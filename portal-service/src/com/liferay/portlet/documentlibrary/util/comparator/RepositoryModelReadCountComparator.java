@@ -32,15 +32,15 @@ public class RepositoryModelReadCountComparator<T>
 
 	public static final String ORDER_BY_ASC = "readCount ASC";
 
+	public static final String ORDER_BY_DESC = "readCount DESC";
+
+	public static final String[] ORDER_BY_FIELDS = {"readCount"};
+
 	public static final String ORDER_BY_MODEL_ASC =
 		"modelFolder DESC, readCount ASC";
 
-	public static final String ORDER_BY_DESC = "readCount DESC";
-
 	public static final String ORDER_BY_MODEL_DESC =
 		"modelFolder DESC, readCount DESC";
-
-	public static final String[] ORDER_BY_FIELDS = {"readCount"};
 
 	public RepositoryModelReadCountComparator() {
 		this(false);
