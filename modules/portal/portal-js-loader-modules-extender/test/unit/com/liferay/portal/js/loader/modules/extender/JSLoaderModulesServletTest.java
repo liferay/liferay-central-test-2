@@ -484,6 +484,12 @@ public class JSLoaderModulesServletTest extends PowerMockito {
 		).getEntry(Details.CONFIG_JSON);
 
 		doReturn(
+			new Hashtable<String, String>()
+		).when(
+			bundle
+		).getHeaders();
+
+		doReturn(
 			bsn
 		).when(
 			bundle
@@ -500,12 +506,6 @@ public class JSLoaderModulesServletTest extends PowerMockito {
 		).when(
 			bundle
 		).adapt(BundleWiring.class);
-
-		doReturn(
-			new Hashtable<String, String>()
-		).when(
-			bundle
-		).getHeaders();
 	}
 
 	protected BundleCapability mockBundleCapability(String bsn) {
