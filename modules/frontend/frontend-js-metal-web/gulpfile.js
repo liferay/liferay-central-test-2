@@ -1,18 +1,25 @@
 'use strict';
 
 var gulp = require('gulp');
+var gulpReplace = require('gulp-replace');
 var path = require('path');
-var replace = require('gulp-replace');
 
-var soyFolder = path.join('bower_components', 'metal', 'src', 'soy');
+var soyDir = path.join('bower_components', 'metal', 'src', 'soy');
 var soyImport = "'use strict';\n\nimport soyutils from 'module:soyutils';"
 var soyRegex = /'use strict';(\s*import\s+soyutils\s+from\s+'module:soyutils';)?/
 
-gulp.task('addSoyImport', function(done) {
-	return gulp.src(path.join(soyFolder, 'SoyComponent.js'))
-		.pipe(replace(soyRegex, soyImport))
-		.pipe(gulp.dest(soyFolder));
-});
+gulp.task(
+	'addSoyImport',
+	function(done) {
+		return gulp.src(
+				path.join(soyDir, 'SoyComponent.js')
+			).pipe(
+				gulpReplace(soyRegex, soyImport)
+			).pipe(
+				gulp.dest(soyDir)
+			);
+	}
+);
 
 gulp.task('default', ['addSoyImport', 'build:amd:jquery']);
 
