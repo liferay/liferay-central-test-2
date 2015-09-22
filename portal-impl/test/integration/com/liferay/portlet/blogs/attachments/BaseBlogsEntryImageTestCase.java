@@ -330,7 +330,7 @@ public abstract class BaseBlogsEntryImageTestCase {
 	protected FileEntry getFileEntry(
 			long userId, String title, ServiceContext serviceContext)
 		throws PortalException {
-		
+
 		Class<?> clazz = getClass();
 
 		ClassLoader classLoader = clazz.getClassLoader();
