@@ -264,10 +264,10 @@ public class JSLoaderModule {
 
 			Dictionary<String, String> headers = _bundle.getHeaders();
 
-			boolean generateJsSubmodules = GetterUtil.getBoolean(
+			boolean jsSubmodules = GetterUtil.getBoolean(
 				headers.get("JS-Submodules"));
 
-			if (generateJsSubmodules) {
+			if (jsSubmodules) {
 				_unversionedMapsConfiguration = normalize(
 					generateMapsConfiguration(_unversionedConfiguration));
 			}
