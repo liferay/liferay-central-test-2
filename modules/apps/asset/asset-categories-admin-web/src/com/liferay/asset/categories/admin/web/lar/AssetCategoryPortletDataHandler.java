@@ -20,11 +20,9 @@ import com.liferay.portal.kernel.module.framework.ModuleServiceLifecycle;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.model.AssetVocabulary;
-import com.liferay.portlet.asset.model.adapter.StagedAssetLink;
 import com.liferay.portlet.asset.model.impl.AssetCategoryImpl;
 import com.liferay.portlet.asset.model.impl.AssetVocabularyImpl;
 import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
-import com.liferay.portlet.asset.service.AssetLinkLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil;
 import com.liferay.portlet.exportimport.lar.BasePortletDataHandler;
 import com.liferay.portlet.exportimport.lar.PortletDataContext;
@@ -120,12 +118,6 @@ public class AssetCategoryPortletDataHandler extends BasePortletDataHandler {
 			vocabularyActionableDynamicQuery.performActions();
 		}
 
-		ActionableDynamicQuery linkActionableDynamicQuery =
-			AssetLinkLocalServiceUtil.getExportActionbleDynamicQuery(
-				portletDataContext);
-
-		linkActionableDynamicQuery.performActions();
-
 		return getExportDataRootElementString(rootElement);
 	}
 
@@ -159,16 +151,6 @@ public class AssetCategoryPortletDataHandler extends BasePortletDataHandler {
 				StagedModelDataHandlerUtil.importStagedModel(
 					portletDataContext, vocabularyElement);
 			}
-		}
-
-		Element linksElement = portletDataContext.getImportDataGroupElement(
-			StagedAssetLink.class);
-
-		List<Element> linkElements = linksElement.elements();
-
-		for (Element linkElement : linkElements) {
-			StagedModelDataHandlerUtil.importStagedModel(
-				portletDataContext, linkElement);
 		}
 
 		return null;
