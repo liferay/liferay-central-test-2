@@ -248,6 +248,7 @@ public class DLAppHelperLocalServiceWrapper implements DLAppHelperLocalService,
 	* @deprecated As of 7.0.0, replaced by {@link
 	#restoreDependentsFromTrash(DLFolder)}
 	*/
+	@Deprecated
 	@Override
 	public void restoreDependentsFromTrash(
 		java.util.List<java.lang.Object> dlFileEntriesAndDLFolders)
