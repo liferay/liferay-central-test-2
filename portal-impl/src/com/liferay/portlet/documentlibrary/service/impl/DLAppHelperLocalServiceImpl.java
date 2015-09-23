@@ -1717,7 +1717,9 @@ public class DLAppHelperLocalServiceImpl
 		}
 	}
 
-	protected void trashOrRestoreFolder(DLFolder dlFolder, DLFolder curFolder, boolean moveToTrash, TrashEntry trashEntry)
+	protected void trashOrRestoreFolder(
+			DLFolder dlFolder, DLFolder curFolder, boolean moveToTrash,
+			TrashEntry trashEntry)
 		throws PortalException {
 
 		List<DLFileEntry> dlFileEntries =
@@ -1745,8 +1747,7 @@ public class DLAppHelperLocalServiceImpl
 
 			if (moveToTrash) {
 				dlFileVersions = dlFileVersionLocalService.getFileVersions(
-					dlFileEntry.getFileEntryId(),
-					WorkflowConstants.STATUS_ANY);
+					dlFileEntry.getFileEntryId(), WorkflowConstants.STATUS_ANY);
 			}
 			else {
 				dlFileVersions = dlFileVersionLocalService.getFileVersions(
@@ -1761,8 +1762,7 @@ public class DLAppHelperLocalServiceImpl
 				if (moveToTrash) {
 					int oldStatus = dlFileVersion.getStatus();
 
-					dlFileVersion.setStatus(
-						WorkflowConstants.STATUS_IN_TRASH);
+					dlFileVersion.setStatus(WorkflowConstants.STATUS_IN_TRASH);
 
 					dlFileVersionPersistence.update(dlFileVersion);
 
@@ -1778,8 +1778,7 @@ public class DLAppHelperLocalServiceImpl
 						trashVersionLocalService.addTrashVersion(
 							trashEntry.getEntryId(),
 							DLFileVersion.class.getName(),
-							dlFileVersion.getFileVersionId(), newStatus,
-							null);
+							dlFileVersion.getFileVersionId(), newStatus, null);
 					}
 
 					// Workflow
@@ -1866,8 +1865,7 @@ public class DLAppHelperLocalServiceImpl
 					trashVersionLocalService.addTrashVersion(
 						trashEntry.getEntryId(),
 						DLFileShortcutConstants.getClassName(),
-						dlFileShortcut.getFileShortcutId(), oldStatus,
-						null);
+						dlFileShortcut.getFileShortcutId(), oldStatus, null);
 				}
 			}
 			else {
@@ -1891,8 +1889,7 @@ public class DLAppHelperLocalServiceImpl
 				dlFileShortcutPersistence.update(dlFileShortcut);
 
 				if (trashVersion != null) {
-					trashVersionLocalService.deleteTrashVersion(
-						trashVersion);
+					trashVersionLocalService.deleteTrashVersion(trashVersion);
 				}
 			}
 		}
@@ -1925,9 +1922,8 @@ public class DLAppHelperLocalServiceImpl
 				return;
 			}
 
-			TrashVersion trashVersion =
-				trashVersionLocalService.fetchVersion(
-					DLFolder.class.getName(), curFolder.getFolderId());
+			TrashVersion trashVersion = trashVersionLocalService.fetchVersion(
+				DLFolder.class.getName(), curFolder.getFolderId());
 
 			int oldStatus = WorkflowConstants.STATUS_APPROVED;
 
