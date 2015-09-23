@@ -1729,7 +1729,7 @@ public class DLAppHelperLocalServiceImpl
 
 				// File shortcut
 
-				dlFileShortcutLocalService.setFileShortcutsEnabled(
+				dlFileShortcutLocalService.updateFileShortcutsActive(
 					dlFileEntry.getFileEntryId(), !moveToTrash);
 
 				// File versions
