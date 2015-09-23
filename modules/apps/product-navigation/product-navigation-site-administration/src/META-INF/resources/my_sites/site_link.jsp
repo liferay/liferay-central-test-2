@@ -29,11 +29,11 @@ String groupFriendlyURL = siteGroup.getFriendlyURL();
 String groupDisplayURL = siteGroup.getDisplayURL(themeDisplay, privateLayout);
 
 if (Validator.isNull(groupDisplayURL)) {
+	PortletURL groupAdministrationURL = null;
+
 	PanelCategoryHelper panelCategoryHelper = (PanelCategoryHelper)request.getAttribute(ApplicationListWebKeys.PANEL_CATEGORY_HELPER);
 
 	String portletId = panelCategoryHelper.getFirstPortletId(PanelCategoryKeys.SITE_ADMINISTRATION, permissionChecker, siteGroup);
-
-	PortletURL groupAdministrationURL = null;
 
 	if (Validator.isNotNull(portletId)) {
 		groupAdministrationURL = PortalUtil.getControlPanelPortletURL(request, siteGroup, portletId, 0, PortletRequest.RENDER_PHASE);

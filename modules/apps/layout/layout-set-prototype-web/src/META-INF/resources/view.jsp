@@ -57,11 +57,11 @@ PortletURL portletURL = renderResponse.createRenderURL();
 
 			Group group = layoutSetPrototype.getGroup();
 
+			PortletURL siteAdministrationURL = null;
+
 			PanelCategoryHelper panelCategoryHelper = (PanelCategoryHelper)request.getAttribute(ApplicationListWebKeys.PANEL_CATEGORY_HELPER);
 
 			String portletId = panelCategoryHelper.getFirstPortletId(PanelCategoryKeys.SITE_ADMINISTRATION, permissionChecker, group);
-
-			PortletURL siteAdministrationURL = null;
 
 			if (Validator.isNotNull(portletId)) {
 				siteAdministrationURL = PortalUtil.getControlPanelPortletURL(request, group, portletId, 0, PortletRequest.RENDER_PHASE);
