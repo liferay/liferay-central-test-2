@@ -93,7 +93,7 @@ else if (metadataField.equals("view-count")) {
 	<c:when test='<%= Validator.equals(value, "author") %>'>
 
 		<%
-		User userDisplay = UserLocalServiceUtil.getUser(assetRenderer.getUserId());
+		User assetRendererUser = UserLocalServiceUtil.getUser(assetRenderer.getUserId());
 
 		String displayDate = StringPool.BLANK;
 
@@ -107,11 +107,11 @@ else if (metadataField.equals("view-count")) {
 
 		<div class="metadata-author">
 			<div class="asset-avatar">
-				<img alt="<%= HtmlUtil.escapeAttribute(userDisplay.getFullName()) %>" class="avatar img-circle" src="<%= HtmlUtil.escape(userDisplay.getPortraitURL(themeDisplay)) %>" />
+				<img alt="<%= HtmlUtil.escapeAttribute(assetRendererUser.getFullName()) %>" class="avatar img-circle" src="<%= HtmlUtil.escape(assetRendererUser.getPortraitURL(themeDisplay)) %>" />
 			</div>
 
 			<div class="asset-user-info">
-				<span class="user-info"><%= userDisplay.getFullName() %></span>
+				<span class="user-info"><%= assetRendererUser.getFullName() %></span>
 
 				<span class="date-info"><%= displayDate %></span>
 			</div>
