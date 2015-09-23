@@ -282,18 +282,6 @@ public class DLFileShortcutLocalServiceImpl
 	}
 
 	@Override
-	public void updateFileShortcutsActive(long toFileEntryId, boolean active) {
-		List<DLFileShortcut> fileShortcuts =
-			dlFileShortcutPersistence.findByToFileEntryId(toFileEntryId);
-
-		for (DLFileShortcut fileShortcut : fileShortcuts) {
-			fileShortcut.setActive(active);
-
-			dlFileShortcutPersistence.update(fileShortcut);
-		}
-	}
-
-	@Override
 	public void setTreePaths(final long folderId, final String treePath)
 		throws PortalException {
 
@@ -411,6 +399,18 @@ public class DLFileShortcutLocalServiceImpl
 
 		for (DLFileShortcut fileShortcut : fileShortcuts) {
 			fileShortcut.setToFileEntryId(newToFileEntryId);
+
+			dlFileShortcutPersistence.update(fileShortcut);
+		}
+	}
+
+	@Override
+	public void updateFileShortcutsActive(long toFileEntryId, boolean active) {
+		List<DLFileShortcut> fileShortcuts =
+			dlFileShortcutPersistence.findByToFileEntryId(toFileEntryId);
+
+		for (DLFileShortcut fileShortcut : fileShortcuts) {
+			fileShortcut.setActive(active);
 
 			dlFileShortcutPersistence.update(fileShortcut);
 		}
