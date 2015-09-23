@@ -1607,12 +1607,14 @@ public class ThemeDisplay
 	/**
 	 * @deprecated As of 7.0.0, with no direct replacement
 	 */
+	@Deprecated
 	public void setShowAddContentIcon(boolean showAddContentIcon) {
 	}
 
 	/**
 	 * @deprecated As of 7.0.0, with no direct replacement
 	 */
+	@Deprecated
 	public void setShowAddContentIconPermission(
 		boolean showAddContentIconPermission) {
 	}
