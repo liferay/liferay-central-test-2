@@ -7572,7 +7572,8 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	protected void updateDDMStructurePredefinedValues(
-		long ddmStructureId, String content, ServiceContext serviceContext) {
+			long ddmStructureId, String content, ServiceContext serviceContext)
+		throws PortalException {
 
 		DDMStructure ddmStructure = ddmStructureLocalService.fetchDDMStructure(
 			ddmStructureId);
@@ -7607,9 +7608,9 @@ public class JournalArticleLocalServiceImpl
 			}
 		}
 
-		ddmStructure.updateDDMForm(ddmForm);
-
-		ddmStructureLocalService.updateDDMStructure(ddmStructure);
+		ddmStructureLocalService.updateStructure(
+				serviceContext.getUserId(), ddmStructureId, ddmForm,
+				ddmStructure.getDDMFormLayout(), serviceContext);
 	}
 
 	protected void updatePreviousApprovedArticle(JournalArticle article)
