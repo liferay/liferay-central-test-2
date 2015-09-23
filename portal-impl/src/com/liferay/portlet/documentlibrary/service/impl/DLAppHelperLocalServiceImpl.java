@@ -1712,19 +1712,20 @@ public class DLAppHelperLocalServiceImpl
 				dlFolder.getTreePath(), WildcardMode.TRAILING)[0],
 			false);
 
-		for (DLFolder curFolder : dlFolders) {
-			trashOrRestoreFolder(dlFolder, curFolder, moveToTrash, trashEntry);
+		for (DLFolder childDLFolder : dlFolders) {
+			trashOrRestoreFolder(
+				dlFolder, childDLFolder, moveToTrash, trashEntry);
 		}
 	}
 
 	protected void trashOrRestoreFolder(
-			DLFolder dlFolder, DLFolder curFolder, boolean moveToTrash,
+			DLFolder dlFolder, DLFolder childDLFolder, boolean moveToTrash,
 			TrashEntry trashEntry)
 		throws PortalException {
 
 		List<DLFileEntry> dlFileEntries =
 			dlFileEntryLocalService.getFileEntries(
-				curFolder.getGroupId(), curFolder.getFolderId());
+				childDLFolder.getGroupId(), childDLFolder.getFolderId());
 
 		for (DLFileEntry dlFileEntry : dlFileEntries) {
 			if (moveToTrash) {
@@ -1845,7 +1846,7 @@ public class DLAppHelperLocalServiceImpl
 
 		List<DLFileShortcut> dlFileShortcuts =
 			dlFileShortcutPersistence.findByG_F(
-				curFolder.getGroupId(), curFolder.getFolderId());
+				childDLFolder.getGroupId(), childDLFolder.getFolderId());
 
 		for (DLFileShortcut dlFileShortcut : dlFileShortcuts) {
 			if (moveToTrash) {
@@ -1894,36 +1895,36 @@ public class DLAppHelperLocalServiceImpl
 			}
 		}
 
-		if (curFolder.equals(dlFolder)) {
+		if (childDLFolder.equals(dlFolder)) {
 			return;
 		}
 
 		if (moveToTrash) {
-			if (curFolder.isInTrashExplicitly()) {
+			if (childDLFolder.isInTrashExplicitly()) {
 				return;
 			}
 
-			int oldStatus = curFolder.getStatus();
+			int oldStatus = childDLFolder.getStatus();
 
-			curFolder.setStatus(WorkflowConstants.STATUS_IN_TRASH);
+			childDLFolder.setStatus(WorkflowConstants.STATUS_IN_TRASH);
 
-			dlFolderPersistence.update(curFolder);
+			dlFolderPersistence.update(childDLFolder);
 
 			// Trash
 
 			if (oldStatus != WorkflowConstants.STATUS_APPROVED) {
 				trashVersionLocalService.addTrashVersion(
 					trashEntry.getEntryId(), DLFolder.class.getName(),
-					curFolder.getFolderId(), oldStatus, null);
+					childDLFolder.getFolderId(), oldStatus, null);
 			}
 		}
 		else {
-			if (!curFolder.isInTrashImplicitly()) {
+			if (!childDLFolder.isInTrashImplicitly()) {
 				return;
 			}
 
 			TrashVersion trashVersion = trashVersionLocalService.fetchVersion(
-				DLFolder.class.getName(), curFolder.getFolderId());
+				DLFolder.class.getName(), childDLFolder.getFolderId());
 
 			int oldStatus = WorkflowConstants.STATUS_APPROVED;
 
@@ -1931,9 +1932,9 @@ public class DLAppHelperLocalServiceImpl
 				oldStatus = trashVersion.getStatus();
 			}
 
-			curFolder.setStatus(oldStatus);
+			childDLFolder.setStatus(oldStatus);
 
-			dlFolderPersistence.update(curFolder);
+			dlFolderPersistence.update(childDLFolder);
 
 			// Trash
 
@@ -1945,7 +1946,7 @@ public class DLAppHelperLocalServiceImpl
 		// Asset
 
 		assetEntryLocalService.updateVisible(
-			DLFolderConstants.getClassName(), curFolder.getFolderId(),
+			DLFolderConstants.getClassName(), childDLFolder.getFolderId(),
 			!moveToTrash);
 
 		// Index
@@ -1953,7 +1954,7 @@ public class DLAppHelperLocalServiceImpl
 		Indexer<DLFolder> indexer = IndexerRegistryUtil.nullSafeGetIndexer(
 			DLFolder.class);
 
-		indexer.reindex(curFolder);
+		indexer.reindex(childDLFolder);
 	}
 
 	protected <T extends RepositoryModel<T>> void triggerRepositoryEvent(
