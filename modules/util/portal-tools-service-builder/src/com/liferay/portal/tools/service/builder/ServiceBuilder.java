@@ -2096,19 +2096,21 @@ public class ServiceBuilder {
 		}
 
 		File originalFinder = new File(
-				_outputPath + "/service/persistence/impl/" + entity.getName() +
-				"FinderImpl.java");
+			_outputPath + "/service/persistence/impl/" + entity.getName() +
+			"FinderImpl.java");
 
 		if (originalFinder.exists()) {
 			String content = _read(originalFinder);
 
 			content = StringUtil.removeFromList(
-				content, "import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;", "");
+				content,
+				"import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;\n",
+				"");
 
 			content = StringUtil.replace(
-					content, "BasePersistenceImpl<"+ entity.getName() +">",
-					entity.getName() +
-					"FinderBaseImpl");
+				content, "BasePersistenceImpl<"+ entity.getName() +">",
+				entity.getName() +
+				"FinderBaseImpl");
 
 			ToolsUtil.writeFileRaw(originalFinder, content, _modifiedFileNames);
 		}
@@ -2128,8 +2130,8 @@ public class ServiceBuilder {
 		// Write file
 
 		File ejbFile = new File(
-				_outputPath + "/service/persistence/impl/" + entity.getName() +
-				"FinderBaseImpl.java");
+			_outputPath + "/service/persistence/impl/" + entity.getName() +
+			"FinderBaseImpl.java");
 
 		ToolsUtil.writeFile(ejbFile, content, _author, _modifiedFileNames);
 	}
