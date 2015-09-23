@@ -77,7 +77,7 @@ public class PollsDisplayExportImportPortletPreferencesProcessor
 		if (questionId <= 0) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
-					"No question id found in preferences of portlet " +
+					"No question ID found in preferences of portlet " +
 						portletId);
 			}
 
