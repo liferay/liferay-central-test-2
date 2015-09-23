@@ -282,12 +282,12 @@ public class DLFileShortcutLocalServiceImpl
 	}
 
 	@Override
-	public void setFileShortcutsEnabled(long toFileEntryId, boolean enabled) {
+	public void setFileShortcutsEnabled(long toFileEntryId, boolean active) {
 		List<DLFileShortcut> fileShortcuts =
 			dlFileShortcutPersistence.findByToFileEntryId(toFileEntryId);
 
 		for (DLFileShortcut fileShortcut : fileShortcuts) {
-			fileShortcut.setActive(enabled);
+			fileShortcut.setActive(active);
 
 			dlFileShortcutPersistence.update(fileShortcut);
 		}
