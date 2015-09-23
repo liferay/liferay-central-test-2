@@ -67,7 +67,7 @@ public class LogAssertionTestCallback
 	}
 
 	public static void endAssert(
-		List<ExpectedLogs> expectedLogses,
+		List<ExpectedLogs> expectedLogsList,
 		List<CaptureAppender> captureAppenders) {
 
 		for (CaptureAppender captureAppender : captureAppenders) {
@@ -77,7 +77,7 @@ public class LogAssertionTestCallback
 
 					String renderedMessage = loggingEvent.getRenderedMessage();
 
-					if (!isExpected(expectedLogses, renderedMessage)) {
+					if (!isExpected(expectedLogsList, renderedMessage)) {
 						Assert.fail(renderedMessage);
 					}
 				}
@@ -111,7 +111,7 @@ public class LogAssertionTestCallback
 	}
 
 	public static List<CaptureAppender> startAssert(
-		List<ExpectedLogs> expectedLogses) {
+		List<ExpectedLogs> expectedLogsList) {
 
 		_thread = Thread.currentThread();
 		_uncaughtExceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
@@ -121,9 +121,9 @@ public class LogAssertionTestCallback
 				_uncaughtExceptionHandler));
 
 		List<CaptureAppender> captureAppenders = new ArrayList<>(
-			expectedLogses.size());
+			expectedLogsList.size());
 
-		for (ExpectedLogs expectedLogs : expectedLogses) {
+		for (ExpectedLogs expectedLogs : expectedLogsList) {
 			Class<?> clazz = expectedLogs.loggerClass();
 
 			captureAppenders.add(
@@ -144,22 +144,22 @@ public class LogAssertionTestCallback
 		ExpectedMultipleLogs expectedMultipleLogs = description.getAnnotation(
 			ExpectedMultipleLogs.class);
 
-		List<ExpectedLogs> expectedLogses = new ArrayList<>();
+		List<ExpectedLogs> expectedLogsList = new ArrayList<>();
 
 		if (expectedMultipleLogs == null) {
 			ExpectedLogs expectedLogs = description.getAnnotation(
 				ExpectedLogs.class);
 
 			if (expectedLogs != null) {
-				expectedLogses.add(expectedLogs);
+				expectedLogsList.add(expectedLogs);
 			}
 		}
 		else {
-			expectedLogses.addAll(
+			expectedLogsList.addAll(
 				Arrays.asList(expectedMultipleLogs.expectedMultipleLogs()));
 		}
 
-		endAssert(expectedLogses, captureAppenders);
+		endAssert(expectedLogsList, captureAppenders);
 	}
 
 	@Override
@@ -175,22 +175,22 @@ public class LogAssertionTestCallback
 		ExpectedMultipleLogs expectedMultipleLogs = description.getAnnotation(
 			ExpectedMultipleLogs.class);
 
-		List<ExpectedLogs> expectedLogses = new ArrayList<>();
+		List<ExpectedLogs> expectedLogsList = new ArrayList<>();
 
 		if (expectedMultipleLogs == null) {
 			ExpectedLogs expectedLogs = description.getAnnotation(
 				ExpectedLogs.class);
 
 			if (expectedLogs != null) {
-				expectedLogses.add(expectedLogs);
+				expectedLogsList.add(expectedLogs);
 			}
 		}
 		else {
-			expectedLogses.addAll(
+			expectedLogsList.addAll(
 				Arrays.asList(expectedMultipleLogs.expectedMultipleLogs()));
 		}
 
-		return startAssert(expectedLogses);
+		return startAssert(expectedLogsList);
 	}
 
 	@Override
@@ -218,9 +218,9 @@ public class LogAssertionTestCallback
 	}
 
 	protected static boolean isExpected(
-		List<ExpectedLogs> expectedLogses, String renderedMessage) {
+		List<ExpectedLogs> expectedLogsList, String renderedMessage) {
 
-		for (ExpectedLogs expectedLogs : expectedLogses) {
+		for (ExpectedLogs expectedLogs : expectedLogsList) {
 			for (ExpectedLog expectedLog : expectedLogs.expectedLogs()) {
 				String dbType = expectedLog.dbType();
 
