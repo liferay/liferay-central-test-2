@@ -123,7 +123,6 @@ else if (metadataField.equals("view-count")) {
 
 			<dd class="metadata-entry <%= metadataFieldCssClass %> <%= iconCssClass %>">
 				<c:choose>
-
 					<c:when test='<%= value.equals("categories") %>'>
 						<liferay-ui:asset-categories-summary
 							className="<%= assetEntry.getClassName() %>"
