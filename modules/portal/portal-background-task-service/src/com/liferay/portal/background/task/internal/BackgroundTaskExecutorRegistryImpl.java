@@ -42,9 +42,9 @@ public class BackgroundTaskExecutorRegistryImpl
 
 	@Override
 	public synchronized BackgroundTaskExecutor getBackgroundTaskExecutor(
-		String className) {
+		String backgroundTaskExecutorClassName) {
 
-		return _backgroundTaskExecutors.get(className);
+		return _backgroundTaskExecutors.get(backgroundTaskExecutorClassName);
 	}
 
 	@Override
@@ -55,7 +55,7 @@ public class BackgroundTaskExecutorRegistryImpl
 		Dictionary<String, Object> properties = new HashMapDictionary<>();
 
 		properties.put(
-			BACKGROUND_TASK_EXECUTOR_REGISTRY_KEY, backgroundTaskExecutor);
+			"background.task.executor.class.name", backgroundTaskExecutor);
 
 		ServiceRegistration<BackgroundTaskExecutor> serviceRegistration =
 			_bundleContext.registerService(
@@ -99,12 +99,12 @@ public class BackgroundTaskExecutorRegistryImpl
 		Map<String, Object> properties) {
 
 		String backgroundTaskExecutorClassName = (String)properties.get(
-			BACKGROUND_TASK_EXECUTOR_REGISTRY_KEY);
+			"background.task.executor.class.name");
 
 		if (Validator.isNull(backgroundTaskExecutorClassName)) {
 			throw new IllegalArgumentException(
-				"Property \"" + BACKGROUND_TASK_EXECUTOR_REGISTRY_KEY +
-					"\" is not set for " + backgroundTaskExecutor);
+				"Property \"background.task.executor.class.name\" is not set " +
+					"for " + backgroundTaskExecutor);
 		}
 
 		_backgroundTaskExecutors.put(
@@ -128,14 +128,14 @@ public class BackgroundTaskExecutorRegistryImpl
 		BackgroundTaskExecutor backgroundTaskExecutor,
 		Map<String, Object> properties) {
 
-		String className = (String)properties.get(
-			BACKGROUND_TASK_EXECUTOR_REGISTRY_KEY);
+		String backgroundTaskExecutorClassName = (String)properties.get(
+			"background.task.executor.class.name");
 
-		if (Validator.isNull(className)) {
+		if (Validator.isNull(backgroundTaskExecutorClassName)) {
 			return;
 		}
 
-		_backgroundTaskExecutors.remove(className);
+		_backgroundTaskExecutors.remove(backgroundTaskExecutorClassName);
 	}
 
 	private final Map<String, ServiceRegistration<BackgroundTaskExecutor>>
