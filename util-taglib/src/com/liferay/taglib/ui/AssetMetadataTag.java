@@ -97,7 +97,7 @@ public class AssetMetadataTag extends IncludeTag {
 				"liferay-ui:asset-metadata:assetRenderer", assetRenderer);
 		}
 		catch (PortalException pe) {
-			_log.error(pe);
+			_log.error(pe, pe);
 		}
 
 		request.setAttribute("liferay-ui:asset-metadata:className", _className);
