@@ -28,23 +28,23 @@ String metadataFieldCssClass = "metadata-" + metadataField;
 boolean showLabel = true;
 String value = null;
 
-if (metadataField.equals("create-date")) {
+if (metadataField.equals("author")) {
+	showLabel = false;
+
+	value = "author";
+}
+else if (metadataField.equals("categories")) {
+	List<AssetCategory> categories = assetEntry.getCategories();
+
+	showLabel = false;
+
+	if (!categories.isEmpty()) {
+		value = "categories";
+	}
+}
+else if (metadataField.equals("create-date")) {
 	iconCssClass = "icon-calendar";
 	value = dateFormatDate.format(assetEntry.getCreateDate());
-}
-else if (metadataField.equals("modified-date")) {
-	iconCssClass = "icon-calendar";
-	value = dateFormatDate.format(assetEntry.getModifiedDate());
-}
-else if (metadataField.equals("publish-date")) {
-	iconCssClass = "icon-calendar";
-
-	if (assetEntry.getPublishDate() == null) {
-		value = StringPool.BLANK;
-	}
-	else {
-		value = dateFormatDate.format(assetEntry.getPublishDate());
-	}
 }
 else if (metadataField.equals("expiration-date")) {
 	iconCssClass = "icon-calendar";
@@ -56,28 +56,23 @@ else if (metadataField.equals("expiration-date")) {
 		value = dateFormatDate.format(assetEntry.getExpirationDate());
 	}
 }
+else if (metadataField.equals("modified-date")) {
+	iconCssClass = "icon-calendar";
+	value = dateFormatDate.format(assetEntry.getModifiedDate());
+}
 else if (metadataField.equals("priority")) {
 	iconCssClass = "icon-long-arrow-up";
 
 	value = LanguageUtil.get(request, "priority") + StringPool.COLON + StringPool.SPACE + assetEntry.getPriority();
 }
-else if (metadataField.equals("author")) {
-	showLabel = false;
+else if (metadataField.equals("publish-date")) {
+	iconCssClass = "icon-calendar";
 
-	value = "author";
-}
-else if (metadataField.equals("view-count")) {
-	int viewCount = assetEntry.getViewCount();
-
-	value = viewCount + StringPool.SPACE + LanguageUtil.get(request, (viewCount == 1) ? "view" : "views");
-}
-else if (metadataField.equals("categories")) {
-	List<AssetCategory> categories = assetEntry.getCategories();
-
-	showLabel = false;
-
-	if (!categories.isEmpty()) {
-		value = "categories";
+	if (assetEntry.getPublishDate() == null) {
+		value = StringPool.BLANK;
+	}
+	else {
+		value = dateFormatDate.format(assetEntry.getPublishDate());
 	}
 }
 else if (metadataField.equals("tags")) {
@@ -88,6 +83,11 @@ else if (metadataField.equals("tags")) {
 	if (!tags.isEmpty()) {
 		value = "tags";
 	}
+}
+else if (metadataField.equals("view-count")) {
+	int viewCount = assetEntry.getViewCount();
+
+	value = viewCount + StringPool.SPACE + LanguageUtil.get(request, (viewCount == 1) ? "view" : "views");
 }
 %>
 
