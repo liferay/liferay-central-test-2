@@ -15,7 +15,6 @@
 package com.liferay.exportimport.background.task;
 
 import com.liferay.portal.kernel.backgroundtask.BackgroundTaskExecutor;
-import com.liferay.portal.kernel.backgroundtask.BackgroundTaskExecutorRegistry;
 import com.liferay.portal.kernel.util.HashMapDictionary;
 
 import java.util.Dictionary;
@@ -96,10 +95,7 @@ public class BackgroundTaskExecutorConfigurator {
 
 		Class<?> clazz = backgroundTaskExecutor.getClass();
 
-		properties.put(
-			BackgroundTaskExecutorRegistry.
-				BACKGROUND_TASK_EXECUTOR_REGISTRY_KEY,
-			clazz.getName());
+		properties.put("background.task.executor.class.name", clazz.getName());
 
 		ServiceRegistration<BackgroundTaskExecutor> serviceRegistration =
 			bundleContext.registerService(

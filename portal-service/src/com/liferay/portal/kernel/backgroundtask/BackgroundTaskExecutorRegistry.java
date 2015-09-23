@@ -19,9 +19,6 @@ package com.liferay.portal.kernel.backgroundtask;
  */
 public interface BackgroundTaskExecutorRegistry {
 
-	public static final String BACKGROUND_TASK_EXECUTOR_REGISTRY_KEY =
-		"background.task.executor.class.name";
-
 	public BackgroundTaskExecutor getBackgroundTaskExecutor(
 		String backgroundTaskExecutorClassName);
 
