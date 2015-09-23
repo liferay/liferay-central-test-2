@@ -40,7 +40,7 @@
 				</c:if>
 			</div>
 
-			<c:if test="<%= Validator.isNotNull(actionJsp) || Validator.isNotNull(header) || Validator.isNotNull(title) || Validator.isNotNull(subtitle) || Validator.isNotNull(footer) %>">
+			<c:if test="<%= Validator.isNotNull(actionJsp) || Validator.isNotNull(footer) || Validator.isNotNull(header) || Validator.isNotNull(subtitle) || Validator.isNotNull(title) %>">
 				<div class="card-footer">
 					<div class="card-dm-more-options">
 						<liferay-util:include page="<%= actionJsp %>" servletContext="<%= actionJspServletContext %>" />
