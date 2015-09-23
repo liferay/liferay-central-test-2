@@ -198,9 +198,6 @@ public class SiteAdminPortlet extends MVCPortlet {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Throwable {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
 		Callable<Group> groupCallable = new GroupCallable(actionRequest);
 
 		Group group = TransactionInvokerUtil.invoke(
