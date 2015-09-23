@@ -30,15 +30,14 @@ String value = null;
 
 if (metadataField.equals("author")) {
 	showLabel = false;
-
 	value = "author";
 }
 else if (metadataField.equals("categories")) {
-	List<AssetCategory> categories = assetEntry.getCategories();
+	List<AssetCategory> assetCategories = assetEntry.getCategories();
 
 	showLabel = false;
 
-	if (!categories.isEmpty()) {
+	if (!assetCategories.isEmpty()) {
 		value = "categories";
 	}
 }
@@ -62,7 +61,6 @@ else if (metadataField.equals("modified-date")) {
 }
 else if (metadataField.equals("priority")) {
 	iconCssClass = "icon-long-arrow-up";
-
 	value = LanguageUtil.get(request, "priority") + StringPool.COLON + StringPool.SPACE + assetEntry.getPriority();
 }
 else if (metadataField.equals("publish-date")) {
@@ -76,11 +74,11 @@ else if (metadataField.equals("publish-date")) {
 	}
 }
 else if (metadataField.equals("tags")) {
-	List<AssetTag> tags = assetEntry.getTags();
+	List<AssetTag> assetTags = assetEntry.getTags();
 
 	showLabel = false;
 
-	if (!tags.isEmpty()) {
+	if (!assetTags.isEmpty()) {
 		value = "tags";
 	}
 }
