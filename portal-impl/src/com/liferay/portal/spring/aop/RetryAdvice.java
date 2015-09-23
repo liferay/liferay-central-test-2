@@ -58,10 +58,10 @@ public class RetryAdvice extends AnnotationChainableMethodAdvice<Retry> {
 			retries++;
 		}
 
-		Map<String, String> propertyMap = new HashMap<>();
+		Map<String, String> properties = new HashMap<>();
 
 		for (Property property : retry.properties()) {
-			propertyMap.put(property.name(), property.value());
+			properties.put(property.name(), property.value());
 		}
 
 		Class<? extends RetryAcceptor> clazz = retry.acceptor();
@@ -74,14 +74,13 @@ public class RetryAdvice extends AnnotationChainableMethodAdvice<Retry> {
 		serviceBeanMethodInvocation.mark();
 
 		Object returnValue = null;
-
 		Throwable throwable = null;
 
 		while ((retries < 0) || (retries-- > 0)) {
 			try {
 				returnValue = serviceBeanMethodInvocation.proceed();
 
-				if (!retryAcceptor.acceptResult(returnValue, propertyMap)) {
+				if (!retryAcceptor.acceptResult(returnValue, properties)) {
 					return returnValue;
 				}
 
@@ -94,13 +93,13 @@ public class RetryAdvice extends AnnotationChainableMethodAdvice<Retry> {
 
 					_log.warn(
 						"Retry on " + methodInvocation + " for " + number +
-							" more times, due to result: " + returnValue);
+							" more times due to result " + returnValue);
 				}
 			}
 			catch (Throwable t) {
 				throwable = t;
 
-				if (!retryAcceptor.acceptException(t, propertyMap)) {
+				if (!retryAcceptor.acceptException(t, properties)) {
 					throw t;
 				}
 
@@ -113,7 +112,7 @@ public class RetryAdvice extends AnnotationChainableMethodAdvice<Retry> {
 
 					_log.warn(
 						"Retry on " + methodInvocation + " for " + number +
-							" more times, due to exception: " + throwable,
+							" more times due to exception " + throwable,
 						throwable);
 				}
 			}
@@ -125,8 +124,8 @@ public class RetryAdvice extends AnnotationChainableMethodAdvice<Retry> {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
 					"Give up retrying on " + methodInvocation + " after " +
-						totalRetries + " retries. Rethrowing last retry's " +
-							"exception: " + throwable,
+						totalRetries + " retries and rethrow last retry's " +
+							"exception " + throwable,
 					throwable);
 			}
 
@@ -136,8 +135,8 @@ public class RetryAdvice extends AnnotationChainableMethodAdvice<Retry> {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
 				"Give up retrying on " + methodInvocation + " after " +
-					totalRetries + " retries. Returning with last retry's " +
-						"result: " + returnValue);
+					totalRetries + " retries and returning the last retry's " +
+						"result " + returnValue);
 		}
 
 		return returnValue;
