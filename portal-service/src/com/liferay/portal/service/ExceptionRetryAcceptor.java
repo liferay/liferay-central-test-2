@@ -31,7 +31,7 @@ public class ExceptionRetryAcceptor implements RetryAcceptor {
 
 		if (name == null) {
 			throw new IllegalArgumentException(
-				"Missing property: " + EXCEPTION_NAME);
+				"Missing property " + EXCEPTION_NAME);
 		}
 
 		while (true) {
