@@ -32,8 +32,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class ShoppingCouponFinderImpl
-	extends ShoppingCouponFinderBaseImpl
-	implements ShoppingCouponFinder {
+	extends ShoppingCouponFinderBaseImpl implements ShoppingCouponFinder {
 
 	public static final String COUNT_BY_G_C_C_A_DT =
 		ShoppingCouponFinder.class.getName() + ".countByG_C_C_A_DT";
