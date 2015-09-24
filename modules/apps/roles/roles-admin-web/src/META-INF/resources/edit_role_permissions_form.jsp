@@ -17,8 +17,6 @@
 <%@ include file="/init.jsp" %>
 
 <%
-PanelCategoryHelper panelCategoryHelper = (PanelCategoryHelper)request.getAttribute(ApplicationListWebKeys.PANEL_CATEGORY_HELPER);
-
 String tabs1 = "roles";
 String tabs2 = ParamUtil.getString(request, "tabs2", "current");
 
@@ -74,6 +72,8 @@ if (Validator.isNotNull(portletResource)) {
 	request.setAttribute("edit_role_permissions.jsp-curPortletResource", portletResource);
 
 	String applicationPermissionsLabel = "application-permissions";
+
+	PanelCategoryHelper panelCategoryHelper = (PanelCategoryHelper)request.getAttribute(ApplicationListWebKeys.PANEL_CATEGORY_HELPER);
 
 	if (portletResource.equals(PortletKeys.PORTAL)) {
 		applicationPermissionsLabel = StringPool.BLANK;

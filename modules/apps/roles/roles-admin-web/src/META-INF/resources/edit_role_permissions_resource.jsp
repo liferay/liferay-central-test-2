@@ -17,7 +17,6 @@
 <%@ include file="/init.jsp" %>
 
 <%
-PanelCategoryHelper panelCategoryHelper = (PanelCategoryHelper)request.getAttribute(ApplicationListWebKeys.PANEL_CATEGORY_HELPER);
 Role role = (Role)request.getAttribute("edit_role_permissions.jsp-role");
 
 String portletResource = (String)request.getAttribute("edit_role_permissions.jsp-portletResource");
@@ -70,6 +69,8 @@ for (int i = 0; i < results.size(); i++) {
 	if (role.getName().equals(RoleConstants.GUEST) && guestUnsupportedActions.contains(actionId)) {
 		continue;
 	}
+
+	PanelCategoryHelper panelCategoryHelper = (PanelCategoryHelper)request.getAttribute(ApplicationListWebKeys.PANEL_CATEGORY_HELPER);
 
 	if (Validator.isNotNull(curPortletResource)) {
 		if (actionId.equals(ActionKeys.ACCESS_IN_CONTROL_PANEL) && !panelCategoryHelper.containsPortlet(curPortletId, PanelCategoryKeys.CONTROL_PANEL)) {
