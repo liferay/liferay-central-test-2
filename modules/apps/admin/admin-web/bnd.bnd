@@ -7,11 +7,8 @@ Include-Resource:\
     @../../../../util-java/util-java.jar!/com/liferay/util/log4j/Log4JUtil.class,\
     @../../../../util-java/util-java.jar!/com/liferay/util/log4j/Levels.class,\
     @../../../../util-java/util-java.jar!/com/liferay/util/ContentUtil.class,\
-    @../../../../util-java/util-java.jar!/com/liferay/util/Encryptor.class
+    @../../../../util-java/util-java.jar!/com/liferay/util/Encryptor.class,\
+    @../../../../lib/portal/jcommon.jar,\
+    @../../../../lib/portal/jfreechart.jar
 Provide-Capability:\
     osgi.extender;osgi.extender="jsp.taglib";uri="http://struts.apache.org/tags-html";version:Version="1.0.0"
-Web-ContextPath: /admin-web
--wab: docroot
--wablib:\
-        ../../../../lib/portal/jcommon.jar,\
-        ../../../../lib/portal/jfreechart.jar
