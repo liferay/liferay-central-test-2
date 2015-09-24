@@ -164,8 +164,8 @@ public class ToolDependencies {
 
 		Registry registry = RegistryUtil.getRegistry();
 
-		registry.registerService(SingleVMPool.class, new TestSingleVMPool());
 		registry.registerService(MultiVMPool.class, new TestMultiVMPool());
+		registry.registerService(SingleVMPool.class, new TestSingleVMPool());
 	}
 
 	public static void wireDeployers() {
