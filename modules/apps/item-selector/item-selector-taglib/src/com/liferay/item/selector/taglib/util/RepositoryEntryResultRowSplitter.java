@@ -28,7 +28,7 @@ public class RepositoryEntryResultRowSplitter implements ResultRowSplitter {
 
 	@Override
 	public List<List<ResultRow>> split(List<ResultRow> resultRows) {
-		List<List<ResultRow>> resultRowList = new ArrayList<>();
+		List<List<ResultRow>> resultRowsList = new ArrayList<>();
 
 		List<ResultRow> fileEntriesResultRows = new ArrayList<>();
 		List<ResultRow> folderResultRows = new ArrayList<>();
@@ -45,14 +45,14 @@ public class RepositoryEntryResultRowSplitter implements ResultRowSplitter {
 		}
 
 		if (!folderResultRows.isEmpty()) {
-			resultRowList.add(folderResultRows);
+			resultRowsList.add(folderResultRows);
 		}
 
 		if (!fileEntriesResultRows.isEmpty()) {
-			resultRowList.add(fileEntriesResultRows);
+			resultRowsList.add(fileEntriesResultRows);
 		}
 
-		return resultRowList;
+		return resultRowsList;
 	}
 
 }
