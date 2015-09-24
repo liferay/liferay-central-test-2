@@ -27,6 +27,11 @@ import java.util.Set;
  * @generated
  */
 public class ShoppingCouponFinderBaseImpl extends BasePersistenceImpl<ShoppingCoupon> {
+	@Override
+	public Set<String> getBadColumnNames() {
+		return getShoppingCouponPersistence().getBadColumnNames();
+	}
+
 	/**
 	 * Returns the shopping coupon persistence.
 	 *
@@ -44,11 +49,6 @@ public class ShoppingCouponFinderBaseImpl extends BasePersistenceImpl<ShoppingCo
 	public void setShoppingCouponPersistence(
 		ShoppingCouponPersistence shoppingCouponPersistence) {
 		this.shoppingCouponPersistence = shoppingCouponPersistence;
-	}
-
-	@Override
-	protected Set<String> getBadColumnNames() {
-		return getShoppingCouponPersistence().getBadColumnNames();
 	}
 
 	@BeanReference(type = ShoppingCouponPersistence.class)

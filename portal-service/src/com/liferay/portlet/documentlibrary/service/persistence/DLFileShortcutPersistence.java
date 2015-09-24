@@ -1417,5 +1417,6 @@ public interface DLFileShortcutPersistence extends BasePersistence<DLFileShortcu
 	*/
 	public int countAll();
 
+	@Override
 	public java.util.Set<java.lang.String> getBadColumnNames();
 }

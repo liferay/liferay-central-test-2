@@ -301,5 +301,6 @@ public interface ShoppingCouponPersistence extends BasePersistence<ShoppingCoupo
 	*/
 	public int countAll();
 
+	@Override
 	public java.util.Set<java.lang.String> getBadColumnNames();
 }

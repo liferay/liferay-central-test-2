@@ -538,5 +538,6 @@ public interface DLFileEntryMetadataPersistence extends BasePersistence<DLFileEn
 	*/
 	public int countAll();
 
+	@Override
 	public java.util.Set<java.lang.String> getBadColumnNames();
 }

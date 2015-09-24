@@ -27,6 +27,11 @@ import java.util.Set;
  * @generated
  */
 public class AssetTagFinderBaseImpl extends BasePersistenceImpl<AssetTag> {
+	@Override
+	public Set<String> getBadColumnNames() {
+		return getAssetTagPersistence().getBadColumnNames();
+	}
+
 	/**
 	 * Returns the asset tag persistence.
 	 *
@@ -43,11 +48,6 @@ public class AssetTagFinderBaseImpl extends BasePersistenceImpl<AssetTag> {
 	 */
 	public void setAssetTagPersistence(AssetTagPersistence assetTagPersistence) {
 		this.assetTagPersistence = assetTagPersistence;
-	}
-
-	@Override
-	protected Set<String> getBadColumnNames() {
-		return getAssetTagPersistence().getBadColumnNames();
 	}
 
 	@BeanReference(type = AssetTagPersistence.class)

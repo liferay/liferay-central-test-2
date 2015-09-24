@@ -782,5 +782,6 @@ public interface LayoutSetBranchPersistence extends BasePersistence<LayoutSetBra
 	*/
 	public int countAll();
 
+	@Override
 	public java.util.Set<java.lang.String> getBadColumnNames();
 }

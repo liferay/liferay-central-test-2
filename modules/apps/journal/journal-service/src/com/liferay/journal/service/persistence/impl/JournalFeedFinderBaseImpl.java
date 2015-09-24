@@ -27,6 +27,11 @@ import java.util.Set;
  * @generated
  */
 public class JournalFeedFinderBaseImpl extends BasePersistenceImpl<JournalFeed> {
+	@Override
+	public Set<String> getBadColumnNames() {
+		return getJournalFeedPersistence().getBadColumnNames();
+	}
+
 	/**
 	 * Returns the journal feed persistence.
 	 *
@@ -44,11 +49,6 @@ public class JournalFeedFinderBaseImpl extends BasePersistenceImpl<JournalFeed> 
 	public void setJournalFeedPersistence(
 		JournalFeedPersistence journalFeedPersistence) {
 		this.journalFeedPersistence = journalFeedPersistence;
-	}
-
-	@Override
-	protected Set<String> getBadColumnNames() {
-		return getJournalFeedPersistence().getBadColumnNames();
 	}
 
 	@BeanReference(type = JournalFeedPersistence.class)

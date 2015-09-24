@@ -27,6 +27,11 @@ import java.util.Set;
  * @generated
  */
 public class DDMTemplateFinderBaseImpl extends BasePersistenceImpl<DDMTemplate> {
+	@Override
+	public Set<String> getBadColumnNames() {
+		return getDDMTemplatePersistence().getBadColumnNames();
+	}
+
 	/**
 	 * Returns the d d m template persistence.
 	 *
@@ -44,11 +49,6 @@ public class DDMTemplateFinderBaseImpl extends BasePersistenceImpl<DDMTemplate> 
 	public void setDDMTemplatePersistence(
 		DDMTemplatePersistence ddmTemplatePersistence) {
 		this.ddmTemplatePersistence = ddmTemplatePersistence;
-	}
-
-	@Override
-	protected Set<String> getBadColumnNames() {
-		return getDDMTemplatePersistence().getBadColumnNames();
 	}
 
 	@BeanReference(type = DDMTemplatePersistence.class)

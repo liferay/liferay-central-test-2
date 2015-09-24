@@ -25,6 +25,11 @@ import java.util.Set;
  * @generated
  */
 public class LayoutFinderBaseImpl extends BasePersistenceImpl<Layout> {
+	@Override
+	public Set<String> getBadColumnNames() {
+		return getLayoutPersistence().getBadColumnNames();
+	}
+
 	/**
 	 * Returns the layout persistence.
 	 *
@@ -41,11 +46,6 @@ public class LayoutFinderBaseImpl extends BasePersistenceImpl<Layout> {
 	 */
 	public void setLayoutPersistence(LayoutPersistence layoutPersistence) {
 		this.layoutPersistence = layoutPersistence;
-	}
-
-	@Override
-	protected Set<String> getBadColumnNames() {
-		return getLayoutPersistence().getBadColumnNames();
 	}
 
 	@BeanReference(type = LayoutPersistence.class)

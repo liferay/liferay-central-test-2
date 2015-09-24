@@ -632,5 +632,6 @@ public interface CalendarNotificationTemplatePersistence extends BasePersistence
 	*/
 	public int countAll();
 
+	@Override
 	public java.util.Set<java.lang.String> getBadColumnNames();
 }

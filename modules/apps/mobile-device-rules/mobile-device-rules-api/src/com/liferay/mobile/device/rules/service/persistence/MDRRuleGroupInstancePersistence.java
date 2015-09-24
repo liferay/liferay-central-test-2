@@ -1123,5 +1123,6 @@ public interface MDRRuleGroupInstancePersistence extends BasePersistence<MDRRule
 	*/
 	public int countAll();
 
+	@Override
 	public java.util.Set<java.lang.String> getBadColumnNames();
 }
