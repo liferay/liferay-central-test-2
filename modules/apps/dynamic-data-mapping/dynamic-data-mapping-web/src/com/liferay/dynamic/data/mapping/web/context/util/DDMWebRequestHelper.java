@@ -39,11 +39,13 @@ public class DDMWebRequestHelper extends BaseRequestHelper {
 		try {
 			if (_ddmServiceConfiguration == null) {
 				if (Validator.isNotNull(getPortletResource())) {
+					HttpServletRequest request = getRequest();
+
 					_ddmServiceConfiguration =
 						ConfigurationFactoryUtil.getConfiguration(
 							DDMServiceConfiguration.class,
 						new ParameterMapSettingsLocator(
-							getRequest().getParameterMap(),
+							request.getParameterMap(),
 							new GroupServiceSettingsLocator(
 								getSiteGroupId(), DDMConstants.SERVICE_NAME)));
 				}
