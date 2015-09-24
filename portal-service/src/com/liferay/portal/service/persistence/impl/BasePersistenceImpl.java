@@ -204,6 +204,10 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 		}
 	}
 
+	public Set<String> getBadColumnNames() {
+		return Collections.emptySet();
+	}
+
 	@Override
 	public Session getCurrentSession() throws ORMException {
 		return _sessionFactory.getCurrentSession();
@@ -463,10 +467,6 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 				}
 			}
 		}
-	}
-
-	protected Set<String> getBadColumnNames() {
-		return Collections.emptySet();
 	}
 
 	protected ClassLoader getClassLoader() {
