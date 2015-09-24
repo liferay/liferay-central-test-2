@@ -51,8 +51,7 @@ import java.util.List;
  * @author Connor McKay
  */
 public class JournalArticleFinderImpl
-	extends JournalArticleFinderBaseImpl
-	implements JournalArticleFinder {
+	extends JournalArticleFinderBaseImpl implements JournalArticleFinder {
 
 	public static final String COUNT_BY_G_F =
 		JournalArticleFinder.class.getName() + ".countByG_F";
