@@ -1364,7 +1364,7 @@ public class AssetPublisherDisplayContext {
 
 		_ddmStructureFieldValue = ParamUtil.getString(
 			_request, "ddmStructureFieldValue",
-			_ddmStructureFieldValue = _portletPreferences.getValue(
+			_portletPreferences.getValue(
 				"ddmStructureFieldValue", StringPool.BLANK));
 
 		if (Validator.isNotNull(_ddmStructureFieldName) &&
