@@ -45,7 +45,7 @@ PasswordPolicy passwordPolicy = user.getPasswordPolicy();
 			%>
 
 			<div>
-				<aui:a href="<%= portletURL.toString() %>" label="click-here-to-request-a-new-password-reset-link"></aui:a>
+				<aui:a href="<%= portletURL.toString() %>" label="request-a-new-password-reset-link"></aui:a>
 			</div>
 		</div>
 	</c:when>
