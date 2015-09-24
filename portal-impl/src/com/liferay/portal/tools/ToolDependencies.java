@@ -277,8 +277,8 @@ public class ToolDependencies {
 			_portalCaches.remove(portalCacheName);
 		}
 
-		private final
-			ConcurrentMap<String,
+		private final ConcurrentMap
+			<String,
 				PortalCache<? extends Serializable, ? extends Serializable>>
 					_portalCaches = new ConcurrentHashMap<>();
 
