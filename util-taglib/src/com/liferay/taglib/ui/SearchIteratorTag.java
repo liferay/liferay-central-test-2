@@ -54,7 +54,10 @@ public class SearchIteratorTag<R> extends SearchPaginatorTag<R> {
 	protected void cleanUp() {
 		super.cleanUp();
 
+		_displayStyle = DEFAULT_DISPLAY_STYPE;
+		_markupView = null;
 		_paginate = true;
+		_resultRowSplitter = null;
 	}
 
 	@Override
