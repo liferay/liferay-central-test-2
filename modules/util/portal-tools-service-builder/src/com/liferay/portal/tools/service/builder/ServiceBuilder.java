@@ -445,8 +445,9 @@ public class ServiceBuilder {
 		_tplExtendedModelImpl = _getTplProperty(
 			"extended_model_impl", _tplExtendedModelImpl);
 		_tplFinder = _getTplProperty("finder", _tplFinder);
+		_tplFinderBaseImpl = _getTplProperty(
+			"finder_base_impl", _tplFinderBaseImpl);
 		_tplFinderUtil = _getTplProperty("finder_util", _tplFinderUtil);
-		_tplFinderBaseImpl = _getTplProperty("finder_base_impl", _tplFinderBaseImpl);
 		_tplHbmXml = _getTplProperty("hbm_xml", _tplHbmXml);
 		_tplJsonJs = _getTplProperty("json_js", _tplJsonJs);
 		_tplJsonJsMethod = _getTplProperty("json_js_method", _tplJsonJsMethod);
@@ -1701,10 +1702,10 @@ public class ServiceBuilder {
 		return SAXReaderFactory.getSAXReader(null, false, false);
 	}
 
-	private static void _move(File source, File destination)
+	private static void _move(File sourceFile, File destinationFile)
 		throws IOException {
 
-		Files.move(source.toPath(), destination.toPath());
+		Files.move(sourceFile.toPath(), destinationFile.toPath());
 	}
 
 	private static String _read(File file) throws IOException {
@@ -2097,27 +2098,27 @@ public class ServiceBuilder {
 			return;
 		}
 
-		File originalFinder = new File(
+		File finderImplFile = new File(
 			_outputPath + "/service/persistence/impl/" + entity.getName() +
-			"FinderImpl.java");
+				"FinderImpl.java");
 
-		if (originalFinder.exists()) {
-			String content = _read(originalFinder);
+		if (finderImplFile.exists()) {
+			String content = _read(finderImplFile);
 
-			content = StringUtil.removeFromList(
+			content = StringUtil.replace(
 				content,
-				"import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;\n",
+				"import com.liferay.portal.service.persistence.impl." +
+					"BasePersistenceImpl;\n",
 				"");
 
 			content = StringUtil.replace(
-				content, "BasePersistenceImpl<"+ entity.getName() +">",
-				entity.getName() +
-				"FinderBaseImpl");
+				content, "BasePersistenceImpl<" + entity.getName() + ">",
+				entity.getName() + "FinderBaseImpl");
 
-			ToolsUtil.writeFileRaw(originalFinder, content, _modifiedFileNames);
+			ToolsUtil.writeFileRaw(finderImplFile, content, _modifiedFileNames);
 		}
 
-		JavaClass javaClass = _getJavaClass(originalFinder.getPath());
+		JavaClass javaClass = _getJavaClass(finderImplFile.getPath());
 
 		Map<String, Object> context = _getContext();
 
@@ -2133,7 +2134,7 @@ public class ServiceBuilder {
 
 		File ejbFile = new File(
 			_outputPath + "/service/persistence/impl/" + entity.getName() +
-			"FinderBaseImpl.java");
+				"FinderBaseImpl.java");
 
 		ToolsUtil.writeFile(ejbFile, content, _author, _modifiedFileNames);
 	}
@@ -4625,17 +4626,17 @@ public class ServiceBuilder {
 
 		String finderClass = "";
 
-		File originalFinderImpl = new File(
+		File originalFinderImplFile = new File(
 			_outputPath + "/service/persistence/" + ejbName +
 				"FinderImpl.java");
-		File newFinderImpl = new File(
+		File newFinderImplFile = new File(
 			_outputPath + "/service/persistence/impl/" + ejbName +
 				"FinderImpl.java");
 
-		if (originalFinderImpl.exists()) {
-			_move(originalFinderImpl, newFinderImpl);
+		if (originalFinderImplFile.exists()) {
+			_move(originalFinderImplFile, newFinderImplFile);
 
-			String content = _read(newFinderImpl);
+			String content = _read(newFinderImplFile);
 
 			StringBundler sb = new StringBundler();
 
@@ -4652,10 +4653,11 @@ public class ServiceBuilder {
 				content, "package " + _packagePath + ".service.persistence;",
 				sb.toString());
 
-			ToolsUtil.writeFileRaw(newFinderImpl, content, _modifiedFileNames);
+			ToolsUtil.writeFileRaw(
+				newFinderImplFile, content, _modifiedFileNames);
 		}
 
-		if (newFinderImpl.exists()) {
+		if (newFinderImplFile.exists()) {
 			finderClass =
 				_packagePath +
 					".service.persistence.impl." + ejbName + "FinderImpl";
@@ -5113,7 +5115,7 @@ public class ServiceBuilder {
 
 	private void _removeFinderBaseImpl(Entity entity) {
 		_deleteFile(
-				_outputPath + "/service/persistence/impl/" + entity.getName() +
+			_outputPath + "/service/persistence/impl/" + entity.getName() +
 				"FinderBaseImpl.java");
 	}
 
