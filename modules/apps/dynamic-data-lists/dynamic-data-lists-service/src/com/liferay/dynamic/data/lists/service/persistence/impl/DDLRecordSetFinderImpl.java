@@ -38,8 +38,8 @@ import java.util.List;
  * @author Marcellus Tavares
  * @author Connor McKay
  */
-public class DDLRecordSetFinderImpl extends DDLRecordSetFinderBaseImpl
-	implements DDLRecordSetFinder {
+public class DDLRecordSetFinderImpl
+	extends DDLRecordSetFinderBaseImpl implements DDLRecordSetFinder {
 
 	public static final String COUNT_BY_C_G_N_D_S =
 		DDLRecordSetFinder.class.getName() + ".countByC_G_N_D_S";
