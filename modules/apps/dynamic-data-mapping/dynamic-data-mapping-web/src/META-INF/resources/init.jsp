@@ -151,10 +151,6 @@ String currentURL = currentURLObj.toString();
 
 PortalPreferences portalPreferences = PortletPreferencesFactoryUtil.getPortalPreferences(request);
 
-DDMWebRequestHelper ddmWebRequestHelper = new DDMWebRequestHelper(request);
-
-DDMServiceConfiguration ddmServiceConfiguration = ddmWebRequestHelper.getDDMServiceConfiguration();
-
 String refererPortletName = ParamUtil.getString(request, "refererPortletName", portletName);
 String refererWebDAVToken = ParamUtil.getString(request, "refererWebDAVToken", portletConfig.getInitParameter("refererWebDAVToken"));
 String scopeTitle = ParamUtil.getString(request, "scopeTitle");
@@ -189,6 +185,10 @@ if (scopeTemplateType.equals(DDMTemplateConstants.TEMPLATE_TYPE_DISPLAY)) {
 else if (scopeTemplateType.equals(DDMTemplateConstants.TEMPLATE_TYPE_FORM)) {
 	templateTypeValue = DDMTemplateConstants.TEMPLATE_TYPE_FORM;
 }
+
+DDMWebRequestHelper ddmWebRequestHelper = new DDMWebRequestHelper(request);
+
+DDMServiceConfiguration ddmServiceConfiguration = ddmWebRequestHelper.getDDMServiceConfiguration();
 %>
 
 <%@ include file="/init-ext.jsp" %>
