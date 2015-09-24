@@ -120,18 +120,18 @@ JSONArray primaryKeysJSONArray = JSONFactoryUtil.createJSONArray();
 
 				</li>
 
-			<%
-				request.removeAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
-				request.removeAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW_ENTRY);
+				<%
+					request.removeAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
+					request.removeAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW_ENTRY);
 
-				request.removeAttribute("liferay-ui:search-container-row:rowId");
-			}
-			%>
+					request.removeAttribute("liferay-ui:search-container-row:rowId");
+				}
+				%>
 
-			<c:if test="<%= i == (resultRowsList.size() - 1) %>">
-				<li></li>
-			</c:if>
-		</ul>
+				<c:if test="<%= i == (resultRowsList.size() - 1) %>">
+					<li></li>
+				</c:if>
+			</ul>
 
 		<%
 		}
