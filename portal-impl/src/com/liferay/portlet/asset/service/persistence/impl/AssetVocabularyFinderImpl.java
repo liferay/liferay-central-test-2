@@ -35,8 +35,7 @@ import java.util.List;
  * @author Juan Fernández
  */
 public class AssetVocabularyFinderImpl
-	extends AssetVocabularyFinderBaseImpl
-	implements AssetVocabularyFinder {
+	extends AssetVocabularyFinderBaseImpl implements AssetVocabularyFinder {
 
 	public static final String COUNT_BY_G_N =
 		AssetVocabularyFinder.class.getName() + ".countByG_N";

@@ -40,8 +40,7 @@ import java.util.List;
  * @author Alexander Chow
  */
 public class DLFileEntryTypeFinderImpl
-	extends DLFileEntryTypeFinderBaseImpl
-	implements DLFileEntryTypeFinder {
+	extends DLFileEntryTypeFinderBaseImpl implements DLFileEntryTypeFinder {
 
 	public static final String COUNT_BY_C_G_N_D_S =
 		DLFileEntryTypeFinder.class.getName() + ".countByC_G_N_D_S";

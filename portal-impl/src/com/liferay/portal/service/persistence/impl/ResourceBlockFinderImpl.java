@@ -30,8 +30,7 @@ import java.util.Iterator;
  * @author Connor McKay
  */
 public class ResourceBlockFinderImpl
-	extends ResourceBlockFinderBaseImpl
-	implements ResourceBlockFinder {
+	extends ResourceBlockFinderBaseImpl implements ResourceBlockFinder {
 
 	public static final String FIND_BY_C_G_N_R =
 		ResourceBlockFinder.class.getName() + ".findByC_G_N_R";
