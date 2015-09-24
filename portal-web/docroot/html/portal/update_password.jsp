@@ -40,8 +40,8 @@ PasswordPolicy passwordPolicy = user.getPasswordPolicy();
 			<%
 			PortletURL portletURL = new PortletURLImpl(request, PortletKeys.LOGIN, plid, PortletRequest.RENDER_PHASE);
 
-			portletURL.setWindowState(WindowState.MAXIMIZED);
 			portletURL.setParameter("mvcRenderCommandName", "/login/forgot_password");
+			portletURL.setWindowState(WindowState.MAXIMIZED);
 			%>
 
 			<div>
