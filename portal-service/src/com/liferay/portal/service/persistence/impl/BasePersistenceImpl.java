@@ -204,6 +204,7 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 		}
 	}
 
+	@Override
 	public Set<String> getBadColumnNames() {
 		return Collections.emptySet();
 	}
