@@ -36,8 +36,8 @@ import java.util.List;
 /**
  * @author Marcellus Tavares
  */
-public class DDLRecordFinderImpl extends DDLRecordFinderBaseImpl
-	implements DDLRecordFinder {
+public class DDLRecordFinderImpl
+	extends DDLRecordFinderBaseImpl implements DDLRecordFinder {
 
 	public static final String COUNT_BY_R_S =
 		DDLRecordFinder.class.getName() + ".countByR_S";
