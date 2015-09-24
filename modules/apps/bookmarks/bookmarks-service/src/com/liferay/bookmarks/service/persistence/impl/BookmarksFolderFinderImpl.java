@@ -43,8 +43,7 @@ import java.util.List;
  * @author Alexander Chow
  */
 public class BookmarksFolderFinderImpl
-		extends BookmarksFolderFinderBaseImpl
-	implements BookmarksFolderFinder {
+	extends BookmarksFolderFinderBaseImpl implements BookmarksFolderFinder {
 
 	public static final String COUNT_F_BY_G_P =
 		BookmarksFolderFinder.class.getName() + ".countF_ByG_P";
