@@ -367,7 +367,6 @@ public class DDMTemplateServiceUtil {
 	* @param classPK the primary key of the template's related entity
 	* @param resourceClassNameId the primary key of the class name for the
 	template's resource model
-	* @param status
 	* @return the matching templates
 	*/
 	public static java.util.List<com.liferay.dynamic.data.mapping.model.DDMTemplate> getTemplatesByClassPK(

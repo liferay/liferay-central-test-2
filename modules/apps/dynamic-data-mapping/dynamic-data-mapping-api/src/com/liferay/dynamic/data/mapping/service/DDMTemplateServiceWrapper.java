@@ -364,7 +364,6 @@ public class DDMTemplateServiceWrapper implements DDMTemplateService,
 	* @param classPK the primary key of the template's related entity
 	* @param resourceClassNameId the primary key of the class name for the
 	template's resource model
-	* @param status
 	* @return the matching templates
 	*/
 	@Override
