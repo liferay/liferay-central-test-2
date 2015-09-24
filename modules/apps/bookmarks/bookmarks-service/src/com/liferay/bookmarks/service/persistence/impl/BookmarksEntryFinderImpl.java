@@ -28,8 +28,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class BookmarksEntryFinderImpl
-	extends BookmarksEntryFinderBaseImpl
-	implements BookmarksEntryFinder {
+	extends BookmarksEntryFinderBaseImpl implements BookmarksEntryFinder {
 
 	public static final String FIND_BY_NO_ASSETS =
 		BookmarksEntryFinder.class.getName() + ".findByNoAssets";
