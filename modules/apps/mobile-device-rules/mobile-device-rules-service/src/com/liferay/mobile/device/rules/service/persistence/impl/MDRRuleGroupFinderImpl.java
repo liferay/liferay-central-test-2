@@ -41,8 +41,8 @@ import java.util.Map;
  * @author Eduardo Lundgren
  * @author Manuel de la Peña
  */
-public class MDRRuleGroupFinderImpl extends MDRRuleGroupFinderBaseImpl
-	implements MDRRuleGroupFinder {
+public class MDRRuleGroupFinderImpl
+	extends MDRRuleGroupFinderBaseImpl implements MDRRuleGroupFinder {
 
 	public static final String COUNT_BY_G_N =
 		MDRRuleGroupFinder.class.getName() + ".countByG_N";
