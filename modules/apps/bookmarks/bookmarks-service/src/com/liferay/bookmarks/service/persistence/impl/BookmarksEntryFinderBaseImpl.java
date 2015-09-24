@@ -27,6 +27,11 @@ import java.util.Set;
  * @generated
  */
 public class BookmarksEntryFinderBaseImpl extends BasePersistenceImpl<BookmarksEntry> {
+	@Override
+	public Set<String> getBadColumnNames() {
+		return getBookmarksEntryPersistence().getBadColumnNames();
+	}
+
 	/**
 	 * Returns the bookmarks entry persistence.
 	 *
@@ -44,11 +49,6 @@ public class BookmarksEntryFinderBaseImpl extends BasePersistenceImpl<BookmarksE
 	public void setBookmarksEntryPersistence(
 		BookmarksEntryPersistence bookmarksEntryPersistence) {
 		this.bookmarksEntryPersistence = bookmarksEntryPersistence;
-	}
-
-	@Override
-	protected Set<String> getBadColumnNames() {
-		return getBookmarksEntryPersistence().getBadColumnNames();
 	}
 
 	@BeanReference(type = BookmarksEntryPersistence.class)

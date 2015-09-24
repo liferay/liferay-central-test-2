@@ -25,6 +25,11 @@ import java.util.Set;
  * @generated
  */
 public class TeamFinderBaseImpl extends BasePersistenceImpl<Team> {
+	@Override
+	public Set<String> getBadColumnNames() {
+		return getTeamPersistence().getBadColumnNames();
+	}
+
 	/**
 	 * Returns the team persistence.
 	 *
@@ -41,11 +46,6 @@ public class TeamFinderBaseImpl extends BasePersistenceImpl<Team> {
 	 */
 	public void setTeamPersistence(TeamPersistence teamPersistence) {
 		this.teamPersistence = teamPersistence;
-	}
-
-	@Override
-	protected Set<String> getBadColumnNames() {
-		return getTeamPersistence().getBadColumnNames();
 	}
 
 	@BeanReference(type = TeamPersistence.class)

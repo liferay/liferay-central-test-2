@@ -1945,5 +1945,6 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 	*/
 	public int countAll();
 
+	@Override
 	public java.util.Set<java.lang.String> getBadColumnNames();
 }

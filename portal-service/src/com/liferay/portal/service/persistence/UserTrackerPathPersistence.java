@@ -255,5 +255,6 @@ public interface UserTrackerPathPersistence extends BasePersistence<UserTrackerP
 	*/
 	public int countAll();
 
+	@Override
 	public java.util.Set<java.lang.String> getBadColumnNames();
 }

@@ -27,6 +27,11 @@ import java.util.Set;
  * @generated
  */
 public class SocialActivitySetFinderBaseImpl extends BasePersistenceImpl<SocialActivitySet> {
+	@Override
+	public Set<String> getBadColumnNames() {
+		return getSocialActivitySetPersistence().getBadColumnNames();
+	}
+
 	/**
 	 * Returns the social activity set persistence.
 	 *
@@ -44,11 +49,6 @@ public class SocialActivitySetFinderBaseImpl extends BasePersistenceImpl<SocialA
 	public void setSocialActivitySetPersistence(
 		SocialActivitySetPersistence socialActivitySetPersistence) {
 		this.socialActivitySetPersistence = socialActivitySetPersistence;
-	}
-
-	@Override
-	protected Set<String> getBadColumnNames() {
-		return getSocialActivitySetPersistence().getBadColumnNames();
 	}
 
 	@BeanReference(type = SocialActivitySetPersistence.class)

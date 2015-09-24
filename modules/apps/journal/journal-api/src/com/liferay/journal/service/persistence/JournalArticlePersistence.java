@@ -6351,5 +6351,6 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	*/
 	public int countAll();
 
+	@Override
 	public java.util.Set<java.lang.String> getBadColumnNames();
 }

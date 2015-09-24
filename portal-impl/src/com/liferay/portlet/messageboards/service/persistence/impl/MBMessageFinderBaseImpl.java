@@ -27,6 +27,11 @@ import java.util.Set;
  * @generated
  */
 public class MBMessageFinderBaseImpl extends BasePersistenceImpl<MBMessage> {
+	@Override
+	public Set<String> getBadColumnNames() {
+		return getMBMessagePersistence().getBadColumnNames();
+	}
+
 	/**
 	 * Returns the message-boards message persistence.
 	 *
@@ -44,11 +49,6 @@ public class MBMessageFinderBaseImpl extends BasePersistenceImpl<MBMessage> {
 	public void setMBMessagePersistence(
 		MBMessagePersistence mbMessagePersistence) {
 		this.mbMessagePersistence = mbMessagePersistence;
-	}
-
-	@Override
-	protected Set<String> getBadColumnNames() {
-		return getMBMessagePersistence().getBadColumnNames();
 	}
 
 	@BeanReference(type = MBMessagePersistence.class)

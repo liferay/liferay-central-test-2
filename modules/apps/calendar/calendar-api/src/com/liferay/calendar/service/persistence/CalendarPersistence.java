@@ -949,5 +949,6 @@ public interface CalendarPersistence extends BasePersistence<Calendar> {
 	*/
 	public int countAll();
 
+	@Override
 	public java.util.Set<java.lang.String> getBadColumnNames();
 }

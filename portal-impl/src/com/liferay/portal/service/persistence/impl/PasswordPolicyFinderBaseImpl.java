@@ -25,6 +25,11 @@ import java.util.Set;
  * @generated
  */
 public class PasswordPolicyFinderBaseImpl extends BasePersistenceImpl<PasswordPolicy> {
+	@Override
+	public Set<String> getBadColumnNames() {
+		return getPasswordPolicyPersistence().getBadColumnNames();
+	}
+
 	/**
 	 * Returns the password policy persistence.
 	 *
@@ -42,11 +47,6 @@ public class PasswordPolicyFinderBaseImpl extends BasePersistenceImpl<PasswordPo
 	public void setPasswordPolicyPersistence(
 		PasswordPolicyPersistence passwordPolicyPersistence) {
 		this.passwordPolicyPersistence = passwordPolicyPersistence;
-	}
-
-	@Override
-	protected Set<String> getBadColumnNames() {
-		return getPasswordPolicyPersistence().getBadColumnNames();
 	}
 
 	@BeanReference(type = PasswordPolicyPersistence.class)

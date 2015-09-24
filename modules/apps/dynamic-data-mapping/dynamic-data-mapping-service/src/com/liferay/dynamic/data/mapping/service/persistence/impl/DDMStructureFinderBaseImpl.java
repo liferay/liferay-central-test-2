@@ -27,6 +27,11 @@ import java.util.Set;
  * @generated
  */
 public class DDMStructureFinderBaseImpl extends BasePersistenceImpl<DDMStructure> {
+	@Override
+	public Set<String> getBadColumnNames() {
+		return getDDMStructurePersistence().getBadColumnNames();
+	}
+
 	/**
 	 * Returns the d d m structure persistence.
 	 *
@@ -44,11 +49,6 @@ public class DDMStructureFinderBaseImpl extends BasePersistenceImpl<DDMStructure
 	public void setDDMStructurePersistence(
 		DDMStructurePersistence ddmStructurePersistence) {
 		this.ddmStructurePersistence = ddmStructurePersistence;
-	}
-
-	@Override
-	protected Set<String> getBadColumnNames() {
-		return getDDMStructurePersistence().getBadColumnNames();
 	}
 
 	@BeanReference(type = DDMStructurePersistence.class)

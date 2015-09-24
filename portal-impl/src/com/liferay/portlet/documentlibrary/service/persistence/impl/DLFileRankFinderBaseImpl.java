@@ -27,6 +27,11 @@ import java.util.Set;
  * @generated
  */
 public class DLFileRankFinderBaseImpl extends BasePersistenceImpl<DLFileRank> {
+	@Override
+	public Set<String> getBadColumnNames() {
+		return getDLFileRankPersistence().getBadColumnNames();
+	}
+
 	/**
 	 * Returns the document library file rank persistence.
 	 *
@@ -44,11 +49,6 @@ public class DLFileRankFinderBaseImpl extends BasePersistenceImpl<DLFileRank> {
 	public void setDLFileRankPersistence(
 		DLFileRankPersistence dlFileRankPersistence) {
 		this.dlFileRankPersistence = dlFileRankPersistence;
-	}
-
-	@Override
-	protected Set<String> getBadColumnNames() {
-		return getDLFileRankPersistence().getBadColumnNames();
 	}
 
 	@BeanReference(type = DLFileRankPersistence.class)

@@ -27,6 +27,11 @@ import java.util.Set;
  * @generated
  */
 public class DDLRecordFinderBaseImpl extends BasePersistenceImpl<DDLRecord> {
+	@Override
+	public Set<String> getBadColumnNames() {
+		return getDDLRecordPersistence().getBadColumnNames();
+	}
+
 	/**
 	 * Returns the d d l record persistence.
 	 *
@@ -44,11 +49,6 @@ public class DDLRecordFinderBaseImpl extends BasePersistenceImpl<DDLRecord> {
 	public void setDDLRecordPersistence(
 		DDLRecordPersistence ddlRecordPersistence) {
 		this.ddlRecordPersistence = ddlRecordPersistence;
-	}
-
-	@Override
-	protected Set<String> getBadColumnNames() {
-		return getDDLRecordPersistence().getBadColumnNames();
 	}
 
 	@BeanReference(type = DDLRecordPersistence.class)

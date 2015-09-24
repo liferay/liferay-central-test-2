@@ -27,6 +27,11 @@ import java.util.Set;
  * @generated
  */
 public class CalendarBookingFinderBaseImpl extends BasePersistenceImpl<CalendarBooking> {
+	@Override
+	public Set<String> getBadColumnNames() {
+		return getCalendarBookingPersistence().getBadColumnNames();
+	}
+
 	/**
 	 * Returns the calendar booking persistence.
 	 *
@@ -44,11 +49,6 @@ public class CalendarBookingFinderBaseImpl extends BasePersistenceImpl<CalendarB
 	public void setCalendarBookingPersistence(
 		CalendarBookingPersistence calendarBookingPersistence) {
 		this.calendarBookingPersistence = calendarBookingPersistence;
-	}
-
-	@Override
-	protected Set<String> getBadColumnNames() {
-		return getCalendarBookingPersistence().getBadColumnNames();
 	}
 
 	@BeanReference(type = CalendarBookingPersistence.class)

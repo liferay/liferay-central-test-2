@@ -1159,5 +1159,6 @@ public interface LayoutFriendlyURLPersistence extends BasePersistence<LayoutFrie
 	*/
 	public int countAll();
 
+	@Override
 	public java.util.Set<java.lang.String> getBadColumnNames();
 }

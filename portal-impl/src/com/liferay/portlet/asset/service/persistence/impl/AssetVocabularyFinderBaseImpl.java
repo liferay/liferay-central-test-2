@@ -27,6 +27,11 @@ import java.util.Set;
  * @generated
  */
 public class AssetVocabularyFinderBaseImpl extends BasePersistenceImpl<AssetVocabulary> {
+	@Override
+	public Set<String> getBadColumnNames() {
+		return getAssetVocabularyPersistence().getBadColumnNames();
+	}
+
 	/**
 	 * Returns the asset vocabulary persistence.
 	 *
@@ -44,11 +49,6 @@ public class AssetVocabularyFinderBaseImpl extends BasePersistenceImpl<AssetVoca
 	public void setAssetVocabularyPersistence(
 		AssetVocabularyPersistence assetVocabularyPersistence) {
 		this.assetVocabularyPersistence = assetVocabularyPersistence;
-	}
-
-	@Override
-	protected Set<String> getBadColumnNames() {
-		return getAssetVocabularyPersistence().getBadColumnNames();
 	}
 
 	@BeanReference(type = AssetVocabularyPersistence.class)

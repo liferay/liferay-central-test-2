@@ -27,6 +27,11 @@ import java.util.Set;
  * @generated
  */
 public class MBThreadFinderBaseImpl extends BasePersistenceImpl<MBThread> {
+	@Override
+	public Set<String> getBadColumnNames() {
+		return getMBThreadPersistence().getBadColumnNames();
+	}
+
 	/**
 	 * Returns the message boards thread persistence.
 	 *
@@ -43,11 +48,6 @@ public class MBThreadFinderBaseImpl extends BasePersistenceImpl<MBThread> {
 	 */
 	public void setMBThreadPersistence(MBThreadPersistence mbThreadPersistence) {
 		this.mbThreadPersistence = mbThreadPersistence;
-	}
-
-	@Override
-	protected Set<String> getBadColumnNames() {
-		return getMBThreadPersistence().getBadColumnNames();
 	}
 
 	@BeanReference(type = MBThreadPersistence.class)

@@ -542,5 +542,6 @@ public interface LockPersistence extends BasePersistence<Lock> {
 	*/
 	public int countAll();
 
+	@Override
 	public java.util.Set<java.lang.String> getBadColumnNames();
 }

@@ -25,6 +25,11 @@ import java.util.Set;
  * @generated
  */
 public class ServiceComponentFinderBaseImpl extends BasePersistenceImpl<ServiceComponent> {
+	@Override
+	public Set<String> getBadColumnNames() {
+		return getServiceComponentPersistence().getBadColumnNames();
+	}
+
 	/**
 	 * Returns the service component persistence.
 	 *
@@ -42,11 +47,6 @@ public class ServiceComponentFinderBaseImpl extends BasePersistenceImpl<ServiceC
 	public void setServiceComponentPersistence(
 		ServiceComponentPersistence serviceComponentPersistence) {
 		this.serviceComponentPersistence = serviceComponentPersistence;
-	}
-
-	@Override
-	protected Set<String> getBadColumnNames() {
-		return getServiceComponentPersistence().getBadColumnNames();
 	}
 
 	@BeanReference(type = ServiceComponentPersistence.class)

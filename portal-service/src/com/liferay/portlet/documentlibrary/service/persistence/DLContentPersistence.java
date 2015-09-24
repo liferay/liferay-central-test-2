@@ -611,5 +611,6 @@ public interface DLContentPersistence extends BasePersistence<DLContent> {
 	*/
 	public int countAll();
 
+	@Override
 	public java.util.Set<java.lang.String> getBadColumnNames();
 }

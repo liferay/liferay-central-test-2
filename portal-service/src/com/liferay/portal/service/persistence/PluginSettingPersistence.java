@@ -314,5 +314,6 @@ public interface PluginSettingPersistence extends BasePersistence<PluginSetting>
 	*/
 	public int countAll();
 
+	@Override
 	public java.util.Set<java.lang.String> getBadColumnNames();
 }

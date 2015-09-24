@@ -25,6 +25,11 @@ import java.util.Set;
  * @generated
  */
 public class RoleFinderBaseImpl extends BasePersistenceImpl<Role> {
+	@Override
+	public Set<String> getBadColumnNames() {
+		return getRolePersistence().getBadColumnNames();
+	}
+
 	/**
 	 * Returns the role persistence.
 	 *
@@ -41,11 +46,6 @@ public class RoleFinderBaseImpl extends BasePersistenceImpl<Role> {
 	 */
 	public void setRolePersistence(RolePersistence rolePersistence) {
 		this.rolePersistence = rolePersistence;
-	}
-
-	@Override
-	protected Set<String> getBadColumnNames() {
-		return getRolePersistence().getBadColumnNames();
 	}
 
 	@BeanReference(type = RolePersistence.class)

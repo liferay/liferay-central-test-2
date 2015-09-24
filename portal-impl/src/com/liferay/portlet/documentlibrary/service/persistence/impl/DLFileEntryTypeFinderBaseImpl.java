@@ -27,6 +27,11 @@ import java.util.Set;
  * @generated
  */
 public class DLFileEntryTypeFinderBaseImpl extends BasePersistenceImpl<DLFileEntryType> {
+	@Override
+	public Set<String> getBadColumnNames() {
+		return getDLFileEntryTypePersistence().getBadColumnNames();
+	}
+
 	/**
 	 * Returns the document library file entry type persistence.
 	 *
@@ -44,11 +49,6 @@ public class DLFileEntryTypeFinderBaseImpl extends BasePersistenceImpl<DLFileEnt
 	public void setDLFileEntryTypePersistence(
 		DLFileEntryTypePersistence dlFileEntryTypePersistence) {
 		this.dlFileEntryTypePersistence = dlFileEntryTypePersistence;
-	}
-
-	@Override
-	protected Set<String> getBadColumnNames() {
-		return getDLFileEntryTypePersistence().getBadColumnNames();
 	}
 
 	@BeanReference(type = DLFileEntryTypePersistence.class)

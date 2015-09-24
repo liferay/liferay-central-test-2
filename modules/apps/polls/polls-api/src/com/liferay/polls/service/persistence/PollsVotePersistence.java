@@ -705,5 +705,6 @@ public interface PollsVotePersistence extends BasePersistence<PollsVote> {
 	*/
 	public int countAll();
 
+	@Override
 	public java.util.Set<java.lang.String> getBadColumnNames();
 }

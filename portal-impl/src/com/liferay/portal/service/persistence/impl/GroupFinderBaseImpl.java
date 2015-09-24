@@ -25,6 +25,11 @@ import java.util.Set;
  * @generated
  */
 public class GroupFinderBaseImpl extends BasePersistenceImpl<Group> {
+	@Override
+	public Set<String> getBadColumnNames() {
+		return getGroupPersistence().getBadColumnNames();
+	}
+
 	/**
 	 * Returns the group persistence.
 	 *
@@ -41,11 +46,6 @@ public class GroupFinderBaseImpl extends BasePersistenceImpl<Group> {
 	 */
 	public void setGroupPersistence(GroupPersistence groupPersistence) {
 		this.groupPersistence = groupPersistence;
-	}
-
-	@Override
-	protected Set<String> getBadColumnNames() {
-		return getGroupPersistence().getBadColumnNames();
 	}
 
 	@BeanReference(type = GroupPersistence.class)

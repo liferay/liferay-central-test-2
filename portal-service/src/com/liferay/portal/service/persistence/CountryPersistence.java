@@ -385,5 +385,6 @@ public interface CountryPersistence extends BasePersistence<Country> {
 	*/
 	public int countAll();
 
+	@Override
 	public java.util.Set<java.lang.String> getBadColumnNames();
 }

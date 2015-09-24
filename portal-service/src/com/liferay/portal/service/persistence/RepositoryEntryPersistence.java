@@ -598,5 +598,6 @@ public interface RepositoryEntryPersistence extends BasePersistence<RepositoryEn
 	*/
 	public int countAll();
 
+	@Override
 	public java.util.Set<java.lang.String> getBadColumnNames();
 }

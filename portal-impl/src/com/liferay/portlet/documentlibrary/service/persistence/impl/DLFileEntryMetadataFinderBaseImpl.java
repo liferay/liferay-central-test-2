@@ -27,6 +27,11 @@ import java.util.Set;
  * @generated
  */
 public class DLFileEntryMetadataFinderBaseImpl extends BasePersistenceImpl<DLFileEntryMetadata> {
+	@Override
+	public Set<String> getBadColumnNames() {
+		return getDLFileEntryMetadataPersistence().getBadColumnNames();
+	}
+
 	/**
 	 * Returns the document library file entry metadata persistence.
 	 *
@@ -44,11 +49,6 @@ public class DLFileEntryMetadataFinderBaseImpl extends BasePersistenceImpl<DLFil
 	public void setDLFileEntryMetadataPersistence(
 		DLFileEntryMetadataPersistence dlFileEntryMetadataPersistence) {
 		this.dlFileEntryMetadataPersistence = dlFileEntryMetadataPersistence;
-	}
-
-	@Override
-	protected Set<String> getBadColumnNames() {
-		return getDLFileEntryMetadataPersistence().getBadColumnNames();
 	}
 
 	@BeanReference(type = DLFileEntryMetadataPersistence.class)

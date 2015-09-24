@@ -2292,5 +2292,6 @@ public interface MBCategoryPersistence extends BasePersistence<MBCategory> {
 	*/
 	public int countAll();
 
+	@Override
 	public java.util.Set<java.lang.String> getBadColumnNames();
 }

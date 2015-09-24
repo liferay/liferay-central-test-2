@@ -26,6 +26,11 @@ import java.util.Set;
  * @generated
  */
 public class LockFinderBaseImpl extends BasePersistenceImpl<Lock> {
+	@Override
+	public Set<String> getBadColumnNames() {
+		return getLockPersistence().getBadColumnNames();
+	}
+
 	/**
 	 * Returns the lock persistence.
 	 *
@@ -42,11 +47,6 @@ public class LockFinderBaseImpl extends BasePersistenceImpl<Lock> {
 	 */
 	public void setLockPersistence(LockPersistence lockPersistence) {
 		this.lockPersistence = lockPersistence;
-	}
-
-	@Override
-	protected Set<String> getBadColumnNames() {
-		return getLockPersistence().getBadColumnNames();
 	}
 
 	@BeanReference(type = LockPersistence.class)

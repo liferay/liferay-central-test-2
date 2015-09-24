@@ -27,6 +27,11 @@ import java.util.Set;
  * @generated
  */
 public class DLFolderFinderBaseImpl extends BasePersistenceImpl<DLFolder> {
+	@Override
+	public Set<String> getBadColumnNames() {
+		return getDLFolderPersistence().getBadColumnNames();
+	}
+
 	/**
 	 * Returns the document library folder persistence.
 	 *
@@ -43,11 +48,6 @@ public class DLFolderFinderBaseImpl extends BasePersistenceImpl<DLFolder> {
 	 */
 	public void setDLFolderPersistence(DLFolderPersistence dlFolderPersistence) {
 		this.dlFolderPersistence = dlFolderPersistence;
-	}
-
-	@Override
-	protected Set<String> getBadColumnNames() {
-		return getDLFolderPersistence().getBadColumnNames();
 	}
 
 	@BeanReference(type = DLFolderPersistence.class)
