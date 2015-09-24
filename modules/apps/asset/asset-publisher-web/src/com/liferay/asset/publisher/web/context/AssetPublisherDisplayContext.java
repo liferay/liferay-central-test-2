@@ -1356,12 +1356,10 @@ public class AssetPublisherDisplayContext {
 			_request, "ddmStructureDisplayFieldValue",
 			_portletPreferences.getValue(
 				"ddmStructureDisplayFieldValue", StringPool.BLANK));
-
 		_ddmStructureFieldName = ParamUtil.getString(
 			_request, "ddmStructureFieldName",
 			_portletPreferences.getValue(
 				"ddmStructureFieldName", StringPool.BLANK));
-
 		_ddmStructureFieldValue = ParamUtil.getString(
 			_request, "ddmStructureFieldValue",
 			_portletPreferences.getValue(
