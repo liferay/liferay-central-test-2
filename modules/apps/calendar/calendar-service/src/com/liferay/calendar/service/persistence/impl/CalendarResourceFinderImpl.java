@@ -42,8 +42,7 @@ import java.util.Map;
  * @author Fabio Pezzutto
  */
 public class CalendarResourceFinderImpl
-	extends CalendarResourceFinderBaseImpl
-	implements CalendarResourceFinder {
+	extends CalendarResourceFinderBaseImpl implements CalendarResourceFinder {
 
 	public static final String COUNT_BY_C_G_C_C_N_D_A =
 		CalendarResourceFinder.class.getName() + ".countByC_G_C_C_N_D_A";

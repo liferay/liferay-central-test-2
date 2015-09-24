@@ -39,8 +39,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class BlogsStatsUserFinderImpl
-	extends BlogsStatsUserFinderBaseImpl
-	implements BlogsStatsUserFinder {
+	extends BlogsStatsUserFinderBaseImpl implements BlogsStatsUserFinder {
 
 	public static final String COUNT_BY_ORGANIZATION_IDS =
 		BlogsStatsUserFinder.class.getName() + ".countByOrganizationIds";
