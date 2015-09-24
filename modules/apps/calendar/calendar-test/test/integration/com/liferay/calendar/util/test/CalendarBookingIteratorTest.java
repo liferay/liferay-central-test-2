@@ -42,7 +42,32 @@ public class CalendarBookingIteratorTest {
 		new LiferayIntegrationTestRule();
 
 	@Test
-	public void testCount() throws ParseException {
+	public void testRecurrenceIsNull() throws ParseException {
+		Calendar calendar = Calendar.getInstance();
+
+		CalendarBooking calendarBooking = new CalendarBookingImpl();
+
+		calendarBooking.setStartTime(calendar.getTimeInMillis());
+		calendarBooking.setRecurrence(null);
+
+		CalendarBookingIterator calendarBookingIterator =
+			new CalendarBookingIterator(calendarBooking);
+
+		int count = 0;
+
+		while (calendarBookingIterator.hasNext()) {
+			calendarBookingIterator.next();
+
+			count++;
+		}
+
+		Assert.assertEquals(1, count);
+	}
+
+	@Test
+	public void testRecurrenceStartsMondayRepeatsMonday()
+		throws ParseException {
+
 		Calendar calendar = Calendar.getInstance();
 
 		calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
@@ -68,7 +93,7 @@ public class CalendarBookingIteratorTest {
 	}
 
 	@Test
-	public void testCountIncludesStartDayOutOfWeeklyRepeatingDays()
+	public void testRecurrenceStartsMondayRepeatsWednesday()
 		throws ParseException {
 
 		Calendar calendar = Calendar.getInstance();
@@ -93,29 +118,6 @@ public class CalendarBookingIteratorTest {
 		}
 
 		Assert.assertEquals(2, count);
-	}
-
-	@Test
-	public void testNoRecurrence() throws ParseException {
-		Calendar calendar = Calendar.getInstance();
-
-		CalendarBooking calendarBooking = new CalendarBookingImpl();
-
-		calendarBooking.setStartTime(calendar.getTimeInMillis());
-		calendarBooking.setRecurrence(null);
-
-		CalendarBookingIterator calendarBookingIterator =
-			new CalendarBookingIterator(calendarBooking);
-
-		int count = 0;
-
-		while (calendarBookingIterator.hasNext()) {
-			calendarBookingIterator.next();
-
-			count++;
-		}
-
-		Assert.assertEquals(1, count);
 	}
 
 }
