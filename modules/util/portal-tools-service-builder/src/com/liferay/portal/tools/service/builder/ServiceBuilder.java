@@ -2089,7 +2089,9 @@ public class ServiceBuilder {
 	}
 
 	private void _createFinderBaseImpl(Entity entity) throws Exception {
-		if (!entity.hasFinderClass()) {
+		if (!entity.hasFinderClass() ||
+			_packagePath.equals("com.liferay.counter")) {
+
 			_removeFinderBaseImpl(entity);
 
 			return;
