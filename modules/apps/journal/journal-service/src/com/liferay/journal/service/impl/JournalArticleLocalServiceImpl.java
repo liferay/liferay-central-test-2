@@ -7522,13 +7522,13 @@ public class JournalArticleLocalServiceImpl
 
 		DDMForm ddmForm = ddmStructure.getDDMForm();
 
+		Map<String, DDMFormField> ddmFormFieldsMap =
+			ddmForm.getDDMFormFieldsMap(true);
+
 		Map<String, DDMFormField> fullHierarchyDDMFormFieldsMap =
 			ddmStructure.getFullHierarchyDDMFormFieldsMap(true);
 
 		Map<String, String> fieldsValuesMap = createFieldsValuesMap(content);
-
-		Map<String, DDMFormField> ddmFormFieldsMap =
-			ddmForm.getDDMFormFieldsMap(true);
 
 		for (Map.Entry<String, String> fieldValue :
 				fieldsValuesMap.entrySet()) {
