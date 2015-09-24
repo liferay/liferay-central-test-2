@@ -26,16 +26,6 @@ String type = (String)request.getAttribute("liferay-ui:search:type");
 String id = searchContainer.getId(request, namespace);
 
 List resultRows = searchContainer.getResultRows();
-
-List<List<com.liferay.portal.kernel.dao.search.ResultRow>> resultRowsList = new ArrayList<List<com.liferay.portal.kernel.dao.search.ResultRow>>();
-
-if (resultRowSplitter != null) {
-	resultRowsList = resultRowSplitter.split(searchContainer.getResultRows());
-}
-else {
-	resultRowsList.add(resultRows);
-}
-
 List<String> headerNames = searchContainer.getHeaderNames();
 List<String> normalizedHeaderNames = searchContainer.getNormalizedHeaderNames();
 String emptyResultsMessage = searchContainer.getEmptyResultsMessage();
@@ -68,6 +58,15 @@ JSONArray primaryKeysJSONArray = JSONFactoryUtil.createJSONArray();
 	request.setAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW_CHECKER, rowChecker);
 
 	boolean allRowsIsChecked = true;
+
+	List<List<com.liferay.portal.kernel.dao.search.ResultRow>> resultRowsList = new ArrayList<List<com.liferay.portal.kernel.dao.search.ResultRow>>();
+
+	if (resultRowSplitter != null) {
+		resultRowsList = resultRowSplitter.split(searchContainer.getResultRows());
+	}
+	else {
+		resultRowsList.add(resultRows);
+	}
 
 	for (int i = 0; i < resultRowsList.size(); i++) {
 		List<com.liferay.portal.kernel.dao.search.ResultRow> curResultRows = resultRowsList.get(i);
