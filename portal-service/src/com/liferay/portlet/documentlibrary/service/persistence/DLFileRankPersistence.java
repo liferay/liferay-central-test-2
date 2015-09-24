@@ -685,5 +685,6 @@ public interface DLFileRankPersistence extends BasePersistence<DLFileRank> {
 	*/
 	public int countAll();
 
+	@Override
 	public java.util.Set<java.lang.String> getBadColumnNames();
 }

@@ -27,6 +27,11 @@ import java.util.Set;
  * @generated
  */
 public class RatingsEntryFinderBaseImpl extends BasePersistenceImpl<RatingsEntry> {
+	@Override
+	public Set<String> getBadColumnNames() {
+		return getRatingsEntryPersistence().getBadColumnNames();
+	}
+
 	/**
 	 * Returns the ratings entry persistence.
 	 *
@@ -44,11 +49,6 @@ public class RatingsEntryFinderBaseImpl extends BasePersistenceImpl<RatingsEntry
 	public void setRatingsEntryPersistence(
 		RatingsEntryPersistence ratingsEntryPersistence) {
 		this.ratingsEntryPersistence = ratingsEntryPersistence;
-	}
-
-	@Override
-	protected Set<String> getBadColumnNames() {
-		return getRatingsEntryPersistence().getBadColumnNames();
 	}
 
 	@BeanReference(type = RatingsEntryPersistence.class)

@@ -4930,5 +4930,6 @@ public interface WikiPagePersistence extends BasePersistence<WikiPage> {
 	*/
 	public int countAll();
 
+	@Override
 	public java.util.Set<java.lang.String> getBadColumnNames();
 }

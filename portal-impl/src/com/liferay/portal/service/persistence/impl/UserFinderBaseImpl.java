@@ -25,6 +25,11 @@ import java.util.Set;
  * @generated
  */
 public class UserFinderBaseImpl extends BasePersistenceImpl<User> {
+	@Override
+	public Set<String> getBadColumnNames() {
+		return getUserPersistence().getBadColumnNames();
+	}
+
 	/**
 	 * Returns the user persistence.
 	 *
@@ -41,11 +46,6 @@ public class UserFinderBaseImpl extends BasePersistenceImpl<User> {
 	 */
 	public void setUserPersistence(UserPersistence userPersistence) {
 		this.userPersistence = userPersistence;
-	}
-
-	@Override
-	protected Set<String> getBadColumnNames() {
-		return getUserPersistence().getBadColumnNames();
 	}
 
 	@BeanReference(type = UserPersistence.class)

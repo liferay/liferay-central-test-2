@@ -2562,5 +2562,6 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	public void setUsers(long pk,
 		java.util.List<com.liferay.portal.model.User> users);
 
+	@Override
 	public java.util.Set<java.lang.String> getBadColumnNames();
 }

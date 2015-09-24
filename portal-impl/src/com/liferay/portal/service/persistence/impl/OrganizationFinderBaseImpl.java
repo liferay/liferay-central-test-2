@@ -25,6 +25,11 @@ import java.util.Set;
  * @generated
  */
 public class OrganizationFinderBaseImpl extends BasePersistenceImpl<Organization> {
+	@Override
+	public Set<String> getBadColumnNames() {
+		return getOrganizationPersistence().getBadColumnNames();
+	}
+
 	/**
 	 * Returns the organization persistence.
 	 *
@@ -42,11 +47,6 @@ public class OrganizationFinderBaseImpl extends BasePersistenceImpl<Organization
 	public void setOrganizationPersistence(
 		OrganizationPersistence organizationPersistence) {
 		this.organizationPersistence = organizationPersistence;
-	}
-
-	@Override
-	protected Set<String> getBadColumnNames() {
-		return getOrganizationPersistence().getBadColumnNames();
 	}
 
 	@BeanReference(type = OrganizationPersistence.class)

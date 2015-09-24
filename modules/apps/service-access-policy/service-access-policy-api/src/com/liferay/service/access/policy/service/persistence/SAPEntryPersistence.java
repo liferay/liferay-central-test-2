@@ -735,5 +735,6 @@ public interface SAPEntryPersistence extends BasePersistence<SAPEntry> {
 	*/
 	public int countAll();
 
+	@Override
 	public java.util.Set<java.lang.String> getBadColumnNames();
 }

@@ -1094,5 +1094,6 @@ public interface AnnouncementsEntryPersistence extends BasePersistence<Announcem
 	*/
 	public int countAll();
 
+	@Override
 	public java.util.Set<java.lang.String> getBadColumnNames();
 }

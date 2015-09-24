@@ -27,6 +27,11 @@ import java.util.Set;
  * @generated
  */
 public class AssetCategoryFinderBaseImpl extends BasePersistenceImpl<AssetCategory> {
+	@Override
+	public Set<String> getBadColumnNames() {
+		return getAssetCategoryPersistence().getBadColumnNames();
+	}
+
 	/**
 	 * Returns the asset category persistence.
 	 *
@@ -44,11 +49,6 @@ public class AssetCategoryFinderBaseImpl extends BasePersistenceImpl<AssetCatego
 	public void setAssetCategoryPersistence(
 		AssetCategoryPersistence assetCategoryPersistence) {
 		this.assetCategoryPersistence = assetCategoryPersistence;
-	}
-
-	@Override
-	protected Set<String> getBadColumnNames() {
-		return getAssetCategoryPersistence().getBadColumnNames();
 	}
 
 	@BeanReference(type = AssetCategoryPersistence.class)

@@ -27,6 +27,11 @@ import java.util.Set;
  * @generated
  */
 public class MBCategoryFinderBaseImpl extends BasePersistenceImpl<MBCategory> {
+	@Override
+	public Set<String> getBadColumnNames() {
+		return getMBCategoryPersistence().getBadColumnNames();
+	}
+
 	/**
 	 * Returns the message boards category persistence.
 	 *
@@ -44,11 +49,6 @@ public class MBCategoryFinderBaseImpl extends BasePersistenceImpl<MBCategory> {
 	public void setMBCategoryPersistence(
 		MBCategoryPersistence mbCategoryPersistence) {
 		this.mbCategoryPersistence = mbCategoryPersistence;
-	}
-
-	@Override
-	protected Set<String> getBadColumnNames() {
-		return getMBCategoryPersistence().getBadColumnNames();
 	}
 
 	@BeanReference(type = MBCategoryPersistence.class)

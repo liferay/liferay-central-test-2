@@ -27,6 +27,11 @@ import java.util.Set;
  * @generated
  */
 public class WikiPageFinderBaseImpl extends BasePersistenceImpl<WikiPage> {
+	@Override
+	public Set<String> getBadColumnNames() {
+		return getWikiPagePersistence().getBadColumnNames();
+	}
+
 	/**
 	 * Returns the wiki page persistence.
 	 *
@@ -43,11 +48,6 @@ public class WikiPageFinderBaseImpl extends BasePersistenceImpl<WikiPage> {
 	 */
 	public void setWikiPagePersistence(WikiPagePersistence wikiPagePersistence) {
 		this.wikiPagePersistence = wikiPagePersistence;
-	}
-
-	@Override
-	protected Set<String> getBadColumnNames() {
-		return getWikiPagePersistence().getBadColumnNames();
 	}
 
 	@BeanReference(type = WikiPagePersistence.class)

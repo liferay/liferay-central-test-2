@@ -27,6 +27,11 @@ import java.util.Set;
  * @generated
  */
 public class MDRRuleGroupFinderBaseImpl extends BasePersistenceImpl<MDRRuleGroup> {
+	@Override
+	public Set<String> getBadColumnNames() {
+		return getMDRRuleGroupPersistence().getBadColumnNames();
+	}
+
 	/**
 	 * Returns the m d r rule group persistence.
 	 *
@@ -44,11 +49,6 @@ public class MDRRuleGroupFinderBaseImpl extends BasePersistenceImpl<MDRRuleGroup
 	public void setMDRRuleGroupPersistence(
 		MDRRuleGroupPersistence mdrRuleGroupPersistence) {
 		this.mdrRuleGroupPersistence = mdrRuleGroupPersistence;
-	}
-
-	@Override
-	protected Set<String> getBadColumnNames() {
-		return getMDRRuleGroupPersistence().getBadColumnNames();
 	}
 
 	@BeanReference(type = MDRRuleGroupPersistence.class)

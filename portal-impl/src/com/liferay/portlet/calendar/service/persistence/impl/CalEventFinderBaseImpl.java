@@ -29,6 +29,11 @@ import java.util.Set;
  */
 @Deprecated
 public class CalEventFinderBaseImpl extends BasePersistenceImpl<CalEvent> {
+	@Override
+	public Set<String> getBadColumnNames() {
+		return getCalEventPersistence().getBadColumnNames();
+	}
+
 	/**
 	 * Returns the cal event persistence.
 	 *
@@ -45,11 +50,6 @@ public class CalEventFinderBaseImpl extends BasePersistenceImpl<CalEvent> {
 	 */
 	public void setCalEventPersistence(CalEventPersistence calEventPersistence) {
 		this.calEventPersistence = calEventPersistence;
-	}
-
-	@Override
-	protected Set<String> getBadColumnNames() {
-		return getCalEventPersistence().getBadColumnNames();
 	}
 
 	@BeanReference(type = CalEventPersistence.class)

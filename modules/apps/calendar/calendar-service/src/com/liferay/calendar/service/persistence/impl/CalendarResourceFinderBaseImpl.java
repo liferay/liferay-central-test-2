@@ -27,6 +27,11 @@ import java.util.Set;
  * @generated
  */
 public class CalendarResourceFinderBaseImpl extends BasePersistenceImpl<CalendarResource> {
+	@Override
+	public Set<String> getBadColumnNames() {
+		return getCalendarResourcePersistence().getBadColumnNames();
+	}
+
 	/**
 	 * Returns the calendar resource persistence.
 	 *
@@ -44,11 +49,6 @@ public class CalendarResourceFinderBaseImpl extends BasePersistenceImpl<Calendar
 	public void setCalendarResourcePersistence(
 		CalendarResourcePersistence calendarResourcePersistence) {
 		this.calendarResourcePersistence = calendarResourcePersistence;
-	}
-
-	@Override
-	protected Set<String> getBadColumnNames() {
-		return getCalendarResourcePersistence().getBadColumnNames();
 	}
 
 	@BeanReference(type = CalendarResourcePersistence.class)

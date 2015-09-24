@@ -27,6 +27,11 @@ import java.util.Set;
  * @generated
  */
 public class BlogsEntryFinderBaseImpl extends BasePersistenceImpl<BlogsEntry> {
+	@Override
+	public Set<String> getBadColumnNames() {
+		return getBlogsEntryPersistence().getBadColumnNames();
+	}
+
 	/**
 	 * Returns the blogs entry persistence.
 	 *
@@ -44,11 +49,6 @@ public class BlogsEntryFinderBaseImpl extends BasePersistenceImpl<BlogsEntry> {
 	public void setBlogsEntryPersistence(
 		BlogsEntryPersistence blogsEntryPersistence) {
 		this.blogsEntryPersistence = blogsEntryPersistence;
-	}
-
-	@Override
-	protected Set<String> getBadColumnNames() {
-		return getBlogsEntryPersistence().getBadColumnNames();
 	}
 
 	@BeanReference(type = BlogsEntryPersistence.class)
