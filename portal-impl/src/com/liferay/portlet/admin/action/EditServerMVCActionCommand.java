@@ -379,13 +379,15 @@ public class EditServerMVCActionCommand extends BaseMVCActionCommand {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		String className = ParamUtil.getString(actionRequest, "className");
 		Map<String, Serializable> taskContextMap = new HashMap<>();
+
+		String className = ParamUtil.getString(actionRequest, "className");
+
+		taskContextMap.put("className", className);
 
 		long[] companyIds = PortalInstances.getCompanyIds();
 
 		taskContextMap.put("companyIds", companyIds);
-		taskContextMap.put("className", className);
 
 		String taskExecutorClassName = _REINDEX_PORTAL_BACKGROUND_TASK_EXECUTOR;
 
