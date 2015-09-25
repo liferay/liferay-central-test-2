@@ -65,26 +65,22 @@ public class WikiNodeLocalServiceTest {
 
 		ProgressTrackerThreadLocal.setProgressTracker(progressTracker);
 
-		byte[] bytes = FileUtil.getBytes(getClass(), _MEDIAWIKI_XML);
+		byte[] bytes = FileUtil.getBytes(
+			getClass(),
+			"/com/liferay/wiki/service/test/dependencies/LiferayMediaWiki.xml");
+
 		InputStream is = new ByteArrayInputStream(bytes);
 
 		WikiNodeLocalServiceUtil.importPages(
-			TestPropsValues.getUserId(), _node.getNodeId(), _IMPORTER,
+			TestPropsValues.getUserId(), _node.getNodeId(), "MediaWiki",
 			new InputStream[] {is, null, null},
 			Collections.<String, String[]>emptyMap());
 
 		WikiPage importedPage = WikiPageLocalServiceUtil.fetchPage(
-			_node.getNodeId(), _PAGE_NAME);
+			_node.getNodeId(), "Liferay");
 
 		Assert.assertNotNull(importedPage);
 	}
-
-	private static final String _IMPORTER = "MediaWiki";
-
-	private static final String _MEDIAWIKI_XML =
-		"/com/liferay/wiki/service/test/dependencies/LiferayMediaWiki.xml";
-
-	private static final String _PAGE_NAME = "Liferay";
 
 	@DeleteAfterTestRun
 	private WikiNode _node;

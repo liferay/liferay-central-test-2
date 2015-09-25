@@ -104,8 +104,8 @@ public class WikiPageLocalServiceTest {
 					RandomTestUtil.randomString(), true, serviceContext);
 
 				Assert.fail(
-					"WikiPage created with invalid character " +
-						invalidCharacter + " in the title");
+					"Created a page with invalid character " +
+						invalidCharacter);
 			}
 			catch (PageTitleException pte) {
 			}
