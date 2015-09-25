@@ -67,7 +67,8 @@ public class WikiNodeLocalServiceTest {
 
 		byte[] bytes = FileUtil.getBytes(
 			getClass(),
-			"/com/liferay/wiki/service/test/dependencies/LiferayMediaWiki.xml");
+			"/com/liferay/wiki/service/test/dependencies" +
+				"/liferay_media_wiki.xml");
 
 		InputStream is = new ByteArrayInputStream(bytes);
 
