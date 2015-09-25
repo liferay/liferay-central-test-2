@@ -23,6 +23,8 @@ long structureId = ParamUtil.getLong(request, "structureId");
 
 DDMStructure structure = DDMStructureServiceUtil.getStructure(structureId);
 
+String title = LanguageUtil.format(request, "x-history", structure.getName(locale), false);
+
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("mvcPath", "/view_structure_history.jsp");
@@ -35,8 +37,6 @@ backURL.setParameter("mvcPath", "/edit_structure.jsp");
 backURL.setParameter("redirect", redirect);
 backURL.setParameter("classNameId", String.valueOf(PortalUtil.getClassNameId(DDMStructure.class)));
 backURL.setParameter("classPK", String.valueOf(structure.getStructureId()));
-
-String title = LanguageUtil.format(request, "x-history", structure.getName(locale), false);
 %>
 
 <c:choose>
