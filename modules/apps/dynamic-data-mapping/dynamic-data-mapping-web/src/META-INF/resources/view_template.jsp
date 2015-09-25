@@ -96,7 +96,6 @@ TemplateSearchTerms templateSearchTerms = (TemplateSearchTerms)templateSearch.ge
 	<liferay-util:include page="/template_toolbar.jsp" servletContext="<%= application %>" />
 
 	<div class="container-fluid-1280" id="<portlet:namespace />entriesContainer">
-
 		<liferay-ui:search-container
 			orderByCol="<%= orderByCol %>"
 			orderByComparator="<%= orderByComparator %>"
@@ -259,5 +258,4 @@ TemplateSearchTerms templateSearchTerms = (TemplateSearchTerms)templateSearch.ge
 			}
 		);
 	}
-
 </aui:script>
