@@ -83,7 +83,7 @@ serverURL.setParameter("tabs3", tabs3);
 				<liferay-util:include page="/server/shutdown.jsp" servletContext="<%= application %>" />
 			</c:when>
 			<c:otherwise>
-				<liferay-util:include page="/server/resources.jsp" servletContext="<%= application %>"/>
+				<liferay-util:include page="/server/resources.jsp" servletContext="<%= application %>" />
 			</c:otherwise>
 		</c:choose>
 	</c:otherwise>
