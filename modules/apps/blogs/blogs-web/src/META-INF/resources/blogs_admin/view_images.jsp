@@ -158,5 +158,5 @@ String keywords = ParamUtil.getString(request, "keywords");
 </aui:script>
 
 <%!
-private static Log _log = LogFactoryUtil.getLog("com_liferay_blogs_web.blogs_admin.view_images.jsp");
+private static Log _log = LogFactoryUtil.getLog("com_liferay_blogs_web.blogs_admin.view_images_jsp");
 %>
