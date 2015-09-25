@@ -25,13 +25,13 @@ DDMTemplateVersion templateVersion = DDMTemplateVersionServiceUtil.getTemplateVe
 
 DDMTemplate template = templateVersion.getTemplate();
 
+String title = LanguageUtil.format(request, "x-version-x", new Object[] {templateVersion.getName(locale), templateVersion.getVersion()});
+
 PortletURL backURL = renderResponse.createRenderURL();
 
 backURL.setParameter("mvcPath", "/view_template_history.jsp");
 backURL.setParameter("redirect", redirect);
 backURL.setParameter("templateId", String.valueOf(template.getTemplateId()));
-
-String title = LanguageUtil.format(request, "x-version-x", new Object[] {templateVersion.getName(locale), templateVersion.getVersion()});
 %>
 
 <div class="container-fluid-1280">
