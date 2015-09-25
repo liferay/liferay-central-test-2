@@ -110,11 +110,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 					try {
 						fileEntry = DLAppLocalServiceUtil.getFileEntry(fileEntryId);
 
-						System.out.println("fileEntry: " + fileEntry);
-
 						results.add(fileEntry);
-
-						System.out.println("results size: " + results.size());
 					}
 					catch (Exception e) {
 						if (_log.isWarnEnabled()) {
