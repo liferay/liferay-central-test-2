@@ -19,6 +19,7 @@
 <%
 long classNameId = ParamUtil.getLong(request, "classNameId");
 long classPK = ParamUtil.getLong(request, "classPK");
+
 long resourceClassNameId = ParamUtil.getLong(request, "resourceClassNameId");
 
 if (resourceClassNameId == 0) {
