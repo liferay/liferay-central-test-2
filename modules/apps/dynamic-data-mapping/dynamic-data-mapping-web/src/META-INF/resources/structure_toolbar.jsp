@@ -19,8 +19,8 @@
 <%
 SearchContainer searchContainer = (SearchContainer)request.getAttribute(WebKeys.SEARCH_CONTAINER);
 
-String eventName = ParamUtil.getString(request, "eventName", "selectStructure");
 long classPK = ParamUtil.getLong(request, "classPK");
+String eventName = ParamUtil.getString(request, "eventName", "selectStructure");
 %>
 
 <liferay-portlet:renderURL copyCurrentRenderParameters="<%= false %>" varImpl="searchURL">
