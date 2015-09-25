@@ -174,11 +174,9 @@ public class VerifyProcessTracker {
 	private void _executeVerifierByName(
 		String verifierName, OutputStream outputStream) {
 
-		PrintWriter printWriter = new PrintWriter(outputStream);
+		PrintWriter printWriter = new PrintWriter(outputStream, true);
 
 		printWriter.println("Executing " + verifierName);
-
-		printWriter.flush();
 
 		VerifyProcess verifyProcess = _getVerifyProcess(verifierName);
 
