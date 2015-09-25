@@ -51,8 +51,6 @@ portletURL.setParameter("tabs1", tabs1);
 	}
 
 	OrderByComparator<DDMStructure> orderByComparator = DDMUtil.getStructureOrderByComparator(orderByCol, orderByType);
-
-	SearchContainer structureSearchContainer = new StructureSearch(renderRequest, portletURL);
 	%>
 
 	<c:if test="<%= showToolbar %>">
@@ -69,7 +67,7 @@ portletURL.setParameter("tabs1", tabs1);
 			orderByComparator="<%= orderByComparator %>"
 			orderByType="<%= orderByType %>"
 			rowChecker="<%= new RowChecker(renderResponse) %>"
-			searchContainer="<%= structureSearchContainer %>"
+			searchContainer="<%= new StructureSearch(renderRequest, portletURL) %>"
 		>
 
 			<liferay-ui:search-container-results>

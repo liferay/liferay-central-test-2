@@ -34,13 +34,13 @@ if (fieldsJSONArray != null) {
 	fieldsJSONArrayString = fieldsJSONArray.toString();
 }
 
+String title = LanguageUtil.format(request, "x-version-x", new Object[] {structureVersion.getName(locale), structureVersion.getVersion()});
+
 PortletURL backURL = renderResponse.createRenderURL();
 
 backURL.setParameter("mvcPath", "/view_structure_history.jsp");
 backURL.setParameter("redirect", redirect);
 backURL.setParameter("structureId", String.valueOf(structureVersion.getStructureId()));
-
-String title = LanguageUtil.format(request, "x-version-x", new Object[] {structureVersion.getName(locale), structureVersion.getVersion()});
 %>
 
 <div class="container-fluid-1280">
