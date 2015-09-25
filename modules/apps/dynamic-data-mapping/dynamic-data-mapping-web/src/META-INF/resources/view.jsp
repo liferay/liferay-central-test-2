@@ -25,8 +25,8 @@ PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter(ActionRequest.ACTION_NAME, "deleteStructure");
 portletURL.setParameter("mvcPath", "/view.jsp");
-portletURL.setParameter("groupId", String.valueOf(groupId));
 portletURL.setParameter("tabs1", tabs1);
+portletURL.setParameter("groupId", String.valueOf(groupId));
 %>
 
 <liferay-ui:error exception="<%= RequiredStructureException.MustNotDeleteStructureReferencedByStructureLinks.class %>" message="the-structure-cannot-be-deleted-because-it-is-required-by-one-or-more-structure-links" />
