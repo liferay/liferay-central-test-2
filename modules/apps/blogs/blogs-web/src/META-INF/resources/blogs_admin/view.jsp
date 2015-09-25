@@ -54,7 +54,7 @@ portletURL.setParameter("navigation", navigation);
 </aui:nav-bar>
 
 <c:choose>
-	<c:when test="<%= navigation.equals("entries") %>">
+	<c:when test='<%= navigation.equals("entries") %>'>
 		<liferay-util:include page="/blogs_admin/view_entries.jsp" servletContext="<%= application %>" />
 	</c:when>
 	<c:otherwise>
