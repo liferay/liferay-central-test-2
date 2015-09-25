@@ -20,7 +20,6 @@
 	checkBoxContainerId="entriesContainer"
 	includeCheckBox="<%= !user.isDefaultUser() %>"
 >
-
 	<liferay-frontend:management-bar-filters>
 		<liferay-util:include page="/sort_button.jsp" servletContext="<%= application %>" />
 	</liferay-frontend:management-bar-filters>
