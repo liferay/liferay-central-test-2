@@ -17,9 +17,9 @@
 <%@ include file="/blogs_admin/init.jsp" %>
 
 <%
-String displayStyle = ParamUtil.getString(request, "displayStyle", "icon");
-
 Folder attachmentsFolder = BlogsEntryLocalServiceUtil.addAttachmentsFolder(themeDisplay.getUserId(), scopeGroupId);
+
+String displayStyle = ParamUtil.getString(request, "displayStyle", "icon");
 
 String orderByCol = ParamUtil.getString(request, "orderByCol", "title");
 String orderByType = ParamUtil.getString(request, "orderByType", "asc");
