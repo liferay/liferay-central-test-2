@@ -229,20 +229,20 @@ public class PortletCSSPortlet extends MVCPortlet {
 		portletSetup.setValue(
 			"portletSetupUseCustomTitle", String.valueOf(useCustomTitle));
 
-		if (Validator.isNotNull(portletDecoratorId)) {
-			portletSetup.setValue(
-				"portletSetupPortletDecoratorId", portletDecoratorId);
-		}
-		else {
-			portletSetup.reset("portletSetupPortletDecoratorId");
-		}
-
 		if (Validator.isNotNull(linkToLayoutUuid)) {
 			portletSetup.setValue(
 				"portletSetupLinkToLayoutUuid", linkToLayoutUuid);
 		}
 		else {
 			portletSetup.reset("portletSetupLinkToLayoutUuid");
+		}
+
+		if (Validator.isNotNull(portletDecoratorId)) {
+			portletSetup.setValue(
+				"portletSetupPortletDecoratorId", portletDecoratorId);
+		}
+		else {
+			portletSetup.reset("portletSetupPortletDecoratorId");
 		}
 
 		portletSetup.setValue("portletSetupCss", css);
