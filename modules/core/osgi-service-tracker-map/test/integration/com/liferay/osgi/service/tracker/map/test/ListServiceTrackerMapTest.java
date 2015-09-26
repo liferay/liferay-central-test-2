@@ -560,6 +560,28 @@ public class ListServiceTrackerMapTest {
 		return _serviceTrackerMap;
 	}
 
+	protected ServiceTrackerMap<String, List<TrackedOne>>
+		createServiceTrackerMap(
+			ServiceTrackerMapListener
+				<String, TrackedOne,
+					List<TrackedOne>> serviceTrackerMapListener)
+		throws InvalidSyntaxException {
+
+		ServiceTrackerMap<String, List<TrackedOne>> serviceTrackerMap =
+			ServiceTrackerMapFactory.multiValueMap(
+				_bundleContext, TrackedOne.class, null,
+				new PropertyServiceReferenceMapper<String, TrackedOne>(
+					"target"),
+				new DefaultServiceTrackerCustomizer<TrackedOne>(_bundleContext),
+				new PropertyServiceReferenceComparator<TrackedOne>(
+					"service.ranking"),
+				serviceTrackerMapListener);
+
+		serviceTrackerMap.open();
+
+		return serviceTrackerMap;
+	}
+
 	protected ServiceRegistration<TrackedOne> registerService(
 		TrackedOne trackedOne) {
 
@@ -597,27 +619,6 @@ public class ListServiceTrackerMapTest {
 
 	protected BundleContextWrapper wrapContext() {
 		return new BundleContextWrapper(_bundleContext);
-	}
-
-	protected ServiceTrackerMap<String, List<TrackedOne>>
-		createServiceTrackerMap(
-			ServiceTrackerMapListener<String, TrackedOne,
-			List<TrackedOne>> serviceTrackerMapListener)
-		throws InvalidSyntaxException {
-
-		ServiceTrackerMap<String, List<TrackedOne>> serviceTrackerMap =
-			ServiceTrackerMapFactory.multiValueMap(
-				_bundleContext, TrackedOne.class, null,
-				new PropertyServiceReferenceMapper<String, TrackedOne>(
-					"target"),
-				new DefaultServiceTrackerCustomizer<TrackedOne>(_bundleContext),
-				new PropertyServiceReferenceComparator<TrackedOne>(
-					"service.ranking"),
-				serviceTrackerMapListener);
-
-		serviceTrackerMap.open();
-
-		return serviceTrackerMap;
 	}
 
 	@ArquillianResource
