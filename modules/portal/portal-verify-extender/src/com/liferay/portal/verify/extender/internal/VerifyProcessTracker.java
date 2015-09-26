@@ -184,7 +184,7 @@ public class VerifyProcessTracker {
 			verifyProcess.verify();
 		}
 		catch (VerifyException ve) {
-			ve.printStackTrace();
+			_log.error(ve, ve);
 		}
 	}
 
