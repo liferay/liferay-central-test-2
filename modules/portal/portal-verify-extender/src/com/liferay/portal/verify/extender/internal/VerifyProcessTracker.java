@@ -46,8 +46,8 @@ import org.osgi.service.component.annotations.Reference;
 @Component(
 	immediate = true,
 	property = {
-		"osgi.command.function=list", "osgi.command.function=execute",
-		"osgi.command.function=executeAll", "osgi.command.function=reports",
+		"osgi.command.function=execute", "osgi.command.function=executeAll",
+		"osgi.command.function=list", "osgi.command.function=reports",
 		"osgi.command.scope=verify"
 	},
 	service = {VerifyProcessTracker.class}
