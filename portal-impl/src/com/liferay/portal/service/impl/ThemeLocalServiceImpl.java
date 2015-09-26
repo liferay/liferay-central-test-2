@@ -205,12 +205,12 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 	public PortletDecorator getPortletDecorator(
 		long companyId, String themeId, String portletDecoratorId) {
 
-		portletDecoratorId = GetterUtil.getString(portletDecoratorId);
-
 		Theme theme = fetchTheme(companyId, themeId);
 
 		Map<String, PortletDecorator> portletDecoratorsMap =
 			theme.getPortletDecoratorsMap();
+
+		portletDecoratorId = GetterUtil.getString(portletDecoratorId);
 
 		PortletDecorator portletDecorator = portletDecoratorsMap.get(
 			portletDecoratorId);
