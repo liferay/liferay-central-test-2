@@ -342,7 +342,7 @@ public class ListServiceTrackerMapTest {
 	}
 
 	@Test
-	public void testServiceRegistrationInvokesListener()
+	public void testServiceRegistrationInvokesServiceTrackerMapListener()
 		throws InvalidSyntaxException {
 
 		final Collection<TrackedOne> trackedOnes = new ArrayList<>();
@@ -360,6 +360,7 @@ public class ListServiceTrackerMapTest {
 
 						trackedOnes.add(service);
 					}
+
 				};
 
 		ServiceTrackerMap<String, List<TrackedOne>> serviceTrackerMap =
@@ -382,7 +383,7 @@ public class ListServiceTrackerMapTest {
 	}
 
 	@Test
-	public void testServiceTrackerListenerCannotModifyContent()
+	public void testServiceTrackerMapListenerCannotModifyContent()
 		throws InvalidSyntaxException {
 
 		ServiceTrackerMapListener<String, TrackedOne, List<TrackedOne>>
@@ -402,6 +403,7 @@ public class ListServiceTrackerMapTest {
 						catch (Exception e) {
 						}
 					}
+
 				};
 
 		ServiceTrackerMap<String, List<TrackedOne>> serviceTrackerMap =
@@ -427,7 +429,7 @@ public class ListServiceTrackerMapTest {
 	}
 
 	@Test
-	public void testServiceTrackerListenerEmittedKey() throws Throwable {
+	public void testServiceTrackerMapListenerKeyEmitted() throws Throwable {
 		final TrackedOne trackedOne = new TrackedOne();
 
 		final Collection<Throwable> throwables = new ArrayList<>();
@@ -453,6 +455,7 @@ public class ListServiceTrackerMapTest {
 							throwables.add(t);
 						}
 					}
+
 				};
 
 		ServiceTrackerMap<String, List<TrackedOne>> serviceTrackerMap =
