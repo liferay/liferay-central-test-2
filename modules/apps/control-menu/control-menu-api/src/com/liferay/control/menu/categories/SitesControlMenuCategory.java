@@ -16,7 +16,6 @@ package com.liferay.control.menu.categories;
 
 import com.liferay.control.menu.ControlMenuCategory;
 import com.liferay.control.menu.constants.ControlMenuCategoryKeys;
-import com.liferay.portal.kernel.exception.PortalException;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -41,9 +40,7 @@ public class SitesControlMenuCategory implements ControlMenuCategory {
 	}
 
 	@Override
-	public boolean hasAccessPermission(HttpServletRequest request)
-		throws PortalException {
-
+	public boolean hasAccessPermission(HttpServletRequest request) {
 		return true;
 	}
 
