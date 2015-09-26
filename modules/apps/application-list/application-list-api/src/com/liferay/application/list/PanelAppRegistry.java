@@ -54,8 +54,8 @@ public class PanelAppRegistry {
 					return panelApp;
 				}
 			}
-			catch (PortalException e) {
-				_log.error(e);
+			catch (PortalException pe) {
+				_log.error(pe, pe);
 			}
 		}
 
@@ -86,8 +86,8 @@ public class PanelAppRegistry {
 						return panelApp.hasAccessPermission(
 							permissionChecker, group);
 					}
-					catch (PortalException e) {
-						_log.error(e);
+					catch (PortalException pe) {
+						_log.error(pe, pe);
 					}
 
 					return false;
