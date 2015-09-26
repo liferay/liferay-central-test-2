@@ -223,7 +223,7 @@ public class ServiceTrackerMapImpl<K, SR, TS, R>
 				catch (Throwable t) {
 					_logger.log(
 						Logger.LOG_ERROR,
-						"Invocation to listener threw Exception: ", t);
+						"Invocation to listener threw exception", t);
 				}
 			}
 		}
