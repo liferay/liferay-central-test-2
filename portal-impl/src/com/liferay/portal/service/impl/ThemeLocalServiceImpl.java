@@ -98,10 +98,10 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 			return null;
 		}
 
-		Map<String, PortletDecorator> portletDecoratorMap =
+		Map<String, PortletDecorator> portletDecoratorsMap =
 			theme.getPortletDecoratorsMap();
 
-		return portletDecoratorMap.get(colorSchemeId);
+		return portletDecoratorsMap.get(colorSchemeId);
 	}
 
 	@Override
@@ -209,10 +209,10 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 
 		Theme theme = fetchTheme(companyId, themeId);
 
-		Map<String, PortletDecorator> portletDecoratorMap =
+		Map<String, PortletDecorator> portletDecoratorsMap =
 			theme.getPortletDecoratorsMap();
 
-		PortletDecorator portletDecorator = portletDecoratorMap.get(
+		PortletDecorator portletDecorator = portletDecoratorsMap.get(
 			portletDecoratorId);
 
 		if (portletDecorator != null) {
