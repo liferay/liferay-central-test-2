@@ -310,7 +310,7 @@ public class ListServiceTrackerMapTest {
 		BundleContextWrapper bundleContextWrapper = wrapContext();
 
 		ServiceTrackerMap<String, List<TrackedOne>> serviceTrackerMap =
-			createServiceTrackerMap((BundleContext)bundleContextWrapper);
+			createServiceTrackerMap(bundleContextWrapper);
 
 		ServiceRegistration<TrackedOne> serviceRegistration1 = registerService(
 			new TrackedOne());
