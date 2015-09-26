@@ -55,19 +55,24 @@ import org.osgi.service.component.annotations.Reference;
 public class VerifyProcessTracker {
 
 	public void execute(final String verifyProcessName) {
-		executeVerifyProcess(verifyProcessName, null, "verify-" + verifyProcessName);
+		executeVerifyProcess(
+			verifyProcessName, null, "verify-" + verifyProcessName);
 	}
 
-	public void execute(String verifyProcessName, String outputStreamContainerFactoryName) {
+	public void execute(
+		String verifyProcessName, String outputStreamContainerFactoryName) {
+
 		executeVerifyProcess(
-			verifyProcessName, outputStreamContainerFactoryName, "verify-" + verifyProcessName);
+			verifyProcessName, outputStreamContainerFactoryName,
+			"verify-" + verifyProcessName);
 	}
 
 	public void executeAll() {
 		Set<String> verifyProcessNames = _verifyProcesses.keySet();
 
 		for (String verifyProcessName : verifyProcessNames) {
-			executeVerifyProcess(verifyProcessName, null, "verify-" + verifyProcessName);
+			executeVerifyProcess(
+				verifyProcessName, null, "verify-" + verifyProcessName);
 		}
 	}
 
@@ -126,18 +131,35 @@ public class VerifyProcessTracker {
 		}
 	}
 
+	protected void close(OutputStream outputStream) {
+		try {
+			outputStream.close();
+		}
+		catch (IOException ioe) {
+			throw new RuntimeException(ioe);
+		}
+	}
+
 	@Deactivate
 	protected void deactivate() {
 		_verifyProcesses.close();
 	}
 
-	@Reference
-	protected void setOutputStreamTracker(
-		OutputStreamContainerFactoryTracker
-			outputStreamContainerFactoryTracker) {
+	protected void executeVerifyProcess(
+		String verifyProcessName, OutputStream outputStream) {
 
-		_outputStreamContainerFactoryTracker =
-			outputStreamContainerFactoryTracker;
+		PrintWriter printWriter = new PrintWriter(outputStream, true);
+
+		printWriter.println("Executing " + verifyProcessName);
+
+		VerifyProcess verifyProcess = getVerifyProcess(verifyProcessName);
+
+		try {
+			verifyProcess.verify();
+		}
+		catch (VerifyException ve) {
+			_log.error(ve, ve);
+		}
 	}
 
 	protected void executeVerifyProcess(
@@ -152,8 +174,9 @@ public class VerifyProcessTracker {
 					outputStreamContainerFactoryName);
 		}
 		else {
-			outputStreamContainerFactory = _outputStreamContainerFactoryTracker.
-				getOutputStreamContainerFactory();
+			outputStreamContainerFactory =
+				_outputStreamContainerFactoryTracker.
+					getOutputStreamContainerFactory();
 		}
 
 		OutputStreamContainer outputStreamContainer =
@@ -175,25 +198,9 @@ public class VerifyProcessTracker {
 		close(outputStream);
 	}
 
-	protected void executeVerifyProcess(
-		String verifyProcessName, OutputStream outputStream) {
-
-		PrintWriter printWriter = new PrintWriter(outputStream, true);
-
-		printWriter.println("Executing " + verifyProcessName);
-
-		VerifyProcess verifyProcess = getVerifyProcess(verifyProcessName);
-
-		try {
-			verifyProcess.verify();
-		}
-		catch (VerifyException ve) {
-			_log.error(ve, ve);
-		}
-	}
-
 	protected VerifyProcess getVerifyProcess(String verifyProcessName) {
-		VerifyProcess verifyProcess = _verifyProcesses.getService(verifyProcessName);
+		VerifyProcess verifyProcess = _verifyProcesses.getService(
+			verifyProcessName);
 
 		if (verifyProcess == null) {
 			throw new IllegalArgumentException(
@@ -204,13 +211,13 @@ public class VerifyProcessTracker {
 		return verifyProcess;
 	}
 
-	protected void close(OutputStream outputStream) {
-		try {
-			outputStream.close();
-		}
-		catch (IOException ioe) {
-			throw new RuntimeException(ioe);
-		}
+	@Reference
+	protected void setOutputStreamTracker(
+		OutputStreamContainerFactoryTracker
+			outputStreamContainerFactoryTracker) {
+
+		_outputStreamContainerFactoryTracker =
+			outputStreamContainerFactoryTracker;
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
