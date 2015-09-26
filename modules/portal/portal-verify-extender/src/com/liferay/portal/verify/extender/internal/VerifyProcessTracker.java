@@ -47,8 +47,7 @@ import org.osgi.service.component.annotations.Reference;
 	immediate = true,
 	property = {
 		"osgi.command.function=execute", "osgi.command.function=executeAll",
-		"osgi.command.function=list", "osgi.command.function=reports",
-		"osgi.command.scope=verify"
+		"osgi.command.function=reports", "osgi.command.scope=verify"
 	},
 	service = {VerifyProcessTracker.class}
 )
@@ -83,28 +82,6 @@ public class VerifyProcessTracker {
 			executeVerifyProcess(
 				verifyProcessName, outputStreamContainerFactoryName,
 				"verify-" + verifyProcessName);
-		}
-	}
-
-	public void list() {
-		for (String key : _verifyProcesses.keySet()) {
-			show(key);
-		}
-	}
-
-	public void show(String verifyProcessName) {
-		VerifyProcess verifyProcess = getVerifyProcess(verifyProcessName);
-
-		if (verifyProcess != null) {
-			if (_log.isInfoEnabled()) {
-				_log.info("Registered verify process " + verifyProcessName);
-			}
-		}
-		else {
-			if (_log.isInfoEnabled()) {
-				_log.info(
-					"No verify process found with name " + verifyProcessName);
-			}
 		}
 	}
 
@@ -204,8 +181,7 @@ public class VerifyProcessTracker {
 
 		if (verifyProcess == null) {
 			throw new IllegalArgumentException(
-				"Verify process with name " + verifyProcessName +
-					" is not registered");
+				"No verify process with name " + verifyProcessName);
 		}
 
 		return verifyProcess;
