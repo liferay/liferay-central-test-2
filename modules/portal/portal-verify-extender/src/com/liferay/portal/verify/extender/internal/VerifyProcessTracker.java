@@ -55,19 +55,19 @@ import org.osgi.service.component.annotations.Reference;
 public class VerifyProcessTracker {
 
 	public void execute(final String verifierName) {
-		executeVerifier(verifierName, null, "verifier-" + verifierName);
+		executeVerifier(verifierName, null, "verify-" + verifierName);
 	}
 
 	public void execute(String verifierName, String outputStreamProviderName) {
 		executeVerifier(
-			verifierName, outputStreamProviderName, "verifier-" + verifierName);
+			verifierName, outputStreamProviderName, "verify-" + verifierName);
 	}
 
 	public void executeAll() {
 		Set<String> keySet = _verifiers.keySet();
 
 		for (String verifierName : keySet) {
-			executeVerifier(verifierName, null, "verifier-" + verifierName);
+			executeVerifier(verifierName, null, "verify-" + verifierName);
 		}
 	}
 
@@ -77,7 +77,7 @@ public class VerifyProcessTracker {
 		for (String verifierName : keySet) {
 			executeVerifier(
 				verifierName, outputStreamProviderName,
-				"verifier-" + verifierName);
+				"verify-" + verifierName);
 		}
 	}
 
