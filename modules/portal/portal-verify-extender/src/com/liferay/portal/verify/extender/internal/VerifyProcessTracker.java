@@ -54,48 +54,48 @@ import org.osgi.service.component.annotations.Reference;
 )
 public class VerifyProcessTracker {
 
-	public void execute(final String verifierName) {
-		executeVerifier(verifierName, null, "verify-" + verifierName);
+	public void execute(final String verifyProcessName) {
+		executeVerifyProcess(verifyProcessName, null, "verify-" + verifyProcessName);
 	}
 
-	public void execute(String verifierName, String outputStreamProviderName) {
-		executeVerifier(
-			verifierName, outputStreamProviderName, "verify-" + verifierName);
+	public void execute(String verifyProcessName, String outputStreamProviderName) {
+		executeVerifyProcess(
+			verifyProcessName, outputStreamProviderName, "verify-" + verifyProcessName);
 	}
 
 	public void executeAll() {
-		Set<String> keySet = _verifiers.keySet();
+		Set<String> keySet = _verifyProcesses.keySet();
 
-		for (String verifierName : keySet) {
-			executeVerifier(verifierName, null, "verify-" + verifierName);
+		for (String verifyProcessName : keySet) {
+			executeVerifyProcess(verifyProcessName, null, "verify-" + verifyProcessName);
 		}
 	}
 
 	public void executeAll(String outputStreamProviderName) {
-		Set<String> keySet = _verifiers.keySet();
+		Set<String> keySet = _verifyProcesses.keySet();
 
-		for (String verifierName : keySet) {
-			executeVerifier(
-				verifierName, outputStreamProviderName,
-				"verify-" + verifierName);
+		for (String verifyProcessName : keySet) {
+			executeVerifyProcess(
+				verifyProcessName, outputStreamProviderName,
+				"verify-" + verifyProcessName);
 		}
 	}
 
 	public void list() {
-		for (String key : _verifiers.keySet()) {
+		for (String key : _verifyProcesses.keySet()) {
 			show(key);
 		}
 	}
 
-	public void show(String verifierName) {
-		VerifyProcess verifyProcess = getVerifyProcess(verifierName);
+	public void show(String verifyProcessName) {
+		VerifyProcess verifyProcess = getVerifyProcess(verifyProcessName);
 
 		if (verifyProcess != null) {
-			System.out.println("Registered verifier: " + verifierName);
+			System.out.println("Registered verifier: " + verifyProcessName);
 		}
 		else {
 			System.out.println(
-				"No verifier registered with name: " + verifierName);
+				"No verifier registered with name: " + verifyProcessName);
 		}
 	}
 
@@ -112,10 +112,10 @@ public class VerifyProcessTracker {
 	@Activate
 	protected void activate(BundleContext bundleContext) {
 		try {
-			_verifiers = ServiceTrackerMapFactory.singleValueMap(
-				bundleContext, VerifyProcess.class, "verifier.name");
+			_verifyProcesses = ServiceTrackerMapFactory.singleValueMap(
+				bundleContext, VerifyProcess.class, "verify.process.name");
 
-			_verifiers.open();
+			_verifyProcesses.open();
 		}
 		catch (InvalidSyntaxException ise) {
 			throw new IllegalStateException(ise);
@@ -124,7 +124,7 @@ public class VerifyProcessTracker {
 
 	@Deactivate
 	protected void deactivate() {
-		_verifiers.close();
+		_verifyProcesses.close();
 	}
 
 	@Reference
@@ -136,8 +136,8 @@ public class VerifyProcessTracker {
 			outputStreamContainerFactoryTracker;
 	}
 
-	protected void executeVerifier(
-		final String verifierName, String outputStreamContainerFactoryName,
+	protected void executeVerifyProcess(
+		final String verifyProcessName, String outputStreamContainerFactoryName,
 		String outputStreamName) {
 
 		OutputStreamContainerFactory outputStreamContainerFactory = null;
@@ -163,7 +163,7 @@ public class VerifyProcessTracker {
 
 				@Override
 				public void run() {
-					executeVerifierByName(verifierName, outputStream);
+					executeVerifyProcess(verifyProcessName, outputStream);
 				}
 
 			}, outputStream);
@@ -171,14 +171,14 @@ public class VerifyProcessTracker {
 		close(outputStream);
 	}
 
-	protected void executeVerifierByName(
-		String verifierName, OutputStream outputStream) {
+	protected void executeVerifyProcess(
+		String verifyProcessName, OutputStream outputStream) {
 
 		PrintWriter printWriter = new PrintWriter(outputStream, true);
 
-		printWriter.println("Executing " + verifierName);
+		printWriter.println("Executing " + verifyProcessName);
 
-		VerifyProcess verifyProcess = getVerifyProcess(verifierName);
+		VerifyProcess verifyProcess = getVerifyProcess(verifyProcessName);
 
 		try {
 			verifyProcess.verify();
@@ -188,12 +188,13 @@ public class VerifyProcessTracker {
 		}
 	}
 
-	protected VerifyProcess getVerifyProcess(String verifierName) {
-		VerifyProcess verifyProcess = _verifiers.getService(verifierName);
+	protected VerifyProcess getVerifyProcess(String verifyProcessName) {
+		VerifyProcess verifyProcess = _verifyProcesses.getService(verifyProcessName);
 
 		if (verifyProcess == null) {
 			throw new IllegalArgumentException(
-				"Verifier with name " + verifierName + " is not registered");
+				"Verify process with name " + verifyProcessName +
+					" is not registered");
 		}
 
 		return verifyProcess;
@@ -213,6 +214,6 @@ public class VerifyProcessTracker {
 
 	private OutputStreamContainerFactoryTracker
 		_outputStreamContainerFactoryTracker;
-	private ServiceTrackerMap<String, VerifyProcess> _verifiers;
+	private ServiceTrackerMap<String, VerifyProcess> _verifyProcesses;
 
 }
