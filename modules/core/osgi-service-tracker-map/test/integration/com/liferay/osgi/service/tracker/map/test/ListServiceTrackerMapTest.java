@@ -564,7 +564,7 @@ public class ListServiceTrackerMapTest {
 		createServiceTrackerMap(
 			ServiceTrackerMapListener
 				<String, TrackedOne,
-					List<TrackedOne>> serviceTrackerMapListener)
+			List<TrackedOne>> serviceTrackerMapListener)
 		throws InvalidSyntaxException {
 
 		ServiceTrackerMap<String, List<TrackedOne>> serviceTrackerMap =
