@@ -58,9 +58,9 @@ public class VerifyProcessTracker {
 		executeVerifyProcess(verifyProcessName, null, "verify-" + verifyProcessName);
 	}
 
-	public void execute(String verifyProcessName, String outputStreamProviderName) {
+	public void execute(String verifyProcessName, String outputStreamContainerFactoryName) {
 		executeVerifyProcess(
-			verifyProcessName, outputStreamProviderName, "verify-" + verifyProcessName);
+			verifyProcessName, outputStreamContainerFactoryName, "verify-" + verifyProcessName);
 	}
 
 	public void executeAll() {
@@ -71,12 +71,12 @@ public class VerifyProcessTracker {
 		}
 	}
 
-	public void executeAll(String outputStreamProviderName) {
+	public void executeAll(String outputStreamContainerFactoryName) {
 		Set<String> verifyProcessNames = _verifyProcesses.keySet();
 
 		for (String verifyProcessName : verifyProcessNames) {
 			executeVerifyProcess(
-				verifyProcessName, outputStreamProviderName,
+				verifyProcessName, outputStreamContainerFactoryName,
 				"verify-" + verifyProcessName);
 		}
 	}
@@ -104,11 +104,11 @@ public class VerifyProcessTracker {
 	}
 
 	public void showReports() {
-		Set<String> outputStreamProviderNames =
+		Set<String> outputStreamContainerFactoryNames =
 			_outputStreamContainerFactoryTracker.
 				getOutputStreamContainerFactoryNames();
 
-		for (String s : outputStreamProviderNames) {
+		for (String s : outputStreamContainerFactoryNames) {
 			System.out.println(s);
 		}
 	}
