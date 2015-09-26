@@ -1,4 +1,4 @@
-#set ($VOID = $velocityPortletPreferences.setValue('portletSetupPortletDecoratorId', 'barebone'))
+#set ($VOID = $velocityPortletPreferences.setValue("portletSetupPortletDecoratorId", "barebone"))
 
 <div aria-expanded="false" class="collapse navbar-collapse" id="navigationCollapse">
 	<nav class="$nav_css_class site-navigation" id="navigation" role="navigation">
