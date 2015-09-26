@@ -47,7 +47,7 @@ import org.osgi.service.component.annotations.Reference;
 	immediate = true,
 	property = {
 		"osgi.command.function=execute", "osgi.command.function=executeAll",
-		"osgi.command.function=reports", "osgi.command.scope=verify"
+		"osgi.command.scope=verify"
 	},
 	service = {VerifyProcessTracker.class}
 )
@@ -82,16 +82,6 @@ public class VerifyProcessTracker {
 			executeVerifyProcess(
 				verifyProcessName, outputStreamContainerFactoryName,
 				"verify-" + verifyProcessName);
-		}
-	}
-
-	public void showReports() {
-		Set<String> outputStreamContainerFactoryNames =
-			_outputStreamContainerFactoryTracker.
-				getOutputStreamContainerFactoryNames();
-
-		for (String s : outputStreamContainerFactoryNames) {
-			System.out.println(s);
 		}
 	}
 
