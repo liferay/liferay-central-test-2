@@ -64,17 +64,17 @@ public class VerifyProcessTracker {
 	}
 
 	public void executeAll() {
-		Set<String> keySet = _verifyProcesses.keySet();
+		Set<String> verifyProcessNames = _verifyProcesses.keySet();
 
-		for (String verifyProcessName : keySet) {
+		for (String verifyProcessName : verifyProcessNames) {
 			executeVerifyProcess(verifyProcessName, null, "verify-" + verifyProcessName);
 		}
 	}
 
 	public void executeAll(String outputStreamProviderName) {
-		Set<String> keySet = _verifyProcesses.keySet();
+		Set<String> verifyProcessNames = _verifyProcesses.keySet();
 
-		for (String verifyProcessName : keySet) {
+		for (String verifyProcessName : verifyProcessNames) {
 			executeVerifyProcess(
 				verifyProcessName, outputStreamProviderName,
 				"verify-" + verifyProcessName);
@@ -91,11 +91,15 @@ public class VerifyProcessTracker {
 		VerifyProcess verifyProcess = getVerifyProcess(verifyProcessName);
 
 		if (verifyProcess != null) {
-			System.out.println("Registered verifier: " + verifyProcessName);
+			if (_log.isInfoEnabled()) {
+				_log.info("Registered verify process " + verifyProcessName);
+			}
 		}
 		else {
-			System.out.println(
-				"No verifier registered with name: " + verifyProcessName);
+			if (_log.isInfoEnabled()) {
+				_log.info(
+					"No verify process found with name " + verifyProcessName);
+			}
 		}
 	}
 
