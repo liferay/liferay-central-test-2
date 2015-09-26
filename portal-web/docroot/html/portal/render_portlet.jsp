@@ -737,11 +737,11 @@ if (group.isControlPanel()) {
 
 // Portlet decorator
 
+Theme theme = layout.getTheme();
+
 String portletDecoratorId = portletSetup.getValue("portletSetupPortletDecoratorId", StringPool.BLANK);
 
-Theme selTheme = layout.getTheme();
-
-PortletDecorator portletDecorator = ThemeLocalServiceUtil.getPortletDecorator(company.getCompanyId(), selTheme.getThemeId(), portletDecoratorId);
+PortletDecorator portletDecorator = ThemeLocalServiceUtil.getPortletDecorator(company.getCompanyId(), theme.getThemeId(), portletDecoratorId);
 
 // Make sure the Tiles context is reset for the next portlet
 
