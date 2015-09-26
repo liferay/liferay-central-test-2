@@ -105,16 +105,16 @@ public class PortletSetupUtil {
 			}
 		}
 
+		String linkToLayoutUuid = GetterUtil.getString(
+			portletSetup.getValue("portletSetupLinkToLayoutUuid", null));
 		boolean useCustomTitle = GetterUtil.getBoolean(
 			portletSetup.getValue("portletSetupUseCustomTitle", null));
 		String portletDecoratorId = GetterUtil.getString(
 			portletSetup.getValue("portletSetupPortletDecoratorId", null));
-		String linkToLayoutUuid = GetterUtil.getString(
-			portletSetup.getValue("portletSetupLinkToLayoutUuid", null));
 
-		portletDataJSONObject.put("useCustomTitle", useCustomTitle);
 		portletDataJSONObject.put("portletDecoratorId", portletDecoratorId);
 		portletDataJSONObject.put("portletLinksTarget", linkToLayoutUuid);
+		portletDataJSONObject.put("useCustomTitle", useCustomTitle);
 
 		return cssJSONObject;
 	}
