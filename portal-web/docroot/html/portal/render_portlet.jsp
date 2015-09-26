@@ -737,8 +737,6 @@ if (group.isControlPanel()) {
 
 // Portlet decorator
 
-Theme theme = layout.getTheme();
-
 String portletDecoratorId = portletSetup.getValue("portletSetupPortletDecoratorId", StringPool.BLANK);
 
 PortletDecorator portletDecorator = ThemeLocalServiceUtil.getPortletDecorator(company.getCompanyId(), theme.getThemeId(), portletDecoratorId);
