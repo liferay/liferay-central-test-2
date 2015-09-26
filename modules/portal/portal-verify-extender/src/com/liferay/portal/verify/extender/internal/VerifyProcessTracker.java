@@ -148,7 +148,7 @@ public class VerifyProcessTracker {
 					outputStreamContainerFactoryName);
 		}
 		else {
-			_outputStreamContainerFactoryTracker.
+			outputStreamContainerFactory = _outputStreamContainerFactoryTracker.
 				getOutputStreamContainerFactory();
 		}
 
