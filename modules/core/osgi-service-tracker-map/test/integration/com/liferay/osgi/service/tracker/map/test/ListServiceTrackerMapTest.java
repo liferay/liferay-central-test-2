@@ -364,7 +364,7 @@ public class ListServiceTrackerMapTest {
 				};
 
 		ServiceTrackerMap<String, List<TrackedOne>> serviceTrackerMap =
-			_createServiceTrackerMap(serviceTrackerMapListener);
+			createServiceTrackerMap(serviceTrackerMapListener);
 
 		ServiceRegistration<TrackedOne> serviceRegistration = null;
 
@@ -407,7 +407,7 @@ public class ListServiceTrackerMapTest {
 				};
 
 		ServiceTrackerMap<String, List<TrackedOne>> serviceTrackerMap =
-			_createServiceTrackerMap(serviceTrackerMapListener);
+			createServiceTrackerMap(serviceTrackerMapListener);
 
 		ServiceRegistration<TrackedOne> serviceRegistration = null;
 
@@ -459,7 +459,7 @@ public class ListServiceTrackerMapTest {
 				};
 
 		ServiceTrackerMap<String, List<TrackedOne>> serviceTrackerMap =
-			_createServiceTrackerMap(serviceTrackerMapListener);
+			createServiceTrackerMap(serviceTrackerMapListener);
 
 		serviceTrackerMap.open();
 
@@ -599,8 +599,8 @@ public class ListServiceTrackerMapTest {
 		return new BundleContextWrapper(_bundleContext);
 	}
 
-	private ServiceTrackerMap<String, List<TrackedOne>>
-		_createServiceTrackerMap(
+	protected ServiceTrackerMap<String, List<TrackedOne>>
+		createServiceTrackerMap(
 			ServiceTrackerMapListener<String, TrackedOne,
 			List<TrackedOne>> serviceTrackerMapListener)
 		throws InvalidSyntaxException {

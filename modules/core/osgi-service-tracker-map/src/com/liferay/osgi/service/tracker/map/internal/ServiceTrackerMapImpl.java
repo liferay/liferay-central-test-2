@@ -171,8 +171,6 @@ public class ServiceTrackerMapImpl<K, SR, TS, R>
 		serviceReferenceServiceTuple.addEmittedKey(key);
 	}
 
-	private final ServiceTrackerMapListener<K, TS, R>
-		_serviceTrackerMapListener;
 	private final Logger _logger;
 	private final ServiceReferenceMapper<K, ? super SR> _serviceReferenceMapper;
 	private final ServiceTracker<SR, ServiceReferenceServiceTuple<SR, TS, K>>
@@ -182,6 +180,8 @@ public class ServiceTrackerMapImpl<K, SR, TS, R>
 	private final ServiceTrackerCustomizer<SR, TS> _serviceTrackerCustomizer;
 	private final ServiceTrackerBucketFactory<SR, TS, R>
 		_serviceTrackerMapBucketFactory;
+	private final ServiceTrackerMapListener<K, TS, R>
+		_serviceTrackerMapListener;
 
 	private class DefaultEmitter implements ServiceReferenceMapper.Emitter<K> {
 
