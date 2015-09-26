@@ -99,9 +99,7 @@ String portletResource = ParamUtil.getString(request, "portletResource");
 							<aui:select label="portlet-decorators" name="portlet-decorator">
 
 								<%
-								Theme selTheme = layout.getTheme();
-
-								List<PortletDecorator> portletDecorators = selTheme.getPortletDecorators();
+								List<PortletDecorator> portletDecorators = theme.getPortletDecorators();
 
 								for (PortletDecorator portletDecorator : portletDecorators) {
 								%>
