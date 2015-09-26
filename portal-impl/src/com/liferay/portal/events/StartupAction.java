@@ -162,8 +162,8 @@ public class StartupAction extends SimpleAction {
 
 			if (_log.isWarnEnabled()) {
 				_log.warn(
-					"Please upgrade to MySQL 5.6.4+. Portal will drop off " +
-						"support to all MySQL releases before 5.6.4 soon!");
+					"Please upgrade to at least MySQL 5.6.4. The portal will " +
+						"soon drop support for older versions of MySQL.");
 			}
 		}
 
