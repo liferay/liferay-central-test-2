@@ -55,11 +55,11 @@ import org.osgi.service.component.annotations.Reference;
 public class VerifyProcessTracker {
 
 	public void execute(final String verifierName) {
-		_executeVerifier(verifierName, null, "verifier-" + verifierName);
+		executeVerifier(verifierName, null, "verifier-" + verifierName);
 	}
 
 	public void execute(String verifierName, String outputStreamProviderName) {
-		_executeVerifier(
+		executeVerifier(
 			verifierName, outputStreamProviderName, "verifier-" + verifierName);
 	}
 
@@ -67,7 +67,7 @@ public class VerifyProcessTracker {
 		Set<String> keySet = _verifiers.keySet();
 
 		for (String verifierName : keySet) {
-			_executeVerifier(verifierName, null, "verifier-" + verifierName);
+			executeVerifier(verifierName, null, "verifier-" + verifierName);
 		}
 	}
 
@@ -75,7 +75,7 @@ public class VerifyProcessTracker {
 		Set<String> keySet = _verifiers.keySet();
 
 		for (String verifierName : keySet) {
-			_executeVerifier(
+			executeVerifier(
 				verifierName, outputStreamProviderName,
 				"verifier-" + verifierName);
 		}
@@ -88,7 +88,7 @@ public class VerifyProcessTracker {
 	}
 
 	public void show(String verifierName) {
-		VerifyProcess verifyProcess = _getVerifyProcess(verifierName);
+		VerifyProcess verifyProcess = getVerifyProcess(verifierName);
 
 		if (verifyProcess != null) {
 			System.out.println("Registered verifier: " + verifierName);
@@ -136,7 +136,7 @@ public class VerifyProcessTracker {
 			outputStreamContainerFactoryTracker;
 	}
 
-	private void _executeVerifier(
+	protected void executeVerifier(
 		final String verifierName, String outputStreamContainerFactoryName,
 		String outputStreamName) {
 
@@ -163,22 +163,22 @@ public class VerifyProcessTracker {
 
 				@Override
 				public void run() {
-					_executeVerifierByName(verifierName, outputStream);
+					executeVerifierByName(verifierName, outputStream);
 				}
 
 			}, outputStream);
 
-		_safeCloseOutputStream(outputStream);
+		close(outputStream);
 	}
 
-	private void _executeVerifierByName(
+	protected void executeVerifierByName(
 		String verifierName, OutputStream outputStream) {
 
 		PrintWriter printWriter = new PrintWriter(outputStream, true);
 
 		printWriter.println("Executing " + verifierName);
 
-		VerifyProcess verifyProcess = _getVerifyProcess(verifierName);
+		VerifyProcess verifyProcess = getVerifyProcess(verifierName);
 
 		try {
 			verifyProcess.verify();
@@ -188,7 +188,7 @@ public class VerifyProcessTracker {
 		}
 	}
 
-	private VerifyProcess _getVerifyProcess(String verifierName) {
+	protected VerifyProcess getVerifyProcess(String verifierName) {
 		VerifyProcess verifyProcess = _verifiers.getService(verifierName);
 
 		if (verifyProcess == null) {
@@ -199,7 +199,7 @@ public class VerifyProcessTracker {
 		return verifyProcess;
 	}
 
-	private void _safeCloseOutputStream(OutputStream outputStream) {
+	protected void close(OutputStream outputStream) {
 		try {
 			outputStream.close();
 		}
