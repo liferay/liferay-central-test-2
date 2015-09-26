@@ -76,8 +76,8 @@ public class ControlMenuCategoryRegistry {
 					try {
 						return ControlMenuCategory.hasAccessPermission(request);
 					}
-					catch (PortalException e) {
-						_log.error(e);
+					catch (PortalException pe) {
+						_log.error(pe, pe);
 					}
 
 					return false;
