@@ -41,6 +41,7 @@ public class PortletDecoratorFactoryImpl implements PortletDecoratorFactory {
 		return PropsValues.DEFAULT_PORTLET_DECORATOR_ID;
 	}
 
+	@Override
 	public PortletDecorator getPortletDecorator() {
 		return new PortletDecoratorImpl();
 	}
