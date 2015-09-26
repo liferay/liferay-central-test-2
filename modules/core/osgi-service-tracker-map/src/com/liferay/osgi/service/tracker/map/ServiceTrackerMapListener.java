@@ -20,6 +20,7 @@ package com.liferay.osgi.service.tracker.map;
 public interface ServiceTrackerMapListener<K, TS, R> {
 
 	public void keyEmitted(
-		ServiceTrackerMap<K, R> map, K key, TS service, R content);
+		ServiceTrackerMap<K, R> serviceTrackerMap, K key, TS service,
+		R content);
 
 }

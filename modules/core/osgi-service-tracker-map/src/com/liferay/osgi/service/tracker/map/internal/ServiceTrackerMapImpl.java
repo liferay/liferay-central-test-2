@@ -50,13 +50,13 @@ public class ServiceTrackerMapImpl<K, SR, TS, R>
 			ServiceTrackerCustomizer<SR, TS> serviceTrackerCustomizer,
 			ServiceTrackerBucketFactory<SR, TS, R>
 				serviceTrackerMapBucketFactory,
-			ServiceTrackerMapListener<K, TS, R> listener)
+			ServiceTrackerMapListener<K, TS, R> serviceTrackerMapListener)
 		throws InvalidSyntaxException {
 
 		_serviceReferenceMapper = serviceReferenceMapper;
 		_serviceTrackerCustomizer = serviceTrackerCustomizer;
 		_serviceTrackerMapBucketFactory = serviceTrackerMapBucketFactory;
-		_listener = listener;
+		_serviceTrackerMapListener = serviceTrackerMapListener;
 
 		if (filterString != null) {
 			Filter filter = bundleContext.createFilter(
@@ -171,7 +171,8 @@ public class ServiceTrackerMapImpl<K, SR, TS, R>
 		serviceReferenceServiceTuple.addEmittedKey(key);
 	}
 
-	private final ServiceTrackerMapListener<K, TS, R> _listener;
+	private final ServiceTrackerMapListener<K, TS, R>
+		_serviceTrackerMapListener;
 	private final Logger _logger;
 	private final ServiceReferenceMapper<K, ? super SR> _serviceReferenceMapper;
 	private final ServiceTracker<SR, ServiceReferenceServiceTuple<SR, TS, K>>
@@ -209,12 +210,12 @@ public class ServiceTrackerMapImpl<K, SR, TS, R>
 
 			storeKey(key, _serviceReferenceServiceTuple);
 
-			if (_listener != null) {
+			if (_serviceTrackerMapListener != null) {
 				try {
 					ServiceTrackerBucket<SR, TS, R> serviceTrackerBucket =
 						_serviceTrackerBuckets.get(key);
 
-					_listener.keyEmitted(
+					_serviceTrackerMapListener.keyEmitted(
 						ServiceTrackerMapImpl.this, key,
 						_serviceReferenceServiceTuple.getService(),
 						serviceTrackerBucket.getContent());
