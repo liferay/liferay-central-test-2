@@ -151,7 +151,7 @@ public class StartupAction extends SimpleAction {
 
 			});
 
-		// MySQL version checking
+		// MySQL version
 
 		DB db = DBFactoryUtil.getDB();
 
