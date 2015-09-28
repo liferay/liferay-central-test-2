@@ -359,8 +359,8 @@ public class JournalServiceVerifyProcess extends VerifyLayout {
 			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
-				"update JournalArticle set expirationDate = ? " +
-					"where groupId = ? and articleId = ? and status = ?");
+				"update JournalArticle set expirationDate = ? where " +
+					"groupId = ? and articleId = ? and status = ?");
 
 			ps.setTimestamp(1, expirationDate);
 			ps.setLong(2, groupId);
@@ -667,8 +667,8 @@ public class JournalServiceVerifyProcess extends VerifyLayout {
 
 			StringBundler sb = new StringBundler(15);
 
-			sb.append("select JournalArticle.* from JournalArticle ");
-			sb.append("left join JournalArticle tempJournalArticle on ");
+			sb.append("select JournalArticle.* from JournalArticle left ");
+			sb.append("join JournalArticle tempJournalArticle on ");
 			sb.append("(JournalArticle.groupId = tempJournalArticle.groupId) ");
 			sb.append("and (JournalArticle.articleId = ");
 			sb.append("tempJournalArticle.articleId) and ");
