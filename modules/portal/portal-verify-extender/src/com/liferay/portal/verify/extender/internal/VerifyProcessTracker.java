@@ -87,8 +87,8 @@ public class VerifyProcessTracker {
 	}
 
 	public void list() {
-		for (String key : _verifyProcesses.keySet()) {
-			show(key);
+		for (String verifyProcessName : _verifyProcesses.keySet()) {
+			show(verifyProcessName);
 		}
 	}
 
@@ -98,7 +98,7 @@ public class VerifyProcessTracker {
 		}
 		catch (IllegalArgumentException iae) {
 			System.out.println(
-				"No verify process found with name " + verifyProcessName);
+				"No verify process with name " + verifyProcessName);
 
 			return;
 		}
@@ -108,11 +108,13 @@ public class VerifyProcessTracker {
 
 	public void showReports() {
 		Set<String> outputStreamContainerFactoryNames =
-				_outputStreamContainerFactoryTracker.
-					getOutputStreamContainerFactoryNames();
+			_outputStreamContainerFactoryTracker.
+				getOutputStreamContainerFactoryNames();
 
-		for (String name : outputStreamContainerFactoryNames) {
-			System.out.println(name);
+		for (String outputStreamContainerFactoryName :
+				outputStreamContainerFactoryNames) {
+
+			System.out.println(outputStreamContainerFactoryName);
 		}
 	}
 
@@ -168,9 +170,9 @@ public class VerifyProcessTracker {
 
 		if (outputStreamContainerFactoryName != null) {
 			outputStreamContainerFactory =
-					_outputStreamContainerFactoryTracker.
-				getOutputStreamContainerFactory(
-					outputStreamContainerFactoryName);
+				_outputStreamContainerFactoryTracker.
+					getOutputStreamContainerFactory(
+						outputStreamContainerFactoryName);
 		}
 		else {
 			outputStreamContainerFactory =
