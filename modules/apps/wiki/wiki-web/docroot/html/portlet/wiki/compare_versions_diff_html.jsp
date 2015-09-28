@@ -18,12 +18,12 @@
 
 <%
 String diffHtmlResults = (String)request.getAttribute(WebKeys.DIFF_HTML_RESULTS);
-double version = GetterUtil.getDouble(request.getAttribute(WebKeys.DIFF_VERSION));
+double diffVersion = GetterUtil.getDouble(request.getAttribute(WebKeys.DIFF_VERSION));
 
 String infoMessage = StringPool.BLANK;
 
-if (version > 0) {
-	infoMessage = LanguageUtil.format(request, "unable-to-render-version-x", version);
+if (diffVersion > 0) {
+	infoMessage = LanguageUtil.format(request, "unable-to-render-version-x", diffVersion);
 }
 %>
 
