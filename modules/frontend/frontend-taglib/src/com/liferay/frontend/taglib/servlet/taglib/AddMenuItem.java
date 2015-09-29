@@ -27,27 +27,29 @@ public class AddMenuItem extends MenuItem {
 	public AddMenuItem(
 		Map<String, Object> anchorData, String id, String label, String url) {
 
-		setLabel(label);
-
 		_anchorData = anchorData;
 		_id = id;
 		_url = url;
+
+		setLabel(label);
 	}
 
 	public AddMenuItem(String label, String url) {
-		setLabel(label);
-
-		_anchorData = null;
 		_id = StringPool.BLANK;
 		_url = url;
+
+		_anchorData = null;
+
+		setLabel(label);
 	}
 
 	public AddMenuItem(String id, String label, String url) {
-		setLabel(label);
-
-		_anchorData = null;
 		_id = id;
 		_url = url;
+
+		_anchorData = null;
+
+		setLabel(label);
 	}
 
 	public Map<String, Object> getAnchorData() {
