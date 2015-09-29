@@ -188,12 +188,12 @@ public class AssetRSSUtil {
 
 		List<AssetEntry> assetEntries = new ArrayList<>();
 
+		SearchContainer searchContainer = new SearchContainer();
+
 		AssetPublisherDisplayContext assetPublisherDisplayContext =
 			new AssetPublisherDisplayContext(
 				PortalUtil.getHttpServletRequest(portletRequest),
 				portletPreferences);
-
-		SearchContainer searchContainer = new SearchContainer();
 
 		searchContainer.setDelta(assetPublisherDisplayContext.getRSSDelta());
 
