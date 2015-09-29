@@ -26,6 +26,7 @@
 
 <#assign void = portletDisplay.setShowBackIcon(true) />
 <#assign void = portletDisplay.setURLBack(redirectURL) />
+
 <#assign void = renderResponse.setTitle(configurationModel.getName()) />
 
 <div class="container-fluid-1280">
