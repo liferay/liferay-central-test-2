@@ -53,7 +53,7 @@ public class I18nServletTest {
 	@BeforeClass
 	public static void setUpClass() throws Exception {
 		_availableLocales = LanguageUtil.getAvailableLocales();
-		_oldLocale = LocaleUtil.getDefault();
+		_defaultLocale = LocaleUtil.getDefault();
 
 		CompanyTestUtil.resetCompanyLocales(
 			PortalUtil.getDefaultCompanyId(),
@@ -65,7 +65,7 @@ public class I18nServletTest {
 	@AfterClass
 	public static void tearDownClass() throws Exception {
 		CompanyTestUtil.resetCompanyLocales(
-			PortalUtil.getDefaultCompanyId(), _availableLocales, _oldLocale);
+			PortalUtil.getDefaultCompanyId(), _availableLocales, _defaultLocale);
 	}
 
 	@Before
@@ -138,7 +138,7 @@ public class I18nServletTest {
 	}
 
 	private static Set<Locale> _availableLocales;
-	private static Locale _oldLocale = null;
+	private static Locale _defaultLocale;
 
 	private final I18nServlet _i18nServlet = new I18nServlet();
 	private boolean _originalLocaleUseDefaultIfNotAvailable;
