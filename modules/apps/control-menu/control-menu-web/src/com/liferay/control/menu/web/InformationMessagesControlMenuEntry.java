@@ -71,8 +71,8 @@ public class InformationMessagesControlMenuEntry
 			return false;
 		}
 
-		if (!isModifiedLayout(themeDisplay) && !isLinkedLayout(themeDisplay) &&
-			!isCustomizableLayout(themeDisplay)) {
+		if (!isCustomizableLayout(themeDisplay) &&
+			!isLinkedLayout(themeDisplay) && !isModifiedLayout(themeDisplay)) {
 
 			return false;
 		}
