@@ -36,6 +36,7 @@ import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
+
 import org.springframework.mock.web.MockHttpServletRequest;
 
 /**
@@ -61,6 +62,12 @@ public class I18nServletTest {
 			LocaleUtil.US);
 	}
 
+	@AfterClass
+	public static void tearDownClass() throws Exception {
+		CompanyTestUtil.resetCompanyLocales(
+			PortalUtil.getDefaultCompanyId(), _availableLocales, _oldLocale);
+	}
+
 	@Before
 	public void setUp() {
 		_originalLocaleUseDefaultIfNotAvailable =
@@ -73,21 +80,13 @@ public class I18nServletTest {
 			_originalLocaleUseDefaultIfNotAvailable;
 	}
 
-	@AfterClass
-	public static void tearDownClass() throws Exception {
-		CompanyTestUtil.resetCompanyLocales(
-			PortalUtil.getDefaultCompanyId(), _availableLocales,
-			_oldLocale);
-	}
-	
 	@Test
 	public void testI18nNotUseDefaultExistentLocale() throws Exception {
 		PropsValues.LOCALE_USE_DEFAULT_IF_NOT_AVAILABLE = false;
 
 		Locale expectedLocale = LocaleUtil.getDefault();
 
-		testGetI18nData(
-			expectedLocale, getI18nData(expectedLocale));
+		testGetI18nData(expectedLocale, getI18nData(expectedLocale));
 	}
 
 	@Test
@@ -96,8 +95,7 @@ public class I18nServletTest {
 
 		Locale expectedLocale = LocaleUtil.SPAIN;
 
-		testGetI18nData(
-			expectedLocale, getI18nData(expectedLocale));
+		testGetI18nData(expectedLocale, getI18nData(expectedLocale));
 	}
 
 	@Test
@@ -115,8 +113,7 @@ public class I18nServletTest {
 
 		Locale expectedLocale = LocaleUtil.getDefault();
 
-		testGetI18nData(
-			expectedLocale, getI18nData(expectedLocale));
+		testGetI18nData(expectedLocale, getI18nData(expectedLocale));
 	}
 
 	protected I18nServlet.I18nData getI18nData(Locale locale) {
@@ -145,5 +142,5 @@ public class I18nServletTest {
 
 	private final I18nServlet _i18nServlet = new I18nServlet();
 	private boolean _originalLocaleUseDefaultIfNotAvailable;
-	
+
 }
