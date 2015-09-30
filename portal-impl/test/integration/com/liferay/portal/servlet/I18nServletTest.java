@@ -56,89 +56,88 @@ public class I18nServletTest {
 		_oldLocale = LocaleUtil.getDefault();
 
 		CompanyTestUtil.resetCompanyLocales(
-				PortalUtil.getDefaultCompanyId(),
-				Arrays.asList(
-					LocaleUtil.CANADA_FRENCH, LocaleUtil.SPAIN, LocaleUtil.US),
-				LocaleUtil.US
-			);
+			PortalUtil.getDefaultCompanyId(),
+			Arrays.asList(
+				LocaleUtil.CANADA_FRENCH, LocaleUtil.SPAIN, LocaleUtil.US),
+			LocaleUtil.US);
 	}
 
 	@AfterClass
 	public static void tearDownClass() throws Exception {
 		CompanyTestUtil.resetCompanyLocales(
-				PortalUtil.getDefaultCompanyId(), _availableLocales,
-				_oldLocale);
+			PortalUtil.getDefaultCompanyId(), _availableLocales,
+			_oldLocale);
 	}
 
 	@Test
 	public void testI18nNotUseDefaultExistentLocale() throws Exception {
-		boolean originalLocaleUseDefault =
+		boolean originalLocaleUseDefaultIfNotAvailable =
 			PropsValues.LOCALE_USE_DEFAULT_IF_NOT_AVAILABLE;
 
 		try {
 			PropsValues.LOCALE_USE_DEFAULT_IF_NOT_AVAILABLE = false;
-			Locale expectedLocale = _defaultLocale;
+			Locale expectedLocale = LocaleUtil.US;
 
 			testGetI18nData(
 				expectedLocale, getExpectedI18nData(expectedLocale));
 		}
 		finally {
 			PropsValues.LOCALE_USE_DEFAULT_IF_NOT_AVAILABLE =
-				originalLocaleUseDefault;
+				originalLocaleUseDefaultIfNotAvailable;
 		}
 	}
 
 	@Test
 	public void testI18nNotUseDefaultNonDefaultLocale() throws Exception {
-		boolean originalLocaleUseDefault =
+		boolean originalLocaleUseDefaultIfNotAvailable =
 			PropsValues.LOCALE_USE_DEFAULT_IF_NOT_AVAILABLE;
 
 		try {
 			PropsValues.LOCALE_USE_DEFAULT_IF_NOT_AVAILABLE = false;
-			Locale expectedLocale = _nonDefaultLocale;
+			Locale expectedLocale = LocaleUtil.SPAIN;
 
 			testGetI18nData(
 				expectedLocale, getExpectedI18nData(expectedLocale));
 		}
 		finally {
 			PropsValues.LOCALE_USE_DEFAULT_IF_NOT_AVAILABLE =
-				originalLocaleUseDefault;
+				originalLocaleUseDefaultIfNotAvailable;
 		}
 	}
 
 	@Test
 	public void testI18nNotUseDefaultNonExistentLocale() throws Exception {
-		boolean originalLocaleUseDefault =
+		boolean originalLocaleUseDefaultIfNotAvailable =
 			PropsValues.LOCALE_USE_DEFAULT_IF_NOT_AVAILABLE;
 
 		try {
 			PropsValues.LOCALE_USE_DEFAULT_IF_NOT_AVAILABLE = false;
 
-			Locale expectedLocale = _nonExistentLocale;
+			Locale expectedLocale = LocaleUtil.CHINA;
 
 			testGetI18nData(expectedLocale, null);
 		}
 		finally {
 			PropsValues.LOCALE_USE_DEFAULT_IF_NOT_AVAILABLE =
-				originalLocaleUseDefault;
+				originalLocaleUseDefaultIfNotAvailable;
 		}
 	}
 
 	@Test
 	public void testI18nUseDefault() throws Exception {
-		boolean originalLocaleUseDefault =
+		boolean originalLocaleUseDefaultIfNotAvailable =
 			PropsValues.LOCALE_USE_DEFAULT_IF_NOT_AVAILABLE;
 
 		try {
 			PropsValues.LOCALE_USE_DEFAULT_IF_NOT_AVAILABLE = true;
-			Locale expectedLocale = _defaultLocale;
+			Locale expectedLocale = LocaleUtil.US;
 
 			testGetI18nData(
 				expectedLocale, getExpectedI18nData(expectedLocale));
 		}
 		finally {
 			PropsValues.LOCALE_USE_DEFAULT_IF_NOT_AVAILABLE =
-				originalLocaleUseDefault;
+				originalLocaleUseDefaultIfNotAvailable;
 		}
 	}
 
@@ -167,9 +166,6 @@ public class I18nServletTest {
 	private static Set<Locale> _availableLocales;
 	private static Locale _oldLocale = null;
 
-	private final Locale _defaultLocale = LocaleUtil.US;
 	private final I18nServlet _i18nServlet = new I18nServlet();
-	private final Locale _nonDefaultLocale = LocaleUtil.SPAIN;
-	private final Locale _nonExistentLocale = LocaleUtil.CHINA;
 
 }
