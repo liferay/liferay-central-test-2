@@ -92,7 +92,7 @@ public class ComboServletTest extends PowerMockito {
 
 					Object[] args = invocation.getArguments();
 
-					if (PortletKeys.ADMIN.equals(args[0])) {
+					if (PortletKeys.ADMIN_SERVER.equals(args[0])) {
 						return _adminPortlet;
 					}
 					else if (PortletKeys.PORTAL.equals(args[0])) {
@@ -208,7 +208,7 @@ public class ComboServletTest extends PowerMockito {
 	public void testGetResourceWithPortletId() throws Exception {
 		_comboServlet.getResourceRequestDispatcher(
 			_mockHttpServletRequest, _mockHttpServletResponse,
-			PortletKeys.ADMIN + ":/js/javascript.js");
+			PortletKeys.ADMIN_SERVER + ":/js/javascript.js");
 
 		verify(_pluginServletContext);
 
