@@ -91,7 +91,7 @@ public class I18nServletTest {
 	}
 
 	@Test
-	public void testI18nNotUseDefaultNonDefaultLocale() throws Exception {
+	public void testI18nNotUseDefaultNondefaultLocale() throws Exception {
 		PropsValues.LOCALE_USE_DEFAULT_IF_NOT_AVAILABLE = false;
 
 		Locale expectedLocale = LocaleUtil.SPAIN;
@@ -101,7 +101,7 @@ public class I18nServletTest {
 	}
 
 	@Test
-	public void testI18nNotUseDefaultNonExistentLocale() throws Exception {
+	public void testI18nNotUseDefaultNonexistentLocale() throws Exception {
 		PropsValues.LOCALE_USE_DEFAULT_IF_NOT_AVAILABLE = false;
 
 		Locale expectedLocale = LocaleUtil.CHINA;
