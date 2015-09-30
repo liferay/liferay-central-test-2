@@ -40,7 +40,6 @@ import org.osgi.service.component.annotations.Component;
  */
 @Component(
 	property = {
-		"javax.portlet.name=" + PortletKeys.ADMIN,
 		"javax.portlet.name=" + PortletKeys.ADMIN_SERVER,
 		"mvc.command.name=/admin_server/edit_document_library_extra_settings"
 	},
