@@ -28,13 +28,14 @@ import java.util.Arrays;
 import java.util.Locale;
 import java.util.Set;
 
+import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
-
 import org.springframework.mock.web.MockHttpServletRequest;
 
 /**
@@ -62,83 +63,59 @@ public class I18nServletTest {
 			LocaleUtil.US);
 	}
 
+	@Before
+	public void setUp() {
+		_originalLocaleUseDefaultIfNotAvailable =
+			PropsValues.LOCALE_USE_DEFAULT_IF_NOT_AVAILABLE;
+	}
+
+	@After
+	public void tearDown() {
+		PropsValues.LOCALE_USE_DEFAULT_IF_NOT_AVAILABLE =
+			_originalLocaleUseDefaultIfNotAvailable;
+	}
+
 	@AfterClass
 	public static void tearDownClass() throws Exception {
 		CompanyTestUtil.resetCompanyLocales(
 			PortalUtil.getDefaultCompanyId(), _availableLocales,
 			_oldLocale);
 	}
-
+	
 	@Test
 	public void testI18nNotUseDefaultExistentLocale() throws Exception {
-		boolean originalLocaleUseDefaultIfNotAvailable =
-			PropsValues.LOCALE_USE_DEFAULT_IF_NOT_AVAILABLE;
+		PropsValues.LOCALE_USE_DEFAULT_IF_NOT_AVAILABLE = false;
+		Locale expectedLocale = LocaleUtil.getDefault();
 
-		try {
-			PropsValues.LOCALE_USE_DEFAULT_IF_NOT_AVAILABLE = false;
-			Locale expectedLocale = LocaleUtil.getDefault();
-
-			testGetI18nData(
-				expectedLocale, getExpectedI18nData(expectedLocale));
-		}
-		finally {
-			PropsValues.LOCALE_USE_DEFAULT_IF_NOT_AVAILABLE =
-				originalLocaleUseDefaultIfNotAvailable;
-		}
+		testGetI18nData(
+			expectedLocale, getExpectedI18nData(expectedLocale));
 	}
 
 	@Test
 	public void testI18nNotUseDefaultNonDefaultLocale() throws Exception {
-		boolean originalLocaleUseDefaultIfNotAvailable =
-			PropsValues.LOCALE_USE_DEFAULT_IF_NOT_AVAILABLE;
+		PropsValues.LOCALE_USE_DEFAULT_IF_NOT_AVAILABLE = false;
+		Locale expectedLocale = LocaleUtil.SPAIN;
 
-		try {
-			PropsValues.LOCALE_USE_DEFAULT_IF_NOT_AVAILABLE = false;
-			Locale expectedLocale = LocaleUtil.SPAIN;
-
-			testGetI18nData(
-				expectedLocale, getExpectedI18nData(expectedLocale));
-		}
-		finally {
-			PropsValues.LOCALE_USE_DEFAULT_IF_NOT_AVAILABLE =
-				originalLocaleUseDefaultIfNotAvailable;
-		}
+		testGetI18nData(
+			expectedLocale, getExpectedI18nData(expectedLocale));
 	}
 
 	@Test
 	public void testI18nNotUseDefaultNonExistentLocale() throws Exception {
-		boolean originalLocaleUseDefaultIfNotAvailable =
-			PropsValues.LOCALE_USE_DEFAULT_IF_NOT_AVAILABLE;
+		PropsValues.LOCALE_USE_DEFAULT_IF_NOT_AVAILABLE = false;
 
-		try {
-			PropsValues.LOCALE_USE_DEFAULT_IF_NOT_AVAILABLE = false;
+		Locale expectedLocale = LocaleUtil.CHINA;
 
-			Locale expectedLocale = LocaleUtil.CHINA;
-
-			testGetI18nData(expectedLocale, null);
-		}
-		finally {
-			PropsValues.LOCALE_USE_DEFAULT_IF_NOT_AVAILABLE =
-				originalLocaleUseDefaultIfNotAvailable;
-		}
+		testGetI18nData(expectedLocale, null);
 	}
 
 	@Test
 	public void testI18nUseDefault() throws Exception {
-		boolean originalLocaleUseDefaultIfNotAvailable =
-			PropsValues.LOCALE_USE_DEFAULT_IF_NOT_AVAILABLE;
+		PropsValues.LOCALE_USE_DEFAULT_IF_NOT_AVAILABLE = true;
+		Locale expectedLocale = LocaleUtil.getDefault();
 
-		try {
-			PropsValues.LOCALE_USE_DEFAULT_IF_NOT_AVAILABLE = true;
-			Locale expectedLocale = LocaleUtil.getDefault();
-
-			testGetI18nData(
-				expectedLocale, getExpectedI18nData(expectedLocale));
-		}
-		finally {
-			PropsValues.LOCALE_USE_DEFAULT_IF_NOT_AVAILABLE =
-				originalLocaleUseDefaultIfNotAvailable;
-		}
+		testGetI18nData(
+			expectedLocale, getExpectedI18nData(expectedLocale));
 	}
 
 	protected I18nServlet.I18nData getExpectedI18nData(Locale locale) {
@@ -167,5 +144,6 @@ public class I18nServletTest {
 	private static Locale _oldLocale = null;
 
 	private final I18nServlet _i18nServlet = new I18nServlet();
-
+	private boolean _originalLocaleUseDefaultIfNotAvailable;
+	
 }
