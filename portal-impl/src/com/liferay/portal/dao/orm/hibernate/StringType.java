@@ -107,7 +107,7 @@ public class StringType implements CompositeUserType, Serializable {
 
 		if (target instanceof String) {
 			String targetString = (String)target;
-			
+
 			if (targetString.isEmpty()) {
 				target = null;
 			}
