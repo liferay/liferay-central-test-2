@@ -39,7 +39,7 @@ import org.osgi.service.component.annotations.Component;
 public class DLPortletXStreamConfigurator implements XStreamConfigurator {
 
 	@Override
-	public List<XStreamAlias> getAliases() {
+	public List<XStreamAlias> getXStreamAliases() {
 		return ListUtil.toList(
 			new XStreamAlias[] {
 				new XStreamAlias(DLFileEntryImpl.class, "DLFileEntry"),
@@ -52,7 +52,7 @@ public class DLPortletXStreamConfigurator implements XStreamConfigurator {
 	}
 
 	@Override
-	public List<XStreamConverter> getConverters() {
+	public List<XStreamConverter> getXStreamConverters() {
 		return ListUtil.toList(
 			new XStreamConverter[] {
 				new FileEntryConverter(), new FileVersionConverter(),
