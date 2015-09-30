@@ -64,8 +64,8 @@ public class PreviewControlMenuEntry
 			return false;
 		}
 
-		if (!(hasUpdateLayoutPermission(themeDisplay) ||
-			  hasPreviewInDevicePermission(themeDisplay))) {
+		if (!(hasPreviewInDevicePermission(themeDisplay) ||
+			  hasUpdateLayoutPermission(themeDisplay))) {
 
 			return false;
 		}
