@@ -67,8 +67,8 @@ public class AddContentControlMenuEntry
 		}
 
 		if (!(hasAddLayoutPermission(themeDisplay) ||
-			  hasUpdateLayoutPermission(themeDisplay) ||
-			  hasCustomizePermission(themeDisplay))) {
+			  hasCustomizePermission(themeDisplay) ||
+			  hasUpdateLayoutPermission(themeDisplay))) {
 
 			return false;
 		}
