@@ -117,9 +117,6 @@ if (portletName.equals(PortletKeys.ADMIN_PLUGINS)) {
 else if (portletName.equals(PortletKeys.ADMIN_SERVER)) {
 	tabs1 = "server";
 }
-else if (portletName.equals(PortletKeys.ADMIN)) {
-	showTabs1 = true;
-}
 
 String tabs2 = ParamUtil.getString(request, "tabs2");
 String tabs3 = ParamUtil.getString(request, "tabs3");
