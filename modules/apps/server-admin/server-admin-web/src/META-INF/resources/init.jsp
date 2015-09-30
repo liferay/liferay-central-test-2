@@ -103,7 +103,6 @@ WindowState windowState = liferayPortletRequest.getWindowState();
 PortletURL currentURLObj = PortletURLUtil.getCurrent(liferayPortletRequest, liferayPortletResponse);
 
 String currentURL = currentURLObj.toString();
-//String currentURL = PortalUtil.getCurrentURL(request);
 %>
 
 <%
@@ -114,7 +113,7 @@ boolean showTabs1 = false;
 if (portletName.equals(PortletKeys.ADMIN_PLUGINS)) {
 	tabs1 = "plugins";
 }
-else if (portletName.equals(PortletKeys.ADMIN_SERVER)) {
+else if (portletName.equals(PortletKeys.SERVER_ADMIN)) {
 	tabs1 = "server";
 }
 

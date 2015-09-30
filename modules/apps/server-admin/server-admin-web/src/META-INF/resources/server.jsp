@@ -27,7 +27,7 @@ long seconds = (uptimeDiff / Time.SECOND) % 60;
 
 PortletURL serverURL = renderResponse.createRenderURL();
 
-serverURL.setParameter("mvcRenderCommandName", "/admin_server/view");
+serverURL.setParameter("mvcRenderCommandName", "/server_admin/view");
 serverURL.setParameter("tabs1", tabs1);
 serverURL.setParameter("tabs2", tabs2);
 serverURL.setParameter("tabs3", tabs3);
@@ -45,7 +45,7 @@ serverURL.setParameter("tabs3", tabs3);
 
 <c:choose>
 	<c:when test="<%= windowState.equals(WindowState.NORMAL) %>">
-		<html:link page="/admin_server/view?windowState=maximized&portletMode=view&actionURL=0"><liferay-ui:message key="more" /></html:link> &raquo;
+		<html:link page="/server_admin/view?windowState=maximized&portletMode=view&actionURL=0"><liferay-ui:message key="more" /></html:link> &raquo;
 	</c:when>
 	<c:otherwise>
 		<liferay-ui:tabs
