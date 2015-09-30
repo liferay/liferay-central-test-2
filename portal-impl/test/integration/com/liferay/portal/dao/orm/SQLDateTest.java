@@ -54,27 +54,27 @@ public class SQLDateTest {
 
 	@Test
 	public void testMillisecondsProcessingHibernate() {
-		long time = _readTimeHibernate() / Time.SECOND * Time.SECOND;
+		long time = readTimeHibernate() / Time.SECOND * Time.SECOND;
 
 		for (int i = 0; i < Time.SECOND; i++) {
-			_writeTimeHibernate(time);
+			writeTimeHibernate(time);
 
-			Assert.assertEquals(time++, _readTimeHibernate());
+			Assert.assertEquals(time++, readTimeHibernate());
 		}
 	}
 
 	@Test
 	public void testMillisecondsProcessingJDBC() throws SQLException {
-		long time = _readTimeJDBC() / Time.SECOND * Time.SECOND;
+		long time = readTimeJDBC() / Time.SECOND * Time.SECOND;
 
 		for (int i = 0; i < Time.SECOND; i++) {
-			_writeTimeJDBC(time);
+			writeTimeJDBC(time);
 
-			Assert.assertEquals(time++, _readTimeJDBC());
+			Assert.assertEquals(time++, readTimeJDBC());
 		}
 	}
 
-	private long _readTimeHibernate() {
+	protected long readTimeHibernate() {
 		Session session = _sessionFactory.openSession();
 
 		try {
@@ -89,23 +89,24 @@ public class SQLDateTest {
 		}
 	}
 
-	private long _readTimeJDBC() throws SQLException {
-		try (Connection con = DataAccess.getConnection();
-			Statement statement = con.createStatement();
-			ResultSet rs = statement.executeQuery(
+	protected long readTimeJDBC() throws SQLException {
+		try (Connection connection = DataAccess.getConnection();
+			Statement statement = connection.createStatement();
+
+			ResultSet resultSet = statement.executeQuery(
 				_READ_RELEASE_MODIFIED_DATE)) {
 
-			Assert.assertTrue(rs.next());
+			Assert.assertTrue(resultSet.next());
 
-			Timestamp timestamp = rs.getTimestamp("modifiedDate");
+			Timestamp timestamp = resultSet.getTimestamp("modifiedDate");
 
-			Assert.assertFalse(rs.next());
+			Assert.assertFalse(resultSet.next());
 
 			return timestamp.getTime();
 		}
 	}
 
-	private void _writeTimeHibernate(long time) {
+	protected void writeTimeHibernate(long time) {
 		Session session = _sessionFactory.openSession();
 
 		try {
@@ -116,6 +117,7 @@ public class SQLDateTest {
 			session.saveOrUpdate(release);
 
 			session.flush();
+
 			session.clear();
 		}
 		finally {
@@ -123,14 +125,14 @@ public class SQLDateTest {
 		}
 	}
 
-	private void _writeTimeJDBC(long time) throws SQLException {
-		try (Connection con = DataAccess.getConnection();
-			PreparedStatement ps = con.prepareStatement(
+	protected void writeTimeJDBC(long time) throws SQLException {
+		try (Connection connection = DataAccess.getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(
 				_WRITE_RELEASE_MODIFIED_DATE)) {
 
-			ps.setTimestamp(1, new Timestamp(time));
+			preparedStatement.setTimestamp(1, new Timestamp(time));
 
-			Assert.assertEquals(1, ps.executeUpdate());
+			Assert.assertEquals(1, preparedStatement.executeUpdate());
 		}
 	}
 
