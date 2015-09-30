@@ -85,19 +85,21 @@ public class I18nServletTest {
 	@Test
 	public void testI18nNotUseDefaultExistentLocale() throws Exception {
 		PropsValues.LOCALE_USE_DEFAULT_IF_NOT_AVAILABLE = false;
+
 		Locale expectedLocale = LocaleUtil.getDefault();
 
 		testGetI18nData(
-			expectedLocale, getExpectedI18nData(expectedLocale));
+			expectedLocale, getI18nData(expectedLocale));
 	}
 
 	@Test
 	public void testI18nNotUseDefaultNonDefaultLocale() throws Exception {
 		PropsValues.LOCALE_USE_DEFAULT_IF_NOT_AVAILABLE = false;
+
 		Locale expectedLocale = LocaleUtil.SPAIN;
 
 		testGetI18nData(
-			expectedLocale, getExpectedI18nData(expectedLocale));
+			expectedLocale, getI18nData(expectedLocale));
 	}
 
 	@Test
@@ -112,13 +114,14 @@ public class I18nServletTest {
 	@Test
 	public void testI18nUseDefault() throws Exception {
 		PropsValues.LOCALE_USE_DEFAULT_IF_NOT_AVAILABLE = true;
+
 		Locale expectedLocale = LocaleUtil.getDefault();
 
 		testGetI18nData(
-			expectedLocale, getExpectedI18nData(expectedLocale));
+			expectedLocale, getI18nData(expectedLocale));
 	}
 
-	protected I18nServlet.I18nData getExpectedI18nData(Locale locale) {
+	protected I18nServlet.I18nData getI18nData(Locale locale) {
 		return _i18nServlet.getI18nData(locale);
 	}
 
@@ -129,10 +132,9 @@ public class I18nServletTest {
 		MockHttpServletRequest mockHttpServletRequest =
 			new MockHttpServletRequest();
 
+		mockHttpServletRequest.setPathInfo(StringPool.SLASH);
 		mockHttpServletRequest.setServletPath(
 			StringPool.SLASH + LocaleUtil.toLanguageId(locale));
-
-		mockHttpServletRequest.setPathInfo(StringPool.SLASH);
 
 		I18nServlet.I18nData actualI18nData = _i18nServlet.getI18nData(
 			mockHttpServletRequest);
