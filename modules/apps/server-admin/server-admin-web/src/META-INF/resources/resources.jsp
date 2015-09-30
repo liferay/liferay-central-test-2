@@ -26,7 +26,7 @@ long usedMemory = totalMemory - runtime.freeMemory();
 %>
 
 <div>
-	<portlet:resourceURL id="/admin_server/view_chart" var="totalMemoryChartURL">
+	<portlet:resourceURL id="/server_admin/view_chart" var="totalMemoryChartURL">
 		<portlet:param name="type" value="total" />
 		<portlet:param name="totalMemory" value="<%= String.valueOf(totalMemory) %>" />
 		<portlet:param name="usedMemory" value="<%= String.valueOf(usedMemory) %>" />
@@ -34,7 +34,7 @@ long usedMemory = totalMemory - runtime.freeMemory();
 
 	<img alt="<liferay-ui:message escapeAttribute="<%= true %>" key="memory-used-vs-total-memory" />" src="<%= totalMemoryChartURL %>" />
 
-	<portlet:resourceURL id="/admin_server/view_chart" var="maxMemoryChartURL">
+	<portlet:resourceURL id="/server_admin/view_chart" var="maxMemoryChartURL">
 		<portlet:param name="type" value="max" />
 		<portlet:param name="maxMemory" value="<%= String.valueOf(runtime.maxMemory()) %>" />
 		<portlet:param name="usedMemory" value="<%= String.valueOf(usedMemory) %>" />
