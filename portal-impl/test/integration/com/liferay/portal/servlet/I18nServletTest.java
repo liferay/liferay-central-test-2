@@ -76,7 +76,7 @@ public class I18nServletTest {
 
 		try {
 			PropsValues.LOCALE_USE_DEFAULT_IF_NOT_AVAILABLE = false;
-			Locale expectedLocale = LocaleUtil.US;
+			Locale expectedLocale = LocaleUtil.getDefault();
 
 			testGetI18nData(
 				expectedLocale, getExpectedI18nData(expectedLocale));
@@ -130,7 +130,7 @@ public class I18nServletTest {
 
 		try {
 			PropsValues.LOCALE_USE_DEFAULT_IF_NOT_AVAILABLE = true;
-			Locale expectedLocale = LocaleUtil.US;
+			Locale expectedLocale = LocaleUtil.getDefault();
 
 			testGetI18nData(
 				expectedLocale, getExpectedI18nData(expectedLocale));
