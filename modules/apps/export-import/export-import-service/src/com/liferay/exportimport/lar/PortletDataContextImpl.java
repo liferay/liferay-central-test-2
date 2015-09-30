@@ -2497,7 +2497,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 			// Alias
 
 			List<XStreamAlias> xStreamAliases =
-				xStreamConfigurator.getAliases();
+				xStreamConfigurator.getXStreamAliases();
 
 			if (ListUtil.isNotEmpty(xStreamAliases)) {
 				for (XStreamAlias xStreamAlias : xStreamAliases) {
@@ -2509,7 +2509,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 			// Converters
 
 			List<XStreamConverter> xStreamConverters =
-				xStreamConfigurator.getConverters();
+				xStreamConfigurator.getXStreamConverters();
 
 			for (XStreamConverter xStreamConverter : xStreamConverters) {
 				_xStream.registerConverter(

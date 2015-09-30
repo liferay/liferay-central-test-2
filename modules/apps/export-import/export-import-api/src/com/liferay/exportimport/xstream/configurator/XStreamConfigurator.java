@@ -24,8 +24,8 @@ import java.util.List;
  */
 public interface XStreamConfigurator {
 
-	public List<XStreamAlias> getAliases();
+	public List<XStreamAlias> getXStreamAliases();
 
-	public List<XStreamConverter> getConverters();
+	public List<XStreamConverter> getXStreamConverters();
 
 }
