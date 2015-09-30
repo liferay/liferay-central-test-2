@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.control.menu.web.control.menu.entries;
+package com.liferay.control.menu.web;
 
 import com.liferay.control.menu.BaseJSPControlMenuEntry;
 import com.liferay.control.menu.ControlMenuEntry;
@@ -183,7 +183,8 @@ public class InformationMessagesControlMenuEntry
 
 	@Override
 	@Reference(
-		target = "(osgi.web.symbolicname=com.liferay.control.menu.web)", unbind = "-"
+		target = "(osgi.web.symbolicname=com.liferay.control.menu.web)",
+		unbind = "-"
 	)
 	public void setServletContext(ServletContext servletContext) {
 		super.setServletContext(servletContext);

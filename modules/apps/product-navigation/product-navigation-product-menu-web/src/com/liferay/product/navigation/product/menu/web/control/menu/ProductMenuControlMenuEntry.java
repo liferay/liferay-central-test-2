@@ -44,7 +44,8 @@ public class ProductMenuControlMenuEntry extends BaseJSPControlMenuEntry {
 
 	@Override
 	@Reference(
-		target = "(osgi.web.symbolicname=com.liferay.product.navigation.product.menu.web)", unbind = "-"
+		target = "(osgi.web.symbolicname=com.liferay.product.navigation.product.menu.web)",
+		unbind = "-"
 	)
 	public void setServletContext(ServletContext servletContext) {
 		super.setServletContext(servletContext);
