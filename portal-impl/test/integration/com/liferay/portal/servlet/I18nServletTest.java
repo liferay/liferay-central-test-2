@@ -65,7 +65,8 @@ public class I18nServletTest {
 	@AfterClass
 	public static void tearDownClass() throws Exception {
 		CompanyTestUtil.resetCompanyLocales(
-			PortalUtil.getDefaultCompanyId(), _availableLocales, _defaultLocale);
+			PortalUtil.getDefaultCompanyId(), _availableLocales,
+			_defaultLocale);
 	}
 
 	@Before
