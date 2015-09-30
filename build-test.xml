@@ -3275,13 +3275,13 @@ go]]></replacevalue>
 					<delete includeemptydirs="true" failonerror="false">
 						<fileset
 							dir="${app.server.lib.global.dir}"
-							includes="${jdbc.jconn.driver}"
+							includes="${jdbc.sybase.driver}"
 						/>
 					</delete>
 
 					<mirrors-get
 						dest="${todir}"
-						src="${test.jdbc.drivers.url}/sybase/16.0/${jdbc.jconn.driver}"
+						src="${test.jdbc.drivers.url}/sybase/16.0/${jdbc.sybase.driver}"
 					/>
 				</then>
 			</elseif>
