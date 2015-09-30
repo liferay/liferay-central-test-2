@@ -53,7 +53,7 @@ public class SQLDateTest {
 			TransactionalTestRule.INSTANCE);
 
 	@Test
-	public void testMillisecondsProcessingHibernate() {
+	public void testMillisecondsHibernate() {
 		long time = readTimeHibernate() / Time.SECOND * Time.SECOND;
 
 		for (int i = 0; i < Time.SECOND; i++) {
@@ -64,7 +64,7 @@ public class SQLDateTest {
 	}
 
 	@Test
-	public void testMillisecondsProcessingJDBC() throws SQLException {
+	public void testMillisecondsJDBC() throws SQLException {
 		long time = readTimeJDBC() / Time.SECOND * Time.SECOND;
 
 		for (int i = 0; i < Time.SECOND; i++) {
