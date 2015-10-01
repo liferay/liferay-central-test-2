@@ -126,10 +126,10 @@ public class PortletKeys {
 
 	public static final String REQUESTS = "121";
 
-	public static final String SHOPPING = "34";
-
 	public static final String SERVER_ADMIN =
 		"com_liferay_server_admin_web_portlet_ServerAdminPortlet";
+
+	public static final String SHOPPING = "34";
 
 	public static final String SITE_ADMIN =
 		"com_liferay_site_admin_web_portlet_SiteAdminPortlet";

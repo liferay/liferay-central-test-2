@@ -34,8 +34,7 @@ import org.osgi.service.component.annotations.Reference;
 	},
 	service = PanelApp.class
 )
-public class ServerAdminPanelApp
-	extends BaseControlPanelEntryPanelApp {
+public class ServerAdminPanelApp extends BaseControlPanelEntryPanelApp {
 
 	@Override
 	public String getPortletId() {
