@@ -16,7 +16,6 @@ package com.liferay.dynamic.data.mapping.type.text;
 
 import com.liferay.dynamic.data.mapping.registry.BaseDDMFormFieldType;
 import com.liferay.dynamic.data.mapping.registry.DDMFormFieldType;
-import com.liferay.dynamic.data.mapping.registry.DDMFormFieldTypeSettings;
 
 import org.osgi.service.component.annotations.Component;
 
@@ -26,21 +25,11 @@ import org.osgi.service.component.annotations.Component;
 @Component(
 	immediate = true,
 	property = {
-		"ddm.form.field.type.icon=icon-font",
-		"ddm.form.field.type.js.class.name=Liferay.DDM.Field.Text",
-		"ddm.form.field.type.js.module=liferay-ddm-form-field-text",
-		"ddm.form.field.type.name=text"
+		"ddm.form.field.type.icon=icon-font", "ddm.form.field.type.name=text"
 	},
 	service = DDMFormFieldType.class
 )
 public class TextDDMFormFieldType extends BaseDDMFormFieldType {
-
-	@Override
-	public Class<? extends DDMFormFieldTypeSettings>
-		getDDMFormFieldTypeSettings() {
-
-		return TextDDMFormFieldTypeSettings.class;
-	}
 
 	@Override
 	public String getName() {
