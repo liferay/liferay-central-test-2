@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.admin.web.upgrade;
+package com.liferay.server.admin.web.upgrade;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
@@ -31,8 +31,8 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Philip Jones
  */
-@Component(immediate = true, service = ServerAdministrationWebUpgrade.class)
-public class ServerAdministrationWebUpgrade {
+@Component(immediate = true, service = ServerAdminWebUpgrade.class)
+public class ServerAdminWebUpgrade {
 
 	@Reference(unbind = "-")
 	protected void setReleaseLocalService(
@@ -53,14 +53,14 @@ public class ServerAdministrationWebUpgrade {
 			protected String[][] getRenamePortletIdsArray() {
 				return new String[][] {
 					new String[] {
-						"137", PortletKeys.ADMIN_SERVER
+						"137", PortletKeys.SERVER_ADMIN
 					}
 				};
 			}
 		};
 
 		_releaseLocalService.updateRelease(
-			"com.liferay.admin.web",
+			"com.liferay.server.admin.web",
 			Collections.<UpgradeProcess>singletonList(upgradePortletId), 1, 1,
 			false);
 	}

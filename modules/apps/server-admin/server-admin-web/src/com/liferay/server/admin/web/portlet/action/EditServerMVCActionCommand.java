@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.admin.web.portlet.action;
+package com.liferay.server.admin.web.portlet.action;
 
 import com.liferay.mail.service.MailServiceUtil;
 import com.liferay.portal.captcha.CaptchaImpl;
@@ -118,8 +118,8 @@ import org.osgi.service.component.annotations.Component;
  */
 @Component(
 	property = {
-		"javax.portlet.name=" + PortletKeys.ADMIN_SERVER,
-		"mvc.command.name=/admin_server/edit_server"
+		"javax.portlet.name=" + PortletKeys.SERVER_ADMIN,
+		"mvc.command.name=/server_admin/edit_server"
 	},
 	service = MVCActionCommand.class
 )

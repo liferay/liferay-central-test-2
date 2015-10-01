@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.admin.web.portlet.action;
+package com.liferay.server.admin.web.portlet.action;
 
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCResourceCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCResourceCommand;
@@ -48,8 +48,8 @@ import org.osgi.service.component.annotations.Component;
  */
 @Component(
 	property = {
-		"javax.portlet.name=" + PortletKeys.ADMIN_SERVER,
-		"mvc.command.name=/admin_server/view_chart"
+		"javax.portlet.name=" + PortletKeys.SERVER_ADMIN,
+		"mvc.command.name=/server_admin/view_chart"
 	},
 	service = MVCResourceCommand.class
 )
