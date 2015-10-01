@@ -119,6 +119,7 @@ public class ControlMenuPortlet extends MVCPortlet {
 
 		renderRequest.setAttribute(
 			ControlMenuWebKeys.CONTROL_MENU_CATEGORIES, controlMenuCategories);
+
 		renderRequest.setAttribute(
 			ControlMenuWebKeys.CONTROL_MENU_ENTRY_REGISTRY,
 			_controlMenuEntryRegistry);
