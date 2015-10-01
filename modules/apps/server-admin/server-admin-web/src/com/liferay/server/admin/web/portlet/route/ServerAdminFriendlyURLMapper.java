@@ -30,7 +30,7 @@ import org.osgi.service.component.annotations.Component;
 	},
 	service = FriendlyURLMapper.class
 )
-public class AdminServerFriendlyURLMapper extends DefaultFriendlyURLMapper {
+public class ServerAdminFriendlyURLMapper extends DefaultFriendlyURLMapper {
 
 	@Override
 	public String getMapping() {
