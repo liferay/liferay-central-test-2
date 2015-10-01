@@ -27,7 +27,7 @@ import org.junit.Test;
 public class HttpAuthorizationHeaderTest {
 
 	@Test
-	public void testToStringBasicChallengeResponse() {
+	public void testToStringBasicResponse() {
 		HttpAuthorizationHeader httpAuthorizationHeader =
 			new HttpAuthorizationHeader(HttpAuthorizationHeader.SCHEME_BASIC);
 
@@ -57,7 +57,7 @@ public class HttpAuthorizationHeaderTest {
 	}
 
 	@Test
-	public void testToStringDigestChallengeResponse() {
+	public void testToStringDigestResponse() {
 		HttpAuthorizationHeader httpAuthorizationHeader =
 			new HttpAuthorizationHeader(HttpAuthorizationHeader.SCHEME_DIGEST);
 
