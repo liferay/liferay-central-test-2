@@ -43,7 +43,7 @@ public class AssetCategoryPropertyLocalServiceImpl
 
 		if (hasCategoryProperty(categoryId, key)) {
 			throw new DuplicateCategoryPropertyException(
-				"A category property with a key " + key + " already exists");
+				"A category property already exists with the key " + key);
 		}
 
 		long categoryPropertyId = counterLocalService.increment();
@@ -135,7 +135,7 @@ public class AssetCategoryPropertyLocalServiceImpl
 			hasCategoryProperty(categoryProperty.getCategoryId(), key)) {
 
 			throw new DuplicateCategoryPropertyException(
-				"A category property with a key " + key + " already exists");
+				"A category property already exists with the key " + key);
 		}
 
 		validate(key, value);
