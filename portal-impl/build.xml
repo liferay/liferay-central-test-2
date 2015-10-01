@@ -1,6 +1,9 @@
 <?xml version="1.0"?>
 
-<project name="portal-impl" basedir="." default="compile"
+<project
+	basedir="."
+	default="compile"
+	name="portal-impl"
 	xmlns:antelope="antlib:ise.antelope.tasks"
 	xmlns:artifact="antlib:org.apache.maven.artifact.ant"
 	xmlns:if="ant:if"

@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 
-<project name="sql-parent"
+<project
+	name="sql-parent"
 	xmlns:if="ant:if"
 	xmlns:unless="ant:unless"
 >
