@@ -63,7 +63,7 @@
 	</ul>
 </div>
 
-<@aui.script use="liferay-navigation-interaction" >
+<@aui.script use="liferay-navigation-interaction">
 	var navigation = A.one(${navbarId});
 
 	if (navigation) {

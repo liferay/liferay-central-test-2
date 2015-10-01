@@ -1,12 +1,13 @@
 <#assign aui = taglibLiferayHash["/WEB-INF/tld/liferay-aui.tld"] />
 <#assign liferay_ui = taglibLiferayHash["/WEB-INF/tld/liferay-ui.tld"] />
 
-<#assign rootNavigationItems = navItem.fromLayouts(request, themeDisplay.getLayouts(), null) />
-
 <#assign portletDisplay = themeDisplay.getPortletDisplay() />
+
 <#assign navbarId = "navbar_" + portletDisplay.getId() />
 
 <div id="${navbarId}">
+	<#assign rootNavigationItems = navItem.fromLayouts(request, themeDisplay.getLayouts(), null) />
+
 	<#list rootNavigationItems as rootNavigationItem>
 		<#if rootNavigationItem.isBrowsable() || rootNavigationItem.hasBrowsableChildren() >
 			<#assign nav_item_caret = "" />
@@ -54,7 +55,7 @@
 	</#list>
 </div>
 
-<@aui.script use="liferay-navigation-interaction" >
+<@aui.script use="liferay-navigation-interaction">
 	var navigation = A.one(${navbarId});
 
 	if (navigation) {
