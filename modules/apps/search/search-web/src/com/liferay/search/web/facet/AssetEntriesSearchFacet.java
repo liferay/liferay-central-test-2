@@ -150,11 +150,11 @@ public class AssetEntriesSearchFacet extends BaseJSPSearchFacet {
 	}
 
 	protected String[] getAssetTypes(long companyId) {
+		List<String> assetTypes = new ArrayList<>();
+
 		List<AssetRendererFactory<?>> assetRendererFactories =
 			AssetRendererFactoryRegistryUtil.getAssetRendererFactories(
 				companyId);
-
-		List<String> assetTypes = new ArrayList<>();
 
 		for (int i = 0; i < assetRendererFactories.size(); i++) {
 			AssetRendererFactory<?> assetRendererFactory =
