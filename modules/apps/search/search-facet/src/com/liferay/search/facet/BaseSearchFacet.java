@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.search.facets;
+package com.liferay.search.facet;
 
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONException;
