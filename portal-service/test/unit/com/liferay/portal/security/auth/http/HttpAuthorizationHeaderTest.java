@@ -27,20 +27,6 @@ import org.junit.Test;
 public class HttpAuthorizationHeaderTest {
 
 	@Test
-	public void testToStringBasicResponse() {
-		HttpAuthorizationHeader httpAuthorizationHeader =
-			new HttpAuthorizationHeader(HttpAuthorizationHeader.SCHEME_BASIC);
-
-		httpAuthorizationHeader.setAuthParameter(
-			HttpAuthorizationHeader.AUTH_PARAMETER_NAME_REALM,
-			Portal.PORTAL_REALM);
-
-		Assert.assertEquals(
-			httpAuthorizationHeader.toString(),
-			"Basic realm=\"" + Portal.PORTAL_REALM + "\"");
-	}
-
-	@Test
 	public void testToStringBasicRequest() {
 		HttpAuthorizationHeader httpAuthorizationHeader =
 			new HttpAuthorizationHeader(HttpAuthorizationHeader.SCHEME_BASIC);
@@ -57,14 +43,9 @@ public class HttpAuthorizationHeaderTest {
 	}
 
 	@Test
-	public void testToStringDigestResponse() {
+	public void testToStringBasicResponse() {
 		HttpAuthorizationHeader httpAuthorizationHeader =
-			new HttpAuthorizationHeader(HttpAuthorizationHeader.SCHEME_DIGEST);
-
-		String nonce = String.valueOf(Math.random());
-
-		httpAuthorizationHeader.setAuthParameter(
-			HttpAuthorizationHeader.AUTH_PARAMETER_NAME_NONCE, nonce);
+			new HttpAuthorizationHeader(HttpAuthorizationHeader.SCHEME_BASIC);
 
 		httpAuthorizationHeader.setAuthParameter(
 			HttpAuthorizationHeader.AUTH_PARAMETER_NAME_REALM,
@@ -72,8 +53,7 @@ public class HttpAuthorizationHeaderTest {
 
 		Assert.assertEquals(
 			httpAuthorizationHeader.toString(),
-			"Digest nonce=\"" + nonce + "\", realm=\"" + Portal.PORTAL_REALM +
-				"\"");
+			"Basic realm=\"" + Portal.PORTAL_REALM + "\"");
 	}
 
 	@Test
@@ -106,6 +86,26 @@ public class HttpAuthorizationHeaderTest {
 			"Digest nonce=\"" + nonce + "\", realm=\"PortalRealm\", " +
 				"response=\"" + response + "\", uri=\"/url\", " +
 					"username=\"test@liferay.com\"");
+	}
+
+	@Test
+	public void testToStringDigestResponse() {
+		HttpAuthorizationHeader httpAuthorizationHeader =
+			new HttpAuthorizationHeader(HttpAuthorizationHeader.SCHEME_DIGEST);
+
+		String nonce = String.valueOf(Math.random());
+
+		httpAuthorizationHeader.setAuthParameter(
+			HttpAuthorizationHeader.AUTH_PARAMETER_NAME_NONCE, nonce);
+
+		httpAuthorizationHeader.setAuthParameter(
+			HttpAuthorizationHeader.AUTH_PARAMETER_NAME_REALM,
+			Portal.PORTAL_REALM);
+
+		Assert.assertEquals(
+			httpAuthorizationHeader.toString(),
+			"Digest nonce=\"" + nonce + "\", realm=\"" + Portal.PORTAL_REALM +
+				"\"");
 	}
 
 }
