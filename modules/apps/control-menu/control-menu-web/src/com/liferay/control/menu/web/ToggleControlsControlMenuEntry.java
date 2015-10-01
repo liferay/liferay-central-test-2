@@ -52,14 +52,14 @@ public class ToggleControlsControlMenuEntry
 
 	@Override
 	public String getIconCssClass(HttpServletRequest request) {
-		String toggleControlsState = GetterUtil.getString(
+		String stateCss = null;
+
+		String toggleControls = GetterUtil.getString(
 			SessionClicks.get(
 				request, "com.liferay.frontend.js.web_toggleControls",
 				"visible"));
 
-		String stateCss = null;
-
-		if (toggleControlsState.equals("visible")) {
+		if (toggleControls.equals("visible")) {
 			stateCss = "icon-eye-open";
 		}
 		else {
