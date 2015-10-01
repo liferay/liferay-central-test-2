@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 
-<project name="build-common"
+<project
+	name="build-common"
 	xmlns:antelope="antlib:ise.antelope.tasks"
 	xmlns:artifact="antlib:org.apache.maven.artifact.ant"
 	xmlns:if="ant:if"
@@ -948,9 +949,9 @@ Please set the environment variable ANT_OPTS to the recommended value of
 			</if>
 
 			<junit dir="${project.dir}" fork="on" forkmode="@{forkmode}" haltonfailure="${junit.halt.on.failure}" jvm="${junit.jvm}" outputtoformatters="false" printsummary="on" showoutput="true">
-				<sysproperty if:true="${jvm.debug}" key="jvm.debug" value="true" />
 				<sysproperty key="junit.aspectj.dump" file="woven-classes" />
 				<sysproperty key="junit.code.coverage" value="${junit.code.coverage}" />
+				<sysproperty if:true="${jvm.debug}" key="jvm.debug" value="true" />
 				<sysproperty key="whip.agent" value="${whip.agent}" />
 				<sysproperty key="whip.datafile" file="test-coverage/@{test.type}/whip.dat" />
 				<sysproperty key="whip.instrument.dump" value="${whip.instrument.dump}" />
