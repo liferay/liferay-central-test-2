@@ -790,7 +790,7 @@ public class EditUserMVCActionCommand extends BaseMVCActionCommand {
 	}
 
 	private AnnouncementsDeliveryLocalService
-				_announcementsDeliveryLocalService;
+		_announcementsDeliveryLocalService;
 	private DLAppLocalService _dlAppLocalService;
 	private ListTypeLocalService _listTypeLocalService;
 	private UserLocalService _userLocalService;
