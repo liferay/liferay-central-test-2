@@ -770,7 +770,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 					PortalMyAccountApplicationType.MyAccount.CLASS_NAME,
 					PortletProvider.Action.VIEW);
 
-				if (!portletModel.getPortletId().equals(PortletKeys.SERVER_ADMIN) &&
+				if (!portletModel.getPortletId(
+						).equals(PortletKeys.SERVER_ADMIN) &&
 					!portletModel.getPortletId().equals(portletId) &&
 					!portletModel.isInclude()) {
 
