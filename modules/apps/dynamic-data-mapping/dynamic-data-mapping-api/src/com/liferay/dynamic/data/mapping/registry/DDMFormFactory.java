@@ -91,10 +91,7 @@ public class DDMFormFactory {
 		ddmFormField.setLabel(ddmFormFactoryHelper.getDDMFormFieldLabel());
 		ddmFormField.setLocalizable(
 			ddmFormFactoryHelper.isDDMFormFieldLocalizable(method));
-		ddmFormField.setPredefinedValue(
-			ddmFormFactoryHelper.getDDMFormFieldPredefinedValue());
 		ddmFormField.setRequired(ddmFormFactoryHelper.isDDMFormFieldRequired());
-		ddmFormField.setTip(ddmFormFactoryHelper.getDDMFormFieldTip());
 		ddmFormField.setVisibilityExpression(
 			ddmFormFactoryHelper.getDDMFormFieldVisibilityExpression());
 

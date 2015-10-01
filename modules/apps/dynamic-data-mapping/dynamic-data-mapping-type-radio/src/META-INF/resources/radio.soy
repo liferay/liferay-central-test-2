@@ -5,7 +5,6 @@
  *
  * @param childElementsHTML
  * @param dir
- * @param inline
  * @param label
  * @param name
  * @param options
@@ -14,29 +13,23 @@
  */
 {template .radio}
 	<div class="form-group{$visible ? '' : ' hide'}" data-fieldname="{$name}">
-		<label class="control-label">
+		<span class="control-label">
 			{$label}
 
 			{if $required}
 				<b>*</b>
 			{/if}
-		</label>
+		</span>
 
-		<div class="radio-options">
-			{foreach $option in $options}
-				{if not $inline}
-					<div class="radio">
-				{/if}
+		{foreach $option in $options}
+			<div class="radio">
+				<label for="{$option.value}">
+					<input class="field" dir="{$dir}" id="{$option.value}" name="{$name}" {$option.status} type="radio" value="{$option.value}" />
 
-				<label class="radio-default{$inline ? ' radio-inline' : ''}" for="{$option.value}">
-					<input class="field" dir="{$dir}" id="{$option.value}" name="{$name}" {$option.status} type="radio" value="{$option.value}" /> {$option.label}
+					{$option.label}
 				</label>
-
-				{if not $inline}
-					</div>
-				{/if}
-			{/foreach}
-		</div>
+			</div>
+		{/foreach}
 
 		{$childElementsHTML|noAutoescape}
 	</div>
