@@ -37,9 +37,9 @@
 		</#if>
 
 		<#if layoutLevel == 0>
-			<#assign rootNavigationItems = navItem.fromLayouts(request, themeDisplay.getLayouts(), null) />
-
 			<ul class="layouts level-${layoutLevel}">
+				<#assign rootNavigationItems = navItem.fromLayouts(request, themeDisplay.getLayouts(), null) />
+
 				<#list rootNavigationItems as rootNavigationItem>
 					<li class="open">
 						<#if entry.isBrowsable()>
