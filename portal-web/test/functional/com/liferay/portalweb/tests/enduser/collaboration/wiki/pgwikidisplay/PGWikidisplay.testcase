@@ -94,7 +94,7 @@
 	<command name="AddWikiFrontPageChildPageFormatHTML" priority="4">
 		<var name="welcomeToLiferay">
 			<![CDATA[
-				<p><a href=http://www.liferay.com>Welcome to LIFERAY</a><p>
+				<p><a href="http://www.liferay.com">Welcome to LIFERAY</a></p>
 			]]>
 		</var>
 		<var name="wikiChildPageContent" value="Wiki FrontPage Child Page Content" />
