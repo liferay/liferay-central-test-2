@@ -215,9 +215,7 @@ public class AssetTagServiceImpl extends AssetTagServiceBaseImpl {
 	}
 
 	@Override
-	public List<AssetTag> getTags(String className, long classPK)
-		throws PortalException {
-
+	public List<AssetTag> getTags(String className, long classPK) {
 		return assetTagLocalService.getTags(className, classPK);
 	}
 
