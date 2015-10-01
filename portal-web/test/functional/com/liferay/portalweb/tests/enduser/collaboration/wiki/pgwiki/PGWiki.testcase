@@ -125,7 +125,7 @@
 			<var name="wikiChildPageTitle" value="${wikiChildPageTitle}" />
 		</execute>
 
-		<execute macro="WikiPage#viewChildPagePGViaWD">
+		<execute macro="WikiPage#viewChildPagePG">
 			<var name="wikiChildPageContent" value="${wikiChildPageHTMLContent}" />
 			<var name="wikiChildPageTitle" value="${wikiChildPageTitle}" />
 		</execute>

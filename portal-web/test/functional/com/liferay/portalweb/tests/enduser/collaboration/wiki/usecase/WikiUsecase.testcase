@@ -419,7 +419,7 @@
 			<var name="wikiPageTitle" value="Wiki FrontPage Child Page Title" />
 		</execute>
 
-		<execute macro="WikiPage#addCommentPG">
+		<execute macro="WikiPage#addComment">
 			<var name="entryComment" value="Wiki FrontPage Child Page Comment Body document" />
 		</execute>
 
