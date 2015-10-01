@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.admin.web.portlet;
+package com.liferay.server.admin.web.portlet;
 
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.util.PortletKeys;
@@ -41,12 +41,12 @@ import org.osgi.service.component.annotations.Component;
 		"javax.portlet.expiration-cache=0",
 		"javax.portlet.init-param.template-path=/",
 		"javax.portlet.init-param.view-template=/view.jsp",
-		"javax.portlet.name=" + PortletKeys.ADMIN_SERVER,
+		"javax.portlet.name=" + PortletKeys.SERVER_ADMIN,
 		"javax.portlet.resource-bundle=content.Language",
 		"javax.portlet.security-role-ref=administrator",
 		"javax.portlet.supports.mime-type=text/html"
 	},
 	service = Portlet.class
 )
-public class AdminServerPortlet extends MVCPortlet {
+public class ServerAdminPortlet extends MVCPortlet {
 }

@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.admin.web.messaging;
+package com.liferay.server.admin.web.messaging;
 
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;

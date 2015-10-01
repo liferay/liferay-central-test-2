@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.admin.web.application.list;
+package com.liferay.server.admin.web.application.list;
 
 import com.liferay.application.list.BaseControlPanelEntryPanelApp;
 import com.liferay.application.list.PanelApp;
@@ -34,12 +34,12 @@ import org.osgi.service.component.annotations.Reference;
 	},
 	service = PanelApp.class
 )
-public class ServerAdministrationPanelApp
+public class ServerAdminPanelApp
 	extends BaseControlPanelEntryPanelApp {
 
 	@Override
 	public String getPortletId() {
-		return PortletKeys.ADMIN_SERVER;
+		return PortletKeys.SERVER_ADMIN;
 	}
 
 	@Reference(
