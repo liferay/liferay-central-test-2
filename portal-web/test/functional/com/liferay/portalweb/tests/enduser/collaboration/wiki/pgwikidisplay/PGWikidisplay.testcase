@@ -140,6 +140,7 @@
 		</execute>
 
 		<execute macro="WikiPage#addFrontPageChildPageFormatHTMLViaWD">
+			<var name="welcomeToLiferay" value="${welcomeToLiferay}" />
 			<var name="wikiChildPageHTMLContent" value="${wikiChildPageHTMLContent}" />
 			<var name="wikiChildPageTitle" value="${wikiChildPageTitle}" />
 		</execute>

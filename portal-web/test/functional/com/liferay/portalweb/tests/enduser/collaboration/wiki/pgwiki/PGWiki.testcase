@@ -111,6 +111,7 @@
 		</execute>
 
 		<execute macro="WikiPage#addFrontPageChildPageFormatHTML">
+			<var name="welcomeToLiferay" value="${welcomeToLiferay}" />
 			<var name="wikiChildPageHTMLContent" value="${wikiChildPageHTMLContent}" />
 			<var name="wikiChildPageTitle" value="${wikiChildPageTitle}" />
 			<var name="wikiPageText" value="${wikiPageText}" />
@@ -123,7 +124,6 @@
 		<execute macro="WikiPage#viewChildPagePGViaWD">
 			<var name="wikiChildPageContent" value="${wikiChildPageHTMLContent}" />
 			<var name="wikiChildPageTitle" value="${wikiChildPageTitle}" />
-			<var name="wikiPageTitle" value="${wikiPageTitle}" />
 		</execute>
 	</command>
 
