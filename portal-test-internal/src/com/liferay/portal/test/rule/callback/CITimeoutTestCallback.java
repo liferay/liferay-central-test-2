@@ -44,7 +44,7 @@ public class CITimeoutTestCallback extends BaseTestCallback<Long, Object> {
 				"ms and surpassed the timeout threshold " +
 					TestPropsValues.CI_TEST_TIMEOUT_TIME + "ms.";
 
-		System.setProperty(_TIMEOUT_TEST_CLASS_MESSAGE, message);
+		System.setProperty(_CI_TIMEOUT_TEST_CLASS_MESSAGE, message);
 
 		Assert.fail(
 			message + " Marked it as failed and aborting subsequent tests.");
@@ -52,7 +52,7 @@ public class CITimeoutTestCallback extends BaseTestCallback<Long, Object> {
 
 	@Override
 	public Long doBeforeClass(Description description) {
-		String message = System.getProperty(_TIMEOUT_TEST_CLASS_MESSAGE);
+		String message = System.getProperty(_CI_TIMEOUT_TEST_CLASS_MESSAGE);
 
 		if (message != null) {
 			Assert.fail(
@@ -64,8 +64,9 @@ public class CITimeoutTestCallback extends BaseTestCallback<Long, Object> {
 			return System.currentTimeMillis();
 		}
 
-		String startTimeKey = _ARQUILLIAN_TEST_START_TIME_KEY_PREFIX.concat(
-			description.getClassName());
+		String startTimeKey =
+			_CI_TIMEOUT_ARQUILLIAN_TEST_START_TIME_KEY +
+				description.getClassName();
 
 		String startTimeValue = System.getProperty(startTimeKey);
 
@@ -104,10 +105,10 @@ public class CITimeoutTestCallback extends BaseTestCallback<Long, Object> {
 		return false;
 	}
 
-	private static final String _ARQUILLIAN_TEST_START_TIME_KEY_PREFIX =
-		"ARQUILLIAN_TEST_START_TIME_KEY_PREFIX_";
+	private static final String _CI_TIMEOUT_ARQUILLIAN_TEST_START_TIME_KEY =
+		"CI_TIMEOUT_ARQUILLIAN_TEST_START_TIME_KEY_";
 
-	private static final String _TIMEOUT_TEST_CLASS_MESSAGE =
-		"TIMEOUT_TEST_CLASS_MESSAGE";
+	private static final String _CI_TIMEOUT_TEST_CLASS_MESSAGE =
+		"CI_TIMEOUT_TEST_CLASS_MESSAGE";
 
 }
