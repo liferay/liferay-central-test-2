@@ -259,8 +259,8 @@ public class DDMIndexerImpl implements DDMIndexer {
 				}
 				catch (PortalException e) {
 					throw new IllegalArgumentException(
-						"Cannot obtain indexType for field: " + fieldName +
-							" for ddmStructureId " + ddmStructureId);
+						"Unable to obtain index tpe for field " + fieldName +
+							" and DDM structure ID " + ddmStructureId);
 				}
 			}
 		}
