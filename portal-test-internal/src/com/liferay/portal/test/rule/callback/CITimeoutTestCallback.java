@@ -41,14 +41,13 @@ public class CITimeoutTestCallback extends BaseTestCallback<Long, Object> {
 
 		String message =
 			description.getClassName() + " spent " + testTime +
-				"ms, passed the timeout threshold " +
+				"ms and surpassed the timeout threshold " +
 					TestPropsValues.CI_TEST_TIMEOUT_TIME + "ms.";
 
 		System.setProperty(_TIMEOUT_TEST_CLASS_MESSAGE, message);
 
 		Assert.fail(
-			message + " Marked it as failed and aborting " +
-				"all following tests");
+			message + " Marked it as failed and aborting subsequent tests.");
 	}
 
 	@Override
