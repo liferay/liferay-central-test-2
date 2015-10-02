@@ -194,6 +194,13 @@
 		<execute function="AssertTextEquals" locator1="RecycleBin#RECYCLE_BIN_TABLE_NAME_2" value1="${assetName}" />
 	</command>
 
+	<command name="viewEntry">
+		<execute function="AssertTextEquals" locator1="Home#SITE_ADMINISTRATION_PORTLET_TITLE" value1="${assetName}" />
+		<execute function="AssertTextPresent" value1="${assetContent}" />
+		<execute function="AssertElementPresent" locator1="Button#RESTORE" />
+		<execute function="AssertElementPresent" locator1="Button#DELETE" />
+	</command>
+
 	<command name="viewRecyclebinViaSiteSettingsCP">
 		<execute function="AssertClick" locator1="SitesEditSite#MENU_BASIC_INFORMATION_RECYCLE_BIN" value1="Recycle Bin" />
 		<execute function="AssertTextEquals#assertValue" locator1="TextInput#TRASH_ENTRIES_MAX_AGE" value1="${maxAgeField}" />
