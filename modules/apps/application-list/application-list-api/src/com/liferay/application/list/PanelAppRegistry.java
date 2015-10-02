@@ -119,8 +119,7 @@ public class PanelAppRegistry {
 			bundleContext, PanelApp.class, "(panel.category.key=*)",
 			new PanelCategoryServiceReferenceMapper(),
 			new ServiceRankingPropertyServiceReferenceComparator(),
-			new StringPanelAppListServiceTrackerMapListener()
-		);
+			new PanelAppsServiceTrackerMapListener());
 
 		_serviceTrackerMap.open();
 	}
@@ -161,7 +160,7 @@ public class PanelAppRegistry {
 
 	}
 
-	private class StringPanelAppListServiceTrackerMapListener
+	private class PanelAppsServiceTrackerMapListener
 		implements ServiceTrackerMapListener<String, PanelApp, List<PanelApp>> {
 
 		@Override
