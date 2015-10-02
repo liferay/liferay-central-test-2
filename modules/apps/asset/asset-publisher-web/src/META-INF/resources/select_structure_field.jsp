@@ -17,12 +17,12 @@
 <%@ include file="/init.jsp" %>
 
 <%
+String portletResource = ParamUtil.getString(request, "portletResource");
 String className = ParamUtil.getString(request, "className");
 long classTypeId = ParamUtil.getLong(request, "classTypeId");
 String ddmStructureFieldName = ParamUtil.getString(request, "ddmStructureFieldName");
 Serializable ddmStructureFieldValue = ParamUtil.getString(request, "ddmStructureFieldValue");
 String eventName = ParamUtil.getString(request, "eventName", liferayPortletResponse.getNamespace() + "selectDDMStructureField");
-String portletResource = ParamUtil.getString(request, "portletResource");
 
 AssetRendererFactory<?> assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(className);
 
