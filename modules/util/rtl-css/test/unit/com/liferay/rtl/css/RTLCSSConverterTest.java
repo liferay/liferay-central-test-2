@@ -44,8 +44,6 @@ public class RTLCSSConverterTest {
 	public void testAsterisk() throws Exception {
 		RTLCSSConverter rtlCssConverter = new RTLCSSConverter();
 
-		Assert.assertNotNull(rtlCssConverter);
-
 		Assert.assertEquals(
 			"p{*right:50%}",
 			rtlCssConverter.process("p{*left:50%}"));
@@ -57,8 +55,6 @@ public class RTLCSSConverterTest {
 	@Test
 	public void testBackground() throws Exception {
 		RTLCSSConverter rtlCssConverter = new RTLCSSConverter();
-
-		Assert.assertNotNull(rtlCssConverter);
 
 		Assert.assertEquals(
 			"p{background:url(../left/right/test_right.png) right 30%}",
@@ -84,8 +80,6 @@ public class RTLCSSConverterTest {
 	public void testBackgroundPosition() throws Exception {
 		RTLCSSConverter rtlCssConverter = new RTLCSSConverter();
 
-		Assert.assertNotNull(rtlCssConverter);
-
 		Assert.assertEquals(
 			"p{background-position:right top}",
 			rtlCssConverter.process("p{background-position:left top}"));
@@ -100,8 +94,6 @@ public class RTLCSSConverterTest {
 	@Test
 	public void testBorder() throws Exception {
 		RTLCSSConverter rtlCssConverter = new RTLCSSConverter();
-
-		Assert.assertNotNull(rtlCssConverter);
 
 		Assert.assertEquals(
 			"p{border-right:1px}",
@@ -159,8 +151,6 @@ public class RTLCSSConverterTest {
 	@Test
 	public void testBorderRadius() throws Exception {
 		RTLCSSConverter rtlCssConverter = new RTLCSSConverter();
-
-		Assert.assertNotNull(rtlCssConverter);
 
 		Assert.assertEquals(
 			"p{border-radius:0}",
@@ -233,8 +223,6 @@ public class RTLCSSConverterTest {
 	public void testClear() throws Exception {
 		RTLCSSConverter rtlCssConverter = new RTLCSSConverter();
 
-		Assert.assertNotNull(rtlCssConverter);
-
 		Assert.assertEquals(
 			"p{clear:left}", rtlCssConverter.process("p{clear:right}"));
 		Assert.assertEquals(
@@ -244,8 +232,6 @@ public class RTLCSSConverterTest {
 	@Test
 	public void testComments() throws Exception {
 		RTLCSSConverter rtlCssConverter = new RTLCSSConverter();
-
-		Assert.assertNotNull(rtlCssConverter);
 
 		Assert.assertEquals(
 			"p{margin-right:5px}",
@@ -258,8 +244,6 @@ public class RTLCSSConverterTest {
 	@Test
 	public void testCommentsInPropertyNamesOrValues() throws Exception {
 		RTLCSSConverter rtlCssConverter = new RTLCSSConverter();
-
-		Assert.assertNotNull(rtlCssConverter);
 
 		Assert.assertEquals(
 			"hello{padding:1px 2px}",
@@ -279,8 +263,6 @@ public class RTLCSSConverterTest {
 	public void testDirection() throws Exception {
 		RTLCSSConverter rtlCssConverter = new RTLCSSConverter();
 
-		Assert.assertNotNull(rtlCssConverter);
-
 		Assert.assertEquals(
 			"p{direction:ltr}", rtlCssConverter.process("p{direction:rtl}"));
 		Assert.assertEquals(
@@ -293,16 +275,12 @@ public class RTLCSSConverterTest {
 	public void testEmptyInput() throws Exception {
 		RTLCSSConverter rtlCssConverter = new RTLCSSConverter();
 
-		Assert.assertNotNull(rtlCssConverter);
-
 		Assert.assertEquals("", rtlCssConverter.process(""));
 	}
 
 	@Test
 	public void testEmptyRuleDefinitions() throws Exception {
 		RTLCSSConverter rtlCssConverter = new RTLCSSConverter();
-
-		Assert.assertNotNull(rtlCssConverter);
 
 		Assert.assertEquals(
 			"b:hover{right:10px}h2{top:2px}",
@@ -314,8 +292,6 @@ public class RTLCSSConverterTest {
 	public void testFloat() throws Exception {
 		RTLCSSConverter rtlCssConverter = new RTLCSSConverter();
 
-		Assert.assertNotNull(rtlCssConverter);
-
 		Assert.assertEquals(
 			"p{float:left}", rtlCssConverter.process("p{float:right}"));
 		Assert.assertEquals(
@@ -326,8 +302,6 @@ public class RTLCSSConverterTest {
 	public void testImportant() throws Exception {
 		RTLCSSConverter rtlCssConverter = new RTLCSSConverter();
 
-		Assert.assertNotNull(rtlCssConverter);
-
 		Assert.assertEquals(
 			"p{float:right !important}",
 			rtlCssConverter.process("p{float:left!important}"));
@@ -336,8 +310,6 @@ public class RTLCSSConverterTest {
 	@Test
 	public void testMargin() throws Exception {
 		RTLCSSConverter rtlCssConverter = new RTLCSSConverter();
-
-		Assert.assertNotNull(rtlCssConverter);
 
 		Assert.assertEquals(
 			"p{margin:0}", rtlCssConverter.process("p{margin:0}"));
@@ -359,8 +331,6 @@ public class RTLCSSConverterTest {
 	public void testMediaExpressions() throws Exception {
 		RTLCSSConverter rtlCssConverter = new RTLCSSConverter();
 
-		Assert.assertNotNull(rtlCssConverter);
-
 		Assert.assertEquals(
 			"@media (max-width:320px){#myid{margin-left:1px}" +
 				".cls{padding-right:3px}}td{float:right}",
@@ -373,8 +343,6 @@ public class RTLCSSConverterTest {
 	public void testNoCompress() throws Exception {
 		RTLCSSConverter rtlCssConverter = new RTLCSSConverter(false);
 
-		Assert.assertNotNull(rtlCssConverter);
-
 		Assert.assertEquals(
 			"p { margin-right:5px; }\n",
 			rtlCssConverter.process(
@@ -384,8 +352,6 @@ public class RTLCSSConverterTest {
 	@Test
 	public void testNoFlip() throws Exception {
 		RTLCSSConverter rtlCssConverter = new RTLCSSConverter();
-
-		Assert.assertNotNull(rtlCssConverter);
 
 		Assert.assertEquals(
 			"p{margin-left: 5px}",
@@ -404,8 +370,6 @@ public class RTLCSSConverterTest {
 	@Test
 	public void testPadding() throws Exception {
 		RTLCSSConverter rtlCssConverter = new RTLCSSConverter();
-
-		Assert.assertNotNull(rtlCssConverter);
 
 		Assert.assertEquals(
 			"p{padding:0}", rtlCssConverter.process("p{padding:0}"));
@@ -427,8 +391,6 @@ public class RTLCSSConverterTest {
 	public void testPortalCss() throws Exception {
 		RTLCSSConverter rtlCssConverter = new RTLCSSConverter();
 
-		Assert.assertNotNull(rtlCssConverter);
-
 		Assert.assertEquals(
 			formatCss(read("main_rtl.css")),
 			rtlCssConverter.process(read("main.css")));
@@ -437,8 +399,6 @@ public class RTLCSSConverterTest {
 	@Test
 	public void testPosition() throws Exception {
 		RTLCSSConverter rtlCssConverter = new RTLCSSConverter();
-
-		Assert.assertNotNull(rtlCssConverter);
 
 		Assert.assertEquals(
 			"p{right:50%}", rtlCssConverter.process("p{left:50%}"));
@@ -450,8 +410,6 @@ public class RTLCSSConverterTest {
 	public void testSemicolonInContent() throws Exception {
 		RTLCSSConverter rtlCssConverter = new RTLCSSConverter();
 
-		Assert.assertNotNull(rtlCssConverter);
-
 		Assert.assertEquals(
 			"b.broke:before{content:\"&darr;\"}",
 			rtlCssConverter.process("b.broke:before { content:\"&darr;\"}"));
@@ -460,8 +418,6 @@ public class RTLCSSConverterTest {
 	@Test
 	public void testTextAlign() throws Exception {
 		RTLCSSConverter rtlCssConverter = new RTLCSSConverter();
-
-		Assert.assertNotNull(rtlCssConverter);
 
 		Assert.assertEquals(
 			"p{text-align:left}",
