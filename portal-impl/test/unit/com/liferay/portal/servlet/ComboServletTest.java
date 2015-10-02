@@ -218,12 +218,6 @@ public class ComboServletTest extends PowerMockito {
 	private static Portal _portal;
 	private static final PortalUtil _portalUtil = new PortalUtil();
 
-	@Mock
-	private Portlet _serverAdminPortlet;
-
-	@Mock
-	private PortletApp _serverAdminPortletApp;
-
 	private ComboServlet _comboServlet;
 	private MockHttpServletRequest _mockHttpServletRequest;
 	private MockHttpServletResponse _mockHttpServletResponse;
@@ -242,5 +236,11 @@ public class ComboServletTest extends PowerMockito {
 
 	@Mock
 	private Portlet _portletUndeployed;
+
+	@Mock
+	private Portlet _serverAdminPortlet;
+
+	@Mock
+	private PortletApp _serverAdminPortletApp;
 
 }
