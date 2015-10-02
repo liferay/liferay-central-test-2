@@ -136,6 +136,10 @@
 		<execute function="Click" locator1="Icon#BASIC_SEARCH" />
 	</command>
 
+	<command name="undoMoveToRecycleBin">
+		<execute function="AssertClick" locator1="Button#UNDO" value1="Undo" />
+	</command>
+
 	<command name="viewCP">
 		<var name="key_assetName" value="${assetName}" />
 
