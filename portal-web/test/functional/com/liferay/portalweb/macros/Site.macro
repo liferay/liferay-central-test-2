@@ -905,6 +905,7 @@
 
 		<var name="key_childChildSiteName" value="${childChildSiteName}" />
 		<var name="key_childSiteName" value="${childSiteName}" />
+
 		<var method="StringUtil#upperCase('${childSiteName}')" name="childSiteNameUppercase" />
 
 		<execute function="AssertTextEquals" locator1="SitesChildSiteChildSite#SITE_NAME" value1="${childSiteNameUppercase}" />
@@ -930,6 +931,7 @@
 
 		<var name="key_childSiteName" value="${childSiteName}" />
 		<var name="key_siteName" value="${siteName}" />
+
 		<var method="StringUtil#upperCase('${siteName}')" name="siteNameUppercase" />
 
 		<execute function="AssertTextEquals" locator1="SitesChildSite#SITE_NAME" value1="${siteNameUppercase}" />
