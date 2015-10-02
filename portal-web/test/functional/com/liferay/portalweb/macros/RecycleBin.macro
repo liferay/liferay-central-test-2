@@ -31,6 +31,19 @@
 		</if>
 	</command>
 
+	<command name="gotoEntryViaSuccessMessage">
+		<var name="key_assetName" value="${assetName}" />
+
+		<execute function="AssertClick" locator1="RecycleBin#SUCCESS_MESSAGE_CONTENT_LINK" value1="${assetName}" />
+		<execute function="AssertTextEquals" locator1="Home#SITE_ADMINISTRATION_PORTLET_TITLE" value1="${assetName}" />
+	</command>
+
+	<command name="gotoRecycleBinViaSuccessMessage">
+		<execute function="AssertClick" locator1="RecycleBin#SUCCESS_MESSAGE_RECYCLE_BIN_LINK" value1="the Recycle Bin" />
+
+		<execute function="AssertTextEquals" locator1="Home#SITE_ADMINISTRATION_PORTLET_TITLE" value1="Recycle Bin" />
+	</command>
+
 	<command name="restoreContentFromFolderCP">
 		<var name="key_assetName" value="${assetName}" />
 
