@@ -65,8 +65,7 @@ public class CITimeoutTestCallback extends BaseTestCallback<Long, Object> {
 		}
 
 		String startTimeKey =
-			_CI_TIMEOUT_ARQUILLIAN_TEST_START_TIME_KEY +
-				description.getClassName();
+			_CI_TIMEOUT_ARQUILLIAN_TEST_START_TIME + description.getClassName();
 
 		String startTimeValue = System.getProperty(startTimeKey);
 
@@ -105,8 +104,8 @@ public class CITimeoutTestCallback extends BaseTestCallback<Long, Object> {
 		return false;
 	}
 
-	private static final String _CI_TIMEOUT_ARQUILLIAN_TEST_START_TIME_KEY =
-		"CI_TIMEOUT_ARQUILLIAN_TEST_START_TIME_KEY_";
+	private static final String _CI_TIMEOUT_ARQUILLIAN_TEST_START_TIME =
+		"CI_TIMEOUT_ARQUILLIAN_TEST_START_TIME_";
 
 	private static final String _CI_TIMEOUT_TEST_CLASS_MESSAGE =
 		"CI_TIMEOUT_TEST_CLASS_MESSAGE";
