@@ -417,4 +417,41 @@
 			<var name="assetName" value="WC Folder Name" />
 		</execute>
 	</command>
+
+	<command name="ViewRecycleBinEntry" priority="4">
+		<execute macro="Page#gotoContentCP">
+			<var name="portletName" value="Web Content" />
+		</execute>
+
+		<execute macro="WebContentNavigator#gotoAddCP" />
+
+		<execute macro="WebContent#addCP">
+			<var name="webContentContent" value="WC Web Content Content" />
+			<var name="webContentTitle" value="WC WebContent Title" />
+		</execute>
+
+		<execute macro="WebContent#publish" />
+
+		<execute macro="WebContent#viewTitle">
+			<var name="webContentTitle" value="WC WebContent Title" />
+		</execute>
+
+		<execute macro="Page#gotoContentCP">
+			<var name="portletName" value="Web Content" />
+		</execute>
+
+		<execute macro="WebContent#moveToRecycleBinCP">
+			<var name="assetType" value="Web Content Article" />
+			<var name="webContentTitle" value="WC WebContent Title" />
+		</execute>
+
+		<execute macro="RecycleBin#gotoEntryViaSuccessMessage">
+			<var name="assetName" value="WC WebContent Title" />
+		</execute>
+
+		<execute macro="RecycleBin#viewEntry">
+			<var name="assetContent" value="WC Web Content Content" />
+			<var name="assetName" value="WC WebContent Title" />
+		</execute>
+	</command>
 </definition>
