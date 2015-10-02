@@ -1481,7 +1481,6 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			GetterUtil.getString(
 				portletElement.elementText("xml-rpc-method-class"),
 				portletModel.getXmlRpcMethodClass()));
-
 		portletModel.setControlPanelEntryClass(
 			GetterUtil.getString(
 				portletElement.elementText("control-panel-entry-class"),
