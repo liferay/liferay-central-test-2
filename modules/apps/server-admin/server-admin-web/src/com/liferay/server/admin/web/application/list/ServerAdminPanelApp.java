@@ -42,7 +42,7 @@ public class ServerAdminPanelApp extends BaseControlPanelEntryPanelApp {
 	}
 
 	@Reference(
-		target = "(javax.portlet.name=" + PortletKeys.ADMIN_SERVER + ")",
+		target = "(javax.portlet.name=" + PortletKeys.SERVER_ADMIN + ")",
 		unbind = "-"
 	)
 	protected void setPortlet(Portlet portlet) {
