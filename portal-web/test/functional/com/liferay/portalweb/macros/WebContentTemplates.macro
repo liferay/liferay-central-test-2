@@ -60,7 +60,7 @@
 				<execute function="SelectFrameTop" />
 				<execute function="SelectFrame" locator1="IFrame#TEMPLATES" />
 
-				<execute function="AssertTextEquals#assertValue" locator1="TextInput#DATA_DEFINITION" value1="${structureName}" />
+				<execute function="AssertTextEquals#assertValue" locator1="TextInput#STRUCTURE" value1="${structureName}" />
 
 				<if>
 					<equals arg1="${templateLanguage}" arg2="ftl" />
