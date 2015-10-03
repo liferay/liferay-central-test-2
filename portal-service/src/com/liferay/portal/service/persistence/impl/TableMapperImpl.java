@@ -263,10 +263,9 @@ public class TableMapperImpl<L extends BaseModel<L>, R extends BaseModel<R>>
 
 	@Override
 	public void destroy() {
-		Set<Entry<Long, String>> entrySet =
-			_leftToRightPortalCacheNames.entrySet();
+		Set<Entry<Long, String>> set = _leftToRightPortalCacheNames.entrySet();
 
-		Iterator<Entry<Long, String>> iterator = entrySet.iterator();
+		Iterator<Entry<Long, String>> iterator = set.iterator();
 
 		while (iterator.hasNext()) {
 			Entry<Long, String> entry = iterator.next();
@@ -276,9 +275,9 @@ public class TableMapperImpl<L extends BaseModel<L>, R extends BaseModel<R>>
 			iterator.remove();
 		}
 
-		entrySet = _rightToLeftPortalCacheNames.entrySet();
+		set = _rightToLeftPortalCacheNames.entrySet();
 
-		iterator = entrySet.iterator();
+		iterator = set.iterator();
 
 		while (iterator.hasNext()) {
 			Entry<Long, String> entry = iterator.next();
