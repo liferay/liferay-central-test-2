@@ -12,13 +12,13 @@
 		<#local assetCategoryIds = dataFactory.getAssetCategoryIds(assetEntryModel.groupId)>
 
 		<#list assetCategoryIds as assetCategoryId>
-			insert into AssetEntries_AssetCategories values (${assetCategoryId}, ${assetEntryModel.entryId}, ${assetEntryModel.companyId});
+			insert into AssetEntries_AssetCategories values (${assetEntryModel.companyId}, ${assetCategoryId}, ${assetEntryModel.entryId});
 		</#list>
 
 		<#local assetTagIds = dataFactory.getAssetTagIds(assetEntryModel.groupId)>
 
 		<#list assetTagIds as assetTagId>
-			insert into AssetEntries_AssetTags values (${assetEntryModel.entryId}, ${assetTagId}, ${assetEntryModel.companyId});
+			insert into AssetEntries_AssetTags values (${assetEntryModel.companyId}, ${assetEntryModel.entryId}, ${assetTagId});
 		</#list>
 	</#if>
 </#macro>
