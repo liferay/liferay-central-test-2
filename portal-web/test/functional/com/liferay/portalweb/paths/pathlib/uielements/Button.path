@@ -105,7 +105,7 @@
 </tr>
 <tr>
 	<td>BASIC_PREVIEW</td>
-	<td>//button[contains(@id,'basicPreviewButton')]</td>
+	<td>//button[contains(.,'Basic Preview')]</td>
 	<td></td>
 </tr>
 <tr>
