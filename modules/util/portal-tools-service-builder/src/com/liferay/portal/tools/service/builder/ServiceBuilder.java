@@ -3973,6 +3973,20 @@ public class ServiceBuilder {
 					String name1 = entity1.getName();
 					String name2 = entity2.getName();
 
+					if (Validator.equals(
+							entity1.getPackagePath(), "com.liferay.portal") &&
+						name1.equals("Company")) {
+
+						return -1;
+					}
+
+					if (Validator.equals(
+							entity2.getPackagePath(), "com.liferay.portal") &&
+						name2.equals("Company")) {
+
+						return 1;
+					}
+
 					return name1.compareTo(name2);
 				}
 
