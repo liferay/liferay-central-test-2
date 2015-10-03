@@ -35,6 +35,7 @@
 		<var name="key_assetName" value="${assetName}" />
 
 		<execute function="AssertClick" locator1="RecycleBin#SUCCESS_MESSAGE_CONTENT_LINK" value1="${assetName}" />
+
 		<execute function="AssertTextEquals" locator1="Home#SITE_ADMINISTRATION_PORTLET_TITLE" value1="${assetName}" />
 	</command>
 
