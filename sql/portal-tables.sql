@@ -112,17 +112,17 @@ create table AssetCategoryProperty (
 );
 
 create table AssetEntries_AssetCategories (
+	companyId LONG not null,
 	categoryId LONG not null,
 	entryId LONG not null,
-	companyId LONG not null,
-	primary key (categoryId, entryId, companyId)
+	primary key (companyId, categoryId, entryId)
 );
 
 create table AssetEntries_AssetTags (
+	companyId LONG not null,
 	entryId LONG not null,
 	tagId LONG not null,
-	companyId LONG not null,
-	primary key (entryId, tagId, companyId)
+	primary key (companyId, entryId, tagId)
 );
 
 create table AssetEntry (
