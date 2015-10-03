@@ -50,7 +50,7 @@
 </tr>
 <tr>
 	<td>DATA_DEFINITION</td>
-	<td>//div[label[contains(@for,'DDMPortlet_structure')]]/input[@type='text']</td>
+	<td>//div[label[contains(.,'Data Definition')]]/input[@type='text']</td>
 	<td></td>
 </tr>
 <tr>
@@ -386,6 +386,11 @@
 <tr>
 	<td>STREET_1</td>
 	<td>//div[label[contains(.,'Street 1')]]//input[@type='text']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>STRUCTURE</td>
+	<td>//div[label[contains(.,'Structure')]]/input[@type='text']</td>
 	<td></td>
 </tr>
 <tr>
