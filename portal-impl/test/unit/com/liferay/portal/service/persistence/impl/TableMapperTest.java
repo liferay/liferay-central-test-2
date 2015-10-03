@@ -1530,7 +1530,7 @@ public class TableMapperTest {
 			Assert.assertEquals(
 				"INSERT INTO " + _TABLE_NAME + " (" + _COMPANY_COLUMN_NAME +
 					", " + _LEFT_COLUMN_NAME + ", " + _RIGHT_COLUMN_NAME+ ") " +
-					"VALUES (?, ?, ?)",
+						"VALUES (?, ?, ?)",
 				sql);
 			Assert.assertArrayEquals(
 				new int[] {Types.BIGINT, Types.BIGINT, Types.BIGINT},
@@ -1635,7 +1635,7 @@ public class TableMapperTest {
 			Assert.assertEquals(
 				"DELETE FROM " + _TABLE_NAME + " WHERE " +
 					_COMPANY_COLUMN_NAME + " = ? AND " + _LEFT_COLUMN_NAME +
-					" = ?",
+						" = ?",
 				sql);
 			Assert.assertArrayEquals(
 				new int[] {Types.BIGINT, Types.BIGINT}, types);
@@ -1742,7 +1742,7 @@ public class TableMapperTest {
 			Assert.assertEquals(
 				"DELETE FROM " + _TABLE_NAME + " WHERE " +
 					_COMPANY_COLUMN_NAME + " = ? AND " + _RIGHT_COLUMN_NAME +
-					" = ?",
+						" = ?",
 				sql);
 			Assert.assertArrayEquals(
 				new int[] {Types.BIGINT, Types.BIGINT}, types);
@@ -1800,7 +1800,7 @@ public class TableMapperTest {
 			Assert.assertEquals(
 				"SELECT " + _LEFT_COLUMN_NAME + " FROM " +
 					_TABLE_NAME + " WHERE " + _COMPANY_COLUMN_NAME +
-					" = ? AND " + _RIGHT_COLUMN_NAME + " = ?",
+						" = ? AND " + _RIGHT_COLUMN_NAME + " = ?",
 				sql);
 			Assert.assertArrayEquals(
 				new int[] {Types.BIGINT, Types.BIGINT}, types);
