@@ -48,7 +48,9 @@ public class ReleaseGraphManager {
 		}
 	}
 
-	public List<List<UpgradeInfo>> getUpgradeInfos(String fromVersionString) {
+	public List<List<UpgradeInfo>> getUpgradeInfosList(
+		String fromVersionString) {
+
 		List<String> endVertices = getEndVertices();
 
 		endVertices.remove(fromVersionString);

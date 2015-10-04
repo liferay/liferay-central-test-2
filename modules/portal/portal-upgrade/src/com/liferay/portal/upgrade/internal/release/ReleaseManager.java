@@ -77,10 +77,10 @@ public class ReleaseManager {
 
 		String schemaVersionString = getSchemaVersionString(bundleSymbolicName);
 
-		List<List<UpgradeInfo>> upgradePaths =
-			releaseGraphManager.getUpgradeInfos(schemaVersionString);
+		List<List<UpgradeInfo>> upgradeInfosList =
+			releaseGraphManager.getUpgradeInfosList(schemaVersionString);
 
-		int size = upgradePaths.size();
+		int size = upgradeInfosList.size();
 
 		if (size > 1) {
 			throw new IllegalStateException(
@@ -92,7 +92,7 @@ public class ReleaseManager {
 			return;
 		}
 
-		executeUpgradeInfos(bundleSymbolicName, upgradePaths.get(0));
+		executeUpgradeInfos(bundleSymbolicName, upgradeInfosList.get(0));
 	}
 
 	public void execute(String bundleSymbolicName, String toVersionString) {
