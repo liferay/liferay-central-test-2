@@ -164,7 +164,7 @@ public class ModuleApplicationContextExtender extends AbstractExtender {
 
 			if (resource == null) {
 				throw new UpgradeException(
-					"Unable to locate SQL template: " + templateName);
+					"Unable to locate SQL template " + templateName);
 			}
 
 			try (InputStream inputStream = resource.openStream()) {
