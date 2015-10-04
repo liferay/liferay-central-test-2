@@ -43,12 +43,12 @@ public class UpgradeModules extends UpgradeProcess {
 
 			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
-			for (String app : _apps) {
+			for (String bundleSymbolicName : _bundleSymbolicNames) {
 				ps.setLong(1, 0);
 				ps.setLong(2, increment());
 				ps.setTimestamp(3, timestamp);
 				ps.setTimestamp(4, timestamp);
-				ps.setString(5, app);
+				ps.setString(5, bundleSymbolicName);
 				ps.setString(6, "0.0.0.1");
 				ps.setLong(7, 0);
 				ps.setTimestamp(8, timestamp);
@@ -66,7 +66,7 @@ public class UpgradeModules extends UpgradeProcess {
 		}
 	}
 
-	private static final String[] _apps = new String[] {
+	private static final String[] _bundleSymbolicNames = new String[] {
 		"com.liferay.amazon.rankings.web", "com.liferay.announcements.web",
 		"com.liferay.asset.browser.web",
 		"com.liferay.asset.categories.admin.web",
