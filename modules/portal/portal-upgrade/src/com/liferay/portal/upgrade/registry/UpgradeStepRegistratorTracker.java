@@ -46,11 +46,10 @@ public class UpgradeStepRegistratorTracker {
 		String fromSchemaVersionString, String toSchemaVersionString,
 		Collection<UpgradeStep> upgradeSteps) {
 
-		UpgradeStep[] upgradeStepsArray = new UpgradeStep[upgradeSteps.size()];
-
 		return register(
 			bundleContext, bundleSymbolicName, fromSchemaVersionString,
-			toSchemaVersionString, upgradeSteps.toArray(upgradeStepsArray));
+			toSchemaVersionString,
+			upgradeSteps.toArray(new UpgradeStep[upgradeSteps.size()]));
 	}
 
 	public static List<ServiceRegistration<UpgradeStep>> register(
