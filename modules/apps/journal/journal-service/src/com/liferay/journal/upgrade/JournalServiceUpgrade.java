@@ -95,7 +95,7 @@ public class JournalServiceUpgrade {
 
 		for (UpgradeProcess upgradeProcess : upgradeProcesses) {
 			if (_log.isDebugEnabled()) {
-				_log.debug("Executing ... " + upgradeProcess);
+				_log.debug("Upgrade process " + upgradeProcess);
 			}
 		}
 
