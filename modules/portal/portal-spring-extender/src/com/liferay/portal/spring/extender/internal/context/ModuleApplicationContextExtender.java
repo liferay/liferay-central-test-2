@@ -145,10 +145,11 @@ public class ModuleApplicationContextExtender extends AbstractExtender {
 
 		@Override
 		public void destroy() throws Exception {
-			for (ServiceRegistration<UpgradeStep> upgradeStepsRegistration :
-					_upgradeStepsRegistrations) {
+			for (ServiceRegistration<UpgradeStep>
+					upgradeStepServiceRegistration :
+						_upgradeStepServiceRegistrations) {
 
-				upgradeStepsRegistration.unregister();
+				upgradeStepServiceRegistration.unregister();
 			}
 
 			if (_component != null) {
@@ -216,7 +217,7 @@ public class ModuleApplicationContextExtender extends AbstractExtender {
 
 			_dependencyManager.add(_component);
 
-			_upgradeStepsRegistrations = _installInitialUpgrade();
+			_upgradeStepServiceRegistrations = _installInitialUpgrade();
 		}
 
 		private void _generateReleaseInfo() {
@@ -312,7 +313,7 @@ public class ModuleApplicationContextExtender extends AbstractExtender {
 		private final Bundle _bundle;
 		private org.apache.felix.dm.Component _component;
 		private List<ServiceRegistration<UpgradeStep>>
-			_upgradeStepsRegistrations;
+			_upgradeStepServiceRegistrations;
 
 		private class ContextDependency {
 
