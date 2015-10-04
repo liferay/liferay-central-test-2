@@ -248,9 +248,7 @@ public class ModuleApplicationContextExtender extends AbstractExtender {
 				upgradeToSchemaVersion, new UpgradeStep() {
 
 					@Override
-					public void upgrade(DBProcessContext dbProcessContext)
-						throws UpgradeException {
-
+					public void upgrade(DBProcessContext dbProcessContext) {
 						DBContext dbContext = dbProcessContext.getDBContext();
 
 						DBFactory dbFactory = dbContext.getDBFactory();
