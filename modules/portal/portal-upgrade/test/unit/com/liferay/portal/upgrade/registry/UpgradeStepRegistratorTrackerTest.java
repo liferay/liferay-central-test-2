@@ -30,7 +30,7 @@ import org.junit.Test;
 public class UpgradeStepRegistratorTrackerTest {
 
 	@Test
-	public void testBuildUpgradeInfos() {
+	public void testCreateUpgradeInfos() {
 		TestUpgradeStep testUpgradeStep = new TestUpgradeStep();
 
 		List<UpgradeInfo> upgradeInfos =
@@ -39,7 +39,6 @@ public class UpgradeStepRegistratorTrackerTest {
 				testUpgradeStep, testUpgradeStep);
 
 		Assert.assertEquals(4, upgradeInfos.size());
-
 		Assert.assertEquals(
 			Arrays.asList(
 				new UpgradeInfo("0.0.0", "1.0.0-step-3", testUpgradeStep),
@@ -52,7 +51,7 @@ public class UpgradeStepRegistratorTrackerTest {
 	}
 
 	@Test
-	public void testBuildUpgradeInfosWhenStepsAreEmpty() {
+	public void testCreateUpgradeInfosWithNoSteps() {
 		List<UpgradeInfo> upgradeInfos =
 			UpgradeStepRegistratorTracker.createUpgradeInfos("0.0.0", "1.0.0");
 
@@ -60,7 +59,7 @@ public class UpgradeStepRegistratorTrackerTest {
 	}
 
 	@Test
-	public void testBuildUpgradeInfosWithOneStep() {
+	public void testCreateUpgradeInfosWithOneStep() {
 		TestUpgradeStep testUpgradeStep = new TestUpgradeStep();
 
 		List<UpgradeInfo> upgradeInfos =
@@ -68,7 +67,6 @@ public class UpgradeStepRegistratorTrackerTest {
 				"0.0.0", "1.0.0", testUpgradeStep);
 
 		Assert.assertEquals(1, upgradeInfos.size());
-
 		Assert.assertEquals(
 			new UpgradeInfo("0.0.0", "1.0.0", testUpgradeStep),
 			upgradeInfos.get(0));
