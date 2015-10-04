@@ -137,13 +137,13 @@ public class UpgradeStepRegistratorTracker {
 
 		Dictionary<String, Object> properties = new Hashtable<>();
 
+		properties.put(
+			"upgrade.bundle.symbolic.name", upgradeBundleSymbolicName);
 		properties.put("upgrade.db.type", "any");
 		properties.put(
 			"upgrade.from.schema.version", upgradeInfo.getFromSchemaVersionString());
 		properties.put(
 			"upgrade.to.schema.version", upgradeInfo.getToSchemaVersionString());
-		properties.put(
-			"upgrade.bundle.symbolic.name", upgradeBundleSymbolicName);
 
 		return bundleContext.registerService(
 			UpgradeStep.class, upgradeInfo.getUpgradeStep(), properties);
