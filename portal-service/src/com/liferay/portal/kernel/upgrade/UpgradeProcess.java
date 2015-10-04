@@ -36,8 +36,8 @@ import java.sql.ResultSetMetaData;
  * @author Brian Wing Shun Chan
  * @author Alexander Chow
  */
-public abstract class UpgradeProcess extends BaseDBProcess
-	implements UpgradeStep {
+public abstract class UpgradeProcess
+	extends BaseDBProcess implements UpgradeStep {
 
 	public int getThreshold() {
 
