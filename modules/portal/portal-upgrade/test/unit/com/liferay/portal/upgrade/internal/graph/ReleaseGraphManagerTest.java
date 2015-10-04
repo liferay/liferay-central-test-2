@@ -45,7 +45,6 @@ public class ReleaseGraphManagerTest {
 			releaseGraphManager.getUpgradeInfosList("0.0.0");
 
 		Assert.assertEquals(1, upgradeInfosList.size());
-
 		Assert.assertEquals(
 			Arrays.asList(
 				upgradeInfo1, upgradeInfo2, upgradeInfo3, upgradeInfo4),
@@ -70,7 +69,6 @@ public class ReleaseGraphManagerTest {
 			releaseGraphManager.getUpgradeInfosList("0.1.0.1");
 
 		Assert.assertEquals(1, upgradeInfosList.size());
-
 		Assert.assertEquals(
 			Arrays.asList(
 				upgradeInfo6, upgradeInfo2, upgradeInfo3, upgradeInfo4),
