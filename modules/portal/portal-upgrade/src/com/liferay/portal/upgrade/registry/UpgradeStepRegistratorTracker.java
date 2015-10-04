@@ -57,17 +57,17 @@ public class UpgradeStepRegistratorTracker {
 		String fromSchemaVersionString, String toSchemaVersionString,
 		UpgradeStep ... upgradeSteps) {
 
-		List<UpgradeInfo> upgradeInfos = buildUpgradeInfos(
-			fromSchemaVersionString, toSchemaVersionString, upgradeSteps);
-
 		List<ServiceRegistration<UpgradeStep>> serviceRegistrations =
 			new ArrayList<>();
 
-		for (UpgradeInfo upgradeInfo : upgradeInfos) {
-			ServiceRegistration<UpgradeStep> upgradeStep = _registerUpgradeStep(
-				bundleContext, bundleSymbolicName, upgradeInfo);
+		List<UpgradeInfo> upgradeInfos = buildUpgradeInfos(
+			fromSchemaVersionString, toSchemaVersionString, upgradeSteps);
 
-			serviceRegistrations.add(upgradeStep);
+		for (UpgradeInfo upgradeInfo : upgradeInfos) {
+			ServiceRegistration<UpgradeStep> serviceRegistration =
+				_register(bundleContext, bundleSymbolicName, upgradeInfo);
+
+			serviceRegistrations.add(serviceRegistration);
 		}
 
 		return serviceRegistrations;
@@ -130,7 +130,7 @@ public class UpgradeStepRegistratorTracker {
 		_serviceTracker.close();
 	}
 
-	private static ServiceRegistration<UpgradeStep> _registerUpgradeStep(
+	private static ServiceRegistration<UpgradeStep> _register(
 		BundleContext bundleContext, String bundleSymbolicName,
 		UpgradeInfo upgradeInfo) {
 
@@ -223,7 +223,7 @@ public class UpgradeStepRegistratorTracker {
 
 				for (UpgradeInfo upgradeInfo : upgradeInfos) {
 					ServiceRegistration<UpgradeStep> serviceRegistration =
-						_registerUpgradeStep(
+						_register(
 							_bundleContext, bundleSymbolicName, upgradeInfo);
 
 					_serviceRegistrations.add(serviceRegistration);
