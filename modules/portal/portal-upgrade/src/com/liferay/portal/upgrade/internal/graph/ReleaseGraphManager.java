@@ -48,29 +48,6 @@ public class ReleaseGraphManager {
 		}
 	}
 
-	public List<List<UpgradeInfo>> getUpgradeInfosList(
-		String fromVersionString) {
-
-		List<String> endVertices = getEndVertices();
-
-		endVertices.remove(fromVersionString);
-
-		List<List<UpgradeInfo>> upgradeInfosList = new ArrayList<>();
-
-		for (String endVertex : endVertices) {
-			List<UpgradeInfo> upgradeInfos = getUpgradeInfos(
-				fromVersionString, endVertex);
-
-			if (upgradeInfos.isEmpty()) {
-				continue;
-			}
-
-			upgradeInfosList.add(upgradeInfos);
-		}
-
-		return upgradeInfosList;
-	}
-
 	public List<UpgradeInfo> getUpgradeInfos(
 		String fromVersionString, String toVersionString) {
 
@@ -107,6 +84,29 @@ public class ReleaseGraphManager {
 				}
 
 			});
+	}
+
+	public List<List<UpgradeInfo>> getUpgradeInfosList(
+		String fromVersionString) {
+
+		List<String> endVertices = getEndVertices();
+
+		endVertices.remove(fromVersionString);
+
+		List<List<UpgradeInfo>> upgradeInfosList = new ArrayList<>();
+
+		for (String endVertex : endVertices) {
+			List<UpgradeInfo> upgradeInfos = getUpgradeInfos(
+				fromVersionString, endVertex);
+
+			if (upgradeInfos.isEmpty()) {
+				continue;
+			}
+
+			upgradeInfosList.add(upgradeInfos);
+		}
+
+		return upgradeInfosList;
 	}
 
 	protected List<String> getEndVertices() {
