@@ -154,7 +154,8 @@ public class UpgradeStepRegistratorTracker {
 		Collection<ServiceRegistration<UpgradeStep>>> _serviceTracker;
 
 	private class UpgradeStepRegistratorServiceTrackerCustomizer
-		implements ServiceTrackerCustomizer<UpgradeStepRegistrator,
+		implements ServiceTrackerCustomizer
+			<UpgradeStepRegistrator,
 				Collection<ServiceRegistration<UpgradeStep>>> {
 
 		@Override
