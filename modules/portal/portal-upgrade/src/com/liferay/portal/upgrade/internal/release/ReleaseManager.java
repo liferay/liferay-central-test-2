@@ -313,9 +313,10 @@ public class ReleaseManager {
 		public UpgradeInfo addingService(
 			ServiceReference<UpgradeStep> serviceReference) {
 
-			String fromVersionString = (String)serviceReference.getProperty(
-				"upgrade.from.schema.version");
-			String toVersionString = (String)serviceReference.getProperty(
+			String fromSchemaVersionString =
+				(String)serviceReference.getProperty(
+					"upgrade.from.schema.version");
+			String toSchemaVersionString = (String)serviceReference.getProperty(
 				"upgrade.to.schema.version");
 
 			UpgradeStep upgradeStep = _bundleContext.getService(
@@ -331,7 +332,7 @@ public class ReleaseManager {
 			}
 
 			return new UpgradeInfo(
-				fromVersionString, toVersionString, upgradeStep);
+				fromSchemaVersionString, toSchemaVersionString, upgradeStep);
 		}
 
 		@Override
