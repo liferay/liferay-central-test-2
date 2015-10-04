@@ -15,7 +15,6 @@
 package com.liferay.portal.upgrade.tools;
 
 import com.liferay.portal.kernel.dao.db.DBProcessContext;
-import com.liferay.portal.kernel.upgrade.UpgradeException;
 import com.liferay.portal.kernel.upgrade.UpgradeStep;
 import com.liferay.portal.upgrade.internal.UpgradeInfo;
 
@@ -78,8 +77,7 @@ public class UpgradeStepRegistratorTrackerTest {
 	private static class TestUpgradeStep implements UpgradeStep {
 
 		@Override
-		public void upgrade(DBProcessContext dbProcessContext)
-			throws UpgradeException {
+		public void upgrade(DBProcessContext dbProcessContext) {
 		}
 
 	}
