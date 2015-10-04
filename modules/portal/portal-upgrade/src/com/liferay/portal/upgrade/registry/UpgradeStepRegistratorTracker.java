@@ -42,31 +42,31 @@ import org.osgi.util.tracker.ServiceTrackerCustomizer;
 public class UpgradeStepRegistratorTracker {
 
 	public static List<ServiceRegistration<UpgradeStep>> register(
-		BundleContext bundleContext, String upgradeBundleSymbolicName,
-		String upgradeFromSchemaVersion, String upgradeToSchemaVersion,
+		BundleContext bundleContext, String bundleSymbolicName,
+		String fromSchemaVersionString, String toSchemaVersionString,
 		Collection<UpgradeStep> upgradeSteps) {
 
 		UpgradeStep[] upgradeStepsArray = new UpgradeStep[upgradeSteps.size()];
 
 		return register(
-			bundleContext, upgradeBundleSymbolicName, upgradeFromSchemaVersion,
-			upgradeToSchemaVersion, upgradeSteps.toArray(upgradeStepsArray));
+			bundleContext, bundleSymbolicName, fromSchemaVersionString,
+			toSchemaVersionString, upgradeSteps.toArray(upgradeStepsArray));
 	}
 
 	public static List<ServiceRegistration<UpgradeStep>> register(
-		BundleContext bundleContext, String upgradeBundleSymbolicName,
-		String upgradeFromSchemaVersion, String upgradeToSchemaVersion,
+		BundleContext bundleContext, String bundleSymbolicName,
+		String fromSchemaVersionString, String toSchemaVersionString,
 		UpgradeStep ... upgradeSteps) {
 
 		List<UpgradeInfo> upgradeInfos = buildUpgradeInfos(
-			upgradeFromSchemaVersion, upgradeToSchemaVersion, upgradeSteps);
+			fromSchemaVersionString, toSchemaVersionString, upgradeSteps);
 
 		List<ServiceRegistration<UpgradeStep>> serviceRegistrations =
 			new ArrayList<>();
 
 		for (UpgradeInfo upgradeInfo : upgradeInfos) {
 			ServiceRegistration<UpgradeStep> upgradeStep = _registerUpgradeStep(
-				bundleContext, upgradeBundleSymbolicName, upgradeInfo);
+				bundleContext, bundleSymbolicName, upgradeInfo);
 
 			serviceRegistrations.add(upgradeStep);
 		}
@@ -132,13 +132,13 @@ public class UpgradeStepRegistratorTracker {
 	}
 
 	private static ServiceRegistration<UpgradeStep> _registerUpgradeStep(
-		BundleContext bundleContext, String upgradeBundleSymbolicName,
+		BundleContext bundleContext, String bundleSymbolicName,
 		UpgradeInfo upgradeInfo) {
 
 		Dictionary<String, Object> properties = new Hashtable<>();
 
 		properties.put(
-			"upgrade.bundle.symbolic.name", upgradeBundleSymbolicName);
+			"upgrade.bundle.symbolic.name", bundleSymbolicName);
 		properties.put("upgrade.db.type", "any");
 		properties.put(
 			"upgrade.from.schema.version",
