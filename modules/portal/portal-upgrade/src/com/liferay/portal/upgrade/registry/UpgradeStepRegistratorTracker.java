@@ -60,7 +60,7 @@ public class UpgradeStepRegistratorTracker {
 		List<ServiceRegistration<UpgradeStep>> serviceRegistrations =
 			new ArrayList<>();
 
-		List<UpgradeInfo> upgradeInfos = buildUpgradeInfos(
+		List<UpgradeInfo> upgradeInfos = createUpgradeInfos(
 			fromSchemaVersionString, toSchemaVersionString, upgradeSteps);
 
 		for (UpgradeInfo upgradeInfo : upgradeInfos) {
@@ -73,7 +73,7 @@ public class UpgradeStepRegistratorTracker {
 		return serviceRegistrations;
 	}
 
-	protected static List<UpgradeInfo> buildUpgradeInfos(
+	protected static List<UpgradeInfo> createUpgradeInfos(
 		String upgradeFromVersion, String upgradeToVersion,
 		UpgradeStep... upgradeSteps) {
 
@@ -120,7 +120,7 @@ public class UpgradeStepRegistratorTracker {
 		String upgradeFromVersion, String upgradeToVersion,
 		Collection<UpgradeStep> upgradeSteps) {
 
-		return buildUpgradeInfos(
+		return createUpgradeInfos(
 			upgradeFromVersion, upgradeToVersion,
 			upgradeSteps.toArray(new UpgradeStep[upgradeSteps.size()]));
 	}
