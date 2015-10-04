@@ -217,7 +217,7 @@ public class ModuleApplicationContextExtender extends AbstractExtender {
 
 			_dependencyManager.add(_component);
 
-			_upgradeStepServiceRegistrations = _installInitialUpgrade();
+			_upgradeStepServiceRegistrations = _processInitialUpgrade();
 		}
 
 		private void _generateReleaseInfo() {
@@ -236,7 +236,7 @@ public class ModuleApplicationContextExtender extends AbstractExtender {
 		}
 
 		private List<ServiceRegistration<UpgradeStep>>
-			_installInitialUpgrade() {
+			_processInitialUpgrade() {
 
 			Dictionary<String, String> headers = _bundle.getHeaders();
 
