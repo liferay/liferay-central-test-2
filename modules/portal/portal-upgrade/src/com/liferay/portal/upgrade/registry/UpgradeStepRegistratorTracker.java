@@ -64,8 +64,8 @@ public class UpgradeStepRegistratorTracker {
 			fromSchemaVersionString, toSchemaVersionString, upgradeSteps);
 
 		for (UpgradeInfo upgradeInfo : upgradeInfos) {
-			ServiceRegistration<UpgradeStep> serviceRegistration =
-				_register(bundleContext, bundleSymbolicName, upgradeInfo);
+			ServiceRegistration<UpgradeStep> serviceRegistration = _register(
+				bundleContext, bundleSymbolicName, upgradeInfo);
 
 			serviceRegistrations.add(serviceRegistration);
 		}
@@ -90,7 +90,7 @@ public class UpgradeStepRegistratorTracker {
 
 			String upgradeInfoToSchemaVersionString =
 				toSchemaVersionString + "-step" + (i - upgradeSteps.length + 1);
-				
+
 			UpgradeInfo upgradeInfo = new UpgradeInfo(
 				upgradeInfoFromSchemaVersionString,
 				upgradeInfoToSchemaVersionString, upgradeStep);
@@ -141,8 +141,7 @@ public class UpgradeStepRegistratorTracker {
 
 		Dictionary<String, Object> properties = new Hashtable<>();
 
-		properties.put(
-			"upgrade.bundle.symbolic.name", bundleSymbolicName);
+		properties.put("upgrade.bundle.symbolic.name", bundleSymbolicName);
 		properties.put("upgrade.db.type", "any");
 		properties.put(
 			"upgrade.from.schema.version",
