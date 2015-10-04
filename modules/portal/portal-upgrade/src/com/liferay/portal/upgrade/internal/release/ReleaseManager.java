@@ -84,7 +84,7 @@ public class ReleaseManager {
 
 		if (size > 1) {
 			throw new IllegalStateException(
-				"There are " + size + " possible end nodes to go from " +
+				"There are " + size + " possible end nodes for " +
 					schemaVersionString);
 		}
 
