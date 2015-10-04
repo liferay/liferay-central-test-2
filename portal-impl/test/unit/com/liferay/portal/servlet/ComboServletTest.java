@@ -114,15 +114,15 @@ public class ComboServletTest extends PowerMockito {
 			_portletLocalService
 		);
 
-		setupComboServlet();
+		setUpComboServlet();
 
-		setupPortalServletContext();
+		setUpPortalServletContext();
 
-		setupPortalPortlet();
+		setUpPortalPortlet();
 
 		_pluginServletContext = spy(new MockServletContext());
 
-		setupTestPortlet();
+		setUpTestPortlet();
 
 		when(
 			_portletUndeployed.isUndeployedPortlet()
@@ -184,7 +184,7 @@ public class ComboServletTest extends PowerMockito {
 		return servletConfig;
 	}
 
-	protected void setupComboServlet() throws ServletException {
+	protected void setUpComboServlet() throws ServletException {
 		_comboServlet = new ComboServlet();
 
 		ServletConfig servletConfig = getServletConfig();
@@ -192,7 +192,7 @@ public class ComboServletTest extends PowerMockito {
 		_comboServlet.init(servletConfig);
 	}
 
-	protected void setupPortalPortlet() {
+	protected void setUpPortalPortlet() {
 		when(
 			_portalPortletApp.getServletContext()
 		).thenReturn(
@@ -212,13 +212,13 @@ public class ComboServletTest extends PowerMockito {
 		);
 	}
 
-	protected void setupPortalServletContext() {
+	protected void setUpPortalServletContext() {
 		_portalServletContext = spy(new MockServletContext());
 
 		_portalServletContext.setContextPath("portal");
 	}
 
-	protected void setupTestPortlet() {
+	protected void setUpTestPortlet() {
 		when(
 			_testPortletApp.getServletContext()
 		).thenReturn(
