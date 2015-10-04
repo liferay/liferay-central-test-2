@@ -53,7 +53,7 @@ public class ReleaseGraphManager {
 
 		endVertices.remove(fromVersionString);
 
-		List<List<UpgradeInfo>> upgradeInfoLists = new ArrayList<>();
+		List<List<UpgradeInfo>> upgradeInfosList = new ArrayList<>();
 
 		for (String endVertex : endVertices) {
 			List<UpgradeInfo> upgradeInfos = getUpgradeInfos(
@@ -63,10 +63,10 @@ public class ReleaseGraphManager {
 				continue;
 			}
 
-			upgradeInfoLists.add(upgradeInfos);
+			upgradeInfosList.add(upgradeInfos);
 		}
 
-		return upgradeInfoLists;
+		return upgradeInfosList;
 	}
 
 	public List<UpgradeInfo> getUpgradeInfos(
