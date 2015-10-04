@@ -38,8 +38,8 @@ public class UpgradeModules extends UpgradeProcess {
 			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
-				"INSERT INTO Release_ VALUES " +
-					" (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+				"insert into Release_ values  (?, ?, ?, ?, ?, ?, ?, ?, ?, " +
+					"?, ?)");
 
 			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
