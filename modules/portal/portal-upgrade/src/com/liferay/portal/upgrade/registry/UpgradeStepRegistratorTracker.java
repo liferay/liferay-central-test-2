@@ -83,22 +83,27 @@ public class UpgradeStepRegistratorTracker {
 
 		List<UpgradeInfo> upgradeInfos = new ArrayList<>();
 
-		String from = fromSchemaVersionString;
+		String upgradeInfoFromSchemaVersionString = fromSchemaVersionString;
 
-		int length = upgradeSteps.length;
-
-		for (int i = 0; i < length - 1; i++) {
+		for (int i = 0; i < upgradeSteps.length - 1; i++) {
 			UpgradeStep upgradeStep = upgradeSteps[i];
 
-			String to = toSchemaVersionString + "-step" + (i - length + 1);
+			String upgradeInfoToSchemaVersionString =
+				toSchemaVersionString + "-step" + (i - upgradeSteps.length + 1);
+				
+			UpgradeInfo upgradeInfo = new UpgradeInfo(
+				upgradeInfoFromSchemaVersionString,
+				upgradeInfoToSchemaVersionString, upgradeStep);
 
-			upgradeInfos.add(new UpgradeInfo(from, to, upgradeStep));
+			upgradeInfos.add(upgradeInfo);
 
-			from = to;
+			upgradeInfoFromSchemaVersionString =
+				upgradeInfoToSchemaVersionString;
 		}
 
 		UpgradeInfo upgradeInfo = new UpgradeInfo(
-			from, toSchemaVersionString, upgradeSteps[length - 1]);
+			upgradeInfoFromSchemaVersionString, toSchemaVersionString,
+			upgradeSteps[upgradeSteps.length - 1]);
 
 		upgradeInfos.add(upgradeInfo);
 
@@ -116,12 +121,12 @@ public class UpgradeStepRegistratorTracker {
 		_serviceTracker.open();
 	}
 
-	protected List<UpgradeInfo> buildUpgradeInfos(
-		String upgradeFromVersion, String upgradeToVersion,
+	protected List<UpgradeInfo> createUpgradeInfos(
+		String fromSchemaVersionString, String toSchemaVersionString,
 		Collection<UpgradeStep> upgradeSteps) {
 
 		return createUpgradeInfos(
-			upgradeFromVersion, upgradeToVersion,
+			fromSchemaVersionString, toSchemaVersionString,
 			upgradeSteps.toArray(new UpgradeStep[upgradeSteps.size()]));
 	}
 
@@ -217,7 +222,7 @@ public class UpgradeStepRegistratorTracker {
 				String toSchemaVersionString,
 				Collection<UpgradeStep> upgradeSteps) {
 
-				List<UpgradeInfo> upgradeInfos = buildUpgradeInfos(
+				List<UpgradeInfo> upgradeInfos = createUpgradeInfos(
 					fromSchemaVersionString, toSchemaVersionString,
 					upgradeSteps);
 
