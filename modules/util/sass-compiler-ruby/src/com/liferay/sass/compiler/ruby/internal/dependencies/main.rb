@@ -44,7 +44,6 @@ class SASSWrapper
 				})
 			
 			return css, sourceMap
-
 		else
 			engine = Sass::Engine.for_file(
 				inputFileName,
