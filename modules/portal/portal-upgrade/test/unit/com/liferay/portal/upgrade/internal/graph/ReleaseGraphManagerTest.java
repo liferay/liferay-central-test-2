@@ -42,7 +42,7 @@ public class ReleaseGraphManagerTest {
 				upgradeInfo1, upgradeInfo2, upgradeInfo3, upgradeInfo4));
 
 		List<List<UpgradeInfo>> upgradePaths =
-			releaseGraphManager.getUpgradeInfos("0.0.0");
+			releaseGraphManager.getUpgradeInfosList("0.0.0");
 
 		Assert.assertEquals(1, upgradePaths.size());
 
@@ -67,7 +67,7 @@ public class ReleaseGraphManagerTest {
 				upgradeInfo5, upgradeInfo6));
 
 		List<List<UpgradeInfo>> upgradePaths =
-			releaseGraphManager.getUpgradeInfos("0.1.0.1");
+			releaseGraphManager.getUpgradeInfosList("0.1.0.1");
 
 		Assert.assertEquals(1, upgradePaths.size());
 
@@ -93,7 +93,7 @@ public class ReleaseGraphManagerTest {
 				upgradeInfo5, upgradeInfo6, upgradeInfo7));
 
 		List<List<UpgradeInfo>> upgradePaths =
-			releaseGraphManager.getUpgradeInfos("0.1.0.1");
+			releaseGraphManager.getUpgradeInfosList("0.1.0.1");
 
 		Assert.assertEquals(2, upgradePaths.size());
 	}
@@ -110,7 +110,7 @@ public class ReleaseGraphManagerTest {
 				upgradeInfo1, upgradeInfo2, upgradeInfo3, upgradeInfo4));
 
 		List<List<UpgradeInfo>> upgradeInfos =
-			releaseGraphManager.getUpgradeInfos("0.0.0");
+			releaseGraphManager.getUpgradeInfosList("0.0.0");
 
 		Assert.assertEquals(0, upgradeInfos.size());
 	}
