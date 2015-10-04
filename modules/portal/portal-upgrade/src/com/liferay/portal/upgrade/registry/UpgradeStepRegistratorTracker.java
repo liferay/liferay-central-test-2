@@ -210,11 +210,12 @@ public class UpgradeStepRegistratorTracker {
 
 			@Override
 			public void register(
-				final String bundleSymbolicName, String fromSchemaVersion,
-				String toSchemaVersion, Collection<UpgradeStep> upgradeSteps) {
+				final String bundleSymbolicName, String fromSchemaVersionString,
+				String toSchemaVersionString,
+				Collection<UpgradeStep> upgradeSteps) {
 
 				List<UpgradeInfo> upgradeInfos = buildUpgradeInfos(
-					fromSchemaVersion, toSchemaVersion, upgradeSteps);
+					fromSchemaVersionString, toSchemaVersionString, upgradeSteps);
 
 				for (UpgradeInfo upgradeInfo : upgradeInfos) {
 					ServiceRegistration<UpgradeStep> serviceRegistration =
