@@ -74,7 +74,7 @@ public class UpgradeStepRegistratorTracker {
 	}
 
 	protected static List<UpgradeInfo> createUpgradeInfos(
-		String upgradeFromVersion, String upgradeToVersion,
+		String fromSchemaVersionString, String toSchemaVersionString,
 		UpgradeStep... upgradeSteps) {
 
 		if (ArrayUtil.isEmpty(upgradeSteps)) {
@@ -83,14 +83,14 @@ public class UpgradeStepRegistratorTracker {
 
 		List<UpgradeInfo> upgradeInfos = new ArrayList<>();
 
-		String from = upgradeFromVersion;
+		String from = fromSchemaVersionString;
 
 		int length = upgradeSteps.length;
 
 		for (int i = 0; i < length - 1; i++) {
 			UpgradeStep upgradeStep = upgradeSteps[i];
 
-			String to = upgradeToVersion + "-step" + (i - length + 1);
+			String to = toSchemaVersionString + "-step" + (i - length + 1);
 
 			upgradeInfos.add(new UpgradeInfo(from, to, upgradeStep));
 
@@ -98,7 +98,7 @@ public class UpgradeStepRegistratorTracker {
 		}
 
 		UpgradeInfo upgradeInfo = new UpgradeInfo(
-			from, upgradeToVersion, upgradeSteps[length - 1]);
+			from, toSchemaVersionString, upgradeSteps[length - 1]);
 
 		upgradeInfos.add(upgradeInfo);
 
