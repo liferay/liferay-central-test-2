@@ -28,8 +28,8 @@ public interface UpgradeStepRegistrator {
 	public interface Registry {
 
 		public void register(
-			String bundleSymbolicName, String from, String to,
-			Collection<UpgradeStep> upgradeSteps);
+			String bundleSymbolicName, String fromSchemaVersion,
+			String toSchemaVersion, Collection<UpgradeStep> upgradeSteps);
 
 	}
 
