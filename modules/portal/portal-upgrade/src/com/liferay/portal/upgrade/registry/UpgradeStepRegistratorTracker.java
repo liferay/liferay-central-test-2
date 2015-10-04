@@ -141,9 +141,11 @@ public class UpgradeStepRegistratorTracker {
 			"upgrade.bundle.symbolic.name", upgradeBundleSymbolicName);
 		properties.put("upgrade.db.type", "any");
 		properties.put(
-			"upgrade.from.schema.version", upgradeInfo.getFromSchemaVersionString());
+			"upgrade.from.schema.version",
+			upgradeInfo.getFromSchemaVersionString());
 		properties.put(
-			"upgrade.to.schema.version", upgradeInfo.getToSchemaVersionString());
+			"upgrade.to.schema.version",
+			upgradeInfo.getToSchemaVersionString());
 
 		return bundleContext.registerService(
 			UpgradeStep.class, upgradeInfo.getUpgradeStep(), properties);
