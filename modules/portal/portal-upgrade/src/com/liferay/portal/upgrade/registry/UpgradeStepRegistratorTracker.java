@@ -168,8 +168,8 @@ public class UpgradeStepRegistratorTracker {
 				return null;
 			}
 
-			final Collection<ServiceRegistration<UpgradeStep>>
-				serviceRegistrations = new ArrayList<>();
+			Collection<ServiceRegistration<UpgradeStep>> serviceRegistrations =
+				new ArrayList<>();
 
 			upgradeStepRegistrator.register(
 				new UpgradeStepRegistry(serviceRegistrations));
