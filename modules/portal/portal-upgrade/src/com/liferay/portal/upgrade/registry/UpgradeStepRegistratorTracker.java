@@ -139,9 +139,9 @@ public class UpgradeStepRegistratorTracker {
 
 		properties.put("upgrade.db.type", "any");
 		properties.put(
-			"upgrade.from.version", upgradeInfo.getFromSchemaVersionString());
+			"upgrade.from.schema.version", upgradeInfo.getFromSchemaVersionString());
 		properties.put(
-			"upgrade.to.version", upgradeInfo.getToSchemaVersionString());
+			"upgrade.to.schema.version", upgradeInfo.getToSchemaVersionString());
 		properties.put(
 			"upgrade.bundle.symbolic.name", upgradeBundleSymbolicName);
 

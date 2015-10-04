@@ -164,7 +164,7 @@ public class ReleaseManager {
 			new UpgradeServiceTrackerCustomizer(bundleContext),
 			Collections.reverseOrder(
 				new PropertyServiceReferenceComparator<UpgradeStep>(
-					"upgrade.from.version")),
+					"upgrade.from.schema.version")),
 			serviceTrackerMapListener);
 
 		_serviceTrackerMap.open();
@@ -314,9 +314,9 @@ public class ReleaseManager {
 			ServiceReference<UpgradeStep> serviceReference) {
 
 			String fromVersionString = (String)serviceReference.getProperty(
-				"upgrade.from.version");
+				"upgrade.from.schema.version");
 			String toVersionString = (String)serviceReference.getProperty(
-				"upgrade.to.version");
+				"upgrade.to.schema.version");
 
 			UpgradeStep upgradeStep = _bundleContext.getService(
 				serviceReference);
