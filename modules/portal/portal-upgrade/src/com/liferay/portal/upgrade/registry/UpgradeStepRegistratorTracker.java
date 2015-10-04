@@ -150,8 +150,9 @@ public class UpgradeStepRegistratorTracker {
 	}
 
 	private BundleContext _bundleContext;
-	private ServiceTracker<UpgradeStepRegistrator,
-		Collection<ServiceRegistration<UpgradeStep>>> _serviceTracker;
+	private ServiceTracker
+		<UpgradeStepRegistrator, Collection<ServiceRegistration<UpgradeStep>>>
+			_serviceTracker;
 
 	private class UpgradeStepRegistratorServiceTrackerCustomizer
 		implements ServiceTrackerCustomizer
