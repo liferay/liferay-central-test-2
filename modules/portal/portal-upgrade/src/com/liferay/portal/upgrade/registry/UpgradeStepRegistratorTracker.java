@@ -215,7 +215,8 @@ public class UpgradeStepRegistratorTracker {
 				Collection<UpgradeStep> upgradeSteps) {
 
 				List<UpgradeInfo> upgradeInfos = buildUpgradeInfos(
-					fromSchemaVersionString, toSchemaVersionString, upgradeSteps);
+					fromSchemaVersionString, toSchemaVersionString,
+					upgradeSteps);
 
 				for (UpgradeInfo upgradeInfo : upgradeInfos) {
 					ServiceRegistration<UpgradeStep> serviceRegistration =
