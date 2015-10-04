@@ -246,7 +246,8 @@ public class ModuleApplicationContextExtender extends AbstractExtender {
 
 			return UpgradeStepRegistratorTracker.register(
 				_bundleContext, _bundle.getSymbolicName(), "0.0.0",
-				upgradeToSchemaVersion, new UpgradeStep() {
+				upgradeToSchemaVersion,
+				new UpgradeStep() {
 
 					@Override
 					public void upgrade(DBProcessContext dbProcessContext) {
@@ -270,6 +271,7 @@ public class ModuleApplicationContextExtender extends AbstractExtender {
 							new UpgradeException(e);
 						}
 					}
+
 				});
 		}
 
