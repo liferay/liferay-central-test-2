@@ -120,7 +120,7 @@ public class ComboServletTest extends PowerMockito {
 
 		setUpPortalPortlet();
 
-		_pluginServletContext = spy(new MockServletContext());
+		setUpPluginServletContext();
 
 		setUpTestPortlet();
 
@@ -190,6 +190,10 @@ public class ComboServletTest extends PowerMockito {
 		ServletConfig servletConfig = getServletConfig();
 
 		_comboServlet.init(servletConfig);
+	}
+
+	protected void setUpPluginServletContext() {
+		_pluginServletContext = spy(new MockServletContext());
 	}
 
 	protected void setUpPortalPortlet() {
