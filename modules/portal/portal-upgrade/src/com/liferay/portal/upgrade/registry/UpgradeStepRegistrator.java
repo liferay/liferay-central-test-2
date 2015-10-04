@@ -29,8 +29,7 @@ public interface UpgradeStepRegistrator {
 
 		public void register(
 			String bundleSymbolicName, String fromSchemaVersionString,
-			String toSchemaVersionString,
-			Collection<UpgradeStep> upgradeSteps);
+			String toSchemaVersionString, Collection<UpgradeStep> upgradeSteps);
 
 	}
 
