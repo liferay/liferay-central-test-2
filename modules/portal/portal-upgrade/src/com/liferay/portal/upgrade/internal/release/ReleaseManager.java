@@ -244,8 +244,9 @@ public class ReleaseManager {
 
 		@Override
 		public void keyEmitted(
-			ServiceTrackerMap<String, List<UpgradeInfo>> map, final String key,
-			UpgradeInfo service, List<UpgradeInfo> content) {
+			ServiceTrackerMap<String, List<UpgradeInfo>> serviceTrackerMap,
+			final String key, UpgradeInfo upgradeInfo,
+			List<UpgradeInfo> upgradeInfos) {
 
 			execute(key);
 		}
