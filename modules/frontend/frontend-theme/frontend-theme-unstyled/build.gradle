@@ -84,10 +84,7 @@ buildLexicon {
 				return line
 			}
 		}
-	}
-
-	eachFile {
-		if (name in ["atlas-variables.scss", "lexicon-base-variables.scss"]) {
+		else if (name in ["atlas-variables.scss", "lexicon-base-variables.scss"]) {
 			filter {
 				String line ->
 
