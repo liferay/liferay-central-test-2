@@ -96,12 +96,15 @@ public class GoogleGadgetServlet extends HttpServlet {
 
 		String title = portlet.getDisplayName();
 
-		String widgetJsURL = PortalUtil.getPortalURL(
-			request) + PortalWebResourcesUtil.getContextPath(
-				PortalWebResourceConstants.RESOURCE_TYPE_JS) +
-			"/liferay/widget.js";
+		String portalURL = PortalUtil.getPortalURL(request);
 
-		String widgetURL = request.getRequestURL().toString();
+		String widgetJsURL = portalURL;
+
+		widgetJsURL += PortalWebResourcesUtil.getContextPath(
+			PortalWebResourceConstants.RESOURCE_TYPE_JS);
+		widgetJsURL += "/liferay/widget.js";
+
+		String widgetURL = String.valueOf(request.getRequestURL());
 
 		widgetURL = widgetURL.replaceFirst(
 			PropsValues.GOOGLE_GADGET_SERVLET_MAPPING,
