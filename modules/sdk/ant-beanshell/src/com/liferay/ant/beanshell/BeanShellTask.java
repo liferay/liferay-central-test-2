@@ -23,7 +23,7 @@ import org.apache.tools.ant.Task;
 /**
  * @author Peter Yoo
  */
-public class BeanshellTask extends Task {
+public class BeanShellTask extends Task {
 
 	public void addText(String text) {
 		_text = text;
