@@ -107,7 +107,6 @@ public class AssetEntryFinderImpl
 			sql = StringUtil.replace(
 				sql, "[$JOIN$]", CustomSQLUtil.get(
 					DLFileEntryFinderImpl.JOIN_AE_BY_DL_FILE_ENTRY));
-
 			sql = StringUtil.replace(
 				sql, "[$WHERE$]", "DLFileEntry.treePath LIKE ? AND");
 
@@ -145,7 +144,6 @@ public class AssetEntryFinderImpl
 			sql = StringUtil.replace(
 				sql, "[$JOIN$]", CustomSQLUtil.get(
 					DLFolderFinderImpl.JOIN_AE_BY_DL_FOLDER));
-
 			sql = StringUtil.replace(
 				sql, "[$WHERE$]", "DLFolder.treePath LIKE ? AND");
 
