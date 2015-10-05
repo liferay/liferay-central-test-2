@@ -1056,7 +1056,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 	 * @param start the lower bound of the range of ${entity.humanNames}
 	 * @param end the upper bound of the range of ${entity.humanNames} (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to use the finder cache
+	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of ${entity.humanNames}
 	 */
 	@Override
