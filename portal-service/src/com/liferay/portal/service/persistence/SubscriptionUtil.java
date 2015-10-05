@@ -165,7 +165,7 @@ public class SubscriptionUtil {
 	* @param start the lower bound of the range of subscriptions
 	* @param end the upper bound of the range of subscriptions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching subscriptions
 	*/
 	public static List<Subscription> findByUserId(long userId, int start,
@@ -325,7 +325,7 @@ public class SubscriptionUtil {
 	* @param start the lower bound of the range of subscriptions
 	* @param end the upper bound of the range of subscriptions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching subscriptions
 	*/
 	public static List<Subscription> findByG_U(long groupId, long userId,
@@ -497,7 +497,7 @@ public class SubscriptionUtil {
 	* @param start the lower bound of the range of subscriptions
 	* @param end the upper bound of the range of subscriptions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching subscriptions
 	*/
 	public static List<Subscription> findByU_C(long userId, long classNameId,
@@ -677,7 +677,7 @@ public class SubscriptionUtil {
 	* @param start the lower bound of the range of subscriptions
 	* @param end the upper bound of the range of subscriptions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching subscriptions
 	*/
 	public static List<Subscription> findByC_C_C(long companyId,
@@ -885,7 +885,7 @@ public class SubscriptionUtil {
 	* @param start the lower bound of the range of subscriptions
 	* @param end the upper bound of the range of subscriptions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching subscriptions
 	*/
 	public static List<Subscription> findByC_U_C_C(long companyId, long userId,
@@ -936,7 +936,7 @@ public class SubscriptionUtil {
 	* @param userId the user ID
 	* @param classNameId the class name ID
 	* @param classPK the class p k
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching subscription, or <code>null</code> if a matching subscription could not be found
 	*/
 	public static Subscription fetchByC_U_C_C(long companyId, long userId,
@@ -1114,7 +1114,7 @@ public class SubscriptionUtil {
 	* @param start the lower bound of the range of subscriptions
 	* @param end the upper bound of the range of subscriptions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of subscriptions
 	*/
 	public static List<Subscription> findAll(int start, int end,

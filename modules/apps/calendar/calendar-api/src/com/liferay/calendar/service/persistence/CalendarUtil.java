@@ -170,7 +170,7 @@ public class CalendarUtil {
 	* @param start the lower bound of the range of calendars
 	* @param end the upper bound of the range of calendars (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching calendars
 	*/
 	public static List<Calendar> findByResourceBlockId(long resourceBlockId,
@@ -334,7 +334,7 @@ public class CalendarUtil {
 	* @param start the lower bound of the range of calendars
 	* @param end the upper bound of the range of calendars (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching calendars
 	*/
 	public static List<Calendar> findByUuid(java.lang.String uuid, int start,
@@ -461,7 +461,7 @@ public class CalendarUtil {
 	*
 	* @param uuid the uuid
 	* @param groupId the group ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching calendar, or <code>null</code> if a matching calendar could not be found
 	*/
 	public static Calendar fetchByUUID_G(java.lang.String uuid, long groupId,
@@ -555,7 +555,7 @@ public class CalendarUtil {
 	* @param start the lower bound of the range of calendars
 	* @param end the upper bound of the range of calendars (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching calendars
 	*/
 	public static List<Calendar> findByUuid_C(java.lang.String uuid,
@@ -730,7 +730,7 @@ public class CalendarUtil {
 	* @param start the lower bound of the range of calendars
 	* @param end the upper bound of the range of calendars (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching calendars
 	*/
 	public static List<Calendar> findByG_C(long groupId,
@@ -999,7 +999,7 @@ public class CalendarUtil {
 	* @param start the lower bound of the range of calendars
 	* @param end the upper bound of the range of calendars (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching calendars
 	*/
 	public static List<Calendar> findByG_C_D(long groupId,
@@ -1345,7 +1345,7 @@ public class CalendarUtil {
 	* @param start the lower bound of the range of calendars
 	* @param end the upper bound of the range of calendars (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of calendars
 	*/
 	public static List<Calendar> findAll(int start, int end,

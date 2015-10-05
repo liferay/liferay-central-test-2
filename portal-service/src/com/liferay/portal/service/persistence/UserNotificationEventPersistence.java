@@ -90,7 +90,7 @@ public interface UserNotificationEventPersistence extends BasePersistence<UserNo
 	* @param start the lower bound of the range of user notification events
 	* @param end the upper bound of the range of user notification events (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching user notification events
 	*/
 	public java.util.List<UserNotificationEvent> findByUuid(
@@ -227,7 +227,7 @@ public interface UserNotificationEventPersistence extends BasePersistence<UserNo
 	* @param start the lower bound of the range of user notification events
 	* @param end the upper bound of the range of user notification events (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching user notification events
 	*/
 	public java.util.List<UserNotificationEvent> findByUuid_C(
@@ -370,7 +370,7 @@ public interface UserNotificationEventPersistence extends BasePersistence<UserNo
 	* @param start the lower bound of the range of user notification events
 	* @param end the upper bound of the range of user notification events (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching user notification events
 	*/
 	public java.util.List<UserNotificationEvent> findByUserId(long userId,
@@ -507,7 +507,7 @@ public interface UserNotificationEventPersistence extends BasePersistence<UserNo
 	* @param start the lower bound of the range of user notification events
 	* @param end the upper bound of the range of user notification events (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching user notification events
 	*/
 	public java.util.List<UserNotificationEvent> findByU_DT(long userId,
@@ -654,7 +654,7 @@ public interface UserNotificationEventPersistence extends BasePersistence<UserNo
 	* @param start the lower bound of the range of user notification events
 	* @param end the upper bound of the range of user notification events (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching user notification events
 	*/
 	public java.util.List<UserNotificationEvent> findByU_D(long userId,
@@ -801,7 +801,7 @@ public interface UserNotificationEventPersistence extends BasePersistence<UserNo
 	* @param start the lower bound of the range of user notification events
 	* @param end the upper bound of the range of user notification events (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching user notification events
 	*/
 	public java.util.List<UserNotificationEvent> findByU_A(long userId,
@@ -950,7 +950,7 @@ public interface UserNotificationEventPersistence extends BasePersistence<UserNo
 	* @param start the lower bound of the range of user notification events
 	* @param end the upper bound of the range of user notification events (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching user notification events
 	*/
 	public java.util.List<UserNotificationEvent> findByU_DT_D(long userId,
@@ -1110,7 +1110,7 @@ public interface UserNotificationEventPersistence extends BasePersistence<UserNo
 	* @param start the lower bound of the range of user notification events
 	* @param end the upper bound of the range of user notification events (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching user notification events
 	*/
 	public java.util.List<UserNotificationEvent> findByU_DT_A(long userId,
@@ -1270,7 +1270,7 @@ public interface UserNotificationEventPersistence extends BasePersistence<UserNo
 	* @param start the lower bound of the range of user notification events
 	* @param end the upper bound of the range of user notification events (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching user notification events
 	*/
 	public java.util.List<UserNotificationEvent> findByU_D_A(long userId,
@@ -1432,7 +1432,7 @@ public interface UserNotificationEventPersistence extends BasePersistence<UserNo
 	* @param start the lower bound of the range of user notification events
 	* @param end the upper bound of the range of user notification events (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching user notification events
 	*/
 	public java.util.List<UserNotificationEvent> findByU_A_A(long userId,
@@ -1600,7 +1600,7 @@ public interface UserNotificationEventPersistence extends BasePersistence<UserNo
 	* @param start the lower bound of the range of user notification events
 	* @param end the upper bound of the range of user notification events (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching user notification events
 	*/
 	public java.util.List<UserNotificationEvent> findByU_DT_D_A(long userId,
@@ -1776,7 +1776,7 @@ public interface UserNotificationEventPersistence extends BasePersistence<UserNo
 	* @param start the lower bound of the range of user notification events
 	* @param end the upper bound of the range of user notification events (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching user notification events
 	*/
 	public java.util.List<UserNotificationEvent> findByU_DT_A_A(long userId,
@@ -1989,7 +1989,7 @@ public interface UserNotificationEventPersistence extends BasePersistence<UserNo
 	* @param start the lower bound of the range of user notification events
 	* @param end the upper bound of the range of user notification events (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of user notification events
 	*/
 	public java.util.List<UserNotificationEvent> findAll(int start, int end,

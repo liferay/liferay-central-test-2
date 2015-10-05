@@ -91,7 +91,7 @@ public interface AnnouncementsEntryPersistence extends BasePersistence<Announcem
 	* @param start the lower bound of the range of announcements entries
 	* @param end the upper bound of the range of announcements entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching announcements entries
 	*/
 	public java.util.List<AnnouncementsEntry> findByUuid(
@@ -291,7 +291,7 @@ public interface AnnouncementsEntryPersistence extends BasePersistence<Announcem
 	* @param start the lower bound of the range of announcements entries
 	* @param end the upper bound of the range of announcements entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching announcements entries
 	*/
 	public java.util.List<AnnouncementsEntry> findByUuid_C(
@@ -502,7 +502,7 @@ public interface AnnouncementsEntryPersistence extends BasePersistence<Announcem
 	* @param start the lower bound of the range of announcements entries
 	* @param end the upper bound of the range of announcements entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching announcements entries
 	*/
 	public java.util.List<AnnouncementsEntry> findByUserId(long userId,
@@ -701,7 +701,7 @@ public interface AnnouncementsEntryPersistence extends BasePersistence<Announcem
 	* @param start the lower bound of the range of announcements entries
 	* @param end the upper bound of the range of announcements entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching announcements entries
 	*/
 	public java.util.List<AnnouncementsEntry> findByC_C(long classNameId,
@@ -917,7 +917,7 @@ public interface AnnouncementsEntryPersistence extends BasePersistence<Announcem
 	* @param start the lower bound of the range of announcements entries
 	* @param end the upper bound of the range of announcements entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching announcements entries
 	*/
 	public java.util.List<AnnouncementsEntry> findByC_C_A(long classNameId,
@@ -1191,7 +1191,7 @@ public interface AnnouncementsEntryPersistence extends BasePersistence<Announcem
 	* @param start the lower bound of the range of announcements entries
 	* @param end the upper bound of the range of announcements entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of announcements entries
 	*/
 	public java.util.List<AnnouncementsEntry> findAll(int start, int end,

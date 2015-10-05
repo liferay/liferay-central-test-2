@@ -91,7 +91,7 @@ public interface ShoppingCouponPersistence extends BasePersistence<ShoppingCoupo
 	* @param start the lower bound of the range of shopping coupons
 	* @param end the upper bound of the range of shopping coupons (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching shopping coupons
 	*/
 	public java.util.List<ShoppingCoupon> findByGroupId(long groupId,
@@ -194,7 +194,7 @@ public interface ShoppingCouponPersistence extends BasePersistence<ShoppingCoupo
 	* Returns the shopping coupon where code = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
 	* @param code the code
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching shopping coupon, or <code>null</code> if a matching shopping coupon could not be found
 	*/
 	public ShoppingCoupon fetchByCode(java.lang.String code,
@@ -318,7 +318,7 @@ public interface ShoppingCouponPersistence extends BasePersistence<ShoppingCoupo
 	* @param start the lower bound of the range of shopping coupons
 	* @param end the upper bound of the range of shopping coupons (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of shopping coupons
 	*/
 	public java.util.List<ShoppingCoupon> findAll(int start, int end,

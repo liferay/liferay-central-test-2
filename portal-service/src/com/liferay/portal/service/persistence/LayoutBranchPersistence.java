@@ -90,7 +90,7 @@ public interface LayoutBranchPersistence extends BasePersistence<LayoutBranch> {
 	* @param start the lower bound of the range of layout branchs
 	* @param end the upper bound of the range of layout branchs (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching layout branchs
 	*/
 	public java.util.List<LayoutBranch> findByLayoutSetBranchId(
@@ -227,7 +227,7 @@ public interface LayoutBranchPersistence extends BasePersistence<LayoutBranch> {
 	* @param start the lower bound of the range of layout branchs
 	* @param end the upper bound of the range of layout branchs (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching layout branchs
 	*/
 	public java.util.List<LayoutBranch> findByL_P(long layoutSetBranchId,
@@ -345,7 +345,7 @@ public interface LayoutBranchPersistence extends BasePersistence<LayoutBranch> {
 	* @param layoutSetBranchId the layout set branch ID
 	* @param plid the plid
 	* @param name the name
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching layout branch, or <code>null</code> if a matching layout branch could not be found
 	*/
 	public LayoutBranch fetchByL_P_N(long layoutSetBranchId, long plid,
@@ -434,7 +434,7 @@ public interface LayoutBranchPersistence extends BasePersistence<LayoutBranch> {
 	* @param start the lower bound of the range of layout branchs
 	* @param end the upper bound of the range of layout branchs (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching layout branchs
 	*/
 	public java.util.List<LayoutBranch> findByL_P_M(long layoutSetBranchId,
@@ -634,7 +634,7 @@ public interface LayoutBranchPersistence extends BasePersistence<LayoutBranch> {
 	* @param start the lower bound of the range of layout branchs
 	* @param end the upper bound of the range of layout branchs (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of layout branchs
 	*/
 	public java.util.List<LayoutBranch> findAll(int start, int end,

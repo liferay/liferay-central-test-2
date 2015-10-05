@@ -165,7 +165,7 @@ public class MBDiscussionUtil {
 	* @param start the lower bound of the range of message boards discussions
 	* @param end the upper bound of the range of message boards discussions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message boards discussions
 	*/
 	public static List<MBDiscussion> findByUuid(java.lang.String uuid,
@@ -292,7 +292,7 @@ public class MBDiscussionUtil {
 	*
 	* @param uuid the uuid
 	* @param groupId the group ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching message boards discussion, or <code>null</code> if a matching message boards discussion could not be found
 	*/
 	public static MBDiscussion fetchByUUID_G(java.lang.String uuid,
@@ -387,7 +387,7 @@ public class MBDiscussionUtil {
 	* @param start the lower bound of the range of message boards discussions
 	* @param end the upper bound of the range of message boards discussions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message boards discussions
 	*/
 	public static List<MBDiscussion> findByUuid_C(java.lang.String uuid,
@@ -556,7 +556,7 @@ public class MBDiscussionUtil {
 	* @param start the lower bound of the range of message boards discussions
 	* @param end the upper bound of the range of message boards discussions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message boards discussions
 	*/
 	public static List<MBDiscussion> findByClassNameId(long classNameId,
@@ -686,7 +686,7 @@ public class MBDiscussionUtil {
 	* Returns the message boards discussion where threadId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
 	* @param threadId the thread ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching message boards discussion, or <code>null</code> if a matching message boards discussion could not be found
 	*/
 	public static MBDiscussion fetchByThreadId(long threadId,
@@ -744,7 +744,7 @@ public class MBDiscussionUtil {
 	*
 	* @param classNameId the class name ID
 	* @param classPK the class p k
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching message boards discussion, or <code>null</code> if a matching message boards discussion could not be found
 	*/
 	public static MBDiscussion fetchByC_C(long classNameId, long classPK,
@@ -898,7 +898,7 @@ public class MBDiscussionUtil {
 	* @param start the lower bound of the range of message boards discussions
 	* @param end the upper bound of the range of message boards discussions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of message boards discussions
 	*/
 	public static List<MBDiscussion> findAll(int start, int end,

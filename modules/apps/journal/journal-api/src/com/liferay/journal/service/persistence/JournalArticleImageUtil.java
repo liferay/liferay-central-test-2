@@ -171,7 +171,7 @@ public class JournalArticleImageUtil {
 	* @param start the lower bound of the range of journal article images
 	* @param end the upper bound of the range of journal article images (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching journal article images
 	*/
 	public static List<JournalArticleImage> findByGroupId(long groupId,
@@ -330,7 +330,7 @@ public class JournalArticleImageUtil {
 	* @param start the lower bound of the range of journal article images
 	* @param end the upper bound of the range of journal article images (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching journal article images
 	*/
 	public static List<JournalArticleImage> findByTempImage(boolean tempImage,
@@ -505,7 +505,7 @@ public class JournalArticleImageUtil {
 	* @param start the lower bound of the range of journal article images
 	* @param end the upper bound of the range of journal article images (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching journal article images
 	*/
 	public static List<JournalArticleImage> findByG_A_V(long groupId,
@@ -685,7 +685,7 @@ public class JournalArticleImageUtil {
 	* @param elInstanceId the el instance ID
 	* @param elName the el name
 	* @param languageId the language ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching journal article image, or <code>null</code> if a matching journal article image could not be found
 	*/
 	public static JournalArticleImage fetchByG_A_V_E_E_L(long groupId,
@@ -862,7 +862,7 @@ public class JournalArticleImageUtil {
 	* @param start the lower bound of the range of journal article images
 	* @param end the upper bound of the range of journal article images (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of journal article images
 	*/
 	public static List<JournalArticleImage> findAll(int start, int end,

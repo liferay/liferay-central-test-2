@@ -168,7 +168,7 @@ public class DDLRecordUtil {
 	* @param start the lower bound of the range of d d l records
 	* @param end the upper bound of the range of d d l records (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d l records
 	*/
 	public static List<DDLRecord> findByUuid(java.lang.String uuid, int start,
@@ -295,7 +295,7 @@ public class DDLRecordUtil {
 	*
 	* @param uuid the uuid
 	* @param groupId the group ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching d d l record, or <code>null</code> if a matching d d l record could not be found
 	*/
 	public static DDLRecord fetchByUUID_G(java.lang.String uuid, long groupId,
@@ -389,7 +389,7 @@ public class DDLRecordUtil {
 	* @param start the lower bound of the range of d d l records
 	* @param end the upper bound of the range of d d l records (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d l records
 	*/
 	public static List<DDLRecord> findByUuid_C(java.lang.String uuid,
@@ -558,7 +558,7 @@ public class DDLRecordUtil {
 	* @param start the lower bound of the range of d d l records
 	* @param end the upper bound of the range of d d l records (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d l records
 	*/
 	public static List<DDLRecord> findByCompanyId(long companyId, int start,
@@ -718,7 +718,7 @@ public class DDLRecordUtil {
 	* @param start the lower bound of the range of d d l records
 	* @param end the upper bound of the range of d d l records (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d l records
 	*/
 	public static List<DDLRecord> findByRecordSetId(long recordSetId,
@@ -882,7 +882,7 @@ public class DDLRecordUtil {
 	* @param start the lower bound of the range of d d l records
 	* @param end the upper bound of the range of d d l records (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d l records
 	*/
 	public static List<DDLRecord> findByR_U(long recordSetId, long userId,
@@ -1115,7 +1115,7 @@ public class DDLRecordUtil {
 	* @param start the lower bound of the range of d d l records
 	* @param end the upper bound of the range of d d l records (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of d d l records
 	*/
 	public static List<DDLRecord> findAll(int start, int end,

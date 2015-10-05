@@ -90,7 +90,7 @@ public interface KaleoNotificationPersistence extends BasePersistence<KaleoNotif
 	* @param start the lower bound of the range of kaleo notifications
 	* @param end the upper bound of the range of kaleo notifications (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching kaleo notifications
 	*/
 	public java.util.List<KaleoNotification> findByCompanyId(long companyId,
@@ -223,7 +223,7 @@ public interface KaleoNotificationPersistence extends BasePersistence<KaleoNotif
 	* @param start the lower bound of the range of kaleo notifications
 	* @param end the upper bound of the range of kaleo notifications (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching kaleo notifications
 	*/
 	public java.util.List<KaleoNotification> findByKaleoDefinitionId(
@@ -364,7 +364,7 @@ public interface KaleoNotificationPersistence extends BasePersistence<KaleoNotif
 	* @param start the lower bound of the range of kaleo notifications
 	* @param end the upper bound of the range of kaleo notifications (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching kaleo notifications
 	*/
 	public java.util.List<KaleoNotification> findByKCN_KCPK(
@@ -522,7 +522,7 @@ public interface KaleoNotificationPersistence extends BasePersistence<KaleoNotif
 	* @param start the lower bound of the range of kaleo notifications
 	* @param end the upper bound of the range of kaleo notifications (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching kaleo notifications
 	*/
 	public java.util.List<KaleoNotification> findByKCN_KCPK_ET(
@@ -731,7 +731,7 @@ public interface KaleoNotificationPersistence extends BasePersistence<KaleoNotif
 	* @param start the lower bound of the range of kaleo notifications
 	* @param end the upper bound of the range of kaleo notifications (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of kaleo notifications
 	*/
 	public java.util.List<KaleoNotification> findAll(int start, int end,

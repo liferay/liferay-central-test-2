@@ -168,7 +168,7 @@ public class DDMTemplateUtil {
 	* @param start the lower bound of the range of d d m templates
 	* @param end the upper bound of the range of d d m templates (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d m templates
 	*/
 	public static List<DDMTemplate> findByUuid(java.lang.String uuid,
@@ -295,7 +295,7 @@ public class DDMTemplateUtil {
 	*
 	* @param uuid the uuid
 	* @param groupId the group ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching d d m template, or <code>null</code> if a matching d d m template could not be found
 	*/
 	public static DDMTemplate fetchByUUID_G(java.lang.String uuid,
@@ -389,7 +389,7 @@ public class DDMTemplateUtil {
 	* @param start the lower bound of the range of d d m templates
 	* @param end the upper bound of the range of d d m templates (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d m templates
 	*/
 	public static List<DDMTemplate> findByUuid_C(java.lang.String uuid,
@@ -558,7 +558,7 @@ public class DDMTemplateUtil {
 	* @param start the lower bound of the range of d d m templates
 	* @param end the upper bound of the range of d d m templates (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d m templates
 	*/
 	public static List<DDMTemplate> findByGroupId(long groupId, int start,
@@ -788,7 +788,7 @@ public class DDMTemplateUtil {
 	* @param start the lower bound of the range of d d m templates
 	* @param end the upper bound of the range of d d m templates (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d m templates
 	*/
 	public static List<DDMTemplate> findByClassPK(long classPK, int start,
@@ -946,7 +946,7 @@ public class DDMTemplateUtil {
 	* @param start the lower bound of the range of d d m templates
 	* @param end the upper bound of the range of d d m templates (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d m templates
 	*/
 	public static List<DDMTemplate> findByTemplateKey(
@@ -1111,7 +1111,7 @@ public class DDMTemplateUtil {
 	* @param start the lower bound of the range of d d m templates
 	* @param end the upper bound of the range of d d m templates (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d m templates
 	*/
 	public static List<DDMTemplate> findByType(java.lang.String type,
@@ -1266,7 +1266,7 @@ public class DDMTemplateUtil {
 	* @param start the lower bound of the range of d d m templates
 	* @param end the upper bound of the range of d d m templates (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d m templates
 	*/
 	public static List<DDMTemplate> findByLanguage(java.lang.String language,
@@ -1393,7 +1393,7 @@ public class DDMTemplateUtil {
 	* Returns the d d m template where smallImageId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
 	* @param smallImageId the small image ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching d d m template, or <code>null</code> if a matching d d m template could not be found
 	*/
 	public static DDMTemplate fetchBySmallImageId(long smallImageId,
@@ -1485,7 +1485,7 @@ public class DDMTemplateUtil {
 	* @param start the lower bound of the range of d d m templates
 	* @param end the upper bound of the range of d d m templates (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d m templates
 	*/
 	public static List<DDMTemplate> findByG_C(long groupId, long classNameId,
@@ -1739,7 +1739,7 @@ public class DDMTemplateUtil {
 	* @param start the lower bound of the range of d d m templates
 	* @param end the upper bound of the range of d d m templates (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d m templates
 	*/
 	public static List<DDMTemplate> findByG_CPK(long groupId, long classPK,
@@ -2016,7 +2016,7 @@ public class DDMTemplateUtil {
 	* @param start the lower bound of the range of d d m templates
 	* @param end the upper bound of the range of d d m templates (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d m templates
 	*/
 	public static List<DDMTemplate> findByG_CPK(long[] groupIds, long classPK,
@@ -2150,7 +2150,7 @@ public class DDMTemplateUtil {
 	* @param start the lower bound of the range of d d m templates
 	* @param end the upper bound of the range of d d m templates (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d m templates
 	*/
 	public static List<DDMTemplate> findByG_C_C(long groupId, long classNameId,
@@ -2456,7 +2456,7 @@ public class DDMTemplateUtil {
 	* @param start the lower bound of the range of d d m templates
 	* @param end the upper bound of the range of d d m templates (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d m templates
 	*/
 	public static List<DDMTemplate> findByG_C_C(long[] groupIds,
@@ -2566,7 +2566,7 @@ public class DDMTemplateUtil {
 	* @param groupId the group ID
 	* @param classNameId the class name ID
 	* @param templateKey the template key
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching d d m template, or <code>null</code> if a matching d d m template could not be found
 	*/
 	public static DDMTemplate fetchByG_C_T(long groupId, long classNameId,
@@ -2672,7 +2672,7 @@ public class DDMTemplateUtil {
 	* @param start the lower bound of the range of d d m templates
 	* @param end the upper bound of the range of d d m templates (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d m templates
 	*/
 	public static List<DDMTemplate> findByC_C_T(long classNameId, long classPK,
@@ -2874,7 +2874,7 @@ public class DDMTemplateUtil {
 	* @param start the lower bound of the range of d d m templates
 	* @param end the upper bound of the range of d d m templates (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d m templates
 	*/
 	public static List<DDMTemplate> findByG_C_C_T(long groupId,
@@ -3191,7 +3191,7 @@ public class DDMTemplateUtil {
 	* @param start the lower bound of the range of d d m templates
 	* @param end the upper bound of the range of d d m templates (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d m templates
 	*/
 	public static List<DDMTemplate> findByG_C_C_T_M(long groupId,
@@ -3567,7 +3567,7 @@ public class DDMTemplateUtil {
 	* @param start the lower bound of the range of d d m templates
 	* @param end the upper bound of the range of d d m templates (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of d d m templates
 	*/
 	public static List<DDMTemplate> findAll(int start, int end,

@@ -169,7 +169,7 @@ public class SocialActivitySettingUtil {
 	* @param start the lower bound of the range of social activity settings
 	* @param end the upper bound of the range of social activity settings (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social activity settings
 	*/
 	public static List<SocialActivitySetting> findByGroupId(long groupId,
@@ -334,7 +334,7 @@ public class SocialActivitySettingUtil {
 	* @param start the lower bound of the range of social activity settings
 	* @param end the upper bound of the range of social activity settings (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social activity settings
 	*/
 	public static List<SocialActivitySetting> findByG_C(long groupId,
@@ -514,7 +514,7 @@ public class SocialActivitySettingUtil {
 	* @param start the lower bound of the range of social activity settings
 	* @param end the upper bound of the range of social activity settings (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social activity settings
 	*/
 	public static List<SocialActivitySetting> findByG_A(long groupId,
@@ -699,7 +699,7 @@ public class SocialActivitySettingUtil {
 	* @param start the lower bound of the range of social activity settings
 	* @param end the upper bound of the range of social activity settings (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social activity settings
 	*/
 	public static List<SocialActivitySetting> findByG_C_A(long groupId,
@@ -868,7 +868,7 @@ public class SocialActivitySettingUtil {
 	* @param classNameId the class name ID
 	* @param activityType the activity type
 	* @param name the name
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching social activity setting, or <code>null</code> if a matching social activity setting could not be found
 	*/
 	public static SocialActivitySetting fetchByG_C_A_N(long groupId,
@@ -1035,7 +1035,7 @@ public class SocialActivitySettingUtil {
 	* @param start the lower bound of the range of social activity settings
 	* @param end the upper bound of the range of social activity settings (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of social activity settings
 	*/
 	public static List<SocialActivitySetting> findAll(int start, int end,

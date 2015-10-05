@@ -91,7 +91,7 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 	* @param start the lower bound of the range of d d m structures
 	* @param end the upper bound of the range of d d m structures (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d m structures
 	*/
 	public java.util.List<DDMStructure> findByUuid(java.lang.String uuid,
@@ -197,7 +197,7 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 	*
 	* @param uuid the uuid
 	* @param groupId the group ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching d d m structure, or <code>null</code> if a matching d d m structure could not be found
 	*/
 	public DDMStructure fetchByUUID_G(java.lang.String uuid, long groupId,
@@ -278,7 +278,7 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 	* @param start the lower bound of the range of d d m structures
 	* @param end the upper bound of the range of d d m structures (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d m structures
 	*/
 	public java.util.List<DDMStructure> findByUuid_C(java.lang.String uuid,
@@ -421,7 +421,7 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 	* @param start the lower bound of the range of d d m structures
 	* @param end the upper bound of the range of d d m structures (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d m structures
 	*/
 	public java.util.List<DDMStructure> findByGroupId(long groupId, int start,
@@ -636,7 +636,7 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 	* @param start the lower bound of the range of d d m structures
 	* @param end the upper bound of the range of d d m structures (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d m structures
 	*/
 	public java.util.List<DDMStructure> findByGroupId(long[] groupIds,
@@ -735,7 +735,7 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 	* @param start the lower bound of the range of d d m structures
 	* @param end the upper bound of the range of d d m structures (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d m structures
 	*/
 	public java.util.List<DDMStructure> findByParentStructureId(
@@ -867,7 +867,7 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 	* @param start the lower bound of the range of d d m structures
 	* @param end the upper bound of the range of d d m structures (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d m structures
 	*/
 	public java.util.List<DDMStructure> findByClassNameId(long classNameId,
@@ -1000,7 +1000,7 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 	* @param start the lower bound of the range of d d m structures
 	* @param end the upper bound of the range of d d m structures (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d m structures
 	*/
 	public java.util.List<DDMStructure> findByStructureKey(
@@ -1140,7 +1140,7 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 	* @param start the lower bound of the range of d d m structures
 	* @param end the upper bound of the range of d d m structures (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d m structures
 	*/
 	public java.util.List<DDMStructure> findByG_P(long groupId,
@@ -1351,7 +1351,7 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 	* @param start the lower bound of the range of d d m structures
 	* @param end the upper bound of the range of d d m structures (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d m structures
 	*/
 	public java.util.List<DDMStructure> findByG_C(long groupId,
@@ -1585,7 +1585,7 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 	* @param start the lower bound of the range of d d m structures
 	* @param end the upper bound of the range of d d m structures (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d m structures
 	*/
 	public java.util.List<DDMStructure> findByG_C(long[] groupIds,
@@ -1693,7 +1693,7 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 	* @param start the lower bound of the range of d d m structures
 	* @param end the upper bound of the range of d d m structures (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d m structures
 	*/
 	public java.util.List<DDMStructure> findByC_C(long companyId,
@@ -1811,7 +1811,7 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 	* @param groupId the group ID
 	* @param classNameId the class name ID
 	* @param structureKey the structure key
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching d d m structure, or <code>null</code> if a matching d d m structure could not be found
 	*/
 	public DDMStructure fetchByG_C_S(long groupId, long classNameId,
@@ -1901,7 +1901,7 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 	* @param start the lower bound of the range of d d m structures
 	* @param end the upper bound of the range of d d m structures (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d m structures
 	*/
 	public java.util.List<DDMStructure> findByG_N_D(long groupId,
@@ -2179,7 +2179,7 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 	* @param start the lower bound of the range of d d m structures
 	* @param end the upper bound of the range of d d m structures (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of d d m structures
 	*/
 	public java.util.List<DDMStructure> findAll(int start, int end,

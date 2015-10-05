@@ -90,7 +90,7 @@ public interface ResourceBlockPermissionPersistence extends BasePersistence<Reso
 	* @param start the lower bound of the range of resource block permissions
 	* @param end the upper bound of the range of resource block permissions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching resource block permissions
 	*/
 	public java.util.List<ResourceBlockPermission> findByResourceBlockId(
@@ -226,7 +226,7 @@ public interface ResourceBlockPermissionPersistence extends BasePersistence<Reso
 	* @param start the lower bound of the range of resource block permissions
 	* @param end the upper bound of the range of resource block permissions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching resource block permissions
 	*/
 	public java.util.List<ResourceBlockPermission> findByRoleId(long roleId,
@@ -332,7 +332,7 @@ public interface ResourceBlockPermissionPersistence extends BasePersistence<Reso
 	*
 	* @param resourceBlockId the resource block ID
 	* @param roleId the role ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching resource block permission, or <code>null</code> if a matching resource block permission could not be found
 	*/
 	public ResourceBlockPermission fetchByR_R(long resourceBlockId,
@@ -462,7 +462,7 @@ public interface ResourceBlockPermissionPersistence extends BasePersistence<Reso
 	* @param start the lower bound of the range of resource block permissions
 	* @param end the upper bound of the range of resource block permissions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of resource block permissions
 	*/
 	public java.util.List<ResourceBlockPermission> findAll(int start, int end,

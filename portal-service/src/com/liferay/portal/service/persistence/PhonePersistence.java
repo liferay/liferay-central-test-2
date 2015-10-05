@@ -89,7 +89,7 @@ public interface PhonePersistence extends BasePersistence<Phone> {
 	* @param start the lower bound of the range of phones
 	* @param end the upper bound of the range of phones (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching phones
 	*/
 	public java.util.List<Phone> findByUuid(java.lang.String uuid, int start,
@@ -225,7 +225,7 @@ public interface PhonePersistence extends BasePersistence<Phone> {
 	* @param start the lower bound of the range of phones
 	* @param end the upper bound of the range of phones (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching phones
 	*/
 	public java.util.List<Phone> findByUuid_C(java.lang.String uuid,
@@ -364,7 +364,7 @@ public interface PhonePersistence extends BasePersistence<Phone> {
 	* @param start the lower bound of the range of phones
 	* @param end the upper bound of the range of phones (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching phones
 	*/
 	public java.util.List<Phone> findByCompanyId(long companyId, int start,
@@ -493,7 +493,7 @@ public interface PhonePersistence extends BasePersistence<Phone> {
 	* @param start the lower bound of the range of phones
 	* @param end the upper bound of the range of phones (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching phones
 	*/
 	public java.util.List<Phone> findByUserId(long userId, int start, int end,
@@ -627,7 +627,7 @@ public interface PhonePersistence extends BasePersistence<Phone> {
 	* @param start the lower bound of the range of phones
 	* @param end the upper bound of the range of phones (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching phones
 	*/
 	public java.util.List<Phone> findByC_C(long companyId, long classNameId,
@@ -775,7 +775,7 @@ public interface PhonePersistence extends BasePersistence<Phone> {
 	* @param start the lower bound of the range of phones
 	* @param end the upper bound of the range of phones (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching phones
 	*/
 	public java.util.List<Phone> findByC_C_C(long companyId, long classNameId,
@@ -938,7 +938,7 @@ public interface PhonePersistence extends BasePersistence<Phone> {
 	* @param start the lower bound of the range of phones
 	* @param end the upper bound of the range of phones (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching phones
 	*/
 	public java.util.List<Phone> findByC_C_C_P(long companyId,
@@ -1147,7 +1147,7 @@ public interface PhonePersistence extends BasePersistence<Phone> {
 	* @param start the lower bound of the range of phones
 	* @param end the upper bound of the range of phones (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of phones
 	*/
 	public java.util.List<Phone> findAll(int start, int end,

@@ -169,7 +169,7 @@ public class AnnouncementsDeliveryUtil {
 	* @param start the lower bound of the range of announcements deliveries
 	* @param end the upper bound of the range of announcements deliveries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching announcements deliveries
 	*/
 	public static List<AnnouncementsDelivery> findByUserId(long userId,
@@ -301,7 +301,7 @@ public class AnnouncementsDeliveryUtil {
 	*
 	* @param userId the user ID
 	* @param type the type
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching announcements delivery, or <code>null</code> if a matching announcements delivery could not be found
 	*/
 	public static AnnouncementsDelivery fetchByU_T(long userId,
@@ -457,7 +457,7 @@ public class AnnouncementsDeliveryUtil {
 	* @param start the lower bound of the range of announcements deliveries
 	* @param end the upper bound of the range of announcements deliveries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of announcements deliveries
 	*/
 	public static List<AnnouncementsDelivery> findAll(int start, int end,

@@ -91,7 +91,7 @@ public interface DLSyncEventPersistence extends BasePersistence<DLSyncEvent> {
 	* @param start the lower bound of the range of d l sync events
 	* @param end the upper bound of the range of d l sync events (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d l sync events
 	*/
 	public java.util.List<DLSyncEvent> findByModifiedTime(long modifiedTime,
@@ -194,7 +194,7 @@ public interface DLSyncEventPersistence extends BasePersistence<DLSyncEvent> {
 	* Returns the d l sync event where typePK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
 	* @param typePK the type p k
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching d l sync event, or <code>null</code> if a matching d l sync event could not be found
 	*/
 	public DLSyncEvent fetchByTypePK(long typePK, boolean retrieveFromCache);
@@ -317,7 +317,7 @@ public interface DLSyncEventPersistence extends BasePersistence<DLSyncEvent> {
 	* @param start the lower bound of the range of d l sync events
 	* @param end the upper bound of the range of d l sync events (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of d l sync events
 	*/
 	public java.util.List<DLSyncEvent> findAll(int start, int end,

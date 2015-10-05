@@ -91,7 +91,7 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 	* @param start the lower bound of the range of social relations
 	* @param end the upper bound of the range of social relations (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social relations
 	*/
 	public java.util.List<SocialRelation> findByUuid(java.lang.String uuid,
@@ -228,7 +228,7 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 	* @param start the lower bound of the range of social relations
 	* @param end the upper bound of the range of social relations (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social relations
 	*/
 	public java.util.List<SocialRelation> findByUuid_C(java.lang.String uuid,
@@ -371,7 +371,7 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 	* @param start the lower bound of the range of social relations
 	* @param end the upper bound of the range of social relations (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social relations
 	*/
 	public java.util.List<SocialRelation> findByCompanyId(long companyId,
@@ -503,7 +503,7 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 	* @param start the lower bound of the range of social relations
 	* @param end the upper bound of the range of social relations (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social relations
 	*/
 	public java.util.List<SocialRelation> findByUserId1(long userId1,
@@ -635,7 +635,7 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 	* @param start the lower bound of the range of social relations
 	* @param end the upper bound of the range of social relations (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social relations
 	*/
 	public java.util.List<SocialRelation> findByUserId2(long userId2,
@@ -767,7 +767,7 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 	* @param start the lower bound of the range of social relations
 	* @param end the upper bound of the range of social relations (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social relations
 	*/
 	public java.util.List<SocialRelation> findByType(int type, int start,
@@ -902,7 +902,7 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 	* @param start the lower bound of the range of social relations
 	* @param end the upper bound of the range of social relations (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social relations
 	*/
 	public java.util.List<SocialRelation> findByC_T(long companyId, int type,
@@ -1045,7 +1045,7 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 	* @param start the lower bound of the range of social relations
 	* @param end the upper bound of the range of social relations (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social relations
 	*/
 	public java.util.List<SocialRelation> findByU1_U2(long userId1,
@@ -1188,7 +1188,7 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 	* @param start the lower bound of the range of social relations
 	* @param end the upper bound of the range of social relations (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social relations
 	*/
 	public java.util.List<SocialRelation> findByU1_T(long userId1, int type,
@@ -1331,7 +1331,7 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 	* @param start the lower bound of the range of social relations
 	* @param end the upper bound of the range of social relations (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social relations
 	*/
 	public java.util.List<SocialRelation> findByU2_T(long userId2, int type,
@@ -1447,7 +1447,7 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 	* @param userId1 the user id1
 	* @param userId2 the user id2
 	* @param type the type
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching social relation, or <code>null</code> if a matching social relation could not be found
 	*/
 	public SocialRelation fetchByU1_U2_T(long userId1, long userId2, int type,
@@ -1575,7 +1575,7 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 	* @param start the lower bound of the range of social relations
 	* @param end the upper bound of the range of social relations (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of social relations
 	*/
 	public java.util.List<SocialRelation> findAll(int start, int end,

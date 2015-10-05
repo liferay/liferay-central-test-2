@@ -169,7 +169,7 @@ public class AssetCategoryPropertyUtil {
 	* @param start the lower bound of the range of asset category properties
 	* @param end the upper bound of the range of asset category properties (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching asset category properties
 	*/
 	public static List<AssetCategoryProperty> findByCompanyId(long companyId,
@@ -332,7 +332,7 @@ public class AssetCategoryPropertyUtil {
 	* @param start the lower bound of the range of asset category properties
 	* @param end the upper bound of the range of asset category properties (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching asset category properties
 	*/
 	public static List<AssetCategoryProperty> findByCategoryId(
@@ -503,7 +503,7 @@ public class AssetCategoryPropertyUtil {
 	* @param start the lower bound of the range of asset category properties
 	* @param end the upper bound of the range of asset category properties (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching asset category properties
 	*/
 	public static List<AssetCategoryProperty> findByC_K(long companyId,
@@ -649,7 +649,7 @@ public class AssetCategoryPropertyUtil {
 	*
 	* @param categoryId the category ID
 	* @param key the key
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching asset category property, or <code>null</code> if a matching asset category property could not be found
 	*/
 	public static AssetCategoryProperty fetchByCA_K(long categoryId,
@@ -807,7 +807,7 @@ public class AssetCategoryPropertyUtil {
 	* @param start the lower bound of the range of asset category properties
 	* @param end the upper bound of the range of asset category properties (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of asset category properties
 	*/
 	public static List<AssetCategoryProperty> findAll(int start, int end,

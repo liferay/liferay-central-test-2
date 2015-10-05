@@ -164,7 +164,7 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 	 * @param start the lower bound of the range of locks
 	 * @param end the upper bound of the range of locks (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to use the finder cache
+	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching locks
 	 */
 	@Override
@@ -709,7 +709,7 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 	 * @param start the lower bound of the range of locks
 	 * @param end the upper bound of the range of locks (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to use the finder cache
+	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching locks
 	 */
 	@Override
@@ -1281,7 +1281,7 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 	 * @param start the lower bound of the range of locks
 	 * @param end the upper bound of the range of locks (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to use the finder cache
+	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching locks
 	 */
 	@Override
@@ -1797,7 +1797,7 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 	 *
 	 * @param className the class name
 	 * @param key the key
-	 * @param retrieveFromCache whether to use the finder cache
+	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the matching lock, or <code>null</code> if a matching lock could not be found
 	 */
 	@Override
@@ -2607,7 +2607,7 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 	 * @param start the lower bound of the range of locks
 	 * @param end the upper bound of the range of locks (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to use the finder cache
+	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of locks
 	 */
 	@Override

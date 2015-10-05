@@ -89,7 +89,7 @@ public interface MembershipRequestPersistence extends BasePersistence<Membership
 	* @param start the lower bound of the range of membership requests
 	* @param end the upper bound of the range of membership requests (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching membership requests
 	*/
 	public java.util.List<MembershipRequest> findByGroupId(long groupId,
@@ -221,7 +221,7 @@ public interface MembershipRequestPersistence extends BasePersistence<Membership
 	* @param start the lower bound of the range of membership requests
 	* @param end the upper bound of the range of membership requests (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching membership requests
 	*/
 	public java.util.List<MembershipRequest> findByUserId(long userId,
@@ -358,7 +358,7 @@ public interface MembershipRequestPersistence extends BasePersistence<Membership
 	* @param start the lower bound of the range of membership requests
 	* @param end the upper bound of the range of membership requests (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching membership requests
 	*/
 	public java.util.List<MembershipRequest> findByG_S(long groupId,
@@ -506,7 +506,7 @@ public interface MembershipRequestPersistence extends BasePersistence<Membership
 	* @param start the lower bound of the range of membership requests
 	* @param end the upper bound of the range of membership requests (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching membership requests
 	*/
 	public java.util.List<MembershipRequest> findByG_U_S(long groupId,
@@ -707,7 +707,7 @@ public interface MembershipRequestPersistence extends BasePersistence<Membership
 	* @param start the lower bound of the range of membership requests
 	* @param end the upper bound of the range of membership requests (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of membership requests
 	*/
 	public java.util.List<MembershipRequest> findAll(int start, int end,

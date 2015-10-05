@@ -161,7 +161,7 @@ public class PhoneUtil {
 	* @param start the lower bound of the range of phones
 	* @param end the upper bound of the range of phones (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching phones
 	*/
 	public static List<Phone> findByUuid(java.lang.String uuid, int start,
@@ -321,7 +321,7 @@ public class PhoneUtil {
 	* @param start the lower bound of the range of phones
 	* @param end the upper bound of the range of phones (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching phones
 	*/
 	public static List<Phone> findByUuid_C(java.lang.String uuid,
@@ -488,7 +488,7 @@ public class PhoneUtil {
 	* @param start the lower bound of the range of phones
 	* @param end the upper bound of the range of phones (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching phones
 	*/
 	public static List<Phone> findByCompanyId(long companyId, int start,
@@ -647,7 +647,7 @@ public class PhoneUtil {
 	* @param start the lower bound of the range of phones
 	* @param end the upper bound of the range of phones (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching phones
 	*/
 	public static List<Phone> findByUserId(long userId, int start, int end,
@@ -806,7 +806,7 @@ public class PhoneUtil {
 	* @param start the lower bound of the range of phones
 	* @param end the upper bound of the range of phones (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching phones
 	*/
 	public static List<Phone> findByC_C(long companyId, long classNameId,
@@ -985,7 +985,7 @@ public class PhoneUtil {
 	* @param start the lower bound of the range of phones
 	* @param end the upper bound of the range of phones (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching phones
 	*/
 	public static List<Phone> findByC_C_C(long companyId, long classNameId,
@@ -1184,7 +1184,7 @@ public class PhoneUtil {
 	* @param start the lower bound of the range of phones
 	* @param end the upper bound of the range of phones (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching phones
 	*/
 	public static List<Phone> findByC_C_C_P(long companyId, long classNameId,
@@ -1443,7 +1443,7 @@ public class PhoneUtil {
 	* @param start the lower bound of the range of phones
 	* @param end the upper bound of the range of phones (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of phones
 	*/
 	public static List<Phone> findAll(int start, int end,

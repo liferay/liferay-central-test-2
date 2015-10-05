@@ -91,7 +91,7 @@ public interface SocialActivityCounterPersistence extends BasePersistence<Social
 	* @param start the lower bound of the range of social activity counters
 	* @param end the upper bound of the range of social activity counters (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social activity counters
 	*/
 	public java.util.List<SocialActivityCounter> findByGroupId(long groupId,
@@ -228,7 +228,7 @@ public interface SocialActivityCounterPersistence extends BasePersistence<Social
 	* @param start the lower bound of the range of social activity counters
 	* @param end the upper bound of the range of social activity counters (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social activity counters
 	*/
 	public java.util.List<SocialActivityCounter> findByC_C(long classNameId,
@@ -383,7 +383,7 @@ public interface SocialActivityCounterPersistence extends BasePersistence<Social
 	* @param start the lower bound of the range of social activity counters
 	* @param end the upper bound of the range of social activity counters (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social activity counters
 	*/
 	public java.util.List<SocialActivityCounter> findByG_C_C_O(long groupId,
@@ -533,7 +533,7 @@ public interface SocialActivityCounterPersistence extends BasePersistence<Social
 	* @param name the name
 	* @param ownerType the owner type
 	* @param startPeriod the start period
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching social activity counter, or <code>null</code> if a matching social activity counter could not be found
 	*/
 	public SocialActivityCounter fetchByG_C_C_N_O_S(long groupId,
@@ -611,7 +611,7 @@ public interface SocialActivityCounterPersistence extends BasePersistence<Social
 	* @param name the name
 	* @param ownerType the owner type
 	* @param endPeriod the end period
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching social activity counter, or <code>null</code> if a matching social activity counter could not be found
 	*/
 	public SocialActivityCounter fetchByG_C_C_N_O_E(long groupId,
@@ -751,7 +751,7 @@ public interface SocialActivityCounterPersistence extends BasePersistence<Social
 	* @param start the lower bound of the range of social activity counters
 	* @param end the upper bound of the range of social activity counters (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of social activity counters
 	*/
 	public java.util.List<SocialActivityCounter> findAll(int start, int end,

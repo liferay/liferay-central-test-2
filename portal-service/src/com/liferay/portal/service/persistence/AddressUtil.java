@@ -162,7 +162,7 @@ public class AddressUtil {
 	* @param start the lower bound of the range of addresses
 	* @param end the upper bound of the range of addresses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching addresses
 	*/
 	public static List<Address> findByUuid(java.lang.String uuid, int start,
@@ -323,7 +323,7 @@ public class AddressUtil {
 	* @param start the lower bound of the range of addresses
 	* @param end the upper bound of the range of addresses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching addresses
 	*/
 	public static List<Address> findByUuid_C(java.lang.String uuid,
@@ -491,7 +491,7 @@ public class AddressUtil {
 	* @param start the lower bound of the range of addresses
 	* @param end the upper bound of the range of addresses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching addresses
 	*/
 	public static List<Address> findByCompanyId(long companyId, int start,
@@ -650,7 +650,7 @@ public class AddressUtil {
 	* @param start the lower bound of the range of addresses
 	* @param end the upper bound of the range of addresses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching addresses
 	*/
 	public static List<Address> findByUserId(long userId, int start, int end,
@@ -810,7 +810,7 @@ public class AddressUtil {
 	* @param start the lower bound of the range of addresses
 	* @param end the upper bound of the range of addresses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching addresses
 	*/
 	public static List<Address> findByC_C(long companyId, long classNameId,
@@ -990,7 +990,7 @@ public class AddressUtil {
 	* @param start the lower bound of the range of addresses
 	* @param end the upper bound of the range of addresses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching addresses
 	*/
 	public static List<Address> findByC_C_C(long companyId, long classNameId,
@@ -1189,7 +1189,7 @@ public class AddressUtil {
 	* @param start the lower bound of the range of addresses
 	* @param end the upper bound of the range of addresses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching addresses
 	*/
 	public static List<Address> findByC_C_C_M(long companyId, long classNameId,
@@ -1401,7 +1401,7 @@ public class AddressUtil {
 	* @param start the lower bound of the range of addresses
 	* @param end the upper bound of the range of addresses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching addresses
 	*/
 	public static List<Address> findByC_C_C_P(long companyId, long classNameId,
@@ -1660,7 +1660,7 @@ public class AddressUtil {
 	* @param start the lower bound of the range of addresses
 	* @param end the upper bound of the range of addresses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of addresses
 	*/
 	public static List<Address> findAll(int start, int end,

@@ -89,7 +89,7 @@ public interface RepositoryEntryPersistence extends BasePersistence<RepositoryEn
 	* @param start the lower bound of the range of repository entries
 	* @param end the upper bound of the range of repository entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching repository entries
 	*/
 	public java.util.List<RepositoryEntry> findByUuid(java.lang.String uuid,
@@ -195,7 +195,7 @@ public interface RepositoryEntryPersistence extends BasePersistence<RepositoryEn
 	*
 	* @param uuid the uuid
 	* @param groupId the group ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching repository entry, or <code>null</code> if a matching repository entry could not be found
 	*/
 	public RepositoryEntry fetchByUUID_G(java.lang.String uuid, long groupId,
@@ -276,7 +276,7 @@ public interface RepositoryEntryPersistence extends BasePersistence<RepositoryEn
 	* @param start the lower bound of the range of repository entries
 	* @param end the upper bound of the range of repository entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching repository entries
 	*/
 	public java.util.List<RepositoryEntry> findByUuid_C(java.lang.String uuid,
@@ -419,7 +419,7 @@ public interface RepositoryEntryPersistence extends BasePersistence<RepositoryEn
 	* @param start the lower bound of the range of repository entries
 	* @param end the upper bound of the range of repository entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching repository entries
 	*/
 	public java.util.List<RepositoryEntry> findByRepositoryId(
@@ -527,7 +527,7 @@ public interface RepositoryEntryPersistence extends BasePersistence<RepositoryEn
 	*
 	* @param repositoryId the repository ID
 	* @param mappedId the mapped ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching repository entry, or <code>null</code> if a matching repository entry could not be found
 	*/
 	public RepositoryEntry fetchByR_M(long repositoryId,
@@ -654,7 +654,7 @@ public interface RepositoryEntryPersistence extends BasePersistence<RepositoryEn
 	* @param start the lower bound of the range of repository entries
 	* @param end the upper bound of the range of repository entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of repository entries
 	*/
 	public java.util.List<RepositoryEntry> findAll(int start, int end,

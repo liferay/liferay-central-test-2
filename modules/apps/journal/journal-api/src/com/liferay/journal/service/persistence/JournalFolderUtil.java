@@ -168,7 +168,7 @@ public class JournalFolderUtil {
 	* @param start the lower bound of the range of journal folders
 	* @param end the upper bound of the range of journal folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching journal folders
 	*/
 	public static List<JournalFolder> findByUuid(java.lang.String uuid,
@@ -297,7 +297,7 @@ public class JournalFolderUtil {
 	*
 	* @param uuid the uuid
 	* @param groupId the group ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching journal folder, or <code>null</code> if a matching journal folder could not be found
 	*/
 	public static JournalFolder fetchByUUID_G(java.lang.String uuid,
@@ -392,7 +392,7 @@ public class JournalFolderUtil {
 	* @param start the lower bound of the range of journal folders
 	* @param end the upper bound of the range of journal folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching journal folders
 	*/
 	public static List<JournalFolder> findByUuid_C(java.lang.String uuid,
@@ -561,7 +561,7 @@ public class JournalFolderUtil {
 	* @param start the lower bound of the range of journal folders
 	* @param end the upper bound of the range of journal folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching journal folders
 	*/
 	public static List<JournalFolder> findByGroupId(long groupId, int start,
@@ -791,7 +791,7 @@ public class JournalFolderUtil {
 	* @param start the lower bound of the range of journal folders
 	* @param end the upper bound of the range of journal folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching journal folders
 	*/
 	public static List<JournalFolder> findByCompanyId(long companyId,
@@ -958,7 +958,7 @@ public class JournalFolderUtil {
 	* @param start the lower bound of the range of journal folders
 	* @param end the upper bound of the range of journal folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching journal folders
 	*/
 	public static List<JournalFolder> findByG_P(long groupId,
@@ -1182,7 +1182,7 @@ public class JournalFolderUtil {
 	*
 	* @param groupId the group ID
 	* @param name the name
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching journal folder, or <code>null</code> if a matching journal folder could not be found
 	*/
 	public static JournalFolder fetchByG_N(long groupId, java.lang.String name,
@@ -1275,7 +1275,7 @@ public class JournalFolderUtil {
 	* @param start the lower bound of the range of journal folders
 	* @param end the upper bound of the range of journal folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching journal folders
 	*/
 	public static List<JournalFolder> findByC_NotS(long companyId, int status,
@@ -1420,7 +1420,7 @@ public class JournalFolderUtil {
 	* @param groupId the group ID
 	* @param parentFolderId the parent folder ID
 	* @param name the name
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching journal folder, or <code>null</code> if a matching journal folder could not be found
 	*/
 	public static JournalFolder fetchByG_P_N(long groupId, long parentFolderId,
@@ -1526,7 +1526,7 @@ public class JournalFolderUtil {
 	* @param start the lower bound of the range of journal folders
 	* @param end the upper bound of the range of journal folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching journal folders
 	*/
 	public static List<JournalFolder> findByG_P_S(long groupId,
@@ -1815,7 +1815,7 @@ public class JournalFolderUtil {
 	* @param start the lower bound of the range of journal folders
 	* @param end the upper bound of the range of journal folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching journal folders
 	*/
 	public static List<JournalFolder> findByG_P_NotS(long groupId,
@@ -2111,7 +2111,7 @@ public class JournalFolderUtil {
 	* @param start the lower bound of the range of journal folders
 	* @param end the upper bound of the range of journal folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching journal folders
 	*/
 	public static List<JournalFolder> findByF_C_P_NotS(long folderId,
@@ -2351,7 +2351,7 @@ public class JournalFolderUtil {
 	* @param start the lower bound of the range of journal folders
 	* @param end the upper bound of the range of journal folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of journal folders
 	*/
 	public static List<JournalFolder> findAll(int start, int end,

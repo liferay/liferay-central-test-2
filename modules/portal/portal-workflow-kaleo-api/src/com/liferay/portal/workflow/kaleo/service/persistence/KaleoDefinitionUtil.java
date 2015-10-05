@@ -168,7 +168,7 @@ public class KaleoDefinitionUtil {
 	* @param start the lower bound of the range of kaleo definitions
 	* @param end the upper bound of the range of kaleo definitions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching kaleo definitions
 	*/
 	public static List<KaleoDefinition> findByCompanyId(long companyId,
@@ -336,7 +336,7 @@ public class KaleoDefinitionUtil {
 	* @param start the lower bound of the range of kaleo definitions
 	* @param end the upper bound of the range of kaleo definitions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching kaleo definitions
 	*/
 	public static List<KaleoDefinition> findByC_N(long companyId,
@@ -514,7 +514,7 @@ public class KaleoDefinitionUtil {
 	* @param start the lower bound of the range of kaleo definitions
 	* @param end the upper bound of the range of kaleo definitions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching kaleo definitions
 	*/
 	public static List<KaleoDefinition> findByC_A(long companyId,
@@ -660,7 +660,7 @@ public class KaleoDefinitionUtil {
 	* @param companyId the company ID
 	* @param name the name
 	* @param version the version
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching kaleo definition, or <code>null</code> if a matching kaleo definition could not be found
 	*/
 	public static KaleoDefinition fetchByC_N_V(long companyId,
@@ -764,7 +764,7 @@ public class KaleoDefinitionUtil {
 	* @param start the lower bound of the range of kaleo definitions
 	* @param end the upper bound of the range of kaleo definitions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching kaleo definitions
 	*/
 	public static List<KaleoDefinition> findByC_N_A(long companyId,
@@ -1012,7 +1012,7 @@ public class KaleoDefinitionUtil {
 	* @param start the lower bound of the range of kaleo definitions
 	* @param end the upper bound of the range of kaleo definitions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of kaleo definitions
 	*/
 	public static List<KaleoDefinition> findAll(int start, int end,

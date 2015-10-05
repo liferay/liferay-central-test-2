@@ -89,7 +89,7 @@ public interface AddressPersistence extends BasePersistence<Address> {
 	* @param start the lower bound of the range of addresses
 	* @param end the upper bound of the range of addresses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching addresses
 	*/
 	public java.util.List<Address> findByUuid(java.lang.String uuid, int start,
@@ -226,7 +226,7 @@ public interface AddressPersistence extends BasePersistence<Address> {
 	* @param start the lower bound of the range of addresses
 	* @param end the upper bound of the range of addresses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching addresses
 	*/
 	public java.util.List<Address> findByUuid_C(java.lang.String uuid,
@@ -365,7 +365,7 @@ public interface AddressPersistence extends BasePersistence<Address> {
 	* @param start the lower bound of the range of addresses
 	* @param end the upper bound of the range of addresses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching addresses
 	*/
 	public java.util.List<Address> findByCompanyId(long companyId, int start,
@@ -496,7 +496,7 @@ public interface AddressPersistence extends BasePersistence<Address> {
 	* @param start the lower bound of the range of addresses
 	* @param end the upper bound of the range of addresses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching addresses
 	*/
 	public java.util.List<Address> findByUserId(long userId, int start,
@@ -631,7 +631,7 @@ public interface AddressPersistence extends BasePersistence<Address> {
 	* @param start the lower bound of the range of addresses
 	* @param end the upper bound of the range of addresses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching addresses
 	*/
 	public java.util.List<Address> findByC_C(long companyId, long classNameId,
@@ -779,7 +779,7 @@ public interface AddressPersistence extends BasePersistence<Address> {
 	* @param start the lower bound of the range of addresses
 	* @param end the upper bound of the range of addresses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching addresses
 	*/
 	public java.util.List<Address> findByC_C_C(long companyId,
@@ -942,7 +942,7 @@ public interface AddressPersistence extends BasePersistence<Address> {
 	* @param start the lower bound of the range of addresses
 	* @param end the upper bound of the range of addresses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching addresses
 	*/
 	public java.util.List<Address> findByC_C_C_M(long companyId,
@@ -1114,7 +1114,7 @@ public interface AddressPersistence extends BasePersistence<Address> {
 	* @param start the lower bound of the range of addresses
 	* @param end the upper bound of the range of addresses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching addresses
 	*/
 	public java.util.List<Address> findByC_C_C_P(long companyId,
@@ -1323,7 +1323,7 @@ public interface AddressPersistence extends BasePersistence<Address> {
 	* @param start the lower bound of the range of addresses
 	* @param end the upper bound of the range of addresses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of addresses
 	*/
 	public java.util.List<Address> findAll(int start, int end,

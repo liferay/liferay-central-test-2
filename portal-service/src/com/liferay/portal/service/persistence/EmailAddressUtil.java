@@ -164,7 +164,7 @@ public class EmailAddressUtil {
 	* @param start the lower bound of the range of email addresses
 	* @param end the upper bound of the range of email addresses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching email addresses
 	*/
 	public static List<EmailAddress> findByUuid(java.lang.String uuid,
@@ -326,7 +326,7 @@ public class EmailAddressUtil {
 	* @param start the lower bound of the range of email addresses
 	* @param end the upper bound of the range of email addresses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching email addresses
 	*/
 	public static List<EmailAddress> findByUuid_C(java.lang.String uuid,
@@ -495,7 +495,7 @@ public class EmailAddressUtil {
 	* @param start the lower bound of the range of email addresses
 	* @param end the upper bound of the range of email addresses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching email addresses
 	*/
 	public static List<EmailAddress> findByCompanyId(long companyId, int start,
@@ -656,7 +656,7 @@ public class EmailAddressUtil {
 	* @param start the lower bound of the range of email addresses
 	* @param end the upper bound of the range of email addresses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching email addresses
 	*/
 	public static List<EmailAddress> findByUserId(long userId, int start,
@@ -818,7 +818,7 @@ public class EmailAddressUtil {
 	* @param start the lower bound of the range of email addresses
 	* @param end the upper bound of the range of email addresses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching email addresses
 	*/
 	public static List<EmailAddress> findByC_C(long companyId,
@@ -999,7 +999,7 @@ public class EmailAddressUtil {
 	* @param start the lower bound of the range of email addresses
 	* @param end the upper bound of the range of email addresses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching email addresses
 	*/
 	public static List<EmailAddress> findByC_C_C(long companyId,
@@ -1203,7 +1203,7 @@ public class EmailAddressUtil {
 	* @param start the lower bound of the range of email addresses
 	* @param end the upper bound of the range of email addresses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching email addresses
 	*/
 	public static List<EmailAddress> findByC_C_C_P(long companyId,
@@ -1463,7 +1463,7 @@ public class EmailAddressUtil {
 	* @param start the lower bound of the range of email addresses
 	* @param end the upper bound of the range of email addresses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of email addresses
 	*/
 	public static List<EmailAddress> findAll(int start, int end,

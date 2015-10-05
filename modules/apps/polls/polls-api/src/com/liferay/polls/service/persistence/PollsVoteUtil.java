@@ -168,7 +168,7 @@ public class PollsVoteUtil {
 	* @param start the lower bound of the range of polls votes
 	* @param end the upper bound of the range of polls votes (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching polls votes
 	*/
 	public static List<PollsVote> findByUuid(java.lang.String uuid, int start,
@@ -295,7 +295,7 @@ public class PollsVoteUtil {
 	*
 	* @param uuid the uuid
 	* @param groupId the group ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching polls vote, or <code>null</code> if a matching polls vote could not be found
 	*/
 	public static PollsVote fetchByUUID_G(java.lang.String uuid, long groupId,
@@ -389,7 +389,7 @@ public class PollsVoteUtil {
 	* @param start the lower bound of the range of polls votes
 	* @param end the upper bound of the range of polls votes (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching polls votes
 	*/
 	public static List<PollsVote> findByUuid_C(java.lang.String uuid,
@@ -558,7 +558,7 @@ public class PollsVoteUtil {
 	* @param start the lower bound of the range of polls votes
 	* @param end the upper bound of the range of polls votes (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching polls votes
 	*/
 	public static List<PollsVote> findByQuestionId(long questionId, int start,
@@ -718,7 +718,7 @@ public class PollsVoteUtil {
 	* @param start the lower bound of the range of polls votes
 	* @param end the upper bound of the range of polls votes (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching polls votes
 	*/
 	public static List<PollsVote> findByChoiceId(long choiceId, int start,
@@ -847,7 +847,7 @@ public class PollsVoteUtil {
 	*
 	* @param questionId the question ID
 	* @param userId the user ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching polls vote, or <code>null</code> if a matching polls vote could not be found
 	*/
 	public static PollsVote fetchByQ_U(long questionId, long userId,
@@ -1000,7 +1000,7 @@ public class PollsVoteUtil {
 	* @param start the lower bound of the range of polls votes
 	* @param end the upper bound of the range of polls votes (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of polls votes
 	*/
 	public static List<PollsVote> findAll(int start, int end,

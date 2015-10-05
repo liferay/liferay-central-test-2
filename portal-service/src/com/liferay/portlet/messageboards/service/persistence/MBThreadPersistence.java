@@ -91,7 +91,7 @@ public interface MBThreadPersistence extends BasePersistence<MBThread> {
 	* @param start the lower bound of the range of message boards threads
 	* @param end the upper bound of the range of message boards threads (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message boards threads
 	*/
 	public java.util.List<MBThread> findByUuid(java.lang.String uuid,
@@ -197,7 +197,7 @@ public interface MBThreadPersistence extends BasePersistence<MBThread> {
 	*
 	* @param uuid the uuid
 	* @param groupId the group ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching message boards thread, or <code>null</code> if a matching message boards thread could not be found
 	*/
 	public MBThread fetchByUUID_G(java.lang.String uuid, long groupId,
@@ -278,7 +278,7 @@ public interface MBThreadPersistence extends BasePersistence<MBThread> {
 	* @param start the lower bound of the range of message boards threads
 	* @param end the upper bound of the range of message boards threads (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message boards threads
 	*/
 	public java.util.List<MBThread> findByUuid_C(java.lang.String uuid,
@@ -417,7 +417,7 @@ public interface MBThreadPersistence extends BasePersistence<MBThread> {
 	* @param start the lower bound of the range of message boards threads
 	* @param end the upper bound of the range of message boards threads (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message boards threads
 	*/
 	public java.util.List<MBThread> findByGroupId(long groupId, int start,
@@ -581,7 +581,7 @@ public interface MBThreadPersistence extends BasePersistence<MBThread> {
 	* Returns the message boards thread where rootMessageId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
 	* @param rootMessageId the root message ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching message boards thread, or <code>null</code> if a matching message boards thread could not be found
 	*/
 	public MBThread fetchByRootMessageId(long rootMessageId,
@@ -659,7 +659,7 @@ public interface MBThreadPersistence extends BasePersistence<MBThread> {
 	* @param start the lower bound of the range of message boards threads
 	* @param end the upper bound of the range of message boards threads (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message boards threads
 	*/
 	public java.util.List<MBThread> findByG_C(long groupId, long categoryId,
@@ -892,7 +892,7 @@ public interface MBThreadPersistence extends BasePersistence<MBThread> {
 	* @param start the lower bound of the range of message boards threads
 	* @param end the upper bound of the range of message boards threads (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message boards threads
 	*/
 	public java.util.List<MBThread> findByG_C(long groupId, long[] categoryIds,
@@ -999,7 +999,7 @@ public interface MBThreadPersistence extends BasePersistence<MBThread> {
 	* @param start the lower bound of the range of message boards threads
 	* @param end the upper bound of the range of message boards threads (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message boards threads
 	*/
 	public java.util.List<MBThread> findByG_NotC(long groupId, long categoryId,
@@ -1210,7 +1210,7 @@ public interface MBThreadPersistence extends BasePersistence<MBThread> {
 	* @param start the lower bound of the range of message boards threads
 	* @param end the upper bound of the range of message boards threads (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message boards threads
 	*/
 	public java.util.List<MBThread> findByG_S(long groupId, int status,
@@ -1420,7 +1420,7 @@ public interface MBThreadPersistence extends BasePersistence<MBThread> {
 	* @param start the lower bound of the range of message boards threads
 	* @param end the upper bound of the range of message boards threads (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message boards threads
 	*/
 	public java.util.List<MBThread> findByC_P(long categoryId, double priority,
@@ -1564,7 +1564,7 @@ public interface MBThreadPersistence extends BasePersistence<MBThread> {
 	* @param start the lower bound of the range of message boards threads
 	* @param end the upper bound of the range of message boards threads (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message boards threads
 	*/
 	public java.util.List<MBThread> findByL_P(java.util.Date lastPostDate,
@@ -1716,7 +1716,7 @@ public interface MBThreadPersistence extends BasePersistence<MBThread> {
 	* @param start the lower bound of the range of message boards threads
 	* @param end the upper bound of the range of message boards threads (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message boards threads
 	*/
 	public java.util.List<MBThread> findByG_C_L(long groupId, long categoryId,
@@ -1951,7 +1951,7 @@ public interface MBThreadPersistence extends BasePersistence<MBThread> {
 	* @param start the lower bound of the range of message boards threads
 	* @param end the upper bound of the range of message boards threads (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message boards threads
 	*/
 	public java.util.List<MBThread> findByG_C_S(long groupId, long categoryId,
@@ -2204,7 +2204,7 @@ public interface MBThreadPersistence extends BasePersistence<MBThread> {
 	* @param start the lower bound of the range of message boards threads
 	* @param end the upper bound of the range of message boards threads (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message boards threads
 	*/
 	public java.util.List<MBThread> findByG_C_S(long groupId,
@@ -2321,7 +2321,7 @@ public interface MBThreadPersistence extends BasePersistence<MBThread> {
 	* @param start the lower bound of the range of message boards threads
 	* @param end the upper bound of the range of message boards threads (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message boards threads
 	*/
 	public java.util.List<MBThread> findByG_C_NotS(long groupId,
@@ -2575,7 +2575,7 @@ public interface MBThreadPersistence extends BasePersistence<MBThread> {
 	* @param start the lower bound of the range of message boards threads
 	* @param end the upper bound of the range of message boards threads (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message boards threads
 	*/
 	public java.util.List<MBThread> findByG_C_NotS(long groupId,
@@ -2693,7 +2693,7 @@ public interface MBThreadPersistence extends BasePersistence<MBThread> {
 	* @param start the lower bound of the range of message boards threads
 	* @param end the upper bound of the range of message boards threads (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message boards threads
 	*/
 	public java.util.List<MBThread> findByG_NotC_S(long groupId,
@@ -2925,7 +2925,7 @@ public interface MBThreadPersistence extends BasePersistence<MBThread> {
 	* @param start the lower bound of the range of message boards threads
 	* @param end the upper bound of the range of message boards threads (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message boards threads
 	*/
 	public java.util.List<MBThread> findByG_NotC_NotS(long groupId,
@@ -3199,7 +3199,7 @@ public interface MBThreadPersistence extends BasePersistence<MBThread> {
 	* @param start the lower bound of the range of message boards threads
 	* @param end the upper bound of the range of message boards threads (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of message boards threads
 	*/
 	public java.util.List<MBThread> findAll(int start, int end,

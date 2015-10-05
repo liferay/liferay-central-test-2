@@ -168,7 +168,7 @@ public class KaleoActionUtil {
 	* @param start the lower bound of the range of kaleo actions
 	* @param end the upper bound of the range of kaleo actions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching kaleo actions
 	*/
 	public static List<KaleoAction> findByCompanyId(long companyId, int start,
@@ -333,7 +333,7 @@ public class KaleoActionUtil {
 	* @param start the lower bound of the range of kaleo actions
 	* @param end the upper bound of the range of kaleo actions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching kaleo actions
 	*/
 	public static List<KaleoAction> findByKaleoDefinitionId(
@@ -507,7 +507,7 @@ public class KaleoActionUtil {
 	* @param start the lower bound of the range of kaleo actions
 	* @param end the upper bound of the range of kaleo actions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching kaleo actions
 	*/
 	public static List<KaleoAction> findByKCN_KCPK(
@@ -704,7 +704,7 @@ public class KaleoActionUtil {
 	* @param start the lower bound of the range of kaleo actions
 	* @param end the upper bound of the range of kaleo actions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching kaleo actions
 	*/
 	public static List<KaleoAction> findByKCN_KCPK_ET(
@@ -964,7 +964,7 @@ public class KaleoActionUtil {
 	* @param start the lower bound of the range of kaleo actions
 	* @param end the upper bound of the range of kaleo actions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of kaleo actions
 	*/
 	public static List<KaleoAction> findAll(int start, int end,

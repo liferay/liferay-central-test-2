@@ -89,7 +89,7 @@ public interface UserTrackerPersistence extends BasePersistence<UserTracker> {
 	* @param start the lower bound of the range of user trackers
 	* @param end the upper bound of the range of user trackers (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching user trackers
 	*/
 	public java.util.List<UserTracker> findByCompanyId(long companyId,
@@ -221,7 +221,7 @@ public interface UserTrackerPersistence extends BasePersistence<UserTracker> {
 	* @param start the lower bound of the range of user trackers
 	* @param end the upper bound of the range of user trackers (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching user trackers
 	*/
 	public java.util.List<UserTracker> findByUserId(long userId, int start,
@@ -354,7 +354,7 @@ public interface UserTrackerPersistence extends BasePersistence<UserTracker> {
 	* @param start the lower bound of the range of user trackers
 	* @param end the upper bound of the range of user trackers (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching user trackers
 	*/
 	public java.util.List<UserTracker> findBySessionId(
@@ -536,7 +536,7 @@ public interface UserTrackerPersistence extends BasePersistence<UserTracker> {
 	* @param start the lower bound of the range of user trackers
 	* @param end the upper bound of the range of user trackers (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of user trackers
 	*/
 	public java.util.List<UserTracker> findAll(int start, int end,

@@ -166,7 +166,7 @@ public class MBStatsUserUtil {
 	* @param start the lower bound of the range of message boards stats users
 	* @param end the upper bound of the range of message boards stats users (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message boards stats users
 	*/
 	public static List<MBStatsUser> findByGroupId(long groupId, int start,
@@ -321,7 +321,7 @@ public class MBStatsUserUtil {
 	* @param start the lower bound of the range of message boards stats users
 	* @param end the upper bound of the range of message boards stats users (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message boards stats users
 	*/
 	public static List<MBStatsUser> findByUserId(long userId, int start,
@@ -449,7 +449,7 @@ public class MBStatsUserUtil {
 	*
 	* @param groupId the group ID
 	* @param userId the user ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching message boards stats user, or <code>null</code> if a matching message boards stats user could not be found
 	*/
 	public static MBStatsUser fetchByG_U(long groupId, long userId,
@@ -549,7 +549,7 @@ public class MBStatsUserUtil {
 	* @param start the lower bound of the range of message boards stats users
 	* @param end the upper bound of the range of message boards stats users (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message boards stats users
 	*/
 	public static List<MBStatsUser> findByG_NotU_NotM(long groupId,
@@ -799,7 +799,7 @@ public class MBStatsUserUtil {
 	* @param start the lower bound of the range of message boards stats users
 	* @param end the upper bound of the range of message boards stats users (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of message boards stats users
 	*/
 	public static List<MBStatsUser> findAll(int start, int end,

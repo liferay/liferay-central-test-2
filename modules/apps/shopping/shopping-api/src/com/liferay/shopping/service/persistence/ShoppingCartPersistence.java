@@ -91,7 +91,7 @@ public interface ShoppingCartPersistence extends BasePersistence<ShoppingCart> {
 	* @param start the lower bound of the range of shopping carts
 	* @param end the upper bound of the range of shopping carts (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching shopping carts
 	*/
 	public java.util.List<ShoppingCart> findByGroupId(long groupId, int start,
@@ -222,7 +222,7 @@ public interface ShoppingCartPersistence extends BasePersistence<ShoppingCart> {
 	* @param start the lower bound of the range of shopping carts
 	* @param end the upper bound of the range of shopping carts (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching shopping carts
 	*/
 	public java.util.List<ShoppingCart> findByUserId(long userId, int start,
@@ -327,7 +327,7 @@ public interface ShoppingCartPersistence extends BasePersistence<ShoppingCart> {
 	*
 	* @param groupId the group ID
 	* @param userId the user ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching shopping cart, or <code>null</code> if a matching shopping cart could not be found
 	*/
 	public ShoppingCart fetchByG_U(long groupId, long userId,
@@ -453,7 +453,7 @@ public interface ShoppingCartPersistence extends BasePersistence<ShoppingCart> {
 	* @param start the lower bound of the range of shopping carts
 	* @param end the upper bound of the range of shopping carts (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of shopping carts
 	*/
 	public java.util.List<ShoppingCart> findAll(int start, int end,

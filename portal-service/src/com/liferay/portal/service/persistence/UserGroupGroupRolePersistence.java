@@ -90,7 +90,7 @@ public interface UserGroupGroupRolePersistence extends BasePersistence<UserGroup
 	* @param start the lower bound of the range of user group group roles
 	* @param end the upper bound of the range of user group group roles (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching user group group roles
 	*/
 	public java.util.List<UserGroupGroupRole> findByUserGroupId(
@@ -223,7 +223,7 @@ public interface UserGroupGroupRolePersistence extends BasePersistence<UserGroup
 	* @param start the lower bound of the range of user group group roles
 	* @param end the upper bound of the range of user group group roles (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching user group group roles
 	*/
 	public java.util.List<UserGroupGroupRole> findByGroupId(long groupId,
@@ -356,7 +356,7 @@ public interface UserGroupGroupRolePersistence extends BasePersistence<UserGroup
 	* @param start the lower bound of the range of user group group roles
 	* @param end the upper bound of the range of user group group roles (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching user group group roles
 	*/
 	public java.util.List<UserGroupGroupRole> findByRoleId(long roleId,
@@ -494,7 +494,7 @@ public interface UserGroupGroupRolePersistence extends BasePersistence<UserGroup
 	* @param start the lower bound of the range of user group group roles
 	* @param end the upper bound of the range of user group group roles (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching user group group roles
 	*/
 	public java.util.List<UserGroupGroupRole> findByU_G(long userGroupId,
@@ -639,7 +639,7 @@ public interface UserGroupGroupRolePersistence extends BasePersistence<UserGroup
 	* @param start the lower bound of the range of user group group roles
 	* @param end the upper bound of the range of user group group roles (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching user group group roles
 	*/
 	public java.util.List<UserGroupGroupRole> findByG_R(long groupId,
@@ -834,7 +834,7 @@ public interface UserGroupGroupRolePersistence extends BasePersistence<UserGroup
 	* @param start the lower bound of the range of user group group roles
 	* @param end the upper bound of the range of user group group roles (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of user group group roles
 	*/
 	public java.util.List<UserGroupGroupRole> findAll(int start, int end,

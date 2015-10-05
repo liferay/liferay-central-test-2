@@ -90,7 +90,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	* @param start the lower bound of the range of layout revisions
 	* @param end the upper bound of the range of layout revisions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching layout revisions
 	*/
 	public java.util.List<LayoutRevision> findByLayoutSetBranchId(
@@ -225,7 +225,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	* @param start the lower bound of the range of layout revisions
 	* @param end the upper bound of the range of layout revisions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching layout revisions
 	*/
 	public java.util.List<LayoutRevision> findByPlid(long plid, int start,
@@ -362,7 +362,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	* @param start the lower bound of the range of layout revisions
 	* @param end the upper bound of the range of layout revisions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching layout revisions
 	*/
 	public java.util.List<LayoutRevision> findByL_H(long layoutSetBranchId,
@@ -507,7 +507,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	* @param start the lower bound of the range of layout revisions
 	* @param end the upper bound of the range of layout revisions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching layout revisions
 	*/
 	public java.util.List<LayoutRevision> findByL_P(long layoutSetBranchId,
@@ -651,7 +651,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	* @param start the lower bound of the range of layout revisions
 	* @param end the upper bound of the range of layout revisions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching layout revisions
 	*/
 	public java.util.List<LayoutRevision> findByL_S(long layoutSetBranchId,
@@ -794,7 +794,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	* @param start the lower bound of the range of layout revisions
 	* @param end the upper bound of the range of layout revisions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching layout revisions
 	*/
 	public java.util.List<LayoutRevision> findByH_P(boolean head, long plid,
@@ -937,7 +937,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	* @param start the lower bound of the range of layout revisions
 	* @param end the upper bound of the range of layout revisions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching layout revisions
 	*/
 	public java.util.List<LayoutRevision> findByP_NotS(long plid, int status,
@@ -1085,7 +1085,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	* @param start the lower bound of the range of layout revisions
 	* @param end the upper bound of the range of layout revisions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching layout revisions
 	*/
 	public java.util.List<LayoutRevision> findByL_L_P(long layoutSetBranchId,
@@ -1246,7 +1246,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	* @param start the lower bound of the range of layout revisions
 	* @param end the upper bound of the range of layout revisions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching layout revisions
 	*/
 	public java.util.List<LayoutRevision> findByL_P_P(long layoutSetBranchId,
@@ -1376,7 +1376,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	* @param layoutSetBranchId the layout set branch ID
 	* @param head the head
 	* @param plid the plid
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching layout revision, or <code>null</code> if a matching layout revision could not be found
 	*/
 	public LayoutRevision fetchByL_H_P(long layoutSetBranchId, boolean head,
@@ -1463,7 +1463,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	* @param start the lower bound of the range of layout revisions
 	* @param end the upper bound of the range of layout revisions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching layout revisions
 	*/
 	public java.util.List<LayoutRevision> findByL_P_S(long layoutSetBranchId,
@@ -1663,7 +1663,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	* @param start the lower bound of the range of layout revisions
 	* @param end the upper bound of the range of layout revisions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of layout revisions
 	*/
 	public java.util.List<LayoutRevision> findAll(int start, int end,

@@ -91,7 +91,7 @@ public interface BlogsEntryPersistence extends BasePersistence<BlogsEntry> {
 	* @param start the lower bound of the range of blogs entries
 	* @param end the upper bound of the range of blogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching blogs entries
 	*/
 	public java.util.List<BlogsEntry> findByUuid(java.lang.String uuid,
@@ -197,7 +197,7 @@ public interface BlogsEntryPersistence extends BasePersistence<BlogsEntry> {
 	*
 	* @param uuid the uuid
 	* @param groupId the group ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching blogs entry, or <code>null</code> if a matching blogs entry could not be found
 	*/
 	public BlogsEntry fetchByUUID_G(java.lang.String uuid, long groupId,
@@ -278,7 +278,7 @@ public interface BlogsEntryPersistence extends BasePersistence<BlogsEntry> {
 	* @param start the lower bound of the range of blogs entries
 	* @param end the upper bound of the range of blogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching blogs entries
 	*/
 	public java.util.List<BlogsEntry> findByUuid_C(java.lang.String uuid,
@@ -418,7 +418,7 @@ public interface BlogsEntryPersistence extends BasePersistence<BlogsEntry> {
 	* @param start the lower bound of the range of blogs entries
 	* @param end the upper bound of the range of blogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching blogs entries
 	*/
 	public java.util.List<BlogsEntry> findByGroupId(long groupId, int start,
@@ -611,7 +611,7 @@ public interface BlogsEntryPersistence extends BasePersistence<BlogsEntry> {
 	* @param start the lower bound of the range of blogs entries
 	* @param end the upper bound of the range of blogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching blogs entries
 	*/
 	public java.util.List<BlogsEntry> findByCompanyId(long companyId,
@@ -717,7 +717,7 @@ public interface BlogsEntryPersistence extends BasePersistence<BlogsEntry> {
 	*
 	* @param groupId the group ID
 	* @param urlTitle the url title
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching blogs entry, or <code>null</code> if a matching blogs entry could not be found
 	*/
 	public BlogsEntry fetchByG_UT(long groupId, java.lang.String urlTitle,
@@ -798,7 +798,7 @@ public interface BlogsEntryPersistence extends BasePersistence<BlogsEntry> {
 	* @param start the lower bound of the range of blogs entries
 	* @param end the upper bound of the range of blogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching blogs entries
 	*/
 	public java.util.List<BlogsEntry> findByG_LtD(long groupId,
@@ -1013,7 +1013,7 @@ public interface BlogsEntryPersistence extends BasePersistence<BlogsEntry> {
 	* @param start the lower bound of the range of blogs entries
 	* @param end the upper bound of the range of blogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching blogs entries
 	*/
 	public java.util.List<BlogsEntry> findByG_S(long groupId, int status,
@@ -1223,7 +1223,7 @@ public interface BlogsEntryPersistence extends BasePersistence<BlogsEntry> {
 	* @param start the lower bound of the range of blogs entries
 	* @param end the upper bound of the range of blogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching blogs entries
 	*/
 	public java.util.List<BlogsEntry> findByG_NotS(long groupId, int status,
@@ -1434,7 +1434,7 @@ public interface BlogsEntryPersistence extends BasePersistence<BlogsEntry> {
 	* @param start the lower bound of the range of blogs entries
 	* @param end the upper bound of the range of blogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching blogs entries
 	*/
 	public java.util.List<BlogsEntry> findByC_U(long companyId, long userId,
@@ -1578,7 +1578,7 @@ public interface BlogsEntryPersistence extends BasePersistence<BlogsEntry> {
 	* @param start the lower bound of the range of blogs entries
 	* @param end the upper bound of the range of blogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching blogs entries
 	*/
 	public java.util.List<BlogsEntry> findByC_LtD(long companyId,
@@ -1725,7 +1725,7 @@ public interface BlogsEntryPersistence extends BasePersistence<BlogsEntry> {
 	* @param start the lower bound of the range of blogs entries
 	* @param end the upper bound of the range of blogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching blogs entries
 	*/
 	public java.util.List<BlogsEntry> findByC_S(long companyId, int status,
@@ -1868,7 +1868,7 @@ public interface BlogsEntryPersistence extends BasePersistence<BlogsEntry> {
 	* @param start the lower bound of the range of blogs entries
 	* @param end the upper bound of the range of blogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching blogs entries
 	*/
 	public java.util.List<BlogsEntry> findByC_NotS(long companyId, int status,
@@ -2012,7 +2012,7 @@ public interface BlogsEntryPersistence extends BasePersistence<BlogsEntry> {
 	* @param start the lower bound of the range of blogs entries
 	* @param end the upper bound of the range of blogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching blogs entries
 	*/
 	public java.util.List<BlogsEntry> findByLtD_S(java.util.Date displayDate,
@@ -2161,7 +2161,7 @@ public interface BlogsEntryPersistence extends BasePersistence<BlogsEntry> {
 	* @param start the lower bound of the range of blogs entries
 	* @param end the upper bound of the range of blogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching blogs entries
 	*/
 	public java.util.List<BlogsEntry> findByG_U_LtD(long groupId, long userId,
@@ -2396,7 +2396,7 @@ public interface BlogsEntryPersistence extends BasePersistence<BlogsEntry> {
 	* @param start the lower bound of the range of blogs entries
 	* @param end the upper bound of the range of blogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching blogs entries
 	*/
 	public java.util.List<BlogsEntry> findByG_U_S(long groupId, long userId,
@@ -2624,7 +2624,7 @@ public interface BlogsEntryPersistence extends BasePersistence<BlogsEntry> {
 	* @param start the lower bound of the range of blogs entries
 	* @param end the upper bound of the range of blogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching blogs entries
 	*/
 	public java.util.List<BlogsEntry> findByG_U_NotS(long groupId, long userId,
@@ -2856,7 +2856,7 @@ public interface BlogsEntryPersistence extends BasePersistence<BlogsEntry> {
 	* @param start the lower bound of the range of blogs entries
 	* @param end the upper bound of the range of blogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching blogs entries
 	*/
 	public java.util.List<BlogsEntry> findByG_LtD_S(long groupId,
@@ -3091,7 +3091,7 @@ public interface BlogsEntryPersistence extends BasePersistence<BlogsEntry> {
 	* @param start the lower bound of the range of blogs entries
 	* @param end the upper bound of the range of blogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching blogs entries
 	*/
 	public java.util.List<BlogsEntry> findByG_LtD_NotS(long groupId,
@@ -3326,7 +3326,7 @@ public interface BlogsEntryPersistence extends BasePersistence<BlogsEntry> {
 	* @param start the lower bound of the range of blogs entries
 	* @param end the upper bound of the range of blogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching blogs entries
 	*/
 	public java.util.List<BlogsEntry> findByC_U_S(long companyId, long userId,
@@ -3484,7 +3484,7 @@ public interface BlogsEntryPersistence extends BasePersistence<BlogsEntry> {
 	* @param start the lower bound of the range of blogs entries
 	* @param end the upper bound of the range of blogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching blogs entries
 	*/
 	public java.util.List<BlogsEntry> findByC_U_NotS(long companyId,
@@ -3643,7 +3643,7 @@ public interface BlogsEntryPersistence extends BasePersistence<BlogsEntry> {
 	* @param start the lower bound of the range of blogs entries
 	* @param end the upper bound of the range of blogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching blogs entries
 	*/
 	public java.util.List<BlogsEntry> findByC_LtD_S(long companyId,
@@ -3804,7 +3804,7 @@ public interface BlogsEntryPersistence extends BasePersistence<BlogsEntry> {
 	* @param start the lower bound of the range of blogs entries
 	* @param end the upper bound of the range of blogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching blogs entries
 	*/
 	public java.util.List<BlogsEntry> findByC_LtD_NotS(long companyId,
@@ -3970,7 +3970,7 @@ public interface BlogsEntryPersistence extends BasePersistence<BlogsEntry> {
 	* @param start the lower bound of the range of blogs entries
 	* @param end the upper bound of the range of blogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching blogs entries
 	*/
 	public java.util.List<BlogsEntry> findByG_U_LtD_S(long groupId,
@@ -4224,7 +4224,7 @@ public interface BlogsEntryPersistence extends BasePersistence<BlogsEntry> {
 	* @param start the lower bound of the range of blogs entries
 	* @param end the upper bound of the range of blogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching blogs entries
 	*/
 	public java.util.List<BlogsEntry> findByG_U_LtD_NotS(long groupId,
@@ -4514,7 +4514,7 @@ public interface BlogsEntryPersistence extends BasePersistence<BlogsEntry> {
 	* @param start the lower bound of the range of blogs entries
 	* @param end the upper bound of the range of blogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of blogs entries
 	*/
 	public java.util.List<BlogsEntry> findAll(int start, int end,

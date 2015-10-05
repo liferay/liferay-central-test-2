@@ -172,7 +172,7 @@ public class JournalContentSearchUtil {
 	* @param start the lower bound of the range of journal content searchs
 	* @param end the upper bound of the range of journal content searchs (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching journal content searchs
 	*/
 	public static List<JournalContentSearch> findByPortletId(
@@ -340,7 +340,7 @@ public class JournalContentSearchUtil {
 	* @param start the lower bound of the range of journal content searchs
 	* @param end the upper bound of the range of journal content searchs (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching journal content searchs
 	*/
 	public static List<JournalContentSearch> findByArticleId(
@@ -513,7 +513,7 @@ public class JournalContentSearchUtil {
 	* @param start the lower bound of the range of journal content searchs
 	* @param end the upper bound of the range of journal content searchs (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching journal content searchs
 	*/
 	public static List<JournalContentSearch> findByG_P(long groupId,
@@ -692,7 +692,7 @@ public class JournalContentSearchUtil {
 	* @param start the lower bound of the range of journal content searchs
 	* @param end the upper bound of the range of journal content searchs (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching journal content searchs
 	*/
 	public static List<JournalContentSearch> findByG_A(long groupId,
@@ -877,7 +877,7 @@ public class JournalContentSearchUtil {
 	* @param start the lower bound of the range of journal content searchs
 	* @param end the upper bound of the range of journal content searchs (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching journal content searchs
 	*/
 	public static List<JournalContentSearch> findByG_P_L(long groupId,
@@ -1075,7 +1075,7 @@ public class JournalContentSearchUtil {
 	* @param start the lower bound of the range of journal content searchs
 	* @param end the upper bound of the range of journal content searchs (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching journal content searchs
 	*/
 	public static List<JournalContentSearch> findByG_P_A(long groupId,
@@ -1282,7 +1282,7 @@ public class JournalContentSearchUtil {
 	* @param start the lower bound of the range of journal content searchs
 	* @param end the upper bound of the range of journal content searchs (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching journal content searchs
 	*/
 	public static List<JournalContentSearch> findByG_P_L_P(long groupId,
@@ -1468,7 +1468,7 @@ public class JournalContentSearchUtil {
 	* @param layoutId the layout ID
 	* @param portletId the portlet ID
 	* @param articleId the article ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching journal content search, or <code>null</code> if a matching journal content search could not be found
 	*/
 	public static JournalContentSearch fetchByG_P_L_P_A(long groupId,
@@ -1639,7 +1639,7 @@ public class JournalContentSearchUtil {
 	* @param start the lower bound of the range of journal content searchs
 	* @param end the upper bound of the range of journal content searchs (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of journal content searchs
 	*/
 	public static List<JournalContentSearch> findAll(int start, int end,

@@ -170,7 +170,7 @@ public class DDMStructureLayoutUtil {
 	* @param start the lower bound of the range of d d m structure layouts
 	* @param end the upper bound of the range of d d m structure layouts (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d m structure layouts
 	*/
 	public static List<DDMStructureLayout> findByUuid(java.lang.String uuid,
@@ -302,7 +302,7 @@ public class DDMStructureLayoutUtil {
 	*
 	* @param uuid the uuid
 	* @param groupId the group ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching d d m structure layout, or <code>null</code> if a matching d d m structure layout could not be found
 	*/
 	public static DDMStructureLayout fetchByUUID_G(java.lang.String uuid,
@@ -397,7 +397,7 @@ public class DDMStructureLayoutUtil {
 	* @param start the lower bound of the range of d d m structure layouts
 	* @param end the upper bound of the range of d d m structure layouts (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d m structure layouts
 	*/
 	public static List<DDMStructureLayout> findByUuid_C(java.lang.String uuid,
@@ -538,7 +538,7 @@ public class DDMStructureLayoutUtil {
 	* Returns the d d m structure layout where structureVersionId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
 	* @param structureVersionId the structure version ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching d d m structure layout, or <code>null</code> if a matching d d m structure layout could not be found
 	*/
 	public static DDMStructureLayout fetchByStructureVersionId(
@@ -693,7 +693,7 @@ public class DDMStructureLayoutUtil {
 	* @param start the lower bound of the range of d d m structure layouts
 	* @param end the upper bound of the range of d d m structure layouts (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of d d m structure layouts
 	*/
 	public static List<DDMStructureLayout> findAll(int start, int end,

@@ -92,7 +92,7 @@ public interface SCProductScreenshotPersistence extends BasePersistence<SCProduc
 	* @param start the lower bound of the range of s c product screenshots
 	* @param end the upper bound of the range of s c product screenshots (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching s c product screenshots
 	*/
 	public java.util.List<SCProductScreenshot> findByProductEntryId(
@@ -196,7 +196,7 @@ public interface SCProductScreenshotPersistence extends BasePersistence<SCProduc
 	* Returns the s c product screenshot where thumbnailId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
 	* @param thumbnailId the thumbnail ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching s c product screenshot, or <code>null</code> if a matching s c product screenshot could not be found
 	*/
 	public SCProductScreenshot fetchByThumbnailId(long thumbnailId,
@@ -241,7 +241,7 @@ public interface SCProductScreenshotPersistence extends BasePersistence<SCProduc
 	* Returns the s c product screenshot where fullImageId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
 	* @param fullImageId the full image ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching s c product screenshot, or <code>null</code> if a matching s c product screenshot could not be found
 	*/
 	public SCProductScreenshot fetchByFullImageId(long fullImageId,
@@ -289,7 +289,7 @@ public interface SCProductScreenshotPersistence extends BasePersistence<SCProduc
 	*
 	* @param productEntryId the product entry ID
 	* @param priority the priority
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching s c product screenshot, or <code>null</code> if a matching s c product screenshot could not be found
 	*/
 	public SCProductScreenshot fetchByP_P(long productEntryId, int priority,
@@ -417,7 +417,7 @@ public interface SCProductScreenshotPersistence extends BasePersistence<SCProduc
 	* @param start the lower bound of the range of s c product screenshots
 	* @param end the upper bound of the range of s c product screenshots (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of s c product screenshots
 	*/
 	public java.util.List<SCProductScreenshot> findAll(int start, int end,

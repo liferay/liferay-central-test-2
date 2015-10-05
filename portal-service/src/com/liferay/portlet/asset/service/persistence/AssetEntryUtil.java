@@ -166,7 +166,7 @@ public class AssetEntryUtil {
 	* @param start the lower bound of the range of asset entries
 	* @param end the upper bound of the range of asset entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching asset entries
 	*/
 	public static List<AssetEntry> findByGroupId(long groupId, int start,
@@ -322,7 +322,7 @@ public class AssetEntryUtil {
 	* @param start the lower bound of the range of asset entries
 	* @param end the upper bound of the range of asset entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching asset entries
 	*/
 	public static List<AssetEntry> findByCompanyId(long companyId, int start,
@@ -482,7 +482,7 @@ public class AssetEntryUtil {
 	* @param start the lower bound of the range of asset entries
 	* @param end the upper bound of the range of asset entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching asset entries
 	*/
 	public static List<AssetEntry> findByVisible(boolean visible, int start,
@@ -639,7 +639,7 @@ public class AssetEntryUtil {
 	* @param start the lower bound of the range of asset entries
 	* @param end the upper bound of the range of asset entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching asset entries
 	*/
 	public static List<AssetEntry> findByPublishDate(
@@ -808,7 +808,7 @@ public class AssetEntryUtil {
 	* @param start the lower bound of the range of asset entries
 	* @param end the upper bound of the range of asset entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching asset entries
 	*/
 	public static List<AssetEntry> findByExpirationDate(
@@ -976,7 +976,7 @@ public class AssetEntryUtil {
 	* @param start the lower bound of the range of asset entries
 	* @param end the upper bound of the range of asset entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching asset entries
 	*/
 	public static List<AssetEntry> findByLayoutUuid(
@@ -1115,7 +1115,7 @@ public class AssetEntryUtil {
 	*
 	* @param groupId the group ID
 	* @param classUuid the class uuid
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching asset entry, or <code>null</code> if a matching asset entry could not be found
 	*/
 	public static AssetEntry fetchByG_CU(long groupId,
@@ -1177,7 +1177,7 @@ public class AssetEntryUtil {
 	*
 	* @param classNameId the class name ID
 	* @param classPK the class p k
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching asset entry, or <code>null</code> if a matching asset entry could not be found
 	*/
 	public static AssetEntry fetchByC_C(long classNameId, long classPK,
@@ -1331,7 +1331,7 @@ public class AssetEntryUtil {
 	* @param start the lower bound of the range of asset entries
 	* @param end the upper bound of the range of asset entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of asset entries
 	*/
 	public static List<AssetEntry> findAll(int start, int end,

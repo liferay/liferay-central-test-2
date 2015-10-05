@@ -168,7 +168,7 @@ public class BackgroundTaskUtil {
 	* @param start the lower bound of the range of background tasks
 	* @param end the upper bound of the range of background tasks (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching background tasks
 	*/
 	public static List<BackgroundTask> findByGroupId(long groupId, int start,
@@ -325,7 +325,7 @@ public class BackgroundTaskUtil {
 	* @param start the lower bound of the range of background tasks
 	* @param end the upper bound of the range of background tasks (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching background tasks
 	*/
 	public static List<BackgroundTask> findByCompanyId(long companyId,
@@ -487,7 +487,7 @@ public class BackgroundTaskUtil {
 	* @param start the lower bound of the range of background tasks
 	* @param end the upper bound of the range of background tasks (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching background tasks
 	*/
 	public static List<BackgroundTask> findByStatus(int status, int start,
@@ -652,7 +652,7 @@ public class BackgroundTaskUtil {
 	* @param start the lower bound of the range of background tasks
 	* @param end the upper bound of the range of background tasks (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching background tasks
 	*/
 	public static List<BackgroundTask> findByG_T(long groupId,
@@ -821,7 +821,7 @@ public class BackgroundTaskUtil {
 	* @param start the lower bound of the range of background tasks
 	* @param end the upper bound of the range of background tasks (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching background tasks
 	*/
 	public static List<BackgroundTask> findByG_T(long groupId,
@@ -929,7 +929,7 @@ public class BackgroundTaskUtil {
 	* @param start the lower bound of the range of background tasks
 	* @param end the upper bound of the range of background tasks (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching background tasks
 	*/
 	public static List<BackgroundTask> findByG_S(long groupId, int status,
@@ -1106,7 +1106,7 @@ public class BackgroundTaskUtil {
 	* @param start the lower bound of the range of background tasks
 	* @param end the upper bound of the range of background tasks (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching background tasks
 	*/
 	public static List<BackgroundTask> findByT_S(
@@ -1275,7 +1275,7 @@ public class BackgroundTaskUtil {
 	* @param start the lower bound of the range of background tasks
 	* @param end the upper bound of the range of background tasks (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching background tasks
 	*/
 	public static List<BackgroundTask> findByT_S(
@@ -1392,7 +1392,7 @@ public class BackgroundTaskUtil {
 	* @param start the lower bound of the range of background tasks
 	* @param end the upper bound of the range of background tasks (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching background tasks
 	*/
 	public static List<BackgroundTask> findByG_N_T(long groupId,
@@ -1596,7 +1596,7 @@ public class BackgroundTaskUtil {
 	* @param start the lower bound of the range of background tasks
 	* @param end the upper bound of the range of background tasks (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching background tasks
 	*/
 	public static List<BackgroundTask> findByG_T_C(long groupId,
@@ -1777,7 +1777,7 @@ public class BackgroundTaskUtil {
 	* @param start the lower bound of the range of background tasks
 	* @param end the upper bound of the range of background tasks (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching background tasks
 	*/
 	public static List<BackgroundTask> findByG_T_C(long groupId,
@@ -1901,7 +1901,7 @@ public class BackgroundTaskUtil {
 	* @param start the lower bound of the range of background tasks
 	* @param end the upper bound of the range of background tasks (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching background tasks
 	*/
 	public static List<BackgroundTask> findByG_T_S(long groupId,
@@ -2082,7 +2082,7 @@ public class BackgroundTaskUtil {
 	* @param start the lower bound of the range of background tasks
 	* @param end the upper bound of the range of background tasks (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching background tasks
 	*/
 	public static List<BackgroundTask> findByG_T_S(long groupId,
@@ -2213,7 +2213,7 @@ public class BackgroundTaskUtil {
 	* @param start the lower bound of the range of background tasks
 	* @param end the upper bound of the range of background tasks (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching background tasks
 	*/
 	public static List<BackgroundTask> findByG_N_T_C(long groupId,
@@ -2476,7 +2476,7 @@ public class BackgroundTaskUtil {
 	* @param start the lower bound of the range of background tasks
 	* @param end the upper bound of the range of background tasks (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of background tasks
 	*/
 	public static List<BackgroundTask> findAll(int start, int end,

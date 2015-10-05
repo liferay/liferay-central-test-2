@@ -89,7 +89,7 @@ public interface ResourcePermissionPersistence extends BasePersistence<ResourceP
 	* @param start the lower bound of the range of resource permissions
 	* @param end the upper bound of the range of resource permissions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching resource permissions
 	*/
 	public java.util.List<ResourcePermission> findByScope(int scope, int start,
@@ -210,7 +210,7 @@ public interface ResourcePermissionPersistence extends BasePersistence<ResourceP
 	* @param start the lower bound of the range of resource permissions
 	* @param end the upper bound of the range of resource permissions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching resource permissions
 	*/
 	public java.util.List<ResourcePermission> findByScope(int[] scopes,
@@ -292,7 +292,7 @@ public interface ResourcePermissionPersistence extends BasePersistence<ResourceP
 	* @param start the lower bound of the range of resource permissions
 	* @param end the upper bound of the range of resource permissions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching resource permissions
 	*/
 	public java.util.List<ResourcePermission> findByRoleId(long roleId,
@@ -429,7 +429,7 @@ public interface ResourcePermissionPersistence extends BasePersistence<ResourceP
 	* @param start the lower bound of the range of resource permissions
 	* @param end the upper bound of the range of resource permissions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching resource permissions
 	*/
 	public java.util.List<ResourcePermission> findByC_LikeP(long companyId,
@@ -581,7 +581,7 @@ public interface ResourcePermissionPersistence extends BasePersistence<ResourceP
 	* @param start the lower bound of the range of resource permissions
 	* @param end the upper bound of the range of resource permissions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching resource permissions
 	*/
 	public java.util.List<ResourcePermission> findByC_N_S(long companyId,
@@ -747,7 +747,7 @@ public interface ResourcePermissionPersistence extends BasePersistence<ResourceP
 	* @param start the lower bound of the range of resource permissions
 	* @param end the upper bound of the range of resource permissions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching resource permissions
 	*/
 	public java.util.List<ResourcePermission> findByC_N_S_P(long companyId,
@@ -932,7 +932,7 @@ public interface ResourcePermissionPersistence extends BasePersistence<ResourceP
 	* @param start the lower bound of the range of resource permissions
 	* @param end the upper bound of the range of resource permissions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching resource permissions
 	*/
 	public java.util.List<ResourcePermission> findByC_N_S_P_R(long companyId,
@@ -977,7 +977,7 @@ public interface ResourcePermissionPersistence extends BasePersistence<ResourceP
 	* @param scope the scope
 	* @param primKey the prim key
 	* @param roleId the role ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching resource permission, or <code>null</code> if a matching resource permission could not be found
 	*/
 	public ResourcePermission fetchByC_N_S_P_R(long companyId,
@@ -1099,7 +1099,7 @@ public interface ResourcePermissionPersistence extends BasePersistence<ResourceP
 	* @param start the lower bound of the range of resource permissions
 	* @param end the upper bound of the range of resource permissions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching resource permissions
 	*/
 	public java.util.List<ResourcePermission> findByC_N_S_P_R_V(
@@ -1279,7 +1279,7 @@ public interface ResourcePermissionPersistence extends BasePersistence<ResourceP
 	* @param start the lower bound of the range of resource permissions
 	* @param end the upper bound of the range of resource permissions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching resource permissions
 	*/
 	public java.util.List<ResourcePermission> findByC_N_S_P_R_V(
@@ -1431,7 +1431,7 @@ public interface ResourcePermissionPersistence extends BasePersistence<ResourceP
 	* @param start the lower bound of the range of resource permissions
 	* @param end the upper bound of the range of resource permissions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of resource permissions
 	*/
 	public java.util.List<ResourcePermission> findAll(int start, int end,

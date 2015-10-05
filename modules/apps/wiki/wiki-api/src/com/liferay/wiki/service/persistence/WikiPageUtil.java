@@ -167,7 +167,7 @@ public class WikiPageUtil {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public static List<WikiPage> findByUuid(java.lang.String uuid, int start,
@@ -294,7 +294,7 @@ public class WikiPageUtil {
 	*
 	* @param uuid the uuid
 	* @param groupId the group ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	*/
 	public static WikiPage fetchByUUID_G(java.lang.String uuid, long groupId,
@@ -388,7 +388,7 @@ public class WikiPageUtil {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public static List<WikiPage> findByUuid_C(java.lang.String uuid,
@@ -558,7 +558,7 @@ public class WikiPageUtil {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public static List<WikiPage> findByResourcePrimKey(long resourcePrimKey,
@@ -721,7 +721,7 @@ public class WikiPageUtil {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public static List<WikiPage> findByNodeId(long nodeId, int start, int end,
@@ -875,7 +875,7 @@ public class WikiPageUtil {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public static List<WikiPage> findByFormat(java.lang.String format,
@@ -1035,7 +1035,7 @@ public class WikiPageUtil {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public static List<WikiPage> findByR_N(long resourcePrimKey, long nodeId,
@@ -1208,7 +1208,7 @@ public class WikiPageUtil {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public static List<WikiPage> findByR_S(long resourcePrimKey, int status,
@@ -1380,7 +1380,7 @@ public class WikiPageUtil {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public static List<WikiPage> findByN_T(long nodeId, java.lang.String title,
@@ -1548,7 +1548,7 @@ public class WikiPageUtil {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public static List<WikiPage> findByN_H(long nodeId, boolean head,
@@ -1717,7 +1717,7 @@ public class WikiPageUtil {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public static List<WikiPage> findByN_P(long nodeId,
@@ -1896,7 +1896,7 @@ public class WikiPageUtil {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public static List<WikiPage> findByN_R(long nodeId,
@@ -2072,7 +2072,7 @@ public class WikiPageUtil {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public static List<WikiPage> findByN_S(long nodeId, int status, int start,
@@ -2214,7 +2214,7 @@ public class WikiPageUtil {
 	* @param resourcePrimKey the resource prim key
 	* @param nodeId the node ID
 	* @param version the version
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	*/
 	public static WikiPage fetchByR_N_V(long resourcePrimKey, long nodeId,
@@ -2319,7 +2319,7 @@ public class WikiPageUtil {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public static List<WikiPage> findByR_N_H(long resourcePrimKey, long nodeId,
@@ -2512,7 +2512,7 @@ public class WikiPageUtil {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public static List<WikiPage> findByR_N_S(long resourcePrimKey, long nodeId,
@@ -2703,7 +2703,7 @@ public class WikiPageUtil {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public static List<WikiPage> findByG_N_H(long groupId, long nodeId,
@@ -2976,7 +2976,7 @@ public class WikiPageUtil {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public static List<WikiPage> findByG_N_S(long groupId, long nodeId,
@@ -3250,7 +3250,7 @@ public class WikiPageUtil {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public static List<WikiPage> findByU_N_S(long userId, long nodeId,
@@ -3400,7 +3400,7 @@ public class WikiPageUtil {
 	* @param nodeId the node ID
 	* @param title the title
 	* @param version the version
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	*/
 	public static WikiPage fetchByN_T_V(long nodeId, java.lang.String title,
@@ -3503,7 +3503,7 @@ public class WikiPageUtil {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public static List<WikiPage> findByN_T_H(long nodeId,
@@ -3695,7 +3695,7 @@ public class WikiPageUtil {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public static List<WikiPage> findByN_T_S(long nodeId,
@@ -3888,7 +3888,7 @@ public class WikiPageUtil {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public static List<WikiPage> findByN_H_P(long nodeId, boolean head,
@@ -4085,7 +4085,7 @@ public class WikiPageUtil {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public static List<WikiPage> findByN_H_R(long nodeId, boolean head,
@@ -4281,7 +4281,7 @@ public class WikiPageUtil {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public static List<WikiPage> findByN_H_S(long nodeId, boolean head,
@@ -4466,7 +4466,7 @@ public class WikiPageUtil {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public static List<WikiPage> findByN_H_NotS(long nodeId, boolean head,
@@ -4658,7 +4658,7 @@ public class WikiPageUtil {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public static List<WikiPage> findByG_U_N_S(long groupId, long userId,
@@ -4959,7 +4959,7 @@ public class WikiPageUtil {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public static List<WikiPage> findByG_N_T_H(long groupId, long nodeId,
@@ -5262,7 +5262,7 @@ public class WikiPageUtil {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public static List<WikiPage> findByG_N_H_S(long groupId, long nodeId,
@@ -5563,7 +5563,7 @@ public class WikiPageUtil {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public static List<WikiPage> findByN_H_P_S(long nodeId, boolean head,
@@ -5773,7 +5773,7 @@ public class WikiPageUtil {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public static List<WikiPage> findByN_H_P_NotS(long nodeId, boolean head,
@@ -5984,7 +5984,7 @@ public class WikiPageUtil {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public static List<WikiPage> findByN_H_R_S(long nodeId, boolean head,
@@ -6195,7 +6195,7 @@ public class WikiPageUtil {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public static List<WikiPage> findByN_H_R_NotS(long nodeId, boolean head,
@@ -6411,7 +6411,7 @@ public class WikiPageUtil {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public static List<WikiPage> findByG_N_H_P_S(long groupId, long nodeId,
@@ -6783,7 +6783,7 @@ public class WikiPageUtil {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of wiki pages
 	*/
 	public static List<WikiPage> findAll(int start, int end,

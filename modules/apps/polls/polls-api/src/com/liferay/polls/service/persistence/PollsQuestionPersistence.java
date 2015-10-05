@@ -91,7 +91,7 @@ public interface PollsQuestionPersistence extends BasePersistence<PollsQuestion>
 	* @param start the lower bound of the range of polls questions
 	* @param end the upper bound of the range of polls questions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching polls questions
 	*/
 	public java.util.List<PollsQuestion> findByUuid(java.lang.String uuid,
@@ -197,7 +197,7 @@ public interface PollsQuestionPersistence extends BasePersistence<PollsQuestion>
 	*
 	* @param uuid the uuid
 	* @param groupId the group ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching polls question, or <code>null</code> if a matching polls question could not be found
 	*/
 	public PollsQuestion fetchByUUID_G(java.lang.String uuid, long groupId,
@@ -278,7 +278,7 @@ public interface PollsQuestionPersistence extends BasePersistence<PollsQuestion>
 	* @param start the lower bound of the range of polls questions
 	* @param end the upper bound of the range of polls questions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching polls questions
 	*/
 	public java.util.List<PollsQuestion> findByUuid_C(java.lang.String uuid,
@@ -421,7 +421,7 @@ public interface PollsQuestionPersistence extends BasePersistence<PollsQuestion>
 	* @param start the lower bound of the range of polls questions
 	* @param end the upper bound of the range of polls questions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching polls questions
 	*/
 	public java.util.List<PollsQuestion> findByGroupId(long groupId, int start,
@@ -665,7 +665,7 @@ public interface PollsQuestionPersistence extends BasePersistence<PollsQuestion>
 	* @param start the lower bound of the range of polls questions
 	* @param end the upper bound of the range of polls questions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of polls questions
 	*/
 	public java.util.List<PollsQuestion> findAll(int start, int end,

@@ -168,7 +168,7 @@ public class JournalFeedUtil {
 	* @param start the lower bound of the range of journal feeds
 	* @param end the upper bound of the range of journal feeds (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching journal feeds
 	*/
 	public static List<JournalFeed> findByUuid(java.lang.String uuid,
@@ -295,7 +295,7 @@ public class JournalFeedUtil {
 	*
 	* @param uuid the uuid
 	* @param groupId the group ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching journal feed, or <code>null</code> if a matching journal feed could not be found
 	*/
 	public static JournalFeed fetchByUUID_G(java.lang.String uuid,
@@ -389,7 +389,7 @@ public class JournalFeedUtil {
 	* @param start the lower bound of the range of journal feeds
 	* @param end the upper bound of the range of journal feeds (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching journal feeds
 	*/
 	public static List<JournalFeed> findByUuid_C(java.lang.String uuid,
@@ -558,7 +558,7 @@ public class JournalFeedUtil {
 	* @param start the lower bound of the range of journal feeds
 	* @param end the upper bound of the range of journal feeds (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching journal feeds
 	*/
 	public static List<JournalFeed> findByGroupId(long groupId, int start,
@@ -758,7 +758,7 @@ public class JournalFeedUtil {
 	*
 	* @param groupId the group ID
 	* @param feedId the feed ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching journal feed, or <code>null</code> if a matching journal feed could not be found
 	*/
 	public static JournalFeed fetchByG_F(long groupId, java.lang.String feedId,
@@ -911,7 +911,7 @@ public class JournalFeedUtil {
 	* @param start the lower bound of the range of journal feeds
 	* @param end the upper bound of the range of journal feeds (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of journal feeds
 	*/
 	public static List<JournalFeed> findAll(int start, int end,

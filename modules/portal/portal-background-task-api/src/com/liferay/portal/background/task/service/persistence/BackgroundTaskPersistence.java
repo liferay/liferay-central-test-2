@@ -90,7 +90,7 @@ public interface BackgroundTaskPersistence extends BasePersistence<BackgroundTas
 	* @param start the lower bound of the range of background tasks
 	* @param end the upper bound of the range of background tasks (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching background tasks
 	*/
 	public java.util.List<BackgroundTask> findByGroupId(long groupId,
@@ -222,7 +222,7 @@ public interface BackgroundTaskPersistence extends BasePersistence<BackgroundTas
 	* @param start the lower bound of the range of background tasks
 	* @param end the upper bound of the range of background tasks (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching background tasks
 	*/
 	public java.util.List<BackgroundTask> findByCompanyId(long companyId,
@@ -354,7 +354,7 @@ public interface BackgroundTaskPersistence extends BasePersistence<BackgroundTas
 	* @param start the lower bound of the range of background tasks
 	* @param end the upper bound of the range of background tasks (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching background tasks
 	*/
 	public java.util.List<BackgroundTask> findByStatus(int status, int start,
@@ -491,7 +491,7 @@ public interface BackgroundTaskPersistence extends BasePersistence<BackgroundTas
 	* @param start the lower bound of the range of background tasks
 	* @param end the upper bound of the range of background tasks (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching background tasks
 	*/
 	public java.util.List<BackgroundTask> findByG_T(long groupId,
@@ -626,7 +626,7 @@ public interface BackgroundTaskPersistence extends BasePersistence<BackgroundTas
 	* @param start the lower bound of the range of background tasks
 	* @param end the upper bound of the range of background tasks (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching background tasks
 	*/
 	public java.util.List<BackgroundTask> findByG_T(long groupId,
@@ -716,7 +716,7 @@ public interface BackgroundTaskPersistence extends BasePersistence<BackgroundTas
 	* @param start the lower bound of the range of background tasks
 	* @param end the upper bound of the range of background tasks (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching background tasks
 	*/
 	public java.util.List<BackgroundTask> findByG_S(long groupId, int status,
@@ -860,7 +860,7 @@ public interface BackgroundTaskPersistence extends BasePersistence<BackgroundTas
 	* @param start the lower bound of the range of background tasks
 	* @param end the upper bound of the range of background tasks (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching background tasks
 	*/
 	public java.util.List<BackgroundTask> findByT_S(
@@ -997,7 +997,7 @@ public interface BackgroundTaskPersistence extends BasePersistence<BackgroundTas
 	* @param start the lower bound of the range of background tasks
 	* @param end the upper bound of the range of background tasks (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching background tasks
 	*/
 	public java.util.List<BackgroundTask> findByT_S(
@@ -1094,7 +1094,7 @@ public interface BackgroundTaskPersistence extends BasePersistence<BackgroundTas
 	* @param start the lower bound of the range of background tasks
 	* @param end the upper bound of the range of background tasks (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching background tasks
 	*/
 	public java.util.List<BackgroundTask> findByG_N_T(long groupId,
@@ -1259,7 +1259,7 @@ public interface BackgroundTaskPersistence extends BasePersistence<BackgroundTas
 	* @param start the lower bound of the range of background tasks
 	* @param end the upper bound of the range of background tasks (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching background tasks
 	*/
 	public java.util.List<BackgroundTask> findByG_T_C(long groupId,
@@ -1407,7 +1407,7 @@ public interface BackgroundTaskPersistence extends BasePersistence<BackgroundTas
 	* @param start the lower bound of the range of background tasks
 	* @param end the upper bound of the range of background tasks (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching background tasks
 	*/
 	public java.util.List<BackgroundTask> findByG_T_C(long groupId,
@@ -1508,7 +1508,7 @@ public interface BackgroundTaskPersistence extends BasePersistence<BackgroundTas
 	* @param start the lower bound of the range of background tasks
 	* @param end the upper bound of the range of background tasks (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching background tasks
 	*/
 	public java.util.List<BackgroundTask> findByG_T_S(long groupId,
@@ -1654,7 +1654,7 @@ public interface BackgroundTaskPersistence extends BasePersistence<BackgroundTas
 	* @param start the lower bound of the range of background tasks
 	* @param end the upper bound of the range of background tasks (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching background tasks
 	*/
 	public java.util.List<BackgroundTask> findByG_T_S(long groupId,
@@ -1762,7 +1762,7 @@ public interface BackgroundTaskPersistence extends BasePersistence<BackgroundTas
 	* @param start the lower bound of the range of background tasks
 	* @param end the upper bound of the range of background tasks (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching background tasks
 	*/
 	public java.util.List<BackgroundTask> findByG_N_T_C(long groupId,
@@ -1977,7 +1977,7 @@ public interface BackgroundTaskPersistence extends BasePersistence<BackgroundTas
 	* @param start the lower bound of the range of background tasks
 	* @param end the upper bound of the range of background tasks (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of background tasks
 	*/
 	public java.util.List<BackgroundTask> findAll(int start, int end,

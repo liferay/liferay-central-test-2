@@ -92,7 +92,7 @@ public interface CalendarResourcePersistence extends BasePersistence<CalendarRes
 	* @param start the lower bound of the range of calendar resources
 	* @param end the upper bound of the range of calendar resources (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching calendar resources
 	*/
 	public java.util.List<CalendarResource> findByResourceBlockId(
@@ -224,7 +224,7 @@ public interface CalendarResourcePersistence extends BasePersistence<CalendarRes
 	* @param start the lower bound of the range of calendar resources
 	* @param end the upper bound of the range of calendar resources (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching calendar resources
 	*/
 	public java.util.List<CalendarResource> findByUuid(java.lang.String uuid,
@@ -330,7 +330,7 @@ public interface CalendarResourcePersistence extends BasePersistence<CalendarRes
 	*
 	* @param uuid the uuid
 	* @param groupId the group ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching calendar resource, or <code>null</code> if a matching calendar resource could not be found
 	*/
 	public CalendarResource fetchByUUID_G(java.lang.String uuid, long groupId,
@@ -411,7 +411,7 @@ public interface CalendarResourcePersistence extends BasePersistence<CalendarRes
 	* @param start the lower bound of the range of calendar resources
 	* @param end the upper bound of the range of calendar resources (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching calendar resources
 	*/
 	public java.util.List<CalendarResource> findByUuid_C(
@@ -554,7 +554,7 @@ public interface CalendarResourcePersistence extends BasePersistence<CalendarRes
 	* @param start the lower bound of the range of calendar resources
 	* @param end the upper bound of the range of calendar resources (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching calendar resources
 	*/
 	public java.util.List<CalendarResource> findByGroupId(long groupId,
@@ -748,7 +748,7 @@ public interface CalendarResourcePersistence extends BasePersistence<CalendarRes
 	* @param start the lower bound of the range of calendar resources
 	* @param end the upper bound of the range of calendar resources (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching calendar resources
 	*/
 	public java.util.List<CalendarResource> findByActive(boolean active,
@@ -885,7 +885,7 @@ public interface CalendarResourcePersistence extends BasePersistence<CalendarRes
 	* @param start the lower bound of the range of calendar resources
 	* @param end the upper bound of the range of calendar resources (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching calendar resources
 	*/
 	public java.util.List<CalendarResource> findByG_C(long groupId,
@@ -1122,7 +1122,7 @@ public interface CalendarResourcePersistence extends BasePersistence<CalendarRes
 	* @param start the lower bound of the range of calendar resources
 	* @param end the upper bound of the range of calendar resources (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching calendar resources
 	*/
 	public java.util.List<CalendarResource> findByG_C(long[] groupIds,
@@ -1230,7 +1230,7 @@ public interface CalendarResourcePersistence extends BasePersistence<CalendarRes
 	* @param start the lower bound of the range of calendar resources
 	* @param end the upper bound of the range of calendar resources (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching calendar resources
 	*/
 	public java.util.List<CalendarResource> findByG_A(long groupId,
@@ -1411,7 +1411,7 @@ public interface CalendarResourcePersistence extends BasePersistence<CalendarRes
 	*
 	* @param classNameId the class name ID
 	* @param classPK the class p k
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching calendar resource, or <code>null</code> if a matching calendar resource could not be found
 	*/
 	public CalendarResource fetchByC_C(long classNameId, long classPK,
@@ -1496,7 +1496,7 @@ public interface CalendarResourcePersistence extends BasePersistence<CalendarRes
 	* @param start the lower bound of the range of calendar resources
 	* @param end the upper bound of the range of calendar resources (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching calendar resources
 	*/
 	public java.util.List<CalendarResource> findByC_C_A(long companyId,
@@ -1698,7 +1698,7 @@ public interface CalendarResourcePersistence extends BasePersistence<CalendarRes
 	* @param start the lower bound of the range of calendar resources
 	* @param end the upper bound of the range of calendar resources (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of calendar resources
 	*/
 	public java.util.List<CalendarResource> findAll(int start, int end,

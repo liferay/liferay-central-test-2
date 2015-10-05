@@ -161,7 +161,7 @@ public class GroupUtil {
 	* @param start the lower bound of the range of groups
 	* @param end the upper bound of the range of groups (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching groups
 	*/
 	public static List<Group> findByUuid(java.lang.String uuid, int start,
@@ -288,7 +288,7 @@ public class GroupUtil {
 	*
 	* @param uuid the uuid
 	* @param groupId the group ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching group, or <code>null</code> if a matching group could not be found
 	*/
 	public static Group fetchByUUID_G(java.lang.String uuid, long groupId,
@@ -381,7 +381,7 @@ public class GroupUtil {
 	* @param start the lower bound of the range of groups
 	* @param end the upper bound of the range of groups (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching groups
 	*/
 	public static List<Group> findByUuid_C(java.lang.String uuid,
@@ -548,7 +548,7 @@ public class GroupUtil {
 	* @param start the lower bound of the range of groups
 	* @param end the upper bound of the range of groups (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching groups
 	*/
 	public static List<Group> findByCompanyId(long companyId, int start,
@@ -677,7 +677,7 @@ public class GroupUtil {
 	* Returns the group where liveGroupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
 	* @param liveGroupId the live group ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching group, or <code>null</code> if a matching group could not be found
 	*/
 	public static Group fetchByLiveGroupId(long liveGroupId,
@@ -769,7 +769,7 @@ public class GroupUtil {
 	* @param start the lower bound of the range of groups
 	* @param end the upper bound of the range of groups (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching groups
 	*/
 	public static List<Group> findByC_C(long companyId, long classNameId,
@@ -941,7 +941,7 @@ public class GroupUtil {
 	* @param start the lower bound of the range of groups
 	* @param end the upper bound of the range of groups (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching groups
 	*/
 	public static List<Group> findByC_P(long companyId, long parentGroupId,
@@ -1080,7 +1080,7 @@ public class GroupUtil {
 	*
 	* @param companyId the company ID
 	* @param groupKey the group key
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching group, or <code>null</code> if a matching group could not be found
 	*/
 	public static Group fetchByC_GK(long companyId, java.lang.String groupKey,
@@ -1141,7 +1141,7 @@ public class GroupUtil {
 	*
 	* @param companyId the company ID
 	* @param friendlyURL the friendly u r l
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching group, or <code>null</code> if a matching group could not be found
 	*/
 	public static Group fetchByC_F(long companyId,
@@ -1234,7 +1234,7 @@ public class GroupUtil {
 	* @param start the lower bound of the range of groups
 	* @param end the upper bound of the range of groups (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching groups
 	*/
 	public static List<Group> findByC_S(long companyId, boolean site,
@@ -1405,7 +1405,7 @@ public class GroupUtil {
 	* @param start the lower bound of the range of groups
 	* @param end the upper bound of the range of groups (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching groups
 	*/
 	public static List<Group> findByT_A(int type, boolean active, int start,
@@ -1580,7 +1580,7 @@ public class GroupUtil {
 	* @param start the lower bound of the range of groups
 	* @param end the upper bound of the range of groups (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching groups
 	*/
 	public static List<Group> findByG_C_P(long groupId, long companyId,
@@ -1717,7 +1717,7 @@ public class GroupUtil {
 	* @param companyId the company ID
 	* @param classNameId the class name ID
 	* @param classPK the class p k
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching group, or <code>null</code> if a matching group could not be found
 	*/
 	public static Group fetchByC_C_C(long companyId, long classNameId,
@@ -1824,7 +1824,7 @@ public class GroupUtil {
 	* @param start the lower bound of the range of groups
 	* @param end the upper bound of the range of groups (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching groups
 	*/
 	public static List<Group> findByC_C_P(long companyId, long classNameId,
@@ -2018,7 +2018,7 @@ public class GroupUtil {
 	* @param start the lower bound of the range of groups
 	* @param end the upper bound of the range of groups (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching groups
 	*/
 	public static List<Group> findByC_P_S(long companyId, long parentGroupId,
@@ -2176,7 +2176,7 @@ public class GroupUtil {
 	* @param companyId the company ID
 	* @param liveGroupId the live group ID
 	* @param groupKey the group key
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching group, or <code>null</code> if a matching group could not be found
 	*/
 	public static Group fetchByC_L_GK(long companyId, long liveGroupId,
@@ -2253,7 +2253,7 @@ public class GroupUtil {
 	* @param classNameId the class name ID
 	* @param liveGroupId the live group ID
 	* @param groupKey the group key
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching group, or <code>null</code> if a matching group could not be found
 	*/
 	public static Group fetchByC_C_L_GK(long companyId, long classNameId,
@@ -2371,7 +2371,7 @@ public class GroupUtil {
 	* @param start the lower bound of the range of groups
 	* @param end the upper bound of the range of groups (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching groups
 	*/
 	public static List<Group> findByC_P_S_I(long companyId, long parentGroupId,
@@ -2631,7 +2631,7 @@ public class GroupUtil {
 	* @param start the lower bound of the range of groups
 	* @param end the upper bound of the range of groups (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of groups
 	*/
 	public static List<Group> findAll(int start, int end,

@@ -60,7 +60,7 @@ public interface CountryPersistence extends BasePersistence<Country> {
 	* Returns the country where name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
 	* @param name the name
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching country, or <code>null</code> if a matching country could not be found
 	*/
 	public Country fetchByName(java.lang.String name, boolean retrieveFromCache);
@@ -104,7 +104,7 @@ public interface CountryPersistence extends BasePersistence<Country> {
 	* Returns the country where a2 = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
 	* @param a2 the a2
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching country, or <code>null</code> if a matching country could not be found
 	*/
 	public Country fetchByA2(java.lang.String a2, boolean retrieveFromCache);
@@ -148,7 +148,7 @@ public interface CountryPersistence extends BasePersistence<Country> {
 	* Returns the country where a3 = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
 	* @param a3 the a3
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching country, or <code>null</code> if a matching country could not be found
 	*/
 	public Country fetchByA3(java.lang.String a3, boolean retrieveFromCache);
@@ -221,7 +221,7 @@ public interface CountryPersistence extends BasePersistence<Country> {
 	* @param start the lower bound of the range of countries
 	* @param end the upper bound of the range of countries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching countries
 	*/
 	public java.util.List<Country> findByActive(boolean active, int start,
@@ -402,7 +402,7 @@ public interface CountryPersistence extends BasePersistence<Country> {
 	* @param start the lower bound of the range of countries
 	* @param end the upper bound of the range of countries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of countries
 	*/
 	public java.util.List<Country> findAll(int start, int end,

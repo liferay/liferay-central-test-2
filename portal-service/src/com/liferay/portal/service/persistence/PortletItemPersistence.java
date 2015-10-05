@@ -93,7 +93,7 @@ public interface PortletItemPersistence extends BasePersistence<PortletItem> {
 	* @param start the lower bound of the range of portlet items
 	* @param end the upper bound of the range of portlet items (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching portlet items
 	*/
 	public java.util.List<PortletItem> findByG_C(long groupId,
@@ -241,7 +241,7 @@ public interface PortletItemPersistence extends BasePersistence<PortletItem> {
 	* @param start the lower bound of the range of portlet items
 	* @param end the upper bound of the range of portlet items (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching portlet items
 	*/
 	public java.util.List<PortletItem> findByG_P_C(long groupId,
@@ -375,7 +375,7 @@ public interface PortletItemPersistence extends BasePersistence<PortletItem> {
 	* @param name the name
 	* @param portletId the portlet ID
 	* @param classNameId the class name ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching portlet item, or <code>null</code> if a matching portlet item could not be found
 	*/
 	public PortletItem fetchByG_N_P_C(long groupId, java.lang.String name,
@@ -507,7 +507,7 @@ public interface PortletItemPersistence extends BasePersistence<PortletItem> {
 	* @param start the lower bound of the range of portlet items
 	* @param end the upper bound of the range of portlet items (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of portlet items
 	*/
 	public java.util.List<PortletItem> findAll(int start, int end,

@@ -162,7 +162,7 @@ public class WebsiteUtil {
 	* @param start the lower bound of the range of websites
 	* @param end the upper bound of the range of websites (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching websites
 	*/
 	public static List<Website> findByUuid(java.lang.String uuid, int start,
@@ -323,7 +323,7 @@ public class WebsiteUtil {
 	* @param start the lower bound of the range of websites
 	* @param end the upper bound of the range of websites (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching websites
 	*/
 	public static List<Website> findByUuid_C(java.lang.String uuid,
@@ -491,7 +491,7 @@ public class WebsiteUtil {
 	* @param start the lower bound of the range of websites
 	* @param end the upper bound of the range of websites (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching websites
 	*/
 	public static List<Website> findByCompanyId(long companyId, int start,
@@ -650,7 +650,7 @@ public class WebsiteUtil {
 	* @param start the lower bound of the range of websites
 	* @param end the upper bound of the range of websites (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching websites
 	*/
 	public static List<Website> findByUserId(long userId, int start, int end,
@@ -810,7 +810,7 @@ public class WebsiteUtil {
 	* @param start the lower bound of the range of websites
 	* @param end the upper bound of the range of websites (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching websites
 	*/
 	public static List<Website> findByC_C(long companyId, long classNameId,
@@ -990,7 +990,7 @@ public class WebsiteUtil {
 	* @param start the lower bound of the range of websites
 	* @param end the upper bound of the range of websites (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching websites
 	*/
 	public static List<Website> findByC_C_C(long companyId, long classNameId,
@@ -1189,7 +1189,7 @@ public class WebsiteUtil {
 	* @param start the lower bound of the range of websites
 	* @param end the upper bound of the range of websites (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching websites
 	*/
 	public static List<Website> findByC_C_C_P(long companyId, long classNameId,
@@ -1448,7 +1448,7 @@ public class WebsiteUtil {
 	* @param start the lower bound of the range of websites
 	* @param end the upper bound of the range of websites (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of websites
 	*/
 	public static List<Website> findAll(int start, int end,

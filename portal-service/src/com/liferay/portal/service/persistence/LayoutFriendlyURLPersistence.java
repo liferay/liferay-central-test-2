@@ -89,7 +89,7 @@ public interface LayoutFriendlyURLPersistence extends BasePersistence<LayoutFrie
 	* @param start the lower bound of the range of layout friendly u r ls
 	* @param end the upper bound of the range of layout friendly u r ls (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching layout friendly u r ls
 	*/
 	public java.util.List<LayoutFriendlyURL> findByUuid(java.lang.String uuid,
@@ -195,7 +195,7 @@ public interface LayoutFriendlyURLPersistence extends BasePersistence<LayoutFrie
 	*
 	* @param uuid the uuid
 	* @param groupId the group ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching layout friendly u r l, or <code>null</code> if a matching layout friendly u r l could not be found
 	*/
 	public LayoutFriendlyURL fetchByUUID_G(java.lang.String uuid, long groupId,
@@ -276,7 +276,7 @@ public interface LayoutFriendlyURLPersistence extends BasePersistence<LayoutFrie
 	* @param start the lower bound of the range of layout friendly u r ls
 	* @param end the upper bound of the range of layout friendly u r ls (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching layout friendly u r ls
 	*/
 	public java.util.List<LayoutFriendlyURL> findByUuid_C(
@@ -419,7 +419,7 @@ public interface LayoutFriendlyURLPersistence extends BasePersistence<LayoutFrie
 	* @param start the lower bound of the range of layout friendly u r ls
 	* @param end the upper bound of the range of layout friendly u r ls (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching layout friendly u r ls
 	*/
 	public java.util.List<LayoutFriendlyURL> findByGroupId(long groupId,
@@ -551,7 +551,7 @@ public interface LayoutFriendlyURLPersistence extends BasePersistence<LayoutFrie
 	* @param start the lower bound of the range of layout friendly u r ls
 	* @param end the upper bound of the range of layout friendly u r ls (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching layout friendly u r ls
 	*/
 	public java.util.List<LayoutFriendlyURL> findByCompanyId(long companyId,
@@ -683,7 +683,7 @@ public interface LayoutFriendlyURLPersistence extends BasePersistence<LayoutFrie
 	* @param start the lower bound of the range of layout friendly u r ls
 	* @param end the upper bound of the range of layout friendly u r ls (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching layout friendly u r ls
 	*/
 	public java.util.List<LayoutFriendlyURL> findByPlid(long plid, int start,
@@ -820,7 +820,7 @@ public interface LayoutFriendlyURLPersistence extends BasePersistence<LayoutFrie
 	* @param start the lower bound of the range of layout friendly u r ls
 	* @param end the upper bound of the range of layout friendly u r ls (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching layout friendly u r ls
 	*/
 	public java.util.List<LayoutFriendlyURL> findByP_F(long plid,
@@ -937,7 +937,7 @@ public interface LayoutFriendlyURLPersistence extends BasePersistence<LayoutFrie
 	*
 	* @param plid the plid
 	* @param languageId the language ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching layout friendly u r l, or <code>null</code> if a matching layout friendly u r l could not be found
 	*/
 	public LayoutFriendlyURL fetchByP_L(long plid, java.lang.String languageId,
@@ -1023,7 +1023,7 @@ public interface LayoutFriendlyURLPersistence extends BasePersistence<LayoutFrie
 	* @param start the lower bound of the range of layout friendly u r ls
 	* @param end the upper bound of the range of layout friendly u r ls (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching layout friendly u r ls
 	*/
 	public java.util.List<LayoutFriendlyURL> findByG_P_F(long groupId,
@@ -1160,7 +1160,7 @@ public interface LayoutFriendlyURLPersistence extends BasePersistence<LayoutFrie
 	* @param privateLayout the private layout
 	* @param friendlyURL the friendly u r l
 	* @param languageId the language ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching layout friendly u r l, or <code>null</code> if a matching layout friendly u r l could not be found
 	*/
 	public LayoutFriendlyURL fetchByG_P_F_L(long groupId,
@@ -1295,7 +1295,7 @@ public interface LayoutFriendlyURLPersistence extends BasePersistence<LayoutFrie
 	* @param start the lower bound of the range of layout friendly u r ls
 	* @param end the upper bound of the range of layout friendly u r ls (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of layout friendly u r ls
 	*/
 	public java.util.List<LayoutFriendlyURL> findAll(int start, int end,

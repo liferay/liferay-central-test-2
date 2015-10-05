@@ -168,7 +168,7 @@ public class KaleoConditionUtil {
 	* @param start the lower bound of the range of kaleo conditions
 	* @param end the upper bound of the range of kaleo conditions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching kaleo conditions
 	*/
 	public static List<KaleoCondition> findByCompanyId(long companyId,
@@ -334,7 +334,7 @@ public class KaleoConditionUtil {
 	* @param start the lower bound of the range of kaleo conditions
 	* @param end the upper bound of the range of kaleo conditions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching kaleo conditions
 	*/
 	public static List<KaleoCondition> findByKaleoDefinitionId(
@@ -473,7 +473,7 @@ public class KaleoConditionUtil {
 	* Returns the kaleo condition where kaleoNodeId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
 	* @param kaleoNodeId the kaleo node ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching kaleo condition, or <code>null</code> if a matching kaleo condition could not be found
 	*/
 	public static KaleoCondition fetchByKaleoNodeId(long kaleoNodeId,
@@ -625,7 +625,7 @@ public class KaleoConditionUtil {
 	* @param start the lower bound of the range of kaleo conditions
 	* @param end the upper bound of the range of kaleo conditions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of kaleo conditions
 	*/
 	public static List<KaleoCondition> findAll(int start, int end,

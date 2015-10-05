@@ -91,7 +91,7 @@ public interface SocialRequestPersistence extends BasePersistence<SocialRequest>
 	* @param start the lower bound of the range of social requests
 	* @param end the upper bound of the range of social requests (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social requests
 	*/
 	public java.util.List<SocialRequest> findByUuid(java.lang.String uuid,
@@ -197,7 +197,7 @@ public interface SocialRequestPersistence extends BasePersistence<SocialRequest>
 	*
 	* @param uuid the uuid
 	* @param groupId the group ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching social request, or <code>null</code> if a matching social request could not be found
 	*/
 	public SocialRequest fetchByUUID_G(java.lang.String uuid, long groupId,
@@ -278,7 +278,7 @@ public interface SocialRequestPersistence extends BasePersistence<SocialRequest>
 	* @param start the lower bound of the range of social requests
 	* @param end the upper bound of the range of social requests (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social requests
 	*/
 	public java.util.List<SocialRequest> findByUuid_C(java.lang.String uuid,
@@ -421,7 +421,7 @@ public interface SocialRequestPersistence extends BasePersistence<SocialRequest>
 	* @param start the lower bound of the range of social requests
 	* @param end the upper bound of the range of social requests (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social requests
 	*/
 	public java.util.List<SocialRequest> findByCompanyId(long companyId,
@@ -553,7 +553,7 @@ public interface SocialRequestPersistence extends BasePersistence<SocialRequest>
 	* @param start the lower bound of the range of social requests
 	* @param end the upper bound of the range of social requests (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social requests
 	*/
 	public java.util.List<SocialRequest> findByUserId(long userId, int start,
@@ -686,7 +686,7 @@ public interface SocialRequestPersistence extends BasePersistence<SocialRequest>
 	* @param start the lower bound of the range of social requests
 	* @param end the upper bound of the range of social requests (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social requests
 	*/
 	public java.util.List<SocialRequest> findByReceiverUserId(
@@ -822,7 +822,7 @@ public interface SocialRequestPersistence extends BasePersistence<SocialRequest>
 	* @param start the lower bound of the range of social requests
 	* @param end the upper bound of the range of social requests (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social requests
 	*/
 	public java.util.List<SocialRequest> findByU_S(long userId, int status,
@@ -966,7 +966,7 @@ public interface SocialRequestPersistence extends BasePersistence<SocialRequest>
 	* @param start the lower bound of the range of social requests
 	* @param end the upper bound of the range of social requests (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social requests
 	*/
 	public java.util.List<SocialRequest> findByC_C(long classNameId,
@@ -1110,7 +1110,7 @@ public interface SocialRequestPersistence extends BasePersistence<SocialRequest>
 	* @param start the lower bound of the range of social requests
 	* @param end the upper bound of the range of social requests (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social requests
 	*/
 	public java.util.List<SocialRequest> findByR_S(long receiverUserId,
@@ -1234,7 +1234,7 @@ public interface SocialRequestPersistence extends BasePersistence<SocialRequest>
 	* @param classPK the class p k
 	* @param type the type
 	* @param receiverUserId the receiver user ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching social request, or <code>null</code> if a matching social request could not be found
 	*/
 	public SocialRequest fetchByU_C_C_T_R(long userId, long classNameId,
@@ -1336,7 +1336,7 @@ public interface SocialRequestPersistence extends BasePersistence<SocialRequest>
 	* @param start the lower bound of the range of social requests
 	* @param end the upper bound of the range of social requests (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social requests
 	*/
 	public java.util.List<SocialRequest> findByU_C_C_T_S(long userId,
@@ -1522,7 +1522,7 @@ public interface SocialRequestPersistence extends BasePersistence<SocialRequest>
 	* @param start the lower bound of the range of social requests
 	* @param end the upper bound of the range of social requests (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social requests
 	*/
 	public java.util.List<SocialRequest> findByC_C_T_R_S(long classNameId,
@@ -1740,7 +1740,7 @@ public interface SocialRequestPersistence extends BasePersistence<SocialRequest>
 	* @param start the lower bound of the range of social requests
 	* @param end the upper bound of the range of social requests (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of social requests
 	*/
 	public java.util.List<SocialRequest> findAll(int start, int end,

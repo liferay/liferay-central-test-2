@@ -168,7 +168,7 @@ public class DDMStorageLinkUtil {
 	* @param start the lower bound of the range of d d m storage links
 	* @param end the upper bound of the range of d d m storage links (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d m storage links
 	*/
 	public static List<DDMStorageLink> findByUuid(java.lang.String uuid,
@@ -295,7 +295,7 @@ public class DDMStorageLinkUtil {
 	* Returns the d d m storage link where classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
 	* @param classPK the class p k
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching d d m storage link, or <code>null</code> if a matching d d m storage link could not be found
 	*/
 	public static DDMStorageLink fetchByClassPK(long classPK,
@@ -381,7 +381,7 @@ public class DDMStorageLinkUtil {
 	* @param start the lower bound of the range of d d m storage links
 	* @param end the upper bound of the range of d d m storage links (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d m storage links
 	*/
 	public static List<DDMStorageLink> findByStructureId(long structureId,
@@ -608,7 +608,7 @@ public class DDMStorageLinkUtil {
 	* @param start the lower bound of the range of d d m storage links
 	* @param end the upper bound of the range of d d m storage links (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of d d m storage links
 	*/
 	public static List<DDMStorageLink> findAll(int start, int end,

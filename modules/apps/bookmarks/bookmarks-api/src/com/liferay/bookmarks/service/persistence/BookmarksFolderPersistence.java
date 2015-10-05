@@ -92,7 +92,7 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 	* @param start the lower bound of the range of bookmarks folders
 	* @param end the upper bound of the range of bookmarks folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching bookmarks folders
 	*/
 	public java.util.List<BookmarksFolder> findByResourceBlockId(
@@ -224,7 +224,7 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 	* @param start the lower bound of the range of bookmarks folders
 	* @param end the upper bound of the range of bookmarks folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching bookmarks folders
 	*/
 	public java.util.List<BookmarksFolder> findByUuid(java.lang.String uuid,
@@ -330,7 +330,7 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 	*
 	* @param uuid the uuid
 	* @param groupId the group ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching bookmarks folder, or <code>null</code> if a matching bookmarks folder could not be found
 	*/
 	public BookmarksFolder fetchByUUID_G(java.lang.String uuid, long groupId,
@@ -411,7 +411,7 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 	* @param start the lower bound of the range of bookmarks folders
 	* @param end the upper bound of the range of bookmarks folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching bookmarks folders
 	*/
 	public java.util.List<BookmarksFolder> findByUuid_C(java.lang.String uuid,
@@ -554,7 +554,7 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 	* @param start the lower bound of the range of bookmarks folders
 	* @param end the upper bound of the range of bookmarks folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching bookmarks folders
 	*/
 	public java.util.List<BookmarksFolder> findByGroupId(long groupId,
@@ -748,7 +748,7 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 	* @param start the lower bound of the range of bookmarks folders
 	* @param end the upper bound of the range of bookmarks folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching bookmarks folders
 	*/
 	public java.util.List<BookmarksFolder> findByCompanyId(long companyId,
@@ -885,7 +885,7 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 	* @param start the lower bound of the range of bookmarks folders
 	* @param end the upper bound of the range of bookmarks folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching bookmarks folders
 	*/
 	public java.util.List<BookmarksFolder> findByG_P(long groupId,
@@ -1097,7 +1097,7 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 	* @param start the lower bound of the range of bookmarks folders
 	* @param end the upper bound of the range of bookmarks folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching bookmarks folders
 	*/
 	public java.util.List<BookmarksFolder> findByC_NotS(long companyId,
@@ -1245,7 +1245,7 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 	* @param start the lower bound of the range of bookmarks folders
 	* @param end the upper bound of the range of bookmarks folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching bookmarks folders
 	*/
 	public java.util.List<BookmarksFolder> findByG_P_S(long groupId,
@@ -1477,7 +1477,7 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 	* @param start the lower bound of the range of bookmarks folders
 	* @param end the upper bound of the range of bookmarks folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching bookmarks folders
 	*/
 	public java.util.List<BookmarksFolder> findByG_P_NotS(long groupId,
@@ -1714,7 +1714,7 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 	* @param start the lower bound of the range of bookmarks folders
 	* @param end the upper bound of the range of bookmarks folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching bookmarks folders
 	*/
 	public java.util.List<BookmarksFolder> findByF_C_P_NotS(long folderId,
@@ -1906,7 +1906,7 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 	* @param start the lower bound of the range of bookmarks folders
 	* @param end the upper bound of the range of bookmarks folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of bookmarks folders
 	*/
 	public java.util.List<BookmarksFolder> findAll(int start, int end,

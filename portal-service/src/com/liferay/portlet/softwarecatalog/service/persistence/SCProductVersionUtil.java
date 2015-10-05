@@ -169,7 +169,7 @@ public class SCProductVersionUtil {
 	* @param start the lower bound of the range of s c product versions
 	* @param end the upper bound of the range of s c product versions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching s c product versions
 	*/
 	public static List<SCProductVersion> findByProductEntryId(
@@ -307,7 +307,7 @@ public class SCProductVersionUtil {
 	* Returns the s c product version where directDownloadURL = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
 	* @param directDownloadURL the direct download u r l
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching s c product version, or <code>null</code> if a matching s c product version could not be found
 	*/
 	public static SCProductVersion fetchByDirectDownloadURL(
@@ -462,7 +462,7 @@ public class SCProductVersionUtil {
 	* @param start the lower bound of the range of s c product versions
 	* @param end the upper bound of the range of s c product versions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of s c product versions
 	*/
 	public static List<SCProductVersion> findAll(int start, int end,

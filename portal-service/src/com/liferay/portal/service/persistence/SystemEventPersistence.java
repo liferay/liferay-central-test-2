@@ -89,7 +89,7 @@ public interface SystemEventPersistence extends BasePersistence<SystemEvent> {
 	* @param start the lower bound of the range of system events
 	* @param end the upper bound of the range of system events (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching system events
 	*/
 	public java.util.List<SystemEvent> findByGroupId(long groupId, int start,
@@ -226,7 +226,7 @@ public interface SystemEventPersistence extends BasePersistence<SystemEvent> {
 	* @param start the lower bound of the range of system events
 	* @param end the upper bound of the range of system events (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching system events
 	*/
 	public java.util.List<SystemEvent> findByG_S(long groupId,
@@ -374,7 +374,7 @@ public interface SystemEventPersistence extends BasePersistence<SystemEvent> {
 	* @param start the lower bound of the range of system events
 	* @param end the upper bound of the range of system events (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching system events
 	*/
 	public java.util.List<SystemEvent> findByG_C_C(long groupId,
@@ -537,7 +537,7 @@ public interface SystemEventPersistence extends BasePersistence<SystemEvent> {
 	* @param start the lower bound of the range of system events
 	* @param end the upper bound of the range of system events (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching system events
 	*/
 	public java.util.List<SystemEvent> findByG_C_C_T(long groupId,
@@ -746,7 +746,7 @@ public interface SystemEventPersistence extends BasePersistence<SystemEvent> {
 	* @param start the lower bound of the range of system events
 	* @param end the upper bound of the range of system events (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of system events
 	*/
 	public java.util.List<SystemEvent> findAll(int start, int end,

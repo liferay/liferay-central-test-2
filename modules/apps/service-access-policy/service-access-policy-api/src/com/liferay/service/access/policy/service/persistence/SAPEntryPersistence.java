@@ -91,7 +91,7 @@ public interface SAPEntryPersistence extends BasePersistence<SAPEntry> {
 	* @param start the lower bound of the range of s a p entries
 	* @param end the upper bound of the range of s a p entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching s a p entries
 	*/
 	public java.util.List<SAPEntry> findByUuid(java.lang.String uuid,
@@ -290,7 +290,7 @@ public interface SAPEntryPersistence extends BasePersistence<SAPEntry> {
 	* @param start the lower bound of the range of s a p entries
 	* @param end the upper bound of the range of s a p entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching s a p entries
 	*/
 	public java.util.List<SAPEntry> findByUuid_C(java.lang.String uuid,
@@ -497,7 +497,7 @@ public interface SAPEntryPersistence extends BasePersistence<SAPEntry> {
 	* @param start the lower bound of the range of s a p entries
 	* @param end the upper bound of the range of s a p entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching s a p entries
 	*/
 	public java.util.List<SAPEntry> findByCompanyId(long companyId, int start,
@@ -665,7 +665,7 @@ public interface SAPEntryPersistence extends BasePersistence<SAPEntry> {
 	*
 	* @param companyId the company ID
 	* @param name the name
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching s a p entry, or <code>null</code> if a matching s a p entry could not be found
 	*/
 	public SAPEntry fetchByC_N(long companyId, java.lang.String name,
@@ -791,7 +791,7 @@ public interface SAPEntryPersistence extends BasePersistence<SAPEntry> {
 	* @param start the lower bound of the range of s a p entries
 	* @param end the upper bound of the range of s a p entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of s a p entries
 	*/
 	public java.util.List<SAPEntry> findAll(int start, int end,

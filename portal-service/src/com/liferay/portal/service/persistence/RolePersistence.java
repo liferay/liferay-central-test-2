@@ -89,7 +89,7 @@ public interface RolePersistence extends BasePersistence<Role> {
 	* @param start the lower bound of the range of roles
 	* @param end the upper bound of the range of roles (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching roles
 	*/
 	public java.util.List<Role> findByUuid(java.lang.String uuid, int start,
@@ -287,7 +287,7 @@ public interface RolePersistence extends BasePersistence<Role> {
 	* @param start the lower bound of the range of roles
 	* @param end the upper bound of the range of roles (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching roles
 	*/
 	public java.util.List<Role> findByUuid_C(java.lang.String uuid,
@@ -494,7 +494,7 @@ public interface RolePersistence extends BasePersistence<Role> {
 	* @param start the lower bound of the range of roles
 	* @param end the upper bound of the range of roles (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching roles
 	*/
 	public java.util.List<Role> findByCompanyId(long companyId, int start,
@@ -687,7 +687,7 @@ public interface RolePersistence extends BasePersistence<Role> {
 	* @param start the lower bound of the range of roles
 	* @param end the upper bound of the range of roles (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching roles
 	*/
 	public java.util.List<Role> findByName(java.lang.String name, int start,
@@ -878,7 +878,7 @@ public interface RolePersistence extends BasePersistence<Role> {
 	* @param start the lower bound of the range of roles
 	* @param end the upper bound of the range of roles (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching roles
 	*/
 	public java.util.List<Role> findByType(int type, int start, int end,
@@ -1067,7 +1067,7 @@ public interface RolePersistence extends BasePersistence<Role> {
 	* @param start the lower bound of the range of roles
 	* @param end the upper bound of the range of roles (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching roles
 	*/
 	public java.util.List<Role> findBySubtype(java.lang.String subtype,
@@ -1235,7 +1235,7 @@ public interface RolePersistence extends BasePersistence<Role> {
 	*
 	* @param companyId the company ID
 	* @param name the name
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching role, or <code>null</code> if a matching role could not be found
 	*/
 	public Role fetchByC_N(long companyId, java.lang.String name,
@@ -1315,7 +1315,7 @@ public interface RolePersistence extends BasePersistence<Role> {
 	* @param start the lower bound of the range of roles
 	* @param end the upper bound of the range of roles (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching roles
 	*/
 	public java.util.List<Role> findByC_T(long companyId, int type, int start,
@@ -1545,7 +1545,7 @@ public interface RolePersistence extends BasePersistence<Role> {
 	* @param start the lower bound of the range of roles
 	* @param end the upper bound of the range of roles (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching roles
 	*/
 	public java.util.List<Role> findByC_T(long companyId, int[] types,
@@ -1652,7 +1652,7 @@ public interface RolePersistence extends BasePersistence<Role> {
 	* @param start the lower bound of the range of roles
 	* @param end the upper bound of the range of roles (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching roles
 	*/
 	public java.util.List<Role> findByT_S(int type, java.lang.String subtype,
@@ -1836,7 +1836,7 @@ public interface RolePersistence extends BasePersistence<Role> {
 	* @param companyId the company ID
 	* @param classNameId the class name ID
 	* @param classPK the class p k
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching role, or <code>null</code> if a matching role could not be found
 	*/
 	public Role fetchByC_C_C(long companyId, long classNameId, long classPK,
@@ -1964,7 +1964,7 @@ public interface RolePersistence extends BasePersistence<Role> {
 	* @param start the lower bound of the range of roles
 	* @param end the upper bound of the range of roles (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of roles
 	*/
 	public java.util.List<Role> findAll(int start, int end,

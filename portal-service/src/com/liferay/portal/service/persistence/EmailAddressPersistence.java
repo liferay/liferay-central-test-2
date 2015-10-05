@@ -89,7 +89,7 @@ public interface EmailAddressPersistence extends BasePersistence<EmailAddress> {
 	* @param start the lower bound of the range of email addresses
 	* @param end the upper bound of the range of email addresses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching email addresses
 	*/
 	public java.util.List<EmailAddress> findByUuid(java.lang.String uuid,
@@ -226,7 +226,7 @@ public interface EmailAddressPersistence extends BasePersistence<EmailAddress> {
 	* @param start the lower bound of the range of email addresses
 	* @param end the upper bound of the range of email addresses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching email addresses
 	*/
 	public java.util.List<EmailAddress> findByUuid_C(java.lang.String uuid,
@@ -369,7 +369,7 @@ public interface EmailAddressPersistence extends BasePersistence<EmailAddress> {
 	* @param start the lower bound of the range of email addresses
 	* @param end the upper bound of the range of email addresses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching email addresses
 	*/
 	public java.util.List<EmailAddress> findByCompanyId(long companyId,
@@ -501,7 +501,7 @@ public interface EmailAddressPersistence extends BasePersistence<EmailAddress> {
 	* @param start the lower bound of the range of email addresses
 	* @param end the upper bound of the range of email addresses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching email addresses
 	*/
 	public java.util.List<EmailAddress> findByUserId(long userId, int start,
@@ -638,7 +638,7 @@ public interface EmailAddressPersistence extends BasePersistence<EmailAddress> {
 	* @param start the lower bound of the range of email addresses
 	* @param end the upper bound of the range of email addresses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching email addresses
 	*/
 	public java.util.List<EmailAddress> findByC_C(long companyId,
@@ -786,7 +786,7 @@ public interface EmailAddressPersistence extends BasePersistence<EmailAddress> {
 	* @param start the lower bound of the range of email addresses
 	* @param end the upper bound of the range of email addresses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching email addresses
 	*/
 	public java.util.List<EmailAddress> findByC_C_C(long companyId,
@@ -949,7 +949,7 @@ public interface EmailAddressPersistence extends BasePersistence<EmailAddress> {
 	* @param start the lower bound of the range of email addresses
 	* @param end the upper bound of the range of email addresses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching email addresses
 	*/
 	public java.util.List<EmailAddress> findByC_C_C_P(long companyId,
@@ -1158,7 +1158,7 @@ public interface EmailAddressPersistence extends BasePersistence<EmailAddress> {
 	* @param start the lower bound of the range of email addresses
 	* @param end the upper bound of the range of email addresses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of email addresses
 	*/
 	public java.util.List<EmailAddress> findAll(int start, int end,

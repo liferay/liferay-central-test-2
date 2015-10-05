@@ -170,7 +170,7 @@ public class DDMStructureLinkUtil {
 	* @param start the lower bound of the range of d d m structure links
 	* @param end the upper bound of the range of d d m structure links (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d m structure links
 	*/
 	public static List<DDMStructureLink> findByClassNameId(long classNameId,
@@ -333,7 +333,7 @@ public class DDMStructureLinkUtil {
 	* @param start the lower bound of the range of d d m structure links
 	* @param end the upper bound of the range of d d m structure links (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d m structure links
 	*/
 	public static List<DDMStructureLink> findByStructureId(long structureId,
@@ -502,7 +502,7 @@ public class DDMStructureLinkUtil {
 	* @param start the lower bound of the range of d d m structure links
 	* @param end the upper bound of the range of d d m structure links (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d m structure links
 	*/
 	public static List<DDMStructureLink> findByC_C(long classNameId,
@@ -648,7 +648,7 @@ public class DDMStructureLinkUtil {
 	* @param classNameId the class name ID
 	* @param classPK the class p k
 	* @param structureId the structure ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching d d m structure link, or <code>null</code> if a matching d d m structure link could not be found
 	*/
 	public static DDMStructureLink fetchByC_C_S(long classNameId, long classPK,
@@ -807,7 +807,7 @@ public class DDMStructureLinkUtil {
 	* @param start the lower bound of the range of d d m structure links
 	* @param end the upper bound of the range of d d m structure links (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of d d m structure links
 	*/
 	public static List<DDMStructureLink> findAll(int start, int end,

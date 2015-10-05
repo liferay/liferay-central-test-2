@@ -90,7 +90,7 @@ public interface LockPersistence extends BasePersistence<Lock> {
 	* @param start the lower bound of the range of locks
 	* @param end the upper bound of the range of locks (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching locks
 	*/
 	public java.util.List<Lock> findByUuid(java.lang.String uuid, int start,
@@ -226,7 +226,7 @@ public interface LockPersistence extends BasePersistence<Lock> {
 	* @param start the lower bound of the range of locks
 	* @param end the upper bound of the range of locks (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching locks
 	*/
 	public java.util.List<Lock> findByUuid_C(java.lang.String uuid,
@@ -366,7 +366,7 @@ public interface LockPersistence extends BasePersistence<Lock> {
 	* @param start the lower bound of the range of locks
 	* @param end the upper bound of the range of locks (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching locks
 	*/
 	public java.util.List<Lock> findByLtExpirationDate(
@@ -472,7 +472,7 @@ public interface LockPersistence extends BasePersistence<Lock> {
 	*
 	* @param className the class name
 	* @param key the key
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching lock, or <code>null</code> if a matching lock could not be found
 	*/
 	public Lock fetchByC_K(java.lang.String className, java.lang.String key,
@@ -598,7 +598,7 @@ public interface LockPersistence extends BasePersistence<Lock> {
 	* @param start the lower bound of the range of locks
 	* @param end the upper bound of the range of locks (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of locks
 	*/
 	public java.util.List<Lock> findAll(int start, int end,

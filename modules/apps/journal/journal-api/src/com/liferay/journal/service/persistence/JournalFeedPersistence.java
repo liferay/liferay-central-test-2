@@ -91,7 +91,7 @@ public interface JournalFeedPersistence extends BasePersistence<JournalFeed> {
 	* @param start the lower bound of the range of journal feeds
 	* @param end the upper bound of the range of journal feeds (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching journal feeds
 	*/
 	public java.util.List<JournalFeed> findByUuid(java.lang.String uuid,
@@ -196,7 +196,7 @@ public interface JournalFeedPersistence extends BasePersistence<JournalFeed> {
 	*
 	* @param uuid the uuid
 	* @param groupId the group ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching journal feed, or <code>null</code> if a matching journal feed could not be found
 	*/
 	public JournalFeed fetchByUUID_G(java.lang.String uuid, long groupId,
@@ -277,7 +277,7 @@ public interface JournalFeedPersistence extends BasePersistence<JournalFeed> {
 	* @param start the lower bound of the range of journal feeds
 	* @param end the upper bound of the range of journal feeds (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching journal feeds
 	*/
 	public java.util.List<JournalFeed> findByUuid_C(java.lang.String uuid,
@@ -419,7 +419,7 @@ public interface JournalFeedPersistence extends BasePersistence<JournalFeed> {
 	* @param start the lower bound of the range of journal feeds
 	* @param end the upper bound of the range of journal feeds (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching journal feeds
 	*/
 	public java.util.List<JournalFeed> findByGroupId(long groupId, int start,
@@ -585,7 +585,7 @@ public interface JournalFeedPersistence extends BasePersistence<JournalFeed> {
 	*
 	* @param groupId the group ID
 	* @param feedId the feed ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching journal feed, or <code>null</code> if a matching journal feed could not be found
 	*/
 	public JournalFeed fetchByG_F(long groupId, java.lang.String feedId,
@@ -711,7 +711,7 @@ public interface JournalFeedPersistence extends BasePersistence<JournalFeed> {
 	* @param start the lower bound of the range of journal feeds
 	* @param end the upper bound of the range of journal feeds (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of journal feeds
 	*/
 	public java.util.List<JournalFeed> findAll(int start, int end,

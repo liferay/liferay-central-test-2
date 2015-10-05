@@ -165,7 +165,7 @@ public class DLFileEntryTypeUtil {
 	* @param start the lower bound of the range of document library file entry types
 	* @param end the upper bound of the range of document library file entry types (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching document library file entry types
 	*/
 	public static List<DLFileEntryType> findByUuid(java.lang.String uuid,
@@ -297,7 +297,7 @@ public class DLFileEntryTypeUtil {
 	*
 	* @param uuid the uuid
 	* @param groupId the group ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching document library file entry type, or <code>null</code> if a matching document library file entry type could not be found
 	*/
 	public static DLFileEntryType fetchByUUID_G(java.lang.String uuid,
@@ -392,7 +392,7 @@ public class DLFileEntryTypeUtil {
 	* @param start the lower bound of the range of document library file entry types
 	* @param end the upper bound of the range of document library file entry types (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching document library file entry types
 	*/
 	public static List<DLFileEntryType> findByUuid_C(java.lang.String uuid,
@@ -561,7 +561,7 @@ public class DLFileEntryTypeUtil {
 	* @param start the lower bound of the range of document library file entry types
 	* @param end the upper bound of the range of document library file entry types (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching document library file entry types
 	*/
 	public static List<DLFileEntryType> findByGroupId(long groupId, int start,
@@ -813,7 +813,7 @@ public class DLFileEntryTypeUtil {
 	* @param start the lower bound of the range of document library file entry types
 	* @param end the upper bound of the range of document library file entry types (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching document library file entry types
 	*/
 	public static List<DLFileEntryType> findByGroupId(long[] groupIds,
@@ -905,7 +905,7 @@ public class DLFileEntryTypeUtil {
 	*
 	* @param groupId the group ID
 	* @param fileEntryTypeKey the file entry type key
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching document library file entry type, or <code>null</code> if a matching document library file entry type could not be found
 	*/
 	public static DLFileEntryType fetchByG_F(long groupId,
@@ -1060,7 +1060,7 @@ public class DLFileEntryTypeUtil {
 	* @param start the lower bound of the range of document library file entry types
 	* @param end the upper bound of the range of document library file entry types (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of document library file entry types
 	*/
 	public static List<DLFileEntryType> findAll(int start, int end,

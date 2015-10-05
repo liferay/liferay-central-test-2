@@ -61,7 +61,7 @@ public interface ReleasePersistence extends BasePersistence<Release> {
 	* Returns the release where servletContextName = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
 	* @param servletContextName the servlet context name
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching release, or <code>null</code> if a matching release could not be found
 	*/
 	public Release fetchByServletContextName(
@@ -186,7 +186,7 @@ public interface ReleasePersistence extends BasePersistence<Release> {
 	* @param start the lower bound of the range of releases
 	* @param end the upper bound of the range of releases (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of releases
 	*/
 	public java.util.List<Release> findAll(int start, int end,

@@ -162,7 +162,7 @@ public class RegionUtil {
 	* @param start the lower bound of the range of regions
 	* @param end the upper bound of the range of regions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching regions
 	*/
 	public static List<Region> findByCountryId(long countryId, int start,
@@ -321,7 +321,7 @@ public class RegionUtil {
 	* @param start the lower bound of the range of regions
 	* @param end the upper bound of the range of regions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching regions
 	*/
 	public static List<Region> findByActive(boolean active, int start, int end,
@@ -447,7 +447,7 @@ public class RegionUtil {
 	*
 	* @param countryId the country ID
 	* @param regionCode the region code
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching region, or <code>null</code> if a matching region could not be found
 	*/
 	public static Region fetchByC_R(long countryId,
@@ -540,7 +540,7 @@ public class RegionUtil {
 	* @param start the lower bound of the range of regions
 	* @param end the upper bound of the range of regions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching regions
 	*/
 	public static List<Region> findByC_A(long countryId, boolean active,
@@ -772,7 +772,7 @@ public class RegionUtil {
 	* @param start the lower bound of the range of regions
 	* @param end the upper bound of the range of regions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of regions
 	*/
 	public static List<Region> findAll(int start, int end,

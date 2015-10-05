@@ -168,7 +168,7 @@ public class ServiceComponentUtil {
 	* @param start the lower bound of the range of service components
 	* @param end the upper bound of the range of service components (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching service components
 	*/
 	public static List<ServiceComponent> findByBuildNamespace(
@@ -309,7 +309,7 @@ public class ServiceComponentUtil {
 	*
 	* @param buildNamespace the build namespace
 	* @param buildNumber the build number
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching service component, or <code>null</code> if a matching service component could not be found
 	*/
 	public static ServiceComponent fetchByBNS_BNU(
@@ -467,7 +467,7 @@ public class ServiceComponentUtil {
 	* @param start the lower bound of the range of service components
 	* @param end the upper bound of the range of service components (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of service components
 	*/
 	public static List<ServiceComponent> findAll(int start, int end,

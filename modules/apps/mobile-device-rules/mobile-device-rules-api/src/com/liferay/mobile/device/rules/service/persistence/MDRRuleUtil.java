@@ -166,7 +166,7 @@ public class MDRRuleUtil {
 	* @param start the lower bound of the range of m d r rules
 	* @param end the upper bound of the range of m d r rules (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching m d r rules
 	*/
 	public static List<MDRRule> findByUuid(java.lang.String uuid, int start,
@@ -293,7 +293,7 @@ public class MDRRuleUtil {
 	*
 	* @param uuid the uuid
 	* @param groupId the group ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching m d r rule, or <code>null</code> if a matching m d r rule could not be found
 	*/
 	public static MDRRule fetchByUUID_G(java.lang.String uuid, long groupId,
@@ -387,7 +387,7 @@ public class MDRRuleUtil {
 	* @param start the lower bound of the range of m d r rules
 	* @param end the upper bound of the range of m d r rules (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching m d r rules
 	*/
 	public static List<MDRRule> findByUuid_C(java.lang.String uuid,
@@ -555,7 +555,7 @@ public class MDRRuleUtil {
 	* @param start the lower bound of the range of m d r rules
 	* @param end the upper bound of the range of m d r rules (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching m d r rules
 	*/
 	public static List<MDRRule> findByRuleGroupId(long ruleGroupId, int start,
@@ -780,7 +780,7 @@ public class MDRRuleUtil {
 	* @param start the lower bound of the range of m d r rules
 	* @param end the upper bound of the range of m d r rules (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of m d r rules
 	*/
 	public static List<MDRRule> findAll(int start, int end,

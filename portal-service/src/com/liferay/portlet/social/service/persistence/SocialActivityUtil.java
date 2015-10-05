@@ -166,7 +166,7 @@ public class SocialActivityUtil {
 	* @param start the lower bound of the range of social activities
 	* @param end the upper bound of the range of social activities (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social activities
 	*/
 	public static List<SocialActivity> findByGroupId(long groupId, int start,
@@ -322,7 +322,7 @@ public class SocialActivityUtil {
 	* @param start the lower bound of the range of social activities
 	* @param end the upper bound of the range of social activities (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social activities
 	*/
 	public static List<SocialActivity> findByCompanyId(long companyId,
@@ -484,7 +484,7 @@ public class SocialActivityUtil {
 	* @param start the lower bound of the range of social activities
 	* @param end the upper bound of the range of social activities (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social activities
 	*/
 	public static List<SocialActivity> findByUserId(long userId, int start,
@@ -641,7 +641,7 @@ public class SocialActivityUtil {
 	* @param start the lower bound of the range of social activities
 	* @param end the upper bound of the range of social activities (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social activities
 	*/
 	public static List<SocialActivity> findByActivitySetId(long activitySetId,
@@ -772,7 +772,7 @@ public class SocialActivityUtil {
 	* Returns the social activity where mirrorActivityId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
 	* @param mirrorActivityId the mirror activity ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching social activity, or <code>null</code> if a matching social activity could not be found
 	*/
 	public static SocialActivity fetchByMirrorActivityId(
@@ -859,7 +859,7 @@ public class SocialActivityUtil {
 	* @param start the lower bound of the range of social activities
 	* @param end the upper bound of the range of social activities (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social activities
 	*/
 	public static List<SocialActivity> findByClassNameId(long classNameId,
@@ -1023,7 +1023,7 @@ public class SocialActivityUtil {
 	* @param start the lower bound of the range of social activities
 	* @param end the upper bound of the range of social activities (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social activities
 	*/
 	public static List<SocialActivity> findByReceiverUserId(
@@ -1192,7 +1192,7 @@ public class SocialActivityUtil {
 	* @param start the lower bound of the range of social activities
 	* @param end the upper bound of the range of social activities (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social activities
 	*/
 	public static List<SocialActivity> findByC_C(long classNameId,
@@ -1375,7 +1375,7 @@ public class SocialActivityUtil {
 	* @param start the lower bound of the range of social activities
 	* @param end the upper bound of the range of social activities (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social activities
 	*/
 	public static List<SocialActivity> findByM_C_C(long mirrorActivityId,
@@ -1574,7 +1574,7 @@ public class SocialActivityUtil {
 	* @param start the lower bound of the range of social activities
 	* @param end the upper bound of the range of social activities (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social activities
 	*/
 	public static List<SocialActivity> findByC_C_T(long classNameId,
@@ -1788,7 +1788,7 @@ public class SocialActivityUtil {
 	* @param start the lower bound of the range of social activities
 	* @param end the upper bound of the range of social activities (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social activities
 	*/
 	public static List<SocialActivity> findByG_U_C_C_T_R(long groupId,
@@ -1997,7 +1997,7 @@ public class SocialActivityUtil {
 	* @param classPK the class p k
 	* @param type the type
 	* @param receiverUserId the receiver user ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching social activity, or <code>null</code> if a matching social activity could not be found
 	*/
 	public static SocialActivity fetchByG_U_CD_C_C_T_R(long groupId,
@@ -2171,7 +2171,7 @@ public class SocialActivityUtil {
 	* @param start the lower bound of the range of social activities
 	* @param end the upper bound of the range of social activities (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of social activities
 	*/
 	public static List<SocialActivity> findAll(int start, int end,

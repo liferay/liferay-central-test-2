@@ -165,7 +165,7 @@ public class AssetCategoryUtil {
 	* @param start the lower bound of the range of asset categories
 	* @param end the upper bound of the range of asset categories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching asset categories
 	*/
 	public static List<AssetCategory> findByUuid(java.lang.String uuid,
@@ -294,7 +294,7 @@ public class AssetCategoryUtil {
 	*
 	* @param uuid the uuid
 	* @param groupId the group ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching asset category, or <code>null</code> if a matching asset category could not be found
 	*/
 	public static AssetCategory fetchByUUID_G(java.lang.String uuid,
@@ -388,7 +388,7 @@ public class AssetCategoryUtil {
 	* @param start the lower bound of the range of asset categories
 	* @param end the upper bound of the range of asset categories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching asset categories
 	*/
 	public static List<AssetCategory> findByUuid_C(java.lang.String uuid,
@@ -557,7 +557,7 @@ public class AssetCategoryUtil {
 	* @param start the lower bound of the range of asset categories
 	* @param end the upper bound of the range of asset categories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching asset categories
 	*/
 	public static List<AssetCategory> findByGroupId(long groupId, int start,
@@ -791,7 +791,7 @@ public class AssetCategoryUtil {
 	* @param start the lower bound of the range of asset categories
 	* @param end the upper bound of the range of asset categories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching asset categories
 	*/
 	public static List<AssetCategory> findByParentCategoryId(
@@ -962,7 +962,7 @@ public class AssetCategoryUtil {
 	* @param start the lower bound of the range of asset categories
 	* @param end the upper bound of the range of asset categories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching asset categories
 	*/
 	public static List<AssetCategory> findByVocabularyId(long vocabularyId,
@@ -1129,7 +1129,7 @@ public class AssetCategoryUtil {
 	* @param start the lower bound of the range of asset categories
 	* @param end the upper bound of the range of asset categories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching asset categories
 	*/
 	public static List<AssetCategory> findByG_V(long groupId,
@@ -1413,7 +1413,7 @@ public class AssetCategoryUtil {
 	* @param start the lower bound of the range of asset categories
 	* @param end the upper bound of the range of asset categories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching asset categories
 	*/
 	public static List<AssetCategory> findByG_V(long groupId,
@@ -1543,7 +1543,7 @@ public class AssetCategoryUtil {
 	* @param start the lower bound of the range of asset categories
 	* @param end the upper bound of the range of asset categories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching asset categories
 	*/
 	public static List<AssetCategory> findByP_N(long parentCategoryId,
@@ -1724,7 +1724,7 @@ public class AssetCategoryUtil {
 	* @param start the lower bound of the range of asset categories
 	* @param end the upper bound of the range of asset categories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching asset categories
 	*/
 	public static List<AssetCategory> findByP_V(long parentCategoryId,
@@ -1903,7 +1903,7 @@ public class AssetCategoryUtil {
 	* @param start the lower bound of the range of asset categories
 	* @param end the upper bound of the range of asset categories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching asset categories
 	*/
 	public static List<AssetCategory> findByN_V(java.lang.String name,
@@ -2086,7 +2086,7 @@ public class AssetCategoryUtil {
 	* @param start the lower bound of the range of asset categories
 	* @param end the upper bound of the range of asset categories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching asset categories
 	*/
 	public static List<AssetCategory> findByG_P_V(long groupId,
@@ -2377,7 +2377,7 @@ public class AssetCategoryUtil {
 	* @param start the lower bound of the range of asset categories
 	* @param end the upper bound of the range of asset categories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching asset categories
 	*/
 	public static List<AssetCategory> findByG_LikeN_V(long groupId,
@@ -2690,7 +2690,7 @@ public class AssetCategoryUtil {
 	* @param start the lower bound of the range of asset categories
 	* @param end the upper bound of the range of asset categories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching asset categories
 	*/
 	public static List<AssetCategory> findByG_LikeN_V(long groupId,
@@ -2803,7 +2803,7 @@ public class AssetCategoryUtil {
 	* @param parentCategoryId the parent category ID
 	* @param name the name
 	* @param vocabularyId the vocabulary ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching asset category, or <code>null</code> if a matching asset category could not be found
 	*/
 	public static AssetCategory fetchByP_N_V(long parentCategoryId,
@@ -2918,7 +2918,7 @@ public class AssetCategoryUtil {
 	* @param start the lower bound of the range of asset categories
 	* @param end the upper bound of the range of asset categories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching asset categories
 	*/
 	public static List<AssetCategory> findByG_P_N_V(long groupId,
@@ -3279,7 +3279,7 @@ public class AssetCategoryUtil {
 	* @param start the lower bound of the range of asset categories
 	* @param end the upper bound of the range of asset categories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of asset categories
 	*/
 	public static List<AssetCategory> findAll(int start, int end,

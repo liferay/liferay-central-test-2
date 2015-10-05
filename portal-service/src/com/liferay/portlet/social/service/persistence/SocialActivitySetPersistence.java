@@ -91,7 +91,7 @@ public interface SocialActivitySetPersistence extends BasePersistence<SocialActi
 	* @param start the lower bound of the range of social activity sets
 	* @param end the upper bound of the range of social activity sets (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social activity sets
 	*/
 	public java.util.List<SocialActivitySet> findByGroupId(long groupId,
@@ -223,7 +223,7 @@ public interface SocialActivitySetPersistence extends BasePersistence<SocialActi
 	* @param start the lower bound of the range of social activity sets
 	* @param end the upper bound of the range of social activity sets (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social activity sets
 	*/
 	public java.util.List<SocialActivitySet> findByUserId(long userId,
@@ -364,7 +364,7 @@ public interface SocialActivitySetPersistence extends BasePersistence<SocialActi
 	* @param start the lower bound of the range of social activity sets
 	* @param end the upper bound of the range of social activity sets (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social activity sets
 	*/
 	public java.util.List<SocialActivitySet> findByG_U_T(long groupId,
@@ -523,7 +523,7 @@ public interface SocialActivitySetPersistence extends BasePersistence<SocialActi
 	* @param start the lower bound of the range of social activity sets
 	* @param end the upper bound of the range of social activity sets (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social activity sets
 	*/
 	public java.util.List<SocialActivitySet> findByC_C_T(long classNameId,
@@ -686,7 +686,7 @@ public interface SocialActivitySetPersistence extends BasePersistence<SocialActi
 	* @param start the lower bound of the range of social activity sets
 	* @param end the upper bound of the range of social activity sets (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social activity sets
 	*/
 	public java.util.List<SocialActivitySet> findByG_U_C_T(long groupId,
@@ -858,7 +858,7 @@ public interface SocialActivitySetPersistence extends BasePersistence<SocialActi
 	* @param start the lower bound of the range of social activity sets
 	* @param end the upper bound of the range of social activity sets (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social activity sets
 	*/
 	public java.util.List<SocialActivitySet> findByU_C_C_T(long userId,
@@ -1068,7 +1068,7 @@ public interface SocialActivitySetPersistence extends BasePersistence<SocialActi
 	* @param start the lower bound of the range of social activity sets
 	* @param end the upper bound of the range of social activity sets (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of social activity sets
 	*/
 	public java.util.List<SocialActivitySet> findAll(int start, int end,

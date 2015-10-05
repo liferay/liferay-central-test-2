@@ -90,7 +90,7 @@ public interface PasswordPolicyRelPersistence extends BasePersistence<PasswordPo
 	* @param start the lower bound of the range of password policy rels
 	* @param end the upper bound of the range of password policy rels (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching password policy rels
 	*/
 	public java.util.List<PasswordPolicyRel> findByPasswordPolicyId(
@@ -200,7 +200,7 @@ public interface PasswordPolicyRelPersistence extends BasePersistence<PasswordPo
 	*
 	* @param classNameId the class name ID
 	* @param classPK the class p k
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching password policy rel, or <code>null</code> if a matching password policy rel could not be found
 	*/
 	public PasswordPolicyRel fetchByC_C(long classNameId, long classPK,
@@ -327,7 +327,7 @@ public interface PasswordPolicyRelPersistence extends BasePersistence<PasswordPo
 	* @param start the lower bound of the range of password policy rels
 	* @param end the upper bound of the range of password policy rels (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of password policy rels
 	*/
 	public java.util.List<PasswordPolicyRel> findAll(int start, int end,

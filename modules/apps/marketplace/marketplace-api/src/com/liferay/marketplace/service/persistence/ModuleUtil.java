@@ -165,7 +165,7 @@ public class ModuleUtil {
 	* @param start the lower bound of the range of modules
 	* @param end the upper bound of the range of modules (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching modules
 	*/
 	public static List<Module> findByUuid(java.lang.String uuid, int start,
@@ -318,7 +318,7 @@ public class ModuleUtil {
 	* @param start the lower bound of the range of modules
 	* @param end the upper bound of the range of modules (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching modules
 	*/
 	public static List<Module> findByAppId(long appId, int start, int end,
@@ -476,7 +476,7 @@ public class ModuleUtil {
 	* @param start the lower bound of the range of modules
 	* @param end the upper bound of the range of modules (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching modules
 	*/
 	public static List<Module> findByBundleSymbolicName(
@@ -647,7 +647,7 @@ public class ModuleUtil {
 	* @param start the lower bound of the range of modules
 	* @param end the upper bound of the range of modules (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching modules
 	*/
 	public static List<Module> findByContextName(java.lang.String contextName,
@@ -781,7 +781,7 @@ public class ModuleUtil {
 	*
 	* @param appId the app ID
 	* @param contextName the context name
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching module, or <code>null</code> if a matching module could not be found
 	*/
 	public static Module fetchByA_CN(long appId, java.lang.String contextName,
@@ -849,7 +849,7 @@ public class ModuleUtil {
 	* @param appId the app ID
 	* @param bundleSymbolicName the bundle symbolic name
 	* @param bundleVersion the bundle version
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching module, or <code>null</code> if a matching module could not be found
 	*/
 	public static Module fetchByA_BSN_BV(long appId,
@@ -1011,7 +1011,7 @@ public class ModuleUtil {
 	* @param start the lower bound of the range of modules
 	* @param end the upper bound of the range of modules (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of modules
 	*/
 	public static List<Module> findAll(int start, int end,

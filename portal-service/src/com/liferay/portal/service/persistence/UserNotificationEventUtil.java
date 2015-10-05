@@ -167,7 +167,7 @@ public class UserNotificationEventUtil {
 	* @param start the lower bound of the range of user notification events
 	* @param end the upper bound of the range of user notification events (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching user notification events
 	*/
 	public static List<UserNotificationEvent> findByUuid(
@@ -334,7 +334,7 @@ public class UserNotificationEventUtil {
 	* @param start the lower bound of the range of user notification events
 	* @param end the upper bound of the range of user notification events (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching user notification events
 	*/
 	public static List<UserNotificationEvent> findByUuid_C(
@@ -508,7 +508,7 @@ public class UserNotificationEventUtil {
 	* @param start the lower bound of the range of user notification events
 	* @param end the upper bound of the range of user notification events (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching user notification events
 	*/
 	public static List<UserNotificationEvent> findByUserId(long userId,
@@ -673,7 +673,7 @@ public class UserNotificationEventUtil {
 	* @param start the lower bound of the range of user notification events
 	* @param end the upper bound of the range of user notification events (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching user notification events
 	*/
 	public static List<UserNotificationEvent> findByU_DT(long userId,
@@ -852,7 +852,7 @@ public class UserNotificationEventUtil {
 	* @param start the lower bound of the range of user notification events
 	* @param end the upper bound of the range of user notification events (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching user notification events
 	*/
 	public static List<UserNotificationEvent> findByU_D(long userId,
@@ -1031,7 +1031,7 @@ public class UserNotificationEventUtil {
 	* @param start the lower bound of the range of user notification events
 	* @param end the upper bound of the range of user notification events (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching user notification events
 	*/
 	public static List<UserNotificationEvent> findByU_A(long userId,
@@ -1216,7 +1216,7 @@ public class UserNotificationEventUtil {
 	* @param start the lower bound of the range of user notification events
 	* @param end the upper bound of the range of user notification events (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching user notification events
 	*/
 	public static List<UserNotificationEvent> findByU_DT_D(long userId,
@@ -1415,7 +1415,7 @@ public class UserNotificationEventUtil {
 	* @param start the lower bound of the range of user notification events
 	* @param end the upper bound of the range of user notification events (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching user notification events
 	*/
 	public static List<UserNotificationEvent> findByU_DT_A(long userId,
@@ -1614,7 +1614,7 @@ public class UserNotificationEventUtil {
 	* @param start the lower bound of the range of user notification events
 	* @param end the upper bound of the range of user notification events (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching user notification events
 	*/
 	public static List<UserNotificationEvent> findByU_D_A(long userId,
@@ -1813,7 +1813,7 @@ public class UserNotificationEventUtil {
 	* @param start the lower bound of the range of user notification events
 	* @param end the upper bound of the range of user notification events (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching user notification events
 	*/
 	public static List<UserNotificationEvent> findByU_A_A(long userId,
@@ -2020,7 +2020,7 @@ public class UserNotificationEventUtil {
 	* @param start the lower bound of the range of user notification events
 	* @param end the upper bound of the range of user notification events (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching user notification events
 	*/
 	public static List<UserNotificationEvent> findByU_DT_D_A(long userId,
@@ -2237,7 +2237,7 @@ public class UserNotificationEventUtil {
 	* @param start the lower bound of the range of user notification events
 	* @param end the upper bound of the range of user notification events (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching user notification events
 	*/
 	public static List<UserNotificationEvent> findByU_DT_A_A(long userId,
@@ -2503,7 +2503,7 @@ public class UserNotificationEventUtil {
 	* @param start the lower bound of the range of user notification events
 	* @param end the upper bound of the range of user notification events (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of user notification events
 	*/
 	public static List<UserNotificationEvent> findAll(int start, int end,

@@ -165,7 +165,7 @@ public class AssetVocabularyUtil {
 	* @param start the lower bound of the range of asset vocabularies
 	* @param end the upper bound of the range of asset vocabularies (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching asset vocabularies
 	*/
 	public static List<AssetVocabulary> findByUuid(java.lang.String uuid,
@@ -296,7 +296,7 @@ public class AssetVocabularyUtil {
 	*
 	* @param uuid the uuid
 	* @param groupId the group ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching asset vocabulary, or <code>null</code> if a matching asset vocabulary could not be found
 	*/
 	public static AssetVocabulary fetchByUUID_G(java.lang.String uuid,
@@ -391,7 +391,7 @@ public class AssetVocabularyUtil {
 	* @param start the lower bound of the range of asset vocabularies
 	* @param end the upper bound of the range of asset vocabularies (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching asset vocabularies
 	*/
 	public static List<AssetVocabulary> findByUuid_C(java.lang.String uuid,
@@ -560,7 +560,7 @@ public class AssetVocabularyUtil {
 	* @param start the lower bound of the range of asset vocabularies
 	* @param end the upper bound of the range of asset vocabularies (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching asset vocabularies
 	*/
 	public static List<AssetVocabulary> findByGroupId(long groupId, int start,
@@ -812,7 +812,7 @@ public class AssetVocabularyUtil {
 	* @param start the lower bound of the range of asset vocabularies
 	* @param end the upper bound of the range of asset vocabularies (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching asset vocabularies
 	*/
 	public static List<AssetVocabulary> findByGroupId(long[] groupIds,
@@ -930,7 +930,7 @@ public class AssetVocabularyUtil {
 	* @param start the lower bound of the range of asset vocabularies
 	* @param end the upper bound of the range of asset vocabularies (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching asset vocabularies
 	*/
 	public static List<AssetVocabulary> findByCompanyId(long companyId,
@@ -1064,7 +1064,7 @@ public class AssetVocabularyUtil {
 	*
 	* @param groupId the group ID
 	* @param name the name
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching asset vocabulary, or <code>null</code> if a matching asset vocabulary could not be found
 	*/
 	public static AssetVocabulary fetchByG_N(long groupId,
@@ -1159,7 +1159,7 @@ public class AssetVocabularyUtil {
 	* @param start the lower bound of the range of asset vocabularies
 	* @param end the upper bound of the range of asset vocabularies (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching asset vocabularies
 	*/
 	public static List<AssetVocabulary> findByG_LikeN(long groupId,
@@ -1479,7 +1479,7 @@ public class AssetVocabularyUtil {
 	* @param start the lower bound of the range of asset vocabularies
 	* @param end the upper bound of the range of asset vocabularies (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of asset vocabularies
 	*/
 	public static List<AssetVocabulary> findAll(int start, int end,

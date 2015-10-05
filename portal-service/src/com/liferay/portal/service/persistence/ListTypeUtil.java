@@ -163,7 +163,7 @@ public class ListTypeUtil {
 	* @param start the lower bound of the range of list types
 	* @param end the upper bound of the range of list types (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching list types
 	*/
 	public static List<ListType> findByType(java.lang.String type, int start,
@@ -292,7 +292,7 @@ public class ListTypeUtil {
 	*
 	* @param name the name
 	* @param type the type
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching list type, or <code>null</code> if a matching list type could not be found
 	*/
 	public static ListType fetchByN_T(java.lang.String name,
@@ -446,7 +446,7 @@ public class ListTypeUtil {
 	* @param start the lower bound of the range of list types
 	* @param end the upper bound of the range of list types (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of list types
 	*/
 	public static List<ListType> findAll(int start, int end,
