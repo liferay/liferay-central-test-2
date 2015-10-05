@@ -503,7 +503,7 @@ AUI.add(
 									var label = [];
 									var value = data[name];
 
-									if (Lang.isArray(value)) {
+									if (isArray(value)) {
 
 										value.forEach(
 												function(item1, index1) {
