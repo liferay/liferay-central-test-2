@@ -171,7 +171,7 @@ public class DDMStructureVersionUtil {
 	* @param start the lower bound of the range of d d m structure versions
 	* @param end the upper bound of the range of d d m structure versions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d m structure versions
 	*/
 	public static List<DDMStructureVersion> findByStructureId(
@@ -310,7 +310,7 @@ public class DDMStructureVersionUtil {
 	*
 	* @param structureId the structure ID
 	* @param version the version
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching d d m structure version, or <code>null</code> if a matching d d m structure version could not be found
 	*/
 	public static DDMStructureVersion fetchByS_V(long structureId,
@@ -406,7 +406,7 @@ public class DDMStructureVersionUtil {
 	* @param start the lower bound of the range of d d m structure versions
 	* @param end the upper bound of the range of d d m structure versions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d m structure versions
 	*/
 	public static List<DDMStructureVersion> findByS_S(long structureId,
@@ -642,7 +642,7 @@ public class DDMStructureVersionUtil {
 	* @param start the lower bound of the range of d d m structure versions
 	* @param end the upper bound of the range of d d m structure versions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of d d m structure versions
 	*/
 	public static List<DDMStructureVersion> findAll(int start, int end,

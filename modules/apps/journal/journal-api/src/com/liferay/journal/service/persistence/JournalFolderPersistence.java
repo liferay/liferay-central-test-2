@@ -91,7 +91,7 @@ public interface JournalFolderPersistence extends BasePersistence<JournalFolder>
 	* @param start the lower bound of the range of journal folders
 	* @param end the upper bound of the range of journal folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching journal folders
 	*/
 	public java.util.List<JournalFolder> findByUuid(java.lang.String uuid,
@@ -197,7 +197,7 @@ public interface JournalFolderPersistence extends BasePersistence<JournalFolder>
 	*
 	* @param uuid the uuid
 	* @param groupId the group ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching journal folder, or <code>null</code> if a matching journal folder could not be found
 	*/
 	public JournalFolder fetchByUUID_G(java.lang.String uuid, long groupId,
@@ -278,7 +278,7 @@ public interface JournalFolderPersistence extends BasePersistence<JournalFolder>
 	* @param start the lower bound of the range of journal folders
 	* @param end the upper bound of the range of journal folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching journal folders
 	*/
 	public java.util.List<JournalFolder> findByUuid_C(java.lang.String uuid,
@@ -421,7 +421,7 @@ public interface JournalFolderPersistence extends BasePersistence<JournalFolder>
 	* @param start the lower bound of the range of journal folders
 	* @param end the upper bound of the range of journal folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching journal folders
 	*/
 	public java.util.List<JournalFolder> findByGroupId(long groupId, int start,
@@ -615,7 +615,7 @@ public interface JournalFolderPersistence extends BasePersistence<JournalFolder>
 	* @param start the lower bound of the range of journal folders
 	* @param end the upper bound of the range of journal folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching journal folders
 	*/
 	public java.util.List<JournalFolder> findByCompanyId(long companyId,
@@ -752,7 +752,7 @@ public interface JournalFolderPersistence extends BasePersistence<JournalFolder>
 	* @param start the lower bound of the range of journal folders
 	* @param end the upper bound of the range of journal folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching journal folders
 	*/
 	public java.util.List<JournalFolder> findByG_P(long groupId,
@@ -933,7 +933,7 @@ public interface JournalFolderPersistence extends BasePersistence<JournalFolder>
 	*
 	* @param groupId the group ID
 	* @param name the name
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching journal folder, or <code>null</code> if a matching journal folder could not be found
 	*/
 	public JournalFolder fetchByG_N(long groupId, java.lang.String name,
@@ -1013,7 +1013,7 @@ public interface JournalFolderPersistence extends BasePersistence<JournalFolder>
 	* @param start the lower bound of the range of journal folders
 	* @param end the upper bound of the range of journal folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching journal folders
 	*/
 	public java.util.List<JournalFolder> findByC_NotS(long companyId,
@@ -1131,7 +1131,7 @@ public interface JournalFolderPersistence extends BasePersistence<JournalFolder>
 	* @param groupId the group ID
 	* @param parentFolderId the parent folder ID
 	* @param name the name
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching journal folder, or <code>null</code> if a matching journal folder could not be found
 	*/
 	public JournalFolder fetchByG_P_N(long groupId, long parentFolderId,
@@ -1220,7 +1220,7 @@ public interface JournalFolderPersistence extends BasePersistence<JournalFolder>
 	* @param start the lower bound of the range of journal folders
 	* @param end the upper bound of the range of journal folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching journal folders
 	*/
 	public java.util.List<JournalFolder> findByG_P_S(long groupId,
@@ -1452,7 +1452,7 @@ public interface JournalFolderPersistence extends BasePersistence<JournalFolder>
 	* @param start the lower bound of the range of journal folders
 	* @param end the upper bound of the range of journal folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching journal folders
 	*/
 	public java.util.List<JournalFolder> findByG_P_NotS(long groupId,
@@ -1689,7 +1689,7 @@ public interface JournalFolderPersistence extends BasePersistence<JournalFolder>
 	* @param start the lower bound of the range of journal folders
 	* @param end the upper bound of the range of journal folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching journal folders
 	*/
 	public java.util.List<JournalFolder> findByF_C_P_NotS(long folderId,
@@ -1881,7 +1881,7 @@ public interface JournalFolderPersistence extends BasePersistence<JournalFolder>
 	* @param start the lower bound of the range of journal folders
 	* @param end the upper bound of the range of journal folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of journal folders
 	*/
 	public java.util.List<JournalFolder> findAll(int start, int end,

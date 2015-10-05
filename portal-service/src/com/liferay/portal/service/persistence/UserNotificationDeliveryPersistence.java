@@ -89,7 +89,7 @@ public interface UserNotificationDeliveryPersistence extends BasePersistence<Use
 	* @param start the lower bound of the range of user notification deliveries
 	* @param end the upper bound of the range of user notification deliveries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching user notification deliveries
 	*/
 	public java.util.List<UserNotificationDelivery> findByUserId(long userId,
@@ -208,7 +208,7 @@ public interface UserNotificationDeliveryPersistence extends BasePersistence<Use
 	* @param classNameId the class name ID
 	* @param notificationType the notification type
 	* @param deliveryType the delivery type
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching user notification delivery, or <code>null</code> if a matching user notification delivery could not be found
 	*/
 	public UserNotificationDelivery fetchByU_P_C_N_D(long userId,
@@ -348,7 +348,7 @@ public interface UserNotificationDeliveryPersistence extends BasePersistence<Use
 	* @param start the lower bound of the range of user notification deliveries
 	* @param end the upper bound of the range of user notification deliveries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of user notification deliveries
 	*/
 	public java.util.List<UserNotificationDelivery> findAll(int start, int end,

@@ -173,7 +173,7 @@ public class BookmarksEntryUtil {
 	* @param start the lower bound of the range of bookmarks entries
 	* @param end the upper bound of the range of bookmarks entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching bookmarks entries
 	*/
 	public static List<BookmarksEntry> findByResourceBlockId(
@@ -342,7 +342,7 @@ public class BookmarksEntryUtil {
 	* @param start the lower bound of the range of bookmarks entries
 	* @param end the upper bound of the range of bookmarks entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching bookmarks entries
 	*/
 	public static List<BookmarksEntry> findByUuid(java.lang.String uuid,
@@ -473,7 +473,7 @@ public class BookmarksEntryUtil {
 	*
 	* @param uuid the uuid
 	* @param groupId the group ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching bookmarks entry, or <code>null</code> if a matching bookmarks entry could not be found
 	*/
 	public static BookmarksEntry fetchByUUID_G(java.lang.String uuid,
@@ -568,7 +568,7 @@ public class BookmarksEntryUtil {
 	* @param start the lower bound of the range of bookmarks entries
 	* @param end the upper bound of the range of bookmarks entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching bookmarks entries
 	*/
 	public static List<BookmarksEntry> findByUuid_C(java.lang.String uuid,
@@ -737,7 +737,7 @@ public class BookmarksEntryUtil {
 	* @param start the lower bound of the range of bookmarks entries
 	* @param end the upper bound of the range of bookmarks entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching bookmarks entries
 	*/
 	public static List<BookmarksEntry> findByCompanyId(long companyId,
@@ -902,7 +902,7 @@ public class BookmarksEntryUtil {
 	* @param start the lower bound of the range of bookmarks entries
 	* @param end the upper bound of the range of bookmarks entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching bookmarks entries
 	*/
 	public static List<BookmarksEntry> findByG_F(long groupId, long folderId,
@@ -1182,7 +1182,7 @@ public class BookmarksEntryUtil {
 	* @param start the lower bound of the range of bookmarks entries
 	* @param end the upper bound of the range of bookmarks entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching bookmarks entries
 	*/
 	public static List<BookmarksEntry> findByG_F(long groupId,
@@ -1309,7 +1309,7 @@ public class BookmarksEntryUtil {
 	* @param start the lower bound of the range of bookmarks entries
 	* @param end the upper bound of the range of bookmarks entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching bookmarks entries
 	*/
 	public static List<BookmarksEntry> findByG_S(long groupId, int status,
@@ -1563,7 +1563,7 @@ public class BookmarksEntryUtil {
 	* @param start the lower bound of the range of bookmarks entries
 	* @param end the upper bound of the range of bookmarks entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching bookmarks entries
 	*/
 	public static List<BookmarksEntry> findByG_NotS(long groupId, int status,
@@ -1819,7 +1819,7 @@ public class BookmarksEntryUtil {
 	* @param start the lower bound of the range of bookmarks entries
 	* @param end the upper bound of the range of bookmarks entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching bookmarks entries
 	*/
 	public static List<BookmarksEntry> findByC_NotS(long companyId, int status,
@@ -1999,7 +1999,7 @@ public class BookmarksEntryUtil {
 	* @param start the lower bound of the range of bookmarks entries
 	* @param end the upper bound of the range of bookmarks entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching bookmarks entries
 	*/
 	public static List<BookmarksEntry> findByG_U_S(long groupId, long userId,
@@ -2276,7 +2276,7 @@ public class BookmarksEntryUtil {
 	* @param start the lower bound of the range of bookmarks entries
 	* @param end the upper bound of the range of bookmarks entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching bookmarks entries
 	*/
 	public static List<BookmarksEntry> findByG_U_NotS(long groupId,
@@ -2560,7 +2560,7 @@ public class BookmarksEntryUtil {
 	* @param start the lower bound of the range of bookmarks entries
 	* @param end the upper bound of the range of bookmarks entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching bookmarks entries
 	*/
 	public static List<BookmarksEntry> findByG_F_S(long groupId, long folderId,
@@ -2866,7 +2866,7 @@ public class BookmarksEntryUtil {
 	* @param start the lower bound of the range of bookmarks entries
 	* @param end the upper bound of the range of bookmarks entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching bookmarks entries
 	*/
 	public static List<BookmarksEntry> findByG_F_S(long groupId,
@@ -3007,7 +3007,7 @@ public class BookmarksEntryUtil {
 	* @param start the lower bound of the range of bookmarks entries
 	* @param end the upper bound of the range of bookmarks entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching bookmarks entries
 	*/
 	public static List<BookmarksEntry> findByG_F_NotS(long groupId,
@@ -3316,7 +3316,7 @@ public class BookmarksEntryUtil {
 	* @param start the lower bound of the range of bookmarks entries
 	* @param end the upper bound of the range of bookmarks entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching bookmarks entries
 	*/
 	public static List<BookmarksEntry> findByG_F_NotS(long groupId,
@@ -3462,7 +3462,7 @@ public class BookmarksEntryUtil {
 	* @param start the lower bound of the range of bookmarks entries
 	* @param end the upper bound of the range of bookmarks entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching bookmarks entries
 	*/
 	public static List<BookmarksEntry> findByG_U_F_S(long groupId, long userId,
@@ -3791,7 +3791,7 @@ public class BookmarksEntryUtil {
 	* @param start the lower bound of the range of bookmarks entries
 	* @param end the upper bound of the range of bookmarks entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching bookmarks entries
 	*/
 	public static List<BookmarksEntry> findByG_U_F_S(long groupId, long userId,
@@ -3997,7 +3997,7 @@ public class BookmarksEntryUtil {
 	* @param start the lower bound of the range of bookmarks entries
 	* @param end the upper bound of the range of bookmarks entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of bookmarks entries
 	*/
 	public static List<BookmarksEntry> findAll(int start, int end,

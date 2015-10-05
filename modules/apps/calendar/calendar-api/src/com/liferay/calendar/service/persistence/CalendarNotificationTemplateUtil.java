@@ -174,7 +174,7 @@ public class CalendarNotificationTemplateUtil {
 	* @param start the lower bound of the range of calendar notification templates
 	* @param end the upper bound of the range of calendar notification templates (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching calendar notification templates
 	*/
 	public static List<CalendarNotificationTemplate> findByUuid(
@@ -310,7 +310,7 @@ public class CalendarNotificationTemplateUtil {
 	*
 	* @param uuid the uuid
 	* @param groupId the group ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching calendar notification template, or <code>null</code> if a matching calendar notification template could not be found
 	*/
 	public static CalendarNotificationTemplate fetchByUUID_G(
@@ -405,7 +405,7 @@ public class CalendarNotificationTemplateUtil {
 	* @param start the lower bound of the range of calendar notification templates
 	* @param end the upper bound of the range of calendar notification templates (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching calendar notification templates
 	*/
 	public static List<CalendarNotificationTemplate> findByUuid_C(
@@ -581,7 +581,7 @@ public class CalendarNotificationTemplateUtil {
 	* @param start the lower bound of the range of calendar notification templates
 	* @param end the upper bound of the range of calendar notification templates (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching calendar notification templates
 	*/
 	public static List<CalendarNotificationTemplate> findByCalendarId(
@@ -730,7 +730,7 @@ public class CalendarNotificationTemplateUtil {
 	* @param calendarId the calendar ID
 	* @param notificationType the notification type
 	* @param notificationTemplateType the notification template type
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching calendar notification template, or <code>null</code> if a matching calendar notification template could not be found
 	*/
 	public static CalendarNotificationTemplate fetchByC_NT_NTT(
@@ -904,7 +904,7 @@ public class CalendarNotificationTemplateUtil {
 	* @param start the lower bound of the range of calendar notification templates
 	* @param end the upper bound of the range of calendar notification templates (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of calendar notification templates
 	*/
 	public static List<CalendarNotificationTemplate> findAll(int start,

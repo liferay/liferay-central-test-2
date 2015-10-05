@@ -91,7 +91,7 @@ public interface MicroblogsEntryPersistence extends BasePersistence<MicroblogsEn
 	* @param start the lower bound of the range of microblogs entries
 	* @param end the upper bound of the range of microblogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching microblogs entries
 	*/
 	public java.util.List<MicroblogsEntry> findByCompanyId(long companyId,
@@ -223,7 +223,7 @@ public interface MicroblogsEntryPersistence extends BasePersistence<MicroblogsEn
 	* @param start the lower bound of the range of microblogs entries
 	* @param end the upper bound of the range of microblogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching microblogs entries
 	*/
 	public java.util.List<MicroblogsEntry> findByUserId(long userId, int start,
@@ -359,7 +359,7 @@ public interface MicroblogsEntryPersistence extends BasePersistence<MicroblogsEn
 	* @param start the lower bound of the range of microblogs entries
 	* @param end the upper bound of the range of microblogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching microblogs entries
 	*/
 	public java.util.List<MicroblogsEntry> findByU_T(long userId, int type,
@@ -503,7 +503,7 @@ public interface MicroblogsEntryPersistence extends BasePersistence<MicroblogsEn
 	* @param start the lower bound of the range of microblogs entries
 	* @param end the upper bound of the range of microblogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching microblogs entries
 	*/
 	public java.util.List<MicroblogsEntry> findByCCNI_CCPK(
@@ -638,7 +638,7 @@ public interface MicroblogsEntryPersistence extends BasePersistence<MicroblogsEn
 	* @param start the lower bound of the range of microblogs entries
 	* @param end the upper bound of the range of microblogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching microblogs entries
 	*/
 	public java.util.List<MicroblogsEntry> findByCCNI_CCPK(
@@ -728,7 +728,7 @@ public interface MicroblogsEntryPersistence extends BasePersistence<MicroblogsEn
 	* @param start the lower bound of the range of microblogs entries
 	* @param end the upper bound of the range of microblogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching microblogs entries
 	*/
 	public java.util.List<MicroblogsEntry> findByCCNI_T(
@@ -875,7 +875,7 @@ public interface MicroblogsEntryPersistence extends BasePersistence<MicroblogsEn
 	* @param start the lower bound of the range of microblogs entries
 	* @param end the upper bound of the range of microblogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching microblogs entries
 	*/
 	public java.util.List<MicroblogsEntry> findByT_P(int type,
@@ -1029,7 +1029,7 @@ public interface MicroblogsEntryPersistence extends BasePersistence<MicroblogsEn
 	* @param start the lower bound of the range of microblogs entries
 	* @param end the upper bound of the range of microblogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching microblogs entries
 	*/
 	public java.util.List<MicroblogsEntry> findByCCNI_CCPK_T(
@@ -1177,7 +1177,7 @@ public interface MicroblogsEntryPersistence extends BasePersistence<MicroblogsEn
 	* @param start the lower bound of the range of microblogs entries
 	* @param end the upper bound of the range of microblogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching microblogs entries
 	*/
 	public java.util.List<MicroblogsEntry> findByCCNI_CCPK_T(
@@ -1284,7 +1284,7 @@ public interface MicroblogsEntryPersistence extends BasePersistence<MicroblogsEn
 	* @param start the lower bound of the range of microblogs entries
 	* @param end the upper bound of the range of microblogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching microblogs entries
 	*/
 	public java.util.List<MicroblogsEntry> findByU_C_T_S(long userId,
@@ -1495,7 +1495,7 @@ public interface MicroblogsEntryPersistence extends BasePersistence<MicroblogsEn
 	* @param start the lower bound of the range of microblogs entries
 	* @param end the upper bound of the range of microblogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of microblogs entries
 	*/
 	public java.util.List<MicroblogsEntry> findAll(int start, int end,

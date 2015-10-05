@@ -168,7 +168,7 @@ public class SocialActivityAchievementPersistenceImpl
 	 * @param start the lower bound of the range of social activity achievements
 	 * @param end the upper bound of the range of social activity achievements (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to use the finder cache
+	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching social activity achievements
 	 */
 	@Override
@@ -685,7 +685,7 @@ public class SocialActivityAchievementPersistenceImpl
 	 * @param start the lower bound of the range of social activity achievements
 	 * @param end the upper bound of the range of social activity achievements (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to use the finder cache
+	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching social activity achievements
 	 */
 	@Override
@@ -1234,7 +1234,7 @@ public class SocialActivityAchievementPersistenceImpl
 	 * @param start the lower bound of the range of social activity achievements
 	 * @param end the upper bound of the range of social activity achievements (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to use the finder cache
+	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching social activity achievements
 	 */
 	@Override
@@ -1830,7 +1830,7 @@ public class SocialActivityAchievementPersistenceImpl
 	 * @param start the lower bound of the range of social activity achievements
 	 * @param end the upper bound of the range of social activity achievements (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to use the finder cache
+	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching social activity achievements
 	 */
 	@Override
@@ -2376,7 +2376,7 @@ public class SocialActivityAchievementPersistenceImpl
 	 * @param groupId the group ID
 	 * @param userId the user ID
 	 * @param name the name
-	 * @param retrieveFromCache whether to use the finder cache
+	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the matching social activity achievement, or <code>null</code> if a matching social activity achievement could not be found
 	 */
 	@Override
@@ -2684,7 +2684,7 @@ public class SocialActivityAchievementPersistenceImpl
 	 * @param start the lower bound of the range of social activity achievements
 	 * @param end the upper bound of the range of social activity achievements (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to use the finder cache
+	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching social activity achievements
 	 */
 	@Override
@@ -3857,7 +3857,7 @@ public class SocialActivityAchievementPersistenceImpl
 	 * @param start the lower bound of the range of social activity achievements
 	 * @param end the upper bound of the range of social activity achievements (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to use the finder cache
+	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of social activity achievements
 	 */
 	@Override

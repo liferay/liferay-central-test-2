@@ -172,7 +172,7 @@ public class ExpandoTableUtil {
 	* @param start the lower bound of the range of expando tables
 	* @param end the upper bound of the range of expando tables (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching expando tables
 	*/
 	public static List<ExpandoTable> findByC_C(long companyId,
@@ -318,7 +318,7 @@ public class ExpandoTableUtil {
 	* @param companyId the company ID
 	* @param classNameId the class name ID
 	* @param name the name
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching expando table, or <code>null</code> if a matching expando table could not be found
 	*/
 	public static ExpandoTable fetchByC_C_N(long companyId, long classNameId,
@@ -476,7 +476,7 @@ public class ExpandoTableUtil {
 	* @param start the lower bound of the range of expando tables
 	* @param end the upper bound of the range of expando tables (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of expando tables
 	*/
 	public static List<ExpandoTable> findAll(int start, int end,

@@ -164,7 +164,7 @@ public class AppUtil {
 	* @param start the lower bound of the range of apps
 	* @param end the upper bound of the range of apps (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching apps
 	*/
 	public static List<App> findByUuid(java.lang.String uuid, int start,
@@ -323,7 +323,7 @@ public class AppUtil {
 	* @param start the lower bound of the range of apps
 	* @param end the upper bound of the range of apps (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching apps
 	*/
 	public static List<App> findByUuid_C(java.lang.String uuid, long companyId,
@@ -490,7 +490,7 @@ public class AppUtil {
 	* @param start the lower bound of the range of apps
 	* @param end the upper bound of the range of apps (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching apps
 	*/
 	public static List<App> findByCompanyId(long companyId, int start, int end,
@@ -618,7 +618,7 @@ public class AppUtil {
 	* Returns the app where remoteAppId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
 	* @param remoteAppId the remote app ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching app, or <code>null</code> if a matching app could not be found
 	*/
 	public static App fetchByRemoteAppId(long remoteAppId,
@@ -705,7 +705,7 @@ public class AppUtil {
 	* @param start the lower bound of the range of apps
 	* @param end the upper bound of the range of apps (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching apps
 	*/
 	public static List<App> findByCategory(java.lang.String category,
@@ -927,7 +927,7 @@ public class AppUtil {
 	* @param start the lower bound of the range of apps
 	* @param end the upper bound of the range of apps (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of apps
 	*/
 	public static List<App> findAll(int start, int end,

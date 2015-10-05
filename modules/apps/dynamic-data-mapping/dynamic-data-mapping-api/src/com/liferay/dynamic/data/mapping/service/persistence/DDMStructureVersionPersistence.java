@@ -92,7 +92,7 @@ public interface DDMStructureVersionPersistence extends BasePersistence<DDMStruc
 	* @param start the lower bound of the range of d d m structure versions
 	* @param end the upper bound of the range of d d m structure versions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d m structure versions
 	*/
 	public java.util.List<DDMStructureVersion> findByStructureId(
@@ -200,7 +200,7 @@ public interface DDMStructureVersionPersistence extends BasePersistence<DDMStruc
 	*
 	* @param structureId the structure ID
 	* @param version the version
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching d d m structure version, or <code>null</code> if a matching d d m structure version could not be found
 	*/
 	public DDMStructureVersion fetchByS_V(long structureId,
@@ -282,7 +282,7 @@ public interface DDMStructureVersionPersistence extends BasePersistence<DDMStruc
 	* @param start the lower bound of the range of d d m structure versions
 	* @param end the upper bound of the range of d d m structure versions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d m structure versions
 	*/
 	public java.util.List<DDMStructureVersion> findByS_S(long structureId,
@@ -473,7 +473,7 @@ public interface DDMStructureVersionPersistence extends BasePersistence<DDMStruc
 	* @param start the lower bound of the range of d d m structure versions
 	* @param end the upper bound of the range of d d m structure versions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of d d m structure versions
 	*/
 	public java.util.List<DDMStructureVersion> findAll(int start, int end,

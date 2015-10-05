@@ -91,7 +91,7 @@ public interface SocialActivityAchievementPersistence extends BasePersistence<So
 	* @param start the lower bound of the range of social activity achievements
 	* @param end the upper bound of the range of social activity achievements (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social activity achievements
 	*/
 	public java.util.List<SocialActivityAchievement> findByGroupId(
@@ -228,7 +228,7 @@ public interface SocialActivityAchievementPersistence extends BasePersistence<So
 	* @param start the lower bound of the range of social activity achievements
 	* @param end the upper bound of the range of social activity achievements (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social activity achievements
 	*/
 	public java.util.List<SocialActivityAchievement> findByG_U(long groupId,
@@ -373,7 +373,7 @@ public interface SocialActivityAchievementPersistence extends BasePersistence<So
 	* @param start the lower bound of the range of social activity achievements
 	* @param end the upper bound of the range of social activity achievements (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social activity achievements
 	*/
 	public java.util.List<SocialActivityAchievement> findByG_N(long groupId,
@@ -521,7 +521,7 @@ public interface SocialActivityAchievementPersistence extends BasePersistence<So
 	* @param start the lower bound of the range of social activity achievements
 	* @param end the upper bound of the range of social activity achievements (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social activity achievements
 	*/
 	public java.util.List<SocialActivityAchievement> findByG_F(long groupId,
@@ -643,7 +643,7 @@ public interface SocialActivityAchievementPersistence extends BasePersistence<So
 	* @param groupId the group ID
 	* @param userId the user ID
 	* @param name the name
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching social activity achievement, or <code>null</code> if a matching social activity achievement could not be found
 	*/
 	public SocialActivityAchievement fetchByG_U_N(long groupId, long userId,
@@ -731,7 +731,7 @@ public interface SocialActivityAchievementPersistence extends BasePersistence<So
 	* @param start the lower bound of the range of social activity achievements
 	* @param end the upper bound of the range of social activity achievements (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social activity achievements
 	*/
 	public java.util.List<SocialActivityAchievement> findByG_U_F(long groupId,
@@ -937,7 +937,7 @@ public interface SocialActivityAchievementPersistence extends BasePersistence<So
 	* @param start the lower bound of the range of social activity achievements
 	* @param end the upper bound of the range of social activity achievements (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of social activity achievements
 	*/
 	public java.util.List<SocialActivityAchievement> findAll(int start,

@@ -165,7 +165,7 @@ public class LayoutSetBranchUtil {
 	* @param start the lower bound of the range of layout set branchs
 	* @param end the upper bound of the range of layout set branchs (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching layout set branchs
 	*/
 	public static List<LayoutSetBranch> findByGroupId(long groupId, int start,
@@ -403,7 +403,7 @@ public class LayoutSetBranchUtil {
 	* @param start the lower bound of the range of layout set branchs
 	* @param end the upper bound of the range of layout set branchs (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching layout set branchs
 	*/
 	public static List<LayoutSetBranch> findByG_P(long groupId,
@@ -636,7 +636,7 @@ public class LayoutSetBranchUtil {
 	* @param groupId the group ID
 	* @param privateLayout the private layout
 	* @param name the name
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching layout set branch, or <code>null</code> if a matching layout set branch could not be found
 	*/
 	public static LayoutSetBranch fetchByG_P_N(long groupId,
@@ -741,7 +741,7 @@ public class LayoutSetBranchUtil {
 	* @param start the lower bound of the range of layout set branchs
 	* @param end the upper bound of the range of layout set branchs (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching layout set branchs
 	*/
 	public static List<LayoutSetBranch> findByG_P_M(long groupId,
@@ -1082,7 +1082,7 @@ public class LayoutSetBranchUtil {
 	* @param start the lower bound of the range of layout set branchs
 	* @param end the upper bound of the range of layout set branchs (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of layout set branchs
 	*/
 	public static List<LayoutSetBranch> findAll(int start, int end,

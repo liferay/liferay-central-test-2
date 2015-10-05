@@ -164,7 +164,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 	 * @param start the lower bound of the range of message boards bans
 	 * @param end the upper bound of the range of message boards bans (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to use the finder cache
+	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching message boards bans
 	 */
 	@Override
@@ -689,7 +689,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 	 *
 	 * @param uuid the uuid
 	 * @param groupId the group ID
-	 * @param retrieveFromCache whether to use the finder cache
+	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the matching message boards ban, or <code>null</code> if a matching message boards ban could not be found
 	 */
 	@Override
@@ -966,7 +966,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 	 * @param start the lower bound of the range of message boards bans
 	 * @param end the upper bound of the range of message boards bans (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to use the finder cache
+	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching message boards bans
 	 */
 	@Override
@@ -1539,7 +1539,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 	 * @param start the lower bound of the range of message boards bans
 	 * @param end the upper bound of the range of message boards bans (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to use the finder cache
+	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching message boards bans
 	 */
 	@Override
@@ -2035,7 +2035,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 	 * @param start the lower bound of the range of message boards bans
 	 * @param end the upper bound of the range of message boards bans (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to use the finder cache
+	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching message boards bans
 	 */
 	@Override
@@ -2533,7 +2533,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 	 * @param start the lower bound of the range of message boards bans
 	 * @param end the upper bound of the range of message boards bans (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to use the finder cache
+	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching message boards bans
 	 */
 	@Override
@@ -3015,7 +3015,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 	 *
 	 * @param groupId the group ID
 	 * @param banUserId the ban user ID
-	 * @param retrieveFromCache whether to use the finder cache
+	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the matching message boards ban, or <code>null</code> if a matching message boards ban could not be found
 	 */
 	@Override
@@ -3876,7 +3876,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 	 * @param start the lower bound of the range of message boards bans
 	 * @param end the upper bound of the range of message boards bans (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to use the finder cache
+	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of message boards bans
 	 */
 	@Override

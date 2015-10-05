@@ -137,7 +137,7 @@ public class WebDAVPropsUtil {
 	*
 	* @param classNameId the class name ID
 	* @param classPK the class p k
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching web d a v props, or <code>null</code> if a matching web d a v props could not be found
 	*/
 	public static WebDAVProps fetchByC_C(long classNameId, long classPK,
@@ -291,7 +291,7 @@ public class WebDAVPropsUtil {
 	* @param start the lower bound of the range of web d a v propses
 	* @param end the upper bound of the range of web d a v propses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of web d a v propses
 	*/
 	public static List<WebDAVProps> findAll(int start, int end,

@@ -167,7 +167,7 @@ public class UserGroupGroupRoleUtil {
 	* @param start the lower bound of the range of user group group roles
 	* @param end the upper bound of the range of user group group roles (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching user group group roles
 	*/
 	public static List<UserGroupGroupRole> findByUserGroupId(long userGroupId,
@@ -332,7 +332,7 @@ public class UserGroupGroupRoleUtil {
 	* @param start the lower bound of the range of user group group roles
 	* @param end the upper bound of the range of user group group roles (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching user group group roles
 	*/
 	public static List<UserGroupGroupRole> findByGroupId(long groupId,
@@ -490,7 +490,7 @@ public class UserGroupGroupRoleUtil {
 	* @param start the lower bound of the range of user group group roles
 	* @param end the upper bound of the range of user group group roles (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching user group group roles
 	*/
 	public static List<UserGroupGroupRole> findByRoleId(long roleId, int start,
@@ -654,7 +654,7 @@ public class UserGroupGroupRoleUtil {
 	* @param start the lower bound of the range of user group group roles
 	* @param end the upper bound of the range of user group group roles (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching user group group roles
 	*/
 	public static List<UserGroupGroupRole> findByU_G(long userGroupId,
@@ -829,7 +829,7 @@ public class UserGroupGroupRoleUtil {
 	* @param start the lower bound of the range of user group group roles
 	* @param end the upper bound of the range of user group group roles (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching user group group roles
 	*/
 	public static List<UserGroupGroupRole> findByG_R(long groupId, long roleId,
@@ -1069,7 +1069,7 @@ public class UserGroupGroupRoleUtil {
 	* @param start the lower bound of the range of user group group roles
 	* @param end the upper bound of the range of user group group roles (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of user group group roles
 	*/
 	public static List<UserGroupGroupRole> findAll(int start, int end,

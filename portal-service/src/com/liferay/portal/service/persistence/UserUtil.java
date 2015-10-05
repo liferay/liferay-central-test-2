@@ -161,7 +161,7 @@ public class UserUtil {
 	* @param start the lower bound of the range of users
 	* @param end the upper bound of the range of users (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching users
 	*/
 	public static List<User> findByUuid(java.lang.String uuid, int start,
@@ -321,7 +321,7 @@ public class UserUtil {
 	* @param start the lower bound of the range of users
 	* @param end the upper bound of the range of users (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching users
 	*/
 	public static List<User> findByUuid_C(java.lang.String uuid,
@@ -488,7 +488,7 @@ public class UserUtil {
 	* @param start the lower bound of the range of users
 	* @param end the upper bound of the range of users (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching users
 	*/
 	public static List<User> findByCompanyId(long companyId, int start,
@@ -617,7 +617,7 @@ public class UserUtil {
 	* Returns the user where contactId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
 	* @param contactId the contact ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching user, or <code>null</code> if a matching user could not be found
 	*/
 	public static User fetchByContactId(long contactId,
@@ -704,7 +704,7 @@ public class UserUtil {
 	* @param start the lower bound of the range of users
 	* @param end the upper bound of the range of users (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching users
 	*/
 	public static List<User> findByEmailAddress(java.lang.String emailAddress,
@@ -833,7 +833,7 @@ public class UserUtil {
 	* Returns the user where portraitId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
 	* @param portraitId the portrait ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching user, or <code>null</code> if a matching user could not be found
 	*/
 	public static User fetchByPortraitId(long portraitId,
@@ -891,7 +891,7 @@ public class UserUtil {
 	*
 	* @param companyId the company ID
 	* @param userId the user ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching user, or <code>null</code> if a matching user could not be found
 	*/
 	public static User fetchByC_U(long companyId, long userId,
@@ -986,7 +986,7 @@ public class UserUtil {
 	* @param start the lower bound of the range of users
 	* @param end the upper bound of the range of users (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching users
 	*/
 	public static List<User> findByC_CD(long companyId,
@@ -1160,7 +1160,7 @@ public class UserUtil {
 	* @param start the lower bound of the range of users
 	* @param end the upper bound of the range of users (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching users
 	*/
 	public static List<User> findByC_MD(long companyId,
@@ -1299,7 +1299,7 @@ public class UserUtil {
 	*
 	* @param companyId the company ID
 	* @param defaultUser the default user
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching user, or <code>null</code> if a matching user could not be found
 	*/
 	public static User fetchByC_DU(long companyId, boolean defaultUser,
@@ -1360,7 +1360,7 @@ public class UserUtil {
 	*
 	* @param companyId the company ID
 	* @param screenName the screen name
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching user, or <code>null</code> if a matching user could not be found
 	*/
 	public static User fetchByC_SN(long companyId, java.lang.String screenName,
@@ -1421,7 +1421,7 @@ public class UserUtil {
 	*
 	* @param companyId the company ID
 	* @param emailAddress the email address
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching user, or <code>null</code> if a matching user could not be found
 	*/
 	public static User fetchByC_EA(long companyId,
@@ -1483,7 +1483,7 @@ public class UserUtil {
 	*
 	* @param companyId the company ID
 	* @param facebookId the facebook ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching user, or <code>null</code> if a matching user could not be found
 	*/
 	public static User fetchByC_FID(long companyId, long facebookId,
@@ -1544,7 +1544,7 @@ public class UserUtil {
 	*
 	* @param companyId the company ID
 	* @param openId the open ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching user, or <code>null</code> if a matching user could not be found
 	*/
 	public static User fetchByC_O(long companyId, java.lang.String openId,
@@ -1636,7 +1636,7 @@ public class UserUtil {
 	* @param start the lower bound of the range of users
 	* @param end the upper bound of the range of users (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching users
 	*/
 	public static List<User> findByC_S(long companyId, int status, int start,
@@ -1818,7 +1818,7 @@ public class UserUtil {
 	* @param start the lower bound of the range of users
 	* @param end the upper bound of the range of users (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching users
 	*/
 	public static List<User> findByC_CD_MD(long companyId,
@@ -2017,7 +2017,7 @@ public class UserUtil {
 	* @param start the lower bound of the range of users
 	* @param end the upper bound of the range of users (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching users
 	*/
 	public static List<User> findByC_DU_S(long companyId, boolean defaultUser,
@@ -2263,7 +2263,7 @@ public class UserUtil {
 	* @param start the lower bound of the range of users
 	* @param end the upper bound of the range of users (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of users
 	*/
 	public static List<User> findAll(int start, int end,

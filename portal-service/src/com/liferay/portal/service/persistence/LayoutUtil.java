@@ -161,7 +161,7 @@ public class LayoutUtil {
 	* @param start the lower bound of the range of layouts
 	* @param end the upper bound of the range of layouts (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching layouts
 	*/
 	public static List<Layout> findByUuid(java.lang.String uuid, int start,
@@ -292,7 +292,7 @@ public class LayoutUtil {
 	* @param uuid the uuid
 	* @param groupId the group ID
 	* @param privateLayout the private layout
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching layout, or <code>null</code> if a matching layout could not be found
 	*/
 	public static Layout fetchByUUID_G_P(java.lang.String uuid, long groupId,
@@ -391,7 +391,7 @@ public class LayoutUtil {
 	* @param start the lower bound of the range of layouts
 	* @param end the upper bound of the range of layouts (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching layouts
 	*/
 	public static List<Layout> findByUuid_C(java.lang.String uuid,
@@ -558,7 +558,7 @@ public class LayoutUtil {
 	* @param start the lower bound of the range of layouts
 	* @param end the upper bound of the range of layouts (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching layouts
 	*/
 	public static List<Layout> findByGroupId(long groupId, int start, int end,
@@ -785,7 +785,7 @@ public class LayoutUtil {
 	* @param start the lower bound of the range of layouts
 	* @param end the upper bound of the range of layouts (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching layouts
 	*/
 	public static List<Layout> findByCompanyId(long companyId, int start,
@@ -914,7 +914,7 @@ public class LayoutUtil {
 	* Returns the layout where iconImageId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
 	* @param iconImageId the icon image ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching layout, or <code>null</code> if a matching layout could not be found
 	*/
 	public static Layout fetchByIconImageId(long iconImageId,
@@ -1005,7 +1005,7 @@ public class LayoutUtil {
 	* @param start the lower bound of the range of layouts
 	* @param end the upper bound of the range of layouts (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching layouts
 	*/
 	public static List<Layout> findByLayoutPrototypeUuid(
@@ -1182,7 +1182,7 @@ public class LayoutUtil {
 	* @param start the lower bound of the range of layouts
 	* @param end the upper bound of the range of layouts (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching layouts
 	*/
 	public static List<Layout> findBySourcePrototypeLayoutUuid(
@@ -1360,7 +1360,7 @@ public class LayoutUtil {
 	* @param start the lower bound of the range of layouts
 	* @param end the upper bound of the range of layouts (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching layouts
 	*/
 	public static List<Layout> findByG_P(long groupId, boolean privateLayout,
@@ -1585,7 +1585,7 @@ public class LayoutUtil {
 	* @param groupId the group ID
 	* @param privateLayout the private layout
 	* @param layoutId the layout ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching layout, or <code>null</code> if a matching layout could not be found
 	*/
 	public static Layout fetchByG_P_L(long groupId, boolean privateLayout,
@@ -1692,7 +1692,7 @@ public class LayoutUtil {
 	* @param start the lower bound of the range of layouts
 	* @param end the upper bound of the range of layouts (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching layouts
 	*/
 	public static List<Layout> findByG_P_P(long groupId, boolean privateLayout,
@@ -1979,7 +1979,7 @@ public class LayoutUtil {
 	* @param start the lower bound of the range of layouts
 	* @param end the upper bound of the range of layouts (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching layouts
 	*/
 	public static List<Layout> findByG_P_T(long groupId, boolean privateLayout,
@@ -2227,7 +2227,7 @@ public class LayoutUtil {
 	* @param groupId the group ID
 	* @param privateLayout the private layout
 	* @param friendlyURL the friendly u r l
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching layout, or <code>null</code> if a matching layout could not be found
 	*/
 	public static Layout fetchByG_P_F(long groupId, boolean privateLayout,
@@ -2303,7 +2303,7 @@ public class LayoutUtil {
 	* @param groupId the group ID
 	* @param privateLayout the private layout
 	* @param sourcePrototypeLayoutUuid the source prototype layout uuid
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching layout, or <code>null</code> if a matching layout could not be found
 	*/
 	public static Layout fetchByG_P_SPLU(long groupId, boolean privateLayout,
@@ -2466,7 +2466,7 @@ public class LayoutUtil {
 	* @param start the lower bound of the range of layouts
 	* @param end the upper bound of the range of layouts (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of layouts
 	*/
 	public static List<Layout> findAll(int start, int end,

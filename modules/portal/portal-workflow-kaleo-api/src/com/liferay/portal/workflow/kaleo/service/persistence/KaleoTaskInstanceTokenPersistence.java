@@ -91,7 +91,7 @@ public interface KaleoTaskInstanceTokenPersistence extends BasePersistence<Kaleo
 	* @param start the lower bound of the range of kaleo task instance tokens
 	* @param end the upper bound of the range of kaleo task instance tokens (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching kaleo task instance tokens
 	*/
 	public java.util.List<KaleoTaskInstanceToken> findByCompanyId(
@@ -224,7 +224,7 @@ public interface KaleoTaskInstanceTokenPersistence extends BasePersistence<Kaleo
 	* @param start the lower bound of the range of kaleo task instance tokens
 	* @param end the upper bound of the range of kaleo task instance tokens (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching kaleo task instance tokens
 	*/
 	public java.util.List<KaleoTaskInstanceToken> findByKaleoDefinitionId(
@@ -361,7 +361,7 @@ public interface KaleoTaskInstanceTokenPersistence extends BasePersistence<Kaleo
 	* @param start the lower bound of the range of kaleo task instance tokens
 	* @param end the upper bound of the range of kaleo task instance tokens (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching kaleo task instance tokens
 	*/
 	public java.util.List<KaleoTaskInstanceToken> findByKaleoInstanceId(
@@ -473,7 +473,7 @@ public interface KaleoTaskInstanceTokenPersistence extends BasePersistence<Kaleo
 	*
 	* @param kaleoInstanceId the kaleo instance ID
 	* @param kaleoTaskId the kaleo task ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching kaleo task instance token, or <code>null</code> if a matching kaleo task instance token could not be found
 	*/
 	public KaleoTaskInstanceToken fetchByKII_KTI(long kaleoInstanceId,
@@ -555,7 +555,7 @@ public interface KaleoTaskInstanceTokenPersistence extends BasePersistence<Kaleo
 	* @param start the lower bound of the range of kaleo task instance tokens
 	* @param end the upper bound of the range of kaleo task instance tokens (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching kaleo task instance tokens
 	*/
 	public java.util.List<KaleoTaskInstanceToken> findByCN_CPK(
@@ -753,7 +753,7 @@ public interface KaleoTaskInstanceTokenPersistence extends BasePersistence<Kaleo
 	* @param start the lower bound of the range of kaleo task instance tokens
 	* @param end the upper bound of the range of kaleo task instance tokens (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of kaleo task instance tokens
 	*/
 	public java.util.List<KaleoTaskInstanceToken> findAll(int start, int end,

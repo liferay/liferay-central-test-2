@@ -165,7 +165,7 @@ public class BlogsEntryUtil {
 	* @param start the lower bound of the range of blogs entries
 	* @param end the upper bound of the range of blogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching blogs entries
 	*/
 	public static List<BlogsEntry> findByUuid(java.lang.String uuid, int start,
@@ -292,7 +292,7 @@ public class BlogsEntryUtil {
 	*
 	* @param uuid the uuid
 	* @param groupId the group ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching blogs entry, or <code>null</code> if a matching blogs entry could not be found
 	*/
 	public static BlogsEntry fetchByUUID_G(java.lang.String uuid, long groupId,
@@ -386,7 +386,7 @@ public class BlogsEntryUtil {
 	* @param start the lower bound of the range of blogs entries
 	* @param end the upper bound of the range of blogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching blogs entries
 	*/
 	public static List<BlogsEntry> findByUuid_C(java.lang.String uuid,
@@ -555,7 +555,7 @@ public class BlogsEntryUtil {
 	* @param start the lower bound of the range of blogs entries
 	* @param end the upper bound of the range of blogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching blogs entries
 	*/
 	public static List<BlogsEntry> findByGroupId(long groupId, int start,
@@ -784,7 +784,7 @@ public class BlogsEntryUtil {
 	* @param start the lower bound of the range of blogs entries
 	* @param end the upper bound of the range of blogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching blogs entries
 	*/
 	public static List<BlogsEntry> findByCompanyId(long companyId, int start,
@@ -916,7 +916,7 @@ public class BlogsEntryUtil {
 	*
 	* @param groupId the group ID
 	* @param urlTitle the url title
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching blogs entry, or <code>null</code> if a matching blogs entry could not be found
 	*/
 	public static BlogsEntry fetchByG_UT(long groupId,
@@ -1012,7 +1012,7 @@ public class BlogsEntryUtil {
 	* @param start the lower bound of the range of blogs entries
 	* @param end the upper bound of the range of blogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching blogs entries
 	*/
 	public static List<BlogsEntry> findByG_LtD(long groupId,
@@ -1273,7 +1273,7 @@ public class BlogsEntryUtil {
 	* @param start the lower bound of the range of blogs entries
 	* @param end the upper bound of the range of blogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching blogs entries
 	*/
 	public static List<BlogsEntry> findByG_S(long groupId, int status,
@@ -1525,7 +1525,7 @@ public class BlogsEntryUtil {
 	* @param start the lower bound of the range of blogs entries
 	* @param end the upper bound of the range of blogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching blogs entries
 	*/
 	public static List<BlogsEntry> findByG_NotS(long groupId, int status,
@@ -1777,7 +1777,7 @@ public class BlogsEntryUtil {
 	* @param start the lower bound of the range of blogs entries
 	* @param end the upper bound of the range of blogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching blogs entries
 	*/
 	public static List<BlogsEntry> findByC_U(long companyId, long userId,
@@ -1952,7 +1952,7 @@ public class BlogsEntryUtil {
 	* @param start the lower bound of the range of blogs entries
 	* @param end the upper bound of the range of blogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching blogs entries
 	*/
 	public static List<BlogsEntry> findByC_LtD(long companyId,
@@ -2129,7 +2129,7 @@ public class BlogsEntryUtil {
 	* @param start the lower bound of the range of blogs entries
 	* @param end the upper bound of the range of blogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching blogs entries
 	*/
 	public static List<BlogsEntry> findByC_S(long companyId, int status,
@@ -2302,7 +2302,7 @@ public class BlogsEntryUtil {
 	* @param start the lower bound of the range of blogs entries
 	* @param end the upper bound of the range of blogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching blogs entries
 	*/
 	public static List<BlogsEntry> findByC_NotS(long companyId, int status,
@@ -2477,7 +2477,7 @@ public class BlogsEntryUtil {
 	* @param start the lower bound of the range of blogs entries
 	* @param end the upper bound of the range of blogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching blogs entries
 	*/
 	public static List<BlogsEntry> findByLtD_S(java.util.Date displayDate,
@@ -2658,7 +2658,7 @@ public class BlogsEntryUtil {
 	* @param start the lower bound of the range of blogs entries
 	* @param end the upper bound of the range of blogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching blogs entries
 	*/
 	public static List<BlogsEntry> findByG_U_LtD(long groupId, long userId,
@@ -2945,7 +2945,7 @@ public class BlogsEntryUtil {
 	* @param start the lower bound of the range of blogs entries
 	* @param end the upper bound of the range of blogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching blogs entries
 	*/
 	public static List<BlogsEntry> findByG_U_S(long groupId, long userId,
@@ -3222,7 +3222,7 @@ public class BlogsEntryUtil {
 	* @param start the lower bound of the range of blogs entries
 	* @param end the upper bound of the range of blogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching blogs entries
 	*/
 	public static List<BlogsEntry> findByG_U_NotS(long groupId, long userId,
@@ -3503,7 +3503,7 @@ public class BlogsEntryUtil {
 	* @param start the lower bound of the range of blogs entries
 	* @param end the upper bound of the range of blogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching blogs entries
 	*/
 	public static List<BlogsEntry> findByG_LtD_S(long groupId,
@@ -3791,7 +3791,7 @@ public class BlogsEntryUtil {
 	* @param start the lower bound of the range of blogs entries
 	* @param end the upper bound of the range of blogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching blogs entries
 	*/
 	public static List<BlogsEntry> findByG_LtD_NotS(long groupId,
@@ -4081,7 +4081,7 @@ public class BlogsEntryUtil {
 	* @param start the lower bound of the range of blogs entries
 	* @param end the upper bound of the range of blogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching blogs entries
 	*/
 	public static List<BlogsEntry> findByC_U_S(long companyId, long userId,
@@ -4273,7 +4273,7 @@ public class BlogsEntryUtil {
 	* @param start the lower bound of the range of blogs entries
 	* @param end the upper bound of the range of blogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching blogs entries
 	*/
 	public static List<BlogsEntry> findByC_U_NotS(long companyId, long userId,
@@ -4465,7 +4465,7 @@ public class BlogsEntryUtil {
 	* @param start the lower bound of the range of blogs entries
 	* @param end the upper bound of the range of blogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching blogs entries
 	*/
 	public static List<BlogsEntry> findByC_LtD_S(long companyId,
@@ -4663,7 +4663,7 @@ public class BlogsEntryUtil {
 	* @param start the lower bound of the range of blogs entries
 	* @param end the upper bound of the range of blogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching blogs entries
 	*/
 	public static List<BlogsEntry> findByC_LtD_NotS(long companyId,
@@ -4867,7 +4867,7 @@ public class BlogsEntryUtil {
 	* @param start the lower bound of the range of blogs entries
 	* @param end the upper bound of the range of blogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching blogs entries
 	*/
 	public static List<BlogsEntry> findByG_U_LtD_S(long groupId, long userId,
@@ -5176,7 +5176,7 @@ public class BlogsEntryUtil {
 	* @param start the lower bound of the range of blogs entries
 	* @param end the upper bound of the range of blogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching blogs entries
 	*/
 	public static List<BlogsEntry> findByG_U_LtD_NotS(long groupId,
@@ -5535,7 +5535,7 @@ public class BlogsEntryUtil {
 	* @param start the lower bound of the range of blogs entries
 	* @param end the upper bound of the range of blogs entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of blogs entries
 	*/
 	public static List<BlogsEntry> findAll(int start, int end,

@@ -91,7 +91,7 @@ public interface DLFileShortcutPersistence extends BasePersistence<DLFileShortcu
 	* @param start the lower bound of the range of document library file shortcuts
 	* @param end the upper bound of the range of document library file shortcuts (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching document library file shortcuts
 	*/
 	public java.util.List<DLFileShortcut> findByUuid(java.lang.String uuid,
@@ -197,7 +197,7 @@ public interface DLFileShortcutPersistence extends BasePersistence<DLFileShortcu
 	*
 	* @param uuid the uuid
 	* @param groupId the group ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching document library file shortcut, or <code>null</code> if a matching document library file shortcut could not be found
 	*/
 	public DLFileShortcut fetchByUUID_G(java.lang.String uuid, long groupId,
@@ -278,7 +278,7 @@ public interface DLFileShortcutPersistence extends BasePersistence<DLFileShortcu
 	* @param start the lower bound of the range of document library file shortcuts
 	* @param end the upper bound of the range of document library file shortcuts (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching document library file shortcuts
 	*/
 	public java.util.List<DLFileShortcut> findByUuid_C(java.lang.String uuid,
@@ -421,7 +421,7 @@ public interface DLFileShortcutPersistence extends BasePersistence<DLFileShortcu
 	* @param start the lower bound of the range of document library file shortcuts
 	* @param end the upper bound of the range of document library file shortcuts (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching document library file shortcuts
 	*/
 	public java.util.List<DLFileShortcut> findByCompanyId(long companyId,
@@ -554,7 +554,7 @@ public interface DLFileShortcutPersistence extends BasePersistence<DLFileShortcu
 	* @param start the lower bound of the range of document library file shortcuts
 	* @param end the upper bound of the range of document library file shortcuts (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching document library file shortcuts
 	*/
 	public java.util.List<DLFileShortcut> findByToFileEntryId(
@@ -690,7 +690,7 @@ public interface DLFileShortcutPersistence extends BasePersistence<DLFileShortcu
 	* @param start the lower bound of the range of document library file shortcuts
 	* @param end the upper bound of the range of document library file shortcuts (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching document library file shortcuts
 	*/
 	public java.util.List<DLFileShortcut> findByG_F(long groupId,
@@ -902,7 +902,7 @@ public interface DLFileShortcutPersistence extends BasePersistence<DLFileShortcu
 	* @param start the lower bound of the range of document library file shortcuts
 	* @param end the upper bound of the range of document library file shortcuts (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching document library file shortcuts
 	*/
 	public java.util.List<DLFileShortcut> findByC_NotS(long companyId,
@@ -1050,7 +1050,7 @@ public interface DLFileShortcutPersistence extends BasePersistence<DLFileShortcu
 	* @param start the lower bound of the range of document library file shortcuts
 	* @param end the upper bound of the range of document library file shortcuts (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching document library file shortcuts
 	*/
 	public java.util.List<DLFileShortcut> findByG_F_A(long groupId,
@@ -1286,7 +1286,7 @@ public interface DLFileShortcutPersistence extends BasePersistence<DLFileShortcu
 	* @param start the lower bound of the range of document library file shortcuts
 	* @param end the upper bound of the range of document library file shortcuts (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching document library file shortcuts
 	*/
 	public java.util.List<DLFileShortcut> findByG_F_A_S(long groupId,
@@ -1575,7 +1575,7 @@ public interface DLFileShortcutPersistence extends BasePersistence<DLFileShortcu
 	* @param start the lower bound of the range of document library file shortcuts
 	* @param end the upper bound of the range of document library file shortcuts (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of document library file shortcuts
 	*/
 	public java.util.List<DLFileShortcut> findAll(int start, int end,

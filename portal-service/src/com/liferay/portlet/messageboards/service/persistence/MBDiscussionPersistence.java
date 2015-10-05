@@ -91,7 +91,7 @@ public interface MBDiscussionPersistence extends BasePersistence<MBDiscussion> {
 	* @param start the lower bound of the range of message boards discussions
 	* @param end the upper bound of the range of message boards discussions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message boards discussions
 	*/
 	public java.util.List<MBDiscussion> findByUuid(java.lang.String uuid,
@@ -197,7 +197,7 @@ public interface MBDiscussionPersistence extends BasePersistence<MBDiscussion> {
 	*
 	* @param uuid the uuid
 	* @param groupId the group ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching message boards discussion, or <code>null</code> if a matching message boards discussion could not be found
 	*/
 	public MBDiscussion fetchByUUID_G(java.lang.String uuid, long groupId,
@@ -278,7 +278,7 @@ public interface MBDiscussionPersistence extends BasePersistence<MBDiscussion> {
 	* @param start the lower bound of the range of message boards discussions
 	* @param end the upper bound of the range of message boards discussions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message boards discussions
 	*/
 	public java.util.List<MBDiscussion> findByUuid_C(java.lang.String uuid,
@@ -421,7 +421,7 @@ public interface MBDiscussionPersistence extends BasePersistence<MBDiscussion> {
 	* @param start the lower bound of the range of message boards discussions
 	* @param end the upper bound of the range of message boards discussions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message boards discussions
 	*/
 	public java.util.List<MBDiscussion> findByClassNameId(long classNameId,
@@ -524,7 +524,7 @@ public interface MBDiscussionPersistence extends BasePersistence<MBDiscussion> {
 	* Returns the message boards discussion where threadId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
 	* @param threadId the thread ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching message boards discussion, or <code>null</code> if a matching message boards discussion could not be found
 	*/
 	public MBDiscussion fetchByThreadId(long threadId, boolean retrieveFromCache);
@@ -571,7 +571,7 @@ public interface MBDiscussionPersistence extends BasePersistence<MBDiscussion> {
 	*
 	* @param classNameId the class name ID
 	* @param classPK the class p k
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching message boards discussion, or <code>null</code> if a matching message boards discussion could not be found
 	*/
 	public MBDiscussion fetchByC_C(long classNameId, long classPK,
@@ -697,7 +697,7 @@ public interface MBDiscussionPersistence extends BasePersistence<MBDiscussion> {
 	* @param start the lower bound of the range of message boards discussions
 	* @param end the upper bound of the range of message boards discussions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of message boards discussions
 	*/
 	public java.util.List<MBDiscussion> findAll(int start, int end,

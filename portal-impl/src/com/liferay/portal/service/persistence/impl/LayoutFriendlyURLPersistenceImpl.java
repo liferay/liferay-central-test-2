@@ -167,7 +167,7 @@ public class LayoutFriendlyURLPersistenceImpl extends BasePersistenceImpl<Layout
 	 * @param start the lower bound of the range of layout friendly u r ls
 	 * @param end the upper bound of the range of layout friendly u r ls (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to use the finder cache
+	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching layout friendly u r ls
 	 */
 	@Override
@@ -701,7 +701,7 @@ public class LayoutFriendlyURLPersistenceImpl extends BasePersistenceImpl<Layout
 	 *
 	 * @param uuid the uuid
 	 * @param groupId the group ID
-	 * @param retrieveFromCache whether to use the finder cache
+	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the matching layout friendly u r l, or <code>null</code> if a matching layout friendly u r l could not be found
 	 */
 	@Override
@@ -981,7 +981,7 @@ public class LayoutFriendlyURLPersistenceImpl extends BasePersistenceImpl<Layout
 	 * @param start the lower bound of the range of layout friendly u r ls
 	 * @param end the upper bound of the range of layout friendly u r ls (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to use the finder cache
+	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching layout friendly u r ls
 	 */
 	@Override
@@ -1564,7 +1564,7 @@ public class LayoutFriendlyURLPersistenceImpl extends BasePersistenceImpl<Layout
 	 * @param start the lower bound of the range of layout friendly u r ls
 	 * @param end the upper bound of the range of layout friendly u r ls (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to use the finder cache
+	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching layout friendly u r ls
 	 */
 	@Override
@@ -2073,7 +2073,7 @@ public class LayoutFriendlyURLPersistenceImpl extends BasePersistenceImpl<Layout
 	 * @param start the lower bound of the range of layout friendly u r ls
 	 * @param end the upper bound of the range of layout friendly u r ls (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to use the finder cache
+	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching layout friendly u r ls
 	 */
 	@Override
@@ -2578,7 +2578,7 @@ public class LayoutFriendlyURLPersistenceImpl extends BasePersistenceImpl<Layout
 	 * @param start the lower bound of the range of layout friendly u r ls
 	 * @param end the upper bound of the range of layout friendly u r ls (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to use the finder cache
+	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching layout friendly u r ls
 	 */
 	@Override
@@ -3090,7 +3090,7 @@ public class LayoutFriendlyURLPersistenceImpl extends BasePersistenceImpl<Layout
 	 * @param start the lower bound of the range of layout friendly u r ls
 	 * @param end the upper bound of the range of layout friendly u r ls (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to use the finder cache
+	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching layout friendly u r ls
 	 */
 	@Override
@@ -3658,7 +3658,7 @@ public class LayoutFriendlyURLPersistenceImpl extends BasePersistenceImpl<Layout
 	 *
 	 * @param plid the plid
 	 * @param languageId the language ID
-	 * @param retrieveFromCache whether to use the finder cache
+	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the matching layout friendly u r l, or <code>null</code> if a matching layout friendly u r l could not be found
 	 */
 	@Override
@@ -3952,7 +3952,7 @@ public class LayoutFriendlyURLPersistenceImpl extends BasePersistenceImpl<Layout
 	 * @param start the lower bound of the range of layout friendly u r ls
 	 * @param end the upper bound of the range of layout friendly u r ls (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to use the finder cache
+	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching layout friendly u r ls
 	 */
 	@Override
@@ -4581,7 +4581,7 @@ public class LayoutFriendlyURLPersistenceImpl extends BasePersistenceImpl<Layout
 	 * @param privateLayout the private layout
 	 * @param friendlyURL the friendly u r l
 	 * @param languageId the language ID
-	 * @param retrieveFromCache whether to use the finder cache
+	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the matching layout friendly u r l, or <code>null</code> if a matching layout friendly u r l could not be found
 	 */
 	@Override
@@ -5678,7 +5678,7 @@ public class LayoutFriendlyURLPersistenceImpl extends BasePersistenceImpl<Layout
 	 * @param start the lower bound of the range of layout friendly u r ls
 	 * @param end the upper bound of the range of layout friendly u r ls (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to use the finder cache
+	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of layout friendly u r ls
 	 */
 	@Override

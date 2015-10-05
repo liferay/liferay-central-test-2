@@ -89,7 +89,7 @@ public interface UserIdMapperPersistence extends BasePersistence<UserIdMapper> {
 	* @param start the lower bound of the range of user ID mappers
 	* @param end the upper bound of the range of user ID mappers (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching user ID mappers
 	*/
 	public java.util.List<UserIdMapper> findByUserId(long userId, int start,
@@ -195,7 +195,7 @@ public interface UserIdMapperPersistence extends BasePersistence<UserIdMapper> {
 	*
 	* @param userId the user ID
 	* @param type the type
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching user ID mapper, or <code>null</code> if a matching user ID mapper could not be found
 	*/
 	public UserIdMapper fetchByU_T(long userId, java.lang.String type,
@@ -247,7 +247,7 @@ public interface UserIdMapperPersistence extends BasePersistence<UserIdMapper> {
 	*
 	* @param type the type
 	* @param externalUserId the external user ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching user ID mapper, or <code>null</code> if a matching user ID mapper could not be found
 	*/
 	public UserIdMapper fetchByT_E(java.lang.String type,
@@ -374,7 +374,7 @@ public interface UserIdMapperPersistence extends BasePersistence<UserIdMapper> {
 	* @param start the lower bound of the range of user ID mappers
 	* @param end the upper bound of the range of user ID mappers (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of user ID mappers
 	*/
 	public java.util.List<UserIdMapper> findAll(int start, int end,

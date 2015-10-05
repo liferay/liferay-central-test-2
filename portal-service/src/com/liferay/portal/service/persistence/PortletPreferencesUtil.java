@@ -165,7 +165,7 @@ public class PortletPreferencesUtil {
 	* @param start the lower bound of the range of portlet preferenceses
 	* @param end the upper bound of the range of portlet preferenceses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching portlet preferenceses
 	*/
 	public static List<PortletPreferences> findByPlid(long plid, int start,
@@ -324,7 +324,7 @@ public class PortletPreferencesUtil {
 	* @param start the lower bound of the range of portlet preferenceses
 	* @param end the upper bound of the range of portlet preferenceses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching portlet preferenceses
 	*/
 	public static List<PortletPreferences> findByPortletId(
@@ -497,7 +497,7 @@ public class PortletPreferencesUtil {
 	* @param start the lower bound of the range of portlet preferenceses
 	* @param end the upper bound of the range of portlet preferenceses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching portlet preferenceses
 	*/
 	public static List<PortletPreferences> findByO_P(int ownerType,
@@ -676,7 +676,7 @@ public class PortletPreferencesUtil {
 	* @param start the lower bound of the range of portlet preferenceses
 	* @param end the upper bound of the range of portlet preferenceses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching portlet preferenceses
 	*/
 	public static List<PortletPreferences> findByP_P(long plid,
@@ -860,7 +860,7 @@ public class PortletPreferencesUtil {
 	* @param start the lower bound of the range of portlet preferenceses
 	* @param end the upper bound of the range of portlet preferenceses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching portlet preferenceses
 	*/
 	public static List<PortletPreferences> findByO_O_P(long ownerId,
@@ -1055,7 +1055,7 @@ public class PortletPreferencesUtil {
 	* @param start the lower bound of the range of portlet preferenceses
 	* @param end the upper bound of the range of portlet preferenceses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching portlet preferenceses
 	*/
 	public static List<PortletPreferences> findByO_O_PI(long ownerId,
@@ -1254,7 +1254,7 @@ public class PortletPreferencesUtil {
 	* @param start the lower bound of the range of portlet preferenceses
 	* @param end the upper bound of the range of portlet preferenceses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching portlet preferenceses
 	*/
 	public static List<PortletPreferences> findByO_P_P(int ownerType,
@@ -1423,7 +1423,7 @@ public class PortletPreferencesUtil {
 	* @param ownerType the owner type
 	* @param plid the plid
 	* @param portletId the portlet ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching portlet preferences, or <code>null</code> if a matching portlet preferences could not be found
 	*/
 	public static PortletPreferences fetchByO_O_P_P(long ownerId,
@@ -1590,7 +1590,7 @@ public class PortletPreferencesUtil {
 	* @param start the lower bound of the range of portlet preferenceses
 	* @param end the upper bound of the range of portlet preferenceses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of portlet preferenceses
 	*/
 	public static List<PortletPreferences> findAll(int start, int end,

@@ -177,7 +177,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * @param start the lower bound of the range of cal events
 	 * @param end the upper bound of the range of cal events (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to use the finder cache
+	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching cal events
 	 */
 	@Override
@@ -706,7 +706,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 *
 	 * @param uuid the uuid
 	 * @param groupId the group ID
-	 * @param retrieveFromCache whether to use the finder cache
+	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the matching cal event, or <code>null</code> if a matching cal event could not be found
 	 */
 	@Override
@@ -985,7 +985,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * @param start the lower bound of the range of cal events
 	 * @param end the upper bound of the range of cal events (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to use the finder cache
+	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching cal events
 	 */
 	@Override
@@ -1565,7 +1565,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * @param start the lower bound of the range of cal events
 	 * @param end the upper bound of the range of cal events (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to use the finder cache
+	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching cal events
 	 */
 	@Override
@@ -2068,7 +2068,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * @param start the lower bound of the range of cal events
 	 * @param end the upper bound of the range of cal events (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to use the finder cache
+	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching cal events
 	 */
 	@Override
@@ -2564,7 +2564,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * @param start the lower bound of the range of cal events
 	 * @param end the upper bound of the range of cal events (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to use the finder cache
+	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching cal events
 	 */
 	@Override
@@ -3068,7 +3068,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * @param start the lower bound of the range of cal events
 	 * @param end the upper bound of the range of cal events (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to use the finder cache
+	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching cal events
 	 */
 	@Override
@@ -3544,7 +3544,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * @param start the lower bound of the range of cal events
 	 * @param end the upper bound of the range of cal events (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to use the finder cache
+	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching cal events
 	 */
 	@Override
@@ -3958,7 +3958,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * @param start the lower bound of the range of cal events
 	 * @param end the upper bound of the range of cal events (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to use the finder cache
+	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching cal events
 	 */
 	@Override
@@ -4522,7 +4522,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * @param start the lower bound of the range of cal events
 	 * @param end the upper bound of the range of cal events (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to use the finder cache
+	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching cal events
 	 */
 	@Override
@@ -5029,7 +5029,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * @param start the lower bound of the range of cal events
 	 * @param end the upper bound of the range of cal events (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to use the finder cache
+	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching cal events
 	 */
 	@Override
@@ -6146,7 +6146,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * @param start the lower bound of the range of cal events
 	 * @param end the upper bound of the range of cal events (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to use the finder cache
+	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of cal events
 	 */
 	@Override

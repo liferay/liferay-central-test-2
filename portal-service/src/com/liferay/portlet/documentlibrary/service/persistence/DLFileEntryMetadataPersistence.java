@@ -91,7 +91,7 @@ public interface DLFileEntryMetadataPersistence extends BasePersistence<DLFileEn
 	* @param start the lower bound of the range of document library file entry metadatas
 	* @param end the upper bound of the range of document library file entry metadatas (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching document library file entry metadatas
 	*/
 	public java.util.List<DLFileEntryMetadata> findByUuid(
@@ -224,7 +224,7 @@ public interface DLFileEntryMetadataPersistence extends BasePersistence<DLFileEn
 	* @param start the lower bound of the range of document library file entry metadatas
 	* @param end the upper bound of the range of document library file entry metadatas (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching document library file entry metadatas
 	*/
 	public java.util.List<DLFileEntryMetadata> findByFileEntryId(
@@ -357,7 +357,7 @@ public interface DLFileEntryMetadataPersistence extends BasePersistence<DLFileEn
 	* @param start the lower bound of the range of document library file entry metadatas
 	* @param end the upper bound of the range of document library file entry metadatas (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching document library file entry metadatas
 	*/
 	public java.util.List<DLFileEntryMetadata> findByFileVersionId(
@@ -464,7 +464,7 @@ public interface DLFileEntryMetadataPersistence extends BasePersistence<DLFileEn
 	*
 	* @param DDMStructureId the d d m structure ID
 	* @param fileVersionId the file version ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching document library file entry metadata, or <code>null</code> if a matching document library file entry metadata could not be found
 	*/
 	public DLFileEntryMetadata fetchByD_F(long DDMStructureId,
@@ -593,7 +593,7 @@ public interface DLFileEntryMetadataPersistence extends BasePersistence<DLFileEn
 	* @param start the lower bound of the range of document library file entry metadatas
 	* @param end the upper bound of the range of document library file entry metadatas (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of document library file entry metadatas
 	*/
 	public java.util.List<DLFileEntryMetadata> findAll(int start, int end,

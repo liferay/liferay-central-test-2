@@ -89,7 +89,7 @@ public interface WebsitePersistence extends BasePersistence<Website> {
 	* @param start the lower bound of the range of websites
 	* @param end the upper bound of the range of websites (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching websites
 	*/
 	public java.util.List<Website> findByUuid(java.lang.String uuid, int start,
@@ -226,7 +226,7 @@ public interface WebsitePersistence extends BasePersistence<Website> {
 	* @param start the lower bound of the range of websites
 	* @param end the upper bound of the range of websites (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching websites
 	*/
 	public java.util.List<Website> findByUuid_C(java.lang.String uuid,
@@ -365,7 +365,7 @@ public interface WebsitePersistence extends BasePersistence<Website> {
 	* @param start the lower bound of the range of websites
 	* @param end the upper bound of the range of websites (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching websites
 	*/
 	public java.util.List<Website> findByCompanyId(long companyId, int start,
@@ -496,7 +496,7 @@ public interface WebsitePersistence extends BasePersistence<Website> {
 	* @param start the lower bound of the range of websites
 	* @param end the upper bound of the range of websites (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching websites
 	*/
 	public java.util.List<Website> findByUserId(long userId, int start,
@@ -631,7 +631,7 @@ public interface WebsitePersistence extends BasePersistence<Website> {
 	* @param start the lower bound of the range of websites
 	* @param end the upper bound of the range of websites (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching websites
 	*/
 	public java.util.List<Website> findByC_C(long companyId, long classNameId,
@@ -779,7 +779,7 @@ public interface WebsitePersistence extends BasePersistence<Website> {
 	* @param start the lower bound of the range of websites
 	* @param end the upper bound of the range of websites (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching websites
 	*/
 	public java.util.List<Website> findByC_C_C(long companyId,
@@ -942,7 +942,7 @@ public interface WebsitePersistence extends BasePersistence<Website> {
 	* @param start the lower bound of the range of websites
 	* @param end the upper bound of the range of websites (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching websites
 	*/
 	public java.util.List<Website> findByC_C_C_P(long companyId,
@@ -1151,7 +1151,7 @@ public interface WebsitePersistence extends BasePersistence<Website> {
 	* @param start the lower bound of the range of websites
 	* @param end the upper bound of the range of websites (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of websites
 	*/
 	public java.util.List<Website> findAll(int start, int end,

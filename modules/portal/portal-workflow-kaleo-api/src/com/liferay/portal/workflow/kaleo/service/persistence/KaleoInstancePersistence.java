@@ -90,7 +90,7 @@ public interface KaleoInstancePersistence extends BasePersistence<KaleoInstance>
 	* @param start the lower bound of the range of kaleo instances
 	* @param end the upper bound of the range of kaleo instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching kaleo instances
 	*/
 	public java.util.List<KaleoInstance> findByCompanyId(long companyId,
@@ -223,7 +223,7 @@ public interface KaleoInstancePersistence extends BasePersistence<KaleoInstance>
 	* @param start the lower bound of the range of kaleo instances
 	* @param end the upper bound of the range of kaleo instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching kaleo instances
 	*/
 	public java.util.List<KaleoInstance> findByKaleoDefinitionId(
@@ -360,7 +360,7 @@ public interface KaleoInstancePersistence extends BasePersistence<KaleoInstance>
 	* @param start the lower bound of the range of kaleo instances
 	* @param end the upper bound of the range of kaleo instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching kaleo instances
 	*/
 	public java.util.List<KaleoInstance> findByC_U(long companyId, long userId,
@@ -504,7 +504,7 @@ public interface KaleoInstancePersistence extends BasePersistence<KaleoInstance>
 	* @param start the lower bound of the range of kaleo instances
 	* @param end the upper bound of the range of kaleo instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching kaleo instances
 	*/
 	public java.util.List<KaleoInstance> findByKDI_C(long kaleoDefinitionId,
@@ -652,7 +652,7 @@ public interface KaleoInstancePersistence extends BasePersistence<KaleoInstance>
 	* @param start the lower bound of the range of kaleo instances
 	* @param end the upper bound of the range of kaleo instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching kaleo instances
 	*/
 	public java.util.List<KaleoInstance> findByCN_CPK(
@@ -811,7 +811,7 @@ public interface KaleoInstancePersistence extends BasePersistence<KaleoInstance>
 	* @param start the lower bound of the range of kaleo instances
 	* @param end the upper bound of the range of kaleo instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching kaleo instances
 	*/
 	public java.util.List<KaleoInstance> findByC_KDN_KDV_CD(long companyId,
@@ -1029,7 +1029,7 @@ public interface KaleoInstancePersistence extends BasePersistence<KaleoInstance>
 	* @param start the lower bound of the range of kaleo instances
 	* @param end the upper bound of the range of kaleo instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of kaleo instances
 	*/
 	public java.util.List<KaleoInstance> findAll(int start, int end,

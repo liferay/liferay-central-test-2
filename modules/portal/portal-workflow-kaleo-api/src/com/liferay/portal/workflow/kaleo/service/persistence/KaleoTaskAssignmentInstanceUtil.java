@@ -174,7 +174,7 @@ public class KaleoTaskAssignmentInstanceUtil {
 	* @param start the lower bound of the range of kaleo task assignment instances
 	* @param end the upper bound of the range of kaleo task assignment instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching kaleo task assignment instances
 	*/
 	public static List<KaleoTaskAssignmentInstance> findByCompanyId(
@@ -344,7 +344,7 @@ public class KaleoTaskAssignmentInstanceUtil {
 	* @param start the lower bound of the range of kaleo task assignment instances
 	* @param end the upper bound of the range of kaleo task assignment instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching kaleo task assignment instances
 	*/
 	public static List<KaleoTaskAssignmentInstance> findByKaleoDefinitionId(
@@ -518,7 +518,7 @@ public class KaleoTaskAssignmentInstanceUtil {
 	* @param start the lower bound of the range of kaleo task assignment instances
 	* @param end the upper bound of the range of kaleo task assignment instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching kaleo task assignment instances
 	*/
 	public static List<KaleoTaskAssignmentInstance> findByKaleoInstanceId(
@@ -694,7 +694,7 @@ public class KaleoTaskAssignmentInstanceUtil {
 	* @param start the lower bound of the range of kaleo task assignment instances
 	* @param end the upper bound of the range of kaleo task assignment instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching kaleo task assignment instances
 	*/
 	public static List<KaleoTaskAssignmentInstance> findBykaleoTaskInstanceTokenId(
@@ -872,7 +872,7 @@ public class KaleoTaskAssignmentInstanceUtil {
 	* @param start the lower bound of the range of kaleo task assignment instances
 	* @param end the upper bound of the range of kaleo task assignment instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching kaleo task assignment instances
 	*/
 	public static List<KaleoTaskAssignmentInstance> findByassigneeClassName(
@@ -1052,7 +1052,7 @@ public class KaleoTaskAssignmentInstanceUtil {
 	* @param start the lower bound of the range of kaleo task assignment instances
 	* @param end the upper bound of the range of kaleo task assignment instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching kaleo task assignment instances
 	*/
 	public static List<KaleoTaskAssignmentInstance> findByG_ACPK(long groupId,
@@ -1241,7 +1241,7 @@ public class KaleoTaskAssignmentInstanceUtil {
 	* @param start the lower bound of the range of kaleo task assignment instances
 	* @param end the upper bound of the range of kaleo task assignment instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching kaleo task assignment instances
 	*/
 	public static List<KaleoTaskAssignmentInstance> findByACN_ACPK(
@@ -1495,7 +1495,7 @@ public class KaleoTaskAssignmentInstanceUtil {
 	* @param start the lower bound of the range of kaleo task assignment instances
 	* @param end the upper bound of the range of kaleo task assignment instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of kaleo task assignment instances
 	*/
 	public static List<KaleoTaskAssignmentInstance> findAll(int start, int end,

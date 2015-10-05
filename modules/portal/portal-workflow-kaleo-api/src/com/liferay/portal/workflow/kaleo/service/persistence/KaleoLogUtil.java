@@ -167,7 +167,7 @@ public class KaleoLogUtil {
 	* @param start the lower bound of the range of kaleo logs
 	* @param end the upper bound of the range of kaleo logs (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching kaleo logs
 	*/
 	public static List<KaleoLog> findByCompanyId(long companyId, int start,
@@ -330,7 +330,7 @@ public class KaleoLogUtil {
 	* @param start the lower bound of the range of kaleo logs
 	* @param end the upper bound of the range of kaleo logs (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching kaleo logs
 	*/
 	public static List<KaleoLog> findByKaleoDefinitionId(
@@ -497,7 +497,7 @@ public class KaleoLogUtil {
 	* @param start the lower bound of the range of kaleo logs
 	* @param end the upper bound of the range of kaleo logs (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching kaleo logs
 	*/
 	public static List<KaleoLog> findByKaleoInstanceId(long kaleoInstanceId,
@@ -668,7 +668,7 @@ public class KaleoLogUtil {
 	* @param start the lower bound of the range of kaleo logs
 	* @param end the upper bound of the range of kaleo logs (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching kaleo logs
 	*/
 	public static List<KaleoLog> findByKaleoTaskInstanceTokenId(
@@ -849,7 +849,7 @@ public class KaleoLogUtil {
 	* @param start the lower bound of the range of kaleo logs
 	* @param end the upper bound of the range of kaleo logs (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching kaleo logs
 	*/
 	public static List<KaleoLog> findByKITI_T(long kaleoInstanceTokenId,
@@ -1045,7 +1045,7 @@ public class KaleoLogUtil {
 	* @param start the lower bound of the range of kaleo logs
 	* @param end the upper bound of the range of kaleo logs (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching kaleo logs
 	*/
 	public static List<KaleoLog> findByKCN_KCPK_KITI_T(
@@ -1315,7 +1315,7 @@ public class KaleoLogUtil {
 	* @param start the lower bound of the range of kaleo logs
 	* @param end the upper bound of the range of kaleo logs (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of kaleo logs
 	*/
 	public static List<KaleoLog> findAll(int start, int end,

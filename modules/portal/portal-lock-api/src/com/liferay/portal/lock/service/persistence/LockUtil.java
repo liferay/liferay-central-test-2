@@ -164,7 +164,7 @@ public class LockUtil {
 	* @param start the lower bound of the range of locks
 	* @param end the upper bound of the range of locks (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching locks
 	*/
 	public static List<Lock> findByUuid(java.lang.String uuid, int start,
@@ -324,7 +324,7 @@ public class LockUtil {
 	* @param start the lower bound of the range of locks
 	* @param end the upper bound of the range of locks (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching locks
 	*/
 	public static List<Lock> findByUuid_C(java.lang.String uuid,
@@ -496,7 +496,7 @@ public class LockUtil {
 	* @param start the lower bound of the range of locks
 	* @param end the upper bound of the range of locks (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching locks
 	*/
 	public static List<Lock> findByLtExpirationDate(
@@ -634,7 +634,7 @@ public class LockUtil {
 	*
 	* @param className the class name
 	* @param key the key
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching lock, or <code>null</code> if a matching lock could not be found
 	*/
 	public static Lock fetchByC_K(java.lang.String className,
@@ -789,7 +789,7 @@ public class LockUtil {
 	* @param start the lower bound of the range of locks
 	* @param end the upper bound of the range of locks (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of locks
 	*/
 	public static List<Lock> findAll(int start, int end,

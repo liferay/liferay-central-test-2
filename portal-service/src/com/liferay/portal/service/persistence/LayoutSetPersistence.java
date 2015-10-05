@@ -89,7 +89,7 @@ public interface LayoutSetPersistence extends BasePersistence<LayoutSet> {
 	* @param start the lower bound of the range of layout sets
 	* @param end the upper bound of the range of layout sets (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching layout sets
 	*/
 	public java.util.List<LayoutSet> findByGroupId(long groupId, int start,
@@ -222,7 +222,7 @@ public interface LayoutSetPersistence extends BasePersistence<LayoutSet> {
 	* @param start the lower bound of the range of layout sets
 	* @param end the upper bound of the range of layout sets (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching layout sets
 	*/
 	public java.util.List<LayoutSet> findByLayoutSetPrototypeUuid(
@@ -334,7 +334,7 @@ public interface LayoutSetPersistence extends BasePersistence<LayoutSet> {
 	*
 	* @param groupId the group ID
 	* @param privateLayout the private layout
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching layout set, or <code>null</code> if a matching layout set could not be found
 	*/
 	public LayoutSet fetchByG_P(long groupId, boolean privateLayout,
@@ -460,7 +460,7 @@ public interface LayoutSetPersistence extends BasePersistence<LayoutSet> {
 	* @param start the lower bound of the range of layout sets
 	* @param end the upper bound of the range of layout sets (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of layout sets
 	*/
 	public java.util.List<LayoutSet> findAll(int start, int end,

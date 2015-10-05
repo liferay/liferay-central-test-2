@@ -169,7 +169,7 @@ public class DDMTemplateLinkUtil {
 	* @param start the lower bound of the range of d d m template links
 	* @param end the upper bound of the range of d d m template links (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d m template links
 	*/
 	public static List<DDMTemplateLink> findByClassNameId(long classNameId,
@@ -331,7 +331,7 @@ public class DDMTemplateLinkUtil {
 	* @param start the lower bound of the range of d d m template links
 	* @param end the upper bound of the range of d d m template links (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d m template links
 	*/
 	public static List<DDMTemplateLink> findByTemplateId(long templateId,
@@ -465,7 +465,7 @@ public class DDMTemplateLinkUtil {
 	*
 	* @param classNameId the class name ID
 	* @param classPK the class p k
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching d d m template link, or <code>null</code> if a matching d d m template link could not be found
 	*/
 	public static DDMTemplateLink fetchByC_C(long classNameId, long classPK,
@@ -619,7 +619,7 @@ public class DDMTemplateLinkUtil {
 	* @param start the lower bound of the range of d d m template links
 	* @param end the upper bound of the range of d d m template links (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of d d m template links
 	*/
 	public static List<DDMTemplateLink> findAll(int start, int end,

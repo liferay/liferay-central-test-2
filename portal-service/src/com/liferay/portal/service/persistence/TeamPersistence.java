@@ -89,7 +89,7 @@ public interface TeamPersistence extends BasePersistence<Team> {
 	* @param start the lower bound of the range of teams
 	* @param end the upper bound of the range of teams (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching teams
 	*/
 	public java.util.List<Team> findByUuid(java.lang.String uuid, int start,
@@ -194,7 +194,7 @@ public interface TeamPersistence extends BasePersistence<Team> {
 	*
 	* @param uuid the uuid
 	* @param groupId the group ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching team, or <code>null</code> if a matching team could not be found
 	*/
 	public Team fetchByUUID_G(java.lang.String uuid, long groupId,
@@ -275,7 +275,7 @@ public interface TeamPersistence extends BasePersistence<Team> {
 	* @param start the lower bound of the range of teams
 	* @param end the upper bound of the range of teams (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching teams
 	*/
 	public java.util.List<Team> findByUuid_C(java.lang.String uuid,
@@ -412,7 +412,7 @@ public interface TeamPersistence extends BasePersistence<Team> {
 	* @param start the lower bound of the range of teams
 	* @param end the upper bound of the range of teams (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching teams
 	*/
 	public java.util.List<Team> findByGroupId(long groupId, int start, int end,
@@ -577,7 +577,7 @@ public interface TeamPersistence extends BasePersistence<Team> {
 	*
 	* @param groupId the group ID
 	* @param name the name
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching team, or <code>null</code> if a matching team could not be found
 	*/
 	public Team fetchByG_N(long groupId, java.lang.String name,
@@ -703,7 +703,7 @@ public interface TeamPersistence extends BasePersistence<Team> {
 	* @param start the lower bound of the range of teams
 	* @param end the upper bound of the range of teams (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of teams
 	*/
 	public java.util.List<Team> findAll(int start, int end,

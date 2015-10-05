@@ -167,7 +167,7 @@ public class WikiNodeUtil {
 	* @param start the lower bound of the range of wiki nodes
 	* @param end the upper bound of the range of wiki nodes (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki nodes
 	*/
 	public static List<WikiNode> findByUuid(java.lang.String uuid, int start,
@@ -294,7 +294,7 @@ public class WikiNodeUtil {
 	*
 	* @param uuid the uuid
 	* @param groupId the group ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching wiki node, or <code>null</code> if a matching wiki node could not be found
 	*/
 	public static WikiNode fetchByUUID_G(java.lang.String uuid, long groupId,
@@ -388,7 +388,7 @@ public class WikiNodeUtil {
 	* @param start the lower bound of the range of wiki nodes
 	* @param end the upper bound of the range of wiki nodes (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki nodes
 	*/
 	public static List<WikiNode> findByUuid_C(java.lang.String uuid,
@@ -555,7 +555,7 @@ public class WikiNodeUtil {
 	* @param start the lower bound of the range of wiki nodes
 	* @param end the upper bound of the range of wiki nodes (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki nodes
 	*/
 	public static List<WikiNode> findByGroupId(long groupId, int start,
@@ -783,7 +783,7 @@ public class WikiNodeUtil {
 	* @param start the lower bound of the range of wiki nodes
 	* @param end the upper bound of the range of wiki nodes (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki nodes
 	*/
 	public static List<WikiNode> findByCompanyId(long companyId, int start,
@@ -915,7 +915,7 @@ public class WikiNodeUtil {
 	*
 	* @param groupId the group ID
 	* @param name the name
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching wiki node, or <code>null</code> if a matching wiki node could not be found
 	*/
 	public static WikiNode fetchByG_N(long groupId, java.lang.String name,
@@ -1007,7 +1007,7 @@ public class WikiNodeUtil {
 	* @param start the lower bound of the range of wiki nodes
 	* @param end the upper bound of the range of wiki nodes (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki nodes
 	*/
 	public static List<WikiNode> findByG_S(long groupId, int status, int start,
@@ -1257,7 +1257,7 @@ public class WikiNodeUtil {
 	* @param start the lower bound of the range of wiki nodes
 	* @param end the upper bound of the range of wiki nodes (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki nodes
 	*/
 	public static List<WikiNode> findByC_S(long companyId, int status,
@@ -1489,7 +1489,7 @@ public class WikiNodeUtil {
 	* @param start the lower bound of the range of wiki nodes
 	* @param end the upper bound of the range of wiki nodes (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of wiki nodes
 	*/
 	public static List<WikiNode> findAll(int start, int end,

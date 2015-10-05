@@ -137,7 +137,7 @@ public class PortalPreferencesUtil {
 	*
 	* @param ownerId the owner ID
 	* @param ownerType the owner type
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching portal preferences, or <code>null</code> if a matching portal preferences could not be found
 	*/
 	public static PortalPreferences fetchByO_O(long ownerId, int ownerType,
@@ -291,7 +291,7 @@ public class PortalPreferencesUtil {
 	* @param start the lower bound of the range of portal preferenceses
 	* @param end the upper bound of the range of portal preferenceses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of portal preferenceses
 	*/
 	public static List<PortalPreferences> findAll(int start, int end,

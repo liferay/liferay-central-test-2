@@ -91,7 +91,7 @@ public interface ShoppingCategoryPersistence extends BasePersistence<ShoppingCat
 	* @param start the lower bound of the range of shopping categories
 	* @param end the upper bound of the range of shopping categories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching shopping categories
 	*/
 	public java.util.List<ShoppingCategory> findByGroupId(long groupId,
@@ -290,7 +290,7 @@ public interface ShoppingCategoryPersistence extends BasePersistence<ShoppingCat
 	* @param start the lower bound of the range of shopping categories
 	* @param end the upper bound of the range of shopping categories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching shopping categories
 	*/
 	public java.util.List<ShoppingCategory> findByG_P(long groupId,
@@ -474,7 +474,7 @@ public interface ShoppingCategoryPersistence extends BasePersistence<ShoppingCat
 	*
 	* @param groupId the group ID
 	* @param name the name
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching shopping category, or <code>null</code> if a matching shopping category could not be found
 	*/
 	public ShoppingCategory fetchByG_N(long groupId, java.lang.String name,
@@ -600,7 +600,7 @@ public interface ShoppingCategoryPersistence extends BasePersistence<ShoppingCat
 	* @param start the lower bound of the range of shopping categories
 	* @param end the upper bound of the range of shopping categories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of shopping categories
 	*/
 	public java.util.List<ShoppingCategory> findAll(int start, int end,

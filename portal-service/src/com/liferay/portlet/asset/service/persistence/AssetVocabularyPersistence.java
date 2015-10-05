@@ -91,7 +91,7 @@ public interface AssetVocabularyPersistence extends BasePersistence<AssetVocabul
 	* @param start the lower bound of the range of asset vocabularies
 	* @param end the upper bound of the range of asset vocabularies (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching asset vocabularies
 	*/
 	public java.util.List<AssetVocabulary> findByUuid(java.lang.String uuid,
@@ -197,7 +197,7 @@ public interface AssetVocabularyPersistence extends BasePersistence<AssetVocabul
 	*
 	* @param uuid the uuid
 	* @param groupId the group ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching asset vocabulary, or <code>null</code> if a matching asset vocabulary could not be found
 	*/
 	public AssetVocabulary fetchByUUID_G(java.lang.String uuid, long groupId,
@@ -278,7 +278,7 @@ public interface AssetVocabularyPersistence extends BasePersistence<AssetVocabul
 	* @param start the lower bound of the range of asset vocabularies
 	* @param end the upper bound of the range of asset vocabularies (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching asset vocabularies
 	*/
 	public java.util.List<AssetVocabulary> findByUuid_C(java.lang.String uuid,
@@ -421,7 +421,7 @@ public interface AssetVocabularyPersistence extends BasePersistence<AssetVocabul
 	* @param start the lower bound of the range of asset vocabularies
 	* @param end the upper bound of the range of asset vocabularies (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching asset vocabularies
 	*/
 	public java.util.List<AssetVocabulary> findByGroupId(long groupId,
@@ -636,7 +636,7 @@ public interface AssetVocabularyPersistence extends BasePersistence<AssetVocabul
 	* @param start the lower bound of the range of asset vocabularies
 	* @param end the upper bound of the range of asset vocabularies (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching asset vocabularies
 	*/
 	public java.util.List<AssetVocabulary> findByGroupId(long[] groupIds,
@@ -734,7 +734,7 @@ public interface AssetVocabularyPersistence extends BasePersistence<AssetVocabul
 	* @param start the lower bound of the range of asset vocabularies
 	* @param end the upper bound of the range of asset vocabularies (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching asset vocabularies
 	*/
 	public java.util.List<AssetVocabulary> findByCompanyId(long companyId,
@@ -840,7 +840,7 @@ public interface AssetVocabularyPersistence extends BasePersistence<AssetVocabul
 	*
 	* @param groupId the group ID
 	* @param name the name
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching asset vocabulary, or <code>null</code> if a matching asset vocabulary could not be found
 	*/
 	public AssetVocabulary fetchByG_N(long groupId, java.lang.String name,
@@ -921,7 +921,7 @@ public interface AssetVocabularyPersistence extends BasePersistence<AssetVocabul
 	* @param start the lower bound of the range of asset vocabularies
 	* @param end the upper bound of the range of asset vocabularies (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching asset vocabularies
 	*/
 	public java.util.List<AssetVocabulary> findByG_LikeN(long groupId,
@@ -1182,7 +1182,7 @@ public interface AssetVocabularyPersistence extends BasePersistence<AssetVocabul
 	* @param start the lower bound of the range of asset vocabularies
 	* @param end the upper bound of the range of asset vocabularies (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of asset vocabularies
 	*/
 	public java.util.List<AssetVocabulary> findAll(int start, int end,

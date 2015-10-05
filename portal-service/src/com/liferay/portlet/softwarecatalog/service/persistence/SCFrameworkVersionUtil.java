@@ -168,7 +168,7 @@ public class SCFrameworkVersionUtil {
 	* @param start the lower bound of the range of s c framework versions
 	* @param end the upper bound of the range of s c framework versions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching s c framework versions
 	*/
 	public static List<SCFrameworkVersion> findByGroupId(long groupId,
@@ -402,7 +402,7 @@ public class SCFrameworkVersionUtil {
 	* @param start the lower bound of the range of s c framework versions
 	* @param end the upper bound of the range of s c framework versions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching s c framework versions
 	*/
 	public static List<SCFrameworkVersion> findByCompanyId(long companyId,
@@ -570,7 +570,7 @@ public class SCFrameworkVersionUtil {
 	* @param start the lower bound of the range of s c framework versions
 	* @param end the upper bound of the range of s c framework versions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching s c framework versions
 	*/
 	public static List<SCFrameworkVersion> findByG_A(long groupId,
@@ -887,7 +887,7 @@ public class SCFrameworkVersionUtil {
 	* @param start the lower bound of the range of s c framework versions
 	* @param end the upper bound of the range of s c framework versions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of s c framework versions
 	*/
 	public static List<SCFrameworkVersion> findAll(int start, int end,

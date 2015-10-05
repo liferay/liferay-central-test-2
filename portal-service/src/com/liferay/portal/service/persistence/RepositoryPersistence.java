@@ -89,7 +89,7 @@ public interface RepositoryPersistence extends BasePersistence<Repository> {
 	* @param start the lower bound of the range of repositories
 	* @param end the upper bound of the range of repositories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching repositories
 	*/
 	public java.util.List<Repository> findByUuid(java.lang.String uuid,
@@ -195,7 +195,7 @@ public interface RepositoryPersistence extends BasePersistence<Repository> {
 	*
 	* @param uuid the uuid
 	* @param groupId the group ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching repository, or <code>null</code> if a matching repository could not be found
 	*/
 	public Repository fetchByUUID_G(java.lang.String uuid, long groupId,
@@ -276,7 +276,7 @@ public interface RepositoryPersistence extends BasePersistence<Repository> {
 	* @param start the lower bound of the range of repositories
 	* @param end the upper bound of the range of repositories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching repositories
 	*/
 	public java.util.List<Repository> findByUuid_C(java.lang.String uuid,
@@ -416,7 +416,7 @@ public interface RepositoryPersistence extends BasePersistence<Repository> {
 	* @param start the lower bound of the range of repositories
 	* @param end the upper bound of the range of repositories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching repositories
 	*/
 	public java.util.List<Repository> findByGroupId(long groupId, int start,
@@ -527,7 +527,7 @@ public interface RepositoryPersistence extends BasePersistence<Repository> {
 	* @param groupId the group ID
 	* @param name the name
 	* @param portletId the portlet ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching repository, or <code>null</code> if a matching repository could not be found
 	*/
 	public Repository fetchByG_N_P(long groupId, java.lang.String name,
@@ -657,7 +657,7 @@ public interface RepositoryPersistence extends BasePersistence<Repository> {
 	* @param start the lower bound of the range of repositories
 	* @param end the upper bound of the range of repositories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of repositories
 	*/
 	public java.util.List<Repository> findAll(int start, int end,

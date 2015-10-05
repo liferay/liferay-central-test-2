@@ -134,7 +134,7 @@ public class BrowserTrackerUtil {
 	* Returns the browser tracker where userId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
 	* @param userId the user ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching browser tracker, or <code>null</code> if a matching browser tracker could not be found
 	*/
 	public static BrowserTracker fetchByUserId(long userId,
@@ -285,7 +285,7 @@ public class BrowserTrackerUtil {
 	* @param start the lower bound of the range of browser trackers
 	* @param end the upper bound of the range of browser trackers (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of browser trackers
 	*/
 	public static List<BrowserTracker> findAll(int start, int end,

@@ -166,7 +166,7 @@ public class TrashEntryUtil {
 	* @param start the lower bound of the range of trash entries
 	* @param end the upper bound of the range of trash entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching trash entries
 	*/
 	public static List<TrashEntry> findByGroupId(long groupId, int start,
@@ -322,7 +322,7 @@ public class TrashEntryUtil {
 	* @param start the lower bound of the range of trash entries
 	* @param end the upper bound of the range of trash entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching trash entries
 	*/
 	public static List<TrashEntry> findByCompanyId(long companyId, int start,
@@ -489,7 +489,7 @@ public class TrashEntryUtil {
 	* @param start the lower bound of the range of trash entries
 	* @param end the upper bound of the range of trash entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching trash entries
 	*/
 	public static List<TrashEntry> findByG_LtCD(long groupId,
@@ -667,7 +667,7 @@ public class TrashEntryUtil {
 	* @param start the lower bound of the range of trash entries
 	* @param end the upper bound of the range of trash entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching trash entries
 	*/
 	public static List<TrashEntry> findByG_C(long groupId, long classNameId,
@@ -807,7 +807,7 @@ public class TrashEntryUtil {
 	*
 	* @param classNameId the class name ID
 	* @param classPK the class p k
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching trash entry, or <code>null</code> if a matching trash entry could not be found
 	*/
 	public static TrashEntry fetchByC_C(long classNameId, long classPK,
@@ -961,7 +961,7 @@ public class TrashEntryUtil {
 	* @param start the lower bound of the range of trash entries
 	* @param end the upper bound of the range of trash entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of trash entries
 	*/
 	public static List<TrashEntry> findAll(int start, int end,

@@ -91,7 +91,7 @@ public interface ShoppingItemPricePersistence extends BasePersistence<ShoppingIt
 	* @param start the lower bound of the range of shopping item prices
 	* @param end the upper bound of the range of shopping item prices (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching shopping item prices
 	*/
 	public java.util.List<ShoppingItemPrice> findByItemId(long itemId,
@@ -274,7 +274,7 @@ public interface ShoppingItemPricePersistence extends BasePersistence<ShoppingIt
 	* @param start the lower bound of the range of shopping item prices
 	* @param end the upper bound of the range of shopping item prices (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of shopping item prices
 	*/
 	public java.util.List<ShoppingItemPrice> findAll(int start, int end,

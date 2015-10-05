@@ -91,7 +91,7 @@ public interface MBMailingListPersistence extends BasePersistence<MBMailingList>
 	* @param start the lower bound of the range of message boards mailing lists
 	* @param end the upper bound of the range of message boards mailing lists (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message boards mailing lists
 	*/
 	public java.util.List<MBMailingList> findByUuid(java.lang.String uuid,
@@ -197,7 +197,7 @@ public interface MBMailingListPersistence extends BasePersistence<MBMailingList>
 	*
 	* @param uuid the uuid
 	* @param groupId the group ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching message boards mailing list, or <code>null</code> if a matching message boards mailing list could not be found
 	*/
 	public MBMailingList fetchByUUID_G(java.lang.String uuid, long groupId,
@@ -278,7 +278,7 @@ public interface MBMailingListPersistence extends BasePersistence<MBMailingList>
 	* @param start the lower bound of the range of message boards mailing lists
 	* @param end the upper bound of the range of message boards mailing lists (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message boards mailing lists
 	*/
 	public java.util.List<MBMailingList> findByUuid_C(java.lang.String uuid,
@@ -421,7 +421,7 @@ public interface MBMailingListPersistence extends BasePersistence<MBMailingList>
 	* @param start the lower bound of the range of message boards mailing lists
 	* @param end the upper bound of the range of message boards mailing lists (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message boards mailing lists
 	*/
 	public java.util.List<MBMailingList> findByActive(boolean active,
@@ -527,7 +527,7 @@ public interface MBMailingListPersistence extends BasePersistence<MBMailingList>
 	*
 	* @param groupId the group ID
 	* @param categoryId the category ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching message boards mailing list, or <code>null</code> if a matching message boards mailing list could not be found
 	*/
 	public MBMailingList fetchByG_C(long groupId, long categoryId,
@@ -653,7 +653,7 @@ public interface MBMailingListPersistence extends BasePersistence<MBMailingList>
 	* @param start the lower bound of the range of message boards mailing lists
 	* @param end the upper bound of the range of message boards mailing lists (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of message boards mailing lists
 	*/
 	public java.util.List<MBMailingList> findAll(int start, int end,

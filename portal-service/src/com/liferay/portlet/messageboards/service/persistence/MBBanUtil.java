@@ -162,7 +162,7 @@ public class MBBanUtil {
 	* @param start the lower bound of the range of message boards bans
 	* @param end the upper bound of the range of message boards bans (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message boards bans
 	*/
 	public static List<MBBan> findByUuid(java.lang.String uuid, int start,
@@ -289,7 +289,7 @@ public class MBBanUtil {
 	*
 	* @param uuid the uuid
 	* @param groupId the group ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching message boards ban, or <code>null</code> if a matching message boards ban could not be found
 	*/
 	public static MBBan fetchByUUID_G(java.lang.String uuid, long groupId,
@@ -382,7 +382,7 @@ public class MBBanUtil {
 	* @param start the lower bound of the range of message boards bans
 	* @param end the upper bound of the range of message boards bans (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message boards bans
 	*/
 	public static List<MBBan> findByUuid_C(java.lang.String uuid,
@@ -549,7 +549,7 @@ public class MBBanUtil {
 	* @param start the lower bound of the range of message boards bans
 	* @param end the upper bound of the range of message boards bans (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message boards bans
 	*/
 	public static List<MBBan> findByGroupId(long groupId, int start, int end,
@@ -702,7 +702,7 @@ public class MBBanUtil {
 	* @param start the lower bound of the range of message boards bans
 	* @param end the upper bound of the range of message boards bans (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message boards bans
 	*/
 	public static List<MBBan> findByUserId(long userId, int start, int end,
@@ -855,7 +855,7 @@ public class MBBanUtil {
 	* @param start the lower bound of the range of message boards bans
 	* @param end the upper bound of the range of message boards bans (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message boards bans
 	*/
 	public static List<MBBan> findByBanUserId(long banUserId, int start,
@@ -987,7 +987,7 @@ public class MBBanUtil {
 	*
 	* @param groupId the group ID
 	* @param banUserId the ban user ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching message boards ban, or <code>null</code> if a matching message boards ban could not be found
 	*/
 	public static MBBan fetchByG_B(long groupId, long banUserId,
@@ -1140,7 +1140,7 @@ public class MBBanUtil {
 	* @param start the lower bound of the range of message boards bans
 	* @param end the upper bound of the range of message boards bans (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of message boards bans
 	*/
 	public static List<MBBan> findAll(int start, int end,

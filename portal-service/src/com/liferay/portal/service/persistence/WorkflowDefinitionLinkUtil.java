@@ -168,7 +168,7 @@ public class WorkflowDefinitionLinkUtil {
 	* @param start the lower bound of the range of workflow definition links
 	* @param end the upper bound of the range of workflow definition links (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching workflow definition links
 	*/
 	public static List<WorkflowDefinitionLink> findByCompanyId(long companyId,
@@ -343,7 +343,7 @@ public class WorkflowDefinitionLinkUtil {
 	* @param start the lower bound of the range of workflow definition links
 	* @param end the upper bound of the range of workflow definition links (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching workflow definition links
 	*/
 	public static List<WorkflowDefinitionLink> findByG_C_C(long groupId,
@@ -547,7 +547,7 @@ public class WorkflowDefinitionLinkUtil {
 	* @param start the lower bound of the range of workflow definition links
 	* @param end the upper bound of the range of workflow definition links (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching workflow definition links
 	*/
 	public static List<WorkflowDefinitionLink> findByC_W_W(long companyId,
@@ -728,7 +728,7 @@ public class WorkflowDefinitionLinkUtil {
 	* @param classNameId the class name ID
 	* @param classPK the class p k
 	* @param typePK the type p k
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching workflow definition link, or <code>null</code> if a matching workflow definition link could not be found
 	*/
 	public static WorkflowDefinitionLink fetchByG_C_C_C_T(long groupId,
@@ -901,7 +901,7 @@ public class WorkflowDefinitionLinkUtil {
 	* @param start the lower bound of the range of workflow definition links
 	* @param end the upper bound of the range of workflow definition links (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of workflow definition links
 	*/
 	public static List<WorkflowDefinitionLink> findAll(int start, int end,

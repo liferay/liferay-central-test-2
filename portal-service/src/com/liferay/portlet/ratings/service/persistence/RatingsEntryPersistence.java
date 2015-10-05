@@ -91,7 +91,7 @@ public interface RatingsEntryPersistence extends BasePersistence<RatingsEntry> {
 	* @param start the lower bound of the range of ratings entries
 	* @param end the upper bound of the range of ratings entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching ratings entries
 	*/
 	public java.util.List<RatingsEntry> findByUuid(java.lang.String uuid,
@@ -228,7 +228,7 @@ public interface RatingsEntryPersistence extends BasePersistence<RatingsEntry> {
 	* @param start the lower bound of the range of ratings entries
 	* @param end the upper bound of the range of ratings entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching ratings entries
 	*/
 	public java.util.List<RatingsEntry> findByUuid_C(java.lang.String uuid,
@@ -375,7 +375,7 @@ public interface RatingsEntryPersistence extends BasePersistence<RatingsEntry> {
 	* @param start the lower bound of the range of ratings entries
 	* @param end the upper bound of the range of ratings entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching ratings entries
 	*/
 	public java.util.List<RatingsEntry> findByC_C(long classNameId,
@@ -491,7 +491,7 @@ public interface RatingsEntryPersistence extends BasePersistence<RatingsEntry> {
 	* @param userId the user ID
 	* @param classNameId the class name ID
 	* @param classPK the class p k
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching ratings entry, or <code>null</code> if a matching ratings entry could not be found
 	*/
 	public RatingsEntry fetchByU_C_C(long userId, long classNameId,
@@ -578,7 +578,7 @@ public interface RatingsEntryPersistence extends BasePersistence<RatingsEntry> {
 	* @param start the lower bound of the range of ratings entries
 	* @param end the upper bound of the range of ratings entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching ratings entries
 	*/
 	public java.util.List<RatingsEntry> findByC_C_S(long classNameId,
@@ -778,7 +778,7 @@ public interface RatingsEntryPersistence extends BasePersistence<RatingsEntry> {
 	* @param start the lower bound of the range of ratings entries
 	* @param end the upper bound of the range of ratings entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of ratings entries
 	*/
 	public java.util.List<RatingsEntry> findAll(int start, int end,

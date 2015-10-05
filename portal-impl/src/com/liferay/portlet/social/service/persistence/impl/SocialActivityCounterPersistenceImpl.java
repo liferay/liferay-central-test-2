@@ -166,7 +166,7 @@ public class SocialActivityCounterPersistenceImpl extends BasePersistenceImpl<So
 	 * @param start the lower bound of the range of social activity counters
 	 * @param end the upper bound of the range of social activity counters (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to use the finder cache
+	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching social activity counters
 	 */
 	@Override
@@ -681,7 +681,7 @@ public class SocialActivityCounterPersistenceImpl extends BasePersistenceImpl<So
 	 * @param start the lower bound of the range of social activity counters
 	 * @param end the upper bound of the range of social activity counters (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to use the finder cache
+	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching social activity counters
 	 */
 	@Override
@@ -1249,7 +1249,7 @@ public class SocialActivityCounterPersistenceImpl extends BasePersistenceImpl<So
 	 * @param start the lower bound of the range of social activity counters
 	 * @param end the upper bound of the range of social activity counters (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to use the finder cache
+	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching social activity counters
 	 */
 	@Override
@@ -1881,7 +1881,7 @@ public class SocialActivityCounterPersistenceImpl extends BasePersistenceImpl<So
 	 * @param name the name
 	 * @param ownerType the owner type
 	 * @param startPeriod the start period
-	 * @param retrieveFromCache whether to use the finder cache
+	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the matching social activity counter, or <code>null</code> if a matching social activity counter could not be found
 	 */
 	@Override
@@ -2239,7 +2239,7 @@ public class SocialActivityCounterPersistenceImpl extends BasePersistenceImpl<So
 	 * @param name the name
 	 * @param ownerType the owner type
 	 * @param endPeriod the end period
-	 * @param retrieveFromCache whether to use the finder cache
+	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the matching social activity counter, or <code>null</code> if a matching social activity counter could not be found
 	 */
 	@Override
@@ -3211,7 +3211,7 @@ public class SocialActivityCounterPersistenceImpl extends BasePersistenceImpl<So
 	 * @param start the lower bound of the range of social activity counters
 	 * @param end the upper bound of the range of social activity counters (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to use the finder cache
+	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of social activity counters
 	 */
 	@Override

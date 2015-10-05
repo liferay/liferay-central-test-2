@@ -132,7 +132,7 @@ public class CompanyUtil {
 	* Returns the company where webId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
 	* @param webId the web ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching company, or <code>null</code> if a matching company could not be found
 	*/
 	public static Company fetchByWebId(java.lang.String webId,
@@ -187,7 +187,7 @@ public class CompanyUtil {
 	* Returns the company where mx = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
 	* @param mx the mx
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching company, or <code>null</code> if a matching company could not be found
 	*/
 	public static Company fetchByMx(java.lang.String mx,
@@ -242,7 +242,7 @@ public class CompanyUtil {
 	* Returns the company where logoId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
 	* @param logoId the logo ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching company, or <code>null</code> if a matching company could not be found
 	*/
 	public static Company fetchByLogoId(long logoId, boolean retrieveFromCache) {
@@ -326,7 +326,7 @@ public class CompanyUtil {
 	* @param start the lower bound of the range of companies
 	* @param end the upper bound of the range of companies (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching companies
 	*/
 	public static List<Company> findBySystem(boolean system, int start,
@@ -547,7 +547,7 @@ public class CompanyUtil {
 	* @param start the lower bound of the range of companies
 	* @param end the upper bound of the range of companies (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of companies
 	*/
 	public static List<Company> findAll(int start, int end,

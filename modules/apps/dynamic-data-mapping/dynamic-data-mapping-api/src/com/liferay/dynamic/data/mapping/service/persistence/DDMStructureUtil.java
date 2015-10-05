@@ -168,7 +168,7 @@ public class DDMStructureUtil {
 	* @param start the lower bound of the range of d d m structures
 	* @param end the upper bound of the range of d d m structures (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d m structures
 	*/
 	public static List<DDMStructure> findByUuid(java.lang.String uuid,
@@ -295,7 +295,7 @@ public class DDMStructureUtil {
 	*
 	* @param uuid the uuid
 	* @param groupId the group ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching d d m structure, or <code>null</code> if a matching d d m structure could not be found
 	*/
 	public static DDMStructure fetchByUUID_G(java.lang.String uuid,
@@ -390,7 +390,7 @@ public class DDMStructureUtil {
 	* @param start the lower bound of the range of d d m structures
 	* @param end the upper bound of the range of d d m structures (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d m structures
 	*/
 	public static List<DDMStructure> findByUuid_C(java.lang.String uuid,
@@ -559,7 +559,7 @@ public class DDMStructureUtil {
 	* @param start the lower bound of the range of d d m structures
 	* @param end the upper bound of the range of d d m structures (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d m structures
 	*/
 	public static List<DDMStructure> findByGroupId(long groupId, int start,
@@ -810,7 +810,7 @@ public class DDMStructureUtil {
 	* @param start the lower bound of the range of d d m structures
 	* @param end the upper bound of the range of d d m structures (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d m structures
 	*/
 	public static List<DDMStructure> findByGroupId(long[] groupIds, int start,
@@ -931,7 +931,7 @@ public class DDMStructureUtil {
 	* @param start the lower bound of the range of d d m structures
 	* @param end the upper bound of the range of d d m structures (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d m structures
 	*/
 	public static List<DDMStructure> findByParentStructureId(
@@ -1101,7 +1101,7 @@ public class DDMStructureUtil {
 	* @param start the lower bound of the range of d d m structures
 	* @param end the upper bound of the range of d d m structures (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d m structures
 	*/
 	public static List<DDMStructure> findByClassNameId(long classNameId,
@@ -1265,7 +1265,7 @@ public class DDMStructureUtil {
 	* @param start the lower bound of the range of d d m structures
 	* @param end the upper bound of the range of d d m structures (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d m structures
 	*/
 	public static List<DDMStructure> findByStructureKey(
@@ -1438,7 +1438,7 @@ public class DDMStructureUtil {
 	* @param start the lower bound of the range of d d m structures
 	* @param end the upper bound of the range of d d m structures (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d m structures
 	*/
 	public static List<DDMStructure> findByG_P(long groupId,
@@ -1702,7 +1702,7 @@ public class DDMStructureUtil {
 	* @param start the lower bound of the range of d d m structures
 	* @param end the upper bound of the range of d d m structures (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d m structures
 	*/
 	public static List<DDMStructure> findByG_C(long groupId, long classNameId,
@@ -1983,7 +1983,7 @@ public class DDMStructureUtil {
 	* @param start the lower bound of the range of d d m structures
 	* @param end the upper bound of the range of d d m structures (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d m structures
 	*/
 	public static List<DDMStructure> findByG_C(long[] groupIds,
@@ -2112,7 +2112,7 @@ public class DDMStructureUtil {
 	* @param start the lower bound of the range of d d m structures
 	* @param end the upper bound of the range of d d m structures (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d m structures
 	*/
 	public static List<DDMStructure> findByC_C(long companyId,
@@ -2258,7 +2258,7 @@ public class DDMStructureUtil {
 	* @param groupId the group ID
 	* @param classNameId the class name ID
 	* @param structureKey the structure key
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching d d m structure, or <code>null</code> if a matching d d m structure could not be found
 	*/
 	public static DDMStructure fetchByG_C_S(long groupId, long classNameId,
@@ -2364,7 +2364,7 @@ public class DDMStructureUtil {
 	* @param start the lower bound of the range of d d m structures
 	* @param end the upper bound of the range of d d m structures (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d m structures
 	*/
 	public static List<DDMStructure> findByG_N_D(long groupId,
@@ -2705,7 +2705,7 @@ public class DDMStructureUtil {
 	* @param start the lower bound of the range of d d m structures
 	* @param end the upper bound of the range of d d m structures (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of d d m structures
 	*/
 	public static List<DDMStructure> findAll(int start, int end,

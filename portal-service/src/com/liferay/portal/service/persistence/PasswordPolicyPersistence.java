@@ -89,7 +89,7 @@ public interface PasswordPolicyPersistence extends BasePersistence<PasswordPolic
 	* @param start the lower bound of the range of password policies
 	* @param end the upper bound of the range of password policies (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching password policies
 	*/
 	public java.util.List<PasswordPolicy> findByUuid(java.lang.String uuid,
@@ -289,7 +289,7 @@ public interface PasswordPolicyPersistence extends BasePersistence<PasswordPolic
 	* @param start the lower bound of the range of password policies
 	* @param end the upper bound of the range of password policies (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching password policies
 	*/
 	public java.util.List<PasswordPolicy> findByUuid_C(java.lang.String uuid,
@@ -500,7 +500,7 @@ public interface PasswordPolicyPersistence extends BasePersistence<PasswordPolic
 	* @param start the lower bound of the range of password policies
 	* @param end the upper bound of the range of password policies (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching password policies
 	*/
 	public java.util.List<PasswordPolicy> findByCompanyId(long companyId,
@@ -668,7 +668,7 @@ public interface PasswordPolicyPersistence extends BasePersistence<PasswordPolic
 	*
 	* @param companyId the company ID
 	* @param defaultPolicy the default policy
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching password policy, or <code>null</code> if a matching password policy could not be found
 	*/
 	public PasswordPolicy fetchByC_DP(long companyId, boolean defaultPolicy,
@@ -718,7 +718,7 @@ public interface PasswordPolicyPersistence extends BasePersistence<PasswordPolic
 	*
 	* @param companyId the company ID
 	* @param name the name
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching password policy, or <code>null</code> if a matching password policy could not be found
 	*/
 	public PasswordPolicy fetchByC_N(long companyId, java.lang.String name,
@@ -844,7 +844,7 @@ public interface PasswordPolicyPersistence extends BasePersistence<PasswordPolic
 	* @param start the lower bound of the range of password policies
 	* @param end the upper bound of the range of password policies (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of password policies
 	*/
 	public java.util.List<PasswordPolicy> findAll(int start, int end,

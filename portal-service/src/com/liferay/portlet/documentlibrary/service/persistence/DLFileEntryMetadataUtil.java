@@ -167,7 +167,7 @@ public class DLFileEntryMetadataUtil {
 	* @param start the lower bound of the range of document library file entry metadatas
 	* @param end the upper bound of the range of document library file entry metadatas (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching document library file entry metadatas
 	*/
 	public static List<DLFileEntryMetadata> findByUuid(java.lang.String uuid,
@@ -326,7 +326,7 @@ public class DLFileEntryMetadataUtil {
 	* @param start the lower bound of the range of document library file entry metadatas
 	* @param end the upper bound of the range of document library file entry metadatas (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching document library file entry metadatas
 	*/
 	public static List<DLFileEntryMetadata> findByFileEntryId(
@@ -494,7 +494,7 @@ public class DLFileEntryMetadataUtil {
 	* @param start the lower bound of the range of document library file entry metadatas
 	* @param end the upper bound of the range of document library file entry metadatas (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching document library file entry metadatas
 	*/
 	public static List<DLFileEntryMetadata> findByFileVersionId(
@@ -634,7 +634,7 @@ public class DLFileEntryMetadataUtil {
 	*
 	* @param DDMStructureId the d d m structure ID
 	* @param fileVersionId the file version ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching document library file entry metadata, or <code>null</code> if a matching document library file entry metadata could not be found
 	*/
 	public static DLFileEntryMetadata fetchByD_F(long DDMStructureId,
@@ -792,7 +792,7 @@ public class DLFileEntryMetadataUtil {
 	* @param start the lower bound of the range of document library file entry metadatas
 	* @param end the upper bound of the range of document library file entry metadatas (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of document library file entry metadatas
 	*/
 	public static List<DLFileEntryMetadata> findAll(int start, int end,

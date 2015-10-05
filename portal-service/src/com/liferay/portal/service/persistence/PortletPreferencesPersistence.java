@@ -89,7 +89,7 @@ public interface PortletPreferencesPersistence extends BasePersistence<PortletPr
 	* @param start the lower bound of the range of portlet preferenceses
 	* @param end the upper bound of the range of portlet preferenceses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching portlet preferenceses
 	*/
 	public java.util.List<PortletPreferences> findByPlid(long plid, int start,
@@ -222,7 +222,7 @@ public interface PortletPreferencesPersistence extends BasePersistence<PortletPr
 	* @param start the lower bound of the range of portlet preferenceses
 	* @param end the upper bound of the range of portlet preferenceses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching portlet preferenceses
 	*/
 	public java.util.List<PortletPreferences> findByPortletId(
@@ -362,7 +362,7 @@ public interface PortletPreferencesPersistence extends BasePersistence<PortletPr
 	* @param start the lower bound of the range of portlet preferenceses
 	* @param end the upper bound of the range of portlet preferenceses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching portlet preferenceses
 	*/
 	public java.util.List<PortletPreferences> findByO_P(int ownerType,
@@ -510,7 +510,7 @@ public interface PortletPreferencesPersistence extends BasePersistence<PortletPr
 	* @param start the lower bound of the range of portlet preferenceses
 	* @param end the upper bound of the range of portlet preferenceses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching portlet preferenceses
 	*/
 	public java.util.List<PortletPreferences> findByP_P(long plid,
@@ -662,7 +662,7 @@ public interface PortletPreferencesPersistence extends BasePersistence<PortletPr
 	* @param start the lower bound of the range of portlet preferenceses
 	* @param end the upper bound of the range of portlet preferenceses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching portlet preferenceses
 	*/
 	public java.util.List<PortletPreferences> findByO_O_P(long ownerId,
@@ -821,7 +821,7 @@ public interface PortletPreferencesPersistence extends BasePersistence<PortletPr
 	* @param start the lower bound of the range of portlet preferenceses
 	* @param end the upper bound of the range of portlet preferenceses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching portlet preferenceses
 	*/
 	public java.util.List<PortletPreferences> findByO_O_PI(long ownerId,
@@ -983,7 +983,7 @@ public interface PortletPreferencesPersistence extends BasePersistence<PortletPr
 	* @param start the lower bound of the range of portlet preferenceses
 	* @param end the upper bound of the range of portlet preferenceses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching portlet preferenceses
 	*/
 	public java.util.List<PortletPreferences> findByO_P_P(int ownerType,
@@ -1117,7 +1117,7 @@ public interface PortletPreferencesPersistence extends BasePersistence<PortletPr
 	* @param ownerType the owner type
 	* @param plid the plid
 	* @param portletId the portlet ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching portlet preferences, or <code>null</code> if a matching portlet preferences could not be found
 	*/
 	public PortletPreferences fetchByO_O_P_P(long ownerId, int ownerType,
@@ -1250,7 +1250,7 @@ public interface PortletPreferencesPersistence extends BasePersistence<PortletPr
 	* @param start the lower bound of the range of portlet preferenceses
 	* @param end the upper bound of the range of portlet preferenceses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of portlet preferenceses
 	*/
 	public java.util.List<PortletPreferences> findAll(int start, int end,

@@ -91,7 +91,7 @@ public interface AssetEntryPersistence extends BasePersistence<AssetEntry> {
 	* @param start the lower bound of the range of asset entries
 	* @param end the upper bound of the range of asset entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching asset entries
 	*/
 	public java.util.List<AssetEntry> findByGroupId(long groupId, int start,
@@ -222,7 +222,7 @@ public interface AssetEntryPersistence extends BasePersistence<AssetEntry> {
 	* @param start the lower bound of the range of asset entries
 	* @param end the upper bound of the range of asset entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching asset entries
 	*/
 	public java.util.List<AssetEntry> findByCompanyId(long companyId,
@@ -354,7 +354,7 @@ public interface AssetEntryPersistence extends BasePersistence<AssetEntry> {
 	* @param start the lower bound of the range of asset entries
 	* @param end the upper bound of the range of asset entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching asset entries
 	*/
 	public java.util.List<AssetEntry> findByVisible(boolean visible, int start,
@@ -487,7 +487,7 @@ public interface AssetEntryPersistence extends BasePersistence<AssetEntry> {
 	* @param start the lower bound of the range of asset entries
 	* @param end the upper bound of the range of asset entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching asset entries
 	*/
 	public java.util.List<AssetEntry> findByPublishDate(
@@ -620,7 +620,7 @@ public interface AssetEntryPersistence extends BasePersistence<AssetEntry> {
 	* @param start the lower bound of the range of asset entries
 	* @param end the upper bound of the range of asset entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching asset entries
 	*/
 	public java.util.List<AssetEntry> findByExpirationDate(
@@ -756,7 +756,7 @@ public interface AssetEntryPersistence extends BasePersistence<AssetEntry> {
 	* @param start the lower bound of the range of asset entries
 	* @param end the upper bound of the range of asset entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching asset entries
 	*/
 	public java.util.List<AssetEntry> findByLayoutUuid(
@@ -862,7 +862,7 @@ public interface AssetEntryPersistence extends BasePersistence<AssetEntry> {
 	*
 	* @param groupId the group ID
 	* @param classUuid the class uuid
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching asset entry, or <code>null</code> if a matching asset entry could not be found
 	*/
 	public AssetEntry fetchByG_CU(long groupId, java.lang.String classUuid,
@@ -912,7 +912,7 @@ public interface AssetEntryPersistence extends BasePersistence<AssetEntry> {
 	*
 	* @param classNameId the class name ID
 	* @param classPK the class p k
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching asset entry, or <code>null</code> if a matching asset entry could not be found
 	*/
 	public AssetEntry fetchByC_C(long classNameId, long classPK,
@@ -1038,7 +1038,7 @@ public interface AssetEntryPersistence extends BasePersistence<AssetEntry> {
 	* @param start the lower bound of the range of asset entries
 	* @param end the upper bound of the range of asset entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of asset entries
 	*/
 	public java.util.List<AssetEntry> findAll(int start, int end,

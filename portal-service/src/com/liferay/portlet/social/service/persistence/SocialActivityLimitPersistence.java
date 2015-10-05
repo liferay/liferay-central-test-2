@@ -91,7 +91,7 @@ public interface SocialActivityLimitPersistence extends BasePersistence<SocialAc
 	* @param start the lower bound of the range of social activity limits
 	* @param end the upper bound of the range of social activity limits (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social activity limits
 	*/
 	public java.util.List<SocialActivityLimit> findByGroupId(long groupId,
@@ -223,7 +223,7 @@ public interface SocialActivityLimitPersistence extends BasePersistence<SocialAc
 	* @param start the lower bound of the range of social activity limits
 	* @param end the upper bound of the range of social activity limits (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social activity limits
 	*/
 	public java.util.List<SocialActivityLimit> findByUserId(long userId,
@@ -360,7 +360,7 @@ public interface SocialActivityLimitPersistence extends BasePersistence<SocialAc
 	* @param start the lower bound of the range of social activity limits
 	* @param end the upper bound of the range of social activity limits (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social activity limits
 	*/
 	public java.util.List<SocialActivityLimit> findByC_C(long classNameId,
@@ -489,7 +489,7 @@ public interface SocialActivityLimitPersistence extends BasePersistence<SocialAc
 	* @param classPK the class p k
 	* @param activityType the activity type
 	* @param activityCounterName the activity counter name
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching social activity limit, or <code>null</code> if a matching social activity limit could not be found
 	*/
 	public SocialActivityLimit fetchByG_U_C_C_A_A(long groupId, long userId,
@@ -629,7 +629,7 @@ public interface SocialActivityLimitPersistence extends BasePersistence<SocialAc
 	* @param start the lower bound of the range of social activity limits
 	* @param end the upper bound of the range of social activity limits (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of social activity limits
 	*/
 	public java.util.List<SocialActivityLimit> findAll(int start, int end,

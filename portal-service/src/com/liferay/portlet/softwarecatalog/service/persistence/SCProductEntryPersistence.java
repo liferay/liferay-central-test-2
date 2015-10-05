@@ -91,7 +91,7 @@ public interface SCProductEntryPersistence extends BasePersistence<SCProductEntr
 	* @param start the lower bound of the range of s c product entries
 	* @param end the upper bound of the range of s c product entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching s c product entries
 	*/
 	public java.util.List<SCProductEntry> findByGroupId(long groupId,
@@ -285,7 +285,7 @@ public interface SCProductEntryPersistence extends BasePersistence<SCProductEntr
 	* @param start the lower bound of the range of s c product entries
 	* @param end the upper bound of the range of s c product entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching s c product entries
 	*/
 	public java.util.List<SCProductEntry> findByCompanyId(long companyId,
@@ -421,7 +421,7 @@ public interface SCProductEntryPersistence extends BasePersistence<SCProductEntr
 	* @param start the lower bound of the range of s c product entries
 	* @param end the upper bound of the range of s c product entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching s c product entries
 	*/
 	public java.util.List<SCProductEntry> findByG_U(long groupId, long userId,
@@ -604,7 +604,7 @@ public interface SCProductEntryPersistence extends BasePersistence<SCProductEntr
 	*
 	* @param repoGroupId the repo group ID
 	* @param repoArtifactId the repo artifact ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching s c product entry, or <code>null</code> if a matching s c product entry could not be found
 	*/
 	public SCProductEntry fetchByRG_RA(java.lang.String repoGroupId,
@@ -732,7 +732,7 @@ public interface SCProductEntryPersistence extends BasePersistence<SCProductEntr
 	* @param start the lower bound of the range of s c product entries
 	* @param end the upper bound of the range of s c product entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of s c product entries
 	*/
 	public java.util.List<SCProductEntry> findAll(int start, int end,

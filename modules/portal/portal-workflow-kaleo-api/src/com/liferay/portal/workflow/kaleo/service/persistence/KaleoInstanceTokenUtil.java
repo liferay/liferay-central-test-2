@@ -170,7 +170,7 @@ public class KaleoInstanceTokenUtil {
 	* @param start the lower bound of the range of kaleo instance tokens
 	* @param end the upper bound of the range of kaleo instance tokens (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching kaleo instance tokens
 	*/
 	public static List<KaleoInstanceToken> findByCompanyId(long companyId,
@@ -336,7 +336,7 @@ public class KaleoInstanceTokenUtil {
 	* @param start the lower bound of the range of kaleo instance tokens
 	* @param end the upper bound of the range of kaleo instance tokens (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching kaleo instance tokens
 	*/
 	public static List<KaleoInstanceToken> findByKaleoDefinitionId(
@@ -510,7 +510,7 @@ public class KaleoInstanceTokenUtil {
 	* @param start the lower bound of the range of kaleo instance tokens
 	* @param end the upper bound of the range of kaleo instance tokens (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching kaleo instance tokens
 	*/
 	public static List<KaleoInstanceToken> findByKaleoInstanceId(
@@ -690,7 +690,7 @@ public class KaleoInstanceTokenUtil {
 	* @param start the lower bound of the range of kaleo instance tokens
 	* @param end the upper bound of the range of kaleo instance tokens (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching kaleo instance tokens
 	*/
 	public static List<KaleoInstanceToken> findByC_PKITI(long companyId,
@@ -888,7 +888,7 @@ public class KaleoInstanceTokenUtil {
 	* @param start the lower bound of the range of kaleo instance tokens
 	* @param end the upper bound of the range of kaleo instance tokens (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching kaleo instance tokens
 	*/
 	public static List<KaleoInstanceToken> findByC_PKITI_CD(long companyId,
@@ -1148,7 +1148,7 @@ public class KaleoInstanceTokenUtil {
 	* @param start the lower bound of the range of kaleo instance tokens
 	* @param end the upper bound of the range of kaleo instance tokens (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of kaleo instance tokens
 	*/
 	public static List<KaleoInstanceToken> findAll(int start, int end,

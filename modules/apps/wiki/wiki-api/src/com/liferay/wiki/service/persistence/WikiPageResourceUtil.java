@@ -169,7 +169,7 @@ public class WikiPageResourceUtil {
 	* @param start the lower bound of the range of wiki page resources
 	* @param end the upper bound of the range of wiki page resources (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki page resources
 	*/
 	public static List<WikiPageResource> findByUuid(java.lang.String uuid,
@@ -301,7 +301,7 @@ public class WikiPageResourceUtil {
 	*
 	* @param uuid the uuid
 	* @param groupId the group ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching wiki page resource, or <code>null</code> if a matching wiki page resource could not be found
 	*/
 	public static WikiPageResource fetchByUUID_G(java.lang.String uuid,
@@ -363,7 +363,7 @@ public class WikiPageResourceUtil {
 	*
 	* @param nodeId the node ID
 	* @param title the title
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching wiki page resource, or <code>null</code> if a matching wiki page resource could not be found
 	*/
 	public static WikiPageResource fetchByN_T(long nodeId,
@@ -517,7 +517,7 @@ public class WikiPageResourceUtil {
 	* @param start the lower bound of the range of wiki page resources
 	* @param end the upper bound of the range of wiki page resources (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of wiki page resources
 	*/
 	public static List<WikiPageResource> findAll(int start, int end,

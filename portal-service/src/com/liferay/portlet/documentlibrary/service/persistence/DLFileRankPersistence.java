@@ -91,7 +91,7 @@ public interface DLFileRankPersistence extends BasePersistence<DLFileRank> {
 	* @param start the lower bound of the range of document library file ranks
 	* @param end the upper bound of the range of document library file ranks (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching document library file ranks
 	*/
 	public java.util.List<DLFileRank> findByUserId(long userId, int start,
@@ -222,7 +222,7 @@ public interface DLFileRankPersistence extends BasePersistence<DLFileRank> {
 	* @param start the lower bound of the range of document library file ranks
 	* @param end the upper bound of the range of document library file ranks (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching document library file ranks
 	*/
 	public java.util.List<DLFileRank> findByFileEntryId(long fileEntryId,
@@ -358,7 +358,7 @@ public interface DLFileRankPersistence extends BasePersistence<DLFileRank> {
 	* @param start the lower bound of the range of document library file ranks
 	* @param end the upper bound of the range of document library file ranks (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching document library file ranks
 	*/
 	public java.util.List<DLFileRank> findByG_U(long groupId, long userId,
@@ -506,7 +506,7 @@ public interface DLFileRankPersistence extends BasePersistence<DLFileRank> {
 	* @param start the lower bound of the range of document library file ranks
 	* @param end the upper bound of the range of document library file ranks (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching document library file ranks
 	*/
 	public java.util.List<DLFileRank> findByG_U_A(long groupId, long userId,
@@ -633,7 +633,7 @@ public interface DLFileRankPersistence extends BasePersistence<DLFileRank> {
 	* @param companyId the company ID
 	* @param userId the user ID
 	* @param fileEntryId the file entry ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching document library file rank, or <code>null</code> if a matching document library file rank could not be found
 	*/
 	public DLFileRank fetchByC_U_F(long companyId, long userId,
@@ -762,7 +762,7 @@ public interface DLFileRankPersistence extends BasePersistence<DLFileRank> {
 	* @param start the lower bound of the range of document library file ranks
 	* @param end the upper bound of the range of document library file ranks (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of document library file ranks
 	*/
 	public java.util.List<DLFileRank> findAll(int start, int end,

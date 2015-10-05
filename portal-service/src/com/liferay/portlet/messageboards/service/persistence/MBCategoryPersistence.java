@@ -91,7 +91,7 @@ public interface MBCategoryPersistence extends BasePersistence<MBCategory> {
 	* @param start the lower bound of the range of message boards categories
 	* @param end the upper bound of the range of message boards categories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message boards categories
 	*/
 	public java.util.List<MBCategory> findByUuid(java.lang.String uuid,
@@ -197,7 +197,7 @@ public interface MBCategoryPersistence extends BasePersistence<MBCategory> {
 	*
 	* @param uuid the uuid
 	* @param groupId the group ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching message boards category, or <code>null</code> if a matching message boards category could not be found
 	*/
 	public MBCategory fetchByUUID_G(java.lang.String uuid, long groupId,
@@ -278,7 +278,7 @@ public interface MBCategoryPersistence extends BasePersistence<MBCategory> {
 	* @param start the lower bound of the range of message boards categories
 	* @param end the upper bound of the range of message boards categories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message boards categories
 	*/
 	public java.util.List<MBCategory> findByUuid_C(java.lang.String uuid,
@@ -418,7 +418,7 @@ public interface MBCategoryPersistence extends BasePersistence<MBCategory> {
 	* @param start the lower bound of the range of message boards categories
 	* @param end the upper bound of the range of message boards categories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message boards categories
 	*/
 	public java.util.List<MBCategory> findByGroupId(long groupId, int start,
@@ -612,7 +612,7 @@ public interface MBCategoryPersistence extends BasePersistence<MBCategory> {
 	* @param start the lower bound of the range of message boards categories
 	* @param end the upper bound of the range of message boards categories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message boards categories
 	*/
 	public java.util.List<MBCategory> findByCompanyId(long companyId,
@@ -749,7 +749,7 @@ public interface MBCategoryPersistence extends BasePersistence<MBCategory> {
 	* @param start the lower bound of the range of message boards categories
 	* @param end the upper bound of the range of message boards categories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message boards categories
 	*/
 	public java.util.List<MBCategory> findByG_P(long groupId,
@@ -983,7 +983,7 @@ public interface MBCategoryPersistence extends BasePersistence<MBCategory> {
 	* @param start the lower bound of the range of message boards categories
 	* @param end the upper bound of the range of message boards categories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message boards categories
 	*/
 	public java.util.List<MBCategory> findByG_P(long groupId,
@@ -1090,7 +1090,7 @@ public interface MBCategoryPersistence extends BasePersistence<MBCategory> {
 	* @param start the lower bound of the range of message boards categories
 	* @param end the upper bound of the range of message boards categories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message boards categories
 	*/
 	public java.util.List<MBCategory> findByG_S(long groupId, int status,
@@ -1300,7 +1300,7 @@ public interface MBCategoryPersistence extends BasePersistence<MBCategory> {
 	* @param start the lower bound of the range of message boards categories
 	* @param end the upper bound of the range of message boards categories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message boards categories
 	*/
 	public java.util.List<MBCategory> findByC_S(long companyId, int status,
@@ -1448,7 +1448,7 @@ public interface MBCategoryPersistence extends BasePersistence<MBCategory> {
 	* @param start the lower bound of the range of message boards categories
 	* @param end the upper bound of the range of message boards categories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message boards categories
 	*/
 	public java.util.List<MBCategory> findByNotC_G_P(long categoryId,
@@ -1670,7 +1670,7 @@ public interface MBCategoryPersistence extends BasePersistence<MBCategory> {
 	* @param start the lower bound of the range of message boards categories
 	* @param end the upper bound of the range of message boards categories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message boards categories
 	*/
 	public java.util.List<MBCategory> findByNotC_G_P(long[] categoryIds,
@@ -1792,7 +1792,7 @@ public interface MBCategoryPersistence extends BasePersistence<MBCategory> {
 	* @param start the lower bound of the range of message boards categories
 	* @param end the upper bound of the range of message boards categories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message boards categories
 	*/
 	public java.util.List<MBCategory> findByG_P_S(long groupId,
@@ -2046,7 +2046,7 @@ public interface MBCategoryPersistence extends BasePersistence<MBCategory> {
 	* @param start the lower bound of the range of message boards categories
 	* @param end the upper bound of the range of message boards categories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message boards categories
 	*/
 	public java.util.List<MBCategory> findByG_P_S(long groupId,
@@ -2169,7 +2169,7 @@ public interface MBCategoryPersistence extends BasePersistence<MBCategory> {
 	* @param start the lower bound of the range of message boards categories
 	* @param end the upper bound of the range of message boards categories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message boards categories
 	*/
 	public java.util.List<MBCategory> findByNotC_G_P_S(long categoryId,
@@ -2407,7 +2407,7 @@ public interface MBCategoryPersistence extends BasePersistence<MBCategory> {
 	* @param start the lower bound of the range of message boards categories
 	* @param end the upper bound of the range of message boards categories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message boards categories
 	*/
 	public java.util.List<MBCategory> findByNotC_G_P_S(long[] categoryIds,
@@ -2575,7 +2575,7 @@ public interface MBCategoryPersistence extends BasePersistence<MBCategory> {
 	* @param start the lower bound of the range of message boards categories
 	* @param end the upper bound of the range of message boards categories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of message boards categories
 	*/
 	public java.util.List<MBCategory> findAll(int start, int end,

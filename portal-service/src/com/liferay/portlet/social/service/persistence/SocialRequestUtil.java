@@ -165,7 +165,7 @@ public class SocialRequestUtil {
 	* @param start the lower bound of the range of social requests
 	* @param end the upper bound of the range of social requests (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social requests
 	*/
 	public static List<SocialRequest> findByUuid(java.lang.String uuid,
@@ -294,7 +294,7 @@ public class SocialRequestUtil {
 	*
 	* @param uuid the uuid
 	* @param groupId the group ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching social request, or <code>null</code> if a matching social request could not be found
 	*/
 	public static SocialRequest fetchByUUID_G(java.lang.String uuid,
@@ -388,7 +388,7 @@ public class SocialRequestUtil {
 	* @param start the lower bound of the range of social requests
 	* @param end the upper bound of the range of social requests (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social requests
 	*/
 	public static List<SocialRequest> findByUuid_C(java.lang.String uuid,
@@ -557,7 +557,7 @@ public class SocialRequestUtil {
 	* @param start the lower bound of the range of social requests
 	* @param end the upper bound of the range of social requests (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social requests
 	*/
 	public static List<SocialRequest> findByCompanyId(long companyId,
@@ -717,7 +717,7 @@ public class SocialRequestUtil {
 	* @param start the lower bound of the range of social requests
 	* @param end the upper bound of the range of social requests (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social requests
 	*/
 	public static List<SocialRequest> findByUserId(long userId, int start,
@@ -875,7 +875,7 @@ public class SocialRequestUtil {
 	* @param start the lower bound of the range of social requests
 	* @param end the upper bound of the range of social requests (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social requests
 	*/
 	public static List<SocialRequest> findByReceiverUserId(
@@ -1042,7 +1042,7 @@ public class SocialRequestUtil {
 	* @param start the lower bound of the range of social requests
 	* @param end the upper bound of the range of social requests (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social requests
 	*/
 	public static List<SocialRequest> findByU_S(long userId, int status,
@@ -1214,7 +1214,7 @@ public class SocialRequestUtil {
 	* @param start the lower bound of the range of social requests
 	* @param end the upper bound of the range of social requests (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social requests
 	*/
 	public static List<SocialRequest> findByC_C(long classNameId, long classPK,
@@ -1388,7 +1388,7 @@ public class SocialRequestUtil {
 	* @param start the lower bound of the range of social requests
 	* @param end the upper bound of the range of social requests (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social requests
 	*/
 	public static List<SocialRequest> findByR_S(long receiverUserId,
@@ -1544,7 +1544,7 @@ public class SocialRequestUtil {
 	* @param classPK the class p k
 	* @param type the type
 	* @param receiverUserId the receiver user ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching social request, or <code>null</code> if a matching social request could not be found
 	*/
 	public static SocialRequest fetchByU_C_C_T_R(long userId, long classNameId,
@@ -1668,7 +1668,7 @@ public class SocialRequestUtil {
 	* @param start the lower bound of the range of social requests
 	* @param end the upper bound of the range of social requests (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social requests
 	*/
 	public static List<SocialRequest> findByU_C_C_T_S(long userId,
@@ -1894,7 +1894,7 @@ public class SocialRequestUtil {
 	* @param start the lower bound of the range of social requests
 	* @param end the upper bound of the range of social requests (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching social requests
 	*/
 	public static List<SocialRequest> findByC_C_T_R_S(long classNameId,
@@ -2163,7 +2163,7 @@ public class SocialRequestUtil {
 	* @param start the lower bound of the range of social requests
 	* @param end the upper bound of the range of social requests (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of social requests
 	*/
 	public static List<SocialRequest> findAll(int start, int end,

@@ -91,7 +91,7 @@ public interface WikiPagePersistence extends BasePersistence<WikiPage> {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public java.util.List<WikiPage> findByUuid(java.lang.String uuid,
@@ -197,7 +197,7 @@ public interface WikiPagePersistence extends BasePersistence<WikiPage> {
 	*
 	* @param uuid the uuid
 	* @param groupId the group ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	*/
 	public WikiPage fetchByUUID_G(java.lang.String uuid, long groupId,
@@ -278,7 +278,7 @@ public interface WikiPagePersistence extends BasePersistence<WikiPage> {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public java.util.List<WikiPage> findByUuid_C(java.lang.String uuid,
@@ -417,7 +417,7 @@ public interface WikiPagePersistence extends BasePersistence<WikiPage> {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public java.util.List<WikiPage> findByResourcePrimKey(
@@ -548,7 +548,7 @@ public interface WikiPagePersistence extends BasePersistence<WikiPage> {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public java.util.List<WikiPage> findByNodeId(long nodeId, int start,
@@ -679,7 +679,7 @@ public interface WikiPagePersistence extends BasePersistence<WikiPage> {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public java.util.List<WikiPage> findByFormat(java.lang.String format,
@@ -815,7 +815,7 @@ public interface WikiPagePersistence extends BasePersistence<WikiPage> {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public java.util.List<WikiPage> findByR_N(long resourcePrimKey,
@@ -958,7 +958,7 @@ public interface WikiPagePersistence extends BasePersistence<WikiPage> {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public java.util.List<WikiPage> findByR_S(long resourcePrimKey, int status,
@@ -1102,7 +1102,7 @@ public interface WikiPagePersistence extends BasePersistence<WikiPage> {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public java.util.List<WikiPage> findByN_T(long nodeId,
@@ -1245,7 +1245,7 @@ public interface WikiPagePersistence extends BasePersistence<WikiPage> {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public java.util.List<WikiPage> findByN_H(long nodeId, boolean head,
@@ -1389,7 +1389,7 @@ public interface WikiPagePersistence extends BasePersistence<WikiPage> {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public java.util.List<WikiPage> findByN_P(long nodeId,
@@ -1533,7 +1533,7 @@ public interface WikiPagePersistence extends BasePersistence<WikiPage> {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public java.util.List<WikiPage> findByN_R(long nodeId,
@@ -1679,7 +1679,7 @@ public interface WikiPagePersistence extends BasePersistence<WikiPage> {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public java.util.List<WikiPage> findByN_S(long nodeId, int status,
@@ -1796,7 +1796,7 @@ public interface WikiPagePersistence extends BasePersistence<WikiPage> {
 	* @param resourcePrimKey the resource prim key
 	* @param nodeId the node ID
 	* @param version the version
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	*/
 	public WikiPage fetchByR_N_V(long resourcePrimKey, long nodeId,
@@ -1883,7 +1883,7 @@ public interface WikiPagePersistence extends BasePersistence<WikiPage> {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public java.util.List<WikiPage> findByR_N_H(long resourcePrimKey,
@@ -2042,7 +2042,7 @@ public interface WikiPagePersistence extends BasePersistence<WikiPage> {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public java.util.List<WikiPage> findByR_N_S(long resourcePrimKey,
@@ -2201,7 +2201,7 @@ public interface WikiPagePersistence extends BasePersistence<WikiPage> {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public java.util.List<WikiPage> findByG_N_H(long groupId, long nodeId,
@@ -2429,7 +2429,7 @@ public interface WikiPagePersistence extends BasePersistence<WikiPage> {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public java.util.List<WikiPage> findByG_N_S(long groupId, long nodeId,
@@ -2657,7 +2657,7 @@ public interface WikiPagePersistence extends BasePersistence<WikiPage> {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public java.util.List<WikiPage> findByU_N_S(long userId, long nodeId,
@@ -2781,7 +2781,7 @@ public interface WikiPagePersistence extends BasePersistence<WikiPage> {
 	* @param nodeId the node ID
 	* @param title the title
 	* @param version the version
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	*/
 	public WikiPage fetchByN_T_V(long nodeId, java.lang.String title,
@@ -2868,7 +2868,7 @@ public interface WikiPagePersistence extends BasePersistence<WikiPage> {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public java.util.List<WikiPage> findByN_T_H(long nodeId,
@@ -3027,7 +3027,7 @@ public interface WikiPagePersistence extends BasePersistence<WikiPage> {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public java.util.List<WikiPage> findByN_T_S(long nodeId,
@@ -3186,7 +3186,7 @@ public interface WikiPagePersistence extends BasePersistence<WikiPage> {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public java.util.List<WikiPage> findByN_H_P(long nodeId, boolean head,
@@ -3347,7 +3347,7 @@ public interface WikiPagePersistence extends BasePersistence<WikiPage> {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public java.util.List<WikiPage> findByN_H_R(long nodeId, boolean head,
@@ -3508,7 +3508,7 @@ public interface WikiPagePersistence extends BasePersistence<WikiPage> {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public java.util.List<WikiPage> findByN_H_S(long nodeId, boolean head,
@@ -3663,7 +3663,7 @@ public interface WikiPagePersistence extends BasePersistence<WikiPage> {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public java.util.List<WikiPage> findByN_H_NotS(long nodeId, boolean head,
@@ -3823,7 +3823,7 @@ public interface WikiPagePersistence extends BasePersistence<WikiPage> {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public java.util.List<WikiPage> findByG_U_N_S(long groupId, long userId,
@@ -4073,7 +4073,7 @@ public interface WikiPagePersistence extends BasePersistence<WikiPage> {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public java.util.List<WikiPage> findByG_N_T_H(long groupId, long nodeId,
@@ -4324,7 +4324,7 @@ public interface WikiPagePersistence extends BasePersistence<WikiPage> {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public java.util.List<WikiPage> findByG_N_H_S(long groupId, long nodeId,
@@ -4575,7 +4575,7 @@ public interface WikiPagePersistence extends BasePersistence<WikiPage> {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public java.util.List<WikiPage> findByN_H_P_S(long nodeId, boolean head,
@@ -4747,7 +4747,7 @@ public interface WikiPagePersistence extends BasePersistence<WikiPage> {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public java.util.List<WikiPage> findByN_H_P_NotS(long nodeId, boolean head,
@@ -4919,7 +4919,7 @@ public interface WikiPagePersistence extends BasePersistence<WikiPage> {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public java.util.List<WikiPage> findByN_H_R_S(long nodeId, boolean head,
@@ -5091,7 +5091,7 @@ public interface WikiPagePersistence extends BasePersistence<WikiPage> {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public java.util.List<WikiPage> findByN_H_R_NotS(long nodeId, boolean head,
@@ -5269,7 +5269,7 @@ public interface WikiPagePersistence extends BasePersistence<WikiPage> {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki pages
 	*/
 	public java.util.List<WikiPage> findByG_N_H_P_S(long groupId, long nodeId,
@@ -5573,7 +5573,7 @@ public interface WikiPagePersistence extends BasePersistence<WikiPage> {
 	* @param start the lower bound of the range of wiki pages
 	* @param end the upper bound of the range of wiki pages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of wiki pages
 	*/
 	public java.util.List<WikiPage> findAll(int start, int end,

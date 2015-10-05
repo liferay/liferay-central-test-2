@@ -169,7 +169,7 @@ public class ShoppingCategoryUtil {
 	* @param start the lower bound of the range of shopping categories
 	* @param end the upper bound of the range of shopping categories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching shopping categories
 	*/
 	public static List<ShoppingCategory> findByGroupId(long groupId, int start,
@@ -408,7 +408,7 @@ public class ShoppingCategoryUtil {
 	* @param start the lower bound of the range of shopping categories
 	* @param end the upper bound of the range of shopping categories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching shopping categories
 	*/
 	public static List<ShoppingCategory> findByG_P(long groupId,
@@ -638,7 +638,7 @@ public class ShoppingCategoryUtil {
 	*
 	* @param groupId the group ID
 	* @param name the name
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching shopping category, or <code>null</code> if a matching shopping category could not be found
 	*/
 	public static ShoppingCategory fetchByG_N(long groupId,
@@ -792,7 +792,7 @@ public class ShoppingCategoryUtil {
 	* @param start the lower bound of the range of shopping categories
 	* @param end the upper bound of the range of shopping categories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of shopping categories
 	*/
 	public static List<ShoppingCategory> findAll(int start, int end,

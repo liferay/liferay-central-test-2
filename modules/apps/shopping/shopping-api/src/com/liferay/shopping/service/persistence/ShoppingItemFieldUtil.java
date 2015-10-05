@@ -169,7 +169,7 @@ public class ShoppingItemFieldUtil {
 	* @param start the lower bound of the range of shopping item fields
 	* @param end the upper bound of the range of shopping item fields (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching shopping item fields
 	*/
 	public static List<ShoppingItemField> findByItemId(long itemId, int start,
@@ -392,7 +392,7 @@ public class ShoppingItemFieldUtil {
 	* @param start the lower bound of the range of shopping item fields
 	* @param end the upper bound of the range of shopping item fields (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of shopping item fields
 	*/
 	public static List<ShoppingItemField> findAll(int start, int end,

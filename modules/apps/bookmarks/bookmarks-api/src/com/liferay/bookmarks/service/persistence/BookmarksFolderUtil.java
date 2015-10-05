@@ -173,7 +173,7 @@ public class BookmarksFolderUtil {
 	* @param start the lower bound of the range of bookmarks folders
 	* @param end the upper bound of the range of bookmarks folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching bookmarks folders
 	*/
 	public static List<BookmarksFolder> findByResourceBlockId(
@@ -342,7 +342,7 @@ public class BookmarksFolderUtil {
 	* @param start the lower bound of the range of bookmarks folders
 	* @param end the upper bound of the range of bookmarks folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching bookmarks folders
 	*/
 	public static List<BookmarksFolder> findByUuid(java.lang.String uuid,
@@ -473,7 +473,7 @@ public class BookmarksFolderUtil {
 	*
 	* @param uuid the uuid
 	* @param groupId the group ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching bookmarks folder, or <code>null</code> if a matching bookmarks folder could not be found
 	*/
 	public static BookmarksFolder fetchByUUID_G(java.lang.String uuid,
@@ -568,7 +568,7 @@ public class BookmarksFolderUtil {
 	* @param start the lower bound of the range of bookmarks folders
 	* @param end the upper bound of the range of bookmarks folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching bookmarks folders
 	*/
 	public static List<BookmarksFolder> findByUuid_C(java.lang.String uuid,
@@ -737,7 +737,7 @@ public class BookmarksFolderUtil {
 	* @param start the lower bound of the range of bookmarks folders
 	* @param end the upper bound of the range of bookmarks folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching bookmarks folders
 	*/
 	public static List<BookmarksFolder> findByGroupId(long groupId, int start,
@@ -967,7 +967,7 @@ public class BookmarksFolderUtil {
 	* @param start the lower bound of the range of bookmarks folders
 	* @param end the upper bound of the range of bookmarks folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching bookmarks folders
 	*/
 	public static List<BookmarksFolder> findByCompanyId(long companyId,
@@ -1135,7 +1135,7 @@ public class BookmarksFolderUtil {
 	* @param start the lower bound of the range of bookmarks folders
 	* @param end the upper bound of the range of bookmarks folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching bookmarks folders
 	*/
 	public static List<BookmarksFolder> findByG_P(long groupId,
@@ -1397,7 +1397,7 @@ public class BookmarksFolderUtil {
 	* @param start the lower bound of the range of bookmarks folders
 	* @param end the upper bound of the range of bookmarks folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching bookmarks folders
 	*/
 	public static List<BookmarksFolder> findByC_NotS(long companyId,
@@ -1578,7 +1578,7 @@ public class BookmarksFolderUtil {
 	* @param start the lower bound of the range of bookmarks folders
 	* @param end the upper bound of the range of bookmarks folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching bookmarks folders
 	*/
 	public static List<BookmarksFolder> findByG_P_S(long groupId,
@@ -1867,7 +1867,7 @@ public class BookmarksFolderUtil {
 	* @param start the lower bound of the range of bookmarks folders
 	* @param end the upper bound of the range of bookmarks folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching bookmarks folders
 	*/
 	public static List<BookmarksFolder> findByG_P_NotS(long groupId,
@@ -2163,7 +2163,7 @@ public class BookmarksFolderUtil {
 	* @param start the lower bound of the range of bookmarks folders
 	* @param end the upper bound of the range of bookmarks folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching bookmarks folders
 	*/
 	public static List<BookmarksFolder> findByF_C_P_NotS(long folderId,
@@ -2403,7 +2403,7 @@ public class BookmarksFolderUtil {
 	* @param start the lower bound of the range of bookmarks folders
 	* @param end the upper bound of the range of bookmarks folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of bookmarks folders
 	*/
 	public static List<BookmarksFolder> findAll(int start, int end,

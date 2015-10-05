@@ -165,7 +165,7 @@ public class MBThreadFlagUtil {
 	* @param start the lower bound of the range of message boards thread flags
 	* @param end the upper bound of the range of message boards thread flags (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message boards thread flags
 	*/
 	public static List<MBThreadFlag> findByUuid(java.lang.String uuid,
@@ -292,7 +292,7 @@ public class MBThreadFlagUtil {
 	*
 	* @param uuid the uuid
 	* @param groupId the group ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching message boards thread flag, or <code>null</code> if a matching message boards thread flag could not be found
 	*/
 	public static MBThreadFlag fetchByUUID_G(java.lang.String uuid,
@@ -387,7 +387,7 @@ public class MBThreadFlagUtil {
 	* @param start the lower bound of the range of message boards thread flags
 	* @param end the upper bound of the range of message boards thread flags (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message boards thread flags
 	*/
 	public static List<MBThreadFlag> findByUuid_C(java.lang.String uuid,
@@ -556,7 +556,7 @@ public class MBThreadFlagUtil {
 	* @param start the lower bound of the range of message boards thread flags
 	* @param end the upper bound of the range of message boards thread flags (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message boards thread flags
 	*/
 	public static List<MBThreadFlag> findByUserId(long userId, int start,
@@ -712,7 +712,7 @@ public class MBThreadFlagUtil {
 	* @param start the lower bound of the range of message boards thread flags
 	* @param end the upper bound of the range of message boards thread flags (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message boards thread flags
 	*/
 	public static List<MBThreadFlag> findByThreadId(long threadId, int start,
@@ -841,7 +841,7 @@ public class MBThreadFlagUtil {
 	*
 	* @param userId the user ID
 	* @param threadId the thread ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching message boards thread flag, or <code>null</code> if a matching message boards thread flag could not be found
 	*/
 	public static MBThreadFlag fetchByU_T(long userId, long threadId,
@@ -994,7 +994,7 @@ public class MBThreadFlagUtil {
 	* @param start the lower bound of the range of message boards thread flags
 	* @param end the upper bound of the range of message boards thread flags (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of message boards thread flags
 	*/
 	public static List<MBThreadFlag> findAll(int start, int end,

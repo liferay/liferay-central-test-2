@@ -184,7 +184,7 @@ public class WorkflowInstanceLinkUtil {
 	* @param start the lower bound of the range of workflow instance links
 	* @param end the upper bound of the range of workflow instance links (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching workflow instance links
 	*/
 	public static List<WorkflowInstanceLink> findByG_C_C_C(long groupId,
@@ -449,7 +449,7 @@ public class WorkflowInstanceLinkUtil {
 	* @param start the lower bound of the range of workflow instance links
 	* @param end the upper bound of the range of workflow instance links (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of workflow instance links
 	*/
 	public static List<WorkflowInstanceLink> findAll(int start, int end,

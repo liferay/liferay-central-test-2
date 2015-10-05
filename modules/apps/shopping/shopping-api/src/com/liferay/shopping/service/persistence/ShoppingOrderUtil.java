@@ -169,7 +169,7 @@ public class ShoppingOrderUtil {
 	* @param start the lower bound of the range of shopping orders
 	* @param end the upper bound of the range of shopping orders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching shopping orders
 	*/
 	public static List<ShoppingOrder> findByGroupId(long groupId, int start,
@@ -368,7 +368,7 @@ public class ShoppingOrderUtil {
 	* Returns the shopping order where number = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
 	* @param number the number
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching shopping order, or <code>null</code> if a matching shopping order could not be found
 	*/
 	public static ShoppingOrder fetchByNumber(java.lang.String number,
@@ -423,7 +423,7 @@ public class ShoppingOrderUtil {
 	* Returns the shopping order where ppTxnId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
 	* @param ppTxnId the pp txn ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching shopping order, or <code>null</code> if a matching shopping order could not be found
 	*/
 	public static ShoppingOrder fetchByPPTxnId(java.lang.String ppTxnId,
@@ -521,7 +521,7 @@ public class ShoppingOrderUtil {
 	* @param start the lower bound of the range of shopping orders
 	* @param end the upper bound of the range of shopping orders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching shopping orders
 	*/
 	public static List<ShoppingOrder> findByG_U_PPPS(long groupId, long userId,
@@ -865,7 +865,7 @@ public class ShoppingOrderUtil {
 	* @param start the lower bound of the range of shopping orders
 	* @param end the upper bound of the range of shopping orders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of shopping orders
 	*/
 	public static List<ShoppingOrder> findAll(int start, int end,

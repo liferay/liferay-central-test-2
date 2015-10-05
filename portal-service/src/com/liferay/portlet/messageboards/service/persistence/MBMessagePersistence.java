@@ -91,7 +91,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public java.util.List<MBMessage> findByUuid(java.lang.String uuid,
@@ -197,7 +197,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	*
 	* @param uuid the uuid
 	* @param groupId the group ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	*/
 	public MBMessage fetchByUUID_G(java.lang.String uuid, long groupId,
@@ -278,7 +278,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public java.util.List<MBMessage> findByUuid_C(java.lang.String uuid,
@@ -417,7 +417,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public java.util.List<MBMessage> findByGroupId(long groupId, int start,
@@ -610,7 +610,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public java.util.List<MBMessage> findByCompanyId(long companyId, int start,
@@ -742,7 +742,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public java.util.List<MBMessage> findByUserId(long userId, int start,
@@ -873,7 +873,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public java.util.List<MBMessage> findByThreadId(long threadId, int start,
@@ -1005,7 +1005,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public java.util.List<MBMessage> findByThreadReplies(long threadId,
@@ -1141,7 +1141,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public java.util.List<MBMessage> findByG_U(long groupId, long userId,
@@ -1351,7 +1351,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public java.util.List<MBMessage> findByG_C(long groupId, long categoryId,
@@ -1562,7 +1562,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public java.util.List<MBMessage> findByG_S(long groupId, int status,
@@ -1772,7 +1772,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public java.util.List<MBMessage> findByC_S(long companyId, int status,
@@ -1915,7 +1915,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public java.util.List<MBMessage> findByU_C(long userId, long classNameId,
@@ -2045,7 +2045,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public java.util.List<MBMessage> findByU_C(long userId,
@@ -2134,7 +2134,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public java.util.List<MBMessage> findByC_C(long classNameId, long classPK,
@@ -2278,7 +2278,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public java.util.List<MBMessage> findByT_P(long threadId,
@@ -2421,7 +2421,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public java.util.List<MBMessage> findByT_A(long threadId, boolean answer,
@@ -2564,7 +2564,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public java.util.List<MBMessage> findByT_S(long threadId, int status,
@@ -2707,7 +2707,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public java.util.List<MBMessage> findByTR_S(long threadId, int status,
@@ -2855,7 +2855,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public java.util.List<MBMessage> findByG_U_S(long groupId, long userId,
@@ -3083,7 +3083,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public java.util.List<MBMessage> findByG_C_T(long groupId, long categoryId,
@@ -3315,7 +3315,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public java.util.List<MBMessage> findByG_C_S(long groupId, long categoryId,
@@ -3547,7 +3547,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public java.util.List<MBMessage> findByU_C_C(long userId, long classNameId,
@@ -3706,7 +3706,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public java.util.List<MBMessage> findByU_C_S(long userId, long classNameId,
@@ -3850,7 +3850,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public java.util.List<MBMessage> findByU_C_S(long userId,
@@ -3947,7 +3947,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public java.util.List<MBMessage> findByC_C_S(long classNameId,
@@ -4110,7 +4110,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public java.util.List<MBMessage> findByG_C_T_A(long groupId,
@@ -4361,7 +4361,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public java.util.List<MBMessage> findByG_C_T_S(long groupId,
@@ -4612,7 +4612,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public java.util.List<MBMessage> findByU_C_C_S(long userId,
@@ -4821,7 +4821,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of message-boards messages
 	*/
 	public java.util.List<MBMessage> findAll(int start, int end,

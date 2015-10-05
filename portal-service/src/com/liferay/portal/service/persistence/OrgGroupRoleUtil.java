@@ -165,7 +165,7 @@ public class OrgGroupRoleUtil {
 	* @param start the lower bound of the range of org group roles
 	* @param end the upper bound of the range of org group roles (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching org group roles
 	*/
 	public static List<OrgGroupRole> findByGroupId(long groupId, int start,
@@ -322,7 +322,7 @@ public class OrgGroupRoleUtil {
 	* @param start the lower bound of the range of org group roles
 	* @param end the upper bound of the range of org group roles (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching org group roles
 	*/
 	public static List<OrgGroupRole> findByRoleId(long roleId, int start,
@@ -548,7 +548,7 @@ public class OrgGroupRoleUtil {
 	* @param start the lower bound of the range of org group roles
 	* @param end the upper bound of the range of org group roles (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of org group roles
 	*/
 	public static List<OrgGroupRole> findAll(int start, int end,

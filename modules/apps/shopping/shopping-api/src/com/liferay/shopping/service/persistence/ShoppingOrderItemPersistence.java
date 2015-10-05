@@ -91,7 +91,7 @@ public interface ShoppingOrderItemPersistence extends BasePersistence<ShoppingOr
 	* @param start the lower bound of the range of shopping order items
 	* @param end the upper bound of the range of shopping order items (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching shopping order items
 	*/
 	public java.util.List<ShoppingOrderItem> findByOrderId(long orderId,
@@ -274,7 +274,7 @@ public interface ShoppingOrderItemPersistence extends BasePersistence<ShoppingOr
 	* @param start the lower bound of the range of shopping order items
 	* @param end the upper bound of the range of shopping order items (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of shopping order items
 	*/
 	public java.util.List<ShoppingOrderItem> findAll(int start, int end,

@@ -167,7 +167,7 @@ public class UserTrackerPathUtil {
 	* @param start the lower bound of the range of user tracker paths
 	* @param end the upper bound of the range of user tracker paths (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching user tracker paths
 	*/
 	public static List<UserTrackerPath> findByUserTrackerId(
@@ -394,7 +394,7 @@ public class UserTrackerPathUtil {
 	* @param start the lower bound of the range of user tracker paths
 	* @param end the upper bound of the range of user tracker paths (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of user tracker paths
 	*/
 	public static List<UserTrackerPath> findAll(int start, int end,

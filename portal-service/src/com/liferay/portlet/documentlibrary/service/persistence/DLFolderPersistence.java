@@ -91,7 +91,7 @@ public interface DLFolderPersistence extends BasePersistence<DLFolder> {
 	* @param start the lower bound of the range of document library folders
 	* @param end the upper bound of the range of document library folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching document library folders
 	*/
 	public java.util.List<DLFolder> findByUuid(java.lang.String uuid,
@@ -197,7 +197,7 @@ public interface DLFolderPersistence extends BasePersistence<DLFolder> {
 	*
 	* @param uuid the uuid
 	* @param groupId the group ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching document library folder, or <code>null</code> if a matching document library folder could not be found
 	*/
 	public DLFolder fetchByUUID_G(java.lang.String uuid, long groupId,
@@ -278,7 +278,7 @@ public interface DLFolderPersistence extends BasePersistence<DLFolder> {
 	* @param start the lower bound of the range of document library folders
 	* @param end the upper bound of the range of document library folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching document library folders
 	*/
 	public java.util.List<DLFolder> findByUuid_C(java.lang.String uuid,
@@ -417,7 +417,7 @@ public interface DLFolderPersistence extends BasePersistence<DLFolder> {
 	* @param start the lower bound of the range of document library folders
 	* @param end the upper bound of the range of document library folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching document library folders
 	*/
 	public java.util.List<DLFolder> findByGroupId(long groupId, int start,
@@ -610,7 +610,7 @@ public interface DLFolderPersistence extends BasePersistence<DLFolder> {
 	* @param start the lower bound of the range of document library folders
 	* @param end the upper bound of the range of document library folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching document library folders
 	*/
 	public java.util.List<DLFolder> findByCompanyId(long companyId, int start,
@@ -742,7 +742,7 @@ public interface DLFolderPersistence extends BasePersistence<DLFolder> {
 	* @param start the lower bound of the range of document library folders
 	* @param end the upper bound of the range of document library folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching document library folders
 	*/
 	public java.util.List<DLFolder> findByRepositoryId(long repositoryId,
@@ -878,7 +878,7 @@ public interface DLFolderPersistence extends BasePersistence<DLFolder> {
 	* @param start the lower bound of the range of document library folders
 	* @param end the upper bound of the range of document library folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching document library folders
 	*/
 	public java.util.List<DLFolder> findByG_P(long groupId,
@@ -1089,7 +1089,7 @@ public interface DLFolderPersistence extends BasePersistence<DLFolder> {
 	* @param start the lower bound of the range of document library folders
 	* @param end the upper bound of the range of document library folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching document library folders
 	*/
 	public java.util.List<DLFolder> findByC_NotS(long companyId, int status,
@@ -1202,7 +1202,7 @@ public interface DLFolderPersistence extends BasePersistence<DLFolder> {
 	*
 	* @param repositoryId the repository ID
 	* @param mountPoint the mount point
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching document library folder, or <code>null</code> if a matching document library folder could not be found
 	*/
 	public DLFolder fetchByR_M(long repositoryId, boolean mountPoint,
@@ -1283,7 +1283,7 @@ public interface DLFolderPersistence extends BasePersistence<DLFolder> {
 	* @param start the lower bound of the range of document library folders
 	* @param end the upper bound of the range of document library folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching document library folders
 	*/
 	public java.util.List<DLFolder> findByR_P(long repositoryId,
@@ -1427,7 +1427,7 @@ public interface DLFolderPersistence extends BasePersistence<DLFolder> {
 	* @param start the lower bound of the range of document library folders
 	* @param end the upper bound of the range of document library folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching document library folders
 	*/
 	public java.util.List<DLFolder> findByP_N(long parentFolderId,
@@ -1576,7 +1576,7 @@ public interface DLFolderPersistence extends BasePersistence<DLFolder> {
 	* @param start the lower bound of the range of document library folders
 	* @param end the upper bound of the range of document library folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching document library folders
 	*/
 	public java.util.List<DLFolder> findByG_M_P(long groupId,
@@ -1781,7 +1781,7 @@ public interface DLFolderPersistence extends BasePersistence<DLFolder> {
 	* @param groupId the group ID
 	* @param parentFolderId the parent folder ID
 	* @param name the name
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching document library folder, or <code>null</code> if a matching document library folder could not be found
 	*/
 	public DLFolder fetchByG_P_N(long groupId, long parentFolderId,
@@ -1874,7 +1874,7 @@ public interface DLFolderPersistence extends BasePersistence<DLFolder> {
 	* @param start the lower bound of the range of document library folders
 	* @param end the upper bound of the range of document library folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching document library folders
 	*/
 	public java.util.List<DLFolder> findByF_C_P_NotS(long folderId,
@@ -2031,7 +2031,7 @@ public interface DLFolderPersistence extends BasePersistence<DLFolder> {
 	* @param start the lower bound of the range of document library folders
 	* @param end the upper bound of the range of document library folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching document library folders
 	*/
 	public java.util.List<DLFolder> findByG_M_P_H(long groupId,
@@ -2287,7 +2287,7 @@ public interface DLFolderPersistence extends BasePersistence<DLFolder> {
 	* @param start the lower bound of the range of document library folders
 	* @param end the upper bound of the range of document library folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching document library folders
 	*/
 	public java.util.List<DLFolder> findByG_M_T_H(long groupId,
@@ -2542,7 +2542,7 @@ public interface DLFolderPersistence extends BasePersistence<DLFolder> {
 	* @param start the lower bound of the range of document library folders
 	* @param end the upper bound of the range of document library folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching document library folders
 	*/
 	public java.util.List<DLFolder> findByG_P_H_S(long groupId,
@@ -2799,7 +2799,7 @@ public interface DLFolderPersistence extends BasePersistence<DLFolder> {
 	* @param start the lower bound of the range of document library folders
 	* @param end the upper bound of the range of document library folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching document library folders
 	*/
 	public java.util.List<DLFolder> findByG_M_P_H_S(long groupId,
@@ -3103,7 +3103,7 @@ public interface DLFolderPersistence extends BasePersistence<DLFolder> {
 	* @param start the lower bound of the range of document library folders
 	* @param end the upper bound of the range of document library folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of document library folders
 	*/
 	public java.util.List<DLFolder> findAll(int start, int end,

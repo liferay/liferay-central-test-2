@@ -60,7 +60,7 @@ public interface ClassNamePersistence extends BasePersistence<ClassName> {
 	* Returns the class name where value = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
 	* @param value the value
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching class name, or <code>null</code> if a matching class name could not be found
 	*/
 	public ClassName fetchByValue(java.lang.String value,
@@ -184,7 +184,7 @@ public interface ClassNamePersistence extends BasePersistence<ClassName> {
 	* @param start the lower bound of the range of class names
 	* @param end the upper bound of the range of class names (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of class names
 	*/
 	public java.util.List<ClassName> findAll(int start, int end,

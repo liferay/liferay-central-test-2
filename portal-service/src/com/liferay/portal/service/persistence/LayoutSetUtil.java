@@ -164,7 +164,7 @@ public class LayoutSetUtil {
 	* @param start the lower bound of the range of layout sets
 	* @param end the upper bound of the range of layout sets (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching layout sets
 	*/
 	public static List<LayoutSet> findByGroupId(long groupId, int start,
@@ -326,7 +326,7 @@ public class LayoutSetUtil {
 	* @param start the lower bound of the range of layout sets
 	* @param end the upper bound of the range of layout sets (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching layout sets
 	*/
 	public static List<LayoutSet> findByLayoutSetPrototypeUuid(
@@ -471,7 +471,7 @@ public class LayoutSetUtil {
 	*
 	* @param groupId the group ID
 	* @param privateLayout the private layout
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching layout set, or <code>null</code> if a matching layout set could not be found
 	*/
 	public static LayoutSet fetchByG_P(long groupId, boolean privateLayout,
@@ -625,7 +625,7 @@ public class LayoutSetUtil {
 	* @param start the lower bound of the range of layout sets
 	* @param end the upper bound of the range of layout sets (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of layout sets
 	*/
 	public static List<LayoutSet> findAll(int start, int end,

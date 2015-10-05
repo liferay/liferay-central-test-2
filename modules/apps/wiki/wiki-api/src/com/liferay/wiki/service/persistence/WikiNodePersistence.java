@@ -91,7 +91,7 @@ public interface WikiNodePersistence extends BasePersistence<WikiNode> {
 	* @param start the lower bound of the range of wiki nodes
 	* @param end the upper bound of the range of wiki nodes (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki nodes
 	*/
 	public java.util.List<WikiNode> findByUuid(java.lang.String uuid,
@@ -197,7 +197,7 @@ public interface WikiNodePersistence extends BasePersistence<WikiNode> {
 	*
 	* @param uuid the uuid
 	* @param groupId the group ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching wiki node, or <code>null</code> if a matching wiki node could not be found
 	*/
 	public WikiNode fetchByUUID_G(java.lang.String uuid, long groupId,
@@ -278,7 +278,7 @@ public interface WikiNodePersistence extends BasePersistence<WikiNode> {
 	* @param start the lower bound of the range of wiki nodes
 	* @param end the upper bound of the range of wiki nodes (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki nodes
 	*/
 	public java.util.List<WikiNode> findByUuid_C(java.lang.String uuid,
@@ -417,7 +417,7 @@ public interface WikiNodePersistence extends BasePersistence<WikiNode> {
 	* @param start the lower bound of the range of wiki nodes
 	* @param end the upper bound of the range of wiki nodes (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki nodes
 	*/
 	public java.util.List<WikiNode> findByGroupId(long groupId, int start,
@@ -610,7 +610,7 @@ public interface WikiNodePersistence extends BasePersistence<WikiNode> {
 	* @param start the lower bound of the range of wiki nodes
 	* @param end the upper bound of the range of wiki nodes (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki nodes
 	*/
 	public java.util.List<WikiNode> findByCompanyId(long companyId, int start,
@@ -715,7 +715,7 @@ public interface WikiNodePersistence extends BasePersistence<WikiNode> {
 	*
 	* @param groupId the group ID
 	* @param name the name
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching wiki node, or <code>null</code> if a matching wiki node could not be found
 	*/
 	public WikiNode fetchByG_N(long groupId, java.lang.String name,
@@ -795,7 +795,7 @@ public interface WikiNodePersistence extends BasePersistence<WikiNode> {
 	* @param start the lower bound of the range of wiki nodes
 	* @param end the upper bound of the range of wiki nodes (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki nodes
 	*/
 	public java.util.List<WikiNode> findByG_S(long groupId, int status,
@@ -1005,7 +1005,7 @@ public interface WikiNodePersistence extends BasePersistence<WikiNode> {
 	* @param start the lower bound of the range of wiki nodes
 	* @param end the upper bound of the range of wiki nodes (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching wiki nodes
 	*/
 	public java.util.List<WikiNode> findByC_S(long companyId, int status,
@@ -1194,7 +1194,7 @@ public interface WikiNodePersistence extends BasePersistence<WikiNode> {
 	* @param start the lower bound of the range of wiki nodes
 	* @param end the upper bound of the range of wiki nodes (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of wiki nodes
 	*/
 	public java.util.List<WikiNode> findAll(int start, int end,

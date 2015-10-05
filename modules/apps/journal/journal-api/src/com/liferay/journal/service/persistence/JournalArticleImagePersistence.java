@@ -91,7 +91,7 @@ public interface JournalArticleImagePersistence extends BasePersistence<JournalA
 	* @param start the lower bound of the range of journal article images
 	* @param end the upper bound of the range of journal article images (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching journal article images
 	*/
 	public java.util.List<JournalArticleImage> findByGroupId(long groupId,
@@ -224,7 +224,7 @@ public interface JournalArticleImagePersistence extends BasePersistence<JournalA
 	* @param start the lower bound of the range of journal article images
 	* @param end the upper bound of the range of journal article images (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching journal article images
 	*/
 	public java.util.List<JournalArticleImage> findByTempImage(
@@ -365,7 +365,7 @@ public interface JournalArticleImagePersistence extends BasePersistence<JournalA
 	* @param start the lower bound of the range of journal article images
 	* @param end the upper bound of the range of journal article images (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching journal article images
 	*/
 	public java.util.List<JournalArticleImage> findByG_A_V(long groupId,
@@ -509,7 +509,7 @@ public interface JournalArticleImagePersistence extends BasePersistence<JournalA
 	* @param elInstanceId the el instance ID
 	* @param elName the el name
 	* @param languageId the language ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching journal article image, or <code>null</code> if a matching journal article image could not be found
 	*/
 	public JournalArticleImage fetchByG_A_V_E_E_L(long groupId,
@@ -652,7 +652,7 @@ public interface JournalArticleImagePersistence extends BasePersistence<JournalA
 	* @param start the lower bound of the range of journal article images
 	* @param end the upper bound of the range of journal article images (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of journal article images
 	*/
 	public java.util.List<JournalArticleImage> findAll(int start, int end,

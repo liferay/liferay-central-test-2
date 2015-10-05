@@ -91,7 +91,7 @@ public interface DDLRecordVersionPersistence extends BasePersistence<DDLRecordVe
 	* @param start the lower bound of the range of d d l record versions
 	* @param end the upper bound of the range of d d l record versions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d l record versions
 	*/
 	public java.util.List<DDLRecordVersion> findByRecordId(long recordId,
@@ -197,7 +197,7 @@ public interface DDLRecordVersionPersistence extends BasePersistence<DDLRecordVe
 	*
 	* @param recordId the record ID
 	* @param version the version
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching d d l record version, or <code>null</code> if a matching d d l record version could not be found
 	*/
 	public DDLRecordVersion fetchByR_V(long recordId, java.lang.String version,
@@ -277,7 +277,7 @@ public interface DDLRecordVersionPersistence extends BasePersistence<DDLRecordVe
 	* @param start the lower bound of the range of d d l record versions
 	* @param end the upper bound of the range of d d l record versions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching d d l record versions
 	*/
 	public java.util.List<DDLRecordVersion> findByR_S(long recordId,
@@ -466,7 +466,7 @@ public interface DDLRecordVersionPersistence extends BasePersistence<DDLRecordVe
 	* @param start the lower bound of the range of d d l record versions
 	* @param end the upper bound of the range of d d l record versions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of d d l record versions
 	*/
 	public java.util.List<DDLRecordVersion> findAll(int start, int end,

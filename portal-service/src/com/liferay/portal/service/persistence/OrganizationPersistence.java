@@ -89,7 +89,7 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 	* @param start the lower bound of the range of organizations
 	* @param end the upper bound of the range of organizations (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching organizations
 	*/
 	public java.util.List<Organization> findByUuid(java.lang.String uuid,
@@ -288,7 +288,7 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 	* @param start the lower bound of the range of organizations
 	* @param end the upper bound of the range of organizations (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching organizations
 	*/
 	public java.util.List<Organization> findByUuid_C(java.lang.String uuid,
@@ -499,7 +499,7 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 	* @param start the lower bound of the range of organizations
 	* @param end the upper bound of the range of organizations (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching organizations
 	*/
 	public java.util.List<Organization> findByCompanyId(long companyId,
@@ -693,7 +693,7 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 	* @param start the lower bound of the range of organizations
 	* @param end the upper bound of the range of organizations (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching organizations
 	*/
 	public java.util.List<Organization> findByLocations(long companyId,
@@ -892,7 +892,7 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 	* @param start the lower bound of the range of organizations
 	* @param end the upper bound of the range of organizations (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching organizations
 	*/
 	public java.util.List<Organization> findByC_P(long companyId,
@@ -1108,7 +1108,7 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 	* @param start the lower bound of the range of organizations
 	* @param end the upper bound of the range of organizations (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching organizations
 	*/
 	public java.util.List<Organization> findByC_T(long companyId,
@@ -1293,7 +1293,7 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 	*
 	* @param companyId the company ID
 	* @param name the name
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching organization, or <code>null</code> if a matching organization could not be found
 	*/
 	public Organization fetchByC_N(long companyId, java.lang.String name,
@@ -1378,7 +1378,7 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 	* @param start the lower bound of the range of organizations
 	* @param end the upper bound of the range of organizations (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching organizations
 	*/
 	public java.util.List<Organization> findByO_C_P(long organizationId,
@@ -1622,7 +1622,7 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 	* @param start the lower bound of the range of organizations
 	* @param end the upper bound of the range of organizations (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of organizations
 	*/
 	public java.util.List<Organization> findAll(int start, int end,

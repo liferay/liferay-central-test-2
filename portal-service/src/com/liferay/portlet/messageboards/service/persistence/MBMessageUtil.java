@@ -165,7 +165,7 @@ public class MBMessageUtil {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public static List<MBMessage> findByUuid(java.lang.String uuid, int start,
@@ -292,7 +292,7 @@ public class MBMessageUtil {
 	*
 	* @param uuid the uuid
 	* @param groupId the group ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	*/
 	public static MBMessage fetchByUUID_G(java.lang.String uuid, long groupId,
@@ -386,7 +386,7 @@ public class MBMessageUtil {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public static List<MBMessage> findByUuid_C(java.lang.String uuid,
@@ -554,7 +554,7 @@ public class MBMessageUtil {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public static List<MBMessage> findByGroupId(long groupId, int start,
@@ -783,7 +783,7 @@ public class MBMessageUtil {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public static List<MBMessage> findByCompanyId(long companyId, int start,
@@ -942,7 +942,7 @@ public class MBMessageUtil {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public static List<MBMessage> findByUserId(long userId, int start, int end,
@@ -1098,7 +1098,7 @@ public class MBMessageUtil {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public static List<MBMessage> findByThreadId(long threadId, int start,
@@ -1255,7 +1255,7 @@ public class MBMessageUtil {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public static List<MBMessage> findByThreadReplies(long threadId, int start,
@@ -1419,7 +1419,7 @@ public class MBMessageUtil {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public static List<MBMessage> findByG_U(long groupId, long userId,
@@ -1671,7 +1671,7 @@ public class MBMessageUtil {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public static List<MBMessage> findByG_C(long groupId, long categoryId,
@@ -1924,7 +1924,7 @@ public class MBMessageUtil {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public static List<MBMessage> findByG_S(long groupId, int status,
@@ -2174,7 +2174,7 @@ public class MBMessageUtil {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public static List<MBMessage> findByC_S(long companyId, int status,
@@ -2346,7 +2346,7 @@ public class MBMessageUtil {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public static List<MBMessage> findByU_C(long userId, long classNameId,
@@ -2502,7 +2502,7 @@ public class MBMessageUtil {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public static List<MBMessage> findByU_C(long userId, long[] classNameIds,
@@ -2607,7 +2607,7 @@ public class MBMessageUtil {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public static List<MBMessage> findByC_C(long classNameId, long classPK,
@@ -2781,7 +2781,7 @@ public class MBMessageUtil {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public static List<MBMessage> findByT_P(long threadId,
@@ -2955,7 +2955,7 @@ public class MBMessageUtil {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public static List<MBMessage> findByT_A(long threadId, boolean answer,
@@ -3127,7 +3127,7 @@ public class MBMessageUtil {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public static List<MBMessage> findByT_S(long threadId, int status,
@@ -3299,7 +3299,7 @@ public class MBMessageUtil {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public static List<MBMessage> findByTR_S(long threadId, int status,
@@ -3478,7 +3478,7 @@ public class MBMessageUtil {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public static List<MBMessage> findByG_U_S(long groupId, long userId,
@@ -3755,7 +3755,7 @@ public class MBMessageUtil {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public static List<MBMessage> findByG_C_T(long groupId, long categoryId,
@@ -4037,7 +4037,7 @@ public class MBMessageUtil {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public static List<MBMessage> findByG_C_S(long groupId, long categoryId,
@@ -4318,7 +4318,7 @@ public class MBMessageUtil {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public static List<MBMessage> findByU_C_C(long userId, long classNameId,
@@ -4510,7 +4510,7 @@ public class MBMessageUtil {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public static List<MBMessage> findByU_C_S(long userId, long classNameId,
@@ -4683,7 +4683,7 @@ public class MBMessageUtil {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public static List<MBMessage> findByU_C_S(long userId, long[] classNameIds,
@@ -4799,7 +4799,7 @@ public class MBMessageUtil {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public static List<MBMessage> findByC_C_S(long classNameId, long classPK,
@@ -4997,7 +4997,7 @@ public class MBMessageUtil {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public static List<MBMessage> findByG_C_T_A(long groupId, long categoryId,
@@ -5306,7 +5306,7 @@ public class MBMessageUtil {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public static List<MBMessage> findByG_C_T_S(long groupId, long categoryId,
@@ -5615,7 +5615,7 @@ public class MBMessageUtil {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching message-boards messages
 	*/
 	public static List<MBMessage> findByU_C_C_S(long userId, long classNameId,
@@ -5870,7 +5870,7 @@ public class MBMessageUtil {
 	* @param start the lower bound of the range of message-boards messages
 	* @param end the upper bound of the range of message-boards messages (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of message-boards messages
 	*/
 	public static List<MBMessage> findAll(int start, int end,

@@ -138,7 +138,7 @@ public class ShoppingItemUtil {
 	* Returns the shopping item where smallImageId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
 	* @param smallImageId the small image ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching shopping item, or <code>null</code> if a matching shopping item could not be found
 	*/
 	public static ShoppingItem fetchBySmallImageId(long smallImageId,
@@ -194,7 +194,7 @@ public class ShoppingItemUtil {
 	* Returns the shopping item where mediumImageId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
 	* @param mediumImageId the medium image ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching shopping item, or <code>null</code> if a matching shopping item could not be found
 	*/
 	public static ShoppingItem fetchByMediumImageId(long mediumImageId,
@@ -250,7 +250,7 @@ public class ShoppingItemUtil {
 	* Returns the shopping item where largeImageId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
 	* @param largeImageId the large image ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching shopping item, or <code>null</code> if a matching shopping item could not be found
 	*/
 	public static ShoppingItem fetchByLargeImageId(long largeImageId,
@@ -341,7 +341,7 @@ public class ShoppingItemUtil {
 	* @param start the lower bound of the range of shopping items
 	* @param end the upper bound of the range of shopping items (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching shopping items
 	*/
 	public static List<ShoppingItem> findByG_C(long groupId, long categoryId,
@@ -563,7 +563,7 @@ public class ShoppingItemUtil {
 	*
 	* @param companyId the company ID
 	* @param sku the sku
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching shopping item, or <code>null</code> if a matching shopping item could not be found
 	*/
 	public static ShoppingItem fetchByC_S(long companyId, java.lang.String sku,
@@ -716,7 +716,7 @@ public class ShoppingItemUtil {
 	* @param start the lower bound of the range of shopping items
 	* @param end the upper bound of the range of shopping items (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of shopping items
 	*/
 	public static List<ShoppingItem> findAll(int start, int end,

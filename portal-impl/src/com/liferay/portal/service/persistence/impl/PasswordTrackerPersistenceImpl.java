@@ -164,7 +164,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 	 * @param start the lower bound of the range of password trackers
 	 * @param end the upper bound of the range of password trackers (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to use the finder cache
+	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching password trackers
 	 */
 	@Override
@@ -1095,7 +1095,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 	 * @param start the lower bound of the range of password trackers
 	 * @param end the upper bound of the range of password trackers (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to use the finder cache
+	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of password trackers
 	 */
 	@Override

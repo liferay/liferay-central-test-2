@@ -165,7 +165,7 @@ public class DLFileVersionUtil {
 	* @param start the lower bound of the range of document library file versions
 	* @param end the upper bound of the range of document library file versions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching document library file versions
 	*/
 	public static List<DLFileVersion> findByUuid(java.lang.String uuid,
@@ -295,7 +295,7 @@ public class DLFileVersionUtil {
 	*
 	* @param uuid the uuid
 	* @param groupId the group ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching document library file version, or <code>null</code> if a matching document library file version could not be found
 	*/
 	public static DLFileVersion fetchByUUID_G(java.lang.String uuid,
@@ -390,7 +390,7 @@ public class DLFileVersionUtil {
 	* @param start the lower bound of the range of document library file versions
 	* @param end the upper bound of the range of document library file versions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching document library file versions
 	*/
 	public static List<DLFileVersion> findByUuid_C(java.lang.String uuid,
@@ -559,7 +559,7 @@ public class DLFileVersionUtil {
 	* @param start the lower bound of the range of document library file versions
 	* @param end the upper bound of the range of document library file versions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching document library file versions
 	*/
 	public static List<DLFileVersion> findByCompanyId(long companyId,
@@ -720,7 +720,7 @@ public class DLFileVersionUtil {
 	* @param start the lower bound of the range of document library file versions
 	* @param end the upper bound of the range of document library file versions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching document library file versions
 	*/
 	public static List<DLFileVersion> findByFileEntryId(long fileEntryId,
@@ -882,7 +882,7 @@ public class DLFileVersionUtil {
 	* @param start the lower bound of the range of document library file versions
 	* @param end the upper bound of the range of document library file versions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching document library file versions
 	*/
 	public static List<DLFileVersion> findByMimeType(
@@ -1049,7 +1049,7 @@ public class DLFileVersionUtil {
 	* @param start the lower bound of the range of document library file versions
 	* @param end the upper bound of the range of document library file versions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching document library file versions
 	*/
 	public static List<DLFileVersion> findByC_NotS(long companyId, int status,
@@ -1191,7 +1191,7 @@ public class DLFileVersionUtil {
 	*
 	* @param fileEntryId the file entry ID
 	* @param version the version
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching document library file version, or <code>null</code> if a matching document library file version could not be found
 	*/
 	public static DLFileVersion fetchByF_V(long fileEntryId,
@@ -1285,7 +1285,7 @@ public class DLFileVersionUtil {
 	* @param start the lower bound of the range of document library file versions
 	* @param end the upper bound of the range of document library file versions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching document library file versions
 	*/
 	public static List<DLFileVersion> findByF_S(long fileEntryId, int status,
@@ -1465,7 +1465,7 @@ public class DLFileVersionUtil {
 	* @param start the lower bound of the range of document library file versions
 	* @param end the upper bound of the range of document library file versions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching document library file versions
 	*/
 	public static List<DLFileVersion> findByG_F_S(long groupId, long folderId,
@@ -1662,7 +1662,7 @@ public class DLFileVersionUtil {
 	* @param start the lower bound of the range of document library file versions
 	* @param end the upper bound of the range of document library file versions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching document library file versions
 	*/
 	public static List<DLFileVersion> findByG_F_T_V(long groupId,
@@ -1921,7 +1921,7 @@ public class DLFileVersionUtil {
 	* @param start the lower bound of the range of document library file versions
 	* @param end the upper bound of the range of document library file versions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of document library file versions
 	*/
 	public static List<DLFileVersion> findAll(int start, int end,

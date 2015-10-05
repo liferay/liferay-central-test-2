@@ -91,7 +91,7 @@ public interface AssetTagPersistence extends BasePersistence<AssetTag> {
 	* @param start the lower bound of the range of asset tags
 	* @param end the upper bound of the range of asset tags (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching asset tags
 	*/
 	public java.util.List<AssetTag> findByUuid(java.lang.String uuid,
@@ -196,7 +196,7 @@ public interface AssetTagPersistence extends BasePersistence<AssetTag> {
 	*
 	* @param uuid the uuid
 	* @param groupId the group ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching asset tag, or <code>null</code> if a matching asset tag could not be found
 	*/
 	public AssetTag fetchByUUID_G(java.lang.String uuid, long groupId,
@@ -277,7 +277,7 @@ public interface AssetTagPersistence extends BasePersistence<AssetTag> {
 	* @param start the lower bound of the range of asset tags
 	* @param end the upper bound of the range of asset tags (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching asset tags
 	*/
 	public java.util.List<AssetTag> findByUuid_C(java.lang.String uuid,
@@ -416,7 +416,7 @@ public interface AssetTagPersistence extends BasePersistence<AssetTag> {
 	* @param start the lower bound of the range of asset tags
 	* @param end the upper bound of the range of asset tags (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching asset tags
 	*/
 	public java.util.List<AssetTag> findByGroupId(long groupId, int start,
@@ -629,7 +629,7 @@ public interface AssetTagPersistence extends BasePersistence<AssetTag> {
 	* @param start the lower bound of the range of asset tags
 	* @param end the upper bound of the range of asset tags (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching asset tags
 	*/
 	public java.util.List<AssetTag> findByGroupId(long[] groupIds, int start,
@@ -701,7 +701,7 @@ public interface AssetTagPersistence extends BasePersistence<AssetTag> {
 	*
 	* @param groupId the group ID
 	* @param name the name
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching asset tag, or <code>null</code> if a matching asset tag could not be found
 	*/
 	public AssetTag fetchByG_N(long groupId, java.lang.String name,
@@ -782,7 +782,7 @@ public interface AssetTagPersistence extends BasePersistence<AssetTag> {
 	* @param start the lower bound of the range of asset tags
 	* @param end the upper bound of the range of asset tags (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching asset tags
 	*/
 	public java.util.List<AssetTag> findByG_LikeN(long groupId,
@@ -1016,7 +1016,7 @@ public interface AssetTagPersistence extends BasePersistence<AssetTag> {
 	* @param start the lower bound of the range of asset tags
 	* @param end the upper bound of the range of asset tags (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching asset tags
 	*/
 	public java.util.List<AssetTag> findByG_LikeN(long[] groupIds,
@@ -1169,7 +1169,7 @@ public interface AssetTagPersistence extends BasePersistence<AssetTag> {
 	* @param start the lower bound of the range of asset tags
 	* @param end the upper bound of the range of asset tags (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of asset tags
 	*/
 	public java.util.List<AssetTag> findAll(int start, int end,

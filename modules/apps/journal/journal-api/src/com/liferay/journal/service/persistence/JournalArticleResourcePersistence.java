@@ -92,7 +92,7 @@ public interface JournalArticleResourcePersistence extends BasePersistence<Journ
 	* @param start the lower bound of the range of journal article resources
 	* @param end the upper bound of the range of journal article resources (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching journal article resources
 	*/
 	public java.util.List<JournalArticleResource> findByUuid(
@@ -200,7 +200,7 @@ public interface JournalArticleResourcePersistence extends BasePersistence<Journ
 	*
 	* @param uuid the uuid
 	* @param groupId the group ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching journal article resource, or <code>null</code> if a matching journal article resource could not be found
 	*/
 	public JournalArticleResource fetchByUUID_G(java.lang.String uuid,
@@ -277,7 +277,7 @@ public interface JournalArticleResourcePersistence extends BasePersistence<Journ
 	* @param start the lower bound of the range of journal article resources
 	* @param end the upper bound of the range of journal article resources (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching journal article resources
 	*/
 	public java.util.List<JournalArticleResource> findByGroupId(long groupId,
@@ -385,7 +385,7 @@ public interface JournalArticleResourcePersistence extends BasePersistence<Journ
 	*
 	* @param groupId the group ID
 	* @param articleId the article ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching journal article resource, or <code>null</code> if a matching journal article resource could not be found
 	*/
 	public JournalArticleResource fetchByG_A(long groupId,
@@ -514,7 +514,7 @@ public interface JournalArticleResourcePersistence extends BasePersistence<Journ
 	* @param start the lower bound of the range of journal article resources
 	* @param end the upper bound of the range of journal article resources (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of journal article resources
 	*/
 	public java.util.List<JournalArticleResource> findAll(int start, int end,

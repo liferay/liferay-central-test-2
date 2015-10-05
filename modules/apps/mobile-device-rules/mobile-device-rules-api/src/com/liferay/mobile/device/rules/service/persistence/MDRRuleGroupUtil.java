@@ -168,7 +168,7 @@ public class MDRRuleGroupUtil {
 	* @param start the lower bound of the range of m d r rule groups
 	* @param end the upper bound of the range of m d r rule groups (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching m d r rule groups
 	*/
 	public static List<MDRRuleGroup> findByUuid(java.lang.String uuid,
@@ -295,7 +295,7 @@ public class MDRRuleGroupUtil {
 	*
 	* @param uuid the uuid
 	* @param groupId the group ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching m d r rule group, or <code>null</code> if a matching m d r rule group could not be found
 	*/
 	public static MDRRuleGroup fetchByUUID_G(java.lang.String uuid,
@@ -390,7 +390,7 @@ public class MDRRuleGroupUtil {
 	* @param start the lower bound of the range of m d r rule groups
 	* @param end the upper bound of the range of m d r rule groups (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching m d r rule groups
 	*/
 	public static List<MDRRuleGroup> findByUuid_C(java.lang.String uuid,
@@ -559,7 +559,7 @@ public class MDRRuleGroupUtil {
 	* @param start the lower bound of the range of m d r rule groups
 	* @param end the upper bound of the range of m d r rule groups (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching m d r rule groups
 	*/
 	public static List<MDRRuleGroup> findByGroupId(long groupId, int start,
@@ -810,7 +810,7 @@ public class MDRRuleGroupUtil {
 	* @param start the lower bound of the range of m d r rule groups
 	* @param end the upper bound of the range of m d r rule groups (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching m d r rule groups
 	*/
 	public static List<MDRRuleGroup> findByGroupId(long[] groupIds, int start,
@@ -992,7 +992,7 @@ public class MDRRuleGroupUtil {
 	* @param start the lower bound of the range of m d r rule groups
 	* @param end the upper bound of the range of m d r rule groups (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of m d r rule groups
 	*/
 	public static List<MDRRuleGroup> findAll(int start, int end,

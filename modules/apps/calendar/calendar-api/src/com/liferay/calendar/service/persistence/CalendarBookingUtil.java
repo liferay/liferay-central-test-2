@@ -173,7 +173,7 @@ public class CalendarBookingUtil {
 	* @param start the lower bound of the range of calendar bookings
 	* @param end the upper bound of the range of calendar bookings (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching calendar bookings
 	*/
 	public static List<CalendarBooking> findByResourceBlockId(
@@ -342,7 +342,7 @@ public class CalendarBookingUtil {
 	* @param start the lower bound of the range of calendar bookings
 	* @param end the upper bound of the range of calendar bookings (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching calendar bookings
 	*/
 	public static List<CalendarBooking> findByUuid(java.lang.String uuid,
@@ -474,7 +474,7 @@ public class CalendarBookingUtil {
 	*
 	* @param uuid the uuid
 	* @param groupId the group ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching calendar booking, or <code>null</code> if a matching calendar booking could not be found
 	*/
 	public static CalendarBooking fetchByUUID_G(java.lang.String uuid,
@@ -569,7 +569,7 @@ public class CalendarBookingUtil {
 	* @param start the lower bound of the range of calendar bookings
 	* @param end the upper bound of the range of calendar bookings (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching calendar bookings
 	*/
 	public static List<CalendarBooking> findByUuid_C(java.lang.String uuid,
@@ -738,7 +738,7 @@ public class CalendarBookingUtil {
 	* @param start the lower bound of the range of calendar bookings
 	* @param end the upper bound of the range of calendar bookings (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching calendar bookings
 	*/
 	public static List<CalendarBooking> findByCalendarId(long calendarId,
@@ -904,7 +904,7 @@ public class CalendarBookingUtil {
 	* @param start the lower bound of the range of calendar bookings
 	* @param end the upper bound of the range of calendar bookings (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching calendar bookings
 	*/
 	public static List<CalendarBooking> findByCalendarResourceId(
@@ -1080,7 +1080,7 @@ public class CalendarBookingUtil {
 	* @param start the lower bound of the range of calendar bookings
 	* @param end the upper bound of the range of calendar bookings (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching calendar bookings
 	*/
 	public static List<CalendarBooking> findByParentCalendarBookingId(
@@ -1227,7 +1227,7 @@ public class CalendarBookingUtil {
 	*
 	* @param calendarId the calendar ID
 	* @param parentCalendarBookingId the parent calendar booking ID
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching calendar booking, or <code>null</code> if a matching calendar booking could not be found
 	*/
 	public static CalendarBooking fetchByC_P(long calendarId,
@@ -1292,7 +1292,7 @@ public class CalendarBookingUtil {
 	*
 	* @param calendarId the calendar ID
 	* @param vEventUid the v event uid
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching calendar booking, or <code>null</code> if a matching calendar booking could not be found
 	*/
 	public static CalendarBooking fetchByC_V(long calendarId,
@@ -1386,7 +1386,7 @@ public class CalendarBookingUtil {
 	* @param start the lower bound of the range of calendar bookings
 	* @param end the upper bound of the range of calendar bookings (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching calendar bookings
 	*/
 	public static List<CalendarBooking> findByC_S(long calendarId, int status,
@@ -1545,7 +1545,7 @@ public class CalendarBookingUtil {
 	* @param start the lower bound of the range of calendar bookings
 	* @param end the upper bound of the range of calendar bookings (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching calendar bookings
 	*/
 	public static List<CalendarBooking> findByC_S(long calendarId,
@@ -1654,7 +1654,7 @@ public class CalendarBookingUtil {
 	* @param start the lower bound of the range of calendar bookings
 	* @param end the upper bound of the range of calendar bookings (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching calendar bookings
 	*/
 	public static List<CalendarBooking> findByP_S(
@@ -1895,7 +1895,7 @@ public class CalendarBookingUtil {
 	* @param start the lower bound of the range of calendar bookings
 	* @param end the upper bound of the range of calendar bookings (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to use the finder cache
+	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of calendar bookings
 	*/
 	public static List<CalendarBooking> findAll(int start, int end,
