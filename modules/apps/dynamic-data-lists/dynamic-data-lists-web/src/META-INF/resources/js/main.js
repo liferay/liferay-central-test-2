@@ -504,13 +504,11 @@ AUI.add(
 									var value = data[name];
 
 									if (isArray(value)) {
-
 										value.forEach(
-												function(item1, index1) {
-													label.push(options[item1]);
-												}
+											function(item1, index1) {
+												label.push(options[item1]);
+											}
 										);
-
 									}
 
 									return label.join(', ');
