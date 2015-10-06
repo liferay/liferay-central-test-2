@@ -30,7 +30,6 @@ import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -99,7 +98,7 @@ public class UpgradeMVCC extends UpgradeProcess {
 				upgradeMVCC(databaseMetaData, classElement);
 			}
 
-			List<String> moduleTableNames = getModuleTableNames();
+			String[] moduleTableNames = getModuleTableNames();
 
 			for (String moduleTableName : moduleTableNames) {
 				upgradeMVCC(databaseMetaData, moduleTableName);
@@ -125,8 +124,8 @@ public class UpgradeMVCC extends UpgradeProcess {
 		return rootElement.elements("class");
 	}
 
-	protected List<String> getModuleTableNames() {
-		return Arrays.asList("BackgroundTask", "Lock_");
+	protected String[] getModuleTableNames() {
+		return new String[] {"BackgroundTask", "Lock_"};
 	}
 
 	protected String normalizeName(
