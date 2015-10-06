@@ -203,7 +203,7 @@ public class SAPEntryLocalServiceImpl extends SAPEntryLocalServiceBaseImpl {
 	}
 
 	@Override
-	public List<SAPEntry> getDefaltSAPEntries(
+	public List<SAPEntry> getDefaultSAPEntries(
 		long companyId, boolean defaultSAPEntry) {
 
 		return sapEntryPersistence.findByC_D(companyId, defaultSAPEntry);
