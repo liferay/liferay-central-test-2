@@ -61,50 +61,52 @@ public class SQLTransformerCastClobTextOracleTest {
 
 		String dbType = _db.getType();
 
-		if (dbType.equals(DB.TYPE_ORACLE)) {
-			_db.runSQL(_SQL_CREATE_TABLE);
+		if (!dbType.equals(DB.TYPE_ORACLE)) {
+			return;
+		}
 
-			try (Connection connection = DataAccess.getConnection();
-				PreparedStatement preparedStatement =
-					connection.prepareStatement(
-						"INSERT INTO TestCastClobText VALUES (?, ?)")) {
+		_db.runSQL(_SQL_CREATE_TABLE);
 
-				preparedStatement.setLong(1, 1);
-				preparedStatement.setClob(
-					2, new UnsyncStringReader(_BIG_TEXT_A_3999));
+		try (Connection connection = DataAccess.getConnection();
+			PreparedStatement preparedStatement =
+				connection.prepareStatement(
+					"INSERT INTO TestCastClobText VALUES (?, ?)")) {
 
-				Assert.assertEquals(1, preparedStatement.executeUpdate());
+			preparedStatement.setLong(1, 1);
+			preparedStatement.setClob(
+				2, new UnsyncStringReader(_BIG_TEXT_A_3999));
 
-				preparedStatement.setLong(1, 2);
-				preparedStatement.setClob(
-					2, new UnsyncStringReader(_BIG_TEXT_A_4000));
+			Assert.assertEquals(1, preparedStatement.executeUpdate());
 
-				Assert.assertEquals(1, preparedStatement.executeUpdate());
+			preparedStatement.setLong(1, 2);
+			preparedStatement.setClob(
+				2, new UnsyncStringReader(_BIG_TEXT_A_4000));
 
-				preparedStatement.setLong(1, 3);
-				preparedStatement.setClob(
-					2, new UnsyncStringReader(_BIG_TEXT_A_4001));
+			Assert.assertEquals(1, preparedStatement.executeUpdate());
 
-				Assert.assertEquals(1, preparedStatement.executeUpdate());
+			preparedStatement.setLong(1, 3);
+			preparedStatement.setClob(
+				2, new UnsyncStringReader(_BIG_TEXT_A_4001));
 
-				preparedStatement.setLong(1, 4);
-				preparedStatement.setClob(
-					2, new UnsyncStringReader(_BIG_TEXT_A_3999_B_1));
+			Assert.assertEquals(1, preparedStatement.executeUpdate());
 
-				Assert.assertEquals(1, preparedStatement.executeUpdate());
+			preparedStatement.setLong(1, 4);
+			preparedStatement.setClob(
+				2, new UnsyncStringReader(_BIG_TEXT_A_3999_B_1));
 
-				preparedStatement.setLong(1, 5);
-				preparedStatement.setClob(
-					2, new UnsyncStringReader(_BIG_TEXT_A_3999_B_2));
+			Assert.assertEquals(1, preparedStatement.executeUpdate());
 
-				Assert.assertEquals(1, preparedStatement.executeUpdate());
+			preparedStatement.setLong(1, 5);
+			preparedStatement.setClob(
+				2, new UnsyncStringReader(_BIG_TEXT_A_3999_B_2));
 
-				preparedStatement.setLong(1, 6);
-				preparedStatement.setClob(
-					2, new UnsyncStringReader(_BIG_TEXT_A_4000_B_1));
+			Assert.assertEquals(1, preparedStatement.executeUpdate());
 
-				Assert.assertEquals(1, preparedStatement.executeUpdate());
-			}
+			preparedStatement.setLong(1, 6);
+			preparedStatement.setClob(
+				2, new UnsyncStringReader(_BIG_TEXT_A_4000_B_1));
+
+			Assert.assertEquals(1, preparedStatement.executeUpdate());
 		}
 	}
 
