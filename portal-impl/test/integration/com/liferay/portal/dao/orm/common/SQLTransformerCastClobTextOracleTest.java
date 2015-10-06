@@ -114,9 +114,11 @@ public class SQLTransformerCastClobTextOracleTest {
 	public static void tearDownClass() throws Exception {
 		String dbType = _db.getType();
 
-		if (dbType.equals(DB.TYPE_ORACLE)) {
-			_db.runSQL(_SQL_DROP_TABLE);
+		if (!dbType.equals(DB.TYPE_ORACLE)) {
+			return;
 		}
+
+		_db.runSQL("drop table TestCastClobText");
 	}
 
 	@Before
@@ -129,7 +131,7 @@ public class SQLTransformerCastClobTextOracleTest {
 	@Test
 	public void testSelectBigText_3999() throws Exception {
 		Assert.assertEquals(
-			Arrays.asList(_BIG_TEXT_A_3999), runSelect(_BIG_TEXT_A_3999));
+			Arrays.asList(_BIG_TEXT_A_3999), select(_BIG_TEXT_A_3999));
 	}
 
 	@Test
@@ -137,43 +139,43 @@ public class SQLTransformerCastClobTextOracleTest {
 		Assert.assertEquals(
 			Arrays.asList(
 				_BIG_TEXT_A_4000, _BIG_TEXT_A_4001, _BIG_TEXT_A_4000_B_1),
-			runSelect(_BIG_TEXT_A_4000));
+			select(_BIG_TEXT_A_4000));
 		Assert.assertEquals(
 			Arrays.asList(_BIG_TEXT_A_3999_B_1, _BIG_TEXT_A_3999_B_2),
-			runSelect(_BIG_TEXT_A_3999_B_1));
+			select(_BIG_TEXT_A_3999_B_1));
 	}
 
 	@Test
 	public void testSelectBigText_4001() throws Exception {
-		List<String> list = runSelect(_BIG_TEXT_A_4000, _A);
+		List<String> values = select(_BIG_TEXT_A_4000, _A);
 
-		Assert.assertTrue(list.toString(), list.isEmpty());
+		Assert.assertTrue(values.toString(), values.isEmpty());
 
-		list = runSelect(_BIG_TEXT_A_3999_B_1, _B);
+		values = select(_BIG_TEXT_A_3999_B_1, _B);
 
-		Assert.assertTrue(list.toString(), list.isEmpty());
+		Assert.assertTrue(values.toString(), values.isEmpty());
 
-		list = runSelect(_BIG_TEXT_A_4000, _B);
+		values = select(_BIG_TEXT_A_4000, _B);
 
-		Assert.assertTrue(list.toString(), list.isEmpty());
+		Assert.assertTrue(values.toString(), values.isEmpty());
 	}
 
 	@Test
 	public void testSelectText_1() throws Exception {
-		List<String> list = runSelect(_A);
+		List<String> values = select(_A);
 
-		Assert.assertTrue(list.toString(), list.isEmpty());
+		Assert.assertTrue(values.toString(), values.isEmpty());
 
-		list = runSelect(_B);
+		values = select(_B);
 
-		Assert.assertTrue(list.toString(), list.isEmpty());
+		Assert.assertTrue(values.toString(), values.isEmpty());
 	}
 
-	protected List<String> runSelect(String data) throws Exception {
-		return runSelect(data, StringPool.BLANK);
+	protected List<String> select(String data) throws Exception {
+		return select(data, StringPool.BLANK);
 	}
 
-	protected List<String> runSelect(String data1, String data2)
+	protected List<String> select(String data1, String data2)
 		throws Exception {
 
 		try (Connection connection = DataAccess.getConnection();
@@ -193,17 +195,17 @@ public class SQLTransformerCastClobTextOracleTest {
 			preparedStatement.setClob(2, clob2);
 
 			try (ResultSet resultSet = preparedStatement.executeQuery()) {
-				List<String> dataStrings = new ArrayList<>();
+				List<String> values = new ArrayList<>();
 
 				while (resultSet.next()) {
 					Clob clob = resultSet.getClob(1);
 
 					try (InputStream inputStream = clob.getAsciiStream()) {
-						dataStrings.add(StringUtil.read(inputStream));
+						values.add(StringUtil.read(inputStream));
 					}
 				}
 
-				return dataStrings;
+				return values;
 			}
 		}
 	}
@@ -227,8 +229,6 @@ public class SQLTransformerCastClobTextOracleTest {
 	private static final String _SQL_CREATE_TABLE =
 		"create table TestCastClobText (id LONG not null primary key, " +
 			"data TEXT null)";
-
-	private static final String _SQL_DROP_TABLE = "DROP TABLE TestCastClobText";
 
 	private static final String _SQL_SELECT_COMPARE_STRINGS =
 		"SELECT data FROM TestCastClobText WHERE " +
