@@ -235,8 +235,8 @@ public class SAPEntryLocalServiceImpl extends SAPEntryLocalServiceBaseImpl {
 		}
 
 		if (sapEntry.isSystem()) {
-			name = sapEntry.getName();
 			defaultSAPEntry = sapEntry.getDefaultSAPEntry();
+			name = sapEntry.getName();
 		}
 
 		name = StringUtil.trim(name);
