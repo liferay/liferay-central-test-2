@@ -31,7 +31,6 @@ import com.liferay.dynamic.data.mapping.util.DDMDisplay;
 import com.liferay.dynamic.data.mapping.util.DDMDisplayRegistryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.PrefsParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -76,7 +75,9 @@ public class DDLDisplayContext {
 	}
 
 	public String getAddDDMTemplateTitle() throws PortalException {
-		return getDDMDisplay().getEditTemplateTitle(
+		DDMDisplay ddmDisplay = getDDMDisplay();
+
+		return ddmDisplay.getEditTemplateTitle(
 			_recordSet.getDDMStructure(), null, getLocale());
 	}
 
@@ -112,7 +113,9 @@ public class DDLDisplayContext {
 			return StringPool.BLANK;
 		}
 
-		return getDDMDisplay().getEditTemplateTitle(
+		DDMDisplay ddmDisplay = getDDMDisplay();
+
+		return ddmDisplay.getEditTemplateTitle(
 			recordSet.getDDMStructure(), fetchDisplayDDMTemplate(),
 			getLocale());
 	}
@@ -124,7 +127,9 @@ public class DDLDisplayContext {
 			return LanguageUtil.get(_renderRequest.getLocale(), "add-list");
 		}
 
-		return getDDMDisplay().getEditTemplateTitle(
+		DDMDisplay ddmDisplay = getDDMDisplay();
+
+		return ddmDisplay.getEditTemplateTitle(
 			recordSet.getDDMStructure(), fetchFormDDMTemplate(), getLocale());
 	}
 
@@ -157,7 +162,9 @@ public class DDLDisplayContext {
 	}
 
 	public boolean isAdminPortlet() {
-		return getPortletName().equals(DDLPortletKeys.DYNAMIC_DATA_LISTS);
+		String portletName = getPortletName();
+
+		return portletName.equals(DDLPortletKeys.DYNAMIC_DATA_LISTS);
 	}
 
 	public boolean isDisplayPortlet() {
@@ -262,11 +269,15 @@ public class DDLDisplayContext {
 
 		_hasShowIconsActionPermission = Boolean.FALSE;
 
-		if (!getThemeDisplay().isSignedIn()) {
+		ThemeDisplay themeDisplay = getThemeDisplay();
+
+		if (!themeDisplay.isSignedIn()) {
 			return _hasShowIconsActionPermission;
 		}
 
-		if (getLayout().isLayoutPrototypeLinkActive()) {
+		Layout layout = themeDisplay.getLayout();
+
+		if (layout.isLayoutPrototypeLinkActive()) {
 			return _hasShowIconsActionPermission;
 		}
 
@@ -341,7 +352,9 @@ public class DDLDisplayContext {
 	}
 
 	protected long getStructureTypeClassNameId() {
-		return PortalUtil.getClassNameId(getDDMDisplay().getStructureType());
+		DDMDisplay ddmDisplay = getDDMDisplay();
+
+		return PortalUtil.getClassNameId(ddmDisplay.getStructureType());
 	}
 
 	protected ThemeDisplay getThemeDisplay() {
