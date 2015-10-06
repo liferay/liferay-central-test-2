@@ -115,9 +115,9 @@ public class HttpTunnelExtender extends AbstractExtender {
 	private HttpTunnelExtenderConfiguration _httpTunnelExtenderConfiguration;
 	private Logger _logger;
 
-	private final class HttpBundleTunnelRegistrationInfo {
+	private final class ServiceRegistrations {
 
-		public HttpBundleTunnelRegistrationInfo(
+		public ServiceRegistrations(
 			ServiceRegistration<Filter> authVerifierFilterServiceRegistration,
 			ServiceRegistration<Servlet> tunneServletServiceRegistration,
 			ServiceRegistration<ServletContextHelper>
@@ -149,18 +149,19 @@ public class HttpTunnelExtender extends AbstractExtender {
 		@Override
 		public void destroy() throws Exception {
 			ServiceRegistration<Servlet> tunnelServletServiceRegistration =
-				_httpBundleTunnelRegistrationInfo._tunnelServletServiceRegistration;
+				_serviceRegistrations._tunnelServletServiceRegistration;
 
 			tunnelServletServiceRegistration.unregister();
 
 			ServiceRegistration<Filter> authVerifierFilterServiceRegistration =
-				_httpBundleTunnelRegistrationInfo._authVerifierFilterServiceRegistration;
+				_serviceRegistrations._authVerifierFilterServiceRegistration;
 
 			authVerifierFilterServiceRegistration.unregister();
 
 			ServiceRegistration<ServletContextHelper>
 				servletContextHelperServiceRegistration =
-					_httpBundleTunnelRegistrationInfo._servletContextHelperServiceRegistration;
+					_serviceRegistrations.
+						_servletContextHelperServiceRegistration;
 
 			servletContextHelperServiceRegistration.unregister();
 		}
@@ -234,16 +235,15 @@ public class HttpTunnelExtender extends AbstractExtender {
 				bundleContext.registerService(
 					Servlet.class, new TunnelServlet(), properties);
 
-			_httpBundleTunnelRegistrationInfo =
-				new HttpBundleTunnelRegistrationInfo(
+			_serviceRegistrations =
+				new ServiceRegistrations(
 					authVerifierFilterServiceRegistration,
 					tunnelServletServiceRegistration,
 					servletContextHelperServiceRegistration);
 		}
 
 		private final Bundle _bundle;
-		private HttpBundleTunnelRegistrationInfo
-			_httpBundleTunnelRegistrationInfo;
+		private ServiceRegistrations _serviceRegistrations;
 
 	}
 
