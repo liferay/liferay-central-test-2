@@ -65,7 +65,9 @@ public class SQLTransformerCastClobTextOracleTest {
 			return;
 		}
 
-		_db.runSQL(_SQL_CREATE_TABLE);
+		_db.runSQL(
+			"create table TestCastClobText (id LONG not null primary key, " +
+				"data TEXT null)");
 
 		try (Connection connection = DataAccess.getConnection();
 			PreparedStatement preparedStatement =
@@ -225,10 +227,6 @@ public class SQLTransformerCastClobTextOracleTest {
 	private static final String _BIG_TEXT_A_4000_B_1;
 
 	private static final String _BIG_TEXT_A_4001;
-
-	private static final String _SQL_CREATE_TABLE =
-		"create table TestCastClobText (id LONG not null primary key, " +
-			"data TEXT null)";
 
 	private static final String _SQL_SELECT_COMPARE_STRINGS =
 		"SELECT data FROM TestCastClobText WHERE " +
