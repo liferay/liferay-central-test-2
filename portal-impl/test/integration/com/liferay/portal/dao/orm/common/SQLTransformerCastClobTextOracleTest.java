@@ -70,7 +70,7 @@ public class SQLTransformerCastClobTextOracleTest {
 		try (Connection connection = DataAccess.getConnection();
 			PreparedStatement preparedStatement =
 				connection.prepareStatement(
-					"INSERT INTO TestCastClobText VALUES (?, ?)")) {
+					"insert into TestCastClobText values (?, ?)")) {
 
 			preparedStatement.setLong(1, 1);
 			preparedStatement.setClob(
