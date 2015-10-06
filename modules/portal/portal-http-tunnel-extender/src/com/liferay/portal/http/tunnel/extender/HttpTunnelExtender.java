@@ -119,16 +119,15 @@ public class HttpTunnelExtender extends AbstractExtender {
 
 		public ServiceRegistrations(
 			ServiceRegistration<Filter> authVerifierFilterServiceRegistration,
-			ServiceRegistration<Servlet> tunneServletServiceRegistration,
 			ServiceRegistration<ServletContextHelper>
-				servletContextHelperServiceRegistration) {
+				servletContextHelperServiceRegistration,
+			ServiceRegistration<Servlet> tunneServletServiceRegistration) {
 
 			_authVerifierFilterServiceRegistration =
 				authVerifierFilterServiceRegistration;
-			_tunnelServletServiceRegistration =
-				tunneServletServiceRegistration;
 			_servletContextHelperServiceRegistration =
 				servletContextHelperServiceRegistration;
+			_tunnelServletServiceRegistration = tunneServletServiceRegistration;
 		}
 
 		private final ServiceRegistration<Filter>
@@ -148,11 +147,6 @@ public class HttpTunnelExtender extends AbstractExtender {
 
 		@Override
 		public void destroy() throws Exception {
-			ServiceRegistration<Servlet> tunnelServletServiceRegistration =
-				_serviceRegistrations._tunnelServletServiceRegistration;
-
-			tunnelServletServiceRegistration.unregister();
-
 			ServiceRegistration<Filter> authVerifierFilterServiceRegistration =
 				_serviceRegistrations._authVerifierFilterServiceRegistration;
 
@@ -164,39 +158,18 @@ public class HttpTunnelExtender extends AbstractExtender {
 						_servletContextHelperServiceRegistration;
 
 			servletContextHelperServiceRegistration.unregister();
+
+			ServiceRegistration<Servlet> tunnelServletServiceRegistration =
+				_serviceRegistrations._tunnelServletServiceRegistration;
+
+			tunnelServletServiceRegistration.unregister();
 		}
 
 		@Override
 		public void start() throws Exception {
-			Dictionary<String, Object> properties = new Hashtable<>();
-
-			properties.put(
-				HttpWhiteboardConstants.HTTP_WHITEBOARD_CONTEXT_NAME,
-				_bundle.getSymbolicName());
-			properties.put(
-				HttpWhiteboardConstants.HTTP_WHITEBOARD_CONTEXT_PATH,
-				"/" + _bundle.getSymbolicName());
-
 			BundleContext bundleContext = _bundle.getBundleContext();
 
-			ServiceRegistration<ServletContextHelper>
-				servletContextHelperServiceRegistration =
-					bundleContext.registerService(
-						ServletContextHelper.class,
-						new ServletContextHelper(_bundle) {
-
-							@Override
-							public URL getResource(String name) {
-								if (name.startsWith("/")) {
-									name = name.substring(1);
-								}
-
-								return _bundle.getResource(name);
-							}
-						},
-						properties);
-
-			properties = new Hashtable<>();
+			Dictionary<String, Object> properties = new Hashtable<>();
 
 			properties.put(
 				HttpWhiteboardConstants.HTTP_WHITEBOARD_CONTEXT_SELECT,
@@ -221,6 +194,33 @@ public class HttpTunnelExtender extends AbstractExtender {
 			properties = new Hashtable<>();
 
 			properties.put(
+				HttpWhiteboardConstants.HTTP_WHITEBOARD_CONTEXT_NAME,
+				_bundle.getSymbolicName());
+			properties.put(
+				HttpWhiteboardConstants.HTTP_WHITEBOARD_CONTEXT_PATH,
+				"/" + _bundle.getSymbolicName());
+
+			ServiceRegistration<ServletContextHelper>
+				servletContextHelperServiceRegistration =
+					bundleContext.registerService(
+						ServletContextHelper.class,
+						new ServletContextHelper(_bundle) {
+
+							@Override
+							public URL getResource(String name) {
+								if (name.startsWith("/")) {
+									name = name.substring(1);
+								}
+
+								return _bundle.getResource(name);
+							}
+
+						},
+						properties);
+
+			properties = new Hashtable<>();
+
+			properties.put(
 				HttpWhiteboardConstants.HTTP_WHITEBOARD_CONTEXT_SELECT,
 				_bundle.getSymbolicName());
 			properties.put(
@@ -235,11 +235,10 @@ public class HttpTunnelExtender extends AbstractExtender {
 				bundleContext.registerService(
 					Servlet.class, new TunnelServlet(), properties);
 
-			_serviceRegistrations =
-				new ServiceRegistrations(
-					authVerifierFilterServiceRegistration,
-					tunnelServletServiceRegistration,
-					servletContextHelperServiceRegistration);
+			_serviceRegistrations = new ServiceRegistrations(
+				authVerifierFilterServiceRegistration,
+				servletContextHelperServiceRegistration,
+				tunnelServletServiceRegistration);
 		}
 
 		private final Bundle _bundle;
