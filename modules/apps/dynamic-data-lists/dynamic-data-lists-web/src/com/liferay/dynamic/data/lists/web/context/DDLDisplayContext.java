@@ -31,6 +31,7 @@ import com.liferay.dynamic.data.mapping.util.DDMDisplay;
 import com.liferay.dynamic.data.mapping.util.DDMDisplayRegistryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.PrefsParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -55,12 +56,12 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class DDLDisplayContext {
 
-	public DDLDisplayContext(
-		HttpServletRequest request, RenderRequest renderRequest) {
-
+	public DDLDisplayContext(HttpServletRequest request) {
 		_ddlRequestHelper = new DDLRequestHelper(request);
-		_renderRequest = renderRequest;
-		_portletPreferences = renderRequest.getPreferences();
+		_renderRequest = (RenderRequest)request.getAttribute(
+			JavaConstants.JAVAX_PORTLET_REQUEST);
+
+		_portletPreferences = _renderRequest.getPreferences();
 
 		if (Validator.isNotNull(getPortletResource())) {
 			return;
