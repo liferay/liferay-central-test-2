@@ -99,10 +99,10 @@ public class UpgradeMVCC extends UpgradeProcess {
 				upgradeMVCC(databaseMetaData, classElement);
 			}
 
-			List<String> modulesTableNames = getModulesTableNames();
+			List<String> moduleTableNames = getModuleTableNames();
 
-			for (String modulesTableName : modulesTableNames) {
-				upgradeMVCC(databaseMetaData, modulesTableName);
+			for (String moduleTableName : moduleTableNames) {
+				upgradeMVCC(databaseMetaData, moduleTableName);
 			}
 		}
 		finally {
@@ -125,7 +125,7 @@ public class UpgradeMVCC extends UpgradeProcess {
 		return rootElement.elements("class");
 	}
 
-	protected List<String> getModulesTableNames() {
+	protected List<String> getModuleTableNames() {
 		return Arrays.asList("BackgroundTask", "Lock_");
 	}
 
