@@ -48,7 +48,7 @@ import org.junit.Test;
  * @author Daniel Sanz
  * @author Shuyang Zhou
  */
-public class SQLTransformerCastClobTextOracleTest {
+public class SQLTransformerOracleCastClobTextTest {
 
 	@ClassRule
 	@Rule
