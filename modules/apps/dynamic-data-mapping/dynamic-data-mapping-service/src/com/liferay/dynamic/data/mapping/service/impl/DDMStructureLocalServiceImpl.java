@@ -170,7 +170,7 @@ public class DDMStructureLocalServiceImpl
 			user, structure, DDMStructureConstants.VERSION_DEFAULT,
 			serviceContext);
 
-		// Structure Layout
+		// Structure layout
 
 		ddmStructureLayoutLocalService.addStructureLayout(
 			userId, groupId, structureVersion.getStructureVersionId(),
@@ -490,16 +490,16 @@ public class DDMStructureLocalServiceImpl
 			}
 		}
 
-		//Structure Links
-
-		ddmStructureLinkPersistence.removeByStructureId(
-			structure.getStructureId());
-
 		// Structure
 
 		ddmStructurePersistence.remove(structure);
 
-		// Structure Versions
+		// Structure links
+
+		ddmStructureLinkPersistence.removeByStructureId(
+			structure.getStructureId());
+
+		// Structure versions
 
 		List<DDMStructureVersion> structureVersions =
 			ddmStructureVersionLocalService.getStructureVersions(
@@ -1520,7 +1520,7 @@ public class DDMStructureLocalServiceImpl
 		DDMStructureVersion structureVersion = addStructureVersion(
 			user, structure, version, serviceContext);
 
-		// Structure Layout
+		// Structure layout
 
 		ddmStructureLayoutLocalService.addStructureLayout(
 			structureVersion.getUserId(), structureVersion.getGroupId(),
