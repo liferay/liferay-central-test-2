@@ -274,8 +274,9 @@ public class VerifyProcessTracker {
 
 		@Override
 		public void keyEmitted(
-			ServiceTrackerMap<String, VerifyProcess> serviceTrackerMap,
-			String key, VerifyProcess service, VerifyProcess content) {
+			ServiceTrackerMap<String, VerifyProcess> verifyProcessTrackerMap,
+			String key, VerifyProcess serviceVerifyProcess,
+			VerifyProcess contentVerifyProcess) {
 
 			Release release = _releases.getService(key);
 
