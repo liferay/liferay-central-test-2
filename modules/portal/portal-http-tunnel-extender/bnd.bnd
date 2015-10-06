@@ -1,4 +1,4 @@
-Bundle-Name: Liferay Portal Http Tunnel Extender
+Bundle-Name: Liferay Portal HTTP Tunnel Extender
 Bundle-SymbolicName: com.liferay.portal.http.tunnel.extender
 Bundle-Version: 1.0.0
 Include-Resource:\
