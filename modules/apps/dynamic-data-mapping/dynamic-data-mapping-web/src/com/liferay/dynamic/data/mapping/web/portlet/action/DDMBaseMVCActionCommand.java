@@ -200,21 +200,21 @@ public abstract class DDMBaseMVCActionCommand extends BaseMVCActionCommand {
 		String portletNamespace = PortalUtil.getPortletNamespace(
 			themeDisplay.getPpid());
 
-		String oldRedirect = getRedirect(actionRequest);
+		String redirect = getRedirect(actionRequest);
 
-		String newRedirect = HttpUtil.setParameter(
-			oldRedirect, portletNamespace.concat("classPK"),
+		redirect = HttpUtil.setParameter(
+			redirect, portletNamespace.concat("classPK"),
 			ParamUtil.getLong(actionRequest, "classPK"));
 
 		boolean saveAndContinue = ParamUtil.getBoolean(
 			actionRequest, "saveAndContinue");
 
 		if (saveAndContinue) {
-			newRedirect = getSaveAndContinueRedirect(
-				actionRequest, template, newRedirect);
+			redirect = getSaveAndContinueRedirect(
+				actionRequest, template, redirect);
 		}
 
-		actionRequest.setAttribute(WebKeys.REDIRECT, newRedirect);
+		actionRequest.setAttribute(WebKeys.REDIRECT, redirect);
 	}
 
 	protected void updatePortletPreferences(
