@@ -24,14 +24,16 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui"  %>
 <%@ page import="com.liferay.portal.model.Layout" %><%@
 page import="com.liferay.portal.security.permission.ActionKeys" %><%@
 page import="com.liferay.portal.service.permission.LayoutPermissionUtil" %><%@
-page import="com.liferay.portal.util.PortalUtil" %>
+page import="com.liferay.portlet.PortletURLUtil" %>
 
 <portlet:defineObjects/>
 
 <liferay-theme:defineObjects />
 
 <%
-String currentURL = PortalUtil.getCurrentURL(request);
+PortletURL currentURLObj = PortletURLUtil.getCurrent(liferayPortletRequest, liferayPortletResponse);
+
+String currentURL = currentURLObj.toString();
 %>
 
 <%@ include file="/init-ext.jsp" %>

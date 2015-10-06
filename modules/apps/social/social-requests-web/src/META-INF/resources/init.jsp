@@ -24,7 +24,7 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 
 <%@ page import="com.liferay.portal.kernel.util.Validator" %><%@
 page import="com.liferay.portal.kernel.util.WebKeys" %><%@
-page import="com.liferay.portal.util.PortalUtil" %><%@
+page import="com.liferay.portlet.PortletURLUtil" %><%@
 page import="com.liferay.portlet.social.NoSuchRequestException" %><%@
 page import="com.liferay.portlet.social.model.SocialRequest" %><%@
 page import="com.liferay.portlet.social.model.SocialRequestConstants" %><%@
@@ -39,7 +39,9 @@ page import="com.liferay.social.requests.web.constants.SocialRequestsWebKeys" %>
 <liferay-theme:defineObjects />
 
 <%
-String currentURL = PortalUtil.getCurrentURL(request);
+PortletURL currentURLObj = PortletURLUtil.getCurrent(liferayPortletRequest, liferayPortletResponse);
+
+String currentURL = currentURLObj.toString();
 %>
 
 <%@ include file="/init-ext.jsp" %>
