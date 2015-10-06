@@ -127,8 +127,7 @@ public class SAPEntryLocalServiceImpl extends SAPEntryLocalServiceBaseImpl {
 
 			systemDefaultSAPEntry = addSAPEntry(
 				defaultUserId,
-				sapConfiguration.
-					systemDefaultSAPEntryServiceSignatures(),
+				sapConfiguration.systemDefaultSAPEntryServiceSignatures(),
 				true, true, sapConfiguration.systemDefaultSAPEntryName(),
 				titleMap, new ServiceContext());
 
