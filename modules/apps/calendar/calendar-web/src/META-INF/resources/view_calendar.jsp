@@ -384,8 +384,6 @@ boolean columnOptionsVisible = GetterUtil.getBoolean(SessionClicks.get(request, 
 
 		<portlet:namespace />miniCalendar.selectDates(selectedDates);
 
-		var todayDate = <portlet:namespace />scheduler.get('todayDate');
-
 		<portlet:namespace />miniCalendar.set('date', todayDate);
 	};
 
