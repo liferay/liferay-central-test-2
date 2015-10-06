@@ -14,6 +14,7 @@
 
 package com.liferay.dynamic.data.mapping.web.portlet.action;
 
+import com.liferay.dynamic.data.mapping.constants.DDMPortletKeys;
 import com.liferay.dynamic.data.mapping.model.DDMStructure;
 import com.liferay.dynamic.data.mapping.model.DDMTemplate;
 import com.liferay.dynamic.data.mapping.model.DDMTemplateConstants;
@@ -195,6 +196,11 @@ public abstract class DDMBaseMVCActionCommand extends BaseMVCActionCommand {
 		throws Exception {
 
 		String redirect = getRedirect(actionRequest);
+		String classPKParam =
+			"_" + DDMPortletKeys.DYNAMIC_DATA_MAPPING + "_classPK";
+		redirect = HttpUtil.setParameter(
+			redirect, classPKParam,
+			ParamUtil.getLong(actionRequest, "classPK"));
 
 		boolean saveAndContinue = ParamUtil.getBoolean(
 			actionRequest, "saveAndContinue");
