@@ -57,32 +57,31 @@ public class SAPAccessControlPolicy extends BaseAccessControlPolicy {
 			AccessControlled accessControlled)
 		throws SecurityException {
 
-		if (alreadyChecked()) {
+		if (isChecked()) {
 			return;
 		}
 
 		long companyId = CompanyThreadLocal.getCompanyId();
 
-		List<String> serviceAccessPolicyNames = getActiveSAPNames();
+		List<String> serviceAccessPolicyNames = new ArrayList<>();
 
-		List<String> systemSAPNames = getSystemSAPNames(companyId);
-		serviceAccessPolicyNames.addAll(systemSAPNames);
-
-		List<String> defaultSAPNames = getDefaultSAPNames(companyId);
-		serviceAccessPolicyNames.addAll(defaultSAPNames);
+		serviceAccessPolicyNames.addAll(
+			getActiveServiceAccessPolicyNames());
+		serviceAccessPolicyNames.addAll(
+			getDefaultServiceAccessPolicyNames(companyId));
+		serviceAccessPolicyNames.addAll(
+			getSystemServiceAccessPolicyNames(companyId));
 
 		Set<String> allowedServiceSignatures = loadAllowedServiceSignatures(
 			companyId, serviceAccessPolicyNames);
 
 		Class<?> clazz = method.getDeclaringClass();
 
-		String className = clazz.getName();
-		String methodName = method.getName();
-
-		checkAccess(allowedServiceSignatures, className, methodName);
+		checkAccess(
+			allowedServiceSignatures, clazz.getName(), method.getName());
 	}
 
-	protected boolean alreadyChecked() {
+	protected boolean isChecked() {
 		AccessControlContext accessControlContext =
 			AccessControlUtil.getAccessControlContext();
 
@@ -119,8 +118,8 @@ public class SAPAccessControlPolicy extends BaseAccessControlPolicy {
 			return;
 		}
 
-		for (String allowedService : allowedServiceSignatures) {
-			if (matches(className, methodName, allowedService)) {
+		for (String allowedServiceSignature : allowedServiceSignatures) {
+			if (matches(className, methodName, allowedServiceSignature)) {
 				return;
 			}
 		}
@@ -129,36 +128,36 @@ public class SAPAccessControlPolicy extends BaseAccessControlPolicy {
 			"Access denied to " + classNameAndMethodName);
 	}
 
-	protected List<String> getActiveSAPNames() {
-		List<String> serviceAccessPolicyNames =
+	protected List<String> getActiveServiceAccessPolicyNames() {
+		List<String> activeServiceAccessPolicyNames =
 			ServiceAccessPolicyThreadLocal.getActiveServiceAccessPolicyNames();
 
-		if (serviceAccessPolicyNames == null) {
-			serviceAccessPolicyNames = new ArrayList<>();
+		if (activeServiceAccessPolicyNames == null) {
+			activeServiceAccessPolicyNames = new ArrayList<>();
 
 			ServiceAccessPolicyThreadLocal.setActiveServiceAccessPolicyNames(
-				serviceAccessPolicyNames);
+				activeServiceAccessPolicyNames);
 		}
 
-		return serviceAccessPolicyNames;
+		return activeServiceAccessPolicyNames;
 	}
 
-	protected List<String> getDefaultSAPNames(long companyId) {
+	protected List<String> getDefaultServiceAccessPolicyNames(long companyId) {
 		List<SAPEntry> defaultSAPEntries =
 			_sapEntryLocalService.getDefaltSAPEntries(companyId, true);
 
-		List<String> defaultSAPNames = new ArrayList<>(
+		List<String> defaultServiceAccessPolicyNames = new ArrayList<>(
 			defaultSAPEntries.size());
 
 		for (SAPEntry sapEntry : defaultSAPEntries) {
-			defaultSAPNames.add(sapEntry.getName());
+			defaultServiceAccessPolicyNames.add(sapEntry.getName());
 		}
 
-		return defaultSAPNames;
+		return defaultServiceAccessPolicyNames;
 	}
 
-	protected List<String> getSystemSAPNames(long companyId) {
-		List<String> systemSAPNames = new ArrayList<>(2);
+	protected List<String> getSystemServiceAccessPolicyNames(long companyId) {
+		List<String> systemServiceAccessPolicyNames = new ArrayList<>(2);
 
 		SAPConfiguration sapConfiguration = null;
 
@@ -174,10 +173,11 @@ public class SAPAccessControlPolicy extends BaseAccessControlPolicy {
 		}
 
 		if (!sapConfiguration.useSystemSAPEntries()) {
-			return systemSAPNames;
+			return systemServiceAccessPolicyNames;
 		}
 
-		systemSAPNames.add(sapConfiguration.systemDefaultSAPEntryName());
+		systemServiceAccessPolicyNames.add(
+			sapConfiguration.systemDefaultSAPEntryName());
 
 		boolean passwordBasedAuthentication = false;
 
@@ -195,11 +195,11 @@ public class SAPAccessControlPolicy extends BaseAccessControlPolicy {
 		}
 
 		if (passwordBasedAuthentication) {
-			systemSAPNames.add(
+			systemServiceAccessPolicyNames.add(
 				sapConfiguration.systemUserPasswordSAPEntryName());
 		}
 
-		return systemSAPNames;
+		return systemServiceAccessPolicyNames;
 	}
 
 	protected Set<String> loadAllowedServiceSignatures(
@@ -207,10 +207,10 @@ public class SAPAccessControlPolicy extends BaseAccessControlPolicy {
 
 		Set<String> allowedServiceSignatures = new HashSet<>();
 
-		for (String name : serviceAccessPolicyNames) {
+		for (String serviceAccessPolicyName : serviceAccessPolicyNames) {
 			try {
 				SAPEntry sapEntry = _sapEntryLocalService.getSAPEntry(
-					companyId, name);
+					companyId, serviceAccessPolicyName);
 
 				if (!sapEntry.isEnabled()) {
 					continue;

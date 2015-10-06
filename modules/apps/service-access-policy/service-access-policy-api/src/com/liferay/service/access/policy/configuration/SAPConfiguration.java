@@ -39,8 +39,8 @@ public interface SAPConfiguration {
 
 	@Meta.AD(
 		deflt =
-			"System Service Access Policy for Requests Authenticated " +
-			"using User Password",
+			"System Service Access Policy for Requests Authenticated Using " +
+				"User Password",
 		required = false
 	)
 	public String systemUserPasswordSAPEntryDescription();
