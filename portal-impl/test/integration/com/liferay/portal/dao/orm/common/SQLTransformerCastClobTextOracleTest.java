@@ -179,10 +179,15 @@ public class SQLTransformerCastClobTextOracleTest {
 
 	protected List<String> select(String data1, String data2)
 		throws Exception {
+		
+		String sql =
+			"select data from TestCastClobText where DBMS_LOB.COMPARE(" +
+				"CAST_CLOB_TEXT(TestCastClobText.data), ? || ?) = 0 order by " +
+					"id";
 
 		try (Connection connection = DataAccess.getConnection();
 			PreparedStatement preparedStatement = connection.prepareStatement(
-				SQLTransformer.transform(_SQL_SELECT_COMPARE_STRINGS))) {
+				SQLTransformer.transform(sql))) {
 
 			Clob clob1 = connection.createClob();
 
@@ -228,19 +233,14 @@ public class SQLTransformerCastClobTextOracleTest {
 
 	private static final String _BIG_TEXT_A_4001;
 
-	private static final String _SQL_SELECT_COMPARE_STRINGS =
-		"SELECT data FROM TestCastClobText WHERE " +
-			"DBMS_LOB.COMPARE(CAST_CLOB_TEXT(TestCastClobText.data), ? || ?) " +
-				"= 0 ORDER BY id";
-
 	private static DB _db;
 
 	static {
-		char[] data = new char[3999];
+		char[] chars = new char[3999];
 
-		Arrays.fill(data, CharPool.LOWER_CASE_A);
+		Arrays.fill(chars, CharPool.LOWER_CASE_A);
 
-		_BIG_TEXT_A_3999 = new String(data);
+		_BIG_TEXT_A_3999 = new String(chars);
 
 		_BIG_TEXT_A_3999_B_1 = _BIG_TEXT_A_3999 + _B;
 
