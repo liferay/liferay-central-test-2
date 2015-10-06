@@ -61,12 +61,12 @@ TemplateSearchTerms templateSearchTerms = (TemplateSearchTerms)templateSearch.ge
 </portlet:actionURL>
 
 <aui:form action="<%= deleteTemplateURL.toString() %>" method="post" name="fm">
+	<aui:input name="tabs1" type="hidden" value="<%= tabs1 %>" />
+	<aui:input name="groupId" type="hidden" value="<%= String.valueOf(groupId) %>" />
 	<aui:input name="classNameId" type="hidden" value="<%= String.valueOf(classNameId) %>" />
 	<aui:input name="classPK" type="hidden" value="<%= String.valueOf(classPK) %>" />
-	<aui:input name="deleteTemplateIds" type="hidden" />
-	<aui:input name="groupId" type="hidden" value="<%= String.valueOf(groupId) %>" />
 	<aui:input name="resourceClassNameId" type="hidden" value="<%= String.valueOf(resourceClassNameId) %>" />
-	<aui:input name="tabs1" type="hidden" value="<%= tabs1 %>" />
+	<aui:input name="deleteTemplateIds" type="hidden" />
 
 	<%
 	String orderByCol = ParamUtil.getString(request, "orderByCol");
