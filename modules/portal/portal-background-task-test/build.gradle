@@ -1,5 +1,8 @@
 dependencies {
-	compile project(":portal:portal-background-task-service")
+	testCompile group: "com.liferay.portal", name: "portal-service", version: liferay.portalVersion
+	testCompile project(":portal:portal-background-task-service")
 
-	testCompile group: "com.liferay", name: "com.liferay.arquillian.extension.junit.bridge", version: "1.0.0-SNAPSHOT"
+	testIntegrationCompile group: "com.liferay", name: "com.liferay.arquillian.extension.junit.bridge", version: "1.0.0-SNAPSHOT"
+	testIntegrationCompile group: "com.liferay.portal", name: "portal-test", version: liferay.portalVersion
+	testIntegrationCompile group: "com.liferay.portal", name: "portal-test-internal", version: liferay.portalVersion
 }

@@ -1,5 +1,7 @@
 dependencies {
-	compile project(":portal:portal-workflow-kaleo-service")
+	testCompile project(":portal:portal-workflow-kaleo-service")
 
-	testCompile group: "com.liferay", name: "com.liferay.arquillian.extension.junit.bridge", version: "1.0.0-SNAPSHOT"
+	testIntegrationCompile group: "com.liferay", name: "com.liferay.arquillian.extension.junit.bridge", version: "1.0.0-SNAPSHOT"
+	testIntegrationCompile group: "com.liferay.portal", name: "portal-test", version: liferay.portalVersion
+	testIntegrationCompile group: "com.liferay.portal", name: "portal-test-internal", version: liferay.portalVersion
 }
