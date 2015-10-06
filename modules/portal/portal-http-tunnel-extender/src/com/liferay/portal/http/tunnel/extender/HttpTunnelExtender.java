@@ -60,10 +60,10 @@ public class HttpTunnelExtender extends AbstractExtender {
 		throws Exception {
 
 		_bundleContext = bundleContext;
-		_logger = new Logger(bundleContext);
 
 		_httpTunnelExtenderConfiguration = Configurable.createConfigurable(
 			HttpTunnelExtenderConfiguration.class, properties);
+		_logger = new Logger(bundleContext);
 
 		start(bundleContext);
 	}
@@ -123,20 +123,20 @@ public class HttpTunnelExtender extends AbstractExtender {
 			ServiceRegistration<ServletContextHelper>
 				servletContextHelperServiceRegistration) {
 
-			this.authVerifierFilterServiceRegistration =
+			_authVerifierFilterServiceRegistration =
 				authVerifierFilterServiceRegistration;
-			this.tunnelServletServiceRegistration =
+			_tunnelServletServiceRegistration =
 				tunneServletServiceRegistration;
-			this.servletContextHelperServiceRegistration =
+			_servletContextHelperServiceRegistration =
 				servletContextHelperServiceRegistration;
 		}
 
-		public final ServiceRegistration<Filter>
-			authVerifierFilterServiceRegistration;
-		public final ServiceRegistration<ServletContextHelper>
-			servletContextHelperServiceRegistration;
-		public final ServiceRegistration<Servlet>
-			tunnelServletServiceRegistration;
+		private final ServiceRegistration<Filter>
+			_authVerifierFilterServiceRegistration;
+		private final ServiceRegistration<ServletContextHelper>
+			_servletContextHelperServiceRegistration;
+		private final ServiceRegistration<Servlet>
+			_tunnelServletServiceRegistration;
 
 	}
 
@@ -149,21 +149,18 @@ public class HttpTunnelExtender extends AbstractExtender {
 		@Override
 		public void destroy() throws Exception {
 			ServiceRegistration<Servlet> tunnelServletServiceRegistration =
-				_httpBundleTunnelRegistrationInfo.
-					tunnelServletServiceRegistration;
+				_httpBundleTunnelRegistrationInfo._tunnelServletServiceRegistration;
 
 			tunnelServletServiceRegistration.unregister();
 
 			ServiceRegistration<Filter> authVerifierFilterServiceRegistration =
-				_httpBundleTunnelRegistrationInfo.
-					authVerifierFilterServiceRegistration;
+				_httpBundleTunnelRegistrationInfo._authVerifierFilterServiceRegistration;
 
 			authVerifierFilterServiceRegistration.unregister();
 
 			ServiceRegistration<ServletContextHelper>
 				servletContextHelperServiceRegistration =
-					_httpBundleTunnelRegistrationInfo.
-						servletContextHelperServiceRegistration;
+					_httpBundleTunnelRegistrationInfo._servletContextHelperServiceRegistration;
 
 			servletContextHelperServiceRegistration.unregister();
 		}
