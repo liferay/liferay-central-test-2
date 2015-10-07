@@ -1495,6 +1495,13 @@
 			</then>
 		</if>
 
+		<if>
+			<isset var="uploadFileName" />
+			<then>
+				<execute function="AssertElementPresent" locator1="BlogsEntry#ENTRY_COVER_IMAGE" />
+			</then>
+		</if>
+
 		<execute function="AssertTextEquals" locator1="BlogsEntry#CONTENT" value1="${entryContent}" />
 	</command>
 
