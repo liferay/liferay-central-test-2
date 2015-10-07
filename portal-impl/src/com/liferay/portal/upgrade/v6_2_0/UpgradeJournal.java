@@ -226,36 +226,6 @@ public class UpgradeJournal extends BaseUpgradePortletPreferences {
 		super.doUpgrade();
 	}
 
-	protected Locale getDefaultLocale(long companyId) throws Exception {
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			con = DataAccess.getUpgradeOptimizedConnection();
-
-			ps = con.prepareStatement(
-				"select languageId from User_ where companyId = ? and " +
-					"defaultUser = ?");
-
-			ps.setLong(1, companyId);
-			ps.setBoolean(2, true);
-
-			rs = ps.executeQuery();
-
-			if (rs.next()) {
-				String languageId = rs.getString("languageId");
-
-				return LocaleUtil.fromLanguageId(languageId);
-			}
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
-
-		return LocaleUtil.getSiteDefault();
-	}
-
 	protected long getCompanyGroupId(long companyId) throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -336,6 +306,36 @@ public class UpgradeJournal extends BaseUpgradePortletPreferences {
 		long groupId, String structureId, boolean warn) {
 
 		return getDDMStructureId(groupId, 0, structureId, warn);
+	}
+
+	protected Locale getDefaultLocale(long companyId) throws Exception {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getUpgradeOptimizedConnection();
+
+			ps = con.prepareStatement(
+				"select languageId from User_ where companyId = ? and " +
+					"defaultUser = ?");
+
+			ps.setLong(1, companyId);
+			ps.setBoolean(2, true);
+
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				String languageId = rs.getString("languageId");
+
+				return LocaleUtil.fromLanguageId(languageId);
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+
+		return LocaleUtil.getSiteDefault();
 	}
 
 	@Override
