@@ -144,7 +144,15 @@
 					</then>
 				</if>
 
-				<execute macro="CalendarEvent#publish" />
+				<if>
+					<equals arg1="${workflow}" arg2="true" />
+					<then>
+						<execute function="AssertClick" locator1="Button#SUBMIT_FOR_PUBLICATION" value1="Submit for Publication" />
+					</then>
+					<else>
+						<execute macro="CalendarEvent#publish" />
+					</else>
+				</if>
 
 				<execute macro="Page#gotoPG">
 					<var name="defaultURL" value="${defaultURL}" />
@@ -204,7 +212,15 @@
 						</then>
 					</if>
 
-					<execute macro="CalendarEvent#publish" />
+					<if>
+						<equals arg1="${workflow}" arg2="true" />
+						<then>
+							<execute function="AssertClick" locator1="Button#SUBMIT_FOR_PUBLICATION" value1="Submit for Publication" />
+						</then>
+						<else>
+							<execute macro="CalendarEvent#publish" />
+						</else>
+					</if>
 
 					<execute macro="Page#gotoPG">
 						<var name="defaultURL" value="${defaultURL}" />
@@ -274,7 +290,15 @@
 						</then>
 					</if>
 
-					<execute macro="CalendarEvent#publish" />
+					<if>
+						<equals arg1="${workflow}" arg2="true" />
+						<then>
+							<execute function="AssertClick" locator1="Button#SUBMIT_FOR_PUBLICATION" value1="Submit for Publication" />
+						</then>
+						<else>
+							<execute macro="CalendarEvent#publish" />
+						</else>
+					</if>
 
 					<execute macro="Page#gotoPG">
 						<var name="defaultURL" value="${defaultURL}" />
