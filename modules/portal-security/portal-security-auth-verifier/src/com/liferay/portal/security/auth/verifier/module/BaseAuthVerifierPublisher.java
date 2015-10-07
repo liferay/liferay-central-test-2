@@ -27,7 +27,7 @@ import org.osgi.framework.ServiceRegistration;
 /**
  * @author Tomas Polesovsky
  */
-public abstract class AbstractAuthVerifierPublisher {
+public abstract class BaseAuthVerifierPublisher {
 
 	protected void activate(
 		BundleContext bundleContext, Map<String, Object> properties) {

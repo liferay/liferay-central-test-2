@@ -15,7 +15,7 @@
 package com.liferay.portal.security.auth.verifier.tunnel.module;
 
 import com.liferay.portal.kernel.security.auth.verifier.AuthVerifier;
-import com.liferay.portal.security.auth.verifier.module.AbstractAuthVerifierPublisher;
+import com.liferay.portal.security.auth.verifier.module.BaseAuthVerifierPublisher;
 import com.liferay.portal.security.auth.verifier.tunnel.TunnelAuthVerifier;
 
 import java.util.Map;
@@ -34,7 +34,7 @@ import org.osgi.service.component.annotations.Modified;
 	configurationPid = "com.liferay.portal.security.auth.verifier.tunnel.module.configuration.TunnelAuthVerifierConfiguration",
 	configurationPolicy = ConfigurationPolicy.REQUIRE
 )
-public class TunnelAuthVerifierPublisher extends AbstractAuthVerifierPublisher {
+public class TunnelAuthVerifierPublisher extends BaseAuthVerifierPublisher {
 
 	@Activate
 	@Override

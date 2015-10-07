@@ -15,7 +15,7 @@
 package com.liferay.portal.security.auth.verifier.request.parameter.module;
 
 import com.liferay.portal.kernel.security.auth.verifier.AuthVerifier;
-import com.liferay.portal.security.auth.verifier.module.AbstractAuthVerifierPublisher;
+import com.liferay.portal.security.auth.verifier.module.BaseAuthVerifierPublisher;
 import com.liferay.portal.security.auth.verifier.request.parameter.RequestParameterAuthVerifier;
 
 import java.util.Map;
@@ -35,7 +35,7 @@ import org.osgi.service.component.annotations.Modified;
 	configurationPolicy = ConfigurationPolicy.REQUIRE
 )
 public class RequestParameterAuthVerifierPublisher
-	extends AbstractAuthVerifierPublisher {
+	extends BaseAuthVerifierPublisher {
 
 	@Activate
 	@Override

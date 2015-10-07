@@ -16,7 +16,7 @@ package com.liferay.portal.security.auth.verifier.digest.authentication.module;
 
 import com.liferay.portal.kernel.security.auth.verifier.AuthVerifier;
 import com.liferay.portal.security.auth.verifier.digest.authentication.DigestAuthenticationAuthVerifier;
-import com.liferay.portal.security.auth.verifier.module.AbstractAuthVerifierPublisher;
+import com.liferay.portal.security.auth.verifier.module.BaseAuthVerifierPublisher;
 
 import java.util.Map;
 
@@ -35,7 +35,7 @@ import org.osgi.service.component.annotations.Modified;
 	configurationPolicy = ConfigurationPolicy.REQUIRE
 )
 public class DigestAuthenticationAuthVerifierPublisher
-	extends AbstractAuthVerifierPublisher {
+	extends BaseAuthVerifierPublisher {
 
 	@Activate
 	@Override
