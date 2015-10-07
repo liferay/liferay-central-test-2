@@ -55,6 +55,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>RESOURCE_TABLE_CALENDAR_EVENT_SELECT</td>
+	<td>//select[contains(@id,'Calendar')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>RESOURCE_TABLE_WEB_CONTENT</td>
 	<td>//div[@id='_151_workflowHandlersSearchContainer']//tr[contains(.,'Web Content')]/td[1]</td>
 	<td></td>
