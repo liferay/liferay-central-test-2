@@ -15,6 +15,10 @@
 package com.liferay.dynamic.data.lists.web.util;
 
 import com.liferay.portal.kernel.display.context.util.BaseRequestHelper;
+import com.liferay.portal.kernel.util.JavaConstants;
+
+import javax.portlet.PortletPreferences;
+import javax.portlet.RenderRequest;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -25,6 +29,22 @@ public class DDLRequestHelper extends BaseRequestHelper {
 
 	public DDLRequestHelper(HttpServletRequest request) {
 		super(request);
+
+		_renderRequest = (RenderRequest)request.getAttribute(
+			JavaConstants.JAVAX_PORTLET_REQUEST);
+
+		_portletPreferences = _renderRequest.getPreferences();
 	}
+
+	public PortletPreferences getPortletPreferences() {
+		return _portletPreferences;
+	}
+
+	public RenderRequest getRenderRequest() {
+		return _renderRequest;
+	}
+
+	private final PortletPreferences _portletPreferences;
+	private final RenderRequest _renderRequest;
 
 }
