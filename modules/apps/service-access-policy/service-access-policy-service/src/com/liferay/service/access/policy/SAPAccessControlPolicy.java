@@ -61,19 +61,19 @@ public class SAPAccessControlPolicy extends BaseAccessControlPolicy {
 			return;
 		}
 
-		long companyId = CompanyThreadLocal.getCompanyId();
-
 		List<String> serviceAccessPolicyNames = new ArrayList<>();
 
 		serviceAccessPolicyNames.addAll(
 			getActiveServiceAccessPolicyNames());
 		serviceAccessPolicyNames.addAll(
-			getDefaultServiceAccessPolicyNames(companyId));
+			getDefaultServiceAccessPolicyNames(
+				CompanyThreadLocal.getCompanyId()));
 		serviceAccessPolicyNames.addAll(
-			getSystemServiceAccessPolicyNames(companyId));
+			getSystemServiceAccessPolicyNames(
+				CompanyThreadLocal.getCompanyId()));
 
 		Set<String> allowedServiceSignatures = loadAllowedServiceSignatures(
-			companyId, serviceAccessPolicyNames);
+			CompanyThreadLocal.getCompanyId(), serviceAccessPolicyNames);
 
 		Class<?> clazz = method.getDeclaringClass();
 
