@@ -35,7 +35,7 @@ public @interface ConfigurationAdmin {
 	public static final String XML_ATTRIBUTE_PREFIX = "cf";
 
 	public static final String XML_NAMESPACE =
-		"http://www.liferay.com/xsd/meta-type-hints/configuration-admin_7_0_0";
+		"http://www.liferay.com/xsd/meta-type-hints/configuration-admin_1_0_0";
 
 	public String category() default "";
 
