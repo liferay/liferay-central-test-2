@@ -21,22 +21,22 @@
 <!--NAVIGATION-->
 <tr>
 	<td>BLOG_IMAGES</td>
-	<td>//ul[contains(@class,'nav-pills')]/li/a[contains(.,'Blog Images')]</td>
+	<td>//ul[contains(@class,'navbar')]//span[contains(.,'Blog Images')]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>DOCUMENTS_AND_MEDIA</td>
-	<td>//ul[contains(@class,'nav-pills')]/li/a[contains(.,'Documents and Media')]</td>
+	<td>//ul[contains(@class,'navbar')]//span[contains(.,'Documents and Media')]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>UPLOAD_IMAGE</td>
-	<td>//ul[contains(@class,'nav-pills')]/li/a[contains(.,'Upload Image')]</td>
+	<td>//ul[contains(@class,'navbar')]//span[contains(.,'Upload Image')]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>URL</td>
-	<td>//ul[contains(@class,'nav-pills')]/li/a[contains(.,'URL')]</td>
+	<td>//ul[contains(@class,'navbar')]//span[contains(.,'Blogs')]</td>
 	<td></td>
 </tr>
 <tr>
@@ -52,7 +52,7 @@
 <!--SELECT_FILE-->
 <tr>
 	<td>SELECT_FILE_BLOG_IMAGES</td>
-	<td>//div[contains(@id,'ItemSelectorPortlet') and not(@class='hide')]//a[@title='${key_imageFileName}']</td>
+	<td>//div[contains(@class,'item-preview')]//div[contains(@style,'${key_imageFileName}')]</td>
 	<td></td>
 </tr>
 <tr>
