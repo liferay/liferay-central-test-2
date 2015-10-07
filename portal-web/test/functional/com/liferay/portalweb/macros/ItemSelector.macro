@@ -15,7 +15,7 @@
 		<execute function="AssertClick" locator1="Button#ADD" value1="ADD" />
 	</command>
 
-	<command name="dmSelectFile">
+	<command name="selectDMImage">
 		<execute function="AssertClick" locator1="ItemSelector#DOCUMENTS_AND_MEDIA" value1="Documents and Media" />
 
 		<execute function="AssertClick" locator1="ItemSelector#SELECT_FILE_UPLOAD_IMAGE" value1="Select File" />
@@ -40,7 +40,7 @@
 		<execute function="AssertClick" locator1="Button#ADD" value1="Add" />
 	</command>
 
-	<command name="uploadImage">
+	<command name="uploadBlogImage">
 		<execute function="AssertClick" locator1="ItemSelector#UPLOAD_IMAGE" value1="Upload Image" />
 
 		<execute function="AssertClick" locator1="ItemSelector#SELECT_FILE_UPLOAD_IMAGE" value1="Select File" />
