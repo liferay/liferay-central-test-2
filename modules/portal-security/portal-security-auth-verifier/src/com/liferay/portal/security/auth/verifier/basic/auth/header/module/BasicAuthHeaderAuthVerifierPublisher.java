@@ -16,7 +16,7 @@ package com.liferay.portal.security.auth.verifier.basic.auth.header.module;
 
 import com.liferay.portal.kernel.security.auth.verifier.AuthVerifier;
 import com.liferay.portal.security.auth.verifier.basic.auth.header.BasicAuthHeaderAuthVerifier;
-import com.liferay.portal.security.auth.verifier.module.AbstractAuthVerifierPublisher;
+import com.liferay.portal.security.auth.verifier.module.BaseAuthVerifierPublisher;
 
 import java.util.Map;
 
@@ -35,7 +35,7 @@ import org.osgi.service.component.annotations.Modified;
 	configurationPolicy = ConfigurationPolicy.REQUIRE
 )
 public class BasicAuthHeaderAuthVerifierPublisher
-	extends AbstractAuthVerifierPublisher {
+	extends BaseAuthVerifierPublisher {
 
 	@Activate
 	@Override
