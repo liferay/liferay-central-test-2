@@ -786,26 +786,6 @@ public class CalendarBookingLocalServiceImpl
 			descriptionMap.put(locale, sanitizedDescription);
 		}
 
-		for (Locale locale : calendarBooking.getDescriptionMap().keySet()) {
-			String description = descriptionMap.get(locale);
-
-			if (description == null) {
-				description = calendarBooking.getDescription(locale);
-			}
-
-			descriptionMap.put(locale, description);
-		}
-
-		for (Locale locale : calendarBooking.getTitleMap().keySet()) {
-			String title = titleMap.get(locale);
-
-			if (title == null) {
-				title = calendarBooking.getTitle(locale);
-			}
-
-			titleMap.put(locale, title);
-		}
-
 		java.util.Calendar startTimeJCalendar = JCalendarUtil.getJCalendar(
 			startTime);
 		java.util.Calendar endTimeJCalendar = JCalendarUtil.getJCalendar(
@@ -830,8 +810,19 @@ public class CalendarBookingLocalServiceImpl
 		calendarBooking.setGroupId(calendar.getGroupId());
 		calendarBooking.setModifiedDate(serviceContext.getModifiedDate(null));
 		calendarBooking.setCalendarId(calendarId);
-		calendarBooking.setTitleMap(titleMap);
-		calendarBooking.setDescriptionMap(descriptionMap);
+
+		Map<Locale, String> updatedTitleMap = calendarBooking.getTitleMap();
+
+		updatedTitleMap.putAll(titleMap);
+
+		calendarBooking.setTitleMap(updatedTitleMap);
+
+		Map<Locale, String> updatedDescriptionMap =
+			calendarBooking.getDescriptionMap();
+
+		updatedDescriptionMap.putAll(descriptionMap);
+
+		calendarBooking.setDescriptionMap(updatedDescriptionMap);
 		calendarBooking.setLocation(location);
 		calendarBooking.setStartTime(startTimeJCalendar.getTimeInMillis());
 		calendarBooking.setEndTime(endTimeJCalendar.getTimeInMillis());
@@ -950,32 +941,21 @@ public class CalendarBookingLocalServiceImpl
 			recurrence = StringPool.BLANK;
 		}
 
-		for (Locale locale : calendarBooking.getDescriptionMap().keySet()) {
-			String description = descriptionMap.get(locale);
+		Map<Locale, String> updatedTitleMap = calendarBooking.getTitleMap();
 
-			if (description == null) {
-				description = calendarBooking.getDescription(locale);
-			}
+		updatedTitleMap.putAll(titleMap);
 
-			descriptionMap.put(locale, description);
-		}
+		Map<Locale, String> updatedDescriptionMap =
+			calendarBooking.getDescriptionMap();
 
-		for (Locale locale : calendarBooking.getTitleMap().keySet()) {
-			String title = titleMap.get(locale);
-
-			if (title == null) {
-				title = calendarBooking.getTitle(locale);
-			}
-
-			titleMap.put(locale, title);
-		}
+		updatedDescriptionMap.putAll(descriptionMap);
 
 		return addCalendarBooking(
 			userId, calendarId, childCalendarIds,
 			CalendarBookingConstants.PARENT_CALENDAR_BOOKING_ID_DEFAULT,
-			titleMap, descriptionMap, location, startTime, endTime, allDay,
-			recurrence, firstReminder, firstReminderType, secondReminder,
-			secondReminderType, serviceContext);
+			updatedTitleMap, updatedDescriptionMap, location, startTime,
+			endTime, allDay, recurrence, firstReminder, firstReminderType,
+			secondReminder, secondReminderType, serviceContext);
 	}
 
 	@Override
