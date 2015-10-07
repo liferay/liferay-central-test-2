@@ -43,12 +43,10 @@ public class DefaultAuthVerifierConfiguration {
 			BasicAuthHeaderAuthVerifierConfiguration.class.getName(), "enabled",
 			Boolean.TRUE, "urlsExcludes", "/api/liferay/*", "urlsIncludes",
 			"/api/*,/xmlrpc/*");
-
 		initAuthVerifierConfiguration(
 			PortalSessionAuthVerifierConfiguration.class.getName(), "enabled",
 			Boolean.TRUE, "urlsIncludes",
 			"/api/json/*,/api/jsonws/*,/c/portal/json_service/*");
-
 		initAuthVerifierConfiguration(
 			TunnelAuthVerifierConfiguration.class.getName(), "enabled",
 			Boolean.TRUE, "hostsAllowed", "127.0.0.1,SERVER_IP", "urlsIncludes",
