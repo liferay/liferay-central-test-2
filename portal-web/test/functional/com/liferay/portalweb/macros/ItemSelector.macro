@@ -50,8 +50,6 @@
 
 		<execute function="SikuliUploadCommonFile" locator1="OS#FILE_DIALOG_BOX_FILE_NAME_FIELD_PNG" value1="${uploadFileName}" />
 
-		<execute function="AssertTextEquals" locator1="ItemSelector#CAPTION" value1="${uploadFileName}" />
-
 		<execute function="AssertClick" locator1="Button#ADD" value1="ADD" />
 
 		<execute function="SelectFrameTop" value1="relative=top" />
