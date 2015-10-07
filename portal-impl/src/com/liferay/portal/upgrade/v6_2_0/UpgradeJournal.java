@@ -235,8 +235,8 @@ public class UpgradeJournal extends BaseUpgradePortletPreferences {
 			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
-				"select languageId from User_ where defaultUser = 1 and " +
-					"companyId = ?");
+				"select languageId from User_ where companyId = ? and " +
+					"defaultUser = 1");
 
 			ps.setLong(1, companyId);
 
