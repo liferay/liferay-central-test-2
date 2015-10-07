@@ -236,9 +236,10 @@ public class UpgradeJournal extends BaseUpgradePortletPreferences {
 
 			ps = con.prepareStatement(
 				"select languageId from User_ where companyId = ? and " +
-					"defaultUser = 1");
+					"defaultUser = ?");
 
 			ps.setLong(1, companyId);
+			ps.setBoolean(2, true);
 
 			rs = ps.executeQuery();
 
