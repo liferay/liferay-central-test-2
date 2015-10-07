@@ -63,8 +63,7 @@ public class SAPAccessControlPolicy extends BaseAccessControlPolicy {
 
 		List<String> serviceAccessPolicyNames = new ArrayList<>();
 
-		serviceAccessPolicyNames.addAll(
-			getActiveServiceAccessPolicyNames());
+		serviceAccessPolicyNames.addAll(getActiveServiceAccessPolicyNames());
 		serviceAccessPolicyNames.addAll(
 			getDefaultServiceAccessPolicyNames(
 				CompanyThreadLocal.getCompanyId()));
@@ -79,24 +78,6 @@ public class SAPAccessControlPolicy extends BaseAccessControlPolicy {
 
 		checkAccess(
 			allowedServiceSignatures, clazz.getName(), method.getName());
-	}
-
-	protected boolean isChecked() {
-		AccessControlContext accessControlContext =
-			AccessControlUtil.getAccessControlContext();
-
-		if (accessControlContext != null) {
-			Map<String, Object> settings = accessControlContext.getSettings();
-
-			int serviceDepth = (Integer)settings.get(
-				AccessControlContext.Settings.SERVICE_DEPTH.toString());
-
-			if (serviceDepth > 1) {
-				return true;
-			}
-		}
-
-		return false;
 	}
 
 	protected void checkAccess(
@@ -200,6 +181,24 @@ public class SAPAccessControlPolicy extends BaseAccessControlPolicy {
 		}
 
 		return systemServiceAccessPolicyNames;
+	}
+
+	protected boolean isChecked() {
+		AccessControlContext accessControlContext =
+			AccessControlUtil.getAccessControlContext();
+
+		if (accessControlContext != null) {
+			Map<String, Object> settings = accessControlContext.getSettings();
+
+			int serviceDepth = (Integer)settings.get(
+				AccessControlContext.Settings.SERVICE_DEPTH.toString());
+
+			if (serviceDepth > 1) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	protected Set<String> loadAllowedServiceSignatures(

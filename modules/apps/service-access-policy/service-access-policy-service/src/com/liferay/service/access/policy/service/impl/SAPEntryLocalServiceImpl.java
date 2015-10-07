@@ -127,9 +127,9 @@ public class SAPEntryLocalServiceImpl extends SAPEntryLocalServiceBaseImpl {
 
 			systemDefaultSAPEntry = addSAPEntry(
 				defaultUserId,
-				sapConfiguration.systemDefaultSAPEntryServiceSignatures(),
-				true, true, sapConfiguration.systemDefaultSAPEntryName(),
-				titleMap, new ServiceContext());
+				sapConfiguration.systemDefaultSAPEntryServiceSignatures(), true,
+				true, sapConfiguration.systemDefaultSAPEntryName(), titleMap,
+				new ServiceContext());
 
 			resourcePermissionLocalService.setResourcePermissions(
 				systemDefaultSAPEntry.getCompanyId(), SAPEntry.class.getName(),
