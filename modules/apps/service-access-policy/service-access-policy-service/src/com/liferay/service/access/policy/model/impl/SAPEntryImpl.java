@@ -51,15 +51,13 @@ public class SAPEntryImpl extends SAPEntryBaseImpl {
 					getCompanyId(), SAPConstants.SERVICE_NAME));
 
 		if (Validator.equals(
-				getName(),
-				sapConfiguration.systemDefaultSAPEntryName())) {
+				getName(), sapConfiguration.systemDefaultSAPEntryName())) {
 
 			return true;
 		}
 
 		if (Validator.equals(
-				getName(),
-				sapConfiguration.systemUserPasswordSAPEntryName())) {
+				getName(), sapConfiguration.systemUserPasswordSAPEntryName())) {
 
 			return true;
 		}
