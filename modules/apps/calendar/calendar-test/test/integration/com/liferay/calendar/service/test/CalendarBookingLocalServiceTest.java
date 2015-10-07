@@ -597,7 +597,9 @@ public class CalendarBookingLocalServiceTest {
 	}
 
 	@Test
-	public void testUpdateDescriptionCalendarBooking() throws PortalException {
+	public void testUpdateCalendarBookingPreservesDescriptionTranslations()
+		throws PortalException {
+
 		ServiceContext serviceContext = createServiceContext();
 
 		CalendarResource calendarResource =
@@ -608,57 +610,60 @@ public class CalendarBookingLocalServiceTest {
 
 		long startTime = System.currentTimeMillis();
 
-		Map<Locale, String> descriptionMap = new HashMap<>();
-		String description_en_US = RandomTestUtil.randomString();
-		String description_pt_BR = RandomTestUtil.randomString();
-		String description_en_UK = RandomTestUtil.randomString();
-		String description_de_DE = RandomTestUtil.randomString();
+		Map<Locale, String> oldDescriptionMap = new HashMap<>();
 
-		descriptionMap.put(LocaleUtil.US, description_en_US);
-		descriptionMap.put(LocaleUtil.BRAZIL, description_pt_BR);
-		descriptionMap.put(LocaleUtil.UK, description_en_UK);
-		descriptionMap.put(LocaleUtil.GERMANY, description_de_DE);
+		oldDescriptionMap.put(LocaleUtil.BRAZIL, RandomTestUtil.randomString());
+		oldDescriptionMap.put(
+			LocaleUtil.GERMANY, RandomTestUtil.randomString());
+		oldDescriptionMap.put(LocaleUtil.UK, RandomTestUtil.randomString());
+		oldDescriptionMap.put(LocaleUtil.US, RandomTestUtil.randomString());
 
 		CalendarBooking calendarBooking =
-				CalendarBookingLocalServiceUtil.addCalendarBooking(
-					_user.getUserId(), calendar.getCalendarId(), new long[0],
-					CalendarBookingConstants.PARENT_CALENDAR_BOOKING_ID_DEFAULT,
-					RandomTestUtil.randomLocaleStringMap(), descriptionMap,
-					RandomTestUtil.randomString(), startTime,
-					startTime + 36000000, false, null, 0, null, 0, null,
-					serviceContext);
-
-		descriptionMap = new HashMap<>();
-		descriptionMap.put(LocaleUtil.US, description_en_US);
-		descriptionMap.put(LocaleUtil.UK, description_en_UK);
-		descriptionMap.put(LocaleUtil.GERMANY, "");
-
-		calendarBooking = CalendarBookingLocalServiceUtil.updateCalendarBooking(
-				_user.getUserId(), calendarBooking.getCalendarBookingId(),
-				calendar.getCalendarId(), new long[0],
-				RandomTestUtil.randomLocaleStringMap(), descriptionMap,
+			CalendarBookingLocalServiceUtil.addCalendarBooking(
+				_user.getUserId(), calendar.getCalendarId(), new long[0],
+				CalendarBookingConstants.PARENT_CALENDAR_BOOKING_ID_DEFAULT,
+				RandomTestUtil.randomLocaleStringMap(), oldDescriptionMap,
 				RandomTestUtil.randomString(), startTime, startTime + 36000000,
 				false, null, 0, null, 0, null, serviceContext);
+
+		HashMap<Locale, String> newDescriptionMap = new HashMap<>();
+
+		newDescriptionMap.put(LocaleUtil.GERMANY, "");
+		newDescriptionMap.put(LocaleUtil.UK, RandomTestUtil.randomString());
+		newDescriptionMap.put(
+			LocaleUtil.US, oldDescriptionMap.get(LocaleUtil.US));
+
+		calendarBooking = CalendarBookingLocalServiceUtil.updateCalendarBooking(
+			_user.getUserId(), calendarBooking.getCalendarBookingId(),
+			calendar.getCalendarId(), new long[0],
+			RandomTestUtil.randomLocaleStringMap(), newDescriptionMap,
+			RandomTestUtil.randomString(), startTime, startTime + 36000000,
+			false, null, 0, null, 0, null, serviceContext);
 
 		calendarBooking = CalendarBookingLocalServiceUtil.fetchCalendarBooking(
 			calendarBooking.getCalendarBookingId());
 
 		Assert.assertEquals(
-				description_en_US,
-				calendarBooking.getDescription(LocaleUtil.US));
+			newDescriptionMap.get(LocaleUtil.US),
+			calendarBooking.getDescription(LocaleUtil.US));
 		Assert.assertEquals(
-				description_pt_BR,
-				calendarBooking.getDescription(LocaleUtil.BRAZIL));
+			newDescriptionMap.get(LocaleUtil.UK),
+			calendarBooking.getDescription(LocaleUtil.UK));
+
 		Assert.assertEquals(
-				description_en_UK,
-				calendarBooking.getDescription(LocaleUtil.UK));
-		Assert.assertNotEquals(
-				description_de_DE,
-				calendarBooking.getDescription(LocaleUtil.GERMANY));
+			oldDescriptionMap.get(LocaleUtil.BRAZIL),
+			calendarBooking.getDescription(LocaleUtil.BRAZIL));
+
+		Map<Locale, String> descriptionMap =
+			calendarBooking.getDescriptionMap();
+
+		Assert.assertFalse(descriptionMap.containsKey(LocaleUtil.GERMANY));
 	}
 
 	@Test
-	public void testUpdateTitleCalendarBooking() throws PortalException {
+	public void testUpdateCalendarBookingPreservesTitleTranslations()
+		throws PortalException {
+
 		ServiceContext serviceContext = createServiceContext();
 
 		CalendarResource calendarResource =
@@ -669,33 +674,30 @@ public class CalendarBookingLocalServiceTest {
 
 		long startTime = System.currentTimeMillis();
 
-		Map<Locale, String> titleMap = new HashMap<>();
-		String title_en_US = RandomTestUtil.randomString();
-		String title_pt_BR = RandomTestUtil.randomString();
-		String title_en_UK = RandomTestUtil.randomString();
-		String title_de_DE = RandomTestUtil.randomString();
+		Map<Locale, String> oldTitleMap = new HashMap<>();
 
-		titleMap.put(LocaleUtil.US, title_en_US);
-		titleMap.put(LocaleUtil.BRAZIL, title_pt_BR);
-		titleMap.put(LocaleUtil.UK, title_en_UK);
-		titleMap.put(LocaleUtil.GERMANY, title_de_DE);
+		oldTitleMap.put(LocaleUtil.BRAZIL, RandomTestUtil.randomString());
+		oldTitleMap.put(LocaleUtil.GERMANY, RandomTestUtil.randomString());
+		oldTitleMap.put(LocaleUtil.UK, RandomTestUtil.randomString());
+		oldTitleMap.put(LocaleUtil.US, RandomTestUtil.randomString());
 
 		CalendarBooking calendarBooking =
 			CalendarBookingLocalServiceUtil.addCalendarBooking(
 				_user.getUserId(), calendar.getCalendarId(), new long[0],
 				CalendarBookingConstants.PARENT_CALENDAR_BOOKING_ID_DEFAULT,
-				titleMap, RandomTestUtil.randomLocaleStringMap(),
+				oldTitleMap, RandomTestUtil.randomLocaleStringMap(),
 				RandomTestUtil.randomString(), startTime, startTime + 36000000,
 				false, null, 0, null, 0, null, serviceContext);
 
-		titleMap = new HashMap<>();
-		titleMap.put(LocaleUtil.US, title_en_US);
-		titleMap.put(LocaleUtil.UK, title_en_UK);
-		titleMap.put(LocaleUtil.GERMANY, "");
+		HashMap<Locale, String> newTitleMap = new HashMap<>();
+
+		newTitleMap.put(LocaleUtil.GERMANY, "");
+		newTitleMap.put(LocaleUtil.UK, RandomTestUtil.randomString());
+		newTitleMap.put(LocaleUtil.US, oldTitleMap.get(LocaleUtil.US));
 
 		calendarBooking = CalendarBookingLocalServiceUtil.updateCalendarBooking(
 			_user.getUserId(), calendarBooking.getCalendarBookingId(),
-			calendar.getCalendarId(), new long[0], titleMap,
+			calendar.getCalendarId(), new long[0], newTitleMap,
 			RandomTestUtil.randomLocaleStringMap(),
 			RandomTestUtil.randomString(), startTime, startTime + 36000000,
 			false, null, 0, null, 0, null, serviceContext);
@@ -704,14 +706,19 @@ public class CalendarBookingLocalServiceTest {
 			calendarBooking.getCalendarBookingId());
 
 		Assert.assertEquals(
-			title_en_US, calendarBooking.getTitle(LocaleUtil.US));
+			oldTitleMap.get(LocaleUtil.BRAZIL),
+			calendarBooking.getTitle(LocaleUtil.BRAZIL));
+
 		Assert.assertEquals(
-			title_pt_BR, calendarBooking.getTitle(LocaleUtil.BRAZIL));
+			newTitleMap.get(LocaleUtil.UK),
+			calendarBooking.getTitle(LocaleUtil.UK));
 		Assert.assertEquals(
-			title_en_UK, calendarBooking.getTitle(LocaleUtil.UK));
-		Assert.assertNotEquals(
-				title_de_DE,
-				calendarBooking.getDescription(LocaleUtil.GERMANY));
+			oldTitleMap.get(LocaleUtil.US),
+			calendarBooking.getTitle(LocaleUtil.US));
+
+		Map<Locale, String> titleMap = calendarBooking.getTitleMap();
+
+		Assert.assertFalse(titleMap.containsKey(LocaleUtil.GERMANY));
 	}
 
 	protected ServiceContext createServiceContext() {
