@@ -31,7 +31,6 @@ import com.liferay.dynamic.data.mapping.util.DDMDisplay;
 import com.liferay.dynamic.data.mapping.util.DDMDisplayRegistryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.PrefsParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -46,7 +45,6 @@ import com.liferay.portal.util.WebKeys;
 
 import java.util.Locale;
 
-import javax.portlet.PortletPreferences;
 import javax.portlet.RenderRequest;
 
 import javax.servlet.http.HttpServletRequest;
@@ -58,10 +56,6 @@ public class DDLDisplayContext {
 
 	public DDLDisplayContext(HttpServletRequest request) {
 		_ddlRequestHelper = new DDLRequestHelper(request);
-		_renderRequest = (RenderRequest)request.getAttribute(
-			JavaConstants.JAVAX_PORTLET_REQUEST);
-
-		_portletPreferences = _renderRequest.getPreferences();
 
 		if (Validator.isNotNull(getPortletResource())) {
 			return;
@@ -70,7 +64,9 @@ public class DDLDisplayContext {
 		DDLRecordSet recordSet = getRecordSet();
 
 		if ((recordSet == null) || !hasViewPermission()) {
-			_renderRequest.setAttribute(
+			RenderRequest renderRequest = _ddlRequestHelper.getRenderRequest();
+
+			renderRequest.setAttribute(
 				WebKeys.PORTLET_CONFIGURATOR_VISIBILITY, Boolean.TRUE);
 		}
 	}
@@ -85,7 +81,8 @@ public class DDLDisplayContext {
 	public String getDDLRecordSetDisplayStyle() {
 		if (_ddlRecordDisplayStyle == null) {
 			_ddlRecordDisplayStyle = DDLPortletUtil.getDDLRecordSetDisplayStyle(
-				_renderRequest, getDDLRecordSetDisplayViews());
+				_ddlRequestHelper.getRenderRequest(),
+				getDDLRecordSetDisplayViews());
 		}
 
 		return _ddlRecordDisplayStyle;
@@ -95,7 +92,8 @@ public class DDLDisplayContext {
 		if (_ddlRecordDisplayViews == null) {
 			_ddlRecordDisplayViews = StringUtil.split(
 				PrefsParamUtil.getString(
-					_portletPreferences, _renderRequest, "displayViews",
+					_ddlRequestHelper.getPortletPreferences(),
+					_ddlRequestHelper.getRenderRequest(), "displayViews",
 					StringUtil.merge(DDLWebConfigurationValues.DISPLAY_VIEWS)));
 		}
 
@@ -104,7 +102,8 @@ public class DDLDisplayContext {
 
 	public long getDisplayDDMTemplateId() {
 		return PrefsParamUtil.getLong(
-			_portletPreferences, _renderRequest, "displayDDMTemplateId");
+			_ddlRequestHelper.getPortletPreferences(),
+			_ddlRequestHelper.getRenderRequest(), "displayDDMTemplateId");
 	}
 
 	public String getEditDisplayDDMTemplateTitle() throws PortalException {
@@ -125,7 +124,7 @@ public class DDLDisplayContext {
 		DDLRecordSet recordSet = getRecordSet();
 
 		if (recordSet == null) {
-			return LanguageUtil.get(_renderRequest.getLocale(), "add-list");
+			return LanguageUtil.get(getLocale(), "add-list");
 		}
 
 		DDMDisplay ddmDisplay = getDDMDisplay();
@@ -136,7 +135,8 @@ public class DDLDisplayContext {
 
 	public long getFormDDMTemplateId() {
 		return PrefsParamUtil.getLong(
-			_portletPreferences, _renderRequest, "formDDMTemplateId");
+			_ddlRequestHelper.getPortletPreferences(),
+			_ddlRequestHelper.getRenderRequest(), "formDDMTemplateId");
 	}
 
 	public DDLRecordSet getRecordSet() {
@@ -144,7 +144,9 @@ public class DDLDisplayContext {
 			return _recordSet;
 		}
 
-		_recordSet = (DDLRecordSet)_renderRequest.getAttribute(
+		RenderRequest renderRequest = _ddlRequestHelper.getRenderRequest();
+
+		_recordSet = (DDLRecordSet)renderRequest.getAttribute(
 			DDLWebKeys.DYNAMIC_DATA_LISTS_RECORD_SET);
 
 		if (_recordSet != null) {
@@ -159,7 +161,8 @@ public class DDLDisplayContext {
 
 	public long getRecordSetId() {
 		return PrefsParamUtil.getLong(
-			_portletPreferences, _renderRequest, "recordSetId");
+			_ddlRequestHelper.getPortletPreferences(),
+			_ddlRequestHelper.getRenderRequest(), "recordSetId");
 	}
 
 	public boolean isAdminPortlet() {
@@ -174,7 +177,8 @@ public class DDLDisplayContext {
 
 	public boolean isEditable() {
 		return PrefsParamUtil.getBoolean(
-			_portletPreferences, _renderRequest, "editable", true);
+			_ddlRequestHelper.getPortletPreferences(),
+			_ddlRequestHelper.getRenderRequest(), "editable", true);
 	}
 
 	public boolean isShowAddDDMTemplateIcon() throws PortalException {
@@ -294,7 +298,8 @@ public class DDLDisplayContext {
 
 	public boolean isSpreadsheet() {
 		return PrefsParamUtil.getBoolean(
-			_portletPreferences, _renderRequest, "spreadsheet");
+			_ddlRequestHelper.getPortletPreferences(),
+			_ddlRequestHelper.getRenderRequest(), "spreadsheet");
 	}
 
 	protected DDMTemplate fetchDisplayDDMTemplate() {
@@ -388,9 +393,7 @@ public class DDLDisplayContext {
 	private Boolean _hasEditFormDDMTemplatePermission;
 	private Boolean _hasShowIconsActionPermission;
 	private Boolean _hasViewPermission;
-	private final PortletPreferences _portletPreferences;
 	private DDLRecordSet _recordSet;
-	private final RenderRequest _renderRequest;
 	private Boolean _showConfigurationIcon;
 
 }
