@@ -39,6 +39,9 @@
 	</command>
 
 	<command name="selectDMImage">
+		<var name="key_imageFileName" value="${imageFileName}" />
+		<var name="key_uploadFileName" value="${imageFileName}" />
+
 		<execute function="SelectFrame" locator1="ItemSelector#ITEM_SELECTOR_IFRAME" />
 
 		<execute function="AssertClick" locator1="ItemSelector#DOCUMENTS_AND_MEDIA" value1="Documents and Media" />
@@ -55,6 +58,8 @@
 	</command>
 
 	<command name="uploadBlogImage">
+		<var name="key_uploadFileName" value="${uploadFileName}" />
+
 		<execute function="SelectFrame" locator1="ItemSelector#ITEM_SELECTOR_IFRAME" />
 
 		<execute function="AssertClick" locator1="ItemSelector#UPLOAD_IMAGE" value1="Upload Image" />
@@ -90,7 +95,7 @@
 
 	<command name="viewItemDetail">
 		<var name="key_fileDetail" value="${fileDetail}" />
-		<var name="key_uploadFileName" value="${uploadFileName}" />
+		<var name="key_imageFileName" value="${uploadFileName}" />
 
 		<execute function="SelectFrame" locator1="ItemSelector#ITEM_SELECTOR_IFRAME" />
 

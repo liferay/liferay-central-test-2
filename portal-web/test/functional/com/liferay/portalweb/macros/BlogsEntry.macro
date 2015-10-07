@@ -1483,6 +1483,7 @@
 		<var name="key_entryContent" value="${entryContent}" />
 		<var name="key_entrySubtitle" value="${entrySubtitle}" />
 		<var name="key_entryTitle" value="${entryTitle}" />
+		<var name="key_uploadFileName" value="${uploadFileName}" />
 
 		<execute function="Pause" locator1="3000" />
 
