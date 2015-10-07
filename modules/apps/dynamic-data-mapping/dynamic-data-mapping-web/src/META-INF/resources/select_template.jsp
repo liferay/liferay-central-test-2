@@ -73,7 +73,6 @@ SearchContainer templateSearch = new TemplateSearch(renderRequest, portletURL, W
 		<liferay-ui:search-container
 			searchContainer="<%= templateSearch %>"
 		>
-
 			<liferay-ui:search-container-results>
 				<%@ include file="/template_search_results.jspf" %>
 			</liferay-ui:search-container-results>
