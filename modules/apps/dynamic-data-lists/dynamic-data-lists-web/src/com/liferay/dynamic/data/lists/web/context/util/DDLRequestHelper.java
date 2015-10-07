@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.dynamic.data.lists.web.util;
+package com.liferay.dynamic.data.lists.web.context.util;
 
 import com.liferay.portal.kernel.display.context.util.BaseRequestHelper;
 import com.liferay.portal.kernel.util.JavaConstants;
