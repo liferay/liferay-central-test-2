@@ -104,21 +104,6 @@
 			<var name="pageName" value="Test Page2" />
 		</execute>
 
-		<execute macro="BlogsNavigator#gotoEntryPG">
-			<var name="entryContent" value="Blogs Entry1 Content" />
-			<var name="entryTitle" value="Blogs Entry1 Title" />
-		</execute>
-
-		<execute macro="BlogsEntry#viewEntry">
-			<var name="entryContent" value="Blogs Entry1 Content" />
-			<var name="entryTitle" value="Blogs Entry1 Title" />
-		</execute>
-
-		<execute macro="Page#gotoPG">
-			<var name="nodePort" value="9080" />
-			<var name="pageName" value="Test Page2" />
-		</execute>
-
 		<execute macro="Blogs#addEntry">
 			<var name="entryContent" value="Blogs Entry2 Content" />
 			<var name="entryTitle" value="Blogs Entry2 Title" />
