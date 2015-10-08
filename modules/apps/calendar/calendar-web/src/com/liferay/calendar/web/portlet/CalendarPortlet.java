@@ -69,6 +69,7 @@ import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileUtil;
@@ -934,7 +935,7 @@ public class CalendarPortlet extends MVCPortlet {
 
 		List<CalendarBooking> calendarBookings = new ArrayList<>();
 
-		if (calendarIds.length > 0) {
+		if (!ArrayUtil.isEmpty(calendarIds)) {
 			calendarBookings = CalendarBookingServiceUtil.search(
 				themeDisplay.getCompanyId(), new long[0], calendarIds,
 				new long[0], -1, null, startTimeJCalendar.getTimeInMillis(),
