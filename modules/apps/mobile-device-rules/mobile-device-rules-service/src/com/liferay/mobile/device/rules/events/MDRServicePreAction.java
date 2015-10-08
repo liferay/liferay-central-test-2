@@ -47,7 +47,7 @@ import org.osgi.service.component.annotations.Component;
 	property = {"key=servlet.service.events.pre"},
 	service = LifecycleAction.class
 )
-public class MobileDeviceRulesServicePreAction extends Action {
+public class MDRServicePreAction extends Action {
 
 	@Override
 	public void run(HttpServletRequest request, HttpServletResponse response) {
@@ -134,6 +134,6 @@ public class MobileDeviceRulesServicePreAction extends Action {
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		MobileDeviceRulesServicePreAction.class);
+		MDRServicePreAction.class);
 
 }
