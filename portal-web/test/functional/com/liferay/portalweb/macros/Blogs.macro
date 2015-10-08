@@ -23,26 +23,6 @@
 		<execute macro="BlogsEntry#autoSaveDraft" />
 	</command>
 
-	<command name="addDraftWithUploadedCoverImage">
-		<execute macro="BlogsNavigator#gotoAddEntry" />
-
-		<execute macro="BlogsEntry#addEntryContent">
-			<var name="entryContent" value="${entryContent}" />
-			<var name="entrySubtitle" value="${entrySubtitle}" />
-			<var name="entryTitle" value="${entryTitle}" />
-		</execute>
-
-		<execute macro="BlogsEntry#addCoverImage" />
-
-		<execute macro="ItemSelector#uploadBlogImage">
-			<var name="uploadFileName" value="${uploadFileName}" />
-		</execute>
-
-		<execute function="Pause" locator1="3000" />
-
-		<execute macro="BlogsEntry#saveAsDraft" />
-	</command>
-
 	<command name="addEntry">
 		<execute macro="BlogsNavigator#gotoAddEntry" />
 
@@ -141,29 +121,12 @@
 
 		<execute macro="BlogsEntry#addCoverImage" />
 
-		<execute macro="ItemSelector#uploadBlogImage">
+		<execute macro="ItemSelector#uploadFile">
+			<var name="navTab" value="${navTab}" />
 			<var name="uploadFileName" value="${uploadFileName}" />
 		</execute>
 
-		<execute macro="BlogsEntry#publish" />
-	</command>
-
-	<command name="addEntryWithUploadedDMCoverImage">
-		<execute macro="BlogsNavigator#gotoAddEntry" />
-
-		<execute macro="BlogsEntry#addEntryContent">
-			<var name="entryContent" value="${entryContent}" />
-			<var name="entrySubtitle" value="${entrySubtitle}" />
-			<var name="entryTitle" value="${entryTitle}" />
-		</execute>
-
-		<execute macro="BlogsEntry#addCoverImage" />
-
-		<execute macro="ItemSelector#uploadDMImage">
-			<var name="uploadFileName" value="${uploadFileName}" />
-		</execute>
-
-		<execute macro="BlogsEntry#publish" />
+		<execute function="Pause" locator1="3000" />
 	</command>
 
 	<command name="addScheduled">
