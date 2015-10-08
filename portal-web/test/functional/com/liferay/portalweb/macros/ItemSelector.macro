@@ -4,7 +4,7 @@
 
 		<execute function="SelectFrame" locator1="ItemSelector#ITEM_SELECTOR_IFRAME" />
 
-		<execute function="AssertClick" locator1="ItemSelector#URL" value1="URL" />
+		<execute function="AssertClick" locator1="ItemSelector#NAVIGATION_URL" value1="URL" />
 
 		<execute function="AssertElementPresent" locator1="ItemSelector#URL_LABEL" />
 
@@ -27,7 +27,7 @@
 
 		<execute function="SelectFrame" locator1="ItemSelector#ITEM_SELECTOR_IFRAME" />
 
-		<execute function="AssertClick" locator1="ItemSelector#BLOG_IMAGES" value1="Blog Images" />
+		<execute function="AssertClick" locator1="ItemSelector#NAVIGATION_BLOG_IMAGES" value1="Blog Images" />
 
 		<execute function="AssertClick" locator1="ItemSelector#SELECT_FILE_IMAGE_PREVIEW" value1="${imageFileName}" />
 
@@ -44,7 +44,7 @@
 
 		<execute function="SelectFrame" locator1="ItemSelector#ITEM_SELECTOR_IFRAME" />
 
-		<execute function="AssertClick" locator1="ItemSelector#DOCUMENTS_AND_MEDIA" value1="Documents and Media" />
+		<execute function="AssertClick" locator1="ItemSelector#NAVIGATION_DOCUMENTS_AND_MEDIA" value1="Documents and Media" />
 
 		<execute function="AssertClick" locator1="ItemSelector#SELECT_FILE_IMAGE_PREVIEW" value1="${imageFileName}" />
 
@@ -60,7 +60,7 @@
 
 		<execute function="SelectFrame" locator1="ItemSelector#ITEM_SELECTOR_IFRAME" />
 
-		<execute function="AssertClick" locator1="ItemSelector#UPLOAD_IMAGE" value1="Upload Image" />
+		<execute function="AssertClick" locator1="ItemSelector#NAVIGATION_SPECIFIC_TAB" value1="${navTab}" />
 
 		<execute function="AssertClick" locator1="ItemSelector#SELECT_FILE_UPLOAD_IMAGE" value1="Select File" />
 
