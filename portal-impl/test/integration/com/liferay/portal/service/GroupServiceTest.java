@@ -198,27 +198,23 @@ public class GroupServiceTest {
 
 		User user = UserTestUtil.addOrganizationOwnerUser(organization);
 
-		long userId = user.getUserId();
+		UserLocalServiceUtil.addGroupUser(
+			organizationSite.getGroupId(), user.getUserId());
+		UserLocalServiceUtil.addOrganizationUsers(
+			organization.getOrganizationId(), new long[] {user.getUserId()});
+
 		Role siteRole = RoleTestUtil.addRole(2);
 
-		long[] userIds = new long[] {userId};
-		long[] roleIds = new long[] {siteRole.getRoleId()};
-
-		UserLocalServiceUtil.addOrganizationUsers(
-			organization.getOrganizationId(), userIds);
-
-		UserLocalServiceUtil.addGroupUser(
-			organizationSite.getGroupId(), userId);
-
 		UserGroupRoleLocalServiceUtil.addUserGroupRoles(
-			userId, organizationSite.getGroupId(), roleIds);
+			user.getUserId(), organizationSite.getGroupId(),
+			new long[] {siteRole.getRoleId()});
 
 		GroupLocalServiceUtil.deleteGroup(organizationSite);
 
 		Assert.assertEquals(
 			1,
 			UserGroupRoleLocalServiceUtil.getUserGroupRolesCount(
-				userId, organizationSite.getGroupId()));
+				user.getUserId(), organizationSite.getGroupId()));
 	}
 
 	@Test
