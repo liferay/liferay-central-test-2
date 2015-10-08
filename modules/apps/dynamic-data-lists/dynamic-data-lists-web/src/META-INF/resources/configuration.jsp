@@ -47,7 +47,6 @@ DDLRecordSet selRecordSet = ddlDisplayContext.getRecordSet();
 			iteratorURL="<%= configurationRenderURL %>"
 			total="<%= DDLRecordSetServiceUtil.searchCount(company.getCompanyId(), scopeGroupId, keywords, DDLRecordSetConstants.SCOPE_DYNAMIC_DATA_LISTS) %>"
 		>
-
 			<aui:nav-bar cssClass="collapse-basic-search" markupView="lexicon">
 				<aui:nav-bar-search>
 					<liferay-ui:input-search autoFocus="<%= true %>" markupView="lexicon" placeholder='<%= LanguageUtil.get(request, "keywords") %>' />
