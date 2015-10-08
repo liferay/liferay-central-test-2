@@ -39,6 +39,7 @@ public class SynchronousMessageListener implements MessageListener {
 		_timeout = timeout;
 		_entityCache = entityCache;
 		_finderCache = finderCache;
+
 		_responseId = _message.getResponseId();
 	}
 

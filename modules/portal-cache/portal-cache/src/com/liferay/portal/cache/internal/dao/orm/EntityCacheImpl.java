@@ -304,7 +304,8 @@ public class EntityCacheImpl
 		result = ((BaseModel<?>)result).toCacheModel();
 
 		if (_localCacheAvailable) {
-			Map<Serializable, Serializable> localCache = _localCache.get();
+			Map<Serializable, Serializable> localCache =
+				_localCache.get();
 
 			Serializable localCacheKey = _encodeLocalCacheKey(
 				clazz, primaryKey);
@@ -346,7 +347,8 @@ public class EntityCacheImpl
 		}
 
 		if (_localCacheAvailable) {
-			Map<Serializable, Serializable> localCache = _localCache.get();
+			Map<Serializable, Serializable> localCache =
+				_localCache.get();
 
 			Serializable localCacheKey = _encodeLocalCacheKey(
 				clazz, primaryKey);
@@ -365,10 +367,10 @@ public class EntityCacheImpl
 	@Activate
 	@Modified
 	protected void activate() {
-		_valueObjectEntityCacheEnabled = GetterUtil.getBoolean(
-			_props.get(PropsKeys.VALUE_OBJECT_ENTITY_CACHE_ENABLED));
 		_valueObjectEntityBlockingCacheEnabled = GetterUtil.getBoolean(
 			_props.get(PropsKeys.VALUE_OBJECT_ENTITY_BLOCKING_CACHE));
+		_valueObjectEntityCacheEnabled = GetterUtil.getBoolean(
+			_props.get(PropsKeys.VALUE_OBJECT_ENTITY_CACHE_ENABLED));
 		_valueObjectMVCCEntityCacheEnabled = GetterUtil.getBoolean(
 			_props.get(PropsKeys.VALUE_OBJECT_MVCC_ENTITY_CACHE_ENABLED));
 

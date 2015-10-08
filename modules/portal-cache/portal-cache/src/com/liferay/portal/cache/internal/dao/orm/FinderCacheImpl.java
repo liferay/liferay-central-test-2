@@ -184,7 +184,8 @@ public class FinderCacheImpl
 		Serializable primaryKey = _resultToPrimaryKey((Serializable)result);
 
 		if (_localCacheAvailable) {
-			Map<Serializable, Serializable> localCache = _localCache.get();
+			Map<Serializable, Serializable> localCache =
+				_localCache.get();
 
 			Serializable localCacheKey = finderPath.encodeLocalCacheKey(args);
 
@@ -224,7 +225,8 @@ public class FinderCacheImpl
 		}
 
 		if (_localCacheAvailable) {
-			Map<Serializable, Serializable> localCache = _localCache.get();
+			Map<Serializable, Serializable> localCache =
+				_localCache.get();
 
 			Serializable localCacheKey = finderPath.encodeLocalCacheKey(args);
 
@@ -242,10 +244,10 @@ public class FinderCacheImpl
 	@Activate
 	@Modified
 	protected void activate() {
-		_valueObjectFinderCacheEnabled = GetterUtil.getBoolean(
-			_props.get(PropsKeys.VALUE_OBJECT_FINDER_CACHE_ENABLED));
 		_valueObjectEntityBlockingCacheEnabled = GetterUtil.getBoolean(
 			_props.get(PropsKeys.VALUE_OBJECT_ENTITY_BLOCKING_CACHE));
+		_valueObjectFinderCacheEnabled = GetterUtil.getBoolean(
+			_props.get(PropsKeys.VALUE_OBJECT_FINDER_CACHE_ENABLED));
 
 		int localCacheMaxSize = GetterUtil.getInteger(
 			_props.get(
