@@ -60,12 +60,12 @@
 			<var name="pageName" value="Test Page1" />
 		</execute>
 
-		<execute macro="BlogsEntry#gotoPG">
+		<execute macro="BlogsNavigator#gotoEntryPG">
 			<var name="entryContent" value="Blogs Entry1 Content" />
 			<var name="entryTitle" value="Blogs Entry1 Title" />
 		</execute>
 
-		<execute macro="BlogsEntry#viewPG">
+		<execute macro="BlogsEntry#viewEntry">
 			<var name="entryContent" value="Blogs Entry1 Content" />
 			<var name="entryTitle" value="Blogs Entry1 Title" />
 		</execute>
@@ -89,12 +89,12 @@
 			<var name="pageName" value="Test Page2" />
 		</execute>
 
-		<execute macro="BlogsEntry#gotoPG">
+		<execute macro="BlogsNavigator#gotoEntryPG">
 			<var name="entryContent" value="Blogs Entry1 Content" />
 			<var name="entryTitle" value="Blogs Entry1 Title" />
 		</execute>
 
-		<execute macro="BlogsEntry#viewPG">
+		<execute macro="BlogsEntry#viewEntry">
 			<var name="entryContent" value="Blogs Entry1 Content" />
 			<var name="entryTitle" value="Blogs Entry1 Title" />
 		</execute>
@@ -104,12 +104,12 @@
 			<var name="pageName" value="Test Page2" />
 		</execute>
 
-		<execute macro="BlogsEntry#gotoPG">
+		<execute macro="BlogsNavigator#gotoEntryPG">
 			<var name="entryContent" value="Blogs Entry1 Content" />
 			<var name="entryTitle" value="Blogs Entry1 Title" />
 		</execute>
 
-		<execute macro="BlogsEntry#viewPG">
+		<execute macro="BlogsEntry#viewEntry">
 			<var name="entryContent" value="Blogs Entry1 Content" />
 			<var name="entryTitle" value="Blogs Entry1 Title" />
 		</execute>
@@ -162,12 +162,12 @@
 			<var name="entryTitle" value="Blogs Entry1 Title" />
 		</execute>
 
-		<execute macro="BlogsEntry#gotoPG">
+		<execute macro="BlogsNavigator#gotoEntryPG">
 			<var name="entryContent" value="Blogs Entry2 Content" />
 			<var name="entryTitle" value="Blogs Entry2 Title" />
 		</execute>
 
-		<execute macro="BlogsEntry#viewPG">
+		<execute macro="BlogsEntry#viewEntry">
 			<var name="entryContent" value="Blogs Entry2 Content" />
 			<var name="entryTitle" value="Blogs Entry2 Title" />
 		</execute>
