@@ -106,6 +106,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -933,7 +934,8 @@ public class CalendarPortlet extends MVCPortlet {
 		int[] statuses = ParamUtil.getIntegerValues(
 			resourceRequest, "statuses");
 
-		List<CalendarBooking> calendarBookings = new ArrayList<>();
+		List<CalendarBooking> calendarBookings =
+			Collections.<CalendarBooking>emptyList();
 
 		if (!ArrayUtil.isEmpty(calendarIds)) {
 			calendarBookings = CalendarBookingServiceUtil.search(
