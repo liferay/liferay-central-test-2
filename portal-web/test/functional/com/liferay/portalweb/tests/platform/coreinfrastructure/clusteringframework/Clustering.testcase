@@ -194,12 +194,12 @@
 
 		<execute macro="DMDocument#addPG">
 			<var name="dmDocumentFile" value="Document_1.doc" />
-			<var name="dmDocumentTitle" value="${dmDocumentFile}" />
+			<var name="dmDocumentTitle" value="DM Document Title" />
 		</execute>
 
 		<execute macro="DMDocument#viewAllPG">
 			<var name="dmDocumentFile" value="Document_1.doc" />
-			<var name="dmDocumentTitle" value="${dmDocumentFile}" />
+			<var name="dmDocumentTitle" value="DM Document Title" />
 		</execute>
 
 		<execute macro="User#logoutPG">
@@ -224,7 +224,7 @@
 
 		<execute macro="DMDocument#viewAllPG">
 			<var name="dmDocumentFile" value="Document_1.doc" />
-			<var name="dmDocumentTitle" value="${dmDocumentFile}" />
+			<var name="dmDocumentTitle" value="DM Document Title" />
 		</execute>
 
 		<execute macro="User#logoutPG">
