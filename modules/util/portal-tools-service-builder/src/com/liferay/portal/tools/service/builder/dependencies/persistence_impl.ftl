@@ -1713,6 +1713,17 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 		</#list>
 	}
 
+	<#if osgiModule>
+		@ServiceReference(type = EntityCache.class)
+		protected EntityCache entityCache;
+
+		@ServiceReference(type = FinderCache.class)
+		protected FinderCache finderCache;
+	<#else>
+		protected EntityCache entityCache = EntityCacheUtil.getEntityCache();
+		protected FinderCache finderCache = FinderCacheUtil.getFinderCache();
+	</#if>
+
 	<#list entity.columnList as column>
 		<#if column.isCollection() && column.isMappingManyToMany()>
 			<#assign tempEntity = serviceBuilder.getEntity(column.getEJBName())>
@@ -1855,17 +1866,6 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 			}
 
 		};
-	</#if>
-
-	<#if osgiModule>
-		@ServiceReference(type = EntityCache.class)
-		protected EntityCache entityCache;
-
-		@ServiceReference(type = FinderCache.class)
-		protected FinderCache finderCache;
-	<#else>
-		protected EntityCache entityCache = EntityCacheUtil.getEntityCache();
-		protected FinderCache finderCache = FinderCacheUtil.getFinderCache();
 	</#if>
 
 }
