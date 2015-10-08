@@ -203,7 +203,7 @@ public class GroupServiceTest {
 		UserLocalServiceUtil.addOrganizationUsers(
 			organization.getOrganizationId(), new long[] {user.getUserId()});
 
-		Role siteRole = RoleTestUtil.addRole(2);
+		Role siteRole = RoleTestUtil.addRole(RoleConstants.TYPE_SITE);
 
 		UserGroupRoleLocalServiceUtil.addUserGroupRoles(
 			user.getUserId(), organizationSite.getGroupId(),
