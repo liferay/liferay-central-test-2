@@ -603,12 +603,10 @@ public class CalendarBookingLocalServiceTest {
 		ServiceContext serviceContext = createServiceContext();
 
 		CalendarResource calendarResource =
-				CalendarResourceUtil.getUserCalendarResource(
-					_user.getUserId(), serviceContext);
+			CalendarResourceUtil.getUserCalendarResource(
+				_user.getUserId(), serviceContext);
 
 		Calendar calendar = calendarResource.getDefaultCalendar();
-
-		long startTime = System.currentTimeMillis();
 
 		Map<Locale, String> oldDescriptionMap = new HashMap<>();
 
@@ -617,6 +615,8 @@ public class CalendarBookingLocalServiceTest {
 			LocaleUtil.GERMANY, RandomTestUtil.randomString());
 		oldDescriptionMap.put(LocaleUtil.UK, RandomTestUtil.randomString());
 		oldDescriptionMap.put(LocaleUtil.US, RandomTestUtil.randomString());
+
+		long startTime = System.currentTimeMillis();
 
 		CalendarBooking calendarBooking =
 			CalendarBookingLocalServiceUtil.addCalendarBooking(
@@ -671,14 +671,14 @@ public class CalendarBookingLocalServiceTest {
 
 		Calendar calendar = calendarResource.getDefaultCalendar();
 
-		long startTime = System.currentTimeMillis();
-
 		Map<Locale, String> oldTitleMap = new HashMap<>();
 
 		oldTitleMap.put(LocaleUtil.BRAZIL, RandomTestUtil.randomString());
 		oldTitleMap.put(LocaleUtil.GERMANY, RandomTestUtil.randomString());
 		oldTitleMap.put(LocaleUtil.UK, RandomTestUtil.randomString());
 		oldTitleMap.put(LocaleUtil.US, RandomTestUtil.randomString());
+
+		long startTime = System.currentTimeMillis();
 
 		CalendarBooking calendarBooking =
 			CalendarBookingLocalServiceUtil.addCalendarBooking(
