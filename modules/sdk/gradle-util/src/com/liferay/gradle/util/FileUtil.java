@@ -347,7 +347,7 @@ public class FileUtil {
 			char driveLetter = getDriveLetter(file);
 
 			if (curDriveLetter != driveLetter) {
-				File jarFile = _createClasspathJar(
+				File jarFile = _createClasspathJarFile(
 					project, curDriveFiles, driveJarDirs.get(curDriveLetter));
 
 				if (jarFile != null) {
@@ -366,7 +366,7 @@ public class FileUtil {
 			}
 		}
 
-		File jarFile = _createClasspathJar(
+		File jarFile = _createClasspathJarFile(
 			project, curDriveFiles, driveJarDirs.get(curDriveLetter));
 
 		if (jarFile != null) {
@@ -404,7 +404,7 @@ public class FileUtil {
 		}
 	}
 
-	private static File _createClasspathJar(
+	private static File _createClasspathJarFile(
 		Project project, List<File> files, File jarDir) {
 
 		if (files.isEmpty()) {
