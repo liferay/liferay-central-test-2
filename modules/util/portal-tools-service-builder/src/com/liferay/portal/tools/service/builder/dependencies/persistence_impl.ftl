@@ -38,17 +38,10 @@ import com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.RowMapper;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
-
-<#if osgiModule>
-	import com.liferay.portal.kernel.dao.orm.EntityCache;
-	import com.liferay.portal.kernel.dao.orm.FinderCache;
-<#else>
-	import com.liferay.portal.kernel.dao.orm.EntityCache;
-	import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
-	import com.liferay.portal.kernel.dao.orm.FinderCache;
-	import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
-</#if>
-
+import com.liferay.portal.kernel.dao.orm.EntityCache;
+import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderCache;
+import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
@@ -86,10 +79,7 @@ import com.liferay.portal.service.persistence.impl.NestedSetsTreeManager;
 import com.liferay.portal.service.persistence.impl.PersistenceNestedSetsTreeManager;
 import com.liferay.portal.service.persistence.impl.TableMapper;
 import com.liferay.portal.service.persistence.impl.TableMapperFactory;
-
-<#if osgiModule>
-	import com.liferay.portal.spring.extender.service.ServiceReference;
-</#if>
+import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.io.Serializable;
 
