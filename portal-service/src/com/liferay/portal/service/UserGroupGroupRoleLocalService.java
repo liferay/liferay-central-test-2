@@ -101,8 +101,7 @@ public interface UserGroupGroupRoleLocalService extends BaseLocalService,
 		com.liferay.portal.service.persistence.UserGroupGroupRolePK userGroupGroupRolePK)
 		throws PortalException;
 
-	public void deleteUserGroupGroupRoles(long groupId, int roleType)
-		throws PortalException;
+	public void deleteUserGroupGroupRoles(long groupId, int roleType);
 
 	public void deleteUserGroupGroupRoles(long userGroupId, long groupId,
 		long[] roleIds);
