@@ -92,9 +92,7 @@ public class UserGroupRoleLocalServiceImpl
 	}
 
 	@Override
-	public void deleteUserGroupRoles(long groupId, int roleType)
-		throws PortalException {
-
+	public void deleteUserGroupRoles(long groupId, int roleType) {
 		List<UserGroupRole> userGroupRoles =
 			userGroupRoleFinder.findByGroupRoleType(groupId, roleType);
 
