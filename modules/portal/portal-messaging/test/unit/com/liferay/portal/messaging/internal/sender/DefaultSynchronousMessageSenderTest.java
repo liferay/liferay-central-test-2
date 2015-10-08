@@ -88,12 +88,12 @@ public class DefaultSynchronousMessageSenderTest {
 		_defaultSynchronousMessageSender =
 			new DefaultSynchronousMessageSender();
 
-		_defaultSynchronousMessageSender.setMessageBus(_messageBus);
-		_defaultSynchronousMessageSender.setTimeout(10000);
 		_defaultSynchronousMessageSender.setEntityCache(
 			Mockito.mock(EntityCache.class));
 		_defaultSynchronousMessageSender.setFinderCache(
 			Mockito.mock(FinderCache.class));
+		_defaultSynchronousMessageSender.setMessageBus(_messageBus);
+		_defaultSynchronousMessageSender.setTimeout(10000);
 
 		_portalExecutorManager = Mockito.mock(PortalExecutorManager.class);
 

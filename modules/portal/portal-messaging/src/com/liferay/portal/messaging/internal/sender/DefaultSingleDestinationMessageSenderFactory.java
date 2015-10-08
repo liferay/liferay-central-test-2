@@ -121,10 +121,10 @@ public class DefaultSingleDestinationMessageSenderFactory
 		DefaultSynchronousMessageSender defaultSynchronousMessageSender =
 			new DefaultSynchronousMessageSender();
 
-		defaultSynchronousMessageSender.setMessageBus(_messageBus);
-		defaultSynchronousMessageSender.setTimeout(timeout);
 		defaultSynchronousMessageSender.setEntityCache(_entityCache);
 		defaultSynchronousMessageSender.setFinderCache(_finderCache);
+		defaultSynchronousMessageSender.setMessageBus(_messageBus);
+		defaultSynchronousMessageSender.setTimeout(timeout);
 
 		_synchronousMessageSenders.put(
 			SynchronousMessageSender.Mode.DEFAULT,

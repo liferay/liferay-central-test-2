@@ -100,7 +100,6 @@ public class TransactionalPortalCacheTest {
 					}
 
 				}));
-
 		registry.registerService(
 			FinderCache.class,
 			(FinderCache)ProxyUtil.newProxyInstance(
