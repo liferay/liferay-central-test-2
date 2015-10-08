@@ -435,6 +435,10 @@ AUI.add(
 
 					var name = LiferayFormBuilderUtil.normalizeKey(instance.get('label'));
 
+					var random = Math.random().toString();
+
+					name = name + random.substring(random.length-4);
+
 					while (UNIQUE_FIELD_NAMES_MAP.has(name)) {
 						name = A.FormBuilderField.buildFieldName(name);
 					}
