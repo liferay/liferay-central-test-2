@@ -158,8 +158,8 @@ public class CalendarBookingServiceImpl extends CalendarBookingServiceBaseImpl {
 			calendarBookingPersistence.findByPrimaryKey(calendarBookingId);
 
 		CalendarPermission.check(
-				getPermissionChecker(), calendarBooking.getCalendarId(),
-				CalendarActionKeys.MANAGE_BOOKINGS);
+			getPermissionChecker(), calendarBooking.getCalendarId(),
+			CalendarActionKeys.MANAGE_BOOKINGS);
 
 		calendarBookingLocalService.deleteCalendarBookingInstance(
 			calendarBookingId, startTime, allFollowing);
