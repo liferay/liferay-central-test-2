@@ -96,9 +96,9 @@ public class SynchronousDestinationTestCallback
 
 		if (!hasSyncedMethod) {
 			throw new AssertionError(
-				testClass + " uses " +
-					SynchronousDestinationTestRule.class +
-						" without any usage of " + Sync.class);
+				testClass.getName() + " uses " +
+					SynchronousDestinationTestRule.class.getName() +
+						" without any usage of " + Sync.class.getName());
 		}
 
 		return super.doBeforeClass(description);
