@@ -304,8 +304,7 @@ public class EntityCacheImpl
 		result = ((BaseModel<?>)result).toCacheModel();
 
 		if (_localCacheAvailable) {
-			Map<Serializable, Serializable> localCache =
-				_localCache.get();
+			Map<Serializable, Serializable> localCache = _localCache.get();
 
 			Serializable localCacheKey = _encodeLocalCacheKey(
 				clazz, primaryKey);
@@ -347,8 +346,7 @@ public class EntityCacheImpl
 		}
 
 		if (_localCacheAvailable) {
-			Map<Serializable, Serializable> localCache =
-				_localCache.get();
+			Map<Serializable, Serializable> localCache = _localCache.get();
 
 			Serializable localCacheKey = _encodeLocalCacheKey(
 				clazz, primaryKey);

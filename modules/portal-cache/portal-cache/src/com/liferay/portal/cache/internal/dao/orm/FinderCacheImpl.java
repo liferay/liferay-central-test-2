@@ -184,8 +184,7 @@ public class FinderCacheImpl
 		Serializable primaryKey = _resultToPrimaryKey((Serializable)result);
 
 		if (_localCacheAvailable) {
-			Map<Serializable, Serializable> localCache =
-				_localCache.get();
+			Map<Serializable, Serializable> localCache = _localCache.get();
 
 			Serializable localCacheKey = finderPath.encodeLocalCacheKey(args);
 
@@ -225,8 +224,7 @@ public class FinderCacheImpl
 		}
 
 		if (_localCacheAvailable) {
-			Map<Serializable, Serializable> localCache =
-				_localCache.get();
+			Map<Serializable, Serializable> localCache = _localCache.get();
 
 			Serializable localCacheKey = finderPath.encodeLocalCacheKey(args);
 
