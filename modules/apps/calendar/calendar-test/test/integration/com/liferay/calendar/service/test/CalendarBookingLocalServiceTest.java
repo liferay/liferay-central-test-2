@@ -626,7 +626,7 @@ public class CalendarBookingLocalServiceTest {
 				RandomTestUtil.randomString(), startTime, startTime + 36000000,
 				false, null, 0, null, 0, null, serviceContext);
 
-		HashMap<Locale, String> newDescriptionMap = new HashMap<>();
+		Map<Locale, String> newDescriptionMap = new HashMap<>();
 
 		newDescriptionMap.put(LocaleUtil.GERMANY, "");
 		newDescriptionMap.put(LocaleUtil.UK, RandomTestUtil.randomString());
@@ -644,15 +644,14 @@ public class CalendarBookingLocalServiceTest {
 			calendarBooking.getCalendarBookingId());
 
 		Assert.assertEquals(
-			newDescriptionMap.get(LocaleUtil.US),
-			calendarBooking.getDescription(LocaleUtil.US));
+			oldDescriptionMap.get(LocaleUtil.BRAZIL),
+			calendarBooking.getDescription(LocaleUtil.BRAZIL));
 		Assert.assertEquals(
 			newDescriptionMap.get(LocaleUtil.UK),
 			calendarBooking.getDescription(LocaleUtil.UK));
-
 		Assert.assertEquals(
-			oldDescriptionMap.get(LocaleUtil.BRAZIL),
-			calendarBooking.getDescription(LocaleUtil.BRAZIL));
+			newDescriptionMap.get(LocaleUtil.US),
+			calendarBooking.getDescription(LocaleUtil.US));
 
 		Map<Locale, String> descriptionMap =
 			calendarBooking.getDescriptionMap();
@@ -689,7 +688,7 @@ public class CalendarBookingLocalServiceTest {
 				RandomTestUtil.randomString(), startTime, startTime + 36000000,
 				false, null, 0, null, 0, null, serviceContext);
 
-		HashMap<Locale, String> newTitleMap = new HashMap<>();
+		Map<Locale, String> newTitleMap = new HashMap<>();
 
 		newTitleMap.put(LocaleUtil.GERMANY, "");
 		newTitleMap.put(LocaleUtil.UK, RandomTestUtil.randomString());
@@ -708,7 +707,6 @@ public class CalendarBookingLocalServiceTest {
 		Assert.assertEquals(
 			oldTitleMap.get(LocaleUtil.BRAZIL),
 			calendarBooking.getTitle(LocaleUtil.BRAZIL));
-
 		Assert.assertEquals(
 			newTitleMap.get(LocaleUtil.UK),
 			calendarBooking.getTitle(LocaleUtil.UK));

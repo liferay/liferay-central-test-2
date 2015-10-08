@@ -823,6 +823,7 @@ public class CalendarBookingLocalServiceImpl
 		updatedDescriptionMap.putAll(descriptionMap);
 
 		calendarBooking.setDescriptionMap(updatedDescriptionMap);
+
 		calendarBooking.setLocation(location);
 		calendarBooking.setStartTime(startTimeJCalendar.getTimeInMillis());
 		calendarBooking.setEndTime(endTimeJCalendar.getTimeInMillis());
