@@ -149,6 +149,13 @@
 			<var name="pageName" value="${pageName}" />
 		</execute>
 
+		<execute macro="WikiPage#viewChildPagePGViaWD">
+			<var name="wikiChildPageContent" value="Welcome to LIFERAY" />
+			<var name="wikiChildPageTitle" value="Wiki FrontPage Child Page Title" />
+			<var name="wikiPageContent" value="Wiki FrontPage Content" />
+			<var name="wikiPageTitle" value="FrontPage" />
+		</execute>
+
 		<execute macro="WikiPage#gotoChildPagePG">
 			<var name="wikiChildPageTitle" value="Wiki FrontPage Child Page Title" />
 		</execute>
