@@ -74,10 +74,10 @@ public class UpgradeProcess_3_0_10 extends UpgradeProcess {
 
 		ZipOutputStream zipOutputStream = new ZipOutputStream(fileOutputStream);
 
-		try (DirectoryStream<Path> directoryStream =
+		try (DirectoryStream<Path> filePaths =
 				Files.newDirectoryStream(logsFolderPath)) {
 
-			for (Path filePath : directoryStream) {
+			for (Path filePath : filePaths) {
 				if (filePath.equals(archiveFilePath)) {
 					continue;
 				}
