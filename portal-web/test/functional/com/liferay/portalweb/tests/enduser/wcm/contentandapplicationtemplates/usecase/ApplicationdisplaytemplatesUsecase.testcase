@@ -844,6 +844,7 @@
 
 		<execute macro="ApplicationDisplayTemplates#addADTviaPortletPG">
 			<var name="adtType" value="Wiki" />
+			<var name="portletName" value="Wiki" />
 		</execute>
 
 		<execute macro="Page#gotoPG">
