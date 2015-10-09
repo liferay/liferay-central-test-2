@@ -84,11 +84,11 @@ public class DeploymentHelper {
 
 			String webInfDeploymentFileName = "WEB-INF/" + file.getName();
 
+			zipEntrySources.add(new FileSource(webInfDeploymentFileName, file));
+
 			sb.append('/');
 			sb.append(webInfDeploymentFileName);
 			sb.append(',');
-
-			zipEntrySources.add(new FileSource(webInfDeploymentFileName, file));
 		}
 
 		sb.setLength(sb.length() - 1);
@@ -140,7 +140,6 @@ public class DeploymentHelper {
 				classLoader.getResourceAsStream(fileName)) {
 
 			byte[] bytes = new byte[1024];
-
 			int length = 0;
 
 			while ((length = inputStream.read(bytes)) > 0) {
