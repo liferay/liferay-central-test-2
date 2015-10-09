@@ -694,7 +694,7 @@
 
 		<execute macro="Blogs#addEntry">
 			<var name="entryContent" value="Blogs Entry Content" />
-			<var name="entryTitle"><![CDATA[Blogs Entry Title !@? ...!@#$%^&*(){.,:;'p[]"}]]></var>
+			<var name="entryTitle"><![CDATA[Blogs Entry Title `~!@#$%^&*(){}[],.<>/?|]]></var>
 		</execute>
 
 		<execute macro="Page#gotoPG">
@@ -703,12 +703,13 @@
 
 		<execute macro="BlogsEntry#gotoPG">
 			<var name="entryContent" value="Blogs Entry Content" />
-			<var name="entryTitle"><![CDATA[Blogs Entry Title !@? ...!@#$%^&*(){.,:;'p[]"}]]></var>
+			<var name="entryTitle"><![CDATA[Blogs Entry Title `~!@#$%^&*(){}[],.<>/?|]]></var>
+			<var name="entryTitleSpecialCharacter" value="true" />
 		</execute>
 
 		<execute macro="BlogsEntry#viewPG">
 			<var name="entryContent" value="Blogs Entry Content" />
-			<var name="entryTitle"><![CDATA[Blogs Entry Title !@? ...!@#$%^&*(){.,:;'p[]"}]]></var>
+			<var name="entryTitle"><![CDATA[Blogs Entry Title `~!@#$%^&*(){}[],.<>/?|]]></var>
 		</execute>
 
 		<execute macro="Page#gotoCP">
@@ -769,17 +770,17 @@
 
 		<execute macro="Blogs#addEntry">
 			<var name="entryContent" value="Blogs Entry2 Content" />
-			<var name="entryTitle"><![CDATA[Blogs Entry2 Title !@#$%^&*(){['.:;"]}]]></var>
+			<var name="entryTitle"><![CDATA[Blogs Entry Title `~!@#$%^&*(){}[],.<>/?|]]></var>
 		</execute>
 
 		<execute macro="BlogsEntry#gotoPG">
 			<var name="entryContent" value="Blogs Entry2 Content" />
-			<var name="entryTitle"><![CDATA[Blogs Entry2 Title !@#$%^&*(){['.:;"]}]]></var>
+			<var name="entryTitle"><![CDATA[Blogs Entry Title `~!@#$%^&*(){}[],.<>/?|]]></var>
 		</execute>
 
 		<execute macro="BlogsEntry#viewPG">
 			<var name="entryContent" value="Blogs Entry2 Content" />
-			<var name="entryTitle"><![CDATA[Blogs Entry2 Title !@#$%^&*(){['.:;"]}]]></var>
+			<var name="entryTitle"><![CDATA[Blogs Entry Title `~!@#$%^&*(){}[],.<>/?|]]></var>
 		</execute>
 
 		<execute macro="User#logoutPG" />
@@ -803,12 +804,12 @@
 
 		<execute macro="BlogsEntry#gotoPG">
 			<var name="entryContent" value="Blogs Entry2 Content" />
-			<var name="entryTitle"><![CDATA[Blogs Entry2 Title !@#$%^&*(){['.:;"]}]]></var>
+			<var name="entryTitle"><![CDATA[Blogs Entry Title `~!@#$%^&*(){}[],.<>/?|]]></var>
 		</execute>
 
 		<execute macro="BlogsEntry#viewPG">
 			<var name="entryContent" value="Blogs Entry2 Content" />
-			<var name="entryTitle"><![CDATA[Blogs Entry2 Title !@#$%^&*(){['.:;"]}]]></var>
+			<var name="entryTitle"><![CDATA[Blogs Entry Title `~!@#$%^&*(){}[],.<>/?|]]></var>
 		</execute>
 
 		<execute macro="User#logoutPG" />
