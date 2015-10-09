@@ -925,7 +925,7 @@
 		<execute function="Check" locator1="SitePagesEditPage#PAGE_TYPE_TEMPLATE_AUTOMATICALLY_APPLY_CHANGES_CHECKBOX" />
 	</command>
 
-	<command name="panelPageMenu">
+	<command name="gotoPagePanelPortlet">
 		<var name="key_portletName" value="${portletName}" />
 
 		<execute function="AssertClick" locator1="Panel#MENU_ITEM" value1="${portletName}" />

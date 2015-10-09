@@ -1129,7 +1129,7 @@
 			<var name="portletNameList" value="Blogs,Message Boards" />
 		</execute>
 
-		<execute macro="Page#panelPageMenu">
+		<execute macro="Page#gotoPagePanelPortlet">
 			<var name="portletName" value="Blogs" />
 		</execute>
 
@@ -1142,7 +1142,7 @@
 			<var name="pageName" value="Panel Test Page" />
 		</execute>
 
-		<execute macro="Page#panelPageMenu">
+		<execute macro="Page#gotoPagePanelPortlet">
 			<var name="portletName" value="Blogs" />
 		</execute>
 
@@ -1151,7 +1151,7 @@
 			<var name="entryTitle" value="Blog Post 1" />
 		</execute>
 
-		<execute macro="Page#panelPageMenu">
+		<execute macro="Page#gotoPagePanelPortlet">
 			<var name="portletName" value="Message Boards" />
 		</execute>
 
@@ -1164,7 +1164,7 @@
 			<var name="pageName" value="Panel Test Page" />
 		</execute>
 
-		<execute macro="Page#panelPageMenu">
+		<execute macro="Page#gotoPagePanelPortlet">
 			<var name="portletName" value="Message Boards" />
 		</execute>
 
