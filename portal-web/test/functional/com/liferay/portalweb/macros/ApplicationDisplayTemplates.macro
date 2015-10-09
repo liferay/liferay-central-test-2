@@ -17,7 +17,7 @@
 		<execute function="Select" locator1="Select#DISPLAY_TEMPLATE" value1="${adtType} Test ADT" />
 		<execute function="AssertClick" locator1="Button#SAVE" value1="Save" />
 		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="You have successfully updated the setup." />
-		<execute function="SelectFrameTop" locator1="PGADTConfiguration#CONFIGURATION_IFRAME" value1="relative=top" />
+		<execute function="SelectFrameTop" />
 	</command>
 
 	<command name="addCP">
@@ -88,7 +88,7 @@
 
 		<var name="key_adtType" value="${adtType}" />
 
-		<execute function="SelectFrameTop" value1="relative=top" />
+		<execute function="SelectFrameTop" />
 		<execute function="SelectFrame" locator1="ApplicationDisplayTemplates#ADT_IFRAME" />
 		<execute function="Click" locator1="Button#PLUS" />
 
