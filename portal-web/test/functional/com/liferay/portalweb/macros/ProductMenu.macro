@@ -115,20 +115,6 @@
 		</execute>
 	</command>
 
-	<command name="gotoSitesAdministration" summary="Navigate to Product Menu > Sites > Administration > ${portlet}.">
-		<execute macro="ProductMenuHelper#gotoSites" />
-
-		<execute function="Click" locator1="ProductMenu#BACK_ARROW" />
-
-		<execute macro="ProductMenuHelper#expandCategory">
-			<var name="category" value="Administration" />
-		</execute>
-
-		<execute macro="ProductMenuHelper#gotoPortlet">
-			<var name="portlet" value="${portlet}" />
-		</execute>
-	</command>
-
 	<command name="gotoSitesConfiguration" summary="Navigate to Product Menu > Sites > Configuration > ${portlet}.">
 		<execute macro="ProductMenuHelper#gotoSites" />
 
@@ -146,20 +132,6 @@
 
 		<execute macro="ProductMenuHelper#expandCategory">
 			<var name="category" value="Content" />
-		</execute>
-
-		<execute macro="ProductMenuHelper#gotoPortlet">
-			<var name="portlet" value="${portlet}" />
-		</execute>
-	</command>
-
-	<command name="gotoSitesMySites" summary="Navigate to Product Menu > Sites > My Sites > ${portlet}.">
-		<execute macro="ProductMenuHelper#gotoSites" />
-
-		<execute function="Click" locator1="ProductMenu#BACK_ARROW" />
-
-		<execute macro="ProductMenuHelper#expandCategory">
-			<var name="category" value="My Sites" />
 		</execute>
 
 		<execute macro="ProductMenuHelper#gotoPortlet">
