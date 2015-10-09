@@ -294,7 +294,7 @@ public class JournalTransformer {
 
 					if (templateNodes != null) {
 						for (TemplateNode templateNode : templateNodes) {
-							template.put(templateNode.getName(), templateNode);
+							putTemplateNode(template, templateNode);
 						}
 					}
 
@@ -638,6 +638,16 @@ public class JournalTransformer {
 		}
 		else {
 			template.processTemplate(unsyncStringWriter);
+		}
+	}
+
+	protected void putTemplateNode(
+		Template template, TemplateNode templateNode) {
+
+		template.put(templateNode.getName(), templateNode);
+
+		for (TemplateNode childTemplateNode : templateNode.getChildren()) {
+			putTemplateNode(template, childTemplateNode);
 		}
 	}
 
