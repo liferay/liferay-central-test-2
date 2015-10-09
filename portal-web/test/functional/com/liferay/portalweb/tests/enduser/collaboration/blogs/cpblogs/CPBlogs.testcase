@@ -220,7 +220,7 @@
 		</execute>
 	</command>
 
-	<command name="DeleteBlogsEntries" priority="4">
+	<command name="DeleteBlogsEntries" priority="5">
 		<var name="blogsEntryCounterList" value="1,2,3" />
 
 		<for list="${blogsEntryCounterList}" param="entryCount" >
@@ -272,7 +272,7 @@
 		</for>
 	</command>
 
-	<command name="DeleteBlogsEntryComment" priority="4">
+	<command name="DeleteBlogsEntryComment" priority="5">
 		<var name="entryComment" value="Blogs Entry Comment Body" />
 		<var name="entryContent" value="Blogs Entry Content" />
 		<var name="entryTitle" value="Blogs Entry Title" />
@@ -326,7 +326,7 @@
 		</execute>
 	</command>
 
-	<command name="EditBlogsEntryComment" priority="4">
+	<command name="EditBlogsEntryComment" priority="5">
 		<var name="entryComment" value="Blogs Entry Comment Body" />
 		<var name="entryCommentEdit" value="Blogs Entry Comment Body Edit" />
 		<var name="entryContent" value="Blogs Entry Content" />
@@ -381,7 +381,7 @@
 		</execute>
 	</command>
 
-	<command name="EditBlogsEntryContent" priority="4">
+	<command name="EditBlogsEntryContent" priority="5">
 		<var name="entryContent" value="Blogs Entry Content" />
 		<var name="entryContentEdit" value="Blogs Entry Content Edit" />
 		<var name="entryTitle" value="Blogs Entry Title" />
@@ -425,7 +425,7 @@
 		</execute>
 	</command>
 
-	<command name="EditBlogsEntryTitle" priority="4">
+	<command name="EditBlogsEntryTitle" priority="5">
 		<var name="entryContent" value="Blogs Entry Content" />
 		<var name="entryTitle" value="Blogs Entry Title" />
 		<var name="entryTitleEdit" value="Blogs Entry Title Edit" />
