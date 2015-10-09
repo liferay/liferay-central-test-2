@@ -65,10 +65,8 @@ public class CacheStatisticsUtil {
 		sb.append(_getKeywords(keywords));
 
 		try {
-			Set<ObjectName> queryNames = _mBeanServer.queryNames(
-				null, new ObjectName(sb.toString()));
-
-			List<ObjectName> objectNames = new ArrayList<>(queryNames);
+			List<ObjectName> objectNames = new ArrayList<>(
+				_mBeanServer.queryNames(null, new ObjectName(sb.toString())));
 
 			Collections.sort(objectNames);
 
