@@ -15,6 +15,7 @@
 package com.liferay.portal.security.auth.verifier.module;
 
 import com.liferay.portal.kernel.security.auth.verifier.AuthVerifier;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.security.auth.AuthVerifierPipeline;
 
 import java.util.Dictionary;
@@ -32,8 +33,7 @@ public abstract class BaseAuthVerifierPublisher {
 	protected void activate(
 		BundleContext bundleContext, Map<String, Object> properties) {
 
-		Boolean enabled = Boolean.parseBoolean(
-			(String)properties.get("enabled"));
+		Boolean enabled = GetterUtil.getBoolean(properties.get("enabled"));
 
 		if ((enabled == null) || !enabled) {
 			return;
