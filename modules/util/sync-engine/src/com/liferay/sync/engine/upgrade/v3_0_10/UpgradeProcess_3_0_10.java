@@ -89,7 +89,7 @@ public class UpgradeProcess_3_0_10 extends UpgradeProcess {
 
 				InputStream inputStream = Files.newInputStream(filePath);
 
-				byte[] buffer = new byte[1024];
+				byte[] buffer = new byte[4096];
 
 				int length = 0;
 
