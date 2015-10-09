@@ -1420,7 +1420,7 @@
 			<var name="portletOption" value="Configuration" />
 		</execute>
 
-		<execute function="SelectFrame" locator1="IFrame#DIALOG" />
+		<execute function="SelectFrame" locator1="IFrame#CONFIGURATION" />
 
 		<var name="key_webContentTitle" value="${webContentTitle}" />
 
