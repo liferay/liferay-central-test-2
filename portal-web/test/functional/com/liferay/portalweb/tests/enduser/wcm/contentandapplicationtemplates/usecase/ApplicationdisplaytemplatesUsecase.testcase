@@ -825,6 +825,7 @@
 
 		<execute macro="Page#gotoConfigurationCP">
 			<var name="pageStaging" value="true" />
+			<var name="portletName" value="Application Display Templates" />
 			<var name="siteName" value="${siteName}" />
 			<var name="siteURL" value="true" />
 		</execute>
