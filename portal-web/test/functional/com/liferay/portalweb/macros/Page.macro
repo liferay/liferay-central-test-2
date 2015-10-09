@@ -679,6 +679,12 @@
 		<execute function="AssertClick" locator1="ControlMenu#USER_MY_PROFILE" value1="My Profile" />
 	</command>
 
+	<command name="gotoPagePanelPortlet">
+		<var name="key_portletName" value="${portletName}" />
+
+		<execute function="AssertClick" locator1="Panel#MENU_ITEM" value1="${portletName}" />
+	</command>
+
 	<command name="gotoPagesCP">
 		<description message="Navigate to Site Administration > Pages > ${portletName}." />
 
@@ -923,12 +929,6 @@
 		<execute function="AssertTextEquals" locator1="SitePagesEditPage#PAGE_TYPE_TEMPLATE_AUTOMATICALLY_APPLY_CHANGES_LABEL"  value1="Automatically apply changes done to the page template." />
 
 		<execute function="Check" locator1="SitePagesEditPage#PAGE_TYPE_TEMPLATE_AUTOMATICALLY_APPLY_CHANGES_CHECKBOX" />
-	</command>
-
-	<command name="gotoPagePanelPortlet">
-		<var name="key_portletName" value="${portletName}" />
-
-		<execute function="AssertClick" locator1="Panel#MENU_ITEM" value1="${portletName}" />
 	</command>
 
 	<command name="saveAddPage">
