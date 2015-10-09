@@ -1,7 +1,9 @@
 <definition>
 	<command name="addADTviaPortletPG">
-		<execute function="Click#mouseOverClick" locator1="BasePortlet#OPTIONS_ICON" />
-		<execute function="AssertClick" locator1="BasePortlet#OPTIONS_MENULIST_CONFIGURATION" value1="Configuration" />
+		<execute macro="Portlet#gotoPortletOptions">
+			<var name="portletName" value="${portletName}" />
+			<var name="portletOption" value="Configuration" />
+		</execute>
 
 		<execute function="SelectFrame" locator1="PGADTConfiguration#CONFIGURATION_IFRAME" />
 
@@ -66,8 +68,10 @@
 	</command>
 
 	<command name="addPG">
-		<execute function="Click#mouseOverClick" locator1="BasePortlet#OPTIONS_ICON" />
-		<execute function="AssertClick" locator1="BasePortlet#OPTIONS_MENULIST_CONFIGURATION" value1="Configuration" />
+		<execute macro="Portlet#gotoPortletOptions">
+			<var name="portletName" value="${portletName}" />
+			<var name="portletOption" value="Configuration" />
+		</execute>
 
 		<execute function="SelectFrame" locator1="PGADTConfiguration#CONFIGURATION_IFRAME" />
 
@@ -103,8 +107,10 @@
 		<if>
 			<condition function="IsElementPresent" locator1="BasePortlet#OPTIONS_ICON" />
 			<then>
-				<execute function="Click#mouseOverClick" locator1="BasePortlet#OPTIONS_ICON" />
-				<execute function="AssertClick" locator1="BasePortlet#OPTIONS_MENULIST_CONFIGURATION" value1="Configuration" />
+				<execute macro="Portlet#gotoPortletOptions">
+					<var name="portletName" value="${portletName}" />
+					<var name="portletOption" value="Configuration" />
+				</execute>
 
 				<execute function="SelectFrame" locator1="PGADTConfiguration#CONFIGURATION_IFRAME" />
 
@@ -124,8 +130,11 @@
 	</command>
 
 	<command name="tearDownPG">
-		<execute function="Click#mouseOverClick" locator1="BasePortlet#OPTIONS_ICON" />
-		<execute function="AssertClick" locator1="BasePortlet#OPTIONS_MENULIST_CONFIGURATION" value1="Configuration" />
+		<execute macro="Portlet#gotoPortletOptions">
+			<var name="portletName" value="${portletName}" />
+			<var name="portletOption" value="Configuration" />
+		</execute>
+
 		<execute function="SelectFrame" locator1="PGADTConfiguration#CONFIGURATION_IFRAME" />
 
 		<if>
@@ -157,8 +166,10 @@
 		<if>
 			<condition function="IsElementPresent" locator1="BasePortlet#OPTIONS_ICON" />
 			<then>
-				<execute function="Click#mouseOverClick" locator1="BasePortlet#OPTIONS_ICON" />
-				<execute function="AssertClick" locator1="BasePortlet#OPTIONS_MENULIST_CONFIGURATION" value1="Configuration" />
+				<execute macro="Portlet#gotoPortletOptions">
+					<var name="portletName" value="${portletName}" />
+					<var name="portletOption" value="Configuration" />
+				</execute>
 
 				<execute function="SelectFrame" locator1="PGADTConfiguration#CONFIGURATION_IFRAME" />
 
