@@ -94,7 +94,7 @@ public class DeploymentHelperContextListener implements ServletContextListener {
 
 				if (inputStream == null) {
 					servletContext.log(
-						"Could not find " + deploymentFileName +
+						"Unable to find " + deploymentFileName +
 							" in the WAR file");
 
 					continue;
@@ -125,11 +125,11 @@ public class DeploymentHelperContextListener implements ServletContextListener {
 		throws Exception {
 
 		if (inputStream == null) {
-			throw new IllegalArgumentException("Input stream cannot be null");
+			throw new IllegalArgumentException("Input stream is null");
 		}
 
 		if (outputStream == null) {
-			throw new IllegalArgumentException("Output stream cannot be null");
+			throw new IllegalArgumentException("Output stream is null");
 		}
 
 		try {
