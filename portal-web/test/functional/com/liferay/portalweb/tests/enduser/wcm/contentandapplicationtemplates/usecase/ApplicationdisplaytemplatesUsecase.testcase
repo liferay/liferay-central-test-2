@@ -526,9 +526,12 @@
 			<var name="portletName" value="Site Map" />
 		</execute>
 
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Sites" />
-			<var name="siteScopeSelected" value="true" />
+		<execute macro="Page#gotoPagesCP">
+			<var name="pageStaging" value="true" />
+			<var name="portletName" value="Site Pages" />
+			<var name="siteName" value="${siteName}" />
+			<var name="siteScopeName" value="${siteName}" />
+			<var name="siteURL" value="true" />
 		</execute>
 
 		<execute macro="SitePage#addChildCP">
@@ -536,28 +539,23 @@
 			<var name="siteName" value="${siteName}" />
 			<var name="sitePageName" value="ADT Test Page" />
 			<var name="sitePagePrivacy" value="Public" />
-		</execute>
-
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Sites" />
 			<var name="siteScopeSelected" value="true" />
 		</execute>
 
-		<execute macro="SitePage#addCP">
+		<execute macro="Page#addPG">
+			<var name="pageName" value="ADT Test Page 2" />
+			<var name="pageStaging" value="true" />
 			<var name="siteName" value="${siteName}" />
-			<var name="sitePageName" value="ADT Test Page 2" />
-			<var name="sitePagePrivacy" value="Public" />
+			<var name="siteScopeName" value="${siteName}" />
+			<var name="siteURL" value="true" />
 		</execute>
 
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Sites" />
-			<var name="siteScopeSelected" value="true" />
-		</execute>
-
-		<execute macro="SitePage#addCP">
+		<execute macro="Page#addPG">
+			<var name="pageName" value="ADT Test Page 3" />
+			<var name="pageStaging" value="true" />
 			<var name="siteName" value="${siteName}" />
-			<var name="sitePageName" value="ADT Test Page 3" />
-			<var name="sitePagePrivacy" value="Public" />
+			<var name="siteScopeName" value="${siteName}" />
+			<var name="siteURL" value="true" />
 		</execute>
 
 		<execute macro="Page#gotoPG">
