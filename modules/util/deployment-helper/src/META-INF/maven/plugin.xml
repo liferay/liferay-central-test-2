@@ -60,5 +60,5 @@
 			</configuration>
 		</mojo>
 	</mojos>
-	<dependencies/>
+	<dependencies />
 </plugin>
