@@ -44,21 +44,21 @@ public class DeploymentHelper {
 
 		if (Validator.isNull(deploymentFileNames)) {
 			throw new IllegalArgumentException(
-				"The deployment.files argument is required");
+				"The\"deployment.files\" argument is required");
 		}
 
 		String deploymentPath = arguments.get("deployment.path");
 
 		if (Validator.isNull(deploymentPath)) {
 			throw new IllegalArgumentException(
-				"The deployment.path argument is required");
+				"The \"deployment.path\" argument is required");
 		}
 
 		String outputFileName = arguments.get("deployment.output.file");
 
 		if (Validator.isNull(outputFileName)) {
 			throw new IllegalArgumentException(
-				"The deployment.output.file argument is required");
+				"The \"deployment.output.file\" argument is required");
 		}
 
 		try {
@@ -77,30 +77,28 @@ public class DeploymentHelper {
 
 		List<ZipEntrySource> zipEntrySources = new ArrayList<>();
 
-		StringBuilder webXmlDeploymentFileNames = new StringBuilder();
+		StringBuilder sb = new StringBuilder();
 
 		for (String deploymentFileName : deploymentFileNames.split(",")) {
 			File file = new File(deploymentFileName.trim());
 
-			String webXmlDeploymentFileName = "WEB-INF/" + file.getName();
+			String webInfDeploymentFileName = "WEB-INF/" + file.getName();
 
-			webXmlDeploymentFileNames.append('/');
-			webXmlDeploymentFileNames.append(webXmlDeploymentFileName);
-			webXmlDeploymentFileNames.append(',');
+			sb.append('/');
+			sb.append(webInfDeploymentFileName);
+			sb.append(',');
 
-			zipEntrySources.add(new FileSource(webXmlDeploymentFileName, file));
+			zipEntrySources.add(new FileSource(webInfDeploymentFileName, file));
 		}
 
-		webXmlDeploymentFileNames.setLength(
-			webXmlDeploymentFileNames.length() - 1);
+		sb.setLength(sb.length() - 1);
 
 		zipEntrySources.add(
-			getWebXmlZipEntrySource(
-				webXmlDeploymentFileNames.toString(), deploymentPath));
+			getWebXmlZipEntrySource(sb.toString(), deploymentPath));
 
 		zipEntrySources.add(
 			getClassZipEntrySource(
-				_SERVLET_FILES_ROOT_PATH +
+				"com/liferay/deployment/helper/servlet/" +
 					"DeploymentHelperContextListener.class"));
 
 		ZipUtil.pack(
@@ -108,49 +106,49 @@ public class DeploymentHelper {
 			new File(outputFileName));
 	}
 
-	protected ZipEntrySource getClassZipEntrySource(String name)
+	protected ZipEntrySource getClassZipEntrySource(String fileName)
 		throws Exception {
 
-		byte[] bytes = read(name);
+		byte[] bytes = read(fileName);
 
-		return new ByteSource("WEB-INF/classes/" + name, bytes);
+		return new ByteSource("WEB-INF/classes/" + fileName, bytes);
 	}
 
 	protected ZipEntrySource getWebXmlZipEntrySource(
 			String deploymentFileNames, String deploymentPath)
 		throws Exception {
 
-		byte[] bytes = read(_SERVLET_FILES_ROOT_PATH + "dependencies/web.xml");
+		byte[] bytes = read(
+			"com/liferay/deployment/helper/servlet/dependencies/web.xml");
 
-		String webXml = new String(bytes);
+		String content = new String(bytes);
 
-		webXml = webXml.replace("${deployment.files}", deploymentFileNames);
-		webXml = webXml.replace("${deployment.path}", deploymentPath);
+		content = content.replace("${deployment.files}", deploymentFileNames);
+		content = content.replace("${deployment.path}", deploymentPath);
 
 		return new ByteSource(
-			"WEB-INF/web.xml", webXml.getBytes(StandardCharsets.UTF_8));
+			"WEB-INF/web.xml", content.getBytes(StandardCharsets.UTF_8));
 	}
 
-	protected byte[] read(String name) throws Exception {
+	protected byte[] read(String fileName) throws Exception {
 		ByteArrayOutputStream byteArrayOutputStream =
 			new ByteArrayOutputStream();
 
 		ClassLoader classLoader = DeploymentHelper.class.getClassLoader();
 
-		try (InputStream inputStream = classLoader.getResourceAsStream(name)) {
-			byte[] buffer = new byte[1024];
+		try (InputStream inputStream =
+				classLoader.getResourceAsStream(fileName)) {
+
+			byte[] bytes = new byte[1024];
 
 			int length = 0;
 
-			while ((length = inputStream.read(buffer)) > 0) {
-				byteArrayOutputStream.write(buffer, 0, length);
+			while ((length = inputStream.read(bytes)) > 0) {
+				byteArrayOutputStream.write(bytes, 0, length);
 			}
 		}
 
 		return byteArrayOutputStream.toByteArray();
 	}
-
-	private static final String _SERVLET_FILES_ROOT_PATH =
-		"com/liferay/deployment/helper/servlet/";
 
 }
