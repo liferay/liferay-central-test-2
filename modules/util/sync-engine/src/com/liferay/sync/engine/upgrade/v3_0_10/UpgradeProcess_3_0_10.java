@@ -89,12 +89,11 @@ public class UpgradeProcess_3_0_10 extends UpgradeProcess {
 
 				InputStream inputStream = Files.newInputStream(filePath);
 
-				byte[] buffer = new byte[4096];
-
+				byte[] bytes = new byte[4096];
 				int length = 0;
 
-				while ((length = inputStream.read(buffer)) > 0) {
-					zipOutputStream.write(buffer, 0, length);
+				while ((length = inputStream.read(bytes)) > 0) {
+					zipOutputStream.write(bytes, 0, length);
 				}
 
 				zipOutputStream.closeEntry();
