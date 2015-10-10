@@ -9,8 +9,6 @@ dependencies {
 
 	provided group: "org.apache.velocity", name: "velocity", version: "1.6.4"
 	provided group: "velocity-tools", name: "velocity-tools", version: "1.4"
-
-	testCompile group: "com.liferay.portal", name: "portal-test", version: liferay.portalVersion
 }
 
 liferay {
