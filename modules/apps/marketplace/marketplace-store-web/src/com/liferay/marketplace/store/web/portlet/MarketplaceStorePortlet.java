@@ -145,8 +145,15 @@ public class MarketplaceStorePortlet extends RemoteMVCPortlet {
 
 		setBaseRequestParameters(actionRequest, actionResponse, oAuthRequest);
 
+		addOAuthParameter(oAuthRequest, "p_p_lifecycle", "1");
+		addOAuthParameter(
+			oAuthRequest, "p_p_state", WindowState.NORMAL.toString());
+
 		String serverNamespace = getServerNamespace();
 
+		addOAuthParameter(
+			oAuthRequest, serverNamespace.concat("compatibility"),
+			String.valueOf(ReleaseInfo.getBuildNumber()));
 		addOAuthParameter(
 			oAuthRequest, serverNamespace.concat("javax.portlet.action"),
 			"getPrepackagedApps");
@@ -165,13 +172,6 @@ public class MarketplaceStorePortlet extends RemoteMVCPortlet {
 		addOAuthParameter(
 			oAuthRequest, serverNamespace.concat("prepackagedApps"),
 			jsonObject.toString());
-
-		addOAuthParameter(
-			oAuthRequest, serverNamespace.concat("compatibility"),
-			String.valueOf(ReleaseInfo.getBuildNumber()));
-		addOAuthParameter(oAuthRequest, "p_p_lifecycle", "1");
-		addOAuthParameter(
-			oAuthRequest, "p_p_state", WindowState.NORMAL.toString());
 
 		Response response = getResponse(themeDisplay.getUser(), oAuthRequest);
 
