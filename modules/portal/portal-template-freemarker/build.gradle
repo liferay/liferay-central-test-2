@@ -9,8 +9,6 @@ dependencies {
 	compile group: "org.osgi", name: "org.osgi.core", version: "5.0.0"
 
 	provided group: "com.liferay", name: "org.freemarker", version: "2.3.17.LIFERAY-PATCHED-1"
-
-	testCompile group: "com.liferay.portal", name: "portal-test", version: liferay.portalVersion
 }
 
 liferay {

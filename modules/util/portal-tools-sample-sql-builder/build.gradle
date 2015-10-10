@@ -13,8 +13,6 @@ dependencies {
 	compile project(":apps:message-boards:message-boards-web")
 	compile project(":apps:wiki:wiki-api")
 	compile project(":apps:wiki:wiki-service")
-
-	testCompile group: "com.liferay.portal", name: "portal-test-internal", version: liferay.portalVersion
 }
 
 liferay {

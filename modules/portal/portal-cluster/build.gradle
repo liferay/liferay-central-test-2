@@ -7,8 +7,6 @@ dependencies {
 	provided group: "org.jgroups", name: "jgroups", version: "3.6.4.Final"
 
 	testCompile group: "com.liferay.portal", name: "portal-impl", version: liferay.portalVersion
-	testCompile group: "com.liferay.portal", name: "portal-test", version: liferay.portalVersion
-	testCompile group: "com.liferay.portal", name: "portal-test-internal", version: liferay.portalVersion
 }
 
 liferay {

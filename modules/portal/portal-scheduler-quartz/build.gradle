@@ -2,8 +2,6 @@ dependencies {
 	compile project(":portal:portal-scheduler")
 
 	provided group: "org.quartz-scheduler", name: "quartz", transitive: false, version: "2.1.7"
-
-	testCompile group: "com.liferay.portal", name: "portal-test", version: liferay.portalVersion
 }
 
 liferay {
