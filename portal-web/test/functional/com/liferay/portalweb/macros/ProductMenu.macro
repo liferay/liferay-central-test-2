@@ -115,6 +115,21 @@
 		</execute>
 	</command>
 
+	<command name="gotoSite" summary="Navigate to Product Menu > Sites > Back Arrow > ${site}.">
+		<execute macro="ProductMenuHelper#gotoSites" />
+
+		<if>
+			<condition function="IsVisible" locator1="ProductMenu#BACK_ARROW" />
+			<then>
+				<execute function="Click" locator1="ProductMenu#BACK_ARROW" />
+			</then>
+		</if>
+
+		<execute macro="ProductMenuHelper#gotoSite">
+			<var name="site" value="${site}" />
+		</execute>
+	</command>
+
 	<command name="gotoSitesConfiguration" summary="Navigate to Product Menu > Sites > Configuration > ${portlet}.">
 		<execute macro="ProductMenuHelper#gotoSites" />
 
