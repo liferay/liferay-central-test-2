@@ -718,8 +718,10 @@ public abstract class BaseIndexer<T> implements Indexer<T> {
 				PortletKeys.PREFS_OWNER_TYPE_COMPANY);
 
 		try {
+			String className = getClassName();
+
 			portletPreferences.setValue(
-				getClassName() + "_indexerEnabled",
+				className.concat("_indexerEnabled"),
 				String.valueOf(indexerEnabled));
 
 			portletPreferences.store();
