@@ -267,17 +267,17 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 			return roleIds;
 		}
 
-		Set<Long> roleIdSet = SetUtil.fromArray(roleIds);
+		Set<Long> roleIdsSet = SetUtil.fromArray(roleIds);
 
 		try {
 			for (long roleId : getGuestUserRoleIds()) {
-				roleIdSet.add(roleId);
+				roleIdsSet.add(roleId);
 			}
 		}
 		catch (Exception e) {
 		}
 
-		return ArrayUtil.toArray(roleIdSet.toArray(new Long[roleIdSet.size()]));
+		return ArrayUtil.toArray(roleIdsSet.toArray(new Long[roleIdsSet.size()]));
 	}
 
 	@Override
