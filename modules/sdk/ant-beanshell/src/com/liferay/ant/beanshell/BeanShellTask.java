@@ -17,8 +17,8 @@ package com.liferay.ant.beanshell;
 import bsh.EvalError;
 import bsh.Interpreter;
 
-import java.util.Map;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
@@ -30,10 +30,6 @@ public class BeanShellTask extends Task {
 
 	public void addText(String text) {
 		_text = text;
-	}
-
-	public void setMapId(String mapId) {
-		_mapId = mapId;
 	}
 
 	@Override
@@ -58,11 +54,15 @@ public class BeanShellTask extends Task {
 		}
 	}
 
+	public void setMapId(String mapId) {
+		_mapId = mapId;
+	}
+
 	private Map<String, Object> _getMap() {
 		Map<String, Object> map = _maps.get(_mapId);
 
 		if (map == null) {
-			map = new HashMap<String, Object>();
+			map = new HashMap<>();
 
 			_maps.put(_mapId, map);
 		}
@@ -71,7 +71,7 @@ public class BeanShellTask extends Task {
 	}
 
 	private static final Map<String, Map<String, Object>> _maps =
-		new HashMap<String, Map<String, Object>>();
+		new HashMap<>();
 
 	private String _mapId;
 	private String _text;
