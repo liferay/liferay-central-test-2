@@ -193,12 +193,12 @@
 
 		<var name="key_listEntry" value="${categoryName}" />
 
-		<execute function="Click" locator1="Categories#CATEGORY_ENTRY_MENULIST_ARROW" />
+		<execute function="Click" locator1="Icon#LIST_VERTICAL_ELLIPSIS" />
 		<execute function="AssertClick" locator1="MenuItem#EDIT" value1="Edit" />
 
 		<var name="key_rowIndexNumber" value="2" />
 
-		<execute function="Click" locator1="CategoriesEditCategory#PROPERTIES_DELETE_ROW_BUTTON_2" />
+		<execute function="Click" locator1="Button#DELETE_ROW_N" />
 		<execute function="AssertElementPresent" locator1="CategoriesEditCategory#PROPERTIES_UNDO_MESSAGE" />
 		<execute function="AssertClick" locator1="Button#SAVE" value1="Save" />
 
