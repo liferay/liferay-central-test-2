@@ -190,8 +190,13 @@
 
 		<execute function="AssertClick" locator1="Categories#VOCABULARY_ENTRY_LINK" value1="${vocabularyName}" />
 		<execute function="AssertClick" locator1="Categories#VOCABULARY_CATEGORY" value1="${categoryName}" />
+
+		<var name="key_listEntry" value="${categoryName}" />
+
 		<execute function="Click" locator1="Categories#CATEGORY_ENTRY_MENULIST_ARROW" />
 		<execute function="AssertClick" locator1="MenuItem#EDIT" value1="Edit" />
+
+		<var name="key_rowIndexNumber" value="2" />
 
 		<execute function="Click" locator1="CategoriesEditCategory#PROPERTIES_DELETE_ROW_BUTTON_2" />
 		<execute function="AssertElementPresent" locator1="CategoriesEditCategory#PROPERTIES_UNDO_MESSAGE" />
