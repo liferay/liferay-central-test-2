@@ -277,7 +277,8 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 		catch (Exception e) {
 		}
 
-		return ArrayUtil.toArray(roleIdsSet.toArray(new Long[roleIdsSet.size()]));
+		return ArrayUtil.toArray(
+			roleIdsSet.toArray(new Long[roleIdsSet.size()]));
 	}
 
 	@Override
