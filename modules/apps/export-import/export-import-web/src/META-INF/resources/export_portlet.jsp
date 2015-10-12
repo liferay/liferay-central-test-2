@@ -41,7 +41,7 @@ Layout exportableLayout = ExportImportHelperUtil.getExportableLayout(themeDispla
 			<portlet:param name="mvcRenderCommandName" value="exportImport" />
 		</portlet:actionURL>
 
-		<liferay-portlet:renderURL var="exportPortletRedirectURL">
+		<liferay-portlet:renderURL var="exportRedirectURL">
 			<portlet:param name="mvcRenderCommandName" value="exportImport" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.EXPORT %>" />
 			<portlet:param name="tabs2" value="export" />
@@ -52,7 +52,7 @@ Layout exportableLayout = ExportImportHelperUtil.getExportableLayout(themeDispla
 		<aui:form action='<%= exportPortletURL + "&etag=0&strip=0" %>' cssClass="lfr-export-dialog" method="post" name="fm1">
 			<aui:input name="tabs1" type="hidden" value="export_import" />
 			<aui:input name="tabs2" type="hidden" value="export" />
-			<aui:input name="redirect" type="hidden" value="<%= exportPortletRedirectURL %>" />
+			<aui:input name="redirect" type="hidden" value="<%= exportRedirectURL %>" />
 			<aui:input name="plid" type="hidden" value="<%= exportableLayout.getPlid() %>" />
 			<aui:input name="groupId" type="hidden" value="<%= themeDisplay.getScopeGroupId() %>" />
 			<aui:input name="portletResource" type="hidden" value="<%= portletResource %>" />
