@@ -32,7 +32,7 @@ public class BeanShellTask extends Task {
 		_text = text;
 	}
 
-	public void setMapid(String mapId) {
+	public void setMapId(String mapId) {
 		_mapId = mapId;
 	}
 
@@ -46,8 +46,9 @@ public class BeanShellTask extends Task {
 
 		try {
 			if (_mapId != null) {
-				interpreter.set("map", getMap());
+				interpreter.set("beanShellMap", _getMap());
 			}
+
 			interpreter.set("project", getProject());
 
 			interpreter.eval(_text);
@@ -57,18 +58,20 @@ public class BeanShellTask extends Task {
 		}
 	}
 
-	private Map<String, Object>getMap() {
-		Map<String, Object> map = _MAPS.get(_mapId);
+	private Map<String, Object> _getMap() {
+		Map<String, Object> map = _maps.get(_mapId);
 
 		if (map == null) {
 			map = new HashMap<String, Object>();
-			_MAPS.put(_mapId, map);
+
+			_maps.put(_mapId, map);
 		}
 
 		return map;
 	}
 
-	private static final Map<String, Map<String, Object>> _MAPS = new HashMap<String, Map<String, Object>>();
+	private static final Map<String, Map<String, Object>> _maps =
+		new HashMap<String, Map<String, Object>>();
 
 	private String _mapId;
 	private String _text;
