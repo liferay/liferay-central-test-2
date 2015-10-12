@@ -37,11 +37,11 @@ Layout exportableLayout = ExportImportHelperUtil.getExportableLayout(themeDispla
 			</liferay-util:include>
 		</div>
 
-		<portlet:actionURL name="exportImport" var="exportPortletURL">
+		<portlet:actionURL name="exportImport" var="exportURL">
 			<portlet:param name="mvcRenderCommandName" value="exportImport" />
 		</portlet:actionURL>
 
-		<liferay-portlet:renderURL var="exportRedirectURL">
+		<liferay-portlet:renderURL var="redirectURL">
 			<portlet:param name="mvcRenderCommandName" value="exportImport" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.EXPORT %>" />
 			<portlet:param name="tabs2" value="export" />
@@ -49,10 +49,10 @@ Layout exportableLayout = ExportImportHelperUtil.getExportableLayout(themeDispla
 			<portlet:param name="portletResource" value="<%= portletResource %>" />
 		</liferay-portlet:renderURL>
 
-		<aui:form action='<%= exportPortletURL + "&etag=0&strip=0" %>' cssClass="lfr-export-dialog" method="post" name="fm1">
+		<aui:form action='<%= exportURL + "&etag=0&strip=0" %>' cssClass="lfr-export-dialog" method="post" name="fm1">
 			<aui:input name="tabs1" type="hidden" value="export_import" />
 			<aui:input name="tabs2" type="hidden" value="export" />
-			<aui:input name="redirect" type="hidden" value="<%= exportRedirectURL %>" />
+			<aui:input name="redirect" type="hidden" value="<%= redirectURL %>" />
 			<aui:input name="plid" type="hidden" value="<%= exportableLayout.getPlid() %>" />
 			<aui:input name="groupId" type="hidden" value="<%= themeDisplay.getScopeGroupId() %>" />
 			<aui:input name="portletResource" type="hidden" value="<%= portletResource %>" />
