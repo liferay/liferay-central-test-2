@@ -97,6 +97,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>BLOGS_ENTRY_TITLE</td>
+	<td>//div[contains(@class,'entry-title')]//a</td>
+	<td></td>
+</tr>
+<tr>
 	<td></td>
 	<td></td>
 	<td></td>

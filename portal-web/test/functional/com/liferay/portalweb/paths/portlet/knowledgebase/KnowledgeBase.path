@@ -14,6 +14,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>MESSAGE_NO_ARTICLES_FOUND</td>
+	<td>//div[contains(@class,'alert') and contains(.,'No articles were found.')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td></td>
 	<td></td>
 	<td></td>
