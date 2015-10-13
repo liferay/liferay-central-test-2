@@ -93,7 +93,7 @@
 <!--BLOGS_ENTRY-->
 <tr>
 	<td>BLOGS_ENTRY_CONTENT</td>
-	<td>//div[@class='asset-content']/p</td>
+	<td>//div[contains(@class,'entry-body')]/p</td>
 	<td></td>
 </tr>
 <tr>
