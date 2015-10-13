@@ -165,7 +165,9 @@ List<Calendar> manageableCalendars = CalendarServiceUtil.search(themeDisplay.get
 
 CalendarResource guestCalendarResource = CalendarResourceUtil.fetchGuestCalendarResource(themeDisplay.getCompanyId());
 
-manageableCalendars.remove(guestCalendarResource.getDefaultCalendar());
+if (guestCalendarResource != null) {
+	manageableCalendars.remove(guestCalendarResource.getDefaultCalendar());
+}
 
 long[] otherCalendarIds = StringUtil.split(SessionClicks.get(request, "com.liferay.calendar.web_otherCalendars", StringPool.BLANK), 0L);
 
