@@ -149,7 +149,7 @@ public class MailboxUtil {
 
 		public ReceiptStub(long receipt, long currentNanoTime) {
 			long expireTime = currentNanoTime;
-			
+
 			expireTime += TimeUnit.MILLISECONDS.toNanos(
 				_INTRABAND_MAILBOX_STORAGE_LIFE);
 
