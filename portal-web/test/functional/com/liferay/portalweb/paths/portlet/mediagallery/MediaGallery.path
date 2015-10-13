@@ -28,6 +28,11 @@
 	<td>//ul//span[contains(.,'Move to the Recycle Bin')]</td>
 	<td></td>
 </tr>
+<tr>
+	<td>IMAGE_TITLE</td>
+	<td>//span[@class='image-title' and contains(.,'${key_mgDocumentTitle}')]</td>
+	<td></td>
+</tr>
 <!--ENTRY-->
 <tr>
 	<td>ENTRY_THUMBNAIL</td>
