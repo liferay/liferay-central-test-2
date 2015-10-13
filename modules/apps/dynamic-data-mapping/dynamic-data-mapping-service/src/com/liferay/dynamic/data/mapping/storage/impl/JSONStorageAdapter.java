@@ -133,10 +133,10 @@ public class JSONStorageAdapter extends BaseStorageAdapter {
 			DDMFormValues ddmFormValues, ServiceContext serviceContext)
 		throws Exception {
 
-		boolean validationDisabled = GetterUtil.getBoolean(
-			serviceContext.getAttribute("validationDisabled"));
+		boolean validateDDMFormValues = GetterUtil.getBoolean(
+			serviceContext.getAttribute("validateDDMFormValues"), true);
 
-		if (validationDisabled) {
+		if (!validateDDMFormValues) {
 			return;
 		}
 
