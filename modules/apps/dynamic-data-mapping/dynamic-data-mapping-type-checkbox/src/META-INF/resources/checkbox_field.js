@@ -4,6 +4,9 @@ AUI.add(
 		var CheckboxField = A.Component.create(
 			{
 				ATTRS: {
+					dataType: {
+						value: 'boolean'
+					},
 					showAsSwitcher: {
 						value: false
 					},
