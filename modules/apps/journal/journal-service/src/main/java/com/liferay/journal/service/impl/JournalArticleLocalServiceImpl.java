@@ -171,8 +171,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.concurrent.Callable;
 import java.util.Set;
+import java.util.concurrent.Callable;
 
 import javax.portlet.PortletPreferences;
 
@@ -7540,22 +7540,40 @@ public class JournalArticleLocalServiceImpl
 	protected void updateDDMFormFieldPredefinedValue(
 		DDMFormField ddmFormField, LocalizedValue ddmFormFieldValue) {
 
-		Set <Locale> ddmFormAvailableLocales =
-			ddmFormField.getDDMForm().getAvailableLocales();
+		DDMForm ddmForm = ddmFormField.getDDMForm();
+
+		Set<Locale> ddmFormAvailableLocales = ddmForm.getAvailableLocales();
 
 		ddmFormField.setPredefinedValue(ddmFormFieldValue);
-		ddmFormAvailableLocales .addAll(
-			ddmFormFieldValue.getAvailableLocales());
+
+		ddmFormAvailableLocales.addAll(ddmFormFieldValue.getAvailableLocales());
 
 		for (Locale locale : ddmFormAvailableLocales) {
-			ddmFormField.getLabel().addString(
-				locale, ddmFormField.getLabel().getString(locale));
+			LocalizedValue label = ddmFormField.getLabel();
 
-			ddmFormField.getStyle().addString(
-				locale, ddmFormField.getStyle().getString(locale));
+			Map<Locale, String> labelValues = label.getValues();
 
-			ddmFormField.getTip().addString(
-				locale, ddmFormField.getTip().getString(locale));
+			if (!labelValues.containsKey(locale)) {
+				label.addString(
+					locale, label.getString(label.getDefaultLocale()));
+			}
+
+			LocalizedValue style = ddmFormField.getStyle();
+
+			Map<Locale, String> styleValues = style.getValues();
+
+			if (!styleValues.containsKey(locale)) {
+				style.addString(
+					locale, style.getString(style.getDefaultLocale()));
+			}
+
+			LocalizedValue tip = ddmFormField.getTip();
+
+			Map<Locale, String> tipValues = tip.getValues();
+
+			if (!tipValues.containsKey(locale)) {
+				tip.addString(locale, tip.getString(tip.getDefaultLocale()));
+			}
 		}
 	}
 
