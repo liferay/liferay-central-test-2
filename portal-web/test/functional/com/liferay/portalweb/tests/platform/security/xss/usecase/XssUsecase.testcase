@@ -39,25 +39,25 @@
 		<execute function="Open" locator1="${maliciousURL1}" />
 
 		<execute function="AssertTextEquals" locator1="Home#ERROR_MESSAGE_ALERT_ERROR" value1="Not Found" />
-		<execute function="AssertTextEquals#assertPartialText" locator1="BasePortlet#PORTLET_CONTENT" value1="The requested resource was not found." />
+		<execute function="AssertTextEquals#assertPartialText" locator1="Home#ERROR_MESSAGE_RESOURCE_NOT_FOUND" value1="The requested resource could not be found." />
 		<execute function="AssertElementPresent" locator1="Home#URL_ERROR_MESSAGE" />
 
 		<execute function="Open" locator1="${maliciousURL2}" />
 
 		<execute function="AssertTextEquals" locator1="Home#ERROR_MESSAGE_ALERT_ERROR" value1="Not Found" />
-		<execute function="AssertTextEquals#assertPartialText" locator1="BasePortlet#PORTLET_CONTENT" value1="The requested resource was not found." />
+		<execute function="AssertTextEquals#assertPartialText" locator1="Home#ERROR_MESSAGE_RESOURCE_NOT_FOUND" value1="The requested resource could not be found." />
 		<execute function="AssertElementPresent" locator1="Home#URL_ERROR_MESSAGE" />
 
 		<execute function="Open" locator1="${maliciousURL3}" />
 
 		<execute function="AssertTextEquals" locator1="Home#ERROR_MESSAGE_ALERT_ERROR" value1="Not Found" />
-		<execute function="AssertTextEquals#assertPartialText" locator1="BasePortlet#PORTLET_CONTENT" value1="The requested resource was not found." />
+		<execute function="AssertTextEquals#assertPartialText" locator1="Home#ERROR_MESSAGE_RESOURCE_NOT_FOUND" value1="The requested resource could not be found." />
 		<execute function="AssertElementPresent" locator1="Home#URL_ERROR_MESSAGE" />
 
 		<execute function="Open" locator1="${maliciousURL4}" />
 
 		<execute function="AssertTextEquals" locator1="Home#ERROR_MESSAGE_ALERT_ERROR" value1="Not Found" />
-		<execute function="AssertTextEquals#assertPartialText" locator1="BasePortlet#PORTLET_CONTENT" value1="The requested resource was not found." />
+		<execute function="AssertTextEquals#assertPartialText" locator1="Home#ERROR_MESSAGE_RESOURCE_NOT_FOUND" value1="The requested resource could not be found." />
 		<execute function="AssertElementPresent" locator1="Home#URL_ERROR_MESSAGE" />
 	</command>
 
