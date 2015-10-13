@@ -91,7 +91,7 @@ public class DLFileEntryTypeStagedModelDataHandlerTest
 			ServiceContextTestUtil.getServiceContext(
 				group.getGroupId(), TestPropsValues.getUserId());
 
-		DLFileEntryType fileEntryType =
+		DLFileEntryType dlFileEntryType =
 			DLFileEntryTypeLocalServiceUtil.addFileEntryType(
 				TestPropsValues.getUserId(), group.getGroupId(),
 				RandomTestUtil.randomString(), RandomTestUtil.randomString(),
@@ -99,9 +99,9 @@ public class DLFileEntryTypeStagedModelDataHandlerTest
 
 		DDMStructureManagerUtil.updateStructureKey(
 			ddmStructure.getStructureId(),
-			DLUtil.getDDMStructureKey(fileEntryType));
+			DLUtil.getDDMStructureKey(dlFileEntryType));
 
-		return fileEntryType;
+		return dlFileEntryType;
 	}
 
 	@Override
