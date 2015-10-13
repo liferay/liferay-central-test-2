@@ -22,20 +22,20 @@ import java.sql.Types;
 public class MeetupsEntryTable {
 
 	public static final Object[][] TABLE_COLUMNS = {
-		{"meetupsEntryId", new Integer(Types.BIGINT)},
-		{"companyId", new Integer(Types.BIGINT)},
-		{"userId", new Integer(Types.BIGINT)},
-		{"userName", new Integer(Types.VARCHAR)},
-		{"createDate", new Integer(Types.TIMESTAMP)},
-		{"modifiedDate", new Integer(Types.TIMESTAMP)},
-		{"title", new Integer(Types.VARCHAR)},
-		{"description", new Integer(Types.VARCHAR)},
-		{"startDate", new Integer(Types.TIMESTAMP)},
-		{"endDate", new Integer(Types.TIMESTAMP)},
-		{"totalAttendees", new Integer(Types.INTEGER)},
-		{"maxAttendees", new Integer(Types.INTEGER)},
-		{"price", new Integer(Types.DOUBLE)},
-		{"thumbnailId", new Integer(Types.BIGINT)}
+		{"meetupsEntryId", Integer.valueOf(Types.BIGINT)},
+		{"companyId", Integer.valueOf(Types.BIGINT)},
+		{"userId", Integer.valueOf(Types.BIGINT)},
+		{"userName", Integer.valueOf(Types.VARCHAR)},
+		{"createDate", Integer.valueOf(Types.TIMESTAMP)},
+		{"modifiedDate", Integer.valueOf(Types.TIMESTAMP)},
+		{"title", Integer.valueOf(Types.VARCHAR)},
+		{"description", Integer.valueOf(Types.VARCHAR)},
+		{"startDate", Integer.valueOf(Types.TIMESTAMP)},
+		{"endDate", Integer.valueOf(Types.TIMESTAMP)},
+		{"totalAttendees", Integer.valueOf(Types.INTEGER)},
+		{"maxAttendees", Integer.valueOf(Types.INTEGER)},
+		{"price", Integer.valueOf(Types.DOUBLE)},
+		{"thumbnailId", Integer.valueOf(Types.BIGINT)}
 	};
 
 	public static final String TABLE_NAME = "SN_MeetupsEntry";
