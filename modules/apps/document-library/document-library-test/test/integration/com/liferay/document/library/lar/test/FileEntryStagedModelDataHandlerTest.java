@@ -208,16 +208,16 @@ public class FileEntryStagedModelDataHandlerTest
 			ServiceContextTestUtil.getServiceContext(
 				groupId, TestPropsValues.getUserId());
 
-		DLFileEntryType fileEntryType =
+		DLFileEntryType dlFileEntryType =
 			DLFileEntryTypeLocalServiceUtil.addFileEntryType(
 				TestPropsValues.getUserId(), groupId,
 				RandomTestUtil.randomString(), RandomTestUtil.randomString(),
 				new long[] {ddmStructureId}, serviceContext);
 
 		DDMStructureManagerUtil.updateStructureKey(
-			ddmStructureId, DLUtil.getDDMStructureKey(fileEntryType));
+			ddmStructureId, DLUtil.getDDMStructureKey(dlFileEntryType));
 
-		return fileEntryType;
+		return dlFileEntryType;
 	}
 
 	@Override
@@ -231,11 +231,11 @@ public class FileEntryStagedModelDataHandlerTest
 
 		Folder folder = (Folder)folderDependentStagedModels.get(0);
 
-		List<StagedModel> fileEntryTypeDependentStagedModels =
+		List<StagedModel> dlFileEntryTypeDependentStagedModels =
 			dependentStagedModelsMap.get(DLFileEntryType.class.getSimpleName());
 
 		DLFileEntryType dlFileEntryType =
-			(DLFileEntryType)fileEntryTypeDependentStagedModels.get(0);
+			(DLFileEntryType)dlFileEntryTypeDependentStagedModels.get(0);
 
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(
