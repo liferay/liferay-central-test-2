@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.module.framework.ModuleServiceLifecycle;
 import com.liferay.portal.kernel.upgrade.UpgradeStep;
 import com.liferay.portal.upgrade.registry.UpgradeStepRegistrator;
 import com.liferay.social.networking.upgrade.v1_0_0.UpgradeNamespace;
+import com.liferay.social.networking.upgrade.v1_0_1.UpgradePortletId;
 
 import java.util.Arrays;
 
@@ -36,6 +37,10 @@ public class SocialNetworkingServiceUpgrade implements UpgradeStepRegistrator {
 		registry.register(
 			"com.liferay.social.networking.service", "0.0.1", "1.0.0",
 			Arrays.<UpgradeStep>asList(new UpgradeNamespace()));
+
+		registry.register(
+			"com.liferay.social.networking.service", "1.0.0", "1.0.1",
+			Arrays.<UpgradeStep>asList(new UpgradePortletId()));
 	}
 
 	@Reference(target = ModuleServiceLifecycle.PORTAL_INITIALIZED, unbind = "-")
