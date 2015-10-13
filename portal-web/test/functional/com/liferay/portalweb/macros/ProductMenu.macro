@@ -146,14 +146,6 @@
 		</execute>
 	</command>
 
-	<command name="gotoSitesConfigurationOnly" summary="Navigate to Product Menu > Sites > Configuration">
-		<execute macro="ProductMenuHelper#gotoSites" />
-
-		<execute macro="ProductMenuHelper#expandCategory">
-			<var name="category" value="Configuration" />
-		</execute>
-	</command>
-
 	<command name="gotoSitesContent" summary="Navigate to Product Menu > Sites > Content > ${portlet}">
 		<execute macro="ProductMenuHelper#gotoSites" />
 

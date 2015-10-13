@@ -99,7 +99,11 @@
 	<command name="CannotViewSiteSettingsInUserPersonalSite" priority="4">
 		<execute macro="ProductMenu#gotoPersonalSite" />
 
-		<execute macro="ProductMenu#gotoSitesConfigurationOnly" />
+		<execute macro="ProductMenuHelper#gotoSites" />
+
+		<execute macro="ProductMenuHelper#expandCategory">
+			<var name="category" value="Configuration" />
+		</execute>
 
 		<execute function="AssertElementNotPresent" locator1="ProductMenu#PRODUCT_MENU_PANEL_MENU_ITEM" value1="Site Settings" />
 	</command>
