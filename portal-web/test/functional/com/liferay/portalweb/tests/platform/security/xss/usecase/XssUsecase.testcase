@@ -74,7 +74,7 @@
 
 		<execute macro="Page#openURL" />
 
-		<execute function="AssertTextEquals#assertPartialText" locator1="BasePortlet#PORTLET_CONTENT" value1="You are signed in as Test ${userLastNameEdit}." />
+		<execute function="AssertTextEquals#assertPartialText" locator1="PGSignin#PORTLET_CONTENT_USER_NAME" value1="${userLastNameEdit}" />
 
 		<execute macro="Portlet#addPG">
 			<var name="portletName" value="Bookmarks" />
