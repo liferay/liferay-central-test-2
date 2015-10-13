@@ -14,22 +14,33 @@
 
 package com.liferay.social.networking.upgrade;
 
-import com.liferay.social.networking.upgrade.v1_0_1.SocialNetworkingServiceUpgrade_v1_0_1;
+import com.liferay.portal.kernel.module.framework.ModuleServiceLifecycle;
+import com.liferay.portal.kernel.upgrade.UpgradeStep;
+import com.liferay.portal.upgrade.registry.UpgradeStepRegistrator;
+import com.liferay.social.networking.upgrade.v1_0_0.UpgradeNamespace;
+
+import java.util.Arrays;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Adolfo Pérez
+ * @author Manuel de la Peña
  */
-@Component(
-	immediate = true, service = SocialNetworkingServiceUpgrade.class
-)
-public class SocialNetworkingServiceUpgrade {
+@Component(immediate = true)
+public class SocialNetworkingServiceUpgrade implements UpgradeStepRegistrator {
 
-	@Reference(unbind = "-")
-	protected void setLastServiceUpgrade(
-		SocialNetworkingServiceUpgrade_v1_0_1 lastServiceUpgrade) {
+	@Override
+	public void register(Registry registry) {
+		registry.register(
+			"com.liferay.social.networking.service", "0.0.1", "1.0.0",
+			Arrays.<UpgradeStep>asList(new UpgradeNamespace()));
+	}
+
+	@Reference(target = ModuleServiceLifecycle.PORTAL_INITIALIZED, unbind = "-")
+	protected void setModuleServiceLifecycle(
+		ModuleServiceLifecycle moduleServiceLifecycle) {
 	}
 
 }
