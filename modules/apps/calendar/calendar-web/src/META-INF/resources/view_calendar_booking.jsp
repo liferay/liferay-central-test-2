@@ -243,7 +243,7 @@ AssetEntry layoutAssetEntry = AssetEntryLocalServiceUtil.getEntry(CalendarBookin
 
 		var positionalWeekday = null;
 
-		<c:if test="<%= (frequency == Frequency.MONTHLY || frequency == Frequency.YEARLY) && positionalWeekday != null %>">
+		<c:if test="<%= (frequency.equals(Frequency.MONTHLY) || frequency.equals(Frequency.YEARLY)) && (positionalWeekday != null) %>">
 			positionalWeekday = {
 				month: <%= startTimeJCalendar.get(java.util.Calendar.MONTH) %>,
 				position: <%= positionalWeekday.getPosition() %>,
