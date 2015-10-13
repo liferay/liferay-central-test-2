@@ -577,14 +577,14 @@ public class DLFileEntryLocalServiceImpl
 				dlFileEntry.getName(), version,
 				DLFileEntryConstants.PRIVATE_WORKING_COPY_VERSION);
 
-			serviceContext.setAttribute("validationDisabled", Boolean.TRUE);
+			serviceContext.setAttribute("validateDDMFormValues", Boolean.FALSE);
 
 			copyFileEntryMetadata(
 				dlFileEntry.getCompanyId(), dlFileVersion.getFileEntryTypeId(),
 				fileEntryId, dlFileVersionId, dlFileVersion.getFileVersionId(),
 				serviceContext);
 
-			serviceContext.setAttribute("validationDisabled", Boolean.FALSE);
+			serviceContext.setAttribute("validateDDMFormValues", Boolean.TRUE);
 		}
 
 		return dlFileEntry;
