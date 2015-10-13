@@ -397,7 +397,7 @@
 
 	<command name="advancedSearchCP">
 		<execute function="AssertClick" locator1="NavTab#ALL_USERS" value1="All Users" />
-		<execute function="AssertClick" locator1="NavBar#SEARCH_TOGGLE_ADVANCED" />
+		<execute function="Click" locator1="NavBar#SEARCH_TOGGLE_ADVANCED" />
 
 		<if>
 			<equals arg1="${userAdvancedSearch}" arg2="First Name" />
