@@ -77,9 +77,7 @@ public class CalendarBookingLocalServiceTest {
 	}
 
 	@Test
-	public void testAddCalendarBookingSetLanguageIdInServiceContext()
-		throws PortalException {
-
+	public void testAddCalendarBooking() throws PortalException {
 		ServiceContext serviceContext = createServiceContext();
 
 		CalendarResource calendarResource =
