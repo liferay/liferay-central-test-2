@@ -112,7 +112,21 @@ public class JournalDisplayContext {
 	public PortletURL getPortletURL() throws PortalException {
 		PortletURL portletURL = _liferayPortletResponse.createRenderURL();
 
+		String navigation = ParamUtil.getString(_request, "navigation");
+
+		if (Validator.isNotNull(navigation)) {
+			portletURL.setParameter(
+				"navigation", HtmlUtil.escapeJS(getNavigation()));
+		}
+
 		portletURL.setParameter("folderId", String.valueOf(getFolderId()));
+
+		String ddmStructureKey = ParamUtil.getString(
+			_request, "ddmStructureKey");
+
+		if (!ddmStructureKey.equals("0")) {
+			portletURL.setParameter("ddmStructureKey", ddmStructureKey);
+		}
 
 		String displayStyle = ParamUtil.getString(_request, "displayStyle");
 
@@ -123,20 +137,6 @@ public class JournalDisplayContext {
 		if (!isShowEditActions()) {
 			portletURL.setParameter(
 				"showEditActions", String.valueOf(isShowEditActions()));
-		}
-
-		String ddmStructureKey = ParamUtil.getString(
-			_request, "ddmStructureKey");
-
-		if (!ddmStructureKey.equals("0")) {
-			portletURL.setParameter("ddmStructureKey", ddmStructureKey);
-		}
-
-		String navigation = ParamUtil.getString(_request, "navigation");
-
-		if (Validator.isNotNull(navigation)) {
-			portletURL.setParameter(
-				"navigation", HtmlUtil.escapeJS(getNavigation()));
 		}
 
 		return portletURL;
