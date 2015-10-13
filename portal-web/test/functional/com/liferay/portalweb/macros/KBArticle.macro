@@ -1419,7 +1419,6 @@
 		<var name="key_kbArticleRelatedAssetTitle" value="${kbArticleRelatedAssetTitle}" />
 
 		<execute function="AssertTextEquals" locator1="AssetRelatedAssets#BLOGS_ENTRY_TITLE" value1="${kbArticleRelatedAssetTitle}" />
-		<execute function="AssertTextEquals" locator1="AssetRelatedAssets#KB_RELATED_ASSETS_LINKS" value1="${kbArticleRelatedAssetTitle}" />
 	</command>
 
 	<command name="viewRelatedAssetViaKBDisplayPG">
