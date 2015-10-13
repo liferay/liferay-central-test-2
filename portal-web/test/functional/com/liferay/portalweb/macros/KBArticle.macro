@@ -1000,6 +1000,11 @@
 		<execute function="AssertElementPresent" locator1="KnowledgeBaseArticle#ATTACHMENTS_SAVED_ATTACHMENTS_CONTAINER" />
 	</command>
 
+	<command name="viewBlogsEntryRelatedAssetViaKBDisplayPG">
+		<execute function="AssertTextEquals" locator1="AssetRelatedAssets#BLOGS_ENTRY_TITLE" value1="${RelatedAssetTitle}" />
+		<execute function="AssertTextEquals" locator1="AssetRelatedAssets#BLOGS_ENTRY_CONTENT" value1="${RelatedAssetContent}" />
+	</command>
+
 	<command name="viewChildArticleCP">
 		<execute function="AssertTextEquals" locator1="Message#INFO" value1="Child Articles for ${kbArticleTitle}." />
 
@@ -1419,11 +1424,6 @@
 		<var name="key_kbArticleRelatedAssetTitle" value="${kbArticleRelatedAssetTitle}" />
 
 		<execute function="AssertTextEquals" locator1="AssetRelatedAssets#BLOGS_ENTRY_TITLE" value1="${kbArticleRelatedAssetTitle}" />
-	</command>
-
-	<command name="viewBlogsEntryRelatedAssetViaKBDisplayPG">
-		<execute function="AssertTextEquals" locator1="AssetRelatedAssets#BLOGS_ENTRY_TITLE" value1="${RelatedAssetTitle}" />
-		<execute function="AssertTextEquals" locator1="AssetRelatedAssets#BLOGS_ENTRY_CONTENT" value1="${RelatedAssetContent}" />
 	</command>
 
 	<command name="viewSearchResultsPG">
