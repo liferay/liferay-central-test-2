@@ -25,19 +25,25 @@ public class UpgradePortletId
 	protected String[][] getRenamePortletIdsArray() {
 		return new String[][] {
 			{"1_WAR_socialnetworkingportlet",
-				SocialNetworkingPortletKeys.SUMMARY},
+				SocialNetworkingPortletKeys.SUMMARY
+			},
 			{"2_WAR_socialnetworkingportlet",
-				SocialNetworkingPortletKeys.FRIENDS},
+				SocialNetworkingPortletKeys.FRIENDS
+			},
 			{"3_WAR_socialnetworkingportlet", SocialNetworkingPortletKeys.WALL},
 			{"4_WAR_socialnetworkingportlet",
-				SocialNetworkingPortletKeys.FRIENDS_ACTIVITIES},
+				SocialNetworkingPortletKeys.FRIENDS_ACTIVITIES
+			},
 			{"5_WAR_socialnetworkingportlet",
-				SocialNetworkingPortletKeys.MEMBERS},
+				SocialNetworkingPortletKeys.MEMBERS
+			},
 			{"6_WAR_socialnetworkingportlet", SocialNetworkingPortletKeys.MAP},
 			{"7_WAR_socialnetworkingportlet",
-				SocialNetworkingPortletKeys.MEETUPS},
+				SocialNetworkingPortletKeys.MEETUPS
+			},
 			{"8_WAR_socialnetworkingportlet",
-				SocialNetworkingPortletKeys.MEMBERS_ACTIVITIES}
+				SocialNetworkingPortletKeys.MEMBERS_ACTIVITIES
+			}
 		};
 	}
 

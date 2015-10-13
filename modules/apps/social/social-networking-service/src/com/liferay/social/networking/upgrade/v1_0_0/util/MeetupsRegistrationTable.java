@@ -22,15 +22,15 @@ import java.sql.Types;
 public class MeetupsRegistrationTable {
 
 	public static final Object[][] TABLE_COLUMNS = {
-		{"meetupsRegistrationId", new Integer(Types.BIGINT)},
-		{"companyId", new Integer(Types.BIGINT)},
-		{"userId", new Integer(Types.BIGINT)},
-		{"userName", new Integer(Types.VARCHAR)},
-		{"createDate", new Integer(Types.TIMESTAMP)},
-		{"modifiedDate", new Integer(Types.TIMESTAMP)},
-		{"meetupsEntryId", new Integer(Types.BIGINT)},
-		{"status", new Integer(Types.INTEGER)},
-		{"comments", new Integer(Types.VARCHAR)}
+		{"meetupsRegistrationId", Integer.valueOf(Types.BIGINT)},
+		{"companyId", Integer.valueOf(Types.BIGINT)},
+		{"userId", Integer.valueOf(Types.BIGINT)},
+		{"userName", Integer.valueOf(Types.VARCHAR)},
+		{"createDate", Integer.valueOf(Types.TIMESTAMP)},
+		{"modifiedDate", Integer.valueOf(Types.TIMESTAMP)},
+		{"meetupsEntryId", Integer.valueOf(Types.BIGINT)},
+		{"status", Integer.valueOf(Types.INTEGER)},
+		{"comments", Integer.valueOf(Types.VARCHAR)}
 	};
 
 	public static final String TABLE_NAME = "SN_MeetupsRegistration";

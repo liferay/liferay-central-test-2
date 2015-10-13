@@ -22,14 +22,14 @@ import java.sql.Types;
 public class WallEntryTable {
 
 	public static final Object[][] TABLE_COLUMNS = {
-		{"wallEntryId", new Integer(Types.BIGINT)},
-		{"groupId", new Integer(Types.BIGINT)},
-		{"companyId", new Integer(Types.BIGINT)},
-		{"userId", new Integer(Types.BIGINT)},
-		{"userName", new Integer(Types.VARCHAR)},
-		{"createDate", new Integer(Types.TIMESTAMP)},
-		{"modifiedDate", new Integer(Types.TIMESTAMP)},
-		{"comments", new Integer(Types.VARCHAR)}
+		{"wallEntryId", Integer.valueOf(Types.BIGINT)},
+		{"groupId", Integer.valueOf(Types.BIGINT)},
+		{"companyId", Integer.valueOf(Types.BIGINT)},
+		{"userId", Integer.valueOf(Types.BIGINT)},
+		{"userName", Integer.valueOf(Types.VARCHAR)},
+		{"createDate", Integer.valueOf(Types.TIMESTAMP)},
+		{"modifiedDate", Integer.valueOf(Types.TIMESTAMP)},
+		{"comments", Integer.valueOf(Types.VARCHAR)}
 	};
 
 	public static final String TABLE_NAME = "SN_WallEntry";
