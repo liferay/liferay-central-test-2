@@ -95,16 +95,16 @@ public class JournalPortletUtil {
 				request, themeDisplay.translate("home"), portletURL.toString());
 		}
 		else {
+			portletURL.setParameter(
+				"folderId",
+				String.valueOf(
+					JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID));
+
 			Map<String, Object> data = new HashMap<>();
 
 			data.put("direction-right", Boolean.TRUE.toString());
 			data.put(
 				"folder-id", JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID);
-
-			portletURL.setParameter(
-				"folderId",
-				String.valueOf(
-					JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID));
 
 			PortalUtil.addPortletBreadcrumbEntry(
 				request, themeDisplay.translate("home"), portletURL.toString(),

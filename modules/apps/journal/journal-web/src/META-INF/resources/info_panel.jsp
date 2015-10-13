@@ -21,7 +21,6 @@ JournalFolder folder = journalDisplayContext.getFolder();
 %>
 
 <div class="sidebar-header">
-
 	<c:if test="<%= journalDisplayContext.isShowEditActions() %>">
 		<ul class="list-inline list-unstyled sidebar-header-actions">
 			<li>
