@@ -84,8 +84,8 @@ public class BookmarksFolderStagedModelDataHandler
 
 		BookmarksFolder importedFolder = (BookmarksFolder)folder.clone();
 
-		importedFolder.setParentFolderId(parentFolderId);
 		importedFolder.setGroupId(portletDataContext.getScopeGroupId());
+		importedFolder.setParentFolderId(parentFolderId);
 
 		BookmarksFolder existingFolder =
 			_stagedModelRepository.fetchStagedModelByUuidAndGroupId(
