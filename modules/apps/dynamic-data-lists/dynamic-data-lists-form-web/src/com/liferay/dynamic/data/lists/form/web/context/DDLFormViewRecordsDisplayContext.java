@@ -118,6 +118,10 @@ public class DDLFormViewRecordsDisplayContext {
 			renderedDDMFormFielValues, StringPool.COMMA_AND_SPACE);
 	}
 
+	public DDLRecordSet getDDLRecordSet() {
+		return _ddlRecordSet;
+	}
+
 	public DDMFormValues getDDMFormValues(DDLRecord ddlRecord)
 		throws PortalException {
 
