@@ -26,13 +26,13 @@ import org.junit.Test;
 public class UpgradeInfoTest {
 
 	@Test
-	public void testEqualsReturnsFalseComparingToDifferentInstance() {
+	public void testEqualsReturnsFalseComparingToDifferentType() {
 		UpgradeStep upgradeStep = new UpgradeStepStub();
 
-		UpgradeInfo upgradeInfo1 = new UpgradeInfo(
+		UpgradeInfo upgradeInfo = new UpgradeInfo(
 			"1.0.0", "2.0.0", upgradeStep);
 
-		Assert.assertFalse(upgradeInfo1.equals(new String()));
+		Assert.assertFalse(upgradeInfo.equals(new String()));
 	}
 
 	@Test
@@ -72,10 +72,10 @@ public class UpgradeInfoTest {
 
 	@Test
 	public void testEqualsReturnsTrueComparingToSameObject() {
-		UpgradeInfo upgradeInfo1 = new UpgradeInfo(
+		UpgradeInfo upgradeInfo = new UpgradeInfo(
 			"1.0.0", "2.0.0", new UpgradeStepStub());
 
-		Assert.assertTrue(upgradeInfo1.equals(upgradeInfo1));
+		Assert.assertTrue(upgradeInfo.equals(upgradeInfo));
 	}
 
 	private class UpgradeStepStub implements UpgradeStep {
