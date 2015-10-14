@@ -224,7 +224,6 @@ public class DDMFormRendererHelperTest extends PowerMockito {
 			ddmFormFieldRendererHelper.getRenderedDDMFormFieldsMap();
 
 		Assert.assertEquals(7, renderedDDMFormFieldsMap.size());
-
 		Assert.assertEquals(
 			renderedNameDDMFormField, renderedDDMFormFieldsMap.get("Name"));
 		Assert.assertEquals(
