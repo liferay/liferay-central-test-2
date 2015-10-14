@@ -1,13 +1,17 @@
+#set ($css_main_file = "")
+#set ($is_signed_in = false)
+#set ($js_main_file = "")
+
+#if ($themeDisplay)
+	#set ($css_main_file = $htmlUtil.escape($portalUtil.getStaticResourceURL($request, "$themeDisplay.getPathThemeCss()/main.css")))
+	#set ($is_signed_in = $themeDisplay.isSignedIn())
+	#set ($js_main_file = $htmlUtil.escape($portalUtil.getStaticResourceURL($request, "$themeDisplay.getPathThemeCss()/main.js")))
+#end
+
 #set ($is_setup_complete = false)
 
 #if ($user)
 	#set ($is_setup_complete = $user.isSetupComplete())
-#end
-
-#set ($is_signed_in = false)
-
-#if ($themeDisplay)
-	#set ($is_signed_in = $themeDisplay.isSignedIn())
 #end
 
 #macro (breadcrumbs $default_preferences)
