@@ -17,20 +17,18 @@
 <%@ include file="/admin/init.jsp" %>
 
 <%
-String redirect = ParamUtil.getString(request, "redirect");
-
 DDLFormViewRecordsDisplayContext ddlFormViewRecordsDisplayContext = new DDLFormViewRecordsDisplayContext(liferayPortletRequest, liferayPortletResponse, ddlFormAdminDisplayContext.getRecordSet());
 
-DDLRecordSet recordSet = ddlFormViewRecordsDisplayContext.getDDLRecordSet();
-
-PortletURL portletURL = renderResponse.createRenderURL();
-
-portletURL.setParameter("mvcPath", "/admin/view_records.jsp");
-portletURL.setParameter("redirect", redirect);
-portletURL.setParameter("recordSetId", String.valueOf(recordSet.getRecordSetId()));
+DDLRecordSet ddlRecordSet = ddlFormViewRecordsDisplayContext.getDDLRecordSet();
 %>
 
-<aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
+<portlet:renderURL var="searchURL">
+	<portlet:param name="mvcPath" value="/admin/view_records.jsp" />
+	<portlet:param name="redirect" value='<%= ParamUtil.getString(request, "redirect") %>' />
+	<portlet:param name="recordSetId" value="<%= String.valueOf(ddlRecordSet.getRecordSetId()) %>" />
+</portlet:renderURL>
+
+<aui:form action="<%= searchURL %>" method="post" name="fm">
 	<aui:nav-bar cssClass="collapse-basic-search" markupView="lexicon">
 		<aui:nav-bar-search>
 			<liferay-ui:input-search autoFocus="<%= true %>" markupView="lexicon" />
