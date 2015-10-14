@@ -26,7 +26,6 @@ long classNameId = ParamUtil.getLong(request, "classNameId");
 String className = PortalUtil.getClassName(classNameId);
 
 long classPK = ParamUtil.getLong(request, "classPK");
-
 String eventName = ParamUtil.getString(request, "eventName", liferayPortletResponse.getNamespace() + "selectContainer");
 
 TrashHandler trashHandler = TrashHandlerRegistryUtil.getTrashHandler(className);
@@ -111,7 +110,7 @@ renderResponse.setTitle(LanguageUtil.format(request, "select-x", containerModelN
 
 			containerURL.setParameter("containerModelId", String.valueOf(curContainerModelId));
 
-			TrashHandler curContainerTrashHandler = TrashHandlerRegistryUtil.getTrashHandler(((BaseModel)curContainerModel).getModelClassName());
+			TrashHandler curContainerTrashHandler = TrashHandlerRegistryUtil.getTrashHandler(curContainerModel.getModelClassName());
 
 			TrashRenderer curContainerTrashRenderer = curContainerTrashHandler.getTrashRenderer(curContainerModelId);
 			%>
