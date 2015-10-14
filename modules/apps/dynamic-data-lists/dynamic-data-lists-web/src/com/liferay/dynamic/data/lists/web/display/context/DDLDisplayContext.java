@@ -14,6 +14,7 @@
 
 package com.liferay.dynamic.data.lists.web.display.context;
 
+import com.liferay.dynamic.data.lists.configuration.DDLServiceConfiguration;
 import com.liferay.dynamic.data.lists.constants.DDLActionKeys;
 import com.liferay.dynamic.data.lists.constants.DDLPortletKeys;
 import com.liferay.dynamic.data.lists.constants.DDLWebKeys;
@@ -90,11 +91,15 @@ public class DDLDisplayContext {
 
 	public String[] getDDLRecordSetDisplayViews() {
 		if (_ddlRecordDisplayViews == null) {
+			DDLServiceConfiguration ddlServiceConfiguration =
+				_ddlRequestHelper.getDDLServiceConfiguration();
+
 			_ddlRecordDisplayViews = StringUtil.split(
 				PrefsParamUtil.getString(
 					_ddlRequestHelper.getPortletPreferences(),
 					_ddlRequestHelper.getRenderRequest(), "displayViews",
-					StringUtil.merge(DDLWebConfigurationValues.DISPLAY_VIEWS)));
+					StringUtil.merge(
+						ddlServiceConfiguration.supportedDisplayView())));
 		}
 
 		return _ddlRecordDisplayViews;
