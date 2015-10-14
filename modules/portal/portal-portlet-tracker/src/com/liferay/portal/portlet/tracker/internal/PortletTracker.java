@@ -1223,8 +1223,7 @@ public class PortletTracker
 				name, _saxReader.createNamespace(defaultNamespace));
 		}
 
-		return _saxReader.createQName(
-			name, _saxReader.createNamespace(uri));
+		return _saxReader.createQName(name, _saxReader.createNamespace(uri));
 	}
 
 	protected ServiceRegistrations getServiceRegistrations(Bundle bundle) {
