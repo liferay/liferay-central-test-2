@@ -77,15 +77,13 @@ public class UserBagFactoryTest {
 
 	@Test
 	public void testGetGroups() throws Exception {
-		Set<Group> userGroups = getUserGroups();
-
-		Set<Group> userOrgGroups = getUserOrgGroups();
-
-		Set<Group> userUserGroupGroups = getUserUserGroupGroups();
-
 		UserBag userBag = getUserBag();
 
 		Set<Group> groups = userBag.getGroups();
+
+		Set<Group> userGroups = getUserGroups();
+		Set<Group> userOrgGroups = getUserOrgGroups();
+		Set<Group> userUserGroupGroups = getUserUserGroupGroups();
 
 		Assert.assertTrue(groups.containsAll(userGroups));
 		Assert.assertTrue(groups.containsAll(userOrgGroups));
