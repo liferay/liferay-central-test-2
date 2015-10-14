@@ -7656,7 +7656,9 @@ public class JournalArticleLocalServiceImpl
 			LocalizationUtil.getDefaultLanguageId(content));
 
 		if (!ExportImportThreadLocal.isImportInProcess()) {
-			if (!LanguageUtil.isAvailableLocale(groupId, articleDefaultLocale)) {
+			if (!LanguageUtil.isAvailableLocale(
+					groupId, articleDefaultLocale)) {
+
 				LocaleException le = new LocaleException(
 					LocaleException.TYPE_CONTENT,
 					"The locale " + articleDefaultLocale +
