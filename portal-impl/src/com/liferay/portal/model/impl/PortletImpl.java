@@ -303,6 +303,16 @@ public class PortletImpl extends PortletBaseImpl {
 	}
 
 	/**
+	 * Adds an application type.
+	 *
+	 * @param applicationType an application type
+	 */
+	@Override
+	public void addApplicationType(ApplicationType applicationType) {
+		_applicationTypes.add(applicationType);
+	}
+
+	/**
 	 * Adds a processing event.
 	 */
 	@Override
@@ -354,16 +364,6 @@ public class PortletImpl extends PortletBaseImpl {
 	@Override
 	public void addSchedulerEntry(SchedulerEntry schedulerEntry) {
 		_schedulerEntries.add(schedulerEntry);
-	}
-
-	/**
-	 * Adds an application type.
-	 *
-	 * @param applicationType an application type
-	 */
-	@Override
-	public void addApplicationType(ApplicationType applicationType) {
-		_applicationTypes.add(applicationType);
 	}
 
 	/**
@@ -2837,7 +2837,7 @@ public class PortletImpl extends PortletBaseImpl {
 	@Override
 	public void setApplicationTypes(Set<ApplicationType> applicationTypes) {
 		for (ApplicationType applicationType : applicationTypes) {
-			addSupportedApplicationType(applicationType);
+			addApplicationType(applicationType);
 		}
 	}
 
