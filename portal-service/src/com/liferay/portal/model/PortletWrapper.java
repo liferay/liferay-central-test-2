@@ -100,7 +100,18 @@ public class PortletWrapper implements Portlet, ModelWrapper<Portlet> {
 	}
 
 	/**
-	* Adds a supported processing event.
+	* Adds an application type.
+	*
+	* @param applicationType an application type
+	*/
+	@Override
+	public void addApplicationType(
+		com.liferay.portal.kernel.application.type.ApplicationType applicationType) {
+		_portlet.addApplicationType(applicationType);
+	}
+
+	/**
+	* Adds a processing event.
 	*/
 	@Override
 	public void addProcessingEvent(
@@ -109,9 +120,9 @@ public class PortletWrapper implements Portlet, ModelWrapper<Portlet> {
 	}
 
 	/**
-	* Adds a supported public render parameter.
+	* Adds a public render parameter.
 	*
-	* @param publicRenderParameter a supported public render parameter
+	* @param publicRenderParameter a public render parameter
 	*/
 	@Override
 	public void addPublicRenderParameter(
@@ -120,7 +131,7 @@ public class PortletWrapper implements Portlet, ModelWrapper<Portlet> {
 	}
 
 	/**
-	* Adds a supported publishing event.
+	* Adds a publishing event.
 	*/
 	@Override
 	public void addPublishingEvent(
@@ -135,17 +146,6 @@ public class PortletWrapper implements Portlet, ModelWrapper<Portlet> {
 	public void addSchedulerEntry(
 		com.liferay.portal.kernel.scheduler.SchedulerEntry schedulerEntry) {
 		_portlet.addSchedulerEntry(schedulerEntry);
-	}
-
-	/**
-	* Adds an application type.
-	*
-	* @param applicationType an application type
-	*/
-	@Override
-	public void addSupportedApplicationType(
-		com.liferay.portal.kernel.application.type.ApplicationType applicationType) {
-		_portlet.addSupportedApplicationType(applicationType);
 	}
 
 	@Override
@@ -213,9 +213,9 @@ public class PortletWrapper implements Portlet, ModelWrapper<Portlet> {
 	}
 
 	/**
-	* Returns a list of all portlet modes supported by the portlet.
+	* Returns the portlet modes of the portlet.
 	*
-	* @return a list of all portlet modes supported by the portlet
+	* @return the portlet modes of the portlet
 	*/
 	@Override
 	public java.util.Set<java.lang.String> getAllPortletModes() {
@@ -223,9 +223,9 @@ public class PortletWrapper implements Portlet, ModelWrapper<Portlet> {
 	}
 
 	/**
-	* Returns a list of all window states supported by the portlet.
+	* Returns the window states of the portlet.
 	*
-	* @return a list of all window states supported by the portlet
+	* @return the window states of the portlet
 	*/
 	@Override
 	public java.util.Set<java.lang.String> getAllWindowStates() {
@@ -233,9 +233,9 @@ public class PortletWrapper implements Portlet, ModelWrapper<Portlet> {
 	}
 
 	/**
-	* Returns the supported application types of the portlet.
+	* Returns the application types of the portlet.
 	*
-	* @return the supported application types of the portlet
+	* @return the application types of the portlet
 	*/
 	@Override
 	public java.util.Set<com.liferay.portal.kernel.application.type.ApplicationType> getApplicationTypes() {
@@ -1104,13 +1104,11 @@ public class PortletWrapper implements Portlet, ModelWrapper<Portlet> {
 	}
 
 	/**
-	* Returns the supported processing event from a namespace URI and a local
-	* part.
+	* Returns the processing event from a namespace URI and a local part.
 	*
 	* @param uri the namespace URI
 	* @param localPart the local part
-	* @return the supported processing event from a namespace URI and a local
-	part
+	* @return the processing event from a namespace URI and a local part
 	*/
 	@Override
 	public com.liferay.portal.kernel.xml.QName getProcessingEvent(
@@ -1119,9 +1117,9 @@ public class PortletWrapper implements Portlet, ModelWrapper<Portlet> {
 	}
 
 	/**
-	* Returns the supported processing events of the portlet.
+	* Returns the processing events of the portlet.
 	*
-	* @return supported processing events of the portlet
+	* @return the processing events of the portlet
 	*/
 	@Override
 	public java.util.Set<com.liferay.portal.kernel.xml.QName> getProcessingEvents() {
@@ -1129,10 +1127,10 @@ public class PortletWrapper implements Portlet, ModelWrapper<Portlet> {
 	}
 
 	/**
-	* Returns the supported public render parameter from an identifier.
+	* Returns the public render parameter from an identifier.
 	*
 	* @param identifier the identifier
-	* @return the supported public render parameter from an identifier
+	* @return the public render parameter from an identifier
 	*/
 	@Override
 	public com.liferay.portal.model.PublicRenderParameter getPublicRenderParameter(
@@ -1141,13 +1139,13 @@ public class PortletWrapper implements Portlet, ModelWrapper<Portlet> {
 	}
 
 	/**
-	* Returns the supported public render parameter from a namespace URI and a
-	* local part.
+	* Returns the spublic render parameter from a namespace URI and a local
+	* part.
 	*
 	* @param uri the namespace URI
 	* @param localPart the local part
-	* @return the supported public render parameter from a namespace URI and a
-	local part
+	* @return the spublic render parameter from a namespace URI and a local
+	part
 	*/
 	@Override
 	public com.liferay.portal.model.PublicRenderParameter getPublicRenderParameter(
@@ -1156,9 +1154,9 @@ public class PortletWrapper implements Portlet, ModelWrapper<Portlet> {
 	}
 
 	/**
-	* Returns the supported public render parameters of the portlet.
+	* Returns the public render parameters of the portlet.
 	*
-	* @return the supported public render parameters of the portlet
+	* @return the public render parameters of the portlet
 	*/
 	@Override
 	public java.util.Set<com.liferay.portal.model.PublicRenderParameter> getPublicRenderParameters() {
@@ -1166,9 +1164,9 @@ public class PortletWrapper implements Portlet, ModelWrapper<Portlet> {
 	}
 
 	/**
-	* Returns the supported publishing events of the portlet.
+	* Returns the publishing events of the portlet.
 	*
-	* @return supported publishing events of the portlet
+	* @return the publishing events of the portlet
 	*/
 	@Override
 	public java.util.Set<com.liferay.portal.kernel.xml.QName> getPublishingEvents() {
@@ -1477,7 +1475,7 @@ public class PortletWrapper implements Portlet, ModelWrapper<Portlet> {
 	/**
 	* Returns the supported locales of the portlet.
 	*
-	* @return supported locales of the portlet
+	* @return the supported locales of the portlet
 	*/
 	@Override
 	public java.util.Set<java.lang.String> getSupportedLocales() {
@@ -2291,10 +2289,9 @@ public class PortletWrapper implements Portlet, ModelWrapper<Portlet> {
 	}
 
 	/**
-	* Sets the supported public render parameters of the portlet.
+	* Sets the application types of the portlet.
 	*
-	* @param applicationTypes the supported public render parameters of
-	the portlet
+	* @param applicationTypes the application types of the portlet
 	*/
 	@Override
 	public void setApplicationTypes(
@@ -3033,9 +3030,9 @@ public class PortletWrapper implements Portlet, ModelWrapper<Portlet> {
 	}
 
 	/**
-	* Sets the supported processing events of the portlet.
+	* Sets the processing events of the portlet.
 	*
-	* @param processingEvents the supported processing events of the portlet
+	* @param processingEvents the processing events of the portlet
 	*/
 	@Override
 	public void setProcessingEvents(
@@ -3044,10 +3041,9 @@ public class PortletWrapper implements Portlet, ModelWrapper<Portlet> {
 	}
 
 	/**
-	* Sets the supported public render parameters of the portlet.
+	* Sets the public render parameters of the portlet.
 	*
-	* @param publicRenderParameters the supported public render parameters of
-	the portlet
+	* @param publicRenderParameters the public render parameters of the portlet
 	*/
 	@Override
 	public void setPublicRenderParameters(
@@ -3056,9 +3052,9 @@ public class PortletWrapper implements Portlet, ModelWrapper<Portlet> {
 	}
 
 	/**
-	* Sets the supported publishing events of the portlet.
+	* Sets the publishing events of the portlet.
 	*
-	* @param publishingEvents the supported publishing events of the portlet
+	* @param publishingEvents the publishing events of the portlet
 	*/
 	@Override
 	public void setPublishingEvents(
