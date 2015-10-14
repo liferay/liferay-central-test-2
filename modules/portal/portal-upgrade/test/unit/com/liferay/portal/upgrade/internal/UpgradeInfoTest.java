@@ -26,19 +26,8 @@ import org.junit.Test;
 public class UpgradeInfoTest {
 
 	@Test
-	public void testEqualsReturnsFalseComparingToDifferentSchemaVersion() {
-		UpgradeInfo upgradeInfo1 = new UpgradeInfo(
-			"1.0.0", "2.0.0", new UpgradeStepStub());
-
-		UpgradeInfo upgradeInfo2 = new UpgradeInfo(
-			"2.0.0", "3.0.0", new UpgradeStepStub());
-
-		Assert.assertFalse(upgradeInfo1.equals(upgradeInfo2));
-	}
-
-	@Test
-	public void testEqualsReturnsFalseComparingToDifferentType() {
-		UpgradeStep upgradeStep = new UpgradeStepStub();
+	public void testEqualsReturnsFalseComparingDifferentClass() {
+		UpgradeStep upgradeStep = new TestUpgradeStep();
 
 		UpgradeInfo upgradeInfo = new UpgradeInfo(
 			"1.0.0", "2.0.0", upgradeStep);
@@ -47,38 +36,46 @@ public class UpgradeInfoTest {
 	}
 
 	@Test
-	public void testEqualsReturnsFalseComparingToSameSchemaVersion() {
+	public void testEqualsReturnsFalseComparingDifferentSchemaVersion() {
 		UpgradeInfo upgradeInfo1 = new UpgradeInfo(
-			"1.0.0", "2.0.0", new UpgradeStepStub());
-
+			"1.0.0", "2.0.0", new TestUpgradeStep());
 		UpgradeInfo upgradeInfo2 = new UpgradeInfo(
-			"1.0.0", "2.0.0", new UpgradeStepStub());
+			"2.0.0", "3.0.0", new TestUpgradeStep());
 
 		Assert.assertFalse(upgradeInfo1.equals(upgradeInfo2));
 	}
 
 	@Test
-	public void testEqualsReturnsTrue() {
-		UpgradeStep upgradeStep = new UpgradeStepStub();
+	public void testEqualsReturnsFalseComparingSameSchemaVersion() {
+		UpgradeInfo upgradeInfo1 = new UpgradeInfo(
+			"1.0.0", "2.0.0", new TestUpgradeStep());
+		UpgradeInfo upgradeInfo2 = new UpgradeInfo(
+			"1.0.0", "2.0.0", new TestUpgradeStep());
+
+		Assert.assertFalse(upgradeInfo1.equals(upgradeInfo2));
+	}
+
+	@Test
+	public void testEqualsReturnsTrueComparingSameInstance() {
+		UpgradeInfo upgradeInfo = new UpgradeInfo(
+			"1.0.0", "2.0.0", new TestUpgradeStep());
+
+		Assert.assertTrue(upgradeInfo.equals(upgradeInfo));
+	}
+
+	@Test
+	public void testEqualsReturnsTrueComparingSameSchemaVersion() {
+		UpgradeStep upgradeStep = new TestUpgradeStep();
 
 		UpgradeInfo upgradeInfo1 = new UpgradeInfo(
 			"1.0.0", "2.0.0", upgradeStep);
-
 		UpgradeInfo upgradeInfo2 = new UpgradeInfo(
 			"1.0.0", "2.0.0", upgradeStep);
 
 		Assert.assertTrue(upgradeInfo1.equals(upgradeInfo2));
 	}
 
-	@Test
-	public void testEqualsReturnsTrueComparingToSameObject() {
-		UpgradeInfo upgradeInfo = new UpgradeInfo(
-			"1.0.0", "2.0.0", new UpgradeStepStub());
-
-		Assert.assertTrue(upgradeInfo.equals(upgradeInfo));
-	}
-
-	private class UpgradeStepStub implements UpgradeStep {
+	private class TestUpgradeStep implements UpgradeStep {
 
 		@Override
 		public void upgrade(DBProcessContext dbProcessContext) {
