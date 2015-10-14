@@ -333,8 +333,8 @@ public class RemoteMVCPortlet extends MVCPortlet {
 
 			PortletResponseUtil.sendFile(
 				resourceRequest, resourceResponse,
-				getFileName(contentDisposition),
-				response.getStream(), contentLength, contentType,
+				getFileName(contentDisposition), response.getStream(),
+				contentLength, contentType,
 				HttpHeaders.CONTENT_DISPOSITION_ATTACHMENT);
 		}
 		else {
