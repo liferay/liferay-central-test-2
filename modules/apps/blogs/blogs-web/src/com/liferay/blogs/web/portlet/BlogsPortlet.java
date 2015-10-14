@@ -30,6 +30,8 @@ import org.osgi.service.component.annotations.Reference;
 	immediate = true,
 	property = {
 		"com.liferay.portlet.add-default-resource=true",
+		"com.liferay.portlet.application-type=full-page-application",
+		"com.liferay.portlet.application-type=widget",
 		"com.liferay.portlet.css-class-wrapper=portlet-blogs",
 		"com.liferay.portlet.display-category=category.collaboration",
 		"com.liferay.portlet.header-portlet-css=/blogs/css/main.css",
@@ -41,8 +43,6 @@ import org.osgi.service.component.annotations.Reference;
 		"com.liferay.portlet.render-weight=50",
 		"com.liferay.portlet.scopeable=true",
 		"com.liferay.portlet.struts-path=blogs",
-		"com.liferay.portlet.supported-application-type=full-page-application",
-		"com.liferay.portlet.supported-application-type=widget",
 		"com.liferay.portlet.use-default-template=true",
 		"javax.portlet.display-name=Blogs", "javax.portlet.expiration-cache=0",
 		"javax.portlet.init-param.template-path=/",
