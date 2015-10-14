@@ -95,11 +95,11 @@ public class FileEntryStagedModelDataHandlerTest
 
 	@Test
 	public void testExportImportFileExtension() throws Exception {
+		String fileName = "PDF_Test.pdf";
+
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(
 				stagingGroup.getGroupId(), TestPropsValues.getUserId());
-
-		String fileName = "PDF_Test.pdf";
 
 		FileEntry fileEntry = DLAppLocalServiceUtil.addFileEntry(
 			TestPropsValues.getUserId(), stagingGroup.getGroupId(),
