@@ -27,14 +27,13 @@ public interface DDLServiceConfiguration {
 
 	@Meta.AD(deflt = "list", required = false)
 	public String defaultDisplayView();
-	
-	@Meta.AD(
-			deflt = "descriptive | list",
-			required = false
-			)
-	public String[] supportedDisplayView();
 
 	@Meta.AD(deflt = "json", required = false)
 	public String storageType();
-	
+
+	@Meta.AD(
+			deflt = "descriptive | list", required = false
+			)
+	public String[] supportedDisplayView();
+
 }

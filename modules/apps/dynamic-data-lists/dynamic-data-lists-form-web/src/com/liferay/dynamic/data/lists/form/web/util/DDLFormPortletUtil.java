@@ -14,8 +14,6 @@
 
 package com.liferay.dynamic.data.lists.form.web.util;
 
-import javax.portlet.PortletRequest;
-
 import com.liferay.dynamic.data.lists.form.web.configuration.DDLFormWebConfiguration;
 import com.liferay.dynamic.data.lists.form.web.constants.DDLFormPortletKeys;
 import com.liferay.dynamic.data.lists.form.web.context.util.DDLFormWebRequestHelper;
@@ -30,6 +28,8 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.PortalPreferences;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
+
+import javax.portlet.PortletRequest;
 
 /**
  * @author Rafael Praxedes
@@ -73,18 +73,16 @@ public class DDLFormPortletUtil {
 			portletRequest, "displayStyle");
 
 		if (Validator.isNull(displayStyle)) {
-			
 			DDLFormWebRequestHelper ddlFormWebRequestHelper =
 					new DDLFormWebRequestHelper(
 						PortalUtil.getHttpServletRequest(portletRequest));
 
 			DDLFormWebConfiguration ddlFormWebConfiguration =
 				ddlFormWebRequestHelper.getDDLFormWebConfiguration();
-			
+
 			displayStyle = portalPreferences.getValue(
 				DDLFormPortletKeys.DYNAMIC_DATA_LISTS_FORM_ADMIN,
-				"display-style",
-				ddlFormWebConfiguration.defaultDisplayView());
+				"display-style", ddlFormWebConfiguration.defaultDisplayView());
 		}
 		else if (ArrayUtil.contains(displayViews, displayStyle)) {
 			portalPreferences.setValue(

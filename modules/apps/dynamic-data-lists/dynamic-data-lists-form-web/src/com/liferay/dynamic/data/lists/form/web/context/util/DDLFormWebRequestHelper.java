@@ -22,7 +22,6 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.module.configuration.ConfigurationFactoryUtil;
 import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
 import com.liferay.portal.kernel.settings.ParameterMapSettingsLocator;
-import com.liferay.portal.kernel.util.Validator;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -38,7 +37,7 @@ public class DDLFormWebRequestHelper extends BaseRequestHelper {
 	public DDLFormWebConfiguration getDDLFormWebConfiguration() {
 		try {
 			if (_ddlFormWebConfiguration == null) {
-				if (Validator.isNotNull(getPortletResource())) {
+				if (getPortletResource() != null) {
 					HttpServletRequest request = getRequest();
 
 					_ddlFormWebConfiguration =
