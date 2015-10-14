@@ -127,7 +127,9 @@ public class PropertiesSourceProcessor extends BaseSourceProcessor {
 
 		String newContent = content;
 
-		if (portalSource && fileName.endsWith("Language.properties")) {
+		if (portalSource && !fileName.contains("/samples/") &&
+			fileName.endsWith("Language.properties")) {
+
 			checkLanguageProperties(fileName);
 		}
 		else if (fileName.endsWith("portlet.properties")) {
