@@ -464,8 +464,9 @@ public class DDLRecordLocalServiceImpl extends DDLRecordLocalServiceBaseImpl {
 
 		DDLRecordSet recordSet = record.getRecordSet();
 
-		if (recordSet.getScope() !=
-				DDLRecordSetConstants.SCOPE_DYNAMIC_DATA_LISTS) {
+		if ((recordSet.getScope() !=
+				DDLRecordSetConstants.SCOPE_DYNAMIC_DATA_LISTS) &&
+			(recordSet.getScope() != DDLRecordSetConstants.SCOPE_FORMS)) {
 
 			return;
 		}
