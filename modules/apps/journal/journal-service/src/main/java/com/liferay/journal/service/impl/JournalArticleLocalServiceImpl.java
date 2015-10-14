@@ -6466,8 +6466,8 @@ public class JournalArticleLocalServiceImpl
 			"dynamic-element");
 
 		LocalizedValue fieldLocalizedValue = new LocalizedValue(
-				LocaleUtil.fromLanguageId(
-					parentElement.attributeValue("default-locale")));
+			LocaleUtil.fromLanguageId(
+				parentElement.attributeValue("default-locale")));
 
 		for (Element dynamicElementElement : dynamicElementElements) {
 			String fieldName = dynamicElementElement.attributeValue(
@@ -6477,9 +6477,9 @@ public class JournalArticleLocalServiceImpl
 				dynamicElementElement.elements("dynamic-content");
 
 			for (Element dynamicContentElement : dynamicContentElements) {
-				String value = dynamicContentElement.getText();
 				String languageId = dynamicContentElement.attributeValue(
 					"language-id");
+				String value = dynamicContentElement.getText();
 
 				fieldLocalizedValue.addString(
 					LocaleUtil.fromLanguageId(languageId), value);

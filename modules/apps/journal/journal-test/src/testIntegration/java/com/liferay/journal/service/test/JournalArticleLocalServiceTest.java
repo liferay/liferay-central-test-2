@@ -164,8 +164,8 @@ public class JournalArticleLocalServiceTest {
 	@Test
 	public void testUpdateDDMStructurePredefinedValues() throws Exception {
 		Set<Locale> availableLocales = DDMFormTestUtil.createAvailableLocales(
-					LocaleUtil.US, LocaleUtil.BRAZIL, LocaleUtil.ITALY,
-					LocaleUtil.FRENCH);
+			LocaleUtil.US, LocaleUtil.BRAZIL, LocaleUtil.ITALY,
+			LocaleUtil.FRENCH);
 
 		DDMForm ddmForm = DDMFormTestUtil.createDDMForm(
 			availableLocales, LocaleUtil.US);
