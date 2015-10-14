@@ -232,6 +232,7 @@ public class DDLRecordIndexer extends BaseIndexer<DDLRecord> {
 
 		reindexRecords(
 			companyId, DDLRecordSetConstants.SCOPE_DYNAMIC_DATA_LISTS);
+		reindexRecords(companyId, DDLRecordSetConstants.SCOPE_FORMS);
 	}
 
 	protected String extractDDMContent(
