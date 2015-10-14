@@ -89,10 +89,10 @@ public class StagedModelRepositoryRegistryUtil {
 			StagedModelRepository<?> stagedModelRepository =
 				_bundleContext.getService(serviceReference);
 
-			String modelName = GetterUtil.getString(
+			String modelClassName = GetterUtil.getString(
 				serviceReference.getProperty("model.class.name"));
 
-			_stagedModelRepositories.put(modelName, stagedModelRepository);
+			_stagedModelRepositories.put(modelClassName, stagedModelRepository);
 
 			return stagedModelRepository;
 		}
@@ -114,10 +114,10 @@ public class StagedModelRepositoryRegistryUtil {
 
 			_bundleContext.ungetService(serviceReference);
 
-			String modelName = GetterUtil.getString(
+			String modelClassName = GetterUtil.getString(
 				serviceReference.getProperty("model.class.name"));
 
-			_stagedModelRepositories.remove(modelName);
+			_stagedModelRepositories.remove(modelClassName);
 		}
 
 	}
