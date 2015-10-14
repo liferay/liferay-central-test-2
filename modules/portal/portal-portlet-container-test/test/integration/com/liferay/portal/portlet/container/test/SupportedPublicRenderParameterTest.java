@@ -49,8 +49,7 @@ public class SupportedPublicRenderParameterTest
 		String prpName = "categoryId";
 
 		properties.put(
-			"javax.portlet.supported-public-render-parameter",
-			prpName);
+			"javax.portlet.supported-public-render-parameter", prpName);
 
 		setUpPortlet(testPortlet, properties, TEST_PORTLET_ID);
 
@@ -109,4 +108,5 @@ public class SupportedPublicRenderParameterTest
 
 		Assert.assertTrue(found);
 	}
+
 }
