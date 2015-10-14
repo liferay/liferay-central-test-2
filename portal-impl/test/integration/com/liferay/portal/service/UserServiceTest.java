@@ -887,9 +887,13 @@ public class UserServiceTest {
 		@Test
 		public void shouldNotRemoveChildSiteMembership() throws Exception {
 			User user = UserTestUtil.addUser(true);
+
 			List<Group> groups = new ArrayList<>();
 
 			Group parentGroup = GroupTestUtil.addGroup();
+
+			groups.add(parentGroup);
+
 			Group childGroup = GroupTestUtil.addGroup(parentGroup.getGroupId());
 
 			childGroup.setMembershipRestriction(
@@ -897,7 +901,6 @@ public class UserServiceTest {
 
 			GroupLocalServiceUtil.updateGroup(childGroup);
 
-			groups.add(parentGroup);
 			groups.add(childGroup);
 
 			GroupLocalServiceUtil.addUserGroups(user.getUserId(), groups);
