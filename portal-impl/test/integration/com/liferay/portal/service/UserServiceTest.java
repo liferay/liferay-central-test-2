@@ -885,7 +885,7 @@ public class UserServiceTest {
 				new LiferayIntegrationTestRule(), MainServletTestRule.INSTANCE);
 
 		@Test
-		public void shouldNotRemoveChildSiteMembership() throws Exception {
+		public void shouldNotRemoveChildGroupAssociation() throws Exception {
 			User user = UserTestUtil.addUser(true);
 
 			List<Group> groups = new ArrayList<>();
