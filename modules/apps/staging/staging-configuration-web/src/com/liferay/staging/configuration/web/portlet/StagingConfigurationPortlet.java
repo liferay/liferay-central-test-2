@@ -76,9 +76,8 @@ public class StagingConfigurationPortlet extends MVCPortlet {
 			WebKeys.THEME_DISPLAY);
 
 		long liveGroupId = ParamUtil.getLong(actionRequest, "liveGroupId");
-		Group liveGroup = _groupLocalService.getGroup(liveGroupId);
 
-		boolean stagedGroup = true;
+		Group liveGroup = _groupLocalService.getGroup(liveGroupId);
 
 		int stagingType = ParamUtil.getInteger(actionRequest, "stagingType");
 
@@ -93,19 +92,19 @@ public class StagingConfigurationPortlet extends MVCPortlet {
 		boolean forceDisable = ParamUtil.getBoolean(
 			actionRequest, "forceDisable");
 
+		boolean stagedGroup = true;
+
 		if (forceDisable) {
 			_groupLocalService.disableStaging(liveGroupId);
 		}
 		else if (stagingType == StagingConstants.TYPE_LOCAL_STAGING) {
-			stagedGroup = liveGroup.hasStagingGroup();
-
 			_stagingLocalService.enableLocalStaging(
 				themeDisplay.getUserId(), liveGroup, branchingPublic,
 				branchingPrivate, serviceContext);
+
+			stagedGroup = liveGroup.hasStagingGroup();
 		}
 		else if (stagingType == StagingConstants.TYPE_REMOTE_STAGING) {
-			stagedGroup = liveGroup.isStagedRemotely();
-
 			String remoteAddress = ParamUtil.getString(
 				actionRequest, "remoteAddress");
 			int remotePort = ParamUtil.getInteger(actionRequest, "remotePort");
@@ -120,6 +119,8 @@ public class StagingConfigurationPortlet extends MVCPortlet {
 				themeDisplay.getUserId(), liveGroup, branchingPublic,
 				branchingPrivate, remoteAddress, remotePort, remotePathContext,
 				secureConnection, remoteGroupId, serviceContext);
+
+			stagedGroup = liveGroup.isStagedRemotely();
 		}
 		else if (stagingType == StagingConstants.TYPE_NOT_STAGED) {
 			_stagingLocalService.disableStaging(liveGroup, serviceContext);
@@ -128,25 +129,23 @@ public class StagingConfigurationPortlet extends MVCPortlet {
 		String redirect = ParamUtil.getString(actionRequest, "redirect");
 
 		if (!stagedGroup) {
-			PortletURL stagingGroupAdministrationURL =
-				PortalUtil.getControlPanelPortletURL(
-					actionRequest, liveGroup.getStagingGroup(),
-					StagingConfigurationPortletKeys.STAGING_CONFIGURATION, 0,
-					PortletRequest.RENDER_PHASE);
+			PortletURL portletURL = PortalUtil.getControlPanelPortletURL(
+				actionRequest, liveGroup.getStagingGroup(),
+				StagingConfigurationPortletKeys.STAGING_CONFIGURATION, 0,
+				PortletRequest.RENDER_PHASE);
 
-			if (stagingGroupAdministrationURL != null) {
-				redirect = stagingGroupAdministrationURL.toString();
+			if (portletURL != null) {
+				redirect = portletURL.toString();
 			}
 		}
 		else if (stagingType == StagingConstants.TYPE_NOT_STAGED) {
-			PortletURL groupAdministrationURL =
-				PortalUtil.getControlPanelPortletURL(
-					actionRequest, liveGroup,
-					StagingConfigurationPortletKeys.STAGING_CONFIGURATION, 0,
-					PortletRequest.RENDER_PHASE);
+			PortletURL portletURL = PortalUtil.getControlPanelPortletURL(
+				actionRequest, liveGroup,
+				StagingConfigurationPortletKeys.STAGING_CONFIGURATION, 0,
+				PortletRequest.RENDER_PHASE);
 
-			if (groupAdministrationURL != null) {
-				redirect = groupAdministrationURL.toString();
+			if (portletURL != null) {
+				redirect = portletURL.toString();
 			}
 		}
 
