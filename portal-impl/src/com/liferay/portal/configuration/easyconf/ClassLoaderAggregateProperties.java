@@ -68,8 +68,7 @@ public class ClassLoaderAggregateProperties extends AggregatedProperties {
 			_baseConfigurationLoaded = true;
 
 			if (configuration.isEmpty() && _log.isDebugEnabled()) {
-				_log.debug(
-					"Base configuration source " + fileName + " is empty");
+				_log.debug("Empty configuration " + fileName);
 			}
 		}
 	}
