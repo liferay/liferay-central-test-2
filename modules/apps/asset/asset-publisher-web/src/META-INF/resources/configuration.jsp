@@ -151,6 +151,8 @@ List<AssetRendererFactory<?>> classTypesAssetRendererFactories = new ArrayList<>
 					<c:if test="<%= GroupLocalServiceUtil.getGroupsCount(company.getCompanyId(), Layout.class.getName(), layout.getGroupId()) > 0 %>">
 
 						<%
+						data = new HashMap<String, Object>();
+
 						PortletURL layoutSiteBrowserURL = PortletProviderUtil.getPortletURL(request, Group.class.getName(), PortletProvider.Action.BROWSE);
 
 						layoutSiteBrowserURL.setParameter("groupId", String.valueOf(layout.getGroupId()));
@@ -161,9 +163,8 @@ List<AssetRendererFactory<?>> classTypesAssetRendererFactories = new ArrayList<>
 						layoutSiteBrowserURL.setPortletMode(PortletMode.VIEW);
 						layoutSiteBrowserURL.setWindowState(LiferayWindowState.POP_UP);
 
-						data = new HashMap<String, Object>();
-
 						data.put("href", layoutSiteBrowserURL.toString());
+
 						data.put("title", LanguageUtil.get(request, "pages"));
 						%>
 
@@ -199,6 +200,8 @@ List<AssetRendererFactory<?>> classTypesAssetRendererFactories = new ArrayList<>
 					<c:if test="<%= !types.isEmpty() %>">
 
 						<%
+						data = new HashMap<String, Object>();
+
 						PortletURL siteBrowserURL = PortletProviderUtil.getPortletURL(renderRequest, Group.class.getName(), PortletProvider.Action.BROWSE);
 
 						siteBrowserURL.setParameter("groupId", String.valueOf(layout.getGroupId()));
@@ -209,9 +212,8 @@ List<AssetRendererFactory<?>> classTypesAssetRendererFactories = new ArrayList<>
 						siteBrowserURL.setPortletMode(PortletMode.VIEW);
 						siteBrowserURL.setWindowState(LiferayWindowState.POP_UP);
 
-						data = new HashMap<String, Object>();
-
 						data.put("href", siteBrowserURL.toString());
+
 						data.put("title", LanguageUtil.get(request, "sites"));
 						%>
 
