@@ -55,14 +55,15 @@ public class PortalImplControlPanelFullURLTest {
 
 	@Test
 	public void testControlPanelPortlet() throws Exception {
-		String portletId = PortletKeys.SERVER_ADMIN;
-
 		StringBuilder sb = new StringBuilder(5);
 
 		sb.append(getPortalURL());
 		sb.append(_portalImpl.getPathFriendlyURLPrivateGroup());
 		sb.append(GroupConstants.CONTROL_PANEL_FRIENDLY_URL);
 		sb.append(PropsValues.CONTROL_PANEL_LAYOUT_FRIENDLY_URL);
+
+		String portletId = PortletKeys.SERVER_ADMIN;
+
 		sb.append(getQueryString(portletId));
 
 		Assert.assertEquals(
@@ -73,8 +74,6 @@ public class PortalImplControlPanelFullURLTest {
 
 	@Test
 	public void testMyAccountPortlet() throws Exception {
-		String portletId = PortletKeys.MY_ACCOUNT;
-
 		StringBuilder sb = new StringBuilder(5);
 
 		sb.append(getPortalURL());
@@ -89,6 +88,9 @@ public class PortalImplControlPanelFullURLTest {
 		sb.append(VirtualLayoutConstants.CANONICAL_URL_SEPARATOR);
 		sb.append(GroupConstants.CONTROL_PANEL_FRIENDLY_URL);
 		sb.append(PropsValues.CONTROL_PANEL_LAYOUT_FRIENDLY_URL);
+
+		String portletId = PortletKeys.MY_ACCOUNT;
+
 		sb.append(getQueryString(portletId));
 
 		Assert.assertEquals(
@@ -99,8 +101,6 @@ public class PortalImplControlPanelFullURLTest {
 
 	@Test
 	public void testSiteAdministrationPortlet() throws Exception {
-		String portletId = "com_liferay_journal_web_portlet_JournalPortlet";
-
 		StringBuilder sb = new StringBuilder(7);
 
 		sb.append(getPortalURL());
@@ -109,6 +109,9 @@ public class PortalImplControlPanelFullURLTest {
 		sb.append(VirtualLayoutConstants.CANONICAL_URL_SEPARATOR);
 		sb.append(GroupConstants.CONTROL_PANEL_FRIENDLY_URL);
 		sb.append(PropsValues.CONTROL_PANEL_LAYOUT_FRIENDLY_URL);
+
+		String portletId = "com_liferay_journal_web_portlet_JournalPortlet";
+
 		sb.append(getQueryString(portletId));
 
 		Assert.assertEquals(
