@@ -25,14 +25,6 @@ import com.liferay.portal.kernel.util.ReferenceRegistry;
  */
 @ProviderType
 public class AssetTagFinderUtil {
-	public static java.util.List<com.liferay.portlet.asset.model.AssetTag> findByG_N_S_E(
-		long groupId, java.lang.String name, int startPeriod, int endPeriod,
-		int periodLength) {
-		return getFinder()
-				   .findByG_N_S_E(groupId, name, startPeriod, endPeriod,
-			periodLength);
-	}
-
 	public static int countByG_N(long groupId, java.lang.String name) {
 		return getFinder().countByG_N(groupId, name);
 	}
@@ -48,6 +40,14 @@ public class AssetTagFinderUtil {
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.asset.model.AssetTag> obc) {
 		return getFinder()
 				   .findByG_C_N(groupId, classNameId, name, start, end, obc);
+	}
+
+	public static java.util.List<com.liferay.portlet.asset.model.AssetTag> findByG_N_S_E(
+		long groupId, java.lang.String name, int startPeriod, int endPeriod,
+		int periodLength) {
+		return getFinder()
+				   .findByG_N_S_E(groupId, name, startPeriod, endPeriod,
+			periodLength);
 	}
 
 	public static AssetTagFinder getFinder() {
