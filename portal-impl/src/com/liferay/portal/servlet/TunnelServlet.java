@@ -28,7 +28,6 @@ import com.liferay.portal.util.PortalUtil;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-
 import java.lang.reflect.InvocationTargetException;
 
 import javax.servlet.ServletException;
@@ -123,11 +122,10 @@ public class TunnelServlet extends HttpServlet {
 			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
 
-		IllegalArgumentException e = new IllegalArgumentException(
-			"method GET is not supported by this URL");
-
 		PortalUtil.sendError(
-			HttpServletResponse.SC_NOT_FOUND, e, request, response);
+			HttpServletResponse.SC_NOT_FOUND,
+			new IllegalArgumentException("The GET method is not supported"),
+			request, response);
 	}
 
 	protected boolean isValidRequest(Class<?> clazz) {
