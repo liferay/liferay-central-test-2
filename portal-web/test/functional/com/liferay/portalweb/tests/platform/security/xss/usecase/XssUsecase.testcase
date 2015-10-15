@@ -116,7 +116,7 @@
 		<var name="key_listEntry" value="${siteName}" />
 
 		<execute function="ClickNoError" locator1="Icon#LIST_VERTICAL_ELLIPSIS" />
-		
+
 		<execute function="AssertClick" locator1="MenuItem#SITE_ADMINISTRATION" value1="Site Administration" />
 
 		<execute function="AssertAlertNotPresent" />
