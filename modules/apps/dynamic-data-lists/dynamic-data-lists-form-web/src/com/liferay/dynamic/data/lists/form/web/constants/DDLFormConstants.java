@@ -15,11 +15,8 @@
 package com.liferay.dynamic.data.lists.form.web.constants;
 
 /**
- *
  * @author Lino Alves
- *
  */
-
 public class DDLFormConstants {
 
 	public static final String SERVICE_NAME =

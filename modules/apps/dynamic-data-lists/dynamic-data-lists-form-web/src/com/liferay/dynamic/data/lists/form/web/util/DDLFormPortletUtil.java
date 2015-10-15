@@ -74,8 +74,8 @@ public class DDLFormPortletUtil {
 
 		if (Validator.isNull(displayStyle)) {
 			DDLFormWebRequestHelper ddlFormWebRequestHelper =
-					new DDLFormWebRequestHelper(
-						PortalUtil.getHttpServletRequest(portletRequest));
+				new DDLFormWebRequestHelper(
+					PortalUtil.getHttpServletRequest(portletRequest));
 
 			DDLFormWebConfiguration ddlFormWebConfiguration =
 				ddlFormWebRequestHelper.getDDLFormWebConfiguration();

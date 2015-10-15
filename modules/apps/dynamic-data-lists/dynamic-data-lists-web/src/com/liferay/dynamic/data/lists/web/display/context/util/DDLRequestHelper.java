@@ -52,10 +52,10 @@ public class DDLRequestHelper extends BaseRequestHelper {
 					_ddlServiceConfiguration =
 						ConfigurationFactoryUtil.getConfiguration(
 							DDLServiceConfiguration.class,
-						new ParameterMapSettingsLocator(
-							request.getParameterMap(),
-							new GroupServiceSettingsLocator(
-								getSiteGroupId(), DDLConstants.SERVICE_NAME)));
+							new ParameterMapSettingsLocator(
+								request.getParameterMap(),
+								new GroupServiceSettingsLocator(
+									getSiteGroupId(), DDLConstants.SERVICE_NAME)));
 				}
 				else {
 					_ddlServiceConfiguration =
