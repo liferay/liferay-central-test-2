@@ -48,26 +48,27 @@ String title = ddmDisplay.getViewTemplatesTitle(structure, locale);
 SearchContainer templateSearch = new TemplateSearch(renderRequest, portletURL, WorkflowConstants.STATUS_APPROVED);
 %>
 
-<c:if test="<%= showToolbar %>">
-
-	<%
-	request.setAttribute(WebKeys.SEARCH_CONTAINER, templateSearch);
-	%>
-
-	<liferay-util:include page="/template_toolbar.jsp" servletContext="<%= application %>">
-		<liferay-util:param name="redirect" value="<%= currentURL %>" />
-		<liferay-util:param name="classNameId" value="<%= String.valueOf(classNameId) %>" />
-		<liferay-util:param name="classPK" value="<%= String.valueOf(classPK) %>" />
-	</liferay-util:include>
-</c:if>
-
 <aui:form action="<%= portletURL.toString() %>" method="post" name="selectTemplateFm">
-	<c:if test="<%= !showToolbar %>">
-		<liferay-ui:header
-			localizeTitle="<%= false %>"
-			title="<%= title %>"
-		/>
-	</c:if>
+	<c:choose>
+		<c:when test="<%= showToolbar %>">
+
+			<%
+			request.setAttribute(WebKeys.SEARCH_CONTAINER, templateSearch);
+			%>
+
+			<liferay-util:include page="/template_toolbar.jsp" servletContext="<%= application %>">
+				<liferay-util:param name="redirect" value="<%= currentURL %>" />
+				<liferay-util:param name="classNameId" value="<%= String.valueOf(classNameId) %>" />
+				<liferay-util:param name="classPK" value="<%= String.valueOf(classPK) %>" />
+			</liferay-util:include>
+		</c:when>
+		<c:otherwise>
+			<liferay-ui:header
+				localizeTitle="<%= false %>"
+				title="<%= title %>"
+			/>
+		</c:otherwise>
+	</c:choose>
 
 	<div class="container-fluid-1280">
 		<liferay-ui:search-container
