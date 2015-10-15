@@ -61,6 +61,7 @@ SearchContainer templateSearch = new TemplateSearch(renderRequest, portletURL, W
 				<liferay-util:param name="redirect" value="<%= currentURL %>" />
 				<liferay-util:param name="classNameId" value="<%= String.valueOf(classNameId) %>" />
 				<liferay-util:param name="classPK" value="<%= String.valueOf(classPK) %>" />
+				<liferay-util:param name="includeCheckBox" value="<%= Boolean.FALSE.toString() %>" />
 			</liferay-util:include>
 		</c:when>
 		<c:otherwise>
