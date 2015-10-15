@@ -71,10 +71,10 @@ public class WabServletContextHelper extends ServletContextHelper {
 		}
 
 		if (!_wabShapedBundle && !name.startsWith("/META-INF/resources")) {
-			return _getEntryInBundleOrFragments("/META-INF/resources" + name);
+			return _getResourceInBundleOrFragments("/META-INF/resources" + name);
 		}
 
-		return _getEntryInBundleOrFragments(name);
+		return _getResourceInBundleOrFragments(name);
 	}
 
 	@Override
@@ -133,7 +133,7 @@ public class WabServletContextHelper extends ServletContextHelper {
 		return _string;
 	}
 
-	private URL _getEntryInBundleOrFragments(String name) {
+	private URL _getResourceInBundleOrFragments(String name) {
 		int lastIndexOf = name.lastIndexOf('/');
 
 		String baseDir = "/";
