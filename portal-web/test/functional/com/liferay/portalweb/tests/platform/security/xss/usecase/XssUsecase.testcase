@@ -110,15 +110,19 @@
 		</execute>
 
 		<execute function="Type" locator1="NavBar#BASIC_SEARCH_FIELD" value1="${siteName}" />
+
 		<execute function="Click" locator1="Icon#BASIC_SEARCH" />
 
 		<var name="key_listEntry" value="${siteName}" />
+
 		<execute function="ClickNoError" locator1="Icon#LIST_VERTICAL_ELLIPSIS" />
+		
 		<execute function="AssertClick" locator1="MenuItem#SITE_ADMINISTRATION" value1="Site Administration" />
 
 		<execute function="AssertAlertNotPresent" />
 
 		<var name="key_siteName" value="${siteName}" />
+
 		<execute function="AssertTextEquals" locator1="ProductMenu#PRODUCT_MENU_PANEL_SITE_ADMINISTRATION_SITE_NAME" value1="${key_siteName}" />
 	</command>
 
