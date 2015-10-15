@@ -34,17 +34,9 @@ if ((classPK > 0) && (structureClassNameId == classNameId)) {
 }
 
 String title = ddmDisplay.getViewTemplatesTitle(structure, locale);
-%>
 
-<liferay-portlet:renderURL varImpl="portletURL">
-	<portlet:param name="mvcPath" value="/select_template.jsp" />
-	<portlet:param name="classNameId" value="<%= String.valueOf(classNameId) %>" />
-	<portlet:param name="classPK" value="<%= String.valueOf(classPK) %>" />
-	<portlet:param name="resourceClassNameId" value="<%= String.valueOf(resourceClassNameId) %>" />
-	<portlet:param name="eventName" value="<%= eventName %>" />
-</liferay-portlet:renderURL>
+PortletURL portletURL = renderResponse.createRenderURL();
 
-<%
 SearchContainer templateSearch = new TemplateSearch(renderRequest, portletURL, WorkflowConstants.STATUS_APPROVED);
 %>
 
