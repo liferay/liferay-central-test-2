@@ -44,7 +44,7 @@ public class BundlePortletServletContextHelper extends ServletContextHelper {
 
 	@Override
 	public URL getResource(String name) {
-		URL url = _getEntryInBundleOrFragments(name);
+		URL url = _getResourceInBundleOrFragments(name);
 
 		if (url == null) {
 			if (name.startsWith("/")) {
@@ -52,7 +52,7 @@ public class BundlePortletServletContextHelper extends ServletContextHelper {
 			}
 
 			if (!name.startsWith("META-INF/resources/")) {
-				url = _getEntryInBundleOrFragments(
+				url = _getResourceInBundleOrFragments(
 					"META-INF/resources/" + name);
 			}
 		}
@@ -107,7 +107,7 @@ public class BundlePortletServletContextHelper extends ServletContextHelper {
 		return _string;
 	}
 
-	private URL _getEntryInBundleOrFragments(String name) {
+	private URL _getResourceInBundleOrFragments(String name) {
 		int lastIndexOf = name.lastIndexOf('/');
 
 		String baseDir = "/";
