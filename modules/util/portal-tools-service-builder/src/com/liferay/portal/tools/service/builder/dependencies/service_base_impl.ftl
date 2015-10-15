@@ -510,8 +510,8 @@ import ${packagePath}.service.${entity.name}${sessionTypeName}Service;
 						new ActionableDynamicQuery.PerformActionMethod<${entity.name}>() {
 
 							@Override
-							public void performAction(${entity.name} stagedModel) throws PortalException {
-								StagedModelDataHandlerUtil.exportStagedModel(portletDataContext, stagedModel);
+							public void performAction(${entity.name} ${entity.varName}) throws PortalException {
+								StagedModelDataHandlerUtil.exportStagedModel(portletDataContext, ${entity.varName});
 							}
 
 						});
