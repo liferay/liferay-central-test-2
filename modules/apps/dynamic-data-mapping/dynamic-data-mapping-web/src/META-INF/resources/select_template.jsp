@@ -40,7 +40,17 @@ PortletURL portletURL = renderResponse.createRenderURL();
 SearchContainer templateSearch = new TemplateSearch(renderRequest, portletURL, WorkflowConstants.STATUS_APPROVED);
 %>
 
-<aui:form action="<%= portletURL.toString() %>" method="post" name="selectTemplateFm">
+<portlet:actionURL var="selectURL">
+	<portlet:param name="mvcPath" value="/select_template.jsp" />
+</portlet:actionURL>
+
+<aui:form action="<%= selectURL.toString() %>" method="post" name="selectTemplateFm">
+	<aui:input name="classNameId" type="hidden" value="<%= String.valueOf(classNameId) %>" />
+	<aui:input name="classPK" type="hidden" value="<%= String.valueOf(classPK) %>" />
+	<aui:input name="resourceClassNameId" type="hidden" value="<%= String.valueOf(resourceClassNameId) %>" />
+	<aui:input name="eventName" type="hidden" value="<%= eventName %>" />
+	<aui:input name="templateId" type="hidden" value="<%= String.valueOf(templateId) %>" />
+
 	<c:choose>
 		<c:when test="<%= showToolbar %>">
 
