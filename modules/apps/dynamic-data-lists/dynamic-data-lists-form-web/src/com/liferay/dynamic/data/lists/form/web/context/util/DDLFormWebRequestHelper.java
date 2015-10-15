@@ -43,11 +43,11 @@ public class DDLFormWebRequestHelper extends BaseRequestHelper {
 					_ddlFormWebConfiguration =
 						ConfigurationFactoryUtil.getConfiguration(
 							DDLFormWebConfiguration.class,
-						new ParameterMapSettingsLocator(
-							request.getParameterMap(),
-							new GroupServiceSettingsLocator(
-								getSiteGroupId(),
-								DDLFormConstants.SERVICE_NAME)));
+							new ParameterMapSettingsLocator(
+								request.getParameterMap(),
+								new GroupServiceSettingsLocator(
+									getSiteGroupId(),
+									DDLFormConstants.SERVICE_NAME)));
 				}
 				else {
 					_ddlFormWebConfiguration =

@@ -108,8 +108,8 @@ public class DDLFormAdminDisplayContext {
 	public String[] getDisplayViews() {
 		if (_displayViews == null) {
 			DDLFormWebRequestHelper ddlFormWebRequestHelper =
-					new DDLFormWebRequestHelper(
-						PortalUtil.getHttpServletRequest(_renderRequest));
+				new DDLFormWebRequestHelper(
+					PortalUtil.getHttpServletRequest(_renderRequest));
 
 			DDLFormWebConfiguration ddlFormWebConfiguration =
 				ddlFormWebRequestHelper.getDDLFormWebConfiguration();

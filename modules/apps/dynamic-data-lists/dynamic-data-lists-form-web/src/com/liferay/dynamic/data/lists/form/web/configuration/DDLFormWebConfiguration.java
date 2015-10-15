@@ -28,9 +28,7 @@ public interface DDLFormWebConfiguration {
 	@Meta.AD(deflt = "descriptive", required = false)
 	public String defaultDisplayView();
 
-	@Meta.AD(
-			deflt = "icon | descriptive | list", required = false
-			)
+	@Meta.AD(deflt = "icon | descriptive | list", required = false)
 	public String[] supportedDisplayView();
 
 }
