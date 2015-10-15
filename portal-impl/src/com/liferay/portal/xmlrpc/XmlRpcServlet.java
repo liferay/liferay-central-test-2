@@ -49,11 +49,10 @@ public class XmlRpcServlet extends HttpServlet {
 			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
 
-		IllegalArgumentException e = new IllegalArgumentException(
-			"method GET is not supported by this URL");
-
 		PortalUtil.sendError(
-			HttpServletResponse.SC_NOT_FOUND, e, request, response);
+			HttpServletResponse.SC_NOT_FOUND,
+			new IllegalArgumentException("The GET method is not supported"),
+			request, response);
 	}
 
 	@Override
