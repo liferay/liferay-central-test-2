@@ -30,6 +30,7 @@ if (resourceClassNameId == 0) {
 
 String orderByCol = ParamUtil.getString(request, "orderByCol", "modified-date");
 String orderByType = ParamUtil.getString(request, "orderByType", "asc");
+long templateId = ParamUtil.getLong(request, "templateId");
 %>
 
 <li>
@@ -48,6 +49,7 @@ String orderByType = ParamUtil.getString(request, "orderByType", "asc");
 		<portlet:param name="eventName" value="<%= eventName %>" />
 		<portlet:param name="orderByCol" value="<%= orderByCol %>" />
 		<portlet:param name="orderByType" value="asc" />
+		<portlet:param name="templateId" value="<%= String.valueOf(templateId) %>" />
 	</portlet:renderURL>
 
 	<a class="btn hidden-xs" href="<%= orderByColAscURL %>"><span class="icon-caret-up icon-monospaced"></span></a>
@@ -62,6 +64,7 @@ String orderByType = ParamUtil.getString(request, "orderByType", "asc");
 		<portlet:param name="eventName" value="<%= eventName %>" />
 		<portlet:param name="orderByCol" value="<%= orderByCol %>" />
 		<portlet:param name="orderByType" value="desc" />
+		<portlet:param name="templateId" value="<%= String.valueOf(templateId) %>" />
 	</portlet:renderURL>
 
 	<a class="btn hidden-xs" href="<%= orderByColDescURL %>"><span class="icon-caret-down icon-monospaced"></span></a>
@@ -75,6 +78,7 @@ String orderByType = ParamUtil.getString(request, "orderByType", "asc");
 		<portlet:param name="resourceClassNameId" value="<%= String.valueOf(resourceClassNameId) %>" />
 		<portlet:param name="eventName" value="<%= eventName %>" />
 		<portlet:param name="orderByType" value="<%= orderByType %>" />
+		<portlet:param name="templateId" value="<%= String.valueOf(templateId) %>" />
 	</portlet:renderURL>
 
 	var orderByCol = $('#<portlet:namespace />orderByCol');
