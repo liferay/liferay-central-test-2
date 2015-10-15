@@ -72,7 +72,7 @@
 </tr>
 <tr>
 	<td>STAGING_BUTTON</td>
-	<td>//a[contains(.,'Staging')]</td>
+	<td>//a[contains(@value,'staging')]</td>
 	<td></td>
 </tr>
 <tr>
