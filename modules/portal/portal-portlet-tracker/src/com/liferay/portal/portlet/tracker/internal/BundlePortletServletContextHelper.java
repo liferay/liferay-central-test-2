@@ -108,24 +108,24 @@ public class BundlePortletServletContextHelper extends ServletContextHelper {
 	}
 
 	private URL _getResourceInBundleOrFragments(String name) {
-		int lastIndexOf = name.lastIndexOf('/');
-
-		String baseDir = "/";
+		String dirName = "/";
 		String fileName = name;
 
-		if (lastIndexOf > 0) {
-			baseDir = name.substring(0, lastIndexOf);
-			fileName = name.substring(lastIndexOf + 1);
+		int index = name.lastIndexOf('/');
+
+		if (index > 0) {
+			dirName = name.substring(0, index);
+			fileName = name.substring(index + 1);
 		}
 
-		Enumeration<URL> entries = _bundle.findEntries(
-			baseDir, fileName, false);
+		Enumeration<URL> enumeration = _bundle.findEntries(
+			dirName, fileName, false);
 
-		if ((entries == null) || !entries.hasMoreElements()) {
+		if ((enumeration == null) || !enumeration.hasMoreElements()) {
 			return null;
 		}
 
-		return entries.nextElement();
+		return enumeration.nextElement();
 	}
 
 	private final Bundle _bundle;
