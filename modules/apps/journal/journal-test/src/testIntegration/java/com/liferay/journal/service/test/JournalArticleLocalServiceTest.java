@@ -164,8 +164,8 @@ public class JournalArticleLocalServiceTest {
 	@Test
 	public void testUpdateDDMStructurePredefinedValues() throws Exception {
 		Set<Locale> availableLocales = DDMFormTestUtil.createAvailableLocales(
-			LocaleUtil.US, LocaleUtil.BRAZIL, LocaleUtil.ITALY,
-			LocaleUtil.FRENCH);
+			LocaleUtil.BRAZIL, LocaleUtil.FRENCH, LocaleUtil.ITALY,
+			LocaleUtil.US);
 
 		DDMForm ddmForm = DDMFormTestUtil.createDDMForm(
 			availableLocales, LocaleUtil.US);
@@ -175,21 +175,12 @@ public class JournalArticleLocalServiceTest {
 
 		LocalizedValue label = new LocalizedValue(LocaleUtil.US);
 
-		label.addString(LocaleUtil.US, "label us");
-		label.addString(LocaleUtil.BRAZIL, "label br");
-		label.addString(LocaleUtil.ITALY, "label es");
-		label.addString(LocaleUtil.FRENCH, "label fr");
+		label.addString(LocaleUtil.BRAZIL, "rótulo");
+		label.addString(LocaleUtil.FRENCH, "étiquette");
+		label.addString(LocaleUtil.ITALY, "etichetta");
+		label.addString(LocaleUtil.US, "label");
 
 		ddmFormField.setLabel(label);
-
-		LocalizedValue predefinedValue = new LocalizedValue(LocaleUtil.US);
-
-		predefinedValue.addString(LocaleUtil.US, "Test1 us");
-		predefinedValue.addString(LocaleUtil.BRAZIL, "Test1 br");
-		predefinedValue.addString(LocaleUtil.ITALY, "Test1 es");
-		predefinedValue.addString(LocaleUtil.FRENCH, "Test1 fr");
-
-		ddmFormField.setPredefinedValue(predefinedValue);
 
 		ddmForm.addDDMFormField(ddmFormField);
 
@@ -204,10 +195,10 @@ public class JournalArticleLocalServiceTest {
 
 		Map<Locale, String> values = new HashMap<>();
 
-		values.put(LocaleUtil.US, "Test2 us");
-		values.put(LocaleUtil.BRAZIL, "Test2 br");
-		values.put(LocaleUtil.ITALY, "Test2 es");
-		values.put(LocaleUtil.FRENCH, "Test2 fr");
+		values.put(LocaleUtil.BRAZIL, "valor predefinido");
+		values.put(LocaleUtil.FRENCH, "valeur prédéfinie");
+		values.put(LocaleUtil.ITALY, "valore predefinito");
+		values.put(LocaleUtil.US, "predefined value");
 
 		String content = DDMStructureTestUtil.getSampleStructuredContent(
 			values, LocaleUtil.US.toString());
@@ -244,17 +235,20 @@ public class JournalArticleLocalServiceTest {
 			actualDDMFormField.getPredefinedValue();
 
 		Assert.assertEquals(
-			"Test2 us",
-			actualDDMFormFieldPredefinedValue.getString(LocaleUtil.US));
-		Assert.assertEquals(
-			"Test2 br",
+			"valor predefinido",
 			actualDDMFormFieldPredefinedValue.getString(LocaleUtil.BRAZIL));
+
 		Assert.assertEquals(
-				"Test2 es",
-				actualDDMFormFieldPredefinedValue.getString(LocaleUtil.ITALY));
+			"valeur prédéfinie",
+			actualDDMFormFieldPredefinedValue.getString(LocaleUtil.FRENCH));
+
 		Assert.assertEquals(
-				"Test2 fr",
-				actualDDMFormFieldPredefinedValue.getString(LocaleUtil.FRENCH));
+			"valore predefinito",
+			actualDDMFormFieldPredefinedValue.getString(LocaleUtil.ITALY));
+
+		Assert.assertEquals(
+			"predefined value",
+			actualDDMFormFieldPredefinedValue.getString(LocaleUtil.US));
 	}
 
 	@DeleteAfterTestRun
