@@ -20,6 +20,7 @@
 String mvcPath = ParamUtil.getString(request, "mvcPath", "/view_template.jsp");
 long classNameId = ParamUtil.getLong(request, "classNameId");
 long classPK = ParamUtil.getLong(request, "classPK");
+String eventName = ParamUtil.getString(request, "eventName", "selectTemplate");
 
 long resourceClassNameId = ParamUtil.getLong(request, "resourceClassNameId");
 
@@ -44,6 +45,7 @@ String orderByType = ParamUtil.getString(request, "orderByType", "asc");
 		<portlet:param name="classNameId" value="<%= String.valueOf(classNameId) %>" />
 		<portlet:param name="classPK" value="<%= String.valueOf(classPK) %>" />
 		<portlet:param name="resourceClassNameId" value="<%= String.valueOf(resourceClassNameId) %>" />
+		<portlet:param name="eventName" value="<%= eventName %>" />
 		<portlet:param name="orderByCol" value="<%= orderByCol %>" />
 		<portlet:param name="orderByType" value="asc" />
 	</portlet:renderURL>
@@ -57,6 +59,7 @@ String orderByType = ParamUtil.getString(request, "orderByType", "asc");
 		<portlet:param name="classNameId" value="<%= String.valueOf(classNameId) %>" />
 		<portlet:param name="classPK" value="<%= String.valueOf(classPK) %>" />
 		<portlet:param name="resourceClassNameId" value="<%= String.valueOf(resourceClassNameId) %>" />
+		<portlet:param name="eventName" value="<%= eventName %>" />
 		<portlet:param name="orderByCol" value="<%= orderByCol %>" />
 		<portlet:param name="orderByType" value="desc" />
 	</portlet:renderURL>
@@ -70,6 +73,7 @@ String orderByType = ParamUtil.getString(request, "orderByType", "asc");
 		<portlet:param name="classNameId" value="<%= String.valueOf(classNameId) %>" />
 		<portlet:param name="classPK" value="<%= String.valueOf(classPK) %>" />
 		<portlet:param name="resourceClassNameId" value="<%= String.valueOf(resourceClassNameId) %>" />
+		<portlet:param name="eventName" value="<%= eventName %>" />
 		<portlet:param name="orderByType" value="<%= orderByType %>" />
 	</portlet:renderURL>
 
