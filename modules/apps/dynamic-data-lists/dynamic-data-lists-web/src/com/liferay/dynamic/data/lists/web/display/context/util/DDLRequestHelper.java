@@ -44,26 +44,28 @@ public class DDLRequestHelper extends BaseRequestHelper {
 	}
 
 	public DDLServiceConfiguration getDDLServiceConfiguration() {
-		try {
-			if (_ddlServiceConfiguration == null) {
-				if (getPortletResource() != null) {
-					HttpServletRequest request = getRequest();
+		if (_ddlServiceConfiguration != null) {
+			return _ddlServiceConfiguration;
+		}
 
-					_ddlServiceConfiguration =
-						ConfigurationFactoryUtil.getConfiguration(
-							DDLServiceConfiguration.class,
-							new ParameterMapSettingsLocator(
-								request.getParameterMap(),
-								new GroupServiceSettingsLocator(
-									getSiteGroupId(), DDLConstants.SERVICE_NAME)));
-				}
-				else {
-					_ddlServiceConfiguration =
-						ConfigurationFactoryUtil.getConfiguration(
-							DDLServiceConfiguration.class,
+		try {
+			if (getPortletResource() != null) {
+				HttpServletRequest request = getRequest();
+
+				_ddlServiceConfiguration =
+					ConfigurationFactoryUtil.getConfiguration(
+						DDLServiceConfiguration.class,
+						new ParameterMapSettingsLocator(
+							request.getParameterMap(),
 							new GroupServiceSettingsLocator(
-								getSiteGroupId(), DDLConstants.SERVICE_NAME));
-				}
+								getSiteGroupId(), DDLConstants.SERVICE_NAME)));
+			}
+			else {
+				_ddlServiceConfiguration =
+					ConfigurationFactoryUtil.getConfiguration(
+						DDLServiceConfiguration.class,
+						new GroupServiceSettingsLocator(
+							getSiteGroupId(), DDLConstants.SERVICE_NAME));
 			}
 
 			return _ddlServiceConfiguration;

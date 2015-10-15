@@ -35,28 +35,30 @@ public class DDLFormWebRequestHelper extends BaseRequestHelper {
 	}
 
 	public DDLFormWebConfiguration getDDLFormWebConfiguration() {
-		try {
-			if (_ddlFormWebConfiguration == null) {
-				if (getPortletResource() != null) {
-					HttpServletRequest request = getRequest();
+		if (_ddlFormWebConfiguration != null) {
+			return _ddlFormWebConfiguration;
+		}
 
-					_ddlFormWebConfiguration =
-						ConfigurationFactoryUtil.getConfiguration(
-							DDLFormWebConfiguration.class,
-							new ParameterMapSettingsLocator(
-								request.getParameterMap(),
-								new GroupServiceSettingsLocator(
-									getSiteGroupId(),
-									DDLFormConstants.SERVICE_NAME)));
-				}
-				else {
-					_ddlFormWebConfiguration =
-						ConfigurationFactoryUtil.getConfiguration(
-							DDLFormWebConfiguration.class,
+		try {
+			if (getPortletResource() != null) {
+				HttpServletRequest request = getRequest();
+
+				_ddlFormWebConfiguration =
+					ConfigurationFactoryUtil.getConfiguration(
+						DDLFormWebConfiguration.class,
+						new ParameterMapSettingsLocator(
+							request.getParameterMap(),
 							new GroupServiceSettingsLocator(
 								getSiteGroupId(),
-								DDLFormConstants.SERVICE_NAME));
-				}
+								DDLFormConstants.SERVICE_NAME)));
+			}
+			else {
+				_ddlFormWebConfiguration =
+					ConfigurationFactoryUtil.getConfiguration(
+						DDLFormWebConfiguration.class,
+						new GroupServiceSettingsLocator(
+							getSiteGroupId(),
+							DDLFormConstants.SERVICE_NAME));
 			}
 
 			return _ddlFormWebConfiguration;
