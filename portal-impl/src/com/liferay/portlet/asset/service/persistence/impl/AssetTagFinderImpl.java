@@ -54,54 +54,6 @@ public class AssetTagFinderImpl
 		AssetTagFinder.class.getName() + ".findByG_N_S_E";
 
 	@Override
-	public List<AssetTag> findByG_N_S_E(
-		long groupId, String name, int startPeriod, int endPeriod,
-		int periodLength) {
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = CustomSQLUtil.get(FIND_BY_G_N_S_E);
-			SQLQuery q = session.createSynchronizedSQLQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-			qPos.add(name);
-			qPos.add(startPeriod);
-			qPos.add(endPeriod);
-			qPos.add(periodLength);
-			qPos.add(endPeriod);
-
-			List<AssetTag> assetTags = new ArrayList<>();
-
-			Iterator<Object[]> itr = q.iterate();
-
-			while (itr.hasNext()) {
-				Object[] array = itr.next();
-
-				AssetTag assetTag = new AssetTagImpl();
-
-				assetTag.setTagId(GetterUtil.getLong(array[0]));
-				assetTag.setName(GetterUtil.getString(array[1]));
-				assetTag.setAssetCount(GetterUtil.getInteger(array[2]));
-
-				assetTags.add(assetTag);
-			}
-
-			return assetTags;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	@Override
 	public int countByG_N(long groupId, String name) {
 		Session session = null;
 
@@ -214,6 +166,54 @@ public class AssetTagFinderImpl
 			qPos.add(lowerCaseName);
 
 			return (List<AssetTag>)QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	@Override
+	public List<AssetTag> findByG_N_S_E(
+		long groupId, String name, int startPeriod, int endPeriod,
+		int periodLength) {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_G_N_S_E);
+			SQLQuery q = session.createSynchronizedSQLQuery(sql);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+			qPos.add(name);
+			qPos.add(startPeriod);
+			qPos.add(endPeriod);
+			qPos.add(periodLength);
+			qPos.add(endPeriod);
+
+			List<AssetTag> assetTags = new ArrayList<>();
+
+			Iterator<Object[]> itr = q.iterate();
+
+			while (itr.hasNext()) {
+				Object[] array = itr.next();
+
+				AssetTag assetTag = new AssetTagImpl();
+
+				assetTag.setTagId(GetterUtil.getLong(array[0]));
+				assetTag.setName(GetterUtil.getString(array[1]));
+				assetTag.setAssetCount(GetterUtil.getInteger(array[2]));
+
+				assetTags.add(assetTag);
+			}
+
+			return assetTags;
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
