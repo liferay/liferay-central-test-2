@@ -29,56 +29,59 @@ boolean showBreadcrumb = GetterUtil.getBoolean(request.getAttribute("liferay-ite
 boolean showDragAndDropZone = GetterUtil.getBoolean(request.getAttribute("liferay-item-selector:browser:showDragAndDropZone"));
 String tabName = GetterUtil.getString(request.getAttribute("liferay-item-selector:browser:tabName"));
 PortletURL uploadURL = (PortletURL)request.getAttribute("liferay-item-selector:browser:uploadURL");
+
+String keywords = ParamUtil.getString(request, "keywords");
+
+boolean showSearchInfo = false;
+
+if (Validator.isNotNull(keywords)) {
+	showSearchInfo = true;
+}
 %>
 
 <liferay-util:html-top>
 	<link href="<%= ServletContextUtil.getContextPath() + "/browser/css/main.css" %>" rel="stylesheet" type="text/css" />
 </liferay-util:html-top>
 
-<liferay-frontend:management-bar>
-	<liferay-frontend:management-bar-buttons>
-		<liferay-frontend:management-bar-display-buttons
-			displayStyleURL="<%= PortletURLUtil.clone(portletURL, liferayPortletResponse) %>"
-			displayViews="<%= BrowserTag.DISPLAY_STYLES %>"
-			selectedDisplayStyle="<%= displayStyle %>"
-		/>
-	</liferay-frontend:management-bar-buttons>
+<c:if test="<%= !showSearchInfo %>">
+	<liferay-frontend:management-bar>
+		<liferay-frontend:management-bar-buttons>
+			<liferay-frontend:management-bar-display-buttons
+				displayStyleURL="<%= PortletURLUtil.clone(portletURL, liferayPortletResponse) %>"
+				displayViews="<%= BrowserTag.DISPLAY_STYLES %>"
+				selectedDisplayStyle="<%= displayStyle %>"
+			/>
+		</liferay-frontend:management-bar-buttons>
 
-	<liferay-frontend:management-bar-filters>
+		<liferay-frontend:management-bar-filters>
 
-		<%
-		PortletURL sortURL = PortletURLUtil.clone(portletURL, liferayPortletResponse);
+			<%
+			PortletURL sortURL = PortletURLUtil.clone(portletURL, liferayPortletResponse);
 
-		String orderByCol = ParamUtil.getString(request, "orderByCol", "title");
-		String orderByType = ParamUtil.getString(request, "orderByType", "asc");
+			String orderByCol = ParamUtil.getString(request, "orderByCol", "title");
+			String orderByType = ParamUtil.getString(request, "orderByType", "asc");
 
-		Map<String, String> orderColumns = new HashMap<String, String>();
+			Map<String, String> orderColumns = new HashMap<String, String>();
 
-		orderColumns.put("modifiedDate", "modified-date");
-		orderColumns.put("size", "size");
-		orderColumns.put("title", "title");
-		%>
+			orderColumns.put("modifiedDate", "modified-date");
+			orderColumns.put("size", "size");
+			orderColumns.put("title", "title");
+			%>
 
-		<liferay-frontend:management-bar-sort
-			orderByCol="<%= orderByCol %>"
-			orderByType="<%= orderByType %>"
-			orderColumns="<%= orderColumns %>"
-			portletURL="<%= sortURL %>"
-		/>
-	</liferay-frontend:management-bar-filters>
-</liferay-frontend:management-bar>
+			<liferay-frontend:management-bar-sort
+				orderByCol="<%= orderByCol %>"
+				orderByType="<%= orderByType %>"
+				orderColumns="<%= orderColumns %>"
+				portletURL="<%= sortURL %>"
+			/>
+		</liferay-frontend:management-bar-filters>
+	</liferay-frontend:management-bar>
+</c:if>
 
 <div class="container-fluid-1280 lfr-item-viewer" id="<%= randomNamespace %>ItemSelectorContainer">
 
 	<%
 	long folderId = ParamUtil.getLong(request, "folderId");
-	String keywords = ParamUtil.getString(request, "keywords");
-
-	boolean showSearchInfo = false;
-
-	if (Validator.isNotNull(keywords)) {
-		showSearchInfo = true;
-	}
 
 	if (showBreadcrumb && !showSearchInfo) {
 		ItemSelectorBrowserUtil.addPortletBreadcrumbEntries(folderId, displayStyle, request, PortletURLUtil.clone(portletURL, liferayPortletResponse));
