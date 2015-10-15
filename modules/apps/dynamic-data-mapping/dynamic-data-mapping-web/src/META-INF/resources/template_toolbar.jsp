@@ -16,6 +16,8 @@
 
 <%@ include file="/init.jsp" %>
 
+<liferay-util:include page="/template_search_bar.jsp" servletContext="<%= application %>" />
+
 <liferay-frontend:management-bar
 	checkBoxContainerId="entriesContainer"
 	includeCheckBox="<%= !user.isDefaultUser() %>"
