@@ -155,7 +155,6 @@ public class RolesAdminPortletDataHandler extends BasePortletDataHandler {
 		actionableDynamicQuery.performCount();
 	}
 
-	@SuppressWarnings("unchecked")
 	protected ActionableDynamicQuery getRoleActionableDynamicQuery(
 		final PortletDataContext portletDataContext, final boolean export) {
 
@@ -195,7 +194,6 @@ public class RolesAdminPortletDataHandler extends BasePortletDataHandler {
 					}
 
 					long defaultUserId = _userLocalService.getDefaultUserId(
-
 						portletDataContext.getCompanyId());
 
 					if (!portletDataContext.getBooleanParameter(

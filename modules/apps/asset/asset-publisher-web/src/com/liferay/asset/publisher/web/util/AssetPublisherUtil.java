@@ -310,10 +310,11 @@ public class AssetPublisherUtil {
 
 				@Override
 				public void performAction(
-						com.liferay.portal.model.PortletPreferences preferences)
+						com.liferay.portal.model.PortletPreferences
+							portletPreferences)
 					throws PortalException {
 
-					_checkAssetEntries(preferences);
+					_checkAssetEntries(portletPreferences);
 				}
 
 			});
