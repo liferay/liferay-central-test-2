@@ -57,6 +57,7 @@ SearchContainer templateSearch = new TemplateSearch(renderRequest, portletURL, W
 			%>
 
 			<liferay-util:include page="/template_toolbar.jsp" servletContext="<%= application %>">
+				<liferay-util:param name="mvcPath" value="/select_template.jsp" />
 				<liferay-util:param name="redirect" value="<%= currentURL %>" />
 				<liferay-util:param name="classNameId" value="<%= String.valueOf(classNameId) %>" />
 				<liferay-util:param name="classPK" value="<%= String.valueOf(classPK) %>" />
