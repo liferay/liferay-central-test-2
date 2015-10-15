@@ -62,7 +62,7 @@
 <!--PG-->
 <tr>
 	<td>LIVE_BUTTON</td>
-	<td>//a[contains(.,'Live')]</td>
+	<td>//a[contains(@value,'live')]</td>
 	<td></td>
 </tr>
 <tr>
