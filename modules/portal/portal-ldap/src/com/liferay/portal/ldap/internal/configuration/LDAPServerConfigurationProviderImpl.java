@@ -51,7 +51,7 @@ public class LDAPServerConfigurationProviderImpl
 
 		if (ldapServerConfigurations.isEmpty()) {
 			throw new IllegalArgumentException(
-				"No LDAPServerConfiguration found for companyId " + companyId);
+				"No LDAP server configuration found for company " + companyId);
 		}
 
 		return ldapServerConfigurations.get(0);
@@ -70,7 +70,7 @@ public class LDAPServerConfigurationProviderImpl
 
 		if (MapUtil.isEmpty(ldapServerConfigurations)) {
 			throw new IllegalArgumentException(
-				"No default LDAPServerConfiguration found");
+				"No default LDAP server configuration found");
 		}
 
 		LDAPServerConfiguration ldapServerConfiguration =
@@ -78,8 +78,8 @@ public class LDAPServerConfigurationProviderImpl
 
 		if (ldapServerConfiguration == null) {
 			throw new IllegalArgumentException(
-				"No LDAPServerConfiguration found: companyId=" + companyId +
-					", ldapServerId=" + ldapServerId);
+				"No LDAP server configuration found for company " + companyId +
+					" and LDAP server " + ldapServerId);
 		}
 
 		return ldapServerConfiguration;
@@ -113,22 +113,21 @@ public class LDAPServerConfigurationProviderImpl
 		LDAPServerConfiguration ldapServerConfiguration =
 			Configurable.createConfigurable(getMetatype(), properties);
 
-		long companyId = ldapServerConfiguration.companyId();
-		long ldapServerId = ldapServerConfiguration.ldapServerId();
-
 		synchronized (_ldapServerConfigurations) {
 			Map<Long, LDAPServerConfiguration>
 				ldapServerConfigurations = _ldapServerConfigurations.get(
-					companyId);
+					ldapServerConfiguration.companyId());
 
 			if (ldapServerConfigurations == null) {
 				ldapServerConfigurations = new TreeMap<>();
 
 				_ldapServerConfigurations.put(
-					companyId, ldapServerConfigurations);
+					ldapServerConfiguration.companyId(),
+					ldapServerConfigurations);
 			}
 
-			ldapServerConfigurations.put(ldapServerId, ldapServerConfiguration);
+			ldapServerConfigurations.put(
+				ldapServerConfiguration.ldapServerId(), ldapServerConfiguration);
 		}
 	}
 
@@ -139,16 +138,14 @@ public class LDAPServerConfigurationProviderImpl
 		LDAPServerConfiguration ldapServerConfiguration =
 			Configurable.createConfigurable(getMetatype(), properties);
 
-		long companyId = ldapServerConfiguration.companyId();
-		long ldapServerId = ldapServerConfiguration.ldapServerId();
-
 		synchronized (_ldapServerConfigurations) {
 			Map<Long, LDAPServerConfiguration>
 				ldapServerConfigurations = _ldapServerConfigurations.get(
-					companyId);
+					ldapServerConfiguration.companyId());
 
 			if (!MapUtil.isEmpty(ldapServerConfigurations)) {
-				ldapServerConfigurations.remove(ldapServerId);
+				ldapServerConfigurations.remove(
+					ldapServerConfiguration.ldapServerId());
 			}
 		}
 	}

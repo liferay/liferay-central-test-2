@@ -167,9 +167,9 @@ public class LDAPAuth implements Authenticator {
 			Hashtable<String, Object> env =
 				(Hashtable<String, Object>)ctx.getEnvironment();
 
-			env.put(Context.SECURITY_PRINCIPAL, userDN);
-			env.put(Context.SECURITY_CREDENTIALS, password);
 			env.put(Context.REFERRAL, systemLDAPConfiguration.referral());
+			env.put(Context.SECURITY_CREDENTIALS, password);
+			env.put(Context.SECURITY_PRINCIPAL, userDN);
 
 			// Do not use pooling because principal changes
 
