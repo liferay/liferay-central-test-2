@@ -123,7 +123,6 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<description>A CSS icon class for styling the card icon</description>
 			<name>icon</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
@@ -159,7 +158,6 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<description>A text for the card</description>
 			<name>text</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
