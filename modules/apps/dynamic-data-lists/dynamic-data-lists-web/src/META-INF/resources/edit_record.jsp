@@ -44,10 +44,6 @@ if (recordVersion != null) {
 	ddmFormValues = StorageEngineUtil.getDDMFormValues(recordVersion.getDDMStorageId());
 }
 
-if (recordSet != null) {
-	renderResponse.setTitle(recordSet.getName(locale));
-}
-
 String defaultLanguageId = ParamUtil.getString(request, "defaultLanguageId");
 
 if (Validator.isNull(defaultLanguageId)) {
@@ -76,7 +72,10 @@ if (translating) {
 	redirect = currentURL;
 }
 
-if (ddlDisplayContext.isAdminPortlet()) {
+if (recordSet != null) {
+	renderResponse.setTitle(recordSet.getName(locale));
+}
+else if (ddlDisplayContext.isAdminPortlet()) {
 	portletDisplay.setShowBackIcon(true);
 	portletDisplay.setURLBack(redirect);
 
