@@ -19,7 +19,8 @@
 <%
 JournalArticle article = journalContentDisplayContext.getArticle();
 AssetRenderer<JournalArticle> assetRenderer = journalContentDisplayContext.getAssetRenderer();
-User userDisplay = UserLocalServiceUtil.fetchUserById(assetRenderer.getUserId());
+
+User assetRendererUser = UserLocalServiceUtil.fetchUserById(assetRenderer.getUserId());
 %>
 
 <liferay-util:buffer var="headerHtml">
@@ -44,7 +45,7 @@ User userDisplay = UserLocalServiceUtil.fetchUserById(assetRenderer.getUserId())
 	footer="<%= statusHtml %>"
 	imageUrl="<%= HtmlUtil.escapeAttribute(assetRenderer.getThumbnailPath(liferayPortletRequest)) %>"
 	smallImageCSSClass="user-icon user-icon-lg"
-	smallImageUrl="<%= userDisplay != null ? userDisplay.getPortraitURL(themeDisplay) : UserConstants.getPortraitURL(themeDisplay.getPathImage(), true, 0, null) %>"
+	smallImageUrl="<%= (assetRendererUser != null) ? assetRendererUser.getPortraitURL(themeDisplay) : UserConstants.getPortraitURL(themeDisplay.getPathImage(), true, 0, null) %>"
 	subtitle="<%= assetRenderer.getSummary() %>"
 	title="<%= headerHtml %>"
 />

@@ -206,8 +206,8 @@ String ddmTemplateKey = journalContentDisplayContext.getDDMTemplateKey();
 					hideError(articlePreviewNode);
 					showLoading(articlePreviewNode);
 
-					templatePreviewNode.addClass(STR_HIDDEN);
 					templatePreviewButtonNode.addClass(STR_HIDDEN);
+					templatePreviewNode.addClass(STR_HIDDEN);
 
 					articlePreviewNode.find('.article-preview-content-container').html('');
 					templatePreviewNode.find('.template-preview-content-container').html('');
