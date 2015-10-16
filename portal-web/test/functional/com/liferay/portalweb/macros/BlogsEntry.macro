@@ -447,7 +447,9 @@
 
 		<execute function="AssertTextEquals" locator1="PGBlogsEntry#ENTRY_TITLE" value1="${entryTitle}" />
 		<execute function="AssertTextEquals" locator1="PGBlogsEntry#ENTRY_CONTENT" value1="${entryContent}" />
+
 		<execute function="Pause" locator1="3000" />
+
 		<execute function="Copy" locator1="PGBlogsEntry#COMMENTS_TRACKBACK_URL" />
 
 		<if>
@@ -487,6 +489,7 @@
 		<execute function="Paste" locator1="AlloyEditor#TRACKBACKS_TO_SEND" />
 
 		<execute function="Pause" locator1="3000" />
+
 		<execute function="AssertClick" locator1="Button#PUBLISH" value1="Publish" />
 	</command>
 
