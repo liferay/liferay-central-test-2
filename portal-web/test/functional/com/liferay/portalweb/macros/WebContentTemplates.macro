@@ -222,7 +222,7 @@
 		<execute function="AssertClick" locator1="DDMSelectTemplate#TOOLBAR_SEARCH_BUTTON" value1="Search" />
 
 		<while>
-			<condition function="IsElementPresent" locator1="DDMSelectTemplate#TEMPLATE_TABLE_ALL_CHECKBOX" />
+			<condition function="IsElementNotPresent" locator1="Message#EMPTY_INFO" />
 			<then>
 				<execute function="Check" locator1="DDMSelectTemplate#TEMPLATE_TABLE_ALL_CHECKBOX" />
 				<execute function="ClickNoError" locator1="Icon#DELETE" />
@@ -235,7 +235,7 @@
 		<execute function="AssertClick" locator1="DDMSelectTemplate#TOOLBAR_SEARCH_BUTTON" value1="Search" />
 
 		<while>
-			<condition function="IsElementPresent" locator1="DDMSelectTemplate#TEMPLATE_TABLE_ALL_CHECKBOX" />
+			<condition function="IsElementNotPresent" locator1="Message#EMPTY_INFO" />
 			<then>
 				<execute function="Check" locator1="DDMSelectTemplate#TEMPLATE_TABLE_ALL_CHECKBOX" />
 				<execute function="ClickNoError" locator1="Icon#DELETE" />
@@ -244,7 +244,7 @@
 			</then>
 		</while>
 
-		<execute function="AssertTextEquals" locator1="Message#INFO" value1="There are no templates." />
+		<execute function="AssertTextEquals" locator1="Message#EMPTY_INFO" value1="There are no templates." />
 	</command>
 
 	<command name="viewCP">

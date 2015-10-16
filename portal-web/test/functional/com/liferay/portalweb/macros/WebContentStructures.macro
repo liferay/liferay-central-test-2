@@ -272,7 +272,7 @@
 		<execute function="AssertClick" locator1="NavBar#BASIC_SEARCH_BUTTON" value1="Search" />
 
 		<while>
-			<condition function="IsElementPresent" locator1="DDMSelectStructure#DDM_STRUCTURE_TABLE_ACTIONS_GENERIC" />
+			<condition function="IsElementNotPresent" locator1="Message#EMPTY_INFO" />
 			<then>
 				<execute function="Check" locator1="DDMSelectStructure#DDM_STRUCTURE_TABLE_ALL_CHECKBOX" />
 				<execute function="ClickNoError" locator1="Icon#DELETE" />
@@ -285,7 +285,7 @@
 		<execute function="AssertClick" locator1="NavBar#BASIC_SEARCH_BUTTON" value1="Search" />
 
 		<while>
-			<condition function="IsElementPresent" locator1="DDMSelectStructure#DDM_STRUCTURE_TABLE_ACTIONS_GENERIC" />
+			<condition function="IsElementNotPresent" locator1="Message#EMPTY_INFO" />
 			<then>
 				<execute function="Check" locator1="DDMSelectStructure#DDM_STRUCTURE_TABLE_ALL_CHECKBOX" />
 				<execute function="Click" locator1="Icon#DELETE" />
@@ -294,7 +294,7 @@
 			</then>
 		</while>
 
-		<execute function="AssertTextEquals" locator1="Message#INFO" value1="There are no results." />
+		<execute function="AssertTextEquals" locator1="Message#EMPTY_INFO" value1="There are no results." />
 	</command>
 
 	<command name="viewCP">
