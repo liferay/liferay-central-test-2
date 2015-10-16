@@ -86,7 +86,7 @@
 			<execute macro="DynamicDataMapping#addField">
 				<var name="field" value="${structureFieldName}" />
 				<var name="fieldFieldLabel" value="${structureFieldName}" />
-				<var method="StringUtil#replace(${structureFieldName}, ' ', '_')" name="fieldName" />
+				<var method="StringUtil#replace(${structureFieldName}, ' ', '')" name="fieldName" />
 			</execute>
 		</for>
 
@@ -211,7 +211,7 @@
 
 		<for list="${editSubstructureFieldNames}" param="structureFieldName">
 			<var name="key_fieldDefaultValue" value="${structureFieldName}" />
-			<var method="StringUtil#replace('${structureFieldName}', ' ', '_')" name="structureFieldName" />
+			<var method="StringUtil#replace('${structureFieldName}', ' ', '')" name="structureFieldName" />
 
 			<execute function="Type" locator1="DDMField#DDM_INPUT" value1="Edited ${structureFieldName} Field" />
 		</for>
