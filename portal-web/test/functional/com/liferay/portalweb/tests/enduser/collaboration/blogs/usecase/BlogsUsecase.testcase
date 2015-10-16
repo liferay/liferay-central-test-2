@@ -271,9 +271,8 @@
 			<var name="pageName" value="${pageName}" />
 		</execute>
 
-		<execute macro="BlogsEntry#gotoPG">
-			<var name="entryContent" value="Blogs Entry1 Content" />
-			<var name="entryTitle" value="Blogs Entry1 Title" />
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="Blogs Page" />
 		</execute>
 
 		<execute macro="BlogsEntryComment#viewPG">
