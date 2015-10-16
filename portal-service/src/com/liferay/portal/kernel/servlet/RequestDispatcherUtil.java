@@ -40,15 +40,10 @@ public class RequestDispatcherUtil {
 
 				@Override
 				public String getHeader(String name) {
-					if (name.equals("If-Modified-Since")) {
-						return null;
-					}
+					if (name.equals("If-Modified-Since") ||
+						name.equals("If-None-Match") ||
+						name.equals("Last-Modified")) {
 
-					if (name.equals("If-None-Match")) {
-						return null;
-					}
-
-					if (name.equals("Last-Modified")) {
 						return null;
 					}
 
