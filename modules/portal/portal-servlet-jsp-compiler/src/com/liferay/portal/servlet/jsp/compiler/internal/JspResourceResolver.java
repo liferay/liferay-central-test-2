@@ -99,7 +99,7 @@ public class JspResourceResolver implements ResourceResolver {
 		if (bundle.equals(_bundle) || bundle.equals(_jspBundle)) {
 			resources = bundleWiring.listResources(path, filePattern, options);
 		}
-		else if (_exportsPackage(bundleWiring, path.replace('/', '.'))) {
+		else if (isExportsPackage(bundleWiring, path.replace('/', '.'))) {
 			if (bundle.getBundleId() == 0) {
 				resources = handleSystemBundle(
 					bundleWiring, path, filePattern, options);
@@ -138,7 +138,7 @@ public class JspResourceResolver implements ResourceResolver {
 		}
 
 		if (((urls == null) || urls.isEmpty()) &&
-			_exportsPackage(bundleWiring, packageName)) {
+			isExportsPackage(bundleWiring, packageName)) {
 
 			ClassLoader classLoader = bundleWiring.getClassLoader();
 
@@ -160,9 +160,9 @@ public class JspResourceResolver implements ResourceResolver {
 			return resources;
 		}
 
-		String matcherRegex = _replace(fileRegex, '*', "[^/]*");
+		String matcherRegex = replace(fileRegex, '*', "[^/]*");
 
-		matcherRegex = _replace(matcherRegex, '.', "\\.");
+		matcherRegex = replace(matcherRegex, '.', "\\.");
 
 		matcherRegex = path + "/" + matcherRegex;
 
@@ -199,13 +199,13 @@ public class JspResourceResolver implements ResourceResolver {
 		return resources;
 	}
 
-	private boolean _exportsPackage(
+	protected boolean isExportsPackage(
 		BundleWiring bundleWiring, String packageName) {
 
-		List<BundleWire> providedWires = bundleWiring.getProvidedWires(
+		List<BundleWire> bundleWires = bundleWiring.getProvidedWires(
 			"osgi.wiring.package");
 
-		for (BundleWire bundleWire : providedWires) {
+		for (BundleWire bundleWire : bundleWires) {
 			BundleCapability bundleCapability = bundleWire.getCapability();
 
 			Map<String, Object> attributes = bundleCapability.getAttributes();
@@ -218,7 +218,7 @@ public class JspResourceResolver implements ResourceResolver {
 		return false;
 	}
 
-	private String _replace(String s, char oldSub, String newSub) {
+	protected String replace(String s, char oldSub, String newSub) {
 		int y = s.indexOf(oldSub);
 
 		if (y < 0) {
