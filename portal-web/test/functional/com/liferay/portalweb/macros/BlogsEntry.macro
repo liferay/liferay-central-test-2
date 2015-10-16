@@ -1,40 +1,6 @@
 <definition>
 	<var name="entryAuthorFullName" value="Test Test" />
 
-	<command name="addAbstractDescriptionPG">
-		<if>
-			<condition function="IsElementPresent#pauseIsElementPresent" locator1="PGBlogsAdd#ABSTRACT_DROPDOWN_COLLAPSED" />
-			<then>
-				<execute function="AssertClick" locator1="PGBlogsAdd#ABSTRACT_DROPDOWN" value1="Abstract" />
-			</then>
-		</if>
-
-		<execute function="Type" locator1="PGBlogsAdd#ABSTRACT_DESCRIPTION_FIELD" value1="${entryAbstractDescription}" />
-
-		<if>
-			<isset var="smallImageURL" />
-			<then>
-				<execute macro="BlogsEntry#addAbstractSmallImagePG">
-					<var name="smallImageFile" value="${smallImageFile}" />
-					<var name="smallImageURL" value="${smallImageURL}" />
-				</execute>
-			</then>
-		</if>
-
-		<if>
-			<isset var="smallImageFile" />
-			<then>
-				<execute macro="BlogsEntry#addAbstractSmallImagePG">
-					<var name="smallImageFile" value="${smallImageFile}" />
-				</execute>
-			</then>
-		</if>
-
-		<execute function="AssertClick" locator1="PGBlogsAdd#PUBLISH_BUTTON" value1="Publish" />
-
-		<execute function="AssertTextEquals" locator1="PGBlogs#SUCCESS_MESSAGE" value1="Your request completed successfully." />
-	</command>
-
 	<command name="addAbstractImage">
 		<execute function="Click" locator1="Button#SELECT" />
 
@@ -48,27 +14,6 @@
 		<execute function="AssertClick" locator1="Button#PUBLISH" value1="Publish" />
 
 		<execute function="AssertTextEquals#assertPartialText" locator1="Message#SUCCESS" value1="Your request completed successfully." />
-	</command>
-
-	<command name="addAbstractSmallImagePG">
-		<execute function="Pause" locator1="5000" />
-		<execute function="Check" locator1="PGBlogsAdd#ABSTRACT_USE_SMALL_IMAGE_CHECKBOX" />
-
-		<if>
-			<isset var="smallImageURL" />
-			<then>
-				<execute function="Click" locator1="PGBlogsAdd#ABSTRACT_SMALL_IMAGE_URL_RADIO" />
-				<execute function="Type" locator1="PGBlogsAdd#ABSTRACT_SMALL_IMAGE_URL_FIELD" value1="${smallImageURL}" />
-			</then>
-		</if>
-
-		<if>
-			<isset var="smallImageFile" />
-			<then>
-				<execute function="Click" locator1="PGBlogsAdd#ABSTRACT_SMALL_IMAGE_FILE_RADIO" />
-				<execute function="UploadCommonFile" locator1="PGBlogsAdd#ABSTRACT_SMALL_IMAGE_FILE_BROWSE_BUTTON" value1="${smallImageFile}" />
-			</then>
-		</if>
 	</command>
 
 	<command name="addCategory">
@@ -867,48 +812,6 @@
 		<execute function="AssertTextEquals" locator1="PGBlogs#DRAFT_ENTRY_TITLE" value1="${entryTitle}" />
 		<execute function="AssertTextEquals" locator1="PGBlogs#DRAFT_ENTRY_CONTENT" value1="${entryContent}" />
 		<execute function="AssertClick" locator1="PGBlogs#DRAFT_ENTRY_TITLE" value1="${entryTitle}" />
-	</command>
-
-	<command name="gotoEditPG">
-		<var name="key_entryTitle" value="${entryTitle}" />
-
-		<execute function="AssertTextEquals" locator1="PGBlogs#ENTRY_TITLE" value1="${entryTitle}" />
-		<execute function="AssertClick" locator1="PGBlogs#ENTRY_EDIT" value1="Edit" />
-	</command>
-
-	<command name="gotoPG">
-		<var name="key_entryContent" value="${entryContent}" />
-		<var name="key_entryTitle" value="${entryTitle}" />
-
-		<if>
-			<equals arg1="${entryTitleSpecialCharacter}" arg2="true" />
-			<then>
-				<execute function="AssertTextEquals" locator1="PGBlogs#ENTRY_TITLE_GENERIC" value1="${entryTitle}" />
-				<execute function="AssertTextEquals" locator1="PGBlogs#ENTRY_CONTENT_GENERIC" value1="${entryContent}" />
-				<execute function="AssertClick" locator1="PGBlogs#ENTRY_TITLE_GENERIC" value1="${entryTitle}" />
-			</then>
-			<elseif>
-				<equals arg1="${viewSpecificEntry}" arg2="true" />
-				<then>
-					<execute function="AssertTextEquals" locator1="PGBlogs#ENTRY_TITLE" value1="${entryTitle}" />
-					<execute function="AssertTextEquals" locator1="PGBlogs#ENTRY_CONTENT_SPECIFIC" value1="${entryContent}" />
-					<execute function="AssertClick" locator1="PGBlogs#ENTRY_TITLE" value1="${entryTitle}" />
-				</then>
-			</elseif>
-			<elseif>
-				<isset var="entrySubtitle" />
-				<then>
-					<var name="key_entrySubtitle" value="${entrySubtitle}" />
-
-					<execute function="AssertTextEquals" locator1="PGBlogs#ENTRY_SUBTITLE" value1="${entrySubtitle}" />
-				</then>
-			</elseif>
-			<else>
-				<execute function="AssertTextEquals" locator1="PGBlogs#ENTRY_TITLE" value1="${entryTitle}" />
-				<execute function="AssertTextEquals" locator1="PGBlogs#ENTRY_CONTENT" value1="${entryContent}" />
-				<execute function="AssertClick" locator1="PGBlogs#ENTRY_TITLE" value1="${entryTitle}" />
-			</else>
-		</if>
 	</command>
 
 	<command name="gotoScheduledEditPG">
