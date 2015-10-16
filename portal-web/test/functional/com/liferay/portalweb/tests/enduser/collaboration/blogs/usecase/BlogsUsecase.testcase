@@ -41,55 +41,6 @@
 		<execute macro="Site#tearDownCP" />
 	</tear-down>
 
-	<command name="AddBlogsEntryWithSmallImageAbstractDisplay" priority="3">
-		<var name="smallImage" value="true" />
-
-		<execute macro="Blogs#addEntry">
-			<var name="entryContent" value="Blogs Entry Content" />
-			<var name="entryTitle" value="Blogs Entry Title" />
-		</execute>
-
-		<execute macro="Page#gotoPG">
-			<var name="pageName" value="${pageName}" />
-		</execute>
-
-		<execute macro="BlogsEntry#gotoEditPG">
-			<var name="entryTitle" value="Blogs Entry Title" />
-		</execute>
-
-		<execute macro="BlogsEntry#addAbstractDescriptionPG">
-			<var name="entryAbstractDescription" value="Blogs Entry Abstract Description" />
-			<var name="smallImageFile" value="Document_2.png" />
-		</execute>
-
-		<execute macro="Page#gotoPG">
-			<var name="pageName" value="${pageName}" />
-		</execute>
-
-		<execute macro="Page#addPG">
-			<var name="pageName" value="Asset Publisher Page" />
-		</execute>
-
-		<execute macro="Page#gotoPG">
-			<var name="pageName" value="Asset Publisher Page" />
-		</execute>
-
-		<execute macro="Portlet#addPG">
-			<var name="portletName" value="Asset Publisher" />
-		</execute>
-
-		<execute macro="Page#gotoPG">
-			<var name="pageName" value="Asset Publisher Page" />
-		</execute>
-
-		<execute macro="BlogsEntry#viewAbstractEntryViaAPPG">
-			<var name="assetTitle" value="Blogs Entry Title" />
-			<var name="entryAbstractDescription" value="Blogs Entry Abstract Description" />
-			<var name="entryContent" value="Blogs Entry Content" />
-			<var name="entryTitle" value="Blogs Entry Title" />
-		</execute>
-	</command>
-
 	<command name="AllowMultiplePortletConfigurationsPerSite" priority="4">
 		<execute macro="Page#gotoCP">
 			<var name="portletName" value="Sites" />
