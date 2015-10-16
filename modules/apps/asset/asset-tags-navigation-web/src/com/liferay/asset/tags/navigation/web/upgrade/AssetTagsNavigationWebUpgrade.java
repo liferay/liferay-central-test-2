@@ -33,6 +33,7 @@ public class AssetTagsNavigationWebUpgrade implements UpgradeStepRegistrator {
 		registry.register(
 			"com.liferay.asset.tags.navigation.web", "0.0.1", "1.0.0",
 			new UpgradePortletId() {
+
 				@Override
 				protected String[][] getRenamePortletIdsArray() {
 					return new String[][] {

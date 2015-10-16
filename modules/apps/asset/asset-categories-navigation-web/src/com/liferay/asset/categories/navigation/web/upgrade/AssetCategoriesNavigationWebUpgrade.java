@@ -34,6 +34,7 @@ public class AssetCategoriesNavigationWebUpgrade
 		registry.register(
 			"com.liferay.asset.categories.navigation.web", "0.0.1", "1.0.0",
 			new UpgradePortletId() {
+
 				@Override
 				protected String[][] getRenamePortletIdsArray() {
 					return new String[][] {
