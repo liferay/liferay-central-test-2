@@ -33,6 +33,7 @@ public class MySitesWebUpgrade implements UpgradeStepRegistrator {
 		registry.register(
 			"com.liferay.site.my.sites", "0.0.1", "1.0.0",
 			new UpgradePortletId() {
+
 				@Override
 				protected String[][] getRenamePortletIdsArray() {
 					return new String[][] {

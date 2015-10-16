@@ -33,6 +33,7 @@ public class TrashWebUpgrade implements UpgradeStepRegistrator {
 		registry.register(
 			"com.liferay.trash.web", "0.0.1", "1.0.0",
 			new UpgradePortletId() {
+
 				@Override
 				protected String[][] getRenamePortletIdsArray() {
 					return new String[][] {
