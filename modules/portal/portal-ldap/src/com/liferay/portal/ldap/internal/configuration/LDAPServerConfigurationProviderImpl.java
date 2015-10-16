@@ -127,7 +127,8 @@ public class LDAPServerConfigurationProviderImpl
 			}
 
 			ldapServerConfigurations.put(
-				ldapServerConfiguration.ldapServerId(), ldapServerConfiguration);
+				ldapServerConfiguration.ldapServerId(),
+				ldapServerConfiguration);
 		}
 	}
 
