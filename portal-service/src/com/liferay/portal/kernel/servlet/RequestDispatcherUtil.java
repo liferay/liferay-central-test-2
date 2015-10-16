@@ -40,9 +40,9 @@ public class RequestDispatcherUtil {
 
 				@Override
 				public String getHeader(String name) {
-					if (name.equals("If-Modified-Since") ||
-						name.equals("If-None-Match") ||
-						name.equals("Last-Modified")) {
+					if (name.equals(HttpHeaders.IF_MODIFIED_SINCE) ||
+						name.equals(HttpHeaders.IF_NONE_MATCH) ||
+						name.equals(HttpHeaders.LAST_MODIFIED)) {
 
 						return null;
 					}
