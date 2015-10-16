@@ -231,7 +231,7 @@
 			</then>
 		</while>
 
-		<execute function="Type" locator1="DDMSelectTemplate#TOOLBAR_SEARCH_FIELD" value1="template" />
+		<execute function="Type" locator1="DDMSelectTemplate#TOOLBAR_SEARCH_FIELD" value1="Template" />
 		<execute function="Click" locator1="Icon#BASIC_SEARCH" />
 
 		<while>
