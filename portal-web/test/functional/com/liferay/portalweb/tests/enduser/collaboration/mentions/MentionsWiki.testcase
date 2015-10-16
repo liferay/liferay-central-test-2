@@ -20,10 +20,6 @@
 			<var name="portlet" value="Users and Organizations" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelUsers">
-			<var name="portlet" value="Users and Organizations" />
-		</execute>
-
 		<execute macro="User#addCP">
 			<var name="userEmailAddress" property-value="email.address.4" />
 			<var name="userFirstName" value="userfn" />
@@ -117,6 +113,8 @@
 		<execute macro="WikiTable#gotoEntry">
 			<var name="wikiPageTitle" value="Wiki Page Title" />
 		</execute>
+
+		<execute function="Pause" locator1="30000" />
 
 		<execute macro="Mentions#addMentionViaComments">
 			<var name="entryComment" value="Comment mentioning" />
