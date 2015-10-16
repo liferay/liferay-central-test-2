@@ -1524,11 +1524,11 @@
 			<var name="webContentTitle" value="WC WebContent Title" />
 		</execute>
 
-		<execute macro="WebContent#saveAsDraft" />
+		<execute function="AssertClickNoError" locator1="Button#SAVE_AS_DRAFT" value1="Save as Draft" />
 
 		<execute macro="WebContentStructures#viewTemplateValidation" />
 
-		<execute macro="WebContent#publish" />
+		<execute function="AssertClickNoError" locator1="Button#PUBLISH" value1="Publish" />
 
 		<execute macro="WebContentStructures#viewTemplateValidation" />
 	</command>
