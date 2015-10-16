@@ -28,8 +28,7 @@ import org.osgi.service.cm.Configuration;
  * @author Michael C. Han
  */
 public abstract class CompanyScopedConfigurationProvider
-	<T extends CompanyScopedConfiguration>
-		implements ConfigurationProvider<T> {
+	<T extends CompanyScopedConfiguration> implements ConfigurationProvider<T> {
 
 	@Override
 	public T getConfiguration(long companyId) {
@@ -40,9 +39,11 @@ public abstract class CompanyScopedConfigurationProvider
 		}
 
 		if (t == null) {
+			Class<?> clazz = getMetatype();
+
 			throw new IllegalArgumentException(
-				"No " + getMetatype().getName() +
-					" instance found for companyId: " + companyId);
+				"No instance of " + clazz.getName() + " for company " +
+					companyId);
 		}
 
 		return t;
