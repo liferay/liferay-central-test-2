@@ -473,13 +473,21 @@
 			</else>
 		</if>
 
-		<execute function="AssertClick" locator1="PGBlogs#ADD_ENTRY_BUTTON" value1="Add Blog Entry" />
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="Blogs Page" />
+		</execute>
 
-		<execute function="Type" locator1="PGBlogsAdd#TITLE_FIELD" value1="${entryTitle2}" />
-		<execute function="Type" locator1="PGBlogsAdd#CONTENT_FIELD" value1="${entryContent2}" />
-		<execute function="Paste" locator1="PGBlogsAdd#TRACKBACKS_TO_SEND_FIELD" />
+		<execute macro="BlogsNavigator#gotoAddEntry" />
+
+		<execute function="Type" locator1="AlloyEditor#TITLE_FIELD" value1="${entryTitle2}" />
+		<execute function="Type" locator1="AlloyEditor#CONTENT_FIELD" value1="${entryContent2}" />
+
+		<execute macro="BlogsNavigator#gotoAbstractField" />
+
+		<execute function="Paste" locator1="AlloyEditor#TRACKBACKS_TO_SEND" />
+
 		<execute function="Pause" locator1="3000" />
-		<execute function="AssertClick" locator1="PGBlogsAdd#PUBLISH_BUTTON" value1="Publish" />
+		<execute function="AssertClick" locator1="Button#PUBLISH" value1="Publish" />
 	</command>
 
 	<command name="addWithWorkflowCP">
