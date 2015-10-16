@@ -72,9 +72,9 @@ public class UpgradeSubscription extends UpgradeProcess {
 				_getGroupIdSQLPartsMap.get(className));
 
 			if (ArrayUtil.isEmpty(groupIdSQLParts)) {
-				if (_log.isDebugEnabled()) {
-					_log.debug(
-						"Unable to determine the groupId for the className " +
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"Unable to determine the group ID for the class name " +
 							className);
 				}
 
