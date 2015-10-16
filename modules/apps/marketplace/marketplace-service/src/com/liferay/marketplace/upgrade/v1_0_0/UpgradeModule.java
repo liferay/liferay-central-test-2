@@ -51,8 +51,8 @@ public class UpgradeModule extends UpgradeProcess {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				String contextName = rs.getString("contextName");
 				long moduleId = rs.getLong("moduleId");
+				String contextName = rs.getString("contextName");
 
 				String newContextName = null;
 
@@ -64,18 +64,15 @@ public class UpgradeModule extends UpgradeProcess {
 							newContextName + "' where moduleId = " + moduleId);
 				}
 				catch (IOException ioe) {
-					if (_log.isErrorEnabled()) {
-						_log.error(
-							"Module's contextName" + contextName +
-								" cannot be updated to the new value " +
-								newContextName,
-							ioe);
-					}
+					_log.error(
+						"Unable to update module + " + moduleId +
+							" with the new context name " + newContextName,
+						ioe);
 				}
 			}
 		}
 		catch (SQLException sqle) {
-			_log.error("Unable to retrieve the list of modules", sqle);
+			_log.error("Unable to update modules", sqle);
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
