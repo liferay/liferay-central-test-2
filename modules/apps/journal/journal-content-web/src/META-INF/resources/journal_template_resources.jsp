@@ -22,8 +22,6 @@ DDMStructure ddmStructure = journalContentDisplayContext.getDDMStructure();
 DDMTemplate ddmTemplate = journalContentDisplayContext.getDDMTemplate();
 List<DDMTemplate> ddmTemplates = journalContentDisplayContext.getDDMTemplates();
 
-String ddmTemplateImageURL = ddmTemplate.getTemplateImageURL(themeDisplay);
-
 Map<String, Object> data = new HashMap<String, Object>();
 
 data.put("change-enabled", ddmTemplates.size() > 1);
@@ -32,6 +30,8 @@ data.put("structure-id", (ddmStructure != null) ? ddmStructure.getClassNameId() 
 data.put("structure-key", (ddmStructure != null) ? ddmStructure.getPrimaryKey() : 0);
 data.put("template-id", (ddmTemplate != null) ? ddmTemplate.getTemplateId() : StringPool.BLANK);
 data.put("template-key", ddmTemplate.getTemplateKey());
+
+String ddmTemplateImageURL = ddmTemplate.getTemplateImageURL(themeDisplay);
 %>
 
 <liferay-frontend:horizontal-card
