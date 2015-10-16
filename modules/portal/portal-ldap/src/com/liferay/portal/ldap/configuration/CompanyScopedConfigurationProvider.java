@@ -28,8 +28,8 @@ import org.osgi.service.cm.Configuration;
  * @author Michael C. Han
  */
 public abstract class CompanyScopedConfigurationProvider
-		<T extends CompanyScopedConfiguration>
-	implements ConfigurationProvider<T> {
+	<T extends CompanyScopedConfiguration>
+		implements ConfigurationProvider<T> {
 
 	@Override
 	public T getConfiguration(long companyId) {

@@ -90,8 +90,8 @@ public class DefaultPortalLDAP implements PortalLDAP {
 
 		if (ldapServerConfiguration == null) {
 			throw new IllegalArgumentException(
-				"No LDAPServerConfiguration found for: copmanyId=" + companyId +
-					", ldapServerId=" + ldapServerId);
+				"No LDAP server configuration found for company " + companyId +
+					" and LDAP server " + ldapServerId);
 		}
 
 		String baseProviderURL = ldapServerConfiguration.baseProviderURL();
@@ -118,10 +118,10 @@ public class DefaultPortalLDAP implements PortalLDAP {
 			Context.INITIAL_CONTEXT_FACTORY,
 			systemLDAPConfiguration.factoryInitial());
 		environmentProperties.put(Context.PROVIDER_URL, providerURL);
-		environmentProperties.put(Context.SECURITY_PRINCIPAL, principal);
-		environmentProperties.put(Context.SECURITY_CREDENTIALS, credentials);
 		environmentProperties.put(
 			Context.REFERRAL, systemLDAPConfiguration.referral());
+		environmentProperties.put(Context.SECURITY_CREDENTIALS, credentials);
+		environmentProperties.put(Context.SECURITY_PRINCIPAL, principal);
 
 		String[] connectionProperties =
 			systemLDAPConfiguration.connectionProperties();
@@ -153,7 +153,7 @@ public class DefaultPortalLDAP implements PortalLDAP {
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Failed to bind to the LDAP server");
+				_log.warn("Unable to bind to the LDAP server");
 			}
 
 			if (_log.isDebugEnabled()) {

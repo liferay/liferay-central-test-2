@@ -69,7 +69,7 @@ public class LDAPConfigurationListener implements ConfigurationListener {
 		}
 		catch (IOException e) {
 			throw new SystemException(
-				"Could not load configuration: " + configurationEvent.getPid(),
+				"Unable to load configuration " + configurationEvent.getPid(),
 				e);
 		}
 	}
@@ -99,7 +99,7 @@ public class LDAPConfigurationListener implements ConfigurationListener {
 
 		if (Validator.isNull(factoryPid)) {
 			throw new IllegalArgumentException(
-				"No factoryPids specified for ConfigurationProvider " +
+				"No factory PID specified for configuration provider " +
 					configurationProvider);
 		}
 
@@ -116,7 +116,7 @@ public class LDAPConfigurationListener implements ConfigurationListener {
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Unable to retrieve configurations", e);
+				_log.warn("Unable to register configurations", e);
 			}
 		}
 	}
