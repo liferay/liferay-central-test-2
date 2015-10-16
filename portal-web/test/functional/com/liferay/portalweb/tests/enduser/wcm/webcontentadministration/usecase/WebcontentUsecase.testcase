@@ -78,7 +78,9 @@
 			<var name="webContentTitle" value="WC WebContent Title" />
 		</execute>
 
-		<execute macro="WebContent#uploadAudio" />
+		<execute macro="WebContent#uploadAudio">
+			<var name="dmDocumentURL" value="${dmDocumentURL}" />
+		</execute>
 
 		<execute macro="WebContent#publish" />
 
