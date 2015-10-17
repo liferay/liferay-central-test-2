@@ -66,9 +66,6 @@ public class ViewChartMVCResourceCommand extends BaseMVCResourceCommand {
 		ThemeDisplay themeDisplay = (ThemeDisplay)resourceRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		ResourceBundle resourceBundle = ResourceBundleUtil.getBundle(
-			"content.Language", themeDisplay.getLocale(), getClass());
-
 		String type = ParamUtil.getString(resourceRequest, "type", "max");
 		long maxMemory = ParamUtil.getLong(resourceRequest, "maxMemory");
 		long totalMemory = ParamUtil.getLong(resourceRequest, "totalMemory");
@@ -78,7 +75,11 @@ public class ViewChartMVCResourceCommand extends BaseMVCResourceCommand {
 
 		StringBundler sb = new StringBundler(5);
 
+		ResourceBundle resourceBundle = ResourceBundleUtil.getBundle(
+			"content.Language", themeDisplay.getLocale(), getClass());
+
 		sb.append(ResourceBundleUtil.getString(resourceBundle, "used-memory"));
+
 		sb.append(StringPool.SPACE);
 		sb.append(StringPool.FORWARD_SLASH);
 		sb.append(StringPool.SPACE);
