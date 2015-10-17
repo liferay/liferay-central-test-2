@@ -71,9 +71,8 @@ public class JGroupsReceiver extends ReceiverAdapter {
 		currentThread.setContextClassLoader(aggregatedClassLoader);
 
 		try {
-			Object object = deserializer.readObject();
-
-			_clusterReceiver.receive(object, new AddressImpl(message.getSrc()));
+			_clusterReceiver.receive(
+				deserializer.readObject(), new AddressImpl(message.getSrc()));
 		}
 		catch (ClassNotFoundException cnfe) {
 			if (_log.isWarnEnabled()) {
