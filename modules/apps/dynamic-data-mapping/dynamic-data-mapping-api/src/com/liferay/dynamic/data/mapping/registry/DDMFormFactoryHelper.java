@@ -98,18 +98,16 @@ public class DDMFormFactoryHelper {
 		for (int i = 0; i < optionLabels.length; i++) {
 			String optionLabel = optionLabels[i];
 
-			if (!isLocalizableKey(optionLabel)) {
+			if (isLocalizableKey(optionLabel)) {
+				String key = getKey(optionLabel);
+
+				ddmFormFieldOptions.addOptionLabel(
+					optionValues[i], _defaultLocale,
+					getLocalizedKey(_defaultLocale, key));
+			}
+			else {
 				ddmFormFieldOptions.addOptionLabel(
 					optionValues[i], _defaultLocale, optionLabel);
-
-				continue;
-			}
-
-			String key = getKey(optionLabels[i]);
-
-			for (Locale locale : _availableLocales) {
-				ddmFormFieldOptions.addOptionLabel(
-					optionValues[i], locale, getLocalizedKey(locale, key));
 			}
 		}
 
@@ -209,16 +207,14 @@ public class DDMFormFactoryHelper {
 			return localizedValue;
 		}
 
-		if (!isLocalizableKey(property)) {
-			localizedValue.addString(_defaultLocale, property);
+		if (isLocalizableKey(property)) {
+			String key = getKey(property);
 
-			return localizedValue;
+			localizedValue.addString(
+				_defaultLocale, getLocalizedKey(_defaultLocale, key));
 		}
-
-		String key = getKey(property);
-
-		for (Locale locale : _availableLocales) {
-			localizedValue.addString(locale, getLocalizedKey(locale, key));
+		else {
+			localizedValue.addString(_defaultLocale, property);
 		}
 
 		return localizedValue;
