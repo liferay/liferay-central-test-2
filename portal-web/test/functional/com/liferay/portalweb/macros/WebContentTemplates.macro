@@ -114,6 +114,8 @@
 		<if>
 			<isset var="addRoleViewPermissions" />
 			<then>
+				<execute function="SelectFrame" locator1="IFrame#TEMPLATES" />
+
 				<var name="key_listEntry" value="${templateName}" />
 
 				<execute function="Click" locator1="Icon#LIST_VERTICAL_ELLIPSIS" />
@@ -125,6 +127,8 @@
 					<var name="roleList" value="${addRoleViewPermissions}" />
 					<var name="roleName" value="${roleName}" />
 				</execute>
+
+				<execute function="SelectFrameTop" />
 			</then>
 		</if>
 	</command>
