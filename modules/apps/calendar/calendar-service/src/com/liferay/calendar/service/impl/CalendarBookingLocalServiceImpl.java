@@ -1143,10 +1143,11 @@ public class CalendarBookingLocalServiceImpl
 			return;
 		}
 
+		Map<Long, CalendarBooking> childCalendarBookingMap = new HashMap<>();
+
 		List<CalendarBooking> childCalendarBookings =
 			calendarBookingPersistence.findByParentCalendarBookingId(
 				calendarBooking.getCalendarBookingId());
-		Map<Long, CalendarBooking> childCalendarBookingMap = new HashMap<>();
 
 		for (CalendarBooking childCalendarBooking : childCalendarBookings) {
 			if (childCalendarBooking.isMasterBooking() ||
@@ -1194,17 +1195,11 @@ public class CalendarBookingLocalServiceImpl
 			if (childCalendarBookingMap.containsKey(calendarId)) {
 				CalendarBooking oldChildCalendarBooking =
 					childCalendarBookingMap.get(calendarId);
-				boolean timeChanged = false;
 
-				if ((calendarBooking.getStartTime() !=
-						oldChildCalendarBooking.getStartTime()) ||
-					(calendarBooking.getEndTime() !=
-						oldChildCalendarBooking.getEndTime())) {
-
-					timeChanged = true;
-				}
-
-				if (!timeChanged &&
+				if ((calendarBooking.getStartTime() ==
+						oldChildCalendarBooking.getStartTime()) &&
+					(calendarBooking.getEndTime() ==
+						oldChildCalendarBooking.getEndTime()) &&
 					(workflowAction != WorkflowConstants.ACTION_SAVE_DRAFT)) {
 
 					updateStatus(
