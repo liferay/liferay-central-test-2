@@ -90,10 +90,7 @@
 			</execute>
 		</for>
 
-		<execute function="SelectFrame" value1="relative=top" />
-		<execute function="SelectFrame" locator1="DDMEditStructure#IFRAME" />
-		<execute function="AssertClick" locator1="Button#SAVE" value1="Save" />
-		<execute function="SelectFrame" />
+		<execute macro="DDLDataDefinition#saveCP" />
 
 		<execute function="SelectFrame" locator1="IFrame#STRUCTURES" />
 
