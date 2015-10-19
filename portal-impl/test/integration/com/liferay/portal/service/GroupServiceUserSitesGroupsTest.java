@@ -223,7 +223,7 @@ public class GroupServiceUserSitesGroupsTest {
 		Group organizationGroup = organization.getGroup();
 
 		Assert.assertTrue(
-			groups + " does not contains " + organizationGroup,
+			groups + " does not contain " + organizationGroup,
 			groups.contains(organizationGroup));
 	}
 
