@@ -722,7 +722,7 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 			return Collections.emptyList();
 		}
 
-		LinkedHashSet<Group> userSiteGroups = new LinkedHashSet<>();
+		Set<Group> userSiteGroups = new LinkedHashSet<>();
 
 		if (classNames == null) {
 			classNames = new String[] {
