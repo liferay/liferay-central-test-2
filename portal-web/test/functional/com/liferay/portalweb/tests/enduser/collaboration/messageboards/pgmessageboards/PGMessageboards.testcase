@@ -498,6 +498,10 @@
 			<var name="pageName" value="Message Boards Page" />
 		</execute>
 
+		<execute macro="ProductMenu#gotoControlPanelSystem">
+			<var name="portlet" value="Server Administration" />
+		</execute>
+
 		<execute macro="ServerAdministration#configureFileUploadOverallMaximumFileSize">
 			<var name="maxFileSize" value="10000" />
 		</execute>
