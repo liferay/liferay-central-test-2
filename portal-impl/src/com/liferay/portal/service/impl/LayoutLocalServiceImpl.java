@@ -1547,9 +1547,10 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 	@Override
 	public boolean hasLayouts(Group group) throws PortalException {
-		for (LayoutSet layoutSet : layoutSetPersistence.findByGroupId(
-			group.getGroupId())) {
+		List<LayoutSet> groupLayoutSets = layoutSetPersistence.findByGroupId(
+			group.getGroupId());
 
+		for (LayoutSet layoutSet : groupLayoutSets) {
 			if (layoutSet.getPageCount() > 0) {
 				return true;
 			}
@@ -1570,9 +1571,11 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				Group userGroupGroup = groupPersistence.findByC_C_C(
 					group.getCompanyId(), userGroupClassNameId, userGroupId);
 
-				for (LayoutSet layoutSet : layoutSetPersistence.findByGroupId(
-					userGroupGroup.getGroupId())) {
+				List<LayoutSet> userGroupGroupLayoutSets =
+					layoutSetPersistence.findByGroupId(
+						userGroupGroup.getGroupId());
 
+				for (LayoutSet layoutSet : userGroupGroupLayoutSets) {
 					if (layoutSet.getPageCount() > 0) {
 						return true;
 					}
