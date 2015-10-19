@@ -22,12 +22,12 @@ AssetRenderer<JournalArticle> assetRenderer = journalContentDisplayContext.getAs
 
 User assetRendererUser = UserLocalServiceUtil.fetchUserById(assetRenderer.getUserId());
 
-String articleTitle = assetRenderer.getTitle(locale);
+String title = assetRenderer.getTitle(locale);
 
 if (article.getGroupId() != themeDisplay.getScopeGroupId()) {
 	Group articleGroup = GroupLocalServiceUtil.getGroup(article.getGroupId());
 
-	articleTitle = articleTitle + StringPool.SPACE + StringPool.OPEN_PARENTHESIS + articleGroup.getDescriptiveName(locale) + StringPool.CLOSE_PARENTHESIS;
+	title = title + StringPool.SPACE + StringPool.OPEN_PARENTHESIS + articleGroup.getDescriptiveName(locale) + StringPool.CLOSE_PARENTHESIS;
 }
 %>
 
@@ -37,7 +37,7 @@ if (article.getGroupId() != themeDisplay.getScopeGroupId()) {
 	smallImageCSSClass="user-icon user-icon-lg"
 	smallImageUrl="<%= (assetRendererUser != null) ? assetRendererUser.getPortraitURL(themeDisplay) : UserConstants.getPortraitURL(themeDisplay.getPathImage(), true, 0, null) %>"
 	subtitle="<%= assetRenderer.getSummary() %>"
-	title="<%= HtmlUtil.escape(articleTitle) %>"
+	title="<%= HtmlUtil.escape(title) %>"
 >
 	<liferay-frontend:vertical-card-footer>
 		<aui:workflow-status markupView="lexicon" showIcon="<%= false %>" showLabel="<%= false %>" status="<%= article.getStatus() %>" />
