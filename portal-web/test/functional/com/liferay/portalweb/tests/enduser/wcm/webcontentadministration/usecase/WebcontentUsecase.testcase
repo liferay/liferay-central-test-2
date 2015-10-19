@@ -1500,6 +1500,12 @@
 			<var name="webContentTitle" value="WC WebContent 3 Title" />
 		</execute>
 
+		<execute macro="WebContentDisplayPortlet#configureSetupPG">
+			<var name="metadataNameList" value="Related Assets" />
+		</execute>
+
+		<execute macro="WebContentDisplayPortlet#saveConfiguration" />
+
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="Web Content Display Page" />
 		</execute>
