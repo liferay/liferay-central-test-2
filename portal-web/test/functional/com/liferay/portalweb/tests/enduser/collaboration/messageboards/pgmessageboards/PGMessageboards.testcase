@@ -536,7 +536,9 @@
 			</execute>
 		</for>
 
-		<execute macro="MessageboardsCategory#tearDownCP" />
+		<execute macro="MessageboardsCategory#tearDownCP">
+			<var name="assetType" value="3 items" />
+		</execute>
 
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="${pageName}" />
