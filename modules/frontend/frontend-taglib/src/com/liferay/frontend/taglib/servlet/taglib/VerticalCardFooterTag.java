@@ -66,7 +66,7 @@ public class VerticalCardFooterTag extends IncludeTag implements BodyTag {
 	}
 
 	private static final String _ATTRIBUTE_NAMESPACE =
-		"liferay-frontend:veticalcard-footer:";
+		"liferay-frontend:vertical-card-footer:";
 
 	private static final boolean _CLEAN_UP_SET_ATTRIBUTES = true;
 
