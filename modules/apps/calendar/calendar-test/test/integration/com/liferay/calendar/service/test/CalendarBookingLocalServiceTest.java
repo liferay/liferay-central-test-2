@@ -627,7 +627,7 @@ public class CalendarBookingLocalServiceTest {
 	}
 
 	@Test
-	public void testUpdateCalendarBookingPreserversChildStatus()
+	public void testUpdateCalendarBookingPreservesChildStatus()
 		throws PortalException {
 
 		ServiceContext serviceContext = createServiceContext();
