@@ -155,7 +155,7 @@
 		</execute>
 
 		<execute macro="Staging#activateStagingCP">
-			<var name="siteName" value="${siteName}" />
+			<var name="siteName" value="Site Name" />
 		</execute>
 
 		<execute macro="Page#gotoPG">
