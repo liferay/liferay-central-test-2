@@ -292,7 +292,7 @@ public class DLFileEntryExtensionTest extends BaseDLAppTestCase {
 
 			Assert.fail("Created" + _FAIL_DUPLICATE_MESSAGE_SUFFIX);
 		}
-		catch (DuplicateFileEntryException dfe) {
+		catch (DuplicateFileEntryException dfee) {
 		}
 
 		FileEntry tempFileEntry = addFileEntry("Temp.txt", "Temp");
@@ -311,7 +311,7 @@ public class DLFileEntryExtensionTest extends BaseDLAppTestCase {
 
 			Assert.fail("Renamed" + _FAIL_DUPLICATE_MESSAGE_SUFFIX);
 		}
-		catch (DuplicateFileEntryException dfe) {
+		catch (DuplicateFileEntryException dfee) {
 		}
 		finally {
 			DLAppLocalServiceUtil.deleteFileEntry(
@@ -325,7 +325,7 @@ public class DLFileEntryExtensionTest extends BaseDLAppTestCase {
 
 			Assert.fail("Created" + _FAIL_DUPLICATE_MESSAGE_SUFFIX);
 		}
-		catch (DuplicateFileEntryException dfe) {
+		catch (DuplicateFileEntryException dfee) {
 		}
 
 		tempFileEntry = addFileEntry("Temp.txt", "");
@@ -340,7 +340,7 @@ public class DLFileEntryExtensionTest extends BaseDLAppTestCase {
 
 			Assert.fail("Renamed" + _FAIL_DUPLICATE_MESSAGE_SUFFIX);
 		}
-		catch (DuplicateFileEntryException dfe) {
+		catch (DuplicateFileEntryException dfee) {
 		}
 		finally {
 			DLAppLocalServiceUtil.deleteFileEntry(
@@ -354,7 +354,7 @@ public class DLFileEntryExtensionTest extends BaseDLAppTestCase {
 
 			Assert.fail("Created" + _FAIL_DUPLICATE_MESSAGE_SUFFIX);
 		}
-		catch (DuplicateFileEntryException dfe) {
+		catch (DuplicateFileEntryException dfee) {
 		}
 
 		tempFileEntry = addFileEntry( "Temp", "Temp.txt");
@@ -369,7 +369,7 @@ public class DLFileEntryExtensionTest extends BaseDLAppTestCase {
 
 			Assert.fail("Renamed" + _FAIL_DUPLICATE_MESSAGE_SUFFIX);
 		}
-		catch (DuplicateFileEntryException dfe) {
+		catch (DuplicateFileEntryException dfee) {
 		}
 		finally {
 			DLAppLocalServiceUtil.deleteFileEntry(
@@ -383,7 +383,7 @@ public class DLFileEntryExtensionTest extends BaseDLAppTestCase {
 
 			Assert.fail("Created" + _FAIL_DUPLICATE_MESSAGE_SUFFIX);
 		}
-		catch (DuplicateFileEntryException dfe) {
+		catch (DuplicateFileEntryException dfee) {
 		}
 
 		tempFileEntry = addFileEntry("", "Temp.txt");
@@ -396,7 +396,7 @@ public class DLFileEntryExtensionTest extends BaseDLAppTestCase {
 
 			Assert.fail("Renamed" + _FAIL_DUPLICATE_MESSAGE_SUFFIX);
 		}
-		catch (DuplicateFileEntryException dfe) {
+		catch (DuplicateFileEntryException dfee) {
 		}
 		finally {
 			DLAppLocalServiceUtil.deleteFileEntry(
@@ -418,7 +418,7 @@ public class DLFileEntryExtensionTest extends BaseDLAppTestCase {
 
 			Assert.fail("Created" + _FAIL_DUPLICATE_MESSAGE_SUFFIX);
 		}
-		catch (DuplicateFileEntryException dfe) {
+		catch (DuplicateFileEntryException dfee) {
 		}
 
 		FileEntry tempFileEntry = addFileEntry("Temp", "");
@@ -437,7 +437,7 @@ public class DLFileEntryExtensionTest extends BaseDLAppTestCase {
 
 			Assert.fail("Renamed" + _FAIL_DUPLICATE_MESSAGE_SUFFIX);
 		}
-		catch (DuplicateFileEntryException dfe) {
+		catch (DuplicateFileEntryException dfee) {
 		}
 		finally {
 			DLAppLocalServiceUtil.deleteFileEntry(
@@ -451,7 +451,7 @@ public class DLFileEntryExtensionTest extends BaseDLAppTestCase {
 
 			Assert.fail("Created" + _FAIL_DUPLICATE_MESSAGE_SUFFIX);
 		}
-		catch (DuplicateFileEntryException dfe) {
+		catch (DuplicateFileEntryException dfee) {
 		}
 
 		tempFileEntry = addFileEntry("", "Temp");
@@ -464,7 +464,7 @@ public class DLFileEntryExtensionTest extends BaseDLAppTestCase {
 
 			Assert.fail("Renamed" + _FAIL_DUPLICATE_MESSAGE_SUFFIX);
 		}
-		catch (DuplicateFileEntryException dfe) {
+		catch (DuplicateFileEntryException dfee) {
 		}
 		finally {
 			DLAppLocalServiceUtil.deleteFileEntry(
