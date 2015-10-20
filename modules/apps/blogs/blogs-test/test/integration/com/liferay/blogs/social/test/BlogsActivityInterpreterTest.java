@@ -70,32 +70,8 @@ public class BlogsActivityInterpreterTest
 
 	@Override
 	protected SocialActivityInterpreter getActivityInterpreter() {
-		try {
-			Registry registry = RegistryUtil.getRegistry();
-
-			Collection<SocialActivityInterpreter> socialActivityInterpreters =
-				registry.getServices(
-					SocialActivityInterpreter.class,
-					"(javax.portlet.name=" + BlogsPortletKeys.BLOGS + ")");
-
-			for (SocialActivityInterpreter socialActivityInterpreter :
-					socialActivityInterpreters) {
-
-				if (ArrayUtil.contains(
-						socialActivityInterpreter.getClassNames(),
-						BlogsEntry.class.getName())) {
-
-					return socialActivityInterpreter;
-				}
-			}
-
-			throw new IllegalStateException(
-				"No activity interpreter found for class " +
-					BlogsEntry.class.getName());
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
+		return getActivityInterpreter(
+			BlogsPortletKeys.BLOGS, BlogsEntry.class.getName());
 	}
 
 	@Override
