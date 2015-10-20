@@ -44,7 +44,7 @@ public class IgnoreDuplicatesStore implements Store {
 		throws PortalException {
 
 		recoverAndRetryOnFailure(
-			deleteFileStoreAction(
+			createDeleteFileStoreAction(
 				companyId, repositoryId, fileName, Store.VERSION_DEFAULT),
 			new StoreAction() {
 
@@ -53,8 +53,7 @@ public class IgnoreDuplicatesStore implements Store {
 					_store.addFile(companyId, repositoryId, fileName, bytes);
 				}
 
-			}
-		);
+			});
 	}
 
 	@Override
@@ -64,7 +63,7 @@ public class IgnoreDuplicatesStore implements Store {
 		throws PortalException {
 
 		recoverAndRetryOnFailure(
-			deleteFileStoreAction(
+			createDeleteFileStoreAction(
 				companyId, repositoryId, fileName, Store.VERSION_DEFAULT),
 			new StoreAction() {
 
@@ -84,7 +83,7 @@ public class IgnoreDuplicatesStore implements Store {
 		throws PortalException {
 
 		recoverAndRetryOnFailure(
-			deleteFileStoreAction(
+			createDeleteFileStoreAction(
 				companyId, repositoryId, fileName, Store.VERSION_DEFAULT),
 			new StoreAction() {
 
@@ -93,8 +92,7 @@ public class IgnoreDuplicatesStore implements Store {
 					_store.addFile(companyId, repositoryId, fileName, is);
 				}
 
-			}
-		);
+			});
 	}
 
 	@Override
@@ -110,7 +108,7 @@ public class IgnoreDuplicatesStore implements Store {
 		throws PortalException {
 
 		recoverAndRetryOnFailure(
-			deleteFileStoreAction(
+			createDeleteFileStoreAction(
 				companyId, repositoryId, fileName, toVersionLabel),
 			new StoreAction() {
 
@@ -121,9 +119,7 @@ public class IgnoreDuplicatesStore implements Store {
 						toVersionLabel);
 				}
 
-			}
-		);
-
+			});
 	}
 
 	@Override
@@ -249,7 +245,7 @@ public class IgnoreDuplicatesStore implements Store {
 		throws PortalException {
 
 		recoverAndRetryOnFailure(
-			deleteFileStoreAction(companyId, repositoryId, fileName),
+			createDeleteFileStoreAction(companyId, repositoryId, fileName),
 			new StoreAction() {
 
 				@Override
@@ -258,8 +254,7 @@ public class IgnoreDuplicatesStore implements Store {
 						companyId, repositoryId, newRepositoryId, fileName);
 				}
 
-			}
-		);
+			});
 	}
 
 	@Override
@@ -269,7 +264,7 @@ public class IgnoreDuplicatesStore implements Store {
 		throws PortalException {
 
 		recoverAndRetryOnFailure(
-			deleteFileStoreAction(companyId, repositoryId, newFileName),
+			createDeleteFileStoreAction(companyId, repositoryId, newFileName),
 			new StoreAction() {
 
 				@Override
@@ -278,8 +273,7 @@ public class IgnoreDuplicatesStore implements Store {
 						companyId, repositoryId, fileName, newFileName);
 				}
 
-			}
-		);
+			});
 	}
 
 	@Override
@@ -290,7 +284,7 @@ public class IgnoreDuplicatesStore implements Store {
 		throws PortalException {
 
 		recoverAndRetryOnFailure(
-			deleteFileStoreAction(
+			createDeleteFileStoreAction(
 				companyId, repositoryId, fileName, versionLabel),
 			new StoreAction() {
 
@@ -300,8 +294,7 @@ public class IgnoreDuplicatesStore implements Store {
 						companyId, repositoryId, fileName, versionLabel, bytes);
 				}
 
-			}
-		);
+			});
 	}
 
 	@Override
@@ -311,7 +304,7 @@ public class IgnoreDuplicatesStore implements Store {
 		throws PortalException {
 
 		recoverAndRetryOnFailure(
-			deleteFileStoreAction(
+			createDeleteFileStoreAction(
 				companyId, repositoryId, fileName, versionLabel),
 			new StoreAction() {
 
@@ -321,8 +314,7 @@ public class IgnoreDuplicatesStore implements Store {
 						companyId, repositoryId, fileName, versionLabel, file);
 				}
 
-			}
-		);
+			});
 	}
 
 	@Override
@@ -333,7 +325,7 @@ public class IgnoreDuplicatesStore implements Store {
 		throws PortalException {
 
 		recoverAndRetryOnFailure(
-			deleteFileStoreAction(
+			createDeleteFileStoreAction(
 				companyId, repositoryId, fileName, versionLabel),
 			new StoreAction() {
 
@@ -343,8 +335,7 @@ public class IgnoreDuplicatesStore implements Store {
 						companyId, repositoryId, fileName, versionLabel, is);
 				}
 
-			}
-		);
+			});
 	}
 
 	@Override
@@ -355,7 +346,7 @@ public class IgnoreDuplicatesStore implements Store {
 		throws PortalException {
 
 		recoverAndRetryOnFailure(
-			deleteFileStoreAction(
+			createDeleteFileStoreAction(
 				companyId, repositoryId, fileName, toVersionLabel),
 			new StoreAction() {
 
@@ -366,11 +357,10 @@ public class IgnoreDuplicatesStore implements Store {
 						toVersionLabel);
 				}
 
-			}
-		);
+			});
 	}
 
-	protected StoreAction deleteFileStoreAction(
+	protected StoreAction createDeleteFileStoreAction(
 		final long companyId, final long repositoryId, final String fileName) {
 
 		return new StoreAction() {
@@ -383,7 +373,7 @@ public class IgnoreDuplicatesStore implements Store {
 		};
 	}
 
-	protected StoreAction deleteFileStoreAction(
+	protected StoreAction createDeleteFileStoreAction(
 		final long companyId, final long repositoryId, final String fileName,
 		final String versionLabel) {
 
