@@ -1034,8 +1034,8 @@ public class StagingImpl implements Staging {
 		catch (JSONException jsone) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
-					"Unable to get recent layout set branch ID layout set " +
-						layoutSetId,
+					"Unable to get recent layout set branch ID with layout " +
+						"set " + layoutSetId,
 					jsone);
 			}
 		}
