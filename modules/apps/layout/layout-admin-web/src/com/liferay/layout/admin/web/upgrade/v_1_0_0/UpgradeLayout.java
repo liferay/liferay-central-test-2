@@ -40,7 +40,7 @@ public class UpgradeLayout extends UpgradeProcess {
 			ps = con.prepareStatement(
 				"select plid, typeSettings from Layout where type_ = ?");
 
-			ps.setString(1, _TYPE_EMBEDDED);
+			ps.setString(1, "embedded");
 
 			rs = ps.executeQuery();
 
@@ -96,7 +96,5 @@ public class UpgradeLayout extends UpgradeProcess {
 			DataAccess.cleanUp(con, ps);
 		}
 	}
-
-	private static final String _TYPE_EMBEDDED = "embedded";
 
 }
