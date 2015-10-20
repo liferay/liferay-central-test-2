@@ -25,10 +25,12 @@ import java.io.InputStreamReader;
  */
 public class JSONCurlUtil {
 
-	public static String get(String curl, String jsonPath) throws Exception {
+	public static String get(String curlOptions, String jsonPath)
+		throws Exception {
+
 		Runtime runtime = Runtime.getRuntime();
 
-		Process process = runtime.exec("curl " + curl);
+		Process process = runtime.exec("curl " + curlOptions);
 
 		InputStreamReader inputStreamReader = new InputStreamReader(
 			process.getInputStream());
@@ -46,9 +48,9 @@ public class JSONCurlUtil {
 
 		DocumentContext documentContext = JsonPath.parse(sb.toString());
 
-		Object obj = documentContext.read(jsonPath);
+		Object object = documentContext.read(jsonPath);
 
-		return obj.toString();
+		return object.toString();
 	}
 
 }
