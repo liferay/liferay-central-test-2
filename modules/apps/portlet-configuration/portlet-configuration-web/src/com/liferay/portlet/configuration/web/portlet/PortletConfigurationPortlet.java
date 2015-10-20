@@ -538,7 +538,7 @@ public class PortletConfigurationPortlet extends MVCPortlet {
 			}
 		}
 
-		// Force updating layout modified date. See LPS-59246
+		// Force update of layout modified date. See LPS-59246.
 
 		Portlet portlet = ActionUtil.getPortlet(actionRequest);
 
