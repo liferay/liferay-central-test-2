@@ -267,12 +267,11 @@ public class DeployUtil {
 		}
 
 		Path tempDirPath = Files.createTempDirectory(
-				Paths.get(SystemProperties.get(SystemProperties.TMP_DIR)),
-				null);
+			Paths.get(SystemProperties.get(SystemProperties.TMP_DIR)), null);
 
 		File file = new File(
-			tempDirPath.toString() +
-				"/liferay/com/liferay/portal/deploy/dependencies/" + resource);
+			tempDirPath + "/liferay/com/liferay/portal/deploy/dependencies/" +
+				resource);
 
 		//if (!file.exists() || resource.startsWith("ext-")) {
 			File parentFile = file.getParentFile();
