@@ -243,43 +243,38 @@ public class DLFileEntryLocalServiceTest {
 	@Test
 	public void testDuplicateFileIsIgnored() throws Exception {
 		DLFolder dlFolder = DLTestUtil.addDLFolder(_group.getGroupId());
+		Map<String, DDMFormValues> ddmFormValuesMap = Collections.emptyMap();
+		InputStream inputStream = new ByteArrayInputStream(new byte[0]);
 
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
-		InputStream inputStream = new ByteArrayInputStream(new byte[0]);
-
-		Map<String, DDMFormValues> ddmFormValuesMap = Collections.emptyMap();
-
-		DLFileEntry fileEntry = addAndApproveFileEntry(
+		DLFileEntry dlFileEntry = addAndApproveFileEntry(
 			dlFolder, ddmFormValuesMap, inputStream, serviceContext);
 
 		DLStoreUtil.updateFile(
-			fileEntry.getCompanyId(), fileEntry.getRepositoryId(),
-			fileEntry.getName(), fileEntry.getExtension(), false, "2.0",
+			dlFileEntry.getCompanyId(), dlFileEntry.getRepositoryId(),
+			dlFileEntry.getName(), dlFileEntry.getExtension(), false, "2.0",
 			StringUtil.randomString(), inputStream);
 
-		fileEntry = updateAndApproveFileEntry(
-			fileEntry, inputStream, ddmFormValuesMap, serviceContext);
+		dlFileEntry = updateAndApproveDLFileEntry(
+			dlFileEntry, inputStream, ddmFormValuesMap, serviceContext);
 
-		fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
-			fileEntry.getFileEntryId());
+		dlFileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
+			dlFileEntry.getFileEntryId());
 
-		Assert.assertEquals("2.0", fileEntry.getVersion());
+		Assert.assertEquals("2.0", dlFileEntry.getVersion());
 	}
 
 	@Test(expected = DuplicateFileEntryException.class)
 	public void testDuplicateTitleFileEntry() throws Exception {
 		DLFolder dlFolder = DLTestUtil.addDLFolder(_group.getGroupId());
-
 		String title = StringUtil.randomString();
+		Map<String, DDMFormValues> ddmFormValuesMap = Collections.emptyMap();
+		InputStream inputStream = new ByteArrayInputStream(new byte[0]);
 
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
-
-		InputStream inputStream = new ByteArrayInputStream(new byte[0]);
-
-		Map<String, DDMFormValues> ddmFormValuesMap = Collections.emptyMap();
 
 		DLFileEntryLocalServiceUtil.addFileEntry(
 			TestPropsValues.getUserId(), dlFolder.getGroupId(),
@@ -450,7 +445,7 @@ public class DLFileEntryLocalServiceTest {
 			InputStream inputStream, ServiceContext serviceContext)
 		throws Exception {
 
-		DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.addFileEntry(
+		DLFileEntry dlFileEntry = DLFileEntryLocalServiceUtil.addFileEntry(
 			TestPropsValues.getUserId(), dlFolder.getGroupId(),
 			dlFolder.getRepositoryId(), dlFolder.getFolderId(),
 			StringUtil.randomString(), ContentTypes.TEXT_PLAIN,
@@ -458,10 +453,10 @@ public class DLFileEntryLocalServiceTest {
 			DLFileEntryTypeConstants.FILE_ENTRY_TYPE_ID_BASIC_DOCUMENT,
 			ddmFormValuesMap, null, inputStream, 0, serviceContext);
 
-		DLFileVersion fileVersion = fileEntry.getLatestFileVersion(true);
+		DLFileVersion dlFileVersion = dlFileEntry.getLatestFileVersion(true);
 
 		return DLFileEntryLocalServiceUtil.updateStatus(
-			TestPropsValues.getUserId(), fileVersion.getFileVersionId(),
+			TestPropsValues.getUserId(), dlFileVersion.getFileVersionId(),
 			WorkflowConstants.STATUS_APPROVED, serviceContext,
 			new HashMap<String, Serializable>());
 	}
@@ -535,23 +530,23 @@ public class DLFileEntryLocalServiceTest {
 		return dlFileEntryType.getFileEntryTypeId();
 	}
 
-	protected DLFileEntry updateAndApproveFileEntry(
-			DLFileEntry fileEntry, InputStream inputStream,
+	protected DLFileEntry updateAndApproveDLFileEntry(
+			DLFileEntry dlFileEntry, InputStream inputStream,
 			Map<String, DDMFormValues> ddmFormValuesMap,
 			ServiceContext serviceContext)
 		throws Exception {
 
-		fileEntry = DLFileEntryLocalServiceUtil.updateFileEntry(
-			TestPropsValues.getUserId(), fileEntry.getFileEntryId(),
+		dlFileEntry = DLFileEntryLocalServiceUtil.updateFileEntry(
+			TestPropsValues.getUserId(), dlFileEntry.getFileEntryId(),
 			StringUtil.randomString(), ContentTypes.TEXT_PLAIN,
 			StringUtil.randomString(), StringPool.BLANK, StringPool.BLANK, true,
 			DLFileEntryTypeConstants.FILE_ENTRY_TYPE_ID_BASIC_DOCUMENT,
 			ddmFormValuesMap, null, inputStream, 0, serviceContext);
 
-		DLFileVersion fileVersion = fileEntry.getLatestFileVersion(true);
+		DLFileVersion dlFileVersion = dlFileEntry.getLatestFileVersion(true);
 
 		return DLFileEntryLocalServiceUtil.updateStatus(
-			TestPropsValues.getUserId(), fileVersion.getFileVersionId(),
+			TestPropsValues.getUserId(), dlFileVersion.getFileVersionId(),
 			WorkflowConstants.STATUS_APPROVED, serviceContext,
 			new HashMap<String, Serializable>());
 	}
