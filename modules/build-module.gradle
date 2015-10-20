@@ -308,10 +308,10 @@ if (System.getenv("JENKINS_HOME")) {
 			File webXmlFile = file("docroot/WEB-INF/web.xml")
 
 			if (webXmlFile.exists()) {
-				println "web.xml found BEFORE running ${path}:\n${webXmlFile.text}"
+				println "Found web.xml before running ${path}:\n${webXmlFile.text}."
 			}
 			else {
-				println "web.xml NOT found BEFORE running ${path}."
+				println "Unable to find web.xml before running ${path}."
 			}
 		}
 
@@ -331,7 +331,7 @@ if (System.getenv("JENKINS_HOME")) {
 				}
 			}
 
-			println "web.xml found AFTER running ${path}:\n${webXmlFile.text}"
+			println "Found web.xml after running ${path}:\n${webXmlFile.text}."
 		}
 	}
 
