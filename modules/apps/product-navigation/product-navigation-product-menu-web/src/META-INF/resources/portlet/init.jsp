@@ -28,7 +28,7 @@ page import="com.liferay.portal.kernel.util.HtmlUtil" %><%@
 page import="com.liferay.portal.kernel.util.StringPool" %><%@
 page import="com.liferay.portal.kernel.util.Validator" %><%@
 page import="com.liferay.portal.util.SessionClicks" %><%@
-page import="com.liferay.product.navigation.product.menu.web.context.ProductMenuDisplayContext" %><%@
+page import="com.liferay.product.navigation.product.menu.web.display.context.ProductMenuDisplayContext" %><%@
 page import="com.liferay.taglib.aui.AUIUtil" %>
 
 <%@ page import="java.util.List" %>
