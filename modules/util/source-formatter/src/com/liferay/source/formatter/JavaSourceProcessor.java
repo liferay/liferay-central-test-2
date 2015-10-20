@@ -275,8 +275,8 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 		// LPS-56706 and LPS-57722
 
 		if (fileName.endsWith("Test.java")) {
-			if (absolutePath.contains("/test/integration/") ||
-				absolutePath.contains("/src/testIntegration/java/")) {
+			if (absolutePath.contains("/src/testIntegration/java/") ||
+				absolutePath.contains("/test/integration/")) {
 
 				if (content.contains("@RunWith(Arquillian.class)") &&
 					content.contains("import org.powermock.")) {
