@@ -378,7 +378,7 @@ public class DLServiceVerifyProcess extends VerifyProcess {
 							dlFileEntry.getFileName(), dlFileEntry.getTitle());
 					}
 					catch (DuplicateFileEntryException |
-						DuplicateFolderNameException pe) {
+								DuplicateFolderNameException pe) {
 
 						try {
 							renameDuplicateTitle(dlFileEntry);
@@ -559,7 +559,7 @@ public class DLServiceVerifyProcess extends VerifyProcess {
 			try {
 				return renameTitle(dlFileEntry, newTitle);
 			}
-			catch (DuplicateFileEntryException dfe) {
+			catch (DuplicateFileEntryException dfee) {
 			}
 		}
 	}
