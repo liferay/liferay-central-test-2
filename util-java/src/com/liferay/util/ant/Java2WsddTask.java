@@ -57,8 +57,7 @@ public class Java2WsddTask {
 		// Create temp directory
 
 		java.nio.file.Path tempDirPath = Files.createTempDirectory(
-				Paths.get(SystemProperties.get(SystemProperties.TMP_DIR)),
-				null);
+			Paths.get(SystemProperties.get(SystemProperties.TMP_DIR)), null);
 
 		File tempDir = tempDirPath.toFile();
 
