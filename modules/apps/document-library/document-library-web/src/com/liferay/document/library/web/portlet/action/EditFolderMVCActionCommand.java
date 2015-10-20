@@ -179,11 +179,11 @@ public class EditFolderMVCActionCommand extends BaseMVCActionCommand {
 		catch (NoSuchFolderException | PrincipalException e) {
 			SessionErrors.add(actionRequest, e.getClass());
 
-				actionResponse.setRenderParameter(
-					"mvcPath", "/document_library/error.jsp");
+			actionResponse.setRenderParameter(
+				"mvcPath", "/document_library/error.jsp");
 		}
 		catch (DuplicateFileException | DuplicateFolderNameException |
-				FolderNameException | RequiredFileEntryTypeException e) {
+			FolderNameException | RequiredFileEntryTypeException e) {
 
 			SessionErrors.add(actionRequest, e.getClass());
 		}
