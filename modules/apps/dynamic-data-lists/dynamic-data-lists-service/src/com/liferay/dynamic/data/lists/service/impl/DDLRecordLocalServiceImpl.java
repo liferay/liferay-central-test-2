@@ -23,6 +23,7 @@ import com.liferay.dynamic.data.lists.service.base.DDLRecordLocalServiceBaseImpl
 import com.liferay.dynamic.data.lists.util.DDL;
 import com.liferay.dynamic.data.lists.util.DDLUtil;
 import com.liferay.dynamic.data.mapping.model.DDMStructure;
+import com.liferay.dynamic.data.mapping.model.Value;
 import com.liferay.dynamic.data.mapping.storage.DDMFormFieldValue;
 import com.liferay.dynamic.data.mapping.storage.DDMFormValues;
 import com.liferay.dynamic.data.mapping.storage.Field;
@@ -784,16 +785,18 @@ public class DDLRecordLocalServiceImpl extends DDLRecordLocalServiceBaseImpl {
 
 		Set<Locale> availableLocales = ddmFormValues.getAvailableLocales();
 
-		List<DDMFormFieldValue> ddmFormFieldValues =
-			ddmFormValues.getDDMFormFieldValues();
+		List<DDMFormFieldValue> ddmFormFieldValues = 
+				ddmFormValues.getDDMFormFieldValues();
 
 		for (DDMFormFieldValue ddmFormFieldValue : ddmFormFieldValues) {
-			Set<Locale> valueLocales =
-				ddmFormFieldValue.getValue().getAvailableLocales();
+			Value fieldValue = ddmFormFieldValue.getValue();
 
-			for (Locale locale : valueLocales) {
-				if (!availableLocales.contains(locale)) {
-					availableLocales.add(locale);
+			if (Validator.isNotNull(fieldValue) && fieldValue.isLocalized()) {
+
+				for (Locale locale : fieldValue.getAvailableLocales()) {
+					if (!availableLocales.contains(locale)) {
+						availableLocales.add(locale);
+					}
 				}
 			}
 		}
