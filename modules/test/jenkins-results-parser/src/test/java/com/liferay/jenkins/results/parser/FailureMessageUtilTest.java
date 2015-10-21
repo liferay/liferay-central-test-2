@@ -14,15 +14,13 @@
 
 package com.liferay.jenkins.results.parser;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.net.URL;
 
-import org.apache.tools.ant.Project;
+import org.dom4j.Document;
+import org.dom4j.io.SAXReader;
 
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.json.JSONObject;
 
 /**
  * @author Peter Yoo
@@ -31,10 +29,31 @@ public class FailureMessageUtilTest {
 
 	@BeforeClass
 	public static void setUpClass() throws Exception {
+		_downloadTestDependencies("test-1-12", "319");
 	}
 
 	@Test
 	public void testGetFailureMessage() throws Exception {
-	}	
+	}
+
+	private static void _downloadTestDependencies(
+			String hostName, String buildNumber)
+		throws Exception {
+
+		if (true) {
+			return;
+		}
+
+		SAXReader saxReader = new SAXReader();
+
+		String jenkinsReportURL =
+			"https://" + hostName + ".liferay.com/userContent/jobs" +
+				"/test-portal-acceptance-pullrequest(master)/builds/" +
+					buildNumber + "/jenkins-report.html";
+
+		Document document = saxReader.read(new URL(jenkinsReportURL));
+
+		System.out.println(document.asXML());
+	}
 
 }

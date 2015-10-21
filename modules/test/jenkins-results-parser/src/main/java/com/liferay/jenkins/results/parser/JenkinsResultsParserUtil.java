@@ -15,9 +15,6 @@
 package com.liferay.jenkins.results.parser;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
@@ -27,7 +24,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -83,12 +79,11 @@ public class JenkinsResultsParserUtil {
 				continue;
 			}
 
-			JSONObject actionsJSONObject = actionsJSONArray.getJSONObject(
-				i);
+			JSONObject actionsJSONObject = actionsJSONArray.getJSONObject(i);
 
 			if (actionsJSONObject.has("parameters")) {
-				JSONArray parametersJSONArray =
-					actionsJSONObject.getJSONArray("parameters");
+				JSONArray parametersJSONArray = actionsJSONObject.getJSONArray(
+					"parameters");
 
 				for (int j = 0; j < parametersJSONArray.length(); j++) {
 					JSONObject parametersJSONObject =
