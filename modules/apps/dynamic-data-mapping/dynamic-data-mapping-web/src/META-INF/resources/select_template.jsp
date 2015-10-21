@@ -59,11 +59,11 @@ OrderByComparator<DDMTemplate> orderByComparator = DDMUtil.getTemplateOrderByCom
 </portlet:actionURL>
 
 <aui:form action="<%= selectURL.toString() %>" method="post" name="selectTemplateFm">
+	<aui:input name="templateId" type="hidden" value="<%= String.valueOf(templateId) %>" />
 	<aui:input name="classNameId" type="hidden" value="<%= String.valueOf(classNameId) %>" />
 	<aui:input name="classPK" type="hidden" value="<%= String.valueOf(classPK) %>" />
 	<aui:input name="resourceClassNameId" type="hidden" value="<%= String.valueOf(resourceClassNameId) %>" />
 	<aui:input name="eventName" type="hidden" value="<%= eventName %>" />
-	<aui:input name="templateId" type="hidden" value="<%= String.valueOf(templateId) %>" />
 
 	<c:choose>
 		<c:when test="<%= showToolbar %>">

@@ -41,7 +41,6 @@ boolean includeCheckBox = ParamUtil.getBoolean(request, "includeCheckBox", true)
 
 		</liferay-frontend:management-bar-action-buttons>
 	</c:if>
-
 </liferay-frontend:management-bar>
 
 <aui:script>
