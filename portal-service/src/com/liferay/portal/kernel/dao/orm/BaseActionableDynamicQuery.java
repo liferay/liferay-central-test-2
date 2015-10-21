@@ -28,7 +28,6 @@ import com.liferay.portal.service.BaseLocalService;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -389,7 +388,6 @@ public abstract class BaseActionableDynamicQuery
 		throws PortalException {
 	}
 
-	@SuppressWarnings("unchecked")
 	protected void performAction(Object object) throws PortalException {
 		if (_performActionMethod != null) {
 			_performActionMethod.performAction(object);
@@ -409,7 +407,10 @@ public abstract class BaseActionableDynamicQuery
 	private long _groupId;
 	private String _groupIdPropertyName = "groupId";
 	private int _interval = Indexer.DEFAULT_INTERVAL;
+
+	@SuppressWarnings("rawtypes")
 	private PerformActionMethod _performActionMethod;
+
 	private PerformCountMethod _performCountMethod;
 	private String _primaryKeyPropertyName;
 	private String _searchEngineId;
