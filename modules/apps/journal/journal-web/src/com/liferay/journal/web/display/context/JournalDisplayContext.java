@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.journal.web.context;
+package com.liferay.journal.web.display.context;
 
 import com.liferay.journal.constants.JournalPortletKeys;
 import com.liferay.journal.model.JournalFolder;
