@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.layout.admin.web.context;
+package com.liferay.layout.admin.web.display.context;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
