@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.journal.web.context.util;
+package com.liferay.journal.web.display.context.util;
 
 import com.liferay.journal.configuration.JournalGroupServiceConfiguration;
 import com.liferay.journal.constants.JournalConstants;
