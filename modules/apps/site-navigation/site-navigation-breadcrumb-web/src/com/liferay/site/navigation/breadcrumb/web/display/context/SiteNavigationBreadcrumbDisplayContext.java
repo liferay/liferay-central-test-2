@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.site.navigation.breadcrumb.web.context;
+package com.liferay.site.navigation.breadcrumb.web.display.context;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
