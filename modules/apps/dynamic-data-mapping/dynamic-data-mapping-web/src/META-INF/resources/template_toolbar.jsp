@@ -24,7 +24,7 @@ boolean includeCheckBox = ParamUtil.getBoolean(request, "includeCheckBox", true)
 
 <liferay-frontend:management-bar
 	checkBoxContainerId="entriesContainer"
-	includeCheckBox="<%= !user.isDefaultUser() && includeCheckBox %>"
+	includeCheckBox="<%= includeCheckBox && !user.isDefaultUser() %>"
 >
 	<liferay-frontend:management-bar-filters>
 		<liferay-util:include page="/template_sort_button.jsp" servletContext="<%= application %>" />
