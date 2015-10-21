@@ -22,7 +22,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 String portletResource = ParamUtil.getString(request, "portletResource");
 
 long referringPlid = ParamUtil.getLong(request, "referringPlid");
-
 String referringPortletResource = ParamUtil.getString(request, "referringPortletResource");
 
 boolean changeStructure = GetterUtil.getBoolean(ParamUtil.getString(request, "changeStructure"));
