@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.workflow.instance.web.context;
+package com.liferay.workflow.instance.web.display.context;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
