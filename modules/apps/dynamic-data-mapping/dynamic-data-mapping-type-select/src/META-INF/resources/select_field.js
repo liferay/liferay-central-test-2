@@ -1,6 +1,8 @@
 AUI.add(
 	'liferay-ddm-form-field-select',
 	function(A) {
+		var Lang = A.Lang;
+
 		var SelectField = A.Component.create(
 			{
 				ATTRS: {
@@ -30,8 +32,14 @@ AUI.add(
 						return A.map(
 							instance.get('options'),
 							function(item) {
+								var label = item.label;
+
+								if (Lang.isObject(label)) {
+									label = label[instance.get('locale')];
+								}
+
 								return {
-									label: item.label[instance.get('locale')],
+									label: label,
 									status: instance._getOptionStatus(item),
 									value: item.value
 								};
