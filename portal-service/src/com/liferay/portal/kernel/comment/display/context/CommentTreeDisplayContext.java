@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.kernel.comment.context;
+package com.liferay.portal.kernel.comment.display.context;
 
 import com.liferay.portal.kernel.exception.PortalException;
 

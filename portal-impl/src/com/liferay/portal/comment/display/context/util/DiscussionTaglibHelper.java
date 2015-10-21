@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.comment.context.util;
+package com.liferay.portal.comment.display.context.util;
 
 import com.liferay.portal.kernel.util.GetterUtil;
 

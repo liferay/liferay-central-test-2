@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.layoutsadmin.context;
+package com.liferay.portlet.layoutsadmin.display.context;
 
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;

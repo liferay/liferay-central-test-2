@@ -38,7 +38,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.LayoutDescription;
 import com.liferay.portal.util.LayoutListUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portlet.layoutsadmin.context.GroupDisplayContextHelper;
+import com.liferay.portlet.layoutsadmin.display.context.GroupDisplayContextHelper;
 
 import java.util.List;
 

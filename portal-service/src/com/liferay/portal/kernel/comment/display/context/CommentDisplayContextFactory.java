@@ -12,13 +12,12 @@
  * details.
  */
 
-package com.liferay.portal.comment.context;
+package com.liferay.portal.kernel.comment.display.context;
 
 import com.liferay.portal.kernel.comment.Discussion;
 import com.liferay.portal.kernel.comment.DiscussionComment;
 import com.liferay.portal.kernel.comment.DiscussionPermission;
-import com.liferay.portal.kernel.comment.context.CommentSectionDisplayContext;
-import com.liferay.portal.kernel.comment.context.CommentTreeDisplayContext;
+import com.liferay.portal.kernel.display.context.DisplayContextFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,13 +25,15 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * @author Adolfo Pérez
  */
-public interface CommentDisplayContextProvider {
+public interface CommentDisplayContextFactory extends DisplayContextFactory {
 
 	public CommentSectionDisplayContext getCommentSectionDisplayContext(
+		CommentSectionDisplayContext parentCommentSectionDisplayContext,
 		HttpServletRequest request, HttpServletResponse response,
 		DiscussionPermission discussionPermission, Discussion discussion);
 
 	public CommentTreeDisplayContext getCommentTreeDisplayContext(
+		CommentTreeDisplayContext parentCommentTreeDisplayContext,
 		HttpServletRequest request, HttpServletResponse response,
 		DiscussionPermission discussionPermission,
 		DiscussionComment discussionComment);
