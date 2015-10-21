@@ -12,13 +12,31 @@
  * details.
  */
 
-package com.liferay.portal.kernel.comment.context;
+package com.liferay.portal.comment.display.context;
 
-import com.liferay.portal.kernel.display.context.BaseDisplayContextFactory;
+import com.liferay.portal.kernel.comment.display.context.CommentDisplayContext;
+import com.liferay.portal.security.sso.SSOUtil;
+import com.liferay.portal.theme.ThemeDisplay;
 
 /**
  * @author Adolfo Pérez
  */
-public abstract class BaseCommentDisplayContextFactory
-	extends BaseDisplayContextFactory implements CommentDisplayContextFactory {
+public abstract class BaseCommentDisplayContext
+	implements CommentDisplayContext {
+
+	@Override
+	public boolean isReplyButtonVisible() {
+		ThemeDisplay themeDisplay = getThemeDisplay();
+
+		if (themeDisplay.isSignedIn() ||
+			!SSOUtil.isLoginRedirectRequired(themeDisplay.getCompanyId())) {
+
+			return true;
+		}
+
+		return false;
+	}
+
+	protected abstract ThemeDisplay getThemeDisplay();
+
 }

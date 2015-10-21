@@ -12,13 +12,13 @@
  * details.
  */
 
-package com.liferay.portal.comment.context;
+package com.liferay.portal.comment.display.context;
 
 import com.liferay.portal.kernel.comment.Discussion;
 import com.liferay.portal.kernel.comment.DiscussionComment;
 import com.liferay.portal.kernel.comment.DiscussionPermission;
-import com.liferay.portal.kernel.comment.context.CommentSectionDisplayContext;
-import com.liferay.portal.kernel.comment.context.CommentTreeDisplayContext;
+import com.liferay.portal.kernel.comment.display.context.CommentSectionDisplayContext;
+import com.liferay.portal.kernel.comment.display.context.CommentTreeDisplayContext;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

@@ -12,13 +12,13 @@
  * details.
  */
 
-package com.liferay.portal.kernel.comment.context;
+package com.liferay.portal.kernel.comment.display.context;
+
+import com.liferay.portal.kernel.display.context.BaseDisplayContextFactory;
 
 /**
  * @author Adolfo Pérez
  */
-public interface CommentDisplayContext {
-
-	public boolean isReplyButtonVisible();
-
+public abstract class BaseCommentDisplayContextFactory
+	extends BaseDisplayContextFactory implements CommentDisplayContextFactory {
 }
