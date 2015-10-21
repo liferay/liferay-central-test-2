@@ -113,10 +113,10 @@ buildLexiconIcons {
 		delete lexiconDestinationDir
 	}
 
-	filesMatching "images/**", new StripPathSegmentsAction(1)
+	filesMatching "images/icons/**", new StripPathSegmentsAction(2)
 	from zipTree(lexiconZipFile)
 
-	include "icons/**"
+	include "images/icons/**"
 
 	includeEmptyDirs = false
 	into lexiconDestinationDir
