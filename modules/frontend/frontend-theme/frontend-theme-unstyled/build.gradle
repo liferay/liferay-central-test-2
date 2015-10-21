@@ -106,11 +106,11 @@ buildLexicon {
 }
 
 buildLexiconIcons {
-	File lexiconDestinationDir = new File(themeDestinationDir, "images/lexicon")
+	File lexiconIconsDestinationDir = new File(themeDestinationDir, "images/lexicon")
 	File lexiconZipFile = new File(thirdPartyDir, "lexicon-${lexiconVersion}.zip")
 
 	doFirst {
-		delete lexiconDestinationDir
+		delete lexiconIconsDestinationDir
 	}
 
 	filesMatching "images/icons/**", new StripPathSegmentsAction(2)
@@ -119,10 +119,10 @@ buildLexiconIcons {
 	include "images/icons/**"
 
 	includeEmptyDirs = false
-	into lexiconDestinationDir
+	into lexiconIconsDestinationDir
 
 	onlyIf {
-		!FileUtil.isUpToDate(project, lexiconZipFile, lexiconDestinationDir)
+		!FileUtil.isUpToDate(project, lexiconZipFile, lexiconIconsDestinationDir)
 	}
 }
 
