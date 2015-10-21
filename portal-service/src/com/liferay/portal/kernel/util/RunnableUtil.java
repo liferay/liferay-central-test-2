@@ -37,7 +37,7 @@ public class RunnableUtil {
 			swappedOutputStream = new SwappedOutputStream(
 				outputStream, System.out, Thread.currentThread());
 
-			_swappedPrintStreams.push(swappedOutputStream);
+			_swappedOutputStreams.push(swappedOutputStream);
 
 			System.setOut(new PrintStream(swappedOutputStream));
 		}
@@ -49,13 +49,13 @@ public class RunnableUtil {
 			synchronized (RunnableUtil.class) {
 				swappedOutputStream._enabled = false;
 
-				if (_swappedPrintStreams.peek() == swappedOutputStream) {
-					_swappedPrintStreams.pop();
+				if (_swappedOutputStreams.peek() == swappedOutputStream) {
+					_swappedOutputStreams.pop();
 
-					System.setOut(swappedOutputStream._fallbackOutputStream);
+					System.setOut(swappedOutputStream._fallbackPrintStream);
 
 					Iterator<SwappedOutputStream> iterator =
-						_swappedPrintStreams.iterator();
+						_swappedOutputStreams.iterator();
 
 					while (iterator.hasNext()) {
 						swappedOutputStream = iterator.next();
@@ -67,14 +67,14 @@ public class RunnableUtil {
 						iterator.remove();
 
 						System.setOut(
-							swappedOutputStream._fallbackOutputStream);
+							swappedOutputStream._fallbackPrintStream);
 					}
 				}
 			}
 		}
 	}
 
-	private static final LinkedList<SwappedOutputStream> _swappedPrintStreams =
+	private static final LinkedList<SwappedOutputStream> _swappedOutputStreams =
 		new LinkedList<>();
 
 	private static class SwappedOutputStream extends UnsyncFilterOutputStream {
@@ -89,7 +89,7 @@ public class RunnableUtil {
 				super.write(bytes, offset, length);
 			}
 			else {
-				_fallbackOutputStream.write(bytes, offset, length);
+				_fallbackPrintStream.write(bytes, offset, length);
 			}
 		}
 
@@ -101,22 +101,22 @@ public class RunnableUtil {
 				super.write(b);
 			}
 			else {
-				_fallbackOutputStream.write(b);
+				_fallbackPrintStream.write(b);
 			}
 		}
 
 		private SwappedOutputStream(
-			OutputStream outputStream, PrintStream fallbackOutputStream,
+			OutputStream outputStream, PrintStream fallbackPrintStream,
 			Thread thread) {
 
 			super(outputStream);
 
-			_fallbackOutputStream = fallbackOutputStream;
+			_fallbackPrintStream = fallbackPrintStream;
 			_thread = thread;
 		}
 
 		private volatile boolean _enabled = true;
-		private final PrintStream _fallbackOutputStream;
+		private final PrintStream _fallbackPrintStream;
 		private final Thread _thread;
 
 	}
