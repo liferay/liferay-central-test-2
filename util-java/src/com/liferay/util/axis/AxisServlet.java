@@ -52,37 +52,41 @@ public class AxisServlet extends org.apache.axis.transport.http.AxisServlet {
 			doDestroy();
 		}
 		else {
-			Thread thread = Thread.currentThread();
+			Thread currentThread = Thread.currentThread();
 
-			ClassLoader classLoader = thread.getContextClassLoader();
+			ClassLoader contextClassLoader =
+				currentThread.getContextClassLoader();
 
-			Class<?> clazz = this.getClass();
+			Class<?> clazz = getClass();
 
-			thread.setContextClassLoader(clazz.getClassLoader());
-
-			DestroyThread destroyThread = new DestroyThread();
-
-			destroyThread.start();
+			currentThread.setContextClassLoader(clazz.getClassLoader());
 
 			try {
-				destroyThread.join();
-			}
-			catch (InterruptedException ie) {
-				throw new RuntimeException(ie);
-			}
+				DestroyThread destroyThread = new DestroyThread();
 
-			Exception e = destroyThread.getException();
+				destroyThread.start();
 
-			if (e != null) {
-				if (e instanceof RuntimeException) {
-					throw (RuntimeException)e;
+				try {
+					destroyThread.join();
 				}
-				else {
-					throw new RuntimeException(e);
+				catch (InterruptedException ie) {
+					throw new RuntimeException(ie);
+				}
+
+				Exception e = destroyThread.getException();
+
+				if (e != null) {
+					if (e instanceof RuntimeException) {
+						throw (RuntimeException)e;
+					}
+					else {
+						throw new RuntimeException(e);
+					}
 				}
 			}
-
-			thread.setContextClassLoader(classLoader);
+			finally {
+				currentThread.setContextClassLoader(contextClassLoader);
+			}
 		}
 	}
 
