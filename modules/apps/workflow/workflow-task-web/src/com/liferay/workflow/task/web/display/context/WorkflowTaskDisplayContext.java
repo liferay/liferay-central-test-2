@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.workflow.task.web.context;
+package com.liferay.workflow.task.web.display.context;
 
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.search.ResultRow;
@@ -56,7 +56,7 @@ import com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil;
 import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.asset.model.AssetRenderer;
 import com.liferay.portlet.asset.model.AssetRendererFactory;
-import com.liferay.workflow.task.web.context.util.WorkflowTaskRequestHelper;
+import com.liferay.workflow.task.web.display.context.util.WorkflowTaskRequestHelper;
 import com.liferay.workflow.task.web.search.WorkflowTaskDisplayTerms;
 import com.liferay.workflow.task.web.search.WorkflowTaskSearch;
 
