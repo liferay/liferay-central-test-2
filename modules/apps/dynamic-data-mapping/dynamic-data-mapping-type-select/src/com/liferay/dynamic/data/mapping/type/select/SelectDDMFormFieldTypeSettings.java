@@ -27,7 +27,8 @@ public interface SelectDDMFormFieldTypeSettings
 	extends DefaultDDMFormFieldTypeSettings {
 
 	@DDMFormField(
-		label = "%multiple", properties = {
+		label = "%multiple",
+		properties = {
 			"setting.category=advanced", "setting.weight=2",
 			"showAsSwitcher=true"
 		}

@@ -31,7 +31,7 @@ public interface RadioDDMFormFieldTypeSettings
 
 	@DDMFormField(
 		dataType = "ddm-options", label = "%options",
-			properties = {
+		properties = {
 			"setting.category=basic", "setting.weight=0", "showLabel=false"
 		},
 		type = "options"
