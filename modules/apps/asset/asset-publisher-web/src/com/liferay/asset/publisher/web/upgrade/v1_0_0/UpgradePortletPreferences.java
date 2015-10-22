@@ -34,9 +34,7 @@ import javax.portlet.PortletPreferences;
 /**
  * @author Sam Ziemer
  */
-
-public class UpgradeManuallySelectedPreferences
-	extends BaseUpgradePortletPreferences {
+public class UpgradePortletPreferences extends BaseUpgradePortletPreferences {
 
 	protected String getJournalArticleResourceUuid(String journalArticleUuid)
 		throws Exception {
