@@ -64,9 +64,9 @@ public class MainServletTestCallback extends BaseTestCallback<Object, Object> {
 
 	@Override
 	public Object doBeforeClass(Description description) {
-		if (_isArquillianTest(description)) {
+		if (isArquillianTest(description)) {
 			Assert.fail(
-				description.getTestClass() + " is an Arquillian test, it " +
+				description.getTestClass() + " is an Arquillian test and " +
 					"should not use " + MainServletTestRule.class);
 		}
 
@@ -118,7 +118,7 @@ public class MainServletTestCallback extends BaseTestCallback<Object, Object> {
 	protected MainServletTestCallback() {
 	}
 
-	private boolean _isArquillianTest(Description description) {
+	protected boolean isArquillianTest(Description description) {
 		RunWith runWith = description.getAnnotation(RunWith.class);
 
 		if (runWith == null) {
