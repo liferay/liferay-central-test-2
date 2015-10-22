@@ -33,6 +33,17 @@ portletURL.setParameter("mvcPath", "/view_record_history.jsp");
 portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("recordId", String.valueOf(record.getRecordId()));
 
+if (redirect.isEmpty()) {
+	PortletURL backURL = renderResponse.createRenderURL();
+
+	backURL.setParameter("mvcPath", "/edit_record.jsp");
+	backURL.setParameter("recordSetId", String.valueOf(recordSet.getRecordSetId()));
+	backURL.setParameter("formDDMTemplateId", String.valueOf(formDDMTemplateId));
+
+	redirect = backURL.toString();
+
+}
+
 if (ddlDisplayContext.isAdminPortlet()) {
 	portletDisplay.setShowBackIcon(true);
 	portletDisplay.setURLBack(redirect);

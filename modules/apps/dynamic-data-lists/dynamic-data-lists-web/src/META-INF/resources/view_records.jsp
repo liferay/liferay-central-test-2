@@ -19,6 +19,11 @@
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 
+if (redirect.isEmpty()) {
+	redirect = portletDisplay.getURLBack();
+
+}
+
 long formDDMTemplateId = ParamUtil.getLong(request, "formDDMTemplateId");
 
 DDLViewRecordsDisplayContext ddlViewRecordsDisplayContext = new DDLViewRecordsDisplayContext(liferayPortletRequest, liferayPortletResponse, formDDMTemplateId);

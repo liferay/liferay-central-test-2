@@ -43,6 +43,12 @@ boolean spreadsheet = ParamUtil.getBoolean(request, "spreadsheet");
 </c:choose>
 
 <%
+if (redirect.isEmpty()) {
+	PortletURL backURL = renderResponse.createRenderURL();
+	backURL.setParameter("mvcPath", "/view.jsp");
+	redirect = backURL.toString();
+}
+
 if (ddlDisplayContext.isAdminPortlet()) {
 	portletDisplay.setShowBackIcon(true);
 	portletDisplay.setURLBack(redirect);
