@@ -152,7 +152,7 @@ currentURLObj.setParameter("historyKey", renderResponse.getNamespace() + "userGr
 
 						<liferay-portlet:renderURL var="selectUserGroupURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
 							<portlet:param name="mvcPath" value="/select_user_group.jsp" />
-							<portlet:param name="p_u_i_d" value='<%= selUser == null ? "0" : String.valueOf(selUser.getUserId()) %>' />
+							<portlet:param name="p_u_i_d" value='<%= (selUser == null) ? "0" : String.valueOf(selUser.getUserId()) %>' />
 						</liferay-portlet:renderURL>
 
 						uri: '<%= selectUserGroupURL.toString() %>'
