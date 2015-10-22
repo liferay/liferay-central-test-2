@@ -36,16 +36,15 @@ import java.util.List;
 public class VerifySQLServer extends VerifyProcess {
 
 	protected void convertColumnsToUnicode() {
-		StringBundler sb = new StringBundler(12);
+		StringBundler sb = new StringBundler(11);
 
-		sb.append("select sysobjects.name as table_name, syscolumns.name ");
-		sb.append("AS column_name, systypes.name as data_type, ");
-		sb.append("syscolumns.length, syscolumns.isnullable as ");
-		sb.append("is_nullable FROM sysobjects inner join syscolumns on ");
-		sb.append("sysobjects.id = syscolumns.id inner join systypes on ");
-		sb.append("syscolumns.xtype = systypes.xtype where ");
-		sb.append("(sysobjects.xtype = 'U') and (sysobjects.category != ");
-		sb.append("2) and ");
+		sb.append("select sysobjects.name as table_name, syscolumns.name AS ");
+		sb.append("column_name, systypes.name as data_type, ");
+		sb.append("syscolumns.length, syscolumns.isnullable as is_nullable ");
+		sb.append("FROM sysobjects inner join syscolumns on sysobjects.id = ");
+		sb.append("syscolumns.id inner join systypes on syscolumns.xtype = ");
+		sb.append("systypes.xtype where (sysobjects.xtype = 'U') and ");
+		sb.append("(sysobjects.category != 2) and ");
 		sb.append(_FILTER_NONUNICODE_DATA_TYPES);
 		sb.append(" and ");
 		sb.append(_FILTER_EXCLUDED_TABLES);
