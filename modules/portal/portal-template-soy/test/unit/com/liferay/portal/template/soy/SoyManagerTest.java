@@ -44,8 +44,9 @@ public class SoyManagerTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testProcessMultiTemplateEmptyList() throws Exception {
-		List<String> emptyList = Collections.emptyList();
-		Template template = _soyManagerTestHelper.getTemplates(emptyList);
+		List<String> list = Collections.emptyList();
+
+		Template template = _soyManagerTestHelper.getTemplates(list);
 
 		template.processTemplate(new UnsyncStringWriter());
 	}
