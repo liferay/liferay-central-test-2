@@ -49,9 +49,9 @@ public class DDMFormFieldValueRendererRegistryImpl
 		try {
 			filter = FrameworkUtil.createFilter(
 				"(&(objectClass=" + DDMFormFieldValueRenderer.class.getName() +
-				")(!(objectClass=" + clazz.getName() + ")))");
+					")(!(objectClass=" + clazz.getName() + ")))");
 		}
-		catch (InvalidSyntaxException ex) {
+		catch (InvalidSyntaxException ise) {
 		}
 
 		_serviceTracker = new ServiceTracker<>(
