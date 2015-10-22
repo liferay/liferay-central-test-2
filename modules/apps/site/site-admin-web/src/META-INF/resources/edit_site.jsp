@@ -83,6 +83,8 @@ if (layoutSetPrototypeId > 0) {
 	layoutSetPrototype = LayoutSetPrototypeServiceUtil.getLayoutSetPrototype(layoutSetPrototypeId);
 }
 
+boolean showPrototypes = ParamUtil.getBoolean(request, "showPrototypes", true);
+
 if (!portletName.equals(SiteAdminPortletKeys.SITE_SETTINGS)) {
 	portletDisplay.setShowBackIcon(true);
 	portletDisplay.setURLBack(backURL.toString());
@@ -114,8 +116,6 @@ if (!portletName.equals(SiteAdminPortletKeys.SITE_SETTINGS)) {
 		PortalUtil.addPortletBreadcrumbEntry(request, parentGroup.getDescriptiveName(locale), null);
 	}
 }
-
-boolean showPrototypes = ParamUtil.getBoolean(request, "showPrototypes", true);
 %>
 
 <liferay-ui:success key='<%= SiteAdminPortletKeys.SITE_SETTINGS + "requestProcessed" %>' message="site-was-added" />
