@@ -23,8 +23,6 @@ import com.liferay.dynamic.data.lists.service.base.DDLRecordLocalServiceBaseImpl
 import com.liferay.dynamic.data.lists.util.DDL;
 import com.liferay.dynamic.data.lists.util.DDLUtil;
 import com.liferay.dynamic.data.mapping.model.DDMStructure;
-import com.liferay.dynamic.data.mapping.model.Value;
-import com.liferay.dynamic.data.mapping.storage.DDMFormFieldValue;
 import com.liferay.dynamic.data.mapping.storage.DDMFormValues;
 import com.liferay.dynamic.data.mapping.storage.Field;
 import com.liferay.dynamic.data.mapping.storage.Fields;
@@ -64,7 +62,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Provides the local service for accessing, adding, deleting, and updating
@@ -100,10 +97,6 @@ public class DDLRecordLocalServiceImpl extends DDLRecordLocalServiceBaseImpl {
 		record.setUserName(user.getFullName());
 		record.setVersionUserId(user.getUserId());
 		record.setVersionUserName(user.getFullName());
-
-		//Add locales
-
-		includeDDMFormFieldValueLocales(ddmFormValues);
 
 		long ddmStorageId = StorageEngineUtil.create(
 			recordSet.getCompanyId(), recordSet.getDDMStructureId(),
@@ -546,10 +539,6 @@ public class DDLRecordLocalServiceImpl extends DDLRecordLocalServiceBaseImpl {
 
 		ddlRecordPersistence.update(record);
 
-		// Add locales
-
-		includeDDMFormFieldValueLocales(ddmFormValues);
-
 		// Record version
 
 		DDLRecordVersion recordVersion = record.getLatestRecordVersion();
@@ -778,30 +767,6 @@ public class DDLRecordLocalServiceImpl extends DDLRecordLocalServiceBaseImpl {
 		}
 
 		return versionParts[0] + StringPool.PERIOD + versionParts[1];
-	}
-
-	protected void includeDDMFormFieldValueLocales(
-		DDMFormValues ddmFormValues) {
-
-		Set<Locale> availableLocales = ddmFormValues.getAvailableLocales();
-
-		List<DDMFormFieldValue> ddmFormFieldValues = 
-				ddmFormValues.getDDMFormFieldValues();
-
-		for (DDMFormFieldValue ddmFormFieldValue : ddmFormFieldValues) {
-			Value fieldValue = ddmFormFieldValue.getValue();
-
-			if (Validator.isNotNull(fieldValue) && fieldValue.isLocalized()) {
-
-				for (Locale locale : fieldValue.getAvailableLocales()) {
-					if (!availableLocales.contains(locale)) {
-						availableLocales.add(locale);
-					}
-				}
-			}
-		}
-
-		ddmFormValues.setAvailableLocales(availableLocales);
 	}
 
 	/**
