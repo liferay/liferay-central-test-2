@@ -16,6 +16,7 @@ package com.liferay.dynamic.data.mapping.storage.impl;
 
 import com.liferay.dynamic.data.mapping.storage.StorageAdapter;
 import com.liferay.dynamic.data.mapping.storage.StorageAdapterRegistry;
+import com.liferay.portal.kernel.util.ReflectionUtil;
 
 import java.util.List;
 import java.util.Map;
@@ -51,6 +52,7 @@ public class StorageAdapterRegistryImpl implements StorageAdapterRegistry {
 					")(!(objectClass=" + clazz.getName() + ")))");
 		}
 		catch (InvalidSyntaxException ise) {
+			ReflectionUtil.throwException(ise);
 		}
 
 		_serviceTracker = new ServiceTracker<>(
