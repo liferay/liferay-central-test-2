@@ -329,10 +329,10 @@ public class DDMFormRendererHelper {
 			ddmFormField.getLabel(), ddmFormFieldRenderingContext);
 		setDDMFormFieldRenderingContextRequired(
 			ddmFormField.isRequired(), ddmFormFieldRenderingContext);
-		setDDMFormFieldRenderingContextValue(
-			ddmFormFieldValue.getValue(), ddmFormFieldRenderingContext);
 		setDDMFormFieldRenderingContextRequired(
 			ddmFormField.isRequired(), ddmFormFieldRenderingContext);
+		setDDMFormFieldRenderingContextValue(
+			ddmFormFieldValue.getValue(), ddmFormFieldRenderingContext);
 		setDDMFormFieldRenderingContextVisible(
 			ddmFormField.getVisibilityExpression(), ddmFormFieldValue.getName(),
 			ddmFormFieldRenderingContext);

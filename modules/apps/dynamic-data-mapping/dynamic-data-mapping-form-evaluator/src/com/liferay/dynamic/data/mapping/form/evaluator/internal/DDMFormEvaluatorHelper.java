@@ -53,6 +53,7 @@ public class DDMFormEvaluatorHelper {
 		}
 
 		_rootDDMFormFieldValues = ddmFormValues.getDDMFormFieldValues();
+
 		_locale = locale;
 	}
 
