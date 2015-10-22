@@ -43,10 +43,10 @@ public interface DefaultDDMFormFieldTypeSettings
 	@DDMFormField(
 		label = "%question",
 		properties = {
-			"placeholder=%type-here-your-question", "setting.category=basic",
+			"placeholder=%type-your-question", "setting.category=basic",
 			"setting.weight=4"
 		},
-		tip = "%type-here-what-you-want-to-ask", type = "text"
+		tip = "%type-what-you-want-to-ask", type = "text"
 	)
 	public LocalizedValue label();
 
@@ -56,7 +56,7 @@ public interface DefaultDDMFormFieldTypeSettings
 	@DDMFormField(
 		label = "%predefined-value",
 		properties = {"setting.category=advanced", "setting.weight=1"},
-		tip = "%a-default-value-inside-the-field", type = "text"
+		tip = "%set-the-default-value-of-a-field", type = "text"
 	)
 	public LocalizedValue predefinedValue();
 
@@ -92,7 +92,7 @@ public interface DefaultDDMFormFieldTypeSettings
 	@DDMFormField(
 		label = "%help-text",
 		properties = {
-			"placeholder=%add-a-text-to-help-users-better-understand-what-you-want",
+			"placeholder=%add-text-to-help-users-better-understand-what-you-want",
 			"setting.category=basic", "setting.weight=3"
 		},
 		tip = "%type-a-short-comment-to-help-users-understand-the-question",
