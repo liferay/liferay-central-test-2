@@ -1013,12 +1013,8 @@
 	</command>
 
 	<command name="SearchBlogsEntryContentQuotes" priority="4">
-		<var name="blogsEntrySearchResult">
-			"Blogs","Entry","Content","Blogs Entry Content"
-		</var>
-		<var name="blogsEntrySearchNoResult">
-			"Blogs1","Entry1","Content1","Blogs1 Entry1 Content1"
-		</var>
+		<var name="blogsEntrySearchResult" value="&quot;Blogs&quot;,&quot;Entry&quot;,&quot;Content&quot;,&quot;Blogs Entry Content&quot;" />	
+		<var name="blogsEntrySearchNoResult" value="&quot;Blogs1&quot;,&quot;Entry1&quot;,&quot;Content1&quot;,&quot;Blogs1 Entry1 Content1&quot;" />
 
 		<execute macro="Page#addPG">
 			<var name="pageName" value="Search Page" />
@@ -1117,12 +1113,8 @@
 	</command>
 
 	<command name="SearchBlogsEntryTitleQuotes" priority="4">
-		<var name="blogsEntrySearchResult">
-			"Blogs","Entry","Title","Blogs Entry Title"
-		</var>
-		<var name="blogsEntrySearchNoResult">
-			"Blogs1","Entry1","Title1","Blogs1 Entry1 Title1"
-		</var>
+		<var name="blogsEntrySearchResult" value="&quot;Blogs&quot;,&quot;Entry&quot;,&quot;Title&quot;,&quot;Blogs Entry Title&quot;" />	
+		<var name="blogsEntrySearchNoResult" value="&quot;Blogs1&quot;,&quot;Entry1&quot;,&quot;Title1&quot;,&quot;Blogs1&quot;,&quot;Entry1&quot;,&quot;Title1&quot;" />
 
 		<execute macro="Page#addPG">
 			<var name="pageName" value="Search Page" />
