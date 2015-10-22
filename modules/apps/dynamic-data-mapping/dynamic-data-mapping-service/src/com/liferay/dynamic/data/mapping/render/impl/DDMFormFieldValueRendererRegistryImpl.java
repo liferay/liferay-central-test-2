@@ -16,6 +16,7 @@ package com.liferay.dynamic.data.mapping.render.impl;
 
 import com.liferay.dynamic.data.mapping.render.DDMFormFieldValueRenderer;
 import com.liferay.dynamic.data.mapping.render.DDMFormFieldValueRendererRegistry;
+import com.liferay.portal.kernel.util.ReflectionUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +53,7 @@ public class DDMFormFieldValueRendererRegistryImpl
 					")(!(objectClass=" + clazz.getName() + ")))");
 		}
 		catch (InvalidSyntaxException ise) {
+			ReflectionUtil.throwException(ise);
 		}
 
 		_serviceTracker = new ServiceTracker<>(
