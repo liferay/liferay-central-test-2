@@ -1417,15 +1417,15 @@
 
 	<command name="viewRelatedAssetCP">
 		<if>
-			<equals arg1="${RelatedAssetType}" arg2="Blogs Entry" />
+			<equals arg1="${relatedAssetType}" arg2="Blogs Entry" />
 			<then>
-				<execute function="AssertTextEquals" locator1="AssetRelatedAssets#BLOGS_ENTRY_CONTENT" value1="${RelatedAssetContent}" />
+				<execute function="AssertTextEquals" locator1="AssetRelatedAssets#BLOGS_ENTRY_CONTENT" value1="${relatedAssetContent}" />
 			</then>
 		</if>
 
-		<var name="key_kbArticleRelatedAssetTitle" value="${kbArticleRelatedAssetTitle}" />
+		<var name="key_relatedAssetTitle" value="${relatedAssetTitle}" />
 
-		<execute function="AssertTextEquals" locator1="AssetRelatedAssets#BLOGS_ENTRY_TITLE" value1="${kbArticleRelatedAssetTitle}" />
+		<execute function="AssertTextEquals" locator1="AssetRelatedAssets#BLOGS_ENTRY_TITLE" value1="${relatedAssetTitle}" />
 	</command>
 
 	<command name="viewSearchResultsPG">
