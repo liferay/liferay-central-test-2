@@ -14,6 +14,7 @@
 
 package com.liferay.asset.publisher.web.upgrade.v1_0_0;
 
+import com.liferay.asset.publisher.web.constants.AssetPublisherPortletKeys;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.upgrade.BaseUpgradePortletPreferences;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -74,7 +75,9 @@ public class UpgradeManuallySelectedPreferences
 
 	@Override
 	protected String[] getPortletIds() {
-		return new String[] {"101_INSTANCE_%"};
+		return new String[] {
+			AssetPublisherPortletKeys.ASSET_PUBLISHER + "_INSTANCE_%"
+		};
 	}
 
 	@Override
