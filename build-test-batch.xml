@@ -1223,7 +1223,7 @@ go</echo>
 					<then>
 						<clean-restart-sybase retry="true" />
 
-						<fail message="Missing /opt/sybase/charsets" />
+						<fail message="Missing /opt/sybase/charsets." />
 					</then>
 				</if>
 
