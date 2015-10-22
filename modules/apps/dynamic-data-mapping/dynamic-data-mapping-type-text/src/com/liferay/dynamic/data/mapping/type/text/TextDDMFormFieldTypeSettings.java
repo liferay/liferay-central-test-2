@@ -28,7 +28,7 @@ public interface TextDDMFormFieldTypeSettings
 
 	@DDMFormField(
 		label = "%my-text-field-is",
-		optionLabels = {"%single-line", "%multi-line"},
+		optionLabels = {"%single-line", "%multiple-lines"},
 		optionValues = {"singleline", "multiline"},
 		properties = {
 			"inline=true", "setting.category=basic", "setting.weight=2"
@@ -38,7 +38,7 @@ public interface TextDDMFormFieldTypeSettings
 	public String displayStyle();
 
 	@DDMFormField(
-		dataType = "string", label = "%tip-inside-field",
+		dataType = "string", label = "%field-tip",
 		properties = {"setting.category=advanced", "setting.weight=2"},
 		type = "text"
 	)
