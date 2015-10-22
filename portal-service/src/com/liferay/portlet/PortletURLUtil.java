@@ -290,7 +290,7 @@ public class PortletURLUtil {
 			}
 
 			if (!PortalUtil.isReservedParameter(name) &&
-				!name.equals("currentURL") &&
+				!name.equals("currentURL") && !name.equals("settingsScope") &&
 				!isRefreshURLReservedParameter(name, namespace)) {
 
 				String[] values = entry.getValue();
