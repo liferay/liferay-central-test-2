@@ -44,6 +44,8 @@ public abstract class BaseIndexingTestCase {
 
 	@Before
 	public void setUp() throws Exception {
+		_documentFixture.setUp();
+
 		_indexingFixture = createIndexingFixture();
 
 		Assume.assumeTrue(_indexingFixture.isSearchEngineAvailable());
@@ -52,8 +54,6 @@ public abstract class BaseIndexingTestCase {
 
 		_indexSearcher = _indexingFixture.getIndexSearcher();
 		_indexWriter = _indexingFixture.getIndexWriter();
-
-		_documentFixture.setUp();
 	}
 
 	@After
@@ -62,12 +62,12 @@ public abstract class BaseIndexingTestCase {
 			return;
 		}
 
+		_documentFixture.tearDown();
+
 		_indexWriter.deleteEntityDocuments(
 			createSearchContext(), _entryClassName);
 
 		_indexingFixture.tearDown();
-
-		_documentFixture.tearDown();
 	}
 
 	public interface DocumentCreationHelper {
