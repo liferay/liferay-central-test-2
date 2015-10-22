@@ -234,16 +234,15 @@ public class VerifySQLServer extends VerifyProcess {
 
 		List<String> columnNames = new ArrayList<>();
 
-		StringBundler sb = new StringBundler(10);
+		StringBundler sb = new StringBundler(9);
 
 		sb.append("select distinct syscolumns.name as column_name from ");
 		sb.append("sysobjects inner join syscolumns on sysobjects.id = ");
-		sb.append("syscolumns.id inner join sysindexes on ");
-		sb.append("sysobjects.id = sysindexes.id inner join sysindexkeys ");
-		sb.append("on ((sysobjects.id = sysindexkeys.id) and ");
-		sb.append("(syscolumns.colid = sysindexkeys.colid) and ");
-		sb.append("(sysindexes.indid = sysindexkeys.indid)) where ");
-		sb.append("sysindexes.name = '");
+		sb.append("syscolumns.id inner join sysindexes on sysobjects.id = ");
+		sb.append("sysindexes.id inner join sysindexkeys on ((sysobjects.id ");
+		sb.append("= sysindexkeys.id) and (syscolumns.colid = ");
+		sb.append("sysindexkeys.colid) and (sysindexes.indid = ");
+		sb.append("sysindexkeys.indid)) where sysindexes.name = '");
 		sb.append(indexName);
 		sb.append("'");
 
