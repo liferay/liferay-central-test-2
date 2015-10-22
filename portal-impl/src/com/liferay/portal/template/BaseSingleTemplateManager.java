@@ -80,7 +80,7 @@ public abstract class BaseSingleTemplateManager extends BaseTemplateManager {
 		TemplateResource errorTemplateResource, boolean restricted) {
 
 		throw new UnsupportedOperationException(
-			"Template type does not support multi templates.");
+			"Template type does not support multi templates");
 	}
 
 	protected abstract Template doGetTemplate(

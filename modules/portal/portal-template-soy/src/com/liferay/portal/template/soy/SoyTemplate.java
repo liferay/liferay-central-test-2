@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.template.TemplateConstants;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateResource;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.template.AbstractMultiResourceTemplate;
 import com.liferay.portal.template.TemplateContextHelper;
@@ -109,7 +110,8 @@ public class SoyTemplate extends AbstractMultiResourceTemplate {
 		throws TemplateException {
 
 		put("exception", exception.getMessage());
-		StringBuilder sb = new StringBuilder();
+
+		StringBundler sb = new StringBundler();
 
 		for (TemplateResource templateResource : templateResources) {
 			if (templateResource instanceof StringTemplateResource) {
