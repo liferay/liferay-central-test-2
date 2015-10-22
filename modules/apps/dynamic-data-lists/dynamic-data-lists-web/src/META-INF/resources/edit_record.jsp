@@ -72,6 +72,16 @@ if (translating) {
 	redirect = currentURL;
 }
 
+if (redirect.isEmpty()) {
+	PortletURL backURL = renderResponse.createRenderURL();
+
+	backURL.setParameter("mvcPath", "/view_record_set.jsp");
+	backURL.setParameter("recordSetId", String.valueOf(recordSetId));
+
+	redirect = backURL.toString();
+
+}
+
 if (ddlDisplayContext.isAdminPortlet()) {
 	portletDisplay.setShowBackIcon(true);
 	portletDisplay.setURLBack(redirect);
@@ -92,7 +102,7 @@ else {
 </portlet:actionURL>
 
 <aui:form action="<%= (record == null) ? addRecordURL : updateRecordURL %>" cssClass="container-fluid-1280" enctype="multipart/form-data" method="post" name="fm">
-	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 	<aui:input name="recordId" type="hidden" value="<%= recordId %>" />
 	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
 	<aui:input name="recordSetId" type="hidden" value="<%= recordSetId %>" />
