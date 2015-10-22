@@ -1007,6 +1007,7 @@
 			<execute macro="Search#viewSearchNoPG">
 				<var name="searchAssetTitle" value="Blogs Entry Title" />
 				<var name="searchNoResults" value="true" />
+				<var name="searchTerm" value="${searchTerm}" />
 			</execute>
 		</for>
 	</command>
@@ -1060,6 +1061,7 @@
 			<execute macro="Search#viewSearchNoPG">
 				<var name="searchAssetTitle" value="Blogs Entry Title" />
 				<var name="searchNoResults" value="true" />
+				<var name="searchTerm" value="${searchTerm}" />
 			</execute>
 		</for>
 	</command>
@@ -1109,6 +1111,7 @@
 			<execute macro="Search#viewSearchNoPG">
 				<var name="searchAssetTitle" value="Blogs Entry Title" />
 				<var name="searchNoResults" value="true" />
+				<var name="searchTerm" value="${searchTerm}" />
 			</execute>
 		</for>
 	</command>
@@ -1166,6 +1169,7 @@
 			<execute macro="Search#viewSearchNoPG">
 				<var name="searchAssetTitle" value="Blogs Entry Title" />
 				<var name="searchNoResults" value="true" />
+				<var name="searchTerm" value="${searchTerm}" />
 			</execute>
 		</for>
 	</command>
