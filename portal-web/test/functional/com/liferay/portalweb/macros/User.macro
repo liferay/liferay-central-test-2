@@ -634,17 +634,29 @@
 			<then>
 				<execute function="AssertTextEquals" locator1="PGPortaldirectory#INFO_MESSAGE" value1="No users were found." />
 
-				<var name="key_userScreenName" value="${userScreenName}" />
+				<var name="key_userFirstName" value="${userFirstName}" />
 
 				<execute function="AssertElementNotPresent" locator1="PortalDirectory#USER_TABLE_FIRST_NAME" value1="${userFirstName}" />
+
+				<var name="key_userLastName" value="${userLastName}" />
+
 				<execute function="AssertElementNotPresent" locator1="PortalDirectory#USER_TABLE_LAST_NAME" value1="${userLastName}" />
+
+				<var name="key_userScreenName" value="${userScreenName}" />
+
 				<execute function="AssertElementNotPresent" locator1="PortalDirectory#USER_TABLE_SCREEN_NAME" value1="${userScreenName}" />
 			</then>
 			<else>
-				<var name="key_userScreenName" value="${userScreenName}" />
+				<var name="key_userFirstName" value="${userFirstName}" />
 
 				<execute function="AssertTextEquals" locator1="PortalDirectory#USER_TABLE_FIRST_NAME" value1="${userFirstName}" />
+
+				<var name="key_userLastName" value="${userLastName}" />
+
 				<execute function="AssertTextEquals" locator1="PortalDirectory#USER_TABLE_LAST_NAME" value1="${userLastName}" />
+
+				<var name="key_userScreenName" value="${userScreenName}" />
+
 				<execute function="AssertTextEquals" locator1="PortalDirectory#USER_TABLE_SCREEN_NAME" value1="${userScreenName}" />
 			</else>
 		</if>
