@@ -14,9 +14,18 @@
  */
 --%>
 
-<%@ include file="/html/portlet/init.jsp" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<%@ page import="com.liferay.portal.AddressCityException" %><%@
+<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
+
+<%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %><%@
+taglib uri="http://liferay.com/tld/portlet" prefix="liferay-portlet" %><%@
+taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %><%@
+taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %><%@
+taglib uri="http://liferay.com/tld/util" prefix="liferay-util" %>
+
+<%@ page import="com.liferay.login.web.portlet.util.LoginUtil" %><%@
+page import="com.liferay.portal.AddressCityException" %><%@
 page import="com.liferay.portal.AddressStreetException" %><%@
 page import="com.liferay.portal.AddressZipException" %><%@
 page import="com.liferay.portal.CompanyMaxUsersException" %><%@
@@ -25,9 +34,11 @@ page import="com.liferay.portal.ContactNameException" %><%@
 page import="com.liferay.portal.CookieNotSupportedException" %><%@
 page import="com.liferay.portal.DuplicateOpenIdException" %><%@
 page import="com.liferay.portal.EmailAddressException" %><%@
+page import="com.liferay.portal.GroupFriendlyURLException" %><%@
 page import="com.liferay.portal.NoSuchCountryException" %><%@
 page import="com.liferay.portal.NoSuchListTypeException" %><%@
 page import="com.liferay.portal.NoSuchRegionException" %><%@
+page import="com.liferay.portal.NoSuchUserException" %><%@
 page import="com.liferay.portal.PasswordExpiredException" %><%@
 page import="com.liferay.portal.PhoneNumberException" %><%@
 page import="com.liferay.portal.PhoneNumberExtensionException" %><%@
@@ -43,14 +54,60 @@ page import="com.liferay.portal.UserPasswordException" %><%@
 page import="com.liferay.portal.UserReminderQueryException" %><%@
 page import="com.liferay.portal.UserScreenNameException" %><%@
 page import="com.liferay.portal.WebsiteURLException" %><%@
+page import="com.liferay.portal.kernel.bean.BeanParamUtil" %><%@
+page import="com.liferay.portal.kernel.captcha.CaptchaConfigurationException" %><%@
+page import="com.liferay.portal.kernel.captcha.CaptchaMaxChallengesException" %><%@
+page import="com.liferay.portal.kernel.captcha.CaptchaTextException" %><%@
+page import="com.liferay.portal.kernel.language.LanguageUtil" %><%@
+page import="com.liferay.portal.kernel.language.UnicodeLanguageUtil" %><%@
+page import="com.liferay.portal.kernel.portlet.LiferayWindowState" %><%@
+page import="com.liferay.portal.kernel.servlet.SessionMessages" %><%@
+page import="com.liferay.portal.kernel.util.CalendarFactoryUtil" %><%@
+page import="com.liferay.portal.kernel.util.Constants" %><%@
+page import="com.liferay.portal.kernel.util.HtmlUtil" %><%@
+page import="com.liferay.portal.kernel.util.HttpUtil" %><%@
+page import="com.liferay.portal.kernel.util.LocalizationUtil" %><%@
+page import="com.liferay.portal.kernel.util.ParamUtil" %><%@
+page import="com.liferay.portal.kernel.util.PrefsPropsUtil" %><%@
+page import="com.liferay.portal.kernel.util.PropsKeys" %><%@
+page import="com.liferay.portal.kernel.util.StringPool" %><%@
+page import="com.liferay.portal.kernel.util.TextFormatter" %><%@
+page import="com.liferay.portal.kernel.util.Validator" %><%@
+page import="com.liferay.portal.kernel.util.WebKeys" %><%@
+page import="com.liferay.portal.kernel.workflow.WorkflowConstants" %><%@
+page import="com.liferay.portal.model.CompanyConstants" %><%@
+page import="com.liferay.portal.model.Contact" %><%@
+page import="com.liferay.portal.model.User" %><%@
+page import="com.liferay.portal.security.auth.AuthException" %><%@
 page import="com.liferay.portal.security.auth.FullNameDefinition" %><%@
 page import="com.liferay.portal.security.auth.FullNameDefinitionFactory" %><%@
+page import="com.liferay.portal.security.auth.PrincipalException" %><%@
 page import="com.liferay.portal.security.auth.ScreenNameValidator" %><%@
 page import="com.liferay.portal.security.auth.ScreenNameValidatorFactory" %><%@
-page import="com.liferay.portlet.login.util.LoginUtil" %>
+page import="com.liferay.portal.service.UserLocalServiceUtil" %><%@
+page import="com.liferay.portal.util.PortalUtil" %><%@
+page import="com.liferay.portal.util.PortletCategoryKeys" %><%@
+page import="com.liferay.portal.util.PortletKeys" %><%@
+page import="com.liferay.portal.util.PropsValues" %><%@
+page import="com.liferay.portlet.PortletURLFactoryUtil" %><%@
+page import="com.liferay.util.ContentUtil" %>
+
+<%@ page import="java.util.Calendar" %><%@
+page import="java.util.Date" %>
+
+<%@ page import="javax.portlet.PortletMode" %><%@
+page import="javax.portlet.PortletRequest" %><%@
+page import="javax.portlet.PortletURL" %><%@
+page import="javax.portlet.WindowState" %>
+
+<portlet:defineObjects />
+
+<liferay-theme:defineObjects />
 
 <%
+WindowState windowState = liferayPortletRequest.getWindowState();
+
 String authType = portletPreferences.getValue("authType", StringPool.BLANK);
 %>
 
-<%@ include file="/html/portlet/login/init-ext.jsp" %>
+<%@ include file="/init-ext.jsp" %>
