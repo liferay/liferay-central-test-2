@@ -47,7 +47,7 @@ import javax.sql.DataSource;
  */
 public class UpgradeSharding extends UpgradeProcess {
 
-	protected void copyControlTablesToShard(String shardName) throws Exception {
+	protected void copyControlTables(String shardName) throws Exception {
 		DataSourceFactoryBean dataSourceFactoryBean =
 			new DataSourceFactoryBean();
 
@@ -104,7 +104,7 @@ public class UpgradeSharding extends UpgradeProcess {
 		}
 	}
 
-	protected void copyControlTablesToShards(List<String> shardNames)
+	protected void copyControlTables(List<String> shardNames)
 		throws Exception {
 
 		String defaultShardName = PropsUtil.get("shard.default.name");
@@ -117,7 +117,7 @@ public class UpgradeSharding extends UpgradeProcess {
 
 		for (String shardName : shardNames) {
 			if (!shardName.equals(defaultShardName)) {
-				copyControlTablesToShard(shardName);
+				copyControlTables(shardName);
 			}
 		}
 	}
@@ -130,7 +130,7 @@ public class UpgradeSharding extends UpgradeProcess {
 			return;
 		}
 
-		copyControlTablesToShards(shardNames);
+		copyControlTables(shardNames);
 	}
 
 	protected List<String> getShardNames() throws Exception {
