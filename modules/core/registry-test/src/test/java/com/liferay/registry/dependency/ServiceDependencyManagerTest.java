@@ -274,7 +274,6 @@ public class ServiceDependencyManagerTest {
 			Assert.assertFalse(
 				"Dependencies 1 should have been fulfilled",
 				dependencyWaiter1.isAlive());
-
 			Assert.assertFalse(
 				"Dependencies 2 should have been fulfilled",
 				dependencyWaiter2.isAlive());
