@@ -45,7 +45,7 @@ import javax.sql.DataSource;
 /**
  * @author Manuel de la Peña
  */
-public class UpgradeShardingControlTables extends UpgradeProcess {
+public class UpgradeSharding extends UpgradeProcess {
 
 	protected void copyControlTablesToShard(String shardName) throws Exception {
 		DataSourceFactoryBean dataSourceFactoryBean =
@@ -172,6 +172,6 @@ public class UpgradeShardingControlTables extends UpgradeProcess {
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		UpgradeShardingControlTables.class);
+		UpgradeSharding.class);
 
 }
