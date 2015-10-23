@@ -627,7 +627,7 @@
 			</elseif>
 		</if>
 
-		<execute function="AssertClick" locator1="Button#SEARCH" value1="Search" />
+		<execute function="AssertClick" locator1="NavBar#BASIC_SEARCH_BUTTON" value1="Search" />
 
 		<if>
 			<equals arg1="${searchNoResults}" arg2="true" />
