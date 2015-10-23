@@ -47,6 +47,35 @@ import javax.sql.DataSource;
  */
 public class UpgradeSharding extends UpgradeProcess {
 
+	protected void copyControlTable(
+			Connection sourceConnection, Connection targetConnection,
+			String tableName, Object[][] columns, String createTable)
+		throws Exception {
+
+		UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
+			tableName, columns);
+
+		upgradeTable.setCreateSQL(createTable);
+
+		upgradeTable.copyTable(sourceConnection, targetConnection);
+	}
+
+	protected void copyControlTables(List<String> shardNames) throws Exception {
+		String defaultShardName = PropsUtil.get("shard.default.name");
+
+		if (Validator.isNull(defaultShardName)) {
+			throw new RuntimeException(
+				"The property \"shard.default.name\" is not set in " +
+					"portal.properties");
+		}
+
+		for (String shardName : shardNames) {
+			if (!shardName.equals(defaultShardName)) {
+				copyControlTables(shardName);
+			}
+		}
+	}
+
 	protected void copyControlTables(String shardName) throws Exception {
 		Connection sourceConnection =
 			DataAccess.getUpgradeOptimizedConnection();
@@ -105,24 +134,6 @@ public class UpgradeSharding extends UpgradeProcess {
 		}
 	}
 
-	protected void copyControlTables(List<String> shardNames)
-		throws Exception {
-
-		String defaultShardName = PropsUtil.get("shard.default.name");
-
-		if (Validator.isNull(defaultShardName)) {
-			throw new RuntimeException(
-				"The property \"shard.default.name\" is not set in " +
-					"portal.properties");
-		}
-
-		for (String shardName : shardNames) {
-			if (!shardName.equals(defaultShardName)) {
-				copyControlTables(shardName);
-			}
-		}
-	}
-
 	@Override
 	protected void doUpgrade() throws Exception {
 		List<String> shardNames = getShardNames();
@@ -157,19 +168,6 @@ public class UpgradeSharding extends UpgradeProcess {
 		}
 
 		return shardNames;
-	}
-
-	protected void copyControlTable(
-			Connection sourceConnection, Connection targetConnection,
-			String tableName, Object[][] columns, String createTable)
-		throws Exception {
-
-		UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
-			tableName, columns);
-
-		upgradeTable.setCreateSQL(createTable);
-
-		upgradeTable.copyTable(sourceConnection, targetConnection);
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
