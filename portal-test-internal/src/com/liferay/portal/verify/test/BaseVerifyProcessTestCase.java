@@ -73,17 +73,17 @@ public abstract class BaseVerifyProcessTestCase {
 			exception = ve;
 		}
 		finally {
-			for (ObjectValuePair<Connection, Exception> ovp :
-					_connectionRecords) {
+			for (ObjectValuePair<Connection, Exception> objectValuePair :
+					_objectValuePairs) {
 
-				Connection connection = ovp.getKey();
+				Connection connection = objectValuePair.getKey();
 
 				if (!connection.isClosed()) {
 					if (exception == null) {
-						exception = ovp.getValue();
+						exception = objectValuePair.getValue();
 					}
 					else {
-						exception.addSuppressed(ovp.getValue());
+						exception.addSuppressed(objectValuePair.getValue());
 					}
 				}
 			}
@@ -103,7 +103,7 @@ public abstract class BaseVerifyProcessTestCase {
 	protected abstract VerifyProcess getVerifyProcess();
 
 	private final Queue<ObjectValuePair<Connection, Exception>>
-		_connectionRecords = new ConcurrentLinkedQueue<>();
+		_objectValuePairs = new ConcurrentLinkedQueue<>();
 	private DataAccess.PACL _pacl;
 
 	private class DataSourceInvocationHandler implements InvocationHandler {
@@ -116,7 +116,7 @@ public abstract class BaseVerifyProcessTestCase {
 				Object result = method.invoke(_instance, args);
 
 				if (result instanceof Connection) {
-					_connectionRecords.add(
+					_objectValuePairs.add(
 						new ObjectValuePair<>(
 							(Connection)result,
 							new Exception("Caught an unclosed exception")));
