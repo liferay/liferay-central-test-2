@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author	  Manuel de la Peña
+ * @author	  Brian Wing Shun Chan
  * @generated
  */
 public class RegionTable {
@@ -59,7 +59,7 @@ TABLE_COLUMNS_MAP.put("active_", Types.BOOLEAN);
 	public static final String[] TABLE_SQL_ADD_INDEXES = {
 		"create index IX_2D9A426F on Region (active_)",
 		"create index IX_11FB3E42 on Region (countryId, active_)",
-		"create unique index IX_A2635F5C on Region (countryId, regionCode)"
+		"create unique index IX_A2635F5C on Region (countryId, regionCode[$COLUMN_LENGTH:75$])"
 	};
 
 }

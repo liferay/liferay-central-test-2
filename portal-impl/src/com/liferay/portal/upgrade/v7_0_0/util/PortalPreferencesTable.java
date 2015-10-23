@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author	  Manuel de la Peña
+ * @author	  Brian Wing Shun Chan
  * @generated
  */
 public class PortalPreferencesTable {
