@@ -1369,7 +1369,12 @@
 		<execute function="Type" locator1="PGFastloginGuest#LAST_NAME_FIELD" value1="${userLastName}" />
 		<execute function="Type" locator1="TextInput#EMAIL_ADDRESS" value1="${userEmailAddress}" />
 		<execute function="AssertClick" locator1="Button#SAVE" value1="Save" />
-		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your comment has already been posted. Would you like to create an account with the provided information?" />
+
+		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request completed successfully." />
+
+		<var name="key_uniqueSuccess" value="${uniqueSuccess}" />
+
+		<execute function="AssertTextEquals" locator1="Message#UNIQUE_SUCCESS" value1="${uniqueSuccess}" />
 		<execute function="AssertClick" locator1="Button#CANCEL" value1="Cancel" />
 		<execute function="SelectFrame" value1="relative=top" />
 	</command>
