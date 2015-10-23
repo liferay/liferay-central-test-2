@@ -49,13 +49,13 @@ public class UpgradeSharding extends UpgradeProcess {
 
 	protected void copyControlTable(
 			Connection sourceConnection, Connection targetConnection,
-			String tableName, Object[][] columns, String createTable)
+			String tableName, Object[][] columns, String createSQL)
 		throws Exception {
 
 		UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			tableName, columns);
 
-		upgradeTable.setCreateSQL(createTable);
+		upgradeTable.setCreateSQL(createSQL);
 
 		upgradeTable.copyTable(sourceConnection, targetConnection);
 	}
