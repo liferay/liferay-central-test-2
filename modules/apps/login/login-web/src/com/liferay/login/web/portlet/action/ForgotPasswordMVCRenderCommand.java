@@ -12,27 +12,29 @@
  * details.
  */
 
-package com.liferay.portlet.login.action;
+package com.liferay.login.web.portlet.action;
 
+import com.liferay.login.web.constants.LoginPortletKeys;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
-import com.liferay.portal.kernel.spring.osgi.OSGiBeanProperties;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
 
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
+import org.osgi.service.component.annotations.Component;
+
 /**
  * @author Peter Fellwock
  */
-@OSGiBeanProperties(
+@Component(
 	property = {
-		"javax.portlet.name=" + PortletKeys.FAST_LOGIN,
-		"javax.portlet.name=" + PortletKeys.LOGIN,
+		"javax.portlet.name=" + LoginPortletKeys.FAST_LOGIN,
+		"javax.portlet.name=" + LoginPortletKeys.LOGIN,
 		"mvc.command.name=/login/forgot_password"
-	}
+	},
+	service = MVCRenderCommand.class
 )
 public class ForgotPasswordMVCRenderCommand implements MVCRenderCommand {
 
@@ -46,12 +48,12 @@ public class ForgotPasswordMVCRenderCommand implements MVCRenderCommand {
 		Company company = themeDisplay.getCompany();
 
 		if (!company.isSendPassword() && !company.isSendPasswordResetLink()) {
-			return "/html/portlet/login/login.jsp";
+			return "/login.jsp";
 		}
 
 		renderResponse.setTitle(themeDisplay.translate("forgot-password"));
 
-		return "/html/portlet/login/forgot_password.jsp";
+		return "/forgot_password.jsp";
 	}
 
 }
