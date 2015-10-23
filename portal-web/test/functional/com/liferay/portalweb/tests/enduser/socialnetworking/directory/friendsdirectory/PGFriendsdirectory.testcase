@@ -71,17 +71,26 @@
 			<var name="pageName" value="Friends Request Page" />
 		</execute>
 
+		<execute macro="ProductMenu#gotoPersonalSite" />
+
+		<var name="key_pageName" value="Friends Request Page" />
+
+		<execute function="AssertClick" locator1="Home#PAGE" value1="Friends Request Page" />
+
 		<execute macro="Portlet#addPG">
 			<var name="portletName" value="Requests" />
 			<var name="siteName" value="test" />
 			<var name="siteURL" value="true" />
 		</execute>
 
-		<execute macro="Page#gotoPG">
-			<var name="pageName" value="Friends Request Page" />
+		<execute macro="Page#openURL">
 			<var name="siteName" value="test" />
 			<var name="siteURL" value="true" />
 		</execute>
+
+		<execute macro="ProductMenu#gotoPersonalSite" />
+
+		<execute function="AssertClick" locator1="Home#PAGE" value1="Friends Request Page" />
 
 		<execute macro="Portlet#addPG">
 			<var name="portletName" value="Summary" />
