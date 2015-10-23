@@ -12,29 +12,31 @@
  * details.
  */
 
-package com.liferay.portlet.login.action;
+package com.liferay.login.web.portlet.action;
 
+import com.liferay.login.web.constants.LoginPortletKeys;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
-import com.liferay.portal.kernel.spring.osgi.OSGiBeanProperties;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
 
 import javax.portlet.PortletConfig;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
+import org.osgi.service.component.annotations.Component;
+
 /**
  * @author Peter Fellwock
  */
-@OSGiBeanProperties(
+@Component(
 	property = {
-		"javax.portlet.name=" + PortletKeys.FAST_LOGIN,
-		"javax.portlet.name=" + PortletKeys.LOGIN,
+		"javax.portlet.name=" + LoginPortletKeys.FAST_LOGIN,
+		"javax.portlet.name=" + LoginPortletKeys.LOGIN,
 		"mvc.command.name=/login/create_anonymous_account"
-	}
+	},
+	service = MVCRenderCommand.class
 )
 public class CreateAnonymousAccountMVCRenderCommand
 	implements MVCRenderCommand {
@@ -49,7 +51,7 @@ public class CreateAnonymousAccountMVCRenderCommand
 		Company company = themeDisplay.getCompany();
 
 		if (!company.isStrangers()) {
-			return "/html/portlet/login/login.jsp";
+			return "/login.jsp";
 		}
 
 		PortletConfig portletConfig = (PortletConfig)renderRequest.getAttribute(
@@ -57,13 +59,13 @@ public class CreateAnonymousAccountMVCRenderCommand
 
 		String portletName = portletConfig.getPortletName();
 
-		if (!portletName.equals(PortletKeys.FAST_LOGIN)) {
-			return "/html/portlet/login/login.jsp";
+		if (!portletName.equals(LoginPortletKeys.FAST_LOGIN)) {
+			return "/login.jsp";
 		}
 
 		renderResponse.setTitle(themeDisplay.translate("anonymous-account"));
 
-		return "/html/portlet/login/create_anonymous_account.jsp";
+		return "/create_anonymous_account.jsp";
 	}
 
 }
