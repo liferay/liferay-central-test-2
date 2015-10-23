@@ -32,7 +32,7 @@ import org.osgi.service.component.annotations.Reference;
 public class GroupModelListener extends BaseModelListener<Group> {
 
 	@Override
-	public void onAfterRemove(Group group) throws ModelListenerException {
+	public void onBeforeRemove(Group group) throws ModelListenerException {
 		try {
 
 			// Global calendar resource
