@@ -19,6 +19,14 @@
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 
+DDLRecord record = (DDLRecord)request.getAttribute(DDLWebKeys.DYNAMIC_DATA_LISTS_RECORD);
+
+DDLRecordSet recordSet = record.getRecordSet();
+
+DDMStructure ddmStructure = recordSet.getDDMStructure();
+
+long formDDMTemplateId = ParamUtil.getLong(request, "formDDMTemplateId");
+
 if (Validator.isNull(redirect)) {
 	PortletURL redirectURL = renderResponse.createRenderURL();
 
@@ -28,14 +36,6 @@ if (Validator.isNull(redirect)) {
 
 	redirect = redirectURL.toString();
 }
-
-DDLRecord record = (DDLRecord)request.getAttribute(DDLWebKeys.DYNAMIC_DATA_LISTS_RECORD);
-
-DDLRecordSet recordSet = record.getRecordSet();
-
-DDMStructure ddmStructure = recordSet.getDDMStructure();
-
-long formDDMTemplateId = ParamUtil.getLong(request, "formDDMTemplateId");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
