@@ -120,10 +120,10 @@ public class FriendlyURLServlet extends HttpServlet {
 			forcePermanentRedirect = (Boolean)redirectArray[1];
 
 			if (request.getAttribute(WebKeys.LAST_PATH) == null) {
+				LastPath lastPath = null;
+
 				String lifecycle = ParamUtil.getString(
 					request, "p_p_lifecycle");
-
-				LastPath lastPath = null;
 
 				if (lifecycle.equals("1")) {
 					lastPath = new LastPath(_friendlyURLPathPrefix, pathInfo);
