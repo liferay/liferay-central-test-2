@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author	  Manuel de la Peña
+ * @author	  Brian Wing Shun Chan
  * @generated
  */
 public class VirtualHostTable {
@@ -55,7 +55,7 @@ TABLE_COLUMNS_MAP.put("hostname", Types.VARCHAR);
 
 	public static final String[] TABLE_SQL_ADD_INDEXES = {
 		"create unique index IX_A083D394 on VirtualHost (companyId, layoutSetId)",
-		"create unique index IX_431A3960 on VirtualHost (hostname)"
+		"create unique index IX_431A3960 on VirtualHost (hostname[$COLUMN_LENGTH:75$])"
 	};
 
 }

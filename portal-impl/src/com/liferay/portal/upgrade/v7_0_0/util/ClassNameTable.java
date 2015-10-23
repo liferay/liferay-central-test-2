@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author	  Manuel de la Peña
+ * @author	  Brian Wing Shun Chan
  * @generated
  */
 public class ClassNameTable {
@@ -48,7 +48,7 @@ TABLE_COLUMNS_MAP.put("value", Types.VARCHAR);
 	public static final String TABLE_SQL_DROP = "drop table ClassName_";
 
 	public static final String[] TABLE_SQL_ADD_INDEXES = {
-		"create unique index IX_B27A301F on ClassName_ (value)"
+		"create unique index IX_B27A301F on ClassName_ (value[$COLUMN_LENGTH:200$])"
 	};
 
 }

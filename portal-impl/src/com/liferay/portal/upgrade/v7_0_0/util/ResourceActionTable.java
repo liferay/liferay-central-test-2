@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author	  Manuel de la Peña
+ * @author	  Brian Wing Shun Chan
  * @generated
  */
 public class ResourceActionTable {
@@ -54,7 +54,7 @@ TABLE_COLUMNS_MAP.put("bitwiseValue", Types.BIGINT);
 	public static final String TABLE_SQL_DROP = "drop table ResourceAction";
 
 	public static final String[] TABLE_SQL_ADD_INDEXES = {
-		"create unique index IX_EDB9986E on ResourceAction (name, actionId)"
+		"create unique index IX_EDB9986E on ResourceAction (name[$COLUMN_LENGTH:255$], actionId[$COLUMN_LENGTH:75$])"
 	};
 
 }
