@@ -86,7 +86,7 @@ public abstract class BaseUpgradeTableImpl extends Table {
 
 	protected void updateTable(
 			Connection sourceConnection, Connection targetConnection,
-			boolean deleteFromSource)
+			boolean deleteSource)
 		throws Exception {
 
 		_calledUpdateTable = true;
@@ -98,7 +98,7 @@ public abstract class BaseUpgradeTableImpl extends Table {
 		try {
 			DB db = DBFactoryUtil.getDB();
 
-			if (Validator.isNotNull(tempFileName) && deleteFromSource) {
+			if (Validator.isNotNull(tempFileName) && deleteSource) {
 				String deleteSQL = getDeleteSQL();
 
 				db.runSQL(sourceConnection, deleteSQL);
@@ -107,7 +107,7 @@ public abstract class BaseUpgradeTableImpl extends Table {
 			String createSQL = getCreateSQL();
 
 			if (Validator.isNotNull(createSQL)) {
-				if (deleteFromSource) {
+				if (deleteSource) {
 					db.runSQL(sourceConnection, "drop table " + getTableName());
 				}
 
