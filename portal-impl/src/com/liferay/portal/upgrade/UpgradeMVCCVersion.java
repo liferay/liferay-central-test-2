@@ -35,9 +35,10 @@ import java.util.List;
 /**
  * @author Shuyang Zhou
  */
-public class UpgradeMVCC extends UpgradeProcess {
+public class UpgradeMVCCVersion extends UpgradeProcess {
 
-	public void upgradeMVCC(DatabaseMetaData databaseMetaData, String tableName)
+	public void upgradeMVCCVersion(
+			DatabaseMetaData databaseMetaData, String tableName)
 		throws Exception {
 
 		tableName = normalizeName(tableName, databaseMetaData);
@@ -95,13 +96,13 @@ public class UpgradeMVCC extends UpgradeProcess {
 					continue;
 				}
 
-				upgradeMVCC(databaseMetaData, classElement);
+				upgradeMVCCVersion(databaseMetaData, classElement);
 			}
 
 			String[] moduleTableNames = getModuleTableNames();
 
 			for (String moduleTableName : moduleTableNames) {
-				upgradeMVCC(databaseMetaData, moduleTableName);
+				upgradeMVCCVersion(databaseMetaData, moduleTableName);
 			}
 		}
 		finally {
@@ -143,15 +144,16 @@ public class UpgradeMVCC extends UpgradeProcess {
 		return name;
 	}
 
-	protected void upgradeMVCC(
+	protected void upgradeMVCCVersion(
 			DatabaseMetaData databaseMetaData, Element classElement)
 		throws Exception {
 
 		String tableName = classElement.attributeValue("table");
 
-		upgradeMVCC(databaseMetaData, tableName);
+		upgradeMVCCVersion(databaseMetaData, tableName);
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(UpgradeMVCC.class);
+	private static final Log _log = LogFactoryUtil.getLog(
+		UpgradeMVCCVersion.class);
 
 }
