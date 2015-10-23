@@ -19,12 +19,11 @@ import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portlet.expando.model.ExpandoColumnConstants;
 
 import java.io.Serializable;
-
 import java.text.DateFormat;
-
 import java.util.Date;
 
 /**
@@ -206,25 +205,11 @@ public class ExpandoConverterUtil {
 	}
 
 	private static Date _getDateFromString(String dateString) {
-		if (_isDateStringInMillisecondsFormat(dateString)) {
+		if (Validator.isNumber(dateString)) {
 			return new Date(GetterUtil.getLong(dateString));
 		}
-		else {
-			return GetterUtil.getDate(dateString, _getDateFormat());
-		}
-	}
 
-	private static boolean _isDateStringInMillisecondsFormat(
-		String dateString) {
-
-		try {
-			Long.parseLong(dateString);
-
-			return true;
-		}
-		catch (Exception e) {
-			return false;
-		}
+		return GetterUtil.getDate(dateString, _getDateFormat());
 	}
 
 }
