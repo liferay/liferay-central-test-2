@@ -81,9 +81,9 @@
 	<command name="searchPG">
 		<var name="key_entryTitle" value="${entryTitle}" />
 
-		<execute function="Type" locator1="PGBlogsSearch#SEARCH_FIELD" value1="${entrySearchTerm}" />
+		<execute function="Type" locator1="TextInput#SEARCH" value1="${entrySearchTerm}" />
 
-		<execute function="AssertClick" locator1="PGBlogsSearch#SEARCH_BUTTON" value1="Search" />
+		<execute function="AssertClick" locator1="Button#SEARCH" value1="" />
 
 		<execute function="AssertTextEquals" locator1="PGBlogsSearch#SEARCH_RESULTS_ENTRY_TITLE" value1="${entryTitle}" />
 		<execute function="AssertTextEquals" locator1="PGBlogsSearch#SEARCH_RESULTS_ENTRY_DESCRIPTION" value1="${entryContent}" />
