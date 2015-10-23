@@ -55,6 +55,28 @@ public class UpgradeCalendar extends UpgradeProcess {
 		ps.execute();
 	}
 
+	protected void updateCalendarTimeZoneId(long calendarId, String timeZoneId)
+		throws Exception {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+
+		try {
+			con = DataAccess.getUpgradeOptimizedConnection();
+
+			ps = con.prepareStatement(
+				"update Calendar set timeZoneId = ? where calendarId = ?");
+
+			ps.setString(1, timeZoneId);
+			ps.setLong(2, calendarId);
+
+			ps.execute();
+		}
+		finally {
+			DataAccess.cleanUp(con, ps);
+		}
+	}
+
 	protected void updateCalendarTimeZoneIds() throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -97,28 +119,6 @@ public class UpgradeCalendar extends UpgradeProcess {
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
-		}
-	}
-
-	protected void updateCalendarTimeZoneId(long calendarId, String timeZoneId)
-		throws Exception {
-
-		Connection con = null;
-		PreparedStatement ps = null;
-
-		try {
-			con = DataAccess.getUpgradeOptimizedConnection();
-
-			ps = con.prepareStatement(
-				"update Calendar set timeZoneId = ? where calendarId = ?");
-
-			ps.setString(1, timeZoneId);
-			ps.setLong(2, calendarId);
-
-			ps.execute();
-		}
-		finally {
-			DataAccess.cleanUp(con, ps);
 		}
 	}
 
