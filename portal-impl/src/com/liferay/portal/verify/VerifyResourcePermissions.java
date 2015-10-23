@@ -173,29 +173,17 @@ public class VerifyResourcePermissions extends VerifyProcess {
 			Role role, VerifiableResourcedModel verifiableResourcedModel)
 		throws Exception {
 
-		StringBundler countSql = new StringBundler(4);
-
-		countSql.append("select count(*) from ");
-		countSql.append(verifiableResourcedModel.getTableName());
-		countSql.append(" where companyId = ");
-		countSql.append(role.getCompanyId());
-
-		StringBundler selectSql = new StringBundler(8);
-
-		selectSql.append("select ");
-		selectSql.append(verifiableResourcedModel.getPrimaryKeyColumnName());
-		selectSql.append(", ");
-		selectSql.append(verifiableResourcedModel.getUserIdColumnName());
-		selectSql.append(" from ");
-		selectSql.append(verifiableResourcedModel.getTableName());
-		selectSql.append(" where companyId = ");
-		selectSql.append(role.getCompanyId());
-
 		try (Connection con = DataAccess.getUpgradeOptimizedConnection()) {
 			int total = 0;
 
-			try (PreparedStatement ps = con.prepareStatement(
-					countSql.toString());
+			StringBundler sb = new StringBundler(4);
+
+			sb.append("select count(*) from ");
+			sb.append(verifiableResourcedModel.getTableName());
+			sb.append(" where companyId = ");
+			sb.append(role.getCompanyId());
+
+			try (PreparedStatement ps = con.prepareStatement(sb.toString());
 				ResultSet rs = ps.executeQuery()) {
 
 				if (rs.next()) {
@@ -203,8 +191,19 @@ public class VerifyResourcePermissions extends VerifyProcess {
 				}
 			}
 
+			sb = new StringBundler(8);
+
+			sb.append("select ");
+			sb.append(verifiableResourcedModel.getPrimaryKeyColumnName());
+			sb.append(", ");
+			sb.append(verifiableResourcedModel.getUserIdColumnName());
+			sb.append(" from ");
+			sb.append(verifiableResourcedModel.getTableName());
+			sb.append(" where companyId = ");
+			sb.append(role.getCompanyId());
+
 			try (PreparedStatement ps = con.prepareStatement(
-					selectSql.toString());
+					sb.toString());
 				ResultSet rs = ps.executeQuery()) {
 
 				for (int i = 0; rs.next(); i++) {
