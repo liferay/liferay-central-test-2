@@ -29,64 +29,66 @@ public class ExpandoConverterUtilTest {
 
 	@Test
 	public void testGetDateArrayAttributeFromString() {
-		long[] expectedTimeArray = { 0L, 10L, 100L };
-		long[] actualTimeArray = new long[3];
+		long[] expectedTimes = {0, 10, 100};
 
-		Date[] dateArray = (Date[])ExpandoConverterUtil.getAttributeFromString(
-			ExpandoColumnConstants.DATE_ARRAY,
-			StringUtil.merge(expectedTimeArray));
+		Date[] dates = (Date[])ExpandoConverterUtil.getAttributeFromString(
+			ExpandoColumnConstants.DATE_ARRAY, StringUtil.merge(expectedTimes));
 
-		for (int i = 0; i < dateArray.length; i++) {
-			actualTimeArray[i] = dateArray[i].getTime();
+		long[] actualTimes = new long[3];
+
+		for (int i = 0; i < dates.length; i++) {
+			actualTimes[i] = dates[i].getTime();
 		}
 
-		Assert.assertArrayEquals(expectedTimeArray, actualTimeArray);
+		Assert.assertArrayEquals(expectedTimes, actualTimes);
 	}
 
 	@Test
 	public void testGetDateArrayAttributeFromStringArray() {
-		long[] expectedTimeArray = { 0L, 10L, 100L };
-		long[] actualTimeArray = new long[3];
+		long[] expectedTimes = {0, 10, 100};
 
-		String[] expectedTimeStringArray = new String[3];
+		String[] expectedTimeStrings = new String[3];
 
-		for (int i = 0; i < expectedTimeArray.length; i++) {
-			expectedTimeStringArray[i] = String.valueOf(expectedTimeArray[i]);
+		for (int i = 0; i < expectedTimes.length; i++) {
+			expectedTimeStrings[i] = String.valueOf(expectedTimes[i]);
 		}
 
-		Date[] dateArray =
+		long[] actualTimes = new long[3];
+
+		Date[] actualDates =
 			(Date[])ExpandoConverterUtil.getAttributeFromStringArray(
-				ExpandoColumnConstants.DATE_ARRAY, expectedTimeStringArray);
+				ExpandoColumnConstants.DATE_ARRAY, expectedTimeStrings);
 
-		for (int i = 0; i < dateArray.length; i++) {
-			actualTimeArray[i] = dateArray[i].getTime();
+		for (int i = 0; i < actualDates.length; i++) {
+			actualTimes[i] = actualDates[i].getTime();
 		}
 
-		Assert.assertArrayEquals(expectedTimeArray, actualTimeArray);
+		Assert.assertArrayEquals(expectedTimes, actualTimes);
 	}
 
 	@Test
 	public void testGetDateAttributeFromString() {
-		long time = 0L;
+		long expectedTime = 0;
 
 		Date date = (Date)ExpandoConverterUtil.getAttributeFromString(
-			ExpandoColumnConstants.DATE, String.valueOf(time));
+			ExpandoColumnConstants.DATE, String.valueOf(expectedTime));
 
-		Assert.assertEquals(time, date.getTime());
+		Assert.assertEquals(expectedTime, date.getTime());
 	}
 
 	@Test
 	public void testGetDateAttributeFromStringArray() {
-		long time = 0L;
+		long expectedTime = 0;
 
-		String[] timeStringArray = new String[1];
+		String[] expectedTimeStrings = new String[1];
 
-		timeStringArray[0] = String.valueOf(time);
+		expectedTimeStrings[0] = String.valueOf(expectedTime);
 
-		Date date = (Date)ExpandoConverterUtil.getAttributeFromStringArray(
-			ExpandoColumnConstants.DATE, timeStringArray);
+		Date actualDate =
+			(Date)ExpandoConverterUtil.getAttributeFromStringArray(
+				ExpandoColumnConstants.DATE, expectedTimeStrings);
 
-		Assert.assertEquals(time, date.getTime());
+		Assert.assertEquals(expectedTime, actualDate.getTime());
 	}
 
 }
