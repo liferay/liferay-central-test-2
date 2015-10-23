@@ -407,7 +407,7 @@
 		</execute>
 	</command>
 
-	<command name="DisplayTagUsageStatistics" priority="4">
+	<command name="DisplayTagUsageStatistics" priority="3">
 		<execute macro="Page#addPG">
 			<var name="pageName" value="Tags Navigation Page" />
 		</execute>
@@ -492,7 +492,7 @@
 		</execute>
 	</command>
 
-	<command name="DisplayUnusedTags" priority="4">
+	<command name="DisplayUnusedTags" priority="3">
 		<execute macro="Page#addPG">
 			<var name="pageName" value="Tags Navigation Page" />
 		</execute>
@@ -532,7 +532,7 @@
 		</execute>
 	</command>
 
-	<command name="RemoveSelectTagViaBlogs" priority="4">
+	<command name="RemoveSelectTagViaBlogs" priority="3">
 		<execute macro="Page#gotoCP">
 			<var name="portletName" value="Sites" />
 		</execute>
@@ -713,7 +713,7 @@
 		<execute function="AssertTextNotPresent" value1="tag name 1" />
 	</command>
 
-	<command name="SearchMultipleTagsViaBlogs" priority="4">
+	<command name="SearchMultipleTagsViaBlogs" priority="3">
 		<execute macro="Page#gotoCP">
 			<var name="portletName" value="Sites" />
 		</execute>
