@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.dynamic.data.lists.form.web.context.util;
+package com.liferay.dynamic.data.lists.form.web.display.context.util;
 
 import com.liferay.dynamic.data.lists.form.web.configuration.DDLFormWebConfiguration;
 import com.liferay.dynamic.data.lists.form.web.constants.DDLFormConstants;
