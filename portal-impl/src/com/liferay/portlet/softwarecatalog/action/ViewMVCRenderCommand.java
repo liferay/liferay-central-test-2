@@ -30,7 +30,7 @@ import javax.portlet.RenderResponse;
 		"mvc.command.name=/software_catalog/view"
 	}
 )
-public class SoftwareCatalogViewMVCRenderCommand implements MVCRenderCommand {
+public class ViewMVCRenderCommand implements MVCRenderCommand {
 
 	@Override
 	public String render(
