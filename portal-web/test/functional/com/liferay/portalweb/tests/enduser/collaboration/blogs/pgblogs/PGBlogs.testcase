@@ -1374,6 +1374,7 @@
 		<var name="userEmailAddress" value="guest@liferay.com" />
 		<var name="userFirstName" value="Guestfn" />
 		<var name="userLastName" value="Guestln" />
+		<var name="userFullName" value="Guestfn Guestln" />
 
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="${pageName}" />
@@ -1418,7 +1419,9 @@
 			<var name="userEmailAddress" value="test@liferay.com" />
 		</execute>
 
-		<execute macro="PermissionsInline#gotoBlogsEntryPG" />
+		<execute macro="PermissionsInline#gotoBlogsEntryPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
 
 		<execute macro="Role#removePermissionPG">
 			<var name="entryTitle" value="${entryTitle}" />
