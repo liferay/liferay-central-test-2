@@ -30,7 +30,7 @@
 </tr>
 <tr>
 	<td>ADD_ENTRY_BUTTON</td>
-	<td>//li[@name='addEntryButton']/a[contains(.,'Add Blog Entry')]</td>
+	<td>//a[contains(.,'Add Blog Entry')]</td>
 	<td></td>
 </tr>
 <tr>

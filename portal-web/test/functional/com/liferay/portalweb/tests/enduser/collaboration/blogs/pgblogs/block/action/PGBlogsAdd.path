@@ -30,7 +30,7 @@
 </tr>
 <tr>
 	<td>TITLE_FIELD</td>
-	<td>//div[@class='entry-title']/h2/div</td>
+	<td>//div[contains(@id,'titleEditor') and contains(@aria-label,'Rich Text Editor')]</td>
 	<td></td>
 </tr>
 <tr>
