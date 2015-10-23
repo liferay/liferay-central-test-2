@@ -53,6 +53,7 @@ public class EditLicenseMVCActionCommand extends BaseMVCActionCommand {
 		}
 
 		String redirect = ParamUtil.getString(actionRequest, "redirect");
+
 		sendRedirect(actionRequest, actionResponse, redirect);
 	}
 
