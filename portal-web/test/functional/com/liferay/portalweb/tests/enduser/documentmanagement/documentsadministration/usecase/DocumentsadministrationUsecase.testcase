@@ -571,7 +571,7 @@
 	</command>
 
 	<command name="ImportDocumentWithDBStore" priority="3">
-		<property name="custom.properties" value="dl.store.impl=com.liferay.portlet.documentlibrary.store.DBStore" />
+		<property name="custom.properties" value="dl.store.impl=com.liferay.portal.store.db.DBStore" />
 
 		<execute macro="Page#gotoContentCP">
 			<var name="portletName" value="Documents and Media" />
