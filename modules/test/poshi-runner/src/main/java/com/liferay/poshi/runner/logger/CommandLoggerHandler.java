@@ -528,7 +528,7 @@ public final class CommandLoggerHandler {
 
 	private static int _btnLinkId;
 	private static Element _commandElement;
-	private static LoggerElement _commandLogLoggerElement = null;
+	private static LoggerElement _commandLogLoggerElement;
 	private static int _errorLinkId;
 	private static int _functionLinkId;
 	private static LoggerElement _lineGroupLoggerElement;
