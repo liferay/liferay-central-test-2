@@ -48,6 +48,9 @@ import javax.sql.DataSource;
 public class UpgradeSharding extends UpgradeProcess {
 
 	protected void copyControlTables(String shardName) throws Exception {
+		Connection sourceConnection =
+			DataAccess.getUpgradeOptimizedConnection();
+
 		DataSourceFactoryBean dataSourceFactoryBean =
 			new DataSourceFactoryBean();
 
@@ -57,49 +60,47 @@ public class UpgradeSharding extends UpgradeProcess {
 
 		Connection targetConnection = dataSource.getConnection();
 
-		Connection sourceConnection =
-			DataAccess.getUpgradeOptimizedConnection();
-
 		try {
-			updateUpgradeTable(
+			copyControlTable(
 				sourceConnection, targetConnection, ClassNameTable.TABLE_NAME,
 				ClassNameTable.TABLE_COLUMNS, ClassNameTable.TABLE_SQL_CREATE);
-			updateUpgradeTable(
+			copyControlTable(
 				sourceConnection, targetConnection,
 				ClusterGroupTable.TABLE_NAME, ClusterGroupTable.TABLE_COLUMNS,
 				ClusterGroupTable.TABLE_SQL_CREATE);
-			updateUpgradeTable(
+			copyControlTable(
 				sourceConnection, targetConnection, CounterTable.TABLE_NAME,
 				CounterTable.TABLE_COLUMNS, CounterTable.TABLE_SQL_CREATE);
-			updateUpgradeTable(
+			copyControlTable(
 				sourceConnection, targetConnection, CountryTable.TABLE_NAME,
 				CountryTable.TABLE_COLUMNS, CountryTable.TABLE_SQL_CREATE);
-			updateUpgradeTable(
+			copyControlTable(
 				sourceConnection, targetConnection,
 				PortalPreferencesTable.TABLE_NAME,
 				PortalPreferencesTable.TABLE_COLUMNS,
 				PortalPreferencesTable.TABLE_SQL_CREATE);
-			updateUpgradeTable(
+			copyControlTable(
 				sourceConnection, targetConnection, RegionTable.TABLE_NAME,
 				RegionTable.TABLE_COLUMNS, RegionTable.TABLE_SQL_CREATE);
-			updateUpgradeTable(
+			copyControlTable(
 				sourceConnection, targetConnection, ReleaseTable.TABLE_NAME,
 				ReleaseTable.TABLE_COLUMNS, ReleaseTable.TABLE_SQL_CREATE);
-			updateUpgradeTable(
+			copyControlTable(
 				sourceConnection, targetConnection,
 				ResourceActionTable.TABLE_NAME,
 				ResourceActionTable.TABLE_COLUMNS,
 				ResourceActionTable.TABLE_SQL_CREATE);
-			updateUpgradeTable(
+			copyControlTable(
 				sourceConnection, targetConnection, VirtualHostTable.TABLE_NAME,
 				VirtualHostTable.TABLE_COLUMNS,
 				VirtualHostTable.TABLE_SQL_CREATE);
 		}
 		catch (Exception e) {
-			_log.error("Unexpected errors while copying the control tables", e);
+			_log.error("Unable to copy control tables", e);
 		}
 		finally {
 			DataAccess.cleanUp(sourceConnection);
+
 			DataAccess.cleanUp(targetConnection);
 		}
 	}
@@ -111,8 +112,8 @@ public class UpgradeSharding extends UpgradeProcess {
 
 		if (Validator.isNull(defaultShardName)) {
 			throw new RuntimeException(
-				"The property 'shard.default.name' cannot be empty. Please " +
-					"review your portal-ext properties file.");
+				"The property \"shard.default.name\" is not set in " +
+					"portal.properties");
 		}
 
 		for (String shardName : shardNames) {
@@ -158,7 +159,7 @@ public class UpgradeSharding extends UpgradeProcess {
 		return shardNames;
 	}
 
-	protected void updateUpgradeTable(
+	protected void copyControlTable(
 			Connection sourceConnection, Connection targetConnection,
 			String tableName, Object[][] columns, String createTable)
 		throws Exception {
