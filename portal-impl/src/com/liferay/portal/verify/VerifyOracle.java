@@ -82,16 +82,16 @@ public class VerifyOracle extends VerifyProcess {
 				catch (SQLException sqle) {
 					if (sqle.getErrorCode() == 1441) {
 						if (_log.isWarnEnabled()) {
-							StringBundler warn = new StringBundler(6);
+							sb = new StringBundler(6);
 
-							warn.append("Unable to alter length of column ");
-							warn.append(columnName);
-							warn.append(" for table ");
-							warn.append(tableName);
-							warn.append(" because it contains values that are");
-							warn.append(" larger than the new column length");
+							sb.append("Unable to alter length of column ");
+							sb.append(columnName);
+							sb.append(" for table ");
+							sb.append(tableName);
+							sb.append(" because it contains values that are");
+							sb.append(" larger than the new column length");
 
-							_log.warn(warn.toString());
+							_log.warn(sb.toString());
 						}
 					}
 					else {
