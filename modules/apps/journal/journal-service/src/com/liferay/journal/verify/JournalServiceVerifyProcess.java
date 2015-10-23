@@ -166,12 +166,11 @@ public class JournalServiceVerifyProcess extends VerifyLayout {
 			Connection con, long groupId, String portletId)
 		throws Exception {
 
-		StringBundler sb = new StringBundler(4);
+		StringBundler sb = new StringBundler(3);
 
 		sb.append("select preferences from PortletPreferences inner join ");
 		sb.append("Layout on PortletPreferences.plid = Layout.plid where ");
-		sb.append("groupId = ?");
-		sb.append(" and portletId = ?");
+		sb.append("groupId = ? and portletId = ?");
 
 		try (PreparedStatement ps = con.prepareStatement(sb.toString())) {
 			ps.setLong(1, groupId);
@@ -631,17 +630,15 @@ public class JournalServiceVerifyProcess extends VerifyLayout {
 			return;
 		}
 
-		StringBundler sb = new StringBundler(15);
+		StringBundler sb = new StringBundler(13);
 
-		sb.append("select JournalArticle.* from JournalArticle left ");
-		sb.append("join JournalArticle tempJournalArticle on ");
-		sb.append("(JournalArticle.groupId = tempJournalArticle.groupId) ");
-		sb.append("and (JournalArticle.articleId = ");
-		sb.append("tempJournalArticle.articleId) and ");
-		sb.append("(JournalArticle.version < tempJournalArticle.version) ");
-		sb.append("and (JournalArticle.status = ");
-		sb.append("tempJournalArticle.status) where ");
-		sb.append("(JournalArticle.classNameId = ");
+		sb.append("select JournalArticle.* from JournalArticle left join ");
+		sb.append("JournalArticle tempJournalArticle on ");
+		sb.append("(JournalArticle.groupId = tempJournalArticle.groupId) and ");
+		sb.append("(JournalArticle.articleId = tempJournalArticle.articleId) ");
+		sb.append("and (JournalArticle.version < tempJournalArticle.version) ");
+		sb.append("and (JournalArticle.status = tempJournalArticle.status) ");
+		sb.append("where (JournalArticle.classNameId = ");
 		sb.append(JournalArticleConstants.CLASSNAME_ID_DEFAULT);
 		sb.append(") and (tempJournalArticle.version is null) and ");
 		sb.append("(JournalArticle.expirationDate is not null) and ");
