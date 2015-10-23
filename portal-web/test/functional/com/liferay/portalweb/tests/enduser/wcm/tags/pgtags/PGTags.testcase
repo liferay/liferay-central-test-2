@@ -105,14 +105,10 @@
 			<var name="portletName" value="Wiki" />
 		</execute>
 
-		<execute macro="Tag#addFrontPageTagPG">
+		<execute macro="WikiPage#addFrontPagePG">
+			<var name="pageAddTag" value="true" />
+			<var name="tagName" value="wiki tag name" />
 			<var name="wikiPageContent" value="Wiki FrontPage Content" />
-			<var name="wikiTagName" value="wiki tag name" />
-		</execute>
-
-		<execute macro="Tag#viewFrontPageTagPG">
-			<var name="wikiPageContent" value="Wiki FrontPage Content" />
-			<var name="wikiTagName" value="wiki tag name" />
 		</execute>
 	</command>
 
