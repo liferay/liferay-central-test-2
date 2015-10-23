@@ -17,7 +17,7 @@ package com.liferay.portal.model;
 /**
  * @author Cristina González
  */
-public interface PartitionedModel {
+public interface ShardedModel {
 
 	public long getCompanyId();
 
