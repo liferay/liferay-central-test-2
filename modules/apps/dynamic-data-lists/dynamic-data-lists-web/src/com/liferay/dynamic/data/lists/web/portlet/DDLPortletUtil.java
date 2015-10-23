@@ -23,7 +23,7 @@ import com.liferay.dynamic.data.lists.util.comparator.DDLRecordModifiedDateCompa
 import com.liferay.dynamic.data.lists.util.comparator.DDLRecordSetCreateDateComparator;
 import com.liferay.dynamic.data.lists.util.comparator.DDLRecordSetModifiedDateComparator;
 import com.liferay.dynamic.data.lists.util.comparator.DDLRecordSetNameComparator;
-import com.liferay.dynamic.data.lists.web.context.util.DDLRequestHelper;
+import com.liferay.dynamic.data.lists.web.display.context.util.DDLRequestHelper;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
