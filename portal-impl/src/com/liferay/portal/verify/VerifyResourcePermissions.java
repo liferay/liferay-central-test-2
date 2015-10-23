@@ -202,8 +202,7 @@ public class VerifyResourcePermissions extends VerifyProcess {
 			sb.append(" where companyId = ");
 			sb.append(role.getCompanyId());
 
-			try (PreparedStatement ps = con.prepareStatement(
-					sb.toString());
+			try (PreparedStatement ps = con.prepareStatement(sb.toString());
 				ResultSet rs = ps.executeQuery()) {
 
 				for (int i = 0; rs.next(); i++) {
