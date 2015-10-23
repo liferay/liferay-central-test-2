@@ -20,6 +20,6 @@ package com.liferay.dynamic.data.lists.form.web.constants;
 public class DDLFormConstants {
 
 	public static final String SERVICE_NAME =
-		"com.liferay.dynamic.data.lists.form";
+		"com.liferay.dynamic.data.lists.form.web";
 
 }
