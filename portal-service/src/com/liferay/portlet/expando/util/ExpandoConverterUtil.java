@@ -23,7 +23,9 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portlet.expando.model.ExpandoColumnConstants;
 
 import java.io.Serializable;
+
 import java.text.DateFormat;
+
 import java.util.Date;
 
 /**
@@ -188,6 +190,18 @@ public class ExpandoConverterUtil {
 		}
 	}
 
+	private static Date _getDate(String dateString) {
+		if (Validator.isNumber(dateString)) {
+			return new Date(GetterUtil.getLong(dateString));
+		}
+
+		return GetterUtil.getDate(dateString, _getDateFormat());
+	}
+
+	private static DateFormat _getDateFormat() {
+		return DateUtil.getISO8601Format();
+	}
+
 	private static Date[] _getDates(String[] dateStrings) {
 		Date[] dates = new Date[dateStrings.length];
 
@@ -196,18 +210,6 @@ public class ExpandoConverterUtil {
 		}
 
 		return dates;
-	}
-
-	private static DateFormat _getDateFormat() {
-		return DateUtil.getISO8601Format();
-	}
-
-	private static Date _getDate(String dateString) {
-		if (Validator.isNumber(dateString)) {
-			return new Date(GetterUtil.getLong(dateString));
-		}
-
-		return GetterUtil.getDate(dateString, _getDateFormat());
 	}
 
 }
