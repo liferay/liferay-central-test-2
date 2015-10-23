@@ -19,6 +19,12 @@
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 
+if (redirect.isEmpty()) {
+	PortletURL redirectURL = renderResponse.createRenderURL();
+	redirectURL.setParameter("mvcPath", "/view.jsp");
+	redirect = redirectURL.toString();
+}
+
 DDLRecordSet recordSet = (DDLRecordSet)request.getAttribute(DDLWebKeys.DYNAMIC_DATA_LISTS_RECORD_SET);
 
 long displayDDMTemplateId = ParamUtil.getLong(request, "displayDDMTemplateId");
@@ -43,12 +49,6 @@ boolean spreadsheet = ParamUtil.getBoolean(request, "spreadsheet");
 </c:choose>
 
 <%
-if (redirect.isEmpty()) {
-	PortletURL backURL = renderResponse.createRenderURL();
-	backURL.setParameter("mvcPath", "/view.jsp");
-	redirect = backURL.toString();
-}
-
 if (ddlDisplayContext.isAdminPortlet()) {
 	portletDisplay.setShowBackIcon(true);
 	portletDisplay.setURLBack(redirect);

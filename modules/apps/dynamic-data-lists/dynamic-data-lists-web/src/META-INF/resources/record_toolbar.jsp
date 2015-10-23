@@ -17,11 +17,7 @@
 <%@ include file="/init.jsp" %>
 
 <%
-String redirect = ParamUtil.getString(request, "redirect");
-
-if (redirect.isEmpty()) {
-	redirect = portletDisplay.getURLBack();
-}
+String redirect = ParamUtil.getString(request, "redirect", portletDisplay.getURLBack());
 
 DDLRecord record = (DDLRecord)request.getAttribute(DDLWebKeys.DYNAMIC_DATA_LISTS_RECORD);
 

@@ -17,12 +17,7 @@
 <%@ include file="/init.jsp" %>
 
 <%
-String redirect = ParamUtil.getString(request, "redirect");
-
-if (redirect.isEmpty()) {
-	redirect = portletDisplay.getURLBack();
-
-}
+String redirect = ParamUtil.getString(request, "redirect", portletDisplay.getURLBack());
 
 long formDDMTemplateId = ParamUtil.getLong(request, "formDDMTemplateId");
 
