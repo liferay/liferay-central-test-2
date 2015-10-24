@@ -23,15 +23,27 @@ import com.liferay.portal.kernel.util.Validator;
 public class ExpressionEvaluationExtension {
 
 	public static boolean between(Double value, Integer min, Integer max) {
-		return ((value >= min) && (value <= max));
+		if ((value >= min) && (value <= max)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	public static boolean between(Integer value, Integer min, Integer max) {
-		return ((value >= min) && (value <= max));
+		if ((value >= min) && (value <= max)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	public static boolean between(Long value, Long min, Long max) {
-		return ((value >= min) && (value <= max));
+		if ((value >= min) && (value <= max)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	public static boolean isEmailAddress(String emailAddress) {
