@@ -18,7 +18,6 @@ import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 import com.liferay.calendar.model.CalendarResource;
 import com.liferay.calendar.service.CalendarResourceLocalServiceUtil;
 import com.liferay.calendar.service.CalendarResourceServiceUtil;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.test.rule.DeleteAfterTestRun;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.test.util.UserTestUtil;
@@ -58,14 +57,16 @@ public class CalendarResourceServiceTest {
 	}
 
 	@Test
-	public void testSearchCountByKeywords() throws PortalException {
-		Locale locale = LocaleUtil.getDefault();
+	public void testSearchCount() throws Exception {
+		long classNameId = PortalUtil.getClassNameId(CalendarResource.class);
+
+		Map<Locale, String> nameMap = new HashMap<>();
+
 		String name =
 			RandomTestUtil.randomString() + StringPool.SPACE +
-			RandomTestUtil.randomString();
-		Map<Locale, String> nameMap = new HashMap<>();
-		nameMap.put(locale, name);
-		long classNameId = PortalUtil.getClassNameId(CalendarResource.class);
+				RandomTestUtil.randomString();
+
+		nameMap.put(LocaleUtil.getDefault(), name);
 
 		CalendarResource calendarResource =
 			CalendarResourceLocalServiceUtil.addCalendarResource(

@@ -63,7 +63,7 @@ public class CalendarLocalServiceTest {
 	}
 
 	@Test
-	public void testSearchByKeywords() throws PortalException {
+	public void testSearch() throws Exception {
 		ServiceContext serviceContext = new ServiceContext();
 
 		CalendarResource calendarResource =
