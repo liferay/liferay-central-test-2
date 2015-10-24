@@ -77,7 +77,7 @@ public class CalendarBookingLocalServiceTest {
 	}
 
 	@Test
-	public void testAddCalendarBooking() throws PortalException {
+	public void testAddCalendarBooking() throws Exception {
 		ServiceContext serviceContext = createServiceContext();
 
 		CalendarResource calendarResource =
@@ -107,7 +107,7 @@ public class CalendarBookingLocalServiceTest {
 
 	@Test
 	public void testDeleteLastCalendarBookingInstanceDeletesCalendarBooking()
-		throws PortalException {
+		throws Exception {
 
 		ServiceContext serviceContext = createServiceContext();
 
@@ -157,7 +157,7 @@ public class CalendarBookingLocalServiceTest {
 
 	@Test
 	public void testInviteToDraftCalendarBookingResultsInMasterPendingChild()
-		throws PortalException {
+		throws Exception {
 
 		ServiceContext serviceContext = createServiceContext();
 
@@ -199,7 +199,7 @@ public class CalendarBookingLocalServiceTest {
 
 	@Test
 	public void testInviteToPublishedCalendarBookingResultsInPendingChild()
-		throws PortalException {
+		throws Exception {
 
 		ServiceContext serviceContext = createServiceContext();
 
@@ -240,7 +240,7 @@ public class CalendarBookingLocalServiceTest {
 
 	@Test
 	public void testMoveToTrashCalendarBookingShouldMoveItsChildrenToTrash()
-		throws PortalException {
+		throws Exception {
 
 		ServiceContext serviceContext = createServiceContext();
 
@@ -287,7 +287,7 @@ public class CalendarBookingLocalServiceTest {
 	}
 
 	@Test
-	public void testPublishCalendarBooking() throws PortalException {
+	public void testPublishCalendarBooking() throws Exception {
 		ServiceContext serviceContext = createServiceContext();
 
 		CalendarResource calendarResource =
@@ -318,7 +318,7 @@ public class CalendarBookingLocalServiceTest {
 	}
 
 	@Test
-	public void testPublishDraftCalendarBooking() throws PortalException {
+	public void testPublishDraftCalendarBooking() throws Exception {
 		ServiceContext serviceContext = createServiceContext();
 
 		CalendarResource calendarResource =
@@ -361,7 +361,7 @@ public class CalendarBookingLocalServiceTest {
 
 	@Test
 	public void testPublishDraftCalendarBookingResultsInPendingChild()
-		throws PortalException {
+		throws Exception {
 
 		ServiceContext serviceContext = createServiceContext();
 
@@ -420,7 +420,7 @@ public class CalendarBookingLocalServiceTest {
 
 	@Test
 	public void testRestoredFromTrashEventResultsInRestoredFromTrashChildren()
-		throws PortalException {
+		throws Exception {
 
 		ServiceContext serviceContext = createServiceContext();
 
@@ -475,7 +475,7 @@ public class CalendarBookingLocalServiceTest {
 	}
 
 	@Test
-	public void testSaveAsDraftCalendarBooking() throws PortalException {
+	public void testSaveAsDraftCalendarBooking() throws Exception {
 		ServiceContext serviceContext = createServiceContext();
 
 		CalendarResource calendarResource =
@@ -506,7 +506,7 @@ public class CalendarBookingLocalServiceTest {
 	}
 
 	@Test
-	public void testSaveAsDraftDraftCalendarBooking() throws PortalException {
+	public void testSaveAsDraftDraftCalendarBooking() throws Exception {
 		ServiceContext serviceContext = createServiceContext();
 
 		CalendarResource calendarResource =
@@ -549,7 +549,7 @@ public class CalendarBookingLocalServiceTest {
 
 	@Test
 	public void testSaveAsDraftPublishedCalendarBooking()
-		throws PortalException {
+		throws Exception {
 
 		ServiceContext serviceContext = createServiceContext();
 
@@ -591,7 +591,7 @@ public class CalendarBookingLocalServiceTest {
 
 	@Test(expected = CalendarBookingRecurrenceException.class)
 	public void testStartDateBeforeUntilDateThrowsRecurrenceException()
-		throws PortalException {
+		throws Exception {
 
 		ServiceContext serviceContext = createServiceContext();
 
@@ -628,7 +628,7 @@ public class CalendarBookingLocalServiceTest {
 
 	@Test
 	public void testUpdateCalendarBookingPreservesChildStatus()
-		throws PortalException {
+		throws Exception {
 
 		ServiceContext serviceContext = createServiceContext();
 
@@ -711,7 +711,7 @@ public class CalendarBookingLocalServiceTest {
 
 	@Test
 	public void testUpdateCalendarBookingPreservesDescriptionTranslations()
-		throws PortalException {
+		throws Exception {
 
 		ServiceContext serviceContext = createServiceContext();
 
@@ -774,7 +774,7 @@ public class CalendarBookingLocalServiceTest {
 
 	@Test
 	public void testUpdateCalendarBookingPreservesTitleTranslations()
-		throws PortalException {
+		throws Exception {
 
 		ServiceContext serviceContext = createServiceContext();
 
