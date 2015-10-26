@@ -281,6 +281,7 @@ public class DDLRecordIndexer extends BaseIndexer<DDLRecord> {
 
 		actionableDynamicQuery.setAddCriteriaMethod(
 			new ActionableDynamicQuery.AddCriteriaMethod() {
+
 				@Override
 				public void addCriteria(DynamicQuery dynamicQuery) {
 					Property recordIdProperty = PropertyFactoryUtil.forName(
@@ -345,6 +346,7 @@ public class DDLRecordIndexer extends BaseIndexer<DDLRecord> {
 						}
 					}
 				}
+
 		});
 		actionableDynamicQuery.setSearchEngineId(getSearchEngineId());
 
