@@ -31,9 +31,9 @@ public class LocalizationImplDefaultXmlFactoryImplTest
 	public void setUp() throws Exception {
 		super.setUp();
 
-		_inputFactoryProperty = System.getProperty(
+		_xmlInputFactoryClassName = System.getProperty(
 			XMLInputFactory.class.getName());
-		_outputFactoryProperty = System.getProperty(
+		_xmlOutputFactoryClassName = System.getProperty(
 			XMLOutputFactory.class.getName());
 
 		System.setProperty(
@@ -46,24 +46,24 @@ public class LocalizationImplDefaultXmlFactoryImplTest
 
 	@After
 	public void tearDown() throws Exception {
-		if (_inputFactoryProperty == null) {
+		if (_xmlInputFactoryClassName == null) {
 			System.clearProperty(XMLInputFactory.class.getName());
 		}
 		else {
 			System.setProperty(
-				XMLInputFactory.class.getName(), _inputFactoryProperty);
+				XMLInputFactory.class.getName(), _xmlInputFactoryClassName);
 		}
 
-		if (_outputFactoryProperty == null) {
+		if (_xmlOutputFactoryClassName == null) {
 			System.clearProperty(XMLOutputFactory.class.getName());
 		}
 		else {
 			System.setProperty(
-				XMLOutputFactory.class.getName(), _outputFactoryProperty);
+				XMLOutputFactory.class.getName(), _xmlOutputFactoryClassName);
 		}
 	}
 
-	private String _inputFactoryProperty;
-	private String _outputFactoryProperty;
+	private String _xmlInputFactoryClassName;
+	private String _xmlOutputFactoryClassName;
 
 }
