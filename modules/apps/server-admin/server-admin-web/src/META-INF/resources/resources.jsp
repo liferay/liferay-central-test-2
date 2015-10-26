@@ -127,7 +127,7 @@ long usedMemory = totalMemory - runtime.freeMemory();
 				long timeout = ParamUtil.getLong(request, "timeout");
 				%>
 
-				<aui:button cssClass="save-server-button" data-blocking='<%= ParamUtil.getBoolean(request, "blocking") %>' data-cmd="reindex" data-timeout="<%= timeout == 0 ? StringPool.BLANK : timeout %>" value="execute" />
+				<aui:button cssClass="save-server-button" data-blocking='<%= ParamUtil.getBoolean(request, "blocking") %>' data-cmd="reindex" data-timeout="<%= (timeout == 0) ? StringPool.BLANK : timeout %>" value="execute" />
 			</td>
 		</tr>
 		<tr>
