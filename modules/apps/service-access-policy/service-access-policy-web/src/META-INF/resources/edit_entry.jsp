@@ -85,8 +85,8 @@ if (sapEntry != null) {
 
 	<aui:input cssClass="hide" helpMessage="allowed-service-signatures-help" name="allowedServiceSignatures" />
 
-	<liferay-portlet:resourceURL copyCurrentRenderParameters="<%= false %>" var="getMethodNamesURL">
-		<portlet:param name="<%= ActionRequest.ACTION_NAME %>" value="getMethodNames" />
+	<liferay-portlet:resourceURL copyCurrentRenderParameters="<%= false %>" var="getActionMethodNamesURL">
+		<portlet:param name="<%= ActionRequest.ACTION_NAME %>" value="getActionMethodNames" />
 	</liferay-portlet:resourceURL>
 
 	<div id="<portlet:namespace />allowedServiceSignaturesFriendlyContentBox">
@@ -94,7 +94,7 @@ if (sapEntry != null) {
 		<%
 		for (int i = 0; i < allowedServiceSignaturesArray.length; i++) {
 			String serviceClassName = StringPool.BLANK;
-			String methodName = StringPool.BLANK;
+			String actionMethodName = StringPool.BLANK;
 
 			String[] allowedServiceSignatureArray = StringUtil.split(allowedServiceSignaturesArray[i], CharPool.POUND);
 
@@ -102,7 +102,7 @@ if (sapEntry != null) {
 				serviceClassName = GetterUtil.getString(allowedServiceSignatureArray[0], StringPool.BLANK);
 
 				if (allowedServiceSignatureArray.length > 1) {
-					methodName = GetterUtil.getString(allowedServiceSignatureArray[1], StringPool.BLANK);
+					actionMethodName = GetterUtil.getString(allowedServiceSignatureArray[1], StringPool.BLANK);
 				}
 			}
 		%>
@@ -113,7 +113,7 @@ if (sapEntry != null) {
 						<aui:input cssClass="service-class-name" data-service-class-name="<%= serviceClassName %>" id='<%= "serviceClassName" + i %>' label="service-class" name="serviceClassName" type="text" value="<%= serviceClassName %>" />
 					</aui:col>
 					<aui:col md="6">
-						<aui:input cssClass="method-name" id='<%= "methodName" + i %>' label="method-name" name="methodName" type="text" value="<%= methodName %>" />
+						<aui:input cssClass="action-method-name" id='<%= "actionMethodName" + i %>' label="method-name" name="actionMethodName" type="text" value="<%= actionMethodName %>" />
 					</aui:col>
 				</div>
 			</div>
@@ -133,11 +133,11 @@ if (sapEntry != null) {
 	<aui:script use="autocomplete,autocomplete-filters,io-base,liferay-auto-fields,liferay-portlet-url">
 		var REGEX_DOT = /\./g;
 
-		var getMethodNamesURL = Liferay.PortletURL.createURL('<%= getMethodNamesURL %>');
+		var getActionMethodNamesURL = Liferay.PortletURL.createURL('<%= getActionMethodNamesURL %>');
 
 		var serviceClassNames = <%= JSONFactoryUtil.looseSerialize(request.getAttribute(SAPWebKeys.REMOTE_SERVICES_CLASS_NAMES)) %>;
 
-		var serviceMethodNames = {};
+		var serviceActionMethodNames = {};
 
 		var getServiceContext = function(serviceClassName) {
 			var serviceMap = A.Array.find(
@@ -150,60 +150,60 @@ if (sapEntry != null) {
 			return serviceMap && serviceMap.contextName || 'portal';
 		};
 
-		var getServiceMethodNames = function(contextName, serviceClassName, callback) {
+		var getServiceActionMethodNames = function(contextName, serviceClassName, callback) {
 			if (contextName && serviceClassName && callback) {
 				var namespace = contextName.replace(REGEX_DOT, '_') + '.' + serviceClassName.replace(REGEX_DOT, '_');
 
-				var methodObj = A.namespace.call(serviceMethodNames, namespace);
+				var methodObj = A.namespace.call(serviceActionMethodNames, namespace);
 
-				var methods = methodObj.methods;
+				var actionMethodNames = methodObj.actionMethodNames;
 
-				if (!methods) {
+				if (!actionMethodNames) {
 					if (contextName == 'portal') {
 						contextName = '';
 					}
 
-					getMethodNamesURL.setParameter('contextName', contextName);
-					getMethodNamesURL.setParameter('serviceClassName', serviceClassName);
+					getActionMethodNamesURL.setParameter('contextName', contextName);
+					getActionMethodNamesURL.setParameter('serviceClassName', serviceClassName);
 
 					A.io.request(
-						getMethodNamesURL.toString(),
+						getActionMethodNamesURL.toString(),
 						{
 							dataType: 'JSON',
 							method: 'GET',
 							on: {
 								success: function(event, id, xhr) {
-									methods = this.get('responseData');
+									actionMethodNames = this.get('responseData');
 
-									methodObj.methods = methods;
+									methodObj.actionMethodNames = actionMethodNames;
 
-									callback(methods);
+									callback(actionMethodNames);
 								}
 							}
 						}
 					);
 				}
 				else {
-					callback(methods);
+					callback(actionMethodNames);
 				}
 			}
 		};
 
 		var initAutoCompleteRow = function(rowNode) {
-			var methodInput = rowNode.one('.method-name');
-			var serviceInput = rowNode.one('.service-class-name');
+			var actionMethodNameInput = rowNode.one('.action-method-name');
+			var serviceClassNameInput = rowNode.one('.service-class-name');
 
 			new A.AutoComplete(
 				{
-					inputNode: serviceInput,
+					inputNode: serviceClassNameInput,
 					on: {
 						select: function(event) {
 							var result = event.result.raw;
 
-							serviceInput.attr('data-service-class-name', result.serviceClassName);
-							serviceInput.attr('data-context-name', result.contextName);
+							serviceClassNameInput.attr('data-service-class-name', result.serviceClassName);
+							serviceClassNameInput.attr('data-context-name', result.contextName);
 
-							methodInput.attr('disabled', false);
+							actionMethodNameInput.attr('disabled', false);
 						}
 					},
 					resultFilters: 'phraseMatch',
@@ -214,20 +214,20 @@ if (sapEntry != null) {
 
 			new A.AutoComplete(
 				{
-					inputNode: methodInput,
+					inputNode: actionMethodNameInput,
 					resultFilters: 'phraseMatch',
-					resultTextLocator: 'methodName',
+					resultTextLocator: 'actionMethodName',
 					source: function(query, callback) {
-						var contextName = serviceInput.attr('data-context-name');
-						var serviceClassName = serviceInput.attr('data-service-class-name');
+						var contextName = serviceClassNameInput.attr('data-context-name');
+						var serviceClassName = serviceClassNameInput.attr('data-service-class-name');
 
 						if (!contextName) {
 							contextName = getServiceContext(serviceClassName);
 
-							serviceInput.attr('data-context-name', contextName);
+							serviceClassNameInput.attr('data-context-name', contextName);
 						}
 
-						getServiceMethodNames(contextName, serviceClassName, callback);
+						getServiceActionMethodNames(contextName, serviceClassName, callback);
 					}
 				}
 			).render();
@@ -238,13 +238,13 @@ if (sapEntry != null) {
 
 			A.all('#<portlet:namespace />allowedServiceSignaturesFriendlyContentBox .lfr-form-row:not(.hide)').each(
 				function(item, index) {
-					var methodName = item.one('.method-name').val();
+					var actionMethodName = item.one('.action-method-name').val();
 					var serviceClassName = item.one('.service-class-name').val();
 
 					updatedInput += serviceClassName;
 
-					if (methodName) {
-						updatedInput += '#' + methodName;
+					if (actionMethodName) {
+						updatedInput += '#' + actionMethodName;
 					}
 
 					updatedInput += '\n';
@@ -270,21 +270,21 @@ if (sapEntry != null) {
 					var row = rowTemplate.clone();
 
 					if (item) {
-						var methodInput = row.one('.method-name');
-						var serviceInput = row.one('.service-class-name');
+						var actionMethodNameInput = row.one('.action-method-name');
+						var serviceClassNameInput = row.one('.service-class-name');
 
 						item = item.split('#');
 
 						var serviceClassName = item[0];
 
-						serviceInput.val(serviceClassName);
+						serviceClassNameInput.val(serviceClassName);
 
-						serviceInput.attr('data-service-class-name', serviceClassName);
+						serviceClassNameInput.attr('data-service-class-name', serviceClassName);
 
-						var method = item[1];
+						var actionMethodName = item[1];
 
-						if (method) {
-							methodInput.val(method);
+						if (actionMethodName) {
+							actionMethodNameInput.val(actionMethodName);
 						}
 
 						initAutoCompleteRow(row);
@@ -303,12 +303,12 @@ if (sapEntry != null) {
 					clone: function(event) {
 						var rowNode = event.row;
 
-						var methodInput = rowNode.one('.method-name');
-						var serviceInput = rowNode.one('.service-class-name');
+						var actionMethodNameInput = rowNode.one('.action-method-name');
+						var serviceClassNameInput = rowNode.one('.service-class-name');
 
-						methodInput.attr('disabled', true);
+						actionMethodNameInput.attr('disabled', true);
 
-						serviceInput.attr(
+						serviceClassNameInput.attr(
 							{
 								'data-context-name': '',
 								'data-service-class-name': ''
@@ -330,7 +330,7 @@ if (sapEntry != null) {
 
 		A.each(rows, initAutoCompleteRow);
 
-		A.one('#<portlet:namespace />allowedServiceSignaturesFriendlyContentBox').delegate('blur', updateAdvancedModeTextarea, '.service-class-name, .method-name');
+		A.one('#<portlet:namespace />allowedServiceSignaturesFriendlyContentBox').delegate('blur', updateAdvancedModeTextarea, '.service-class-name, .action-method-name');
 		A.one('#<portlet:namespace />allowedServiceSignatures').on('blur', updateFriendlyModeInputs);
 	</aui:script>
 

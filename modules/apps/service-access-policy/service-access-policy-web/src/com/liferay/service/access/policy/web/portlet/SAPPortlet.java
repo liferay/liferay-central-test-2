@@ -90,7 +90,7 @@ public class SAPPortlet extends MVCPortlet {
 		_sapEntryService.deleteSAPEntry(sapEntryId);
 	}
 
-	public void getMethodNames(
+	public void getActionMethodNames(
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws IOException {
 
@@ -118,9 +118,9 @@ public class SAPPortlet extends MVCPortlet {
 
 			Method method = jsonWebServiceActionMapping.getActionMethod();
 
-			String methodName = method.getName();
+			String actionMethodName = method.getName();
 
-			jsonObject.put("methodName", methodName);
+			jsonObject.put("actionMethodName", actionMethodName);
 
 			jsonArray.put(jsonObject);
 		}
