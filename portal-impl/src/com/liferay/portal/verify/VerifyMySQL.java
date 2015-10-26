@@ -51,6 +51,7 @@ public class VerifyMySQL extends VerifyProcess {
 			Statement statement = connection.createStatement()) {
 
 			verifyTableEngine(statement);
+
 			verifyDatetimePrecision(connection.getMetaData(), statement);
 		}
 	}
