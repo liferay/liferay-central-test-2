@@ -46,10 +46,9 @@ public class PoshiRunner {
 		PoshiRunnerContext.readFiles();
 
 		List<String> classCommandNames = new ArrayList<>();
-		String testNameString = PropsValues.TEST_NAME;
 
 		List<String> testNames = Arrays.asList(
-			testNameString.split("\\s*,\\s*"));
+			PropsValues.TEST_NAME.split("\\s*,\\s*"));
 
 		for (String testName : testNames) {
 			PoshiRunnerValidation.validate(testName);
