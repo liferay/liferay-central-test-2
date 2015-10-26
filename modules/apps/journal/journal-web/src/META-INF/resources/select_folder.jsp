@@ -25,14 +25,13 @@ String folderName = LanguageUtil.get(request, "home");
 
 if (folder != null) {
 	folderName = folder.getName();
-
-	PortletURL portletURL = journalDisplayContext.getPortletURL();
-
-	portletURL.setParameter(ActionRequest.ACTION_NAME, "selectFolder");
-	portletURL.setParameter("folderId", "0");
-
-	JournalPortletUtil.addPortletBreadcrumbEntries(folder, request, portletURL);
 }
+
+PortletURL portletURL = renderResponse.createRenderURL();
+
+portletURL.setParameter("mvcPath", "/select_folder.jsp");
+
+JournalPortletUtil.addPortletBreadcrumbEntries(folder, request, portletURL);
 %>
 
 <aui:form method="post" name="selectFolderFm">
@@ -41,14 +40,6 @@ if (folder != null) {
 	/>
 
 	<liferay-ui:breadcrumb showCurrentGroup="<%= false %>" showGuestGroup="<%= false %>" showLayout="<%= false %>" showParentGroups="<%= false %>" />
-
-	<%
-	PortletURL portletURL = renderResponse.createRenderURL();
-
-	portletURL.setParameter(ActionRequest.ACTION_NAME, "selectFolder");
-	portletURL.setParameter("mvcPath", "/select_folder.jsp");
-	portletURL.setParameter("folderId", String.valueOf(journalDisplayContext.getFolderId()));
-	%>
 
 	<%
 	boolean hasAddFolderPermission = JournalFolderPermission.contains(permissionChecker, scopeGroupId, journalDisplayContext.getFolderId(), ActionKeys.ADD_FOLDER);
@@ -77,8 +68,15 @@ if (folder != null) {
 
 	<br />
 
+	<%
+	PortletURL iteratorURL = renderResponse.createRenderURL();
+
+	iteratorURL.setParameter("mvcPath", "/select_folder.jsp");
+	iteratorURL.setParameter("folderId", String.valueOf(journalDisplayContext.getFolderId()));
+	%>
+
 	<liferay-ui:search-container
-		iteratorURL="<%= portletURL %>"
+		iteratorURL="<%= iteratorURL %>"
 		total="<%= JournalFolderServiceUtil.getFoldersCount(scopeGroupId, journalDisplayContext.getFolderId()) %>"
 	>
 		<liferay-ui:search-container-results
@@ -92,7 +90,6 @@ if (folder != null) {
 			rowVar="row"
 		>
 			<liferay-portlet:renderURL varImpl="rowURL">
-				<portlet:param name="<%= ActionRequest.ACTION_NAME %>" value="selectFolder" />
 				<portlet:param name="mvcPath" value="/select_folder.jsp" />
 				<portlet:param name="folderId" value="<%= String.valueOf(curFolder.getFolderId()) %>" />
 			</liferay-portlet:renderURL>
