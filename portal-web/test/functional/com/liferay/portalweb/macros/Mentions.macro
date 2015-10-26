@@ -28,9 +28,17 @@
 	</command>
 
 	<command name="addMentionViaMessageBoardThread">
-		<var name="key_mentionsUserScreenName" value="${mentionsUserScreenName}" />
+		<if>
+			<equals arg1="editMBThread" arg2="True" />
+			<then>
+				<execute function="AssertClick" locator1="MessageBoardsThread#MESSAGE_EDIT_1" value1="Edit" />
+			</then>
+			<else>
+				<execute function="AssertClick" locator1="MessageBoards#POST_NEW_THREAD_BUTTON" value1="Post New Thread" />
+			</else>
+		</if>
 
-		<execute function="AssertClick" locator1="MessageBoards#POST_NEW_THREAD_BUTTON" value1="Post New Thread" />
+		<var name="key_mentionsUserScreenName" value="${mentionsUserScreenName}" />
 
 		<execute function="Type" locator1="TextInput#SUBJECT" value1="${threadSubject}" />
 
