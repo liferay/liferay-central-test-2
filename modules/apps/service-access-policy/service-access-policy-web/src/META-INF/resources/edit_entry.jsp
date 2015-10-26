@@ -135,19 +135,19 @@ if (sapEntry != null) {
 
 		var getActionMethodNamesURL = Liferay.PortletURL.createURL('<%= getActionMethodNamesURL %>');
 
-		var serviceClassNames = <%= JSONFactoryUtil.looseSerialize(request.getAttribute(SAPWebKeys.REMOTE_SERVICES_CLASS_NAMES)) %>;
+		var serviceClassNamesToContextNames = <%= request.getAttribute(SAPWebKeys.REMOTE_SERVICE_CLASS_NAMES_TO_CONTEXT_NAMES).toString() %>;
 
 		var serviceActionMethodNames = {};
 
 		var getServiceContext = function(serviceClassName) {
-			var serviceMap = A.Array.find(
-				serviceClassNames,
+			var serviceClassNameToContextName = A.Array.find(
+				serviceClassNamesToContextNames,
 				function(item, index) {
 					return item.serviceClassName === serviceClassName;
 				}
 			);
 
-			return serviceMap && serviceMap.contextName || 'portal';
+			return serviceClassNameToContextName && serviceClassNameToContextName.contextName || 'portal';
 		};
 
 		var getServiceActionMethodNames = function(contextName, serviceClassName, callback) {
@@ -208,7 +208,7 @@ if (sapEntry != null) {
 					},
 					resultFilters: 'phraseMatch',
 					resultTextLocator: 'serviceClassName',
-					source: serviceClassNames
+					source: serviceClassNamesToContextNames
 				}
 			).render();
 
