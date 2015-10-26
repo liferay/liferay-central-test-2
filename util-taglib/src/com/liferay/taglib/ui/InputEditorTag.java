@@ -393,6 +393,7 @@ public class InputEditorTag extends IncludeTag {
 
 		request.setAttribute(
 			"liferay-ui:input-editor:placeholder", _placeholder);
+
 		request.setAttribute(
 			"liferay-ui:input-editor:resizable", String.valueOf(_resizable));
 		request.setAttribute(
