@@ -5392,7 +5392,7 @@ public class MDRRuleGroupInstancePersistenceImpl extends BasePersistenceImpl<MDR
 	}
 
 	@Override
-	public Set<String> getBadColumnNames() {
+	protected Set<String> getBadColumnNames() {
 		return _badColumnNames;
 	}
 

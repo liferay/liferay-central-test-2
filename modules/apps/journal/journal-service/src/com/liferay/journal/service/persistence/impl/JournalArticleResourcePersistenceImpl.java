@@ -2383,7 +2383,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	}
 
 	@Override
-	public Set<String> getBadColumnNames() {
+	protected Set<String> getBadColumnNames() {
 		return _badColumnNames;
 	}
 

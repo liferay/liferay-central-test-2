@@ -9333,7 +9333,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	}
 
 	@Override
-	public Set<String> getBadColumnNames() {
+	protected Set<String> getBadColumnNames() {
 		return _badColumnNames;
 	}
 

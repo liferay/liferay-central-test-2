@@ -2948,7 +2948,7 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 	}
 
 	@Override
-	public Set<String> getBadColumnNames() {
+	protected Set<String> getBadColumnNames() {
 		return _badColumnNames;
 	}
 

@@ -908,10 +908,6 @@ public class RatingsEntryUtil {
 		return getPersistence().countAll();
 	}
 
-	public static java.util.Set<java.lang.String> getBadColumnNames() {
-		return getPersistence().getBadColumnNames();
-	}
-
 	public static RatingsEntryPersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (RatingsEntryPersistence)PortalBeanLocatorUtil.locate(RatingsEntryPersistence.class.getName());

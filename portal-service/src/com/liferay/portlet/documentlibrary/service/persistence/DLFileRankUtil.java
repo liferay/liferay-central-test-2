@@ -890,10 +890,6 @@ public class DLFileRankUtil {
 		return getPersistence().countAll();
 	}
 
-	public static java.util.Set<java.lang.String> getBadColumnNames() {
-		return getPersistence().getBadColumnNames();
-	}
-
 	public static DLFileRankPersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (DLFileRankPersistence)PortalBeanLocatorUtil.locate(DLFileRankPersistence.class.getName());

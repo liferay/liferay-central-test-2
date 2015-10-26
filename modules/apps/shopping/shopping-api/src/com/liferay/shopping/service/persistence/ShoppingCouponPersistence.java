@@ -300,7 +300,4 @@ public interface ShoppingCouponPersistence extends BasePersistence<ShoppingCoupo
 	* @return the number of shopping coupons
 	*/
 	public int countAll();
-
-	@Override
-	public java.util.Set<java.lang.String> getBadColumnNames();
 }

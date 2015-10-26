@@ -2983,7 +2983,7 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	}
 
 	@Override
-	public Set<String> getBadColumnNames() {
+	protected Set<String> getBadColumnNames() {
 		return _badColumnNames;
 	}
 

@@ -45,7 +45,7 @@ import java.util.Set;
  * @author Hugo Huijser
  */
 public class PortletPreferencesFinderImpl
-	extends PortletPreferencesFinderBaseImpl
+	extends BasePersistenceImpl<PortletPreferences>
 	implements PortletPreferencesFinder {
 
 	public static final String COUNT_BY_O_O_P =

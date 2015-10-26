@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.security.permission.InlineSQLHelperUtil;
+import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.util.Iterator;
@@ -44,7 +45,7 @@ import java.util.List;
  * @author Marcellus Tavares
  */
 public class DDMStructureFinderImpl
-	extends DDMStructureFinderBaseImpl implements DDMStructureFinder {
+	extends BasePersistenceImpl<DDMStructure> implements DDMStructureFinder {
 
 	public static final String COUNT_BY_C_G_C_N_D_S_T_S =
 		DDMStructureFinder.class.getName() + ".countByC_G_C_N_D_S_T_S";

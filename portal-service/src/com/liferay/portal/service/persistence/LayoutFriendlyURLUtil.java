@@ -1476,10 +1476,6 @@ public class LayoutFriendlyURLUtil {
 		return getPersistence().countAll();
 	}
 
-	public static java.util.Set<java.lang.String> getBadColumnNames() {
-		return getPersistence().getBadColumnNames();
-	}
-
 	public static LayoutFriendlyURLPersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (LayoutFriendlyURLPersistence)PortalBeanLocatorUtil.locate(LayoutFriendlyURLPersistence.class.getName());

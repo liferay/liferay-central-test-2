@@ -699,7 +699,4 @@ public interface RatingsEntryPersistence extends BasePersistence<RatingsEntry> {
 	* @return the number of ratings entries
 	*/
 	public int countAll();
-
-	@Override
-	public java.util.Set<java.lang.String> getBadColumnNames();
 }

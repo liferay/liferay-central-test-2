@@ -302,7 +302,4 @@ public interface PortletPersistence extends BasePersistence<Portlet> {
 	* @return the number of portlets
 	*/
 	public int countAll();
-
-	@Override
-	public java.util.Set<java.lang.String> getBadColumnNames();
 }

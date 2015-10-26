@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.social.model.SocialActivity;
 import com.liferay.portlet.social.model.impl.SocialActivityImpl;
 import com.liferay.portlet.social.service.persistence.SocialActivityFinder;
@@ -34,7 +35,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class SocialActivityFinderImpl
-	extends SocialActivityFinderBaseImpl
+	extends BasePersistenceImpl<SocialActivity>
 	implements SocialActivityFinder {
 
 	public static final String COUNT_BY_GROUP_ID =

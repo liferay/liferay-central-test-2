@@ -412,7 +412,4 @@ public interface DDMStorageLinkPersistence extends BasePersistence<DDMStorageLin
 	* @return the number of d d m storage links
 	*/
 	public int countAll();
-
-	@Override
-	public java.util.Set<java.lang.String> getBadColumnNames();
 }

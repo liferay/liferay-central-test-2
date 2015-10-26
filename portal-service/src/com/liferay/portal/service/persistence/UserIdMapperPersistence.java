@@ -356,7 +356,4 @@ public interface UserIdMapperPersistence extends BasePersistence<UserIdMapper> {
 	* @return the number of user ID mappers
 	*/
 	public int countAll();
-
-	@Override
-	public java.util.Set<java.lang.String> getBadColumnNames();
 }

@@ -179,11 +179,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>CLOSE_MODAL</td>
-	<td>//button[contains(.,'×')]</td>
-	<td></td>
-</tr>
-<tr>
 	<td>CLOSE_PANEL</td>
 	<td>//button[contains(@id,'closePanelAdd')]</td>
 	<td></td>

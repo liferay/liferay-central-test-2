@@ -228,12 +228,6 @@
 			<var name="portletName" value="Blogs" />
 		</execute>
 
-		<execute macro="Blogs#addWithWorkflow">
-			<var name="entryContent" value="Blogs Entry Content - Liferay" />
-			<var name="entrySubtitle" value="Subtitle" />
-			<var name="entryTitle" value="Blogs Entry Title - Liferay" />
-		</execute>
-
 		<execute macro="Page#gotoMyAccount">
 			<var name="portletName" value="My Workflow Tasks" />
 		</execute>
@@ -495,7 +489,7 @@
 		</execute>
 	</command>
 
-	<command name="DeactivateAndDeleteUploadedDefinition" priority="5">
+	<command name="DeactivateAndDeleteUploadedDefinition" priority="4">
 		<execute macro="Page#gotoCP">
 			<var name="portletName" value="Workflow Definition" />
 		</execute>

@@ -914,10 +914,6 @@ public class SocialActivityCounterUtil {
 		return getPersistence().countAll();
 	}
 
-	public static java.util.Set<java.lang.String> getBadColumnNames() {
-		return getPersistence().getBadColumnNames();
-	}
-
 	public static SocialActivityCounterPersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (SocialActivityCounterPersistence)PortalBeanLocatorUtil.locate(SocialActivityCounterPersistence.class.getName());

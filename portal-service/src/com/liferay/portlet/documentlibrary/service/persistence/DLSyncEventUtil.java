@@ -432,10 +432,6 @@ public class DLSyncEventUtil {
 		return getPersistence().countAll();
 	}
 
-	public static java.util.Set<java.lang.String> getBadColumnNames() {
-		return getPersistence().getBadColumnNames();
-	}
-
 	public static DLSyncEventPersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (DLSyncEventPersistence)PortalBeanLocatorUtil.locate(DLSyncEventPersistence.class.getName());

@@ -256,7 +256,4 @@ public interface ShoppingItemFieldPersistence extends BasePersistence<ShoppingIt
 	* @return the number of shopping item fields
 	*/
 	public int countAll();
-
-	@Override
-	public java.util.Set<java.lang.String> getBadColumnNames();
 }

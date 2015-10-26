@@ -175,9 +175,17 @@
 			<var name="portletName" value="Blogs" />
 		</execute>
 
-		<execute macro="Blogs#addEntryWithCategory">
-			<var name="categoryName" value="Category Name" />
+		<execute macro="Blogs#addEntry">
 			<var name="entryContent" value="Blogs Entry Content" />
+			<var name="entryTitle" value="Blogs Entry Title" />
+		</execute>
+
+		<execute macro="Page#gotoContentCP">
+			<var name="portletName" value="Blogs" />
+		</execute>
+
+		<execute macro="BlogsEntry#addCategoryCP">
+			<var name="categoryName" value="Category Name" />
 			<var name="entryTitle" value="Blogs Entry Title" />
 			<var name="vocabularyName" value="Vocabulary Name" />
 		</execute>
@@ -251,9 +259,17 @@
 			<var name="portletName" value="Blogs" />
 		</execute>
 
-		<execute macro="Blogs#addEntryWithCategory">
-			<var name="categoryName" value="Category Name" />
+		<execute macro="Blogs#addEntry">
 			<var name="entryContent" value="Blogs Entry Content" />
+			<var name="entryTitle" value="Blogs Entry Title" />
+		</execute>
+
+		<execute macro="Page#gotoContentCP">
+			<var name="portletName" value="Blogs" />
+		</execute>
+
+		<execute macro="BlogsEntry#addCategoryCP">
+			<var name="categoryName" value="Category Name" />
 			<var name="entryTitle" value="Blogs Entry Title" />
 			<var name="vocabularyName" value="Vocabulary Name" />
 		</execute>
@@ -483,8 +499,16 @@
 			<var name="portletName" value="Blogs" />
 		</execute>
 
-		<execute macro="Blogs#addEntryWithTag">
+		<execute macro="Blogs#addEntry">
 			<var name="entryContent" value="Blogs Entry Content" />
+			<var name="entryTitle" value="Blogs Entry Title" />
+		</execute>
+
+		<execute macro="Page#gotoContentCP">
+			<var name="portletName" value="Blogs" />
+		</execute>
+
+		<execute macro="BlogsEntry#addTagCP">
 			<var name="entryTitle" value="Blogs Entry Title" />
 			<var name="tagName" value="tag name" />
 		</execute>
@@ -545,8 +569,16 @@
 			<var name="portletName" value="Blogs" />
 		</execute>
 
-		<execute macro="Blogs#addEntryWithTag">
+		<execute macro="Blogs#addEntry">
 			<var name="entryContent" value="Blogs Entry Content" />
+			<var name="entryTitle" value="Blogs Entry Title" />
+		</execute>
+
+		<execute macro="Page#gotoContentCP">
+			<var name="portletName" value="Blogs" />
+		</execute>
+
+		<execute macro="BlogsEntry#addTagCP">
 			<var name="entryTitle" value="Blogs Entry Title" />
 			<var name="tagName" value="tag name" />
 		</execute>
@@ -624,6 +656,11 @@
 
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="Search Page" />
+		</execute>
+
+		<execute macro="Search#viewSearchResultPG">
+			<var name="searchAssetTitle" value="DM Document Title" />
+			<var name="searchAssetType" value="Document" />
 		</execute>
 
 		<execute macro="Search#searchPG">
@@ -861,7 +898,7 @@
 		</execute>
 
 		<execute macro="Page#gotoPG">
-			<var name="pageName" value="Search Page" />
+			<var name="pageName" value="Search Pagef" />
 		</execute>
 
 		<execute macro="Search#searchPG">

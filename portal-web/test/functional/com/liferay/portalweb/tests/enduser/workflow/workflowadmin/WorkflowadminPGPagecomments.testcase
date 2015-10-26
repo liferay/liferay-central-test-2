@@ -1,6 +1,7 @@
 <definition component-name="portal-workflow">
 	<property name="testray.main.component.name" value="Workflow" />
 
+	<var name="pageName" value="Page Comments Page" />
 	<var name="portletName" value="Page Comments" />
 	<var name="workflowAssetType" value="Comments" />
 
@@ -17,11 +18,11 @@
 		</execute>
 
 		<execute macro="Page#addPG">
-			<var name="pageName" value="Page Comments Page" />
+			<var name="pageName" value="${pageName}" />
 		</execute>
 
 		<execute macro="Page#gotoPG">
-			<var name="pageName" value="Page Comments Page" />
+			<var name="pageName" value="${pageName}" />
 		</execute>
 
 		<execute macro="Portlet#addPG">
@@ -30,9 +31,7 @@
 	</set-up>
 
 	<tear-down>
-		<execute macro="PageComment#tearDownPG">
-			<var name="pageName" value="Page Comments Page" />
-		</execute>
+		<execute macro="PageComment#tearDownPG" />
 
 		<execute macro="Page#tearDownPG" />
 
@@ -46,7 +45,7 @@
 		<var name="commentBody" value="Page Comment Comment" />
 
 		<execute macro="Page#gotoPG">
-			<var name="pageName" value="Page Comments Page" />
+			<var name="pageName" value="${pageName}" />
 		</execute>
 
 		<execute macro="PageComment#addWithWorkflowPG">
@@ -55,7 +54,7 @@
 		</execute>
 
 		<execute macro="Page#gotoPG">
-			<var name="pageName" value="Page Comments Page" />
+			<var name="pageName" value="${pageName}" />
 		</execute>
 
 		<execute macro="PageComment#viewWithWorkflowPG">
@@ -75,7 +74,7 @@
 		</execute>
 
 		<execute macro="Page#gotoPG">
-			<var name="pageName" value="Page Comments Page" />
+			<var name="pageName" value="${pageName}" />
 		</execute>
 
 		<execute macro="PageComment#viewWithWorkflowPG">
@@ -95,7 +94,7 @@
 		</execute>
 
 		<execute macro="Page#gotoPG">
-			<var name="pageName" value="Page Comments Page" />
+			<var name="pageName" value="${pageName}" />
 		</execute>
 
 		<execute macro="PageComment#viewPG">
@@ -108,7 +107,7 @@
 		<description message="This is a use case for LPS-54707." />
 
 		<execute macro="Page#gotoPG">
-			<var name="pageName" value="Page Comments Page" />
+			<var name="pageName" value="${pageName}" />
 		</execute>
 
 		<execute macro="PageComment#addWithWorkflowPG">
@@ -117,7 +116,7 @@
 		</execute>
 
 		<execute macro="Page#gotoPG">
-			<var name="pageName" value="Page Comments Page" />
+			<var name="pageName" value="${pageName}" />
 		</execute>
 
 		<execute macro="PageComment#viewWithWorkflowPG">
@@ -138,7 +137,7 @@
 		</execute>
 
 		<execute macro="PageComment#tearDownPG">
-			<var name="pageName" value="Page Comments Page" />
+			<var name="pageName" value="${pageName}" />
 		</execute>
 
 		<execute macro="Page#gotoMyAccount">
@@ -153,7 +152,7 @@
 		<var name="commentBody" value="Page Comment Comment" />
 
 		<execute macro="Page#gotoPG">
-			<var name="pageName" value="Page Comments Page" />
+			<var name="pageName" value="${pageName}" />
 		</execute>
 
 		<execute macro="PageComment#addWithWorkflowPG">
@@ -162,7 +161,7 @@
 		</execute>
 
 		<execute macro="Page#gotoPG">
-			<var name="pageName" value="Page Comments Page" />
+			<var name="pageName" value="${pageName}" />
 		</execute>
 
 		<execute macro="PageComment#viewWithWorkflowPG">
@@ -201,7 +200,7 @@
 		</execute>
 
 		<execute macro="Page#gotoPG">
-			<var name="pageName" value="Page Comments Page" />
+			<var name="pageName" value="${pageName}" />
 		</execute>
 
 		<execute macro="PageComment#viewWithWorkflowPG">

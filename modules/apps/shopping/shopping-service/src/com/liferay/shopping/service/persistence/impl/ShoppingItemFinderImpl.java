@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.security.permission.InlineSQLHelperUtil;
+import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.shopping.model.ShoppingItem;
 import com.liferay.shopping.model.impl.ShoppingItemImpl;
 import com.liferay.shopping.service.persistence.ShoppingItemFinder;
@@ -37,7 +38,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class ShoppingItemFinderImpl
-	extends ShoppingItemFinderBaseImpl implements ShoppingItemFinder {
+	extends BasePersistenceImpl<ShoppingItem> implements ShoppingItemFinder {
 
 	public static final String COUNT_BY_G_C =
 		ShoppingItemFinder.class.getName() + ".countByG_C";

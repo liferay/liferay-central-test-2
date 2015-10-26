@@ -3547,10 +3547,6 @@ public class MBThreadUtil {
 		return getPersistence().countAll();
 	}
 
-	public static java.util.Set<java.lang.String> getBadColumnNames() {
-		return getPersistence().getBadColumnNames();
-	}
-
 	public static MBThreadPersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (MBThreadPersistence)PortalBeanLocatorUtil.locate(MBThreadPersistence.class.getName());

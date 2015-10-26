@@ -1133,10 +1133,6 @@ public class LayoutSetPrototypeUtil {
 		return getPersistence().countAll();
 	}
 
-	public static java.util.Set<java.lang.String> getBadColumnNames() {
-		return getPersistence().getBadColumnNames();
-	}
-
 	public static LayoutSetPrototypePersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (LayoutSetPrototypePersistence)PortalBeanLocatorUtil.locate(LayoutSetPrototypePersistence.class.getName());

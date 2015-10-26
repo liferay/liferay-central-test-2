@@ -8,6 +8,9 @@
 	<command name="configureExportSiteCP">
 		<execute macro="LAR#gotoExportSiteCmd" />
 
+		<execute function="SelectFrameTop" value1="relative=top" />
+		<execute function="SelectFrame" locator1="BasePortletExport#EXPORT_IMPORT_IFRAME" />
+
 		<execute macro="LAR#configureExportSiteOptionsCmd" />
 	</command>
 
@@ -344,7 +347,7 @@
 	</command>
 
 	<command name="gotoExportSiteCmd">
-		<execute macro="Page#gotoPublishingTools">
+		<execute macro="Page#gotoConfigurationCP">
 			<var name="portletCategoryName" value="Publishing Tools" />
 			<var name="portletName" value="Export/Import" />
 			<var name="siteScopeName" value="${siteScopeName}" />
@@ -360,12 +363,14 @@
 	</command>
 
 	<command name="gotoImportSiteCmd">
-		<execute macro="Page#gotoPublishingTools">
+		<execute macro="Page#gotoConfigurationCP">
 			<var name="portletCategoryName" value="Publishing Tools" />
 			<var name="portletName" value="Export/Import" />
 		</execute>
 
 		<execute function="AssertClick" locator1="SitePages#TOOLBAR_IMPORT" value1="Import" />
+
+		<execute function="SelectFrame" locator1="BasePortletExport#EXPORT_IMPORT_IFRAME" />
 	</command>
 
 	<command name="importDDL">
@@ -383,6 +388,9 @@
 
 	<command name="importPortlet">
 		<execute macro="LAR#gotoExportImportCmd" />
+
+		<execute function="SelectFrameTop" value1="relative=top" />
+		<execute function="SelectFrame" locator1="BasePortletExport#EXPORT_IMPORT_IFRAME" />
 
 		<execute macro="LAR#selectImportFileCmd">
 			<var name="cannotImport" value="${cannotImport}" />
@@ -480,8 +488,6 @@
 	</command>
 
 	<command name="selectImportFileCmd">
-		<execute function="SelectFrame" locator1="ExportImport#EXPORT_IMPORT_IFRAME" />
-
 		<execute function="AssertClick" locator1="ExportImport#NAVIGATION_IMPORT" value1="Import" />
 		<execute function="AssertClick" locator1="Button#SELECT_FILE" value1="Select File" />
 

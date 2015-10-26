@@ -48,7 +48,7 @@ public interface ${entity.name}Persistence extends BasePersistence<${entity.name
 				@Deprecated
 			</#if>
 
-			<#if (method.name == "fetchByPrimaryKeys") || (method.name == "getBadColumnNames")>
+			<#if method.name == "fetchByPrimaryKeys">
 				@Override
 			</#if>
 

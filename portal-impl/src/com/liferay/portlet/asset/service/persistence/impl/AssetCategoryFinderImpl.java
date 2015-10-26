@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.asset.NoSuchCategoryException;
 import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.model.AssetCategoryConstants;
@@ -42,7 +43,7 @@ import java.util.List;
  * @author Shuyang Zhou
  */
 public class AssetCategoryFinderImpl
-	extends AssetCategoryFinderBaseImpl implements AssetCategoryFinder {
+	extends BasePersistenceImpl<AssetCategory> implements AssetCategoryFinder {
 
 	public static final String COUNT_BY_G_C_N =
 		AssetCategoryFinder.class.getName() + ".countByG_C_N";

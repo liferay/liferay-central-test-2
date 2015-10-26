@@ -355,7 +355,4 @@ public interface WikiPageResourcePersistence extends BasePersistence<WikiPageRes
 	* @return the number of wiki page resources
 	*/
 	public int countAll();
-
-	@Override
-	public java.util.Set<java.lang.String> getBadColumnNames();
 }

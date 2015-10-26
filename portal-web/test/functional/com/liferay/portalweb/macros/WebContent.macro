@@ -601,7 +601,7 @@
 
 	<command name="addWithTagCP">
 		<execute function="Type" locator1="TextInput#TITLE" value1="${webContentTitle}" />
-		<execute function="Type#typeCKEditor" locator1="CKEditor#BODY_FIELD" value1="${webContentContent}" />
+		<execute function="Type#typeCKEditor" locator1="CKEditor#IFRAME" value1="${webContentContent}" />
 		<execute function="AssertClick" locator1="WCEditWebContent#MENU_CATEGORIZATION" value1="Categorization" />
 
 		<for list="${tagNameList}" param="tagName">
@@ -612,31 +612,6 @@
 		<execute function="Click" locator1="AssetCategorization#TAGS_ADD_BUTTON" />
 
 		<execute macro="WebContent#publish" />
-	</command>
-
-	<command name="addWithThreeTranslations">
-		<execute macro="WebContent#addCP">
-			<var name="webContentContent" value="WC Content" />
-			<var name="webContentTitle" value="WC Title" />
-		</execute>
-
-		<execute macro="WebContent#addTranslation">
-			<var name="localizedContent" value="WC Contenido" />
-			<var name="localizedLanguage" value="Spanish (Spain)" />
-			<var name="localizedTitle" value="WC Titulo" />
-		</execute>
-
-		<execute macro="WebContent#addTranslation">
-			<var name="localizedContent" value="WC Inhalt" />
-			<var name="localizedLanguage" value="German (Germany)" />
-			<var name="localizedTitle" value="WC Titel" />
-		</execute>
-
-		<execute macro="WebContent#addTranslation">
-			<var name="localizedContent" value="WC Pitoisuus" />
-			<var name="localizedLanguage" value="Finnish (Finland)" />
-			<var name="localizedTitle" value="WC Otsikko" />
-		</execute>
 	</command>
 
 	<command name="addWithWorkflowCP">
@@ -941,8 +916,6 @@
 	</command>
 
 	<command name="moveToRecycleBinCP">
-		<var name="key_assetType" value="${assetType}" />
-
 		<execute macro="WebContent#viewTitle">
 			<var name="webContentTitle" value="${webContentTitle}" />
 			<var name="webContentTitleEscapeCharacter" value="${webContentTitleEscapeCharacter}" />
@@ -962,7 +935,7 @@
 
 		<execute function="Click" locator1="WC#ENTRY_DESCRIPTIVE_MENULIST_ICON" />
 		<execute function="AssertClick#assertPartialTextClickAt" locator1="MenuItem#MOVE_TO_THE_RECYCLE_BIN" value1="Move to the Recycle Bin" />
-		<execute function="AssertTextEquals#assertPartialText" locator1="Message#RECYCLE_BIN_SUCCESS" value1="The ${assetType} ${webContentTitle} was moved to the Recycle Bin. Undo" />
+		<execute function="AssertTextEquals#assertPartialText" locator1="Message#SUCCESS_RECYCLE_BIN" value1="The Web Content Article ${webContentTitle} was moved to the Recycle Bin. Undo" />
 	</command>
 
 	<command name="moveToRecycleBinViaDeleteIconCP">
@@ -1071,7 +1044,7 @@
 			<then>
 				<execute function="Check" locator1="Checkbox#SELECT_ALL" />
 				<execute function="Click" locator1="Icon#DELETE" />
-				<execute function="AssertTextEquals#assertPartialText" locator1="Message#RECYCLE_BIN_SUCCESS" value1="moved to the Recycle Bin. Undo" />
+				<execute function="AssertTextEquals#assertPartialText" locator1="Message#SUCCESS_RECYCLE_BIN" value1="moved to the Recycle Bin. Undo" />
 			</then>
 		</while>
 

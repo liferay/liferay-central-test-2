@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
+import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.model.impl.BlogsEntryImpl;
 import com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder;
@@ -42,7 +43,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class BlogsEntryFinderImpl
-	extends BlogsEntryFinderBaseImpl implements BlogsEntryFinder {
+	extends BasePersistenceImpl<BlogsEntry> implements BlogsEntryFinder {
 
 	public static final String COUNT_BY_ORGANIZATION_IDS =
 		BlogsEntryFinder.class.getName() + ".countByOrganizationIds";

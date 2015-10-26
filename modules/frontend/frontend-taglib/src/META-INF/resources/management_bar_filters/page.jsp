@@ -1,3 +1,4 @@
+<%--
 /**
  * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
@@ -11,28 +12,12 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
+--%>
 
-package com.liferay.portal.kernel.dao.search;
+<%@ include file="/management_bar_filters/init.jsp" %>
 
-import com.liferay.portal.kernel.util.StringPool;
-
-import javax.portlet.PortletResponse;
-
-/**
- * @author Eudaldo Alonso
- */
-public class EmptyOnClickRowChecker extends RowChecker {
-
-	public EmptyOnClickRowChecker(PortletResponse portletResponse) {
-		super(portletResponse);
-	}
-
-	@Override
-	protected String getOnClick(
-		String checkBoxRowIds, String checkBoxAllRowIds,
-		String checkBoxPostOnClick) {
-
-		return StringPool.BLANK;
-	}
-
-}
+<div class="collapse management-bar-collapse">
+	<ul class="management-bar-nav nav">
+		<%= bodyContentString %>
+	</ul>
+</div>

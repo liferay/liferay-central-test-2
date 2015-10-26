@@ -18,6 +18,7 @@
 							path: 'navigation.js',
 							requires: [
 								'liferay-app-view-move',
+								'liferay-app-view-select',
 								'liferay-portlet-base'
 							]
 						},

@@ -841,7 +841,4 @@ public interface SCProductEntryPersistence extends BasePersistence<SCProductEntr
 	*/
 	public void setSCLicenses(long pk,
 		java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> scLicenses);
-
-	@Override
-	public java.util.Set<java.lang.String> getBadColumnNames();
 }

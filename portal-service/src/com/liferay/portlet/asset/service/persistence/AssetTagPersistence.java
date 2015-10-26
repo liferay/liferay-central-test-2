@@ -1219,7 +1219,4 @@ public interface AssetTagPersistence extends BasePersistence<AssetTag> {
 	*/
 	public void setAssetEntries(long pk,
 		java.util.List<com.liferay.portlet.asset.model.AssetEntry> assetEntries);
-
-	@Override
-	public java.util.Set<java.lang.String> getBadColumnNames();
 }

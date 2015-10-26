@@ -318,7 +318,4 @@ public interface TicketPersistence extends BasePersistence<Ticket> {
 	* @return the number of tickets
 	*/
 	public int countAll();
-
-	@Override
-	public java.util.Set<java.lang.String> getBadColumnNames();
 }

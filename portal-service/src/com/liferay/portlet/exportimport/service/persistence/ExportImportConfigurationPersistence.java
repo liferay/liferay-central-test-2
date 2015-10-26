@@ -760,7 +760,4 @@ public interface ExportImportConfigurationPersistence extends BasePersistence<Ex
 	* @return the number of export import configurations
 	*/
 	public int countAll();
-
-	@Override
-	public java.util.Set<java.lang.String> getBadColumnNames();
 }

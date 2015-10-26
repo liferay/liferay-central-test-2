@@ -541,7 +541,4 @@ public interface MDRRulePersistence extends BasePersistence<MDRRule> {
 	* @return the number of m d r rules
 	*/
 	public int countAll();
-
-	@Override
-	public java.util.Set<java.lang.String> getBadColumnNames();
 }

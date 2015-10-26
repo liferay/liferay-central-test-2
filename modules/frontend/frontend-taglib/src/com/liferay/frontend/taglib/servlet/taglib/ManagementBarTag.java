@@ -29,29 +29,22 @@ import javax.servlet.jsp.tagext.BodyTag;
 public class ManagementBarTag extends IncludeTag implements BodyTag {
 
 	@Override
-	public int doEndTag() throws JspException {
-		return super.doEndTag();
+	public int doStartTag() throws JspException {
+		setAttributeNamespace(_ATTRIBUTE_NAMESPACE);
+
+		return super.doStartTag();
 	}
 
-	@Override
-	public int doStartTag() {
-		return EVAL_BODY_INCLUDE;
+	public void setCheckBoxCssClass(String checkBoxCssClass) {
+		_checkBoxCssClass = checkBoxCssClass;
 	}
 
-	public void setActionButtons(String actionButtons) {
-		_actionButtons = actionButtons;
+	public void setCssClass(String cssClass) {
+		_cssClass = cssClass;
 	}
 
-	public void setButtons(String buttons) {
-		_buttons = buttons;
-	}
-
-	public void setCheckBoxContainerId(String checkBoxContainerId) {
-		_checkBoxContainerId = checkBoxContainerId;
-	}
-
-	public void setFilters(String filters) {
-		_filters = filters;
+	public void setId(String id) {
+		_id = id;
 	}
 
 	public void setIncludeCheckBox(boolean includeCheckBox) {
@@ -67,10 +60,9 @@ public class ManagementBarTag extends IncludeTag implements BodyTag {
 
 	@Override
 	protected void cleanUp() {
-		_actionButtons = null;
-		_buttons = null;
-		_checkBoxContainerId = StringPool.BLANK;
-		_filters = null;
+		_checkBoxCssClass = StringPool.BLANK;
+		_cssClass = StringPool.BLANK;
+		_id = StringPool.BLANK;
 		_includeCheckBox = false;
 	}
 
@@ -92,27 +84,26 @@ public class ManagementBarTag extends IncludeTag implements BodyTag {
 	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute(
-			"liferay-frontend:management-bar:actionButtons", _actionButtons);
+			"liferay-frontend:management-bar:checkBoxCssClass",
+			_checkBoxCssClass);
 		request.setAttribute(
-			"liferay-frontend:management-bar:buttons", _buttons);
-		request.setAttribute(
-			"liferay-frontend:management-bar:checkBoxContainerId",
-			_checkBoxContainerId);
-		request.setAttribute(
-			"liferay-frontend:management-bar:filters", _filters);
+			"liferay-frontend:management-bar:cssClass", _cssClass);
+		request.setAttribute("liferay-frontend:management-bar:id", _id);
 		request.setAttribute(
 			"liferay-frontend:management-bar:includeCheckBox",
 			_includeCheckBox);
 	}
 
+	private static final String _ATTRIBUTE_NAMESPACE =
+		"liferay-frontend:management-bar:";
+
 	private static final boolean _CLEAN_UP_SET_ATTRIBUTES = true;
 
 	private static final String _PAGE = "/management_bar/page.jsp";
 
-	private String _actionButtons;
-	private String _buttons;
-	private String _checkBoxContainerId = StringPool.BLANK;
-	private String _filters;
+	private String _checkBoxCssClass = StringPool.BLANK;
+	private String _cssClass = StringPool.BLANK;
+	private String _id = StringPool.BLANK;
 	private boolean _includeCheckBox;
 
 }

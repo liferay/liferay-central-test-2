@@ -1213,10 +1213,6 @@ public class SocialActivitySetUtil {
 		return getPersistence().countAll();
 	}
 
-	public static java.util.Set<java.lang.String> getBadColumnNames() {
-		return getPersistence().getBadColumnNames();
-	}
-
 	public static SocialActivitySetPersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (SocialActivitySetPersistence)PortalBeanLocatorUtil.locate(SocialActivitySetPersistence.class.getName());

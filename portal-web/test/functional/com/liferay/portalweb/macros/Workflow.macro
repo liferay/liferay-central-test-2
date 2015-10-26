@@ -49,13 +49,8 @@
 		<if>
 			<isset var="workflowActivityComment" />
 			<then>
-				<var name="key_workflowAssetTitle" value="${workflowAssetTitle}" />
-
 				<execute function="AssertClick" locator1="MyWorkflowTasks#COMPLETED_TABLE_ASSET_TITLE" value1="${workflowAssetTitle}" />
 				<execute function="AssertClick" locator1="MyWorkflowTasks#PREVIEW_ACTIVITY" value1="Activities" />
-
-				<var name="key_workflowActivityComment" value="${workflowActivityComment}" />
-
 				<execute function="AssertTextEquals" locator1="MyWorkflowTasks#PREVIEW_ACTIVITY_ENTRY" value1="${workflowActivityComment}" />
 			</then>
 		</if>
@@ -76,13 +71,11 @@
 			<var name="workflowTask" value="${workflowTask}" />
 		</execute>
 
-		<execute function="Click" locator1="Icon#BODY_VERTICAL_ELLIPSIS" />
-
 		<execute function="AssertClick" locator1="MyWorkflowTasksTask#MENU_APPROVE" value1="Approve" />
 
 		<execute macro="Workflow#confirmAndViewSucessMessageViaDetails" />
 
-		<execute function="Click" locator1="Icon#ANGLE_LEFT_BACK" />
+		<execute function="AssertClick#assertPartialTextClickAtAndWait" locator1="MyWorkflowTasksTask#BACK" value1="Back" />
 
 		<execute macro="Workflow#viewCompletedTask">
 			<var name="ddlDataDefinitionName" value="${ddlDataDefinitionName}" />
@@ -98,12 +91,8 @@
 
 		<execute function="SelectFrame" locator1="MyWorkflowTasksTask#MANAGE_MY_ACCOUNT_IFRAME" />
 		<execute function="AssertTextEquals#assertValue" locator1="MyWorkflowTasksTask#ASSIGNED_TO" value1="${userName}" />
-		<execute function="Click" locator1="Icon#BODY_VERTICAL_ELLIPSIS" />
-
 		<execute function="AssertClick" locator1="MyWorkflowTasksTask#MENU_APPROVE" value1="Approve" />
-
 		<execute function="AssertClick" locator1="Button#OK" value1="OK" />
-
 		<execute function="AssertTextEquals#assertText" locator1="Message#SUCCESS" value1="Your request completed successfully." />
 	</command>
 
@@ -141,13 +130,8 @@
 		<if>
 			<isset var="workflowActivityComment" />
 			<then>
-				<var name="key_workflowAssetTitle" value="${workflowAssetTitle}" />
-
 				<execute function="AssertClick" locator1="MyWorkflowTasks#ASSIGNED_TO_ME_TABLE_ASSET_TITLE" value1="${workflowAssetTitle}" />
 				<execute function="AssertClick" locator1="MyWorkflowTasks#PREVIEW_ACTIVITY" value1="Activities" />
-
-				<var name="key_workflowActivityComment" value="${workflowActivityComment}" />
-
 				<execute function="AssertTextEquals" locator1="MyWorkflowTasks#PREVIEW_ACTIVITY_ENTRY" value1="${workflowActivityComment}" />
 			</then>
 		</if>
@@ -173,20 +157,16 @@
 		<if>
 			<equals arg1="${assignToMeKey}" arg2="ASSIGN_TO_ME" />
 			<then>
-				<execute function="Click" locator1="Icon#BODY_VERTICAL_ELLIPSIS" />
-
 				<execute function="AssertClick" locator1="MyWorkflowTasksTask#ASSIGN_TO_ME" value1="Assign to Me" />
 			</then>
 			<else>
-				<execute function="Click" locator1="Icon#BODY_VERTICAL_ELLIPSIS" />
-
 				<execute function="AssertClick" locator1="MyWorkflowTasksTask#MENU_ASSIGN_TO_ME" value1="Assign to Me" />
 			</else>
 		</if>
 
 		<execute macro="Workflow#confirmAndViewSucessMessageViaDetails" />
 
-		<execute function="Click" locator1="Icon#ANGLE_LEFT_BACK" />
+		<execute function="AssertClick#assertPartialTextClickAtAndWait" locator1="MyWorkflowTasksTask#BACK" value1="Back" />
 
 		<execute macro="Workflow#viewTaskAssignedToMe">
 			<var name="ddlDataDefinitionName" value="${ddlDataDefinitionName}" />
@@ -202,12 +182,8 @@
 
 		<execute function="SelectFrame" locator1="MyWorkflowTasksTask#MANAGE_MY_ACCOUNT_IFRAME" />
 		<execute function="AssertTextEquals#assertValue" locator1="MyWorkflowTasksTask#ASSIGNED_TO" value1="Nobody" />
-		<execute function="Click" locator1="Icon#BODY_VERTICAL_ELLIPSIS" />
-
 		<execute function="AssertClick" locator1="MyWorkflowTasksTask#MENU_ASSIGN_TO_ME" value1="Assign to Me" />
-
 		<execute function="AssertClick" locator1="Button#OK" value1="OK" />
-
 		<execute function="AssertTextEquals#assertText" locator1="Message#SUCCESS" value1="Your request completed successfully." />
 	</command>
 
@@ -255,7 +231,7 @@
 	</command>
 
 	<command name="deactivateAddedWorkflowDefinition">
-		<execute function="Click" locator1="WorkflowDefinition#DEFINITION_TABLE_ADDED_DEFINITION_ELLIPSIS" />
+		<execute function="Click" locator1="WorkflowDefinition#DEFINITION_TABLE_ADDED_DEFINITION_ACTIONS" />
 
 		<execute macro="Workflow#deactivateWorkflowDefinitionCmd" />
 	</command>
@@ -263,13 +239,13 @@
 	<command name="deactivateSpecificWorkflowDefinition">
 		<var name="key_workflowDefinitionTitle" value="${workflowDefinitionTitle}" />
 
-		<execute function="Click" locator1="WorkflowDefinition#DEFINITION_TABLE_SPECIFIC_DEFINITION_ELLIPSIS" />
+		<execute function="AssertClick" locator1="WorkflowDefinition#DEFINITION_TABLE_SPECIFIC_DEFINITION_ACTIONS" value1="Actions" />
 
 		<execute macro="Workflow#deactivateWorkflowDefinitionCmd" />
 	</command>
 
 	<command name="deactivateWorkflowDefinition">
-		<execute function="Click" locator1="WorkflowDefinition#DEFINITION_TABLE_ADDED_DEFINITION_ELLIPSIS" />
+		<execute function="AssertClick" locator1="WorkflowDefinition#DEFINITION_TABLE_ADDED_DEFINITION_ACTIONS" value1="Actions" />
 
 		<execute macro="Workflow#deactivateWorkflowDefinitionCmd" />
 	</command>
@@ -283,13 +259,13 @@
 	<command name="deleteSpecificWorkflowDefinition">
 		<var name="key_workflowDefinitionTitle" value="${workflowDefinitionTitle}" />
 
-		<execute function="Click" locator1="WorkflowDefinition#DEFINITION_TABLE_SPECIFIC_DEFINITION_ELLIPSIS" />
+		<execute function="AssertClick" locator1="WorkflowDefinition#DEFINITION_TABLE_SPECIFIC_DEFINITION_ACTIONS" value1="Actions" />
 
 		<execute macro="Workflow#deleteWorkflowDefinitionCmd" />
 	</command>
 
 	<command name="deleteWorkflowDefinition">
-		<execute function="Click" locator1="WorkflowDefinition#DEFINITION_TABLE_DEACTIVATED_DEFINITION_ELLIPSIS" />
+		<execute function="Click" locator1="WorkflowDefinition#DEFINITION_TABLE_DEACTIVATED_DEFINITION_ACTIONS" />
 
 		<execute macro="Workflow#deleteWorkflowDefinitionCmd" />
 	</command>
@@ -318,7 +294,7 @@
 		<var name="key_workflowDefinitionName" value="${workflowDefinitionName}" />
 
 		<execute function="AssertTextEquals" locator1="WorkflowDefinition#DEFINITION_TABLE_ACTIVE" value1="No" />
-		<execute function="Click" locator1="WorkflowDefinition#DEFINITION_TABLE_DEACTIVATED_DEFINITION_ELLIPSIS" />
+		<execute function="Click" locator1="WorkflowDefinition#DEFINITION_TABLE_DEACTIVATED_DEFINITION_ACTIONS" />
 		<execute function="AssertClick" locator1="WorkflowDefinition#DEFINITION_MENULIST_ACTIVATE" value1="Activate" />
 		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request completed successfully." />
 		<execute function="AssertTextEquals" locator1="WorkflowDefinition#DEFINITION_TABLE_ACTIVE" value1="Yes" />
@@ -366,13 +342,11 @@
 			<var name="workflowTask" value="${workflowTask}" />
 		</execute>
 
-		<execute function="Click" locator1="Icon#BODY_VERTICAL_ELLIPSIS" />
-
 		<execute function="AssertClick" locator1="MyWorkflowTasksTask#MENU_REJECT" value1="Reject" />
 
 		<execute macro="Workflow#confirmAndViewSucessMessageViaDetails" />
 
-		<execute function="Click" locator1="Icon#ANGLE_LEFT_BACK" />
+		<execute function="AssertClick#assertPartialTextClickAtAndWait" locator1="MyWorkflowTasksTask#BACK" value1="Back" />
 
 		<execute function="SelectFrame" value1="relative=top" />
 
@@ -424,13 +398,11 @@
 			<var name="workflowTask" value="${workflowTask}" />
 		</execute>
 
-		<execute function="Click" locator1="Icon#BODY_VERTICAL_ELLIPSIS" />
-
 		<execute function="AssertClick" locator1="MyWorkflowTasksTask#MENU_RESUBMIT" value1="Resubmit" />
 
 		<execute macro="Workflow#confirmAndViewSucessMessageViaDetails" />
 
-		<execute function="Click" locator1="Icon#ANGLE_LEFT_BACK" />
+		<execute function="AssertClick#assertPartialTextClickAtAndWait" locator1="MyWorkflowTasksTask#BACK" value1="Back" />
 
 		<execute macro="Workflow#viewCompletedTask">
 			<var name="ddlDataDefinitionName" value="${ddlDataDefinitionName}" />
@@ -494,11 +466,9 @@
 		<var name="key_workflowDefinitionTitle" value="${workflowDefinitionTitle}" />
 
 		<while>
-			<condition function="IsElementPresent" locator1="WorkflowDefinition#DEFINITION_TABLE_SPECIFIC_DEFINITION_ELLIPSIS" />
+			<condition function="IsElementPresent" locator1="WorkflowDefinition#DEFINITION_TABLE_SPECIFIC_DEFINITION_ACTIONS" />
 			<then>
-				<execute macro="Workflow#deactivateSpecificWorkflowDefinition">
-					<var name="workflowDefinitionTitle" value="Join Xor" />
-				</execute>
+				<execute macro="Workflow#deactivateSpecificWorkflowDefinition" />
 
 				<execute macro="Workflow#deleteWorkflowDefinition" />
 			</then>
@@ -531,7 +501,7 @@
 		</execute>
 
 		<while>
-			<condition function="IsElementPresent" locator1="WorkflowDefinition#DEFINITION_TABLE_ADDED_DEFINITION_ELLIPSIS" />
+			<condition function="IsElementPresent" locator1="WorkflowDefinition#DEFINITION_TABLE_ADDED_DEFINITION_ACTIONS" />
 			<then>
 				<execute macro="Workflow#deactivateAddedWorkflowDefinition" />
 
@@ -558,8 +528,8 @@
 
 		<execute function="AssertClick" locator1="MyWorkflowTasks#ASSIGNED_TO_MY_ROLES_MENULIST_UPDATE_DUE_DATE" value1="Update Due Date" />
 
-		<execute function="Type" locator1="MyWorkflowTasks#DIALOG_BOX_DUE_DATE" value1="${workflowDueDate}" />
-		<execute function="Type" locator1="MyWorkflowTasks#DIALOG_BOX_DUE_DATE_TIME" value1="${workflowDueDateTime}" />
+		<execute function="Type#clickAtSendKeys" locator1="MyWorkflowTasks#DIALOG_BOX_DUE_DATE" value1="${workflowDueDate}" />
+		<execute function="Type#clickAtSendKeys" locator1="MyWorkflowTasks#DIALOG_BOX_DUE_DATE_TIME" value1="${workflowDueDateTime}" />
 
 		<execute macro="Workflow#confirmAndViewSucessMessageViaActions" />
 
@@ -570,11 +540,11 @@
 			<var name="workflowTask" value="${workflowTask}" />
 		</execute>
 
-		<execute function="AssertTextEquals#assertPartialText" locator1="MyWorkflowTasks#ASSIGNED_TO_MY_ROLES_TABLE_DUE_DATE" value1="Within" />
+		<execute function="AssertTextEquals" locator1="MyWorkflowTasks#ASSIGNED_TO_MY_ROLES_TABLE_DUE_DATE" value1="${workflowDueDateFormatted} ${workflowDueDateTime}" />
 	</command>
 
 	<command name="uploadDefinition">
-		<execute function="Click" locator1="Button#PLUS" />
+		<execute function="AssertClick" locator1="WorkflowDefinition#TOOLBAR_UPLOAD_DEFINITION" value1="Upload Definition" />
 
 		<execute function="Type" locator1="TextInput#TITLE" value1="${workflowDefinitionTitle}" />
 		<execute function="UploadCommonFile" locator1="WorkflowUpload#FILE_UPLOAD" value1="${workflowDefinitionFile}" />
@@ -595,7 +565,7 @@
 	</command>
 
 	<command name="viewCannotWithdrawTaskByActions">
-		<execute function="AssertClick"  locator1="MenuItem#COMPLETED" value1="Completed" />
+		<execute function="AssertClick"  locator1="NavTab#COMPLETED" value1="Completed" />
 
 		<var name="key_workflowAssetTitle" value="${workflowAssetTitle}" />
 
@@ -610,7 +580,7 @@
 	</command>
 
 	<command name="viewCompletedTask">
-		<execute function="Click" locator1="MenuItem#COMPLETED" value1="Completed" />
+		<execute function="Click" locator1="NavTab#COMPLETED" value1="Completed" />
 
 		<var name="key_workflowAssetTitle" value="${workflowAssetTitle}" />
 
@@ -632,7 +602,7 @@
 	</command>
 
 	<command name="viewCompletedTasks">
-		<execute function="AssertClick" locator1="MenuItem#COMPLETED" value1="Completed" />
+		<execute function="AssertClick" locator1="NavTab#COMPLETED" value1="Completed" />
 
 		<var name="key_workflowAssetTitle" value="${workflowAssetTitle}" />
 
@@ -642,7 +612,7 @@
 	</command>
 
 	<command name="viewCompletedTasksTaskNotPresentCP">
-		<execute function="AssertClick" locator1="MenuItem#COMPLETED" value1="Completed" />
+		<execute function="AssertClick" locator1="NavTab#COMPLETED" value1="Completed" />
 
 		<var name="key_workflowAssetTitle" value="${workflowAssetTitle}" />
 
@@ -652,18 +622,18 @@
 	</command>
 
 	<command name="viewDefaultMySubmissionsCP">
-		<execute function="AssertTextEquals" locator1="Message#EMPTY" value1="There are no pending publications requested by me." />
-		<execute function="AssertClick" locator1="MenuItem#COMPLETED" value1="Completed" />
+		<execute function="AssertTextEquals" locator1="Message#INFO" value1="There are no pending publications requested by me." />
+		<execute function="AssertClick" locator1="NavTab#COMPLETED" value1="Completed" />
 
-		<execute function="AssertTextEquals" locator1="Message#EMPTY" value1="There are no completed publications requested by me." />
+		<execute function="AssertTextEquals" locator1="Message#INFO" value1="There are no completed publications requested by me." />
 	</command>
 
 	<command name="viewDefaultMyWorkflowTasksCP">
 		<execute function="AssertTextEquals" locator1="MyWorkflowTasks#ASSIGNED_TO_ME_INFO_MESSAGE" value1="There are no pending tasks assigned to you." />
 		<execute function="AssertTextEquals" locator1="MyWorkflowTasks#ASSIGNED_TO_MY_ROLES_INFO_MESSAGE" value1="There are no pending tasks assigned to your roles." />
-		<execute function="AssertClick" locator1="MenuItem#COMPLETED" value1="Completed" />
+		<execute function="AssertClick" locator1="NavTab#COMPLETED" value1="Completed" />
 
-		<execute function="AssertTextEquals" locator1="Message#EMPTY" value1="There are no completed tasks." />
+		<execute function="AssertTextEquals" locator1="Message#INFO" value1="There are no completed tasks." />
 	</command>
 
 	<command name="viewDefinition">
@@ -796,9 +766,7 @@
 
 		<var name="key_workflowAssetTitle" value="${workflowAssetTitle}" />
 
-		<execute function="Click" locator1="Icon#BODY_VERTICAL_ELLIPSIS" />
-
-		<execute function="AssertClick" locator1="MenuItem#WITHDRAW_SUBMISSION" value1="Withdraw Submission" />
+		<execute function="AssertClick" locator1="WorkflowSubmissions#PENDING_TABLE_WITHDRAW_SUBMISSION" value1="Withdraw Submission" />
 
 		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request completed successfully." />
 	</command>
@@ -813,6 +781,7 @@
 
 		<var name="key_workflowAssetTitle" value="${workflowAssetTitle}" />
 
+		<execute function="AssertTextEquals" locator1="WorkflowSubmissions#PENDING_TABLE_WITHDRAW_SUBMISSION" value1="Withdraw Submission" />
 		<execute function="AssertClick" locator1="WorkflowSubmissions#PENDING_TABLE_ASSET_TITLE" value1="${workflowAssetTitle}" />
 
 		<execute macro="Workflow#viewMySubmissionsTaskPreview">
@@ -822,15 +791,13 @@
 			<var name="workflowDefinition" value="${workflowDefinition}" />
 		</execute>
 
-		<execute function="Click" locator1="Icon#BODY_VERTICAL_ELLIPSIS" />
-
-		<execute function="AssertClick" locator1="MenuItem#WITHDRAW_SUBMISSION" value1="Withdraw Submission" />
+		<execute function="AssertClick" locator1="WorkflowSubmissionsTask#MENU_WITHDRAW_SUBMISSION" value1="Withdraw Submission" />
 
 		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request completed successfully." />
 	</command>
 
 	<command name="withdrawTaskCompletedNoByDetails">
-		<execute function="AssertClick"  locator1="MenuItem#COMPLETED" value1="Completed" />
+		<execute function="AssertClick"  locator1="NavTab#COMPLETED" value1="Completed" />
 
 		<var name="key_workflowAssetTitle" value="${workflowAssetTitle}" />
 

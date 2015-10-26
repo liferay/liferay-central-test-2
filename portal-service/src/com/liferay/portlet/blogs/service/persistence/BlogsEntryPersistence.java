@@ -4043,7 +4043,4 @@ public interface BlogsEntryPersistence extends BasePersistence<BlogsEntry> {
 	* @return the number of blogs entries
 	*/
 	public int countAll();
-
-	@Override
-	public java.util.Set<java.lang.String> getBadColumnNames();
 }

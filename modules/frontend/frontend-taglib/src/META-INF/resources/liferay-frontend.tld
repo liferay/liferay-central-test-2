@@ -194,7 +194,17 @@
 		<tag-class>com.liferay.frontend.taglib.servlet.taglib.ManagementBarTag</tag-class>
 		<body-content>JSP</body-content>
 		<attribute>
-			<name>checkBoxContainerId</name>
+			<name>checkBoxCssClass</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>cssClass</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>id</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
@@ -203,11 +213,6 @@
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
-	</tag>
-	<tag>
-		<name>management-bar-action-buttons</name>
-		<tag-class>com.liferay.frontend.taglib.servlet.taglib.ManagementBarActionButtonsTag</tag-class>
-		<body-content>JSP</body-content>
 	</tag>
 	<tag>
 		<name>management-bar-buttons</name>

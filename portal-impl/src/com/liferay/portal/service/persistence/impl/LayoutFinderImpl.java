@@ -36,7 +36,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class LayoutFinderImpl
-	extends LayoutFinderBaseImpl implements LayoutFinder {
+	extends BasePersistenceImpl<Layout> implements LayoutFinder {
 
 	public static final String FIND_BY_NO_PERMISSIONS =
 		LayoutFinder.class.getName() + ".findByNoPermissions";

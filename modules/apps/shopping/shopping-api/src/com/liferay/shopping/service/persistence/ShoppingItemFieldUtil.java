@@ -376,10 +376,6 @@ public class ShoppingItemFieldUtil {
 		return getPersistence().countAll();
 	}
 
-	public static java.util.Set<java.lang.String> getBadColumnNames() {
-		return getPersistence().getBadColumnNames();
-	}
-
 	public static ShoppingItemFieldPersistence getPersistence() {
 		return _serviceTracker.getService();
 	}

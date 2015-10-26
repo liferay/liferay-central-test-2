@@ -1162,7 +1162,4 @@ public interface AddressPersistence extends BasePersistence<Address> {
 	* @return the number of addresses
 	*/
 	public int countAll();
-
-	@Override
-	public java.util.Set<java.lang.String> getBadColumnNames();
 }

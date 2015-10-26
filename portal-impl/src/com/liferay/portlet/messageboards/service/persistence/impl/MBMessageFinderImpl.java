@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.security.permission.InlineSQLHelperUtil;
+import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.impl.MBMessageImpl;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFinder;
@@ -41,7 +42,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class MBMessageFinderImpl
-	extends MBMessageFinderBaseImpl implements MBMessageFinder {
+	extends BasePersistenceImpl<MBMessage> implements MBMessageFinder {
 
 	public static final String COUNT_BY_C_T =
 		MBMessageFinder.class.getName() + ".countByC_T";

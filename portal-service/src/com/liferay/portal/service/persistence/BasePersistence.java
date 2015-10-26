@@ -189,8 +189,6 @@ public interface BasePersistence<T extends BaseModel<T>> {
 
 	public void flush();
 
-	public Set<String> getBadColumnNames();
-
 	public Session getCurrentSession() throws ORMException;
 
 	/**

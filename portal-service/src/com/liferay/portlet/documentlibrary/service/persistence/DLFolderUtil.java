@@ -3394,10 +3394,6 @@ public class DLFolderUtil {
 		getPersistence().setDLFileEntryTypes(pk, dlFileEntryTypes);
 	}
 
-	public static java.util.Set<java.lang.String> getBadColumnNames() {
-		return getPersistence().getBadColumnNames();
-	}
-
 	public static DLFolderPersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (DLFolderPersistence)PortalBeanLocatorUtil.locate(DLFolderPersistence.class.getName());

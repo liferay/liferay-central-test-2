@@ -640,7 +640,4 @@ public interface MBDiscussionPersistence extends BasePersistence<MBDiscussion> {
 	* @return the number of message boards discussions
 	*/
 	public int countAll();
-
-	@Override
-	public java.util.Set<java.lang.String> getBadColumnNames();
 }

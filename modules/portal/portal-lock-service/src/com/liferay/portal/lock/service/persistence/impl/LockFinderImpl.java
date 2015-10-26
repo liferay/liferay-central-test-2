@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.lock.model.Lock;
 import com.liferay.portal.lock.service.persistence.LockFinder;
 import com.liferay.portal.lock.service.persistence.LockUtil;
+import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.util.List;
@@ -28,7 +29,8 @@ import java.util.List;
 /**
  * @author Shuyang Zhou
  */
-public class LockFinderImpl extends LockFinderBaseImpl implements LockFinder {
+public class LockFinderImpl
+	extends BasePersistenceImpl<Lock> implements LockFinder {
 
 	public static final String FIND_BY_C_K =
 		LockFinder.class.getName() + ".findByC_K";

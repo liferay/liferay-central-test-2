@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.util.Iterator;
@@ -37,7 +38,7 @@ import java.util.List;
  * @author Connor McKay
  */
 public class JournalFeedFinderImpl
-	extends JournalFeedFinderBaseImpl implements JournalFeedFinder {
+	extends BasePersistenceImpl<JournalFeed> implements JournalFeedFinder {
 
 	public static final String COUNT_BY_C_G_F_N_D =
 		JournalFeedFinder.class.getName() + ".countByC_G_F_N_D";

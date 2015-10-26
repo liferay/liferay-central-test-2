@@ -537,7 +537,4 @@ public interface RegionPersistence extends BasePersistence<Region> {
 	* @return the number of regions
 	*/
 	public int countAll();
-
-	@Override
-	public java.util.Set<java.lang.String> getBadColumnNames();
 }

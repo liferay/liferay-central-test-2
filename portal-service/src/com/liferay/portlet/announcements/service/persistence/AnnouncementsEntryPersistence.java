@@ -1093,7 +1093,4 @@ public interface AnnouncementsEntryPersistence extends BasePersistence<Announcem
 	* @return the number of announcements entries
 	*/
 	public int countAll();
-
-	@Override
-	public java.util.Set<java.lang.String> getBadColumnNames();
 }

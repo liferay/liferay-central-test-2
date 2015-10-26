@@ -787,7 +787,4 @@ public interface PasswordPolicyPersistence extends BasePersistence<PasswordPolic
 	* @return the number of password policies
 	*/
 	public int countAll();
-
-	@Override
-	public java.util.Set<java.lang.String> getBadColumnNames();
 }

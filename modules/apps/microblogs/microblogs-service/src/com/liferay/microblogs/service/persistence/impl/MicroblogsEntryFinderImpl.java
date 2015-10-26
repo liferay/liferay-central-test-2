@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.social.model.SocialRelationConstants;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
@@ -36,7 +37,8 @@ import java.util.List;
  * @author Jonathan Lee
  */
 public class MicroblogsEntryFinderImpl
-	extends MicroblogsEntryFinderBaseImpl implements MicroblogsEntryFinder {
+	extends BasePersistenceImpl<MicroblogsEntry>
+	implements MicroblogsEntryFinder {
 
 	public static final String COUNT_BY_USER_ID =
 		MicroblogsEntryFinder.class.getName() + ".countByUserId";

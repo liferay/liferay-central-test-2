@@ -885,7 +885,4 @@ public interface KaleoLogPersistence extends BasePersistence<KaleoLog> {
 	* @return the number of kaleo logs
 	*/
 	public int countAll();
-
-	@Override
-	public java.util.Set<java.lang.String> getBadColumnNames();
 }

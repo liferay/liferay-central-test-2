@@ -183,8 +183,8 @@
 
 		<execute function="AssertClick" locator1="SiteMemberships#TOOLBAR_ADD_MEMBERS" value1="Add Members" />
 		<execute function="AssertClick" locator1="MenuItem#ORGANIZATION" value1="Organization" />
-		<execute function="Type" locator1="Search#SEARCH_FIELD" value1="${orgName}" />
-		<execute function="AssertClick" locator1="Search#SEARCH_BUTTON" value1="Search" />
+		<execute function="Type" locator1="NavBar#BASIC_SEARCH_BUTTON" value1="${orgName}" />
+		<execute function="AssertClick" locator1="NavBar#BASIC_SEARCH_BUTTON" value1="Search" />
 		<execute function="AssertTextEquals" locator1="SiteMembershipsAddMembers#ORGANIZATION_TABLE_NAME" value1="${orgName}" />
 		<execute function="Check" locator1="SiteMembershipsAddMembers#ORGANIZATION_TABLE_CHECKBOX" />
 		<execute function="Click" locator1="Button#SAVE" />
@@ -308,7 +308,7 @@
 
 		<execute function="SelectFrame" locator1="IFrame#DIALOG" />
 
-		<execute function="Type" locator1="TextInput#KEYWORDS" value1="${roleName}" />
+		<execute function="Type" locator1="NavBar#BASIC_SEARCH_FIELD" value1="${roleName}" />
 		<execute function="Click" locator1="NavBar#BASIC_SEARCH_BUTTON" />
 		<execute function="AssertTextEquals" locator1="SiteMembershipsAssignUserRoles#ROLE_TABLE_TITLE" value1="${roleName}" />
 		<execute function="Click" locator1="SiteMembershipsAssignUserRoles#ROLE_TABLE_TITLE" value1="${roleName}" />
@@ -316,7 +316,7 @@
 		<var name="key_userScreenName" value="${userScreenName}" />
 
 		<execute function="AssertClick" locator1="SiteMembershipsAssignUserRoles#AVAILABLE" value1="Available" />
-		<execute function="Type" locator1="TextInput#KEYWORDS" value1="${userScreenName}" />
+		<execute function="Type" locator1="NavBar#BASIC_SEARCH_FIELD" value1="${userScreenName}" />
 		<execute function="AssertClick" locator1="NavBar#BASIC_SEARCH_BUTTON" value1="Search" />
 		<execute function="AssertTextEquals" locator1="SiteMembershipsAssignUserRoles#USER_TABLE_SCREEN_NAME" value1="${userScreenName}" />
 		<execute function="Check" locator1="SiteMembershipsAssignUserRoles#USER_TABLE_USER_NAME" />

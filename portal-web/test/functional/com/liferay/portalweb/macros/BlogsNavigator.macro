@@ -156,12 +156,11 @@
 		<execute function="AssertTextEquals" locator1="BlogsEntry#TITLE" value1="${entryTitle}" />
 	</command>
 
-	<command name="gotoSettings">
-		<execute function="Click" locator1="Button#COG" />
+	<command name="gotoSettingsTab">
+		<execute function="AssertClick" locator1="BlogsEditEntry#SETTINGS_TAB" value1="Settings" />
 	</command>
 
 	<command name="moveToRecycleBinCP">
-		<var name="key_assetType" value="${assetType}" />
 		<var name="key_entryTitle" value="${entryTitle}" />
 
 		<execute function="AssertTextEquals" locator1="Blogs#ENTRY_TABLE_TITLE" value1="${entryTitle}" />
@@ -174,7 +173,6 @@
 	</command>
 
 	<command name="moveToRecycleBinDraftCP">
-		<var name="key_assetType" value="${assetType}" />
 		<var name="key_entryTitle" value="${entryTitle}" />
 
 		<execute function="AssertTextEquals" locator1="Blogs#ENTRY_TABLE_TITLE" value1="${entryTitle}" />
@@ -188,7 +186,6 @@
 	</command>
 
 	<command name="moveToRecycleBinPG">
-		<var name="key_assetType" value="${assetType}" />
 		<var name="key_entryTitle" value="${entryTitle}" />
 
 		<execute function="AssertTextEquals" locator1="BlogsEntry#TITLE" value1="${entryTitle}" />

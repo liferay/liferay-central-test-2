@@ -3506,7 +3506,7 @@ public class ModulePersistenceImpl extends BasePersistenceImpl<Module>
 	}
 
 	@Override
-	public Set<String> getBadColumnNames() {
+	protected Set<String> getBadColumnNames() {
 		return _badColumnNames;
 	}
 

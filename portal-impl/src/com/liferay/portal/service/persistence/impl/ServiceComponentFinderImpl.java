@@ -28,7 +28,8 @@ import java.util.List;
  * @author Alberto Chaparro
  */
 public class ServiceComponentFinderImpl
-	extends ServiceComponentFinderBaseImpl implements ServiceComponentFinder {
+	extends BasePersistenceImpl<ServiceComponent>
+	implements ServiceComponentFinder {
 
 	public static final String FIND_BY_MAX_BUILD_NUMBER =
 		ServiceComponentFinder.class.getName() + ".findByMaxBuildNumber";

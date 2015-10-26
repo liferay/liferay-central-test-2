@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.service.ClassNameLocalServiceUtil;
+import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 import com.liferay.wiki.exception.NoSuchPageException;
 import com.liferay.wiki.model.WikiPage;
@@ -43,7 +44,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class WikiPageFinderImpl
-	extends WikiPageFinderBaseImpl implements WikiPageFinder {
+	extends BasePersistenceImpl<WikiPage> implements WikiPageFinder {
 
 	public static final String COUNT_BY_CREATE_DATE =
 		WikiPageFinder.class.getName() + ".countByCreateDate";

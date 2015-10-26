@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.permission.InlineSQLHelperUtil;
+import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.util.Iterator;
@@ -42,7 +43,8 @@ import java.util.Map;
  * @author Fabio Pezzutto
  */
 public class CalendarBookingFinderImpl
-	extends CalendarBookingFinderBaseImpl implements CalendarBookingFinder {
+	extends BasePersistenceImpl<CalendarBooking>
+	implements CalendarBookingFinder {
 
 	public static final String COUNT_BY_C_G_C_C_P_T_D_L_S_E_S =
 		CalendarBookingFinder.class.getName() + ".countByC_G_C_C_P_T_D_L_S_E_S";

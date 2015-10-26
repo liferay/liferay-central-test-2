@@ -595,7 +595,4 @@ public interface PollsChoicePersistence extends BasePersistence<PollsChoice> {
 	* @return the number of polls choices
 	*/
 	public int countAll();
-
-	@Override
-	public java.util.Set<java.lang.String> getBadColumnNames();
 }

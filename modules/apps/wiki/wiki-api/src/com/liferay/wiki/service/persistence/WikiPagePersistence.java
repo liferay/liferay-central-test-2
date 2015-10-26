@@ -4929,7 +4929,4 @@ public interface WikiPagePersistence extends BasePersistence<WikiPage> {
 	* @return the number of wiki pages
 	*/
 	public int countAll();
-
-	@Override
-	public java.util.Set<java.lang.String> getBadColumnNames();
 }

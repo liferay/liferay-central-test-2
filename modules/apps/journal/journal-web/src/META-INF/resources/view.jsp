@@ -112,6 +112,16 @@ request.setAttribute("view.jsp-folderId", String.valueOf(folderId));
 			width: 320
 		}
 	);
+
+	function <portlet:namespace />toggleActionsButton() {
+		var form = AUI.$(document.<portlet:namespace />fm);
+
+		var hide = Liferay.Util.listCheckedExcept(form, '<portlet:namespace /><%= RowChecker.ALL_ROW_IDS %>').length == 0;
+
+		AUI.$('#<portlet:namespace />actionsButtonContainer').toggleClass('on', !hide);
+	}
+
+	<portlet:namespace />toggleActionsButton();
 </aui:script>
 
 <aui:script use="liferay-journal-navigation">
@@ -135,7 +145,12 @@ request.setAttribute("view.jsp-folderId", String.valueOf(folderId));
 			},
 			namespace: '<portlet:namespace />',
 			portletId: '<%= portletDisplay.getId() %>',
-			rowIds: '<portlet:namespace /><%= RowChecker.ROW_IDS %>'
+			rowIds: '<portlet:namespace /><%= RowChecker.ROW_IDS %>',
+			select: {
+				displayStyleCSSClass: 'entry-display-style',
+				selectAllCheckbox: '.select-all-checkboxes',
+				selectedCSSClass: 'active'
+			}
 		}
 	);
 

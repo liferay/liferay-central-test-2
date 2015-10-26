@@ -1078,7 +1078,4 @@ public interface WikiNodePersistence extends BasePersistence<WikiNode> {
 	* @return the number of wiki nodes
 	*/
 	public int countAll();
-
-	@Override
-	public java.util.Set<java.lang.String> getBadColumnNames();
 }

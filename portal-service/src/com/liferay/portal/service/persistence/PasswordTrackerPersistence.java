@@ -253,7 +253,4 @@ public interface PasswordTrackerPersistence extends BasePersistence<PasswordTrac
 	* @return the number of password trackers
 	*/
 	public int countAll();
-
-	@Override
-	public java.util.Set<java.lang.String> getBadColumnNames();
 }

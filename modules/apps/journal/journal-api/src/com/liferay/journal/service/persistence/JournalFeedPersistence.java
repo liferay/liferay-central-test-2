@@ -654,7 +654,4 @@ public interface JournalFeedPersistence extends BasePersistence<JournalFeed> {
 	* @return the number of journal feeds
 	*/
 	public int countAll();
-
-	@Override
-	public java.util.Set<java.lang.String> getBadColumnNames();
 }

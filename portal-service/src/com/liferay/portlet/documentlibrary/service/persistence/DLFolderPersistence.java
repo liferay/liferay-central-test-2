@@ -2725,7 +2725,4 @@ public interface DLFolderPersistence extends BasePersistence<DLFolder> {
 	*/
 	public void setDLFileEntryTypes(long pk,
 		java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntryType> dlFileEntryTypes);
-
-	@Override
-	public java.util.Set<java.lang.String> getBadColumnNames();
 }

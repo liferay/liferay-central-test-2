@@ -17,9 +17,16 @@
 <%@ include file="/init.jsp" %>
 
 <%
-String actionButtons = (String)request.getAttribute("liferay-frontend:management-bar:actionButtons");
-String buttons = (String)request.getAttribute("liferay-frontend:management-bar:buttons");
-String checkBoxContainerId = (String)request.getAttribute("liferay-frontend:management-bar:checkBoxContainerId");
-String filters = (String)request.getAttribute("liferay-frontend:management-bar:filters");
+String checkBoxCssClass = (String)request.getAttribute("liferay-frontend:management-bar:checkBoxCssClass");
+String cssClass = (String)request.getAttribute("liferay-frontend:management-bar:cssClass");
+String id = (String)request.getAttribute("liferay-frontend:management-bar:id");
 boolean includeCheckBox = GetterUtil.getBoolean(request.getAttribute("liferay-frontend:management-bar:includeCheckBox"));
+
+String bodyContentString = StringPool.BLANK;
+
+Object bodyContent = request.getAttribute("liferay-frontend:management-bar:bodyContent");
+
+if (bodyContent != null) {
+	bodyContentString = bodyContent.toString();
+}
 %>

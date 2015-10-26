@@ -655,7 +655,4 @@ public interface DDMContentPersistence extends BasePersistence<DDMContent> {
 	* @return the number of d d m contents
 	*/
 	public int countAll();
-
-	@Override
-	public java.util.Set<java.lang.String> getBadColumnNames();
 }
