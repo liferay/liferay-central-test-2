@@ -42,9 +42,13 @@
 
 		<execute function="Type" locator1="TextInput#SUBJECT" value1="${threadSubject}" />
 
-		<execute function="SikuliType" locator1="CKEditor#CKEDITOR_PNG" value1="${entryContent} @${mentionsUserScreenName}" />
+		<execute function="SelectFrame" locator1="CKEditor#BODY_FIELD_IFRAME" />
 
-		<execute function="AssertClick" locator1="Mentions#MENTIONS_USER_DISPLAY_OPTION" value1="${mentionsUserFullName} (@${mentionsUserScreenName})" />
+		<execute function="Type#sendKeys" locator1="CKEditor#BODY" value1="${threadBody} &#64;${mentionsUserScreenName}" />
+
+		<execute function="SelectFrame#selectFrameTop" />
+
+		<execute function="AssertClick" locator1="Mentions#MENTIONS_USER_DISPLAY_OPTION" value1="${mentionsUserFullName}&#64;${mentionsUserScreenName}" />
 
 		<execute function="Click" locator1="Button#PUBLISH" value1="Publish" />
 
