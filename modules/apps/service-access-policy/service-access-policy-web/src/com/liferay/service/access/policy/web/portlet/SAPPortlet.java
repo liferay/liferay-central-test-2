@@ -35,7 +35,6 @@ import java.io.PrintWriter;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -128,8 +127,9 @@ public class SAPPortlet extends MVCPortlet {
 		printWriter.write(jsonArray.toString());
 	}
 
-	public Set<Map<String, String>> getRemoteServiceClassMaps() {
-		Set<Map<String, String>> remoteServiceClassMaps = new LinkedHashSet<>();
+	public JSONArray getJSONArrayServiceClassNamesToContextNames() {
+		JSONArray jsonArrayServiceClassNamesToContextNames =
+			JSONFactoryUtil.createJSONArray();
 
 		Set<String> contextNames =
 			_jsonWebServiceActionsManager.getContextNames();
@@ -142,9 +142,11 @@ public class SAPPortlet extends MVCPortlet {
 			for (Map.Entry<String, Set<JSONWebServiceActionMapping>> entry :
 					jsonWebServiceActionMappingsMap.entrySet()) {
 
-				Map<String, String> remoteServiceClassMap = new HashMap<>();
+				JSONObject jsonObjectServiceClassNameToContextName =
+					JSONFactoryUtil.createJSONObject();
 
-				remoteServiceClassMap.put("serviceClassName", entry.getKey());
+				jsonObjectServiceClassNameToContextName.put(
+					"serviceClassName", entry.getKey());
 
 				Set<JSONWebServiceActionMapping>
 					jsonWebServiceActionMappingsSet = entry.getValue();
@@ -155,15 +157,16 @@ public class SAPPortlet extends MVCPortlet {
 				JSONWebServiceActionMapping firstJSONWebServiceActionMapping =
 					iterator.next();
 
-				remoteServiceClassMap.put(
+				jsonObjectServiceClassNameToContextName.put(
 					"contextName",
 					firstJSONWebServiceActionMapping.getContextName());
 
-				remoteServiceClassMaps.add(remoteServiceClassMap);
+				jsonArrayServiceClassNamesToContextNames.put(
+					jsonObjectServiceClassNameToContextName);
 			}
 		}
 
-		return remoteServiceClassMaps;
+		return jsonArrayServiceClassNamesToContextNames;
 	}
 
 	@Override
@@ -174,11 +177,12 @@ public class SAPPortlet extends MVCPortlet {
 		String mvcPath = ParamUtil.getString(renderRequest, "mvcPath");
 
 		if (mvcPath.equals("/edit_entry.jsp")) {
-			Set<Map<String, String>> remoteServiceClassMaps =
-				getRemoteServiceClassMaps();
+			JSONArray jsonArrayServiceClassNamesToContextNames =
+				getJSONArrayServiceClassNamesToContextNames();
 
 			renderRequest.setAttribute(
-				SAPWebKeys.REMOTE_SERVICES_CLASS_NAMES, remoteServiceClassMaps);
+				SAPWebKeys.REMOTE_SERVICE_CLASS_NAMES_TO_CONTEXT_NAMES,
+				jsonArrayServiceClassNamesToContextNames);
 		}
 
 		super.render(renderRequest, renderResponse);
