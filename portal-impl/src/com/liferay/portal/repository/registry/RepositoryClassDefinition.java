@@ -70,8 +70,8 @@ public class RepositoryClassDefinition
 	public LocalRepository createLocalRepository(long repositoryId)
 		throws PortalException {
 
-		if (_localRepositoryCache.containsKey(repositoryId)) {
-			return _localRepositoryCache.get(repositoryId);
+		if (_localRepositories.containsKey(repositoryId)) {
+			return _localRepositories.get(repositoryId);
 		}
 
 		InitializedLocalRepository initializedLocalRepository =
@@ -106,7 +106,7 @@ public class RepositoryClassDefinition
 		initializedLocalRepository.setDocumentRepository(
 			capabilityLocalRepository);
 
-		_localRepositoryCache.put(repositoryId, capabilityLocalRepository);
+		_localRepositories.put(repositoryId, capabilityLocalRepository);
 
 		return capabilityLocalRepository;
 	}
@@ -115,8 +115,8 @@ public class RepositoryClassDefinition
 	public Repository createRepository(long repositoryId)
 		throws PortalException {
 
-		if (_repositoryCache.containsKey(repositoryId)) {
-			return _repositoryCache.get(repositoryId);
+		if (_repositories.containsKey(repositoryId)) {
+			return _repositories.get(repositoryId);
 		}
 
 		InitializedRepository initializedRepository =
@@ -149,7 +149,7 @@ public class RepositoryClassDefinition
 
 		initializedRepository.setDocumentRepository(capabilityRepository);
 
-		_repositoryCache.put(repositoryId, capabilityRepository);
+		_repositories.put(repositoryId, capabilityRepository);
 
 		return capabilityRepository;
 	}
@@ -173,8 +173,8 @@ public class RepositoryClassDefinition
 	}
 
 	public void invalidateCache() {
-		_repositoryCache.clear();
-		_localRepositoryCache.clear();
+		_localRepositories.clear();
+		_repositories.clear();
 	}
 
 	@Override
@@ -196,8 +196,8 @@ public class RepositoryClassDefinition
 	}
 
 	protected void invalidateCachedRepository(long repositoryId) {
-		_repositoryCache.remove(repositoryId);
-		_localRepositoryCache.remove(repositoryId);
+		_localRepositories.remove(repositoryId);
+		_repositories.remove(repositoryId);
 	}
 
 	protected void setUpCommonCapabilities(
@@ -228,9 +228,9 @@ public class RepositoryClassDefinition
 			CacheCapability.class, new CacheCapability());
 	}
 
-	private final Map<Long, LocalRepository> _localRepositoryCache =
+	private final Map<Long, LocalRepository> _localRepositories =
 		new ConcurrentHashMap<>();
-	private final Map<Long, Repository> _repositoryCache =
+	private final Map<Long, Repository> _repositories =
 		new ConcurrentHashMap<>();
 	private final RepositoryDefiner _repositoryDefiner;
 	private RepositoryFactory _repositoryFactory;
@@ -248,9 +248,7 @@ public class RepositoryClassDefinition
 					<RepositoryEventType.Delete, LocalRepository>() {
 
 					@Override
-					public void execute(LocalRepository localRepository)
-						throws PortalException {
-
+					public void execute(LocalRepository localRepository) {
 						invalidateCachedRepository(
 							localRepository.getRepositoryId());
 					}
