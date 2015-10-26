@@ -34,17 +34,16 @@ public class ResourcesImporterBundleActivator implements BundleActivator {
 				DestinationConfiguration.DESTINATION_TYPE_SERIAL,
 				DestinationNames.RESOURCES_IMPORTER);
 
-		_destinationServiceRegistration = bundleContext.registerService(
+		_serviceRegistration = bundleContext.registerService(
 			DestinationConfiguration.class, destinationConfiguration,
 			new HashMapDictionary<String, Object>());
 	}
 
 	@Override
 	public void stop(BundleContext bundleContext) throws Exception {
-		_destinationServiceRegistration.unregister();
+		_serviceRegistration.unregister();
 	}
 
-	private ServiceRegistration<DestinationConfiguration>
-		_destinationServiceRegistration;
+	private ServiceRegistration<DestinationConfiguration> _serviceRegistration;
 
 }
