@@ -53,20 +53,16 @@ public class LARImporter extends BaseImporter {
 			return;
 		}
 
-		boolean privateLayout = false;
+		User user = UserLocalServiceUtil.getUser(userId);
 
-		InputStream inputStream = _publicLARInputStream;
+		boolean privateLayout = false;
 
 		if (_privateLARInputStream != null) {
 			privateLayout = true;
-
-			inputStream = _privateLARInputStream;
 		}
 
 		long[] layoutIds = ExportImportHelperUtil.getAllLayoutIds(
 			groupId, privateLayout);
-
-		User user = UserLocalServiceUtil.getUser(userId);
 
 		Map<String, Serializable> settingsMap =
 			ExportImportConfigurationSettingsMapFactory.
@@ -80,6 +76,12 @@ public class LARImporter extends BaseImporter {
 					userId, groupId, StringPool.BLANK, StringPool.BLANK,
 					ExportImportConfigurationConstants.TYPE_IMPORT_LAYOUT,
 					settingsMap, new ServiceContext());
+
+		InputStream inputStream = _publicLARInputStream;
+
+		if (_privateLARInputStream != null) {
+			inputStream = _privateLARInputStream;
+		}
 
 		ExportImportLocalServiceUtil.importLayouts(
 			exportImportConfiguration, inputStream);
