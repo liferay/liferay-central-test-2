@@ -1,4 +1,0 @@
-Bundle-Name: Liferay Resources Importer Service
-Bundle-SymbolicName: com.liferay.resources.importer.service
-Bundle-Version: 1.0.0
-Include-Resource: classes
