@@ -60,11 +60,10 @@ public class PoshiRunner {
 			else {
 				String className = testName;
 
-				Element rootElement =
-					PoshiRunnerContext.getTestCaseRootElement(className);
+				Element rootElement = PoshiRunnerContext.getTestCaseRootElement(
+					className);
 
-				List<Element> commandElements = rootElement.elements(
-					"command");
+				List<Element> commandElements = rootElement.elements("command");
 
 				for (Element commandElement : commandElements) {
 					classCommandNames.add(
