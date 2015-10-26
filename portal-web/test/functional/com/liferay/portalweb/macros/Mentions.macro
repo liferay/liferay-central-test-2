@@ -27,7 +27,7 @@
 		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request processed successfully." />
 	</command>
 
-	<command name="addMentionViaMessageBoards">
+	<command name="addMentionViaMessageBoardThread">
 		<var name="key_mentionsUserScreenName" value="${mentionsUserScreenName}" />
 
 		<execute function="AssertClick" locator1="MessageBoards#POST_NEW_THREAD_BUTTON" value1="Post New Thread" />
