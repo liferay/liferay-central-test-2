@@ -158,8 +158,8 @@
 	</command>
 
 	<command name="viewMentionTagLink">
-		<var name="key_mentionsUserFullName" value="${mentionsUserFullName}" />
 		<var name="key_mentionsUserScreenName" value="${mentionsUserScreenName}" />
+		<var name="key_siteName" value="${mentionsUserFullName}" />
 
 		<execute function="AssertClick" locator1="Mentions#MENTIONS_TAG_LINK" value1="@${mentionsUserScreenName}" />
 
