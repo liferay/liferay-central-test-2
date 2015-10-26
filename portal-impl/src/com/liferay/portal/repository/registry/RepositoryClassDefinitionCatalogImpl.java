@@ -57,7 +57,9 @@ public class RepositoryClassDefinitionCatalogImpl
 
 	@Override
 	public String getRegistryName() {
-		return getClass().getName();
+		Class<?> clazz = getClass();
+
+		return clazz.getName();
 	}
 
 	@Override
