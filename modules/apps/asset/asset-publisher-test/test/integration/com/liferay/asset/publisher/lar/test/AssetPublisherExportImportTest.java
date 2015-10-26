@@ -315,6 +315,7 @@ public class AssetPublisherExportImportTest
 		groups.add(layoutGroup1);
 
 		Layout layout2 = LayoutTestUtil.addLayout(group);
+
 		Group layoutGroup2 = GroupTestUtil.addGroup(
 			TestPropsValues.getUserId(), layout2);
 
@@ -740,11 +741,11 @@ public class AssetPublisherExportImportTest
 		throws Exception {
 
 		for (int i = 0; i < count; i++) {
-			JournalArticle article = JournalTestUtil.addArticle(
+			JournalArticle journalArticle = JournalTestUtil.addArticle(
 				group.getGroupId(), RandomTestUtil.randomString(),
 				RandomTestUtil.randomString(100));
 
-			assetEntries.add(getAssetEntry(article));
+			assetEntries.add(getAssetEntry(journalArticle));
 		}
 
 		return assetEntries;
@@ -781,7 +782,6 @@ public class AssetPublisherExportImportTest
 			Assert.assertEquals(
 				expectedAssetEntry.getClassName(),
 				actualAssetEntry.getClassName());
-
 			Assert.assertEquals(
 				expectedAssetEntry.getClassUuid(),
 				actualAssetEntry.getClassUuid());
@@ -837,15 +837,15 @@ public class AssetPublisherExportImportTest
 		Assert.assertNotNull(importedLayout);
 	}
 
-	protected String[] getAssetEntryXmls(List<AssetEntry> assetEntries) {
-		String[] assetEntryXmls = new String[assetEntries.size()];
+	protected String[] getAssetEntriesXmls(List<AssetEntry> assetEntries) {
+		String[] assetEntriesXmls = new String[assetEntries.size()];
 
 		for (int i = 0; i < assetEntries.size(); i++) {
-			assetEntryXmls[i] = AssetPublisherTestUtil.getAssetEntryXml(
+			assetEntriesXmls[i] = AssetPublisherTestUtil.getAssetEntryXml(
 				assetEntries.get(i));
 		}
 
-		return assetEntryXmls;
+		return assetEntriesXmls;
 	}
 
 	@Override
@@ -913,7 +913,7 @@ public class AssetPublisherExportImportTest
 
 		Map<String, String[]> preferenceMap = new HashMap<>();
 
-		preferenceMap.put("assetEntryXml", getAssetEntryXmls(assetEntries));
+		preferenceMap.put("assetEntryXml", getAssetEntriesXmls(assetEntries));
 		preferenceMap.put("scopeIds", scopeIds);
 
 		PortletPreferences importedPortletPreferences =
