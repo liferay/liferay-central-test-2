@@ -33,12 +33,14 @@ public class LocalizationImplDefaultXmlFactoryImplTest
 
 		_xmlInputFactoryClassName = System.getProperty(
 			XMLInputFactory.class.getName());
-		_xmlOutputFactoryClassName = System.getProperty(
-			XMLOutputFactory.class.getName());
 
 		System.setProperty(
 			XMLInputFactory.class.getName(),
 			"com.sun.xml.internal.stream.XMLInputFactoryImpl");
+
+		_xmlOutputFactoryClassName = System.getProperty(
+			XMLOutputFactory.class.getName());
+
 		System.setProperty(
 			XMLOutputFactory.class.getName(),
 			"com.sun.xml.internal.stream.XMLOutputFactoryImpl");
