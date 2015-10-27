@@ -75,7 +75,7 @@ public class JenkinsResultsParserUtil {
 
 		JSONArray actionsJSONArray = (JSONArray)jsonObject.get("actions");
 
-		for (int i = 0; i <actionsJSONArray.length(); i++) {
+		for (int i = 0; i < actionsJSONArray.length(); i++) {
 			Object object = actionsJSONArray.get(i);
 
 			if (object.equals(JSONObject.NULL)) {
