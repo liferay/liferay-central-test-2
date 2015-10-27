@@ -19,30 +19,30 @@
 <%
 Contact selContact = (Contact)request.getAttribute("user.selContact");
 
-String jabber = selContact.getJabberSn();
-String skype = selContact.getSkypeSn();
+String jabberSn = selContact.getJabberSn();
+String skypeSn = selContact.getSkypeSn();
 %>
 
-<c:if test="<%= Validator.isNotNull(jabber) || Validator.isNotNull(skype) %>">
+<c:if test="<%= Validator.isNotNull(jabberSn) || Validator.isNotNull(skypeSn) %>">
 	<h3 class="icon-comments"><liferay-ui:message key="instant-messenger" /></h3>
 
 	<dl class="property-list">
-		<c:if test="<%= Validator.isNotNull(jabber) %>">
+		<c:if test="<%= Validator.isNotNull(jabberSn) %>">
 			<dt>
 				<liferay-ui:message key="jabber" />
 			</dt>
 			<dd>
-				<%= HtmlUtil.escape(jabber) %>
+				<%= HtmlUtil.escape(jabberSn) %>
 			</dd>
 		</c:if>
 
-		<c:if test="<%= Validator.isNotNull(skype) %>">
+		<c:if test="<%= Validator.isNotNull(skypeSn) %>">
 			<dt>
 				<liferay-ui:message key="skype" />
 			</dt>
 			<dd>
-				<%= HtmlUtil.escape(skype) %>
-				<a href="callto://<%= HtmlUtil.escapeAttribute(skype) %>"><img alt="<liferay-ui:message escapeAttribute="<%= true %>" key="call-this-user" />" class="instant-messenger-logo" src="http://mystatus.skype.com/smallicon/<%= HtmlUtil.escapeAttribute(skype) %>" /></a>
+				<%= HtmlUtil.escape(skypeSn) %>
+				<a href="callto://<%= HtmlUtil.escapeAttribute(skypeSn) %>"><img alt="<liferay-ui:message escapeAttribute="<%= true %>" key="call-this-user" />" class="instant-messenger-logo" src="http://mystatus.skype.com/smallicon/<%= HtmlUtil.escapeAttribute(skypeSn) %>" /></a>
 			</dd>
 		</c:if>
 	</dl>
