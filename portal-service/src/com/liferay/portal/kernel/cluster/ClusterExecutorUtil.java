@@ -55,15 +55,15 @@ public class ClusterExecutorUtil {
 	public static ClusterExecutor getClusterExecutor() {
 		PortalRuntimePermission.checkGetBeanProperty(ClusterExecutorUtil.class);
 
-		if ((_instance == null) || !_instance.isEnabled()) {
+		if ((_clusterExecutor == null) || !_clusterExecutor.isEnabled()) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("ClusterExecutorUtil was not initialized");
+				_log.warn("ClusterExecutorUtil is not initialized");
 			}
 
 			return null;
 		}
 
-		return _instance;
+		return _clusterExecutor;
 	}
 
 	public static List<ClusterNode> getClusterNodes() {
@@ -121,7 +121,7 @@ public class ClusterExecutorUtil {
 	private static final Log _log = LogFactoryUtil.getLog(
 		ClusterExecutorUtil.class);
 
-	private static final ClusterExecutor _instance =
+	private static final ClusterExecutor _clusterExecutor =
 		ProxyFactory.newServiceTrackedInstance(ClusterExecutor.class);
 
 }
