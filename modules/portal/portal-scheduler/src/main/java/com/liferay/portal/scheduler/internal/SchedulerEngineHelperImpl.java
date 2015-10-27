@@ -860,9 +860,8 @@ public class SchedulerEngineHelperImpl implements SchedulerEngineHelper {
 	private Props _props;
 	private SchedulerEngine _schedulerEngine;
 	private final Map
-			<MessageListener,
-				ServiceRegistration<SchedulerEventMessageListener>>
-		_serviceRegistrations = new HashMap<>();
+		<MessageListener, ServiceRegistration<SchedulerEventMessageListener>>
+			_serviceRegistrations = new HashMap<>();
 	private volatile ServiceTracker
 			<SchedulerEventMessageListener, SchedulerEventMessageListener>
 		_serviceTracker;
@@ -921,6 +920,7 @@ public class SchedulerEngineHelperImpl implements SchedulerEngineHelper {
 					new HashMapDictionary<>();
 
 				properties.put("destination.name", destinationName);
+
 				ServiceRegistration<MessageListener> serviceRegistration =
 					bundleContext.registerService(
 						MessageListener.class, schedulerEventMessageListener,
