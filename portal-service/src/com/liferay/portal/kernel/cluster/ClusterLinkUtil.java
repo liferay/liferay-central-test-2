@@ -33,15 +33,15 @@ public class ClusterLinkUtil {
 	public static ClusterLink getClusterLink() {
 		PortalRuntimePermission.checkGetBeanProperty(ClusterLinkUtil.class);
 
-		if ((_instance == null) || !_instance.isEnabled()) {
+		if ((_clusterLink == null) || !_clusterLink.isEnabled()) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("ClusterLinkUtil has not been initialized");
+				_log.warn("ClusterLinkUtil is not initialized");
 			}
 
 			return null;
 		}
 
-		return _instance;
+		return _clusterLink;
 	}
 
 	public static void sendMulticastMessage(
@@ -87,7 +87,7 @@ public class ClusterLinkUtil {
 	private static final Log _log = LogFactoryUtil.getLog(
 		ClusterLinkUtil.class);
 
-	private static final ClusterLink _instance =
+	private static final ClusterLink _clusterLink =
 		ProxyFactory.newServiceTrackedInstance(ClusterLink.class);
 
 }
