@@ -398,8 +398,7 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 			Validator.isNull(
 				message.get(SchedulerEngine.MESSAGE_LISTENER_UUID))) {
 
-			throw new IllegalArgumentException(
-				"messageListenerUUID must be set");
+			throw new IllegalArgumentException("Message listener UUID is null");
 		}
 
 		try {
