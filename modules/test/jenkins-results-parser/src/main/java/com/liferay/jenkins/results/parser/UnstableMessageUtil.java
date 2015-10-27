@@ -125,7 +125,7 @@ public class UnstableMessageUtil {
 
 					if (status.equals("FIXED") || status.equals("PASSED") ||
 						status.equals("SKIPPED")) {
-						
+
 						continue;
 					}
 
@@ -141,8 +141,7 @@ public class UnstableMessageUtil {
 					int x = testClassName.lastIndexOf(".");
 
 					String testPackageName = testClassName.substring(0, x);
-					String testSimpleClassName = testClassName.substring(
-						x + 1);
+					String testSimpleClassName = testClassName.substring(x + 1);
 
 					runBuildURL = runBuildURL.replace("[", "_");
 					runBuildURL = runBuildURL.replace("]", "_");
@@ -163,8 +162,7 @@ public class UnstableMessageUtil {
 					testMethodNameURL = testMethodNameURL.replace("#", "_");
 
 					if (testPackageName.equals("junit.framework")) {
-						testMethodNameURL =
-							testMethodNameURL.replace(".", "_");
+						testMethodNameURL = testMethodNameURL.replace(".", "_");
 					}
 
 					sb.append(testMethodNameURL);
@@ -173,9 +171,8 @@ public class UnstableMessageUtil {
 					sb.append(".");
 					sb.append(testMethodName);
 
-					String jobVariant =
-						JenkinsResultsParserUtil.getJobVariant(
-							jobJSONObject);
+					String jobVariant = JenkinsResultsParserUtil.getJobVariant(
+						jobJSONObject);
 
 					if (jobVariant.contains("functional") &&
 						testClassName.contains("EvaluateLogTest")) {

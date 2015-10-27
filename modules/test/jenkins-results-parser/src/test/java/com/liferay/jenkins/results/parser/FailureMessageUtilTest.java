@@ -14,16 +14,17 @@
 
 package com.liferay.jenkins.results.parser;
 
-import static org.junit.Assert.assertTrue;
-
 import java.io.File;
 import java.io.IOException;
+
 import java.net.URI;
 import java.net.URL;
+
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import org.apache.tools.ant.Project;
+
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -35,49 +36,26 @@ public class FailureMessageUtilTest {
 
 	@BeforeClass
 	public static void setUpClass() throws Exception {
-		_downloadSlaveDependency(
+		_downloadSample(
 			"generic-1", "0,label_exp=!master", "129",
 			"test-portal-acceptance-pullrequest-batch(master)", "test-4-1");
-		_downloadSlaveDependency(
+		_downloadSample(
 			"rebase-1", null, "267",
 			"test-portal-acceptance-pullrequest-source(ee-6.2.x)", "test-1-1");
-		_downloadSlaveDependency(
+		_downloadSample(
 			"plugin-compile-1", "9,label_exp=!master", "233",
 			"test-portal-acceptance-pullrequest-batch(ee-6.2.x)", "test-1-20");
 	}
 
-	public FailureMessageUtilTest() {
-		_project = _initProject();
-	}
-
 	@Test
 	public void testGetFailureMessage() throws Exception {
-		File[] files = _testDependenciesDir.listFiles();
+		File[] files = _dependenciesDir.listFiles();
 
 		for (File file : files) {
 			if (file.isDirectory()) {
 				assertSample(_project, file);
 			}
 		}
-	}
-	
-	protected String toExternalForm(File file) throws Exception {
-		URI uri = file.toURI();
-		
-		URL url = uri.toURL();
-		
-		return url.toExternalForm();
-	}
-
-	protected void writeExpectedResults(Project project, File sampleDir)
-		throws Exception {
-		
-		String failureMessage = FailureMessageUtil.getFailureMessage(
-			project, toExternalForm(sampleDir));
-
-		File file = new File(sampleDir, "expected_results.html");
-
-		_write(file, failureMessage);
 	}
 
 	protected void assertSample(Project project, File caseDir)
@@ -90,7 +68,7 @@ public class FailureMessageUtilTest {
 
 		String expectedResults = _read(expectedResultsFile);
 
-		String url = caseDir.toURI().toURL().toExternalForm();
+		String url = _toExternalForm(caseDir);
 		String results = FailureMessageUtil.getFailureMessage(project, url);
 
 		boolean value = results.equals(expectedResults);
@@ -132,8 +110,8 @@ public class FailureMessageUtilTest {
 		}
 	}
 
-	private static void _downloadSlaveDependency(
-			String caseDescription, String axisVariable, String buildNumber,
+	private static void _downloadSample(
+			String sampleKey, String axisVariable, String buildNumber,
 			String jobName, String hostName)
 		throws Exception {
 
@@ -141,13 +119,7 @@ public class FailureMessageUtilTest {
 			"https://${hostName}.liferay.com/job/${jobName}/" +
 				"/${buildNumber}/";
 
-		String slaveDependencyIdentifier =
-			caseDescription + "_" + jobName + "_" + hostName + "_" +
-				buildNumber;
-
 		if (axisVariable != null) {
-			slaveDependencyIdentifier += "_" + axisVariable;
-
 			urlString =
 				"https://${hostName}.liferay.com/job/${jobName}/" +
 					"AXIS_VARIABLE=${axis}/${buildNumber}/";
@@ -161,74 +133,42 @@ public class FailureMessageUtilTest {
 
 		URL url = _createURL(urlString);
 
-		_downloadSlaveDependency(slaveDependencyIdentifier, url);
+		_downloadSample(sampleKey, url);
 	}
 
-	private static void _downloadSlaveDependency(
-			String slaveDependencyIdentifier, URL slaveDependencyURL)
+	private static void _downloadSample(String sampleKey, URL url)
 		throws Exception {
 
-		System.out.println(
-			"downloading slave results: " + slaveDependencyIdentifier);
+		System.out.println("Downloading sample " + sampleKey);
 
-		String slaveDependencyRootPath =
-			_testDependenciesDir.getPath() + "/" + slaveDependencyIdentifier;
+		String sampleDirName = _dependenciesDir.getPath() + "/" + sampleKey;
 
-		String slaveLogTextPath = slaveDependencyRootPath + "/logText";
-		String slaveApiPath = slaveDependencyRootPath + "/api";
+		File sampleDir = new File(sampleDirName);
 
-		File slaveLogTextDir = new File(slaveLogTextPath);
-		File slaveApiDir = new File(slaveApiPath);
-
-		if (slaveLogTextDir.exists()) {
+		if (sampleDir.exists()) {
 			return;
 		}
 
-		slaveLogTextDir.mkdirs();
-		slaveApiDir.mkdirs();
-
 		try {
-			String jsonURL = slaveDependencyURL.toString() + "/api/json";
+			String jsonString = JenkinsResultsParserUtil.toString(
+				url + "/api/json");
 
-			System.out.println(" downloading json from:" + jsonURL);
-
-			String jsonString = JenkinsResultsParserUtil.toString(jsonURL);
-
-			File jsonFile = new File(slaveApiDir.getPath() + "/json");
+			File jsonFile = new File(sampleDirName + "/api/json");
 
 			_write(jsonFile, jsonString);
 
-			System.out.println(
-				" wrote file: " + jsonFile.getPath() + " size; " +
-					jsonFile.length());
-
-			String consoleURL =
-				slaveDependencyURL.toString() + "/logText/progressiveText";
-
-			System.out.println(" downloading console from:" + consoleURL);
-
-			String console = JenkinsResultsParserUtil.toString(consoleURL);
+			String progressiveText = JenkinsResultsParserUtil.toString(
+				url + "/logText/progressiveText");
 
 			File consoleFile = new File(
-				slaveLogTextDir.getPath() + "/progressiveText");
+				sampleDirName + "/logText/progressiveText");
 
-			_write(consoleFile, console);
+			_write(consoleFile, progressiveText);
 
-			System.out.println(
-				" wrote file: " + consoleFile.getPath() + " size; " +
-					consoleFile.length());
-
-			FailureMessageUtilTest failureMessageUtilTest =
-				new FailureMessageUtilTest();
-
-			failureMessageUtilTest.writeExpectedResults(
-				failureMessageUtilTest._project,
-				new File(slaveDependencyRootPath));
+			_writeExpectedResults(_project, sampleDir);
 		}
 		catch (IOException ioe) {
-			_deleteFile(slaveLogTextDir);
-
-			_deleteFile(slaveApiDir);
+			_deleteFile(sampleDir);
 
 			throw ioe;
 		}
@@ -240,21 +180,6 @@ public class FailureMessageUtilTest {
 			url.getPath(), url.getQuery(), url.getRef());
 
 		return new URL(uri.toASCIIString());
-	}
-
-	private static Project _initProject() {
-		Project project = new Project();
-
-		project.setProperty(
-			"github.pull.request.head.branch", "junit-pr-head-branch");
-		project.setProperty(
-			"github.pull.request.head.username", "junit-pr-head-username");
-		project.setProperty("plugins.branch.name", "junit-plugins-branch-name");
-		project.setProperty("plugins.repository", "junit-plugins-repository");
-		project.setProperty("portal.repository", "junit-portal-repository");
-		project.setProperty("repository", "junit-repository");
-
-		return project;
 	}
 
 	private static String _read(File file) throws IOException {
@@ -271,17 +196,55 @@ public class FailureMessageUtilTest {
 		return string.replace("${" + token + "}", value);
 	}
 
+	private static String _toExternalForm(File file) throws Exception {
+		URI uri = file.toURI();
+
+		URL url = uri.toURL();
+
+		return url.toExternalForm();
+	}
+
 	private static void _write(File file, String content) throws Exception {
+		System.out.println(
+			"Write file " + file + " with length " + content.length());
+
+		File parentDir = file.getParentFile();
+
+		if (!parentDir.exists()) {
+			System.out.println("Make parent directories for " + file);
+
+			parentDir.mkdirs();
+		}
+
 		Files.write(Paths.get(file.toURI()), content.getBytes());
 	}
 
-	private static final String _EXPECTED_RESULTS_FILE_PATH =
-		"expected-results/FailureMessageUtilTest.html";
+	private static void _writeExpectedResults(Project project, File sampleDir)
+		throws Exception {
 
-	private static final File _testDependenciesDir = new File(
-		"src/test/resources/com/liferay/results/parser/dependencies/" +
-		"FailureMessageUtilTest");
+		String failureMessage = FailureMessageUtil.getFailureMessage(
+			project, _toExternalForm(sampleDir));
 
-	private final Project _project;
+		File file = new File(sampleDir, "expected_results.html");
+
+		_write(file, failureMessage);
+	}
+
+	private static final File _dependenciesDir = new File(
+		"src/test/resources/com/liferay/results/parser/dependencies" +
+			"/FailureMessageUtilTest");
+	private static final Project _project = new Project();
+
+	static {
+		_project.setProperty(
+			"github.pull.request.head.branch", "junit-pr-head-branch");
+		_project.setProperty(
+			"github.pull.request.head.username", "junit-pr-head-username");
+		_project.setProperty(
+			"plugins.branch.name", "junit-plugins-branch-name");
+		_project.setProperty("plugins.repository", "junit-plugins-repository");
+		_project.setProperty("portal.repository", "junit-portal-repository");
+		_project.setProperty("repository", "junit-repository");
+	}
 
 }
