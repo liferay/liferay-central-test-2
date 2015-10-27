@@ -39,6 +39,7 @@ import java.util.Date;
 public class SchedulerEventMessageListenerWrapper
 	implements SchedulerEventMessageListener {
 
+	@Override
 	public String getMessageListenerUUID() {
 		return _messageListenerUUID;
 	}
