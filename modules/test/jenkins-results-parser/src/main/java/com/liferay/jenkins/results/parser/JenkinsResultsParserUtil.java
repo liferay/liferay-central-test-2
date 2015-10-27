@@ -95,9 +95,9 @@ public class JenkinsResultsParserUtil {
 				JSONObject parametersJSONObject =
 					parametersJSONArray.getJSONObject(j);
 
-				if ("AXIS_VARIABLE".contains(
-						parametersJSONObject.getString("name"))) {
+				String name = parametersJSONObject.getString("name");
 
+				if ("AXIS_VARIABLE".contains(name)) {
 					return parametersJSONObject.getString("value");
 				}
 			}
