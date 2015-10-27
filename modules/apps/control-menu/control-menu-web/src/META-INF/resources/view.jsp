@@ -70,7 +70,7 @@ if (layout != null) {
 									linkCssClass='<%= "control-menu-icon " + controlMenuEntry.getLinkCssClass(request) %>'
 									message="<%= controlMenuEntry.getLabel(locale) %>"
 									url="<%= controlMenuEntry.getURL(request) %>"
-									useDialog="<%= controlMenuEntry.useDialog() %>"
+									useDialog="<%= controlMenuEntry.isUseDialog() %>"
 								/>
 							</li>
 

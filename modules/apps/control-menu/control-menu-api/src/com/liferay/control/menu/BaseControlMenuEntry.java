@@ -87,7 +87,7 @@ public abstract class BaseControlMenuEntry implements ControlMenuEntry {
 	}
 
 	@Override
-	public boolean useDialog() {
+	public boolean isUseDialog() {
 		return false;
 	}
 
