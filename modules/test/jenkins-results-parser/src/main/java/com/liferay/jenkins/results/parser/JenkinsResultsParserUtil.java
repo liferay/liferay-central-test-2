@@ -84,7 +84,7 @@ public class JenkinsResultsParserUtil {
 
 			JSONObject actionsJSONObject = actionsJSONArray.getJSONObject(i);
 
-			JSONArray parametersJSONArray = actionsJSONObject.fetchJSONArray(
+			JSONArray parametersJSONArray = actionsJSONObject.optJSONArray(
 				"parameters");
 			
 			if (parametersJSONArray == null) {
