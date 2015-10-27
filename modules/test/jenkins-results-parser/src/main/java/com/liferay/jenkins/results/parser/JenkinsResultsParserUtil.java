@@ -97,7 +97,7 @@ public class JenkinsResultsParserUtil {
 
 				String name = parametersJSONObject.getString("name");
 
-				if ("AXIS_VARIABLE".contains(name)) {
+				if (name.contains("AXIS_VARIABLE")) {
 					return parametersJSONObject.getString("value");
 				}
 			}
