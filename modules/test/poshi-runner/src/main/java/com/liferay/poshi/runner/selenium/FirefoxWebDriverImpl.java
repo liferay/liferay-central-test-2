@@ -65,6 +65,7 @@ public class FirefoxWebDriverImpl extends BaseWebDriverImpl {
 		}
 
 		_firefoxProfile.setPreference("browser.download.dir", outputDirName);
+
 		_firefoxProfile.setPreference("browser.download.folderList", 2);
 		_firefoxProfile.setPreference(
 			"browser.download.manager.showWhenStarting", false);

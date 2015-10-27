@@ -49,6 +49,7 @@ public class ChromeWebDriverImpl extends BaseWebDriverImpl {
 		}
 
 		preferences.put("download.default_directory", outputDirName);
+
 		preferences.put("download.prompt_for_download", false);
 
 		_desiredCapabilities.setCapability("chrome.prefs", preferences);
