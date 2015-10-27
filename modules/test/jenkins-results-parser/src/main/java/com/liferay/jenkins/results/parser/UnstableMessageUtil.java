@@ -125,10 +125,11 @@ public class UnstableMessageUtil {
 
 					if (!status.equals("FIXED") && !status.equals("PASSED") &&
 						!status.equals("SKIPPED")) {
-							JSONObject jobJSONObject =
-								JenkinsResultsParserUtil.toJSONObject(
-									JenkinsResultsParserUtil.getLocalURL(
-										runBuildURL + "api/json"));
+
+						JSONObject jobJSONObject =
+							JenkinsResultsParserUtil.toJSONObject(
+								JenkinsResultsParserUtil.getLocalURL(
+									runBuildURL + "api/json"));
 
 						String testClassName = casesJSONObject.getString(
 							"className");
