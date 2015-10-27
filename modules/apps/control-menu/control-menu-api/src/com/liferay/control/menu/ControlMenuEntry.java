@@ -46,6 +46,6 @@ public interface ControlMenuEntry {
 			HttpServletRequest request, HttpServletResponse response)
 		throws IOException;
 
-	public boolean useDialog();
+	public boolean isUseDialog();
 
 }
