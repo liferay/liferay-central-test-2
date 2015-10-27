@@ -18,15 +18,13 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
-
 import java.net.URI;
 import java.net.URL;
-
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import org.apache.tools.ant.Project;
-
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -38,13 +36,13 @@ public class FailureMessageUtilTest {
 	@BeforeClass
 	public static void setUpClass() throws Exception {
 		_downloadSlaveDependency(
-			"generic", "0,label_exp=!master", "129",
+			"generic-1", "0,label_exp=!master", "129",
 			"test-portal-acceptance-pullrequest-batch(master)", "test-4-1");
 		_downloadSlaveDependency(
-			"rebase", null, "267",
+			"rebase-1", null, "267",
 			"test-portal-acceptance-pullrequest-source(ee-6.2.x)", "test-1-1");
 		_downloadSlaveDependency(
-			"plugin-compile", "9,label_exp=!master", "233",
+			"plugin-compile-1", "9,label_exp=!master", "233",
 			"test-portal-acceptance-pullrequest-batch(ee-6.2.x)", "test-1-20");
 	}
 
@@ -58,52 +56,55 @@ public class FailureMessageUtilTest {
 
 		for (File file : files) {
 			if (file.isDirectory()) {
-				assertTrue(validateCase(_project, file));
+				assertSample(_project, file);
 			}
 		}
 	}
+	
+	protected String toExternalForm(File file) throws Exception {
+		URI uri = file.toURI();
+		
+		URL url = uri.toURL();
+		
+		return url.toExternalForm();
+	}
 
-	protected void createExpectedResultsFile(Project project, File testRoot)
+	protected void writeExpectedResults(Project project, File sampleDir)
 		throws Exception {
-
+		
 		String failureMessage = FailureMessageUtil.getFailureMessage(
-			project, testRoot.toURI().toURL().toExternalForm());
+			project, toExternalForm(sampleDir));
 
-		new File(testRoot.getPath() + "/expected-results").mkdir();
-
-		File file = new File(
-			testRoot.getPath() + "/" + _EXPECTED_RESULTS_FILE_PATH);
+		File file = new File(sampleDir, "expected_results.html");
 
 		_write(file, failureMessage);
 	}
 
-	protected boolean validateCase(Project project, File testRoot)
+	protected void assertSample(Project project, File caseDir)
 		throws Exception {
 
-		String name = testRoot.getName();
-
-		System.out.print("Testing case: " + name);
+		System.out.print("Asserting sample " + caseDir.getName() + ": ");
 
 		File expectedResultsFile = new File(
-			testRoot.getPath() + "/" + _EXPECTED_RESULTS_FILE_PATH);
+			caseDir.getPath(), "expected_results.html");
 
 		String expectedResults = _read(expectedResultsFile);
 
-		String url = testRoot.toURI().toURL().toExternalForm();
+		String url = caseDir.toURI().toURL().toExternalForm();
 		String results = FailureMessageUtil.getFailureMessage(project, url);
 
-		boolean passed = results.equals(expectedResults);
+		boolean value = results.equals(expectedResults);
 
-		if (!passed) {
-			System.out.println("name: " + ":" + name + ": FAILED");
-			System.out.println("results: \n" + results);
-			System.out.println("expected results: \n" + expectedResults);
+		if (!value) {
+			System.out.println(" FAILED");
+			System.out.println("\nActual results: \n" + results);
+			System.out.println("\nExpected results: \n" + expectedResults);
 		}
 		else {
 			System.out.println(" PASSED");
 		}
 
-		return passed;
+		Assert.assertTrue(value);
 	}
 
 	private static URL _createURL(String urlString) throws Exception {
@@ -132,7 +133,7 @@ public class FailureMessageUtilTest {
 	}
 
 	private static void _downloadSlaveDependency(
-			String description, String axisVariable, String buildNumber,
+			String caseDescription, String axisVariable, String buildNumber,
 			String jobName, String hostName)
 		throws Exception {
 
@@ -141,7 +142,8 @@ public class FailureMessageUtilTest {
 				"/${buildNumber}/";
 
 		String slaveDependencyIdentifier =
-			description + "_" + jobName + "_" + hostName + "_" + buildNumber;
+			caseDescription + "_" + jobName + "_" + hostName + "_" +
+				buildNumber;
 
 		if (axisVariable != null) {
 			slaveDependencyIdentifier += "_" + axisVariable;
@@ -219,7 +221,7 @@ public class FailureMessageUtilTest {
 			FailureMessageUtilTest failureMessageUtilTest =
 				new FailureMessageUtilTest();
 
-			failureMessageUtilTest.createExpectedResultsFile(
+			failureMessageUtilTest.writeExpectedResults(
 				failureMessageUtilTest._project,
 				new File(slaveDependencyRootPath));
 		}
