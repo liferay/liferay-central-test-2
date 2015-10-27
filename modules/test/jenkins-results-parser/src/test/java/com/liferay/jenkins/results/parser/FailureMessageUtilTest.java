@@ -38,13 +38,13 @@ public class FailureMessageUtilTest {
 	@BeforeClass
 	public static void setUpClass() throws Exception {
 		_downloadSlaveDependency(
-			"AXIS_VARIABLE=0,label_exp=!master", "129", "generic-fail",
+			"generic", "0,label_exp=!master", "129",
 			"test-portal-acceptance-pullrequest-batch(master)", "test-4-1");
 		_downloadSlaveDependency(
-			null, "267", "rebase-fail",
+			"rebase", null, "267",
 			"test-portal-acceptance-pullrequest-source(ee-6.2.x)", "test-1-1");
 		_downloadSlaveDependency(
-			"AXIS_VARIABLE=9,label_exp=!master", "233", "plugin-compile",
+			"plugin-compile", "9,label_exp=!master", "233",
 			"test-portal-acceptance-pullrequest-batch(ee-6.2.x)", "test-1-20");
 	}
 
@@ -132,8 +132,8 @@ public class FailureMessageUtilTest {
 	}
 
 	private static void _downloadSlaveDependency(
-			String axis, String buildNumber, String description, String jobName,
-			String hostName)
+			String description, String axisVariable, String buildNumber,
+			String jobName, String hostName)
 		throws Exception {
 
 		String urlString =
@@ -143,12 +143,14 @@ public class FailureMessageUtilTest {
 		String slaveDependencyIdentifier =
 			description + "_" + jobName + "_" + hostName + "_" + buildNumber;
 
-		if (axis != null) {
+		if (axisVariable != null) {
+			slaveDependencyIdentifier += "_" + axisVariable;
+
 			urlString =
 				"https://${hostName}.liferay.com/job/${jobName}/" +
-				"${axis}/${buildNumber}/";
-			slaveDependencyIdentifier += "_" + axis;
-			urlString = _replaceToken(urlString, "axis", axis);
+					"AXIS_VARIABLE=${axis}/${buildNumber}/";
+
+			urlString = _replaceToken(urlString, "axis", axisVariable);
 		}
 
 		urlString = _replaceToken(urlString, "buildNumber", buildNumber);
