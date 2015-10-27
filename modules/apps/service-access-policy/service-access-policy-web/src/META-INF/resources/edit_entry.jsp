@@ -135,7 +135,7 @@ if (sapEntry != null) {
 
 		var getActionMethodNamesURL = Liferay.PortletURL.createURL('<%= getActionMethodNamesURL %>');
 
-		var serviceClassNamesToContextNames = <%= request.getAttribute(SAPWebKeys.SERVICE_CLASS_NAMES_TO_CONTEXT_NAMES).toString() %>;
+		var serviceClassNamesToContextNames = <%= request.getAttribute(SAPWebKeys.SERVICE_CLASS_NAMES_TO_CONTEXT_NAMES) %>;
 
 		var serviceActionMethodNames = {};
 
