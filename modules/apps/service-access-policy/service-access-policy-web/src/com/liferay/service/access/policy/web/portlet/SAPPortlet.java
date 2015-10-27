@@ -181,7 +181,7 @@ public class SAPPortlet extends MVCPortlet {
 				getJSONArrayServiceClassNamesToContextNames();
 
 			renderRequest.setAttribute(
-				SAPWebKeys.REMOTE_SERVICE_CLASS_NAMES_TO_CONTEXT_NAMES,
+				SAPWebKeys.SERVICE_CLASS_NAMES_TO_CONTEXT_NAMES,
 				jsonArrayServiceClassNamesToContextNames);
 		}
 

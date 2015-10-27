@@ -19,7 +19,7 @@ package com.liferay.service.access.policy.web.constants;
  */
 public class SAPWebKeys {
 
-	public static final String REMOTE_SERVICE_CLASS_NAMES_TO_CONTEXT_NAMES =
-		"REMOTE_SERVICE_CLASS_NAMES_TO_CONTEXT_NAMES";
+	public static final String SERVICE_CLASS_NAMES_TO_CONTEXT_NAMES =
+		"SERVICE_CLASS_NAMES_TO_CONTEXT_NAMES";
 
 }
