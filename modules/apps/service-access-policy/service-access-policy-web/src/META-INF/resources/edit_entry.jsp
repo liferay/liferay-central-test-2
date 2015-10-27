@@ -148,7 +148,7 @@ if (sapEntry != null) {
 			return serviceClassNameToContextName && serviceClassNameToContextName.contextName || 'portal';
 		};
 
-		var getServiceActionMethodNames = function(contextName, serviceClassName, callback) {
+		var getActionMethodNames = function(contextName, serviceClassName, callback) {
 			if (contextName && serviceClassName && callback) {
 				var namespace = contextName.replace(REGEX_DOT, '_') + '.' + serviceClassName.replace(REGEX_DOT, '_');
 
@@ -225,7 +225,7 @@ if (sapEntry != null) {
 							serviceClassNameInput.attr('data-context-name', contextName);
 						}
 
-						getServiceActionMethodNames(contextName, serviceClassName, callback);
+						getActionMethodNames(contextName, serviceClassName, callback);
 					}
 				}
 			).render();
