@@ -14,8 +14,6 @@
 
 package com.liferay.portal.kernel.scheduler.config;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineHelperUtil;
 import com.liferay.portal.kernel.scheduler.SchedulerEntry;
@@ -43,9 +41,6 @@ public class DefaultSchedulingConfigurator
 		schedulingConfiguratorLifecycle.registerPortalLifecycle(
 			PortalLifecycle.METHOD_INIT);
 	}
-
-	private static final Log _log = LogFactoryUtil.getLog(
-		DefaultSchedulingConfigurator.class);
 
 	private class SchedulingConfiguratorLifecycle extends BasePortalLifecycle {
 
