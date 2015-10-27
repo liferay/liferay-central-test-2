@@ -20,9 +20,6 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.wiki.constants.WikiPortletKeys;
 
-import javax.portlet.PortletConfig;
-import javax.portlet.PortletContext;
-import javax.portlet.PortletRequestDispatcher;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 
