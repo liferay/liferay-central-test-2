@@ -127,48 +127,6 @@ public class SAPPortlet extends MVCPortlet {
 		printWriter.write(jsonArray.toString());
 	}
 
-	protected JSONArray getServiceClassNamesToContextNamesJSONArray() {
-		JSONArray serviceClassNamesToContextNamesJSONArray =
-			JSONFactoryUtil.createJSONArray();
-
-		Set<String> contextNames =
-			_jsonWebServiceActionsManager.getContextNames();
-
-		for (String contextName : contextNames) {
-			Map<String, Set<JSONWebServiceActionMapping>>
-				jsonWebServiceActionMappingsMap =
-					getServiceJSONWebServiceActionMappingsMap(contextName);
-
-			for (Map.Entry<String, Set<JSONWebServiceActionMapping>> entry :
-					jsonWebServiceActionMappingsMap.entrySet()) {
-
-				JSONObject jsonObjectServiceClassNameToContextName =
-					JSONFactoryUtil.createJSONObject();
-
-				jsonObjectServiceClassNameToContextName.put(
-					"serviceClassName", entry.getKey());
-
-				Set<JSONWebServiceActionMapping>
-					jsonWebServiceActionMappingsSet = entry.getValue();
-
-				Iterator<JSONWebServiceActionMapping> iterator =
-					jsonWebServiceActionMappingsSet.iterator();
-
-				JSONWebServiceActionMapping firstJSONWebServiceActionMapping =
-					iterator.next();
-
-				jsonObjectServiceClassNameToContextName.put(
-					"contextName",
-					firstJSONWebServiceActionMapping.getContextName());
-
-				serviceClassNamesToContextNamesJSONArray.put(
-					jsonObjectServiceClassNameToContextName);
-			}
-		}
-
-		return serviceClassNamesToContextNamesJSONArray;
-	}
-
 	@Override
 	public void render(
 			RenderRequest renderRequest, RenderResponse renderResponse)
@@ -216,6 +174,48 @@ public class SAPPortlet extends MVCPortlet {
 				allowedServiceSignatures, defaultSAPEntry, enabled, name,
 				titleMap, serviceContext);
 		}
+	}
+
+	protected JSONArray getServiceClassNamesToContextNamesJSONArray() {
+		JSONArray serviceClassNamesToContextNamesJSONArray =
+			JSONFactoryUtil.createJSONArray();
+
+		Set<String> contextNames =
+			_jsonWebServiceActionsManager.getContextNames();
+
+		for (String contextName : contextNames) {
+			Map<String, Set<JSONWebServiceActionMapping>>
+				jsonWebServiceActionMappingsMap =
+					getServiceJSONWebServiceActionMappingsMap(contextName);
+
+			for (Map.Entry<String, Set<JSONWebServiceActionMapping>> entry :
+					jsonWebServiceActionMappingsMap.entrySet()) {
+
+				JSONObject jsonObjectServiceClassNameToContextName =
+					JSONFactoryUtil.createJSONObject();
+
+				jsonObjectServiceClassNameToContextName.put(
+					"serviceClassName", entry.getKey());
+
+				Set<JSONWebServiceActionMapping>
+					jsonWebServiceActionMappingsSet = entry.getValue();
+
+				Iterator<JSONWebServiceActionMapping> iterator =
+					jsonWebServiceActionMappingsSet.iterator();
+
+				JSONWebServiceActionMapping firstJSONWebServiceActionMapping =
+					iterator.next();
+
+				jsonObjectServiceClassNameToContextName.put(
+					"contextName",
+					firstJSONWebServiceActionMapping.getContextName());
+
+				serviceClassNamesToContextNamesJSONArray.put(
+					jsonObjectServiceClassNameToContextName);
+			}
+		}
+
+		return serviceClassNamesToContextNamesJSONArray;
 	}
 
 	protected Map<String, Set<JSONWebServiceActionMapping>>
