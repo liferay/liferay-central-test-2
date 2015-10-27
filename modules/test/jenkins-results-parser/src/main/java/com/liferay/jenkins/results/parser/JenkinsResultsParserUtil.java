@@ -71,31 +71,33 @@ public class JenkinsResultsParserUtil {
 	}
 
 	public static String getAxisVariable(JSONObject jsonObject)
-		throws JSONException {
+		throws Exception {
 
 		JSONArray actionsJSONArray = (JSONArray)jsonObject.get("actions");
 
-		for (int i = 0; i<actionsJSONArray.length(); i++) {
+		for (int i = 0; i <actionsJSONArray.length(); i++) {
 			Object object = actionsJSONArray.get(i);
 
-			if (object.equals(org.json.JSONObject.NULL)) {
+			if (object.equals(JSONObject.NULL)) {
 				continue;
 			}
 
 			JSONObject actionsJSONObject = actionsJSONArray.getJSONObject(i);
 
-			if (actionsJSONObject.has("parameters")) {
-				JSONArray parametersJSONArray = actionsJSONObject.getJSONArray(
-					"parameters");
+			if (!actionsJSONObject.has("parameters")) {
+				continue;
+			}
 
-				for (int j = 0; j < parametersJSONArray.length(); j++) {
-					JSONObject parametersJSONObject =
-						parametersJSONArray.getJSONObject(j);
+			JSONArray parametersJSONArray = actionsJSONObject.getJSONArray(
+				"parameters");
 
-					if ("AXIS_VARIABLE".contains(
-							parametersJSONObject.getString("name"))) {
-								return parametersJSONObject.getString("value");
-					}
+			for (int j = 0; j < parametersJSONArray.length(); j++) {
+				JSONObject parametersJSONObject =
+					parametersJSONArray.getJSONObject(j);
+
+				if ("AXIS_VARIABLE".contains(
+						parametersJSONObject.getString("name"))) {
+							return parametersJSONObject.getString("value");
 				}
 			}
 		}
