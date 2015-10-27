@@ -52,9 +52,7 @@ public class FailureMessageUtilTest {
 		File[] files = _dependenciesDir.listFiles();
 
 		for (File file : files) {
-			if (file.isDirectory()) {
-				assertSample(_project, file);
-			}
+			assertSample(_project, file);
 		}
 	}
 
@@ -63,23 +61,24 @@ public class FailureMessageUtilTest {
 
 		System.out.print("Asserting sample " + caseDir.getName() + ": ");
 
-		File expectedResultsFile = new File(
-			caseDir.getPath(), "expected_results.html");
+		File expectedFailureMessageFile = new File(
+			caseDir, "expected_failure_message.html");
 
-		String expectedResults = _read(expectedResultsFile);
+		String expectedFailureMessage = _read(expectedFailureMessageFile);
 
-		String url = _toExternalForm(caseDir);
-		String results = FailureMessageUtil.getFailureMessage(project, url);
+		String actualFailureMessage = FailureMessageUtil.getFailureMessage(
+			project, _toExternalForm(caseDir));
 
-		boolean value = results.equals(expectedResults);
+		boolean value = expectedFailureMessage.equals(actualFailureMessage);
 
-		if (!value) {
-			System.out.println(" FAILED");
-			System.out.println("\nActual results: \n" + results);
-			System.out.println("\nExpected results: \n" + expectedResults);
+		if (value) {
+			System.out.println(" PASSED");
 		}
 		else {
-			System.out.println(" PASSED");
+			System.out.println(" FAILED");
+			System.out.println("\nActual results: \n" + actualFailureMessage);
+			System.out.println(
+				"\nExpected results: \n" + expectedFailureMessage);
 		}
 
 		Assert.assertTrue(value);
@@ -150,28 +149,24 @@ public class FailureMessageUtilTest {
 		}
 
 		try {
-			String jsonString = JenkinsResultsParserUtil.toString(
-				url + "/api/json");
+			_downloadSampleURL(sampleDir, url, "/api/json");
+			_downloadSampleURL(sampleDir, url, "/logText/progressiveText");
 
-			File jsonFile = new File(sampleDirName + "/api/json");
-
-			_write(jsonFile, jsonString);
-
-			String progressiveText = JenkinsResultsParserUtil.toString(
-				url + "/logText/progressiveText");
-
-			File consoleFile = new File(
-				sampleDirName + "/logText/progressiveText");
-
-			_write(consoleFile, progressiveText);
-
-			_writeExpectedResults(_project, sampleDir);
+			_writeExpectedFailureMessage(_project, sampleDir);
 		}
 		catch (IOException ioe) {
 			_deleteFile(sampleDir);
 
 			throw ioe;
 		}
+	}
+
+	private static void _downloadSampleURL(File dir, URL url, String urlSuffix)
+		throws Exception {
+
+		_write(
+			new File(dir, urlSuffix),
+			JenkinsResultsParserUtil.toString(url + urlSuffix));
 	}
 
 	private static URL _encode(URL url) throws Exception {
@@ -219,15 +214,16 @@ public class FailureMessageUtilTest {
 		Files.write(Paths.get(file.toURI()), content.getBytes());
 	}
 
-	private static void _writeExpectedResults(Project project, File sampleDir)
+	private static void _writeExpectedFailureMessage(
+			Project project, File sampleDir)
 		throws Exception {
 
-		String failureMessage = FailureMessageUtil.getFailureMessage(
+		File expectedFailureMessageFile = new File(
+			sampleDir, "expected_failure_message.html");
+		String expectedFailureMessage = FailureMessageUtil.getFailureMessage(
 			project, _toExternalForm(sampleDir));
 
-		File file = new File(sampleDir, "expected_results.html");
-
-		_write(file, failureMessage);
+		_write(expectedFailureMessageFile, expectedFailureMessage);
 	}
 
 	private static final File _dependenciesDir = new File(
