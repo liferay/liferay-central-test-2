@@ -137,7 +137,7 @@ if (sapEntry != null) {
 
 		var serviceClassNamesToContextNames = <%= request.getAttribute(SAPWebKeys.SERVICE_CLASS_NAMES_TO_CONTEXT_NAMES) %>;
 
-		var getServiceContext = function(serviceClassName) {
+		var getContextName = function(serviceClassName) {
 			var serviceClassNameToContextName = A.Array.find(
 				serviceClassNamesToContextNames,
 				function(item, index) {
@@ -220,7 +220,7 @@ if (sapEntry != null) {
 						var serviceClassName = serviceClassNameInput.attr('data-service-class-name');
 
 						if (!contextName) {
-							contextName = getServiceContext(serviceClassName);
+							contextName = getContextName(serviceClassName);
 
 							serviceClassNameInput.attr('data-context-name', contextName);
 						}
