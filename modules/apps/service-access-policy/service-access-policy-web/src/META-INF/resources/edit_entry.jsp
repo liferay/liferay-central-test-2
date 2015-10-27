@@ -137,17 +137,6 @@ if (sapEntry != null) {
 
 		var serviceClassNamesToContextNames = <%= request.getAttribute(SAPWebKeys.SERVICE_CLASS_NAMES_TO_CONTEXT_NAMES) %>;
 
-		var getContextName = function(serviceClassName) {
-			var serviceClassNameToContextName = A.Array.find(
-				serviceClassNamesToContextNames,
-				function(item, index) {
-					return item.serviceClassName === serviceClassName;
-				}
-			);
-
-			return serviceClassNameToContextName && serviceClassNameToContextName.contextName || 'portal';
-		};
-
 		var getActionMethodNames = function(contextName, serviceClassName, callback) {
 			if (contextName && serviceClassName && callback) {
 				var namespace = contextName.replace(REGEX_DOT, '_') + '.' + serviceClassName.replace(REGEX_DOT, '_');
@@ -185,6 +174,17 @@ if (sapEntry != null) {
 					callback(actionMethodNames);
 				}
 			}
+		};
+
+		var getContextName = function(serviceClassName) {
+			var serviceClassNameToContextName = A.Array.find(
+				serviceClassNamesToContextNames,
+				function(item, index) {
+					return item.serviceClassName === serviceClassName;
+				}
+			);
+
+			return serviceClassNameToContextName && serviceClassNameToContextName.contextName || 'portal';
 		};
 
 		var initAutoCompleteRow = function(rowNode) {
