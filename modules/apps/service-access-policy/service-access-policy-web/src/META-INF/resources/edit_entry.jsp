@@ -137,8 +137,6 @@ if (sapEntry != null) {
 
 		var serviceClassNamesToContextNames = <%= request.getAttribute(SAPWebKeys.SERVICE_CLASS_NAMES_TO_CONTEXT_NAMES) %>;
 
-		var serviceActionMethodNames = {};
-
 		var getServiceContext = function(serviceClassName) {
 			var serviceClassNameToContextName = A.Array.find(
 				serviceClassNamesToContextNames,
@@ -154,7 +152,7 @@ if (sapEntry != null) {
 			if (contextName && serviceClassName && callback) {
 				var namespace = contextName.replace(REGEX_DOT, '_') + '.' + serviceClassName.replace(REGEX_DOT, '_');
 
-				var methodObj = A.namespace.call(serviceActionMethodNames, namespace);
+				var methodObj = A.namespace.call({}, namespace);
 
 				var actionMethodNames = methodObj.actionMethodNames;
 
