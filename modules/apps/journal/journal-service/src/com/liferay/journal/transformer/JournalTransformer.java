@@ -359,13 +359,6 @@ public class JournalTransformer {
 				template.put("templatesPath", templatesPath);
 				template.put("viewMode", viewMode);
 
-				// Deprecated variables
-
-				template.put("groupId", articleGroupId);
-				template.put("journalTemplatesPath", templatesPath);
-
-				// Taglibs
-
 				if (themeDisplay != null) {
 					TemplateManager templateManager =
 						TemplateManagerUtil.getTemplateManager(langType);
@@ -381,6 +374,11 @@ public class JournalTransformer {
 						template, "Request", request,
 						themeDisplay.getResponse());
 				}
+
+				// Deprecated variables
+
+				template.put("groupId", articleGroupId);
+				template.put("journalTemplatesPath", templatesPath);
 
 				mergeTemplate(template, unsyncStringWriter, propagateException);
 			}
