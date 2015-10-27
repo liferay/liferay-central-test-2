@@ -127,7 +127,7 @@ public class SAPPortlet extends MVCPortlet {
 		printWriter.write(jsonArray.toString());
 	}
 
-	public JSONArray getServiceClassNamesToContextNamesJSONArray() {
+	protected JSONArray getServiceClassNamesToContextNamesJSONArray() {
 		JSONArray serviceClassNamesToContextNamesJSONArray =
 			JSONFactoryUtil.createJSONArray();
 
