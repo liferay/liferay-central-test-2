@@ -127,8 +127,8 @@ public class SAPPortlet extends MVCPortlet {
 		printWriter.write(jsonArray.toString());
 	}
 
-	public JSONArray getJSONArrayServiceClassNamesToContextNames() {
-		JSONArray jsonArrayServiceClassNamesToContextNames =
+	public JSONArray getServiceClassNamesToContextNamesJSONArray() {
+		JSONArray serviceClassNamesToContextNamesJSONArray =
 			JSONFactoryUtil.createJSONArray();
 
 		Set<String> contextNames =
@@ -161,12 +161,12 @@ public class SAPPortlet extends MVCPortlet {
 					"contextName",
 					firstJSONWebServiceActionMapping.getContextName());
 
-				jsonArrayServiceClassNamesToContextNames.put(
+				serviceClassNamesToContextNamesJSONArray.put(
 					jsonObjectServiceClassNameToContextName);
 			}
 		}
 
-		return jsonArrayServiceClassNamesToContextNames;
+		return serviceClassNamesToContextNamesJSONArray;
 	}
 
 	@Override
@@ -177,12 +177,12 @@ public class SAPPortlet extends MVCPortlet {
 		String mvcPath = ParamUtil.getString(renderRequest, "mvcPath");
 
 		if (mvcPath.equals("/edit_entry.jsp")) {
-			JSONArray jsonArrayServiceClassNamesToContextNames =
-				getJSONArrayServiceClassNamesToContextNames();
+			JSONArray serviceClassNamesToContextNamesJSONArray =
+				getServiceClassNamesToContextNamesJSONArray();
 
 			renderRequest.setAttribute(
 				SAPWebKeys.SERVICE_CLASS_NAMES_TO_CONTEXT_NAMES,
-				jsonArrayServiceClassNamesToContextNames);
+				serviceClassNamesToContextNamesJSONArray);
 		}
 
 		super.render(renderRequest, renderResponse);
