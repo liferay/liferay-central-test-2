@@ -636,16 +636,16 @@ public class PortletBagFactory {
 		List<SchedulerEntry> schedulerEntries = portlet.getSchedulerEntries();
 
 		for (SchedulerEntry schedulerEntry : schedulerEntries) {
+			SchedulerEventMessageListenerWrapper
+				schedulerEventMessageListenerWrapper =
+					new SchedulerEventMessageListenerWrapper();
+
 			com.liferay.portal.kernel.messaging.MessageListener
 				messageListener =
 					(com.liferay.portal.kernel.messaging.MessageListener)
 						InstanceFactory.newInstance(
 							_classLoader,
 							schedulerEntry.getEventListenerClass());
-
-			SchedulerEventMessageListenerWrapper
-				schedulerEventMessageListenerWrapper =
-					new SchedulerEventMessageListenerWrapper();
 
 			schedulerEventMessageListenerWrapper.setMessageListener(
 				messageListener);
