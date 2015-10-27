@@ -85,7 +85,7 @@ public class JenkinsResultsParserUtil {
 
 			JSONArray parametersJSONArray = actionsJSONObject.optJSONArray(
 				"parameters");
-			
+
 			if (parametersJSONArray == null) {
 				continue;
 			}
@@ -172,6 +172,8 @@ public class JenkinsResultsParserUtil {
 	}
 
 	public static String toString(String url) throws IOException {
+		System.out.println("Downloading " + url);
+
 		StringBuilder sb = new StringBuilder();
 
 		URL urlObject = new URL(fixURL(url));
