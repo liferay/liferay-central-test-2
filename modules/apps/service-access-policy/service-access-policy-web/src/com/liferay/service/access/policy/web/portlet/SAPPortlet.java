@@ -177,8 +177,7 @@ public class SAPPortlet extends MVCPortlet {
 	}
 
 	protected JSONArray getServiceClassNamesToContextNamesJSONArray() {
-		JSONArray serviceClassNamesToContextNamesJSONArray =
-			JSONFactoryUtil.createJSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		Set<String> contextNames =
 			_jsonWebServiceActionsManager.getContextNames();
@@ -191,11 +190,9 @@ public class SAPPortlet extends MVCPortlet {
 			for (Map.Entry<String, Set<JSONWebServiceActionMapping>> entry :
 					jsonWebServiceActionMappingsMap.entrySet()) {
 
-				JSONObject jsonObjectServiceClassNameToContextName =
-					JSONFactoryUtil.createJSONObject();
+				JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-				jsonObjectServiceClassNameToContextName.put(
-					"serviceClassName", entry.getKey());
+				jsonObject.put("serviceClassName", entry.getKey());
 
 				Set<JSONWebServiceActionMapping>
 					jsonWebServiceActionMappingsSet = entry.getValue();
@@ -206,16 +203,15 @@ public class SAPPortlet extends MVCPortlet {
 				JSONWebServiceActionMapping firstJSONWebServiceActionMapping =
 					iterator.next();
 
-				jsonObjectServiceClassNameToContextName.put(
+				jsonObject.put(
 					"contextName",
 					firstJSONWebServiceActionMapping.getContextName());
 
-				serviceClassNamesToContextNamesJSONArray.put(
-					jsonObjectServiceClassNameToContextName);
+				jsonArray.put(jsonObject);
 			}
 		}
 
-		return serviceClassNamesToContextNamesJSONArray;
+		return jsonArray;
 	}
 
 	protected Map<String, Set<JSONWebServiceActionMapping>>
