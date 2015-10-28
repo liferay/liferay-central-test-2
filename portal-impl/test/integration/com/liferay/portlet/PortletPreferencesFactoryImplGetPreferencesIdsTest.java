@@ -75,7 +75,7 @@ public class PortletPreferencesFactoryImplGetPreferencesIdsTest {
 		String portletId = TestCompanyPortlet.PORTLET_NAME;
 
 		LayoutTestUtil.addPortletToLayout(
-			TestPropsValues.getUserId(), _layout, String.valueOf(portletId),
+			TestPropsValues.getUserId(), _layout, portletId,
 			"column-1", null);
 
 		PortletPreferencesIds portletPreferencesIds =
