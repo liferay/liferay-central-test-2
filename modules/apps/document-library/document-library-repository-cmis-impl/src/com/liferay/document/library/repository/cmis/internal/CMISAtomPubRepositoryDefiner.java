@@ -30,6 +30,17 @@ import org.osgi.service.component.annotations.Reference;
 @Component(immediate = true, service = RepositoryDefiner.class)
 public class CMISAtomPubRepositoryDefiner extends BaseCMISRepositoryDefiner {
 
+	public CMISAtomPubRepositoryDefiner() {
+		RepositoryConfigurationBuilder repositoryConfigurationBuilder =
+			new RepositoryConfigurationBuilder(
+				getClass(), "content.Language",
+				CMISRepositoryConstants.
+					CMIS_ATOMPUB_URL_PARAMETER,
+				CMISRepositoryConstants.CMIS_ATOMPUB_REPOSITORY_ID_PARAMETER);
+
+		_repositoryConfiguration = repositoryConfigurationBuilder.build();
+	}
+
 	@Override
 	public String getClassName() {
 		return CMISAtomPubRepository.class.getName();
@@ -60,13 +71,7 @@ public class CMISAtomPubRepositoryDefiner extends BaseCMISRepositoryDefiner {
 		_repositoryFactory = repositoryFactory;
 	}
 
-	private final RepositoryConfiguration _repositoryConfiguration =
-		new RepositoryConfigurationBuilder(getClass(), "content.Language").
-			addParameter(
-				CMISRepositoryConstants.CMIS_ATOMPUB_URL_PARAMETER
-			).addParameter(
-				CMISRepositoryConstants.CMIS_ATOMPUB_REPOSITORY_ID_PARAMETER
-			).build();
+	private final RepositoryConfiguration _repositoryConfiguration;
 	private RepositoryFactory _repositoryFactory;
 
 }

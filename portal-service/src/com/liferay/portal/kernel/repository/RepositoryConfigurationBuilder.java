@@ -36,10 +36,14 @@ public class RepositoryConfigurationBuilder {
 	}
 
 	public RepositoryConfigurationBuilder(
-		Class<?> clazz, String resourceBundleBaseName) {
+		Class<?> clazz, String resourceBundleBaseName, String... names) {
 
 		_clazz = clazz;
 		_resourceBundleBaseName = resourceBundleBaseName;
+
+		for (String name : names) {
+			addParameter(name);
+		}
 	}
 
 	public RepositoryConfigurationBuilder addParameter(String name) {
