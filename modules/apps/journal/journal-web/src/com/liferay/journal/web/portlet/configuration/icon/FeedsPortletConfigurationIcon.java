@@ -58,7 +58,7 @@ public class FeedsPortletConfigurationIcon
 		try {
 			portletURL.setWindowState(LiferayWindowState.POP_UP);
 		}
-		catch (WindowStateException e) {
+		catch (WindowStateException wse) {
 		}
 
 		return portletURL.toString();
