@@ -29,7 +29,11 @@ import com.liferay.portal.test.rule.MainServletTestRule;
 import com.liferay.portal.test.rule.SyntheticBundleRule;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.test.LayoutTestUtil;
-import com.liferay.portlet.bundle.portletpreferencesfactoryimplgetpreferencesids.constants.TestPortletsPortletKeys;
+import com.liferay.portlet.bundle.portletpreferencesfactoryimplgetpreferencesids.TestCompanyPortlet;
+import com.liferay.portlet.bundle.portletpreferencesfactoryimplgetpreferencesids.TestGroupLayoutPortlet;
+import com.liferay.portlet.bundle.portletpreferencesfactoryimplgetpreferencesids.TestGroupPortlet;
+import com.liferay.portlet.bundle.portletpreferencesfactoryimplgetpreferencesids.TestUserLayoutPortlet;
+import com.liferay.portlet.bundle.portletpreferencesfactoryimplgetpreferencesids.TestUserPortlet;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -68,7 +72,7 @@ public class PortletPreferencesFactoryImplGetPreferencesIdsTest {
 		long siteGroupId = _layout.getGroupId();
 		boolean modeEditGuest = false;
 
-		String portletId = TestPortletsPortletKeys.TEST_COMPANY_PORTLET;
+		String portletId = TestCompanyPortlet.PORTLET_NAME;
 
 		LayoutTestUtil.addPortletToLayout(
 			TestPropsValues.getUserId(), _layout, String.valueOf(portletId),
@@ -93,7 +97,7 @@ public class PortletPreferencesFactoryImplGetPreferencesIdsTest {
 
 	@Test
 	public void testPreferencesOwnedByGroup() throws Exception {
-		String portletId = TestPortletsPortletKeys.TEST_GROUP_PORTLET;
+		String portletId = TestGroupPortlet.PORTLET_NAME;
 
 		long siteGroupId = _layout.getGroupId();
 		boolean modeEditGuest = false;
@@ -117,7 +121,7 @@ public class PortletPreferencesFactoryImplGetPreferencesIdsTest {
 
 	@Test
 	public void testPreferencesOwnedByGroupLayout() throws Exception {
-		String portletId = TestPortletsPortletKeys.TEST_GROUP_LAYOUT_PORTLET;
+		String portletId = TestGroupLayoutPortlet.PORTLET_NAME;
 
 		long siteGroupId = _layout.getGroupId();
 		boolean modeEditGuest = false;
@@ -142,7 +146,7 @@ public class PortletPreferencesFactoryImplGetPreferencesIdsTest {
 
 	@Test
 	public void testPreferencesOwnedByUser() throws Exception {
-		String portletId = TestPortletsPortletKeys.TEST_USER_PORTLET;
+		String portletId = TestUserPortlet.PORTLET_NAME;
 
 		long siteGroupId = _layout.getGroupId();
 		boolean modeEditGuest = false;
@@ -166,7 +170,7 @@ public class PortletPreferencesFactoryImplGetPreferencesIdsTest {
 
 	@Test
 	public void testPreferencesOwnedByUserLayout() throws Exception {
-		String portletId = TestPortletsPortletKeys.TEST_USER_LAYOUT_PORTLET;
+		String portletId = TestUserLayoutPortlet.PORTLET_NAME;
 
 		long siteGroupId = _layout.getGroupId();
 		boolean modeEditGuest = false;
@@ -194,7 +198,7 @@ public class PortletPreferencesFactoryImplGetPreferencesIdsTest {
 
 		_layout = LayoutTestUtil.addLayout(_group, false);
 
-		String portletId = TestPortletsPortletKeys.TEST_GROUP_PORTLET;
+		String portletId = TestGroupPortlet.PORTLET_NAME;
 
 		long siteGroupId = _layout.getGroupId();
 		boolean modeEditGuest = true;

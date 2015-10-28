@@ -15,7 +15,6 @@
 package com.liferay.portlet.bundle.portletpreferencesfactoryimplgetpreferencesids;
 
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
-import com.liferay.portlet.bundle.portletpreferencesfactoryimplgetpreferencesids.constants.TestPortletsPortletKeys;
 
 import javax.portlet.Portlet;
 
@@ -30,9 +29,14 @@ import org.osgi.service.component.annotations.Component;
 		"com.liferay.portlet.preferences-company-wide=false",
 		"com.liferay.portlet.preferences-owned-by-group=true",
 		"com.liferay.portlet.preferences-unique-per-layout=true",
-		"javax.portlet.name=" + TestPortletsPortletKeys.TEST_GROUP_LAYOUT_PORTLET
+		"javax.portlet.name=" + TestGroupLayoutPortlet.PORTLET_NAME
 	},
 	service = Portlet.class
 )
 public class TestGroupLayoutPortlet extends MVCPortlet {
+
+	public static final String PORTLET_NAME =
+		"com_liferay_portlet_bundle_portletpreferencesfactoryimplget" +
+			"preferencesids_TestGroupLayoutPortlet";
+
 }
