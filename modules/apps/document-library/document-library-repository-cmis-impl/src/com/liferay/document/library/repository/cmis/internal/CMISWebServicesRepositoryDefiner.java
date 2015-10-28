@@ -31,6 +31,33 @@ import org.osgi.service.component.annotations.Reference;
 public class CMISWebServicesRepositoryDefiner
 	extends BaseCMISRepositoryDefiner {
 
+	public CMISWebServicesRepositoryDefiner() {
+		RepositoryConfigurationBuilder repositoryConfigurationBuilder =
+			new RepositoryConfigurationBuilder(
+				getClass(), "content.Language",
+				CMISRepositoryConstants.
+					CMIS_WEBSERVICES_REPOSITORY_ID_PARAMETER,
+				CMISRepositoryConstants.CMIS_WEBSERVICES_ACL_SERVICE_PARAMETER,
+				CMISRepositoryConstants.
+					CMIS_WEBSERVICES_DISCOVERY_SERVICE_PARAMETER,
+				CMISRepositoryConstants.
+					CMIS_WEBSERVICES_MULTIFILING_SERVICE_PARAMETER,
+				CMISRepositoryConstants.
+					CMIS_WEBSERVICES_NAVIGATION_SERVICE_PARAMETER,
+				CMISRepositoryConstants.
+					CMIS_WEBSERVICES_OBJECT_SERVICE_PARAMETER,
+				CMISRepositoryConstants.
+					CMIS_WEBSERVICES_POLICY_SERVICE_PARAMETER,
+				CMISRepositoryConstants.
+					CMIS_WEBSERVICES_RELATIONSHIP_SERVICE_PARAMETER,
+				CMISRepositoryConstants.
+					CMIS_WEBSERVICES_REPOSITORY_SERVICE_PARAMETER,
+				CMISRepositoryConstants.
+					CMIS_WEBSERVICES_VERSIONING_SERVICE_PARAMETER);
+
+		_repositoryConfiguration = repositoryConfigurationBuilder.build();
+	}
+
 	@Override
 	public String getClassName() {
 		return CMISWebServicesRepository.class.getName();
@@ -61,38 +88,7 @@ public class CMISWebServicesRepositoryDefiner
 		_repositoryFactory = repositoryFactory;
 	}
 
-	private final RepositoryConfiguration _repositoryConfiguration =
-		new RepositoryConfigurationBuilder(getClass(), "content.Language").
-			addParameter(
-				CMISRepositoryConstants.
-					CMIS_WEBSERVICES_REPOSITORY_ID_PARAMETER
-			).addParameter(
-				CMISRepositoryConstants.CMIS_WEBSERVICES_ACL_SERVICE_PARAMETER
-			).addParameter(
-				CMISRepositoryConstants.
-					CMIS_WEBSERVICES_DISCOVERY_SERVICE_PARAMETER
-			).addParameter(
-				CMISRepositoryConstants.
-					CMIS_WEBSERVICES_MULTIFILING_SERVICE_PARAMETER
-			).addParameter(
-				CMISRepositoryConstants.
-					CMIS_WEBSERVICES_NAVIGATION_SERVICE_PARAMETER
-			).addParameter(
-				CMISRepositoryConstants.
-					CMIS_WEBSERVICES_OBJECT_SERVICE_PARAMETER
-			).addParameter(
-				CMISRepositoryConstants.
-					CMIS_WEBSERVICES_POLICY_SERVICE_PARAMETER
-			).addParameter(
-				CMISRepositoryConstants.
-					CMIS_WEBSERVICES_RELATIONSHIP_SERVICE_PARAMETER
-			).addParameter(
-				CMISRepositoryConstants.
-					CMIS_WEBSERVICES_REPOSITORY_SERVICE_PARAMETER
-			).addParameter(
-				CMISRepositoryConstants.
-					CMIS_WEBSERVICES_VERSIONING_SERVICE_PARAMETER
-			).build();
+	private final RepositoryConfiguration _repositoryConfiguration;
 	private RepositoryFactory _repositoryFactory;
 
 }

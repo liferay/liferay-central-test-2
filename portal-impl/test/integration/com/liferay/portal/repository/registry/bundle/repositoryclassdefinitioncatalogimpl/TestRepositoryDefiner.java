@@ -35,6 +35,13 @@ import org.osgi.service.component.annotations.Component;
 )
 public class TestRepositoryDefiner implements RepositoryDefiner {
 
+	public TestRepositoryDefiner() {
+		RepositoryConfigurationBuilder repositoryConfigurationBuilder =
+			new RepositoryConfigurationBuilder();
+
+		_repositoryConfiguration = repositoryConfigurationBuilder.build();
+	}
+
 	@Override
 	public String getClassName() {
 		return TestRepositoryDefiner.class.getName();
@@ -70,7 +77,6 @@ public class TestRepositoryDefiner implements RepositoryDefiner {
 		RepositoryFactoryRegistry repositoryFactoryRegistry) {
 	}
 
-	private static final RepositoryConfiguration _EMPTY_CONFIGURATION =
-		new RepositoryConfigurationBuilder().build();
+	private final RepositoryConfiguration _repositoryConfiguration;
 
 }

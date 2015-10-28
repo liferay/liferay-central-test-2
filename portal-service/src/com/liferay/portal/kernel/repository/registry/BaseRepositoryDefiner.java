@@ -26,12 +26,19 @@ import java.util.Locale;
  */
 public abstract class BaseRepositoryDefiner implements RepositoryDefiner {
 
+	public BaseRepositoryDefiner() {
+		RepositoryConfigurationBuilder repositoryConfigurationBuilder =
+			new RepositoryConfigurationBuilder();
+
+		_repositoryConfiguration = repositoryConfigurationBuilder.build();
+	}
+
 	@Override
 	public abstract String getClassName();
 
 	@Override
 	public RepositoryConfiguration getRepositoryConfiguration() {
-		return _EMPTY_CONFIGURATION;
+		return _repositoryConfiguration;
 	}
 
 	@Override
@@ -56,11 +63,10 @@ public abstract class BaseRepositoryDefiner implements RepositoryDefiner {
 	public abstract void registerRepositoryFactory(
 		RepositoryFactoryRegistry repositoryFactoryRegistry);
 
-	private static final RepositoryConfiguration _EMPTY_CONFIGURATION =
-		new RepositoryConfigurationBuilder().build();
-
 	private static final String[] _SUPPORTED_CONFIGURATIONS = {};
 
 	private static final String[][] _SUPPORTED_PARAMETERS = {};
+
+	private final RepositoryConfiguration _repositoryConfiguration;
 
 }
