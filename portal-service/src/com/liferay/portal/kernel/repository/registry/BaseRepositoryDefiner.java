@@ -63,10 +63,6 @@ public abstract class BaseRepositoryDefiner implements RepositoryDefiner {
 	public abstract void registerRepositoryFactory(
 		RepositoryFactoryRegistry repositoryFactoryRegistry);
 
-	private static final String[] _SUPPORTED_CONFIGURATIONS = {};
-
-	private static final String[][] _SUPPORTED_PARAMETERS = {};
-
 	private final RepositoryConfiguration _repositoryConfiguration;
 
 }
