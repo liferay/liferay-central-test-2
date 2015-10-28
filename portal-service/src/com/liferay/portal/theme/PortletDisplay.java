@@ -232,7 +232,7 @@ public class PortletDisplay implements Serializable {
 	}
 
 	public String getPortletDisplayName() {
-		if (_portletDisplayName == null) {
+		if (Validator.isNull(_portletDisplayName)) {
 			return _title;
 		}
 
