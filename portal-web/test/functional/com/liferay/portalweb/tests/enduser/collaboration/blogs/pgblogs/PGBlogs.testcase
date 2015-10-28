@@ -1983,8 +1983,6 @@
 			<var name="pageName" value="Blogs Page" />
 		</execute>
 
-		<execute macro="BlogsEntry#viewDisabledSocialBookmarkSites">
-			<var name="socialBookmarkSites" value="Twitter,Facebook,Google+,LinkedIn,BlinkList,Delicious,Digg,Evernote,Newsvine,Reddit,Slashdot,StumbleUpon,Technorati,Tuenti" />
-		</execute>
+		<execute macro="BlogsEntry#viewDisabledSocialBookmarkSites" />
 	</command>
 </definition>
