@@ -21,13 +21,13 @@ package com.liferay.portlet.social.util;
 public class SocialInteractionsConfiguration {
 
 	public SocialInteractionsConfiguration(
-		SocialInteractionsType socialInteractionsType,
+		boolean socialInteractionsFriendsEnabled,
 		boolean socialInteractionsSitesEnabled,
-		boolean socialInteractionsFriendsEnabled) {
+		SocialInteractionsType socialInteractionsType) {
 
-		_socialInteractionsType = socialInteractionsType;
-		_socialInteractionsSitesEnabled = socialInteractionsSitesEnabled;
 		_socialInteractionsFriendsEnabled = socialInteractionsFriendsEnabled;
+		_socialInteractionsSitesEnabled = socialInteractionsSitesEnabled;
+		_socialInteractionsType = socialInteractionsType;
 	}
 
 	public boolean isSocialInteractionsAnyUserEnabled() {
