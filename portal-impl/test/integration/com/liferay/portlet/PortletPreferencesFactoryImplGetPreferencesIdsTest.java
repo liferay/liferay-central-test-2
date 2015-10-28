@@ -74,8 +74,7 @@ public class PortletPreferencesFactoryImplGetPreferencesIdsTest {
 		boolean modeEditGuest = false;
 
 		LayoutTestUtil.addPortletToLayout(
-			TestPropsValues.getUserId(), _layout, portletId,
-			"column-1", null);
+			TestPropsValues.getUserId(), _layout, portletId, "column-1", null);
 
 		PortletPreferencesIds portletPreferencesIds =
 			PortletPreferencesFactoryUtil.getPortletPreferencesIds(
@@ -137,8 +136,8 @@ public class PortletPreferencesFactoryImplGetPreferencesIdsTest {
 			PortletKeys.PREFS_OWNER_ID_DEFAULT,
 			portletPreferencesIds.getOwnerId());
 		Assert.assertEquals(
-			"The PLID should be the PLID of the layout",
-			_layout.getPlid(), portletPreferencesIds.getPlid());
+			"The PLID should be the PLID of the layout", _layout.getPlid(),
+			portletPreferencesIds.getPlid());
 	}
 
 	@Test
@@ -183,8 +182,8 @@ public class PortletPreferencesFactoryImplGetPreferencesIdsTest {
 			"The owner ID should be the ID of the user who added it",
 			TestPropsValues.getUserId(), portletPreferencesIds.getOwnerId());
 		Assert.assertEquals(
-			"The PLID should be the PLID of the layout",
-			_layout.getPlid(), portletPreferencesIds.getPlid());
+			"The PLID should be the PLID of the layout", _layout.getPlid(),
+			portletPreferencesIds.getPlid());
 	}
 
 	@Test
