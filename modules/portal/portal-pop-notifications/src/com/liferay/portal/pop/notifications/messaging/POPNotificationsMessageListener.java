@@ -85,7 +85,7 @@ public class POPNotificationsMessageListener
 		MessageListenerWrapper messageListenerWrapper =
 			new MessageListenerWrapper(messageListener);
 
-		_messageListeners.put(messageListener, messageListenerWrapper);
+		_messageListenerWrappers.put(messageListener, messageListenerWrapper);
 	}
 
 	@Deactivate
@@ -218,7 +218,9 @@ public class POPNotificationsMessageListener
 				_log.debug("Recipient " + recipient);
 			}
 
-			for (MessageListener messageListener : _messageListeners.values()) {
+			for (MessageListener messageListener :
+					_messageListenerWrappers.values()) {
+
 				try {
 					if (messageListener.accept(from, recipient, message)) {
 						messageListener.deliver(from, recipient, message);
@@ -232,7 +234,7 @@ public class POPNotificationsMessageListener
 	}
 
 	protected void removeMessageListener(MessageListener messageListener) {
-		_messageListeners.remove(messageListener);
+		_messageListenerWrappers.remove(messageListener);
 	}
 
 	@Reference(target = ModuleServiceLifecycle.PORTAL_INITIALIZED, unbind = "-")
@@ -255,7 +257,7 @@ public class POPNotificationsMessageListener
 		POPNotificationsMessageListener.class);
 
 	private final Map<MessageListener, MessageListenerWrapper>
-		_messageListeners = new ConcurrentHashMap<>();
+		_messageListenerWrappers = new ConcurrentHashMap<>();
 	private SchedulerEngineHelper _schedulerEngineHelper;
 
 }
