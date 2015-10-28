@@ -35,21 +35,21 @@ public class CMISWebServicesRepositoryDefiner
 		RepositoryConfigurationBuilder repositoryConfigurationBuilder =
 			new RepositoryConfigurationBuilder(
 				getClass(), "content.Language",
-				CMISRepositoryConstants.
-					CMIS_WEBSERVICES_REPOSITORY_ID_PARAMETER,
 				CMISRepositoryConstants.CMIS_WEBSERVICES_ACL_SERVICE_PARAMETER,
 				CMISRepositoryConstants.
 					CMIS_WEBSERVICES_DISCOVERY_SERVICE_PARAMETER,
 				CMISRepositoryConstants.
 					CMIS_WEBSERVICES_MULTIFILING_SERVICE_PARAMETER,
 				CMISRepositoryConstants.
-					CMIS_WEBSERVICES_NAVIGATION_SERVICE_PARAMETER,
-				CMISRepositoryConstants.
 					CMIS_WEBSERVICES_OBJECT_SERVICE_PARAMETER,
+				CMISRepositoryConstants.
+					CMIS_WEBSERVICES_NAVIGATION_SERVICE_PARAMETER,
 				CMISRepositoryConstants.
 					CMIS_WEBSERVICES_POLICY_SERVICE_PARAMETER,
 				CMISRepositoryConstants.
 					CMIS_WEBSERVICES_RELATIONSHIP_SERVICE_PARAMETER,
+				CMISRepositoryConstants.
+					CMIS_WEBSERVICES_REPOSITORY_ID_PARAMETER,
 				CMISRepositoryConstants.
 					CMIS_WEBSERVICES_REPOSITORY_SERVICE_PARAMETER,
 				CMISRepositoryConstants.

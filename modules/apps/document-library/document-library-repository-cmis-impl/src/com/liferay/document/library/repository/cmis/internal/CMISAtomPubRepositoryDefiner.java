@@ -35,8 +35,8 @@ public class CMISAtomPubRepositoryDefiner extends BaseCMISRepositoryDefiner {
 			new RepositoryConfigurationBuilder(
 				getClass(), "content.Language",
 				CMISRepositoryConstants.
-					CMIS_ATOMPUB_URL_PARAMETER,
-				CMISRepositoryConstants.CMIS_ATOMPUB_REPOSITORY_ID_PARAMETER);
+					CMIS_ATOMPUB_REPOSITORY_ID_PARAMETER,
+				CMISRepositoryConstants.CMIS_ATOMPUB_URL_PARAMETER);
 
 		_repositoryConfiguration = repositoryConfigurationBuilder.build();
 	}
