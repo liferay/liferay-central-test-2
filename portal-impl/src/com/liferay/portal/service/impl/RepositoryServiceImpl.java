@@ -118,6 +118,7 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 	/**
 	 * @deprecated As of 7.0.0, with no direct replacement
 	 */
+	@Deprecated
 	@Override
 	public String[] getSupportedParameters(
 		String className, String configuration) {
