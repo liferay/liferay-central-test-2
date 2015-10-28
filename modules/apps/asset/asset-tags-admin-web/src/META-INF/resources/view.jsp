@@ -21,10 +21,6 @@ String displayStyle = ParamUtil.getString(request, "displayStyle", "list");
 
 String orderByCol = ParamUtil.getString(request, "orderByCol", "name");
 String orderByType = ParamUtil.getString(request, "orderByType", "asc");
-
-PortletURL navigationPortletURL = renderResponse.createRenderURL();
-
-PortletURL sortPortletURL = renderResponse.createRenderURL();
 %>
 
 <liferay-portlet:renderURL varImpl="portletURL" />
@@ -48,14 +44,14 @@ PortletURL sortPortletURL = renderResponse.createRenderURL();
 	<liferay-frontend:management-bar-filters>
 		<liferay-frontend:management-bar-navigation
 			navigationKeys='<%= new String[] {"all"} %>'
-			portletURL="<%= navigationPortletURL %>"
+			portletURL="<%= renderResponse.createRenderURL() %>"
 		/>
 
 		<liferay-frontend:management-bar-sort
 			orderByCol="<%= orderByCol %>"
 			orderByType="<%= orderByType %>"
 			orderColumns='<%= new String[] {"name", "usages"} %>'
-			portletURL="<%= sortPortletURL %>"
+			portletURL="<%= renderResponse.createRenderURL() %>"
 		/>
 	</liferay-frontend:management-bar-filters>
 
