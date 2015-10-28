@@ -137,7 +137,7 @@ public class PortletPreferencesFactoryImplGetPreferencesIdsTest {
 			PortletKeys.PREFS_OWNER_ID_DEFAULT,
 			portletPreferencesIds.getOwnerId());
 		Assert.assertEquals(
-			"The PLID should be the PLID of the current layout",
+			"The PLID should be the PLID of the layout",
 			_layout.getPlid(), portletPreferencesIds.getPlid());
 	}
 
@@ -183,7 +183,7 @@ public class PortletPreferencesFactoryImplGetPreferencesIdsTest {
 			"The owner ID should be the ID of the user who added it",
 			TestPropsValues.getUserId(), portletPreferencesIds.getOwnerId());
 		Assert.assertEquals(
-			"The PLID should be the PLID of the current layout",
+			"The PLID should be the PLID of the layout",
 			_layout.getPlid(), portletPreferencesIds.getPlid());
 	}
 
