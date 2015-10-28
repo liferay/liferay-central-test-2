@@ -35,40 +35,40 @@ public class SocialInteractionsConfigurationUtil {
 		PortletPreferences portletPreferences = PrefsPropsUtil.getPreferences(
 			companyId, true);
 
+		boolean socialInteractionsFriendsEnabled = PrefsParamUtil.getBoolean(
+			portletPreferences, request,
+			"socialInteractionsFriendsEnabled" + serviceName, true);
+		boolean socialInteractionsSitesEnabled = PrefsParamUtil.getBoolean(
+			portletPreferences, request,
+			"socialInteractionsSitesEnabled" + serviceName, true);
 		SocialInteractionsType socialInteractionsType =
 			SocialInteractionsType.parse(
 				PrefsParamUtil.getString(
 					portletPreferences, request,
 					"socialInteractionsType" + serviceName,
 					SocialInteractionsType.ALL_USERS.toString()));
-		boolean socialInteractionsSitesEnabled = PrefsParamUtil.getBoolean(
-			portletPreferences, request,
-			"socialInteractionsSitesEnabled" + serviceName, true);
-		boolean socialInteractionsFriendsEnabled = PrefsParamUtil.getBoolean(
-			portletPreferences, request,
-			"socialInteractionsFriendsEnabled" + serviceName, true);
 
 		return new SocialInteractionsConfiguration(
-			socialInteractionsType, socialInteractionsSitesEnabled,
-			socialInteractionsFriendsEnabled);
+			socialInteractionsFriendsEnabled, socialInteractionsSitesEnabled,
+			socialInteractionsType);
 	}
 
 	public static SocialInteractionsConfiguration
 		getSocialInteractionsConfiguration(long companyId, String serviceName) {
 
+		boolean socialInteractionsFriendsEnabled = PrefsPropsUtil.getBoolean(
+			companyId, "socialInteractionsFriendsEnabled" + serviceName, true);
+		boolean socialInteractionsSitesEnabled = PrefsPropsUtil.getBoolean(
+			companyId, "socialInteractionsSitesEnabled" + serviceName, true);
 		SocialInteractionsType socialInteractionsType =
 			SocialInteractionsType.parse(
 				PrefsPropsUtil.getString(
 					companyId, "socialInteractionsType" + serviceName,
 					SocialInteractionsType.ALL_USERS.toString()));
-		boolean socialInteractionsSitesEnabled = PrefsPropsUtil.getBoolean(
-			companyId, "socialInteractionsSitesEnabled" + serviceName, true);
-		boolean socialInteractionsFriendsEnabled = PrefsPropsUtil.getBoolean(
-			companyId, "socialInteractionsFriendsEnabled" + serviceName, true);
 
 		return new SocialInteractionsConfiguration(
-			socialInteractionsType, socialInteractionsSitesEnabled,
-			socialInteractionsFriendsEnabled);
+			socialInteractionsFriendsEnabled, socialInteractionsSitesEnabled,
+			socialInteractionsType);
 	}
 
 }
