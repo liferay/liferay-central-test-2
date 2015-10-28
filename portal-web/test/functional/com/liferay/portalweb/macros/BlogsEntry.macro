@@ -1300,7 +1300,7 @@
 	</command>
 
 	<command name="viewDisabledSocialBookmarkSites">
-		<execute function="AssertClick" locator1="Button#SHARE" value1="Share" />
+		<execute function="AssertElementNotPresent" locator1="Button#SHARE" value1="Share" />
 	</command>
 
 	<command name="viewEditLinkPG">
