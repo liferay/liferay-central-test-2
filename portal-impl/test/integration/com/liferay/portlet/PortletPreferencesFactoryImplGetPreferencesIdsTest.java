@@ -41,7 +41,7 @@ import org.junit.Test;
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
  */
-public class PortletPreferencesFactoryImplGetPreferencesIdsIntegrationTest {
+public class PortletPreferencesFactoryImplGetPreferencesIdsTest {
 
 	@ClassRule
 	@Rule
