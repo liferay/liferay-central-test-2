@@ -21,6 +21,7 @@ alter table Contact_ drop column mySpaceSn;
 alter table Contact_ drop column ymSn;
 
 drop table CyrusUser;
+
 drop table CyrusVirtual;
 
 drop index IX_C803899D on DDMStructureLink;
