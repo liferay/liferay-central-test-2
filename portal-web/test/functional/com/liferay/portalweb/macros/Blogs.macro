@@ -333,7 +333,7 @@
 
 		<execute macro="BlogsConfiguration#selectConfigurationIFrame" />
 
-		<execute macro="BlogsConfiguration#checkSocialBookmarks" />
+		<execute macro="BlogsConfiguration#uncheckSocialBookmarks" />
 
 		<execute macro="IFrame#saveConfiguration" />
 	</command>
