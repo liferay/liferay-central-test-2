@@ -2,11 +2,10 @@
 
 <#assign portlet_display = portletDisplay />
 
-<#assign portlet_id = htmlUtil.escapeAttribute(portlet_display.getId()) />
-<#assign portlet_display_name = htmlUtil.escape(portlet_display.getPortletDisplayName()) />
-<#assign portlet_title = htmlUtil.escape(portlet_display.getTitle()) />
 <#assign portlet_back_url = htmlUtil.escapeHREF(portlet_display.getURLBack()) />
-
+<#assign portlet_display_name = htmlUtil.escape(portlet_display.getPortletDisplayName()) />
+<#assign portlet_id = htmlUtil.escapeAttribute(portlet_display.getId()) />
+<#assign portlet_title = htmlUtil.escape(portlet_display.getTitle()) />
 <#assign portlet_toolbar = portlet_display.getPortletToolbar() />
 
 <section class="portlet" id="portlet_${portlet_id}">
