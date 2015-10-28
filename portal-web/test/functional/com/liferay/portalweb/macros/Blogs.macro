@@ -331,6 +331,8 @@
 			<var name="portletOption" value="Configuration" />
 		</execute>
 
+		<execute macro="BlogsConfiguration#selectConfigurationIFrame" />
+
 		<execute macro="BlogsConfiguration#checkSocialBookmarks" />
 
 		<for list="${socialBookmarkSites}" param="socialBookmarkSite">
@@ -390,6 +392,8 @@
 			<var name="portletName" value="Blogs" />
 			<var name="portletOption" value="Configuration" />
 		</execute>
+
+		<execute macro="BlogsConfiguration#selectConfigurationIFrame" />
 
 		<execute macro="BlogsConfiguration#checkSocialBookmarks" />
 
