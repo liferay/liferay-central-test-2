@@ -122,14 +122,14 @@ public class ResourceBundleTrackerTest {
 		ResourceBundle portletResourceBundleD = portletConfig.getResourceBundle(
 			new Locale(""));
 
-		ServiceRegistration serviceRegistrationA = registerResourceBundle(
-			resourceBundleA, "th_TH_TH");
-		ServiceRegistration serviceRegistrationB = registerResourceBundle(
-			resourceBundleB, "th_TH");
-		ServiceRegistration serviceRegistrationC = registerResourceBundle(
-			resourceBundleC, "th");
-		ServiceRegistration serviceRegistrationD = registerResourceBundle(
-			resourceBundleD, "");
+		ServiceRegistration<ResourceBundle> serviceRegistrationA =
+			registerResourceBundle(resourceBundleA, "th_TH_TH");
+		ServiceRegistration<ResourceBundle> serviceRegistrationB =
+			registerResourceBundle(resourceBundleB, "th_TH");
+		ServiceRegistration<ResourceBundle> serviceRegistrationC =
+			registerResourceBundle(resourceBundleC, "th");
+		ServiceRegistration<ResourceBundle> serviceRegistrationD =
+			registerResourceBundle(resourceBundleD, "");
 
 		Assert.assertEquals(
 			"th_TH_TH",
@@ -200,8 +200,9 @@ public class ResourceBundleTrackerTest {
 		properties.put("language.id", "es_ES");
 
 		Registry registry = RegistryUtil.getRegistry();
-		ServiceRegistration serviceRegistration = registry.registerService(
-			ResourceBundle.class, resourceBundleA, properties);
+		ServiceRegistration<ResourceBundle> serviceRegistration =
+			registry.registerService(
+				ResourceBundle.class, resourceBundleA, properties);
 
 		try {
 			PortletConfig portletConfig = _genericPortlet.getPortletConfig();
@@ -248,7 +249,7 @@ public class ResourceBundleTrackerTest {
 		};
 	}
 
-	private ServiceRegistration registerResourceBundle(
+	private ServiceRegistration<ResourceBundle> registerResourceBundle(
 		ResourceBundle resourceBundle, String languageId) {
 
 		Map<String, Object> properties = new HashMap<>();
