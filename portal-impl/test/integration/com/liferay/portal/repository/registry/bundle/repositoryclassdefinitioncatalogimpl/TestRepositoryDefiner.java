@@ -49,7 +49,7 @@ public class TestRepositoryDefiner implements RepositoryDefiner {
 
 	@Override
 	public RepositoryConfiguration getRepositoryConfiguration() {
-		return _EMPTY_CONFIGURATION;
+		return _repositoryConfiguration;
 	}
 
 	@Override
