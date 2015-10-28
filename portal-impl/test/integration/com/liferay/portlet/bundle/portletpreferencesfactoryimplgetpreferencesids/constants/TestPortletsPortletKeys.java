@@ -20,21 +20,27 @@ package com.liferay.portlet.bundle.portletpreferencesfactoryimplgetpreferencesid
 public class TestPortletsPortletKeys {
 
 	public static final String TEST_COMPANY_PORTLET =
-		"com_liferay_test_TestCompanyPortlet";
+		"com_liferay_portlet_bundle_portletpreferencesfactoryimplget" +
+			"preferencesids_TestCompanyPortlet";
 
 	public static final String TEST_GROUP_LAYOUT_PORTLET =
-		"com_liferay_test_TestGroupLayoutPortlet";
+		"com_liferay_portlet_bundle_portletpreferencesfactoryimplget" +
+			"preferencesids_TestGroupLayoutPortlet";
 
 	public static final String TEST_GROUP_PORTLET =
-		"com_liferay_test_TestGroupPortlet";
+		"com_liferay_portlet_bundle_portletpreferencesfactoryimplget" +
+			"preferencesids_TestGroupPortlet";
 
 	public static final String TEST_GROUP_RESTRICTED_PORTLET =
-		"com_liferay_test_TestGroupRestrictedPortlet";
+		"com_liferay_portlet_bundle_portletpreferencesfactoryimplget" +
+			"preferencesids_TestGroupRestrictedPortlet";
 
 	public static final String TEST_USER_LAYOUT_PORTLET =
-		"com_liferay_test_TestUserLayoutPortlet";
+		"com_liferay_portlet_bundle_portletpreferencesfactoryimplget" +
+			"preferencesids_TestUserLayoutPortlet";
 
 	public static final String TEST_USER_PORTLET =
-		"com_liferay_test_TestUserPortlet";
+		"com_liferay_portlet_bundle_portletpreferencesfactoryimplget" +
+			"preferencesids_TestUserPortlet";
 
 }
