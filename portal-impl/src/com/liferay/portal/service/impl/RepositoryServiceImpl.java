@@ -90,7 +90,7 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 	@Deprecated
 	@Override
 	public String[] getSupportedConfigurations(long classNameId) {
-		return _DEFAULT_CONFIGURATIONS;
+		return _SUPPORTED_CONFIGURATIONS;
 	}
 
 	/**
@@ -123,12 +123,13 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 		String className, String configuration) {
 
 		try {
-			if (!configuration.equals(_DEFAULT_CONFIGURATION)) {
+			if (!configuration.equals(_CONFIGURATION)) {
 				throw new IllegalArgumentException(
-					"Unsupported configuration " + configuration + "; the " +
-						"only supported configuration is " +
-							_DEFAULT_CONFIGURATION);
+					"Specified " + configuration + " does not match " +
+						"supported configuration " + _CONFIGURATION);
 			}
+
+			Collection<String> supportedParameters = new ArrayList<>();
 
 			RepositoryClassDefinition repositoryClassDefinition =
 				_repositoryClassDefinitionCatalog.getRepositoryClassDefinition(
@@ -140,8 +141,6 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 			Collection<RepositoryConfiguration.Parameter>
 				repositoryConfigurationParameters =
 					repositoryConfiguration.getParameters();
-
-			Collection<String> supportedParameters = new ArrayList<>();
 
 			for (RepositoryConfiguration.Parameter
 					repositoryConfigurationParameter :
@@ -247,10 +246,10 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 		}
 	}
 
-	private static final String _DEFAULT_CONFIGURATION = "DEFAULT";
+	private static final String _CONFIGURATION = "DEFAULT";
 
-	private static final String[] _DEFAULT_CONFIGURATIONS =
-		new String[] {_DEFAULT_CONFIGURATION};
+	private static final String[] _SUPPORTED_CONFIGURATIONS =
+		new String[] {_CONFIGURATION};
 
 	@BeanReference(type = RepositoryClassDefinitionCatalog.class)
 	private RepositoryClassDefinitionCatalog _repositoryClassDefinitionCatalog;
