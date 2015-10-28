@@ -904,8 +904,7 @@ public class SearchEngineUtil {
 
 		setCommitImmediately(
 			searchContext,
-			commitImmediately || ProxyModeThreadLocal.isForceSync()
-		);
+			commitImmediately || ProxyModeThreadLocal.isForceSync());
 
 		indexWriter.updateDocument(searchContext, document);
 	}
@@ -1002,7 +1001,7 @@ public class SearchEngineUtil {
 
 	private static final boolean _INDEX_COMMIT_IMMEDIATELY =
 		GetterUtil.getBoolean(
-			PropsUtil.get(PropsKeys.INDEX_COMMIT_IMMEDIATELY), false);
+			PropsUtil.get(PropsKeys.INDEX_COMMIT_IMMEDIATELY));
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		SearchEngineUtil.class);
