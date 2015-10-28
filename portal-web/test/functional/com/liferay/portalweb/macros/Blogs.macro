@@ -326,18 +326,18 @@
 			<var name="soPage" value="${soPage}" />
 		</execute>
 
-		<execute macro="BlogsNavigator#gotoConfigurationSetupPG">
-			<var name="portletNameBorderless" value="Blogs" />
-			<var name="soPage" value="${soPage}" />
+		<execute macro="Portlet#gotoPortletOptions">
+			<var name="portletName" value="Blogs" />
+			<var name="portletOption" value="Configuration" />
 		</execute>
 
 		<execute macro="BlogsConfiguration#checkSocialBookmarks" />
 
 		<for list="${socialBookmarkSites}" param="socialBookmarkSite">
-			<execute macro="BlogsConfiguration#disableSocialBookmarkSites">
-				<var name="socialBookmarkSite" value="${socialBookmarkSite}" />
-				<var name="socialBookmarkSites" value="${socialBookmarkSite}" />
-			</execute>
+		<execute macro="Portlet#gotoPortletOptions">
+			<var name="portletName" value="Blogs" />
+			<var name="portletOption" value="Configuration" />
+		</execute>
 		</for>
 
 		<execute macro="IFrame#saveConfiguration" />
@@ -386,9 +386,9 @@
 			<var name="soPage" value="${soPage}" />
 		</execute>
 
-		<execute macro="BlogsNavigator#gotoConfigurationSetupPG">
-			<var name="portletNameBorderless" value="Blogs" />
-			<var name="soPage" value="${soPage}" />
+		<execute macro="Portlet#gotoPortletOptions">
+			<var name="portletName" value="Blogs" />
+			<var name="portletOption" value="Configuration" />
 		</execute>
 
 		<execute macro="BlogsConfiguration#checkSocialBookmarks" />
