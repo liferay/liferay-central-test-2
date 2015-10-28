@@ -47,7 +47,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 	PortletLocalServiceUtil.class
 })
 @RunWith(PowerMockRunner.class)
-public class PortletPreferencesFactoryImplGetPreferencesIdsTest {
+public class PortletPreferencesFactoryImplGetPreferencesIdsUnitTest {
 
 	@BeforeClass
 	public static void setUpClass() throws Exception {
