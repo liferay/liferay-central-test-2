@@ -70,9 +70,8 @@ public class PortletPreferencesFactoryImplGetPreferencesIdsTest {
 	@Test
 	public void testPreferencesOwnedByCompany() throws Exception {
 		long siteGroupId = _layout.getGroupId();
-		boolean modeEditGuest = false;
-
 		String portletId = TestCompanyPortlet.PORTLET_NAME;
+		boolean modeEditGuest = false;
 
 		LayoutTestUtil.addPortletToLayout(
 			TestPropsValues.getUserId(), _layout, portletId,
@@ -97,9 +96,8 @@ public class PortletPreferencesFactoryImplGetPreferencesIdsTest {
 
 	@Test
 	public void testPreferencesOwnedByGroup() throws Exception {
-		String portletId = TestGroupPortlet.PORTLET_NAME;
-
 		long siteGroupId = _layout.getGroupId();
+		String portletId = TestGroupPortlet.PORTLET_NAME;
 		boolean modeEditGuest = false;
 
 		PortletPreferencesIds portletPreferencesIds =
@@ -121,9 +119,8 @@ public class PortletPreferencesFactoryImplGetPreferencesIdsTest {
 
 	@Test
 	public void testPreferencesOwnedByGroupLayout() throws Exception {
-		String portletId = TestGroupLayoutPortlet.PORTLET_NAME;
-
 		long siteGroupId = _layout.getGroupId();
+		String portletId = TestGroupLayoutPortlet.PORTLET_NAME;
 		boolean modeEditGuest = false;
 
 		PortletPreferencesIds portletPreferencesIds =
@@ -146,9 +143,8 @@ public class PortletPreferencesFactoryImplGetPreferencesIdsTest {
 
 	@Test
 	public void testPreferencesOwnedByUser() throws Exception {
-		String portletId = TestUserPortlet.PORTLET_NAME;
-
 		long siteGroupId = _layout.getGroupId();
+		String portletId = TestUserPortlet.PORTLET_NAME;
 		boolean modeEditGuest = false;
 
 		PortletPreferencesIds portletPreferencesIds =
@@ -170,9 +166,8 @@ public class PortletPreferencesFactoryImplGetPreferencesIdsTest {
 
 	@Test
 	public void testPreferencesOwnedByUserLayout() throws Exception {
-		String portletId = TestUserLayoutPortlet.PORTLET_NAME;
-
 		long siteGroupId = _layout.getGroupId();
+		String portletId = TestUserLayoutPortlet.PORTLET_NAME;
 		boolean modeEditGuest = false;
 
 		PortletPreferencesIds portletPreferencesIds =
@@ -198,9 +193,9 @@ public class PortletPreferencesFactoryImplGetPreferencesIdsTest {
 
 		_layout = LayoutTestUtil.addLayout(_group, false);
 
-		String portletId = TestGroupPortlet.PORTLET_NAME;
-
 		long siteGroupId = _layout.getGroupId();
+
+		String portletId = TestGroupPortlet.PORTLET_NAME;
 		boolean modeEditGuest = true;
 
 		PortletPreferencesFactoryUtil.getPortletPreferencesIds(
