@@ -160,7 +160,7 @@ public class ProductMenuDisplayContext {
 		List<PanelCategory> childPanelCategories = getChildPanelCategories();
 
 		// If only the Personal Panel is shown, then the product menu itself
-		// won't be shown to users
+		// will not be shown to users
 
 		if (childPanelCategories.size() <= 1) {
 			return false;

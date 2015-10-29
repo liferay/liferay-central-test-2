@@ -70,8 +70,8 @@ public class ProductMenuControlMenuEntry extends BaseJSPControlMenuEntry {
 				PanelCategoryKeys.ROOT, themeDisplay.getPermissionChecker(),
 				themeDisplay.getScopeGroup());
 
-		// If only the Personal Panel is shown, then the product menu link
-		// won't be shown to users
+		// If only the Personal Panel is shown, then the product menu link will
+		// not be shown to users
 
 		if (panelCategories.size() <= 1) {
 			return false;
