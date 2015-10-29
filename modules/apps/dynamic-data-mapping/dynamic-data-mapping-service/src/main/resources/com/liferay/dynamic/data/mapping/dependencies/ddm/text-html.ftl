@@ -1,7 +1,9 @@
 <#include "../init.ftl">
 
 <#assign editorName = propsUtil.get("editor.wysiwyg.portal-impl.portlet.ddm.text_html.ftl")>
+
 <#assign inputEditorName = "${namespacedFieldName}Editor">
+
 <#assign fieldValue = paramUtil.getString(request, "${inputEditorName}", fieldValue)>
 
 <@aui["field-wrapper"] cssClass="field-wrapper-html" data=data helpMessage=escape(fieldStructure.tip) label=escape(label) name=inputEditorName required=required>
