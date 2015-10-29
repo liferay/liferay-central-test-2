@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.monitoring.RequestStatus;
 import com.liferay.portal.kernel.monitoring.ServiceMonitoringControl;
 import com.liferay.portal.kernel.servlet.BaseFilter;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
+import com.liferay.portal.kernel.util.AutoResetThreadLocal;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -254,13 +255,9 @@ public class MonitoringFilter extends BaseFilter
 		MonitoringFilter.class);
 
 	private static final ThreadLocal<AtomicInteger> _processFilterCount =
-		new ThreadLocal<AtomicInteger>() {
-
-		protected AtomicInteger initialValue() {
-			return new AtomicInteger(0);
-		};
-
-	};
+		new AutoResetThreadLocal<>(
+			MonitoringFilter.class + "._processFilterCount",
+			new AtomicInteger(0));
 
 	private DataSampleFactory _dataSampleFactory;
 	private volatile LayoutLocalService _layoutLocalService;
