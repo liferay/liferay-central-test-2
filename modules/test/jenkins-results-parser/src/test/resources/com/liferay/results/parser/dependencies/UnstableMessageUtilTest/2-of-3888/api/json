@@ -50,11 +50,11 @@
     "culprits": [],
     "description": null,
     "duration": 1615077,
-    "estimatedDuration": 1431282,
+    "estimatedDuration": 1614590,
     "executor": null,
     "fullDisplayName": "test-portal-acceptance-pullrequest-batch(master) #3415",
     "id": "2015-10-27_00-51-50",
-    "keepLog": false,
+    "keepLog": true,
     "number": 3415,
     "result": "UNSTABLE",
     "runs": [
@@ -117,10 +117,6 @@
         {
             "number": 3415,
             "url": "file:${user.dir}/src/test/resources/com/liferay/results/parser/dependencies/UnstableMessageUtilTest/2-of-3888/run-14/3415/"
-        },
-        {
-            "number": 1401,
-            "url": "https://test-1-18.liferay.com/job/test-portal-acceptance-pullrequest-batch%28master%29/AXIS_VARIABLE=CPBlogs%23AddBlogsEntries,label_exp=!master/1401/"
         },
         {
             "number": 3388,

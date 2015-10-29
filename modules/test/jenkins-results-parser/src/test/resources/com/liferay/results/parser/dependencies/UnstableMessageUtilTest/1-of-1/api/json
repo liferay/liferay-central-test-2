@@ -50,7 +50,7 @@
     "culprits": [],
     "description": null,
     "duration": 682320,
-    "estimatedDuration": 1353662,
+    "estimatedDuration": 823434,
     "executor": null,
     "fullDisplayName": "test-portal-acceptance-pullrequest-batch(master) #5141",
     "id": "2015-10-26_12-10-33",
