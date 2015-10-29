@@ -103,15 +103,6 @@ public class ResourceBundleTrackerTest {
 
 	@Test
 	public void testResourceBundlesHierarchy() {
-		ResourceBundle resourceBundleA = _createResourceBundle(
-			"common-key", "th_TH_TH", "th_TH_TH", "th_TH_TH");
-		ResourceBundle resourceBundleB = _createResourceBundle(
-			"common-key", "th_TH", "th_TH", "th_TH");
-		ResourceBundle resourceBundleC = _createResourceBundle(
-			"common-key", "th", "th", "th");
-		ResourceBundle resourceBundleD = _createResourceBundle(
-			"common-key", "root-bundle", "root-bundle", "root-bundle");
-
 		PortletConfig portletConfig = _genericPortlet.getPortletConfig();
 		ResourceBundle portletResourceBundleA = portletConfig.getResourceBundle(
 			new Locale("th", "TH", "TH"));
@@ -123,13 +114,22 @@ public class ResourceBundleTrackerTest {
 			new Locale(""));
 
 		ServiceRegistration<ResourceBundle> serviceRegistrationA =
-			registerResourceBundle(resourceBundleA, "th_TH_TH");
+			registerResourceBundle(
+				_createResourceBundle(
+					"common-key", "th_TH_TH", "th_TH_TH", "th_TH_TH"),
+				"th_TH_TH");
 		ServiceRegistration<ResourceBundle> serviceRegistrationB =
-			registerResourceBundle(resourceBundleB, "th_TH");
+			registerResourceBundle(
+				_createResourceBundle("common-key", "th_TH", "th_TH", "th_TH"),
+				"th_TH");
 		ServiceRegistration<ResourceBundle> serviceRegistrationC =
-			registerResourceBundle(resourceBundleC, "th");
+			registerResourceBundle(
+				_createResourceBundle("common-key", "th", "th", "th"), "th");
 		ServiceRegistration<ResourceBundle> serviceRegistrationD =
-			registerResourceBundle(resourceBundleD, "");
+			registerResourceBundle(
+				_createResourceBundle(
+					"common-key", "root-bundle", "root-bundle", "root-bundle"),
+				"");
 
 		Assert.assertEquals(
 			"th_TH_TH",
@@ -192,9 +192,6 @@ public class ResourceBundleTrackerTest {
 
 	@Test
 	public void testResourceBundlesOverride() {
-		ResourceBundle resourceBundleA = _createResourceBundle(
-			"key", "value", "this", "esto2");
-
 		Map<String, Object> properties = new HashMap<>();
 		properties.put("javax.portlet.name", TestPortlet.PORTLET_NAME);
 		properties.put("language.id", "es_ES");
@@ -202,7 +199,9 @@ public class ResourceBundleTrackerTest {
 		Registry registry = RegistryUtil.getRegistry();
 		ServiceRegistration<ResourceBundle> serviceRegistration =
 			registry.registerService(
-				ResourceBundle.class, resourceBundleA, properties);
+				ResourceBundle.class,
+				_createResourceBundle("key", "value", "this", "esto2"),
+				properties);
 
 		try {
 			PortletConfig portletConfig = _genericPortlet.getPortletConfig();
