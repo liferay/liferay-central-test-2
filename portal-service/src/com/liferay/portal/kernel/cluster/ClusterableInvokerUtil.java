@@ -47,11 +47,11 @@ public class ClusterableInvokerUtil {
 
 	public static MethodHandler createMethodHandler(
 		Class<? extends ClusterInvokeAcceptor> clusterInvokeAcceptorClass,
-		Object targetObject, Method method, Object[] args) {
+		Object targetObject, Method method, Object[] arguments) {
 
 		MethodHandler methodHandler =
 			IdentifiableOSGiServiceInvokerUtil.createMethodHandler(
-				targetObject, method, args);
+				targetObject, method, arguments);
 
 		Map<String, Serializable> context =
 			ClusterableContextThreadLocal.collectThreadLocalContext();
@@ -72,11 +72,11 @@ public class ClusterableInvokerUtil {
 
 	public static void invokeOnCluster(
 			Class<? extends ClusterInvokeAcceptor> clusterInvokeAcceptorClass,
-			Object targetObject, Method method, Object[] args)
+			Object targetObject, Method method, Object[] arguments)
 		throws Throwable {
 
 		MethodHandler methodHandler = createMethodHandler(
-			clusterInvokeAcceptorClass, targetObject, method, args);
+			clusterInvokeAcceptorClass, targetObject, method, arguments);
 
 		ClusterRequest clusterRequest = ClusterRequest.createMulticastRequest(
 			methodHandler, true);
@@ -88,16 +88,17 @@ public class ClusterableInvokerUtil {
 
 	public static Object invokeOnMaster(
 			Class<? extends ClusterInvokeAcceptor> clusterInvokeAcceptorClass,
-			Object targetObject, Method method, Object[] args)
+			Object targetObject, Method method, Object[] arguments)
 		throws Throwable {
 
 		MethodHandler methodHandler = createMethodHandler(
-			clusterInvokeAcceptorClass, targetObject, method, args);
+			clusterInvokeAcceptorClass, targetObject, method, arguments);
 
 		Future<Object> futureResult = ClusterMasterExecutorUtil.executeOnMaster(
 			methodHandler);
 
-		return futureResult.get(_TIME_OUT, TimeUnit.SECONDS);
+		return futureResult.get(
+			_CLUSTERABLE_ADVICE_CALL_MASTER_TIMEOUT, TimeUnit.SECONDS);
 	}
 
 	@SuppressWarnings("unused")
@@ -223,8 +224,9 @@ public class ClusterableInvokerUtil {
 		}
 	}
 
-	private static final long _TIME_OUT = GetterUtil.getLong(
-		PropsUtil.get(PropsKeys.CLUSTERABLE_ADVICE_CALL_MASTER_TIMEOUT));
+	private static final long _CLUSTERABLE_ADVICE_CALL_MASTER_TIMEOUT =
+		GetterUtil.getLong(
+			PropsUtil.get(PropsKeys.CLUSTERABLE_ADVICE_CALL_MASTER_TIMEOUT));
 
 	private static final MethodKey _invokeMethodKey = new MethodKey(
 		ClusterableInvokerUtil.class, "_invoke", MethodHandler.class,

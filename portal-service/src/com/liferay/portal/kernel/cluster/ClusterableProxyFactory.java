@@ -41,33 +41,33 @@ public class ClusterableProxyFactory {
 		implements InvocationHandler {
 
 		@Override
-		public Object invoke(Object proxy, Method method, Object[] args)
+		public Object invoke(Object proxy, Method method, Object[] arguments)
 			throws Throwable {
 
 			if (!ClusterInvokeThreadLocal.isEnabled()) {
-				return method.invoke(_targetObject, args);
+				return method.invoke(_targetObject, arguments);
 			}
 
 			Clusterable clusterable = _getClusterable(
 				method, _targetObject.getClass());
 
 			if (clusterable == null) {
-				return method.invoke(_targetObject, args);
+				return method.invoke(_targetObject, arguments);
 			}
 
 			if (clusterable.onMaster()) {
 				if (ClusterMasterExecutorUtil.isMaster()) {
-					return method.invoke(_targetObject, args);
+					return method.invoke(_targetObject, arguments);
 				}
 
 				return ClusterableInvokerUtil.invokeOnMaster(
-					clusterable.acceptor(), _targetObject, method, args);
+					clusterable.acceptor(), _targetObject, method, arguments);
 			}
 
-			Object result = method.invoke(_targetObject, args);
+			Object result = method.invoke(_targetObject, arguments);
 
 			ClusterableInvokerUtil.invokeOnCluster(
-				clusterable.acceptor(), _targetObject, method, args);
+				clusterable.acceptor(), _targetObject, method, arguments);
 
 			return result;
 		}

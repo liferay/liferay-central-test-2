@@ -54,7 +54,7 @@ public class IdentifiableOSGiServiceInvokerUtil {
 
 		if (osgiService == null) {
 			throw new Exception(
-				"Unable to load osgi service " + osgiServiceIdentifier);
+				"Unable to load OSGi service " + osgiServiceIdentifier);
 		}
 
 		ClassLoader contextClassLoader =
