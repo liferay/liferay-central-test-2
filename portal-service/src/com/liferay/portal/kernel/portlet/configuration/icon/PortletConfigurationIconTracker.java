@@ -37,11 +37,11 @@ public class PortletConfigurationIconTracker {
 
 		List<PortletConfigurationIconFactory>
 			portletConfigurationIconFactories =
-				_portletConfigurationIconFactoryMap.get(StringPool.STAR);
+				_portletConfigurationIconFactoriesMap.get(StringPool.STAR);
 
 		List<PortletConfigurationIconFactory>
 			portletPortletConfigurationIconFactories =
-				_portletConfigurationIconFactoryiesMap.get(portletId);
+				_portletConfigurationIconFactoriesMap.get(portletId);
 
 		if (portletPortletConfigurationIconFactories != null) {
 			portletConfigurationIconFactories.addAll(
@@ -62,7 +62,7 @@ public class PortletConfigurationIconTracker {
 	}
 
 	private static final Map<String, List<PortletConfigurationIconFactory>>
-		_portletConfigurationIconFactoryiesMap = new ConcurrentHashMap<>();
+		_portletConfigurationIconFactoriesMap = new ConcurrentHashMap<>();
 
 	private final ServiceTracker
 		<PortletConfigurationIconFactory, PortletConfigurationIconFactory>
@@ -91,12 +91,12 @@ public class PortletConfigurationIconTracker {
 
 			List<PortletConfigurationIconFactory>
 				portletConfigurationIconFactories =
-					_portletConfigurationIconFactoryiesMap.get(portletId);
+					_portletConfigurationIconFactoriesMap.get(portletId);
 
 			if (portletConfigurationIconFactories == null) {
 				portletConfigurationIconFactories = new ArrayList<>();
 
-				_portletConfigurationIconFactoryiesMap.put(
+				_portletConfigurationIconFactoriesMap.put(
 					portletId, portletConfigurationIconFactories);
 			}
 
@@ -130,7 +130,7 @@ public class PortletConfigurationIconTracker {
 
 			List<PortletConfigurationIconFactory>
 				portletConfigurationIconFactories =
-					_portletConfigurationIconFactoryiesMap.get(portletId);
+					_portletConfigurationIconFactoriesMap.get(portletId);
 
 			if (portletConfigurationIconFactories == null) {
 				return;
