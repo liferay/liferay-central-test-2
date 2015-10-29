@@ -80,21 +80,18 @@ public class FailureMessageUtilTest extends BaseMessageUtilTestCase {
 
 	@Override
 	protected String getMessage(String urlString) throws Exception {
-		return FailureMessageUtil.getFailureMessage(_project, urlString);
-	}
+		Project project = new Project();
 
-	private static final Project _project = new Project();
-
-	static {
-		_project.setProperty(
+		project.setProperty(
 			"github.pull.request.head.branch", "junit-pr-head-branch");
-		_project.setProperty(
+		project.setProperty(
 			"github.pull.request.head.username", "junit-pr-head-username");
-		_project.setProperty(
-			"plugins.branch.name", "junit-plugins-branch-name");
-		_project.setProperty("plugins.repository", "junit-plugins-repository");
-		_project.setProperty("portal.repository", "junit-portal-repository");
-		_project.setProperty("repository", "junit-repository");
+		project.setProperty("plugins.branch.name", "junit-plugins-branch-name");
+		project.setProperty("plugins.repository", "junit-plugins-repository");
+		project.setProperty("portal.repository", "junit-portal-repository");
+		project.setProperty("repository", "junit-repository");
+
+		return FailureMessageUtil.getFailureMessage(project, urlString);
 	}
 
 }
