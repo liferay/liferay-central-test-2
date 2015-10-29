@@ -62,7 +62,7 @@ public class MonitoringTopHeadDynamicInclude extends BaseDynamicInclude {
 				themeDisplay.getCompanyId(), themeDisplay.getScopeGroupId(),
 				request.getHeader(HttpHeaders.REFERER), request.getRemoteAddr(),
 				request.getRemoteUser(), request.getRequestURI(),
-				request.getRequestURL().toString() + ".jsp_display",
+				String.valueOf(request.getRequestURL()) + ".jsp_display",
 				request.getHeader(HttpHeaders.USER_AGENT));
 
 		dataSample.setDescription("Portal Request");

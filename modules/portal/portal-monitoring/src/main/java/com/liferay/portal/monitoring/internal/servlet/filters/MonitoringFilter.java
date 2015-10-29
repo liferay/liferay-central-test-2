@@ -181,7 +181,6 @@ public class MonitoringFilter extends BaseFilter
 				portalRequestDataSample.capture(RequestStatus.SUCCESS);
 
 				portalRequestDataSample.setGroupId(getGroupId(request));
-
 				portalRequestDataSample.setStatusCode(response.getStatus());
 			}
 		}
