@@ -23,32 +23,37 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import org.apache.tools.ant.Project;
-
 import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
 
 /**
  * @author Peter Yoo
  */
-public class FailureMessageUtilTest {
+public abstract class BaseMessageUtilTestCase {
 
-	@BeforeClass
-	public static void setUpClass() throws Exception {
-		_downloadSample(
-			"generic-1", "0,label_exp=!master", "129",
-			"test-portal-acceptance-pullrequest-batch(master)", "test-4-1");
-		_downloadSample(
-			"rebase-1", null, "267",
-			"test-portal-acceptance-pullrequest-source(ee-6.2.x)", "test-1-1");
-		_downloadSample(
-			"plugin-compile-1", "9,label_exp=!master", "233",
-			"test-portal-acceptance-pullrequest-batch(ee-6.2.x)", "test-1-20");
+	protected void assertSample(File caseDir) throws Exception {
+		System.out.print("Asserting sample " + caseDir.getName() + ": ");
+
+		File expectedMessageFile = new File(caseDir, "expected_message.html");
+
+		String expectedMessage = read(expectedMessageFile);
+
+		String actualMessage = getMessage(toURLString(caseDir));
+
+		boolean value = expectedMessage.equals(actualMessage);
+
+		if (value) {
+			System.out.println(" PASSED");
+		}
+		else {
+			System.out.println(" FAILED");
+			System.out.println("\nActual message: \n" + actualMessage);
+			System.out.println("\nExpected message: \n" + expectedMessage);
+		}
+
+		Assert.assertTrue(value);
 	}
 
-	@Test
-	public void testGetFailureMessage() throws Exception {
+	protected void assertSamples() throws Exception {
 		File[] files = _dependenciesDir.listFiles();
 
 		for (File file : files) {
@@ -56,39 +61,13 @@ public class FailureMessageUtilTest {
 		}
 	}
 
-	protected void assertSample(File caseDir) throws Exception {
-		System.out.print("Asserting sample " + caseDir.getName() + ": ");
-
-		File expectedFailureMessageFile = new File(
-			caseDir, "expected_failure_message.html");
-
-		String expectedFailureMessage = _read(expectedFailureMessageFile);
-
-		String actualFailureMessage = FailureMessageUtil.getFailureMessage(
-			_project, _toURLString(caseDir));
-
-		boolean value = expectedFailureMessage.equals(actualFailureMessage);
-
-		if (value) {
-			System.out.println(" PASSED");
-		}
-		else {
-			System.out.println(" FAILED");
-			System.out.println("\nActual results: \n" + actualFailureMessage);
-			System.out.println(
-				"\nExpected results: \n" + expectedFailureMessage);
-		}
-
-		Assert.assertTrue(value);
-	}
-
-	private static URL _createURL(String urlString) throws Exception {
+	protected URL createURL(String urlString) throws Exception {
 		URL url = new URL(urlString);
 
-		return _encode(url);
+		return encode(url);
 	}
 
-	private static void _deleteFile(File file) {
+	protected void deleteFile(File file) {
 		if (!file.exists()) {
 			return;
 		}
@@ -100,42 +79,17 @@ public class FailureMessageUtilTest {
 			File[] files = file.listFiles();
 
 			for (File childFile : files) {
-				_deleteFile(childFile);
+				deleteFile(childFile);
 			}
 
 			file.delete();
 		}
 	}
 
-	private static void _downloadSample(
-			String sampleKey, String axisVariable, String buildNumber,
-			String jobName, String hostName)
-		throws Exception {
+	protected abstract void downloadSample(File sampleDir, URL url)
+		throws Exception;
 
-		String urlString =
-			"https://${hostName}.liferay.com/job/${jobName}/" +
-				"/${buildNumber}/";
-
-		if (axisVariable != null) {
-			urlString =
-				"https://${hostName}.liferay.com/job/${jobName}/" +
-					"AXIS_VARIABLE=${axis}/${buildNumber}/";
-
-			urlString = _replaceToken(urlString, "axis", axisVariable);
-		}
-
-		urlString = _replaceToken(urlString, "buildNumber", buildNumber);
-		urlString = _replaceToken(urlString, "hostName", hostName);
-		urlString = _replaceToken(urlString, "jobName", jobName);
-
-		URL url = _createURL(urlString);
-
-		_downloadSample(sampleKey, url);
-	}
-
-	private static void _downloadSample(String sampleKey, URL url)
-		throws Exception {
-
+	protected void downloadSample(String sampleKey, URL url) throws Exception {
 		System.out.println("Downloading sample " + sampleKey);
 
 		String sampleDirName = _dependenciesDir.getPath() + "/" + sampleKey;
@@ -147,19 +101,18 @@ public class FailureMessageUtilTest {
 		}
 
 		try {
-			_downloadSampleURL(sampleDir, url, "/api/json");
-			_downloadSampleURL(sampleDir, url, "/logText/progressiveText");
+			downloadSample(sampleDir, url);
 
-			_writeExpectedFailureMessage(sampleDir);
+			writeExpectedMessage(sampleDir);
 		}
 		catch (IOException ioe) {
-			_deleteFile(sampleDir);
+			deleteFile(sampleDir);
 
 			throw ioe;
 		}
 	}
 
-	private static void _downloadSampleURL(File dir, URL url, String urlSuffix)
+	protected void downloadSampleURL(File dir, URL url, String urlSuffix)
 		throws Exception {
 
 		String urlString = url + urlSuffix;
@@ -168,13 +121,13 @@ public class FailureMessageUtilTest {
 			urlString += "?pretty";
 		}
 
-		_write(
+		write(
 			new File(dir, urlSuffix),
 			JenkinsResultsParserUtil.toString(
 				JenkinsResultsParserUtil.getLocalURL(urlString)));
 	}
 
-	private static URL _encode(URL url) throws Exception {
+	protected URL encode(URL url) throws Exception {
 		URI uri = new URI(
 			url.getProtocol(), url.getUserInfo(), url.getHost(), url.getPort(),
 			url.getPath(), url.getQuery(), url.getRef());
@@ -184,13 +137,19 @@ public class FailureMessageUtilTest {
 		return new URL(uriASCIIString.replace("#", "%23"));
 	}
 
-	private static String _read(File file) throws IOException {
+	protected abstract String getMessage(String urlString) throws Exception;
+
+	protected String getSimpleClassName() {
+		Class<?> clazz = getClass();
+
+		return clazz.getSimpleName();
+	}
+
+	protected String read(File file) throws IOException {
 		return new String(Files.readAllBytes(Paths.get(file.toURI())));
 	}
 
-	private static String _replaceToken(
-		String string, String token, String value) {
-
+	protected String replaceToken(String string, String token, String value) {
 		if (string == null) {
 			return string;
 		}
@@ -198,7 +157,7 @@ public class FailureMessageUtilTest {
 		return string.replace("${" + token + "}", value);
 	}
 
-	private static String _toURLString(File file) throws Exception {
+	protected String toURLString(File file) throws Exception {
 		URI uri = file.toURI();
 
 		URL url = uri.toURL();
@@ -208,7 +167,7 @@ public class FailureMessageUtilTest {
 		return urlString.replace(System.getProperty("user.dir"), "${user.dir}");
 	}
 
-	private static void _write(File file, String content) throws Exception {
+	protected void write(File file, String content) throws Exception {
 		System.out.println(
 			"Write file " + file + " with length " + content.length());
 
@@ -223,32 +182,15 @@ public class FailureMessageUtilTest {
 		Files.write(Paths.get(file.toURI()), content.getBytes());
 	}
 
-	private static void _writeExpectedFailureMessage(File sampleDir)
-		throws Exception {
+	protected void writeExpectedMessage(File sampleDir) throws Exception {
+		File expectedMessageFile = new File(sampleDir, "expected_message.html");
+		String expectedMessage = getMessage(toURLString(sampleDir));
 
-		File expectedFailureMessageFile = new File(
-			sampleDir, "expected_failure_message.html");
-		String expectedFailureMessage = FailureMessageUtil.getFailureMessage(
-			_project, _toURLString(sampleDir));
-
-		_write(expectedFailureMessageFile, expectedFailureMessage);
+		write(expectedMessageFile, expectedMessage);
 	}
 
-	private static final File _dependenciesDir = new File(
-		"src/test/resources/com/liferay/results/parser/dependencies" +
-			"/FailureMessageUtilTest");
-	private static final Project _project = new Project();
-
-	static {
-		_project.setProperty(
-			"github.pull.request.head.branch", "junit-pr-head-branch");
-		_project.setProperty(
-			"github.pull.request.head.username", "junit-pr-head-username");
-		_project.setProperty(
-			"plugins.branch.name", "junit-plugins-branch-name");
-		_project.setProperty("plugins.repository", "junit-plugins-repository");
-		_project.setProperty("portal.repository", "junit-portal-repository");
-		_project.setProperty("repository", "junit-repository");
-	}
+	private final File _dependenciesDir = new File(
+		"src/test/resources/com/liferay/results/parser/dependencies/" +
+			getSimpleClassName());
 
 }
