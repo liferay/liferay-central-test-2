@@ -152,43 +152,43 @@ public class ResourceBundleTrackerTest {
 		Assert.assertEquals(
 			"th_TH",
 			ResourceBundleUtil.getString(portletResourceBundleB, "common-key"));
-		Assert.assertTrue(!portletResourceBundleB.containsKey("th_TH_TH"));
+		Assert.assertFalse(portletResourceBundleB.containsKey("th_TH_TH"));
 
 		Assert.assertEquals(
 			"th",
 			ResourceBundleUtil.getString(portletResourceBundleC, "common-key"));
-		Assert.assertTrue(!portletResourceBundleC.containsKey("th_TH"));
+		Assert.assertFalse(portletResourceBundleC.containsKey("th_TH"));
 
 		Assert.assertEquals(
 			"root-bundle",
 			ResourceBundleUtil.getString(portletResourceBundleD, "common-key"));
-		Assert.assertTrue(!portletResourceBundleD.containsKey("th"));
+		Assert.assertFalse(portletResourceBundleD.containsKey("th"));
 
 		serviceRegistrationA.unregister();
 
-		Assert.assertTrue(!portletResourceBundleA.containsKey("th_TH_TH"));
+		Assert.assertFalse(portletResourceBundleA.containsKey("th_TH_TH"));
 		Assert.assertEquals(
 			"th_TH",
 			ResourceBundleUtil.getString(portletResourceBundleA, "common-key"));
 
 		serviceRegistrationB.unregister();
 
-		Assert.assertTrue(!portletResourceBundleA.containsKey("th_TH"));
+		Assert.assertFalse(portletResourceBundleA.containsKey("th_TH"));
 		Assert.assertEquals(
 			"th",
 			ResourceBundleUtil.getString(portletResourceBundleA, "common-key"));
 
 		serviceRegistrationC.unregister();
 
-		Assert.assertTrue(!portletResourceBundleA.containsKey("th"));
+		Assert.assertFalse(portletResourceBundleA.containsKey("th"));
 		Assert.assertEquals(
 			"root-bundle",
 			ResourceBundleUtil.getString(portletResourceBundleA, "common-key"));
 
 		serviceRegistrationD.unregister();
 
-		Assert.assertTrue(!portletResourceBundleA.containsKey("root-bundle"));
-		Assert.assertTrue(!portletResourceBundleA.containsKey("common-key"));
+		Assert.assertFalse(portletResourceBundleA.containsKey("root-bundle"));
+		Assert.assertFalse(portletResourceBundleA.containsKey("common-key"));
 	}
 
 	@Test
