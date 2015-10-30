@@ -27,10 +27,8 @@ public class AggregateResourceBundleTest {
 
 	@Test
 	public void testGetKeyFromFirstBundle() {
-		ResourceBundle resourceBundleA = createResourceBundle(
-			"keyA", "valueA");
-		ResourceBundle resourceBundleB = createResourceBundle(
-			"keyB", "valueB");
+		ResourceBundle resourceBundleA = createResourceBundle("keyA", "valueA");
+		ResourceBundle resourceBundleB = createResourceBundle("keyB", "valueB");
 
 		AggregateResourceBundle aggregateResourceBundle =
 			new AggregateResourceBundle(resourceBundleA, resourceBundleB);
@@ -44,10 +42,8 @@ public class AggregateResourceBundleTest {
 
 	@Test
 	public void testGetKeyFromSecondBundle() {
-		ResourceBundle resourceBundleA = createResourceBundle(
-			"keyA", "valueA");
-		ResourceBundle resourceBundleB = createResourceBundle(
-			"keyB", "valueB");
+		ResourceBundle resourceBundleA = createResourceBundle("keyA", "valueA");
+		ResourceBundle resourceBundleB = createResourceBundle("keyB", "valueB");
 
 		AggregateResourceBundle aggregateResourceBundle =
 			new AggregateResourceBundle(resourceBundleA, resourceBundleB);
@@ -58,10 +54,8 @@ public class AggregateResourceBundleTest {
 
 	@Test
 	public void testKeySet() {
-		ResourceBundle resourceBundleA = createResourceBundle(
-			"keyA", "valueA");
-		ResourceBundle resourceBundleB = createResourceBundle(
-			"keyB", "valueB");
+		ResourceBundle resourceBundleA = createResourceBundle("keyA", "valueA");
+		ResourceBundle resourceBundleB = createResourceBundle("keyB", "valueB");
 
 		AggregateResourceBundle aggregateResourceBundle =
 			new AggregateResourceBundle(resourceBundleA, resourceBundleB);
@@ -73,10 +67,8 @@ public class AggregateResourceBundleTest {
 
 	@Test
 	public void testOverriddenKeys() {
-		ResourceBundle resourceBundleA = createResourceBundle(
-			"keyA", "valueA");
-		ResourceBundle resourceBundleB = createResourceBundle(
-			"keyA", "valueB");
+		ResourceBundle resourceBundleA = createResourceBundle("keyA", "valueA");
+		ResourceBundle resourceBundleB = createResourceBundle("keyA", "valueB");
 
 		AggregateResourceBundle aggregateResourceBundle =
 			new AggregateResourceBundle(resourceBundleA, resourceBundleB);
