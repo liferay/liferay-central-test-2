@@ -817,7 +817,10 @@
 	</command>
 
 	<command name="selectPGViaKBArticle">
-		<execute function="AssertClick" locator1="Message#INFO" value1="Please configure this portlet to make it visible to all users." />
+		<execute macro="Portlet#gotoPortletOptions">
+			<var name="portletNameBorderless" value="${portletNameBorderless}" />
+			<var name="portletOption" value="Configuration" />
+		</execute>
 
 		<execute function="SelectFrame" locator1="Configuration#CONFIGURATION_IFRAME" />
 		<execute function="AssertClick" locator1="Button#SELECT" value1="Select" />
