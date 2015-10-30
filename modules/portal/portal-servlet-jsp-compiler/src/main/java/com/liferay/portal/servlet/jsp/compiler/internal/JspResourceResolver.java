@@ -143,6 +143,18 @@ public class JspResourceResolver implements ResourceResolver {
 
 			fileName = jarFileURL.getFile();
 		}
+		else if (Validator.equals(url.getProtocol(), "vfs")) {
+
+			// JBoss uses a custom vfs protocol to represent JAR files
+
+			fileName = url.getFile();
+
+			int index = fileName.indexOf(".jar");
+
+			if (index > 0) {
+				fileName = fileName.substring(0, index + 4);
+			}
+		}
 		else if (Validator.equals(url.getProtocol(), "wsjar")) {
 
 			// WebSphere uses a custom wsjar protocol to represent JAR files
@@ -175,18 +187,6 @@ public class JspResourceResolver implements ResourceResolver {
 
 			if (index > 0) {
 				fileName = fileName.substring(0, index);
-			}
-		}
-		else if (Validator.equals(url.getProtocol(), "vfs")) {
-
-			// JBoss uses a custom vfs protocol to represent JAR files
-
-			fileName = url.getFile();
-
-			int index = fileName.indexOf(".jar");
-
-			if (index > 0) {
-				fileName = fileName.substring(0, index + 4);
 			}
 		}
 
