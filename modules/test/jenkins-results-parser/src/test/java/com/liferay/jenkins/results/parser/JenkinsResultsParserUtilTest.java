@@ -27,7 +27,8 @@ import org.junit.Test;
 /**
  * @author Peter Yoo
  */
-public class JenkinsResultsParserUtilTest extends BaseMessageUtilTestCase {
+public class JenkinsResultsParserUtilTest
+	extends BaseJenkinsResultsParserTestCase {
 
 	@Before
 	public void setUp() throws Exception {
@@ -89,24 +90,15 @@ public class JenkinsResultsParserUtilTest extends BaseMessageUtilTestCase {
 		Assert.assertEquals(
 			"integration-db2",
 			JenkinsResultsParserUtil.getJobVariant(
-				new JSONObject(
-					read(
-						new File(
-							dependenciesDir,
-							"/axis-integration-db2-1/api/json")))));
-
+				read(dependenciesDir, "/axis-integration-db2-1/api/json")));
 		Assert.assertEquals(
 			"plugins",
 			JenkinsResultsParserUtil.getJobVariant(
-				new JSONObject(
-					read(
-						new File(
-							dependenciesDir, "/axis-plugin-1/api/json")))));
+				read(dependenciesDir, "/axis-plugin-1/api/json")));
 		Assert.assertEquals(
 			"",
 			JenkinsResultsParserUtil.getJobVariant(
-				new JSONObject(
-					read(new File(dependenciesDir, "/job-1/api/json")))));
+				read(dependenciesDir, "/job-1/api/json")));
 	}
 
 	@Test
@@ -128,34 +120,15 @@ public class JenkinsResultsParserUtilTest extends BaseMessageUtilTestCase {
 	@Test
 	public void testToJSONObject() throws Exception {
 		for (File file : dependenciesDir.listFiles()) {
-			assertToJSONObjectSample(new File(file, "api/json"));
+			testToJSONObject(new File(file, "api/json"));
 		}
 	}
 
 	@Test
 	public void testToString() throws Exception {
 		for (File file : dependenciesDir.listFiles()) {
-			assertToStringSample(new File(file, "api/json"));
+			testToString(new File(file, "api/json"));
 		}
-	}
-
-	protected void assertToJSONObjectSample(File jsonFile) throws Exception {
-		JSONObject expectedJSONObject = new JSONObject(read(jsonFile));
-		JSONObject actualJSONObject = JenkinsResultsParserUtil.toJSONObject(
-			JenkinsResultsParserUtil.getLocalURL(toURLString(jsonFile)));
-
-		Assert.assertEquals(
-			expectedJSONObject.toString(), actualJSONObject.toString());
-	}
-
-	protected void assertToStringSample(File jsonFile) throws Exception {
-		String expectedJSONString = read(jsonFile);
-		String actualJSONString = JenkinsResultsParserUtil.toString(
-			JenkinsResultsParserUtil.getLocalURL(toURLString(jsonFile)));
-
-		Assert.assertEquals(
-			expectedJSONString.replace("\n", ""),
-			actualJSONString.replace("\n", ""));
 	}
 
 	@Override
@@ -194,11 +167,27 @@ public class JenkinsResultsParserUtilTest extends BaseMessageUtilTestCase {
 		return null;
 	}
 
+	protected void testToJSONObject(File file) throws Exception {
+		JSONObject expectedJSONObject = new JSONObject(read(file));
+		JSONObject actualJSONObject = JenkinsResultsParserUtil.toJSONObject(
+			JenkinsResultsParserUtil.getLocalURL(toURLString(file)));
+
+		Assert.assertEquals(
+			expectedJSONObject.toString(), actualJSONObject.toString());
+	}
+
+	protected void testToString(File file) throws Exception {
+		String expectedJSONString = read(file);
+		String actualJSONString = JenkinsResultsParserUtil.toString(
+			JenkinsResultsParserUtil.getLocalURL(toURLString(file)));
+
+		Assert.assertEquals(
+			expectedJSONString.replace("\n", ""),
+			actualJSONString.replace("\n", ""));
+	}
+
 	@Override
 	protected void writeExpectedMessage(File sampleDir) throws Exception {
-
-		// Do nothing
-
 	}
 
 }
