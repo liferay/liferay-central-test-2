@@ -142,13 +142,12 @@ public class MVCCommandCache {
 		for (MVCCommand mvcCommand : mvcCommands) {
 			String mvcCommandClassName = ClassUtil.getClassName(mvcCommand);
 
-			List<String> keys = _mvcCommandCompositeIds.get(
-				mvcCommandClassName);
+			List<String> keys = _mvcCommandKeys.get(mvcCommandClassName);
 
 			if (keys == null) {
 				keys = new ArrayList<>();
 
-				_mvcCommandCompositeIds.put(mvcCommandClassName, keys);
+				_mvcCommandKeys.put(mvcCommandClassName, keys);
 			}
 
 			keys.add(key);
@@ -168,7 +167,7 @@ public class MVCCommandCache {
 	private final String _mvcComandPostFix;
 	private final Map<String, MVCCommand> _mvcCommandCache =
 		new ConcurrentHashMap<>();
-	private final Map<String, List<String>> _mvcCommandCompositeIds =
+	private final Map<String, List<String>> _mvcCommandKeys =
 		new ConcurrentHashMap<>();
 	private final Map<String, List<MVCCommand>> _mvcCommands =
 		new ConcurrentHashMap<>();
@@ -223,7 +222,7 @@ public class MVCCommandCache {
 
 				String mvcCommandClassName = ClassUtil.getClassName(mvcCommand);
 
-				_mvcCommandCompositeIds.remove(mvcCommandClassName);
+				_mvcCommandKeys.remove(mvcCommandClassName);
 			}
 		}
 
