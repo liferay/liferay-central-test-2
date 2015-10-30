@@ -104,20 +104,20 @@ public class ResourceBundleTrackerTest {
 	@Test
 	public void testResourceBundlesHierarchy() {
 		ServiceRegistration<ResourceBundle> serviceRegistrationA =
-			_registerResourceBundle(
-				_createResourceBundle(
+			registerResourceBundle(
+				createResourceBundle(
 					"common-key", "th_TH_TH", "th_TH_TH", "th_TH_TH"),
 				"th_TH_TH");
 		ServiceRegistration<ResourceBundle> serviceRegistrationB =
-			_registerResourceBundle(
-				_createResourceBundle("common-key", "th_TH", "th_TH", "th_TH"),
+			registerResourceBundle(
+				createResourceBundle("common-key", "th_TH", "th_TH", "th_TH"),
 				"th_TH");
 		ServiceRegistration<ResourceBundle> serviceRegistrationC =
-			_registerResourceBundle(
-				_createResourceBundle("common-key", "th", "th", "th"), "th");
+			registerResourceBundle(
+				createResourceBundle("common-key", "th", "th", "th"), "th");
 		ServiceRegistration<ResourceBundle> serviceRegistrationD =
-			_registerResourceBundle(
-				_createResourceBundle(
+			registerResourceBundle(
+				createResourceBundle(
 					"common-key", "root-bundle", "root-bundle", "root-bundle"),
 				"");
 
@@ -203,7 +203,7 @@ public class ResourceBundleTrackerTest {
 		ServiceRegistration<ResourceBundle> serviceRegistration =
 			registry.registerService(
 				ResourceBundle.class,
-				_createResourceBundle("key", "value", "this", "esto2"),
+				createResourceBundle("key", "value", "this", "esto2"),
 				properties);
 
 		try {
@@ -222,7 +222,7 @@ public class ResourceBundleTrackerTest {
 		}
 	}
 
-	private ResourceBundle _createResourceBundle(
+	protected ResourceBundle createResourceBundle(
 		final String... keysAndValues) {
 
 		if ((keysAndValues.length % 2) != 0) {
@@ -248,7 +248,7 @@ public class ResourceBundleTrackerTest {
 		};
 	}
 
-	private ServiceRegistration<ResourceBundle> _registerResourceBundle(
+	protected ServiceRegistration<ResourceBundle> registerResourceBundle(
 		ResourceBundle resourceBundle, String languageId) {
 
 		Map<String, Object> properties = new HashMap<>();
