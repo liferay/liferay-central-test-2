@@ -17,6 +17,7 @@ package com.liferay.portal.servlet.jsp.compiler.internal;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.URLCodec;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.io.IOException;
 
@@ -121,7 +122,9 @@ public class JspResourceResolver implements ResourceResolver {
 	protected String decodePath(String path) {
 		path = StringUtil.replace(
 			path, StringPool.SLASH, "_LIFERAY_TEMP_SLASH_");
+
 		path = URLCodec.decodeURL(path, StringPool.UTF8);
+
 		path = StringUtil.replace(
 			path, "_LIFERAY_TEMP_SLASH_", StringPool.SLASH);
 
@@ -140,7 +143,7 @@ public class JspResourceResolver implements ResourceResolver {
 
 			fileName = jarFileURL.getFile();
 		}
-		else if ("wsjar".equals(url.getProtocol())) {
+		else if (Validator.equals(url.getProtocol(), "wsjar")) {
 
 			// WebSphere uses a custom wsjar protocol to represent JAR files
 
@@ -162,7 +165,7 @@ public class JspResourceResolver implements ResourceResolver {
 
 			fileName = decodePath(fileName);
 		}
-		else if ("zip".equals(url.getProtocol())) {
+		else if (Validator.equals(url.getProtocol(), "zip")) {
 
 			// Weblogic uses a custom zip protocol to represent JAR files
 
@@ -174,7 +177,7 @@ public class JspResourceResolver implements ResourceResolver {
 				fileName = fileName.substring(0, index);
 			}
 		}
-		else if ("vfs".equals(url.getProtocol())) {
+		else if (Validator.equals(url.getProtocol(), "vfs")) {
 
 			// JBoss uses a custom vfs protocol to represent JAR files
 
