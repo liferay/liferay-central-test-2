@@ -28,7 +28,7 @@ import javax.servlet.jsp.tagext.BodyTag;
 public class VerticalCardStickerBottomTag
 	extends IncludeTag implements BodyTag {
 
-		@Override
+	@Override
 	public int doEndTag() {
 		VerticalCardTag verticalCardTag =
 			(VerticalCardTag)findAncestorWithClass(this, VerticalCardTag.class);

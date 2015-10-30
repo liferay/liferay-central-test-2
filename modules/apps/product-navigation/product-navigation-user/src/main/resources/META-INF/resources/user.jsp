@@ -15,8 +15,7 @@
 --%>
 
 <%@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
-
-<%@ taglib prefix="liferay-ui" uri="http://liferay.com/tld/ui" %>
+<%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 
 <liferay-theme:defineObjects />
 
