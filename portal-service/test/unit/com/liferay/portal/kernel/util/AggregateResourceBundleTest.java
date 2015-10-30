@@ -27,9 +27,9 @@ public class AggregateResourceBundleTest {
 
 	@Test
 	public void testGetKeyFromFirstBundle() {
-		ResourceBundle resourceBundleA = _createResourceBundle(
+		ResourceBundle resourceBundleA = createResourceBundle(
 			"keyA", "valueA");
-		ResourceBundle resourceBundleB = _createResourceBundle(
+		ResourceBundle resourceBundleB = createResourceBundle(
 			"keyB", "valueB");
 
 		AggregateResourceBundle aggregateResourceBundle =
@@ -44,9 +44,9 @@ public class AggregateResourceBundleTest {
 
 	@Test
 	public void testGetKeyFromSecondBundle() {
-		ResourceBundle resourceBundleA = _createResourceBundle(
+		ResourceBundle resourceBundleA = createResourceBundle(
 			"keyA", "valueA");
-		ResourceBundle resourceBundleB = _createResourceBundle(
+		ResourceBundle resourceBundleB = createResourceBundle(
 			"keyB", "valueB");
 
 		AggregateResourceBundle aggregateResourceBundle =
@@ -58,9 +58,9 @@ public class AggregateResourceBundleTest {
 
 	@Test
 	public void testKeySet() {
-		ResourceBundle resourceBundleA = _createResourceBundle(
+		ResourceBundle resourceBundleA = createResourceBundle(
 			"keyA", "valueA");
-		ResourceBundle resourceBundleB = _createResourceBundle(
+		ResourceBundle resourceBundleB = createResourceBundle(
 			"keyB", "valueB");
 
 		AggregateResourceBundle aggregateResourceBundle =
@@ -73,9 +73,9 @@ public class AggregateResourceBundleTest {
 
 	@Test
 	public void testOverriddenKeys() {
-		ResourceBundle resourceBundleA = _createResourceBundle(
+		ResourceBundle resourceBundleA = createResourceBundle(
 			"keyA", "valueA");
-		ResourceBundle resourceBundleB = _createResourceBundle(
+		ResourceBundle resourceBundleB = createResourceBundle(
 			"keyA", "valueB");
 
 		AggregateResourceBundle aggregateResourceBundle =
@@ -91,7 +91,7 @@ public class AggregateResourceBundleTest {
 			"valueB", aggregateResourceBundle.getString("keyA"));
 	}
 
-	private ResourceBundle _createResourceBundle(
+	protected ResourceBundle createResourceBundle(
 		final String... keysAndValues) {
 
 		if ((keysAndValues.length % 2) != 0) {
