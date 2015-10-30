@@ -823,6 +823,7 @@
 		</execute>
 
 		<execute function="SelectFrame" locator1="Configuration#CONFIGURATION_IFRAME" />
+
 		<execute function="AssertClick" locator1="Button#SELECT" value1="Select" />
 
 		<execute function="SelectWindow" locator1="title=Knowledge Base Article" />
@@ -834,7 +835,9 @@
 		<execute function="SelectWindow" locator1="title=${pageName} - Liferay" />
 
 		<execute function="SelectFrame" locator1="Configuration#CONFIGURATION_IFRAME" />
+
 		<execute function="AssertClick" locator1="Button#SAVE" value1="Save" />
+
 		<execute function="SelectFrame" value1="relative=top" />
 	</command>
 
