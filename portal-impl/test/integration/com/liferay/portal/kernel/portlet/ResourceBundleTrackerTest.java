@@ -148,17 +148,14 @@ public class ResourceBundleTrackerTest {
 		Assert.assertEquals(
 			"th_TH_TH",
 			ResourceBundleUtil.getString(portletResourceBundleA, "common-key"));
-
 		Assert.assertEquals(
 			"th_TH",
 			ResourceBundleUtil.getString(portletResourceBundleB, "common-key"));
 		Assert.assertFalse(portletResourceBundleB.containsKey("th_TH_TH"));
-
 		Assert.assertEquals(
 			"th",
 			ResourceBundleUtil.getString(portletResourceBundleC, "common-key"));
 		Assert.assertFalse(portletResourceBundleC.containsKey("th_TH"));
-
 		Assert.assertEquals(
 			"root-bundle",
 			ResourceBundleUtil.getString(portletResourceBundleD, "common-key"));
