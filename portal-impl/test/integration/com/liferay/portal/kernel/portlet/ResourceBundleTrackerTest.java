@@ -193,12 +193,12 @@ public class ResourceBundleTrackerTest {
 
 	@Test
 	public void testResourceBundlesOverride() {
+		Registry registry = RegistryUtil.getRegistry();
+
 		Map<String, Object> properties = new HashMap<>();
 
 		properties.put("javax.portlet.name", TestPortlet.PORTLET_NAME);
 		properties.put("language.id", "es_ES");
-
-		Registry registry = RegistryUtil.getRegistry();
 
 		ServiceRegistration<ResourceBundle> serviceRegistration =
 			registry.registerService(
@@ -251,12 +251,12 @@ public class ResourceBundleTrackerTest {
 	protected ServiceRegistration<ResourceBundle> registerResourceBundle(
 		ResourceBundle resourceBundle, String languageId) {
 
+		Registry registry = RegistryUtil.getRegistry();
+
 		Map<String, Object> properties = new HashMap<>();
 
 		properties.put("javax.portlet.name", TestPortlet.PORTLET_NAME);
 		properties.put("language.id", languageId);
-
-		Registry registry = RegistryUtil.getRegistry();
 
 		return registry.registerService(
 			ResourceBundle.class, resourceBundle, properties);
