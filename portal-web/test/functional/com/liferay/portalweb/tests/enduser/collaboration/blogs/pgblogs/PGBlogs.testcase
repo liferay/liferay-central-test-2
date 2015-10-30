@@ -1630,7 +1630,7 @@
 	</command>
 
 	<command name="ViewBlogsEntryWithDefaultScope" priority="3">
-		<var name="contentScopeName" value="Default" />
+		<var name="contentScopeName" value="Default Scope" />
 		<var name="entryContent" value="Blogs Entry Content" />
 		<var name="entryTitle" value="Blogs Entry Title" />
 		<var name="portletName2" value="Blogs (Blogs Page)" />
@@ -1656,7 +1656,7 @@
 			<var name="pageName" value="${pageName}" />
 		</execute>
 
-		<execute macro="Portlet#viewPillTitle">
+		<execute macro="Portlet#viewTitle">
 			<var name="portletName" value="${portletName2}" />
 		</execute>
 
@@ -1679,6 +1679,10 @@
 			<var name="contentScopeName" value="${contentScopeName}" />
 		</execute>
 
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
 		<execute macro="Portlet#gotoPortletOptions">
 			<var name="portletName" value="Blogs" />
 			<var name="portletOption" value="Configuration" />
@@ -1697,8 +1701,8 @@
 		</execute>
 
 		<execute macro="BlogsConfiguration#selectScopeCP">
-			<var name="scopeDefault" value="Default" />
-			<var name="scopeSelection" value="${pageName2}" />
+			<var name="scopeDefault" value="Default Scope" />
+			<var name="scopeSelection" value="${pageName}" />
 		</execute>
 
 		<execute macro="BlogsEntry#viewCP">
