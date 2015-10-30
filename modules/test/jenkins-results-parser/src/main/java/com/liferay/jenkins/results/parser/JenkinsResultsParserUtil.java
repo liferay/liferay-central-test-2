@@ -137,6 +137,10 @@ public class JenkinsResultsParserUtil {
 		return "";
 	}
 
+	public static String getJobVariant(String json) throws Exception {
+		return getJobVariant(new JSONObject(json));
+	}
+
 	public static String getLocalURL(String remoteURL) {
 		remoteURL = remoteURL.replace(
 			"${user.dir}", System.getProperty("user.dir"));

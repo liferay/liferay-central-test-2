@@ -28,7 +28,7 @@ import org.junit.Assert;
 /**
  * @author Peter Yoo
  */
-public abstract class BaseMessageUtilTestCase {
+public abstract class BaseJenkinsResultsParserTestCase {
 
 	protected void assertSample(File caseDir) throws Exception {
 		System.out.print("Asserting sample " + caseDir.getName() + ": ");
@@ -147,6 +147,10 @@ public abstract class BaseMessageUtilTestCase {
 
 	protected String read(File file) throws IOException {
 		return new String(Files.readAllBytes(Paths.get(file.toURI())));
+	}
+
+	protected String read(File dir, String fileName) throws IOException {
+		return read(new File(dir, fileName));
 	}
 
 	protected String replaceToken(String string, String token, String value) {
