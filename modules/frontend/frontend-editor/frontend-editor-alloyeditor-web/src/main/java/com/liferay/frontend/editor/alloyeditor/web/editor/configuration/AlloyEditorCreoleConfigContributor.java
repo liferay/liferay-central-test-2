@@ -53,14 +53,6 @@ public class AlloyEditorCreoleConfigContributor
 			"b strong i hr h1 h2 h3 h4 h5 h6 em ul ol li pre table tr th; " +
 				"img a[*]");
 
-		String extraPlugins = jsonObject.getString("extraPlugins");
-
-		extraPlugins = extraPlugins.replace(
-			",ae_tableresize", StringPool.BLANK);
-		extraPlugins = extraPlugins.concat(",creole");
-
-		jsonObject.put("extraPlugins", extraPlugins);
-
 		Map<String, String> fileBrowserParams =
 			(Map<String, String>)inputEditorTaglibAttributes.get(
 				"liferay-ui:input-editor:fileBrowserParams");
@@ -72,6 +64,15 @@ public class AlloyEditorCreoleConfigContributor
 
 		jsonObject.put("decodeLinks", Boolean.TRUE);
 		jsonObject.put("disableObjectResizing", Boolean.TRUE);
+
+		String extraPlugins = jsonObject.getString("extraPlugins");
+
+		extraPlugins = extraPlugins.replace(
+			",ae_tableresize", StringPool.BLANK);
+		extraPlugins = extraPlugins.concat(",creole");
+
+		jsonObject.put("extraPlugins", extraPlugins);
+
 		jsonObject.put("format_tags", "p;h1;h2;h3;h4;h5;h6;pre");
 
 		String removePlugins = jsonObject.getString("removePlugins");
