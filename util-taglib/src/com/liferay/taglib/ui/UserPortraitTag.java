@@ -53,7 +53,6 @@ public class UserPortraitTag extends IncludeTag {
 
 	@Override
 	protected void cleanUp() {
-		_colorCssClass = StringPool.BLANK;
 		_cssClass = StringPool.BLANK;
 		_imageCssClass = StringPool.BLANK;
 		_userId = 0;
@@ -142,7 +141,6 @@ public class UserPortraitTag extends IncludeTag {
 	private static final Log _log = LogFactoryUtil.getLog(
 		UserPortraitTag.class);
 
-	private String _colorCssClass;
 	private String _cssClass;
 	private String _imageCssClass;
 	private long _userId;
