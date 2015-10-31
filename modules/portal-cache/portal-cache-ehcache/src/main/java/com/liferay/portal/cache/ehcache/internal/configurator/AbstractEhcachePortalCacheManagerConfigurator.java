@@ -416,8 +416,9 @@ public abstract class AbstractEhcachePortalCacheManagerConfigurator {
 
 			if (_log.isInfoEnabled()) {
 				_log.info(
-					"portalPropertyKey " + propertiesStringPortalPropertyKey +
-						" has value " + Arrays.toString(values));
+					"Portal property key " +
+						propertiesStringPortalPropertyKey + " has value " +
+							Arrays.toString(values));
 			}
 
 			StringBundler sb = new StringBundler(values.length * 4 - 1);
@@ -461,7 +462,7 @@ public abstract class AbstractEhcachePortalCacheManagerConfigurator {
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
-				"portalPropertyKey " + classPathPortalPropertyKey +
+				"Portal property key " + classPathPortalPropertyKey +
 					" has value " + value);
 		}
 
