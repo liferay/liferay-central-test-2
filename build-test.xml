@@ -6279,18 +6279,16 @@ if (ppstate.equals("normal")) {
 						import java.util.regex.Matcher;
 						import java.util.regex.Pattern;
 
-						String content = project.getProperty("test.generated.properties.content");
-						String className = project.getProperty("poshi.class.name");
-						String methodName = project.getProperty("poshi.method.name");
-
 						StringBuilder sb = new StringBuilder();
 
 						sb.append("(");
-						sb.append(className);
+						sb.append(project.getProperty("poshi.class.name"));
 						sb.append("TestCase\\.(test");
 
-						if (methodName != null) {
-							sb.append(methodName);
+						String poshiMethodName = project.getProperty("poshi.method.name");
+
+						if (poshiMethodName != null) {
+							sb.append(poshiMethodName);
 							sb.append("\\.|");
 						}
 						else {
@@ -6301,7 +6299,7 @@ if (ppstate.equals("normal")) {
 
 						Pattern pattern = Pattern.compile(sb.toString());
 
-						Matcher matcher = pattern.matcher(content);
+						Matcher matcher = pattern.matcher(project.getProperty("test.generated.properties.content"));
 
 						sb = new StringBuilder();
 
