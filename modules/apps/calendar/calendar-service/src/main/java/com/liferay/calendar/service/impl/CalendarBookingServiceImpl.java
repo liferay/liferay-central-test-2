@@ -766,10 +766,15 @@ public class CalendarBookingServiceImpl extends CalendarBookingServiceBaseImpl {
 	protected boolean isPendingInWorkflow(CalendarBooking calendarBooking)
 		throws PortalException, PrincipalException {
 
-		return calendarBooking.isPending() &&
+		if (calendarBooking.isPending() &&
 			 !CalendarPermission.contains(
 				 getPermissionChecker(), calendarBooking.getCalendarId(),
-				 CalendarActionKeys.MANAGE_BOOKINGS);
+				 CalendarActionKeys.MANAGE_BOOKINGS)) {
+
+			return true;
+		}
+
+		return false;
 	}
 
 }
