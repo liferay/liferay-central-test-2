@@ -52,11 +52,11 @@ public class PortletConfigurationIconServiceReferenceMapper
 		}
 
 		for (String path : paths) {
-			emitter.emit(_getKey(portletId, path));
+			emitter.emit(getKey(portletId, path));
 		}
 	}
 
-	private static String _getKey(String portletId, String path) {
+	protected String getKey(String portletId, String path) {
 		return portletId + StringPool.COLON + path;
 	}
 

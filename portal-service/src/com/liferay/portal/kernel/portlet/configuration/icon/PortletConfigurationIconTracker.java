@@ -112,9 +112,9 @@ public class PortletConfigurationIconTracker {
 		_serviceTrackerList = ServiceTrackerCollections.list(
 			PortletConfigurationIconLocator.class);
 	private static final ServiceTrackerMap
-			<String, List<PortletConfigurationIconFactory>>
-		_serviceTrackerMap = ServiceTrackerCollections.multiValueMap(
-			PortletConfigurationIconFactory.class, null,
-			new PortletConfigurationIconServiceReferenceMapper());
+		<String, List<PortletConfigurationIconFactory>>
+			_serviceTrackerMap = ServiceTrackerCollections.multiValueMap(
+				PortletConfigurationIconFactory.class, null,
+				new PortletConfigurationIconServiceReferenceMapper());
 
 }
