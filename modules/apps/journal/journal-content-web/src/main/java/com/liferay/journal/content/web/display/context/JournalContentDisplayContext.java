@@ -283,7 +283,9 @@ public class JournalContentDisplayContext {
 			return _ddmTemplateKey;
 		}
 
-		if (!getDDMTemplates().isEmpty()) {
+		List<DDMTemplate> ddmTemplates = getDDMTemplates();
+
+		if (!ddmTemplates.isEmpty()) {
 			JournalArticle article = getArticle();
 
 			_ddmTemplateKey = article.getDDMTemplateKey();
