@@ -40,8 +40,7 @@ public class WikiServiceUpgrade implements UpgradeStepRegistrator {
 			"com.liferay.wiki.service", "0.0.1", "1.0.0", new UpgradeSchema(),
 			new UpgradePortletId(), new UpgradePortletPreferences(),
 			new UpgradeClassNames(), new UpgradeLastPublishDate(),
-			new UpgradePortletSettings(_settingsFactory),
-			new UpgradeWikiPageResource());
+			new UpgradePortletSettings(_settingsFactory));
 	}
 
 	@Reference(target = ModuleServiceLifecycle.PORTAL_INITIALIZED, unbind = "-")
