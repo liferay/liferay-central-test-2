@@ -97,11 +97,12 @@ public class BaseUpgradeLastPublishDate extends UpgradeProcess {
 				if (Validator.isNotNull(preferences)) {
 					int x = preferences.lastIndexOf(
 						"last-publish-date</name><value>");
-					int y = preferences.indexOf("</value>", x);
 
 					if (x < 0) {
 						break;
 					}
+
+					int y = preferences.indexOf("</value>", x);
 
 					String lastPublishDateString = preferences.substring(x, y);
 
