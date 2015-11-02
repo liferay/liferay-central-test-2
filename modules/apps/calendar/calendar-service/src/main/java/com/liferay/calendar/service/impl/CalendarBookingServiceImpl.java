@@ -767,9 +767,9 @@ public class CalendarBookingServiceImpl extends CalendarBookingServiceBaseImpl {
 		throws PortalException, PrincipalException {
 
 		if (calendarBooking.isPending() &&
-			 !CalendarPermission.contains(
-				 getPermissionChecker(), calendarBooking.getCalendarId(),
-				 CalendarActionKeys.MANAGE_BOOKINGS)) {
+			!CalendarPermission.contains(
+				getPermissionChecker(), calendarBooking.getCalendarId(),
+				CalendarActionKeys.MANAGE_BOOKINGS)) {
 
 			return true;
 		}
