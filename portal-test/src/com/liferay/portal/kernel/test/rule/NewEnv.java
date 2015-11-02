@@ -36,7 +36,7 @@ public @interface NewEnv {
 	@Inherited
 	@Retention(RetentionPolicy.RUNTIME)
 	@Target({ElementType.METHOD, ElementType.TYPE})
-	public @interface JVMArgs {
+	public @interface JVMArgsLine {
 
 		public String value();
 

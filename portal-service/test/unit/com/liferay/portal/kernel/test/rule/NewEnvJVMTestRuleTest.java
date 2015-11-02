@@ -14,7 +14,7 @@
 
 package com.liferay.portal.kernel.test.rule;
 
-import com.liferay.portal.kernel.test.rule.NewEnv.JVMArgs;
+import com.liferay.portal.kernel.test.rule.NewEnv.JVMArgsLine;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 
@@ -32,7 +32,7 @@ import org.junit.Test;
 /**
  * @author Shuyang Zhou
  */
-@JVMArgs("-Dkey1=default1 -Dkey2=default2")
+@JVMArgsLine("-Dkey1=default1 -Dkey2=default2")
 @NewEnv(type = NewEnv.Type.JVM)
 public class NewEnvJVMTestRuleTest {
 
@@ -62,7 +62,7 @@ public class NewEnvJVMTestRuleTest {
 		Assert.assertNull(System.getProperty("key3"));
 	}
 
-	@JVMArgs("-Dkey1=value1")
+	@JVMArgsLine("-Dkey1=value1")
 	@Test
 	public void testNewJVM2() {
 		Assert.assertEquals(1, _counter.getAndIncrement());
@@ -74,7 +74,7 @@ public class NewEnvJVMTestRuleTest {
 		Assert.assertNull(System.getProperty("key3"));
 	}
 
-	@JVMArgs("-Dkey2=value2")
+	@JVMArgsLine("-Dkey2=value2")
 	@Test
 	public void testNewJVM3() {
 		Assert.assertEquals(1, _counter.getAndIncrement());
@@ -86,7 +86,7 @@ public class NewEnvJVMTestRuleTest {
 		Assert.assertNull(System.getProperty("key3"));
 	}
 
-	@JVMArgs("-Dkey1=value1 -Dkey2=value2")
+	@JVMArgsLine("-Dkey1=value1 -Dkey2=value2")
 	@Test
 	public void testNewJVM4() {
 		Assert.assertEquals(1, _counter.getAndIncrement());
@@ -98,7 +98,7 @@ public class NewEnvJVMTestRuleTest {
 		Assert.assertNull(System.getProperty("key3"));
 	}
 
-	@JVMArgs("-Dkey1=value1 -Dkey2=value2 -Dkey3=value3")
+	@JVMArgsLine("-Dkey1=value1 -Dkey2=value2 -Dkey3=value3")
 	@Test
 	public void testNewJVM5() {
 		Assert.assertEquals(1, _counter.getAndIncrement());
