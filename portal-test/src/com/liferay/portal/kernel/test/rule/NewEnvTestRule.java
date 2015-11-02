@@ -25,7 +25,7 @@ import com.liferay.portal.kernel.process.local.LocalProcessExecutor;
 import com.liferay.portal.kernel.process.local.LocalProcessLauncher.ProcessContext;
 import com.liferay.portal.kernel.process.local.LocalProcessLauncher.ShutdownHook;
 import com.liferay.portal.kernel.test.rule.BaseTestRule.StatementWrapper;
-import com.liferay.portal.kernel.test.rule.NewEnv.JVMArgs;
+import com.liferay.portal.kernel.test.rule.NewEnv.JVMArgsLine;
 import com.liferay.portal.kernel.util.MethodCache;
 import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
@@ -151,20 +151,20 @@ public class NewEnvTestRule implements TestRule {
 
 		Class<?> testClass = description.getTestClass();
 
-		JVMArgs jvmArgs = testClass.getAnnotation(JVMArgs.class);
+		JVMArgsLine jvmArgsLine = testClass.getAnnotation(JVMArgsLine.class);
 
-		if (jvmArgs != null) {
+		if (jvmArgsLine != null) {
 			arguments.addAll(
 				Arrays.asList(
-					StringUtil.split(jvmArgs.value(), StringPool.SPACE)));
+					StringUtil.split(jvmArgsLine.value(), StringPool.SPACE)));
 		}
 
-		jvmArgs = description.getAnnotation(JVMArgs.class);
+		jvmArgsLine = description.getAnnotation(JVMArgsLine.class);
 
-		if (jvmArgs != null) {
+		if (jvmArgsLine != null) {
 			arguments.addAll(
 				Arrays.asList(
-					StringUtil.split(jvmArgs.value(), StringPool.SPACE)));
+					StringUtil.split(jvmArgsLine.value(), StringPool.SPACE)));
 		}
 
 		arguments.add("-Djava.net.preferIPv4Stack=true");
