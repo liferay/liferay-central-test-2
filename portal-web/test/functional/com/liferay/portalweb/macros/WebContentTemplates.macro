@@ -70,6 +70,7 @@
 		<var name="key_listEntry" value="${templateName}" />
 
 		<execute function="Click" locator1="Icon#LIST_VERTICAL_ELLIPSIS" />
+
 		<execute function="AssertClick" locator1="MenuItem#PERMISSIONS" value1="Permissions" />
 
 		<execute macro="PermissionsInline#addOrRemoveViewPermissionFromAllRoles">
@@ -84,6 +85,7 @@
 		<execute function="AssertClick" locator1="DDMEditTemplate#DETAILS_SELECT_STRUCTURE" value1="Select" />
 
 		<execute function="SelectFrameTop" />
+
 		<execute function="SelectFrame" locator1="DDMSelectStructure#DDM_STRUCTURES_IFRAME" />
 
 		<execute function="Type" locator1="NavBar#BASIC_SEARCH_FIELD" value1="${structureName}" />
@@ -93,10 +95,13 @@
 		<var name="key_ddlDatadefinitionName" value="${structureName}" />
 
 		<execute function="AssertTextEquals" locator1="DDMSelectStructure#DDM_STRUCTURE_TABLE_NAME_1" value1="${structureName}" />
+
 		<execute function="AssertClickNoError" locator1="DDMSelectStructure#DDM_STRUCTURE_TABLE_CHOOSE_BUTTON_1" value1="Choose" />
+
 		<execute function="Confirm" value1="Selecting a new structure changes the available input fields and available templates. Do you want to proceed?" />
 
 		<execute function="SelectFrameTop" />
+
 		<execute function="SelectFrame" locator1="IFrame#TEMPLATES" />
 
 		<execute function="AssertTextEquals#assertValue" locator1="TextInput#STRUCTURE" value1="${structureName}" />
@@ -176,12 +181,15 @@
 		<execute function="AssertTextEquals" locator1="DDMSelectTemplate#TEMPLATE_TABLE_NAME" value1="${templateName}" />
 
 		<execute function="AssertClick" locator1="DDMSelectTemplate#TEMPLATE_TABLE_NAME" value1="${templateName}" />
+
 		<execute function="SelectFrame" />
 
 		<execute function="SelectFrame" locator1="IFrame#TEMPLATES" />
+
 		<execute function="AssertTextEquals" locator1="TextInput#NAME" value1="${templateName}" />
 
 		<execute function="Click" locator1="Translation#LOCALIZATION_NAME" />
+
 		<execute function="Type#clickAtSendKeys" locator1="TextInput#NAME" value1="${localization1Name}" />
 
 		<if>
