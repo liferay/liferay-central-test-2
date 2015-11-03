@@ -34,7 +34,7 @@ public class UpgradeCalendar extends UpgradeProcess {
 	@Override
 	protected void doUpgrade() throws Exception {
 		if (!tableHasColumn("CalendarBooking", "vEventUid")) {
-			runSQL("alter table Calendar add timeZoneId STRING default null");
+			runSQL("alter table Calendar add timeZoneId VARCHAR(75) null");
 		}
 
 		updateCalendarTimeZoneIds();
