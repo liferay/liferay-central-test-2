@@ -52,7 +52,6 @@ public class JenkinsResultsParserUtil {
 	}
 
 	public static String fixURL(String url) {
-		url = url.replace("//", "/");
 		url = url.replace("(", "%28");
 		url = url.replace(")", "%29");
 		url = url.replace("[", "%5B");
@@ -173,8 +172,10 @@ public class JenkinsResultsParserUtil {
 	public static String toString(String url) throws IOException {
 		url = fixURL(url);
 
-		if (_toStringCache.containsKey(url)) {
-			return _toStringCache.get(url);
+		String key = url.replace("//", "/");
+
+		if (_toStringCache.containsKey(key)) {
+			return _toStringCache.get(key);
 		}
 
 		System.out.println("Downloading " + url);
@@ -197,7 +198,7 @@ public class JenkinsResultsParserUtil {
 
 		bufferedReader.close();
 
-		_toStringCache.put(url, sb.toString());
+		_toStringCache.put(key, sb.toString());
 
 		return sb.toString();
 	}
