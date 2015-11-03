@@ -226,11 +226,11 @@ public class DDMStructureServiceTest extends BaseDDMServiceTestCase {
 
 	private static long _classNameId;
 
-	private String _originalName;
-	private PermissionChecker _originalPermissionChecker;
-
 	@DeleteAfterTestRun
 	private Group _group;
+
+	private String _originalName;
+	private PermissionChecker _originalPermissionChecker;
 
 	@DeleteAfterTestRun
 	private User _siteAdminUser;
