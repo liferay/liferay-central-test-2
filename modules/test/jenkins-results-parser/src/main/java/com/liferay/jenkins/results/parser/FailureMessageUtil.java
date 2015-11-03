@@ -31,7 +31,7 @@ public class FailureMessageUtil {
 
 		StringBuilder sb = new StringBuilder();
 
-		String consoleOutput = JenkinsResultsParserUtil.downloadToString(
+		String consoleOutput = JenkinsResultsParserUtil.toString(
 			JenkinsResultsParserUtil.getLocalURL(
 				buildURL + "/logText/progressiveText"));
 
