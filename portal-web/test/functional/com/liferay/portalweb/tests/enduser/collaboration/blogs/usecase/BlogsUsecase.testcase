@@ -1177,7 +1177,7 @@
 		</execute>
 	</command>
 
-	<command name="ViewBlogsEntryWithImageUploadedToDM" priority="3">
+	<command name="ViewBlogsEntryWithCoverImageUploadedToDM" priority="3">
 		<execute macro="Page#gotoContentCP">
 			<var name="portletName" value="Blogs" />
 		</execute>
