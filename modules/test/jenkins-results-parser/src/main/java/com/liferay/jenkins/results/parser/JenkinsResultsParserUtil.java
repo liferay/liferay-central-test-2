@@ -175,6 +175,8 @@ public class JenkinsResultsParserUtil {
 		String key = url.replace("//", "/");
 
 		if (_toStringCache.containsKey(key)) {
+			System.out.println("Loading " + url);
+
 			return _toStringCache.get(key);
 		}
 
