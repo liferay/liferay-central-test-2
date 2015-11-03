@@ -173,8 +173,6 @@ public class JenkinsResultsParserUtil {
 	public static String toString(String url) throws IOException {
 		url = fixURL(url);
 
-		URL urlObject = new URL(url);
-
 		if (_toStringCache.containsKey(url)) {
 			return _toStringCache.get(url);
 		}
@@ -182,6 +180,8 @@ public class JenkinsResultsParserUtil {
 		System.out.println("Downloading " + url);
 
 		StringBuilder sb = new StringBuilder();
+
+		URL urlObject = new URL(url);
 
 		InputStreamReader inputStreamReader = new InputStreamReader(
 			urlObject.openStream());
