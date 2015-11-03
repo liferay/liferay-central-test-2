@@ -33,38 +33,6 @@ import org.json.JSONObject;
  */
 public class JenkinsResultsParserUtil {
 
-	public static String downloadToString(String url) throws IOException {
-		URL urlObject = new URL(fixURL(url));
-
-		String key = _convertToCacheKey(urlObject.toString());
-
-		if (_cache.containsKey(key)) {
-			return _cache.get(key);
-		}
-
-		System.out.println("Downloading " + url);
-
-		StringBuilder sb = new StringBuilder();
-
-		InputStreamReader inputStreamReader = new InputStreamReader(
-			urlObject.openStream());
-
-		BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-
-		String line = null;
-
-		while ((line = bufferedReader.readLine()) != null) {
-			sb.append(line);
-			sb.append("\n");
-		}
-
-		bufferedReader.close();
-
-		_cache.put(key, sb.toString());
-
-		return sb.toString();
-	}
-
 	public static String fixJSON(String json) {
 		json = json.replaceAll("\t", "&#09;");
 		json = json.replaceAll("\\\"", "&#34;");
@@ -209,7 +177,39 @@ public class JenkinsResultsParserUtil {
 	}
 
 	public static JSONObject toJSONObject(String url) throws Exception {
-		return new JSONObject(downloadToString(url));
+		return new JSONObject(toString(url));
+	}
+
+	public static String toString(String url) throws IOException {
+		URL urlObject = new URL(fixURL(url));
+
+		String key = _convertToCacheKey(urlObject.toString());
+
+		if (_cache.containsKey(key)) {
+			return _cache.get(key);
+		}
+
+		System.out.println("Downloading " + url);
+
+		StringBuilder sb = new StringBuilder();
+
+		InputStreamReader inputStreamReader = new InputStreamReader(
+			urlObject.openStream());
+
+		BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+		String line = null;
+
+		while ((line = bufferedReader.readLine()) != null) {
+			sb.append(line);
+			sb.append("\n");
+		}
+
+		bufferedReader.close();
+
+		_cache.put(key, sb.toString());
+
+		return sb.toString();
 	}
 
 	private static String _convertToCacheKey(String url) {
