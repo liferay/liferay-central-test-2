@@ -1412,12 +1412,12 @@
 	</command>
 
 	<command name="viewPGViaKBArticle">
-		<execute function="AssertTextEquals" locator1="PGKnowledgebasearticle#ARTICLE_TITLE" value1="${kbArticleTitle}" />
+		<execute function="AssertTextEquals#assertPartialText" locator1="PGKnowledgebasearticle#ARTICLE_TITLE" value1="${kbArticleTitle}" />
 		<execute function="AssertTextEquals" locator1="PGKnowledgebasearticle#ARTICLE_CONTENT" value1="${kbArticleContent}" />
 	</command>
 
 	<command name="viewPGViaKBDisplay">
-		<execute function="AssertTextEquals" locator1="KnowledgeBase#DISPLAY_TITLE" value1="${kbArticleTitle}" />
+		<execute function="AssertTextEquals#assertPartialText" locator1="KnowledgeBase#DISPLAY_TITLE" value1="${kbArticleTitle}" />
 		<execute function="AssertTextEquals" locator1="KnowledgeBase#DISPLAY_CONTENT" value1="${kbArticleContent}" />
 	</command>
 
