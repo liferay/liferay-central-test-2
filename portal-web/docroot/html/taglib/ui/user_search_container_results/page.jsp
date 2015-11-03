@@ -17,8 +17,8 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
-boolean useIndexer = GetterUtil.getBoolean(request.getAttribute("liferay-ui:user-search-container-results:useIndexer"));
 UserSearchTerms searchTerms = (UserSearchTerms)request.getAttribute("liferay-ui:user-search-container-results:searchTerms");
+boolean useIndexer = GetterUtil.getBoolean(request.getAttribute("liferay-ui:user-search-container-results:useIndexer"));
 LinkedHashMap<String, Object> userParams = (LinkedHashMap<String, Object>)request.getAttribute("liferay-ui:user-search-container-results:userParams");
 
 Indexer<?> indexer = IndexerRegistryUtil.nullSafeGetIndexer(User.class);

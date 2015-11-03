@@ -17,10 +17,10 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
-boolean useIndexer = GetterUtil.getBoolean(request.getAttribute("liferay-ui:organization-search-container-results:useIndexer"));
-OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)request.getAttribute("liferay-ui:organization-search-container-results:searchTerms");
 LinkedHashMap<String, Object> organizationParams = (LinkedHashMap<String, Object>)request.getAttribute("liferay-ui:organization-search-container-results:organizationParams");
 long parentOrganizationId = GetterUtil.getLong(request.getAttribute("liferay-ui:organization-search-container-results:parentOrganizationId"));
+OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)request.getAttribute("liferay-ui:organization-search-container-results:searchTerms");
+boolean useIndexer = GetterUtil.getBoolean(request.getAttribute("liferay-ui:organization-search-container-results:useIndexer"));
 
 Indexer<?> indexer = IndexerRegistryUtil.nullSafeGetIndexer(Organization.class);
 %>
