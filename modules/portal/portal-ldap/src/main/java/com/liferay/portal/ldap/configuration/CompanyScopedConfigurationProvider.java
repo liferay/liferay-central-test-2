@@ -164,13 +164,14 @@ public abstract class CompanyScopedConfigurationProvider
 					companyId);
 		}
 
-		List<Dictionary<String, Object>> configurations = new ArrayList<>();
+		List<Dictionary<String, Object>> configurationsProperties =
+			new ArrayList<>();
 
 		Dictionary<String, Object> properties = configuration.getProperties();
 
-		configurations.add(properties);
+		configurationsProperties.add(properties);
 
-		return configurations;
+		return configurationsProperties;
 	}
 
 	@Override
@@ -210,8 +211,10 @@ public abstract class CompanyScopedConfigurationProvider
 		Configuration defaultConfiguration = _configurations.get(0L);
 
 		if (defaultConfiguration == null) {
+			Class<?> metatype = getMetatype();
+
 			throw new IllegalArgumentException(
-				"No default configuration for " + getMetatype().getName());
+				"No default configuration for " + metatype.getName());
 		}
 
 		try {
