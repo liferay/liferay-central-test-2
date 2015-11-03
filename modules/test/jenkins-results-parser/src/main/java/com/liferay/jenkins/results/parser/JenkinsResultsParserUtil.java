@@ -52,21 +52,11 @@ public class JenkinsResultsParserUtil {
 	}
 
 	public static String fixURL(String url) {
-		if (url.contains("(")) {
-			url = url.replace("(", "%28");
-		}
-
-		if (url.contains(")")) {
-			url = url.replace(")", "%29");
-		}
-
-		if (url.contains("[")) {
-			url = url.replace("[", "%5B");
-		}
-
-		if (url.contains("]")) {
-			url = url.replace("]", "%5D");
-		}
+		url = url.replace("//", "/");
+		url = url.replace("(", "%28");
+		url = url.replace(")", "%29");
+		url = url.replace("[", "%5B");
+		url = url.replace("]", "%5D");
 
 		return url;
 	}
@@ -181,14 +171,12 @@ public class JenkinsResultsParserUtil {
 	}
 
 	public static String toString(String url) throws IOException {
-		URL urlObject = new URL(fixURL(url));
+		url = fixURL(url);
 
-		String key = urlObject.toString();
+		URL urlObject = new URL(url);
 
-		key = url.replace("//", "/");
-
-		if (_toStringCache.containsKey(key)) {
-			return _toStringCache.get(key);
+		if (_toStringCache.containsKey(url)) {
+			return _toStringCache.get(url);
 		}
 
 		System.out.println("Downloading " + url);
@@ -209,7 +197,7 @@ public class JenkinsResultsParserUtil {
 
 		bufferedReader.close();
 
-		_toStringCache.put(key, sb.toString());
+		_toStringCache.put(url, sb.toString());
 
 		return sb.toString();
 	}
