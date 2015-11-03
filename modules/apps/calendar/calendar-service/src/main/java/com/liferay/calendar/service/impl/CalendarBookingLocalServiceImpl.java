@@ -590,6 +590,8 @@ public class CalendarBookingLocalServiceImpl
 			long userId, CalendarBooking calendarBooking)
 		throws PortalException {
 
+		// Calendar booking
+
 		if (!calendarBooking.isMasterBooking()) {
 			return calendarBooking;
 		}
@@ -640,6 +642,8 @@ public class CalendarBookingLocalServiceImpl
 	public CalendarBooking restoreCalendarBookingFromTrash(
 			long userId, long calendarBookingId)
 		throws PortalException {
+
+		// Calendar booking
 
 		CalendarBooking calendarBooking = getCalendarBooking(calendarBookingId);
 
