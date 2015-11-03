@@ -26,9 +26,9 @@ taglib uri="http://liferay.com/tld/util" prefix="liferay-util" %>
 <%@ page import="com.liferay.portal.kernel.util.Constants" %><%@
 page import="com.liferay.portal.kernel.util.HtmlUtil" %><%@
 page import="com.liferay.portal.ldap.authenticator.configuration.LDAPAuthConfiguration" %><%@
+page import="com.liferay.portal.ldap.configuration.ConfigurationProvider" %><%@
 page import="com.liferay.portal.ldap.configuration.LDAPServerConfiguration" %><%@
 page import="com.liferay.portal.ldap.constants.LDAPConstants" %><%@
-page import="com.liferay.portal.ldap.configuration.ConfigurationProvider" %><%@
 page import="com.liferay.portal.ldap.exportimport.configuration.LDAPExportConfiguration" %><%@
 page import="com.liferay.portal.ldap.exportimport.configuration.LDAPImportConfiguration" %><%@
 page import="com.liferay.portal.ldap.internal.portal.settings.web.portlet.util.ConfigurationProviderUtil" %><%@
