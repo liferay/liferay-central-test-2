@@ -183,10 +183,12 @@ public class JenkinsResultsParserUtil {
 	public static String toString(String url) throws IOException {
 		URL urlObject = new URL(fixURL(url));
 
-		String key = _convertToCacheKey(urlObject.toString());
+		String key = urlObject.toString();
 
-		if (_cache.containsKey(key)) {
-			return _cache.get(key);
+		key = url.replace("//", "/");
+
+		if (_toStringCache.containsKey(key)) {
+			return _toStringCache.get(key);
 		}
 
 		System.out.println("Downloading " + url);
@@ -207,19 +209,15 @@ public class JenkinsResultsParserUtil {
 
 		bufferedReader.close();
 
-		_cache.put(key, sb.toString());
+		_toStringCache.put(key, sb.toString());
 
 		return sb.toString();
 	}
 
-	private static String _convertToCacheKey(String url) {
-		return url.replace("//", "/");
-	}
-
-	private static final Map<String, String> _cache = new HashMap<>();
 	private static final Pattern _localURLPattern1 = Pattern.compile(
 		"https://test.liferay.com/([0-9]+)/");
 	private static final Pattern _localURLPattern2 = Pattern.compile(
 		"https://(test-[0-9]+-[0-9]+).liferay.com/");
+	private static final Map<String, String> _toStringCache = new HashMap<>();
 
 }
