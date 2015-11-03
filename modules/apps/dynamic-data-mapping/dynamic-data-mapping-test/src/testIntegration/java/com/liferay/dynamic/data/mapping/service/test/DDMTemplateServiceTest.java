@@ -692,11 +692,11 @@ public class DDMTemplateServiceTest extends BaseDDMServiceTestCase {
 	private static long _recordSetClassNameId;
 	private static long _structureClassNameId;
 
-	private String _originalName;
-	private PermissionChecker _originalPermissionChecker;
-
 	@DeleteAfterTestRun
 	private Group _group;
+
+	private String _originalName;
+	private PermissionChecker _originalPermissionChecker;
 
 	@DeleteAfterTestRun
 	private User _siteAdminUser;
