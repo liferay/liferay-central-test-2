@@ -43,10 +43,10 @@ public class OrganizationSearchContainerResultsTag<R> extends IncludeTag {
 
 	@Override
 	protected void cleanUp() {
-		_useIndexer = true;
 		_organizationParams = null;
 		_parentOrganizationId = 0;
 		_searchTerms = null;
+		_useIndexer = true;
 	}
 
 	@Override
