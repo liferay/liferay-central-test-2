@@ -15,7 +15,6 @@
 package com.liferay.jenkins.results.parser;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 
 import java.net.URL;
@@ -169,24 +168,24 @@ public class JenkinsResultsParserUtil {
 		return toJSONObject(url, true);
 	}
 
-	public static JSONObject toJSONObject(String url, boolean cacheFlag)
+	public static JSONObject toJSONObject(String url, boolean checkCache)
 		throws Exception {
 
-		return new JSONObject(toString(url, cacheFlag));
+		return new JSONObject(toString(url, checkCache));
 	}
 
-	public static String toString(String url) throws IOException {
+	public static String toString(String url) throws Exception {
 		return toString(url, true);
 	}
 
-	public static String toString(String url, boolean cacheFlag)
-		throws IOException {
+	public static String toString(String url, boolean checkCache)
+		throws Exception {
 
 		url = fixURL(url);
 
 		String key = url.replace("//", "/");
 
-		if (cacheFlag && _toStringCache.containsKey(key)) {
+		if (checkCache && _toStringCache.containsKey(key)) {
 			System.out.println("Loading " + url);
 
 			return _toStringCache.get(key);
