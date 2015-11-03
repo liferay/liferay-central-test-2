@@ -28,6 +28,7 @@ page import="com.liferay.portal.kernel.util.HtmlUtil" %><%@
 page import="com.liferay.portal.ldap.authenticator.configuration.LDAPAuthConfiguration" %><%@
 page import="com.liferay.portal.ldap.configuration.LDAPServerConfiguration" %><%@
 page import="com.liferay.portal.ldap.constants.LDAPConstants" %><%@
+page import="com.liferay.portal.ldap.configuration.ConfigurationProvider" %><%@
 page import="com.liferay.portal.ldap.exportimport.configuration.LDAPExportConfiguration" %><%@
 page import="com.liferay.portal.ldap.exportimport.configuration.LDAPImportConfiguration" %><%@
 page import="com.liferay.portal.ldap.internal.portal.settings.web.portlet.util.ConfigurationProviderUtil" %><%@
@@ -47,8 +48,19 @@ PortletURL currentURLObj = PortletURLUtil.getCurrent(liferayPortletRequest, life
 
 String currentURL = currentURLObj.toString();
 
-LDAPAuthConfiguration ldapAuthConfiguration = ConfigurationProviderUtil.getLDAPAuthConfigurationProvider().getConfiguration(themeDisplay.getCompanyId());
-LDAPExportConfiguration ldapExportConfiguration = ConfigurationProviderUtil.getLDAPExportConfigurationProvider().getConfiguration(themeDisplay.getCompanyId());
-LDAPImportConfiguration ldapImportConfiguration = ConfigurationProviderUtil.getLDAPImportConfigurationProvider().getConfiguration(themeDisplay.getCompanyId());
-List<LDAPServerConfiguration> ldapServerConfigurations = ConfigurationProviderUtil.getLDAPServerConfigurationProvider().getConfigurations(themeDisplay.getCompanyId(), false);
+ConfigurationProvider<LDAPAuthConfiguration> ldapAuthConfigurationProvider = ConfigurationProviderUtil.getLDAPAuthConfigurationProvider();
+
+LDAPAuthConfiguration ldapAuthConfiguration = ldapAuthConfigurationProvider.getConfiguration(themeDisplay.getCompanyId());
+
+ConfigurationProvider<LDAPExportConfiguration> ldapExportConfigurationProvider = ConfigurationProviderUtil.getLDAPExportConfigurationProvider();
+
+LDAPExportConfiguration ldapExportConfiguration = ldapExportConfigurationProvider.getConfiguration(themeDisplay.getCompanyId());
+
+ConfigurationProvider<LDAPImportConfiguration> ldapImportConfigurationProvider = ConfigurationProviderUtil.getLDAPImportConfigurationProvider();
+
+LDAPImportConfiguration ldapImportConfiguration = ldapImportConfigurationProvider.getConfiguration(themeDisplay.getCompanyId());
+
+ConfigurationProvider<LDAPServerConfiguration> ldapServerConfigurationProvider = ConfigurationProviderUtil.getLDAPServerConfigurationProvider();
+
+List<LDAPServerConfiguration> ldapServerConfigurations = ldapServerConfigurationProvider.getConfigurations(themeDisplay.getCompanyId());
 %>
