@@ -182,8 +182,8 @@ public class DDMTemplateLocalServiceTest extends BaseDDMServiceTestCase {
 	@Test
 	public void testSearchByAnyStatus() throws Exception {
 		addDisplayTemplate(
-				_classNameId, 0, _resourceClassNameId, "Event", null,
-				WorkflowConstants.STATUS_APPROVED);
+			_classNameId, 0, _resourceClassNameId, "Event", null,
+			WorkflowConstants.STATUS_APPROVED);
 		addDisplayTemplate(
 			_classNameId, 0, _resourceClassNameId, "Contact", null,
 			WorkflowConstants.STATUS_DRAFT);
@@ -365,7 +365,6 @@ public class DDMTemplateLocalServiceTest extends BaseDDMServiceTestCase {
 			classNameId1, classPK1, _resourceClassNameId,
 			StringUtil.randomString(), StringUtil.randomString(),
 			WorkflowConstants.STATUS_APPROVED);
-
 		addDisplayTemplate(
 			classNameId1, RandomTestUtil.randomLong(), _resourceClassNameId,
 			StringUtil.randomString(), StringUtil.randomString(),
@@ -402,11 +401,9 @@ public class DDMTemplateLocalServiceTest extends BaseDDMServiceTestCase {
 		addDisplayTemplate(
 			classNameId1, _resourceClassNameId, StringUtil.randomString(),
 			WorkflowConstants.STATUS_APPROVED);
-
 		addDisplayTemplate(
 			classNameId1, _resourceClassNameId, StringUtil.randomString(),
 			WorkflowConstants.STATUS_APPROVED);
-
 		addDisplayTemplate(
 			classNameId1, _resourceClassNameId, StringUtil.randomString(),
 			WorkflowConstants.STATUS_APPROVED);
@@ -416,7 +413,6 @@ public class DDMTemplateLocalServiceTest extends BaseDDMServiceTestCase {
 		addDisplayTemplate(
 			classNameId2, _resourceClassNameId, StringUtil.randomString(),
 			WorkflowConstants.STATUS_APPROVED);
-
 		addDisplayTemplate(
 			classNameId2, _resourceClassNameId, StringUtil.randomString(),
 			WorkflowConstants.STATUS_APPROVED);
@@ -495,7 +491,6 @@ public class DDMTemplateLocalServiceTest extends BaseDDMServiceTestCase {
 			StringUtil.randomString(), StringPool.BLANK, StringPool.BLANK,
 			velocityLanguage, getTestTemplateScript(velocityLanguage),
 			WorkflowConstants.STATUS_APPROVED);
-
 		addTemplate(
 			RandomTestUtil.randomLong(), RandomTestUtil.randomLong(),
 			StringUtil.randomString(), StringPool.BLANK, StringPool.BLANK,

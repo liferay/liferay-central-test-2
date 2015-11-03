@@ -66,8 +66,7 @@ public class DDMTemplateServiceTest extends BaseDDMServiceTestCase {
 	public void setUp() throws Exception {
 		super.setUp();
 
-		_otherGroup = GroupTestUtil.addGroup();
-
+		_group = GroupTestUtil.addGroup();
 		_recordSetClassNameId = PortalUtil.getClassNameId(
 			DDL_RECORD_SET_CLASS_NAME);
 		_structureClassNameId = PortalUtil.getClassNameId(DDMStructure.class);
@@ -196,25 +195,25 @@ public class DDMTemplateServiceTest extends BaseDDMServiceTestCase {
 		DDMStructure structure = addStructure(
 			_recordSetClassNameId, StringUtil.randomString());
 
-		List<DDMTemplate> createdTemplates = new ArrayList<>(3);
+		List<DDMTemplate> newTemplates = new ArrayList<>(3);
 
 		DDMTemplate template = addFormTemplate(
 			structure.getStructureId(), StringUtil.randomString(),
 			WorkflowConstants.STATUS_ANY);
 
-		createdTemplates.add(template);
+		newTemplates.add(template);
 
 		template = addFormTemplate(
 			structure.getStructureId(), StringUtil.randomString(),
 			WorkflowConstants.STATUS_ANY);
 
-		createdTemplates.add(template);
+		newTemplates.add(template);
 
 		template = addFormTemplate(
 			structure.getStructureId(), StringUtil.randomString(),
 			WorkflowConstants.STATUS_ANY);
 
-		createdTemplates.add(template);
+		newTemplates.add(template);
 
 		List<DDMTemplate> templates =
 			DDMTemplateServiceUtil.getTemplatesByStructureClassNameId(
@@ -224,8 +223,8 @@ public class DDMTemplateServiceTest extends BaseDDMServiceTestCase {
 
 		Assert.assertEquals(3, templates.size());
 
-		for (DDMTemplate curTemplate : createdTemplates) {
-			Assert.assertTrue(templates.contains(curTemplate));
+		for (DDMTemplate newTemplate : newTemplates) {
+			Assert.assertTrue(templates.contains(newTemplate));
 		}
 	}
 
@@ -357,9 +356,7 @@ public class DDMTemplateServiceTest extends BaseDDMServiceTestCase {
 			structure.getStructureId(), StringUtil.randomString(),
 			WorkflowConstants.STATUS_ANY);
 
-		long[] groupIds = new long[] {
-			group.getGroupId(), _otherGroup.getGroupId()
-		};
+		long[] groupIds = new long[] {group.getGroupId(), _group.getGroupId()};
 
 		List<DDMTemplate> ddmTemplates = DDMTemplateServiceUtil.search(
 			TestPropsValues.getCompanyId(), groupIds,
@@ -439,9 +436,7 @@ public class DDMTemplateServiceTest extends BaseDDMServiceTestCase {
 			_recordSetClassNameId, null, StringUtil.randomString(), description,
 			type, mode, language, script, WorkflowConstants.STATUS_ANY);
 
-		long[] groupIds = new long[] {
-			group.getGroupId(), _otherGroup.getGroupId()
-		};
+		long[] groupIds = new long[] {group.getGroupId(), _group.getGroupId()};
 
 		List<DDMTemplate> templates = DDMTemplateServiceUtil.search(
 			TestPropsValues.getCompanyId(), groupIds,
@@ -456,7 +451,7 @@ public class DDMTemplateServiceTest extends BaseDDMServiceTestCase {
 	}
 
 	@Test
-	public void testSearchByNameORDescription1() throws Exception {
+	public void testSearchByNameOrDescription1() throws Exception {
 		String name = StringUtil.randomString();
 		String description = StringUtil.randomString();
 
@@ -492,7 +487,7 @@ public class DDMTemplateServiceTest extends BaseDDMServiceTestCase {
 	}
 
 	@Test
-	public void testSearchByNameORDescription2() throws Exception {
+	public void testSearchByNameOrDescription2() throws Exception {
 		String name = StringUtil.randomString();
 		String description = StringUtil.randomString();
 
@@ -517,9 +512,7 @@ public class DDMTemplateServiceTest extends BaseDDMServiceTestCase {
 			_recordSetClassNameId, null, StringUtil.randomString(), description,
 			type, mode, language, script, WorkflowConstants.STATUS_ANY);
 
-		long[] groupIds = new long[] {
-			group.getGroupId(), _otherGroup.getGroupId()
-		};
+		long[] groupIds = new long[] {group.getGroupId(), _group.getGroupId()};
 
 		List<DDMTemplate> templates = DDMTemplateServiceUtil.search(
 			TestPropsValues.getCompanyId(), groupIds,
@@ -593,9 +586,7 @@ public class DDMTemplateServiceTest extends BaseDDMServiceTestCase {
 			_recordSetClassNameId, null, StringUtil.randomString(), description,
 			type, mode, language, script, WorkflowConstants.STATUS_ANY);
 
-		long[] groupIds = new long[] {
-			group.getGroupId(), _otherGroup.getGroupId()
-		};
+		long[] groupIds = new long[] {group.getGroupId(), _group.getGroupId()};
 
 		int count = DDMTemplateServiceUtil.searchCount(
 			TestPropsValues.getCompanyId(), groupIds,
@@ -608,7 +599,7 @@ public class DDMTemplateServiceTest extends BaseDDMServiceTestCase {
 	}
 
 	@Test
-	public void testSearchCountByNameORDescription1() throws Exception {
+	public void testSearchCountByNameOrDescription1() throws Exception {
 		String name = StringUtil.randomString();
 		String description = StringUtil.randomString();
 
@@ -643,7 +634,7 @@ public class DDMTemplateServiceTest extends BaseDDMServiceTestCase {
 	}
 
 	@Test
-	public void testSearchCountByNameORDescription2() throws Exception {
+	public void testSearchCountByNameOrDescription2() throws Exception {
 		String name = StringUtil.randomString();
 		String description = StringUtil.randomString();
 
@@ -668,9 +659,7 @@ public class DDMTemplateServiceTest extends BaseDDMServiceTestCase {
 			_recordSetClassNameId, null, StringUtil.randomString(), description,
 			type, mode, language, script, WorkflowConstants.STATUS_ANY);
 
-		long[] groupIds = new long[] {
-			group.getGroupId(), _otherGroup.getGroupId()
-		};
+		long[] groupIds = new long[] {group.getGroupId(), _group.getGroupId()};
 
 		int count = DDMTemplateServiceUtil.searchCount(
 			TestPropsValues.getCompanyId(), groupIds,
@@ -707,7 +696,7 @@ public class DDMTemplateServiceTest extends BaseDDMServiceTestCase {
 	private PermissionChecker _originalPermissionChecker;
 
 	@DeleteAfterTestRun
-	private Group _otherGroup;
+	private Group _group;
 
 	@DeleteAfterTestRun
 	private User _siteAdminUser;

@@ -64,7 +64,7 @@ public class DDMStructureServiceTest extends BaseDDMServiceTestCase {
 		super.setUp();
 
 		_classNameId = PortalUtil.getClassNameId(DDL_RECORD_SET_CLASS_NAME);
-		_otherGroup = GroupTestUtil.addGroup();
+		_group = GroupTestUtil.addGroup();
 		_siteAdminUser = UserTestUtil.addGroupAdminUser(group);
 
 		setUpPermissionThreadLocal();
@@ -84,9 +84,7 @@ public class DDMStructureServiceTest extends BaseDDMServiceTestCase {
 		addStructure(_classNameId, StringUtil.randomString());
 		addStructure(_classNameId, StringUtil.randomString());
 
-		long[] groupIds = new long[] {
-			group.getGroupId(), _otherGroup.getGroupId()
-		};
+		long[] groupIds = {group.getGroupId(), _group.getGroupId()};
 
 		List<DDMStructure> structures = DDMStructureServiceUtil.getStructures(
 			TestPropsValues.getCompanyId(), groupIds, _classNameId,
@@ -101,9 +99,7 @@ public class DDMStructureServiceTest extends BaseDDMServiceTestCase {
 		addStructure(_classNameId, StringUtil.randomString());
 		addStructure(_classNameId, StringUtil.randomString());
 
-		long[] groupIds = new long[] {
-			group.getGroupId(), _otherGroup.getGroupId()
-		};
+		long[] groupIds = {group.getGroupId(), _group.getGroupId()};
 
 		List<DDMStructure> structures = DDMStructureServiceUtil.search(
 			TestPropsValues.getCompanyId(), groupIds, _classNameId,
@@ -123,9 +119,7 @@ public class DDMStructureServiceTest extends BaseDDMServiceTestCase {
 		addStructure(_classNameId, name, StringUtil.randomString());
 		addStructure(_classNameId, StringUtil.randomString(), description);
 
-		long[] groupIds = new long[] {
-			group.getGroupId(), _otherGroup.getGroupId()
-		};
+		long[] groupIds = {group.getGroupId(), _group.getGroupId()};
 
 		List<DDMStructure> structures = DDMStructureServiceUtil.search(
 			TestPropsValues.getCompanyId(), groupIds, _classNameId, name,
@@ -146,9 +140,7 @@ public class DDMStructureServiceTest extends BaseDDMServiceTestCase {
 		addStructure(_classNameId, name, StringUtil.randomString());
 		addStructure(_classNameId, StringUtil.randomString(), description);
 
-		long[] groupIds = new long[] {
-			group.getGroupId(), _otherGroup.getGroupId()
-		};
+		long[] groupIds = {group.getGroupId(), _group.getGroupId()};
 
 		List<DDMStructure> structures = DDMStructureServiceUtil.search(
 			TestPropsValues.getCompanyId(), groupIds, _classNameId, name,
@@ -165,9 +157,7 @@ public class DDMStructureServiceTest extends BaseDDMServiceTestCase {
 		addStructure(_classNameId, StringUtil.randomString());
 		addStructure(_classNameId, StringUtil.randomString());
 
-		long[] groupIds = new long[] {
-			group.getGroupId(), _otherGroup.getGroupId()
-		};
+		long[] groupIds = {group.getGroupId(), _group.getGroupId()};
 
 		int count = DDMStructureServiceUtil.searchCount(
 			TestPropsValues.getCompanyId(), groupIds, _classNameId,
@@ -185,9 +175,7 @@ public class DDMStructureServiceTest extends BaseDDMServiceTestCase {
 		addStructure(_classNameId, name, StringUtil.randomString());
 		addStructure(_classNameId, StringUtil.randomString(), description);
 
-		long[] groupIds = new long[] {
-			group.getGroupId(), _otherGroup.getGroupId()
-		};
+		long[] groupIds = {group.getGroupId(), _group.getGroupId()};
 
 		int count = DDMStructureServiceUtil.searchCount(
 			TestPropsValues.getCompanyId(), groupIds, _classNameId, name,
@@ -207,9 +195,7 @@ public class DDMStructureServiceTest extends BaseDDMServiceTestCase {
 		addStructure(_classNameId, name, StringUtil.randomString());
 		addStructure(_classNameId, StringUtil.randomString(), description);
 
-		long[] groupIds = new long[] {
-			group.getGroupId(), _otherGroup.getGroupId()
-		};
+		long[] groupIds = {group.getGroupId(), _group.getGroupId()};
 
 		int count = DDMStructureServiceUtil.searchCount(
 			TestPropsValues.getCompanyId(), groupIds, _classNameId, name,
@@ -244,7 +230,7 @@ public class DDMStructureServiceTest extends BaseDDMServiceTestCase {
 	private PermissionChecker _originalPermissionChecker;
 
 	@DeleteAfterTestRun
-	private Group _otherGroup;
+	private Group _group;
 
 	@DeleteAfterTestRun
 	private User _siteAdminUser;
