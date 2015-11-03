@@ -148,9 +148,7 @@ public class LDAPServerConfigurationProviderImpl
 					" and LDAP server " + ldapServerId);
 		}
 
-		Dictionary<String, Object> properties = configuration.getProperties();
-
-		return properties;
+		return configuration.getProperties();
 	}
 
 	@Override
@@ -285,8 +283,10 @@ public class LDAPServerConfigurationProviderImpl
 			0L);
 
 		if (defaultConfigurations == null) {
+			Class<?> metatype = getMetatype();
+
 			throw new IllegalArgumentException(
-				"No default configuration for " + getMetatype().getName());
+				"No default configuration for " + metatype.getName());
 		}
 
 		try {
