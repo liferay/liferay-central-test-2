@@ -25,6 +25,7 @@
 		<execute function="Pause" locator1="3000" />
 
 		<execute function="Click" locator1="Button#PLUS" />
+
 		<execute function="AssertClick" locator1="MenuItem#BASIC_WEB_CONTENT" value1="Basic Web Content" />
 
 		<execute function="Pause" locator1="3000" />
@@ -32,6 +33,7 @@
 
 	<command name="gotoAddTemplate">
 		<execute function="Click" locator1="Button#PLUS" />
+
 		<execute function="SelectFrame" />
 
 		<execute function="SelectFrame" locator1="IFrame#TEMPLATES" />
@@ -41,6 +43,7 @@
 		<var name="key_structureName" value="${structureName}" />
 
 		<execute function="Click" locator1="Button#PLUS" />
+
 		<execute function="AssertClick" locator1="MenuItem#STRUCTURE_NAME" value1="${structureName}" />
 	</command>
 
@@ -61,6 +64,7 @@
 
 	<command name="gotoManageStructures">
 		<execute function="Click" locator1="Icon#HEADER_VERTICAL_ELLIPSIS" />
+
 		<execute function="AssertClick" locator1="MenuItem#STRUCTURES" value1="Structures" />
 
 		<execute function="SelectFrame" locator1="DDMSelectStructure#DDM_STRUCTURES_IFRAME" />
@@ -68,6 +72,7 @@
 
 	<command name="gotoManageTemplates">
 		<execute function="Click" locator1="Icon#HEADER_VERTICAL_ELLIPSIS" />
+
 		<execute function="AssertClick" locator1="MenuItem#TEMPLATES" value1="Templates" />
 
 		<execute function="SelectFrame" locator1="IFrame#TEMPLATES" />
@@ -91,6 +96,7 @@
 
 		<execute function="AssertElementPresent#pauseAssertVisible" locator1="WC#ENTRY_DESCRIPTIVE_THUMBNAIL" />
 		<execute function="AssertTextEquals" locator1="WC#ENTRY_DESCRIPTIVE_WORKFLOW_STATUS" value1="${webContentStatus}" />
+
 		<execute function="AssertClick" locator1="WC#ENTRY_DESCRIPTIVE_TITLE" value1="${webContentTitle}" />
 	</command>
 
