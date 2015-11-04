@@ -195,10 +195,10 @@ public class JournalArticleLocalServiceTest {
 
 		Map<Locale, String> values = new HashMap<>();
 
-		values.put(LocaleUtil.BRAZIL, "valor predefinido");
-		values.put(LocaleUtil.FRENCH, "valeur prédéfinie");
-		values.put(LocaleUtil.ITALY, "valore predefinito");
-		values.put(LocaleUtil.US, "predefined value");
+		values.put(LocaleUtil.BRAZIL, "Valor Predefinido");
+		values.put(LocaleUtil.FRENCH, "Valeur Prédéfinie");
+		values.put(LocaleUtil.ITALY, "Valore Predefinito");
+		values.put(LocaleUtil.US, "Predefined Value");
 
 		String content = DDMStructureTestUtil.getSampleStructuredContent(
 			values, LocaleUtil.US.toString());
@@ -235,19 +235,16 @@ public class JournalArticleLocalServiceTest {
 			actualDDMFormField.getPredefinedValue();
 
 		Assert.assertEquals(
-			"valor predefinido",
+			"Valor Predefinido",
 			actualDDMFormFieldPredefinedValue.getString(LocaleUtil.BRAZIL));
-
 		Assert.assertEquals(
-			"valeur prédéfinie",
+			"Valeur Prédéfinie",
 			actualDDMFormFieldPredefinedValue.getString(LocaleUtil.FRENCH));
-
 		Assert.assertEquals(
-			"valore predefinito",
+			"Valore Predefinito",
 			actualDDMFormFieldPredefinedValue.getString(LocaleUtil.ITALY));
-
 		Assert.assertEquals(
-			"predefined value",
+			"Predefined Value",
 			actualDDMFormFieldPredefinedValue.getString(LocaleUtil.US));
 	}
 
