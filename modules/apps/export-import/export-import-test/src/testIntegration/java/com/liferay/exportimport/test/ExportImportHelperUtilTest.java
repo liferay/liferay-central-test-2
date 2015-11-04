@@ -192,8 +192,6 @@ public class ExportImportHelperUtilTest {
 			ExportImportHelperUtil.getDataSiteLevelPortlets(
 				TestPropsValues.getCompanyId());
 
-		// Portlets should be already ordered by rank, testing for order
-
 		Integer previousRank = null;
 
 		for (Portlet portlet : portlets) {
@@ -204,7 +202,7 @@ public class ExportImportHelperUtilTest {
 
 			if (previousRank != null) {
 				Assert.assertTrue(
-					"Portlets should be in ascending order by their ranks",
+					"Portlets should be in ascending order by rank",
 					previousRank <= actualRank);
 			}
 
