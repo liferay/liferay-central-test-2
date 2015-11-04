@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.dao.db.DBProcessContext;
  */
 public class DummyUpgradeStep implements UpgradeStep {
 
+	@Override
 	public void upgrade(DBProcessContext dbProcessContext) {
 	}
 
