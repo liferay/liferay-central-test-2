@@ -376,6 +376,10 @@
 			<var name="portletName" value="${portletName2}" />
 		</execute>
 
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName2}" />
+		</execute>
+
 		<execute macro="Portlet#gotoPortletOptions">
 			<var name="portletName" value="Blogs" />
 			<var name="portletOption" value="Configuration" />
