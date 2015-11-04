@@ -108,7 +108,7 @@
 
 		<execute function="Type" locator1="TextInput#TITLE" value1="${wikiPageTitle}" />
 		<execute function="Type#clickAtType" locator1="Wiki#RICH_TEXT_EDITOR" value1="${wikiPageContent}" />
-		<execute function="AssertClick#assertTextClickAtAndWaitCKEditor" locator1="Button#PUBLISH" value1="Publish" />
+		<execute function="AssertClick" locator1="Button#PUBLISH" value1="Publish" />
 
 		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request completed successfully." />
 	</command>
@@ -134,7 +134,7 @@
 		<execute function="Confirm" value1="You may lose some formatting when switching from Creole to HTML. Do you want to continue?" />
 
 		<execute function="Type#clickAtType" locator1="Wiki#RICH_TEXT_EDITOR" value1="${welcomeToLiferay}" />
-		<execute function="AssertClick#assertTextClickAtAndWaitCKEditor" locator1="Button#PUBLISH" value1="Publish" />
+		<execute function="AssertClick" locator1="Button#PUBLISH" value1="Publish" />
 
 		<execute function="AssertTextEquals" locator1="PGWikidisplay#SUCCESS_MESSAGE" value1="Your request completed successfully." />
 	</command>
@@ -158,7 +158,7 @@
 
 		<execute function="Type" locator1="TextInput#TITLE" value1="${wikiChildPageTitle}" />
 		<execute function="Type#clickAtType" locator1="Wiki#RICH_TEXT_EDITOR" value1="${wikiChildPageContent}" />
-		<execute function="AssertClick#assertTextClickAtAndWaitCKEditor" locator1="Button#PUBLISH" value1="Publish" />
+		<execute function="AssertClick" locator1="Button#PUBLISH" value1="Publish" />
 		<execute function="AssertTextEquals" locator1="PGWikidisplayAddpage#PORTLET_ERROR_MESSAGE" value1="Your request failed to complete." />
 		<execute function="AssertTextEquals" locator1="PGWikidisplayAddpage#TITLE_ERROR_MESSAGE" value1="Please enter a valid title." />
 	</command>
@@ -167,7 +167,7 @@
 		<execute function="AssertClick" locator1="Message#INFO_LINK" value1="This page is empty. Edit it to add some text." />
 
 		<execute function="Type#clickAtType" locator1="Wiki#RICH_TEXT_EDITOR" value1="${wikiFrontPageContent}" />
-		<execute function="AssertClick#assertTextClickAtAndWaitCKEditor" locator1="Button#PUBLISH" value1="Publish" />
+		<execute function="AssertClick" locator1="Button#PUBLISH" value1="Publish" />
 
 		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request completed successfully." />
 	</command>
@@ -248,7 +248,7 @@
 		<execute function="Confirm" value1="You may lose some formatting when switching from Creole to HTML. Do you want to continue?" />
 		<execute function="AssertClick" locator1="Wiki#ADD_PAGE_FORMAT_DROPDOWN" value1="Source" />
 		<execute function="Type#clickAtType" locator1="Wiki#RICH_TEXT_EDITOR" value1="${wikiPageContent}" />
-		<execute function="AssertClick#assertTextClickAtAndWaitCKEditor" locator1="Button#PUBLISH" value1="Publish" />
+		<execute function="AssertClick" locator1="Button#PUBLISH" value1="Publish" />
 
 		<execute function="AssertTextEquals" locator1="PGWikidisplay#SUCCESS_MESSAGE" value1="Your request completed successfully." />
 	</command>
@@ -257,7 +257,7 @@
 		<execute function="AssertClick" locator1="PGWikidisplay#ADD_FRONTPAGE" value1="This page is empty. Edit it to add some text." />
 
 		<execute function="Type#clickAtType" locator1="Wiki#RICH_TEXT_EDITOR" value1="${wikiPageContent}" />
-		<execute function="AssertClick#assertTextClickAtAndWaitCKEditor" locator1="Button#PUBLISH" value1="Publish" />
+		<execute function="AssertClick" locator1="Button#PUBLISH" value1="Publish" />
 
 		<execute function="AssertTextEquals" locator1="PGWikidisplay#SUCCESS_MESSAGE" value1="Your request completed successfully." />
 	</command>
@@ -305,7 +305,7 @@
 
 		<execute function="Type" locator1="TextInput#TITLE" value1="${wikiPageTitle}" />
 		<execute function="Type#clickAtType" locator1="Wiki#RICH_TEXT_EDITOR" value1="${wikiPageContent}" />
-		<execute function="AssertClick#assertTextClickAtAndWaitCKEditor" locator1="Button#PUBLISH" value1="Publish" />
+		<execute function="AssertClick" locator1="Button#PUBLISH" value1="Publish" />
 
 		<execute function="AssertTextEquals" locator1="PGWikidisplayAllpages#SUCCESS_MESSAGE" value1="Your request completed successfully." />
 	</command>
@@ -315,7 +315,7 @@
 
 		<execute function="Type" locator1="TextInput#TITLE" value1="${wikiPageTitle}" />
 		<execute function="Type#clickAtType" locator1="Wiki#RICH_TEXT_EDITOR" value1="${wikiPageContent}" />
-		<execute function="AssertClick#assertTextClickAtCKEditor" locator1="Button#SUBMIT_FOR_PUBLICATION" value1="Submit for Publication" />
+		<execute function="AssertClick" locator1="Button#SUBMIT_FOR_PUBLICATION" value1="Submit for Publication" />
 
 		<execute function="AssertTextEquals" locator1="PGWikiAllpages#SUCCESS_MESSAGE" value1="Your request completed successfully." />
 	</command>
@@ -716,7 +716,7 @@
 		<execute function="AssertClick" locator1="Wiki#LINK_EDIT" value1="Edit" />
 
 		<execute function="Type#clickAtType" locator1="Wiki#RICH_TEXT_EDITOR" value1="${wikiPageContentEdit}" />
-		<execute function="AssertClick#assertTextClickAtAndWaitCKEditor" locator1="Button#PUBLISH" value1="Publish" />
+		<execute function="AssertClick" locator1="Button#PUBLISH" value1="Publish" />
 
 		<execute function="AssertTextEquals" locator1="Wiki#BODY" value1="${wikiPageContentEdit}" />
 		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request completed successfully." />
@@ -729,7 +729,7 @@
 		<execute function="AssertClick" locator1="MenuItem#EDIT" value1="Edit" />
 
 		<execute function="Type#clickAtType" locator1="Wiki#RICH_TEXT_EDITOR" value1="${wikiPageContentEdit}" />
-		<execute function="AssertClick#assertTextClickAtAndWaitCKEditor" locator1="Button#PUBLISH" value1="Publish" />
+		<execute function="AssertClick" locator1="Button#PUBLISH" value1="Publish" />
 		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request completed successfully." />
 	</command>
 
@@ -755,7 +755,7 @@
 			</then>
 		</if>
 
-		<execute function="AssertClick#assertTextClickAtAndWaitCKEditor" locator1="Button#PUBLISH" value1="Publish" />
+		<execute function="AssertClick" locator1="Button#PUBLISH" value1="Publish" />
 
 		<execute function="AssertTextEquals" locator1="Wiki#BODY" value1="${wikiPageContentEdit}" />
 		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request completed successfully." />
@@ -955,7 +955,7 @@
 
 		<execute function="Select" locator1="Wiki#ADD_PAGE_FORMAT_DROPDOWN" value1="Creole" />
 		<execute function="Type#clickAtType" locator1="Wiki#RICH_TEXT_EDITOR" value1="${wikiPage2Link}" />
-		<execute function="AssertClick#assertTextClickAtAndWaitCKEditor" locator1="Button#PUBLISH" value1="Publish" />
+		<execute function="AssertClick" locator1="Button#PUBLISH" value1="Publish" />
 
 		<execute function="AssertTextEquals#assertPartialText" locator1="PGWikiWikipage#SUCCESS_MESSAGE" value1="Your request completed successfully." />
 		<execute function="AssertClick" locator1="Wiki#BODY_LINK" value1="${wikiPage2Title}" />
@@ -1026,7 +1026,7 @@
 		<execute function="AssertClick" locator1="Button#REMOVE_REDIRECT" value1="Remove Redirect" />
 
 		<execute function="Type#clickAtType" locator1="Wiki#RICH_TEXT_EDITOR" value1="${wikiPage2Content}" />
-		<execute function="AssertClick#assertTextClickAtAndWaitCKEditor" locator1="Button#PUBLISH" value1="Publish" />
+		<execute function="AssertClick" locator1="Button#PUBLISH" value1="Publish" />
 
 		<execute function="AssertTextEquals#assertPartialText" locator1="PGWikiWikipage#SUCCESS_MESSAGE" value1="Your request completed successfully." />
 	</command>
