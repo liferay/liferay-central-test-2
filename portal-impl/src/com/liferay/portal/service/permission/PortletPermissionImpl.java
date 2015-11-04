@@ -294,7 +294,9 @@ public class PortletPermissionImpl implements PortletPermission {
 		}
 
 		if ((layout instanceof VirtualLayout) && layout.isTypeControlPanel()) {
-			layout = ((VirtualLayout)layout).getSourceLayout();
+			VirtualLayout virtualLayout = (VirtualLayout)layout;
+
+			layout = virtualLayout.getSourceLayout();
 		}
 
 		if (!actionId.equals(ActionKeys.VIEW) &&
