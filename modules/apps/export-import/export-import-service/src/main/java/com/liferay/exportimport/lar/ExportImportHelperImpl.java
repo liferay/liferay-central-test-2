@@ -173,10 +173,13 @@ public class ExportImportHelperImpl implements ExportImportHelper {
 			long companyId, boolean excludeDataAlwaysStaged)
 		throws Exception {
 
-		List<Portlet> allPortlets = _portletLocalService.getPortlets(companyId);
-		SortedMap<Integer, List<Portlet>> rankedPortlets = new TreeMap<>();
+		List<Portlet> dataSiteLevelPortlets = new ArrayList<>();
 
-		for (Portlet portlet : allPortlets) {
+		Map<Integer, List<Portlet>> rankedPortletsMap = new TreeMap<>();
+
+		List<Portlet> portlets = _portletLocalService.getPortlets(companyId);
+
+		for (Portlet portlet : portlets) {
 			if (!portlet.isActive()) {
 				continue;
 			}
@@ -192,22 +195,20 @@ public class ExportImportHelperImpl implements ExportImportHelper {
 				continue;
 			}
 
-			List<Portlet> portlets = rankedPortlets.get(
+			List<Portlet> rankedPortlets = rankedPortletsMap.get(
 				portletDataHandler.getRank());
 
-			if (portlets == null) {
-				portlets = new ArrayList<>();
+			if (rankedPortlets == null) {
+				rankedPortlets = new ArrayList<>();
 			}
 
-			portlets.add(portlet);
+			rankedPortlets.add(portlet);
 
-			rankedPortlets.put(portletDataHandler.getRank(), portlets);
+			rankedPortletsMap.put(portletDataHandler.getRank(), rankedPortlets);
 		}
 
-		List<Portlet> dataSiteLevelPortlets = new ArrayList<>();
-
-		for (List<Portlet> portlets : rankedPortlets.values()) {
-			dataSiteLevelPortlets.addAll(portlets);
+		for (List<Portlet> rankedPortlets : rankedPortletsMap.values()) {
+			dataSiteLevelPortlets.addAll(rankedPortlets);
 		}
 
 		return dataSiteLevelPortlets;
