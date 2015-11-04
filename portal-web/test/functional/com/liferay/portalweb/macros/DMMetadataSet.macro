@@ -92,6 +92,8 @@
 		<if>
 			<condition function="IsElementPresent" locator1="DocumentsAndMediaMetadataSets#METADATA_SETS_IFRAME" />
 			<then>
+				<execute function="SelectFrameTop" />
+
 				<execute function="SelectFrame" locator1="DocumentsAndMediaMetadataSets#METADATA_SETS_IFRAME" />
 			</then>
 		</if>
