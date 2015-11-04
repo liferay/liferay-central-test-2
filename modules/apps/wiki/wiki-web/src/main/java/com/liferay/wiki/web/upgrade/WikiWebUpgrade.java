@@ -14,11 +14,9 @@
 
 package com.liferay.wiki.web.upgrade;
 
-import com.liferay.portal.kernel.dao.db.DBProcessContext;
 import com.liferay.portal.kernel.module.framework.ModuleServiceLifecycle;
 import com.liferay.portal.kernel.settings.SettingsFactory;
-import com.liferay.portal.kernel.upgrade.UpgradeException;
-import com.liferay.portal.kernel.upgrade.UpgradeStep;
+import com.liferay.portal.kernel.upgrade.DummyUpgradeStep;
 import com.liferay.portal.upgrade.registry.UpgradeStepRegistrator;
 import com.liferay.wiki.web.upgrade.v1_0_0.UpgradePortletSettings;
 
@@ -35,13 +33,7 @@ public class WikiWebUpgrade implements UpgradeStepRegistrator {
 	@Override
 	public void register(Registry registry) {
 		registry.register(
-			"com.liferay.wiki.web", "0.0.0", "1.0.0", new UpgradeStep() {
-				@Override
-				public void upgrade(DBProcessContext dbProcessContext)
-					throws UpgradeException {
-				}
-
-			});
+			"com.liferay.wiki.web", "0.0.0", "1.0.0", new DummyUpgradeStep());
 		registry.register(
 			"com.liferay.wiki.web", "0.0.1", "1.0.0",
 			new UpgradePortletSettings(_settingsFactory));
