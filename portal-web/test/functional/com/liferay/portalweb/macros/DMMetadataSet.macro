@@ -34,10 +34,6 @@
 				<var method="StringUtil#replace('${dmMetadataSetFieldName}', ' ', '')" name="fieldName" />
 			</execute>
 		</for>
-
-		<execute function="AssertClick" locator1="Button#SAVE" value1="Save" />
-		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request completed successfully." />
-		<execute function="SelectFrameTop" value1="relative=top" />
 	</command>
 
 	<command name="deletePG">
@@ -82,6 +78,14 @@
 	<command name="gotoPG">
 		<execute function="AssertClick#waitForDMHomeAssertTextEqualsClick" locator1="Toolbar#MANAGE" value1="Manage" />
 		<execute function="AssertClick" locator1="MenuItem#METADATA_SETS" value1="Metadata Sets" />
+	</command>
+
+	<command name="save">
+		<execute function="SelectFrameTop" />
+
+		<execute function="SelectFrame" locator1="DocumentsAndMediaMetadataSets#METADATA_SETS_IFRAME" />
+
+		<execute function="AssertClick" locator1="DocumentsAndMediaMetadataSets#SAVE_BUTTON" value1="Save" />
 	</command>
 
 	<command name="selectMetadataSetsFrame">
