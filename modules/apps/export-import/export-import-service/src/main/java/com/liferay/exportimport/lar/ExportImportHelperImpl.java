@@ -45,7 +45,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.SystemProperties;
 import com.liferay.portal.kernel.util.TempFileEntryUtil;
 import com.liferay.portal.kernel.util.Time;
-import com.liferay.portal.kernel.util.Tuple;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
@@ -97,12 +96,13 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
@@ -173,10 +173,10 @@ public class ExportImportHelperImpl implements ExportImportHelper {
 			long companyId, boolean excludeDataAlwaysStaged)
 		throws Exception {
 
-		List<Portlet> portlets = _portletLocalService.getPortlets(companyId);
-		List<Tuple> rankedPortlets = new ArrayList<>();
+		List<Portlet> allPortlets = _portletLocalService.getPortlets(companyId);
+		SortedMap<Integer, List<Portlet>> rankedPortlets = new TreeMap<>();
 
-		for (Portlet portlet : portlets) {
+		for (Portlet portlet : allPortlets) {
 			if (!portlet.isActive()) {
 				continue;
 			}
@@ -192,26 +192,22 @@ public class ExportImportHelperImpl implements ExportImportHelper {
 				continue;
 			}
 
-			rankedPortlets.add(
-				new Tuple(portletDataHandler.getRank(), portlet));
-		}
+			List<Portlet> portlets = rankedPortlets.get(
+				portletDataHandler.getRank());
 
-		Collections.sort(rankedPortlets, new Comparator<Tuple>() {
-
-			@Override
-			public int compare(Tuple tuple1, Tuple tuple2) {
-				int rank1 = (int)tuple1.getObject(0);
-				int rank2 = (int)tuple2.getObject(0);
-
-				return rank1 - rank2;
+			if (portlets == null) {
+				portlets = new ArrayList<>();
 			}
 
-		});
+			portlets.add(portlet);
+
+			rankedPortlets.put(portletDataHandler.getRank(), portlets);
+		}
 
 		List<Portlet> dataSiteLevelPortlets = new ArrayList<>();
 
-		for (Tuple tuple : rankedPortlets) {
-			dataSiteLevelPortlets.add((Portlet)tuple.getObject(1));
+		for (List<Portlet> portlets : rankedPortlets.values()) {
+			dataSiteLevelPortlets.addAll(portlets);
 		}
 
 		return dataSiteLevelPortlets;
