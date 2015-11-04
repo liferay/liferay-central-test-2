@@ -1250,7 +1250,6 @@
 		</execute>
 		
 		<execute macro="BlogsEntry#flagPG">
-			<var name="entryTitle" value="Blogs Entry Title" />
 			<var name="flagReason" value="Spam" />
 		</execute>
 

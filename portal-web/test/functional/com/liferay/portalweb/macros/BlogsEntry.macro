@@ -799,8 +799,6 @@
 	</command>
 
 	<command name="flagPG">
-		<var name="key_entryTitle" value="${entryTitle}" />
-
 		<execute function="AssertClick" locator1="PGBlogs#ENTRY_FLAG" value1="Flag" />
 
 		<execute function="AssertTextEquals" locator1="PGBlogs#REPORT_INAPPROPRIATE_CONTENT_HEADER" value1="Report Inappropriate Content" />
