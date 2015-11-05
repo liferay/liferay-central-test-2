@@ -409,7 +409,7 @@ public class DDMImplTest extends BaseDDMTestCase {
 
 		addDDMFormFields(
 			ddmForm,
-			createTextDDMFormField("NonLocalizable", "", false, false, false));
+			createTextDDMFormField("Nonlocalizable", "", false, false, false));
 
 		DDMStructure ddmStructure = createStructure("Test Structure", ddmForm);
 
@@ -417,16 +417,16 @@ public class DDMImplTest extends BaseDDMTestCase {
 			ddmStructure.getStructureId(), "Localizable",
 			createValuesList("Joe"), null);
 
-		Field existingNonLocalizableField = createField(
-			ddmStructure.getStructureId(), "NonLocalizable",
-			createValuesList("NonLocalizable"), null);
+		Field existingNonlocalizableField = createField(
+			ddmStructure.getStructureId(), "Nonlocalizable",
+			createValuesList("Nonlocalizable"), null);
 
 		Field existingFieldsDisplayField = createFieldsDisplayField(
 			ddmStructure.getStructureId(),
-			"Localizable_INSTANCE_ovho,NonLocalizable_INSTANCE_zuvh");
+			"Localizable_INSTANCE_ovho,Nonlocalizable_INSTANCE_zuvh");
 
 		Fields existingFields = createFields(
-			existingLocalizableField, existingNonLocalizableField,
+			existingLocalizableField, existingNonlocalizableField,
 			existingFieldsDisplayField);
 
 		Field newLocalizedField = createBRField(
@@ -451,7 +451,7 @@ public class DDMImplTest extends BaseDDMTestCase {
 
 		testValues(
 			fieldsDisplayValues, "Localizable_INSTANCE_ovho",
-			"NonLocalizable_INSTANCE_zuvh");
+			"Nonlocalizable_INSTANCE_zuvh");
 	}
 
 	@Test
