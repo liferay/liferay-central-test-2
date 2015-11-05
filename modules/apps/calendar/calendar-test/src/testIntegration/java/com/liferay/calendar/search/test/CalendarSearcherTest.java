@@ -82,7 +82,6 @@ public class CalendarSearcherTest {
 		setUpPrincipalThreadLocal();
 
 		_group = GroupTestUtil.addGroup();
-
 		_user = UserTestUtil.addUser();
 
 		_searchContext = getSearchContext(_group);
@@ -96,7 +95,7 @@ public class CalendarSearcherTest {
 	}
 
 	@Test
-	public void testBasicSearchWithJustOneTerm() throws Exception {
+	public void testBasicSearchWithOneTerm() throws Exception {
 		addCalendar("Joe Bloggs", "Simple description");
 		addCalendar("Bloggs", "Another description example");
 		addCalendar(
@@ -150,7 +149,7 @@ public class CalendarSearcherTest {
 	}
 
 	@Test
-	public void testQuestionMarksVersusStopwords1() throws Exception {
+	public void testQuestionMarksVersusStopWords1() throws Exception {
 		addCalendar(RandomTestUtil.randomString());
 		addCalendar("how ? create ? coupon");
 
@@ -160,7 +159,7 @@ public class CalendarSearcherTest {
 	}
 
 	@Test
-	public void testQuestionMarksVersusStopwords2() throws Exception {
+	public void testQuestionMarksVersusStopWords2() throws Exception {
 		Assume.assumeTrue(isExactPhraseQueryImplementedForSearchEngine());
 
 		addCalendar(RandomTestUtil.randomString());
@@ -172,7 +171,7 @@ public class CalendarSearcherTest {
 	}
 
 	@Test
-	public void testQuestionMarksVersusStopwords3() throws Exception {
+	public void testQuestionMarksVersusStopWords3() throws Exception {
 		Assume.assumeTrue(isExactPhraseQueryImplementedForSearchEngine());
 
 		addCalendar(RandomTestUtil.randomString());
@@ -184,7 +183,7 @@ public class CalendarSearcherTest {
 	}
 
 	@Test
-	public void testQuestionMarksVersusStopwords4() throws Exception {
+	public void testQuestionMarksVersusStopWords4() throws Exception {
 		addCalendar(RandomTestUtil.randomString());
 		addCalendar("how ! create ! coupon");
 
@@ -194,7 +193,7 @@ public class CalendarSearcherTest {
 	}
 
 	@Test
-	public void testStopwords() throws Exception {
+	public void testStopWords() throws Exception {
 		addCalendar(RandomTestUtil.randomString());
 		addCalendar(
 			RandomTestUtil.randomString(), "Another description example");
@@ -203,7 +202,7 @@ public class CalendarSearcherTest {
 	}
 
 	@Test
-	public void testStopwordsInExactPhrase() throws Exception {
+	public void testStopWordsInExactPhrase() throws Exception {
 		Assume.assumeTrue(isExactPhraseQueryImplementedForSearchEngine());
 
 		addCalendar("how to create a coupon");
@@ -262,15 +261,14 @@ public class CalendarSearcherTest {
 	protected void assertSearch(String keywords, final int length)
 		throws Exception {
 
-		final String preparedKeywords = StringUtil.toLowerCase(keywords);
-
 		IdempotentRetryAssert.retryAssert(
 			3, TimeUnit.SECONDS,
 			new Callable<Void>() {
 
 				@Override
 				public Void call() throws Exception {
-					_searchContext.setKeywords(preparedKeywords);
+					_searchContext.setKeywords(
+						StringUtil.toLowerCase(keywords));
 
 					Indexer<?> indexer = CalendarSearcher.getInstance();
 
