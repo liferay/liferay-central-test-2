@@ -65,6 +65,11 @@ public class PanelAppTag extends BasePanelTag {
 		return super.doEndTag();
 	}
 
+	@Override
+	public int doStartTag() throws JspException {
+		return EVAL_BODY_INCLUDE;
+	}
+
 	public void setActive(Boolean active) {
 		_active = active;
 	}
