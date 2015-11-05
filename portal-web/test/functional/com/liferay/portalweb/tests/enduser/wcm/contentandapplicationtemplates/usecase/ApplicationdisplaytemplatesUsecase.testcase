@@ -92,7 +92,7 @@
 			<var name="siteName" value="Test Site Name" />
 		</execute>
 
-		<execute function="RefreshNoError" />
+		<execute function="Refresh" />
 
 		<execute macro="ApplicationDisplayTemplates#addADTviaPortletPG">
 			<var name="adtType" value="RSS" />
