@@ -817,8 +817,6 @@
 			<var name="virtualHostsURL" value="${virtualHostsURL}" />
 		</execute>
 
-		<execute function="AssertClick#assertTextClickAtClickDockbar" locator1="ControlMenu#ADMIN" value1="${adminLocalized}" />
-
 		<var name="key_portletCategoryName" value="${portletCategoryName}" />
 
 		<execute function="AssertClick" locator1="ControlMenu#ADMIN_SITE_ADMINISTRATION_CATEGORY" value1="${portletCategoryName}" />
