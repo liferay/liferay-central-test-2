@@ -285,18 +285,18 @@ public class SecureXMLFactoryProviderImplTest {
 		throws Throwable {
 
 		boolean xmlSecurityEnabled = ReflectionTestUtil.getFieldValue(
-			PropsValues.class, _XML_SECURITY_ENABLED);
+			PropsValues.class, "XML_SECURITY_ENABLED");
 
 		try {
 			ReflectionTestUtil.setFieldValue(
-				PropsValues.class, _XML_SECURITY_ENABLED, false);
+				PropsValues.class, "XML_SECURITY_ENABLED", false);
 
 			runXMLSecurityTest(
 				xmlSecurityTest, xml, disableXMLSecurityExpectedException,
 				disableXMLSecurityFailMessage);
 
 			ReflectionTestUtil.setFieldValue(
-				PropsValues.class, _XML_SECURITY_ENABLED, true);
+				PropsValues.class, "XML_SECURITY_ENABLED", true);
 
 			runXMLSecurityTest(
 				xmlSecurityTest, xml, enableXMLSecurityExpectedException,
@@ -304,11 +304,9 @@ public class SecureXMLFactoryProviderImplTest {
 		}
 		finally {
 			ReflectionTestUtil.setFieldValue(
-				PropsValues.class, _XML_SECURITY_ENABLED, xmlSecurityEnabled);
+				PropsValues.class, "XML_SECURITY_ENABLED", xmlSecurityEnabled);
 		}
 	}
-
-	private static final String _XML_SECURITY_ENABLED = "XML_SECURITY_ENABLED";
 
 	private static String _xmlBombBillionLaughsXML;
 	private static String _xmlBombQuadraticBlowupXML;
