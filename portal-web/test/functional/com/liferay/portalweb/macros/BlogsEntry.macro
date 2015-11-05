@@ -461,8 +461,6 @@
 					<var name="defaultURL" value="${defaultURL}" />
 					<var name="nodePort" value="${nodePort}" />
 					<var name="pageName" value="${pageName}" />
-					<var name="soDashboard" value="${soDashboard}" />
-					<var name="soPage" value="${soPage}" />
 					<var name="virtualHostsURL" value="${virtualHost1}" />
 				</execute>
 			</then>
@@ -471,8 +469,6 @@
 					<var name="defaultURL" value="${defaultURL}" />
 					<var name="nodePort" value="${nodePort}" />
 					<var name="pageName" value="${pageName}" />
-					<var name="soDashboard" value="${soDashboard}" />
-					<var name="soPage" value="${soPage}" />
 				</execute>
 			</else>
 		</if>
@@ -1135,14 +1131,17 @@
 		</execute>
 
 		<if>
-			<condition function="IsElementPresent#isVisible" locator1="Blogs#ENTRY_TABLE_ALL_CHECKBOX" />
+			<condition function="IsElementPresent#isVisible" locator1="Message#EMPTY_INFO" value1="No entries were found." />
 			<then>
+				<execute macro="Blogs#viewNoEntryCP" />
+			</then>
+			<else>
 				<execute function="Click" locator1="Blogs#ENTRY_TABLE_ALL_CHECKBOX" />
 
 				<execute function="Click" locator1="Icon#DELETE" />
 
 				<execute function="AssertTextEquals#assertPartialText" locator1="Message#SUCCESS" value1="moved to the Recycle Bin. Undo" />
-			</then>
+			</else>
 		</if>
 
 		<execute macro="Page#gotoContentCP">
