@@ -19,26 +19,9 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.dynamic.data.mapping.service.base.DDMDataProviderLocalServiceBaseImpl;
 
 /**
- * The implementation of the d d m data provider local service.
- *
- * <p>
- * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.liferay.dynamic.data.mapping.service.DDMDataProviderLocalService} interface.
- *
- * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
- * </p>
- *
  * @author Brian Wing Shun Chan
- * @see DDMDataProviderLocalServiceBaseImpl
- * @see com.liferay.dynamic.data.mapping.service.DDMDataProviderLocalServiceUtil
  */
 @ProviderType
 public class DDMDataProviderLocalServiceImpl
 	extends DDMDataProviderLocalServiceBaseImpl {
-
-	/**
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this class directly. Always use {@link com.liferay.dynamic.data.mapping.service.DDMDataProviderLocalServiceUtil} to access the d d m data provider local service.
-	 */
 }
