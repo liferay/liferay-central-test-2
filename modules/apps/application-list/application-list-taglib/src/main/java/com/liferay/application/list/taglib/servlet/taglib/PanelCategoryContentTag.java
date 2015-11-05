@@ -40,6 +40,8 @@ public class PanelCategoryContentTag extends BasePanelTag {
 				request, new PipingServletResponse(pageContext));
 
 			if (include) {
+				doClearTag();
+
 				return EVAL_PAGE;
 			}
 		}

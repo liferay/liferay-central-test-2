@@ -52,6 +52,8 @@ public class PanelAppTag extends BasePanelTag {
 					request, new PipingServletResponse(pageContext));
 
 				if (include) {
+					doClearTag();
+
 					return EVAL_PAGE;
 				}
 			}
