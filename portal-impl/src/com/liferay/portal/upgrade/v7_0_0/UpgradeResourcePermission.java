@@ -64,53 +64,64 @@ public class UpgradeResourcePermission extends UpgradeProcess {
 					continue;
 				}
 
-				PreparedStatement ps2 = null;
-
-				try {
-					ps2 = con.prepareStatement(
-						"update ResourcePermission set primKeyId = ?," +
-							"viewActionId = ?  where resourcePermissionId = ?");
-
-					ps2.setLong(1, newPrimKeyId);
-
-					if (newViewActionId) {
-						ps2.setBoolean(2, true);
-					}
-					else {
-						ps2.setBoolean(2, false);
-					}
-
-					ps2.setLong(3, resourcePermissionId);
-
-					int count = 0;
-
-					if (supportsBatchUpdates) {
-						ps2.addBatch();
-
-						if (count == PropsValues.HIBERNATE_JDBC_BATCH_SIZE) {
-							ps2.executeBatch();
-
-							count = 0;
-						}
-						else {
-							count++;
-						}
-					}
-					else {
-						ps2.executeUpdate();
-					}
-
-					if (supportsBatchUpdates && (count > 0)) {
-						ps2.executeBatch();
-					}
-				}
-				finally {
-					DataAccess.cleanUp(ps2);
-				}
+				updateResourcePermission(
+					con, supportsBatchUpdates, resourcePermissionId,
+					newPrimKeyId, newViewActionId);
 			}
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+	
+	protected void updateResourcePermission(
+			Connection con, boolean supportsBatchUpdates,
+			long resourcePermissionId, long newPrimKeyId,
+			boolean newViewActionId)
+		throws Exception {
+
+		PreparedStatement ps2 = null;
+
+		try {
+			ps2 = con.prepareStatement(
+				"update ResourcePermission set primKeyId = ?," +
+					"viewActionId = ?  where resourcePermissionId = ?");
+
+			ps2.setLong(1, newPrimKeyId);
+
+			if (newViewActionId) {
+				ps2.setBoolean(2, true);
+			}
+			else {
+				ps2.setBoolean(2, false);
+			}
+
+			ps2.setLong(3, resourcePermissionId);
+
+			int count = 0;
+
+			if (supportsBatchUpdates) {
+				ps2.addBatch();
+
+				if (count == PropsValues.HIBERNATE_JDBC_BATCH_SIZE) {
+					ps2.executeBatch();
+
+					count = 0;
+				}
+				else {
+					count++;
+				}
+			}
+			else {
+				ps2.executeUpdate();
+			}
+
+			if (supportsBatchUpdates && (count > 0)) {
+				ps2.executeBatch();
+			}
+		}
+		finally {
+			DataAccess.cleanUp(ps2);
 		}
 	}
 
