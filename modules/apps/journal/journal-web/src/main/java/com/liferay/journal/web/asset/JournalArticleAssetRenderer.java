@@ -464,38 +464,31 @@ public class JournalArticleAssetRenderer
 			HttpServletRequest request, HttpServletResponse response)
 		throws PortalException {
 
-		JournalArticleDisplay articleDisplay = null;
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		PortletRequestModel portletRequestModel = getPortletRequestModel(
-			request, response);
-
 		boolean workflowAssetPreview = GetterUtil.getBoolean(
 			(Boolean)request.getAttribute(WebKeys.WORKFLOW_ASSET_PREVIEW));
 
-		String languageId = LanguageUtil.getLanguageId(request);
-
-		int articlePage = ParamUtil.getInteger(request, "page", 1);
 		String ddmTemplateKey = (String)request.getAttribute(
 			WebKeys.JOURNAL_TEMPLATE_ID);
 		String viewMode = ParamUtil.getString(
 			request, "viewMode", Constants.VIEW);
+		String languageId = LanguageUtil.getLanguageId(request);
+		int articlePage = ParamUtil.getInteger(request, "page", 1);
+		PortletRequestModel portletRequestModel = getPortletRequestModel(
+			request, response);
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		if (!workflowAssetPreview && _article.isApproved()) {
-			articleDisplay = _journalContent.getDisplay(
+			return _journalContent.getDisplay(
 				_article.getGroupId(), _article.getArticleId(),
 				_article.getVersion(), ddmTemplateKey, viewMode, languageId,
 				articlePage, portletRequestModel, themeDisplay);
 		}
 		else {
-			articleDisplay = JournalArticleLocalServiceUtil.getArticleDisplay(
+			return JournalArticleLocalServiceUtil.getArticleDisplay(
 				_article, ddmTemplateKey, viewMode, languageId, articlePage,
 				portletRequestModel, themeDisplay);
 		}
-
-		return articleDisplay;
 	}
 
 	@Override
