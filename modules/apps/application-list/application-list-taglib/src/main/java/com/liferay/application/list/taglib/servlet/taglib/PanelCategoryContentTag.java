@@ -52,6 +52,11 @@ public class PanelCategoryContentTag extends BasePanelTag {
 		return super.doEndTag();
 	}
 
+	@Override
+	public int doStartTag() throws JspException {
+		return EVAL_BODY_INCLUDE;
+	}
+
 	public void setPanelCategory(PanelCategory panelCategory) {
 		_panelCategory = panelCategory;
 	}
