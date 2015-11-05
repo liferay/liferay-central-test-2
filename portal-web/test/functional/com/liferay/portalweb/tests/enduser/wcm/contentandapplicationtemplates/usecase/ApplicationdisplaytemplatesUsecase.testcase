@@ -98,6 +98,12 @@
 			<var name="adtType" value="RSS" />
 		</execute>
 
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="ADT Test Page" />
+			<var name="siteName" value="Test Site Name" />
+			<var name="siteURL" value="true" />
+		</execute>
+
 		<execute macro="RSS#viewCorruptScript" />
 	</command>
 
