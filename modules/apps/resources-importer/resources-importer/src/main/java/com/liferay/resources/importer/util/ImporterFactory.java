@@ -96,8 +96,8 @@ public class ImporterFactory {
 		else if ((resourcePaths != null) && !resourcePaths.isEmpty()) {
 			importer = getResourceImporter();
 
-			importer.setResourcesDir(RESOURCES_DIR);
 			importer.setJournalConverter(_journalConverter);
+			importer.setResourcesDir(RESOURCES_DIR);
 		}
 		else if ((templatePaths != null) && !templatePaths.isEmpty()) {
 			importer = getResourceImporter();

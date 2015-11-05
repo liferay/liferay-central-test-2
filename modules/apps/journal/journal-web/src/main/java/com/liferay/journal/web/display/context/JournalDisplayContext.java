@@ -81,21 +81,26 @@ public class JournalDisplayContext {
 
 		JournalArticle article = getArticle();
 
-		if (article != null) {
-			String content = article.getContent();
-
-			if (Validator.isNotNull(content)) {
-				JournalConverter journalConverter = getJournalConverter();
-
-				Fields fields = journalConverter.getDDMFields(
-					ddmStructure, content);
-
-				if (fields != null) {
-					_ddmFormValues = FieldsToDDMFormValuesConverterUtil.convert(
-						ddmStructure, fields);
-				}
-			}
+		if (article == null) {
+			return _ddmFormValues;
 		}
+
+		String content = article.getContent();
+
+		if (Validator.isNull(content)) {
+			return _ddmFormValues;
+		}
+
+		JournalConverter journalConverter = getJournalConverter();
+
+		Fields fields = journalConverter.getDDMFields(ddmStructure, content);
+
+		if (fields == null) {
+			return _ddmFormValues;
+		}
+
+		_ddmFormValues = FieldsToDDMFormValuesConverterUtil.convert(
+			ddmStructure, fields);
 
 		return _ddmFormValues;
 	}
