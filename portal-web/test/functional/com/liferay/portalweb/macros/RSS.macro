@@ -52,7 +52,7 @@
 		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="You have successfully updated the setup." />
 	</command>
 
-	<command name="viewCorruptScriptConsoleError">
+	<command name="viewCorruptScript">
 		<execute function="AssertConsoleTextPresentNoError" value1="ERROR" />
 		<execute function="AssertConsoleTextPresentNoError" value1="Unexpected end of file reached." />
 	</command>

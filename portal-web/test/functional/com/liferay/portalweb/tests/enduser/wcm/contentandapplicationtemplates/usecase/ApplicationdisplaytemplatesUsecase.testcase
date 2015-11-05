@@ -98,7 +98,7 @@
 			<var name="adtType" value="RSS" />
 		</execute>
 
-		<execute macro="RSS#viewCorruptScriptConsoleError" />
+		<execute macro="RSS#viewCorruptScript" />
 	</command>
 
 	<command name="AddRSSADTWithScript" priority="3">
