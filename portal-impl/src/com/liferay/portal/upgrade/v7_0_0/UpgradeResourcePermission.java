@@ -73,7 +73,7 @@ public class UpgradeResourcePermission extends UpgradeProcess {
 			DataAccess.cleanUp(con, ps, rs);
 		}
 	}
-	
+
 	protected void updateResourcePermission(
 			Connection con, boolean supportsBatchUpdates,
 			long resourcePermissionId, long newPrimKeyId,
