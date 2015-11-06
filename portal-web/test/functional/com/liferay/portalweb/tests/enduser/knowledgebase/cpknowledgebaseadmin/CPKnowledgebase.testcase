@@ -238,7 +238,13 @@
 	</command>
 
 	<command name="AddKBArticleWithInvalidAttachmentSize" priority="3">
-		<property name="custom.properties" value="com.liferay.portal.upload.UploadServletRequestImpl.max.size=1024" />
+		<execute macro="ProductMenu#gotoControlPanelSystem">
+			<var name="portlet" value="Server Administration" />
+		</execute>
+
+		<execute macro="ServerAdministration#configureFileUploadOverallMaximumFileSize">
+			<var name="maxFileSize" value="1024" />
+		</execute>
 
 		<execute macro="Page#gotoContentCP">
 			<var name="portletName" value="Knowledge Base" />
