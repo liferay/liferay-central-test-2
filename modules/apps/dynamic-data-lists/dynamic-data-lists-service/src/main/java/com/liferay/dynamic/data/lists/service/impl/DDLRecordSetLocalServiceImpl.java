@@ -431,7 +431,7 @@ public class DDLRecordSetLocalServiceImpl
 
 		if (!Validator.isBoolean(requireCaptcha)) {
 			throw new RecordSetSettingsException(
-				"'requireCaptcha' property must be a boolean");
+				"The property \"requireCaptcha\" is not a boolean");
 		}
 	}
 
