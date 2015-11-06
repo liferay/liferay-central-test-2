@@ -28,10 +28,9 @@ else {
 	portalPreferences.setValue(BlogsPortletKeys.BLOGS_ADMIN, "images-display-style", displayStyle);
 }
 
+int delta = ParamUtil.getInteger(request, "delta");
 String orderByCol = ParamUtil.getString(request, "orderByCol", "title");
 String orderByType = ParamUtil.getString(request, "orderByType", "asc");
-
-int delta = ParamUtil.getInteger(request, "delta");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
