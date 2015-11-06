@@ -73,6 +73,7 @@ String rootNodeName = ParamUtil.getString(request, "rootNodeName");
 			int exportImportConfigurationType = ExportImportConfigurationConstants.TYPE_EXPORT_LAYOUT;
 
 			long originalGroupId = groupId;
+
 			groupId = liveGroupId;
 			%>
 
