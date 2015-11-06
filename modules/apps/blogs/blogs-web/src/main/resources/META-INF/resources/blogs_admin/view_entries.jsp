@@ -33,10 +33,9 @@ else {
 	request.setAttribute(WebKeys.SINGLE_PAGE_APPLICATION_CLEAR_CACHE, Boolean.TRUE);
 }
 
+int delta = ParamUtil.getInteger(request, "delta");
 String orderByCol = ParamUtil.getString(request, "orderByCol", "title");
 String orderByType = ParamUtil.getString(request, "orderByType", "asc");
-
-int delta = ParamUtil.getInteger(request, "delta");
 
 PortletURL navigationPortletURL = renderResponse.createRenderURL();
 
