@@ -5,7 +5,7 @@
     <packaging>jar</packaging>
     <groupId>org.webjars.bower</groupId>
     <artifactId>alloyeditor</artifactId>
-    <version>0.6.0</version>
+    <version>0.7.0</version>
     <name>alloyeditor</name>
     <description>WebJar for alloyeditor</description>
     <url>http://webjars.org</url>
@@ -18,7 +18,7 @@
         <url>https://github.com/liferay/alloy-editor</url>
         <connection>git://github.com/liferay/alloy-editor.git</connection>
         <developerConnection>git://github.com/liferay/alloy-editor.git</developerConnection>
-        <tag>v0.6.0</tag>
+        <tag>v0.7.0</tag>
     </scm>
 
     <developers>
