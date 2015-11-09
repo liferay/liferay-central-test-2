@@ -18,7 +18,6 @@ import com.liferay.portal.LayoutBranchNameException;
 import com.liferay.portal.LayoutSetBranchNameException;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.servlet.MultiSessionMessages;
 import com.liferay.portal.kernel.servlet.SessionErrors;
@@ -31,7 +30,6 @@ import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutSetBranch;
 import com.liferay.portal.model.LayoutSetBranchConstants;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.LayoutBranchService;
 import com.liferay.portal.service.LayoutRevisionLocalService;
 import com.liferay.portal.service.LayoutSetBranchLocalService;
 import com.liferay.portal.service.LayoutSetBranchService;
@@ -41,13 +39,11 @@ import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.exportimport.staging.StagingUtil;
+import com.liferay.staging.bar.web.portlet.action.ActionUtil;
 import com.liferay.staging.bar.web.portlet.constants.StagingBarPortletKeys;
 import com.liferay.staging.bar.web.upgrade.StagingBarWebUpgrade;
 
 import java.io.IOException;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -55,7 +51,6 @@ import javax.portlet.Portlet;
 import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
-import javax.portlet.WindowState;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -93,30 +88,6 @@ import org.osgi.service.component.annotations.Reference;
 	service = Portlet.class
 )
 public class StagingBarPortlet extends MVCPortlet {
-
-	public void deleteLayoutBranch(
-			ActionRequest actionRequest, ActionResponse actionResponse)
-		throws Exception {
-
-		long layoutBranchId = ParamUtil.getLong(
-			actionRequest, "layoutBranchId");
-
-		long currentLayoutBranchId = ParamUtil.getLong(
-			actionRequest, "currentLayoutBranchId");
-
-		_layoutBranchService.deleteLayoutBranch(layoutBranchId);
-
-		SessionMessages.add(actionRequest, "pageVariationDeleted");
-
-		if (layoutBranchId == currentLayoutBranchId) {
-			SessionMessages.add(
-				actionRequest,
-				PortalUtil.getPortletId(actionRequest) +
-					SessionMessages.KEY_SUFFIX_PORTLET_NOT_AJAXABLE);
-		}
-
-		addLayoutBranchSessionMessages(actionRequest, actionResponse);
-	}
 
 	public void deleteLayoutRevision(
 			ActionRequest actionRequest, ActionResponse actionResponse)
@@ -402,13 +373,6 @@ public class StagingBarPortlet extends MVCPortlet {
 	}
 
 	@Reference
-	protected void setLayoutBranchService(
-		LayoutBranchService layoutBranchService) {
-
-		_layoutBranchService = layoutBranchService;
-	}
-
-	@Reference
 	protected void setLayoutRevisionLocalService(
 		LayoutRevisionLocalService layoutRevisionLocalService) {
 
@@ -441,12 +405,6 @@ public class StagingBarPortlet extends MVCPortlet {
 		StagingBarWebUpgrade stagingBarWebUpgrade) {
 	}
 
-	protected void unsetLayoutBranchService(
-		LayoutBranchService layoutBranchService) {
-
-		_layoutBranchService = null;
-	}
-
 	protected void unsetLayoutRevisionLocalService(
 		LayoutRevisionLocalService layoutRevisionLocalService) {
 
@@ -471,7 +429,6 @@ public class StagingBarPortlet extends MVCPortlet {
 		_layoutSetLocalService = null;
 	}
 
-	private LayoutBranchService _layoutBranchService;
 	private LayoutRevisionLocalService _layoutRevisionLocalService;
 	private LayoutSetBranchLocalService _layoutSetBranchLocalService;
 	private LayoutSetBranchService _layoutSetBranchService;
