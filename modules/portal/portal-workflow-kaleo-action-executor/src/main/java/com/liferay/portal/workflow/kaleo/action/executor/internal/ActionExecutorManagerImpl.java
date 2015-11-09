@@ -53,7 +53,7 @@ public class ActionExecutorManagerImpl implements ActionExecutorManager {
 
 		if (actionExecutor == null) {
 			throw new PortalException(
-				"No ActionExecutor configured for: " + actionExecutorKey);
+				"No action executor for " + actionExecutorKey);
 		}
 
 		actionExecutor.execute(kaleoAction, executionContext);
@@ -81,13 +81,11 @@ public class ActionExecutorManagerImpl implements ActionExecutorManager {
 	protected synchronized void registerActionExecutor(
 		ActionExecutor actionExecutor, Map<String, Object> properties) {
 
-		Object languageProperty = properties.get(
+		Object value = properties.get(
 			"com.liferay.portal.workflow.kaleo.action.executor.language");
 
-		String[] defaultValue = new String[] {String.valueOf(languageProperty)};
-
 		String[] languages = GetterUtil.getStringValues(
-			languageProperty, defaultValue);
+			value, new String[] {String.valueOf(value)});
 
 		for (String language : languages) {
 			String actionExecutorKey = getActionExecutorKey(
@@ -100,13 +98,11 @@ public class ActionExecutorManagerImpl implements ActionExecutorManager {
 	protected synchronized void unregisterActionExecutor(
 		ActionExecutor actionExecutor, Map<String, Object> properties) {
 
-		Object languageProperty = properties.get(
+		Object value = properties.get(
 			"com.liferay.portal.workflow.kaleo.action.executor.language");
 
-		String[] defaultValue = new String[] {String.valueOf(languageProperty)};
-
 		String[] languages = GetterUtil.getStringValues(
-			languageProperty, defaultValue);
+			value, new String[] {String.valueOf(value)});
 
 		for (String language : languages) {
 			String actionExecutorKey = getActionExecutorKey(
