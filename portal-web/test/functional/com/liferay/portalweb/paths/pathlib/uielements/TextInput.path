@@ -59,6 +59,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>DISPLAY_DATE_DAY</td>
+	<td>//input[contains(@id,'displayDateDay')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>DISPLAY_DATE_HOUR</td>
 	<td>//input[contains(@id,'displayDateHour')]</td>
 	<td></td>
@@ -74,8 +79,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>DISPLAY_DATE_MONTH</td>
+	<td>//input[contains(@id,'displayDateMonth')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>DISPLAY_DATE_TIME</td>
 	<td>//input[contains(@id,'displayDateTime')]</td>
+	<td></td>
+</tr>
+<tr>
+ 	<td>DISPLAY_DATE_YEAR</td>
+	<td>//input[contains(@id,'displayDateYear')]</td>
 	<td></td>
 </tr>
 <tr>
