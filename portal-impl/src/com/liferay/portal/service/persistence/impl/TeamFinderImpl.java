@@ -159,26 +159,26 @@ public class TeamFinderImpl extends TeamFinderBaseImpl implements TeamFinder {
 	protected List<Team> doFindByG_U(
 		long groupId, long userId, int start, int end,
 		OrderByComparator<Team> obc) {
-	
+
 		Session session = null;
-	
+
 		try {
 			session = openSession();
-	
+
 			String sql = CustomSQLUtil.get(FIND_BY_G_U);
-	
+
 			sql = CustomSQLUtil.replaceOrderBy(sql, obc);
-	
+
 			SQLQuery q = session.createSynchronizedSQLQuery(sql);
-	
+
 			q.addEntity("Team", TeamImpl.class);
-	
+
 			QueryPos qPos = QueryPos.getInstance(q);
-	
+
 			qPos.add(groupId);
 			qPos.add(userId);
 			qPos.add(userId);
-	
+
 			return (List<Team>)QueryUtil.list(q, getDialect(), start, end);
 		}
 		catch (Exception e) {
