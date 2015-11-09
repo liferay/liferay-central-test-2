@@ -16,7 +16,7 @@ package com.liferay.portal.service.test;
 
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
-import com.liferay.portal.workflow.user.UserWorkflowHandler;
+import com.liferay.portal.workflow.UserWorkflowHandler;
 import com.liferay.portlet.asset.util.AssetEntryIndexer;
 import com.liferay.portlet.documentlibrary.util.DLFileEntryIndexer;
 import com.liferay.portlet.documentlibrary.util.DLFolderIndexer;
