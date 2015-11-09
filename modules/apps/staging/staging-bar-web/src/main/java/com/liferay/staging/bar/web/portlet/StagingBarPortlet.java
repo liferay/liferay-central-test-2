@@ -242,35 +242,6 @@ public class StagingBarPortlet extends MVCPortlet {
 			request, layoutSet.getLayoutSetId(),
 			layoutSetBranch.getLayoutSetBranchId());
 
-
-	public void updateLayoutBranch(
-			ActionRequest actionRequest, ActionResponse actionResponse)
-		throws Exception {
-
-		long layoutBranchId = ParamUtil.getLong(
-			actionRequest, "layoutBranchId");
-
-		long layoutRevisionId = ParamUtil.getLong(
-			actionRequest, "copyLayoutRevisionId");
-		String name = ParamUtil.getString(actionRequest, "name");
-		String description = ParamUtil.getString(actionRequest, "description");
-
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			actionRequest);
-
-		if (layoutBranchId <= 0) {
-			_layoutBranchService.addLayoutBranch(
-				layoutRevisionId, name, description, false, serviceContext);
-
-			SessionMessages.add(actionRequest, "pageVariationAdded");
-		}
-		else {
-			_layoutBranchService.updateLayoutBranch(
-				layoutBranchId, name, description, serviceContext);
-
-			SessionMessages.add(actionRequest, "pageVariationUpdated");
-		}
-
 		ActionUtil.addLayoutBranchSessionMessages(
 			actionRequest, actionResponse);
 	}
