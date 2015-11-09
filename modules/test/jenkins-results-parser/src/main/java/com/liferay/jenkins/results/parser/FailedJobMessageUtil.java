@@ -66,22 +66,25 @@ public class FailedJobMessageUtil {
 
 					String runBuildURL = runsJSONObject.getString("url");
 
-					if (runBuildURL.endsWith(
+					if (!runBuildURL.endsWith(
 							"/"+ jsonObject.get("number") + "/")) {
-
-						JSONObject runJSONObject =
-							JenkinsResultsParserUtil.toJSONObject(
-								JenkinsResultsParserUtil.getLocalURL(
-									runBuildURL + "api/json"));
-
-						String runResult = runJSONObject.getString("result");
-
-						if (!runResult.equals("SUCCESS")) {
-							failureBuildURLs.add(runBuildURL);
-						}
-
-						runBuildURLs.add(runBuildURL);
+							
+						continue;
 					}
+
+					JSONObject runBuildURLJSONObject =
+						JenkinsResultsParserUtil.toJSONObject(
+							JenkinsResultsParserUtil.getLocalURL(
+								runBuildURL + "api/json"));
+
+					String runBuildURLResult = runBuildURLJSONObject.getString(
+						"result");
+
+					if (!runBuildURLResult.equals("SUCCESS")) {
+						failureBuildURLs.add(runBuildURL);
+					}
+
+					runBuildURLs.add(runBuildURL);
 				}
 
 				sb.append("<h6>Job Results:</h6>");
@@ -102,7 +105,6 @@ public class FailedJobMessageUtil {
 				}
 
 				sb.append(" Failed.</p>");
-
 				sb.append("<ol>");
 
 				for (int i = 0; i < failureBuildURLs.size(); i++) {
