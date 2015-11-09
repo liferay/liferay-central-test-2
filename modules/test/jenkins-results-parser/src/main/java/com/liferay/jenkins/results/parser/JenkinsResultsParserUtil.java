@@ -33,19 +33,19 @@ import org.json.JSONObject;
 public class JenkinsResultsParserUtil {
 
 	public static String fixJSON(String json) {
-		json = json.replaceAll("\t", "&#09;");
-		json = json.replaceAll("\\\"", "&#34;");
 		json = json.replaceAll("'", "&#39;");
-		json = json.replaceAll("\\(", "&#40;");
-		json = json.replaceAll("\\)", "&#41;");
 		json = json.replaceAll("<", "&#60;");
 		json = json.replaceAll(">", "&#62;");
+		json = json.replaceAll("\\(", "&#40;");
+		json = json.replaceAll("\\)", "&#41;");
 		json = json.replaceAll("\\[", "&#91;");
+		json = json.replaceAll("\\\"", "&#34;");
 		json = json.replaceAll("\\\\", "&#92;");
 		json = json.replaceAll("\\]", "&#93;");
 		json = json.replaceAll("\\{", "&#123;");
 		json = json.replaceAll("\\}", "&#125;");
 		json = json.replaceAll("\n", "<br />");
+		json = json.replaceAll("\t", "&#09;");
 		json = json.replaceAll("\u00BB", "&raquo;");
 
 		return json;
