@@ -319,9 +319,9 @@ public class TrackingInterfacesTest {
 			Assert.assertEquals(trackedTwo2, testInterface.getTrackedTwo());
 
 			serviceRegistration1.unregister();
-			
+
 			serviceRegistration2.unregister();
-			
+
 			serviceRegistration3.unregister();
 
 			serviceRegistration4.unregister();
