@@ -167,7 +167,8 @@ public class StagingBarPortlet extends MVCPortlet {
 
 		SessionMessages.add(actionRequest, "sitePageVariationDeleted");
 
-		addLayoutBranchSessionMessages(actionRequest, actionResponse);
+		ActionUtil.addLayoutBranchSessionMessages(
+			actionRequest, actionResponse);
 	}
 
 	public void mergeLayoutSetBranch(
@@ -188,7 +189,8 @@ public class StagingBarPortlet extends MVCPortlet {
 
 		SessionMessages.add(actionRequest, "sitePageVariationMerged");
 
-		addLayoutBranchSessionMessages(actionRequest, actionResponse);
+		ActionUtil.addLayoutBranchSessionMessages(
+			actionRequest, actionResponse);
 	}
 
 	public void selectLayoutBranch(
@@ -210,7 +212,8 @@ public class StagingBarPortlet extends MVCPortlet {
 		StagingUtil.setRecentLayoutBranchId(
 			request, layoutSetBranchId, themeDisplay.getPlid(), layoutBranchId);
 
-		addLayoutBranchSessionMessages(actionRequest, actionResponse);
+		ActionUtil.addLayoutBranchSessionMessages(
+			actionRequest, actionResponse);
 	}
 
 	public void selectLayoutSetBranch(
@@ -239,8 +242,6 @@ public class StagingBarPortlet extends MVCPortlet {
 			request, layoutSet.getLayoutSetId(),
 			layoutSetBranch.getLayoutSetBranchId());
 
-		addLayoutBranchSessionMessages(actionRequest, actionResponse);
-	}
 
 	public void updateLayoutBranch(
 			ActionRequest actionRequest, ActionResponse actionResponse)
@@ -270,7 +271,8 @@ public class StagingBarPortlet extends MVCPortlet {
 			SessionMessages.add(actionRequest, "pageVariationUpdated");
 		}
 
-		addLayoutBranchSessionMessages(actionRequest, actionResponse);
+		ActionUtil.addLayoutBranchSessionMessages(
+			actionRequest, actionResponse);
 	}
 
 	public void updateLayoutRevision(
@@ -382,39 +384,8 @@ public class StagingBarPortlet extends MVCPortlet {
 			SessionMessages.add(actionRequest, "sitePageVariationUpdated");
 		}
 
-		addLayoutBranchSessionMessages(actionRequest, actionResponse);
-	}
-
-	protected void addLayoutBranchSessionMessages(
-			ActionRequest actionRequest, ActionResponse actionResponse)
-		throws IOException {
-
-		if (SessionErrors.isEmpty(actionRequest)) {
-			SessionMessages.add(
-				actionRequest,
-				PortalUtil.getPortletId(actionRequest) +
-					SessionMessages.KEY_SUFFIX_REFRESH_PORTLET,
-				StagingBarPortletKeys.STAGING_BAR);
-
-			Map<String, String> data = new HashMap<>();
-
-			data.put("preventNotification", Boolean.TRUE.toString());
-
-			SessionMessages.add(
-				actionRequest,
-				PortalUtil.getPortletId(actionRequest) +
-					SessionMessages.KEY_SUFFIX_REFRESH_PORTLET_DATA,
-				data);
-		}
-
-		String redirect = PortalUtil.escapeRedirect(
-			ParamUtil.getString(actionRequest, "redirect"));
-
-		WindowState windowState = actionRequest.getWindowState();
-
-		if (windowState.equals(LiferayWindowState.POP_UP)) {
-			actionResponse.sendRedirect(redirect);
-		}
+		ActionUtil.addLayoutBranchSessionMessages(
+			actionRequest, actionResponse);
 	}
 
 	protected void addLayoutRevisionSessionMessages(
