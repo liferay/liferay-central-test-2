@@ -219,7 +219,7 @@ public class WebDriverHelper {
 		return webElement.getAttribute(attribute);
 	}
 
-	public static By getByFromLocator(String locator) {
+	public static By getBy(String locator) {
 		if (locator.startsWith("//")) {
 			return By.xpath(locator);
 		}
@@ -876,7 +876,7 @@ public class WebDriverHelper {
 		}
 
 		try {
-			return webDriver.findElements(getByFromLocator(locator));
+			return webDriver.findElements(getBy(locator));
 		}
 		finally {
 			if (timeout != null) {
