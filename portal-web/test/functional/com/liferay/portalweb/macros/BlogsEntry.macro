@@ -997,6 +997,17 @@
 	</command>
 
 	<command name="scheduleBlogEntry">
+		<var locator="TextInput#DISPLAY_DATE_DAY" name="displayDateDay" />
+
+		<var locator="TextInput#DISPLAY_DATE_MONTH" name="displayDateMonth" />
+		<var method="MathUtil#sum('${displayDateMonth}', '1')" name="displayDateMonth" />
+
+		<var locator="TextInput#DISPLAY_DATE_YEAR" name="displayDateYear" />
+
+		<var name="displayDate" value="${displayDateMonth}/${displayDateDay}/${displayDateYear}" />
+
+		<execute function="Type" locator1="TextInput#DISPLAY_DATE" value1="${displayDate}" />
+
 		<var locator="TextInput#DISPLAY_DATE_HOUR" name="displayDateHour" />
 		<var name="displayDateHourLength" value="${displayDateHour?length()}" />
 
@@ -1005,6 +1016,9 @@
 			<then>
 				<var name="displayDateHour" value="0${displayDateHour}" />
 			</then>
+			<else>
+				<var name="displayDateHour" value="${displayDateHour}" />
+			</else>
 		</if>
 
 		<var locator="TextInput#DISPLAY_DATE_MINUTE" name="displayDateMinute" />
@@ -1016,15 +1030,17 @@
 			<then>
 				<var name="displayDateMinuteFuture" value="0${displayDateMinuteFuture}" />
 			</then>
+			<else>
+				<var name="displayDateMinuteFuture" value="${displayDateMinuteFuture}" />
+			</else>
 		</if>
 
 		<var locator="TextInput#DISPLAY_DATE_MERIDIAN" name="displayDateMeridian" />
 		<var method="StringUtil#replace('${displayDateMeridian}', '0', 'AM')" name="displayDateMeridian" />
 		<var method="StringUtil#replace('${displayDateMeridian}', '1', 'PM')" name="displayDateMeridian" />
+		<var name="displayTime" value="${displayDateHour}:${displayDateMinuteFuture} ${displayDateMeridian}" />
 
-		<var name="displayDate" value="${displayDateHour}:${displayDateMinuteFuture} ${displayDateMeridian}" />
-
-		<execute function="Type#clickAtSendKeys" locator1="TextInput#DISPLAY_DATE_TIME" value1="${displayDate}" />
+		<execute function="Type" locator1="TextInput#DISPLAY_DATE_TIME" value1="${displayTime}" />
 	</command>
 
 	<command name="searchCP">
