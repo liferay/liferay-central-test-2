@@ -63,7 +63,6 @@ public class AddRecordMVCActionCommand extends BaseMVCActionCommand {
 
 		long groupId = ParamUtil.getLong(actionRequest, "groupId");
 		long recordSetId = ParamUtil.getLong(actionRequest, "recordSetId");
-		String portletId = PortalUtil.getPortletId(actionRequest);
 
 		DDLRecordSet recordSet = _ddlRecordSetService.getRecordSet(recordSetId);
 
@@ -84,6 +83,8 @@ public class AddRecordMVCActionCommand extends BaseMVCActionCommand {
 
 		if (SessionErrors.isEmpty(actionRequest) &&
 			Validator.isNotNull(redirectURL)) {
+
+			String portletId = PortalUtil.getPortletId(actionRequest);
 
 			SessionMessages.add(
 				actionRequest, portletId,

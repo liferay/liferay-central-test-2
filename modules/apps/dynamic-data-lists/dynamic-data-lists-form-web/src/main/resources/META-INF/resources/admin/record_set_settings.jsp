@@ -20,8 +20,8 @@
 DDLRecordSet recordSet = ddlFormAdminDisplayContext.getRecordSet();
 
 long recordSetId = BeanParamUtil.getLong(recordSet, request, "recordSetId");
-long groupId = BeanParamUtil.getLong(recordSet, request, "groupId", scopeGroupId);
 
+long groupId = BeanParamUtil.getLong(recordSet, request, "groupId", scopeGroupId);
 String redirectURL = GetterUtil.getString(recordSet.getSettingsProperty("redirectURL", StringPool.BLANK));
 %>
 
