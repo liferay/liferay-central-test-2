@@ -66,7 +66,7 @@ public class TeamFinderTest {
 	}
 
 	@Test
-	public void testGetTeamsByUserOrUserGroups() throws Exception {
+	public void testGetUserOrUserGroupTeams() throws Exception {
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(
 				_group.getGroupId(), _user.getUserId());
@@ -79,7 +79,7 @@ public class TeamFinderTest {
 			_user.getUserId(), directTeam.getTeamId());
 
 		List<Team> justDirectTeam =
-			TeamLocalServiceUtil.getTeamsByUserOrUserGroups(
+			TeamLocalServiceUtil.getUserOrUserGroupTeams(
 				_group.getGroupId(), _user.getUserId());
 
 		Assert.assertEquals(1, justDirectTeam.size());
@@ -93,7 +93,7 @@ public class TeamFinderTest {
 			_userGroup.getUserGroupId(), groupTeam.getTeamId());
 
 		List<Team> directAndGroupTeams =
-			TeamLocalServiceUtil.getTeamsByUserOrUserGroups(
+			TeamLocalServiceUtil.getUserOrUserGroupTeams(
 				_group.getGroupId(), _user.getUserId());
 
 		Assert.assertEquals(2, directAndGroupTeams.size());
