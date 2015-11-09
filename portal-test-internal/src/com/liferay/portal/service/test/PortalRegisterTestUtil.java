@@ -27,7 +27,7 @@ import com.liferay.portlet.usersadmin.util.OrganizationIndexer;
 import com.liferay.portlet.usersadmin.util.UserIndexer;
 
 /**
- * @author Roberto D�az
+ * @author Roberto Díaz
  */
 public class PortalRegisterTestUtil {
 
