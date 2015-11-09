@@ -36,20 +36,17 @@ public class FailedJobMessageUtilTest extends BaseJenkinsResultsParserTestCase {
 	public void setUp() throws Exception {
 		downloadSample(
 			"23-of-46", "2251",
-			"test-portal-acceptance-pullrequest-batch(master)", "test-1-17",
-			false);
+			"test-portal-acceptance-pullrequest-batch(master)", "test-1-17");
 		downloadSample(
 			"2-of-3888", "3415",
-			"test-portal-acceptance-pullrequest-batch(master)", "test-1-18",
-			false);
+			"test-portal-acceptance-pullrequest-batch(master)", "test-1-18");
 		downloadSample(
 			"6-of-6", "1287",
-			"test-portal-acceptance-pullrequest-batch(master)", "test-1-19",
-			false);
+			"test-portal-acceptance-pullrequest-batch(master)", "test-1-19");
 	}
 
 	@Test
-	public void testGetFailedJobsMessage() throws Exception {
+	public void testGetFailedJobMessage() throws Exception {
 		assertSamples();
 	}
 
@@ -59,14 +56,12 @@ public class FailedJobMessageUtilTest extends BaseJenkinsResultsParserTestCase {
 		downloadSampleURL(sampleDir, url, "/logText/progressiveText");
 		downloadSampleURL(sampleDir, url, "/testReport/api/json");
 
-		generateJavacOutputFile(sampleDir);
-
 		downloadSampleAxisURLs(sampleDir, new File(sampleDir, "/api/json"));
 	}
 
 	protected void downloadSample(
 			String sampleKey, String buildNumber, String jobName,
-			String hostName, boolean generateJavacOutputFile)
+			String hostName)
 		throws Exception {
 
 		String urlString =
@@ -79,16 +74,6 @@ public class FailedJobMessageUtilTest extends BaseJenkinsResultsParserTestCase {
 		URL url = createURL(urlString);
 
 		downloadSample(sampleKey + "-" + jobName, url);
-
-		if (!generateJavacOutputFile) {
-			File javacOutputFile = new File(
-				dependenciesDir,
-				sampleKey + "-" + jobName + "/" + _JAVAC_OUTPUT_FILE_NAME);
-
-			if (javacOutputFile.exists()) {
-				javacOutputFile.delete();
-			}
-		}
 	}
 
 	protected void downloadSampleAxisURLs(File sampleDir, File jobJSONFile)
@@ -123,30 +108,9 @@ public class FailedJobMessageUtilTest extends BaseJenkinsResultsParserTestCase {
 		write(jobJSONFile, jobJSONObject.toString(4));
 	}
 
-	protected void generateJavacOutputFile(File caseDir) throws Exception {
-		File javacOutputFile = new File(caseDir, _JAVAC_OUTPUT_FILE_NAME);
-
-		int maxLineCount = 4000;
-		StringBuilder sb = new StringBuilder();
-
-		for (int i = 0; i < maxLineCount; i++) {
-			sb.append("line: ");
-
-			sb.append(i+1);
-
-			sb.append(" of " );
-
-			sb.append(maxLineCount);
-
-			sb.append("\n");
-		}
-
-		write(javacOutputFile, sb.toString());
-	}
-
 	@Override
 	protected String getMessage(String urlString) throws Exception {
-		Project project = _getProject(
+		Project project = getProject(
 			urlString, urlString.substring("file:".length()));
 
 		FailedJobMessageUtil.getFailedJobMessage(project);
@@ -154,7 +118,7 @@ public class FailedJobMessageUtilTest extends BaseJenkinsResultsParserTestCase {
 		return project.getProperty("report.html.content");
 	}
 
-	private Project _getProject(
+	protected Project getProject(
 		String buildURLString, String topLevelSharedDir) {
 
 		Project project = new Project();
@@ -172,7 +136,5 @@ public class FailedJobMessageUtilTest extends BaseJenkinsResultsParserTestCase {
 
 		return project;
 	}
-
-	private static final String _JAVAC_OUTPUT_FILE_NAME = "javac.output.txt";
 
 }

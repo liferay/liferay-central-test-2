@@ -68,7 +68,7 @@ public class FailedJobMessageUtil {
 
 					if (!runBuildURL.endsWith(
 							"/"+ jsonObject.get("number") + "/")) {
-							
+
 						continue;
 					}
 
