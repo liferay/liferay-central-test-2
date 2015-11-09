@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.DeleteAfterTestRun;
 import com.liferay.portal.kernel.test.rule.TransactionalTestRule;
 import com.liferay.portal.kernel.test.util.GroupTestUtil;
+import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.test.util.ServiceContextTestUtil;
 import com.liferay.portal.kernel.test.util.UserGroupTestUtil;
 import com.liferay.portal.kernel.test.util.UserTestUtil;
@@ -71,8 +72,8 @@ public class TeamFinderTest {
 				_group.getGroupId(), _user.getUserId());
 
 		Team directTeam = TeamLocalServiceUtil.addTeam(
-			_user.getUserId(), _group.getGroupId(), "DirectTeam", "",
-			serviceContext);
+			_user.getUserId(), _group.getGroupId(),
+			RandomTestUtil.randomString(), "", serviceContext);
 
 		TeamLocalServiceUtil.addUserTeam(
 			_user.getUserId(), directTeam.getTeamId());
@@ -85,8 +86,8 @@ public class TeamFinderTest {
 		Assert.assertTrue(justDirectTeam.contains(directTeam));
 
 		Team groupTeam = TeamLocalServiceUtil.addTeam(
-			_user.getUserId(), _group.getGroupId(), "GroupTeam", "",
-			serviceContext);
+			_user.getUserId(), _group.getGroupId(),
+			RandomTestUtil.randomString(), "", serviceContext);
 
 		TeamLocalServiceUtil.addUserGroupTeam(
 			_userGroup.getUserGroupId(), groupTeam.getTeamId());
