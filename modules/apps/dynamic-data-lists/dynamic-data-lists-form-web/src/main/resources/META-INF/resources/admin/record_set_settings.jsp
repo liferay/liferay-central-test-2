@@ -34,7 +34,7 @@ String redirectURL = GetterUtil.getString(recordSet.getSettingsProperty("redirec
 		<aui:input name="recordSetId" type="hidden" value="<%= recordSetId %>" />
 		<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
 
-		<liferay-ui:error exception="<%= RecordSetSettingsException.class %>" message="please-enter-a-valid-form-settings" />
+		<liferay-ui:error exception="<%= RecordSetSettingsException.class %>" message="please-enter-valid-form-settings" />
 
 		<aui:fieldset>
 			<aui:input label="redirect-url-on-success" name="redirectURL" value="<%= HtmlUtil.toInputSafe(redirectURL) %>" wrapperCssClass="lfr-input-text-container" />
