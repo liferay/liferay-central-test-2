@@ -1,7 +1,6 @@
 <#include "../init.ftl">
 
 <#assign cssClass = "">
-
 <#assign editorName = propsUtil.get("editor.wysiwyg.portal-impl.portlet.ddm.text_html.ftl")>
 
 <#assign inputEditorName = "${namespacedFieldName}Editor">
