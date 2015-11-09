@@ -33,14 +33,15 @@ import org.osgi.service.component.annotations.Component;
  * @author Michael C. Han
  */
 @Component(
-		immediate = true,
-		property = {"javax.portlet.name=" + PortletKeys.DIRECTORY,
-			"javax.portlet.name=" + PortletKeys.FRIENDS_DIRECTORY,
-			"javax.portlet.name=" + PortletKeys.MY_SITES_DIRECTORY,
-			"javax.portlet.name=" + PortletKeys.SITE_MEMBERS_DIRECTORY
-		},
-		service = AssetRendererFactory.class
-	)
+	immediate = true,
+	property = {
+		"javax.portlet.name=" + PortletKeys.DIRECTORY,
+		"javax.portlet.name=" + PortletKeys.FRIENDS_DIRECTORY,
+		"javax.portlet.name=" + PortletKeys.MY_SITES_DIRECTORY,
+		"javax.portlet.name=" + PortletKeys.SITE_MEMBERS_DIRECTORY
+	},
+	service = AssetRendererFactory.class
+)
 public class UserAssetRendererFactory extends BaseAssetRendererFactory<User> {
 
 	public static final String TYPE = "user";

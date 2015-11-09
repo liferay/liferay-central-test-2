@@ -34,21 +34,6 @@
 		</permissions>
 	</portlet-resource>
 	<portlet-resource>
-		<portlet-name>com.liferay.portlet.directory.SiteMembersDirectoryPortlet</portlet-name>
-		<permissions>
-			<supports>
-				<action-key>ADD_TO_PAGE</action-key>
-				<action-key>CONFIGURATION</action-key>
-				<action-key>VIEW</action-key>
-			</supports>
-			<site-member-defaults />
-			<guest-defaults />
-			<guest-unsupported>
-				<action-key>CONFIGURATION</action-key>
-			</guest-unsupported>
-		</permissions>
-	</portlet-resource>
-	<portlet-resource>
 		<portlet-name>com_liferay_directory_web_portlet_MySitesDirectoryPortlet</portlet-name>
 		<permissions>
 			<supports>
@@ -61,6 +46,21 @@
 			<guest-unsupported>
 				<action-key>CONFIGURATION</action-key>
 				<action-key>VIEW</action-key>
+			</guest-unsupported>
+		</permissions>
+	</portlet-resource>
+	<portlet-resource>
+		<portlet-name>com.liferay.portlet.directory.SiteMembersDirectoryPortlet</portlet-name>
+		<permissions>
+			<supports>
+				<action-key>ADD_TO_PAGE</action-key>
+				<action-key>CONFIGURATION</action-key>
+				<action-key>VIEW</action-key>
+			</supports>
+			<site-member-defaults />
+			<guest-defaults />
+			<guest-unsupported>
+				<action-key>CONFIGURATION</action-key>
 			</guest-unsupported>
 		</permissions>
 	</portlet-resource>
