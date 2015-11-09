@@ -46,10 +46,6 @@ public class FailedJobMessageUtilTest extends BaseJenkinsResultsParserTestCase {
 			"6-of-6", "1287",
 			"test-portal-acceptance-pullrequest-batch(master)", "test-1-19",
 			false);
-		downloadSample(
-			"0-of-23-javac-output-file", "2269",
-			"test-portal-acceptance-pullrequest-batch(master)", "test-1-19",
-			true);
 	}
 
 	@Test
