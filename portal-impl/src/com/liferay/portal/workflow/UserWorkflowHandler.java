@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.workflow.user;
+package com.liferay.portal.workflow;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.util.GetterUtil;
