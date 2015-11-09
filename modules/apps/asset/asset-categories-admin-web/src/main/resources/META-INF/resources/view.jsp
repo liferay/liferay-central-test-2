@@ -64,7 +64,7 @@ PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(request, "vocabul
 	/>
 
 	<liferay-ui:search-container
-		emptyResultsMessage="there-are-no-vocabularies.-you-can-add-a-vocabulary-by-clicking-the-plus-button-on-the-right-bottom-corner"
+		emptyResultsMessage="there-are-no-vocabularies.-you-can-add-a-vocabulary-by-clicking-the-plus-button-on-the-bottom-right-corner"
 		id="assetVocabularies"
 		rowChecker="<%= new EmptyOnClickRowChecker(renderResponse) %>"
 	>
