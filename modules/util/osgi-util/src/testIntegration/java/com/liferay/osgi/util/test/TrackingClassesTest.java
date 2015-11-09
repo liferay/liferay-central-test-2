@@ -55,7 +55,7 @@ public class TrackingClassesTest {
 		TestInstance testInstance = new TestInstance();
 
 		try (ReflectionServiceTracker reflectionServiceTracker =
-			new ReflectionServiceTracker(testInstance)) {
+				new ReflectionServiceTracker(testInstance)) {
 
 			Assert.assertNull(testInstance.getTrackedOne());
 			Assert.assertNull(testInstance.getTrackedTwo());
@@ -67,7 +67,7 @@ public class TrackingClassesTest {
 		TestInstance testInstance = new TestInstance();
 
 		try (ReflectionServiceTracker reflectionServiceTracker =
-			new ReflectionServiceTracker(testInstance)) {
+				new ReflectionServiceTracker(testInstance)) {
 
 			TrackedOne trackedOne = new TrackedOne();
 
@@ -82,6 +82,7 @@ public class TrackingClassesTest {
 					_bundleContext, TrackedTwo.class, trackedTwo, 0);
 
 			serviceRegistration1.unregister();
+
 			serviceRegistration2.unregister();
 
 			Assert.assertNull(testInstance.getTrackedOne());

@@ -59,7 +59,7 @@ public class TrackingInterfacesTest {
 		TestInterface testInterface = new TestInterface();
 
 		try (ReflectionServiceTracker reflectionServiceTracker =
-			new ReflectionServiceTracker(testInterface)) {
+				new ReflectionServiceTracker(testInterface)) {
 
 			TrackedOne trackedOne = new TrackedOne();
 
@@ -89,8 +89,11 @@ public class TrackingInterfacesTest {
 			Assert.assertEquals(trackedTwo, testInterface.getTrackedTwo());
 
 			serviceRegistration1.unregister();
+
 			serviceRegistration2.unregister();
+
 			serviceRegistration3.unregister();
+
 			serviceRegistration4.unregister();
 		}
 	}
@@ -102,7 +105,7 @@ public class TrackingInterfacesTest {
 		TestInterface testInterface = new TestInterface();
 
 		try (ReflectionServiceTracker reflectionServiceTracker =
-			new ReflectionServiceTracker(testInterface)) {
+				new ReflectionServiceTracker(testInterface)) {
 
 			TrackedOne trackedOne = new TrackedOne();
 
@@ -141,14 +144,18 @@ public class TrackingInterfacesTest {
 					_bundleContext, InterfaceTwo.class, trackedTwo3, 1);
 
 			serviceRegistration1.unregister();
+
 			serviceRegistration2.unregister();
 
 			Assert.assertEquals(trackedOne2, testInterface.getTrackedOne());
 			Assert.assertEquals(trackedTwo2, testInterface.getTrackedTwo());
 
 			serviceRegistration3.unregister();
+
 			serviceRegistration4.unregister();
+
 			serviceRegistration5.unregister();
+
 			serviceRegistration6.unregister();
 		}
 	}
@@ -158,7 +165,7 @@ public class TrackingInterfacesTest {
 		TestInterface testInterface = new TestInterface();
 
 		try (ReflectionServiceTracker reflectionServiceTracker =
-			new ReflectionServiceTracker(testInterface)) {
+				new ReflectionServiceTracker(testInterface)) {
 
 			TrackedOne trackedOne = new TrackedOne();
 
@@ -176,6 +183,7 @@ public class TrackingInterfacesTest {
 			Assert.assertEquals(trackedTwo, testInterface.getTrackedTwo());
 
 			serviceRegistration1.unregister();
+
 			serviceRegistration2.unregister();
 		}
 	}
@@ -185,7 +193,7 @@ public class TrackingInterfacesTest {
 		TestInterface testInterface = new TestInterface();
 
 		try (ReflectionServiceTracker reflectionServiceTracker =
-			new ReflectionServiceTracker(testInterface)) {
+				new ReflectionServiceTracker(testInterface)) {
 
 			Assert.assertNotNull(testInterface.getTrackedOne());
 			Assert.assertNotNull(testInterface.getTrackedTwo());
@@ -193,7 +201,7 @@ public class TrackingInterfacesTest {
 			try {
 				testInterface.getTrackedOne().noop1();
 
-				Assert.fail("Should throw UnavailableServiceException");
+				Assert.fail();
 			}
 			catch (UnavailableServiceException sue) {
 				Assert.assertEquals(
@@ -203,7 +211,7 @@ public class TrackingInterfacesTest {
 			try {
 				testInterface.getTrackedTwo().noop2();
 
-				Assert.fail("Should throw UnavailableServiceException");
+				Assert.fail();
 			}
 			catch (UnavailableServiceException sue) {
 				Assert.assertEquals(
@@ -217,7 +225,7 @@ public class TrackingInterfacesTest {
 		TestInterface testInterface = new TestInterface();
 
 		try (ReflectionServiceTracker reflectionServiceTracker =
-			new ReflectionServiceTracker(testInterface)) {
+				new ReflectionServiceTracker(testInterface)) {
 
 			TrackedOne trackedOne = new TrackedOne();
 
@@ -232,6 +240,7 @@ public class TrackingInterfacesTest {
 					_bundleContext, InterfaceTwo.class, trackedTwo, 0);
 
 			serviceRegistration1.unregister();
+
 			serviceRegistration2.unregister();
 
 			Assert.assertNotNull(testInterface.getTrackedOne());
@@ -264,7 +273,7 @@ public class TrackingInterfacesTest {
 		TestInterface testInterface = new TestInterface();
 
 		try (ReflectionServiceTracker reflectionServiceTracker =
-			new ReflectionServiceTracker(testInterface)) {
+				new ReflectionServiceTracker(testInterface)) {
 
 			TrackedOne trackedOne = new TrackedOne();
 
@@ -295,14 +304,18 @@ public class TrackingInterfacesTest {
 			properties.put("service.ranking", 3);
 
 			serviceRegistration3.setProperties(properties);
+
 			serviceRegistration4.setProperties(properties);
 
 			Assert.assertEquals(trackedOne2, testInterface.getTrackedOne());
 			Assert.assertEquals(trackedTwo2, testInterface.getTrackedTwo());
 
 			serviceRegistration1.unregister();
+			
 			serviceRegistration2.unregister();
+			
 			serviceRegistration3.unregister();
+
 			serviceRegistration4.unregister();
 		}
 	}
