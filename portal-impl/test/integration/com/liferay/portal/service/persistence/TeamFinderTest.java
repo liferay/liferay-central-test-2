@@ -71,19 +71,19 @@ public class TeamFinderTest {
 			ServiceContextTestUtil.getServiceContext(
 				_group.getGroupId(), _user.getUserId());
 
-		Team directTeam = TeamLocalServiceUtil.addTeam(
+		Team userTeam = TeamLocalServiceUtil.addTeam(
 			_user.getUserId(), _group.getGroupId(),
 			RandomTestUtil.randomString(), "", serviceContext);
 
 		TeamLocalServiceUtil.addUserTeam(
-			_user.getUserId(), directTeam.getTeamId());
+			_user.getUserId(), userTeam.getTeamId());
 
-		List<Team> justDirectTeam =
+		List<Team> userOrUserGroupTeams1 =
 			TeamLocalServiceUtil.getUserOrUserGroupTeams(
 				_group.getGroupId(), _user.getUserId());
 
-		Assert.assertEquals(1, justDirectTeam.size());
-		Assert.assertTrue(justDirectTeam.contains(directTeam));
+		Assert.assertEquals(1, userOrUserGroupTeams1.size());
+		Assert.assertTrue(userOrUserGroupTeams1.contains(userTeam));
 
 		Team groupTeam = TeamLocalServiceUtil.addTeam(
 			_user.getUserId(), _group.getGroupId(),
@@ -92,13 +92,13 @@ public class TeamFinderTest {
 		TeamLocalServiceUtil.addUserGroupTeam(
 			_userGroup.getUserGroupId(), groupTeam.getTeamId());
 
-		List<Team> directAndGroupTeams =
+		List<Team> userOrUserGroupTeams2 =
 			TeamLocalServiceUtil.getUserOrUserGroupTeams(
 				_group.getGroupId(), _user.getUserId());
 
-		Assert.assertEquals(2, directAndGroupTeams.size());
-		Assert.assertTrue(directAndGroupTeams.contains(directTeam));
-		Assert.assertTrue(directAndGroupTeams.contains(groupTeam));
+		Assert.assertEquals(2, userOrUserGroupTeams2.size());
+		Assert.assertTrue(userOrUserGroupTeams2.contains(userTeam));
+		Assert.assertTrue(userOrUserGroupTeams2.contains(groupTeam));
 	}
 
 	@DeleteAfterTestRun
