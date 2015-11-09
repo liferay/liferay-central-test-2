@@ -24,7 +24,6 @@ String skypeSn = selContact.getSkypeSn();
 %>
 
 <c:if test="<%= Validator.isNotNull(jabberSn) || Validator.isNotNull(skypeSn) %>">
-
 	<h3 class="icon-comments"><liferay-ui:message key="instant-messenger" /></h3>
 
 	<dl class="property-list">
