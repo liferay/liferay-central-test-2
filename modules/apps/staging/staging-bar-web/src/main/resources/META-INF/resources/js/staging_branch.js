@@ -45,26 +45,6 @@ AUI.add(
 					mergeDialog.show();
 				},
 
-				updateBranch: function(options) {
-					var instance = this;
-
-					var updateBranchDialog = instance._getUpdateBranchDialog();
-
-					var updateBranchDialogIO = updateBranchDialog.io;
-
-					updateBranchDialogIO.set('uri', options.uri);
-
-					updateBranchDialogIO.start();
-
-					var dialogTitle = options.dialogTitle;
-
-					if (Lang.isValue(dialogTitle)) {
-						updateBranchDialog.set('title', dialogTitle);
-					}
-
-					updateBranchDialog.show();
-				},
-
 				_getBranchDialog: function() {
 					var instance = this;
 
@@ -126,38 +106,6 @@ AUI.add(
 					}
 
 					return mergeDialog;
-				},
-
-				_getUpdateBranchDialog: function() {
-					var instance = this;
-
-					var updateBranchDialog = instance._updateBranchDialog;
-
-					if (!updateBranchDialog) {
-						updateBranchDialog = Liferay.Util.Window.getWindow(
-							{
-								dialog: {
-									destroyOnHide: true
-								},
-								title: Liferay.Language.get('branch')
-							}
-						);
-
-						updateBranchDialog.plug(
-								A.Plugin.IO,
-								{
-									autoLoad: false,
-									data: {
-										doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
-										p_l_id: themeDisplay.getPlid()
-									}
-								}
-						);
-
-						instance._updateBranchDialog = updateBranchDialog;
-					}
-
-					return updateBranchDialog;
 				},
 
 				_onMergeBranch: function(node) {
