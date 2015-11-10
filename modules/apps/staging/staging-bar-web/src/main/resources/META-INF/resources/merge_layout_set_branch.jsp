@@ -32,9 +32,16 @@ if (layoutSetBranches.contains(layoutSetBranch)) {
 }
 %>
 
+<liferay-ui:header
+	backURL="<%= redirect %>"
+	localizeTitle="<%= true %>"
+	showBackURL="<%= true %>"
+	title="merge-site-pages-variation"
+/>
+
 <div id="<portlet:namespace />mergeLayoutSetBranch">
 	<portlet:actionURL name="mergeLayoutSetBranch" var="mergeLayoutSetBranchURL">
-		<portlet:param name="mvcPath" value="/view_layout_set_branches.jsp" />
+		<portlet:param name="mvcRenderCommandName" value="viewLayoutSetBranches" />
 	</portlet:actionURL>
 
 	<aui:form action="<%= mergeLayoutSetBranchURL %>" enctype="multipart/form-data" method="post" name="fm4">
