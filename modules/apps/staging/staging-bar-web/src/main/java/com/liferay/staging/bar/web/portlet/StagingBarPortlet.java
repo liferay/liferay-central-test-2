@@ -21,14 +21,10 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.servlet.MultiSessionMessages;
 import com.liferay.portal.kernel.servlet.SessionErrors;
-import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.LayoutRevision;
-import com.liferay.portal.model.LayoutSet;
-import com.liferay.portal.model.LayoutSetBranch;
-import com.liferay.portal.model.LayoutSetBranchConstants;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.LayoutRevisionLocalService;
 import com.liferay.portal.service.LayoutSetBranchLocalService;
@@ -39,7 +35,6 @@ import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.exportimport.staging.StagingUtil;
-import com.liferay.staging.bar.web.portlet.action.ActionUtil;
 import com.liferay.staging.bar.web.portlet.constants.StagingBarPortletKeys;
 import com.liferay.staging.bar.web.upgrade.StagingBarWebUpgrade;
 
@@ -115,36 +110,6 @@ public class StagingBarPortlet extends MVCPortlet {
 		}
 
 		addLayoutRevisionSessionMessages(actionRequest, actionResponse);
-	}
-
-	public void selectLayoutSetBranch(
-			ActionRequest actionRequest, ActionResponse actionResponse)
-		throws Exception {
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
-
-		long groupId = ParamUtil.getLong(actionRequest, "groupId");
-		boolean privateLayout = ParamUtil.getBoolean(
-			actionRequest, "privateLayout");
-
-		LayoutSet layoutSet = _layoutSetLocalService.getLayoutSet(
-			groupId, privateLayout);
-
-		long layoutSetBranchId = ParamUtil.getLong(
-			actionRequest, "layoutSetBranchId");
-
-		// Ensure layout set branch exists
-
-		LayoutSetBranch layoutSetBranch =
-			_layoutSetBranchLocalService.getLayoutSetBranch(layoutSetBranchId);
-
-		StagingUtil.setRecentLayoutSetBranchId(
-			request, layoutSet.getLayoutSetId(),
-			layoutSetBranch.getLayoutSetBranchId());
-
-		ActionUtil.addLayoutBranchSessionMessages(
-			actionRequest, actionResponse);
 	}
 
 	public void updateLayoutRevision(
