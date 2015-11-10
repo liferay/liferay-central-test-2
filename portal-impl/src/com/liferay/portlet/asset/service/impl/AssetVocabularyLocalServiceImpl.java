@@ -438,8 +438,8 @@ public class AssetVocabularyLocalServiceImpl
 		searchContext.setEnd(end);
 		searchContext.setGroupIds(new long[] {groupId});
 		searchContext.setKeywords(title);
-		searchContext.setStart(start);
 		searchContext.setSorts(sort);
+		searchContext.setStart(start);
 
 		QueryConfig queryConfig = searchContext.getQueryConfig();
 
