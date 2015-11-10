@@ -355,18 +355,18 @@ public class RTLCSSConverter {
 	private static final Map<String, String> _replacementIcons =
 		new HashMap<>();
 	private static final List<String> _reverseProperties = Arrays.asList(
-		"-moz-border-radius-bottomright", "-moz-border-radius-bottomleft",
-		"-moz-border-radius-topright", "-moz-border-radius-topleft",
-		"border-radius-topleft", "border-radius-topright",
-		"border-top-right-radius", "border-top-left-radius",
-		"-webkit-border-bottom-right-radius",
-		"-webkit-border-bottom-left-radius", "-webkit-border-top-right-radius",
-		"-webkit-border-top-left-radius", "border-bottom-right-radius",
-		"border-bottom-left-radius", "border-left", "border-right",
-		"border-left-color", "border-right-color", "border-left-width",
-		"border-right-width", "border-radius-bottomleft",
-		"border-radius-bottomright", "left", "right", "margin-left",
-		"margin-right", "padding-left", "padding-right");
+		"-moz-border-radius-bottomleft", "-moz-border-radius-bottomright",
+		"-moz-border-radius-topleft", "-moz-border-radius-topright",
+		"-webkit-border-bottom-left-radius",
+		"-webkit-border-bottom-right-radius", "-webkit-border-top-left-radius",
+		"-webkit-border-top-right-radius", "border-bottom-left-radius",
+		"border-bottom-right-radius", "border-left", "border-left-color",
+		"border-left-width", "border-radius-bottomleft",
+		"border-radius-bottomright", "border-radius-topleft",
+		"border-radius-topright", "border-right", "border-right-color",
+		"border-right-width", "border-top-left-radius",
+		"border-top-right-radius", "left", "margin-left", "margin-right",
+		"padding-left", "padding-right", "right");
 	private static final List<String> _reverseValueProperties = Arrays.asList(
 		"clear", "direction", "float", "text-align");
 	private static final List<String> _shorthandProperties = Arrays.asList(
@@ -376,10 +376,14 @@ public class RTLCSSConverter {
 			"-moz-border-radius", "-webkit-border-radius", "border-radius");
 
 	static {
+		_replacementIcons.put("\"\\f053\"", "\"\\f054\"");
+		_replacementIcons.put("\"\\f054\"", "\"\\f053\"");
 		_replacementIcons.put("\"\\f060\"", "\"\\f061\"");
 		_replacementIcons.put("\"\\f061\"", "\"\\f060\"");
 		_replacementIcons.put("\"\\f0a4\"", "\"\\f0a5\"");
 		_replacementIcons.put("\"\\f0a5\"", "\"\\f0a4\"");
+		_replacementIcons.put("\"\\f0a8\"", "\"\\f0a9\"");
+		_replacementIcons.put("\"\\f0a9\"", "\"\\f0a8\"");
 		_replacementIcons.put("\"\\f0d9\"", "\"\\f0da\"");
 		_replacementIcons.put("\"\\f0da\"", "\"\\f0d9\"");
 		_replacementIcons.put("\"\\f100\"", "\"\\f101\"");
@@ -388,10 +392,6 @@ public class RTLCSSConverter {
 		_replacementIcons.put("\"\\f105\"", "\"\\f104\"");
 		_replacementIcons.put("\"\\f137\"", "\"\\f138\"");
 		_replacementIcons.put("\"\\f138\"", "\"\\f137\"");
-		_replacementIcons.put("\"\\f053\"", "\"\\f054\"");
-		_replacementIcons.put("\"\\f054\"", "\"\\f053\"");
-		_replacementIcons.put("\"\\f0a8\"", "\"\\f0a9\"");
-		_replacementIcons.put("\"\\f0a9\"", "\"\\f0a8\"");
 		_replacementIcons.put("\"\\f177\"", "\"\\f178\"");
 		_replacementIcons.put("\"\\f178\"", "\"\\f177\"");
 	}
