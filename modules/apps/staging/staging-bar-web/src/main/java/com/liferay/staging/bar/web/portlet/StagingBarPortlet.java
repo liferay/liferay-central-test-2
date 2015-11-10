@@ -245,43 +245,6 @@ public class StagingBarPortlet extends MVCPortlet {
 		addLayoutRevisionSessionMessages(actionRequest, actionResponse);
 	}
 
-	public void updateLayoutSetBranch(
-			ActionRequest actionRequest, ActionResponse actionResponse)
-		throws Exception {
-
-		long layoutSetBranchId = ParamUtil.getLong(
-			actionRequest, "layoutSetBranchId");
-
-		long groupId = ParamUtil.getLong(actionRequest, "groupId");
-		boolean privateLayout = ParamUtil.getBoolean(
-			actionRequest, "privateLayout");
-		String name = ParamUtil.getString(actionRequest, "name");
-		String description = ParamUtil.getString(actionRequest, "description");
-		long copyLayoutSetBranchId = ParamUtil.getLong(
-			actionRequest, "copyLayoutSetBranchId",
-			LayoutSetBranchConstants.ALL_BRANCHES);
-
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			actionRequest);
-
-		if (layoutSetBranchId <= 0) {
-			_layoutSetBranchService.addLayoutSetBranch(
-				groupId, privateLayout, name, description, false,
-				copyLayoutSetBranchId, serviceContext);
-
-			SessionMessages.add(actionRequest, "sitePageVariationAdded");
-		}
-		else {
-			_layoutSetBranchLocalService.updateLayoutSetBranch(
-				layoutSetBranchId, name, description, serviceContext);
-
-			SessionMessages.add(actionRequest, "sitePageVariationUpdated");
-		}
-
-		ActionUtil.addLayoutBranchSessionMessages(
-			actionRequest, actionResponse);
-	}
-
 	protected void addLayoutRevisionSessionMessages(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws IOException {
