@@ -796,8 +796,8 @@ public class AssetCategoryLocalServiceImpl
 		searchContext.setEnd(end);
 		searchContext.setGroupIds(groupIds);
 		searchContext.setKeywords(title);
-		searchContext.setStart(start);
 		searchContext.setSorts(sort);
+		searchContext.setStart(start);
 
 		QueryConfig queryConfig = searchContext.getQueryConfig();
 
