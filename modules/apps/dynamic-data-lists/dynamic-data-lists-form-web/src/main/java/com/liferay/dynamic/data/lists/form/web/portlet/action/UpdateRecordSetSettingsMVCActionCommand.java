@@ -78,10 +78,12 @@ public class UpdateRecordSetSettingsMVCActionCommand
 		UnicodeProperties settingsProperties = new UnicodeProperties(true);
 
 		String redirectURL = ParamUtil.getString(actionRequest, "redirectURL");
+
+		settingsProperties.setProperty("redirectURL", redirectURL);
+
 		boolean requireCaptcha = ParamUtil.getBoolean(
 			actionRequest, "requireCaptcha");
 
-		settingsProperties.setProperty("redirectURL", redirectURL);
 		settingsProperties.setProperty(
 			"requireCaptcha", String.valueOf(requireCaptcha));
 

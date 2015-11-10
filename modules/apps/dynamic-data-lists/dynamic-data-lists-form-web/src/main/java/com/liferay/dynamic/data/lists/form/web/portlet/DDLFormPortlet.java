@@ -196,7 +196,7 @@ public class DDLFormPortlet extends MVCPortlet {
 
 		if (requireCaptcha) {
 			DDMFormField captchaDDMFormField = new DDMFormField(
-				_CAPTCHA_FIELD_NAME, "captcha");
+				_DDM_FORM_FIELD_NAME_CAPTCHA, "captcha");
 
 			captchaDDMFormField.setProperty(
 				"url", createCaptchaResourceURL(renderResponse));
@@ -217,10 +217,8 @@ public class DDLFormPortlet extends MVCPortlet {
 
 		DDMStructure ddmStructure = recordSet.getDDMStructure();
 
-		boolean requireCaptcha = isCaptchaRequired(recordSet);
-
 		DDMForm ddmForm = getDDMForm(
-			renderResponse, ddmStructure, requireCaptcha);
+			renderResponse, ddmStructure, isCaptchaRequired(recordSet));
 
 		DDMFormLayout ddmFormLayout = getDDMFormLayout(
 			ddmStructure, requireCaptcha);
@@ -240,7 +238,7 @@ public class DDLFormPortlet extends MVCPortlet {
 				ddmFormLayout);
 
 			DDMFormLayoutRow ddmFormLayoutRow =
-				createFullColumnDDMFormLayoutRow(_CAPTCHA_FIELD_NAME);
+				createFullColumnDDMFormLayoutRow(_DDM_FORM_FIELD_NAME_CAPTCHA);
 
 			lastDDMFormLayoutPage.addDDMFormLayoutRow(ddmFormLayoutRow);
 		}
@@ -316,7 +314,7 @@ public class DDLFormPortlet extends MVCPortlet {
 			DDMWebKeys.DYNAMIC_DATA_MAPPING_FORM_HTML, ddmFormHTML);
 	}
 
-	private static final String _CAPTCHA_FIELD_NAME = "_CAPTCHA_";
+	private static final String _DDM_FORM_FIELD_NAME_CAPTCHA = "_CAPTCHA_";
 
 	private static final Log _log = LogFactoryUtil.getLog(DDLFormPortlet.class);
 
