@@ -79,18 +79,11 @@ public class RTLCSSConverter {
 		for (
 			ICSSExpressionMember icssExpressionMember : icssExpressionMembers) {
 
-			if (icssExpressionMember instanceof CSSExpressionMemberTermURI) {
-				CSSExpressionMemberTermURI cssExpressionMemberTermURI =
-					(CSSExpressionMemberTermURI)icssExpressionMember;
+			if (icssExpressionMember instanceof CSSExpressionMemberFunction) {
+				CSSExpressionMemberFunction cssExpressionMemberFunction =
+					(CSSExpressionMemberFunction)icssExpressionMember;
 
-				String uri = cssExpressionMemberTermURI.getURIString();
-
-				int index = uri.lastIndexOf("/") + 1;
-
-				String fileName = reverse(uri.substring(index));
-
-				cssExpressionMemberTermURI.setURIString(
-					uri.substring(0, index) + fileName);
+				reverseValue(cssExpressionMemberFunction.getExpression());
 			}
 			else if (icssExpressionMember instanceof
 						CSSExpressionMemberTermSimple) {
@@ -102,12 +95,19 @@ public class RTLCSSConverter {
 					reverse(cssExpressionMemberTermSimple.getValue()));
 			}
 			else if (icssExpressionMember instanceof
-						CSSExpressionMemberFunction) {
+						CSSExpressionMemberTermURI) {
 
-				CSSExpressionMemberFunction cssExpressionMemberFunction =
-					(CSSExpressionMemberFunction)icssExpressionMember;
+				CSSExpressionMemberTermURI cssExpressionMemberTermURI =
+					(CSSExpressionMemberTermURI)icssExpressionMember;
 
-				reverseValue(cssExpressionMemberFunction.getExpression());
+				String uri = cssExpressionMemberTermURI.getURIString();
+
+				int index = uri.lastIndexOf("/") + 1;
+
+				String fileName = reverse(uri.substring(index));
+
+				cssExpressionMemberTermURI.setURIString(
+					uri.substring(0, index) + fileName);
 			}
 		}
 
