@@ -217,8 +217,10 @@ public class DDLFormPortlet extends MVCPortlet {
 
 		DDMStructure ddmStructure = recordSet.getDDMStructure();
 
+		boolean requireCaptcha = isCaptchaRequired(recordSet);
+
 		DDMForm ddmForm = getDDMForm(
-			renderResponse, ddmStructure, isCaptchaRequired(recordSet));
+			renderResponse, ddmStructure, requireCaptcha);
 
 		DDMFormLayout ddmFormLayout = getDDMFormLayout(
 			ddmStructure, requireCaptcha);
