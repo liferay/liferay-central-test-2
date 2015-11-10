@@ -117,28 +117,6 @@ public class StagingBarPortlet extends MVCPortlet {
 		addLayoutRevisionSessionMessages(actionRequest, actionResponse);
 	}
 
-	public void mergeLayoutSetBranch(
-			ActionRequest actionRequest, ActionResponse actionResponse)
-		throws Exception {
-
-		long layoutSetBranchId = ParamUtil.getLong(
-			actionRequest, "layoutSetBranchId");
-
-		long mergeLayoutSetBranchId = ParamUtil.getLong(
-			actionRequest, "mergeLayoutSetBranchId");
-
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			actionRequest);
-
-		_layoutSetBranchService.mergeLayoutSetBranch(
-			layoutSetBranchId, mergeLayoutSetBranchId, serviceContext);
-
-		SessionMessages.add(actionRequest, "sitePageVariationMerged");
-
-		ActionUtil.addLayoutBranchSessionMessages(
-			actionRequest, actionResponse);
-	}
-
 	public void selectLayoutSetBranch(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
