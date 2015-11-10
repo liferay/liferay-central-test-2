@@ -117,31 +117,6 @@ public class StagingBarPortlet extends MVCPortlet {
 		addLayoutRevisionSessionMessages(actionRequest, actionResponse);
 	}
 
-	public void deleteLayoutSetBranch(
-			ActionRequest actionRequest, ActionResponse actionResponse)
-		throws Exception {
-
-		long layoutSetBranchId = ParamUtil.getLong(
-			actionRequest, "layoutSetBranchId");
-
-		long currentLayoutBranchId = ParamUtil.getLong(
-			actionRequest, "currentLayoutBranchId");
-
-		if (layoutSetBranchId == currentLayoutBranchId) {
-			SessionMessages.add(
-				actionRequest,
-				PortalUtil.getPortletId(actionRequest) +
-					SessionMessages.KEY_SUFFIX_PORTLET_NOT_AJAXABLE);
-		}
-
-		_layoutSetBranchService.deleteLayoutSetBranch(layoutSetBranchId);
-
-		SessionMessages.add(actionRequest, "sitePageVariationDeleted");
-
-		ActionUtil.addLayoutBranchSessionMessages(
-			actionRequest, actionResponse);
-	}
-
 	public void mergeLayoutSetBranch(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
