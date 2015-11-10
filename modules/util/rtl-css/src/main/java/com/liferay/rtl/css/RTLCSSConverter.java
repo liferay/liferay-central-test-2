@@ -233,7 +233,7 @@ public class RTLCSSConverter {
 		for (
 			CSSDeclaration cssDeclaration : cssStyleRule.getAllDeclarations()) {
 
-			String property = stripAsterick(cssDeclaration.getProperty());
+			String property = stripAsterisk(cssDeclaration.getProperty());
 
 			if (_backgroundProperties.contains(property)) {
 				convertBackgroundProperties(cssDeclaration);
@@ -307,7 +307,7 @@ public class RTLCSSConverter {
 		if (property.startsWith("*")) {
 			asterisk = "*";
 
-			property = stripAsterick(property);
+			property = stripAsterisk(property);
 		}
 
 		property = reverse(property);
@@ -342,7 +342,7 @@ public class RTLCSSConverter {
 		}
 	}
 
-	protected String stripAsterick(String property) {
+	protected String stripAsterisk(String property) {
 		return property.replaceAll("\\**\\b", "");
 	}
 
