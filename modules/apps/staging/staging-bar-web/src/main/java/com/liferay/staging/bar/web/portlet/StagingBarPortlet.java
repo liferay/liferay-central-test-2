@@ -164,29 +164,6 @@ public class StagingBarPortlet extends MVCPortlet {
 			actionRequest, actionResponse);
 	}
 
-	public void selectLayoutBranch(
-			ActionRequest actionRequest, ActionResponse actionResponse)
-		throws IOException {
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		long layoutSetBranchId = ParamUtil.getLong(
-			actionRequest, "layoutSetBranchId");
-
-		long layoutBranchId = ParamUtil.getLong(
-			actionRequest, "layoutBranchId");
-
-		StagingUtil.setRecentLayoutBranchId(
-			request, layoutSetBranchId, themeDisplay.getPlid(), layoutBranchId);
-
-		ActionUtil.addLayoutBranchSessionMessages(
-			actionRequest, actionResponse);
-	}
-
 	public void selectLayoutSetBranch(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
