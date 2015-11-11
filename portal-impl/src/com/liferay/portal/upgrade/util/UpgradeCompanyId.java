@@ -88,14 +88,12 @@ public abstract class UpgradeCompanyId extends UpgradeProcess {
 			}
 		}
 
-		protected String getUpdateSQL(
+		protected String getSelectSQL(
 			String foreignTableName, String foreignColumnName) {
 
-			StringBundler sb = new StringBundler();
+			StringBundler sb = new StringBundler(10);
 
-			sb.append("update ");
-			sb.append(_tableName);
-			sb.append(" set companyId = (select companyId from ");
+			sb.append("select companyId from ");
 			sb.append(foreignTableName);
 			sb.append(" where ");
 			sb.append(foreignTableName);
@@ -105,6 +103,19 @@ public abstract class UpgradeCompanyId extends UpgradeProcess {
 			sb.append(_tableName);
 			sb.append(".");
 			sb.append(_columnName);
+
+			return sb.toString();
+		}
+
+		protected String getUpdateSQL(
+			String foreignTableName, String foreignColumnName) {
+
+			StringBundler sb = new StringBundler(5);
+
+			sb.append("update ");
+			sb.append(_tableName);
+			sb.append(" set companyId = (");
+			sb.append(getSelectSQL(foreignTableName, foreignColumnName));
 			sb.append(")");
 
 			return sb.toString();
