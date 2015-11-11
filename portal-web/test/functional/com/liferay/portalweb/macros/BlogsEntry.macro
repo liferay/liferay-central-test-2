@@ -1016,9 +1016,6 @@
 			<then>
 				<var name="displayDateHour" value="0${displayDateHour}" />
 			</then>
-			<else>
-				<var name="displayDateHour" value="${displayDateHour}" />
-			</else>
 		</if>
 
 		<var locator="TextInput#DISPLAY_DATE_MINUTE" name="displayDateMinute" />
@@ -1030,9 +1027,6 @@
 			<then>
 				<var name="displayDateMinuteFuture" value="0${displayDateMinuteFuture}" />
 			</then>
-			<else>
-				<var name="displayDateMinuteFuture" value="${displayDateMinuteFuture}" />
-			</else>
 		</if>
 
 		<var locator="TextInput#DISPLAY_DATE_MERIDIAN" name="displayDateMeridian" />
