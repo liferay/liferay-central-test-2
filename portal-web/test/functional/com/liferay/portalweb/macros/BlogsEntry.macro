@@ -1263,7 +1263,7 @@
 
 		<execute function="AssertElementPresent" locator1="Blogs#ENTRY_TABLE_CREATE_DATE" />
 		<execute function="AssertTextEquals" locator1="Blogs#ENTRY_TABLE_STATUS" value1="Approved" />
-		
+
 		<execute function="AssertClick" locator1="Blogs#ENTRY_TABLE_TITLE" value1="${entryTitle}" />
 
 		<execute function="AssertTextEquals" locator1="CPBlogsEntry#ENTRY_TITLE_HEADER" value1="${entryTitle}" />
