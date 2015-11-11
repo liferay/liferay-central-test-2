@@ -88,12 +88,12 @@ public class AddRecordMVCActionCommand extends BaseMVCActionCommand {
 			DDLFormEmailNotificationUtil.isEmailNotificationEnabled(recordSet);
 
 		if (emailNotificationEnabled) {
-			DDLFormEmailNotificationSenderUtil.sendEmailNotification(
+			_ddlFormEmailNotificationSender.sendEmailNotification(
 				actionRequest, ddlRecord);
 		}
 
-		String redirectURL = GetterUtil.getString(
-			recordSet.getSettingsProperty("redirectURL", StringPool.BLANK));
+		String redirectURL = recordSet.getSettingsProperty(
+			"redirectURL", StringPool.BLANK);
 
 		if (SessionErrors.isEmpty(actionRequest) &&
 			Validator.isNotNull(redirectURL)) {
@@ -116,7 +116,14 @@ public class AddRecordMVCActionCommand extends BaseMVCActionCommand {
 		return ddmStructure.getDDMForm();
 	}
 
-	@Reference(unbind = "-")
+	@Reference
+	protected void setDDLFormEmailNotificationSender(
+		DDLFormEmailNotificationSender ddlFormEmailNotificationSender) {
+
+		_ddlFormEmailNotificationSender = ddlFormEmailNotificationSender;
+	}
+
+	@Reference
 	protected void setDDLRecordService(DDLRecordService ddlRecordService) {
 		_ddlRecordService = ddlRecordService;
 	}
@@ -156,8 +163,9 @@ public class AddRecordMVCActionCommand extends BaseMVCActionCommand {
 		}
 	}
 
-	private volatile DDLRecordService _ddlRecordService;
-	private volatile DDLRecordSetService _ddlRecordSetService;
-	private volatile DDMFormValuesFactory _ddmFormValuesFactory;
+	private DDLFormEmailNotificationSender _ddlFormEmailNotificationSender;
+	private DDLRecordService _ddlRecordService;
+	private DDLRecordSetService _ddlRecordSetService;
+	private DDMFormValuesFactory _ddmFormValuesFactory;
 
 }
