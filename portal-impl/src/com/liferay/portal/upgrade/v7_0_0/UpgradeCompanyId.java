@@ -14,6 +14,8 @@
 
 package com.liferay.portal.upgrade.v7_0_0;
 
+import com.liferay.portal.kernel.util.StringBundler;
+
 import java.io.IOException;
 
 import java.sql.SQLException;
@@ -140,15 +142,19 @@ public class UpgradeCompanyId
 		}
 
 		@Override
-		public void update() throws IOException, SQLException {
-			String updateDLFileEntry =
-				"update SCLicense " +
-					"set companyId = (select pe.companyId " +
-					"from SCLicenses_SCProductEntries lpe, SCProductEntry pe " +
-					"where SCLicense.licenseId=lpe.licenseId and " +
-					"lpe.productEntryId=pe.productEntryId);";
+		protected String getSelectSQL(
+			String foreignTableName, String foreignColumnName) {
 
-			runSQL(updateDLFileEntry);
+			StringBundler sb = new StringBundler(6);
+			
+			sb.append("select SCProductEntry.companyId from ");
+			sb.append("SCLicenses_SCProductEntries, SCProductEntry where ");
+			sb.append("SCLicenses_SCProductEntries.licenseId = ");
+			sb.append("SCLicense.licenseId and ");
+			sb.append("SCLicenses_SCProductEntries.productEntryId = ");
+			sb.append("SCProductEntry.productEntryId");
+			
+			return sb.toString();
 		}
 
 	}
