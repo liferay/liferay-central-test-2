@@ -44,7 +44,7 @@ public class UpgradeCompanyId
 			new TableUpdater(
 				"Image", "imageId",
 				new String[][] {
-					{"DLFileEntry", "largeImageId"}, {"Company", "logoId"},
+					{"Company", "logoId"}, {"DLFileEntry", "largeImageId"},
 					{"Layout", "iconImageId"},
 					{"LayoutRevision", "iconImageId"},
 					{"LayoutSetBranch", "logoId"}, {"Organization_", "logoId"},
