@@ -183,12 +183,7 @@ public class EditServerMVCActionCommand extends BaseMVCActionCommand {
 			CleanUpPermissionsUtil.cleanUpAddToPagePermissions(actionRequest);
 		}
 		else if (cmd.startsWith("convertProcess.")) {
-			String convertProcessRedirect = convertProcess(
-				actionRequest, actionResponse, cmd);
-
-			if (Validator.isNotNull(convertProcessRedirect)) {
-				redirect = convertProcessRedirect;
-			}
+			redirect = convertProcess(actionRequest, actionResponse, cmd);
 		}
 		else if (cmd.equals("dlPreviews")) {
 			DLPreviewableProcessor.deleteFiles();
