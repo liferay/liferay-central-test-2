@@ -31,9 +31,9 @@ import org.openqa.selenium.internal.WrapsDriver;
 /**
  * @author Brian Wing Shun Chan
  */
-public class WebElementWrapper implements Locatable, WebElement, WrapsDriver {
+public class RetryWebElementImpl implements Locatable, WebElement, WrapsDriver {
 
-	public WebElementWrapper(String locator, WebElement webElement) {
+	public RetryWebElementImpl(String locator, WebElement webElement) {
 		_locator = locator;
 		_webElement = webElement;
 	}
