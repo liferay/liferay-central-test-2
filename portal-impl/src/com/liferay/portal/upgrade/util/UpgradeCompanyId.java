@@ -65,17 +65,17 @@ public abstract class UpgradeCompanyId extends UpgradeProcess {
 
 			_columnName = foreignColumnName;
 
-			_foreignTables = new String[][] {
+			_foreignNamesArray = new String[][] {
 				new String[] {foreignTableName, foreignColumnName
 			}};
 		}
 
 		public TableUpdater(
-			String tableName, String columnName, String[][] foreignTables) {
+			String tableName, String columnName, String[][] foreignNamesArray) {
 
 			_tableName = tableName;
 			_columnName = columnName;
-			_foreignTables = foreignTables;
+			_foreignNamesArray = foreignNamesArray;
 		}
 
 		public String getTableName() {
@@ -83,8 +83,8 @@ public abstract class UpgradeCompanyId extends UpgradeProcess {
 		}
 
 		public void update() throws IOException, SQLException {
-			for (String[] foreignTable : _foreignTables) {
-				runSQL(getUpdateSQL(foreignTable[0], foreignTable[1]));
+			for (String[] foreignNames : _foreignNamesArray) {
+				runSQL(getUpdateSQL(foreignNames[0], foreignNames[1]));
 			}
 		}
 
@@ -111,7 +111,7 @@ public abstract class UpgradeCompanyId extends UpgradeProcess {
 		}
 
 		private final String _columnName;
-		private final String[][] _foreignTables;
+		private final String[][] _foreignNamesArray;
 		private final String _tableName;
 
 	}
