@@ -17,7 +17,6 @@ package com.liferay.portal.upgrade.v7_0_0;
 import com.liferay.portal.kernel.util.StringBundler;
 
 import java.io.IOException;
-
 import java.sql.SQLException;
 
 /**
@@ -63,9 +62,7 @@ public class UpgradeCompanyId
 			new TableUpdater(
 				"PasswordPolicyRel", "PasswordPolicy", "passwordPolicyId"),
 			new TableUpdater("PasswordTracker", "User_", "userId"),
-			new TableUpdater(
-				"PortletPreferences", "portletId",
-				new String[][] {{"Layout", "plid"}, {"Portlet", "portletId"}}),
+			new PortletPreferencesTableUpdater("PortletPreferences"),
 			new TableUpdater(
 				"RatingsStats", "classPK",
 				new String[][] {
@@ -123,6 +120,58 @@ public class UpgradeCompanyId
 			selectSQL =
 				"select companyId from DLFolder where DLSyncEvent.type_ = " +
 					"'folder' and DLFolder.folderId = DLSyncEvent.typePK";
+
+			runSQL(getUpdateSQL(selectSQL));
+		}
+
+	}
+	
+	protected class PortletPreferencesTableUpdater extends TableUpdater {
+
+		public PortletPreferencesTableUpdater(String tableName) {
+			super(tableName, "", "");
+		}
+
+		@Override
+		public void update() throws IOException, SQLException {
+			
+			// Company
+
+			String selectSQL =
+				"select companyId from Company where Company.companyId = " +
+					"PortletPreferences.ownerId";
+
+			runSQL(getUpdateSQL(selectSQL));
+
+			// Group
+
+			selectSQL =
+				"select companyId from Group_ where Group_.organizationId = " +
+					"PortletPreferences.ownerId";
+
+			runSQL(getUpdateSQL(selectSQL));
+			
+			// Layout
+
+			selectSQL =
+				"select companyId from Layout where Layout.plid = " +
+					"PortletPreferences.ownerId";
+
+			runSQL(getUpdateSQL(selectSQL));
+			
+			// Organization
+
+			selectSQL =
+				"select companyId from Organization_ where " +
+					"Organization_.organizationId = PortletPreferences.ownerId";
+
+			runSQL(getUpdateSQL(selectSQL));
+
+			// User_
+
+			selectSQL =
+				"select companyId from User_ where User_.userId = " +
+					"PortletPreferences.ownerId";
 
 			runSQL(getUpdateSQL(selectSQL));
 		}
