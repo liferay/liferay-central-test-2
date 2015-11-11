@@ -30,8 +30,8 @@ boolean quickPublish = ParamUtil.getBoolean(request, "quickPublish");
 
 PortletURL renderURL = liferayPortletResponse.createRenderURL();
 
-renderURL.setParameter(Constants.CMD, cmd);
 renderURL.setParameter("mvcRenderCommandName", "publishLayouts");
+renderURL.setParameter(Constants.CMD, cmd);
 renderURL.setParameter("tabs2", "current-and-previous");
 renderURL.setParameter("closeRedirect", closeRedirect);
 renderURL.setParameter("groupId", String.valueOf(groupId));
