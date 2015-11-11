@@ -31,7 +31,10 @@
 
 <@aui["nav-bar"] cssClass="collapse-basic-search" markupView="lexicon">
 	<@aui["nav"] cssClass="navbar-nav">
-		<@aui["nav-item"] cssClass="active" label="settings" />
+		<@aui["nav-item"]
+			cssClass="active"
+			label="settings"
+		/>
 	</@>
 </@>
 
