@@ -110,27 +110,21 @@ public class UpgradeCompanyId
 		@Override
 		public void update() throws IOException, SQLException {
 
-			// DLFileEntries
+			// DLFileEntry
 
-			String updateDLFileEntry =
-				"update DLSyncEvent " +
-					"set companyId = (select dlfe.companyId " +
-						"from DLFileEntry dlfe " +
-						"where DLSyncEvent.type_='file' and " +
-						"dlfe.fileEntryId = DLSyncEvent.typePK);";
+			String selectSQL =
+				"select companyId from DLFileEntry where DLSyncEvent.type_ = " +
+					"'file' and DLFileEntry.fileEntryId = DLSyncEvent.typePK";
 
-			runSQL(updateDLFileEntry);
+			runSQL(getUpdateSQL(selectSQL));
+			
+			// DLFolder
 
-			// DLFolders
+			selectSQL =
+				"select companyId from DLFolder where DLSyncEvent.type_ = " +
+					"'folder' and DLFolder.folderId = DLSyncEvent.typePK";
 
-			String updateDLFolder =
-				"update DLSyncEvent " +
-					"set companyId = (select dlf.companyId " +
-					"from DLFolder dlf " +
-					"where DLSyncEvent.type_='folder' and " +
-					"dlf.folderId = DLSyncEvent.typePK);";
-
-			runSQL(updateDLFolder);
+			runSQL(getUpdateSQL(selectSQL));
 		}
 
 	}
