@@ -858,6 +858,13 @@
 		<var name="entryContent" value="Blogs Entry Content" />
 		<var name="entryTitle" value="Blogs Entry Title" />
 
+		<var method="StringUtil#replace('${entryTitle}', ' ', '-')" name="entryTitleURL" />
+		<var method="StringUtil#lowerCase('${entryTitleURL}')" name="entryTitleURL" />
+		<var method="StringUtil#replace('${pageName}', ' ', '-')" name="pageNameURL" />
+		<var method="StringUtil#lowerCase('${pageNameURL}')" name="pageNameURL" />
+
+		<var name="friendlyURL" value="http://localhost:8080/web/guest/${pageNameURL}/-/blogs/${entryTitleURL}" />
+		
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="${pageName}" />
 		</execute>
@@ -891,6 +898,9 @@
 		<execute macro="Portlet#addPG">
 			<var name="portletName" value="Recent Bloggers" />
 		</execute>
+
+		<var name="entryAuthor" value="Test Test" />
+		<var name="key_entryAuthor" value="${entryAuthor}" />
 
 		<execute function="AssertClick" locator1="Blogs#RECENT_BLOGGER_USER_NAME" value1="${entryAuthor}" />
 
