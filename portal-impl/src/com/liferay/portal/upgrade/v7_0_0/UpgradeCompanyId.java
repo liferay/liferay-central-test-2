@@ -68,17 +68,13 @@ public class UpgradeCompanyId
 				"RatingsStats", "classPK",
 				new String[][] {
 					{"BookmarksEntry", "entryId"},
-					{"BookmarksFolder", "folderId"},
-					{"BlogsEntry", "entryId"},
+					{"BookmarksFolder", "folderId"}, {"BlogsEntry", "entryId"},
 					{"CalendarBooking", "calendarBookingId"},
-					{"DDLRecord", "recordId"},
-					{"DLFileEntry", "fileEntryId"},
-					{"DLFolder", "folderId"},
-					{"JournalArticle", "articleId"},
+					{"DDLRecord", "recordId"}, {"DLFileEntry", "fileEntryId"},
+					{"DLFolder", "folderId"}, {"JournalArticle", "articleId"},
 					{"JournalFolder", "folderId"},
 					{"MBDiscussion", "discussionId"},
-					{"MBMessage", "messageId"},
-					{"WikiPage", "pageId"}
+					{"MBMessage", "messageId"}, {"WikiPage", "pageId"}
 				}),
 			new TableUpdater(
 				"ResourceBlockPermission", "ResourceBlock", "resourceBlockId"),
