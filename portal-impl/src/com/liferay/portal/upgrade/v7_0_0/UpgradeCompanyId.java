@@ -17,6 +17,7 @@ package com.liferay.portal.upgrade.v7_0_0;
 import com.liferay.portal.kernel.util.StringBundler;
 
 import java.io.IOException;
+
 import java.sql.SQLException;
 
 /**
@@ -114,7 +115,7 @@ public class UpgradeCompanyId
 					"'file' and DLFileEntry.fileEntryId = DLSyncEvent.typePK";
 
 			runSQL(getUpdateSQL(selectSQL));
-			
+
 			// DLFolder
 
 			selectSQL =
@@ -125,7 +126,7 @@ public class UpgradeCompanyId
 		}
 
 	}
-	
+
 	protected class PortletPreferencesTableUpdater extends TableUpdater {
 
 		public PortletPreferencesTableUpdater(String tableName) {
@@ -134,7 +135,7 @@ public class UpgradeCompanyId
 
 		@Override
 		public void update() throws IOException, SQLException {
-			
+
 			// Company
 
 			String selectSQL =
@@ -150,7 +151,7 @@ public class UpgradeCompanyId
 					"PortletPreferences.ownerId";
 
 			runSQL(getUpdateSQL(selectSQL));
-			
+
 			// Layout
 
 			selectSQL =
@@ -158,7 +159,7 @@ public class UpgradeCompanyId
 					"PortletPreferences.ownerId";
 
 			runSQL(getUpdateSQL(selectSQL));
-			
+
 			// Organization
 
 			selectSQL =
@@ -189,14 +190,14 @@ public class UpgradeCompanyId
 			String foreignTableName, String foreignColumnName) {
 
 			StringBundler sb = new StringBundler(6);
-			
+
 			sb.append("select SCProductEntry.companyId from ");
 			sb.append("SCLicenses_SCProductEntries, SCProductEntry where ");
 			sb.append("SCLicenses_SCProductEntries.licenseId = ");
 			sb.append("SCLicense.licenseId and ");
 			sb.append("SCLicenses_SCProductEntries.productEntryId = ");
 			sb.append("SCProductEntry.productEntryId");
-			
+
 			return sb.toString();
 		}
 
