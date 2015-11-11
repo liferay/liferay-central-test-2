@@ -299,7 +299,7 @@ public abstract class BaseStagedModelDataHandler<T extends StagedModel>
 		catch (Exception e) {
 			if (!StringUtil.equalsIgnoreCase(
 					referenceElement.attributeValue("type"),
-					portletDataContext.REFERENCE_TYPE_DEPENDENCY_DISPOSABLE)) {
+					PortletDataContext.REFERENCE_TYPE_DEPENDENCY_DISPOSABLE)) {
 
 				throw e;
 			}
