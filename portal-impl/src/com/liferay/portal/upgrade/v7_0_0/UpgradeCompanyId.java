@@ -37,7 +37,7 @@ public class UpgradeCompanyId
 				"DLFileEntryMetadata", "DLFileEntry", "fileEntryId"),
 			new TableUpdater(
 				"DLFileEntryTypes_DLFolders", "DLFolder", "folderId"),
-			new DLSyncEventTableUpdater("DLSyncEvent", "", ""),
+			new DLSyncEventTableUpdater("DLSyncEvent"),
 			new TableUpdater("Groups_Orgs", "Group_", "groupId"),
 			new TableUpdater("Groups_Roles", "Group_", "groupId"),
 			new TableUpdater("Groups_UserGroups", "Group_", "groupId"),
@@ -81,7 +81,7 @@ public class UpgradeCompanyId
 			new TableUpdater(
 				"SCFrameworkVersi_SCProductVers", "SCFrameworkVersion",
 				"frameworkVersionId"),
-			new SCLicenseTableUpdater("SCLicense", "", ""),
+			new SCLicenseTableUpdater("SCLicense"),
 			new TableUpdater(
 				"SCLicenses_SCProductEntries", "SCProductEntry",
 				"productEntryId"),
@@ -101,11 +101,8 @@ public class UpgradeCompanyId
 
 	protected class DLSyncEventTableUpdater extends TableUpdater {
 
-		public DLSyncEventTableUpdater(
-			String tableName, String foreignTableName,
-			String foreignColumnName) {
-
-			super(tableName, foreignTableName, foreignColumnName);
+		public DLSyncEventTableUpdater(String tableName) {
+			super(tableName, "", "");
 		}
 
 		@Override
@@ -138,11 +135,8 @@ public class UpgradeCompanyId
 
 	protected class SCLicenseTableUpdater extends TableUpdater {
 
-		public SCLicenseTableUpdater(
-			String tableName, String foreignTableName,
-			String foreignColumnName) {
-
-			super(tableName, foreignTableName, foreignColumnName);
+		public SCLicenseTableUpdater(String tableName) {
+			super(tableName, "", "");
 		}
 
 		@Override
