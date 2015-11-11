@@ -267,7 +267,6 @@ public class StagedAssetLinkStagedModelDataHandler
 
 			assetEntry1DynamicQuery.add(groupIdCriterion);
 			assetEntry2DynamicQuery.add(groupIdCriterion);
-			dynamicQuery.add(groupIdCriterion);
 		}
 
 		return dynamicQuery;
