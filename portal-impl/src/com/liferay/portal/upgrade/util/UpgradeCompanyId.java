@@ -74,9 +74,7 @@ public abstract class UpgradeCompanyId extends UpgradeProcess {
 			String tableName, String columnName, String[][] foreignTables) {
 
 			_tableName = tableName;
-
 			_columnName = columnName;
-
 			_foreignTables = foreignTables;
 		}
 
