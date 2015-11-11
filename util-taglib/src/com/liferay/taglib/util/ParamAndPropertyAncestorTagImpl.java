@@ -166,8 +166,7 @@ public class ParamAndPropertyAncestorTagImpl
 	public void setCopyCurrentRenderParameters(
 		boolean copyCurrentRenderParameters) {
 
-		_copyCurrentRenderParameters = Boolean.valueOf(
-			copyCurrentRenderParameters);
+		_copyCurrentRenderParameters = copyCurrentRenderParameters;
 	}
 
 	@Override
