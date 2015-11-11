@@ -44,15 +44,16 @@ public class UpgradeCompanyId
 			new TableUpdater(
 				"Image", "imageId",
 				new String[][] {
-					{"Company", "logoId"}, {"DLFileEntry", "largeImageId"},
+					{"BlogsEntry", "smallImageId"}, {"Company", "logoId"},
+					{"DDMTemplate", "smallImageId"},
+					{"DLFileEntry", "largeImageId"},
+					{"JournalArticle", "smallImageId"},
 					{"Layout", "iconImageId"},
 					{"LayoutRevision", "iconImageId"},
 					{"LayoutSetBranch", "logoId"}, {"Organization_", "logoId"},
-					{"User_", "portraitId"}, {"BlogsEntry", "smallImageId"},
-					{"JournalArticle", "smallImageId"},
-					{"DDMTemplate", "smallImageId"},
+					{"SCProductScreenshot", "fullImageId"},
 					{"SCProductScreenshot", "thumbnailId"},
-					{"SCProductScreenshot", "fullImageId"}
+					{"User_", "portraitId"}
 				}),
 			new TableUpdater("MBStatsUser", "Group_", "groupId"),
 			new TableUpdater("OrgGroupRole", "Organization_", "organizationId"),
