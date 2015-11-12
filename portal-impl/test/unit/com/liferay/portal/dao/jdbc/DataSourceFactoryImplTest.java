@@ -100,16 +100,16 @@ public class DataSourceFactoryImplTest {
 
 	@AfterClass
 	public static void tearDownClass() throws Exception {
-		String hikaricpJarFileURL = System.clearProperty(_HIKARICP_JAR_URL);
+		String hikaricpJarURL = System.clearProperty(_HIKARICP_JAR_URL);
 
-		if (hikaricpJarFileURL != null) {
+		if (hikaricpJarURL != null) {
 			PropsUtil.setProps(new PropsImpl());
 
 			String jarName = PropsUtil.get(
 				PropsKeys.SETUP_LIFERAY_POOL_PROVIDER_JAR_NAME,
 				new Filter("hikaricp"));
 
-			URL url = new URL(hikaricpJarFileURL);
+			URL url = new URL(hikaricpJarURL);
 
 			Files.move(
 				Paths.get(url.toURI()), Paths.get("lib/portal", jarName),
@@ -204,7 +204,7 @@ public class DataSourceFactoryImplTest {
 			Connection connection = dataSource.getConnection();
 
 			PreparedStatement preparedStatement = connection.prepareStatement(
-				_CONNECTION_TEST_QUERY);
+				"SELECT 1 FROM INFORMATION_SCHEMA.SYSTEM_USERS");
 
 			preparedStatement.execute();
 		}
@@ -233,9 +233,6 @@ public class DataSourceFactoryImplTest {
 	public final NewEnvTestRule newEnvTestRule = NewEnvTestRule.INSTANCE;
 
 	private static final int _CHECKOUT_COUNT = 5;
-
-	private static final String _CONNECTION_TEST_QUERY =
-		"SELECT 1 FROM INFORMATION_SCHEMA.SYSTEM_USERS";
 
 	private static final String _HIKARICP_JAR_URL = "HIKARICP_JAR_URL";
 
