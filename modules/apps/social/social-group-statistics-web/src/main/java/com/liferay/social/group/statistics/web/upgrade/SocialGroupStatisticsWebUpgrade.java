@@ -33,6 +33,7 @@ public class SocialGroupStatisticsWebUpgrade implements UpgradeStepRegistrator {
 		registry.register(
 			"com.liferay.social.group.statistics.web", "0.0.0", "1.0.0",
 			new DummyUpgradeStep());
+
 		registry.register(
 			"com.liferay.social.group.statistics.web", "0.0.1", "1.0.0",
 			new UpgradePortletId());

@@ -32,6 +32,10 @@ public class SocialActivitiesWebUpgrade implements UpgradeStepRegistrator {
 
 	@Override
 	public void register(Registry registry) {
+		registry.register(
+			"com.liferay.social.activities.web", "0.0.0", "1.0.0",
+			new DummyUpgradeStep());
+
 		UpgradePortletId upgradePortletId = new UpgradePortletId() {
 
 			@Override
@@ -45,9 +49,6 @@ public class SocialActivitiesWebUpgrade implements UpgradeStepRegistrator {
 
 		};
 
-		registry.register(
-			"com.liferay.social.activities.web", "0.0.0", "1.0.0",
-			new DummyUpgradeStep());
 		registry.register(
 			"com.liferay.social.activities.web", "0.0.1", "1.0.0",
 			upgradePortletId);
