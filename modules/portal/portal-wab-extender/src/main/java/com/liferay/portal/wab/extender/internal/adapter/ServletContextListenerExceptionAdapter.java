@@ -46,15 +46,17 @@ public class ServletContextListenerExceptionAdapter
 		final ServletContextEvent servletContextEvent) {
 
 		try {
-			TCCLUtil.wrapTCCL(new Callable<Void>() {
-				@Override
-				public Void call() throws Exception {
-					_servletContextListener.contextInitialized(
-						servletContextEvent);
+			TCCLUtil.wrapTCCL(
+				new Callable<Void>() {
 
-					return null;
-				}
-			});
+					@Override
+					public Void call() throws Exception {
+						_servletContextListener.contextInitialized(
+							servletContextEvent);
+
+						return null;
+					}
+				});
 		}
 		catch (Exception e) {
 			_exception = e;
