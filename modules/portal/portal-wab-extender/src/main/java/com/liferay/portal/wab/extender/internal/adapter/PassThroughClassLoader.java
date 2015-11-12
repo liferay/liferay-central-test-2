@@ -88,8 +88,8 @@ public class PassThroughClassLoader extends ClassLoader {
 	}
 
 	@Override
-	protected String findLibrary(String libname) {
-		return super.findLibrary(libname);
+	protected String findLibrary(String name) {
+		return super.findLibrary(name);
 	}
 
 	@Override
