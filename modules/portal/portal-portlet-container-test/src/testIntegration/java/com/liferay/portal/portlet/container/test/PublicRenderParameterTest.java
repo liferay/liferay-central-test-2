@@ -68,7 +68,7 @@ public class PublicRenderParameterTest extends BasePortletContainerTestCase {
 			new LiferayIntegrationTestRule(), TransactionalTestRule.INSTANCE);
 
 	@Test
-	public void testWithCoreLayoutTypeController() throws Exception {
+	public void testWithPortalLayoutTypeController() throws Exception {
 		final String prpName = "categoryId";
 		final String prpValue = RandomTestUtil.randomString(
 			FriendlyURLRandomizerBumper.INSTANCE,
@@ -166,16 +166,16 @@ public class PublicRenderParameterTest extends BasePortletContainerTestCase {
 
 		Assert.assertFalse(portlet.isUndeployedPortlet());
 
-		String layoutName = RandomTestUtil.randomString(
+		String name = RandomTestUtil.randomString(
 			FriendlyURLRandomizerBumper.INSTANCE,
 			NumericStringRandomizerBumper.INSTANCE,
 			UniqueStringRandomizerBumper.INSTANCE);
 
 		layout = LayoutLocalServiceUtil.addLayout(
 			TestPropsValues.getUserId(), group.getGroupId(), false,
-			LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, layoutName, null, null,
+			LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, name, null, null,
 			"full_page_application", false,
-			StringPool.SLASH + FriendlyURLNormalizerUtil.normalize(layoutName),
+			StringPool.SLASH + FriendlyURLNormalizerUtil.normalize(name),
 			ServiceContextTestUtil.getServiceContext());
 
 		HttpServletRequest httpServletRequest = getHttpServletRequest();
