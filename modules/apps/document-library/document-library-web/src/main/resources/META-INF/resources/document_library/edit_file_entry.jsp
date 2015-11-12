@@ -418,7 +418,7 @@ if (portletTitleBasedNavigation) {
 
 				<c:if test="<%= (fileEntry != null) && !checkedOut %>">
 					<aui:input
-						label="i-want-to-customize-the-version-number-increment-and-describe-my-changes"
+						label="customize-the-version-number-increment-and-describe-my-changes"
 						name="updateVersionDetails"
 						type="checkbox"
 					/>
