@@ -98,6 +98,7 @@ public class ItemSelectorImpl implements ItemSelector {
 
 		String itemSelectedEventName = getValue(
 			parameters, PARAMETER_ITEM_SELECTED_EVENT_NAME);
+		String selectedTab = getValue(parameters, PARAMETER_SELECTED_TAB);
 
 		List<ItemSelectorViewRenderer> itemSelectorViewRenderers =
 			new ArrayList<>();
@@ -108,8 +109,6 @@ public class ItemSelectorImpl implements ItemSelector {
 		ItemSelectorCriterion[] itemSelectorCriteriaArray =
 			itemSelectorCriteria.toArray(
 				new ItemSelectorCriterion[itemSelectorCriteria.size()]);
-
-		String selectedTab = getValue(parameters, PARAMETER_SELECTED_TAB);
 
 		for (int i = 0; i < itemSelectorCriteria.size(); i++) {
 			ItemSelectorCriterion itemSelectorCriterion =
@@ -137,8 +136,8 @@ public class ItemSelectorImpl implements ItemSelector {
 				PortletURL portletURL = getPortletURL(
 					requestBackedPortletURLFactory,
 					itemSelectorView.getTitle(themeDisplay.getLocale()),
-					selectedTab, itemSelectedEventName, themeDisplay,
-					itemSelectorCriteriaArray);
+					selectedTab, itemSelectedEventName,
+					itemSelectorCriteriaArray, themeDisplay);
 
 				itemSelectorViewRenderers.add(
 					new ItemSelectorViewRendererImpl(
@@ -268,8 +267,8 @@ public class ItemSelectorImpl implements ItemSelector {
 	protected PortletURL getPortletURL(
 		RequestBackedPortletURLFactory requestBackedPortletURLFactory,
 		String title, String selectedTab, String itemSelectedEventName,
-		ThemeDisplay themeDisplay,
-		ItemSelectorCriterion[] itemSelectorCriteriaArray) {
+		ItemSelectorCriterion[] itemSelectorCriteriaArray,
+		ThemeDisplay themeDisplay) {
 
 		PortletURL portletURL = null;
 

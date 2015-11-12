@@ -1706,17 +1706,17 @@ public class PortalImpl implements Portal {
 		HttpServletRequest request, Group group, String portletId,
 		long refererGroupId, long refererPlid, String lifecycle) {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
+		RequestBackedPortletURLFactory requestBackedPortletURLFactory =
+			RequestBackedPortletURLFactoryUtil.create(request);
 
 		if (group == null) {
+			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
 			group = getControlPanelDisplayGroup(
 				themeDisplay.getCompanyId(), themeDisplay.getScopeGroupId(),
 				themeDisplay.getDoAsGroupId(), portletId);
 		}
-
-		RequestBackedPortletURLFactory requestBackedPortletURLFactory =
-			RequestBackedPortletURLFactoryUtil.create(request);
 
 		return requestBackedPortletURLFactory.createControlPanelPortletURL(
 			portletId, group, refererGroupId, refererPlid, lifecycle);
@@ -1735,17 +1735,18 @@ public class PortalImpl implements Portal {
 		PortletRequest portletRequest, Group group, String portletId,
 		long refererGroupId, long refererPlid, String lifecycle) {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
+		RequestBackedPortletURLFactory requestBackedPortletURLFactory =
+			RequestBackedPortletURLFactoryUtil.create(portletRequest);
 
 		if (group == null) {
+			ThemeDisplay themeDisplay =
+				(ThemeDisplay)portletRequest.getAttribute(
+					WebKeys.THEME_DISPLAY);
+
 			group = getControlPanelDisplayGroup(
 				themeDisplay.getCompanyId(), themeDisplay.getScopeGroupId(),
 				themeDisplay.getDoAsGroupId(), portletId);
 		}
-
-		RequestBackedPortletURLFactory requestBackedPortletURLFactory =
-			RequestBackedPortletURLFactoryUtil.create(portletRequest);
 
 		return requestBackedPortletURLFactory.createControlPanelPortletURL(
 			portletId, group, refererGroupId, refererPlid, lifecycle);

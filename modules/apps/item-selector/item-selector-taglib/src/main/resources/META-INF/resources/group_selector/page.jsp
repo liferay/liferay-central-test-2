@@ -25,9 +25,9 @@ RequestBackedPortletURLFactory requestBackedPortletURLFactory = RequestBackedPor
 
 String itemSelectedEventName = ParamUtil.getString(request, "itemSelectedEventName");
 
-List<ItemSelectorCriterion> criteria = itemSelector.getItemSelectorCriteria(liferayPortletRequest.getParameterMap());
+List<ItemSelectorCriterion> itemSelectorCriteria = itemSelector.getItemSelectorCriteria(liferayPortletRequest.getParameterMap());
 
-PortletURL iteratorURL = itemSelector.getItemSelectorURL(requestBackedPortletURLFactory, itemSelectedEventName, criteria.toArray(new ItemSelectorCriterion[criteria.size()]));
+PortletURL iteratorURL = itemSelector.getItemSelectorURL(requestBackedPortletURLFactory, itemSelectedEventName, itemSelectorCriteria.toArray(new ItemSelectorCriterion[itemSelectorCriteria.size()]));
 
 iteratorURL.setParameter("selectedTab", ParamUtil.getString(request, "selectedTab"));
 iteratorURL.setParameter("showGroupSelector", Boolean.TRUE.toString());
@@ -57,7 +57,7 @@ SearchContainer searchContainer = new GroupSearch(liferayPortletRequest, iterato
 
 			long refererGroupId = (themeDisplay.getRefererGroupId() != 0) ? themeDisplay.getRefererGroupId() : themeDisplay.getScopeGroupId();
 
-			PortletURL viewGroupURL = itemSelector.getItemSelectorURL(requestBackedPortletURLFactory, curGroup, refererGroupId, itemSelectedEventName, criteria.toArray(new ItemSelectorCriterion[criteria.size()]));
+			PortletURL viewGroupURL = itemSelector.getItemSelectorURL(requestBackedPortletURLFactory, curGroup, refererGroupId, itemSelectedEventName, itemSelectorCriteria.toArray(new ItemSelectorCriterion[itemSelectorCriteria.size()]));
 
 			viewGroupURL.setParameter("selectedTab", ParamUtil.getString(request, "selectedTab"));
 			%>
