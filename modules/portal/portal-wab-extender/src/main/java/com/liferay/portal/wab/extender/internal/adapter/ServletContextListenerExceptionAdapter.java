@@ -56,6 +56,7 @@ public class ServletContextListenerExceptionAdapter
 
 						return null;
 					}
+
 				});
 		}
 		catch (Exception e) {
