@@ -182,10 +182,10 @@ if (portletTitleBasedNavigation) {
 		<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 		<aui:input name="uploadProgressId" type="hidden" value="<%= uploadProgressId %>" />
 		<aui:input name="repositoryId" type="hidden" value="<%= repositoryId %>" />
-		<aui:input name="changeLog" type="hidden" />
 		<aui:input name="folderId" type="hidden" value="<%= folderId %>" />
 		<aui:input name="fileEntryId" type="hidden" value="<%= fileEntryId %>" />
 		<aui:input name="majorVersion" type="hidden" />
+		<aui:input name="changeLog" type="hidden" />
 		<aui:input name="workflowAction" type="hidden" value="<%= String.valueOf(WorkflowConstants.ACTION_PUBLISH) %>" />
 
 		<liferay-ui:error exception="<%= AntivirusScannerException.class %>">
@@ -590,11 +590,13 @@ if (portletTitleBasedNavigation) {
 				'<%= UnicodeLanguageUtil.get(request, "describe-your-changes") %>',
 				['<portlet:namespace />versionDetailsMajorVersion', '<portlet:namespace />versionDetailsChangeLog'],
 				function(event, nodes) {
-					var changeLogNode = nodes[1];
 					var majorVersionNode = nodes[0];
 
-					form.fm('changeLog').val(changeLogNode.val());
 					form.fm('majorVersion').val(majorVersionNode.attr('checked'));
+
+					var changeLogNode = nodes[1];
+
+					form.fm('changeLog').val(changeLogNode.val());
 
 					submitForm(form);
 				}
