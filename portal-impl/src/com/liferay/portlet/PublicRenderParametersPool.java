@@ -36,25 +36,24 @@ import javax.servlet.http.HttpSession;
 public class PublicRenderParametersPool {
 
 	public static PublicRenderParameters get(
-		HttpServletRequest request, long plid, boolean isWarFile) {
+		HttpServletRequest request, long plid, boolean warFile) {
 
-		Map<String, String[]> threadLocalMap = null;
+		Map<String, String[]> map1 = get(request, plid);
+		Map<String, String[]> map2 = null;
 
-		Map<String, String[]> map = get(request, plid);
-
-		if (isWarFile) {
-			if (_publicRenderParametersThreadLocal.get() == null) {
-				_publicRenderParametersThreadLocal.set(
+		if (warFile) {
+			if (_publicRenderParametersMap.get() == null) {
+				_publicRenderParametersMap.set(
 					new HashMap<String, String[]>());
 			}
 			else {
-				map.putAll(_publicRenderParametersThreadLocal.get());
+				map1.putAll(_publicRenderParametersMap.get());
 			}
 
-			threadLocalMap = _publicRenderParametersThreadLocal.get();
+			map2 = _publicRenderParametersMap.get();
 		}
 
-		return new PublicRenderParameters(map, threadLocalMap);
+		return new PublicRenderParameters(map1, map2);
 	}
 
 	protected static Map<String, String[]> get(
@@ -112,8 +111,8 @@ public class PublicRenderParametersPool {
 		PublicRenderParametersPool.class);
 
 	private static final ThreadLocal<Map<String, String[]>>
-		_publicRenderParametersThreadLocal = new AutoResetThreadLocal<>(
+		_publicRenderParametersMap = new AutoResetThreadLocal<>(
 			PublicRenderParametersPool.class +
-				"._publicRenderParametersThreadLocal");
+				"._publicRenderParametersMap");
 
 }
