@@ -14,6 +14,8 @@
 
 package com.liferay.gradle.plugins.xsd.builder;
 
+import com.liferay.gradle.util.GradleUtil;
+
 import java.io.File;
 
 import java.util.HashMap;
@@ -38,9 +40,7 @@ public class BuildXSDTask extends Zip {
 
 	@InputDirectory
 	public File getInputDir() {
-		Project project = getProject();
-
-		return project.file(_inputDir);
+		return GradleUtil.toFile(getProject(), _inputDir);
 	}
 
 	@InputFiles
