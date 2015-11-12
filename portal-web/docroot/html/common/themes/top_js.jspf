@@ -276,7 +276,7 @@
 			getDateFormat: function() {
 
 				<%
-				String mask = "%m/%d/%Y";
+				String dateFormatPattern = "%m/%d/%Y";
 
 				DateFormat shortDateFormat = DateFormat.getDateInstance(DateFormat.SHORT, locale);
 
@@ -285,14 +285,14 @@
 				String shortDateFormatSimpleDateFormatPattern = shortDateFormatSimpleDateFormat.toPattern();
 
 				if (shortDateFormatSimpleDateFormatPattern.indexOf("y") == 0) {
-					mask = "%Y/%m/%d";
+					dateFormatPattern = "%Y/%m/%d";
 				}
 				else if (shortDateFormatSimpleDateFormatPattern.indexOf("d") == 0) {
-					mask = "%d/%m/%Y";
+					dateFormatPattern = "%d/%m/%Y";
 				}
 				%>
 
-				return '<%= mask %>';
+				return '<%= dateFormatPattern %>';
 			},
 			getEditorCKEditorPath: function() {
 				return '<%= PortalWebResourcesUtil.getContextPath(PortalWebResourceConstants.RESOURCE_TYPE_EDITOR_CKEDITOR) %>';
