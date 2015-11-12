@@ -20,6 +20,8 @@ import com.liferay.gradle.util.StringUtil;
 
 import java.io.File;
 
+import java.util.concurrent.Callable;
+
 import org.gradle.api.Action;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
@@ -28,6 +30,9 @@ import org.gradle.api.artifacts.Configuration;
 import org.gradle.api.file.FileCollection;
 import org.gradle.api.plugins.BasePlugin;
 import org.gradle.api.plugins.JavaPlugin;
+import org.gradle.api.plugins.PluginContainer;
+import org.gradle.api.plugins.WarPlugin;
+import org.gradle.api.plugins.WarPluginConvention;
 import org.gradle.api.tasks.JavaExec;
 import org.gradle.api.tasks.TaskContainer;
 import org.gradle.api.tasks.TaskInputs;
@@ -92,7 +97,7 @@ public class XSDBuilderPlugin implements Plugin<Project> {
 	}
 
 	protected BuildXSDTask addTaskBuildXSD(Project project) {
-		BuildXSDTask buildXSDTask = GradleUtil.addTask(
+		final BuildXSDTask buildXSDTask = GradleUtil.addTask(
 			project, BUILD_XSD_TASK_NAME, BuildXSDTask.class);
 
 		buildXSDTask.setArchiveName(
@@ -101,6 +106,19 @@ public class XSDBuilderPlugin implements Plugin<Project> {
 		buildXSDTask.setDestinationDir(project.file("lib"));
 		buildXSDTask.setGroup(BasePlugin.BUILD_GROUP);
 		buildXSDTask.setInputDir("xsd");
+
+		PluginContainer pluginContainer = project.getPlugins();
+
+		pluginContainer.withType(
+			WarPlugin.class,
+			new Action<WarPlugin>() {
+
+				@Override
+				public void execute(WarPlugin warPlugin) {
+					configureTaskBuildXSDForWarPlugin(buildXSDTask);
+				}
+
+			});
 
 		return buildXSDTask;
 	}
@@ -202,6 +220,39 @@ public class XSDBuilderPlugin implements Plugin<Project> {
 				}
 
 			});
+	}
+
+	protected void configureTaskBuildXSDForWarPlugin(
+		final BuildXSDTask buildXSDTask) {
+
+		buildXSDTask.setDestinationDir(
+			new Callable<File>() {
+
+				@Override
+				public File call() throws Exception {
+					return new File(
+						getWebAppDir(buildXSDTask.getProject()), "WEB-INF/lib");
+				}
+
+			});
+
+		buildXSDTask.setInputDir(
+			new Callable<File>() {
+
+				@Override
+				public File call() throws Exception {
+					return new File(
+						getWebAppDir(buildXSDTask.getProject()), "WEB-INF/xsd");
+				}
+
+			});
+	}
+
+	protected File getWebAppDir(Project project) {
+		WarPluginConvention warPluginConvention = GradleUtil.getConvention(
+			project, WarPluginConvention.class);
+
+		return warPluginConvention.getWebAppDir();
 	}
 
 }
