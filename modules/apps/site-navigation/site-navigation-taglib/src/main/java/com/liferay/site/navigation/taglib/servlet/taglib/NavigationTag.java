@@ -167,32 +167,38 @@ public class NavigationTag extends IncludeTag {
 	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute(
-			"liferay-ui:navigation:displayStyle", getDisplayStyle());
+			"liferay-site-navigation:navigation:displayStyle",
+			getDisplayStyle());
 		request.setAttribute(
-			"liferay-ui:navigation:displayStyleGroupId",
+			"liferay-site-navigation:navigation:displayStyleGroupId",
 			String.valueOf(getDisplayStyleGroupId()));
 		request.setAttribute(
-			"liferay-ui:navigation:includedLayouts", _includedLayouts);
+			"liferay-site-navigation:navigation:includedLayouts",
+			_includedLayouts);
 
 		try {
 			List<NavItem> branchNavItems = getBranchNavItems(request);
 
 			request.setAttribute(
-				"liferay-ui:navigation:branchNavItems", branchNavItems);
+				"liferay-site-navigation:navigation:branchNavItems",
+				branchNavItems);
 			request.setAttribute(
-				"liferay-ui:navigation:navItems", getNavItems(branchNavItems));
+				"liferay-site-navigation:navigation:navItems",
+				getNavItems(branchNavItems));
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}
 
 		request.setAttribute(
-			"liferay-ui:navigation:preview", String.valueOf(_preview));
+			"liferay-site-navigation:navigation:preview",
+			String.valueOf(_preview));
 		request.setAttribute(
-			"liferay-ui:navigation:rootLayoutLevel",
+			"liferay-site-navigation:navigation:rootLayoutLevel",
 			String.valueOf(_rootLayoutLevel));
 		request.setAttribute(
-			"liferay-ui:navigation:rootLayoutType", _rootLayoutType);
+			"liferay-site-navigation:navigation:rootLayoutType",
+			_rootLayoutType);
 	}
 
 	private static final String _PAGE = "/navigation/page.jsp";

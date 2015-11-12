@@ -20,12 +20,12 @@
 page import="com.liferay.portlet.dynamicdatamapping.DDMTemplate" %>
 
 <%
-List<NavItem> branchNavItems = (List)request.getAttribute("liferay-ui:navigation:branchNavItems");
-String displayStyle = GetterUtil.getString((String)request.getAttribute("liferay-ui:navigation:displayStyle"));
-long displayStyleGroupId = GetterUtil.getLong((String)request.getAttribute("liferay-ui:navigation:displayStyleGroupId"));
-String includedLayouts = (String)request.getAttribute("liferay-ui:navigation:includedLayouts");
-List<NavItem> navItems = (List)request.getAttribute("liferay-ui:navigation:navItems");
-boolean preview = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:navigation:preview"));
-int rootLayoutLevel = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:navigation:rootLayoutLevel"));
-String rootLayoutType = (String)request.getAttribute("liferay-ui:navigation:rootLayoutType");
+List<NavItem> branchNavItems = (List)request.getAttribute("liferay-site-navigation:navigation:branchNavItems");
+String displayStyle = GetterUtil.getString((String)request.getAttribute("liferay-site-navigation:navigation:displayStyle"));
+long displayStyleGroupId = GetterUtil.getLong((String)request.getAttribute("liferay-site-navigation:navigation:displayStyleGroupId"));
+String includedLayouts = (String)request.getAttribute("liferay-site-navigation:navigation:includedLayouts");
+List<NavItem> navItems = (List)request.getAttribute("liferay-site-navigation:navigation:navItems");
+boolean preview = GetterUtil.getBoolean((String)request.getAttribute("liferay-site-navigation:navigation:preview"));
+int rootLayoutLevel = GetterUtil.getInteger((String)request.getAttribute("liferay-site-navigation:navigation:rootLayoutLevel"));
+String rootLayoutType = (String)request.getAttribute("liferay-site-navigation:navigation:rootLayoutType");
 %>
