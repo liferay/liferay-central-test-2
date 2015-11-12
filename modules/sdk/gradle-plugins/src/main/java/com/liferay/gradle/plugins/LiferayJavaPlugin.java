@@ -905,7 +905,6 @@ public class LiferayJavaPlugin implements Plugin<Project> {
 		GradleUtil.applyPlugin(project, TLDFormatterPlugin.class);
 		GradleUtil.applyPlugin(project, WhipPlugin.class);
 		GradleUtil.applyPlugin(project, XMLFormatterPlugin.class);
-		GradleUtil.applyPlugin(project, XSDBuilderPlugin.class);
 	}
 
 	protected void configureArtifacts(Project project) {
