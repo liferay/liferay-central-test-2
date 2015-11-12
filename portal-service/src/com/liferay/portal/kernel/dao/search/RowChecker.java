@@ -176,10 +176,9 @@ public class RowChecker {
 			return StringPool.BLANK;
 		}
 
-		StringBuilder sb = new StringBuilder(12);
+		StringBuilder sb = new StringBuilder(10);
 
-		sb.append("<label>");
-		sb.append("<input name=\"");
+		sb.append("<label><input name=\"");
 		sb.append(name);
 		sb.append("\" title=\"");
 		sb.append(LanguageUtil.get(getLocale(request), "select-all"));
@@ -188,8 +187,7 @@ public class RowChecker {
 		sb.append("onClick=\"Liferay.Util.checkAll(AUI().one(this).ancestor(");
 		sb.append("'.table'), ");
 		sb.append(checkBoxRowIds);
-		sb.append(", this, 'tr:not(.lfr-template)');\">");
-		sb.append("</label>");
+		sb.append(", this, 'tr:not(.lfr-template)');\"></label>");
 
 		return sb.toString();
 	}
@@ -254,10 +252,9 @@ public class RowChecker {
 		String name, String value, String checkBoxRowIds,
 		String checkBoxAllRowIds, String checkBoxPostOnClick) {
 
-		StringBundler sb = new StringBundler(16);
+		StringBundler sb = new StringBundler(14);
 
-		sb.append("<label>");
-		sb.append("<input ");
+		sb.append("<label><input ");
 
 		if (checked) {
 			sb.append("checked ");
@@ -283,8 +280,7 @@ public class RowChecker {
 					checkBoxRowIds, checkBoxAllRowIds, checkBoxPostOnClick));
 		}
 
-		sb.append(">");
-		sb.append("</label>");
+		sb.append("></label>");
 
 		return sb.toString();
 	}
