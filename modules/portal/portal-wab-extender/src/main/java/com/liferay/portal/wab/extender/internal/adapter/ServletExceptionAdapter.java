@@ -55,16 +55,17 @@ public class ServletExceptionAdapter implements Servlet {
 	@Override
 	public void init(final ServletConfig servletConfig) {
 		try {
-			TCCLUtil.wrapTCCL(new Callable<Void>() {
+			TCCLUtil.wrapTCCL(
+				new Callable<Void>() {
 
-				@Override
-				public Void call() throws Exception {
-					_servlet.init(servletConfig);
+					@Override
+					public Void call() throws Exception {
+						_servlet.init(servletConfig);
 
-					return null;
-				}
+						return null;
+					}
 
-			});
+				});
 		}
 		catch (Exception e) {
 			_exception = e;
