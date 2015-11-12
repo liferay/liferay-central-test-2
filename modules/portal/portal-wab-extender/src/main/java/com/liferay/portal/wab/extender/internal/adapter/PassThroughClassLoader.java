@@ -22,12 +22,8 @@ import java.net.URL;
 import java.util.Enumeration;
 
 /**
-* This class exits with the sole purpose of altering the BundleLoader logic in
-* isRequestFromVM() so it returns false. It is essential that the methods are
-* implemented even though what they do is just calling the parent class.
-*
-* @author Carlos Sierra Andrés
-*/
+ * @author Carlos Sierra Andrés
+ */
 public class PassThroughClassLoader extends ClassLoader {
 
 	public PassThroughClassLoader(ClassLoader contextClassLoader) {
