@@ -46,7 +46,7 @@ public class XSDBuilderPlugin implements Plugin<Project> {
 
 	@Override
 	public void apply(Project project) {
-		addXSDBuilderConfiguration(project);
+		addConfigurationXSDBuilder(project);
 
 		addTaskBuildXSD(project);
 
@@ -59,6 +59,34 @@ public class XSDBuilderPlugin implements Plugin<Project> {
 				}
 
 			});
+	}
+
+	protected Configuration addConfigurationXSDBuilder(final Project project) {
+		Configuration configuration = GradleUtil.addConfiguration(
+			project, CONFIGURATION_NAME);
+
+		configuration.setDescription(
+			"Configures Apache XMLBeans for generating XMLBeans bindings.");
+		configuration.setVisible(false);
+
+		GradleUtil.executeIfEmpty(
+			configuration,
+			new Action<Configuration>() {
+
+				@Override
+				public void execute(Configuration configuration) {
+					addDependenciesXSDBuilder(project);
+				}
+
+			});
+
+		return configuration;
+	}
+
+	protected void addDependenciesXSDBuilder(Project project) {
+		GradleUtil.addDependency(
+			project, CONFIGURATION_NAME, "org.apache.xmlbeans", "xmlbeans",
+			"2.5.0");
 	}
 
 	protected BuildXSDTask addTaskBuildXSD(Project project) {
@@ -135,34 +163,6 @@ public class XSDBuilderPlugin implements Plugin<Project> {
 		taskOutputs.dir(tmpSrcDir);
 
 		return javaExec;
-	}
-
-	protected Configuration addXSDBuilderConfiguration(final Project project) {
-		Configuration configuration = GradleUtil.addConfiguration(
-			project, CONFIGURATION_NAME);
-
-		configuration.setDescription(
-			"Configures Apache XMLBeans for generating XMLBeans bindings.");
-		configuration.setVisible(false);
-
-		GradleUtil.executeIfEmpty(
-			configuration,
-			new Action<Configuration>() {
-
-				@Override
-				public void execute(Configuration configuration) {
-					addXSDBuilderDependencies(project);
-				}
-
-			});
-
-		return configuration;
-	}
-
-	protected void addXSDBuilderDependencies(Project project) {
-		GradleUtil.addDependency(
-			project, CONFIGURATION_NAME, "org.apache.xmlbeans", "xmlbeans",
-			"2.5.0");
 	}
 
 	protected void configureTaskBuildXSD(BuildXSDTask buildXSDTask) {
