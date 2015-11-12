@@ -68,60 +68,6 @@ public class PublicRenderParameterTest extends BasePortletContainerTestCase {
 			new LiferayIntegrationTestRule(), TransactionalTestRule.INSTANCE);
 
 	@Test
-	public void testWithPortalLayoutTypeController() throws Exception {
-		final String prpName = "categoryId";
-		final String prpValue = RandomTestUtil.randomString(
-			FriendlyURLRandomizerBumper.INSTANCE,
-			NumericStringRandomizerBumper.INSTANCE,
-			UniqueStringRandomizerBumper.INSTANCE);
-		final AtomicBoolean success = new AtomicBoolean(false);
-
-		properties.put(
-			"javax.portlet.supported-public-render-parameter", prpName);
-
-		testPortlet = new TestPortlet() {
-
-			@Override
-			public void render(
-					RenderRequest renderRequest, RenderResponse renderResponse)
-				throws IOException, PortletException {
-
-				PrintWriter writer = renderResponse.getWriter();
-
-				String value = renderRequest.getParameter(prpName);
-
-				if (prpValue.equals(value)) {
-					success.set(true);
-				}
-
-				writer.write(value);
-			}
-
-		};
-
-		setUpPortlet(testPortlet, properties, TEST_PORTLET_ID);
-
-		HttpServletRequest httpServletRequest = getHttpServletRequest();
-
-		PortletURL portletURL = new PortletURLImpl(
-			httpServletRequest, TEST_PORTLET_ID, layout.getPlid(),
-			PortletRequest.RENDER_PHASE);
-
-		portletURL.setParameter(prpName, prpValue);
-
-		String portletURLString = portletURL.toString();
-
-		Assert.assertTrue(
-			portletURLString.contains(
-				PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE));
-
-		Map<String, List<String>> responseMap = request(portletURLString);
-
-		Assert.assertEquals("200", getString(responseMap, "code"));
-		Assert.assertTrue(success.get());
-	}
-
-	@Test
 	public void testWithModuleLayoutTypeController() throws Exception {
 		final String prpName = "categoryId";
 		final String prpValue = RandomTestUtil.randomString(
@@ -177,6 +123,60 @@ public class PublicRenderParameterTest extends BasePortletContainerTestCase {
 			"full_page_application", false,
 			StringPool.SLASH + FriendlyURLNormalizerUtil.normalize(name),
 			ServiceContextTestUtil.getServiceContext());
+
+		HttpServletRequest httpServletRequest = getHttpServletRequest();
+
+		PortletURL portletURL = new PortletURLImpl(
+			httpServletRequest, TEST_PORTLET_ID, layout.getPlid(),
+			PortletRequest.RENDER_PHASE);
+
+		portletURL.setParameter(prpName, prpValue);
+
+		String portletURLString = portletURL.toString();
+
+		Assert.assertTrue(
+			portletURLString.contains(
+				PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE));
+
+		Map<String, List<String>> responseMap = request(portletURLString);
+
+		Assert.assertEquals("200", getString(responseMap, "code"));
+		Assert.assertTrue(success.get());
+	}
+
+	@Test
+	public void testWithPortalLayoutTypeController() throws Exception {
+		final String prpName = "categoryId";
+		final String prpValue = RandomTestUtil.randomString(
+			FriendlyURLRandomizerBumper.INSTANCE,
+			NumericStringRandomizerBumper.INSTANCE,
+			UniqueStringRandomizerBumper.INSTANCE);
+		final AtomicBoolean success = new AtomicBoolean(false);
+
+		properties.put(
+			"javax.portlet.supported-public-render-parameter", prpName);
+
+		testPortlet = new TestPortlet() {
+
+			@Override
+			public void render(
+					RenderRequest renderRequest, RenderResponse renderResponse)
+				throws IOException, PortletException {
+
+				PrintWriter writer = renderResponse.getWriter();
+
+				String value = renderRequest.getParameter(prpName);
+
+				if (prpValue.equals(value)) {
+					success.set(true);
+				}
+
+				writer.write(value);
+			}
+
+		};
+
+		setUpPortlet(testPortlet, properties, TEST_PORTLET_ID);
 
 		HttpServletRequest httpServletRequest = getHttpServletRequest();
 

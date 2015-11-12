@@ -43,8 +43,7 @@ public class PublicRenderParametersPool {
 
 		if (warFile) {
 			if (_publicRenderParametersMap.get() == null) {
-				_publicRenderParametersMap.set(
-					new HashMap<String, String[]>());
+				_publicRenderParametersMap.set(new HashMap<String, String[]>());
 			}
 			else {
 				map1.putAll(_publicRenderParametersMap.get());
@@ -112,7 +111,6 @@ public class PublicRenderParametersPool {
 
 	private static final ThreadLocal<Map<String, String[]>>
 		_publicRenderParametersMap = new AutoResetThreadLocal<>(
-			PublicRenderParametersPool.class +
-				"._publicRenderParametersMap");
+			PublicRenderParametersPool.class + "._publicRenderParametersMap");
 
 }
