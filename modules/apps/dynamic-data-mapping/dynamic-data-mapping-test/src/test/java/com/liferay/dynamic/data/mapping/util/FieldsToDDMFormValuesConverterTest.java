@@ -86,7 +86,7 @@ public class FieldsToDDMFormValuesConverterTest extends BaseDDMTestCase {
 		Fields fields = createFields(metadata1Field, metadata2Field);
 
 		DDMFormValues ddmFormValues =
-			FieldsToDDMFormValuesConverterUtil.convert(ddmStructure, fields);
+			_fieldsToDDMFormValuesConverterImpl.convert(ddmStructure, fields);
 
 		List<DDMFormFieldValue> ddmFormFieldValues =
 			ddmFormValues.getDDMFormFieldValues();
@@ -133,7 +133,7 @@ public class FieldsToDDMFormValuesConverterTest extends BaseDDMTestCase {
 		Fields fields = createFields(nameField, phoneField, fieldsDisplayField);
 
 		DDMFormValues ddmFormValues =
-			FieldsToDDMFormValuesConverterUtil.convert(ddmStructure, fields);
+			_fieldsToDDMFormValuesConverterImpl.convert(ddmStructure, fields);
 
 		List<DDMFormFieldValue> ddmFormFieldValues =
 			ddmFormValues.getDDMFormFieldValues();
@@ -198,7 +198,7 @@ public class FieldsToDDMFormValuesConverterTest extends BaseDDMTestCase {
 		Fields fields = createFields(nameField, fieldsDisplayField);
 
 		DDMFormValues ddmFormValues =
-			FieldsToDDMFormValuesConverterUtil.convert(ddmStructure, fields);
+			_fieldsToDDMFormValuesConverterImpl.convert(ddmStructure, fields);
 
 		List<DDMFormFieldValue> ddmFormFieldValues =
 			ddmFormValues.getDDMFormFieldValues();
@@ -241,7 +241,7 @@ public class FieldsToDDMFormValuesConverterTest extends BaseDDMTestCase {
 			titleField, contentField, fieldsDisplayField);
 
 		DDMFormValues ddmFormValues =
-			FieldsToDDMFormValuesConverterUtil.convert(ddmStructure, fields);
+			_fieldsToDDMFormValuesConverterImpl.convert(ddmStructure, fields);
 
 		List<DDMFormFieldValue> ddmFormFieldValues =
 			ddmFormValues.getDDMFormFieldValues();
@@ -285,5 +285,9 @@ public class FieldsToDDMFormValuesConverterTest extends BaseDDMTestCase {
 		testDDMFormFieldValue(
 			expectedEnValue, expectedPtValue, ddmFormFieldValue);
 	}
+
+	private final FieldsToDDMFormValuesConverterImpl
+		_fieldsToDDMFormValuesConverterImpl =
+			new FieldsToDDMFormValuesConverterImpl();
 
 }
