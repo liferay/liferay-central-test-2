@@ -57,7 +57,6 @@ public interface TeamLocalService extends BaseLocalService,
 		com.liferay.portal.model.Team team);
 
 	/**
-	* @throws PortalException
 	* @deprecated As of 7.0.0, replaced by {@link #addTeam(long, long, String,
 	String, ServiceContext)}
 	*/
