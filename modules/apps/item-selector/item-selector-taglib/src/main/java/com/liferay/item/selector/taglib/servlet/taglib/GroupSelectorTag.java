@@ -175,7 +175,7 @@ public class GroupSelectorTag extends IncludeTag {
 	private static final Log _log = LogFactoryUtil.getLog(
 		GroupSelectorTag.class);
 
-	private List<Group> _groups = null;
+	private List<Group> _groups;
 	private int _groupsCount;
 
 }
