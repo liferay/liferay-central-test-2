@@ -59,10 +59,10 @@ public class DDMDataProviderInstanceLocalServiceImpl
 		dataProviderInstance.setCompanyId(user.getCompanyId());
 		dataProviderInstance.setUserId(user.getUserId());
 		dataProviderInstance.setUserName(user.getFullName());
+		dataProviderInstance.setNameMap(nameMap);
+		dataProviderInstance.setDescriptionMap(descriptionMap);
 		dataProviderInstance.setDefinition(
 			ddmFormValuesJSONSerializer.serialize(ddmFormValues));
-		dataProviderInstance.setDescriptionMap(descriptionMap);
-		dataProviderInstance.setNameMap(nameMap);
 		dataProviderInstance.setType(type);
 
 		ddmDataProviderInstancePersistence.update(dataProviderInstance);
@@ -150,10 +150,10 @@ public class DDMDataProviderInstanceLocalServiceImpl
 
 		dataProviderInstance.setUserId(user.getUserId());
 		dataProviderInstance.setUserName(user.getFullName());
+		dataProviderInstance.setNameMap(nameMap);
+		dataProviderInstance.setDescriptionMap(descriptionMap);
 		dataProviderInstance.setDefinition(
 			ddmFormValuesJSONSerializer.serialize(ddmFormValues));
-		dataProviderInstance.setDescriptionMap(descriptionMap);
-		dataProviderInstance.setNameMap(nameMap);
 
 		ddmDataProviderInstancePersistence.update(dataProviderInstance);
 
