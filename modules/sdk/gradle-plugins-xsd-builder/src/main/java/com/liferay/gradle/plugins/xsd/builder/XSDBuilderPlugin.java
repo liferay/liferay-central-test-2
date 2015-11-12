@@ -100,6 +100,7 @@ public class XSDBuilderPlugin implements Plugin<Project> {
 		buildXSDTask.setDescription("Generates XMLBeans bindings.");
 		buildXSDTask.setDestinationDir(project.file("lib"));
 		buildXSDTask.setGroup(BasePlugin.BUILD_GROUP);
+		buildXSDTask.setInputDir("xsd");
 
 		return buildXSDTask;
 	}
