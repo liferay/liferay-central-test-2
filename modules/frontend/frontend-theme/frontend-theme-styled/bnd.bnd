@@ -3,5 +3,4 @@ Bundle-SymbolicName: com.liferay.frontend.theme.styled
 Bundle-Version: 1.0.2
 Include-Resource:\
 	classes,\
-	META-INF/resources=src/main/resources/META-INF/resources
--donotcopy: (npm-debug\.log)
+	META-INF/resources=src/main/resources/META-INF/resources-donotcopy: (npm-debug\.log)
