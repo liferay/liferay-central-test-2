@@ -20,6 +20,7 @@ import java.io.File;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.Callable;
 
 import org.gradle.api.Project;
 import org.gradle.api.file.FileCollection;
@@ -37,6 +38,15 @@ public class BuildXSDTask extends Zip {
 	public BuildXSDTask() {
 		setAppendix("xbean");
 		setExtension(Jar.DEFAULT_EXTENSION);
+	}
+
+	@Override
+	public File getDestinationDir() {
+		if (_destinationDir != null) {
+			return GradleUtil.toFile(getProject(), _destinationDir);
+		}
+
+		return super.getDestinationDir();
 	}
 
 	@InputDirectory
@@ -61,6 +71,11 @@ public class BuildXSDTask extends Zip {
 		_inputDir = inputDir;
 	}
 
+	protected void setDestinationDir(Callable<File> callable) {
+		_destinationDir = callable;
+	}
+
+	private Callable<File> _destinationDir;
 	private Object _inputDir;
 
 }
