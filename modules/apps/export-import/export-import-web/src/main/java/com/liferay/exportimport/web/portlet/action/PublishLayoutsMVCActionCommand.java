@@ -131,9 +131,11 @@ public class PublishLayoutsMVCActionCommand extends BaseMVCActionCommand {
 					SessionErrors.add(actionRequest, e.getClass(), e);
 				}
 
-				String redirect = StringUtil.replace(
-					ParamUtil.getString(actionRequest, "redirect"),
-					"tabs2=current-and-previous",
+				String redirect = ParamUtil.getString(
+					actionRequest, "redirect");
+
+				redirect = StringUtil.replace(
+					redirect, "tabs2=current-and-previous",
 					"tabs2=new-publication-process");
 
 				sendRedirect(actionRequest, actionResponse, redirect);
