@@ -36,6 +36,7 @@ public class DLWebUpgrade implements UpgradeStepRegistrator {
 		registry.register(
 			"com.liferay.document.library.web", "0.0.0", "1.0.0",
 			new DummyUpgradeStep());
+
 		registry.register(
 			"com.liferay.document.library.web", "0.0.1", "1.0.0",
 			new UpgradePortletId(), new UpgradeAdminPortlets(),

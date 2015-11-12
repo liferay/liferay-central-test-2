@@ -33,6 +33,7 @@ public class AnnouncementsWebUpgrade implements UpgradeStepRegistrator {
 		registry.register(
 			"com.liferay.announcements.web", "0.0.0", "1.0.0",
 			new DummyUpgradeStep());
+
 		registry.register(
 			"com.liferay.announcements.web", "0.0.1", "1.0.0",
 			new UpgradePortletId());
