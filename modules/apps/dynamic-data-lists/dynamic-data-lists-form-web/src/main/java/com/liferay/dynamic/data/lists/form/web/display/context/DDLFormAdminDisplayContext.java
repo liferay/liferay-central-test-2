@@ -30,6 +30,8 @@ import com.liferay.dynamic.data.lists.service.permission.DDLPermission;
 import com.liferay.dynamic.data.lists.service.permission.DDLRecordSetPermission;
 import com.liferay.dynamic.data.mapping.form.field.type.DDMFormFieldType;
 import com.liferay.dynamic.data.mapping.form.field.type.DDMFormFieldTypeServicesTrackerUtil;
+import com.liferay.dynamic.data.mapping.form.renderer.DDMFormRenderer;
+import com.liferay.dynamic.data.mapping.form.renderer.DDMFormRenderingContext;
 import com.liferay.dynamic.data.mapping.io.DDMFormFieldTypesJSONSerializerUtil;
 import com.liferay.dynamic.data.mapping.io.DDMFormJSONSerializerUtil;
 import com.liferay.dynamic.data.mapping.io.DDMFormLayoutJSONSerializerUtil;
@@ -103,7 +105,7 @@ public class DDLFormAdminDisplayContext {
 		DDMForm ddmForm = ddmStructure.getDDMForm();
 
 		for (DDMFormField ddmFormField : ddmForm.getDDMFormFields()) {
-			makeDDMFormFieldReadOnly(ddmFormField);
+			setDDMFormFieldReadOnly(ddmFormField);
 		}
 
 		DDMFormLayout ddmFormLayout = ddmStructure.getDDMFormLayout();
@@ -345,13 +347,13 @@ public class DDLFormAdminDisplayContext {
 		return DDLRecordLocalServiceUtil.fetchDDLRecord(recordId);
 	}
 
-	protected void makeDDMFormFieldReadOnly(DDMFormField ddmFormField) {
+	protected void setDDMFormFieldReadOnly(DDMFormField ddmFormField) {
 		ddmFormField.setReadOnly(true);
 
-		for (DDMFormField nestedDDMFormField
-				: ddmFormField.getNestedDDMFormFields()) {
+		for (DDMFormField nestedDDMFormField :
+				ddmFormField.getNestedDDMFormFields()) {
 
-			makeDDMFormFieldReadOnly(nestedDDMFormField);
+			setDDMFormFieldReadOnly(nestedDDMFormField);
 		}
 	}
 
