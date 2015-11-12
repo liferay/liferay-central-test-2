@@ -55,6 +55,7 @@ import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.CompanyLocalService;
 import com.liferay.portal.service.PortletLocalService;
 import com.liferay.portal.service.ResourceActionLocalService;
+import com.liferay.portal.servlet.jsp.compiler.JspServlet;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebAppPool;
@@ -1398,19 +1399,19 @@ public class PortletTracker
 		}
 
 		@Override
-		public void init(ServletConfig config) throws ServletException {
-			_servlet.init(config);
+		public void init(ServletConfig servletConfig) throws ServletException {
+			_servlet.init(servletConfig);
 		}
 
 		@Override
-		public void service(ServletRequest request, ServletResponse response)
+		public void service(
+				ServletRequest servletRequest, ServletResponse servletResponse)
 			throws IOException, ServletException {
 
-			_servlet.service(request, response);
+			_servlet.service(servletRequest, servletResponse);
 		}
 
-		private final Servlet _servlet =
-			new com.liferay.portal.servlet.jsp.compiler.JspServlet();
+		private final Servlet _servlet = new JspServlet();
 
 	}
 
