@@ -17,8 +17,8 @@
 <%@ include file="/group_selector/init.jsp" %>
 
 <%
-int groupsCount = GetterUtil.getInteger(request.getAttribute("liferay-item-selector:group-selector:groupsCount"));
 List<Group> groups = (List<Group>)request.getAttribute("liferay-item-selector:group-selector:groups");
+int groupsCount = GetterUtil.getInteger(request.getAttribute("liferay-item-selector:group-selector:groupsCount"));
 ItemSelector itemSelector = (ItemSelector)request.getAttribute("liferay-item-selector:group-selector:itemSelector");
 
 RequestBackedPortletURLFactory requestBackedPortletURLFactory = RequestBackedPortletURLFactoryUtil.create(request);
