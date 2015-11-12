@@ -332,10 +332,11 @@ public class EditFileEntryMVCActionCommand extends BaseMVCActionCommand {
 	protected void checkInFileEntries(ActionRequest actionRequest)
 		throws Exception {
 
-		String changeLog = ParamUtil.getString(actionRequest, "changeLog");
 		long fileEntryId = ParamUtil.getLong(actionRequest, "fileEntryId");
+
 		boolean majorVersion = ParamUtil.getBoolean(
 			actionRequest, "majorVersion");
+		String changeLog = ParamUtil.getString(actionRequest, "changeLog");
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			actionRequest);

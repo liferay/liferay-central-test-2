@@ -7,12 +7,14 @@ Liferay.provide(
 			'${dialogTitle}',
 			['${namespace}versionDetailsMajorVersion', '${namespace}versionDetailsChangeLog'],
 			function(event, nodes) {
-				var majorVersionNode = nodes[0];
-				var changeLogNode = nodes[1];
-
 				var portletURL = new Liferay.PortletURL(null, null, saveURL);
 
+				var majorVersionNode = nodes[0];
+
 				portletURL.setParameter('majorVersion', majorVersionNode.attr('checked'));
+
+				var changeLogNode = nodes[1];
+
 				portletURL.setParameter('changeLog', changeLogNode.val());
 
 				window.location.href = portletURL.toString();
