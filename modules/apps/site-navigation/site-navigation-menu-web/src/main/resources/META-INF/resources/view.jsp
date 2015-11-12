@@ -16,7 +16,7 @@
 
 <%@ include file="/init.jsp" %>
 
-<liferay-ui:navigation
+<liferay-site-navigation:navigation
 	ddmTemplateGroupId="<%= siteNavigationMenuDisplayContext.getDisplayStyleGroupId() %>"
 	ddmTemplateKey="<%= siteNavigationMenuDisplayContext.getDDMTemplateKey() %>"
 	includedLayouts="<%= siteNavigationMenuDisplayContext.getIncludedLayouts() %>"
