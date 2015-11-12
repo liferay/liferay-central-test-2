@@ -136,12 +136,10 @@ public class UIItemsBuilder {
 		portletURL.setParameter(
 			"fileEntryId", String.valueOf(_fileEntry.getFileEntryId()));
 
-		String onClick =
-			getNamespace() + "showVersionDetailsDialog('" + portletURL + "');";
-
 		JavaScriptMenuItem javascriptMenuItem = _addJavaScriptUIItem(
 			new JavaScriptMenuItem(), menuItems, DLUIItemKeys.CHECKIN,
-			"checkin", onClick);
+			"checkin",
+			getNamespace() + "showVersionDetailsDialog('" + portletURL + "');");
 
 		String javaScript =
 			"/com/liferay/document/library/web/display/context/dependencies" +
@@ -182,12 +180,10 @@ public class UIItemsBuilder {
 		portletURL.setParameter(
 			"fileEntryId", String.valueOf(_fileEntry.getFileEntryId()));
 
-		String onClick =
-			getNamespace() + "showVersionDetailsDialog('" + portletURL + "');";
-
 		JavaScriptToolbarItem javaScriptToolbarItem = _addJavaScriptUIItem(
 			new JavaScriptToolbarItem(), toolbarItems, DLUIItemKeys.CHECKIN,
-			LanguageUtil.get(_request, "checkin"), onClick);
+			LanguageUtil.get(_request, "checkin"),
+			getNamespace() + "showVersionDetailsDialog('" + portletURL + "');");
 
 		String javaScript =
 			"/com/liferay/document/library/web/display/context/dependencies" +
