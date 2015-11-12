@@ -180,7 +180,6 @@ public class LiferayJavaPlugin implements Plugin<Project> {
 
 		configureArtifacts(project);
 
-		configureTaskBuildXSD(project);
 		configureTaskConfigJSModules(project);
 		configureTaskTranspileJS(project);
 		configureTasksBuildUpgradeTable(project);
@@ -1172,28 +1171,6 @@ public class LiferayJavaPlugin implements Plugin<Project> {
 		buildUpgradeTableTask.setUpgradeTableDir(file);
 	}
 
-	protected void configureTaskBuildXSD(Project project) {
-		BuildXSDTask buildXSDTask = (BuildXSDTask)GradleUtil.getTask(
-			project, XSDBuilderPlugin.BUILD_XSD_TASK_NAME);
-
-		configureTaskBuildXSDDestinationDir(buildXSDTask);
-		configureTaskBuildXSDInputDir(buildXSDTask);
-	}
-
-	protected void configureTaskBuildXSDDestinationDir(
-		BuildXSDTask buildXSDTask) {
-
-		buildXSDTask.setDestinationDir(getLibDir(buildXSDTask.getProject()));
-	}
-
-	protected void configureTaskBuildXSDInputDir(BuildXSDTask buildXSDTask) {
-		Project project = buildXSDTask.getProject();
-
-		File inputDir = project.file("xsd");
-
-		buildXSDTask.setInputDir(inputDir);
-	}
-
 	protected void configureTaskClasses(Project project) {
 		Task classesTask = GradleUtil.getTask(
 			project, JavaPlugin.CLASSES_TASK_NAME);
@@ -1979,13 +1956,6 @@ public class LiferayJavaPlugin implements Plugin<Project> {
 
 	protected String getDeployedFileName(Project project, File sourceFile) {
 		return sourceFile.getName();
-	}
-
-	protected File getJavaDir(Project project) {
-		SourceSet sourceSet = GradleUtil.getSourceSet(
-			project, SourceSet.MAIN_SOURCE_SET_NAME);
-
-		return getSrcDir(sourceSet.getJava());
 	}
 
 	protected File getLibDir(Project project) {
