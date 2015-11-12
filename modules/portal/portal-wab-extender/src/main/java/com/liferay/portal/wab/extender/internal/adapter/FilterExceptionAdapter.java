@@ -55,16 +55,17 @@ public class FilterExceptionAdapter implements Filter {
 	@Override
 	public void init(final FilterConfig filterConfig) {
 		try {
-			TCCLUtil.wrapTCCL(new Callable<Void>() {
+			TCCLUtil.wrapTCCL(
+				new Callable<Void>() {
 
-				@Override
-				public Void call() throws Exception {
-					_filter.init(filterConfig);
+					@Override
+					public Void call() throws Exception {
+						_filter.init(filterConfig);
 
-					return null;
-				}
+						return null;
+					}
 
-			});
+				});
 		}
 		catch (Exception e) {
 			_exception = e;
