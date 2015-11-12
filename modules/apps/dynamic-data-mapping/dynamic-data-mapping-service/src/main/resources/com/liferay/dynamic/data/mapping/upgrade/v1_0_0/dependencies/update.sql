@@ -1,3 +1,18 @@
+create table DDMDataProviderInstance (
+	uuid_ VARCHAR(75) null,
+	dataProviderInstanceId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	name STRING null,
+	description TEXT null,
+	definition TEXT null,
+	type_ VARCHAR(75) null
+);
+
 alter table DDMStructure add versionUserId LONG;
 alter table DDMStructure add versionUserName VARCHAR(75) null;
 alter table DDMStructure add version VARCHAR(75) null;
