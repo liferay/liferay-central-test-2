@@ -46,6 +46,8 @@ public class XSDBuilderPlugin implements Plugin<Project> {
 
 	@Override
 	public void apply(Project project) {
+		GradleUtil.applyPlugin(project, JavaPlugin.class);
+
 		addConfigurationXSDBuilder(project);
 
 		addTaskBuildXSD(project);
