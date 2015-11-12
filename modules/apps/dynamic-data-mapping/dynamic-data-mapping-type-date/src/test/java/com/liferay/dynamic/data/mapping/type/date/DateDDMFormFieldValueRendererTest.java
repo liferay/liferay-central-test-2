@@ -68,7 +68,6 @@ public class DateDDMFormFieldValueRendererTest {
 			"1/25/15",
 			dateDDMFormFieldValueRenderer.render(
 				ddmFormFieldValue, LocaleUtil.US));
-
 		Assert.assertEquals(
 			"25/01/15",
 			dateDDMFormFieldValueRenderer.render(
