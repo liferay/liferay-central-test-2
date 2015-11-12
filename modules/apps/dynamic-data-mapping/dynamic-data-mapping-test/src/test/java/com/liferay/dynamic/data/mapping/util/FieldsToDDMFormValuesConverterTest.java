@@ -24,7 +24,6 @@ import com.liferay.dynamic.data.mapping.storage.DDMFormFieldValue;
 import com.liferay.dynamic.data.mapping.storage.DDMFormValues;
 import com.liferay.dynamic.data.mapping.storage.Field;
 import com.liferay.dynamic.data.mapping.storage.Fields;
-import com.liferay.dynamic.data.mapping.util.impl.DDMImpl;
 import com.liferay.dynamic.data.mapping.util.impl.FieldsToDDMFormValuesConverterImpl;
 import com.liferay.portal.kernel.util.LocaleUtil;
 
@@ -56,7 +55,6 @@ public class FieldsToDDMFormValuesConverterTest extends BaseDDMTestCase {
 		setUpDDMFormJSONDeserializerUtil();
 		setUpDDMFormJSONSerializerUtil();
 		setUpDDMStructureLocalServiceUtil();
-		setUpDDMUtil();
 		setUpFieldsToDDMFormValuesConverterUtil();
 		setUpHtmlUtil();
 		setUpJSONFactoryUtil();
@@ -256,12 +254,6 @@ public class FieldsToDDMFormValuesConverterTest extends BaseDDMTestCase {
 		testDDMFormFieldValue(
 			"ovho", "Content Example", "Conteudo Exemplo",
 			ddmFormFieldValues.get(1));
-	}
-
-	protected void setUpDDMUtil() {
-		DDMUtil ddmUtil = new DDMUtil();
-
-		ddmUtil.setDDM(new DDMImpl());
 	}
 
 	protected void setUpFieldsToDDMFormValuesConverterUtil() {
