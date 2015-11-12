@@ -18,12 +18,12 @@ import com.liferay.dynamic.data.lists.form.web.configuration.DDLFormWebConfigura
 import com.liferay.dynamic.data.lists.form.web.util.DDLFormEmailNotificationUtil;
 import com.liferay.dynamic.data.lists.model.DDLRecord;
 import com.liferay.dynamic.data.lists.model.DDLRecordSet;
+import com.liferay.dynamic.data.mapping.form.field.type.DDMFormFieldTypeServicesTracker;
+import com.liferay.dynamic.data.mapping.form.field.type.DDMFormFieldValueRenderer;
 import com.liferay.dynamic.data.mapping.model.DDMForm;
 import com.liferay.dynamic.data.mapping.model.DDMFormField;
 import com.liferay.dynamic.data.mapping.model.DDMStructure;
 import com.liferay.dynamic.data.mapping.model.LocalizedValue;
-import com.liferay.dynamic.data.mapping.registry.DDMFormFieldTypeServicesTracker;
-import com.liferay.dynamic.data.mapping.registry.DDMFormFieldValueRenderer;
 import com.liferay.dynamic.data.mapping.storage.DDMFormFieldValue;
 import com.liferay.dynamic.data.mapping.storage.DDMFormValues;
 import com.liferay.mail.service.MailService;
