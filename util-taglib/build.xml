@@ -116,6 +116,11 @@
 			maxmemory="256m"
 		>
 			<arg line="-d ${doc.taglibs.dir}" />
+
+			<!--
+			Sort by short name. See LRDOCS-2073.
+			-->
+
 			<arg value="${project.dir}/util-taglib/src/META-INF/liferay-aui.tld" />
 			<arg value="${project.dir}/modules/apps/application-list/application-list-taglib/src/main/resources/META-INF/resources/liferay-application-list.tld" />
 			<arg value="${project.dir}/modules/apps/dynamic-data-mapping/dynamic-data-mapping-taglib/src/main/resources/META-INF/resources/liferay-ddm.tld" />
