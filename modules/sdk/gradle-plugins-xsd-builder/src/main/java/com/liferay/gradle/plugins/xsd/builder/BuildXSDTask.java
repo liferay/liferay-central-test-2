@@ -35,6 +35,7 @@ import org.gradle.api.tasks.bundling.Zip;
 public class BuildXSDTask extends Zip {
 
 	public BuildXSDTask() {
+		setAppendix("xbean");
 		setExtension(Jar.DEFAULT_EXTENSION);
 	}
 
@@ -48,15 +49,9 @@ public class BuildXSDTask extends Zip {
 	public FileCollection getInputFiles() {
 		Project project = getProject();
 
-		File inputDir = getInputDir();
-
-		if (inputDir == null) {
-			return project.files();
-		}
-
 		Map<String, Object> args = new HashMap<>();
 
-		args.put("dir", inputDir);
+		args.put("dir", getInputDir());
 		args.put("include", "**/*.*");
 
 		return project.fileTree(args);
@@ -66,6 +61,6 @@ public class BuildXSDTask extends Zip {
 		_inputDir = inputDir;
 	}
 
-	private Object _inputDir = "xsd";
+	private Object _inputDir;
 
 }
