@@ -16,6 +16,7 @@ package com.liferay.staging.bar.web.portlet.action;
 
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
+import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.service.LayoutSetBranchService;
@@ -56,13 +57,21 @@ public class MergeLayoutSetBranchMVCActionCommand extends BaseMVCActionCommand {
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			actionRequest);
 
-		_layoutSetBranchService.mergeLayoutSetBranch(
-			layoutSetBranchId, mergeLayoutSetBranchId, serviceContext);
+		try {
+			_layoutSetBranchService.mergeLayoutSetBranch(
+				layoutSetBranchId, mergeLayoutSetBranchId, serviceContext);
 
-		SessionMessages.add(actionRequest, "sitePageVariationMerged");
+			SessionMessages.add(actionRequest, "sitePageVariationMerged");
 
-		ActionUtil.addLayoutBranchSessionMessages(
-			actionRequest, actionResponse);
+			ActionUtil.addLayoutBranchSessionMessages(
+				actionRequest, actionResponse);
+		}
+		catch (Exception e) {
+			SessionErrors.add(actionRequest, e.getClass(), e);
+
+			actionResponse.setRenderParameter(
+				"mvcPath", "/view_layout_set_branches.jsp");
+		}
 	}
 
 	@Reference(unbind = "-")
