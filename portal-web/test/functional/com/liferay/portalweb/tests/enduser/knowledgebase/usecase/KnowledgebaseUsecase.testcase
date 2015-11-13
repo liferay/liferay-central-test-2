@@ -244,7 +244,7 @@
 			<var name="pageName" value="Knowledge Base Article Page" />
 		</execute>
 
-		<execute macro="KBArticle#configureKBArticlePG">
+		<execute macro="KBArticle#configureKBArticleDisplayPG">
 			<var name="kbArticleTitle" value="KB Admin Article2" />
 			<var name="pageName" value="Knowledge Base Article Page" />
 		</execute>
