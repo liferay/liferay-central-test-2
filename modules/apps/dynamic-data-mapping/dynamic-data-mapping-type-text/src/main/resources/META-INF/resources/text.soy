@@ -34,7 +34,7 @@
 					{$value}
 				</textarea>
 			{else}
-				<input class="field form-control" dir="{$dir}" id="{$name}" name="{$name}" placeholder="{$placeholder}" type="text" value="{$value}" {if $readOnly}readonly{/if} >
+				<input class="field form-control" dir="{$dir}" id="{$name}" name="{$name}" placeholder="{$placeholder}" {if $readOnly}readonly{/if} type="text" value="{$value}">
 			{/if}
 
 			{if $tip}
