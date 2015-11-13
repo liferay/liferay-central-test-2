@@ -569,6 +569,8 @@
 	</command>
 
 	<command name="gotoPGViaKBSection">
+		<var name="key_kbArticleTitle" value="${kbArticleTitle}" />
+
 		<execute function="AssertClick" locator1="KnowledgeBaseSection#KB_ARTICLE_LINK" value1="${kbArticleTitle}" />
 	</command>
 
