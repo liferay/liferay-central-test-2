@@ -35,8 +35,8 @@ import org.openqa.selenium.remote.RemoteWebElement;
  * @author Brian Wing Shun Chan
  * @author Michael Hashimoto
  */
-public class RetryWebElementImpl extends RemoteWebElement
-	implements Locatable, WebElement, WrapsDriver {
+public class RetryWebElementImpl
+	extends RemoteWebElement implements Locatable, WebElement, WrapsDriver {
 
 	public RetryWebElementImpl(String locator, WebElement webElement) {
 		_locator = locator;
@@ -392,26 +392,26 @@ public class RetryWebElementImpl extends RemoteWebElement
 		}
 	}
 
-	public void sendKeys(CharSequence... keysToSend) {
+	public void sendKeys(CharSequence... keys) {
 		try {
-			_webElement.sendKeys(keysToSend);
+			_webElement.sendKeys(keys);
 		}
 		catch (StaleElementReferenceException sere) {
 			_refreshWebElement(sere);
 
-			_webElement.sendKeys(keysToSend);
+			_webElement.sendKeys(keys);
 		}
 	}
 
 	@Override
-	public void setFileDetector(FileDetector detector) {
+	public void setFileDetector(FileDetector fileDetector) {
 		try {
-			_remoteWebElement.setFileDetector(detector);
+			_remoteWebElement.setFileDetector(fileDetector);
 		}
 		catch (StaleElementReferenceException sere) {
 			_refreshWebElement(sere);
 
-			_remoteWebElement.setFileDetector(detector);
+			_remoteWebElement.setFileDetector(fileDetector);
 		}
 	}
 
@@ -428,14 +428,14 @@ public class RetryWebElementImpl extends RemoteWebElement
 	}
 
 	@Override
-	public void setParent(RemoteWebDriver parent) {
+	public void setParent(RemoteWebDriver remoteWebDriver) {
 		try {
-			_remoteWebElement.setParent(parent);
+			_remoteWebElement.setParent(remoteWebDriver);
 		}
 		catch (StaleElementReferenceException sere) {
 			_refreshWebElement(sere);
 
-			_remoteWebElement.setParent(parent);
+			_remoteWebElement.setParent(remoteWebDriver);
 		}
 	}
 
