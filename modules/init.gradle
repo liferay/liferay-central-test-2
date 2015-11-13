@@ -8,24 +8,15 @@ if (System.properties["http.proxyHost"] == "squid.lax.liferay.com") {
 }
 
 gradle.buildFinished {
-	ByteArrayOutputStream errorByteArrayOutputStream = new ByteArrayOutputStream()
-	ByteArrayOutputStream outputByteArrayOutputStream = new ByteArrayOutputStream()
+	ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream()
 
 	exec {
 		commandLine "git", "ls-files", "--exclude-standard", "--others"
-		ignoreExitValue = true
-		errorOutput = errorByteArrayOutputStream
-		standardOutput = outputByteArrayOutputStream
+		standardOutput = byteArrayOutputStream
 		workingDir = gradle.gradleUserHomeDir
 	}
 
-	String errorString = errorByteArrayOutputStream.toString()
-
-	if (!errorString.contains("Not a git repository")) {
-		logger.error errorString
-	}
-
-	String output = outputByteArrayOutputStream.toString()
+	String output = byteArrayOutputStream.toString()
 
 	List<String> fileNames = output.readLines()
 
