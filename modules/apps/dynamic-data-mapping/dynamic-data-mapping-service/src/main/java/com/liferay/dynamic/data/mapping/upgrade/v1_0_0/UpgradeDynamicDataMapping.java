@@ -1345,7 +1345,7 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 				rootElement, fieldName);
 
 			if (Validator.isNotNull(ddmFormField.getDataType()) &&
-				Validator.isNotNull(dynamicElement)) {
+				(dynamicElement != null)) {
 
 				if (ddmFormField.isLocalizable()) {
 					setDDMFormFieldValueLocalizedValue(
