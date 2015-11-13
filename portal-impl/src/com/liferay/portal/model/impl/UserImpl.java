@@ -288,6 +288,7 @@ public class UserImpl extends UserBaseImpl {
 	 *             is available for the user's profile
 	 * @return     the user's display URL
 	 * @deprecated As of 7.0.0, replaced by {@link #getDisplayURL(ThemeDisplay)}
+	 * @throws PortalException
 	 */
 	@Deprecated
 	@Override
@@ -369,6 +370,7 @@ public class UserImpl extends UserBaseImpl {
 	 *         intranet (versus extranet) site home page, if no friendly URL is
 	 *         available for the user's profile
 	 * @return the user's display URL
+	 * @throws PortalException
 	 */
 	@Override
 	public String getDisplayURL(
