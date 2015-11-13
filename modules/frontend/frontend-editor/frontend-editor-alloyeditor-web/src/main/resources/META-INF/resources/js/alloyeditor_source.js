@@ -43,10 +43,10 @@ AUI.add(
 						host.getNativeEditor().on('editorUpdate', A.bind('_onEditorUpdate', instance));
 
 						instance._eventHandles = [
-							instance._editorSwitch.on('click', instance._switchMode, instance),
-							instance._editorSwitch.on('blur', instance._onSwitchBlur, instance),
-							instance._editorSwitch.on('focus', instance._onSwitchFocus, instance),
 							instance._editorFullscreen.on('click', instance._onFullScreenBtnClick, instance),
+							instance._editorSwitch.on('blur', instance._onSwitchBlur, instance),
+							instance._editorSwitch.on('click', instance._switchMode, instance),
+							instance._editorSwitch.on('focus', instance._onSwitchFocus, instance),
 							instance.doAfter('getHTML', instance._getHTML, instance)
 						];
 					},
