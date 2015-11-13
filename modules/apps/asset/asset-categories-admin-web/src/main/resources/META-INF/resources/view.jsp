@@ -40,7 +40,6 @@ OrderByComparator<AssetVocabulary> orderByComparator = new AssetVocabularyCreate
 vocabulariesSearchContainer.setOrderByComparator(orderByComparator);
 
 vocabulariesSearchContainer.setOrderByType(orderByType);
-
 vocabulariesSearchContainer.setRowChecker(new EmptyOnClickRowChecker(renderResponse));
 
 List<AssetVocabulary> vocabularies = null;
