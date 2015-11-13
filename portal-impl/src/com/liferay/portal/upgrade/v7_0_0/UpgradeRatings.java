@@ -149,7 +149,7 @@ public class UpgradeRatings extends UpgradeProcess {
 		try (Connection con = DataAccess.getUpgradeOptimizedConnection();
 			PreparedStatement ps = con.prepareStatement(selectSQL);
 			ResultSet rs = ps.executeQuery();
-			PreparedStatement ps2 = AutoBatchPreparedStatementUtil.autoBath(
+			PreparedStatement ps2 = AutoBatchPreparedStatementUtil.autoBatch(
 				con.prepareStatement(updateSQL))) {
 
 			while (rs.next()) {

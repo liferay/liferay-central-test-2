@@ -475,7 +475,7 @@ public class Table {
 			return;
 		}
 
-		try (PreparedStatement ps = AutoBatchPreparedStatementUtil.autoBath(
+		try (PreparedStatement ps = AutoBatchPreparedStatementUtil.autoBatch(
 				con.prepareStatement(getInsertSQL()));
 			UnsyncBufferedReader unsyncBufferedReader =
 				new UnsyncBufferedReader(new FileReader(_tempFileName))) {
