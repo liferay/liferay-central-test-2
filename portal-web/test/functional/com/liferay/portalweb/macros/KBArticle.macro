@@ -565,7 +565,7 @@
 	<command name="gotoPGViaKBSearchResult">
 		<var name="key_kbArticleTitle" value="${kbArticleTitle}" />
 
-		<execute function="AssertClick" locator1="KnowledgeBase#ARTICLE_TABLE_ARTICLE_TITLE" value1="${kbArticleTitle}" />
+		<execute function="AssertClick" locator1="KnowledgeBase#KB_SEARCH_RESULTS_TITLE" value1="${kbArticleTitle}" />
 	</command>
 
 	<command name="gotoPGViaKBSection">
@@ -1407,8 +1407,8 @@
 	</command>
 
 	<command name="viewPGViaKBSection">
-		<execute function="AssertTextEquals" locator1="PGKnowledgebasesectionArticle#ARTICLE_TITLE" value1="${kbArticleTitle}" />
-		<execute function="AssertTextEquals" locator1="PGKnowledgebasesectionArticle#ARTICLE_CONTENT" value1="${kbArticleContent}" />
+		<execute function="AssertTextEquals" locator1="KnowledgeBaseArticle#TITLE" value1="${kbArticleTitle}" />
+		<execute function="AssertTextEquals" locator1="KnowledgeBaseArticle#CONTENT" value1="${kbArticleContent}" />
 	</command>
 
 	<command name="viewRelatedAssetCP">
@@ -1428,7 +1428,7 @@
 		<for list="${kbArticleTitleList}" param="kbArticleTitle">
 			<var name="key_kbArticleTitle" value="${kbArticleTitle}" />
 
-			<execute function="AssertTextEquals" locator1="KnowledgeBase#ARTICLE_TABLE_ARTICLE_TITLE" value1="${kbArticleTitle}" />
+			<execute function="AssertTextEquals" locator1="KnowledgeBase#KB_SEARCH_RESULTS_TITLE" value1="${kbArticleTitle}" />
 		</for>
 	</command>
 
