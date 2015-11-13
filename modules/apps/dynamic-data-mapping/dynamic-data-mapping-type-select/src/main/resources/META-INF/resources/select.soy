@@ -27,7 +27,7 @@
 				</label>
 			{/if}
 
-			<select class="form-control" dir="{$dir}" id="{$name}" name="{$name}" {$multiple} {if $readOnly}disabled{/if}>
+			<select class="form-control" dir="{$dir}" {if $readOnly}disabled{/if} id="{$name}" name="{$name}" {$multiple}>
 				{foreach $option in $options}
 					<option dir="{$dir}" {$option.status} value="{$option.value}">
 						{$option.label}
