@@ -78,7 +78,6 @@ OrderByComparator<AssetCategory> orderByComparator = new AssetCategoryCreateDate
 categoriesSearchContainer.setOrderByComparator(orderByComparator);
 
 categoriesSearchContainer.setOrderByType(orderByType);
-
 categoriesSearchContainer.setRowChecker(new EmptyOnClickRowChecker(renderResponse));
 
 List<AssetCategory> categories = null;
