@@ -38,8 +38,8 @@ public class UpgradeResourcePermission extends UpgradeProcess {
 				"where resourcePermissionId = ?";
 
 		try (Connection con = DataAccess.getUpgradeOptimizedConnection();
-			PreparedStatement ps = con.prepareStatement(selectSQL);
-			ResultSet rs = ps.executeQuery();
+			PreparedStatement ps1 = con.prepareStatement(selectSQL);
+			ResultSet rs = ps1.executeQuery();
 			PreparedStatement ps2 = AutoBatchPreparedStatementUtil.autoBatch(
 				con.prepareStatement(updateSQL))) {
 
