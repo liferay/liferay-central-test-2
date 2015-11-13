@@ -1184,8 +1184,8 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 				}
 				catch (SQLException sqle) {
 					_log.error(
-						"Unexpected error while retrieving default locale " +
-							"for company " + _companyId,
+						"Unable to get default locale for company " +
+							_companyId,
 						sqle);
 
 					throw new RuntimeException(sqle);
