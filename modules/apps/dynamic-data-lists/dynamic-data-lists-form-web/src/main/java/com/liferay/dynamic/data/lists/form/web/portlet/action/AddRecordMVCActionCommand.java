@@ -84,10 +84,9 @@ public class AddRecordMVCActionCommand extends BaseMVCActionCommand {
 			groupId, recordSetId, DDLRecordConstants.DISPLAY_INDEX_DEFAULT,
 			ddmFormValues, serviceContext);
 
-		boolean emailNotificationEnabled =
-			DDLFormEmailNotificationUtil.isEmailNotificationEnabled(recordSet);
+		if (DDLFormEmailNotificationUtil.isEmailNotificationEnabled(
+				recordSet)) {
 
-		if (emailNotificationEnabled) {
 			_ddlFormEmailNotificationSender.sendEmailNotification(
 				actionRequest, ddlRecord);
 		}
