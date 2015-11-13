@@ -50,7 +50,7 @@ public class XStreamConfiguratorRegistryUtil {
 			classLoaders.add(xStreamConfigurator.getClass().getClassLoader());
 		}
 
-		// Temporary code to fetch classloaders from old framework too
+		// Temporary code to fetch class loaders from the old framework too
 
 		Map<Class<?>, String> aliases = XStreamAliasRegistryUtil.getAliases();
 
