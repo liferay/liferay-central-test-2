@@ -762,10 +762,6 @@
 
 		<execute function="AssertClick#assertPartialTextClickAt" locator1="ProductMenu#PRIVATE_SITE_LINK" value1="www.able.com" />
 
-		<execute macro="Portlet#addPG">
-			<var name="portletName" value="Blogs" />
-		</execute>
-
 		<execute macro="BlogsNavigator#gotoEntryPG">
 			<var name="entryContent" value="Blogs Entry2 Content" />
 			<var name="entryTitle"><![CDATA[Blogs Entry Title `~!@#$%^&*(){}[],.<>/?|]]></var>
