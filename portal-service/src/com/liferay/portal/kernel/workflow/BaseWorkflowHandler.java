@@ -238,7 +238,7 @@ public abstract class BaseWorkflowHandler<T> implements WorkflowHandler<T> {
 	}
 
 	/**
-	 * @throws PortalException  
+	 * @throws PortalException
 	 */
 	@Override
 	public WorkflowDefinitionLink getWorkflowDefinitionLink(
