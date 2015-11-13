@@ -95,6 +95,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>ICON_DOCUMENT_VERTICAL_ELLIPSIS</td>
+	<td>//li[contains(@data-title,'${key_dmDocumentTitle}')]//span[contains(@class,'icon-ellipsis-vertical')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>ICON_DOCUMENT_WORKFLOW_STATUS</td>
 	<td>//div[contains(.,'${key_dmDocumentTitle}') and a[@data-folder='false']]//span[@class='workflow-status']/strong</td>
 	<td></td>
