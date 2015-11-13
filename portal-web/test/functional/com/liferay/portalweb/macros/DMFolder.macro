@@ -425,9 +425,9 @@
 		<execute function="AssertTextEquals" locator1="DocumentsAndMedia#ICON_FOLDER_THUMBNAIL" value1="${dmFolderName}" />
 		<execute function="Click" locator1="DocumentsAndMedia#ICON_FOLDER_TITLE" />
 
-		<var method="StringUtil#upperCase('${dmFolderName}')" name="dmFolderName" />
+		<var method="StringUtil#upperCase('${dmFolderName}')" name="dmFolderNameUpperCase" />
 
-		<execute function="AssertTextEquals" locator1="DocumentsAndMedia#BREADCRUMB_LAST" value1="${dmFolderName}" />
+		<execute function="AssertTextEquals" locator1="DocumentsAndMedia#BREADCRUMB_LAST" value1="${dmFolderNameUpperCase}" />
 	</command>
 
 	<command name="viewDefaultCP">
@@ -441,9 +441,9 @@
 		<execute function="AssertElementPresent" locator1="DocumentsAndMedia#ICON_FOLDER_THUMBNAIL" />
 		<execute function="AssertClick" locator1="DocumentsAndMedia#ICON_FOLDER_TITLE" value1="${dmFolderNameEdit}" />
 
-		<var method="StringUtil#upperCase('${dmFolderNameEdit}')" name="dmFolderNameEdit" />
+		<var method="StringUtil#upperCase('${dmFolderNameEdit}')" name="dmFolderNameEditUpperCase" />
 
-		<execute function="AssertTextEquals" locator1="DocumentsAndMedia#BREADCRUMB_LAST" value1="${dmFolderNameEdit}" />
+		<execute function="AssertTextEquals" locator1="DocumentsAndMedia#BREADCRUMB_LAST" value1="${dmFolderNameEditUpperCase}" />
 	</command>
 
 	<command name="viewFolderViewPermissionsPG">
