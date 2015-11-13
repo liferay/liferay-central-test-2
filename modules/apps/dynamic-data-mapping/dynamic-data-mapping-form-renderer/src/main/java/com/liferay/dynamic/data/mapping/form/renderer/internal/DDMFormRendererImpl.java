@@ -207,11 +207,11 @@ public class DDMFormRendererImpl implements DDMFormRenderer {
 			DDMFormRenderingContext ddmFormRenderingContext)
 		throws PortalException {
 
-		Locale locale = ddmFormRenderingContext.getLocale();
-
 		template.put("containerId", StringUtil.randomId());
 		template.put(
 			"definition", DDMFormJSONSerializerUtil.serialize(ddmForm));
+
+		Locale locale = ddmFormRenderingContext.getLocale();
 
 		DDMFormEvaluationResult ddmFormEvaluationResult =
 			_ddmFormEvaluator.evaluate(
@@ -236,9 +236,9 @@ public class DDMFormRendererImpl implements DDMFormRenderer {
 			ddmForm, ddmFormLayout, ddmFormRenderingContext);
 
 		template.put("pages", pages);
+
 		template.put(
 			"portletNamespace", ddmFormRenderingContext.getPortletNamespace());
-
 		template.put("readOnly", ddmFormRenderingContext.isReadOnly());
 		template.put("strings", getLanguageStringsMap(locale));
 		template.put("templateNamespace", getTemplateNamespace(ddmFormLayout));
