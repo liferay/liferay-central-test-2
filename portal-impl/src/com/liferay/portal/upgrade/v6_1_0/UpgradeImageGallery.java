@@ -347,7 +347,7 @@ public class UpgradeImageGallery extends UpgradeProcess {
 			ps.setString(1, igResourceName);
 
 			try (PreparedStatement ps2 =
-					AutoBatchPreparedStatementUtil.autoBath(
+					AutoBatchPreparedStatementUtil.autoBatch(
 						con.prepareStatement(deleteSQL))) {
 
 				while (rs.next()) {

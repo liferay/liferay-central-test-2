@@ -100,7 +100,7 @@ public class AutoBatchPreparedStatementUtilTest {
 			new PreparedStatementInvocationHandler(false);
 
 		PreparedStatement preparedStatement =
-			AutoBatchPreparedStatementUtil.autoBath(
+			AutoBatchPreparedStatementUtil.autoBatch(
 				(PreparedStatement)ProxyUtil.newProxyInstance(
 					ClassLoader.getSystemClassLoader(),
 					new Class<?>[] {PreparedStatement.class},
@@ -139,7 +139,7 @@ public class AutoBatchPreparedStatementUtilTest {
 			new PreparedStatementInvocationHandler(true);
 
 		PreparedStatement preparedStatement =
-			AutoBatchPreparedStatementUtil.autoBath(
+			AutoBatchPreparedStatementUtil.autoBatch(
 				(PreparedStatement)ProxyUtil.newProxyInstance(
 					ClassLoader.getSystemClassLoader(),
 					new Class<?>[] {PreparedStatement.class},
