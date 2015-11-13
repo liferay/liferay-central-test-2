@@ -6,6 +6,8 @@
 			<condition function="IsElementNotPresent" locator1="ConfigurationAdmin#CONFIGURATION_ADMIN_NAME_LINK" />
 			<then>
 				<execute function="Click" locator1="Icon#CARET_RIGHT" />
+
+				<execute function="Pause" value1="1000" />
 			</then>
 		</while>
 
