@@ -109,7 +109,7 @@ public class UploadServletRequestImpl
 			if ((contentLength == -1) ||
 				(contentLength > uploadServletRequestImplMaxSize)) {
 
-				fileItems = sortBySize(fileItems);
+				fileItems = sort(fileItems);
 			}
 
 			for (org.apache.commons.fileupload.FileItem fileItem : fileItems) {
@@ -576,7 +576,7 @@ public class UploadServletRequestImpl
 		return inputStream;
 	}
 
-	protected List<org.apache.commons.fileupload.FileItem> sortBySize(
+	protected List<org.apache.commons.fileupload.FileItem> sort(
 		List<org.apache.commons.fileupload.FileItem> fileItems) {
 
 		Map<String, GroupedFileItems> groupedFileItemsMap = new HashMap<>();
@@ -599,13 +599,14 @@ public class UploadServletRequestImpl
 		Set<GroupedFileItems> groupedFileItemsList = new TreeSet<>(
 			groupedFileItemsMap.values());
 
-		List<org.apache.commons.fileupload.FileItem> result = new ArrayList<>();
+		List<org.apache.commons.fileupload.FileItem> sortedFileItems =
+			new ArrayList<>();
 
 		for (GroupedFileItems groupedFileItems : groupedFileItemsList) {
-			result.addAll(groupedFileItems.getFileItems());
+			sortedFileItems.addAll(groupedFileItems.getFileItems());
 		}
 
-		return result;
+		return sortedFileItems;
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
@@ -627,6 +628,7 @@ public class UploadServletRequestImpl
 			org.apache.commons.fileupload.FileItem fileItem) {
 
 			_fileItems.add(fileItem);
+
 			_fileItemsSize += fileItem.getSize();
 		}
 
@@ -661,7 +663,7 @@ public class UploadServletRequestImpl
 
 		private final List<org.apache.commons.fileupload.FileItem> _fileItems =
 			new ArrayList<>();
-		private int _fileItemsSize = 0;
+		private int _fileItemsSize;
 		private final String _key;
 
 	}

@@ -53,12 +53,11 @@ public class UploadServletRequestImplTest extends PowerMockito {
 	}
 
 	@Test
-	public void testSortBySize() {
+	public void testSort() {
 		UploadServletRequestImpl uploadServletRequest =
 			new UploadServletRequestImpl(new MockHttpServletRequest());
 
-		List<FileItem> sortedFileItems = uploadServletRequest.sortBySize(
-			_fileItems);
+		List<FileItem> sortedFileItems = uploadServletRequest.sort(_fileItems);
 
 		Assert.assertEquals(10, sortedFileItems.size());
 
@@ -79,12 +78,11 @@ public class UploadServletRequestImplTest extends PowerMockito {
 	}
 
 	@Test
-	public void testSortBySizeKeepsOriginalOrderWhenSameParameterName() {
+	public void testSortKeepsOriginalOrderWithSameParameterName() {
 		UploadServletRequestImpl uploadServletRequest =
 			new UploadServletRequestImpl(new MockHttpServletRequest());
 
-		List<FileItem> sortedFileItems = uploadServletRequest.sortBySize(
-			_fileItems);
+		List<FileItem> sortedFileItems = uploadServletRequest.sort(_fileItems);
 
 		FileItem fileItem1 = sortedFileItems.get(1);
 
