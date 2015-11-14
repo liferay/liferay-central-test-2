@@ -4240,7 +4240,7 @@
 
 		<execute macro="Staging#viewHistoryVersionPG" >
 			<var name="historyVersion" value="${historyVersion}" />
-		<execute>
+		</execute>
 	</command>
 
 	<command name="ViewPageOrderWithStaging" priority="4">
