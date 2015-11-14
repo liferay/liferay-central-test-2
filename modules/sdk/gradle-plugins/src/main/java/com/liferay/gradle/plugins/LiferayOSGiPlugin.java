@@ -187,9 +187,9 @@ public class LiferayOSGiPlugin extends LiferayJavaPlugin {
 		DirectDeployTask directDeployTask = GradleUtil.addTask(
 			project, AUTO_UPDATE_XML_TASK_NAME, DirectDeployTask.class);
 
-		directDeployTask.setArgAppServerType("tomcat");
 		directDeployTask.setAppServerDeployDir(
 			directDeployTask.getTemporaryDir());
+		directDeployTask.setArgAppServerType("tomcat");
 		directDeployTask.setWebAppType("portlet");
 
 		directDeployTask.doFirst(
