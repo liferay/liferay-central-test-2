@@ -78,12 +78,13 @@ public class ConfigurationHelper {
 	}
 
 	public List<String> getConfigurationCategories() {
-		TreeSet orderedCategories = new TreeSet(
+		Set<String> configurationCategories = new TreeSet(
 			new ConfigurationCategoryComparator());
 
-		orderedCategories.addAll(_categorizedConfigurationModels.keySet());
+		configurationCategories.addAll(
+			_categorizedConfigurationModels.keySet());
 
-		return new ArrayList<>(orderedCategories);
+		return new ArrayList<>(configurationCategories);
 	}
 
 	public ConfigurationModel getConfigurationModel(String pid) {
@@ -91,24 +92,24 @@ public class ConfigurationHelper {
 	}
 
 	public List<ConfigurationModel> getConfigurationModels() {
-		TreeSet orderedConfigurationModels = new TreeSet(
+		Set<ConfigurationModel> configurationModels = new TreeSet(
 			new ConfigurationModelComparator());
 
-		orderedConfigurationModels.addAll(_configurationModels.values());
+		configurationModels.addAll(_configurationModels.values());
 
-		return new ArrayList<>(orderedConfigurationModels);
+		return new ArrayList<>(configurationModels);
 	}
 
 	public List<ConfigurationModel> getConfigurationModels(
 		String configurationCategory) {
 
-		TreeSet orderedConfigurationModels = new TreeSet(
+		Set<ConfigurationModel> configurationModels = new TreeSet(
 			new ConfigurationModelComparator());
 
-		orderedConfigurationModels.addAll(
+		configurationModels.addAll(
 			_categorizedConfigurationModels.get(configurationCategory));
 
-		return new ArrayList<>(orderedConfigurationModels);
+		return new ArrayList<>(configurationModels);
 	}
 
 	public List<ConfigurationModel> getFactoryInstances(
@@ -317,9 +318,12 @@ public class ConfigurationHelper {
 		implements Comparator<ConfigurationModel> {
 
 		@Override
-		public int compare(ConfigurationModel cm1, ConfigurationModel cm2) {
-			String name1 = cm1.getName();
-			String name2 = cm2.getName();
+		public int compare(
+			ConfigurationModel configurationModel1,
+			ConfigurationModel configurationModel2) {
+
+			String name1 = configurationModel1.getName();
+			String name2 = configurationModel2.getName();
 
 			return name1.compareTo(name2);
 		}
