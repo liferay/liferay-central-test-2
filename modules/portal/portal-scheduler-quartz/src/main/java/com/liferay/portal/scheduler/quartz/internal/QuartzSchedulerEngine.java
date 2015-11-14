@@ -399,8 +399,8 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 
 			message = message.clone();
 
-			message.put(SchedulerEngine.JOB_NAME, trigger.getJobName());
 			message.put(SchedulerEngine.GROUP_NAME, trigger.getGroupName());
+			message.put(SchedulerEngine.JOB_NAME, trigger.getJobName());
 
 			schedule(
 				scheduler, storageType, quartzTrigger, description, destination,
