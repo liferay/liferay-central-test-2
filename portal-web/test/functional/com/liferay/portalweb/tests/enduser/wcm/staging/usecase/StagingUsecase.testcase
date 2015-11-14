@@ -4264,8 +4264,6 @@
 			<var name="siteURL" value="true" />
 		</execute>
 
-		<execute macro="Navigator#gotoStagedView" />
-
 		<execute macro="Page#gotoPagesCP">
 			<var name="portletName" value="Site Pages" />
 			<var name="siteScopeName" value="${siteName}" />
