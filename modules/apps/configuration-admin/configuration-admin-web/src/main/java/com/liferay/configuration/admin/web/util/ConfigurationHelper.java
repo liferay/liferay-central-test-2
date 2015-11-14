@@ -79,7 +79,7 @@ public class ConfigurationHelper {
 
 	public List<String> getConfigurationCategories() {
 		Set<String> configurationCategories = new TreeSet(
-			new ConfigurationCategoryComparator());
+			getConfigurationCategoryComparator());
 
 		configurationCategories.addAll(
 			_categorizedConfigurationModels.keySet());
@@ -93,7 +93,7 @@ public class ConfigurationHelper {
 
 	public List<ConfigurationModel> getConfigurationModels() {
 		Set<ConfigurationModel> configurationModels = new TreeSet(
-			new ConfigurationModelComparator());
+			getConfigurationModelComparator());
 
 		configurationModels.addAll(_configurationModels.values());
 
@@ -152,6 +152,14 @@ public class ConfigurationHelper {
 		}
 
 		return configurationModels;
+	}
+
+	protected Comparator<String> getConfigurationCategoryComparator() {
+		return new ConfigurationCategoryComparator();
+	}
+
+	protected Comparator<ConfigurationModel> getConfigurationModelComparator() {
+		return new ConfigurationModelComparator();
 	}
 
 	private void _collectConfigurationModels(
