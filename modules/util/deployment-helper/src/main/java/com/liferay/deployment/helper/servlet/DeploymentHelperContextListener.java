@@ -55,8 +55,8 @@ public class DeploymentHelperContextListener implements ServletContextListener {
 			deploymentPath = PropsUtil.get("auto.deploy.deploy.dir");
 
 			servletContext.log(
-				"No deployment path is specified in the web.xml, using " +
-				deploymentPath);
+				"Using deployment path " + deploymentPath +
+					" because it is not specified in web.xml");
 		}
 
 		File deploymentPathFile = new File(deploymentPath);
