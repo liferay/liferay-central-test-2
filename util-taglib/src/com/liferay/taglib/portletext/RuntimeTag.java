@@ -208,6 +208,8 @@ public class RuntimeTag extends TagSupport {
 
 			request.setAttribute(WebKeys.SETTINGS_SCOPE, settingsScope);
 
+			JSONObject jsonObject = null;
+
 			boolean writeJSONObject = false;
 
 			if (PortletPreferencesLocalServiceUtil.getPortletPreferencesCount(
@@ -247,8 +249,6 @@ public class RuntimeTag extends TagSupport {
 
 				writeJSONObject = true;
 			}
-
-			JSONObject jsonObject = null;
 
 			if (writeJSONObject) {
 				jsonObject = JSONFactoryUtil.createJSONObject();
