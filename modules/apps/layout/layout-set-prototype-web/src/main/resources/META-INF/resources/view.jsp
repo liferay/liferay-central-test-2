@@ -17,12 +17,11 @@
 <%@ include file="/init.jsp" %>
 
 <%
-String displayStyle = ParamUtil.getString(request, "displayStyle", "list");
+String navigation = ParamUtil.getString(request, "navigation", "all");
 
+String displayStyle = ParamUtil.getString(request, "displayStyle", "list");
 String orderByCol = ParamUtil.getString(request, "orderByCol", "create-date");
 String orderByType = ParamUtil.getString(request, "orderByType", "asc");
-
-String navigation = ParamUtil.getString(request, "navigation", "all");
 
 Boolean active = null;
 
