@@ -48,7 +48,6 @@ public class SchedulerEventMessageListenerWrapper
 	public void receive(Message message) throws MessageListenerException {
 		String destinationName = GetterUtil.getString(
 			message.getString(SchedulerEngine.DESTINATION_NAME));
-
 		String jobName = message.getString(SchedulerEngine.JOB_NAME);
 		String groupName = message.getString(SchedulerEngine.GROUP_NAME);
 
@@ -56,7 +55,7 @@ public class SchedulerEventMessageListenerWrapper
 			Trigger trigger = _schedulerEntry.getTrigger();
 
 			if (!jobName.equals(trigger.getJobName()) ||
-				! groupName.equals(trigger.getGroupName())) {
+				!groupName.equals(trigger.getGroupName())) {
 
 				return;
 			}
