@@ -50,9 +50,9 @@
 
 		<execute function="AssertTextEquals#assertPartialText" locator1="ItemSelector#CAPTION" value1="${uploadFileName}" />
 
-		<execute function="AssertClick" locator1="ItemSelector#ADD_BUTTON" value1="Add" />
-
 		<execute function="SelectFrameTop" value1="relative=top" />
+
+		<execute function="Click" locator1="Button#ADD" />
 	</command>
 
 	<command name="uploadFile">
