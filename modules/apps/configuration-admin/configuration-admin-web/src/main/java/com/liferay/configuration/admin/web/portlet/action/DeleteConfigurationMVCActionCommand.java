@@ -56,10 +56,10 @@ public class DeleteConfigurationMVCActionCommand implements MVCActionCommand {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws PortletException {
 
-		String pid = ParamUtil.getString(actionRequest, "pid");
-
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
+
+		String pid = ParamUtil.getString(actionRequest, "pid");
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Deleting configuration for service " + pid);
