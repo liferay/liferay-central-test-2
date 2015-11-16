@@ -47,6 +47,30 @@ import java.util.Map;
  */
 public class UpgradeSubscription extends UpgradeProcess {
 
+	protected void addClassName(long classNameId, String className)
+		throws Exception {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+
+		try {
+			con = DataAccess.getUpgradeOptimizedConnection();
+
+			ps = con.prepareStatement(
+				"insert into ClassName_ (mvccVersion, classNameId, value) " +
+					"values (?, ?, ?)");
+
+			ps.setLong(1, 0);
+			ps.setLong(2, classNameId);
+			ps.setString(3, className);
+
+			ps.executeUpdate();
+		}
+		finally {
+			DataAccess.cleanUp(con, ps);
+		}
+	}
+
 	@Override
 	protected void doUpgrade() throws Exception {
 		updateSubscriptionClassNames(
@@ -61,29 +85,13 @@ public class UpgradeSubscription extends UpgradeProcess {
 	protected long getClassNameId(String className) throws Exception {
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		if (classNameId == 0) {
-			Connection con = null;
-			PreparedStatement ps = null;
-
-			try {
-				con = DataAccess.getUpgradeOptimizedConnection();
-
-				classNameId = increment();
-
-				ps = con.prepareStatement(
-					"insert into ClassName_ (mvccVersion, classNameId, " +
-						"value) values (?, ?, ?)");
-
-				ps.setLong(1, 0);
-				ps.setLong(2, classNameId);
-				ps.setString(3, className);
-
-				ps.executeUpdate();
-			}
-			finally {
-				DataAccess.cleanUp(con, ps);
-			}
+		if (classNameId != 0) {
+			return classNameId;
 		}
+
+		classNameId = increment();
+
+		addClassName(classNameId, className);
 
 		return classNameId;
 	}
