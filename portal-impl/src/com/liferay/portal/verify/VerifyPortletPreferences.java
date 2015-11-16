@@ -129,9 +129,12 @@ public class VerifyPortletPreferences extends VerifyProcess {
 	protected void doVerify() throws Exception {
 		CacheRegistryUtil.setActive(true);
 
-		cleanUpLayoutRevisionPortletPreferences();
-
-		CacheRegistryUtil.setActive(false);
+		try {
+			cleanUpLayoutRevisionPortletPreferences();
+		}
+		finally {
+			CacheRegistryUtil.setActive(false);
+		}
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
