@@ -132,10 +132,6 @@ public class ComboServlet extends HttpServlet {
 		Enumeration<String> enu = Collections.enumeration(
 			parameterMap.keySet());
 
-		ServletContext servletContext = getServletContext();
-
-		String contextPath = servletContext.getContextPath();
-
 		while (enu.hasMoreElements()) {
 			String name = enu.nextElement();
 
@@ -144,6 +140,10 @@ public class ComboServlet extends HttpServlet {
 			}
 
 			name = HttpUtil.decodePath(name);
+
+			ServletContext servletContext = getServletContext();
+
+			String contextPath = servletContext.getContextPath();
 
 			if (name.startsWith(contextPath)) {
 				name = name.replaceFirst(contextPath, StringPool.BLANK);
