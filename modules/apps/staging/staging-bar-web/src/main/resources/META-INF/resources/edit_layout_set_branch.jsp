@@ -31,7 +31,7 @@ if (layoutSetBranchId > 0) {
 <liferay-ui:error exception="<%= LayoutSetBranchNameException.class %>">
 
 	<%
-		LayoutSetBranchNameException lsbne = (LayoutSetBranchNameException)errorException;
+	LayoutSetBranchNameException lsbne = (LayoutSetBranchNameException)errorException;
 	%>
 
 	<c:if test="<%= lsbne.getType() == LayoutSetBranchNameException.DUPLICATE %>">
