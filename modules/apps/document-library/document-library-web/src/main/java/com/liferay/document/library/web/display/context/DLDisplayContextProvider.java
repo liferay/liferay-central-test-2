@@ -164,10 +164,10 @@ public class DLDisplayContextProvider {
 	protected void activate(
 		BundleContext bundleContext, Map<String, Object> properties) {
 
+		_bundleContext = bundleContext;
+
 		_dlConfiguration = Configurable.createConfigurable(
 			DLConfiguration.class, properties);
-
-		_bundleContext = bundleContext;
 
 		for (Map.Entry<ServiceReference<DLDisplayContextFactory>,
 				DLDisplayContextFactory> entry :
