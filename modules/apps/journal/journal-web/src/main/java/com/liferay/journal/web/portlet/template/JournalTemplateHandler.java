@@ -54,24 +54,6 @@ import org.osgi.service.component.annotations.Reference;
 )
 public class JournalTemplateHandler extends BaseDDMTemplateHandler {
 
-	public static final Map<String, String> journalArticleLanguageContent =
-		new HashMap<>();
-
-	static {
-		journalArticleLanguageContent.put(
-			"css",
-			"com/liferay/journal/web/portlet/template/dependencies/" +
-				"template.css");
-		journalArticleLanguageContent.put(
-			"ftl",
-			"com/liferay/journal/web/portlet/template/dependencies/" +
-				"template.ftl");
-		journalArticleLanguageContent.put(
-			"vm",
-			"com/liferay/journal/web/portlet/template/dependencies/" +
-				"template.vm");
-	}
-
 	@Override
 	public String getClassName() {
 		return JournalArticle.class.getName();
@@ -114,7 +96,7 @@ public class JournalTemplateHandler extends BaseDDMTemplateHandler {
 
 	@Override
 	public String getTemplatesHelpPath(String language) {
-		return journalArticleLanguageContent.get(language);
+		return _templatesHelpPaths.get(language);
 	}
 
 	@Override
@@ -176,5 +158,23 @@ public class JournalTemplateHandler extends BaseDDMTemplateHandler {
 					"boolean", "date", "document-library", "geolocation",
 					"image", "link-to-page"
 				}));
+
+	private static final Map<String, String> _templatesHelpPaths =
+		new HashMap<>();
+
+	static {
+		_templatesHelpPaths.put(
+			"css",
+			"com/liferay/journal/web/portlet/template/dependencies" +
+				"/template.css");
+		_templatesHelpPaths.put(
+			"ftl",
+			"com/liferay/journal/web/portlet/template/dependencies" +
+				"/template.ftl");
+		_templatesHelpPaths.put(
+			"vm",
+			"com/liferay/journal/web/portlet/template/dependencies" +
+				"/template.vm");
+	}
 
 }
