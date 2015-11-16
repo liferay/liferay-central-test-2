@@ -148,17 +148,6 @@ public class JournalTemplateHandler extends BaseDDMTemplateHandler {
 	private static final Log _log = LogFactoryUtil.getLog(
 		JournalTemplateHandler.class);
 
-	private JournalContent _journalContent;
-	private final TemplateVariableCodeHandler _templateVariableCodeHandler =
-		new DDMTemplateVariableCodeHandler(
-			JournalTemplateHandler.class.getClassLoader(),
-			"com/liferay/journal/web/portlet/template/dependencies/",
-			SetUtil.fromArray(
-				new String[] {
-					"boolean", "date", "document-library", "geolocation",
-					"image", "link-to-page"
-				}));
-
 	private static final Map<String, String> _templatesHelpPaths =
 		new HashMap<>();
 
@@ -176,5 +165,16 @@ public class JournalTemplateHandler extends BaseDDMTemplateHandler {
 			"com/liferay/journal/web/portlet/template/dependencies" +
 				"/template.vm");
 	}
+
+	private JournalContent _journalContent;
+	private final TemplateVariableCodeHandler _templateVariableCodeHandler =
+		new DDMTemplateVariableCodeHandler(
+			JournalTemplateHandler.class.getClassLoader(),
+			"com/liferay/journal/web/portlet/template/dependencies/",
+			SetUtil.fromArray(
+				new String[] {
+					"boolean", "date", "document-library", "geolocation",
+					"image", "link-to-page"
+				}));
 
 }
