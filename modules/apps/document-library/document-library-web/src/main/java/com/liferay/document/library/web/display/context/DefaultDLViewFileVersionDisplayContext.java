@@ -96,6 +96,11 @@ public class DefaultDLViewFileVersionDisplayContext
 			return "file-icon-color-4";
 		}
 		else if (_containsMimeType(
+					_dlConfiguration.spreadSheetFileMimeTypes(), mimeType)) {
+
+			return "file-icon-color-2";
+		}
+		else if (_containsMimeType(
 					_dlConfiguration.textFileMimeTypes(), mimeType)) {
 
 			return "file-icon-color-6";
@@ -104,11 +109,6 @@ public class DefaultDLViewFileVersionDisplayContext
 					_dlConfiguration.vectorialFileMimeTypes(), mimeType)) {
 
 			return "file-icon-color-5";
-		}
-		else if (_containsMimeType(
-					_dlConfiguration.spreadSheetFileMimeTypes(), mimeType)) {
-
-			return "file-icon-color-2";
 		}
 
 		return "file-icon-color-0";
