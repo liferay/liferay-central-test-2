@@ -1824,8 +1824,8 @@ public class BaseDeployer implements AutoDeployer, Deployer {
 							"of " + exitValue);
 				}
 			}
-			catch (IllegalThreadStateException e) {
-				_log.info("Executed command has not yet terminated");
+			catch (IllegalThreadStateException itse) {
+				_log.info("Process did not terminate");
 			}
 		}
 
