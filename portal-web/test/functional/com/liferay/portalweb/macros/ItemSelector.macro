@@ -46,7 +46,7 @@
 
 		<var method="StringUtil#replace('${imageFileName}', ' ', '+')" name="key_imageFileName" />
 
-		<execute function="AssertClick" locator1="ItemSelector#SELECT_FILE_IMAGE_PREVIEW" value1="${imageFileName}" />
+		<execute function="Click" locator1="ItemSelector#SELECT_FILE_IMAGE_PREVIEW" />
 
 		<execute function="AssertTextEquals" locator1="ItemSelector#CAPTION" value1="${imageFileName}" />
 
