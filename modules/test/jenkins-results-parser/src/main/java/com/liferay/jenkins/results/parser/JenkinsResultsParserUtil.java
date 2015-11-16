@@ -15,9 +15,14 @@
 package com.liferay.jenkins.results.parser;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
 import java.io.InputStreamReader;
 
 import java.net.URL;
+
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -201,6 +206,10 @@ public class JenkinsResultsParserUtil {
 		}
 
 		return remoteURL;
+	}
+
+	public static String read(File file) throws IOException {
+		return new String(Files.readAllBytes(Paths.get(file.toURI())));
 	}
 
 	public static JSONObject toJSONObject(String url) throws Exception {
