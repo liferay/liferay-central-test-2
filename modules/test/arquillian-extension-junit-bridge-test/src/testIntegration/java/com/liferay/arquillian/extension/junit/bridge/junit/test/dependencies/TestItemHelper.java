@@ -50,6 +50,7 @@ public class TestItemHelper {
 			StandardOpenOption.CREATE, StandardOpenOption.WRITE)) {
 
 			bufferedWriter.write(s);
+
 			bufferedWriter.newLine();
 		}
 	}

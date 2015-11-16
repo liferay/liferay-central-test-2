@@ -94,12 +94,10 @@ public class JUnitBridgeObserver {
 
 		FrameworkMethod firstFrameworkMethod = frameworkMethods.get(0);
 
-		Method firstMethod = firstFrameworkMethod.getMethod();
+		boolean firstMethod = false;
 
-		boolean isFirstMethod = false;
-
-		if (firstMethod.equals(method)) {
-			isFirstMethod = true;
+		if (method.equals(firstFrameworkMethod.getMethod())) {
+			firstMethod = true;
 
 			statement = withBefores(
 				statement, BeforeClass.class, junitTestClass, null);
@@ -108,12 +106,10 @@ public class JUnitBridgeObserver {
 		FrameworkMethod lastFrameworkMethod = frameworkMethods.get(
 			frameworkMethods.size() - 1);
 
-		Method lastMethod = lastFrameworkMethod.getMethod();
+		boolean lastMethod = false;
 
-		boolean isLastMethod = false;
-
-		if (lastMethod.equals(method)) {
-			isLastMethod = true;
+		if (method.equals(lastFrameworkMethod.getMethod())) {
+			lastMethod = true;
 
 			statement = withAfters(
 				statement, AfterClass.class, junitTestClass, null);
@@ -121,18 +117,16 @@ public class JUnitBridgeObserver {
 
 		evaluateWithClassRule(
 			statement, junitTestClass, target,
-			Description.createSuiteDescription(clazz), isFirstMethod,
-			isLastMethod);
+			Description.createSuiteDescription(clazz), firstMethod, lastMethod);
 	}
 
 	protected void evaluateWithClassRule(
 			Statement statement,
 			org.junit.runners.model.TestClass junitTestClass, Object target,
-			Description description, boolean isFirstMethod,
-			boolean isLastMethod)
+			Description description, boolean firstMethod, boolean lastMethod)
 		throws Throwable {
 
-		if (!isFirstMethod && !isLastMethod) {
+		if (!firstMethod && !lastMethod) {
 			statement.evaluate();
 
 			return;
@@ -151,7 +145,7 @@ public class JUnitBridgeObserver {
 			return;
 		}
 
-		handleClassRules(testRules, isFirstMethod, isLastMethod, true);
+		handleClassRules(testRules, firstMethod, lastMethod, true);
 
 		statement = new RunRules(statement, testRules, description);
 
@@ -159,18 +153,18 @@ public class JUnitBridgeObserver {
 			statement.evaluate();
 		}
 		finally {
-			handleClassRules(testRules, isFirstMethod, isLastMethod, false);
+			handleClassRules(testRules, firstMethod, lastMethod, false);
 		}
 	}
 
 	protected void handleClassRules(
-		List<TestRule> testRules, boolean isFirstMethod, boolean isLastMethod,
+		List<TestRule> testRules, boolean firstMethod, boolean lastMethod,
 		boolean enable) {
 
 		for (TestRule testRule : testRules) {
 			Class<?> testRuleClass = testRule.getClass();
 
-			if (isFirstMethod) {
+			if (firstMethod) {
 				try {
 					Method handleBeforeClassMethod = testRuleClass.getMethod(
 						"handleBeforeClass", boolean.class);
@@ -182,7 +176,7 @@ public class JUnitBridgeObserver {
 				}
 			}
 
-			if (isLastMethod) {
+			if (lastMethod) {
 				try {
 					Method handleAfterClassMethod = testRuleClass.getMethod(
 						"handleAfterClass", boolean.class);
