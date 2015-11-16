@@ -1,4 +1,3 @@
-
 <%--
 /**
  * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
@@ -38,7 +37,7 @@ if (layoutRevisionId <= 0) {
 <liferay-ui:error exception="<%= LayoutBranchNameException.class %>">
 
 	<%
-		LayoutBranchNameException lbne = (LayoutBranchNameException)errorException;
+	LayoutBranchNameException lbne = (LayoutBranchNameException)errorException;
 	%>
 
 	<c:if test="<%= lbne.getType() == LayoutBranchNameException.DUPLICATE %>">
