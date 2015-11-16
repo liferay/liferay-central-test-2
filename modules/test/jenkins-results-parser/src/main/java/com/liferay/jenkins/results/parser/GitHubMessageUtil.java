@@ -15,10 +15,6 @@
 package com.liferay.jenkins.results.parser;
 
 import java.io.File;
-import java.io.IOException;
-
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -90,7 +86,7 @@ public class GitHubMessageUtil {
 		for (String reportFileName : reportFileNames.split(" ")) {
 			File file = new File(reportFileName);
 
-			String content = _read(file);
+			String content = JenkinsResultsParserUtil.read(file);
 
 			Matcher matcher = _pattern.matcher(content);
 
@@ -158,7 +154,7 @@ public class GitHubMessageUtil {
 				try {
 					File file = new File(reportFileName);
 
-					String content = _read(file);
+					String content = JenkinsResultsParserUtil.read(file);
 
 					if (content.contains("job-result=\\\"SUCCESS\\\"")) {
 						continue;
@@ -184,10 +180,6 @@ public class GitHubMessageUtil {
 		}
 
 		project.setProperty("github.post.comment.body", sb.toString());
-	}
-
-	private static String _read(File file) throws IOException {
-		return new String(Files.readAllBytes(Paths.get(file.toURI())));
 	}
 
 	private static final Pattern _pattern = Pattern.compile(
