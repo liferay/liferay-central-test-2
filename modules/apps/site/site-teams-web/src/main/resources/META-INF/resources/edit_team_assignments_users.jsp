@@ -17,11 +17,6 @@
 <%@ include file="/init.jsp" %>
 
 <%
-String displayStyle = ParamUtil.getString(request, "displayStyle", "list");
-
-String orderByCol = ParamUtil.getString(request, "orderByCol", "first-name");
-String orderByType = ParamUtil.getString(request, "orderByType", "asc");
-
 String tabs1 = (String)request.getAttribute("edit_team_assignments.jsp-tabs1");
 String tabs2 = (String)request.getAttribute("edit_team_assignments.jsp-tabs2");
 
@@ -32,6 +27,10 @@ String redirect = (String)request.getAttribute("edit_team_assignments.jsp-redire
 Group group = (Group)request.getAttribute("edit_team_assignments.jsp-group");
 
 Team team = (Team)request.getAttribute("edit_team_assignments.jsp-team");
+
+String displayStyle = ParamUtil.getString(request, "displayStyle", "list");
+String orderByCol = ParamUtil.getString(request, "orderByCol", "first-name");
+String orderByType = ParamUtil.getString(request, "orderByType", "asc");
 
 PortletURL portletURL = (PortletURL)request.getAttribute("edit_team_assignments.jsp-portletURL");
 
