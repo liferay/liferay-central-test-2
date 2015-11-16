@@ -313,9 +313,7 @@ public abstract class BaseActionableDynamicQuery
 										return null;
 									}
 
-								}
-							)
-						);
+								}));
 					}
 
 					for (Future<Void> future : futures) {
