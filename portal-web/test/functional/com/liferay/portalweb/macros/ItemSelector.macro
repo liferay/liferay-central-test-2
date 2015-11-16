@@ -48,7 +48,7 @@
 
 		<execute function="Click" locator1="ItemSelector#SELECT_FILE_IMAGE_PREVIEW" />
 
-		<execute function="AssertTextEquals#assertPartialText" locator1="ItemSelector#CAPTION" value1="${imageFileName}" />
+		<execute function="AssertTextEquals#assertPartialText" locator1="ItemSelector#CAPTION" value1="${uploadFileName}" />
 
 		<execute function="AssertClick" locator1="ItemSelector#ADD_BUTTON" value1="Add" />
 
