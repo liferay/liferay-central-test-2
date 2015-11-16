@@ -81,18 +81,18 @@ public class FriendlyURLServletTest {
 	public void testGetRedirectWithInvalidI18nPath() throws Exception {
 		Layout layout = LayoutTestUtil.addLayout(_group);
 
+		_mockHttpServletRequest.setAttribute(WebKeys.I18N_LANGUAGE_ID, "fr");
+		_mockHttpServletRequest.setPathInfo(StringPool.SLASH);
+
 		String requestURI =
 			PropsValues.LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING +
 				getPath(_group, layout);
 
-		_request.setRequestURI(requestURI);
-		_request.setAttribute(WebKeys.I18N_LANGUAGE_ID, "fr");
-		_request.setPathInfo(StringPool.SLASH);
+		_mockHttpServletRequest.setRequestURI(requestURI);
 
 		testGetRedirect(
 			_group.getFriendlyURL(), Portal.PATH_MAIN,
 			new Object[] {"/en" + requestURI, true});
-
 		testGetRedirect(
 			getPath(_group, layout), Portal.PATH_MAIN,
 			new Object[] {"/en" + requestURI, true});
@@ -125,7 +125,8 @@ public class FriendlyURLServletTest {
 		throws Exception {
 
 		Object[] actualRedirectArray = _friendlyURLServlet.getRedirect(
-			_request, path, mainPath, Collections.<String, String[]>emptyMap());
+			_mockHttpServletRequest, path, mainPath,
+			Collections.<String, String[]>emptyMap());
 
 		Assert.assertArrayEquals(actualRedirectArray, expectedRedirectArray);
 	}
@@ -136,7 +137,7 @@ public class FriendlyURLServletTest {
 	@DeleteAfterTestRun
 	private Group _group;
 
-	private final MockHttpServletRequest _request =
+	private final MockHttpServletRequest _mockHttpServletRequest =
 		new MockHttpServletRequest();
 
 }
