@@ -35,7 +35,7 @@ public class AppDisplay implements Comparable<AppDisplay> {
 
 		AppDisplay appDisplay = new AppDisplay(appName);
 
-		if (appName.equals(_NULL_APP_NAME)) {
+		if (appName.equals(_APP_NAME_UNCATEGORIZED)) {
 			appName = null;
 		}
 
@@ -80,7 +80,7 @@ public class AppDisplay implements Comparable<AppDisplay> {
 			String appName = headers.get("Liferay-Releng-App-Name");
 
 			if (appName == null) {
-				appName = _NULL_APP_NAME;
+				appName = _APP_NAME_UNCATEGORIZED;
 			}
 
 			AppDisplay appDisplay = appDisplaysMap.get(appName);
@@ -99,7 +99,7 @@ public class AppDisplay implements Comparable<AppDisplay> {
 
 	public AppDisplay() {
 		_bundles = new ArrayList<>();
-		_name = _NULL_APP_NAME;
+		_name = _APP_NAME_UNCATEGORIZED;
 	}
 
 	public AppDisplay(String name) {
@@ -124,7 +124,7 @@ public class AppDisplay implements Comparable<AppDisplay> {
 		return _name;
 	}
 
-	private static final String _NULL_APP_NAME = "Uncategorized";
+	private static final String _APP_NAME_UNCATEGORIZED = "Uncategorized";
 
 	private final List<Bundle> _bundles;
 	private final String _name;
