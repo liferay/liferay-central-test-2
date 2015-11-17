@@ -1395,7 +1395,7 @@ public class LayoutTypePortletImpl
 		}
 	}
 
-	protected void copyResources(
+	protected void copyResourcePermissions(
 		String sourcePortletId, String targetPortletId) {
 
 		Layout layout = getLayout();
@@ -1416,10 +1416,9 @@ public class LayoutTypePortletImpl
 				PortletPermissionUtil.getPrimaryKey(
 					layout.getPlid(), targetPortletId);
 
-			resourcePermission.setPrimKey(targetPortletPrimaryKey);
-			resourcePermission.setMvccVersion(0);
 			resourcePermission.setResourcePermissionId(
 				CounterLocalServiceUtil.increment());
+			resourcePermission.setPrimKey(targetPortletPrimaryKey);
 
 			ResourcePermissionLocalServiceUtil.addResourcePermission(
 				resourcePermission);
@@ -1717,7 +1716,7 @@ public class LayoutTypePortletImpl
 				copyPreferences(
 					_portalPreferences.getUserId(), portletId, newPortletId);
 
-				copyResources(portletId, newPortletId);
+				copyResourcePermissions(portletId, newPortletId);
 			}
 			else {
 				newPortletId = portletId;
