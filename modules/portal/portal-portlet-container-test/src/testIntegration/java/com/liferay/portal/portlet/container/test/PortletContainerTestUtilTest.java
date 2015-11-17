@@ -76,14 +76,14 @@ public class PortletContainerTestUtilTest {
 			(ThemeDisplay)httpServletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
-		Assert.assertSame(_layout, themeDisplay.getLayout());
-
 		Company company = CompanyLocalServiceUtil.getCompany(
 			_layout.getCompanyId());
 
 		Assert.assertEquals(company, themeDisplay.getCompany());
+
 		Assert.assertEquals(
 			_layout.getCompanyId(), themeDisplay.getCompanyId());
+		Assert.assertSame(_layout, themeDisplay.getLayout());
 		Assert.assertEquals(_layout.getPlid(), themeDisplay.getPlid());
 		Assert.assertEquals(
 			TestPropsValues.PORTAL_URL, themeDisplay.getPortalURL());
