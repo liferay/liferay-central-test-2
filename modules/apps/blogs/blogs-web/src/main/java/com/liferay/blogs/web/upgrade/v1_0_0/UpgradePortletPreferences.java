@@ -23,7 +23,7 @@ import javax.portlet.PortletPreferences;
 /**
  * @author Iván Zaera
  */
-public class UpgradeEnableViewCount extends BaseUpgradePortletPreferences {
+public class UpgradePortletPreferences extends BaseUpgradePortletPreferences {
 
 	@Override
 	protected String[] getPortletIds() {
