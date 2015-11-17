@@ -410,7 +410,7 @@ public class TestFileEntry implements FileEntry {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler();
+		StringBundler sb = new StringBundler(5);
 
 		sb.append(_groupId);
 		sb.append("_");
