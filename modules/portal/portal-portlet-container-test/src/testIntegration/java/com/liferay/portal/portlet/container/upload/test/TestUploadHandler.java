@@ -43,12 +43,12 @@ public class TestUploadHandler extends BaseUploadHandler {
 		String contentType, InputStream inputStream, long size,
 		ServiceContext serviceContext) {
 
-		FileEntry fileEntry = new TestFileEntry(
+		TestFileEntry testFileEntry = new TestFileEntry(
 			fileName, folderId, groupId, inputStream);
 
-		_testUploadPortlet.put(fileEntry);
+		_testUploadPortlet.put(testFileEntry);
 
-		return fileEntry;
+		return testFileEntry;
 	}
 
 	@Override
