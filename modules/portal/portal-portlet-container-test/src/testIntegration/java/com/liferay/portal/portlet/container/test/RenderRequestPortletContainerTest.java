@@ -105,7 +105,7 @@ public class RenderRequestPortletContainerTest
 	public void testIsAccessGrantedByPortletAuthenticationToken()
 		throws Exception {
 
-		final String testTargetPortletId = "testTargetPortletId";
+		TestPortlet testTargetPortlet = new TestPortlet();
 
 		Dictionary<String, Object> properties = new HashMapDictionary<>();
 
@@ -113,7 +113,7 @@ public class RenderRequestPortletContainerTest
 			"com.liferay.portlet.add-default-resource", Boolean.TRUE);
 		properties.put("com.liferay.portlet.system", Boolean.TRUE);
 
-		TestPortlet testTargetPortlet = new TestPortlet();
+		final String testTargetPortletId = "testTargetPortletId";
 
 		setUpPortlet(testTargetPortlet, properties, testTargetPortletId, false);
 
@@ -233,9 +233,8 @@ public class RenderRequestPortletContainerTest
 			httpServletRequest, TEST_PORTLET_ID, layout.getPlid(),
 			PortletRequest.RENDER_PHASE);
 
-		String testRuntimePortletId = "testRuntimePortletId";
-
 		TestPortlet testRuntimePortlet = new TestPortlet();
+		String testRuntimePortletId = "testRuntimePortletId";
 
 		setUpPortlet(
 			testRuntimePortlet, new HashMapDictionary<String, Object>(),

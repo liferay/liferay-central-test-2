@@ -78,6 +78,26 @@ public class PublicRenderParameterTest extends BasePortletContainerTestCase {
 			UniqueStringRandomizerBumper.INSTANCE);
 		final AtomicBoolean success = new AtomicBoolean(false);
 
+		testPortlet = new TestPortlet() {
+
+			@Override
+			public void render(
+					RenderRequest renderRequest, RenderResponse renderResponse)
+				throws IOException, PortletException {
+
+				PrintWriter printWriter = renderResponse.getWriter();
+
+				String value = renderRequest.getParameter(prpName);
+
+				if (prpValue.equals(value)) {
+					success.set(true);
+				}
+
+				printWriter.write(value);
+			}
+
+		};
+
 		Dictionary<String, Object> properties = new HashMapDictionary<>();
 
 		properties.put(
@@ -88,26 +108,6 @@ public class PublicRenderParameterTest extends BasePortletContainerTestCase {
 			});
 		properties.put(
 			"javax.portlet.supported-public-render-parameter", prpName);
-
-		testPortlet = new TestPortlet() {
-
-			@Override
-			public void render(
-					RenderRequest renderRequest, RenderResponse renderResponse)
-				throws IOException, PortletException {
-
-				PrintWriter writer = renderResponse.getWriter();
-
-				String value = renderRequest.getParameter(prpName);
-
-				if (prpValue.equals(value)) {
-					success.set(true);
-				}
-
-				writer.write(value);
-			}
-
-		};
 
 		setUpPortlet(testPortlet, properties, TEST_PORTLET_ID, false);
 
@@ -158,11 +158,6 @@ public class PublicRenderParameterTest extends BasePortletContainerTestCase {
 			UniqueStringRandomizerBumper.INSTANCE);
 		final AtomicBoolean success = new AtomicBoolean(false);
 
-		Dictionary<String, Object> properties = new HashMapDictionary<>();
-
-		properties.put(
-			"javax.portlet.supported-public-render-parameter", prpName);
-
 		testPortlet = new TestPortlet() {
 
 			@Override
@@ -170,7 +165,7 @@ public class PublicRenderParameterTest extends BasePortletContainerTestCase {
 					RenderRequest renderRequest, RenderResponse renderResponse)
 				throws IOException, PortletException {
 
-				PrintWriter writer = renderResponse.getWriter();
+				PrintWriter printWriter = renderResponse.getWriter();
 
 				String value = renderRequest.getParameter(prpName);
 
@@ -178,10 +173,15 @@ public class PublicRenderParameterTest extends BasePortletContainerTestCase {
 					success.set(true);
 				}
 
-				writer.write(value);
+				printWriter.write(value);
 			}
 
 		};
+
+		Dictionary<String, Object> properties = new HashMapDictionary<>();
+
+		properties.put(
+			"javax.portlet.supported-public-render-parameter", prpName);
 
 		setUpPortlet(testPortlet, properties, TEST_PORTLET_ID);
 
