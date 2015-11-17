@@ -16,7 +16,7 @@
 		<var name="entryComment" value="${entryComment}" />
 
 		<execute function="Click" locator1="Comments#COMMENT_FIELD" />
-		
+
 		<execute function="Type" locator1="Comments#COMMENT_FIELD" value1="${entryComment}" />
 
 		<execute function="AssertElementPresent" locator1="ControlMenu#USER_SIGN_IN" />
