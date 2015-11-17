@@ -242,7 +242,7 @@ public class JenkinsResultsParserUtil {
 			return _toStringCache.get(key);
 		}
 
-		int retryCount = 0;
+		int retries = 0;
 
 		while (true) {
 			try {
@@ -273,23 +273,19 @@ public class JenkinsResultsParserUtil {
 
 				return sb.toString();
 			}
-			catch (FileNotFoundException e) {
-				retryCount++;
+			catch (FileNotFoundException fnfe) {
+				retries++;
 
-				if (retryCount > _MAX_RETRIES) {
+				if (retries > 3) {
 					throw e;
 				}
 
-				System.out.println(
-					"Download file not found. Waiting 5 seconds before retry." +
-						" Retry " + retryCount + " of " + _MAX_RETRIES);
+				System.out.println("Retry in 5 seconds");
 
 				Thread.sleep(5000);
 			}
 		}
 	}
-
-	private static final int _MAX_RETRIES = 3;
 
 	private static final Pattern _localURLPattern1 = Pattern.compile(
 		"https://test.liferay.com/([0-9]+)/");
