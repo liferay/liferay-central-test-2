@@ -110,9 +110,9 @@ public class UploadPortletTest extends BasePortletContainerTestCase {
 			}
 		};
 
-		registerMVCPortlet(_testUploadPortlet);
 		registerMVCActionCommand(
 			new TestUploadMVCActionCommand(_testUploadPortlet));
+		registerMVCPortlet(_testUploadPortlet);
 	}
 
 	@Test
@@ -132,7 +132,7 @@ public class UploadPortletTest extends BasePortletContainerTestCase {
 			group.getGroupId() + "_0_" +
 				TestUploadPortlet.TEST_UPLOAD_FILE_NAME_PARAMETER;
 
-		// verify the file was upload to the TestUploadPortlet store
+		// Verify the file was uploaded to the TestUploadPortlet store
 
 		TestFileEntry actualTestFileEntry = _testUploadPortlet.get(key);
 
@@ -152,7 +152,7 @@ public class UploadPortletTest extends BasePortletContainerTestCase {
 
 		Assert.assertTrue(jsonObject.getBoolean("success"));
 
-		// verify the file was upload to the TestUploadPortlet store, but empty
+		// Verify the empty file was uploaded to the TestUploadPortlet store
 
 		String key =
 			group.getGroupId() + "_0_" +
@@ -166,67 +166,67 @@ public class UploadPortletTest extends BasePortletContainerTestCase {
 	protected void registerMVCActionCommand(MVCActionCommand mvcActionCommand)
 		throws Exception {
 
-		Dictionary<String, Object> mvcActionCommandProperties =
-			new HashMapDictionary<>();
-
-		mvcActionCommandProperties.put(
-			"javax.portlet.name", TestUploadPortlet.TEST_UPLOAD_PORTLET);
-		mvcActionCommandProperties.put(
-			"mvc.command.name", TestUploadPortlet.TEST_MVC_COMMAND_NAME);
-
 		Bundle bundle = FrameworkUtil.getBundle(getClass());
 
 		BundleContext bundleContext = bundle.getBundleContext();
 
+		Dictionary<String, Object> properties =
+			new HashMapDictionary<>();
+
+		properties.put(
+			"javax.portlet.name", TestUploadPortlet.TEST_UPLOAD_PORTLET);
+		properties.put(
+			"mvc.command.name", TestUploadPortlet.TEST_MVC_COMMAND_NAME);
+
 		ServiceRegistration<MVCActionCommand> serviceRegistration =
 			bundleContext.registerService(
 				MVCActionCommand.class, mvcActionCommand,
-				mvcActionCommandProperties);
+				properties);
 
 		serviceRegistrations.add(serviceRegistration);
 	}
 
 	protected void registerMVCPortlet(Portlet portlet) throws Exception {
-		Dictionary<String, Object> portletProperties =
+		Dictionary<String, Object> properties =
 			new HashMapDictionary<>();
 
-		portletProperties.put(
+		properties.put(
 			"com.liferay.portlet.private-request-attributes",
 			Boolean.FALSE.toString());
-		portletProperties.put(
+		properties.put(
 			"com.liferay.portlet.private-session-attributes",
 			Boolean.FALSE.toString());
-		portletProperties.put(
+		properties.put(
 			"com.liferay.portlet.scopeable", Boolean.TRUE.toString());
-		portletProperties.put(
+		properties.put(
 			"com.liferay.portlet.struts-path",
 			TestUploadPortlet.TEST_UPLOAD_STRUTS_PATH);
-		portletProperties.put(
+		properties.put(
 			"com.liferay.portlet.use-default-template",
 			Boolean.TRUE.toString());
-		portletProperties.put(
+		properties.put(
 			"com.liferay.portlet.webdav-storage-token",
 			TestUploadPortlet.TEST_UPLOAD_STRUTS_PATH);
-		portletProperties.put(
+		properties.put(
 			"javax.portlet.display-name", "Test Upload Portlet");
-		portletProperties.put("javax.portlet.expiration-cache", "0");
-		portletProperties.put(
+		properties.put("javax.portlet.expiration-cache", "0");
+		properties.put(
 			"javax.portlet.init-param.single-page-application-cacheable",
 			Boolean.FALSE.toString());
-		portletProperties.put("javax.portlet.init-param.template-path", "/");
-		portletProperties.put(
+		properties.put("javax.portlet.init-param.template-path", "/");
+		properties.put(
 			"javax.portlet.init-param.view-template",
 			"/" + TestUploadPortlet.TEST_UPLOAD_PORTLET + "/view.jsp");
-		portletProperties.put(
+		properties.put(
 			"javax.portlet.name", TestUploadPortlet.TEST_UPLOAD_PORTLET);
-		portletProperties.put(
+		properties.put(
 			"javax.portlet.resource-bundle", "content.Language");
-		portletProperties.put(
+		properties.put(
 			"javax.portlet.security-role-ref", "guest,power-user,user");
-		portletProperties.put("javax.portlet.supports.mime-type", "text/html");
+		properties.put("javax.portlet.supports.mime-type", "text/html");
 
 		setUpPortlet(
-			portlet, portletProperties, TestUploadPortlet.TEST_UPLOAD_PORTLET);
+			portlet, properties, TestUploadPortlet.TEST_UPLOAD_PORTLET);
 	}
 
 	protected Response testUpload(byte[] bytes) throws Exception {
@@ -270,8 +270,13 @@ public class UploadPortletTest extends BasePortletContainerTestCase {
 			LiferayServletRequest liferayServletRequest, Layout layout)
 		throws Exception {
 
-		if ((liferayServletRequest == null) || (layout == null)) {
-			throw new IllegalArgumentException("Arguments cannot be null.");
+		if (liferayServletRequest == null) {
+			throw new IllegalArgumentException(
+				"Liferay servlet request is null");
+		}
+
+		if (layout == null) {
+			throw new IllegalArgumentException("Layout is null");
 		}
 
 		HttpServletRequest httpServletRequest =
@@ -288,6 +293,7 @@ public class UploadPortletTest extends BasePortletContainerTestCase {
 
 		themeDisplay.setLayout(layout);
 		themeDisplay.setPlid(layout.getPlid());
+
 		themeDisplay.setPortalURL(TestPropsValues.PORTAL_URL);
 		themeDisplay.setRequest(httpServletRequest);
 
@@ -295,6 +301,7 @@ public class UploadPortletTest extends BasePortletContainerTestCase {
 
 		themeDisplay.setScopeGroupId(group.getGroupId());
 		themeDisplay.setSiteGroupId(group.getGroupId());
+
 		themeDisplay.setUser(TestPropsValues.getUser());
 
 		httpServletRequest.setAttribute(WebKeys.THEME_DISPLAY, themeDisplay);
