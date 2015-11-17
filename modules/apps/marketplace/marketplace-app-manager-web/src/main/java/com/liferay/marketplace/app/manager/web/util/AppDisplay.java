@@ -98,12 +98,10 @@ public class AppDisplay implements Comparable<AppDisplay> {
 	}
 
 	public AppDisplay() {
-		_bundles = new ArrayList<>();
 		_name = _APP_NAME_UNCATEGORIZED;
 	}
 
 	public AppDisplay(String name) {
-		_bundles = new ArrayList<>();
 		_name = name;
 	}
 
@@ -126,7 +124,7 @@ public class AppDisplay implements Comparable<AppDisplay> {
 
 	private static final String _APP_NAME_UNCATEGORIZED = "Uncategorized";
 
-	private final List<Bundle> _bundles;
+	private final List<Bundle> _bundles = new ArrayList<>();
 	private final String _name;
 
 }
