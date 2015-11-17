@@ -277,7 +277,7 @@ public class JenkinsResultsParserUtil {
 				retries++;
 
 				if (retries > 3) {
-					throw e;
+					throw fnfe;
 				}
 
 				System.out.println("Retry in 5 seconds");
