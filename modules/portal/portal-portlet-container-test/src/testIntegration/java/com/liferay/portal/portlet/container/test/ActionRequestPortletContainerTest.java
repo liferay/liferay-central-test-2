@@ -90,7 +90,7 @@ public class ActionRequestPortletContainerTest
 				portletURL.toString());
 
 			Assert.assertEquals(200, response.getCode());
-			Assert.assertTrue(testPortlet.isActionCalled());
+			Assert.assertTrue(testPortlet.isCalledAction());
 		}
 		finally {
 			ReflectionTestUtil.setFieldValue(
@@ -124,7 +124,7 @@ public class ActionRequestPortletContainerTest
 				portletURL.toString());
 
 			Assert.assertEquals(200, response.getCode());
-			Assert.assertTrue(testPortlet.isActionCalled());
+			Assert.assertTrue(testPortlet.isCalledAction());
 		}
 		finally {
 			ReflectionTestUtil.setFieldValue(
@@ -160,7 +160,7 @@ public class ActionRequestPortletContainerTest
 				portletURL.toString());
 
 			Assert.assertEquals(200, response.getCode());
-			Assert.assertTrue(testPortlet.isActionCalled());
+			Assert.assertTrue(testPortlet.isCalledAction());
 		}
 		finally {
 			ReflectionTestUtil.setFieldValue(
@@ -192,7 +192,7 @@ public class ActionRequestPortletContainerTest
 			portletURL.toString());
 
 		Assert.assertEquals(200, response.getCode());
-		Assert.assertTrue(testPortlet.isActionCalled());
+		Assert.assertTrue(testPortlet.isCalledAction());
 	}
 
 	@Test
@@ -230,7 +230,7 @@ public class ActionRequestPortletContainerTest
 						TEST_PORTLET_ID,
 				loggingEvent.getMessage());
 			Assert.assertEquals(200, response.getCode());
-			Assert.assertFalse(testPortlet.isActionCalled());
+			Assert.assertFalse(testPortlet.isCalledAction());
 		}
 	}
 
@@ -288,7 +288,7 @@ public class ActionRequestPortletContainerTest
 			url, Collections.singletonMap("Cookie", response.getCookies()));
 
 		Assert.assertEquals(200, response.getCode());
-		Assert.assertTrue(testPortlet.isActionCalled());
+		Assert.assertTrue(testPortlet.isCalledAction());
 	}
 
 	@Test
@@ -314,7 +314,7 @@ public class ActionRequestPortletContainerTest
 				portletURL.toString());
 
 			Assert.assertEquals(200, response.getCode());
-			Assert.assertTrue(testPortlet.isActionCalled());
+			Assert.assertTrue(testPortlet.isCalledAction());
 		}
 		finally {
 			ReflectionTestUtil.setFieldValue(
@@ -345,7 +345,7 @@ public class ActionRequestPortletContainerTest
 			portletURL.toString());
 
 		Assert.assertEquals(200, response.getCode());
-		Assert.assertTrue(testPortlet.isActionCalled());
+		Assert.assertTrue(testPortlet.isCalledAction());
 	}
 
 	@Test
@@ -407,7 +407,7 @@ public class ActionRequestPortletContainerTest
 		response = PortletContainerTestUtil.request(url, headers);
 
 		Assert.assertEquals(200, response.getCode());
-		Assert.assertTrue(testPortlet.isActionCalled());
+		Assert.assertTrue(testPortlet.isCalledAction());
 	}
 
 }

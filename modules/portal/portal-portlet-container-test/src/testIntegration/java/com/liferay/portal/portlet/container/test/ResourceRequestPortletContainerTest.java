@@ -186,7 +186,7 @@ public class ResourceRequestPortletContainerTest
 			url, Collections.singletonMap("Cookie", response.getCookies()));
 
 		Assert.assertEquals(200, response.getCode());
-		Assert.assertTrue(testTargetPortlet.isResourceCalled());
+		Assert.assertTrue(testTargetPortlet.isCalledServeResource());
 	}
 
 	@Test
@@ -206,7 +206,7 @@ public class ResourceRequestPortletContainerTest
 			portletURL.toString());
 
 		Assert.assertEquals(200, response.getCode());
-		Assert.assertTrue(testPortlet.isResourceCalled());
+		Assert.assertTrue(testPortlet.isCalledServeResource());
 	}
 
 	@Test
@@ -255,7 +255,7 @@ public class ResourceRequestPortletContainerTest
 			portletURL.toString());
 
 		Assert.assertEquals(200, response.getCode());
-		Assert.assertTrue(testRuntimePortlet.isRenderCalled());
+		Assert.assertTrue(testRuntimePortlet.isCalledRender());
 	}
 
 }
