@@ -401,9 +401,9 @@ public class UploadPortletRequestTest {
 						new HashMap<String, List<String>>()), null,
 					_portletNamespace);
 
-			Assert.assertNull(uploadPortletRequest.getFile("nevermind-name"));
+			Assert.assertNull(uploadPortletRequest.getFile("irrelevantName"));
 			Assert.assertNull(
-				uploadPortletRequest.getFile("nevermind-name", true));
+				uploadPortletRequest.getFile("irrelevantName", true));
 		}
 
 		@Test
@@ -426,9 +426,9 @@ public class UploadPortletRequestTest {
 					null, _portletNamespace);
 
 			Assert.assertNull(
-				uploadPortletRequest.getFile("not-existing-file"));
+				uploadPortletRequest.getFile("nonexistentFile"));
 			Assert.assertNull(
-				uploadPortletRequest.getFile("not-existing-file", true));
+				uploadPortletRequest.getFile("nonexistentFile", true));
 		}
 
 	}
@@ -501,9 +501,9 @@ public class UploadPortletRequestTest {
 					_portletNamespace);
 
 			Assert.assertNull(
-				uploadPortletRequest.getFileAsStream("nevermind-name"));
+				uploadPortletRequest.getFileAsStream("irrelevantName"));
 			Assert.assertNull(
-				uploadPortletRequest.getFileAsStream("nevermind-name", true));
+				uploadPortletRequest.getFileAsStream("irrelevantName", true));
 		}
 
 		@Test
@@ -526,10 +526,10 @@ public class UploadPortletRequestTest {
 					null, _portletNamespace);
 
 			Assert.assertNull(
-				uploadPortletRequest.getFileAsStream("not-existing-file"));
+				uploadPortletRequest.getFileAsStream("nonexistentFile"));
 			Assert.assertNull(
 				uploadPortletRequest.getFileAsStream(
-					"not-existing-file", true));
+					"nonexistentFile", true));
 		}
 
 	}
@@ -601,7 +601,7 @@ public class UploadPortletRequestTest {
 					_portletNamespace);
 
 			Assert.assertNull(
-				uploadPortletRequest.getFileName("nevermind-name"));
+				uploadPortletRequest.getFileName("irrelevantName"));
 		}
 
 		@Test
@@ -624,7 +624,7 @@ public class UploadPortletRequestTest {
 					null, _portletNamespace);
 
 			Assert.assertNull(
-				uploadPortletRequest.getFileName("not-existing-file"));
+				uploadPortletRequest.getFileName("nonexistentFile"));
 		}
 
 	}
@@ -700,7 +700,7 @@ public class UploadPortletRequestTest {
 					_portletNamespace);
 
 			Assert.assertNull(
-				uploadPortletRequest.getFileNames("nevermind-name"));
+				uploadPortletRequest.getFileNames("irrelevantName"));
 		}
 
 		@Test
@@ -723,7 +723,7 @@ public class UploadPortletRequestTest {
 					null, _portletNamespace);
 
 			Assert.assertNull(
-				uploadPortletRequest.getFileNames("not-existing-file"));
+				uploadPortletRequest.getFileNames("nonexistentFile"));
 		}
 
 	}
@@ -757,7 +757,7 @@ public class UploadPortletRequestTest {
 						new HashMap<String, List<String>>()), null,
 					_portletNamespace);
 
-			Assert.assertNull(uploadPortletRequest.getFiles("nevermind-name"));
+			Assert.assertNull(uploadPortletRequest.getFiles("irrelevantName"));
 		}
 
 		@Test
@@ -780,7 +780,7 @@ public class UploadPortletRequestTest {
 					null, _portletNamespace);
 
 			Assert.assertNull(
-				uploadPortletRequest.getFiles("not-existing-file"));
+				uploadPortletRequest.getFiles("nonexistentFile"));
 		}
 
 		@Test
@@ -861,7 +861,7 @@ public class UploadPortletRequestTest {
 					_portletNamespace);
 
 			Assert.assertNull(
-				uploadPortletRequest.getFilesAsStream("nevermind-name"));
+				uploadPortletRequest.getFilesAsStream("irrelevantName"));
 		}
 
 		@Test
@@ -884,7 +884,7 @@ public class UploadPortletRequestTest {
 					null, _portletNamespace);
 
 			Assert.assertNull(
-				uploadPortletRequest.getFilesAsStream("not-existing-file"));
+				uploadPortletRequest.getFilesAsStream("nonexistentFile"));
 		}
 
 		@Test
@@ -1000,7 +1000,7 @@ public class UploadPortletRequestTest {
 					_portletNamespace);
 
 			Assert.assertNull(
-				uploadPortletRequest.getFullFileName("nevermind-name"));
+				uploadPortletRequest.getFullFileName("irrelevantName"));
 		}
 
 		@Test
@@ -1023,7 +1023,7 @@ public class UploadPortletRequestTest {
 					null, _portletNamespace);
 
 			Assert.assertNull(
-				uploadPortletRequest.getFullFileName("not-existing-file"));
+				uploadPortletRequest.getFullFileName("nonexistentFile"));
 		}
 
 	}
@@ -1318,7 +1318,7 @@ public class UploadPortletRequestTest {
 						new HashMap<String, List<String>>()), null,
 					_portletNamespace);
 
-			Long size = uploadPortletRequest.getSize("nevermind-name");
+			Long size = uploadPortletRequest.getSize("irrelevantName");
 
 			Assert.assertEquals(0, size.longValue());
 		}
@@ -1342,7 +1342,7 @@ public class UploadPortletRequestTest {
 						fileParameters, new HashMap<String, List<String>>()),
 					null, _portletNamespace);
 
-			Long size = uploadPortletRequest.getSize("not-existing-file");
+			Long size = uploadPortletRequest.getSize("nonexistentFile");
 
 			Assert.assertEquals(0, size.longValue());
 		}
@@ -1414,7 +1414,7 @@ public class UploadPortletRequestTest {
 					_portletNamespace);
 
 			Assert.assertTrue(
-				uploadPortletRequest.isFormField("nevermind-name"));
+				uploadPortletRequest.isFormField("irrelevantName"));
 		}
 
 		@Test
@@ -1437,7 +1437,7 @@ public class UploadPortletRequestTest {
 					null, _portletNamespace);
 
 			Assert.assertTrue(
-				uploadPortletRequest.isFormField("not-existing-file"));
+				uploadPortletRequest.isFormField("nonexistentFile"));
 		}
 
 	}
