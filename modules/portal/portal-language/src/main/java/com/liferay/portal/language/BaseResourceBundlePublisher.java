@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.language.util;
+package com.liferay.portal.language;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
@@ -39,12 +39,12 @@ import org.osgi.framework.ServiceRegistration;
  */
 public abstract class BaseResourceBundlePublisher {
 
-	protected void activated(BundleContext bundleContext) throws IOException {
+	protected void doActivate(BundleContext bundleContext) throws IOException {
 		registerResourceBundle(
 			bundleContext, "content.Language", getPortletName());
 	}
 
-	protected void deactivated() {
+	protected void doDeactivate() {
 		for (ServiceRegistration serviceRegistration : _serviceRegistrations) {
 			serviceRegistration.unregister();
 		}
@@ -52,13 +52,13 @@ public abstract class BaseResourceBundlePublisher {
 		_serviceRegistrations.clear();
 	}
 
-	protected abstract String getPortletName();
+	protected void doModified(BundleContext bundleContext) throws IOException {
+		doDeactivate();
 
-	protected void modified(BundleContext bundleContext) throws IOException {
-		deactivated();
-
-		activated(bundleContext);
+		doActivate(bundleContext);
 	}
+
+	protected abstract String getPortletName();
 
 	protected void registerResourceBundle(
 		BundleContext bundleContext, String bundleName, String portletName) {
@@ -67,14 +67,16 @@ public abstract class BaseResourceBundlePublisher {
 			ResourceBundle resourceBundle = null;
 
 			try {
+				Class<?> clazz = getClass();
+
 				resourceBundle = ResourceBundleUtil.getBundle(
-					bundleName, locale, getClass().getClassLoader());
+					bundleName, locale, clazz.getClassLoader());
 			}
-			catch (MissingResourceException e) {
+			catch (MissingResourceException mre) {
 				if (_log.isDebugEnabled()) {
 					_log.debug(
-						"Unable to create ResourceBundle for locale " + locale,
-						e);
+						"Unable to create resource bundle for locale " + locale,
+						mre);
 				}
 
 				continue;
