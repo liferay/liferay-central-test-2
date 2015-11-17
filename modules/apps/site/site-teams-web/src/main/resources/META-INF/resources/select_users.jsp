@@ -19,22 +19,21 @@
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 
-String eventName = ParamUtil.getString(request, "eventName", liferayPortletResponse.getNamespace() + "selectUser");
+long teamId = ParamUtil.getLong(request, "teamId");
+
+Team team = TeamLocalServiceUtil.fetchTeam(teamId);
 
 String displayStyle = ParamUtil.getString(request, "displayStyle", "list");
 String orderByCol = ParamUtil.getString(request, "orderByCol", "first-name");
 String orderByType = ParamUtil.getString(request, "orderByType", "asc");
-
-long teamId = ParamUtil.getLong(request, "teamId");
-
-Team team = TeamLocalServiceUtil.fetchTeam(teamId);
+String eventName = ParamUtil.getString(request, "eventName", liferayPortletResponse.getNamespace() + "selectUser");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("mvcPath", "/select_users.jsp");
 portletURL.setParameter("redirect", redirect);
-portletURL.setParameter("eventName", eventName);
 portletURL.setParameter("teamId", String.valueOf(teamId));
+portletURL.setParameter("eventName", eventName);
 
 SearchContainer userSearchContainer = new UserSearch(renderRequest, PortletURLUtil.clone(portletURL, renderResponse));
 

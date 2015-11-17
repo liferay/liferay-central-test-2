@@ -19,22 +19,21 @@
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 
-String eventName = ParamUtil.getString(request, "eventName", liferayPortletResponse.getNamespace() + "selectUserGroup");
+long teamId = ParamUtil.getLong(request, "teamId");
+
+Team team = TeamLocalServiceUtil.fetchTeam(teamId);
 
 String displayStyle = ParamUtil.getString(request, "displayStyle", "list");
 String orderByCol = ParamUtil.getString(request, "orderByCol", "name");
 String orderByType = ParamUtil.getString(request, "orderByType", "asc");
-
-long teamId = ParamUtil.getLong(request, "teamId");
-
-Team team = TeamLocalServiceUtil.fetchTeam(teamId);
+String eventName = ParamUtil.getString(request, "eventName", liferayPortletResponse.getNamespace() + "selectUserGroup");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("mvcPath", "/select_user_groups.jsp");
 portletURL.setParameter("redirect", redirect);
-portletURL.setParameter("eventName", eventName);
 portletURL.setParameter("teamId", String.valueOf(teamId));
+portletURL.setParameter("eventName", eventName);
 
 SearchContainer userGroupSearchContainer = new UserGroupSearch(renderRequest, PortletURLUtil.clone(portletURL, renderResponse));
 
