@@ -46,9 +46,9 @@ public class SupportedPublicRenderParameterTest
 
 	@Test
 	public void testPortalProvidedPRP() throws Exception {
-		String prpName = "categoryId";
-
 		Dictionary<String, Object> properties = new HashMapDictionary<>();
+
+		String prpName = "categoryId";
 
 		properties.put(
 			"javax.portlet.supported-public-render-parameter", prpName);
@@ -80,9 +80,9 @@ public class SupportedPublicRenderParameterTest
 
 	@Test
 	public void testPortletProvidedPRP() throws Exception {
-		String prpName = "myprp";
-
 		Dictionary<String, Object> properties = new HashMapDictionary<>();
+
+		String prpName = "myprp";
 
 		properties.put(
 			"javax.portlet.supported-public-render-parameter",
