@@ -31,11 +31,11 @@ public class LiferayFileItemFactory extends DiskFileItemFactory {
 
 	@Override
 	public LiferayFileItem createItem(
-		String fieldName, String contentType, boolean isFormField,
+		String fieldName, String contentType, boolean formField,
 		String fileName) {
 
 		return new LiferayFileItem(
-			fieldName, contentType, isFormField, fileName, DEFAULT_SIZE,
+			fieldName, contentType, formField, fileName, DEFAULT_SIZE,
 			_tempDir);
 	}
 
