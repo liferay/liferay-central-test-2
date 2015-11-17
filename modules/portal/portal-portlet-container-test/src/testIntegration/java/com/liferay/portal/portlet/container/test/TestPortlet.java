@@ -30,51 +30,49 @@ import javax.portlet.ResourceResponse;
  */
 public class TestPortlet extends GenericPortlet {
 
-	public boolean isActionCalled() {
-		return _actionCalled;
+	public boolean isCalledAction() {
+		return _calledProcessAction;
 	}
 
-	public boolean isRenderCalled() {
-		return _renderCalled;
+	public boolean isCalledRender() {
+		return _calledRender;
 	}
 
-	public boolean isResourceCalled() {
-		return _resourceCalled;
+	public boolean isCalledServeResource() {
+		return _calledServeResource;
 	}
 
 	@Override
 	public void processAction(
 		ActionRequest actionRequest, ActionResponse actionResponse) {
 
-		_actionCalled = true;
+		_calledProcessAction = true;
 	}
 
 	@Override
-	@SuppressWarnings("unused")
 	public void render(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
-		_renderCalled = true;
+		_calledRender = true;
 	}
 
 	public void reset() {
-		_actionCalled = false;
-		_renderCalled = false;
-		_resourceCalled = false;
+		_calledProcessAction = false;
+		_calledRender = false;
+		_calledServeResource = false;
 	}
 
 	@Override
-	@SuppressWarnings("unused")
 	public void serveResource(
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws IOException, PortletException {
 
-		_resourceCalled = true;
+		_calledServeResource = true;
 	}
 
-	private boolean _actionCalled;
-	private boolean _renderCalled;
-	private boolean _resourceCalled;
+	private boolean _calledProcessAction;
+	private boolean _calledRender;
+	private boolean _calledServeResource;
 
 }

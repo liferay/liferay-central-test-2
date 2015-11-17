@@ -180,7 +180,7 @@ public class RenderRequestPortletContainerTest
 			url, Collections.singletonMap("Cookie", response.getCookies()));
 
 		Assert.assertEquals(200, response.getCode());
-		Assert.assertTrue(testTargetPortlet.isRenderCalled());
+		Assert.assertTrue(testTargetPortlet.isCalledRender());
 	}
 
 	@Test
@@ -200,7 +200,7 @@ public class RenderRequestPortletContainerTest
 			portletURL.toString());
 
 		Assert.assertEquals(200, response.getCode());
-		Assert.assertTrue(testPortlet.isRenderCalled());
+		Assert.assertTrue(testPortlet.isCalledRender());
 	}
 
 	@Test
@@ -247,7 +247,7 @@ public class RenderRequestPortletContainerTest
 			portletURL.toString());
 
 		Assert.assertEquals(200, response.getCode());
-		Assert.assertTrue(testRuntimePortlet.isRenderCalled());
+		Assert.assertTrue(testRuntimePortlet.isCalledRender());
 	}
 
 }
