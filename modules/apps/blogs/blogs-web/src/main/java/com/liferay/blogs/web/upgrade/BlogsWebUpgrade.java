@@ -14,8 +14,8 @@
 
 package com.liferay.blogs.web.upgrade;
 
-import com.liferay.blogs.web.upgrade.v1_0_0.UpgradeEnableViewCount;
 import com.liferay.blogs.web.upgrade.v1_0_0.UpgradePortletId;
+import com.liferay.blogs.web.upgrade.v1_0_0.UpgradePortletPreferences;
 import com.liferay.blogs.web.upgrade.v1_0_0.UpgradePortletSettings;
 import com.liferay.portal.kernel.module.framework.ModuleServiceLifecycle;
 import com.liferay.portal.kernel.settings.SettingsFactory;
@@ -38,8 +38,8 @@ public class BlogsWebUpgrade implements UpgradeStepRegistrator {
 			"com.liferay.blogs.web", "0.0.0", "1.0.0", new DummyUpgradeStep());
 		registry.register(
 			"com.liferay.blogs.web", "0.0.1", "1.0.0", new UpgradePortletId(),
-			new UpgradePortletSettings(_settingsFactory),
-			new UpgradeEnableViewCount());
+			new UpgradePortletPreferences(),
+			new UpgradePortletSettings(_settingsFactory));
 	}
 
 	@Reference(unbind = "-")
