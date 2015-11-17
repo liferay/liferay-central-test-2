@@ -399,9 +399,9 @@ public class UploadServletRequestTest {
 					new HashMap<String, FileItem[]>(),
 					new HashMap<String, List<String>>());
 
-			Assert.assertNull(uploadServletRequest.getFile("never-mind-name"));
+			Assert.assertNull(uploadServletRequest.getFile("irrelevantName"));
 			Assert.assertNull(
-				uploadServletRequest.getFile("never-mind-name", true));
+				uploadServletRequest.getFile("irrelevantName", true));
 		}
 
 		@Test
@@ -421,9 +421,9 @@ public class UploadServletRequestTest {
 					fileParameters, new HashMap<String, List<String>>());
 
 			Assert.assertNull(
-				uploadServletRequest.getFile("nonexistent-file"));
+				uploadServletRequest.getFile("nonexistentFile"));
 			Assert.assertNull(
-				uploadServletRequest.getFile("nonexistent-file", true));
+				uploadServletRequest.getFile("nonexistentFile", true));
 		}
 
 	}
@@ -489,9 +489,9 @@ public class UploadServletRequestTest {
 					new HashMap<String, List<String>>());
 
 			Assert.assertNull(
-				uploadServletRequest.getFileAsStream("never-mind-name"));
+				uploadServletRequest.getFileAsStream("irrelevantName"));
 			Assert.assertNull(
-				uploadServletRequest.getFileAsStream("never-mind-name", true));
+				uploadServletRequest.getFileAsStream("irrelevantName", true));
 		}
 
 		@Test
@@ -511,10 +511,10 @@ public class UploadServletRequestTest {
 					fileParameters, new HashMap<String, List<String>>());
 
 			Assert.assertNull(
-				uploadServletRequest.getFileAsStream("nonexistent-file"));
+				uploadServletRequest.getFileAsStream("nonexistentFile"));
 			Assert.assertNull(
 				uploadServletRequest.getFileAsStream(
-					"nonexistent-file", true));
+					"nonexistentFile", true));
 		}
 
 	}
@@ -581,7 +581,7 @@ public class UploadServletRequestTest {
 					new HashMap<String, List<String>>());
 
 			Assert.assertNull(
-				uploadServletRequest.getFileName("never-mind-name"));
+				uploadServletRequest.getFileName("irrelevantName"));
 		}
 
 		@Test
@@ -601,7 +601,7 @@ public class UploadServletRequestTest {
 					fileParameters, new HashMap<String, List<String>>());
 
 			Assert.assertNull(
-				uploadServletRequest.getFileName("nonexistent-file"));
+				uploadServletRequest.getFileName("nonexistentFile"));
 		}
 
 	}
@@ -672,7 +672,7 @@ public class UploadServletRequestTest {
 					new HashMap<String, List<String>>());
 
 			Assert.assertNull(
-				uploadServletRequest.getFileNames("never-mind-name"));
+				uploadServletRequest.getFileNames("irrelevantName"));
 		}
 
 		@Test
@@ -692,7 +692,7 @@ public class UploadServletRequestTest {
 					fileParameters, new HashMap<String, List<String>>());
 
 			Assert.assertNull(
-				uploadServletRequest.getFileNames("nonexistent-file"));
+				uploadServletRequest.getFileNames("nonexistentFile"));
 		}
 
 	}
@@ -765,7 +765,7 @@ public class UploadServletRequestTest {
 					new HashMap<String, FileItem[]>(),
 					new HashMap<String, List<String>>());
 
-			Assert.assertNull(uploadServletRequest.getFiles("never-mind-name"));
+			Assert.assertNull(uploadServletRequest.getFiles("irrelevantName"));
 		}
 
 		@Test
@@ -785,7 +785,7 @@ public class UploadServletRequestTest {
 					fileParameters, new HashMap<String, List<String>>());
 
 			Assert.assertNull(
-				uploadServletRequest.getFiles("nonexistent-file"));
+				uploadServletRequest.getFiles("nonexistentFile"));
 		}
 
 	}
@@ -858,7 +858,7 @@ public class UploadServletRequestTest {
 					new HashMap<String, List<String>>());
 
 			Assert.assertNull(
-				uploadServletRequest.getFilesAsStream("never-mind-name"));
+				uploadServletRequest.getFilesAsStream("irrelevantName"));
 		}
 
 		@Test
@@ -878,7 +878,7 @@ public class UploadServletRequestTest {
 					fileParameters, new HashMap<String, List<String>>());
 
 			Assert.assertNull(
-				uploadServletRequest.getFilesAsStream("nonexistent-file"));
+				uploadServletRequest.getFilesAsStream("nonexistentFile"));
 		}
 
 	}
@@ -946,7 +946,7 @@ public class UploadServletRequestTest {
 					new HashMap<String, List<String>>());
 
 			Assert.assertNull(
-				uploadServletRequest.getFullFileName("never-mind-name"));
+				uploadServletRequest.getFullFileName("irrelevantName"));
 		}
 
 		@Test
@@ -966,7 +966,7 @@ public class UploadServletRequestTest {
 					fileParameters, new HashMap<String, List<String>>());
 
 			Assert.assertNull(
-				uploadServletRequest.getFullFileName("nonexistent-file"));
+				uploadServletRequest.getFullFileName("nonexistentFile"));
 		}
 
 	}
@@ -1238,7 +1238,7 @@ public class UploadServletRequestTest {
 					new HashMap<String, FileItem[]>(),
 					new HashMap<String, List<String>>());
 
-			Assert.assertNull(uploadServletRequest.getSize("never-mind-name"));
+			Assert.assertNull(uploadServletRequest.getSize("irrelevantName"));
 		}
 
 		@Test
@@ -1258,7 +1258,7 @@ public class UploadServletRequestTest {
 					fileParameters, new HashMap<String, List<String>>());
 
 			Assert.assertNull(
-				uploadServletRequest.getSize("nonexistent-file"));
+				uploadServletRequest.getSize("nonexistentFile"));
 		}
 
 	}
@@ -1374,7 +1374,7 @@ public class UploadServletRequestTest {
 					new HashMap<String, List<String>>());
 
 			Assert.assertNull(
-				uploadServletRequest.isFormField("never-mind-name"));
+				uploadServletRequest.isFormField("irrelevantName"));
 		}
 
 		@Test
@@ -1394,7 +1394,7 @@ public class UploadServletRequestTest {
 					fileParameters, new HashMap<String, List<String>>());
 
 			Assert.assertNull(
-				uploadServletRequest.isFormField("nonexistent-file"));
+				uploadServletRequest.isFormField("nonexistentFile"));
 		}
 
 	}
