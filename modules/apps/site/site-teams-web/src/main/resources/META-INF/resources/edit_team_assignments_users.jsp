@@ -100,7 +100,6 @@ RowChecker rowChecker = new EmptyOnClickRowChecker(renderResponse);
 		rowChecker="<%= rowChecker %>"
 		searchContainer="<%= userSearchContainer %>"
 	>
-
 		<liferay-ui:search-container-row
 			className="com.liferay.portal.model.User"
 			cssClass="selectable"
