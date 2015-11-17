@@ -42,14 +42,14 @@ public class TestUploadPortlet extends MVCPortlet {
 	public static final String TEST_UPLOAD_STRUTS_PATH = "upload_test";
 
 	public TestFileEntry get(String key) {
-		return _testFileEntriesMap.get(key);
+		return _testFileEntries.get(key);
 	}
 
 	public void put(TestFileEntry testFileEntry) {
-		_testFileEntriesMap.put(testFileEntry.toString(), testFileEntry);
+		_testFileEntries.put(testFileEntry.toString(), testFileEntry);
 	}
 
-	private final Map<String, TestFileEntry> _testFileEntriesMap =
+	private final Map<String, TestFileEntry> _testFileEntries =
 		new ConcurrentHashMap<>();
 
 }
