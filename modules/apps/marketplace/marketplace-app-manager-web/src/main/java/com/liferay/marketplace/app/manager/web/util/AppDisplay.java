@@ -117,7 +117,7 @@ public class AppDisplay implements Comparable<AppDisplay> {
 			return -1;
 		}
 
-		return getName().compareToIgnoreCase(appDisplay.getName());
+		return _name.compareToIgnoreCase(appDisplay.getName());
 	}
 
 	public String getName() {
