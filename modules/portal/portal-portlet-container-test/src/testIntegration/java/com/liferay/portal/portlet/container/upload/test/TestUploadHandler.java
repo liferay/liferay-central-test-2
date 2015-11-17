@@ -43,7 +43,7 @@ public class TestUploadHandler extends BaseUploadHandler {
 		String contentType, InputStream inputStream, long size,
 		ServiceContext serviceContext) {
 
-		TestFileEntry fileEntry = new TestFileEntry(
+		FileEntry fileEntry = new TestFileEntry(
 			fileName, folderId, groupId, inputStream);
 
 		_testUploadPortlet.put(fileEntry);
@@ -66,7 +66,7 @@ public class TestUploadHandler extends BaseUploadHandler {
 	protected FileEntry fetchFileEntry(
 		long userId, long groupId, long folderId, String fileName) {
 
-		TestFileEntry fileEntry = new TestFileEntry(
+		FileEntry fileEntry = new TestFileEntry(
 			fileName, folderId, groupId, null);
 
 		return _testUploadPortlet.get(fileEntry.toString());
