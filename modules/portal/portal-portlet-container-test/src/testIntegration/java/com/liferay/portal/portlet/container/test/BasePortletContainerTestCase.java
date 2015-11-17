@@ -85,13 +85,13 @@ public class BasePortletContainerTestCase {
 			String portletName, boolean addToLayout)
 		throws Exception {
 
-		Assert.assertNotNull(properties);
-
-		properties.put("javax.portlet.name", portletName);
-
 		Bundle bundle = FrameworkUtil.getBundle(getClass());
 
 		BundleContext bundleContext = bundle.getBundleContext();
+
+		Assert.assertNotNull(properties);
+
+		properties.put("javax.portlet.name", portletName);
 
 		serviceRegistrations.add(
 			bundleContext.registerService(
