@@ -59,13 +59,13 @@ public class S3StoreTest extends BaseStoreTestCase {
 	@Override
 	@Test
 	public void testUpdateFileWithNewFileName() throws Exception {
-		testUpdateFileOnS3StoreShouldNotUpdateFile();
+		updateFileShouldNotUpdateFile();
 	}
 
 	@Override
 	@Test
 	public void testUpdateFileWithNewRepositoryId() throws Exception {
-		testUpdateFileOnS3StoreShouldNotUpdateFile();
+		updateFileShouldNotUpdateFile();
 	}
 
 	@Override
@@ -73,7 +73,7 @@ public class S3StoreTest extends BaseStoreTestCase {
 		return "com.liferay.portal.store.s3.S3Store";
 	}
 
-	protected void testUpdateFileOnS3StoreShouldNotUpdateFile()
+	protected void updateFileShouldNotUpdateFile()
 		throws Exception {
 
 		String fileName = RandomTestUtil.randomString();
