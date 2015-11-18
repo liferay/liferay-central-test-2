@@ -81,7 +81,7 @@ public class DefaultDestinationFactory implements DestinationFactory {
 		cardinality = ReferenceCardinality.MULTIPLE,
 		policy = ReferencePolicy.DYNAMIC,
 		policyOption = ReferencePolicyOption.GREEDY,
-		unbind ="removeDestinationPrototype"
+		unbind = "removeDestinationPrototype"
 	)
 	protected void addDestinationPrototype(
 		DestinationPrototype destinationPrototype,
