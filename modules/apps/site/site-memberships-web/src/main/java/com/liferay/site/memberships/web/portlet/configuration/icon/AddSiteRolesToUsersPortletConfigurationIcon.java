@@ -71,7 +71,7 @@ public class AddSiteRolesToUsersPortletConfigurationIcon
 				themeDisplay.getPermissionChecker(),
 				themeDisplay.getScopeGroup(), ActionKeys.ASSIGN_USER_ROLES);
 		}
-		catch (PortalException e) {
+		catch (PortalException pe) {
 		}
 
 		return false;
