@@ -52,7 +52,7 @@ public class AppDisplayFactoryUtil {
 
 			App app = _appLocalService.getApp(appId);
 
-			return buildMarketplaceAppDisplay(bundlesMap, app);
+			return createMarketplaceAppDisplay(bundlesMap, app);
 		}
 		catch (PortalException pe) {
 			return null;
@@ -98,15 +98,15 @@ public class AppDisplayFactoryUtil {
 
 		bundlesMap.load(bundles);
 
-		appDisplays.addAll(buildMarketplaceAppDisplays(bundlesMap, category));
-		appDisplays.addAll(buildPortalAppDisplays(bundlesMap, category));
+		appDisplays.addAll(createMarketplaceAppDisplays(bundlesMap, category));
+		appDisplays.addAll(createPortalAppDisplays(bundlesMap, category));
 
 		filterAppDisplays(appDisplays, state);
 
 		return ListUtil.sort(appDisplays);
 	}
 
-	protected static AppDisplay buildMarketplaceAppDisplay(
+	protected static AppDisplay createMarketplaceAppDisplay(
 		BundlesMap bundlesMap, App app) {
 
 		AppDisplay appDisplay = new AppDisplay(app.getTitle());
@@ -124,7 +124,7 @@ public class AppDisplayFactoryUtil {
 		return appDisplay;
 	}
 
-	protected static List<AppDisplay> buildMarketplaceAppDisplays(
+	protected static List<AppDisplay> createMarketplaceAppDisplays(
 		BundlesMap bundlesMap, String category) {
 
 		List<AppDisplay> appDisplays = new ArrayList<>();
@@ -140,7 +140,8 @@ public class AppDisplayFactoryUtil {
 		}
 
 		for (App app : apps) {
-			AppDisplay appDisplay = buildMarketplaceAppDisplay(bundlesMap, app);
+			AppDisplay appDisplay = createMarketplaceAppDisplay(
+				bundlesMap, app);
 
 			appDisplays.add(appDisplay);
 		}
@@ -148,7 +149,7 @@ public class AppDisplayFactoryUtil {
 		return appDisplays;
 	}
 
-	protected static List<AppDisplay> buildPortalAppDisplays(
+	protected static List<AppDisplay> createPortalAppDisplays(
 		BundlesMap bundlesMap, String category) {
 
 		Map<String, AppDisplay> appDisplaysMap = new HashMap<>();
@@ -189,23 +190,23 @@ public class AppDisplayFactoryUtil {
 	protected static void filterAppDisplays(
 		List<AppDisplay> appDisplays, int state) {
 
-		Iterator<AppDisplay> itr = appDisplays.iterator();
+		Iterator<AppDisplay> iterator = appDisplays.iterator();
 
-		while (itr.hasNext()) {
-			AppDisplay appDisplay = itr.next();
+		while (iterator.hasNext()) {
+			AppDisplay appDisplay = iterator.next();
 
 			if (appDisplay.getState() != state) {
-				itr.remove();
+				iterator.remove();
 			}
 		}
 	}
 
-	@Reference
+	@Reference(unbind = "-")
 	protected void setAppLocalService(AppLocalService appLocalService) {
 		_appLocalService = appLocalService;
 	}
 
-	@Reference
+	@Reference(unbind = "-")
 	protected void setModuleLocalService(
 		ModuleLocalService moduleLocalService) {
 
