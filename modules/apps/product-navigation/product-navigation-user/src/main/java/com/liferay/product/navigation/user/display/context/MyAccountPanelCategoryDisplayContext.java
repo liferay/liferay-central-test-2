@@ -105,7 +105,7 @@ public class MyAccountPanelCategoryDisplayContext {
 		return true;
 	}
 
-	public boolean showMySiteGroup(boolean privateLayout)
+	public boolean isShowMySiteGroup(boolean privateLayout)
 		throws PortalException {
 
 		Group mySiteGroup = getMySiteGroup();

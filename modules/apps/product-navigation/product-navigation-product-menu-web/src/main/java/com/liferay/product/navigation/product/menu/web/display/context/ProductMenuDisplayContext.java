@@ -104,7 +104,7 @@ public class ProductMenuDisplayContext {
 		return _rootPanelCategoryKey;
 	}
 
-	public boolean showProductMenu() {
+	public boolean isShowProductMenu() {
 		Layout layout = _themeDisplay.getLayout();
 
 		if (layout.isTypeControlPanel()) {

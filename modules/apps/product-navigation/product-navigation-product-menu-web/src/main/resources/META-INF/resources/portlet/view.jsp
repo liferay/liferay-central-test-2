@@ -16,7 +16,7 @@
 
 <%@ include file="/portlet/init.jsp" %>
 
-<c:if test="<%= productMenuDisplayContext.showProductMenu() %>">
+<c:if test="<%= productMenuDisplayContext.isShowProductMenu() %>">
 	<h4 class="sidebar-header">
 		<span class="company-details">
 			<img alt="" class="company-logo" src="<%= themeDisplay.getCompanyLogo() %>" />
