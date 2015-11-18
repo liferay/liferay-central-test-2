@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.site.memberships.web.portlet.icon;
+package com.liferay.site.memberships.web.portlet.configuration.icon;
 
 import com.liferay.portal.kernel.portlet.configuration.icon.BasePortletConfigurationIconFactory;
 import com.liferay.portal.kernel.portlet.configuration.icon.PortletConfigurationIcon;
@@ -31,17 +31,17 @@ import org.osgi.service.component.annotations.Component;
 	property = {"javax.portlet.name=" + SiteMembershipsPortletKeys.SITE_MEMBERSHIPS_ADMIN},
 	service = PortletConfigurationIconFactory.class
 )
-public class AddSiteRolesToUsersPortletConfigurationIconFactory
+public class AddSiteRolesToUserGroupsPortletConfigurationIconFactory
 	extends BasePortletConfigurationIconFactory {
 
 	@Override
 	public PortletConfigurationIcon create(HttpServletRequest request) {
-		return new AddSiteRolesToUsersPortletConfigurationIcon(request);
+		return new AddSiteRolesToUserGroupsPortletConfigurationIcon(request);
 	}
 
 	@Override
 	public double getWeight() {
-		return 102;
+		return 101;
 	}
 
 }
