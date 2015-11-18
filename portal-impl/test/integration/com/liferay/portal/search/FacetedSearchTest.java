@@ -176,6 +176,9 @@ public class FacetedSearchTest {
 	}
 
 	@DeleteAfterTestRun
-	private Group _group1, _group2;
+	private Group _group1;
+
+	@DeleteAfterTestRun
+	private Group _group2;
 
 }
