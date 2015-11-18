@@ -346,9 +346,9 @@ public class LocalizationImpl implements Localization {
 	public Map<Locale, String> getLocalizationMap(
 		Collection<Locale> locales, Locale defaultLocale, String key) {
 
-		String defaultValue = LanguageUtil.get(defaultLocale, key);
+		Map<Locale, String> map = new HashMap<>();
 
-		Map<Locale, String> localizationMap = new HashMap<>();
+		String defaultValue = LanguageUtil.get(defaultLocale, key);
 
 		for (Locale locale : locales) {
 			String value = LanguageUtil.get(locale, key);
@@ -357,10 +357,10 @@ public class LocalizationImpl implements Localization {
 				continue;
 			}
 
-			localizationMap.put(locale, value);
+			map.put(locale, value);
 		}
 
-		return localizationMap;
+		return map;
 	}
 
 	@Override
