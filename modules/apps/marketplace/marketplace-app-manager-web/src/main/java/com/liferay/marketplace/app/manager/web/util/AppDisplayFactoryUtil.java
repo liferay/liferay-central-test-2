@@ -92,11 +92,11 @@ public class AppDisplayFactoryUtil {
 	public static List<AppDisplay> getAppDisplays(
 		List<Bundle> bundles, String category, int state) {
 
+		List<AppDisplay> appDisplays = new ArrayList<>();
+
 		BundlesMap bundlesMap = new BundlesMap(bundles.size());
 
 		bundlesMap.load(bundles);
-
-		List<AppDisplay> appDisplays = new ArrayList<>();
 
 		appDisplays.addAll(buildMarketplaceAppDisplays(bundlesMap, category));
 		appDisplays.addAll(buildPortalAppDisplays(bundlesMap, category));
@@ -151,9 +151,9 @@ public class AppDisplayFactoryUtil {
 	protected static List<AppDisplay> buildPortalAppDisplays(
 		BundlesMap bundlesMap, String category) {
 
-		Collection<Bundle> bundles = bundlesMap.values();
-
 		Map<String, AppDisplay> appDisplaysMap = new HashMap<>();
+
+		Collection<Bundle> bundles = bundlesMap.values();
 
 		for (Bundle bundle : bundles) {
 			Dictionary<String, String> headers = bundle.getHeaders();
