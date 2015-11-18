@@ -177,12 +177,12 @@ public class RepositoryEntryBrowserTag extends IncludeTag {
 			getDisplayStyle());
 		request.setAttribute(
 			"liferay-item-selector:repository-entry-browser:" +
-				"emptyResultsMessage",
-			getEmptyResultsMessage(request));
-		request.setAttribute(
-			"liferay-item-selector:repository-entry-browser:" +
 				"draggableFileReturnType",
 			getDraggableFileReturnType());
+		request.setAttribute(
+			"liferay-item-selector:repository-entry-browser:" +
+				"emptyResultsMessage",
+			getEmptyResultsMessage(request));
 		request.setAttribute(
 			"liferay-item-selector:repository-entry-browser:" +
 				"existingFileEntryReturnType",
