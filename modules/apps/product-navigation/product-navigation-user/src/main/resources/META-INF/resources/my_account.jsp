@@ -24,7 +24,7 @@ MyAccountPanelCategoryDisplayContext myAccountPanelCategoryDisplayContext = new 
 
 <liferay-application-list:panel-category panelCategory="<%= panelCategory %>" showOpen="<%= true %>" />
 
-<c:if test="<%= myAccountPanelCategoryDisplayContext.showMySiteGroup(false) %>">
+<c:if test="<%= myAccountPanelCategoryDisplayContext.isShowMySiteGroup(false) %>">
 	<aui:a
 		cssClass='<%= "list-group-heading" + (myAccountPanelCategoryDisplayContext.isMySiteGroupActive(false) ? " active" : StringPool.BLANK) %>'
 		href="<%= myAccountPanelCategoryDisplayContext.getMySiteGroupURL(false) %>"
@@ -32,7 +32,7 @@ MyAccountPanelCategoryDisplayContext myAccountPanelCategoryDisplayContext = new 
 	/>
 </c:if>
 
-<c:if test="<%= myAccountPanelCategoryDisplayContext.showMySiteGroup(true) %>">
+<c:if test="<%= myAccountPanelCategoryDisplayContext.isShowMySiteGroup(true) %>">
 	<aui:a
 		cssClass='<%= "list-group-heading" + (myAccountPanelCategoryDisplayContext.isMySiteGroupActive(true) ? " active" : StringPool.BLANK) %>'
 		href="<%= myAccountPanelCategoryDisplayContext.getMySiteGroupURL(true) %>"

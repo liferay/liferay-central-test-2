@@ -235,7 +235,7 @@ public class AssetPublisherDisplayContext {
 			SearchContainer searchContainer)
 		throws Exception {
 
-		if (!showAssetEntryResults()) {
+		if (!isShowAssetEntryResults()) {
 			return Collections.emptyList();
 		}
 
@@ -1385,7 +1385,7 @@ public class AssetPublisherDisplayContext {
 		}
 	}
 
-	protected boolean showAssetEntryResults() throws Exception {
+	protected boolean isShowAssetEntryResults() throws Exception {
 		AssetEntryQuery assetEntryQuery = getAssetEntryQuery();
 
 		String portletName = getPortletName();
