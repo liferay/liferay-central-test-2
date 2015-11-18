@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.configuration.icon.exportimport;
+package com.liferay.exportimport.web.configuration.icon;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.configuration.icon.BasePortletConfigurationIcon;
