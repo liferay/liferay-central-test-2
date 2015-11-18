@@ -67,13 +67,11 @@ public class FieldsetTag extends BaseFieldsetTag {
 		PortletResponse portletResponse = (PortletResponse)request.getAttribute(
 			JavaConstants.JAVAX_PORTLET_RESPONSE);
 
-		String namespace = StringPool.BLANK;
-
 		if (portletResponse != null) {
-			namespace = portletResponse.getNamespace();
+			return portletResponse.getNamespace();
 		}
 
-		return namespace;
+		return StringPool.BLANK;
 	}
 
 	private static final boolean _CLEAN_UP_SET_ATTRIBUTES = true;
