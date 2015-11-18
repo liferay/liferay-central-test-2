@@ -135,7 +135,6 @@ String treeId = (String)request.getAttribute("liferay-ui:layouts-tree:treeId");
 				,
 				selPlid: '<%= selPlid %>'
 			</c:if>
-
 		}
 	).render();
 </aui:script>
