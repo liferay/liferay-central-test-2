@@ -17,8 +17,8 @@
 <%@ include file="/init.jsp" %>
 
 <%
-boolean privateLayout = ParamUtil.getBoolean(request, "privateLayout");
 long selPlid = ParamUtil.getLong(request, "selPlid");
+boolean privateLayout = ParamUtil.getBoolean(request, "privateLayout");
 
 Layout selLayout = LayoutLocalServiceUtil.fetchLayout(selPlid);
 
