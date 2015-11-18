@@ -297,7 +297,7 @@ public class DLFileEntryTypeFinderImpl
 			return StringPool.BLANK;
 		}
 
-		return _getBasicDocument(
+		return getBasicDocument(
 			"(SELECT {DLFileEntryType.*} From DLFileEntryType WHERE ");
 	}
 
@@ -306,7 +306,7 @@ public class DLFileEntryTypeFinderImpl
 			return StringPool.BLANK;
 		}
 
-		return _getBasicDocument(
+		return getBasicDocument(
 			"(SELECT COUNT(*) AS COUNT_VALUE From DLFileEntryType WHERE ");
 	}
 
@@ -332,7 +332,7 @@ public class DLFileEntryTypeFinderImpl
 		return sb.toString();
 	}
 
-	private String _getBasicDocument(String prefix) {
+	protected String getBasicDocument(String prefix) {
 		StringBundler sb = new StringBundler(9);
 
 		sb.append(prefix);
