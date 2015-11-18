@@ -25,13 +25,13 @@ import java.util.Set;
 public class LanguageEntry {
 
 	public LanguageEntry(
-		boolean disabled, Set<String> duplicateLanguages, Locale currentLocale,
-		Locale locale, String url) {
+		Set<String> duplicateLanguages, Locale currentLocale, Locale locale,
+		String url, boolean disabled) {
 
-		_disabled = disabled;
 		_duplicateLanguages = duplicateLanguages;
 		_locale = locale;
 		_url = url;
+		_disabled = disabled;
 
 		_languageId = LocaleUtil.toLanguageId(locale);
 
