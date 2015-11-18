@@ -666,6 +666,9 @@ public class LayoutAdminPortlet extends MVCPortlet {
 				ServiceContextThreadLocal.pushServiceContext(serviceContext);
 			}
 			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(e, e);
+				}
 			}
 
 			super.doDispatch(renderRequest, renderResponse);
