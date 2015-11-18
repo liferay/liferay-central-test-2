@@ -17,11 +17,11 @@
 <%@ include file="/init.jsp" %>
 
 <%
+String mvcPath = ParamUtil.getString(request, "mvcPath", "/view_record_set.jsp");
+
 String redirect = ParamUtil.getString(request, "redirect", PortalUtil.getCurrentURL(request));
 
 long recordSetId = PrefsParamUtil.getLong(renderRequest.getPreferences(), renderRequest, "recordSetId");
-
-String mvcPath = ParamUtil.getString(request, "mvcPath", "/view_record_set.jsp");
 
 String orderByCol = ParamUtil.getString(request, "orderByCol", "modified-date");
 String orderByType = ParamUtil.getString(request, "orderByType", "asc");
