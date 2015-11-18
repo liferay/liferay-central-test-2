@@ -192,7 +192,7 @@ public class LanguageTag extends IncludeTag {
 			}
 
 			LanguageEntry languageEntry = new LanguageEntry(
-				disabled, duplicateLanguages, currentLocale, locale, url);
+				duplicateLanguages, currentLocale, locale, url, disabled);
 
 			languageEntries.add(languageEntry);
 		}
