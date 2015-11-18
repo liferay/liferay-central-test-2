@@ -14,22 +14,7 @@
  */
 --%>
 
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
-<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
-
-<%@ taglib uri="http://liferay.com/tld/application-list" prefix="liferay-application-list" %>
-<%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %>
-<%@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
-
-<%@ page import="com.liferay.application.list.PanelCategory" %>
-<%@ page import="com.liferay.application.list.constants.ApplicationListWebKeys" %>
-<%@ page import="com.liferay.portal.kernel.util.StringPool" %>
-<%@ page import="com.liferay.product.navigation.user.display.context.MyAccountPanelCategoryDisplayContext" %>
-
-<portlet:defineObjects />
-
-<liferay-theme:defineObjects />
+<%@ include file="/init.jsp" %>
 
 <%
 PanelCategory panelCategory = (PanelCategory)request.getAttribute(ApplicationListWebKeys.PANEL_CATEGORY);
