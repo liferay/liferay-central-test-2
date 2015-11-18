@@ -150,13 +150,10 @@ public class AddDefaultDocumentLibraryStructuresAction extends SimpleAction {
 				groupId, dlFileEntryTypeKey);
 
 		if (dlFileEntryType == null) {
-			Set<Locale> locales = LanguageUtil.getSupportedLocales();
-
-			Locale defaultLocale = LocaleUtil.getDefault();
-
 			Map<Locale, String> localizationMap =
 				LocalizationUtil.getLocalizationMap(
-					locales, defaultLocale, languageKey);
+					LanguageUtil.getSupportedLocales(), LocaleUtil.getDefault(),
+					languageKey);
 
 			_dlFileEntryTypeLocalService.addFileEntryType(
 				userId, groupId, dlFileEntryTypeKey, localizationMap,
