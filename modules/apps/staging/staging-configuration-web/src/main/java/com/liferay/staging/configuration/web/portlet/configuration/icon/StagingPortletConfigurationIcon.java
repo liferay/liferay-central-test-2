@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.staging.configuration.web.configuration.icon;
+package com.liferay.staging.configuration.web.portlet.configuration.icon;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.configuration.icon.BasePortletConfigurationIcon;
