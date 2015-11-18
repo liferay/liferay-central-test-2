@@ -301,6 +301,22 @@ public class DLFileEntryTypeFinderImpl
 			"(SELECT {DLFileEntryType.*} From DLFileEntryType WHERE ");
 	}
 
+	protected String getBasicDocument(String prefix) {
+		StringBundler sb = new StringBundler(9);
+
+		sb.append(prefix);
+		sb.append("((DLFileEntryType.companyId = 0) ");
+		sb.append("AND (DLFileEntryType.groupId = 0) AND (");
+		sb.append("(lower(DLFileEntryType.name) LIKE ? ");
+		sb.append("[$AND_OR_NULL_CHECK$]) ");
+		sb.append("[$AND_OR_CONNECTOR$] ");
+		sb.append("(DLFileEntryType.description LIKE ? ");
+		sb.append("[$AND_OR_NULL_CHECK$]) ");
+		sb.append("))) UNION ALL (");
+
+		return sb.toString();
+	}
+
 	protected String getBasicDocumentCount(boolean includeBasicFileEntryType) {
 		if (!includeBasicFileEntryType) {
 			return StringPool.BLANK;
@@ -328,22 +344,6 @@ public class DLFileEntryTypeFinderImpl
 		}
 
 		sb.append(") AND");
-
-		return sb.toString();
-	}
-
-	protected String getBasicDocument(String prefix) {
-		StringBundler sb = new StringBundler(9);
-
-		sb.append(prefix);
-		sb.append("((DLFileEntryType.companyId = 0) ");
-		sb.append("AND (DLFileEntryType.groupId = 0) AND (");
-		sb.append("(lower(DLFileEntryType.name) LIKE ? ");
-		sb.append("[$AND_OR_NULL_CHECK$]) ");
-		sb.append("[$AND_OR_CONNECTOR$] ");
-		sb.append("(DLFileEntryType.description LIKE ? ");
-		sb.append("[$AND_OR_NULL_CHECK$]) ");
-		sb.append("))) UNION ALL (");
 
 		return sb.toString();
 	}
