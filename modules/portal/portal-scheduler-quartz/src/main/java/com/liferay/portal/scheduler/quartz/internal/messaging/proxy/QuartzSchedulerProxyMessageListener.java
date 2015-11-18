@@ -12,12 +12,13 @@
  * details.
  */
 
-package com.liferay.portal.scheduler.quartz.internal;
+package com.liferay.portal.scheduler.quartz.internal.messaging.proxy;
 
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.MessageBus;
 import com.liferay.portal.kernel.messaging.proxy.ProxyMessageListener;
 import com.liferay.portal.kernel.scheduler.SchedulerEngine;
+import com.liferay.portal.scheduler.quartz.internal.QuartzSchedulerEngine;
 
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;

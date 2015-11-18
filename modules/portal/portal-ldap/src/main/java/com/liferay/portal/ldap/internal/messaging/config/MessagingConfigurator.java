@@ -12,12 +12,13 @@
  * details.
  */
 
-package com.liferay.portal.ldap.internal.messaging;
+package com.liferay.portal.ldap.internal.messaging.config;
 
 import com.liferay.portal.kernel.messaging.Destination;
 import com.liferay.portal.kernel.messaging.DestinationConfiguration;
 import com.liferay.portal.kernel.messaging.DestinationFactory;
 import com.liferay.portal.kernel.util.HashMapDictionary;
+import com.liferay.portal.ldap.internal.messaging.DestinationNames;
 
 import java.util.Dictionary;
 
