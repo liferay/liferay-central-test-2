@@ -81,7 +81,7 @@ public class DLFileEntryTypeFinderTest {
 	}
 
 	@Test
-	public void testFilterCountByKeywordsAsAPowerUser() throws Exception {
+	public void testFilterCountByKeywordsAsPowerUser() throws Exception {
 		User user = UserTestUtil.addGroupUser(_group, RoleConstants.POWER_USER);
 
 		PermissionChecker permissionChecker =
@@ -113,7 +113,7 @@ public class DLFileEntryTypeFinderTest {
 	}
 
 	@Test
-	public void testFilterCountByKeywordsAsAPowerUserWithoutViewPermission()
+	public void testFilterCountByKeywordsAsPowerUserWithoutViewPermission()
 		throws Exception {
 
 		User user = UserTestUtil.addGroupUser(_group, RoleConstants.POWER_USER);
@@ -166,8 +166,7 @@ public class DLFileEntryTypeFinderTest {
 	}
 
 	@Test
-	public void
-			testFilterCountByKeywordsWithBlankKeywordsNotIncludingBasicType()
+	public void testFilterCountByKeywordsWithBlankKeywordsExcludingBasicType()
 		throws Exception {
 
 		ServiceContext serviceContext =
@@ -203,7 +202,7 @@ public class DLFileEntryTypeFinderTest {
 	}
 
 	@Test
-	public void testFilterFindByKeywordsAsAPowerUser() throws Exception {
+	public void testFilterFindByKeywordsAsPowerUser() throws Exception {
 		User user = UserTestUtil.addGroupUser(_group, RoleConstants.POWER_USER);
 
 		PermissionChecker permissionChecker =
@@ -237,7 +236,7 @@ public class DLFileEntryTypeFinderTest {
 	}
 
 	@Test
-	public void testFilterFindByKeywordsAsAPowerUserWithoutViewPermission()
+	public void testFilterFindByKeywordsAsPowerUserWithoutViewPermission()
 		throws Exception {
 
 		User user = UserTestUtil.addGroupUser(_group, RoleConstants.POWER_USER);
@@ -300,7 +299,7 @@ public class DLFileEntryTypeFinderTest {
 	}
 
 	@Test
-	public void testFilterFindByKeywordsWithBlankKeywordsNotIncludingBasicType()
+	public void testFilterFindByKeywordsWithBlankKeywordsExcludingBasicType()
 		throws Exception {
 
 		ServiceContext serviceContext =
