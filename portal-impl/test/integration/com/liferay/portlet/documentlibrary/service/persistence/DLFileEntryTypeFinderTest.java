@@ -166,7 +166,8 @@ public class DLFileEntryTypeFinderTest {
 	}
 
 	@Test
-	public void testFilterCountByKeywordsWithBlankKeywordsNotIncludingBasicType()
+	public void
+			testFilterCountByKeywordsWithBlankKeywordsNotIncludingBasicType()
 		throws Exception {
 
 		ServiceContext serviceContext =
