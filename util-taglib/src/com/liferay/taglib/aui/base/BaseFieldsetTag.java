@@ -33,16 +33,16 @@ public abstract class BaseFieldsetTag extends com.liferay.taglib.util.IncludeTag
 		return super.doStartTag();
 	}
 
-	public boolean getColumn() {
-		return _column;
-	}
-
 	public boolean getCollapsed() {
 		return _collapsed;
 	}
 
 	public boolean getCollapsible() {
 		return _collapsible;
+	}
+
+	public boolean getColumn() {
+		return _column;
 	}
 
 	public java.lang.String getCssClass() {
@@ -65,12 +65,6 @@ public abstract class BaseFieldsetTag extends com.liferay.taglib.util.IncludeTag
 		return _localizeLabel;
 	}
 
-	public void setColumn(boolean column) {
-		_column = column;
-
-		setScopedAttribute("column", column);
-	}
-
 	public void setCollapsed(boolean collapsed) {
 		_collapsed = collapsed;
 
@@ -81,6 +75,12 @@ public abstract class BaseFieldsetTag extends com.liferay.taglib.util.IncludeTag
 		_collapsible = collapsible;
 
 		setScopedAttribute("collapsible", collapsible);
+	}
+
+	public void setColumn(boolean column) {
+		_column = column;
+
+		setScopedAttribute("column", column);
 	}
 
 	public void setCssClass(java.lang.String cssClass) {
@@ -117,9 +117,9 @@ public abstract class BaseFieldsetTag extends com.liferay.taglib.util.IncludeTag
 	protected void cleanUp() {
 		super.cleanUp();
 
-		_column = false;
 		_collapsed = false;
 		_collapsible = false;
+		_column = false;
 		_cssClass = null;
 		_helpMessage = null;
 		_id = null;
@@ -134,9 +134,9 @@ public abstract class BaseFieldsetTag extends com.liferay.taglib.util.IncludeTag
 
 	@Override
 	protected void setAttributes(HttpServletRequest request) {
-		setNamespacedAttribute(request, "column", _column);
 		setNamespacedAttribute(request, "collapsed", _collapsed);
 		setNamespacedAttribute(request, "collapsible", _collapsible);
+		setNamespacedAttribute(request, "column", _column);
 		setNamespacedAttribute(request, "cssClass", _cssClass);
 		setNamespacedAttribute(request, "helpMessage", _helpMessage);
 		setNamespacedAttribute(request, "id", _id);
@@ -149,9 +149,9 @@ public abstract class BaseFieldsetTag extends com.liferay.taglib.util.IncludeTag
 	private static final String _START_PAGE =
 		"/html/taglib/aui/fieldset/start.jsp";
 
-	private boolean _column = false;
 	private boolean _collapsed = false;
 	private boolean _collapsible = false;
+	private boolean _column = false;
 	private java.lang.String _cssClass = null;
 	private java.lang.String _helpMessage = null;
 	private java.lang.String _id = null;

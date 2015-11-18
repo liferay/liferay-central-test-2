@@ -19,6 +19,7 @@
 <%@ include file="/html/taglib/taglib-init.jsp" %>
 
 <%
+
 Map<String, Object> dynamicAttributes = (Map<String, Object>)request.getAttribute("aui:fieldset-group:dynamicAttributes");
 Map<String, Object> scopedAttributes = (Map<String, Object>)request.getAttribute("aui:fieldset-group:scopedAttributes");
 %>
