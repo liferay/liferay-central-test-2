@@ -44,12 +44,11 @@ public class MyAccountPanelCategoryDisplayContext {
 		_portletRequest = portletRequest;
 		_portletResponse = portletResponse;
 
-		_themeDisplay = (ThemeDisplay)_portletRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
 		_panelCategoryHelper =
 			(PanelCategoryHelper)_portletRequest.getAttribute(
 				ApplicationListWebKeys.PANEL_CATEGORY_HELPER);
+		_themeDisplay = (ThemeDisplay)_portletRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 	}
 
 	public Group getMySiteGroup() throws PortalException {

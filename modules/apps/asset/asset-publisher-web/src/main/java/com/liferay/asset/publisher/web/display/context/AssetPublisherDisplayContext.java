@@ -1334,6 +1334,20 @@ public class AssetPublisherDisplayContext {
 		return false;
 	}
 
+	protected boolean isShowAssetEntryResults() throws Exception {
+		AssetEntryQuery assetEntryQuery = getAssetEntryQuery();
+
+		String portletName = getPortletName();
+
+		if (!portletName.equals(AssetPublisherPortletKeys.RELATED_ASSETS) ||
+			(assetEntryQuery.getLinkedAssetEntryId() > 0)) {
+
+			return true;
+		}
+
+		return false;
+	}
+
 	protected void setDDMStructure() throws Exception {
 		ThemeDisplay themeDisplay = (ThemeDisplay)_request.getAttribute(
 			WebKeys.THEME_DISPLAY);
@@ -1383,20 +1397,6 @@ public class AssetPublisherDisplayContext {
 
 			_ddmStructureFieldLabel = classTypeField.getLabel();
 		}
-	}
-
-	protected boolean isShowAssetEntryResults() throws Exception {
-		AssetEntryQuery assetEntryQuery = getAssetEntryQuery();
-
-		String portletName = getPortletName();
-
-		if (!portletName.equals(AssetPublisherPortletKeys.RELATED_ASSETS) ||
-			(assetEntryQuery.getLinkedAssetEntryId() > 0)) {
-
-			return true;
-		}
-
-		return false;
 	}
 
 	private Integer _abstractLength;
