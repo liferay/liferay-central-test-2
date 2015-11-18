@@ -44,15 +44,13 @@ public class ProductMenuDisplayContext {
 		_portletRequest = portletRequest;
 		_portletResponse = portletResponse;
 
-		_themeDisplay = (ThemeDisplay)_portletRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
 		_panelAppRegistry = (PanelAppRegistry)_portletRequest.getAttribute(
 			ApplicationListWebKeys.PANEL_APP_REGISTRY);
-
 		_panelCategoryRegistry =
 			(PanelCategoryRegistry)_portletRequest.getAttribute(
 				ApplicationListWebKeys.PANEL_CATEGORY_REGISTRY);
+		_themeDisplay = (ThemeDisplay)_portletRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 	}
 
 	public List<PanelCategory> getChildPanelCategories() {
