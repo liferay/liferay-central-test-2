@@ -159,18 +159,18 @@ public class AppDisplayFactoryUtil {
 		for (Bundle bundle : bundles) {
 			Dictionary<String, String> headers = bundle.getHeaders();
 
-			String appTitle = headers.get(
-				BundleConstants.LIFERAY_RELENG_APP_TITLE);
-
-			if (appTitle == null) {
-				appTitle = AppDisplay.APP_NAME_UNCATEGORIZED;
-			}
-
 			String[] categories = StringUtil.split(
 				headers.get(BundleConstants.LIFERAY_RELENG_CATEGORY));
 
 			if (!ArrayUtil.contains(categories, category)) {
 				continue;
+			}
+
+			String appTitle = headers.get(
+				BundleConstants.LIFERAY_RELENG_APP_TITLE);
+
+			if (appTitle == null) {
+				appTitle = AppDisplay.APP_NAME_UNCATEGORIZED;
 			}
 
 			AppDisplay appDisplay = appDisplaysMap.get(appTitle);
