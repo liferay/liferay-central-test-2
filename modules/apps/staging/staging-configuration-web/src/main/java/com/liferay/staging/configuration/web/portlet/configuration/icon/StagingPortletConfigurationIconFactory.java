@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.exportimport.web.configuration.icon;
+package com.liferay.staging.configuration.web.portlet.configuration.icon;
 
 import com.liferay.portal.kernel.portlet.configuration.icon.BasePortletConfigurationIconFactory;
 import com.liferay.portal.kernel.portlet.configuration.icon.PortletConfigurationIcon;
@@ -26,17 +26,17 @@ import org.osgi.service.component.annotations.Component;
  * @author Eudaldo Alonso
  */
 @Component(immediate = true, service = PortletConfigurationIconFactory.class)
-public class ExportImportPortletConfigurationIconFactory
+public class StagingPortletConfigurationIconFactory
 	extends BasePortletConfigurationIconFactory {
 
 	@Override
 	public PortletConfigurationIcon create(HttpServletRequest request) {
-		return new ExportImportPortletConfigurationIcon(request);
+		return new StagingPortletConfigurationIcon(request);
 	}
 
 	@Override
 	public double getWeight() {
-		return 11.0;
+		return 10.0;
 	}
 
 }
