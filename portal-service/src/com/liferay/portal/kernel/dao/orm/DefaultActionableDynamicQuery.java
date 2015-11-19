@@ -96,7 +96,7 @@ public class DefaultActionableDynamicQuery implements ActionableDynamicQuery {
 		}
 
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
-			_clazz, _classLoader);
+			_modelClass, _classLoader);
 
 		addDefaultCriteria(dynamicQuery);
 
@@ -137,7 +137,7 @@ public class DefaultActionableDynamicQuery implements ActionableDynamicQuery {
 
 	@Override
 	public void setClass(Class<?> clazz) {
-		_clazz = clazz;
+		_modelClass = clazz;
 	}
 
 	@Override
@@ -229,7 +229,7 @@ public class DefaultActionableDynamicQuery implements ActionableDynamicQuery {
 		throws PortalException {
 
 		final DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
-			_clazz, _classLoader);
+			_modelClass, _classLoader);
 
 		Property property = PropertyFactoryUtil.forName(
 			_primaryKeyPropertyName);
@@ -357,7 +357,7 @@ public class DefaultActionableDynamicQuery implements ActionableDynamicQuery {
 	}
 
 	protected Class<?> getModelClass() {
-		return _clazz;
+		return _modelClass;
 	}
 
 	protected TransactionAttribute getTransactionAttribute() {
@@ -379,7 +379,7 @@ public class DefaultActionableDynamicQuery implements ActionableDynamicQuery {
 	private AddOrderCriteriaMethod _addOrderCriteriaMethod;
 	private BaseLocalService _baseLocalService;
 	private ClassLoader _classLoader;
-	private Class<?> _clazz;
+	private Class<?> _modelClass;
 	private long _companyId;
 	private Method _dynamicQueryCountMethod;
 	private Method _dynamicQueryMethod;
