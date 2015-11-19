@@ -12,8 +12,7 @@ import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
  * @generated
  */
 @Deprecated
-public abstract class ${entity.name}ActionableDynamicQuery
-	extends DefaultActionableDynamicQuery {
+public abstract class ${entity.name}ActionableDynamicQuery extends DefaultActionableDynamicQuery {
 
 	public ${entity.name}ActionableDynamicQuery() {
 		setBaseLocalService(${entity.name}LocalServiceUtil.getService());
