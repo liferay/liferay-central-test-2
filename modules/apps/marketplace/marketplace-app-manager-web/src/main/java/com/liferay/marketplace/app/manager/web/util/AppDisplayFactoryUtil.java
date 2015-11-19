@@ -131,6 +131,8 @@ public class AppDisplayFactoryUtil {
 
 		List<AppDisplay> appDisplays = new ArrayList<>();
 
+		Set<Bundle> removeBundles = new HashSet<>();
+
 		List<App> apps = null;
 
 		if (Validator.isNotNull(category)) {
@@ -141,15 +143,13 @@ public class AppDisplayFactoryUtil {
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 		}
 
-		Set<Bundle> removeBundles = new HashSet<>();
-
 		for (App app : apps) {
 			AppDisplay appDisplay = createMarketplaceAppDisplay(
 				bundlesMap, app);
 
-			removeBundles.addAll(appDisplay.getBundles());
-
 			appDisplays.add(appDisplay);
+
+			removeBundles.addAll(appDisplay.getBundles());
 		}
 
 		for (Bundle bundle : removeBundles) {
