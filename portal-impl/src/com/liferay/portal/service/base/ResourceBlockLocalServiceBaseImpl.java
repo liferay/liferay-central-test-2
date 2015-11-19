@@ -233,8 +233,8 @@ public abstract class ResourceBlockLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.ResourceBlockLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(ResourceBlock.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(ResourceBlock.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("resourceBlockId");
 
@@ -246,8 +246,8 @@ public abstract class ResourceBlockLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.ResourceBlockLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(ResourceBlock.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(ResourceBlock.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
 			"resourceBlockId");
@@ -258,8 +258,8 @@ public abstract class ResourceBlockLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.ResourceBlockLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(ResourceBlock.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(ResourceBlock.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("resourceBlockId");
 	}

@@ -30,9 +30,10 @@ public abstract class AssetVocabularyActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public AssetVocabularyActionableDynamicQuery() {
 		setBaseLocalService(AssetVocabularyLocalServiceUtil.getService());
-		setClass(AssetVocabulary.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(AssetVocabulary.class);
 
 		setPrimaryKeyPropertyName("vocabularyId");
 	}

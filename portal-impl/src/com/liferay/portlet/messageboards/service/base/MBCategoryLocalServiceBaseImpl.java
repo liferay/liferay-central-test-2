@@ -273,8 +273,8 @@ public abstract class MBCategoryLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(MBCategory.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(MBCategory.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("categoryId");
 
@@ -286,8 +286,8 @@ public abstract class MBCategoryLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(MBCategory.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(MBCategory.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName("categoryId");
 
@@ -297,8 +297,8 @@ public abstract class MBCategoryLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(MBCategory.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(MBCategory.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("categoryId");
 	}

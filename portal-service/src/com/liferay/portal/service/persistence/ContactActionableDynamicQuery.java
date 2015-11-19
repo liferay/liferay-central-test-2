@@ -29,9 +29,10 @@ public abstract class ContactActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public ContactActionableDynamicQuery() {
 		setBaseLocalService(ContactLocalServiceUtil.getService());
-		setClass(Contact.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(Contact.class);
 
 		setPrimaryKeyPropertyName("contactId");
 	}

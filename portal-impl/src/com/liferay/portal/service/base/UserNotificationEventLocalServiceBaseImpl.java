@@ -246,8 +246,8 @@ public abstract class UserNotificationEventLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.UserNotificationEventLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(UserNotificationEvent.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(UserNotificationEvent.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName(
 			"userNotificationEventId");
@@ -260,8 +260,8 @@ public abstract class UserNotificationEventLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.UserNotificationEventLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(UserNotificationEvent.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(UserNotificationEvent.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
 			"userNotificationEventId");
@@ -272,8 +272,8 @@ public abstract class UserNotificationEventLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.UserNotificationEventLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(UserNotificationEvent.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(UserNotificationEvent.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName(
 			"userNotificationEventId");

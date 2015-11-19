@@ -29,9 +29,10 @@ public abstract class LayoutFriendlyURLActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public LayoutFriendlyURLActionableDynamicQuery() {
 		setBaseLocalService(LayoutFriendlyURLLocalServiceUtil.getService());
-		setClass(LayoutFriendlyURL.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(LayoutFriendlyURL.class);
 
 		setPrimaryKeyPropertyName("layoutFriendlyURLId");
 	}

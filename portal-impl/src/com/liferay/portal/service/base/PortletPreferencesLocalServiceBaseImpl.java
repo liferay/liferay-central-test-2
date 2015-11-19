@@ -232,8 +232,8 @@ public abstract class PortletPreferencesLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.PortletPreferencesLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(PortletPreferences.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(PortletPreferences.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("portletPreferencesId");
 
@@ -245,8 +245,8 @@ public abstract class PortletPreferencesLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.PortletPreferencesLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(PortletPreferences.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(PortletPreferences.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
 			"portletPreferencesId");
@@ -257,8 +257,8 @@ public abstract class PortletPreferencesLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.PortletPreferencesLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(PortletPreferences.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(PortletPreferences.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("portletPreferencesId");
 	}

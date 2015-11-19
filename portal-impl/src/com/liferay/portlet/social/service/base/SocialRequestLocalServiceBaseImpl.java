@@ -243,8 +243,8 @@ public abstract class SocialRequestLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.social.service.SocialRequestLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(SocialRequest.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(SocialRequest.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("requestId");
 
@@ -256,8 +256,8 @@ public abstract class SocialRequestLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portlet.social.service.SocialRequestLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(SocialRequest.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(SocialRequest.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName("requestId");
 
@@ -267,8 +267,8 @@ public abstract class SocialRequestLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.social.service.SocialRequestLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(SocialRequest.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(SocialRequest.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("requestId");
 	}

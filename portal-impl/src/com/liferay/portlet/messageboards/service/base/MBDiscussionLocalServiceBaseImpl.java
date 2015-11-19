@@ -257,8 +257,8 @@ public abstract class MBDiscussionLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.messageboards.service.MBDiscussionLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(MBDiscussion.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(MBDiscussion.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("discussionId");
 
@@ -270,8 +270,8 @@ public abstract class MBDiscussionLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portlet.messageboards.service.MBDiscussionLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(MBDiscussion.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(MBDiscussion.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
 			"discussionId");
@@ -282,8 +282,8 @@ public abstract class MBDiscussionLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.messageboards.service.MBDiscussionLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(MBDiscussion.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(MBDiscussion.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("discussionId");
 	}

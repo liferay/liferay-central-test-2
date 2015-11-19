@@ -231,8 +231,8 @@ public abstract class PasswordTrackerLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.PasswordTrackerLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(PasswordTracker.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(PasswordTracker.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("passwordTrackerId");
 
@@ -244,8 +244,8 @@ public abstract class PasswordTrackerLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.PasswordTrackerLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(PasswordTracker.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(PasswordTracker.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
 			"passwordTrackerId");
@@ -256,8 +256,8 @@ public abstract class PasswordTrackerLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.PasswordTrackerLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(PasswordTracker.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(PasswordTracker.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("passwordTrackerId");
 	}

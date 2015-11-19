@@ -221,8 +221,8 @@ public abstract class AccountLocalServiceBaseImpl extends BaseLocalServiceImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.AccountLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(Account.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(Account.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("accountId");
 
@@ -234,8 +234,8 @@ public abstract class AccountLocalServiceBaseImpl extends BaseLocalServiceImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.AccountLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(Account.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(Account.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName("accountId");
 
@@ -245,8 +245,8 @@ public abstract class AccountLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.AccountLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(Account.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(Account.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("accountId");
 	}

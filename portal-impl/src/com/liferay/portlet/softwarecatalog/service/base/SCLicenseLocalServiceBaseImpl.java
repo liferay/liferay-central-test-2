@@ -225,8 +225,8 @@ public abstract class SCLicenseLocalServiceBaseImpl extends BaseLocalServiceImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.softwarecatalog.service.SCLicenseLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(SCLicense.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(SCLicense.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("licenseId");
 
@@ -238,8 +238,8 @@ public abstract class SCLicenseLocalServiceBaseImpl extends BaseLocalServiceImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portlet.softwarecatalog.service.SCLicenseLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(SCLicense.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(SCLicense.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName("licenseId");
 
@@ -249,8 +249,8 @@ public abstract class SCLicenseLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.softwarecatalog.service.SCLicenseLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(SCLicense.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(SCLicense.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("licenseId");
 	}

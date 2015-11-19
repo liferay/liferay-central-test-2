@@ -233,8 +233,8 @@ public abstract class MeetupsEntryLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.social.networking.service.MeetupsEntryLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(MeetupsEntry.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(MeetupsEntry.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("meetupsEntryId");
 
@@ -246,8 +246,8 @@ public abstract class MeetupsEntryLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.social.networking.service.MeetupsEntryLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(MeetupsEntry.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(MeetupsEntry.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
 			"meetupsEntryId");
@@ -258,8 +258,8 @@ public abstract class MeetupsEntryLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.social.networking.service.MeetupsEntryLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(MeetupsEntry.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(MeetupsEntry.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("meetupsEntryId");
 	}

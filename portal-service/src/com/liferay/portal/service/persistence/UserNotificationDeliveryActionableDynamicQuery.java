@@ -29,9 +29,10 @@ public abstract class UserNotificationDeliveryActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public UserNotificationDeliveryActionableDynamicQuery() {
 		setBaseLocalService(UserNotificationDeliveryLocalServiceUtil.getService());
-		setClass(UserNotificationDelivery.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(UserNotificationDelivery.class);
 
 		setPrimaryKeyPropertyName("userNotificationDeliveryId");
 	}

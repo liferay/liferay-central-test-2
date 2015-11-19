@@ -29,9 +29,10 @@ public abstract class LayoutActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public LayoutActionableDynamicQuery() {
 		setBaseLocalService(LayoutLocalServiceUtil.getService());
-		setClass(Layout.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(Layout.class);
 
 		setPrimaryKeyPropertyName("plid");
 	}

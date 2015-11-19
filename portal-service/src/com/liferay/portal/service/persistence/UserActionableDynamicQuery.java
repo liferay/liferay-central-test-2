@@ -29,9 +29,10 @@ public abstract class UserActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public UserActionableDynamicQuery() {
 		setBaseLocalService(UserLocalServiceUtil.getService());
-		setClass(User.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(User.class);
 
 		setPrimaryKeyPropertyName("userId");
 	}

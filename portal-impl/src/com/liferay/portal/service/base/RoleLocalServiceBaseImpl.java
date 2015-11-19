@@ -267,8 +267,8 @@ public abstract class RoleLocalServiceBaseImpl extends BaseLocalServiceImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.RoleLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(Role.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(Role.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("roleId");
 
@@ -280,8 +280,8 @@ public abstract class RoleLocalServiceBaseImpl extends BaseLocalServiceImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.RoleLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(Role.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(Role.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName("roleId");
 
@@ -291,8 +291,8 @@ public abstract class RoleLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.RoleLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(Role.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(Role.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("roleId");
 	}

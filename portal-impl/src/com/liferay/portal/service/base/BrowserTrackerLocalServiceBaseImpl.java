@@ -226,8 +226,8 @@ public abstract class BrowserTrackerLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.BrowserTrackerLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(BrowserTracker.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(BrowserTracker.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("browserTrackerId");
 
@@ -239,8 +239,8 @@ public abstract class BrowserTrackerLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.BrowserTrackerLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(BrowserTracker.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(BrowserTracker.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
 			"browserTrackerId");
@@ -251,8 +251,8 @@ public abstract class BrowserTrackerLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.BrowserTrackerLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(BrowserTracker.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(BrowserTracker.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("browserTrackerId");
 	}

@@ -227,8 +227,8 @@ public abstract class UserTrackerPathLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.UserTrackerPathLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(UserTrackerPath.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(UserTrackerPath.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("userTrackerPathId");
 
@@ -240,8 +240,8 @@ public abstract class UserTrackerPathLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.UserTrackerPathLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(UserTrackerPath.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(UserTrackerPath.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
 			"userTrackerPathId");
@@ -252,8 +252,8 @@ public abstract class UserTrackerPathLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.UserTrackerPathLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(UserTrackerPath.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(UserTrackerPath.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("userTrackerPathId");
 	}

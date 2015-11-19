@@ -29,9 +29,10 @@ public abstract class PortalPreferencesActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public PortalPreferencesActionableDynamicQuery() {
 		setBaseLocalService(PortalPreferencesLocalServiceUtil.getService());
-		setClass(PortalPreferences.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(PortalPreferences.class);
 
 		setPrimaryKeyPropertyName("portalPreferencesId");
 	}

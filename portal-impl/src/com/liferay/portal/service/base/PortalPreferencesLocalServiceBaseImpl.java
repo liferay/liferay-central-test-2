@@ -228,8 +228,8 @@ public abstract class PortalPreferencesLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.PortalPreferencesLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(PortalPreferences.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(PortalPreferences.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("portalPreferencesId");
 
@@ -241,8 +241,8 @@ public abstract class PortalPreferencesLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.PortalPreferencesLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(PortalPreferences.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(PortalPreferences.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
 			"portalPreferencesId");
@@ -253,8 +253,8 @@ public abstract class PortalPreferencesLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.PortalPreferencesLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(PortalPreferences.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(PortalPreferences.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("portalPreferencesId");
 	}

@@ -248,8 +248,8 @@ public abstract class TeamLocalServiceBaseImpl extends BaseLocalServiceImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.TeamLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(Team.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(Team.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("teamId");
 
@@ -261,8 +261,8 @@ public abstract class TeamLocalServiceBaseImpl extends BaseLocalServiceImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.TeamLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(Team.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(Team.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName("teamId");
 
@@ -272,8 +272,8 @@ public abstract class TeamLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.TeamLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(Team.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(Team.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("teamId");
 	}

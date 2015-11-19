@@ -244,8 +244,8 @@ public abstract class KaleoConditionLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.workflow.kaleo.service.KaleoConditionLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(KaleoCondition.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(KaleoCondition.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("kaleoConditionId");
 
@@ -257,8 +257,8 @@ public abstract class KaleoConditionLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portal.workflow.kaleo.service.KaleoConditionLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(KaleoCondition.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(KaleoCondition.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
 			"kaleoConditionId");
@@ -269,8 +269,8 @@ public abstract class KaleoConditionLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.workflow.kaleo.service.KaleoConditionLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(KaleoCondition.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(KaleoCondition.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("kaleoConditionId");
 	}

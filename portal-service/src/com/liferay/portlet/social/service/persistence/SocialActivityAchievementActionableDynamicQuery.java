@@ -30,9 +30,10 @@ public abstract class SocialActivityAchievementActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public SocialActivityAchievementActionableDynamicQuery() {
 		setBaseLocalService(SocialActivityAchievementLocalServiceUtil.getService());
-		setClass(SocialActivityAchievement.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(SocialActivityAchievement.class);
 
 		setPrimaryKeyPropertyName("activityAchievementId");
 	}

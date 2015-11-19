@@ -30,9 +30,10 @@ public abstract class DLFolderActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public DLFolderActionableDynamicQuery() {
 		setBaseLocalService(DLFolderLocalServiceUtil.getService());
-		setClass(DLFolder.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(DLFolder.class);
 
 		setPrimaryKeyPropertyName("folderId");
 	}

@@ -29,9 +29,10 @@ public abstract class LayoutPrototypeActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public LayoutPrototypeActionableDynamicQuery() {
 		setBaseLocalService(LayoutPrototypeLocalServiceUtil.getService());
-		setClass(LayoutPrototype.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(LayoutPrototype.class);
 
 		setPrimaryKeyPropertyName("layoutPrototypeId");
 	}

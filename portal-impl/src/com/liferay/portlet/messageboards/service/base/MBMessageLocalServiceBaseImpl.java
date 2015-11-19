@@ -277,8 +277,8 @@ public abstract class MBMessageLocalServiceBaseImpl extends BaseLocalServiceImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(MBMessage.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(MBMessage.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("messageId");
 
@@ -290,8 +290,8 @@ public abstract class MBMessageLocalServiceBaseImpl extends BaseLocalServiceImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(MBMessage.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(MBMessage.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName("messageId");
 
@@ -301,8 +301,8 @@ public abstract class MBMessageLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(MBMessage.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(MBMessage.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("messageId");
 	}

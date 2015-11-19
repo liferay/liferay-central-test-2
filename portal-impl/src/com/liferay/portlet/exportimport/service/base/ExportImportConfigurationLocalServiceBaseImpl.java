@@ -235,8 +235,8 @@ public abstract class ExportImportConfigurationLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.exportimport.service.ExportImportConfigurationLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(ExportImportConfiguration.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(ExportImportConfiguration.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName(
 			"exportImportConfigurationId");
@@ -249,8 +249,8 @@ public abstract class ExportImportConfigurationLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portlet.exportimport.service.ExportImportConfigurationLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(ExportImportConfiguration.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(ExportImportConfiguration.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
 			"exportImportConfigurationId");
@@ -261,8 +261,8 @@ public abstract class ExportImportConfigurationLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.exportimport.service.ExportImportConfigurationLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(ExportImportConfiguration.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(ExportImportConfiguration.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName(
 			"exportImportConfigurationId");

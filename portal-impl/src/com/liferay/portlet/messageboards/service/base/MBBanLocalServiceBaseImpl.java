@@ -243,8 +243,8 @@ public abstract class MBBanLocalServiceBaseImpl extends BaseLocalServiceImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(MBBan.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(MBBan.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("banId");
 
@@ -256,8 +256,8 @@ public abstract class MBBanLocalServiceBaseImpl extends BaseLocalServiceImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(MBBan.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(MBBan.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName("banId");
 
@@ -267,8 +267,8 @@ public abstract class MBBanLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(MBBan.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(MBBan.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("banId");
 	}

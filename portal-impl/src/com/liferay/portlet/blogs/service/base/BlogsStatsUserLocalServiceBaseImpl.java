@@ -232,8 +232,8 @@ public abstract class BlogsStatsUserLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.blogs.service.BlogsStatsUserLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(BlogsStatsUser.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(BlogsStatsUser.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("statsUserId");
 
@@ -245,8 +245,8 @@ public abstract class BlogsStatsUserLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portlet.blogs.service.BlogsStatsUserLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(BlogsStatsUser.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(BlogsStatsUser.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName("statsUserId");
 
@@ -256,8 +256,8 @@ public abstract class BlogsStatsUserLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.blogs.service.BlogsStatsUserLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(BlogsStatsUser.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(BlogsStatsUser.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("statsUserId");
 	}

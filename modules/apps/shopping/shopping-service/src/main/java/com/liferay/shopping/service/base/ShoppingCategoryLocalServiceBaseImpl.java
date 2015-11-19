@@ -232,8 +232,8 @@ public abstract class ShoppingCategoryLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.shopping.service.ShoppingCategoryLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(ShoppingCategory.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(ShoppingCategory.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("categoryId");
 
@@ -245,8 +245,8 @@ public abstract class ShoppingCategoryLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.shopping.service.ShoppingCategoryLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(ShoppingCategory.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(ShoppingCategory.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName("categoryId");
 
@@ -256,8 +256,8 @@ public abstract class ShoppingCategoryLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.shopping.service.ShoppingCategoryLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(ShoppingCategory.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(ShoppingCategory.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("categoryId");
 	}

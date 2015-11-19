@@ -230,8 +230,8 @@ public abstract class VirtualHostLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.VirtualHostLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(VirtualHost.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(VirtualHost.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("virtualHostId");
 
@@ -243,8 +243,8 @@ public abstract class VirtualHostLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.VirtualHostLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(VirtualHost.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(VirtualHost.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
 			"virtualHostId");
@@ -255,8 +255,8 @@ public abstract class VirtualHostLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.VirtualHostLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(VirtualHost.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(VirtualHost.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("virtualHostId");
 	}

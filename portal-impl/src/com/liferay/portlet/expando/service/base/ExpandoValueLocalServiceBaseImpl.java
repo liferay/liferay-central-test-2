@@ -232,8 +232,8 @@ public abstract class ExpandoValueLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.expando.service.ExpandoValueLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(ExpandoValue.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(ExpandoValue.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("valueId");
 
@@ -245,8 +245,8 @@ public abstract class ExpandoValueLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portlet.expando.service.ExpandoValueLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(ExpandoValue.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(ExpandoValue.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName("valueId");
 
@@ -256,8 +256,8 @@ public abstract class ExpandoValueLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.expando.service.ExpandoValueLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(ExpandoValue.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(ExpandoValue.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("valueId");
 	}

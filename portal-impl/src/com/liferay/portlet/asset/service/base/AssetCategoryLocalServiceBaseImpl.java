@@ -258,8 +258,8 @@ public abstract class AssetCategoryLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(AssetCategory.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(AssetCategory.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("categoryId");
 
@@ -271,8 +271,8 @@ public abstract class AssetCategoryLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(AssetCategory.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(AssetCategory.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName("categoryId");
 
@@ -282,8 +282,8 @@ public abstract class AssetCategoryLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(AssetCategory.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(AssetCategory.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("categoryId");
 	}

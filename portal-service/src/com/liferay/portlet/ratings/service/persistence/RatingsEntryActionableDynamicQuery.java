@@ -30,9 +30,10 @@ public abstract class RatingsEntryActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public RatingsEntryActionableDynamicQuery() {
 		setBaseLocalService(RatingsEntryLocalServiceUtil.getService());
-		setClass(RatingsEntry.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(RatingsEntry.class);
 
 		setPrimaryKeyPropertyName("entryId");
 	}

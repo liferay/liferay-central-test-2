@@ -275,8 +275,8 @@ public abstract class CalendarBookingLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.calendar.service.CalendarBookingLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(CalendarBooking.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(CalendarBooking.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("calendarBookingId");
 
@@ -288,8 +288,8 @@ public abstract class CalendarBookingLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.calendar.service.CalendarBookingLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(CalendarBooking.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(CalendarBooking.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
 			"calendarBookingId");
@@ -300,8 +300,8 @@ public abstract class CalendarBookingLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.calendar.service.CalendarBookingLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(CalendarBooking.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(CalendarBooking.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("calendarBookingId");
 	}

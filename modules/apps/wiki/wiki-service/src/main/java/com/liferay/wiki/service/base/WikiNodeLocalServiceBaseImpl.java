@@ -260,8 +260,8 @@ public abstract class WikiNodeLocalServiceBaseImpl extends BaseLocalServiceImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.wiki.service.WikiNodeLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(WikiNode.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(WikiNode.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("nodeId");
 
@@ -273,8 +273,8 @@ public abstract class WikiNodeLocalServiceBaseImpl extends BaseLocalServiceImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.wiki.service.WikiNodeLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(WikiNode.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(WikiNode.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName("nodeId");
 
@@ -284,8 +284,8 @@ public abstract class WikiNodeLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.wiki.service.WikiNodeLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(WikiNode.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(WikiNode.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("nodeId");
 	}

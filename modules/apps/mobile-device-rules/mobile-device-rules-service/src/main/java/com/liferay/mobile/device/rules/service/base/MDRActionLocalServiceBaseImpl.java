@@ -248,8 +248,8 @@ public abstract class MDRActionLocalServiceBaseImpl extends BaseLocalServiceImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.mobile.device.rules.service.MDRActionLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(MDRAction.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(MDRAction.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("actionId");
 
@@ -261,8 +261,8 @@ public abstract class MDRActionLocalServiceBaseImpl extends BaseLocalServiceImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.mobile.device.rules.service.MDRActionLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(MDRAction.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(MDRAction.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName("actionId");
 
@@ -272,8 +272,8 @@ public abstract class MDRActionLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.mobile.device.rules.service.MDRActionLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(MDRAction.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(MDRAction.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("actionId");
 	}

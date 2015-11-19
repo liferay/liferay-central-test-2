@@ -30,9 +30,10 @@ public abstract class MBBanActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public MBBanActionableDynamicQuery() {
 		setBaseLocalService(MBBanLocalServiceUtil.getService());
-		setClass(MBBan.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(MBBan.class);
 
 		setPrimaryKeyPropertyName("banId");
 	}

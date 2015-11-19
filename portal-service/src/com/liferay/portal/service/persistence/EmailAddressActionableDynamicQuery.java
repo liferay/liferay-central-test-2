@@ -29,9 +29,10 @@ public abstract class EmailAddressActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public EmailAddressActionableDynamicQuery() {
 		setBaseLocalService(EmailAddressLocalServiceUtil.getService());
-		setClass(EmailAddress.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(EmailAddress.class);
 
 		setPrimaryKeyPropertyName("emailAddressId");
 	}

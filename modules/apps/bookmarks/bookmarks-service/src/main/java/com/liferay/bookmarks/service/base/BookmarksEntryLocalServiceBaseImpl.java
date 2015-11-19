@@ -271,8 +271,8 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.bookmarks.service.BookmarksEntryLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(BookmarksEntry.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(BookmarksEntry.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("entryId");
 
@@ -284,8 +284,8 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.bookmarks.service.BookmarksEntryLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(BookmarksEntry.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(BookmarksEntry.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName("entryId");
 
@@ -295,8 +295,8 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.bookmarks.service.BookmarksEntryLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(BookmarksEntry.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(BookmarksEntry.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("entryId");
 	}

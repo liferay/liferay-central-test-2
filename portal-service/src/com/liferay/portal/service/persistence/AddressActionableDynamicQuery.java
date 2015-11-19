@@ -29,9 +29,10 @@ public abstract class AddressActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public AddressActionableDynamicQuery() {
 		setBaseLocalService(AddressLocalServiceUtil.getService());
-		setClass(Address.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(Address.class);
 
 		setPrimaryKeyPropertyName("addressId");
 	}

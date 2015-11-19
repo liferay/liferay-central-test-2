@@ -232,8 +232,8 @@ public abstract class JournalContentSearchLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.journal.service.JournalContentSearchLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(JournalContentSearch.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(JournalContentSearch.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("contentSearchId");
 
@@ -245,8 +245,8 @@ public abstract class JournalContentSearchLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.journal.service.JournalContentSearchLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(JournalContentSearch.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(JournalContentSearch.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
 			"contentSearchId");
@@ -257,8 +257,8 @@ public abstract class JournalContentSearchLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.journal.service.JournalContentSearchLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(JournalContentSearch.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(JournalContentSearch.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("contentSearchId");
 	}

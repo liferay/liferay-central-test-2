@@ -30,9 +30,10 @@ public abstract class AssetEntryActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public AssetEntryActionableDynamicQuery() {
 		setBaseLocalService(AssetEntryLocalServiceUtil.getService());
-		setClass(AssetEntry.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(AssetEntry.class);
 
 		setPrimaryKeyPropertyName("entryId");
 	}

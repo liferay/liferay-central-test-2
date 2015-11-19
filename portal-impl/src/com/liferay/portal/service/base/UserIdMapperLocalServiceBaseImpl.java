@@ -226,8 +226,8 @@ public abstract class UserIdMapperLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.UserIdMapperLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(UserIdMapper.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(UserIdMapper.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("userIdMapperId");
 
@@ -239,8 +239,8 @@ public abstract class UserIdMapperLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.UserIdMapperLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(UserIdMapper.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(UserIdMapper.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
 			"userIdMapperId");
@@ -251,8 +251,8 @@ public abstract class UserIdMapperLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.UserIdMapperLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(UserIdMapper.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(UserIdMapper.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("userIdMapperId");
 	}

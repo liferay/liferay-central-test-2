@@ -232,8 +232,8 @@ public abstract class UserNotificationDeliveryLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.UserNotificationDeliveryLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(UserNotificationDelivery.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(UserNotificationDelivery.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName(
 			"userNotificationDeliveryId");
@@ -246,8 +246,8 @@ public abstract class UserNotificationDeliveryLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.UserNotificationDeliveryLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(UserNotificationDelivery.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(UserNotificationDelivery.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
 			"userNotificationDeliveryId");
@@ -258,8 +258,8 @@ public abstract class UserNotificationDeliveryLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.UserNotificationDeliveryLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(UserNotificationDelivery.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(UserNotificationDelivery.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName(
 			"userNotificationDeliveryId");

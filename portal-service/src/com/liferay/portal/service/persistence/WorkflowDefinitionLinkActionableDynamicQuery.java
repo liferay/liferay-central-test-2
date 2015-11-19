@@ -29,9 +29,10 @@ public abstract class WorkflowDefinitionLinkActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public WorkflowDefinitionLinkActionableDynamicQuery() {
 		setBaseLocalService(WorkflowDefinitionLinkLocalServiceUtil.getService());
-		setClass(WorkflowDefinitionLink.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(WorkflowDefinitionLink.class);
 
 		setPrimaryKeyPropertyName("workflowDefinitionLinkId");
 	}

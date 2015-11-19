@@ -29,9 +29,10 @@ public abstract class TeamActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public TeamActionableDynamicQuery() {
 		setBaseLocalService(TeamLocalServiceUtil.getService());
-		setClass(Team.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(Team.class);
 
 		setPrimaryKeyPropertyName("teamId");
 	}

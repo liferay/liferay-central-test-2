@@ -29,9 +29,10 @@ public abstract class PasswordPolicyActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public PasswordPolicyActionableDynamicQuery() {
 		setBaseLocalService(PasswordPolicyLocalServiceUtil.getService());
-		setClass(PasswordPolicy.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(PasswordPolicy.class);
 
 		setPrimaryKeyPropertyName("passwordPolicyId");
 	}

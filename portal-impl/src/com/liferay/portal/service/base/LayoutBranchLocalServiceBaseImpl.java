@@ -230,8 +230,8 @@ public abstract class LayoutBranchLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.LayoutBranchLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(LayoutBranch.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(LayoutBranch.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("layoutBranchId");
 
@@ -243,8 +243,8 @@ public abstract class LayoutBranchLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.LayoutBranchLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(LayoutBranch.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(LayoutBranch.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
 			"layoutBranchId");
@@ -255,8 +255,8 @@ public abstract class LayoutBranchLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.LayoutBranchLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(LayoutBranch.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(LayoutBranch.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("layoutBranchId");
 	}

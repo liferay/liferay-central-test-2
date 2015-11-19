@@ -242,8 +242,8 @@ public abstract class WikiPageResourceLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.wiki.service.WikiPageResourceLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(WikiPageResource.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(WikiPageResource.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("resourcePrimKey");
 
@@ -255,8 +255,8 @@ public abstract class WikiPageResourceLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.wiki.service.WikiPageResourceLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(WikiPageResource.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(WikiPageResource.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
 			"resourcePrimKey");
@@ -267,8 +267,8 @@ public abstract class WikiPageResourceLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.wiki.service.WikiPageResourceLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(WikiPageResource.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(WikiPageResource.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("resourcePrimKey");
 	}

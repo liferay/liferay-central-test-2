@@ -29,9 +29,10 @@ public abstract class WorkflowInstanceLinkActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public WorkflowInstanceLinkActionableDynamicQuery() {
 		setBaseLocalService(WorkflowInstanceLinkLocalServiceUtil.getService());
-		setClass(WorkflowInstanceLink.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(WorkflowInstanceLink.class);
 
 		setPrimaryKeyPropertyName("workflowInstanceLinkId");
 	}

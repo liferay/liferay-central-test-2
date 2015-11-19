@@ -229,8 +229,8 @@ public abstract class AssetTagStatsLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.asset.service.AssetTagStatsLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(AssetTagStats.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(AssetTagStats.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("tagStatsId");
 
@@ -242,8 +242,8 @@ public abstract class AssetTagStatsLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portlet.asset.service.AssetTagStatsLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(AssetTagStats.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(AssetTagStats.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName("tagStatsId");
 
@@ -253,8 +253,8 @@ public abstract class AssetTagStatsLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.asset.service.AssetTagStatsLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(AssetTagStats.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(AssetTagStats.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("tagStatsId");
 	}

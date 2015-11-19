@@ -30,9 +30,10 @@ public abstract class AnnouncementsDeliveryActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public AnnouncementsDeliveryActionableDynamicQuery() {
 		setBaseLocalService(AnnouncementsDeliveryLocalServiceUtil.getService());
-		setClass(AnnouncementsDelivery.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(AnnouncementsDelivery.class);
 
 		setPrimaryKeyPropertyName("deliveryId");
 	}

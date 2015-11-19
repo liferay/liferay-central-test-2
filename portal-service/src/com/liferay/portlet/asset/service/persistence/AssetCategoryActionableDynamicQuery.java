@@ -30,9 +30,10 @@ public abstract class AssetCategoryActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public AssetCategoryActionableDynamicQuery() {
 		setBaseLocalService(AssetCategoryLocalServiceUtil.getService());
-		setClass(AssetCategory.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(AssetCategory.class);
 
 		setPrimaryKeyPropertyName("categoryId");
 	}

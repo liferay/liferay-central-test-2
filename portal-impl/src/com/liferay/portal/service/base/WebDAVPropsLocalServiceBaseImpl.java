@@ -227,8 +227,8 @@ public abstract class WebDAVPropsLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.WebDAVPropsLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(WebDAVProps.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(WebDAVProps.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("webDavPropsId");
 
@@ -240,8 +240,8 @@ public abstract class WebDAVPropsLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.WebDAVPropsLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(WebDAVProps.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(WebDAVProps.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
 			"webDavPropsId");
@@ -252,8 +252,8 @@ public abstract class WebDAVPropsLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.WebDAVPropsLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(WebDAVProps.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(WebDAVProps.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("webDavPropsId");
 	}

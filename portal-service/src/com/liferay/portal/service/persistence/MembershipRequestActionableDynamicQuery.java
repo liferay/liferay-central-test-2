@@ -29,9 +29,10 @@ public abstract class MembershipRequestActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public MembershipRequestActionableDynamicQuery() {
 		setBaseLocalService(MembershipRequestLocalServiceUtil.getService());
-		setClass(MembershipRequest.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(MembershipRequest.class);
 
 		setPrimaryKeyPropertyName("membershipRequestId");
 	}

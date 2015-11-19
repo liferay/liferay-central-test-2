@@ -30,9 +30,10 @@ public abstract class DLFileRankActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public DLFileRankActionableDynamicQuery() {
 		setBaseLocalService(DLFileRankLocalServiceUtil.getService());
-		setClass(DLFileRank.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(DLFileRank.class);
 
 		setPrimaryKeyPropertyName("fileRankId");
 	}

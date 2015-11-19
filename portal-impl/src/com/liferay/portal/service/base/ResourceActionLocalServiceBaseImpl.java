@@ -228,8 +228,8 @@ public abstract class ResourceActionLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.ResourceActionLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(ResourceAction.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(ResourceAction.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("resourceActionId");
 
@@ -241,8 +241,8 @@ public abstract class ResourceActionLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.ResourceActionLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(ResourceAction.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(ResourceAction.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
 			"resourceActionId");
@@ -253,8 +253,8 @@ public abstract class ResourceActionLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.ResourceActionLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(ResourceAction.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(ResourceAction.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("resourceActionId");
 	}

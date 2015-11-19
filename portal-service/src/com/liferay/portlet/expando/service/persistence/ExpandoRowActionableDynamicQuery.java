@@ -30,9 +30,10 @@ public abstract class ExpandoRowActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public ExpandoRowActionableDynamicQuery() {
 		setBaseLocalService(ExpandoRowLocalServiceUtil.getService());
-		setClass(ExpandoRow.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(ExpandoRow.class);
 
 		setPrimaryKeyPropertyName("rowId");
 	}

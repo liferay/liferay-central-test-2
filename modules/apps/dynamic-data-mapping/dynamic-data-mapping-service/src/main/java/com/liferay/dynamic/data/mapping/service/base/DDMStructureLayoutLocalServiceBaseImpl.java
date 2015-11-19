@@ -250,8 +250,8 @@ public abstract class DDMStructureLayoutLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.dynamic.data.mapping.service.DDMStructureLayoutLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(DDMStructureLayout.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(DDMStructureLayout.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("structureLayoutId");
 
@@ -263,8 +263,8 @@ public abstract class DDMStructureLayoutLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.dynamic.data.mapping.service.DDMStructureLayoutLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(DDMStructureLayout.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(DDMStructureLayout.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
 			"structureLayoutId");
@@ -275,8 +275,8 @@ public abstract class DDMStructureLayoutLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.dynamic.data.mapping.service.DDMStructureLayoutLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(DDMStructureLayout.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(DDMStructureLayout.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("structureLayoutId");
 	}

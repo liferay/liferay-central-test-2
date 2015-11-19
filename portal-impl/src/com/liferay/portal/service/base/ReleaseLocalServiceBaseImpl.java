@@ -221,8 +221,8 @@ public abstract class ReleaseLocalServiceBaseImpl extends BaseLocalServiceImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.ReleaseLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(Release.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(Release.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("releaseId");
 
@@ -234,8 +234,8 @@ public abstract class ReleaseLocalServiceBaseImpl extends BaseLocalServiceImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.ReleaseLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(Release.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(Release.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName("releaseId");
 
@@ -245,8 +245,8 @@ public abstract class ReleaseLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.ReleaseLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(Release.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(Release.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("releaseId");
 	}

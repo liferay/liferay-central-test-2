@@ -30,9 +30,10 @@ public abstract class DLFileVersionActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public DLFileVersionActionableDynamicQuery() {
 		setBaseLocalService(DLFileVersionLocalServiceUtil.getService());
-		setClass(DLFileVersion.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(DLFileVersion.class);
 
 		setPrimaryKeyPropertyName("fileVersionId");
 	}

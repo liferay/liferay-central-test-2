@@ -29,9 +29,10 @@ public abstract class WebsiteActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public WebsiteActionableDynamicQuery() {
 		setBaseLocalService(WebsiteLocalServiceUtil.getService());
-		setClass(Website.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(Website.class);
 
 		setPrimaryKeyPropertyName("websiteId");
 	}

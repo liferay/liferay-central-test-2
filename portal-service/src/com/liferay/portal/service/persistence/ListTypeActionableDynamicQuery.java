@@ -29,9 +29,10 @@ public abstract class ListTypeActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public ListTypeActionableDynamicQuery() {
 		setBaseLocalService(ListTypeLocalServiceUtil.getService());
-		setClass(ListType.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(ListType.class);
 
 		setPrimaryKeyPropertyName("listTypeId");
 	}

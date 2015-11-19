@@ -235,8 +235,8 @@ public abstract class LockLocalServiceBaseImpl extends BaseLocalServiceImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.lock.service.LockLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(Lock.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(Lock.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("lockId");
 
@@ -248,8 +248,8 @@ public abstract class LockLocalServiceBaseImpl extends BaseLocalServiceImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portal.lock.service.LockLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(Lock.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(Lock.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName("lockId");
 
@@ -259,8 +259,8 @@ public abstract class LockLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.lock.service.LockLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(Lock.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(Lock.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("lockId");
 	}

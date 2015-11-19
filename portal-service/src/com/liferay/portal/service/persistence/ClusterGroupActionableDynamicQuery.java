@@ -29,9 +29,10 @@ public abstract class ClusterGroupActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public ClusterGroupActionableDynamicQuery() {
 		setBaseLocalService(ClusterGroupLocalServiceUtil.getService());
-		setClass(ClusterGroup.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(ClusterGroup.class);
 
 		setPrimaryKeyPropertyName("clusterGroupId");
 	}

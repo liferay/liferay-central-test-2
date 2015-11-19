@@ -233,8 +233,8 @@ public abstract class SocialActivityLimitLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.social.service.SocialActivityLimitLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(SocialActivityLimit.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(SocialActivityLimit.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("activityLimitId");
 
@@ -246,8 +246,8 @@ public abstract class SocialActivityLimitLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portlet.social.service.SocialActivityLimitLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(SocialActivityLimit.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(SocialActivityLimit.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
 			"activityLimitId");
@@ -258,8 +258,8 @@ public abstract class SocialActivityLimitLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.social.service.SocialActivityLimitLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(SocialActivityLimit.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(SocialActivityLimit.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("activityLimitId");
 	}

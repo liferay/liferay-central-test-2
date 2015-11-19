@@ -268,8 +268,8 @@ public abstract class MBThreadLocalServiceBaseImpl extends BaseLocalServiceImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(MBThread.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(MBThread.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("threadId");
 
@@ -281,8 +281,8 @@ public abstract class MBThreadLocalServiceBaseImpl extends BaseLocalServiceImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(MBThread.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(MBThread.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName("threadId");
 
@@ -292,8 +292,8 @@ public abstract class MBThreadLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(MBThread.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(MBThread.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("threadId");
 	}

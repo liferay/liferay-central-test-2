@@ -29,9 +29,10 @@ public abstract class RoleActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public RoleActionableDynamicQuery() {
 		setBaseLocalService(RoleLocalServiceUtil.getService());
-		setClass(Role.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(Role.class);
 
 		setPrimaryKeyPropertyName("roleId");
 	}

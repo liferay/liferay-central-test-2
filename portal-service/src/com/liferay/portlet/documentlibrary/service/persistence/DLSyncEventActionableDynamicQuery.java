@@ -30,9 +30,10 @@ public abstract class DLSyncEventActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public DLSyncEventActionableDynamicQuery() {
 		setBaseLocalService(DLSyncEventLocalServiceUtil.getService());
-		setClass(DLSyncEvent.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(DLSyncEvent.class);
 
 		setPrimaryKeyPropertyName("syncEventId");
 	}

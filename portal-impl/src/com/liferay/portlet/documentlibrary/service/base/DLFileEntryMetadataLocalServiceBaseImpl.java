@@ -249,8 +249,8 @@ public abstract class DLFileEntryMetadataLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.documentlibrary.service.DLFileEntryMetadataLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(DLFileEntryMetadata.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(DLFileEntryMetadata.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("fileEntryMetadataId");
 
@@ -262,8 +262,8 @@ public abstract class DLFileEntryMetadataLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portlet.documentlibrary.service.DLFileEntryMetadataLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(DLFileEntryMetadata.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(DLFileEntryMetadata.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
 			"fileEntryMetadataId");
@@ -274,8 +274,8 @@ public abstract class DLFileEntryMetadataLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.documentlibrary.service.DLFileEntryMetadataLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(DLFileEntryMetadata.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(DLFileEntryMetadata.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("fileEntryMetadataId");
 	}

@@ -29,9 +29,10 @@ public abstract class ImageActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public ImageActionableDynamicQuery() {
 		setBaseLocalService(ImageLocalServiceUtil.getService());
-		setClass(Image.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(Image.class);
 
 		setPrimaryKeyPropertyName("imageId");
 	}

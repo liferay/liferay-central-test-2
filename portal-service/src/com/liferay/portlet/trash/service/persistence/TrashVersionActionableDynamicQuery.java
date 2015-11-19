@@ -30,9 +30,10 @@ public abstract class TrashVersionActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public TrashVersionActionableDynamicQuery() {
 		setBaseLocalService(TrashVersionLocalServiceUtil.getService());
-		setClass(TrashVersion.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(TrashVersion.class);
 
 		setPrimaryKeyPropertyName("versionId");
 	}

@@ -258,8 +258,8 @@ public abstract class DLFileVersionLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(DLFileVersion.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(DLFileVersion.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("fileVersionId");
 
@@ -271,8 +271,8 @@ public abstract class DLFileVersionLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(DLFileVersion.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(DLFileVersion.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
 			"fileVersionId");
@@ -283,8 +283,8 @@ public abstract class DLFileVersionLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(DLFileVersion.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(DLFileVersion.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("fileVersionId");
 	}

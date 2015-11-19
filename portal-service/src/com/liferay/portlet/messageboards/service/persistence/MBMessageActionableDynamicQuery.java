@@ -30,9 +30,10 @@ public abstract class MBMessageActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public MBMessageActionableDynamicQuery() {
 		setBaseLocalService(MBMessageLocalServiceUtil.getService());
-		setClass(MBMessage.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(MBMessage.class);
 
 		setPrimaryKeyPropertyName("messageId");
 	}

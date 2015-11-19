@@ -229,8 +229,8 @@ public abstract class ShoppingItemFieldLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.shopping.service.ShoppingItemFieldLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(ShoppingItemField.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(ShoppingItemField.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("itemFieldId");
 
@@ -242,8 +242,8 @@ public abstract class ShoppingItemFieldLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.shopping.service.ShoppingItemFieldLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(ShoppingItemField.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(ShoppingItemField.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName("itemFieldId");
 
@@ -253,8 +253,8 @@ public abstract class ShoppingItemFieldLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.shopping.service.ShoppingItemFieldLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(ShoppingItemField.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(ShoppingItemField.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("itemFieldId");
 	}
