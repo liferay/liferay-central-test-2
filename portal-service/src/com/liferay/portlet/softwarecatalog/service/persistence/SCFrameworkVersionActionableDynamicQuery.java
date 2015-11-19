@@ -30,9 +30,10 @@ public abstract class SCFrameworkVersionActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public SCFrameworkVersionActionableDynamicQuery() {
 		setBaseLocalService(SCFrameworkVersionLocalServiceUtil.getService());
-		setClass(SCFrameworkVersion.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(SCFrameworkVersion.class);
 
 		setPrimaryKeyPropertyName("frameworkVersionId");
 	}

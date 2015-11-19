@@ -275,8 +275,8 @@ public abstract class OrganizationLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.OrganizationLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(Organization.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(Organization.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("organizationId");
 
@@ -288,8 +288,8 @@ public abstract class OrganizationLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.OrganizationLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(Organization.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(Organization.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
 			"organizationId");
@@ -300,8 +300,8 @@ public abstract class OrganizationLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.OrganizationLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(Organization.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(Organization.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("organizationId");
 	}

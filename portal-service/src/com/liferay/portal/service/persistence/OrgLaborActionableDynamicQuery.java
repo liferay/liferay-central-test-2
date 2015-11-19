@@ -29,9 +29,10 @@ public abstract class OrgLaborActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public OrgLaborActionableDynamicQuery() {
 		setBaseLocalService(OrgLaborLocalServiceUtil.getService());
-		setClass(OrgLabor.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(OrgLabor.class);
 
 		setPrimaryKeyPropertyName("orgLaborId");
 	}

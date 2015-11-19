@@ -240,8 +240,8 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(SCProductEntry.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(SCProductEntry.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("productEntryId");
 
@@ -253,8 +253,8 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(SCProductEntry.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(SCProductEntry.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
 			"productEntryId");
@@ -265,8 +265,8 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(SCProductEntry.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(SCProductEntry.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("productEntryId");
 	}

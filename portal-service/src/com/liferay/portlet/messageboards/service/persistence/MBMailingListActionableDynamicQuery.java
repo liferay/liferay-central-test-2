@@ -30,9 +30,10 @@ public abstract class MBMailingListActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public MBMailingListActionableDynamicQuery() {
 		setBaseLocalService(MBMailingListLocalServiceUtil.getService());
-		setClass(MBMailingList.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(MBMailingList.class);
 
 		setPrimaryKeyPropertyName("mailingListId");
 	}

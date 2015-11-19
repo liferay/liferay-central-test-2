@@ -232,8 +232,8 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.ratings.service.RatingsStatsLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(RatingsStats.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(RatingsStats.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("statsId");
 
@@ -245,8 +245,8 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portlet.ratings.service.RatingsStatsLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(RatingsStats.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(RatingsStats.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName("statsId");
 
@@ -256,8 +256,8 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.ratings.service.RatingsStatsLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(RatingsStats.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(RatingsStats.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("statsId");
 	}

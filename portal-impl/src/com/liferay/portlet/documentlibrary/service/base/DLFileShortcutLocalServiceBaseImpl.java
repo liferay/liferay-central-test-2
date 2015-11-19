@@ -264,8 +264,8 @@ public abstract class DLFileShortcutLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(DLFileShortcut.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(DLFileShortcut.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("fileShortcutId");
 
@@ -277,8 +277,8 @@ public abstract class DLFileShortcutLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(DLFileShortcut.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(DLFileShortcut.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
 			"fileShortcutId");
@@ -289,8 +289,8 @@ public abstract class DLFileShortcutLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(DLFileShortcut.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(DLFileShortcut.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("fileShortcutId");
 	}

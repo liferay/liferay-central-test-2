@@ -30,9 +30,10 @@ public abstract class SCProductVersionActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public SCProductVersionActionableDynamicQuery() {
 		setBaseLocalService(SCProductVersionLocalServiceUtil.getService());
-		setClass(SCProductVersion.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(SCProductVersion.class);
 
 		setPrimaryKeyPropertyName("productVersionId");
 	}

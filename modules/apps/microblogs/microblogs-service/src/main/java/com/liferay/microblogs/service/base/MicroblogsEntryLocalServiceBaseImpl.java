@@ -238,8 +238,8 @@ public abstract class MicroblogsEntryLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.microblogs.service.MicroblogsEntryLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(MicroblogsEntry.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(MicroblogsEntry.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("microblogsEntryId");
 
@@ -251,8 +251,8 @@ public abstract class MicroblogsEntryLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.microblogs.service.MicroblogsEntryLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(MicroblogsEntry.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(MicroblogsEntry.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
 			"microblogsEntryId");
@@ -263,8 +263,8 @@ public abstract class MicroblogsEntryLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.microblogs.service.MicroblogsEntryLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(MicroblogsEntry.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(MicroblogsEntry.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("microblogsEntryId");
 	}

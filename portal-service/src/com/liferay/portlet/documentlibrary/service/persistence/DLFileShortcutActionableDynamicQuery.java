@@ -30,9 +30,10 @@ public abstract class DLFileShortcutActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public DLFileShortcutActionableDynamicQuery() {
 		setBaseLocalService(DLFileShortcutLocalServiceUtil.getService());
-		setClass(DLFileShortcut.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(DLFileShortcut.class);
 
 		setPrimaryKeyPropertyName("fileShortcutId");
 	}

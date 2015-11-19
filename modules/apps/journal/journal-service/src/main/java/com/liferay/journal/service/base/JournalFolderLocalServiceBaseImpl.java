@@ -270,8 +270,8 @@ public abstract class JournalFolderLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.journal.service.JournalFolderLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(JournalFolder.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(JournalFolder.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("folderId");
 
@@ -283,8 +283,8 @@ public abstract class JournalFolderLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.journal.service.JournalFolderLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(JournalFolder.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(JournalFolder.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName("folderId");
 
@@ -294,8 +294,8 @@ public abstract class JournalFolderLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.journal.service.JournalFolderLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(JournalFolder.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(JournalFolder.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("folderId");
 	}

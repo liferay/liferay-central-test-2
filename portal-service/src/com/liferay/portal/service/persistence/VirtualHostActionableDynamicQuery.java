@@ -29,9 +29,10 @@ public abstract class VirtualHostActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public VirtualHostActionableDynamicQuery() {
 		setBaseLocalService(VirtualHostLocalServiceUtil.getService());
-		setClass(VirtualHost.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(VirtualHost.class);
 
 		setPrimaryKeyPropertyName("virtualHostId");
 	}

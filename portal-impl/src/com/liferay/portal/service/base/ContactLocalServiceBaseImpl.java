@@ -229,8 +229,8 @@ public abstract class ContactLocalServiceBaseImpl extends BaseLocalServiceImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.ContactLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(Contact.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(Contact.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("contactId");
 
@@ -242,8 +242,8 @@ public abstract class ContactLocalServiceBaseImpl extends BaseLocalServiceImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.ContactLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(Contact.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(Contact.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName("contactId");
 
@@ -253,8 +253,8 @@ public abstract class ContactLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.ContactLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(Contact.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(Contact.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("contactId");
 	}

@@ -29,9 +29,10 @@ public abstract class UserGroupGroupRoleActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public UserGroupGroupRoleActionableDynamicQuery() {
 		setBaseLocalService(UserGroupGroupRoleLocalServiceUtil.getService());
-		setClass(UserGroupGroupRole.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(UserGroupGroupRole.class);
 
 		setPrimaryKeyPropertyName("primaryKey.userGroupId");
 

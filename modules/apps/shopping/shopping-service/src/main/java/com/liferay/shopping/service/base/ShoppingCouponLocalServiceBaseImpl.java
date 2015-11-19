@@ -232,8 +232,8 @@ public abstract class ShoppingCouponLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.shopping.service.ShoppingCouponLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(ShoppingCoupon.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(ShoppingCoupon.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("couponId");
 
@@ -245,8 +245,8 @@ public abstract class ShoppingCouponLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.shopping.service.ShoppingCouponLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(ShoppingCoupon.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(ShoppingCoupon.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName("couponId");
 
@@ -256,8 +256,8 @@ public abstract class ShoppingCouponLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.shopping.service.ShoppingCouponLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(ShoppingCoupon.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(ShoppingCoupon.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("couponId");
 	}

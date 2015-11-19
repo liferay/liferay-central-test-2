@@ -30,9 +30,10 @@ public abstract class SocialActivityCounterActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public SocialActivityCounterActionableDynamicQuery() {
 		setBaseLocalService(SocialActivityCounterLocalServiceUtil.getService());
-		setClass(SocialActivityCounter.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(SocialActivityCounter.class);
 
 		setPrimaryKeyPropertyName("activityCounterId");
 	}

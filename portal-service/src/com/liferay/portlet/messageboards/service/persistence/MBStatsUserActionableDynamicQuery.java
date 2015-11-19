@@ -30,9 +30,10 @@ public abstract class MBStatsUserActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public MBStatsUserActionableDynamicQuery() {
 		setBaseLocalService(MBStatsUserLocalServiceUtil.getService());
-		setClass(MBStatsUser.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(MBStatsUser.class);
 
 		setPrimaryKeyPropertyName("statsUserId");
 	}

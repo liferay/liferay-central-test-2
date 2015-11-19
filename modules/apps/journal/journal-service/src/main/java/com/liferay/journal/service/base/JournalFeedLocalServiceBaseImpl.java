@@ -250,8 +250,8 @@ public abstract class JournalFeedLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.journal.service.JournalFeedLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(JournalFeed.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(JournalFeed.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("id");
 
@@ -263,8 +263,8 @@ public abstract class JournalFeedLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.journal.service.JournalFeedLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(JournalFeed.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(JournalFeed.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName("id");
 
@@ -274,8 +274,8 @@ public abstract class JournalFeedLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.journal.service.JournalFeedLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(JournalFeed.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(JournalFeed.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("id");
 	}

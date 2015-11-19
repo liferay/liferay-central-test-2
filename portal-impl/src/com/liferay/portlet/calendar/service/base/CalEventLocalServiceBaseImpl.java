@@ -263,8 +263,8 @@ public abstract class CalEventLocalServiceBaseImpl extends BaseLocalServiceImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.calendar.service.CalEventLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(CalEvent.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(CalEvent.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("eventId");
 
@@ -276,8 +276,8 @@ public abstract class CalEventLocalServiceBaseImpl extends BaseLocalServiceImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portlet.calendar.service.CalEventLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(CalEvent.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(CalEvent.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName("eventId");
 
@@ -287,8 +287,8 @@ public abstract class CalEventLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.calendar.service.CalEventLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(CalEvent.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(CalEvent.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("eventId");
 	}

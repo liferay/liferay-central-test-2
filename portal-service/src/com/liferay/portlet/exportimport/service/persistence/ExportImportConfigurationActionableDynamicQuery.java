@@ -30,9 +30,10 @@ public abstract class ExportImportConfigurationActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public ExportImportConfigurationActionableDynamicQuery() {
 		setBaseLocalService(ExportImportConfigurationLocalServiceUtil.getService());
-		setClass(ExportImportConfiguration.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(ExportImportConfiguration.class);
 
 		setPrimaryKeyPropertyName("exportImportConfigurationId");
 	}

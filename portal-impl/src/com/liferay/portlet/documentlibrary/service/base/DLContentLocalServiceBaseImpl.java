@@ -226,8 +226,8 @@ public abstract class DLContentLocalServiceBaseImpl extends BaseLocalServiceImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.documentlibrary.service.DLContentLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(DLContent.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(DLContent.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("contentId");
 
@@ -239,8 +239,8 @@ public abstract class DLContentLocalServiceBaseImpl extends BaseLocalServiceImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portlet.documentlibrary.service.DLContentLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(DLContent.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(DLContent.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName("contentId");
 
@@ -250,8 +250,8 @@ public abstract class DLContentLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.documentlibrary.service.DLContentLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(DLContent.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(DLContent.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("contentId");
 	}

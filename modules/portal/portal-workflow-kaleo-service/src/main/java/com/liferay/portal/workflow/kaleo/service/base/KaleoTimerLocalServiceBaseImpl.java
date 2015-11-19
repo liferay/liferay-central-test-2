@@ -244,8 +244,8 @@ public abstract class KaleoTimerLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.workflow.kaleo.service.KaleoTimerLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(KaleoTimer.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(KaleoTimer.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("kaleoTimerId");
 
@@ -257,8 +257,8 @@ public abstract class KaleoTimerLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portal.workflow.kaleo.service.KaleoTimerLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(KaleoTimer.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(KaleoTimer.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
 			"kaleoTimerId");
@@ -269,8 +269,8 @@ public abstract class KaleoTimerLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.workflow.kaleo.service.KaleoTimerLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(KaleoTimer.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(KaleoTimer.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("kaleoTimerId");
 	}

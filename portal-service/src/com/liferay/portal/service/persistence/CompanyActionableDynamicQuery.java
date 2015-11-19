@@ -29,9 +29,10 @@ public abstract class CompanyActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public CompanyActionableDynamicQuery() {
 		setBaseLocalService(CompanyLocalServiceUtil.getService());
-		setClass(Company.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(Company.class);
 
 		setPrimaryKeyPropertyName("companyId");
 	}

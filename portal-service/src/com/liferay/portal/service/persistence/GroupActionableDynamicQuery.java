@@ -29,9 +29,10 @@ public abstract class GroupActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public GroupActionableDynamicQuery() {
 		setBaseLocalService(GroupLocalServiceUtil.getService());
-		setClass(Group.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(Group.class);
 
 		setPrimaryKeyPropertyName("groupId");
 	}

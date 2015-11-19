@@ -234,8 +234,8 @@ public abstract class SCFrameworkVersionLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(SCFrameworkVersion.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(SCFrameworkVersion.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("frameworkVersionId");
 
@@ -247,8 +247,8 @@ public abstract class SCFrameworkVersionLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(SCFrameworkVersion.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(SCFrameworkVersion.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
 			"frameworkVersionId");
@@ -259,8 +259,8 @@ public abstract class SCFrameworkVersionLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(SCFrameworkVersion.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(SCFrameworkVersion.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("frameworkVersionId");
 	}

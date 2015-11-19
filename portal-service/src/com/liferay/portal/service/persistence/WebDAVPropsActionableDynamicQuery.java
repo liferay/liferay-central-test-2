@@ -29,9 +29,10 @@ public abstract class WebDAVPropsActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public WebDAVPropsActionableDynamicQuery() {
 		setBaseLocalService(WebDAVPropsLocalServiceUtil.getService());
-		setClass(WebDAVProps.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(WebDAVProps.class);
 
 		setPrimaryKeyPropertyName("webDavPropsId");
 	}

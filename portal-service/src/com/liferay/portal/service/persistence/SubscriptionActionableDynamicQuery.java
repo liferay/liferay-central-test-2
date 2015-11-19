@@ -29,9 +29,10 @@ public abstract class SubscriptionActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public SubscriptionActionableDynamicQuery() {
 		setBaseLocalService(SubscriptionLocalServiceUtil.getService());
-		setClass(Subscription.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(Subscription.class);
 
 		setPrimaryKeyPropertyName("subscriptionId");
 	}

@@ -249,8 +249,8 @@ public abstract class RepositoryEntryLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.RepositoryEntryLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(RepositoryEntry.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(RepositoryEntry.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("repositoryEntryId");
 
@@ -262,8 +262,8 @@ public abstract class RepositoryEntryLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.RepositoryEntryLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(RepositoryEntry.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(RepositoryEntry.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
 			"repositoryEntryId");
@@ -274,8 +274,8 @@ public abstract class RepositoryEntryLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.RepositoryEntryLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(RepositoryEntry.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(RepositoryEntry.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("repositoryEntryId");
 	}

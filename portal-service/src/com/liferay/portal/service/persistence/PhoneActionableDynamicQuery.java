@@ -29,9 +29,10 @@ public abstract class PhoneActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public PhoneActionableDynamicQuery() {
 		setBaseLocalService(PhoneLocalServiceUtil.getService());
-		setClass(Phone.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(Phone.class);
 
 		setPrimaryKeyPropertyName("phoneId");
 	}

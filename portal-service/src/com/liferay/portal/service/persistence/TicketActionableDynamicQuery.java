@@ -29,9 +29,10 @@ public abstract class TicketActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public TicketActionableDynamicQuery() {
 		setBaseLocalService(TicketLocalServiceUtil.getService());
-		setClass(Ticket.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(Ticket.class);
 
 		setPrimaryKeyPropertyName("ticketId");
 	}

@@ -231,8 +231,8 @@ public abstract class DLFileRankLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.documentlibrary.service.DLFileRankLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(DLFileRank.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(DLFileRank.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("fileRankId");
 
@@ -244,8 +244,8 @@ public abstract class DLFileRankLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portlet.documentlibrary.service.DLFileRankLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(DLFileRank.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(DLFileRank.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName("fileRankId");
 
@@ -255,8 +255,8 @@ public abstract class DLFileRankLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.documentlibrary.service.DLFileRankLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(DLFileRank.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(DLFileRank.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("fileRankId");
 	}

@@ -30,9 +30,10 @@ public abstract class MBThreadFlagActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public MBThreadFlagActionableDynamicQuery() {
 		setBaseLocalService(MBThreadFlagLocalServiceUtil.getService());
-		setClass(MBThreadFlag.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(MBThreadFlag.class);
 
 		setPrimaryKeyPropertyName("threadFlagId");
 	}

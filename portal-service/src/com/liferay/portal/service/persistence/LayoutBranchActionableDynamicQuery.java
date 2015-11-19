@@ -29,9 +29,10 @@ public abstract class LayoutBranchActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public LayoutBranchActionableDynamicQuery() {
 		setBaseLocalService(LayoutBranchLocalServiceUtil.getService());
-		setClass(LayoutBranch.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(LayoutBranch.class);
 
 		setPrimaryKeyPropertyName("layoutBranchId");
 	}

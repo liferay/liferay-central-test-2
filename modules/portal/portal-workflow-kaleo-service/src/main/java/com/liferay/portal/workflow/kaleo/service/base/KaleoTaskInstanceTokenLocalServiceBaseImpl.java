@@ -248,8 +248,8 @@ public abstract class KaleoTaskInstanceTokenLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.workflow.kaleo.service.KaleoTaskInstanceTokenLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(KaleoTaskInstanceToken.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(KaleoTaskInstanceToken.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName(
 			"kaleoTaskInstanceTokenId");
@@ -262,8 +262,8 @@ public abstract class KaleoTaskInstanceTokenLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portal.workflow.kaleo.service.KaleoTaskInstanceTokenLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(KaleoTaskInstanceToken.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(KaleoTaskInstanceToken.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
 			"kaleoTaskInstanceTokenId");
@@ -274,8 +274,8 @@ public abstract class KaleoTaskInstanceTokenLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.workflow.kaleo.service.KaleoTaskInstanceTokenLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(KaleoTaskInstanceToken.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(KaleoTaskInstanceToken.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName(
 			"kaleoTaskInstanceTokenId");

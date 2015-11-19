@@ -30,9 +30,10 @@ public abstract class DLContentActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public DLContentActionableDynamicQuery() {
 		setBaseLocalService(DLContentLocalServiceUtil.getService());
-		setClass(DLContent.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(DLContent.class);
 
 		setPrimaryKeyPropertyName("contentId");
 	}

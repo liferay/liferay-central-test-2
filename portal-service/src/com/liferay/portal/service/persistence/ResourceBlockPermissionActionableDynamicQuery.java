@@ -29,9 +29,10 @@ public abstract class ResourceBlockPermissionActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public ResourceBlockPermissionActionableDynamicQuery() {
 		setBaseLocalService(ResourceBlockPermissionLocalServiceUtil.getService());
-		setClass(ResourceBlockPermission.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(ResourceBlockPermission.class);
 
 		setPrimaryKeyPropertyName("resourceBlockPermissionId");
 	}

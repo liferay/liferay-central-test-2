@@ -230,8 +230,8 @@ public abstract class JournalArticleImageLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.journal.service.JournalArticleImageLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(JournalArticleImage.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(JournalArticleImage.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("articleImageId");
 
@@ -243,8 +243,8 @@ public abstract class JournalArticleImageLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.journal.service.JournalArticleImageLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(JournalArticleImage.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(JournalArticleImage.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
 			"articleImageId");
@@ -255,8 +255,8 @@ public abstract class JournalArticleImageLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.journal.service.JournalArticleImageLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(JournalArticleImage.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(JournalArticleImage.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("articleImageId");
 	}

@@ -230,8 +230,8 @@ public abstract class PluginSettingLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.PluginSettingLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(PluginSetting.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(PluginSetting.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("pluginSettingId");
 
@@ -243,8 +243,8 @@ public abstract class PluginSettingLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.PluginSettingLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(PluginSetting.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(PluginSetting.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
 			"pluginSettingId");
@@ -255,8 +255,8 @@ public abstract class PluginSettingLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.PluginSettingLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(PluginSetting.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(PluginSetting.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("pluginSettingId");
 	}

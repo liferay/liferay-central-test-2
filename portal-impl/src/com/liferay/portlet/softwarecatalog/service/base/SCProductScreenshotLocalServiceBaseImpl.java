@@ -232,8 +232,8 @@ public abstract class SCProductScreenshotLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(SCProductScreenshot.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(SCProductScreenshot.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("productScreenshotId");
 
@@ -245,8 +245,8 @@ public abstract class SCProductScreenshotLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(SCProductScreenshot.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(SCProductScreenshot.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
 			"productScreenshotId");
@@ -257,8 +257,8 @@ public abstract class SCProductScreenshotLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(SCProductScreenshot.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(SCProductScreenshot.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("productScreenshotId");
 	}

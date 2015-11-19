@@ -222,8 +222,8 @@ public abstract class TicketLocalServiceBaseImpl extends BaseLocalServiceImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.TicketLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(Ticket.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(Ticket.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("ticketId");
 
@@ -235,8 +235,8 @@ public abstract class TicketLocalServiceBaseImpl extends BaseLocalServiceImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.TicketLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(Ticket.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(Ticket.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName("ticketId");
 
@@ -246,8 +246,8 @@ public abstract class TicketLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.TicketLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(Ticket.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(Ticket.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("ticketId");
 	}

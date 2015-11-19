@@ -29,9 +29,10 @@ public abstract class ResourceTypePermissionActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public ResourceTypePermissionActionableDynamicQuery() {
 		setBaseLocalService(ResourceTypePermissionLocalServiceUtil.getService());
-		setClass(ResourceTypePermission.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(ResourceTypePermission.class);
 
 		setPrimaryKeyPropertyName("resourceTypePermissionId");
 	}

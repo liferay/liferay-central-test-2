@@ -247,8 +247,8 @@ public abstract class SAPEntryLocalServiceBaseImpl extends BaseLocalServiceImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.service.access.policy.service.SAPEntryLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(SAPEntry.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(SAPEntry.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("sapEntryId");
 
@@ -260,8 +260,8 @@ public abstract class SAPEntryLocalServiceBaseImpl extends BaseLocalServiceImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.service.access.policy.service.SAPEntryLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(SAPEntry.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(SAPEntry.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName("sapEntryId");
 
@@ -271,8 +271,8 @@ public abstract class SAPEntryLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.service.access.policy.service.SAPEntryLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(SAPEntry.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(SAPEntry.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("sapEntryId");
 	}

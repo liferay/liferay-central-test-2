@@ -267,8 +267,8 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.announcements.service.AnnouncementsEntryLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(AnnouncementsEntry.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(AnnouncementsEntry.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("entryId");
 
@@ -280,8 +280,8 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portlet.announcements.service.AnnouncementsEntryLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(AnnouncementsEntry.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(AnnouncementsEntry.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName("entryId");
 
@@ -291,8 +291,8 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.announcements.service.AnnouncementsEntryLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(AnnouncementsEntry.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(AnnouncementsEntry.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("entryId");
 	}

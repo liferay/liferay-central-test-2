@@ -30,9 +30,10 @@ public abstract class AssetTagActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public AssetTagActionableDynamicQuery() {
 		setBaseLocalService(AssetTagLocalServiceUtil.getService());
-		setClass(AssetTag.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(AssetTag.class);
 
 		setPrimaryKeyPropertyName("tagId");
 	}

@@ -30,9 +30,10 @@ public abstract class ExpandoValueActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public ExpandoValueActionableDynamicQuery() {
 		setBaseLocalService(ExpandoValueLocalServiceUtil.getService());
-		setClass(ExpandoValue.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(ExpandoValue.class);
 
 		setPrimaryKeyPropertyName("valueId");
 	}

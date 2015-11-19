@@ -30,9 +30,10 @@ public abstract class SCProductEntryActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public SCProductEntryActionableDynamicQuery() {
 		setBaseLocalService(SCProductEntryLocalServiceUtil.getService());
-		setClass(SCProductEntry.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(SCProductEntry.class);
 
 		setPrimaryKeyPropertyName("productEntryId");
 	}

@@ -29,9 +29,10 @@ public abstract class PasswordTrackerActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public PasswordTrackerActionableDynamicQuery() {
 		setBaseLocalService(PasswordTrackerLocalServiceUtil.getService());
-		setClass(PasswordTracker.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(PasswordTracker.class);
 
 		setPrimaryKeyPropertyName("passwordTrackerId");
 	}

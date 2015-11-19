@@ -29,9 +29,10 @@ public abstract class RepositoryEntryActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public RepositoryEntryActionableDynamicQuery() {
 		setBaseLocalService(RepositoryEntryLocalServiceUtil.getService());
-		setClass(RepositoryEntry.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(RepositoryEntry.class);
 
 		setPrimaryKeyPropertyName("repositoryEntryId");
 	}

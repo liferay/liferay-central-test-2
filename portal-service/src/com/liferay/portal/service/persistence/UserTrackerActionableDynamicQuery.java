@@ -29,9 +29,10 @@ public abstract class UserTrackerActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public UserTrackerActionableDynamicQuery() {
 		setBaseLocalService(UserTrackerLocalServiceUtil.getService());
-		setClass(UserTracker.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(UserTracker.class);
 
 		setPrimaryKeyPropertyName("userTrackerId");
 	}

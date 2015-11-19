@@ -246,8 +246,8 @@ public abstract class KaleoNotificationLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.workflow.kaleo.service.KaleoNotificationLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(KaleoNotification.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(KaleoNotification.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("kaleoNotificationId");
 
@@ -259,8 +259,8 @@ public abstract class KaleoNotificationLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portal.workflow.kaleo.service.KaleoNotificationLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(KaleoNotification.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(KaleoNotification.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
 			"kaleoNotificationId");
@@ -271,8 +271,8 @@ public abstract class KaleoNotificationLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.workflow.kaleo.service.KaleoNotificationLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(KaleoNotification.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(KaleoNotification.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("kaleoNotificationId");
 	}

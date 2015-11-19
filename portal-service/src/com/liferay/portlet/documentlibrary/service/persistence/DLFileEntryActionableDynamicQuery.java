@@ -30,9 +30,10 @@ public abstract class DLFileEntryActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public DLFileEntryActionableDynamicQuery() {
 		setBaseLocalService(DLFileEntryLocalServiceUtil.getService());
-		setClass(DLFileEntry.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(DLFileEntry.class);
 
 		setPrimaryKeyPropertyName("fileEntryId");
 	}

@@ -232,8 +232,8 @@ public abstract class ResourceBlockPermissionLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.ResourceBlockPermissionLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(ResourceBlockPermission.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(ResourceBlockPermission.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName(
 			"resourceBlockPermissionId");
@@ -246,8 +246,8 @@ public abstract class ResourceBlockPermissionLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.ResourceBlockPermissionLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(ResourceBlockPermission.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(ResourceBlockPermission.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
 			"resourceBlockPermissionId");
@@ -258,8 +258,8 @@ public abstract class ResourceBlockPermissionLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.ResourceBlockPermissionLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(ResourceBlockPermission.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(ResourceBlockPermission.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName(
 			"resourceBlockPermissionId");

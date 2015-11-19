@@ -29,9 +29,10 @@ public abstract class ClassNameActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public ClassNameActionableDynamicQuery() {
 		setBaseLocalService(ClassNameLocalServiceUtil.getService());
-		setClass(ClassName.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(ClassName.class);
 
 		setPrimaryKeyPropertyName("classNameId");
 	}

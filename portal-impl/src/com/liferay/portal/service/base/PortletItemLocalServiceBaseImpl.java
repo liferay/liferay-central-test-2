@@ -229,8 +229,8 @@ public abstract class PortletItemLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.PortletItemLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(PortletItem.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(PortletItem.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("portletItemId");
 
@@ -242,8 +242,8 @@ public abstract class PortletItemLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.PortletItemLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(PortletItem.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(PortletItem.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
 			"portletItemId");
@@ -254,8 +254,8 @@ public abstract class PortletItemLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.PortletItemLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(PortletItem.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(PortletItem.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("portletItemId");
 	}

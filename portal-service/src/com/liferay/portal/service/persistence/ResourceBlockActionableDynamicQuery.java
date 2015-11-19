@@ -29,9 +29,10 @@ public abstract class ResourceBlockActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public ResourceBlockActionableDynamicQuery() {
 		setBaseLocalService(ResourceBlockLocalServiceUtil.getService());
-		setClass(ResourceBlock.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(ResourceBlock.class);
 
 		setPrimaryKeyPropertyName("resourceBlockId");
 	}

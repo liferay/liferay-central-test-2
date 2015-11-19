@@ -229,8 +229,8 @@ public abstract class DDMStructureLinkLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.dynamic.data.mapping.service.DDMStructureLinkLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(DDMStructureLink.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(DDMStructureLink.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("structureLinkId");
 
@@ -242,8 +242,8 @@ public abstract class DDMStructureLinkLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.dynamic.data.mapping.service.DDMStructureLinkLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(DDMStructureLink.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(DDMStructureLink.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
 			"structureLinkId");
@@ -254,8 +254,8 @@ public abstract class DDMStructureLinkLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.dynamic.data.mapping.service.DDMStructureLinkLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(DDMStructureLink.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(DDMStructureLink.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("structureLinkId");
 	}

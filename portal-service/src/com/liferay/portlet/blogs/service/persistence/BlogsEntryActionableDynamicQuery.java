@@ -30,9 +30,10 @@ public abstract class BlogsEntryActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public BlogsEntryActionableDynamicQuery() {
 		setBaseLocalService(BlogsEntryLocalServiceUtil.getService());
-		setClass(BlogsEntry.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(BlogsEntry.class);
 
 		setPrimaryKeyPropertyName("entryId");
 	}

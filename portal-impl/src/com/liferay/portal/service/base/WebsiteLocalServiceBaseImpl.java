@@ -246,8 +246,8 @@ public abstract class WebsiteLocalServiceBaseImpl extends BaseLocalServiceImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.WebsiteLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(Website.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(Website.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("websiteId");
 
@@ -259,8 +259,8 @@ public abstract class WebsiteLocalServiceBaseImpl extends BaseLocalServiceImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.WebsiteLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(Website.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(Website.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName("websiteId");
 
@@ -270,8 +270,8 @@ public abstract class WebsiteLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.WebsiteLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(Website.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(Website.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("websiteId");
 	}

@@ -248,8 +248,8 @@ public abstract class PollsChoiceLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.polls.service.PollsChoiceLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(PollsChoice.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(PollsChoice.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("choiceId");
 
@@ -261,8 +261,8 @@ public abstract class PollsChoiceLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.polls.service.PollsChoiceLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(PollsChoice.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(PollsChoice.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName("choiceId");
 
@@ -272,8 +272,8 @@ public abstract class PollsChoiceLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.polls.service.PollsChoiceLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(PollsChoice.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(PollsChoice.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("choiceId");
 	}

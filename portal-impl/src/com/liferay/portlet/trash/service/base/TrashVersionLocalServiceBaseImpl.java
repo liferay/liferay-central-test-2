@@ -231,8 +231,8 @@ public abstract class TrashVersionLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.trash.service.TrashVersionLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(TrashVersion.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(TrashVersion.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("versionId");
 
@@ -244,8 +244,8 @@ public abstract class TrashVersionLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portlet.trash.service.TrashVersionLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(TrashVersion.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(TrashVersion.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName("versionId");
 
@@ -255,8 +255,8 @@ public abstract class TrashVersionLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.trash.service.TrashVersionLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(TrashVersion.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(TrashVersion.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("versionId");
 	}

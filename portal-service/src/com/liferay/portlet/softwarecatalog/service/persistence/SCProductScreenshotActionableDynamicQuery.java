@@ -30,9 +30,10 @@ public abstract class SCProductScreenshotActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public SCProductScreenshotActionableDynamicQuery() {
 		setBaseLocalService(SCProductScreenshotLocalServiceUtil.getService());
-		setClass(SCProductScreenshot.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(SCProductScreenshot.class);
 
 		setPrimaryKeyPropertyName("productScreenshotId");
 	}

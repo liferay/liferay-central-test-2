@@ -235,8 +235,8 @@ public abstract class WallEntryLocalServiceBaseImpl extends BaseLocalServiceImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.social.networking.service.WallEntryLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(WallEntry.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(WallEntry.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("wallEntryId");
 
@@ -248,8 +248,8 @@ public abstract class WallEntryLocalServiceBaseImpl extends BaseLocalServiceImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.social.networking.service.WallEntryLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(WallEntry.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(WallEntry.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName("wallEntryId");
 
@@ -259,8 +259,8 @@ public abstract class WallEntryLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.social.networking.service.WallEntryLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(WallEntry.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(WallEntry.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("wallEntryId");
 	}

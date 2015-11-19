@@ -30,9 +30,10 @@ public abstract class SocialRelationActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public SocialRelationActionableDynamicQuery() {
 		setBaseLocalService(SocialRelationLocalServiceUtil.getService());
-		setClass(SocialRelation.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(SocialRelation.class);
 
 		setPrimaryKeyPropertyName("relationId");
 	}

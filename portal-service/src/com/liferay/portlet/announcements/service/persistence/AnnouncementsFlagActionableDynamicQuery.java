@@ -30,9 +30,10 @@ public abstract class AnnouncementsFlagActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public AnnouncementsFlagActionableDynamicQuery() {
 		setBaseLocalService(AnnouncementsFlagLocalServiceUtil.getService());
-		setClass(AnnouncementsFlag.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(AnnouncementsFlag.class);
 
 		setPrimaryKeyPropertyName("flagId");
 	}

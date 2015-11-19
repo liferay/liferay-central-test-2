@@ -30,9 +30,10 @@ public abstract class MBDiscussionActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public MBDiscussionActionableDynamicQuery() {
 		setBaseLocalService(MBDiscussionLocalServiceUtil.getService());
-		setClass(MBDiscussion.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(MBDiscussion.class);
 
 		setPrimaryKeyPropertyName("discussionId");
 	}

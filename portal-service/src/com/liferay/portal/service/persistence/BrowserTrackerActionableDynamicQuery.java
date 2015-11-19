@@ -29,9 +29,10 @@ public abstract class BrowserTrackerActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public BrowserTrackerActionableDynamicQuery() {
 		setBaseLocalService(BrowserTrackerLocalServiceUtil.getService());
-		setClass(BrowserTracker.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(BrowserTracker.class);
 
 		setPrimaryKeyPropertyName("browserTrackerId");
 	}

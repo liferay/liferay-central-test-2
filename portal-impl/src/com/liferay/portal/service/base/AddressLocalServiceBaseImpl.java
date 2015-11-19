@@ -247,8 +247,8 @@ public abstract class AddressLocalServiceBaseImpl extends BaseLocalServiceImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.AddressLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(Address.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(Address.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("addressId");
 
@@ -260,8 +260,8 @@ public abstract class AddressLocalServiceBaseImpl extends BaseLocalServiceImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.AddressLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(Address.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(Address.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName("addressId");
 
@@ -271,8 +271,8 @@ public abstract class AddressLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.AddressLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(Address.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(Address.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("addressId");
 	}

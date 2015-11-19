@@ -29,9 +29,10 @@ public abstract class UserNotificationEventActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public UserNotificationEventActionableDynamicQuery() {
 		setBaseLocalService(UserNotificationEventLocalServiceUtil.getService());
-		setClass(UserNotificationEvent.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(UserNotificationEvent.class);
 
 		setPrimaryKeyPropertyName("userNotificationEventId");
 	}

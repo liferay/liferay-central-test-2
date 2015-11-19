@@ -29,9 +29,10 @@ public abstract class UserIdMapperActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public UserIdMapperActionableDynamicQuery() {
 		setBaseLocalService(UserIdMapperLocalServiceUtil.getService());
-		setClass(UserIdMapper.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(UserIdMapper.class);
 
 		setPrimaryKeyPropertyName("userIdMapperId");
 	}

@@ -245,8 +245,8 @@ public abstract class MDRRuleLocalServiceBaseImpl extends BaseLocalServiceImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.mobile.device.rules.service.MDRRuleLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(MDRRule.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(MDRRule.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("ruleId");
 
@@ -258,8 +258,8 @@ public abstract class MDRRuleLocalServiceBaseImpl extends BaseLocalServiceImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.mobile.device.rules.service.MDRRuleLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(MDRRule.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(MDRRule.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName("ruleId");
 
@@ -269,8 +269,8 @@ public abstract class MDRRuleLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.mobile.device.rules.service.MDRRuleLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(MDRRule.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(MDRRule.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("ruleId");
 	}

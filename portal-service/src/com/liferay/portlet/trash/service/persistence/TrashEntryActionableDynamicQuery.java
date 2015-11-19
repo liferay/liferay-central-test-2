@@ -30,9 +30,10 @@ public abstract class TrashEntryActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public TrashEntryActionableDynamicQuery() {
 		setBaseLocalService(TrashEntryLocalServiceUtil.getService());
-		setClass(TrashEntry.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(TrashEntry.class);
 
 		setPrimaryKeyPropertyName("entryId");
 	}

@@ -29,9 +29,10 @@ public abstract class PluginSettingActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public PluginSettingActionableDynamicQuery() {
 		setBaseLocalService(PluginSettingLocalServiceUtil.getService());
-		setClass(PluginSetting.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(PluginSetting.class);
 
 		setPrimaryKeyPropertyName("pluginSettingId");
 	}

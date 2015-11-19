@@ -29,9 +29,10 @@ public abstract class ServiceComponentActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public ServiceComponentActionableDynamicQuery() {
 		setBaseLocalService(ServiceComponentLocalServiceUtil.getService());
-		setClass(ServiceComponent.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(ServiceComponent.class);
 
 		setPrimaryKeyPropertyName("serviceComponentId");
 	}

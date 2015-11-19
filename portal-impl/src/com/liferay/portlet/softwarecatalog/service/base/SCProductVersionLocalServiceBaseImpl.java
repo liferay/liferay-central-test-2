@@ -233,8 +233,8 @@ public abstract class SCProductVersionLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(SCProductVersion.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(SCProductVersion.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("productVersionId");
 
@@ -246,8 +246,8 @@ public abstract class SCProductVersionLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(SCProductVersion.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(SCProductVersion.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
 			"productVersionId");
@@ -258,8 +258,8 @@ public abstract class SCProductVersionLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(SCProductVersion.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(SCProductVersion.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("productVersionId");
 	}

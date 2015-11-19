@@ -29,9 +29,10 @@ public abstract class AccountActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public AccountActionableDynamicQuery() {
 		setBaseLocalService(AccountLocalServiceUtil.getService());
-		setClass(Account.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(Account.class);
 
 		setPrimaryKeyPropertyName("accountId");
 	}

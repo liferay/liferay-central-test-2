@@ -30,9 +30,10 @@ public abstract class AnnouncementsEntryActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public AnnouncementsEntryActionableDynamicQuery() {
 		setBaseLocalService(AnnouncementsEntryLocalServiceUtil.getService());
-		setClass(AnnouncementsEntry.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(AnnouncementsEntry.class);
 
 		setPrimaryKeyPropertyName("entryId");
 	}

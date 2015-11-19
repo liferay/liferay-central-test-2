@@ -259,8 +259,8 @@ public abstract class DDMTemplateLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.dynamic.data.mapping.service.DDMTemplateLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(DDMTemplate.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(DDMTemplate.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("templateId");
 
@@ -272,8 +272,8 @@ public abstract class DDMTemplateLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.dynamic.data.mapping.service.DDMTemplateLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(DDMTemplate.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(DDMTemplate.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName("templateId");
 
@@ -283,8 +283,8 @@ public abstract class DDMTemplateLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.dynamic.data.mapping.service.DDMTemplateLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(DDMTemplate.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(DDMTemplate.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("templateId");
 	}

@@ -29,9 +29,10 @@ public abstract class SystemEventActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public SystemEventActionableDynamicQuery() {
 		setBaseLocalService(SystemEventLocalServiceUtil.getService());
-		setClass(SystemEvent.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(SystemEvent.class);
 
 		setPrimaryKeyPropertyName("systemEventId");
 	}

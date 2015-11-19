@@ -30,9 +30,10 @@ public abstract class MBCategoryActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public MBCategoryActionableDynamicQuery() {
 		setBaseLocalService(MBCategoryLocalServiceUtil.getService());
-		setClass(MBCategory.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(MBCategory.class);
 
 		setPrimaryKeyPropertyName("categoryId");
 	}

@@ -234,8 +234,8 @@ public abstract class SocialActivitySettingLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.social.service.SocialActivitySettingLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(SocialActivitySetting.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(SocialActivitySetting.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("activitySettingId");
 
@@ -247,8 +247,8 @@ public abstract class SocialActivitySettingLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portlet.social.service.SocialActivitySettingLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(SocialActivitySetting.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(SocialActivitySetting.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
 			"activitySettingId");
@@ -259,8 +259,8 @@ public abstract class SocialActivitySettingLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.social.service.SocialActivitySettingLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(SocialActivitySetting.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(SocialActivitySetting.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("activitySettingId");
 	}

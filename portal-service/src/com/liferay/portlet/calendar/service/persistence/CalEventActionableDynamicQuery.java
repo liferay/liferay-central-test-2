@@ -30,9 +30,10 @@ public abstract class CalEventActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public CalEventActionableDynamicQuery() {
 		setBaseLocalService(CalEventLocalServiceUtil.getService());
-		setClass(CalEvent.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(CalEvent.class);
 
 		setPrimaryKeyPropertyName("eventId");
 	}

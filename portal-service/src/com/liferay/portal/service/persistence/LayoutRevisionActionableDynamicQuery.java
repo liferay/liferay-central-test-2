@@ -29,9 +29,10 @@ public abstract class LayoutRevisionActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public LayoutRevisionActionableDynamicQuery() {
 		setBaseLocalService(LayoutRevisionLocalServiceUtil.getService());
-		setClass(LayoutRevision.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(LayoutRevision.class);
 
 		setPrimaryKeyPropertyName("layoutRevisionId");
 	}

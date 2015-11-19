@@ -250,8 +250,8 @@ public abstract class LayoutFriendlyURLLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.LayoutFriendlyURLLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(LayoutFriendlyURL.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(LayoutFriendlyURL.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("layoutFriendlyURLId");
 
@@ -263,8 +263,8 @@ public abstract class LayoutFriendlyURLLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.LayoutFriendlyURLLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(LayoutFriendlyURL.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(LayoutFriendlyURL.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
 			"layoutFriendlyURLId");
@@ -275,8 +275,8 @@ public abstract class LayoutFriendlyURLLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.LayoutFriendlyURLLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(LayoutFriendlyURL.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(LayoutFriendlyURL.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("layoutFriendlyURLId");
 	}

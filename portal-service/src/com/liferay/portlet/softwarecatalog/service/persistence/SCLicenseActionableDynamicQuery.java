@@ -30,9 +30,10 @@ public abstract class SCLicenseActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public SCLicenseActionableDynamicQuery() {
 		setBaseLocalService(SCLicenseLocalServiceUtil.getService());
-		setClass(SCLicense.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(SCLicense.class);
 
 		setPrimaryKeyPropertyName("licenseId");
 	}

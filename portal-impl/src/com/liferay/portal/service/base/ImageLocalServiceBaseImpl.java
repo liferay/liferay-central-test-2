@@ -224,8 +224,8 @@ public abstract class ImageLocalServiceBaseImpl extends BaseLocalServiceImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.ImageLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(Image.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(Image.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("imageId");
 
@@ -237,8 +237,8 @@ public abstract class ImageLocalServiceBaseImpl extends BaseLocalServiceImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.ImageLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(Image.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(Image.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName("imageId");
 
@@ -248,8 +248,8 @@ public abstract class ImageLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portal.service.ImageLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(Image.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(Image.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("imageId");
 	}

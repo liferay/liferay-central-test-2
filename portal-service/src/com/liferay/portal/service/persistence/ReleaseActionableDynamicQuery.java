@@ -29,9 +29,10 @@ public abstract class ReleaseActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public ReleaseActionableDynamicQuery() {
 		setBaseLocalService(ReleaseLocalServiceUtil.getService());
-		setClass(Release.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(Release.class);
 
 		setPrimaryKeyPropertyName("releaseId");
 	}

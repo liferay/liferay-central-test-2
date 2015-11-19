@@ -255,8 +255,8 @@ public abstract class AssetVocabularyLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(AssetVocabulary.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(AssetVocabulary.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("vocabularyId");
 
@@ -268,8 +268,8 @@ public abstract class AssetVocabularyLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(AssetVocabulary.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(AssetVocabulary.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
 			"vocabularyId");
@@ -280,8 +280,8 @@ public abstract class AssetVocabularyLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(AssetVocabulary.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(AssetVocabulary.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("vocabularyId");
 	}

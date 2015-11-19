@@ -30,9 +30,10 @@ public abstract class ExpandoColumnActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public ExpandoColumnActionableDynamicQuery() {
 		setBaseLocalService(ExpandoColumnLocalServiceUtil.getService());
-		setClass(ExpandoColumn.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(ExpandoColumn.class);
 
 		setPrimaryKeyPropertyName("columnId");
 	}

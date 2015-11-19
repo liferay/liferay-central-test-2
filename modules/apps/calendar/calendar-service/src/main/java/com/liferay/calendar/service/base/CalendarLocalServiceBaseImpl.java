@@ -251,8 +251,8 @@ public abstract class CalendarLocalServiceBaseImpl extends BaseLocalServiceImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.calendar.service.CalendarLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(Calendar.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(Calendar.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("calendarId");
 
@@ -264,8 +264,8 @@ public abstract class CalendarLocalServiceBaseImpl extends BaseLocalServiceImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.calendar.service.CalendarLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(Calendar.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(Calendar.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName("calendarId");
 
@@ -275,8 +275,8 @@ public abstract class CalendarLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.calendar.service.CalendarLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(Calendar.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(Calendar.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("calendarId");
 	}

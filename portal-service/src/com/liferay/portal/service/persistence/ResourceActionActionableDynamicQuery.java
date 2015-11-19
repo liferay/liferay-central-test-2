@@ -29,9 +29,10 @@ public abstract class ResourceActionActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public ResourceActionActionableDynamicQuery() {
 		setBaseLocalService(ResourceActionLocalServiceUtil.getService());
-		setClass(ResourceAction.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(ResourceAction.class);
 
 		setPrimaryKeyPropertyName("resourceActionId");
 	}

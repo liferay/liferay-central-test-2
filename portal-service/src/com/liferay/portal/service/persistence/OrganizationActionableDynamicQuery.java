@@ -29,9 +29,10 @@ public abstract class OrganizationActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public OrganizationActionableDynamicQuery() {
 		setBaseLocalService(OrganizationLocalServiceUtil.getService());
-		setClass(Organization.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(Organization.class);
 
 		setPrimaryKeyPropertyName("organizationId");
 	}

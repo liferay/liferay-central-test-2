@@ -30,9 +30,10 @@ public abstract class SocialActivityLimitActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public SocialActivityLimitActionableDynamicQuery() {
 		setBaseLocalService(SocialActivityLimitLocalServiceUtil.getService());
-		setClass(SocialActivityLimit.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(SocialActivityLimit.class);
 
 		setPrimaryKeyPropertyName("activityLimitId");
 	}

@@ -29,9 +29,10 @@ public abstract class PortletItemActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public PortletItemActionableDynamicQuery() {
 		setBaseLocalService(PortletItemLocalServiceUtil.getService());
-		setClass(PortletItem.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(PortletItem.class);
 
 		setPrimaryKeyPropertyName("portletItemId");
 	}

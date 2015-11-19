@@ -30,9 +30,10 @@ public abstract class AssetLinkActionableDynamicQuery
 	extends DefaultActionableDynamicQuery {
 	public AssetLinkActionableDynamicQuery() {
 		setBaseLocalService(AssetLinkLocalServiceUtil.getService());
-		setClass(AssetLink.class);
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		setModelClass(AssetLink.class);
 
 		setPrimaryKeyPropertyName("linkId");
 	}

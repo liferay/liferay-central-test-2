@@ -227,8 +227,8 @@ public abstract class DLSyncEventLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.documentlibrary.service.DLSyncEventLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(DLSyncEvent.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(DLSyncEvent.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("syncEventId");
 
@@ -240,8 +240,8 @@ public abstract class DLSyncEventLocalServiceBaseImpl
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.portlet.documentlibrary.service.DLSyncEventLocalServiceUtil.getService());
-		indexableActionableDynamicQuery.setClass(DLSyncEvent.class);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(DLSyncEvent.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName("syncEventId");
 
@@ -251,8 +251,8 @@ public abstract class DLSyncEventLocalServiceBaseImpl
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.portlet.documentlibrary.service.DLSyncEventLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(DLSyncEvent.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(DLSyncEvent.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("syncEventId");
 	}
