@@ -74,7 +74,7 @@ public class SyncPolicies {
 				}
 				catch (PortalException e) {
 					throw new Exception(
-						"Unable to add SAP default policy for company " +
+						"Unable to add default SAP entry for company " +
 							company.getCompanyId(),
 						e);
 				}
