@@ -373,8 +373,8 @@ import ${packagePath}.service.${entity.name}${sessionTypeName}Service;
 				ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 				actionableDynamicQuery.setBaseLocalService(${packagePath}.service.${entity.name}LocalServiceUtil.getService());
-				actionableDynamicQuery.setClass(${entity.name}.class);
 				actionableDynamicQuery.setClassLoader(getClassLoader());
+				actionableDynamicQuery.setModelClass(${entity.name}.class);
 
 				<#if entity.hasPrimitivePK()>
 					actionableDynamicQuery.setPrimaryKeyPropertyName("${entity.PKVarName}");
@@ -400,8 +400,8 @@ import ${packagePath}.service.${entity.name}${sessionTypeName}Service;
 				IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
 				indexableActionableDynamicQuery.setBaseLocalService(${packagePath}.service.${entity.name}LocalServiceUtil.getService());
-				indexableActionableDynamicQuery.setClass(${entity.name}.class);
 				indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+				indexableActionableDynamicQuery.setModelClass(${entity.name}.class);
 
 				<#if entity.hasPrimitivePK()>
 					indexableActionableDynamicQuery.setPrimaryKeyPropertyName("${entity.PKVarName}");
@@ -424,8 +424,8 @@ import ${packagePath}.service.${entity.name}${sessionTypeName}Service;
 
 			protected void initActionableDynamicQuery(ActionableDynamicQuery actionableDynamicQuery) {
 				actionableDynamicQuery.setBaseLocalService(${packagePath}.service.${entity.name}LocalServiceUtil.getService());
-				actionableDynamicQuery.setClass(${entity.name}.class);
 				actionableDynamicQuery.setClassLoader(getClassLoader());
+				actionableDynamicQuery.setModelClass(${entity.name}.class);
 
 				<#if entity.hasPrimitivePK()>
 					actionableDynamicQuery.setPrimaryKeyPropertyName("${entity.PKVarName}");
