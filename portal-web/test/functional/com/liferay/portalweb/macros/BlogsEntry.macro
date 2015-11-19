@@ -1395,7 +1395,26 @@
 			</then>
 		</if>
 
-		<execute function="AssertTextEquals" locator1="BlogsEntry#CONTENT" value1="${entryContent}" />
+		<if>
+			<isset var="entryContent" />
+			<then>
+				<execute function="AssertTextEquals" locator1="BlogsEntry#CONTENT" value1="${entryContent}" />
+			</then>
+		</if>
+
+		<if>
+			<isset var="entryContentBold" />
+			<then>
+				<execute function="AssertTextEquals#assertPartialText" locator1="BlogsEntry#CONTENT_HTML_BOLD" value1="${entryContentBold}" />
+			</then>
+		</if>
+
+		<if>
+			<isset var="entryContentItalics" />
+			<then>
+				<execute function="AssertTextEquals#assertPartialText" locator1="BlogsEntry#CONTENT_HTML_ITALICS" value1="${entryContentItalics}" />
+			</then>
+		</if>
 	</command>
 
 	<command name="viewEntryAsGuestViaBlogsAggregatorPG">
