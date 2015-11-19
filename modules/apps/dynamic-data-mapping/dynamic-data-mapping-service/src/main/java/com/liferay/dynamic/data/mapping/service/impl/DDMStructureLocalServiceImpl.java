@@ -1657,9 +1657,10 @@ public class DDMStructureLocalServiceImpl
 
 		if (!commonDDMFormFieldNames.isEmpty()) {
 			StringBundler sb = new StringBundler(
-				commonDDMFormFieldNames.size() * 2 + 2);
+				commonDDMFormFieldNames.size() * 2 + 3);
 
 			sb.append("Duplicate DDMFormField names: ");
+			sb.append(StringPool.OPEN_CURLY_BRACE);
 
 			for (String commonName : commonDDMFormFieldNames) {
 				sb.append(commonName);
