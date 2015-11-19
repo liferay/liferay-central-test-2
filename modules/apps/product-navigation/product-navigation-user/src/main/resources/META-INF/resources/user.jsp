@@ -24,18 +24,15 @@ UserPanelCategory userPanelCategory = (UserPanelCategory)request.getAttribute(Ap
 int notificationsCount = panelCategoryHelper.getNotificationsCount(userPanelCategory.getKey(), permissionChecker, themeDisplay.getScopeGroup(), user);
 %>
 
-<div class="product-menu-tab-icon user-tab">
-	<div class="icon-monospaced">
-		<c:if test="<%= notificationsCount > 0 %>">
-			<span class="sticker sticker-right sticker-rounded sticker-sm sticker-warning"><%= notificationsCount %></span>
-		</c:if>
 
-		<liferay-ui:user-portrait
-			userId="<%= user.getUserId() %>"
-		/>
-	</div>
-</div>
+<c:if test="<%= notificationsCount > 0 %>">
+	<span class="sticker sticker-right sticker-rounded sticker-sm sticker-warning"><%= notificationsCount %></span>
+</c:if>
 
-<div class="product-menu-tab-text">
+<liferay-ui:user-portrait
+	userId="<%= user.getUserId() %>"
+/>
+
+<span>
 	<%= HtmlUtil.escape(user.getFirstName()) %>
-</div>
+</span>
