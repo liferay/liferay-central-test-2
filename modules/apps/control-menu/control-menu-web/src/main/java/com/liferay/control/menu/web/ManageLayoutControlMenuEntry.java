@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.control.menu.web.control.menu.entry;
+package com.liferay.control.menu.web;
 
 import com.liferay.control.menu.BaseControlMenuEntry;
 import com.liferay.control.menu.ControlMenuEntry;

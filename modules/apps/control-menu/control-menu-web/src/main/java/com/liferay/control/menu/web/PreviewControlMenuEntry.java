@@ -12,28 +12,24 @@
  * details.
  */
 
-package com.liferay.product.navigation.product.menu.web.control.menu.entry;
+package com.liferay.control.menu.web;
 
-import com.liferay.application.list.PanelCategory;
-import com.liferay.application.list.PanelCategoryRegistry;
-import com.liferay.application.list.constants.PanelCategoryKeys;
 import com.liferay.control.menu.BaseJSPControlMenuEntry;
 import com.liferay.control.menu.ControlMenuEntry;
 import com.liferay.control.menu.constants.ControlMenuCategoryKeys;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.model.Layout;
+import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.permission.GroupPermissionUtil;
+import com.liferay.portal.service.permission.LayoutPermissionUtil;
 import com.liferay.portal.theme.ThemeDisplay;
-
-import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
-import org.osgi.service.component.annotations.ReferenceCardinality;
-import org.osgi.service.component.annotations.ReferencePolicy;
-import org.osgi.service.component.annotations.ReferencePolicyOption;
 
 /**
  * @author Julio Camarero
@@ -41,38 +37,35 @@ import org.osgi.service.component.annotations.ReferencePolicyOption;
 @Component(
 	immediate = true,
 	property = {
-		"control.menu.category.key=" + ControlMenuCategoryKeys.SITES,
+		"control.menu.category.key=" + ControlMenuCategoryKeys.USER,
 		"service.ranking:Integer=100"
 	},
 	service = ControlMenuEntry.class
 )
-public class ProductMenuControlMenuEntry extends BaseJSPControlMenuEntry {
+public class PreviewControlMenuEntry
+	extends BaseJSPControlMenuEntry implements ControlMenuEntry {
 
 	@Override
 	public String getJspPath() {
-		return "/portlet/control_menu/product_menu_control_menu_entry.jsp";
+		return "/entries/preview.jsp";
 	}
 
 	@Override
 	public boolean hasAccessPermission(HttpServletRequest request)
 		throws PortalException {
 
-		if (_panelCategoryRegistry == null) {
-			return false;
-		}
-
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		List<PanelCategory> panelCategories =
-			_panelCategoryRegistry.getChildPanelCategories(
-				PanelCategoryKeys.ROOT, themeDisplay.getPermissionChecker(),
-				themeDisplay.getScopeGroup());
+		Layout layout = themeDisplay.getLayout();
 
-		// If only the Personal Panel is shown, then the product menu link will
-		// not be shown to users
+		if (layout.isTypeControlPanel()) {
+			return false;
+		}
 
-		if (panelCategories.size() <= 1) {
+		if (!(hasPreviewInDevicePermission(themeDisplay) ||
+			  hasUpdateLayoutPermission(themeDisplay))) {
+
 			return false;
 		}
 
@@ -81,30 +74,27 @@ public class ProductMenuControlMenuEntry extends BaseJSPControlMenuEntry {
 
 	@Override
 	@Reference(
-		target = "(osgi.web.symbolicname=com.liferay.product.navigation.product.menu.web)",
+		target = "(osgi.web.symbolicname=com.liferay.control.menu.web)",
 		unbind = "-"
 	)
 	public void setServletContext(ServletContext servletContext) {
 		super.setServletContext(servletContext);
 	}
 
-	@Reference(
-		cardinality = ReferenceCardinality.OPTIONAL,
-		policy = ReferencePolicy.DYNAMIC,
-		policyOption = ReferencePolicyOption.GREEDY
-	)
-	protected void setPanelCategoryRegistry(
-		PanelCategoryRegistry panelCategoryRegistry) {
+	protected boolean hasPreviewInDevicePermission(ThemeDisplay themeDisplay)
+		throws PortalException {
 
-		_panelCategoryRegistry = panelCategoryRegistry;
+		return GroupPermissionUtil.contains(
+			themeDisplay.getPermissionChecker(), themeDisplay.getScopeGroup(),
+			ActionKeys.PREVIEW_IN_DEVICE);
 	}
 
-	protected void unsetPanelCategoryRegistry(
-		PanelCategoryRegistry panelCategoryRegistry) {
+	protected boolean hasUpdateLayoutPermission(ThemeDisplay themeDisplay)
+		throws PortalException {
 
-		_panelCategoryRegistry = null;
+		return LayoutPermissionUtil.contains(
+			themeDisplay.getPermissionChecker(), themeDisplay.getLayout(),
+			ActionKeys.UPDATE);
 	}
-
-	private PanelCategoryRegistry _panelCategoryRegistry;
 
 }
