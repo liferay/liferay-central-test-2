@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.control.menu.web.control.menu.entry;
+package com.liferay.control.menu.web;
 
 import com.liferay.control.menu.BaseControlMenuEntry;
 import com.liferay.control.menu.ControlMenuEntry;
@@ -47,7 +47,7 @@ public class IndexingControlMenuEntry
 
 	@Override
 	public String getIconCssClass(HttpServletRequest request) {
-		return "icon-refresh icon-spin";
+		return "icon-refresh";
 	}
 
 	@Override
