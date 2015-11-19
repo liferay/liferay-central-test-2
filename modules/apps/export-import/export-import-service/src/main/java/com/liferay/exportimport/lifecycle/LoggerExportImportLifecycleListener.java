@@ -59,26 +59,25 @@ public class LoggerExportImportLifecycleListener
 	}
 
 	protected String getStagedModelLogFragment(StagedModel stagedModel) {
-		StringBundler stringBundler = new StringBundler(6);
+		StringBundler sb = new StringBundler(6);
 
-		stringBundler.append(StringPool.OPEN_CURLY_BRACE);
-		stringBundler.append("class: ");
-		stringBundler.append(
-			ExportImportClassedModelUtil.getClassName(stagedModel));
-		stringBundler.append(", uuid: ");
-		stringBundler.append(stagedModel.getUuid());
+		sb.append(StringPool.OPEN_CURLY_BRACE);
+		sb.append("class: ");
+		sb.append(ExportImportClassedModelUtil.getClassName(stagedModel));
+		sb.append(", uuid: ");
+		sb.append(stagedModel.getUuid());
 
 		if (stagedModel instanceof StagedGroupedModel) {
 			StagedGroupedModel stagedGroupedModel =
 				(StagedGroupedModel)stagedModel;
 
-			stringBundler.append(", groupId: ");
-			stringBundler.append(stagedGroupedModel.getGroupId());
+			sb.append(", groupId: ");
+			sb.append(stagedGroupedModel.getGroupId());
 		}
 
-		stringBundler.append(StringPool.CLOSE_CURLY_BRACE);
+		sb.append(StringPool.CLOSE_CURLY_BRACE);
 
-		return stringBundler.toString();
+		return sb.toString();
 	}
 
 	@Override
