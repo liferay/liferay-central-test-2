@@ -59,7 +59,7 @@ public class LoggerExportImportLifecycleListener
 	}
 
 	protected String getStagedModelLogFragment(StagedModel stagedModel) {
-		StringBundler sb = new StringBundler(6);
+		StringBundler sb = new StringBundler(8);
 
 		sb.append(StringPool.OPEN_CURLY_BRACE);
 		sb.append("class: ");
