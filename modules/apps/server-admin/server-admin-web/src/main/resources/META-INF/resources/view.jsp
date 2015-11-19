@@ -37,8 +37,6 @@
 			<portlet:param name="cur" value="<%= String.valueOf(cur) %>" />
 		</portlet:renderURL>
 
-		<portlet:actionURL name="/server_admin/edit_server" var="editServerURL" />
-
 		<aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
 			<aui:input name="tabs1" type="hidden" value="<%= tabs1 %>" />
 			<aui:input name="tabs2" type="hidden" value="<%= tabs2 %>" />
@@ -73,7 +71,7 @@
 					namespace: '<portlet:namespace />',
 					redirectUrl: '<%= redirectURL %>',
 					submitButton: '.save-server-button',
-					url: '<%= editServerURL %>'
+					url: '<portlet:actionURL name="/server_admin/edit_server" />'
 				}
 			);
 		</aui:script>
