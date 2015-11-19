@@ -266,7 +266,7 @@ public class TestGroup implements Group {
 	}
 
 	@Override
-	public String getLogo(ThemeDisplay themeDisplay, boolean useDefault) {
+	public String getLogoURL(ThemeDisplay themeDisplay, boolean useDefault) {
 		return null;
 	}
 

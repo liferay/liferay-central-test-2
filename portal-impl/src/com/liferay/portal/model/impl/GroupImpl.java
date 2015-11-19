@@ -429,7 +429,7 @@ public class GroupImpl extends GroupBaseImpl {
 	}
 
 	@Override
-	public String getLogo(ThemeDisplay themeDisplay, boolean useDefault) {
+	public String getLogoURL(ThemeDisplay themeDisplay, boolean useDefault) {
 		long logoId = 0;
 
 		LayoutSet publicLayoutSet = getPublicLayoutSet();
