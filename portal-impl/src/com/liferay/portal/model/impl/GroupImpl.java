@@ -432,16 +432,16 @@ public class GroupImpl extends GroupBaseImpl {
 	public String getLogoURL(ThemeDisplay themeDisplay, boolean useDefault) {
 		long logoId = 0;
 
-		LayoutSet publicLayoutSet = getPublicLayoutSet();
-
-		if (publicLayoutSet.getLogoId() > 0) {
-			logoId = publicLayoutSet.getLogoId();
-		}
-
 		LayoutSet privateLayoutSet = getPrivateLayoutSet();
 
 		if (privateLayoutSet.getLogoId() > 0) {
 			logoId = privateLayoutSet.getLogoId();
+		}
+
+		LayoutSet publicLayoutSet = getPublicLayoutSet();
+
+		if (publicLayoutSet.getLogoId() > 0) {
+			logoId = publicLayoutSet.getLogoId();
 		}
 
 		if ((logoId == 0) && !useDefault) {
