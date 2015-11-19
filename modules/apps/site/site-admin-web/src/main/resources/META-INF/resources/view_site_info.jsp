@@ -67,7 +67,7 @@ request.setAttribute("view_entries.jspf-site", group);
 </aui:nav-bar>
 
 <div class="sidebar-body">
-	<img alt="<%= HtmlUtil.escapeAttribute(group.getDescriptiveName()) %>" class="center-block img-responsive" src="<%= group.getLogo(themeDisplay, true) %>" />
+	<img alt="<%= HtmlUtil.escapeAttribute(group.getDescriptiveName()) %>" class="center-block img-responsive" src="<%= group.getLogoURL(themeDisplay, true) %>" />
 
 	<c:if test="<%= group.isOrganization() %>">
 

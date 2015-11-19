@@ -114,7 +114,7 @@
 												description="<%= HtmlUtil.escape(childGroup.getDescription(locale)) %>"
 												displayStyle="<%= displayStyle %>"
 												showCheckbox="<%= false %>"
-												thumbnailSrc="<%= childGroup.getLogo(themeDisplay, true) %>"
+												thumbnailSrc="<%= childGroup.getLogoURL(themeDisplay, true) %>"
 												title="<%= childGroup.getDescriptiveName(locale) %>"
 												url="<%= (childGroup.getGroupId() != scopeGroupId) ? childGroup.getDisplayURL(themeDisplay) : null %>"
 											/>
