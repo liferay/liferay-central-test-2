@@ -16,13 +16,14 @@ public abstract class ${entity.name}ActionableDynamicQuery extends DefaultAction
 
 	public ${entity.name}ActionableDynamicQuery() {
 		setBaseLocalService(${entity.name}LocalServiceUtil.getService());
-		setClass(${entity.name}.class);
 
 		<#if pluginName != "">
 			setClassLoader(${packagePath}.service.ClpSerializer.class.getClassLoader());
 		<#else>
 			setClassLoader(PortalClassLoaderUtil.getClassLoader());
 		</#if>
+
+		setModelClass(${entity.name}.class);
 
 		<#if entity.hasPrimitivePK()>
 			setPrimaryKeyPropertyName("${entity.PKVarName}");

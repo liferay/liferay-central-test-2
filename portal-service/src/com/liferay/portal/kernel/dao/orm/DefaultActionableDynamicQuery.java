@@ -135,9 +135,13 @@ public class DefaultActionableDynamicQuery implements ActionableDynamicQuery {
 		}
 	}
 
+	/**
+	 * @deprecated As of 7.0.0, replaced by {@link #setModelClass(Class)}
+	 */
+	@Deprecated
 	@Override
-	public void setClass(Class<?> clazz) {
-		_modelClass = clazz;
+	public void setClass(Class<?> modelClass) {
+		_modelClass = modelClass;
 	}
 
 	@Override
@@ -163,6 +167,11 @@ public class DefaultActionableDynamicQuery implements ActionableDynamicQuery {
 	@Override
 	public void setInterval(int interval) {
 		_interval = interval;
+	}
+
+	@Override
+	public void setModelClass(Class<?> modelClass) {
+		_modelClass = modelClass;
 	}
 
 	@Override
@@ -379,13 +388,13 @@ public class DefaultActionableDynamicQuery implements ActionableDynamicQuery {
 	private AddOrderCriteriaMethod _addOrderCriteriaMethod;
 	private BaseLocalService _baseLocalService;
 	private ClassLoader _classLoader;
-	private Class<?> _modelClass;
 	private long _companyId;
 	private Method _dynamicQueryCountMethod;
 	private Method _dynamicQueryMethod;
 	private long _groupId;
 	private String _groupIdPropertyName = "groupId";
 	private int _interval = Indexer.DEFAULT_INTERVAL;
+	private Class<?> _modelClass;
 	private boolean _parallel;
 
 	@SuppressWarnings("rawtypes")
