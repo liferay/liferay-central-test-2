@@ -258,7 +258,7 @@ public class NamedConfigurationPathContentFactoryTest {
 		}
 
 		@Override
-		public Enumeration<URL> getResources(String var1) throws IOException {
+		public Enumeration<URL> getResources(String var1) {
 			return null;
 		}
 
