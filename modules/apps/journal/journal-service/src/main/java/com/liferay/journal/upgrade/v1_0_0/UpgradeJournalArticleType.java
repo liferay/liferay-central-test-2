@@ -69,12 +69,12 @@ public class UpgradeJournalArticleType extends UpgradeProcess {
 			long groupId, long companyId, String title, long assetVocabularyId)
 		throws Exception {
 
+		long userId = _userLocalService.getDefaultUserId(companyId);
+
 		ServiceContext serviceContext = new ServiceContext();
 
 		serviceContext.setAddGroupPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
-
-		long userId = _userLocalService.getDefaultUserId(companyId);
 
 		return _assetCategoryLocalService.addCategory(
 			userId, groupId, title, assetVocabularyId, serviceContext);
@@ -85,23 +85,22 @@ public class UpgradeJournalArticleType extends UpgradeProcess {
 			Map<Locale, String> nameMap, Map<Locale, String> descriptionMap)
 		throws Exception {
 
-		ServiceContext serviceContext = new ServiceContext();
-
-		serviceContext.setAddGroupPermissions(true);
-		serviceContext.setAddGuestPermissions(true);
-
 		long userId = _userLocalService.getDefaultUserId(companyId);
 
 		AssetVocabularySettingsHelper assetVocabularySettingsHelper =
 			new AssetVocabularySettingsHelper();
-
-		assetVocabularySettingsHelper.setMultiValued(false);
 
 		assetVocabularySettingsHelper.setClassNameIdsAndClassTypePKs(
 			new long[] {
 				PortalUtil.getClassNameId(JournalArticle.class.getName())
 			},
 			new long[] {-1}, new boolean[] {false});
+		assetVocabularySettingsHelper.setMultiValued(false);
+
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setAddGroupPermissions(true);
+		serviceContext.setAddGuestPermissions(true);
 
 		return _assetVocabularyLocalService.addVocabulary(
 			userId, groupId, title, nameMap, descriptionMap,
@@ -200,18 +199,21 @@ public class UpgradeJournalArticleType extends UpgradeProcess {
 
 			while (rs.next()) {
 				long resourcePrimKey = rs.getLong("resourcePrimKey");
-				String type = rs.getString("type_");
 
 				AssetEntry assetEntry = _assetEntryLocalService.fetchEntry(
 					JournalArticle.class.getName(), resourcePrimKey);
 
+				if (assetEntry == null) {
+					continue;
+				}
+
+				String type = rs.getString("type_");
+
 				long assetCategoryId =
 					journalArticleTypesToAssetCategoryIds.get(type);
 
-				if (assetEntry != null) {
-					_assetEntryLocalService.addAssetCategoryAssetEntry(
-						assetCategoryId, assetEntry);
-				}
+				_assetEntryLocalService.addAssetCategoryAssetEntry(
+					assetCategoryId, assetEntry);
 			}
 		}
 		finally {
