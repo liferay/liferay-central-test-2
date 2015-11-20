@@ -46,14 +46,14 @@ public class NamedConfigurationPathContentFactoryTest {
 
 	@Before
 	public void setUp() throws IOException {
-		temporaryFolder.create();
-
 		_headers = new Hashtable<>();
 
 		_headers.put(
 			"Bundle-SymbolicName",
 			"com.liferay.portal.configuration.extender.test");
 		_headers.put("ConfigurationPath", "/configs");
+
+		temporaryFolder.create();
 
 		temporaryFolder.newFolder("configs");
 
