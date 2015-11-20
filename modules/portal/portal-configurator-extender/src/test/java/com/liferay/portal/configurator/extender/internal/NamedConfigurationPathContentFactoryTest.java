@@ -60,7 +60,7 @@ public class NamedConfigurationPathContentFactoryTest {
 		_file = temporaryFolder.newFile(
 			"/configs/com.liferay.test.aConfigFile");
 
-		_writeToFile(_file, "key=value\nanotherKey=anotherValue");
+		write(_file, "key=value\nanotherKey=anotherValue");
 	}
 
 	@After
@@ -89,7 +89,6 @@ public class NamedConfigurationPathContentFactoryTest {
 		Assert.assertEquals(
 			"com.liferay.test.aConfigFile",
 			namedConfigurationContent.getName());
-
 		Assert.assertEquals(
 			"key=value\nanotherKey=anotherValue",
 			StringUtil.read(namedConfigurationContent.getInputStream()));
@@ -102,7 +101,7 @@ public class NamedConfigurationPathContentFactoryTest {
 		File file = temporaryFolder.newFile(
 			"/configs/com.liferay.test.anotherConfigFile");
 
-		_writeToFile(file, "key2=value2\nanotherKey2=anotherValue2");
+		write(file, "key2=value2\nanotherKey2=anotherValue2");
 
 		URI uri2 = file.toURI();
 
@@ -110,11 +109,11 @@ public class NamedConfigurationPathContentFactoryTest {
 			100, "aLocation", _headers,
 			Arrays.asList(uri1.toURL(), uri2.toURL()));
 
-		NamedConfigurationContentFactory contentFactory =
+		NamedConfigurationContentFactory namedConfigurationContentFactory =
 			new NamedConfigurationPathContentFactory();
 
 		List<NamedConfigurationContent> namedConfigurationContents =
-			contentFactory.create(bundleStorage);
+			namedConfigurationContentFactory.create(bundleStorage);
 
 		Assert.assertEquals(2, namedConfigurationContents.size());
 
@@ -124,7 +123,6 @@ public class NamedConfigurationPathContentFactoryTest {
 		Assert.assertEquals(
 			"com.liferay.test.aConfigFile",
 			namedConfigurationContent.getName());
-
 		Assert.assertEquals(
 			"key=value\nanotherKey=anotherValue",
 			StringUtil.read(namedConfigurationContent.getInputStream()));
@@ -134,7 +132,6 @@ public class NamedConfigurationPathContentFactoryTest {
 		Assert.assertEquals(
 			"com.liferay.test.anotherConfigFile",
 			namedConfigurationContent.getName());
-
 		Assert.assertEquals(
 			"key2=value2\nanotherKey2=anotherValue2",
 			StringUtil.read(namedConfigurationContent.getInputStream()));
@@ -149,7 +146,7 @@ public class NamedConfigurationPathContentFactoryTest {
 		File file = temporaryFolder.newFile(
 			"/configs/nested/com.liferay.test.anotherConfigFile");
 
-		_writeToFile(file, "key2=value2\nanotherKey2=anotherValue2");
+		write(file, "key2=value2\nanotherKey2=anotherValue2");
 
 		URI uri2 = file.toURI();
 
@@ -157,11 +154,11 @@ public class NamedConfigurationPathContentFactoryTest {
 			100, "aLocation", _headers,
 			Arrays.asList(uri1.toURL(), uri2.toURL()));
 
-		NamedConfigurationContentFactory contentFactory =
+		NamedConfigurationContentFactory namedConfigurationContentFactory =
 			new NamedConfigurationPathContentFactory();
 
 		List<NamedConfigurationContent> namedConfigurationContents =
-			contentFactory.create(bundleStorage);
+			namedConfigurationContentFactory.create(bundleStorage);
 
 		Assert.assertEquals(2, namedConfigurationContents.size());
 
@@ -171,7 +168,6 @@ public class NamedConfigurationPathContentFactoryTest {
 		Assert.assertEquals(
 			"com.liferay.test.aConfigFile",
 			namedConfigurationContent.getName());
-
 		Assert.assertEquals(
 			"key=value\nanotherKey=anotherValue",
 			StringUtil.read(namedConfigurationContent.getInputStream()));
@@ -181,7 +177,6 @@ public class NamedConfigurationPathContentFactoryTest {
 		Assert.assertEquals(
 			"com.liferay.test.anotherConfigFile",
 			namedConfigurationContent.getName());
-
 		Assert.assertEquals(
 			"key2=value2\nanotherKey2=anotherValue2",
 			StringUtil.read(namedConfigurationContent.getInputStream()));
@@ -190,7 +185,7 @@ public class NamedConfigurationPathContentFactoryTest {
 	@Rule
 	public TemporaryFolder temporaryFolder = new TemporaryFolder();
 
-	private void _writeToFile(File file, String content) {
+	protected void write(File file, String content) {
 		try (Writer writer = new FileWriter(file)) {
 			writer.write(content);
 
