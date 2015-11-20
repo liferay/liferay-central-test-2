@@ -1399,7 +1399,7 @@
 		<for list="${orgNameList}" param="orgName">
 			<execute macro="Organization#addCP">
 				<var name="orgName" value="${orgName}" />
-				<var name="orgType" value="${orgType}" />
+				<var name="orgType" value="Regular Organization" />
 			</execute>
 
 			<execute macro="Page#gotoCP">
@@ -1408,8 +1408,8 @@
 		</for>
 
 		<execute macro="Organization#selectParentOrganizationCP">
-			<var name="orgName" value="${orgName3}" />
-			<var name="parentOrgName" value="${parentOrgName}" />
+			<var name="orgName" value="Organization3 Name" />
+			<var name="parentOrgName" value="Organization1 Name" />
 		</execute>
 
 		<execute macro="Page#gotoCP">
@@ -1417,10 +1417,10 @@
 		</execute>
 
 		<execute macro="Organization#viewParentOrganizationCP">
-			<var name="orgName" value="${orgName1}" />
+			<var name="orgName" value="Organization1 Name" />
 			<var name="parentOrgExist" value="true" />
-			<var name="parentOrgName" value="${parentOrgName}" />
-			<var name="subOrgName" value="${subOrgName}" />
+			<var name="parentOrgName" value="Organization1 Name" />
+			<var name="subOrgName" value="Organization3 Name" />
 		</execute>
 
 		<execute macro="Page#gotoCP">
@@ -1428,7 +1428,7 @@
 		</execute>
 
 		<execute macro="Organization#viewParentOrganizationCP">
-			<var name="orgName" value="${orgName2}" />
+			<var name="orgName" value="Organization2 Name" />
 			<var name="parentOrgExist" value="false" />
 		</execute>
 
@@ -1437,7 +1437,7 @@
 		</execute>
 
 		<execute macro="BlogsAggregatorPortlet#viewParentOrganizationPG">
-			<var name="orgName" value="${orgName2}" />
+			<var name="orgName" value="Organization2 Name" />
 			<var name="parentOrgExist" value="false" />
 		</execute>
 
@@ -1446,8 +1446,8 @@
 		</execute>
 
 		<execute macro="BlogsAggregatorPortlet#viewParentOrganizationPG">
-			<var name="orgName" value="${orgName3}" />
-			<var name="parentOrgName" value="${parentOrgName}" />
+			<var name="orgName" value="Organization3 Name" />
+			<var name="parentOrgName" value="Organization1 Name" />
 		</execute>
 	</command>
 </definition>
