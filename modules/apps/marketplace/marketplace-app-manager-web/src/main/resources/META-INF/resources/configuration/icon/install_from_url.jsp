@@ -16,15 +16,9 @@
 
 <%@ include file="/init.jsp" %>
 
-<%
-PortletURL portletURL = renderResponse.createRenderURL();
-
-String taglibOnClick = renderResponse.getNamespace() + "openInstallFromURLView()";
-%>
-
 <liferay-ui:icon
 	message="install-from-url"
-	onClick="<%= taglibOnClick %>"
+	onClick='<%= renderResponse.getNamespace() + "openInstallFromURLView()" %>'
 	url="javascript:;"
 />
 
@@ -37,7 +31,7 @@ String taglibOnClick = renderResponse.getNamespace() + "openInstallFromURLView()
 				},
 				id: '<portlet:namespace />openInstallFromURLView',
 				title: '<%= UnicodeLanguageUtil.get(request, "install-from-url") %>',
-				uri: '<liferay-portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="mvcPath" value="/install_remote_app.jsp" /><portlet:param name="redirect" value="<%= portletURL.toString() %>" /></liferay-portlet:renderURL>'
+				uri: '<liferay-portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="mvcPath" value="/install_remote_app.jsp" /><portlet:param name="redirect" value="<%= renderResponse.createRenderURL() %>" /></liferay-portlet:renderURL>'
 			}
 		);
 	}
