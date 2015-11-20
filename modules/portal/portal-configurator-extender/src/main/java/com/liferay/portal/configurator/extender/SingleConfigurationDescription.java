@@ -14,6 +14,7 @@
 
 package com.liferay.portal.configurator.extender;
 
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Supplier;
 
 import java.util.Dictionary;
@@ -41,7 +42,15 @@ public final class SingleConfigurationDescription
 
 	@Override
 	public String toString() {
-		return "SingleConfigurationDescriptor {pid='" + _pid + "\'}";
+		StringBundler sb = new StringBundler(5);
+
+		sb.append("{pid=");
+		sb.append(_pid);
+		sb.append(", propertiesSupplier=");
+		sb.append(_propertiesSupplier);
+		sb.append("}");
+
+		return sb.toString();
 	}
 
 	private final String _pid;

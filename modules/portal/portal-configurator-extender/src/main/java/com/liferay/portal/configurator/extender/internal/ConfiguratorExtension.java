@@ -87,9 +87,8 @@ public class ConfiguratorExtension implements Extension {
 			NamedConfigurationContent namedConfigurationContent)
 		throws Exception {
 
-		for (ConfigurationDescriptionFactory
-			configurationDescriptionFactory :
-			_configurationDescriptionFactories) {
+		for (ConfigurationDescriptionFactory configurationDescriptionFactory :
+				_configurationDescriptionFactories) {
 
 			ConfigurationDescription configurationDescription =
 				configurationDescriptionFactory.create(

@@ -14,6 +14,7 @@
 
 package com.liferay.portal.configurator.extender;
 
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Supplier;
 
 import java.util.Dictionary;
@@ -47,8 +48,17 @@ public final class FactoryConfigurationDescription
 
 	@Override
 	public String toString() {
-		return "FactoryConfigurationDescription {factoryPid='" +
-			_factoryPid + "\', pid='" + _pid + '\'' + '}';
+		StringBundler sb = new StringBundler(7);
+
+		sb.append("{factoryPid=");
+		sb.append(_factoryPid);
+		sb.append(", pid=");
+		sb.append(_pid);
+		sb.append(", propertiesSupplier=");
+		sb.append(_propertiesSupplier);
+		sb.append("}");
+
+		return sb.toString();
 	}
 
 	private final String _factoryPid;

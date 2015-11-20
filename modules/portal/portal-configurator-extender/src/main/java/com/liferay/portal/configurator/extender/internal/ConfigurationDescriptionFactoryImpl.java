@@ -42,21 +42,21 @@ public class ConfigurationDescriptionFactoryImpl
 		NamedConfigurationContent namedConfigurationContent) {
 
 		if (!(namedConfigurationContent
-			instanceof PropertiesFileNamedConfigurationContent)) {
+				instanceof PropertiesFileNamedConfigurationContent)) {
 
 			return null;
 		}
 
-		String name = namedConfigurationContent.getName();
-
-		int lastIndexOfDash = name.lastIndexOf('-');
-
 		String factoryPid = null;
 		String pid = null;
 
-		if (lastIndexOfDash > 0) {
-			factoryPid = name.substring(0, lastIndexOfDash);
-			pid = name.substring(lastIndexOfDash + 1);
+		String name = namedConfigurationContent.getName();
+
+		int index = name.lastIndexOf('-');
+
+		if (index > 0) {
+			factoryPid = name.substring(0, index);
+			pid = name.substring(index + 1);
 
 			return new FactoryConfigurationDescription(
 				factoryPid, pid,
