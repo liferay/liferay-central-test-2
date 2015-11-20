@@ -201,8 +201,8 @@ public class LDAPPropertiesVerifyProcess extends VerifyProcess {
 				verifyLDAPServerConfiguration(companyId, ldapServerId, postfix);
 
 				for (int i = 0;
-					 i < LegacyLDAPPropsKeys.SERVER_ID_POSTFIXED_KEYS.length;
-					 i++) {
+					 	i < LegacyLDAPPropsKeys.SERVER_ID_POSTFIXED_KEYS.length;
+					 		i++) {
 
 					keys.add(
 						LegacyLDAPPropsKeys.SERVER_ID_POSTFIXED_KEYS[i] +
