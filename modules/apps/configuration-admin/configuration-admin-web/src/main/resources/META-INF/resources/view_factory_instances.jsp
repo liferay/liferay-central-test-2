@@ -17,10 +17,10 @@
 <%@ include file="/init.jsp" %>
 
 <%
+String redirect = ParamUtil.getString(request, "redirect");
+
 ConfigurationModelIterator configurationModelIterator = (ConfigurationModelIterator)request.getAttribute(ConfigurationAdminWebKeys.CONFIGURATION_MODEL_ITERATOR);
 ConfigurationModel factoryConfigurationModel = (ConfigurationModel)request.getAttribute(ConfigurationAdminWebKeys.FACTORY_CONFIGURATION_MODEL);
-
-String redirect = ParamUtil.getString(request, "redirect");
 
 portletDisplay.setShowBackIcon(true);
 portletDisplay.setURLBack(redirect);
@@ -44,9 +44,9 @@ renderResponse.setTitle(factoryConfigurationModel.getName());
 		>
 			<portlet:renderURL var="editURL">
 				<portlet:param name="mvcRenderCommandName" value="/edit-configuration" />
+				<portlet:param name="redirect" value="<%= currentURL %>" />
 				<portlet:param name="factoryPid" value="<%= configurationModel.getFactoryPid() %>" />
 				<portlet:param name="pid" value="<%= configurationModel.getID() %>" />
-				<portlet:param name="redirect" value="<%= currentURL %>" />
 			</portlet:renderURL>
 
 			<liferay-ui:search-container-column-text name="entry">
@@ -95,9 +95,9 @@ renderResponse.setTitle(factoryConfigurationModel.getName());
 
 					<c:if test="<%= configurationModel.getConfiguration() != null %>">
 						<portlet:actionURL name="deleteConfiguration" var="deleteConfigActionURL">
+							<portlet:param name="redirect" value="<%= currentURL %>" />
 							<portlet:param name="factoryPid" value="<%= configurationModel.getFactoryPid() %>" />
 							<portlet:param name="pid" value="<%= configurationModel.getID() %>" />
-							<portlet:param name="redirect" value="<%= currentURL %>" />
 						</portlet:actionURL>
 
 						<liferay-ui:icon

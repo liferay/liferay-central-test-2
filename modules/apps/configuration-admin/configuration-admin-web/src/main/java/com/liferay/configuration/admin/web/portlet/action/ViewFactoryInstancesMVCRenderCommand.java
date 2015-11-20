@@ -71,13 +71,13 @@ public class ViewFactoryInstancesMVCRenderCommand implements MVCRenderCommand {
 		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		String factoryPid = ParamUtil.getString(renderRequest, "factoryPid");
-
 		ConfigurationHelper configurationHelper = new ConfigurationHelper(
 			_bundleContext, _configurationAdmin, _extendedMetaTypeService,
 			themeDisplay.getLanguageId());
 
 		List<ConfigurationModel> configurationModels = null;
+
+		String factoryPid = ParamUtil.getString(renderRequest, "factoryPid");
 
 		try {
 			configurationModels = configurationHelper.getFactoryInstances(

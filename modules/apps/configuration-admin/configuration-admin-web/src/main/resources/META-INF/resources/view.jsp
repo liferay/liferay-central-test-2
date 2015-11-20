@@ -67,15 +67,15 @@ portletURL.setParameter("configurationCategory", configurationCategory);
 		>
 			<portlet:renderURL var="editURL">
 				<portlet:param name="mvcRenderCommandName" value="/edit-configuration" />
+				<portlet:param name="redirect" value="<%= currentURL %>" />
 				<portlet:param name="factoryPid" value="<%= configurationModel.getFactoryPid() %>" />
 				<portlet:param name="pid" value="<%= configurationModel.getID() %>" />
-				<portlet:param name="redirect" value="<%= currentURL %>" />
 			</portlet:renderURL>
 
 			<portlet:renderURL var="viewFactoryInstancesURL">
 				<portlet:param name="mvcRenderCommandName" value="/view-factory-instances" />
-				<portlet:param name="factoryPid" value="<%= configurationModel.getFactoryPid() %>" />
 				<portlet:param name="redirect" value="<%= currentURL %>" />
+				<portlet:param name="factoryPid" value="<%= configurationModel.getFactoryPid() %>" />
 			</portlet:renderURL>
 
 			<liferay-ui:search-container-column-text name="name">
@@ -135,8 +135,8 @@ portletURL.setParameter("configurationCategory", configurationCategory);
 
 							<portlet:renderURL var="createFactoryConfigURL">
 								<portlet:param name="mvcRenderCommandName" value="/edit-configuration" />
-								<portlet:param name="factoryPid" value="<%= configurationModel.getID() %>" />
 								<portlet:param name="redirect" value="<%= currentURL %>" />
+								<portlet:param name="factoryPid" value="<%= configurationModel.getID() %>" />
 							</portlet:renderURL>
 
 							<liferay-ui:icon
@@ -154,9 +154,9 @@ portletURL.setParameter("configurationCategory", configurationCategory);
 
 							<c:if test="<%= configurationModel.getConfiguration() != null %>">
 								<portlet:actionURL name="deleteConfiguration" var="deleteConfigActionURL">
+									<portlet:param name="redirect" value="<%= currentURL %>" />
 									<portlet:param name="factoryPid" value="<%= configurationModel.getFactoryPid() %>" />
 									<portlet:param name="pid" value="<%= configurationModel.getID() %>" />
-									<portlet:param name="redirect" value="<%= currentURL %>" />
 								</portlet:actionURL>
 
 								<liferay-ui:icon
