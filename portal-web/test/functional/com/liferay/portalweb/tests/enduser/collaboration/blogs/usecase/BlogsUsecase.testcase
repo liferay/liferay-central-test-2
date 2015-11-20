@@ -1359,8 +1359,6 @@
 	</command>
 
 	<command name="ViewParentOrganizationViaSelectOrganizationInBlogsConfiguration" priority="4">
-		<var name="orgNameList" value="Organization1 Name,Organization2 Name,Organization3 Name" />
-
 		<execute macro="Page#addPG">
 			<var name="pageName" value="${pageName}" />
 		</execute>
@@ -1395,6 +1393,8 @@
 		<execute macro="Page#gotoCP">
 			<var name="portletName" value="Users and Organizations" />
 		</execute>
+
+		<var name="orgNameList" value="Organization1 Name,Organization2 Name,Organization3 Name" />
 
 		<for list="${orgNameList}" param="orgName">
 			<execute macro="Organization#addCP">
