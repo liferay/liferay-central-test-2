@@ -292,7 +292,7 @@ public class LDAPServerConfigurationProviderImpl
 			ldapServerConfiguration.companyId(),
 			ldapServerConfiguration.ldapServerId());
 
-		_pidToCompanyIdLDAPServerId.put(configuration.getPid(), tuple);
+		_tuples.put(configuration.getPid(), tuple);
 
 		synchronized (_configurations) {
 			Map<Long, Configuration> ldapServerConfigurations =
@@ -313,20 +313,21 @@ public class LDAPServerConfigurationProviderImpl
 
 	@Override
 	public void unregisterConfiguration(Configuration configuration) {
-		Tuple tuple = _pidToCompanyIdLDAPServerId.get(configuration.getPid());
+		Tuple tuple = _tuples.get(configuration.getPid());
 
 		if (tuple == null) {
 			return;
 		}
 
 		long companyId = (Long)tuple.getObject(0);
-		long ldapServerId = (Long)tuple.getObject(1);
 
 		Map<Long, Configuration> configurations = _configurations.get(
 			companyId);
 
 		synchronized (_configurations) {
 			if (!MapUtil.isEmpty(configurations)) {
+				long ldapServerId = (Long)tuple.getObject(1);
+
 				configurations.remove(ldapServerId);
 			}
 		}
@@ -388,7 +389,6 @@ public class LDAPServerConfigurationProviderImpl
 
 	private final Map<Long, Map<Long, Configuration>>
 		_configurations = new ConcurrentHashMap<>();
-	private final Map<String, Tuple> _pidToCompanyIdLDAPServerId =
-		new HashMap<>();
+	private final Map<String, Tuple> _tuples = new HashMap<>();
 
 }
