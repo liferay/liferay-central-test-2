@@ -138,10 +138,10 @@ public class ConfiguratorExtension implements Extension {
 		Configuration configuration =
 			_configurationAdmin.createFactoryConfiguration(factoryPid, null);
 
+		Dictionary<String, Object> properties = null;
+
 		Supplier<Dictionary<String, Object>> propertiesSupplier =
 			factoryConfigurationDescription.getPropertiesSupplier();
-
-		Dictionary<String, Object> properties = null;
 
 		try {
 			properties = propertiesSupplier.get();
@@ -174,10 +174,10 @@ public class ConfiguratorExtension implements Extension {
 		Configuration configuration = _configurationAdmin.getConfiguration(
 			pid, null);
 
+		Dictionary<String, Object> properties = null;
+
 		Supplier<Dictionary<String, Object>> propertiesSupplier =
 			description.getPropertiesSupplier();
-
-		Dictionary<String, Object> properties = null;
 
 		try {
 			properties = propertiesSupplier.get();
