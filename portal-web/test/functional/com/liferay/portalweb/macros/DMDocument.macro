@@ -758,6 +758,26 @@
 		<execute function="AssertTextEquals#assertPartialText" locator1="Message#SUCCESS" value1="moved to the Recycle Bin. Undo" />
 	</command>
 
+	<command name="disableActionsMenuOnPortlet">
+		<execute macro="Portlet#gotoPortletOptions">
+			<var name="portletOption" value="Configuration" />
+		</execute>
+
+		<execute function="SelectFrame" locator1="DocumentsAndMedia#CONFIGURATION_IFRAME" />
+
+		<execute function="Uncheck" locator1="Checkbox#SHOW_ACTIONS_CHECKBOX" />
+
+		<execute function="Uncheck" locator1="Checkbox#SHOW_FOLDER_MENU_CHECKBOX" />
+
+		<execute function="Uncheck" locator1="Checkbox#SHOW_NAVIGATION_LINKS_CHECKBOX" />
+
+		<execute function="AssertClick" locator1="Button#SAVE" value1="Save" />
+
+		<execute function="AssertTextEquals#assertPartialText" locator1="Message#SUCCESS" value1="You have successfully updated the setup." />
+
+		<execute function="SelectFrame" locator1="relative=top" />
+	</command>
+
 	<command name="downloadCP">
 		<var name="key_dmDocumentTitle" value="${dmDocumentTitle}" />
 
