@@ -39,8 +39,7 @@ import org.osgi.service.cm.Configuration;
  */
 public abstract class CompanyScopedConfigurationProvider
 	<T extends CompanyScopedConfiguration>
-	extends BaseConfigurationProvider<T>
-	implements ConfigurationProvider<T> {
+	extends BaseConfigurationProvider<T> implements ConfigurationProvider<T> {
 
 	@Override
 	public boolean delete(long companyId) {
@@ -203,7 +202,7 @@ public abstract class CompanyScopedConfigurationProvider
 
 		long companyId = configurable.companyId();
 
-		_pidToCompanyId.put(configuration.getPid(), companyId);
+		_companyIds.put(configuration.getPid(), companyId);
 
 		_configurations.put(companyId, configuration);
 	}
@@ -214,7 +213,7 @@ public abstract class CompanyScopedConfigurationProvider
 
 		String pid = configuration.getPid();
 
-		Long companyId = _pidToCompanyId.get(pid);
+		Long companyId = _companyIds.get(pid);
 
 		if (companyId != null) {
 			_configurations.remove(companyId);
@@ -257,7 +256,7 @@ public abstract class CompanyScopedConfigurationProvider
 		updateProperties(companyId, properties);
 	}
 
+	private final Map<String, Long> _companyIds = new HashMap<>();
 	private final Map<Long, Configuration> _configurations = new HashMap<>();
-	private final Map<String, Long> _pidToCompanyId = new HashMap<>();
 
 }
