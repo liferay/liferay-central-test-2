@@ -74,7 +74,7 @@ public class ConfiguratorExtender extends AbstractExtender {
 		cardinality = ReferenceCardinality.MULTIPLE,
 		policy = ReferencePolicy.DYNAMIC,
 		policyOption = ReferencePolicyOption.GREEDY,
-		unbind = "removeConfigurationURLLocator"
+		unbind = "removeNamedConfigurationContentFactory"
 	)
 	protected void addNamedConfigurationContentFactory(
 		NamedConfigurationContentFactory namedConfigurationContentFactory) {
