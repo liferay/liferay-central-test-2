@@ -197,7 +197,7 @@ public class LDAPPropertiesVerifyProcess extends VerifyProcess {
 			Set<String> propertyKeys = new HashSet<>();
 
 			propertyKeys.addAll(
-				Arrays.asList(LegacyLDAPPropsKeys.NON_POSTFIXED_LDAP_KEYS));
+				Arrays.asList(LegacyLDAPPropsKeys.NONPOSTFIXED_LDAP_KEYS));
 
 			for (long ldapServerId : ldapServerIds) {
 				String postfix = _ldapSettings.getPropertyPostfix(ldapServerId);
