@@ -454,8 +454,8 @@ public class LDAPPropertiesVerifyProcess extends VerifyProcess {
 		if (_log.isInfoEnabled()) {
 			_log.info(
 				"Adding LDAP servier configuration for company " + companyId +
-					" and LDAP server ID " + ldapServerId + " with values: " +
-						dictionary);
+					" and LDAP server ID " + ldapServerId +
+						" with properties: " + dictionary);
 		}
 
 		_ldapServerConfigurationProvider.updateProperties(
@@ -538,7 +538,7 @@ public class LDAPPropertiesVerifyProcess extends VerifyProcess {
 		if (_log.isInfoEnabled()) {
 			_log.info(
 				"Adding system LDAP configurations for company " + companyId +
-					" with values: " + dictionary);
+					" with properties: " + dictionary);
 		}
 
 		_systemLDAPConfigurationProvider.updateProperties(
