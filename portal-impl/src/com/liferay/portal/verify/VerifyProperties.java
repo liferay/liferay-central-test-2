@@ -17,7 +17,6 @@ package com.liferay.portal.verify;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ListUtil;
-import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.SystemProperties;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.documentlibrary.store.StoreFactory;
@@ -212,11 +211,6 @@ public class VerifyProperties extends VerifyProcess {
 					newKey + "\"");
 		}
 	}
-
-	private static final String[] _LDAP_KEYS = {
-		PropsKeys.LDAP_CONTACT_CUSTOM_MAPPINGS, PropsKeys.LDAP_CONTACT_MAPPINGS,
-		PropsKeys.LDAP_USER_CUSTOM_MAPPINGS
-	};
 
 	private static final String[][] _MIGRATED_PORTAL_KEYS = new String[][] {
 		new String[] {
