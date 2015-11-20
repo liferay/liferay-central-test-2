@@ -116,7 +116,7 @@ public class ViewFactoryInstancesMVCRenderCommand implements MVCRenderCommand {
 	}
 
 	private BundleContext _bundleContext;
-	private ConfigurationAdmin _configurationAdmin;
-	private ExtendedMetaTypeService _extendedMetaTypeService;
+	private volatile ConfigurationAdmin _configurationAdmin;
+	private volatile ExtendedMetaTypeService _extendedMetaTypeService;
 
 }

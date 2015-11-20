@@ -127,8 +127,8 @@ public class EditConfigurationMVCRenderCommand implements MVCRenderCommand {
 	}
 
 	private BundleContext _bundleContext;
-	private ConfigurationAdmin _configurationAdmin;
-	private DDMFormRenderer _ddmFormRenderer;
-	private ExtendedMetaTypeService _extendedMetaTypeService;
+	private volatile ConfigurationAdmin _configurationAdmin;
+	private volatile DDMFormRenderer _ddmFormRenderer;
+	private volatile ExtendedMetaTypeService _extendedMetaTypeService;
 
 }
