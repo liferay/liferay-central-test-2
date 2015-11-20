@@ -350,21 +350,24 @@ public class LDAPPropertiesVerifyProcessTest extends BaseVerifyProcessTestCase {
 				Dictionary<String, Object> properties =
 					configuration.getProperties();
 
-				if (properties != null) {
-					Long companyId = (Long)properties.get(
-						LDAPConstants.COMPANY_ID);
-
-					Long configuredLDAPServerId = (Long)properties.get(
-						LDAPConstants.LDAP_SERVER_ID);
-
-					if ((companyId != null) &&
-						(configuredLDAPServerId != null) &&
-						(companyId == company.getCompanyId()) &&
-						(configuredLDAPServerId == ldapServerId)) {
-
-						return properties;
-					}
+				if (properties == null) {
+					continue;
 				}
+
+				Long companyId = (Long)properties.get(
+					LDAPConstants.COMPANY_ID);
+				Long configuredLDAPServerId = (Long)properties.get(
+					LDAPConstants.LDAP_SERVER_ID);
+
+				if ((companyId == null) ||
+					(configuredLDAPServerId == null) ||
+					(companyId != company.getCompanyId()) ||
+					(configuredLDAPServerId != ldapServerId)) {
+
+					continue;
+				}
+
+				return properties;
 			}
 
 			return null;
