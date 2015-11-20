@@ -190,10 +190,6 @@ public class ConfiguratorExtender extends AbstractExtender {
 			return _bundle.getHeaders();
 		}
 
-		public Dictionary<String, String> getHeaders(String name) {
-			return _bundle.getHeaders(name);
-		}
-
 		@Override
 		public String getLocation() {
 			return _bundle.getLocation();
