@@ -78,7 +78,7 @@ public class WaiterUtil {
 				if (!countDownLatch.await(timeout, TimeUnit.MILLISECONDS)) {
 					throw new TimeoutException(
 						"Time out on waiting for " + filterString +
-							" to disappear after " + timeout);
+							" to disappear after " + timeout + "ms");
 				}
 			}
 		};
