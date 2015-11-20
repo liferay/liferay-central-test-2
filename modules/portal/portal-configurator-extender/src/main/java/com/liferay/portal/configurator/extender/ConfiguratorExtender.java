@@ -72,7 +72,7 @@ public class ConfiguratorExtender extends AbstractExtender {
 		policyOption = ReferencePolicyOption.GREEDY,
 		unbind = "removeConfigurationURLLocator"
 	)
-	protected void addConfigurationURLLocator(
+	protected void addNamedConfigurationContentFactory(
 		NamedConfigurationContentFactory namedConfigurationContentFactory) {
 
 		_namedConfigurationContentFactories.add(
@@ -91,31 +91,29 @@ public class ConfiguratorExtender extends AbstractExtender {
 
 	@Override
 	protected Extension doCreateExtension(Bundle bundle) throws Exception {
-		Collection<NamedConfigurationContent> configurationURLs =
+		Collection<NamedConfigurationContent> namedConfigurationContents =
 			new ArrayList<>();
 
 		for (NamedConfigurationContentFactory namedConfigurationContentFactory :
 				_namedConfigurationContentFactories) {
 
 			try {
-				configurationURLs.addAll(
+				namedConfigurationContents.addAll(
 					namedConfigurationContentFactory.create(
 						new BundleStorageImpl(bundle)));
 			}
 			catch (Throwable t) {
-				_logger.log(
-					Logger.LOG_INFO, "ConfigurationURLLocator threw Exception",
-					t);
+				_logger.log(Logger.LOG_INFO, t.getMessage(), t);
 			}
 		}
 
-		if (configurationURLs.isEmpty()) {
+		if (namedConfigurationContents.isEmpty()) {
 			return null;
 		}
 
 		return new ConfiguratorExtension(
 			_configurationAdmin, new Logger(bundle.getBundleContext()),
-			bundle.getSymbolicName(), configurationURLs,
+			bundle.getSymbolicName(), namedConfigurationContents,
 			_configurationDescriptionFactories);
 	}
 
@@ -131,7 +129,7 @@ public class ConfiguratorExtender extends AbstractExtender {
 			configurationDescriptionFactory);
 	}
 
-	protected void removeConfigurationURLLocator(
+	protected void removeNamedConfigurationContentFactory(
 		NamedConfigurationContentFactory namedConfigurationContentFactory) {
 
 		_namedConfigurationContentFactories.remove(

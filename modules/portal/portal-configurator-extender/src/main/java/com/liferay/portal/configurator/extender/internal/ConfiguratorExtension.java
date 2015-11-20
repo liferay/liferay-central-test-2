@@ -41,14 +41,14 @@ public class ConfiguratorExtension implements Extension {
 
 	public ConfiguratorExtension(
 		ConfigurationAdmin configurationAdmin, Logger logger, String namespace,
-		Collection<NamedConfigurationContent> configurationContents,
+		Collection<NamedConfigurationContent> namedConfigurationContents,
 		Collection<ConfigurationDescriptionFactory>
 			configurationDescriptionFactories) {
 
 		_configurationAdmin = configurationAdmin;
 		_logger = logger;
 		_namespace = namespace;
-		_configurationContents = configurationContents;
+		_configurationContents = namedConfigurationContents;
 		_configurationDescriptionFactories = configurationDescriptionFactories;
 	}
 
