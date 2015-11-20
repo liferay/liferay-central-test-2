@@ -107,8 +107,11 @@ public class DDMFormFieldTypeSettingsSerializerHelper {
 			for (DDMFormFieldSetting ddmFormFieldSetting :
 					ddmFormFieldSettings) {
 
-				if (ddmFormFieldSetting.getName().equals(setting.getName())) {
+				if (Validator.equals(
+						ddmFormFieldSetting.getName(), setting.getName())) {
+
 					ddmFormFieldSettings.remove(ddmFormFieldSetting);
+
 					break;
 				}
 			}
