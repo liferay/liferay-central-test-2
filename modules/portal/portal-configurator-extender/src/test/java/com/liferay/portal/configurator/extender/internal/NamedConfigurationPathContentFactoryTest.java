@@ -23,8 +23,10 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+
 import java.net.URI;
 import java.net.URL;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Dictionary;
@@ -138,7 +140,7 @@ public class NamedConfigurationPathContentFactoryTest {
 	}
 
 	@Test
-	public void testCreateWithNestedDir() throws IOException {
+	public void testCreateWithNestedDirectory() throws IOException {
 		URI uri1 = _file.toURI();
 
 		temporaryFolder.newFolder("configs", "nested");

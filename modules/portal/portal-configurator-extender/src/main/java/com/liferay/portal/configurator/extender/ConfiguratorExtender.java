@@ -17,7 +17,9 @@ package com.liferay.portal.configurator.extender;
 import com.liferay.portal.configurator.extender.internal.ConfiguratorExtension;
 
 import java.io.IOException;
+
 import java.net.URL;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Dictionary;
@@ -27,6 +29,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import org.apache.felix.utils.extender.AbstractExtender;
 import org.apache.felix.utils.extender.Extension;
 import org.apache.felix.utils.log.Logger;
+
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.service.cm.ConfigurationAdmin;
