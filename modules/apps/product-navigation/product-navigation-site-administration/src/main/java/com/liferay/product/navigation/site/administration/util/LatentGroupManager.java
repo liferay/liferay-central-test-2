@@ -28,7 +28,7 @@ public class LatentGroupManager {
 
 	public static Group getLatentGroup(HttpSession session) {
 		long groupId = GetterUtil.getLong(
-			SessionClicks.get(session, _LATENT_GROUP_KEY, null));
+			SessionClicks.get(session, _KEY_LATENT_GROUP, null));
 
 		if (groupId > 0) {
 			return GroupLocalServiceUtil.fetchGroup(groupId);
@@ -39,10 +39,10 @@ public class LatentGroupManager {
 
 	public static void setLatentGroup(HttpSession session, Group group) {
 		SessionClicks.put(
-			session, _LATENT_GROUP_KEY, String.valueOf(group.getGroupId()));
+			session, _KEY_LATENT_GROUP, String.valueOf(group.getGroupId()));
 	}
 
-	private static final String _LATENT_GROUP_KEY =
+	private static final String _KEY_LATENT_GROUP =
 		"com.liferay.product.navigation.site.administration.util_latentGroup";
 
 }
