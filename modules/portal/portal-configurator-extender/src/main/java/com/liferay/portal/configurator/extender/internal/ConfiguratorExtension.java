@@ -113,8 +113,8 @@ public class ConfiguratorExtension implements Extension {
 			else {
 				_logger.log(
 					Logger.LOG_ERROR,
-					configurationDescriptionFactory + " returned " +
-						"unsupported ConfigurationDescription " +
+					configurationDescriptionFactory + " returned an " +
+						"unsupported configuration description " +
 							configurationDescription);
 			}
 		}
@@ -127,10 +127,10 @@ public class ConfiguratorExtension implements Extension {
 		String factoryPid = factoryConfigurationDescription.getFactoryPid();
 		String pid = factoryConfigurationDescription.getPid();
 
-		String configuratorUrl = _namespace + "#" + pid;
+		String configuratorURL = _namespace + "#" + pid;
 
 		if (_configurationExists(
-				"(configurator.url=" + configuratorUrl + ")")) {
+				"(configurator.url=" + configuratorURL + ")")) {
 
 			return;
 		}
@@ -141,7 +141,7 @@ public class ConfiguratorExtension implements Extension {
 		Supplier<Dictionary<String, Object>> propertiesSupplier =
 			factoryConfigurationDescription.getPropertiesSupplier();
 
-		Dictionary<String, Object> properties;
+		Dictionary<String, Object> properties = null;
 
 		try {
 			properties = propertiesSupplier.get();
@@ -149,15 +149,15 @@ public class ConfiguratorExtension implements Extension {
 		catch (Throwable t) {
 			_logger.log(
 				Logger.LOG_WARNING,
-				"Supplier from factoryConfigurationDescription " +
-					factoryConfigurationDescription + " threw " +
-					"Exception: ",
+				"Supplier from factory configuration description " +
+					factoryConfigurationDescription + " threw an " +
+						"exception: ",
 				t);
 
 			return;
 		}
 
-		properties.put("configurator.url", configuratorUrl);
+		properties.put("configurator.url", configuratorURL);
 
 		configuration.update(properties);
 	}
@@ -177,7 +177,7 @@ public class ConfiguratorExtension implements Extension {
 		Supplier<Dictionary<String, Object>> propertiesSupplier =
 			description.getPropertiesSupplier();
 
-		Dictionary<String, Object> properties;
+		Dictionary<String, Object> properties = null;
 
 		try {
 			properties = propertiesSupplier.get();
@@ -186,7 +186,7 @@ public class ConfiguratorExtension implements Extension {
 			_logger.log(
 				Logger.LOG_WARNING,
 				"Supplier from description " + description + " threw " +
-					"Exception: ",
+					" an exception: ",
 				t);
 
 			return;
