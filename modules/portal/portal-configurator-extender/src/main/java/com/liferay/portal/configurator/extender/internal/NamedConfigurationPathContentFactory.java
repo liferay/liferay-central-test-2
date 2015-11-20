@@ -58,8 +58,8 @@ public class NamedConfigurationPathContentFactory
 				public NamedConfigurationContent map(URL url) {
 					return new PropertiesFileNamedConfigurationContent(url);
 				}
-			})
-		);
+
+			}));
 	}
 
 }
