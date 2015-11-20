@@ -6,6 +6,6 @@ Import-Package: !javax.*,*
 Include-Resource:\
 	classes,\
 	test-classes/integration,\
-	@lib/portal-service.jar,\
 	@lib/org.apache.felix.utils.jar,\
+	@lib/portal-service.jar,\
 	@test-lib/com.liferay.registry.api-1.0.0.jar
