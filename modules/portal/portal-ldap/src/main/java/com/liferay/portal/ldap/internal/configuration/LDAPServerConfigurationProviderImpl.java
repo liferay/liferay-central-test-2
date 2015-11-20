@@ -23,7 +23,7 @@ import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Tuple;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.ldap.configuration.AbstractConfigurationProvider;
+import com.liferay.portal.ldap.configuration.BaseConfigurationProvider;
 import com.liferay.portal.ldap.configuration.ConfigurationProvider;
 import com.liferay.portal.ldap.configuration.LDAPServerConfiguration;
 import com.liferay.portal.ldap.constants.LDAPConstants;
@@ -55,7 +55,7 @@ import org.osgi.service.component.annotations.Reference;
 	service = ConfigurationProvider.class
 )
 public class LDAPServerConfigurationProviderImpl
-	extends AbstractConfigurationProvider<LDAPServerConfiguration>
+	extends BaseConfigurationProvider<LDAPServerConfiguration>
 	implements ConfigurationProvider<LDAPServerConfiguration> {
 
 	@Override
