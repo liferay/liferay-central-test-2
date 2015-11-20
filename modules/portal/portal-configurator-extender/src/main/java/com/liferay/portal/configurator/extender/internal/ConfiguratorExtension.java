@@ -99,16 +99,16 @@ public class ConfiguratorExtension implements Extension {
 			}
 
 			if (configurationDescription
-					instanceof SingleConfigurationDescription) {
-
-				_process(
-					(SingleConfigurationDescription)configurationDescription);
-			}
-			else if (configurationDescription
-						instanceof FactoryConfigurationDescription) {
+					instanceof FactoryConfigurationDescription) {
 
 				_process(
 					(FactoryConfigurationDescription)configurationDescription);
+			}
+			else if (configurationDescription
+						instanceof SingleConfigurationDescription) {
+
+				_process(
+					(SingleConfigurationDescription)configurationDescription);
 			}
 			else {
 				_logger.log(
