@@ -21,7 +21,7 @@ import org.osgi.service.cm.ConfigurationAdmin;
 /**
  * @author Michael C. Han
  */
-public abstract class AbstractConfigurationProvider<T>
+public abstract class BaseConfigurationProvider<T>
 	implements ConfigurationProvider<T> {
 
 	protected String getMetatypeId() {

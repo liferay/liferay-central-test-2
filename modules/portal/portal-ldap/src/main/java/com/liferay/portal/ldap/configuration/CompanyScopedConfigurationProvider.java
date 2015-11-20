@@ -39,7 +39,7 @@ import org.osgi.service.cm.Configuration;
  */
 public abstract class CompanyScopedConfigurationProvider
 	<T extends CompanyScopedConfiguration>
-	extends AbstractConfigurationProvider<T>
+	extends BaseConfigurationProvider<T>
 	implements ConfigurationProvider<T> {
 
 	@Override
