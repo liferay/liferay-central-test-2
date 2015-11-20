@@ -24,7 +24,7 @@ import javax.servlet.http.HttpSession;
 /**
  * @author Julio Camarero
  */
-public class LatentGroupManager {
+public class LatentGroupManagerUtil {
 
 	public static Group getLatentGroup(HttpSession session) {
 		long groupId = GetterUtil.getLong(
