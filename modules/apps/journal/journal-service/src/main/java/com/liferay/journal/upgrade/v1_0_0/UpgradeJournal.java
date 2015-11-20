@@ -97,14 +97,15 @@ public class UpgradeJournal extends UpgradeProcess {
 
 		Element structureElement = structureElements.get(0);
 
-		String name = structureElement.elementText("name");
-
-		String description = structureElement.elementText("description");
-
 		Set<Locale> locales = LanguageUtil.getAvailableLocales(groupId);
+
+		String name = structureElement.elementText("name");
 
 		Map<Locale, String> nameMap = LocalizationUtil.getLocalizationMap(
 			locales, defaultLocale, name);
+
+		String description = structureElement.elementText("description");
+
 		Map<Locale, String> descriptionMap =
 			LocalizationUtil.getLocalizationMap(
 				locales, defaultLocale, description);
@@ -130,7 +131,6 @@ public class UpgradeJournal extends UpgradeProcess {
 			Element templateElement = structureElement.element("template");
 
 			String fileName = templateElement.elementText("file-name");
-
 			boolean cacheable = GetterUtil.getBoolean(
 				templateElement.elementText("cacheable"));
 
@@ -166,6 +166,8 @@ public class UpgradeJournal extends UpgradeProcess {
 			String definition)
 		throws Exception {
 
+		long userId = _userLocalService.getDefaultUserId(companyId);
+
 		ServiceContext serviceContext = new ServiceContext();
 
 		serviceContext.setAddGroupPermissions(true);
@@ -174,8 +176,6 @@ public class UpgradeJournal extends UpgradeProcess {
 		if (Validator.isNotNull(uuid)) {
 			serviceContext.setUuid(uuid);
 		}
-
-		long userId = _userLocalService.getDefaultUserId(companyId);
 
 		return _ddmStructureLocalService.addStructure(
 			userId, groupId,
@@ -193,6 +193,8 @@ public class UpgradeJournal extends UpgradeProcess {
 			boolean cacheable)
 		throws Exception {
 
+		long userId = _userLocalService.getDefaultUserId(companyId);
+
 		ServiceContext serviceContext = new ServiceContext();
 
 		serviceContext.setAddGroupPermissions(true);
@@ -201,8 +203,6 @@ public class UpgradeJournal extends UpgradeProcess {
 		if (Validator.isNotNull(uuid)) {
 			serviceContext.setUuid(uuid);
 		}
-
-		long userId = _userLocalService.getDefaultUserId(companyId);
 
 		return _ddmTemplateLocalService.addTemplate(
 			userId, groupId,
