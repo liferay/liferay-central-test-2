@@ -106,8 +106,8 @@ public class LDAPPropertiesVerifyProcessTest extends BaseVerifyProcessTestCase {
 		_bundleContext = bundle.getBundleContext();
 
 		ServiceReference<ConfigurationAdmin>
-				configurationAdminServiceReference =
-			_bundleContext.getServiceReference(ConfigurationAdmin.class);
+			configurationAdminServiceReference =
+				_bundleContext.getServiceReference(ConfigurationAdmin.class);
 
 		_configurationAdmin = _bundleContext.getService(
 			configurationAdminServiceReference);
