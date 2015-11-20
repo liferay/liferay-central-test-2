@@ -210,19 +210,19 @@ public class NamedConfigurationPathContentFactoryTest {
 
 		public DummyBundleStorage(
 			long bundleId, String location, Dictionary<String, String> headers,
-			List<URL> findEntries) {
+			List<URL> entries) {
 
 			_bundleId = bundleId;
 			_location = location;
 			_headers = headers;
-			_findEntries = findEntries;
+			_entries = entries;
 		}
 
 		@Override
 		public Enumeration<URL> findEntries(
 			String root, String pattern, boolean recurse) {
 
-			return Collections.enumeration(_findEntries);
+			return Collections.enumeration(_entries);
 		}
 
 		@Override
@@ -266,7 +266,7 @@ public class NamedConfigurationPathContentFactoryTest {
 		}
 
 		private final long _bundleId;
-		private final List<URL> _findEntries;
+		private final List<URL> _entries;
 		private final Dictionary<String, String> _headers;
 		private final String _location;
 
