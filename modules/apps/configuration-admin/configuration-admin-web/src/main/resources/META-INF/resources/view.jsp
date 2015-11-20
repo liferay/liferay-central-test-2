@@ -66,14 +66,14 @@ portletURL.setParameter("configurationCategory", configurationCategory);
 			modelVar="configurationModel"
 		>
 			<portlet:renderURL var="editURL">
-				<portlet:param name="mvcRenderCommandName" value="/edit-configuration" />
+				<portlet:param name="mvcRenderCommandName" value="/edit_configuration" />
 				<portlet:param name="redirect" value="<%= currentURL %>" />
 				<portlet:param name="factoryPid" value="<%= configurationModel.getFactoryPid() %>" />
 				<portlet:param name="pid" value="<%= configurationModel.getID() %>" />
 			</portlet:renderURL>
 
 			<portlet:renderURL var="viewFactoryInstancesURL">
-				<portlet:param name="mvcRenderCommandName" value="/view-factory-instances" />
+				<portlet:param name="mvcRenderCommandName" value="/view_factory_instances" />
 				<portlet:param name="redirect" value="<%= currentURL %>" />
 				<portlet:param name="factoryPid" value="<%= configurationModel.getFactoryPid() %>" />
 			</portlet:renderURL>
@@ -134,7 +134,7 @@ portletURL.setParameter("configurationCategory", configurationCategory);
 							/>
 
 							<portlet:renderURL var="createFactoryConfigURL">
-								<portlet:param name="mvcRenderCommandName" value="/edit-configuration" />
+								<portlet:param name="mvcRenderCommandName" value="/edit_configuration" />
 								<portlet:param name="redirect" value="<%= currentURL %>" />
 								<portlet:param name="factoryPid" value="<%= configurationModel.getID() %>" />
 							</portlet:renderURL>

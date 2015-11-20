@@ -47,7 +47,7 @@ import org.osgi.service.component.annotations.Reference;
 	immediate = true,
 	property = {
 		"javax.portlet.name=" + ConfigurationAdminPortletKeys.CONFIGURATION_ADMIN,
-		"mvc.command.name=/view-factory-instances"
+		"mvc.command.name=/view_factory_instances"
 	},
 	service = MVCRenderCommand.class
 )
