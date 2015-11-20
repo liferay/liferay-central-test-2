@@ -185,7 +185,7 @@ public class LDAPPropertiesVerifyProcessTest extends BaseVerifyProcessTestCase {
 	}
 
 	protected static void deleteConfigurations(
-			Company company, Class configurationClass)
+			Company company, Class<?> configurationClass)
 		throws InvalidSyntaxException, IOException {
 
 		Configuration[] configurations = _configurationAdmin.listConfigurations(
@@ -294,7 +294,7 @@ public class LDAPPropertiesVerifyProcessTest extends BaseVerifyProcessTestCase {
 	}
 
 	protected Dictionary<String, Object> getConfigurationProperties(
-		Company company, Class configurationClass) {
+		Company company, Class<?> configurationClass) {
 
 		try {
 			Configuration[] configurations =
@@ -334,7 +334,7 @@ public class LDAPPropertiesVerifyProcessTest extends BaseVerifyProcessTestCase {
 	}
 
 	protected Dictionary<String, Object> getConfigurationProperties(
-		Company company, long ldapServerId, Class configurationClass) {
+		Company company, long ldapServerId, Class<?> configurationClass) {
 
 		try {
 			Configuration[] configurations =
