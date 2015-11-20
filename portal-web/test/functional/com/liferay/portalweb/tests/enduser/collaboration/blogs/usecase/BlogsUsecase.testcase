@@ -1438,7 +1438,7 @@
 
 		<execute macro="BlogsAggregatorPortlet#viewParentOrganizationPG">
 			<var name="orgName" value="Organization2 Name" />
-			<var name="parentOrgExist" value="false" />
+			<var name="parentOrgName" value="" />
 		</execute>
 
 		<execute macro="Page#gotoPG">
