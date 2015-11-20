@@ -1359,15 +1359,7 @@
 	</command>
 
 	<command name="ViewParentOrganizationViaSelectOrganizationInBlogsConfiguration" priority="4">
-		<var name="orgName1" value="Organization1 Name" />
-		<var name="orgName2" value="Organization2 Name" />
-		<var name="orgName3" value="Organization3 Name" />
 		<var name="orgNameList" value="Organization1 Name,Organization2 Name,Organization3 Name" />
-		<var name="orgType" value="Regular Organization" />
-		<var name="parentOrg" value="true" />
-		<var name="parentOrgExist" value="true" />
-		<var name="parentOrgName" value="Organization1 Name" />
-		<var name="subOrgName" value="Organization3 Name" />
 
 		<execute macro="Page#addPG">
 			<var name="pageName" value="${pageName}" />
@@ -1438,8 +1430,6 @@
 		<execute macro="Organization#viewParentOrganizationCP">
 			<var name="orgName" value="${orgName2}" />
 			<var name="parentOrgExist" value="false" />
-			<var name="parentOrgName" value="${parentOrgName}" />
-			<var name="subOrgName" value="${subOrgName}" />
 		</execute>
 
 		<execute macro="Page#gotoPG">
@@ -1457,9 +1447,7 @@
 
 		<execute macro="BlogsAggregatorPortlet#viewParentOrganizationPG">
 			<var name="orgName" value="${orgName3}" />
-			<var name="parentOrgExist" value="true" />
 			<var name="parentOrgName" value="${parentOrgName}" />
-			<var name="subOrgName" value="${subOrgName}" />
 		</execute>
 	</command>
 </definition>
