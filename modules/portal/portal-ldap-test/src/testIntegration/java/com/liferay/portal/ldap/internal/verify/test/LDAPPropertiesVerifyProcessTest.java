@@ -152,11 +152,11 @@ public class LDAPPropertiesVerifyProcessTest extends BaseVerifyProcessTestCase {
 			LegacyLDAPPropsKeys.LDAP_GROUP_DEFAULT_OBJECT_CLASSES + postfix,
 			"top,groupOfUniqueNames");
 		properties.put(
-			LegacyLDAPPropsKeys.LDAP_GROUP_MAPPINGS + postfix,
-			"description=description\ngroupName=cn\nuser=uniqueMember");
-		properties.put(
 			LegacyLDAPPropsKeys.LDAP_GROUPS_DN + postfix,
 			"ou=groups,dc=example,dc=com");
+		properties.put(
+			LegacyLDAPPropsKeys.LDAP_GROUP_MAPPINGS + postfix,
+			"description=description\ngroupName=cn\nuser=uniqueMember");
 		properties.put(
 			LegacyLDAPPropsKeys.LDAP_IMPORT_GROUP_SEARCH_FILTER + postfix,
 			"(objectClass=groupOfUniqueNames)");
@@ -178,7 +178,7 @@ public class LDAPPropertiesVerifyProcessTest extends BaseVerifyProcessTestCase {
 			LegacyLDAPPropsKeys.LDAP_USER_MAPPINGS + postfix,
 			"emailAddress=mail\nfirstName=givenName\ngroup=groupMembership\n" +
 				"jobTitle=title\nlastName=sn\npassword=userPassword\n" +
-				"screenName=cn\nuuid=uuid\n");
+					"screenName=cn\nuuid=uuid\n");
 		properties.put(
 			LegacyLDAPPropsKeys.LDAP_USERS_DN + postfix,
 			"ou=users,dc=example,dc=com");
