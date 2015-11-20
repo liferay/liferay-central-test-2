@@ -824,7 +824,7 @@ public class MainServlet extends ActionServlet {
 		Filter filter = registry.getFilter("(search.engine.id=SYSTEM_ENGINE)");
 
 		serviceDependencyManager.registerDependencies(
-			new Class[] { LDAPSettings.class}, new Filter[] {filter} );
+			new Class[] {LDAPSettings.class}, new Filter[] {filter});
 	}
 
 	protected void initExt() throws Exception {
