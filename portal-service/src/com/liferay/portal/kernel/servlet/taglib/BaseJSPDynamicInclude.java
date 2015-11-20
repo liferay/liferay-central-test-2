@@ -12,11 +12,9 @@
  * details.
  */
 
-package com.liferay.portal.settings.web.servlet.taglib;
+package com.liferay.portal.kernel.servlet.taglib;
 
 import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.servlet.taglib.BaseDynamicInclude;
-import com.liferay.portal.kernel.servlet.taglib.DynamicInclude;
 
 import java.io.IOException;
 
@@ -29,8 +27,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * @author Philip Jones
  */
-public abstract class BaseAuthenticationDynamicInclude
-	extends BaseDynamicInclude {
+public abstract class BaseJSPDynamicInclude extends BaseDynamicInclude {
 
 	@Override
 	public void include(

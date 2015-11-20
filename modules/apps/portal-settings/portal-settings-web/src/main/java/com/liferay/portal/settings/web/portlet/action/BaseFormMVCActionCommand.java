@@ -14,7 +14,6 @@
 
 package com.liferay.portal.settings.web.portlet.action;
 
-import com.liferay.portal.kernel.portlet.bridges.mvc.BaseFormMVCActionCommand;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.settings.CompanyServiceSettingsLocator;
 import com.liferay.portal.kernel.settings.ModifiableSettings;
@@ -39,8 +38,9 @@ import javax.portlet.ValidatorException;
  * @author Tomas Polesovsky
  * @author Philip Jones
  */
-public abstract class BaseAuthenticationFormMVCActionCommand
-	extends BaseFormMVCActionCommand {
+public abstract class BaseFormMVCActionCommand
+	extends
+		com.liferay.portal.kernel.portlet.bridges.mvc.BaseFormMVCActionCommand {
 
 	@Override
 	protected void doProcessAction(
