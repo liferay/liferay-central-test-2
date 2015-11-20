@@ -1381,6 +1381,25 @@
 			<var name="portletName" value="Blogs Aggregator" />
 		</execute>
 
+		<execute macro="Portlet#gotoPortletOptions">
+			<var name="portletNameBorderless" value="${portletNameBorderless}" />
+			<var name="portletOption" value="Configuration" />
+		</execute>
+
+		<execute function="AssertTextPresent" locator1="Portlet#TITLE" value1="Blogs Aggregator" />
+
+		<execute function="SelectFrame" locator1="IFrame#CONFIGURATION" />
+
+		<execute function="AssertClick" locator1="Configuration#NAVIGATION_SETUP" value1="Setup" />
+
+		<execute function="AssertClick" locator1="Button#SELECT" value1="Select" />
+
+		<execute function="SelectFrame" value1="relative=top" />
+
+		<execute function="SelectFrame" locator1="UsersAndOrganizationsSelectOrganization#SELECT_ORGANIZATION_IFRAME" />
+
+		<execute function="AssertElementPresent" locator1="Message#INFO_1" />
+
 		<execute macro="Page#gotoCP">
 			<var name="portletName" value="Users and Organizations" />
 		</execute>
