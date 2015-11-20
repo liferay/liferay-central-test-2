@@ -868,7 +868,7 @@ public class DLFileEntryLocalServiceImpl
 
 		if (version.equals(DLFileEntryConstants.PRIVATE_WORKING_COPY_VERSION)) {
 			throw new InvalidFileVersionException(
-				"Cannot delete a private working copy file version");
+				"Unable to delete a private working copy file version");
 		}
 
 		if (!hasFileEntryLock(userId, fileEntryId)) {
@@ -1683,7 +1683,7 @@ public class DLFileEntryLocalServiceImpl
 
 		if (version.equals(DLFileEntryConstants.PRIVATE_WORKING_COPY_VERSION)) {
 			throw new InvalidFileVersionException(
-				"Cannot revert a private working copy file version");
+				"Unable to revert a private working copy file version");
 		}
 
 		DLFileVersion dlFileVersion = dlFileVersionLocalService.getFileVersion(
@@ -1691,7 +1691,7 @@ public class DLFileEntryLocalServiceImpl
 
 		if (!dlFileVersion.isApproved()) {
 			throw new InvalidFileVersionException(
-				"Cannot revert from an unapproved file version");
+				"Unable to revert from an unapproved file version");
 		}
 
 		DLFileVersion latestDLFileVersion =
@@ -1699,7 +1699,7 @@ public class DLFileEntryLocalServiceImpl
 
 		if (version.equals(latestDLFileVersion.getVersion())) {
 			throw new InvalidFileVersionException(
-				"Cannot revert from the latest file version");
+				"Unable to revert from the latest file version");
 		}
 
 		String sourceFileName = dlFileVersion.getTitle();
