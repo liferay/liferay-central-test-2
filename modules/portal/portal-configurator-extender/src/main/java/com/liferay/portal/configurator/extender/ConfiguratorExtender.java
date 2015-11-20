@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Dictionary;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.apache.felix.utils.extender.AbstractExtender;
@@ -101,9 +102,13 @@ public class ConfiguratorExtender extends AbstractExtender {
 				_namedConfigurationContentFactories) {
 
 			try {
-				namedConfigurationContents.addAll(
+				List<NamedConfigurationContent> contents =
 					namedConfigurationContentFactory.create(
-						new BundleStorageImpl(bundle)));
+						new BundleStorageImpl(bundle));
+
+				if (contents != null) {
+					namedConfigurationContents.addAll(contents);
+				}
 			}
 			catch (Throwable t) {
 				_logger.log(Logger.LOG_INFO, t.getMessage(), t);
