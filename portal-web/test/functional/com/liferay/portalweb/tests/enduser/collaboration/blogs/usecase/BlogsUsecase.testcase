@@ -1381,8 +1381,6 @@
 			<var name="portletName" value="Blogs Aggregator" />
 		</execute>
 
-		<execute macro="BlogsAggregatorPortlet#viewSelectOrganizationNoPG" />
-
 		<execute macro="Page#gotoCP">
 			<var name="portletName" value="Users and Organizations" />
 		</execute>
