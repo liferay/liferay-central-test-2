@@ -201,8 +201,8 @@ public class LDAPPropertiesVerifyProcess extends VerifyProcess {
 				verifyLDAPServerConfiguration(companyId, ldapServerId, postfix);
 
 				for (int i = 0;
-					 	i < LegacyLDAPPropsKeys.SERVER_ID_POSTFIXED_KEYS.length;
-					 		i++) {
+						i < LegacyLDAPPropsKeys.SERVER_ID_POSTFIXED_KEYS.length;
+							i++) {
 
 					keys.add(
 						LegacyLDAPPropsKeys.SERVER_ID_POSTFIXED_KEYS[i] +
@@ -217,8 +217,7 @@ public class LDAPPropertiesVerifyProcess extends VerifyProcess {
 			}
 
 			_companyLocalService.removePreferences(
-				companyId,
-				keys.toArray(new String[keys.size()]));
+				companyId, keys.toArray(new String[keys.size()]));
 
 			UnicodeProperties properties = new UnicodeProperties();
 
@@ -548,19 +547,19 @@ public class LDAPPropertiesVerifyProcess extends VerifyProcess {
 	private static final Log _log = LogFactoryUtil.getLog(
 		LDAPPropertiesVerifyProcess.class);
 
-	private CompanyLocalService _companyLocalService;
-	private ConfigurationProvider<LDAPAuthConfiguration>
+	private volatile CompanyLocalService _companyLocalService;
+	private volatile ConfigurationProvider<LDAPAuthConfiguration>
 		_ldapAuthConfigurationProvider;
-	private ConfigurationProvider<LDAPExportConfiguration>
+	private volatile ConfigurationProvider<LDAPExportConfiguration>
 		_ldapExportConfigurationProvider;
-	private ConfigurationProvider<LDAPImportConfiguration>
+	private volatile ConfigurationProvider<LDAPImportConfiguration>
 		_ldapImportConfigurationProvider;
-	private ConfigurationProvider<LDAPServerConfiguration>
+	private volatile ConfigurationProvider<LDAPServerConfiguration>
 		_ldapServerConfigurationProvider;
-	private LDAPSettings _ldapSettings;
-	private PrefsProps _prefsProps;
-	private Props _props;
-	private ConfigurationProvider<SystemLDAPConfiguration>
+	private volatile LDAPSettings _ldapSettings;
+	private volatile PrefsProps _prefsProps;
+	private volatile Props _props;
+	private volatile ConfigurationProvider<SystemLDAPConfiguration>
 		_systemLDAPConfigurationProvider;
 
 }
