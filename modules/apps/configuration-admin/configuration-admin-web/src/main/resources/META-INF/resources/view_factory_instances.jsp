@@ -43,7 +43,7 @@ renderResponse.setTitle(factoryConfigurationModel.getName());
 			modelVar="configurationModel"
 		>
 			<portlet:renderURL var="editURL">
-				<portlet:param name="mvcRenderCommandName" value="/edit-configuration" />
+				<portlet:param name="mvcRenderCommandName" value="/edit_configuration" />
 				<portlet:param name="redirect" value="<%= currentURL %>" />
 				<portlet:param name="factoryPid" value="<%= configurationModel.getFactoryPid() %>" />
 				<portlet:param name="pid" value="<%= configurationModel.getID() %>" />
