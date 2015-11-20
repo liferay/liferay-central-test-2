@@ -23,10 +23,9 @@
 	</command>
 
 	<command name="addCP">
-		<var name="key_dmDocumentTitle" value="${dmDocumentTitle}" />
+		<execute macro="DMDocument#gotoAddBasicDocument" />
 
-		<execute function="Click" locator1="Button#PLUS" />
-		<execute function="AssertClick" locator1="MenuItem#BASIC_DOCUMENT" value1="Basic Document" />
+		<var name="key_dmDocumentTitle" value="${dmDocumentTitle}" />
 
 		<if>
 			<equals arg1="${uploadTempFile}" arg2="true" />
@@ -520,8 +519,7 @@
 	</command>
 
 	<command name="addWithWorkflowCP">
-		<execute function="AssertClick#waitForDMHomeAssertTextEqualsClick" locator1="NavBar#ADD" value1="Add" />
-		<execute function="AssertClick" locator1="MenuItem#BASIC_DOCUMENT" value1="Basic Document" />
+		<execute macro="DMDocument#gotoAddBasicDocument" />
 
 		<execute function="UploadCommonFile" locator1="TextInput#FILE" value1="${dmDocumentFile}" />
 		<execute function="Type" locator1="TextInput#TITLE" value1="${dmDocumentTitle}" />
@@ -1110,6 +1108,12 @@
 		<execute function="AssertTextEquals#assertPartialText" locator1="Message#SUCCESS" value1="You have successfully updated the setup." />
 
 		<execute function="SelectFrame" locator1="relative=top" />
+	</command>
+
+	<command name="gotoAddBasicDocument">
+		<execute function="Click" locator1="Button#PLUS" />
+
+		<execute function="AssertClick" locator1="MenuItem#BASIC_DOCUMENT" value1="Basic Document" />
 	</command>
 
 	<command name="gotoCP">
