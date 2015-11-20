@@ -14,6 +14,7 @@
 
 package com.liferay.portal.soap.extender.test.activator.configuration;
 
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.soap.extender.test.util.WaiterUtil;
 import com.liferay.portal.soap.extender.test.util.WaiterUtil.Waiter;
 
@@ -84,11 +85,15 @@ public class ConfigurationAdminBundleActivator implements BundleActivator {
 
 			_soapConfiguration.update(properties);
 
-			_filterString =
-				"(&(objectClass=" + ServletContextHelper.class.getName() +
-					")(" +
-						HttpWhiteboardConstants.HTTP_WHITEBOARD_CONTEXT_NAME +
-							"=soap-test))";
+			StringBundler sb = new StringBundler();
+
+			sb.append("(&(objectClass=");
+			sb.append(ServletContextHelper.class.getName());
+			sb.append(")(");
+			sb.append(HttpWhiteboardConstants.HTTP_WHITEBOARD_CONTEXT_NAME);
+			sb.append("=soap-test))");
+
+			_filterString = sb.toString();
 
 			try {
 				WaiterUtil.waitForFilter(bundleContext, _filterString, 10_000);
