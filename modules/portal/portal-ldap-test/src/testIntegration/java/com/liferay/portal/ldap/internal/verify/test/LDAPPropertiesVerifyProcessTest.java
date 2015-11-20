@@ -314,8 +314,7 @@ public class LDAPPropertiesVerifyProcessTest extends BaseVerifyProcessTestCase {
 					continue;
 				}
 
-				Long companyId = (Long)properties.get(
-					LDAPConstants.COMPANY_ID);
+				Long companyId = (Long)properties.get(LDAPConstants.COMPANY_ID);
 
 				if ((companyId == null) ||
 					(companyId != company.getCompanyId())) {
@@ -354,13 +353,11 @@ public class LDAPPropertiesVerifyProcessTest extends BaseVerifyProcessTestCase {
 					continue;
 				}
 
-				Long companyId = (Long)properties.get(
-					LDAPConstants.COMPANY_ID);
+				Long companyId = (Long)properties.get(LDAPConstants.COMPANY_ID);
 				Long configuredLDAPServerId = (Long)properties.get(
 					LDAPConstants.LDAP_SERVER_ID);
 
-				if ((companyId == null) ||
-					(configuredLDAPServerId == null) ||
+				if ((companyId == null) || (configuredLDAPServerId == null) ||
 					(companyId != company.getCompanyId()) ||
 					(configuredLDAPServerId != ldapServerId)) {
 
@@ -387,8 +384,7 @@ public class LDAPPropertiesVerifyProcessTest extends BaseVerifyProcessTestCase {
 						")(verify.process.name=com.liferay.portal.ldap))");
 
 			if (ArrayUtil.isEmpty(serviceReferences)) {
-				throw new IllegalStateException(
-					"Unable to get verify process");
+				throw new IllegalStateException("Unable to get verify process");
 			}
 
 			return (VerifyProcess)_bundleContext.getService(
