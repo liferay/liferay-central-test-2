@@ -74,7 +74,9 @@ public class ConfigurationDescriptionFactoryImplTest {
 	}
 
 	@Test
-	public void testCreateReturnsNullWhenNotPropertiesFileNamedConfigurationContent() {
+	public void
+		testCreateReturnsNullWhenNotPropertiesFileNamedConfigurationContent() {
+
 		ConfigurationDescriptionFactory configurationDescriptionFactory =
 			new ConfigurationDescriptionFactoryImpl();
 
@@ -91,6 +93,7 @@ public class ConfigurationDescriptionFactoryImplTest {
 					public InputStream getInputStream() {
 						return new ByteArrayInputStream(new byte[0]);
 					}
+
 				});
 
 		Assert.assertNull(configurationDescription);
