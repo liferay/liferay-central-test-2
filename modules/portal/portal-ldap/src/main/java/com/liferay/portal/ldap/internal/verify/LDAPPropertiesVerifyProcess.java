@@ -226,8 +226,9 @@ public class LDAPPropertiesVerifyProcess extends VerifyProcess {
 
 			if (_log.isInfoEnabled()) {
 				_log.info(
-					"Removing ldap server ids for company: " + companyId +
-						" id: " + ListUtil.toList(ldapServerIds));
+					"Removing LDAP server IDs " +
+						ListUtil.toList(ldapServerIds) + " for company " +
+							companyId);
 			}
 
 			_companyLocalService.updatePreferences(companyId, properties);
