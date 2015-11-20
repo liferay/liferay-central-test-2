@@ -147,24 +147,20 @@ public class LDAPPropertiesVerifyProcess extends VerifyProcess {
 			LDAPConstants.AUTH_ENABLED,
 			_prefsProps.getBoolean(
 				companyId, LegacyLDAPPropsKeys.LDAP_AUTH_ENABLED, false));
-
 		dictionary.put(
 			LDAPConstants.AUTH_METHOD,
 			_prefsProps.getString(
 				companyId, LegacyLDAPPropsKeys.LDAP_AUTH_METHOD, "bind"));
-
 		dictionary.put(
 			LDAPConstants.AUTH_REQUIRED,
 			_prefsProps.getBoolean(
 				companyId, LegacyLDAPPropsKeys.LDAP_AUTH_REQUIRED, false));
-
 		dictionary.put(
 			LDAPConstants.PASSWORD_ENCRYPTION_ALGORITHM,
 			_prefsProps.getString(
 				companyId,
 				LegacyLDAPPropsKeys.LDAP_AUTH_PASSWORD_ENCRYPTION_ALGORITHM,
 				"NONE"));
-
 		dictionary.put(
 			LDAPConstants.PASSWORD_POLICY_ENABLED,
 			_prefsProps.getBoolean(
@@ -173,8 +169,8 @@ public class LDAPPropertiesVerifyProcess extends VerifyProcess {
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
-				"Adding LDAPAuthConfiguration for company: " + companyId +
-					" values: " + dictionary);
+				"Adding LDAP auth configuration for company " + companyId +
+					" with properties: " + dictionary);
 		}
 
 		_ldapAuthConfigurationProvider.updateProperties(companyId, dictionary);
@@ -194,9 +190,9 @@ public class LDAPPropertiesVerifyProcess extends VerifyProcess {
 			long[] ldapServerIds = StringUtil.split(
 				_prefsProps.getString(companyId, "ldap.server.ids"), 0L);
 
-			Set<String> propertyKeys = new HashSet<>();
+			Set<String> keys = new HashSet<>();
 
-			propertyKeys.addAll(
+			keys.addAll(
 				Arrays.asList(LegacyLDAPPropsKeys.NONPOSTFIXED_LDAP_KEYS));
 
 			for (long ldapServerId : ldapServerIds) {
@@ -208,7 +204,7 @@ public class LDAPPropertiesVerifyProcess extends VerifyProcess {
 					 i < LegacyLDAPPropsKeys.SERVER_ID_POSTFIXED_KEYS.length;
 					 i++) {
 
-					propertyKeys.add(
+					keys.add(
 						LegacyLDAPPropsKeys.SERVER_ID_POSTFIXED_KEYS[i] +
 							postfix);
 				}
@@ -216,13 +212,13 @@ public class LDAPPropertiesVerifyProcess extends VerifyProcess {
 
 			if (_log.isInfoEnabled()) {
 				_log.info(
-					"Removing preference for company: " + companyId +
-						" keys: " + propertyKeys);
+					"Removing preference keys " + keys + " for company " +
+						companyId);
 			}
 
 			_companyLocalService.removePreferences(
 				companyId,
-				propertyKeys.toArray(new String[propertyKeys.size()]));
+				keys.toArray(new String[keys.size()]));
 
 			UnicodeProperties properties = new UnicodeProperties();
 
