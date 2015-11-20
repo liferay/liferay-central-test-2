@@ -23,10 +23,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
-
 import java.net.URI;
 import java.net.URL;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Dictionary;
@@ -222,7 +220,7 @@ public class NamedConfigurationPathContentFactoryTest {
 
 		@Override
 		public Enumeration<URL> findEntries(
-			String var1, String var2, boolean var3) {
+			String root, String pattern, boolean recurse) {
 
 			return Collections.enumeration(_findEntries);
 		}
@@ -233,12 +231,12 @@ public class NamedConfigurationPathContentFactoryTest {
 		}
 
 		@Override
-		public URL getEntry(String var1) {
+		public URL getEntry(String name) {
 			return null;
 		}
 
 		@Override
-		public Enumeration<String> getEntryPaths(String var1) {
+		public Enumeration<String> getEntryPaths(String name) {
 			return null;
 		}
 
@@ -253,12 +251,12 @@ public class NamedConfigurationPathContentFactoryTest {
 		}
 
 		@Override
-		public URL getResource(String var1) {
+		public URL getResource(String name) {
 			return null;
 		}
 
 		@Override
-		public Enumeration<URL> getResources(String var1) {
+		public Enumeration<URL> getResources(String name) {
 			return null;
 		}
 
