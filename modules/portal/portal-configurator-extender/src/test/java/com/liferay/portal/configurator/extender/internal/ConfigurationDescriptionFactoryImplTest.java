@@ -100,7 +100,7 @@ public class ConfigurationDescriptionFactoryImplTest {
 	}
 
 	@Test
-	public void testCreateSimpleConfiguration() {
+	public void testCreateSingleConfiguration() {
 		ConfigurationDescriptionFactory configurationDescriptionFactory =
 			new ConfigurationDescriptionFactoryImpl();
 
