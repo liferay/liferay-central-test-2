@@ -368,9 +368,10 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 				if ((folder.getParentFolderId() != parentFolderId) ||
 					(webDAVRequest.getGroupId() != folder.getRepositoryId())) {
 
-					StringBundler sb = new StringBundler(5);
+					StringBundler sb = new StringBundler(6);
 
-					sb.append("No folder for {parendFolderId=");
+					sb.append("No DLFolder exists with the key ");
+					sb.append("{parendFolderId=");
 					sb.append(parentFolderId);
 					sb.append(", repositoryId=");
 					sb.append(webDAVRequest.getGroupId());
@@ -996,14 +997,12 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 				if (!hasLock(fileEntry, lockUuid) &&
 					(fileEntry.getLock() != null)) {
 
-					StringBundler sb = new StringBundler(6);
+					StringBundler sb = new StringBundler(4);
 
-					sb.append("Inconsistent file lock state for ");
-					sb.append("{fileEntryPrimaryKey=");
+					sb.append("Inconsistent file lock state for file entry ");
 					sb.append(fileEntry.getPrimaryKey());
-					sb.append(", lockUuid=");
+					sb.append(" and lock UUID ");
 					sb.append(lockUuid);
-					sb.append(StringPool.CLOSE_CURLY_BRACE);
 
 					throw new LockException(sb.toString());
 				}
