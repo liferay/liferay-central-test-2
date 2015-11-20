@@ -236,13 +236,10 @@ public class LDAPPropertiesVerifyProcessTest extends BaseVerifyProcessTestCase {
 					company, LDAPAuthConfiguration.class);
 
 			Assert.assertNotNull(ldapAuthProperties);
-
 			Assert.assertEquals(
 				true, ldapAuthProperties.get(LDAPConstants.AUTH_ENABLED));
-
 			Assert.assertEquals(
 				true, ldapAuthProperties.get(LDAPConstants.AUTH_REQUIRED));
-
 			Assert.assertEquals(
 				true,
 				ldapAuthProperties.get(LDAPConstants.PASSWORD_POLICY_ENABLED));
@@ -261,14 +258,11 @@ public class LDAPPropertiesVerifyProcessTest extends BaseVerifyProcessTestCase {
 					company, LDAPImportConfiguration.class);
 
 			Assert.assertNotNull(ldapImportProperties);
-
 			Assert.assertEquals(
 				true, ldapImportProperties.get(LDAPConstants.IMPORT_ENABLED));
-
 			Assert.assertEquals(
 				true,
 				ldapImportProperties.get(LDAPConstants.IMPORT_ON_STARTUP));
-
 			Assert.assertEquals(
 				true,
 				ldapImportProperties.get(
@@ -293,7 +287,6 @@ public class LDAPPropertiesVerifyProcessTest extends BaseVerifyProcessTestCase {
 					company, SystemLDAPConfiguration.class);
 
 			Assert.assertNotNull(systemLdapProperties);
-
 			Assert.assertEquals(
 				"com.sun.jndi.ldap.LdapCtxFactory",
 				systemLdapProperties.get(LDAPConstants.FACTORY_INITIAL));
@@ -317,16 +310,20 @@ public class LDAPPropertiesVerifyProcessTest extends BaseVerifyProcessTestCase {
 				Dictionary<String, Object> properties =
 					configuration.getProperties();
 
-				if (properties != null) {
-					Long companyId = (Long)properties.get(
-						LDAPConstants.COMPANY_ID);
-
-					if ((companyId != null) &&
-						(companyId == company.getCompanyId())) {
-
-						return properties;
-					}
+				if (properties == null) {
+					continue;
 				}
+
+				Long companyId = (Long)properties.get(
+					LDAPConstants.COMPANY_ID);
+
+				if ((companyId == null) ||
+					(companyId != company.getCompanyId())) {
+
+					continue;
+				}
+
+				return properties;
 			}
 
 			return null;
