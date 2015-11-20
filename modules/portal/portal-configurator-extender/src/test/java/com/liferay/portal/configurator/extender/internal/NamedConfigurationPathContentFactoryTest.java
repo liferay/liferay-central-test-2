@@ -262,7 +262,7 @@ public class NamedConfigurationPathContentFactoryTest {
 
 		@Override
 		public String getSymbolicName() {
-			return getHeaders().get("Bundle-SymbolicName");
+			return _headers.get("Bundle-SymbolicName");
 		}
 
 		private final long _bundleId;
