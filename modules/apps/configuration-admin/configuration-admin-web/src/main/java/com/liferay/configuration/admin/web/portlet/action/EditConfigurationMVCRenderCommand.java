@@ -74,12 +74,12 @@ public class EditConfigurationMVCRenderCommand implements MVCRenderCommand {
 			_bundleContext, _configurationAdmin, _extendedMetaTypeService,
 			themeDisplay.getLanguageId());
 
+		String factoryPid = ParamUtil.getString(renderRequest, "factoryPid");
+
 		String pid = ParamUtil.getString(renderRequest, "pid", factoryPid);
 
 		ConfigurationModel configurationModel =
 			configurationHelper.getConfigurationModel(pid);
-
-		String factoryPid = ParamUtil.getString(renderRequest, "factoryPid");
 
 		if ((configurationModel == null) && Validator.isNotNull(factoryPid)) {
 			configurationModel = configurationHelper.getConfigurationModel(
