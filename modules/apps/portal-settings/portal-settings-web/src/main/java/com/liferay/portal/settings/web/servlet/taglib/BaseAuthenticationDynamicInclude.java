@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.security.common.servlet.taglib;
+package com.liferay.portal.settings.web.servlet.taglib;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.servlet.taglib.BaseDynamicInclude;

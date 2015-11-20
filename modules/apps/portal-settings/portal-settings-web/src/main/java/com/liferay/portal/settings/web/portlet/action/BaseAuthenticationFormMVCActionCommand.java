@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.security.common.action;
+package com.liferay.portal.settings.web.portlet.action;
 
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseFormMVCActionCommand;
 import com.liferay.portal.kernel.servlet.SessionErrors;
