@@ -17,9 +17,7 @@ package com.liferay.portal.configurator.extender;
 import com.liferay.portal.configurator.extender.internal.ConfiguratorExtension;
 
 import java.io.IOException;
-
 import java.net.URL;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Dictionary;
@@ -29,7 +27,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import org.apache.felix.utils.extender.AbstractExtender;
 import org.apache.felix.utils.extender.Extension;
 import org.apache.felix.utils.log.Logger;
-
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.service.cm.ConfigurationAdmin;
@@ -167,8 +164,10 @@ public class ConfiguratorExtender extends AbstractExtender {
 		}
 
 		@Override
-		public Enumeration<URL> findEntries(String s, String s1, boolean b) {
-			return _bundle.findEntries(s, s1, b);
+		public Enumeration<URL> findEntries(
+			String root, String pattern, boolean recurse) {
+
+			return _bundle.findEntries(root, pattern, recurse);
 		}
 
 		@Override
@@ -177,13 +176,13 @@ public class ConfiguratorExtender extends AbstractExtender {
 		}
 
 		@Override
-		public URL getEntry(String s) {
-			return _bundle.getEntry(s);
+		public URL getEntry(String name) {
+			return _bundle.getEntry(name);
 		}
 
 		@Override
-		public Enumeration<String> getEntryPaths(String s) {
-			return _bundle.getEntryPaths(s);
+		public Enumeration<String> getEntryPaths(String name) {
+			return _bundle.getEntryPaths(name);
 		}
 
 		@Override
@@ -191,8 +190,8 @@ public class ConfiguratorExtender extends AbstractExtender {
 			return _bundle.getHeaders();
 		}
 
-		public Dictionary<String, String> getHeaders(String s) {
-			return _bundle.getHeaders(s);
+		public Dictionary<String, String> getHeaders(String name) {
+			return _bundle.getHeaders(name);
 		}
 
 		@Override
@@ -201,13 +200,13 @@ public class ConfiguratorExtender extends AbstractExtender {
 		}
 
 		@Override
-		public URL getResource(String s) {
-			return _bundle.getResource(s);
+		public URL getResource(String name) {
+			return _bundle.getResource(name);
 		}
 
 		@Override
-		public Enumeration<URL> getResources(String s) throws IOException {
-			return _bundle.getResources(s);
+		public Enumeration<URL> getResources(String name) throws IOException {
+			return _bundle.getResources(name);
 		}
 
 		@Override
