@@ -70,7 +70,8 @@ public class BackgroundTaskDisplayFactoryImpl
 		_backgroundTaskManager = backgroundTaskManager;
 	}
 
-	private BackgroundTaskExecutorRegistry _backgroundTaskExecutorRegistry;
-	private BackgroundTaskManager _backgroundTaskManager;
+	private volatile BackgroundTaskExecutorRegistry
+		_backgroundTaskExecutorRegistry;
+	private volatile BackgroundTaskManager _backgroundTaskManager;
 
 }
