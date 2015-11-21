@@ -91,8 +91,6 @@ public class PanelCategoryHelper {
 
 		int count = 0;
 
-		// Child Categories
-
 		List<PanelCategory> panelCategories =
 			_panelCategoryRegistry.getChildPanelCategories(
 				panelCategoryKey, permissionChecker, group);
@@ -101,8 +99,6 @@ public class PanelCategoryHelper {
 			count += panelCategory.getNotificationsCount(
 				this, permissionChecker, group, user);
 		}
-
-		// Child Apps
 
 		Iterable<PanelApp> panelApps = _panelAppRegistry.getPanelApps(
 			panelCategoryKey, permissionChecker, group);
