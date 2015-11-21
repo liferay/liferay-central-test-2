@@ -49,6 +49,10 @@ public class TestPortlet extends GenericPortlet {
 		_calledProcessAction = true;
 	}
 
+	/**
+	 * @throws IOException
+	 * @throws PortletException
+	 */
 	@Override
 	public void render(
 			RenderRequest renderRequest, RenderResponse renderResponse)
@@ -63,6 +67,10 @@ public class TestPortlet extends GenericPortlet {
 		_calledServeResource = false;
 	}
 
+	/**
+	 * @throws IOException
+	 * @throws PortletException
+	 */
 	@Override
 	public void serveResource(
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)

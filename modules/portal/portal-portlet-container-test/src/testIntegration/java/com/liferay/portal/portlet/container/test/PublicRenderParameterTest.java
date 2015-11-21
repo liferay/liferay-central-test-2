@@ -43,7 +43,6 @@ import java.io.PrintWriter;
 import java.util.Dictionary;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import javax.portlet.PortletException;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
@@ -83,7 +82,7 @@ public class PublicRenderParameterTest extends BasePortletContainerTestCase {
 			@Override
 			public void render(
 					RenderRequest renderRequest, RenderResponse renderResponse)
-				throws IOException, PortletException {
+				throws IOException {
 
 				PrintWriter printWriter = renderResponse.getWriter();
 
@@ -163,7 +162,7 @@ public class PublicRenderParameterTest extends BasePortletContainerTestCase {
 			@Override
 			public void render(
 					RenderRequest renderRequest, RenderResponse renderResponse)
-				throws IOException, PortletException {
+				throws IOException {
 
 				PrintWriter printWriter = renderResponse.getWriter();
 

@@ -82,6 +82,7 @@ public class UploadPortletTest extends BasePortletContainerTestCase {
 		new LiferayIntegrationTestRule();
 
 	@Before
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
