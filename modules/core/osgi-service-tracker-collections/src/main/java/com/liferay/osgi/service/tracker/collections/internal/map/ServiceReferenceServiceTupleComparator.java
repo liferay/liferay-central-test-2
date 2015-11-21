@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.osgi.service.tracker.collections.map.internal;
+package com.liferay.osgi.service.tracker.collections.internal.map;
 
 import com.liferay.osgi.service.tracker.collections.map.ServiceReferenceServiceTuple;
 
