@@ -29,6 +29,7 @@ int notificationsCount = panelCategoryHelper.getNotificationsCount(userPanelCate
 		<c:if test="<%= notificationsCount > 0 %>">
 			<span class="sticker sticker-right sticker-rounded sticker-sm sticker-warning"><%= notificationsCount %></span>
 		</c:if>
+
 		<liferay-ui:user-portrait
 			userId="<%= user.getUserId() %>"
 		/>
