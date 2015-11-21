@@ -80,7 +80,6 @@ public class PortletContainerTestUtilTest {
 			_layout.getCompanyId());
 
 		Assert.assertEquals(company, themeDisplay.getCompany());
-
 		Assert.assertEquals(
 			_layout.getCompanyId(), themeDisplay.getCompanyId());
 		Assert.assertSame(_layout, themeDisplay.getLayout());
