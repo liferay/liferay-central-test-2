@@ -57,7 +57,7 @@ public abstract class BasePanelCategory implements PanelCategory {
 		PermissionChecker permissionChecker, Group group, User user) {
 
 		return panelCategoryHelper.getNotificationsCount(
-			this.getKey(), permissionChecker, group, user);
+			getKey(), permissionChecker, group, user);
 	}
 
 	@Override
