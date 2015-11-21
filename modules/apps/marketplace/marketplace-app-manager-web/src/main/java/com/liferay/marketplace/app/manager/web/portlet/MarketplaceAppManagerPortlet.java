@@ -171,9 +171,7 @@ public class MarketplaceAppManagerPortlet extends MVCPortlet {
 			SessionMessages.add(actionRequest, "pluginUploaded");
 		}
 
-		String redirect = ParamUtil.getString(uploadPortletRequest, "redirect");
-
-		actionResponse.sendRedirect(redirect);
+		sendRedirect(actionRequest, actionResponse);
 	}
 
 	public void installRemoteApp(
