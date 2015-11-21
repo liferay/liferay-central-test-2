@@ -263,6 +263,18 @@ public class JournalArticleAssetRendererFactory
 		return themeDisplay.getPathThemeImages() + "/common/history.png";
 	}
 
+	protected JournalArticleAssetRenderer getJournalArticleAssetRenderer(
+		JournalArticle article) {
+
+		JournalArticleAssetRenderer journalArticleAssetRenderer =
+			new JournalArticleAssetRenderer(article);
+
+		journalArticleAssetRenderer.setJournalContent(_journalContent);
+		journalArticleAssetRenderer.setJournalConverter(_journalConverter);
+
+		return journalArticleAssetRenderer;
+	}
+
 	@Reference(unbind = "-")
 	protected void setDDMStructureLocalService(
 		DDMStructureLocalService ddmStructureLocalService) {
@@ -300,18 +312,6 @@ public class JournalArticleAssetRendererFactory
 	@Reference(unbind = "-")
 	protected void setJournalConverter(JournalConverter journalConverter) {
 		_journalConverter = journalConverter;
-	}
-
-	protected JournalArticleAssetRenderer getJournalArticleAssetRenderer(
-		JournalArticle article) {
-
-		JournalArticleAssetRenderer journalArticleAssetRenderer =
-			new JournalArticleAssetRenderer(article);
-
-		journalArticleAssetRenderer.setJournalContent(_journalContent);
-		journalArticleAssetRenderer.setJournalConverter(_journalConverter);
-
-		return journalArticleAssetRenderer;
 	}
 
 	private volatile DDMStructureLocalService _ddmStructureLocalService;
