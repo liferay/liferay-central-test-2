@@ -30,6 +30,6 @@ public class DDLFormWebConfigurationValues {
 	public static final String EMAIL_FORM_ENTRY_NOTIFICATION_BODY =
 		GetterUtil.getString(
 			DDLFormWebConfigurationUtil.get(
-				DDLFormWebCongurationKeys.EMAIL_FORM_ENTRY_NOTIFICATION_BODY));
+				"email.form.entry.notification.body"));
 
 }
