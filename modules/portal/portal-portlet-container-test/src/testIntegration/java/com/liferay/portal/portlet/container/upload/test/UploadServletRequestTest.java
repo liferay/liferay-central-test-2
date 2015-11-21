@@ -65,7 +65,7 @@ import org.springframework.mock.web.MockHttpServletRequest;
 public class UploadServletRequestTest {
 
 	@RunWith(Arquillian.class)
-	public static final class WhenBuildingFromMainConstructor {
+	public static final class WhenCreatingFromMainConstructor {
 
 		@ClassRule
 		@Rule
@@ -125,7 +125,7 @@ public class UploadServletRequestTest {
 	}
 
 	@RunWith(Arquillian.class)
-	public static final class WhenBuildingFromParametrizedConstructor {
+	public static final class WhenCreatingFromParametrizedConstructor {
 
 		@ClassRule
 		@Rule
