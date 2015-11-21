@@ -69,7 +69,7 @@ public class DDLFormEmailNotificationSender {
 			_mailService.sendEmail(mailMessage);
 		}
 		catch (Exception e) {
-			_log.error("The form email could not be sent", e);
+			_log.error("Unable to send form email", e);
 		}
 	}
 
@@ -112,9 +112,19 @@ public class DDLFormEmailNotificationSender {
 
 		Map<String, Serializable> context = new HashMap<>();
 
+		context.put("formFieldsValues", getSerializedDDMFormValues(record));
+
 		Locale locale = getDDMFormDefaultLocale(recordSet.getDDMStructure());
 
 		context.put("formName", recordSet.getName(locale));
+
+		context.put(
+			"fromAddress",
+			DDLFormEmailNotificationUtil.getEmailFromAddress(recordSet));
+		context.put(
+			"fromName",
+			DDLFormEmailNotificationUtil.getEmailFromName(recordSet));
+		context.put("portalUrl", PortalUtil.getPortalURL(portletRequest));
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
@@ -122,14 +132,6 @@ public class DDLFormEmailNotificationSender {
 		Group siteGroup = themeDisplay.getSiteGroup();
 
 		context.put("siteName", siteGroup.getName(locale));
-		context.put("formFieldsValues", getSerializedDDMFormValues(record));
-		context.put(
-			"fromName",
-			DDLFormEmailNotificationUtil.getEmailFromName(recordSet));
-		context.put(
-			"fromAddress",
-			DDLFormEmailNotificationUtil.getEmailFromAddress(recordSet));
-		context.put("portalUrl", PortalUtil.getPortalURL(portletRequest));
 
 		return context;
 	}
@@ -201,16 +203,16 @@ public class DDLFormEmailNotificationSender {
 		return StringUtil.replace(
 			notificationTemplate,
 			new String[] {
-				"[$FORM_NAME$]", "[$SITE_NAME$]", "[$FORM_FIELDS_VALUES$]",
-				"[$FROM_NAME$]", "[$FROM_ADDRESS$]", "[$PORTAL_URL$]"
+				"[$FORM_FIELDS_VALUES$]", "[$FORM_NAME$]", "[$FROM_ADDRESS$]",
+				"[$FROM_NAME$]", "[$PORTAL_URL$]", "[$SITE_NAME$]"
 			},
 			new String[] {
-				GetterUtil.getString(context.get("formName")),
-				GetterUtil.getString(context.get("siteName")),
 				GetterUtil.getString(context.get("formFieldsValues")),
-				GetterUtil.getString(context.get("fromName")),
+				GetterUtil.getString(context.get("formName")),
 				GetterUtil.getString(context.get("fromAddress")),
-				GetterUtil.getString(context.get("portalUrl"))
+				GetterUtil.getString(context.get("fromName")),
+				GetterUtil.getString(context.get("portalUrl")),
+				GetterUtil.getString(context.get("siteName"))
 			});
 	}
 
