@@ -97,7 +97,6 @@ boolean requireCaptcha = GetterUtil.getBoolean(recordSet.getSettingsProperty("re
 </div>
 
 <aui:script use="aui-base">
-
 	var sendEmailNotificationCheckbox = A.one('#<portlet:namespace />sendEmailNotification');
 
 	<portlet:namespace />toogleDisabledEmailNotificationFields();
@@ -118,11 +117,8 @@ boolean requireCaptcha = GetterUtil.getBoolean(recordSet.getSettingsProperty("re
 		var disable = !checked;
 
 		toggleDisabled(A.one('#<portlet:namespace />emailFromName'), disable);
-
 		toggleDisabled(A.one('#<portlet:namespace />emailFromAddress'), disable);
-
 		toggleDisabled(A.one('#<portlet:namespace />emailToAddress'), disable);
-
 		toggleDisabled(A.one('#<portlet:namespace />emailSubject'), disable);
 	}
 </aui:script>

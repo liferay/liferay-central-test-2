@@ -453,7 +453,8 @@ public class DDLRecordSetLocalServiceImpl
 
 			if (!Validator.isEmailAddress(emailFromAddress)) {
 				throw new RecordSetSettingsException(
-					"The property \"emailFromAddress\" is not an email");
+					"The property \"emailFromAddress\" is not an email " +
+						"address");
 			}
 
 			String emailFromName = settingsProperties.getProperty(
@@ -469,7 +470,7 @@ public class DDLRecordSetLocalServiceImpl
 
 			if (!Validator.isEmailAddress(emailToAddress)) {
 				throw new RecordSetSettingsException(
-					"The property \"emailToAddress\" is not an email");
+					"The property \"emailToAddress\" is not an email address");
 			}
 		}
 	}
