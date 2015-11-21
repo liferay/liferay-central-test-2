@@ -151,7 +151,7 @@ public class DDLFormEmailNotificationSender {
 
 		String notificationTemplate = ContentUtil.get(
 			clazz.getClassLoader(), DDLFormWebConfigurationValues.
-			DDL_FORM_WEB_EMAIL_FORM_ENTRY_NOTIFICATION_BODY);
+			EMAIL_FORM_ENTRY_NOTIFICATION_BODY);
 
 		Map<String, Serializable> context = getContext(
 			portletRequest, recordSet, record);

@@ -19,7 +19,7 @@ package com.liferay.dynamic.data.lists.form.web.configuration;
  */
 public class DDLFormWebCongurationKeys {
 
-	public static final String DDL_FORM_WEB_EMAIL_FORM_ENTRY_NOTIFICATION_BODY =
+	public static final String EMAIL_FORM_ENTRY_NOTIFICATION_BODY =
 		"email.form.entry.notification.body";
 
 }
