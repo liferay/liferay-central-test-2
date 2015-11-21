@@ -17,14 +17,12 @@
 <%@ include file="/init.jsp" %>
 
 <%
-String displayStyle = ParamUtil.getString(request, "displayStyle", "descriptive");
-
 String tabs1 = (String)request.getAttribute("edit_site_assignments.jsp-tabs1");
 String tabs2 = (String)request.getAttribute("edit_site_assignments.jsp-tabs2");
 
-String redirect = (String)request.getAttribute("edit_site_assignments.jsp-redirect");
-
 int cur = (Integer)request.getAttribute("edit_site_assignments.jsp-cur");
+
+String redirect = (String)request.getAttribute("edit_site_assignments.jsp-redirect");
 
 Group group = (Group)request.getAttribute("edit_site_assignments.jsp-group");
 
@@ -32,12 +30,16 @@ long userGroupId = ParamUtil.getLong(request, "userGroupId");
 
 UserGroup userGroup = UserGroupLocalServiceUtil.getUserGroup(userGroupId);
 
+String displayStyle = ParamUtil.getString(request, "displayStyle", "descriptive");
+
+
 PortletURL portletURL = (PortletURL)request.getAttribute("edit_site_assignments.jsp-portletURL");
 
 portletURL.setParameter("userGroupId", String.valueOf(userGroupId));
 
 portletDisplay.setShowBackIcon(true);
 portletDisplay.setURLBack(redirect);
+
 renderResponse.setTitle(LanguageUtil.get(request, "edit-site-roles-for-user-group") + ": " + HtmlUtil.escape(userGroup.getName()));
 %>
 
