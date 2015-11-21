@@ -74,7 +74,7 @@ public class UploadServletRequestTest {
 
 		@Before
 		public void setUp() throws Exception {
-			_setUpScenario();
+			_setUp();
 		}
 
 		@Test
@@ -134,7 +134,7 @@ public class UploadServletRequestTest {
 
 		@Before
 		public void setUp() throws Exception {
-			_setUpScenario();
+			_setUp();
 		}
 
 		@Test
@@ -244,7 +244,7 @@ public class UploadServletRequestTest {
 
 		@Before
 		public void setUp() throws Exception {
-			_setUpScenario();
+			_setUp();
 		}
 
 		@Test
@@ -284,7 +284,7 @@ public class UploadServletRequestTest {
 
 		@Before
 		public void setUp() throws Exception {
-			_setUpScenario();
+			_setUp();
 		}
 
 		@Test
@@ -348,7 +348,7 @@ public class UploadServletRequestTest {
 
 		@Before
 		public void setUp() throws Exception {
-			_setUpScenario();
+			_setUp();
 		}
 
 		@Test
@@ -437,7 +437,7 @@ public class UploadServletRequestTest {
 
 		@Before
 		public void setUp() throws Exception {
-			_setUpScenario();
+			_setUp();
 		}
 
 		@Test
@@ -527,7 +527,7 @@ public class UploadServletRequestTest {
 
 		@Before
 		public void setUp() throws Exception {
-			_setUpScenario();
+			_setUp();
 		}
 
 		@Test
@@ -614,7 +614,7 @@ public class UploadServletRequestTest {
 
 		@Before
 		public void setUp() throws Exception {
-			_setUpScenario();
+			_setUp();
 		}
 
 		@Test
@@ -705,7 +705,7 @@ public class UploadServletRequestTest {
 
 		@Before
 		public void setUp() throws Exception {
-			_setUpScenario();
+			_setUp();
 		}
 
 		@Test
@@ -797,7 +797,7 @@ public class UploadServletRequestTest {
 
 		@Before
 		public void setUp() throws Exception {
-			_setUpScenario();
+			_setUp();
 		}
 
 		@Test
@@ -890,7 +890,7 @@ public class UploadServletRequestTest {
 
 		@Before
 		public void setUp() throws Exception {
-			_setUpScenario();
+			_setUp();
 		}
 
 		@Test
@@ -978,7 +978,7 @@ public class UploadServletRequestTest {
 
 		@Before
 		public void setUp() throws Exception {
-			_setUpScenario();
+			_setUp();
 		}
 
 		@Test
@@ -1034,7 +1034,7 @@ public class UploadServletRequestTest {
 
 		@Before
 		public void setUp() throws Exception {
-			_setUpScenario();
+			_setUp();
 		}
 
 		@Test
@@ -1095,7 +1095,7 @@ public class UploadServletRequestTest {
 
 		@Before
 		public void setUp() throws Exception {
-			_setUpScenario();
+			_setUp();
 		}
 
 		@Test
@@ -1169,7 +1169,7 @@ public class UploadServletRequestTest {
 
 		@Before
 		public void setUp() throws Exception {
-			_setUpScenario();
+			_setUp();
 		}
 
 		@Test
@@ -1252,7 +1252,7 @@ public class UploadServletRequestTest {
 
 		@Before
 		public void setUp() throws Exception {
-			_setUpScenario();
+			_setUp();
 		}
 
 		@Test
@@ -1303,7 +1303,7 @@ public class UploadServletRequestTest {
 
 		@Before
 		public void setUp() throws Exception {
-			_setUpScenario();
+			_setUp();
 		}
 
 		@Test
@@ -1378,7 +1378,7 @@ public class UploadServletRequestTest {
 
 	}
 
-	private static void _setUpScenario() throws Exception {
+	private static void _setUp() throws Exception {
 		_fileNameParameter = RandomTestUtil.randomString();
 	}
 
