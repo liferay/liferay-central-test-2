@@ -74,7 +74,7 @@ public class TestUploadHandler extends BaseUploadHandler {
 
 	@Override
 	protected String getParameterName() {
-		return TestUploadPortlet.TEST_UPLOAD_FILE_NAME_PARAMETER;
+		return TestUploadPortlet.PARAMETER_NAME;
 	}
 
 	@Override
