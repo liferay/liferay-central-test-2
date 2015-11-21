@@ -148,7 +148,6 @@ AUI.add(
 						var portletURL = Liferay.PortletURL.createURL(themeDisplay.getURLControlPanel());
 
 						portletURL.setDoAsGroupId(scopeGroupId);
-
 						portletURL.setParameter('criteria', 'com.liferay.item.selector.criteria.file.criterion.FileItemSelectorCriterion');
 						portletURL.setParameter('itemSelectedEventName', portletNamespace + 'selectDocumentLibrary');
 
@@ -165,7 +164,6 @@ AUI.add(
 						};
 
 						portletURL.setParameter('2_json', JSON.stringify(uploadCriterionJSON));
-
 						portletURL.setPortletId(Liferay.PortletKeys.ITEM_SELECTOR);
 						portletURL.setPortletMode('view');
 						portletURL.setWindowState('pop_up');
@@ -182,7 +180,6 @@ AUI.add(
 
 						portletURL.setDoAsGroupId(scopeGroupId);
 						portletURL.setLifecycle(Liferay.PortletURL.ACTION_PHASE);
-
 						portletURL.setParameter('cmd', 'add_temp');
 						portletURL.setParameter('javax.portlet.action', '/document_library/upload_file_entry');
 						portletURL.setParameter('p_auth', Liferay.authToken);
