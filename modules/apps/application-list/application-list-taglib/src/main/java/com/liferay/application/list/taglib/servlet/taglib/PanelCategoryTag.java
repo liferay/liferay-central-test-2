@@ -102,12 +102,6 @@ public class PanelCategoryTag extends BasePanelTag {
 
 		request.setAttribute("liferay-application-list:panel-category:id", id);
 
-		request.setAttribute(
-			"liferay-application-list:panel-category:panelApps", panelApps);
-		request.setAttribute(
-			"liferay-application-list:panel-category:panelCategory",
-			_panelCategory);
-
 		int notificationsCount = panelCategoryHelper.getNotificationsCount(
 			_panelCategory.getKey(), themeDisplay.getPermissionChecker(),
 			themeDisplay.getScopeGroup(), themeDisplay.getUser());
@@ -115,6 +109,12 @@ public class PanelCategoryTag extends BasePanelTag {
 		request.setAttribute(
 			"liferay-application-list:panel-category:notificationsCount",
 			notificationsCount);
+
+		request.setAttribute(
+			"liferay-application-list:panel-category:panelApps", panelApps);
+		request.setAttribute(
+			"liferay-application-list:panel-category:panelCategory",
+			_panelCategory);
 		request.setAttribute(
 			"liferay-application-list:panel-category:showHeader", _showHeader);
 		request.setAttribute(
