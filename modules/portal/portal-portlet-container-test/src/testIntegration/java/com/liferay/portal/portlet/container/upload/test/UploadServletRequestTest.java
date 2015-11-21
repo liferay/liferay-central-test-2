@@ -969,7 +969,7 @@ public class UploadServletRequestTest {
 	}
 
 	@RunWith(Arquillian.class)
-	public static final class WhenGettingInputStreamp {
+	public static final class WhenGettingInputStream {
 
 		@ClassRule
 		@Rule
