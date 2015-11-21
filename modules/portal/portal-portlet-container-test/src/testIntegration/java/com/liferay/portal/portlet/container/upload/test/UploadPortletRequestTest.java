@@ -425,8 +425,7 @@ public class UploadPortletRequestTest {
 						fileParameters, new HashMap<String, List<String>>()),
 					null, _portletNamespace);
 
-			Assert.assertNull(
-				uploadPortletRequest.getFile("nonexistentFile"));
+			Assert.assertNull(uploadPortletRequest.getFile("nonexistentFile"));
 			Assert.assertNull(
 				uploadPortletRequest.getFile("nonexistentFile", true));
 		}
@@ -528,8 +527,7 @@ public class UploadPortletRequestTest {
 			Assert.assertNull(
 				uploadPortletRequest.getFileAsStream("nonexistentFile"));
 			Assert.assertNull(
-				uploadPortletRequest.getFileAsStream(
-					"nonexistentFile", true));
+				uploadPortletRequest.getFileAsStream("nonexistentFile", true));
 		}
 
 	}
@@ -779,8 +777,7 @@ public class UploadPortletRequestTest {
 						fileParameters, new HashMap<String, List<String>>()),
 					null, _portletNamespace);
 
-			Assert.assertNull(
-				uploadPortletRequest.getFiles("nonexistentFile"));
+			Assert.assertNull(uploadPortletRequest.getFiles("nonexistentFile"));
 		}
 
 		@Test
