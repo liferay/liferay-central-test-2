@@ -143,9 +143,6 @@ public class MarketplaceAppManagerPortlet extends MVCPortlet {
 		UploadPortletRequest uploadPortletRequest =
 			PortalUtil.getUploadPortletRequest(actionRequest);
 
-		String installMethod = ParamUtil.getString(
-			uploadPortletRequest, "installMethod");
-
 		String fileName = GetterUtil.getString(
 			uploadPortletRequest.getFileName("file"));
 
