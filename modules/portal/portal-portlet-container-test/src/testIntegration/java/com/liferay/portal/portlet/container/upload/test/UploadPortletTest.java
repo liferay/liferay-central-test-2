@@ -170,8 +170,7 @@ public class UploadPortletTest extends BasePortletContainerTestCase {
 
 		BundleContext bundleContext = bundle.getBundleContext();
 
-		Dictionary<String, Object> properties =
-			new HashMapDictionary<>();
+		Dictionary<String, Object> properties = new HashMapDictionary<>();
 
 		properties.put(
 			"javax.portlet.name", TestUploadPortlet.TEST_UPLOAD_PORTLET);
@@ -180,15 +179,13 @@ public class UploadPortletTest extends BasePortletContainerTestCase {
 
 		ServiceRegistration<MVCActionCommand> serviceRegistration =
 			bundleContext.registerService(
-				MVCActionCommand.class, mvcActionCommand,
-				properties);
+				MVCActionCommand.class, mvcActionCommand, properties);
 
 		serviceRegistrations.add(serviceRegistration);
 	}
 
 	protected void registerMVCPortlet(Portlet portlet) throws Exception {
-		Dictionary<String, Object> properties =
-			new HashMapDictionary<>();
+		Dictionary<String, Object> properties = new HashMapDictionary<>();
 
 		properties.put(
 			"com.liferay.portlet.private-request-attributes",
@@ -207,8 +204,7 @@ public class UploadPortletTest extends BasePortletContainerTestCase {
 		properties.put(
 			"com.liferay.portlet.webdav-storage-token",
 			TestUploadPortlet.TEST_UPLOAD_STRUTS_PATH);
-		properties.put(
-			"javax.portlet.display-name", "Test Upload Portlet");
+		properties.put("javax.portlet.display-name", "Test Upload Portlet");
 		properties.put("javax.portlet.expiration-cache", "0");
 		properties.put(
 			"javax.portlet.init-param.single-page-application-cacheable",
@@ -219,8 +215,7 @@ public class UploadPortletTest extends BasePortletContainerTestCase {
 			"/" + TestUploadPortlet.TEST_UPLOAD_PORTLET + "/view.jsp");
 		properties.put(
 			"javax.portlet.name", TestUploadPortlet.TEST_UPLOAD_PORTLET);
-		properties.put(
-			"javax.portlet.resource-bundle", "content.Language");
+		properties.put("javax.portlet.resource-bundle", "content.Language");
 		properties.put(
 			"javax.portlet.security-role-ref", "guest,power-user,user");
 		properties.put("javax.portlet.supports.mime-type", "text/html");

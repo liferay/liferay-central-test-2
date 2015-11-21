@@ -420,8 +420,7 @@ public class UploadServletRequestTest {
 					(HttpServletRequest)liferayServletRequest.getRequest(),
 					fileParameters, new HashMap<String, List<String>>());
 
-			Assert.assertNull(
-				uploadServletRequest.getFile("nonexistentFile"));
+			Assert.assertNull(uploadServletRequest.getFile("nonexistentFile"));
 			Assert.assertNull(
 				uploadServletRequest.getFile("nonexistentFile", true));
 		}
@@ -513,8 +512,7 @@ public class UploadServletRequestTest {
 			Assert.assertNull(
 				uploadServletRequest.getFileAsStream("nonexistentFile"));
 			Assert.assertNull(
-				uploadServletRequest.getFileAsStream(
-					"nonexistentFile", true));
+				uploadServletRequest.getFileAsStream("nonexistentFile", true));
 		}
 
 	}
@@ -784,8 +782,7 @@ public class UploadServletRequestTest {
 					(HttpServletRequest)liferayServletRequest.getRequest(),
 					fileParameters, new HashMap<String, List<String>>());
 
-			Assert.assertNull(
-				uploadServletRequest.getFiles("nonexistentFile"));
+			Assert.assertNull(uploadServletRequest.getFiles("nonexistentFile"));
 		}
 
 	}
@@ -1257,8 +1254,7 @@ public class UploadServletRequestTest {
 					(HttpServletRequest)liferayServletRequest.getRequest(),
 					fileParameters, new HashMap<String, List<String>>());
 
-			Assert.assertNull(
-				uploadServletRequest.getSize("nonexistentFile"));
+			Assert.assertNull(uploadServletRequest.getSize("nonexistentFile"));
 		}
 
 	}
