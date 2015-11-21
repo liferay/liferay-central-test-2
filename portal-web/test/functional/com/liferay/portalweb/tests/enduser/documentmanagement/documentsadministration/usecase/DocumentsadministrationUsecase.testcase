@@ -958,8 +958,6 @@
 			<var name="portletName" value="Documents and Media" />
 		</execute>
 
-
-
 		<execute macro="Page#addPG">
 			<var name="pageName" value="Documents and Media Page - Global" />
 		</execute>
