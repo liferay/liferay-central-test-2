@@ -37,7 +37,7 @@ public class TestUploadPortlet extends MVCPortlet {
 		TestUploadPortlet.class.getCanonicalName();
 
 	public static final String TEST_UPLOAD_PORTLET =
-		"com_liferay_portal_portlet_container_test_upload_portlet";
+		"com_liferay_portal_portlet_container_upload_test_TestUploadPortlet";
 
 	public static final String TEST_UPLOAD_STRUTS_PATH = "upload_test";
 
