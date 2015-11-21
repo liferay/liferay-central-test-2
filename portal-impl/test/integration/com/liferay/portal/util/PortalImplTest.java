@@ -64,9 +64,7 @@ public class PortalImplTest {
 	}
 
 	@Test
-	public void
-		testGetUploadPortletRequestFromInvalidRequestShouldThrowException() {
-
+	public void testGetUploadPortletRequestWithInvalidHttpServletRequest() {
 		try {
 			PortalUtil.getUploadPortletRequest(new MockPortletRequest());
 
@@ -82,8 +80,7 @@ public class PortalImplTest {
 	}
 
 	@Test
-	public void
-			testGetUploadServletRequestShouldReturnUploadServletRequestImpl()
+	public void testGetUploadPortletRequestWithValidHttpServletRequest()
 		throws Exception {
 
 		Class<?> clazz = getClass();
