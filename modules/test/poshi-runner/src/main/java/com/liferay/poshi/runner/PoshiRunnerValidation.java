@@ -227,7 +227,7 @@ public class PoshiRunnerValidation {
 			PoshiRunnerGetterUtil.getAllChildElements(element, "return");
 
 		if (returns == null) {
-			if (returnElements.isEmpty()) {
+			if (returnElements.size() > 0) {
 				_exceptions.add(
 					new Exception(
 						element.attributeValue("name") +
@@ -241,15 +241,14 @@ public class PoshiRunnerValidation {
 			for (Element returnElement : returnElements) {
 				String returnVariable = returnElement.attributeValue("name");
 
-				if (returnsList.contains(returnVariable)) {
-					continue;
+				if (!returnsList.contains(returnVariable)) {
+					_exceptions.add(
+						new Exception(
+							returnVariable +
+								" not listed as a return variable\n" +
+									filePath + ":" +
+										element.attributeValue("line-number")));
 				}
-
-				_exceptions.add(
-					new Exception(
-						returnVariable + " not listed as a return variable\n" +
-							filePath + ":" +
-								element.attributeValue("line-number")));
 			}
 		}
 	}
