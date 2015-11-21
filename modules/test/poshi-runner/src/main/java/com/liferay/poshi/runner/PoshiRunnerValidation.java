@@ -132,7 +132,7 @@ public class PoshiRunnerValidation {
 
 		List<String> possibleElementNames = Arrays.asList(
 			"description", "echo", "execute", "fail", "for", "if", "property",
-			"return", "take-screenshot", "task", "var", "while");
+			"take-screenshot", "task", "var", "while");
 
 		if (Validator.isNotNull(filePath) && filePath.endsWith(".function")) {
 			possibleElementNames = Arrays.asList("execute", "if");
@@ -211,7 +211,7 @@ public class PoshiRunnerValidation {
 		Element element, String filePath) {
 
 		List<String> possibleAttributeNames = Arrays.asList(
-			"line-number", "name", "returns", "summary", "summary-ignore");
+			"line-number", "name", "summary", "summary-ignore");
 
 		validatePossibleAttributeNames(
 			element, possibleAttributeNames, filePath);
@@ -513,13 +513,13 @@ public class PoshiRunnerValidation {
 				element, multiplePrimaryAttributeNames, primaryAttributeNames,
 				filePath);
 
-			List<String> possibleChildElementNames = Arrays.asList(
-				"var", "return");
-
 			for (Element childElement : childElements) {
-				String childElementName = childElement.getName();
+				if (Validator.equals(childElement.getName(), "var")) {
+					validateVarElement(childElement, filePath);
 
-				if (!possibleChildElementNames.contains(childElementName)) {
+					continue;
+				}
+				else {
 					_exceptions.add(
 						new Exception(
 							"Invalid child element\n" + filePath + ":" +
