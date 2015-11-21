@@ -132,7 +132,7 @@ public class UploadPortletTest extends BasePortletContainerTestCase {
 
 		String key =
 			group.getGroupId() + "_0_" +
-				TestUploadPortlet.TEST_UPLOAD_FILE_NAME_PARAMETER;
+				TestUploadPortlet.PARAMETER_NAME;
 
 		TestFileEntry actualTestFileEntry = _testUploadPortlet.get(key);
 
@@ -154,7 +154,7 @@ public class UploadPortletTest extends BasePortletContainerTestCase {
 
 		String key =
 			group.getGroupId() + "_0_" +
-				TestUploadPortlet.TEST_UPLOAD_FILE_NAME_PARAMETER;
+				TestUploadPortlet.PARAMETER_NAME;
 
 		TestFileEntry actualTestFileEntry = _testUploadPortlet.get(key);
 
@@ -171,9 +171,9 @@ public class UploadPortletTest extends BasePortletContainerTestCase {
 		Dictionary<String, Object> properties = new HashMapDictionary<>();
 
 		properties.put(
-			"javax.portlet.name", TestUploadPortlet.TEST_UPLOAD_PORTLET);
+			"javax.portlet.name", TestUploadPortlet.PORTLET_NAME);
 		properties.put(
-			"mvc.command.name", TestUploadPortlet.TEST_MVC_COMMAND_NAME);
+			"mvc.command.name", TestUploadPortlet.MVC_COMMAND_NAME);
 
 		ServiceRegistration<MVCActionCommand> serviceRegistration =
 			bundleContext.registerService(
@@ -195,13 +195,13 @@ public class UploadPortletTest extends BasePortletContainerTestCase {
 			"com.liferay.portlet.scopeable", Boolean.TRUE.toString());
 		properties.put(
 			"com.liferay.portlet.struts-path",
-			TestUploadPortlet.TEST_UPLOAD_STRUTS_PATH);
+			TestUploadPortlet.MVC_PATH);
 		properties.put(
 			"com.liferay.portlet.use-default-template",
 			Boolean.TRUE.toString());
 		properties.put(
 			"com.liferay.portlet.webdav-storage-token",
-			TestUploadPortlet.TEST_UPLOAD_STRUTS_PATH);
+			TestUploadPortlet.MVC_PATH);
 		properties.put("javax.portlet.display-name", "Test Upload Portlet");
 		properties.put("javax.portlet.expiration-cache", "0");
 		properties.put(
@@ -210,22 +210,22 @@ public class UploadPortletTest extends BasePortletContainerTestCase {
 		properties.put("javax.portlet.init-param.template-path", "/");
 		properties.put(
 			"javax.portlet.init-param.view-template",
-			"/" + TestUploadPortlet.TEST_UPLOAD_PORTLET + "/view.jsp");
+			"/" + TestUploadPortlet.PORTLET_NAME + "/view.jsp");
 		properties.put(
-			"javax.portlet.name", TestUploadPortlet.TEST_UPLOAD_PORTLET);
+			"javax.portlet.name", TestUploadPortlet.PORTLET_NAME);
 		properties.put("javax.portlet.resource-bundle", "content.Language");
 		properties.put(
 			"javax.portlet.security-role-ref", "guest,power-user,user");
 		properties.put("javax.portlet.supports.mime-type", "text/html");
 
 		setUpPortlet(
-			portlet, properties, TestUploadPortlet.TEST_UPLOAD_PORTLET);
+			portlet, properties, TestUploadPortlet.PORTLET_NAME);
 	}
 
 	protected Response testUpload(byte[] bytes) throws Exception {
 		LiferayServletRequest liferayServletRequest =
 			PortletContainerTestUtil.getMultipartRequest(
-				TestUploadPortlet.TEST_UPLOAD_FILE_NAME_PARAMETER, bytes);
+				TestUploadPortlet.PARAMETER_NAME, bytes);
 
 		setUp(liferayServletRequest, layout);
 
@@ -235,14 +235,14 @@ public class UploadPortletTest extends BasePortletContainerTestCase {
 			(MockMultipartHttpServletRequest)servletRequest;
 
 		Response response = PortletContainerTestUtil.getPortalAuthentication(
-			mockServletRequest, layout, TestUploadPortlet.TEST_UPLOAD_PORTLET);
+			mockServletRequest, layout, TestUploadPortlet.PORTLET_NAME);
 
 		PortletURL portletURL = PortletURLFactoryUtil.create(
-			mockServletRequest, TestUploadPortlet.TEST_UPLOAD_PORTLET,
+			mockServletRequest, TestUploadPortlet.PORTLET_NAME,
 			layout.getPlid(), PortletRequest.ACTION_PHASE);
 
 		portletURL.setParameter(
-			ActionRequest.ACTION_NAME, TestUploadPortlet.TEST_MVC_COMMAND_NAME);
+			ActionRequest.ACTION_NAME, TestUploadPortlet.MVC_COMMAND_NAME);
 		portletURL.setParameter("randomId", RandomTestUtil.randomString());
 
 		String url = portletURL.toString();
@@ -256,7 +256,7 @@ public class UploadPortletTest extends BasePortletContainerTestCase {
 
 		return PortletContainerTestUtil.postMultipart(
 			url, mockServletRequest,
-			TestUploadPortlet.TEST_UPLOAD_FILE_NAME_PARAMETER);
+			TestUploadPortlet.PARAMETER_NAME);
 	}
 
 	protected void setUp(
