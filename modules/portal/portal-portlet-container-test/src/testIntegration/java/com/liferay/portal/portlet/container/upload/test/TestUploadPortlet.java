@@ -30,16 +30,15 @@ import org.osgi.service.component.annotations.Component;
 public class TestUploadPortlet extends MVCPortlet {
 
 	public static final String MVC_COMMAND_NAME =
-		TestUploadPortlet.PORTLET_NAME + "/" +
-			TestUploadPortlet.MVC_PATH;
+		TestUploadPortlet.PORTLET_NAME + "/" + TestUploadPortlet.MVC_PATH;
+
+	public static final String MVC_PATH = "upload_test";
 
 	public static final String PARAMETER_NAME =
 		TestUploadPortlet.class.getCanonicalName();
 
 	public static final String PORTLET_NAME =
 		"com_liferay_portal_portlet_container_upload_test_TestUploadPortlet";
-
-	public static final String MVC_PATH = "upload_test";
 
 	public TestFileEntry get(String key) {
 		return _testFileEntries.get(key);

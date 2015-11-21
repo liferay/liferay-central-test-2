@@ -131,8 +131,7 @@ public class UploadPortletTest extends BasePortletContainerTestCase {
 		Assert.assertTrue(jsonObject.getBoolean("success"));
 
 		String key =
-			group.getGroupId() + "_0_" +
-				TestUploadPortlet.PARAMETER_NAME;
+			group.getGroupId() + "_0_" + TestUploadPortlet.PARAMETER_NAME;
 
 		TestFileEntry actualTestFileEntry = _testUploadPortlet.get(key);
 
@@ -153,8 +152,7 @@ public class UploadPortletTest extends BasePortletContainerTestCase {
 		Assert.assertTrue(jsonObject.getBoolean("success"));
 
 		String key =
-			group.getGroupId() + "_0_" +
-				TestUploadPortlet.PARAMETER_NAME;
+			group.getGroupId() + "_0_" + TestUploadPortlet.PARAMETER_NAME;
 
 		TestFileEntry actualTestFileEntry = _testUploadPortlet.get(key);
 
@@ -170,10 +168,8 @@ public class UploadPortletTest extends BasePortletContainerTestCase {
 
 		Dictionary<String, Object> properties = new HashMapDictionary<>();
 
-		properties.put(
-			"javax.portlet.name", TestUploadPortlet.PORTLET_NAME);
-		properties.put(
-			"mvc.command.name", TestUploadPortlet.MVC_COMMAND_NAME);
+		properties.put("javax.portlet.name", TestUploadPortlet.PORTLET_NAME);
+		properties.put("mvc.command.name", TestUploadPortlet.MVC_COMMAND_NAME);
 
 		ServiceRegistration<MVCActionCommand> serviceRegistration =
 			bundleContext.registerService(
@@ -194,8 +190,7 @@ public class UploadPortletTest extends BasePortletContainerTestCase {
 		properties.put(
 			"com.liferay.portlet.scopeable", Boolean.TRUE.toString());
 		properties.put(
-			"com.liferay.portlet.struts-path",
-			TestUploadPortlet.MVC_PATH);
+			"com.liferay.portlet.struts-path", TestUploadPortlet.MVC_PATH);
 		properties.put(
 			"com.liferay.portlet.use-default-template",
 			Boolean.TRUE.toString());
@@ -211,52 +206,13 @@ public class UploadPortletTest extends BasePortletContainerTestCase {
 		properties.put(
 			"javax.portlet.init-param.view-template",
 			"/" + TestUploadPortlet.PORTLET_NAME + "/view.jsp");
-		properties.put(
-			"javax.portlet.name", TestUploadPortlet.PORTLET_NAME);
+		properties.put("javax.portlet.name", TestUploadPortlet.PORTLET_NAME);
 		properties.put("javax.portlet.resource-bundle", "content.Language");
 		properties.put(
 			"javax.portlet.security-role-ref", "guest,power-user,user");
 		properties.put("javax.portlet.supports.mime-type", "text/html");
 
-		setUpPortlet(
-			portlet, properties, TestUploadPortlet.PORTLET_NAME);
-	}
-
-	protected Response testUpload(byte[] bytes) throws Exception {
-		LiferayServletRequest liferayServletRequest =
-			PortletContainerTestUtil.getMultipartRequest(
-				TestUploadPortlet.PARAMETER_NAME, bytes);
-
-		setUp(liferayServletRequest, layout);
-
-		ServletRequest servletRequest = liferayServletRequest.getRequest();
-
-		MockMultipartHttpServletRequest mockServletRequest =
-			(MockMultipartHttpServletRequest)servletRequest;
-
-		Response response = PortletContainerTestUtil.getPortalAuthentication(
-			mockServletRequest, layout, TestUploadPortlet.PORTLET_NAME);
-
-		PortletURL portletURL = PortletURLFactoryUtil.create(
-			mockServletRequest, TestUploadPortlet.PORTLET_NAME,
-			layout.getPlid(), PortletRequest.ACTION_PHASE);
-
-		portletURL.setParameter(
-			ActionRequest.ACTION_NAME, TestUploadPortlet.MVC_COMMAND_NAME);
-		portletURL.setParameter("randomId", RandomTestUtil.randomString());
-
-		String url = portletURL.toString();
-
-		url = HttpUtil.setParameter(url, "p_auth", response.getBody());
-
-		List<String> cookies = response.getCookies();
-
-		mockServletRequest.addParameter(
-			"Cookie", cookies.toArray(new String[cookies.size()]));
-
-		return PortletContainerTestUtil.postMultipart(
-			url, mockServletRequest,
-			TestUploadPortlet.PARAMETER_NAME);
+		setUpPortlet(portlet, properties, TestUploadPortlet.PORTLET_NAME);
 	}
 
 	protected void setUp(
@@ -298,6 +254,42 @@ public class UploadPortletTest extends BasePortletContainerTestCase {
 		themeDisplay.setUser(TestPropsValues.getUser());
 
 		httpServletRequest.setAttribute(WebKeys.THEME_DISPLAY, themeDisplay);
+	}
+
+	protected Response testUpload(byte[] bytes) throws Exception {
+		LiferayServletRequest liferayServletRequest =
+			PortletContainerTestUtil.getMultipartRequest(
+				TestUploadPortlet.PARAMETER_NAME, bytes);
+
+		setUp(liferayServletRequest, layout);
+
+		ServletRequest servletRequest = liferayServletRequest.getRequest();
+
+		MockMultipartHttpServletRequest mockServletRequest =
+			(MockMultipartHttpServletRequest)servletRequest;
+
+		Response response = PortletContainerTestUtil.getPortalAuthentication(
+			mockServletRequest, layout, TestUploadPortlet.PORTLET_NAME);
+
+		PortletURL portletURL = PortletURLFactoryUtil.create(
+			mockServletRequest, TestUploadPortlet.PORTLET_NAME,
+			layout.getPlid(), PortletRequest.ACTION_PHASE);
+
+		portletURL.setParameter(
+			ActionRequest.ACTION_NAME, TestUploadPortlet.MVC_COMMAND_NAME);
+		portletURL.setParameter("randomId", RandomTestUtil.randomString());
+
+		String url = portletURL.toString();
+
+		url = HttpUtil.setParameter(url, "p_auth", response.getBody());
+
+		List<String> cookies = response.getCookies();
+
+		mockServletRequest.addParameter(
+			"Cookie", cookies.toArray(new String[cookies.size()]));
+
+		return PortletContainerTestUtil.postMultipart(
+			url, mockServletRequest, TestUploadPortlet.PARAMETER_NAME);
 	}
 
 	private TestUploadPortlet _testUploadPortlet;
