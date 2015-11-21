@@ -32,7 +32,6 @@ UserGroup userGroup = UserGroupLocalServiceUtil.getUserGroup(userGroupId);
 
 String displayStyle = ParamUtil.getString(request, "displayStyle", "descriptive");
 
-
 PortletURL portletURL = (PortletURL)request.getAttribute("edit_site_assignments.jsp-portletURL");
 
 portletURL.setParameter("userGroupId", String.valueOf(userGroupId));
