@@ -214,14 +214,14 @@ public class DDLFormEmailNotificationSender {
 			});
 	}
 
-	@Reference
+	@Reference(unbind = "-")
 	protected void setDDMFormFieldTypeServicesTracker(
 		DDMFormFieldTypeServicesTracker ddmFormFieldTypeServicesTracker) {
 
 		_ddmFormFieldTypeServicesTracker = ddmFormFieldTypeServicesTracker;
 	}
 
-	@Reference
+	@Reference(unbind = "-")
 	protected void setMailService(MailService mailService) {
 		_mailService = mailService;
 	}
@@ -229,7 +229,8 @@ public class DDLFormEmailNotificationSender {
 	private static final Log _log = LogFactoryUtil.getLog(
 		DDLFormEmailNotificationSender.class);
 
-	private DDMFormFieldTypeServicesTracker _ddmFormFieldTypeServicesTracker;
-	private MailService _mailService;
+	private volatile DDMFormFieldTypeServicesTracker
+		_ddmFormFieldTypeServicesTracker;
+	private volatile MailService _mailService;
 
 }

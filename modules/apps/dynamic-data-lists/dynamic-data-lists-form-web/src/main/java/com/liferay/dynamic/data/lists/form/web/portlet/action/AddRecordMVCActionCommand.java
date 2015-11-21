@@ -115,14 +115,14 @@ public class AddRecordMVCActionCommand extends BaseMVCActionCommand {
 		return ddmStructure.getDDMForm();
 	}
 
-	@Reference
+	@Reference(unbind = "-")
 	protected void setDDLFormEmailNotificationSender(
 		DDLFormEmailNotificationSender ddlFormEmailNotificationSender) {
 
 		_ddlFormEmailNotificationSender = ddlFormEmailNotificationSender;
 	}
 
-	@Reference
+	@Reference(unbind = "-")
 	protected void setDDLRecordService(DDLRecordService ddlRecordService) {
 		_ddlRecordService = ddlRecordService;
 	}
@@ -162,9 +162,10 @@ public class AddRecordMVCActionCommand extends BaseMVCActionCommand {
 		}
 	}
 
-	private DDLFormEmailNotificationSender _ddlFormEmailNotificationSender;
-	private DDLRecordService _ddlRecordService;
-	private DDLRecordSetService _ddlRecordSetService;
-	private DDMFormValuesFactory _ddmFormValuesFactory;
+	private volatile DDLFormEmailNotificationSender
+		_ddlFormEmailNotificationSender;
+	private volatile DDLRecordService _ddlRecordService;
+	private volatile DDLRecordSetService _ddlRecordSetService;
+	private volatile DDMFormValuesFactory _ddmFormValuesFactory;
 
 }
