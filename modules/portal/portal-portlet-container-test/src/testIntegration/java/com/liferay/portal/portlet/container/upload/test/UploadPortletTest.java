@@ -109,6 +109,7 @@ public class UploadPortletTest extends BasePortletContainerTestCase {
 
 				printWriter.write(portalAuthenticationToken);
 			}
+
 		};
 
 		registerMVCActionCommand(
@@ -133,8 +134,6 @@ public class UploadPortletTest extends BasePortletContainerTestCase {
 			group.getGroupId() + "_0_" +
 				TestUploadPortlet.TEST_UPLOAD_FILE_NAME_PARAMETER;
 
-		// Verify the file was uploaded to the TestUploadPortlet store
-
 		TestFileEntry actualTestFileEntry = _testUploadPortlet.get(key);
 
 		Assert.assertNotNull(actualTestFileEntry);
@@ -143,7 +142,7 @@ public class UploadPortletTest extends BasePortletContainerTestCase {
 	}
 
 	@Test
-	public void testUploadZeroBitsFile() throws Exception {
+	public void testUploadZeroBytesFile() throws Exception {
 		Response response = testUpload(new byte[0]);
 
 		Assert.assertEquals(200, response.getCode());
@@ -152,8 +151,6 @@ public class UploadPortletTest extends BasePortletContainerTestCase {
 			response.getBody());
 
 		Assert.assertTrue(jsonObject.getBoolean("success"));
-
-		// Verify the empty file was uploaded to the TestUploadPortlet store
 
 		String key =
 			group.getGroupId() + "_0_" +
@@ -230,7 +227,7 @@ public class UploadPortletTest extends BasePortletContainerTestCase {
 			PortletContainerTestUtil.getMultipartRequest(
 				TestUploadPortlet.TEST_UPLOAD_FILE_NAME_PARAMETER, bytes);
 
-		_addGroupAndLayoutToServletRequest(liferayServletRequest, layout);
+		setUp(liferayServletRequest, layout);
 
 		ServletRequest servletRequest = liferayServletRequest.getRequest();
 
@@ -262,7 +259,7 @@ public class UploadPortletTest extends BasePortletContainerTestCase {
 			TestUploadPortlet.TEST_UPLOAD_FILE_NAME_PARAMETER);
 	}
 
-	private void _addGroupAndLayoutToServletRequest(
+	protected void setUp(
 			LiferayServletRequest liferayServletRequest, Layout layout)
 		throws Exception {
 
