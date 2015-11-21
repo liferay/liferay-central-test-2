@@ -63,9 +63,10 @@ public abstract class BasePanelApp implements PanelApp {
 			return 0;
 		}
 
-		return _userNotificationEventLocalService.getUserNotificationEventCount(
-			user.getUserId(), _portlet.getPortletId(),
-			UserNotificationDeliveryConstants.TYPE_WEBSITE, false);
+		return _userNotificationEventLocalService.
+			getUserNotificationEventsCount(
+				user.getUserId(), _portlet.getPortletId(),
+				UserNotificationDeliveryConstants.TYPE_WEBSITE, false);
 	}
 
 	public Portlet getPortlet() {
