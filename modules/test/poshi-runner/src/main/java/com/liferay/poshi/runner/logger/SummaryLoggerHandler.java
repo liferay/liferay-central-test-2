@@ -98,11 +98,11 @@ public final class SummaryLoggerHandler {
 		for (LoggerElement loggerElement : loggerElements) {
 			String className = loggerElement.getClassName();
 
-			if (className.equals("steps")) {
-				_removeUnneededStepsFromLoggerElement(loggerElement);
-			}
-			else if (className.equals("screenshots")) {
+			if (className.equals("screenshots")) {
 				summaryLogLoggerElement.removeChildLoggerElement(loggerElement);
+			}
+			else if (className.equals("steps")) {
+				_removeUnneededStepsFromLoggerElement(loggerElement);
 			}
 		}
 
