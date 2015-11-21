@@ -159,14 +159,14 @@ public class UserFinderTest {
 		Assert.assertEquals(1, counts.size());
 		Assert.assertEquals(4, (int)counts.get(groupId));
 
-		long orgGroupId = _organization.getGroupId();
+		long organizationGroupId = _organization.getGroupId();
 
 		counts = UserFinderUtil.countByGroups(
 			TestPropsValues.getCompanyId(), WorkflowConstants.STATUS_APPROVED,
-			new long[] {groupId, orgGroupId});
+			new long[] {groupId, organizationGroupId});
 
 		Assert.assertEquals(2, counts.size());
-		Assert.assertEquals(1, (int)counts.get(orgGroupId));
+		Assert.assertEquals(1, (int)counts.get(organizationGroupId));
 	}
 
 	@Test
