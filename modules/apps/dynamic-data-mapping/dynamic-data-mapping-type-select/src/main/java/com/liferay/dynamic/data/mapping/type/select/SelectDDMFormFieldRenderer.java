@@ -90,8 +90,10 @@ public class SelectDDMFormFieldRenderer extends BaseDDMFormFieldRenderer {
 			"options", getOptions(ddmFormField, ddmFormFieldRenderingContext));
 
 		Map<String, String> stringsMap = new HashMap<>();
+
 		stringsMap.put(
-			"chooseAnOption", LanguageUtil.get(
+			"chooseAnOption",
+			LanguageUtil.get(
 				ddmFormFieldRenderingContext.getLocale(), "choose-an-option"));
 
 		template.put("strings", stringsMap);
