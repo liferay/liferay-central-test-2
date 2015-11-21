@@ -223,8 +223,7 @@ public class PoshiRunnerValidation {
 
 		String returns = element.attributeValue("returns");
 
-		List<Element> returnElements =
-			PoshiRunnerGetterUtil.getAllChildElements(element, "return");
+		List<Element> returnElements = element.elements("return");
 
 		if (returns == null) {
 			if (returnElements.size() > 0) {
