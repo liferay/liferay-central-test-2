@@ -17,17 +17,17 @@
 <%@ include file="/init.jsp" %>
 
 <%
-String displayStyle = ParamUtil.getString(request, "displayStyle", "descriptive");
-
 String tabs1 = (String)request.getAttribute("edit_site_assignments.jsp-tabs1");
 String tabs2 = (String)request.getAttribute("edit_site_assignments.jsp-tabs2");
 
-String redirect = (String)request.getAttribute("edit_site_assignments.jsp-redirect");
-
 int cur = (Integer)request.getAttribute("edit_site_assignments.jsp-cur");
+
+String redirect = (String)request.getAttribute("edit_site_assignments.jsp-redirect");
 
 Group group = (Group)request.getAttribute("edit_site_assignments.jsp-group");
 User selUser = (User)request.getAttribute("edit_site_assignments.jsp-selUser");
+
+String displayStyle = ParamUtil.getString(request, "displayStyle", "descriptive");
 
 PortletURL portletURL = (PortletURL)request.getAttribute("edit_site_assignments.jsp-portletURL");
 
@@ -35,6 +35,7 @@ portletURL.setParameter("p_u_i_d", String.valueOf(selUser.getUserId()));
 
 portletDisplay.setShowBackIcon(true);
 portletDisplay.setURLBack(redirect);
+
 renderResponse.setTitle(LanguageUtil.get(request, "edit-site-roles-for-user") + ": " + HtmlUtil.escape(selUser.getFullName()));
 %>
 
@@ -88,8 +89,8 @@ renderResponse.setTitle(LanguageUtil.get(request, "edit-site-roles-for-user") + 
 	updateRoleAssignmentsURL.setParameter("tabs2", tabs2);
 	updateRoleAssignmentsURL.setParameter("cur", String.valueOf(cur));
 	updateRoleAssignmentsURL.setParameter("redirect", redirect);
-	updateRoleAssignmentsURL.setParameter("p_u_i_d", String.valueOf(selUser.getUserId()));
 	updateRoleAssignmentsURL.setParameter("groupId", String.valueOf(group.getGroupId()));
+	updateRoleAssignmentsURL.setParameter("p_u_i_d", String.valueOf(selUser.getUserId()));
 
 	String taglibOnClick = renderResponse.getNamespace() + "updateUserGroupRole('" + updateRoleAssignmentsURL.toString() + "');";
 	%>
