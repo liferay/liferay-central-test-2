@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.osgi.service.tracker.collections.list.internal;
+package com.liferay.osgi.service.tracker.collections.internal.list;
 
 import com.liferay.osgi.service.tracker.collections.list.ServiceTrackerList;
 

@@ -14,7 +14,7 @@
 
 package com.liferay.osgi.service.tracker.collections.list;
 
-import com.liferay.osgi.service.tracker.collections.list.internal.ServiceTrackerListImpl;
+import com.liferay.osgi.service.tracker.collections.internal.list.ServiceTrackerListImpl;
 
 import java.util.Comparator;
 
