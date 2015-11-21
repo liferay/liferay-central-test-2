@@ -2880,7 +2880,7 @@
 			<finder-column name="actionRequired" />
 			<finder-column name="archived" />
 		</finder>
-		<finder name="U_TY_DT_D" return-type="Collection">
+		<finder name="U_T_DT_D" return-type="Collection">
 			<finder-column name="userId" />
 			<finder-column name="type" />
 			<finder-column name="deliveryType" />

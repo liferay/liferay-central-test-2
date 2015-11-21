@@ -434,7 +434,7 @@ public class UserNotificationEventLocalServiceImpl
 	public int getUserNotificationEventsCount(
 		long userId, String type, int deliveryType, boolean archived) {
 
-		return userNotificationEventPersistence.countByU_TY_DT_D(
+		return userNotificationEventPersistence.countByU_T_DT_D(
 			userId, type, deliveryType, archived);
 	}
 
