@@ -357,14 +357,6 @@ public class UserNotificationEventLocalServiceImpl
 	}
 
 	@Override
-	public int getUserNotificationEventCount(
-		long userId, String type, int deliveryType, boolean archived) {
-
-		return userNotificationEventPersistence.countByU_TY_DT_D(
-			userId, type, deliveryType, archived);
-	}
-
-	@Override
 	public List<UserNotificationEvent> getUserNotificationEvents(long userId) {
 		return userNotificationEventPersistence.findByUserId(userId);
 	}
@@ -436,6 +428,14 @@ public class UserNotificationEventLocalServiceImpl
 	public int getUserNotificationEventsCount(long userId, int deliveryType) {
 		return userNotificationEventPersistence.countByU_DT(
 			userId, deliveryType);
+	}
+
+	@Override
+	public int getUserNotificationEventsCount(
+		long userId, String type, int deliveryType, boolean archived) {
+
+		return userNotificationEventPersistence.countByU_TY_DT_D(
+			userId, type, deliveryType, archived);
 	}
 
 	@Override
