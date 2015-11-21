@@ -67,9 +67,7 @@ public class ServiceTrackerListTest {
 	}
 
 	@Test
-	public void testGetServiceWithCustomComparatorReturningZero()
-		throws Exception {
-
+	public void testGetServiceWithCustomComparator() throws Exception {
 		ServiceTrackerList<Object, Object> serviceTrackerList =
 			ServiceTrackerListFactory.open(
 				_bundleContext, Object.class,
@@ -96,7 +94,7 @@ public class ServiceTrackerListTest {
 	}
 
 	@Test
-	public void testGetServiceWithCustomizer() throws Exception {
+	public void testGetServiceWithServiceTrackerCustomizer() throws Exception {
 		ServiceTrackerList<Object, Object> serviceTrackerList =
 			ServiceTrackerListFactory.open(
 				_bundleContext, Object.class, null,
