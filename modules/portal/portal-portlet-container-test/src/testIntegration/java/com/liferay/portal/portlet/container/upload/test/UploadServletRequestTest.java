@@ -981,13 +981,6 @@ public class UploadServletRequestTest {
 			_setUpScenario();
 		}
 
-		/**
-		 * Using parametrized constructor will cause the _liferayServletReques
-		 * to be null, so the getInputStream() method will invoke super class
-		 * method, instead of delegating the invocation to Liferay's class.
-		 *
-		 * @see LiferayServletRequest
-		 */
 		@Test
 		public void shouldNotReturnLiferayInputStream() throws Exception {
 			LiferayServletRequest liferayServletRequest =
@@ -1013,16 +1006,6 @@ public class UploadServletRequestTest {
 			Assert.assertFalse(inputStream instanceof LiferayInputStream);
 		}
 
-		/**
-		 * Using main constructor will cause invoking
-		 * LiferayServletRequest.setFinishedReadingOriginalStream(true) method,
-		 * which is the only way to set _finishedReadingOriginalStream to TRUE,
-		 * so it will Return the cached input stream the second time the user
-		 * requests the input stream, otherwise, it will return an empty input
-		 * stream because it has already been parsed.
-		 *
-		 * @see LiferayServletRequest
-		 */
 		@Test
 		public void shouldReturnServletInputStreamAdapter() throws Exception {
 			LiferayServletRequest liferayServletRequest =
