@@ -65,6 +65,46 @@ import org.springframework.mock.web.MockHttpServletRequest;
 public class UploadServletRequestTest {
 
 	@RunWith(Arquillian.class)
+	public static class WhenCleaningUp {
+
+		@ClassRule
+		@Rule
+		public static final TestRule aggregateTestRule =
+			new LiferayIntegrationTestRule();
+
+		@Before
+		public void setUp() throws Exception {
+			_setUp();
+		}
+
+		@Test
+		public void shouldNotRemoveMultipartParameters() throws Exception {
+			Map<String, FileItem[]> fileParameters =
+				PortletContainerTestUtil.getFileParameters(1, _bytes);
+
+			LiferayServletRequest liferayServletRequest =
+				PortletContainerTestUtil.getMultipartRequest(
+					_fileNameParameter, _bytes);
+
+			UploadServletRequestImpl uploadServletRequest =
+				new UploadServletRequestImpl(
+					(HttpServletRequest)liferayServletRequest.getRequest(),
+					fileParameters, new HashMap<String, List<String>>());
+
+			uploadServletRequest.cleanUp();
+
+			Map<String, FileItem[]> multipartParameterMap =
+				uploadServletRequest.getMultipartParameterMap();
+
+			Assert.assertNotNull(multipartParameterMap);
+			Assert.assertEquals(
+				multipartParameterMap.toString(), 1,
+				multipartParameterMap.size());
+		}
+
+	}
+
+	@RunWith(Arquillian.class)
 	public static final class WhenCreatingFromMainConstructor {
 
 		@ClassRule
@@ -230,46 +270,6 @@ public class UploadServletRequestTest {
 			Assert.assertNotNull(regularParameterMap);
 			Assert.assertEquals(
 				regularParameterMap.toString(), 10, regularParameterMap.size());
-		}
-
-	}
-
-	@RunWith(Arquillian.class)
-	public static class WhenCleaningUp {
-
-		@ClassRule
-		@Rule
-		public static final TestRule aggregateTestRule =
-			new LiferayIntegrationTestRule();
-
-		@Before
-		public void setUp() throws Exception {
-			_setUp();
-		}
-
-		@Test
-		public void shouldNotRemoveMultipartParameters() throws Exception {
-			Map<String, FileItem[]> fileParameters =
-				PortletContainerTestUtil.getFileParameters(1, _bytes);
-
-			LiferayServletRequest liferayServletRequest =
-				PortletContainerTestUtil.getMultipartRequest(
-					_fileNameParameter, _bytes);
-
-			UploadServletRequestImpl uploadServletRequest =
-				new UploadServletRequestImpl(
-					(HttpServletRequest)liferayServletRequest.getRequest(),
-					fileParameters, new HashMap<String, List<String>>());
-
-			uploadServletRequest.cleanUp();
-
-			Map<String, FileItem[]> multipartParameterMap =
-				uploadServletRequest.getMultipartParameterMap();
-
-			Assert.assertNotNull(multipartParameterMap);
-			Assert.assertEquals(
-				multipartParameterMap.toString(), 1,
-				multipartParameterMap.size());
 		}
 
 	}
