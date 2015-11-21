@@ -113,7 +113,7 @@ public class LiferayFileItemTest {
 	}
 
 	@Test
-	public void testGetFileNameExtensionShouldReturnFileExtension() {
+	public void testGetFileNameExtension() {
 		String fieldName = RandomTestUtil.randomString();
 		String contentType = RandomTestUtil.randomString();
 		String fileName = RandomTestUtil.randomString() + ".txt";
