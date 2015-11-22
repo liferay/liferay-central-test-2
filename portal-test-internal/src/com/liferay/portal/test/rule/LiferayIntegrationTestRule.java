@@ -16,6 +16,7 @@ package com.liferay.portal.test.rule;
 
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.BaseTestRule;
+import com.liferay.portal.kernel.test.rule.BaseTestRule.StatementWrapper;
 import com.liferay.portal.kernel.test.rule.DeleteAfterTestRunTestRule;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -39,32 +40,51 @@ public class LiferayIntegrationTestRule extends AggregateTestRule {
 	public LiferayIntegrationTestRule() {
 		super(
 			false, CITimeoutTestRule.INSTANCE, LogAssertionTestRule.INSTANCE,
+			_springInitializationTestRule,
 			SybaseDumpTransactionLogTestRule.INSTANCE,
 			_clearThreadLocalTestRule, _uniqueStringRandomizerBumperTestRule,
 			new DeleteAfterTestRunTestRule());
 	}
 
-	@Override
-	public Statement apply(Statement statement, Description description) {
-		if (!InitUtil.isInitialized()) {
-			ServerDetector.init(ServerDetector.TOMCAT_ID);
-
-			List<String> configLocations = ListUtil.fromArray(
-				PropsUtil.getArray(PropsKeys.SPRING_CONFIGS));
-
-			InitUtil.initWithSpring(configLocations, true);
-
-			if (System.getProperty("external-properties") == null) {
-				System.setProperty(
-					"external-properties", "portal-test.properties");
-			}
-		}
-
-		return super.apply(statement, description);
-	}
-
 	private static final TestRule _clearThreadLocalTestRule =
 		new BaseTestRule<>(ClearThreadLocalTestCallback.INSTANCE);
+
+	private static final TestRule _springInitializationTestRule =
+		new TestRule() {
+
+			@Override
+			public Statement apply(
+				Statement statement, Description description) {
+
+				return new StatementWrapper(statement) {
+
+					@Override
+					public void evaluate() throws Throwable {
+						if (!InitUtil.isInitialized()) {
+							ServerDetector.init(ServerDetector.TOMCAT_ID);
+
+							List<String> configLocations = ListUtil.fromArray(
+								PropsUtil.getArray(PropsKeys.SPRING_CONFIGS));
+
+							InitUtil.initWithSpring(configLocations, true);
+
+							if (System.getProperty("external-properties") ==
+									null) {
+
+								System.setProperty(
+									"external-properties",
+									"portal-test.properties");
+							}
+						}
+
+						statement.evaluate();
+					}
+
+				};
+			}
+
+		};
+
 	private static final TestRule _uniqueStringRandomizerBumperTestRule =
 		new BaseTestRule<>(UniqueStringRandomizerBumperTestCallback.INSTANCE);
 
