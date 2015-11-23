@@ -25,7 +25,6 @@ PortletURL viewUsersURL = renderResponse.createRenderURL();
 
 viewUsersURL.setParameter("mvcPath", "/view.jsp");
 viewUsersURL.setParameter("tabs1", "users");
-viewUsersURL.setParameter("tabs2", "current");
 viewUsersURL.setParameter("redirect", currentURL);
 viewUsersURL.setParameter("groupId", String.valueOf(siteMembershipsDisplayContext.getGroupId()));
 
@@ -88,7 +87,6 @@ userSearch.setResults(users);
 
 <aui:form action="<%= viewUsersURL.toString() %>" cssClass="container-fluid-1280" method="post" name="fm">
 	<aui:input name="tabs1" type="hidden" value="users" />
-	<aui:input name="tabs2" type="hidden" value="current" />
 	<aui:input name="assignmentsRedirect" type="hidden" />
 	<aui:input name="groupId" type="hidden" value="<%= String.valueOf(siteMembershipsDisplayContext.getGroupId()) %>" />
 	<aui:input name="p_u_i_d" type="hidden" />
@@ -126,14 +124,8 @@ userSearch.setResults(users);
 </aui:form>
 
 <c:if test="<%= GroupPermissionUtil.contains(permissionChecker, siteMembershipsDisplayContext.getGroupId(), ActionKeys.ASSIGN_MEMBERS) %>">
-
-	<%
-	viewUsersURL.setParameter("tabs2", "available");
-	viewUsersURL.setParameter("redirect", currentURL);
-	%>
-
 	<liferay-frontend:add-menu>
-		<liferay-frontend:add-menu-item title='<%= LanguageUtil.get(request, "assign-users") %>' url="<%= viewUsersURL.toString() %>" />
+		<liferay-frontend:add-menu-item id="selectUsers" title='<%= LanguageUtil.get(request, "assign-users") %>' url="javascript:;" />
 	</liferay-frontend:add-menu>
 </c:if>
 
@@ -183,6 +175,34 @@ userSearch.setResults(users);
 					},
 					title: '<liferay-ui:message key="assign-site-roles" />',
 					url: currentTarget.data('href')
+				}
+			);
+
+			itemSelectorDialog.open();
+		}
+	);
+
+	$('#<portlet:namespace />selectUsers').on(
+		'click',
+		function(event) {
+			event.preventDefault();
+
+			var itemSelectorDialog = new A.LiferayItemSelectorDialog(
+				{
+					eventName: '<portlet:namespace />selectUsers',
+					on: {
+						selectedItemChange: function(event) {
+							var selectedItem = event.newVal;
+
+							if (selectedItem) {
+								form.fm('addUserIds').val(selectedItem.addUserIds);
+
+								submitForm(form, '<portlet:actionURL name="editGroupUsers" />');
+							}
+						}
+					},
+					title: '<liferay-ui:message key="add-users-to-this-site" />',
+					url: '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="mvcPath" value="/select_users.jsp" /></portlet:renderURL>'
 				}
 			);
 
