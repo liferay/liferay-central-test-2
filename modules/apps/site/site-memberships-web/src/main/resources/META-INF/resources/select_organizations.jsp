@@ -20,6 +20,8 @@
 String eventName = ParamUtil.getString(request, "eventName", liferayPortletResponse.getNamespace() + "selectOrganizations");
 
 String displayStyle = ParamUtil.getString(request, "displayStyle", "list");
+String orderByCol = ParamUtil.getString(request, "orderByCol", "name");
+String orderByType = ParamUtil.getString(request, "orderByType", "asc");
 
 PortletURL viewOrganizationsURL = renderResponse.createRenderURL();
 
@@ -32,8 +34,36 @@ OrganizationSiteMembershipsChecker rowChecker = new OrganizationSiteMembershipsC
 SearchContainer searchContainer = new OrganizationSearch(renderRequest, viewOrganizationsURL);
 %>
 
+<liferay-frontend:management-bar
+	checkBoxContainerId="organizationsSearchContainer"
+	includeCheckBox="<%= true %>"
+>
+	<liferay-frontend:management-bar-buttons>
+		<liferay-frontend:management-bar-display-buttons
+			displayViews='<%= new String[] {"icon", "descriptive", "list"} %>'
+			portletURL="<%= PortletURLUtil.clone(viewOrganizationsURL, renderResponse) %>"
+			selectedDisplayStyle="<%= displayStyle %>"
+		/>
+	</liferay-frontend:management-bar-buttons>
+
+	<liferay-frontend:management-bar-filters>
+		<liferay-frontend:management-bar-navigation
+			navigationKeys='<%= new String[] {"all"} %>'
+			portletURL="<%= PortletURLUtil.clone(viewOrganizationsURL, renderResponse) %>"
+		/>
+
+		<liferay-frontend:management-bar-sort
+			orderByCol="<%= orderByCol %>"
+			orderByType="<%= orderByType %>"
+			orderColumns='<%= new String[] {"name", "type"} %>'
+			portletURL="<%= PortletURLUtil.clone(viewOrganizationsURL, renderResponse) %>"
+		/>
+	</liferay-frontend:management-bar-filters>
+</liferay-frontend:management-bar>
+
 <aui:form cssClass="container-fluid-1280" name="fm">
 	<liferay-ui:search-container
+		id="organizations"
 		rowChecker="<%= rowChecker %>"
 		searchContainer="<%= searchContainer %>"
 		var="organizationSearchContainer"
