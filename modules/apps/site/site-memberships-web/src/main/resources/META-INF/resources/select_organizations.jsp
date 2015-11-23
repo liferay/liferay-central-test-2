@@ -19,7 +19,7 @@
 <%
 String eventName = ParamUtil.getString(request, "eventName", liferayPortletResponse.getNamespace() + "selectOrganizations");
 
-String displayStyle = ParamUtil.getString(request, "displayStyle", "list");
+String displayStyle = ParamUtil.getString(request, "displayStyle", "icon");
 String orderByCol = ParamUtil.getString(request, "orderByCol", "name");
 String orderByType = ParamUtil.getString(request, "orderByType", "asc");
 

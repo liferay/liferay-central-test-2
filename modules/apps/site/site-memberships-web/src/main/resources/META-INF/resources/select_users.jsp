@@ -21,7 +21,7 @@ String eventName = ParamUtil.getString(request, "eventName", liferayPortletRespo
 
 Group group = siteMembershipsDisplayContext.getGroup();
 
-String displayStyle = ParamUtil.getString(request, "displayStyle", "list");
+String displayStyle = ParamUtil.getString(request, "displayStyle", "icon");
 String orderByCol = ParamUtil.getString(request, "orderByCol", "first-name");
 String orderByType = ParamUtil.getString(request, "orderByType", "asc");
 
