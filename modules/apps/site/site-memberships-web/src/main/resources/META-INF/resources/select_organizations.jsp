@@ -31,74 +31,68 @@ viewOrganizationsURL.setParameter("groupId", String.valueOf(siteMembershipsDispl
 
 OrganizationSiteMembershipsChecker rowChecker = new OrganizationSiteMembershipsChecker(renderResponse, siteMembershipsDisplayContext.getGroup());
 
-SearchContainer searchContainer = new OrganizationSearch(renderRequest, PortletURLUtil.clone(viewOrganizationsURL, renderResponse));
+OrganizationSearch organizationSearch = new OrganizationSearch(renderRequest, PortletURLUtil.clone(viewOrganizationsURL, renderResponse));
+
+OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)organizationSearch.getSearchTerms();
+
+long parentOrganizationId = OrganizationConstants.ANY_PARENT_ORGANIZATION_ID;
+
+LinkedHashMap<String, Object> organizationParams = new LinkedHashMap<String, Object>();
+
+int organizationsCount = OrganizationLocalServiceUtil.searchCount(company.getCompanyId(), parentOrganizationId, searchTerms.getKeywords(), searchTerms.getType(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), organizationParams);
+
+organizationSearch.setTotal(organizationsCount);
+
+List<Organization> organizations = OrganizationLocalServiceUtil.search(company.getCompanyId(), parentOrganizationId, searchTerms.getKeywords(), searchTerms.getType(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), organizationParams, organizationSearch.getStart(), organizationSearch.getEnd(), organizationSearch.getOrderByComparator());
+
+organizationSearch.setResults(organizations);
 %>
 
 <aui:nav-bar cssClass="collapse-basic-search" markupView="lexicon">
-	<aui:nav-bar-search>
-		<aui:form action="<%= viewOrganizationsURL.toString() %>" name="searchFm">
-			<liferay-ui:input-search autoFocus="<%= windowState.equals(WindowState.MAXIMIZED) %>" markupView="lexicon" />
-		</aui:form>
-	</aui:nav-bar-search>
+	<c:if test="<%= organizationsCount > 0 %>">
+		<aui:nav-bar-search>
+			<aui:form action="<%= viewOrganizationsURL.toString() %>" name="searchFm">
+				<liferay-ui:input-search autoFocus="<%= windowState.equals(WindowState.MAXIMIZED) %>" markupView="lexicon" />
+			</aui:form>
+		</aui:nav-bar-search>
+	</c:if>
 </aui:nav-bar>
 
-<liferay-frontend:management-bar
-	checkBoxContainerId="organizationsSearchContainer"
-	includeCheckBox="<%= true %>"
->
-	<liferay-frontend:management-bar-buttons>
-		<liferay-frontend:management-bar-display-buttons
-			displayViews='<%= new String[] {"icon", "descriptive", "list"} %>'
-			portletURL="<%= PortletURLUtil.clone(viewOrganizationsURL, renderResponse) %>"
-			selectedDisplayStyle="<%= displayStyle %>"
-		/>
-	</liferay-frontend:management-bar-buttons>
+<c:if test="<%= organizationsCount > 0 %>">
+	<liferay-frontend:management-bar
+		checkBoxContainerId="organizationsSearchContainer"
+		includeCheckBox="<%= true %>"
+	>
+		<liferay-frontend:management-bar-buttons>
+			<liferay-frontend:management-bar-display-buttons
+				displayViews='<%= new String[] {"icon", "descriptive", "list"} %>'
+				portletURL="<%= PortletURLUtil.clone(viewOrganizationsURL, renderResponse) %>"
+				selectedDisplayStyle="<%= displayStyle %>"
+			/>
+		</liferay-frontend:management-bar-buttons>
 
-	<liferay-frontend:management-bar-filters>
-		<liferay-frontend:management-bar-navigation
-			navigationKeys='<%= new String[] {"all"} %>'
-			portletURL="<%= PortletURLUtil.clone(viewOrganizationsURL, renderResponse) %>"
-		/>
+		<liferay-frontend:management-bar-filters>
+			<liferay-frontend:management-bar-navigation
+				navigationKeys='<%= new String[] {"all"} %>'
+				portletURL="<%= PortletURLUtil.clone(viewOrganizationsURL, renderResponse) %>"
+			/>
 
-		<liferay-frontend:management-bar-sort
-			orderByCol="<%= orderByCol %>"
-			orderByType="<%= orderByType %>"
-			orderColumns='<%= new String[] {"name", "type"} %>'
-			portletURL="<%= PortletURLUtil.clone(viewOrganizationsURL, renderResponse) %>"
-		/>
-	</liferay-frontend:management-bar-filters>
-</liferay-frontend:management-bar>
+			<liferay-frontend:management-bar-sort
+				orderByCol="<%= orderByCol %>"
+				orderByType="<%= orderByType %>"
+				orderColumns='<%= new String[] {"name", "type"} %>'
+				portletURL="<%= PortletURLUtil.clone(viewOrganizationsURL, renderResponse) %>"
+			/>
+		</liferay-frontend:management-bar-filters>
+	</liferay-frontend:management-bar>
+</c:if>
 
 <aui:form cssClass="container-fluid-1280" name="fm">
 	<liferay-ui:search-container
 		id="organizations"
 		rowChecker="<%= rowChecker %>"
-		searchContainer="<%= searchContainer %>"
-		var="organizationSearchContainer"
+		searchContainer="<%= organizationSearch %>"
 	>
-
-		<%
-		OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)organizationSearchContainer.getSearchTerms();
-
-		long parentOrganizationId = OrganizationConstants.ANY_PARENT_ORGANIZATION_ID;
-
-		LinkedHashMap<String, Object> organizationParams = new LinkedHashMap<String, Object>();
-		%>
-
-		<liferay-ui:search-container-results>
-
-			<%
-			total = OrganizationLocalServiceUtil.searchCount(company.getCompanyId(), parentOrganizationId, searchTerms.getKeywords(), searchTerms.getType(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), organizationParams);
-
-			organizationSearchContainer.setTotal(total);
-
-			results = OrganizationLocalServiceUtil.search(company.getCompanyId(), parentOrganizationId, searchTerms.getKeywords(), searchTerms.getType(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), organizationParams, organizationSearchContainer.getStart(), organizationSearchContainer.getEnd(), organizationSearchContainer.getOrderByComparator());
-
-			organizationSearchContainer.setResults(results);
-			%>
-
-		</liferay-ui:search-container-results>
-
 		<liferay-ui:search-container-row
 			className="com.liferay.portal.model.Organization"
 			cssClass="selectable"
