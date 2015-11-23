@@ -20,6 +20,8 @@
 String eventName = ParamUtil.getString(request, "eventName", liferayPortletResponse.getNamespace() + "selectUserGroups");
 
 String displayStyle = ParamUtil.getString(request, "displayStyle", "list");
+String orderByCol = ParamUtil.getString(request, "orderByCol", "name");
+String orderByType = ParamUtil.getString(request, "orderByType", "asc");
 
 PortletURL viewUserGroupsURL = renderResponse.createRenderURL();
 
@@ -32,8 +34,36 @@ UserGroupSiteMembershipsChecker rowChecker = new UserGroupSiteMembershipsChecker
 UserGroupSearch userGroupSearch = new UserGroupSearch(renderRequest, viewUserGroupsURL);
 %>
 
+<liferay-frontend:management-bar
+	checkBoxContainerId="userGroupsSearchContainer"
+	includeCheckBox="<%= true %>"
+>
+	<liferay-frontend:management-bar-buttons>
+		<liferay-frontend:management-bar-display-buttons
+			displayViews='<%= new String[] {"icon", "descriptive", "list"} %>'
+			portletURL="<%= PortletURLUtil.clone(viewUserGroupsURL, renderResponse) %>"
+			selectedDisplayStyle="<%= displayStyle %>"
+		/>
+	</liferay-frontend:management-bar-buttons>
+
+	<liferay-frontend:management-bar-filters>
+		<liferay-frontend:management-bar-navigation
+			navigationKeys='<%= new String[] {"all"} %>'
+			portletURL="<%= PortletURLUtil.clone(viewUserGroupsURL, renderResponse) %>"
+		/>
+
+		<liferay-frontend:management-bar-sort
+			orderByCol="<%= orderByCol %>"
+			orderByType="<%= orderByType %>"
+			orderColumns='<%= new String[] {"name", "description"} %>'
+			portletURL="<%= PortletURLUtil.clone(viewUserGroupsURL, renderResponse) %>"
+		/>
+	</liferay-frontend:management-bar-filters>
+</liferay-frontend:management-bar>
+
 <aui:form cssClass="container-fluid-1280" name="fm">
 	<liferay-ui:search-container
+		id="userGroups"
 		rowChecker="<%= rowChecker %>"
 		searchContainer="<%= userGroupSearch %>"
 	>
