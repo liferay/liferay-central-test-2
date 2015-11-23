@@ -69,14 +69,7 @@ String tabs2 = siteMembershipsDisplayContext.getTabs2();
 
 <c:choose>
 	<c:when test='<%= tabs1.equals("users") %>'>
-		<c:choose>
-			<c:when test='<%= tabs2.equals("current") %>'>
-				<liferay-util:include page="/users.jsp" servletContext="<%= application %>" />
-			</c:when>
-			<c:when test='<%= tabs2.equals("available") %>'>
-				<liferay-util:include page="/select_users.jsp" servletContext="<%= application %>" />
-			</c:when>
-		</c:choose>
+		<liferay-util:include page="/users.jsp" servletContext="<%= application %>" />
 	</c:when>
 	<c:when test='<%= tabs1.equals("organizations") %>'>
 		<liferay-util:include page="/organizations.jsp" servletContext="<%= application %>" />
