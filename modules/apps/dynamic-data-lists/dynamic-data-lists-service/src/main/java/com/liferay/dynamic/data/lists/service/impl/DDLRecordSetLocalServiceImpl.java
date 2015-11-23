@@ -410,8 +410,8 @@ public class DDLRecordSetLocalServiceImpl
 
 		if (ddmStructure == null) {
 			throw new RecordSetDDMStructureIdException(
-				"No DDMStructure found for {ddmStructureId=" +
-					ddmStructureId + "}");
+				"No DDM structure exists with the DDM structure ID " +
+					ddmStructureId);
 		}
 	}
 
