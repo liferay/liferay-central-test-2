@@ -31,8 +31,16 @@ viewUserGroupsURL.setParameter("groupId", String.valueOf(siteMembershipsDisplayC
 
 UserGroupSiteMembershipsChecker rowChecker = new UserGroupSiteMembershipsChecker(renderResponse, siteMembershipsDisplayContext.getGroup());
 
-UserGroupSearch userGroupSearch = new UserGroupSearch(renderRequest, viewUserGroupsURL);
+UserGroupSearch userGroupSearch = new UserGroupSearch(renderRequest, PortletURLUtil.clone(viewUserGroupsURL, renderResponse));
 %>
+
+<aui:nav-bar cssClass="collapse-basic-search" markupView="lexicon">
+	<aui:nav-bar-search>
+		<aui:form action="<%= viewUserGroupsURL.toString() %>" name="searchFm">
+			<liferay-ui:input-search autoFocus="<%= windowState.equals(WindowState.MAXIMIZED) %>" markupView="lexicon" />
+		</aui:form>
+	</aui:nav-bar-search>
+</aui:nav-bar>
 
 <liferay-frontend:management-bar
 	checkBoxContainerId="userGroupsSearchContainer"

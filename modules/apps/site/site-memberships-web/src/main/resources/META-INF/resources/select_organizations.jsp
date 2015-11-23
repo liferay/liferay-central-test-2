@@ -31,8 +31,16 @@ viewOrganizationsURL.setParameter("groupId", String.valueOf(siteMembershipsDispl
 
 OrganizationSiteMembershipsChecker rowChecker = new OrganizationSiteMembershipsChecker(renderResponse, siteMembershipsDisplayContext.getGroup());
 
-SearchContainer searchContainer = new OrganizationSearch(renderRequest, viewOrganizationsURL);
+SearchContainer searchContainer = new OrganizationSearch(renderRequest, PortletURLUtil.clone(viewOrganizationsURL, renderResponse));
 %>
+
+<aui:nav-bar cssClass="collapse-basic-search" markupView="lexicon">
+	<aui:nav-bar-search>
+		<aui:form action="<%= viewOrganizationsURL.toString() %>" name="searchFm">
+			<liferay-ui:input-search autoFocus="<%= windowState.equals(WindowState.MAXIMIZED) %>" markupView="lexicon" />
+		</aui:form>
+	</aui:nav-bar-search>
+</aui:nav-bar>
 
 <liferay-frontend:management-bar
 	checkBoxContainerId="organizationsSearchContainer"
