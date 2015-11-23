@@ -257,7 +257,7 @@ public class MVCPortlet extends LiferayPortlet {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
-		checkDefaultSuccessMessage(renderRequest);
+		invokeHideDefaultSuccessMessage(renderRequest);
 
 		String mvcRenderCommandName = ParamUtil.getString(
 			renderRequest, "mvcRenderCommandName", "/");
@@ -289,7 +289,7 @@ public class MVCPortlet extends LiferayPortlet {
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws IOException, PortletException {
 
-		checkDefaultSuccessMessage(resourceRequest);
+		invokeHideDefaultSuccessMessage(resourceRequest);
 
 		String path = getPath(resourceRequest, resourceResponse);
 
@@ -433,7 +433,9 @@ public class MVCPortlet extends LiferayPortlet {
 		return super.callResourceMethod(resourceRequest, resourceResponse);
 	}
 
-	protected void checkDefaultSuccessMessage(PortletRequest portletRequest) {
+	protected void invokeHideDefaultSuccessMessage(
+		PortletRequest portletRequest) {
+
 		boolean hideDefaultSuccessMessage = ParamUtil.getBoolean(
 			portletRequest, "hideDefaultSuccessMessage");
 
