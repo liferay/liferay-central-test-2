@@ -162,7 +162,7 @@ public class GitHubMessageUtil {
 					continue;
 				}
 
-				if (isHighPriority(content)) {
+				if (isHighPriorityJobFailure(content)) {
 					highPriorityJobFailureList.add("<li>" + content + "</li>");
 				}
 				else {
@@ -188,7 +188,7 @@ public class GitHubMessageUtil {
 		project.setProperty("github.post.comment.body", sb.toString());
 	}
 
-	protected static boolean isHighPriority(String content) {
+	protected static boolean isHighPriorityJobFailure(String content) {
 		String[] contentFlags = new String[] {
 			"compileJSP", "Unable to compile JSPs"
 		};
