@@ -163,11 +163,10 @@ public class GitHubMessageUtil {
 				}
 
 				if (isHighPriorityJobFailure(content)) {
-					highPriorityJobFailures.add("<li>" + content + "</li>");
+					highPriorityJobFailures.add(content);
 				}
 				else {
-					normalPriorityJobFailures.add(
-						"<li>" + content + "</li>");
+					normalPriorityJobFailures.add(content);
 				}
 			}
 
@@ -182,7 +181,7 @@ public class GitHubMessageUtil {
 					break;
 				}
 
-				sb.append(jobFailures.get(i));
+				sb.append("<li>" + jobFailures.get(i) + "</li>");
 			}
 
 			sb.append("</ol>");
