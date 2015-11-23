@@ -407,6 +407,83 @@ public class ServiceTrackerCollections {
 		return serviceTrackerMap;
 	}
 
+	public static <S> ServiceTrackerMap<String, S> openSingleValueMap(
+		Class<S> clazz, String propertyKey) {
+
+		ServiceTrackerMap<String, S> serviceTrackerMap = singleValueMap(
+			clazz, propertyKey);
+
+		serviceTrackerMap.open();
+
+		return serviceTrackerMap;
+	}
+
+	public static <K, S> ServiceTrackerMap<K, S> openSingleValueMap(
+		Class<S> clazz, String filterString,
+		ServiceReferenceMapper<K, ? super S> serviceReferenceMapper) {
+
+		ServiceTrackerMap<K, S> serviceTrackerMap = singleValueMap(
+			clazz, filterString, serviceReferenceMapper);
+
+		serviceTrackerMap.open();
+
+		return serviceTrackerMap;
+	}
+
+	public static <K, S> ServiceTrackerMap<K, S> openSingleValueMap(
+		Class<S> clazz, String filterString,
+		ServiceReferenceMapper<K, ? super S> serviceReferenceMapper,
+		Comparator<ServiceReference<S>> comparator) {
+
+		ServiceTrackerMap<K, S> serviceTrackerMap = singleValueMap(
+			clazz, filterString, serviceReferenceMapper, comparator);
+
+		serviceTrackerMap.open();
+
+		return serviceTrackerMap;
+	}
+
+	public static <K, SR, S> ServiceTrackerMap<K, S> openSingleValueMap(
+		Class<SR> clazz, String filterString,
+		ServiceReferenceMapper<K, ? super SR> serviceReferenceMapper,
+		ServiceTrackerCustomizer<SR, S> serviceTrackerCustomizer) {
+
+		ServiceTrackerMap<K, S> serviceTrackerMap = singleValueMap(
+			clazz, filterString, serviceReferenceMapper,
+			serviceTrackerCustomizer);
+
+		serviceTrackerMap.open();
+
+		return serviceTrackerMap;
+	}
+
+	public static <K, SR, S> ServiceTrackerMap<K, S> openSingleValueMap(
+		Class<SR> clazz, String filterString,
+		ServiceReferenceMapper<K, ? super SR> serviceReferenceMapper,
+		ServiceTrackerCustomizer<SR, S> serviceTrackerCustomizer,
+		Comparator<ServiceReference<SR>> comparator) {
+
+		ServiceTrackerMap<K, S> serviceTrackerMap = singleValueMap(
+			clazz, filterString, serviceReferenceMapper,
+			serviceTrackerCustomizer, comparator);
+
+		serviceTrackerMap.open();
+
+		return serviceTrackerMap;
+	}
+
+	public static <SR, S> ServiceTrackerMap<String, S> openSingleValueMap(
+		Class<SR> clazz, String propertyKey,
+		ServiceTrackerCustomizer<SR, S> serviceTrackerCustomizer) {
+
+		ServiceTrackerMap<String, S> serviceTrackerMap = singleValueMap(
+			clazz, propertyKey, serviceTrackerCustomizer);
+
+		serviceTrackerMap.open();
+
+		return serviceTrackerMap;
+	}
+
 	public static <S> ServiceTrackerMap<String, S> singleValueMap(
 		Class<S> clazz, String propertyKey) {
 
