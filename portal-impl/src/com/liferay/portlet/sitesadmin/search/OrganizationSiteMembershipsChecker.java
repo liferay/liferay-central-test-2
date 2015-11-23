@@ -63,9 +63,8 @@ public class OrganizationSiteMembershipsChecker extends EmptyOnClickRowChecker {
 		if (_group.getOrganizationId() == organization.getOrganizationId()) {
 			return true;
 		}
-		else {
-			return false;
-		}
+
+		return isChecked(obj);
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(

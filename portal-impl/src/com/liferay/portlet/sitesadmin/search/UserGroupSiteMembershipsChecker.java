@@ -51,6 +51,11 @@ public class UserGroupSiteMembershipsChecker extends EmptyOnClickRowChecker {
 		}
 	}
 
+	@Override
+	public boolean isDisabled(Object obj) {
+		return isChecked(obj);
+	}
+
 	private static final Log _log = LogFactoryUtil.getLog(
 		UserGroupSiteMembershipsChecker.class);
 
