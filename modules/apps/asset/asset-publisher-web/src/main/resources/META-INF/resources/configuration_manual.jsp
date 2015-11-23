@@ -226,9 +226,9 @@ String eventName = "_" + HtmlUtil.escapeJS(assetPublisherDisplayContext.getPortl
 <aui:script>
 	function selectAsset(assetEntryId, assetClassName, assetType, assetEntryTitle, groupName) {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'add-selection';
+		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = '<%= HtmlUtil.escapeJS(currentURL) %>';
 		document.<portlet:namespace />fm.<portlet:namespace />assetEntryId.value = assetEntryId;
 		document.<portlet:namespace />fm.<portlet:namespace />assetEntryType.value = assetClassName;
-		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = '<%= HtmlUtil.escapeJS(currentURL) %>';
 
 		submitForm(document.<portlet:namespace />fm);
 	}
