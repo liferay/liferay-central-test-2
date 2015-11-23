@@ -17,13 +17,9 @@
 <%@ include file="/init.jsp" %>
 
 <%
-Group group = (Group)request.getAttribute("edit_site_assignments.jsp-group");
-
 String displayStyle = ParamUtil.getString(request, "displayStyle", "list");
 String orderByCol = ParamUtil.getString(request, "orderByCol", "first-name");
 String orderByType = ParamUtil.getString(request, "orderByType", "asc");
-
-PortletURL portletURL = (PortletURL)request.getAttribute("edit_site_assignments.jsp-portletURL");
 
 PortletURL viewUsersURL = renderResponse.createRenderURL();
 
@@ -31,7 +27,7 @@ viewUsersURL.setParameter("mvcPath", "/view.jsp");
 viewUsersURL.setParameter("tabs1", "users");
 viewUsersURL.setParameter("tabs2", "current");
 viewUsersURL.setParameter("redirect", currentURL);
-viewUsersURL.setParameter("groupId", String.valueOf(group.getGroupId()));
+viewUsersURL.setParameter("groupId", String.valueOf(siteMembershipsDisplayContext.getGroupId()));
 
 UserSearch userSearch = new UserSearch(renderRequest, PortletURLUtil.clone(viewUsersURL, renderResponse));
 
@@ -44,7 +40,7 @@ UserSearchTerms searchTerms = (UserSearchTerms)userSearch.getSearchTerms();
 LinkedHashMap<String, Object> userParams = new LinkedHashMap<String, Object>();
 
 userParams.put("inherit", Boolean.TRUE);
-userParams.put("usersGroups", Long.valueOf(group.getGroupId()));
+userParams.put("usersGroups", Long.valueOf(siteMembershipsDisplayContext.getGroupId()));
 
 int usersCount = UserLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getKeywords(), searchTerms.getStatus(), userParams);
 
@@ -90,11 +86,11 @@ userSearch.setResults(users);
 
 <liferay-util:include page="/info_message.jsp" servletContext="<%= application %>" />
 
-<aui:form action="<%= portletURL.toString() %>" cssClass="container-fluid-1280" method="post" name="fm">
+<aui:form action="<%= viewUsersURL.toString() %>" cssClass="container-fluid-1280" method="post" name="fm">
 	<aui:input name="tabs1" type="hidden" value="users" />
 	<aui:input name="tabs2" type="hidden" value="current" />
 	<aui:input name="assignmentsRedirect" type="hidden" />
-	<aui:input name="groupId" type="hidden" value="<%= String.valueOf(group.getGroupId()) %>" />
+	<aui:input name="groupId" type="hidden" value="<%= String.valueOf(siteMembershipsDisplayContext.getGroupId()) %>" />
 	<aui:input name="addUserIds" type="hidden" />
 	<aui:input name="removeUserIds" type="hidden" />
 
@@ -126,7 +122,7 @@ userSearch.setResults(users);
 	</liferay-ui:search-container>
 </aui:form>
 
-<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.ASSIGN_MEMBERS) %>">
+<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, siteMembershipsDisplayContext.getGroupId(), ActionKeys.ASSIGN_MEMBERS) %>">
 
 	<%
 	viewUsersURL.setParameter("tabs2", "available");

@@ -17,13 +17,7 @@
 <%@ include file="/init.jsp" %>
 
 <%
-int cur = (Integer)request.getAttribute("edit_site_assignments.jsp-cur");
-
-Group group = (Group)request.getAttribute("edit_site_assignments.jsp-group");
-
 String displayStyle = ParamUtil.getString(request, "displayStyle", "list");
-
-PortletURL portletURL = (PortletURL)request.getAttribute("edit_site_assignments.jsp-portletURL");
 
 PortletURL viewOrganizationsURL = renderResponse.createRenderURL();
 
@@ -31,18 +25,18 @@ viewOrganizationsURL.setParameter("mvcPath", "/view.jsp");
 viewOrganizationsURL.setParameter("tabs1", "organizations");
 viewOrganizationsURL.setParameter("tabs2", "available");
 viewOrganizationsURL.setParameter("redirect", currentURL);
-viewOrganizationsURL.setParameter("groupId", String.valueOf(group.getGroupId()));
+viewOrganizationsURL.setParameter("groupId", String.valueOf(siteMembershipsDisplayContext.getGroupId()));
 
-OrganizationGroupChecker rowChecker = new OrganizationGroupChecker(renderResponse, group);
+OrganizationGroupChecker rowChecker = new OrganizationGroupChecker(renderResponse, siteMembershipsDisplayContext.getGroup());
 
 SearchContainer searchContainer = new OrganizationSearch(renderRequest, viewOrganizationsURL);
 %>
 
-<aui:form action="<%= portletURL.toString() %>" cssClass="container-fluid-1280" method="post" name="fm">
+<aui:form action="<%= viewOrganizationsURL.toString() %>" cssClass="container-fluid-1280" method="post" name="fm">
 	<aui:input name="tabs1" type="hidden" value="organizations" />
 	<aui:input name="tabs2" type="hidden" value="available" />
 	<aui:input name="assignmentsRedirect" type="hidden" />
-	<aui:input name="groupId" type="hidden" value="<%= String.valueOf(group.getGroupId()) %>" />
+	<aui:input name="groupId" type="hidden" value="<%= String.valueOf(siteMembershipsDisplayContext.getGroupId()) %>" />
 	<aui:input name="addOrganizationIds" type="hidden" />
 	<aui:input name="removeOrganizationIds" type="hidden" />
 
@@ -91,11 +85,13 @@ SearchContainer searchContainer = new OrganizationSearch(renderRequest, viewOrga
 
 		<liferay-ui:search-iterator displayStyle="<%= displayStyle %>" markupView="lexicon" />
 
-		<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.ASSIGN_MEMBERS) %>">
+		<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, siteMembershipsDisplayContext.getGroupId(), ActionKeys.ASSIGN_MEMBERS) %>">
 
 			<%
+			PortletURL portletURL = siteMembershipsDisplayContext.getPortletURL();
+
 			portletURL.setParameter("tabs2", "current");
-			portletURL.setParameter("cur", String.valueOf(cur));
+			portletURL.setParameter("cur", String.valueOf(siteMembershipsDisplayContext.getCur()));
 
 			String taglibOnClick = renderResponse.getNamespace() + "updateGroupOrganizations('" + portletURL.toString() + "');";
 			%>

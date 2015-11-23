@@ -17,13 +17,9 @@
 <%@ include file="/init.jsp" %>
 
 <%
-int cur = (Integer)request.getAttribute("edit_site_assignments.jsp-cur");
-
-Group group = (Group)request.getAttribute("edit_site_assignments.jsp-group");
+Group group = siteMembershipsDisplayContext.getGroup();
 
 String displayStyle = ParamUtil.getString(request, "displayStyle", "list");
-
-PortletURL portletURL = (PortletURL)request.getAttribute("edit_site_assignments.jsp-portletURL");
 
 PortletURL viewUsersURL = renderResponse.createRenderURL();
 
@@ -38,7 +34,7 @@ SiteMembershipChecker rowChecker = new SiteMembershipChecker(renderResponse, gro
 SearchContainer searchContainer = new UserSearch(renderRequest, viewUsersURL);
 %>
 
-<aui:form action="<%= portletURL.toString() %>" cssClass="container-fluid-1280" method="post" name="fm">
+<aui:form action="<%= viewUsersURL.toString() %>" cssClass="container-fluid-1280" method="post" name="fm">
 	<aui:input name="tabs1" type="hidden" value="users" />
 	<aui:input name="tabs2" type="hidden" value="available" />
 	<aui:input name="assignmentsRedirect" type="hidden" />
@@ -100,8 +96,10 @@ SearchContainer searchContainer = new UserSearch(renderRequest, viewUsersURL);
 		<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.ASSIGN_MEMBERS) %>">
 
 			<%
+			PortletURL portletURL = siteMembershipsDisplayContext.getPortletURL();
+
 			portletURL.setParameter("tabs2", "current");
-			portletURL.setParameter("cur", String.valueOf(cur));
+			portletURL.setParameter("cur", String.valueOf(siteMembershipsDisplayContext.getCur()));
 
 			String taglibOnClick = renderResponse.getNamespace() + "updateGroupUsers('" + portletURL.toString() + "');";
 			%>
