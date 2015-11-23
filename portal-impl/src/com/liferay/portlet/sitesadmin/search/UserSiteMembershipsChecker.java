@@ -14,7 +14,7 @@
 
 package com.liferay.portlet.sitesadmin.search;
 
-import com.liferay.portal.kernel.dao.search.RowChecker;
+import com.liferay.portal.kernel.dao.search.EmptyOnClickRowChecker;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.Group;
@@ -29,7 +29,7 @@ import javax.portlet.RenderResponse;
 /**
  * @author Brian Wing Shun Chan
  */
-public class UserSiteMembershipsChecker extends RowChecker {
+public class UserSiteMembershipsChecker extends EmptyOnClickRowChecker {
 
 	public UserSiteMembershipsChecker(
 		RenderResponse renderResponse, Group group) {
