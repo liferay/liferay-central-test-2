@@ -265,10 +265,8 @@ public class ListServiceTrackerMapTest {
 	protected ServiceTrackerMap<String, List<TrackedOne>>
 		createServiceTrackerMap() {
 
-		_serviceTrackerMap = ServiceTrackerCollections.multiValueMap(
+		_serviceTrackerMap = ServiceTrackerCollections.openMultiValueMap(
 			TrackedOne.class, "target");
-
-		_serviceTrackerMap.open();
 
 		return _serviceTrackerMap;
 	}
