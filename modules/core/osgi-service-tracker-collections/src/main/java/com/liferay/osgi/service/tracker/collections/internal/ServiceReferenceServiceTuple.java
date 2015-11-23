@@ -50,7 +50,7 @@ public class ServiceReferenceServiceTuple<S, T>
 		ServiceReferenceServiceTuple<S, T> serviceReferenceServiceTuple =
 			(ServiceReferenceServiceTuple<S, T>)obj;
 
-		return getServiceReference().equals(
+		return _serviceReference.equals(
 			serviceReferenceServiceTuple.getServiceReference());
 	}
 
@@ -64,7 +64,7 @@ public class ServiceReferenceServiceTuple<S, T>
 
 	@Override
 	public int hashCode() {
-		return getServiceReference().hashCode();
+		return _serviceReference.hashCode();
 	}
 
 	private final T _service;
