@@ -14,8 +14,8 @@
 
 package com.liferay.osgi.service.tracker.collections.internal.list;
 
-import com.liferay.osgi.service.tracker.collections.internal.common.ServiceReferenceServiceTuple;
-import com.liferay.osgi.service.tracker.collections.internal.common.ServiceReferenceServiceTupleComparator;
+import com.liferay.osgi.service.tracker.collections.internal.ServiceReferenceServiceTuple;
+import com.liferay.osgi.service.tracker.collections.internal.ServiceReferenceServiceTupleComparator;
 import com.liferay.osgi.service.tracker.collections.list.ServiceTrackerList;
 
 import java.util.Collections;
