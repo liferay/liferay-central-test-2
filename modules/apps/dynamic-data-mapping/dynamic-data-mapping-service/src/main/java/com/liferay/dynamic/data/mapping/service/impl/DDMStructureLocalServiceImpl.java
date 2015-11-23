@@ -1656,14 +1656,9 @@ public class DDMStructureLocalServiceImpl
 			getDDMFormFieldsNames(ddmForm));
 
 		if (!commonDDMFormFieldNames.isEmpty()) {
-			StringBundler sb = new StringBundler(4);
-
-			sb.append("Duplicate DDMFormField names: ");
-			sb.append(StringPool.OPEN_CURLY_BRACE);
-			sb.append(StringUtil.merge(commonDDMFormFieldNames));
-			sb.append(StringPool.CLOSE_CURLY_BRACE);
-
-			throw new StructureDuplicateElementException(sb.toString());
+			throw new StructureDuplicateElementException(
+				"Duplicate DDM form field names: " +
+					StringUtil.merge(commonDDMFormFieldNames));
 		}
 	}
 
