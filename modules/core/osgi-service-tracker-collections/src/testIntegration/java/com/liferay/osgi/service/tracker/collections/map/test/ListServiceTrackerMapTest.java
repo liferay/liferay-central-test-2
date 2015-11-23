@@ -36,13 +36,16 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.arquillian.liferay.deploymentscenario.annotations.BndFile;
+
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.test.api.ArquillianResource;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleException;
