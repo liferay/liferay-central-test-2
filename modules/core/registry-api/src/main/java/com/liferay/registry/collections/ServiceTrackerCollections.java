@@ -196,6 +196,140 @@ public class ServiceTrackerCollections {
 			clazz, propertyKey, serviceTrackerCustomizer);
 	}
 
+	public static <S> ServiceTrackerList<S> openList(Class<S> clazz) {
+		ServiceTrackerList<S> serviceTrackerList = list(clazz);
+
+		serviceTrackerList.open();
+
+		return serviceTrackerList;
+	}
+
+	public static <S> ServiceTrackerList<S> openList(
+		Class<S> clazz, Filter filter) {
+
+		ServiceTrackerList<S> serviceTrackerList = list(clazz, filter);
+
+		serviceTrackerList.open();
+
+		return serviceTrackerList;
+	}
+
+	public static <S> ServiceTrackerList<S> openList(
+		Class<S> clazz, Filter filter, Map<String, Object> properties) {
+
+		ServiceTrackerList<S> serviceTrackerList = list(
+			clazz, filter, properties);
+
+		serviceTrackerList.open();
+
+		return serviceTrackerList;
+	}
+
+	public static <S> ServiceTrackerList<S> openList(
+		Class<S> clazz, Filter filter,
+		ServiceTrackerCustomizer<S, S> serviceTrackerCustomizer) {
+
+		ServiceTrackerList<S> serviceTrackerList = list(
+			clazz, filter, serviceTrackerCustomizer);
+
+		serviceTrackerList.open();
+
+		return serviceTrackerList;
+	}
+
+	public static <S> ServiceTrackerList<S> openList(
+		Class<S> clazz, Filter filter,
+		ServiceTrackerCustomizer<S, S> serviceTrackerCustomizer,
+		Map<String, Object> properties) {
+
+		ServiceTrackerList<S> serviceTrackerList = list(
+			clazz, filter, serviceTrackerCustomizer, properties);
+
+		serviceTrackerList.open();
+
+		return serviceTrackerList;
+	}
+
+	public static <S> ServiceTrackerList<S> openList(
+		Class<S> clazz, Map<String, Object> properties) {
+
+		ServiceTrackerList<S> serviceTrackerList = list(clazz, properties);
+
+		serviceTrackerList.open();
+
+		return serviceTrackerList;
+	}
+
+	public static <S> ServiceTrackerList<S> openList(
+		Class<S> clazz,
+		ServiceTrackerCustomizer<S, S> serviceTrackerCustomizer) {
+
+		ServiceTrackerList<S> serviceTrackerList = list(
+			clazz, serviceTrackerCustomizer);
+
+		serviceTrackerList.open();
+
+		return serviceTrackerList;
+	}
+
+	public static <S> ServiceTrackerList<S> openList(
+		Class<S> clazz, ServiceTrackerCustomizer<S, S> serviceTrackerCustomizer,
+		Map<String, Object> properties) {
+
+		ServiceTrackerList<S> serviceTrackerList = list(
+			clazz, serviceTrackerCustomizer, properties);
+
+		serviceTrackerList.open();
+
+		return serviceTrackerList;
+	}
+
+	public static <S> ServiceTrackerList<S> openList(
+		Class<S> clazz, String filterString) {
+
+		ServiceTrackerList<S> serviceTrackerList = list(clazz, filterString);
+
+		serviceTrackerList.open();
+
+		return serviceTrackerList;
+	}
+
+	public static <S> ServiceTrackerList<S> openList(
+		Class<S> clazz, String filterString, Map<String, Object> properties) {
+
+		ServiceTrackerList<S> serviceTrackerList = list(
+			clazz, filterString, properties);
+
+		serviceTrackerList.open();
+
+		return serviceTrackerList;
+	}
+
+	public static <S> ServiceTrackerList<S> openList(
+		Class<S> clazz, String filterString,
+		ServiceTrackerCustomizer<S, S> serviceTrackerCustomizer) {
+
+		ServiceTrackerList<S> serviceTrackerList = list(
+			clazz, filterString, serviceTrackerCustomizer);
+
+		serviceTrackerList.open();
+
+		return serviceTrackerList;
+	}
+
+	public static <S> ServiceTrackerList<S> openList(
+		Class<S> clazz, String filterString,
+		ServiceTrackerCustomizer<S, S> serviceTrackerCustomizer,
+		Map<String, Object> properties) {
+
+		ServiceTrackerList<S> serviceTrackerList = list(
+			clazz, filterString, serviceTrackerCustomizer, properties);
+
+		serviceTrackerList.open();
+
+		return serviceTrackerList;
+	}
+
 	public static <S> ServiceTrackerMap<String, S> singleValueMap(
 		Class<S> clazz, String propertyKey) {
 
