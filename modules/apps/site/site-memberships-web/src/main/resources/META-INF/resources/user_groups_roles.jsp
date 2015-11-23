@@ -30,7 +30,7 @@ long userGroupId = ParamUtil.getLong(request, "userGroupId");
 
 UserGroup userGroup = UserGroupLocalServiceUtil.getUserGroup(userGroupId);
 
-String displayStyle = ParamUtil.getString(request, "displayStyle", "descriptive");
+String displayStyle = ParamUtil.getString(request, "displayStyle", "list");
 
 PortletURL portletURL = (PortletURL)request.getAttribute("edit_site_assignments.jsp-portletURL");
 
