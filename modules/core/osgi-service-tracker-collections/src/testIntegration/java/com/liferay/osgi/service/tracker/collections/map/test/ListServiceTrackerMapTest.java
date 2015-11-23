@@ -14,7 +14,7 @@
 
 package com.liferay.osgi.service.tracker.collections.map.test;
 
-import com.liferay.osgi.service.tracker.collections.internal.common.DefaultServiceTrackerCustomizer;
+import com.liferay.osgi.service.tracker.collections.internal.DefaultServiceTrackerCustomizer;
 import com.liferay.osgi.service.tracker.collections.internal.map.BundleContextWrapper;
 import com.liferay.osgi.service.tracker.collections.internal.map.TrackedOne;
 import com.liferay.osgi.service.tracker.collections.map.PropertyServiceReferenceComparator;
@@ -36,16 +36,13 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.arquillian.liferay.deploymentscenario.annotations.BndFile;
-
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.test.api.ArquillianResource;
-
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleException;

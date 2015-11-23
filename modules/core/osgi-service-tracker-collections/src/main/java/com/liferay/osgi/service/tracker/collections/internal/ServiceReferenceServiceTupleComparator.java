@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.osgi.service.tracker.collections.internal.common;
+package com.liferay.osgi.service.tracker.collections.internal;
 
 import java.util.Comparator;
 
