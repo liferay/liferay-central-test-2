@@ -195,20 +195,12 @@ public class MediaWikiImporter implements WikiImporter {
 			String parentTitle = readParentTitle(content);
 			String redirectTitle = readRedirectTitle(content);
 
-			ServiceContext serviceContext = new ServiceContext();
-
-			serviceContext.setAddGroupPermissions(true);
-			serviceContext.setAddGuestPermissions(true);
-			serviceContext.setAssetTagNames(
-				readAssetTagNames(userId, node, content));
-
 			String format = FORMAT_MEDIAWIKI;
 
 			Collection<String> supportedFormats = WikiUtil.getFormats();
 
 			if (Validator.isNotNull(redirectTitle)) {
 				content = getCreoleRedirectContent(redirectTitle);
-
 				format = FORMAT_CREOLE;
 			}
 			else if (supportedFormats.contains(FORMAT_MEDIAWIKI) &&
@@ -220,9 +212,15 @@ public class MediaWikiImporter implements WikiImporter {
 			}
 			else {
 				content = translateMediaWikiToCreole(content, strictImportMode);
-
 				format = FORMAT_CREOLE;
 			}
+
+			ServiceContext serviceContext = new ServiceContext();
+
+			serviceContext.setAddGroupPermissions(true);
+			serviceContext.setAddGuestPermissions(true);
+			serviceContext.setAssetTagNames(
+				readAssetTagNames(userId, node, content));
 
 			WikiPage page = null;
 
