@@ -17,27 +17,16 @@
 <%@ include file="/init.jsp" %>
 
 <%
-String tabs1 = (String)request.getAttribute("edit_site_assignments.jsp-tabs1");
-String tabs2 = (String)request.getAttribute("edit_site_assignments.jsp-tabs2");
-
-int cur = (Integer)request.getAttribute("edit_site_assignments.jsp-cur");
-
-String redirect = (String)request.getAttribute("edit_site_assignments.jsp-redirect");
-
-Group group = (Group)request.getAttribute("edit_site_assignments.jsp-group");
-
-long userGroupId = ParamUtil.getLong(request, "userGroupId");
-
-UserGroup userGroup = UserGroupLocalServiceUtil.getUserGroup(userGroupId);
+UserGroup userGroup = siteMembershipsDisplayContext.getUserGroup();
 
 String displayStyle = ParamUtil.getString(request, "displayStyle", "list");
 
-PortletURL portletURL = (PortletURL)request.getAttribute("edit_site_assignments.jsp-portletURL");
+PortletURL portletURL = siteMembershipsDisplayContext.getPortletURL();
 
-portletURL.setParameter("userGroupId", String.valueOf(userGroupId));
+portletURL.setParameter("userGroupId", String.valueOf(siteMembershipsDisplayContext.getUserGroupId()));
 
 portletDisplay.setShowBackIcon(true);
-portletDisplay.setURLBack(redirect);
+portletDisplay.setURLBack(siteMembershipsDisplayContext.getRedirect());
 
 renderResponse.setTitle(LanguageUtil.get(request, "edit-site-roles-for-user-group") + ": " + HtmlUtil.escape(userGroup.getName()));
 %>
@@ -75,23 +64,23 @@ renderResponse.setTitle(LanguageUtil.get(request, "edit-site-roles-for-user-grou
 </liferay-frontend:management-bar>
 
 <aui:form action="<%= portletURL.toString() %>" cssClass="container-fluid-1280" name="fm">
-	<aui:input name="tabs1" type="hidden" value="<%= tabs1 %>" />
-	<aui:input name="tabs2" type="hidden" value="<%= tabs2 %>" />
+	<aui:input name="tabs1" type="hidden" value="<%= siteMembershipsDisplayContext.getTabs1() %>" />
+	<aui:input name="tabs2" type="hidden" value="<%= siteMembershipsDisplayContext.getTabs2() %>" />
 	<aui:input name="assignmentsRedirect" type="hidden" />
-	<aui:input name="groupId" type="hidden" value="<%= String.valueOf(group.getGroupId()) %>" />
-	<aui:input name="userGroupId" type="hidden" value="<%= userGroupId %>" />
+	<aui:input name="groupId" type="hidden" value="<%= String.valueOf(siteMembershipsDisplayContext.getGroupId()) %>" />
+	<aui:input name="userGroupId" type="hidden" value="<%= siteMembershipsDisplayContext.getUserGroupId() %>" />
 	<aui:input name="addRoleIds" type="hidden" />
 	<aui:input name="removeRoleIds" type="hidden" />
 
 	<%
 	PortletURL updateRoleAssignmentsURL = renderResponse.createRenderURL();
 
-	updateRoleAssignmentsURL.setParameter("tabs1", tabs1);
-	updateRoleAssignmentsURL.setParameter("tabs2", tabs2);
-	updateRoleAssignmentsURL.setParameter("cur", String.valueOf(cur));
-	updateRoleAssignmentsURL.setParameter("redirect", redirect);
-	updateRoleAssignmentsURL.setParameter("userGroupId", String.valueOf(userGroupId));
-	updateRoleAssignmentsURL.setParameter("groupId", String.valueOf(group.getGroupId()));
+	updateRoleAssignmentsURL.setParameter("tabs1", siteMembershipsDisplayContext.getTabs1());
+	updateRoleAssignmentsURL.setParameter("tabs2", siteMembershipsDisplayContext.getTabs2());
+	updateRoleAssignmentsURL.setParameter("cur", String.valueOf(siteMembershipsDisplayContext.getCur()));
+	updateRoleAssignmentsURL.setParameter("redirect", siteMembershipsDisplayContext.getRedirect());
+	updateRoleAssignmentsURL.setParameter("userGroupId", String.valueOf(siteMembershipsDisplayContext.getUserGroupId()));
+	updateRoleAssignmentsURL.setParameter("groupId", String.valueOf(siteMembershipsDisplayContext.getGroupId()));
 
 	String taglibOnClick = renderResponse.getNamespace() + "updateUserGroupGroupRole('" + updateRoleAssignmentsURL.toString() + "');";
 	%>
@@ -102,7 +91,7 @@ renderResponse.setTitle(LanguageUtil.get(request, "edit-site-roles-for-user-grou
 
 	<liferay-ui:search-container
 		id="userGroupGroupRoleRole"
-		rowChecker="<%= new UserGroupGroupRoleRoleChecker(renderResponse, userGroup, group) %>"
+		rowChecker="<%= new UserGroupGroupRoleRoleChecker(renderResponse, userGroup, siteMembershipsDisplayContext.getGroup()) %>"
 		searchContainer="<%= new RoleSearch(renderRequest, portletURL) %>"
 	>
 		<liferay-ui:search-container-results>
@@ -112,7 +101,7 @@ renderResponse.setTitle(LanguageUtil.get(request, "edit-site-roles-for-user-grou
 
 			List<Role> roles = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getKeywords(), new Integer[] {RoleConstants.TYPE_SITE}, QueryUtil.ALL_POS, QueryUtil.ALL_POS, searchContainer.getOrderByComparator());
 
-			roles = UsersAdminUtil.filterGroupRoles(permissionChecker, group.getGroupId(), roles);
+			roles = UsersAdminUtil.filterGroupRoles(permissionChecker, siteMembershipsDisplayContext.getGroupId(), roles);
 
 			total = roles.size();
 

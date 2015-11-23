@@ -14,10 +14,9 @@
  */
 --%>
 
-<liferay-ui:search-container-row-parameter
-	name="group"
-	value="<%= group %>"
-/>
+<%
+Group group = siteMembershipsDisplayContext.getGroup();
+%>
 
 <liferay-util:buffer var="name">
 	<%= organization.getName() %>

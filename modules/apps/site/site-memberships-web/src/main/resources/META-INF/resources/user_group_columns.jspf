@@ -21,15 +21,10 @@ userParams.put("usersUserGroups", Long.valueOf(userGroup.getUserGroupId()));
 
 int usersCount = UserLocalServiceUtil.searchCount(company.getCompanyId(), StringPool.BLANK, WorkflowConstants.STATUS_ANY, userParams);
 
-List<UserGroupGroupRole> userGroupGroupRoles = UserGroupGroupRoleLocalServiceUtil.getUserGroupGroupRoles(userGroup.getUserGroupId(), group.getGroupId());
+List<UserGroupGroupRole> userGroupGroupRoles = UserGroupGroupRoleLocalServiceUtil.getUserGroupGroupRoles(userGroup.getUserGroupId(), siteMembershipsDisplayContext.getGroupId());
 
 String userGroupGroupRolesString = ListUtil.toString(userGroupGroupRoles, UsersAdmin.USER_GROUP_GROUP_ROLE_TITLE_ACCESSOR, StringPool.COMMA_AND_SPACE);
 %>
-
-<liferay-ui:search-container-row-parameter
-	name="group"
-	value="<%= group %>"
-/>
 
 <c:choose>
 	<c:when test='<%= displayStyle.equals("icon") %>'>

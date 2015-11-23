@@ -17,13 +17,7 @@
 <%@ include file="/init.jsp" %>
 
 <%
-int cur = (Integer)request.getAttribute("edit_site_assignments.jsp-cur");
-
-Group group = (Group)request.getAttribute("edit_site_assignments.jsp-group");
-
 String displayStyle = ParamUtil.getString(request, "displayStyle", "list");
-
-PortletURL portletURL = (PortletURL)request.getAttribute("edit_site_assignments.jsp-portletURL");
 
 PortletURL viewUserGroupsURL = renderResponse.createRenderURL();
 
@@ -31,18 +25,18 @@ viewUserGroupsURL.setParameter("mvcPath", "/view.jsp");
 viewUserGroupsURL.setParameter("tabs1", "user-groups");
 viewUserGroupsURL.setParameter("tabs2", "available");
 viewUserGroupsURL.setParameter("redirect", currentURL);
-viewUserGroupsURL.setParameter("groupId", String.valueOf(group.getGroupId()));
+viewUserGroupsURL.setParameter("groupId", String.valueOf(siteMembershipsDisplayContext.getGroupId()));
 
-UserGroupGroupChecker rowChecker = new UserGroupGroupChecker(renderResponse, group);
+UserGroupGroupChecker rowChecker = new UserGroupGroupChecker(renderResponse, siteMembershipsDisplayContext.getGroup());
 
 UserGroupSearch userGroupSearch = new UserGroupSearch(renderRequest, viewUserGroupsURL);
 %>
 
-<aui:form action="<%= portletURL.toString() %>" cssClass="container-fluid-1280" method="post" name="fm">
+<aui:form action="<%= viewUserGroupsURL.toString() %>" cssClass="container-fluid-1280" method="post" name="fm">
 	<aui:input name="tabs1" type="hidden" value="user-groups" />
 	<aui:input name="tabs2" type="hidden" value="available" />
 	<aui:input name="assignmentsRedirect" type="hidden" />
-	<aui:input name="groupId" type="hidden" value="<%= String.valueOf(group.getGroupId()) %>" />
+	<aui:input name="groupId" type="hidden" value="<%= String.valueOf(siteMembershipsDisplayContext.getGroupId()) %>" />
 	<aui:input name="addUserGroupIds" type="hidden" />
 	<aui:input name="removeUserGroupIds" type="hidden" />
 
@@ -88,11 +82,13 @@ UserGroupSearch userGroupSearch = new UserGroupSearch(renderRequest, viewUserGro
 
 		<liferay-ui:search-iterator displayStyle="<%= displayStyle %>" markupView="lexicon" />
 
-		<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.ASSIGN_MEMBERS) %>">
+		<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, siteMembershipsDisplayContext.getGroupId(), ActionKeys.ASSIGN_MEMBERS) %>">
 
 			<%
+			PortletURL portletURL = siteMembershipsDisplayContext.getPortletURL();
+
 			portletURL.setParameter("tabs2", "current");
-			portletURL.setParameter("cur", String.valueOf(cur));
+			portletURL.setParameter("cur", String.valueOf(siteMembershipsDisplayContext.getCur()));
 
 			String taglibOnClick = renderResponse.getNamespace() + "updateGroupUserGroups('" + portletURL.toString() + "');";
 			%>
