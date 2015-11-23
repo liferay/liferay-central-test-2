@@ -17,13 +17,13 @@
 <%@ include file="/init.jsp" %>
 
 <%
-ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
-
-DDMTemplate template = (DDMTemplate)row.getObject();
-
 long classNameId = ParamUtil.getLong(request, "classNameId");
 long classPK = ParamUtil.getLong(request, "classPK");
 long resourceClassNameId = ParamUtil.getLong(request, "resourceClassNameId");
+
+ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
+
+DDMTemplate template = (DDMTemplate)row.getObject();
 %>
 
 <liferay-ui:icon-menu direction="down" icon="<%= StringPool.BLANK %>" markupView="lexicon" message="<%= StringPool.BLANK %>" showExpanded="<%= false %>" showWhenSingleIcon="<%= false %>">
