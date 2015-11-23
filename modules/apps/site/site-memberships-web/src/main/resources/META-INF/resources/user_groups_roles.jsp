@@ -25,62 +25,62 @@ PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("mvcPath", "/user_groups_roles.jsp");
 portletURL.setParameter("userGroupId", String.valueOf(siteMembershipsDisplayContext.getUserGroupId()));
+
+RoleSearch roleSearch = new RoleSearch(renderRequest, PortletURLUtil.clone(portletURL, renderResponse));
+
+RoleSearchTerms searchTerms = (RoleSearchTerms)roleSearch.getSearchTerms();
+
+List<Role> roles = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getKeywords(), new Integer[] {RoleConstants.TYPE_SITE}, QueryUtil.ALL_POS, QueryUtil.ALL_POS, roleSearch.getOrderByComparator());
+
+roles = UsersAdminUtil.filterGroupRoles(permissionChecker, siteMembershipsDisplayContext.getGroupId(), roles);
+
+int rolesCount = roles.size();
+
+roleSearch.setTotal(rolesCount);
+
+roles = ListUtil.subList(roles, roleSearch.getStart(), roleSearch.getEnd());
+
+roleSearch.setResults(roles);
 %>
 
 <aui:nav-bar cssClass="collapse-basic-search" markupView="lexicon">
-	<aui:nav-bar-search>
-		<aui:form action="<%= portletURL.toString() %>" name="searchFm">
-			<liferay-ui:input-search autoFocus="<%= windowState.equals(WindowState.MAXIMIZED) %>" markupView="lexicon" />
-		</aui:form>
-	</aui:nav-bar-search>
+	<c:if test="<%= rolesCount > 0 %>">
+		<aui:nav-bar-search>
+			<aui:form action="<%= portletURL.toString() %>" name="searchFm">
+				<liferay-ui:input-search autoFocus="<%= windowState.equals(WindowState.MAXIMIZED) %>" markupView="lexicon" />
+			</aui:form>
+		</aui:nav-bar-search>
+	</c:if>
 </aui:nav-bar>
 
-<liferay-frontend:management-bar
-	includeCheckBox="<%= true %>"
-	searchContainerId="userGroupGroupRoleRole"
->
-	<liferay-frontend:management-bar-filters>
-		<liferay-frontend:management-bar-navigation
-			navigationKeys='<%= new String[] {"all"} %>'
-			portletURL="<%= PortletURLUtil.clone(portletURL, renderResponse) %>"
-		/>
-	</liferay-frontend:management-bar-filters>
+<c:if test="<%= rolesCount > 0 %>">
+	<liferay-frontend:management-bar
+		includeCheckBox="<%= true %>"
+		searchContainerId="userGroupGroupRoleRole"
+	>
+		<liferay-frontend:management-bar-filters>
+			<liferay-frontend:management-bar-navigation
+				navigationKeys='<%= new String[] {"all"} %>'
+				portletURL="<%= PortletURLUtil.clone(portletURL, renderResponse) %>"
+			/>
+		</liferay-frontend:management-bar-filters>
 
-	<liferay-frontend:management-bar-buttons>
-		<liferay-frontend:management-bar-display-buttons
-			displayViews='<%= new String[] {"list"} %>'
-			portletURL="<%= PortletURLUtil.clone(portletURL, renderResponse) %>"
-			selectedDisplayStyle="<%= displayStyle %>"
-		/>
-	</liferay-frontend:management-bar-buttons>
-</liferay-frontend:management-bar>
+		<liferay-frontend:management-bar-buttons>
+			<liferay-frontend:management-bar-display-buttons
+				displayViews='<%= new String[] {"list"} %>'
+				portletURL="<%= PortletURLUtil.clone(portletURL, renderResponse) %>"
+				selectedDisplayStyle="<%= displayStyle %>"
+			/>
+		</liferay-frontend:management-bar-buttons>
+	</liferay-frontend:management-bar>
+</c:if>
 
 <aui:form cssClass="container-fluid-1280" name="fm">
 	<liferay-ui:search-container
 		id="userGroupGroupRoleRole"
 		rowChecker="<%= new UserGroupGroupRoleRoleChecker(renderResponse, siteMembershipsDisplayContext.getUserGroup(), siteMembershipsDisplayContext.getGroup()) %>"
-		searchContainer="<%= new RoleSearch(renderRequest, portletURL) %>"
+		searchContainer="<%= roleSearch %>"
 	>
-		<liferay-ui:search-container-results>
-
-			<%
-			RoleSearchTerms searchTerms = (RoleSearchTerms)searchContainer.getSearchTerms();
-
-			List<Role> roles = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getKeywords(), new Integer[] {RoleConstants.TYPE_SITE}, QueryUtil.ALL_POS, QueryUtil.ALL_POS, searchContainer.getOrderByComparator());
-
-			roles = UsersAdminUtil.filterGroupRoles(permissionChecker, siteMembershipsDisplayContext.getGroupId(), roles);
-
-			total = roles.size();
-
-			searchContainer.setTotal(total);
-
-			results = ListUtil.subList(roles, searchContainer.getStart(), searchContainer.getEnd());
-
-			searchContainer.setResults(results);
-			%>
-
-		</liferay-ui:search-container-results>
-
 		<liferay-ui:search-container-row
 			className="com.liferay.portal.model.Role"
 			cssClass="selected"
