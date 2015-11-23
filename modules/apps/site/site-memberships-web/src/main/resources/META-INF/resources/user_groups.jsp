@@ -17,8 +17,6 @@
 <%@ include file="/init.jsp" %>
 
 <%
-String tabs1 = (String)request.getAttribute("edit_site_assignments.jsp-tabs1");
-
 Group group = (Group)request.getAttribute("edit_site_assignments.jsp-group");
 
 String displayStyle = ParamUtil.getString(request, "displayStyle", "list");
@@ -56,7 +54,7 @@ List<UserGroup> userGroups = UserGroupLocalServiceUtil.search(company.getCompany
 userGroupSearch.setResults(userGroups);
 %>
 
-<c:if test='<%= !tabs1.equals("summary") && (userGroupsCount > 0) %>'>
+<c:if test="<%= userGroupsCount > 0 %>">
 	<liferay-frontend:management-bar
 		checkBoxContainerId="userGroupsSearchContainer"
 		includeCheckBox="<%= true %>"
@@ -118,53 +116,38 @@ userGroupSearch.setResults(userGroups);
 			<%@ include file="/user_group_columns.jspf" %>
 		</liferay-ui:search-container-row>
 
-		<c:choose>
-			<c:when test='<%= tabs1.equals("summary") && (total > 0) %>'>
-				<liferay-ui:panel collapsible="<%= true %>" extended="<%= false %>" persistState="<%= true %>" title='<%= LanguageUtil.format(request, (total > 1) ? "x-user-groups" : "x-user-group", total, false) %>'>
-					<liferay-ui:search-iterator markupView="lexicon" paginate="<%= false %>" />
-
-					<c:if test="<%= total > userGroupSearch.getDelta() %>">
-						<a href="<%= viewUserGroupsURL %>"><liferay-ui:message key="view-more" /> &raquo;</a>
-					</c:if>
-				</liferay-ui:panel>
-			</c:when>
-			<c:when test='<%= !tabs1.equals("summary") %>'>
-				<liferay-ui:search-iterator displayStyle="<%= displayStyle %>" markupView="lexicon" />
-
-				<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.ASSIGN_MEMBERS) %>">
-
-					<%
-					viewUserGroupsURL.setParameter("tabs2", "available");
-					%>
-
-					<liferay-frontend:add-menu>
-						<liferay-frontend:add-menu-item title='<%= LanguageUtil.get(request, "assign-user-groups") %>' url="<%= viewUserGroupsURL.toString() %>" />
-					</liferay-frontend:add-menu>
-				</c:if>
-			</c:when>
-		</c:choose>
+		<liferay-ui:search-iterator displayStyle="<%= displayStyle %>" markupView="lexicon" />
 	</liferay-ui:search-container>
 </aui:form>
 
-<c:if test='<%= !tabs1.equals("summary") %>'>
-	<aui:script sandbox="<%= true %>">
-		var Util = Liferay.Util;
+<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.ASSIGN_MEMBERS) %>">
 
-		var form = $(document.<portlet:namespace />fm);
+	<%
+	viewUserGroupsURL.setParameter("tabs2", "available");
+	%>
 
-		$('#<portlet:namespace />deleteSelectedUserGroups').on(
-			'click',
-			function() {
-				if (confirm('<liferay-ui:message key="are-you-sure-you-want-to-delete-this" />')) {
-					<portlet:actionURL name="editGroupUserGroups" var="deleteUserGroupsURL">
-						<portlet:param name="redirect" value="<%= currentURL %>" />
-					</portlet:actionURL>
-
-					form.fm('removeUserGroupIds').val(Util.listCheckedExcept(form, '<portlet:namespace />allRowIds'));
-
-					submitForm(form, '<%= deleteUserGroupsURL %>');
-				}
-			}
-		);
-	</aui:script>
+	<liferay-frontend:add-menu>
+		<liferay-frontend:add-menu-item title='<%= LanguageUtil.get(request, "assign-user-groups") %>' url="<%= viewUserGroupsURL.toString() %>" />
+	</liferay-frontend:add-menu>
 </c:if>
+
+<aui:script sandbox="<%= true %>">
+	var Util = Liferay.Util;
+
+	var form = $(document.<portlet:namespace />fm);
+
+	$('#<portlet:namespace />deleteSelectedUserGroups').on(
+		'click',
+		function() {
+			if (confirm('<liferay-ui:message key="are-you-sure-you-want-to-delete-this" />')) {
+				<portlet:actionURL name="editGroupUserGroups" var="deleteUserGroupsURL">
+					<portlet:param name="redirect" value="<%= currentURL %>" />
+				</portlet:actionURL>
+
+				form.fm('removeUserGroupIds').val(Util.listCheckedExcept(form, '<portlet:namespace />allRowIds'));
+
+				submitForm(form, '<%= deleteUserGroupsURL %>');
+			}
+		}
+	);
+</aui:script>
