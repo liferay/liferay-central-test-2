@@ -91,8 +91,11 @@ userSearch.setResults(users);
 	<aui:input name="tabs2" type="hidden" value="current" />
 	<aui:input name="assignmentsRedirect" type="hidden" />
 	<aui:input name="groupId" type="hidden" value="<%= String.valueOf(siteMembershipsDisplayContext.getGroupId()) %>" />
+	<aui:input name="p_u_i_d" type="hidden" />
 	<aui:input name="addUserIds" type="hidden" />
 	<aui:input name="removeUserIds" type="hidden" />
+	<aui:input name="addRoleIds" type="hidden" />
+	<aui:input name="removeRoleIds" type="hidden" />
 
 	<liferay-ui:membership-policy-error />
 
@@ -134,7 +137,7 @@ userSearch.setResults(users);
 	</liferay-frontend:add-menu>
 </c:if>
 
-<aui:script sandbox="<%= true %>">
+<aui:script use="liferay-item-selector-dialog">
 	var Util = Liferay.Util;
 
 	var form = $(document.<portlet:namespace />fm);
@@ -151,6 +154,39 @@ userSearch.setResults(users);
 
 				submitForm(form, '<%= deleteUsersURL %>');
 			}
+		}
+	);
+
+	form.on(
+		'click',
+		'.assign-site-roles a',
+		function(event) {
+			event.preventDefault();
+
+			var currentTarget = $(event.currentTarget);
+
+			var itemSelectorDialog = new A.LiferayItemSelectorDialog(
+				{
+					eventName: '<portlet:namespace />selectUsersRoles',
+					on: {
+						selectedItemChange: function(event) {
+							var selectedItem = event.newVal;
+
+							if (selectedItem) {
+								form.fm('addRoleIds').val(selectedItem.addRoleIds);
+								form.fm('removeRoleIds').val(selectedItem.removeRoleIds);
+								form.fm('p_u_i_d').val(selectedItem.selUserId);
+
+								submitForm(form, '<portlet:actionURL name="editUserGroupRole" />');
+							}
+						}
+					},
+					title: '<liferay-ui:message key="assign-site-roles" />',
+					url: currentTarget.data('href')
+				}
+			);
+
+			itemSelectorDialog.open();
 		}
 	);
 </aui:script>

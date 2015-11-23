@@ -21,66 +21,61 @@ String tabs1 = siteMembershipsDisplayContext.getTabs1();
 String tabs2 = siteMembershipsDisplayContext.getTabs2();
 %>
 
-<c:if test="<%= (siteMembershipsDisplayContext.getSelUser() == null) && (siteMembershipsDisplayContext.getUserGroupId() == 0) %>">
-	<c:if test='<%= tabs2.equals("available") %>'>
-		<liferay-ui:header
-			backURL="<%= siteMembershipsDisplayContext.getRedirect() %>"
-			escapeXml="<%= false %>"
-			localizeTitle="<%= false %>"
-			title='<%= LanguageUtil.get(request, "add-members") + ": " + LanguageUtil.get(request, tabs1) %>'
-		/>
-	</c:if>
+<c:if test='<%= tabs2.equals("available") %>'>
+	<liferay-ui:header
+		backURL="<%= siteMembershipsDisplayContext.getRedirect() %>"
+		escapeXml="<%= false %>"
+		localizeTitle="<%= false %>"
+		title='<%= LanguageUtil.get(request, "add-members") + ": " + LanguageUtil.get(request, tabs1) %>'
+	/>
+</c:if>
 
-	<c:if test='<%= tabs2.equals("current") %>'>
-		<aui:nav-bar cssClass="collapse-basic-search" markupView="lexicon">
-			<aui:nav cssClass="navbar-nav">
+<c:if test='<%= tabs2.equals("current") %>'>
+	<aui:nav-bar cssClass="collapse-basic-search" markupView="lexicon">
+		<aui:nav cssClass="navbar-nav">
 
-				<%
-				PortletURL usersURL = siteMembershipsDisplayContext.getPortletURL();
+			<%
+			PortletURL usersURL = siteMembershipsDisplayContext.getPortletURL();
 
-				usersURL.setParameter("tabs1", "users");
-				%>
+			usersURL.setParameter("tabs1", "users");
+			%>
 
-				<aui:nav-item href="<%= usersURL.toString() %>" label="users" selected='<%= tabs1.equals("users") %>' />
+			<aui:nav-item href="<%= usersURL.toString() %>" label="users" selected='<%= tabs1.equals("users") %>' />
 
-				<%
-				PortletURL organizationsURL = siteMembershipsDisplayContext.getPortletURL();
+			<%
+			PortletURL organizationsURL = siteMembershipsDisplayContext.getPortletURL();
 
-				organizationsURL.setParameter("tabs1", "organizations");
-				%>
+			organizationsURL.setParameter("tabs1", "organizations");
+			%>
 
-				<aui:nav-item href="<%= organizationsURL.toString() %>" label="organizations" selected='<%= tabs1.equals("organizations") %>' />
+			<aui:nav-item href="<%= organizationsURL.toString() %>" label="organizations" selected='<%= tabs1.equals("organizations") %>' />
 
-				<%
-				PortletURL userGroupsURL = siteMembershipsDisplayContext.getPortletURL();
+			<%
+			PortletURL userGroupsURL = siteMembershipsDisplayContext.getPortletURL();
 
-				userGroupsURL.setParameter("tabs1", "user-groups");
-				%>
+			userGroupsURL.setParameter("tabs1", "user-groups");
+			%>
 
-				<aui:nav-item href="<%= userGroupsURL.toString() %>" label="user-groups" selected='<%= tabs1.equals("user-groups") %>' />
-			</aui:nav>
+			<aui:nav-item href="<%= userGroupsURL.toString() %>" label="user-groups" selected='<%= tabs1.equals("user-groups") %>' />
+		</aui:nav>
 
-			<aui:nav-bar-search>
-				<aui:form action="<%= siteMembershipsDisplayContext.getPortletURL() %>" name="searchFm">
-					<liferay-ui:input-search autoFocus="<%= windowState.equals(WindowState.MAXIMIZED) %>" markupView="lexicon" />
-				</aui:form>
-			</aui:nav-bar-search>
-		</aui:nav-bar>
-	</c:if>
+		<aui:nav-bar-search>
+			<aui:form action="<%= siteMembershipsDisplayContext.getPortletURL() %>" name="searchFm">
+				<liferay-ui:input-search autoFocus="<%= windowState.equals(WindowState.MAXIMIZED) %>" markupView="lexicon" />
+			</aui:form>
+		</aui:nav-bar-search>
+	</aui:nav-bar>
 </c:if>
 
 <c:choose>
 	<c:when test='<%= tabs1.equals("users") %>'>
 		<c:choose>
-			<c:when test='<%= (siteMembershipsDisplayContext.getSelUser() == null) && tabs2.equals("current") %>'>
+			<c:when test='<%= tabs2.equals("current") %>'>
 				<liferay-util:include page="/users.jsp" servletContext="<%= application %>" />
 			</c:when>
-			<c:when test='<%= (siteMembershipsDisplayContext.getSelUser() == null) && tabs2.equals("available") %>'>
+			<c:when test='<%= tabs2.equals("available") %>'>
 				<liferay-util:include page="/select_users.jsp" servletContext="<%= application %>" />
 			</c:when>
-			<c:otherwise>
-				<liferay-util:include page="/users_roles.jsp" servletContext="<%= application %>" />
-			</c:otherwise>
 		</c:choose>
 	</c:when>
 	<c:when test='<%= tabs1.equals("organizations") %>'>
@@ -95,15 +90,12 @@ String tabs2 = siteMembershipsDisplayContext.getTabs2();
 	</c:when>
 	<c:when test='<%= tabs1.equals("user-groups") %>'>
 		<c:choose>
-			<c:when test='<%= (siteMembershipsDisplayContext.getUserGroupId() == 0) && tabs2.equals("current") %>'>
+			<c:when test='<%= tabs2.equals("current") %>'>
 				<liferay-util:include page="/user_groups.jsp" servletContext="<%= application %>" />
 			</c:when>
-			<c:when test='<%= (siteMembershipsDisplayContext.getUserGroupId() == 0) && tabs2.equals("available") %>'>
+			<c:when test='<%= tabs2.equals("available") %>'>
 				<liferay-util:include page="/select_user_groups.jsp" servletContext="<%= application %>" />
 			</c:when>
-			<c:otherwise>
-				<liferay-util:include page="/user_groups_roles.jsp" servletContext="<%= application %>" />
-			</c:otherwise>
 		</c:choose>
 	</c:when>
 </c:choose>
