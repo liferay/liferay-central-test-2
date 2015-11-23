@@ -17,29 +17,22 @@
 <%@ include file="/init.jsp" %>
 
 <%
+String eventName = ParamUtil.getString(request, "eventName", liferayPortletResponse.getNamespace() + "selectUserGroups");
+
 String displayStyle = ParamUtil.getString(request, "displayStyle", "list");
 
 PortletURL viewUserGroupsURL = renderResponse.createRenderURL();
 
-viewUserGroupsURL.setParameter("mvcPath", "/view.jsp");
-viewUserGroupsURL.setParameter("tabs1", "user-groups");
-viewUserGroupsURL.setParameter("tabs2", "available");
-viewUserGroupsURL.setParameter("redirect", currentURL);
+viewUserGroupsURL.setParameter("mvcPath", "/select_user_groups.jsp");
+viewUserGroupsURL.setParameter("eventName", eventName);
 viewUserGroupsURL.setParameter("groupId", String.valueOf(siteMembershipsDisplayContext.getGroupId()));
 
-UserGroupGroupChecker rowChecker = new UserGroupGroupChecker(renderResponse, siteMembershipsDisplayContext.getGroup());
+UserGroupSiteMembershipsChecker rowChecker = new UserGroupSiteMembershipsChecker(renderResponse, siteMembershipsDisplayContext.getGroup());
 
 UserGroupSearch userGroupSearch = new UserGroupSearch(renderRequest, viewUserGroupsURL);
 %>
 
-<aui:form action="<%= viewUserGroupsURL.toString() %>" cssClass="container-fluid-1280" method="post" name="fm">
-	<aui:input name="tabs1" type="hidden" value="user-groups" />
-	<aui:input name="tabs2" type="hidden" value="available" />
-	<aui:input name="assignmentsRedirect" type="hidden" />
-	<aui:input name="groupId" type="hidden" value="<%= String.valueOf(siteMembershipsDisplayContext.getGroupId()) %>" />
-	<aui:input name="addUserGroupIds" type="hidden" />
-	<aui:input name="removeUserGroupIds" type="hidden" />
-
+<aui:form cssClass="container-fluid-1280" name="fm">
 	<liferay-ui:search-container
 		rowChecker="<%= rowChecker %>"
 		searchContainer="<%= userGroupSearch %>"
@@ -81,35 +74,24 @@ UserGroupSearch userGroupSearch = new UserGroupSearch(renderRequest, viewUserGro
 		</liferay-ui:search-container-row>
 
 		<liferay-ui:search-iterator displayStyle="<%= displayStyle %>" markupView="lexicon" />
-
-		<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, siteMembershipsDisplayContext.getGroupId(), ActionKeys.ASSIGN_MEMBERS) %>">
-
-			<%
-			PortletURL portletURL = siteMembershipsDisplayContext.getPortletURL();
-
-			portletURL.setParameter("tabs2", "current");
-			portletURL.setParameter("cur", String.valueOf(siteMembershipsDisplayContext.getCur()));
-
-			String taglibOnClick = renderResponse.getNamespace() + "updateGroupUserGroups('" + portletURL.toString() + "');";
-			%>
-
-			<aui:button-row>
-				<aui:button onClick="<%= taglibOnClick %>" primary="<%= true %>" value="save" />
-			</aui:button-row>
-		</c:if>
 	</liferay-ui:search-container>
 </aui:form>
 
 <aui:script>
-	function <portlet:namespace />updateGroupUserGroups(assignmentsRedirect) {
-		var Util = Liferay.Util;
+	var Util = Liferay.Util;
 
-		var form = AUI.$(document.<portlet:namespace />fm);
+	var form = AUI.$(document.<portlet:namespace />fm);
 
-		form.fm('assignmentsRedirect').val(assignmentsRedirect);
-		form.fm('addUserGroupIds').val(Util.listCheckedExcept(form, '<portlet:namespace />allRowIds'));
-		form.fm('removeUserGroupIds').val(Util.listUncheckedExcept(form, '<portlet:namespace />allRowIds'));
+	$('input[name="<portlet:namespace />rowIds"]').on(
+		'change',
+		function(event) {
+			var values = {
+				data: {
+					addUserGroupIds: Util.listCheckedExcept(form, '<portlet:namespace />allRowIds')
+				}
+			};
 
-		submitForm(form, '<portlet:actionURL name="editGroupUserGroups" />');
-	}
+			Util.getOpener().Liferay.fire('<%= HtmlUtil.escapeJS(eventName) %>', values);
+		}
+	);
 </aui:script>
