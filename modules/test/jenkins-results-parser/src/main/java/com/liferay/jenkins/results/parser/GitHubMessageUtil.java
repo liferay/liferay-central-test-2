@@ -150,8 +150,8 @@ public class GitHubMessageUtil {
 			sb.append(topLevelResult);
 			sb.append(".</pre></li>");
 
-			List<String> errorReportsList = new ArrayList<>();
-			List<String> highPriorityList = new ArrayList<>();
+			List<String> highPriorityJobFailureList = new ArrayList<>();
+			List<String> normalPriorityJobFailureList = new ArrayList<>();
 
 			for (String reportFileName : reportFileNames.split(" ")) {
 				File file = new File(reportFileName);
@@ -163,22 +163,23 @@ public class GitHubMessageUtil {
 				}
 
 				if (isHighPriority(content)) {
-					highPriorityList.add("<li>" + content + "</li>");
+					highPriorityJobFailureList.add("<li>" + content + "</li>");
 				}
 				else {
-					errorReportsList.add("<li>" + content + "</li>");
+					normalPriorityJobFailureList.add(
+						"<li>" + content + "</li>");
 				}
 			}
 
-			errorReportsList.addAll(0, highPriorityList);
+			normalPriorityJobFailureList.addAll(0, highPriorityJobFailureList);
 
-			for (int i = 0; i < errorReportsList.size(); i++) {
+			for (int i = 0; i < normalPriorityJobFailureList.size(); i++) {
 				if (i == 4) {
 					sb.append("<li>...</li>");
 					break;
 				}
 
-				sb.append(errorReportsList.get(i));
+				sb.append(normalPriorityJobFailureList.get(i));
 			}
 
 			sb.append("</ol>");
