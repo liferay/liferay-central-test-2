@@ -175,6 +175,8 @@
 		<execute function="AssertTextEquals" locator1="Card#SPECIFIC_TEXT" value1="${userScreenName}" />
 		<execute function="AssertTextEquals" locator1="Card#SPECIFIC_SMALL_TEXT" value1="${teamName}" />
 
-		<execute function="AssertVisible" locator1="SiteMemberships#USER_TABLE_ACTIONS" />
+		<var name="cardEntry" value="${text}" />
+
+		<execute function="AssertVisible" locator1="Icon#CARD_VERTICAL_ELLIPSIS" />
 	</command>
 </definition>
