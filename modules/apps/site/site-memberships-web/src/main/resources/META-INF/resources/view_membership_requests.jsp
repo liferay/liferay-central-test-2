@@ -17,6 +17,8 @@
 <%@ include file="/init.jsp" %>
 
 <%
+String displayStyle = ParamUtil.getString(request, "displayStyle", "list");
+
 String tabs1 = ParamUtil.getString(request, "tabs1", "pending");
 
 int statusId = -1;
@@ -72,6 +74,23 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 		<aui:nav-item href="<%= deniedURL.toString() %>" label="denied" selected='<%= tabs1.equals("denied") %>' />
 	</aui:nav>
 </aui:nav-bar>
+
+<liferay-frontend:management-bar>
+	<liferay-frontend:management-bar-buttons>
+		<liferay-frontend:management-bar-display-buttons
+			displayViews='<%= new String[] {"list"} %>'
+			portletURL="<%= PortletURLUtil.clone(portletURL, renderResponse) %>"
+			selectedDisplayStyle="<%= displayStyle %>"
+		/>
+	</liferay-frontend:management-bar-buttons>
+
+	<liferay-frontend:management-bar-filters>
+		<liferay-frontend:management-bar-navigation
+			navigationKeys='<%= new String[] {"all"} %>'
+			portletURL="<%= PortletURLUtil.clone(portletURL, renderResponse) %>"
+		/>
+	</liferay-frontend:management-bar-filters>
+</liferay-frontend:management-bar>
 
 <div class="container-fluid-1280">
 	<liferay-ui:search-container
