@@ -235,10 +235,8 @@ public class EditPageAttachmentsMVCActionCommand extends BaseMVCActionCommand {
 			String originalSelectedFileName =
 				TempFileEntryUtil.getOriginalTempFileName(
 					tempFileEntry.getFileName());
-
-			String mimeType = tempFileEntry.getMimeType();
-
 			InputStream inputStream = tempFileEntry.getContentStream();
+			String mimeType = tempFileEntry.getMimeType();
 
 			FileEntry fileEntry = _wikiPageService.addPageAttachment(
 				nodeId, title, originalSelectedFileName, inputStream, mimeType);

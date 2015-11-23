@@ -205,7 +205,6 @@ public class EditFileEntryMVCActionCommand extends BaseMVCActionCommand {
 				tempFileEntry.getGroupId(), folderId, originalSelectedFileName);
 
 			String mimeType = tempFileEntry.getMimeType();
-
 			InputStream inputStream = tempFileEntry.getContentStream();
 			long size = tempFileEntry.getSize();
 
@@ -253,12 +252,12 @@ public class EditFileEntryMVCActionCommand extends BaseMVCActionCommand {
 		InputStream inputStream = null;
 
 		try {
+			String tempFileName = TempFileEntryUtil.getTempFileName(
+				sourceFileName);
+
 			inputStream = uploadPortletRequest.getFileAsStream("file");
 
 			String mimeType = uploadPortletRequest.getContentType("file");
-
-			String tempFileName = TempFileEntryUtil.getTempFileName(
-				sourceFileName);
 
 			FileEntry fileEntry = _dlAppService.addTempFileEntry(
 				themeDisplay.getScopeGroupId(), folderId, TEMP_FOLDER_NAME,
