@@ -17,29 +17,22 @@
 <%@ include file="/init.jsp" %>
 
 <%
+String eventName = ParamUtil.getString(request, "eventName", liferayPortletResponse.getNamespace() + "selectOrganizations");
+
 String displayStyle = ParamUtil.getString(request, "displayStyle", "list");
 
 PortletURL viewOrganizationsURL = renderResponse.createRenderURL();
 
-viewOrganizationsURL.setParameter("mvcPath", "/view.jsp");
-viewOrganizationsURL.setParameter("tabs1", "organizations");
-viewOrganizationsURL.setParameter("tabs2", "available");
-viewOrganizationsURL.setParameter("redirect", currentURL);
+viewOrganizationsURL.setParameter("mvcPath", "/select_organizations.jsp");
+viewOrganizationsURL.setParameter("eventName", eventName);
 viewOrganizationsURL.setParameter("groupId", String.valueOf(siteMembershipsDisplayContext.getGroupId()));
 
-OrganizationGroupChecker rowChecker = new OrganizationGroupChecker(renderResponse, siteMembershipsDisplayContext.getGroup());
+OrganizationSiteMembershipsChecker rowChecker = new OrganizationSiteMembershipsChecker(renderResponse, siteMembershipsDisplayContext.getGroup());
 
 SearchContainer searchContainer = new OrganizationSearch(renderRequest, viewOrganizationsURL);
 %>
 
-<aui:form action="<%= viewOrganizationsURL.toString() %>" cssClass="container-fluid-1280" method="post" name="fm">
-	<aui:input name="tabs1" type="hidden" value="organizations" />
-	<aui:input name="tabs2" type="hidden" value="available" />
-	<aui:input name="assignmentsRedirect" type="hidden" />
-	<aui:input name="groupId" type="hidden" value="<%= String.valueOf(siteMembershipsDisplayContext.getGroupId()) %>" />
-	<aui:input name="addOrganizationIds" type="hidden" />
-	<aui:input name="removeOrganizationIds" type="hidden" />
-
+<aui:form cssClass="container-fluid-1280" name="fm">
 	<liferay-ui:search-container
 		rowChecker="<%= rowChecker %>"
 		searchContainer="<%= searchContainer %>"
@@ -84,35 +77,24 @@ SearchContainer searchContainer = new OrganizationSearch(renderRequest, viewOrga
 		</liferay-ui:search-container-row>
 
 		<liferay-ui:search-iterator displayStyle="<%= displayStyle %>" markupView="lexicon" />
-
-		<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, siteMembershipsDisplayContext.getGroupId(), ActionKeys.ASSIGN_MEMBERS) %>">
-
-			<%
-			PortletURL portletURL = siteMembershipsDisplayContext.getPortletURL();
-
-			portletURL.setParameter("tabs2", "current");
-			portletURL.setParameter("cur", String.valueOf(siteMembershipsDisplayContext.getCur()));
-
-			String taglibOnClick = renderResponse.getNamespace() + "updateGroupOrganizations('" + portletURL.toString() + "');";
-			%>
-
-			<aui:button-row>
-				<aui:button onClick="<%= taglibOnClick %>" primary="<%= true %>" value="save" />
-			</aui:button-row>
-		</c:if>
 	</liferay-ui:search-container>
 </aui:form>
 
 <aui:script>
-	function <portlet:namespace />updateGroupOrganizations(assignmentsRedirect) {
-		var Util = Liferay.Util;
+	var Util = Liferay.Util;
 
-		var form = AUI.$(document.<portlet:namespace />fm);
+	var form = AUI.$(document.<portlet:namespace />fm);
 
-		form.fm('assignmentsRedirect').val(assignmentsRedirect);
-		form.fm('addOrganizationIds').val(Util.listCheckedExcept(form, '<portlet:namespace />allRowIds'));
-		form.fm('removeOrganizationIds').val(Util.listUncheckedExcept(form, '<portlet:namespace />allRowIds'));
+	$('input[name="<portlet:namespace />rowIds"]').on(
+		'change',
+		function(event) {
+			var values = {
+				data: {
+					addOrganizationIds: Util.listCheckedExcept(form, '<portlet:namespace />allRowIds')
+				}
+			};
 
-		submitForm(form, '<portlet:actionURL name="editGroupOrganizations" />');
-	}
+			Util.getOpener().Liferay.fire('<%= HtmlUtil.escapeJS(eventName) %>', values);
+		}
+	);
 </aui:script>

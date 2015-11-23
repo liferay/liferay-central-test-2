@@ -25,7 +25,6 @@ PortletURL viewOrganizationsURL = renderResponse.createRenderURL();
 
 viewOrganizationsURL.setParameter("mvcPath", "/view.jsp");
 viewOrganizationsURL.setParameter("tabs1", "organizations");
-viewOrganizationsURL.setParameter("tabs2", "current");
 viewOrganizationsURL.setParameter("redirect", currentURL);
 viewOrganizationsURL.setParameter("groupId", String.valueOf(siteMembershipsDisplayContext.getGroupId()));
 
@@ -90,7 +89,6 @@ organizationSearch.setResults(organizations);
 
 <aui:form action="<%= viewOrganizationsURL.toString() %>" cssClass="container-fluid-1280" method="post" name="fm">
 	<aui:input name="tabs1" type="hidden" value="organizations" />
-	<aui:input name="tabs2" type="hidden" value="current" />
 	<aui:input name="assignmentsRedirect" type="hidden" />
 	<aui:input name="groupId" type="hidden" value="<%= String.valueOf(siteMembershipsDisplayContext.getGroupId()) %>" />
 	<aui:input name="addOrganizationIds" type="hidden" />
@@ -122,17 +120,12 @@ organizationSearch.setResults(organizations);
 </aui:form>
 
 <c:if test="<%= GroupPermissionUtil.contains(permissionChecker, siteMembershipsDisplayContext.getGroupId(), ActionKeys.ASSIGN_MEMBERS) %>">
-
-	<%
-	viewOrganizationsURL.setParameter("tabs2", "available");
-	%>
-
 	<liferay-frontend:add-menu>
-		<liferay-frontend:add-menu-item title='<%= LanguageUtil.get(request, "assign-organizations") %>' url="<%= viewOrganizationsURL.toString() %>" />
+		<liferay-frontend:add-menu-item id="selectOrganizations" title='<%= LanguageUtil.get(request, "assign-organizations") %>' url="javascript:;" />
 	</liferay-frontend:add-menu>
 </c:if>
 
-<aui:script sandbox="<%= true %>">
+<aui:script use="liferay-item-selector-dialog">
 	var Util = Liferay.Util;
 
 	var form = $(document.<portlet:namespace />fm);
@@ -149,6 +142,34 @@ organizationSearch.setResults(organizations);
 
 				submitForm(form, '<%= deleteOrganizationsURL %>');
 			}
+		}
+	);
+
+	$('#<portlet:namespace />selectOrganizations').on(
+		'click',
+		function(event) {
+			event.preventDefault();
+
+			var itemSelectorDialog = new A.LiferayItemSelectorDialog(
+				{
+					eventName: '<portlet:namespace />selectOrganizations',
+					on: {
+						selectedItemChange: function(event) {
+							var selectedItem = event.newVal;
+
+							if (selectedItem) {
+								form.fm('addOrganizationIds').val(selectedItem.addOrganizationIds);
+
+								submitForm(form, '<portlet:actionURL name="editGroupOrganizations" />');
+							}
+						}
+					},
+					title: '<liferay-ui:message key="add-organizations-to-this-site" />',
+					url: '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="mvcPath" value="/select_organizations.jsp" /></portlet:renderURL>'
+				}
+			);
+
+			itemSelectorDialog.open();
 		}
 	);
 </aui:script>
