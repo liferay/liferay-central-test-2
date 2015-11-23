@@ -88,7 +88,6 @@ public class SiteMembershipsDisplayContext {
 
 		portletURL.setParameter("mvcPath", "/view.jsp");
 		portletURL.setParameter("tabs1", getTabs1());
-		portletURL.setParameter("tabs2", getTabs2());
 		portletURL.setParameter("groupId", String.valueOf(getGroupId()));
 
 		return portletURL;
@@ -130,16 +129,6 @@ public class SiteMembershipsDisplayContext {
 		return _tabs1;
 	}
 
-	public String getTabs2() {
-		if (_tabs2 != null) {
-			return _tabs2;
-		}
-
-		_tabs2 = ParamUtil.getString(_request, "tabs2", "current");
-
-		return _tabs2;
-	}
-
 	public UserGroup getUserGroup() throws PortalException {
 		if (_userGroup != null) {
 			return _userGroup;
@@ -177,7 +166,6 @@ public class SiteMembershipsDisplayContext {
 	private final HttpServletRequest _request;
 	private User _selUser;
 	private String _tabs1;
-	private String _tabs2;
 	private UserGroup _userGroup;
 	private Long _userGroupId;
 
