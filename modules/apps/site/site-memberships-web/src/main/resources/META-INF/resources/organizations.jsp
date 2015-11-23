@@ -54,8 +54,8 @@ organizationSearch.setResults(organizations);
 
 <c:if test="<%= organizationsCount > 0 %>">
 	<liferay-frontend:management-bar
-		checkBoxContainerId="organizationsSearchContainer"
 		includeCheckBox="<%= true %>"
+		searchContainerId="organizations"
 	>
 		<liferay-frontend:management-bar-buttons>
 			<liferay-frontend:management-bar-display-buttons
