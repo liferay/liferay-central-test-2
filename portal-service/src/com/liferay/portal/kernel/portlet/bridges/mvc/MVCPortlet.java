@@ -433,17 +433,6 @@ public class MVCPortlet extends LiferayPortlet {
 		return super.callResourceMethod(resourceRequest, resourceResponse);
 	}
 
-	protected void invokeHideDefaultSuccessMessage(
-		PortletRequest portletRequest) {
-
-		boolean hideDefaultSuccessMessage = ParamUtil.getBoolean(
-			portletRequest, "hideDefaultSuccessMessage");
-
-		if (hideDefaultSuccessMessage) {
-			hideDefaultSuccessMessage(portletRequest);
-		}
-	}
-
 	protected void checkPath(String path) throws PortletException {
 		if (Validator.isNotNull(path) &&
 			(!path.startsWith(templatePath) ||
@@ -584,6 +573,17 @@ public class MVCPortlet extends LiferayPortlet {
 		include(
 			path, resourceRequest, resourceResponse,
 			PortletRequest.RESOURCE_PHASE);
+	}
+
+	protected void invokeHideDefaultSuccessMessage(
+		PortletRequest portletRequest) {
+
+		boolean hideDefaultSuccessMessage = ParamUtil.getBoolean(
+			portletRequest, "hideDefaultSuccessMessage");
+
+		if (hideDefaultSuccessMessage) {
+			hideDefaultSuccessMessage(portletRequest);
+		}
 	}
 
 	protected String aboutTemplate;
