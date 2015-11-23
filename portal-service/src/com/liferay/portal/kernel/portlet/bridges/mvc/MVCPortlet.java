@@ -435,7 +435,7 @@ public class MVCPortlet extends LiferayPortlet {
 
 	protected void checkDefaultSuccessMessage(PortletRequest portletRequest) {
 		boolean hideDefaultSuccessMessage = ParamUtil.getBoolean(
-			portletRequest, "hideDefaultSuccessMessage", false);
+			portletRequest, "hideDefaultSuccessMessage");
 
 		if (hideDefaultSuccessMessage) {
 			hideDefaultSuccessMessage(portletRequest);
