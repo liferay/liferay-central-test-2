@@ -51,8 +51,8 @@ userGroupSearch.setResults(userGroups);
 
 <c:if test="<%= userGroupsCount > 0 %>">
 	<liferay-frontend:management-bar
-		checkBoxContainerId="userGroupsSearchContainer"
 		includeCheckBox="<%= true %>"
+		searchContainerId="userGroups"
 	>
 		<liferay-frontend:management-bar-buttons>
 			<liferay-frontend:management-bar-display-buttons
