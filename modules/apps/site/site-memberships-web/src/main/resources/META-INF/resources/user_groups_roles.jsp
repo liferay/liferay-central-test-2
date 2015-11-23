@@ -17,25 +17,17 @@
 <%@ include file="/init.jsp" %>
 
 <%
-UserGroup userGroup = siteMembershipsDisplayContext.getUserGroup();
+String eventName = ParamUtil.getString(request, "eventName", liferayPortletResponse.getNamespace() + "selectUserGroupsRoles");
 
 String displayStyle = ParamUtil.getString(request, "displayStyle", "list");
 
-PortletURL portletURL = siteMembershipsDisplayContext.getPortletURL();
+PortletURL portletURL = renderResponse.createRenderURL();
 
+portletURL.setParameter("mvcPath", "/user_groups_roles.jsp");
 portletURL.setParameter("userGroupId", String.valueOf(siteMembershipsDisplayContext.getUserGroupId()));
-
-portletDisplay.setShowBackIcon(true);
-portletDisplay.setURLBack(siteMembershipsDisplayContext.getRedirect());
-
-renderResponse.setTitle(LanguageUtil.get(request, "edit-site-roles-for-user-group") + ": " + HtmlUtil.escape(userGroup.getName()));
 %>
 
 <aui:nav-bar cssClass="collapse-basic-search" markupView="lexicon">
-	<aui:nav cssClass="navbar-nav">
-		<aui:nav-item label="site-roles" selected="<%= true %>" />
-	</aui:nav>
-
 	<aui:nav-bar-search>
 		<aui:form action="<%= portletURL.toString() %>" name="searchFm">
 			<liferay-ui:input-search autoFocus="<%= windowState.equals(WindowState.MAXIMIZED) %>" markupView="lexicon" />
@@ -63,35 +55,10 @@ renderResponse.setTitle(LanguageUtil.get(request, "edit-site-roles-for-user-grou
 	</liferay-frontend:management-bar-buttons>
 </liferay-frontend:management-bar>
 
-<aui:form action="<%= portletURL.toString() %>" cssClass="container-fluid-1280" name="fm">
-	<aui:input name="tabs1" type="hidden" value="<%= siteMembershipsDisplayContext.getTabs1() %>" />
-	<aui:input name="tabs2" type="hidden" value="<%= siteMembershipsDisplayContext.getTabs2() %>" />
-	<aui:input name="assignmentsRedirect" type="hidden" />
-	<aui:input name="groupId" type="hidden" value="<%= String.valueOf(siteMembershipsDisplayContext.getGroupId()) %>" />
-	<aui:input name="userGroupId" type="hidden" value="<%= siteMembershipsDisplayContext.getUserGroupId() %>" />
-	<aui:input name="addRoleIds" type="hidden" />
-	<aui:input name="removeRoleIds" type="hidden" />
-
-	<%
-	PortletURL updateRoleAssignmentsURL = renderResponse.createRenderURL();
-
-	updateRoleAssignmentsURL.setParameter("tabs1", siteMembershipsDisplayContext.getTabs1());
-	updateRoleAssignmentsURL.setParameter("tabs2", siteMembershipsDisplayContext.getTabs2());
-	updateRoleAssignmentsURL.setParameter("cur", String.valueOf(siteMembershipsDisplayContext.getCur()));
-	updateRoleAssignmentsURL.setParameter("redirect", siteMembershipsDisplayContext.getRedirect());
-	updateRoleAssignmentsURL.setParameter("userGroupId", String.valueOf(siteMembershipsDisplayContext.getUserGroupId()));
-	updateRoleAssignmentsURL.setParameter("groupId", String.valueOf(siteMembershipsDisplayContext.getGroupId()));
-
-	String taglibOnClick = renderResponse.getNamespace() + "updateUserGroupGroupRole('" + updateRoleAssignmentsURL.toString() + "');";
-	%>
-
-	<aui:button-row cssClass="text-center">
-		<aui:button cssClass="btn-lg btn-primary" onClick="<%= taglibOnClick %>" value="update-associations" />
-	</aui:button-row>
-
+<aui:form cssClass="container-fluid-1280" name="fm">
 	<liferay-ui:search-container
 		id="userGroupGroupRoleRole"
-		rowChecker="<%= new UserGroupGroupRoleRoleChecker(renderResponse, userGroup, siteMembershipsDisplayContext.getGroup()) %>"
+		rowChecker="<%= new UserGroupGroupRoleRoleChecker(renderResponse, siteMembershipsDisplayContext.getUserGroup(), siteMembershipsDisplayContext.getGroup()) %>"
 		searchContainer="<%= new RoleSearch(renderRequest, portletURL) %>"
 	>
 		<liferay-ui:search-container-results>
@@ -141,20 +108,33 @@ renderResponse.setTitle(LanguageUtil.get(request, "edit-site-roles-for-user-grou
 			/>
 		</liferay-ui:search-container-row>
 
-		<liferay-ui:search-iterator markupView="lexicon" />
+		<liferay-ui:search-iterator displayStyle="<%= displayStyle %>" markupView="lexicon" />
 	</liferay-ui:search-container>
 </aui:form>
 
 <aui:script>
-	function <portlet:namespace />updateUserGroupGroupRole(assignmentsRedirect) {
+	$('input[name="<portlet:namespace />rowIds"]').on(
+		'change',
+		function(event) {
+			<portlet:namespace />updateUserGroupGroupRole();
+		}
+	);
+
+	function <portlet:namespace />updateUserGroupGroupRole() {
 		var Util = Liferay.Util;
 
 		var form = AUI.$(document.<portlet:namespace />fm);
 
-		form.fm('assignmentsRedirect').val(assignmentsRedirect);
-		form.fm('addRoleIds').val(Util.listCheckedExcept(form, '<portlet:namespace />allRowIds'));
-		form.fm('removeRoleIds').val(Util.listUncheckedExcept(form, '<portlet:namespace />allRowIds'));
+		var values = {
+			data: {
+				addRoleIds: Util.listCheckedExcept(form, '<portlet:namespace />allRowIds'),
+				removeRoleIds: Util.listUncheckedExcept(form, '<portlet:namespace />allRowIds'),
+				userGroupId: <%= siteMembershipsDisplayContext.getUserGroupId() %>
+			}
+		};
 
-		submitForm(form, '<portlet:actionURL name="editUserGroupGroupRole" />');
+		Util.getOpener().Liferay.fire('<%= HtmlUtil.escapeJS(eventName) %>', values);
 	}
+
+	<portlet:namespace />updateUserGroupGroupRole();
 </aui:script>

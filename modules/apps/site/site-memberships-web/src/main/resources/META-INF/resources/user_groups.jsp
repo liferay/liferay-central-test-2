@@ -85,13 +85,16 @@ userGroupSearch.setResults(userGroups);
 
 <liferay-util:include page="/info_message.jsp" servletContext="<%= application %>" />
 
-<aui:form action="<%= viewUserGroupsURL.toString() %>" cssClass="container-fluid-1280" method="post" name="fm">
+<aui:form cssClass="container-fluid-1280" name="fm">
 	<aui:input name="tabs1" type="hidden" value="user-groups" />
 	<aui:input name="tabs2" type="hidden" value="current" />
 	<aui:input name="assignmentsRedirect" type="hidden" />
 	<aui:input name="groupId" type="hidden" value="<%= String.valueOf(siteMembershipsDisplayContext.getGroupId()) %>" />
+	<aui:input name="userGroupId" type="hidden" />
 	<aui:input name="addUserGroupIds" type="hidden" />
 	<aui:input name="removeUserGroupIds" type="hidden" />
+	<aui:input name="addRoleIds" type="hidden" />
+	<aui:input name="removeRoleIds" type="hidden" />
 
 	<liferay-ui:search-container
 		id="userGroups"
@@ -129,7 +132,7 @@ userGroupSearch.setResults(userGroups);
 	</liferay-frontend:add-menu>
 </c:if>
 
-<aui:script sandbox="<%= true %>">
+<aui:script use="liferay-item-selector-dialog">
 	var Util = Liferay.Util;
 
 	var form = $(document.<portlet:namespace />fm);
@@ -146,6 +149,39 @@ userGroupSearch.setResults(userGroups);
 
 				submitForm(form, '<%= deleteUserGroupsURL %>');
 			}
+		}
+	);
+
+	form.on(
+		'click',
+		'.assign-site-roles a',
+		function(event) {
+			event.preventDefault();
+
+			var currentTarget = $(event.currentTarget);
+
+			var itemSelectorDialog = new A.LiferayItemSelectorDialog(
+				{
+					eventName: '<portlet:namespace />selectUserGroupsRoles',
+					on: {
+						selectedItemChange: function(event) {
+							var selectedItem = event.newVal;
+
+							if (selectedItem) {
+								form.fm('addRoleIds').val(selectedItem.addRoleIds);
+								form.fm('removeRoleIds').val(selectedItem.removeRoleIds);
+								form.fm('userGroupId').val(selectedItem.userGroupId);
+
+								submitForm(form, '<portlet:actionURL name="editUserGroupGroupRole" />');
+							}
+						}
+					},
+					title: '<liferay-ui:message key="assign-site-roles" />',
+					url: currentTarget.data('href')
+				}
+			);
+
+			itemSelectorDialog.open();
 		}
 	);
 </aui:script>
