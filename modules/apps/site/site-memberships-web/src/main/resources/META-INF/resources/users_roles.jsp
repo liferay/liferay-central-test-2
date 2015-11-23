@@ -27,7 +27,7 @@ String redirect = (String)request.getAttribute("edit_site_assignments.jsp-redire
 Group group = (Group)request.getAttribute("edit_site_assignments.jsp-group");
 User selUser = (User)request.getAttribute("edit_site_assignments.jsp-selUser");
 
-String displayStyle = ParamUtil.getString(request, "displayStyle", "descriptive");
+String displayStyle = ParamUtil.getString(request, "displayStyle", "list");
 
 PortletURL portletURL = (PortletURL)request.getAttribute("edit_site_assignments.jsp-portletURL");
 
