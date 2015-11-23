@@ -690,7 +690,7 @@
 			<var name="userScreenName" value="test" />
 		</execute>
 
-		<execute function="AssertClick" locator1="SiteMemberships#NAVIGATION_USERS" value1="Users" />
+		<execute function="AssertClick" locator1="NavBar#USERS" value1="Users" />
 		<execute function="AssertClick" locator1="Pagination#ITEMS_PER_PAGE_SELECT" value1="20 Items per Page" />
 		<execute function="Click" locator1="Pagination#FIVE_ITEMS_PER_PAGE" />
 		<execute function="AssertTextEquals" locator1="Pagination#CURRENT_PAGE_SELECT" value1="Page 1 of 3" />
