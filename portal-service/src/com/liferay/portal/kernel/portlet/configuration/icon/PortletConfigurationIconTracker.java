@@ -116,7 +116,7 @@ public class PortletConfigurationIconTracker {
 	}
 
 	private static final ServiceTrackerList<PortletConfigurationIconLocator>
-		_serviceTrackerList = ServiceTrackerCollections.list(
+		_serviceTrackerList = ServiceTrackerCollections.openList(
 			PortletConfigurationIconLocator.class);
 	private static final ServiceTrackerMap
 		<String, List<PortletConfigurationIconFactory>>
