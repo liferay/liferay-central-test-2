@@ -96,7 +96,7 @@
 			<var name="portlet" value="Documents and Media" />
 		</execute>
 
-		<execute macro="DMNavigator#gotoMetadataSetsCP" />
+		<execute macro="DMNavigator#gotoMetadataSets" />
 
 		<execute macro="DMMetadataSet#selectMetadataSetsFrame" />
 
