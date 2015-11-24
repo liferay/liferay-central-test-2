@@ -438,7 +438,7 @@ public class MediaWikiImporter implements WikiImporter {
 		}
 		finally {
 			for (ObjectValuePair<String, InputStream> inputStreamOVP :
-				inputStreamOVPs) {
+					inputStreamOVPs) {
 
 				InputStream inputStream = inputStreamOVP.getValue();
 
