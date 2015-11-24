@@ -339,6 +339,49 @@ public class UpgradeJournal extends UpgradeProcess {
 		return rootElement.elements("structure");
 	}
 
+	protected void transformDateFieldValue(Element dynamicContentElement) {
+		String value = dynamicContentElement.getText();
+
+		if (!Validator.isNumber(value)) {
+			return;
+		}
+
+		Date date = new Date(GetterUtil.getLong(value));
+
+		dynamicContentElement.clearContent();
+
+		dynamicContentElement.addCDATA(_dateFormat.format(date));
+	}
+
+	protected void transformDateFieldValues(
+		List<Element> dynamicElementElements) {
+
+		if ( (dynamicElementElements == null) ||
+			dynamicElementElements.isEmpty() ) {
+
+			return;
+		}
+
+		for (Element dynamicElementElement : dynamicElementElements) {
+			String type = GetterUtil.getString(
+				dynamicElementElement.attributeValue("type"));
+
+			if (type.equals("ddm-date")) {
+				List<Element> dynamicContentElements =
+					dynamicElementElement.elements("dynamic-content");
+
+				for (Element dynamicContentElement : dynamicContentElements) {
+					transformDateFieldValue(dynamicContentElement);
+				}
+			}
+
+			List<Element> nestedDynamicElementElements =
+				dynamicElementElement.elements("dynamic-element");
+
+			transformDateFieldValues(nestedDynamicElementElements);
+		}
+	}
+
 	protected String transformDateFieldValues(String content) throws Exception {
 		Document document = SAXReaderUtil.read(content);
 
@@ -462,49 +505,6 @@ public class UpgradeJournal extends UpgradeProcess {
 		}
 		finally {
 			DataAccess.cleanUp(con, ps);
-		}
-	}
-
-	protected void transformDateFieldValue(Element dynamicContentElement) {
-		String value = dynamicContentElement.getText();
-
-		if (!Validator.isNumber(value)) {
-			return;
-		}
-
-		Date date = new Date(GetterUtil.getLong(value));
-
-		dynamicContentElement.clearContent();
-
-		dynamicContentElement.addCDATA(_dateFormat.format(date));
-	}
-
-	protected void transformDateFieldValues(
-		List<Element> dynamicElementElements) {
-
-		if ( (dynamicElementElements == null) ||
-			dynamicElementElements.isEmpty() ) {
-
-			return;
-		}
-
-		for (Element dynamicElementElement : dynamicElementElements) {
-			String type = GetterUtil.getString(
-				dynamicElementElement.attributeValue("type"));
-
-			if (type.equals("ddm-date")) {
-				List<Element> dynamicContentElements =
-					dynamicElementElement.elements("dynamic-content");
-
-				for (Element dynamicContentElement : dynamicContentElements) {
-					transformDateFieldValue(dynamicContentElement);
-				}
-			}
-
-			List<Element> nestedDynamicElementElements =
-				dynamicElementElement.elements("dynamic-element");
-
-			transformDateFieldValues(nestedDynamicElementElements);
 		}
 	}
 

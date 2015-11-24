@@ -198,14 +198,14 @@ public class UpgradePortletPreferences extends BaseUpgradePortletPreferences {
 			PortletPreferences portletPreferences)
 		throws Exception {
 
-		String oldValue = GetterUtil.getString(
+		String value = GetterUtil.getString(
 			portletPreferences.getValue(_DDM_STRUCTURE_FIELD_VALUE, null));
 
-		if (Validator.isNotNull(oldValue)) {
-			Date dateValue = _oldDateFormat.parse(oldValue);
+		if (Validator.isNotNull(value)) {
+			Date date = _oldDateFormat.parse(value);
 
 			portletPreferences.setValue(
-				_DDM_STRUCTURE_FIELD_VALUE, _newDateFormat.format(dateValue));
+				_DDM_STRUCTURE_FIELD_VALUE, _newDateFormat.format(date));
 		}
 	}
 
