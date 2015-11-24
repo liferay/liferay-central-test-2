@@ -48,7 +48,7 @@ int state = ParamUtil.getInteger(request, "state");
 			modelVar="appDisplay"
 		>
 			<liferay-ui:search-container-column-text colspan="<%= 2 %>">
-				<%= appDisplay.getName() %>
+				<%= appDisplay.getTitle() %>
 			</liferay-ui:search-container-column-text>
 		</liferay-ui:search-container-row>
 
