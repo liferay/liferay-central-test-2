@@ -129,18 +129,18 @@ public class PanelAppTag extends BasePanelTag {
 		request.setAttribute(
 			"liferay-application-list:panel-app:active", active);
 
+		if (_data == null) {
+			_data = new HashMap<>();
+
+			_data.put("navigation", true);
+		}
+
 		if (Validator.isNull(_label) && (_panelApp != null)) {
 			Portlet portlet = PortletLocalServiceUtil.getPortletById(
 				themeDisplay.getCompanyId(), _panelApp.getPortletId());
 
 			_label = PortalUtil.getPortletTitle(
 				portlet, servletContext, themeDisplay.getLocale());
-		}
-
-		if (_data == null) {
-			_data = new HashMap<>();
-
-			_data.put("navigation", true);
 		}
 
 		if (!_data.containsKey("title")) {
