@@ -83,7 +83,6 @@ roleSearch.setResults(roles);
 	>
 		<liferay-ui:search-container-row
 			className="com.liferay.portal.model.Role"
-			cssClass="selected"
 			keyProperty="roleId"
 			modelVar="role"
 		>

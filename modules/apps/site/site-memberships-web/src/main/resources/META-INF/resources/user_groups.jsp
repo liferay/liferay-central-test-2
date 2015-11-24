@@ -102,7 +102,6 @@ userGroupSearch.setResults(userGroups);
 
 		<liferay-ui:search-container-row
 			className="com.liferay.portal.model.UserGroup"
-			cssClass="selectable"
 			escapedModel="<%= true %>"
 			keyProperty="userGroupId"
 			modelVar="userGroup"

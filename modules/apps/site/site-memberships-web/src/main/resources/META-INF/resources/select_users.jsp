@@ -102,7 +102,6 @@ userSearch.setResults(users);
 	>
 		<liferay-ui:search-container-row
 			className="com.liferay.portal.model.User"
-			cssClass="selectable"
 			escapedModel="<%= true %>"
 			keyProperty="userId"
 			modelVar="user2"
