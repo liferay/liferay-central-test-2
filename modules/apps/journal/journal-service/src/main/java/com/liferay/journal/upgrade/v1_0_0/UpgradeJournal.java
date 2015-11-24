@@ -465,10 +465,10 @@ public class UpgradeJournal extends UpgradeProcess {
 		}
 	}
 
-	private void transformDateFieldValue(Element dynamicContentElement) {
+	protected void transformDateFieldValue(Element dynamicContentElement) {
 		String value = dynamicContentElement.getText();
 
-		if (Validator.isNull(value) || !Validator.isNumber(value)) {
+		if (!Validator.isNumber(value)) {
 			return;
 		}
 
@@ -479,7 +479,7 @@ public class UpgradeJournal extends UpgradeProcess {
 		dynamicContentElement.addCDATA(_dateFormat.format(date));
 	}
 
-	private void transformDateFieldValues(
+	protected void transformDateFieldValues(
 		List<Element> dynamicElementElements) {
 
 		if ( (dynamicElementElements == null) ||

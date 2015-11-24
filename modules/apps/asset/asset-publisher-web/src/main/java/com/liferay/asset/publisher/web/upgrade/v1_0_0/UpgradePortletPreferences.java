@@ -51,6 +51,50 @@ import javax.portlet.PortletPreferences;
  */
 public class UpgradePortletPreferences extends BaseUpgradePortletPreferences {
 
+	protected JSONObject getDDMStructureJSONObject(long structureId)
+		throws Exception {
+
+		JSONObject ddmStructureJSONObject = _ddmSructureJSONObjects.get(
+			structureId);
+
+		if (ddmStructureJSONObject != null) {
+			return ddmStructureJSONObject;
+		}
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getUpgradeOptimizedConnection();
+
+			ps = con.prepareStatement(
+				"select definition from DDMStructure where structureId = ?" );
+
+			ps.setLong(1, structureId);
+
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				String definition = rs.getString("definition");
+
+				ddmStructureJSONObject = JSONFactoryUtil.createJSONObject(
+					definition);
+
+				_ddmSructureJSONObjects.put(
+					structureId, ddmStructureJSONObject);
+
+				return ddmStructureJSONObject;
+			}
+
+			throw new UpgradeException(
+				"Unable to find dynamic data mapping structure " + structureId);
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
 	protected JSONObject getFieldJSONObject(
 		JSONArray fieldsJSONArray, String selectedFieldName) {
 
@@ -125,6 +169,118 @@ public class UpgradePortletPreferences extends BaseUpgradePortletPreferences {
 		};
 	}
 
+	protected boolean isDateField(
+		JSONObject ddmStructureJSONObject, String selectedFieldName) {
+
+		JSONArray fieldsJSONArray = ddmStructureJSONObject.getJSONArray(
+			"fields");
+
+		JSONObject fieldJSONObject = getFieldJSONObject(
+			fieldsJSONArray, selectedFieldName);
+
+		if ((fieldJSONObject != null) &&
+			Validator.equals(fieldJSONObject.getString("type"), "ddm-date")) {
+
+			return true;
+		}
+
+		return false;
+	}
+
+	protected boolean isFilterByFieldEnable(
+		PortletPreferences portletPreferences, String key) {
+
+		return GetterUtil.getBoolean(
+			portletPreferences.getValue(key, Boolean.FALSE.toString()));
+	}
+
+	protected void transformDateFieldValue(
+			PortletPreferences portletPreferences)
+		throws Exception {
+
+		String oldValue = GetterUtil.getString(
+			portletPreferences.getValue(_DDM_STRUCTURE_FIELD_VALUE, null));
+
+		if (Validator.isNotNull(oldValue)) {
+			Date dateValue = _oldDateFormat.parse(oldValue);
+
+			portletPreferences.setValue(
+				_DDM_STRUCTURE_FIELD_VALUE, _newDateFormat.format(dateValue));
+		}
+	}
+
+	protected void upgradeDLDateFieldsValues(
+			PortletPreferences portletPreferences)
+		throws Exception {
+
+		long fileEntryTypeId = GetterUtil.getLong(
+			portletPreferences.getValue(_DL_CLASS_TYPE, "0"));
+
+		if (fileEntryTypeId > 0) {
+			Connection con = null;
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+
+			try {
+				long fileEntryTypeClassNameId = PortalUtil.getClassNameId(
+					DLFileEntryType.class);
+
+				con = DataAccess.getUpgradeOptimizedConnection();
+
+				ps = con.prepareStatement(
+					"select structureId from DDMStructureLink where " +
+						"classNameId = ? and classPK = ?" );
+
+				ps.setLong(1, fileEntryTypeClassNameId);
+				ps.setLong(2, fileEntryTypeId);
+
+				rs = ps.executeQuery();
+
+				String selectedFieldName = GetterUtil.getString(
+					portletPreferences.getValue(
+						_DDM_STRUCTURE_FIELD_NAME, null));
+
+				while (rs.next()) {
+					long structureId = rs.getLong("structureId");
+
+					JSONObject ddmStructureJSONObject =
+						getDDMStructureJSONObject(structureId);
+
+					if (isDateField(
+							ddmStructureJSONObject, selectedFieldName)) {
+
+						transformDateFieldValue(portletPreferences);
+
+						break;
+					}
+				}
+			}
+			finally {
+				DataAccess.cleanUp(con, ps, rs);
+			}
+		}
+	}
+
+	protected void upgradeJournalDateFieldValue(
+			PortletPreferences portletPreferences)
+		throws Exception {
+
+		long structureId = GetterUtil.getLong(
+			portletPreferences.getValue(_JOURNAL_CLASS_TYPE, "0"));
+
+		if (structureId > 0) {
+			String selectedFieldName = GetterUtil.getString(
+				portletPreferences.getValue(_DDM_STRUCTURE_FIELD_NAME, null));
+
+			JSONObject ddmStructureJSONObject = getDDMStructureJSONObject(
+				structureId);
+
+			if (isDateField(ddmStructureJSONObject, selectedFieldName)) {
+				transformDateFieldValue(portletPreferences);
+			}
+		}
+	}
+
 	@Override
 	protected String upgradePreferences(
 			long companyId, long ownerId, int ownerType, long plid,
@@ -192,161 +348,6 @@ public class UpgradePortletPreferences extends BaseUpgradePortletPreferences {
 			document.setRootElement(rootElement);
 
 			assetEntryXmls[i] = document.formattedString(StringPool.BLANK);
-		}
-	}
-
-	private JSONObject getDDMStructureJSONObject(long structureId)
-		throws Exception {
-
-		JSONObject ddmStructureJSONObject = _ddmSructureJSONObjects.get(
-			structureId);
-
-		if (ddmStructureJSONObject != null) {
-			return ddmStructureJSONObject;
-		}
-
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			con = DataAccess.getUpgradeOptimizedConnection();
-
-			ps = con.prepareStatement(
-				"select definition from DDMStructure where structureId = ?" );
-
-			ps.setLong(1, structureId);
-
-			rs = ps.executeQuery();
-
-			if (rs.next()) {
-				String definition = rs.getString("definition");
-
-				ddmStructureJSONObject = JSONFactoryUtil.createJSONObject(
-					definition);
-
-				_ddmSructureJSONObjects.put(
-					structureId, ddmStructureJSONObject);
-
-				return ddmStructureJSONObject;
-			}
-
-			throw new UpgradeException(
-				"Unable to find dynamic data mapping structure " + structureId);
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
-	}
-
-	private boolean isDateField(
-		JSONObject ddmStructureJSONObject, String selectedFieldName) {
-
-		JSONArray fieldsJSONArray = ddmStructureJSONObject.getJSONArray(
-			"fields");
-
-		JSONObject fieldJSONObject = getFieldJSONObject(
-			fieldsJSONArray, selectedFieldName);
-
-		if ((fieldJSONObject != null) &&
-			Validator.equals(fieldJSONObject.getString("type"), "ddm-date")) {
-
-			return true;
-		}
-
-		return false;
-	}
-
-	private boolean isFilterByFieldEnable(
-		PortletPreferences portletPreferences, String key) {
-
-		return GetterUtil.getBoolean(
-			portletPreferences.getValue(key, Boolean.FALSE.toString()));
-	}
-
-	private void transformDateFieldValue(PortletPreferences portletPreferences)
-		throws Exception {
-
-		String oldValue = GetterUtil.getString(
-			portletPreferences.getValue(_DDM_STRUCTURE_FIELD_VALUE, null));
-
-		if (Validator.isNotNull(oldValue)) {
-			Date dateValue = _oldDateFormat.parse(oldValue);
-
-			portletPreferences.setValue(
-				_DDM_STRUCTURE_FIELD_VALUE, _newDateFormat.format(dateValue));
-		}
-	}
-
-	private void upgradeDLDateFieldsValues(
-			PortletPreferences portletPreferences)
-		throws Exception {
-
-		long fileEntryTypeId = GetterUtil.getLong(
-			portletPreferences.getValue(_DL_CLASS_TYPE, "0"));
-
-		if (fileEntryTypeId > 0) {
-			Connection con = null;
-			PreparedStatement ps = null;
-			ResultSet rs = null;
-
-			try {
-				long fileEntryTypeClassNameId = PortalUtil.getClassNameId(
-					DLFileEntryType.class);
-
-				con = DataAccess.getUpgradeOptimizedConnection();
-
-				ps = con.prepareStatement(
-					"select structureId from DDMStructureLink where " +
-						"classNameId = ? and classPK = ?" );
-
-				ps.setLong(1, fileEntryTypeClassNameId);
-				ps.setLong(2, fileEntryTypeId);
-
-				rs = ps.executeQuery();
-
-				String selectedFieldName = GetterUtil.getString(
-					portletPreferences.getValue(
-						_DDM_STRUCTURE_FIELD_NAME, null));
-
-				while (rs.next()) {
-					long structureId = rs.getLong("structureId");
-
-					JSONObject ddmStructureJSONObject =
-						getDDMStructureJSONObject(structureId);
-
-					if (isDateField(
-							ddmStructureJSONObject, selectedFieldName)) {
-
-						transformDateFieldValue(portletPreferences);
-
-						break;
-					}
-				}
-			}
-			finally {
-				DataAccess.cleanUp(con, ps, rs);
-			}
-		}
-	}
-
-	private void upgradeJournalDateFieldValue(
-			PortletPreferences portletPreferences)
-		throws Exception {
-
-		long structureId = GetterUtil.getLong(
-			portletPreferences.getValue(_JOURNAL_CLASS_TYPE, "0"));
-
-		if (structureId > 0) {
-			String selectedFieldName = GetterUtil.getString(
-				portletPreferences.getValue(_DDM_STRUCTURE_FIELD_NAME, null));
-
-			JSONObject ddmStructureJSONObject = getDDMStructureJSONObject(
-				structureId);
-
-			if (isDateField(ddmStructureJSONObject, selectedFieldName)) {
-				transformDateFieldValue(portletPreferences);
-			}
 		}
 	}
 
