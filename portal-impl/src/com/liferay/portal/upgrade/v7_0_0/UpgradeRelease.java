@@ -30,10 +30,6 @@ public class UpgradeRelease extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		transformBuildNumber();
-	}
-
-	protected void transformBuildNumber() throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -47,7 +43,7 @@ public class UpgradeRelease extends UpgradeProcess {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				updateToNewFormat(rs.getString("buildNumber"));
+				updateSchemaVersion(rs.getString("buildNumber"));
 			}
 		}
 		finally {
@@ -55,7 +51,7 @@ public class UpgradeRelease extends UpgradeProcess {
 		}
 	}
 
-	protected void updateToNewFormat(String oldFormattedVersion)
+	protected void updateSchemaVersion(String buildNumber)
 		throws SQLException {
 
 		Connection con = null;
@@ -68,7 +64,7 @@ public class UpgradeRelease extends UpgradeProcess {
 			ps = con.prepareStatement(
 				"update Release_ set schemaVersion = ? where buildNumber = ?");
 
-			char[] chars = oldFormattedVersion.toCharArray();
+			char[] chars = buildNumber.toCharArray();
 
 			StringBundler sb = new StringBundler(2 * chars.length);
 
@@ -82,7 +78,7 @@ public class UpgradeRelease extends UpgradeProcess {
 			sb.append(chars[i]);
 
 			ps.setString(1, sb.toString());
-			ps.setString(2, oldFormattedVersion);
+			ps.setString(2, buildNumber);
 
 			ps.execute();
 		}
