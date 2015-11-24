@@ -204,6 +204,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>TOOLTIP</td>
+	<td>//span[@class='taglib-icon-help']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>TWITTER</td>
 	<td>//i[contains(@class,'icon-twitter')]</td>
 	<td></td>
