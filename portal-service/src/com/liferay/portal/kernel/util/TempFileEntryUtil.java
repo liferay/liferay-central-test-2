@@ -111,9 +111,7 @@ public class TempFileEntryUtil {
 			new TemporaryFileEntriesScope(_UUID, userId, folderName), fileName);
 	}
 
-	public static String getOriginalTempFileName(String tempFileName)
-		throws PortalException {
-
+	public static String getOriginalTempFileName(String tempFileName) {
 		String extension = FileUtil.getExtension(tempFileName);
 
 		int pos = tempFileName.lastIndexOf(TEMP_RANDOM_SUFFIX);
