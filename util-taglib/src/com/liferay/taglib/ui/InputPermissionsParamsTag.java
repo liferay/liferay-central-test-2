@@ -142,7 +142,7 @@ public class InputPermissionsParamsTag extends TagSupport {
 
 		Layout layout = themeDisplay.getLayout();
 
-		Group layoutGroup = getLayoutGroup(layout);
+		Group layoutGroup = _getLayoutGroup(layout);
 
 		List<String> guestDefaultActions =
 			ResourceActionsUtil.getModelResourceGuestDefaultActions(modelName);
@@ -196,7 +196,7 @@ public class InputPermissionsParamsTag extends TagSupport {
 		_modelName = modelName;
 	}
 
-	protected static Group getLayoutGroup(Layout layout)
+	protected static Group _getLayoutGroup(Layout layout)
 		throws PortalException {
 
 		if (!(layout instanceof VirtualLayout)) {
