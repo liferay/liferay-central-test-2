@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.util.StringBundler;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 /**
  * @author Miguel Pastor
@@ -44,7 +43,7 @@ public class UpgradeRelease extends UpgradeProcess {
 
 			while (rs.next()) {
 				String buildNumber = rs.getString("buildNumber");
-				
+
 				String schemaVersion = toSchemaVersion(buildNumber);
 
 				runSQL(
@@ -56,7 +55,7 @@ public class UpgradeRelease extends UpgradeProcess {
 			DataAccess.cleanUp(con, ps, rs);
 		}
 	}
-	
+
 	protected String toSchemaVersion(String buildNumber) {
 		char[] chars = buildNumber.toCharArray();
 
@@ -70,7 +69,7 @@ public class UpgradeRelease extends UpgradeProcess {
 		}
 
 		sb.append(chars[i]);
-		
+
 		return sb.toString();
 	}
 
