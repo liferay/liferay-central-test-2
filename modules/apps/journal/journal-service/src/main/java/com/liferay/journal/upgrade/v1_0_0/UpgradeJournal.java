@@ -508,12 +508,6 @@ public class UpgradeJournal extends UpgradeProcess {
 		}
 	}
 
-	private static final String _CLASS_NAME_DDM_STRUCTURE =
-		"com.liferay.dynamic.data.mapping.model.DDMStructure";
-
-	private static final String _CLASS_NAME_DDM_TEMPLATE =
-		"com.liferay.dynamic.data.mapping.model.DDMTemplate";
-
 	private static final Log _log = LogFactoryUtil.getLog(UpgradeJournal.class);
 
 	private static final DateFormat _dateFormat =
