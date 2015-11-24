@@ -1144,7 +1144,7 @@
 					<arg value="services" />
 				</exec>
 
-				<echo>Output content:
+				<echo>Output:
 ${output.content}</echo>
 
 				<if>
@@ -1154,7 +1154,7 @@ ${output.content}</echo>
 					<then>
 						<sleep seconds="5" />
 
-						<fail message="Output content: ${output.content}" />
+						<fail message="Output: ${output.content}" />
 					</then>
 				</if>
 			</sequential>
@@ -1353,7 +1353,7 @@ go</echo>
 				</exec>
 
 				<echo>Return code: ${return.code}
-Output content:
+Output:
 ${output.content}</echo>
 
 				<if>
@@ -1365,7 +1365,7 @@ ${output.content}</echo>
 					<then>
 						<clean-restart-sybase retry="true" />
 
-						<fail message="Output content: ${output.content}" />
+						<fail message="Output: ${output.content}" />
 					</then>
 				</if>
 
