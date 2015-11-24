@@ -724,7 +724,7 @@
 		<execute function="SelectFrame" locator1="KnowledgeBaseSelectParent#IFRAME" />
 
 		<execute function="Click" locator1="KnowledgeBaseSelectParent#REMOVE_BUTTON" />
-		
+
 		<execute function="SelectFrame" value1="relative=top" />
 
 		<execute function="Click" locator1="Button#MOVE" />
