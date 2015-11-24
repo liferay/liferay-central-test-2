@@ -102,7 +102,6 @@ organizationSearch.setResults(organizations);
 
 		<liferay-ui:search-container-row
 			className="com.liferay.portal.model.Organization"
-			cssClass="selectable"
 			escapedModel="<%= true %>"
 			keyProperty="organizationId"
 			modelVar="organization"
