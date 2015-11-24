@@ -43,7 +43,9 @@ public class UpgradeRelease extends UpgradeProcess {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				updateSchemaVersion(rs.getString("buildNumber"));
+				String buildNumber = rs.getString("buildNumber");
+
+				updateSchemaVersion(buildNumber);
 			}
 		}
 		finally {
