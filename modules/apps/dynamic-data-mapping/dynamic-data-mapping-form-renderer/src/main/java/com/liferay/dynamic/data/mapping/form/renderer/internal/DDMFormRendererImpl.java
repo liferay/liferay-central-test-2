@@ -269,13 +269,13 @@ public class DDMFormRendererImpl implements DDMFormRenderer {
 		Map<String, DDMFormField> ddmFormFieldsMap,
 		List<DDMFormFieldValue> ddmFormFieldValues) {
 
-		Iterator<DDMFormFieldValue> itr = ddmFormFieldValues.iterator();
+		Iterator<DDMFormFieldValue> iterator = ddmFormFieldValues.iterator();
 
-		while (itr.hasNext()) {
-			DDMFormFieldValue ddmFormFieldValue = itr.next();
+		while (iterator.hasNext()) {
+			DDMFormFieldValue ddmFormFieldValue = iterator.next();
 
 			if (!ddmFormFieldsMap.containsKey(ddmFormFieldValue.getName())) {
-				itr.remove();
+				iterator.remove();
 			}
 
 			removeStaleDDMFormFieldValues(
