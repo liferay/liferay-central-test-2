@@ -1087,7 +1087,9 @@
 		<if>
 			<equals arg1="${toolTip}" arg2="true" />
 			<then>
-				<execute function="AssertTextEquals#assertPartialText" locator1="SiteMemberships#ORGANIZATION_TABLE_TOOLTIP" value1="This site belongs to ${orgName} which is an organization" />
+				<execute function="MouseOver" locator1="Icon#TOOLTIP" />
+
+				<execute function="AssertTextEquals#assertPartialText" locator1="Message#TOOLTIP" value1="Users are not allowed to request membership. Only site administrators can add new members." />
 			</then>
 		</if>
 	</command>
