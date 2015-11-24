@@ -4662,9 +4662,7 @@ discussion.comments.format=bbcode
 discussion.max.comments=0
 
 dl.file.entry.thumbnail.max.height=128
-dl.file.entry.thumbnail.max.width=128
-
-upgrade.processes=${upgrade.processes.master}</echo>
+dl.file.entry.thumbnail.max.width=128</echo>
 			</then>
 		</if>
 
