@@ -66,20 +66,7 @@ public class UpgradeRelease extends UpgradeProcess {
 			ps = con.prepareStatement(
 				"update Release_ set schemaVersion = ? where buildNumber = ?");
 
-			char[] chars = buildNumber.toCharArray();
-
-			StringBundler sb = new StringBundler(2 * chars.length);
-
-			int i = 0;
-
-			for (; i < chars.length - 1; i++) {
-				sb.append(chars[i]);
-				sb.append(".");
-			}
-
-			sb.append(chars[i]);
-
-			ps.setString(1, sb.toString());
+			ps.setString(1, toSchemaVersion(buildNumber));
 			ps.setString(2, buildNumber);
 
 			ps.execute();
@@ -87,6 +74,23 @@ public class UpgradeRelease extends UpgradeProcess {
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
+	}
+	
+	protected String toSchemaVersion(String buildNumber) {
+		char[] chars = buildNumber.toCharArray();
+
+		StringBundler sb = new StringBundler(2 * chars.length);
+
+		int i = 0;
+
+		for (; i < chars.length - 1; i++) {
+			sb.append(chars[i]);
+			sb.append(".");
+		}
+
+		sb.append(chars[i]);
+		
+		return sb.toString();
 	}
 
 }
