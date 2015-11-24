@@ -182,7 +182,9 @@ public class GitHubMessageUtil {
 					break;
 				}
 
-				sb.append("<li>" + jobFailureContents.get(i) + "</li>");
+				sb.append("<li>");
+				sb.append(jobFailureContents.get(i));
+				sb.append("</li>");
 			}
 
 			sb.append("</ol>");
