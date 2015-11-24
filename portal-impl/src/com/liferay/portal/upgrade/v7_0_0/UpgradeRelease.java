@@ -44,32 +44,13 @@ public class UpgradeRelease extends UpgradeProcess {
 
 			while (rs.next()) {
 				String buildNumber = rs.getString("buildNumber");
+				
+				String schemaVersion = toSchemaVersion(buildNumber);
 
-				updateSchemaVersion(buildNumber);
+				runSQL(
+					"update Release_ set schemaVersion = '" + schemaVersion +
+						"' where buildNumber = " + buildNumber);
 			}
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
-	}
-
-	protected void updateSchemaVersion(String buildNumber)
-		throws SQLException {
-
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			con = DataAccess.getUpgradeOptimizedConnection();
-
-			ps = con.prepareStatement(
-				"update Release_ set schemaVersion = ? where buildNumber = ?");
-
-			ps.setString(1, toSchemaVersion(buildNumber));
-			ps.setString(2, buildNumber);
-
-			ps.execute();
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
