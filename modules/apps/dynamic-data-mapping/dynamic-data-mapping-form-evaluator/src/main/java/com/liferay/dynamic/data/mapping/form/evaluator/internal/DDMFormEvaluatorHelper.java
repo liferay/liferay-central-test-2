@@ -119,8 +119,9 @@ public class DDMFormEvaluatorHelper {
 		catch (ExpressionEvaluationException eee) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
-					"Invalid expression or expression is making reference to" +
-						" a field no longer available. " + expressionString);
+					"Invalid expression or expression that is making " +
+						"reference to a field no longer available: " +
+							expressionString);
 			}
 		}
 
