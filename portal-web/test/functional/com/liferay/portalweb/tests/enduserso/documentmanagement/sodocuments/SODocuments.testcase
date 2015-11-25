@@ -1387,7 +1387,7 @@
 			<var name="siteURL" value="true" />
 		</execute>
 
-		<execute macro="DMDocumentType#viewPGAddMenulist">
+		<execute macro="DMDocumentType#viewMenulistOption">
 			<var name="dmDocumentTypeName" value="DM Document Type Name" />
 		</execute>
 
@@ -2380,7 +2380,7 @@
 			<var name="siteURL" value="true" />
 		</execute>
 
-		<execute macro="DMDocumentType#viewPGAddMenulist">
+		<execute macro="DMDocumentType#viewMenulistOption">
 			<var name="dmDocumentTypeName" value="${dmDocumentTypeName}" />
 		</execute>
 
@@ -2944,7 +2944,7 @@
 			<var name="siteURL" value="true" />
 		</execute>
 
-		<execute macro="DMDocumentType#viewPGAddMenulist">
+		<execute macro="DMDocumentType#viewMenulistOption">
 			<var name="dmDocumentTypeName" value="DM Document Type Name" />
 		</execute>
 
@@ -2966,7 +2966,7 @@
 			<var name="siteURL" value="true" />
 		</execute>
 
-		<execute macro="DMDocumentType#viewPGAddMenulist">
+		<execute macro="DMDocumentType#viewMenulistOption">
 			<var name="dmDocumentTypeName" value="${dmDocumentTypeNameEdit}" />
 		</execute>
 
