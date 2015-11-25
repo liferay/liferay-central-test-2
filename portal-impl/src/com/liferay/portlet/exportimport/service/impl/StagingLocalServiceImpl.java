@@ -335,6 +335,7 @@ public class StagingLocalServiceImpl extends StagingLocalServiceBaseImpl {
 		}
 
 		boolean stagedRemotely = stagingGroup.isStagedRemotely();
+
 		boolean oldStagedRemotely = stagedRemotely;
 
 		UnicodeProperties typeSettingsProperties =
