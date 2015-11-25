@@ -20,12 +20,22 @@
 String eventName = ParamUtil.getString(request, "eventName", liferayPortletResponse.getNamespace() + "selectTeam");
 
 String displayStyle = ParamUtil.getString(request, "displayStyle", "list");
-%>
 
-<liferay-portlet:renderURL varImpl="portletURL">
-	<portlet:param name="mvcPath" value="/select_team.jsp" />
-	<portlet:param name="eventName" value="<%= eventName %>" />
-</liferay-portlet:renderURL>
+PortletURL portletURL = renderResponse.createRenderURL();
+
+portletURL.setParameter("mvcPath", "/select_team.jsp");
+portletURL.setParameter("eventName", eventName);
+
+TeamSearch teamSearch = new TeamSearch(renderRequest, PortletURLUtil.clone(portletURL, liferayPortletResponse));
+
+TeamDisplayTerms searchTerms = (TeamDisplayTerms)teamSearch.getSearchTerms();
+
+portletURL.setParameter(teamSearch.getCurParam(), String.valueOf(teamSearch.getCur()));
+
+int teamsCount = TeamLocalServiceUtil.searchCount(scopeGroupId, searchTerms.getKeywords(), searchTerms.getDescription(), new LinkedHashMap<String, Object>());
+
+teamSearch.setTotal(teamsCount);
+%>
 
 <aui:nav-bar cssClass="collapse-basic-search" markupView="lexicon">
 	<aui:nav cssClass="navbar-nav">
@@ -39,37 +49,29 @@ String displayStyle = ParamUtil.getString(request, "displayStyle", "list");
 	</aui:nav-bar-search>
 </aui:nav-bar>
 
-<liferay-frontend:management-bar>
-	<liferay-frontend:management-bar-buttons>
-		<liferay-frontend:management-bar-filters>
-			<liferay-frontend:management-bar-navigation
-				navigationKeys='<%= new String[] {"all"} %>'
-				portletURL="<%= PortletURLUtil.clone(portletURL, liferayPortletResponse) %>"
-			/>
-		</liferay-frontend:management-bar-filters>
+<c:if test="<%= teamsCount > 0 %>">
+	<liferay-frontend:management-bar>
+		<liferay-frontend:management-bar-buttons>
+			<liferay-frontend:management-bar-filters>
+				<liferay-frontend:management-bar-navigation
+					navigationKeys='<%= new String[] {"all"} %>'
+					portletURL="<%= PortletURLUtil.clone(portletURL, liferayPortletResponse) %>"
+				/>
+			</liferay-frontend:management-bar-filters>
 
-		<liferay-frontend:management-bar-display-buttons
-			displayViews='<%= new String[] {"list"} %>'
-			portletURL="<%= PortletURLUtil.clone(portletURL, liferayPortletResponse) %>"
-			selectedDisplayStyle="<%= displayStyle %>"
-		/>
-	</liferay-frontend:management-bar-buttons>
-</liferay-frontend:management-bar>
+			<liferay-frontend:management-bar-display-buttons
+				displayViews='<%= new String[] {"list"} %>'
+				portletURL="<%= PortletURLUtil.clone(portletURL, liferayPortletResponse) %>"
+				selectedDisplayStyle="<%= displayStyle %>"
+			/>
+		</liferay-frontend:management-bar-buttons>
+	</liferay-frontend:management-bar>
+</c:if>
 
 <aui:form cssClass="container-fluid-1280" name="selectTeamFm">
 	<liferay-ui:search-container
-		searchContainer="<%= new TeamSearch(renderRequest, portletURL) %>"
+		searchContainer="<%= teamSearch %>"
 	>
-
-		<%
-		TeamDisplayTerms searchTerms = (TeamDisplayTerms)searchContainer.getSearchTerms();
-
-		portletURL.setParameter(searchContainer.getCurParam(), String.valueOf(searchContainer.getCur()));
-
-		total = TeamLocalServiceUtil.searchCount(scopeGroupId, searchTerms.getKeywords(), searchTerms.getDescription(), new LinkedHashMap<String, Object>());
-
-		searchContainer.setTotal(total);
-		%>
 
 		<liferay-ui:search-container-results
 			results="<%= TeamLocalServiceUtil.search(scopeGroupId, searchTerms.getKeywords(), searchTerms.getDescription(), new LinkedHashMap<String, Object>(), searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator()) %>"
