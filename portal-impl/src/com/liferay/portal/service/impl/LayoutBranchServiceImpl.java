@@ -39,10 +39,9 @@ public class LayoutBranchServiceImpl extends LayoutBranchServiceBaseImpl {
 
 		PermissionChecker permissionChecker = getPermissionChecker();
 
-		long groupId = serviceContext.getScopeGroupId();
-
 		GroupPermissionUtil.check(
-			permissionChecker, groupId, ActionKeys.ADD_LAYOUT_BRANCH);
+			permissionChecker, serviceContext.getScopeGroupId(),
+			ActionKeys.ADD_LAYOUT_BRANCH);
 
 		LayoutRevision layoutRevision =
 			layoutRevisionPersistence.findByPrimaryKey(layoutRevisionId);
