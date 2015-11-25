@@ -120,8 +120,8 @@ public class DDMFormValuesValidatorImpl implements DDMFormValuesValidator {
 					ddmFormFieldValue);
 
 				traverseDDMFormFieldValues(
-						ddmFormFieldValue.getNestedDDMFormFieldValues(),
-						ddmFormField.getNestedDDMFormFieldsMap());
+					ddmFormFieldValue.getNestedDDMFormFieldValues(),
+					ddmFormField.getNestedDDMFormFieldsMap());
 			}
 		}
 	}
