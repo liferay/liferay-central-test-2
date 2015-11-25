@@ -17,8 +17,6 @@
 <%@ include file="/init.jsp" %>
 
 <%
-String displayStyle = ParamUtil.getString(request, "displayStyle", "list");
-
 String tabs1 = ParamUtil.getString(request, "tabs1", "pending");
 
 int statusId = -1;
@@ -36,6 +34,8 @@ else {
 long groupId = ParamUtil.getLong(request, "groupId", themeDisplay.getSiteGroupId());
 
 Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+String displayStyle = ParamUtil.getString(request, "displayStyle", "list");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
