@@ -30,12 +30,12 @@
 </tr>
 <tr>
 	<td>CATEGORY_COLLAPSED</td>
-	<td>//div[contains(@class,'sidebar-body')]/div/div[contains(@class,'active')]//a[contains(.,'${key_category}') and contains(@class,'collapsed')]</td>
+	<td>//div[div[@aria-expanded='true']]/../..//a[@aria-expanded='false' and contains(.,'${key_category}')]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>CATEGORY_EXPANDED</td>
-	<td>//div[contains(@class,'sidebar-body')]/div/div[contains(@class,'active')]//a[contains(.,'${key_category}') and not(contains(@class,'collapsed'))]</td>
+	<td>//div[div[@aria-expanded='true']]/../..//a[@aria-expanded='true' and contains(.,'${key_category}')]</td>
 	<td></td>
 </tr>
 <tr>
