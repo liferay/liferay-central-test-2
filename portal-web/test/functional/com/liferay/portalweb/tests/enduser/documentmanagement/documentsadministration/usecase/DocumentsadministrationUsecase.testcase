@@ -24,22 +24,8 @@
 	</tear-down>
 
 	<command name="AddAndRemoveMetadataSets" priority="4">
-		<execute macro="Page#addPG">
-			<var name="pageName" value="Documents and Media Page" />
-		</execute>
-
-		<execute macro="Page#gotoPG">
-			<var name="pageName" value="Documents and Media Page" />
-		</execute>
-
-		<execute macro="Portlet#addPG">
-			<var name="portletName" value="Documents and Media" />
-		</execute>
-
-		<execute macro="Portlet#dragAndDropPortletToColumnPG">
-			<var name="columnNumberFrom" value="1" />
-			<var name="columnNumberTo" value="2" />
-			<var name="portletName" value="Documents and Media" />
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Documents and Media" />
 		</execute>
 
 		<execute macro="DMNavigator#gotoMetadataSets" />
@@ -51,8 +37,10 @@
 
 		<execute macro="DMMetadataSet#save" />
 
-		<execute macro="Page#gotoPG">
-			<var name="pageName" value="Documents and Media Page" />
+		<execute function="SelectFrameTop" value1="relative=top" />
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Documents and Media" />
 		</execute>
 
 		<execute macro="DMNavigator#gotoDocumentType" />
@@ -64,8 +52,10 @@
 			<var name="metadataSetName" value="DM Metadata Set Name" />
 		</execute>
 
-		<execute macro="Page#gotoPG">
-			<var name="pageName" value="Documents and Media Page" />
+		<execute function="SelectFrameTop" value1="relative=top" />
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Documents and Media" />
 		</execute>
 
 		<execute macro="DMNavigator#gotoDocumentType" />
