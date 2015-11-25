@@ -511,35 +511,15 @@
 			</then>
 		</if>
 
-		<var name="key_portletCategoryName" value="${portletCategoryName}" />
+		<execute macro="ProductMenuHelper#gotoControlPanel" />
 
-		<if>
-			<condition function="IsElementNotPresent" locator1="ProductMenu#PRODUCT_MENU_OPENED" />
-			<then>
-				<execute function="Click" locator1="ProductMenu#TOGGLE" />
-			</then>
-		</if>
+		<execute macro="ProductMenuHelper#expandCategory">
+			<var name="category" value="${category}" />
+		</execute>
 
-		<execute function="AssertClick" locator1="ProductMenu#PRODUCT_MENU_TABS_CONTROL_PANEL_NAVIGATION" value1="Control Panel" />
-
-		<execute function="AssertClick" locator1="ProductMenu#PRODUCT_MENU_PANEL_CONTROL_PANEL_PANEL_TITLE" value1="${portletCategoryName}" />
-
-		<if>
-			<isset var="portletName" />
-			<then>
-				<var name="key_portletName" value="${portletName}" />
-
-				<if>
-					<equals arg1="${portletName}" arg2="Workflow Configuration" />
-					<then>
-						<execute function="AssertClick" locator1="ProductMenu#PRODUCT_MENU_PANEL_MENU_ITEM_2" value1="${portletName}" />
-					</then>
-					<else>
-						<execute function="AssertClick" locator1="ProductMenu#PRODUCT_MENU_PANEL_MENU_ITEM" value1="${portletName}" />
-					</else>
-				</if>
-			</then>
-		</if>
+		<execute macro="ProductMenuHelper#gotoPortlet">
+			<var name="portlet" value="${portletName}" />
+		</execute>
 
 		<if>
 			<equals arg1="${portletName}" arg2="Portal Settings" />
@@ -567,27 +547,9 @@
 			<var name="virtualHostsURL" value="${virtualHostsURL}" />
 		</execute>
 
-		<if>
-			<condition function="IsElementNotPresent" locator1="ProductMenu#PRODUCT_MENU_OPENED" />
-			<then>
-				<execute function="Click" locator1="ProductMenu#TOGGLE" />
-			</then>
-		</if>
-
-		<execute function="Click" locator1="ProductMenu#PRODUCT_MENU_TABS_USER_NAVIGATION" />
-
-		<var name="key_portletName" value="${portletName}" />
-
-		<if>
-			<condition function="IsElementNotPresent" locator1="ProductMenu#PRODUCT_MENU_PANEL_MENU_ITEM" />
-			<then>
-				<var name="key_portletCategoryName" value="My Account" />
-
-				<execute function="AssertClick" locator1="ProductMenu#PRODUCT_MENU_PANEL_MY_SPACE_PANEL_TITLE" value1="My Account" />
-			</then>
-		</if>
-
-		<execute function="AssertClick" locator1="ProductMenu#PRODUCT_MENU_PANEL_MENU_ITEM" value1="${portletName}" />
+		<execute macro="ProductMenu#gotoUserMyAccount">
+			<var name="portlet" value="${portletName}" />
+		</execute>
 	</command>
 
 	<command name="gotoMyDashboard">
