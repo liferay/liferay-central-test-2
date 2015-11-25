@@ -17,9 +17,8 @@
 <%@ include file="/init.jsp" %>
 
 <%
-String eventName = ParamUtil.getString(request, "eventName", liferayPortletResponse.getNamespace() + "selectTeam");
-
 String displayStyle = ParamUtil.getString(request, "displayStyle", "list");
+String eventName = ParamUtil.getString(request, "eventName", liferayPortletResponse.getNamespace() + "selectTeam");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
