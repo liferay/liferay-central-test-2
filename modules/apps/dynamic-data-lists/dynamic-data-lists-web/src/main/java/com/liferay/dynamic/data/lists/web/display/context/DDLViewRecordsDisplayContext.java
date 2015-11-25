@@ -88,8 +88,14 @@ public class DDLViewRecordsDisplayContext {
 
 	protected boolean hasValue(DDMFormField ddmFormField) {
 		String type = ddmFormField.getType();
-		return !(type.equals(DDMFormFieldType.FIELDSET) ||
-			type.equals(DDMFormFieldType.SEPARATOR));
+
+		if (type.equals(DDMFormFieldType.FIELDSET) ||
+			type.equals(DDMFormFieldType.SEPARATOR)) {
+
+			return false;
+		}
+
+		return true;
 	}
 
 	private static final int _TOTAL_COLUMNS = 5;
