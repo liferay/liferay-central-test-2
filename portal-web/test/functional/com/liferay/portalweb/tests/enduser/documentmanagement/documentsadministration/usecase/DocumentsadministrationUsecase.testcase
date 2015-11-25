@@ -55,9 +55,9 @@
 			<var name="pageName" value="Documents and Media Page" />
 		</execute>
 
-		<execute macro="DMNavigator#gotoDocumentTypePG" />
+		<execute macro="DMNavigator#gotoDocumentType" />
 
-		<execute macro="DMDocumentType#addPG">
+		<execute macro="DMDocumentType#add">
 			<var name="dmDocumentTypeDescription" value="DM Document Type Description" />
 			<var name="dmDocumentTypeFieldNames" value="Text Box" />
 			<var name="dmDocumentTypeName" value="DM Document Type Name" />
@@ -68,9 +68,9 @@
 			<var name="pageName" value="Documents and Media Page" />
 		</execute>
 
-		<execute macro="DMNavigator#gotoDocumentTypePG" />
+		<execute macro="DMNavigator#gotoDocumentType" />
 
-		<execute macro="DMDocumentType#editPG">
+		<execute macro="DMDocumentType#edit">
 			<var name="dmDocumentTypeName" value="DM Document Type Name" />
 			<var name="metadataSetName" value="DM Metadata Set Name" />
 			<var name="removeMetadataSet" value="true" />
@@ -770,9 +770,9 @@
 			<var name="portletName" value="Documents and Media" />
 		</execute>
 
-		<execute macro="DMNavigator#gotoDocumentTypePG" />
+		<execute macro="DMNavigator#gotoDocumentType" />
 
-		<execute macro="DMDocumentType#addPG">
+		<execute macro="DMDocumentType#add">
 			<var name="dmDocumentTypeDescription" value="Images" />
 			<var name="dmDocumentTypeFieldNames" value="Text Box,Date" />
 			<var name="dmDocumentTypeName" value="Photos" />
@@ -930,9 +930,9 @@
 			<var name="pageName" value="Documents and Media Page" />
 		</execute>
 
-		<execute macro="DMNavigator#gotoDocumentTypePG" />
+		<execute macro="DMNavigator#gotoDocumentType" />
 
-		<execute macro="DMDocumentType#editPG">
+		<execute macro="DMDocumentType#edit">
 			<var name="dmDocumentTypeFieldNames" value="Radio" />
 			<var name="dmDocumentTypeName" value="Photos" />
 		</execute>

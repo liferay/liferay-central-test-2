@@ -24,11 +24,6 @@
 		<execute function="AssertClick" locator1="MenuItem#DOCUMENT_TYPES" value1="Document Types" />
 	</command>
 
-	<command name="gotoDocumentTypePG">
-		<execute function="AssertClick#waitForDMHomeAssertTextEqualsClick" locator1="Toolbar#MANAGE" value1="Manage" />
-		<execute function="AssertClick" locator1="MenuItem#DOCUMENT_TYPES" value1="Document Types" />
-	</command>
-
 	<command name="gotoHomeCP">
 		<execute function="AssertClick#assertTextClickAtAndWait" locator1="DocumentsAndMedia#BREADCRUMB_HOME" value1="HOME" />
 	</command>
