@@ -29,6 +29,16 @@
 	<td></td>
 </tr>
 <tr>
+	<td>SITES_COMPASS</td>
+	<td>//a[contains(@id,'manageSitesLink')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SITES_POPUP</td>
+	<td>//div[div[contains(@id,'siteSelectorContent')] and contains(@class,'popover-content')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>CATEGORY_COLLAPSED</td>
 	<td>//div[div[@aria-expanded='true']]/../..//a[@aria-expanded='false' and contains(.,'${key_category}')]</td>
 	<td></td>
@@ -60,7 +70,7 @@
 </tr>
 <tr>
 	<td>SITE</td>
-	<td>//div[contains(@id,'sites')]/ul/li/a[contains(.,'${key_site}')]</td>
+	<td>//div[contains(@id,'siteSelector')]//div[h5[.='${key_site}']]</td>
 	<td></td>
 </tr>
 <tr>

@@ -130,11 +130,13 @@
 
 		<if>
 			<and>
-				<condition function="IsElementPresent" locator1="ProductMenu#BACK_ARROW" />
-				<condition function="IsVisible" locator1="ProductMenu#BACK_ARROW" />
+				<condition function="IsElementPresent" locator1="ProductMenu#SITES_COMPASS" />
+				<condition function="IsVisible" locator1="ProductMenu#SITES_COMPASS" />
 			</and>
 			<then>
-				<execute function="Click" locator1="ProductMenu#BACK_ARROW" />
+				<execute function="Click" locator1="ProductMenu#SITES_COMPASS" />
+
+				<execute function="AssertVisible" locator1="ProductMenu#SITES_POPUP" />
 			</then>
 		</if>
 
