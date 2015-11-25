@@ -70,33 +70,33 @@ public class AssetUtilTest {
 	public void setUp() throws Exception {
 		_group = GroupTestUtil.addGroup();
 
-		_vocabulary = AssetTestUtil.addVocabulary(_group.getGroupId());
+		_assetVocabulary = AssetTestUtil.addVocabulary(_group.getGroupId());
 
-		_category = AssetTestUtil.addCategory(
-			_group.getGroupId(), _vocabulary.getVocabularyId());
+		_assetCategory = AssetTestUtil.addCategory(
+			_group.getGroupId(), _assetVocabulary.getVocabularyId());
 
-		_tag = AssetTestUtil.addTag(_group.getGroupId());
+		_assetTag = AssetTestUtil.addTag(_group.getGroupId());
 	}
 
 	@Test
 	public void testSearchAssetEntries() throws Exception {
-		long[] categoryIds = new long[] {_category.getCategoryId()};
-		String[] tagNames = new String[] {_tag.getName()};
-
 		AssetEntryQuery assetEntryQuery = new AssetEntryQuery();
 
 		assetEntryQuery.setGroupIds(new long[] {_group.getGroupId()});
 
+		long[] assetCategoryIds = new long[] {_assetCategory.getCategoryId()};
+		String[] assetTagNames = new String[] {_assetTag.getName()};
+
 		assertCount(
-			0, categoryIds, tagNames, StringPool.BLANK, null, assetEntryQuery,
-			_group.getCompanyId(), _group.getGroupId(), null, null,
-			_group.getCreatorUserId(), null);
+			0, assetEntryQuery, assetCategoryIds, assetTagNames, null,
+			_group.getCompanyId(), StringPool.BLANK, null, null,
+			_group.getGroupId(), null, _group.getCreatorUserId());
 
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
-		serviceContext.setAssetCategoryIds(categoryIds);
-		serviceContext.setAssetTagNames(tagNames);
+		serviceContext.setAssetCategoryIds(assetCategoryIds);
+		serviceContext.setAssetTagNames(assetTagNames);
 
 		BlogsEntryLocalServiceUtil.addEntry(
 			TestPropsValues.getUserId(), RandomTestUtil.randomString(),
@@ -105,18 +105,17 @@ public class AssetUtilTest {
 			serviceContext);
 
 		assertCount(
-			1, categoryIds, tagNames, StringPool.BLANK, null, assetEntryQuery,
-			_group.getCompanyId(), _group.getGroupId(), null, null,
-			_group.getCreatorUserId(), null);
+			1, assetEntryQuery, assetCategoryIds, assetTagNames, null,
+			_group.getCompanyId(), StringPool.BLANK, null, null,
+			_group.getGroupId(), null, _group.getCreatorUserId());
 	}
 
 	protected void assertCount(
-			final int expectedCount, final long[] assetCategoryIds,
-			final String[] assetTagNames, final String keywords,
-			final Locale locale, final AssetEntryQuery assetEntryQuery,
-			final long companyId, final long scopeGroupId, final Layout layout,
-			final TimeZone timezone, final long userId,
-			final Map<String, Serializable> attributes)
+			final int expectedCount, final AssetEntryQuery assetEntryQuery,
+			final long[] assetCategoryIds, final String[] assetTagNames,
+			final Map<String, Serializable> attributes, final long companyId,
+			final String keywords, final Layout layout, final Locale locale,
+			final long scopeGroupId, final TimeZone timezone, final long userId)
 		throws Exception {
 
 		IdempotentRetryAssert.retryAssert(
@@ -125,15 +124,15 @@ public class AssetUtilTest {
 
 				@Override
 				public Void call() throws Exception {
-					BaseModelSearchResult<AssetEntry> searchResult =
+					BaseModelSearchResult<AssetEntry> baseModelSearchResult =
 						AssetUtil.searchAssetEntries(
-							assetCategoryIds, assetTagNames, keywords, locale,
-							assetEntryQuery, companyId, scopeGroupId, layout,
-							timezone, userId, QueryUtil.ALL_POS,
-							QueryUtil.ALL_POS, attributes);
+							assetEntryQuery, assetCategoryIds, assetTagNames,
+							attributes, companyId, keywords, layout, locale,
+							scopeGroupId, timezone, userId, QueryUtil.ALL_POS,
+							QueryUtil.ALL_POS);
 
 					Assert.assertEquals(
-						expectedCount, searchResult.getLength());
+						expectedCount, baseModelSearchResult.getLength());
 
 					return null;
 				}
@@ -141,12 +140,11 @@ public class AssetUtilTest {
 			});
 	}
 
-	private AssetCategory _category;
+	private AssetCategory _assetCategory;
+	private AssetTag _assetTag;
+	private AssetVocabulary _assetVocabulary;
 
 	@DeleteAfterTestRun
 	private Group _group;
-
-	private AssetTag _tag;
-	private AssetVocabulary _vocabulary;
 
 }
