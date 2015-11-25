@@ -17,23 +17,27 @@
 <%@ include file="/init.jsp" %>
 
 <%
-String redirect = ParamUtil.getString(request, "redirect");
-
 String eventName = ParamUtil.getString(request, "eventName", liferayPortletResponse.getNamespace() + "selectTeam");
 %>
-
-<liferay-ui:header
-	title="teams"
-/>
 
 <liferay-portlet:renderURL varImpl="portletURL">
 	<portlet:param name="mvcPath" value="/select_team.jsp" />
 	<portlet:param name="eventName" value="<%= eventName %>" />
 </liferay-portlet:renderURL>
 
-<aui:form action="<%= portletURL.toString() %>" cssClass="form-search" method="get" name="selectTeamFm">
-	<liferay-portlet:renderURLParams varImpl="portletURL" />
+<aui:nav-bar cssClass="collapse-basic-search" markupView="lexicon">
+	<aui:nav cssClass="navbar-nav">
+		<aui:nav-item label="teams" selected="<%= true %>" />
+	</aui:nav>
 
+	<aui:nav-bar-search>
+		<aui:form action="<%= portletURL %>" name="searchFm">
+			<liferay-ui:input-search markupView="lexicon" />
+		</aui:form>
+	</aui:nav-bar-search>
+</aui:nav-bar>
+
+<aui:form cssClass="container-fluid-1280" name="selectTeamFm">
 	<liferay-ui:search-container
 		searchContainer="<%= new TeamSearch(renderRequest, portletURL) %>"
 	>
@@ -43,17 +47,13 @@ String eventName = ParamUtil.getString(request, "eventName", liferayPortletRespo
 
 		portletURL.setParameter(searchContainer.getCurParam(), String.valueOf(searchContainer.getCur()));
 
-		total = TeamLocalServiceUtil.searchCount(scopeGroupId, searchTerms.getName(), searchTerms.getDescription(), new LinkedHashMap<String, Object>());
+		total = TeamLocalServiceUtil.searchCount(scopeGroupId, searchTerms.getKeywords(), searchTerms.getDescription(), new LinkedHashMap<String, Object>());
 
 		searchContainer.setTotal(total);
 		%>
 
-		<liferay-ui:input-search name="<%= searchTerms.NAME %>" />
-
-		<div class="separator"><!-- --></div>
-
 		<liferay-ui:search-container-results
-			results="<%= TeamLocalServiceUtil.search(scopeGroupId, searchTerms.getName(), searchTerms.getDescription(), new LinkedHashMap<String, Object>(), searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator()) %>"
+			results="<%= TeamLocalServiceUtil.search(scopeGroupId, searchTerms.getKeywords(), searchTerms.getDescription(), new LinkedHashMap<String, Object>(), searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator()) %>"
 		/>
 
 		<liferay-ui:search-container-row
