@@ -69,7 +69,7 @@ public class JGroupsClusterChannel implements ClusterChannel {
 
 			if (_log.isInfoEnabled()) {
 				_log.info(
-					"Create a new jgroups channel with properties " +
+					"Create a new JGroups channel with properties " +
 						_jChannel.getProperties());
 			}
 		}
