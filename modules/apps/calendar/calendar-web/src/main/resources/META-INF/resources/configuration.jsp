@@ -22,7 +22,6 @@ String tabs2 = ParamUtil.getString(request, "tabs2", "user-settings");
 
 <aui:nav-bar markupView="lexicon">
 	<aui:nav cssClass="navbar-nav">
-
 		<liferay-portlet:renderURL portletConfiguration="<%= true %>" var="userSettingsURL">
 			<portlet:param name="tabs2" value="user-settings" />
 		</liferay-portlet:renderURL>
@@ -34,7 +33,6 @@ String tabs2 = ParamUtil.getString(request, "tabs2", "user-settings");
 		/>
 
 		<c:if test="<%= PortalUtil.isRSSFeedsEnabled() %>">
-
 			<liferay-portlet:renderURL portletConfiguration="<%= true %>" var="rssURL">
 				<portlet:param name="tabs2" value="rss" />
 			</liferay-portlet:renderURL>
@@ -44,9 +42,7 @@ String tabs2 = ParamUtil.getString(request, "tabs2", "user-settings");
 				label="rss"
 				selected='<%= tabs2.equals("rss") %>'
 			/>
-
 		</c:if>
-
 	</aui:nav>
 </aui:nav-bar>
 

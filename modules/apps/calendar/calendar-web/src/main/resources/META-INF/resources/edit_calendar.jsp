@@ -84,7 +84,6 @@ navigationURL.setParameter("calendarResourceId", calendarResourceId);
 				selected='<%= tabs2.equals("notification-templates") %>'
 			/>
 		</c:if>
-
 	</aui:nav>
 </aui:nav-bar>
 
