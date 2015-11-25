@@ -504,10 +504,10 @@
 
 		<if>
 			<not>
-				<isset var="portletCategoryName" />
+				<isset var="category" />
 			</not>
 			<then>
-				<var name="portletCategoryName" value="Apps" />
+				<var name="category" value="Apps" />
 			</then>
 		</if>
 
