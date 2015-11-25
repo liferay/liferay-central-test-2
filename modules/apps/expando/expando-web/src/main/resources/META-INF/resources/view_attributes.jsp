@@ -19,10 +19,9 @@
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 
-String displayStyle = ParamUtil.getString(request, "displayStyle", "list");
-
 String modelResource = ParamUtil.getString(request, "modelResource");
 String modelResourceName = ResourceActionsUtil.getModelResource(request, modelResource);
+String displayStyle = ParamUtil.getString(request, "displayStyle", "list");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
