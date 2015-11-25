@@ -35,9 +35,7 @@
 	href="<%= rowURL %>"
 	name="key"
 	value="<%= HtmlUtil.escape(name) %>"
->
-
-</liferay-ui:search-container-column-text>
+/>
 
 <liferay-ui:search-container-column-text
 	href="<%= rowURL %>"
