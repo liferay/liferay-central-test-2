@@ -18,6 +18,8 @@
 
 <%
 String eventName = ParamUtil.getString(request, "eventName", liferayPortletResponse.getNamespace() + "selectTeam");
+
+String displayStyle = ParamUtil.getString(request, "displayStyle", "list");
 %>
 
 <liferay-portlet:renderURL varImpl="portletURL">
@@ -36,6 +38,23 @@ String eventName = ParamUtil.getString(request, "eventName", liferayPortletRespo
 		</aui:form>
 	</aui:nav-bar-search>
 </aui:nav-bar>
+
+<liferay-frontend:management-bar>
+	<liferay-frontend:management-bar-buttons>
+		<liferay-frontend:management-bar-filters>
+			<liferay-frontend:management-bar-navigation
+				navigationKeys='<%= new String[] {"all"} %>'
+				portletURL="<%= PortletURLUtil.clone(portletURL, liferayPortletResponse) %>"
+			/>
+		</liferay-frontend:management-bar-filters>
+
+		<liferay-frontend:management-bar-display-buttons
+			displayViews='<%= new String[] {"list"} %>'
+			portletURL="<%= PortletURLUtil.clone(portletURL, liferayPortletResponse) %>"
+			selectedDisplayStyle="<%= displayStyle %>"
+		/>
+	</liferay-frontend:management-bar-buttons>
+</liferay-frontend:management-bar>
 
 <aui:form cssClass="container-fluid-1280" name="selectTeamFm">
 	<liferay-ui:search-container
@@ -104,7 +123,7 @@ String eventName = ParamUtil.getString(request, "eventName", liferayPortletRespo
 
 		</liferay-ui:search-container-row>
 
-		<liferay-ui:search-iterator />
+		<liferay-ui:search-iterator displayStyle="<%= displayStyle %>" markupView="lexicon" />
 	</liferay-ui:search-container>
 </aui:form>
 
