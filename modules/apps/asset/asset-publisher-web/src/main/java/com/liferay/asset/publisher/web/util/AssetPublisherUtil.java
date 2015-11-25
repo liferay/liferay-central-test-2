@@ -391,16 +391,11 @@ public class AssetPublisherUtil {
 		throws Exception {
 
 		if (isSearchWithIndex(portletName, assetEntryQuery)) {
-			long[] assetCategoryIds = getAssetCategoryIds(portletPreferences);
-
-			String[] assetTagNames = getAssetTagNames(portletPreferences);
-
-			String keywords = assetEntryQuery.getKeywords();
-
 			return AssetUtil.searchAssetEntries(
-				assetCategoryIds, assetTagNames, keywords, locale,
-				assetEntryQuery, companyId, scopeGroupId, layout, timeZone,
-				userId, start, end, attributes);
+				assetEntryQuery, getAssetCategoryIds(portletPreferences),
+				getAssetTagNames(portletPreferences), attributes, companyId,
+				assetEntryQuery.getKeywords(), layout, locale, scopeGroupId,
+				timeZone, userId, start, end);
 		}
 
 		int total = _assetEntryService.getEntriesCount(assetEntryQuery);

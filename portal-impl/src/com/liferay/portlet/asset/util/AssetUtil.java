@@ -612,25 +612,26 @@ public class AssetUtil {
 	}
 
 	public static BaseModelSearchResult<AssetEntry> searchAssetEntries(
-			HttpServletRequest request, AssetEntryQuery assetEntryQuery,
-			int start, int end)
+			AssetEntryQuery assetEntryQuery, long[] assetCategoryIds,
+			String[] assetTagNames, Map<String, Serializable> attributes,
+			long companyId, String keywords, Layout layout, Locale locale,
+			long scopeGroupId, TimeZone timeZone, long userId, int start,
+			int end)
 		throws Exception {
 
-		SearchContext searchContext = SearchContextFactory.getInstance(request);
+		SearchContext searchContext = SearchContextFactory.getInstance(
+			assetCategoryIds, assetTagNames, attributes, companyId, keywords,
+			layout, locale, scopeGroupId, timeZone, userId);
 
 		return searchAssetEntries(searchContext, assetEntryQuery, start, end);
 	}
 
 	public static BaseModelSearchResult<AssetEntry> searchAssetEntries(
-			long[] assetCategoryIds, String[] assetTagNames, String keywords,
-			Locale locale, AssetEntryQuery assetEntryQuery, long companyId,
-			long scopeGroupId, Layout layout, TimeZone timeZone, long userId,
-			int start, int end, Map<String, Serializable> attributes)
+			HttpServletRequest request, AssetEntryQuery assetEntryQuery,
+			int start, int end)
 		throws Exception {
 
-		SearchContext searchContext = SearchContextFactory.getInstance(
-			assetCategoryIds, assetTagNames, keywords, locale, companyId,
-			scopeGroupId, layout, timeZone, userId, attributes);
+		SearchContext searchContext = SearchContextFactory.getInstance(request);
 
 		return searchAssetEntries(searchContext, assetEntryQuery, start, end);
 	}

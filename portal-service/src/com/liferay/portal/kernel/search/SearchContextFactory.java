@@ -99,9 +99,10 @@ public class SearchContextFactory {
 	}
 
 	public static SearchContext getInstance(
-		long[] assetCategoryIds, String[] assetTagNames, String keywords,
-		Locale locale, long companyId, long scopeGroupId, Layout layout,
-		TimeZone timeZone, long userId, Map<String, Serializable> attributes) {
+		long[] assetCategoryIds, String[] assetTagNames,
+		Map<String, Serializable> attributes, long companyId, String keywords,
+		Layout layout, Locale locale, long scopeGroupId, TimeZone timeZone,
+		long userId) {
 
 		SearchContext searchContext = new SearchContext();
 
