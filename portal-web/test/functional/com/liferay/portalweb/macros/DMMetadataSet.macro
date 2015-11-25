@@ -20,7 +20,7 @@
 		<execute function="Click" locator1="TextInput#NAME" />
 	</command>
 
-	<command name="addPG">
+	<command name="add">
 		<execute macro="DMMetadataSet#selectMetadataSetsFrame" />
 
 		<execute function="Click" locator1="Button#PLUS" />

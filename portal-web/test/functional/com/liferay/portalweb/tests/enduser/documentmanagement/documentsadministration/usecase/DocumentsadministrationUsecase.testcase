@@ -42,9 +42,9 @@
 			<var name="portletName" value="Documents and Media" />
 		</execute>
 
-		<execute macro="DMNavigator#gotoMetadataSetsCP" />
+		<execute macro="DMNavigator#gotoMetadataSets" />
 
-		<execute macro="DMMetadataSet#addPG">
+		<execute macro="DMMetadataSet#add">
 			<var name="dmMetadataSetFieldNames" value="Text Box" />
 			<var name="metadataSetName" value="DM Metadata Set Name" />
 		</execute>
