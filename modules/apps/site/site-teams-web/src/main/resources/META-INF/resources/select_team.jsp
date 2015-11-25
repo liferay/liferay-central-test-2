@@ -83,24 +83,9 @@ String displayStyle = ParamUtil.getString(request, "displayStyle", "list");
 		>
 			<liferay-ui:search-container-column-text
 				name="name"
-				value="<%= HtmlUtil.escape(curTeam.getName()) %>"
-			/>
-
-			<liferay-ui:search-container-column-text
-				name="description"
-				value="<%= HtmlUtil.escape(curTeam.getDescription()) %>"
-			/>
-
-			<liferay-ui:search-container-column-text>
+			>
 
 				<%
-				Map<String, Object> data = new HashMap<String, Object>();
-
-				data.put("teamdescription", curTeam.getDescription());
-				data.put("teamid", curTeam.getTeamId());
-				data.put("teamname", curTeam.getName());
-				data.put("teamsearchcontainername", "teams");
-
 				boolean disabled = false;
 
 				Group group = GroupLocalServiceUtil.getGroup(scopeGroupId);
@@ -118,9 +103,32 @@ String displayStyle = ParamUtil.getString(request, "displayStyle", "list");
 				}
 				%>
 
-				<aui:button cssClass="selector-button" data="<%= data %>" disabled="<%= disabled %>" value="choose" />
+				<c:choose>
+					<c:when test="<%= !disabled %>">
+
+						<%
+						Map<String, Object> data = new HashMap<String, Object>();
+
+						data.put("teamdescription", curTeam.getDescription());
+						data.put("teamid", curTeam.getTeamId());
+						data.put("teamname", curTeam.getName());
+						data.put("teamsearchcontainername", "teams");
+						%>
+
+						<aui:a cssClass="selector-button" data="<%= data %>" href="javascript:;">
+							<%= HtmlUtil.escape(curTeam.getName()) %>
+						</aui:a>
+					</c:when>
+					<c:otherwise>
+						<%= HtmlUtil.escape(curTeam.getName()) %>
+					</c:otherwise>
+				</c:choose>
 			</liferay-ui:search-container-column-text>
 
+			<liferay-ui:search-container-column-text
+				name="description"
+				value="<%= HtmlUtil.escape(curTeam.getDescription()) %>"
+			/>
 		</liferay-ui:search-container-row>
 
 		<liferay-ui:search-iterator displayStyle="<%= displayStyle %>" markupView="lexicon" />
