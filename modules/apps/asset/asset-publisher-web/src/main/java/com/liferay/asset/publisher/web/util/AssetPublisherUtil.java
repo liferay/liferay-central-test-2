@@ -405,8 +405,8 @@ public class AssetPublisherUtil {
 
 		int total = _assetEntryService.getEntriesCount(assetEntryQuery);
 
-		assetEntryQuery.setStart(start);
 		assetEntryQuery.setEnd(end);
+		assetEntryQuery.setStart(start);
 
 		List<AssetEntry> results = _assetEntryService.getEntries(
 			assetEntryQuery);
