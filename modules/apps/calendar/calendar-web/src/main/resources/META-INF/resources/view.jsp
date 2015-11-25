@@ -25,7 +25,6 @@ PortletURL portletURL = renderResponse.createRenderURL();
 <div id="<portlet:namespace />alert"></div>
 
 <c:if test="<%= themeDisplay.isSignedIn() %>">
-
 	<aui:nav-bar cssClass="collapse-basic-search container-fluid" markupView="lexicon">
 		<aui:nav cssClass="navbar-nav">
 
