@@ -60,9 +60,7 @@
 	</command>
 
 	<command name="gotoLocalizedControlPanel" summary="Navigate to Product Menu > Control Panel > ${category} > ${portlet}">
-		<execute macro="ProductMenuHelper#gotoTab">
-			<var name="tab" value="${tab}" />
-		</execute>
+		<execute macro="ProductMenuHelper#gotoControlPanel" />
 
 		<execute macro="ProductMenuHelper#expandCategory">
 			<var name="category" value="${category}" />
@@ -74,9 +72,7 @@
 	</command>
 
 	<command name="gotoLocalizedSitesAdministration" summary="Navigate to Product Menu > Sites > ${category} > ${portlet}">
-		<execute macro="ProductMenuHelper#gotoTab">
-			<var name="tab" value="${tab}" />
-		</execute>
+		<execute macro="ProductMenuHelper#gotoSites" />
 
 		<execute function="Click" locator1="ProductMenu#BACK_ARROW" />
 

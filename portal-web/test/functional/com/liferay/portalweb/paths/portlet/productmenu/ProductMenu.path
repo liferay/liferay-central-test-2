@@ -79,6 +79,16 @@
 	<td></td>
 </tr>
 <tr>
+	<td>TAB_COLLAPSED</td>
+	<td>//div[@role='tab' and contains(.,'${key_tab}')]//div[@aria-expanded='false']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>TAB_EXPANDED</td>
+	<td>//div[@role='tab' and contains(.,'${key_tab}')]//div[@aria-expanded='true']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>USER_PROFILE_PICTURE</td>
 	<td>//div[contains(@class,'user-icon')]</td>
 	<td></td>
@@ -105,13 +115,43 @@
 	<td></td>
 </tr>
 <tr>
+	<td>PRODUCT_MENU_TABS_SITES_COLLAPSED</td>
+	<td>//div[@role='tab' and contains(@id,'site_administration')]//div[@aria-expanded='false']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>PRODUCT_MENU_TABS_SITES_EXPANDED</td>
+	<td>//div[@role='tab' and contains(@id,'site_administration')]//div[@aria-expanded='true']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>PRODUCT_MENU_TABS_SITES_NAVIGATION</td>
 	<td>//div[contains(.,'Sites')]/../div[contains(@class,'tab-text')]</td>
 	<td></td>
 </tr>
 <tr>
+	<td>PRODUCT_MENU_TABS_USER_COLLAPSED</td>
+	<td>//div[@role='tab' and contains(@id,'user')]//div[@aria-expanded='false']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>PRODUCT_MENU_TABS_USER_EXPANDED</td>
+	<td>//div[@role='tab' and contains(@id,'user')]//div[@aria-expanded='true']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>PRODUCT_MENU_TABS_USER_NAVIGATION</td>
 	<td>//div[contains(@class,'user-tab')]//div[contains(@class,'user-icon')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>PRODUCT_MENU_TABS_CONTROL_PANEL_COLLAPSED</td>
+	<td>//div[@role='tab' and contains(@id,'control_panel')]//div[@aria-expanded='false']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>PRODUCT_MENU_TABS_CONTROL_PANEL_EXPANDED</td>
+	<td>//div[@role='tab' and contains(@id,'control_panel')]//div[@aria-expanded='true']</td>
 	<td></td>
 </tr>
 <tr>
