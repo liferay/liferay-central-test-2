@@ -87,18 +87,16 @@ public class BookmarksFolderLocalServiceTest {
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
-		String roleName = StringUtil.randomString();
-
 		Role role = RoleLocalServiceUtil.addRole(
-			TestPropsValues.getUserId(), null, 0, roleName, null, null,
-			RoleConstants.TYPE_SITE, null, serviceContext);
+			TestPropsValues.getUserId(), null, 0, StringUtil.randomString(),
+			null, null, RoleConstants.TYPE_SITE, null, serviceContext);
 
 		ResourceBlockServiceUtil.addCompanyScopePermission(
 			_group.getGroupId(), _group.getCompanyId(),
 			BookmarksFolder.class.getName(), role.getRoleId(),
 			ActionKeys.ADD_SUBFOLDER);
 
-		User user = UserTestUtil.addGroupUser(_group, roleName);
+		User user = UserTestUtil.addGroupUser(_group, role.getName());
 
 		PermissionChecker permissionChecker =
 			PermissionCheckerFactoryUtil.create(user);
