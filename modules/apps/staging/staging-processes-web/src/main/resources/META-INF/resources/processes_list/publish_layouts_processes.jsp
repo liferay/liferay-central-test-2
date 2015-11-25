@@ -21,6 +21,7 @@ String cmd = ParamUtil.getString(request, Constants.CMD, Constants.PUBLISH_TO_LI
 
 long layoutSetBranchId = ParamUtil.getLong(request, "layoutSetBranchId");
 String layoutSetBranchName = ParamUtil.getString(request, "layoutSetBranchName");
+
 boolean localPublishing = true;
 
 if ((liveGroup.isStaged() && liveGroup.isStagedRemotely()) || cmd.equals(Constants.PUBLISH_TO_REMOTE)) {
