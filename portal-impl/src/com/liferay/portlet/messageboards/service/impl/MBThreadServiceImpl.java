@@ -395,7 +395,7 @@ public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 			permissionChecker, messageId, ActionKeys.VIEW);
 
 		return mbThreadLocalService.splitThread(
-			getGuestOrUserId(), messageId, subject, serviceContext);
+			getUserId(), messageId, subject, serviceContext);
 	}
 
 	@Override
