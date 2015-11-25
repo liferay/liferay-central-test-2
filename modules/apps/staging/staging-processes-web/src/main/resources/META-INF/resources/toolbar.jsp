@@ -20,9 +20,7 @@
 	includeCheckBox="<%= true %>"
 	searchContainerId="publishProcesses"
 >
-
-	<liferay-frontend:management-bar-filters>
-	</liferay-frontend:management-bar-filters>
+	<liferay-frontend:management-bar-filters />
 
 	<liferay-frontend:management-bar-action-buttons>
 
