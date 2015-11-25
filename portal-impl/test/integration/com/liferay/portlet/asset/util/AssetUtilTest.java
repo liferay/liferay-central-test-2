@@ -82,6 +82,7 @@ public class AssetUtilTest {
 	public void testSearchAssetEntries() throws Exception {
 		long[] categoryIds = new long[] {_category.getCategoryId()};
 		String[] tagNames = new String[] {_tag.getName()};
+
 		AssetEntryQuery assetEntryQuery = new AssetEntryQuery();
 
 		assetEntryQuery.setGroupIds(new long[] {_group.getGroupId()});
