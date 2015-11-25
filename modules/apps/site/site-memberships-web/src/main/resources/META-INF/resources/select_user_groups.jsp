@@ -17,17 +17,16 @@
 <%@ include file="/init.jsp" %>
 
 <%
-String eventName = ParamUtil.getString(request, "eventName", liferayPortletResponse.getNamespace() + "selectUserGroups");
-
 String displayStyle = ParamUtil.getString(request, "displayStyle", "icon");
+String eventName = ParamUtil.getString(request, "eventName", liferayPortletResponse.getNamespace() + "selectUserGroups");
 String orderByCol = ParamUtil.getString(request, "orderByCol", "name");
 String orderByType = ParamUtil.getString(request, "orderByType", "asc");
 
 PortletURL viewUserGroupsURL = renderResponse.createRenderURL();
 
 viewUserGroupsURL.setParameter("mvcPath", "/select_user_groups.jsp");
-viewUserGroupsURL.setParameter("eventName", eventName);
 viewUserGroupsURL.setParameter("groupId", String.valueOf(siteMembershipsDisplayContext.getGroupId()));
+viewUserGroupsURL.setParameter("eventName", eventName);
 
 UserGroupSiteMembershipsChecker rowChecker = new UserGroupSiteMembershipsChecker(renderResponse, siteMembershipsDisplayContext.getGroup());
 
