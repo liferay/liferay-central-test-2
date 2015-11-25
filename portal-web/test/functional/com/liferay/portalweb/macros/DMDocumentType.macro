@@ -19,6 +19,17 @@
 
 		<execute function="SelectFrame" locator1="DocumentsAndMediaDocumentTypes#DOCUMENT_TYPES_IFRAME" />
 
+		<if>
+			<isset var="metadataSetName" />
+			<then>
+				<execute macro="DMDocumentType#selectPGMetadataSet">
+					<var name="key_metadataSetName" value="${metadataSetName}" />
+				</execute>
+
+				<execute macro="DMDocumentType#selectDocumentTypeFrame" />
+			</then>
+		</if>
+
 		<execute function="AssertClick" locator1="DocumentsAndMediaDocumentTypes#SAVE_BUTTON" value1="Save" />
 		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request completed successfully." />
 	</command>
