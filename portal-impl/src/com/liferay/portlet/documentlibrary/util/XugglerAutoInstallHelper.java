@@ -86,7 +86,7 @@ public class XugglerAutoInstallHelper {
 			try {
 				xuggler.installNativeLibraries(xugglerJarFile);
 			}
-			catch (XugglerInstallException.MuseBeURLClassLoader xie) {
+			catch (XugglerInstallException.MustBeURLClassLoader xie) {
 				if (_log.isDebugEnabled()) {
 					_log.debug(xie, xie);
 				}

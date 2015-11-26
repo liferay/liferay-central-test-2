@@ -21,9 +21,9 @@ import com.liferay.portal.kernel.exception.PortalException;
  */
 public class XugglerInstallException extends PortalException {
 
-	public static class MuseBeURLClassLoader extends XugglerInstallException {
+	public static class MustBeURLClassLoader extends XugglerInstallException {
 
-		public MuseBeURLClassLoader() {
+		public MustBeURLClassLoader() {
 			super(
 				"Unable to install JAR because the portal class loader is " +
 					"not an instance of URLClassLoader");

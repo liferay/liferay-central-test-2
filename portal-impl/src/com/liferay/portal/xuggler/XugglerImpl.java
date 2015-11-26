@@ -42,7 +42,7 @@ public class XugglerImpl implements Xuggler {
 		ClassLoader classLoader = ClassLoaderUtil.getPortalClassLoader();
 
 		if (!(classLoader instanceof URLClassLoader)) {
-			throw new XugglerInstallException.MuseBeURLClassLoader();
+			throw new XugglerInstallException.MustBeURLClassLoader();
 		}
 
 		try {
