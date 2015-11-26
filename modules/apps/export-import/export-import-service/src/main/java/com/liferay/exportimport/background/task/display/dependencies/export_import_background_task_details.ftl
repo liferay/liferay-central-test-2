@@ -9,64 +9,57 @@
 
 	<span class="error-message">${htmlUtil.escape(statusMessageJSONObject.getString("message"))}</span>
 
-	<#assign messageListItemsJSONArray = statusMessageJSONObject.getJSONArray("messageListItems")! >
+	<#assign messageListItemsJSONArray = statusMessageJSONObject.getJSONArray("messageListItems")!>
 
-	<#if (messageListItemsJSONArray.iterator())?has_content >
+	<#if (messageListItemsJSONArray.iterator())?has_content>
 		<ul class="error-list-items">
+			<#list messageListItemsJSONArray.iterator() as messageListItemJSONObject>
+				<#assign info = messageListItemJSONObject.getString("info")>
+				<#assign name = messageListItemJSONObject.getString("name")>
 
-			<#list messageListItemsJSONArray.iterator() as messageListItemJSONObject >
-				<#assign info = messageListItemJSONObject.getString("info") >
-				<#assign name = messageListItemJSONObject.getString("name") >
+				<li>
+					${messageListItemJSONObject.getString("type")}
 
-			<li>
-				${messageListItemJSONObject.getString("type")}
+					${messageListItemJSONObject.getString("site")}:
 
-				${messageListItemJSONObject.getString("site")}:
+					<strong>${htmlUtil.escape(name)}</strong>
 
-				<strong>${htmlUtil.escape(name)}</strong>
-
-				<#if info?? >
-					<span class="error-info">(${htmlUtil.escape(info)})</span>
-				</#if>
-			</li>
-
+					<#if info??>
+						<span class="error-info">(${htmlUtil.escape(info)})</span>
+					</#if>
+				</li>
 			</#list>
-
 		</ul>
 	</#if>
 </div>
 
-<#assign warningMessagesJSONArray = statusMessageJSONObject.getJSONArray("warningMessages")! >
+<#assign warningMessagesJSONArray = statusMessageJSONObject.getJSONArray("warningMessages")!>
 
-<#if (warningMessagesJSONArray.iterator())?has_content >
+<#if (warningMessagesJSONArray.iterator())?has_content>
 	<div class="alert upload-error">
 		<span class="error-message">
-			<#if (messageListItemsJSONArray.iterator())?has_content >
+			<#if (messageListItemsJSONArray.iterator())?has_content>
 				<@liferay.language key="consider-that-the-following-data-would-not-have-been-published-either"/>
-			<#else >
+			<#else>
 				<@liferay.language key="the-following-data-has-not-been-published"/>
 			</#if>
 		</span>
 
 		<ul class="error-list-items">
-
-			<#list warningMessagesJSONArray.iterator() as warningMessageJSONObject >
-				<#assign info = warningMessageJSONObject.getString("info") >
-				<#assign name = warningMessageJSONObject.getString("name") >
+			<#list warningMessagesJSONArray.iterator() as warningMessageJSONObject>
+				<#assign info = warningMessageJSONObject.getString("info")>
+				<#assign name = warningMessageJSONObject.getString("name")>
 
 				<li>
 					${warningMessageJSONObject.getString("type")}
 
 					<strong>${warningMessageJSONObject.getString("size")}</strong>
 
-					<#if info?? >
+					<#if info??>
 						<span class="error-info">(${htmlUtil.escape(info)})</span>
 					</#if>
 				</li>
-
 			</#list>
-
 		</ul>
 	</div>
-
 </#if>
