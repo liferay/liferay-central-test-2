@@ -479,10 +479,9 @@ public class DDMFormRendererHelper {
 	}
 
 	protected String wrapDDMFormFieldHTML(String ddmFormFieldHTML) {
-		StringBundler sb = new StringBundler(4);
+		StringBundler sb = new StringBundler(3);
 
-		sb.append("<div class=\"lfr-ddm-form-field-container");
-		sb.append("\">");
+		sb.append("<div class=\"lfr-ddm-form-field-container\">");
 		sb.append(ddmFormFieldHTML);
 		sb.append("</div>");
 
