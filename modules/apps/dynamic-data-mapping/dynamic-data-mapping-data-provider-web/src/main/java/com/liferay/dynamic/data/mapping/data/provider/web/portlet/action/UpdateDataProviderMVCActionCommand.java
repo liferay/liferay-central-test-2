@@ -55,7 +55,7 @@ public class UpdateDataProviderMVCActionCommand
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		long dataProviderId = ParamUtil.getLong(
+		long dataProviderInstanceId = ParamUtil.getLong(
 			actionRequest, "dataProviderInstanceId");
 
 		String name = ParamUtil.getString(actionRequest, "name");
@@ -67,7 +67,8 @@ public class UpdateDataProviderMVCActionCommand
 			DDMDataProviderInstance.class.getName(), actionRequest);
 
 		getDDMDataProviderInstanceService().updateDataProviderInstance(
-			dataProviderId, getLocalizedMap(themeDisplay.getLocale(), name),
+			dataProviderInstanceId,
+			getLocalizedMap(themeDisplay.getLocale(), name),
 			getLocalizedMap(themeDisplay.getLocale(), description),
 			ddmFormValues, serviceContext);
 	}
