@@ -51,7 +51,7 @@ public class XugglerImpl implements Xuggler {
 				PropsValues.LIFERAY_LIB_PORTAL_DIR, name,
 				(URLClassLoader)classLoader);
 
-			_isNativeLibraryCopied = true;
+			_nativeLibraryCopied = true;
 		}
 		catch (Exception e) {
 			throw new XugglerInstallException.MustInstallJar(name, e);
@@ -90,7 +90,7 @@ public class XugglerImpl implements Xuggler {
 
 	@Override
 	public boolean isNativeLibraryCopied() {
-		return _isNativeLibraryCopied;
+		return _nativeLibraryCopied;
 	}
 
 	@Override
@@ -147,7 +147,7 @@ public class XugglerImpl implements Xuggler {
 	private static final Log _log = LogFactoryUtil.getLog(XugglerImpl.class);
 
 	private static boolean _informAdministrator = true;
-	private static boolean _isNativeLibraryCopied;
+	private static boolean _nativeLibraryCopied;
 	private static boolean _nativeLibraryInstalled;
 
 }
