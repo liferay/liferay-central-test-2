@@ -51,7 +51,7 @@
 			<liferay-ui:error exception="<%= XugglerInstallException.class %>">
 
 				<%
-					XugglerInstallException xie = (XugglerInstallException)errorException;
+				XugglerInstallException xie = (XugglerInstallException)errorException;
 				%>
 
 				<liferay-ui:message arguments="<%= xie.getMessage() %>" key="an-unexpected-error-occurred-while-installing-xuggler-x" translateArguments="<%= false %>" />
