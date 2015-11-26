@@ -24,7 +24,6 @@ DDMDataProviderInstance ddmDataProviderInstance = (DDMDataProviderInstance)row.g
 
 <liferay-ui:icon-menu direction="down" icon="<%= StringPool.BLANK %>" markupView="lexicon" message="<%= StringPool.BLANK %>" showExpanded="<%= false %>" showWhenSingleIcon="<%= false %>">
 	<c:if test="<%= ddmDataProviderDisplayContext.isShowEditDataProviderIcon(ddmDataProviderInstance) %>">
-
 		<portlet:renderURL var="editURL">
 			<portlet:param name="mvcPath" value="/edit_data_provider.jsp" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
