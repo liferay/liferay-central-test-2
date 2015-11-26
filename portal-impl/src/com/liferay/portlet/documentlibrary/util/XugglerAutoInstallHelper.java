@@ -30,13 +30,17 @@ import com.liferay.portal.kernel.xuggler.Xuggler;
 import com.liferay.portal.kernel.xuggler.XugglerInstallException;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.xuggler.XugglerImpl;
+
 import com.xuggle.ferry.JNILibrary;
 
 import java.io.File;
 import java.io.PrintStream;
+
 import java.lang.reflect.Field;
+
 import java.net.URL;
 import java.net.URLClassLoader;
+
 import java.util.Iterator;
 import java.util.Properties;
 import java.util.Set;
