@@ -58,6 +58,7 @@ public class DeleteDataProviderMVCActionCommand extends BaseMVCActionCommand {
 		_ddmDataProviderInstanceService = ddmDataProviderInstanceService;
 	}
 
-	private DDMDataProviderInstanceService _ddmDataProviderInstanceService;
+	private volatile DDMDataProviderInstanceService
+		_ddmDataProviderInstanceService;
 
 }
