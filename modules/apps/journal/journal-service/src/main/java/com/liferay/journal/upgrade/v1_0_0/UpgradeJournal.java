@@ -375,10 +375,10 @@ public class UpgradeJournal extends UpgradeProcess {
 				}
 			}
 
-			List<Element> nestedDynamicElementElements =
+			List<Element> childDynamicElementElements =
 				dynamicElementElement.elements("dynamic-element");
 
-			transformDateFieldValues(nestedDynamicElementElements);
+			transformDateFieldValues(childDynamicElementElements);
 		}
 	}
 

@@ -229,10 +229,10 @@ public class BaseDDMServiceTestCase {
 
 		Date dateValue = PortalUtil.getDate(month, day, year);
 
-		DateFormat rawDateFormat = DateFormatFactoryUtil.getSimpleDateFormat(
+		DateFormat dateFormat = DateFormatFactoryUtil.getSimpleDateFormat(
 			"yyyy-MM-dd", locale);
 
-		return rawDateFormat.format(dateValue);
+		return dateFormat.format(dateValue);
 	}
 
 	protected Map<Locale, String> getDefaultLocaleMap(String value) {
