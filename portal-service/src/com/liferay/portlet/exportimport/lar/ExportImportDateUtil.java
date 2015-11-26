@@ -417,22 +417,22 @@ public class ExportImportDateUtil {
 			if (Validator.isNotNull(portletId)) {
 				Layout layout = LayoutLocalServiceUtil.fetchLayout(plid);
 
-				PortletPreferences preferences = null;
+				PortletPreferences portletPreferences = null;
 
 				if (layout == null) {
 					Group group = GroupLocalServiceUtil.getGroup(groupId);
 
-					preferences =
+					portletPreferences =
 						PortletPreferencesFactoryUtil.getStrictPortletSetup(
 							group.getCompanyId(), groupId, portletId);
 				}
 				else {
-					preferences =
+					portletPreferences =
 						PortletPreferencesFactoryUtil.getStrictPortletSetup(
 							layout, portletId);
 				}
 
-				lastPublishDate = getLastPublishDate(preferences);
+				lastPublishDate = getLastPublishDate(portletPreferences);
 			}
 			else {
 				LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
