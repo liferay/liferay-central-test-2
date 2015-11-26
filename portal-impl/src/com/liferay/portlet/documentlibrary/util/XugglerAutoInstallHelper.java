@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.documentlibrary.util;
 
-import com.liferay.portal.XugglerInstallException;
 import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.io.DummyOutputStream;
 import com.liferay.portal.kernel.log.Log;
@@ -28,19 +27,16 @@ import com.liferay.portal.kernel.util.ReflectionUtil;
 import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xuggler.Xuggler;
+import com.liferay.portal.kernel.xuggler.XugglerInstallException;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.xuggler.XugglerImpl;
-
 import com.xuggle.ferry.JNILibrary;
 
 import java.io.File;
 import java.io.PrintStream;
-
 import java.lang.reflect.Field;
-
 import java.net.URL;
 import java.net.URLClassLoader;
-
 import java.util.Iterator;
 import java.util.Properties;
 import java.util.Set;

@@ -14,18 +14,17 @@
 
 package com.liferay.portal.xuggler;
 
-import com.liferay.portal.XugglerInstallException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ClassLoaderUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.xuggler.Xuggler;
+import com.liferay.portal.kernel.xuggler.XugglerInstallException;
 import com.liferay.portal.util.JarUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.log4j.Log4JUtil;
-
 import com.xuggle.ferry.JNILibraryLoader;
 import com.xuggle.xuggler.IContainer;
 

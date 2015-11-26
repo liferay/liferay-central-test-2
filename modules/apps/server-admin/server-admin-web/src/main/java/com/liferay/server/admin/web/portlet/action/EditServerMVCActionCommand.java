@@ -15,7 +15,7 @@
 package com.liferay.server.admin.web.portlet.action;
 
 import com.liferay.mail.service.MailService;
-import com.liferay.portal.XugglerInstallException;
+import com.liferay.portal.kernel.xuggler.XugglerInstallException;
 import com.liferay.portal.captcha.CaptchaImpl;
 import com.liferay.portal.captcha.recaptcha.ReCaptchaImpl;
 import com.liferay.portal.captcha.simplecaptcha.SimpleCaptchaImpl;
