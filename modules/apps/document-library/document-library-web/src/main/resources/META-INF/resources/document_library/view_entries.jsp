@@ -48,10 +48,10 @@ String displayStyle = GetterUtil.getString((String)request.getAttribute("view.js
 PortletURL portletURL = liferayPortletResponse.createRenderURL();
 
 portletURL.setParameter("mvcRenderCommandName", "/document_library/view");
+portletURL.setParameter("navigation", navigation);
 portletURL.setParameter("curFolder", currentFolder);
 portletURL.setParameter("deltaFolder", deltaFolder);
 portletURL.setParameter("folderId", String.valueOf(folderId));
-portletURL.setParameter("navigation", navigation);
 
 SearchContainer dlSearchContainer = new SearchContainer(liferayPortletRequest, null, null, "curEntry", SearchContainer.DEFAULT_DELTA, portletURL, null, null);
 
