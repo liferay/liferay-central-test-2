@@ -33,10 +33,10 @@ public class ClusterNodeResponse implements Serializable {
 	public static ClusterNodeResponse createResultClusterNodeResponse(
 		ClusterNode clusterNode, String uuid, Serializable result) {
 
-		if (result != null) {
+		if ((result != null) && !(result instanceof Serializable)) {
 			return new ClusterNodeResponse(
 				clusterNode, uuid, null,
-				new ClusterException("Result is null"));
+				new ClusterException("Return value is not serializable"));
 		}
 
 		return new ClusterNodeResponse(clusterNode, uuid, result, null);
