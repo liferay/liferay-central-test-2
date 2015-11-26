@@ -205,6 +205,7 @@
 
 	.panel-heading {
 		padding: 0;
+		position: relative;
 	}
 }
 
@@ -230,10 +231,18 @@
 }
 
 .product-menu {
-	.user-icon {
+	.user-icon, .sticker {
 		display: inline-block;
 		margin-right: 5px;
+		position: static;
 		vertical-align: middle;
+	}
+
+	.icon-sites {
+		position: absolute;
+		right: 46px;
+		top: 9px;
+		z-index: 1;
 	}
 }
 
