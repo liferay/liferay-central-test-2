@@ -60,11 +60,11 @@ public abstract class BaseUploadHandler implements UploadHandler {
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
-
 		checkPermission(
 			themeDisplay.getScopeGroupId(), getFolderId(uploadPortletRequest),
 			themeDisplay.getPermissionChecker());
+
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
 		try {
 			UploadException uploadException =
@@ -89,16 +89,16 @@ public abstract class BaseUploadHandler implements UploadHandler {
 				throw new PortalException(cause);
 			}
 
-			String randomId = ParamUtil.getString(
-				uploadPortletRequest, "randomId");
-
 			JSONObject imageJSONObject = getImageJSONObject(portletRequest);
 
-			jsonObject.put("success", Boolean.TRUE);
+			String randomId = ParamUtil.getString(
+				uploadPortletRequest, "randomId");
 
 			imageJSONObject.put("randomId", randomId);
 
 			jsonObject.put("file", imageJSONObject);
+
+			jsonObject.put("success", Boolean.TRUE);
 
 			JSONPortletResponseUtil.writeJSON(
 				portletRequest, portletResponse, jsonObject);
