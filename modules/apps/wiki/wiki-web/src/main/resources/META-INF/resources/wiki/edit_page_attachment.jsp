@@ -56,7 +56,7 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WikiWebKeys.WIKI_PAGE);
 	<liferay-ui:error exception="<%= FileNameException.class %>" message="please-enter-a-file-with-a-valid-file-name" />
 
 	<%
-	long maxUploadRequestSize = PrefsPropsUtil.getLong(PropsKeys.UPLOAD_SERVLET_REQUEST_IMPL_MAX_SIZE);
+	long uploadServletRequestImplMaxSize = PrefsPropsUtil.getLong(PropsKeys.UPLOAD_SERVLET_REQUEST_IMPL_MAX_SIZE);
 	%>
 
 	<liferay-ui:error exception="<%= FileSizeException.class %>">
@@ -65,7 +65,7 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WikiWebKeys.WIKI_PAGE);
 		long fileMaxSize = PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE);
 
 		if (fileMaxSize == 0) {
-			fileMaxSize = maxUploadRequestSize;
+			fileMaxSize = uploadServletRequestImplMaxSize;
 		}
 		%>
 
@@ -73,7 +73,7 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WikiWebKeys.WIKI_PAGE);
 	</liferay-ui:error>
 
 	<liferay-ui:error exception="<%= UploadRequestSizeException.class %>">
-		<liferay-ui:message arguments="<%= TextFormatter.formatStorageSize(maxUploadRequestSize, locale) %>" key="request-is-larger-than-x-and-could-not-be-processed" translateArguments="<%= false %>" />
+		<liferay-ui:message arguments="<%= TextFormatter.formatStorageSize(uploadServletRequestImplMaxSize, locale) %>" key="request-is-larger-than-x-and-could-not-be-processed" translateArguments="<%= false %>" />
 	</liferay-ui:error>
 
 	<div class="lfr-dynamic-uploader">
