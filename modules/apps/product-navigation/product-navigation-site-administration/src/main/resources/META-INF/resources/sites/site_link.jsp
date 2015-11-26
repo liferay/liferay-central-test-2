@@ -29,7 +29,7 @@ SiteAdministrationPanelCategoryDisplayContext sapcDisplayContext = new SiteAdmin
 
 <li class="list-group-item selectable-site">
 	<aui:a cssClass='<%= "site-link" + (selectedSite ? " selected-site" : StringPool.BLANK) %>' href="<%= sapcDisplayContext.getGroupURL(privateLayout) %>">
-		<div class="list-group-item-field site-logo-container">
+		<div class="list-group-item-field">
 			<c:choose>
 				<c:when test="<%= selectedSite %>">
 					<div class="sticker sticker-primary">
