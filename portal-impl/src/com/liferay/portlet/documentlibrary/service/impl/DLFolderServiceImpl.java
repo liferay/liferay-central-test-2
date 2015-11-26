@@ -435,6 +435,11 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 	}
 
 	@Override
+	public boolean hasInheritableLock(long folderId) throws PortalException {
+		return dlFolderLocalService.hasInheritableLock(folderId);
+	}
+
+	@Override
 	public boolean isFolderLocked(long folderId) {
 		return LockManagerUtil.isLocked(DLFolder.class.getName(), folderId);
 	}
@@ -572,6 +577,13 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 		return dlFolderLocalService.updateFolder(
 			folderId, name, description, defaultFileEntryTypeId,
 			fileEntryTypeIds, restrictionType, serviceContext);
+	}
+
+	@Override
+	public boolean verifyInheritableLock(long folderId, String lockUuid)
+		throws PortalException {
+
+		return dlFolderLocalService.verifyInheritableLock(folderId, lockUuid);
 	}
 
 }
