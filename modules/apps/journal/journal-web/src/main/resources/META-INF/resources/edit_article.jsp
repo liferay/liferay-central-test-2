@@ -204,6 +204,7 @@ request.setAttribute("edit_article.jsp-changeStructure", changeStructure);
 					formModelBean="<%= article %>"
 					formName="fm1"
 					id="<%= FormNavigatorConstants.FORM_NAVIGATOR_ID_JOURNAL %>"
+					markupView="lexicon"
 					showButtons="<%= false %>"
 				/>
 
