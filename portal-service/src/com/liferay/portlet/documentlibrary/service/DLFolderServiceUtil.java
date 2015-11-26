@@ -237,6 +237,11 @@ public class DLFolderServiceUtil {
 		return getService().hasFolderLock(folderId);
 	}
 
+	public static boolean hasInheritableLock(long folderId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().hasInheritableLock(folderId);
+	}
+
 	public static boolean isFolderLocked(long folderId) {
 		return getService().isFolderLocked(folderId);
 	}
@@ -320,6 +325,12 @@ public class DLFolderServiceUtil {
 				   .updateFolder(folderId, parentFolderId, name, description,
 			defaultFileEntryTypeId, fileEntryTypeIds, restrictionType,
 			serviceContext);
+	}
+
+	public static boolean verifyInheritableLock(long folderId,
+		java.lang.String lockUuid)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().verifyInheritableLock(folderId, lockUuid);
 	}
 
 	public static DLFolderService getService() {

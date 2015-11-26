@@ -178,6 +178,9 @@ public interface DLFolderService extends BaseService {
 	public boolean hasFolderLock(long folderId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public boolean hasInheritableLock(long folderId) throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean isFolderLocked(long folderId);
 
 	public com.liferay.portal.kernel.lock.Lock lockFolder(long folderId)
@@ -230,4 +233,7 @@ public interface DLFolderService extends BaseService {
 		java.util.List<java.lang.Long> fileEntryTypeIds, int restrictionType,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws PortalException;
+
+	public boolean verifyInheritableLock(long folderId,
+		java.lang.String lockUuid) throws PortalException;
 }
