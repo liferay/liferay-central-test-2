@@ -221,7 +221,7 @@ public class EmbeddedPortletTest {
 	}
 
 	@RunWith(Arquillian.class)
-	public static class WhenEmbeddingNonEmbeddablePortletInLayout
+	public static class WhenEmbeddingNonembeddablePortletInLayout
 		extends BasePortletContainerTestCase {
 
 		@ClassRule
@@ -239,13 +239,13 @@ public class EmbeddedPortletTest {
 
 			_layoutStaticPortletsAll = PropsValues.LAYOUT_STATIC_PORTLETS_ALL;
 
-			_nonEmbeddedPortlet = new TestNonEmbeddedPortlet();
+			_nonembeddedPortlet = new TestNonembeddedPortlet();
 
 			Dictionary<String, Object> properties = new Hashtable<>();
 
 			setUpPortlet(
-				_nonEmbeddedPortlet, properties,
-				_nonEmbeddedPortlet.getPortletId(), false);
+				_nonembeddedPortlet, properties,
+				_nonembeddedPortlet.getPortletId(), false);
 		}
 
 		@Test
@@ -254,11 +254,11 @@ public class EmbeddedPortletTest {
 				TestPropsValues.getCompanyId(),
 				PortletKeys.PREFS_OWNER_ID_DEFAULT,
 				PortletKeys.PREFS_OWNER_TYPE_LAYOUT, layout.getPlid(),
-				_nonEmbeddedPortlet.getPortletId(), _nonEmbeddedPortlet, null);
+				_nonembeddedPortlet.getPortletId(), _nonembeddedPortlet, null);
 
 			List<Portlet> allPortlets = _layoutTypePortlet.getAllPortlets();
 
-			Assert.assertFalse(allPortlets.contains(_nonEmbeddedPortlet));
+			Assert.assertFalse(allPortlets.contains(_nonembeddedPortlet));
 		}
 
 		@Test
@@ -267,12 +267,12 @@ public class EmbeddedPortletTest {
 				TestPropsValues.getCompanyId(),
 				PortletKeys.PREFS_OWNER_ID_DEFAULT,
 				PortletKeys.PREFS_OWNER_TYPE_LAYOUT, layout.getPlid(),
-				_nonEmbeddedPortlet.getPortletId(), _nonEmbeddedPortlet, null);
+				_nonembeddedPortlet.getPortletId(), _nonembeddedPortlet, null);
 
 			List<Portlet> embeddedPortlets =
 				_layoutTypePortlet.getEmbeddedPortlets();
 
-			Assert.assertFalse(embeddedPortlets.contains(_nonEmbeddedPortlet));
+			Assert.assertFalse(embeddedPortlets.contains(_nonembeddedPortlet));
 		}
 
 		@Test
@@ -283,13 +283,13 @@ public class EmbeddedPortletTest {
 				TestPropsValues.getCompanyId(),
 				PortletKeys.PREFS_OWNER_ID_DEFAULT,
 				PortletKeys.PREFS_OWNER_TYPE_LAYOUT, layout.getPlid(),
-				_nonEmbeddedPortlet.getPortletId(), _nonEmbeddedPortlet, null);
+				_nonembeddedPortlet.getPortletId(), _nonembeddedPortlet, null);
 
 			List<Portlet> explicitlyAddedPortlets =
 				_layoutTypePortlet.getExplicitlyAddedPortlets();
 
 			Assert.assertFalse(
-				explicitlyAddedPortlets.contains(_nonEmbeddedPortlet));
+				explicitlyAddedPortlets.contains(_nonembeddedPortlet));
 		}
 
 		@Test
@@ -300,12 +300,12 @@ public class EmbeddedPortletTest {
 				TestPropsValues.getCompanyId(),
 				PortletKeys.PREFS_OWNER_ID_DEFAULT,
 				PortletKeys.PREFS_OWNER_TYPE_LAYOUT, layout.getPlid(),
-				_nonEmbeddedPortlet.getPortletId(), _nonEmbeddedPortlet,
+				_nonembeddedPortlet.getPortletId(), _nonembeddedPortlet,
 				defaultPreferences);
 
 			List<PortletPreferences> portletPreferences =
 				PortletPreferencesLocalServiceUtil.getPortletPreferences(
-					layout.getPlid(), _nonEmbeddedPortlet.getPortletId());
+					layout.getPlid(), _nonembeddedPortlet.getPortletId());
 
 			Assert.assertEquals(1, portletPreferences.size());
 
@@ -330,7 +330,7 @@ public class EmbeddedPortletTest {
 			super.tearDown();
 		}
 
-		private TestNonEmbeddedPortlet _nonEmbeddedPortlet;
+		private TestNonembeddedPortlet _nonembeddedPortlet;
 
 	}
 

@@ -29,7 +29,7 @@ import javax.portlet.RenderResponse;
 /**
  * @author Manuel de la Peña
  */
-public class TestNonEmbeddedPortlet extends PortletImpl implements Portlet {
+public class TestNonembeddedPortlet extends PortletImpl implements Portlet {
 
 	@Override
 	public void destroy() {
