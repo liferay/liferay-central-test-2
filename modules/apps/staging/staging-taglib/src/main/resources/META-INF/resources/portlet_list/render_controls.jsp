@@ -19,8 +19,8 @@
 <%
 String action = (String)request.getAttribute("render_controls.jsp-action");
 PortletDataHandlerControl[] controls = (PortletDataHandlerControl[])request.getAttribute("render_controls.jsp-controls");
-String portletId = (String)request.getAttribute("render_controls.jsp-portletId");
 ManifestSummary manifestSummary = (ManifestSummary)request.getAttribute("render_controls.jsp-manifestSummary");
+String portletId = (String)request.getAttribute("render_controls.jsp-portletId");
 
 control:
 for (int i = 0; i < controls.length; i++) {
