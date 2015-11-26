@@ -60,14 +60,16 @@ public class DDMRESTDataProvider implements DDMDataProvider {
 			DDMDataProviderContext ddmDataProviderContext)
 		throws PortalException {
 
-		DDMRESTDataProviderSettings restSettings =
+		DDMRESTDataProviderSettings ddmRESTDataProviderSettings =
 			ddmDataProviderContext.getSettingsInstance(
 				DDMRESTDataProviderSettings.class);
 
-		HttpRequest httpRequest = HttpRequest.get(restSettings.url());
+		HttpRequest httpRequest = HttpRequest.get(
+			ddmRESTDataProviderSettings.url());
 
 		httpRequest.basicAuthentication(
-			restSettings.username(), restSettings.password());
+			ddmRESTDataProviderSettings.username(),
+			ddmRESTDataProviderSettings.password());
 		httpRequest.query(ddmDataProviderContext.getParameters());
 
 		HttpResponse httpResponse = httpRequest.send();
@@ -79,8 +81,10 @@ public class DDMRESTDataProvider implements DDMDataProvider {
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-			String key = jsonObject.getString(restSettings.key());
-			String value = jsonObject.getString(restSettings.value());
+			String key = jsonObject.getString(
+				ddmRESTDataProviderSettings.key());
+			String value = jsonObject.getString(
+				ddmRESTDataProviderSettings.value());
 
 			results.add(new KeyValuePair(key, value));
 		}

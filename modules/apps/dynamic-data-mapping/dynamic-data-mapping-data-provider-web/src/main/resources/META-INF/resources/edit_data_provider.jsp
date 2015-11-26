@@ -22,6 +22,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 DDMDataProviderInstance ddmDataProviderInstance = ddmDataProviderDisplayContext.getDataProviderInstance();
 
 long dataProviderInstanceId = BeanParamUtil.getLong(ddmDataProviderInstance, request, "dataProviderInstanceId");
+
 long groupId = BeanParamUtil.getLong(ddmDataProviderInstance, request, "groupId", scopeGroupId);
 String name = BeanParamUtil.getString(ddmDataProviderInstance, request, "name");
 String description = BeanParamUtil.getString(ddmDataProviderInstance, request, "description");
