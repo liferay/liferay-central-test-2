@@ -201,10 +201,6 @@ else {
 		long maxUploadRequestSize = PrefsPropsUtil.getLong(PropsKeys.UPLOAD_SERVLET_REQUEST_IMPL_MAX_SIZE);
 		%>
 
-		<liferay-ui:error exception="<%= UploadRequestSizeException.class %>">
-			<liferay-ui:message arguments="<%= TextFormatter.formatStorageSize(maxUploadRequestSize, locale) %>" key="request-is-larger-than-x-and-could-not-be-processed" translateArguments="<%= false %>" />
-		</liferay-ui:error>
-
 		<liferay-ui:error exception="<%= FileSizeException.class %>">
 
 			<%
@@ -221,6 +217,10 @@ else {
 		<liferay-ui:error exception="<%= LockedThreadException.class %>" message="thread-is-locked" />
 		<liferay-ui:error exception="<%= MessageBodyException.class %>" message="please-enter-a-valid-message" />
 		<liferay-ui:error exception="<%= MessageSubjectException.class %>" message="please-enter-a-valid-subject" />
+
+		<liferay-ui:error exception="<%= UploadRequestSizeException.class %>">
+			<liferay-ui:message arguments="<%= TextFormatter.formatStorageSize(maxUploadRequestSize, locale) %>" key="request-is-larger-than-x-and-could-not-be-processed" translateArguments="<%= false %>" />
+		</liferay-ui:error>
 
 		<liferay-ui:asset-categories-error />
 
