@@ -169,18 +169,18 @@ public abstract class BaseBackgroundTaskDisplay
 	protected JSONArray translateJSON(JSONArray jsonArray, Locale locale) {
 		JSONArray translatedJSON = JSONFactoryUtil.createJSONArray();
 
-		for (Object obj : jsonArray) {
-			if (obj instanceof JSONObject) {
-				translatedJSON.put(translateJSON((JSONObject)obj, locale));
+		for (Object object : jsonArray) {
+			if (object instanceof JSONObject) {
+				translatedJSON.put(translateJSON((JSONObject)object, locale));
 			}
-			else if (obj instanceof JSONArray) {
-				translatedJSON.put(translateJSON((JSONArray)obj, locale));
+			else if (object instanceof JSONArray) {
+				translatedJSON.put(translateJSON((JSONArray)object, locale));
 			}
-			else if (obj instanceof String) {
-				translatedJSON.put(LanguageUtil.get(locale, (String)obj));
+			else if (object instanceof String) {
+				translatedJSON.put(LanguageUtil.get(locale, (String)object));
 			}
 			else {
-				translatedJSON.put(obj);
+				translatedJSON.put(object);
 			}
 		}
 
@@ -194,24 +194,27 @@ public abstract class BaseBackgroundTaskDisplay
 
 		JSONObject translatedJSON = JSONFactoryUtil.createJSONObject();
 
-		Iterator<String> itr = jsonObject.keys();
+		Iterator<String> iterator = jsonObject.keys();
 
-		while (itr.hasNext()) {
-			String key = itr.next();
+		while (iterator.hasNext()) {
+			String key = iterator.next();
 
-			Object obj = jsonObject.get(key);
+			Object object = jsonObject.get(key);
 
-			if (obj instanceof JSONObject) {
-				translatedJSON.put(key, translateJSON((JSONObject)obj, locale));
+			if (object instanceof JSONObject) {
+				translatedJSON.put(
+					key, translateJSON((JSONObject)object, locale));
 			}
-			else if (obj instanceof JSONArray) {
-				translatedJSON.put(key, translateJSON((JSONArray)obj, locale));
+			else if (object instanceof JSONArray) {
+				translatedJSON.put(
+					key, translateJSON((JSONArray)object, locale));
 			}
-			else if (obj instanceof String) {
-				translatedJSON.put(key, LanguageUtil.get(locale, (String)obj));
+			else if (object instanceof String) {
+				translatedJSON.put(
+					key, LanguageUtil.get(locale, (String)object));
 			}
 			else {
-				translatedJSON.put(key, obj);
+				translatedJSON.put(key, object);
 			}
 		}
 
