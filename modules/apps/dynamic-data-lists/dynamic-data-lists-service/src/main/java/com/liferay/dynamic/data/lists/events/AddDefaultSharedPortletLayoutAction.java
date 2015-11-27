@@ -75,7 +75,6 @@ public class AddDefaultSharedPortletLayoutAction extends SimpleAction {
 
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setAddGroupPermissions(true);
-
 		serviceContext.setAttribute(
 			"layout.instanceable.allowed", Boolean.TRUE);
 
