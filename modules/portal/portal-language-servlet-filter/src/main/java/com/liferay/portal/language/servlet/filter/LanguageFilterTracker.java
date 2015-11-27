@@ -65,20 +65,20 @@ public class LanguageFilterTracker {
 						contextName);
 
 					properties.put(
-						HttpWhiteboardConstants.HTTP_WHITEBOARD_FILTER_PATTERN,
-							new String[] {"*.css", "*.js"});
+						HttpWhiteboardConstants.
+							HTTP_WHITEBOARD_FILTER_DISPATCHER,
+						new String[] {
+							DispatcherType.ASYNC.toString(),
+							DispatcherType.FORWARD.toString(),
+							DispatcherType.INCLUDE.toString(),
+							DispatcherType.REQUEST.toString()
+						});
 					properties.put(
 						HttpWhiteboardConstants.HTTP_WHITEBOARD_FILTER_NAME,
 						"Language Filter");
 					properties.put(
-						HttpWhiteboardConstants.
-							HTTP_WHITEBOARD_FILTER_DISPATCHER,
-							new String[] {
-								DispatcherType.ASYNC.toString(),
-								DispatcherType.FORWARD.toString(),
-								DispatcherType.INCLUDE.toString(),
-								DispatcherType.REQUEST.toString()
-							});
+						HttpWhiteboardConstants.HTTP_WHITEBOARD_FILTER_PATTERN,
+							new String[] {"*.css", "*.js"});
 
 					return bundleContext.registerService(
 						Filter.class, filter, properties);
