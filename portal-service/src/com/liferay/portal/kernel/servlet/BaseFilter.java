@@ -103,7 +103,7 @@ public abstract class BaseFilter implements LiferayFilter {
 	}
 
 	protected void processFilter(
-			String loggerName, HttpServletRequest request,
+			String logName, HttpServletRequest request,
 			HttpServletResponse response, FilterChain filterChain)
 		throws Exception {
 
@@ -136,8 +136,7 @@ public abstract class BaseFilter implements LiferayFilter {
 			path = request.getRequestURI();
 
 			log.debug(
-				"[" + threadName + "]" + depther + "> " +
-					loggerName + " " + path);
+				"[" + threadName + "]" + depther + "> " + logName + " " + path);
 		}
 
 		filterChain.doFilter(request, response);
@@ -156,7 +155,7 @@ public abstract class BaseFilter implements LiferayFilter {
 
 		log.debug(
 			"[" + threadName + "]" + depther + "< " +
-				loggerName + " " + path + " " + (endTime - startTime) + " ms");
+				logName + " " + path + " " + (endTime - startTime) + " ms");
 
 		if (depther.length() > 0) {
 			depther = depther.substring(1);
