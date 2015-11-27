@@ -57,44 +57,44 @@ public class LanguageFilter extends BasePortalFilter {
 
 		ResourceBundle resourceBundle = _resourceBundles.get(languageId);
 
-		if (resourceBundle == null) {
-			ResourceBundleUtil.loadResourceBundleMap(
-				_resourceBundles, locale,
-				new ResourceBundleUtil.ResourceBundleLoader() {
-
-					@Override
-					public ResourceBundle loadBundle(String languageId) {
-						String name;
-
-						if (Validator.isNull(languageId)) {
-							name = "content/Language.properties";
-						}
-						else {
-							name =
-								"content/Language_" + languageId +
-									".properties";
-						}
-
-						URL url = _servletContextHelper.getResource(name);
-
-						if (url == null) {
-							return null;
-						}
-
-						try {
-							return new PropertyResourceBundle(url.openStream());
-						}
-						catch (IOException e) {
-							return null;
-						}
-					}
-
-				});
-
-			resourceBundle = _resourceBundles.get(languageId);
+		if (resourceBundle != null) {
+			return resourceBundle;
 		}
 
-		return resourceBundle;
+		ResourceBundleUtil.loadResourceBundleMap(
+			_resourceBundles, locale,
+			new ResourceBundleUtil.ResourceBundleLoader() {
+
+				@Override
+				public ResourceBundle loadBundle(String languageId) {
+					String name = null;
+
+					if (Validator.isNull(languageId)) {
+						name = "content/Language.properties";
+					}
+					else {
+						name =
+							"content/Language_" + languageId +
+								".properties";
+					}
+
+					URL url = _servletContextHelper.getResource(name);
+
+					if (url == null) {
+						return null;
+					}
+
+					try {
+						return new PropertyResourceBundle(url.openStream());
+					}
+					catch (IOException ioe) {
+						return null;
+					}
+				}
+
+			});
+
+		return _resourceBundles.get(languageId);
 	}
 
 	@Override
