@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.tck.bridge;
+package com.liferay.portlet.tck.bridge.servlet.filter;
 
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.User;
