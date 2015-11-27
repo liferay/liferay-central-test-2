@@ -61,7 +61,7 @@ public class LanguageFilter extends BasePortalFilter {
 			return resourceBundle;
 		}
 
-		ResourceBundleUtil.loadResourceBundleMap(
+		ResourceBundleUtil.loadResourceBundles(
 			_resourceBundles, locale,
 			new ResourceBundleUtil.ResourceBundleLoader() {
 

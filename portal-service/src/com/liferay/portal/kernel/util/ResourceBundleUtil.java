@@ -91,7 +91,7 @@ public class ResourceBundleUtil {
 		}
 	}
 
-	public static void loadResourceBundleMap(
+	public static void loadResourceBundles(
 		Map<String, ResourceBundle> resourceBundles, Locale locale,
 		ResourceBundleLoader resourceBundleLoader) {
 
