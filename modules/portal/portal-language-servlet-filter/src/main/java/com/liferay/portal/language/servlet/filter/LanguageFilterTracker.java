@@ -35,7 +35,7 @@ import org.osgi.util.tracker.ServiceTrackerCustomizer;
  * @author Carlos Sierra Andrés
  */
 @Component(immediate = true)
-public class ServletContextHelperTrackerComponent {
+public class LanguageFilterTracker {
 
 	@Activate
 	protected void activate(final BundleContext bundleContext)
