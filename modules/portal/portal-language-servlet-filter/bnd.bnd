@@ -1,5 +1,5 @@
-Bundle-Name: Liferay Portal Language Filter
-Bundle-SymbolicName: com.liferay.portal.language.filter
+Bundle-Name: Liferay Portal Language Servlet Filter
+Bundle-SymbolicName: com.liferay.portal.language.servlet.filter
 Bundle-Version: 1.0.0
 Include-Resource:\
 	classes,\

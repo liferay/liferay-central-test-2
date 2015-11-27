@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.language.filter;
+package com.liferay.portal.language.servlet.filter;
 
 import java.util.Hashtable;
 
