@@ -163,9 +163,8 @@ public class DDMServiceVerifyProcess extends VerifyProcess {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
 					String.format(
-						"There is stale or invalid data in the DDM content " +
-							"with ID %d according to its structure %d. " +
-								"Caused by: {%s}. Please verify it manually.",
+						"Stale or invalid data for DDM content %d  and " +
+							"structure %d causes: {%s}",
 						content.getContentId(), structure.getStructureId(),
 						e.getMessage()),
 					e);
