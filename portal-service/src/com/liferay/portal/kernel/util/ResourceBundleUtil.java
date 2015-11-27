@@ -114,8 +114,8 @@ public class ResourceBundleUtil {
 
 			token += languageIdParts[i];
 
-			ResourceBundle resourceBundle = resourceBundleLoader.loadBundle(
-				token);
+			ResourceBundle resourceBundle =
+				resourceBundleLoader.loadResourceBundle(token);
 
 			if (resourceBundle != null) {
 				listBundles.add(resourceBundle);
@@ -133,7 +133,7 @@ public class ResourceBundleUtil {
 
 	public interface ResourceBundleLoader {
 
-		public ResourceBundle loadBundle(String languageId);
+		public ResourceBundle loadResourceBundle(String languageId);
 
 	}
 

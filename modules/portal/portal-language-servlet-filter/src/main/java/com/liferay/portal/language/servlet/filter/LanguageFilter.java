@@ -66,7 +66,7 @@ public class LanguageFilter extends BasePortalFilter {
 			new ResourceBundleUtil.ResourceBundleLoader() {
 
 				@Override
-				public ResourceBundle loadBundle(String languageId) {
+				public ResourceBundle loadResourceBundle(String languageId) {
 					String name = null;
 
 					if (Validator.isNull(languageId)) {
