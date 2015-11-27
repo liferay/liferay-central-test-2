@@ -42,6 +42,7 @@ AUI.add(
 						);
 
 						instance.renderUI();
+
 						instance.bindUI();
 					},
 
