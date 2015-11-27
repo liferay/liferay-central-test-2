@@ -97,9 +97,9 @@ public class ResourceBundleUtil {
 
 		String languageId = LocaleUtil.toLanguageId(locale);
 
-		String[] tokens = languageId.split("_");
+		String[] languageIdParts = languageId.split("_");
 
-		if (ArrayUtil.isEmpty(tokens)) {
+		if (ArrayUtil.isEmpty(languageIdParts)) {
 			return;
 		}
 
@@ -107,12 +107,12 @@ public class ResourceBundleUtil {
 
 		List<ResourceBundle> listBundles = new ArrayList<>();
 
-		for (int i = 0; i < tokens.length; i++) {
+		for (int i = 0; i < languageIdParts.length; i++) {
 			if ( i > 0 ) {
 				token += "_";
 			}
 
-			token += tokens[i];
+			token += languageIdParts[i];
 
 			ResourceBundle resourceBundle = resourceBundleLoader.loadBundle(
 				token);
@@ -132,6 +132,7 @@ public class ResourceBundleUtil {
 	}
 
 	public interface ResourceBundleLoader {
+
 		public ResourceBundle loadBundle(String languageId);
 
 	}
