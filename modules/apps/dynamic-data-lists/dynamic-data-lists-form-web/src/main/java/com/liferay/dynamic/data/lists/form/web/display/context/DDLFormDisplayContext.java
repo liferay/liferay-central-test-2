@@ -88,6 +88,7 @@ public class DDLFormDisplayContext {
 
 		if (isFormShared()) {
 			_showConfigurationIcon = false;
+
 			return _showConfigurationIcon;
 		}
 
@@ -144,7 +145,7 @@ public class DDLFormDisplayContext {
 	}
 
 	protected boolean isFormShared() {
-		return ParamUtil.get(_renderRequest, "shared", false);
+		return ParamUtil.getBoolean(_renderRequest, "shared");
 	}
 
 	private Boolean _hasViewPermission;

@@ -67,7 +67,7 @@ renderResponse.setTitle((recordSet == null) ? LanguageUtil.get(request, "new-for
 						<span class="icon-external-link"></span>
 					</liferay-util:buffer>
 
-					<liferay-ui:message arguments="<%= new Object[] { publishedLink } %>" key="form-published-at-x" />
+					<liferay-ui:message arguments="<%= new Object[] {publishedLink} %>" key="form-published-at-x" />
 				</div>
 			</div>
 		</c:if>
