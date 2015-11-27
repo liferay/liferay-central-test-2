@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.security.sso.cas;
+package com.liferay.portal.security.sso.cas.servlet.filter;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
