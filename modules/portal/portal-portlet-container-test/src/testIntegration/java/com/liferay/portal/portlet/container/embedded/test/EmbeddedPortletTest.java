@@ -310,7 +310,7 @@ public class EmbeddedPortletTest {
 	}
 
 	@RunWith(Arquillian.class)
-	public static class WhenEmbeddingPortletUsingADTTemplates
+	public static class WhenEmbeddingPortletUsingApplicationDisplayTemplate
 		extends BasePortletContainerTestCase {
 
 		@ClassRule
@@ -331,8 +331,10 @@ public class EmbeddedPortletTest {
 		}
 
 		@Test
-		public void shouldRenderADTAndRuntimePortlets() throws Exception {
-			TestPortlet adtPortlet = new TestPortlet() {
+		public void shouldRenderApplicationDisplayTemplateAndRuntimePortlets()
+			throws Exception {
+
+			TestPortlet testPortlet = new TestPortlet() {
 
 				@Override
 				public void render(
@@ -358,7 +360,7 @@ public class EmbeddedPortletTest {
 			properties.put(
 				"com.liferay.portlet.instanceable", Boolean.FALSE.toString());
 
-			setUpPortlet(adtPortlet, properties, TEST_PORTLET_ID);
+			setUpPortlet(testPortlet, properties, TEST_PORTLET_ID);
 
 			properties.put("javax.portlet.name", TEST_PORTLET_ID);
 
@@ -374,7 +376,6 @@ public class EmbeddedPortletTest {
 				PortletRequest.RENDER_PHASE);
 
 			TestRuntimePortlet testRuntimePortlet = new TestRuntimePortlet();
-
 			String testRuntimePortletId = "testRuntimePortletId";
 
 			setUpPortlet(
@@ -387,7 +388,7 @@ public class EmbeddedPortletTest {
 				portletURL.toString());
 
 			Assert.assertEquals(200, response.getCode());
-			Assert.assertTrue(adtPortlet.isCalledRender());
+			Assert.assertTrue(testPortlet.isCalledRender());
 			Assert.assertTrue(testRuntimePortlet.isCalledRuntime());
 		}
 
@@ -455,9 +456,8 @@ public class EmbeddedPortletTest {
 				httpServletRequest, TEST_PORTLET_ID, layout.getPlid(),
 				PortletRequest.RESOURCE_PHASE);
 
-			String testRuntimePortletId = "testRuntimePortletId";
-
 			TestRuntimePortlet testRuntimePortlet = new TestRuntimePortlet();
+			String testRuntimePortletId = "testRuntimePortletId";
 
 			setUpPortlet(
 				testRuntimePortlet, properties, testRuntimePortletId, false);
