@@ -52,6 +52,51 @@ public class LanguageFilter extends BasePortalFilter {
 		_servletContextHelper = servletContextHelper;
 	}
 
+	protected ResourceBundle getResourceBundle(Locale locale) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		ResourceBundle resourceBundle = _resourceBundles.get(languageId);
+
+		if (resourceBundle == null) {
+			ResourceBundleUtil.loadResourceBundleMap(
+				_resourceBundles, locale,
+				new ResourceBundleUtil.ResourceBundleLoader() {
+
+					@Override
+					public ResourceBundle loadBundle(String languageId) {
+						String name;
+
+						if (Validator.isNull(languageId)) {
+							name = "content/Language.properties";
+						}
+						else {
+							name =
+								"content/Language_" + languageId +
+									".properties";
+						}
+
+						URL url = _servletContextHelper.getResource(name);
+
+						if (url == null) {
+							return null;
+						}
+
+						try {
+							return new PropertyResourceBundle(url.openStream());
+						}
+						catch (IOException e) {
+							return null;
+						}
+					}
+
+				});
+
+			resourceBundle = _resourceBundles.get(languageId);
+		}
+
+		return resourceBundle;
+	}
+
 	@Override
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
@@ -105,51 +150,6 @@ public class LanguageFilter extends BasePortalFilter {
 		}
 
 		return LanguageUtil.process(resourceBundle, locale, content);
-	}
-
-	protected ResourceBundle getResourceBundle(Locale locale) {
-		String languageId = LocaleUtil.toLanguageId(locale);
-
-		ResourceBundle resourceBundle = _resourceBundles.get(languageId);
-
-		if (resourceBundle == null) {
-			ResourceBundleUtil.loadResourceBundleMap(
-				_resourceBundles, locale,
-				new ResourceBundleUtil.ResourceBundleLoader() {
-
-					@Override
-					public ResourceBundle loadBundle(String languageId) {
-						String name;
-
-						if (Validator.isNull(languageId)) {
-							name = "content/Language.properties";
-						}
-						else {
-							name =
-								"content/Language_" + languageId +
-									".properties";
-						}
-
-						URL url = _servletContextHelper.getResource(name);
-
-						if (url == null) {
-							return null;
-						}
-
-						try {
-							return new PropertyResourceBundle(url.openStream());
-						}
-						catch (IOException e) {
-							return null;
-						}
-					}
-
-				});
-
-			resourceBundle = _resourceBundles.get(languageId);
-		}
-
-		return resourceBundle;
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(LanguageFilter.class);
