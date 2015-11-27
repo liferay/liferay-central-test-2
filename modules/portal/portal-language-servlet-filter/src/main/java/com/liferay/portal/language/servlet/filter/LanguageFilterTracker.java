@@ -86,11 +86,12 @@ public class LanguageFilterTracker {
 
 				@Override
 				public void modifiedService(
-					ServiceReference<ServletContextHelper> reference,
+					ServiceReference<ServletContextHelper> serviceReference,
 					ServiceRegistration<Filter> serviceRegistration) {
 
-					removedService(reference, serviceRegistration);
-					addingService(reference);
+					removedService(serviceReference, serviceRegistration);
+
+					addingService(serviceReference);
 				}
 
 				@Override
