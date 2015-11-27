@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.monitoring.internal.servlet.filters;
+package com.liferay.portal.monitoring.internal.servlet.filter;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
