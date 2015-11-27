@@ -71,37 +71,6 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 /**
- * A portlet is considered explicitly added to a layout if all these
- * circumstances are satisfied: (See
- * LayoutTypePortletImpl.getExplicitlyAddedPortlets method)
- *
- * - the portlet has been added to any columns in the layout.
- *
- *
- * A portlet is considered embedded under these circumstances: (See
- * LayoutTypePortletImpl.getEmbeddedPortlets method)
- *
- * - a portlet preference exists for the portlet in an specific layout, being
- * its owner id the layout's groupId, and its owner type 'shared-plid'.
- *
- * Once the first condition is satisfied, if any of the following premises is
- * true, then the portlet is NOT embedded.
- *
- * - the portlet does not exist in Liferay's database.
- * - the portlet is present in any column of the layout.
- * - the portlet is defined in the static portlets of the layout.
- * - the portlet is not ready.
- * - the portlet is undeployed.
- * - the portlet is not active.
- *
- *
- * A portlet is considered static if all these circumstances are satisfied: (See
- * LayoutTypePortletImpl.getStaticPortlets method)
- *
- * - the portlet has been added to the layout.static.portlets.all portal
- * property.
- * - any layout' column has defined the portletId as a non-static
- *
  * @author Manuel de la Peña
  */
 @RunWith(Enclosed.class)
