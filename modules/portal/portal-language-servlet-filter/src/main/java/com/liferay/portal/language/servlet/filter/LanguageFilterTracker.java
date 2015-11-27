@@ -96,12 +96,12 @@ public class LanguageFilterTracker {
 
 				@Override
 				public void removedService(
-					ServiceReference<ServletContextHelper> reference,
+					ServiceReference<ServletContextHelper> serviceReference,
 					ServiceRegistration<Filter> serviceRegistration) {
 
 					serviceRegistration.unregister();
 
-					bundleContext.ungetService(reference);
+					bundleContext.ungetService(serviceReference);
 				}
 			});
 
