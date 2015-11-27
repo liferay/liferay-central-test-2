@@ -32,6 +32,7 @@ import java.io.IOException;
 import java.net.URL;
 
 import java.util.Locale;
+import java.util.Map;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 import java.util.concurrent.ConcurrentHashMap;
@@ -62,7 +63,7 @@ public class LanguageFilter extends BasePortalFilter {
 
 		if (languageId == null) {
 			if (_log.isInfoEnabled()) {
-				_log.info("Language parameter not present");
+				_log.info("The request parameter \"languageId\" is null");
 			}
 
 			processFilter(
@@ -117,31 +118,34 @@ public class LanguageFilter extends BasePortalFilter {
 				_resourceBundles, locale,
 				new ResourceBundleUtil.ResourceBundleLoader() {
 
-				@Override
-				public ResourceBundle loadBundle(String languageId) {
-					String name;
+					@Override
+					public ResourceBundle loadBundle(String languageId) {
+						String name;
 
-					if (Validator.isNull(languageId)) {
-						name = "content/Language.properties";
-					}
-					else {
-						name = "content/Language_" + languageId + ".properties";
+						if (Validator.isNull(languageId)) {
+							name = "content/Language.properties";
+						}
+						else {
+							name =
+								"content/Language_" + languageId +
+									".properties";
+						}
+
+						URL url = _servletContextHelper.getResource(name);
+
+						if (url == null) {
+							return null;
+						}
+
+						try {
+							return new PropertyResourceBundle(url.openStream());
+						}
+						catch (IOException e) {
+							return null;
+						}
 					}
 
-					URL url = _servletContextHelper.getResource(name);
-
-					if (url == null) {
-						return null;
-					}
-
-					try {
-						return new PropertyResourceBundle(url.openStream());
-					}
-					catch (IOException e) {
-						return null;
-					}
-				}
-			});
+				});
 
 			resourceBundle = _resourceBundles.get(languageId);
 		}
@@ -151,7 +155,7 @@ public class LanguageFilter extends BasePortalFilter {
 
 	private static final Log _log = LogFactoryUtil.getLog(LanguageFilter.class);
 
-	private final ConcurrentMap<String, ResourceBundle> _resourceBundles =
+	private final Map<String, ResourceBundle> _resourceBundles =
 		new ConcurrentHashMap<>();
 	private final ServletContextHelper _servletContextHelper;
 
