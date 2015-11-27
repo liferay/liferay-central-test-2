@@ -37,11 +37,13 @@ public class TestNonembeddedPortlet extends PortletImpl implements Portlet {
 
 	@Override
 	public String getPortletId() {
-		return getClass().getCanonicalName();
+		Class<?> clazz = getClass();
+
+		return clazz.getCanonicalName();
 	}
 
 	@Override
-	public void init(PortletConfig portletConfig) throws PortletException {
+	public void init(PortletConfig portletConfig) {
 	}
 
 	@Override
@@ -56,14 +58,12 @@ public class TestNonembeddedPortlet extends PortletImpl implements Portlet {
 
 	@Override
 	public void processAction(
-			ActionRequest actionRequest, ActionResponse actionResponse)
-		throws IOException, PortletException {
+		ActionRequest actionRequest, ActionResponse actionResponse) {
 	}
 
 	@Override
 	public void render(
-			RenderRequest renderRequest, RenderResponse renderResponse)
-		throws IOException, PortletException {
+		RenderRequest renderRequest, RenderResponse renderResponse) {
 	}
 
 }
