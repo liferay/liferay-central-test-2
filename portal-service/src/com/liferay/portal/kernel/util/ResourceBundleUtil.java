@@ -103,19 +103,19 @@ public class ResourceBundleUtil {
 			return;
 		}
 
-		String token = StringPool.BLANK;
+		String currentLanguageId = StringPool.BLANK;
 
 		List<ResourceBundle> listBundles = new ArrayList<>();
 
 		for (int i = 0; i < languageIdParts.length; i++) {
 			if ( i > 0 ) {
-				token += "_";
+				currentLanguageId += "_";
 			}
 
-			token += languageIdParts[i];
+			currentLanguageId += languageIdParts[i];
 
 			ResourceBundle resourceBundle =
-				resourceBundleLoader.loadResourceBundle(token);
+				resourceBundleLoader.loadResourceBundle(currentLanguageId);
 
 			if (resourceBundle != null) {
 				listBundles.add(resourceBundle);
@@ -123,7 +123,7 @@ public class ResourceBundleUtil {
 
 			if (!listBundles.isEmpty()) {
 				resourceBundles.put(
-					token,
+					currentLanguageId,
 					new AggregateResourceBundle(
 						listBundles.toArray(
 							new ResourceBundle[listBundles.size()])));
