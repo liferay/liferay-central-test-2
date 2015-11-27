@@ -120,13 +120,15 @@ public class ResourceBundleUtil {
 				currentResourceBundles.add(resourceBundle);
 			}
 
-			if (!currentResourceBundles.isEmpty()) {
-				resourceBundles.put(
-					currentLanguageId,
-					new AggregateResourceBundle(
-						currentResourceBundles.toArray(
-							new ResourceBundle[currentResourceBundles.size()])));
+			if (currentResourceBundles.isEmpty()) {
+				continue;
 			}
+
+			resourceBundles.put(
+				currentLanguageId,
+				new AggregateResourceBundle(
+					currentResourceBundles.toArray(
+						new ResourceBundle[currentResourceBundles.size()])));
 		}
 	}
 

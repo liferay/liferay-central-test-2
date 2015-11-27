@@ -73,8 +73,7 @@ public class LanguageFilter extends BasePortalFilter {
 						name = "content/Language.properties";
 					}
 					else {
-						name =
-							"content/Language_" + languageId + ".properties";
+						name = "content/Language_" + languageId + ".properties";
 					}
 
 					URL url = _servletContextHelper.getResource(name);
