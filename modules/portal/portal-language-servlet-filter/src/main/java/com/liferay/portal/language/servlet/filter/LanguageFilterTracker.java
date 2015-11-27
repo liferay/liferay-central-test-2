@@ -103,6 +103,7 @@ public class LanguageFilterTracker {
 
 					bundleContext.ungetService(serviceReference);
 				}
+
 			});
 
 		_serviceTracker.open();
