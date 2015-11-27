@@ -36,7 +36,6 @@ import java.util.Map;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
@@ -95,7 +94,7 @@ public class LanguageFilter extends BasePortalFilter {
 	protected String translateResponse(String languageId, String content) {
 		Locale locale = LocaleUtil.fromLanguageId(languageId);
 
-		ResourceBundle resourceBundle = _getBundle(locale);
+		ResourceBundle resourceBundle = getResourceBundle(locale);
 
 		if (resourceBundle == null) {
 			resourceBundle = LanguageResources.getResourceBundle(locale);
@@ -108,7 +107,7 @@ public class LanguageFilter extends BasePortalFilter {
 		return LanguageUtil.process(resourceBundle, locale, content);
 	}
 
-	private ResourceBundle _getBundle(Locale locale) {
+	protected ResourceBundle getResourceBundle(Locale locale) {
 		String languageId = LocaleUtil.toLanguageId(locale);
 
 		ResourceBundle resourceBundle = _resourceBundles.get(languageId);
