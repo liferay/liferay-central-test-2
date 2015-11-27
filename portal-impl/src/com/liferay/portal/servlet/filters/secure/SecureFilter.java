@@ -296,8 +296,9 @@ public class SecureFilter extends BasePortalFilter {
 			}
 
 			if (request != null) {
-				processFilter(
-					getClass().getName(), request, response, filterChain);
+				Class<?> clazz = getClass();
+
+				processFilter(clazz.getName(), request, response, filterChain);
 			}
 		}
 	}
