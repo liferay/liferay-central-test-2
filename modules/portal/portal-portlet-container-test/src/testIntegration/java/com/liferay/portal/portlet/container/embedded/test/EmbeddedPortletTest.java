@@ -180,8 +180,8 @@ public class EmbeddedPortletTest {
 			StringBundler sb = new StringBundler(
 				_layoutStaticPortletsAll.length);
 
-			for (String layoutStaticPortlet : _layoutStaticPortletsAll) {
-				sb.append(layoutStaticPortlet);
+			for (String portletId : _layoutStaticPortletsAll) {
+				sb.append(portletId);
 			}
 
 			PropsUtil.set(PropsKeys.LAYOUT_STATIC_PORTLETS_ALL, sb.toString());
@@ -201,6 +201,7 @@ public class EmbeddedPortletTest {
 				TransactionalTestRule.INSTANCE);
 
 		@Before
+		@Override
 		public void setUp() throws Exception {
 			super.setUp();
 
@@ -208,13 +209,13 @@ public class EmbeddedPortletTest {
 
 			_layoutStaticPortletsAll = PropsValues.LAYOUT_STATIC_PORTLETS_ALL;
 
-			_nonembeddedPortlet = new TestNonembeddedPortlet();
+			_testNonembeddedPortlet = new TestNonembeddedPortlet();
 
 			Dictionary<String, Object> properties = new Hashtable<>();
 
 			setUpPortlet(
-				_nonembeddedPortlet, properties,
-				_nonembeddedPortlet.getPortletId(), false);
+				_testNonembeddedPortlet, properties,
+				_testNonembeddedPortlet.getPortletId(), false);
 		}
 
 		@Test
@@ -223,11 +224,12 @@ public class EmbeddedPortletTest {
 				TestPropsValues.getCompanyId(),
 				PortletKeys.PREFS_OWNER_ID_DEFAULT,
 				PortletKeys.PREFS_OWNER_TYPE_LAYOUT, layout.getPlid(),
-				_nonembeddedPortlet.getPortletId(), _nonembeddedPortlet, null);
+				_testNonembeddedPortlet.getPortletId(), _testNonembeddedPortlet,
+				null);
 
 			List<Portlet> allPortlets = _layoutTypePortlet.getAllPortlets();
 
-			Assert.assertFalse(allPortlets.contains(_nonembeddedPortlet));
+			Assert.assertFalse(allPortlets.contains(_testNonembeddedPortlet));
 		}
 
 		@Test
@@ -236,12 +238,14 @@ public class EmbeddedPortletTest {
 				TestPropsValues.getCompanyId(),
 				PortletKeys.PREFS_OWNER_ID_DEFAULT,
 				PortletKeys.PREFS_OWNER_TYPE_LAYOUT, layout.getPlid(),
-				_nonembeddedPortlet.getPortletId(), _nonembeddedPortlet, null);
+				_testNonembeddedPortlet.getPortletId(), _testNonembeddedPortlet,
+				null);
 
 			List<Portlet> embeddedPortlets =
 				_layoutTypePortlet.getEmbeddedPortlets();
 
-			Assert.assertFalse(embeddedPortlets.contains(_nonembeddedPortlet));
+			Assert.assertFalse(
+				embeddedPortlets.contains(_testNonembeddedPortlet));
 		}
 
 		@Test
@@ -252,13 +256,14 @@ public class EmbeddedPortletTest {
 				TestPropsValues.getCompanyId(),
 				PortletKeys.PREFS_OWNER_ID_DEFAULT,
 				PortletKeys.PREFS_OWNER_TYPE_LAYOUT, layout.getPlid(),
-				_nonembeddedPortlet.getPortletId(), _nonembeddedPortlet, null);
+				_testNonembeddedPortlet.getPortletId(), _testNonembeddedPortlet,
+				null);
 
 			List<Portlet> explicitlyAddedPortlets =
 				_layoutTypePortlet.getExplicitlyAddedPortlets();
 
 			Assert.assertFalse(
-				explicitlyAddedPortlets.contains(_nonembeddedPortlet));
+				explicitlyAddedPortlets.contains(_testNonembeddedPortlet));
 		}
 
 		@Test
@@ -269,12 +274,12 @@ public class EmbeddedPortletTest {
 				TestPropsValues.getCompanyId(),
 				PortletKeys.PREFS_OWNER_ID_DEFAULT,
 				PortletKeys.PREFS_OWNER_TYPE_LAYOUT, layout.getPlid(),
-				_nonembeddedPortlet.getPortletId(), _nonembeddedPortlet,
+				_testNonembeddedPortlet.getPortletId(), _testNonembeddedPortlet,
 				defaultPreferences);
 
 			List<PortletPreferences> portletPreferences =
 				PortletPreferencesLocalServiceUtil.getPortletPreferences(
-					layout.getPlid(), _nonembeddedPortlet.getPortletId());
+					layout.getPlid(), _testNonembeddedPortlet.getPortletId());
 
 			Assert.assertEquals(1, portletPreferences.size());
 
@@ -286,12 +291,13 @@ public class EmbeddedPortletTest {
 		}
 
 		@After
+		@Override
 		public void tearDown() throws Exception {
 			StringBundler sb = new StringBundler(
 				_layoutStaticPortletsAll.length);
 
-			for (String layoutStaticPortlet : _layoutStaticPortletsAll) {
-				sb.append(layoutStaticPortlet);
+			for (String portletId : _layoutStaticPortletsAll) {
+				sb.append(portletId);
 			}
 
 			PropsUtil.set(PropsKeys.LAYOUT_STATIC_PORTLETS_ALL, sb.toString());
@@ -299,7 +305,7 @@ public class EmbeddedPortletTest {
 			super.tearDown();
 		}
 
-		private TestNonembeddedPortlet _nonembeddedPortlet;
+		private TestNonembeddedPortlet _testNonembeddedPortlet;
 
 	}
 
@@ -315,6 +321,7 @@ public class EmbeddedPortletTest {
 				TransactionalTestRule.INSTANCE);
 
 		@Before
+		@Override
 		public void setUp() throws Exception {
 			super.setUp();
 
@@ -398,6 +405,7 @@ public class EmbeddedPortletTest {
 				TransactionalTestRule.INSTANCE);
 
 		@Before
+		@Override
 		public void setUp() throws Exception {
 			super.setUp();
 
@@ -408,7 +416,7 @@ public class EmbeddedPortletTest {
 
 		@Test
 		public void shouldRenderEmbeddedAndRuntimePortlets() throws Exception {
-			TestPortlet embeddedPortlet = new TestPortlet() {
+			TestPortlet testPortlet = new TestPortlet() {
 
 				@Override
 				public void serveResource(
@@ -432,7 +440,7 @@ public class EmbeddedPortletTest {
 
 			Dictionary<String, Object> properties = new HashMapDictionary<>();
 
-			setUpPortlet(embeddedPortlet, properties, TEST_PORTLET_ID, false);
+			setUpPortlet(testPortlet, properties, TEST_PORTLET_ID, false);
 
 			PortletPreferencesLocalServiceUtil.addPortletPreferences(
 				TestPropsValues.getCompanyId(),
@@ -461,7 +469,7 @@ public class EmbeddedPortletTest {
 				portletURL.toString());
 
 			Assert.assertEquals(200, response.getCode());
-			Assert.assertTrue(embeddedPortlet.isCalledServeResource());
+			Assert.assertTrue(testPortlet.isCalledServeResource());
 			Assert.assertTrue(testRuntimePortlet.isCalledRuntime());
 		}
 
