@@ -97,9 +97,9 @@ public abstract class BaseFilter implements LiferayFilter {
 			FilterChain filterChain)
 		throws Exception {
 
-		throw new UnsupportedOperationException(
-			"Please implement processFilter(HttpServletRequest, " +
-				"HttpServletResponse, FilterChain)");
+		Class<?> clazz = getClass();
+
+		processFilter(clazz.getName(), request, response, filterChain);
 	}
 
 	protected void processFilter(
