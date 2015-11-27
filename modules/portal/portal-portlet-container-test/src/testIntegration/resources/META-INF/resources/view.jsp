@@ -32,14 +32,14 @@
 <liferay-theme:defineObjects/>
 
 <%
-	String displayStyle = GetterUtil.getString(portletPreferences.getValue("displayStyle", StringPool.BLANK));
-	long displayStyleGroupId = GetterUtil.getLong(portletPreferences.getValue("displayStyleGroupId", null), scopeGroupId);
+Map<String, Object> contextObjects = new HashMap<>();
 
-	Map<String, Object> contextObjects = new HashMap<>();
+contextObjects.put("testRuntimePortletId", "testRuntimePortletId");
 
-	contextObjects.put("testRuntimePortletId", "testRuntimePortletId");
+String displayStyle = GetterUtil.getString(portletPreferences.getValue("displayStyle", StringPool.BLANK));
+long displayStyleGroupId = GetterUtil.getLong(portletPreferences.getValue("displayStyleGroupId", null), scopeGroupId);
 %>
 
 <liferay-ddm:template-renderer className="<%= TestPortlet.class.getName() %>" contextObjects="<%= contextObjects %>" displayStyle="<%= displayStyle %>" displayStyleGroupId="<%= displayStyleGroupId %>" entries="<%= Collections.emptyList() %>">
-	Default test content in case of failure
+	This is the default content in case of failure.
 </liferay-ddm:template-renderer>
