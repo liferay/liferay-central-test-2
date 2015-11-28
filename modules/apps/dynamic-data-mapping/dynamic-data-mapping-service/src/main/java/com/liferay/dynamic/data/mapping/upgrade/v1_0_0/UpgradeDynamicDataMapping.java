@@ -354,7 +354,7 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 
 		if (structureModelResourceName == null) {
 			throw new UpgradeException(
-				"Model " + className + " does not support DDMStructure " +
+				"Model " + className + " does not support DDM structure " +
 					"permission checking");
 		}
 
@@ -371,7 +371,7 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 
 		if (templateModelResourceName == null) {
 			throw new UpgradeException(
-				"Model " + className + " does not support DDMTemplate " +
+				"Model " + className + " does not support DDM template " +
 					"permission checking");
 		}
 
