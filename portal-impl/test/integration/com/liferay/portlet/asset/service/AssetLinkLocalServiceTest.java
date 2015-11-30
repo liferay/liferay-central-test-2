@@ -83,8 +83,7 @@ public class AssetLinkLocalServiceTest {
 			TestPropsValues.getUserId(), assetEntry1.getEntryId(),
 			assetEntry2.getEntryId(), 0, 0);
 
-		AssetLinkLocalServiceUtil.deleteLinksByAssetEntryGroupId(
-			_group1.getGroupId());
+		AssetLinkLocalServiceUtil.deleteGroupLinks(_group1.getGroupId());
 
 		List<AssetLink> assetLinks = AssetLinkLocalServiceUtil.getAssetLinks(
 			QueryUtil.ALL_POS, QueryUtil.ALL_POS);
