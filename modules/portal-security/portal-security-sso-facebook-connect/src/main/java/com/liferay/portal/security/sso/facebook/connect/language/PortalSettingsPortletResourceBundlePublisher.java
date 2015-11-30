@@ -15,7 +15,7 @@
 package com.liferay.portal.security.sso.facebook.connect.language;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.language.BaseResourceBundlePublisher;
+import com.liferay.portal.language.resource.bundle.BaseResourceBundlePublisher;
 import com.liferay.portal.settings.web.constants.PortalSettingsPortletKeys;
 
 import java.io.IOException;
