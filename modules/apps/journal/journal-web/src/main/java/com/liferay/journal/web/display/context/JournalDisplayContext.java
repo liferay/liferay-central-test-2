@@ -78,6 +78,7 @@ public class JournalDisplayContext {
 		_liferayPortletRequest = liferayPortletRequest;
 		_liferayPortletResponse = liferayPortletResponse;
 		_portletPreferences = portletPreferences;
+
 		_portalPreferences = PortletPreferencesFactoryUtil.getPortalPreferences(
 			_request);
 	}
@@ -440,15 +441,15 @@ public class JournalDisplayContext {
 
 			boolean orderByAsc = false;
 
-			if (getOrderByType().equals("asc")) {
+			if (Validator.equals(getOrderByType(), "asc")) {
 				orderByAsc = true;
 			}
 
-			if (getOrderByCol().equals("display-date")) {
+			if (Validator.equals(getOrderByCol(), "display-date")) {
 				folderOrderByComparator =
 					new FolderArticleDisplayDateComparator(orderByAsc);
 			}
-			else if (getOrderByCol().equals("modified-date")) {
+			else if (Validator.equals(getOrderByCol(), "modified-date")) {
 				folderOrderByComparator =
 					new FolderArticleModifiedDateComparator(orderByAsc);
 			}
@@ -490,7 +491,7 @@ public class JournalDisplayContext {
 	}
 
 	public boolean isNavigationHome() {
-		if (getNavigation().equals("home")) {
+		if (Validator.equals(getNavigation(), "home")) {
 			return true;
 		}
 
@@ -498,7 +499,7 @@ public class JournalDisplayContext {
 	}
 
 	public boolean isNavigationMine() {
-		if (getNavigation().equals("mine")) {
+		if (Validator.equals(getNavigation(), "mine")) {
 			return true;
 		}
 
@@ -506,7 +507,7 @@ public class JournalDisplayContext {
 	}
 
 	public boolean isNavigationRecent() {
-		if (getNavigation().equals("recent")) {
+		if (Validator.equals(getNavigation(), "recent")) {
 			return true;
 		}
 
