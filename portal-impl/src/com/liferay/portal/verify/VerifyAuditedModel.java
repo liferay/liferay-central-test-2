@@ -119,11 +119,9 @@ public class VerifyAuditedModel extends VerifyProcess {
 
 			if (rs.next()) {
 				long companyId = rs.getLong("companyId");
-				Timestamp createDate = rs.getTimestamp("createDate");
-				Timestamp modifiedDate = rs.getTimestamp("modifiedDate");
 
-				long userId;
-				String userName;
+				long userId = 0;
+				String userName = null;
 
 				if (allowAnonymousUser) {
 					userId = previousUserId;
@@ -134,9 +132,11 @@ public class VerifyAuditedModel extends VerifyProcess {
 					userName = getUserName(con, userId);
 				}
 
+				Timestamp createDate = rs.getTimestamp("createDate");
+				Timestamp modifiedDate = rs.getTimestamp("modifiedDate");
+
 				return new Object[] {
-					companyId, userId, userName, createDate,
-					modifiedDate
+					companyId, userId, userName, createDate, modifiedDate
 				};
 			}
 
@@ -299,12 +299,11 @@ public class VerifyAuditedModel extends VerifyProcess {
 		ResultSet rs = null;
 
 		try (Connection con = DataAccess.getUpgradeOptimizedConnection()) {
-			StringBundler sb = new StringBundler(9);
+			StringBundler sb = new StringBundler(8);
 
 			sb.append("select ");
 			sb.append(verifiableAuditedModel.getPrimaryKeyColumnName());
-			sb.append(", companyId");
-			sb.append(", userId");
+			sb.append(", companyId, userId");
 
 			if (verifiableAuditedModel.getJoinByTableName() != null) {
 				sb.append(StringPool.COMMA_AND_SPACE);
