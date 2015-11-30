@@ -41,7 +41,7 @@ renderResponse.setTitle(configurationModel.getName());
 			<aui:fieldset-group>
 				<c:if test="<%= configurationModel.getConfiguration() == null %>">
 					<aui:alert closeable="<%= false %>" id='<%= "errorAlert" %>' type="info">
-						<liferay-ui:message key="this-configuration-has-not-been-saved-yet" />
+						<liferay-ui:message key="this-configuration-was-not-saved-yet" />
 					</aui:alert>
 				</c:if>
 
