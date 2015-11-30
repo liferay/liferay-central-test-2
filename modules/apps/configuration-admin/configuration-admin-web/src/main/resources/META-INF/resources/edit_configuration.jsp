@@ -40,7 +40,7 @@ renderResponse.setTitle(configurationModel.getName());
 		<div class="lfr-ddm-container" id="lfr-ddm-container">
 			<aui:fieldset-group>
 				<c:if test="<%= configurationModel.getConfiguration() == null %>">
-					<aui:alert closeable="<%= false %>" id='<%= "errorAlert" %>' type="info">
+					<aui:alert closeable="<%= false %>" id="errorAlert" type="info">
 						<liferay-ui:message key="this-configuration-was-not-saved-yet" />
 					</aui:alert>
 				</c:if>
