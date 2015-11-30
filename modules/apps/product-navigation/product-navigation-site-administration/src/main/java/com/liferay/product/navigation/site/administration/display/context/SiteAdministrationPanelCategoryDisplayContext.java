@@ -14,6 +14,7 @@
 
 package com.liferay.product.navigation.site.administration.display.context;
 
+import com.liferay.application.list.PanelCategory;
 import com.liferay.application.list.constants.ApplicationListWebKeys;
 import com.liferay.application.list.constants.PanelCategoryKeys;
 import com.liferay.application.list.display.context.logic.PanelCategoryHelper;
@@ -35,6 +36,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.exportimport.staging.StagingUtil;
+import com.liferay.product.navigation.product.menu.web.display.context.ProductMenuDisplayContext;
 import com.liferay.product.navigation.site.administration.application.list.SiteAdministrationPanelCategory;
 import com.liferay.product.navigation.site.administration.util.LatentGroupManagerUtil;
 
@@ -64,6 +66,8 @@ public class SiteAdministrationPanelCategoryDisplayContext {
 			_group = group;
 		}
 
+		_panelCategory = (PanelCategory)_portletRequest.getAttribute(
+			ApplicationListWebKeys.PANEL_CATEGORY);
 		_panelCategoryHelper =
 			(PanelCategoryHelper)_portletRequest.getAttribute(
 				ApplicationListWebKeys.PANEL_CATEGORY_HELPER);
@@ -220,6 +224,10 @@ public class SiteAdministrationPanelCategoryDisplayContext {
 		return _notificationsCount;
 	}
 
+	public PanelCategory getPanelCategory() {
+		return _panelCategory;
+	}
+
 	public String getStagingGroupURL() {
 		if (_stagingGroupURL != null) {
 			return _stagingGroupURL;
@@ -263,6 +271,21 @@ public class SiteAdministrationPanelCategoryDisplayContext {
 		}
 
 		return _stagingLabel;
+	}
+
+	public boolean isCollapsedPanel() throws PortalException {
+		if (_collapsedPanel != null) {
+			return _collapsedPanel;
+		}
+
+		ProductMenuDisplayContext productMenuDisplayContext =
+			new ProductMenuDisplayContext(_portletRequest, _portletResponse);
+
+		_collapsedPanel = Validator.equals(
+			_panelCategory.getKey(),
+			productMenuDisplayContext.getRootPanelCategoryKey());
+
+		return _collapsedPanel;
 	}
 
 	public boolean isSelectedSite() {
@@ -381,6 +404,7 @@ public class SiteAdministrationPanelCategoryDisplayContext {
 		return true;
 	}
 
+	private Boolean _collapsedPanel;
 	private Group _group;
 	private String _groupName;
 	private String _groupURL;
@@ -389,6 +413,7 @@ public class SiteAdministrationPanelCategoryDisplayContext {
 	private String _manageSitesURL;
 	private List<Group> _mySites;
 	private Integer _notificationsCount;
+	private final PanelCategory _panelCategory;
 	private final PanelCategoryHelper _panelCategoryHelper;
 	private final PortletRequest _portletRequest;
 	private final PortletResponse _portletResponse;
