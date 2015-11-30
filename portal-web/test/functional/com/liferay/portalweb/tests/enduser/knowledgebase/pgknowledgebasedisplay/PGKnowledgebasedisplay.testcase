@@ -917,15 +917,6 @@
 			<var name="kbArticleRelatedAssetTitle" value="Blogs Entry Title" />
 			<var name="kbArticleTitle" value="Knowledge Base Article Title" />
 		</execute>
-
-		<execute macro="KBArticle#gotoRelatedAssetViaKBDisplayPG">
-			<var name="kbArticleRelatedAssetTitle" value="Blogs Entry Title" />
-		</execute>
-
-		<execute macro="KBArticle#viewBlogsEntryRelatedAssetViaKBDisplayPG">
-			<var name="RelatedAssetContent" value="Blogs Entry Content" />
-			<var name="RelatedAssetTitle" value="Blogs Entry Title" />
-		</execute>
 	</command>
 
 	<command name="ViewKBArticleWithEditedStarRatings" priority="3">
