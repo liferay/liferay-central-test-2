@@ -20,9 +20,9 @@
 	<c:when test="<%= permissionChecker.isOmniadmin() %>">
 
 		<%
-		String displayStyle = ParamUtil.getString(request, "displayStyle", "list");
-
 		int cur = ParamUtil.getInteger(request, SearchContainer.DEFAULT_CUR_PARAM);
+
+		String displayStyle = ParamUtil.getString(request, "displayStyle", "list");
 
 		PortletURL portletURL = renderResponse.createRenderURL();
 
