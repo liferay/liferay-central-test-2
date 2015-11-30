@@ -23,6 +23,7 @@
 		<execute function="AssertChecked" locator1="Wiki#FILES_READY_TO_BE_SAVED_CHECKBOX" />
 		<execute function="AssertTextEquals" locator1="Wiki#FILES_READY_TO_BE_SAVED_TITLE" value1="${attachmentFileName}" />
 		<execute function="AssertClick" locator1="Button#SAVE_ATTACHMENT" value1="Save" />
+
 		<execute function="AssertTextEquals#assertPartialText" locator1="Wiki#FILES_READY_TO_BE_SAVED_SUCCESS_MESSAGE" value1="Successfully saved." />
 	</command>
 
@@ -708,8 +709,11 @@
 		<var name="key_commentBody" value="${commentBody}" />
 
 		<execute function="AssertClick" locator1="Wiki#COMMENT_EDIT_LINK" value1="Edit" />
+
 		<execute function="Type" locator1="Wiki#COMMENT_EDIT_BODY_FIELD" value1="${commentBodyEdit}" />
+
 		<execute function="AssertClick" locator1="Button#PUBLISH" value1="Publish" />
+
 		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request completed successfully." />
 	</command>
 
