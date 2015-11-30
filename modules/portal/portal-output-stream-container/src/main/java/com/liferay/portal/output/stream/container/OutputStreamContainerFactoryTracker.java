@@ -217,11 +217,13 @@ public class OutputStreamContainerFactoryTracker {
 		}
 
 		@Override
-		public void write(char[] cbuf, int off, int len) throws IOException {
+		public void write(char[] chars, int offset, int length)
+			throws IOException {
+
 			Writer writer = _writerThreadLocal.get();
 
 			if (writer != null) {
-				writer.write(cbuf, off, len);
+				writer.write(chars, offset, length);
 			}
 		}
 
