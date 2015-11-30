@@ -61,7 +61,7 @@
 
 		<execute function="AssertClick#assertTextClickAtAndWait" locator1="Button#REPLY" value1="Reply" />
 
-		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request processed successfully." />
+		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request completed successfully." />
 	</command>
 
 	<command name="addCommentPG">
@@ -102,7 +102,7 @@
 			</else>
 		</if>
 
-		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request processed successfully." />
+		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request completed successfully." />
 	</command>
 
 	<command name="addCP">
@@ -646,7 +646,7 @@
 			</else>
 		</if>
 
-		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request processed successfully." />
+		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request completed successfully." />
 	</command>
 
 	<command name="deleteCP">
@@ -710,7 +710,7 @@
 		<execute function="AssertClick" locator1="Wiki#COMMENT_EDIT_LINK" value1="Edit" />
 		<execute function="Type" locator1="Wiki#COMMENT_EDIT_BODY_FIELD" value1="${commentBodyEdit}" />
 		<execute function="AssertClick" locator1="Button#PUBLISH" value1="Publish" />
-		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request processed successfully." />
+		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request completed successfully." />
 	</command>
 
 	<command name="editFrontPagePG">
