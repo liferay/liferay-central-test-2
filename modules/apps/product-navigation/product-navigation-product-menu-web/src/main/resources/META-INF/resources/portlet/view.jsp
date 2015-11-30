@@ -18,12 +18,14 @@
 
 <c:if test="<%= productMenuDisplayContext.isShowProductMenu() %>">
 	<h4 class="sidebar-header">
-		<span class="company-details">
-			<img alt="" class="company-logo" src="<%= themeDisplay.getCompanyLogo() %>" />
-			<span class="company-name"><%= company.getName() %></span>
-		</span>
+		<a href="<%= themeDisplay.getURLPortal() %>">
+			<span class="company-details">
+				<img alt="" class="company-logo" src="<%= themeDisplay.getCompanyLogo() %>" />
+				<span class="company-name"><%= company.getName() %></span>
+			</span>
 
-		<aui:icon cssClass="icon-monospaced sidenav-close visible-xs-block" image="remove" url="javascript:;" />
+			<aui:icon cssClass="icon-monospaced sidenav-close visible-xs-block" image="remove" url="javascript:;" />
+		</a>
 	</h4>
 
 	<div class="sidebar-body">
@@ -38,8 +40,8 @@
 				<div class="panel">
 					<div class="panel-heading" id="<portlet:namespace /><%= AUIUtil.normalizeId(childPanelCategory.getKey()) %>Heading" role="tab">
 						<div class="panel-title">
-							<div aria-controls="#<portlet:namespace /><%= AUIUtil.normalizeId(childPanelCategory.getKey()) %>Collapse" aria-expanded="<%= Validator.equals(childPanelCategory.getKey(), productMenuDisplayContext.getRootPanelCategoryKey()) %>" class="panel-toggler collapse-icon <%= Validator.equals(childPanelCategory.getKey(), productMenuDisplayContext.getRootPanelCategoryKey()) ? StringPool.BLANK : "collapsed" %>" class="collapsed" data-parent="#<portlet:namespace />Accordion" data-toggle="collapse" href="#<portlet:namespace /><%= AUIUtil.normalizeId(childPanelCategory.getKey()) %>Collapse" role="button">
-								<c:if test="<%= !childPanelCategory.includeHeader(request, new PipingServletResponse(pageContext)) %>">
+							<c:if test="<%= !childPanelCategory.includeHeader(request, new PipingServletResponse(pageContext)) %>">
+								<div aria-controls="#<portlet:namespace /><%= AUIUtil.normalizeId(childPanelCategory.getKey()) %>Collapse" aria-expanded="<%= Validator.equals(childPanelCategory.getKey(), productMenuDisplayContext.getRootPanelCategoryKey()) %>" class="panel-toggler collapse-icon <%= Validator.equals(childPanelCategory.getKey(), productMenuDisplayContext.getRootPanelCategoryKey()) ? StringPool.BLANK : "collapsed" %>" class="collapsed" data-parent="#<portlet:namespace />Accordion" data-toggle="collapse" href="#<portlet:namespace /><%= AUIUtil.normalizeId(childPanelCategory.getKey()) %>Collapse" role="button">
 
 									<%
 									int notificationsCount = productMenuDisplayContext.getNotificationsCount(childPanelCategory);
@@ -50,8 +52,9 @@
 									</c:if>
 
 									<span><%= childPanelCategory.getLabel(locale) %></span>
-								</c:if>
-							</div>
+
+								</div>
+							</c:if>
 						</div>
 					</div>
 
