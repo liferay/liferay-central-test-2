@@ -826,8 +826,8 @@
 
 		<var name="key_kbArticleRelatedAssetTitle" value="${kbArticleRelatedAssetTitle}" />
 
-		<execute function="AssertTextEquals" locator1="AssetRelatedAssets#KB_ASSET_TABLE_TITLE" value1="${kbArticleRelatedAssetTitle}" />
-		<execute function="AssertClick" locator1="AssetRelatedAssets#KB_ASSET_TABLE_ACTION" value1="Choose" />
+		<execute function="AssertClick" locator1="AssetRelatedAssets#KB_ASSET_TABLE_TITLE_LINK" value1="${kbArticleRelatedAssetTitle}" />
+
 		<execute function="SelectFrame" value1="relative=top" />
 	</command>
 
