@@ -119,6 +119,29 @@ public class AssetLinkLocalServiceImpl extends AssetLinkLocalServiceBaseImpl {
 		return link;
 	}
 
+	@Override
+	public void deleteGroupLinks(long groupId) {
+		Session session = assetLinkPersistence.openSession();
+
+		try {
+			String sql = CustomSQLUtil.get(_DELETE_BY_ASSET_ENTRY_GROUP_ID);
+
+			SQLQuery sqlQuery = session.createSynchronizedSQLQuery(sql);
+
+			QueryPos qPos = QueryPos.getInstance(sqlQuery);
+
+			qPos.add(groupId);
+			qPos.add(groupId);
+
+			sqlQuery.executeUpdate();
+		}
+		finally {
+			assetLinkPersistence.closeSession(session);
+
+			assetLinkPersistence.clearCache();
+		}
+	}
+
 	/**
 	 * Deletes the asset link.
 	 *
@@ -182,29 +205,6 @@ public class AssetLinkLocalServiceImpl extends AssetLinkLocalServiceBaseImpl {
 
 		for (AssetLink link : links) {
 			deleteLink(link);
-		}
-	}
-
-	@Override
-	public void deleteLinksByAssetEntryGroupId(long groupId) {
-		Session session = assetLinkPersistence.openSession();
-
-		try {
-			String sql = CustomSQLUtil.get(_DELETE_BY_ASSET_ENTRY_GROUP_ID);
-
-			SQLQuery sqlQuery = session.createSynchronizedSQLQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(sqlQuery);
-
-			qPos.add(groupId);
-			qPos.add(groupId);
-
-			sqlQuery.executeUpdate();
-		}
-		finally {
-			assetLinkPersistence.closeSession(session);
-
-			assetLinkPersistence.clearCache();
 		}
 	}
 
