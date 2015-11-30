@@ -68,18 +68,17 @@ public class LayoutTypePortletImplTest {
 		}
 
 		@Test
-		public void
-				shouldReturnFalseIfThereIsANonLayoutCacheableRootPortlet()
+		public void shouldReturnFalseIfThereIsANonlayoutCacheableRootPortlet()
 			throws Exception {
 
-			Portlet nonCacheablePortlet =
+			Portlet noncacheablePortlet =
 				PortletLocalServiceUtil.getPortletById(PortletKeys.LOGIN);
 
 			PortletPreferencesLocalServiceUtil.addPortletPreferences(
 				TestPropsValues.getCompanyId(), _layout.getGroupId(),
 				PortletKeys.PREFS_OWNER_TYPE_LAYOUT,
 				PortletKeys.PREFS_PLID_SHARED,
-				nonCacheablePortlet.getPortletId(), nonCacheablePortlet, null);
+				noncacheablePortlet.getPortletId(), noncacheablePortlet, null);
 
 			String cacheablePortletId = PortletProviderUtil.getPortletId(
 				"com.liferay.journal.model.JournalArticle",
@@ -139,15 +138,15 @@ public class LayoutTypePortletImplTest {
 
 		@Test
 		public void
-				shouldReturnFalseIfANonLayoutCacheableRootPortletIsInstalled()
+				shouldReturnFalseIfANonlayoutCacheableRootPortletIsInstalled()
 			throws Exception {
 
-			Portlet nonCacheablePortlet =
+			Portlet noncacheablePortlet =
 				PortletLocalServiceUtil.getPortletById(PortletKeys.LOGIN);
 
 			LayoutTestUtil.addPortletToLayout(
 				TestPropsValues.getUserId(), _layout,
-				nonCacheablePortlet.getPortletId(), "column-1",
+				noncacheablePortlet.getPortletId(), "column-1",
 				new HashMap<String, String[]>());
 
 			String cacheablePortletId = PortletProviderUtil.getPortletId(
@@ -175,6 +174,7 @@ public class LayoutTypePortletImplTest {
 
 			Assert.assertTrue(_layoutTypePortlet.isCacheable());
 		}
+
 	}
 
 	public static class
@@ -197,11 +197,10 @@ public class LayoutTypePortletImplTest {
 		}
 
 		@Test
-		public void
-				shouldReturnFalseIfThereIsANonLayoutCacheableRootPortlet()
+		public void shouldReturnFalseIfThereIsANonlayoutCacheableRootPortlet()
 			throws Exception {
 
-			Portlet nonCacheablePortlet =
+			Portlet noncacheablePortlet =
 				PortletLocalServiceUtil.getPortletById(PortletKeys.LOGIN);
 
 			String cacheablePortletId = PortletProviderUtil.getPortletId(
@@ -210,7 +209,7 @@ public class LayoutTypePortletImplTest {
 
 			PropsUtil.set(
 				PropsKeys.LAYOUT_STATIC_PORTLETS_ALL,
-				nonCacheablePortlet.getPortletId() + "," + cacheablePortletId);
+				noncacheablePortlet.getPortletId() + "," + cacheablePortletId);
 
 			Assert.assertFalse(_layoutTypePortlet.isCacheable());
 		}
@@ -228,6 +227,7 @@ public class LayoutTypePortletImplTest {
 
 			Assert.assertTrue(_layoutTypePortlet.isCacheable());
 		}
+
 	}
 
 	private static void _setUp() throws Exception {
