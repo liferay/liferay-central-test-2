@@ -205,16 +205,6 @@
 			<var name="kbArticleRelatedAssetTitle" value="Blogs Entry Title" />
 			<var name="kbArticleTitle" value="Knowledge Base Article Title" />
 		</execute>
-
-		<execute macro="KBArticle#gotoRelatedAssetCP">
-			<var name="kbArticleRelatedAssetTitle" value="Blogs Entry Title" />
-		</execute>
-
-		<execute macro="KBArticle#viewRelatedAssetCP">
-			<var name="relatedAssetContent" value="Blogs Entry Content" />
-			<var name="relatedAssetTitle" value="Blogs Entry Title" />
-			<var name="relatedAssetType" value="Blogs Entry" />
-		</execute>
 	</command>
 
 	<command name="AddKBArticleWithCategory" priority="4">
