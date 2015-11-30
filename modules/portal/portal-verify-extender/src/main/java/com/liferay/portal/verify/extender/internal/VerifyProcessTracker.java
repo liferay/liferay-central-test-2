@@ -285,7 +285,7 @@ public class VerifyProcessTracker {
 
 		@Override
 		public void run() {
-			final Set<String> verifyProcessNames = _verifyProcesses.keySet();
+			Set<String> verifyProcessNames = _verifyProcesses.keySet();
 
 			for (String verifyProcessName : verifyProcessNames) {
 				executeVerifyProcess(verifyProcessName, _outputStream);
