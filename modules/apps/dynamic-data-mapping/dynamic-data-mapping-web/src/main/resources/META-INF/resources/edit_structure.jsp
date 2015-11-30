@@ -103,7 +103,6 @@ if (Validator.isNotNull(requestUpdateStructureURL)) {
 		<aui:input name="saveAndContinue" type="hidden" value="<%= false %>" />
 
 		<liferay-ui:error exception="<%= DDMFormLayoutValidationException.class %>" message="please-enter-a-valid-form-layout" />
-		<liferay-ui:error exception="<%= DDMFormValidationException.class %>" message="please-enter-a-valid-form-definition" />
 
 		<liferay-ui:error exception="<%= DDMFormLayoutValidationException.MustNotDuplicateFieldName.class %>">
 
@@ -114,16 +113,7 @@ if (Validator.isNotNull(requestUpdateStructureURL)) {
 			<liferay-ui:message arguments="<%= StringUtil.merge(mndfn.getDuplicatedFieldNames(), StringPool.COMMA_AND_SPACE) %>" key="the-definition-field-name-x-was-defined-more-than-once" translateArguments="<%= false %>" />
 		</liferay-ui:error>
 
-		<liferay-ui:error exception="<%= LocaleException.class %>">
-
-			<%
-			LocaleException le = (LocaleException)errorException;
-			%>
-
-			<c:if test="<%= le.getType() == LocaleException.TYPE_CONTENT %>">
-				<liferay-ui:message arguments="<%= new String[] {StringUtil.merge(le.getSourceAvailableLocales(), StringPool.COMMA_AND_SPACE), StringUtil.merge(le.getTargetAvailableLocales(), StringPool.COMMA_AND_SPACE)} %>" key="the-default-language-x-does-not-match-the-portal's-available-languages-x" />
-			</c:if>
-		</liferay-ui:error>
+		<liferay-ui:error exception="<%= DDMFormValidationException.class %>" message="please-enter-a-valid-form-definition" />
 
 		<liferay-ui:error exception="<%= DDMFormValidationException.MustNotDuplicateFieldName.class %>">
 
@@ -150,6 +140,17 @@ if (Validator.isNotNull(requestUpdateStructureURL)) {
 			%>
 
 			<liferay-ui:message arguments="<%= msvcffn.getFieldName() %>" key="invalid-characters-were-defined-for-field-name-x" translateArguments="<%= false %>" />
+		</liferay-ui:error>
+
+		<liferay-ui:error exception="<%= LocaleException.class %>">
+
+			<%
+			LocaleException le = (LocaleException)errorException;
+			%>
+
+			<c:if test="<%= le.getType() == LocaleException.TYPE_CONTENT %>">
+				<liferay-ui:message arguments="<%= new String[] {StringUtil.merge(le.getSourceAvailableLocales(), StringPool.COMMA_AND_SPACE), StringUtil.merge(le.getTargetAvailableLocales(), StringPool.COMMA_AND_SPACE)} %>" key="the-default-language-x-does-not-match-the-portal's-available-languages-x" />
+			</c:if>
 		</liferay-ui:error>
 
 		<liferay-ui:error exception="<%= StructureDefinitionException.class %>" message="please-enter-a-valid-definition" />
