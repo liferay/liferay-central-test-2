@@ -107,6 +107,10 @@ public class AssetLinkLocalServiceUtil {
 		return getService().deleteAssetLink(linkId);
 	}
 
+	public static void deleteGroupLinks(long groupId) {
+		getService().deleteGroupLinks(groupId);
+	}
+
 	/**
 	* Deletes the asset link.
 	*
@@ -144,10 +148,6 @@ public class AssetLinkLocalServiceUtil {
 	*/
 	public static void deleteLinks(long entryId1, long entryId2) {
 		getService().deleteLinks(entryId1, entryId2);
-	}
-
-	public static void deleteLinksByAssetEntryGroupId(long groupId) {
-		getService().deleteLinksByAssetEntryGroupId(groupId);
 	}
 
 	/**
