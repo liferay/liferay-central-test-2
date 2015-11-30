@@ -80,7 +80,7 @@ public class DLFolderFinderTest {
 			TestPropsValues.getUserId(), _group.getGroupId(), classNameId,
 			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, "Test Repository",
 			StringUtil.randomString(), StringUtil.randomString(),
-			new UnicodeProperties(), false, serviceContext);
+			new UnicodeProperties(), true, serviceContext);
 
 		_folder = DLAppLocalServiceUtil.addFolder(
 			TestPropsValues.getUserId(), _group.getGroupId(),
