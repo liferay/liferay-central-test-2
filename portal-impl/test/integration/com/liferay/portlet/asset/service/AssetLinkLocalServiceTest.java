@@ -54,7 +54,7 @@ public class AssetLinkLocalServiceTest {
 	@Test
 	public void testDeleteLinksByAssetEntryGroupId() throws Exception {
 
-		// Add Link between entities in Group 1
+		// Add link between entries in group 1
 
 		AssetEntry assetEntry1 = AssetTestUtil.addAssetEntry(
 			_group1.getGroupId());
@@ -65,7 +65,7 @@ public class AssetLinkLocalServiceTest {
 			TestPropsValues.getUserId(), assetEntry1.getEntryId(),
 			assetEntry2.getEntryId(), 0, 0);
 
-		// Add Link between entities in different Groups
+		// Add link between entries in different groups
 
 		assetEntry1 = AssetTestUtil.addAssetEntry(_group1.getGroupId());
 		assetEntry2 = AssetTestUtil.addAssetEntry(_group2.getGroupId());
@@ -74,7 +74,7 @@ public class AssetLinkLocalServiceTest {
 			TestPropsValues.getUserId(), assetEntry1.getEntryId(),
 			assetEntry2.getEntryId(), 0, 0);
 
-		// Add Link between entities in Group 2
+		// Add link between entries in group 2
 
 		assetEntry1 = AssetTestUtil.addAssetEntry(_group2.getGroupId());
 		assetEntry2 = AssetTestUtil.addAssetEntry(_group2.getGroupId());
