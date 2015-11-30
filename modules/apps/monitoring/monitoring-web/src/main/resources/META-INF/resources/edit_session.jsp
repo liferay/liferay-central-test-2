@@ -28,10 +28,10 @@ int numHits = userTracker.getHits();
 
 userTracker = userTracker.toEscapedModel();
 
-renderResponse.setTitle(LanguageUtil.format(request, "session-id-x", sessionId, false));
-
 portletDisplay.setShowBackIcon(true);
 portletDisplay.setURLBack(redirect);
+
+renderResponse.setTitle(LanguageUtil.format(request, "session-id-x", sessionId, false));
 %>
 
 <portlet:actionURL name="/monitoring/edit_session" var="editSessionURL" />
