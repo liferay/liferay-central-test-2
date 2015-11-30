@@ -105,6 +105,11 @@ public class AssetLinkLocalServiceWrapper implements AssetLinkLocalService,
 		return _assetLinkLocalService.deleteAssetLink(linkId);
 	}
 
+	@Override
+	public void deleteGroupLinks(long groupId) {
+		_assetLinkLocalService.deleteGroupLinks(groupId);
+	}
+
 	/**
 	* Deletes the asset link.
 	*
@@ -145,11 +150,6 @@ public class AssetLinkLocalServiceWrapper implements AssetLinkLocalService,
 	@Override
 	public void deleteLinks(long entryId1, long entryId2) {
 		_assetLinkLocalService.deleteLinks(entryId1, entryId2);
-	}
-
-	@Override
-	public void deleteLinksByAssetEntryGroupId(long groupId) {
-		_assetLinkLocalService.deleteLinksByAssetEntryGroupId(groupId);
 	}
 
 	/**
