@@ -247,44 +247,49 @@ public class UpgradeJournalArticleType extends UpgradeProcess {
 			return;
 		}
 
-		List<Company> companies = _companyLocalService.getCompanies();
+		Locale defaultLocale = LocaleThreadLocal.getDefaultLocale();
 
-		Locale previousDefaultLocale = LocaleThreadLocal.getDefaultLocale();
+		try {
+			List<Company> companies = _companyLocalService.getCompanies();
 
-		for (Company company : companies) {
-			LocaleThreadLocal.setDefaultLocale(company.getLocale());
+			for (Company company : companies) {
+				LocaleThreadLocal.setDefaultLocale(company.getLocale());
 
-			Set<Locale> locales = LanguageUtil.getAvailableLocales(
-				company.getGroupId());
+				Set<Locale> locales = LanguageUtil.getAvailableLocales(
+					company.getGroupId());
 
-			Locale defaultLocale = LocaleUtil.fromLanguageId(
-				UpgradeProcessUtil.getDefaultLanguageId(
-					company.getCompanyId()));
+				Locale defaultLocale = LocaleUtil.fromLanguageId(
+					UpgradeProcessUtil.getDefaultLanguageId(
+						company.getCompanyId()));
 
-			Map<Locale, String> nameMap = LocalizationUtil.getLocalizationMap(
-				locales, defaultLocale, "type");
+				Map<Locale, String> nameMap =
+					LocalizationUtil.getLocalizationMap(
+						locales, defaultLocale, "type");
 
-			AssetVocabulary assetVocabulary = addAssetVocabulary(
-				company.getGroupId(), company.getCompanyId(), "type", nameMap,
-				new HashMap<Locale, String>());
+				AssetVocabulary assetVocabulary = addAssetVocabulary(
+					company.getGroupId(), company.getCompanyId(), "type",
+					nameMap, new HashMap<Locale, String>());
 
-			Map<String, Long> journalArticleTypesToAssetCategoryIds =
-				new HashMap<>();
+				Map<String, Long> journalArticleTypesToAssetCategoryIds =
+					new HashMap<>();
 
-			for (String type : types) {
-				AssetCategory assetCategory = addAssetCategory(
-					company.getGroupId(), company.getCompanyId(), type,
-					assetVocabulary.getVocabularyId());
+				for (String type : types) {
+					AssetCategory assetCategory = addAssetCategory(
+						company.getGroupId(), company.getCompanyId(), type,
+						assetVocabulary.getVocabularyId());
 
-				journalArticleTypesToAssetCategoryIds.put(
-					type, assetCategory.getCategoryId());
+					journalArticleTypesToAssetCategoryIds.put(
+						type, assetCategory.getCategoryId());
+				}
+
+				updateArticles(
+					company.getCompanyId(),
+					journalArticleTypesToAssetCategoryIds);
 			}
-
-			updateArticles(
-				company.getCompanyId(), journalArticleTypesToAssetCategoryIds);
 		}
-
-		LocaleThreadLocal.setDefaultLocale(previousDefaultLocale);
+		finally {
+			LocaleThreadLocal.setDefaultLocale(defaultLocale);
+		}
 	}
 
 	private final AssetCategoryLocalService _assetCategoryLocalService;
