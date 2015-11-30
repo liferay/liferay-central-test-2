@@ -31,8 +31,8 @@ renderResponse.setTitle(factoryConfigurationModel.getName());
 <aui:nav-bar cssClass="collapse-basic-search" markupView="lexicon">
 	<aui:nav cssClass="navbar-nav">
 		<aui:nav-item
-				label="entries"
-				selected="<%= true %>"
+			label="entries"
+			selected="<%= true %>"
 		/>
 	</aui:nav>
 </aui:nav-bar>
@@ -45,8 +45,9 @@ renderResponse.setTitle(factoryConfigurationModel.getName());
 	</portlet:renderURL>
 
 	<liferay-frontend:add-menu-item
-			title='<%= LanguageUtil.format(request, "add-x", factoryConfigurationModel.getName()) %>'
-			url="<%= createFactoryConfigURL %>" />
+		title='<%= LanguageUtil.format(request, "add-x", factoryConfigurationModel.getName()) %>'
+		url="<%= createFactoryConfigURL %>"
+	/>
 </liferay-frontend:add-menu>
 
 <div class="container-fluid-1280">
