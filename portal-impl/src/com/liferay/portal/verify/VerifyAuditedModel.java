@@ -228,8 +228,7 @@ public class VerifyAuditedModel extends VerifyProcess {
 
 	protected void verifyAuditedModel(
 			Connection con, String tableName, String primaryKeyColumnName,
-			long primKey, Object[] auditedModelArray, boolean updateDates,
-			boolean allowAnonymousUser)
+			long primKey, Object[] auditedModelArray, boolean updateDates)
 		throws Exception {
 
 		PreparedStatement ps = null;
@@ -352,8 +351,7 @@ public class VerifyAuditedModel extends VerifyProcess {
 				verifyAuditedModel(
 					con, verifiableAuditedModel.getTableName(),
 					verifiableAuditedModel.getPrimaryKeyColumnName(), primKey,
-					auditedModelArray, verifiableAuditedModel.isUpdateDates(),
-					verifiableAuditedModel.isAnonymousUserAllowed());
+					auditedModelArray, verifiableAuditedModel.isUpdateDates());
 			}
 		}
 		finally {
