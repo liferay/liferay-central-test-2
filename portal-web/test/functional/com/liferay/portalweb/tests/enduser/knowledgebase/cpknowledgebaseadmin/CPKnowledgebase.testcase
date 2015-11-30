@@ -205,6 +205,14 @@
 			<var name="kbArticleRelatedAssetTitle" value="Blogs Entry Title" />
 			<var name="kbArticleTitle" value="Knowledge Base Article Title" />
 		</execute>
+
+		<var name="kbArticleRelatedAssetTitle" value="Blogs Entry Title" />
+		<var name="key_relatedAssetTitle" value="${relatedAssetTitle}" />
+
+		<execute function="AssertClick" locator1="AssetRelatedAssets#ASSET_TITLE" value1="${kbArticleRelatedAssetTitle}" />
+
+		<execute function="AssertTextEquals" locator1="BlogsEntry#CONTENT_GENERIC" value1="Blogs Entry Content" />
+		<execute function="AssertTextEquals" locator1="BlogsEntry#TITLE_GENERIC" value1="Blogs Entry Title" />
 	</command>
 
 	<command name="AddKBArticleWithCategory" priority="4">
