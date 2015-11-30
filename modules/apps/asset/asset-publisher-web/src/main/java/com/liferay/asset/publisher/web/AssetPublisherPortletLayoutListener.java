@@ -68,18 +68,18 @@ public class AssetPublisherPortletLayoutListener
 					layout.getGroupId(), layout.getUuid());
 			}
 
+			long ownerId = PortletKeys.PREFS_OWNER_ID_DEFAULT;
 			int ownerType = PortletKeys.PREFS_OWNER_TYPE_LAYOUT;
-			long userId = PortletKeys.PREFS_OWNER_ID_DEFAULT;
 
 			if (PortletConstants.hasUserId(portletId)) {
 				ownerType = PortletKeys.PREFS_OWNER_TYPE_USER;
-				userId = PortletConstants.getUserId(portletId);
+				ownerId = PortletConstants.getUserId(portletId);
 			}
 
 			_subscriptionLocalService.deleteSubscriptions(
 				layout.getCompanyId(), PortletPreferences.class.getName(),
 				AssetPublisherUtil.getSubscriptionClassPK(
-					userId, ownerType, plid, portletId));
+					ownerId, ownerType, plid, portletId));
 		}
 		catch (Exception e) {
 			throw new PortletLayoutListenerException(e);
