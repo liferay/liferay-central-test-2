@@ -85,9 +85,7 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 				<%
 				String rowHREF = StringPool.BLANK;
 
-				boolean hasStructureUpdatePermission = DDMStructurePermission.contains(permissionChecker, structure, refererPortletName, ActionKeys.UPDATE);
-
-				if (hasStructureUpdatePermission) {
+				if (DDMStructurePermission.contains(permissionChecker, structure, refererPortletName, ActionKeys.UPDATE)) {
 					PortletURL rowURL = renderResponse.createRenderURL();
 
 					rowURL.setParameter("mvcPath", "/edit_structure.jsp");
