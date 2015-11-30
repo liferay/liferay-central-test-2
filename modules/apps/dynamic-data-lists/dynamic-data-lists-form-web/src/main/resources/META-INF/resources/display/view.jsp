@@ -72,10 +72,6 @@ if (recordSet != null) {
 							<div class="container-fluid-1280">
 								<h1 class="ddl-form-name"><%= recordSet.getName(locale) %></h1>
 
-						<div class="ddl-form-basic-info">
-							<div class="container-fluid-1280">
-								<h1 class="ddl-form-name"><%= recordSet.getName(locale) %></h1>
-
 								<%
 								String description = recordSet.getDescription(locale);
 								%>
