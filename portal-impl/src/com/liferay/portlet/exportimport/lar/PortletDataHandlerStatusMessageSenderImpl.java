@@ -110,7 +110,6 @@ public class PortletDataHandlerStatusMessageSenderImpl
 		message.put(
 			"stagedModelType",
 			String.valueOf(stagedModel.getStagedModelType()));
-
 		message.put("uuid", stagedModel.getUuid());
 
 		_backgroundTaskStatusMessageSender.sendBackgroundTaskStatusMessage(

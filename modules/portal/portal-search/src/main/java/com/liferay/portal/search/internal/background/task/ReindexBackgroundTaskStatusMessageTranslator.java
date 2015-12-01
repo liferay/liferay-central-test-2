@@ -139,15 +139,15 @@ public class ReindexBackgroundTaskStatusMessageTranslator
 		BackgroundTaskStatus backgroundTaskStatus, Message message) {
 
 		backgroundTaskStatus.setAttribute(
-			ReindexBackgroundTaskConstants.PHASE,
-			message.getString(ReindexBackgroundTaskConstants.PHASE));
-		backgroundTaskStatus.setAttribute(
 			ReindexBackgroundTaskConstants.COMPANY_ID,
 			message.getLong(ReindexBackgroundTaskConstants.COMPANY_ID));
 		backgroundTaskStatus.setAttribute(
 			ReindexBackgroundTaskConstants.COMPANY_IDS,
 			GetterUtil.getLongValues(
 				message.get(ReindexBackgroundTaskConstants.COMPANY_IDS)));
+		backgroundTaskStatus.setAttribute(
+			ReindexBackgroundTaskConstants.PHASE,
+			message.getString(ReindexBackgroundTaskConstants.PHASE));
 	}
 
 }
