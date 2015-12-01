@@ -2177,10 +2177,6 @@
 			<var name="kbSuggestionCount" value="4" />
 		</execute>
 
-		<execute macro="KBArticleSuggestion#viewPG">
-			<var name="kbSuggestionCount" value="4" />
-		</execute>
-
 		<execute macro="KBArticle#gotoSuggestionsNavigationPG" />
 
 		<execute macro="KBArticleSuggestion#viewPG">
