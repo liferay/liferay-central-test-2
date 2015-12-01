@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.security.sso.ntlm.language;
+package com.liferay.portal.security.sso.ntlm.language.resource.bundle;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.language.resource.bundle.BaseResourceBundlePublisher;
