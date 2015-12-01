@@ -252,7 +252,8 @@ public class MBMailingListLocalServiceImpl
 			throw new MailingListEmailAddressException(emailAddress);
 		}
 		else if (Validator.isNull(inServerName)) {
-			throw new MailingListInServerNameException("In server name is null");
+			throw new MailingListInServerNameException(
+				"In server name is null");
 		}
 		else if (Validator.isNull(inUserName)) {
 			throw new MailingListInUserNameException("In user name is null");
