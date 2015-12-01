@@ -817,6 +817,7 @@ public class PoshiRunnerExecutor {
 				LiferaySelenium liferaySelenium = SeleniumUtil.getSelenium();
 
 				String attribute = element.attributeValue("attribute");
+
 				String locator = element.attributeValue("locator");
 
 				if (locator.contains("#")) {
