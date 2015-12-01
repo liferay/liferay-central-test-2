@@ -31,6 +31,9 @@ if (Validator.isNotNull(servicePassword)) {
 %>
 
 <aui:fieldset>
+
+	<aui:input name="<%= ActionRequest.ACTION_NAME %>" type="hidden" value="/portal_settings/edit_company_ntlm_configuration" />
+
 	<aui:input label="enabled" name='<%= "ntlm--enabled" %>' type="checkbox" value="<%= enabled %>" />
 
 	<aui:input cssClass="lfr-input-text-container" label="domain-controller" name='<%= "ntlm--domainController" %>' type="text" value="<%= domainController %>" />
