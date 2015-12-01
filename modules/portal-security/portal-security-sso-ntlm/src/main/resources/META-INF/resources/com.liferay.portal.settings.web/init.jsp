@@ -26,3 +26,7 @@ page import="com.liferay.portal.security.sso.ntlm.module.configuration.NtlmConfi
 page import="com.liferay.portal.util.Portal" %>
 
 <%@ page import="javax.portlet.ActionRequest" %>
+
+<portlet:defineObjects />
+
+<liferay-theme:defineObjects />
