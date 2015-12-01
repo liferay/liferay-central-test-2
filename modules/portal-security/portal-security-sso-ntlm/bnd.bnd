@@ -3,7 +3,7 @@ Bundle-SymbolicName: com.liferay.portal.security.sso.ntlm
 Bundle-Version: 1.0.0
 Import-Package:\
 	com.liferay.portal.language.resource.bundle,\
-        com.liferay.portal.settings.portlet.action,\
+	com.liferay.portal.settings.portlet.action,\
 	!javax.microedition.*,\
 	*
 Include-Resource:\
