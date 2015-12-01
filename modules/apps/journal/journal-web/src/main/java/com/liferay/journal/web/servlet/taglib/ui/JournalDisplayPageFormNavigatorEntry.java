@@ -14,8 +14,6 @@
 
 package com.liferay.journal.web.servlet.taglib.ui;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.taglib.ui.FormNavigatorEntry;
 
 import javax.servlet.ServletContext;
@@ -50,8 +48,5 @@ public class JournalDisplayPageFormNavigatorEntry
 	protected String getJspPath() {
 		return "/article/display_page.jsp";
 	}
-
-	private static final Log _log = LogFactoryUtil.getLog(
-		JournalDisplayPageFormNavigatorEntry.class);
 
 }
