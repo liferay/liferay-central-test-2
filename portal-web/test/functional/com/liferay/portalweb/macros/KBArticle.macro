@@ -1107,6 +1107,13 @@
 				<execute function="AssertTextEquals" locator1="CPKnowledgebaseadminArticle#CATEGORY_LINKS" value1="${categoryName}" />
 			</then>
 		</if>
+
+		<if>
+			<equals arg1="noAttachment" arg2="true" />
+			<then>
+				<execute function="AssertAlertNotPresent" locator1="KnowledgeBaseArticle#ATTACHMENTS_SAVED_ATTACHMENTS_CONTAINER" />
+			</then>
+		</if>
 	</command>
 
 	<command name="viewDefaultCP">
