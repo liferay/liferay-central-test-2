@@ -220,13 +220,12 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		if (LockManagerUtil.isLocked(
 				MBThread.class.getName(), parentMessage.getThreadId())) {
 
-			StringBundler sb = new StringBundler(5);
+			StringBundler sb = new StringBundler(4);
 
-			sb.append("Thread is locked for {className=");
+			sb.append("Thread is locked for class name ");
 			sb.append(MBThread.class.getName());
-			sb.append(", threadId=");
+			sb.append(" and class PK ");
 			sb.append(parentMessage.getThreadId());
-			sb.append(StringPool.CLOSE_CURLY_BRACE);
 
 			throw new LockedThreadException(sb.toString());
 		}
@@ -263,13 +262,12 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		if (LockManagerUtil.isLocked(
 				MBThread.class.getName(), message.getThreadId())) {
 
-			StringBundler sb = new StringBundler(5);
+			StringBundler sb = new StringBundler(4);
 
-			sb.append("Thread is locked for {className=");
+			sb.append("Thread is locked for class name ");
 			sb.append(MBThread.class.getName());
-			sb.append(", threadId=");
+			sb.append(" and class PK ");
 			sb.append(message.getThreadId());
-			sb.append(StringPool.CLOSE_CURLY_BRACE);
 
 			throw new LockedThreadException(sb.toString());
 		}
@@ -781,11 +779,10 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 			StringBundler sb = new StringBundler(5);
 
-			sb.append("Thread is locked for {className=");
+			sb.append("Thread is locked for class name ");
 			sb.append(MBThread.class.getName());
-			sb.append(", threadId=");
+			sb.append(" and class PK ");
 			sb.append(message.getThreadId());
-			sb.append(StringPool.CLOSE_CURLY_BRACE);
 
 			throw new LockedThreadException(sb.toString());
 		}

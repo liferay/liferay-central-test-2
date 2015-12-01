@@ -51,13 +51,12 @@ public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 	@Override
 	public void deleteThread(long threadId) throws PortalException {
 		if (LockManagerUtil.isLocked(MBThread.class.getName(), threadId)) {
-			StringBundler sb = new StringBundler(5);
+			StringBundler sb = new StringBundler(4);
 
-			sb.append("Thread is locked for {className=");
+			sb.append("Thread is locked for class name ");
 			sb.append(MBThread.class.getName());
-			sb.append(", threadId=");
+			sb.append(" and class PK ");
 			sb.append(threadId);
-			sb.append(StringPool.CLOSE_CURLY_BRACE);
 
 			throw new LockedThreadException(sb.toString());
 		}
@@ -305,13 +304,12 @@ public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 		throws PortalException {
 
 		if (LockManagerUtil.isLocked(MBThread.class.getName(), threadId)) {
-			StringBundler sb = new StringBundler(5);
+			StringBundler sb = new StringBundler(4);
 
-			sb.append("Thread is locked for {className=");
+			sb.append("Thread is locked for class name ");
 			sb.append(MBThread.class.getName());
-			sb.append(", threadId=");
+			sb.append(" and class PK ");
 			sb.append(threadId);
-			sb.append(StringPool.CLOSE_CURLY_BRACE);
 
 			throw new LockedThreadException(sb.toString());
 		}
@@ -347,13 +345,12 @@ public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 	@Override
 	public MBThread moveThreadToTrash(long threadId) throws PortalException {
 		if (LockManagerUtil.isLocked(MBThread.class.getName(), threadId)) {
-			StringBundler sb = new StringBundler(5);
+			StringBundler sb = new StringBundler(4);
 
-			sb.append("Thread is locked for {className=");
+			sb.append("Thread is locked for class name ");
 			sb.append(MBThread.class.getName());
-			sb.append(", threadId=");
+			sb.append(" and class PK ");
 			sb.append(threadId);
-			sb.append(StringPool.CLOSE_CURLY_BRACE);
 
 			throw new LockedThreadException(sb.toString());
 		}

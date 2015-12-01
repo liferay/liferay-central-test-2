@@ -150,13 +150,12 @@ public class MBDiscussionStagedModelDataHandler
 						rootMessage.getThreadId());
 			}
 			else {
-				StringBundler sb = new StringBundler(5);
+				StringBundler sb = new StringBundler(4);
 
-				sb.append("No discussion exists for {className=");
+				sb.append("No discussion exists for class name ");
 				sb.append(discussion.getClassName());
-				sb.append(", classPK=");
+				sb.append(" and class PK ");
 				sb.append(newClassPK);
-				sb.append(StringPool.CLOSE_CURLY_BRACE);
 
 				throw new NoSuchDiscussionException(sb.toString());
 			}
