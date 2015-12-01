@@ -82,12 +82,6 @@ buildCSS {
 	portalCommonDir = new File(rootDir, "frontend/frontend-common-css/tmp/META-INF/resources")
 }
 
-buildSoy {
-	ext {
-		autoClean = false
-	}
-}
-
 configure([test, testIntegration]) {
 	testLogging {
 		events = EnumSet.allOf(TestLogEvent)
@@ -173,18 +167,6 @@ eclipse {
 	}
 }
 
-eclipseClasspath {
-	ext {
-		autoClean = false
-	}
-}
-
-eclipseProject {
-	ext {
-		autoClean = false
-	}
-}
-
 idea {
 	module {
 		excludeDirs += sourceSets.main.output.classesDir
@@ -218,12 +200,6 @@ idea {
 				}
 			}
 		}
-	}
-}
-
-ideaModule {
-	ext {
-		autoClean = false
 	}
 }
 
