@@ -30,12 +30,12 @@ public class ReindexStatusMessageSenderImpl
 	public void sendStatusMessage(String className, long progress, long count) {
 		Message message = new Message();
 
+		message.put(ReindexBackgroundTaskConstants.CLASS_NAME, className);
+		message.put(ReindexBackgroundTaskConstants.COUNT, count);
+		message.put(ReindexBackgroundTaskConstants.PROGRESS, progress);
 		message.put(
 			"backgroundTaskId",
 			BackgroundTaskThreadLocal.getBackgroundTaskId());
-		message.put(ReindexBackgroundTaskConstants.CLASS_NAME, className);
-		message.put(ReindexBackgroundTaskConstants.PROGRESS, progress);
-		message.put(ReindexBackgroundTaskConstants.COUNT, count);
 
 		_backgroundTaskStatusMessageSender.sendBackgroundTaskStatusMessage(
 			message);
@@ -47,12 +47,12 @@ public class ReindexStatusMessageSenderImpl
 
 		Message message = new Message();
 
+		message.put(ReindexBackgroundTaskConstants.COMPANY_ID, companyId);
+		message.put(ReindexBackgroundTaskConstants.COMPANY_IDS, companyIds);
+		message.put(ReindexBackgroundTaskConstants.PHASE, phase);
 		message.put(
 			"backgroundTaskId",
 			BackgroundTaskThreadLocal.getBackgroundTaskId());
-		message.put(ReindexBackgroundTaskConstants.PHASE, phase);
-		message.put(ReindexBackgroundTaskConstants.COMPANY_ID, companyId);
-		message.put(ReindexBackgroundTaskConstants.COMPANY_IDS, companyIds);
 
 		_backgroundTaskStatusMessageSender.sendBackgroundTaskStatusMessage(
 			message);
