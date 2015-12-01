@@ -46,6 +46,7 @@ public class ReindexBackgroundTaskStatusMessageTranslator
 		phase = GetterUtil.getString(
 			backgroundTaskStatus.getAttribute(
 				ReindexBackgroundTaskConstants.PHASE));
+
 		long companyId = GetterUtil.getLong(
 			backgroundTaskStatus.getAttribute(
 				ReindexBackgroundTaskConstants.COMPANY_ID));
@@ -55,16 +56,20 @@ public class ReindexBackgroundTaskStatusMessageTranslator
 
 		String className = message.getString(
 			ReindexBackgroundTaskConstants.CLASS_NAME);
-		long progress = message.getLong(
-			ReindexBackgroundTaskConstants.PROGRESS);
-		long count = message.getLong(ReindexBackgroundTaskConstants.COUNT);
 
 		backgroundTaskStatus.setAttribute(
 			ReindexBackgroundTaskConstants.CLASS_NAME, className);
-		backgroundTaskStatus.setAttribute(
-			ReindexBackgroundTaskConstants.PROGRESS, progress);
+
+		long count = message.getLong(ReindexBackgroundTaskConstants.COUNT);
+
 		backgroundTaskStatus.setAttribute(
 			ReindexBackgroundTaskConstants.COUNT, count);
+
+		long progress = message.getLong(
+			ReindexBackgroundTaskConstants.PROGRESS);
+
+		backgroundTaskStatus.setAttribute(
+			ReindexBackgroundTaskConstants.PROGRESS, progress);
 
 		int completedCompanies = 0;
 
