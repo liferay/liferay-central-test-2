@@ -24,11 +24,11 @@ String siteName = GetterUtil.getString(request.getAttribute("my_sites.jsp-siteGr
 boolean showPrivateLabel = (Boolean)request.getAttribute("my_sites.jsp-showPrivateLabel");
 boolean showStagingLabel = (Boolean)request.getAttribute("my_sites.jsp-showStagingLabel");
 
-SiteAdministrationPanelCategoryDisplayContext sapcDisplayContext = new SiteAdministrationPanelCategoryDisplayContext(liferayPortletRequest, liferayPortletResponse, siteGroup);
+SiteAdministrationPanelCategoryDisplayContext siteAdministrationPanelCategoryDisplayContext = new SiteAdministrationPanelCategoryDisplayContext(liferayPortletRequest, liferayPortletResponse, siteGroup);
 %>
 
 <li class="list-group-item selectable-site">
-	<aui:a cssClass='<%= "site-link" + (selectedSite ? " selected-site" : StringPool.BLANK) %>' href="<%= sapcDisplayContext.getGroupURL(privateLayout) %>">
+	<aui:a cssClass='<%= "site-link" + (selectedSite ? " selected-site" : StringPool.BLANK) %>' href="<%= siteAdministrationPanelCategoryDisplayContext.getGroupURL(privateLayout) %>">
 		<div class="list-group-item-field">
 			<c:choose>
 				<c:when test="<%= selectedSite %>">
@@ -36,8 +36,8 @@ SiteAdministrationPanelCategoryDisplayContext sapcDisplayContext = new SiteAdmin
 						<aui:icon image="check" markupView="lexicon" />
 					</div>
 				</c:when>
-				<c:when test="<%= Validator.isNotNull(sapcDisplayContext.getLogoURL()) %>">
-					<div class="aspect-ratio-bg-cover sticker" style="background-image: url(<%= sapcDisplayContext.getLogoURL() %>);">
+				<c:when test="<%= Validator.isNotNull(siteAdministrationPanelCategoryDisplayContext.getLogoURL()) %>">
+					<div class="aspect-ratio-bg-cover sticker" style="background-image: url(<%= siteAdministrationPanelCategoryDisplayContext.getLogoURL() %>);">
 					</div>
 				</c:when>
 				<c:otherwise>

@@ -17,9 +17,9 @@
 <%@ include file="/init.jsp" %>
 
 <%
-SiteAdministrationPanelCategoryDisplayContext sapcDisplayContext = new SiteAdministrationPanelCategoryDisplayContext(liferayPortletRequest, liferayPortletResponse, null);
+SiteAdministrationPanelCategoryDisplayContext siteAdministrationPanelCategoryDisplayContext = new SiteAdministrationPanelCategoryDisplayContext(liferayPortletRequest, liferayPortletResponse, null);
 
-List<Group> mySiteGroups = sapcDisplayContext.getMySites();
+List<Group> mySiteGroups = siteAdministrationPanelCategoryDisplayContext.getMySites();
 %>
 
 <c:if test="<%= !mySiteGroups.isEmpty() %>">
@@ -27,8 +27,6 @@ List<Group> mySiteGroups = sapcDisplayContext.getMySites();
 
 	<%
 	for (Group mySiteGroup : mySiteGroups) {
-		SiteAdministrationPanelCategoryDisplayContext groupDisplayContext = new SiteAdministrationPanelCategoryDisplayContext(liferayPortletRequest, liferayPortletResponse, mySiteGroup);
-
 		boolean showPublicSite = mySiteGroup.isShowSite(permissionChecker, false) && (mySiteGroup.getPublicLayoutsPageCount() > 0);
 		boolean showPrivateSite = mySiteGroup.isShowSite(permissionChecker, true) && (mySiteGroup.getPrivateLayoutsPageCount() > 0);
 
@@ -54,6 +52,8 @@ List<Group> mySiteGroups = sapcDisplayContext.getMySites();
 				}
 			}
 		}
+
+		SiteAdministrationPanelCategoryDisplayContext groupSiteAdministrationPanelCategoryDisplayContext = new SiteAdministrationPanelCategoryDisplayContext(liferayPortletRequest, liferayPortletResponse, mySiteGroup);
 	%>
 
 		<c:choose>
@@ -66,7 +66,7 @@ List<Group> mySiteGroups = sapcDisplayContext.getMySites();
 					}
 
 					request.setAttribute("my_sites.jsp-privateLayout", false);
-					request.setAttribute("my_sites.jsp-selectedSite", groupDisplayContext.isSelectedSite() && !layout.isPrivateLayout());
+					request.setAttribute("my_sites.jsp-selectedSite", groupSiteAdministrationPanelCategoryDisplayContext.isSelectedSite() && !layout.isPrivateLayout());
 					request.setAttribute("my_sites.jsp-siteGroup", showPublicSite ? mySiteGroup : siteGroup);
 
 					if (mySiteGroup.isUser()) {
@@ -90,7 +90,7 @@ List<Group> mySiteGroups = sapcDisplayContext.getMySites();
 					}
 
 					request.setAttribute("my_sites.jsp-privateLayout", true);
-					request.setAttribute("my_sites.jsp-selectedSite", groupDisplayContext.isSelectedSite() && layout.isPrivateLayout());
+					request.setAttribute("my_sites.jsp-selectedSite", groupSiteAdministrationPanelCategoryDisplayContext.isSelectedSite() && layout.isPrivateLayout());
 					request.setAttribute("my_sites.jsp-siteGroup", showPrivateSite ? mySiteGroup : siteGroup);
 
 					if (mySiteGroup.isUser()) {
@@ -110,7 +110,7 @@ List<Group> mySiteGroups = sapcDisplayContext.getMySites();
 				siteGroup = StagingUtil.getStagingGroup(mySiteGroup.getGroupId());
 
 				request.setAttribute("my_sites.jsp-privateLayout", false);
-				request.setAttribute("my_sites.jsp-selectedSite", groupDisplayContext.isSelectedSite());
+				request.setAttribute("my_sites.jsp-selectedSite", groupSiteAdministrationPanelCategoryDisplayContext.isSelectedSite());
 				request.setAttribute("my_sites.jsp-siteGroup", siteGroup);
 
 				if (siteGroup.isUser()) {

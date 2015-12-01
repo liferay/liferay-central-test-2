@@ -17,9 +17,9 @@
 <%@ include file="/init.jsp" %>
 
 <%
-SiteAdministrationPanelCategoryDisplayContext sapcDisplayContext = new SiteAdministrationPanelCategoryDisplayContext(liferayPortletRequest, liferayPortletResponse, null);
+SiteAdministrationPanelCategoryDisplayContext siteAdministrationPanelCategoryDisplayContext = new SiteAdministrationPanelCategoryDisplayContext(liferayPortletRequest, liferayPortletResponse, null);
 
-PanelCategory panelCategory = sapcDisplayContext.getPanelCategory();
+PanelCategory panelCategory = siteAdministrationPanelCategoryDisplayContext.getPanelCategory();
 %>
 
 <aui:a cssClass="icon-monospaced icon-sites" href="javascript:;" id="manageSitesLink" title="go-to-other-site">
@@ -30,25 +30,25 @@ PanelCategory panelCategory = sapcDisplayContext.getPanelCategory();
 	<div id="<portlet:namespace/>siteSelectorContent">
 		<liferay-util:include page="/sites/my_sites.jsp" servletContext="<%= application %>" />
 
-		<c:if test="<%= Validator.isNotNull(sapcDisplayContext.getManageSitesURL()) %>">
+		<c:if test="<%= Validator.isNotNull(siteAdministrationPanelCategoryDisplayContext.getManageSitesURL()) %>">
 
 			<%
 			ResourceBundle resourceBundle = ResourceBundleUtil.getBundle("content.Language", locale, getClass());
 			%>
 
 			<div class="manage-sites-link">
-				<aui:icon image="sites" label='<%= LanguageUtil.get(resourceBundle, "manage-sites") %>' markupView="lexicon" url="<%= sapcDisplayContext.getManageSitesURL() %>" />
+				<aui:icon image="sites" label='<%= LanguageUtil.get(resourceBundle, "manage-sites") %>' markupView="lexicon" url="<%= siteAdministrationPanelCategoryDisplayContext.getManageSitesURL() %>" />
 			</div>
 		</c:if>
 	</div>
 </div>
 
-<div aria-controls="#<portlet:namespace /><%= AUIUtil.normalizeId(panelCategory.getKey()) %>Collapse" aria-expanded="<%= sapcDisplayContext.isCollapsedPanel() %>" class="panel-toggler collapse-icon <%= sapcDisplayContext.isCollapsedPanel() ? StringPool.BLANK : "collapsed" %>" class="collapsed" data-parent="#<portlet:namespace />Accordion" data-toggle="collapse" href="#<portlet:namespace /><%= AUIUtil.normalizeId(panelCategory.getKey()) %>Collapse" role="button">
+<div aria-controls="#<portlet:namespace /><%= AUIUtil.normalizeId(panelCategory.getKey()) %>Collapse" aria-expanded="<%= siteAdministrationPanelCategoryDisplayContext.isCollapsedPanel() %>" class="panel-toggler collapse-icon <%= siteAdministrationPanelCategoryDisplayContext.isCollapsedPanel() ? StringPool.BLANK : "collapsed" %>" class="collapsed" data-parent="#<portlet:namespace />Accordion" data-toggle="collapse" href="#<portlet:namespace /><%= AUIUtil.normalizeId(panelCategory.getKey()) %>Collapse" role="button">
 	<div>
 		<div class="toolbar-group-field">
 			<c:choose>
-				<c:when test="<%= Validator.isNotNull(sapcDisplayContext.getLogoURL()) %>">
-					<div class="aspect-ratio-bg-cover sticker" style="background-image: url(<%= sapcDisplayContext.getLogoURL() %>);"></div>
+				<c:when test="<%= Validator.isNotNull(siteAdministrationPanelCategoryDisplayContext.getLogoURL()) %>">
+					<div class="aspect-ratio-bg-cover sticker" style="background-image: url(<%= siteAdministrationPanelCategoryDisplayContext.getLogoURL() %>);"></div>
 				</c:when>
 				<c:otherwise>
 					<div class="sticker sticker-default">
@@ -59,26 +59,26 @@ PanelCategory panelCategory = sapcDisplayContext.getPanelCategory();
 		</div>
 
 		<div class="toolbar-group-content">
-			<c:if test="<%= sapcDisplayContext.getNotificationsCount() > 0 %>">
-				<span class="sticker sticker-right sticker-rounded sticker-sm sticker-warning"><%= sapcDisplayContext.getNotificationsCount() %></span>
+			<c:if test="<%= siteAdministrationPanelCategoryDisplayContext.getNotificationsCount() > 0 %>">
+				<span class="sticker sticker-right sticker-rounded sticker-sm sticker-warning"><%= siteAdministrationPanelCategoryDisplayContext.getNotificationsCount() %></span>
 			</c:if>
 
 			<span class="site-name">
-				<%= HtmlUtil.escape(sapcDisplayContext.getGroupName()) %>
+				<%= HtmlUtil.escape(siteAdministrationPanelCategoryDisplayContext.getGroupName()) %>
 
-				<c:if test="<%= sapcDisplayContext.isShowStagingInfo() %>">
-					<span class="site-sub-name">(<%= sapcDisplayContext.getStagingLabel() %>)</span>
+				<c:if test="<%= siteAdministrationPanelCategoryDisplayContext.isShowStagingInfo() %>">
+					<span class="site-sub-name">(<%= siteAdministrationPanelCategoryDisplayContext.getStagingLabel() %>)</span>
 				</c:if>
 			</span>
 
-			<c:if test="<%= sapcDisplayContext.isShowStagingInfo() %>">
+			<c:if test="<%= siteAdministrationPanelCategoryDisplayContext.isShowStagingInfo() %>">
 				<div class="site-subheader">
-					<div class="<%= Validator.isNull(sapcDisplayContext.getStagingGroupURL()) ? "active" : StringPool.BLANK %>">
-						<aui:a cssClass="icon-fb-radio icon-monospaced" href="<%= sapcDisplayContext.getStagingGroupURL() %>" title="staging" />
+					<div class="<%= Validator.isNull(siteAdministrationPanelCategoryDisplayContext.getStagingGroupURL()) ? "active" : StringPool.BLANK %>">
+						<aui:a cssClass="icon-fb-radio icon-monospaced" href="<%= siteAdministrationPanelCategoryDisplayContext.getStagingGroupURL() %>" title="staging" />
 					</div>
 
-					<div class="<%= Validator.isNull(sapcDisplayContext.getLiveGroupURL()) ? "active" : StringPool.BLANK %>">
-						<aui:a cssClass="icon-circle-blank icon-monospaced" href="<%= sapcDisplayContext.getLiveGroupURL() %>" title="live" />
+					<div class="<%= Validator.isNull(siteAdministrationPanelCategoryDisplayContext.getLiveGroupURL()) ? "active" : StringPool.BLANK %>">
+						<aui:a cssClass="icon-circle-blank icon-monospaced" href="<%= siteAdministrationPanelCategoryDisplayContext.getLiveGroupURL() %>" title="live" />
 					</div>
 				</div>
 			</c:if>
