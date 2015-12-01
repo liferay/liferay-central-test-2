@@ -66,7 +66,7 @@ public class UpgradeCalendarTest extends UpgradeCalendar {
 		try (Connection con = DataAccess.getUpgradeOptimizedConnection()) {
 			connection = con;
 
-			doUpgrade();
+			upgrade();
 
 			Assert.assertTrue(tableHasColumn("Calendar", "timeZoneId"));
 		}
