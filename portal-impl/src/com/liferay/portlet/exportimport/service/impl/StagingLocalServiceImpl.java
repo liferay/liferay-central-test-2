@@ -465,10 +465,10 @@ public class StagingLocalServiceImpl extends StagingLocalServiceBaseImpl {
 			throw new SystemException(ioe);
 		}
 		finally {
-			LocaleThreadLocal.setSiteDefaultLocale(siteDefaultLocale);
-
 			ExportImportThreadLocal.setLayoutImportInProcess(false);
 			ExportImportThreadLocal.setLayoutStagingInProcess(false);
+
+			LocaleThreadLocal.setSiteDefaultLocale(siteDefaultLocale);
 		}
 	}
 
