@@ -143,13 +143,6 @@
 					<execute function="AssertTextEquals" locator1="Message#ERROR_2" value1="Please select at least one category for ${vocabularyName}." />
 				</then>
 			</elseif>
-			<elseif>
-				<equals arg1="${kbArticleInvalidAttachmentSize}" arg2="true" />
-				<then>
-					<execute function="AssertTextEquals" locator1="Message#ERROR_1" value1="Your request failed to complete." />
-					<execute function="AssertTextEquals" locator1="Message#ERROR_2" value1="Please Enter a file with a valid file size no larger than 1k" />
-				</then>
-			</elseif>
 			<else>
 				<execute function="AssertTextEquals#assertPartialText" locator1="Message#SUCCESS" value1="Your request completed successfully." />
 			</else>
