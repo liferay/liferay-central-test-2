@@ -275,7 +275,6 @@
 		<execute macro="KBArticle#addCPWithInvalidAttachmentSize">
 			<var name="kbArticleAttachment" value="Document_1.png" />
 			<var name="kbArticleContent" value="Knowledge Base Article Content" />
-			<var name="kbArticleInvalidAttachmentSize" value="true" />
 			<var name="kbArticleTitle" value="Knowledge Base Article Title" />
 		</execute>
 	</command>
