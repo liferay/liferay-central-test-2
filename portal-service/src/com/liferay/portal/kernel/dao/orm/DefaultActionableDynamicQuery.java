@@ -209,7 +209,7 @@ public class DefaultActionableDynamicQuery implements ActionableDynamicQuery {
 	}
 
 	/**
-	 * @throws PortalException 
+	 * @throws PortalException
 	 */
 	protected void actionsCompleted() throws PortalException {
 	}
