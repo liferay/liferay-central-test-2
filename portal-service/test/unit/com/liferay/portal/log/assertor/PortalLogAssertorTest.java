@@ -56,11 +56,11 @@ public class PortalLogAssertorTest {
 	}
 
 	@Test
-	public void testScanOsgiLog() throws IOException {
+	public void testScanOSGiLog() throws IOException {
 		StringBundler sb = new StringBundler();
 
 		try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(
-			Paths.get(System.getProperty("osgi.state.dir")), "*.log")) {
+				Paths.get(System.getProperty("osgi.state.dir")), "*.log")) {
 
 			for (Path path : directoryStream) {
 				if (!Files.isRegularFile(path)) {
@@ -84,7 +84,7 @@ public class PortalLogAssertorTest {
 	}
 
 	@Test
-	public void testScanXmlLog() throws IOException {
+	public void testScanXMLLog() throws IOException {
 		Files.walkFileTree(
 			Paths.get(System.getProperty("liferay.log.dir")),
 			new SimpleFileVisitor<Path>() {
@@ -97,7 +97,7 @@ public class PortalLogAssertorTest {
 					String pathString = StringUtil.toLowerCase(path.toString());
 
 					if (pathString.endsWith(".xml")) {
-						scanXmlLogFile(path);
+						scanXMLLogFile(path);
 					}
 
 					return FileVisitResult.CONTINUE;
@@ -106,7 +106,7 @@ public class PortalLogAssertorTest {
 			});
 	}
 
-	protected void scanXmlLogFile(Path path) throws IOException {
+	protected void scanXMLLogFile(Path path) throws IOException {
 		String content = StringUtil.replace(
 			new String(Files.readAllBytes(path), StringPool.UTF8), "log4j:",
 			"");
