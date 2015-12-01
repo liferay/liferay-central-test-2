@@ -55,7 +55,6 @@ public class RubySassCompiler implements AutoCloseable, SassCompiler {
 		throws Exception {
 
 		_precision = precision;
-
 		_tmpDirName = tmpDirName;
 
 		_scriptingContainer = new ScriptingContainer(
