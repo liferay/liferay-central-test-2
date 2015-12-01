@@ -2173,10 +2173,6 @@
 			<var name="kbArticleTitle" value="Knowledge Base Article Title" />
 		</execute>
 
-		<execute macro="KBArticleSuggestion#viewSuggestionCountPG">
-			<var name="kbSuggestionCount" value="4" />
-		</execute>
-
 		<execute macro="KBArticle#gotoSuggestionsNavigationPG" />
 
 		<execute macro="KBArticleSuggestion#viewPG">
