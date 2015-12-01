@@ -17,8 +17,6 @@ package com.liferay.site.browser.web.display.context;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -33,7 +31,6 @@ import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.PortletURLUtil;
 import com.liferay.portlet.sites.util.SitesUtil;
 import com.liferay.portlet.usersadmin.search.GroupSearch;
 import com.liferay.portlet.usersadmin.search.GroupSearchTerms;
@@ -42,8 +39,6 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import javax.portlet.PortletRequest;
-import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
 
 import javax.servlet.http.HttpServletRequest;
@@ -53,8 +48,13 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class SiteBrowserDisplayContext {
 
-	public SiteBrowserDisplayContext(HttpServletRequest request) {
+	public SiteBrowserDisplayContext(
+		HttpServletRequest request, LiferayPortletRequest liferayPortletRequest,
+		LiferayPortletResponse liferayPortletResponse) {
+
 		_request = request;
+		_liferayPortletRequest = liferayPortletRequest;
+		_liferayPortletResponse = liferayPortletResponse;
 	}
 
 	public String getFilter() {
@@ -103,10 +103,10 @@ public class SiteBrowserDisplayContext {
 			filterManageableGroups = false;
 		}
 
-		LinkedHashMap<String, Object> groupParams = new LinkedHashMap<>();
+		_groupParams = new LinkedHashMap<>();
 
 		if (isManualMembership()) {
-			groupParams.put("manualMembership", Boolean.TRUE);
+			_groupParams.put("manualMembership", Boolean.TRUE);
 		}
 
 		if (type.equals("child-sites")) {
@@ -116,13 +116,13 @@ public class SiteBrowserDisplayContext {
 
 			parentGroups.add(parentGroup);
 
-			groupParams.put("groupsTree", parentGroups);
+			_groupParams.put("groupsTree", parentGroups);
 		}
 		else if (filterManageableGroups) {
-			groupParams.put("usersGroups", user.getUserId());
+			_groupParams.put("usersGroups", user.getUserId());
 		}
 
-		groupParams.put("site", Boolean.TRUE);
+		_groupParams.put("site", Boolean.TRUE);
 
 		if (!includeCurrentGroup && (groupId > 0)) {
 			List<Long> excludedGroupIds = new ArrayList<>();
@@ -136,30 +136,20 @@ public class SiteBrowserDisplayContext {
 				excludedGroupIds.add(groupId);
 			}
 
-			groupParams.put("excludedGroupIds", excludedGroupIds);
+			_groupParams.put("excludedGroupIds", excludedGroupIds);
 		}
-
-		_groupParams = groupParams;
 
 		return _groupParams;
 	}
 
 	public GroupSearch getGroupSearch() throws Exception {
-		if (_groupSearch != null) {
-			return _groupSearch;
-		}
-
 		ThemeDisplay themeDisplay = (ThemeDisplay)_request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		Company company = themeDisplay.getCompany();
 
-		LiferayPortletRequest portletRequest = _getLiferayPortletRequest();
-
 		GroupSearch groupSearch = new GroupSearch(
-			portletRequest,
-			PortletURLUtil.clone(
-				getPortletURL(), _getLiferayPortletResponse()));
+			_liferayPortletRequest, getPortletURL());
 
 		GroupSearchTerms groupSearchTerms =
 			(GroupSearchTerms)groupSearch.getSearchTerms();
@@ -197,8 +187,8 @@ public class SiteBrowserDisplayContext {
 
 		if (type.equals("layoutScopes")) {
 			total = GroupLocalServiceUtil.getGroupsCount(
-					themeDisplay.getCompanyId(), Layout.class.getName(),
-					getGroupId());
+				themeDisplay.getCompanyId(), Layout.class.getName(),
+				getGroupId());
 		}
 		else if (type.equals("parent-sites")) {
 		}
@@ -271,21 +261,17 @@ public class SiteBrowserDisplayContext {
 
 		groupSearch.setResults(results);
 
-		_groupSearch = groupSearch;
-
-		return _groupSearch;
+		return groupSearch;
 	}
 
 	public PortletURL getPortletURL() throws PortalException {
-		LiferayPortletResponse portletResponse = _getLiferayPortletResponse();
-
-		PortletURL portletURL = portletResponse.createRenderURL();
+		PortletURL portletURL = _liferayPortletResponse.createRenderURL();
 
 		User selUser = PortalUtil.getSelectedUser(_request);
 
 		String eventName = ParamUtil.getString(
 			_request, "eventName",
-			portletResponse.getNamespace() + "selectSite");
+			_liferayPortletResponse.getNamespace() + "selectSite");
 		boolean includeCompany = ParamUtil.getBoolean(
 			_request, "includeCompany");
 		boolean includeUserPersonalSite = ParamUtil.getBoolean(
@@ -358,15 +344,13 @@ public class SiteBrowserDisplayContext {
 	}
 
 	public Boolean isPrivateLayout() {
-		Boolean privateLayout = null;
-
-		String privateLayoutString = _request.getParameter("privateLayout");
-
-		if (Validator.isNotNull(privateLayoutString)) {
-			privateLayout = GetterUtil.getBoolean(privateLayoutString);
+		if (_privateLayout != null) {
+			return _privateLayout;
 		}
 
-		return privateLayout;
+		_privateLayout = ParamUtil.getBoolean(_request, "privateLayout");
+
+		return _privateLayout;
 	}
 
 	private List<Group> _filterGroups(List<Group> groups, String filter)
@@ -411,26 +395,13 @@ public class SiteBrowserDisplayContext {
 		return filteredGroups;
 	}
 
-	private LiferayPortletRequest _getLiferayPortletRequest() {
-		PortletRequest portletRequest = (PortletRequest) _request.getAttribute(
-			JavaConstants.JAVAX_PORTLET_REQUEST);
-
-		return PortalUtil.getLiferayPortletRequest(portletRequest);
-	}
-
-	private LiferayPortletResponse _getLiferayPortletResponse() {
-		PortletResponse portletResponse =
-				(PortletResponse) _request.getAttribute(
-					JavaConstants.JAVAX_PORTLET_RESPONSE);
-
-		return PortalUtil.getLiferayPortletResponse(portletResponse);
-	}
-
 	private String _filter;
 	private Long _groupId;
 	private LinkedHashMap<String, Object> _groupParams;
-	private GroupSearch _groupSearch;
+	private final LiferayPortletRequest _liferayPortletRequest;
+	private final LiferayPortletResponse _liferayPortletResponse;
 	private Boolean _manualMembership;
+	private Boolean _privateLayout;
 	private final HttpServletRequest _request;
 	private String _type;
 	private String[] _types;

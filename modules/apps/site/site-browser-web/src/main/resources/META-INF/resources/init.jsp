@@ -45,7 +45,7 @@ page import="java.util.Map" %>
 <liferay-theme:defineObjects />
 
 <%
-SiteBrowserDisplayContext siteBrowserDisplayContext = new SiteBrowserDisplayContext(request);
+SiteBrowserDisplayContext siteBrowserDisplayContext = new SiteBrowserDisplayContext(request, liferayPortletRequest, liferayPortletResponse);
 %>
 
 <%@ include file="/init-ext.jsp" %>
