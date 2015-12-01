@@ -47,13 +47,6 @@ public class ReindexBackgroundTaskStatusMessageTranslator
 			backgroundTaskStatus.getAttribute(
 				ReindexBackgroundTaskConstants.PHASE));
 
-		long companyId = GetterUtil.getLong(
-			backgroundTaskStatus.getAttribute(
-				ReindexBackgroundTaskConstants.COMPANY_ID));
-		long[] companyIds = GetterUtil.getLongValues(
-			backgroundTaskStatus.getAttribute(
-				ReindexBackgroundTaskConstants.COMPANY_IDS));
-
 		String className = message.getString(
 			ReindexBackgroundTaskConstants.CLASS_NAME);
 
@@ -73,7 +66,15 @@ public class ReindexBackgroundTaskStatusMessageTranslator
 
 		int completedCompanies = 0;
 
+		long[] companyIds = GetterUtil.getLongValues(
+			backgroundTaskStatus.getAttribute(
+				ReindexBackgroundTaskConstants.COMPANY_IDS));
+
 		for (long completedCompanyId : companyIds) {
+			long companyId = GetterUtil.getLong(
+				backgroundTaskStatus.getAttribute(
+					ReindexBackgroundTaskConstants.COMPANY_ID));
+
 			if (completedCompanyId == companyId) {
 				break;
 			}
