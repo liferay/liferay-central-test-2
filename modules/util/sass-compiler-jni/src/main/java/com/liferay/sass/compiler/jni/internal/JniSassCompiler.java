@@ -229,9 +229,9 @@ public class JniSassCompiler implements SassCompiler {
 		_liferaysassLibrary.sass_option_set_input_path(
 			sassOptions, inputFileName);
 		_liferaysassLibrary.sass_option_set_output_path(sassOptions, "");
-		_liferaysassLibrary.sass_option_set_precision(sassOptions, _precision);
 		_liferaysassLibrary.sass_option_set_output_style(
 			sassOptions, Sass_Output_Style.SASS_STYLE_NESTED);
+		_liferaysassLibrary.sass_option_set_precision(sassOptions, _precision);
 		_liferaysassLibrary.sass_option_set_source_comments(
 			sassOptions, (byte)0);
 
