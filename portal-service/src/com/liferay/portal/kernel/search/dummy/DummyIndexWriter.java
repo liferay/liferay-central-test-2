@@ -17,7 +17,6 @@ package com.liferay.portal.kernel.search.dummy;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.IndexWriter;
 import com.liferay.portal.kernel.search.SearchContext;
-import com.liferay.portal.kernel.search.SearchException;
 
 import java.util.Collection;
 
@@ -47,7 +46,7 @@ public class DummyIndexWriter implements IndexWriter {
 	}
 
 	@Override
-	public void commit(long companyId) throws SearchException {
+	public void commit(long companyId) {
 	}
 
 	@Override
