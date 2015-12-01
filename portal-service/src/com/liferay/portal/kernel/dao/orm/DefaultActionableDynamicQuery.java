@@ -208,6 +208,9 @@ public class DefaultActionableDynamicQuery implements ActionableDynamicQuery {
 		_transactionAttribute = transactionAttribute;
 	}
 
+	/**
+	 * @throws PortalException 
+	 */
 	protected void actionsCompleted() throws PortalException {
 	}
 

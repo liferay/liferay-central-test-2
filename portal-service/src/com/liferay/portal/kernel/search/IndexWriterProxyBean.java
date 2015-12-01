@@ -53,7 +53,7 @@ public class IndexWriterProxyBean
 	}
 
 	@Override
-	public void commit(long companyId) throws SearchException {
+	public void commit(long companyId) {
 		throw new UnsupportedOperationException();
 	}
 
