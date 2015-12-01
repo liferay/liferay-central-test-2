@@ -87,7 +87,6 @@ public class ReindexBackgroundTaskStatusMessageTranslator
 		if (phase.equals(ReindexBackgroundTaskConstants.PORTAL_START)) {
 			String lastIndexer = GetterUtil.getString(
 				backgroundTaskStatus.getAttribute("lastIndexer"));
-
 			int completedIndexers = GetterUtil.getInteger(
 				backgroundTaskStatus.getAttribute("completedIndexers"));
 
