@@ -992,6 +992,11 @@
 		<execute function="AssertElementPresent" locator1="KnowledgeBaseArticle#ATTACHMENTS_SAVED_ATTACHMENTS_CONTAINER" />
 	</command>
 
+	<command name="viewBlogsEntryRelatedAsset">
+		<execute function="AssertTextEquals" locator1="BlogsEntry#CONTENT_GENERIC" value1="Blogs Entry Content" />
+		<execute function="AssertTextEquals" locator1="BlogsEntry#TITLE_GENERIC" value1="Blogs Entry Title" />
+	</command>
+
 	<command name="viewChildArticleCP">
 		<execute function="AssertTextEquals" locator1="Message#INFO" value1="Child Articles for ${kbArticleTitle}." />
 

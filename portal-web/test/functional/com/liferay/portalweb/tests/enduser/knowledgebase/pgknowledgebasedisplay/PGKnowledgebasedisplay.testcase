@@ -923,8 +923,7 @@
 
 		<execute function="AssertClick#assertTextClickAtAndWait" locator1="AssetRelatedAssets#KB_RELATED_ASSETS_LINKS" value1="${kbArticleRelatedAssetTitle}" />
 
-		<execute function="AssertTextEquals" locator1="BlogsEntry#TITLE_GENERIC" value1="Blogs Entry Title" />
-		<execute function="AssertTextEquals" locator1="BlogsEntry#CONTENT_GENERIC" value1="Blogs Entry Content" />
+		<execute macro="KBArticle#viewBlogsEntryRelatedAsset" />
 	</command>
 
 	<command name="ViewKBArticleWithEditedStarRatings" priority="3">
