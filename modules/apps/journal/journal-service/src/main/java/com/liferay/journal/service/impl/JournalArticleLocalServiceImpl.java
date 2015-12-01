@@ -7606,8 +7606,7 @@ public class JournalArticleLocalServiceImpl
 
 			if ((expirationDate != null) && expirationDate.before(new Date())) {
 				throw new ArticleExpirationDateException(
-					"Expiration date is in the past {expirationDate=" +
-						expirationDate + "}");
+					"Expiration date " + expirationDate + " is in the past");
 			}
 		}
 
@@ -7640,7 +7639,7 @@ public class JournalArticleLocalServiceImpl
 			}
 		}
 		else if (classNameId == JournalArticleConstants.CLASSNAME_ID_DEFAULT) {
-			throw new NoSuchTemplateException("DDMTemplateKey is null");
+			throw new NoSuchTemplateException("DDM template key is null");
 		}
 
 		String[] imageExtensions = PrefsPropsUtil.getStringArray(
