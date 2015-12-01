@@ -112,12 +112,12 @@ public class PanelContainerTag extends BaseBodyTagSupport implements BodyTag {
 		return EVAL_BODY_BUFFERED;
 	}
 
-	public boolean getAccordion() {
-		return _accordion;
-	}
-
 	public String getId() {
 		return _id;
+	}
+
+	public boolean isAccordion() {
+		return _accordion;
 	}
 
 	public void setAccordion(boolean accordion) {

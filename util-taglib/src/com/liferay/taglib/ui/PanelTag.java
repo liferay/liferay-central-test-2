@@ -48,7 +48,7 @@ public class PanelTag extends IncludeTag {
 					(PanelContainerTag)baseBodyTagSupport;
 
 				_parentId = panelContainerTag.getId();
-				_accordion = panelContainerTag.getAccordion();
+				_accordion = panelContainerTag.isAccordion();
 			}
 		}
 
