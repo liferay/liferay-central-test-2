@@ -58,7 +58,7 @@ public abstract class BaseIndexWriter
 	}
 
 	/**
-	 * @throws SearchException 
+	 * @throws SearchException
 	 */
 	@Override
 	public void commit(long companyId) throws SearchException {
