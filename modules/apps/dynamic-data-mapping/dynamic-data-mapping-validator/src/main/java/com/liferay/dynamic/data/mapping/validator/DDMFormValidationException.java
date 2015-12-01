@@ -47,7 +47,8 @@ public class DDMFormValidationException extends PortalException {
 		public MustNotDuplicateFieldName(String fieldName) {
 			super(
 				String.format(
-					"The field name %s was defined more than once", fieldName));
+					"The field name %s cannot be defined more than once",
+					fieldName));
 
 			_fieldName = fieldName;
 		}
@@ -64,7 +65,9 @@ public class DDMFormValidationException extends PortalException {
 		extends DDMFormValidationException {
 
 		public MustSetAvailableLocales() {
-			super("The available locales property was never set for DDM form");
+			super(
+				"The available locales property was not set for the " +
+					"DDM form");
 		}
 
 	}
@@ -73,7 +76,7 @@ public class DDMFormValidationException extends PortalException {
 		extends DDMFormValidationException {
 
 		public MustSetDefaultLocale() {
-			super("The default locale property was never set for DDM form");
+			super("The default locale property was not set for the DDM form");
 		}
 
 	}
@@ -84,8 +87,8 @@ public class DDMFormValidationException extends PortalException {
 		public MustSetDefaultLocaleAsAvailableLocale(Locale defaultLocale) {
 			super(
 				String.format(
-					"The default locale %s should be set as a valid available" +
-						" locale",
+					"The default locale %s must be set to a valid available " +
+						"locale",
 					defaultLocale));
 
 			_defaultLocale = defaultLocale;
@@ -104,8 +107,9 @@ public class DDMFormValidationException extends PortalException {
 		public MustSetFieldType(String fieldName) {
 			super(
 				String.format(
-					"The field type was never set for DDM form field %s",
-						fieldName));
+					"The field type was never set for the DDM form field " +
+						"with the field name %s",
+					fieldName));
 
 			_fieldName = fieldName;
 		}
@@ -124,8 +128,7 @@ public class DDMFormValidationException extends PortalException {
 		public MustSetOptionsForField(String fieldName) {
 			super(
 				String.format(
-					"At least one option should be set for field %s",
-					fieldName));
+					"At least one option must be set for field %s", fieldName));
 
 			_fieldName = fieldName;
 		}
@@ -146,7 +149,7 @@ public class DDMFormValidationException extends PortalException {
 
 			super(
 				String.format(
-					"Invalid available locales set for property '%s' of " +
+					"Invalid available locales set for the property '%s' of " +
 						"field name %s",
 					property, fieldName));
 
@@ -173,8 +176,7 @@ public class DDMFormValidationException extends PortalException {
 		public MustSetValidCharactersForFieldName(String fieldName) {
 			super(
 				String.format(
-					"Invalid characters were defined for field name %s",
-						fieldName));
+					"Invalid characters entered for field name %s", fieldName));
 
 			_fieldName = fieldName;
 		}
@@ -193,8 +195,7 @@ public class DDMFormValidationException extends PortalException {
 		public MustSetValidCharactersForFieldType(String fieldType) {
 			super(
 				String.format(
-					"Invalid characters were defined for field type %s",
-						fieldType));
+					"Invalid characters entered for field type %s", fieldType));
 
 			_fieldType = fieldType;
 		}
@@ -215,7 +216,7 @@ public class DDMFormValidationException extends PortalException {
 
 			super(
 				String.format(
-					"Invalid default locale set for property '%s' of " +
+					"Invalid default locale set for the property '%s' of " +
 						"field name %s",
 					property, fieldName));
 
