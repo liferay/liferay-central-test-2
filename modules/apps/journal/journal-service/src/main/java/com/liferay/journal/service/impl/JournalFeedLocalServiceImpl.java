@@ -404,19 +404,18 @@ public class JournalFeedLocalServiceImpl
 			companyId, targetLayoutFriendlyUrl);
 
 		if (plid <= 0) {
-			StringBundler sb = new StringBundler(5);
+			StringBundler sb = new StringBundler(4);
 
-			sb.append("No layout exists for {companyId=");
+			sb.append("No layout exists for company ");
 			sb.append(companyId);
-			sb.append(", friendlyURL=");
+			sb.append(" and friendly URL ");
 			sb.append(targetLayoutFriendlyUrl);
-			sb.append(StringPool.CLOSE_CURLY_BRACE);
 
 			throw new FeedTargetLayoutFriendlyUrlException(sb.toString());
 		}
 
-		if (contentField.equals(JournalFeedConstants.WEB_CONTENT_DESCRIPTION) ||
-			contentField.equals(JournalFeedConstants.RENDERED_WEB_CONTENT)) {
+		if (contentField.equals(JournalFeedConstants.RENDERED_WEB_CONTENT) ||
+			contentField.equals(JournalFeedConstants.WEB_CONTENT_DESCRIPTION)) {
 
 			return;
 		}
@@ -436,7 +435,7 @@ public class JournalFeedLocalServiceImpl
 
 		if (!isValidStructureOptionValue(ddmFormFieldsMap, contentField)) {
 			throw new FeedContentFieldException(
-				"Invalid contentField: " + contentField);
+				"Invalid content field " + contentField);
 		}
 	}
 

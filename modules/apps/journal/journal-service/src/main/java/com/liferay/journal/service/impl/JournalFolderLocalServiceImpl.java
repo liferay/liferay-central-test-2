@@ -1426,17 +1426,15 @@ public class JournalFolderLocalServiceImpl
 						article.getDDMStructureKey(), true);
 
 				if (ddmStructure == null) {
-					StringBundler sb = new StringBundler(9);
+					StringBundler sb = new StringBundler(7);
 
-					sb.append("No ddmStructure exists for {groupId=");
+					sb.append("No DDM structure exists for group ");
 					sb.append(article.getGroupId());
-					sb.append(", classNameId=");
+					sb.append(", class name ");
 					sb.append(classNameId);
-					sb.append(", structureKey=");
+					sb.append(", and structure key ");
 					sb.append(article.getDDMStructureKey());
-					sb.append(", includeAncestorStructures=");
-					sb.append(true);
-					sb.append(StringPool.CLOSE_CURLY_BRACE);
+					sb.append(" that includes ancestor structures");
 
 					throw new InvalidDDMStructureException(sb.toString());
 				}
@@ -1445,7 +1443,7 @@ public class JournalFolderLocalServiceImpl
 						ddmStructureIds, ddmStructure.getStructureId())) {
 
 					throw new InvalidDDMStructureException(
-						"Invalid ddmStructureId: " +
+						"Invalid DDM structure " +
 							ddmStructure.getStructureId());
 				}
 			}
