@@ -38,7 +38,7 @@ import org.osgi.service.component.annotations.Component;
 	},
 	service = MVCActionCommand.class
 )
-public class PortalSettingsFacebookConnectAuthenticationFormMVCActionCommand
+public class PortalSettingsFacebookConnectFormMVCActionCommand
 	extends BasePortalSettingsFormMVCActionCommand {
 
 	@Override

@@ -50,7 +50,7 @@ import org.osgi.service.component.annotations.Reference;
 	},
 	service = MVCActionCommand.class
 )
-public class PortalSettingsLDAPAuthenticationFormMVCActionCommand
+public class PortalSettingsLDAPFormMVCActionCommand
 	extends BaseFormMVCActionCommand {
 
 	@Override

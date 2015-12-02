@@ -12,10 +12,10 @@
  * details.
  */
 
-package com.liferay.portal.security.sso.openid.portlet.action;
+package com.liferay.portal.security.sso.ntlm.portlet.action;
 
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
-import com.liferay.portal.security.sso.openid.constants.OpenIdConstants;
+import com.liferay.portal.security.sso.ntlm.constants.NtlmConstants;
 import com.liferay.portal.settings.portlet.action.BasePortalSettingsFormMVCActionCommand;
 import com.liferay.portal.settings.web.constants.PortalSettingsPortletKeys;
 
@@ -25,17 +25,16 @@ import javax.portlet.ActionResponse;
 import org.osgi.service.component.annotations.Component;
 
 /**
- * @author Stian Sigvartsen
+ * @author Philip Jones
  */
 @Component(
-	immediate = true,
 	property = {
 		"javax.portlet.name=" + PortalSettingsPortletKeys.PORTAL_SETTINGS,
-		"mvc.command.name=/portal_settings/openid"
+		"mvc.command.name=/portal_settings/ntlm"
 	},
 	service = MVCActionCommand.class
 )
-public class PortalSettingsOpenIdAuthenticationFormMVCActionCommand
+public class PortalSettingsNtlmFormMVCActionCommand
 	extends BasePortalSettingsFormMVCActionCommand {
 
 	@Override
@@ -45,12 +44,12 @@ public class PortalSettingsOpenIdAuthenticationFormMVCActionCommand
 
 	@Override
 	protected String getParameterNamespace() {
-		return "openid--";
+		return "ntlm--";
 	}
 
 	@Override
 	protected String getSettingsId() {
-		return OpenIdConstants.SERVICE_NAME;
+		return NtlmConstants.SERVICE_NAME;
 	}
 
 }
