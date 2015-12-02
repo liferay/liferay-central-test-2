@@ -236,10 +236,11 @@
 		</execute>
 
 		<execute macro="MessageboardsThread#gotoPG">
+			<var name="lastPostUserName" value="Test Test" />
 			<var name="postCount" value="1" />
+			<var name="startedByUserName" value="Test Test" />
 			<var name="threadBody" value="This is the message boards thread." />
 			<var name="threadSubject" value="Thread" />
-			<var name="userName" value="Test Test" />
 		</execute>
 
 		<execute macro="MessageboardsThread#viewPG">
@@ -256,10 +257,11 @@
 		<execute function="AssertTextEquals" locator1="BasePortlet#SPECIFIC_PORTLET_TITLE" value1="Message Boards" />
 
 		<execute macro="MessageboardsThread#gotoPG">
+			<var name="lastPostUserName" value="Test Test" />
 			<var name="postCount" value="1" />
+			<var name="startedByUserName" value="Test Test" />
 			<var name="threadBody" value="This is the message boards thread." />
 			<var name="threadSubject" value="Thread" />
-			<var name="userName" value="Test Test" />
 		</execute>
 
 		<execute macro="MessageboardsThread#viewPG">
