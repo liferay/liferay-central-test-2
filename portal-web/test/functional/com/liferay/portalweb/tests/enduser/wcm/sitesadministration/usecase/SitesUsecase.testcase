@@ -290,6 +290,8 @@
 			<var name="userPassword" value="test" />
 		</execute>
 
+		<execute function="Open" locator1="http://localhost:8080/web/site-name/home" />
+
 		<execute macro="PermissionsInline#gotoConfigurationPG" >
 			<var name="portletName" value="Polls Display" />
 		</execute>
