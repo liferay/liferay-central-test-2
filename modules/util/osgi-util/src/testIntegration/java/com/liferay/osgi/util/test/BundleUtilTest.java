@@ -52,17 +52,9 @@ public class BundleUtilTest {
 	}
 
 	@Test
-	public void testGetResourceInBundleOrFragmentsWhenMissing()
+	public void testGetResourceInBundleOrFragmentsWhenInRoot()
 		throws IOException {
 
-		URL url = BundleUtil.getResourceInBundleOrFragments(
-			_bundle, "/fileNotExists.properties");
-
-		Assert.assertNull(url);
-	}
-
-	@Test
-	public void testGetResourceInRootInBundleOrFragments() throws IOException {
 		URL url = BundleUtil.getResourceInBundleOrFragments(
 			_bundle, "/fileInRoot.properties");
 
@@ -71,6 +63,16 @@ public class BundleUtilTest {
 		properties.load(url.openStream());
 
 		Assert.assertEquals("aRootValue", properties.getProperty("aRootKey"));
+	}
+
+	@Test
+	public void testGetResourceInBundleOrFragmentsWhenMissing()
+		throws IOException {
+
+		URL url = BundleUtil.getResourceInBundleOrFragments(
+			_bundle, "/fileMissing.properties");
+
+		Assert.assertNull(url);
 	}
 
 	@ArquillianResource
