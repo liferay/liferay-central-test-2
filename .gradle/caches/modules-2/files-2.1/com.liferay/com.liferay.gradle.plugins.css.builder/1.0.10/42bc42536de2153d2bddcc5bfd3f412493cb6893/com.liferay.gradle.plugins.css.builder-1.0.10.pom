@@ -3,8 +3,8 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.liferay</groupId>
-  <artifactId>com.liferay.gradle.plugins.service.builder</artifactId>
-  <version>1.0.6</version>
+  <artifactId>com.liferay.gradle.plugins.css.builder</artifactId>
+  <version>1.0.10</version>
   <licenses>
     <license>
       <name>LGPL 2.1</name>
@@ -26,8 +26,8 @@
   <dependencies>
     <dependency>
       <groupId>com.liferay</groupId>
-      <artifactId>com.liferay.portal.tools.service.builder</artifactId>
-      <version>1.0.58</version>
+      <artifactId>com.liferay.css.builder</artifactId>
+      <version>1.0.11</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
