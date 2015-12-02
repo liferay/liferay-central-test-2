@@ -31,8 +31,7 @@ import org.osgi.service.component.annotations.Component;
 		"mvc.command.name=/portal_settings/test_opensso"
 	}
 )
-public class TestOpenSSOMVCRenderCommand
-	implements MVCRenderCommand {
+public class TestOpenSSOMVCRenderCommand implements MVCRenderCommand {
 
 	@Override
 	public String render(
