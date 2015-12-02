@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.upgrade.util;
+package com.liferay.portal.transaction;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -36,7 +36,7 @@ import org.aopalliance.intercept.MethodInvocation;
 /**
  * @author Miguel Pastor
  */
-public class TransactionHelper {
+public class TransactionsUtil {
 
 	public static void disableTransactions() {
 		if (_log.isDebugEnabled()) {
@@ -71,8 +71,7 @@ public class TransactionHelper {
 						}
 					};
 
-				}
-			);
+				});
 		}
 		catch (Exception e) {
 			throw new RuntimeException(
@@ -104,6 +103,6 @@ public class TransactionHelper {
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		TransactionHelper.class);
+		TransactionsUtil.class);
 
 }

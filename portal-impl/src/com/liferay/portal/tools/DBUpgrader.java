@@ -32,7 +32,7 @@ import com.liferay.portal.model.ReleaseConstants;
 import com.liferay.portal.service.ClassNameLocalServiceUtil;
 import com.liferay.portal.service.ReleaseLocalServiceUtil;
 import com.liferay.portal.service.ResourceActionLocalServiceUtil;
-import com.liferay.portal.upgrade.util.TransactionHelper;
+import com.liferay.portal.transaction.TransactionsUtil;
 import com.liferay.portal.util.InitUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.registry.Registry;
@@ -44,7 +44,6 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -138,7 +137,7 @@ public class DBUpgrader {
 		_checkReleaseState(_getReleaseState());
 
 		if (PropsValues.UPGRADE_DATABASE_TRANSACTIONS_DISABLED) {
-			TransactionHelper.disableTransactions();
+			TransactionsUtil.disableTransactions();
 		}
 
 		try {
@@ -151,7 +150,7 @@ public class DBUpgrader {
 		}
 		finally {
 			if (PropsValues.UPGRADE_DATABASE_TRANSACTIONS_DISABLED) {
-				TransactionHelper.enableTransactions();
+				TransactionsUtil.enableTransactions();
 			}
 		}
 
@@ -226,7 +225,7 @@ public class DBUpgrader {
 		// Verify
 
 		if (PropsValues.VERIFY_DATABASE_TRANSACTIONS_DISABLED) {
-			TransactionHelper.disableTransactions();
+			TransactionsUtil.disableTransactions();
 		}
 
 		boolean newBuildNumber = false;
@@ -249,7 +248,7 @@ public class DBUpgrader {
 		}
 		finally {
 			if (PropsValues.VERIFY_DATABASE_TRANSACTIONS_DISABLED) {
-				TransactionHelper.enableTransactions();
+				TransactionsUtil.enableTransactions();
 			}
 		}
 
