@@ -10,7 +10,7 @@
  * This library is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
- * details.
+ * details.ßß
  */
 --%>
 
@@ -18,6 +18,7 @@
 
 <%
 OpenSSOConfiguration openSSOConfiguration = ConfigurationFactoryUtil.getConfiguration(OpenSSOConfiguration.class, new ParameterMapSettingsLocator(request.getParameterMap(), "open-sso--", new CompanyServiceSettingsLocator(company.getCompanyId(), OpenSSOConstants.SERVICE_NAME)));
+
 boolean enabled = openSSOConfiguration.enabled();
 boolean importFromLDAP = openSSOConfiguration.importFromLDAP();
 String loginURL = openSSOConfiguration.loginURL();
