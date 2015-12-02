@@ -25,8 +25,11 @@ public class SyncFileComparator implements Comparator<SyncFile> {
 
 	@Override
 	public int compare(SyncFile syncFile1, SyncFile syncFile2) {
+		String name1 = syncFile1.getName();
+		String name2 = syncFile2.getName();
+
 		if ((syncFile1.getParentFolderId() == syncFile2.getParentFolderId()) &&
-			syncFile1.getName().equals(syncFile2.getName())) {
+			name1.equals(name2)) {
 
 			return Long.compare(
 				syncFile1.getModifiedTime(), syncFile2.getModifiedTime());
