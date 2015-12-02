@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/init.jsp" %>
+<%@ include file="/init.jsp" %>
 
 <%
 String className = ParamUtil.getString(request, "className");
@@ -126,7 +126,7 @@ long reportedUserId = ParamUtil.getLong(request, "reportedUserId");
 		var errorMessage = (errorMessageNode && errorMessageNode.html()) || '';
 
 		A.io.request(
-			'<liferay-portlet:actionURL portletName="<%= PortletKeys.FLAGS %>" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/flags/edit_entry" /></liferay-portlet:actionURL>',
+			'<liferay-portlet:actionURL portletName="<%= PageFlagsPortletKeys.FLAGS %>" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="mvcRenderCommandName" value="/flags/edit_entry" /></liferay-portlet:actionURL>',
 			{
 				data: data,
 				on: {
