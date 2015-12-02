@@ -18,7 +18,6 @@ import com.liferay.dynamic.data.lists.form.web.constants.DDLFormPortletKeys;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.portlet.configuration.icon.BasePortletConfigurationIcon;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.theme.PortletDisplay;
 import com.liferay.portal.util.PortalUtil;
 
 import javax.portlet.PortletRequest;
@@ -83,8 +82,6 @@ public class DDLRecordSetSettingsPortletConfigurationIcon
 	}
 
 	protected long getRecordSetId() {
-		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
-
 		return ParamUtil.getLong(portletRequest, "recordSetId");
 	}
 
