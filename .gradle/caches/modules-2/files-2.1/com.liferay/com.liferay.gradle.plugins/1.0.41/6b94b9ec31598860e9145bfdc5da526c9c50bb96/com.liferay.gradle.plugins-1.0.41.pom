@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.liferay</groupId>
   <artifactId>com.liferay.gradle.plugins</artifactId>
-  <version>1.0.40</version>
+  <version>1.0.41</version>
   <licenses>
     <license>
       <name>LGPL 2.1</name>
@@ -37,27 +37,27 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
+      <groupId>com.liferay</groupId>
+      <artifactId>com.liferay.gradle.plugins.service.builder</artifactId>
+      <version>1.0.8</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
       <groupId>org.dm.gradle</groupId>
       <artifactId>gradle-bundle-plugin</artifactId>
       <version>0.6.3</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>com.liferay</groupId>
-      <artifactId>com.liferay.gradle.plugins.service.builder</artifactId>
-      <version>1.0.6</version>
+      <groupId>com.netflix.nebula</groupId>
+      <artifactId>gradle-extra-configurations-plugin</artifactId>
+      <version>3.0.3</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>com.liferay</groupId>
       <artifactId>com.liferay.gradle.plugins.whip</artifactId>
       <version>1.0.2</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.netflix.nebula</groupId>
-      <artifactId>gradle-extra-configurations-plugin</artifactId>
-      <version>3.0.3</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
@@ -70,12 +70,6 @@
       <groupId>com.liferay</groupId>
       <artifactId>com.liferay.gradle.plugins.javadoc.formatter</artifactId>
       <version>1.0.5</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.liferay</groupId>
-      <artifactId>com.liferay.gradle.plugins.css.builder</artifactId>
-      <version>1.0.8</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
@@ -118,6 +112,12 @@
       <groupId>com.liferay</groupId>
       <artifactId>com.liferay.gradle.plugins.wsdl.builder</artifactId>
       <version>1.0.3</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.liferay</groupId>
+      <artifactId>com.liferay.gradle.plugins.css.builder</artifactId>
+      <version>1.0.10</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
