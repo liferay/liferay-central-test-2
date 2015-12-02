@@ -204,10 +204,10 @@ public class PluginPackageIndexer extends BaseIndexer<PluginPackage> {
 		List<PluginPackage> pluginPackages =
 			PluginPackageUtil.getAllAvailablePluginPackages();
 
-		int count = pluginPackages.size();
+		int total = pluginPackages.size();
 
 		ReindexStatusMessageSenderUtil.sendStatusMessage(
-			getClassName(), 0, count);
+			getClassName(), 0, total);
 
 		for (PluginPackage pluginPackage : pluginPackages) {
 			Document document = getDocument(pluginPackage);
@@ -220,7 +220,7 @@ public class PluginPackageIndexer extends BaseIndexer<PluginPackage> {
 			isCommitImmediately());
 
 		ReindexStatusMessageSenderUtil.sendStatusMessage(
-			getClassName(), count, count);
+			getClassName(), total, total);
 	}
 
 	@Override

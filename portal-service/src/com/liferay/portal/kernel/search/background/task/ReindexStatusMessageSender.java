@@ -22,7 +22,7 @@ import aQute.bnd.annotation.ProviderType;
 @ProviderType
 public interface ReindexStatusMessageSender {
 
-	public void sendStatusMessage(String className, long progress, long count);
+	public void sendStatusMessage(String className, long count, long total);
 
 	public void sendStatusMessage(
 		String state, long searchContext, long[] items);

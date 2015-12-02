@@ -59,14 +59,14 @@ public class IndexableActionableDynamicQuery
 	@Override
 	public void performActions() throws PortalException {
 		if (BackgroundTaskThreadLocal.hasBackgroundTask()) {
-			_count = super.performCount();
+			_total = super.performCount();
 		}
 
 		try {
 			super.performActions();
 		}
 		finally {
-			_progress = _count;
+			_count = _total;
 
 			sendStatusMessage();
 		}
@@ -114,7 +114,7 @@ public class IndexableActionableDynamicQuery
 			_searchEngineId, getCompanyId(), new ArrayList<>(_documents),
 			false);
 
-		_progress += _documents.size();
+		_count += _documents.size();
 
 		_documents.clear();
 	}
@@ -127,12 +127,12 @@ public class IndexableActionableDynamicQuery
 		Class<?> modelClass = getModelClass();
 
 		ReindexStatusMessageSenderUtil.sendStatusMessage(
-			modelClass.getName(), _progress, _count);
+			modelClass.getName(), _count, _total);
 	}
 
 	private long _count;
 	private Collection<Document> _documents;
-	private long _progress;
 	private String _searchEngineId;
+	private long _total;
 
 }
