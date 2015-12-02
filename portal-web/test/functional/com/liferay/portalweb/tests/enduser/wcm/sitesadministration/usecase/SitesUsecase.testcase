@@ -207,8 +207,7 @@
 
 		<execute macro="Polls#viewPollPG">
 			<var name="pollsQuestion" value="What is the most important issue for this election?" />
-			<var name="pollsQuestionChoiceA" value="The Economy" />
-			<var name="pollsQuestionChoiceB" value="The National Debt" />
+			<var name="pollsQuestionChoiceList" value="The Economy,The National Debt" />
 		</execute>
 
 		<execute macro="PermissionsInline#gotoConfigurationPG" >
