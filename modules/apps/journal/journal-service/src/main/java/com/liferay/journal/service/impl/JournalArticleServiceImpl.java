@@ -964,7 +964,7 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 	 * @param  groupId the primary key of the web content article's group
 	 * @param  ddmStructureKey the primary key of the web content article's DDM
 	 *         structure
-	 *  @param status the web content article's workflow status. For more
+	 * @param  status the web content article's workflow status. For more
 	 *         information see {@link WorkflowConstants} for constants starting
 	 *         with the "STATUS_" prefix.
 	 * @return the number of matching web content articles
