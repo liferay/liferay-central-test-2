@@ -32,11 +32,11 @@ String value = (String)request.getAttribute("liferay-frontend:management-bar-fil
 		<ul class="dropdown-menu">
 
 			<%
-			for (ManagementBarFilterItem curItem : managementBarFilterItems) {
+			for (ManagementBarFilterItem managementBarFilterItem : managementBarFilterItems) {
 			%>
 
-				<li class="<%= Validator.equals(curItem.getLabel(), value) ? "active" : StringPool.BLANK %>">
-					<aui:a href="<%= curItem.getURL() %>" label="<%= curItem.getLabel() %>" />
+				<li class="<%= Validator.equals(managementBarFilterItem.getLabel(), value) ? "active" : StringPool.BLANK %>">
+					<aui:a href="<%= managementBarFilterItem.getURL() %>" label="<%= managementBarFilterItem.getLabel() %>" />
 				</li>
 
 			<%
