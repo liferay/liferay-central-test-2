@@ -825,8 +825,8 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 			status, start, end, obc);
 
 		return journalArticleFinder.filterFindByG_C_S(
-				groupId, JournalArticleConstants.CLASSNAME_ID_DEFAULT,
-				ddmStructureKey, queryDefinition);
+			groupId, JournalArticleConstants.CLASSNAME_ID_DEFAULT,
+			ddmStructureKey, queryDefinition);
 	}
 
 	/**
