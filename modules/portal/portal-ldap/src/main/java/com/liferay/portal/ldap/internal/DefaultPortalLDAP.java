@@ -264,7 +264,7 @@ public class DefaultPortalLDAP implements PortalLDAP {
 		if (_log.isDebugEnabled()) {
 			if ((attributes == null) || (attributes.size() == 0)) {
 				_log.debug(
-					"No LDAP group attributes found for:: " +
+					"No LDAP group attributes found for " +
 						fullDistinguishedName);
 			}
 			else {
