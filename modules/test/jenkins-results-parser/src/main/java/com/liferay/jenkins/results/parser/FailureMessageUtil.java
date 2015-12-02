@@ -175,7 +175,6 @@ public class FailureMessageUtil {
 				"testSourceFormatter FAILED.*?)^\\s+\\[exec\\]\\s+\\:",
 			Pattern.DOTALL | Pattern.MULTILINE)
 	};
-
 	private static final Pattern _pattern = Pattern.compile(
 		"\\n[a-z\\-\\.]+\\:\\n");
 
