@@ -28,17 +28,16 @@ import org.osgi.service.component.annotations.Component;
 @Component(
 	property = {
 		"javax.portlet.name=" + PortalSettingsPortletKeys.PORTAL_SETTINGS,
-		"mvc.command.name=/portal_settings/test_opensso_configuration"
+		"mvc.command.name=/portal_settings/test_cas"
 	}
 )
-public class TestOpenSSOConfigurationMVCRenderCommand
-	implements MVCRenderCommand {
+public class TestCASMVCRenderCommand implements MVCRenderCommand {
 
 	@Override
 	public String render(
 		RenderRequest renderRequest, RenderResponse renderResponse) {
 
-		return "/test_opensso_configuration.jsp";
+		return "/test_cas.jsp";
 	}
 
 }

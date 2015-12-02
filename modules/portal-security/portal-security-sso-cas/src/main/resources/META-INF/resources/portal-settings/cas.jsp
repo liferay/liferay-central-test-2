@@ -81,7 +81,7 @@ String noSuchUserRedirectURL = casConfiguration.noSuchUserRedirectURL();
 			data.<portlet:namespace />casServerURL = document.<portlet:namespace />fm['<portlet:namespace />cas--serverURL'].value;
 			data.<portlet:namespace />casServiceURL = document.<portlet:namespace />fm['<portlet:namespace />cas--serviceURL'].value;
 
-			var url = '<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="mvcRenderCommandName" value="/portal_settings/test_cas_configuration" /></portlet:renderURL>';
+			var url = '<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="mvcRenderCommandName" value="/portal_settings/test_cas" /></portlet:renderURL>';
 
 			var dialog = Liferay.Util.Window.getWindow(
 				{
