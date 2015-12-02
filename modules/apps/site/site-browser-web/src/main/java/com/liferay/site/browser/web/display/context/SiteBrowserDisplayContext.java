@@ -269,21 +269,21 @@ public class SiteBrowserDisplayContext {
 
 		User selUser = PortalUtil.getSelectedUser(_request);
 
-		String eventName = ParamUtil.getString(
-			_request, "eventName",
-			_liferayPortletResponse.getNamespace() + "selectSite");
-		boolean includeCompany = ParamUtil.getBoolean(
-			_request, "includeCompany");
-		boolean includeUserPersonalSite = ParamUtil.getBoolean(
-			_request, "includeUserPersonalSite");
-		long[] selectedGroupIds = StringUtil.split(
-			ParamUtil.getString(_request, "selectedGroupIds"), 0L);
-		String target = ParamUtil.getString(_request, "target");
-
 		if (selUser != null) {
 			portletURL.setParameter(
 				"p_u_i_d", String.valueOf(selUser.getUserId()));
 		}
+
+		long[] selectedGroupIds = StringUtil.split(
+			ParamUtil.getString(_request, "selectedGroupIds"), 0L);
+		boolean includeCompany = ParamUtil.getBoolean(
+			_request, "includeCompany");
+		boolean includeUserPersonalSite = ParamUtil.getBoolean(
+			_request, "includeUserPersonalSite");
+		String eventName = ParamUtil.getString(
+			_request, "eventName",
+			_liferayPortletResponse.getNamespace() + "selectSite");
+		String target = ParamUtil.getString(_request, "target");
 
 		portletURL.setParameter("groupId", String.valueOf(getGroupId()));
 		portletURL.setParameter(

@@ -17,17 +17,17 @@
 <%@ include file="/init.jsp" %>
 
 <%
-String type = siteBrowserDisplayContext.getType();
-String[] types = siteBrowserDisplayContext.getTypes();
-
 String p_u_i_d = ParamUtil.getString(request, "p_u_i_d");
 String displayStyle = ParamUtil.getString(request, "displayStyle", "list");
 String eventName = ParamUtil.getString(request, "eventName", liferayPortletResponse.getNamespace() + "selectSite");
 String target = ParamUtil.getString(request, "target");
 
-PortletURL portletURL = siteBrowserDisplayContext.getPortletURL();
-
 User selUser = PortalUtil.getSelectedUser(request);
+
+String type = siteBrowserDisplayContext.getType();
+String[] types = siteBrowserDisplayContext.getTypes();
+
+PortletURL portletURL = siteBrowserDisplayContext.getPortletURL();
 %>
 
 <c:choose>
