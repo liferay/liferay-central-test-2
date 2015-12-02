@@ -389,9 +389,8 @@ public class LiferayLocalRepository
 
 	@Override
 	public List<RepositoryEntry> getFoldersAndFileEntriesAndFileShortcuts(
-			long folderId, int status, boolean includeMountFolders, int start,
-			int end, OrderByComparator<?> obc)
-		throws PortalException {
+		long folderId, int status, boolean includeMountFolders, int start,
+		int end, OrderByComparator<?> obc) {
 
 		QueryDefinition<Object> queryDefinition = new QueryDefinition<>(
 			status, start, end, (OrderByComparator<Object>)obc);
