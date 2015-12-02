@@ -4,25 +4,11 @@
 
 		<execute function="AssertClick" locator1="DocumentsAndMedia#DESCRIPTIVE_LIST_DOCUMENT_TITLE" value1="${dmDocumentTitle}" />
 
-		<if>
-			<condition function="IsElementPresent" locator1="PGDocumentsandmediaDocument#COMMENTS_BE_THE_FIRST" />
-			<then>
-				<execute function="AssertClick" locator1="PGDocumentsandmediaDocument#COMMENTS_BE_THE_FIRST" value1="Be the first." />
-			</then>
-		</if>
-
 		<execute function="Type" locator1="Comments#COMMENT_FIELD" value1="${commentBody}" />
+
 		<execute function="Pause" locator1="3000" />
 
-		<if>
-			<condition function="IsElementPresent" locator1="PGDocumentsandmediaDocument#COMMENTS_SUBMIT_BUTTON" value1="Submit" />
-			<then>
-				<execute function="AssertClick" locator1="PGDocumentsandmediaDocument#COMMENTS_SUBMIT_BUTTON" value1="Submit" />
-			</then>
-			<else>
-				<execute function="AssertClick" locator1="Button#REPLY" value1="Reply" />
-			</else>
-		</if>
+		<execute function="AssertClick" locator1="Button#REPLY" value1="Reply" />
 
 		<execute function="Pause" locator1="3000" />
 
