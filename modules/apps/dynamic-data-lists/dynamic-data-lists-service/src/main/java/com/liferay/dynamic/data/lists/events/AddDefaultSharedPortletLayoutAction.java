@@ -106,7 +106,7 @@ public class AddDefaultSharedPortletLayoutAction extends SimpleAction {
 		UnicodeProperties typeSettingsProperties =
 			layout.getTypeSettingsProperties();
 
-		typeSettingsProperties.setProperty("hide", "true");
+		typeSettingsProperties.setProperty("hide", Boolean.TRUE.toString());
 
 		_layoutLocalService.updateLayout(
 			group.getGroupId(), false, layout.getLayoutId(),
