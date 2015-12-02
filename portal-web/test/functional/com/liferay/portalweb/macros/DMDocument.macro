@@ -448,11 +448,7 @@
 	</command>
 
 	<command name="addPGViaMG">
-		<execute function="AssertClick" locator1="PGMediagalleryFolder#FOLDER_MENU_ADD_MEDIA" value1="Add Media" />
-
-		<execute function="SelectFrame" locator1="IFrame#SELECT_MEDIA_TYPE" />
 		<execute function="AssertClick" locator1="MenuItem#ADD_FILE_ENTRY" value1="Add File Entry" />
-		<execute function="SelectFrameTop" value1="relative=top" />
 
 		<execute function="UploadCommonFile" locator1="TextInput#FILE" value1="${mgDocumentFile}" />
 		<execute function="Type" locator1="TextInput#TITLE" value1="${mgDocumentTitle}" />
@@ -744,9 +740,7 @@
 	<command name="deletePGViaMG">
 		<var name="key_mgDocumentTitle" value="${mgDocumentTitle}" />
 
-		<execute function="AssertClick" locator1="MediaGallery#IMAGE_TITLE" value1="${mgDocumentTitle}" />
-
-		<execute function="AssertClick" locator1="MenuItem#MOVE_TO_THE_RECYCLE_BIN_ICON" value1="Move to the Recycle Bin" />
+		<execute function="AssertClick" locator1="MenuItem#MOVE_TO_THE_RECYCLE_BIN" value1="Move to the Recycle Bin" />
 		<execute function="AssertTextEquals#assertPartialText" locator1="Message#SUCCESS" value1="moved to the Recycle Bin." />
 		<execute function="AssertElementNotPresent" locator1="MediaGallery#IMAGE_TITLE" value1="${mgDocumentTitle}" />
 	</command>
@@ -1009,13 +1003,7 @@
 	<command name="editPGViaMG">
 		<var name="key_mgDocumentTitle" value="${mgDocumentTitle}" />
 
-		<execute function="AssertClick" locator1="MediaGallery#IMAGE_TITLE" value1="${mgDocumentTitle}" />
-
-		<execute function="AssertTextEquals" locator1="MediaGallery#MEDIA_CAPTION" value1="${mgDocumentTitle} - ${mgDocumentDescription}" />
-
 		<execute function="Click" locator1="MenuItem#EDIT" value1="Edit" />
-
-		<execute function="Click" locator1="MediaGallery#ENTRY_EDIT_ICON" />
 
 		<execute function="Type" locator1="TextInput#NAME" value1="${mgDocumentTitleEdit}" />
 		<execute function="Type" locator1="TextArea#DESCRIPTION" value1="${mgDocumentDescriptionEdit}" />
