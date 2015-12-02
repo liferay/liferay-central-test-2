@@ -165,7 +165,7 @@ public class DDLFormDisplayContext {
 		}
 
 		return GetterUtil.getBoolean(
-			ddlRecordSet.getSettingsProperty("published", null));
+			ddlRecordSet.getSettingsProperty("published"));
 	}
 
 	protected boolean isSharedURL() {
