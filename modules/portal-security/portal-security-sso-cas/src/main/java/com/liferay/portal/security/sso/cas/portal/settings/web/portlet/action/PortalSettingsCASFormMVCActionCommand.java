@@ -48,7 +48,7 @@ import org.osgi.service.component.annotations.Component;
 	},
 	service = MVCActionCommand.class
 )
-public class PortalSettingsCASAuthenticationFormMVCActionCommand
+public class PortalSettingsCASFormMVCActionCommand
 	extends BaseFormMVCActionCommand {
 
 	@Override
