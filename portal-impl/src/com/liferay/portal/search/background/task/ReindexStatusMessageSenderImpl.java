@@ -14,6 +14,7 @@
 
 package com.liferay.portal.search.background.task;
 
+import com.liferay.portal.kernel.backgroundtask.BackgroundTaskConstants;
 import com.liferay.portal.kernel.backgroundtask.BackgroundTaskStatusMessageSender;
 import com.liferay.portal.kernel.backgroundtask.BackgroundTaskThreadLocal;
 import com.liferay.portal.kernel.messaging.Message;
@@ -34,7 +35,7 @@ public class ReindexStatusMessageSenderImpl
 		message.put(ReindexBackgroundTaskConstants.TOTAL, total);
 		message.put(ReindexBackgroundTaskConstants.COUNT, count);
 		message.put(
-			"backgroundTaskId",
+			BackgroundTaskConstants.BACKGROUND_TASK_ID,
 			BackgroundTaskThreadLocal.getBackgroundTaskId());
 
 		_backgroundTaskStatusMessageSender.sendBackgroundTaskStatusMessage(
@@ -51,7 +52,7 @@ public class ReindexStatusMessageSenderImpl
 		message.put(ReindexBackgroundTaskConstants.COMPANY_IDS, companyIds);
 		message.put(ReindexBackgroundTaskConstants.PHASE, phase);
 		message.put(
-			"backgroundTaskId",
+			BackgroundTaskConstants.BACKGROUND_TASK_ID,
 			BackgroundTaskThreadLocal.getBackgroundTaskId());
 
 		_backgroundTaskStatusMessageSender.sendBackgroundTaskStatusMessage(
