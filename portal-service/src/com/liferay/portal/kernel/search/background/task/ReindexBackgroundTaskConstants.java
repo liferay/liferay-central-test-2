@@ -33,10 +33,10 @@ public class ReindexBackgroundTaskConstants {
 
 	public static final String PORTAL_START = "portalStart";
 
-	public static final String PROGRESS = "progress";
-
 	public static final String SINGLE_END = "singleEnd";
 
 	public static final String SINGLE_START = "singleStart";
+
+	public static final String TOTAL = "total";
 
 }

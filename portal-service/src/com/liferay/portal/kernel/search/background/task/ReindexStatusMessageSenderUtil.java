@@ -34,10 +34,10 @@ public class ReindexStatusMessageSenderUtil {
 	}
 
 	public static void sendStatusMessage(
-		String className, long progress, long count) {
+		String className, long count, long total) {
 
 		getReindexStatusMessageSender().sendStatusMessage(
-			className, progress, count);
+			className, count, total);
 	}
 
 	public static void sendStatusMessage(

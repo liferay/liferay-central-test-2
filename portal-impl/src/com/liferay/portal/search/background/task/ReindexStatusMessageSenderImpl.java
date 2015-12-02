@@ -27,12 +27,12 @@ public class ReindexStatusMessageSenderImpl
 	implements ReindexStatusMessageSender {
 
 	@Override
-	public void sendStatusMessage(String className, long progress, long count) {
+	public void sendStatusMessage(String className, long count, long total) {
 		Message message = new Message();
 
 		message.put(ReindexBackgroundTaskConstants.CLASS_NAME, className);
+		message.put(ReindexBackgroundTaskConstants.TOTAL, total);
 		message.put(ReindexBackgroundTaskConstants.COUNT, count);
-		message.put(ReindexBackgroundTaskConstants.PROGRESS, progress);
 		message.put(
 			"backgroundTaskId",
 			BackgroundTaskThreadLocal.getBackgroundTaskId());
