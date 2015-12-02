@@ -35,10 +35,12 @@ import org.osgi.service.component.annotations.Reference;
 public class PortalSettingsOpenSSOAuthenticationDynamicInclude
 	extends BaseJSPDynamicInclude {
 
+	@Override
 	protected String getJspPath() {
 		return "/com.liferay.portal.settings.web/open_sso.jsp";
 	}
 
+	@Override
 	protected Log getLog() {
 		return _log;
 	}
