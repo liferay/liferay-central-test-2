@@ -18,6 +18,7 @@
 
 <%
 OpenIdConfiguration openIdConfiguration = ConfigurationFactoryUtil.getConfiguration(OpenIdConfiguration.class, new ParameterMapSettingsLocator(request.getParameterMap(), "openid--", new CompanyServiceSettingsLocator(company.getCompanyId(), OpenIdConstants.SERVICE_NAME)));
+
 boolean enabled = openIdConfiguration.enabled();
 %>
 
