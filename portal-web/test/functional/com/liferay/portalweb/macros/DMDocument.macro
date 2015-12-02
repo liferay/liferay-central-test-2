@@ -451,7 +451,7 @@
 		<execute function="AssertClick" locator1="PGMediagalleryFolder#FOLDER_MENU_ADD_MEDIA" value1="Add Media" />
 
 		<execute function="SelectFrame" locator1="IFrame#SELECT_MEDIA_TYPE" />
-		<execute function="AssertClick" locator1="MenuItem#ADD_FILE_ENTRY" value1="Basic Document" />
+		<execute function="AssertClick" locator1="MenuItem#ADD_FILE_ENTRY" value1="Add File Entry" />
 		<execute function="SelectFrameTop" value1="relative=top" />
 
 		<execute function="UploadCommonFile" locator1="TextInput#FILE" value1="${mgDocumentFile}" />
@@ -747,7 +747,7 @@
 		<execute function="AssertClick" locator1="MediaGallery#IMAGE_TITLE" value1="${mgDocumentTitle}" />
 
 		<execute function="AssertClick" locator1="MenuItem#MOVE_TO_THE_RECYCLE_BIN_ICON" value1="Move to the Recycle Bin" />
-		<execute function="AssertTextEquals#assertPartialText" locator1="Message#SUCCESS" value1="moved to the Recycle Bin. Undo" />
+		<execute function="AssertTextEquals#assertPartialText" locator1="Message#SUCCESS" value1="moved to the Recycle Bin." />
 		<execute function="AssertElementNotPresent" locator1="MediaGallery#IMAGE_TITLE" value1="${mgDocumentTitle}" />
 	</command>
 
@@ -1013,7 +1013,7 @@
 
 		<execute function="AssertTextEquals" locator1="MediaGallery#MEDIA_CAPTION" value1="${mgDocumentTitle} - ${mgDocumentDescription}" />
 
-		<execute function="Click" locator1="MenuItem#EDIT" />
+		<execute function="Click" locator1="MenuItem#EDIT" value1="Edit" />
 
 		<execute function="Click" locator1="MediaGallery#ENTRY_EDIT_ICON" />
 
@@ -1530,7 +1530,7 @@
 					<execute function="Type" locator1="Search#SEARCH_FIELD" value1="asdf" />
 					<execute function="Click" locator1="Search#SEARCH_BUTTON" />
 
-					<execute function="AssertTextEquals" locator1="Message#INFO" value1="No documents were found that matched the keywords: asdf." />
+					<execute function="AssertTextEquals" locator1="Message#INFO" value1="No results were found that matched the keywords: asdf." />
 				</then>
 			</elseif>
 			<elseif>
