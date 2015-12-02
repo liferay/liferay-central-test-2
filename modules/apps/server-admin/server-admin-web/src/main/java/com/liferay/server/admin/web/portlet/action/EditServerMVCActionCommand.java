@@ -725,8 +725,8 @@ public class EditServerMVCActionCommand extends BaseMVCActionCommand {
 		portletPreferences.setValue(
 			PropsKeys.SHOPPING_IMAGE_EXTENSIONS, shoppingImageExtensions);
 		portletPreferences.setValue(
-				PropsKeys.SHOPPING_IMAGE_LARGE_MAX_SIZE,
-				String.valueOf(shoppingImageLargeMaxSize));
+			PropsKeys.SHOPPING_IMAGE_LARGE_MAX_SIZE,
+			String.valueOf(shoppingImageLargeMaxSize));
 		portletPreferences.setValue(
 			PropsKeys.SHOPPING_IMAGE_MEDIUM_MAX_SIZE,
 			String.valueOf(shoppingImageMediumMaxSize));
