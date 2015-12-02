@@ -208,10 +208,10 @@ public class LayoutsTreeUtil {
 					request, groupId, privateLayout, parentLayoutId, layouts,
 					treeId)) {
 
-			String typeSettingProperty = layout.getTypeSettingsProperty(
-				"hide", "false");
+			boolean hide = GetterUtil.getBoolean(
+				layout.getTypeSettingsProperty("hide"));
 
-			if (!typeSettingProperty.equals("false")) {
+			if (hide) {
 				continue;
 			}
 
