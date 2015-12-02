@@ -40,8 +40,7 @@ public class PortalSettingsOpenIdAuthenticationMVCActionCommand
 
 	@Override
 	protected void doValidateForm(
-			ActionRequest actionRequest, ActionResponse actionResponse)
-		throws Exception {
+		ActionRequest actionRequest, ActionResponse actionResponse) {
 	}
 
 	@Override
