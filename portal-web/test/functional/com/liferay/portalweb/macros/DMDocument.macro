@@ -451,7 +451,7 @@
 		<execute function="AssertClick" locator1="PGMediagalleryFolder#FOLDER_MENU_ADD_MEDIA" value1="Add Media" />
 
 		<execute function="SelectFrame" locator1="IFrame#SELECT_MEDIA_TYPE" />
-		<execute function="AssertClick" locator1="MediaGallery#MEDIA_TABLE_BASIC_DOCUMENT" value1="Basic Document" />
+		<execute function="AssertClick" locator1="MenuItem#ADD_FILE_ENTRY" value1="Basic Document" />
 		<execute function="SelectFrameTop" value1="relative=top" />
 
 		<execute function="UploadCommonFile" locator1="TextInput#FILE" value1="${mgDocumentFile}" />
@@ -497,8 +497,8 @@
 		<var name="key_dmDocumentTitle" value="${dmDocumentTitle}" />
 		<var name="key_siteName" value="${siteName}" />
 
-		<execute function="Type" locator1="NavBar#BASIC_SEARCH_FIELD" value1="${siteName}" />
-		<execute function="Click" locator1="Icon#ADVANCED_SEARCH" />
+		<execute function="Type" locator1="Search#SEARCH_FIELD" value1="${siteName}" />
+		<execute function="Click" locator1="Search#SEARCH_BUTTON" />
 		<execute function="AssertTextEquals" locator1="SitesSelectSite#SITES_TABLE_NAME" value1="${siteName}" />
 		<execute function="Click" locator1="SITES_TABLE_CHOOSE_SITE_LINK" />
 		<execute function="SelectFrameTop" value1="relative=top" />
@@ -746,7 +746,7 @@
 
 		<execute function="AssertClick" locator1="MediaGallery#IMAGE_TITLE" value1="${mgDocumentTitle}" />
 
-		<execute function="AssertClick" locator1="MediaGallery#ENTRY_RECYCLE_BIN_ICON" value1="Move to the Recycle Bin" />
+		<execute function="AssertClick" locator1="MenuItem#MOVE_TO_THE_RECYCLE_BIN_ICON" value1="Move to the Recycle Bin" />
 		<execute function="AssertTextEquals#assertPartialText" locator1="Message#SUCCESS" value1="moved to the Recycle Bin. Undo" />
 		<execute function="AssertElementNotPresent" locator1="MediaGallery#IMAGE_TITLE" value1="${mgDocumentTitle}" />
 	</command>
@@ -1013,7 +1013,7 @@
 
 		<execute function="AssertTextEquals" locator1="MediaGallery#MEDIA_CAPTION" value1="${mgDocumentTitle} - ${mgDocumentDescription}" />
 
-		<execute function="Click" locator1="PGMediagalleryMedia#CLOSE" />
+		<execute function="Click" locator1="MenuItem#EDIT" />
 
 		<execute function="Click" locator1="MediaGallery#ENTRY_EDIT_ICON" />
 
@@ -1499,14 +1499,14 @@
 	</command>
 
 	<command name="searchCP">
-		<execute function="Type" locator1="NavBar#BASIC_SEARCH_FIELD" value1="${dmDocumentKeyword}" />
+		<execute function="Type" locator1="Search#SEARCH_FIELD" value1="${dmDocumentKeyword}" />
 
-		<execute function="Click" locator1="Icon#BASIC_SEARCH" />
+		<execute function="Click" locator1="Search#SEARCH_BUTTON" />
 	</command>
 
 	<command name="searchPG">
-		<execute function="Type" locator1="NavBar#BASIC_SEARCH_FIELD" value1="${dmDocumentKeyword}" />
-		<execute function="Click" locator1="Icon#BASIC_SEARCH" />
+		<execute function="Type" locator1="Search#SEARCH_FIELD" value1="${dmDocumentKeyword}" />
+		<execute function="Click" locator1="Search#SEARCH_BUTTON" />
 
 		<execute function="AssertTextEquals" locator1="DocumentsAndMedia#SEARCH_TITLE" value1="${dmDocumentTitle}" />
 	</command>
@@ -1517,8 +1517,8 @@
 			<then>
 				<var name="key_mgDocumentTitle" value="${mgDocumentTitle}" />
 
-				<execute function="Type" locator1="NavBar#BASIC_SEARCH_FIELD" value1="${mgDocumentTitle}" />
-				<execute function="Click" locator1="NavBar#BASIC_SEARCH_BUTTON" value1="Search" />
+				<execute function="Type" locator1="Search#SEARCH_FIELD" value1="${mgDocumentTitle}" />
+				<execute function="Click" locator1="Search#SEARCH_BUTTON" />
 
 				<execute function="AssertTextEquals" locator1="MediaGallery#ENTRY_TITLE" value1="${mgDocumentTitle}" />
 			</then>
@@ -1527,8 +1527,8 @@
 				<then>
 					<var name="key_mgDocumentTitle" value="${mgDocumentTitle}" />
 
-					<execute function="Type" locator1="NavBar#BASIC_SEARCH_FIELD" value1="asdf" />
-					<execute function="AssertClick" locator1="NavBar#BASIC_SEARCH_BUTTON" value1="Search" />
+					<execute function="Type" locator1="Search#SEARCH_FIELD" value1="asdf" />
+					<execute function="Click" locator1="Search#SEARCH_BUTTON" />
 
 					<execute function="AssertTextEquals" locator1="Message#INFO" value1="No documents were found that matched the keywords: asdf." />
 				</then>
@@ -1539,8 +1539,8 @@
 					<var name="quotes"><![CDATA["${mgDocumentTitle}"]]></var>
 					<var name="key_mgDocumentTitle" value="${mgDocumentTitle}" />
 
-					<execute function="Type" locator1="NavBar#BASIC_SEARCH_FIELD" value1="${quotes}" />
-					<execute function="Click" locator1="NavBar#BASIC_SEARCH_BUTTON" value1="Search" />
+					<execute function="Type" locator1="Search#SEARCH_FIELD" value1="${quotes}" />
+					<execute function="Click" locator1="Search#SEARCH_BUTTON" />
 
 					<execute function="AssertTextEquals" locator1="MediaGallery#ENTRY_TITLE" value1="${mgDocumentTitle}" />
 				</then>
@@ -1998,8 +1998,8 @@
 		<var name="key_dmDocumentVersionNumber" value="${dmDocumentVersionNumberEdit}" />
 
 		<execute function="AssertTextPresent" locator1="DocumentsAndMedia#BREADCRUMB_HOME" value1="Home" />
-		<execute function="Type" locator1="NavBar#BASIC_SEARCH_FIELD" value1="${dmDocumentTitle}" />
-		<execute function="AssertClick" locator1="NavBar#BASIC_SEARCH_BUTTON" value1="Search" />
+		<execute function="Type" locator1="Search#SEARCH_FIELD" value1="${dmDocumentTitle}" />
+		<execute function="Click" locator1="Search#SEARCH_BUTTON" />
 
 		<execute function="AssertClick#assertPartialTextClickAt" locator1="DocumentsAndMedia#SEARCH_TITLE" value1="${dmDocumentTitle} Draft" />
 
@@ -2154,8 +2154,8 @@
 		<var name="key_dmDocumentTitle" value="${dmDocumentTitle}" />
 
 		<execute function="AssertTextPresent" locator1="DocumentsAndMedia#BREADCRUMB_HOME" value1="Home" />
-		<execute function="Type" locator1="NavBar#BASIC_SEARCH_FIELD" value1="${dmDocumentTitle}" />
-		<execute function="AssertClick" locator1="NavBar#BASIC_SEARCH_BUTTON" value1="Search" />
+		<execute function="Type" locator1="Search#SEARCH_FIELD" value1="${dmDocumentTitle}" />
+		<execute function="Click" locator1="Search#SEARCH_BUTTON" />
 
 		<execute function="AssertClick#assertPartialTextClickAt" locator1="DocumentsAndMedia#SEARCH_TITLE" value1="${dmDocumentTitle}" />
 
