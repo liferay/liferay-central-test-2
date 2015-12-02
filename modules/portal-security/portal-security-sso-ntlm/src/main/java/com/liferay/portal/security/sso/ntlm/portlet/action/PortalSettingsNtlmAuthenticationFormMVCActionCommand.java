@@ -34,7 +34,7 @@ import org.osgi.service.component.annotations.Component;
 	},
 	service = MVCActionCommand.class
 )
-public class PortalSettingsNtlmAuthenticationMVCActionCommand
+public class PortalSettingsNtlmAuthenticationFormMVCActionCommand
 	extends BasePortalSettingsFormMVCActionCommand {
 
 	@Override
