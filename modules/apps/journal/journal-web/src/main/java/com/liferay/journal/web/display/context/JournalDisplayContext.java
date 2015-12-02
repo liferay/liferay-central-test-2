@@ -247,49 +247,48 @@ public class JournalDisplayContext {
 	public List<ManagementBarFilterItem> getManagementBarStatusFilterItems()
 		throws PortalException, PortletException {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)_request.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		String parameterName = "status";
-
-		PortletURL portletURL = PortletURLUtil.clone(
-			getPortletURL(), _liferayPortletResponse);
-
 		List<ManagementBarFilterItem> managementBarFilterItems =
 			new ArrayList<>();
 
+		String parameterName = "status";
+		PortletURL portletURL = PortletURLUtil.clone(
+			getPortletURL(), _liferayPortletResponse);
+
 		managementBarFilterItems.add(
-			_getFilteredItem(
+			getManagementBarFilterItem(
 				parameterName, portletURL, WorkflowConstants.STATUS_ANY));
 		managementBarFilterItems.add(
-			_getFilteredItem(
+			getManagementBarFilterItem(
 				parameterName, portletURL, WorkflowConstants.STATUS_DRAFT));
 
-		int linksCount =
+		ThemeDisplay themeDisplay = (ThemeDisplay)_request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		int workflowDefinitionLinksCount =
 			WorkflowDefinitionLinkLocalServiceUtil.
 				getWorkflowDefinitionLinksCount(
 					themeDisplay.getCompanyId(), themeDisplay.getScopeGroupId(),
 					JournalFolder.class.getName());
 
-		if (linksCount > 0) {
+		if (workflowDefinitionLinksCount > 0) {
 			managementBarFilterItems.add(
-				_getFilteredItem(
+				getManagementBarFilterItem(
 					parameterName, portletURL,
 					WorkflowConstants.STATUS_PENDING));
 			managementBarFilterItems.add(
-				_getFilteredItem(
+				getManagementBarFilterItem(
 					parameterName, portletURL,
 					WorkflowConstants.STATUS_DENIED));
 		}
 
 		managementBarFilterItems.add(
-			_getFilteredItem(
+			getManagementBarFilterItem(
 				parameterName, portletURL, WorkflowConstants.STATUS_SCHEDULED));
 		managementBarFilterItems.add(
-			_getFilteredItem(
+			getManagementBarFilterItem(
 				parameterName, portletURL, WorkflowConstants.STATUS_APPROVED));
 		managementBarFilterItems.add(
-			_getFilteredItem(
+			getManagementBarFilterItem(
 				parameterName, portletURL, WorkflowConstants.STATUS_EXPIRED));
 
 		return managementBarFilterItems;
@@ -373,6 +372,12 @@ public class JournalDisplayContext {
 			portletURL.setParameter("ddmStructureKey", ddmStructureKey);
 		}
 
+		String status = ParamUtil.getString(_request, "status");
+
+		if (Validator.isNotNull(status)) {
+			portletURL.setParameter("status", String.valueOf(getStatus()));
+		}
+
 		String deltaEntry = ParamUtil.getString(_request, "deltaEntry");
 
 		if (Validator.isNotNull(deltaEntry)) {
@@ -388,12 +393,6 @@ public class JournalDisplayContext {
 		if (!isShowEditActions()) {
 			portletURL.setParameter(
 				"showEditActions", String.valueOf(isShowEditActions()));
-		}
-
-		String status = ParamUtil.getString(_request, "status");
-
-		if (Validator.isNotNull(status)) {
-			portletURL.setParameter("status", String.valueOf(getStatus()));
 		}
 
 		return portletURL;
@@ -674,10 +673,11 @@ public class JournalDisplayContext {
 		return displayStyle;
 	}
 
-	private ManagementBarFilterItem _getFilteredItem(
+	protected ManagementBarFilterItem getManagementBarFilterItem(
 		String parameterName, PortletURL portletURL, int status) {
 
 		portletURL.setParameter(parameterName, String.valueOf(status));
+
 		return new ManagementBarFilterItem(
 			WorkflowConstants.getStatusLabel(status), portletURL.toString());
 	}
