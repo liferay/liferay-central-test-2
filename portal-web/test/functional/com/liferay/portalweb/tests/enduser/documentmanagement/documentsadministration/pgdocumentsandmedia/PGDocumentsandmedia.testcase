@@ -35,6 +35,8 @@
 		</execute>
 
 		<execute macro="DMDocument#enableActionsMenuOnPortlet" />
+
+		<execute function="Click" locator1="Icon#DISPLAY_STYLE_DESCRIPTIVE" />
 	</set-up>
 
 	<tear-down>

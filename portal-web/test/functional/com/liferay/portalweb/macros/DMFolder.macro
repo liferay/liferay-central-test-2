@@ -79,7 +79,7 @@
 	</command>
 
 	<command name="addSubfolderPG">
-		<execute function="Click#clickAtAndWait" locator1="Button#PLUS" />
+		<execute function="Click#makeVisibleClickAt" locator1="Portlet#ICON_PLUS_SIGN" />
 
 		<execute function="AssertClick" locator1="MenuItem#SUBFOLDER" value1="Subfolder" />
 
@@ -279,7 +279,7 @@
 	<command name="gotoPG">
 		<var name="key_dmFolderName" value="${dmFolderName}" />
 
-		<execute function="AssertClick" locator1="DocumentsAndMedia#ICON_FOLDER_TITLE" value1="${dmFolderName}" />
+		<execute function="AssertClick" locator1="DocumentsAndMedia#DESCRIPTIVE_LIST_FOLDER_TITLE" value1="${dmFolderName}" />
 	</command>
 
 	<command name="gotoPGViaMG">
