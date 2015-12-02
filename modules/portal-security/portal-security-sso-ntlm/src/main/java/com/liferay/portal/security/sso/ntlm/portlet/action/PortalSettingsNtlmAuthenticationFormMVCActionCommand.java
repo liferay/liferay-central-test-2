@@ -30,7 +30,7 @@ import org.osgi.service.component.annotations.Component;
 @Component(
 	property = {
 		"javax.portlet.name=" + PortalSettingsPortletKeys.PORTAL_SETTINGS,
-		"mvc.command.name=/portal_settings/edit_company_ntlm_configuration"
+		"mvc.command.name=/portal_settings/ntlm"
 	},
 	service = MVCActionCommand.class
 )

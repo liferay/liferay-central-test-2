@@ -34,7 +34,7 @@ import org.osgi.service.component.annotations.Component;
 	immediate = true,
 	property = {
 		"javax.portlet.name=" + PortalSettingsPortletKeys.PORTAL_SETTINGS,
-		"mvc.command.name=/portal_settings/edit_company_facebook_connect_configuration"
+		"mvc.command.name=/portal_settings/facebook_connect"
 	},
 	service = MVCActionCommand.class
 )

@@ -46,7 +46,7 @@ import org.osgi.service.component.annotations.Reference;
 	immediate = true,
 	property = {
 		"javax.portlet.name=" + PortalSettingsPortletKeys.PORTAL_SETTINGS,
-		"mvc.command.name=/portal_settings/edit_company_ldap_configuration"
+		"mvc.command.name=/portal_settings/ldap"
 	},
 	service = MVCActionCommand.class
 )
