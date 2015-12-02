@@ -49,10 +49,10 @@ public class CalendarXStreamConfigurator implements XStreamConfigurator {
 		_xStreamAliases = new XStreamAlias[] {
 			new XStreamAlias(CalendarImpl.class, "Calendar"),
 			new XStreamAlias(CalendarBookingImpl.class, "CalendarBooking"),
-			new XStreamAlias(CalendarResourceImpl.class, "CalendarResource"),
 			new XStreamAlias(
 				CalendarNotificationTemplateImpl.class,
-				"CalendarNotificationTemplate")
+				"CalendarNotificationTemplate"),
+			new XStreamAlias(CalendarResourceImpl.class, "CalendarResource")
 		};
 	}
 
