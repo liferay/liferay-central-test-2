@@ -453,8 +453,11 @@
 		<execute function="AssertClick" locator1="MenuItem#ADD_FILE_ENTRY" value1="Add File Entry" />
 
 		<execute function="UploadCommonFile" locator1="TextInput#FILE" value1="${mgDocumentFile}" />
+
 		<execute function="Type" locator1="TextInput#TITLE" value1="${mgDocumentTitle}" />
+
 		<execute function="Type" locator1="TextArea#DESCRIPTION" value1="${mgDocumentDescription}" />
+
 		<execute function="AssertClick" locator1="Button#PUBLISH" value1="Publish" />
 
 		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request completed successfully." />
@@ -745,6 +748,7 @@
 		<execute function="Click" locator1="Icon#BODY_VERTICAL_ELLIPSIS" />
 
 		<execute function="AssertClick" locator1="MenuItem#MOVE_TO_THE_RECYCLE_BIN" value1="Move to the Recycle Bin" />
+
 		<execute function="AssertTextEquals#assertPartialText" locator1="Message#SUCCESS" value1="moved to the Recycle Bin." />
 		<execute function="AssertElementNotPresent" locator1="MediaGallery#IMAGE_TITLE" value1="${mgDocumentTitle}" />
 	</command>
@@ -1012,7 +1016,9 @@
 		<execute function="Click" locator1="MenuItem#EDIT" value1="Edit" />
 
 		<execute function="Type" locator1="TextInput#NAME" value1="${mgDocumentTitleEdit}" />
+
 		<execute function="Type" locator1="TextArea#DESCRIPTION" value1="${mgDocumentDescriptionEdit}" />
+
 		<execute function="AssertClick" locator1="Button#SAVE" value1="Save" />
 
 		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request completed successfully." />
@@ -1512,6 +1518,7 @@
 				<var name="key_mgDocumentTitle" value="${mgDocumentTitle}" />
 
 				<execute function="Type" locator1="Search#SEARCH_FIELD" value1="${mgDocumentTitle}" />
+
 				<execute function="Click" locator1="Search#SEARCH_BUTTON" />
 
 				<execute macro="Search#viewSearchResultsPG">
@@ -1525,6 +1532,7 @@
 					<var name="key_mgDocumentTitle" value="${mgDocumentTitle}" />
 
 					<execute function="Type" locator1="Search#SEARCH_FIELD" value1="asdf" />
+
 					<execute function="Click" locator1="Search#SEARCH_BUTTON" />
 
 					<execute function="AssertTextEquals" locator1="Message#INFO" value1="No results were found that matched the keywords: asdf." />
@@ -1537,6 +1545,7 @@
 					<var name="key_mgDocumentTitle" value="${mgDocumentTitle}" />
 
 					<execute function="Type" locator1="Search#SEARCH_FIELD" value1="${quotes}" />
+
 					<execute function="Click" locator1="Search#SEARCH_BUTTON" />
 
 					<execute macro="Search#viewSearchResultsPG">
