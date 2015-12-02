@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.exportimport.lar;
 
+import com.liferay.portal.kernel.backgroundtask.BackgroundTaskConstants;
 import com.liferay.portal.kernel.backgroundtask.BackgroundTaskStatusMessageSender;
 import com.liferay.portal.kernel.backgroundtask.BackgroundTaskThreadLocal;
 import com.liferay.portal.kernel.messaging.Message;
@@ -126,7 +127,7 @@ public class PortletDataHandlerStatusMessageSenderImpl
 		Message message, String messageType, ManifestSummary manifestSummary) {
 
 		message.put(
-			"backgroundTaskId",
+			BackgroundTaskConstants.BACKGROUND_TASK_ID,
 			BackgroundTaskThreadLocal.getBackgroundTaskId());
 		message.put("messageType", messageType);
 
