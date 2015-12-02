@@ -1508,7 +1508,10 @@
 				<execute function="Type" locator1="Search#SEARCH_FIELD" value1="${mgDocumentTitle}" />
 				<execute function="Click" locator1="Search#SEARCH_BUTTON" />
 
-				<execute function="AssertTextEquals" locator1="MediaGallery#ENTRY_TITLE" value1="${mgDocumentTitle}" />
+				<execute macro="Search#viewSearchResultsPG">
+					<var name="searchAssetTitle1" value="${mgDocumentTitle}" />
+					<var name="searchAssetType1" value="Document" />
+				</execute>
 			</then>
 			<elseif>
 				<equals arg1="${mediaGallerySearch}" arg2="Null" />
@@ -1530,7 +1533,10 @@
 					<execute function="Type" locator1="Search#SEARCH_FIELD" value1="${quotes}" />
 					<execute function="Click" locator1="Search#SEARCH_BUTTON" />
 
-					<execute function="AssertTextEquals" locator1="MediaGallery#ENTRY_TITLE" value1="${mgDocumentTitle}" />
+					<execute macro="Search#viewSearchResultsPG">
+						<var name="searchAssetTitle1" value="${mgDocumentTitle}" />
+						<var name="searchAssetType1" value="Document" />
+					</execute>
 				</then>
 			</elseif>
 		</if>
