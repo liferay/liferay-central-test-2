@@ -55,8 +55,7 @@ public class EditEntryMVCActionCommand extends BaseMVCActionCommand {
 			actionRequest, "reportedUserId");
 		String contentTitle = ParamUtil.getString(
 			actionRequest, "contentTitle");
-		String contentURL = ParamUtil.getString(
-			actionRequest, "contentURL");
+		String contentURL = ParamUtil.getString(actionRequest, "contentURL");
 		String reason = ParamUtil.getString(actionRequest, "reason");
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
