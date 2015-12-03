@@ -45,7 +45,7 @@ public class PortalSettingsOpenSSOFormMVCActionCommand
 
 	@Override
 	protected String getParameterNamespace() {
-		return "open-sso--";
+		return "opensso--";
 	}
 
 	@Override
