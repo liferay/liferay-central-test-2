@@ -35,13 +35,12 @@ import org.osgi.service.component.annotations.Component;
 	},
 	service = MVCActionCommand.class
 )
-public class PortalSettingsOpenSSOAuthenticationMVCActionCommand
+public class PortalSettingsOpenSSOFormMVCActionCommand
 	extends BasePortalSettingsFormMVCActionCommand {
 
 	@Override
 	protected void doValidateForm(
-			ActionRequest actionRequest, ActionResponse actionResponse)
-		throws Exception {
+		ActionRequest actionRequest, ActionResponse actionResponse) {
 	}
 
 	@Override
