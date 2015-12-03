@@ -54,8 +54,8 @@ public class ImageCardTag extends IncludeTag {
 	protected void cleanUp() {
 		_cssClass = null;
 		_data = null;
-		_imageUrl = null;
 		_imageCSSClass = null;
+		_imageUrl = null;
 	}
 
 	@Override
