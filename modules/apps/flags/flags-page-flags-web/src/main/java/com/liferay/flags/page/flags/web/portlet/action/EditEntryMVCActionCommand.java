@@ -47,26 +47,26 @@ public class EditEntryMVCActionCommand extends BaseMVCActionCommand {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-			String className = ParamUtil.getString(actionRequest, "className");
-			long classPK = ParamUtil.getLong(actionRequest, "classPK");
-			String reporterEmailAddress = ParamUtil.getString(
-				actionRequest, "reporterEmailAddress");
-			long reportedUserId = ParamUtil.getLong(
-				actionRequest, "reportedUserId");
-			String contentTitle = ParamUtil.getString(
-				actionRequest, "contentTitle");
-			String contentURL = ParamUtil.getString(
-				actionRequest, "contentURL");
-			String reason = ParamUtil.getString(actionRequest, "reason");
+		String className = ParamUtil.getString(actionRequest, "className");
+		long classPK = ParamUtil.getLong(actionRequest, "classPK");
+		String reporterEmailAddress = ParamUtil.getString(
+			actionRequest, "reporterEmailAddress");
+		long reportedUserId = ParamUtil.getLong(
+			actionRequest, "reportedUserId");
+		String contentTitle = ParamUtil.getString(
+			actionRequest, "contentTitle");
+		String contentURL = ParamUtil.getString(
+			actionRequest, "contentURL");
+		String reason = ParamUtil.getString(actionRequest, "reason");
 
-			ServiceContext serviceContext = ServiceContextFactory.getInstance(
-				"com.liferay.portlet.flags.model.FlagsEntry", actionRequest);
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			"com.liferay.portlet.flags.model.FlagsEntry", actionRequest);
 
-			_flagsEntryService.addEntry(
-				className, classPK, reporterEmailAddress, reportedUserId,
-				contentTitle, contentURL, reason, serviceContext);
+		_flagsEntryService.addEntry(
+			className, classPK, reporterEmailAddress, reportedUserId,
+			contentTitle, contentURL, reason, serviceContext);
 
-			actionResponse.setRenderParameter("mvcPath", "edit_entry.jsp");
+		actionResponse.setRenderParameter("mvcPath", "edit_entry.jsp");
 	}
 
 	@Reference(unbind = "-")
