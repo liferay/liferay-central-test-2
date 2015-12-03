@@ -20,6 +20,7 @@
 	<c:if test="<%= Validator.isNotNull(id) %>">
 		<span class="workflow-id">
 			<span class="workflow-label"><liferay-ui:message key="id" />:</span>
+
 			<span class="workflow-value"><%= HtmlUtil.escape(id) %></span>
 		</span>
 	</c:if>
@@ -27,6 +28,7 @@
 	<c:if test="<%= Validator.isNotNull(version) %>">
 		<span class="workflow-version">
 			<span class="workflow-label"><liferay-ui:message key="version" />:</span>
+
 			<span class="workflow-value"><%= version %></span>
 		</span>
 	</c:if>
