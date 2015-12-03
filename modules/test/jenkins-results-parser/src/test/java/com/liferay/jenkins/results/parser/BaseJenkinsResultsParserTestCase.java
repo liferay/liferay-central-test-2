@@ -86,6 +86,10 @@ public abstract class BaseJenkinsResultsParserTestCase {
 		}
 	}
 
+	protected void deleteFile(String fileName) {
+		deleteFile(new File(fileName));
+	}
+
 	protected abstract void downloadSample(File sampleDir, URL url)
 		throws Exception;
 
