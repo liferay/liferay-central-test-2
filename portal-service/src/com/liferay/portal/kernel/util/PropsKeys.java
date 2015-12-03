@@ -1141,7 +1141,6 @@ public interface PropsKeys {
 
 	public static final String LAYOUT_VIEW_PAGE = "layout.view.page";
 
-	@Deprecated
 	public static final String LDAP_ATTRS_TRANSFORMER_IMPL = "ldap.attrs.transformer.impl";
 
 	public static final String LIBRARY_DOWNLOAD_URL = "library.download.url.";
