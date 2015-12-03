@@ -53,11 +53,10 @@ public class StagedModelRepositoryRegistryUtil {
 
 		_bundleContext = bundle.getBundleContext();
 
-		Class<StagedModelRepository<?>> clazz =
-			(Class)StagedModelRepository.class;
-
 		_serviceTracker = ServiceTrackerFactory.open(
-			_bundleContext, clazz,
+			_bundleContext,
+			(Class<StagedModelRepository<?>>)(Class<?>)
+				StagedModelRepository.class,
 			new StagedModelRepositoryServiceTrackerCustomizer());
 	}
 
