@@ -50,9 +50,8 @@ public class LoadBalancerUtilTest extends BaseJenkinsResultsParserTestCase {
 	@After
 	public void tearDown() throws Exception {
 		Project project = getTestProject(null);
-		File jenkinsSharedDir = new File(
-			project.getProperty("jenkins.shared.dir"));
-		deleteFile(jenkinsSharedDir);
+
+		deleteFile(project.getProperty("jenkins.shared.dir"));
 	}
 
 	@Test
