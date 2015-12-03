@@ -559,7 +559,6 @@ public class WikiUtil {
 
 		_wikiEngineServiceTracker = ServiceTrackerFactory.open(
 			bundle, WikiEngineTracker.class);
-
 		_wikiImporterServiceTracker = ServiceTrackerFactory.open(
 			bundle, WikiImporterTracker.class);
 	}

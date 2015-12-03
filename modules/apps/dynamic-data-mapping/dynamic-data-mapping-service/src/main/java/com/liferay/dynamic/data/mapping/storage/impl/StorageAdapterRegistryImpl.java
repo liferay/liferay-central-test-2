@@ -44,10 +44,10 @@ public class StorageAdapterRegistryImpl implements StorageAdapterRegistry {
 		_bundleContext = bundle.getBundleContext();
 
 		_serviceTracker = ServiceTrackerFactory.open(
-				_bundleContext,
-				"(&(objectClass=" + StorageAdapter.class.getName() +
-						")(!(objectClass=" + clazz.getName() + ")))",
-				new StorageAdapterServiceTrackerCustomizer());
+			_bundleContext,
+			"(&(objectClass=" + StorageAdapter.class.getName() +
+				")(!(objectClass=" + clazz.getName() + ")))",
+			new StorageAdapterServiceTrackerCustomizer());
 	}
 
 	@Override
