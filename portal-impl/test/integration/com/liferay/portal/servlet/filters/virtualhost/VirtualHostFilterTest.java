@@ -17,6 +17,7 @@ package com.liferay.portal.servlet.filters.virtualhost;
 import com.liferay.portal.kernel.struts.LastPath;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.MainServletTestRule;
 import com.liferay.portal.util.Portal;
@@ -73,7 +74,7 @@ public class VirtualHostFilterTest {
 	}
 
 	@Test
-	public void testFilterProxyContext() throws Exception {
+	public void testProcessFilter1() throws Exception {
 		_pathContext = _PATH_PROXY + _PATH_CONTEXT;
 		_pathProxy = _PATH_PROXY;
 
@@ -87,7 +88,7 @@ public class VirtualHostFilterTest {
 	}
 
 	@Test
-	public void testFilterProxyFriendlyURLBeginsWithProxy() throws Exception {
+	public void testProcessFilter2() throws Exception {
 		_pathContext = _PATH_PROXY;
 		_pathProxy = _PATH_PROXY;
 
@@ -101,11 +102,9 @@ public class VirtualHostFilterTest {
 	}
 
 	@Test
-	public void testFilterProxyFriendlyUrlBeginsWithProxyEmptyPathProxy()
-		throws Exception {
-
+	public void testProcessFilter3() throws Exception {
 		_pathContext = _PATH_PROXY;
-		_pathProxy = "";
+		_pathProxy = StringPool.BLANK;
 
 		_mockHttpServletRequest.setRequestURI(_LAST_PATH);
 
@@ -129,15 +128,15 @@ public class VirtualHostFilterTest {
 			return lastPath.getPath();
 		}
 
-		return "";
+		return StringPool.BLANK;
 	}
 
 	private static final String _LAST_PATH =
-		VirtualHostFilterTest._PATH_PROXY + "_test_friendly_url";
+		VirtualHostFilterTest._PATH_PROXY + "_last_path";
 
-	private static final String _PATH_CONTEXT = "/test_context";
+	private static final String _PATH_CONTEXT = "/context";
 
-	private static final String _PATH_PROXY = "/test_proxy";
+	private static final String _PATH_PROXY = "/proxy";
 
 	private final MockFilterChain _mockFilterChain = new MockFilterChain();
 	private final MockFilterConfig _mockFilterConfig = new MockFilterConfig();
