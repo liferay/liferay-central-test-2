@@ -63,12 +63,6 @@ public class VirtualHostFilterTest {
 
 			});
 
-		_mockFilterChain = new MockFilterChain();
-		_mockHttpServletRequest = new MockHttpServletRequest();
-		_mockHttpServletResponse = new MockHttpServletResponse();
-		_mockFilterConfig = new MockFilterConfig();
-
-		_virtualHostFilter = new VirtualHostFilter();
 		_virtualHostFilter.init(_mockFilterConfig);
 	}
 
@@ -137,12 +131,14 @@ public class VirtualHostFilterTest {
 	private static final String _STARTING_WITH_PROXY_FRIENDLY_URL =
 		_PATH_PROXY + "_sitename";
 
-	private MockFilterChain _mockFilterChain;
-	private MockFilterConfig _mockFilterConfig;
-	private MockHttpServletRequest _mockHttpServletRequest;
-	private MockHttpServletResponse _mockHttpServletResponse;
+	private MockFilterChain _mockFilterChain = new MockFilterChain();
+	private MockFilterConfig _mockFilterConfig = new MockFilterConfig();
+	private MockHttpServletRequest _mockHttpServletRequest =
+		new MockHttpServletRequest();
+	private MockHttpServletResponse _mockHttpServletResponse =
+		new MockHttpServletResponse();
 	private String _portalPathContext;
 	private String _portalPathProxy;
-	private VirtualHostFilter _virtualHostFilter;
+	private VirtualHostFilter _virtualHostFilter = new VirtualHostFilter();
 
 }
