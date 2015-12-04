@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.journal.upgrade.v1_0_0;
+package com.liferay.journal.upgrade.v0_0_2;
 
 import com.liferay.journal.model.JournalArticle;
 import com.liferay.journal.model.JournalFeed;
