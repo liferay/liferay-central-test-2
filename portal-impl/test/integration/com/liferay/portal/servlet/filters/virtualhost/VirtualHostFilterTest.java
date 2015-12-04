@@ -79,11 +79,11 @@ public class VirtualHostFilterTest {
 
 		_mockHttpServletRequest.setRequestURI(_PATH_CONTEXT + _FRIENDLY_URL);
 
-		String filteredFriendlyURL = getFilteredFriendlyURL(
+		String lastPath = getLastPath(
 			_mockHttpServletRequest, _mockHttpServletResponse,
 			_mockFilterChain);
 
-		Assert.assertEquals(_FRIENDLY_URL, filteredFriendlyURL);
+		Assert.assertEquals(_FRIENDLY_URL, lastPath);
 	}
 
 	@Test
@@ -93,11 +93,11 @@ public class VirtualHostFilterTest {
 
 		_mockHttpServletRequest.setRequestURI(_FRIENDLY_URL);
 
-		String filteredFriendlyURL = getFilteredFriendlyURL(
+		String lastPath = getLastPath(
 			_mockHttpServletRequest, _mockHttpServletResponse,
 			_mockFilterChain);
 
-		Assert.assertEquals(_FRIENDLY_URL, filteredFriendlyURL);
+		Assert.assertEquals(_FRIENDLY_URL, lastPath);
 	}
 
 	@Test
@@ -109,14 +109,14 @@ public class VirtualHostFilterTest {
 
 		_mockHttpServletRequest.setRequestURI(_FRIENDLY_URL);
 
-		String filteredFriendlyURL = getFilteredFriendlyURL(
+		String lastPath = getLastPath(
 			_mockHttpServletRequest, _mockHttpServletResponse,
 			_mockFilterChain);
 
-		Assert.assertEquals(_FRIENDLY_URL, filteredFriendlyURL);
+		Assert.assertEquals(_FRIENDLY_URL, lastPath);
 	}
 
-	protected String getFilteredFriendlyURL(
+	protected String getLastPath(
 			MockHttpServletRequest request, MockHttpServletResponse response,
 			MockFilterChain filterChain)
 		throws Exception {
