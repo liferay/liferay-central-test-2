@@ -683,12 +683,10 @@ public class WebDriverHelper {
 			return;
 		}
 
-		String cssSource = getCSSSource(htmlSource);
-
-		StringBuilder sb = new StringBuilder(4);
+		StringBuilder sb = new StringBuilder(3);
 
 		sb.append("<style>");
-		sb.append(cssSource);
+		sb.append(getCSSSource(htmlSource));
 		sb.append("</style></html>");
 
 		FileUtil.write(fileName, htmlSource.replace("<\\html>", sb.toString()));
