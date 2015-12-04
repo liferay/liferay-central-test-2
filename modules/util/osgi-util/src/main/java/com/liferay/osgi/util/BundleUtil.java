@@ -14,8 +14,6 @@
 
 package com.liferay.osgi.util;
 
-import java.io.File;
-
 import java.net.URL;
 
 import java.util.Enumeration;
@@ -29,7 +27,7 @@ public class BundleUtil {
 
 	public static URL getResourceInBundleOrFragments(
 		Bundle bundle, String name) {
-		
+
 		String dirName = "/";
 		String fileName = name;
 
@@ -43,8 +41,8 @@ public class BundleUtil {
 			fileName = name.substring(1);
 		}
 
-		if (file.isDirectory()) {
-			return bundle.getEntry(name);
+		if (fileName.length() == 0) {
+			return bundle.getEntry(dirName);
 		}
 
 		Enumeration<URL> enumeration = bundle.findEntries(
