@@ -71,15 +71,13 @@ public class VirtualHostFilterTest {
 		_pathContext = _PATH_PROXY + _PATH_CONTEXT;
 		_pathProxy = _PATH_PROXY;
 
-		_mockHttpServletRequest.setRequestURI(
-			_PATH_CONTEXT + _FRIENDLY_URL);
+		_mockHttpServletRequest.setRequestURI(_PATH_CONTEXT + _FRIENDLY_URL);
 
 		String filteredFriendlyURL = getFilteredFriendlyURL(
 			_mockHttpServletRequest, _mockHttpServletResponse,
 			_mockFilterChain);
 
-		Assert.assertEquals(
-			_FRIENDLY_URL, filteredFriendlyURL);
+		Assert.assertEquals(_FRIENDLY_URL, filteredFriendlyURL);
 	}
 
 	@Test
@@ -87,15 +85,13 @@ public class VirtualHostFilterTest {
 		_pathContext = _PATH_PROXY;
 		_pathProxy = _PATH_PROXY;
 
-		_mockHttpServletRequest.setRequestURI(
-			_FRIENDLY_URL);
+		_mockHttpServletRequest.setRequestURI(_FRIENDLY_URL);
 
 		String filteredFriendlyURL = getFilteredFriendlyURL(
 			_mockHttpServletRequest, _mockHttpServletResponse,
 			_mockFilterChain);
 
-		Assert.assertEquals(
-			_FRIENDLY_URL, filteredFriendlyURL);
+		Assert.assertEquals(_FRIENDLY_URL, filteredFriendlyURL);
 	}
 
 	@Test
@@ -105,15 +101,13 @@ public class VirtualHostFilterTest {
 		_pathContext = _PATH_PROXY;
 		_pathProxy = "";
 
-		_mockHttpServletRequest.setRequestURI(
-			_FRIENDLY_URL);
+		_mockHttpServletRequest.setRequestURI(_FRIENDLY_URL);
 
 		String filteredFriendlyURL = getFilteredFriendlyURL(
 			_mockHttpServletRequest, _mockHttpServletResponse,
 			_mockFilterChain);
 
-		Assert.assertEquals(
-			_FRIENDLY_URL, filteredFriendlyURL);
+		Assert.assertEquals(_FRIENDLY_URL, filteredFriendlyURL);
 	}
 
 	protected String getFilteredFriendlyURL(
@@ -132,21 +126,22 @@ public class VirtualHostFilterTest {
 		return "";
 	}
 
+	private static final String _FRIENDLY_URL =
+		VirtualHostFilterTest._PATH_PROXY + "_test_friendly_url";
+
 	private static final String _PATH_CONTEXT = "/test_context";
 
 	private static final String _PATH_PROXY = "/test_proxy";
 
-	private static final String _FRIENDLY_URL =
-		VirtualHostFilterTest._PATH_PROXY + "_test_friendly_url";
-
-	private MockFilterChain _mockFilterChain = new MockFilterChain();
-	private MockFilterConfig _mockFilterConfig = new MockFilterConfig();
-	private MockHttpServletRequest _mockHttpServletRequest =
+	private final MockFilterChain _mockFilterChain = new MockFilterChain();
+	private final MockFilterConfig _mockFilterConfig = new MockFilterConfig();
+	private final MockHttpServletRequest _mockHttpServletRequest =
 		new MockHttpServletRequest();
-	private MockHttpServletResponse _mockHttpServletResponse =
+	private final MockHttpServletResponse _mockHttpServletResponse =
 		new MockHttpServletResponse();
 	private String _pathContext;
 	private String _pathProxy;
-	private VirtualHostFilter _virtualHostFilter = new VirtualHostFilter();
+	private final VirtualHostFilter _virtualHostFilter =
+		new VirtualHostFilter();
 
 }
