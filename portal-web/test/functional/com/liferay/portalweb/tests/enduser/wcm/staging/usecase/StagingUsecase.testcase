@@ -3294,10 +3294,6 @@
 			<var name="site" value="Community Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoEditPage">
-			<var name="page" value="Wiki" />
-		</execute>
-
 		<execute macro="SitePage#deleteSitepagesCP">
 			<var name="siteName" value="Community Site Name" />
 			<var name="sitePageName" value="Wiki" />
