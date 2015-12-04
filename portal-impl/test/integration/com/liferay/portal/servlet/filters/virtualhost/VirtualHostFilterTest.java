@@ -53,12 +53,12 @@ public class VirtualHostFilterTest {
 
 				@Override
 				public String getPathContext() {
-					return _portalPathContext;
+					return _pathContext;
 				}
 
 				@Override
 				public String getPathProxy() {
-					return _portalPathProxy;
+					return _pathProxy;
 				}
 
 			});
@@ -68,46 +68,55 @@ public class VirtualHostFilterTest {
 
 	@Test
 	public void testFilterProxyContext() throws Exception {
+		_pathContext = _PATH_PROXY + _PATH_CONTEXT;
+		_pathProxy = _PATH_PROXY;
+
 		_mockHttpServletRequest.setRequestURI(
-			_PATH_CONTEXT + _STARTING_WITH_PROXY_FRIENDLY_URL);
-		_portalPathContext = _PATH_PROXY + _PATH_CONTEXT;
-		_portalPathProxy = _PATH_PROXY;
-		String filteredFriendlyUrl = getFilteredFriendlyUrl(
+			_PATH_CONTEXT + _FRIENDLY_URL);
+
+		String filteredFriendlyURL = getFilteredFriendlyURL(
 			_mockHttpServletRequest, _mockHttpServletResponse,
 			_mockFilterChain);
+
 		Assert.assertEquals(
-			_STARTING_WITH_PROXY_FRIENDLY_URL, filteredFriendlyUrl);
+			_FRIENDLY_URL, filteredFriendlyURL);
 	}
 
 	@Test
-	public void testFilterProxyFriendlyUrlBeginsWithProxy() throws Exception {
+	public void testFilterProxyFriendlyURLBeginsWithProxy() throws Exception {
+		_pathContext = _PATH_PROXY;
+		_pathProxy = _PATH_PROXY;
+
 		_mockHttpServletRequest.setRequestURI(
-			_STARTING_WITH_PROXY_FRIENDLY_URL);
-		_portalPathContext = _PATH_PROXY;
-		_portalPathProxy = _PATH_PROXY;
-		String filteredFriendlyUrl = getFilteredFriendlyUrl(
+			_FRIENDLY_URL);
+
+		String filteredFriendlyURL = getFilteredFriendlyURL(
 			_mockHttpServletRequest, _mockHttpServletResponse,
 			_mockFilterChain);
+
 		Assert.assertEquals(
-			_STARTING_WITH_PROXY_FRIENDLY_URL, filteredFriendlyUrl);
+			_FRIENDLY_URL, filteredFriendlyURL);
 	}
 
 	@Test
 	public void testFilterProxyFriendlyUrlBeginsWithProxyEmptyPathProxy()
 		throws Exception {
 
+		_pathContext = _PATH_PROXY;
+		_pathProxy = "";
+
 		_mockHttpServletRequest.setRequestURI(
-			_STARTING_WITH_PROXY_FRIENDLY_URL);
-		_portalPathContext = _PATH_PROXY;
-		_portalPathProxy = "";
-		String filteredFriendlyUrl = getFilteredFriendlyUrl(
+			_FRIENDLY_URL);
+
+		String filteredFriendlyURL = getFilteredFriendlyURL(
 			_mockHttpServletRequest, _mockHttpServletResponse,
 			_mockFilterChain);
+
 		Assert.assertEquals(
-			_STARTING_WITH_PROXY_FRIENDLY_URL, filteredFriendlyUrl);
+			_FRIENDLY_URL, filteredFriendlyURL);
 	}
 
-	protected String getFilteredFriendlyUrl(
+	protected String getFilteredFriendlyURL(
 			MockHttpServletRequest request, MockHttpServletResponse response,
 			MockFilterChain filterChain)
 		throws Exception {
@@ -119,17 +128,16 @@ public class VirtualHostFilterTest {
 		if (lastPath != null) {
 			return lastPath.getPath();
 		}
-		else {
-			return "";
-		}
+
+		return "";
 	}
 
 	private static final String _PATH_CONTEXT = "/test_context";
 
 	private static final String _PATH_PROXY = "/test_proxy";
 
-	private static final String _STARTING_WITH_PROXY_FRIENDLY_URL =
-		_PATH_PROXY + "_sitename";
+	private static final String _FRIENDLY_URL =
+		VirtualHostFilterTest._PATH_PROXY + "_test_friendly_url";
 
 	private MockFilterChain _mockFilterChain = new MockFilterChain();
 	private MockFilterConfig _mockFilterConfig = new MockFilterConfig();
@@ -137,8 +145,8 @@ public class VirtualHostFilterTest {
 		new MockHttpServletRequest();
 	private MockHttpServletResponse _mockHttpServletResponse =
 		new MockHttpServletResponse();
-	private String _portalPathContext;
-	private String _portalPathProxy;
+	private String _pathContext;
+	private String _pathProxy;
 	private VirtualHostFilter _virtualHostFilter = new VirtualHostFilter();
 
 }
