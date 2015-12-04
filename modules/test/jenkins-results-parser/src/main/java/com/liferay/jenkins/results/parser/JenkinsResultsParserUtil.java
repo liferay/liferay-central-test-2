@@ -76,21 +76,22 @@ public class JenkinsResultsParserUtil {
 
 		return sb.toString();
 	}
-	
+
 	public static String fixFileName(String fileName) {
 		String prefix = "";
 
 		if (fileName.startsWith("file:")) {
 			prefix = "file:";
+
 			fileName = fileName.substring(prefix.length());
 		}
 
-		fileName = fileName.replace("?", "[qt]");
-		fileName = fileName.replace("|", "[pi]");
-		fileName = fileName.replace("<", "[lt]");
 		fileName = fileName.replace(">", "[gt]");
+		fileName = fileName.replace("<", "[lt]");
+		fileName = fileName.replace("|", "[pi]");
+		fileName = fileName.replace("?", "[qt]");
 		fileName = fileName.replace(":", "[sc]");
- 
+
 		return prefix + fileName;
 	}
 
