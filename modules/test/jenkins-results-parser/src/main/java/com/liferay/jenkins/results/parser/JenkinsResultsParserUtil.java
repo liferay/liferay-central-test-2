@@ -76,6 +76,23 @@ public class JenkinsResultsParserUtil {
 
 		return sb.toString();
 	}
+	
+	public static String fixFileName(String fileName) {
+		String prefix = "";
+
+		if (fileName.startsWith("file:")) {
+			prefix = "file:";
+			fileName = fileName.substring(prefix.length());
+		}
+
+		fileName = fileName.replace("?", "[qt]");
+		fileName = fileName.replace("|", "[pi]");
+		fileName = fileName.replace("<", "[lt]");
+		fileName = fileName.replace(">", "[gt]");
+		fileName = fileName.replace(":", "[sc]");
+ 
+		return prefix + fileName;
+	}
 
 	public static String fixJSON(String json) {
 		json = json.replaceAll("'", "&#39;");
@@ -182,7 +199,7 @@ public class JenkinsResultsParserUtil {
 			"${user.dir}", System.getProperty("user.dir"));
 
 		if (remoteURL.startsWith("file")) {
-			remoteURL = remoteURL.replace("?", "%3F");
+			remoteURL = fixFileName(remoteURL);
 		}
 
 		Matcher matcher = _localURLPattern1.matcher(remoteURL);
