@@ -47,9 +47,7 @@ String lastNameAttr = openSSOConfiguration.lastNameAttr();
 
 	<aui:input cssClass="lfr-input-text-container" label="email-address-attribute" name="opensso--emailAddressAttr" type="text" value="<%= emailAddressAttr %>" />
 
-	<aui:input cssClass="lfr-input-text-container" label="first-name-attribute" name="opensso--firstNameAttr" type="text" value="<%= firstNameAttr %>" />
-
-	<aui:input cssClass="lfr-input-text-container" label="last-name-attribute" name="opensso--lastNameAttr" type="text" value="<%= lastNameAttr %>" />
+	<%@ include file="/com.liferay.portal.settings.web/opensso_user_name.jspf" %>
 
 	<aui:button-row>
 
