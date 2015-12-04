@@ -60,11 +60,9 @@ String searchContainerId = ParamUtil.getString(request, "searchContainerId");
 
 		<%
 		String taglibURL = "javascript:" + renderResponse.getNamespace() + "deleteEntries();";
-
-		boolean isTrashEnabled = TrashUtil.isTrashEnabled(scopeGroupId);
 		%>
 
-		<liferay-frontend:management-bar-button href="<%= taglibURL %>" iconCssClass='<%= isTrashEnabled ? "icon-trash" : "icon-remove" %>' label='<%= isTrashEnabled ? "recycle-bin" : "delete" %>' />
+		<liferay-frontend:management-bar-button href="<%= taglibURL %>" iconCssClass='<%= TrashUtil.isTrashEnabled(scopeGroupId) ? "icon-trash" : "icon-remove" %>' label='<%= TrashUtil.isTrashEnabled(scopeGroupId) ? "recycle-bin" : "delete" %>' />
 
 		<%
 		taglibURL = "javascript:Liferay.fire('" + renderResponse.getNamespace() + "editEntry', {action: 'expireEntries'}); void(0);";
