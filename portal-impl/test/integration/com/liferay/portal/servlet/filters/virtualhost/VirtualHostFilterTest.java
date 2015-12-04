@@ -77,13 +77,13 @@ public class VirtualHostFilterTest {
 		_pathContext = _PATH_PROXY + _PATH_CONTEXT;
 		_pathProxy = _PATH_PROXY;
 
-		_mockHttpServletRequest.setRequestURI(_PATH_CONTEXT + _FRIENDLY_URL);
+		_mockHttpServletRequest.setRequestURI(_PATH_CONTEXT + _LAST_PATH);
 
 		String lastPath = getLastPath(
 			_mockHttpServletRequest, _mockHttpServletResponse,
 			_mockFilterChain);
 
-		Assert.assertEquals(_FRIENDLY_URL, lastPath);
+		Assert.assertEquals(_LAST_PATH, lastPath);
 	}
 
 	@Test
@@ -91,13 +91,13 @@ public class VirtualHostFilterTest {
 		_pathContext = _PATH_PROXY;
 		_pathProxy = _PATH_PROXY;
 
-		_mockHttpServletRequest.setRequestURI(_FRIENDLY_URL);
+		_mockHttpServletRequest.setRequestURI(_LAST_PATH);
 
 		String lastPath = getLastPath(
 			_mockHttpServletRequest, _mockHttpServletResponse,
 			_mockFilterChain);
 
-		Assert.assertEquals(_FRIENDLY_URL, lastPath);
+		Assert.assertEquals(_LAST_PATH, lastPath);
 	}
 
 	@Test
@@ -107,13 +107,13 @@ public class VirtualHostFilterTest {
 		_pathContext = _PATH_PROXY;
 		_pathProxy = "";
 
-		_mockHttpServletRequest.setRequestURI(_FRIENDLY_URL);
+		_mockHttpServletRequest.setRequestURI(_LAST_PATH);
 
 		String lastPath = getLastPath(
 			_mockHttpServletRequest, _mockHttpServletResponse,
 			_mockFilterChain);
 
-		Assert.assertEquals(_FRIENDLY_URL, lastPath);
+		Assert.assertEquals(_LAST_PATH, lastPath);
 	}
 
 	protected String getLastPath(
@@ -132,7 +132,7 @@ public class VirtualHostFilterTest {
 		return "";
 	}
 
-	private static final String _FRIENDLY_URL =
+	private static final String _LAST_PATH =
 		VirtualHostFilterTest._PATH_PROXY + "_test_friendly_url";
 
 	private static final String _PATH_CONTEXT = "/test_context";
