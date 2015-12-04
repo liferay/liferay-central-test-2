@@ -16,7 +16,6 @@ package com.liferay.journal.upgrade.v0_0_3;
 
 import com.liferay.dynamic.data.mapping.service.DDMStructureLocalService;
 import com.liferay.journal.model.JournalArticle;
-import com.liferay.journal.upgrade.v1_0_0.UpgradeJournalArticles;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
