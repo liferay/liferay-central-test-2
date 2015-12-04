@@ -32,7 +32,7 @@ boolean requireCaptcha = GetterUtil.getBoolean(recordSet.getSettingsProperty("re
 
 <liferay-ui:error exception="<%= RecordSetSettingsException.MustEnterValidEmailAddress.class %>" message="please-enter-a-valid-email-address" />
 <liferay-ui:error exception="<%= RecordSetSettingsException.MustEnterValidURL.class %>" message="please-enter-a-valid-redirect-url" />
-<liferay-ui:error exception="<%= RecordSetSettingsException.RequiredValue.class %>" message="please-enter-a-valid-address-from">
+<liferay-ui:error exception="<%= RecordSetSettingsException.RequiredValue.class %>" message="please-enter-a-valid-from-address">
 
 	<%
 	RecordSetSettingsException.RequiredValue rv = (RecordSetSettingsException.RequiredValue)errorException;
@@ -49,11 +49,11 @@ boolean requireCaptcha = GetterUtil.getBoolean(recordSet.getSettingsProperty("re
 		<aui:fieldset>
 			<aui:input helpMessage="enable-email-notification-for-each-form-submission" label="send-email-notification" name="sendEmailNotification" type="checkbox" value="<%= DDLFormEmailNotificationUtil.isEmailNotificationEnabled(recordSet) %>" />
 
-			<aui:input label="name-from" name="emailFromName" value="<%= DDLFormEmailNotificationUtil.getEmailFromName(recordSet) %>" />
+			<aui:input label="from-name" name="emailFromName" value="<%= DDLFormEmailNotificationUtil.getEmailFromName(recordSet) %>" />
 
-			<aui:input label="address-from" name="emailFromAddress" value="<%= DDLFormEmailNotificationUtil.getEmailFromAddress(recordSet) %>" />
+			<aui:input label="from-address" name="emailFromAddress" value="<%= DDLFormEmailNotificationUtil.getEmailFromAddress(recordSet) %>" />
 
-			<aui:input label="address-to" name="emailToAddress" value="<%= DDLFormEmailNotificationUtil.getEmailToAddress(recordSet) %>" />
+			<aui:input label="to-address" name="emailToAddress" value="<%= DDLFormEmailNotificationUtil.getEmailToAddress(recordSet) %>" />
 
 			<aui:input label="subject" name="emailSubject" value="<%= DDLFormEmailNotificationUtil.getEmailSubject(recordSet) %>" />
 		</aui:fieldset>
