@@ -16,8 +16,8 @@ package com.liferay.portal.servlet.filters.virtualhost;
 
 import com.liferay.portal.kernel.struts.LastPath;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
-import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.MainServletTestRule;
 import com.liferay.portal.util.Portal;
@@ -30,6 +30,7 @@ import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
+
 import org.springframework.mock.web.MockFilterChain;
 import org.springframework.mock.web.MockFilterConfig;
 import org.springframework.mock.web.MockHttpServletRequest;
@@ -147,7 +148,7 @@ public class VirtualHostFilterTest {
 	private String _pathContext;
 	private String _pathProxy;
 	private Portal _portal;
-	private PortalUtil _portalUtil = new PortalUtil();
+	private final PortalUtil _portalUtil = new PortalUtil();
 	private final VirtualHostFilter _virtualHostFilter =
 		new VirtualHostFilter();
 
