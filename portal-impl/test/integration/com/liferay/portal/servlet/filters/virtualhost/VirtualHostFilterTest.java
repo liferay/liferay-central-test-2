@@ -61,8 +61,7 @@ public class VirtualHostFilterTest {
 					return _portalPathProxy;
 				}
 
-			}
-		);
+			});
 
 		_mockFilterChain = new MockFilterChain();
 		_mockHttpServletRequest = new MockHttpServletRequest();
@@ -76,9 +75,9 @@ public class VirtualHostFilterTest {
 	@Test
 	public void testFilterProxyContext() throws Exception {
 		_mockHttpServletRequest.setRequestURI(
-			_CONTEXT + _STARTING_WITH_PROXY_FRIENDLY_URL);
-		_portalPathContext = _PROXY + _CONTEXT;
-		_portalPathProxy = _PROXY;
+			_PATH_CONTEXT + _STARTING_WITH_PROXY_FRIENDLY_URL);
+		_portalPathContext = _PATH_PROXY + _PATH_CONTEXT;
+		_portalPathProxy = _PATH_PROXY;
 		String filteredFriendlyUrl = getFilteredFriendlyUrl(
 			_mockHttpServletRequest, _mockHttpServletResponse,
 			_mockFilterChain);
@@ -90,8 +89,8 @@ public class VirtualHostFilterTest {
 	public void testFilterProxyFriendlyUrlBeginsWithProxy() throws Exception {
 		_mockHttpServletRequest.setRequestURI(
 			_STARTING_WITH_PROXY_FRIENDLY_URL);
-		_portalPathContext = _PROXY;
-		_portalPathProxy = _PROXY;
+		_portalPathContext = _PATH_PROXY;
+		_portalPathProxy = _PATH_PROXY;
 		String filteredFriendlyUrl = getFilteredFriendlyUrl(
 			_mockHttpServletRequest, _mockHttpServletResponse,
 			_mockFilterChain);
@@ -105,7 +104,7 @@ public class VirtualHostFilterTest {
 
 		_mockHttpServletRequest.setRequestURI(
 			_STARTING_WITH_PROXY_FRIENDLY_URL);
-		_portalPathContext = _PROXY;
+		_portalPathContext = _PATH_PROXY;
 		_portalPathProxy = "";
 		String filteredFriendlyUrl = getFilteredFriendlyUrl(
 			_mockHttpServletRequest, _mockHttpServletResponse,
@@ -131,12 +130,12 @@ public class VirtualHostFilterTest {
 		}
 	}
 
-	private static final String _CONTEXT = "/pathcontext";
+	private static final String _PATH_CONTEXT = "/test_context";
 
-	private static final String _PROXY = "/pathproxy";
+	private static final String _PATH_PROXY = "/test_proxy";
 
 	private static final String _STARTING_WITH_PROXY_FRIENDLY_URL =
-		_PROXY + "_sitename";
+		_PATH_PROXY + "_sitename";
 
 	private MockFilterChain _mockFilterChain;
 	private MockFilterConfig _mockFilterConfig;
