@@ -31,7 +31,7 @@ String lastNameAttr = openSSOConfiguration.lastNameAttr();
 %>
 
 <aui:fieldset>
-	<aui:input name="<%= ActionRequest.ACTION_NAME %>" type="hidden" value="/portal_settings/edit_company_opensso_configuration" />
+	<aui:input name="<%= ActionRequest.ACTION_NAME %>" type="hidden" value="/portal_settings/opensso" />
 
 	<aui:input label="enabled" name="opensso--enabled" type="checkbox" value="<%= enabled %>" />
 
