@@ -19,6 +19,7 @@
 <%
 String viewUserGroupsRedirect = ParamUtil.getString(request, "viewUserGroupsRedirect");
 String backURL = ParamUtil.getString(request, "backURL", viewUserGroupsRedirect);
+
 String displayStyle = ParamUtil.getString(request, "displayStyle");
 
 if (Validator.isNull(displayStyle)) {
