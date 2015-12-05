@@ -31,7 +31,7 @@ import org.osgi.service.component.annotations.Component;
 	immediate = true,
 	property = {
 		"javax.portlet.name=" + PortalSettingsPortletKeys.PORTAL_SETTINGS,
-		"mvc.command.name=/portal_settings/edit_company_opensso_configuration"
+		"mvc.command.name=/portal_settings/opensso"
 	},
 	service = MVCActionCommand.class
 )
