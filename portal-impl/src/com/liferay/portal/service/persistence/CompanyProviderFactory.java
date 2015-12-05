@@ -19,7 +19,7 @@ package com.liferay.portal.service.persistence;
 /**
  * @author Cristina González
  */
-public interface CompanyProviderHolder extends CompanyProvider {
+public interface CompanyProviderFactory extends CompanyProvider {
 
 	public CompanyProvider getCompanyProvider();
 
