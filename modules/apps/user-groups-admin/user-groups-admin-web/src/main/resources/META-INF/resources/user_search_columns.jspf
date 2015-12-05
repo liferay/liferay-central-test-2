@@ -15,23 +15,6 @@
 --%>
 
 <c:choose>
-	<c:when test='<%= displayStyle.equals("icon") %>'>
-
-		<%
-		row.setCssClass("col-md-2 col-sm-4 col-xs-6 selectable");
-		%>
-
-		<liferay-ui:search-container-column-text>
-			<liferay-frontend:vertical-card
-				actionJspServletContext="<%= application %>"
-				cssClass="entry-display-style"
-				resultRow="<%= row %>"
-				rowChecker="<%= rowChecker %>"
-				subtitle="<%= user2.getScreenName() %>"
-				title="<%= user2.getFullName() %>"
-			/>
-		</liferay-ui:search-container-column-text>
-	</c:when>
 	<c:when test='<%= displayStyle.equals("descriptive") %>'>
 		<liferay-ui:search-container-column-text>
 			<liferay-ui:user-portrait
@@ -48,6 +31,23 @@
 			<h6 class="text-default">
 				<span><%= user2.getScreenName() %></span>
 			</h6>
+		</liferay-ui:search-container-column-text>
+	</c:when>
+	<c:when test='<%= displayStyle.equals("icon") %>'>
+
+		<%
+		row.setCssClass("col-md-2 col-sm-4 col-xs-6 selectable");
+		%>
+
+		<liferay-ui:search-container-column-text>
+			<liferay-frontend:vertical-card
+				actionJspServletContext="<%= application %>"
+				cssClass="entry-display-style"
+				resultRow="<%= row %>"
+				rowChecker="<%= rowChecker %>"
+				subtitle="<%= user2.getScreenName() %>"
+				title="<%= user2.getFullName() %>"
+			/>
 		</liferay-ui:search-container-column-text>
 	</c:when>
 	<c:otherwise>
