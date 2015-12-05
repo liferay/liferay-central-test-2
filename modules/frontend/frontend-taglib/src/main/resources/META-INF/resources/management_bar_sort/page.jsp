@@ -78,7 +78,7 @@ orderByColDescURL.setParameter("orderByType", "desc");
 
 <li>
 	<liferay-frontend:management-bar-button
-		active='<%= ((Validator.isNotNull(orderByType)) && orderByType.equals("desc")) %>'
+		active='<%= Validator.isNotNull(orderByType) && orderByType.equals("desc") %>'
 		href="<%= orderByColDescURL.toString() %>"
 		icon="caret-bottom"
 		label="descending"
