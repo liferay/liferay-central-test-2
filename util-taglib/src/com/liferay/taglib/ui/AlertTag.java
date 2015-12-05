@@ -128,12 +128,12 @@ public class AlertTag extends IncludeTag {
 
 	private Integer _animationTime = 500;
 	private boolean _closeable = true;
-	private String _message = null;
-	private String _cssClass = null;
-	private boolean _destroyOnHide = false;
-	private String _targetContainer = null;
+	private String _message;
+	private String _cssClass;
+	private boolean _destroyOnHide;
+	private String _targetContainer;
 	private Integer _timeout = -1;
-	private String _title = null;
+	private String _title;
 	private String _type = "info";
 
 }
