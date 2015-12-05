@@ -43,11 +43,6 @@ portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("userGroupId", String.valueOf(userGroup.getUserGroupId()));
 
-portletDisplay.setShowBackIcon(true);
-portletDisplay.setURLBack(redirect);
-
-renderResponse.setTitle(userGroup.getName());
-
 PortletURL searchURL = PortletURLUtil.clone(portletURL, renderResponse);
 
 SearchContainer userSearchContainer = new UserSearch(renderRequest, searchURL);
@@ -63,6 +58,11 @@ if (filterManageableOrganizations) {
 userParams.put("usersUserGroups", Long.valueOf(userGroup.getUserGroupId()));
 
 RowChecker rowChecker = new UnsetUserUserGroupChecker(renderResponse, userGroup);
+
+portletDisplay.setShowBackIcon(true);
+portletDisplay.setURLBack(redirect);
+
+renderResponse.setTitle(userGroup.getName());
 %>
 
 <aui:nav-bar cssClass="collapse-basic-search" markupView="lexicon">
