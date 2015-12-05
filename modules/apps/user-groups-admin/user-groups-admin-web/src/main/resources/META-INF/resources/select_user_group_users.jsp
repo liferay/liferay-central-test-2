@@ -19,11 +19,11 @@
 <%
 String tabs1 = ParamUtil.getString(request, "tabs1");
 
-String eventName = ParamUtil.getString(request, "eventName", liferayPortletResponse.getNamespace() + "selectUsers");
-
 String redirect = ParamUtil.getString(request, "redirect");
 
 long userGroupId = ParamUtil.getLong(request, "userGroupId");
+
+UserGroup userGroup = UserGroupServiceUtil.fetchUserGroup(userGroupId);
 
 String displayStyle = ParamUtil.getString(request, "displayStyle");
 
@@ -32,18 +32,19 @@ if (Validator.isNull(displayStyle)) {
 }
 else {
 	portalPreferences.setValue(UserGroupsAdminPortletKeys.USER_GROUPS_ADMIN, "users-display-style", displayStyle);
+
 	request.setAttribute(WebKeys.SINGLE_PAGE_APPLICATION_CLEAR_CACHE, Boolean.TRUE);
 }
 
-UserGroup userGroup = UserGroupServiceUtil.fetchUserGroup(userGroupId);
+String eventName = ParamUtil.getString(request, "eventName", liferayPortletResponse.getNamespace() + "selectUsers");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("mvcPath", "/select_user_group_users.jsp");
-portletURL.setParameter("eventName", eventName);
 portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("userGroupId", String.valueOf(userGroup.getUserGroupId()));
+portletURL.setParameter("eventName", eventName);
 
 PortletURL searchURL = PortletURLUtil.clone(portletURL, renderResponse);
 
