@@ -15,7 +15,7 @@
 		<div class="container-fluid-1280">
 			<div class="toolbar-group">
 				<div class="toolbar-group-content">
-					<a class="icon-monospaced sidenav-toggler" data-content="body" data-target="#sidenavSliderId,#wrapper" data-toggle="sidenav" data-type="fixed-push" data-type-mobile="fixed" data-use-delegate="true" href="#sidenavSliderId" id="sidenavToggleId">
+					<a class="icon-monospaced sidenav-toggler" data-content="body" data-qa-id="productMenu" data-target="#sidenavSliderId,#wrapper" data-toggle="sidenav" data-type="fixed-push" data-type-mobile="fixed" data-use-delegate="true" href="#sidenavSliderId" id="sidenavToggleId">
 						<div class="toast-animation">
 							<div class="pm"></div>
 							<div class="cn"></div>
