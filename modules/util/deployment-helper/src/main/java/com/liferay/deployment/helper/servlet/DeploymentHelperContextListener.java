@@ -116,8 +116,8 @@ public class DeploymentHelperContextListener implements ServletContextListener {
 			}
 			catch (Exception e) {
 				servletContext.log(
-					"An error occured while attempting to process " +
-						deploymentFileName + ":\n" + e.getMessage(),
+					"Unable to process " + deploymentFileName + ":\n" +
+						e.getMessage(),
 					e);
 			}
 		}
