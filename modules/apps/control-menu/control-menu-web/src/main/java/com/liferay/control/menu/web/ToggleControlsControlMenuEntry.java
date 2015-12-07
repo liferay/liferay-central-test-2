@@ -55,6 +55,8 @@ public class ToggleControlsControlMenuEntry
 	public Map<String, Object> getData(HttpServletRequest request) {
 		Map<String, Object> data = super.getData(request);
 
+		data.put("qa-id", "showControls");
+
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
