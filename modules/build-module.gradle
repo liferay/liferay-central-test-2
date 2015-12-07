@@ -207,11 +207,6 @@ jspC {
 	jspCVersion = project.properties["com.liferay.jasper.jspc.version"]
 }
 
-jsTranspiler {
-	babelVersion = project.properties["nodejs.babel.version"]
-	lfrAmdLoaderVersion = project.properties["nodejs.lfr.amd.loader.version"]
-}
-
 node {
 	npmArgs "--fetch-retries", "10"
 	npmArgs "--fetch-retry-maxtimeout", "120000"
