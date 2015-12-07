@@ -83,22 +83,22 @@ if (layout != null) {
 			</div>
 		</div>
 	</div>
+
+	<aui:script position="inline" use="liferay-control-menu">
+		var controlMenu = A.one('#<portlet:namespace/>ControlMenu');
+
+		controlMenu.delegate(
+			'mouseover',
+			function(event) {
+				var title = event.currentTarget.attr('data-title');
+
+				if (title) {
+					Liferay.Portal.ToolTip.show(this, title);
+				}
+			},
+			'.control-menu-icon'
+		);
+
+		Liferay.ControlMenu.init('#<portlet:namespace />controlMenu');
+	</aui:script>
 </c:if>
-
-<aui:script position="inline" use="liferay-control-menu">
-	var controlMenu = A.one('#<portlet:namespace/>ControlMenu');
-
-	controlMenu.delegate(
-		'mouseover',
-		function(event) {
-			var title = event.currentTarget.attr('data-title');
-
-			if (title) {
-				Liferay.Portal.ToolTip.show(this, title);
-			}
-		},
-		'.control-menu-icon'
-	);
-
-	Liferay.ControlMenu.init('#<portlet:namespace />controlMenu');
-</aui:script>
