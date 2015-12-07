@@ -86,17 +86,19 @@ public class LayoutRemoteStagingBackgroundTaskExecutor
 
 		clearBackgroundTaskStatus(backgroundTask);
 
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+
 		File file = null;
 		HttpPrincipal httpPrincipal = null;
 		MissingReferences missingReferences = null;
 		long stagingRequestId = 0L;
 
-		Thread currentThread = Thread.currentThread();
-
-		currentThread.setContextClassLoader(
-			ClassLoaderUtil.getPortalClassLoader());
-
 		try {
+			currentThread.setContextClassLoader(
+				ClassLoaderUtil.getPortalClassLoader());
+
 			ExportImportThreadLocal.setLayoutStagingInProcess(true);
 
 			ExportImportLifecycleManagerUtil.fireExportImportLifecycleEvent(
@@ -166,6 +168,8 @@ public class LayoutRemoteStagingBackgroundTaskExecutor
 			throw new SystemException(t);
 		}
 		finally {
+			currentThread.setContextClassLoader(contextClassLoader);
+
 			if ((stagingRequestId > 0) && (httpPrincipal != null)) {
 				try {
 					StagingServiceHttp.cleanUpStagingRequest(
