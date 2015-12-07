@@ -18,6 +18,7 @@ import com.liferay.control.menu.BaseControlMenuEntry;
 import com.liferay.control.menu.ControlMenuEntry;
 import com.liferay.control.menu.constants.ControlMenuCategoryKeys;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Group;
@@ -30,6 +31,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.SessionClicks;
 
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -48,6 +50,18 @@ import org.osgi.service.component.annotations.Component;
 )
 public class ToggleControlsControlMenuEntry
 	extends BaseControlMenuEntry implements ControlMenuEntry {
+
+	@Override
+	public Map<String, Object> getData(HttpServletRequest request) {
+		Map<String, Object> data = super.getData(request);
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		data.put("title", getLabel(themeDisplay.getLocale()));
+
+		return data;
+	}
 
 	@Override
 	public String getIconCssClass(HttpServletRequest request) {
@@ -70,7 +84,7 @@ public class ToggleControlsControlMenuEntry
 
 	@Override
 	public String getLabel(Locale locale) {
-		return "edit-controls";
+		return LanguageUtil.get(locale, "edit-controls");
 	}
 
 	@Override
