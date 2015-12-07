@@ -24,6 +24,7 @@
 Map<String, Object> data = new HashMap<String, Object>();
 
 data.put("panelURL", previewContentURL);
+data.put("title", HtmlUtil.escape(LanguageUtil.get(request, "simulation")));
 %>
 
 <li>
