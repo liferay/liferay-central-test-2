@@ -203,10 +203,6 @@ idea {
 	}
 }
 
-jsModuleConfigGenerator {
-	version = project.properties["nodejs.lfr.module.config.generator.version"]
-}
-
 jspC {
 	jspCVersion = project.properties["com.liferay.jasper.jspc.version"]
 }
