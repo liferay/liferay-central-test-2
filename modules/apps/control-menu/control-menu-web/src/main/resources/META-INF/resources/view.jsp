@@ -28,7 +28,7 @@ if (layout != null) {
 %>
 
 <c:if test="<%= !layout.isTypeControlPanel() && !group.isControlPanel() && !controlMenuCategories.isEmpty() %>">
-	<div class="control-menu">
+	<div class="control-menu" id="<portlet:namespace/>ControlMenu">
 		<c:if test="<%= (user.isSetupComplete() || themeDisplay.isImpersonated()) && themeDisplay.isShowStagingIcon() %>">
 			<div class="control-menu-level-2">
 				<div class="container-fluid-1280">
@@ -86,5 +86,19 @@ if (layout != null) {
 </c:if>
 
 <aui:script position="inline" use="liferay-control-menu">
+	var controlMenu = A.one('#<portlet:namespace/>ControlMenu');
+
+	controlMenu.delegate(
+		'mouseover',
+		function(event) {
+			var title = event.currentTarget.attr('data-title');
+
+			if (title) {
+				Liferay.Portal.ToolTip.show(this, title);
+			}
+		},
+		'.control-menu-icon'
+	);
+
 	Liferay.ControlMenu.init('#<portlet:namespace />controlMenu');
 </aui:script>
