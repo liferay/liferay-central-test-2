@@ -143,16 +143,15 @@ public abstract class AbstractMessagingConfigurator
 			_messageBusEventListenerServiceRegistrar.destroy();
 		}
 
-		_messageListeners.clear();
-		_destinationEventListeners.clear();
 		_destinationConfigurations.clear();
+		_destinationEventListeners.clear();
+		_messageListeners.clear();
 
 		for (Destination destination : _destinations) {
 			destination.destroy();
 		}
 
 		_destinations.clear();
-
 		_messageBusEventListeners.clear();
 
 		ClassLoader operatingClassLoader = getOperatingClassloader();
