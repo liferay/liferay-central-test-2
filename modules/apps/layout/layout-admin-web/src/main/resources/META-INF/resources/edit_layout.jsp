@@ -108,7 +108,7 @@ renderResponse.setTitle(selLayout.getName(locale));
 				<portlet:param name="mvcPath" value="/view.jsp" />
 				<portlet:param name="redirect" value='<%= HttpUtil.addParameter(redirectURL.toString(), liferayPortletResponse.getNamespace() + "selPlid", selLayout.getParentPlid()) %>' />
 				<portlet:param name="plid" value="<%= String.valueOf(layoutsAdminDisplayContext.getSelPlid()) %>" />
-				<portlet:param name="layoutSetBranchId" value="<%= String.valueOf(0L) %>" />
+				<portlet:param name="layoutSetBranchId" value="0" />
 				<portlet:param name="selPlid" value="<%= String.valueOf(selLayout.getParentPlid()) %>" />
 			</portlet:actionURL>
 
