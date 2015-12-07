@@ -66,6 +66,7 @@ if (layout != null) {
 							<li>
 								<aui:icon
 									cssClass='<%= "control-menu-icon " + controlMenuEntry.getLinkCssClass(request) %>'
+									data="<%= controlMenuEntry.getData(request) %>"
 									image="<%= controlMenuEntry.getIconCssClass(request) %>"
 									label="<%= controlMenuEntry.getLabel(locale) %>"
 									markupView="lexicon"
