@@ -30,6 +30,7 @@ InformationMessagesControlMenuEntry informationMessagesControlMenuEntry = (Infor
 Map<String, Object> data = new HashMap<String, Object>();
 
 data.put("panelURL", addURL);
+data.put("qa-id", "info");
 data.put("title", HtmlUtil.escape(LanguageUtil.get(request, "additional-information")));
 %>
 
