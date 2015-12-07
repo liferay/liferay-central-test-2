@@ -1615,9 +1615,14 @@
 			<var name="dmDocumentTitle" value="DM Document Title" />
 		</execute>
 
-		<execute macro="DMDocument#searchPG">
-			<var name="dmDocumentKeyword" value="This is a *.doc file." />
-			<var name="dmDocumentTitle" value="DM Document Title" />
+		<execute macro="Search#searchPG">
+			<var name="searchTerm" value="This is a *.doc file." />
+		</execute>
+
+		<execute macro="Search#viewSearchResultPG">
+			<var name="searchAssetSummary" value="This is a *.doc file." />
+			<var name="searchAssetTitle" value="DM Document Title" />
+			<var name="searchAssetType" value="Document" />
 		</execute>
 	</command>
 
@@ -1632,9 +1637,13 @@
 			<var name="dmDocumentTitle" value="DM Document Title" />
 		</execute>
 
-		<execute macro="DMDocument#searchPG">
-			<var name="dmDocumentKeyword" value="DM Document Title" />
-			<var name="dmDocumentTitle" value="DM Document Title" />
+		<execute macro="Search#searchPG">
+			<var name="searchTerm" value="DM Document Title" />
+		</execute>
+
+		<execute macro="Search#viewSearchResultPG">
+			<var name="searchAssetTitle" value="DM Document Title" />
+			<var name="searchAssetType" value="Document" />
 		</execute>
 	</command>
 
@@ -1658,9 +1667,13 @@
 			<var name="dmDocumentTitle" value="DM Document Title" />
 		</execute>
 
-		<execute macro="DMDocument#searchPG">
-			<var name="dmDocumentKeyword" value="DM Document Title" />
-			<var name="dmDocumentTitle" value="DM Document Title" />
+		<execute macro="Search#searchPG">
+			<var name="searchTerm" value="DM Document Title" />
+		</execute>
+
+		<execute macro="Search#viewSearchResultPG">
+			<var name="searchAssetTitle" value="DM Document Title" />
+			<var name="searchAssetType" value="Document" />
 		</execute>
 	</command>
 
@@ -1684,9 +1697,13 @@
 			<var name="dmDocumentTitle" value="DM Image Title" />
 		</execute>
 
-		<execute macro="DMDocument#searchPG">
-			<var name="dmDocumentKeyword" value="DM Image Title" />
-			<var name="dmDocumentTitle" value="DM Image Title" />
+		<execute macro="Search#searchPG">
+			<var name="searchTerm" value="DM Image Title" />
+		</execute>
+
+		<execute macro="Search#viewSearchResultPG">
+			<var name="searchAssetTitle" value="DM Image Title" />
+			<var name="searchAssetType" value="Document" />
 		</execute>
 	</command>
 
@@ -1719,9 +1736,13 @@
 			<var name="dmDocumentTitle" value="DM Document Title" />
 		</execute>
 
-		<execute macro="DMDocument#searchPG">
-			<var name="dmDocumentKeyword" value="DM Document Title" />
-			<var name="dmDocumentTitle" value="DM Document Title" />
+		<execute macro="Search#searchPG">
+			<var name="searchTerm" value="DM Document Title" />
+		</execute>
+
+		<execute macro="Search#viewSearchResultPG">
+			<var name="searchAssetTitle" value="DM Document Title" />
+			<var name="searchAssetType" value="Document" />
 		</execute>
 	</command>
 
