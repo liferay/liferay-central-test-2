@@ -46,14 +46,14 @@
 	<c:if test='<%= tabs1.equals("entries") && themeDisplay.isSignedIn() %>'>
 
 		<%
-		String markAsReadURL = "javascript:" + renderResponse.getNamespace() + "handleEntry(" + entry.getEntryId() + ");";
+		String taglibMarkAsReadURL = "javascript:" + renderResponse.getNamespace() + "handleEntry(" + entry.getEntryId() + ");";
 		%>
 
 		<liferay-ui:icon
 			cssClass="visibility-control"
 			label="<%= true %>"
 			message='<%= ((flagValue == AnnouncementsFlagConstants.NOT_HIDDEN) ? "mark-as-read" : "show") %>'
-			url="<%= markAsReadURL %>"
+			url="<%= taglibMarkAsReadURL %>"
 		/>
 	</c:if>
 </liferay-ui:icon-menu>
