@@ -69,7 +69,7 @@ public class BaseExportImportTestCase {
 					user, importedGroup.getGroupId(), false, null,
 					parameterMap);
 
-		ExportImportConfiguration importConfiguration =
+		ExportImportConfiguration exportImportConfiguration =
 			ExportImportConfigurationLocalServiceUtil.
 				addExportImportConfiguration(
 					user.getUserId(), importedGroup.getGroupId(),
@@ -78,7 +78,8 @@ public class BaseExportImportTestCase {
 					importLayoutSettingsMap, WorkflowConstants.STATUS_DRAFT,
 					new ServiceContext());
 
-		ExportImportServiceUtil.importLayouts(importConfiguration, larFile);
+		ExportImportServiceUtil.importLayouts(
+			exportImportConfiguration, larFile);
 	}
 
 	@Before
@@ -167,7 +168,7 @@ public class BaseExportImportTestCase {
 				buildExportLayoutSettingsMap(
 					user, group.getGroupId(), false, layoutIds, parameterMap);
 
-		ExportImportConfiguration exportConfiguration =
+		ExportImportConfiguration exportImportConfiguration =
 			ExportImportConfigurationLocalServiceUtil.
 				addDraftExportImportConfiguration(
 					user.getUserId(),
@@ -175,7 +176,7 @@ public class BaseExportImportTestCase {
 					exportLayoutSettingsMap);
 
 		larFile = ExportImportServiceUtil.exportLayoutsAsFile(
-			exportConfiguration);
+			exportImportConfiguration);
 	}
 
 	protected AssetEntry getAssetEntry(StagedModel stagedModel)

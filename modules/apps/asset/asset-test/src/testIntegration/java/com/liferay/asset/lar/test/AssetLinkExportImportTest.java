@@ -91,7 +91,7 @@ public class AssetLinkExportImportTest extends BaseExportImportTestCase {
 	}
 
 	@Test
-	public void testBothAssetsExported() throws Exception {
+	public void testBothAssetEntriesExported() throws Exception {
 		long[] layoutIds = new long[] {layout.getLayoutId()};
 
 		exportImportLayouts(layoutIds, getImportParameterMap());
@@ -100,11 +100,11 @@ public class AssetLinkExportImportTest extends BaseExportImportTestCase {
 			importedGroup.getGroupId(),
 			_journalArticle.getArticleResourceUuid());
 
-		List<AssetLink> links = AssetLinkLocalServiceUtil.getLinks(
+		List<AssetLink> assetLinks = AssetLinkLocalServiceUtil.getLinks(
 			assetEntry.getEntryId());
 
-		Assert.assertNotNull(links);
-		Assert.assertTrue(links.size() > 0);
+		Assert.assertNotNull(assetLinks);
+		Assert.assertTrue(assetLinks.size() > 0);
 	}
 
 	@Test
@@ -124,7 +124,7 @@ public class AssetLinkExportImportTest extends BaseExportImportTestCase {
 
 		checkAssetLinksInLar(_journalArticle.getArticleResourceUuid());
 
-		// JournalArticle should not be in the LAR
+		// Journal article should not be in the LAR
 
 		PortletDataContext portletDataContext = getPortletDataContext();
 
@@ -134,7 +134,7 @@ public class AssetLinkExportImportTest extends BaseExportImportTestCase {
 
 		Assert.assertNull(_journalArticle);
 
-		// BookmarksEntry should not be in the LAR
+		// BookmarksE etry should not be in the LAR
 
 		_bookmarksEntry =
 			(BookmarksEntry)portletDataContext.getZipEntryAsObject(
@@ -146,7 +146,7 @@ public class AssetLinkExportImportTest extends BaseExportImportTestCase {
 	}
 
 	@Test
-	public void testOnlyOneEntityExported() throws Exception {
+	public void testOnlyOneAssetEntryExported() throws Exception {
 		long[] layoutIds = new long[] {layout.getLayoutId()};
 
 		Map<String, String[]> exportParameterMap = getExportParameterMap();
@@ -166,7 +166,7 @@ public class AssetLinkExportImportTest extends BaseExportImportTestCase {
 
 		checkAssetLinksInLar(_journalArticle.getArticleResourceUuid());
 
-		// JournalArticle should be in the LAR
+		// Journal article should be in the LAR
 
 		PortletDataContext portletDataContext = getPortletDataContext();
 
@@ -176,7 +176,7 @@ public class AssetLinkExportImportTest extends BaseExportImportTestCase {
 
 		Assert.assertNotNull(_journalArticle);
 
-		// BookmarksEntry should not be in the LAR
+		// Bookmarks entry should not be in the LAR
 
 		_bookmarksEntry =
 			(BookmarksEntry)portletDataContext.getZipEntryAsObject(
@@ -218,11 +218,11 @@ public class AssetLinkExportImportTest extends BaseExportImportTestCase {
 			TestPropsValues.getUserId(), stagingGroup.getGroupId(),
 			group.getGroupId(), false, parameterMap);
 
-		JournalArticle liveArticle =
+		JournalArticle liveJournalArticle =
 			JournalArticleLocalServiceUtil.fetchJournalArticleByUuidAndGroupId(
 				article.getUuid(), group.getGroupId());
 
-		Assert.assertNull(liveArticle);
+		Assert.assertNull(liveJournalArticle);
 
 		parameterMap.put(
 			PortletDataHandlerKeys.PORTLET_DATA,
@@ -240,11 +240,11 @@ public class AssetLinkExportImportTest extends BaseExportImportTestCase {
 
 		Assert.assertNotNull(assetEntry);
 
-		List<AssetLink> links = AssetLinkLocalServiceUtil.getLinks(
+		List<AssetLink> assetLinks = AssetLinkLocalServiceUtil.getLinks(
 			assetEntry.getEntryId());
 
-		Assert.assertNotNull(links);
-		Assert.assertTrue(links.size() == 2);
+		Assert.assertNotNull(assetLinks);
+		Assert.assertTrue(assetLinks.size() == 2);
 	}
 
 	protected void checkAssetLinksInLar(String assetEntryClassUuid)
