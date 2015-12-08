@@ -57,10 +57,11 @@ public class SyncFileService {
 		String checksum = FileUtil.getChecksum(filePath);
 		String name = String.valueOf(filePath.getFileName());
 		String mimeType = Files.probeContentType(filePath);
+		long size = Files.size(filePath);
 
 		SyncFile syncFile = addSyncFile(
 			null, checksum, null, filePath.toString(), mimeType, name, folderId,
-			repositoryId, SyncFile.STATE_SYNCED, syncAccountId,
+			repositoryId, size, SyncFile.STATE_SYNCED, syncAccountId,
 			SyncFile.TYPE_FILE, true);
 
 		// Remote sync file
@@ -87,7 +88,7 @@ public class SyncFileService {
 
 		SyncFile syncFile = addSyncFile(
 			null, null, null, filePath.toString(),
-			Files.probeContentType(filePath), name, parentFolderId,
+			Files.probeContentType(filePath), name, parentFolderId, 0,
 			repositoryId, SyncFile.STATE_SYNCED, syncAccountId,
 			SyncFile.TYPE_FOLDER, false);
 
@@ -102,7 +103,7 @@ public class SyncFileService {
 	public static SyncFile addSyncFile(
 			String changeLog, String checksum, String description,
 			String filePathName, String mimeType, String name,
-			long parentFolderId, long repositoryId, int state,
+			long parentFolderId, long repositoryId, long size, int state,
 			long syncAccountId, String type, boolean createChecksums)
 		throws Exception {
 
@@ -124,7 +125,7 @@ public class SyncFileService {
 		syncFile.setName(name);
 		syncFile.setParentFolderId(parentFolderId);
 		syncFile.setRepositoryId(repositoryId);
-		syncFile.setSize(Files.size(Paths.get(filePathName)));
+		syncFile.setSize(size);
 		syncFile.setState(state);
 		syncFile.setSyncAccountId(syncAccountId);
 		syncFile.setType(type);
@@ -201,10 +202,11 @@ public class SyncFileService {
 		String checksum = FileUtil.getChecksum(filePath);
 		String name = String.valueOf(filePath.getFileName());
 		String mimeType = Files.probeContentType(filePath);
+		long size = Files.size(filePath);
 
 		SyncFile targetSyncFile = addSyncFile(
 			null, checksum, null, filePath.toString(), mimeType, name, folderId,
-			repositoryId, SyncFile.STATE_SYNCED, syncAccountId,
+			repositoryId, size, SyncFile.STATE_SYNCED, syncAccountId,
 			SyncFile.TYPE_FILE, false);
 
 		IODeltaUtil.copyChecksums(sourceSyncFile, targetSyncFile);
