@@ -1308,7 +1308,9 @@
 	</command>
 
 	<command name="navigateBackViaDocumentViewPG">
-		<execute function="AssertClick" locator1="NavListItem#UP" value1="Up" />
+		<var name="key_breadcrumbName" value="Home" />
+
+		<execute function="AssertClick" locator1="Breadcrumb#BREADCRUMB_PAGE" value1="HOME" />
 	</command>
 
 	<command name="populateField">
