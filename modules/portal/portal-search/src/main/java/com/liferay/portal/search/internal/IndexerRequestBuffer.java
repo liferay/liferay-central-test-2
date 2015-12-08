@@ -144,7 +144,7 @@ public class IndexerRequestBuffer {
 			}
 			catch (SearchException e) {
 				if (_log.isWarnEnabled()) {
-					_log.warn("Unable to commit search engine: ", e);
+					_log.warn("Unable to commit search engine", e);
 				}
 			}
 		}
