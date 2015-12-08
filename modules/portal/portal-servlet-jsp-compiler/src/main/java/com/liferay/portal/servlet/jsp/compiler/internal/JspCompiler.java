@@ -237,8 +237,9 @@ public class JspCompiler extends Jsr199JavaCompiler {
 	}
 
 	protected String getTldUri(URL url) {
-		try (InputStream is = url.openStream();
-			InputStreamReader inputStreamReader = new InputStreamReader(is);
+		try (InputStream inputStream = url.openStream();
+			InputStreamReader inputStreamReader = new InputStreamReader(
+				inputStream);
 			BufferedReader bufferedReader = new BufferedReader(
 				inputStreamReader)) {
 
