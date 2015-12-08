@@ -42,7 +42,7 @@ public class SyncFileTestUtil {
 
 		SyncFile syncFile = SyncFileService.addSyncFile(
 			null, null, null, filePathName, null, null, parentFolderId,
-			repositoryId, SyncFile.STATE_SYNCED, syncAccountId,
+			repositoryId, SyncFile.STATE_SYNCED, 0, syncAccountId,
 			SyncFile.TYPE_FILE, true);
 
 		if (typePK == 0) {
@@ -78,7 +78,7 @@ public class SyncFileTestUtil {
 
 		SyncFile syncFile = SyncFileService.addSyncFile(
 			null, null, null, filePathName, null, null, parentFolderId,
-			repositoryId, SyncFile.STATE_SYNCED, syncAccountId,
+			repositoryId, SyncFile.STATE_SYNCED, 0, syncAccountId,
 			SyncFile.TYPE_FOLDER, false);
 
 		if (typePK == 0) {
