@@ -1307,7 +1307,7 @@
 		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request completed successfully." />
 	</command>
 
-	<command name="navigateBackViaDocumentViewPG">
+	<command name="navigateHomeViaDocumentViewPG">
 		<var name="key_breadcrumbName" value="Home" />
 
 		<execute function="AssertClick" locator1="Breadcrumb#BREADCRUMB_PAGE" value1="HOME" />
