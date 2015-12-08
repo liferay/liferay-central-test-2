@@ -80,7 +80,7 @@ public class GetUserSitesGroupsHandler extends BaseJSONHandler {
 
 				SyncFileService.addSyncFile(
 					null, null, null, remoteSyncSite.getFilePathName(), null,
-					remoteSyncSite.getName(), 0, remoteSyncSite.getGroupId(),
+					remoteSyncSite.getName(), 0, remoteSyncSite.getGroupId(), 0,
 					SyncFile.STATE_SYNCED, remoteSyncSite.getSyncAccountId(),
 					SyncFile.TYPE_SYSTEM, false);
 			}
