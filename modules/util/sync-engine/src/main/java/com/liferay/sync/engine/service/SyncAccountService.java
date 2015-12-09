@@ -124,10 +124,10 @@ public class SyncAccountService {
 		}
 
 		SyncFileService.addSyncFile(
-			null, null, null, filePathName, null,
+			null, null, false, null, filePathName, null,
 			String.valueOf(filePath.getFileName()), 0, 0, 0,
 			SyncFile.STATE_SYNCED, syncAccount.getSyncAccountId(),
-			SyncFile.TYPE_SYSTEM, false);
+			SyncFile.TYPE_SYSTEM);
 
 		// Sync sites
 
@@ -161,10 +161,10 @@ public class SyncAccountService {
 				}
 
 				SyncFileService.addSyncFile(
-					null, null, null, syncSite.getFilePathName(), null,
+					null, null, false, null, syncSite.getFilePathName(), null,
 					syncSite.getName(), 0, syncSite.getGroupId(), 0,
 					SyncFile.STATE_SYNCED, syncSite.getSyncAccountId(),
-					SyncFile.TYPE_SYSTEM, false);
+					SyncFile.TYPE_SYSTEM);
 			}
 		}
 
