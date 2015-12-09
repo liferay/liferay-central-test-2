@@ -77,9 +77,9 @@ create table RecentLayoutBranch (
 	groupId LONG,
 	companyId LONG,
 	userId LONG,
+	layoutBranchId LONG,
 	layoutSetBranchId LONG,
-	plid LONG,
-	layoutBranchId LONG
+	plid LONG
 );
 
 create table RecentLayoutRevision (
@@ -88,9 +88,9 @@ create table RecentLayoutRevision (
 	groupId LONG,
 	companyId LONG,
 	userId LONG,
+	layoutRevisionId LONG,
 	layoutSetBranchId LONG,
-	plid LONG,
-	layoutRevisionId LONG
+	plid LONG
 );
 
 create table RecentLayoutSetBranch (
@@ -99,8 +99,8 @@ create table RecentLayoutSetBranch (
 	groupId LONG,
 	companyId LONG,
 	userId LONG,
-	layoutSetId LONG,
-	layoutSetBranchId LONG
+	layoutSetBranchId LONG,
+	layoutSetId LONG
 );
 
 alter table RatingsEntry add uuid_ VARCHAR(75) null;
