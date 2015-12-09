@@ -102,7 +102,7 @@
 
 		<execute function="AssertElementPresent" locator1="NavPill#CONTENT" />
 
-		<execute function="Click#clickAtSidebarClickAt" locator1="Icon#EDIT" />
+		<execute function="Click#clickAtSidebarClickAt" locator1="ControlMenu#EDIT" />
 
 		<execute function="Click#clickAtSidebarClickAt" locator1="Icon#PREVIEW" />
 
