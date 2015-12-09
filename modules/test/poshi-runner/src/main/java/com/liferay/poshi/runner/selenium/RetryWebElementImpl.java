@@ -468,10 +468,10 @@ public class RetryWebElementImpl
 			WebDriverHelper.getBy(_locator));
 
 		if (webElement == _webElement) {
-			System.out.println("Did not find a new web element!");
+			System.out.println("Unable to find a new web element");
 		}
 		else {
-			System.out.println("Found a new web element!");
+			System.out.println("Found a new web element");
 		}
 
 		_webElement = webElement;
