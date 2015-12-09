@@ -330,11 +330,11 @@ public class BlogsEntryStagedModelDataHandler
 				entry.getCoverImageCaption(), null, null, serviceContext);
 		}
 
-		importedEntry.setSmallImageId(smallImageFileEntryId);
-		importedEntry.setSmallImageURL(entry.getSmallImageURL());
 		importedEntry.setCoverImageFileEntryId(
 			entry.getCoverImageFileEntryId());
 		importedEntry.setCoverImageURL(entry.getCoverImageURL());
+		importedEntry.setSmallImageId(smallImageFileEntryId);
+		importedEntry.setSmallImageURL(entry.getSmallImageURL());
 
 		_blogsEntryLocalService.updateBlogsEntry(importedEntry);
 
