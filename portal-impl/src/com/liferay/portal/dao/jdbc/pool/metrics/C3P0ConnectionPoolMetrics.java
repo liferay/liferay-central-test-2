@@ -16,6 +16,7 @@ package com.liferay.portal.dao.jdbc.pool.metrics;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+
 import com.mchange.v2.c3p0.impl.AbstractPoolBackedDataSource;
 
 import java.sql.SQLException;
