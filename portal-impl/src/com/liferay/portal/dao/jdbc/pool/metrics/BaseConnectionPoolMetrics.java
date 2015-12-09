@@ -29,6 +29,7 @@ import org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy;
 public abstract class BaseConnectionPoolMetrics
 	implements ConnectionPoolMetrics {
 
+	@Override
 	public String getConnectionPoolName() {
 		if (_name == null) {
 			initializeConnectionPool();
