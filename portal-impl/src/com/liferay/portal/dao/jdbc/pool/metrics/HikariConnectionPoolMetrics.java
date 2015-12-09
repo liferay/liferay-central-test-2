@@ -17,10 +17,10 @@ package com.liferay.portal.dao.jdbc.pool.metrics;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
-import com.zaxxer.hikari.HikariDataSource;
 import com.zaxxer.hikari.HikariPoolMXBean;
 
 import java.lang.management.ManagementFactory;
+import java.lang.reflect.Method;
 
 import javax.management.JMX;
 import javax.management.MBeanServer;
@@ -31,7 +31,7 @@ import javax.management.ObjectName;
  */
 public class HikariConnectionPoolMetrics extends BaseConnectionPoolMetrics {
 
-	public HikariConnectionPoolMetrics(HikariDataSource dataSource) {
+	public HikariConnectionPoolMetrics(Object dataSource) {
 		_dataSource = dataSource;
 	}
 
@@ -70,12 +70,31 @@ public class HikariConnectionPoolMetrics extends BaseConnectionPoolMetrics {
 
 	@Override
 	protected String getPoolName() {
-		return _dataSource.getPoolName();
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+
+		try {
+			Class<?> hikariDataSourceClazz = contextClassLoader.loadClass(
+				_HIKARICP_DATASOURCE_CLASS_NAME);
+
+			Method poolNameMethod = hikariDataSourceClazz.getMethod(
+				"getPoolName");
+
+			return (String)poolNameMethod.invoke(_dataSource);
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(e.getMessage());
+			}
+		}
+
+		return null;
 	}
 
 	@Override
 	protected void initializeConnectionPool() {
-		if (_dataSource.getPoolName() == null ) {
+		if (getPoolName() == null ) {
 			_initializationFailed = true;
 
 			return;
@@ -85,8 +104,7 @@ public class HikariConnectionPoolMetrics extends BaseConnectionPoolMetrics {
 
 		try {
 			ObjectName poolName = new ObjectName(
-				"com.zaxxer.hikari:type=Pool (" +
-					_dataSource.getPoolName() + ")");
+				"com.zaxxer.hikari:type=Pool (" + getPoolName() + ")");
 
 			_connectionPool = JMX.newMXBeanProxy(
 				mBeanServer, poolName, HikariPoolMXBean.class);
@@ -102,11 +120,14 @@ public class HikariConnectionPoolMetrics extends BaseConnectionPoolMetrics {
 		super.initializeConnectionPool();
 	}
 
+	private static final String _HIKARICP_DATASOURCE_CLASS_NAME =
+		"com.zaxxer.hikari.HikariDataSource";
+
 	private static final Log _log = LogFactoryUtil.getLog(
 		HikariConnectionPoolMetrics.class);
 
 	private HikariPoolMXBean _connectionPool;
-	private final HikariDataSource _dataSource;
+	private final Object _dataSource;
 	private boolean _initializationFailed = false;
 
 }
