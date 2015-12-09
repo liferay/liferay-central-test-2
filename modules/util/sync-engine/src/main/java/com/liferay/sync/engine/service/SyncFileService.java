@@ -88,8 +88,8 @@ public class SyncFileService {
 
 		SyncFile syncFile = addSyncFile(
 			null, null, false, null, filePath.toString(),
-			Files.probeContentType(filePath), name, parentFolderId, 0,
-			repositoryId, SyncFile.STATE_SYNCED, syncAccountId,
+			Files.probeContentType(filePath), name, parentFolderId,
+			repositoryId, 0, SyncFile.STATE_SYNCED, syncAccountId,
 			SyncFile.TYPE_FOLDER);
 
 		// Remote sync file
