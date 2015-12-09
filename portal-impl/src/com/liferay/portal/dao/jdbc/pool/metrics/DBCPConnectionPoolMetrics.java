@@ -25,10 +25,12 @@ public class DBCPConnectionPoolMetrics extends BaseConnectionPoolMetrics {
 		_basicDataSource = basicDataSource;
 	}
 
+	@Override
 	public int getNumActive() {
 		return _basicDataSource.getNumActive();
 	}
 
+	@Override
 	public int getNumIdle() {
 		return _basicDataSource.getNumIdle();
 	}
