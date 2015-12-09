@@ -98,7 +98,7 @@
 
 		<execute function="AssertVisible" locator1="SOUserBar#USER_BAR" />
 
-		<execute function="Click#clickAtSidebarClickAtWaitForScript" locator1="Icon#ADD" />
+		<execute function="Click#clickAtSidebarClickAtWaitForScript" locator1="ControlMenu#ADD" />
 
 		<execute function="AssertElementPresent" locator1="NavPill#CONTENT" />
 
