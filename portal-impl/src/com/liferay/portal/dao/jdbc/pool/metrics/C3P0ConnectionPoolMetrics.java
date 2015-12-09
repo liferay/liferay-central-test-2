@@ -16,7 +16,6 @@ package com.liferay.portal.dao.jdbc.pool.metrics;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-
 import com.mchange.v2.c3p0.impl.AbstractPoolBackedDataSource;
 
 import java.sql.SQLException;
@@ -32,6 +31,7 @@ public class C3P0ConnectionPoolMetrics extends BaseConnectionPoolMetrics {
 		_abstractPoolBackedDataSource = abstractPoolBackedDataSource;
 	}
 
+	@Override
 	public int getNumActive() {
 		try {
 			return _abstractPoolBackedDataSource.getNumBusyConnections();
@@ -45,6 +45,7 @@ public class C3P0ConnectionPoolMetrics extends BaseConnectionPoolMetrics {
 		}
 	}
 
+	@Override
 	public int getNumIdle() {
 		try {
 			return _abstractPoolBackedDataSource.getNumIdleConnections();

@@ -16,7 +16,6 @@ package com.liferay.portal.dao.jdbc.pool.metrics;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-
 import com.zaxxer.hikari.HikariPoolMXBean;
 
 import java.lang.management.ManagementFactory;
@@ -35,6 +34,7 @@ public class HikariConnectionPoolMetrics extends BaseConnectionPoolMetrics {
 		_dataSource = dataSource;
 	}
 
+	@Override
 	public int getNumActive() {
 		if (!_initializationFailed && (_connectionPool == null)) {
 			initializeConnectionPool();
@@ -47,6 +47,7 @@ public class HikariConnectionPoolMetrics extends BaseConnectionPoolMetrics {
 		return _connectionPool.getActiveConnections();
 	}
 
+	@Override
 	public int getNumIdle() {
 		if (!_initializationFailed && (_connectionPool == null)) {
 			initializeConnectionPool();

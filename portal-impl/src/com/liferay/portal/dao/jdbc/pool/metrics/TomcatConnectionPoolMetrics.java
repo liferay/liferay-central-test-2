@@ -25,10 +25,12 @@ public class TomcatConnectionPoolMetrics extends BaseConnectionPoolMetrics {
 		_dataSourceProxy = dataSourceProxy;
 	}
 
+	@Override
 	public int getNumActive() {
 		return _dataSourceProxy.getNumActive();
 	}
 
+	@Override
 	public int getNumIdle() {
 		return _dataSourceProxy.getNumIdle();
 	}
