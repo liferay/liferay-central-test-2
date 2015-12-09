@@ -685,7 +685,9 @@
 					<execute function="Click" locator1="Icon#LIST_VERTICAL_ELLIPSIS" />
 
 					<execute function="AssertClick" locator1="MenuItem#REQUEST_MEMBERSHIP" value1="Request Membership" />
+
 					<execute function="Type" locator1="TextArea#COMMENTS" value1="Please allow me to join the Restricted Site." />
+
 					<execute function="AssertClick" locator1="Button#SAVE" value1="Save" />
 
 					<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request completed successfully." />
@@ -702,10 +704,11 @@
 				<execute function="Click" locator1="Icon#LIST_VERTICAL_ELLIPSIS" />
 
 				<execute function="AssertClick" locator1="MenuItem#JOIN" value1="Join" />
+
 				<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request completed successfully." />
 				<execute function="AssertTextEquals" locator1="MySites#SITE_TABLE_SITE_NAME" value1="${siteName}" />
 				<execute function="AssertTextEquals" locator1="MySites#SITE_TABLE_SITE_NAME_MEMBERS" value1="2" />
-				
+
 				<execute function="Click" locator1="Icon#LIST_VERTICAL_ELLIPSIS" />
 
 				<execute function="AssertVisible" locator1="MenuItem#LEAVE" />
@@ -718,9 +721,13 @@
 
 		<execute function="AssertTextEquals" locator1="MySites#SITE_TABLE_SITE_NAME" value1="${siteName}" />
 		<execute function="AssertTextEquals" locator1="MySites#SITE_TABLE_SITE_NAME_MEMBERS" value1="2" />
+
 		<execute function="AssertClick" locator1="NavBar#AVAILABLE_SITES" value1="Available Sites" />
+
 		<execute function="Type" locator1="NavBar#BASIC_SEARCH_FIELD" value1="${siteName}" />
+
 		<execute function="Click" locator1="Icon#BASIC_SEARCH" />
+
 		<execute function="AssertTextEquals" locator1="MySites#SITE_TABLE_SITE_NAME" value1="${siteName}" />
 		<execute function="AssertTextEquals" locator1="MySites#SITE_TABLE_SITE_NAME_MEMBERS" value1="2" />
 
@@ -729,6 +736,7 @@
 		<execute function="Click" locator1="Icon#LIST_VERTICAL_ELLIPSIS" />
 
 		<execute function="AssertClick" locator1="MenuItem#LEAVE" value1="Leave" />
+
 		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request completed successfully." />
 		<execute function="AssertTextEquals" locator1="MySites#SITE_TABLE_SITE_NAME" value1="${siteName}" />
 		<execute function="AssertTextEquals" locator1="MySites#SITE_TABLE_SITE_NAME_MEMBERS" value1="1" />
