@@ -589,6 +589,10 @@
 
 		<execute function="Pause" locator1="180000" />
 
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="Documents and Media Page" />
+		</execute>
+
 		<execute macro="DMNavigator#gotoDocumentPG">
 			<var name="dmDocumentTitle" value="Document_1.mp4" />
 		</execute>
