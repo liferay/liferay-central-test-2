@@ -380,10 +380,10 @@ public class StagingUtil {
 		return _staging.getStagedPortletId(portletId);
 	}
 
-	public static long[] getStagingAndLiveGroupId(long groupId)
+	public static long[] getStagingAndLiveGroupIds(long groupId)
 		throws PortalException {
 
-		return _staging.getStagingAndLiveGroupId(groupId);
+		return _staging.getStagingAndLiveGroupIds(groupId);
 	}
 
 	public static Group getStagingGroup(long groupId) {
