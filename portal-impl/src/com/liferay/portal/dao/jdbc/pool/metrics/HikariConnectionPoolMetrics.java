@@ -16,6 +16,7 @@ package com.liferay.portal.dao.jdbc.pool.metrics;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+
 import com.zaxxer.hikari.HikariPoolMXBean;
 
 import java.lang.management.ManagementFactory;

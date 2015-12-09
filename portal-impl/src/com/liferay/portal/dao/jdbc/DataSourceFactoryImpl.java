@@ -269,7 +269,6 @@ public class DataSourceFactoryImpl implements DataSourceFactory {
 			}
 		}
 
-
 		registerConnectionPoolMetrics(
 			new C3P0ConnectionPoolMetrics(comboPooledDataSource));
 
@@ -279,13 +278,13 @@ public class DataSourceFactoryImpl implements DataSourceFactory {
 	protected DataSource initDataSourceDBCP(Properties properties)
 		throws Exception {
 
-		DataSource basicDataSource = BasicDataSourceFactory.createDataSource(
+		DataSource dataSource = BasicDataSourceFactory.createDataSource(
 			properties);
 
 		registerConnectionPoolMetrics(
-			new DBCPConnectionPoolMetrics((BasicDataSource)basicDataSource));
+			new DBCPConnectionPoolMetrics((BasicDataSource)dataSource));
 
-		return basicDataSource;
+		return dataSource;
 	}
 
 	protected DataSource initDataSourceHikariCP(Properties properties)
