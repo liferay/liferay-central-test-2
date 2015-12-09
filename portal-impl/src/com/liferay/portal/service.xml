@@ -1763,9 +1763,9 @@
 
 		<!-- Other fields -->
 
+		<column name="layoutBranchId" type="long" />
 		<column name="layoutSetBranchId" type="long" />
 		<column name="plid" type="long" />
-		<column name="layoutBranchId" type="long" />
 
 		<!-- Finder methods -->
 
@@ -1801,9 +1801,9 @@
 
 		<!-- Other fields -->
 
+		<column name="layoutRevisionId" type="long" />
 		<column name="layoutSetBranchId" type="long" />
 		<column name="plid" type="long" />
-		<column name="layoutRevisionId" type="long" />
 
 		<!-- Finder methods -->
 
@@ -1839,8 +1839,8 @@
 
 		<!-- Other fields -->
 
-		<column name="layoutSetId" type="long" />
 		<column name="layoutSetBranchId" type="long" />
+		<column name="layoutSetId" type="long" />
 
 		<!-- Finder methods -->
 
