@@ -71,6 +71,8 @@ alter table LayoutSetBranch drop column logo;
 
 alter table Organization_ add logoId LONG;
 
+alter table RatingsEntry add uuid_ VARCHAR(75) null;
+
 create table RecentLayoutBranch (
 	mvccVersion LONG default 0,
 	recentLayoutBranchId LONG not null primary key,
@@ -102,8 +104,6 @@ create table RecentLayoutSetBranch (
 	layoutSetBranchId LONG,
 	layoutSetId LONG
 );
-
-alter table RatingsEntry add uuid_ VARCHAR(75) null;
 
 insert into Region (regionId, countryId, regionCode, name, active_) values (33001, 33, 'AT-1', 'Burgenland', TRUE);
 insert into Region (regionId, countryId, regionCode, name, active_) values (33002, 33, 'AT-2', 'Kärnten', TRUE);
