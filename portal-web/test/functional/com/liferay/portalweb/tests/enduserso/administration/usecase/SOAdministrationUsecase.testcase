@@ -104,7 +104,7 @@
 
 		<execute function="Click#clickAtSidebarClickAt" locator1="ControlMenu#EDIT" />
 
-		<execute function="Click#clickAtSidebarClickAt" locator1="Icon#PREVIEW" />
+		<execute function="Click#clickAtSidebarClickAt" locator1="ControlMenu#SIMULATION" />
 
 		<execute function="AssertElementPresent" locator1="ControlMenuPreviewPanel#PREVIEW_AUTOSIZE" />
 
