@@ -120,7 +120,7 @@
 </tr>
 <tr>
 	<td>EDIT</td>
-	<td>//a[contains(@id,'ControlMenuPortlet') and i[contains(@class,'icon-cog')]]</td>
+	<td>//i[@class='icon-edit-sign']</td>
 	<td></td>
 </tr>
 <tr>
