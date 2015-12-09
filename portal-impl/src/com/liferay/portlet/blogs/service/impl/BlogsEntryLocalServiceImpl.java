@@ -190,7 +190,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 				}
 				catch (IOException ioe) {
 					if (_log.isErrorEnabled()) {
-						_log.error("Could not create the image selector", ioe);
+						_log.error("Unable to create image selector", ioe);
 					}
 				}
 			}
@@ -1224,7 +1224,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 				}
 				catch (IOException ioe) {
 					if (_log.isErrorEnabled()) {
-						_log.error("Could not create the image selector", ioe);
+						_log.error("Unable to create image selector", ioe);
 					}
 				}
 			}
