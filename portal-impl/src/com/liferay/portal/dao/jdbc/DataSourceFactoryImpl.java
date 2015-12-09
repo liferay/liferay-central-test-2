@@ -45,8 +45,6 @@ import com.liferay.registry.ServiceTrackerCustomizer;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
-import com.zaxxer.hikari.HikariDataSource;
-
 import java.net.URL;
 import java.net.URLClassLoader;
 
@@ -355,7 +353,7 @@ public class DataSourceFactoryImpl implements DataSourceFactory {
 		}
 
 		HikariConnectionPoolMetrics connectionPoolMetrics =
-			new HikariConnectionPoolMetrics((HikariDataSource)hikariDataSource);
+			new HikariConnectionPoolMetrics(hikariDataSource);
 
 		registerConnectionPoolMetrics(connectionPoolMetrics);
 
