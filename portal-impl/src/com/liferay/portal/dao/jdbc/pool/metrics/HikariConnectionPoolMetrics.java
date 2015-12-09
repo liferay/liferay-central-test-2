@@ -75,13 +75,12 @@ public class HikariConnectionPoolMetrics extends BaseConnectionPoolMetrics {
 		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
 		try {
-			Class<?> hikariDataSourceClazz = contextClassLoader.loadClass(
+			Class<?> clazz = contextClassLoader.loadClass(
 				"com.zaxxer.hikari.HikariDataSource");
 
-			Method poolNameMethod = hikariDataSourceClazz.getMethod(
-				"getPoolName");
+			Method method = clazz.getMethod("getPoolName");
 
-			return (String)poolNameMethod.invoke(_dataSource);
+			return (String)method.invoke(_dataSource);
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
@@ -103,11 +102,11 @@ public class HikariConnectionPoolMetrics extends BaseConnectionPoolMetrics {
 		MBeanServer mBeanServer = ManagementFactory.getPlatformMBeanServer();
 
 		try {
-			ObjectName poolName = new ObjectName(
+			ObjectName objectName = new ObjectName(
 				"com.zaxxer.hikari:type=Pool (" + getPoolName() + ")");
 
 			_connectionPool = JMX.newMXBeanProxy(
-				mBeanServer, poolName, HikariPoolMXBean.class);
+				mBeanServer, objectName, HikariPoolMXBean.class);
 		}
 		catch (Exception e) {
 			_initializationFailed = true;
