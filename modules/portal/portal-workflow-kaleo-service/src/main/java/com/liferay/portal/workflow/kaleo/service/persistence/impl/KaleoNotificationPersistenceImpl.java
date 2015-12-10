@@ -2507,8 +2507,6 @@ public class KaleoNotificationPersistenceImpl extends BasePersistenceImpl<KaleoN
 		kaleoNotification.setNew(true);
 		kaleoNotification.setPrimaryKey(kaleoNotificationId);
 
-		kaleoNotification.setCompanyId(companyProvider.getCompanyId());
-
 		return kaleoNotification;
 	}
 

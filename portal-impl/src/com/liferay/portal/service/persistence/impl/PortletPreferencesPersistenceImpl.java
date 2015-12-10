@@ -4660,8 +4660,6 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 		portletPreferences.setNew(true);
 		portletPreferences.setPrimaryKey(portletPreferencesId);
 
-		portletPreferences.setCompanyId(companyProvider.getCompanyId());
-
 		return portletPreferences;
 	}
 

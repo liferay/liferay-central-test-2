@@ -1469,8 +1469,6 @@ public class KaleoConditionPersistenceImpl extends BasePersistenceImpl<KaleoCond
 		kaleoCondition.setNew(true);
 		kaleoCondition.setPrimaryKey(kaleoConditionId);
 
-		kaleoCondition.setCompanyId(companyProvider.getCompanyId());
-
 		return kaleoCondition;
 	}
 

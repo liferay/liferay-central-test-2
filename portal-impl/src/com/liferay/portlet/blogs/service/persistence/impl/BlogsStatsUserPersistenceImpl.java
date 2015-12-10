@@ -3114,8 +3114,6 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 		blogsStatsUser.setNew(true);
 		blogsStatsUser.setPrimaryKey(statsUserId);
 
-		blogsStatsUser.setCompanyId(companyProvider.getCompanyId());
-
 		return blogsStatsUser;
 	}
 

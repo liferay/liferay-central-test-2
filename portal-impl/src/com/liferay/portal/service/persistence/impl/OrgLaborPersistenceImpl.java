@@ -687,8 +687,6 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 		orgLabor.setNew(true);
 		orgLabor.setPrimaryKey(orgLaborId);
 
-		orgLabor.setCompanyId(companyProvider.getCompanyId());
-
 		return orgLabor;
 	}
 

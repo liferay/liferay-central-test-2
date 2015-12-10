@@ -2135,8 +2135,6 @@ public class MDRActionPersistenceImpl extends BasePersistenceImpl<MDRAction>
 
 		mdrAction.setUuid(uuid);
 
-		mdrAction.setCompanyId(companyProvider.getCompanyId());
-
 		return mdrAction;
 	}
 

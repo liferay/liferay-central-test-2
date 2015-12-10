@@ -2454,8 +2454,6 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 
 		repositoryEntry.setUuid(uuid);
 
-		repositoryEntry.setCompanyId(companyProvider.getCompanyId());
-
 		return repositoryEntry;
 	}
 

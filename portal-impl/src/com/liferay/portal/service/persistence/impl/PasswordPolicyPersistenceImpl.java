@@ -3605,8 +3605,6 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 
 		passwordPolicy.setUuid(uuid);
 
-		passwordPolicy.setCompanyId(companyProvider.getCompanyId());
-
 		return passwordPolicy;
 	}
 

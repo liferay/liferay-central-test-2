@@ -1326,8 +1326,6 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 		userIdMapper.setNew(true);
 		userIdMapper.setPrimaryKey(userIdMapperId);
 
-		userIdMapper.setCompanyId(companyProvider.getCompanyId());
-
 		return userIdMapper;
 	}
 

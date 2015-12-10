@@ -462,8 +462,6 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 		webDAVProps.setNew(true);
 		webDAVProps.setPrimaryKey(webDavPropsId);
 
-		webDAVProps.setCompanyId(companyProvider.getCompanyId());
-
 		return webDAVProps;
 	}
 

@@ -2513,8 +2513,6 @@ public class KaleoTaskAssignmentPersistenceImpl extends BasePersistenceImpl<Kale
 		kaleoTaskAssignment.setNew(true);
 		kaleoTaskAssignment.setPrimaryKey(kaleoTaskAssignmentId);
 
-		kaleoTaskAssignment.setCompanyId(companyProvider.getCompanyId());
-
 		return kaleoTaskAssignment;
 	}
 

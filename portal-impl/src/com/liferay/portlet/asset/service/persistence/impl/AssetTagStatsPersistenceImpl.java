@@ -1473,8 +1473,6 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 		assetTagStats.setNew(true);
 		assetTagStats.setPrimaryKey(tagStatsId);
 
-		assetTagStats.setCompanyId(companyProvider.getCompanyId());
-
 		return assetTagStats;
 	}
 

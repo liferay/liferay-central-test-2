@@ -3363,8 +3363,6 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 
 		mbBan.setUuid(uuid);
 
-		mbBan.setCompanyId(companyProvider.getCompanyId());
-
 		return mbBan;
 	}
 

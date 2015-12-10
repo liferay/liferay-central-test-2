@@ -1459,8 +1459,6 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl<ExpandoRow>
 		expandoRow.setNew(true);
 		expandoRow.setPrimaryKey(rowId);
 
-		expandoRow.setCompanyId(companyProvider.getCompanyId());
-
 		return expandoRow;
 	}
 

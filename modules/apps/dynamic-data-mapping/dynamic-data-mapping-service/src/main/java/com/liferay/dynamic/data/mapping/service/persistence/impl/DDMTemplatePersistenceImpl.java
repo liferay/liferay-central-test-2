@@ -12092,8 +12092,6 @@ public class DDMTemplatePersistenceImpl extends BasePersistenceImpl<DDMTemplate>
 
 		ddmTemplate.setUuid(uuid);
 
-		ddmTemplate.setCompanyId(companyProvider.getCompanyId());
-
 		return ddmTemplate;
 	}
 

@@ -2737,8 +2737,6 @@ public class SocialActivityCounterPersistenceImpl extends BasePersistenceImpl<So
 		socialActivityCounter.setNew(true);
 		socialActivityCounter.setPrimaryKey(activityCounterId);
 
-		socialActivityCounter.setCompanyId(companyProvider.getCompanyId());
-
 		return socialActivityCounter;
 	}
 

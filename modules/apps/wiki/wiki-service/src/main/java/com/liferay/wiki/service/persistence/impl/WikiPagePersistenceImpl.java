@@ -22099,8 +22099,6 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 		wikiPage.setUuid(uuid);
 
-		wikiPage.setCompanyId(companyProvider.getCompanyId());
-
 		return wikiPage;
 	}
 

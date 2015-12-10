@@ -2587,8 +2587,6 @@ public class CalendarNotificationTemplatePersistenceImpl
 
 		calendarNotificationTemplate.setUuid(uuid);
 
-		calendarNotificationTemplate.setCompanyId(companyProvider.getCompanyId());
-
 		return calendarNotificationTemplate;
 	}
 

@@ -2123,8 +2123,6 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 		assetCategoryProperty.setNew(true);
 		assetCategoryProperty.setPrimaryKey(categoryPropertyId);
 
-		assetCategoryProperty.setCompanyId(companyProvider.getCompanyId());
-
 		return assetCategoryProperty;
 	}
 
