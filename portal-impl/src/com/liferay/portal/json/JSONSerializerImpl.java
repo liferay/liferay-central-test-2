@@ -111,8 +111,8 @@ public class JSONSerializerImpl implements JSONSerializer {
 		implements TypeJsonSerializer<JSONArray> {
 
 		@Override
-		public void serialize(JsonContext jsonContext, JSONArray value) {
-			jsonContext.write(value.toString());
+		public void serialize(JsonContext jsonContext, JSONArray jsonArray) {
+			jsonContext.write(jsonArray.toString());
 		}
 
 	}
@@ -121,8 +121,8 @@ public class JSONSerializerImpl implements JSONSerializer {
 		implements TypeJsonSerializer<JSONObject> {
 
 		@Override
-		public void serialize(JsonContext jsonContext, JSONObject value) {
-			jsonContext.write(value.toString());
+		public void serialize(JsonContext jsonContext, JSONObject jsonObject) {
+			jsonContext.write(jsonObject.toString());
 		}
 
 	}
