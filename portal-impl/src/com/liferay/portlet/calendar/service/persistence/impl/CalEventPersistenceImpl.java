@@ -5543,8 +5543,6 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 		calEvent.setUuid(uuid);
 
-		calEvent.setCompanyId(companyProvider.getCompanyId());
-
 		return calEvent;
 	}
 

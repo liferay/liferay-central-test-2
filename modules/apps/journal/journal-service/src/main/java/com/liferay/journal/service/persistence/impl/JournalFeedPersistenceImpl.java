@@ -2786,8 +2786,6 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 
 		journalFeed.setUuid(uuid);
 
-		journalFeed.setCompanyId(companyProvider.getCompanyId());
-
 		return journalFeed;
 	}
 

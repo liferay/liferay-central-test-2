@@ -1547,8 +1547,6 @@ public class MeetupsRegistrationPersistenceImpl extends BasePersistenceImpl<Meet
 		meetupsRegistration.setNew(true);
 		meetupsRegistration.setPrimaryKey(meetupsRegistrationId);
 
-		meetupsRegistration.setCompanyId(companyProvider.getCompanyId());
-
 		return meetupsRegistration;
 	}
 

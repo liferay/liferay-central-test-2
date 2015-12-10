@@ -4950,8 +4950,6 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 
 		announcementsEntry.setUuid(uuid);
 
-		announcementsEntry.setCompanyId(companyProvider.getCompanyId());
-
 		return announcementsEntry;
 	}
 

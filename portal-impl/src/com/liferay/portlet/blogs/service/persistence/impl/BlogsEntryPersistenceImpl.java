@@ -18372,8 +18372,6 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 		blogsEntry.setUuid(uuid);
 
-		blogsEntry.setCompanyId(companyProvider.getCompanyId());
-
 		return blogsEntry;
 	}
 

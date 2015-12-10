@@ -6135,8 +6135,6 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 		dlFileShortcut.setUuid(uuid);
 
-		dlFileShortcut.setCompanyId(companyProvider.getCompanyId());
-
 		return dlFileShortcut;
 	}
 

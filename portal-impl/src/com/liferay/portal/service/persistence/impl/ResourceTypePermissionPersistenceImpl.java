@@ -1706,8 +1706,6 @@ public class ResourceTypePermissionPersistenceImpl extends BasePersistenceImpl<R
 		resourceTypePermission.setNew(true);
 		resourceTypePermission.setPrimaryKey(resourceTypePermissionId);
 
-		resourceTypePermission.setCompanyId(companyProvider.getCompanyId());
-
 		return resourceTypePermission;
 	}
 

@@ -1009,8 +1009,6 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 		announcementsDelivery.setNew(true);
 		announcementsDelivery.setPrimaryKey(deliveryId);
 
-		announcementsDelivery.setCompanyId(companyProvider.getCompanyId());
-
 		return announcementsDelivery;
 	}
 

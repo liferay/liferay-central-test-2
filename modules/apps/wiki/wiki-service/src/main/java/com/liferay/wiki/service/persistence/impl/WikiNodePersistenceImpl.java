@@ -4724,8 +4724,6 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 
 		wikiNode.setUuid(uuid);
 
-		wikiNode.setCompanyId(companyProvider.getCompanyId());
-
 		return wikiNode;
 	}
 

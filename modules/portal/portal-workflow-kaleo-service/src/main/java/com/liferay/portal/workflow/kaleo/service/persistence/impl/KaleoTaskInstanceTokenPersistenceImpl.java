@@ -2644,8 +2644,6 @@ public class KaleoTaskInstanceTokenPersistenceImpl extends BasePersistenceImpl<K
 		kaleoTaskInstanceToken.setNew(true);
 		kaleoTaskInstanceToken.setPrimaryKey(kaleoTaskInstanceTokenId);
 
-		kaleoTaskInstanceToken.setCompanyId(companyProvider.getCompanyId());
-
 		return kaleoTaskInstanceToken;
 	}
 

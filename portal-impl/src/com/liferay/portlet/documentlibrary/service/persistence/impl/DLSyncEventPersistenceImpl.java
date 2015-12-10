@@ -920,8 +920,6 @@ public class DLSyncEventPersistenceImpl extends BasePersistenceImpl<DLSyncEvent>
 		dlSyncEvent.setNew(true);
 		dlSyncEvent.setPrimaryKey(syncEventId);
 
-		dlSyncEvent.setCompanyId(companyProvider.getCompanyId());
-
 		return dlSyncEvent;
 	}
 

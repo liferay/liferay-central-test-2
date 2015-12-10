@@ -2627,8 +2627,6 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 
 		ddmContent.setUuid(uuid);
 
-		ddmContent.setCompanyId(companyProvider.getCompanyId());
-
 		return ddmContent;
 	}
 

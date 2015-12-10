@@ -5097,8 +5097,6 @@ public class LayoutFriendlyURLPersistenceImpl extends BasePersistenceImpl<Layout
 
 		layoutFriendlyURL.setUuid(uuid);
 
-		layoutFriendlyURL.setCompanyId(companyProvider.getCompanyId());
-
 		return layoutFriendlyURL;
 	}
 

@@ -696,8 +696,6 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 		userTrackerPath.setNew(true);
 		userTrackerPath.setPrimaryKey(userTrackerPathId);
 
-		userTrackerPath.setCompanyId(companyProvider.getCompanyId());
-
 		return userTrackerPath;
 	}
 

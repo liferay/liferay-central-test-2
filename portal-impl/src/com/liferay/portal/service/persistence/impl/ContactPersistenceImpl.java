@@ -1719,8 +1719,6 @@ public class ContactPersistenceImpl extends BasePersistenceImpl<Contact>
 		contact.setNew(true);
 		contact.setPrimaryKey(contactId);
 
-		contact.setCompanyId(companyProvider.getCompanyId());
-
 		return contact;
 	}
 

@@ -2570,8 +2570,6 @@ public class TrashEntryPersistenceImpl extends BasePersistenceImpl<TrashEntry>
 		trashEntry.setNew(true);
 		trashEntry.setPrimaryKey(entryId);
 
-		trashEntry.setCompanyId(companyProvider.getCompanyId());
-
 		return trashEntry;
 	}
 

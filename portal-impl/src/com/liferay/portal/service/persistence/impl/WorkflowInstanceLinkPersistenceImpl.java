@@ -819,8 +819,6 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 		workflowInstanceLink.setNew(true);
 		workflowInstanceLink.setPrimaryKey(workflowInstanceLinkId);
 
-		workflowInstanceLink.setCompanyId(companyProvider.getCompanyId());
-
 		return workflowInstanceLink;
 	}
 

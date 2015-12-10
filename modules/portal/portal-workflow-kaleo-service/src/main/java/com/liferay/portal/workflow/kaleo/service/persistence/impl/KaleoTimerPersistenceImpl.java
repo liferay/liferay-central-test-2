@@ -1418,8 +1418,6 @@ public class KaleoTimerPersistenceImpl extends BasePersistenceImpl<KaleoTimer>
 		kaleoTimer.setNew(true);
 		kaleoTimer.setPrimaryKey(kaleoTimerId);
 
-		kaleoTimer.setCompanyId(companyProvider.getCompanyId());
-
 		return kaleoTimer;
 	}
 
