@@ -28,8 +28,8 @@ FileEntry fileEntry = (FileEntry)row.getObject();
 	<liferay-ui:icon-menu direction="left-side" icon="<%= StringPool.BLANK %>" markupView="lexicon" message="<%= StringPool.BLANK %>" showWhenSingleIcon="<%= true %>">
 		<portlet:actionURL name="/blogs/edit_image" var="deleteImageURL">
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-			<portlet:param name="fileEntryId" value="<%= String.valueOf(fileEntry.getFileEntryId()) %>" />
 			<portlet:param name="redirect" value="<%= portletURL.toString() %>" />
+			<portlet:param name="fileEntryId" value="<%= String.valueOf(fileEntry.getFileEntryId()) %>" />
 		</portlet:actionURL>
 
 		<liferay-ui:icon-delete trash="<%= false %>" url="<%= deleteImageURL %>" />
