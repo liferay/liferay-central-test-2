@@ -314,7 +314,7 @@ pluginManager.withPlugin("com.liferay.portal.tools.service.builder") {
 			serviceBuilder fileTree(dir: new File(portalRootDir, "tools/sdk/tmp/portal-tools/portal-tools-service-builder"), include: "*.jar")
 		}
 		else {
-			serviceBuilder group: "com.liferay", name: "com.liferay.portal.tools.service.builder", version: "1.0.62"
+			serviceBuilder group: "com.liferay", name: "com.liferay.portal.tools.service.builder", version: "1.0.61"
 		}
 	}
 }
