@@ -23,15 +23,15 @@ Folder folder = (Folder)row.getObject();
 
 folder = folder.toEscapedModel();
 
+Date modifiedDate = folder.getModifiedDate();
+
+String modifiedDateDescription = LanguageUtil.getTimeDescription(request, System.currentTimeMillis() - modifiedDate.getTime(), true);
+
 PortletURL rowURL = liferayPortletResponse.createRenderURL();
 
 rowURL.setParameter("mvcRenderCommandName", "/document_library/view");
 rowURL.setParameter("redirect", currentURL);
 rowURL.setParameter("folderId", String.valueOf(folder.getFolderId()));
-
-Date modifiedDate = folder.getModifiedDate();
-
-String modifiedDateDescription = LanguageUtil.getTimeDescription(request, System.currentTimeMillis() - modifiedDate.getTime(), true);
 %>
 
 <h5 class="text-default">
