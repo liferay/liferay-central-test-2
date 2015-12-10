@@ -76,6 +76,7 @@ public class EntriesChecker extends EmptyOnClickRowChecker {
 
 		BookmarksEntry entry =
 			BookmarksEntryLocalServiceUtil.fetchBookmarksEntry(entryId);
+
 		BookmarksFolder folder = null;
 
 		if (entry == null) {
