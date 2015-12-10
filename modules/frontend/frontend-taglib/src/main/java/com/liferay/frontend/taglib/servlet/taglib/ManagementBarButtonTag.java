@@ -116,6 +116,7 @@ public class ManagementBarButtonTag extends IncludeTag {
 
 		request.setAttribute(
 			"liferay-frontend:management-bar-button:data", _data);
+
 		request.setAttribute(
 			"liferay-frontend:management-bar-button:href", _href);
 		request.setAttribute(
