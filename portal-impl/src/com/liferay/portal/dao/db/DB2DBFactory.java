@@ -21,7 +21,7 @@ import com.liferay.portal.kernel.dao.db.DBType;
 /**
  * @author Shuyang Zhou
  */
-public class DB2DBCreator implements DBFactory {
+public class DB2DBFactory implements DBFactory {
 
 	@Override
 	public DB create(int dbMajorVersion, int dbMinorVersion) {
