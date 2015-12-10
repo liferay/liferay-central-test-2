@@ -15,22 +15,22 @@
 package com.liferay.portal.dao.db;
 
 import com.liferay.portal.kernel.dao.db.DB;
-import com.liferay.portal.kernel.dao.db.DBCreator;
+import com.liferay.portal.kernel.dao.db.DBFactory;
 import com.liferay.portal.kernel.dao.db.DBType;
 
 /**
  * @author Shuyang Zhou
  */
-public class PostgreSQLDBCreator implements DBCreator {
+public class SQLServerDBFactory implements DBFactory {
 
 	@Override
 	public DB create(int dbMajorVersion, int dbMinorVersion) {
-		return new PostgreSQLDB(dbMajorVersion, dbMinorVersion);
+		return new SQLServerDB(dbMajorVersion, dbMinorVersion);
 	}
 
 	@Override
 	public DBType getDBType() {
-		return DBType.POSTGRESQL;
+		return DBType.SQLSERVER;
 	}
 
 }

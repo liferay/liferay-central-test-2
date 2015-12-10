@@ -16,7 +16,7 @@ package com.liferay.portal.dao.db;
 
 import com.liferay.portal.dao.orm.hibernate.DialectImpl;
 import com.liferay.portal.kernel.dao.db.DB;
-import com.liferay.portal.kernel.dao.db.DBCreator;
+import com.liferay.portal.kernel.dao.db.DBFactory;
 import com.liferay.portal.kernel.dao.db.DBManager;
 import com.liferay.portal.kernel.dao.db.DBType;
 import com.liferay.portal.kernel.log.Log;
@@ -58,9 +58,9 @@ import org.hibernate.dialect.SybaseDialect;
 public class DBManagerImpl implements DBManager {
 
 	public DBManagerImpl() {
-		for (DBCreator dbCreator :
+		for (DBFactory dbCreator :
 				ServiceLoader.load(
-					DBCreator.class, DBManagerImpl.class.getClassLoader())) {
+					DBFactory.class, DBManagerImpl.class.getClassLoader())) {
 
 			_dbCreators.put(dbCreator.getDBType(), dbCreator);
 		}
@@ -107,7 +107,7 @@ public class DBManagerImpl implements DBManager {
 			}
 		}
 
-		DBCreator dbCreator = _dbCreators.get(dbType);
+		DBFactory dbCreator = _dbCreators.get(dbType);
 
 		if (dbCreator == null) {
 			throw new IllegalArgumentException(
@@ -178,7 +178,7 @@ public class DBManagerImpl implements DBManager {
 	private static final Log _log = LogFactoryUtil.getLog(DBManagerImpl.class);
 
 	private DB _db;
-	private final EnumMap<DBType, DBCreator> _dbCreators = new EnumMap<>(
+	private final EnumMap<DBType, DBFactory> _dbCreators = new EnumMap<>(
 		DBType.class);
 
 }

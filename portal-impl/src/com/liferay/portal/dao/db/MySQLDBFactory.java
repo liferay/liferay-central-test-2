@@ -12,15 +12,25 @@
  * details.
  */
 
-package com.liferay.portal.kernel.dao.db;
+package com.liferay.portal.dao.db;
+
+import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.DBFactory;
+import com.liferay.portal.kernel.dao.db.DBType;
 
 /**
  * @author Shuyang Zhou
  */
-public interface DBCreator {
+public class MySQLDBFactory implements DBFactory {
 
-	public DB create(int dbMajorVersion, int dbMinorVersion);
+	@Override
+	public DB create(int dbMajorVersion, int dbMinorVersion) {
+		return new MySQLDB(dbMajorVersion, dbMinorVersion);
+	}
 
-	public DBType getDBType();
+	@Override
+	public DBType getDBType() {
+		return DBType.MYSQL;
+	}
 
 }
