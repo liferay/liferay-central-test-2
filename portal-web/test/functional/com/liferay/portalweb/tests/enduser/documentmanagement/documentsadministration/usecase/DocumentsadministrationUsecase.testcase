@@ -967,8 +967,8 @@
 			<var name="userEmailAddress" value="userea@liferay.com" />
 		</execute>
 
-		<execute macro="Page#gotoPG">
-			<var name="pageName" value="Documents and Media Page" />
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Documents and Media" />
 		</execute>
 
 		<execute macro="DMNavigator#gotoDocumentType" />
@@ -991,8 +991,8 @@
 
 		<execute macro="DMDocument#viewCannotAddRepository" />
 
-		<execute macro="Page#gotoPG">
-			<var name="pageName" value="Documents and Media Page" />
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Documents and Media" />
 		</execute>
 
 		<execute macro="DMDocumentType#viewNoAvailableActionsViaDocumentTypesPG" />
