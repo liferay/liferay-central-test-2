@@ -141,6 +141,8 @@ public class DDLFormPortlet extends MVCPortlet {
 		DDMFormRenderingContext ddmFormRenderingContext =
 			new DDMFormRenderingContext();
 
+		ddmFormRenderingContext.setDDMFormValues(
+			_ddmFormValuesFactory.create(renderRequest, ddmForm));
 		ddmFormRenderingContext.setHttpServletRequest(
 			PortalUtil.getHttpServletRequest(renderRequest));
 		ddmFormRenderingContext.setHttpServletResponse(
@@ -149,8 +151,6 @@ public class DDLFormPortlet extends MVCPortlet {
 			LocaleUtil.fromLanguageId(languageId));
 		ddmFormRenderingContext.setPortletNamespace(
 			renderResponse.getNamespace());
-		ddmFormRenderingContext.setDDMFormValues(
-			_ddmFormValuesFactory.create(renderRequest, ddmForm));
 
 		return ddmFormRenderingContext;
 	}
@@ -226,12 +226,12 @@ public class DDLFormPortlet extends MVCPortlet {
 		DDMForm ddmForm = getDDMForm(
 			renderResponse, ddmStructure, requireCaptcha);
 
+		DDMFormLayout ddmFormLayout = getDDMFormLayout(
+			ddmStructure, requireCaptcha);
+
 		DDMFormRenderingContext ddmFormRenderingContext =
 			createDDMFormRenderingContext(
 				renderRequest, renderResponse, ddmForm);
-
-		DDMFormLayout ddmFormLayout = getDDMFormLayout(
-			ddmStructure, requireCaptcha);
 
 		return _ddmFormRenderer.render(
 			ddmForm, ddmFormLayout, ddmFormRenderingContext);
