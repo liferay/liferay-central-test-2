@@ -85,10 +85,11 @@ public class LanguageFilter extends BasePortalFilter {
 					}
 
 					try {
-						InputStreamReader reader = new InputStreamReader(
-							url.openStream(), StringPool.UTF8);
+						InputStreamReader inputStreamReader =
+							new InputStreamReader(
+								url.openStream(), StringPool.UTF8);
 
-						return new PropertyResourceBundle(reader);
+						return new PropertyResourceBundle(inputStreamReader);
 					}
 					catch (IOException ioe) {
 						return null;
