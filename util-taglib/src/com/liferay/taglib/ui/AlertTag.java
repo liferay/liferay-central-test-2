@@ -14,11 +14,8 @@
 
 package com.liferay.taglib.ui;
 
-import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.taglib.util.IncludeTag;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.jsp.JspException;
 
 /**
  * @author Carlos Lancha
@@ -27,7 +24,7 @@ import javax.servlet.jsp.JspException;
 public class AlertTag extends IncludeTag {
 
 	@Override
-	public int doStartTag() throws JspException {
+	public int doStartTag() {
 		setAttributeNamespace(_ATTRIBUTE_NAMESPACE);
 
 		return EVAL_BODY_INCLUDE;
