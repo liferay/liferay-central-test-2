@@ -49,14 +49,14 @@ public class DeliveryPortletConfigurationIcon
 
 	@Override
 	public String getOnClick() {
-		PortletURL deliveryURL = getDeliveryURL();
-
-		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
-
 		StringBundler sb = new StringBundler(11);
 
 		sb.append("Liferay.Portlet.openWindow({namespace: '");
+
+		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
+
 		sb.append(portletDisplay.getNamespace());
+
 		sb.append("', portlet: '#p_p_id_");
 		sb.append(portletDisplay.getId());
 		sb.append("_', portletId: '");
@@ -64,7 +64,11 @@ public class DeliveryPortletConfigurationIcon
 		sb.append("', title: '");
 		sb.append(LanguageUtil.get(themeDisplay.getLocale(), "configuration"));
 		sb.append("', uri: '");
+
+		PortletURL deliveryURL = getDeliveryURL();
+
 		sb.append(HtmlUtil.escapeJS(deliveryURL.toString()));
+
 		sb.append("'}); return false;");
 
 		return sb.toString();
