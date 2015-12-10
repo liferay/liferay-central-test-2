@@ -155,9 +155,8 @@
 												</liferay-ui:search-container-column-text>
 											</c:otherwise>
 										</c:choose>
-										<liferay-ui:search-container-column-text>
 
-										</liferay-ui:search-container-column-text>
+										<liferay-ui:search-container-column-text />
 									</liferay-ui:search-container-row>
 
 									<liferay-ui:search-iterator displayStyle="<%= displayStyle %>" markupView="lexicon" />
