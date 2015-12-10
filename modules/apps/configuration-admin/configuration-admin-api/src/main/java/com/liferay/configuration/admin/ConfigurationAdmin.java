@@ -40,4 +40,5 @@ public @interface ConfigurationAdmin {
 	public String category() default "";
 
 	public String factoryInstanceLabelAttribute() default "";
+
 }

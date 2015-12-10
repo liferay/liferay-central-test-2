@@ -22,8 +22,7 @@ import com.liferay.configuration.admin.ConfigurationAdmin;
  * @author Carlos Sierra Andrés
  */
 @ConfigurationAdmin(
-	category = "platform",
-	factoryInstanceLabelAttribute = "companyId"
+	category = "platform", factoryInstanceLabelAttribute = "companyId"
 )
 @Meta.OCD(
 	factory = true,
