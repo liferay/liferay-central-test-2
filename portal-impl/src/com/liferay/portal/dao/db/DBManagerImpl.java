@@ -58,11 +58,11 @@ import org.hibernate.dialect.SybaseDialect;
 public class DBManagerImpl implements DBManager {
 
 	public DBManagerImpl() {
-		for (DBFactory dbCreator :
-				ServiceLoader.load(
-					DBFactory.class, DBManagerImpl.class.getClassLoader())) {
+		ServiceLoader<DBFactory> serviceLoader = ServiceLoader.load(
+			DBFactory.class, DBManagerImpl.class.getClassLoader());
 
-			_dbCreators.put(dbCreator.getDBType(), dbCreator);
+		for (DBFactory dbFactory : serviceLoader) {
+			_dbFactories.put(dbFactory.getDBType(), dbFactory);
 		}
 	}
 
@@ -107,7 +107,7 @@ public class DBManagerImpl implements DBManager {
 			}
 		}
 
-		DBFactory dbCreator = _dbCreators.get(dbType);
+		DBFactory dbCreator = _dbFactories.get(dbType);
 
 		if (dbCreator == null) {
 			throw new IllegalArgumentException(
@@ -178,7 +178,7 @@ public class DBManagerImpl implements DBManager {
 	private static final Log _log = LogFactoryUtil.getLog(DBManagerImpl.class);
 
 	private DB _db;
-	private final EnumMap<DBType, DBFactory> _dbCreators = new EnumMap<>(
+	private final EnumMap<DBType, DBFactory> _dbFactories = new EnumMap<>(
 		DBType.class);
 
 }
