@@ -244,7 +244,7 @@ public class BookmarksPortletToolbarContributor
 		}
 		catch (ConfigurationException ce) {
 			_log.error(
-				"Cannot obtain Bookmarks root folder id for group id " +
+				"Unable to obtain bookmarks root folder ID for group " +
 					themeDisplay.getScopeGroupId());
 		}
 
