@@ -276,7 +276,7 @@ public class MVCPortlet extends LiferayPortlet {
 					renderRequest, renderResponse);
 			}
 
-			if (mvcPath == MVCRenderCommand.DONT_DISPATCH_PATH) {
+			if (mvcPath == MVCRenderCommand.MVC_PATH_SKIP_DISPATCH) {
 				return;
 			}
 
