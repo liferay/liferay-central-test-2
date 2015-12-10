@@ -107,11 +107,12 @@ request.setAttribute("view.jsp-orderByType", orderByType);
 	<liferay-util:param name="searchContainerId" value="entries" />
 </liferay-util:include>
 
-<%
-boolean portletTitleBasedNavigation = GetterUtil.getBoolean(portletConfig.getInitParameter("portlet-title-based-navigation"));
-%>
-
 <div id="<portlet:namespace />documentLibraryContainer">
+
+	<%
+	boolean portletTitleBasedNavigation = GetterUtil.getBoolean(portletConfig.getInitParameter("portlet-title-based-navigation"));
+	%>
+
 	<div class="closed <%= portletTitleBasedNavigation ? "container-fluid-1280" : StringPool.BLANK %> sidenav-container sidenav-right" id="<portlet:namespace />infoPanelId">
 		<div class="sidenav-menu-slider">
 			<div class="sidebar sidebar-default sidenav-menu">
