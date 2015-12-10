@@ -16,7 +16,7 @@ package com.liferay.portal.lock.service.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 import com.liferay.portal.kernel.dao.db.DB;
-import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
+import com.liferay.portal.kernel.dao.db.DBManagerUtil;
 import com.liferay.portal.kernel.dao.db.DBType;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.lock.model.Lock;
@@ -232,7 +232,7 @@ public class LockLocalServiceTest {
 				return true;
 			}
 
-			DB db = DBFactoryUtil.getDB();
+			DB db = DBManagerUtil.getDB();
 
 			if ((db.getDBType() == DBType.SYBASE) &&
 				(cause instanceof GenericJDBCException)) {

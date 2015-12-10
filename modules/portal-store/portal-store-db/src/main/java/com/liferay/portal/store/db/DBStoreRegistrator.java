@@ -16,7 +16,7 @@ package com.liferay.portal.store.db;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.db.DB;
-import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
+import com.liferay.portal.kernel.dao.db.DBManagerUtil;
 import com.liferay.portal.kernel.dao.db.DBType;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.module.framework.ModuleServiceLifecycle;
@@ -75,7 +75,7 @@ public class DBStoreRegistrator {
 	}
 
 	protected Store prepare(Store store) {
-		DB db = DBFactoryUtil.getDB();
+		DB db = DBManagerUtil.getDB();
 
 		if (db.getDBType() != DBType.POSTGRESQL) {
 			return store;

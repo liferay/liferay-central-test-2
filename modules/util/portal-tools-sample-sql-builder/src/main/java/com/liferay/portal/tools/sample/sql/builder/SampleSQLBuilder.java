@@ -16,7 +16,7 @@ package com.liferay.portal.tools.sample.sql.builder;
 
 import com.liferay.portal.freemarker.FreeMarkerUtil;
 import com.liferay.portal.kernel.dao.db.DB;
-import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
+import com.liferay.portal.kernel.dao.db.DBManagerUtil;
 import com.liferay.portal.kernel.dao.db.DBType;
 import com.liferay.portal.kernel.io.CharPipe;
 import com.liferay.portal.kernel.io.OutputStreamWriter;
@@ -207,7 +207,7 @@ public class SampleSQLBuilder {
 	}
 
 	protected void compressSQL(Reader reader, File dir) throws Exception {
-		DB db = DBFactoryUtil.getDB(_dbType, null);
+		DB db = DBManagerUtil.getDB(_dbType, null);
 
 		if (_dbType == DBType.MYSQL) {
 			db = new SampleMySQLDB(db.getMajorVersion(), db.getMinorVersion());
