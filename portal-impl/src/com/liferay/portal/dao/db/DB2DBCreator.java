@@ -15,13 +15,13 @@
 package com.liferay.portal.dao.db;
 
 import com.liferay.portal.kernel.dao.db.DB;
-import com.liferay.portal.kernel.dao.db.DBCreator;
+import com.liferay.portal.kernel.dao.db.DBFactory;
 import com.liferay.portal.kernel.dao.db.DBType;
 
 /**
  * @author Shuyang Zhou
  */
-public class DB2DBCreator implements DBCreator {
+public class DB2DBCreator implements DBFactory {
 
 	@Override
 	public DB create(int dbMajorVersion, int dbMinorVersion) {

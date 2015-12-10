@@ -15,22 +15,22 @@
 package com.liferay.portal.dao.db;
 
 import com.liferay.portal.kernel.dao.db.DB;
-import com.liferay.portal.kernel.dao.db.DBCreator;
+import com.liferay.portal.kernel.dao.db.DBFactory;
 import com.liferay.portal.kernel.dao.db.DBType;
 
 /**
  * @author Shuyang Zhou
  */
-public class SQLServerDBCreator implements DBCreator {
+public class SybaseDBFactory implements DBFactory {
 
 	@Override
 	public DB create(int dbMajorVersion, int dbMinorVersion) {
-		return new SQLServerDB(dbMajorVersion, dbMinorVersion);
+		return new SybaseDB(dbMajorVersion, dbMinorVersion);
 	}
 
 	@Override
 	public DBType getDBType() {
-		return DBType.SQLSERVER;
+		return DBType.SYBASE;
 	}
 
 }

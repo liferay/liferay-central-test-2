@@ -12,25 +12,15 @@
  * details.
  */
 
-package com.liferay.portal.dao.db;
-
-import com.liferay.portal.kernel.dao.db.DB;
-import com.liferay.portal.kernel.dao.db.DBCreator;
-import com.liferay.portal.kernel.dao.db.DBType;
+package com.liferay.portal.kernel.dao.db;
 
 /**
  * @author Shuyang Zhou
  */
-public class OracleDBCreator implements DBCreator {
+public interface DBFactory {
 
-	@Override
-	public DB create(int dbMajorVersion, int dbMinorVersion) {
-		return new OracleDB(dbMajorVersion, dbMinorVersion);
-	}
+	public DB create(int dbMajorVersion, int dbMinorVersion);
 
-	@Override
-	public DBType getDBType() {
-		return DBType.ORACLE;
-	}
+	public DBType getDBType();
 
 }
