@@ -17,7 +17,7 @@ package com.liferay.portal.service.persistence.impl;
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.dao.db.DB;
-import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
+import com.liferay.portal.kernel.dao.db.DBManagerUtil;
 import com.liferay.portal.kernel.dao.db.DBType;
 import com.liferay.portal.kernel.dao.orm.Dialect;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
@@ -304,7 +304,7 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		_sessionFactory = sessionFactory;
 		_dialect = _sessionFactory.getDialect();
-		_db = DBFactoryUtil.getDB(_dialect, getDataSource());
+		_db = DBManagerUtil.getDB(_dialect, getDataSource());
 
 		DBType dbType = _db.getDBType();
 

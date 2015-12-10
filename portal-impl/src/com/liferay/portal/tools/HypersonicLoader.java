@@ -17,7 +17,7 @@ package com.liferay.portal.tools;
 import com.liferay.portal.dao.db.DBManagerImpl;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBManager;
-import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
+import com.liferay.portal.kernel.dao.db.DBManagerUtil;
 import com.liferay.portal.kernel.dao.db.DBType;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -86,7 +86,7 @@ public class HypersonicLoader {
 
 		ToolDependencies.wireBasic();
 
-		DBFactoryUtil.setDB(DBType.HYPERSONIC, null);
+		DBManagerUtil.setDB(DBType.HYPERSONIC, null);
 
 		// See LEP-2927. Appending ;shutdown=true to the database connection URL
 		// guarantees that ${databaseName}.log is purged.

@@ -16,7 +16,7 @@ package com.liferay.portal.dao.orm;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.db.DB;
-import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
+import com.liferay.portal.kernel.dao.db.DBManagerUtil;
 import com.liferay.portal.kernel.dao.db.DBType;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
@@ -1028,7 +1028,7 @@ public class SQLNullTest {
 	}
 
 	protected boolean isDBType(DBType dbType) {
-		DB db = DBFactoryUtil.getDB();
+		DB db = DBManagerUtil.getDB();
 
 		return dbType == db.getDBType();
 	}

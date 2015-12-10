@@ -15,7 +15,7 @@
 package com.liferay.portal.security.pacl.test;
 
 import com.liferay.portal.kernel.dao.db.DB;
-import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
+import com.liferay.portal.kernel.dao.db.DBManagerUtil;
 import com.liferay.portal.kernel.dao.db.DBType;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.test.rule.PACLTestRule;
@@ -475,7 +475,7 @@ public class SQLTest {
 	}
 
 	protected void executeDB(String sql) throws Exception {
-		DB db = DBFactoryUtil.getDB();
+		DB db = DBManagerUtil.getDB();
 
 		db.runSQL(sql);
 	}
@@ -517,7 +517,7 @@ public class SQLTest {
 	}
 
 	protected boolean isMySQL() {
-		DB db = DBFactoryUtil.getDB();
+		DB db = DBManagerUtil.getDB();
 
 		if (db.getDBType() == DBType.MYSQL) {
 			return true;

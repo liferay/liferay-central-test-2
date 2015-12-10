@@ -15,7 +15,7 @@
 package com.liferay.portal.verify;
 
 import com.liferay.portal.kernel.dao.db.DB;
-import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
+import com.liferay.portal.kernel.dao.db.DBManagerUtil;
 import com.liferay.portal.kernel.dao.db.DBType;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
@@ -163,7 +163,7 @@ public class VerifySQLServer extends VerifyProcess {
 
 	@Override
 	protected void doVerify() throws Exception {
-		DB db = DBFactoryUtil.getDB();
+		DB db = DBManagerUtil.getDB();
 
 		if (db.getDBType() != DBType.SQLSERVER) {
 			return;

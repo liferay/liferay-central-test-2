@@ -15,7 +15,7 @@
 package com.liferay.portal.test.rule.callback;
 
 import com.liferay.portal.kernel.dao.db.DB;
-import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
+import com.liferay.portal.kernel.dao.db.DBManagerUtil;
 import com.liferay.portal.kernel.dao.db.DBType;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.test.rule.callback.BaseTestCallback;
@@ -37,7 +37,7 @@ public class SybaseDumpTransactionLogTestCallback
 
 	@Override
 	public Void beforeClass(Description description) throws SQLException {
-		DB db = DBFactoryUtil.getDB();
+		DB db = DBManagerUtil.getDB();
 
 		if (db.getDBType() != DBType.SYBASE) {
 			return null;
