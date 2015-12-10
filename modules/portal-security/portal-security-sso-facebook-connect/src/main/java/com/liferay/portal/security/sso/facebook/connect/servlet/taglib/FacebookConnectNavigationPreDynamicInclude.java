@@ -96,7 +96,7 @@ public class FacebookConnectNavigationPreDynamicInclude
 		DynamicInclude.DynamicIncludeRegistry dynamicIncludeRegistry) {
 
 		dynamicIncludeRegistry.register(
-			"com.liferay.login.web:/navigation.jsp#pre");
+			"com.liferay.login.web#/navigation.jsp#pre");
 	}
 
 	@Reference(unbind = "-")
