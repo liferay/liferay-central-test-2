@@ -14,9 +14,9 @@
 
 package com.liferay.portal.tools;
 
-import com.liferay.portal.dao.db.DBFactoryImpl;
+import com.liferay.portal.dao.db.DBManagerImpl;
 import com.liferay.portal.kernel.dao.db.DB;
-import com.liferay.portal.kernel.dao.db.DBFactory;
+import com.liferay.portal.kernel.dao.db.DBManager;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.db.DBType;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -44,9 +44,9 @@ public class HypersonicLoader {
 	public static void loadHypersonic(Connection con, String fileName)
 		throws Exception {
 
-		DBFactory dbFactory = new DBFactoryImpl();
+		DBManager dbManager = new DBManagerImpl();
 
-		DB db = dbFactory.getDB(DBType.HYPERSONIC, null);
+		DB db = dbManager.getDB(DBType.HYPERSONIC, null);
 
 		List<String> lines = Files.readAllLines(
 			Paths.get(fileName), StandardCharsets.UTF_8);

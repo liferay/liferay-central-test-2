@@ -16,7 +16,7 @@ package com.liferay.portal.util;
 
 import com.liferay.portal.bean.BeanLocatorImpl;
 import com.liferay.portal.configuration.ConfigurationFactoryImpl;
-import com.liferay.portal.dao.db.DBFactoryImpl;
+import com.liferay.portal.dao.db.DBManagerImpl;
 import com.liferay.portal.dao.jdbc.DataSourceFactoryImpl;
 import com.liferay.portal.kernel.bean.BeanLocator;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
@@ -139,9 +139,9 @@ public class InitUtil {
 		DataSourceFactoryUtil.setDataSourceFactory(
 			DoPrivilegedUtil.wrap(new DataSourceFactoryImpl()));
 
-		// DB factory
+		// DB manager
 
-		DBFactoryUtil.setDBFactory(DoPrivilegedUtil.wrap(new DBFactoryImpl()));
+		DBFactoryUtil.setDBManager(DoPrivilegedUtil.wrap(new DBManagerImpl()));
 
 		// ROME
 

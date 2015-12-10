@@ -24,52 +24,52 @@ import javax.sql.DataSource;
 public class DBFactoryUtil {
 
 	public static DB getDB() {
-		return getDBFactory().getDB();
+		return getDBManager().getDB();
 	}
 
 	public static DB getDB(DBType dbType, DataSource dataSource) {
-		return getDBFactory().getDB(dbType, dataSource);
+		return getDBManager().getDB(dbType, dataSource);
 	}
 
 	public static DB getDB(Object dialect, DataSource dataSource) {
-		DBFactory dbFactory = getDBFactory();
+		DBManager dbManager = getDBManager();
 
-		return dbFactory.getDB(dbFactory.getDBType(dialect), dataSource);
+		return dbManager.getDB(dbManager.getDBType(dialect), dataSource);
 	}
 
-	public static DBFactory getDBFactory() {
+	public static DBManager getDBManager() {
 		PortalRuntimePermission.checkGetBeanProperty(DBFactoryUtil.class);
 
-		return _dbFactory;
+		return _dbManager;
 	}
 
 	public static DBType getDBType(Object dialect) {
-		return getDBFactory().getDBType(dialect);
+		return getDBManager().getDBType(dialect);
 	}
 
 	public static void reset() {
-		setDBFactory(null);
+		setDBManager(null);
 	}
 
 	public static void setDB(DBType dbType, DataSource dataSource) {
-		DBFactory dbFactory = getDBFactory();
+		DBManager dbManager = getDBManager();
 
-		dbFactory.setDB(dbFactory.getDB(dbType, dataSource));
+		dbManager.setDB(dbManager.getDB(dbType, dataSource));
 	}
 
 	public static void setDB(Object dialect, DataSource dataSource) {
-		DBFactory dbFactory = getDBFactory();
+		DBManager dbManager = getDBManager();
 
-		dbFactory.setDB(
-			dbFactory.getDB(dbFactory.getDBType(dialect), dataSource));
+		dbManager.setDB(
+			dbManager.getDB(dbManager.getDBType(dialect), dataSource));
 	}
 
-	public static void setDBFactory(DBFactory dbFactory) {
+	public static void setDBManager(DBManager dbManager) {
 		PortalRuntimePermission.checkSetBeanProperty(DBFactoryUtil.class);
 
-		_dbFactory = dbFactory;
+		_dbManager = dbManager;
 	}
 
-	private static DBFactory _dbFactory;
+	private static DBManager _dbManager;
 
 }
