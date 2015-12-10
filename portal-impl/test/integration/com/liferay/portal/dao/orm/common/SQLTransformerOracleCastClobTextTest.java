@@ -15,7 +15,7 @@
 package com.liferay.portal.dao.orm.common;
 
 import com.liferay.portal.kernel.dao.db.DB;
-import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
+import com.liferay.portal.kernel.dao.db.DBManagerUtil;
 import com.liferay.portal.kernel.dao.db.DBType;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
@@ -58,7 +58,7 @@ public class SQLTransformerOracleCastClobTextTest {
 
 	@BeforeClass
 	public static void setUpClass() throws Exception {
-		_db = DBFactoryUtil.getDB();
+		_db = DBManagerUtil.getDB();
 
 		if (_db.getDBType() != DBType.ORACLE) {
 			return;

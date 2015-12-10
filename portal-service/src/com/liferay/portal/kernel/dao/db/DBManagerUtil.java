@@ -21,7 +21,7 @@ import javax.sql.DataSource;
 /**
  * @author Brian Wing Shun Chan
  */
-public class DBFactoryUtil {
+public class DBManagerUtil {
 
 	public static DB getDB() {
 		return getDBManager().getDB();
@@ -38,7 +38,7 @@ public class DBFactoryUtil {
 	}
 
 	public static DBManager getDBManager() {
-		PortalRuntimePermission.checkGetBeanProperty(DBFactoryUtil.class);
+		PortalRuntimePermission.checkGetBeanProperty(DBManagerUtil.class);
 
 		return _dbManager;
 	}
@@ -65,7 +65,7 @@ public class DBFactoryUtil {
 	}
 
 	public static void setDBManager(DBManager dbManager) {
-		PortalRuntimePermission.checkSetBeanProperty(DBFactoryUtil.class);
+		PortalRuntimePermission.checkSetBeanProperty(DBManagerUtil.class);
 
 		_dbManager = dbManager;
 	}

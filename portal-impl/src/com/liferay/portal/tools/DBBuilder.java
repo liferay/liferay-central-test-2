@@ -15,7 +15,7 @@
 package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.dao.db.DB;
-import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
+import com.liferay.portal.kernel.dao.db.DBManagerUtil;
 import com.liferay.portal.kernel.dao.db.DBType;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -110,7 +110,7 @@ public class DBBuilder {
 				continue;
 			}
 
-			DB db = DBFactoryUtil.getDB(dbType, null);
+			DB db = DBManagerUtil.getDB(dbType, null);
 
 			if (db != null) {
 				if (!sqlDir.endsWith("/WEB-INF/sql")) {
@@ -131,7 +131,7 @@ public class DBBuilder {
 		}
 
 		for (DBType dbType : _dbTypes) {
-			DB db = DBFactoryUtil.getDB(dbType, null);
+			DB db = DBManagerUtil.getDB(dbType, null);
 
 			if (db != null) {
 				db.buildSQLFile(sqlDir, fileName);

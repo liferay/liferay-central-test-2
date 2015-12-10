@@ -15,7 +15,7 @@
 package com.liferay.portal.verify;
 
 import com.liferay.portal.kernel.dao.db.DB;
-import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
+import com.liferay.portal.kernel.dao.db.DBManagerUtil;
 import com.liferay.portal.kernel.dao.db.DBType;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
@@ -196,7 +196,7 @@ public class VerifyPermission extends VerifyProcess {
 		long userClassNameId = PortalUtil.getClassNameId(User.class);
 		long userGroupClassNameId = PortalUtil.getClassNameId(UserGroup.class);
 
-		DB db = DBFactoryUtil.getDB();
+		DB db = DBManagerUtil.getDB();
 
 		long[] companyIds = PortalInstances.getCompanyIdsBySQL();
 

@@ -34,7 +34,7 @@ public class DBContext {
 	}
 
 	public DBManager getDBManager() {
-		return DBFactoryUtil.getDBManager();
+		return DBManagerUtil.getDBManager();
 	}
 
 	public Connection getUpgradeOptimizedConnection() {

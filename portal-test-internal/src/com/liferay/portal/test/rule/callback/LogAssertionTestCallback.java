@@ -15,7 +15,7 @@
 package com.liferay.portal.test.rule.callback;
 
 import com.liferay.portal.kernel.dao.db.DB;
-import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
+import com.liferay.portal.kernel.dao.db.DBManagerUtil;
 import com.liferay.portal.kernel.test.rule.callback.TestCallback;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.test.log.CaptureAppender;
@@ -225,7 +225,7 @@ public class LogAssertionTestCallback
 				ExpectedDBType expectedDBType = expectedLog.expectedDBType();
 
 				if (expectedDBType != ExpectedDBType.NONE) {
-					DB db = DBFactoryUtil.getDB();
+					DB db = DBManagerUtil.getDB();
 
 					if (expectedDBType.getDBType() != db.getDBType()) {
 						continue;
