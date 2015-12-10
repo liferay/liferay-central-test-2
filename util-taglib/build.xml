@@ -111,13 +111,13 @@
 		<pathconvert property="tld.files" pathsep=" ">
 			<path>
 				<fileset dir="${project.dir}">
-					<include name="**/liferay-*.tld" />
 					<exclude name="**/bin/**" />
 					<exclude name="**/build/**" />
 					<exclude name="**/classes/**" />
 					<exclude name="**/portal-web/**" />
 					<exclude name="**/sdk/**" />
 					<exclude name="**/test/**" />
+					<include name="**/liferay-*.tld" />
 				</fileset>
 			</path>
 		</pathconvert>
@@ -137,13 +137,13 @@
 	<target name="validate-tld">
 		<schemavalidate>
 			<fileset dir="${project.dir}" >
-				<include name="**/liferay-*.tld" />
 				<exclude name="**/bin/**" />
 				<exclude name="**/build/**" />
 				<exclude name="**/classes/**" />
 				<exclude name="**/portal-web/**" />
 				<exclude name="**/sdk/**" />
 				<exclude name="**/test/**" />
+				<include name="**/liferay-*.tld" />
 			</fileset>
 		</schemavalidate>
 	</target>
