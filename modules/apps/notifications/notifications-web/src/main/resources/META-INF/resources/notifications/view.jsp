@@ -17,9 +17,9 @@
 <%@ include file="/init.jsp" %>
 
 <%
-PortletURL portletURL = renderResponse.createRenderURL();
-
 int userNotificationEventsCount = UserNotificationEventLocalServiceUtil.getDeliveredUserNotificationEventsCount(themeDisplay.getUserId(), UserNotificationDeliveryConstants.TYPE_WEBSITE, true);
+
+PortletURL portletURL = renderResponse.createRenderURL();
 %>
 
 <aui:nav-bar markupView="lexicon">
