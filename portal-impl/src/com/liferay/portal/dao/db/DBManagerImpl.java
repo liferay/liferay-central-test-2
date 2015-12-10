@@ -17,7 +17,7 @@ package com.liferay.portal.dao.db;
 import com.liferay.portal.dao.orm.hibernate.DialectImpl;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBCreator;
-import com.liferay.portal.kernel.dao.db.DBFactory;
+import com.liferay.portal.kernel.dao.db.DBManager;
 import com.liferay.portal.kernel.dao.db.DBType;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -55,12 +55,12 @@ import org.hibernate.dialect.SybaseDialect;
  */
 @DoPrivileged
 @SuppressWarnings("deprecation")
-public class DBFactoryImpl implements DBFactory {
+public class DBManagerImpl implements DBManager {
 
-	public DBFactoryImpl() {
+	public DBManagerImpl() {
 		for (DBCreator dbCreator :
 				ServiceLoader.load(
-					DBCreator.class, DBFactoryImpl.class.getClassLoader())) {
+					DBCreator.class, DBManagerImpl.class.getClassLoader())) {
 
 			_dbCreators.put(dbCreator.getDBType(), dbCreator);
 		}
@@ -175,7 +175,7 @@ public class DBFactoryImpl implements DBFactory {
 		}
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(DBFactoryImpl.class);
+	private static final Log _log = LogFactoryUtil.getLog(DBManagerImpl.class);
 
 	private DB _db;
 	private final EnumMap<DBType, DBCreator> _dbCreators = new EnumMap<>(

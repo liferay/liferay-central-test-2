@@ -19,7 +19,7 @@ import javax.sql.DataSource;
 /**
  * @author Brian Wing Shun Chan
  */
-public interface DBFactory {
+public interface DBManager {
 
 	public DB getDB();
 
