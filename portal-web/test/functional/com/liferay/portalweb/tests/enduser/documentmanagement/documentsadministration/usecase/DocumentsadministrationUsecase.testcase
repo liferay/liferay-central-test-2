@@ -885,6 +885,15 @@
 			<var name="portletName" value="Users and Organizations" />
 		</execute>
 
+		<execute macro="Site#assignUserSitesCP">
+			<var name="siteName" value="Liferay" />
+			<var name="userScreenName" value="usersn" />
+		</execute>
+
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Users and Organizations" />
+		</execute>
+
 		<execute macro="User#assignRegularRoleCP">
 			<var name="roleName" value="Technical Writer" />
 			<var name="userScreenName" value="usersn" />
