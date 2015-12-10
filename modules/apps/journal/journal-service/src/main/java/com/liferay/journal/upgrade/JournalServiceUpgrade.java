@@ -26,7 +26,7 @@ import com.liferay.journal.upgrade.v1_0_0.UpgradeLastPublishDate;
 import com.liferay.journal.upgrade.v1_0_0.UpgradePortletSettings;
 import com.liferay.journal.upgrade.v1_0_0.UpgradeSchema;
 import com.liferay.portal.kernel.dao.db.DB;
-import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
+import com.liferay.portal.kernel.dao.db.DBManagerUtil;
 import com.liferay.portal.kernel.dao.db.DBProcessContext;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -102,7 +102,7 @@ public class JournalServiceUpgrade implements UpgradeStepRegistrator {
 			_log.debug("Delete temporary images");
 		}
 
-		DB db = DBFactoryUtil.getDB();
+		DB db = DBManagerUtil.getDB();
 
 		db.runSQL(
 			"delete from Image where imageId IN (SELECT articleImageId FROM " +
