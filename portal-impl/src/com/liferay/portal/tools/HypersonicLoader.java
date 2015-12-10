@@ -44,6 +44,10 @@ public class HypersonicLoader {
 	public static void loadHypersonic(Connection con, String fileName)
 		throws Exception {
 
+		DBFactory dbFactory = new DBFactoryImpl();
+
+		DB db = dbFactory.getDB(DBType.HYPERSONIC, null);
+
 		List<String> lines = Files.readAllLines(
 			Paths.get(fileName), StandardCharsets.UTF_8);
 
@@ -57,10 +61,6 @@ public class HypersonicLoader {
 			sb.append(line);
 			sb.append(StringPool.NEW_LINE);
 		}
-
-		DBFactory dbFactory = new DBFactoryImpl();
-
-		DB db = dbFactory.getDB(DBType.HYPERSONIC, null);
 
 		db.runSQLTemplateString(con, sb.toString(), false, true);
 	}
