@@ -73,8 +73,8 @@ public class UpgradeSubscription extends UpgradeProcess {
 
 		runSQL(
 			"delete from Subscription where classNameId = " + classNameId +
-			" and classPK not in (select portletPreferencesId" +
-			" from PortletPreferences)");
+				" and classPK not in (select portletPreferencesId from " +
+					" PortletPreferences)");
 	}
 
 	@Override
