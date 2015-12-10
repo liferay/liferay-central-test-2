@@ -23,8 +23,7 @@ import com.liferay.portal.security.auth.verifier.module.configuration.BaseAuthVe
  * @author Tomas Polesovsky
  */
 @ConfigurationAdmin(
-	category = "platform",
-	factoryInstanceLabelAttribute = "urlsIncludes"
+	category = "platform", factoryInstanceLabelAttribute = "urlsIncludes"
 )
 @Meta.OCD(
 	factory = true,

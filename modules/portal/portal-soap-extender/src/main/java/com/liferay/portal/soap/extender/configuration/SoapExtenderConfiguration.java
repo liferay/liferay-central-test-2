@@ -22,8 +22,7 @@ import com.liferay.configuration.admin.ConfigurationAdmin;
  * @author Carlos Sierra Andrés
  */
 @ConfigurationAdmin(
-	category = "platform",
-	factoryInstanceLabelAttribute = "contextPaths"
+	category = "platform", factoryInstanceLabelAttribute = "contextPaths"
 )
 @Meta.OCD(
 	factory = true,
