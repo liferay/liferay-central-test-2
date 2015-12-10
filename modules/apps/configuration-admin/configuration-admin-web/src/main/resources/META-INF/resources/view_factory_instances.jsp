@@ -72,7 +72,7 @@ renderResponse.setTitle(factoryConfigurationModel.getName());
 			</portlet:renderURL>
 
 			<liferay-ui:search-container-column-text name="entry">
-				<aui:a href="<%= editURL %>"><b><%= configurationModel.getLabel() %></b></aui:a>
+				<aui:a href="<%= editURL %>"><strong><%= configurationModel.getLabel() %></strong></aui:a>
 			</liferay-ui:search-container-column-text>
 
 			<liferay-ui:search-container-column-text
