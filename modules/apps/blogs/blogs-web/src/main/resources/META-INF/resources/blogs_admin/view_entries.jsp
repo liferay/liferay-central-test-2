@@ -41,12 +41,13 @@ String orderByType = ParamUtil.getString(request, "orderByType", "asc");
 PortletURL navigationPortletURL = renderResponse.createRenderURL();
 
 navigationPortletURL.setParameter("mvcRenderCommandName", "/blogs_admin/view");
-navigationPortletURL.setParameter("orderBycol", orderByCol);
-navigationPortletURL.setParameter("orderByType", orderByType);
 
 if (delta > 0) {
 	navigationPortletURL.setParameter("delta", String.valueOf(delta));
 }
+
+navigationPortletURL.setParameter("orderBycol", orderByCol);
+navigationPortletURL.setParameter("orderByType", orderByType);
 
 PortletURL portletURL = PortletURLUtil.clone(navigationPortletURL, liferayPortletResponse);
 

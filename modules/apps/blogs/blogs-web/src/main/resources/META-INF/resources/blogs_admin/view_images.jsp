@@ -39,20 +39,21 @@ PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("mvcRenderCommandName", "/blogs_admin/view");
 portletURL.setParameter("navigation", "images");
-portletURL.setParameter("orderBycol", orderByCol);
-portletURL.setParameter("orderByType", orderByType);
 
 if (delta > 0) {
 	portletURL.setParameter("delta", String.valueOf(delta));
 }
+
+portletURL.setParameter("orderBycol", orderByCol);
+portletURL.setParameter("orderByType", orderByType);
+
+request.setAttribute("view_images.jsp-portletURL", portletURL);
 
 PortletURL displayStyleURL = PortletURLUtil.clone(portletURL, liferayPortletResponse);
 
 if (cur > 0) {
 	displayStyleURL.setParameter("cur", String.valueOf(cur));
 }
-
-request.setAttribute("view_images.jsp-portletURL", portletURL);
 
 String keywords = ParamUtil.getString(request, "keywords");
 %>
