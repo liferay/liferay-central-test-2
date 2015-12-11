@@ -1608,8 +1608,9 @@ public class StagingImpl implements Staging {
 
 	@Override
 	public void setRecentLayoutBranchId(
-		HttpServletRequest request, long layoutSetBranchId, long plid,
-		long layoutBranchId) {
+			HttpServletRequest request, long layoutSetBranchId, long plid,
+			long layoutBranchId)
+		throws PortalException {
 
 		setRecentLayoutBranchId(
 			PortalUtil.getUserId(request), layoutSetBranchId, plid,
@@ -1618,7 +1619,8 @@ public class StagingImpl implements Staging {
 
 	@Override
 	public void setRecentLayoutBranchId(
-		User user, long layoutSetBranchId, long plid, long layoutBranchId) {
+			User user, long layoutSetBranchId, long plid, long layoutBranchId)
+		throws PortalException {
 
 		setRecentLayoutBranchId(
 			user.getUserId(), layoutSetBranchId, plid, layoutBranchId);
@@ -1626,8 +1628,9 @@ public class StagingImpl implements Staging {
 
 	@Override
 	public void setRecentLayoutRevisionId(
-		HttpServletRequest request, long layoutSetBranchId, long plid,
-		long layoutRevisionId) {
+			HttpServletRequest request, long layoutSetBranchId, long plid,
+			long layoutRevisionId)
+		throws PortalException {
 
 		setRecentLayoutRevisionId(
 			PortalUtil.getUserId(request), layoutSetBranchId, plid,
@@ -1636,7 +1639,8 @@ public class StagingImpl implements Staging {
 
 	@Override
 	public void setRecentLayoutRevisionId(
-		User user, long layoutSetBranchId, long plid, long layoutRevisionId) {
+			User user, long layoutSetBranchId, long plid, long layoutRevisionId)
+		throws PortalException {
 
 		setRecentLayoutRevisionId(
 			user.getUserId(), layoutSetBranchId, plid, layoutRevisionId);
@@ -1644,7 +1648,9 @@ public class StagingImpl implements Staging {
 
 	@Override
 	public void setRecentLayoutSetBranchId(
-		HttpServletRequest request, long layoutSetId, long layoutSetBranchId) {
+			HttpServletRequest request, long layoutSetId,
+			long layoutSetBranchId)
+		throws PortalException {
 
 		setRecentLayoutSetBranchId(
 			PortalUtil.getUserId(request), layoutSetId, layoutSetBranchId);
@@ -1652,7 +1658,8 @@ public class StagingImpl implements Staging {
 
 	@Override
 	public void setRecentLayoutSetBranchId(
-		User user, long layoutSetId, long layoutSetBranchId) {
+			User user, long layoutSetId, long layoutSetBranchId)
+		throws PortalException {
 
 		setRecentLayoutSetBranchId(
 			user.getUserId(), layoutSetId, layoutSetBranchId);
@@ -2315,7 +2322,8 @@ public class StagingImpl implements Staging {
 	}
 
 	protected void setRecentLayoutBranchId(
-		long userId, long layoutSetBranchId, long plid, long layoutBranchId) {
+			long userId, long layoutSetBranchId, long plid, long layoutBranchId)
+		throws PortalException {
 
 		LayoutBranch layoutBranch = _layoutBranchLocalService.fetchLayoutBranch(
 			layoutBranchId);
@@ -2358,7 +2366,9 @@ public class StagingImpl implements Staging {
 	}
 
 	protected void setRecentLayoutRevisionId(
-		long userId, long layoutSetBranchId, long plid, long layoutRevisionId) {
+			long userId, long layoutSetBranchId, long plid,
+			long layoutRevisionId)
+		throws PortalException {
 
 		long layoutBranchId = 0;
 
@@ -2416,7 +2426,8 @@ public class StagingImpl implements Staging {
 	}
 
 	protected void setRecentLayoutSetBranchId(
-		long userId, long layoutSetId, long layoutSetBranchId) {
+			long userId, long layoutSetId, long layoutSetBranchId)
+		throws PortalException {
 
 		LayoutSetBranch layoutSetBranch =
 			_layoutSetBranchLocalService.fetchLayoutSetBranch(
