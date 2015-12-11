@@ -45,9 +45,6 @@ public interface RecentLayoutBranchLocalService extends BaseLocalService,
 	 *
 	 * Never modify or reference this interface directly. Always use {@link RecentLayoutBranchLocalServiceUtil} to access the recent layout branch local service. Add custom service methods to {@link com.liferay.portal.service.impl.RecentLayoutBranchLocalServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public com.liferay.portal.model.RecentLayoutBranch addRecentLayoutBranch(
-		long companyId, long groupId, long userId, long layoutBranchId,
-		long layoutSetBranchId, long plid);
 
 	/**
 	* Adds the recent layout branch to the database. Also notifies the appropriate model listeners.
@@ -58,6 +55,10 @@ public interface RecentLayoutBranchLocalService extends BaseLocalService,
 	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.REINDEX)
 	public com.liferay.portal.model.RecentLayoutBranch addRecentLayoutBranch(
 		com.liferay.portal.model.RecentLayoutBranch recentLayoutBranch);
+
+	public com.liferay.portal.model.RecentLayoutBranch addRecentLayoutBranch(
+		long userId, long layoutBranchId, long layoutSetBranchId, long plid)
+		throws PortalException;
 
 	/**
 	* Creates a new recent layout branch with the primary key. Does not add the recent layout branch to the database.
@@ -97,10 +98,9 @@ public interface RecentLayoutBranchLocalService extends BaseLocalService,
 	public com.liferay.portal.model.RecentLayoutBranch deleteRecentLayoutBranch(
 		long recentLayoutBranchId) throws PortalException;
 
-	public void deleteRecentLayoutBranches(
-		com.liferay.portal.model.LayoutBranch layoutBranch);
+	public void deleteRecentLayoutBranches(long layoutBranchId);
 
-	public void deleteRecentLayoutBranches(com.liferay.portal.model.User user);
+	public void deleteUserRecentLayoutBranches(long userId);
 
 	public com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery();
 
