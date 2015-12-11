@@ -40,13 +40,6 @@ public class RecentLayoutRevisionLocalServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.portal.service.impl.RecentLayoutRevisionLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
-	public static com.liferay.portal.model.RecentLayoutRevision addRecentLayoutRevision(
-		long companyId, long groupId, long userId, long layoutRevisionId,
-		long layoutSetBranchId, long plid) {
-		return getService()
-				   .addRecentLayoutRevision(companyId, groupId, userId,
-			layoutRevisionId, layoutSetBranchId, plid);
-	}
 
 	/**
 	* Adds the recent layout revision to the database. Also notifies the appropriate model listeners.
@@ -57,6 +50,14 @@ public class RecentLayoutRevisionLocalServiceUtil {
 	public static com.liferay.portal.model.RecentLayoutRevision addRecentLayoutRevision(
 		com.liferay.portal.model.RecentLayoutRevision recentLayoutRevision) {
 		return getService().addRecentLayoutRevision(recentLayoutRevision);
+	}
+
+	public static com.liferay.portal.model.RecentLayoutRevision addRecentLayoutRevision(
+		long userId, long layoutRevisionId, long layoutSetBranchId, long plid)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .addRecentLayoutRevision(userId, layoutRevisionId,
+			layoutSetBranchId, plid);
 	}
 
 	/**
@@ -103,14 +104,12 @@ public class RecentLayoutRevisionLocalServiceUtil {
 		return getService().deleteRecentLayoutRevision(recentLayoutRevisionId);
 	}
 
-	public static void deleteRecentLayoutRevisions(
-		com.liferay.portal.model.LayoutRevision layoutRevision) {
-		getService().deleteRecentLayoutRevisions(layoutRevision);
+	public static void deleteRecentLayoutRevisions(long layoutRevisionId) {
+		getService().deleteRecentLayoutRevisions(layoutRevisionId);
 	}
 
-	public static void deleteRecentLayoutRevisions(
-		com.liferay.portal.model.User user) {
-		getService().deleteRecentLayoutRevisions(user);
+	public static void deleteUserRecentLayoutRevisions(long userId) {
+		getService().deleteUserRecentLayoutRevisions(userId);
 	}
 
 	public static com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery() {

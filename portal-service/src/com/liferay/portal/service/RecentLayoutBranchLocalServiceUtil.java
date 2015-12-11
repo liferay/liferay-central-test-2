@@ -40,13 +40,6 @@ public class RecentLayoutBranchLocalServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.portal.service.impl.RecentLayoutBranchLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
-	public static com.liferay.portal.model.RecentLayoutBranch addRecentLayoutBranch(
-		long companyId, long groupId, long userId, long layoutBranchId,
-		long layoutSetBranchId, long plid) {
-		return getService()
-				   .addRecentLayoutBranch(companyId, groupId, userId,
-			layoutBranchId, layoutSetBranchId, plid);
-	}
 
 	/**
 	* Adds the recent layout branch to the database. Also notifies the appropriate model listeners.
@@ -57,6 +50,14 @@ public class RecentLayoutBranchLocalServiceUtil {
 	public static com.liferay.portal.model.RecentLayoutBranch addRecentLayoutBranch(
 		com.liferay.portal.model.RecentLayoutBranch recentLayoutBranch) {
 		return getService().addRecentLayoutBranch(recentLayoutBranch);
+	}
+
+	public static com.liferay.portal.model.RecentLayoutBranch addRecentLayoutBranch(
+		long userId, long layoutBranchId, long layoutSetBranchId, long plid)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .addRecentLayoutBranch(userId, layoutBranchId,
+			layoutSetBranchId, plid);
 	}
 
 	/**
@@ -103,14 +104,12 @@ public class RecentLayoutBranchLocalServiceUtil {
 		return getService().deleteRecentLayoutBranch(recentLayoutBranchId);
 	}
 
-	public static void deleteRecentLayoutBranches(
-		com.liferay.portal.model.LayoutBranch layoutBranch) {
-		getService().deleteRecentLayoutBranches(layoutBranch);
+	public static void deleteRecentLayoutBranches(long layoutBranchId) {
+		getService().deleteRecentLayoutBranches(layoutBranchId);
 	}
 
-	public static void deleteRecentLayoutBranches(
-		com.liferay.portal.model.User user) {
-		getService().deleteRecentLayoutBranches(user);
+	public static void deleteUserRecentLayoutBranches(long userId) {
+		getService().deleteUserRecentLayoutBranches(userId);
 	}
 
 	public static com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery() {

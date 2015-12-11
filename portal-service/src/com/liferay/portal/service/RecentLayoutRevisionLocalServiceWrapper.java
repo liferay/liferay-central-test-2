@@ -32,14 +32,6 @@ public class RecentLayoutRevisionLocalServiceWrapper
 		_recentLayoutRevisionLocalService = recentLayoutRevisionLocalService;
 	}
 
-	@Override
-	public com.liferay.portal.model.RecentLayoutRevision addRecentLayoutRevision(
-		long companyId, long groupId, long userId, long layoutRevisionId,
-		long layoutSetBranchId, long plid) {
-		return _recentLayoutRevisionLocalService.addRecentLayoutRevision(companyId,
-			groupId, userId, layoutRevisionId, layoutSetBranchId, plid);
-	}
-
 	/**
 	* Adds the recent layout revision to the database. Also notifies the appropriate model listeners.
 	*
@@ -50,6 +42,14 @@ public class RecentLayoutRevisionLocalServiceWrapper
 	public com.liferay.portal.model.RecentLayoutRevision addRecentLayoutRevision(
 		com.liferay.portal.model.RecentLayoutRevision recentLayoutRevision) {
 		return _recentLayoutRevisionLocalService.addRecentLayoutRevision(recentLayoutRevision);
+	}
+
+	@Override
+	public com.liferay.portal.model.RecentLayoutRevision addRecentLayoutRevision(
+		long userId, long layoutRevisionId, long layoutSetBranchId, long plid)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _recentLayoutRevisionLocalService.addRecentLayoutRevision(userId,
+			layoutRevisionId, layoutSetBranchId, plid);
 	}
 
 	/**
@@ -101,14 +101,13 @@ public class RecentLayoutRevisionLocalServiceWrapper
 	}
 
 	@Override
-	public void deleteRecentLayoutRevisions(
-		com.liferay.portal.model.LayoutRevision layoutRevision) {
-		_recentLayoutRevisionLocalService.deleteRecentLayoutRevisions(layoutRevision);
+	public void deleteRecentLayoutRevisions(long layoutRevisionId) {
+		_recentLayoutRevisionLocalService.deleteRecentLayoutRevisions(layoutRevisionId);
 	}
 
 	@Override
-	public void deleteRecentLayoutRevisions(com.liferay.portal.model.User user) {
-		_recentLayoutRevisionLocalService.deleteRecentLayoutRevisions(user);
+	public void deleteUserRecentLayoutRevisions(long userId) {
+		_recentLayoutRevisionLocalService.deleteUserRecentLayoutRevisions(userId);
 	}
 
 	@Override

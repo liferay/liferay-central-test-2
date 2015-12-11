@@ -40,13 +40,6 @@ public class RecentLayoutSetBranchLocalServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.portal.service.impl.RecentLayoutSetBranchLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
-	public static com.liferay.portal.model.RecentLayoutSetBranch addRecentLayoutSetBranch(
-		long companyId, long groupId, long userId, long layoutSetBranchId,
-		long layoutSetId) {
-		return getService()
-				   .addRecentLayoutSetBranch(companyId, groupId, userId,
-			layoutSetBranchId, layoutSetId);
-	}
 
 	/**
 	* Adds the recent layout set branch to the database. Also notifies the appropriate model listeners.
@@ -57,6 +50,14 @@ public class RecentLayoutSetBranchLocalServiceUtil {
 	public static com.liferay.portal.model.RecentLayoutSetBranch addRecentLayoutSetBranch(
 		com.liferay.portal.model.RecentLayoutSetBranch recentLayoutSetBranch) {
 		return getService().addRecentLayoutSetBranch(recentLayoutSetBranch);
+	}
+
+	public static com.liferay.portal.model.RecentLayoutSetBranch addRecentLayoutSetBranch(
+		long userId, long layoutSetBranchId, long layoutSetId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .addRecentLayoutSetBranch(userId, layoutSetBranchId,
+			layoutSetId);
 	}
 
 	/**
@@ -103,14 +104,12 @@ public class RecentLayoutSetBranchLocalServiceUtil {
 		return getService().deleteRecentLayoutSetBranch(recentLayoutSetBranchId);
 	}
 
-	public static void deleteRecentLayoutSetBranches(
-		com.liferay.portal.model.LayoutSetBranch layoutSetBranch) {
-		getService().deleteRecentLayoutSetBranches(layoutSetBranch);
+	public static void deleteRecentLayoutSetBranches(long layoutSetBranchId) {
+		getService().deleteRecentLayoutSetBranches(layoutSetBranchId);
 	}
 
-	public static void deleteRecentLayoutSetBranches(
-		com.liferay.portal.model.User user) {
-		getService().deleteRecentLayoutSetBranches(user);
+	public static void deleteUserRecentLayoutSetBranches(long userId) {
+		getService().deleteUserRecentLayoutSetBranches(userId);
 	}
 
 	public static com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery() {

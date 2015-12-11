@@ -32,14 +32,6 @@ public class RecentLayoutSetBranchLocalServiceWrapper
 		_recentLayoutSetBranchLocalService = recentLayoutSetBranchLocalService;
 	}
 
-	@Override
-	public com.liferay.portal.model.RecentLayoutSetBranch addRecentLayoutSetBranch(
-		long companyId, long groupId, long userId, long layoutSetBranchId,
-		long layoutSetId) {
-		return _recentLayoutSetBranchLocalService.addRecentLayoutSetBranch(companyId,
-			groupId, userId, layoutSetBranchId, layoutSetId);
-	}
-
 	/**
 	* Adds the recent layout set branch to the database. Also notifies the appropriate model listeners.
 	*
@@ -50,6 +42,14 @@ public class RecentLayoutSetBranchLocalServiceWrapper
 	public com.liferay.portal.model.RecentLayoutSetBranch addRecentLayoutSetBranch(
 		com.liferay.portal.model.RecentLayoutSetBranch recentLayoutSetBranch) {
 		return _recentLayoutSetBranchLocalService.addRecentLayoutSetBranch(recentLayoutSetBranch);
+	}
+
+	@Override
+	public com.liferay.portal.model.RecentLayoutSetBranch addRecentLayoutSetBranch(
+		long userId, long layoutSetBranchId, long layoutSetId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _recentLayoutSetBranchLocalService.addRecentLayoutSetBranch(userId,
+			layoutSetBranchId, layoutSetId);
 	}
 
 	/**
@@ -101,15 +101,13 @@ public class RecentLayoutSetBranchLocalServiceWrapper
 	}
 
 	@Override
-	public void deleteRecentLayoutSetBranches(
-		com.liferay.portal.model.LayoutSetBranch layoutSetBranch) {
-		_recentLayoutSetBranchLocalService.deleteRecentLayoutSetBranches(layoutSetBranch);
+	public void deleteRecentLayoutSetBranches(long layoutSetBranchId) {
+		_recentLayoutSetBranchLocalService.deleteRecentLayoutSetBranches(layoutSetBranchId);
 	}
 
 	@Override
-	public void deleteRecentLayoutSetBranches(
-		com.liferay.portal.model.User user) {
-		_recentLayoutSetBranchLocalService.deleteRecentLayoutSetBranches(user);
+	public void deleteUserRecentLayoutSetBranches(long userId) {
+		_recentLayoutSetBranchLocalService.deleteUserRecentLayoutSetBranches(userId);
 	}
 
 	@Override
