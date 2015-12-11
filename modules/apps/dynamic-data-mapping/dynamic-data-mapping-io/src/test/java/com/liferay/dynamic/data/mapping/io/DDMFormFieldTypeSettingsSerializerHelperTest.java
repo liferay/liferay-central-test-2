@@ -59,23 +59,134 @@ public class DDMFormFieldTypeSettingsSerializerHelperTest
 			expectedJSON, actualJSONObject.toString(), false);
 	}
 
+	@Test
+	public void testGetSettingsLayoutWithDefaultColumnSize() throws Exception {
+		JSONFactory jsonFactory = new JSONFactoryImpl();
+
+		DDMFormFieldTypeSettingsSerializerHelper
+			ddmFormFieldTypeSettingsSerializerHelper =
+				new DDMFormFieldTypeSettingsSerializerHelper(
+					SampleDDMFormFieldTypeSettingsWithDefaultColumnSize.class,
+					new DDMFormJSONSerializerImpl(),
+					new DDMFormLayoutJSONSerializerImpl(), jsonFactory);
+
+		String expectedJSON = read(
+			"ddm-form-field-type-settings-layout-serializer-test-data" +
+				"-default-column-size.json");
+
+		JSONObject actualJSONObject =
+			ddmFormFieldTypeSettingsSerializerHelper.
+				getSettingsLayoutJSONObject();
+
+		JSONAssert.assertEquals(
+			expectedJSON, actualJSONObject.toString(), false);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testWithoutLayout() throws Exception {
+		JSONFactory jsonFactory = new JSONFactoryImpl();
+
+		DDMFormFieldTypeSettingsSerializerHelper
+			ddmFormFieldTypeSettingsSerializerHelper =
+				new DDMFormFieldTypeSettingsSerializerHelper(
+					SampleDDMFormFieldTypeSettingsWithNoLayout.class,
+					new DDMFormJSONSerializerImpl(),
+					new DDMFormLayoutJSONSerializerImpl(), jsonFactory);
+
+		ddmFormFieldTypeSettingsSerializerHelper.getSettingsLayoutJSONObject();
+	}
+
 	@DDMForm
 	@DDMFormLayout(
 		{
 			@DDMFormLayoutPage(
 				title = "basic",
 				value = {
-					@DDMFormLayoutRow({@DDMFormLayoutColumn({"c", "b", "a"})}
-	)
+					@DDMFormLayoutRow(
+						{
+							@DDMFormLayoutColumn(
+								size = 4,
+								value = {"c", "b", "a"}
+							)
+						}
+					)
 				}
 			),
 			@DDMFormLayoutPage(
 				title = "advanced",
-				value = {@DDMFormLayoutRow({@DDMFormLayoutColumn({"e", "d"})})}
+				value = {
+					@DDMFormLayoutRow(
+						{
+							@DDMFormLayoutColumn(size = 6, value = {"e", "d"})
+						}
+					)
+				}
 			)
 		}
 	)
 	private interface SampleDDMFormFieldTypeSettings {
+
+		@DDMFormField
+		public String a();
+
+		@DDMFormField
+		public String b();
+
+		@DDMFormField
+		public String c();
+
+		@DDMFormField
+		public String d();
+
+		@DDMFormField
+		public String e();
+
+	}
+
+	@DDMForm
+	@DDMFormLayout(
+		{
+			@DDMFormLayoutPage(
+				title = "basic",
+				value = {
+					@DDMFormLayoutRow(
+						{@DDMFormLayoutColumn(value = {"a", "b"})}
+					)
+				}
+			),
+			@DDMFormLayoutPage(
+				title = "advanced",
+				value = {
+					@DDMFormLayoutRow(
+						{
+							@DDMFormLayoutColumn(value = {"e", "c", "d"})
+						}
+					)
+				}
+			)
+		}
+	)
+	private interface SampleDDMFormFieldTypeSettingsWithDefaultColumnSize {
+
+		@DDMFormField
+		public String a();
+
+		@DDMFormField
+		public String b();
+
+		@DDMFormField
+		public String c();
+
+		@DDMFormField
+		public String d();
+
+		@DDMFormField
+		public String e();
+
+	}
+
+	@DDMForm
+	private interface SampleDDMFormFieldTypeSettingsWithNoLayout {
 
 		@DDMFormField
 		public String a();
