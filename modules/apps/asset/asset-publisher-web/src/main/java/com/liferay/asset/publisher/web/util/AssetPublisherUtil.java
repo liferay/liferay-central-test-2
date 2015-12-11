@@ -1003,14 +1003,14 @@ public class AssetPublisherUtil {
 
 		definitionTerms.put("[$PORTAL_URL$]", company.getVirtualHostname());
 
-		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
-
 		definitionTerms.put(
 			"[$PORTLET_NAME$]",
 			HtmlUtil.escape(
 				PortalUtil.getPortletTitle(
 					AssetPublisherPortletKeys.ASSET_PUBLISHER,
 					themeDisplay.getLocale())));
+
+		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
 		definitionTerms.put(
 			"[$PORTLET_TITLE$]", HtmlUtil.escape(portletDisplay.getTitle()));
