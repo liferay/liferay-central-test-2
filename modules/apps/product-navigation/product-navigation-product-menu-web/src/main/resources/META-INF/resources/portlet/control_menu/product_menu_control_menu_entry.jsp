@@ -24,6 +24,7 @@ String productMenuState = SessionClicks.get(request, "com.liferay.control.menu.w
 	<a class="control-menu-icon icon-monospaced sidenav-toggler" data-content="body" data-qa-id="productMenu" data-target="#sidenavSliderId,#wrapper" data-title="<%= HtmlUtil.escape(LanguageUtil.get(request, "menu")) %>" data-toggle="sidenav" data-type="fixed-push" data-type-mobile="fixed" href="#sidenavSliderId" id="sidenavToggleId">
 		<div class="toast-animation">
 			<div class="pm"></div>
+
 			<div class="cn"></div>
 		</div>
 	</a>
