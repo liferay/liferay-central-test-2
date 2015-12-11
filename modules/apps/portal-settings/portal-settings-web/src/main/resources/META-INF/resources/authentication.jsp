@@ -46,7 +46,7 @@ tabsNames = (tabsNames.length() > 0) ? "general" + StringPool.COMMA + tabsNames 
 	%>
 
 		<liferay-ui:section>
-			<liferay-util:include page='<%= "/authentication/" + _getSectionJsp(section) + ".jsp" %>' portletId="<%= portletDisplay.getRootPortletId() %>" />
+			<liferay-util:include page='<%= "/html/portlet/portal_settings/authentication/" + _getSectionJsp(section) + ".jsp" %>' portletId="<%= PortletKeys.PORTAL %>" />
 		</liferay-ui:section>
 
 	<%
