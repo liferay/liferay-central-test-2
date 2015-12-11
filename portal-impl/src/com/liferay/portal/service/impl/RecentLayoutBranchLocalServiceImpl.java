@@ -16,9 +16,9 @@ package com.liferay.portal.service.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.model.LayoutBranch;
 import com.liferay.portal.model.RecentLayoutBranch;
-import com.liferay.portal.model.User;
 import com.liferay.portal.service.base.RecentLayoutBranchLocalServiceBaseImpl;
 
 /**
@@ -31,16 +31,18 @@ public class RecentLayoutBranchLocalServiceImpl
 
 	@Override
 	public RecentLayoutBranch addRecentLayoutBranch(
-		long companyId, long groupId, long userId, long layoutBranchId,
-		long layoutSetBranchId, long plid) {
+			long userId, long layoutBranchId, long layoutSetBranchId, long plid)
+		throws PortalException {
 
-		long recentLayoutBranchId = counterLocalService.increment();
+		LayoutBranch layoutBranch = layoutBranchPersistence.findByPrimaryKey(
+			layoutBranchId);
 
 		RecentLayoutBranch recentLayoutBranch =
-			recentLayoutBranchPersistence.create(recentLayoutBranchId);
+			recentLayoutBranchPersistence.create(
+				counterLocalService.increment());
 
-		recentLayoutBranch.setGroupId(groupId);
-		recentLayoutBranch.setCompanyId(companyId);
+		recentLayoutBranch.setGroupId(layoutBranch.getGroupId());
+		recentLayoutBranch.setCompanyId(layoutBranch.getCompanyId());
 		recentLayoutBranch.setUserId(userId);
 		recentLayoutBranch.setLayoutBranchId(layoutBranchId);
 		recentLayoutBranch.setLayoutSetBranchId(layoutSetBranchId);
@@ -50,14 +52,13 @@ public class RecentLayoutBranchLocalServiceImpl
 	}
 
 	@Override
-	public void deleteRecentLayoutBranches(LayoutBranch layoutBranch) {
-		recentLayoutBranchPersistence.removeByLayoutBranchId(
-			layoutBranch.getLayoutBranchId());
+	public void deleteRecentLayoutBranches(long layoutBranchId) {
+		recentLayoutBranchPersistence.removeByLayoutBranchId(layoutBranchId);
 	}
 
 	@Override
-	public void deleteRecentLayoutBranches(User user) {
-		recentLayoutBranchPersistence.removeByUserId(user.getUserId());
+	public void deleteUserRecentLayoutBranches(long userId) {
+		recentLayoutBranchPersistence.removeByUserId(userId);
 	}
 
 	@Override

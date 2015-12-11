@@ -2338,7 +2338,6 @@ public class StagingImpl implements Staging {
 			if (recentLayoutBranch == null) {
 				recentLayoutBranch =
 					_recentLayoutBranchLocalService.addRecentLayoutBranch(
-						layoutBranch.getCompanyId(), layoutBranch.getGroupId(),
 						userId, layoutBranchId, layoutSetBranchId, plid);
 			}
 
@@ -2385,9 +2384,8 @@ public class StagingImpl implements Staging {
 					recentLayoutRevision =
 						_recentLayoutRevisionLocalService.
 							addRecentLayoutRevision(
-								layoutRevision.getCompanyId(),
-								layoutRevision.getGroupId(), userId,
-								layoutRevisionId, layoutSetBranchId, plid);
+								userId, layoutRevisionId, layoutSetBranchId,
+								plid);
 				}
 
 				recentLayoutRevision.setLayoutRevisionId(layoutRevisionId);
@@ -2442,9 +2440,7 @@ public class StagingImpl implements Staging {
 			if (recentLayoutSetBranch == null) {
 				recentLayoutSetBranch =
 					_recentLayoutSetBranchLocalService.addRecentLayoutSetBranch(
-						layoutSetBranch.getCompanyId(),
-						layoutSetBranch.getGroupId(), userId, layoutSetBranchId,
-						layoutSetId);
+						userId, layoutSetBranchId, layoutSetId);
 			}
 
 			recentLayoutSetBranch.setLayoutSetBranchId(layoutSetBranchId);
