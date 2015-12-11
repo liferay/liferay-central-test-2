@@ -97,9 +97,11 @@ public class CompoundSessionIdFilter
 		public void modifiedService(
 			ServiceReference<CompoundSessionIdServletRequestFactory>
 				serviceReference,
-			CompoundSessionIdServletRequestFactory service) {
+			CompoundSessionIdServletRequestFactory
+				compoundSessionIdServletRequestFactory) {
 
-			removedService(serviceReference, service);
+			removedService(
+				serviceReference, compoundSessionIdServletRequestFactory);
 			addingService(serviceReference);
 		}
 
@@ -107,7 +109,8 @@ public class CompoundSessionIdFilter
 		public void removedService(
 			ServiceReference<CompoundSessionIdServletRequestFactory>
 				serviceReference,
-			CompoundSessionIdServletRequestFactory service) {
+			CompoundSessionIdServletRequestFactory
+				compoundSessionIdServletRequestFactory) {
 
 			_compoundSessionIdServletRequestFactory = null;
 		}
