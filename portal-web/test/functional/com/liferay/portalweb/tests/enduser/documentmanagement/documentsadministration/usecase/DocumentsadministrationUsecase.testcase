@@ -1234,6 +1234,10 @@
 
 		<execute macro="DMDocument#enableActionsMenuOnPortlet" />
 
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
 		<execute function="Click" locator1="Icon#DISPLAY_STYLE_DESCRIPTIVE" />
 
 		<execute macro="Page#gotoPG">
