@@ -35,7 +35,8 @@ import com.liferay.dynamic.data.mapping.model.DDMFormFieldOptions;
 				@DDMFormLayoutRow(
 					{
 						@DDMFormLayoutColumn(
-							{
+							size = 12,
+							value = {
 								"label", "tip", "required", "options",
 								"dataSourceType", "ddmDataProviderInstanceId"
 							}
@@ -50,7 +51,8 @@ import com.liferay.dynamic.data.mapping.model.DDMFormFieldOptions;
 				@DDMFormLayoutRow(
 					{
 						@DDMFormLayoutColumn(
-							{
+							size = 12,
+							value = {
 								"validation", "showLabel", "repeatable",
 								"multiple", "predefinedValue",
 								"visibilityExpression", "fieldNamespace",

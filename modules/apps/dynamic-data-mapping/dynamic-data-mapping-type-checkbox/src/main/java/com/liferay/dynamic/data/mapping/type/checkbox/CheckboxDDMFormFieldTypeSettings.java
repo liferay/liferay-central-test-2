@@ -35,7 +35,10 @@ import com.liferay.dynamic.data.mapping.model.LocalizedValue;
 				@DDMFormLayoutRow(
 					{
 						@DDMFormLayoutColumn(
-							{"label", "tip", "required", "showAsSwitcher"}
+							size = 12,
+							value = {
+								"label", "tip", "required", "showAsSwitcher"
+							}
 						)
 					}
 				)
@@ -47,7 +50,8 @@ import com.liferay.dynamic.data.mapping.model.LocalizedValue;
 				@DDMFormLayoutRow(
 					{
 						@DDMFormLayoutColumn(
-							{
+							size = 12,
+							value = {
 								"validation", "showLabel",
 								"visibilityExpression", "predefinedValue",
 								"repeatable", "fieldNamespace", "indexType",

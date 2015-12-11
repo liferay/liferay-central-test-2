@@ -26,6 +26,8 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 public @interface DDMFormLayoutColumn {
 
+	public int size() default 12;
+
 	public String[] value() default {};
 
 }

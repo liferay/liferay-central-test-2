@@ -27,11 +27,14 @@ import com.liferay.dynamic.data.mapping.annotations.DDMFormLayoutRow;
 @DDMForm
 @DDMFormLayout( {
 	@DDMFormLayoutPage( {
-		@DDMFormLayoutRow({@DDMFormLayoutColumn({"url"})}),
-		@DDMFormLayoutRow({@DDMFormLayoutColumn({"username"})}),
-		@DDMFormLayoutRow({@DDMFormLayoutColumn({"password"})}),
-		@DDMFormLayoutRow({@DDMFormLayoutColumn({"key"})}),
-		@DDMFormLayoutRow({@DDMFormLayoutColumn({"value"})})
+		@DDMFormLayoutRow(
+			{
+				@DDMFormLayoutColumn(
+					size = 12,
+					value = {"url", "username", "password", "key", "value"}
+				)
+			}
+		)
 	})
 })
 public interface DDMRESTDataProviderSettings {

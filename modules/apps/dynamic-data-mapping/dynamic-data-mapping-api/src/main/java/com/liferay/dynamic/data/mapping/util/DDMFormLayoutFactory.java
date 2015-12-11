@@ -67,8 +67,7 @@ public class DDMFormLayoutFactory {
 
 		ddmFormLayoutColumn.setDDMFormFieldNames(
 			ListUtil.fromArray(ddmFormLayoutColumnAnnotation.value()));
-		ddmFormLayoutColumn.setSize(
-			com.liferay.dynamic.data.mapping.model.DDMFormLayoutColumn.FULL);
+		ddmFormLayoutColumn.setSize(ddmFormLayoutColumnAnnotation.size());
 
 		return ddmFormLayoutColumn;
 	}
