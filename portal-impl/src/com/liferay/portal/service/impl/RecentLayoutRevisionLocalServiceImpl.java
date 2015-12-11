@@ -16,9 +16,9 @@ package com.liferay.portal.service.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.model.LayoutRevision;
 import com.liferay.portal.model.RecentLayoutRevision;
-import com.liferay.portal.model.User;
 import com.liferay.portal.service.base.RecentLayoutRevisionLocalServiceBaseImpl;
 
 /**
@@ -31,16 +31,19 @@ public class RecentLayoutRevisionLocalServiceImpl
 
 	@Override
 	public RecentLayoutRevision addRecentLayoutRevision(
-		long companyId, long groupId, long userId, long layoutRevisionId,
-		long layoutSetBranchId, long plid) {
+			long userId, long layoutRevisionId, long layoutSetBranchId,
+			long plid)
+		throws PortalException {
 
-		long recentLayoutRevisionId = counterLocalService.increment();
+		LayoutRevision layoutRevision =
+			layoutRevisionPersistence.findByPrimaryKey(layoutRevisionId);
 
 		RecentLayoutRevision recentLayoutRevision =
-			recentLayoutRevisionPersistence.create(recentLayoutRevisionId);
+			recentLayoutRevisionPersistence.create(
+				counterLocalService.increment());
 
-		recentLayoutRevision.setGroupId(groupId);
-		recentLayoutRevision.setCompanyId(companyId);
+		recentLayoutRevision.setGroupId(layoutRevision.getGroupId());
+		recentLayoutRevision.setCompanyId(layoutRevision.getCompanyId());
 		recentLayoutRevision.setUserId(userId);
 		recentLayoutRevision.setLayoutRevisionId(layoutRevisionId);
 		recentLayoutRevision.setLayoutSetBranchId(layoutSetBranchId);
@@ -50,14 +53,14 @@ public class RecentLayoutRevisionLocalServiceImpl
 	}
 
 	@Override
-	public void deleteRecentLayoutRevisions(LayoutRevision layoutRevision) {
+	public void deleteRecentLayoutRevisions(long layoutRevisionId) {
 		recentLayoutRevisionPersistence.removeByLayoutRevisionId(
-			layoutRevision.getLayoutRevisionId());
+			layoutRevisionId);
 	}
 
 	@Override
-	public void deleteRecentLayoutRevisions(User user) {
-		recentLayoutRevisionPersistence.removeByUserId(user.getUserId());
+	public void deleteUserRecentLayoutRevisions(long userId) {
+		recentLayoutRevisionPersistence.removeByUserId(userId);
 	}
 
 	@Override

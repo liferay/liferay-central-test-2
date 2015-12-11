@@ -1856,9 +1856,12 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		// Recent layouts
 
-		recentLayoutBranchLocalService.deleteRecentLayoutBranches(user);
-		recentLayoutRevisionLocalService.deleteRecentLayoutRevisions(user);
-		recentLayoutSetBranchLocalService.deleteRecentLayoutSetBranches(user);
+		recentLayoutBranchLocalService.deleteUserRecentLayoutBranches(
+			user.getUserId());
+		recentLayoutRevisionLocalService.deleteUserRecentLayoutRevisions(
+			user.getUserId());
+		recentLayoutSetBranchLocalService.deleteUserRecentLayoutSetBranches(
+			user.getUserId());
 
 		// Resources
 

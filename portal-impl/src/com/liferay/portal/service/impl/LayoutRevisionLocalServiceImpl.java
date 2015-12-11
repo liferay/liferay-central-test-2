@@ -169,7 +169,7 @@ public class LayoutRevisionLocalServiceImpl
 		}
 
 		recentLayoutRevisionLocalService.deleteRecentLayoutRevisions(
-			layoutRevision);
+			layoutRevision.getLayoutRevisionId());
 
 		if (layoutRevision.isPending()) {
 			workflowInstanceLinkLocalService.deleteWorkflowInstanceLink(

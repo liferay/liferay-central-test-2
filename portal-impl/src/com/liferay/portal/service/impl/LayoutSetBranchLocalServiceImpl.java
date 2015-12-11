@@ -274,11 +274,6 @@ public class LayoutSetBranchLocalServiceImpl
 
 		layoutSetBranchPersistence.remove(layoutSetBranch);
 
-		// Recent layout sets
-
-		recentLayoutSetBranchLocalService.deleteRecentLayoutSetBranches(
-			layoutSetBranch);
-
 		// Resources
 
 		resourceLocalService.deleteResource(
@@ -294,6 +289,11 @@ public class LayoutSetBranchLocalServiceImpl
 		// Layout revisions
 
 		layoutRevisionLocalService.deleteLayoutSetBranchLayoutRevisions(
+			layoutSetBranch.getLayoutSetBranchId());
+
+		// Recent layout sets
+
+		recentLayoutSetBranchLocalService.deleteRecentLayoutSetBranches(
 			layoutSetBranch.getLayoutSetBranchId());
 
 		return layoutSetBranch;
