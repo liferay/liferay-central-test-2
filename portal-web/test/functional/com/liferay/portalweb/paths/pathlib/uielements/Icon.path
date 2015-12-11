@@ -75,7 +75,7 @@
 </tr>
 <tr>
 	<td>CLOSE</td>
-	<td>//button[contains(@class,'close')]</td>
+	<td>//button[contains(@class,'close')] | //a[contains(@class,'close')]</td>
 	<td></td>
 </tr>
 <tr>
