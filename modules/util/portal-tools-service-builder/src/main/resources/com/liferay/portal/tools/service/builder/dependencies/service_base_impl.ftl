@@ -1174,6 +1174,7 @@ import ${packagePath}.service.${entity.name}${sessionTypeName}Service;
 			<#else>
 				@BeanReference(type = ${tempEntity.name}Persistence.class)
 			</#if>
+
 			protected ${tempEntity.name}Persistence ${tempEntity.varName}Persistence;
 		</#if>
 
@@ -1183,6 +1184,7 @@ import ${packagePath}.service.${entity.name}${sessionTypeName}Service;
 			<#else>
 				@BeanReference(type = ${tempEntity.name}Finder.class)
 			</#if>
+
 			protected ${tempEntity.name}Finder ${tempEntity.varName}Finder;
 		</#if>
 	</#list>
