@@ -70,7 +70,7 @@ public interface DefaultDDMFormFieldTypeSettings
 	public String indexType();
 
 	@DDMFormField(
-		label = "%question", properties = { "placeholder=%type-your-question" },
+		label = "%question", properties = {"placeholder=%type-your-question"},
 		required = true, tip = "%type-what-you-want-to-ask", type = "key-value"
 	)
 	public LocalizedValue label();
@@ -87,13 +87,13 @@ public interface DefaultDDMFormFieldTypeSettings
 	@DDMFormField(label = "%read-only", visibilityExpression = "false")
 	public boolean readOnly();
 
-	@DDMFormField(label = "%repeatable", properties = { "showAsSwitcher=true" })
+	@DDMFormField(label = "%repeatable", properties = {"showAsSwitcher=true"})
 	public boolean repeatable();
 
-	@DDMFormField(label = "%required", properties = { "showAsSwitcher=true" })
+	@DDMFormField(label = "%required", properties = {"showAsSwitcher=true"})
 	public boolean required();
 
-	@DDMFormField(label = "%show-label", properties = { "showAsSwitcher=true" })
+	@DDMFormField(label = "%show-label", properties = {"showAsSwitcher=true"})
 	public boolean showLabel();
 
 	@DDMFormField(
