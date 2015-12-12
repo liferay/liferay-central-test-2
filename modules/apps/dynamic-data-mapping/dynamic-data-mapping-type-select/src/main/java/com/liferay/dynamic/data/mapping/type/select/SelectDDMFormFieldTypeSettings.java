@@ -78,18 +78,18 @@ public interface SelectDDMFormFieldTypeSettings
 	public String dataSourceType();
 
 	@DDMFormField(
-		properties = { "showLabel=false" },
+		properties = {"showLabel=false"},
 		type = "select",
 		visibilityExpression = "dataSourceType.equals(\"data-provider\")"
 	)
 	public long ddmDataProviderInstanceId();
 
-	@DDMFormField(label = "%multiple", properties = { "showAsSwitcher=true" })
+	@DDMFormField(label = "%multiple", properties = {"showAsSwitcher=true"})
 	public boolean multiple();
 
 	@DDMFormField(
 		dataType = "ddm-options", label = "%options",
-		properties = { "showLabel=false" },
+		properties = {"showLabel=false"},
 		required = true, type = "options",
 		visibilityExpression = "dataSourceType.equals(\"manual\")"
 	)
