@@ -71,8 +71,8 @@ public class DDMFormFieldTypeSettingsSerializerHelperTest
 					new DDMFormLayoutJSONSerializerImpl(), jsonFactory);
 
 		String expectedJSON = read(
-			"ddm-form-field-type-settings-layout-serializer-test-data" +
-				"-default-column-size.json");
+			"ddm-form-field-type-settings-layout-serializer-test-data-" +
+				"default-column-size.json");
 
 		JSONObject actualJSONObject =
 			ddmFormFieldTypeSettingsSerializerHelper.
