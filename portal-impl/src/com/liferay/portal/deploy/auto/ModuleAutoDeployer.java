@@ -42,9 +42,11 @@ public class ModuleAutoDeployer extends BaseDeployer {
 
 		String destDir = null;
 
-		for (String dir : moduleFrameworkAutoDeployDirs) {
-			if (dir.endsWith("modules")) {
-				destDir = dir;
+		for (String moduleFrameworkAutoDeployDir :
+				moduleFrameworkAutoDeployDirs) {
+
+			if (moduleFrameworkAutoDeployDir.endsWith("modules")) {
+				destDir = moduleFrameworkAutoDeployDir;
 			}
 		}
 

@@ -52,17 +52,21 @@ public class ModuleAutoDeployerTest extends BaseDeployerTestCase {
 	}
 
 	@Test
-	public void testDeployJarToModules() throws Exception {
-		File jarFile = File.createTempFile("some", ".jar");
+	public void testDeployJARToModules() throws Exception {
+		BaseDeployer baseDeployer = getDeployer();
 
 		AutoDeploymentContext autoDeploymentContext =
 			new AutoDeploymentContext();
 
+		File jarFile = File.createTempFile("some", ".jar");
+
 		autoDeploymentContext.setFile(jarFile);
 
-		getDeployer().deployFile(autoDeploymentContext);
+		baseDeployer.deployFile(autoDeploymentContext);
 
-		assertTrue(new File(getModulesDir(), jarFile.getName()).exists());
+		File deployedJarFile = new File(getModulesDir(), jarFile.getName());
+
+		assertTrue(deployedJarFile.exists());
 	}
 
 	protected File getConfigsDir() {
