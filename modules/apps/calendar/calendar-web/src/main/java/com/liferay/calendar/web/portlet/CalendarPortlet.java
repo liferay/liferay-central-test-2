@@ -363,7 +363,6 @@ public class CalendarPortlet extends MVCPortlet {
 			actionRequest, calendar.getTimeZone());
 		long[] reminders = getReminders(actionRequest);
 		String[] remindersType = getRemindersType(actionRequest);
-
 		int instanceIndex = ParamUtil.getInteger(
 			actionRequest, "instanceIndex");
 		boolean updateCalendarBookingInstance = ParamUtil.getBoolean(
@@ -1207,35 +1206,32 @@ public class CalendarPortlet extends MVCPortlet {
 
 		long calendarBookingId = ParamUtil.getLong(
 			resourceRequest, "calendarBookingId");
-		int instanceIndex = ParamUtil.getInteger(
-			resourceRequest, "instanceIndex");
+
+		CalendarBooking calendarBooking =
+			_calendarBookingService.fetchCalendarBooking(calendarBookingId);
 
 		long calendarId = ParamUtil.getLong(resourceRequest, "calendarId");
 
 		Calendar calendar = _calendarService.getCalendar(calendarId);
 
-		String title = ParamUtil.getString(resourceRequest, "title");
+		long[] childCalendarIds = {};
+		Map<Locale, String> titleMap = new HashMap<>();
+		Map<Locale, String> descriptionMap = new HashMap<>();
+		String location = null;
 		java.util.Calendar startTimeJCalendar = getJCalendar(
 			resourceRequest, "startTime");
 		java.util.Calendar endTimeJCalendar = getJCalendar(
 			resourceRequest, "endTime");
 		boolean allDay = ParamUtil.getBoolean(resourceRequest, "allDay");
 		String recurrence = ParamUtil.getString(resourceRequest, "recurrence");
-
+		long[] reminders = {0, 0};
+		String[] remindersType = {"email", "email"};
+		int instanceIndex = ParamUtil.getInteger(
+			resourceRequest, "instanceIndex");
 		boolean updateInstance = ParamUtil.getBoolean(
 			resourceRequest, "updateInstance");
 		boolean allFollowing = ParamUtil.getBoolean(
 			resourceRequest, "allFollowing");
-
-		CalendarBooking calendarBooking =
-			_calendarBookingService.fetchCalendarBooking(calendarBookingId);
-
-		long[] childCalendarIds;
-		Map<Locale, String> titleMap;
-		Map<Locale, String> descriptionMap;
-		String location;
-		long[] reminders;
-		String[] remindersType;
 
 		if (calendarBooking != null) {
 			childCalendarIds = _calendarBookingLocalService.getChildCalendarIds(
@@ -1252,14 +1248,8 @@ public class CalendarPortlet extends MVCPortlet {
 				calendarBooking.getSecondReminderType()
 			};
 		}
-		else {
-			childCalendarIds = new long[0];
-			titleMap = new HashMap<>();
-			descriptionMap = new HashMap<>();
-			location = null;
-			reminders = new long[] {0, 0};
-			remindersType = new String[] {"email", "email"};
-		}
+
+		String title = ParamUtil.getString(resourceRequest, "title");
 
 		titleMap.put(themeDisplay.getLocale(), title);
 
