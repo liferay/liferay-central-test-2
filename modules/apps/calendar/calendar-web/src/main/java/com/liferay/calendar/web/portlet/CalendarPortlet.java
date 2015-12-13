@@ -1337,11 +1337,9 @@ public class CalendarPortlet extends MVCPortlet {
 
 		CalendarBooking calendarBooking = null;
 
-		long calendarId = calendar.getCalendarId();
-
 		if (calendarBookingId <= 0) {
 			calendarBooking = _calendarBookingService.addCalendarBooking(
-				calendarId, childCalendarIds,
+				calendar.getCalendarId(), childCalendarIds,
 				CalendarBookingConstants.PARENT_CALENDAR_BOOKING_ID_DEFAULT,
 				titleMap, descriptionMap, location, startTime, endTime, allDay,
 				recurrence, reminders[0], remindersType[0], reminders[1],
@@ -1351,11 +1349,12 @@ public class CalendarPortlet extends MVCPortlet {
 			if (updateInstance) {
 				calendarBooking =
 					_calendarBookingService.updateCalendarBookingInstance(
-						calendarBookingId, instanceIndex, calendarId,
-						childCalendarIds, titleMap, descriptionMap, location,
-						startTime, endTime, allDay, recurrence, allFollowing,
-						reminders[0], remindersType[0], reminders[1],
-						remindersType[1], serviceContext);
+						calendarBookingId, instanceIndex,
+						calendar.getCalendarId(), childCalendarIds, titleMap,
+						descriptionMap, location, startTime, endTime, allDay,
+						recurrence, allFollowing, reminders[0],
+						remindersType[0], reminders[1], remindersType[1],
+						serviceContext);
 			}
 			else {
 				calendarBooking =
@@ -1374,8 +1373,9 @@ public class CalendarPortlet extends MVCPortlet {
 					calendarBooking, recurrence, calendar.getTimeZone());
 
 				calendarBooking = _calendarBookingService.updateCalendarBooking(
-					calendarBookingId, calendarId, childCalendarIds, titleMap,
-					descriptionMap, location, calendarBooking.getStartTime(),
+					calendarBookingId, calendar.getCalendarId(),
+					childCalendarIds, titleMap, descriptionMap, location,
+					calendarBooking.getStartTime(),
 					calendarBooking.getEndTime(), allDay, recurrence,
 					reminders[0], remindersType[0], reminders[1],
 					remindersType[1], serviceContext);
