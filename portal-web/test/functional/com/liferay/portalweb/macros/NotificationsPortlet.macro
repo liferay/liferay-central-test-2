@@ -89,6 +89,14 @@
 		<execute function="AssertChecked" locator1="Notifications#NOTIFICATION_DELIVERY_CHECKBOX_2" />
 		<execute function="AssertTextEquals" locator1="Notifications#NOTIFICATION_DELIVERY_CHECKBOX_LABEL_2" value1="Website" />
 
+		<var name="key_contentType" value="Mentions" />
+
+		<execute function="AssertTextEquals" locator1="Notifications#NOTIFICATION_DELIVERY_TEXT_1" value1="mentions you in a blogs entry, a comment, or a message boards message." />
+		<execute function="AssertChecked" locator1="Notifications#NOTIFICATION_DELIVERY_CHECKBOX_1" />
+		<execute function="AssertTextEquals" locator1="Notifications#NOTIFICATION_DELIVERY_CHECKBOX_LABEL_1" value1="Email" />
+		<execute function="AssertChecked" locator1="Notifications#NOTIFICATION_DELIVERY_CHECKBOX_2" />
+		<execute function="AssertTextEquals" locator1="Notifications#NOTIFICATION_DELIVERY_CHECKBOX_LABEL_2" value1="Website" />
+
 		<var name="key_contentType" value="Message Boards" />
 
 		<execute function="AssertTextEquals" locator1="Notifications#NOTIFICATION_DELIVERY_TEXT_1" value1="adds a new post in a thread or category you are subscribed to." />
