@@ -48,6 +48,7 @@ import com.liferay.portal.util.PropsValues;
 
 import java.io.IOException;
 import java.io.Serializable;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Enumeration;
@@ -255,9 +256,9 @@ public class ComboServlet extends HttpServlet {
 		if (!resourcePath.startsWith(portlet.getContextPath())) {
 			resourcePath = portlet.getContextPath() + resourcePath;
 		}
-		
+
 		StringBundler sb = new StringBundler(5);
-		
+
 		sb.append(resourcePath);
 		sb.append(StringPool.QUESTION);
 		sb.append(minifierType);
