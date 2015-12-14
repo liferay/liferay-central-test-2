@@ -26,16 +26,6 @@ import org.junit.Test;
 public class FileImplTest {
 
 	@Test
-	public void testAppendSuffix() {
-		Assert.assertEquals("test_rtl", _fileImpl.appendSuffix("test", "_rtl"));
-		Assert.assertEquals(
-			"test_rtl.css", _fileImpl.appendSuffix("test.css", "_rtl"));
-		Assert.assertEquals(
-			"/folder/test_rtl.css",
-			_fileImpl.appendSuffix("/folder/test.css", "_rtl"));
-	}
-
-	@Test
 	public void testAppendParentheticalSuffixWhenFileNameHasParenthesis() {
 		String fileName = _fileImpl.appendParentheticalSuffix(
 			"test(1).jsp", "1");
@@ -89,6 +79,16 @@ public class FileImplTest {
 		String fileName = _fileImpl.appendParentheticalSuffix("test.jsp", "A");
 
 		Assert.assertEquals("test (A).jsp", fileName);
+	}
+
+	@Test
+	public void testAppendSuffix() {
+		Assert.assertEquals("test_rtl", _fileImpl.appendSuffix("test", "_rtl"));
+		Assert.assertEquals(
+			"test_rtl.css", _fileImpl.appendSuffix("test.css", "_rtl"));
+		Assert.assertEquals(
+			"/folder/test_rtl.css",
+			_fileImpl.appendSuffix("/folder/test.css", "_rtl"));
 	}
 
 	@Test
