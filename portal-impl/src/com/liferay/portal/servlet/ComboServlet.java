@@ -262,7 +262,7 @@ public class ComboServlet extends HttpServlet {
 		sb.append(StringPool.QUESTION);
 		sb.append(minifierType);
 		sb.append("&languageId=");
-		sb.append(request.getParameter("languageId"));
+		sb.append(ParamUtil.getString(request, "languageId"));
 
 		String fileContentKey = sb.toString();
 
