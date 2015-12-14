@@ -28,6 +28,7 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 
 import java.net.URI;
@@ -66,7 +67,7 @@ public class RTLServlet extends HttpServlet {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND, "Not Found");
 		}
 		else {
-			transferOk(url, response);
+			transfer(url, response);
 		}
 	}
 
@@ -80,11 +81,10 @@ public class RTLServlet extends HttpServlet {
 
 				return urlConnection.getLastModified();
 			}
-			else {
-				return super.getLastModified(request);
-			}
+
+			return super.getLastModified(request);
 		}
-		catch (IOException e) {
+		catch (IOException ioe) {
 			return super.getLastModified(request);
 		}
 	}
@@ -94,11 +94,10 @@ public class RTLServlet extends HttpServlet {
 
 		String languageId = request.getParameter("languageId");
 
-		String pathInfo = URLDecoder.decode(
-				RequestDispatcherUtil.getEffectivePath(request),
-				StringPool.UTF8);
+		String path = URLDecoder.decode(
+			RequestDispatcherUtil.getEffectivePath(request), StringPool.UTF8);
 
-		URL url = _servletContextHelper.getResource(pathInfo);
+		URL url = _servletContextHelper.getResource(path);
 
 		if (url == null) {
 			return null;
@@ -107,23 +106,22 @@ public class RTLServlet extends HttpServlet {
 		if ((languageId == null) || !PortalUtil.isRightToLeft(request)) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"Nothing to do; languageId=" + languageId +
-						", PortalUtil.isRightToLeft(request)=" +
-							PortalUtil.isRightToLeft(request));
+					"Skip because specified language " + languageId +
+						" is not right to left");
 			}
 
 			return url;
 		}
 
-		String pathWithRTL = FileUtil.append(pathInfo, "_rtl");
+		String rtlPath = FileUtil.appendSuffix(path, "_rtl");
 
-		URL urlRTL = _servletContextHelper.getResource(pathWithRTL);
+		URL rtlURL = _servletContextHelper.getResource(rtlPath);
 
-		if (urlRTL != null) {
-			return urlRTL;
+		if (rtlURL != null) {
+			return rtlURL;
 		}
 
-		File dataFile = _bundle.getDataFile(pathWithRTL);
+		File dataFile = _bundle.getDataFile(rtlPath);
 
 		if (dataFile.exists() &&
 			(dataFile.lastModified() >
@@ -138,7 +136,7 @@ public class RTLServlet extends HttpServlet {
 
 		String rtl = rtlcssConverter.process(StringUtil.read(url.openStream()));
 
-		ByteArrayInputStream inputStream = new ByteArrayInputStream(
+		InputStream inputStream = new ByteArrayInputStream(
 			rtl.getBytes(StringPool.UTF8));
 
 		OutputStream outputStream = null;
@@ -154,7 +152,7 @@ public class RTLServlet extends HttpServlet {
 		}
 		catch (IOException ioe) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Could not cache RTL'ed CSS", ioe);
+				_log.warn("Unable to cache RTL CSS", ioe);
 			}
 		}
 		finally {
@@ -170,7 +168,7 @@ public class RTLServlet extends HttpServlet {
 		return uri.toURL();
 	}
 
-	private void transferOk(URL url, HttpServletResponse response)
+	protected void transfer(URL url, HttpServletResponse response)
 		throws IOException {
 
 		URLConnection urlConnection = url.openConnection();
