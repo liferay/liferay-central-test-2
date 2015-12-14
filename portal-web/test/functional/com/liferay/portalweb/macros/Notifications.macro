@@ -2,7 +2,7 @@
 	<command name="acceptRequest">
 		<var name="key_requestsContent" value="${requestsContent}" />
 
-		<execute function="AssertTextEquals" locator1="NotificationsDockbar#REQUESTS_CONTENT" value1="${requestsContent}" />
+		<execute function="AssertTextEquals" locator1="Notifications#NOTIFICATIONS_CONTENT" value1="${requestsContent}" />
 		<execute function="AssertClick" locator1="Button#CONFIRM" value1="Confirm" />
 	</command>
 
@@ -13,13 +13,13 @@
 	<command name="markAllAsRead">
 		<execute function="Check#checkAll" locator1="Checkbox#SELECT_ALL_NOTIFICATIONS" />
 		
-		<execute function="AssertClick" locator1="NotificationsDockbar#NOTIFICATIONS_MARK_ALL_AS_READ" value1="Mark as Read" />
+		<execute function="Click" locator1="Notifications#MARK_AS_READ" />
 	</command>
 
 	<command name="navigateToContent">
 		<var name="key_contentBody" value="${contentBody}" />
 
-		<execute function="Click#partialTextClickAtAndWait" locator1="NotificationsDockbar#NOTIFICATIONS_CONTENT" value1="${contentBody}" />
+		<execute function="Click#partialTextClickAtAndWait" locator1="Notifications#NOTIFICATIONS_CONTENT" value1="${contentBody}" />
 	</command>
 
 	<command name="navigateToViewAllNotifications">
@@ -49,9 +49,9 @@
 		<execute function="Click" locator1="NotificationsDockbar#DOCKBAR" />
 
 		<if>
-			<condition function="IsElementPresent" locator1="NotificationsDockbar#NOTIFICATIONS_CONTENT_GENERIC" />
+			<condition function="IsElementPresent" locator1="Notifications#NOTIFICATIONS_CONTENT" />
 			<then>
-				<execute function="AssertClick" locator1="NotificationsDockbar#NOTIFICATIONS_MARK_ALL_AS_READ" value1="Mark as Read" />
+				<execute function="AssertClick" locator1="Notifications#MARK_AS_READ" value1="Mark as Read" />
 			</then>
 		</if>
 	</command>
@@ -65,23 +65,23 @@
 	</command>
 
 	<command name="viewDefaultContent">
-		<execute function="AssertTextEquals" locator1="NotificationsDockbar#NOTIFICATIONS_MESSAGE" value1="You do not have any notifications." />
+		<execute function="AssertTextEquals" locator1="Message#EMPTY_INFO" value1="You do not have any notifications." />
 	</command>
 
 	<command name="viewNewComment">
 		<var method="StringUtil#lowerCase('${assetType}')" name="assetType" />
 		<var name="key_contentBody" value="${contentBody}" />
 
-		<execute function="AssertTextEquals" locator1="NotificationsDockbar#NOTIFICATIONS_CONTENT_TITLE" value1="${user} added a new ${assetType} to ${content}." />
-		<execute function="AssertTextEquals#assertPartialText" locator1="NotificationsDockbar#NOTIFICATIONS_CONTENT_BODY" value1="${contentBody}" />
+		<execute function="AssertTextEquals" locator1="Notifications#NOTIFICATIONS_TITLE" value1="${user} added a new ${assetType} to ${content}." />
+		<execute function="AssertTextEquals#assertPartialText" locator1="Notifications#NOTIFICATIONS_CONTENT" value1="${contentBody}" />
 	</command>
 
 	<command name="viewNewContent">
 		<var method="StringUtil#lowerCase('${assetType}')" name="assetType" />
 		<var name="key_contentBody" value="${contentBody}" />
 
-		<execute function="AssertTextEquals" locator1="NotificationsDockbar#NOTIFICATIONS_CONTENT_TITLE" value1="${user} added a new ${assetType}." />
-		<execute function="AssertTextEquals" locator1="NotificationsDockbar#NOTIFICATIONS_CONTENT_BODY" value1="${contentBody}" />
+		<execute function="AssertTextEquals" locator1="Notifications#NOTIFICATIONS_TITLE" value1="${user} added a new ${assetType}." />
+		<execute function="AssertTextEquals" locator1="Notifications#NOTIFICATIONS_CONTENT" value1="${contentBody}" />
 	</command>
 
 	<command name="viewNoRequest">
@@ -90,14 +90,14 @@
 	</command>
 
 	<command name="viewNotification">
-		<execute function="AssertClick" locator1="NotificationsDockbar#COUNT_ALERT" value1="${notificationCount}" />
+		<execute function="AssertTextEquals" locator1="Notifications#NOTIFICATIONS_CONTENT" value1="${notificationContent}" />
 		<execute function="AssertTextEquals" locator1="NotificationsDockbar#NOTIFICATIONS_CONTENT_GENERIC" value1="${notificationContent}" />
 	</command>
 
 	<command name="viewRequest">
 		<var name="key_requestsContent" value="${requestsContent}" />
 
-		<execute function="AssertTextEquals" locator1="NotificationsDockbar#REQUESTS_CONTENT" value1="${requestsContent}" />
+		<execute function="AssertTextEquals" locator1="Notifications#NOTIFICATIONS_CONTENT" value1="${requestsContent}" />
 	</command>
 
 	<command name="viewRequestCount">
@@ -110,15 +110,15 @@
 		<var method="StringUtil#lowerCase('${assetType}')" name="assetType" />
 		<var name="key_contentBody" value="${contentBody}" />
 
-		<execute function="AssertTextEquals" locator1="NotificationsDockbar#NOTIFICATIONS_CONTENT_TITLE" value1="${user} updated a ${assetType} to ${content}." />
-		<execute function="AssertTextEquals" locator1="NotificationsDockbar#NOTIFICATIONS_CONTENT_BODY" value1="${contentBody}" />
+		<execute function="AssertTextEquals" locator1="Notifications#NOTIFICATIONS_TITLE" value1="${user} updated a ${assetType} to ${content}." />
+		<execute function="AssertTextEquals" locator1="Notifications#NOTIFICATIONS_CONTENT" value1="${contentBody}" />
 	</command>
 
 	<command name="viewUpdatedContent">
 		<var method="StringUtil#lowerCase('${assetType}')" name="assetType" />
 		<var name="key_contentBody" value="${contentBody}" />
 
-		<execute function="AssertTextEquals" locator1="NotificationsDockbar#NOTIFICATIONS_CONTENT_TITLE" value1="${user} updated a ${assetType}." />
-		<execute function="AssertTextEquals" locator1="NotificationsDockbar#NOTIFICATIONS_CONTENT_BODY" value1="${contentBody}" />
+		<execute function="AssertTextEquals" locator1="Notifications#NOTIFICATIONS_TITLE" value1="${user} updated a ${assetType}." />
+		<execute function="AssertTextEquals" locator1="Notifications#NOTIFICATIONS_CONTENT" value1="${contentBody}" />
 	</command>
 </definition>
