@@ -142,9 +142,7 @@ public abstract class BaseJenkinsResultsParserTestCase {
 				_HTML_XML_REPLACEMENTS[i][0], _HTML_XML_REPLACEMENTS[i][1]);
 		}
 
-		Document document = null;
-
-		document = saxReader.read(new StringReader(xml));
+		Document document = saxReader.read(new StringReader(xml));
 
 		String formattedXML = JenkinsResultsParserUtil.format(
 			document.getRootElement());
