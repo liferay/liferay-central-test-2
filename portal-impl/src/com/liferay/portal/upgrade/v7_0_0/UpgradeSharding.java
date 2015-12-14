@@ -69,7 +69,7 @@ public class UpgradeSharding extends UpgradeProcess {
 			throw new RuntimeException(
 				"The property \"shard.default.name\" is not set in " +
 					"portal.properties. Please specify a default shard name " +
-						"from: " + StringUtil.merge(shardNames) + ".");
+						"from: " + StringUtil.merge(shardNames, ", ") + ".");
 		}
 
 		for (String shardName : shardNames) {
