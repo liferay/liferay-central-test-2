@@ -226,9 +226,9 @@
 	</command>
 
 	<command name="ViewDefaultNotificationsPortletDeliveryOptions" priority="3">
-		<execute macro="Notifications#gotoDockbar" />
-
-		<execute macro="Notifications#navigateToViewAllNotifications" />
+		<execute macro="Page#gotoMyAccount">
+			<var name="portletName" value="Notifications" />
+		</execute>
 
 		<execute macro="NotificationsPortlet#gotoNotificationDelivery" />
 

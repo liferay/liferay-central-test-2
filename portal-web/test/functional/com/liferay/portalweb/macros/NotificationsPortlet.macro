@@ -1,9 +1,7 @@
 <definition>
 	<command name="gotoNotificationDelivery">
-		<execute macro="Notifications#gotoDockbar" />
-
-		<execute macro="Notifications#navigateToViewAllNotifications">
-			<var name="notificationCount" value="${notificationCount}" />
+		<execute macro="ProductMenu#gotoUserMyAccount">
+			<var name="portlet" value="Notifications" />
 		</execute>
 
   		<execute function="Click" locator1="Icon#HEADER_VERTICAL_ELLIPSIS" />
