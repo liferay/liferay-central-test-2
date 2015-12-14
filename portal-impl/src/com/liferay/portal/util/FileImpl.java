@@ -87,7 +87,7 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 	}
 
 	@Override
-	public String append(String fileName, String suffix) {
+	public String appendSuffix(String fileName, String suffix) {
 		String fileNameWithoutExtension = stripExtension(fileName);
 
 		String extension = getExtension(fileName);
