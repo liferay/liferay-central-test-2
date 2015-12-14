@@ -64,7 +64,6 @@ public class GoogleDocsDLFileEntryTypeHelper {
 			_company.getCompanyId());
 
 		Map<Locale, String> nameMap = new HashMap<>();
-
 		Map<Locale, String> descriptionMap = new HashMap<>();
 
 		for (Locale curLocale :
