@@ -91,6 +91,8 @@
 
 		<execute macro="NotificationsPortlet#gotoNotificationDelivery" />
 
+		<execute macro="IFrame#selectConfigurationFrame" />
+
 		<execute macro="NotificationsPortlet#setUserDeliveries">
 			<var name="actionType" value="adds" />
 			<var name="contentType" value="Message Boards" />
@@ -156,6 +158,8 @@
 		</execute>
 
 		<execute macro="NotificationsPortlet#gotoNotificationDelivery" />
+
+		<execute macro="IFrame#selectConfigurationFrame" />
 
 		<execute macro="NotificationsPortlet#setUserDeliveries">
 			<var name="actionType" value="updates" />
