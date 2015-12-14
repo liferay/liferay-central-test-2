@@ -202,7 +202,8 @@ public abstract class BaseJenkinsResultsParserTestCase {
 		"src/test/resources/dependencies/" + getSimpleClassName());
 
 	private static final String[][] _HTML_XML_REPLACEMENTS =
-		new String[][] {{"&raquo;", "[raquo]"}, {"<pre>", "<pre><![CDATA["},
+		new String[][] {
+			{"&raquo;", "[raquo]"}, {"<pre>", "<pre><![CDATA["},
 			{"</pre>", "]]></pre>"}
 		};
 
