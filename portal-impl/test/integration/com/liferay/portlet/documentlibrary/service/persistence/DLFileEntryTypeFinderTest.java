@@ -93,8 +93,7 @@ public class DLFileEntryTypeFinderTest {
 			1,
 			DLFileEntryTypeFinderUtil.filterCountByKeywords(
 				_group.getCompanyId(), new long[] {_group.getGroupId()},
-				StringPool.BLANK, true)
-		);
+				StringPool.BLANK, true));
 	}
 
 	@Test
