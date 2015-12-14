@@ -34,10 +34,11 @@ public class SimpleAppDisplay extends BaseAppDisplay {
 	}
 
 	public SimpleAppDisplay(String title, String description, Version version) {
-		_title = title;
-
-		if (Validator.isNull(_title)) {
+		if (Validator.isNull(title)) {
 			_title = APP_TITLE_UNCATEGORIZED;
+		}
+		else {
+			_title = title;
 		}
 
 		_description = description;
