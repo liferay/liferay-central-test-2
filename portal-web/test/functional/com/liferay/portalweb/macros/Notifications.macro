@@ -6,6 +6,29 @@
 		<execute function="AssertClick" locator1="Button#CONFIRM" value1="Confirm" />
 	</command>
 
+	<command name="gotoNotifications">
+		<if>
+			<condition function="IsElementPresent" locator1="Notifications#PROFILE_BADGE_COUNT" />
+			<then>
+				<execute function="Click" locator1="Notifications#PROFILE_BADGE_COUNT" />
+			</then>
+		</if>
+
+		<if>
+			<condition function="IsElementPresent" locator1="Notifications#MY_ACCOUNT_BADGE_COUNT" />
+			<then>
+				<execute function="Click" locator1="Notifications#MY_ACCOUNT_BADGE_COUNT" />
+			</then>
+		</if>
+
+		<if>
+			<condition function="IsElementPresent" locator1="Notifications#NOTIFICATIONS_BADGE_COUNT" />
+			<then>
+				<execute function="Click" locator1="Notifications#NOTIFICATIONS_BADGE_COUNT" />
+			</then>
+		</if>
+	</command>
+
 	<command name="markAllAsRead">
 		<execute function="Check#checkAll" locator1="Checkbox#SELECT_ALL_NOTIFICATIONS" />
 		
@@ -38,6 +61,29 @@
 		</if>
 	</command>
 
+	<command name="viewBadgeCount">
+		<if>
+			<equals arg1="${activePanel}" arg2="Profile" />
+			<then>
+				<execute function="AssertTextEquals" locator1="Notifications#PROFILE_BADGE_COUNT" value1="${notificationCount}" />
+			</then>
+		</if>
+
+		<if>
+			<equals arg1="${activePanel}" arg2="My Account" />
+			<then>
+				<execute function="AssertTextEquals" locator1="Notifications#MY_ACCOUNT_BADGE_COUNT" value1="${notificationCount}" />
+			</then>
+		</if>
+
+		<if>
+			<equals arg1="${activePanel}" arg2="Notifications" />
+			<then>
+				<execute function="AssertTextEquals" locator1="Notifications#NOTIFICATIONS_BADGE_COUNT" value1="${notificationCount}" />
+			</then>
+		</if>
+	</command>
+
 	<command name="viewDefaultContent">
 		<execute function="AssertTextEquals" locator1="Message#EMPTY_INFO" value1="You do not have any notifications." />
 	</command>
@@ -56,6 +102,29 @@
 
 		<execute function="AssertTextEquals" locator1="Notifications#NOTIFICATIONS_TITLE" value1="${user} added a new ${assetType}." />
 		<execute function="AssertTextEquals" locator1="Notifications#NOTIFICATIONS_CONTENT" value1="${contentBody}" />
+	</command>
+
+	<command name="viewNoNotifications">
+		<if>
+			<equals arg1="${activePanel}" arg2="Profile" />
+			<then>
+				<execute function="AssertElementNotPresent" locator1="Notifications#PROFILE_BADGE_COUNT" />
+			</then>
+		</if>
+
+		<if>
+			<equals arg1="${activePanel}" arg2="My Account" />
+			<then>
+				<execute function="AssertElementNotPresent" locator1="Notifications#MY_ACCOUNT_BADGE_COUNT" />
+			</then>
+		</if>
+
+		<if>
+			<equals arg1="${activePanel}" arg2="Notifications" />
+			<then>
+				<execute function="AssertElementNotPresent" locator1="Notifications#NOTIFICATIONS_BADGE_COUNT" />
+			</then>
+		</if>
 	</command>
 
 	<command name="viewNoRequest">
