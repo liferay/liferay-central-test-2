@@ -159,7 +159,7 @@
 </tr>
 <tr>
 	<td>ENTRY_DESCRIPTIVE_LAST_MODIFIED</td>
-	<td>//li[contains(@data-title,'${key_webContentTitle}')]//h6[contains(.,'modified')]</td>
+	<td>//*[@data-qa-id='row' and contains(.,'${key_webContentTitle}')]//h6[contains(.,'modified')]</td>
 	<td></td>
 </tr>
 <tr>
