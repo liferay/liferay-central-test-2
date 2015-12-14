@@ -9,7 +9,7 @@
 </thead>
 <tbody>
 <tr>
-	<td>UNREAD_COUNT</td>
+	<td>PROFILE_BADGE_COUNT</td>
 	<td>//div[@class='panel-title']//span[contains(@class,'notifications-count')]</td>
 	<td></td>
 </tr>
@@ -25,7 +25,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>NOTIFICATIONS_CONTENT_1</td>
+	<td>NOTIFICATIONS_CONTENT</td>
 	<td>//div[@class='body']</td>
 	<td></td>
 </tr>
