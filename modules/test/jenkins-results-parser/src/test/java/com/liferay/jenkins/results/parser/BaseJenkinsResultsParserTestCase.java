@@ -201,8 +201,8 @@ public abstract class BaseJenkinsResultsParserTestCase {
 
 	private static final String[][] _HTML_XML_REPLACEMENTS =
 		new String[][] {
-			{"&raquo;", "[raquo]"}, {"<pre>", "<pre><![CDATA["},
-			{"</pre>", "]]></pre>"}
+			{"<pre>", "<pre><![CDATA["}, {"</pre>", "]]></pre>"},
+			{"&raquo;", "[raquo]"}
 		};
 
 }
