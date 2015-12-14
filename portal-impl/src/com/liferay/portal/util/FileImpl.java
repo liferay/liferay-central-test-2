@@ -87,27 +87,6 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 	}
 
 	@Override
-	public String appendSuffix(String fileName, String suffix) {
-		String fileNameWithoutExtension = stripExtension(fileName);
-
-		String extension = getExtension(fileName);
-
-		StringBundler sb = new StringBundler(4);
-
-		sb.append(fileNameWithoutExtension);
-
-		sb.append(suffix);
-
-		if (Validator.isNotNull(extension)) {
-			sb.append(StringPool.PERIOD);
-
-			sb.append(extension);
-		}
-
-		return sb.toString();
-	}
-
-	@Override
 	public String appendParentheticalSuffix(String fileName, String suffix) {
 		String fileNameWithoutExtension = stripExtension(fileName);
 
@@ -126,6 +105,27 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 		sb.append(fileNameWithParentheticalSuffix);
 		sb.append(StringPool.PERIOD);
 		sb.append(extension);
+
+		return sb.toString();
+	}
+
+	@Override
+	public String appendSuffix(String fileName, String suffix) {
+		String fileNameWithoutExtension = stripExtension(fileName);
+
+		String extension = getExtension(fileName);
+
+		StringBundler sb = new StringBundler(4);
+
+		sb.append(fileNameWithoutExtension);
+
+		sb.append(suffix);
+
+		if (Validator.isNotNull(extension)) {
+			sb.append(StringPool.PERIOD);
+
+			sb.append(extension);
+		}
 
 		return sb.toString();
 	}
