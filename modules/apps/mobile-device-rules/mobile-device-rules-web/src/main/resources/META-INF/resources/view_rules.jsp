@@ -17,8 +17,6 @@
 <%@ include file="/init.jsp" %>
 
 <%
-String displayStyle = ParamUtil.getString(request, "displayStyle", "list");
-
 String redirect = ParamUtil.getString(request, "redirect");
 
 String backURL = ParamUtil.getString(request, "backURL");
@@ -36,19 +34,19 @@ long ruleGroupId = ParamUtil.getLong(request, "ruleGroupId");
 
 MDRRuleGroup ruleGroup = MDRRuleGroupLocalServiceUtil.getRuleGroup(ruleGroupId);
 
+String displayStyle = ParamUtil.getString(request, "displayStyle", "list");
+
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("mvcPath", "/view_rules.jsp");
+portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("ruleGroupId", String.valueOf(ruleGroupId));
 portletURL.setParameter("groupId", String.valueOf(groupId));
-portletURL.setParameter("redirect", redirect);
 
 portletDisplay.setShowBackIcon(true);
 portletDisplay.setURLBack(backURL);
 
 renderResponse.setTitle(LanguageUtil.format(request, "classification-rules-for-x", ruleGroup.getName(locale), false));
-
-int mdrRulesCount = MDRRuleLocalServiceUtil.getRulesCount(ruleGroupId);
 %>
 
 <aui:nav-bar markupView="lexicon">
@@ -57,7 +55,11 @@ int mdrRulesCount = MDRRuleLocalServiceUtil.getRulesCount(ruleGroupId);
 	</aui:nav>
 </aui:nav-bar>
 
-<c:if test="<%= mdrRulesCount > 0 %>">
+<%
+int rulesCount = MDRRuleLocalServiceUtil.getRulesCount(ruleGroupId);
+%>
+
+<c:if test="<%= rulesCount > 0 %>">
 	<liferay-frontend:management-bar>
 
 		<%
@@ -91,7 +93,7 @@ int mdrRulesCount = MDRRuleLocalServiceUtil.getRulesCount(ruleGroupId);
 	<liferay-ui:search-container
 		emptyResultsMessage="no-classification-rules-are-configured-for-this-device-family"
 		iteratorURL="<%= portletURL %>"
-		total="<%= mdrRulesCount %>"
+		total="<%= rulesCount %>"
 	>
 		<liferay-ui:search-container-results
 			results="<%= MDRRuleLocalServiceUtil.getRules(ruleGroupId, searchContainer.getStart(), searchContainer.getEnd()) %>"
