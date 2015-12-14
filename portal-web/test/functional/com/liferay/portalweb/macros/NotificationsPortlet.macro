@@ -6,6 +6,8 @@
 			<var name="notificationCount" value="${notificationCount}" />
 		</execute>
 
+  		<execute function="Click" locator1="Icon#HEADER_VERTICAL_ELLIPSIS" />
+    
 		<execute function="AssertClick" locator1="Notifications#NAVIGATION_NOTIFICATION_DELIVERY" value1="Notification Delivery" />
 	</command>
 
