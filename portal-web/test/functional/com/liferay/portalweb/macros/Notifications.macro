@@ -6,10 +6,6 @@
 		<execute function="AssertClick" locator1="Button#CONFIRM" value1="Confirm" />
 	</command>
 
-	<command name="gotoDockbar">
-		<execute function="Click" locator1="NotificationsDockbar#DOCKBAR" />
-	</command>
-
 	<command name="markAllAsRead">
 		<execute function="Check#checkAll" locator1="Checkbox#SELECT_ALL_NOTIFICATIONS" />
 		
@@ -20,18 +16,6 @@
 		<var name="key_contentBody" value="${contentBody}" />
 
 		<execute function="Click#partialTextClickAtAndWait" locator1="Notifications#NOTIFICATIONS_CONTENT" value1="${contentBody}" />
-	</command>
-
-	<command name="navigateToViewAllNotifications">
-		<if>
-			<isset var="notificationCount" />
-			<then>
-				<execute function="AssertClick" locator1="NotificationsDockbar#NOTIFICATIONS_VIEW_ALL_NOTIFICATIONS" value1="Notifications (${notificationCount})" />
-			</then>
-			<else>
-				<execute function="Click" locator1="NotificationsDockbar#NOTIFICATIONS_VIEW_ALL_NOTIFICATIONS" />
-			</else>
-		</if>
 	</command>
 
 	<command name="tearDownUnreadNotifications">
@@ -46,22 +30,12 @@
 			<var name="virtualHostsURL" value="${virtualHostsURL}" />
 		</execute>
 
-		<execute function="Click" locator1="NotificationsDockbar#DOCKBAR" />
-
 		<if>
 			<condition function="IsElementPresent" locator1="Notifications#NOTIFICATIONS_CONTENT" />
 			<then>
 				<execute function="AssertClick" locator1="Notifications#MARK_AS_READ" value1="Mark as Read" />
 			</then>
 		</if>
-	</command>
-
-	<command name="viewCount">
-		<execute function="AssertTextEquals" locator1="NotificationsDockbar#COUNT" value1="${notificationCount}" />
-	</command>
-
-	<command name="viewCountAlert">
-		<execute function="AssertTextEquals" locator1="NotificationsDockbar#COUNT_ALERT" value1="${notificationCount}" />
 	</command>
 
 	<command name="viewDefaultContent">
@@ -91,19 +65,12 @@
 
 	<command name="viewNotification">
 		<execute function="AssertTextEquals" locator1="Notifications#NOTIFICATIONS_CONTENT" value1="${notificationContent}" />
-		<execute function="AssertTextEquals" locator1="NotificationsDockbar#NOTIFICATIONS_CONTENT_GENERIC" value1="${notificationContent}" />
 	</command>
 
 	<command name="viewRequest">
 		<var name="key_requestsContent" value="${requestsContent}" />
 
 		<execute function="AssertTextEquals" locator1="Notifications#NOTIFICATIONS_CONTENT" value1="${requestsContent}" />
-	</command>
-
-	<command name="viewRequestCount">
-		<var name="key_requestsLink" value="${requestsLink}" />
-
-		<execute function="AssertTextEquals" locator1="NotificationsDockbar#REQUESTS_LINK" value1="${requestsLink}" />
 	</command>
 
 	<command name="viewUpdatedComment">
