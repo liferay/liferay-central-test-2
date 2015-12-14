@@ -191,9 +191,6 @@ public class HypersonicServerTestCallback
 			});
 	}
 
-	private static final String _HSQL_HOME =
-		PropsValues.LIFERAY_HOME + "/data/hypersonic/";
-
 	private static final String _HSQL_TEMP =
 		PropsValues.LIFERAY_HOME + "/data/hypersonic_temp/";
 
