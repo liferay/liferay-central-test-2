@@ -92,8 +92,6 @@ public class RTLServlet extends HttpServlet {
 	protected URL getResourceURL(HttpServletRequest request)
 		throws IOException {
 
-		String languageId = request.getParameter("languageId");
-
 		String path = URLDecoder.decode(
 			RequestDispatcherUtil.getEffectivePath(request), StringPool.UTF8);
 
@@ -102,6 +100,8 @@ public class RTLServlet extends HttpServlet {
 		if (url == null) {
 			return null;
 		}
+
+		String languageId = request.getParameter("languageId");
 
 		if ((languageId == null) || !PortalUtil.isRightToLeft(request)) {
 			if (_log.isDebugEnabled()) {
