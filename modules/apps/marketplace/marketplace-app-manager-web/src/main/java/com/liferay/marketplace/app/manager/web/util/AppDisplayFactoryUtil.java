@@ -101,9 +101,8 @@ public class AppDisplayFactoryUtil {
 		if (appDisplayBundles.isEmpty()) {
 			return null;
 		}
-		else {
-			return appDisplay;
-		}
+
+		return appDisplay;
 	}
 
 	public static List<AppDisplay> getAppDisplays(
