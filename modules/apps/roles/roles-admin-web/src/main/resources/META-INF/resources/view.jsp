@@ -17,25 +17,25 @@
 <%@ include file="/init.jsp" %>
 
 <%
-String displayStyle = ParamUtil.getString(request, "displayStyle", "list");
+int type = ParamUtil.getInteger(request, "type", 1);
 String keywords = ParamUtil.getString(request, "keywords");
+String displayStyle = ParamUtil.getString(request, "displayStyle", "list");
 String orderByCol = ParamUtil.getString(request, "orderByCol", "title");
 String orderByType = ParamUtil.getString(request, "orderByType", "asc");
-int type = ParamUtil.getInteger(request, "type", 1);
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("mvcPath", "/view.jsp");
+portletURL.setParameter("type", String.valueOf(type));
 portletURL.setParameter("displayStyle", displayStyle);
 portletURL.setParameter("orderByCol", orderByCol);
 portletURL.setParameter("orderByType", orderByType);
-portletURL.setParameter("type", String.valueOf(type));
-
-pageContext.setAttribute("portletURL", portletURL);
 
 String portletURLString = portletURL.toString();
 
 portletURL.setParameter("keywords", keywords);
+
+pageContext.setAttribute("portletURL", portletURL);
 %>
 
 <liferay-ui:error exception="<%= RequiredRoleException.class %>" message="you-cannot-delete-a-system-role" />

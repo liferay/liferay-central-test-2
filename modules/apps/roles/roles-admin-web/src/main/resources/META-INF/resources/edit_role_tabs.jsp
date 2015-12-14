@@ -17,6 +17,8 @@
 <%@ include file="/init.jsp" %>
 
 <%
+String tabs1 = ParamUtil.getString(request, "tabs1");
+
 String redirect = ParamUtil.getString(request, "redirect");
 
 String backURL = ParamUtil.getString(request, "backURL", redirect);
@@ -26,10 +28,7 @@ long roleId = ParamUtil.getLong(request, "roleId");
 Role role = RoleServiceUtil.fetchRole(roleId);
 
 String portletResource = ParamUtil.getString(request, "portletResource");
-
 String portletURL = ParamUtil.getString(request, "portletURL");
-
-String tabs1 = ParamUtil.getString(request, "tabs1");
 
 // Edit
 
