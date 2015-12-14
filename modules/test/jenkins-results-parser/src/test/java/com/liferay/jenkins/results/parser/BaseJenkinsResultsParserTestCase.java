@@ -137,9 +137,8 @@ public abstract class BaseJenkinsResultsParserTestCase {
 
 		SAXReader saxReader = new SAXReader();
 
-		for (int i = 0; i < _HTML_XML_REPLACEMENTS.length; i++) {
-			xml = xml.replace(
-				_HTML_XML_REPLACEMENTS[i][0], _HTML_XML_REPLACEMENTS[i][1]);
+		for (int i = 0; i < _XML_REPLACEMENTS.length; i++) {
+			xml = xml.replace(_XML_REPLACEMENTS[i][0], _XML_REPLACEMENTS[i][1]);
 		}
 
 		Document document = saxReader.read(new StringReader(xml));
@@ -147,9 +146,9 @@ public abstract class BaseJenkinsResultsParserTestCase {
 		String formattedXML = JenkinsResultsParserUtil.format(
 			document.getRootElement());
 
-		for (int i = 0; i < _HTML_XML_REPLACEMENTS.length; i++) {
+		for (int i = 0; i < _XML_REPLACEMENTS.length; i++) {
 			formattedXML = formattedXML.replace(
-				_HTML_XML_REPLACEMENTS[i][1], _HTML_XML_REPLACEMENTS[i][0]);
+				_XML_REPLACEMENTS[i][1], _XML_REPLACEMENTS[i][0]);
 		}
 
 		return formattedXML;
@@ -199,7 +198,7 @@ public abstract class BaseJenkinsResultsParserTestCase {
 	protected File dependenciesDir = new File(
 		"src/test/resources/dependencies/" + getSimpleClassName());
 
-	private static final String[][] _HTML_XML_REPLACEMENTS =
+	private static final String[][] _XML_REPLACEMENTS =
 		new String[][] {
 			{"<pre>", "<pre><![CDATA["}, {"</pre>", "]]></pre>"},
 			{"&raquo;", "[raquo]"}
