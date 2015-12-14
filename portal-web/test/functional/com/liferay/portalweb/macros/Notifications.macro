@@ -3,6 +3,7 @@
 		<var name="key_requestsContent" value="${requestsContent}" />
 
 		<execute function="AssertTextEquals" locator1="Notifications#NOTIFICATIONS_CONTENT" value1="${requestsContent}" />
+
 		<execute function="AssertClick" locator1="Button#CONFIRM" value1="Confirm" />
 	</command>
 
@@ -31,7 +32,7 @@
 
 	<command name="markAllAsRead">
 		<execute function="Check#checkAll" locator1="Checkbox#SELECT_ALL_NOTIFICATIONS" />
-		
+
 		<execute function="Click" locator1="Notifications#MARK_AS_READ" />
 	</command>
 
