@@ -23,13 +23,13 @@ import com.liferay.portal.security.permission.PermissionThreadLocal;
 /**
  * @author Adolfo Pérez
  */
-public class ContextUserReplacer implements AutoCloseable {
+public class ContextUserReplace implements AutoCloseable {
 
-	public ContextUserReplacer(User user) throws Exception {
+	public ContextUserReplace(User user) throws Exception {
 		this(user, PermissionCheckerFactoryUtil.create(user));
 	}
 
-	public ContextUserReplacer(User user, PermissionChecker permissionChecker) {
+	public ContextUserReplace(User user, PermissionChecker permissionChecker) {
 		_name = PrincipalThreadLocal.getName();
 		_permissionCheker = PermissionThreadLocal.getPermissionChecker();
 
