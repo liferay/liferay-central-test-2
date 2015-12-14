@@ -270,7 +270,7 @@
 	<command name="gotoCP">
 		<var name="key_dmFolderName" value="${dmFolderName}" />
 
-		<execute function="AssertClick" locator1="DocumentsAndMedia#ICON_FOLDER_TITLE" value1="${dmFolderName}" />
+		<execute function="AssertClick#assertTextClickAtAndWait" locator1="DocumentsAndMedia#ICON_FOLDER_TITLE" value1="${dmFolderName}" />
 	</command>
 
 	<command name="gotoEditCP">
