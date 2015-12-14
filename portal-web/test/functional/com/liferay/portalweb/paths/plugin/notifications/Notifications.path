@@ -10,7 +10,7 @@
 <tbody>
 <tr>
 	<td>UNREAD_COUNT</td>
-	<td>//div[contains(@class,'user-notifications-sidebar')]//a/span[@class='count']</td>
+	<td>//div[@class='panel-title']//span[contains(@class,'notifications-count')]</td>
 	<td></td>
 </tr>
 <tr>
@@ -21,12 +21,12 @@
 <!--NOTIFICATIONS-->
 <tr>
 	<td>MARK_AS_READ</td>
-	<td>//div/a[contains(.,'Mark as Read')]</td>
+	<td>//a[@title='Mark as Read']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>NOTIFICATIONS_CONTENT_1</td>
-	<td>xpath=(//li[contains(@class,'user-notification')]//div[@class='body'])[1]</td>
+	<td>//div[@class='body']</td>
 	<td></td>
 </tr>
 <tr>
