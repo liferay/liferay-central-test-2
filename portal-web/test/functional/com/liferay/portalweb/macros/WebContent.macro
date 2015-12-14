@@ -1679,6 +1679,11 @@
 		<var name="key_webContentTitle" value="${webContentTitle}" />
 
 		<execute function="AssertTextEquals#assertPartialText" locator1="WC#ENTRY_DESCRIPTIVE_LAST_MODIFIED" value1="${userFirstLast}" />
+
+		<execute macro="WebContentNavigator#gotoEditCP">
+			<var name="webContentTitle" value="${webContentTitle}" />
+		</execute>
+
 		<execute function="AssertTextEquals#assertPartialText" locator1="WCEditWebContent#VERSION" value1="1.1" />
 	</command>
 
