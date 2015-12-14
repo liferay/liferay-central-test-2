@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.SetUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
@@ -47,7 +48,6 @@ import com.liferay.portal.util.PropsValues;
 
 import java.io.IOException;
 import java.io.Serializable;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Enumeration;
@@ -255,10 +255,16 @@ public class ComboServlet extends HttpServlet {
 		if (!resourcePath.startsWith(portlet.getContextPath())) {
 			resourcePath = portlet.getContextPath() + resourcePath;
 		}
+		
+		StringBundler sb = new StringBundler(5);
+		
+		sb.append(resourcePath);
+		sb.append(StringPool.QUESTION);
+		sb.append(minifierType);
+		sb.append("&languageId=");
+		sb.append(request.getParameter("languageId"));
 
-		String fileContentKey = resourcePath.concat(StringPool.QUESTION).concat(
-			minifierType).concat("&languageId=").concat(
-				request.getParameter("languageId"));
+		String fileContentKey = sb.toString();
 
 		FileContentBag fileContentBag = _fileContentBagPortalCache.get(
 			fileContentKey);
