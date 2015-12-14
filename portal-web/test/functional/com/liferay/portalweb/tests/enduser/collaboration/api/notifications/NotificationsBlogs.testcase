@@ -130,6 +130,7 @@
 
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="Blogs Page" />
+			<var name="notificationCount" value="3" />
 		</execute>
 
 		<execute macro="Notifications#viewCount">
