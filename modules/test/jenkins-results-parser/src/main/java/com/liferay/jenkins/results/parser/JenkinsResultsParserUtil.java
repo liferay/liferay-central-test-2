@@ -147,10 +147,10 @@ public class JenkinsResultsParserUtil {
 	}
 
 	public static String format(Element element) throws IOException {
-		OutputFormat outputFormat = OutputFormat.createPrettyPrint();
 		Writer writer = new CharArrayWriter();
 
-		XMLWriter xmlWriter = new XMLWriter(writer, outputFormat);
+		XMLWriter xmlWriter = new XMLWriter(
+			writer, OutputFormat.createPrettyPrint());
 
 		xmlWriter.write(element);
 
