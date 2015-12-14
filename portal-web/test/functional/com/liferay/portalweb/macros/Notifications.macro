@@ -11,6 +11,8 @@
 	</command>
 
 	<command name="markAllAsRead">
+		<execute function="Check#checkAll" locator1="Checkbox#SELECT_ALL_NOTIFICATIONS" />
+		
 		<execute function="AssertClick" locator1="NotificationsDockbar#NOTIFICATIONS_MARK_ALL_AS_READ" value1="Mark as Read" />
 	</command>
 
