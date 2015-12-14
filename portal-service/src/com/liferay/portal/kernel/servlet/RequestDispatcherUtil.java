@@ -91,16 +91,16 @@ public class RequestDispatcherUtil {
 	public static String getEffectivePath(HttpServletRequest request) {
 		DispatcherType dispatcherType = request.getDispatcherType();
 
-		switch (dispatcherType) {
-			case FORWARD:
-				return (String)request.getAttribute(
-					RequestDispatcher.FORWARD_SERVLET_PATH);
-			case INCLUDE:
-				return (String)request.getAttribute(
-					RequestDispatcher.INCLUDE_SERVLET_PATH);
-			default:
-				return request.getServletPath();
+		if (dispatcherType.equals(DispatcherType.FORWARD)) {
+			return (String)request.getAttribute(
+				RequestDispatcher.FORWARD_SERVLET_PATH);
 		}
+		else if (dispatcherType.equals(DispatcherType.INCLUDE)) {
+			return (String)request.getAttribute(
+				RequestDispatcher.INCLUDE_SERVLET_PATH);
+		}
+
+		return request.getServletPath();
 	}
 
 	public static long getLastModifiedTime(
