@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.test.rule.TransactionalTestRule;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.test.util.ServiceContextTestUtil;
 import com.liferay.portal.kernel.test.util.TestPropsValues;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.lar.test.BaseWorkflowedStagedModelDataHandlerTestCase;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.StagedModel;
@@ -148,7 +149,8 @@ public class BlogsEntryStagedModelDataHandlerTest
 		Assert.assertEquals(
 			entry.isAllowTrackbacks(), importedEntry.isAllowTrackbacks());
 		Assert.assertEquals(
-			entry.getTrackbacks().trim(), importedEntry.getTrackbacks().trim());
+			StringUtil.trim(entry.getTrackbacks()),
+			StringUtil.trim(importedEntry.getTrackbacks()));
 		Assert.assertEquals(
 			entry.getCoverImageCaption(), importedEntry.getCoverImageCaption());
 		Assert.assertEquals(entry.isSmallImage(), importedEntry.isSmallImage());
