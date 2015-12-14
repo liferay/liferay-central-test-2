@@ -111,19 +111,18 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 
 	@Override
 	public String appendSuffix(String fileName, String suffix) {
-		String fileNameWithoutExtension = stripExtension(fileName);
-
-		String extension = getExtension(fileName);
-
 		StringBundler sb = new StringBundler(4);
+
+		String fileNameWithoutExtension = stripExtension(fileName);
 
 		sb.append(fileNameWithoutExtension);
 
 		sb.append(suffix);
 
+		String extension = getExtension(fileName);
+
 		if (Validator.isNotNull(extension)) {
 			sb.append(StringPool.PERIOD);
-
 			sb.append(extension);
 		}
 
