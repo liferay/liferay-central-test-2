@@ -28,10 +28,8 @@ public class FileImplTest {
 	@Test
 	public void testAppend() {
 		Assert.assertEquals("test_rtl", _fileImpl.append("test", "_rtl"));
-
 		Assert.assertEquals(
 			"test_rtl.css", _fileImpl.append("test.css", "_rtl"));
-
 		Assert.assertEquals(
 			"/folder/test_rtl.css",
 			_fileImpl.append("/folder/test.css", "_rtl"));
