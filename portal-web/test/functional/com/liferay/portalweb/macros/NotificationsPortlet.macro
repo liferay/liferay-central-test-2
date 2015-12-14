@@ -73,14 +73,14 @@
 
 		<var name="key_contentType" value="Comments" />
 
-		<execute function="AssertTextEquals" locator1="Notifications#NOTIFICATION_DELIVERY_TEXT_1" value1="adds a new comment to comments you are subscribed to." />
+		<execute function="AssertTextEquals" locator1="Notifications#NOTIFICATION_DELIVERY_TEXT_1" value1="adds a comment to comments you are subscribed to." />
 		<execute function="AssertTextEquals" locator1="Notifications#NOTIFICATION_DELIVERY_TEXT_2" value1="updates a comment you are subscribed to." />
 		<execute function="AssertChecked" locator1="Notifications#NOTIFICATION_DELIVERY_CHECKBOX_1" />
 		<execute function="AssertTextEquals" locator1="Notifications#NOTIFICATION_DELIVERY_CHECKBOX_LABEL_1" value1="Email" />
 		<execute function="AssertChecked" locator1="Notifications#NOTIFICATION_DELIVERY_CHECKBOX_2" />
 		<execute function="AssertTextEquals" locator1="Notifications#NOTIFICATION_DELIVERY_CHECKBOX_LABEL_2" value1="Website" />
 
-		<var name="key_contentType" value="Documents and Media " />
+		<var name="key_contentType" value="Documents and Media" />
 
 		<execute function="AssertTextEquals" locator1="Notifications#NOTIFICATION_DELIVERY_TEXT_1" value1="adds a new document in a folder you are subscribed to." />
 		<execute function="AssertTextEquals" locator1="Notifications#NOTIFICATION_DELIVERY_TEXT_2" value1="updates a document you are subscribed to." />
