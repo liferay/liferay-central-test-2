@@ -18,6 +18,7 @@
 
 <%
 long selPlid = ParamUtil.getLong(request, "selPlid");
+
 boolean privateLayout = ParamUtil.getBoolean(request, "privateLayout");
 
 if (selPlid <= 0) {
