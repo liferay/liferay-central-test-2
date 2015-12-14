@@ -146,6 +146,8 @@
 			<var name="pageName" value="Blogs Page" />
 		</execute>
 
+		<execute macro="IFrame#selectConfigurationFrame" />
+
 		<execute macro="NotificationsPortlet#setUserDeliveries">
 			<var name="actionType" value="add" />
 			<var name="contentType" value="Blogs" />

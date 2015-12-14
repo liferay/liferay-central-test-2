@@ -232,6 +232,8 @@
 
 		<execute macro="NotificationsPortlet#gotoNotificationDelivery" />
 
+		<execute macro="IFrame#selectConfigurationFrame" />
+
 		<execute macro="NotificationsPortlet#viewDefaultNotificationDeliveries" />
 	</command>
 </definition>

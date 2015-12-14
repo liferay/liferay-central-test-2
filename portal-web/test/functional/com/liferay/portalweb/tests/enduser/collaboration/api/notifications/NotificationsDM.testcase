@@ -89,6 +89,8 @@
 			<var name="notificationCount" value="0" />
 		</execute>
 
+		<execute macro="IFrame#selectConfigurationFrame" />
+
 		<execute macro="NotificationsPortlet#setUserDeliveries">
 			<var name="actionType" value="adds" />
 			<var name="contentType" value="Documents and Media" />
@@ -160,6 +162,8 @@
 		<execute macro="NotificationsPortlet#gotoNotificationDelivery">
 			<var name="notificationCount" value="0" />
 		</execute>
+
+		<execute macro="IFrame#selectConfigurationFrame" />
 
 		<execute macro="NotificationsPortlet#setUserDeliveries">
 			<var name="actionType" value="updates" />
