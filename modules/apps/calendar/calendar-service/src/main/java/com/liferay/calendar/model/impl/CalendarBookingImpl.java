@@ -105,8 +105,8 @@ public class CalendarBookingImpl extends CalendarBookingBaseImpl {
 
 			return calendar.getTimeZone();
 		}
-		catch (PortalException e) {
-			throw new SystemException(e);
+		catch (PortalException pe) {
+			throw new SystemException(pe);
 		}
 	}
 

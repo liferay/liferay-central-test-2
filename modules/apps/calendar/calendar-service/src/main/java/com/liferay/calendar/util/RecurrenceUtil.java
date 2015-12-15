@@ -160,19 +160,11 @@ public class RecurrenceUtil {
 
 		recurrence = recurrence.clone();
 
-		Calendar untilJCalendar = recurrence.getUntilJCalendar();
 
-		if (untilJCalendar != null) {
-			untilJCalendar = JCalendarUtil.getJCalendar(
-				recurrence.getUntilJCalendar(), timeZone);
-
-			recurrence.setUntilJCalendar(untilJCalendar);
-		}
+		List<Calendar> newExceptionJCalendars = new ArrayList<>();
 
 		List<Calendar> exceptionJCalendars =
 			recurrence.getExceptionJCalendars();
-
-		List<Calendar> newExceptionJCalendars = new ArrayList<>();
 
 		for (Calendar exceptionJCalendar : exceptionJCalendars) {
 			exceptionJCalendar = JCalendarUtil.getJCalendar(
@@ -183,10 +175,10 @@ public class RecurrenceUtil {
 
 		recurrence.setExceptionJCalendars(newExceptionJCalendars);
 
+		List<PositionalWeekday> newPositionalWeekdays = new ArrayList<>();
+
 		List<PositionalWeekday> positionalWeekdays =
 			recurrence.getPositionalWeekdays();
-
-		List<PositionalWeekday> newPositionalWeekdays = new ArrayList<>();
 
 		for (PositionalWeekday positionalWeekday : positionalWeekdays) {
 			Calendar jCalendar = JCalendarUtil.getJCalendar(
@@ -207,7 +199,17 @@ public class RecurrenceUtil {
 		}
 
 		recurrence.setPositionalWeekdays(newPositionalWeekdays);
+
 		recurrence.setTimeZone(timeZone);
+
+		Calendar untilJCalendar = recurrence.getUntilJCalendar();
+
+		if (untilJCalendar != null) {
+			untilJCalendar = JCalendarUtil.getJCalendar(
+				recurrence.getUntilJCalendar(), timeZone);
+
+			recurrence.setUntilJCalendar(untilJCalendar);
+		}
 
 		return recurrence;
 	}
