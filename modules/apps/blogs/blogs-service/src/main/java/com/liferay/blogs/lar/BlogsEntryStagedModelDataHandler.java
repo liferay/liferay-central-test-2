@@ -264,8 +264,8 @@ public class BlogsEntryStagedModelDataHandler
 		}
 
 		if ((entry.getCoverImageFileEntryId() == 0) &&
-			(entry.getSmallImageFileEntryId() == 0) &&
 			Validator.isNull(entry.getCoverImageURL()) &&
+			(entry.getSmallImageFileEntryId() == 0) &&
 			Validator.isNull(entry.getSmallImageURL()) &&
 			!entry.isSmallImage()) {
 
@@ -279,7 +279,7 @@ public class BlogsEntryStagedModelDataHandler
 				entry, DLFileEntry.class,
 				PortletDataContext.REFERENCE_TYPE_WEAK);
 
-		// Small Image
+		// Small image
 
 		ImageSelector smallImageSelector = null;
 
@@ -322,7 +322,7 @@ public class BlogsEntryStagedModelDataHandler
 				importedEntry.getEntryId(), smallImageSelector);
 		}
 
-		// Cover Image
+		// Cover image
 
 		ImageSelector coverImageSelector = null;
 
