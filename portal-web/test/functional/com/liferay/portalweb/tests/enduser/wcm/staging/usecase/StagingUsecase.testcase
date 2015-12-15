@@ -4315,7 +4315,7 @@
 		<execute macro="Staging#activateStagingCP">
 			<var name="siteName" value="${siteName}" />
 		</execute>
-		
+
 		<execute macro="ProductMenu#gotoSite">
 			<var name="site" value="Site Name" />
 		</execute>
