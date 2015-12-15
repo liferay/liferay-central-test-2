@@ -229,7 +229,7 @@
 
 		<var name="key_entryContent" value="${entryContent}" />
 
-		<execute function="AssertTextEquals" locator1="Announcements#CARD_VIEW_ENTRY_CONTENT" value1="${distributionScope} ${entryContent}" />
+		<execute function="AssertTextEquals" locator1="Announcements#CARD_VIEW_ENTRY_CONTENT" value1="${entryContent}" />
 	</command>
 
 	<command name="viewViaManageEntriesPG">
