@@ -756,7 +756,7 @@
 	<command name="flagPG">
 		<var name="key_entryTitle" value="${entryTitle}" />
 
-		<execute function="AssertClick" locator1="BlogsEntry#FLAG" value1="Flag" />
+		<execute function="AssertClick" locator1="BlogsEntry#FLAG_LINK" value1="Flag" />
 
 		<execute function="AssertTextEquals" locator1="ReportContent#HEADER" value1="Report Inappropriate Content" />
 		<execute function="AssertTextEquals" locator1="ReportContent#WARNING" value1="You are about to report a violation of our Terms of Use. All reports are strictly confidential." />
