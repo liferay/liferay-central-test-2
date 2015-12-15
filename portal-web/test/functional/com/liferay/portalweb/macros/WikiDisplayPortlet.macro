@@ -15,7 +15,11 @@
 		</if>
 
 		<execute function="SelectFrame" locator1="IFrame#DIALOG" />
-		<execute function="AssertClick" locator1="NavPill#SCOPE" value1="Scope" />
+
+		<execute macro="Navigator#gotoNavItem">
+			<var name="navItem" value="Scope" />
+		</execute>
+
 		<execute function="Click" locator1="WikiConfiguration#SCOPE_SELECT" />
 
 		<var name="key_siteName" value="${siteName}" />
