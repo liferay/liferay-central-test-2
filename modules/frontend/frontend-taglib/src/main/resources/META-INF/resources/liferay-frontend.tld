@@ -537,12 +537,12 @@
 		<tag-class>com.liferay.frontend.taglib.servlet.taglib.SidebarPanelTag</tag-class>
 		<body-content>JSP</body-content>
 		<attribute>
-			<name>resourceURL</name>
+			<name>searchContainerId</name>
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<name>searchContainerId</name>
+			<name>resourceURL</name>
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
