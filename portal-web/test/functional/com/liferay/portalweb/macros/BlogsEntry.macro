@@ -753,7 +753,7 @@
 		<execute function="Type" locator1="PGBlogsAdd#SUBTITLE_FIELD" value1="${entrySubtitle}" />
 	</command>
 
-	<command name="flag">
+	<command name="flagPG">
 		<var name="key_entryTitle" value="${entryTitle}" />
 
 		<execute function="AssertClick" locator1="BlogsEntry#FLAG" value1="Flag" />
