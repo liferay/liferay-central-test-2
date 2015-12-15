@@ -51,42 +51,6 @@ if ((category != null) && layout.isTypeControlPanel()) {
 
 	<c:choose>
 		<c:when test='<%= topLink.equals("message-boards-home") %>'>
-
-			<%
-			boolean showAddCategoryButton = MBCategoryPermission.contains(permissionChecker, scopeGroupId, categoryId, ActionKeys.ADD_CATEGORY);
-			boolean showAddMessageButton = MBCategoryPermission.contains(permissionChecker, scopeGroupId, categoryId, ActionKeys.ADD_MESSAGE);
-
-			if (showAddMessageButton && !themeDisplay.isSignedIn()) {
-				if (!allowAnonymousPosting) {
-					showAddMessageButton = false;
-				}
-			}
-			%>
-
-			<c:if test="<%= showAddCategoryButton || showAddMessageButton %>">
-				<div class="category-buttons">
-					<c:if test="<%= showAddCategoryButton %>">
-						<portlet:renderURL var="editCategoryURL">
-							<portlet:param name="mvcRenderCommandName" value="/message_boards/edit_category" />
-							<portlet:param name="redirect" value="<%= currentURL %>" />
-							<portlet:param name="parentCategoryId" value="<%= String.valueOf(categoryId) %>" />
-						</portlet:renderURL>
-
-						<aui:button href="<%= editCategoryURL %>" value='<%= (category == null) ? "add-category" : "add-subcategory" %>' />
-					</c:if>
-
-					<c:if test="<%= showAddMessageButton %>">
-						<portlet:renderURL var="editMessageURL">
-							<portlet:param name="mvcRenderCommandName" value="/message_boards/edit_message" />
-							<portlet:param name="redirect" value="<%= currentURL %>" />
-							<portlet:param name="mbCategoryId" value="<%= String.valueOf(categoryId) %>" />
-						</portlet:renderURL>
-
-						<aui:button href="<%= editMessageURL %>" value="post-new-thread" />
-					</c:if>
-				</div>
-			</c:if>
-
 			<c:if test="<%= category != null %>">
 
 				<%
@@ -554,6 +518,8 @@ if ((category != null) && layout.isTypeControlPanel()) {
 		</c:when>
 	</c:choose>
 </div>
+
+<liferay-util:include page="/message_boards_admin/add_button.jsp" servletContext="<%= application %>" />
 
 <aui:script>
 	Liferay.Util.toggleSearchContainerButton('#<portlet:namespace />deleteCategory', '#<portlet:namespace /><%= searchContainerReference.getId("categorySearchContainer") %>SearchContainer', document.<portlet:namespace />fm, '<portlet:namespace />allRowIds');
