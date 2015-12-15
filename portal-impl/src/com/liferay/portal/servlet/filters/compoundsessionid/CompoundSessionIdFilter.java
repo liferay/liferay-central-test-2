@@ -62,7 +62,11 @@ public class CompoundSessionIdFilter
 
 	@Override
 	public boolean isFilterEnabled() {
-		return _compoundSessionIdServletRequestFactory != null;
+		if (_compoundSessionIdServletRequestFactory != null) {
+			return true;
+		}
+
+		return false;
 	}
 
 	private volatile CompoundSessionIdServletRequestFactory
