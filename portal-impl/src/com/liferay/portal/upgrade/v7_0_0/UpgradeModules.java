@@ -31,44 +31,58 @@ import java.sql.Timestamp;
  */
 public class UpgradeModules extends UpgradeProcess {
 
-	@Override
-	protected void doUpgrade() throws Exception {
-		registerModulesExtractedFromCore();
-
-		registerModulesConvertedFromLegacySDK();
-	}
-
-	protected boolean isInstalled(String buildNamespace, String portletId)
+	protected void addRelease(String... bundleSymbolicNames)
 		throws SQLException {
 
-		return isServiceBuilderApplication(buildNamespace) ||
-			isPortletInstalled(portletId);
-	}
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
-	protected boolean isPortletInstalled(String portletId) throws SQLException {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
 		try {
-			ps = connection.prepareStatement(
-				"select portletId from Portlet where portletId like ?");
+			StringBundler sb = new StringBundler(5);
 
-			ps.setString(1, portletId);
+			sb.append("insert into Release_ (mvccVersion, releaseId, ");
+			sb.append("createDate, modifiedDate, servletContextName, ");
+			sb.append("schemaVersion, buildNumber, buildDate, verified, ");
+			sb.append("state_, testString) values (?, ?, ?, ?, ?, ?, ?, ?, ");
+			sb.append("?, ?, ?)");
 
-			rs = ps.executeQuery();
+			String sql = sb.toString();
 
-			if (rs.next()) {
-				return true;
+			ps = connection.prepareStatement(sql);
+
+			for (String bundleSymbolicName : bundleSymbolicNames) {
+				ps.setLong(1, 0);
+				ps.setLong(2, increment());
+				ps.setTimestamp(3, timestamp);
+				ps.setTimestamp(4, timestamp);
+				ps.setString(5, bundleSymbolicName);
+				ps.setString(6, "0.0.1");
+				ps.setInt(7, 001);
+				ps.setTimestamp(8, timestamp);
+				ps.setBoolean(9, false);
+				ps.setInt(10, 0);
+				ps.setString(11, ReleaseConstants.TEST_STRING);
+
+				ps.addBatch();
 			}
+
+			ps.executeBatch();
 		}
 		finally {
 			DataAccess.cleanUp(ps, rs);
 		}
-
-		return false;
 	}
 
-	protected boolean isServiceBuilderApplication(String buildNamespace)
+	@Override
+	protected void doUpgrade() throws Exception {
+		updateExtractedModules();
+
+		updateConvertedLegacyModules();
+	}
+
+	protected boolean hasServiceComponent(String buildNamespace)
 		throws SQLException {
 
 		PreparedStatement ps = null;
@@ -94,17 +108,52 @@ public class UpgradeModules extends UpgradeProcess {
 		return false;
 	}
 
-	protected void registerModulesConvertedFromLegacySDK()
+	protected boolean isInstalled(String buildNamespace, String portletId)
+		throws SQLException {
+
+		if (hasServiceComponent(buildNamespace) ||
+			isPortletInstalled(portletId)) {
+
+			return true;
+		}
+
+		return false;
+	}
+
+	protected boolean isPortletInstalled(String portletId) throws SQLException {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			ps = connection.prepareStatement(
+				"select portletId from Portlet where portletId like ?");
+
+			ps.setString(1, portletId);
+
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				return true;
+			}
+		}
+		finally {
+			DataAccess.cleanUp(ps, rs);
+		}
+
+		return false;
+	}
+
+	protected void updateConvertedLegacyModules()
 		throws IOException, SQLException {
 
 		for (String[] convertedLegacyModule : _convertedLegacyModules) {
-			PreparedStatement ps = null;
-			ResultSet rs = null;
-
 			String oldServletContextName = convertedLegacyModule[0];
 			String newServletContextName = convertedLegacyModule[1];
 			String buildNamespace = convertedLegacyModule[2];
 			String portletId = convertedLegacyModule[3];
+
+			PreparedStatement ps = null;
+			ResultSet rs = null;
 
 			try {
 				ps = connection.prepareStatement(
@@ -116,18 +165,11 @@ public class UpgradeModules extends UpgradeProcess {
 				rs = ps.executeQuery();
 
 				if (!rs.next()) {
-
-					// check it is been installed but never upgraded
-
 					if (isInstalled(buildNamespace, portletId)) {
-						registerStartVersion(newServletContextName);
+						addRelease(newServletContextName);
 					}
 				}
 				else {
-
-					// it's been installed, we just need to translate
-					// its servlet context name
-
 					updateServletContextName(
 						oldServletContextName, newServletContextName);
 				}
@@ -138,52 +180,8 @@ public class UpgradeModules extends UpgradeProcess {
 		}
 	}
 
-	protected void registerModulesExtractedFromCore() throws SQLException {
-		registerStartVersion(_bundleSymbolicNames);
-	}
-
-	protected void registerStartVersion(String... bundleSymbolicNames)
-		throws SQLException {
-
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			StringBundler sb = new StringBundler(5);
-
-			sb.append("insert into Release_ (mvccVersion, releaseId, ");
-			sb.append("createDate, modifiedDate, servletContextName, ");
-			sb.append("schemaVersion, buildNumber, buildDate, verified, ");
-			sb.append("state_, testString) values (?, ?, ?, ?, ?, ?, ?, ?, ");
-			sb.append("?, ?, ?)");
-
-			String sql = sb.toString();
-
-			ps = connection.prepareStatement(sql);
-
-			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-
-			for (String bundleSymbolicName : bundleSymbolicNames) {
-				ps.setLong(1, 0);
-				ps.setLong(2, increment());
-				ps.setTimestamp(3, timestamp);
-				ps.setTimestamp(4, timestamp);
-				ps.setString(5, bundleSymbolicName);
-				ps.setString(6, "0.0.1");
-				ps.setInt(7, 001);
-				ps.setTimestamp(8, timestamp);
-				ps.setBoolean(9, false);
-				ps.setInt(10, 0);
-				ps.setString(11, ReleaseConstants.TEST_STRING);
-
-				ps.addBatch();
-			}
-
-			ps.executeBatch();
-		}
-		finally {
-			DataAccess.cleanUp(ps, rs);
-		}
+	protected void updateExtractedModules() throws SQLException {
+		addRelease(_bundleSymbolicNames);
 	}
 
 	protected void updateServletContextName(
@@ -193,7 +191,7 @@ public class UpgradeModules extends UpgradeProcess {
 		runSQL(
 			"update Release_ set servletContextName = \"" +
 				newServletContextName + "\" where servletContextName = \"" +
-				oldServletContextName + "\"");
+					oldServletContextName + "\"");
 	}
 
 	private static final String[] _bundleSymbolicNames = new String[] {
