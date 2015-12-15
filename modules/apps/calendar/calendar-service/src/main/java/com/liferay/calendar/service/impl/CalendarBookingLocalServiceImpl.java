@@ -953,6 +953,7 @@ public class CalendarBookingLocalServiceImpl
 
 		if (allFollowing) {
 			Calendar calendar = calendarLocalService.getCalendar(calendarId);
+
 			Recurrence recurrenceObj = RecurrenceSerializer.deserialize(
 				recurrence, calendar.getTimeZone());
 
