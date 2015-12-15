@@ -1329,7 +1329,7 @@
 		</execute>
 	</command>
 
-	<command name="SubmitFormWithThreePages" priority="4">
+	<command name="SubmitFormWithThreePages" priority="5">
 		<execute macro="Navigator#openURL" />
 
 		<execute macro="ProductMenu#gotoSitesContent">
