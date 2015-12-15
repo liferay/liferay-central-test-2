@@ -39,6 +39,7 @@ public class Recurrence {
 		recurrence.setInterval(_interval);
 		recurrence.setMonths(new ArrayList<>(_months));
 		recurrence.setPositionalWeekdays(new ArrayList<>(_positionalWeekdays));
+		recurrence.setTimeZone(_timeZone);
 
 		Calendar untilJCalendar = null;
 
@@ -47,7 +48,6 @@ public class Recurrence {
 		}
 
 		recurrence.setUntilJCalendar(untilJCalendar);
-		recurrence.setTimeZone(_timeZone);
 
 		return recurrence;
 	}
