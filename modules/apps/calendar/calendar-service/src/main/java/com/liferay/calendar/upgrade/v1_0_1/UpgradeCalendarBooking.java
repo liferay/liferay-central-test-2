@@ -29,7 +29,7 @@ public class UpgradeCalendarBooking extends UpgradeProcess {
 
 		runSQL(
 			"update CalendarBooking set vEventUid = uuid_ where vEventUid is " +
-				"NULL or vEventUid = ''");
+				"null or vEventUid = ''");
 	}
 
 }
