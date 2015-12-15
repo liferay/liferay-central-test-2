@@ -33,19 +33,19 @@ public class UpgradeModules extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		_registerModulesExtractedFromCore();
+		registerModulesExtractedFromCore();
 
-		_registerModulesConvertedFromLegacySDK();
+		registerModulesConvertedFromLegacySDK();
 	}
 
-	private boolean _isInstalled(String buildNamespace, String portletId)
+	protected boolean isInstalled(String buildNamespace, String portletId)
 		throws SQLException {
 
-		return _isServiceBuilderApplication(buildNamespace) ||
-			_isPortletInstalled(portletId);
+		return isServiceBuilderApplication(buildNamespace) ||
+			isPortletInstalled(portletId);
 	}
 
-	private boolean _isPortletInstalled(String portletId) throws SQLException {
+	protected boolean isPortletInstalled(String portletId) throws SQLException {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
@@ -68,7 +68,7 @@ public class UpgradeModules extends UpgradeProcess {
 		return false;
 	}
 
-	private boolean _isServiceBuilderApplication(String buildNamespace)
+	protected boolean isServiceBuilderApplication(String buildNamespace)
 		throws SQLException {
 
 		PreparedStatement ps = null;
@@ -94,7 +94,7 @@ public class UpgradeModules extends UpgradeProcess {
 		return false;
 	}
 
-	private void _registerModulesConvertedFromLegacySDK()
+	protected void registerModulesConvertedFromLegacySDK()
 		throws IOException, SQLException {
 
 		for (String[] convertedLegacyModule : _convertedLegacyModules) {
@@ -119,8 +119,8 @@ public class UpgradeModules extends UpgradeProcess {
 
 					// check it is been installed but never upgraded
 
-					if (_isInstalled(buildNamespace, portletId)) {
-						_registerStartVersion(newServletContextName);
+					if (isInstalled(buildNamespace, portletId)) {
+						registerStartVersion(newServletContextName);
 					}
 				}
 				else {
@@ -128,7 +128,7 @@ public class UpgradeModules extends UpgradeProcess {
 					// it's been installed, we just need to translate
 					// its servlet context name
 
-					_updateServletContextName(
+					updateServletContextName(
 						oldServletContextName, newServletContextName);
 				}
 			}
@@ -138,11 +138,11 @@ public class UpgradeModules extends UpgradeProcess {
 		}
 	}
 
-	private void _registerModulesExtractedFromCore() throws SQLException {
-		_registerStartVersion(_bundleSymbolicNames);
+	protected void registerModulesExtractedFromCore() throws SQLException {
+		registerStartVersion(_bundleSymbolicNames);
 	}
 
-	private void _registerStartVersion(String... bundleSymbolicNames)
+	protected void registerStartVersion(String... bundleSymbolicNames)
 		throws SQLException {
 
 		PreparedStatement ps = null;
@@ -186,7 +186,7 @@ public class UpgradeModules extends UpgradeProcess {
 		}
 	}
 
-	private void _updateServletContextName(
+	protected void updateServletContextName(
 			String oldServletContextName, String newServletContextName)
 		throws IOException, SQLException {
 
