@@ -108,19 +108,7 @@ public class UpgradeModules extends UpgradeProcess {
 		return false;
 	}
 
-	protected boolean isInstalled(String buildNamespace, String portletId)
-		throws SQLException {
-
-		if (hasServiceComponent(buildNamespace) ||
-			isPortletInstalled(portletId)) {
-
-			return true;
-		}
-
-		return false;
-	}
-
-	protected boolean isPortletInstalled(String portletId) throws SQLException {
+	protected boolean hasPortlet(String portletId) throws SQLException {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
@@ -165,7 +153,9 @@ public class UpgradeModules extends UpgradeProcess {
 				rs = ps.executeQuery();
 
 				if (!rs.next()) {
-					if (isInstalled(buildNamespace, portletId)) {
+					if (hasPortlet(portletId) ||
+						hasServiceComponent(buildNamespace)) {
+
 						addRelease(newServletContextName);
 					}
 				}
