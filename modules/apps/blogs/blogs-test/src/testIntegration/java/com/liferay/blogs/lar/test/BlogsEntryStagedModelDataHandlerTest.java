@@ -67,7 +67,7 @@ public class BlogsEntryStagedModelDataHandlerTest
 			new LiferayIntegrationTestRule(), TransactionalTestRule.INSTANCE);
 
 	@Test
-	public void testCoverImageIsImported() throws Exception {
+	public void testImportedCoverImage() throws Exception {
 		initExport();
 
 		BlogsEntry entry = addBlogsEntryWithCoverImage();
@@ -97,7 +97,7 @@ public class BlogsEntryStagedModelDataHandlerTest
 	}
 
 	@Test
-	public void testSmallImageIsImported() throws Exception {
+	public void testImportedSmallImage() throws Exception {
 		initExport();
 
 		BlogsEntry entry = addBlogsEntryWithSmallImage();
