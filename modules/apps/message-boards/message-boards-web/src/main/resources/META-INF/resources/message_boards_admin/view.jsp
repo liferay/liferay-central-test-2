@@ -46,9 +46,64 @@ if ((category != null) && layout.isTypeControlPanel()) {
 	portletURL="<%= restoreTrashEntriesURL %>"
 />
 
-<div class="container-fluid-1280">
-	<liferay-util:include page="/message_boards/top_links.jsp" servletContext="<%= application %>" />
+<%
+PortletURL navigationURL = renderResponse.createRenderURL();
 
+navigationURL.setParameter("mvcRenderCommandName", "/message_boards/view");
+%>
+
+<aui:nav-bar cssClass="collapse-basic-search" markupView="lexicon">
+	<aui:nav cssClass="navbar-nav">
+
+		<%
+		navigationURL.setParameter("top-link", "message-boards-home");
+		navigationURL.setParameter("tag", StringPool.BLANK);
+		%>
+
+		<aui:nav-item
+			href="<%= navigationURL.toString() %>"
+			label="message-boards-home"
+			selected='<%= topLink.equals("message-boards-home") %>'
+		/>
+
+		<%
+		navigationURL.setParameter("topLink", "statistics");
+		%>
+
+		<aui:nav-item
+			href="<%= navigationURL.toString() %>"
+			label="statistics"
+			selected='<%= topLink.equals("statistics") %>'
+		/>
+
+		<%
+		navigationURL.setParameter("topLink", "banned-users");
+		%>
+
+		<aui:nav-item
+			href="<%= navigationURL.toString() %>"
+			label="banned-users"
+			selected='<%= topLink.equals("banned-users") %>'
+		/>
+	</aui:nav>
+
+	<liferay-portlet:renderURL varImpl="searchURL">
+		<portlet:param name="mvcRenderCommandName" value="/message_boards/search" />
+	</liferay-portlet:renderURL>
+
+	<aui:nav-bar-search>
+		<aui:form action="<%= searchURL %>" name="searchFm">
+			<liferay-portlet:renderURLParams varImpl="searchURL" />
+			<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
+			<aui:input name="breadcrumbsCategoryId" type="hidden" value="<%= categoryId %>" />
+			<aui:input name="searchCategoryId" type="hidden" value="<%= categoryId %>" />
+
+			<liferay-ui:input-search markupView="lexicon" />
+		</aui:form>
+	</aui:nav-bar-search>
+</aui:nav-bar>
+
+<div class="container-fluid-1280">
 	<c:choose>
 		<c:when test='<%= topLink.equals("message-boards-home") %>'>
 			<c:if test="<%= category != null %>">
