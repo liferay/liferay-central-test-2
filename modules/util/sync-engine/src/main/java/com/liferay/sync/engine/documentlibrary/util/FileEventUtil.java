@@ -209,7 +209,7 @@ public class FileEventUtil {
 	public static void downloadFile(
 		long syncAccountId, SyncFile syncFile, boolean batch) {
 
-		if (checkEvents(syncFile)) {
+		if (isDownloadInProgress(syncFile)) {
 			return;
 		}
 
@@ -229,7 +229,7 @@ public class FileEventUtil {
 		long sourceVersionId, long syncAccountId, SyncFile syncFile,
 		long targetVersionId) {
 
-		if (checkEvents(syncFile)) {
+		if (isDownloadInProgress(syncFile)) {
 			return;
 		}
 
@@ -497,7 +497,7 @@ public class FileEventUtil {
 		updateFolderEvent.run();
 	}
 
-	protected static boolean checkEvents(SyncFile syncFile) {
+	protected static boolean isDownloadInProgress(SyncFile syncFile) {
 		Set<Event> events = FileEventManager.getEvents(
 			syncFile.getSyncFileId());
 
