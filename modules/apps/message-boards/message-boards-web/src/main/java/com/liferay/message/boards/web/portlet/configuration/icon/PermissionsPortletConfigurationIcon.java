@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.message.boards.web.portlet.icon;
+package com.liferay.message.boards.web.portlet.configuration.icon;
 
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.portlet.configuration.icon.BasePortletConfigurationIcon;
