@@ -55,7 +55,6 @@ if ((category != null) && layout.isTypeControlPanel()) {
 			<%
 			boolean showAddCategoryButton = MBCategoryPermission.contains(permissionChecker, scopeGroupId, categoryId, ActionKeys.ADD_CATEGORY);
 			boolean showAddMessageButton = MBCategoryPermission.contains(permissionChecker, scopeGroupId, categoryId, ActionKeys.ADD_MESSAGE);
-			boolean showPermissionsButton = MBCategoryPermission.contains(permissionChecker, scopeGroupId, categoryId, ActionKeys.PERMISSIONS);
 
 			if (showAddMessageButton && !themeDisplay.isSignedIn()) {
 				if (!allowAnonymousPosting) {
@@ -64,7 +63,7 @@ if ((category != null) && layout.isTypeControlPanel()) {
 			}
 			%>
 
-			<c:if test="<%= showAddCategoryButton || showAddMessageButton || showPermissionsButton %>">
+			<c:if test="<%= showAddCategoryButton || showAddMessageButton %>">
 				<div class="category-buttons">
 					<c:if test="<%= showAddCategoryButton %>">
 						<portlet:renderURL var="editCategoryURL">
@@ -84,31 +83,6 @@ if ((category != null) && layout.isTypeControlPanel()) {
 						</portlet:renderURL>
 
 						<aui:button href="<%= editMessageURL %>" value="post-new-thread" />
-					</c:if>
-
-					<c:if test="<%= showPermissionsButton %>">
-
-						<%
-						String modelResource = "com.liferay.portlet.messageboards";
-						String modelResourceDescription = themeDisplay.getScopeGroupName();
-						String resourcePrimKey = String.valueOf(scopeGroupId);
-
-						if (category != null) {
-							modelResource = MBCategory.class.getName();
-							modelResourceDescription = category.getName();
-							resourcePrimKey = String.valueOf(category.getCategoryId());
-						}
-						%>
-
-						<liferay-security:permissionsURL
-							modelResource="<%= modelResource %>"
-							modelResourceDescription="<%= HtmlUtil.escape(modelResourceDescription) %>"
-							resourcePrimKey="<%= resourcePrimKey %>"
-							var="permissionsURL"
-							windowState="<%= LiferayWindowState.POP_UP.toString() %>"
-						/>
-
-						<aui:button href="<%= permissionsURL %>" useDialog="<%= true %>" value="permissions" />
 					</c:if>
 				</div>
 			</c:if>
