@@ -274,10 +274,28 @@ public class BlogsEntryStagedModelDataHandler
 			return;
 		}
 
+		// Cover image
+
+		ImageSelector coverImageSelector = null;
+
 		List<Element> attachmentElements =
 			portletDataContext.getReferenceDataElements(
 				entry, DLFileEntry.class,
 				PortletDataContext.REFERENCE_TYPE_WEAK);
+
+		if (Validator.isNotNull(entry.getCoverImageURL())) {
+			coverImageSelector = new ImageSelector(entry.getCoverImageURL());
+		}
+		else if (entry.getCoverImageFileEntryId() != 0) {
+			coverImageSelector = _getImageSelector(
+				portletDataContext, entry.getCoverImageFileEntryId(),
+				attachmentElements);
+		}
+
+		if (coverImageSelector != null) {
+			_blogsEntryLocalService.addCoverImage(
+				importedEntry.getEntryId(), coverImageSelector);
+		}
 
 		// Small image
 
@@ -322,25 +340,7 @@ public class BlogsEntryStagedModelDataHandler
 				importedEntry.getEntryId(), smallImageSelector);
 		}
 
-		// Cover image
-
-		ImageSelector coverImageSelector = null;
-
-		if (Validator.isNotNull(entry.getCoverImageURL())) {
-			coverImageSelector = new ImageSelector(entry.getCoverImageURL());
-		}
-		else if (entry.getCoverImageFileEntryId() != 0) {
-			coverImageSelector = _getImageSelector(
-				portletDataContext, entry.getCoverImageFileEntryId(),
-				attachmentElements);
-		}
-
-		if (coverImageSelector != null) {
-			_blogsEntryLocalService.addCoverImage(
-				importedEntry.getEntryId(), coverImageSelector);
-		}
-
-		if ((smallImageSelector != null) || (coverImageSelector != null)) {
+		if ((coverImageSelector != null) || (smallImageSelector != null)) {
 			importedEntry =_blogsEntryLocalService.getBlogsEntry(
 				importedEntry.getEntryId());
 		}
