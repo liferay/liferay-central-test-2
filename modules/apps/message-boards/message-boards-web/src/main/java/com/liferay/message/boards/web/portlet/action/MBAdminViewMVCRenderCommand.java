@@ -16,7 +16,7 @@ package com.liferay.message.boards.web.portlet.action;
 
 import com.liferay.message.boards.web.constants.MBPortletKeys;
 import com.liferay.message.boards.web.constants.MBWebKeys;
-import com.liferay.message.boards.web.portlet.item.MBPortletToolbarContributor;
+import com.liferay.message.boards.web.portlet.toolbar.contributor.MBPortletToolbarContributor;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 
 import javax.portlet.PortletException;
