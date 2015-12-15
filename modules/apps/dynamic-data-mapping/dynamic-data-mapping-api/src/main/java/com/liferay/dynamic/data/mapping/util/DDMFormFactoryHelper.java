@@ -265,12 +265,11 @@ public class DDMFormFactoryHelper {
 		ResourceBundle portalResourceBundle = ResourceBundleUtil.getBundle(
 			"content.Language", locale, PortalClassLoaderUtil.getClassLoader());
 
-		String resourceBundleBaseName = getResourceBundleBaseName(_clazz);
-
 		return new AggregateResourceBundle(
 			portalResourceBundle,
 			ResourceBundleUtil.getBundle(
-				resourceBundleBaseName, locale, _clazz.getClassLoader()));
+				getResourceBundleBaseName(_clazz), locale,
+				_clazz.getClassLoader()));
 	}
 
 	protected String getResourceBundleBaseName(Class<?> clazz) {
