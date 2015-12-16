@@ -801,8 +801,6 @@
 			<var name="userScreenName" value="usersn" />
 		</execute>
 
-		<execute function="AssertConsoleTextNotPresent" value1="Error" />
-
 		<execute macro="User#firstLoginPG">
 			<var name="password" value="test" />
 			<var name="userEmailAddress" value="userea@liferay.com" />
