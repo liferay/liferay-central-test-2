@@ -1771,13 +1771,17 @@
 	</command>
 
 	<command name="viewViewCountPG">
-		<execute function="Click#clickAtNavigation" locator1="link=${pageName}" />
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
 
 		<var name="key_entryTitle" value="${entryTitle}" />
 
 		<execute function="AssertClick" locator1="PGBlogs#ENTRY_TITLE" value1="${entryTitle}" />
 
-		<execute function="Click#clickAtNavigation" locator1="link=${pageName}" />
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
 
 		<execute function="AssertClick" locator1="PGBlogs#ENTRY_TITLE" value1="${entryTitle}" />
 
@@ -1794,7 +1798,9 @@
 			</else>
 		</if>
 
-		<execute function="Click#clickAtNavigation" locator1="link=${pageName}" />
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
 
 		<execute function="AssertClick" locator1="PGBlogs#ENTRY_TITLE" value1="${entryTitle}" />
 
