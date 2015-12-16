@@ -86,7 +86,7 @@ public class JspCompiler extends Jsr199JavaCompiler {
 		if (javaCompiler == null) {
 			errDispatcher.jspError("jsp.error.nojdk");
 
-			throw new JasperException("Unable to find java compiler");
+			throw new JasperException("Unable to find Java compiler");
 		}
 
 		DiagnosticCollector<JavaFileObject> diagnosticCollector =
