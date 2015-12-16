@@ -847,9 +847,6 @@
 	</command>
 
 	<command name="selectScopePG">
-		<var name="key_currentKBPageScope" value="${currentKBPageScope}" />
-		<var name="key_newKBPageScope" value="${newKBPageScope}" />
-
 		<execute function="SelectFrame" locator1="KnowledgeBaseConfiguration#IFRAME" />
 
 		<execute function="AssertClick" locator1="KnowledgeBaseConfiguration#SECTION_SCOPE" value1="Scope" />
