@@ -50,7 +50,6 @@ String searchContainerId = ParamUtil.getString(request, "searchContainerId");
 		<liferay-frontend:management-bar-navigation
 			label="<%= label %>"
 		>
-
 			<portlet:renderURL var="viewArticlesHomeURL">
 				<portlet:param name="folderId" value="<%= String.valueOf(JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID) %>" />
 				<portlet:param name="showEditActions" value="<%= String.valueOf(journalDisplayContext.isShowEditActions()) %>" />
