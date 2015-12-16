@@ -48,10 +48,10 @@ public class PortalSettingsTestCASMVCRenderCommand implements MVCRenderCommand {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws PortletException {
 
-		try {
-			RequestDispatcher requestDispatcher =
-				_servletContext.getRequestDispatcher(_JSP_PATH);
+		RequestDispatcher requestDispatcher =
+			_servletContext.getRequestDispatcher(_JSP_PATH);
 
+		try {
 			HttpServletRequest httpServletRequest =
 				PortalUtil.getHttpServletRequest(renderRequest);
 			HttpServletResponse httpServletResponse =
