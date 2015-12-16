@@ -31,26 +31,29 @@ import java.util.Set;
  */
 public class ProtectedObjectInputStream extends ObjectInputStream {
 
-	public ProtectedObjectInputStream(InputStream in) throws IOException {
-		super(in);
+	public ProtectedObjectInputStream(InputStream inputStream)
+		throws IOException {
+
+		super(inputStream);
 	}
 
-	protected Class<?> doResolveClass(ObjectStreamClass osc)
+	protected Class<?> doResolveClass(ObjectStreamClass objectStreamClass)
 		throws ClassNotFoundException, IOException {
 
-		return super.resolveClass(osc);
+		return super.resolveClass(objectStreamClass);
 	}
 
 	@Override
-	protected Class<?> resolveClass(ObjectStreamClass osc)
+	protected Class<?> resolveClass(ObjectStreamClass objectStreamClass)
 		throws ClassNotFoundException, IOException {
 
-		if (_restrictedClassNames.contains(osc.getName())) {
+		if (_restrictedClassNames.contains(objectStreamClass.getName())) {
 			throw new InvalidClassException(
-				"Trying to load restricted class: " + osc.getName());
+				"Reject resolving of restricted class " +
+					objectStreamClass.getName());
 		}
 
-		return doResolveClass(osc);
+		return doResolveClass(objectStreamClass);
 	}
 
 	private static final Set<String> _restrictedClassNames;
