@@ -358,7 +358,11 @@ public class SiteAdministrationPanelCategoryDisplayContext {
 	public boolean isShowSiteAdministration() throws PortalException {
 		Group group = getGroup();
 
-		if ((group != null) && GroupPermissionUtil.contains(
+		if (group == null) {
+			return false;
+		}
+
+		if (GroupPermissionUtil.contains(
 				_themeDisplay.getPermissionChecker(), group,
 				ActionKeys.VIEW_SITE_ADMINISTRATION)) {
 
