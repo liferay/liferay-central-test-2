@@ -160,7 +160,6 @@ public class UploadImageMVCActionCommand extends BaseMVCActionCommand {
 				jsonObject.put(
 					"tempImageFileName", tempImageFileEntry.getTitle());
 
-				//writeJSON(actionRequest, actionResponse, jsonObject);
 				JSONPortletResponseUtil.writeJSON(
 					actionRequest, actionResponse, jsonObject);
 			}
@@ -260,7 +259,6 @@ public class UploadImageMVCActionCommand extends BaseMVCActionCommand {
 
 				jsonObject.put("errorMessage", errorMessage);
 
-				//writeJSON(actionRequest, actionResponse, jsonObject);
 				JSONPortletResponseUtil.writeJSON(
 					actionRequest, actionResponse, jsonObject);
 			}
