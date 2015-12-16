@@ -20,6 +20,6 @@ package com.liferay.imageuploader.web.constants;
 public class ImageUploaderPortletKeys {
 
 	public static final String IMAGE_UPLOADER =
-		"com_liferay_imageuploader_web_portlet_ImageUploaderPortlet";
+		"com_liferay_image_uploader_web_portlet_ImageUploaderPortlet";
 
 }
