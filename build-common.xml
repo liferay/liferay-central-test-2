@@ -1508,7 +1508,7 @@ rerun your task.
 					</then>
 				</elseif>
 				<else>
-					<fail>Please set a valid "lp.version" in ${basedir}/release.properties.</fail>
+					<fail>Please set a valid value for the property "lp.version" in ${basedir}/release.properties.</fail>
 				</else>
 			</if>
 
