@@ -23,7 +23,9 @@
 		<execute function="Select" locator1="Select#SCOPE" value1="${siteName}" />
 
 		<execute function="AssertTextEquals" locator1="PGWikidisplayConfigurationScope#SUCCESS_MESSAGE" value1="You have successfully updated the setup." />
-		<execute function="AssertSelectedLabel" locator1="WikiConfiguration#SCOPE_SELECT" value1="${siteName}" />
+
+		<execute function="AssertSelectedLabel" locator1="Select#SCOPE" value1="${siteName}" />
+
 		<execute function="SelectFrame" value1="relative=top" />
 	</command>
 
