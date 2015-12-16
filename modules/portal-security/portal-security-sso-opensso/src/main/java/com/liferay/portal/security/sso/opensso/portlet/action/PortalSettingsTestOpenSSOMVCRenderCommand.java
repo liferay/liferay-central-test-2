@@ -65,8 +65,7 @@ public class PortalSettingsTestOpenSSOMVCRenderCommand
 				_log.debug("Unable to include JSP " + _JSP_PATH, e);
 			}
 
-			throw new PortletException(
-				"Unable to include JSP " + _JSP_PATH, e);
+			throw new PortletException("Unable to include JSP " + _JSP_PATH, e);
 		}
 
 		return MVC_PATH_SKIP_DISPATCH;
