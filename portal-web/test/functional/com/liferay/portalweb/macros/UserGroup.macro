@@ -60,7 +60,7 @@
 		<execute function="Type" locator1="TextInput#SEARCH" value1="${userGroupName}" />
 		<execute function="Click" locator1="Button#SUBMIT" />
 		<execute function="Click" locator1="Icon#BODY_VERTICAL_ELLIPSIS" />
-		<execute function="AssertClick" locator1="MenuItem#MANAGE_SITE_PAGES" value1="Manage Site Pages" />
+		<execute function="AssertClick" locator1="MenuItem#MANAGE_PAGES" value1="Manage Pages" />
 
 		<execute function="Pause" locator1="5000" />
 
@@ -258,11 +258,11 @@
 		<execute function="Click" locator1="Icon#BODY_VERTICAL_ELLIPSIS" />
 	</command>
 
-	<command name="gotoManageSitePages">
+	<command name="gotoManagePages">
 		<var name="key_userGroupName" value="${userGroupName}" />
 
 		<execute function="Click" locator1="Icon#BODY_VERTICAL_ELLIPSIS" />
-		<execute function="AssertClick" locator1="MenuItem#MANAGE_SITE_PAGES" value1="Manage Site Pages" />
+		<execute function="AssertClick" locator1="MenuItem#MANAGE_PAGES" value1="Manage Pages" />
 	</command>
 
 	<command name="removeMemberCP">
