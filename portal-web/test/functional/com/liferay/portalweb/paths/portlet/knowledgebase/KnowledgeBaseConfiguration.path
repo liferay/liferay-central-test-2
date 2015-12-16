@@ -170,11 +170,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>SCOPE_MENU_BUTTON</td>
-	<td>//div[contains(@class,'btn-group')]//span[contains(.,'${key_currentKBPageScope}')]</td>
-	<td></td>
-</tr>
-<tr>
 	<td>SCOPE_SELECTION</td>
 	<td>//select[contains(@id,'scope')]</td>
 	<td></td>
