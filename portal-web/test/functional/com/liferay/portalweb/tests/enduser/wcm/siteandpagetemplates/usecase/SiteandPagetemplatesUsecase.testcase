@@ -94,7 +94,7 @@
 		</execute>
 
 		<execute macro="SitePage#viewNoDeletePagesAssociatedWithSiteTemplateCP">
-			<var name="siteChildPageName" value="Site Child Page Name" />
+			<var name="page" value="Site Child Page Name" />
 		</execute>
 	</command>
 
@@ -259,11 +259,9 @@
 			<var name="userGroupName" value="UG UserGroup Name" />
 		</execute>
 
-		<for list="Home,Wiki" param="sitePageName">
+		<for list="Home,Wiki" param="page">
 			<execute macro="SitePage#viewNoDeletePagesAssociatedWithSiteTemplateCP">
-				<var name="iframe" value="true" />
-				<var name="sitePageName" value="${sitePageName}" />
-				<var name="userGroupName" value="UG UserGroup Name" />
+				<var name="page" value="${page}" />
 			</execute>
 		</for>
 	</command>
