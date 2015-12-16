@@ -12,9 +12,9 @@
  * details.
  */
 
-package com.liferay.imageuploader.web.upgrade.v1_0_0;
+package com.liferay.image.uploader.web.upgrade.v1_0_0;
 
-import com.liferay.imageuploader.web.constants.ImageUploaderPortletKeys;
+import com.liferay.image.uploader.web.constants.ImageUploaderPortletKeys;
 
 /**
  * @author Peter Fellwock
