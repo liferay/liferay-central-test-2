@@ -1537,9 +1537,9 @@
 	</command>
 
 	<command name="searchCP">
-		<execute function="Type" locator1="Search#SEARCH_FIELD" value1="${dmDocumentKeyword}" />
+		<execute function="Type" locator1="TextInput#SEARCH" value1="${dmDocumentKeyword}" />
 
-		<execute function="Click" locator1="Search#SEARCH_BUTTON" />
+		<execute function="Click" locator1="Icon#BASIC_SEARCH" />
 	</command>
 
 	<command name="searchPG">
