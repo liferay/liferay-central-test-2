@@ -611,19 +611,19 @@ public class LDAPAuth implements Authenticator {
 	}
 
 	protected String removeEncryptionAlgorithm(String ldapPassword) {
-		int openBrace = ldapPassword.indexOf(StringPool.OPEN_CURLY_BRACE);
+		int x = ldapPassword.indexOf(StringPool.OPEN_CURLY_BRACE);
 
-		if (openBrace == -1) {
+		if (x == -1) {
 			return ldapPassword;
 		}
 
-		int closeBrace = ldapPassword.indexOf(StringPool.CLOSE_CURLY_BRACE);
+		int y = ldapPassword.indexOf(StringPool.CLOSE_CURLY_BRACE);
 
-		if (closeBrace == -1) {
+		if (y == -1) {
 			return ldapPassword;
 		}
 
-		return ldapPassword.substring(openBrace, closeBrace + 1);
+		return ldapPassword.substring(x, y + 1);
 	}
 
 	@Reference(
