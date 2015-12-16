@@ -638,10 +638,6 @@
 		<execute macro="WebContent#viewPGViaWCD">
 			<var name="webContentContent" value="WC WebContent Content" />
 		</execute>
-
-		<execute macro="WebContent#tearDownCP">
-			<var name="siteScopeName" value="Global" />
-		</execute>
 	</command>
 
 	<command name="ViewAllFileTypesEnabled" priority="4">
