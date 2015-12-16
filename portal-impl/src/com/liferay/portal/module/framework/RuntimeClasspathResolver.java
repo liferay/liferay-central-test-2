@@ -42,9 +42,9 @@ public class RuntimeClasspathResolver implements ClasspathResolver {
 
 		for (int i = 0; i < urls.length; i++) {
 
-			// Make sure we compose proper URLs when running in Windows based
-			// systems. Otherwise, if we refer to a class defined in this
-			// files from a JSP we run into unexpected errors
+			// Ensure URLs are properly composed for Windows environments.
+			// Otherwise, we will run into unexpected errors when referencing a
+			// class from a JSP. See LPS-61210 for more information.
 
 			String path = StringUtil.replace(
 				files[i].getAbsolutePath(), StringPool.BACK_SLASH,
