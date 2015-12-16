@@ -255,7 +255,7 @@
 			<var name="portlet" value="User Groups" />
 		</execute>
 
-		<execute macro="UserGroup#gotoManageSitePages">
+		<execute macro="UserGroup#gotoManagePages">
 			<var name="userGroupName" value="UG UserGroup Name" />
 		</execute>
 
