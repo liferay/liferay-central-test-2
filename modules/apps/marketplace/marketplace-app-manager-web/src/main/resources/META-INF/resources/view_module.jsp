@@ -123,19 +123,16 @@ MarketplaceAppManagerUtil.addPortletBreadcrumbEntry(appDisplay, moduleGroupDispl
 			</liferay-ui:search-container-column-text>
 
 			<liferay-ui:search-container-column-text colspan="<%= 2 %>">
-
-				<%
-				String portletDescription = GetterUtil.getString(serviceReference.getProperty("javax.portlet.description"));
-				String portletDisplayName = GetterUtil.getString(serviceReference.getProperty("javax.portlet.display-name"));
-				String portletName = GetterUtil.getString(serviceReference.getProperty("javax.portlet.name"));
-				%>
-
 				<h5>
-					<%= portletDisplayName %>
+					<%= GetterUtil.getString(serviceReference.getProperty("javax.portlet.display-name")) %>
 				</h5>
 
 				<h6 class="text-default">
-					<%= portletName %>
+					<%= GetterUtil.getString(serviceReference.getProperty("javax.portlet.name")) %>
+
+					<%
+					String portletDescription = GetterUtil.getString(serviceReference.getProperty("javax.portlet.description"));
+					%>
 
 					<c:if test="<%= Validator.isNotNull(portletDescription) %>">
 					- <%= portletDescription %>
