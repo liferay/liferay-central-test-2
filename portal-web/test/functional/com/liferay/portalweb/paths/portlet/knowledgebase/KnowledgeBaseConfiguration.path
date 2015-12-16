@@ -176,7 +176,7 @@
 </tr>
 <tr>
 	<td>SCOPE_SELECTION</td>
-	<td>//ul[contains(@class,'dropdown-menu')]/li//span[contains(.,'${key_newKBPageScope}')]</td>
+	<td>//select[contains(@id,'scope')]</td>
 	<td></td>
 </tr>
 <tr>
