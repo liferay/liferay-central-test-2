@@ -133,6 +133,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		return doAddFolder(userId, groupId, BlogsConstants.SERVICE_NAME);
 	}
 
+	@Override
 	public void addCoverImage(long entryId, ImageSelector imageSelector)
 		throws PortalException {
 
@@ -452,6 +453,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		return originalFileEntry.getFileEntryId();
 	}
 
+	@Override
 	public void addSmallImage(long entryId, ImageSelector imageSelector)
 		throws PortalException {
 
