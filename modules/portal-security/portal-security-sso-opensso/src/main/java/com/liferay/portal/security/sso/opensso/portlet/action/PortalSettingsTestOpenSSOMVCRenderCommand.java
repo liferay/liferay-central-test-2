@@ -49,23 +49,24 @@ public class PortalSettingsTestOpenSSOMVCRenderCommand
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws PortletException {
 
-		RequestDispatcher requestDispatcher =
-			_servletContext.getRequestDispatcher(_JSP_PATH);
-
 		try {
+			RequestDispatcher requestDispatcher =
+				_servletContext.getRequestDispatcher(_JSP_PATH);
+
 			HttpServletRequest httpServletRequest =
 				PortalUtil.getHttpServletRequest(renderRequest);
-
 			HttpServletResponse httpServletResponse =
 				PortalUtil.getHttpServletResponse(renderResponse);
 
 			requestDispatcher.include(httpServletRequest, httpServletResponse);
 		}
-		catch (Exception se) {
-			_log.error("Unable to include JSP " + _JSP_PATH, se);
+		catch (Exception e) {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Unable to include JSP " + _JSP_PATH, e);
+			}
 
 			throw new PortletException(
-				"Unable to include JSP " + _JSP_PATH, se);
+				"Unable to include JSP " + _JSP_PATH, e);
 		}
 
 		return MVC_PATH_SKIP_DISPATCH;
