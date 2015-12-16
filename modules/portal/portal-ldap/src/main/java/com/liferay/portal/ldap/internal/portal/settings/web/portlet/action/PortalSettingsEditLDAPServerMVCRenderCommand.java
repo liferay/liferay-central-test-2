@@ -33,7 +33,7 @@ import org.osgi.service.component.annotations.Reference;
 	service = MVCRenderCommand.class
 )
 public class PortalSettingsEditLDAPServerMVCRenderCommand
-	extends PortalSettingsBaseMVCRenderCommand {
+	extends BasePortalSettingsMVCRenderCommand {
 
 	@Override
 	protected String getJSPPath() {
