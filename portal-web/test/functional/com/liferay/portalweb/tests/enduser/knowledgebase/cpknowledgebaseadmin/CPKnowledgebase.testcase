@@ -207,7 +207,7 @@
 		</execute>
 
 		<var name="kbArticleRelatedAssetTitle" value="Blogs Entry Title" />
-		<var name="key_relatedAssetTitle" value="${relatedAssetTitle}" />
+		<var name="key_kbArticleRelatedAssetTitle" value="${kbArticleRelatedAssetTitle}" />
 
 		<execute function="AssertClick" locator1="AssetRelatedAssets#KB_RELATED_ASSETS_LINKS" value1="${kbArticleRelatedAssetTitle}" />
 
