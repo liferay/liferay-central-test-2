@@ -137,9 +137,7 @@ for (ResultRowSplitterEntry resultRowSplitterEntry : resultRowSplitterEntries) {
 
 <%
 }
-%>
 
-<%
 String rowHtmlTag = "li";
 %>
 
