@@ -35,16 +35,16 @@ UserPanelCategory userPanelCategory = (UserPanelCategory)request.getAttribute(Ap
 	<c:if test="<%= !realUserLocale.equals(userLocale) %>">
 
 		<%
-		String doAsUserLanguageId = null;
 		String changeLanguageMessage = null;
+		String doAsUserLanguageId = null;
 
 		if (locale.getLanguage().equals(realUserLocale.getLanguage()) && locale.getCountry().equals(realUserLocale.getCountry())) {
-			doAsUserLanguageId = userLocale.getLanguage() + "_" + userLocale.getCountry();
 			changeLanguageMessage = LanguageUtil.format(realUserLocale, "use-x's-preferred-language-(x)", new String[] {HtmlUtil.escape(user.getFullName()), userLocale.getDisplayLanguage(realUserLocale)}, false);
+			doAsUserLanguageId = userLocale.getLanguage() + "_" + userLocale.getCountry();
 		}
 		else {
-			doAsUserLanguageId = realUserLocale.getLanguage() + "_" + realUserLocale.getCountry();
 			changeLanguageMessage = LanguageUtil.format(realUserLocale, "use-your-preferred-language-(x)", realUserLocale.getDisplayLanguage(realUserLocale), false);
+			doAsUserLanguageId = realUserLocale.getLanguage() + "_" + realUserLocale.getCountry();
 		}
 		%>
 
