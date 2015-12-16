@@ -55,7 +55,7 @@ public class PortletKeys {
 		"com_liferay_directory_web_portlet_FriendsDirectoryPortlet";
 
 	public static final String IMAGE_UPLOADER =
-		"com_liferay_imageuploader_web_portlet_ImageUploaderPortlet";
+		"com_liferay_image_uploader_web_portlet_ImageUploaderPortlet";
 
 	public static final String ITEM_SELECTOR =
 		"com_liferay_item_selector_web_portlet_ItemSelectorPortlet";
