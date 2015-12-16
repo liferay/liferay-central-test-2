@@ -8,10 +8,10 @@ configurations {
 
 task buildMetalComponents(type: Copy)
 
-String metalComponentsVersion = "1.0.0-rc.5"
-
 String defineRegex = "define(['exports', 'metal/src/core', 'metal/src/dom/dom', 'metal/src/object/object', 'metal/src/component/Component', 'metal/src/component/ComponentRegistry', 'metal/src/component/ComponentRenderer', 'metal/src/soy/SoyAop', 'metal/src/soy/SoyTemplates'], function (exports, _core, _dom, _object, _Component2, _ComponentRegistry, _ComponentRenderer2, _SoyAop, _SoyTemplates) {";
 String defineReplace = "define(['exports', 'soyutils', 'metal/src/core', 'metal/src/dom/dom', 'metal/src/object/object', 'metal/src/component/Component', 'metal/src/component/ComponentRegistry', 'metal/src/component/ComponentRenderer', 'metal/src/soy/SoyAop', 'metal/src/soy/SoyTemplates'], function (exports, _soyutils, _core, _dom, _object, _Component2, _ComponentRegistry, _ComponentRenderer2, _SoyAop, _SoyTemplates) {";
+
+String metalComponentsVersion = "1.0.0-rc.5"
 
 buildMetalComponents {
 	eachFile new StripPathSegmentsAction(7)
