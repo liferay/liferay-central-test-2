@@ -1220,6 +1220,8 @@
 	</command>
 
 	<command name="moveToFolderPG">
+		<execute function="Click" locator1="Icon#DISPLAY_STYLE_ICON" />
+
 		<var name="key_dmDocumentTitle" value="${dmDocumentTitle}" />
 
 		<execute function="Click" locator1="DocumentsAndMedia#ICON_DOCUMENT_ACTIONS" />
