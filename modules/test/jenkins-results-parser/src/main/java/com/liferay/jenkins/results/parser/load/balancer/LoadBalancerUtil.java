@@ -190,7 +190,7 @@ public class LoadBalancerUtil {
 					JenkinsResultsParserUtil.write(
 						recentJobFile, sb.toString());
 				}
-				
+
 				JenkinsResultsParserUtil.write(semaphoreFile, "");
 			}
 		}
