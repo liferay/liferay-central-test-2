@@ -1791,10 +1791,10 @@
 		<if>
 			<equals arg1="${entryViewCount}" arg2="1" />
 			<then>
-				<execute function="AssertTextEquals" locator1="BlogsEntry#ENTRY_VIEW_COUNT" value1="${entryViewCount} View" />
+				<execute function="AssertTextEquals#assertPartialText" locator1="BlogsEntry#ENTRY_VIEW_COUNT" value1="${entryViewCount} View" />
 			</then>
 			<else>
-				<execute function="AssertTextEquals" locator1="BlogsEntry#ENTRY_VIEW_COUNT" value1="${entryViewCount} Views" />
+				<execute function="AssertTextEquals#assertPartialText" locator1="BlogsEntry#ENTRY_VIEW_COUNT" value1="${entryViewCount} Views" />
 			</else>
 		</if>
 
@@ -1806,7 +1806,7 @@
 
 		<var method="MathUtil#sum('${entryViewCount}', '1')" name="entryViewCount" />
 
-		<execute function="AssertTextEquals" locator1="BlogsEntry#ENTRY_VIEW_COUNT" value1="${entryViewCount} Views" />
+		<execute function="AssertTextEquals#assertPartialText" locator1="BlogsEntry#ENTRY_VIEW_COUNT" value1="${entryViewCount} Views" />
 	</command>
 
 	<command name="viewViewPermissionsPG">
