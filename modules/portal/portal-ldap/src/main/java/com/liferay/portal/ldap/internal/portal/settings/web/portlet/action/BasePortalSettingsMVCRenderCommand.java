@@ -45,19 +45,18 @@ public abstract class BasePortalSettingsMVCRenderCommand
 		try {
 			HttpServletRequest httpServletRequest =
 				PortalUtil.getHttpServletRequest(renderRequest);
-
 			HttpServletResponse httpServletResponse =
 				PortalUtil.getHttpServletResponse(renderResponse);
 
 			requestDispatcher.include(httpServletRequest, httpServletResponse);
 		}
-		catch (Exception se) {
+		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Unable to include JSP " + getJSPPath(), se);
+				_log.warn("Unable to include JSP " + getJSPPath(), e);
 			}
 
 			throw new PortletException(
-				"Unable to include JSP " + getJSPPath(), se);
+				"Unable to include JSP " + getJSPPath(), e);
 		}
 
 		return MVC_PATH_SKIP_DISPATCH;
