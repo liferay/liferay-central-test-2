@@ -17,9 +17,8 @@
 <%@ include file="/init.jsp" %>
 
 <%
-String eventName = ParamUtil.getString(request, "eventName", renderResponse.getNamespace() + "selectStructure");
-
 String ddmStructureKey = ParamUtil.getString(request, "ddmStructureKey");
+String eventName = ParamUtil.getString(request, "eventName", renderResponse.getNamespace() + "selectStructure");
 
 long[] groupIds = PortalUtil.getCurrentAndAncestorSiteGroupIds(scopeGroupId);
 
