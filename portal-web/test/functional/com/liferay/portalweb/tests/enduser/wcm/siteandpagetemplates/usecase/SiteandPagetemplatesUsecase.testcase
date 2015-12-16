@@ -260,6 +260,10 @@
 		</execute>
 
 		<for list="Home,Wiki" param="page">
+			<execute macro="ProductMenu#gotoSiteViaLink">
+				<var name="site" value="UG UserGroup Name" />
+			</execute>
+
 			<execute macro="SitePage#viewNoDeletePagesAssociatedWithSiteTemplateCP">
 				<var name="page" value="${page}" />
 			</execute>
