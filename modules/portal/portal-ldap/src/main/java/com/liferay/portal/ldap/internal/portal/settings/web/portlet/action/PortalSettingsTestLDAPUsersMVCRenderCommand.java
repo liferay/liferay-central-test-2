@@ -36,7 +36,7 @@ public class PortalSettingsTestLDAPUsersMVCRenderCommand
 	extends BasePortalSettingsMVCRenderCommand {
 
 	@Override
-	protected String getJSPPath() {
+	protected String getJspPath() {
 		return _JSP_PATH;
 	}
 
