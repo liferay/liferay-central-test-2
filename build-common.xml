@@ -1508,10 +1508,7 @@ rerun your task.
 					</then>
 				</elseif>
 				<else>
-					<echo>Please set valid lp.version in ${basedir}/release.properties.</echo>
-
-					<var name="liferay.releng.public" value="" />
-					<var name="liferay.releng.supported" value="" />
+					<fail>Please set a valid "lp.version" in ${basedir}/release.properties.</fail>
 				</else>
 			</if>
 
