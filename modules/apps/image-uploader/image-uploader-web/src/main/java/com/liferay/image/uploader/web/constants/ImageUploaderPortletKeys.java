@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.imageuploader.web.constants;
+package com.liferay.image.uploader.web.constants;
 
 /**
  * @author Peter Fellwock
