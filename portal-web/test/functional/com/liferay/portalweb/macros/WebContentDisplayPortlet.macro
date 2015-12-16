@@ -56,9 +56,7 @@
 
 		<var name="key_scopeSelection" value="${scopeSelection}" />
 
-		<execute function="Click#pauseClickAt" locator1="WCDConfigurationScope#SCOPE_MENULIST" />
-
-		<execute function="Click" locator1="WCDConfigurationScope#SCOPE_MENULIST_SELECTION" value1="${scopeSelection}" />
+		<execute function="Select" locator1="Select#SCOPE" value1="${scopeSelection}" />
 
 		<execute function="AssertClick" locator1="Button#SAVE" value1="Save" />
 
