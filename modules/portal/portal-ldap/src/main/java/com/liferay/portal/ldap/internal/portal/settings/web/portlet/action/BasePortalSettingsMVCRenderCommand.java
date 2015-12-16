@@ -31,7 +31,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * @author Tomas Polesovsky
  */
-public abstract class PortalSettingsBaseMVCRenderCommand
+public abstract class BasePortalSettingsMVCRenderCommand
 	implements MVCRenderCommand {
 
 	@Override
@@ -68,6 +68,6 @@ public abstract class PortalSettingsBaseMVCRenderCommand
 	protected volatile ServletContext servletContext;
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		PortalSettingsBaseMVCRenderCommand.class);
+		BasePortalSettingsMVCRenderCommand.class);
 
 }
