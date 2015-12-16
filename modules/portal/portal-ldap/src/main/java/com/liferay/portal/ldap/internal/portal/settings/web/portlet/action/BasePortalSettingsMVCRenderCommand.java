@@ -40,7 +40,7 @@ public abstract class BasePortalSettingsMVCRenderCommand
 		throws PortletException {
 
 		RequestDispatcher requestDispatcher =
-			servletContext.getRequestDispatcher(getJSPPath());
+			servletContext.getRequestDispatcher(getJspPath());
 
 		try {
 			HttpServletRequest httpServletRequest =
@@ -52,17 +52,17 @@ public abstract class BasePortalSettingsMVCRenderCommand
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Unable to include JSP " + getJSPPath(), e);
+				_log.warn("Unable to include JSP " + getJspPath(), e);
 			}
 
 			throw new PortletException(
-				"Unable to include JSP " + getJSPPath(), e);
+				"Unable to include JSP " + getJspPath(), e);
 		}
 
 		return MVC_PATH_SKIP_DISPATCH;
 	}
 
-	protected abstract String getJSPPath();
+	protected abstract String getJspPath();
 
 	protected volatile ServletContext servletContext;
 
