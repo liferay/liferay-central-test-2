@@ -516,8 +516,8 @@
 	</command>
 
 	<command name="tearDownWorkflowDefinitionDraftsViaKDCP">
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Kaleo Designer" />
+		<execute macro="ProductMenu#gotoControlPanelApps">
+			<var name="portlet" value="Kaleo Designer" />
 		</execute>
 
 		<while>
