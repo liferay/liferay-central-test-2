@@ -172,7 +172,7 @@ boolean disableStagingOptions = GetterUtil.getBoolean(SessionMessages.get(lifera
 					</c:when>
 					<c:otherwise>
 						<div class="alert alert-warning">
-							<liferay-ui:message key="staging-has-been-disabled.-please-close-this-window-in-order-to-go-to-the-live-site" />
+							<liferay-ui:message key="staging-is-disabled.-please-close-this-window-in-order-to-go-to-the-live-site" />
 						</div>
 					</c:otherwise>
 				</c:choose>
