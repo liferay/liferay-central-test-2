@@ -126,17 +126,6 @@ public abstract class BaseDBProcess implements DBProcess {
 		return false;
 	}
 
-	protected boolean hasTable(String tableName) throws Exception {
-		if (doHasTable(StringUtil.toLowerCase(tableName)) ||
-			doHasTable(StringUtil.toUpperCase(tableName)) ||
-			doHasTable(tableName)) {
-
-			return true;
-		}
-
-		return false;
-	}
-
 	protected boolean hasColumn(String tableName, String columnName)
 		throws Exception {
 
@@ -191,6 +180,17 @@ public abstract class BaseDBProcess implements DBProcess {
 		}
 		finally {
 			DataAccess.cleanUp(ps, rs);
+		}
+
+		return false;
+	}
+
+	protected boolean hasTable(String tableName) throws Exception {
+		if (doHasTable(StringUtil.toLowerCase(tableName)) ||
+			doHasTable(StringUtil.toUpperCase(tableName)) ||
+			doHasTable(tableName)) {
+
+			return true;
 		}
 
 		return false;
