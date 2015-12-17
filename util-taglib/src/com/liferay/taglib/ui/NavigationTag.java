@@ -174,7 +174,7 @@ public class NavigationTag extends IncludeTag {
 				"liferay-ui:navigation:navItems", getNavItems(branchNavItems));
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 		}
 
 		request.setAttribute(
