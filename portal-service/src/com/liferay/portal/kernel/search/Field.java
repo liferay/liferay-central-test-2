@@ -202,6 +202,7 @@ public class Field implements Serializable {
 
 	public Field(String name, Map<Locale, String> localizedValues) {
 		validate(name);
+
 		_name = name;
 		_localizedValues = localizedValues;
 	}
@@ -442,32 +443,33 @@ public class Field implements Serializable {
 	protected void validate(String name) {
 		if (name.contains(StringPool.COMMA)) {
 			throw new IllegalArgumentException(
-				"Name cannot contain " + StringPool.COMMA + ": " + name);
+				"Name must not contain " + StringPool.COMMA + ": " + name);
 		}
 
 		if (name.contains(StringPool.PERIOD)) {
 			throw new IllegalArgumentException(
-				"Name cannot contain " + StringPool.PERIOD + ": " + name);
+				"Name must not contain " + StringPool.PERIOD + ": " + name);
 		}
 
 		if (name.contains(StringPool.POUND)) {
 			throw new IllegalArgumentException(
-				"Name cannot contain " + StringPool.POUND + ": " + name);
+				"Name must not contain " + StringPool.POUND + ": " + name);
 		}
 
 		if (name.contains(StringPool.SLASH)) {
 			throw new IllegalArgumentException(
-				"Name cannot contain " + StringPool.SLASH + ": " + name);
+				"Name must not contain " + StringPool.SLASH + ": " + name);
 		}
 
 		if (name.contains(StringPool.STAR)) {
 			throw new IllegalArgumentException(
-				"Name cannot contain " + StringPool.STAR + ": " + name);
+				"Name must not contain " + StringPool.STAR + ": " + name);
 		}
 
 		if (name.startsWith(StringPool.UNDERLINE)) {
 			throw new IllegalArgumentException(
-				"Name cannot start with " + StringPool.UNDERLINE + ": " + name);
+				"Name must not start with " + StringPool.UNDERLINE + ": " +
+					name);
 		}
 	}
 
