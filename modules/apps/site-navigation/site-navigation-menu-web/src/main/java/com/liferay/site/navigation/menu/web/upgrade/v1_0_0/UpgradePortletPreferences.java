@@ -54,7 +54,7 @@ public class UpgradePortletPreferences extends BaseUpgradePortletPreferences {
 			PortletDisplayTemplateManager.DISPLAY_STYLE_PREFIX +
 				"list-menu-ftl");
 
-		// Extract old navigation.display.options as portlet preferences
+		// Extract old "navigation.display.options" as portlet preferences
 
 		if (displayStyle.equals("from-level-0")) {
 			_upgradeDisplayStylePreferences(
