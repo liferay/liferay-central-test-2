@@ -432,7 +432,7 @@ boolean hasUnlinkLayoutSetPrototypePermission = PortalPermissionUtil.contains(pe
 
 								options.prop('disabled', false);
 
-								if ((siteTemplate != null) && (siteTemplate != "")) {
+								if (siteTemplate) {
 									options.filter(':not([data-servletContextName=' + siteTemplate + '])').prop('disabled', true);
 								}
 							};
