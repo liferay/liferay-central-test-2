@@ -3414,9 +3414,12 @@
 			<var name="siteScopeName" value="Global" />
 		</execute>
 
-		<execute macro="Page#gotoCP">
-			<var name="nodePort" value="8080" />
-			<var name="portletName" value="Sites" />
+		<execute macro="Navigator#openSpecificURL">
+			<var name="url" value="http://localhost:8080" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoControlPanelSites">
+			<var name="portlet" value="Sites" />
 		</execute>
 
 		<execute macro="Staging#publishGlobalToLiveCP">
