@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.liferay</groupId>
   <artifactId>com.liferay.lang.builder</artifactId>
-  <version>1.0.2</version>
+  <version>1.0.3</version>
   <licenses>
     <license>
       <name>LGPL 2.1</name>
@@ -25,6 +25,12 @@
   </scm>
   <dependencies>
     <dependency>
+      <groupId>com.liferay.portal</groupId>
+      <artifactId>portal-impl</artifactId>
+      <version>7.0.0-SNAPSHOT</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
       <groupId>org.apache.ant</groupId>
       <artifactId>ant</artifactId>
       <version>1.9.4</version>
@@ -41,6 +47,12 @@
       <artifactId>log4j</artifactId>
       <version>1.2.17</version>
       <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.liferay.portal</groupId>
+      <artifactId>portal-service</artifactId>
+      <version>7.0.0-SNAPSHOT</version>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.memetix</groupId>
