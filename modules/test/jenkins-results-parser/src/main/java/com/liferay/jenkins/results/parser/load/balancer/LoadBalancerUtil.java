@@ -97,17 +97,19 @@ public class LoadBalancerUtil {
 				StringBuilder sb = new StringBuilder();
 
 				for (int i = 0; i < futureTasks.size(); i++) {
-					FutureTask<Integer> futureTask = futureTasks.get(i);
-
 					Integer availableSlaveCount = null;
+
+					FutureTask<Integer> futureTask = futureTasks.get(i);
 
 					try {
 						availableSlaveCount = futureTask.get(
 							15, TimeUnit.SECONDS);
 					}
 					catch (TimeoutException te) {
-						System.out.println("Master availability assessment " +
-							"timed out. " + hostNames.get(i));
+						System.out.println(
+							"Unable to assess master availability for " +
+								hostNames.get(i));
+
 						availableSlaveCount = null;
 					}
 
