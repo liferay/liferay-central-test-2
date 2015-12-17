@@ -40,13 +40,15 @@ public class DDMFormInstanceFactoryHelper {
 	public DDMFormInstanceFactoryHelper(
 		Class<?> clazz, DDMFormValues ddmFormValues, Locale locale) {
 
+		_locale = locale;
+
 		setDDMFormFieldNameMethodMap(clazz);
 
 		DDMForm ddmForm = ddmFormValues.getDDMForm();
 
 		_ddmForm = ddmForm;
+
 		_ddmFormFieldValuesMap = ddmFormValues.getDDMFormFieldValuesMap();
-		_locale = locale;
 	}
 
 	public Map<String, Object> getProperties() {
