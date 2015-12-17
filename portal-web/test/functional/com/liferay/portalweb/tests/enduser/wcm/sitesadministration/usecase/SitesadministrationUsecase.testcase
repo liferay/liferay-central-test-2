@@ -178,10 +178,12 @@
 			<var name="siteTemplate" value="Intranet" />
 		</execute>
 
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Sites" />
+		<execute macro="Navigator#openSiteURL">
 			<var name="siteName" value="Organization Name 2" />
-			<var name="siteURL" value="true" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoControlPanelSites">
+			<var name="portlet" value="Sites" />
 		</execute>
 
 		<execute macro="Site#deactivateCP">
