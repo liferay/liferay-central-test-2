@@ -54,8 +54,8 @@
 	<command name="AssertPageTemplatePreviewWithSOUserBar" priority="4">
 		<var name="pageTemplateName" value="Page Template Name" />
 
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Page Templates" />
+		<execute macro="ProductMenu#gotoControlPanelSites">
+			<var name="portlet" value="Page Templates" />
 		</execute>
 
 		<execute macro="PageTemplate#addCP">
@@ -78,8 +78,8 @@
 
 		<execute function="Close#closeWindow" locator1="SOPage#PAGE_TITLE" />
 
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Page Templates" />
+		<execute macro="ProductMenu#gotoControlPanelSites">
+			<var name="portlet" value="Page Templates" />
 		</execute>
 
 		<execute macro="PageTemplate#editCP">

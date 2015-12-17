@@ -472,8 +472,8 @@
 		<var name="userName" value="Social01 Office01 User01" />
 		<var name="userScreenName" value="socialoffice01" />
 
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Site Templates" />
+		<execute macro="ProductMenu#gotoControlPanelSites">
+			<var name="portlet" value="Site Templates" />
 		</execute>
 
 		<execute macro="SiteTemplates#addSitePageViaSiteTemplateCP">

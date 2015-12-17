@@ -474,8 +474,8 @@
 			<execute function="AssertTextNotPresent" locator1="UsersAndOrganizations#USER_TABLE_SCREEN_NAME" value1="${userScreenName}" />
 		</for>
 
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Sites" />
+		<execute macro="ProductMenu#gotoControlPanelSites">
+			<var name="portlet" value="Sites" />
 		</execute>
 
 		<execute function="AssertTextNotPresent" value1="Organization Name 1" />
@@ -722,8 +722,8 @@
 		<var name="siteNameList" value="Site Name A,Site Name B,Site Name C,Site Name D,Site Name E,Site Name F,Site Name G,Site Name H" />
 
 		<for list="${siteNameList}" param="siteName" >
-			<execute macro="Page#gotoCP">
-				<var name="portletName" value="Sites" />
+			<execute macro="ProductMenu#gotoControlPanelSites">
+				<var name="portlet" value="Sites" />
 			</execute>
 
 			<execute macro="Site#addCommunityCP">
@@ -762,8 +762,8 @@
 	</command>
 
 	<command name="OrganizationSiteDefaultUserAssociations" priority="3">
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Sites" />
+		<execute macro="ProductMenu#gotoControlPanelSites">
+			<var name="portlet" value="Sites" />
 		</execute>
 
 		<execute macro="Site#addCP">

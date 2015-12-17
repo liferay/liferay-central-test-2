@@ -2306,8 +2306,8 @@
 	</command>
 
 	<command name="ViewUnchangedKBArticleTitleViaLocalizedPage" priority="3">
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Sites" />
+		<execute macro="ProductMenu#gotoControlPanelSites">
+			<var name="portlet" value="Sites" />
 		</execute>
 
 		<execute macro="SitePage#addChildCP">
