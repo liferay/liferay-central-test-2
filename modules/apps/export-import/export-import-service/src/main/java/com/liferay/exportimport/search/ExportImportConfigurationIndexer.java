@@ -241,13 +241,12 @@ public class ExportImportConfigurationIndexer
 			(Map<String, String[]>)settingsMap.get("parameterMap");
 
 		for (Map.Entry<String, String[]> entry : parameterMap.entrySet()) {
-			String key = entry.getKey();
+			String parameterName = entry.getKey();
 
-			if (!Field.validateFieldName(key)) {
+			if (!Field.validateFieldName(parameterName)) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
-						"Invalid parameter key: " + key +
-							", not adding to index.");
+						"Skipping invalid parameter name: " + parameterName);
 				}
 
 				continue;
