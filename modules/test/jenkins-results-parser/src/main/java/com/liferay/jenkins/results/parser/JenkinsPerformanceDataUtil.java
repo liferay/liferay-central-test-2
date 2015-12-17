@@ -37,7 +37,7 @@ public class JenkinsPerformanceDataUtil {
 	public static void processPerformanceData(String job, String url, int size)
 		throws Exception {
 
-		JSONObject jsonObject;
+		JSONObject jsonObject = null;
 
 		if (url.contains("-source")) {
 			jsonObject = JenkinsResultsParserUtil.toJSONObject(
@@ -50,12 +50,12 @@ public class JenkinsPerformanceDataUtil {
 				JenkinsResultsParserUtil.getLocalURL(
 					url + "/testReport/api/json"));
 
-			_results.addAll(getSlowestResults(job, jsonObject, size));
+			_results.addAll(_getSlowestResults(job, jsonObject, size));
 		}
 
 		Collections.sort(_results);
 
-		truncate(_results, size);
+		_truncate(_results, size);
 	}
 
 	public static void reset() {
@@ -66,31 +66,33 @@ public class JenkinsPerformanceDataUtil {
 
 		public Result(
 				JSONObject caseJSONObject, JSONObject childJSONObject,
-				String job)
+				String jobName)
 			throws Exception {
 
-			_job = job;
+			_jobName = jobName;
+
 			_className = caseJSONObject.getString("className");
 			_duration = caseJSONObject.getInt("duration");
 			_name = caseJSONObject.getString("name");
 			_status = caseJSONObject.getString("status");
 
-			setAxis(childJSONObject);
-			setUrl(childJSONObject);
+			_setAxis(childJSONObject);
+			_setUrl(childJSONObject);
 		}
 
-		public Result(String job, JSONObject sourceJSONObject)
+		public Result(String jobName, JSONObject sourceJSONObject)
 			throws Exception {
 
 			_axis = "";
 			_className = "";
 			_duration = sourceJSONObject.getInt("duration") / 1000;
-			_job = job;
+			_jobName = jobName;
 			_name = sourceJSONObject.getString("fullDisplayName");
 			_status = sourceJSONObject.getString("result");
 			_url = sourceJSONObject.getString("url");
 		}
 
+		@Override
 		public int compareTo(Result result) {
 			return -1 * Float.compare(getDuration(), result.getDuration());
 		}
@@ -108,7 +110,7 @@ public class JenkinsPerformanceDataUtil {
 		}
 
 		public String getJob() {
-			return _job;
+			return _jobName;
 		}
 
 		public String getName() {
@@ -123,7 +125,7 @@ public class JenkinsPerformanceDataUtil {
 			return _url;
 		}
 
-		private void setAxis(JSONObject childJSONObject) throws Exception {
+		private void _setAxis(JSONObject childJSONObject) throws Exception {
 			String _url = childJSONObject.getString("url");
 
 			_url = URLDecoder.decode(_url, "UTF-8");
@@ -137,7 +139,7 @@ public class JenkinsPerformanceDataUtil {
 			_axis = _url.substring(0, y);
 		}
 
-		private void setUrl(JSONObject childJSONObject) throws Exception {
+		private void _setUrl(JSONObject childJSONObject) throws Exception {
 			String urlString = URLDecoder.decode(
 				childJSONObject.getString("url"), "UTF-8");
 
@@ -160,15 +162,16 @@ public class JenkinsPerformanceDataUtil {
 				poshiName = poshiName.replaceAll("#", "_");
 
 				sb.append(poshiName);
+
 				sb.append("/");
 			}
 			else {
 				sb.append(_name);
 			}
 
-			URL urlObject = JenkinsResultsParserUtil.createURL(sb.toString());
+			URL url = JenkinsResultsParserUtil.createURL(sb.toString());
 
-			URI uri = urlObject.toURI();
+			URI uri = url.toURI();
 
 			_url = uri.toASCIIString();
 		}
@@ -176,20 +179,21 @@ public class JenkinsPerformanceDataUtil {
 		private String _axis;
 		private final String _className;
 		private final int _duration;
-		private final String _job;
+		private final String _jobName;
 		private final String _name;
 		private final String _status;
 		private String _url;
 
 	}
 
-	private static List<Result> getSlowestResults(
+	private static List<Result> _getSlowestResults(
 			String name, JSONObject jobJSONObject, int maxSize)
 		throws Exception {
 
+		List<Result> results = new ArrayList<>();
+
 		JSONArray childReportsJSONArray = jobJSONObject.getJSONArray(
 			"childReports");
-		List<Result> results = new ArrayList<>();
 
 		for (int i = 0; i < childReportsJSONArray.length(); i++) {
 			JSONObject childReportJSONObject =
@@ -223,12 +227,12 @@ public class JenkinsPerformanceDataUtil {
 
 		Collections.sort(results);
 
-		truncate(results, maxSize);
+		_truncate(results, maxSize);
 
 		return results;
 	}
 
-	private static void truncate(List<?> list, int maxSize) {
+	private static void _truncate(List<?> list, int maxSize) {
 		if (list.size() < maxSize) {
 			return;
 		}
