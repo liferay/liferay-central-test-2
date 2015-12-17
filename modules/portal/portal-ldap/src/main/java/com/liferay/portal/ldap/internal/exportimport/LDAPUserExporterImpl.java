@@ -79,10 +79,10 @@ public class LDAPUserExporterImpl implements UserExporter {
 
 		StopWatch stopWatch = new StopWatch();
 
-		if (_log.isTraceEnabled()) {
+		if (_log.isDebugEnabled()) {
 			stopWatch.start();
 
-			_log.trace(
+			_log.debug(
 				"exportUser(Contact, Map): userId = " + contact.getUserId() +
 					"contactId = " + contact.getContactId() +
 					", companyId = " + companyId + ".");
@@ -159,8 +159,8 @@ public class LDAPUserExporterImpl implements UserExporter {
 				ldapContext.close();
 			}
 
-			if (_log.isTraceEnabled()) {
-				_log.trace(
+			if (_log.isDebugEnabled()) {
+				_log.debug(
 					"Completed export for userId " + contact.getUserId() +
 						" in " + (stopWatch.getTime()) + "ms.");
 			}
@@ -178,10 +178,10 @@ public class LDAPUserExporterImpl implements UserExporter {
 
 		StopWatch stopWatch = new StopWatch();
 
-		if (_log.isTraceEnabled()) {
+		if (_log.isDebugEnabled()) {
 			stopWatch.start();
 
-			_log.trace(
+			_log.debug(
 				"exportUser(userId, userGroupId, UserOperation): " +
 					"userId = " + userId +
 					"userGroupId = " + userGroupId +
@@ -263,8 +263,8 @@ public class LDAPUserExporterImpl implements UserExporter {
 				ldapContext.close();
 			}
 
-			if (_log.isTraceEnabled()) {
-				_log.trace(
+			if (_log.isDebugEnabled()) {
+				_log.debug(
 					"Completed export for userId " + userId +
 						" in " + (stopWatch.getTime()) + "ms.");
 			}
