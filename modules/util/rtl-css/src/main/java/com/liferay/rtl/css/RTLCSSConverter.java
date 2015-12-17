@@ -235,7 +235,7 @@ public class RTLCSSConverter {
 			String property = stripAsterisk(cssDeclaration.getProperty());
 
 			if (_backgroundProperties.contains(property)) {
-				resizeYui3BgPosition(cssStyleRule, cssDeclaration);
+				resizeYui3BackgroundPosition(cssStyleRule, cssDeclaration);
 
 				convertBackgroundProperties(cssDeclaration);
 			}
@@ -310,7 +310,7 @@ public class RTLCSSConverter {
 		}
 	}
 
-	protected void resizeYui3BgPosition(
+	protected void resizeYui3BackgroundPosition(
 		CSSStyleRule cssStyleRule, CSSDeclaration cssDeclaration) {
 
 		String selector = cssStyleRule.getSelectorsAsCSSString(
@@ -320,42 +320,48 @@ public class RTLCSSConverter {
 
 		Matcher matcher = _yui3ResizeHandleInnerPattern.matcher(selector);
 
-		if (property.equals("background-position") && matcher.find()) {
-			CSSExpression cssExpression = cssDeclaration.getExpression();
-
-			List<CSSExpressionMemberTermSimple> cssExpressionMemberTermSimples =
-				cssExpression.getAllSimpleMembers();
-
-			if (selector.endsWith("bl")) {
-				CSSExpressionMemberTermSimple cssExpressionMemberTermSimple1 =
-					cssExpressionMemberTermSimples.get(0);
-
-				cssExpressionMemberTermSimple1.setValue("-30px");
-			}
-			else if (selector.endsWith("br")) {
-				CSSExpressionMemberTermSimple cssExpressionMemberTermSimple1 =
-					cssExpressionMemberTermSimples.get(0);
-
-				cssExpressionMemberTermSimple1.setValue("-75px");
-			}
-			else if (selector.endsWith("tl")) {
-				CSSExpressionMemberTermSimple cssExpressionMemberTermSimple1 =
-					cssExpressionMemberTermSimples.get(0);
-
-				cssExpressionMemberTermSimple1.setValue("-58px");
-			}
-			else if (selector.endsWith("tr")) {
-				CSSExpressionMemberTermSimple cssExpressionMemberTermSimple1 =
-					cssExpressionMemberTermSimples.get(0);
-
-				cssExpressionMemberTermSimple1.setValue("-47px");
-			}
-
-			CSSExpressionMemberTermSimple cssExpressionMemberTermSimple2 =
-				cssExpressionMemberTermSimples.get(1);
-
-			cssExpressionMemberTermSimple2.setValue("0");
+		if (!property.equals("background-position")) {
+			return;
 		}
+
+		if (!matcher.find()) {
+			return;
+		}
+
+		CSSExpression cssExpression = cssDeclaration.getExpression();
+
+		List<CSSExpressionMemberTermSimple> cssExpressionMemberTermSimples =
+			cssExpression.getAllSimpleMembers();
+
+		if (selector.endsWith("bl")) {
+			CSSExpressionMemberTermSimple cssExpressionMemberTermSimple1 =
+				cssExpressionMemberTermSimples.get(0);
+
+			cssExpressionMemberTermSimple1.setValue("-30px");
+		}
+		else if (selector.endsWith("br")) {
+			CSSExpressionMemberTermSimple cssExpressionMemberTermSimple1 =
+				cssExpressionMemberTermSimples.get(0);
+
+			cssExpressionMemberTermSimple1.setValue("-75px");
+		}
+		else if (selector.endsWith("tl")) {
+			CSSExpressionMemberTermSimple cssExpressionMemberTermSimple1 =
+				cssExpressionMemberTermSimples.get(0);
+
+			cssExpressionMemberTermSimple1.setValue("-58px");
+		}
+		else if (selector.endsWith("tr")) {
+			CSSExpressionMemberTermSimple cssExpressionMemberTermSimple1 =
+				cssExpressionMemberTermSimples.get(0);
+
+			cssExpressionMemberTermSimple1.setValue("-47px");
+		}
+
+		CSSExpressionMemberTermSimple cssExpressionMemberTermSimple2 =
+			cssExpressionMemberTermSimples.get(1);
+
+		cssExpressionMemberTermSimple2.setValue("0");
 	}
 
 	protected void resizeYui3Offset(
@@ -366,17 +372,19 @@ public class RTLCSSConverter {
 
 		Matcher matcher = _yui3ResizeHandleInnerPattern.matcher(selector);
 
-		if (matcher.find()) {
-			CSSExpression cssExpression = cssDeclaration.getExpression();
+		if (!matcher.find()) {
+			return;
+		}
 
-			List<CSSExpressionMemberTermSimple> cssExpressionMemberTermSimples =
-				cssExpression.getAllSimpleMembers();
+		CSSExpression cssExpression = cssDeclaration.getExpression();
 
-			for (CSSExpressionMemberTermSimple cssExpressionMemberTermSimple :
-					cssExpressionMemberTermSimples) {
+		List<CSSExpressionMemberTermSimple> cssExpressionMemberTermSimples =
+			cssExpression.getAllSimpleMembers();
 
-				cssExpressionMemberTermSimple.setValue("2px");
-			}
+		for (CSSExpressionMemberTermSimple cssExpressionMemberTermSimple :
+				cssExpressionMemberTermSimples) {
+
+			cssExpressionMemberTermSimple.setValue("2px");
 		}
 	}
 
