@@ -38,7 +38,7 @@ public class DDMFormInstanceFactory {
 
 		if (!ddmForm.equals(ddmFormValues.getDDMForm())) {
 			throw new IllegalArgumentException(
-				"DDMFormValues does not match with the given class " + clazz);
+				"DDM form values does not match with the given class " + clazz);
 		}
 
 		DDMFormInstanceFactoryHelper ddmFormInstanceFactoryHelper =
