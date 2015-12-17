@@ -80,7 +80,7 @@ public class JenkinsPerformanceTableUtilTest
 
 		StringBuilder sb = new StringBuilder();
 
-		int jobCount = 0;
+		int count = 0;
 
 		String content = JenkinsResultsParserUtil.toString(
 			JenkinsResultsParserUtil.getLocalURL(progressiveTextURL));
@@ -94,11 +94,11 @@ public class JenkinsPerformanceTableUtilTest
 			String urlSuffix = null;
 
 			if (url.contains("-source")) {
-				fileSuffix = "source-" + jobCount;
+				fileSuffix = "source-" + count;
 				urlSuffix = "/api/json";
 			}
 			else {
-				fileSuffix = Integer.toString(jobCount);
+				fileSuffix = Integer.toString(count);
 				urlSuffix = "/testReport/api/json";
 			}
 
@@ -114,7 +114,7 @@ public class JenkinsPerformanceTableUtilTest
 
 			sb.append(toURLString(new File(sampleDir, "job-" + fileSuffix)));
 
-			jobCount++;
+			count++;
 		}
 
 		JenkinsResultsParserUtil.write(
