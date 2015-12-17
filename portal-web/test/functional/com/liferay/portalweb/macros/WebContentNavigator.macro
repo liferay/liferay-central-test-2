@@ -62,6 +62,8 @@
 		<execute function="Click" locator1="WCD#EDIT_WEB_CONTENT" />
 
 		<execute function="SelectFrame" locator1="IFrame#EDIT_ASSET" />
+
+		<execute function="AssertVisible" locator1="TextInput#TITLE" />
 	</command>
 
 	<command name="gotoManageStructures">
