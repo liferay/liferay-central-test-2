@@ -124,13 +124,13 @@
 </tr>
 <!--FOLDERS_DESCRIPTIVE-->
 <tr>
-	<td>FOLDERS_DESCRIPTIVE_ENTRY_TITLE</td>
-	<td>//li[contains(@class,'list-group-item')]//div/h5[contains(.,'${key_folderName}')]</td>
+	<td>DESCRIPTIVE_ENTRY_TITLE</td>
+	<td>//li[contains(@class,'list-group-item')]//a[contains(.,'${key_assetName}')]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>FOLDERS_DESCRIPTIVE_ENTRY_DESCRIPTION</td>
-	<td>//li[contains(@class,'list-group-item')]//div/h6[contains(.,'${key_folderDescription}')]</td>
+	<td>DESCRIPTIVE_ENTRY_DESCRIPTION</td>
+	<td>//li[contains(@class,'list-group-item')]//div/h6[contains(.,'${key_assetDescription}')]</td>
 	<td></td>
 </tr>
 </tbody>
