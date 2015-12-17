@@ -1004,8 +1004,7 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 				DDMTemplate.class.getName());
 	}
 
-private final AssetEntryLocalService _assetEntryLocalService;
-
+	private final AssetEntryLocalService _assetEntryLocalService;
 	private final Map<Long, DDMForm> _ddmForms = new HashMap<>();
 	private final DLFileEntryLocalService _dlFileEntryLocalService;
 	private final DLFileVersionLocalService _dlFileVersionLocalService;
