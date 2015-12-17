@@ -59,16 +59,19 @@ public class VerifyWorkflow extends VerifyProcess {
 
 					String orphanedClassName = orphanedAttachedModel[1];
 
-					if (classNameValue.equals(orphanedClassName)) {
-						String orphanedTableName = orphanedAttachedModel[2];
-						String orphanedColumnName = orphanedAttachedModel[3];
-
-						if (hasTable(orphanedTableName)) {
-							deleteOrphaned(
-								tableName, orphanedTableName,
-								orphanedColumnName);
-						}
+					if (!classNameValue.equals(orphanedClassName)) {
+						continue;
 					}
+
+					String orphanedTableName = orphanedAttachedModel[2];
+					String orphanedColumnName = orphanedAttachedModel[3];
+
+					if (!hasTable(orphanedTableName)) {
+						continue;
+					}
+
+					deleteOrphaned(
+						tableName, orphanedTableName, orphanedColumnName);
 				}
 			}
 			finally {
