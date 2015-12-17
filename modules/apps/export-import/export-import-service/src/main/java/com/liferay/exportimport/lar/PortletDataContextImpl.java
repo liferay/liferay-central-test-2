@@ -2579,7 +2579,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 			}
 		}
 
-		// Default permissions - first wipe than add default
+		// For default permissions, first wipe than add default
 
 		_xStream.addPermission(NoTypePermission.NONE);
 
