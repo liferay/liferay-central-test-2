@@ -36,7 +36,7 @@ public class VerifyWorkflow extends VerifyProcess {
 			String tableName = orphanedAttachedModel[0];
 
 			if (!hasTable(tableName) ||
-				!tableHasColumn(tableName, "classNameId")) {
+				!hasColumn(tableName, "classNameId")) {
 
 				continue;
 			}

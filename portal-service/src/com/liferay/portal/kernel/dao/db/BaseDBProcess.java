@@ -137,7 +137,7 @@ public abstract class BaseDBProcess implements DBProcess {
 		return false;
 	}
 
-	protected boolean tableHasColumn(String tableName, String columnName)
+	protected boolean hasColumn(String tableName, String columnName)
 		throws Exception {
 
 		PreparedStatement ps = null;
@@ -168,7 +168,7 @@ public abstract class BaseDBProcess implements DBProcess {
 		return false;
 	}
 
-	protected boolean tableHasData(String tableName) throws Exception {
+	protected boolean hasRows(String tableName) throws Exception {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
