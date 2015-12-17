@@ -135,20 +135,20 @@ public class UpgradeDynamicDataLists extends UpgradeProcess {
 	protected void deleteExpandoData(Set<Long> expandoRowIds)
 		throws PortalException {
 
-		Set<Long> tableIds = new HashSet<>();
+		Set<Long> expandoTableIds = new HashSet<>();
 
 		for (long expandoRowId : expandoRowIds) {
 			ExpandoRow expandoRow = _expandoRowLocalService.fetchExpandoRow(
 				expandoRowId);
 
 			if (expandoRow != null) {
-				tableIds.add(expandoRow.getTableId());
+				expandoTableIds.add(expandoRow.getTableId());
 			}
 		}
 
-		for (Long tableId : tableIds) {
+		for (long expandoTableId : expandoTableIds) {
 			try {
-				_expandoTableLocalService.deleteTable(tableId);
+				_expandoTableLocalService.deleteTable(expandoTableId);
 			}
 			catch (PortalException pe) {
 				_log.error("Unable delete expando table ", pe);
@@ -186,12 +186,12 @@ public class UpgradeDynamicDataLists extends UpgradeProcess {
 	protected Map<String, String> getExpandoValuesMap(long expandoRowId)
 		throws PortalException {
 
-		List<ExpandoValue> rowValues = _expandoValueLocalService.getRowValues(
-			expandoRowId);
-
 		Map<String, String> fieldsMap = new HashMap<>();
 
-		for (ExpandoValue expandoValue : rowValues) {
+		List<ExpandoValue> expandoValues =
+			_expandoValueLocalService.getRowValues(expandoRowId);
+
+		for (ExpandoValue expandoValue : expandoValues) {
 			ExpandoColumn expandoColumn = expandoValue.getColumn();
 
 			fieldsMap.put(expandoColumn.getName(), expandoValue.getData());
