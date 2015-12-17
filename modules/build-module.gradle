@@ -132,7 +132,7 @@ dependencies {
 	javadocFormatter group: "com.liferay", name: "com.liferay.javadoc.formatter", version: "1.0.8"
 	jspCTool group: "com.liferay", name: "com.liferay.jasper.jspc", version: "1.0.4"
 	jspCTool group: "org.apache.ant", name: "ant", version: "1.9.4"
-	langBuilder group: "com.liferay", name: "com.liferay.lang.builder", version: "1.0.2"
+	langBuilder group: "com.liferay", name: "com.liferay.lang.builder", version: "1.0.3"
 
 	portal files(appServerClassesPortalDir)
 	portal fileTree(dir: appServerLibPortalDir, include: "*.jar")
