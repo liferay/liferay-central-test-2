@@ -122,7 +122,7 @@
 	<td></td>
 	<td></td>
 </tr>
-<!--FOLDERS_DESCRIPTIVE-->
+<!--DESCRIPTIVE_ENTRY-->
 <tr>
 	<td>DESCRIPTIVE_ENTRY_TITLE</td>
 	<td>//li[contains(@class,'list-group-item')]//a[contains(.,'${key_assetName}')]</td>
