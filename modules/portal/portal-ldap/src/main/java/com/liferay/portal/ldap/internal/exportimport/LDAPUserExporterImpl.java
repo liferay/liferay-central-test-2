@@ -82,10 +82,7 @@ public class LDAPUserExporterImpl implements UserExporter {
 		if (_log.isDebugEnabled()) {
 			stopWatch.start();
 
-			_log.debug(
-				"exportUser(Contact, Map): userId = " + contact.getUserId() +
-					"contactId = " + contact.getContactId() +
-					", companyId = " + companyId + ".");
+			_log.debug("Exporting contact " + contact);
 		}
 
 		LDAPAuthConfiguration ldapAuthConfiguration =
@@ -161,8 +158,8 @@ public class LDAPUserExporterImpl implements UserExporter {
 
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"Completed export for userId " + contact.getUserId() +
-						" in " + (stopWatch.getTime()) + "ms.");
+					"Finished exporting contact " + contact + " in " +
+						stopWatch.getTime() + "ms");
 			}
 		}
 	}
@@ -182,10 +179,7 @@ public class LDAPUserExporterImpl implements UserExporter {
 			stopWatch.start();
 
 			_log.debug(
-				"exportUser(userId, userGroupId, UserOperation): " +
-					"userId = " + userId +
-					"userGroupId = " + userGroupId +
-					", companyId = " + companyId + ".");
+				"Exporting user " + user + " in user group " + userGroupId);
 		}
 
 		LDAPAuthConfiguration ldapAuthConfiguration =
@@ -264,9 +258,9 @@ public class LDAPUserExporterImpl implements UserExporter {
 			}
 
 			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Completed export for userId " + userId +
-						" in " + (stopWatch.getTime()) + "ms.");
+			_log.debug(
+				"Finished exporting user " + user + " in user group " +
+					userGroupId + " in " + stopWatch.getTime() + "ms");
 			}
 		}
 	}
