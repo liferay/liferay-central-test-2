@@ -80,7 +80,7 @@
 		<execute function="SelectFrame" locator1="IFrame#TEMPLATES" />
 	</command>
 
-	<command name="gotoPreviewCP">
+	<command name="gotoPreviewEntryCP">
 		<execute macro="WebContentNavigator#_openDescriptiveMenulistCP">
 			<var name="webContentTitle" value="${webContentTitle}" />
 			<var name="webContentTitleEscapeCharacter" value="${webContentTitleEscapeCharacter}" />
