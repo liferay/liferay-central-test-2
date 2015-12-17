@@ -4064,8 +4064,8 @@
 			<var name="displaySettingsGreeting" value="Welcome Test Test!" />
 		</execute>
 
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Portal Settings" />
+		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+			<var name="portlet" value="Portal Settings" />
 		</execute>
 
 		<execute macro="PortalSettings#configureTimeZone">

@@ -2055,8 +2055,8 @@
 			<var name="userScreenName" value="${user3ScreenName}" />
 		</execute>
 
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Workflow Definition" />
+		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+			<var name="portlet" value="Workflow Definition" />
 		</execute>
 
 		<execute macro="KaleoDesigner#editWorkflowDefinitionViaWorkflowCP">
@@ -4242,8 +4242,8 @@
 	<command name="CompleteProcessWithUploadedDefinition" priority="4">
 		<var name="kfProcessName" value="Kaleo Forms Process Predefined" />
 
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Workflow Definition" />
+		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+			<var name="portlet" value="Workflow Definition" />
 		</execute>
 
 		<execute macro="Workflow#uploadDefinition">
@@ -5475,8 +5475,8 @@
 	<command name="EditProcessWorkflowAfterFormSubmission" priority="4">
 		<var name="kfProcessName" value="Kaleo Forms Process" />
 
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Workflow Definition" />
+		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+			<var name="portlet" value="Workflow Definition" />
 		</execute>
 
 		<execute macro="Workflow#uploadDefinition">
@@ -5656,8 +5656,8 @@
 	<command name="EditProcessWorkflowBeforeFormSubmission" priority="4">
 		<var name="kfProcessName" value="Kaleo Forms Process" />
 
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Workflow Definition" />
+		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+			<var name="portlet" value="Workflow Definition" />
 		</execute>
 
 		<execute macro="Workflow#uploadDefinition">
@@ -7209,8 +7209,8 @@
 		<var name="kfProcessName" value="Kaleo Forms Process" />
 		<var name="nodeNotificationsTemplate"><![CDATA[Submission reviewed. The reviewer left the following: $taskComments.]]></var>
 
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Workflow Definition" />
+		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+			<var name="portlet" value="Workflow Definition" />
 		</execute>
 
 		<execute macro="KaleoDesigner#editWorkflowDefinitionViaWorkflowCP">
@@ -7855,8 +7855,8 @@
 			<var name="roleName" value="${role1Name}" />
 		</execute>
 
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Workflow Definition" />
+		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+			<var name="portlet" value="Workflow Definition" />
 		</execute>
 
 		<execute macro="KaleoDesigner#editWorkflowDefinitionViaWorkflowCP">

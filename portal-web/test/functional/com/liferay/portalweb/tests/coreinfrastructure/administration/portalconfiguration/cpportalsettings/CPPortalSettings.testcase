@@ -60,16 +60,16 @@
 			<var name="orgName" value="Organization Name" />
 		</execute>
 
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Portal Settings" />
+		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+			<var name="portlet" value="Portal Settings" />
 		</execute>
 
 		<execute macro="PortalSettings#editConfigurationUsersDefaultUserAssociationsOrganizationSitesCP">
 			<var name="orgName" value="Organization Name" />
 		</execute>
 
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Portal Settings" />
+		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+			<var name="portlet" value="Portal Settings" />
 		</execute>
 
 		<execute macro="PortalSettings#viewConfigurationUsersDefaultUserAssociationsOrganizationSitesCP">
@@ -110,16 +110,16 @@
 			<var name="roleName" value="Roles Regrole Name" />
 		</execute>
 
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Portal Settings" />
+		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+			<var name="portlet" value="Portal Settings" />
 		</execute>
 
 		<execute macro="PortalSettings#editConfigurationUsersDefaultUserAssociationsRolesCP">
 			<var name="roleName" value="Roles Regrole Name" />
 		</execute>
 
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Portal Settings" />
+		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+			<var name="portlet" value="Portal Settings" />
 		</execute>
 
 		<execute macro="PortalSettings#viewConfigurationUsersDefaultUserAssociationsRolesCP">
@@ -159,16 +159,16 @@
 			<var name="siteName" value="Site Name" />
 		</execute>
 
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Portal Settings" />
+		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+			<var name="portlet" value="Portal Settings" />
 		</execute>
 
 		<execute macro="PortalSettings#editConfigurationUsersDefaultUserAssociationsSitesCP">
 			<var name="siteName" value="Site Name" />
 		</execute>
 
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Portal Settings" />
+		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+			<var name="portlet" value="Portal Settings" />
 		</execute>
 
 		<execute macro="PortalSettings#viewConfigurationUsersDefaultUserAssociationsSitesCP">
@@ -208,16 +208,16 @@
 			<var name="userGroupName" value="UG UserGroup Name" />
 		</execute>
 
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Portal Settings" />
+		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+			<var name="portlet" value="Portal Settings" />
 		</execute>
 
 		<execute macro="PortalSettings#editConfigurationUsersDefaultUserAssociationsUserGroupsCP">
 			<var name="userGroupName" value="UG UserGroup Name" />
 		</execute>
 
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Portal Settings" />
+		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+			<var name="portlet" value="Portal Settings" />
 		</execute>
 
 		<execute macro="PortalSettings#viewConfigurationUsersDefaultUserAssociationsUserGroupsCP">
@@ -249,8 +249,8 @@
 	</command>
 
 	<command name="EnterReservedEmailAddress" priority="4">
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Portal Settings" />
+		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+			<var name="portlet" value="Portal Settings" />
 		</execute>
 
 		<execute macro="PortalSettings#enterReservedEmailAddressCP">
@@ -270,8 +270,8 @@
 	</command>
 
 	<command name="EnterReservedScreenName" priority="4">
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Portal Settings" />
+		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+			<var name="portlet" value="Portal Settings" />
 		</execute>
 
 		<execute macro="PortalSettings#enterReservedScreenNameCP">
@@ -291,56 +291,56 @@
 	</command>
 
 	<command name="ViewAuthenticationCAS" priority="3">
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Portal Settings" />
+		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+			<var name="portlet" value="Portal Settings" />
 		</execute>
 
 		<execute macro="PortalSettings#viewAuthenticationCASCP" />
 	</command>
 
 	<command name="ViewAuthenticationGeneral" priority="3">
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Portal Settings" />
+		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+			<var name="portlet" value="Portal Settings" />
 		</execute>
 
 		<execute macro="PortalSettings#viewAuthenticationGeneralCP" />
 	</command>
 
 	<command name="ViewAuthenticationLDAP" priority="3">
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Portal Settings" />
+		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+			<var name="portlet" value="Portal Settings" />
 		</execute>
 
 		<execute macro="PortalSettings#viewAuthenticationLDAPCP" />
 	</command>
 
 	<command name="ViewAuthenticationNTLM" priority="3">
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Portal Settings" />
+		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+			<var name="portlet" value="Portal Settings" />
 		</execute>
 
 		<execute macro="PortalSettings#viewAuthenticationNTLMCP" />
 	</command>
 
 	<command name="ViewAuthenticationOpenID" priority="3">
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Portal Settings" />
+		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+			<var name="portlet" value="Portal Settings" />
 		</execute>
 
 		<execute macro="PortalSettings#viewAuthenticationOpenIDCP" />
 	</command>
 
 	<command name="ViewAuthenticationOpenSSO" priority="3">
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Portal Settings" />
+		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+			<var name="portlet" value="Portal Settings" />
 		</execute>
 
 		<execute macro="PortalSettings#viewAuthenticationOpenSSOCP" />
 	</command>
 
 	<command name="ViewContentSharingDisabledAcrossSitesViaAP" priority="4">
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Portal Settings" />
+		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+			<var name="portlet" value="Portal Settings" />
 		</execute>
 
 		<execute macro="PortalSettings#configureContentSharingAcrossSitesCP">
@@ -506,8 +506,8 @@
 		<var name="portletName" value="Asset Publisher" />
 		<var name="siteName" value="Site Name" />
 
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Portal Settings" />
+		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+			<var name="portlet" value="Portal Settings" />
 		</execute>
 
 		<execute macro="PortalSettings#configureContentSharingAcrossSitesCP">
@@ -615,40 +615,40 @@
 	</command>
 
 	<command name="ViewDefaultUserAssociations" priority="3">
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Portal Settings" />
+		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+			<var name="portlet" value="Portal Settings" />
 		</execute>
 
 		<execute macro="PortalSettings#viewDefaultUserAssociationsCP" />
 	</command>
 
 	<command name="ViewEmailNotificationsAccountCreatedNotification" priority="3">
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Portal Settings" />
+		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+			<var name="portlet" value="Portal Settings" />
 		</execute>
 
 		<execute macro="PortalSettings#viewEmailNotificationsAccountCreatedNotificationCP" />
 	</command>
 
 	<command name="ViewEmailNotificationsPasswordChangedNotification" priority="3">
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Portal Settings" />
+		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+			<var name="portlet" value="Portal Settings" />
 		</execute>
 
 		<execute macro="PortalSettings#viewEmailNotificationsPasswordChangedNotificationCP" />
 	</command>
 
 	<command name="ViewEmailNotificationsSender" priority="3">
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Portal Settings" />
+		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+			<var name="portlet" value="Portal Settings" />
 		</execute>
 
 		<execute macro="PortalSettings#viewEmailNotificationsSenderCP" />
 	</command>
 
 	<command name="ViewReservedCredentialsScreenNames" priority="3">
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Portal Settings" />
+		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+			<var name="portlet" value="Portal Settings" />
 		</execute>
 
 		<execute macro="PortalSettings#viewReservedCredentialsScreenNamesCP" />
