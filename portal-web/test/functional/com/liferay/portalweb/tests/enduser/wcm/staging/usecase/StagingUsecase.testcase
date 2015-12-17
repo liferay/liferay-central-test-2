@@ -1360,9 +1360,8 @@
 
 		<execute macro="Role#addStagingAdminRole" />
 
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Users and Organizations" />
-			<var name="roleName" value="${roleName}" />
+		<execute macro="ProductMenu#gotoControlPanelUsers">
+			<var name="portlet" value="Users and Organizations" />
 		</execute>
 
 		<execute macro="User#addCP">
