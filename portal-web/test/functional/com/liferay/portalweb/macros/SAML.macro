@@ -4,8 +4,8 @@
 
 		<!-- Configure IdP (Identity Provider) on http://localhost:8080 with database lportal and saml deployed -->
 
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="SAML Admin" />
+		<execute macro="ProductMenu#gotoControlPanelApps">
+			<var name="portlet" value="SAML Admin" />
 		</execute>
 
 		<execute macro="SAMLRole#configure">
@@ -84,8 +84,8 @@
 			<var name="virtualHostsURL" value="${virtualHostsURL}" />
 		</execute>
 
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="SAML Admin" />
+		<execute macro="ProductMenu#gotoControlPanelApps">
+			<var name="portlet" value="SAML Admin" />
 		</execute>
 
 		<execute macro="SAMLNavigation#gotoServiceProviderConnection" />

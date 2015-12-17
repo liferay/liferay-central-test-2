@@ -508,8 +508,8 @@
 	</command>
 
 	<command name="DeleteConnectors" priority="4">
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Kaleo Designer" />
+		<execute macro="ProductMenu#gotoControlPanelApps">
+			<var name="portlet" value="Kaleo Designer" />
 		</execute>
 
 		<execute macro="KaleoDesigner#addNewDefinitionViaKDCP">
@@ -579,8 +579,8 @@
 
 		<execute macro="KaleoDesigner#saveAsDraftWorkflowDefinitionViaKDCP" />
 
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Kaleo Designer" />
+		<execute macro="ProductMenu#gotoControlPanelApps">
+			<var name="portlet" value="Kaleo Designer" />
 		</execute>
 
 		<execute macro="KaleoDesigner#editWorkflowDefinitionViaKDCP">
@@ -609,8 +609,8 @@
 	</command>
 
 	<command name="DeleteWorkflowDefinitionDraftViaKDCP" priority="4">
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Kaleo Designer" />
+		<execute macro="ProductMenu#gotoControlPanelApps">
+			<var name="portlet" value="Kaleo Designer" />
 		</execute>
 
 		<execute macro="KaleoDesigner#addNewDefinitionViaKDCP">
@@ -619,8 +619,8 @@
 
 		<execute macro="KaleoDesigner#saveAsDraftWorkflowDefinitionViaKDCP" />
 
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Kaleo Designer" />
+		<execute macro="ProductMenu#gotoControlPanelApps">
+			<var name="portlet" value="Kaleo Designer" />
 		</execute>
 
 		<execute macro="KaleoDesigner#viewTableDefinitionDraftViaKDCP">
@@ -1119,8 +1119,8 @@
 	</command>
 
 	<command name="RedoDraftDefinition" priority="4">
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Kaleo Designer" />
+		<execute macro="ProductMenu#gotoControlPanelApps">
+			<var name="portlet" value="Kaleo Designer" />
 		</execute>
 
 		<execute macro="KaleoDesigner#addNewDefinitionViaKDCP">
@@ -1246,8 +1246,8 @@
 	</command>
 
 	<command name="SaveInvalidWorkflowDefinitionAsDraft" priority="4">
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Kaleo Designer" />
+		<execute macro="ProductMenu#gotoControlPanelApps">
+			<var name="portlet" value="Kaleo Designer" />
 		</execute>
 
 		<execute macro="KaleoDesigner#addNewDefinitionViaKDCP">
@@ -1266,8 +1266,8 @@
 	</command>
 
 	<command name="UndoDraftDefinition" priority="4">
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Kaleo Designer" />
+		<execute macro="ProductMenu#gotoControlPanelApps">
+			<var name="portlet" value="Kaleo Designer" />
 		</execute>
 
 		<execute macro="KaleoDesigner#addNewDefinitionViaKDCP">
@@ -1355,8 +1355,8 @@
 			<var name="connectorLabel" value="Complete" />
 		</execute>
 
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Kaleo Designer" />
+		<execute macro="ProductMenu#gotoControlPanelApps">
+			<var name="portlet" value="Kaleo Designer" />
 		</execute>
 
 		<execute macro="KaleoDesigner#editWorkflowDefinitionViaKDCP">
@@ -1398,8 +1398,8 @@
 	</command>
 
 	<command name="ViewAndPublishWorkflowDefinitionDraftViaKDCP" priority="4">
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Kaleo Designer" />
+		<execute macro="ProductMenu#gotoControlPanelApps">
+			<var name="portlet" value="Kaleo Designer" />
 		</execute>
 
 		<execute macro="KaleoDesigner#addNewDefinitionViaKDCP">
@@ -1408,16 +1408,16 @@
 
 		<execute macro="KaleoDesigner#saveAsDraftWorkflowDefinitionViaKDCP" />
 
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Kaleo Designer" />
+		<execute macro="ProductMenu#gotoControlPanelApps">
+			<var name="portlet" value="Kaleo Designer" />
 		</execute>
 
 		<execute macro="KaleoDesigner#viewTableDefinitionDraftViaKDCP">
 			<var name="workflowDefinitionTitle" value="New Workflow Definition" />
 		</execute>
 
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Kaleo Designer" />
+		<execute macro="ProductMenu#gotoControlPanelApps">
+			<var name="portlet" value="Kaleo Designer" />
 		</execute>
 
 		<execute macro="KaleoDesigner#editWorkflowDefinitionViaKDCP">
@@ -1426,8 +1426,8 @@
 
 		<execute macro="KaleoDesigner#publishWorkflowDefinitionViaKDCP" />
 
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Kaleo Designer" />
+		<execute macro="ProductMenu#gotoControlPanelApps">
+			<var name="portlet" value="Kaleo Designer" />
 		</execute>
 
 		<execute macro="KaleoDesigner#viewTableDefinitionPublishedViaKDCP">
@@ -1436,8 +1436,8 @@
 	</command>
 
 	<command name="ViewAssignmentsForTaskNodeKDCP" priority="4">
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Kaleo Designer" />
+		<execute macro="ProductMenu#gotoControlPanelApps">
+			<var name="portlet" value="Kaleo Designer" />
 		</execute>
 
 		<execute macro="KaleoDesigner#addNewDefinitionViaKDCP">
@@ -1668,8 +1668,8 @@
 	<command name="ViewWorkflowDefinitionButtonsViaKDCP" priority="4">
 		<description message="This is a use case for LPS-47352 and LPS-48912." />
 
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Kaleo Designer" />
+		<execute macro="ProductMenu#gotoControlPanelApps">
+			<var name="portlet" value="Kaleo Designer" />
 		</execute>
 
 		<execute macro="KaleoDesigner#addNewDefinitionViaKDCP">

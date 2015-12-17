@@ -38,8 +38,8 @@
 	</tear-down>
 
 	<command name="MarkAsNotSpamWikiPage" priority="4">
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Akismet" />
+		<execute macro="ProductMenu#gotoControlPanelApps">
+			<var name="portlet" value="Akismet" />
 		</execute>
 
 		<execute macro="AkismetPortlet#configure">
@@ -179,8 +179,8 @@
 	</command>
 
 	<command name="MarkAsSpamWikiPage" priority="4">
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Akismet" />
+		<execute macro="ProductMenu#gotoControlPanelApps">
+			<var name="portlet" value="Akismet" />
 		</execute>
 
 		<execute macro="AkismetPortlet#configure">
