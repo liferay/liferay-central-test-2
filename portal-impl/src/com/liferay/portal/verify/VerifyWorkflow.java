@@ -106,16 +106,6 @@ public class VerifyWorkflow extends VerifyProcess {
 
 	private static final String[][] _ORPHANED_ATTACHED_MODELS = new String[][] {
 		new String[] {
-			"WorkflowDefinitionLink",
-			"com.liferay.portal.workflow.kaleo.forms.model.KaleoProcess",
-			"KaleoProcess", "kaleoProcessId"
-		},
-		new String[] {
-			"WorkflowDefinitionLink",
-			"com.liferay.portal.workflow.kaleo.forms.model.KaleoProcess",
-			"DDLRecord", "recordId"
-		},
-		new String[] {
 			"KaleoInstance",
 			"com.liferay.portal.workflow.kaleo.forms.model.KaleoProcess",
 			"DDLRecord", "recordId"
@@ -124,6 +114,16 @@ public class VerifyWorkflow extends VerifyProcess {
 			"KaleoInstanceToken",
 			"com.liferay.portal.workflow.kaleo.forms.model.KaleoProcess",
 			"DDLRecord", "recordId"
+		},
+		new String[] {
+			"WorkflowDefinitionLink",
+			"com.liferay.portal.workflow.kaleo.forms.model.KaleoProcess",
+			"DDLRecord", "recordId"
+		},
+		new String[] {
+			"WorkflowDefinitionLink",
+			"com.liferay.portal.workflow.kaleo.forms.model.KaleoProcess",
+			"KaleoProcess", "kaleoProcessId"
 		}
 	};
 
