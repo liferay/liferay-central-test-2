@@ -172,8 +172,8 @@
 		<var name="pageName" value="Documents and Media Page" />
 		<var name="portletName" value="Documents and Media" />
 
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Users and Organizations" />
+		<execute macro="ProductMenu#gotoControlPanelUsers">
+			<var name="portlet" value="Users and Organizations" />
 		</execute>
 
 		<execute macro="User#addCP">
@@ -183,8 +183,8 @@
 			<var name="userScreenName" value="usersn" />
 		</execute>
 
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Users and Organizations" />
+		<execute macro="ProductMenu#gotoControlPanelUsers">
+			<var name="portlet" value="Users and Organizations" />
 		</execute>
 
 		<execute macro="User#editPasswordCP">
@@ -192,8 +192,8 @@
 			<var name="userScreenName" value="usersn" />
 		</execute>
 
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Roles" />
+		<execute macro="ProductMenu#gotoControlPanelUsers">
+			<var name="portlet" value="Roles" />
 		</execute>
 
 		<execute macro="Role#assignRegRoleCP">
@@ -808,8 +808,8 @@
 			<var name="actionsDescription" value="Clean up permissions." />
 		</execute>
 
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Roles" />
+		<execute macro="ProductMenu#gotoControlPanelUsers">
+			<var name="portlet" value="Roles" />
 		</execute>
 
 		<execute macro="Role#addCP">
@@ -824,8 +824,8 @@
 			<var name="roleName" value="Technical Writer" />
 		</execute>
 
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Roles" />
+		<execute macro="ProductMenu#gotoControlPanelUsers">
+			<var name="portlet" value="Roles" />
 		</execute>
 
 		<execute macro="Role#definePermissionsCP">
@@ -868,8 +868,8 @@
 			<var name="permissionNavigationValue" value="Documents Folder" />
 		</execute>
 
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Users and Organizations" />
+		<execute macro="ProductMenu#gotoControlPanelUsers">
+			<var name="portlet" value="Users and Organizations" />
 		</execute>
 
 		<execute macro="User#addCP">
@@ -879,8 +879,8 @@
 			<var name="userScreenName" value="usersn" />
 		</execute>
 
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Users and Organizations" />
+		<execute macro="ProductMenu#gotoControlPanelUsers">
+			<var name="portlet" value="Users and Organizations" />
 		</execute>
 
 		<execute macro="User#editPasswordCP">
@@ -889,8 +889,8 @@
 			<var name="userScreenName" value="usersn" />
 		</execute>
 
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Users and Organizations" />
+		<execute macro="ProductMenu#gotoControlPanelUsers">
+			<var name="portlet" value="Users and Organizations" />
 		</execute>
 
 		<execute macro="Site#assignUserSitesCP">
@@ -898,8 +898,8 @@
 			<var name="userScreenName" value="usersn" />
 		</execute>
 
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Users and Organizations" />
+		<execute macro="ProductMenu#gotoControlPanelUsers">
+			<var name="portlet" value="Users and Organizations" />
 		</execute>
 
 		<execute macro="User#assignRegularRoleCP">
@@ -907,8 +907,8 @@
 			<var name="userScreenName" value="usersn" />
 		</execute>
 
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Users and Organizations" />
+		<execute macro="ProductMenu#gotoControlPanelUsers">
+			<var name="portlet" value="Users and Organizations" />
 		</execute>
 
 		<execute macro="User#unassignRegularRoleCP">
@@ -916,8 +916,8 @@
 			<var name="userScreenName" value="usersn" />
 		</execute>
 
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Users and Organizations" />
+		<execute macro="ProductMenu#gotoControlPanelUsers">
+			<var name="portlet" value="Users and Organizations" />
 		</execute>
 
 		<execute macro="User#addCP">
@@ -927,8 +927,8 @@
 			<var name="userScreenName" value="usersn2" />
 		</execute>
 
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Users and Organizations" />
+		<execute macro="ProductMenu#gotoControlPanelUsers">
+			<var name="portlet" value="Users and Organizations" />
 		</execute>
 
 		<execute macro="User#editPasswordCP">
@@ -937,8 +937,8 @@
 			<var name="userScreenName" value="usersn2" />
 		</execute>
 
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Users and Organizations" />
+		<execute macro="ProductMenu#gotoControlPanelUsers">
+			<var name="portlet" value="Users and Organizations" />
 		</execute>
 
 		<execute macro="Site#assignUserSitesCP">
