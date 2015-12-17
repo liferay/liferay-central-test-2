@@ -258,9 +258,9 @@ public class LDAPUserExporterImpl implements UserExporter {
 			}
 
 			if (_log.isDebugEnabled()) {
-			_log.debug(
-				"Finished exporting user " + user + " in user group " +
-					userGroupId + " in " + stopWatch.getTime() + "ms");
+				_log.debug(
+					"Finished exporting user " + user + " in user group " +
+						userGroupId + " in " + stopWatch.getTime() + "ms");
 			}
 		}
 	}
