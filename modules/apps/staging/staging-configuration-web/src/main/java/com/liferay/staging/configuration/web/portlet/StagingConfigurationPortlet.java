@@ -41,11 +41,10 @@ import java.io.IOException;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.Portlet;
+import javax.portlet.PortletException;
 import javax.portlet.PortletMode;
-import javax.portlet.PortletModeException;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
-import javax.portlet.WindowStateException;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -105,8 +104,7 @@ public class StagingConfigurationPortlet extends MVCPortlet {
 
 	public void editStagingConfiguration(
 			ActionRequest actionRequest, ActionResponse actionResponse)
-		throws IOException, PortalException, PortletModeException,
-			WindowStateException {
+		throws IOException, PortalException, PortletException {
 
 		hideDefaultSuccessMessage(actionRequest);
 

@@ -18,13 +18,11 @@
 
 <%
 PortletURL portletURL = PortalUtil.getControlPanelPortletURL(request, liveGroup, StagingProcessesPortletKeys.STAGING_PROCESSES, 0, 0, PortletRequest.RENDER_PHASE);
-
-String taglibOnClick = renderResponse.getNamespace() + "openStagingConfigurationPortlet()";
 %>
 
 <liferay-ui:icon
 	message="staging-configuration"
-	onClick="<%= taglibOnClick %>"
+	onClick='<%= renderResponse.getNamespace() + "openStagingConfigurationPortlet();" %>'
 	url="javascript:;"
 />
 
