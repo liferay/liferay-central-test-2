@@ -745,6 +745,8 @@
 
 		<execute macro="BlogsNavigator#gotoSettings" />
 
+		<execute function="Pause" locator1="30000" />
+
 		<execute macro="AssetCategorization#removeTag">
 			<var name="tagName" value="tag name 1" />
 		</execute>
