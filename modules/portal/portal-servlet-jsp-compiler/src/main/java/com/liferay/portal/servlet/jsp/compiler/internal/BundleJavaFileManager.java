@@ -52,8 +52,6 @@ import org.osgi.framework.wiring.BundleWiring;
 public class BundleJavaFileManager
 	extends ForwardingJavaFileManager<JavaFileManager> {
 
-	public static final String JAVA_PACKAGE = "java.";
-
 	public static final String OPT_VERBOSE = "-verbose";
 
 	public BundleJavaFileManager(
@@ -178,7 +176,7 @@ public class BundleJavaFileManager
 		String packagePath = packageName.replace(
 			CharPool.PERIOD, CharPool.SLASH);
 
-		if (!packageName.startsWith(JAVA_PACKAGE) &&
+		if (!packageName.startsWith("java.") &&
 			(location == StandardLocation.CLASS_PATH)) {
 
 			List<JavaFileObject> javaFileObjects = listFromDependencies(
