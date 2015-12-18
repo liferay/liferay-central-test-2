@@ -340,15 +340,7 @@
 		<execute function="Click" locator1="CPBookmarksFolder#BOOKMARKS_TABLE_ACTIONS_BUTTON" />
 		<execute function="AssertClick" locator1="CPBookmarksFolder#BOOKMARK_ACTION_MENULIST_EDIT" value1="Edit" />
 
-		<if>
-			<isset var="subfolderName" />
-			<then>
-				<execute function="AssertTextEquals" locator1="CPBookmarksEditbookmark#FOLDER_NAME" value1="${subfolderName}" />
-			</then>
-			<else>
-				<execute function="AssertTextEquals" locator1="CPBookmarksEditbookmark#FOLDER_NAME" value1="${folderName}" />
-			</else>
-		</if>
+		<execute function="AssertTextEquals" locator1="Portlet#HEADER" value1="Edit ${bookmarkName}" />
 
 		<execute function="AssertClick" locator1="Button#SELECT" value1="Select" />
 
