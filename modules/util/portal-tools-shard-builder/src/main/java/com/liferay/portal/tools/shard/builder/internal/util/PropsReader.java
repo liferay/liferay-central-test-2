@@ -25,9 +25,7 @@ import java.util.Properties;
  */
 public class PropsReader {
 
-	public static Properties getProperties(String fileName)
-		throws IOException {
-
+	public static Properties read(String fileName) throws IOException {
 		try (InputStream inputStream = new FileInputStream(fileName)) {
 			Properties properties = new Properties();
 	
