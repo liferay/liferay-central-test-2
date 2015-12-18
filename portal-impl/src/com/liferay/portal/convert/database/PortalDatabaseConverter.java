@@ -16,6 +16,8 @@ package com.liferay.portal.convert.database;
 
 import com.liferay.portal.convert.DatabaseConverter;
 import com.liferay.portal.convert.util.ModelMigrator;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.ServletContextPool;
 import com.liferay.portal.kernel.util.ClassLoaderUtil;
 import com.liferay.portal.model.BaseModel;
@@ -25,7 +27,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
-
 import javax.sql.DataSource;
 
 /**
@@ -50,6 +51,9 @@ public class PortalDatabaseConverter implements DatabaseConverter {
 				implClassName);
 		}
 		catch (Exception e) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(e, e);
+			}
 		}
 
 		// Backward compatibility so legacy plugins are converted
@@ -65,6 +69,9 @@ public class PortalDatabaseConverter implements DatabaseConverter {
 					implClassName);
 			}
 			catch (Exception e) {
+				if (_log.isDebugEnabled()) {
+					_log.debug(e, e);
+				}
 			}
 		}
 
@@ -101,5 +108,8 @@ public class PortalDatabaseConverter implements DatabaseConverter {
 	}
 
 	private ModelMigrator _modelMigrator;
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		PortalDatabaseConverter.class);
 
 }
