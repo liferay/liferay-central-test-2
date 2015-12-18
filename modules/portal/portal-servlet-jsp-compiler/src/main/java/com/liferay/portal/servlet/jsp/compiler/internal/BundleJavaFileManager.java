@@ -98,11 +98,11 @@ public class BundleJavaFileManager
 		if (_verbose) {
 			StringBundler sb = new StringBundler(_bundleWirings.size() * 4 + 6);
 
-			sb.append("BundleJavaFileManager for bundle: ");
+			sb.append("Bundle Java file manager for bundle ");
 			sb.append(bundle.getSymbolicName());
 			sb.append(StringPool.DASH);
 			sb.append(bundle.getVersion());
-			sb.append(", dependent BundleWirings: {");
+			sb.append(" has dependent bundle wirings: ");
 
 			for (BundleWiring bundleWiring : _bundleWirings) {
 				Bundle currentBundle = bundleWiring.getBundle();
@@ -116,8 +116,6 @@ public class BundleJavaFileManager
 			if (!_bundleWirings.isEmpty()) {
 				sb.setIndex(sb.index() - 1);
 			}
-
-			sb.append(StringPool.CLOSE_CURLY_BRACE);
 
 			_logger.log(Logger.LOG_INFO, sb.toString());
 		}
