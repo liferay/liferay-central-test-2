@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
+
 import javax.sql.DataSource;
 
 /**
@@ -107,9 +108,9 @@ public class PortalDatabaseConverter implements DatabaseConverter {
 		return implClassesNames;
 	}
 
-	private ModelMigrator _modelMigrator;
-
 	private static final Log _log = LogFactoryUtil.getLog(
 		PortalDatabaseConverter.class);
+
+	private ModelMigrator _modelMigrator;
 
 }

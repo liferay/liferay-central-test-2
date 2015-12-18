@@ -57,7 +57,7 @@ import java.util.List;
  * @author Alexander Chow
  * @author László Csontos
  */
-public class ConvertDocumentLibrary
+public class DocumentLibraryConvertProcess
 	extends BaseConvertProcess implements DLStoreConverter {
 
 	@Override
@@ -363,7 +363,7 @@ public class ConvertDocumentLibrary
 	private static final String _FILE_SYSTEM_STORE_SUFFIX = "FileSystemStore";
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		ConvertDocumentLibrary.class);
+		DocumentLibraryConvertProcess.class);
 
 	private Store _sourceStore;
 	private Store _targetStore;
