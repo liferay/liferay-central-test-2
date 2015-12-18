@@ -23,9 +23,9 @@ import java.util.List;
  */
 public interface DBProvider {
 
-	public List<String> getControlTables(String schema);
+	public List<String> getControlTableNames(String schema);
 
-	public List<String> getPartitionedTables(String schema);
+	public List<String> getPartitionedTableNames(String schema);
 
 	public String write(String tableName, OutputStream outputStream);
 

@@ -35,40 +35,40 @@ public class ExportProcess {
 		_dbProvider = dbProvider;
 	}
 
-	public void export(ExportContext exportContext)
-		throws IOException, SQLException {
-
-		List<String> partitionedTables = _dbProvider.getPartitionedTables(
-			exportContext.getSchema());
-		List<String> controlTables = _dbProvider.getControlTables(
+	public void export(ExportContext exportContext) throws IOException {
+		List<String> partitionedTableNames =
+			_dbProvider.getPartitionedTableNames(exportContext.getSchema());
+		List<String> controlTableNames = _dbProvider.getControlTableNames(
 			exportContext.getSchema());
 
 		List<Long> companyIds = exportContext.getCompanyIds();
 
 		for (Long companyId : companyIds) {
-			_exportCompany(companyId, partitionedTables, exportContext);
-			_exportCompany(companyId, controlTables, exportContext);
+			_exportCompany(companyId, partitionedTableNames, exportContext);
+			_exportCompany(companyId, controlTableNames, exportContext);
 		}
 	}
 
 	private void _exportCompany(
-			long companyId, List<String> tables, ExportContext exportContext)
+			long companyId, List<String> tableNames,
+			ExportContext exportContext)
 		throws IOException {
 
 		String outputFileName =
 			exportContext.getSchema() + "-" + companyId + ".sql";
 
 		File outputFile = new File(
-			exportContext.getOutputFolder(), outputFileName);
+			exportContext.getOutputDirname(), outputFileName);
 
 		OutputStream outputStream = new BufferedOutputStream(
 			new FileOutputStream(outputFile));
 
-		for (String tableName : tables) {
+		for (String tableName : tableNames) {
 			_dbProvider.write(tableName, outputStream);
 		}
 
 		outputStream.flush();
+
 		outputStream.close();
 	}
 
