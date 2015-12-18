@@ -314,7 +314,7 @@ public class InputTag extends BaseInputTag {
 		}
 
 		List<String> checkboxNames = (List<String>)request.getAttribute(
-			WebKeys.CHECKBOX_NAMES);
+			"LIFERAY_SHARED_aui:form:checkboxNames");
 
 		if (checkboxNames != null) {
 			String inputName = getInputName();
