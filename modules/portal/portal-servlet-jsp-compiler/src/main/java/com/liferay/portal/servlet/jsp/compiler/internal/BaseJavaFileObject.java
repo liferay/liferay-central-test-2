@@ -96,7 +96,7 @@ public abstract class BaseJavaFileObject implements JavaFileObject {
 	}
 
 	/**
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	@Override
 	public InputStream openInputStream() throws IOException {
