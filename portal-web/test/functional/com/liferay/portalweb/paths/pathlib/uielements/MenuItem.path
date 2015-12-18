@@ -189,6 +189,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>CATEGORY</td>
+	<td>//div[contains(@class,'open')]//a[contains(.,'Category')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>CHECKIN</td>
 	<td>//div[contains(@class,'open')]//a[@role='menuitem' and contains(.,'Checkin')]</td>
 	<td></td>
