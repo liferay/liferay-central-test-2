@@ -48,6 +48,7 @@ public class JenkinsPerformanceDataUtil {
 		}
 		else {
 			int retryCount = 0;
+
 			while (true) {
 				jsonObject = JenkinsResultsParserUtil.toJSONObject(
 					JenkinsResultsParserUtil.getLocalURL(
@@ -57,25 +58,25 @@ public class JenkinsPerformanceDataUtil {
 				try {
 					_results.addAll(
 						_getSlowestResults(jobName, jsonObject, size));
+
 					break;
 				}
 				catch (IllegalArgumentException iae) {
 					String message = iae.getMessage();
 
-					if (!message.contains("Result not yet available")) {
+					if (!message.contains("Result is not available for ")) {
 						throw iae;
 					}
 
 					retryCount++;
 
 					if (retryCount > 5) {
-						System.out.println(
-							"Exceeded max retries to get child report " +
-							"results.");
+						System.out.println("Exceeded max retries");
+
 						throw iae;
 					}
 
-					System.out.println(message + "\n Retry in 30 seconds.");
+					System.out.println("Retry in 30 seconds: " + message);
 
 					Thread.sleep(30 * 1000);
 				}
@@ -233,7 +234,7 @@ public class JenkinsPerformanceDataUtil {
 
 			if (!childReportJSONObject.has("result")) {
 				throw new IllegalArgumentException(
-					"Result not yet available for child url " +
+					"Result is not available for " +
 						childJSONObject.getString("url"));
 			}
 
