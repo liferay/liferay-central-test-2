@@ -227,8 +227,6 @@
 	</command>
 
 	<command name="editCP">
-		<execute function="Click" locator1="Icon#DISPLAY_STYLE_LIST" />
-
 		<var name="bookmarkName" value="${bookmarkName}" />
 		<var name="bookmarkURL" value="${bookmarkURL}" />
 		<var name="key_assetEntry" value="${bookmarkName}" />
@@ -259,8 +257,6 @@
 	</command>
 
 	<command name="editPG">
-		<execute function="Click" locator1="Icon#DISPLAY_STYLE_LIST" />
-
 		<var name="bookmarkName" value="${bookmarkName}" />
 		<var name="bookmarkURL" value="${bookmarkURL}" />
 		<var name="key_assetEntry" value="${bookmarkName}" />
@@ -369,8 +365,6 @@
 		<execute macro="ProductMenu#gotoSitesContent">
 			<var name="portlet" value="Bookmarks" />
 		</execute>
-
-		<execute function="Click" locator1="Icon#DISPLAY_STYLE_LIST" />
 
 		<var name="key_assetName" value="${bookmarkName}" />
 
