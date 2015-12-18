@@ -60,7 +60,7 @@ public class ConvertDatabase extends BaseConvertProcess {
 
 	@Override
 	protected void doConvert() throws Exception {
-		MaintenanceUtil.appendStatus("Starting Database migration");
+		MaintenanceUtil.appendStatus("Starting database migration.");
 
 		for (DatabaseConverter databaseConverter : _databaseConverters) {
 			databaseConverter.convert(getDataSource());
