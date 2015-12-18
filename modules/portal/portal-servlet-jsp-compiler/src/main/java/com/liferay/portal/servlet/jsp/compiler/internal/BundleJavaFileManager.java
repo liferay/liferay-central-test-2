@@ -144,7 +144,7 @@ public class BundleJavaFileManager
 			if (_verbose) {
 				_logger.log(
 					Logger.LOG_INFO,
-					"Infering binary name from " + baseJavaFileObject);
+					"Inferring binary name from " + baseJavaFileObject);
 			}
 
 			return baseJavaFileObject.getClassName();
