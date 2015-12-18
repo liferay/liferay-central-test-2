@@ -53,7 +53,7 @@ public class AttributeDefinitionUtil {
 		Object property = properties.get(attributeDefinition.getID());
 
 		if (property == null) {
-			return new String[] {};
+			return new String[0];
 		}
 
 		int cardinality = attributeDefinition.getCardinality();
@@ -66,7 +66,9 @@ public class AttributeDefinitionUtil {
 			return ArrayUtil.toStringArray((Object[])property);
 		}
 
-		return ArrayUtil.toStringArray(((Vector<?>)property).toArray());
+		Vector<?> vector = (Vector<?>)property;
+
+		return ArrayUtil.toStringArray(vector.toArray());
 	}
 
 }
