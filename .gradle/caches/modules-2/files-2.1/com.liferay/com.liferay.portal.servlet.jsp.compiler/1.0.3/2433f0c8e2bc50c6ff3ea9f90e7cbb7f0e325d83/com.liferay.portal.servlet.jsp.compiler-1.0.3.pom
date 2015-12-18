@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.liferay</groupId>
   <artifactId>com.liferay.portal.servlet.jsp.compiler</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.3</version>
   <licenses>
     <license>
       <name>LGPL 2.1</name>
@@ -37,12 +37,6 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>com.github.rotty3000</groupId>
-      <artifactId>phidias</artifactId>
-      <version>0.3.7</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
       <groupId>org.glassfish</groupId>
       <artifactId>javax.el</artifactId>
       <version>3.0.1-b05</version>
@@ -53,12 +47,6 @@
       <artifactId>javax.servlet.jsp.jstl-api</artifactId>
       <version>1.2.1</version>
       <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.glassfish.web</groupId>
-      <artifactId>javax.servlet.jsp</artifactId>
-      <version>2.3.3-b02</version>
-      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.glassfish.web</groupId>
@@ -82,6 +70,12 @@
       <groupId>org.osgi</groupId>
       <artifactId>org.osgi.compendium</artifactId>
       <version>5.0.0</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.liferay</groupId>
+      <artifactId>javax.servlet.jsp</artifactId>
+      <version>2.3.3-b02.LIFERAY-PATCHED-1</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
