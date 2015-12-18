@@ -166,7 +166,7 @@ public class JspCompiler extends Jsr199JavaCompiler {
 
 		_bundle = _allParticipatingBundles[0];
 
-		_resourceResolver = new JspClassResolver(_bundle, _jspBundle, _logger);
+		_classResolver = new JspClassResolver(_bundle, _jspBundle, _logger);
 
 		jspCompilationContext.setClassLoader(jspBundleClassloader);
 
@@ -295,7 +295,7 @@ public class JspCompiler extends Jsr199JavaCompiler {
 				new BundleJavaFileManager(
 					_bundle, standardJavaFileManager, _logger,
 					options.contains(BundleJavaFileManager.OPT_VERBOSE),
-					_resourceResolver);
+					_classResolver);
 
 			addBundleWirings(bundleJavaFileManager);
 
@@ -450,8 +450,8 @@ public class JspCompiler extends Jsr199JavaCompiler {
 	private Bundle[] _allParticipatingBundles;
 	private Bundle _bundle;
 	private final List<File> _classPath = new ArrayList<>();
+	private ClassResolver _classResolver;
 	private Bundle _jspBundle;
 	private Logger _logger;
-	private ClassResolver _resourceResolver;
 
 }
