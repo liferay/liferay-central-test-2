@@ -160,14 +160,14 @@ public class BundleJavaFileManager
 		throws IOException {
 
 		if ((location == StandardLocation.CLASS_PATH) && _verbose) {
-			StringBundler sb = new StringBundler(8);
+			StringBundler sb = new StringBundler(9);
 
-			sb.append("List for {location=");
+			sb.append("List for {kinds=");
+			sb.append(kinds);
+			sb.append(", location=");
 			sb.append(location);
 			sb.append(", packageName=");
 			sb.append(packageName);
-			sb.append(", kinds=");
-			sb.append(kinds);
 			sb.append(", recurse=");
 			sb.append(recurse);
 			sb.append(StringPool.CLOSE_CURLY_BRACE);
