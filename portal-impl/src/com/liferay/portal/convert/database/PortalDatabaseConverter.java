@@ -52,7 +52,7 @@ public class PortalDatabaseConverter implements DatabaseConverter {
 		catch (Exception e) {
 		}
 
-		// Backward compatibility, so legacy plugins' tables get converted
+		// Backward compatibility so legacy plugins are converted
 
 		for (String servletContextName : ServletContextPool.keySet()) {
 			try {
@@ -72,7 +72,7 @@ public class PortalDatabaseConverter implements DatabaseConverter {
 	}
 
 	protected List<Class<? extends BaseModel<?>>> getModelClassesName(
-		String pattern) {
+		String regex) {
 
 		List<String> modelNames = ModelHintsUtil.getModels();
 
@@ -87,7 +87,7 @@ public class PortalDatabaseConverter implements DatabaseConverter {
 			String implClassName = modelName.replaceFirst(
 				"(\\.model\\.)(\\p{Upper}.*)", "$1impl.$2Impl");
 
-			if (implClassName.matches(pattern)) {
+			if (implClassName.matches(regex)) {
 				Class<? extends BaseModel<?>> implClass = getImplClass(
 					implClassName);
 
