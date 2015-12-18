@@ -2,7 +2,9 @@
 	<var name="assetType" value="Message Boards Category" />
 
 	<command name="addCP">
-		<execute function="AssertClick" locator1="MessageBoards#ADD_CATEGORY_BUTTON" value1="Add Category" />
+		<execute function="Click" locator1="Button#PLUS" />
+
+		<execute function="AssertClick" locator1="MenuItem#CATEGORY" value1="Category" />
 
 		<execute function="Type" locator1="TextInput#NAME" value1="${categoryName}" />
 		<execute function="AssertClick" locator1="Button#SAVE" value1="Save" />
