@@ -69,9 +69,9 @@ public class ConfigurationModelToDDMFormValuesConverter {
 	protected void addDDMFormFieldValues(
 		AttributeDefinition attributeDefinition, DDMFormValues ddmFormValues) {
 
-		Configuration configuration = _configurationModel.getConfiguration();
+		String[] values = null;
 
-		String[] values;
+		Configuration configuration = _configurationModel.getConfiguration();
 
 		if (configuration != null) {
 			values = AttributeDefinitionUtil.getProperty(
