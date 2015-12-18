@@ -193,7 +193,7 @@ public class BundleJavaFileManager
 		return fileManager.list(location, packagePath, kinds, recurse);
 	}
 
-	private String getClassName(String resourceName) {
+	protected String getClassName(String resourceName) {
 		if (resourceName.endsWith(".class")) {
 			resourceName = resourceName.substring(0, resourceName.length() - 6);
 		}
@@ -201,7 +201,7 @@ public class BundleJavaFileManager
 		return resourceName.replace(CharPool.SLASH, CharPool.PERIOD);
 	}
 
-	private JavaFileObject getJavaFileObject(
+	protected JavaFileObject getJavaFileObject(
 		URL resourceURL, String resourceName) {
 
 		String protocol = resourceURL.getProtocol();
@@ -237,7 +237,7 @@ public class BundleJavaFileManager
 		return null;
 	}
 
-	private void list(
+	protected void list(
 		String packagePath, Kind kind, int options, BundleWiring bundleWiring,
 		List<JavaFileObject> javaFileObjects) {
 
@@ -274,7 +274,7 @@ public class BundleJavaFileManager
 		}
 	}
 
-	private List<JavaFileObject> listFromDependencies(
+	protected List<JavaFileObject> listFromDependencies(
 		Set<Kind> kinds, boolean recurse, String packagePath) {
 
 		List<JavaFileObject> javaFileObjects = new ArrayList<>();
