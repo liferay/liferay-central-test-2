@@ -260,7 +260,7 @@ public class BundleJavaFileManager
 				if (_verbose) {
 					_logger.log(
 						Logger.LOG_INFO,
-						"Could not create JavaFileObject for " + resourceURL);
+						"Unable to create Java file object for " + resourceURL);
 				}
 
 				continue;
