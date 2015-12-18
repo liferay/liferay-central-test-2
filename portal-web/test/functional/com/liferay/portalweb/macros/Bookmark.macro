@@ -3,9 +3,13 @@
 
 	<command name="addBookmarkViaAP">
 		<execute function="AssertClick" locator1="AP#ADD_NEW_DROPDOWN" value1="Add New" />
+
 		<execute function="AssertClick" locator1="MenuItem#BOOKMARKS_ENTRY" value1="Bookmarks Entry" />
+
 		<execute function="SelectFrame" locator1="IFrame#EDIT_ASSET" />
+
 		<execute function="AssertClick#pauseAssertTextClickAtAndWait" locator1="Button#SELECT" value1="Select" />
+
 		<execute function="SelectFrameTop" />
 
 		<execute function="SelectFrame" locator1="IFrame#SELECT_FOLDER" />
@@ -17,9 +21,11 @@
 		<execute function="SelectFrameTop" />
 
 		<execute function="SelectFrame" locator1="IFrame#EDIT_ASSET" />
+
 		<execute function="Type" locator1="TextInput#NAME" value1="${bookmarkName}" />
 		<execute function="Type" locator1="TextInput#URL" value1="${bookmarkURL}" />
 		<execute function="Type" locator1="TextArea#DESCRIPTION" value1="${bookmarkDescription}" />
+
 		<execute function="AssertClick#pauseAssertTextClickAt" locator1="Button#SAVE" value1="Save" />
 	</command>
 
@@ -69,7 +75,9 @@
 		<execute function="Type" locator1="TextInput#NAME" value1="${bookmarkName}" />
 		<execute function="Type" locator1="TextInput#URL" value1="${bookmarkURLInvalid}" />
 		<execute function="Type" locator1="TextArea#DESCRIPTION" value1="${bookmarkDescription}" />
+
 		<execute function="AssertClick" locator1="Button#SAVE" value1="Save" />
+
 		<execute function="AssertTextEquals#assertPartialText" locator1="TextInput#URL_REQUIRED" value1="URL" />
 		<execute function="AssertTextEquals#assertPartialText" locator1="TextInput#URL_REQUIRED" value1="Required" />
 		<execute function="AssertTextEquals#assertPartialText" locator1="TextInput#URL_REQUIRED" value1="Please enter a valid URL." />
@@ -166,12 +174,14 @@
 
 	<command name="addRelatedAssetBookmarksEntryPG">
 		<execute function="SelectFrame" locator1="AssetRelatedAssets#SELECT_ASSET_IFRAME" />
+
 		<execute function="AssertClick" locator1="AssetRelatedAssets#BOOKMARKS_ENTRY_NAVIGATION_ADD_BOOKMARKS_ENTRY" value1="Add Bookmarks Entry" />
 
 		<execute function="Type" locator1="TextInput#NAME" value1="${bookmarkName}" />
 		<execute function="Type" locator1="TextInput#URL" value1="${bookmarkURL}" />
 
 		<execute function="AssertClick" locator1="Button#SAVE" value1="Save" />
+
 		<execute function="SelectFrame" value1="relative=top" />
 	</command>
 
@@ -185,6 +195,7 @@
 		<var name="key_assetName" value="${subfolderName}" />
 
 		<execute function="AssertClick" locator1="Bookmarks#DESCRIPTIVE_ENTRY_TITLE" value1="${subfolderName}" />
+
 		<execute function="AssertTextEquals" locator1="Portlet#HEADER" value1="${subfolderName}" />
 
 		<execute function="Click" locator1="Button#PLUS" />
@@ -194,6 +205,7 @@
 		<execute function="Type" locator1="TextInput#NAME" value1="${bookmarkName}" />
 		<execute function="Type" locator1="TextInput#URL" value1="${bookmarkURL}" />
 		<execute function="Type" locator1="TextArea#DESCRIPTION" value1="${bookmarkDescription}" />
+
 		<execute function="AssertClick" locator1="Button#SAVE" value1="Save" />
 
 		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request completed successfully." />
@@ -283,6 +295,7 @@
 		<var name="key_assetName" value="${bookmarkName}" />
 
 		<execute function="AssertTextEquals" locator1="Bookmarks#DESCRIPTIVE_ENTRY_TITLE" value1="${bookmarkName}" />
+
 		<execute function="AssertClick" locator1="Bookmarks#DESCRIPTIVE_ENTRY_TITLE" value1="${bookmarkName}" />
 	</command>
 
@@ -299,8 +312,11 @@
 		<var name="key_assetEntry" value="${bookmarkName}" />
 
 		<execute function="Click" locator1="Icon#DESCRIPTIVE_VERTICAL_ELLIPSIS" />
+
 		<execute function="AssertClick" locator1="MenuItem#EDIT" value1="Edit" />
+
 		<execute function="AssertClick" locator1="Button#SELECT" value1="Select" />
+
 		<execute function="SelectFrame" locator1="IFrame#DIALOG" />
 
 		<var name="key_folderName" value="${folderName2}" />
@@ -310,6 +326,7 @@
 		<execute function="SelectFrame" value1="relative=top" />
 
 		<execute function="AssertClick" locator1="Button#SAVE" value1="Save" />
+
 		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request completed successfully." />
 		<execute function="AssertTextEquals" locator1="Message#INFO" value1="There are no bookmarks in this folder." />
 	</command>
@@ -332,6 +349,7 @@
 		<var name="key_assetEntry" value="${bookmarkName}" />
 
 		<execute function="Click" locator1="Icon#DESCRIPTIVE_VERTICAL_ELLIPSIS" />
+
 		<execute function="AssertClick" locator1="MenuItem#EDIT" value1="Edit" />
 
 		<execute function="AssertTextEquals" locator1="Portlet#HEADER" value1="Edit ${bookmarkName}" />
@@ -339,10 +357,13 @@
 		<execute function="AssertClick" locator1="Button#SELECT" value1="Select" />
 
 		<execute function="SelectFrame" locator1="IFrame#DIALOG" />
+
 		<execute function="AssertClick" locator1="Button#CHOOSE_THIS_FOLDER" value1="Choose This Folder" />
 
 		<execute function="SelectFrame" value1="relative=top" />
+
 		<execute function="AssertTextEquals" locator1="Portlet#HEADER" value1="Edit ${bookmarkName}" />
+
 		<execute function="AssertClick" locator1="Button#SAVE" value1="Save" />
 
 		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request completed successfully." />
@@ -375,6 +396,7 @@
 		<execute function="Click" locator1="Icon#DESCRIPTIVE_VERTICAL_ELLIPSIS" />
 
 		<execute function="AssertClick" locator1="MenuItem#MOVE_TO_THE_RECYCLE_BIN" value1="Move to the Recycle Bin" />
+
 		<execute function="AssertTextEquals#assertPartialText" locator1="Message#SUCCESS" value1="The ${assetType} ${bookmarkName} was moved to the Recycle Bin. Undo" />
 		<execute function="AssertTextNotPresent" locator1="Bookmarks#BOOKMARKS_TABLE_URL" value1="${bookmarkURL}" />
 	</command>
@@ -385,6 +407,7 @@
 		<execute function="Click" locator1="Icon#DESCRIPTIVE_VERTICAL_ELLIPSIS" />
 
 		<execute function="AssertClick" locator1="MenuItem#MOVE_TO_THE_RECYCLE_BIN" value1="Move to the Recycle Bin" />
+
 		<execute function="AssertTextEquals#assertPartialText" locator1="Message#SUCCESS" value1="moved to the Recycle Bin. Undo" />
 	</command>
 
@@ -414,6 +437,7 @@
 				<var name="key_bookmarkName" value="${bookmarkName}" />
 
 				<execute function="Type" locator1="NavBar#BASIC_SEARCH_FIELD" value1="${bookmarkName}" />
+
 				<execute function="AssertClick" locator1="NavBar#BASIC_SEARCH_BUTTON" value1="Search" />
 
 				<var name="key_bookmarkName" value="${bookmarkName}" />
@@ -426,6 +450,7 @@
 					<var name="key_bookmarkName" value="${bookmarkName}" />
 
 					<execute function="Type" locator1="NavBar#BASIC_SEARCH_FIELD" value1="asdf" />
+
 					<execute function="AssertClick" locator1="NavBar#BASIC_SEARCH_BUTTON" value1="Search" />
 
 					<execute function="AssertTextEquals" locator1="Message#INFO" value1="No entries were found that matched the keywords: asdf." />
@@ -437,6 +462,7 @@
 					<var name="quotes"><![CDATA["${bookmarkName}"]]></var>
 
 					<execute function="Type" locator1="NavBar#BASIC_SEARCH_FIELD" value1="${quotes}" />
+
 					<execute function="AssertClick" locator1="NavBar#BASIC_SEARCH_BUTTON" value1="Search" />
 
 					<var name="key_bookmarkName" value="${bookmarkName}" />
@@ -489,10 +515,15 @@
 		<var name="key_bookmarkName" value="${bookmarkName}" />
 
 		<execute function="AssertClick" locator1="AP#ASSET_ABSTRACT_TITLE" value1="${bookmarkName}" />
+
 		<execute function="AssertTextEquals" locator1="AP#ASSET_ABSTRACT_BOOKMARK_DETAIL_NAME" value1="${bookmarkName}" />
+
 		<execute function="Click" locator1="AP#ASSET_ABSTRACT_BOOKMARK_DETAIL_LINK" />
+
 		<execute function="SelectWindow" locator1="title=Liferay - Enterprise open source portal and collaboration software | Liferay" />
+
 		<execute function="AssertElementPresent#assertElementPresent" locator1="AP#ASSET_ABSTRACT_BOOKMARK_LIFERAY_LOGO" />
+
 		<execute function="Close" locator1="title=Liferay - Enterprise open source portal and collaboration software | Liferay" />
 	</command>
 
