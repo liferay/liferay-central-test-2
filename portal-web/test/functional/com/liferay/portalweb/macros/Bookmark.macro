@@ -470,6 +470,16 @@
 		<execute macro="RecycleBin#emptyCP" />
 	</command>
 
+	<command name="viewBookmark">
+		<var name="key_assetName" value="${bookmarkName}" />
+
+		<execute function="AssertTextEquals#assertPartialText" locator1="Bookmarks#DESCRIPTIVE_ENTRY_TITLE" value1="${bookmarkName}" />
+
+		<execute function="AssertClick" locator1="Bookmarks#DESCRIPTIVE_ENTRY_TITLE" value1="${bookmarkName}" />
+
+		<execute function="AssertTextEquals#assertPartialText" locator1="Bookmarks#BOOKMARK_ASSET_URL" value1="${bookmarkURL}" />
+	</command>
+
 	<command name="viewBookmarkViaAP">
 		<var name="key_assetTitle" value="${bookmarkName}" />
 		<var name="key_bookmarkName" value="${bookmarkName}" />
@@ -480,15 +490,6 @@
 		<execute function="SelectWindow" locator1="title=Liferay - Enterprise open source portal and collaboration software | Liferay" />
 		<execute function="AssertElementPresent#assertElementPresent" locator1="AP#ASSET_ABSTRACT_BOOKMARK_LIFERAY_LOGO" />
 		<execute function="Close" locator1="title=Liferay - Enterprise open source portal and collaboration software | Liferay" />
-	</command>
-
-	<command name="viewCP">
-		<var name="key_bookmarkName" value="${bookmarkName}" />
-
-		<execute function="Click" locator1="Icon#DISPLAY_STYLE_LIST" />
-
-		<execute function="AssertTextEquals" locator1="Bookmarks#BOOKMARKS_TABLE_NAME" value1="${bookmarkName}" />
-		<execute function="AssertTextEquals" locator1="Bookmarks#BOOKMARKS_TABLE_URL" value1="${bookmarkURL}" />
 	</command>
 
 	<command name="viewNoCategoryCP">
@@ -506,10 +507,5 @@
 	<command name="viewNoPG">
 		<execute function="AssertTextNotPresent" value1="${bookmarkName}" />
 		<execute function="AssertTextNotPresent" value1="${bookmarkURL}" />
-	</command>
-
-	<command name="viewPG">
-		<execute function="AssertTextEquals" locator1="BookmarksEntry#NAME" value1="${bookmarkName}" />
-		<execute function="AssertTextEquals" locator1="BookmarksEntry#URL" value1="${bookmarkURL}" />
 	</command>
 </definition>
