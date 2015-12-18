@@ -169,6 +169,7 @@ public class BundleJavaFileManager
 			sb.append(", kinds=");
 			sb.append(kinds);
 			sb.append(", recurse=");
+			sb.append(recurse);
 			sb.append(StringPool.CLOSE_CURLY_BRACE);
 
 			_logger.log(Logger.LOG_INFO, sb.toString());
