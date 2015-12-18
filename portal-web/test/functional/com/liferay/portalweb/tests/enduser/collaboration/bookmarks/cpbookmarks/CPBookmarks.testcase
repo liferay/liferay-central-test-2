@@ -468,6 +468,7 @@
 			<var name="editSubfolderDescription" value="${editSubfolderDescription}" />
 			<var name="editSubfolderName" value="${editSubfolderName}" />
 			<var name="folderName" value="${folderName}" />
+			<var name="subfolderName" value="${subfolderName}" />
 		</execute>
 	</command>
 
