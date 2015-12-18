@@ -903,6 +903,7 @@
 		<execute function="AssertClick" locator1="MenuItem#THREAD" value1="Thread" />
 
 		<execute function="AssertChecked" locator1="Checkbox#MARK_AS_A_QUESTION" />
+
 		<execute function="AssertClick" locator1="Button#CANCEL" value1="Cancel" />
 	</command>
 
@@ -912,6 +913,7 @@
 		<execute function="AssertClick" locator1="MenuItem#THREAD" value1="Thread" />
 
 		<execute function="AssertNotChecked" locator1="Checkbox#MARK_AS_A_QUESTION" />
+
 		<execute function="AssertClick" locator1="Button#CANCEL" value1="Cancel" />
 	</command>
 
