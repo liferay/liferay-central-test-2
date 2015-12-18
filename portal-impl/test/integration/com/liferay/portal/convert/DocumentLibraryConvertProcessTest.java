@@ -72,7 +72,7 @@ import org.junit.Test;
  * @author Sergio González
  * @author Manuel de la Peña
  */
-public class ConvertDocumentLibraryFromFileSystemStoreToDBStoreTest {
+public class DocumentLibraryConvertProcessTest {
 
 	@ClassRule
 	@Rule
@@ -96,7 +96,7 @@ public class ConvertDocumentLibraryFromFileSystemStoreToDBStoreTest {
 		_group = GroupTestUtil.addGroup();
 
 		_convertProcess = (ConvertProcess)InstancePool.get(
-			ConvertDocumentLibrary.class.getName());
+			DocumentLibraryConvertProcess.class.getName());
 
 		_convertProcess.setParameterValues(
 			new String[] {_CLASS_NAME_DB_STORE, Boolean.TRUE.toString()});

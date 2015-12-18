@@ -27,7 +27,7 @@ import javax.sql.DataSource;
 /**
  * @author Alexander Chow
  */
-public class ConvertDatabase extends BaseConvertProcess {
+public class DatabaseConvertProcess extends BaseConvertProcess {
 
 	public void destroy() {
 		_databaseConverters.clear();
