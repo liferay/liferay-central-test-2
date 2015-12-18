@@ -156,9 +156,7 @@ public class LegacyGoogleDocsMigration {
 					legacyGoogleDocsMetadataHelper.delete();
 				}
 
-			}
-
-		);
+			});
 
 		actionableDynamicQuery.performActions();
 	}
