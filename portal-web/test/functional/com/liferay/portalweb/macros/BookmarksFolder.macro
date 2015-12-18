@@ -32,6 +32,7 @@
 	</command>
 
 	<command name="addNullSubfolderCP">
+		<var name="key_assetEntry" value="${folderName}" />
 		<var name="key_folderName" value="${folderName}" />
 
 		<execute function="AssertClick" locator1="Bookmarks#DESCRIPTIVE_ENTRY_TITLE" value1="${folderName}" />
@@ -88,8 +89,8 @@
 		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request completed successfully." />
 
 		<execute macro="BookmarksFolder#viewFolder">
-			<var name="subfolderDescription" value="${subfolderDescription}" />
-			<var name="subfolderName" value="${subfolderName}" />
+			<var name="folderDescription" value="${subfolderDescription}" />
+			<var name="folderName" value="${subfolderName}" />
 		</execute>
 
 		<execute function="AssertTextEquals" locator1="Portlet#HEADER" value1="${folderName}" />
@@ -168,8 +169,8 @@
 		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request completed successfully." />
 
 		<execute macro="BookmarksFolder#viewFolder">
-			<var name="folderDescriptionEdit" value="${folderDescriptionEdit}" />
-			<var name="folderNameEdit" value="${folderNameEdit}" />
+			<var name="folderDescription" value="${folderDescriptionEdit}" />
+			<var name="folderName" value="${folderNameEdit}" />
 		</execute>
 	</command>
 
@@ -180,6 +181,9 @@
 		<execute function="AssertClick" locator1="Bookmarks#DESCRIPTIVE_ENTRY_TITLE" value1="${folderName}" />
 
 		<execute function="AssertTextEquals" locator1="Portlet#HEADER" value1="${folderName}" />
+
+		<var name="key_assetEntry" value="${subfolderName}" />
+
 		<execute function="Click" locator1="Icon#DESCRIPTIVE_VERTICAL_ELLIPSIS" />
 		<execute function="AssertClick" locator1="MenuItem#EDIT" value1="Edit" />
 
@@ -192,8 +196,8 @@
 		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request completed successfully." />
 
 		<execute macro="BookmarksFolder#viewFolder">
-			<var name="editSubfolderDescription" value="${editSubfolderDescription}" />
-			<var name="editSubfolderName" value="${editSubfolderName}" />
+			<var name="folderDescription" value="${editSubfolderDescription}" />
+			<var name="folderName" value="${editSubfolderName}" />
 		</execute>
 	</command>
 
