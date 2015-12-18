@@ -747,9 +747,14 @@
 
 		<execute function="Pause" locator1="30000" />
 
-		<execute macro="AssetCategorization#removeTag">
-			<var name="tagName" value="tag name 1" />
-		</execute>
+		<if>
+			<condition function="IsElementPresent#isVisible" locator1="BlogsEditEntry#SETTINGS_SECTION" />
+			<then>
+				<execute macro="AssetCategorization#removeTag">
+					<var name="tagName" value="tag name 1" />
+				</execute>
+			</then>
+		</if>
 
 		<execute macro="BlogsEntry#publish" />
 
