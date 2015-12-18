@@ -28,9 +28,9 @@ public class PropsReader {
 	public static Properties read(String fileName) throws IOException {
 		try (InputStream inputStream = new FileInputStream(fileName)) {
 			Properties properties = new Properties();
-	
+
 			properties.load(inputStream);
-	
+
 			return properties;
 		}
 	}
