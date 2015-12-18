@@ -22,27 +22,27 @@ import java.util.List;
 public class ExportContext {
 
 	public ExportContext(
-		List<Long> companyIds, String outputDirName, String schema) {
+		List<Long> companyIds, String outputDirName, String schemaName) {
 
 		_companyIds = companyIds;
 		_outputDirName = outputDirName;
-		_schema = schema;
+		_schemaName = schemaName;
 	}
 
 	public List<Long> getCompanyIds() {
 		return _companyIds;
 	}
 
-	public String getOutputDirname() {
+	public String getOutputDirName() {
 		return _outputDirName;
 	}
 
-	public String getSchema() {
-		return _schema;
+	public String getSchemaName() {
+		return _schemaName;
 	}
 
 	private final List<Long> _companyIds;
 	private final String _outputDirName;
-	private final String _schema;
+	private final String _schemaName;
 
 }

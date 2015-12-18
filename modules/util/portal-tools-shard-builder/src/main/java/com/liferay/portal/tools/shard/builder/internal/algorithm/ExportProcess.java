@@ -37,9 +37,9 @@ public class ExportProcess {
 
 	public void export(ExportContext exportContext) throws IOException {
 		List<String> partitionedTableNames =
-			_dbProvider.getPartitionedTableNames(exportContext.getSchema());
+			_dbProvider.getPartitionedTableNames(exportContext.getSchemaName());
 		List<String> controlTableNames = _dbProvider.getControlTableNames(
-			exportContext.getSchema());
+			exportContext.getSchemaName());
 
 		List<Long> companyIds = exportContext.getCompanyIds();
 
@@ -55,10 +55,10 @@ public class ExportProcess {
 		throws IOException {
 
 		String outputFileName =
-			exportContext.getSchema() + "-" + companyId + ".sql";
+			exportContext.getSchemaName() + "-" + companyId + ".sql";
 
 		File outputFile = new File(
-			exportContext.getOutputDirname(), outputFileName);
+			exportContext.getOutputDirName(), outputFileName);
 
 		OutputStream outputStream = new BufferedOutputStream(
 			new FileOutputStream(outputFile));
