@@ -295,10 +295,9 @@
 		<if>
 			<isset var="folderName" />
 			<then>
-				<var name="key_folderName" value="${folderName}" />
-
-				<execute function="AssertTextEquals#assertPartialText" locator1="Bookmarks#FOLDERS_TABLE_FOLDER_NAME" value1="${folderName}" />
-				<execute function="AssertClick#assertPartialTextClickAtAndWait" locator1="Bookmarks#FOLDERS_TABLE_FOLDER_NAME" value1="${folderName}" />
+				<execute macro="Bookmark#gotoPG">
+					<var name="key_assetName" value="${folderName}" />
+				</execute>
 			</then>
 		</if>
 
