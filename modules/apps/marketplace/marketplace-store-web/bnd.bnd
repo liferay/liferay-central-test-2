@@ -1,7 +1,6 @@
 Bundle-Name: Liferay Marketplace Store Web
 Bundle-SymbolicName: com.liferay.marketplace.store.web
 Bundle-Version: 1.0.0
--include: ../../../../marketplace/marketplace/bnd.bnd
 Include-Resource:\
 	classes,\
 	META-INF/resources=src/main/resources/META-INF/resources,\
@@ -9,3 +8,4 @@ Include-Resource:\
 Liferay-Releng-Module-Group-Description:
 Liferay-Releng-Module-Group-Title: Store
 Web-ContextPath: /marketplace-store-web
+-include: ../../../../marketplace/marketplace/bnd.bnd
