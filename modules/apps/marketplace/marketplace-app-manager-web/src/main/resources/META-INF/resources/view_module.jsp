@@ -142,7 +142,7 @@ MarketplaceAppManagerUtil.addPortletBreadcrumbEntry(appDisplay, moduleGroupDispl
 			<%
 			BundleContext bundleContext = bundle.getBundleContext();
 
-			List<ServiceReference<?>> serviceReferences = Collections.EMPTY_LIST;
+			List<ServiceReference<?>> serviceReferences = Collections.<ServiceReference<?>>emptyList();
 
 			if (pluginType.equals("portlets")) {
 				Collection<ServiceReference<Portlet>> serviceReferenceCollection = bundleContext.getServiceReferences(Portlet.class, "(service.bundleid=" + bundle.getBundleId() + ")");
