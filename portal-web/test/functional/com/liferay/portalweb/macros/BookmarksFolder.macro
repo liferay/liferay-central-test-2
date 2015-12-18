@@ -69,7 +69,7 @@
 	</command>
 
 	<command name="addSubfolderCP">
-		<var name="key_folderName" value="${folderName}" />
+		<var name="key_assetName" value="${folderName}" />
 
 		<execute function="AssertClick" locator1="Bookmarks#FOLDERS_TABLE_FOLDER_NAME" value1="${folderName}" />
 
@@ -91,8 +91,6 @@
 			<var name="subfolderDescription" value="${subfolderDescription}" />
 			<var name="subfolderName" value="${subfolderName}" />
 		</execute>
-
-		<var name="key_folderName" value="${folderName}" />
 
 		<execute function="AssertTextEquals" locator1="Bookmarks#FOLDER_NAME" value1="${folderName}" />
 	</command>
@@ -117,9 +115,8 @@
 	<command name="deletePG">
 		<execute function="Click" locator1="Icon#DISPLAY_STYLE_LIST" />
 
-		<var name="key_folderName" value="${folderName}" />
-
-		<execute function="AssertTextEquals" locator1="Bookmarks#FOLDERS_TABLE_FOLDER_NAME" value1="${folderName}" />
+		<var name="key_assetEntry" value="${folderName}" />
+		<var name="key_assetName" value="${folderName}" />
 
 		<var name="key_listEntry" value="${folderName}" />
 
@@ -141,7 +138,7 @@
 	<command name="editCP">
 		<execute function="Click" locator1="Icon#DISPLAY_STYLE_LIST" />
 
-		<var name="key_listEntry" value="${folderName}" />
+		<var name="key_assetEntry" value="${folderName}" />
 
 		<execute function="Click" locator1="Icon#LIST_VERTICAL_ELLIPSIS" />
 
@@ -155,15 +152,15 @@
 		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request completed successfully." />
 
 		<execute macro="BookmarksFolder#viewFolder">
-			<var name="folderDescriptionEdit" value="${folderDescriptionEdit}" />
-			<var name="folderNameEdit" value="${folderNameEdit}" />
+			<var name="folderDescription" value="${folderDescriptionEdit}" />
+			<var name="folderName" value="${folderNameEdit}" />
 		</execute>
 	</command>
 
 	<command name="editPG">
 		<execute function="Click" locator1="Icon#DISPLAY_STYLE_LIST" />
 
-		<var name="key_listEntry" value="${folderName}" />
+		<var name="key_assetEntry" value="${folderName}" />
 
 		<execute function="Click" locator1="Icon#LIST_VERTICAL_ELLIPSIS" />
 
@@ -183,9 +180,8 @@
 	</command>
 
 	<command name="editSubfolderCP">
-		<var name="key_folderName" value="${folderName}" />
-
-		<execute function="AssertClick" locator1="Bookmarks#FOLDERS_TABLE_FOLDER_NAME" value1="${folderName}" />
+		<var name="key_assetEntry" value="${folderName}" />
+		<var name="key_assetName" value="${folderName}" />
 
 		<execute function="AssertTextEquals" locator1="Bookmarks#FOLDER_NAME" value1="${folderName}" />
 		<execute function="Click" locator1="CPBookmarksFolder#FOLDERS_TABLE_FOLDER_ACTIONS_BUTTON_GENERIC" />
@@ -208,6 +204,7 @@
 	<command name="gotoPG">
 		<execute function="Click" locator1="Icon#DISPLAY_STYLE_LIST" />
 
+		<var name="key_assetName" value="${folderName}" />
 		<var name="key_folderName" value="${folderName}" />
 
 		<execute function="AssertClick#assertPartialTextClickAtAndWait" locator1="Bookmarks#FOLDERS_TABLE_FOLDER_NAME" value1="${folderName}" />
@@ -233,21 +230,23 @@
 			</then>
 		</while>
 
-		<var name="key_folderName" value="${folderName}" />
+		<var name="key_assetName" value="${folderName}" />
 
 		<execute function="AssertClick#assertPartialTextClickAtAndWait" locator1="Bookmarks#FOLDERS_TABLE_FOLDER_NAME" value1="${folderName}" />
 
-		<var name="key_folderName" value="${subfolderName}" />
+		<var name="key_assetName" value="${subfolderName}" />
 
 		<execute function="AssertClick#assertPartialTextClickAtAndWait" locator1="Bookmarks#FOLDERS_TABLE_FOLDER_NAME" value1="${subfolderName}" />
 	</command>
 
 	<command name="mergeSubfolderToFolderCP">
-		<var name="key_folderName" value="${folderName}" />
+		<var name="key_assetName" value="${folderName}" />
 
 		<execute function="AssertClick" locator1="Bookmarks#FOLDERS_TABLE_FOLDER_NAME" value1="${folderName}" />
 
 		<execute function="AssertTextEquals" locator1="Bookmarks#FOLDER_NAME" value1="${folderName}" />
+
+		<var name="key_assetEntry" value="${subfolderName}" />
 
 		<execute function="Click" locator1="Bookmarks#FOLDERS_TABLE_FOLDER_ACTIONS_DROPDOWN_GENERIC" />
 
@@ -286,11 +285,11 @@
 
 		<execute function="Click" locator1="Icon#DISPLAY_STYLE_LIST" />
 
-		<var name="key_folderName" value="${folderName}" />
+		<var name="key_assetName" value="${folderName}" />
 
 		<execute function="AssertTextEquals" locator1="Bookmarks#FOLDERS_TABLE_FOLDER_NAME" value1="${folderName}" />
 
-		<var name="key_listEntry" value="${folderName}" />
+		<var name="key_assetEntry" value="${folderName}" />
 
 		<execute function="Click" locator1="Icon#LIST_VERTICAL_ELLIPSIS" />
 
@@ -299,7 +298,7 @@
 	</command>
 
 	<command name="subscribePG">
-		<var name="key_folderName" value="${folderName}" />
+		<var name="key_assetName" value="${folderName}" />
 
 		<execute function="AssertTextEquals#assertPartialText" locator1="Bookmarks#FOLDERS_TABLE_FOLDER_NAME" value1="${folderName}" />
 		<execute function="AssertTextEquals#assertPartialText" locator1="Bookmarks#FOLDERS_TABLE_FOLDER_NAME" value1="${folderDescription}" />
