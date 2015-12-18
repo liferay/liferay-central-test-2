@@ -344,23 +344,13 @@
 		<execute macro="RecycleBin#emptyCP" />
 	</command>
 
-	<command name="viewCP">
-		<var name="key_folderName" value="${folderName}" />
+	<command name="viewFolder">
+		<var name="key_assetName" value="${folderName}" />
 
-		<execute function="AssertTextEquals" locator1="Bookmarks#FOLDERS_DESCRIPTIVE_ENTRY_TITLE" value1="${folderName}" />
+		<execute function="AssertTextEquals" locator1="Bookmarks#DESCRIPTIVE_ENTRY_TITLE" value1="${folderName}" />
 
-		<var name="key_folderDescription" value="${folderDescription}" />
+		<var name="key_assetDescription" value="${folderDescription}" />
 
-		<execute function="AssertTextEquals" locator1="Bookmarks#FOLDERS_DESCRIPTIVE_ENTRY_DESCRIPTION" value1="${folderDescription}" />
-	</command>
-
-	<command name="viewPG">
-		<var name="key_folderName" value="${folderName}" />
-
-		<execute function="AssertTextEquals#assertPartialText" locator1="Bookmarks#FOLDERS_DESCRIPTIVE_ENTRY_TITLE" value1="${folderName}" />
-
-		<var name="key_folderDescription" value="${folderDescription}" />
-
-		<execute function="AssertTextEquals#assertPartialText" locator1="Bookmarks#FOLDERS_DESCRIPTIVE_ENTRY_DESCRIPTION" value1="${folderDescription}" />
+		<execute function="AssertTextEquals" locator1="Bookmarks#DESCRIPTIVE_ENTRY_DESCRIPTION" value1="${folderDescription}" />
 	</command>
 </definition>
