@@ -13,7 +13,9 @@
 	</command>
 
 	<command name="addNullPG">
-		<execute function="Click" locator1="MessageBoards#ADD_CATEGORY_BUTTON" />
+		<execute function="Click#makeVisibleClickAt" locator1="Portlet#ICON_PLUS_SIGN" />
+
+		<execute function="AssertClick" locator1="MenuItem#CATEGORY" value1="Category" />
 
 		<execute function="Type" locator1="TextInput#NAME" value1="${categoryNullName}" />
 		<execute function="Type" locator1="TextArea#DESCRIPTION" value1="${categoryDescription}" />
@@ -22,7 +24,9 @@
 	</command>
 
 	<command name="addPG">
-		<execute function="AssertClick" locator1="MessageBoards#ADD_CATEGORY_BUTTON" value1="Add Category" />
+		<execute function="Click#makeVisibleClickAt" locator1="Portlet#ICON_PLUS_SIGN" />
+
+		<execute function="AssertClick" locator1="MenuItem#CATEGORY" value1="Category" />
 
 		<execute function="Type" locator1="TextInput#NAME" value1="${categoryName}" />
 
