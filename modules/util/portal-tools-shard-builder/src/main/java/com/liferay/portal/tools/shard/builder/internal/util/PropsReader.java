@@ -25,14 +25,16 @@ import java.util.Properties;
  */
 public class PropsReader {
 
-	public static Properties getProperties(String path) throws IOException {
-		InputStream is = new FileInputStream(path);
+	public static Properties getProperties(String fileName)
+		throws IOException {
 
-		Properties properties = new Properties();
-
-		properties.load(is);
-
-		return properties;
+		try (InputStream inputStream = new FileInputStream(fileName)) {
+			Properties properties = new Properties();
+	
+			properties.load(inputStream);
+	
+			return properties;
+		}
 	}
 
 }
