@@ -55,9 +55,9 @@ public class UpgradeProcess_3_0_10 extends UpgradeProcess {
 	@Override
 	public void upgrade() throws Exception {
 		upgradeLogger();
-		upgradeTable();
+		upgradeSchema();
 
-		upgradeSites();
+		upgradeSyncSites();
 	}
 
 	protected void upgradeLogger() throws Exception {
@@ -122,7 +122,7 @@ public class UpgradeProcess_3_0_10 extends UpgradeProcess {
 		UpgradeUtil.copyLoggerConfiguration();
 	}
 
-	protected void upgradeSites() throws Exception {
+	protected void upgradeSyncSites() throws Exception {
 		List<SyncAccount> syncAccounts = SyncAccountService.findAll();
 
 		for (SyncAccount syncAccount : syncAccounts) {
@@ -146,7 +146,7 @@ public class UpgradeProcess_3_0_10 extends UpgradeProcess {
 		}
 	}
 
-	protected void upgradeTable() throws Exception {
+	protected void upgradeSchema() throws Exception {
 		SyncFilePersistence syncFilePersistence =
 			SyncFileService.getSyncFilePersistence();
 
