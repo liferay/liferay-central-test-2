@@ -233,14 +233,11 @@ public class JspClassResolver implements ClassResolver {
 
 					String name = zipEntry.getName();
 
-					// Long enough, otherwise don't bother to look into it.
-
 					if (name.length() <= (length + 7)) {
 						continue;
 					}
 
-					// Start with path + "/", check separately to avoid creating
-					// temp string
+					// Optimized the check to avoid creating a temp string
 
 					if (!name.startsWith(path) ||
 						(name.charAt(length) != CharPool.SLASH)) {
@@ -248,13 +245,9 @@ public class JspClassResolver implements ClassResolver {
 						continue;
 					}
 
-					// End with ".class"
-
 					if (!name.endsWith(".class")) {
 						continue;
 					}
-
-					// Middle part does not contain '/'
 
 					if (name.indexOf(CharPool.SLASH, length + 1) >= 0) {
 						continue;
