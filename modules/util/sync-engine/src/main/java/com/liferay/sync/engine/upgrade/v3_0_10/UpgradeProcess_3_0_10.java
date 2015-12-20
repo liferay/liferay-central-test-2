@@ -122,6 +122,25 @@ public class UpgradeProcess_3_0_10 extends UpgradeProcess {
 		UpgradeUtil.copyLoggerConfiguration();
 	}
 
+	protected void upgradeSchema() throws Exception {
+		SyncFilePersistence syncFilePersistence =
+			SyncFileService.getSyncFilePersistence();
+
+		syncFilePersistence.executeRaw(
+			"ALTER TABLE `SyncAccount` ADD COLUMN oAuthToken " +
+				"VARCHAR(16777216) BEFORE password;");
+		syncFilePersistence.executeRaw(
+			"ALTER TABLE `SyncAccount` ADD COLUMN oAuthTokenSecret " +
+				"VARCHAR(16777216) BEFORE password;");
+		syncFilePersistence.executeRaw(
+			"ALTER TABLE `SyncAccount` ADD COLUMN pluginVersion VARCHAR " +
+				"BEFORE pollInterval;");
+
+		syncFilePersistence.executeRaw(
+			"ALTER TABLE `SyncFile` ADD COLUMN localExtraSettings " +
+				"VARCHAR(16777216) BEFORE localSyncTime;");
+	}
+
 	protected void upgradeSyncSites() throws Exception {
 		List<SyncAccount> syncAccounts = SyncAccountService.findAll();
 
@@ -144,25 +163,6 @@ public class UpgradeProcess_3_0_10 extends UpgradeProcess {
 					SyncFile.TYPE_SYSTEM);
 			}
 		}
-	}
-
-	protected void upgradeSchema() throws Exception {
-		SyncFilePersistence syncFilePersistence =
-			SyncFileService.getSyncFilePersistence();
-
-		syncFilePersistence.executeRaw(
-			"ALTER TABLE `SyncAccount` ADD COLUMN oAuthToken " +
-				"VARCHAR(16777216) BEFORE password;");
-		syncFilePersistence.executeRaw(
-			"ALTER TABLE `SyncAccount` ADD COLUMN oAuthTokenSecret " +
-				"VARCHAR(16777216) BEFORE password;");
-		syncFilePersistence.executeRaw(
-			"ALTER TABLE `SyncAccount` ADD COLUMN pluginVersion VARCHAR " +
-				"BEFORE pollInterval;");
-
-		syncFilePersistence.executeRaw(
-			"ALTER TABLE `SyncFile` ADD COLUMN localExtraSettings " +
-				"VARCHAR(16777216) BEFORE localSyncTime;");
 	}
 
 }
