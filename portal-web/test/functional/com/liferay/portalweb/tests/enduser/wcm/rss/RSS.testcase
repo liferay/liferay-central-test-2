@@ -41,7 +41,9 @@
 				<execute macro="PortalInstances#tearDownCP" />
 			</then>
 			<else>
-				<execute macro="Page#tearDownPG" />
+				<execute macro="Page#tearDownPG">
+					<var name="site" value="Site Name" />
+				</execute>
 
 				<execute macro="Site#tearDownCP" />
 			</else>
