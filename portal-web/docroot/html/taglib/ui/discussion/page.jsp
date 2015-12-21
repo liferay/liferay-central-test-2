@@ -19,6 +19,8 @@
 <%
 String randomNamespace = StringUtil.randomId() + StringPool.UNDERLINE;
 
+boolean skipEditorLoading = ParamUtil.getBoolean(request, "skipEditorLoading");
+
 DiscussionRequestHelper discussionRequestHelper = new DiscussionRequestHelper(request);
 DiscussionTaglibHelper discussionTaglibHelper = new DiscussionTaglibHelper(request);
 
@@ -28,8 +30,6 @@ Discussion discussion = CommentManagerUtil.getDiscussion(discussionTaglibHelper.
 DiscussionComment rootDiscussionComment = (discussion == null) ? null : discussion.getRootDiscussionComment();
 
 CommentSectionDisplayContext commentSectionDisplayContext = CommentDisplayContextProviderUtil.getCommentSectionDisplayContext(request, response, discussionPermission, discussion);
-
-boolean skipEditorLoading = ParamUtil.getBoolean(request, "skipEditorLoading");
 %>
 
 <section>

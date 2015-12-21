@@ -28,6 +28,8 @@ request.setAttribute("liferay-ui:discussion:index", Integer.valueOf(index));
 
 String randomNamespace = (String)request.getAttribute("liferay-ui:discussion:randomNamespace");
 
+boolean skipEditorLoading = ParamUtil.getBoolean(request, "skipEditorLoading");
+
 DiscussionRequestHelper discussionRequestHelper = new DiscussionRequestHelper(request);
 DiscussionTaglibHelper discussionTaglibHelper = new DiscussionTaglibHelper(request);
 
@@ -36,8 +38,6 @@ DiscussionPermission discussionPermission = CommentManagerUtil.getDiscussionPerm
 CommentTreeDisplayContext commentTreeDisplayContext = CommentDisplayContextProviderUtil.getCommentTreeDisplayContext(request, response, discussionPermission, discussionComment);
 
 Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
-
-boolean skipEditorLoading = ParamUtil.getBoolean(request, "skipEditorLoading");
 %>
 
 <c:if test="<%= commentTreeDisplayContext.isDiscussionVisible() %>">
