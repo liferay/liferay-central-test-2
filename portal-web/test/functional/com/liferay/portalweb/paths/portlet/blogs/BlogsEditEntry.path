@@ -15,7 +15,7 @@
 </tr>
 <tr>
 	<td>SETTINGS_SECTION</td>
-	<td>//div[contains(@id,'BlogsPortlet_settingsSection')]</td>
+	<td>//div[contains(@id,'Blogs') and contains(@id,'_settingsSection')]</td>
 	<td></td>
 </tr>
 <tr>
