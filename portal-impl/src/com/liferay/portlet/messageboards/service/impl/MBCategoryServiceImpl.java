@@ -350,7 +350,7 @@ public class MBCategoryServiceImpl extends MBCategoryServiceBaseImpl {
 		QueryDefinition<MBCategory> queryDefinition = new QueryDefinition<>(
 			WorkflowConstants.STATUS_ANY, start, end, null);
 
-		return mbCategoryFinder.filterFindByS_G_U_P(
+		return mbCategoryFinder.filterFindC_ByS_G_U_P(
 			groupId, userId, categoryIds, queryDefinition);
 	}
 
@@ -366,7 +366,7 @@ public class MBCategoryServiceImpl extends MBCategoryServiceBaseImpl {
 		QueryDefinition<MBCategory> queryDefinition = new QueryDefinition<>(
 			WorkflowConstants.STATUS_ANY);
 
-		return mbCategoryFinder.filterCountByS_G_U_P(
+		return mbCategoryFinder.filterCountC_ByS_G_U_P(
 			groupId, userId, categoryIds, queryDefinition);
 	}
 

@@ -98,16 +98,16 @@ public class MBCategoryFinderImpl
 		long groupId, long userId, long[] parentCategoryIds,
 		QueryDefinition<MBCategory> queryDefinition) {
 
-		return doCountByS_G_U_P(
+		return doCountC_ByS_G_U_P(
 			groupId, userId, parentCategoryIds, queryDefinition, false);
 	}
 
 	@Override
-	public List<MBCategory> filterFindByS_G_U_P(
+	public List<MBCategory> filterFindC_ByS_G_U_P(
 		long groupId, long userId, long[] parentCategoryIds,
 		QueryDefinition<MBCategory> queryDefinition) {
 
-		return doFindByS_G_U_P(
+		return doFindC_ByS_G_U_P(
 			groupId, userId, parentCategoryIds, queryDefinition, true);
 	}
 
@@ -133,11 +133,11 @@ public class MBCategoryFinderImpl
 	}
 
 	@Override
-	public int filterCountByS_G_U_P(
+	public int filterCountC_ByS_G_U_P(
 		long groupId, long userId, long[] parentCategoryIds,
 		QueryDefinition<MBCategory> queryDefinition) {
 
-		return doCountByS_G_U_P(
+		return doCountC_ByS_G_U_P(
 			groupId, userId, parentCategoryIds, queryDefinition, true);
 	}
 
@@ -146,11 +146,11 @@ public class MBCategoryFinderImpl
 		long groupId, long userId, long[] parentCategoryIds,
 		QueryDefinition<MBCategory> queryDefinition) {
 
-		return doFindByS_G_U_P(
+		return doFindC_ByS_G_U_P(
 			groupId, userId, parentCategoryIds, queryDefinition, false);
 	}
 
-	protected int doCountByS_G_U_P(
+	protected int doCountC_ByS_G_U_P(
 		long groupId, long userId, long[] parentCategoryIds,
 		QueryDefinition<MBCategory> queryDefinition, boolean inlineSQLHelper) {
 
@@ -437,7 +437,7 @@ public class MBCategoryFinderImpl
 		}
 	}
 
-	protected List<MBCategory> doFindByS_G_U_P(
+	protected List<MBCategory> doFindC_ByS_G_U_P(
 		long groupId, long userId, long[] parentCategoryIds,
 		QueryDefinition<MBCategory> queryDefinition, boolean inlineSQLHelper) {
 
