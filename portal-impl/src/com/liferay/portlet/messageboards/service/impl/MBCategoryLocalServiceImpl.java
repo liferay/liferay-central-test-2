@@ -539,7 +539,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		QueryDefinition<MBCategory> queryDefinition = new QueryDefinition<>(
 			WorkflowConstants.STATUS_ANY, start, end, null);
 
-		return mbCategoryFinder.findByS_G_U_P(
+		return mbCategoryFinder.findC_ByS_G_U_P(
 			groupId, userId, null, queryDefinition);
 	}
 
@@ -548,7 +548,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		QueryDefinition<MBCategory> queryDefinition = new QueryDefinition<>(
 			WorkflowConstants.STATUS_ANY);
 
-		return mbCategoryFinder.countByS_G_U_P(
+		return mbCategoryFinder.countC_ByS_G_U_P(
 			groupId, userId, null, queryDefinition);
 	}
 
