@@ -14,9 +14,9 @@
 
 package com.liferay.portal.servlet.jsp.compiler.internal;
 
-import java.util.Collection;
+import java.net.URL;
 
-import javax.tools.JavaFileObject;
+import java.util.Collection;
 
 import org.osgi.framework.wiring.BundleWiring;
 
@@ -25,7 +25,9 @@ import org.osgi.framework.wiring.BundleWiring;
  */
 public interface ClassResolver {
 
-	public Collection<JavaFileObject> resolveClasses(
+	public URL getClassURL(BundleWiring bundleWiring, String name);
+
+	public Collection<String> resolveClasses(
 		BundleWiring bundleWiring, String path, int options);
 
 }
