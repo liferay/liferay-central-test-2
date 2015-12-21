@@ -59,14 +59,16 @@ public abstract class BaseCompanySettingsVerifyProcess extends VerifyProcess {
 			Dictionary<String, String> dictionary)
 		throws IOException, SettingsException, ValidatorException {
 
-		Settings settings = getSettingsFactory().getSettings(
+		SettingsFactory settingsFactory = getSettingsFactory();
+
+		Settings settings = settingsFactory.getSettings(
 			new CompanyServiceSettingsLocator(companyId, settingsId));
 
 		ModifiableSettings modifiableSettings =
 			settings.getModifiableSettings();
 
 		SettingsDescriptor settingsDescriptor =
-			getSettingsFactory().getSettingsDescriptor(settingsId);
+			settingsFactory.getSettingsDescriptor(settingsId);
 
 		for (String name : settingsDescriptor.getAllKeys()) {
 			String value = dictionary.get(name);
@@ -82,26 +84,26 @@ public abstract class BaseCompanySettingsVerifyProcess extends VerifyProcess {
 	}
 
 	protected void verifyProperties() throws Exception {
-		List<Company> companies = getCompanyLocalService().getCompanies(false);
+		CompanyLocalService companyLocalService = getCompanyLocalService();
+
+		List<Company> companies = companyLocalService.getCompanies(false);
 
 		for (Company company : companies) {
-			long companyId = company.getCompanyId();
-
 			Dictionary<String, String> dictionary = getPropertyValues(
-				companyId);
+				company.getCompanyId());
 
-			storeSettings(companyId, getSettingsId(), dictionary);
+			storeSettings(company.getCompanyId(), getSettingsId(), dictionary);
 
 			Set<String> keys = getLegacyPropertyKeys();
 
 			if (_log.isInfoEnabled()) {
 				_log.info(
 					"Removing preference keys " + keys + " for company " +
-						companyId);
+						company.getCompanyId());
 			}
 
-			getCompanyLocalService().removePreferences(
-				companyId, keys.toArray(new String[keys.size()]));
+			companyLocalService.removePreferences(
+				company.getCompanyId(), keys.toArray(new String[keys.size()]));
 		}
 	}
 
