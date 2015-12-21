@@ -76,23 +76,20 @@ public class OpenIdCompanySettingsVerifyProcessTest
 
 		_bundleContext = bundle.getBundleContext();
 
-		ServiceReference<SettingsFactory>
-			configurationAdminServiceReference =
-				_bundleContext.getServiceReference(SettingsFactory.class);
+		ServiceReference<SettingsFactory> configurationAdminServiceReference =
+			_bundleContext.getServiceReference(SettingsFactory.class);
 
 		_settingsFactory = _bundleContext.getService(
 			configurationAdminServiceReference);
 
-		ServiceReference<CompanyLocalService>
-			companyLocalServiceReference = _bundleContext.getServiceReference(
-				CompanyLocalService.class);
+		ServiceReference<CompanyLocalService> companyLocalServiceReference =
+			_bundleContext.getServiceReference(CompanyLocalService.class);
 
 		_companyLocalService = _bundleContext.getService(
 			companyLocalServiceReference);
 
-		ServiceReference<PrefsProps>
-			prefsPropsServiceReference = _bundleContext.getServiceReference(
-				PrefsProps.class);
+		ServiceReference<PrefsProps> prefsPropsServiceReference =
+			_bundleContext.getServiceReference(PrefsProps.class);
 
 		_prefsProps = _bundleContext.getService(prefsPropsServiceReference);
 
