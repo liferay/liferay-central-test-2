@@ -75,7 +75,8 @@ public class AssociateFacebookUserMVCRenderCommand implements MVCRenderCommand {
 			return renderUpdateAccount(renderRequest, user);
 		}
 
-		// This situation might happen if the browser back button is used
+		// This return statement may be used if the user presses the browser's
+		// back button
 
 		return "/login.jsp";
 	}
