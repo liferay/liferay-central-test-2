@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -36,8 +37,11 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.workflow.definition.link.web.portlet.constants.WorkflowDefinitionLinkPortletKeys;
 import com.liferay.workflow.definition.link.web.search.WorkflowDefinitionLinkSearchEntry;
 import com.liferay.workflow.definition.link.web.search.WorkflowDefinitionLinkSearchTerms;
+import com.liferay.workflow.definition.link.web.util.WorkflowDefinitionLinkPortletUtil;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -140,6 +144,8 @@ public class WorkflowDefinitionLinkDisplayContext {
 		}
 
 		searchContainer.setTotal(workflowDefinitionLinkSearchEntries.size());
+
+		sort(workflowDefinitionLinkSearchEntries);
 
 		return workflowDefinitionLinkSearchEntries;
 	}
@@ -406,6 +412,27 @@ public class WorkflowDefinitionLinkDisplayContext {
 		}
 
 		return workflowHandlers;
+	}
+
+	protected void sort(
+		List<WorkflowDefinitionLinkSearchEntry>
+			workflowDefinitionLinkSearchEntries) {
+
+		String orderByCol = ParamUtil.getString(
+			_workflowDefinitionLinkRequestHelper.getRequest(), "orderByCol",
+			"resource");
+
+		String orderByType = ParamUtil.getString(
+			_workflowDefinitionLinkRequestHelper.getRequest(), "orderByType",
+			"asc");
+
+		Comparator<WorkflowDefinitionLinkSearchEntry> orderByComparator =
+			WorkflowDefinitionLinkPortletUtil.
+				getWorkflowDefinitionLinkOrderByComparator(
+					orderByCol, orderByType);
+
+		Collections.sort(
+			workflowDefinitionLinkSearchEntries, orderByComparator);
 	}
 
 	private final long _groupId;
