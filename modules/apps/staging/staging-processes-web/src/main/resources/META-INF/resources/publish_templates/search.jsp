@@ -28,7 +28,6 @@ PublishConfigurationDisplayTerms displayTerms = (PublishConfigurationDisplayTerm
 	displayTerms="<%= displayTerms %>"
 	id="toggle_id_layout_publish_configuration_search"
 >
-
 	<aui:fieldset>
 		<aui:input inlineField="<%= true %>" name="<%= PublishConfigurationDisplayTerms.NAME %>" size="20" type="text" value="<%= displayTerms.getName() %>" />
 

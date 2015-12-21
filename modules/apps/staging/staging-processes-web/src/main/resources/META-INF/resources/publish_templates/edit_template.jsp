@@ -131,7 +131,6 @@ portletURL.setParameter("privateLayout", String.valueOf(privateLayout));
 PortletURL renderURL = renderResponse.createRenderURL();
 
 renderURL.setParameter("mvcRenderCommandName", "viewPublishConfigurations");
-
 renderURL.setParameter("closeRedirect", closeRedirect);
 renderURL.setParameter("groupId", String.valueOf(stagingGroupId));
 renderURL.setParameter("layoutSetBranchId", String.valueOf(layoutSetBranchId));
