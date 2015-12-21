@@ -48,9 +48,9 @@ public class DDLFormAssetRenderer extends BaseJSPAssetRenderer<DDLFormRecord> {
 		DDLFormRecord formRecord, DDLRecordVersion recordVersion) {
 
 		_formRecord = formRecord;
+		_recordVersion = recordVersion;
 
 		_record = formRecord.getDDLRecord();
-		_recordVersion = recordVersion;
 
 		DDLRecordSet recordSet = null;
 
