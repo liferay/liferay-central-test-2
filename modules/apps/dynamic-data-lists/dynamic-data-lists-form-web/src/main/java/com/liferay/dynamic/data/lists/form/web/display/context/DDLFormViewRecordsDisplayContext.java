@@ -149,7 +149,7 @@ public class DDLFormViewRecordsDisplayContext {
 	protected void createRecordSearchContainer(DDMStructure ddmStructure) {
 		List<String> headerNames = new ArrayList<>();
 
-		List<DDMFormField> ddmFormfields = getNonTransientDDMFormFields(
+		List<DDMFormField> ddmFormfields = getNontransientDDMFormFields(
 			ddmStructure.getDDMForm());
 
 		int totalColumns = _MAX_COLUMNS;
@@ -212,7 +212,7 @@ public class DDLFormViewRecordsDisplayContext {
 		updateSearchContainerResults();
 	}
 
-	protected List<DDMFormField> getNonTransientDDMFormFields(DDMForm ddmForm) {
+	protected List<DDMFormField> getNontransientDDMFormFields(DDMForm ddmForm) {
 		List<DDMFormField> ddmFormfields = new ArrayList<>();
 
 		for (DDMFormField ddmFormField : ddmForm.getDDMFormFields()) {
