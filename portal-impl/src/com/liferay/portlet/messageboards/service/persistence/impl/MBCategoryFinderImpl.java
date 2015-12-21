@@ -87,19 +87,19 @@ public class MBCategoryFinderImpl
 		MBCategoryFinder.class.getName() + ".findT_ByG_C_S";
 
 	@Override
-	public int countC_T_ByG_C(
-		long groupId, long categoryId, QueryDefinition<?> queryDefinition) {
-
-		return doCountC_T_ByG_C(groupId, categoryId, queryDefinition, false);
-	}
-
-	@Override
 	public int countC_ByS_G_U_P(
 		long groupId, long userId, long[] parentCategoryIds,
 		QueryDefinition<MBCategory> queryDefinition) {
 
 		return doCountC_ByS_G_U_P(
 			groupId, userId, parentCategoryIds, queryDefinition, false);
+	}
+
+	@Override
+	public int countC_T_ByG_C(
+		long groupId, long categoryId, QueryDefinition<?> queryDefinition) {
+
+		return doCountC_T_ByG_C(groupId, categoryId, queryDefinition, false);
 	}
 
 	@Override
@@ -126,19 +126,19 @@ public class MBCategoryFinderImpl
 	}
 
 	@Override
-	public int filterCountC_T_ByG_C(
-		long groupId, long categoryId, QueryDefinition<?> queryDefinition) {
-
-		return doCountC_T_ByG_C(groupId, categoryId, queryDefinition, true);
-	}
-
-	@Override
 	public int filterCountC_ByS_G_U_P(
 		long groupId, long userId, long[] parentCategoryIds,
 		QueryDefinition<MBCategory> queryDefinition) {
 
 		return doCountC_ByS_G_U_P(
 			groupId, userId, parentCategoryIds, queryDefinition, true);
+	}
+
+	@Override
+	public int filterCountC_T_ByG_C(
+		long groupId, long categoryId, QueryDefinition<?> queryDefinition) {
+
+		return doCountC_T_ByG_C(groupId, categoryId, queryDefinition, true);
 	}
 
 	@Override
@@ -221,118 +221,6 @@ public class MBCategoryFinderImpl
 			}
 
 			return count;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	protected List<Object> doFindC_T_ByG_C(
-		long groupId, long categoryId, QueryDefinition<?> queryDefinition,
-		boolean inlineSQLHelper) {
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringBundler sb = new StringBundler(6);
-
-			sb.append("SELECT * FROM (");
-
-			String sql = null;
-
-			if (queryDefinition.getStatus() == WorkflowConstants.STATUS_ANY) {
-				sql = CustomSQLUtil.get(FIND_T_BY_G_C);
-			}
-			else {
-				sql = CustomSQLUtil.get(FIND_T_BY_G_C_S);
-
-				sql = replaceExcludeStatus(sql, queryDefinition);
-			}
-
-			if (inlineSQLHelper) {
-				sql = InlineSQLHelperUtil.replacePermissionCheck(
-					sql, MBMessage.class.getName(), "MBThread.rootMessageId",
-					groupId);
-			}
-
-			sb.append(sql);
-			sb.append(" UNION ALL ");
-
-			if (queryDefinition.getStatus() == WorkflowConstants.STATUS_ANY) {
-				sql = CustomSQLUtil.get(FIND_C_BY_G_P);
-			}
-			else {
-				sql = CustomSQLUtil.get(FIND_C_BY_G_P_S);
-
-				sql = replaceExcludeStatus(sql, queryDefinition);
-			}
-
-			if (inlineSQLHelper) {
-				sql = InlineSQLHelperUtil.replacePermissionCheck(
-					sql, MBCategory.class.getName(), "MBCategory.categoryId",
-					groupId);
-			}
-
-			sb.append(sql);
-			sb.append(") TEMP_TABLE ORDER BY modelCategory ASC, ");
-			sb.append("priority DESC, modelId ASC");
-
-			sql = sb.toString();
-
-			sql = CustomSQLUtil.replaceOrderBy(
-				sql, queryDefinition.getOrderByComparator());
-
-			SQLQuery q = session.createSynchronizedSQLQuery(sql);
-
-			q.addScalar("modelId", Type.LONG);
-			q.addScalar("modelCategory", Type.LONG);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-			qPos.add(categoryId);
-
-			if (queryDefinition.getStatus() != WorkflowConstants.STATUS_ANY) {
-				qPos.add(queryDefinition.getStatus());
-			}
-
-			qPos.add(groupId);
-			qPos.add(categoryId);
-
-			if (queryDefinition.getStatus() != WorkflowConstants.STATUS_ANY) {
-				qPos.add(queryDefinition.getStatus());
-			}
-
-			List<Object> models = new ArrayList<>();
-
-			Iterator<Object[]> itr = (Iterator<Object[]>)QueryUtil.iterate(
-				q, getDialect(), queryDefinition.getStart(),
-				queryDefinition.getEnd());
-
-			while (itr.hasNext()) {
-				Object[] array = itr.next();
-
-				long modelId = (Long)array[0];
-				long modelCategory = (Long)array[1];
-
-				Object obj = null;
-
-				if (modelCategory == 1) {
-					obj = MBThreadUtil.findByPrimaryKey(modelId);
-				}
-				else {
-					obj = MBCategoryUtil.findByPrimaryKey(modelId);
-				}
-
-				models.add(obj);
-			}
-
-			return models;
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -520,6 +408,118 @@ public class MBCategoryFinderImpl
 				ListUtil.subList(
 					list, queryDefinition.getStart(),
 					queryDefinition.getEnd()));
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected List<Object> doFindC_T_ByG_C(
+		long groupId, long categoryId, QueryDefinition<?> queryDefinition,
+		boolean inlineSQLHelper) {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler sb = new StringBundler(6);
+
+			sb.append("SELECT * FROM (");
+
+			String sql = null;
+
+			if (queryDefinition.getStatus() == WorkflowConstants.STATUS_ANY) {
+				sql = CustomSQLUtil.get(FIND_T_BY_G_C);
+			}
+			else {
+				sql = CustomSQLUtil.get(FIND_T_BY_G_C_S);
+
+				sql = replaceExcludeStatus(sql, queryDefinition);
+			}
+
+			if (inlineSQLHelper) {
+				sql = InlineSQLHelperUtil.replacePermissionCheck(
+					sql, MBMessage.class.getName(), "MBThread.rootMessageId",
+					groupId);
+			}
+
+			sb.append(sql);
+			sb.append(" UNION ALL ");
+
+			if (queryDefinition.getStatus() == WorkflowConstants.STATUS_ANY) {
+				sql = CustomSQLUtil.get(FIND_C_BY_G_P);
+			}
+			else {
+				sql = CustomSQLUtil.get(FIND_C_BY_G_P_S);
+
+				sql = replaceExcludeStatus(sql, queryDefinition);
+			}
+
+			if (inlineSQLHelper) {
+				sql = InlineSQLHelperUtil.replacePermissionCheck(
+					sql, MBCategory.class.getName(), "MBCategory.categoryId",
+					groupId);
+			}
+
+			sb.append(sql);
+			sb.append(") TEMP_TABLE ORDER BY modelCategory ASC, ");
+			sb.append("priority DESC, modelId ASC");
+
+			sql = sb.toString();
+
+			sql = CustomSQLUtil.replaceOrderBy(
+				sql, queryDefinition.getOrderByComparator());
+
+			SQLQuery q = session.createSynchronizedSQLQuery(sql);
+
+			q.addScalar("modelId", Type.LONG);
+			q.addScalar("modelCategory", Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+			qPos.add(categoryId);
+
+			if (queryDefinition.getStatus() != WorkflowConstants.STATUS_ANY) {
+				qPos.add(queryDefinition.getStatus());
+			}
+
+			qPos.add(groupId);
+			qPos.add(categoryId);
+
+			if (queryDefinition.getStatus() != WorkflowConstants.STATUS_ANY) {
+				qPos.add(queryDefinition.getStatus());
+			}
+
+			List<Object> models = new ArrayList<>();
+
+			Iterator<Object[]> itr = (Iterator<Object[]>)QueryUtil.iterate(
+				q, getDialect(), queryDefinition.getStart(),
+				queryDefinition.getEnd());
+
+			while (itr.hasNext()) {
+				Object[] array = itr.next();
+
+				long modelId = (Long)array[0];
+				long modelCategory = (Long)array[1];
+
+				Object obj = null;
+
+				if (modelCategory == 1) {
+					obj = MBThreadUtil.findByPrimaryKey(modelId);
+				}
+				else {
+					obj = MBCategoryUtil.findByPrimaryKey(modelId);
+				}
+
+				models.add(obj);
+			}
+
+			return models;
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
