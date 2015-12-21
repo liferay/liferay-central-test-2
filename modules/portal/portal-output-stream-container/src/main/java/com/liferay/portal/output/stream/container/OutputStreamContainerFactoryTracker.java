@@ -193,8 +193,9 @@ public class OutputStreamContainerFactoryTracker {
 		_outputStreamContainerFactory = _consoleOutputStreamContainerFactory;
 	}
 
-	private final OutputStreamContainerFactory _consoleOutputStreamContainerFactory =
-		new ConsoleOutputStreamContainerFactory();
+	private final OutputStreamContainerFactory
+		_consoleOutputStreamContainerFactory =
+			new ConsoleOutputStreamContainerFactory();
 	private org.apache.felix.utils.log.Logger _logger;
 	private ServiceTrackerMap<String, OutputStreamContainerFactory>
 		_outputStreamContainerFactories;
