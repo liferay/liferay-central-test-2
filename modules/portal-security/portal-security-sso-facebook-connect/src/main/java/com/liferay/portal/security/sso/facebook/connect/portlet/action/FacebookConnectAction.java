@@ -196,7 +196,6 @@ public class FacebookConnectAction extends BaseStrutsAction {
 		portletURL.setParameter("saveLastPath", Boolean.FALSE.toString());
 		portletURL.setParameter(
 			"mvcRenderCommandName", "/login/associate_facebook_user");
-
 		portletURL.setParameter(
 			"redirect", ParamUtil.getString(request, "redirect"));
 		portletURL.setParameter("userId", String.valueOf(user.getUserId()));
