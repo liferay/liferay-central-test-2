@@ -32,10 +32,11 @@ public class WorkflowDefinitionLinkDisplayTerms extends DisplayTerms {
 	public WorkflowDefinitionLinkDisplayTerms(PortletRequest portletRequest) {
 		super(portletRequest);
 
-		workflow = StringUtil.toLowerCase(
-			ParamUtil.getString(portletRequest, WORKFLOW));
 		resource = StringUtil.toLowerCase(
 			ParamUtil.getString(portletRequest, RESOURCE));
+
+		workflow = StringUtil.toLowerCase(
+			ParamUtil.getString(portletRequest, WORKFLOW));
 	}
 
 	public String getResource() {

@@ -47,7 +47,6 @@ import java.util.List;
 import java.util.Locale;
 
 import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
 
 /**
  * @author Leonardo Barros
@@ -55,13 +54,11 @@ import javax.portlet.RenderResponse;
 public class WorkflowDefinitionLinkDisplayContext {
 
 	public WorkflowDefinitionLinkDisplayContext(
-			RenderRequest renderRequest, RenderResponse renderResponse,
+			RenderRequest renderRequest,
 			WorkflowDefinitionLinkLocalService
 				workflowDefinitionLinkLocalService)
 		throws PortalException {
 
-		_renderRequest = renderRequest;
-		_renderResponse = renderResponse;
 		_workflowDefinitionLinkLocalService =
 			workflowDefinitionLinkLocalService;
 
@@ -436,8 +433,6 @@ public class WorkflowDefinitionLinkDisplayContext {
 	}
 
 	private final long _groupId;
-	private final RenderRequest _renderRequest;
-	private final RenderResponse _renderResponse;
 	private final WorkflowDefinitionLinkLocalService
 		_workflowDefinitionLinkLocalService;
 	private final WorkflowDefinitionLinkRequestHelper
