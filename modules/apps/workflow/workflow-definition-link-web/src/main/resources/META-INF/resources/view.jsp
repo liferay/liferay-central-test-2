@@ -27,6 +27,12 @@ WorkflowDefinitionLinkSearch workflowDefinitionLinkSearch = new WorkflowDefiniti
 
 <liferay-util:include page="/search_bar.jsp" servletContext="<%= application %>" />
 
+<liferay-frontend:management-bar>
+	<liferay-frontend:management-bar-filters>
+		<liferay-util:include page="/sort_buttons.jsp" servletContext="<%= application %>" />
+	</liferay-frontend:management-bar-filters>
+</liferay-frontend:management-bar>
+
 <div class="container-fluid-1280 workflow-definition-link-container" id="<portlet:namespace />Container">
 
 	<liferay-ui:search-container
