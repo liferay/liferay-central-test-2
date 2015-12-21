@@ -24,7 +24,7 @@
 				(MBCategory.status = ?)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.messageboards.service.persistence.MBCategoryFinder.countByS_G_U_P">
+	<sql id="com.liferay.portlet.messageboards.service.persistence.MBCategoryFinder.countC_ByS_G_U_P">
 		<![CDATA[
 			SELECT
 				COUNT(DISTINCT MBCategory.categoryId) AS COUNT_VALUE
@@ -91,7 +91,7 @@
 				(MBCategory.status = ?)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.messageboards.service.persistence.MBCategoryFinder.findByS_G_U_P">
+	<sql id="com.liferay.portlet.messageboards.service.persistence.MBCategoryFinder.findC_ByS_G_U_P">
 		<![CDATA[
 			SELECT
 				DISTINCT {MBCategory.*}
