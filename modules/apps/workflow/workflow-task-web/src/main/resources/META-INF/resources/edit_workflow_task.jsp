@@ -37,7 +37,9 @@ long classPK = workflowTaskDisplayContext.getWorkflowContextEntryClassPK(workflo
 WorkflowHandler<?> workflowHandler = workflowTaskDisplayContext.getWorkflowHandler(workflowTask);
 
 AssetRenderer<?> assetRenderer = workflowHandler.getAssetRenderer(classPK);
+
 AssetRendererFactory<?> assetRendererFactory = assetRenderer.getAssetRendererFactory();
+
 AssetEntry assetEntry = assetRendererFactory.getAssetEntry(assetRendererFactory.getClassName(), assetRenderer.getClassPK());
 
 String headerTitle = workflowTaskDisplayContext.getHeaderTitle(workflowTask);
