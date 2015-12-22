@@ -35,11 +35,11 @@ public class CompanyProviderTestCallback extends BaseTestCallback<Long, Void> {
 
 	@Override
 	public Long beforeClass(Description description) throws PortalException {
-		Long previousCompanyId = CompanyThreadLocal.getCompanyId();
+		Long companyId = CompanyThreadLocal.getCompanyId();
 
 		CompanyThreadLocal.setCompanyId(TestPropsValues.getCompanyId());
 
-		return previousCompanyId;
+		return companyId;
 	}
 
 	private CompanyProviderTestCallback() {
