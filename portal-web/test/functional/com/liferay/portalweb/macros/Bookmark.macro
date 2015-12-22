@@ -304,7 +304,7 @@
 			<isset var="folderName" />
 			<then>
 				<execute macro="BookmarksFolder#gotoPG">
-					<var name="key_assetName" value="${folderName}" />
+					<var name="folderName" value="${folderName}" />
 				</execute>
 			</then>
 		</if>
