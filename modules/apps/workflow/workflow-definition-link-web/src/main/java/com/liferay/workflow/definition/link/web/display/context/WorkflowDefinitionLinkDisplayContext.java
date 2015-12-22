@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.workflow.definition.link.web.search.display.context;
+package com.liferay.workflow.definition.link.web.display.context;
 
 import com.liferay.portal.NoSuchWorkflowDefinitionLinkException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
