@@ -28,7 +28,7 @@
 		</execute>
 	</set-up>
 
-	<tear-down>
+<!-- 	<tear-down>
 		<var method="TestPropsUtil#get('test.portal.instance')" name="testPortalInstance" />
 
 		<if>
@@ -60,7 +60,7 @@
 				<execute macro="BlogsEntry#tearDownCP" />
 			</else>
 		</if>
-	</tear-down>
+	</tear-down> -->
 
 	<command name="AddAPMultiplePortlet" priority="4">
 		<execute macro="Page#gotoPG">
@@ -395,9 +395,7 @@
 		</execute>
 
 		<execute macro="AssetPublisherPortlet#configureAddSiteScopes">
-			<var name="addSite" value="true" />
-			<var name="defaultSite" value="true" />
-			<var name="siteName" value="Test Site" />
+			<var name="otherSite" value="Test Site" />
 		</execute>
 
 		<execute macro="Page#gotoPG">
