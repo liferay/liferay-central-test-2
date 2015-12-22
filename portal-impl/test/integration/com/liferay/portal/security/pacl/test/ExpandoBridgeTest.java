@@ -42,14 +42,14 @@ public class ExpandoBridgeTest {
 
 	@BeforeClass
 	public static void setUpClass() throws Exception {
-		_previousCompanyId = CompanyThreadLocal.getCompanyId();
+		_companyId = CompanyThreadLocal.getCompanyId();
 
 		CompanyThreadLocal.setCompanyId(TestPropsValues.getCompanyId());
 	}
 
 	@AfterClass
 	public static void tearDownClass() throws Exception {
-		CompanyThreadLocal.setCompanyId(_previousCompanyId);
+		CompanyThreadLocal.setCompanyId(_companyId);
 	}
 
 	@Test
@@ -136,6 +136,6 @@ public class ExpandoBridgeTest {
 		user.setExpandoBridgeAttributes(serviceContext);
 	}
 
-	private static long _previousCompanyId;
+	private static long _companyId;
 
 }
