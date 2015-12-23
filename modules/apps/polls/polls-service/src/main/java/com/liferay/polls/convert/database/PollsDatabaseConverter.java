@@ -33,10 +33,12 @@ public class PollsDatabaseConverter implements DatabaseConverter {
 
 	@Override
 	public void convert(DataSource dataSource) throws Exception {
+		Class<?> clazz = getClass();
+
 		_modelMigrator.migrate(
 			dataSource,
-			HibernateModelLoaderUtil.getModelClassesName(
-				getClass().getClassLoader(), ".*Polls.*"));
+			HibernateModelLoaderUtil.getModelClassNames(
+				clazz.getClassLoader(), ".*Polls.*"));
 	}
 
 	@Reference(unbind = "-")
