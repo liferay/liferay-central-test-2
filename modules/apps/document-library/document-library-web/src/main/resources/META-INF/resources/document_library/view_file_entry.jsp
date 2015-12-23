@@ -16,7 +16,7 @@
 
 <%@ include file="/document_library/init.jsp" %>
 
-<liferay-util:dynamic-include key="com.liferay.document.library#VIEW_FILE_ENTRY#pre" />
+<liferay-util:dynamic-include key="com.liferay.document.library.web#/document_library/view_file_entry.jsp#pre" />
 
 <%
 String tabs2 = ParamUtil.getString(request, "tabs2", "version-history");
@@ -688,4 +688,4 @@ if (addPortletBreadcrumbEntries) {
 }
 %>
 
-<liferay-util:dynamic-include key="com.liferay.document.library#VIEW_FILE_ENTRY#post" />
+<liferay-util:dynamic-include key="com.liferay.document.library.web#/document_library/view_file_entry.jsp#post" />
