@@ -346,7 +346,7 @@
 		</execute>
 
 		<execute macro="MessageboardsPortlet#configureScopePG">
-			<var name="scopeName" value="Message Boards Page 2" />
+			<var name="scopeName" value="Message Boards Page 2 (Create New)" />
 		</execute>
 
 		<execute macro="Page#gotoPG">
