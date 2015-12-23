@@ -12,9 +12,8 @@
  * details.
  */
 
-package com.liferay.portal.convert.util.impl;
+package com.liferay.portal.convert.util;
 
-import com.liferay.portal.convert.util.ModelMigrator;
 import com.liferay.portal.events.StartupHelperUtil;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBManagerUtil;
