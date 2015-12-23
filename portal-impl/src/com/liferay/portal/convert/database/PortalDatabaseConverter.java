@@ -14,7 +14,7 @@
 
 package com.liferay.portal.convert.database;
 
-import com.liferay.portal.convert.util.HibernateModelLoaderUtil;
+import com.liferay.portal.convert.util.HibernateModelUtil;
 import com.liferay.portal.convert.util.ModelMigrator;
 import com.liferay.portal.kernel.servlet.ServletContextPool;
 import com.liferay.portal.kernel.util.ClassLoaderUtil;
@@ -48,7 +48,7 @@ public class PortalDatabaseConverter implements DatabaseConverter {
 			new ArrayList<>();
 
 		modelClassesName.addAll(
-			HibernateModelLoaderUtil.getModelClassNames(
+			HibernateModelUtil.getModelClassNames(
 				ClassLoaderUtil.getPortalClassLoader(), ".*"));
 
 		for (String servletContextName : ServletContextPool.keySet()) {
@@ -58,7 +58,7 @@ public class PortalDatabaseConverter implements DatabaseConverter {
 			ClassLoader classLoader = servletContext.getClassLoader();
 
 			modelClassesName.addAll(
-				HibernateModelLoaderUtil.getModelClassNames(classLoader, ".*"));
+				HibernateModelUtil.getModelClassNames(classLoader, ".*"));
 		}
 
 		return modelClassesName;

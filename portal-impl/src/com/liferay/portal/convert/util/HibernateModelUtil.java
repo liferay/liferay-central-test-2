@@ -25,7 +25,7 @@ import java.util.List;
 /**
  * @author Cristina González
  */
-public class HibernateModelLoaderUtil {
+public class HibernateModelUtil {
 
 	public static List<Class<? extends BaseModel<?>>> getModelClassNames(
 		ClassLoader classLoader, String regex) {
@@ -72,6 +72,6 @@ public class HibernateModelLoaderUtil {
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		HibernateModelLoaderUtil.class);
+		HibernateModelUtil.class);
 
 }
