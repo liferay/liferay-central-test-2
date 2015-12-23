@@ -600,8 +600,7 @@ public class UpgradeImageGallery extends UpgradeProcess {
 		catch (SQLException e) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
-					"Unable to find max fileVersionId for document " +
-						fileEntryId,
+					"Unable to get file version for file entry " + fileEntryId,
 					e);
 			}
 		}
@@ -682,7 +681,9 @@ public class UpgradeImageGallery extends UpgradeProcess {
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
-						"Ignoring exception for image " + largeImageId, e);
+						"Ignoring exception for migrating image " +
+							largeImageId,
+						e);
 				}
 			}
 		}
