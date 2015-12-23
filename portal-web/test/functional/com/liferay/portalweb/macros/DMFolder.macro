@@ -7,7 +7,7 @@
 		<execute function="Click" locator1="Button#PLUS" />
 		<execute function="AssertClick#assertTextClickAtAndWait" locator1="MenuItem#FOLDER" value1="Folder" />
 
-		<execute function="AssertClick" locator1="MenuItem#FOLDER" value1="Folder" />
+		<execute function="Pause" locator1="1000" />
 
 		<execute function="Type" locator1="DocumentsAndMediaEditFolder#NAME_FIELD" value1="${dmFolderName}" />
 
@@ -30,7 +30,7 @@
 
 		<execute function="AssertClick#assertTextClickAtAndWait" locator1="MenuItem#FOLDER" value1="Folder" />
 
-		<execute function="AssertClick" locator1="MenuItem#FOLDER" value1="Folder" />
+		<execute function="Pause" locator1="1000" />
 
 		<execute function="Type" locator1="DocumentsAndMediaEditFolder#NAME_FIELD" value1="${dmFolderName}" />
 		<execute function="Type" locator1="DocumentsAndMediaEditFolder#DESCRIPTION_FIELD" value1="${dmFolderDescription}" />
@@ -72,6 +72,8 @@
 
 		<execute function="AssertClick#assertTextClickAtAndWait" locator1="MenuItem#ADD_FOLDER" value1="Add Folder" />
 
+		<execute function="Pause" locator1="1000" />
+
 		<execute function="Type" locator1="TextInput#NAME" value1="${mgFolderName}" />
 
 		<execute function="Type" locator1="TextArea#DESCRIPTION" value1="${mgFolderDescription}" />
@@ -91,7 +93,7 @@
 
 		<execute function="AssertClick#assertTextClickAtAndWait" locator1="MenuItem#SUBFOLDER" value1="Subfolder" />
 
-		<execute function="AssertClick" locator1="MenuItem#SUBFOLDER" value1="Subfolder" />
+		<execute function="Pause" locator1="1000" />
 
 		<execute function="Type" locator1="DocumentsAndMediaEditFolder#NAME_FIELD" value1="${dmSubFolderName}" />
 
@@ -128,7 +130,7 @@
 
 		<execute function="AssertClick#assertTextClickAtAndWait" locator1="MenuItem#SUBFOLDER" value1="Subfolder" />
 
-		<execute function="AssertClick" locator1="MenuItem#SUBFOLDER" value1="Subfolder" />
+		<execute function="Pause" locator1="1000" />
 
 		<execute function="Type" locator1="DocumentsAndMediaEditFolder#NAME_FIELD" value1="${dmSubFolderName}" />
 
@@ -164,6 +166,8 @@
 		<execute function="Click" locator1="Icon#BODY_VERTICAL_ELLIPSIS" />
 
 		<execute function="AssertClick#assertTextClickAtAndWait" locator1="MenuItem#ADD_SUBFOLDER" value1="Add Subfolder" />
+
+		<execute function="Pause" locator1="1000" />
 
 		<execute function="Type" locator1="TextInput#NAME" value1="${mgSubfolderName}" />
 
