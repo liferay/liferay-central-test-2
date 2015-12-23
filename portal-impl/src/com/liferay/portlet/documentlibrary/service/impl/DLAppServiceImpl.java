@@ -2970,6 +2970,15 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 					toRepository, fileEntry, destinationFolder.getFolderId(),
 					serviceContext);
 			}
+			else if (repositoryEntry instanceof FileShortcut) {
+				if (destinationFolder.isSupportsShortcuts()) {
+					FileShortcut fileShortcut = (FileShortcut)repositoryEntry;
+
+					toRepository.addFileShortcut(
+						getUserId(), destinationFolder.getFolderId(),
+						fileShortcut.getToFileEntryId(), serviceContext);
+				}
+			}
 			else if (repositoryEntry instanceof Folder) {
 				Folder currentFolder = (Folder)repositoryEntry;
 
@@ -2984,15 +2993,6 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 				copyFolderDependencies(
 					currentFolder, newFolder, fromRepository, toRepository,
 					serviceContext);
-			}
-			else if (repositoryEntry instanceof FileShortcut) {
-				if (destinationFolder.isSupportsShortcuts()) {
-					FileShortcut fileShortcut = (FileShortcut)repositoryEntry;
-
-					toRepository.addFileShortcut(
-						getUserId(), destinationFolder.getFolderId(),
-						fileShortcut.getToFileEntryId(), serviceContext);
-				}
 			}
 		}
 	}
