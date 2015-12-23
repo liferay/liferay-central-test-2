@@ -42,7 +42,7 @@
 			</then>
 			<else>
 				<execute macro="Page#tearDownPG">
-					<var name="site" value="Site Name" />
+					<var name="site" value="Liferay" />
 				</execute>
 
 				<execute macro="Site#tearDownCP" />
