@@ -16,7 +16,7 @@
 
 <%@ include file="/wiki/init.jsp" %>
 
-<liferay-util:dynamic-include key="com.liferay.wiki#VIEW#pre" />
+<liferay-util:dynamic-include key="com.liferay.wiki.web#/wiki/view.jsp#pre" />
 
 <%
 boolean followRedirect = ParamUtil.getBoolean(request, "followRedirect", true);
@@ -420,4 +420,4 @@ if ((wikiPage != null) && !wikiPage.getTitle().equals(wikiGroupServiceConfigurat
 }
 %>
 
-<liferay-util:dynamic-include key="com.liferay.wiki#VIEW#post" />
+<liferay-util:dynamic-include key="com.liferay.wiki.web#/wiki/view.jsp#post" />

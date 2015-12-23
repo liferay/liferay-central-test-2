@@ -16,7 +16,7 @@
 
 <%@ include file="/init.jsp" %>
 
-<liferay-util:dynamic-include key="com.liferay.asset.publisher#VIEW_CONTENT#pre" />
+<liferay-util:dynamic-include key="com.liferay.asset.publisher.web#/view_content.jsp#pre" />
 
 <%
 String returnToFullPageURL = ParamUtil.getString(request, "returnToFullPageURL");
@@ -82,4 +82,4 @@ else {
 	</c:otherwise>
 </c:choose>
 
-<liferay-util:dynamic-include key="com.liferay.asset.publisher#VIEW_CONTENT#post" />
+<liferay-util:dynamic-include key="com.liferay.asset.publisher.web#/view_content.jsp#post" />

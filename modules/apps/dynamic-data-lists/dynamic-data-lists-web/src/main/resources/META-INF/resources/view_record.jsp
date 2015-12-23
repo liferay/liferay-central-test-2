@@ -16,7 +16,7 @@
 
 <%@ include file="/init.jsp" %>
 
-<liferay-util:dynamic-include key="com.liferay.dynamic.data.lists#VIEW_RECORD#pre" />
+<liferay-util:dynamic-include key="com.liferay.dynamic.data.lists.web#/view_record.jsp#pre" />
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");
@@ -116,4 +116,4 @@ PortalUtil.addPortletBreadcrumbEntry(request, recordSet.getName(locale), portlet
 PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.format(request, "view-x", ddmStructure.getName(locale), false), currentURL);
 %>
 
-<liferay-util:dynamic-include key="com.liferay.dynamic.data.lists#VIEW_RECORD#post" />
+<liferay-util:dynamic-include key="com.liferay.dynamic.data.lists.web#/view_record.jsp#post" />
