@@ -17,8 +17,6 @@ package com.liferay.portal.convert.database;
 import com.liferay.portal.convert.DatabaseConverter;
 import com.liferay.portal.convert.util.HibernateModelLoaderUtil;
 import com.liferay.portal.convert.util.ModelMigrator;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.ServletContextPool;
 import com.liferay.portal.kernel.util.ClassLoaderUtil;
 import com.liferay.portal.model.BaseModel;
@@ -67,9 +65,6 @@ public class PortalDatabaseConverter implements DatabaseConverter {
 
 		return modelClassesName;
 	}
-
-	private static final Log _log = LogFactoryUtil.getLog(
-		PortalDatabaseConverter.class);
 
 	private ModelMigrator _modelMigrator;
 
