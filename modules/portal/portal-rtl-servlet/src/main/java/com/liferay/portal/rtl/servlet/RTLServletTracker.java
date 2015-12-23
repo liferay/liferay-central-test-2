@@ -43,7 +43,7 @@ public class RTLServletTracker {
 
 		Filter filter = bundleContext.createFilter(
 			"(&(objectClass=" + ServletContextHelper.class.getSimpleName() +
-				")(requires.rtl=true))");
+				")(rtl.required=true))");
 
 		_serviceTracker = new ServiceTracker<>(
 			bundleContext, filter, new ServiceTrackerCustomizer
