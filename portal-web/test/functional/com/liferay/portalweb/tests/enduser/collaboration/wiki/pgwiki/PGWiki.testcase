@@ -1448,7 +1448,7 @@
 			<var name="pageName" value="Wiki Test Page" />
 		</execute>
 
-		<execute macro="WikiNavigator#gotoAllPages" />
+		<execute macro="WikiNavigator#gotoAllPagesPG" />
 
 		<execute function="AssertClick" locator1="Wiki#ADD_PAGE" value1="Add Page" />
 
@@ -1466,7 +1466,7 @@
 			<var name="pageName" value="Wiki Test Page" />
 		</execute>
 
-		<execute macro="WikiNavigator#gotoAllPages" />
+		<execute macro="WikiNavigator#gotoAllPagesPG" />
 
 		<execute macro="WikiTable#gotoEntryEdit">
 			<var name="wikiPageTitle" value="Wiki Page Title" />
@@ -1482,7 +1482,7 @@
 			<var name="pageName" value="Wiki Test Page" />
 		</execute>
 
-		<execute macro="WikiNavigator#gotoDraftPages" />
+		<execute macro="WikiNavigator#gotoDraftPagesPG" />
 
 		<execute macro="WikiTable#viewEntry">
 			<var name="draftStatus" value="Draft" />
