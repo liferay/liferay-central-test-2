@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.convert;
+package com.liferay.portal.convert.documentlibrary;
 
 import com.liferay.portal.kernel.repository.model.FileEntry;
 

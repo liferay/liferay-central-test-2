@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.convert;
+package com.liferay.portal.convert.database;
 
 import javax.sql.DataSource;
 

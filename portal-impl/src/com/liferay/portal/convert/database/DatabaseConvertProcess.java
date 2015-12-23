@@ -12,10 +12,9 @@
  * details.
  */
 
-package com.liferay.portal.convert.process;
+package com.liferay.portal.convert.database;
 
 import com.liferay.portal.convert.BaseConvertProcess;
-import com.liferay.portal.convert.DatabaseConverter;
 import com.liferay.portal.kernel.dao.jdbc.DataSourceFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.MaintenanceUtil;

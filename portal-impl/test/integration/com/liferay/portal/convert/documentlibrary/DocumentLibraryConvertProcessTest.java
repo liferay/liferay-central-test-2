@@ -12,10 +12,9 @@
  * details.
  */
 
-package com.liferay.portal.convert;
+package com.liferay.portal.convert.documentlibrary;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
-import com.liferay.portal.convert.documentlibrary.DocumentLibraryConvertProcess;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
