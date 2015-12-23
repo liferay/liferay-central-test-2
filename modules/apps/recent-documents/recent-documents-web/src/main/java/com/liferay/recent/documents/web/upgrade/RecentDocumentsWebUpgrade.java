@@ -14,9 +14,9 @@
 
 package com.liferay.recent.documents.web.upgrade;
 
-import com.liferay.recent.documents.web.upgrade.v1_0_0.UpgradePortletId;
 import com.liferay.portal.kernel.module.framework.ModuleServiceLifecycle;
 import com.liferay.portal.upgrade.registry.UpgradeStepRegistrator;
+import com.liferay.recent.documents.web.upgrade.v1_0_0.UpgradePortletId;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
