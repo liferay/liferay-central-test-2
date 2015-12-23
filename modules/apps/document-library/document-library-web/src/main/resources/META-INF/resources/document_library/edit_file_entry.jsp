@@ -432,6 +432,7 @@ if (portletTitleBasedNavigation) {
 
 						<div id="<portlet:namespace />versionDetails" style="display: none">
 							<aui:input label="major-version" name="majorVersion" type="radio" value="<%= true %>" />
+
 							<aui:input checked="<%= true %>" label="minor-version" name="majorVersion" type="radio" value="<%= false %>" />
 
 							<aui:input label="change-log" model="<%= null %>" name="changeLog" type="textarea" />
