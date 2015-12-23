@@ -1429,7 +1429,7 @@ rerun your task.
 				</then>
 			</if>
 
-			<exec executable="git" outputproperty="git.branch">
+			<exec executable="git" outputproperty="liferay.releng.branch">
 				<arg value="rev-parse" />
 				<arg value="--abbrev-ref" />
 				<arg value="HEAD" />
@@ -1438,7 +1438,7 @@ rerun your task.
 			<if>
 				<or>
 					<istrue value="${ee.override}" />
-					<matches pattern="ee-.+" string="${git.branch}" />
+					<matches pattern="ee-.+" string="${liferay.releng.branch}" />
 				</or>
 				<then>
 					<var name="liferay.releng.app.title.suffix" value="\s EE" />
