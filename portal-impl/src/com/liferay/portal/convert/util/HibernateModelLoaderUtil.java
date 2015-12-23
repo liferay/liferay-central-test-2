@@ -27,12 +27,12 @@ import java.util.List;
  */
 public class HibernateModelLoaderUtil {
 
-	public static List<Class<? extends BaseModel<?>>> getModelClassesName(
+	public static List<Class<? extends BaseModel<?>>> getModelClassNames(
 		ClassLoader classLoader, String regex) {
 
 		List<String> modelNames = ModelHintsUtil.getModels();
 
-		List<Class<? extends BaseModel<?>>> implClassesNames =
+		List<Class<? extends BaseModel<?>>> implClassNames =
 			new ArrayList<>();
 
 		for (String modelName : modelNames) {
@@ -48,12 +48,12 @@ public class HibernateModelLoaderUtil {
 					classLoader, implClassName);
 
 				if (implClass != null) {
-					implClassesNames.add(implClass);
+					implClassNames.add(implClass);
 				}
 			}
 		}
 
-		return implClassesNames;
+		return implClassNames;
 	}
 
 	protected static Class<? extends BaseModel<?>> getImplClass(

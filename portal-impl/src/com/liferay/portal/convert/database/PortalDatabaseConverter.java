@@ -35,21 +35,21 @@ public class PortalDatabaseConverter implements DatabaseConverter {
 
 	@Override
 	public void convert(DataSource dataSource) throws Exception {
-		_modelMigrator.migrate(dataSource, getModelClassesName(".*"));
+		_modelMigrator.migrate(dataSource, getModelClassNames(".*"));
 	}
 
 	public void setModelMigrator(ModelMigrator modelMigrator) {
 		_modelMigrator = modelMigrator;
 	}
 
-	protected List<Class<? extends BaseModel<?>>> getModelClassesName(
+	protected List<Class<? extends BaseModel<?>>> getModelClassNames(
 		String regex) {
 
 		List<Class<? extends BaseModel<?>>> modelClassesName =
 			new ArrayList<>();
 
 		modelClassesName.addAll(
-			HibernateModelLoaderUtil.getModelClassesName(
+			HibernateModelLoaderUtil.getModelClassNames(
 				ClassLoaderUtil.getPortalClassLoader(), ".*"));
 
 		for (String servletContextName : ServletContextPool.keySet()) {
@@ -59,7 +59,7 @@ public class PortalDatabaseConverter implements DatabaseConverter {
 			ClassLoader classLoader = servletContext.getClassLoader();
 
 			modelClassesName.addAll(
-				HibernateModelLoaderUtil.getModelClassesName(
+				HibernateModelLoaderUtil.getModelClassNames(
 					classLoader, ".*"));
 		}
 
