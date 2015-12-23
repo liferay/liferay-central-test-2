@@ -72,8 +72,7 @@ public class ModelMigratorImpl implements ModelMigrator {
 					model);
 
 				MaintenanceUtil.appendStatus(
-					"Processing model " + model +
-						" (1 of " + modelTableDetails.size() + ")");
+					"Processing " + modelTableDetails.size() + " models");
 
 				migrateModel(
 					modelTableDetails, DBManagerUtil.getDB(dialect, dataSource),
