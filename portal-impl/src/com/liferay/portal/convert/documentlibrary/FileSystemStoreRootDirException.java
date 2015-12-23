@@ -12,16 +12,28 @@
  * details.
  */
 
-package com.liferay.portal.convert;
+package com.liferay.portal.convert.documentlibrary;
 
-import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.convert.ConvertException;
 
 /**
- * @author Iván Zaera
+ * @author László Csontos
  */
-public interface DLStoreConvertProcess {
+public class FileSystemStoreRootDirException extends ConvertException {
 
-	public void migrate(DLStoreConverter DLStoreConverter)
-		throws PortalException;
+	public FileSystemStoreRootDirException() {
+	}
+
+	public FileSystemStoreRootDirException(String msg) {
+		super(msg);
+	}
+
+	public FileSystemStoreRootDirException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
+
+	public FileSystemStoreRootDirException(Throwable cause) {
+		super(cause);
+	}
 
 }

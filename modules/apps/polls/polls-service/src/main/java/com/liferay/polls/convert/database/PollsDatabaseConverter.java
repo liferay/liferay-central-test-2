@@ -14,7 +14,7 @@
 
 package com.liferay.polls.convert.database;
 
-import com.liferay.portal.convert.DatabaseConverter;
+import com.liferay.portal.convert.database.DatabaseConverter;
 import com.liferay.portal.convert.util.HibernateModelLoaderUtil;
 import com.liferay.portal.convert.util.ModelMigrator;
 import com.liferay.portal.kernel.log.Log;

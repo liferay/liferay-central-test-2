@@ -32,8 +32,7 @@ public class HibernateModelLoaderUtil {
 
 		List<String> modelNames = ModelHintsUtil.getModels();
 
-		List<Class<? extends BaseModel<?>>> implClassNames =
-			new ArrayList<>();
+		List<Class<? extends BaseModel<?>>> implClassNames = new ArrayList<>();
 
 		for (String modelName : modelNames) {
 			if (!modelName.contains(".model.")) {

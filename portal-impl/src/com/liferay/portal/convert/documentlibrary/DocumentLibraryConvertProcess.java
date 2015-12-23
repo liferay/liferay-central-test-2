@@ -15,8 +15,6 @@
 package com.liferay.portal.convert.documentlibrary;
 
 import com.liferay.portal.convert.BaseConvertProcess;
-import com.liferay.portal.convert.DLStoreConvertProcess;
-import com.liferay.portal.convert.DLStoreConverter;
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.Property;

@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.wiki.convert;
+package com.liferay.wiki.convert.creole;
 
 import com.liferay.portal.convert.BaseConvertProcess;
 import com.liferay.portal.convert.ConvertProcess;
@@ -32,7 +32,7 @@ import org.osgi.service.component.annotations.Reference;
  * @author Jorge Ferrer
  */
 @Component(service = ConvertProcess.class)
-public class ConvertWikiCreole extends BaseConvertProcess {
+public class WikiCreoleConvertProcess extends BaseConvertProcess {
 
 	@Override
 	public String getDescription() {
@@ -91,7 +91,7 @@ public class ConvertWikiCreole extends BaseConvertProcess {
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		ConvertWikiCreole.class);
+		WikiCreoleConvertProcess.class);
 
 	private volatile WikiPageLocalService _wikiPageLocalService;
 
