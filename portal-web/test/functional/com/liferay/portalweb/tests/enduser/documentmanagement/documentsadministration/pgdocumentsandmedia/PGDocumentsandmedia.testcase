@@ -1075,6 +1075,8 @@
 			<var name="dmFolderName" value="DM Folder Name" />
 		</execute>
 
+		<execute function="Refresh" />
+
 		<execute macro="DMFolder#deletePG">
 			<var name="dmFolderName" value="DM Subfolder Name" />
 		</execute>
