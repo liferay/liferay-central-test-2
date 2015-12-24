@@ -1313,15 +1313,15 @@ public class LayoutImportController implements ImportController {
 				portlet.getPortletDataHandlerInstance();
 
 			if (!portletDataHandler.validateSchemaVersion(schemaVersion)) {
-				StringBundler sb = new StringBundler(7);
+				StringBundler sb = new StringBundler(6);
 
 				sb.append("Portlet's schema version ");
 				sb.append(schemaVersion);
 				sb.append(
-					" in the LAR is not valid for the deployed portlet's ");
-				sb.append(portletDataHandler.getSchemaVersion());
-				sb.append(" for portlet id ");
+					" in the LAR is not valid for the deployed portlet ");
 				sb.append(portletId);
+				sb.append(" with schema version ");
+				sb.append(portletDataHandler.getSchemaVersion());
 
 				throw new LayoutImportException(sb.toString());
 			}
