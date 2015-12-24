@@ -82,15 +82,18 @@ public class UpgradeJournal extends UpgradeProcess {
 
 		PermissionThreadLocal.setAddResource(false);
 
-		_defaultDDMStructureHelper.addDDMStructures(
-			defaultUserId, group.getGroupId(),
-			PortalUtil.getClassNameId(JournalArticle.class),
-			getClass().getClassLoader(),
-			"com/liferay/journal/upgrade/v1_0_0/dependencies" +
-				"/basic-web-content-structure.xml",
-			new ServiceContext());
-
-		PermissionThreadLocal.setAddResource(addResource);
+		try {
+			_defaultDDMStructureHelper.addDDMStructures(
+				defaultUserId, group.getGroupId(),
+				PortalUtil.getClassNameId(JournalArticle.class),
+				getClass().getClassLoader(),
+				"com/liferay/journal/upgrade/v1_0_0/dependencies" +
+					"/basic-web-content-structure.xml",
+				new ServiceContext());
+		}
+		finally {
+			PermissionThreadLocal.setAddResource(addResource);
+		}
 
 		String defaultLanguageId = UpgradeProcessUtil.getDefaultLanguageId(
 			companyId);
