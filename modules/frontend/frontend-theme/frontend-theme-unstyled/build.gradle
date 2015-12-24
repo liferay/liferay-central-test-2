@@ -106,15 +106,14 @@ buildLexicon {
 	}
 
 	include "META-INF/resources/webjars/lexicon/${lexiconVersion}/release/scss/**"
-
 	includeEmptyDirs = false
 	into lexiconDestinationDir
 }
 
 buildLexiconFonts {
-	dependsOn buildLexicon
-
 	File lexiconFontsDestinationDir = new File(themeDestinationDir, "css/aui/lexicon/fonts")
+
+	dependsOn buildLexicon
 
 	doFirst {
 		delete lexiconFontsDestinationDir
@@ -130,7 +129,6 @@ buildLexiconFonts {
 	includeEmptyDirs = false
 	into lexiconFontsDestinationDir
 }
-
 
 buildLexiconIcons {
 	File lexiconIconsDestinationDir = new File(themeDestinationDir, "images/lexicon")
