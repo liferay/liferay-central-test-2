@@ -54,9 +54,11 @@ buildAlloyUI {
 	}
 
 	eachFile new StripPathSegmentsAction(6)
+
 	from {
 		zipTree(configurations.alloyUI.singleFile)
 	}
+
 	include "META-INF/resources/webjars/alloy-ui/${alloyUIVersion}/build/**"
 	includeEmptyDirs = false
 	into alloyDestinationDir
