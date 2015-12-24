@@ -1317,8 +1317,7 @@ public class LayoutImportController implements ImportController {
 
 				sb.append("Portlet's schema version ");
 				sb.append(schemaVersion);
-				sb.append(
-					" in the LAR is not valid for the deployed portlet ");
+				sb.append(" in the LAR is not valid for the deployed portlet ");
 				sb.append(portletId);
 				sb.append(" with schema version ");
 				sb.append(portletDataHandler.getSchemaVersion());
