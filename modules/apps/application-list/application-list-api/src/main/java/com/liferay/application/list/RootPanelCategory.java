@@ -62,16 +62,14 @@ public class RootPanelCategory implements PanelCategory {
 
 	@Override
 	public boolean include(
-			HttpServletRequest request, HttpServletResponse response)
-		throws IOException {
+		HttpServletRequest request, HttpServletResponse response) {
 
 		return false;
 	}
 
 	@Override
 	public boolean includeHeader(
-			HttpServletRequest request, HttpServletResponse response)
-		throws IOException {
+		HttpServletRequest request, HttpServletResponse response) {
 
 		return false;
 	}
@@ -84,9 +82,7 @@ public class RootPanelCategory implements PanelCategory {
 	}
 
 	@Override
-	public boolean isShow(PermissionChecker permissionChecker, Group group)
-		throws PortalException {
-
+	public boolean isShow(PermissionChecker permissionChecker, Group group) {
 		return true;
 	}
 
