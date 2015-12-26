@@ -59,7 +59,7 @@ buildAlloyUI {
 		zipTree(configurations.alloyUI.singleFile)
 	}
 
-	include "META-INF/resources/webjars/alloy-ui/${alloyUIVersion}/build/**"
+	include "META-INF/resources/webjars/alloy-ui/${alloyUIVersion}/build/"
 	includeEmptyDirs = false
 	into alloyDestinationDir
 }
@@ -109,7 +109,7 @@ buildLexicon {
 		zipTree(configurations.lexicon.singleFile)
 	}
 
-	include "META-INF/resources/webjars/lexicon/${lexiconVersion}/release/js/**"
+	include "META-INF/resources/webjars/lexicon/${lexiconVersion}/release/js/"
 	includeEmptyDirs = false
 	into lexiconDestinationDir
 }

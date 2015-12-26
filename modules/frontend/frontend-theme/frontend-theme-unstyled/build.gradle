@@ -27,8 +27,8 @@ buildAlloyUITheme {
 
 	eachFile new StripPathSegmentsAction(6)
 
-	filesMatching "build/aui-*/assets/skins/sam/**", new StripPathSegmentsAction(5)
-	filesMatching "build/aui-skin-deprecated/images/**", new StripPathSegmentsAction(3)
+	filesMatching "build/aui-*/assets/skins/sam/", new StripPathSegmentsAction(5)
+	filesMatching "build/aui-skin-deprecated/images/", new StripPathSegmentsAction(3)
 
 	from {
 		zipTree(configurations.alloyUI.singleFile)
@@ -37,7 +37,7 @@ buildAlloyUITheme {
 	include "META-INF/resources/webjars/alloy-ui/${alloyUIVersion}/build/aui-*/assets/skins/sam/**.gif"
 	include "META-INF/resources/webjars/alloy-ui/${alloyUIVersion}/build/aui-*/assets/skins/sam/**.jpg"
 	include "META-INF/resources/webjars/alloy-ui/${alloyUIVersion}/build/aui-*/assets/skins/sam/**.png"
-	include "META-INF/resources/webjars/alloy-ui/${alloyUIVersion}/build/aui-skin-deprecated/images/**"
+	include "META-INF/resources/webjars/alloy-ui/${alloyUIVersion}/build/aui-skin-deprecated/images/"
 
 	includeEmptyDirs = false
 	into alloyThemeDestinationDir
@@ -101,7 +101,7 @@ buildLexicon {
 		zipTree(configurations.lexicon.singleFile)
 	}
 
-	include "META-INF/resources/webjars/lexicon/${lexiconVersion}/release/scss/**"
+	include "META-INF/resources/webjars/lexicon/${lexiconVersion}/release/scss/"
 	includeEmptyDirs = false
 	into lexiconDestinationDir
 }
@@ -121,7 +121,7 @@ buildLexiconFonts {
 		zipTree(configurations.lexicon.singleFile)
 	}
 
-	include "META-INF/resources/webjars/lexicon/${lexiconVersion}/release/fonts/**"
+	include "META-INF/resources/webjars/lexicon/${lexiconVersion}/release/fonts/"
 	includeEmptyDirs = false
 	into lexiconFontsDestinationDir
 }
@@ -139,7 +139,7 @@ buildLexiconIcons {
 		zipTree(configurations.lexicon.singleFile)
 	}
 
-	include "META-INF/resources/webjars/lexicon/${lexiconVersion}/release/images/icons/**"
+	include "META-INF/resources/webjars/lexicon/${lexiconVersion}/release/images/icons/"
 	includeEmptyDirs = false
 	into lexiconIconsDestinationDir
 }
