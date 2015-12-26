@@ -28,7 +28,7 @@ buildCKEditor {
 
 	from(zipTree(ckEditorZipFile)) {
 		eachFile new StripPathSegmentsAction(1)
-		include "ckeditor/**"
+		include "ckeditor/"
 	}
 
 	from new File(editorSrcDir, "_diffs")
