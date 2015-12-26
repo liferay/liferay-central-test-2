@@ -217,6 +217,7 @@ public class DDMFormRendererImpl implements DDMFormRenderer {
 		}
 
 		template.put("containerId", containerId);
+
 		template.put(
 			"definition", DDMFormJSONSerializerUtil.serialize(ddmForm));
 
