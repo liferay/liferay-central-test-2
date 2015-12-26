@@ -187,7 +187,7 @@ public class JspCompiler extends Jsr199JavaCompiler {
 			StringBundler sb = new StringBundler(
 				_bundleWiringPackageNames.size() * 4 + 6);
 
-			sb.append("Jsp compiler for bundle ");
+			sb.append("JSP compiler for bundle ");
 			sb.append(bundle.getSymbolicName());
 			sb.append(StringPool.DASH);
 			sb.append(bundle.getVersion());
