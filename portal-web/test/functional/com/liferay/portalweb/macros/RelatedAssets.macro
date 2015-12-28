@@ -29,7 +29,9 @@
 	</command>
 
 	<command name="gotoBookmarksSelectionPG">
-		<execute function="AssertClick" locator1="NavListItem#ADD_BOOKMARK" value1="Add Bookmark" />
+		<execute function="Click#makeVisibleClickAt" locator1="Portlet#ICON_PLUS_SIGN" />
+
+		<execute function="AssertClick" locator1="MenuItem#BOOKMARK" value1="Bookmark" />
 
 		<execute macro="Panel#expandPanel">
 			<var name="panelHeading" value="Related Assets" />
