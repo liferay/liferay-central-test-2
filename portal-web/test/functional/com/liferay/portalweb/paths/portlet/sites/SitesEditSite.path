@@ -131,6 +131,8 @@
 	<td></td>
 </tr>
 <tr>
+	<td>MENU_ADVANCED_TAB</td>
+	<td>//li[contains(@id,'SiteSettingsPortlet')]/a[contains(.,'Advanced')]</td>
 	<td></td>
 </tr>
 <tr>
