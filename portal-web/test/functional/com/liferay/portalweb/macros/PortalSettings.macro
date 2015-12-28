@@ -18,6 +18,9 @@
 				<execute function="AssertClick" locator1="Button#SAVE" value1="Save" />
 
 				<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request completed successfully." />
+				<execute macro="Panel#expandPanel">
+					<var name="panelHeading" value="Content Sharing" />
+				</execute>
 
 				<execute function="AssertChecked" locator1="PortalSettingsContentSharing#CONTENT_SHARING_CHECKBOX" />
 			</then>
@@ -29,6 +32,9 @@
 					<execute function="AssertClick" locator1="Button#SAVE" value1="Save" />
 
 					<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request completed successfully." />
+					<execute macro="Panel#expandPanel">
+						<var name="panelHeading" value="Content Sharing" />
+					</execute>
 
 					<execute function="AssertNotChecked" locator1="PortalSettingsContentSharing#CONTENT_SHARING_CHECKBOX" />
 				</then>
@@ -49,6 +55,9 @@
 				<execute function="AssertClick" locator1="Button#SAVE" value1="Save" />
 
 				<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request completed successfully." />
+				<execute macro="Panel#expandPanel">
+					<var name="panelHeading" value="Content Sharing" />
+				</execute>
 
 				<execute function="AssertSelectedLabel" locator1="PortalSettingsContentSharing#CONTENT_SHARING_SELECTOR" value1="Enabled by Default" />
 			</then>
@@ -60,6 +69,9 @@
 					<execute function="AssertClick" locator1="Button#SAVE" value1="Save" />
 
 					<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request completed successfully." />
+					<execute macro="Panel#expandPanel">
+						<var name="panelHeading" value="Content Sharing" />
+					</execute>
 
 					<execute function="AssertSelectedLabel" locator1="PortalSettingsContentSharing#CONTENT_SHARING_SELECTOR" value1="Disabled by Default" />
 				</then>
@@ -72,6 +84,9 @@
 					<execute function="AssertClick" locator1="Button#SAVE" value1="Save" />
 
 					<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request completed successfully." />
+					<execute macro="Panel#expandPanel">
+						<var name="panelHeading" value="Content Sharing" />
+					</execute>
 
 					<execute function="AssertSelectedLabel" locator1="PortalSettingsContentSharing#CONTENT_SHARING_SELECTOR" value1="Disabled" />
 				</then>
@@ -221,6 +236,9 @@
 		<execute function="AssertClick" locator1="Button#SAVE" value1="Save" />
 
 		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request completed successfully." />
+		<execute macro="Panel#expandPanel">
+			<var name="panelHeading" value="Users" />
+		</execute>
 
 		<execute function="AssertClick" locator1="NavTab#DEFAULT_USER_ASSOCIATIONS" value1="Default User Associations" />
 
@@ -241,6 +259,9 @@
 		<execute function="AssertClick" locator1="Button#SAVE" value1="Save" />
 
 		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request completed successfully." />
+		<execute macro="Panel#expandPanel">
+			<var name="panelHeading" value="Users" />
+		</execute>
 
 		<execute function="AssertClick" locator1="NavTab#DEFAULT_USER_ASSOCIATIONS" value1="Default User Associations" />
 
@@ -261,6 +282,9 @@
 		<execute function="AssertClick" locator1="Button#SAVE" value1="Save" />
 
 		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request completed successfully." />
+		<execute macro="Panel#expandPanel">
+			<var name="panelHeading" value="Users" />
+		</execute>
 
 		<execute function="AssertClick" locator1="NavTab#DEFAULT_USER_ASSOCIATIONS" value1="Default User Associations" />
 
@@ -280,6 +304,9 @@
 		<execute function="AssertClick" locator1="Button#SAVE" value1="Save" />
 
 		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request completed successfully." />
+		<execute macro="Panel#expandPanel">
+			<var name="panelHeading" value="Users" />
+		</execute>
 
 		<execute function="AssertClick" locator1="NavTab#DEFAULT_USER_ASSOCIATIONS" value1="Default User Associations" />
 
@@ -359,6 +386,9 @@
 		<execute function="AssertClick" locator1="Button#SAVE" value1="Save" />
 
 		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request completed successfully." />
+		<execute macro="Panel#expandPanel">
+			<var name="panelHeading" value="Users" />
+		</execute>
 
 		<execute function="AssertClick" locator1="NavTab#RESERVED_CREDENTIALS" value1="Reserved Credentials" />
 
@@ -379,6 +409,9 @@
 		<execute function="AssertClick" locator1="Button#SAVE" value1="Save" />
 
 		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request completed successfully." />
+		<execute macro="Panel#expandPanel">
+			<var name="panelHeading" value="Users" />
+		</execute>
 
 		<execute function="AssertClick" locator1="NavTab#RESERVED_CREDENTIALS" value1="Reserved Credentials" />
 
