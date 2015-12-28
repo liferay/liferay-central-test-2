@@ -1493,7 +1493,6 @@
 	</command>
 
 	<command name="viewRelatedAssetsPGViaWCD">
-		<execute function="AssertElementPresent" locator1="Relatedassets#ASSET_TITLE_IMAGE_1" />
 		<execute function="AssertTextEquals" locator1="Relatedassets#ASSET_TITLE_1" value1="${assetTitle}" />
 	</command>
 
