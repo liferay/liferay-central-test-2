@@ -512,21 +512,21 @@
 		<var name="key_wikiNodeName" value="${wikiNodeName}" />
 
 		<execute function="AssertClick" locator1="Wiki#LINK_DETAILS" value1="Details" />
+
 		<execute function="AssertClick" locator1="Wiki#PAGE_TABS_HISTORY" value1="History" />
+
+		<execute function="AssertClick" locator1="Wiki#HISTORY_VERSIONS_TAB" value1="Versions" />
 
 		<var name="key_wikiPageVersionNew" value="${wikiPageVersionNew}" />
 
-		<execute function="AssertClick" locator1="Wiki#HISTORY_ACTIVITIES_TABLE_COMPARE_TO" value1="Compare to..." />
-
-		<execute function="SelectFrame" locator1="PGWikiWikipageHistorySelectversion#SELECT_VERSION_IFRAME" />
-		<execute function="AssertTextEquals" locator1="PGWikiWikipageHistorySelectversion#SELECT_VERSION_VERSION_NEW" value1="${wikiPageVersionNew}" />
-		<execute function="AssertElementPresent" locator1="PGWikiWikipageHistorySelectversion#SELECT_VERSION_DATE_NEW" />
+		<execute function="Check" locator1="Wiki#SELECT_VERSION_VERSION_NEW_CHECKBOX" value1="${wikiPageVersionNew}" />
 
 		<var name="key_wikiPageVersionOld" value="${wikiPageVersionOld}" />
 
-		<execute function="AssertTextEquals" locator1="PGWikiWikipageHistorySelectversion#SELECT_VERSION_VERSION_OLD" value1="${wikiPageVersionOld}" />
-		<execute function="AssertElementPresent" locator1="PGWikiWikipageHistorySelectversion#SELECT_VERSION_DATE_OLD" />
-		<execute function="AssertClick" locator1="PGWikiWikipageHistorySelectversion#SELECT_VERSION_CHOOSE_BUTTON_OLD" value1="Choose" />
+		<execute function="Check" locator1="Wiki#SELECT_VERSION_VERSION_OLD_CHECKBOX" value1="${wikiPageVersionOld}" />
+
+		<execute function="AssertClick" locator1="Button#COMPARE_VERSIONS" value1="Compare Versions" />
+
 		<execute function="SelectFrame" value1="relative=top" />
 
 		<if>
