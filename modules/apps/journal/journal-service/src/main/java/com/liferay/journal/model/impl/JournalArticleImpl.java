@@ -153,11 +153,9 @@ public class JournalArticleImpl extends JournalArticleBaseImpl {
 
 	@Override
 	public String[] getAvailableLanguageIds() {
-		String[] availableLanguageIdsArray = super.getAvailableLanguageIds();
-
 		Set<String> availableLanguageIds = new TreeSet<>();
 
-		for (String availableLanguageId : availableLanguageIdsArray) {
+		for (String availableLanguageId : super.getAvailableLanguageIds()) {
 			availableLanguageIds.add(availableLanguageId);
 		}
 
