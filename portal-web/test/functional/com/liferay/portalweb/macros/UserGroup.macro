@@ -268,12 +268,14 @@
 
 	<command name="removeMemberCP">
 		<execute function="Type" locator1="TextInput#SEARCH" value1="${userGroupName}" />
+
 		<execute function="Click" locator1="Button#SUBMIT" />
 
 		<var name="key_userGroupName" value="${userGroupName}" />
 
 		<execute function="AssertTextEquals" locator1="UserGroups#USER_GROUP_TABLE_NAME" value1="${userGroupName}" />
 		<execute function="Click" locator1="Icon#BODY_VERTICAL_ELLIPSIS" />
+
 		<execute function="AssertClick" locator1="MenuItem#ASSIGN_MEMBERS" value1="Assign Members" />
 
 		<var name="key_userScreenName" value="${userScreenName}" />
@@ -421,9 +423,13 @@
 		<var name="key_userGroupName" value="${userGroupName}" />
 
 		<execute function="Type" locator1="TextInput#SEARCH" value1="${userGroupName}" />
+
 		<execute function="Click" locator1="Button#SUBMIT" />
+
 		<execute function="AssertTextEquals" locator1="UserGroups#USER_GROUP_TABLE_NAME" value1="${userGroupName}" />
+
 		<execute function="AssertClick" locator1="UserGroups#USER_GROUP_TABLE_NAME_LINK" value1="${userGroupName}" />
+
 		<execute function="AssertTextNotPresent" value1="${userFirstName}" />
 	</command>
 </definition>
