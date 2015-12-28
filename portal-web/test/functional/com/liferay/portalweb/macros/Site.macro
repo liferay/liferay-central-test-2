@@ -596,7 +596,11 @@
 	</command>
 
 	<command name="editGoogleAnalyticsIDCP">
-		<execute function="AssertClick" locator1="SitesEditSite#MENU_ADVANCED_ANALYTICS" value1="Analytics" />
+		<execute function="AssertClick" locator1="SitesEditSite#MENU_ADVANCED_TAB" value1="Advanced" />
+
+		<execute macro="Panel#expandPanel">
+			<var name="panelHeading" value="Analytics" />
+		</execute>
 
 		<execute function="Type" locator1="TextInput#GOOGLE_ANALYTICS_ID" value1="${googleAnalyticsID}" />
 
