@@ -80,8 +80,8 @@
 								<div class="panel-heading" id="<portlet:namespace />addContentHeading" role="tab">
 									<div class="panel-title">
 										<div aria-controls="#<portlet:namespace />addContentCollapse" aria-expanded="<%= selectedTab.equals("content") %>" class="panel-toggler collapse-icon <%= selectedTab.equals("content") ? StringPool.BLANK : "collapsed" %>" class="collapsed" data-parent="#<portlet:namespace />Accordion" data-toggle="collapse" href="#<portlet:namespace />addContentCollapse" role="button">
-										<span><liferay-ui:message key="content" /></span>
-									</div>
+											<span><liferay-ui:message key="content" /></span>
+										</div>
 									</div>
 								</div>
 
