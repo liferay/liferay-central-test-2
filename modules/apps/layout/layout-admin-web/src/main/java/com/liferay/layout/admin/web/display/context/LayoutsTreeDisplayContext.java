@@ -137,13 +137,6 @@ public class LayoutsTreeDisplayContext {
 		return editPublicLayoutURL;
 	}
 
-	public String getLayoutRootNodeName(boolean privateLayout) {
-		Group liveGroup = getLiveGroup();
-
-		return liveGroup.getLayoutRootNodeName(
-			privateLayout, _themeDisplay.getLocale());
-	}
-
 	public String getLayoutSetBranchCssClass(LayoutSetBranch layoutSetBranch)
 		throws PortalException {
 
@@ -206,6 +199,33 @@ public class LayoutsTreeDisplayContext {
 		data.put("navigation", Boolean.TRUE.toString());
 
 		return data;
+	}
+
+	public String getLayoutSetName(boolean privateLayout) {
+		Group liveGroup = getLiveGroup();
+
+		return liveGroup.getLayoutRootNodeName(
+			privateLayout, _themeDisplay.getLocale());
+	}
+
+	public String getPrivateLayoutsURL() {
+		Group selGroup = getSelGroup();
+
+		if (!selGroup.hasPrivateLayouts()) {
+			return null;
+		}
+
+		return selGroup.getDisplayURL(_themeDisplay, true);
+	}
+
+	public String getPublicLayoutsURL() {
+		Group selGroup = getSelGroup();
+
+		if (!selGroup.hasPublicLayouts()) {
+			return null;
+		}
+
+		return selGroup.getDisplayURL(_themeDisplay, false);
 	}
 
 	public Group getSelGroup() {
@@ -276,6 +296,12 @@ public class LayoutsTreeDisplayContext {
 		}
 	}
 
+	public boolean isShowEditLayoutSetButton() throws PortalException {
+		return GroupPermissionUtil.contains(
+			_themeDisplay.getPermissionChecker(), getSelGroup(),
+			ActionKeys.MANAGE_LAYOUTS);
+	}
+
 	public boolean isShowLayoutSetBranchesSelector() {
 		Group stagingGroup = getStagingGroup();
 
@@ -288,6 +314,16 @@ public class LayoutsTreeDisplayContext {
 		List<LayoutSetBranch> layoutSetBranches = getLayoutSetBranches();
 
 		if (layoutSetBranches.size() < 2) {
+			return false;
+		}
+
+		return true;
+	}
+
+	public boolean isShowLayoutTabs() {
+		Group selGroup = getSelGroup();
+
+		if (selGroup.isLayoutSetPrototype() || selGroup.isLayoutPrototype()) {
 			return false;
 		}
 
