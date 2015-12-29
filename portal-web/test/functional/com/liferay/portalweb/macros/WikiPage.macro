@@ -107,7 +107,7 @@
 	</command>
 
 	<command name="addCP">
-		<execute function="AssertClick" locator1="Wiki#ADD_PAGE" value1="Add Page" />
+		<execute function="Click" locator1="Button#PLUS" />
 
 		<var name="key_wikiPageTitle" value="${wikiPageTitle}" />
 
