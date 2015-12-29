@@ -193,7 +193,7 @@
 
 		<execute function="SelectFrame" locator1="IFrame#CONFIGURATION" />
 
-		<execute function="Select" locator1="Select#DISPLAY_TEMPLATE" value1="Relative with Breadcrumb" />
+		<execute function="Select" locator1="Select#DISPLAY_TEMPLATE" value1="Bar minimally styled" />
 		<execute function="AssertClick" locator1="Button#SAVE" value1="Save" />
 		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="You have successfully updated the setup." />
 		<execute function="SelectFrame" value1="relative=top" />
@@ -202,7 +202,7 @@
 			<var name="pageName" value="Navigation Display Test Page" />
 		</execute>
 
-		<execute function="AssertTextEquals" locator1="Navigation#BREADCRUMB_ENTRY" value1="NAVIGATION DISPLAY TEST PAGE" />
+		<execute function="AssertTextEquals" locator1="Navigation#BREADCRUMB_ENTRY" value1="Navigation Display Test Page" />
 	</command>
 
 	<command name="ViewNoAddPagePermissionsPG" priority="4">
