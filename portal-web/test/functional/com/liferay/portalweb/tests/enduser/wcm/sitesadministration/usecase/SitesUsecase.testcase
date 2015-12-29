@@ -84,8 +84,8 @@
 			<var name="sitePageURL" value="http://localhost:8080/es/web/site-name/home" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelSites">
-			<var name="portlet" value="Sites" />
+		<execute macro="Navigator#openSiteURL">
+			<var name="siteName" value="Site Name" />
 		</execute>
 
 		<execute macro="SitePage#addChildCP">
