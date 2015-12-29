@@ -280,7 +280,7 @@
 
 		<var name="key_userScreenName" value="${userScreenName}" />
 
-		<execute functioncd="Check" locator1="UserGroupsAssignUsers#USER_TABLE_CHECKBOX" />
+		<execute function="Check" locator1="UserGroupsAssignUsers#USER_TABLE_CHECKBOX" />
 
 		<execute function="Click" locator1="Toolbar#MANAGEMENT_BAR_TRASH_ICON_BUTTON" />
 
