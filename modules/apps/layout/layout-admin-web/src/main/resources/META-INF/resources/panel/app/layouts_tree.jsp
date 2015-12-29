@@ -54,7 +54,9 @@ LayoutsTreeDisplayContext layoutsTreeDisplayContext = new LayoutsTreeDisplayCont
 <liferay-util:buffer var="linkTemplate">
 	<a class="{cssClass}" data-plid="{plid}" data-url="{url}" data-uuid="{uuid}" href="{regularURL}" id="{id}" title="{label}">{label}</a>
 
-	<a class="layout-tree-edit" data-plid="{plid}" data-url="{url}" data-uuid="{uuid}" href="{layoutURL}" id="{id}" title="<liferay-ui:message arguments="{label}" key="edit-x" />"><aui:icon image="cog" markupView="lexicon" /></a>
+	<a class="layout-tree-add" data-plid="{plid}" data-url="{url}" data-uuid="{uuid}" href="{addURL}" id="{id}" title="<liferay-ui:message arguments="{label}" key="add-child-page" />"><aui:icon image="plus" markupView="lexicon" /></a>
+
+	<a class="layout-tree-edit" data-plid="{plid}" data-url="{url}" data-uuid="{uuid}" href="{editURL}" id="{id}" title="<liferay-ui:message arguments="{label}" key="edit-x" />"><aui:icon image="cog" markupView="lexicon" /></a>
 </liferay-util:buffer>
 
 <c:if test="<%= layoutsTreeDisplayContext.isShowLayoutTabs() %>">
@@ -62,6 +64,10 @@ LayoutsTreeDisplayContext layoutsTreeDisplayContext = new LayoutsTreeDisplayCont
 		<c:if test="<%= layoutsTreeDisplayContext.isShowPublicLayoutsTree() %>">
 			<span class="layout-set-tab <%= layoutsTreeDisplayContext.isPrivateLayout() ? StringPool.BLANK : "selected-layout-set" %>">
 				<aui:a cssClass="layout-set-link" href="<%= layoutsTreeDisplayContext.getPublicLayoutsURL() %>" label="<%= layoutsTreeDisplayContext.getLayoutSetName(false) %>" />
+
+				<c:if test="<%= layoutsTreeDisplayContext.isShowAddRootLayoutButton() %>">
+					<a class="layout-set-tree-add" href="<%= layoutsTreeDisplayContext.getAddLayoutURL(false, LayoutConstants.DEFAULT_PLID) %>" title="<liferay-ui:message key="add-page" />"><aui:icon image="plus" markupView="lexicon" /></a>
+				</c:if>
 
 				<c:if test="<%= layoutsTreeDisplayContext.isShowEditLayoutSetButton() %>">
 					<a class="layout-set-tree-edit" href="<%= layoutsTreeDisplayContext.getEditLayoutURL(false) %>" title="<liferay-ui:message arguments="<%= layoutsTreeDisplayContext.getLayoutSetName(false) %>" key="edit-x" />"><aui:icon image="cog" markupView="lexicon" /></a>
@@ -71,6 +77,10 @@ LayoutsTreeDisplayContext layoutsTreeDisplayContext = new LayoutsTreeDisplayCont
 
 		<span class="layout-set-tab <%= layoutsTreeDisplayContext.isPrivateLayout() ? "selected-layout-set" : StringPool.BLANK %>">
 			<aui:a cssClass="layout-set-link" href="<%= layoutsTreeDisplayContext.getPrivateLayoutsURL() %>" label="<%= layoutsTreeDisplayContext.getLayoutSetName(true) %>" />
+
+			<c:if test="<%= layoutsTreeDisplayContext.isShowAddRootLayoutButton() %>">
+				<a class="layout-set-tree-add" href="<%= layoutsTreeDisplayContext.getAddLayoutURL(true, LayoutConstants.DEFAULT_PLID) %>" title="<liferay-ui:message key="add-page" />"><aui:icon image="plus" markupView="lexicon" /></a>
+			</c:if>
 
 			<c:if test="<%= layoutsTreeDisplayContext.isShowEditLayoutSetButton() %>">
 				<a class="layout-set-tree-edit" href="<%= layoutsTreeDisplayContext.getEditLayoutURL(true) %>" title="<liferay-ui:message arguments="<%= layoutsTreeDisplayContext.getLayoutSetName(true) %>" key="edit-x" />"><aui:icon image="cog" markupView="lexicon" /></a>
@@ -89,32 +99,3 @@ LayoutsTreeDisplayContext layoutsTreeDisplayContext = new LayoutsTreeDisplayCont
 	selPlid="<%= layoutsTreeDisplayContext.getCurSelPlid() %>"
 	treeId="layoutsTree"
 />
-
-<c:if test="<%= layoutsTreeDisplayContext.isShowAddLayoutButton() %>">
-	<aui:button-row>
-		<aui:button cssClass="btn-block btn-primary" data="<%= layoutsTreeDisplayContext.getAddLayoutURLData() %>" href="<%= String.valueOf(layoutsTreeDisplayContext.getAddLayoutURL()) %>" name="addButton" value="add-page" />
-	</aui:button-row>
-</c:if>
-
-<aui:script use="aui-base">
-	var addButton = A.one('#<portlet:namespace/>addButton');
-
-	var onSelectedNode = function(event) {
-		var pageNode = event.selectedNode.get('contentBox');
-
-		var link = pageNode.one('a');
-
-		var url = A.Lang.sub(
-			addButton.attr('data-url'),
-			{
-				privateLayout: link.attr('data-privateLayout'),
-				selPlid: link.attr('data-plid')
-			}
-		);
-
-		addButton.attr('href', url);
-	};
-
-	Liferay.on('<portlet:namespace/>privateLayoutsTree:selectedNode', onSelectedNode);
-	Liferay.on('<portlet:namespace/>publicLayoutsTree:selectedNode', onSelectedNode);
-</aui:script>
