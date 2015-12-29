@@ -79,30 +79,15 @@ LayoutsTreeDisplayContext layoutsTreeDisplayContext = new LayoutsTreeDisplayCont
 	</div>
 </c:if>
 
-<%
-Group selGroup = layoutsTreeDisplayContext.getSelGroup();
-%>
-
-<c:if test="<%= layoutsTreeDisplayContext.isShowPublicLayoutsTree() %>">
-	<liferay-ui:layouts-tree
-		groupId="<%= selGroup.getGroupId() %>"
-		linkTemplate="<%= linkTemplate %>"
-		portletURL="<%= layoutsTreeDisplayContext.getEditLayoutURL(false) %>"
-		privateLayout="<%= false %>"
-		rootNodeName="<%= layoutsTreeDisplayContext.getLayoutRootNodeName(false) %>"
-		selPlid="<%= layoutsTreeDisplayContext.isPrivateLayout() ? null : layoutsTreeDisplayContext.getCurSelPlid() %>"
-		treeId="publicLayoutsTree"
-	/>
-</c:if>
-
 <liferay-ui:layouts-tree
-	groupId="<%= selGroup.getGroupId() %>"
+	expandFirstNode="<%= true %>"
+	groupId="<%= layoutsTreeDisplayContext.getSelGroupId() %>"
 	linkTemplate="<%= linkTemplate %>"
-	portletURL="<%= layoutsTreeDisplayContext.getEditLayoutURL(true) %>"
-	privateLayout="<%= true %>"
-	rootNodeName="<%= layoutsTreeDisplayContext.getLayoutRootNodeName(true) %>"
-	selPlid="<%= layoutsTreeDisplayContext.isPrivateLayout() ? layoutsTreeDisplayContext.getCurSelPlid() : null %>"
-	treeId="privateLayoutsTree"
+	portletURL="<%= layoutsTreeDisplayContext.getEditLayoutURL(false) %>"
+	privateLayout="<%= layoutsTreeDisplayContext.isPrivateLayout() %>"
+	rootNodeName="<%= StringPool.BLANK %>"
+	selPlid="<%= layoutsTreeDisplayContext.getCurSelPlid() %>"
+	treeId="layoutsTree"
 />
 
 <c:if test="<%= layoutsTreeDisplayContext.isShowAddLayoutButton() %>">
