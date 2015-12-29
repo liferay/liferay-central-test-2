@@ -292,18 +292,6 @@
 		<execute function="AssertTextEquals" locator1="Wiki#HTML_BODY" value1="${wikiPageContent}" />
 	</command>
 
-	<command name="addPagePGViaWD">
-		<execute function="AssertClick" locator1="PGWikidisplayAllpages#ADD_PAGE_BUTTON" value1="Add Page" />
-
-		<execute function="Type" locator1="TextInput#TITLE" value1="${wikiPageTitle}" />
-
-		<execute function="Type#typeAlloyEditor" locator1="Wiki#RICH_TEXT_EDITOR" value1="${wikiPageContent}" />
-
-		<execute function="AssertClick" locator1="Button#PUBLISH" value1="Publish" />
-
-		<execute function="AssertTextEquals" locator1="PGWikidisplayAllpages#SUCCESS_MESSAGE" value1="Your request completed successfully." />
-	</command>
-
 	<command name="addPageWithWorkflowPG">
 		<execute function="Click#makeVisibleClickAt" locator1="Portlet#ICON_PLUS_SIGN" />
 
