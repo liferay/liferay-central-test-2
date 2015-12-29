@@ -57,17 +57,27 @@ LayoutsTreeDisplayContext layoutsTreeDisplayContext = new LayoutsTreeDisplayCont
 	<a class="layout-tree-edit" data-plid="{plid}" data-url="{url}" data-uuid="{uuid}" href="{layoutURL}" id="{id}" title="<liferay-ui:message arguments="{label}" key="edit-x" />"><aui:icon image="cog" markupView="lexicon" /></a>
 </liferay-util:buffer>
 
-<liferay-util:buffer var="rootLinkTemplate">
-	<span class="{cssClass}" data-plid="{plid}" data-url="{url}" data-uuid="{uuid}" id="{id}" title="{label}">{label}</span>
+<c:if test="<%= layoutsTreeDisplayContext.isShowLayoutTabs() %>">
+	<div class="layout-set-tabs">
+		<c:if test="<%= layoutsTreeDisplayContext.isShowPublicLayoutsTree() %>">
+			<span class="layout-set-tab <%= layoutsTreeDisplayContext.isPrivateLayout() ? StringPool.BLANK : "selected-layout-set" %>">
+				<aui:a cssClass="layout-set-link" href="<%= layoutsTreeDisplayContext.getPublicLayoutsURL() %>" label="<%= layoutsTreeDisplayContext.getLayoutSetName(false) %>" />
 
-	<a data-plid="{plid}" data-privateLayout="{privateLayout}" data-url="{url}" data-uuid="{uuid}" href="{layoutURL}" id="{id}" title="<liferay-ui:message arguments="{label}" key="edit-x" />"><aui:icon image="cog" markupView="lexicon" /></a>
-</liferay-util:buffer>
+				<c:if test="<%= layoutsTreeDisplayContext.isShowEditLayoutSetButton() %>">
+					<a class="layout-set-tree-edit" href="<%= layoutsTreeDisplayContext.getEditLayoutURL(false) %>" title="<liferay-ui:message arguments="<%= layoutsTreeDisplayContext.getLayoutSetName(false) %>" key="edit-x" />"><aui:icon image="cog" markupView="lexicon" /></a>
+				</c:if>
+			</span>
+		</c:if>
 
-<liferay-util:buffer var="rootURLLinkTemplate">
-	<a class="{cssClass}" data-plid="{plid}" data-url="{url}" data-uuid="{uuid}" href="{regularURL}" id="{id}" title="{label}">{label}</a>
+		<span class="layout-set-tab <%= layoutsTreeDisplayContext.isPrivateLayout() ? "selected-layout-set" : StringPool.BLANK %>">
+			<aui:a cssClass="layout-set-link" href="<%= layoutsTreeDisplayContext.getPrivateLayoutsURL() %>" label="<%= layoutsTreeDisplayContext.getLayoutSetName(true) %>" />
 
-	<a data-plid="{plid}" data-privateLayout="{privateLayout}" data-url="{url}" data-uuid="{uuid}" href="{layoutURL}" id="{id}" title="<liferay-ui:message arguments="{label}" key="edit-x" />"><aui:icon image="cog" markupView="lexicon" /></a>
-</liferay-util:buffer>
+			<c:if test="<%= layoutsTreeDisplayContext.isShowEditLayoutSetButton() %>">
+				<a class="layout-set-tree-edit" href="<%= layoutsTreeDisplayContext.getEditLayoutURL(true) %>" title="<liferay-ui:message arguments="<%= layoutsTreeDisplayContext.getLayoutSetName(true) %>" key="edit-x" />"><aui:icon image="cog" markupView="lexicon" /></a>
+			</c:if>
+		</span>
+	</div>
+</c:if>
 
 <%
 Group selGroup = layoutsTreeDisplayContext.getSelGroup();
@@ -79,9 +89,7 @@ Group selGroup = layoutsTreeDisplayContext.getSelGroup();
 		linkTemplate="<%= linkTemplate %>"
 		portletURL="<%= layoutsTreeDisplayContext.getEditLayoutURL(false) %>"
 		privateLayout="<%= false %>"
-		rootLinkTemplate="<%= (selGroup.getPublicLayoutsPageCount() > 0) ? rootURLLinkTemplate : rootLinkTemplate %>"
 		rootNodeName="<%= layoutsTreeDisplayContext.getLayoutRootNodeName(false) %>"
-		rootPortletURL="<%= (selGroup.getPublicLayoutsPageCount() > 0) ? selGroup.getDisplayURL(themeDisplay, false) : StringPool.BLANK %>"
 		selPlid="<%= layoutsTreeDisplayContext.isPrivateLayout() ? null : layoutsTreeDisplayContext.getCurSelPlid() %>"
 		treeId="publicLayoutsTree"
 	/>
@@ -92,9 +100,7 @@ Group selGroup = layoutsTreeDisplayContext.getSelGroup();
 	linkTemplate="<%= linkTemplate %>"
 	portletURL="<%= layoutsTreeDisplayContext.getEditLayoutURL(true) %>"
 	privateLayout="<%= true %>"
-	rootLinkTemplate="<%= (selGroup.getPrivateLayoutsPageCount() > 0) ? rootURLLinkTemplate : rootLinkTemplate %>"
 	rootNodeName="<%= layoutsTreeDisplayContext.getLayoutRootNodeName(true) %>"
-	rootPortletURL="<%= (selGroup.getPrivateLayoutsPageCount() > 0) ? selGroup.getDisplayURL(themeDisplay, true) : StringPool.BLANK %>"
 	selPlid="<%= layoutsTreeDisplayContext.isPrivateLayout() ? layoutsTreeDisplayContext.getCurSelPlid() : null %>"
 	treeId="privateLayoutsTree"
 />
