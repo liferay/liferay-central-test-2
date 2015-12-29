@@ -279,27 +279,22 @@ public class DDLFormPortlet extends MVCPortlet {
 	protected String getSubmitLabel(
 		long recordSetId, ThemeDisplay themeDisplay) {
 
-		boolean assignedToWorkflow = isAssignedToWorkflow(
-			recordSetId, themeDisplay);
+		boolean workflowEnabled = hasWorkflowEnabled(recordSetId, themeDisplay);
 
-		String submitLabel = null;
-
-		if (assignedToWorkflow) {
-			submitLabel = LanguageUtil.get(
+		if (workflowEnabled) {
+			return LanguageUtil.get(
 				themeDisplay.getRequest(), "submit-for-publication");
 		}
 		else {
-			submitLabel = LanguageUtil.get(themeDisplay.getRequest(), "submit");
+			return LanguageUtil.get(themeDisplay.getRequest(), "submit");
 		}
-
-		return submitLabel;
 	}
 
 	protected ThemeDisplay getThemeDisplay(RenderRequest renderRequest) {
 		return (ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
 	}
 
-	protected boolean isAssignedToWorkflow(
+	protected boolean hasWorkflowEnabled(
 		long recordSetId, ThemeDisplay themeDisplay) {
 
 		return _workflowDefinitionLinkLocalService.hasWorkflowDefinitionLink(

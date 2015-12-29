@@ -51,7 +51,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
-import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PrefsParamUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -401,18 +400,15 @@ public class DDLFormAdminDisplayContext {
 		DDMFormRenderingContext ddmFormRenderingContext =
 			new DDMFormRenderingContext();
 
-		Locale locale = _ddlFormAdminRequestHelper.getLocale();
-
 		ddmFormRenderingContext.setHttpServletRequest(
 			PortalUtil.getHttpServletRequest(_renderRequest));
 		ddmFormRenderingContext.setHttpServletResponse(
 			PortalUtil.getHttpServletResponse(_renderResponse));
-		ddmFormRenderingContext.setLocale(locale);
+		ddmFormRenderingContext.setLocale(
+			_ddlFormAdminRequestHelper.getLocale());
 		ddmFormRenderingContext.setPortletNamespace(
 			_renderResponse.getNamespace());
 		ddmFormRenderingContext.setReadOnly(true);
-		ddmFormRenderingContext.setSubmitLabel(
-			LanguageUtil.get(locale, "submit"));
 
 		return ddmFormRenderingContext;
 	}
