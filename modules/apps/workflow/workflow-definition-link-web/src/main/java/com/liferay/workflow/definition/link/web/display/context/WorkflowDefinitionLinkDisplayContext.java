@@ -19,10 +19,12 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.util.AggregatePredicateFilter;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.PredicateFilter;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.workflow.WorkflowDefinition;
@@ -40,11 +42,12 @@ import com.liferay.workflow.definition.link.web.portlet.constants.WorkflowDefini
 import com.liferay.workflow.definition.link.web.search.WorkflowDefinitionLinkSearchEntry;
 import com.liferay.workflow.definition.link.web.search.WorkflowDefinitionLinkSearchTerms;
 import com.liferay.workflow.definition.link.web.util.WorkflowDefinitionLinkPortletUtil;
+import com.liferay.workflow.definition.link.web.util.filter.WorkflowDefinitionLinkSearchEntryLabelPredicateFilter;
+import com.liferay.workflow.definition.link.web.util.filter.WorkflowDefinitionLinkSearchEntryResourcePredicateFilter;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.portlet.RenderRequest;
@@ -114,17 +117,23 @@ public class WorkflowDefinitionLinkDisplayContext {
 				createWorkflowDefinitionLinkSearchEntryList();
 
 		if (searchTerms.isAdvancedSearch()) {
-			filter(workflowDefinitionLinkSearchEntries, searchTerms);
+			workflowDefinitionLinkSearchEntries = filter(
+				workflowDefinitionLinkSearchEntries, searchTerms.getResource(),
+				searchTerms.getWorkflow(), searchTerms.isAndOperator());
 		}
 		else {
-			filter(
-				workflowDefinitionLinkSearchEntries,
-				StringUtil.toLowerCase(searchTerms.getKeywords()));
+			workflowDefinitionLinkSearchEntries = filter(
+				workflowDefinitionLinkSearchEntries, searchTerms.getKeywords(),
+				searchTerms.getKeywords(), false);
 		}
 
 		searchContainer.setTotal(workflowDefinitionLinkSearchEntries.size());
 
-		sort(workflowDefinitionLinkSearchEntries);
+		Comparator<WorkflowDefinitionLinkSearchEntry> orderByComparator =
+			getWorkflowDefinitionLinkOrderByComparator();
+
+		Collections.sort(
+			workflowDefinitionLinkSearchEntries, orderByComparator);
 
 		return workflowDefinitionLinkSearchEntries;
 	}
@@ -180,6 +189,30 @@ public class WorkflowDefinitionLinkDisplayContext {
 		return false;
 	}
 
+	protected PredicateFilter<WorkflowDefinitionLinkSearchEntry>
+		createPredicateFilter(
+			String resource, String workflowDefinitionLabel,
+			boolean andOperator) {
+
+		AggregatePredicateFilter<WorkflowDefinitionLinkSearchEntry>
+			aggregatePredicateFilter = new AggregatePredicateFilter<>(
+				new WorkflowDefinitionLinkSearchEntryResourcePredicateFilter(
+					resource));
+
+		if (andOperator) {
+			aggregatePredicateFilter.and(
+				new WorkflowDefinitionLinkSearchEntryLabelPredicateFilter(
+					workflowDefinitionLabel));
+		}
+		else {
+			aggregatePredicateFilter.or(
+				new WorkflowDefinitionLinkSearchEntryLabelPredicateFilter(
+					workflowDefinitionLabel));
+		}
+
+		return aggregatePredicateFilter;
+	}
+
 	protected WorkflowDefinitionLinkSearchEntry
 			createWorkflowDefinitionLinkSearchEntry(
 				WorkflowHandler<?> workflowHandler)
@@ -215,82 +248,23 @@ public class WorkflowDefinitionLinkDisplayContext {
 		return workflowDefinitionLinkSearchEntries;
 	}
 
-	protected void filter(
+	protected List<WorkflowDefinitionLinkSearchEntry> filter(
 		List<WorkflowDefinitionLinkSearchEntry>
-			workflowDefinitionLinkSearchEntries, String keyword) {
+			workflowDefinitionLinkSearchEntries, String resource,
+		String workflowDefinitionLabel, boolean andOperator) {
 
-		Iterator<WorkflowDefinitionLinkSearchEntry> iterator =
-			workflowDefinitionLinkSearchEntries.iterator();
+		if (Validator.isNull(resource) &&
+			Validator.isNull(workflowDefinitionLabel)) {
 
-		while (iterator.hasNext()) {
-			WorkflowDefinitionLinkSearchEntry entry = iterator.next();
-
-			String resource = StringUtil.toLowerCase(entry.getResource());
-			String workflowDefinitionName = StringUtil.toLowerCase(
-				entry.getWorkflowDefinitionLabel());
-
-			if (!resource.contains(keyword) &&
-				!workflowDefinitionName.contains(keyword)) {
-
-				iterator.remove();
-			}
-		}
-	}
-
-	protected void filter(
-		List<WorkflowDefinitionLinkSearchEntry>
-			workflowDefinitionLinkSearchEntries,
-		WorkflowDefinitionLinkSearchTerms searchTerms) {
-
-		if (Validator.isNull(searchTerms.getResource()) &&
-			Validator.isNull(searchTerms.getWorkflow())) {
-
-			return;
+			return workflowDefinitionLinkSearchEntries;
 		}
 
-		Iterator<WorkflowDefinitionLinkSearchEntry> iterator =
-			workflowDefinitionLinkSearchEntries.iterator();
+		PredicateFilter<WorkflowDefinitionLinkSearchEntry> predicateFilter =
+			createPredicateFilter(
+				resource, workflowDefinitionLabel, andOperator);
 
-		while (iterator.hasNext()) {
-			WorkflowDefinitionLinkSearchEntry entry = iterator.next();
-
-			String resource = StringUtil.toLowerCase(entry.getResource());
-			String workflowDefinitionName = StringUtil.toLowerCase(
-				entry.getWorkflowDefinitionLabel());
-
-			if (Validator.isNotNull(searchTerms.getResource()) &&
-				Validator.isNotNull(searchTerms.getWorkflow())) {
-
-				if (searchTerms.isAndOperator()) {
-					if (!resource.contains(searchTerms.getResource()) ||
-						!workflowDefinitionName.contains(
-							searchTerms.getWorkflow())) {
-
-						iterator.remove();
-					}
-				}
-				else {
-					if (!resource.contains(searchTerms.getResource()) &&
-						!workflowDefinitionName.contains(
-							searchTerms.getWorkflow())) {
-
-						iterator.remove();
-					}
-				}
-			}
-			else if(Validator.isNotNull(searchTerms.getResource())) {
-				if (!resource.contains(searchTerms.getResource())) {
-					iterator.remove();
-				}
-			}
-			else if(Validator.isNotNull(searchTerms.getWorkflow())) {
-				if (!workflowDefinitionName.contains(
-						searchTerms.getWorkflow())) {
-
-					iterator.remove();
-				}
-			}
-		}
+		return ListUtil.filter(
+			workflowDefinitionLinkSearchEntries, predicateFilter);
 	}
 
 	protected String getPortletName() {
@@ -342,6 +316,21 @@ public class WorkflowDefinitionLinkDisplayContext {
 		}
 	}
 
+	protected Comparator<WorkflowDefinitionLinkSearchEntry>
+		getWorkflowDefinitionLinkOrderByComparator() {
+
+		String orderByCol = ParamUtil.getString(
+			_workflowDefinitionLinkRequestHelper.getRequest(), "orderByCol",
+			"resource");
+
+		String orderByType = ParamUtil.getString(
+			_workflowDefinitionLinkRequestHelper.getRequest(), "orderByType",
+			"asc");
+
+		return WorkflowDefinitionLinkPortletUtil.
+			getWorkflowDefinitionLinkOrderByComparator(orderByCol, orderByType);
+	}
+
 	protected List<WorkflowHandler<?>> getWorkflowHandlers() {
 		List<WorkflowHandler<?>> workflowHandlers = null;
 
@@ -354,17 +343,17 @@ public class WorkflowDefinitionLinkDisplayContext {
 				WorkflowHandlerRegistryUtil.getScopeableWorkflowHandlers();
 		}
 
-		Iterator<WorkflowHandler<?>> itr = workflowHandlers.iterator();
+		PredicateFilter<WorkflowHandler<?>> predicateFilter =
+			new PredicateFilter<WorkflowHandler<?>>() {
 
-		while (itr.hasNext()) {
-			WorkflowHandler<?> workflowHandler = itr.next();
-
-			if (!workflowHandler.isVisible()) {
-				itr.remove();
+			@Override
+			public boolean filter(WorkflowHandler<?> workflowHandler) {
+				return workflowHandler.isVisible();
 			}
-		}
 
-		return workflowHandlers;
+		};
+
+		return ListUtil.filter(workflowHandlers, predicateFilter);
 	}
 
 	protected boolean isControlPanelPortlet() {
@@ -378,27 +367,6 @@ public class WorkflowDefinitionLinkDisplayContext {
 		}
 
 		return false;
-	}
-
-	protected void sort(
-		List<WorkflowDefinitionLinkSearchEntry>
-			workflowDefinitionLinkSearchEntries) {
-
-		String orderByCol = ParamUtil.getString(
-			_workflowDefinitionLinkRequestHelper.getRequest(), "orderByCol",
-			"resource");
-
-		String orderByType = ParamUtil.getString(
-			_workflowDefinitionLinkRequestHelper.getRequest(), "orderByType",
-			"asc");
-
-		Comparator<WorkflowDefinitionLinkSearchEntry> orderByComparator =
-			WorkflowDefinitionLinkPortletUtil.
-				getWorkflowDefinitionLinkOrderByComparator(
-					orderByCol, orderByType);
-
-		Collections.sort(
-			workflowDefinitionLinkSearchEntries, orderByComparator);
 	}
 
 	private final WorkflowDefinitionLinkLocalService
