@@ -9,16 +9,6 @@
 </thead>
 <tbody>
 <tr>
-	<td>PORTLET_NAME</td>
-	<td>//header[@class='portlet-topper']/h1/span[2]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>OPTIONS</td>
-	<td>//header[@class='portlet-topper']/menu/div/a[contains(.,'Options')]</td>
-	<td></td>
-</tr>
-<tr>
 	<td>SITE_ENTRY</td>
 	<td>//div[@class='entry-metadata']/span/span</td>
 	<td></td>
