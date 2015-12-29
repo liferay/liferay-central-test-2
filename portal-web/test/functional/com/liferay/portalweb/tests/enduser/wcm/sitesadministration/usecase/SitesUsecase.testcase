@@ -66,9 +66,9 @@
 		</execute>
 
 		<execute macro="SitePage#addPageTranslations">
+			<var name="page" value="Home" />
 			<var name="pageTranslation" value="es_ES" />
 			<var name="PageTranslationName" value="Casa" />
-			<var name="sitePageName" value="Home" />
 		</execute>
 
 		<execute macro="Page#openURL">
@@ -100,10 +100,9 @@
 		</execute>
 
 		<execute macro="SitePage#addPageTranslations">
-			<var name="childPageName" value="true" />
+			<var name="page" value="Blog Page" />
 			<var name="pageTranslation" value="es_ES" />
 			<var name="PageTranslationName" value="Blog Página" />
-			<var name="sitePageName" value="Blog Page" />
 		</execute>
 
 		<execute macro="Page#openURL">
