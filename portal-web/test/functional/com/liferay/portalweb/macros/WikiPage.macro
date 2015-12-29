@@ -305,7 +305,7 @@
 	</command>
 
 	<command name="addPageWithWorkflowPG">
-		<execute function="AssertClick" locator1="Wiki#ADD_PAGE" value1="Add Page" />
+		<execute function="Click#makeVisibleClickAt" locator1="Portlet#ICON_PLUS_SIGN" />
 
 		<execute function="Type" locator1="TextInput#TITLE" value1="${wikiPageTitle}" />
 
@@ -317,7 +317,7 @@
 	</command>
 
 	<command name="addPageWithWorkflowPGViaWD">
-		<execute function="AssertClick" locator1="PGWikidisplayAllpages#ADD_PAGE_BUTTON" value1="Add Page" />
+		<execute function="Click#makeVisibleClickAt" locator1="Portlet#ICON_PLUS_SIGN" />
 
 		<execute function="Type" locator1="TextInput#TITLE" value1="${wikiPageTitle}" />
 
@@ -355,7 +355,7 @@
 	</command>
 
 	<command name="addPG">
-		<execute function="AssertClick" locator1="Wiki#ADD_PAGE" value1="Add Page" />
+		<execute function="Click#makeVisibleClickAt" locator1="Portlet#ICON_PLUS_SIGN" />
 
 		<execute function="Type" locator1="TextInput#TITLE" value1="${wikiPageTitle}" />
 
