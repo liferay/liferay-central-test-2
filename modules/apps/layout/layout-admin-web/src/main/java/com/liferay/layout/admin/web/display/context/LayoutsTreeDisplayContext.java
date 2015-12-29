@@ -228,22 +228,14 @@ public class LayoutsTreeDisplayContext {
 		return selGroup.getDisplayURL(_themeDisplay, false);
 	}
 
-	public Group getSelGroup() {
-		if (_selGroup != null) {
-			return _selGroup;
+	public long getSelGroupId() {
+		Group selGroup = getSelGroup();
+
+		if (selGroup != null) {
+			return selGroup.getGroupId();
 		}
 
-		_selGroup = _themeDisplay.getScopeGroup();
-
-		if (_selGroup.isControlPanel()) {
-			HttpServletRequest httpServletRequest =
-				PortalUtil.getHttpServletRequest(_liferayPortletRequest);
-
-			_selGroup = LatentGroupManagerUtil.getLatentGroup(
-				httpServletRequest.getSession());
-		}
-
-		return _selGroup;
+		return 0;
 	}
 
 	public boolean isPrivateLayout() {
@@ -399,14 +391,22 @@ public class LayoutsTreeDisplayContext {
 		return _liveGroup;
 	}
 
-	protected long getSelGroupId() {
-		Group selGroup = getSelGroup();
-
-		if (selGroup != null) {
-			return selGroup.getGroupId();
+	protected Group getSelGroup() {
+		if (_selGroup != null) {
+			return _selGroup;
 		}
 
-		return 0;
+		_selGroup = _themeDisplay.getScopeGroup();
+
+		if (_selGroup.isControlPanel()) {
+			HttpServletRequest httpServletRequest =
+				PortalUtil.getHttpServletRequest(_liferayPortletRequest);
+
+			_selGroup = LatentGroupManagerUtil.getLatentGroup(
+				httpServletRequest.getSession());
+		}
+
+		return _selGroup;
 	}
 
 	protected Layout getSelLayout() {
