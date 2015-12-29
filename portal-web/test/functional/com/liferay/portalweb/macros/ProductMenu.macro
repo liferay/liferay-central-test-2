@@ -48,9 +48,12 @@
 	</command>
 
 	<command name="gotoEditPage" summary="Navigate to Product Menu > Sites > Pages > Public Pages > ${page}">
-		<var name="page" value="${page}" />
 
-		<execute macro="ProductMenuHelper#gotoEditPage" />
+		<execute macro="ProductMenuHelper#gotoSites" />
+
+		<var name="key_page" value="${page}" />
+
+		<execute function="Click" locator1="ProductMenu#EDIT_PAGE" value1="${page}" />
 	</command>
 
 	<command name="gotoEditPublicPages" summary="Navigate to Product Menu > Sites > Pages > Public Pages > ${page}">
