@@ -64,11 +64,10 @@ public class WorkflowDefinitionLinkPortlet extends MVCPortlet {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
-		WorkflowDefinitionLinkDisplayContext displayContext;
-
 		try {
-			displayContext = new WorkflowDefinitionLinkDisplayContext(
-				renderRequest, _workflowDefinitionLinkLocalService);
+			WorkflowDefinitionLinkDisplayContext displayContext =
+				new WorkflowDefinitionLinkDisplayContext(
+					renderRequest, _workflowDefinitionLinkLocalService);
 
 			renderRequest.setAttribute(
 				WebKeys.PORTLET_DISPLAY_CONTEXT, displayContext);

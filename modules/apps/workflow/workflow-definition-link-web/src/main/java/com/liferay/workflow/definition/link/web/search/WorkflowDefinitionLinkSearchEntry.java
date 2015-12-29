@@ -20,11 +20,11 @@ package com.liferay.workflow.definition.link.web.search;
 public class WorkflowDefinitionLinkSearchEntry {
 
 	public WorkflowDefinitionLinkSearchEntry(
-		String className, String resource, String workflowDefinitionName) {
+		String className, String resource, String workflowDefinitionLabel) {
 
 		_className = className;
 		_resource = resource;
-		_workflowDefinitionName = workflowDefinitionName;
+		_workflowDefinitionLabel = workflowDefinitionLabel;
 	}
 
 	public String getClassName() {
@@ -35,12 +35,12 @@ public class WorkflowDefinitionLinkSearchEntry {
 		return _resource;
 	}
 
-	public String getWorkflowDefinitionName() {
-		return _workflowDefinitionName;
+	public String getWorkflowDefinitionLabel() {
+		return _workflowDefinitionLabel;
 	}
 
 	private final String _className;
 	private final String _resource;
-	private final String _workflowDefinitionName;
+	private final String _workflowDefinitionLabel;
 
 }

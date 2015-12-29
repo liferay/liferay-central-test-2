@@ -34,13 +34,13 @@ public class WorkflowDefinitionLinkSearchEntryWorkflowComparator
 		WorkflowDefinitionLinkSearchEntry wdlse1,
 		WorkflowDefinitionLinkSearchEntry wdlse2) {
 
-		String workflowDefinitionName1 = StringUtil.toLowerCase(
-			wdlse1.getWorkflowDefinitionName());
+		String workflowDefinitionLabel1 = StringUtil.toLowerCase(
+			wdlse1.getWorkflowDefinitionLabel());
+		String workflowDefinitionLabel2 = StringUtil.toLowerCase(
+			wdlse2.getWorkflowDefinitionLabel());
 
-		String workflowDefinitionName2 = StringUtil.toLowerCase(
-			wdlse2.getWorkflowDefinitionName());
-
-		int value = workflowDefinitionName1.compareTo(workflowDefinitionName2);
+		int value = workflowDefinitionLabel1.compareTo(
+			workflowDefinitionLabel2);
 
 		if (_ascending) {
 			return value;
