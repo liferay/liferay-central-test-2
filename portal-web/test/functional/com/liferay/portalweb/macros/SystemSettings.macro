@@ -42,10 +42,7 @@
 		<execute function="AssertClick" locator1="MenuItem#VIEW" value1="View" />
 
 		<if>
-			<and>
-				<isset var="LDAPEnabled" />
-				<equals arg1="${LDAPEnabled}" arg2="true" />
-			</and>
+			<equals arg1="${LDAPEnabled}" arg2="true" />
 			<then>
 				<execute function="AssertElementPresent" locator1="SystemSettings#LDAP_ENTRY" />
 			</then>
