@@ -129,13 +129,13 @@
 		</execute>
 	</command>
 
-	<command name="gotoSite" summary="Navigate to Product Menu > Sites > Back Arrow > ${site}">
+	<command name="gotoSite" summary="Navigate to Product Menu > Sites > Sites Popup > ${site}">
 		<execute macro="ProductMenuHelper#gotoSites" />
 
 		<if>
 			<and>
-				<condition function="IsElementPresent" locator1="ProductMenu#SITES_COMPASS" />
-				<condition function="IsVisible" locator1="ProductMenu#SITES_COMPASS" />
+				<condition function="IsElementPresent" locator1="ProductMenu#SITES_POPUP" />
+				<condition function="IsNotVisible" locator1="ProductMenu#SITES_POPUP" />
 			</and>
 			<then>
 				<execute function="Click" locator1="ProductMenu#SITES_COMPASS" />
@@ -256,11 +256,13 @@
 
 		<if>
 			<and>
-				<condition function="IsElementPresent" locator1="ProductMenu#BACK_ARROW" />
-				<condition function="IsVisible" locator1="ProductMenu#BACK_ARROW" />
+				<condition function="IsElementPresent" locator1="ProductMenu#SITES_POPUP" />
+				<condition function="IsNotVisible" locator1="ProductMenu#SITES_POPUP" />
 			</and>
 			<then>
-				<execute function="Click" locator1="ProductMenu#BACK_ARROW" />
+				<execute function="Click" locator1="ProductMenu#SITES_COMPASS" />
+
+				<execute function="AssertVisible" locator1="ProductMenu#SITES_POPUP" />
 			</then>
 		</if>
 
