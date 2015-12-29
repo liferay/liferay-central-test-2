@@ -27,7 +27,6 @@ import com.liferay.dynamic.data.mapping.model.DDMFormLayout;
 import com.liferay.dynamic.data.mapping.storage.DDMFormValues;
 import com.liferay.dynamic.data.mapping.util.DDMFormLayoutFactory;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
@@ -39,8 +38,6 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 
 import java.io.IOException;
-
-import java.util.Locale;
 
 import javax.portlet.Portlet;
 import javax.portlet.PortletException;
@@ -110,8 +107,6 @@ public class DDLFormAdminPortlet extends MVCPortlet {
 
 		String languageId = ParamUtil.getString(renderRequest, "languageId");
 
-		Locale locale = LocaleUtil.fromLanguageId(languageId);
-
 		DDMFormRenderingContext ddmFormRenderingContext =
 			new DDMFormRenderingContext();
 
@@ -120,11 +115,10 @@ public class DDLFormAdminPortlet extends MVCPortlet {
 		ddmFormRenderingContext.setHttpServletResponse(
 			PortalUtil.getHttpServletResponse(renderResponse));
 		ddmFormRenderingContext.setContainerId("settings");
-		ddmFormRenderingContext.setLocale(locale);
+		ddmFormRenderingContext.setLocale(
+			LocaleUtil.fromLanguageId(languageId));
 		ddmFormRenderingContext.setPortletNamespace(
 			renderResponse.getNamespace());
-		ddmFormRenderingContext.setSubmitLabel(
-			LanguageUtil.get(locale, "submit"));
 
 		return ddmFormRenderingContext;
 	}
