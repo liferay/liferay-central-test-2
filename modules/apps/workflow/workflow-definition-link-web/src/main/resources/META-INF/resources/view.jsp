@@ -34,15 +34,10 @@ WorkflowDefinitionLinkSearch workflowDefinitionLinkSearch = new WorkflowDefiniti
 </liferay-frontend:management-bar>
 
 <div class="container-fluid-1280 workflow-definition-link-container" id="<portlet:namespace />Container">
-
 	<liferay-ui:search-container
 		id="searchContainer"
 		searchContainer="<%= workflowDefinitionLinkSearch %>"
 	>
-
-		<%
-		request.setAttribute(WebKeys.SEARCH_CONTAINER, searchContainer);
-		%>
 
 		<liferay-ui:search-container-results
 			results="<%= workflowDefinitionLinkDisplayContext.getSearchContainerResults(searchContainer) %>"
@@ -65,7 +60,7 @@ WorkflowDefinitionLinkSearch workflowDefinitionLinkSearch = new WorkflowDefiniti
 
 			<liferay-ui:search-container-column-text
 				name="workflow"
-				value="<%= workflowDefinitionLinkSearchEntry.getWorkflowDefinitionName() %>"
+				value="<%= workflowDefinitionLinkSearchEntry.getWorkflowDefinitionLabel() %>"
 			/>
 
 			<liferay-ui:search-container-column-jsp
