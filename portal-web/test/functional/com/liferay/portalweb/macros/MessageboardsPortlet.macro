@@ -47,27 +47,6 @@
 		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="You have successfully updated the setup." />
 	</command>
 
-	<command name="configureGeneralPG">
-		<execute macro="Portlet#gotoPortletOptions">
-			<var name="portletName" value="${portletName}" />
-			<var name="portletOption" value="Configuration" />
-		</execute>
-
-		<execute function="SelectFrame" locator1="IFrame#CONFIGURATION" />
-
-		<if>
-			<equals arg1="${messageFormatBBCodeEnabled}" arg2="true" />
-			<then>
-				<var name="key_messageFormat" value="${messageFormat}" />
-
-				<execute function="Select" locator1="MessageBoardsAdminConfiguration#GENERAL_MESSAGE_FORMAT_DROPDOWN_OPTION" value1="${key_messageFormat}" />
-			</then>
-		</if>
-
-		<execute function="AssertClick" locator1="Button#SAVE" value1="Save" />
-		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="You have successfully updated the setup." />
-	</command>
-
 	<command name="configureMessageAddedEmailCP">
 		<execute macro="Navigator#openURL" />
 
@@ -151,29 +130,6 @@
 
 		<execute function="AssertClick" locator1="Button#SAVE" value1="Save" />
 		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="You have successfully updated the setup." />
-	</command>
-
-	<command name="configureMessageUpdatedEmailPG">
-		<execute macro="Portlet#gotoPortletOptions">
-			<var name="portletName" value="${portletName}" />
-			<var name="portletOption" value="Configuration" />
-		</execute>
-
-		<execute function="SelectFrame" locator1="MessageBoardsConfiguration#IFRAME" />
-		<execute function="AssertClick" locator1="PGMessageboardsConfiguration#SETUP_NAVIGATION_MESSAGE_UPDATED_EMAIL" value1="Message Updated Email" />
-
-		<if>
-			<equals arg1="${messageUpdatedEmailEnabled}" arg2="false" />
-			<then>
-				<execute function="Uncheck" locator1="MessageBoardsAdminConfiguration#MESSAGE_UPDATED_EMAIL_ENABLED_CHECKBOX" />
-			</then>
-			<else>
-				<execute function="AssertChecked" locator1="MessageBoardsAdminConfiguration#MESSAGE_UPDATED_EMAIL_ENABLED_CHECKBOX" />
-			</else>
-		</if>
-
-		<execute function="AssertClick" locator1="PGMessageboardsConfigurationSetupMessageUpdatedEmail#SAVE_BUTTON" value1="Save" />
-		<execute function="AssertTextEquals" locator1="PGMessageboardsConfigurationSetupMessageUpdatedEmail#SUCCESS_MESSAGE" value1="You have successfully updated the setup." />
 	</command>
 
 	<command name="configureScopePG">
@@ -338,16 +294,6 @@
 		<var name="key_threadSubject" value="${threadSubject}" />
 
 		<execute function="AssertElementNotPresent" locator1="MessageBoardsSearch#SEARCH_RESULTS_ENTRY_TITLE" />
-	</command>
-
-	<command name="viewRecentPostsConfigurationCP">
-		<execute macro="Portlet#gotoPortletOptions">
-			<var name="portletName" value="${portletName}" />
-			<var name="portletOption" value="Configuration" />
-		</execute>
-
-		<execute function="SelectFrame" locator1="CPMessageboardsConfiguration#MESSAGE_BOARDS_IFRAME" />
-		<execute function="AssertTextEquals" locator1="MessageBoardsAdminConfiguration#GENERAL_SHOW_RECENT_POSTS_FROM_LAST_DROPDOWN" value1="${recentPostsRange}" />
 	</command>
 
 	<command name="viewSearchResultPG">
