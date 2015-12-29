@@ -16,7 +16,6 @@ package com.liferay.workflow.definition.link.web.search;
 
 import com.liferay.portal.kernel.dao.search.DisplayTerms;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringUtil;
 
 import javax.portlet.PortletRequest;
 
@@ -32,11 +31,8 @@ public class WorkflowDefinitionLinkDisplayTerms extends DisplayTerms {
 	public WorkflowDefinitionLinkDisplayTerms(PortletRequest portletRequest) {
 		super(portletRequest);
 
-		resource = StringUtil.toLowerCase(
-			ParamUtil.getString(portletRequest, RESOURCE));
-
-		workflow = StringUtil.toLowerCase(
-			ParamUtil.getString(portletRequest, WORKFLOW));
+		resource = ParamUtil.getString(portletRequest, RESOURCE);
+		workflow = ParamUtil.getString(portletRequest, WORKFLOW);
 	}
 
 	public String getResource() {

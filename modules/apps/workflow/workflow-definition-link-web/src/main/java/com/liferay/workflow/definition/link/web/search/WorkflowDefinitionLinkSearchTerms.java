@@ -15,7 +15,6 @@
 package com.liferay.workflow.definition.link.web.search;
 
 import com.liferay.portal.kernel.dao.search.DAOParamUtil;
-import com.liferay.portal.kernel.util.StringUtil;
 
 import javax.portlet.PortletRequest;
 
@@ -28,11 +27,8 @@ public class WorkflowDefinitionLinkSearchTerms
 	public WorkflowDefinitionLinkSearchTerms(PortletRequest portletRequest) {
 		super(portletRequest);
 
-		resource = StringUtil.toLowerCase(
-			DAOParamUtil.getString(portletRequest, RESOURCE));
-
-		workflow = StringUtil.toLowerCase(
-			DAOParamUtil.getString(portletRequest, WORKFLOW));
+		resource = DAOParamUtil.getString(portletRequest, RESOURCE);
+		workflow = DAOParamUtil.getString(portletRequest, WORKFLOW);
 	}
 
 }

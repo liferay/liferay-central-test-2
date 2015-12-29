@@ -41,18 +41,20 @@ renderResponse.setTitle(resource);
 			<aui:select label="<%= resource %>" name='<%= "workflowDefinitionName@" + className %>' title="workflow-definition">
 
 				<%
-				String defaultWorkflowDefinitionLink = workflowDefinitionLinkDisplayContext.getDefaultWorkflowDefinitionLink(className);
+				String defaultWorkflowDefinitionLabel = workflowDefinitionLinkDisplayContext.getDefaultWorkflowDefinitionLabel(className);
 				%>
 
-				<aui:option><%= defaultWorkflowDefinitionLink %></aui:option>
+				<aui:option><%= defaultWorkflowDefinitionLabel %></aui:option>
 
 				<%
 				for (WorkflowDefinition workflowDefinition : workflowDefinitionLinkDisplayContext.getWorkflowDefinitions()) {
 				%>
 
-					<aui:option label='<%= workflowDefinitionLinkDisplayContext.getLabel(workflowDefinition) %>'
-						selected="<%= workflowDefinitionLinkDisplayContext.isSelected(workflowDefinition, className) %>"
-						value="<%= workflowDefinitionLinkDisplayContext.getValue(workflowDefinition) %>" />
+					<aui:option
+						label="<%= workflowDefinitionLinkDisplayContext.getWorkflowDefinitionLabel(workflowDefinition) %>"
+						selected="<%= workflowDefinitionLinkDisplayContext.isWorkflowDefinitionSelected(workflowDefinition, className) %>"
+						value="<%= workflowDefinitionLinkDisplayContext.getWorkflowDefinitionValue(workflowDefinition) %>"
+					/>
 
 				<%
 				}
