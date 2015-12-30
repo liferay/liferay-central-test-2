@@ -815,9 +815,12 @@
 			<var name="webContentTitle" value="${webContentTitle}" />
 		</execute>
 
+		<execute macro="WebContent#viewCategorizationVocabularyCP">
+			<var name="vocabularyNameList" value="${vocabularyName}" />
+		</execute>
+
 		<execute macro="WebContent#viewCategorizationCategoryCP">
 			<var name="categoryNameList" value="${categoryName}" />
-			<var name="vocabularyName" value="${vocabularyName}" />
 		</execute>
 
 		<execute macro="WebContent#copyCP">
