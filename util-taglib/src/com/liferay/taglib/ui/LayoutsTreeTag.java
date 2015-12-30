@@ -25,6 +25,7 @@ import com.liferay.taglib.ui.util.SessionTreeJSClicks;
 import com.liferay.taglib.util.IncludeTag;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -68,6 +69,10 @@ public class LayoutsTreeTag extends IncludeTag {
 
 	public void setLinkTemplate(String linkTemplate) {
 		_linkTemplate = linkTemplate;
+	}
+
+	public void setPortletURL(PortletURL portletURL) {
+		_portletURL = portletURL;
 	}
 
 	public void setPortletURLs(Map<String, PortletURL> portletURLs) {
@@ -115,6 +120,7 @@ public class LayoutsTreeTag extends IncludeTag {
 		_groupId = 0;
 		_incomplete = true;
 		_linkTemplate = null;
+		_portletURL = null;
 		_portletURLs = null;
 		_privateLayout = false;
 		_rootLinkTemplate = null;
@@ -205,8 +211,19 @@ public class LayoutsTreeTag extends IncludeTag {
 			"liferay-ui:layouts-tree:linkTemplate",
 			String.valueOf(_linkTemplate));
 		request.setAttribute("liferay-ui:layouts-tree:modules", getModules());
+
+		Map<String, PortletURL> portletURLs = _portletURLs;
+
+		if (_portletURL != null) {
+			if (portletURLs == null) {
+				portletURLs = new HashMap<>();
+			}
+
+			portletURLs.put("layoutURL", _portletURL);
+		}
+
 		request.setAttribute(
-			"liferay-ui:layouts-tree:portletURLs", _portletURLs);
+			"liferay-ui:layouts-tree:portletURLs", portletURLs);
 		request.setAttribute(
 			"liferay-ui:layouts-tree:privateLayout",
 			String.valueOf(_privateLayout));
@@ -236,6 +253,7 @@ public class LayoutsTreeTag extends IncludeTag {
 	private long _groupId;
 	private boolean _incomplete = true;
 	private String _linkTemplate;
+	private PortletURL _portletURL;
 	private Map<String, PortletURL> _portletURLs;
 	private boolean _privateLayout;
 	private String _rootLinkTemplate;
