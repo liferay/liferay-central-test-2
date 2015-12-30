@@ -826,6 +826,25 @@
 		<execute macro="WebContent#copyCP">
 			<var name="webContentTitle" value="${webContentTitle}" />
 		</execute>
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Web Content" />
+		</execute>
+
+		<execute macro="WebContent#gotoEditDuplicateEntryCP" />
+
+		<execute macro="WebContent#viewCP">
+			<var name="webContentContent" value="${webContentContent}" />
+			<var name="webContentTitle" value="${webContentTitle}" />
+		</execute>
+
+		<execute macro="WebContent#viewCategorizationVocabularyCP">
+			<var name="vocabularyNameList" value="${vocabularyName}" />
+		</execute>
+
+		<execute macro="WebContent#viewCategorizationCategoryCP">
+			<var name="categoryNameList" value="${categoryName}" />
+		</execute>
 	</command>
 
 	<command name="ExportImportWCWithCategoryViaAP" priority="4">
