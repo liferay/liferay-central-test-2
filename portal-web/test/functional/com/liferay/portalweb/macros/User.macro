@@ -778,6 +778,7 @@
 		<execute function="AssertClick" locator1="NavTab#ALL_USERS" value1="All Users" />
 
 		<execute function="Type" locator1="NavBar#BASIC_SEARCH_FIELD" value1="${userScreenName}" />
+
 		<execute function="AssertClick" locator1="NavBar#BASIC_SEARCH_BUTTON" value1="Search" />
 
 		<var name="key_userScreenName" value="${userScreenName}" />
@@ -790,6 +791,7 @@
 			</then>
 			<else>
 				<execute function="Click" locator1="UsersAndOrganizations#USER_TABLE_ACTIONS" />
+
 				<execute function="AssertElementNotPresent" locator1="MenuItem#IMPERSONATE_USER" value1="Impersonate User (Opens New Window)" />
 			</else>
 		</if>
@@ -1403,7 +1405,9 @@
 		<execute function="AssertClick" locator1="NavTab#ALL_USERS" value1="All Users" />
 
 		<execute function="Pause" locator1="1000" />
+
 		<execute function="Type" locator1="NavBar#BASIC_SEARCH_FIELD" value1="${userScreenName}" />
+
 		<execute function="AssertClick" locator1="NavBar#BASIC_SEARCH_BUTTON" value1="Search" />
 
 		<var name="key_userScreenName" value="${userScreenName}" />
