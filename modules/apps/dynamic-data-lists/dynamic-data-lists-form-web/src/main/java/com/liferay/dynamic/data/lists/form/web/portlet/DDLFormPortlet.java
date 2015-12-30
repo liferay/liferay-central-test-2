@@ -239,8 +239,11 @@ public class DDLFormPortlet extends MVCPortlet {
 			createDDMFormRenderingContext(
 				renderRequest, renderResponse, ddmForm);
 
+		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
 		String submitLabel = getSubmitLabel(
-			recordSet.getRecordSetId(), getThemeDisplay(renderRequest));
+			recordSet.getRecordSetId(), themeDisplay);
 
 		ddmFormRenderingContext.setSubmitLabel(submitLabel);
 
@@ -288,10 +291,6 @@ public class DDLFormPortlet extends MVCPortlet {
 		else {
 			return LanguageUtil.get(themeDisplay.getRequest(), "submit");
 		}
-	}
-
-	protected ThemeDisplay getThemeDisplay(RenderRequest renderRequest) {
-		return (ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
 	}
 
 	protected boolean hasWorkflowEnabled(
