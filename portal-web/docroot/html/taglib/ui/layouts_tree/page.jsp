@@ -27,6 +27,7 @@ boolean incomplete = GetterUtil.getBoolean((String)request.getAttribute("liferay
 String linkTemplate = (String)request.getAttribute("liferay-ui:layouts-tree:linkTemplate");
 String modules = (String)request.getAttribute("liferay-ui:layouts-tree:modules");
 Map<String, PortletURL> portletURLs = (Map<String, PortletURL>)request.getAttribute("liferay-ui:layouts-tree:portletURLs");
+JSONArray portletURLsJSONArray = (JSONArray)request.getAttribute("liferay-ui:layouts-tree:portletURLsJSONArray");
 boolean privateLayout = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:layouts-tree:privateLayout"));
 String rootLinkTemplate = (String)request.getAttribute("liferay-ui:layouts-tree:rootLinkTemplate");
 String rootNodeName = (String)request.getAttribute("liferay-ui:layouts-tree:rootNodeName");
@@ -129,32 +130,7 @@ String treeId = (String)request.getAttribute("liferay-ui:layouts-tree:treeId");
 				selPlid: '<%= selPlid %>',
 			</c:if>
 
-			urls:
-				[
-
-					<%
-					int i = 0;
-
-					for (String urlName : portletURLs.keySet()) {
-						PortletURL portletURL = portletURLs.get(urlName);
-
-						portletURL.setParameter("selPlid", "{selPlid}");
-					%>
-
-						{
-							name: '<%= urlName %>',
-							value: '<%= StringUtil.replace(portletURL.toString(), HttpUtil.encodePath("{selPlid}"), "{selPlid}") %>'
-						}
-
-						<c:if test="<%= i++ < portletURLs.size() %>">
-						,
-						</c:if>
-
-					<%
-					}
-					%>
-
-				]
+			urls: <%= portletURLsJSONArray.toString() %>
 		}
 	).render();
 </aui:script>

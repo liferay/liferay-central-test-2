@@ -16,7 +16,10 @@ package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
@@ -182,6 +185,36 @@ public class LayoutsTreeTag extends IncludeTag {
 		return _PAGE;
 	}
 
+	protected JSONArray getPortletURLsJSONArray(
+		Map<String, PortletURL> portletURLs) {
+
+		JSONArray urls = JSONFactoryUtil.createJSONArray();
+
+		if (MapUtil.isEmpty(portletURLs)) {
+			return urls;
+		}
+
+		for (String name : portletURLs.keySet()) {
+			PortletURL portletURL = portletURLs.get(name);
+
+			portletURL.setParameter("selPlid", "{selPlid}");
+
+			JSONObject url = JSONFactoryUtil.createJSONObject();
+
+			url.put("name", name);
+
+			url.put(
+				"value",
+				StringUtil.replace(
+					portletURL.toString(), HttpUtil.encodePath("{selPlid}"),
+					"{selPlid}"));
+
+			urls.put(url);
+		}
+
+		return urls;
+	}
+
 	@Override
 	protected boolean isCleanUpSetAttributes() {
 		return _CLEAN_UP_SET_ATTRIBUTES;
@@ -224,6 +257,9 @@ public class LayoutsTreeTag extends IncludeTag {
 
 		request.setAttribute(
 			"liferay-ui:layouts-tree:portletURLs", portletURLs);
+		request.setAttribute(
+			"liferay-ui:layouts-tree:portletURLsJSONArray",
+			getPortletURLsJSONArray(portletURLs));
 		request.setAttribute(
 			"liferay-ui:layouts-tree:privateLayout",
 			String.valueOf(_privateLayout));
