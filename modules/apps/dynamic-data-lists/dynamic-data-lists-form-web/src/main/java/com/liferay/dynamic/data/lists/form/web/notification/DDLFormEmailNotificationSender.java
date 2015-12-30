@@ -172,10 +172,8 @@ public class DDLFormEmailNotificationSender {
 		Map<String, Object> fieldMap = new HashMap<>();
 
 		String labelString = null;
-
-		int total = (ddmFormFieldValues.size() * 2) - 1;
-
-		StringBundler sb = new StringBundler(total);
+		StringBundler sb = new StringBundler(
+			(ddmFormFieldValues.size() * 2) - 1);
 
 		for (int i = 0; i < ddmFormFieldValues.size(); i++) {
 			DDMFormFieldValue ddmFormFieldValue = ddmFormFieldValues.get(i);
@@ -251,15 +249,15 @@ public class DDLFormEmailNotificationSender {
 
 		Map<String, Object> pageMap = new HashMap<>();
 
-		LocalizedValue title = ddmFormLayoutPage.getTitle();
-
-		pageMap.put("title", title.getString(locale));
-
 		List<String> fieldNames = getFieldNames(ddmFormLayoutPage);
 
 		pageMap.put(
 			"fields",
 			getFields(fieldNames, ddmFormFieldValuesMap, locale));
+
+		LocalizedValue title = ddmFormLayoutPage.getTitle();
+
+		pageMap.put("title", title.getString(locale));
 
 		return pageMap;
 	}
