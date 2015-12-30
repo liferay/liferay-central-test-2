@@ -266,6 +266,7 @@ public class DDMFormRendererImpl implements DDMFormRenderer {
 			LanguageUtil.get(locale, "submit"));
 
 		template.put("submitLabel", submitLabel);
+
 		template.put("templateNamespace", getTemplateNamespace(ddmFormLayout));
 
 		if (ddmFormValues != null) {
