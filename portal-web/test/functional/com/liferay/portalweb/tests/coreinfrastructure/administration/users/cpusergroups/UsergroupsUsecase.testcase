@@ -148,10 +148,9 @@
 
 		<execute function="AssertClick" locator1="MenuItem#MANAGE_PAGES" value1="Manage Pages" />
 
-		<execute function="SelectFrame" locator1="BasePortlet#IFRAME" />
+		<var name="key_page" value="Test User Group Page 1" />
 
-		<execute function="AssertClick" locator1="CPUsersandorganizationsManagepages#NAVIGATION_MY_DASHBOARD" value1="Dashboard" />
-		<execute function="AssertTextNotEquals" locator1="CPUsersandorganizationsManagepages#PAGE_TREE_PAGE_EDIT_COG" value1="Test User Group Page 1" />
+		<execute function="AssertElementNotPresent" locator1="ProductMenu#PAGES" />
 
 		<execute macro="ProductMenu#gotoControlPanelUsers">
 			<var name="portlet" value="User Groups" />
