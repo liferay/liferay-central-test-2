@@ -170,8 +170,7 @@
 
 		<execute macro="UserBar#gotoDashboard" />
 
-		<execute function="Click" locator1="Home#PAGE_NAVIGATION_BAR" />
-		<execute function="AssertTextEquals" locator1="Home#PAGE_2" value1="Test User Group Page 1" />
+		<execute function="AssertTextEquals" locator1="Home#PAGE_1" value1="Test User Group Page 1" />
 
 		<execute macro="User#logoutUserPG" />
 
