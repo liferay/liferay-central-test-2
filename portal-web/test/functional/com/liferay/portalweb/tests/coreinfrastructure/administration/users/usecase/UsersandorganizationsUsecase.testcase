@@ -225,7 +225,7 @@
 			<var name="userScreenName" value="usersn2" />
 		</execute>
 
-		<execute function="Close" locator1="title=Welcome - Liferay" />
+		<execute function="Close#closeWindow" locator1="title=Welcome - Liferay" />
 		<execute function="SelectWindow" locator1="title=Users and Organizations - Control Panel - Liferay" />
 
 		<execute macro="ProductMenu#gotoControlPanelUsers">
@@ -273,7 +273,7 @@
 			<var name="userScreenName" value="usersn2" />
 		</execute>
 
-		<execute function="Close" locator1="title=Welcome - Liferay" />
+		<execute function="Close#closeWindow" locator1="title=Welcome - Liferay" />
 		<execute function="SelectWindow" locator1="title=Users and Organizations - Control Panel - Liferay" />
 
 		<execute macro="ProductMenu#gotoControlPanelUsers">
@@ -284,7 +284,7 @@
 			<var name="userScreenName" value="usersn3" />
 		</execute>
 
-		<execute function="Close" locator1="title=Welcome - Liferay" />
+		<execute function="Close#closeWindow" locator1="title=Welcome - Liferay" />
 		<execute function="SelectWindow" locator1="title=Users and Organizations - Control Panel - Liferay" />
 
 		<execute macro="ProductMenu#gotoControlPanelUsers">
@@ -295,7 +295,7 @@
 			<var name="userScreenName" value="test" />
 		</execute>
 
-		<execute function="Close" locator1="title=Welcome - Liferay" />
+		<execute function="Close#closeWindow" locator1="title=Welcome - Liferay" />
 		<execute function="SelectWindow" locator1="title=Users and Organizations - Control Panel - Liferay" />
 	</command>
 
