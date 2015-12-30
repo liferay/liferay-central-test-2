@@ -73,7 +73,9 @@
 			<var name="page" value="Public Pages" />
 		</execute>
 
-		<execute function="AssertClick" locator1="Button#ADD_PAGE" value1="Add Page" />
+		<var name="key_page" value="Public Pages" />
+
+		<execute function="Click" locator1="ProductMenu#ADD_PAGE_ICON" />
 
 		<execute macro-mobile="MobileNavigator#clickRemoveIcon" />
 
