@@ -709,9 +709,9 @@
 
 		<execute function="Check" locator1="WC#ENTRY_DESCRIPTIVE_CHECKBOX" />
 
-		<var name="key_assetEntry" value="${webContentTitle}" />
+		<var name="key_rowEntry" value="${webContentTitle}" />
 
-		<execute function="Click" locator1="Icon#DESCRIPTIVE_VERTICAL_ELLIPSIS" />
+		<execute function="Click" locator1="Icon#ROW_VERTICAL_ELLIPSIS" />
 		<execute function="AssertClick" locator1="MenuItem#COPY" value1="Copy" />
 
 		<execute function="AssertClick" locator1="Button#COPY" value1="Copy" />
@@ -760,9 +760,9 @@
 	</command>
 
 	<command name="deleteWithDisabledRB">
-		<var name="key_assetEntry" value="${entryTitle}" />
+		<var name="key_rowEntry" value="${entryTitle}" />
 
-		<execute function="Click" locator1="Icon#DESCRIPTIVE_VERTICAL_ELLIPSIS" />
+		<execute function="Click" locator1="Icon#ROW_VERTICAL_ELLIPSIS" />
 
 		<execute function="ClickNoError" locator1="MenuItem#DELETE" />
 
@@ -930,9 +930,9 @@
 	</command>
 
 	<command name="expireSpecificVersionCP">
-		<var name="key_assetEntry" value="${webContentTitle}" />
+		<var name="key_rowEntry" value="${webContentTitle}" />
 
-		<execute function="Click" locator1="Icon#DESCRIPTIVE_VERTICAL_ELLIPSIS" />
+		<execute function="Click" locator1="Icon#ROW_VERTICAL_ELLIPSIS" />
 
 		<execute function="AssertClick" locator1="MenuItem#VIEW_HISTORY" value1="View History" />
 
@@ -967,9 +967,9 @@
 	</command>
 
 	<command name="gotoViewSpecificVersionHistoryCP">
-		<var name="key_assetEntry" value="${webContentTitle}" />
+		<var name="key_rowEntry" value="${webContentTitle}" />
 
-		<execute function="Click" locator1="Icon#DESCRIPTIVE_VERTICAL_ELLIPSIS" />
+		<execute function="Click" locator1="Icon#ROW_VERTICAL_ELLIPSIS" />
 
 		<execute function="AssertClick" locator1="MenuItem#VIEW_HISTORY" value1="View History" />
 	</command>
