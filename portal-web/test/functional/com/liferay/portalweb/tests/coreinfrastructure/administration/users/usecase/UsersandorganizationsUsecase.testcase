@@ -735,8 +735,9 @@
 
 		<execute function="Click" locator1="ProductMenu#BACK_ARROW" />
 		<for list="${siteNameList}" param="siteName" >
-			<var name="key_portletName" value="${siteName}" />
-			<execute function="AssertTextPresent" locator1="ProductMenu#PRODUCT_MENU_PANEL_MENU_ITEM" value1="${siteName}" />
+			<execute macro="ProductMenuHelper#viewSite">
+				<var name="site" value="${siteName}" />
+			</execute>
 		</for>
 
 		<execute macro="ProductMenu#gotoControlPanelUsers">
