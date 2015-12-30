@@ -821,7 +821,6 @@
 		</execute>
 
 		<execute macro="WebContent#copyCP">
-			<var name="categoryName" value="${categoryName}" />
 			<var name="webContentTitle" value="${webContentTitle}" />
 		</execute>
 	</command>
