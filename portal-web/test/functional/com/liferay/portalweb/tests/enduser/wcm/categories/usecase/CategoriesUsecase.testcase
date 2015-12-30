@@ -823,12 +823,12 @@
 			<var name="categoryNameList" value="${categoryName}" />
 		</execute>
 
-		<execute macro="WebContent#copyCP">
-			<var name="webContentTitle" value="${webContentTitle}" />
-		</execute>
-
 		<execute macro="ProductMenu#gotoSitesContent">
 			<var name="portlet" value="Web Content" />
+		</execute>
+
+		<execute macro="WebContent#copyCP">
+			<var name="webContentTitle" value="${webContentTitle}" />
 		</execute>
 
 		<execute macro="WebContent#gotoEditDuplicateEntryCP" />
