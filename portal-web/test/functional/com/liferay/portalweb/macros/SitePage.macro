@@ -18,15 +18,9 @@
 			<var name="page" value="${page}" />
 		</execute>
 
-		<var name="key_sitePageName" value="${sitePageName}" />
+		<var name="key_page" value="${sitePageName}" />
 
-		<execute function="Click" locator1="SitePages#PAGE_TREE_PAGE_EDIT_COG" />
-
-		<execute macro="ProductMenuHelper#openProductMenu" />
-
-		<execute function="Pause" locator1="5000" />
-
-		<execute function="AssertClick" locator1="Button#ADD_PAGE" value1="Add Page" />
+		<execute function="Click" locator1="ProductMenu#ADD_PAGE_ICON" />
 
 		<execute function="AssertElementPresent#pauseAssertVisible" locator1="Icon#BACK" />
 
@@ -85,7 +79,10 @@
 		</execute>
 
 		<execute function="Pause" locator1="5000" />
-		<execute function="AssertClick" locator1="Button#ADD_PAGE" value1="Add Page" />
+
+		<var name="key_page" value="${page}" />
+
+		<execute function="Click" locator1="ProductMenu#ADD_PAGE_ICON" />
 
 		<execute function="Type#mouseOverFocusType" locator1="TextInput#NAME" value1="${sitePageName}" />
 
