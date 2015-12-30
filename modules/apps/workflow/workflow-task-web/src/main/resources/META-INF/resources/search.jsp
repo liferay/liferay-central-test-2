@@ -27,7 +27,6 @@ WorkflowTaskDisplayTerms workflowTaskDisplayTerms = workflowTaskDisplayContext.g
 	id="toggle_id_workflow_task_search"
 	markupView="lexicon"
 >
-
 	<aui:fieldset>
 		<aui:input inlineField="<%= true %>" label="task" name="name" size="20" value="<%= workflowTaskDisplayTerms.getName() %>" />
 
