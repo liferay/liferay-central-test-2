@@ -1,30 +1,5 @@
-import com.liferay.gradle.util.FileUtil
-
-buildscript {
-	dependencies {
-		classpath group: "com.liferay", name: "com.liferay.gradle.util", version: "1.0.23"
-	}
-
-	repositories {
-		if (!Boolean.getBoolean("maven.local.ignore")) {
-			mavenLocal()
-		}
-
-		maven {
-			url System.properties["repository.url"] ?: "http://cdn.repository.liferay.com/nexus/content/groups/public"
-		}
-	}
-}
-
 apply plugin: "com.liferay.defaults.plugin"
 apply plugin: "com.liferay.plugin"
-
-File portalRootDir = _getPortalRootDir(project)
-
-if (portalRootDir) {
-	distsDirName = FileUtil.relativize(new File(portalRootDir, "tools/sdk/dist"), buildDir)
-	libsDirName = distsDirName
-}
 
 Project frontendCommonCssProject = findProject(":frontend:frontend-common-css")
 
@@ -54,24 +29,6 @@ pluginManager.withPlugin("com.liferay.maven.plugin.builder") {
 
 		ext {
 			autoClean = false
-		}
-	}
-}
-
-private File _getPortalRootDir(Project project) {
-	File dir = project.rootDir.parentFile
-
-	while (true) {
-		File portalImplDir = new File(dir, "portal-impl")
-
-		if (portalImplDir.exists()) {
-			return dir
-		}
-
-		dir = dir.parentFile
-
-		if (!dir) {
-			return null
 		}
 	}
 }
