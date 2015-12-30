@@ -58,20 +58,6 @@ pluginManager.withPlugin("com.liferay.maven.plugin.builder") {
 	}
 }
 
-if (portalRootDir) {
-	pluginManager.withPlugin("com.liferay.portal.tools.service.builder") {
-		configurations {
-			serviceBuilder {
-				exclude group: "com.liferay", module: "com.liferay.portal.tools.service.builder"
-			}
-		}
-
-		dependencies {
-			serviceBuilder fileTree(dir: new File(portalRootDir, "tools/sdk/tmp/portal-tools/portal-tools-service-builder"), include: "*.jar")
-		}
-	}
-}
-
 private File _getPortalRootDir(Project project) {
 	File dir = project.rootDir.parentFile
 
