@@ -54,9 +54,9 @@ LayoutsTreeDisplayContext layoutsTreeDisplayContext = new LayoutsTreeDisplayCont
 <liferay-util:buffer var="linkTemplate">
 	<a class="{cssClass}" data-plid="{plid}" data-url="{url}" data-uuid="{uuid}" href="{regularURL}" id="{id}" title="{label}">{label}</a>
 
-	<a class="layout-tree-add" data-plid="{plid}" data-url="{url}" data-uuid="{uuid}" href="{addURL}" id="{id}" title="<liferay-ui:message arguments="{label}" key="add-child-page" />"><aui:icon image="plus" markupView="lexicon" /></a>
+	<a class="layout-tree-add" data-plid="{plid}" data-url="{url}" data-uuid="{uuid}" href="{addLayoutURL}" id="{id}" title="<liferay-ui:message arguments="{label}" key="add-child-page" />"><aui:icon image="plus" markupView="lexicon" /></a>
 
-	<a class="layout-tree-edit" data-plid="{plid}" data-url="{url}" data-uuid="{uuid}" href="{editURL}" id="{id}" title="<liferay-ui:message arguments="{label}" key="edit-x" />"><aui:icon image="cog" markupView="lexicon" /></a>
+	<a class="layout-tree-edit" data-plid="{plid}" data-url="{url}" data-uuid="{uuid}" href="{editLayoutURL}" id="{id}" title="<liferay-ui:message arguments="{label}" key="edit-x" />"><aui:icon image="cog" markupView="lexicon" /></a>
 </liferay-util:buffer>
 
 <c:if test="<%= layoutsTreeDisplayContext.isShowLayoutTabs() %>">
@@ -93,7 +93,7 @@ LayoutsTreeDisplayContext layoutsTreeDisplayContext = new LayoutsTreeDisplayCont
 	expandFirstNode="<%= true %>"
 	groupId="<%= layoutsTreeDisplayContext.getSelGroupId() %>"
 	linkTemplate="<%= linkTemplate %>"
-	portletURL="<%= layoutsTreeDisplayContext.getEditLayoutURL(false) %>"
+	portletURLs="<%= layoutsTreeDisplayContext.getPortletURLs() %>"
 	privateLayout="<%= layoutsTreeDisplayContext.isPrivateLayout() %>"
 	rootNodeName="<%= StringPool.BLANK %>"
 	selPlid="<%= layoutsTreeDisplayContext.getCurSelPlid() %>"
