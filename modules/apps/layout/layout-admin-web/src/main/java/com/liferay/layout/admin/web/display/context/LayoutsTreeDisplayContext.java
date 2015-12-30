@@ -82,11 +82,11 @@ public class LayoutsTreeDisplayContext {
 
 		Layout selLayout = getSelLayout();
 
+		data.put("privateLayout", String.valueOf(isPrivateLayout()));
 		data.put(
 			"selPlid",
 			(selLayout != null) ?
 				String.valueOf(selLayout.getPlid()) : StringPool.BLANK);
-		data.put("privateLayout", String.valueOf(isPrivateLayout()));
 
 		PortletURL genericAddLayoutURL = getCommonAddLayoutURL();
 
