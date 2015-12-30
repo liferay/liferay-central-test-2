@@ -209,6 +209,11 @@
 	<td>//*[@data-qa-id='row' and contains(.,'${key_rowEntry}')]//span/*[name()='svg'][contains(@class,'icon-ellipsis')]</td>
 	<td></td>
 </tr>
+<tr>
+	<td>ROW_VERTICAL_ELLIPSIS_N</td>
+	<td>xpath=(//*[@data-qa-id='row']//span/*[name()='svg'][contains(@class,'icon-ellipsis')])[${key_rowIndexNumber}]</td>
+	<td></td>
+</tr>
 </tbody>
 </table>
 </body>
