@@ -26,6 +26,7 @@ import com.liferay.taglib.util.IncludeTag;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.portlet.PortletURL;
 
@@ -69,8 +70,8 @@ public class LayoutsTreeTag extends IncludeTag {
 		_linkTemplate = linkTemplate;
 	}
 
-	public void setPortletURL(PortletURL portletURL) {
-		_portletURL = portletURL;
+	public void setPortletURLs(Map<String, PortletURL> portletURLs) {
+		_portletURLs = portletURLs;
 	}
 
 	public void setPrivateLayout(boolean privateLayout) {
@@ -83,10 +84,6 @@ public class LayoutsTreeTag extends IncludeTag {
 
 	public void setRootNodeName(String rootNodeName) {
 		_rootNodeName = rootNodeName;
-	}
-
-	public void setRootPortletURL(String rootPortletURL) {
-		_rootPortletURL = rootPortletURL;
 	}
 
 	public void setSaveState(boolean saveState) {
@@ -118,11 +115,10 @@ public class LayoutsTreeTag extends IncludeTag {
 		_groupId = 0;
 		_incomplete = true;
 		_linkTemplate = null;
-		_portletURL = null;
+		_portletURLs = null;
 		_privateLayout = false;
 		_rootLinkTemplate = null;
 		_rootNodeName = null;
-		_rootPortletURL = null;
 		_saveState = true;
 		_selectableTree = false;
 		_selectedLayoutIds = null;
@@ -209,7 +205,8 @@ public class LayoutsTreeTag extends IncludeTag {
 			"liferay-ui:layouts-tree:linkTemplate",
 			String.valueOf(_linkTemplate));
 		request.setAttribute("liferay-ui:layouts-tree:modules", getModules());
-		request.setAttribute("liferay-ui:layouts-tree:portletURL", _portletURL);
+		request.setAttribute(
+			"liferay-ui:layouts-tree:portletURLs", _portletURLs);
 		request.setAttribute(
 			"liferay-ui:layouts-tree:privateLayout",
 			String.valueOf(_privateLayout));
@@ -217,8 +214,6 @@ public class LayoutsTreeTag extends IncludeTag {
 			"liferay-ui:layouts-tree:rootLinkTemplate", _rootLinkTemplate);
 		request.setAttribute(
 			"liferay-ui:layouts-tree:rootNodeName", _rootNodeName);
-		request.setAttribute(
-			"liferay-ui:layouts-tree:rootPortletURL", _rootPortletURL);
 		request.setAttribute(
 			"liferay-ui:layouts-tree:saveState", String.valueOf(_saveState));
 		request.setAttribute(
@@ -241,11 +236,10 @@ public class LayoutsTreeTag extends IncludeTag {
 	private long _groupId;
 	private boolean _incomplete = true;
 	private String _linkTemplate;
-	private PortletURL _portletURL;
+	private Map<String, PortletURL> _portletURLs;
 	private boolean _privateLayout;
 	private String _rootLinkTemplate;
 	private String _rootNodeName;
-	private String _rootPortletURL;
 	private boolean _saveState = true;
 	private boolean _selectableTree;
 	private String _selectedLayoutIds;
