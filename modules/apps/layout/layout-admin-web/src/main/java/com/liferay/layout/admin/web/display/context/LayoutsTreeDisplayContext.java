@@ -65,7 +65,7 @@ public class LayoutsTreeDisplayContext {
 			WebKeys.THEME_DISPLAY);
 	}
 
-	public PortletURL getAddLayoutURL(boolean privateLayout, long selPlid) {
+	public PortletURL getAddLayoutURL(Boolean privateLayout, long selPlid) {
 		PortletURL addPagesURL = PortalUtil.getControlPanelPortletURL(
 			_liferayPortletRequest, LayoutAdminPortletKeys.GROUP_PAGES,
 			PortletRequest.RENDER_PHASE);
@@ -77,8 +77,10 @@ public class LayoutsTreeDisplayContext {
 			addPagesURL.setParameter("selPlid", String.valueOf(selPlid));
 		}
 
-		addPagesURL.setParameter(
-			"privateLayout", String.valueOf(privateLayout));
+		if (privateLayout != null) {
+			addPagesURL.setParameter(
+				"privateLayout", String.valueOf(privateLayout));
+		}
 
 		addPagesURL.setParameter("selPlid", String.valueOf(getCurSelPlid()));
 		addPagesURL.setParameter(
@@ -104,13 +106,15 @@ public class LayoutsTreeDisplayContext {
 		return curSelPlid;
 	}
 
-	public PortletURL getEditLayoutURL(boolean privateLayout) {
+	public PortletURL getEditLayoutURL(Boolean privateLayout) {
 		PortletURL editPublicLayoutURL = PortalUtil.getControlPanelPortletURL(
 			_liferayPortletRequest, LayoutAdminPortletKeys.GROUP_PAGES,
 			PortletRequest.RENDER_PHASE);
 
-		editPublicLayoutURL.setParameter(
-			"privateLayout", String.valueOf(privateLayout));
+		if (privateLayout != null) {
+			editPublicLayoutURL.setParameter(
+				"privateLayout", String.valueOf(privateLayout));
+		}
 
 		Group liveGroup = getLiveGroup();
 
@@ -190,6 +194,18 @@ public class LayoutsTreeDisplayContext {
 
 		return liveGroup.getLayoutRootNodeName(
 			privateLayout, _themeDisplay.getLocale());
+	}
+
+	public Map<String, PortletURL> getPortletURLs() {
+		Map<String, PortletURL> portletURLs = new HashMap<>();
+
+		portletURLs.put(
+			"addLayoutURL",
+			getAddLayoutURL(null, LayoutConstants.DEFAULT_PLID));
+
+		portletURLs.put("editLayoutURL", getEditLayoutURL(null));
+
+		return portletURLs;
 	}
 
 	public String getPrivateLayoutsURL() {
