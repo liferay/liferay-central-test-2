@@ -1,22 +1,6 @@
 apply plugin: "com.liferay.defaults.plugin"
 apply plugin: "com.liferay.plugin"
 
-Project frontendCommonCssProject = findProject(":frontend:frontend-common-css")
-
-if (frontendCommonCssProject) {
-	buildCSS {
-		dependsOn {
-			FileCollection cssFiles = getCSSFiles()
-
-			if (!cssFiles.empty) {
-				return frontendCommonCssProject.path + ":buildCssCommon"
-			}
-		}
-
-		portalCommonDir = new File(frontendCommonCssProject.projectDir, "tmp/META-INF/resources")
-	}
-}
-
 pluginManager.withPlugin("com.liferay.maven.plugin.builder") {
 	afterEvaluate {
 		buildPluginDescriptor {
