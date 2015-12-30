@@ -82,10 +82,6 @@ public class LayoutsTreeDisplayContext {
 				"privateLayout", String.valueOf(privateLayout));
 		}
 
-		addPagesURL.setParameter("selPlid", String.valueOf(getCurSelPlid()));
-		addPagesURL.setParameter(
-			"privateLayout", String.valueOf(isPrivateLayout()));
-
 		return addPagesURL;
 	}
 
