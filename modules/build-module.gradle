@@ -3,8 +3,6 @@ apply plugin: "com.liferay.plugin"
 
 pluginManager.withPlugin("com.liferay.maven.plugin.builder") {
 	buildPluginDescriptor {
-		configurationScopeMapping "provided", "provided"
-
 		ext {
 			autoClean = false
 		}
