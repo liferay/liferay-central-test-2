@@ -147,8 +147,8 @@ public class BundleJavaFileManager
 	private static final Class<?> _zipFileIndexFileObjectClass;
 
 	static {
-		Class<?> zipFileIndexFileObjectClass = null;
 		Field nameField = null;
+		Class<?> zipFileIndexFileObjectClass = null;
 
 		if (GetterUtil.getBoolean(
 				SystemProperties.get("sun.javac.hack.enabled"), true)) {
@@ -167,8 +167,8 @@ public class BundleJavaFileManager
 				nameField.setAccessible(true);
 			}
 			catch (ReflectiveOperationException roe) {
-				zipFileIndexFileObjectClass = null;
 				nameField = null;
+				zipFileIndexFileObjectClass = null;
 			}
 		}
 
