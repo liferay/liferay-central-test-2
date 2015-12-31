@@ -160,6 +160,7 @@ public class BundleJavaFileManager
 				zipFileIndexFileObjectClass = systemToolClassLoader.loadClass(
 					"com.sun.tools.javac.file.ZipFileIndexArchive$" +
 						"ZipFileIndexFileObject");
+
 				nameField = zipFileIndexFileObjectClass.getDeclaredField(
 					"name");
 
