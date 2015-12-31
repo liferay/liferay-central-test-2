@@ -1,10 +1,2 @@
 apply plugin: "com.liferay.defaults.plugin"
 apply plugin: "com.liferay.plugin"
-
-pluginManager.withPlugin("com.liferay.maven.plugin.builder") {
-	buildPluginDescriptor {
-		ext {
-			autoClean = false
-		}
-	}
-}
