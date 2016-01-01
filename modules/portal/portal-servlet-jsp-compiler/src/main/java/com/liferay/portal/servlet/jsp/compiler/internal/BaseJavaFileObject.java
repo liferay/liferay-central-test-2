@@ -69,9 +69,9 @@ public abstract class BaseJavaFileObject implements JavaFileObject {
 
 	@Override
 	public String getName() {
-		int index = className.lastIndexOf('.');
-
 		String simpleName = null;
+
+		int index = className.lastIndexOf('.');
 
 		if (index >= 0) {
 			simpleName = className.substring(index + 1);
