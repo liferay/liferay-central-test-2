@@ -72,8 +72,8 @@ public class WorkflowDefinitionLinkPortlet extends MVCPortlet {
 			renderRequest.setAttribute(
 				WebKeys.PORTLET_DISPLAY_CONTEXT, displayContext);
 		}
-		catch (PortalException e) {
-			throw new PortletException(e);
+		catch (PortalException pe) {
+			throw new PortletException(pe);
 		}
 
 		super.render(renderRequest, renderResponse);
