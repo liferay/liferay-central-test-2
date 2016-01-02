@@ -67,7 +67,7 @@ public class AggregatePredicateFilter<T> implements PredicateFilter<T> {
 
 				return true;
 			}
-			
+
 			return false;
 		}
 
@@ -123,7 +123,7 @@ public class AggregatePredicateFilter<T> implements PredicateFilter<T> {
 
 				return true;
 			}
-			
+
 			return false;
 		}
 

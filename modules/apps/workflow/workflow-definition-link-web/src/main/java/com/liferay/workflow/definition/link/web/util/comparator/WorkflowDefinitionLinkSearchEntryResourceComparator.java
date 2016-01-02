@@ -31,11 +31,13 @@ public class WorkflowDefinitionLinkSearchEntryResourceComparator
 
 	@Override
 	public int compare(
-		WorkflowDefinitionLinkSearchEntry wdlse1,
-		WorkflowDefinitionLinkSearchEntry wdlse2) {
+		WorkflowDefinitionLinkSearchEntry workflowDefinitionLinkSearchEntry1,
+		WorkflowDefinitionLinkSearchEntry workflowDefinitionLinkSearchEntry2) {
 
-		String resource1 = StringUtil.toLowerCase(wdlse1.getResource());
-		String resource2 = StringUtil.toLowerCase(wdlse2.getResource());
+		String resource1 = StringUtil.toLowerCase(
+			workflowDefinitionLinkSearchEntry1.getResource());
+		String resource2 = StringUtil.toLowerCase(
+			workflowDefinitionLinkSearchEntry2.getResource());
 
 		int value = resource1.compareTo(resource2);
 
