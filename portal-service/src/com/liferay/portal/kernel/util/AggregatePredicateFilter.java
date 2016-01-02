@@ -53,19 +53,26 @@ public class AggregatePredicateFilter<T> implements PredicateFilter<T> {
 	private class AndPredicateFilter implements PredicateFilter<T> {
 
 		public AndPredicateFilter(
-			PredicateFilter<T> left, PredicateFilter<T> right) {
+			PredicateFilter<T> leftPredicateFilter,
+			PredicateFilter<T> rightPredicateFilter) {
 
-			_left = left;
-			_right = right;
+			_leftPredicateFilter = leftPredicateFilter;
+			_rightPredicateFilter = rightPredicateFilter;
 		}
 
 		@Override
 		public boolean filter(T t) {
-			return _left.filter(t) && _right.filter(t);
+			if (_leftPredicateFilter.filter(t) &&
+				_rightPredicateFilter.filter(t)) {
+
+				return true;
+			}
+			
+			return false;
 		}
 
-		private PredicateFilter<T> _left;
-		private PredicateFilter<T> _right;
+		private PredicateFilter<T> _leftPredicateFilter;
+		private PredicateFilter<T> _rightPredicateFilter;
 
 	}
 
@@ -102,19 +109,26 @@ public class AggregatePredicateFilter<T> implements PredicateFilter<T> {
 	private class OrPredicateFilter implements PredicateFilter<T> {
 
 		public OrPredicateFilter(
-			PredicateFilter<T> left, PredicateFilter<T> right) {
+			PredicateFilter<T> leftPredicateFilter,
+			PredicateFilter<T> rightPredicateFilter) {
 
-			_left = left;
-			_right = right;
+			_leftPredicateFilter = leftPredicateFilter;
+			_rightPredicateFilter = rightPredicateFilter;
 		}
 
 		@Override
 		public boolean filter(T t) {
-			return _left.filter(t) || _right.filter(t);
+			if (_leftPredicateFilter.filter(t) ||
+				_rightPredicateFilter.filter(t)) {
+
+				return true;
+			}
+			
+			return false;
 		}
 
-		private PredicateFilter<T> _left;
-		private PredicateFilter<T> _right;
+		private PredicateFilter<T> _leftPredicateFilter;
+		private PredicateFilter<T> _rightPredicateFilter;
 
 	}
 
