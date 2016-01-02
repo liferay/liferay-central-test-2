@@ -127,7 +127,7 @@ public class AggregatePredicateFilterTest {
 			return false;
 		}
 
-		private String _lastLetter;
+		private final String _lastLetter;
 
 	}
 
@@ -148,7 +148,7 @@ public class AggregatePredicateFilterTest {
 			return false;
 		}
 
-		private String _firstLetter;
+		private final String _firstLetter;
 
 	}
 
