@@ -17,9 +17,8 @@
 <%@ include file="/init.jsp" %>
 
 <%
-long groupId = workflowDefinitionLinkDisplayContext.getGroupId();
-
 String redirect = ParamUtil.getString(request, "redirect");
+
 String className = ParamUtil.getString(request, "className");
 String resource = ParamUtil.getString(request, "resource");
 
@@ -34,7 +33,7 @@ renderResponse.setTitle(resource);
 <div class="container-fluid-1280 workflow-definition-link-container" id="<portlet:namespace />formContainer">
 	<aui:form action="<%= updateWorkflowDefinitionLinkURL %>" method="post">
 		<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
-		<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
+		<aui:input name="groupId" type="hidden" value="<%= workflowDefinitionLinkDisplayContext.getGroupId() %>" />
 		<aui:input name="resource" type="hidden" value="<%= resource %>" />
 
 		<div class="col-xs-4">
