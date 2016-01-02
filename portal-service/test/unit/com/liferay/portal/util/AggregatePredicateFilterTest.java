@@ -67,7 +67,6 @@ public class AggregatePredicateFilterTest {
 
 		aggregatePredicateFilter = aggregatePredicateFilter.and(
 			new EndsWithPredicateFilter("L"));
-
 		aggregatePredicateFilter = aggregatePredicateFilter.or(
 			new EndsWithPredicateFilter("E"));
 
@@ -113,43 +112,43 @@ public class AggregatePredicateFilterTest {
 
 	private class EndsWithPredicateFilter implements PredicateFilter<String> {
 
-		public EndsWithPredicateFilter(String letter) {
-			_letter = letter;
+		public EndsWithPredicateFilter(String lastLetter) {
+			_lastLetter = lastLetter;
 		}
 
 		@Override
-		public boolean filter(String s) {
-			String last = s.substring(s.length() - 1);
+		public boolean filter(String string) {
+			String lastLetter = string.substring(string.length() - 1);
 
-			if (StringUtil.equalsIgnoreCase(last, _letter)) {
+			if (StringUtil.equalsIgnoreCase(lastLetter, _lastLetter)) {
 				return true;
 			}
 
 			return false;
 		}
 
-		private String _letter;
+		private String _lastLetter;
 
 	}
 
 	private class StartsWithPredicateFilter implements PredicateFilter<String> {
 
-		public StartsWithPredicateFilter(String letter) {
-			_letter = letter;
+		public StartsWithPredicateFilter(String firstLetter) {
+			_firstLetter = firstLetter;
 		}
 
 		@Override
-		public boolean filter(String s) {
-			String first = s.substring(0, 1);
+		public boolean filter(String string) {
+			String firstLetter = string.substring(0, 1);
 
-			if (StringUtil.equalsIgnoreCase(first, _letter)) {
+			if (StringUtil.equalsIgnoreCase(firstLetter, _firstLetter)) {
 				return true;
 			}
 
 			return false;
 		}
 
-		private String _letter;
+		private String _firstLetter;
 
 	}
 
