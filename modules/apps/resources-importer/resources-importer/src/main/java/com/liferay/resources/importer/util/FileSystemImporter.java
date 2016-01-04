@@ -1002,7 +1002,7 @@ public class FileSystemImporter extends BaseImporter {
 				if (!developerModeEnabled) {
 					if (_log.isInfoEnabled()) {
 						_log.info(
-							"Layout with friendlyURL " + friendlyURL +
+							"Layout with friendly URL " + friendlyURL +
 								" already exists");
 					}
 
