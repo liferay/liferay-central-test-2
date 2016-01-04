@@ -110,8 +110,7 @@ public class JenkinsPerformanceDataUtil {
 			_truncate(_results, size);
 		}
 		catch (Exception e) {
-			System.out.println("WARNING: Exception occurred while parsing" +
-				" performance data.");
+			System.out.println("Unable to parse performance data.");
 
 			e.printStackTrace();
 
@@ -121,6 +120,7 @@ public class JenkinsPerformanceDataUtil {
 
 	public static void reset() {
 		_broken = false;
+
 		_results.clear();
 	}
 
@@ -318,7 +318,7 @@ public class JenkinsPerformanceDataUtil {
 		subList.clear();
 	}
 
-	private static boolean _broken = false;
+	private static boolean _broken;
 	private static final List<Result> _results = new ArrayList<>();
 
 }
