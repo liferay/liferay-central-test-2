@@ -52,8 +52,6 @@ public class CompileJSPTask extends JavaExec implements CompileJSPSpec {
 
 	@Override
 	public void exec() {
-		super.setClasspath(getClasspath());
-
 		setArgs(getCompleteArgs());
 
 		FileCollection jspCClasspath = getJspCClasspath();
