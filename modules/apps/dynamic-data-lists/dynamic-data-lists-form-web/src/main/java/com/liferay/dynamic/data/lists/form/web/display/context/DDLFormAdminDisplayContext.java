@@ -67,6 +67,7 @@ import java.util.Locale;
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.osgi.framework.FrameworkUtil;
