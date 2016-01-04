@@ -726,7 +726,6 @@
 
 		<execute function="AssertElementNotPresent" locator1="NavPill#CONTENT" />
 		<execute function="AssertElementNotPresent" locator1="NavPill#APPLICATIONS" />
-		<execute function="AssertElementPresent" locator1="NavPill#PAGE" />
 
 		<execute function="Refresh" />
 	</command>

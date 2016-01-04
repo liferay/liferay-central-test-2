@@ -23,11 +23,6 @@
 	<td>//ul[contains(@class,'nav-pills')]/li/a[contains(.,'Content')]</td>
 	<td></td>
 </tr>
-<tr>
-	<td>PAGE</td>
-	<td>//ul[contains(@class,'nav-pills')]/li/a[contains(.,'Page')]</td>
-	<td></td>
-</tr>
 </tbody>
 </table>
 </body>
