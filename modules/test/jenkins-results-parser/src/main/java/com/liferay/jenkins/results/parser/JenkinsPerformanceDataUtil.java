@@ -249,7 +249,7 @@ public class JenkinsPerformanceDataUtil {
 			if (!childReportJSONObject.has("child") ||
 				childReportJSONObject.isNull("child")) {
 
-				throw new IllegalArgumentException("Child is not available.");
+				throw new IllegalArgumentException("Child element is missing");
 			}
 
 			JSONObject childJSONObject = childReportJSONObject.getJSONObject(
@@ -259,7 +259,7 @@ public class JenkinsPerformanceDataUtil {
 				childReportJSONObject.isNull("result")) {
 
 				throw new IllegalArgumentException(
-					"Result is not available for " +
+					"Result element is missing for " +
 						childJSONObject.getString("url"));
 			}
 
