@@ -83,7 +83,7 @@ public class BanUserMVCActionCommand extends BaseMVCActionCommand {
 	}
 
 	protected void unbanUser(ActionRequest actionRequest) throws Exception {
-		long banUserIds[] = null;
+		long[] banUserIds = null;
 
 		long banUserId = ParamUtil.getLong(actionRequest, "banUserId");
 
