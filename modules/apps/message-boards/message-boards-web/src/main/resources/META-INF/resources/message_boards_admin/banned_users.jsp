@@ -19,8 +19,6 @@
 <%
 String topLink = ParamUtil.getString(request, "topLink", "message-boards-home");
 
-PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
-
 String displayStyle = ParamUtil.getString(request, "displayStyle");
 
 if (Validator.isNull(displayStyle)) {
@@ -31,6 +29,8 @@ else {
 
 	request.setAttribute(WebKeys.SINGLE_PAGE_APPLICATION_CLEAR_CACHE, Boolean.TRUE);
 }
+
+PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 %>
 
 <liferay-frontend:management-bar

@@ -19,8 +19,6 @@
 <%
 String entriesNavigation = ParamUtil.getString(request, "entriesNavigation", "all");
 
-PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
-
 MBCategory category = (MBCategory)request.getAttribute(WebKeys.MESSAGE_BOARDS_CATEGORY);
 
 long categoryId = GetterUtil.getLong(request.getAttribute("view.jsp-categoryId"));
@@ -35,6 +33,8 @@ else {
 
 	request.setAttribute(WebKeys.SINGLE_PAGE_APPLICATION_CLEAR_CACHE, Boolean.TRUE);
 }
+
+PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 %>
 
 <liferay-frontend:management-bar

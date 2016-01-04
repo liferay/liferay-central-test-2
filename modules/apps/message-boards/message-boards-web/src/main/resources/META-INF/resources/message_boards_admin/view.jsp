@@ -29,10 +29,9 @@ portletURL.setParameter("mvcRenderCommandName", "/message_boards/view");
 portletURL.setParameter("topLink", topLink);
 portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 
-request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
-
-request.setAttribute("view.jsp-portletURL", portletURL);
 request.setAttribute("view.jsp-categoryId", categoryId);
+request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
+request.setAttribute("view.jsp-portletURL", portletURL);
 %>
 
 <portlet:actionURL name="/message_boards/edit_category" var="restoreTrashEntriesURL">
