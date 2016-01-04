@@ -51,6 +51,11 @@
 </tr>
 <!--APPLICATIONS-->
 <tr>
+	<td>APPLICATIONS_ACCORDION_PANEL_TITLE</td>
+	<td>//div[contains(@id,'Accordion')]//div[@class='panel-title' and contains(.,'Applications')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>COLLAPSED_CATEGORY</td>
 	<td>//div[contains(@class,'toggler-header-collapsed')]/div</td>
 	<td></td>
