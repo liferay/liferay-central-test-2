@@ -2979,6 +2979,11 @@ public class PortalImpl implements Portal {
 			}
 		}
 
+		StringBundler sb = new StringBundler(4);
+
+		sb.append(portalURL);
+		sb.append(getPathContext());
+
 		Group group = layoutSet.getGroup();
 
 		String friendlyURL = null;
@@ -2995,11 +3000,8 @@ public class PortalImpl implements Portal {
 			friendlyURL = _PUBLIC_GROUP_SERVLET_MAPPING;
 		}
 
-		StringBundler sb = new StringBundler(4);
-
-		sb.append(portalURL);
-		sb.append(getPathContext());
 		sb.append(friendlyURL);
+
 		sb.append(group.getFriendlyURL());
 
 		return sb.toString();
