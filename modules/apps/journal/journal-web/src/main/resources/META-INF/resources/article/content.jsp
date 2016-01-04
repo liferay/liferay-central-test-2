@@ -56,7 +56,7 @@ boolean changeStructure = GetterUtil.getBoolean(request.getAttribute("edit_artic
 	</c:if>
 </liferay-ui:error>
 
-<liferay-ui:error exception="<%= NoSuchFileEntryException.class %>" message="the-content-references-a-non-existing-file-entry" />
+<liferay-ui:error exception="<%= NoSuchFileEntryException.class %>" message="the-content-references-a-missing-file-entry" />
 <liferay-ui:error exception="<%= NoSuchImageException.class %>" message="please-select-an-existing-small-image" />
 
 <liferay-ui:error exception="<%= NoSuchLayoutException.class %>">
@@ -71,7 +71,7 @@ boolean changeStructure = GetterUtil.getBoolean(request.getAttribute("edit_artic
 		<liferay-ui:message key="please-select-an-existing-display-page" />
 	</c:when>
 	<c:otherwise>
-		<liferay-ui:message key="the-content-references-a-non-existing-page" />
+		<liferay-ui:message key="the-content-references-a-missing-page" />
 	</c:otherwise>
 </liferay-ui:error>
 
