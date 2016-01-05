@@ -42,10 +42,9 @@ public enum LicenseManagerMessageType {
 		return null;
 	}
 
-	public static JSONObject getMessagePayload(String jsonString) {
+	public static JSONObject getMessagePayload(String json) {
 		try {
-			JSONObject jsonObject = JSONFactoryUtil.createJSONObject(
-				jsonString);
+			JSONObject jsonObject = JSONFactoryUtil.createJSONObject(json);
 
 			valueOf(jsonObject);
 
