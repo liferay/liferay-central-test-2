@@ -614,9 +614,10 @@ public class LiferayOSGiPlugin extends LiferayJavaPlugin {
 
 		@Override
 		public JarBuilder withClasspath(Object files) {
-			List<File> list = new ArrayList<>(Arrays.asList((File[])files));
+			List<File> filesList = new ArrayList<>(
+				Arrays.asList((File[])files));
 
-			Iterator<File> iterator = list.iterator();
+			Iterator<File> iterator = filesList.iterator();
 
 			while (iterator.hasNext()) {
 				File file = iterator.next();
@@ -634,14 +635,16 @@ public class LiferayOSGiPlugin extends LiferayJavaPlugin {
 				}
 			}
 
-			return super.withClasspath(list.toArray(new File[list.size()]));
+			return super.withClasspath(
+				filesList.toArray(new File[filesList.size()]));
 		}
 
 		@Override
 		public JarBuilder withResources(Object files) {
-			List<File> list = new ArrayList<>(Arrays.asList((File[])files));
+			List<File> filesList = new ArrayList<>(
+				Arrays.asList((File[])files));
 
-			Iterator<File> iterator = list.iterator();
+			Iterator<File> iterator = filesList.iterator();
 
 			while (iterator.hasNext()) {
 				File file = iterator.next();
@@ -659,7 +662,8 @@ public class LiferayOSGiPlugin extends LiferayJavaPlugin {
 				}
 			}
 
-			return super.withResources(list.toArray(new File[list.size()]));
+			return super.withResources(
+				filesList.toArray(new File[filesList.size()]));
 		}
 
 		private final Set<File> _classPathReferences = new HashSet<>();
