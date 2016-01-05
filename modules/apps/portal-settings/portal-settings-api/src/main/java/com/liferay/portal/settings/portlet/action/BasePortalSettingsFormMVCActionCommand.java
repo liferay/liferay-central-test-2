@@ -107,12 +107,14 @@ public abstract class BasePortalSettingsFormMVCActionCommand
 		for (String name : settingsDescriptor.getAllKeys()) {
 			String value = getString(actionRequest, name);
 
-			if (!Portal.TEMP_OBFUSCATION_VALUE.equals(value)) {
-				String oldValue = settings.getValue(name, null);
+			if (Portal.TEMP_OBFUSCATION_VALUE.equals(value)) {
+				continue;
+			}
 
-				if (!value.equals(oldValue)) {
-					modifiableSettings.setValue(name, value);
-				}
+			String oldValue = settings.getValue(name, null);
+
+			if (!value.equals(oldValue)) {
+				modifiableSettings.setValue(name, value);
 			}
 		}
 
