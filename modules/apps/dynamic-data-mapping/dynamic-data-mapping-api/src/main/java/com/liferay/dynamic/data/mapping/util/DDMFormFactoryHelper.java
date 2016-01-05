@@ -284,14 +284,14 @@ public class DDMFormFactoryHelper {
 			collectResourceBundles(interfaceClass, resourceBundles, locale);
 		}
 
-		String baseName = getResourceBundleBaseName(clazz);
+		String resourceBundleBaseName = getResourceBundleBaseName(clazz);
 
-		if (Validator.isNull(baseName)) {
+		if (Validator.isNull(resourceBundleBaseName)) {
 			return;
 		}
 
 		ResourceBundle resourceBundle = ResourceBundleUtil.getBundle(
-			baseName, locale, clazz.getClassLoader());
+			resourceBundleBaseName, locale, clazz.getClassLoader());
 
 		if (resourceBundle != null) {
 			resourceBundles.add(resourceBundle);
