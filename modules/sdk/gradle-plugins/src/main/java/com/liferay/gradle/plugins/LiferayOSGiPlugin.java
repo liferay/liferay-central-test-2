@@ -622,13 +622,13 @@ public class LiferayOSGiPlugin extends LiferayJavaPlugin {
 			while (iterator.hasNext()) {
 				File file = iterator.next();
 
-				if (_classPathReferences.contains(file)) {
+				if (_classpathFiles.contains(file)) {
 					iterator.remove();
 
 					continue;
 				}
 
-				_classPathReferences.add(file);
+				_classpathFiles.add(file);
 
 				if (_logger.isInfoEnabled()) {
 					_logger.info("CLASSPATH: {}", file.getAbsolutePath());
@@ -649,13 +649,13 @@ public class LiferayOSGiPlugin extends LiferayJavaPlugin {
 			while (iterator.hasNext()) {
 				File file = iterator.next();
 
-				if (_resourceReferences.contains(file)) {
+				if (_resourceFiles.contains(file)) {
 					iterator.remove();
 
 					continue;
 				}
 
-				_resourceReferences.add(file);
+				_resourceFiles.add(file);
 
 				if (_logger.isInfoEnabled()) {
 					_logger.info("RESOURCE: {}", file.getAbsolutePath());
@@ -666,8 +666,8 @@ public class LiferayOSGiPlugin extends LiferayJavaPlugin {
 				filesList.toArray(new File[filesList.size()]));
 		}
 
-		private final Set<File> _classPathReferences = new HashSet<>();
-		private final Set<File> _resourceReferences = new HashSet<>();
+		private final Set<File> _classpathFiles = new HashSet<>();
+		private final Set<File> _resourceFiles = new HashSet<>();
 
 	}
 
