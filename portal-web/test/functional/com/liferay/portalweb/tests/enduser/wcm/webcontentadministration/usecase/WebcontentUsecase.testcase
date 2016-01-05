@@ -571,10 +571,12 @@
 			<var name="setAsDefaultPage" value="true" />
 		</execute>
 
-		<execute macro="Page#gotoContentCP">
-			<var name="portletName" value="Web Content" />
+		<execute macro="Navigator#openSiteURL">
 			<var name="siteName" value="Blank Site Name" />
-			<var name="siteURL" value="true" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Web Content" />
 		</execute>
 
 		<execute macro="WebContentNavigator#gotoAddCP" />
@@ -590,10 +592,12 @@
 			<var name="webContentTitle" value="Web Content Title" />
 		</execute>
 
-		<execute macro="Page#gotoContentCP">
-			<var name="portletName" value="Web Content" />
+		<execute macro="Navigator#openSiteURL">
 			<var name="siteName" value="Blank Site Name" />
-			<var name="siteURL" value="true" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Web Content" />
 		</execute>
 
 		<execute macro="WebContentNavigator#gotoEditCP">
@@ -1431,10 +1435,12 @@
 			<var name="webContentTitle" value="WC WebContent Title" />
 		</execute>
 
-		<execute macro="Page#gotoPublishingTools">
-			<var name="portletName" value="Staging Processes" />
+		<execute macro="Navigator#openSiteURL">
 			<var name="siteName" value="Site Name" />
-			<var name="siteURL" value="true" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesPublishingTools">
+			<var name="portlet" value="Staging Processes" />
 		</execute>
 
 		<execute macro="Staging#activateStagingCP">

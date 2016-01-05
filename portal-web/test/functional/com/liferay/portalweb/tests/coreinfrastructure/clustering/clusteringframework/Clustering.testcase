@@ -265,9 +265,10 @@
 			<var name="nodePort" value="8080" />
 		</execute>
 
-		<execute macro="Page#gotoPublishingTools">
-			<var name="portletName" value="Staging Processes" />
-			<var name="siteURL" value="true" />
+		<execute macro="Navigator#openURL" />
+
+		<execute macro="ProductMenu#gotoSitesPublishingTools">
+			<var name="portlet" value="Staging Processes" />
 		</execute>
 
 		<execute macro="Staging#activateStagingCP">
