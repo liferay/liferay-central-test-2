@@ -41,7 +41,7 @@ import javax.portlet.PortletPreferences;
  * @author Brian Wing Shun Chan
  * @author Eduardo Lundgren
  */
-public class PortletDisplay implements Serializable {
+public class PortletDisplay implements Cloneable, Serializable {
 
 	public PortletDisplay() {
 		if (_log.isDebugEnabled()) {
@@ -49,6 +49,7 @@ public class PortletDisplay implements Serializable {
 		}
 	}
 
+	@Override
 	public Object clone() {
 		PortletDisplay portletDisplay = new PortletDisplay();
 
