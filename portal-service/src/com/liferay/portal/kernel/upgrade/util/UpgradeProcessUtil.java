@@ -160,12 +160,6 @@ public class UpgradeProcessUtil {
 		finally {
 			IndexWriterHelperUtil.setIndexReadOnly(tempIndexReadOnly);
 
-			// Clear the caches only if the upgrade process was run
-
-			if (_log.isDebugEnabled()) {
-				_log.debug("Clear cache if upgrade process was run");
-			}
-
 			if (ranUpgradeProcess) {
 				MultiVMPoolUtil.clear();
 			}
