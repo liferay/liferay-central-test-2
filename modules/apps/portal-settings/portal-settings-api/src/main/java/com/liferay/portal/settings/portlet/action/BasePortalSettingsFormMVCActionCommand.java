@@ -107,7 +107,7 @@ public abstract class BasePortalSettingsFormMVCActionCommand
 		for (String name : settingsDescriptor.getAllKeys()) {
 			String value = getString(actionRequest, name);
 
-			if (Portal.TEMP_OBFUSCATION_VALUE.equals(value)) {
+			if (value.equals(Portal.TEMP_OBFUSCATION_VALUE)) {
 				continue;
 			}
 
