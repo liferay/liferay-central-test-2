@@ -188,10 +188,10 @@ public class LayoutsTreeTag extends IncludeTag {
 	protected JSONArray getPortletURLsJSONArray(
 		Map<String, PortletURL> portletURLs) {
 
-		JSONArray urls = JSONFactoryUtil.createJSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		if (MapUtil.isEmpty(portletURLs)) {
-			return urls;
+			return jsonArray;
 		}
 
 		for (String name : portletURLs.keySet()) {
@@ -199,20 +199,20 @@ public class LayoutsTreeTag extends IncludeTag {
 
 			portletURL.setParameter("selPlid", "{selPlid}");
 
-			JSONObject url = JSONFactoryUtil.createJSONObject();
+			JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-			url.put("name", name);
+			jsonObject.put("name", name);
 
-			url.put(
+			jsonObject.put(
 				"value",
 				StringUtil.replace(
 					portletURL.toString(), HttpUtil.encodePath("{selPlid}"),
 					"{selPlid}"));
 
-			urls.put(url);
+			jsonArray.put(jsonObject);
 		}
 
-		return urls;
+		return jsonArray;
 	}
 
 	@Override
