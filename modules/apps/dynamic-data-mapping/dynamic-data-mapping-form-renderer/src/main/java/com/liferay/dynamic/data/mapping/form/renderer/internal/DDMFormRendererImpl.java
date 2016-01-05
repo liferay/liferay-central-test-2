@@ -153,10 +153,10 @@ public class DDMFormRendererImpl implements DDMFormRenderer {
 	protected Map<String, String> getLanguageStringsMap(Locale locale) {
 		Map<String, String> stringsMap = new HashMap<>();
 
+		List<ResourceBundle> resourceBundles = new ArrayList<>();
+
 		ResourceBundle portalResourceBundle = ResourceBundleUtil.getBundle(
 			"content.Language", locale, PortalClassLoaderUtil.getClassLoader());
-
-		List<ResourceBundle> resourceBundles = new ArrayList<>();
 
 		resourceBundles.add(portalResourceBundle);
 
