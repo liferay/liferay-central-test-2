@@ -82,8 +82,8 @@ public enum LicenseManagerMessageType {
 
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObject.put("type", name());
 		jsonObject.put("state", lcsPortletState.intValue());
+		jsonObject.put("type", name());
 
 		message.setPayload(jsonObject.toString());
 
