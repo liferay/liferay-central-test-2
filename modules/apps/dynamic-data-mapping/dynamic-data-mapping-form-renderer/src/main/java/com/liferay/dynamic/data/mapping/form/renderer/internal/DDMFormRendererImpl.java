@@ -162,11 +162,11 @@ public class DDMFormRendererImpl implements DDMFormRenderer {
 
 		collectResourceBundles(getClass(), resourceBundles, locale);
 
-		ResourceBundle[] resourceBundleArray = resourceBundles.toArray(
+		ResourceBundle[] resourceBundlesArray = resourceBundles.toArray(
 			new ResourceBundle[resourceBundles.size()]);
 
 		ResourceBundle resourceBundle = new AggregateResourceBundle(
-			resourceBundleArray);
+			resourceBundlesArray);
 
 		stringsMap.put("next", LanguageUtil.get(resourceBundle, "next"));
 		stringsMap.put(

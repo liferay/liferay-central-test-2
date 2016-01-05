@@ -191,10 +191,10 @@ public class DDMFormLayoutFactoryHelper {
 
 		collectResourceBundles(_clazz, resourceBundles, locale);
 
-		ResourceBundle[] resourceBundleArray = resourceBundles.toArray(
+		ResourceBundle[] resourceBundlesArray = resourceBundles.toArray(
 			new ResourceBundle[resourceBundles.size()]);
 
-		return new AggregateResourceBundle(resourceBundleArray);
+		return new AggregateResourceBundle(resourceBundlesArray);
 	}
 
 	protected boolean isLocalizableValue(String value) {
