@@ -245,6 +245,7 @@ public class LayoutsTreeTag extends IncludeTag {
 			String.valueOf(_linkTemplate));
 		request.setAttribute("liferay-ui:layouts-tree:modules", getModules());
 
+
 		Map<String, PortletURL> portletURLs = _portletURLs;
 
 		if (_portletURL != null) {
@@ -260,6 +261,7 @@ public class LayoutsTreeTag extends IncludeTag {
 		request.setAttribute(
 			"liferay-ui:layouts-tree:portletURLsJSONArray",
 			getPortletURLsJSONArray(portletURLs));
+
 		request.setAttribute(
 			"liferay-ui:layouts-tree:privateLayout",
 			String.valueOf(_privateLayout));
