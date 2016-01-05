@@ -1169,9 +1169,12 @@
 			<var name="nodePort" value="9080" />
 		</execute>
 
-		<execute macro="Page#gotoContentCP">
-			<var name="nodePort" value="9080" />
-			<var name="portletName" value="Web Content" />
+		<execute macro="Navigator#openSpecificURL">
+			<var name="url" value="http://localhost:9080" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Web Content" />
 		</execute>
 
 		<execute macro="WebContentNavigator#gotoAddCP" />
