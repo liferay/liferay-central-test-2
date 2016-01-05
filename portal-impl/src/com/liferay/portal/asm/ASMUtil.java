@@ -147,7 +147,8 @@ public class ASMUtil {
 
 				@Override
 				public void visitInnerClass(
-					String name, String outerName, String innerName, int access) {
+					String name, String outerName, String innerName,
+					int access) {
 				}
 
 			};
