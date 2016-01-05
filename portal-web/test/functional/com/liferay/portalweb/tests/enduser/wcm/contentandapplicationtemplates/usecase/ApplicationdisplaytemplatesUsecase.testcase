@@ -871,11 +871,14 @@
 			<var name="wikiPageContent" value="Test Wiki Content" />
 		</execute>
 
-		<execute macro="Page#gotoConfigurationCP">
-			<var name="pageStaging" value="true" />
-			<var name="portletName" value="Application Display Templates" />
+		<execute macro="Navigator#openSiteURL">
 			<var name="siteName" value="${siteName}" />
-			<var name="siteURL" value="true" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoStagingSite" />
+
+		<execute macro="ProductMenu#gotoSitesConfiguration">
+			<var name="portlet" value="Application Display Templates" />
 		</execute>
 
 		<execute macro="ApplicationDisplayTemplates#addCP">
