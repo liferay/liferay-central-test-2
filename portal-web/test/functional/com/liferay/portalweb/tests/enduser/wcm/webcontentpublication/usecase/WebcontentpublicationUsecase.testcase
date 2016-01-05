@@ -264,9 +264,12 @@
 	</command>
 
 	<command name="AssertAssetListScopeViaAssetPublisher" priority="4">
-		<execute macro="Page#gotoContentCP">
-			<var name="portletName" value="Documents and Media" />
-			<var name="siteScopeName" value="Global" />
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="Global" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Documents and Media" />
 		</execute>
 
 		<execute macro="DMDocumentType#add">

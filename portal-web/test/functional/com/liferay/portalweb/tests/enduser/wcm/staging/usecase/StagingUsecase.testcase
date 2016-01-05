@@ -166,9 +166,12 @@
 			<var name="dmDocumentTitle" value="DM Document Title" />
 		</execute>
 
-		<execute macro="Page#gotoContentCP">
-			<var name="portletName" value="Web Content" />
-			<var name="siteScopeName" value="Site Name" />
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="Site Name" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Web Content" />
 		</execute>
 
 		<execute macro="WebContentNavigator#gotoAddCP" />
@@ -184,9 +187,12 @@
 			<var name="webContentTitle" value="Web Content Title" />
 		</execute>
 
-		<execute macro="Page#gotoContentCP">
-			<var name="portletName" value="Web Content" />
-			<var name="siteScopeName" value="Site Name" />
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="Site Name" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Web Content" />
 		</execute>
 
 		<execute macro="WebContentNavigator#gotoEditCP">
@@ -200,9 +206,12 @@
 
 		<execute macro="WebContent#publish" />
 
-		<execute macro="Page#gotoPublishingTools">
-			<var name="portletName" value="Staging Processes" />
-			<var name="siteScopeName" value="Site Name" />
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="Site Name" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesPublishingTools">
+			<var name="portlet" value="Staging Processes" />
 		</execute>
 
 		<execute macro="Staging#activateStagingCP">
@@ -582,9 +591,12 @@
 			<var name="publishTemplateName" value="Publish Template Name" />
 		</execute>
 
-		<execute macro="Page#gotoContentCP">
-			<var name="portletName" value="Recycle Bin" />
-			<var name="siteScopeName" value="Site Name" />
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="Site Name" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Recycle Bin" />
 		</execute>
 
 		<execute macro="RecycleBin#viewCP">
@@ -2012,9 +2024,12 @@
 			<var name="portletName" value="Language Selector" />
 		</execute>
 
-		<execute macro="Page#gotoConfigurationCP">
-			<var name="portletName" value="Workflow Configuration" />
-			<var name="siteScopeName" value="Community Site Name" />
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="Community Site Name" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesConfiguration">
+			<var name="portlet" value="Workflow Configuration" />
 		</execute>
 
 		<execute macro="Workflow#configureWorkflow">
@@ -2056,9 +2071,12 @@
 	</command>
 
 	<command name="StagingKaleoWebContentLinkingUnapprovedContent" priority="3">
-		<execute macro="Page#gotoConfigurationCP">
-			<var name="portletName" value="Workflow Configuration" />
-			<var name="siteScopeName" value="Site Name" />
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="Site Name" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesConfiguration">
+			<var name="portlet" value="Workflow Configuration" />
 		</execute>
 
 		<execute macro="Workflow#configureWorkflow">
@@ -2066,9 +2084,12 @@
 			<var name="workflowResourceValue" value="Page Revision" />
 		</execute>
 
-		<execute macro="Page#gotoContentCP">
-			<var name="portletName" value="Web Content" />
-			<var name="siteScopeName" value="Site Name" />
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="Site Name" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Web Content" />
 		</execute>
 
 		<execute macro="Workflow#configureWorkflowViaFolderInfo">
@@ -2251,9 +2272,12 @@
 			<var name="workflowResourceValue" value="Page Revision" />
 		</execute>
 
-		<execute macro="Page#gotoContentCP">
-			<var name="portletName" value="Web Content" />
-			<var name="siteScopeName" value="Community Site Name" />
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="Community Site Name" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Web Content" />
 		</execute>
 
 		<execute macro="Workflow#configureWorkflowViaFolderInfo">
@@ -2733,9 +2757,12 @@
 			<var name="portletName" value="Web Content Display" />
 		</execute>
 
-		<execute macro="Page#gotoContentCP">
-			<var name="portletName" value="Web Content" />
-			<var name="siteScopeName" value="Site Name" />
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="Site Name" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Web Content" />
 		</execute>
 
 		<execute macro="Workflow#configureWorkflowViaFolderInfo">
@@ -2986,9 +3013,12 @@
 			<var name="userEmailAddress" value="userea@liferay.com" />
 		</execute>
 
-		<execute macro="Page#gotoPublishingTools">
-			<var name="portletName" value="Staging Processes" />
-			<var name="siteScopeName" value="Organization Name" />
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="Organization Name" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesPublishingTools">
+			<var name="portlet" value="Staging Processes" />
 		</execute>
 
 		<execute macro="Staging#activateStagingCP">
@@ -3047,9 +3077,12 @@
 			<var name="siteName" value="Site Name" />
 		</execute>
 
-		<execute macro="Page#gotoContentCP">
-			<var name="portletName" value="Web Content" />
-			<var name="siteScopeName" value="Site Name" />
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="Site Name" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Web Content" />
 		</execute>
 
 		<execute macro="Navigator#gotoStagedView" />
@@ -3067,9 +3100,12 @@
 			<var name="webContentTitle" value="Web Content Title" />
 		</execute>
 
-		<execute macro="Page#gotoContentCP">
-			<var name="portletName" value="Web Content" />
-			<var name="siteScopeName" value="Site Name" />
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="Site Name" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Web Content" />
 		</execute>
 
 		<execute macro="Staging#viewPublishContentCountViaPortletStagingCP">
@@ -3078,16 +3114,22 @@
 			<var name="stagingDateRange" value="From Last Publish Date" />
 		</execute>
 
-		<execute macro="Page#gotoContentCP">
-			<var name="portletName" value="Web Content" />
-			<var name="siteScopeName" value="Site Name" />
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="Site Name" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Web Content" />
 		</execute>
 
 		<execute macro="Staging#publishToLiveNowViaPortletCP" />
 
-		<execute macro="Page#gotoContentCP">
-			<var name="portletName" value="Web Content" />
-			<var name="siteScopeName" value="Site Name" />
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="Site Name" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Web Content" />
 		</execute>
 
 		<execute macro="Staging#viewNoPublishContentCountViaPortletStagingCP">
@@ -3463,9 +3505,12 @@
 			<var name="siteName" value="Site Name" />
 		</execute>
 
-		<execute macro="Page#gotoContentCP">
-			<var name="portletName" value="Documents and Media" />
-			<var name="siteScopeName" value="Site Name" />
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="Site Name" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Documents and Media" />
 		</execute>
 
 		<execute macro="DMDocument#addDMMarketingBannerCP">
@@ -3549,9 +3594,12 @@
 			<var name="portletName" value="Web Content Display" />
 		</execute>
 
-		<execute macro="Page#gotoContentCP">
-			<var name="portletName" value="Web Content" />
-			<var name="siteScopeName" value="Site Name" />
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="Site Name" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Web Content" />
 		</execute>
 
 		<execute macro="WebContentNavigator#gotoManageStructures" />
@@ -3573,9 +3621,12 @@
 			<var name="structureName" value="Structure Name" />
 		</execute>
 
-		<execute macro="Page#gotoContentCP">
-			<var name="portletName" value="Web Content" />
-			<var name="siteScopeName" value="Site Name" />
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="Site Name" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Web Content" />
 		</execute>
 
 		<execute macro="WebContentTemplates#addCP">
@@ -3586,9 +3637,12 @@
 			<var name="templateName" value="Template Name" />
 		</execute>
 
-		<execute macro="Page#gotoContentCP">
-			<var name="portletName" value="Web Content" />
-			<var name="siteScopeName" value="Site Name" />
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="Site Name" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Web Content" />
 		</execute>
 
 		<execute macro="WebContentNavigator#gotoAddWithStructureCP">
@@ -3641,9 +3695,12 @@
 
 		<execute macro="Staging#publishToLive" />
 
-		<execute macro="Page#gotoContentCP">
-			<var name="portletName" value="Web Content" />
-			<var name="siteScopeName" value="Remote Site" />
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="Remote Site" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Web Content" />
 		</execute>
 
 		<var name="key_webContentTitle" value="Web Content Title" />
@@ -3664,9 +3721,12 @@
 			</execute>
 		</for>
 
-		<execute macro="Page#gotoContentCP">
-			<var name="portletName" value="Web Content" />
-			<var name="siteScopeName" value="Remote Site" />
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="Remote Site" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Web Content" />
 		</execute>
 
 		<execute macro="WebContentTemplates#viewCP">
@@ -4174,9 +4234,12 @@
 			<var name="userScreenName" value="usersn" />
 		</execute>
 
-		<execute macro="Page#gotoUsersCP">
-			<var name="portletName" value="Site Memberships" />
-			<var name="siteScopeName" value="Site Name" />
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="Site Name" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesUsers">
+			<var name="portlet" value="Site Memberships" />
 		</execute>
 
 		<execute macro="Site#addMemberCP">

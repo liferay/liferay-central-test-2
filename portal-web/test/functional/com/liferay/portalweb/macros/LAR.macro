@@ -567,9 +567,12 @@
 	</command>
 
 	<command name="setupContentTargeting" >
-		<execute macro="Page#gotoConfigurationCP">
-			<var name="portletName" value="Audience Targeting" />
-			<var name="siteScopeName" value="Site Name" />
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="Site Name" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesConfiguration">
+			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
 		<execute macro="ContentTargetingUserSegment#addCP">
@@ -579,9 +582,12 @@
 
 		<execute macro="ContentTargetingUserSegment#saveCP" />
 
-		<execute macro="Page#gotoConfigurationCP">
-			<var name="portletName" value="Audience Targeting" />
-			<var name="siteScopeName" value="Site Name" />
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="Site Name" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesConfiguration">
+			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
 		<execute macro="ContentTargetingCampaign#addCP">
@@ -598,9 +604,12 @@
 
 		<execute macro="ContentTargetingCampaign#saveCP" />
 
-		<execute macro="Page#gotoContentCP">
-			<var name="portletName" value="Web Content" />
-			<var name="siteScopeName" value="Site Name" />
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="Site Name" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Web Content" />
 		</execute>
 
 		<execute macro="WebContentNavigator#gotoAddCP" />

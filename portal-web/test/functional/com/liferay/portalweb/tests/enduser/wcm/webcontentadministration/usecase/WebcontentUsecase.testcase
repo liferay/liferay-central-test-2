@@ -700,9 +700,12 @@
 	</command>
 
 	<command name="AddWebContentViaWCDWithGlobalStructureAndLocalTemplate" priority="4">
-		<execute macro="Page#gotoContentCP">
-			<var name="portletName" value="Web Content" />
-			<var name="siteScopeName" value="Global" />
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="Global" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Web Content" />
 		</execute>
 
 		<execute macro="WebContentNavigator#gotoManageStructures" />
@@ -769,9 +772,12 @@
 	</command>
 
 	<command name="AddWebContentWithGlobalStructureAndEditedDefaultValues" priority="3">
-		<execute macro="Page#gotoContentCP">
-			<var name="portletName" value="Web Content" />
-			<var name="siteScopeName" value="Global" />
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="Global" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Web Content" />
 		</execute>
 
 		<execute macro="WebContentNavigator#gotoManageStructures" />
@@ -792,9 +798,12 @@
 			<var name="structureName" value="Global Structure" />
 		</execute>
 
-		<execute macro="Page#gotoContentCP">
-			<var name="portletName" value="Web Content" />
-			<var name="siteScopeName" value="Global" />
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="Global" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Web Content" />
 		</execute>
 
 		<execute macro="WebContentTemplates#addCP">
@@ -814,9 +823,12 @@
 			<var name="templateName" value="Template Name" />
 		</execute>
 
-		<execute macro="Page#gotoContentCP">
-			<var name="portletName" value="Web Content" />
-			<var name="siteScopeName" value="Global" />
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="Global" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Web Content" />
 		</execute>
 
 		<execute macro="WebContentNavigator#gotoManageStructures" />
@@ -1000,9 +1012,12 @@
 	</command>
 
 	<command name="EditArticleMadeFromGlobalStructure" priority="4">
-		<execute macro="Page#gotoContentCP">
-			<var name="portletName" value="Web Content" />
-			<var name="siteScopeName" value="Global" />
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="Global" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Web Content" />
 		</execute>
 
 		<execute macro="WebContentNavigator#gotoManageStructures" />
@@ -1022,9 +1037,12 @@
 			<var name="structureName" value="Global WC Structure Name" />
 		</execute>
 
-		<execute macro="Page#gotoContentCP">
-			<var name="portletName" value="Web Content" />
-			<var name="siteScopeName" value="Global" />
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="Global" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Web Content" />
 		</execute>
 
 		<execute macro="WebContentTemplates#addCP">
@@ -1166,9 +1184,12 @@
 	</command>
 
 	<command name="EditGlobalWebContentTemplate" priority="4">
-		<execute macro="Page#gotoContentCP">
-			<var name="portletName" value="Web Content" />
-			<var name="siteScopeName" value="Global" />
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="Global" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Web Content" />
 		</execute>
 
 		<execute macro="WebContentNavigator#gotoManageStructures" />
@@ -1188,9 +1209,12 @@
 			<var name="structureName" value="Global WC Structure Name" />
 		</execute>
 
-		<execute macro="Page#gotoContentCP">
-			<var name="portletName" value="Web Content" />
-			<var name="siteScopeName" value="Global" />
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="Global" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Web Content" />
 		</execute>
 
 		<execute macro="WebContentTemplates#addCP">
@@ -1489,9 +1513,12 @@
 	</command>
 
 	<command name="ViewGlobalStructureViaAddMenuInLiferaySite" priority="3">
-		<execute macro="Page#gotoContentCP">
-			<var name="portletName" value="Web Content" />
-			<var name="siteScopeName" value="Global" />
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="Global" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Web Content" />
 		</execute>
 
 		<execute macro="WebContentNavigator#gotoManageStructures" />

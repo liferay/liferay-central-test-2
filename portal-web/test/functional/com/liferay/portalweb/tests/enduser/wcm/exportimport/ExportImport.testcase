@@ -174,9 +174,12 @@
 			<var name="siteName" value="Site Name" />
 		</execute>
 
-		<execute macro="Page#gotoContentCP">
-			<var name="portletName" value="Web Content" />
-			<var name="siteScopeName" value="Site Name" />
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="Site Name" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Web Content" />
 		</execute>
 
 		<execute macro="WebContentNavigator#gotoEditCP">
@@ -232,9 +235,12 @@
 			<var name="siteName" value="Site Name" />
 		</execute>
 
-		<execute macro="Page#gotoContentCP">
-			<var name="portletName" value="Blogs" />
-			<var name="siteScopeName" value="Site Name" />
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="Site Name" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Blogs" />
 		</execute>
 
 		<execute macro="BlogsEntry#viewEntry">
@@ -262,9 +268,12 @@
 			<var name="sitePageName" value="Test Page" />
 		</execute>
 
-		<execute macro="Page#gotoContentCP">
-			<var name="portletName" value="Dynamic Data Lists" />
-			<var name="siteScopeName" value="Global" />
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="Global" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Dynamic Data Lists" />
 		</execute>
 
 		<execute macro="DDLDataDefinition#addCP">
@@ -280,9 +289,12 @@
 
 		<execute macro="DDLDataDefinition#saveCP" />
 
-		<execute macro="Page#gotoContentCP">
-			<var name="portletName" value="Dynamic Data Lists" />
-			<var name="siteScopeName" value="Global" />
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="Global" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Dynamic Data Lists" />
 		</execute>
 
 		<execute macro="DDLList#addCP">
@@ -314,9 +326,12 @@
 			<var name="portlet" value="Sites" />
 		</execute>
 
-		<execute macro="Page#gotoContentCP">
-			<var name="portletName" value="Dynamic Data Lists" />
-			<var name="siteScopeName" value="Global" />
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="Global" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Dynamic Data Lists" />
 		</execute>
 
 		<execute macro="LAR#exportPortlet">
@@ -324,9 +339,12 @@
 			<var name="siteScopeName" value="Global" />
 		</execute>
 
-		<execute macro="Page#gotoContentCP">
-			<var name="portletName" value="Dynamic Data Lists" />
-			<var name="siteScopeName" value="Site Name" />
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="Site Name" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Dynamic Data Lists" />
 		</execute>
 
 		<execute macro="LAR#importPortlet">
@@ -334,9 +352,12 @@
 			<var name="siteName" value="Site Name" />
 		</execute>
 
-		<execute macro="Page#gotoContentCP">
-			<var name="portletName" value="Dynamic Data Lists" />
-			<var name="siteScopeName" value="Site Name" />
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="Site Name" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Dynamic Data Lists" />
 		</execute>
 
 		<execute macro="DDLNavigator#gotoListRecords">
