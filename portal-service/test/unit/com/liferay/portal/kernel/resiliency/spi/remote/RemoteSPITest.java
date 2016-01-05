@@ -158,18 +158,19 @@ public class RemoteSPITest {
 		ProcessOutputStream processOutputStream = new ProcessOutputStream(
 			new ObjectOutputStream(new UnsyncByteArrayOutputStream())) {
 
-			@Override
-			public void writeProcessCallable(ProcessCallable<?> processCallable)
-				throws IOException {
+				@Override
+				public void writeProcessCallable(
+						ProcessCallable<?> processCallable)
+					throws IOException {
 
-				if (throwIOException.get()) {
-					throw new IOException();
+					if (throwIOException.get()) {
+						throw new IOException();
+					}
+
+					super.writeProcessCallable(processCallable);
 				}
 
-				super.writeProcessCallable(processCallable);
-			}
-
-		};
+			};
 
 		ReflectionTestUtil.setFieldValue(
 			ProcessContext.class, "_processOutputStream", processOutputStream);
