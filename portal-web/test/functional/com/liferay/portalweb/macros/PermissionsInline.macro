@@ -309,9 +309,12 @@
 	</command>
 
 	<command name="gotoSiteTeamsCP">
-		<execute macro="Page#gotoUsersCP">
-			<var name="portletName" value="${portletName}" />
-			<var name="siteScopeName" value="${siteScopeName}" />
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="${siteScopeName}" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesUsers">
+			<var name="portlet" value="${portletName}" />
 		</execute>
 
 		<var name="key_rowEntry" value="${teamName}" />
