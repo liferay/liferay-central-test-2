@@ -88,10 +88,8 @@ public class ExportConfigurationMVCResourceCommand
 		String pid = ParamUtil.getString(resourceRequest, "pid", factoryPid);
 
 		try {
-			String fileName = pid + ".cfg";
-
 			PortletResponseUtil.sendFile(
-				resourceRequest, resourceResponse, fileName,
+				resourceRequest, resourceResponse, pid + ".cfg",
 				getPropertiesAsBytes(resourceRequest, resourceResponse),
 				ContentTypes.TEXT_XML_UTF8);
 		}
@@ -105,6 +103,8 @@ public class ExportConfigurationMVCResourceCommand
 	protected Properties getProperties(
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws Exception {
+
+		Properties properties = new Properties();
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)resourceRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
@@ -128,8 +128,6 @@ public class ExportConfigurationMVCResourceCommand
 		ExtendedAttributeDefinition[] attributeDefinitions =
 			configurationModel.getAttributeDefinitions(ConfigurationModel.ALL);
 
-		Properties properties = new Properties();
-
 		for (AttributeDefinition attributeDefinition : attributeDefinitions) {
 			Configuration configuration = configurationModel.getConfiguration();
 
@@ -138,7 +136,7 @@ public class ExportConfigurationMVCResourceCommand
 
 			String value = null;
 
-			// See http://felix.apache.org/documentation/subprojects/apache-felix-file-install.html
+			// See http://goo.gl/JhYK7g
 
 			if (values.length == 1) {
 				value = values[0];
@@ -162,7 +160,9 @@ public class ExportConfigurationMVCResourceCommand
 
 		String propertiesString = PropertiesUtil.toString(properties);
 
-		propertiesString = _PROPERTIES_HELP + propertiesString;
+		propertiesString =
+			"##\n## Deploy this file to a Liferay installation to apply the " +
+				"configuration.\n##\n"+ propertiesString;
 
 		return propertiesString.getBytes();
 	}
@@ -180,11 +180,6 @@ public class ExportConfigurationMVCResourceCommand
 
 		_extendedMetaTypeService = extendedMetaTypeService;
 	}
-
-	private static final String _PROPERTIES_HELP =
-		"##\n" +
-			"## Deploy this file to any Liferay installation to apply its " +
-				"configuration \n" + "##\n";
 
 	private BundleContext _bundleContext;
 	private volatile ConfigurationAdmin _configurationAdmin;
