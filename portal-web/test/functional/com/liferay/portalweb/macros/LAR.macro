@@ -340,10 +340,12 @@
 	</command>
 
 	<command name="gotoExportSiteCmd">
-		<execute macro="Page#gotoPublishingTools">
-			<var name="portletCategoryName" value="Publishing Tools" />
-			<var name="portletName" value="Export" />
-			<var name="siteScopeName" value="${siteScopeName}" />
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="${siteScopeName}" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesPublishingTools">
+			<var name="portlet" value="Export" />
 		</execute>
 	</command>
 
