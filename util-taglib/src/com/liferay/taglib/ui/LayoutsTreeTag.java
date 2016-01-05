@@ -195,13 +195,13 @@ public class LayoutsTreeTag extends IncludeTag {
 		}
 
 		for (String name : portletURLs.keySet()) {
-			PortletURL portletURL = portletURLs.get(name);
-
-			portletURL.setParameter("selPlid", "{selPlid}");
-
 			JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
 			jsonObject.put("name", name);
+
+			PortletURL portletURL = portletURLs.get(name);
+
+			portletURL.setParameter("selPlid", "{selPlid}");
 
 			jsonObject.put(
 				"value",
