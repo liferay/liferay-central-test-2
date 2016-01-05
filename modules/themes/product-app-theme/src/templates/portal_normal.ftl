@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 
 <#include init />
-<html class="${root_css_class}" dir="<@liferay.language key="lang.dir" />" lang="${w3c_language_id}">
 
+<html class="${root_css_class}" dir="<@liferay.language key="lang.dir" />" lang="${w3c_language_id}">
 	<head>
 		<title>${the_title} - ${company_name}</title>
 
@@ -12,14 +12,13 @@
 	</head>
 
 	<body class="${css_class}">
+		<@liferay_ui["quick-access"] contentId="#main-content" />
 
-	<@liferay_ui["quick-access"] contentId="#main-content" />
+		<@liferay_util["include"] page=body_top_include />
 
-	<@liferay_util["include"] page=body_top_include />
+		<@liferay.control_menu />
 
-	<@liferay.control_menu />
-
-	<@liferay.product_menu_sidebar state="${liferay_product_menu_state}" />
+		<@liferay.product_menu_sidebar state="${liferay_product_menu_state}" />
 
 		<div id="wrapper">
 			<header id="banner" role="banner">
@@ -85,14 +84,11 @@
 						<small><@liferay.language key="powered-by" /> <a href="http://www.liferay.com" rel="external">Liferay</a></small>
 					</p>
 				</div>
-
 			</footer>
 		</div>
 
 		<@liferay_util["include"] page=body_bottom_include />
 
 		<@liferay_util["include"] page=bottom_include />
-
 	</body>
-
 </html>

@@ -10,7 +10,6 @@
 <#assign portlet_toolbar = portlet_display.getPortletToolbar()>
 
 <section class="portlet" id="portlet_${portlet_id}">
-
 	<#if portlet_display.isPortletDecorate() && !portlet_display.isStateMax()>
 		<header class="portlet-topper">
 			<div class="portlet-title-default">
@@ -34,5 +33,4 @@
 	<div class="${portlet_content_css_class}">
 		${portlet_display.writeContent(writer)}
 	</div>
-
 </section>
