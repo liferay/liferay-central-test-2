@@ -395,7 +395,7 @@
 </tr>
 <tr>
 	<td>MANAGE_SITE</td>
-	<td>//a[@role='menuitem' and contains(.,'Manage Site')]</td>
+	<td>//div[contains(@class,'open')]//a[@role='menuitem' and contains(.,'Manage Site')]</td>
 	<td></td>
 </tr>
 <tr>
