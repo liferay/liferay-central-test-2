@@ -1,8 +1,6 @@
 <#if socialMediaFacebook == "true" || socialMediaTwitter == "true">
-
 	<aside id="social-networks">
 		<ul class="list-inline">
-
 			<#if socialMediaFacebook == "true">
 				<li>
 					<a href="${socialMediaFacebookUrl}" rel="external" target="_blank" title="Go to our Facebook (in new window)">
@@ -18,7 +16,6 @@
 					</a>
 				</li>
 			</#if>
-
 		</ul>
 	</aside>
 </#if>
