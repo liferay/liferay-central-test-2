@@ -338,10 +338,10 @@ public class DDMFormFactoryHelper {
 
 		collectResourceBundles(_clazz, resourceBundles, locale);
 
-		ResourceBundle[] resourceBundleArray = resourceBundles.toArray(
+		ResourceBundle[] resourceBundlesArray = resourceBundles.toArray(
 			new ResourceBundle[resourceBundles.size()]);
 
-		return new AggregateResourceBundle(resourceBundleArray);
+		return new AggregateResourceBundle(resourceBundlesArray);
 	}
 
 	protected String getResourceBundleBaseName(Class<?> clazz) {
