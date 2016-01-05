@@ -120,6 +120,16 @@
 		</execute>
 	</command>
 
+	<command name="gotoPrivateSite" summary="Navigate to Product Menu > Sites > Site Popup > ${site}">
+		<execute macro="ProductMenuHelper#gotoSites" />
+
+		<execute macro="ProductMenuHelper#openSitesPopup" />
+
+		<var name="key_site" value="${site}" />
+
+		<execute function="AssertClick" locator1="ProductMenu#PRIVATE_SITE_LINK" value1="${site}" />
+	</command>
+
 	<command name="gotoPublicPages" summary="Navigate to Product Menu > Sites > Pages > Public Pages > ${page}">
 		<execute macro="ProductMenuHelper#gotoSites" />
 
@@ -130,6 +140,16 @@
 		<execute macro="ProductMenuHelper#gotoAddPage">
 			<var name="page" value="Public Pages" />
 		</execute>
+	</command>
+
+	<command name="gotoPublicSite" summary="Navigate to Product Menu > Sites > Site Popup > ${site}">
+		<execute macro="ProductMenuHelper#gotoSites" />
+
+		<execute macro="ProductMenuHelper#openSitesPopup" />
+
+		<var name="key_site" value="${site}" />
+
+		<execute function="AssertClick" locator1="ProductMenu#PUBLIC_SITE_LINK" value1="${site}" />
 	</command>
 
 	<command name="gotoSite" summary="Navigate to Product Menu > Sites > Sites Popup > ${site}">
