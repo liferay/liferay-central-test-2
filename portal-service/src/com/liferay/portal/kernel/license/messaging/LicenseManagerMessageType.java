@@ -75,7 +75,7 @@ public enum LicenseManagerMessageType {
 		return message;
 	}
 
-	public Message createMessage(LCSPortletState state) {
+	public Message createMessage(LCSPortletState lcsPortletState) {
 		Message message = new Message();
 
 		message.setDestinationName(getDestinationName());
@@ -83,7 +83,7 @@ public enum LicenseManagerMessageType {
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
 		jsonObject.put("type", name());
-		jsonObject.put("state", state.intValue());
+		jsonObject.put("state", lcsPortletState.intValue());
 
 		message.setPayload(jsonObject.toString());
 
