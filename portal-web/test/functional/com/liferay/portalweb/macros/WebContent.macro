@@ -1466,7 +1466,7 @@
 			<elseif>
 				<equals arg1="${expiredContent}" arg2="true" />
 				<then>
-					<execute function="AssertTextEquals" locator1="Message#ERROR_3" value1="${webContentTitle} is expired." />
+					<execute function="AssertTextEquals" locator1="Message#ERROR_3_ALT" value1="${webContentTitle} is expired." />
 				</then>
 			</elseif>
 			<elseif>
