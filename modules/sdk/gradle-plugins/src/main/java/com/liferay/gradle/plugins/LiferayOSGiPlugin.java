@@ -649,13 +649,13 @@ public class LiferayOSGiPlugin extends LiferayJavaPlugin {
 			while (iterator.hasNext()) {
 				File file = iterator.next();
 
-				if (_classPathReferences.contains(file)) {
+				if (_resourceReferences.contains(file)) {
 					iterator.remove();
 
 					continue;
 				}
 
-				_classPathReferences.add(file);
+				_resourceReferences.add(file);
 
 				if (_logger.isInfoEnabled()) {
 					_logger.info("RESOURCE: {}", file.getAbsolutePath());
