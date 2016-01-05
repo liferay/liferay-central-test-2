@@ -2561,9 +2561,8 @@
 
 		<execute macro="Page#viewDefaultLogoPG" />
 
-		<execute macro="Page#gotoContentCP">
+		<execute macro="Navigator#openSiteURL">
 			<var name="siteName" value="Site Name" />
-			<var name="siteURL" value="true" />
 		</execute>
 
 		<execute macro="ProductMenu#gotoSitesPages">
