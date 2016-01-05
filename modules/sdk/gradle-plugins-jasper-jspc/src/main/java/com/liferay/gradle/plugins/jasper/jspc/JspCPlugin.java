@@ -51,12 +51,13 @@ public class JspCPlugin implements Plugin<Project> {
 
 	@Override
 	public void apply(Project project) {
-		GradleUtil.addExtension(project, EXTENSION_NAME, JspCExtension.class);
+		final JspCExtension jspCExtension = GradleUtil.addExtension(
+			project, EXTENSION_NAME, JspCExtension.class);
 
 		Configuration jspCConfiguration = addJspCConfiguration(project);
 		Configuration jspCToolConfiguration = addJspCToolConfiguration(project);
 
-		CompileJSPTask generateJSPJavaTask = addTaskGenerateJSPJava(
+		final CompileJSPTask generateJSPJavaTask = addTaskGenerateJSPJava(
 			project, jspCConfiguration, jspCToolConfiguration);
 
 		addTaskCompileJSP(
@@ -67,13 +68,11 @@ public class JspCPlugin implements Plugin<Project> {
 
 				@Override
 				public void execute(Project project) {
-					JspCExtension jspCExtension = GradleUtil.getExtension(
-						project, JspCExtension.class);
-
 					addJspCDependencies(project);
 					addJspCToolDependencies(project);
 					configureJspcExtension(project, jspCExtension);
-					configureTaskGenerateJSPJava(project, jspCExtension);
+
+					jspCExtension.copyTo(generateJSPJavaTask);
 				}
 
 			});
@@ -196,15 +195,6 @@ public class JspCPlugin implements Plugin<Project> {
 		}
 
 		jspCExtension.setWebAppDir(webAppDir);
-	}
-
-	protected void configureTaskGenerateJSPJava(
-		Project project, JspCExtension jspCExtension) {
-
-		CompileJSPTask compileJSPTask = (CompileJSPTask)GradleUtil.getTask(
-			project, GENERATE_JSP_JAVA_TASK_NAME);
-
-		jspCExtension.copyTo(compileJSPTask);
 	}
 
 }
