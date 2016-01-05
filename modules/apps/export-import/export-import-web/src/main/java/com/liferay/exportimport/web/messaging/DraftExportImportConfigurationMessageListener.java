@@ -163,6 +163,10 @@ public class DraftExportImportConfigurationMessageListener
 	protected boolean isLiveGroup(long groupId) {
 		Group group = _groupLocalService.fetchGroup(groupId);
 
+		if (group == null) {
+			return false;
+		}
+
 		if (group.hasStagingGroup()) {
 			return true;
 		}
