@@ -51,6 +51,8 @@ public class JspCPlugin implements Plugin<Project> {
 
 	@Override
 	public void apply(Project project) {
+		GradleUtil.applyPlugin(project, JavaPlugin.class);
+
 		final JspCExtension jspCExtension = GradleUtil.addExtension(
 			project, EXTENSION_NAME, JspCExtension.class);
 
