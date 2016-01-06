@@ -177,7 +177,7 @@ public class FriendlyURLMapperTrackerImpl implements FriendlyURLMapperTracker {
 		}
 
 		protected Router newFriendlyURLRouter(String xml) throws Exception {
-			if (Validator.isNull(xml) || Validator.isBlank(xml)) {
+			if (Validator.isNull(xml)) {
 				return null;
 			}
 
