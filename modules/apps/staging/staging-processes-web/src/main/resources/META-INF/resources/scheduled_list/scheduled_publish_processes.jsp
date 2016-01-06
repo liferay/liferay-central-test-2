@@ -17,14 +17,14 @@
 <%@ include file="/init.jsp" %>
 
 <%
+String cmd = "unschedule_publish_to_live";
+
 boolean localPublishing = true;
 
-String unscheduleCMD = "unschedule_publish_to_live";
-
 if (group.isStaged() && group.isStagedRemotely()) {
-	localPublishing = false;
+	cmd = "unschedule_publish_to_remote";
 
-	unscheduleCMD = "unschedule_publish_to_remote";
+	localPublishing = false;
 }
 
 String destinationName = localPublishing ? DestinationNames.LAYOUTS_LOCAL_PUBLISHER : DestinationNames.LAYOUTS_REMOTE_PUBLISHER;
@@ -136,7 +136,7 @@ else {
 					</portlet:renderURL>
 
 					<portlet:actionURL name="publishLayouts" var="deleteScheduledPublicationURL">
-						<portlet:param name="cmd" value="<%= unscheduleCMD %>" />
+						<portlet:param name="cmd" value="<%= cmd %>" />
 						<portlet:param name="stagingGroupId" value="<%= String.valueOf(stagingGroupId) %>" />
 						<portlet:param name="jobName" value="<%= schedulerResponse.getJobName() %>" />
 						<portlet:param name="redirect" value="<%= deleteScheduledPublicationRedirectURL %>" />
