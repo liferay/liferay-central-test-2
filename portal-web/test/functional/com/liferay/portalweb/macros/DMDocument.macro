@@ -18,7 +18,8 @@
 
 		<execute function="AssertClick" locator1="DocumentsAndMedia#DESCRIPTIVE_LIST_DOCUMENT_TITLE" value1="${dmDocumentTitle}" />
 
-		<execute function="AssertClick" locator1="PGDocumentsandmediaDocument#COMMENTS_BE_THE_FIRST" value1="Be the first." />
+		<execute function="Click" locator1="Comments#COMMENT_FIELD" />
+
 		<execute function="Type" locator1="Comments#COMMENT_FIELD" value1="${commentBody}" />
 
 		<if>
