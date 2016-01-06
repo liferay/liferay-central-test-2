@@ -158,7 +158,7 @@ renderResponse.setTitle(userGroup.getName());
 							var selectedItem = event.newVal;
 
 							if (selectedItem) {
-								form.fm('addUserIds').val(selectedItem.value);
+								form.fm('addUserIds').val(selectedItem);
 
 								submitForm(form, '<portlet:actionURL name="editUserGroupAssignments" />');
 							}
