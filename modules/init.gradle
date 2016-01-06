@@ -67,7 +67,7 @@ if (Boolean.getBoolean("build.performance.logger.enabled")) {
 
 				long duration = endTime - startTime
 
-				logger.lifecycle "${task.path} started at ${startTime}, ended at ${endTime}, took ${duration} ms"
+				logger.lifecycle "${task.path} started at ${startTime} and ended at ${endTime}, taking ${duration} ms."
 			}
 
 			void beforeExecute(Task task) {
