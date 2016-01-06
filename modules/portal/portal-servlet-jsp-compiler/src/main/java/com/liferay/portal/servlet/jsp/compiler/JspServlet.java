@@ -188,6 +188,7 @@ public class JspServlet extends HttpServlet {
 		sb.append(
 			portalServletContext.getAttribute(
 				JavaConstants.JAVAX_SERVLET_CONTEXT_TEMPDIR));
+
 		sb.append(StringPool.SLASH);
 		sb.append(_bundle.getSymbolicName());
 		sb.append(StringPool.DASH);
