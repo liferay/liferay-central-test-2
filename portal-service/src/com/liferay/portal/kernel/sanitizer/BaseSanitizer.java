@@ -52,8 +52,8 @@ public abstract class BaseSanitizer implements Sanitizer {
 
 			return result.getBytes(StringPool.UTF8);
 		}
-		catch (UnsupportedEncodingException e) {
-			throw new SanitizerException(e);
+		catch (UnsupportedEncodingException uee) {
+			throw new SanitizerException(uee);
 		}
 	}
 
@@ -86,8 +86,8 @@ public abstract class BaseSanitizer implements Sanitizer {
 
 			outputStream.write(bytes);
 		}
-		catch (IOException e) {
-			throw new SanitizerException(e);
+		catch (IOException ioe) {
+			throw new SanitizerException(ioe);
 		}
 	}
 
