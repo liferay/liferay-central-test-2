@@ -74,12 +74,12 @@ public class SanitizerUtil {
 
 	public static String sanitize(
 			long companyId, long groupId, long userId, String className,
-			long classPK, String contentType, String s)
+			long classPK, String contentType, String content)
 		throws SanitizerException {
 
 		return sanitize(
 			companyId, groupId, userId, className, classPK, contentType,
-			Sanitizer.MODE_ALL, s, null);
+			Sanitizer.MODE_ALL, content, null);
 	}
 
 	/**
