@@ -142,12 +142,12 @@ public class EditPublishConfigurationMVCActionCommand
 			else if (cmd.equals(Constants.MOVE_TO_TRASH)) {
 				deleteExportImportConfiguration(actionRequest, true);
 			}
-			else if (cmd.equals(Constants.RESTORE)) {
-				restoreTrashEntries(actionRequest);
-			}
 			else if (cmd.equals(Constants.RELAUNCH)) {
 				relaunchPublishLayoutConfiguration(
 					themeDisplay.getUserId(), actionRequest);
+			}
+			else if (cmd.equals(Constants.RESTORE)) {
+				restoreTrashEntries(actionRequest);
 			}
 
 			String redirect = ParamUtil.getString(actionRequest, "redirect");
