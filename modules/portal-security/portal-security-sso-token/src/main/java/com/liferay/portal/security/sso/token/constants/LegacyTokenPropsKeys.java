@@ -25,7 +25,11 @@ public class LegacyTokenPropsKeys {
 	public static final String SHIBBOLETH_IMPORT_FROM_LDAP =
 		"shibboleth.import.from.ldap";
 
-	public static final String[] SHIBBOLETH_KEYS;
+	public static final String[] SHIBBOLETH_KEYS = {
+		SHIBBOLETH_AUTH_ENABLED, SHIBBOLETH_IMPORT_FROM_LDAP,
+		LegacyTokenPropsKeys.SHIBBOLETH_LOGOUT_URL,
+		LegacyTokenPropsKeys.SHIBBOLETH_USER_HEADER
+	};
 
 	public static final String SHIBBOLETH_LOGOUT_URL = "shibboleth.logout.url";
 
@@ -38,21 +42,12 @@ public class LegacyTokenPropsKeys {
 	public static final String SITEMINDER_IMPORT_FROM_LDAP =
 		"siteminder.import.from.ldap";
 
-	public static final String[] SITEMINDER_KEYS;
+	public static final String[] SITEMINDER_KEYS = {
+		SITEMINDER_AUTH_ENABLED, SITEMINDER_IMPORT_FROM_LDAP,
+		LegacyTokenPropsKeys.SITEMINDER_USER_HEADER
+	};
 
 	public static final String SITEMINDER_USER_HEADER =
 		"siteminder.user.header";
-
-	static {
-		SHIBBOLETH_KEYS = new String[] {
-			SHIBBOLETH_AUTH_ENABLED, SHIBBOLETH_IMPORT_FROM_LDAP,
-			SHIBBOLETH_LOGOUT_URL, SHIBBOLETH_USER_HEADER
-		};
-
-		SITEMINDER_KEYS = new String[] {
-			SITEMINDER_AUTH_ENABLED, SITEMINDER_IMPORT_FROM_LDAP,
-			SITEMINDER_USER_HEADER
-		};
-	}
 
 }
