@@ -52,20 +52,20 @@ public class AntiSamySanitizerImpl extends BaseSanitizer {
 
 		if (blacklist != null) {
 			for (String blacklistItem : blacklist) {
-				String trimmedItem = blacklistItem.trim();
+				blacklistItem = blacklistItem.trim();
 
-				if (!trimmedItem.isEmpty()) {
-					_blacklist.add(trimmedItem);
+				if (!blacklistItem.isEmpty()) {
+					_blacklist.add(blacklistItem);
 				}
 			}
 		}
 
 		if (whitelist != null) {
 			for (String whitelistItem : whitelist) {
-				String trimmedItem = whitelistItem.trim();
+				whitelistItem = whitelistItem.trim();
 
-				if (!trimmedItem.isEmpty()) {
-					_whitelist.add(trimmedItem);
+				if (!whitelistItem.isEmpty()) {
+					_whitelist.add(whitelistItem);
 				}
 			}
 		}
