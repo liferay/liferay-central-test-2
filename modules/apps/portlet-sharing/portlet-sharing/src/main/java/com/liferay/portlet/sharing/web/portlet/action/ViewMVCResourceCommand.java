@@ -37,7 +37,7 @@ import org.osgi.service.component.annotations.Component;
 	},
 	service = MVCResourceCommand.class
 )
-public class ViewActionMVCResourceCommand extends BaseMVCResourceCommand {
+public class ViewMVCResourceCommand extends BaseMVCResourceCommand {
 
 	@Override
 	protected void doServeResource(
