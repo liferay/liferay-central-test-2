@@ -204,26 +204,28 @@ public class SetupWizardUtil {
 		throws Exception {
 
 		_processProperty(
-			"adminFirstName", PropsKeys.DEFAULT_ADMIN_FIRST_NAME,
-			PropsValues.DEFAULT_ADMIN_FIRST_NAME, request, unicodeProperties);
+			request, unicodeProperties, "adminFirstName",
+			PropsKeys.DEFAULT_ADMIN_FIRST_NAME,
+			PropsValues.DEFAULT_ADMIN_FIRST_NAME);
 		_processProperty(
-			"adminLastName", PropsKeys.DEFAULT_ADMIN_LAST_NAME,
-			PropsValues.DEFAULT_ADMIN_LAST_NAME, request, unicodeProperties);
+			request, unicodeProperties, "adminLastName",
+			PropsKeys.DEFAULT_ADMIN_LAST_NAME,
+			PropsValues.DEFAULT_ADMIN_LAST_NAME);
 		_processProperty(
-			"companyName", PropsKeys.COMPANY_DEFAULT_NAME,
-			PropsValues.COMPANY_DEFAULT_NAME, request, unicodeProperties);
+			request, unicodeProperties, "companyName",
+			PropsKeys.COMPANY_DEFAULT_NAME, PropsValues.COMPANY_DEFAULT_NAME);
 	}
 
 	private static void _processProperty(
-			String requestKey, String propKey, String propDefaultValue,
-			HttpServletRequest request, UnicodeProperties unicodeProperties)
+			HttpServletRequest request, UnicodeProperties unicodeProperties,
+			String parameterName, String propertyKey, String defaultValue)
 		throws Exception {
 
-		String paramValue = ParamUtil.getString(
-			request, requestKey, propDefaultValue);
+		String value = ParamUtil.getString(
+			request, parameterName, defaultValue);
 
-		if (!paramValue.equals(propDefaultValue)) {
-			unicodeProperties.put(propKey, paramValue);
+		if (!value.equals(defaultValue)) {
+			unicodeProperties.put(propertyKey, value);
 		}
 	}
 
