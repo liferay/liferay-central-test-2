@@ -22,7 +22,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.sso.cas.constants.CASConfigurationKeys;
-import com.liferay.portal.security.sso.cas.constants.CASSettingsConstants;
+import com.liferay.portal.security.sso.cas.constants.CASConstants;
 import com.liferay.portal.security.sso.cas.constants.LegacyCASPropsKeys;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.verify.test.BaseCompanySettingsVerifyProcessTestCase;
@@ -98,7 +98,7 @@ public class CASCompanySettingsVerifyProcessTest
 
 	@Override
 	protected String getSettingsId() {
-		return CASSettingsConstants.SERVICE_NAME;
+		return CASConstants.SERVICE_NAME;
 	}
 
 	@Override

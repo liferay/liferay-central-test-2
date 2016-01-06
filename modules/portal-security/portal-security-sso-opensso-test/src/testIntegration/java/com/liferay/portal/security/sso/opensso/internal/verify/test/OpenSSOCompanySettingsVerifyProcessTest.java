@@ -23,7 +23,7 @@ import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.sso.opensso.constants.LegacyOpenSSOPropsKeys;
 import com.liferay.portal.security.sso.opensso.constants.OpenSSOConfigurationKeys;
-import com.liferay.portal.security.sso.opensso.constants.OpenSSOSettingsConstants;
+import com.liferay.portal.security.sso.opensso.constants.OpenSSOConstants;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.verify.test.BaseCompanySettingsVerifyProcessTestCase;
 
@@ -101,7 +101,7 @@ public class OpenSSOCompanySettingsVerifyProcessTest
 
 	@Override
 	protected String getSettingsId() {
-		return OpenSSOSettingsConstants.SERVICE_NAME;
+		return OpenSSOConstants.SERVICE_NAME;
 	}
 
 	@Override

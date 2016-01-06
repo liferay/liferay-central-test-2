@@ -17,7 +17,7 @@ package com.liferay.portal.security.sso.ntlm.constants;
 /**
  * @author Michael C. Han
  */
-public class NtlmSettingsConstants {
+public class NtlmConstants {
 
 	public static final String SERVICE_NAME =
 		"com.liferay.portal.security.sso.ntlm";

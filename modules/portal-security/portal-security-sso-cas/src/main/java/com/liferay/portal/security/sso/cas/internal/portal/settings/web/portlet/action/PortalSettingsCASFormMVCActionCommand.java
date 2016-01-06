@@ -28,7 +28,7 @@ import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
-import com.liferay.portal.security.sso.cas.constants.CASSettingsConstants;
+import com.liferay.portal.security.sso.cas.constants.CASConstants;
 import com.liferay.portal.settings.web.constants.PortalSettingsPortletKeys;
 import com.liferay.portal.theme.ThemeDisplay;
 
@@ -72,15 +72,14 @@ public class PortalSettingsCASFormMVCActionCommand
 
 		Settings settings = SettingsFactoryUtil.getSettings(
 			new CompanyServiceSettingsLocator(
-				themeDisplay.getCompanyId(),
-				CASSettingsConstants.SERVICE_NAME));
+				themeDisplay.getCompanyId(), CASConstants.SERVICE_NAME));
 
 		ModifiableSettings modifiableSettings =
 			settings.getModifiableSettings();
 
 		SettingsDescriptor settingsDescriptor =
 			SettingsFactoryUtil.getSettingsDescriptor(
-				CASSettingsConstants.SERVICE_NAME);
+				CASConstants.SERVICE_NAME);
 
 		for (String name : settingsDescriptor.getAllKeys()) {
 			String value = ParamUtil.getString(actionRequest, "cas--" + name);

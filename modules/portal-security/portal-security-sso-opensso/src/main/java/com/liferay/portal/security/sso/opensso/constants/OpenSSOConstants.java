@@ -12,14 +12,14 @@
  * details.
  */
 
-package com.liferay.portal.security.sso.cas.constants;
+package com.liferay.portal.security.sso.opensso.constants;
 
 /**
  * @author Michael C. Han
  */
-public class CASSettingsConstants {
+public class OpenSSOConstants {
 
 	public static final String SERVICE_NAME =
-		"com.liferay.portal.security.sso.cas";
+		"com.liferay.portal.security.sso.opensso";
 
 }
