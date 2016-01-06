@@ -30,7 +30,7 @@ public class LegacyCASPropsKeys {
 		LegacyCASPropsKeys.CAS_NO_SUCH_USER_REDIRECT_URL,
 		LegacyCASPropsKeys.CAS_SERVER_NAME, LegacyCASPropsKeys.CAS_SERVER_URL,
 		LegacyCASPropsKeys.CAS_SERVICE_URL
-	};;
+	};
 
 	public static final String CAS_LOGIN_URL = "cas.login.url";
 
