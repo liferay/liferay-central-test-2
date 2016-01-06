@@ -315,6 +315,12 @@
 			<var name="contentBody" value="DM Document Title" />
 		</execute>
 
+		<execute function="Click" locator1="Icon#DISPLAY_STYLE_DESCRIPTIVE" />
+
+		<execute macro="DMNavigator#gotoDocumentPG">
+			<var name="dmDocumentTitle" value="DM Document Title" />
+		</execute>
+
 		<execute macro="DMDocument#viewDocumentTitleCmdPG">
 			<var name="dmDocumentTitle" value="DM Document Title" />
 		</execute>
@@ -397,6 +403,12 @@
 
 		<execute macro="Notifications#navigateToContent">
 			<var name="contentBody" value="DM Document Title Edit" />
+		</execute>
+
+		<execute function="Click" locator1="Icon#DISPLAY_STYLE_DESCRIPTIVE" />
+
+		<execute macro="DMNavigator#gotoDocumentPG">
+			<var name="dmDocumentTitle" value="DM Document Title Edit" />
 		</execute>
 
 		<execute macro="DMDocument#viewDocumentTitleCmdPG">
