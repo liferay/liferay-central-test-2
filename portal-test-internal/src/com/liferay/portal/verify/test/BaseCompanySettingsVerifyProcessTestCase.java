@@ -80,6 +80,7 @@ public abstract class BaseCompanySettingsVerifyProcessTestCase
 	}
 
 	@After
+	@Override
 	public void tearDown() throws Exception {
 		List<Company> companies = companyLocalService.getCompanies(false);
 
