@@ -16,11 +16,8 @@ package com.liferay.portlet.sharing.web.portlet.action;
 
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCResourceCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCResourceCommand;
-import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portlet.sharing.web.constants.PortletSharingPortletKeys;
 
-import javax.portlet.PortletConfig;
-import javax.portlet.PortletRequestDispatcher;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 
