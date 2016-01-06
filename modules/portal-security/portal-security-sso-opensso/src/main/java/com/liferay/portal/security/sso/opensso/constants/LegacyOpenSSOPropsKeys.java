@@ -30,7 +30,7 @@ public class LegacyOpenSSOPropsKeys {
 	public static final String OPENSSO_IMPORT_FROM_LDAP =
 		"open.sso.ldap.import.enabled";
 
-	public static final String[] OPENSSO_KEYS =  {
+	public static final String[] OPENSSO_KEYS = {
 		OPENSSO_EMAIL_ADDRESS_ATTR, OPENSSO_AUTH_ENABLED,
 		OPENSSO_FIRST_NAME_ATTR, OPENSSO_IMPORT_FROM_LDAP,
 		LegacyOpenSSOPropsKeys.OPENSSO_LAST_NAME_ATTR,
