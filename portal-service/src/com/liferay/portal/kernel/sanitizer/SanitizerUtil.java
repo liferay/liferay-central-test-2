@@ -42,7 +42,7 @@ public class SanitizerUtil {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0 please use {@link
+	 * @deprecated As of 7.0.0, replaced by {@link
 	 *             #sanitize(long, long, long, String, long, String, String)}
 	 */
 	@Deprecated
@@ -57,7 +57,7 @@ public class SanitizerUtil {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0 please use {@link
+	 * @deprecated As of 7.0.0, replaced by {@link
 	 *             #sanitize(long, long, long, String, long, String, String)}
 	 */
 	@Deprecated
@@ -83,7 +83,7 @@ public class SanitizerUtil {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0 please use {@link
+	 * @deprecated As of 7.0.0, replaced by {@link
 	 *             #sanitize(long, long, long, String, long, String, String, String, Map)}
 	 */
 	@Deprecated
@@ -99,7 +99,7 @@ public class SanitizerUtil {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0 please use {@link
+	 * @deprecated As of 7.0.0, replaced by {@link
 	 *             #sanitize(long, long, long, String, long, String, String, String, Map)}
 	 */
 	@Deprecated
@@ -127,7 +127,7 @@ public class SanitizerUtil {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0 please use {@link
+	 * @deprecated As of 7.0.0, replaced by {@link
 	 *             #sanitize(long, long, long, String, long, String, String[], String, Map)}
 	 */
 	@Deprecated
@@ -149,7 +149,7 @@ public class SanitizerUtil {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0 please use {@link
+	 * @deprecated As of 7.0.0, replaced by {@link
 	 *             #sanitize(long, long, long, String, long, String, String[], String, Map)}
 	 */
 	@Deprecated
@@ -162,24 +162,25 @@ public class SanitizerUtil {
 
 		PortalRuntimePermission.checkGetBeanProperty(SanitizerUtil.class);
 
-		InputStream in = inputStream;
-		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		ByteArrayOutputStream byteArrayOutputStream =
+			new ByteArrayOutputStream();
 
 		for (Sanitizer sanitizer : _sanitizers) {
 			sanitizer.sanitize(
 				companyId, groupId, userId, className, classPK, contentType,
-				modes, in, out, options);
+				modes, inputStream, byteArrayOutputStream, options);
 
-			in = new ByteArrayInputStream(out.toByteArray());
+			inputStream = new ByteArrayInputStream(
+				byteArrayOutputStream.toByteArray());
 
-			out.reset();
+			byteArrayOutputStream.reset();
 		}
 
 		try {
-			StreamUtil.transfer(in, outputStream);
+			StreamUtil.transfer(inputStream, outputStream);
 		}
-		catch (IOException e) {
-			throw new SanitizerException(e);
+		catch (IOException ioe) {
+			throw new SanitizerException(ioe);
 		}
 	}
 
@@ -201,7 +202,7 @@ public class SanitizerUtil {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0 with no direct replacement
+	 * @deprecated As of 7.0.0, with no direct replacement
 	 */
 	@Deprecated
 	public void setSanitizer(Sanitizer sanitizer) {
