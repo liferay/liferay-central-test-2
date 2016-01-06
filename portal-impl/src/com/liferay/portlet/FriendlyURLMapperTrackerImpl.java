@@ -142,8 +142,10 @@ public class FriendlyURLMapperTrackerImpl implements FriendlyURLMapperTracker {
 				String xml = null;
 
 				if (Validator.isNotNull(friendlyURLRoutes)) {
-					ClassLoader classLoader =
-						friendlyURLMapper.getClass().getClassLoader();
+					Class<?> clazz = friendlyURLMapper.getClass();
+
+					ClassLoader classLoader = clazz.getClassLoader();
+
 					xml = StringUtil.read(classLoader, friendlyURLRoutes);
 				}
 
