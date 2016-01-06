@@ -25,7 +25,6 @@ ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_
 ExportImportConfiguration exportImportConfiguration = (ExportImportConfiguration)row.getObject();
 %>
 
-
 <portlet:renderURL var="deleteRedirectURL">
 	<portlet:param name="mvcRenderCommandName" value="viewPublishConfigurations" />
 	<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
