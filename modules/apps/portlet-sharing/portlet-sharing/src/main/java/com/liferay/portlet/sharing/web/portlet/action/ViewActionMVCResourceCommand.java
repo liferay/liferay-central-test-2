@@ -44,16 +44,7 @@ public class ViewActionMVCResourceCommand extends BaseMVCResourceCommand {
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws Exception {
 
-		String path = "/view.jsp";
-
-		PortletConfig portletConfig =
-			(PortletConfig)resourceRequest.getAttribute(
-				JavaConstants.JAVAX_PORTLET_CONFIG);
-
-		PortletRequestDispatcher portletRequestDispatcher =
-			portletConfig.getPortletContext().getRequestDispatcher(path);
-
-		portletRequestDispatcher.include(resourceRequest, resourceResponse);
+		include(resourceRequest, resourceResponse, "/view.jsp");
 	}
 
 }
