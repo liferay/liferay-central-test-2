@@ -113,14 +113,14 @@ public class AntiSamySanitizerImpl extends BaseSanitizer {
 	protected boolean isWhitelisted(String className, long classPK) {
 		String classNameAndPK = className + StringPool.POUND + classPK;
 
-		for (String blacklistEntry : _blacklist) {
-			if (classNameAndPK.startsWith(blacklistEntry)) {
+		for (String blacklistItem : _blacklist) {
+			if (classNameAndPK.startsWith(blacklistItem)) {
 				return false;
 			}
 		}
 
-		for (String whitelistEntry : _whitelist) {
-			if (classNameAndPK.startsWith(whitelistEntry)) {
+		for (String whitelistItem : _whitelist) {
+			if (classNameAndPK.startsWith(whitelistItem)) {
 				return true;
 			}
 		}
