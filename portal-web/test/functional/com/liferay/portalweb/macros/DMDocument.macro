@@ -20,7 +20,7 @@
 
 		<execute function="Click" locator1="Comments#COMMENT_FIELD" />
 
-		<execute function="Type" locator1="Comments#COMMENT_FIELD" value1="${commentBody}" />
+		<execute function="Type" locator1="Comments#COMMENT_FIELD" value1="${entryComment}" />
 
 		<if>
 			<condition function="IsElementPresent" locator1="PGDocumentsandmediaDocument#COMMENTS_SUBMIT_BUTTON" value1="Submit" />
