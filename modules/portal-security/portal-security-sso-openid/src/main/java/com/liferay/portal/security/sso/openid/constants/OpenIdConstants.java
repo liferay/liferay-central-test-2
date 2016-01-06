@@ -12,14 +12,14 @@
  * details.
  */
 
-package com.liferay.portal.security.sso.opensso.constants;
+package com.liferay.portal.security.sso.openid.constants;
 
 /**
  * @author Michael C. Han
  */
-public class OpenSSOSettingsConstants {
+public class OpenIdConstants {
 
 	public static final String SERVICE_NAME =
-		"com.liferay.portal.security.sso.opensso";
+		"com.liferay.portal.security.sso.openid";
 
 }

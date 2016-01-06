@@ -12,14 +12,14 @@
  * details.
  */
 
-package com.liferay.portal.security.sso.token.constants;
+package com.liferay.portal.security.sso.facebook.connect.constants;
 
 /**
  * @author Michael C. Han
  */
-public class TokenSettingsConstants {
+public class FacebookConnectConstants {
 
 	public static final String SERVICE_NAME =
-		"com.liferay.portal.security.sso.token";
+		"com.liferay.portal.security.sso.facebook.connect";
 
 }

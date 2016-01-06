@@ -16,7 +16,7 @@ package com.liferay.portal.security.sso.opensso.internal.module.configuration.de
 
 import com.liferay.portal.kernel.settings.definition.ConfigurationPidMapping;
 import com.liferay.portal.security.sso.opensso.configuration.OpenSSOConfiguration;
-import com.liferay.portal.security.sso.opensso.constants.OpenSSOSettingsConstants;
+import com.liferay.portal.security.sso.opensso.constants.OpenSSOConstants;
 
 import org.osgi.service.component.annotations.Component;
 
@@ -34,7 +34,7 @@ public class OpenSSOCompanyServiceConfigurationPidMapping
 
 	@Override
 	public String getConfigurationPid() {
-		return OpenSSOSettingsConstants.SERVICE_NAME;
+		return OpenSSOConstants.SERVICE_NAME;
 	}
 
 }

@@ -20,7 +20,7 @@ import com.liferay.portal.kernel.util.PrefsProps;
 import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.security.sso.facebook.connect.constants.FacebookConnectConfigurationKeys;
-import com.liferay.portal.security.sso.facebook.connect.constants.FacebookConnectSettingsConstants;
+import com.liferay.portal.security.sso.facebook.connect.constants.FacebookConnectConstants;
 import com.liferay.portal.security.sso.facebook.connect.constants.LegacyFacebookConnectPropsKeys;
 import com.liferay.portal.service.CompanyLocalService;
 import com.liferay.portal.verify.BaseCompanySettingsVerifyProcess;
@@ -110,7 +110,7 @@ public class FacebookConnectCompanySettingsVerifyProcess
 
 	@Override
 	protected String getSettingsId() {
-		return FacebookConnectSettingsConstants.SERVICE_NAME;
+		return FacebookConnectConstants.SERVICE_NAME;
 	}
 
 	@Reference(unbind = "-")

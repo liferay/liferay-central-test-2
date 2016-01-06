@@ -16,7 +16,7 @@ package com.liferay.portal.security.sso.ntlm.internal.module.configuration.defin
 
 import com.liferay.portal.kernel.settings.definition.ConfigurationPidMapping;
 import com.liferay.portal.security.sso.ntlm.configuration.NtlmConfiguration;
-import com.liferay.portal.security.sso.ntlm.constants.NtlmSettingsConstants;
+import com.liferay.portal.security.sso.ntlm.constants.NtlmConstants;
 
 import org.osgi.service.component.annotations.Component;
 
@@ -34,7 +34,7 @@ public class NtlmCompanyServiceConfigurationPidMapping
 
 	@Override
 	public String getConfigurationPid() {
-		return NtlmSettingsConstants.SERVICE_NAME;
+		return NtlmConstants.SERVICE_NAME;
 	}
 
 }

@@ -21,7 +21,7 @@ import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.security.sso.openid.constants.LegacyOpenIdPropsKeys;
 import com.liferay.portal.security.sso.openid.constants.OpenIdConfigurationKeys;
-import com.liferay.portal.security.sso.openid.constants.OpenIdSettingsConstants;
+import com.liferay.portal.security.sso.openid.constants.OpenIdConstants;
 import com.liferay.portal.service.CompanyLocalService;
 import com.liferay.portal.verify.BaseCompanySettingsVerifyProcess;
 import com.liferay.portal.verify.VerifyProcess;
@@ -73,7 +73,7 @@ public class OpenIdCompanySettingsVerifyProcess
 
 	@Override
 	protected String getSettingsId() {
-		return OpenIdSettingsConstants.SERVICE_NAME;
+		return OpenIdConstants.SERVICE_NAME;
 	}
 
 	@Reference(unbind = "-")

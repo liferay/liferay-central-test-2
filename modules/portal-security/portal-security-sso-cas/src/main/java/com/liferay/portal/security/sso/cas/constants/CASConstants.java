@@ -12,14 +12,14 @@
  * details.
  */
 
-package com.liferay.portal.security.sso.facebook.connect.constants;
+package com.liferay.portal.security.sso.cas.constants;
 
 /**
  * @author Michael C. Han
  */
-public class FacebookConnectSettingsConstants {
+public class CASConstants {
 
 	public static final String SERVICE_NAME =
-		"com.liferay.portal.security.sso.facebook.connect";
+		"com.liferay.portal.security.sso.cas";
 
 }
