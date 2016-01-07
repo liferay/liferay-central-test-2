@@ -1041,7 +1041,7 @@
 
 	<target name="compile-jsp">
 		<property name="testray.main.component.name" value="Compile JSP" />
-		<property name="testray.testcase.priority" value="4" />
+		<property name="testray.testcase.priority" value="5" />
 
 		<run-batch-test>
 			<test-action>
