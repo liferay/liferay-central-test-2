@@ -591,9 +591,10 @@ public class JournalTransformer {
 				DDMFormFieldOptions ddmFormFieldOptions =
 					ddmFormField.getDDMFormFieldOptions();
 
-				for (Entry<String, LocalizedValue> entry :
-						ddmFormFieldOptions.getOptions().entrySet()) {
+				Map<String, LocalizedValue> options =
+					ddmFormFieldOptions.getOptions();
 
+				for (Entry<String, LocalizedValue> entry : options.entrySet()) {
 					String optionValue = StringUtil.stripCDATA(entry.getKey());
 
 					LocalizedValue localizedLabel = entry.getValue();
