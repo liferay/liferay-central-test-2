@@ -454,8 +454,9 @@ public class JspServlet extends HttpServlet {
 
 	private static final Class<?>[] _INTERFACES = {ServletContext.class};
 
-	private static final String _WORK_DIR = PropsUtil.get(
-		PropsKeys.LIFERAY_HOME) + File.separator + "work" + File.separator;
+	private static final String _WORK_DIR =
+		PropsUtil.get(PropsKeys.LIFERAY_HOME) + File.separator + "work" +
+			File.separator;
 
 	private static final Bundle _jspBundle = FrameworkUtil.getBundle(
 		JspServlet.class);
