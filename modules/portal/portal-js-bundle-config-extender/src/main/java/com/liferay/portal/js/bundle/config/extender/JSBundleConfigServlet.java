@@ -14,6 +14,7 @@
 
 package com.liferay.portal.js.bundle.config.extender;
 
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.StreamUtil;
 
 import java.io.IOException;
@@ -48,15 +49,11 @@ import org.osgi.service.component.annotations.Reference;
 	property = {
 		"osgi.http.whiteboard.servlet.name=JS Bundle Config Servlet",
 		"osgi.http.whiteboard.servlet.pattern=/js_bundle_config",
-		"service.ranking:Integer=" + JSBundleConfigServlet.MAX_VALUE_LESS_1K
+		"service.ranking:Integer=" + (Integer.MAX_VALUE - 1000)
 	},
 	service = {JSBundleConfigServlet.class, Servlet.class}
 )
 public class JSBundleConfigServlet extends HttpServlet {
-
-	public static final String CONTENT_TYPE = "text/javascript; charset=UTF-8";
-
-	public static final int MAX_VALUE_LESS_1K = (Integer.MAX_VALUE - 1000);
 
 	@Activate
 	@Modified
@@ -76,7 +73,7 @@ public class JSBundleConfigServlet extends HttpServlet {
 			HttpServletRequest request, HttpServletResponse response)
 		throws IOException {
 
-		response.setContentType(CONTENT_TYPE);
+		response.setContentType(ContentTypes.TEXT_JAVASCRIPT_UTF8);
 
 		ServletOutputStream servletOutputStream = response.getOutputStream();
 
