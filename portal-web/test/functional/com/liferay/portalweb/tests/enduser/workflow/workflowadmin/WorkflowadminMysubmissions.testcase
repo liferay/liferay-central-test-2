@@ -44,7 +44,7 @@
 		</if>
 	</tear-down>
 
-	<command name="WithdrawTaskAssignedToMeByActions" priority="4">
+	<command name="WithdrawTaskAssignedToMeByActions" priority="5">
 		<var name="webContentContent" value="WC WebContent Content" />
 		<var name="webContentTitle" value="WC WebContent Title" />
 

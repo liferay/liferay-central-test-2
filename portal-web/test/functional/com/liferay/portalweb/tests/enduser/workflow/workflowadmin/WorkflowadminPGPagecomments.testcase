@@ -62,7 +62,7 @@
 		</if>
 	</tear-down>
 
-	<command name="ApprovePageCommentPG" priority="4">
+	<command name="ApprovePageCommentPG" priority="5">
 		<var name="commentAuthor" value="Test Test (You)" />
 		<var name="commentBody" value="Page Comment Comment" />
 
