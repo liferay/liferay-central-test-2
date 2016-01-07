@@ -163,7 +163,7 @@ if (ListUtil.isEmpty(folders) && ListUtil.isEmpty(entries)) {
 	</c:when>
 	<c:otherwise>
 		<div class="sidebar-header">
-			<h4><liferay-ui:message arguments="<%= folders.size() + entries.size() %>" key="x-items-selected" /></h4>
+			<h4><liferay-ui:message arguments="<%= folders.size() + entries.size() %>" key="x-items-are-selected" /></h4>
 		</div>
 
 		<aui:nav-bar>
@@ -173,7 +173,7 @@ if (ListUtil.isEmpty(folders) && ListUtil.isEmpty(entries)) {
 		</aui:nav-bar>
 
 		<div class="sidebar-body">
-			<h5><liferay-ui:message arguments="<%= folders.size() + entries.size() %>" key="x-items-selected" /></h5>
+			<h5><liferay-ui:message arguments="<%= folders.size() + entries.size() %>" key="x-items-are-selected" /></h5>
 		</div>
 	</c:otherwise>
 </c:choose>
