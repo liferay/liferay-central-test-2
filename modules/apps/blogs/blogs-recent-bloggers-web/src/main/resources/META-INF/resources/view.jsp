@@ -59,9 +59,7 @@ else {
 			try {
 				Group group = GroupLocalServiceUtil.getGroup(statsUser.getGroupId());
 				User user2 = UserLocalServiceUtil.getUserById(statsUser.getUserId());
-
 				Date now = new Date();
-
 				QueryDefinition<BlogsEntry> entryCountQueryDefinition = new QueryDefinition<>(WorkflowConstants.STATUS_APPROVED);
 
 				int entryCount = BlogsEntryLocalServiceUtil.getGroupUserEntriesCount(group.getGroupId(), user2.getUserId(), now, entryCountQueryDefinition);
