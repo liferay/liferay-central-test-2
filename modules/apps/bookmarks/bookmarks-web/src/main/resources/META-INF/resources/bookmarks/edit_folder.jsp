@@ -26,7 +26,6 @@ long folderId = BeanParamUtil.getLong(folder, request, "folderId");
 long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 
 boolean mergeWithParentFolderDisabled = ParamUtil.getBoolean(request, "mergeWithParentFolderDisabled");
-
 boolean showFolderSelector = ParamUtil.getBoolean(request, "showFolderSelector");
 
 if (folder != null) {
