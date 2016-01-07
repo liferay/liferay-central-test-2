@@ -342,7 +342,7 @@
 		</execute>
 	</command>
 
-	<command name="AddDDLRecordWithDoubleApproverDefinition" priority="4">
+	<command name="AddDDLRecordWithDoubleApproverDefinition" priority="5">
 		<execute macro="ProductMenu#gotoControlPanelConfiguration">
 			<var name="portlet" value="Workflow Definition" />
 		</execute>

@@ -83,7 +83,7 @@
 		</if>
 	</tear-down>
 
-	<command name="ApprovePageRevisionPG" priority="4">
+	<command name="ApprovePageRevisionPG" priority="5">
 		<var name="pageName" value="Page Revision Page" />
 
 		<execute macro="Page#addPG">
