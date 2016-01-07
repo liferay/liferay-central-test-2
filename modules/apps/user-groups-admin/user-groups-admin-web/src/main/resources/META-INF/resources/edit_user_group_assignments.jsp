@@ -17,8 +17,6 @@
 <%@ include file="/init.jsp" %>
 
 <%
-String tabs1 = ParamUtil.getString(request, "tabs1");
-
 String redirect = ParamUtil.getString(request, "redirect");
 
 long userGroupId = ParamUtil.getLong(request, "userGroupId");
@@ -39,7 +37,6 @@ else {
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("mvcPath", "/edit_user_group_assignments.jsp");
-portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("userGroupId", String.valueOf(userGroup.getUserGroupId()));
 
@@ -110,7 +107,6 @@ renderResponse.setTitle(userGroup.getName());
 </aui:button-row>
 
 <aui:form action="<%= portletURL.toString() %>" cssClass="container-fluid-1280" method="post" name="fm">
-	<aui:input name="tabs1" type="hidden" value="<%= tabs1 %>" />
 	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 	<aui:input name="assignmentsRedirect" type="hidden" />
 	<aui:input name="userGroupId" type="hidden" value="<%= userGroup.getUserGroupId() %>" />
