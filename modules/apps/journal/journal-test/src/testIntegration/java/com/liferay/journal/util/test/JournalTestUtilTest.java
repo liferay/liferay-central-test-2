@@ -77,9 +77,9 @@ public class JournalTestUtilTest {
 
 	@Before
 	public void setUp() throws Exception {
-		_group = GroupTestUtil.addGroup();
 		_ddmStructure = DDMStructureTestUtil.addStructure(
 			JournalArticle.class.getName());
+		_group = GroupTestUtil.addGroup();
 	}
 
 	@Test
@@ -311,9 +311,9 @@ public class JournalTestUtilTest {
 		tokens.put(
 			"article_group_id", String.valueOf(TestPropsValues.getGroupId()));
 		tokens.put(
-			"ddm_structure_id", String.valueOf(_ddmStructure.getStructureId()));
-		tokens.put(
 			"company_id", String.valueOf(TestPropsValues.getCompanyId()));
+		tokens.put(
+			"ddm_structure_id", String.valueOf(_ddmStructure.getStructureId()));
 
 		return tokens;
 	}
