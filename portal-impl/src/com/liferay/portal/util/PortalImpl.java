@@ -2955,10 +2955,9 @@ public class PortalImpl implements Portal {
 			LayoutSet layoutSet, boolean secureConnection)
 		throws PortalException {
 
-		int portalPort = getPortalServerPort(secureConnection);
-
 		Company company = CompanyLocalServiceUtil.getCompany(
 			layoutSet.getCompanyId());
+		int portalPort = getPortalServerPort(secureConnection);
 
 		String portalURL = getPortalURL(
 			company.getVirtualHostname(), portalPort, secureConnection);
