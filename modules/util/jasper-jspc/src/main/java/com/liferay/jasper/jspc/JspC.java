@@ -59,8 +59,8 @@ public class JspC extends org.apache.jasper.JspC {
 
 			jspc.execute();
 		}
-		catch (Exception e) {
-			e.printStackTrace();
+		catch (Exception e1) {
+			e1.printStackTrace();
 
 			try {
 				Field noDieLevelField =
