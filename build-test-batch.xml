@@ -1039,6 +1039,23 @@
 		</sequential>
 	</macrodef>
 
+	<target name="compile-jsp">
+		<property name="testray.main.component.name" value="Compile JSP" />
+		<property name="testray.testcase.priority" value="4" />
+
+		<run-batch-test>
+			<test-action>
+				<ant dir="portal-web" target="compile-tomcat" />
+
+				<gradle-execute dir="modules" task="compileJSP" />
+			</test-action>
+
+			<test-set-up>
+				<prepare-test-build />
+			</test-set-up>
+		</run-batch-test>
+	</target>
+
 	<target name="functional-bundle-tomcat-mysql">
 		<set-tomcat-version-number liferay.portal.bundle="${test.portal.bundle.version}" />
 
