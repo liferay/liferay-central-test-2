@@ -138,11 +138,11 @@ public class EditEntryMVCActionCommand extends BaseMVCActionCommand {
 			else if (cmd.equals(Constants.DELETE)) {
 				deleteEntry(actionRequest, false);
 			}
-			else if (cmd.equals(Constants.MOVE_TO_TRASH)) {
-				deleteEntry(actionRequest, true);
-			}
 			else if (cmd.equals(Constants.MOVE)) {
 				moveEntries(actionRequest);
+			}
+			else if (cmd.equals(Constants.MOVE_TO_TRASH)) {
+				deleteEntry(actionRequest, true);
 			}
 			else if (cmd.equals(Constants.RESTORE)) {
 				restoreTrashEntries(actionRequest);
