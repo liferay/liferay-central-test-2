@@ -43,8 +43,8 @@ else {
 	}
 }
 
-boolean showHeader = ParamUtil.getBoolean(request, "showHeader", true);
 boolean showFolderSelector = ParamUtil.getBoolean(request, "showFolderSelector");
+boolean showHeader = ParamUtil.getBoolean(request, "showHeader", true);
 
 String headerTitle = (entry == null) ? LanguageUtil.get(request, "add-bookmark") : LanguageUtil.format(request, "edit-x", entry.getName(), false);
 
