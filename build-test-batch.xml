@@ -1131,13 +1131,6 @@
 				<gradle-execute dir="modules" task="test">
 					<arg value="-Dtest.class.group.index=${axis.variable}" />
 				</gradle-execute>
-
-				<if>
-					<equals arg1="${axis.variable}" arg2="0" />
-					<then>
-						<gradle-execute dir="modules" task="compileJSP" />
-					</then>
-				</if>
 			</test-action>
 
 			<test-set-up>
