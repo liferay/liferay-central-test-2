@@ -95,7 +95,7 @@ if (portletTitleBasedNavigation) {
 			<aui:fieldset>
 				<c:if test="<%= !validMoveFolders.isEmpty() %>">
 					<div class="move-list-info">
-						<h4><liferay-ui:message arguments="<%= validMoveFolders.size() %>" key="x-folders-ready-to-be-moved" translateArguments="<%= false %>" /></h4>
+						<h4><liferay-ui:message arguments="<%= validMoveFolders.size() %>" key="x-folders-are-ready-to-be-moved" translateArguments="<%= false %>" /></h4>
 					</div>
 
 					<div class="move-list">
@@ -163,7 +163,7 @@ if (portletTitleBasedNavigation) {
 
 				<c:if test="<%= !validMoveEntries.isEmpty() %>">
 					<div class="move-list-info">
-						<h4><liferay-ui:message arguments="<%= validMoveEntries.size() %>" key="x-entries-ready-to-be-moved" translateArguments="<%= false %>" /></h4>
+						<h4><liferay-ui:message arguments="<%= validMoveEntries.size() %>" key="x-entries-are-ready-to-be-moved" translateArguments="<%= false %>" /></h4>
 					</div>
 
 					<div class="move-list">
