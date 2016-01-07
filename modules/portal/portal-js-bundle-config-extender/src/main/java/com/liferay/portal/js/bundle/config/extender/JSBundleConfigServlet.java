@@ -26,7 +26,6 @@ import java.net.URL;
 import java.util.Collection;
 import java.util.Map;
 
-import javax.servlet.Servlet;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -51,7 +50,7 @@ import org.osgi.service.component.annotations.Reference;
 		"osgi.http.whiteboard.servlet.pattern=/js_bundle_config",
 		"service.ranking:Integer=" + (Integer.MAX_VALUE - 1000)
 	},
-	service = {JSBundleConfigServlet.class, Servlet.class}
+	service = {JSBundleConfigServlet.class, javax.servlet.Servlet.class}
 )
 public class JSBundleConfigServlet extends HttpServlet {
 
