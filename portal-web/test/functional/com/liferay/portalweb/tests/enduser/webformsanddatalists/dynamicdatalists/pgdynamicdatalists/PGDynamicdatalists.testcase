@@ -175,6 +175,8 @@
 	</command>
 
 	<command name="AddListRecord" priority="5">
+		<property name="portal.acceptance" value="true" />
+
 		<var name="ddlDataDefinitionName" value="Data Definition Name" />
 		<var name="ddlListName" value="List Name" />
 		<var name="ddlRecordFieldData" value="Text" />
@@ -453,6 +455,8 @@
 	</command>
 
 	<command name="ConfigureSpreadsheetListPG" priority="5">
+		<property name="portal.acceptance" value="true" />
+
 		<var name="ddlDataDefinitionName" value="Data Definition Name" />
 		<var name="ddlListName" value="List Name" />
 		<var name="field" value="Text" />
@@ -1734,6 +1738,7 @@
 
 	<command name="ViewListRecordWithUploadedFreeMarkerDisplayTemplate" priority="5">
 		<property name="custom.properties" value="freemarker.engine.restricted.variables=${line.separator}velocity.engine.restricted.variables=" />
+		<property name="portal.acceptance" value="true" />
 
 		<var name="ddlDataDefinitionName" value="Data Definition" />
 		<var name="ddlDisplayTemplateLanguage" value="FreeMarker (.ftl)" />
