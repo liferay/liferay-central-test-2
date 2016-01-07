@@ -89,7 +89,7 @@ public class PortalImplControlPanelFullURLTest {
 			_group.getCompanyId(), portletId);
 
 		Assert.assertEquals(
-			portlet.toString() + ", controlPanelEntryCategory=" +
+			portlet.toString() + " with control panel entry category " +
 				portlet.getControlPanelEntryCategory(),
 			sb.toString(),
 			_portalImpl.getControlPanelFullURL(
