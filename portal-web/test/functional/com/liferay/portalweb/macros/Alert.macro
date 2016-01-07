@@ -8,4 +8,10 @@
 	<command name="viewRequiredFieldAlert">
 		<execute function="AssertTextEquals#assertPartialText" locator1="TextInput#REQUIRED_ALERT" value1="This field is required." />
 	</command>
+
+	<command name="viewSetupUpdatedSuccessMessage">
+		<execute macro-mobile="MobileNavigator#clickRemoveIcon" />
+
+		<execute function="AssertTextEquals#assertPartialText" locator1="Message#SUCCESS" value1="You have successfully updated the setup." />
+	</command>
 </definition>
