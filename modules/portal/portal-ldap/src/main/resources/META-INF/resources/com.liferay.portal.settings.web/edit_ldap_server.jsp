@@ -561,7 +561,7 @@ for (int i = 0; i < groupMappingArray.length; i++) {
 				data.<portlet:namespace />userMappingStatus = document.<portlet:namespace />fm['<portlet:namespace />userMappingStatus'].value;
 				data.<portlet:namespace />userMappingUuid = document.<portlet:namespace />fm['<portlet:namespace />userMappingUuid'].value;
 			}
-console.log(type, data);
+
 			if (url != null) {
 				data.<portlet:namespace />ldapServerId = document.<portlet:namespace />fm['<portlet:namespace />ldapServerId'].value;
 				data.<portlet:namespace />baseProviderURL = document.<portlet:namespace />fm['<portlet:namespace />ldap--<%= LDAPConstants.BASE_PROVIDER_URL %>--'].value;
