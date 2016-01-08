@@ -35,16 +35,13 @@ public class LiferayBuildPerformanceLogger extends DefaultLogger {
 		long currentTime = System.currentTimeMillis();
 		long startTime = _startTimes.get(target);
 
-		long duration = currentTime - startTime;
-
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("  [logging] ");
 		sb.append(currentTime);
-		sb.append(" : Target ");
+		sb.append(" [LiferayBuildPerformanceLogger] Finished target ");
 		sb.append(target.getName());
-		sb.append(" finished in ");
-		sb.append(duration);
+		sb.append(" in ");
+		sb.append(currentTime - startTime);
 		sb.append("ms");
 
 		printMessage(sb.toString(), out, buildEvent.getPriority());
@@ -60,18 +57,16 @@ public class LiferayBuildPerformanceLogger extends DefaultLogger {
 
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("  [logging] ");
 		sb.append(currentTime);
-		sb.append(" : Target ");
+		sb.append(" [LiferayBuildPerformanceLogger] Start target ");
 		sb.append(target.getName());
-		sb.append(" started");
 
 		printMessage(sb.toString(), out, buildEvent.getPriority());
 	}
 
 	public LiferayBuildPerformanceLogger() {
-		out = System.out;
 		err = System.err;
+		out = System.out;
 	}
 
 	private final Map<Target, Long> _startTimes = new HashMap<>();
