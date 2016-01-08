@@ -497,15 +497,13 @@ public class ConfigurationPersistenceManager
 
 			preparedStatement = connection.prepareStatement(
 				buildSQL(
-					"update Configuration_ set dictionary = ? " +
-					"where configurationId = ?"));
+					"update Configuration_ set dictionary = ? where " +
+						"configurationId = ?"));
 
 			preparedStatement.setString(1, outputStream.toString());
 			preparedStatement.setString(2, pid);
 
-			int updateCount = preparedStatement.executeUpdate();
-
-			if (updateCount == 0) {
+			if (preparedStatement.executeUpdate() == 0) {
 				preparedStatement = prepareStatement(
 					connection,
 					"insert into Configuration_ (configurationId, " +
