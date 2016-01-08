@@ -1907,15 +1907,7 @@
 	</command>
 
 	<command name="viewDocumentTitleCmdPG">
-		<if>
-			<condition function="IsElementPresent" locator1="DocumentsAndMediaDocument#DOCUMENT_INFO_TITLE" />
-			<then>
-				<execute function="AssertTextEquals" locator1="DocumentsAndMediaDocument#DOCUMENT_INFO_TITLE" value1="${dmDocumentTitle}" />
-			</then>
-			<else>
-				<execute function="AssertTextEquals" locator1="PGDocumentsandmediaDocument#DOCUMENT_HEADER_TITLE" value1="${dmDocumentTitle}" />
-			</else>
-		</if>
+		<execute function="AssertTextEquals" locator1="DocumentsAndMediaDocument#DOCUMENT_INFO_TITLE" value1="${dmDocumentTitle}" />
 	</command>
 
 	<command name="viewDocumentToolbarCmdAsGuestPG">
