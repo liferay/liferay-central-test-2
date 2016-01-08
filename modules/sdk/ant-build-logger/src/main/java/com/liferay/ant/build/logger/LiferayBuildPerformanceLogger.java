@@ -33,7 +33,7 @@ public class LiferayBuildPerformanceLogger extends DefaultLogger {
 		Target target = buildEvent.getTarget();
 
 		long currentTime = System.currentTimeMillis();
-		long startTime = _startTimeMap.get(target);
+		long startTime = _startTimes.get(target);
 
 		long duration = currentTime - startTime;
 
@@ -56,7 +56,7 @@ public class LiferayBuildPerformanceLogger extends DefaultLogger {
 
 		long currentTime = System.currentTimeMillis();
 
-		_startTimeMap.put(target, currentTime);
+		_startTimes.put(target, currentTime);
 
 		StringBuilder sb = new StringBuilder();
 
@@ -74,6 +74,6 @@ public class LiferayBuildPerformanceLogger extends DefaultLogger {
 		err = System.err;
 	}
 
-	private final Map<Target, Long> _startTimeMap = new HashMap<>();
+	private final Map<Target, Long> _startTimes = new HashMap<>();
 
 }
