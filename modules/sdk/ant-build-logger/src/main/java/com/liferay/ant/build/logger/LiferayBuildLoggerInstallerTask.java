@@ -64,7 +64,13 @@ public class LiferayBuildLoggerInstallerTask extends Task {
 		Object buildPerformanceLoggerEnabled = project.getProperty(
 			BUILD_PERFORMANCE_LOGGER_ENABLED);
 
-		return buildPerformanceLoggerEnabled.equals("true");
+		if ((buildPerformanceLoggerEnabled != null) &&
+			buildPerformanceLoggerEnabled.equals("true")) {
+
+			return true;
+		}
+
+		return false;
 	}
 
 	private static final Field _listenersLockField;
