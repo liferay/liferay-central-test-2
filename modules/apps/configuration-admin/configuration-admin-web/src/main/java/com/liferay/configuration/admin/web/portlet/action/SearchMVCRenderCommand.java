@@ -65,7 +65,6 @@ public class SearchMVCRenderCommand implements MVCRenderCommand {
 		SearchContext searchContext = new SearchContext();
 
 		searchContext.setAndSearch(false);
-
 		searchContext.setCompanyId(CompanyConstants.SYSTEM);
 
 		String keywords = renderRequest.getParameter("keywords");

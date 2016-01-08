@@ -124,33 +124,35 @@ public class ExportConfigurationMVCResourceCommand
 			configurationModel = configurationModels.get(factoryPid);
 		}
 
-		if (configurationModel != null) {
-			ExtendedAttributeDefinition[] attributeDefinitions =
-				configurationModel.getAttributeDefinitions(
-					ConfigurationModel.ALL);
+		if (configurationModel == null) {
+			return properties;
+		}
 
-			for (AttributeDefinition attributeDefinition :
-					attributeDefinitions) {
+		ExtendedAttributeDefinition[] attributeDefinitions =
+			configurationModel.getAttributeDefinitions(
+				ConfigurationModel.ALL);
 
-				Configuration configuration =
-					configurationModel.getConfiguration();
+		for (AttributeDefinition attributeDefinition :
+				attributeDefinitions) {
 
-				String[] values = AttributeDefinitionUtil.getProperty(
-					attributeDefinition, configuration);
+			Configuration configuration =
+				configurationModel.getConfiguration();
 
-				String value = null;
+			String[] values = AttributeDefinitionUtil.getProperty(
+				attributeDefinition, configuration);
 
-				// See http://goo.gl/JhYK7g
+			String value = null;
 
-				if (values.length == 1) {
-					value = values[0];
-				}
-				else if (values.length > 1) {
-					value = StringUtil.merge(values, "\n");
-				}
+			// See http://goo.gl/JhYK7g
 
-				properties.setProperty(attributeDefinition.getID(), value);
+			if (values.length == 1) {
+				value = values[0];
 			}
+			else if (values.length > 1) {
+				value = StringUtil.merge(values, "\n");
+			}
+
+			properties.setProperty(attributeDefinition.getID(), value);
 		}
 
 		return properties;

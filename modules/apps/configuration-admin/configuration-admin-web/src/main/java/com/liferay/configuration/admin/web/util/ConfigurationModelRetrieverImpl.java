@@ -132,7 +132,6 @@ public class ConfigurationModelRetrieverImpl
 		for (Bundle bundle : bundles) {
 			collectConfigurationModels(
 				bundle, configurationModels, true, locale);
-
 			collectConfigurationModels(
 				bundle, configurationModels, false, locale);
 		}
