@@ -85,10 +85,9 @@ public class CalendarBookingIndexer extends BaseIndexer<CalendarBooking> {
 				permissionChecker, calendarBooking.getCalendar(),
 				CalendarActionKeys.VIEW_BOOKING_DETAILS);
 		}
-		else {
-			return super.hasPermission(
-				permissionChecker, entryClassName, entryClassPK, actionId);
-		}
+
+		return super.hasPermission(
+			permissionChecker, entryClassName, entryClassPK, actionId);
 	}
 
 	@Override
