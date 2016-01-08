@@ -68,10 +68,7 @@ public interface LDAPServerConfiguration {
 	)
 	public String[] groupMappings();
 
-	@Meta.AD(
-		deflt = "", description = "%groups-dn-help",
-		required = false
-	)
+	@Meta.AD(deflt = "", description = "%groups-dn-help", required = false)
 	public String groupsDN();
 
 	@Meta.AD(
@@ -121,10 +118,7 @@ public interface LDAPServerConfiguration {
 	)
 	public String[] userMappings();
 
-	@Meta.AD(
-		deflt = "", description = "%users-dn-help",
-		required = false
-	)
+	@Meta.AD(deflt = "", description = "%users-dn-help", required = false)
 	public String usersDN();
 
 	@Meta.AD(
