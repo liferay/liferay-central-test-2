@@ -37,16 +37,18 @@ public class LiferayBuildLoggerInstallerTask extends Task {
 				for (BuildListener buildListener :
 						currentProject.getBuildListeners()) {
 
-					if (buildListener.getClass() == DefaultLogger.class) {
-						currentProject.removeBuildListener(buildListener);
+					if (buildListener.getClass() != DefaultLogger.class) {
+						continue;
+					}
 
+					currentProject.removeBuildListener(buildListener);
+
+					currentProject.addBuildListener(
+						new LiferayBuildLogger(buildListener));
+
+					if (isBuildPerformanceLoggerEnabled()) {
 						currentProject.addBuildListener(
-							new LiferayBuildLogger(buildListener));
-
-						if (isBuildPerformanceLoggerEnabled()) {
-							currentProject.addBuildListener(
-								new LiferayBuildPerformanceLogger());
-						}
+							new LiferayBuildPerformanceLogger());
 					}
 				}
 			}
@@ -61,8 +63,8 @@ public class LiferayBuildLoggerInstallerTask extends Task {
 	private boolean isBuildPerformanceLoggerEnabled() {
 		Project project = getProject();
 
-		Object buildPerformanceLoggerEnabled = project.getProperty(
-			BUILD_PERFORMANCE_LOGGER_ENABLED);
+		String buildPerformanceLoggerEnabled = project.getProperty(
+			"build.performance.logger.enabled");
 
 		if ((buildPerformanceLoggerEnabled != null) &&
 			buildPerformanceLoggerEnabled.equals("true")) {
@@ -86,8 +88,5 @@ public class LiferayBuildLoggerInstallerTask extends Task {
 			throw new ExceptionInInitializerError(roe);
 		}
 	}
-
-	private static final String BUILD_PERFORMANCE_LOGGER_ENABLED =
-		"build.performance.logger.enabled";
 
 }
