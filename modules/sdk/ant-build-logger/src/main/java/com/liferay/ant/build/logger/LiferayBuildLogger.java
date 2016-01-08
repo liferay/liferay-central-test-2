@@ -27,44 +27,44 @@ import org.apache.tools.ant.Project;
 public class LiferayBuildLogger implements BuildListener {
 
 	@Override
-	public void buildFinished(BuildEvent be) {
-		_buildListener.buildFinished(be);
+	public void buildFinished(BuildEvent buildEvent) {
+		_buildListener.buildFinished(buildEvent);
 	}
 
 	@Override
-	public void buildStarted(BuildEvent be) {
-		_buildListener.buildStarted(be);
+	public void buildStarted(BuildEvent buildEvent) {
+		_buildListener.buildStarted(buildEvent);
 	}
 
 	@Override
-	public void messageLogged(BuildEvent be) {
-		String message = be.getMessage();
+	public void messageLogged(BuildEvent buildEvent) {
+		String message = buildEvent.getMessage();
 
 		if (message.startsWith("Trying to override old definition of ")) {
-			be.setMessage(message, Project.MSG_DEBUG);
+			buildEvent.setMessage(message, Project.MSG_DEBUG);
 		}
 
-		_buildListener.messageLogged(be);
+		_buildListener.messageLogged(buildEvent);
 	}
 
 	@Override
-	public void targetFinished(BuildEvent be) {
-		_buildListener.targetFinished(be);
+	public void targetFinished(BuildEvent buildEvent) {
+		_buildListener.targetFinished(buildEvent);
 	}
 
 	@Override
-	public void targetStarted(BuildEvent be) {
-		_buildListener.targetStarted(be);
+	public void targetStarted(BuildEvent buildEvent) {
+		_buildListener.targetStarted(buildEvent);
 	}
 
 	@Override
-	public void taskFinished(BuildEvent be) {
-		_buildListener.taskFinished(be);
+	public void taskFinished(BuildEvent buildEvent) {
+		_buildListener.taskFinished(buildEvent);
 	}
 
 	@Override
-	public void taskStarted(BuildEvent be) {
-		_buildListener.taskStarted(be);
+	public void taskStarted(BuildEvent buildEvent) {
+		_buildListener.taskStarted(buildEvent);
 	}
 
 	public LiferayBuildLogger(BuildListener buildListener) {
