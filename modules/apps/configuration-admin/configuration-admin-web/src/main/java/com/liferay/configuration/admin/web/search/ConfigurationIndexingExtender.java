@@ -67,9 +67,9 @@ public class ConfigurationIndexingExtender {
 		try {
 			IndexWriterHelperUtil.commit(indexer.getSearchEngineId());
 		}
-		catch (SearchException e) {
+		catch (SearchException se) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Unable to commit", e);
+				_log.warn("Unable to commit", se);
 			}
 		}
 	}
@@ -143,7 +143,7 @@ public class ConfigurationIndexingExtender {
 
 		@Override
 		public void removedBundle(
-			Bundle bundle, BundleEvent event,
+			Bundle bundle, BundleEvent bundleEvent,
 			ConfigurationModelIterator configurationModelIterator) {
 
 			if (!_clusterMasterExecutor.isMaster()) {
@@ -156,9 +156,9 @@ public class ConfigurationIndexingExtender {
 				try {
 					_configurationModelIndexer.delete(configurationModel);
 				}
-				catch (SearchException e) {
+				catch (SearchException se) {
 					if (_log.isWarnEnabled()) {
-						_log.warn("Unable to reindex models", e);
+						_log.warn("Unable to reindex models", se);
 					}
 				}
 			}

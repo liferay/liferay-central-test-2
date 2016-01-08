@@ -105,6 +105,7 @@ public class ConfigurationModelIndexer extends BaseIndexer<ConfigurationModel> {
 
 	@Activate
 	protected void activate(BundleContext bundleContext) {
+		setCommitImmediately(false);
 		setDefaultSelectedFieldNames(
 			Field.COMPANY_ID, Field.DESCRIPTION, Field.ENTRY_CLASS_NAME,
 			Field.TITLE, Field.UID,
@@ -113,8 +114,6 @@ public class ConfigurationModelIndexer extends BaseIndexer<ConfigurationModel> {
 			FieldNames.CONFIGURATION_MODEL_CATEGORY,
 			FieldNames.CONFIGURATION_MODEL_FACTORY_PID,
 			FieldNames.CONFIGURATION_MODEL_ID);
-
-		setCommitImmediately(false);
 		setFilterSearch(false);
 		setPermissionAware(false);
 		setSelectAllLocales(false);
@@ -181,7 +180,6 @@ public class ConfigurationModelIndexer extends BaseIndexer<ConfigurationModel> {
 		document.addUID(
 			ConfigurationAdminPortletKeys.CONFIGURATION_ADMIN,
 			configurationModel.getID());
-
 		document.addKeyword(
 			FieldNames.CONFIGURATION_MODEL_CATEGORY,
 			configurationModel.getCategory());
@@ -192,7 +190,6 @@ public class ConfigurationModelIndexer extends BaseIndexer<ConfigurationModel> {
 			FieldNames.CONFIGURATION_MODEL_ID, configurationModel.getID());
 		document.addKeyword(Field.COMPANY_ID, CompanyConstants.SYSTEM);
 		document.addKeyword(Field.ENTRY_CLASS_NAME, getClassName());
-
 		document.addText(
 			Field.DESCRIPTION, configurationModel.getDescription());
 		document.addText(Field.TITLE, configurationModel.getName());
@@ -217,7 +214,6 @@ public class ConfigurationModelIndexer extends BaseIndexer<ConfigurationModel> {
 		document.addKeyword(
 			FieldNames.CONFIGURATION_MODEL_ATTRIBUTE_NAME,
 			attributeNames.toArray(new String[attributeNames.size()]));
-
 		document.addText(
 			FieldNames.CONFIGURATION_MODEL_ATTRIBUTE_DESCRIPTION,
 			attributeDescriptions.toArray(

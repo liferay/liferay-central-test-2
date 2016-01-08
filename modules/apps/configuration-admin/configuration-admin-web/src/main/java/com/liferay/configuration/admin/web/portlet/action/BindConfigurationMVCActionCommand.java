@@ -78,11 +78,11 @@ public class BindConfigurationMVCActionCommand implements MVCActionCommand {
 			_log.debug("Binding attributes for service " + pid);
 		}
 
+		ConfigurationModel configurationModel = null;
+
 		Map<String, ConfigurationModel> configurationModels =
 			_configurationModelRetriever.getConfigurationModels(
 				themeDisplay.getLanguageId());
-
-		ConfigurationModel configurationModel = null;
 
 		if (Validator.isNotNull(factoryPid)) {
 			configurationModel = configurationModels.get(factoryPid);

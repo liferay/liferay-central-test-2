@@ -17,7 +17,6 @@
 <%@ include file="/init.jsp" %>
 
 <%
-String keywords = renderRequest.getParameter("keywords");
 String redirect = renderRequest.getParameter("redirect");
 
 List<String> configurationCategories = (List<String>)request.getAttribute(ConfigurationAdminWebKeys.CONFIGURATION_CATEGORIES);
@@ -27,6 +26,8 @@ ConfigurationModelIterator configurationModelIterator = (ConfigurationModelItera
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("configurationCategory", configurationCategory);
+
+String keywords = renderRequest.getParameter("keywords");
 
 if (Validator.isNotNull(keywords)) {
 	portletDisplay.setShowBackIcon(true);
