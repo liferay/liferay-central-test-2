@@ -54,13 +54,13 @@
 				<execute macro="PortalInstances#tearDownCP" />
 			</then>
 			<else>
-				<execute macro="MessageboardsCategory#tearDownCP" />
+				<execute macro="DMDocument#tearDownCP" />
 
-				<execute macro="MessageboardsThread#tearDownCP">
-					<var name="assetType" value="Message Boards Thread" />
-				</execute>
+				<execute macro="DMFolder#tearDownCP" />
 
 				<execute macro="Page#tearDownPG" />
+
+				<execute macro="User#tearDownCP" />
 			</else>
 		</if>
 	</tear-down>
