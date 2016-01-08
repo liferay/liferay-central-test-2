@@ -129,14 +129,10 @@ public class ExportConfigurationMVCResourceCommand
 		}
 
 		ExtendedAttributeDefinition[] attributeDefinitions =
-			configurationModel.getAttributeDefinitions(
-				ConfigurationModel.ALL);
+			configurationModel.getAttributeDefinitions(ConfigurationModel.ALL);
 
-		for (AttributeDefinition attributeDefinition :
-				attributeDefinitions) {
-
-			Configuration configuration =
-				configurationModel.getConfiguration();
+		for (AttributeDefinition attributeDefinition : attributeDefinitions) {
+			Configuration configuration = configurationModel.getConfiguration();
 
 			String[] values = AttributeDefinitionUtil.getProperty(
 				attributeDefinition, configuration);
