@@ -22,17 +22,19 @@ long exportImportConfigurationId = GetterUtil.getLong(request.getAttribute("expo
 ExportImportConfiguration exportImportConfiguration = ExportImportConfigurationLocalServiceUtil.getExportImportConfiguration(exportImportConfigurationId);
 
 String cmd = Constants.PUBLISH_TO_LIVE;
-boolean localPublishing = true;
-String publishActionKey = "publish-to-live";
-
-if (exportImportConfiguration.getType() == ExportImportConfigurationConstants.TYPE_PUBLISH_LAYOUT_REMOTE) {
-	cmd = Constants.PUBLISH_TO_REMOTE;
-	localPublishing = false;
-	publishActionKey = "publish-to-remote-live";
-}
 
 long selPlid = ParamUtil.getLong(request, "selPlid", LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
 boolean privateLayout = ParamUtil.getBoolean(request, "privateLayout");
+
+boolean localPublishing = true;
+String publishMessageKey = "publish-to-live";
+
+if (exportImportConfiguration.getType() == ExportImportConfigurationConstants.TYPE_PUBLISH_LAYOUT_REMOTE) {
+	cmd = Constants.PUBLISH_TO_REMOTE;
+
+	localPublishing = false;
+	publishMessageKey = "publish-to-remote-live";
+}
 
 GroupDisplayContextHelper groupDisplayContextHelper = new GroupDisplayContextHelper(request);
 %>
@@ -77,7 +79,7 @@ GroupDisplayContextHelper groupDisplayContextHelper = new GroupDisplayContextHel
 		incompleteBackgroundTaskCount += BackgroundTaskManagerUtil.getBackgroundTasksCount(groupDisplayContextHelper.getLiveGroupId(), taskExecutorClassName, false);
 		%>
 
-		<div class="<%= incompleteBackgroundTaskCount == 0 ? "hide" : "in-progress" %>" id="<portlet:namespace />incompleteProcessMessage">
+		<div class="<%= (incompleteBackgroundTaskCount == 0) ? "hide" : "in-progress" %>" id="<portlet:namespace />incompleteProcessMessage">
 			<liferay-util:include page="/incomplete_processes_message.jsp" servletContext="<%= application %>">
 				<liferay-util:param name="incompleteBackgroundTaskCount" value="<%= String.valueOf(incompleteBackgroundTaskCount) %>" />
 			</liferay-util:include>
@@ -160,7 +162,7 @@ GroupDisplayContextHelper groupDisplayContextHelper = new GroupDisplayContextHel
 			</aui:fieldset>
 
 			<aui:button-row>
-				<aui:button cssClass="btn-lg" type="submit" value="<%= LanguageUtil.get(request, publishActionKey) %>" />
+				<aui:button cssClass="btn-lg" type="submit" value="<%= LanguageUtil.get(request, publishMessageKey) %>" />
 			</aui:button-row>
 		</ul>
 	</div>
