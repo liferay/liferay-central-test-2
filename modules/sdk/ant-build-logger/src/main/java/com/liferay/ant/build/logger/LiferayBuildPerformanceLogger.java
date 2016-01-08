@@ -29,8 +29,8 @@ import org.apache.tools.ant.Target;
 public class LiferayBuildPerformanceLogger extends DefaultLogger {
 
 	@Override
-	public void targetFinished(BuildEvent be) {
-		Target target = be.getTarget();
+	public void targetFinished(BuildEvent buildEvent) {
+		Target target = buildEvent.getTarget();
 
 		long currentTime = System.currentTimeMillis();
 		long startTime = _startTimeMap.get(target);
@@ -47,12 +47,12 @@ public class LiferayBuildPerformanceLogger extends DefaultLogger {
 		sb.append(duration);
 		sb.append("ms");
 
-		printMessage(sb.toString(), out, be.getPriority());
+		printMessage(sb.toString(), out, buildEvent.getPriority());
 	}
 
 	@Override
-	public void targetStarted(BuildEvent be) {
-		Target target = be.getTarget();
+	public void targetStarted(BuildEvent buildEvent) {
+		Target target = buildEvent.getTarget();
 
 		long currentTime = System.currentTimeMillis();
 
@@ -66,7 +66,7 @@ public class LiferayBuildPerformanceLogger extends DefaultLogger {
 		sb.append(target.getName());
 		sb.append(" started");
 
-		printMessage(sb.toString(), out, be.getPriority());
+		printMessage(sb.toString(), out, buildEvent.getPriority());
 	}
 
 	public LiferayBuildPerformanceLogger() {
