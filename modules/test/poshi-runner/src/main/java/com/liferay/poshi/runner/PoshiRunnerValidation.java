@@ -1012,29 +1012,30 @@ public class PoshiRunnerValidation {
 		catch (Exception e) {
 			_exceptions.add(
 				new Exception(
-					"Cannot find class " + className + "\n" + filePath + ":" +
-						element.attributeValue("line-number")));
+					"Unable to find class " + className + "\n" + filePath +
+						":" + element.attributeValue("line-number")));
 
 			return;
 		}
 
 		String methodName = element.attributeValue("method");
 
-		List<Method> completeMethodsList = Arrays.asList(clazz.getMethods());
-		List<Method> possibleMethodsList = new ArrayList<>();
+		List<Method> possibleMethods = new ArrayList<>();
 
-		for (Method possibleMethod : completeMethodsList) {
+		List<Method> completeMethods = Arrays.asList(clazz.getMethods());
+
+		for (Method possibleMethod : completeMethods) {
 			String possibleMethodName = possibleMethod.getName();
 
 			if (methodName.equals(possibleMethodName)) {
-				possibleMethodsList.add(possibleMethod);
+				possibleMethods.add(possibleMethod);
 			}
 		}
 
-		if (possibleMethodsList.isEmpty()) {
+		if (possibleMethods.isEmpty()) {
 			_exceptions.add(
 				new Exception(
-					"Cannot find method " + className + "." + methodName +
+					"Unable to find method " + className + "#" + methodName +
 						"\n" + filePath + ":" +
 							element.attributeValue("line-number")));
 
@@ -1042,6 +1043,7 @@ public class PoshiRunnerValidation {
 		}
 
 		List<Element> argElements = new ArrayList<>(element.elements("arg"));
+
 		Class<?>[] parameterTypes = new Class<?>[argElements.size()];
 
 		for (int i = 0; i < argElements.size(); i++) {
@@ -1054,7 +1056,7 @@ public class PoshiRunnerValidation {
 		catch (Exception e) {
 			_exceptions.add(
 				new Exception(
-					"Argument mismatch in method " + className + "." +
+					"Mismatched argument in method " + className + "#" +
 						methodName + "\n" + filePath + ":" +
 							element.attributeValue("line-number")));
 		}
