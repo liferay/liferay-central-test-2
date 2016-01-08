@@ -98,6 +98,20 @@ public abstract class BaseCompanySettingsVerifyProcessTestCase
 
 	@Override
 	protected void doVerify() throws VerifyException {
+		super.doVerify();
+
+		List<Company> companies = companyLocalService.getCompanies(false);
+
+		for (Company company : companies) {
+			PortletPreferences portletPreferences = prefsProps.getPreferences(
+				company.getCompanyId(), true);
+
+			Settings settings = getSettings(company.getCompanyId());
+
+			Assert.assertNotNull(settings);
+
+			doVerify(portletPreferences, settings);
+		}
 	}
 
 	protected abstract void doVerify(
