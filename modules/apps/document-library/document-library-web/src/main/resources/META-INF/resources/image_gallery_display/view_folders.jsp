@@ -116,21 +116,16 @@ PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 			</c:if>
 		</liferay-ui:search-container-column-text>
 
-		<%
-		int subFoldersCount = DLAppServiceUtil.getFoldersCount(repositoryId, curFolder.getFolderId());
-		int subEntriesCount = DLAppServiceUtil.getFoldersFileEntriesCount(repositoryId, Arrays.asList(curFolder.getFolderId()), status);
-		%>
-
 		<liferay-ui:search-container-column-text
 			href="<%= rowURL %>"
 			name="num-of-folders"
-			value="<%= String.valueOf(subFoldersCount) %>"
+			value="<%= String.valueOf(DLAppServiceUtil.getFoldersCount(repositoryId, curFolder.getFolderId())) %>"
 		/>
 
 		<liferay-ui:search-container-column-text
 			href="<%= rowURL %>"
 			name="num-of-entries"
-			value="<%= String.valueOf(subEntriesCount) %>"
+			value="<%= String.valueOf(DLAppServiceUtil.getFoldersFileEntriesCount(repositoryId, Arrays.asList(curFolder.getFolderId()), status)) %>"
 		/>
 
 		<liferay-ui:search-container-column-jsp
