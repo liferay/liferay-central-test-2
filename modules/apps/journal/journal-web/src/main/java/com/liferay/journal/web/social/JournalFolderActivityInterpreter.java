@@ -57,14 +57,7 @@ public class JournalFolderActivityInterpreter
 			return viewEntryInTrashURL;
 		}
 
-		String viewEntryURL = getViewEntryURL(
-			className, classPK, serviceContext);
-
-		if (viewEntryURL != null) {
-			return viewEntryURL.toString();
-		}
-
-		return null;
+		return getViewEntryURL(className, classPK, serviceContext);
 	}
 
 	@Override
