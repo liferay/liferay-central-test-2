@@ -114,7 +114,6 @@ public class ExportConfigurationMVCResourceCommand
 				themeDisplay.getLanguageId());
 
 		String factoryPid = ParamUtil.getString(resourceRequest, "factoryPid");
-
 		String pid = ParamUtil.getString(resourceRequest, "pid");
 
 		ConfigurationModel configurationModel = configurationModels.get(pid);
@@ -168,9 +167,9 @@ public class ExportConfigurationMVCResourceCommand
 		String propertiesString = PropertiesUtil.toString(properties);
 
 		propertiesString =
-			"##\n## Deploy this file to a Liferay installation to apply the " +
-				"configuration.\n## Make sure the file name is " +
-					getFileName(resourceRequest) + "\n##\n"+ propertiesString;
+			"##\n## Deploy this file to a Liferay installation with the " +
+				"file name "+ getFileName(resourceRequest) + ".\n##\n\n"+
+					propertiesString;
 
 		return propertiesString.getBytes();
 	}
