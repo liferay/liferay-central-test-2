@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.portlet.bridges.mvc.MVCResourceCommand;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -161,15 +162,19 @@ public class ExportConfigurationMVCResourceCommand
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws Exception {
 
+		StringBundler sb = new StringBundler(5);
+
+		sb.append("##\n## To apply the configuration, deploy this file to a ");
+		sb.append("Liferay installation with the file name ");
+		sb.append(getFileName(resourceRequest));
+		sb.append(".\n##\n\n");
+
 		Properties properties = getProperties(
 			resourceRequest, resourceResponse);
 
-		String propertiesString = PropertiesUtil.toString(properties);
+		sb.append(PropertiesUtil.toString(properties));
 
-		propertiesString =
-			"##\n## Deploy this file to a Liferay installation with the " +
-				"file name "+ getFileName(resourceRequest) + ".\n##\n\n"+
-					propertiesString;
+		String propertiesString = sb.toString();
 
 		return propertiesString.getBytes();
 	}
