@@ -53,7 +53,7 @@ public class UTF8Control extends Control {
 		}
 
 		if (!reload) {
-			ResourceBundle resourceBundle = _resourceBundleCache.get(url);
+			ResourceBundle resourceBundle = _resourceBundles.get(url);
 
 			if (resourceBundle != null) {
 				return resourceBundle;
@@ -68,13 +68,13 @@ public class UTF8Control extends Control {
 			ResourceBundle resourceBundle = new PropertyResourceBundle(
 				new InputStreamReader(inputStream, StringPool.UTF8));
 
-			_resourceBundleCache.put(url, resourceBundle);
+			_resourceBundles.put(url, resourceBundle);
 
 			return resourceBundle;
 		}
 	}
 
-	private static final Map<URL, ResourceBundle> _resourceBundleCache =
+	private static final Map<URL, ResourceBundle> _resourceBundles =
 		new ConcurrentReferenceValueHashMap<>(
 			FinalizeManager.SOFT_REFERENCE_FACTORY);
 
