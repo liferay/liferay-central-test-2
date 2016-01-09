@@ -27,8 +27,6 @@ import com.liferay.registry.ServiceReference;
 import com.liferay.registry.ServiceTracker;
 import com.liferay.registry.ServiceTrackerCustomizer;
 
-import java.util.concurrent.atomic.AtomicBoolean;
-
 /**
  * @author Michael C. Han
  * @author Raymond Augé
@@ -187,7 +185,7 @@ public class MessageBusUtil {
 
 	private MessageBus _getMessageBus() {
 		try {
-			if (!_initialized.get()) {
+			if (!_initialized) {
 				while (_serviceTracker.getService() == null) {
 					if (_log.isDebugEnabled()) {
 						_log.debug("Waiting for a PortalExecutorManager");
@@ -319,7 +317,7 @@ public class MessageBusUtil {
 
 	private static SynchronousMessageSender.Mode _synchronousMessageSenderMode;
 
-	private final AtomicBoolean _initialized = new AtomicBoolean(false);
+	private volatile boolean _initialized;
 	private final MessageBus _messageBus =
 		ProxyFactory.newServiceTrackedInstance(MessageBus.class);
 	private final ServiceTracker<MessageBus, MessageBus> _serviceTracker;
@@ -331,7 +329,7 @@ public class MessageBusUtil {
 		public MessageBus addingService(
 			ServiceReference<MessageBus> serviceReference) {
 
-			_initialized.set(true);
+			_initialized = true;
 
 			return null;
 		}
