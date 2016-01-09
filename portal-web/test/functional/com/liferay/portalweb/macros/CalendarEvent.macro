@@ -1054,6 +1054,7 @@
 			<condition function="IsElementPresent" locator1="CalendarEditEvent#RELATED_ASSETS_PANEL_COLLAPSED" />
 			<then>
 				<execute function="Click" locator1="CalendarEditEvent#RELATED_ASSETS_PANEL_COLLAPSED" />
+
 				<execute function="AssertElementPresent" locator1="CalendarEditEvent#RELATED_ASSETS_PANEL_EXPANDED" />
 			</then>
 		</if>

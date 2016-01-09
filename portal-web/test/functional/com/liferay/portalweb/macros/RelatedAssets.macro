@@ -5,6 +5,7 @@
 		<execute function="AssertClick" locator1="AssetRelatedAssets#RELATED_ASSETS_SELECT" value1="Select" />
 
 		<var method="StringUtil#replace('${assetType}', ' ', '_')" name="assetTypeLocator" />
+
 		<var method="StringUtil#upperCase('${assetTypeLocator}')" name="assetTypeLocator" />
 
 		<execute function="AssertClick" locator1="MenuItem#${assetTypeLocator}" value1="${assetType}" />
