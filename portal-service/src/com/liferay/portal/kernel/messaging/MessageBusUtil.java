@@ -185,22 +185,20 @@ public class MessageBusUtil {
 
 	private MessageBus _getMessageBus() {
 		try {
-			if (!_initialized) {
-				while (_serviceTracker.getService() == null) {
-					if (_log.isDebugEnabled()) {
-						_log.debug("Waiting for a PortalExecutorManager");
-					}
-
-					Thread.sleep(500);
+			while (!_initialized && (_serviceTracker.getService() == null)) {
+				if (_log.isDebugEnabled()) {
+					_log.debug("Waiting for a PortalExecutorManager");
 				}
-			}
 
-			return _messageBus;
+				Thread.sleep(500);
+			}
 		}
 		catch (InterruptedException e) {
 			throw new IllegalStateException(
 				"Unable to initialize MessageBusUtil", e);
 		}
+
+		return _messageBus;
 	}
 
 	private boolean _hasMessageListener(String destinationName) {
