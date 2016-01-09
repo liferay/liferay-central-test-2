@@ -3280,7 +3280,7 @@
 			<type>boolean</type>
 		</attribute>
 		<attribute>
-			<name>resourceBunle</name>
+			<name>resourceBundle</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 			<type>boolean</type>
