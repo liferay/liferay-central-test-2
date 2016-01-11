@@ -19,6 +19,7 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionCheckerFactory;
 
 import java.util.Collection;
+import java.util.Iterator;
 
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
@@ -35,22 +36,23 @@ public class StagingPermissionCheckerFactory
 	@Override
 	public PermissionChecker create(User user) throws Exception {
 		Collection<ServiceReference<PermissionCheckerFactory>>
-			permissionCheckerFactoryServiceReferences =
-				_bundleContext.getServiceReferences(
-					PermissionCheckerFactory.class,
-					"(!(component.name=" +
-						StagingPermissionCheckerFactory.class.getName() + "))");
+			serviceReferences = _bundleContext.getServiceReferences(
+				PermissionCheckerFactory.class,
+				"(!(component.name=" +
+					StagingPermissionCheckerFactory.class.getName() + "))");
 
-		if (permissionCheckerFactoryServiceReferences.isEmpty()) {
+		if (serviceReferences.isEmpty()) {
 			return null;
 		}
 
-		ServiceReference<PermissionCheckerFactory>
-			permissionCheckerFactoryServiceReference =
-				permissionCheckerFactoryServiceReferences.iterator().next();
+		Iterator<ServiceReference<PermissionCheckerFactory>> iterator =
+			serviceReferences.iterator();
+
+		ServiceReference<PermissionCheckerFactory> serviceReference =
+			iterator.next();
 
 		PermissionCheckerFactory permissionCheckerFactory =
-			_bundleContext.getService(permissionCheckerFactoryServiceReference);
+			_bundleContext.getService(serviceReference);
 
 		try {
 			PermissionChecker permissionChecker =
@@ -59,8 +61,7 @@ public class StagingPermissionCheckerFactory
 			return new StagingPermissionChecker(permissionChecker);
 		}
 		finally {
-			_bundleContext.ungetService(
-				permissionCheckerFactoryServiceReference);
+			_bundleContext.ungetService(serviceReference);
 		}
 	}
 
