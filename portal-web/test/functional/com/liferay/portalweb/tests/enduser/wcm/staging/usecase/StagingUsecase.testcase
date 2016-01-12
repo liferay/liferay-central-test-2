@@ -769,11 +769,6 @@
 			<var name="postCount" value="1" />
 		</execute>
 
-		<execute macro="BlogsNavigator#gotoEntryPG">
-			<var name="entryContent" value="Blogs Entry Content 1" />
-			<var name="entryTitle" value="Blogs Entry Title 1" />
-		</execute>
-
 		<execute macro="BlogsAggregatorPortlet#viewBlogsEntryViaBAPortletPG">
 			<var name="viewEntryTitle" value="Blogs Entry Title 1" />
 		</execute>
