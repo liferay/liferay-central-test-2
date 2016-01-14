@@ -772,6 +772,10 @@
 
 		<execute macro="WikiEntry#cancel" />
 
+		<execute macro="WikiNavigator#gotoEntryViaPGTable">
+			<var name="wikiPageTitle" value="Wiki Page Title" />
+		</execute>
+
 		<execute macro="WikiPage#viewPageContentBody">
 			<var name="wikiPageContent" value="Wiki Page Content" />
 		</execute>
