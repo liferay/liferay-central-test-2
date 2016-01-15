@@ -24,6 +24,10 @@ LayoutSetBranch currentLayoutSetBranch = LayoutSetBranchLocalServiceUtil.getUser
 request.setAttribute("view_layout_set_branches.jsp-currentLayoutSetBranchId", String.valueOf(currentLayoutSetBranch.getLayoutSetBranchId()));
 %>
 
+<liferay-util:include page="/navigation.jsp" servletContext="<%= application %>">
+	<liferay-util:param name="navigationName" value="site-pages-variation" />
+</liferay-util:include>
+
 <div class="container-fluid-1280">
 	<liferay-ui:success key="sitePageVariationAdded" message="site-page-variation-was-added" />
 	<liferay-ui:success key="sitePageVariationDeleted" message="site-page-variation-was-deleted" />

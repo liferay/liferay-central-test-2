@@ -39,6 +39,10 @@ else {
 request.setAttribute("view_layout_branches.jsp-currenttLayoutBranchId", String.valueOf(currentLayoutRevision.getLayoutBranchId()));
 %>
 
+<liferay-util:include page="/navigation.jsp" servletContext="<%= application %>">
+	<liferay-util:param name="navigationName" value="page-variations" />
+</liferay-util:include>
+
 <div class="container-fluid-1280">
 	<liferay-ui:success key="pageVariationAdded" message="page-variation-was-added" />
 	<liferay-ui:success key="pageVariationDeleted" message="page-variation-was-deleted" />
