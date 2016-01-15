@@ -33,8 +33,8 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.exportimport.service.StagingLocalService;
 import com.liferay.portlet.exportimport.staging.StagingConstants;
-import com.liferay.staging.configuration.web.portlet.constants.StagingConfigurationPortletKeys;
-import com.liferay.staging.processes.web.constants.StagingProcessesPortletKeys;
+import com.liferay.staging.constants.StagingConfigurationPortletKeys;
+import com.liferay.staging.constants.StagingProcessesPortletKeys;
 
 import java.io.IOException;
 
