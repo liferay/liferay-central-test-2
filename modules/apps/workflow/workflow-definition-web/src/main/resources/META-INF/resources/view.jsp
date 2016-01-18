@@ -17,11 +17,28 @@
 <%@ include file="/init.jsp" %>
 
 <%
-PortletURL portletURL = renderResponse.createRenderURL();
+int cur = ParamUtil.getInteger(request, SearchContainer.DEFAULT_CUR_PARAM);
+int delta = ParamUtil.getInteger(request, SearchContainer.DEFAULT_DELTA_PARAM);
+String orderByCol = ParamUtil.getString(request, "orderByCol", "name");
+String orderByType = ParamUtil.getString(request, "orderByType", "asc");
 
-portletURL.setParameter("mvcPath", "/view.jsp");
+PortletURL navigationPortletURL = renderResponse.createRenderURL();
+navigationPortletURL.setParameter("mvcPath", "/view.jsp");
+
+if (delta > 0) {
+	navigationPortletURL.setParameter("delta", String.valueOf(delta));
+}
+
+navigationPortletURL.setParameter("orderBycol", orderByCol);
+navigationPortletURL.setParameter("orderByType", orderByType);
+
+PortletURL portletURL = PortletURLUtil.clone(navigationPortletURL, liferayPortletResponse);
 
 PortletURL displayStyleURL = PortletURLUtil.clone(portletURL, liferayPortletResponse);
+
+if (cur > 0) {
+	displayStyleURL.setParameter("cur", String.valueOf(cur));
+}
 
 WorkflowDefinitionSearch workflowDefinitionSearch = new WorkflowDefinitionSearch(renderRequest, portletURL);
 %>
@@ -43,7 +60,12 @@ WorkflowDefinitionSearch workflowDefinitionSearch = new WorkflowDefinitionSearch
 		/>
 	</liferay-frontend:management-bar-buttons>
 	<liferay-frontend:management-bar-filters>
-		<liferay-util:include page="/sort_buttons.jsp" servletContext="<%= application %>" />
+		<liferay-frontend:management-bar-sort
+			orderByCol="<%= orderByCol %>"
+			orderByType="<%= orderByType %>"
+			orderColumns='<%= new String[] {"active", "name", "title"} %>'
+			portletURL="<%= portletURL %>"
+		/>
 	</liferay-frontend:management-bar-filters>
 </liferay-frontend:management-bar>
 
