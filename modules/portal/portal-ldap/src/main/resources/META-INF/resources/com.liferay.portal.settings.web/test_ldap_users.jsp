@@ -124,7 +124,6 @@ portletURL.setWindowState(LiferayWindowState.POP_UP);
 	iteratorURL="<%= portletURL %>"
 	total="<%= searchResults.size() %>"
 >
-
 	<liferay-ui:search-container-results
 		results="<%= ListUtil.subList(searchResults, searchContainer.getStart(), searchContainer.getEnd()) %>"
 	/>
