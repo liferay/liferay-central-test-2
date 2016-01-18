@@ -21,6 +21,8 @@ PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("mvcPath", "/view.jsp");
 
+PortletURL displayStyleURL = PortletURLUtil.clone(portletURL, liferayPortletResponse);
+
 WorkflowDefinitionSearch workflowDefinitionSearch = new WorkflowDefinitionSearch(renderRequest, portletURL);
 %>
 
@@ -30,7 +32,16 @@ WorkflowDefinitionSearch workflowDefinitionSearch = new WorkflowDefinitionSearch
 
 <liferay-util:include page="/search_bar.jsp" servletContext="<%= application %>" />
 
-<liferay-frontend:management-bar>
+<liferay-frontend:management-bar
+	searchContainerId="workflowDefinitions"
+	>
+	<liferay-frontend:management-bar-buttons>
+		<liferay-frontend:management-bar-display-buttons
+			displayViews='<%= new String[] {"list"} %>'
+			portletURL="<%= displayStyleURL %>"
+			selectedDisplayStyle="list"
+		/>
+	</liferay-frontend:management-bar-buttons>
 	<liferay-frontend:management-bar-filters>
 		<liferay-util:include page="/sort_buttons.jsp" servletContext="<%= application %>" />
 	</liferay-frontend:management-bar-filters>
@@ -39,7 +50,7 @@ WorkflowDefinitionSearch workflowDefinitionSearch = new WorkflowDefinitionSearch
 <div class="container-fluid-1280 workflow-definition-container">
 	<liferay-ui:search-container
 		emptyResultsMessage="no-workflow-definitions-are-defined"
-		id="searchContainer"
+		id="workflowDefinitions"
 		searchContainer="<%= workflowDefinitionSearch %>"
 	>
 
