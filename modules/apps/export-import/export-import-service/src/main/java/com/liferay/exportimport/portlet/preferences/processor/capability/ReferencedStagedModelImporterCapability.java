@@ -94,17 +94,15 @@ public class ReferencedStagedModelImporterCapability implements Capability {
 						if (_log.isInfoEnabled()) {
 							StringBundler sb = new StringBundler(9);
 
-							sb.append("Unable to find layout in group ");
-							sb.append(portletDataContext.getGroupId());
-							sb.append(" with UUID ");
-							sb.append(scopeLayoutUuid);
-							sb.append(
-								" therefore the layout scoped element with " +
-									"className ");
+							sb.append("Uanble to export the layout scoped ");
+							sb.append("element with class name ");
 							sb.append(className);
-							sb.append(" and classPK ");
+							sb.append(" and class primary key ");
 							sb.append(classPK);
-							sb.append(" cannot be imported");
+							sb.append(" because the layout with UUID ");
+							sb.append(scopeLayoutUuid);
+							sb.append(" is missing from group ");
+							sb.append(portletDataContext.getGroupId());
 
 							_log.info(sb.toString());
 						}
