@@ -362,7 +362,7 @@ public class JournalRSSUtil {
 			}
 			catch (NoSuchFeedException nsfe) {
 
-				// Compatibility with old URLs
+				// Backward compatibility with old URLs
 
 				feed = _journalFeedLocalService.getFeed(
 					themeDisplay.getScopeGroupId(), String.valueOf(id));
