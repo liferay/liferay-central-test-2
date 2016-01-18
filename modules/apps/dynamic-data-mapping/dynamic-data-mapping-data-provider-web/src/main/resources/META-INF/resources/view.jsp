@@ -47,6 +47,7 @@ ddmDataProviderSearch.setOrderByType(orderByType);
 
 			<%
 			searchContainer.setTotal(ddmDataProviderDisplayContext.getSearchContainerTotal(searchContainer));
+
 			request.setAttribute(WebKeys.SEARCH_CONTAINER, searchContainer);
 			%>
 

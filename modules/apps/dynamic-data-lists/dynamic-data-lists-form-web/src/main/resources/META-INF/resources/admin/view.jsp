@@ -51,6 +51,7 @@ recordSetSearch.setOrderByType(orderByType);
 
 			<%
 			searchContainer.setTotal(ddlFormAdminDisplayContext.getSearchContainerTotal(searchContainer));
+
 			request.setAttribute(WebKeys.SEARCH_CONTAINER, searchContainer);
 			%>
 
