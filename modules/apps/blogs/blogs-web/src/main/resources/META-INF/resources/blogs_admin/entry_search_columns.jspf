@@ -71,7 +71,7 @@
 						actionJsp="/blogs_admin/entry_action.jsp"
 						actionJspServletContext="<%= application %>"
 						cssClass="entry-display-style"
-						imageUrl='<%= entryImageURL %>'
+						imageUrl="<%= entryImageURL %>"
 						resultRow="<%= row %>"
 						rowChecker="<%= searchContainer.getRowChecker() %>"
 						title="<%= entry.getTitle() %>"
