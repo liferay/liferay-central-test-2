@@ -2143,7 +2143,6 @@ public class StagingImpl implements Staging {
 
 		long[] layoutIds = ExportImportHelperUtil.getLayoutIds(
 			portletRequest, targetGroupId);
-
 		String name = ParamUtil.getString(portletRequest, "name");
 
 		if (schedule) {
