@@ -389,19 +389,19 @@
 			<var name="pageName" value="${pageName}" />
 		</execute>
 
-		<execute function="AssertClick" locator1="Wiki#FRONTPAGE_DEFAULT_MESSAGE" value1="This page is empty. Edit it to add some text." />
+		<execute macro="WikiPage#_editEmptyFrontPage">
+			<var name="wikiPageContent" value="${wikiPageContent}" />
+		</execute>
+
+		<execute function="Click" locator1="AlloyEditor#CONTENT_FIELD" />
+
+		<execute function="Click" locator1="AlloyEditor#CONTENT_EDITOR_SWITCH_ACE_EDITOR" />
 
 		<execute macro="WikiEntry#selectPageFormat">
 			<var name="pageFormat" value="HTML" />
 		</execute>
 
 		<execute macro="WikiEntry#confirmHTML" />
-
-		<execute function="Click#clickAt" locator1="AlloyEditor#CONTENT_FIELD" />
-
-		<execute function="Click" locator1="AlloyEditor#CONTENT_EDITOR_SWITCH_ACE_EDITOR" />
-
-		<execute function="Type#typeAceEditor" locator1="TextArea#ACE_EDITOR" value1="${wikiPageContent}" />
 
 		<execute macro="WikiEntry#publish" />
 
@@ -450,21 +450,19 @@
 			<var name="pageName" value="${pageName}" />
 		</execute>
 
-		<execute function="AssertClick#assertTextClickAtAndPause" locator1="Wiki#FRONTPAGE_DEFAULT_MESSAGE" value1="This page is empty. Edit it to add some text." />
+		<execute macro="WikiPage#_editEmptyFrontPage">
+			<var name="wikiPageContent"><![CDATA[<p><a href="/">Home</a></p>]]></var>
+		</execute>
+
+		<execute function="Click" locator1="AlloyEditor#CONTENT_FIELD" />
+
+		<execute function="Click" locator1="AlloyEditor#CONTENT_EDITOR_SWITCH_ACE_EDITOR" />
 
 		<execute macro="WikiEntry#selectPageFormat">
 			<var name="pageFormat" value="HTML" />
 		</execute>
 
 		<execute macro="WikiEntry#confirmHTML" />
-
-		<execute function="Click" locator1="AlloyEditor#CONTENT_FIELD" />
-
-		<execute function="Click" locator1="AlloyEditor#CONTENT_EDITOR_SWITCH_ACE_EDITOR" />
-
-		<var name="home"><![CDATA[<p><a href="/">Home</a></p>]]></var>
-
-		<execute function="Type#typeAceEditor" locator1="TextArea#ACE_EDITOR" value1="${home}" />
 
 		<execute macro="WikiEntry#publish" />
 
