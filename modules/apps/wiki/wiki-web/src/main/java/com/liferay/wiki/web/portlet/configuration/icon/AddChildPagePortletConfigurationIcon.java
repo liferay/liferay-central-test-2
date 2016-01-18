@@ -68,7 +68,7 @@ public class AddChildPagePortletConfigurationIcon
 				themeDisplay.getPermissionChecker(), _page.getNodeId(),
 				ActionKeys.ADD_PAGE);
 		}
-		catch (PortalException e) {
+		catch (PortalException pe) {
 		}
 
 		return false;
