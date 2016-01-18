@@ -17,6 +17,8 @@
 <%@ include file="/init.jsp" %>
 
 <%
+String definitionsNavigation = ParamUtil.getString(request, "definitionsNavigation");
+
 int cur = ParamUtil.getInteger(request, SearchContainer.DEFAULT_CUR_PARAM);
 int delta = ParamUtil.getInteger(request, SearchContainer.DEFAULT_DELTA_PARAM);
 String orderByCol = ParamUtil.getString(request, "orderByCol", "name");
@@ -33,6 +35,8 @@ navigationPortletURL.setParameter("orderBycol", orderByCol);
 navigationPortletURL.setParameter("orderByType", orderByType);
 
 PortletURL portletURL = PortletURLUtil.clone(navigationPortletURL, liferayPortletResponse);
+
+portletURL.setParameter("definitionsNavigation", definitionsNavigation);
 
 PortletURL displayStyleURL = PortletURLUtil.clone(portletURL, liferayPortletResponse);
 
@@ -60,6 +64,12 @@ WorkflowDefinitionSearch workflowDefinitionSearch = new WorkflowDefinitionSearch
 		/>
 	</liferay-frontend:management-bar-buttons>
 	<liferay-frontend:management-bar-filters>
+		<liferay-frontend:management-bar-navigation
+			navigationKeys='<%= new String[] {"all"} %>'
+			navigationParam="definitionsNavigation"
+			portletURL="<%= navigationPortletURL %>"
+		/>
+
 		<liferay-frontend:management-bar-sort
 			orderByCol="<%= orderByCol %>"
 			orderByType="<%= orderByType %>"
