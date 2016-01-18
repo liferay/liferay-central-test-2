@@ -90,9 +90,6 @@ public class DraftExportImportConfigurationMessageListener
 		DynamicQuery dynamicQuery =
 			_exportImportConfigurationLocalService.dynamicQuery();
 
-		Property statusProperty = PropertyFactoryUtil.forName("status");
-
-		dynamicQuery.add(statusProperty.eq(WorkflowConstants.STATUS_DRAFT));
 
 		Property typeProperty = PropertyFactoryUtil.forName("type");
 
@@ -104,6 +101,10 @@ public class DraftExportImportConfigurationMessageListener
 			typeProperty.ne(
 				ExportImportConfigurationConstants.
 					TYPE_SCHEDULED_PUBLISH_LAYOUT_REMOTE));
+
+		Property statusProperty = PropertyFactoryUtil.forName("status");
+
+		dynamicQuery.add(statusProperty.eq(WorkflowConstants.STATUS_DRAFT));
 
 		Order order = OrderFactoryUtil.asc("createDate");
 
