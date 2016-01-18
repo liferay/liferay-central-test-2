@@ -197,6 +197,10 @@
 		<if>
 			<equals arg1="${creoleSource}" arg2="true" />
 			<then>
+				<execute macro="Panel#expandPanel">
+					<var name="panelHeading" value="Configuration" />
+				</execute>
+
 				<execute function="Select#pauseSelect" locator1="Wiki#ADD_PAGE_FORMAT_DROPDOWN" value1="Creole" />
 
 				<execute function="Type#typeAlloyEditor" locator1="AlloyEditor#CONTENT_FIELD" value1="${wikiPageContent}" />
@@ -840,6 +844,10 @@
 		<execute function="AssertTextNotPresent" locator1="Portlet#H3_HEADER" value1="${wikiPage2Title}" />
 		<execute function="AssertTextNotPresent" locator1="Wiki#BODY" value1="${wikiPage2Content}" />
 		<execute function="AssertClick" locator1="Wiki#LINK_EDIT" value1="Edit" />
+
+		<execute macro="Panel#expandPanel">
+			<var name="panelHeading" value="Configuration" />
+		</execute>
 
 		<execute function="Select" locator1="Wiki#ADD_PAGE_FORMAT_DROPDOWN" value1="Creole" />
 
