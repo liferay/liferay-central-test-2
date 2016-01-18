@@ -375,22 +375,16 @@
 	</command>
 
 	<command name="AddWikiFrontPageContentNoJavascript" priority="4">
-		<var name="wikiPageContent">
-			<![CDATA[
-				<p id="demo">PASS</p><script type="text/javascript">document.getElementById('demo').innerHTML="this code should not be read by the client";</script>
-			]]>
-		</var>
-		<var name="wikiPageRevision" value="1.1" />
-		<var name="wikiPageText" value="PASS" />
-		<var name="wikiPageTitle" value="FrontPage" />
-		<var name="wikiPageUsername" value="Test Test" />
-
 		<execute macro="Page#gotoPG">
-			<var name="pageName" value="${pageName}" />
+			<var name="pageName" value="Wiki Test Page" />
 		</execute>
 
 		<execute macro="WikiPage#_editEmptyFrontPage">
-			<var name="wikiPageContent" value="${wikiPageContent}" />
+			<var name="wikiPageContent">
+			<![CDATA[
+				<p id="demo">PASS</p><script type="text/javascript">document.getElementById('demo').innerHTML="this code should not be read by the client";</script>
+			]]>
+			</var>
 		</execute>
 
 		<execute function="Click" locator1="AlloyEditor#CONTENT_FIELD" />
@@ -406,14 +400,14 @@
 		<execute macro="WikiEntry#publish" />
 
 		<execute macro="Page#gotoPG">
-			<var name="pageName" value="${pageName}" />
+			<var name="pageName" value="Wiki Test Page" />
 		</execute>
 
 		<execute macro="WikiNavigator#gotoFrontPagePG" />
 
 		<execute macro="WikiPage#viewFrontPagePG">
-			<var name="wikiPageContent" value="${wikiPageText}" />
-			<var name="wikiPageTitle" value="${wikiPageTitle}" />
+			<var name="wikiPageContent" value="PASS" />
+			<var name="wikiPageTitle" value="FrontPage" />
 		</execute>
 	</command>
 
@@ -447,11 +441,14 @@
 
 	<command name="AddWikiFrontPageFormatHTML" priority="5">
 		<execute macro="Page#gotoPG">
-			<var name="pageName" value="${pageName}" />
+			<var name="pageName" value="Wiki Test Page" />
 		</execute>
 
 		<execute macro="WikiPage#_editEmptyFrontPage">
-			<var name="wikiPageContent"><![CDATA[<p><a href="/">Home</a></p>]]></var>
+			<var name="wikiPageContent">
+			<![CDATA[<p><a href="/">Home</a></p>
+			]]>
+			</var>
 		</execute>
 
 		<execute function="Click" locator1="AlloyEditor#CONTENT_FIELD" />
@@ -467,7 +464,7 @@
 		<execute macro="WikiEntry#publish" />
 
 		<execute macro="Page#gotoPG">
-			<var name="pageName" value="${pageName}" />
+			<var name="pageName" value="Wiki Test Page" />
 		</execute>
 
 		<execute macro="WikiNavigator#gotoPG">
