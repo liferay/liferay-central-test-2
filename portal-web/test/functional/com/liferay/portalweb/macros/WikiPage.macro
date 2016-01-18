@@ -845,6 +845,8 @@
 		<execute function="AssertTextNotPresent" locator1="Wiki#BODY" value1="${wikiPage2Content}" />
 		<execute function="AssertClick" locator1="Wiki#LINK_EDIT" value1="Edit" />
 
+		<execute function="Click" locator1="AlloyEditor#CONTENT_FIELD" />
+
 		<execute macro="Panel#expandPanel">
 			<var name="panelHeading" value="Configuration" />
 		</execute>
