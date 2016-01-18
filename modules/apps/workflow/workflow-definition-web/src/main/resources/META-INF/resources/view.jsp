@@ -17,10 +17,10 @@
 <%@ include file="/init.jsp" %>
 
 <%
-String definitionsNavigation = ParamUtil.getString(request, "definitionsNavigation");
-
 int cur = ParamUtil.getInteger(request, SearchContainer.DEFAULT_CUR_PARAM);
+String definitionsNavigation = ParamUtil.getString(request, "definitionsNavigation");
 int delta = ParamUtil.getInteger(request, SearchContainer.DEFAULT_DELTA_PARAM);
+String navigation = ParamUtil.getString(request, "navigation", "definitions");
 String orderByCol = ParamUtil.getString(request, "orderByCol", "name");
 String orderByType = ParamUtil.getString(request, "orderByType", "asc");
 
@@ -44,6 +44,14 @@ if (cur > 0) {
 	displayStyleURL.setParameter("cur", String.valueOf(cur));
 }
 
+PortletURL viewDefinitionsURL = renderResponse.createRenderURL();
+
+viewDefinitionsURL.setParameter("navigation", "definitions");
+
+PortletURL searchURL = renderResponse.createRenderURL();
+searchURL.setParameter("groupId", String.valueOf(themeDisplay.getScopeGroupId()));
+searchURL.setParameter("mvcPath", "/view.jsp");
+
 WorkflowDefinitionSearch workflowDefinitionSearch = new WorkflowDefinitionSearch(renderRequest, portletURL);
 %>
 
@@ -51,7 +59,20 @@ WorkflowDefinitionSearch workflowDefinitionSearch = new WorkflowDefinitionSearch
 
 <liferay-util:include page="/add_button.jsp" servletContext="<%= application %>" />
 
-<liferay-util:include page="/search_bar.jsp" servletContext="<%= application %>" />
+<aui:nav-bar cssClass="collapse-basic-search" markupView="lexicon">
+	<aui:nav cssClass="navbar-nav">
+		<aui:nav-item
+			href="<%= viewDefinitionsURL %>"
+			label="definitions"
+			selected='<%= navigation.equals("definitions") %>'
+		/>
+	</aui:nav>
+	<aui:nav-bar-search>
+		<aui:form action="<%= searchURL.toString() %>" method="post" name="fm1">
+			<liferay-util:include page="/workflow_definition_search.jsp" servletContext="<%= application %>" />
+		</aui:form>
+	</aui:nav-bar-search>
+</aui:nav-bar>
 
 <liferay-frontend:management-bar
 	searchContainerId="workflowDefinitions"
