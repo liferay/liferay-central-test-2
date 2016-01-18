@@ -83,7 +83,6 @@ public class MarketplaceAppDisplay extends BaseAppDisplay {
 
 			portletURL.setParameter(
 				"appEntryId", String.valueOf(_app.getRemoteAppId()));
-
 			portletURL.setWindowState(LiferayWindowState.MAXIMIZED);
 
 			return portletURL.toString();
