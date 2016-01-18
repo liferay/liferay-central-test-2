@@ -22,7 +22,6 @@ boolean localPublishing = true;
 
 if (stagingGroup.hasRemoteStagingGroup()) {
 	configurationType = ExportImportConfigurationConstants.TYPE_PUBLISH_LAYOUT_REMOTE;
-
 	localPublishing = false;
 }
 
