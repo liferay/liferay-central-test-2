@@ -34,10 +34,6 @@ request.setAttribute("view_layout_set_branches.jsp-currentLayoutSetBranchId", St
 	<liferay-ui:success key="sitePageVariationMerged" message="site-page-variation-was-merged" />
 	<liferay-ui:success key="sitePageVariationUpdated" message="site-page-variation-was-updated" />
 
-	<div class="alert alert-info">
-		<liferay-ui:message key="pages-variations-help" />
-	</div>
-
 	<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, stagingGroup, ActionKeys.ADD_LAYOUT_SET_BRANCH) %>">
 		<liferay-portlet:renderURL var="addLayoutSetBranchURL">
 			<portlet:param name="mvcRenderCommandName" value="editLayoutSetBranch" />
