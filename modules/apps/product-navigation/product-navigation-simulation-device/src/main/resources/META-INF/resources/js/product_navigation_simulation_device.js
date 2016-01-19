@@ -38,6 +38,8 @@ AUI.add(
 
 		var STR_DEVICES = 'devices';
 
+		var STR_ICON_ROTATE_90 = 'icon-rotate-90';
+
 		var STR_INPUT = 'input';
 
 		var STR_INPUT_HEIGHT = 'inputHeight';
@@ -238,6 +240,8 @@ AUI.add(
 						if (device) {
 							if (deviceItem.hasClass(CSS_SELECTED) && device.rotation) {
 								deviceItem.toggleClass(STR_ROTATED);
+
+								deviceItem.one('.icon').toggleClass(STR_ICON_ROTATE_90);
 							}
 
 							deviceItem.radioClass(CSS_SELECTED);
