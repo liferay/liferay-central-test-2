@@ -1,4 +1,4 @@
-Bundle-Name: Liferay Metatype Definitons Annotations
+Bundle-Name: Liferay Portal Metatype Definitons Annotations
 Bundle-SymbolicName: com.liferay.portal.metatype.definitions.annotations
 Bundle-Version: 1.0.0
 Include-Resource: classes
