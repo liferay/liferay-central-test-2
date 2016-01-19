@@ -66,6 +66,9 @@ public class ServiceJSONWebServiceScannerStrategy
 			new MethodDescriptor[methodDescriptors.size()]);
 	}
 
+	/**
+	 * @see com.liferay.portal.jsonwebservice.SpringJSONWebServiceScannerStrategy#getTargetClass(Object)
+	 */
 	protected Class<?> getTargetClass(Object service) throws Exception {
 		while (ProxyUtil.isProxyClass(service.getClass())) {
 			InvocationHandler invocationHandler =
