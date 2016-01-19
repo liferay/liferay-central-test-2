@@ -17,7 +17,7 @@ package com.liferay.blogs.layout.prototype.lifecycle;
 import com.liferay.asset.tags.navigation.web.constants.AssetTagsNavigationPortletKeys;
 import com.liferay.blogs.recent.bloggers.web.constants.RecentBloggersPortletKeys;
 import com.liferay.blogs.web.constants.BlogsPortletKeys;
-import com.liferay.portal.instance.lifecycle.PortalInstanceLifecycleListener;
+import com.liferay.portal.instance.lifecycle.BasePortalInstanceLifecycleListener;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.module.framework.ModuleServiceLifecycle;
 import com.liferay.portal.model.Company;
@@ -38,7 +38,7 @@ import org.osgi.service.component.annotations.Reference;
  */
 @Component(immediate = true, service = PortalInstanceLifecycleListener.class)
 public class AddLayoutPrototypePortalInstanceLifecycleListener
-	implements PortalInstanceLifecycleListener {
+	extends PortalInstanceLifecycleListener {
 
 	@Override
 	public void portalInstanceRegistered(Company company) throws Exception {
@@ -61,7 +61,7 @@ public class AddLayoutPrototypePortalInstanceLifecycleListener
 		Layout layout = DefaultLayoutPrototypesUtil.addLayoutPrototype(
 			companyId, defaultUserId, "layout-prototype-blog-title",
 			"layout-prototype-blog-description", "2_columns_iii",
-			layoutPrototypes, getClass().getClassLoader());
+			layoutPrototypes, getClassLoader());
 
 		if (layout == null) {
 			return;

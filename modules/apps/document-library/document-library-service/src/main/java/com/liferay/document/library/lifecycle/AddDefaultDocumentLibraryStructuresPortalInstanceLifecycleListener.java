@@ -24,7 +24,7 @@ import com.liferay.dynamic.data.mapping.storage.StorageType;
 import com.liferay.dynamic.data.mapping.util.DDM;
 import com.liferay.dynamic.data.mapping.util.DDMBeanTranslator;
 import com.liferay.dynamic.data.mapping.util.DefaultDDMStructureHelper;
-import com.liferay.portal.instance.lifecycle.PortalInstanceLifecycleListener;
+import com.liferay.portal.instance.lifecycle.BasePortalInstanceLifecycleListener;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.metadata.RawMetadataProcessorUtil;
 import com.liferay.portal.kernel.module.framework.ModuleServiceLifecycle;
@@ -67,7 +67,7 @@ import org.osgi.service.component.annotations.Reference;
  */
 @Component(immediate = true, service = PortalInstanceLifecycleListener.class)
 public class AddDefaultDocumentLibraryStructuresPortalInstanceLifecycleListener
-	implements PortalInstanceLifecycleListener {
+	extends PortalInstanceLifecycleListener {
 
 	@Override
 	public void portalInstanceRegistered(Company company) throws Exception {
@@ -89,7 +89,7 @@ public class AddDefaultDocumentLibraryStructuresPortalInstanceLifecycleListener
 		_defaultDDMStructureHelper.addDDMStructures(
 			defaultUserId, group.getGroupId(),
 			PortalUtil.getClassNameId(DLFileEntryMetadata.class),
-			getClass().getClassLoader(),
+			getClassLoader(),
 			"com/liferay/document/library/events/dependencies" +
 				"/document-library-structures.xml",
 			serviceContext);
@@ -128,7 +128,7 @@ public class AddDefaultDocumentLibraryStructuresPortalInstanceLifecycleListener
 
 		String definition =
 			_defaultDDMStructureHelper.getDynamicDDMStructureDefinition(
-				getClass().getClassLoader(),
+				getClassLoader(),
 				"com/liferay/document/library/events/dependencies" +
 					"/document-library-structures.xml",
 				languageKey, locale);
