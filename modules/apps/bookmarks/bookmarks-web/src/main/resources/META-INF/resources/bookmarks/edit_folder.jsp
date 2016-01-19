@@ -97,7 +97,7 @@ if (portletTitleBasedNavigation) {
 				<aui:input name="description" />
 			</aui:fieldset>
 
-			<c:if test="<%= (folder != null) %>">
+			<c:if test="<%= folder != null %>">
 				<aui:fieldset collapsed="<%= true %>" collapsible="<%= true %>" label="parent-folder">
 
 					<%
