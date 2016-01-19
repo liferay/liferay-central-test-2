@@ -88,6 +88,7 @@ public class UpgradeProcess_7_0_0 extends UpgradeProcess {
 		upgrade(UpgradePhone.class);
 		upgrade(UpgradePortalPreferences.class);
 		upgrade(UpgradePortletDisplayTemplatePreferences.class);
+		upgrade(UpgradePortletId.class);
 		upgrade(UpgradeRatings.class);
 		upgrade(UpgradeRelease.class);
 		upgrade(UpgradeRepositoryEntry.class);
@@ -95,7 +96,6 @@ public class UpgradeProcess_7_0_0 extends UpgradeProcess {
 		upgrade(UpgradeSharding.class);
 		upgrade(UpgradeSubscription.class);
 		upgrade(UpgradeWebsite.class);
-		upgrade(UpgradePortletId.class);
 	}
 
 }
