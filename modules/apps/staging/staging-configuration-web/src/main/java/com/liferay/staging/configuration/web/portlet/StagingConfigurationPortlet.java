@@ -163,7 +163,7 @@ public class StagingConfigurationPortlet extends MVCPortlet {
 
 		if (!stagedGroup) {
 
-			// Staging has been turned on
+			// Staging was turned on
 
 			PortletURL portletURL = null;
 
@@ -187,8 +187,8 @@ public class StagingConfigurationPortlet extends MVCPortlet {
 		else if ((stagingType == StagingConstants.TYPE_NOT_STAGED) ||
 				 (stagingType == StagingConstants.TYPE_REMOTE_STAGING)) {
 
-			// Staging has been turned off or
-			// remote staging configuration has been modified
+			// Staging was turned off or remote staging configuration was
+			// modified
 
 			PortletURL portletURL = PortalUtil.getControlPanelPortletURL(
 				actionRequest, liveGroup,
@@ -204,7 +204,7 @@ public class StagingConfigurationPortlet extends MVCPortlet {
 		}
 		else {
 
-			// local staging configuration has been modified
+			// Local staging configuration was modified
 
 			PortletURL portletURL = PortalUtil.getControlPanelPortletURL(
 				actionRequest, liveGroup.getStagingGroup(),
