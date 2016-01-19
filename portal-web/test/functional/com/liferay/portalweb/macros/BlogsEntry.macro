@@ -112,10 +112,6 @@
 		</execute>
 	</command>
 
-	<command name="addCoverImage">
-		<execute function="AssertClick" locator1="BlogsEntry#ENTRY_COVER_IMAGE_SELECT_FILE" value1="Select File" />
-	</command>
-
 	<command name="addCP">
 		<execute macro="BlogsNavigator#gotoAddEntry" />
 
