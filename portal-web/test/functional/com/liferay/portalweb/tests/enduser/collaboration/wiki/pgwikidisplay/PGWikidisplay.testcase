@@ -154,10 +154,6 @@
 
 		<execute function="AssertClick" locator1="PGWikidisplay#ADD_CHILD_PAGE" value1="Add Child Page" />
 
-		<execute macro="WikiEntry#addPageTitle">
-			<var name="wikiPageTitle" value="${wikiChildPageTitle}" />
-		</execute>
-
 		<execute macro="WikiEntry#selectPageFormat">
 			<var name="pageFormat" value="HTML" />
 		</execute>
@@ -169,6 +165,10 @@
 		<execute function="Click" locator1="AlloyEditor#CONTENT_EDITOR_SWITCH_ACE_EDITOR" />
 
 		<execute function="Type#typeAceEditor" locator1="TextArea#ACE_EDITOR" value1="${welcomeToLiferay}" />
+
+		<execute macro="WikiEntry#addPageTitle">
+			<var name="wikiPageTitle" value="${wikiChildPageTitle}" />
+		</execute>
 
 		<execute macro="WikiEntry#publish" />
 
