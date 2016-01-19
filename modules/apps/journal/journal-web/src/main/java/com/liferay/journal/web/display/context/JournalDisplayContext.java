@@ -707,16 +707,16 @@ public class JournalDisplayContext {
 	protected ManagementBarFilterItem getManagementBarFilterItem(int status)
 		throws PortalException, PortletException {
 
-		PortletURL portletURL = PortletURLUtil.clone(
-			getPortletURL(), _liferayPortletResponse);
-
-		portletURL.setParameter("status", String.valueOf(status));
-
 		boolean active = false;
 
 		if (status == getStatus()) {
 			active = true;
 		}
+
+		PortletURL portletURL = PortletURLUtil.clone(
+			getPortletURL(), _liferayPortletResponse);
+
+		portletURL.setParameter("status", String.valueOf(status));
 
 		return new ManagementBarFilterItem(
 			active, WorkflowConstants.getStatusLabel(status),
