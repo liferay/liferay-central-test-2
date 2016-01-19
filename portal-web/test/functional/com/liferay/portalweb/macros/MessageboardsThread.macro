@@ -276,16 +276,9 @@
 	</command>
 
 	<command name="editCP">
-		<if>
-			<condition function="IsElementNotPresent" locator1="MessageBoardsThread#MESSAGE_EDIT_1" />
-			<then>
-				<execute function="MakeVisible" locator1="MessageBoardsThread#MESSAGE_EDIT_1" value1="Edit" />
-				<execute function="AssertClick" locator1="MessageBoardsThread#MESSAGE_EDIT_1" value1="Edit" />
-			</then>
-			<else>
-				<execute function="AssertClick" locator1="MessageBoardsThread#MESSAGE_EDIT_1" value1="Edit" />
-			</else>
-		</if>
+		<execute function="Click" locator1="Icon#BODY_VERTICAL_ELLIPSIS" />
+
+		<execute function="AssertClick" locator1="MenuItem#EDIT" value1="Edit" />
 
 		<if>
 			<equals arg1="${threadAttachmentRemove}" arg2="true" />
@@ -322,7 +315,12 @@
 	</command>
 
 	<command name="editPG">
-		<execute function="AssertClick" locator1="MessageBoardsThread#MESSAGE_EDIT_1" value1="Edit" />
+		<var name="key_threadSubject" value="${threadSubject}" />
+		<var name="key_userName" value="${userName}" />
+
+		<execute function="Click" locator1="Icon#BODY_VERTICAL_ELLIPSIS" />
+
+		<execute function="AssertClick" locator1="MenuItem#EDIT" value1="Edit" />
 
 		<if>
 			<isset var="threadSubjectEdit" />
