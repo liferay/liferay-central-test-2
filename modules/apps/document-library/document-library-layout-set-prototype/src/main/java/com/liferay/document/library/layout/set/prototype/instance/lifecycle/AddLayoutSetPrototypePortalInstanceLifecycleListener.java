@@ -12,10 +12,11 @@
  * details.
  */
 
-package com.liferay.document.library.layout.set.prototype.lifecycle;
+package com.liferay.document.library.layout.set.prototype.instance.lifecycle;
 
 import com.liferay.document.library.web.constants.DLPortletKeys;
 import com.liferay.portal.instance.lifecycle.BasePortalInstanceLifecycleListener;
+import com.liferay.portal.instance.lifecycle.PortalInstanceLifecycleListener;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.module.framework.ModuleServiceLifecycle;
 import com.liferay.portal.model.Company;
@@ -40,7 +41,7 @@ import org.osgi.service.component.annotations.Reference;
  */
 @Component(immediate = true, service = PortalInstanceLifecycleListener.class)
 public class AddLayoutSetPrototypePortalInstanceLifecycleListener
-	extends PortalInstanceLifecycleListener {
+	extends BasePortalInstanceLifecycleListener {
 
 	@Override
 	public void portalInstanceRegistered(Company company) throws Exception {

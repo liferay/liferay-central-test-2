@@ -12,25 +12,22 @@
  * details.
  */
 
-package com.liferay.asset.publisher.layout.prototype.lifecycle;
+package com.liferay.blogs.layout.prototype.instance.lifecycle;
 
-import com.liferay.asset.categories.navigation.web.constants.AssetCategoriesNavigationPortletKeys;
-import com.liferay.asset.publisher.web.constants.AssetPublisherPortletKeys;
 import com.liferay.asset.tags.navigation.web.constants.AssetTagsNavigationPortletKeys;
+import com.liferay.blogs.recent.bloggers.web.constants.RecentBloggersPortletKeys;
+import com.liferay.blogs.web.constants.BlogsPortletKeys;
 import com.liferay.portal.instance.lifecycle.BasePortalInstanceLifecycleListener;
+import com.liferay.portal.instance.lifecycle.PortalInstanceLifecycleListener;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.module.framework.ModuleServiceLifecycle;
-import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutPrototype;
-import com.liferay.portal.model.LayoutTypePortletConstants;
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.service.LayoutLocalService;
 import com.liferay.portal.service.LayoutPrototypeLocalService;
 import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.util.DefaultLayoutPrototypesUtil;
-import com.liferay.search.web.constants.SearchPortletKeys;
 
 import java.util.List;
 
@@ -38,11 +35,11 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 /**
- * @author Juergen Kappler
+ * @author Sergio González
  */
 @Component(immediate = true, service = PortalInstanceLifecycleListener.class)
 public class AddLayoutPrototypePortalInstanceLifecycleListener
-	extends PortalInstanceLifecycleListener {
+	extends BasePortalInstanceLifecycleListener {
 
 	@Override
 	public void portalInstanceRegistered(Company company) throws Exception {
@@ -54,18 +51,17 @@ public class AddLayoutPrototypePortalInstanceLifecycleListener
 				company.getCompanyId(), null, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS, null);
 
-		addWebContentPage(
-			company.getCompanyId(), defaultUserId, layoutPrototypes);
+		addBlogPage(company.getCompanyId(), defaultUserId, layoutPrototypes);
 	}
 
-	protected void addWebContentPage(
+	protected void addBlogPage(
 			long companyId, long defaultUserId,
 			List<LayoutPrototype> layoutPrototypes)
 		throws Exception {
 
 		Layout layout = DefaultLayoutPrototypesUtil.addLayoutPrototype(
-			companyId, defaultUserId, "layout-prototype-web-content-title",
-			"layout-prototype-web-content-description", "2_columns_ii",
+			companyId, defaultUserId, "layout-prototype-blog-title",
+			"layout-prototype-blog-description", "2_columns_iii",
 			layoutPrototypes, getClassLoader());
 
 		if (layout == null) {
@@ -73,58 +69,28 @@ public class AddLayoutPrototypePortalInstanceLifecycleListener
 		}
 
 		DefaultLayoutPrototypesUtil.addPortletId(
-			layout, AssetTagsNavigationPortletKeys.ASSET_TAGS_NAVIGATION,
-			"column-1");
+			layout, BlogsPortletKeys.BLOGS, "column-1");
 
 		DefaultLayoutPrototypesUtil.addPortletId(
-			layout,
-			AssetCategoriesNavigationPortletKeys.ASSET_CATEGORIES_NAVIGATION,
-			"column-1");
+			layout, AssetTagsNavigationPortletKeys.ASSET_TAGS_CLOUD,
+			"column-2");
 
 		DefaultLayoutPrototypesUtil.addPortletId(
-			layout, SearchPortletKeys.SEARCH, "column-2");
-
-		String portletId = DefaultLayoutPrototypesUtil.addPortletId(
-			layout, AssetPublisherPortletKeys.ASSET_PUBLISHER, "column-2");
-
-		UnicodeProperties typeSettingsProperties =
-			layout.getTypeSettingsProperties();
-
-		typeSettingsProperties.setProperty(
-			LayoutTypePortletConstants.DEFAULT_ASSET_PUBLISHER_PORTLET_ID,
-			portletId);
-
-		_layoutLocalService.updateLayout(
-			layout.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId(),
-			layout.getTypeSettings());
+			layout, RecentBloggersPortletKeys.RECENT_BLOGGERS, "column-2");
 	}
 
 	@Reference(
-		target = "(javax.portlet.name=" + AssetCategoriesNavigationPortletKeys.ASSET_CATEGORIES_NAVIGATION + ")",
+		target = "(javax.portlet.name=" + AssetTagsNavigationPortletKeys.ASSET_TAGS_CLOUD + ")",
 		unbind = "-"
 	)
-	protected void setAssetCategoriesNavigationPortlet(Portlet portlet) {
+	protected void setAssetTagsCloudPortlet(Portlet portlet) {
 	}
 
 	@Reference(
-		target = "(javax.portlet.name=" + AssetPublisherPortletKeys.ASSET_PUBLISHER + ")",
+		target = "(javax.portlet.name=" + BlogsPortletKeys.BLOGS + ")",
 		unbind = "-"
 	)
-	protected void setAssetPublisherPortlet(Portlet portlet) {
-	}
-
-	@Reference(
-		target = "(javax.portlet.name=" + AssetTagsNavigationPortletKeys.ASSET_TAGS_NAVIGATION + ")",
-		unbind = "-"
-	)
-	protected void setAssetTagsNavigationPortlet(Portlet portlet) {
-	}
-
-	@Reference(unbind = "-")
-	protected void setLayoutLocalService(
-		LayoutLocalService layoutLocalService) {
-
-		_layoutLocalService = layoutLocalService;
+	protected void setBlogsPortlet(Portlet portlet) {
 	}
 
 	@Reference(unbind = "-")
@@ -140,10 +106,10 @@ public class AddLayoutPrototypePortalInstanceLifecycleListener
 	}
 
 	@Reference(
-		target = "(javax.portlet.name=" + SearchPortletKeys.SEARCH + ")",
+		target = "(javax.portlet.name=" + RecentBloggersPortletKeys.RECENT_BLOGGERS + ")",
 		unbind = "-"
 	)
-	protected void setSearchPortlet(Portlet portlet) {
+	protected void setRecentBloggersPortlet(Portlet portlet) {
 	}
 
 	@Reference(unbind = "-")
@@ -151,7 +117,6 @@ public class AddLayoutPrototypePortalInstanceLifecycleListener
 		_userLocalService = userLocalService;
 	}
 
-	private LayoutLocalService _layoutLocalService;
 	private LayoutPrototypeLocalService _layoutPrototypeLocalService;
 	private UserLocalService _userLocalService;
 
