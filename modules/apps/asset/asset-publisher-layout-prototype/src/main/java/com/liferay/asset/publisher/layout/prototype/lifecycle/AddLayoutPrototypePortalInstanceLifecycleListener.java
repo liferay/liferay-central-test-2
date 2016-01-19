@@ -17,7 +17,7 @@ package com.liferay.asset.publisher.layout.prototype.lifecycle;
 import com.liferay.asset.categories.navigation.web.constants.AssetCategoriesNavigationPortletKeys;
 import com.liferay.asset.publisher.web.constants.AssetPublisherPortletKeys;
 import com.liferay.asset.tags.navigation.web.constants.AssetTagsNavigationPortletKeys;
-import com.liferay.portal.instance.lifecycle.PortalInstanceLifecycleListener;
+import com.liferay.portal.instance.lifecycle.BasePortalInstanceLifecycleListener;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.module.framework.ModuleServiceLifecycle;
 import com.liferay.portal.kernel.util.UnicodeProperties;
@@ -42,7 +42,7 @@ import org.osgi.service.component.annotations.Reference;
  */
 @Component(immediate = true, service = PortalInstanceLifecycleListener.class)
 public class AddLayoutPrototypePortalInstanceLifecycleListener
-	implements PortalInstanceLifecycleListener {
+	extends PortalInstanceLifecycleListener {
 
 	@Override
 	public void portalInstanceRegistered(Company company) throws Exception {
@@ -66,7 +66,7 @@ public class AddLayoutPrototypePortalInstanceLifecycleListener
 		Layout layout = DefaultLayoutPrototypesUtil.addLayoutPrototype(
 			companyId, defaultUserId, "layout-prototype-web-content-title",
 			"layout-prototype-web-content-description", "2_columns_ii",
-			layoutPrototypes, getClass().getClassLoader());
+			layoutPrototypes, getClassLoader());
 
 		if (layout == null) {
 			return;

@@ -15,7 +15,7 @@
 package com.liferay.document.library.layout.set.prototype.lifecycle;
 
 import com.liferay.document.library.web.constants.DLPortletKeys;
-import com.liferay.portal.instance.lifecycle.PortalInstanceLifecycleListener;
+import com.liferay.portal.instance.lifecycle.BasePortalInstanceLifecycleListener;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.module.framework.ModuleServiceLifecycle;
 import com.liferay.portal.model.Company;
@@ -40,7 +40,7 @@ import org.osgi.service.component.annotations.Reference;
  */
 @Component(immediate = true, service = PortalInstanceLifecycleListener.class)
 public class AddLayoutSetPrototypePortalInstanceLifecycleListener
-	implements PortalInstanceLifecycleListener {
+	extends PortalInstanceLifecycleListener {
 
 	@Override
 	public void portalInstanceRegistered(Company company) throws Exception {
@@ -66,7 +66,7 @@ public class AddLayoutSetPrototypePortalInstanceLifecycleListener
 				companyId, defaultUserId,
 				"layout-set-prototype-intranet-site-title",
 				"layout-set-prototype-intranet-site-description",
-				layoutSetPrototypes, getClass().getClassLoader());
+				layoutSetPrototypes, getClassLoader());
 
 		if (layoutSet == null) {
 			return;
