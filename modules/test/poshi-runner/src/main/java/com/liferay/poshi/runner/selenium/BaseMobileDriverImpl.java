@@ -338,7 +338,7 @@ public abstract class BaseMobileDriverImpl
 	}
 
 	@Override
-	public void click(String locator) {
+	public void click(String locator) throws Exception {
 		try {
 			tap(locator);
 		}
@@ -352,25 +352,28 @@ public abstract class BaseMobileDriverImpl
 	}
 
 	@Override
-	public void clickAndWait(String locator) {
+	public void clickAndWait(String locator) throws Exception {
 		click(locator);
 
 		waitForPageToLoad("30000");
 	}
 
 	@Override
-	public void clickAt(String locator, String coordString) {
+	public void clickAt(String locator, String coordString) throws Exception {
 		clickAt(locator, coordString, true);
 	}
 
 	public void clickAt(
-		String locator, String coordString, boolean scrollIntoView) {
+			String locator, String coordString, boolean scrollIntoView)
+		throws Exception {
 
 		click(locator);
 	}
 
 	@Override
-	public void clickAtAndWait(String locator, String coordString) {
+	public void clickAtAndWait(String locator, String coordString)
+		throws Exception {
+
 		clickAt(locator, coordString);
 
 		waitForPageToLoad("30000");
@@ -1201,7 +1204,7 @@ public abstract class BaseMobileDriverImpl
 	}
 
 	@Override
-	public void open(String url) {
+	public void open(String url) throws Exception {
 		WebDriverHelper.open(this, url);
 	}
 
@@ -1211,7 +1214,7 @@ public abstract class BaseMobileDriverImpl
 	}
 
 	@Override
-	public void openWindow(String url, String windowID) {
+	public void openWindow(String url, String windowID) throws Exception {
 		open(url);
 	}
 
