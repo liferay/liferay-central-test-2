@@ -241,10 +241,16 @@ AUI.add(
 							if (deviceItem.hasClass(CSS_SELECTED) && device.rotation) {
 								deviceItem.toggleClass(STR_ROTATED);
 
-								deviceItem.one('.icon').toggleClass(STR_ICON_ROTATE_90);
+								var icon = deviceItem.one('.icon');
+
+								if (icon) {
+									icon.toggleClass(STR_ICON_ROTATE_90);
+								}
 							}
 
-							deviceItem.radioClass(CSS_SELECTED);
+							instance._deviceItems.removeClass(CSS_SELECTED);
+
+							deviceItem.addClass(CSS_SELECTED);
 
 							instance._openDeviceDialog(device, deviceItem.hasClass(STR_ROTATED));
 						}
