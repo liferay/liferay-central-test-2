@@ -99,16 +99,6 @@ public class AddLayoutSetPrototypePortalInstanceLifecycleListener
 			layoutSet, "wiki", "/wiki", "2_columns_iii");
 	}
 
-	protected void doRun(long companyId) throws Exception {
-		long defaultUserId = _userLocalService.getDefaultUserId(companyId);
-
-		List<LayoutSetPrototype> layoutSetPrototypes =
-			_layoutSetPrototypeLocalService.search(
-				companyId, null, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
-
-		addPublicSite(companyId, defaultUserId, layoutSetPrototypes);
-	}
-
 	@Reference(unbind = "-")
 	protected void setLayoutSetPrototypeLocalService(
 		LayoutSetPrototypeLocalService layoutSetPrototypeLocalService) {
