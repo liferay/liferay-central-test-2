@@ -143,11 +143,12 @@ public interface LiferaySelenium {
 
 	public void click(String locator) throws Exception;
 
-	public void clickAndWait(String locator);
+	public void clickAndWait(String locator) throws Exception;
 
-	public void clickAt(String locator, String coordString);
+	public void clickAt(String locator, String coordString) throws Exception;
 
-	public void clickAtAndWait(String locator, String coordString);
+	public void clickAtAndWait(String locator, String coordString)
+		throws Exception;
 
 	public void close();
 
