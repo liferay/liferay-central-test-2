@@ -6273,9 +6273,8 @@ public class PortalImpl implements Portal {
 
 	@Override
 	public boolean isSkipPortletContentRendering(
-			Group group, LayoutTypePortlet layoutTypePortlet,
-			PortletDisplay portletDisplay, String portletName)
-		throws PortalException {
+		Group group, LayoutTypePortlet layoutTypePortlet,
+		PortletDisplay portletDisplay, String portletName) {
 
 		if (group.isLayoutPrototype() &&
 			layoutTypePortlet.hasPortletId(portletDisplay.getId()) &&
