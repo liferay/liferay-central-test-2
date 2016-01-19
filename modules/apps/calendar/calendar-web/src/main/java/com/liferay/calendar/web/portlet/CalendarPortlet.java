@@ -658,7 +658,7 @@ public class CalendarPortlet extends MVCPortlet {
 
 			calendarBooking.setEndTime(
 				firstDayJCalendar.getTimeInMillis() +
-				calendarBooking.getDuration());
+					calendarBooking.getDuration());
 
 			calendarBooking.setStartTime(firstDayJCalendar.getTimeInMillis());
 
