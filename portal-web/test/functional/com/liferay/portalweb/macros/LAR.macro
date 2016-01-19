@@ -1,8 +1,8 @@
 <definition>
 	<command name="addExportTemplateCP">
-		<execute function="Click" locator1="Icon#HEADER_VERTICAL_ELLIPSIS"/>
+		<execute function="Click" locator1="Icon#HEADER_VERTICAL_ELLIPSIS" />
 
-		<execute function="AssertClick" locator1="MenuItem#EXPORT_TEMPLATES" value1="Export Templates"/>
+		<execute function="AssertClick" locator1="MenuItem#EXPORT_TEMPLATES" value1="Export Templates" />
 
 		<execute function="Click" locator1="Button#PLUS" />
 
