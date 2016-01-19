@@ -880,6 +880,7 @@
 
 	<command name="viewCP">
 		<var name="key_threadSubject" value="${threadSubject}" />
+		<var name="key_userName" value="${userName}" />
 
 		<execute function="AssertTextEquals" locator1="MessageBoards#THREAD_LIST_THREAD" value1="${threadSubject}" />
 
@@ -1013,6 +1014,7 @@
 
 	<command name="viewNoXSSPG">
 		<var name="key_threadSubject" value="${threadSubject}" />
+		<var name="key_userName" value="${userName}" />
 
 		<execute function="AssertAlertNotPresent" />
 		<execute function="AssertTextEquals" locator1="MessageBoardsThread#TITLE_HEADER" value1="${threadSubject}" />
@@ -1022,6 +1024,9 @@
 	</command>
 
 	<command name="viewPG">
+		<var name="key_threadSubject" value="${threadSubject}" />
+		<var name="key_userName" value="${userName}" />
+
 		<execute function="AssertTextEquals" locator1="MessageBoardsThread#TITLE_HEADER" value1="${threadSubject}" />
 		<execute function="AssertTextEquals" locator1="MessageBoardsThread#MESSAGE_USERNAME_1" value1="${userName}" />
 		<execute function="AssertTextEquals" locator1="MessageBoardsThread#MESSAGE_SUBJECT_1" value1="${threadSubject}" />
@@ -1086,6 +1091,7 @@
 
 	<command name="viewReplyCP">
 		<var name="key_threadSubject" value="${threadSubject}" />
+		<var name="key_userName" value="${userName}" />
 
 		<execute function="AssertTextEquals" locator1="MessageBoardsThread#TITLE_HEADER" value1="${threadSubject}" />
 		<execute function="AssertTextEquals" locator1="MessageBoardsThread#MESSAGE_USERNAME_1" value1="${userName}" />
@@ -1106,6 +1112,7 @@
 
 	<command name="viewReplyPG">
 		<var name="key_threadSubject" value="${threadSubject}" />
+		<var name="key_userName" value="${userName}" />
 
 		<execute function="AssertTextEquals" locator1="MessageBoards#THREAD_TABLE_THREAD" value1="${threadSubject}" />
 		<execute function="AssertTextEquals" locator1="MessageBoards#THREAD_TABLE_STARTED_BY" value1="${userName}" />
@@ -1165,6 +1172,7 @@
 
 	<command name="viewSplitThreadPG">
 		<var name="key_threadSubject" value="${threadSubject}" />
+		<var name="key_userName" value="${userName}" />
 
 		<execute function="AssertTextEquals" locator1="MessageBoards#THREAD_TABLE_THREAD" value1="${threadSubject}" />
 		<execute function="AssertTextEquals" locator1="MessageBoards#THREAD_TABLE_POSTS" value1="2" />
@@ -1307,6 +1315,7 @@
 
 	<command name="viewWithWorkflowPG">
 		<var name="key_threadSubject" value="${threadSubject}" />
+		<var name="key_userName" value="${userName}" />
 
 		<execute function="AssertElementNotPresent" locator1="MessageBoards#THREAD_TABLE_THREAD" />
 		<execute function="AssertElementNotPresent" locator1="MessageBoards#THREAD_TABLE_STARTED_BY" />
