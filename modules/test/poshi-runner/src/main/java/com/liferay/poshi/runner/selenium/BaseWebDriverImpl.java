@@ -251,7 +251,7 @@ public abstract class BaseWebDriverImpl
 	}
 
 	@Override
-	public void assertLocation(String pattern) {
+	public void assertLocation(String pattern) throws Exception {
 		LiferaySeleniumHelper.assertLocation(this, pattern);
 	}
 
@@ -281,7 +281,7 @@ public abstract class BaseWebDriverImpl
 	}
 
 	@Override
-	public void assertNotLocation(String pattern) {
+	public void assertNotLocation(String pattern) throws Exception {
 		LiferaySeleniumHelper.assertNotLocation(this, pattern);
 	}
 
@@ -1037,7 +1037,7 @@ public abstract class BaseWebDriverImpl
 	}
 
 	@Override
-	public String getLocation() {
+	public String getLocation() throws Exception {
 		return WebDriverHelper.getLocation(this);
 	}
 
