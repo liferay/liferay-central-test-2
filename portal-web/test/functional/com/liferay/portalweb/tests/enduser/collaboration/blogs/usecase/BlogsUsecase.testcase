@@ -1729,7 +1729,7 @@
 
 		<execute function="SelectFrame" locator1="UsersAndOrganizationsSelectOrganization#SELECT_ORGANIZATION_IFRAME" />
 
-		<execute function="AssertElementPresent" locator1="Message#INFO_1" />
+		<execute function="AssertElementPresent" locator1="Message#EMPTY_INFO" />
 
 		<execute macro="IFrame#selectTopFrame" />
 
