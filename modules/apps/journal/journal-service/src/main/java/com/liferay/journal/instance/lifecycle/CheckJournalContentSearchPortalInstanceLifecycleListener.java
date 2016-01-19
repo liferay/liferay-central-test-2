@@ -41,9 +41,6 @@ public class CheckJournalContentSearchPortalInstanceLifecycleListener
 			company.getCompanyId());
 	}
 
-	protected void doRun(long companyId) throws Exception {
-	}
-
 	@Reference(unbind = "-")
 	protected void setJournalContentSearchLocalService(
 		JournalContentSearchLocalService journalContentSearchLocalService) {
