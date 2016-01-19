@@ -1251,9 +1251,8 @@ public interface Portal {
 		throws Exception;
 
 	public boolean isSkipPortletContentRendering(
-			Group group, LayoutTypePortlet layoutTypePortlet,
-			PortletDisplay portletDisplay, String portletName)
-		throws PortalException;
+		Group group, LayoutTypePortlet layoutTypePortlet,
+		PortletDisplay portletDisplay, String portletName);
 
 	public boolean isSystemGroup(String groupName);
 

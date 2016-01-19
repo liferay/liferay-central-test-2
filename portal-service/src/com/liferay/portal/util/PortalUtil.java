@@ -2080,9 +2080,8 @@ public class PortalUtil {
 	}
 
 	public static boolean isSkipPortletContentRendering(
-			Group group, LayoutTypePortlet layoutTypePortlet,
-			PortletDisplay portletDisplay, String portletName)
-		throws PortalException {
+		Group group, LayoutTypePortlet layoutTypePortlet,
+		PortletDisplay portletDisplay, String portletName) {
 
 		return getPortal().isSkipPortletContentRendering(
 			group, layoutTypePortlet, portletDisplay, portletName);
