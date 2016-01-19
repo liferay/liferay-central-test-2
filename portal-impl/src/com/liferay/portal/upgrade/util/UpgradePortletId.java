@@ -351,10 +351,10 @@ public class UpgradePortletId extends UpgradeProcess {
 	protected void updateResourceAction(String oldName, String newName)
 		throws Exception {
 
-		String selectSQL =
+		String sql =
 			"select name from ResourceAction where name = '" + newName + "'";
 
-		try (PreparedStatement ps = connection.prepareStatement(selectSQL);
+		try (PreparedStatement ps = connection.prepareStatement(sql);
 				ResultSet rs = ps.executeQuery()) {
 
 			if (rs.next()) {

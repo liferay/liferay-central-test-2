@@ -25,37 +25,38 @@ public class UpgradePortletId
 	@Override
 	protected String[][] getRenamePortletIdsArray() {
 		return new String[][] {
-			new String[] {"147", PortletKeys.ASSET_CATEGORIES_ADMIN},
-			new String[] {"99", PortletKeys.ASSET_TAGS_ADMIN},
+			new String[] {"110", PortletKeys.DOCUMENT_LIBRARY},
+			new String[] {"115", PortletKeys.BLOGS_AGGREGATOR},
+			new String[] {"125", PortletKeys.USERS_ADMIN},
+			new String[] {"127", PortletKeys.USER_GROUPS_ADMIN},
+			new String[] {"128", PortletKeys.ROLES_ADMIN},
+			new String[] {"129", PortletKeys.PASSWORD_POLICIES_ADMIN},
 			new String[] {"134", PortletKeys.SITE_ADMIN},
+			new String[] {"139", PortletKeys.EXPANDO},
+			new String[] {"140", PortletKeys.MY_PAGES},
+			new String[] {"146", PortletKeys.LAYOUT_PROTOTYPE},
+			new String[] {"147", PortletKeys.ASSET_CATEGORIES_ADMIN},
+			new String[] {"149", PortletKeys.LAYOUT_SET_PROTOTYPE},
+			new String[] {"156", PortletKeys.GROUP_PAGES},
+			new String[] {"161", PortletKeys.BLOGS_ADMIN},
+			new String[] {"162", PortletKeys.MESSAGE_BOARDS_ADMIN},
 			new String[] {"165", PortletKeys.SITE_SETTINGS},
+			new String[] {"174", PortletKeys.SITE_MEMBERSHIPS_ADMIN},
+			new String[] {"19", PortletKeys.MESSAGE_BOARDS},
 			new String[] {"191", PortletKeys.SITE_TEAMS},
+			new String[] {"192", PortletKeys.SITE_TEMPLATE_SETTINGS}
+			new String[] {"199", PortletKeys.DOCUMENT_LIBRARY_ADMIN},
 			new String[] {
-				"1_WAR_soannouncementsportlet", PortletKeys.ANNOUNCEMENTS
+				"1_WAR_soannouncementsportlet",
+				PortletKeys.ANNOUNCEMENTS
 			},
+			new String[] {"20", PortletKeys.DOCUMENT_LIBRARY},
+			new String[] {"31", PortletKeys.MEDIA_GALLERY_DISPLAY},
+			new String[] {"33", PortletKeys.BLOGS},
 			new String[] {"83", PortletKeys.ALERTS},
 			new String[] {"84", PortletKeys.ANNOUNCEMENTS},
-			new String[] {"19", PortletKeys.MESSAGE_BOARDS},
-			new String[] {"162", PortletKeys.MESSAGE_BOARDS_ADMIN},
-			new String[] {"33", PortletKeys.BLOGS},
-			new String[] {"115", PortletKeys.BLOGS_AGGREGATOR},
-			new String[] {"161", PortletKeys.BLOGS_ADMIN},
-			new String[] {"139", PortletKeys.EXPANDO},
-			new String[] {"20", PortletKeys.DOCUMENT_LIBRARY},
-			new String[] {"199", PortletKeys.DOCUMENT_LIBRARY_ADMIN},
-			new String[] {"110", PortletKeys.DOCUMENT_LIBRARY},
-			new String[] {"31", PortletKeys.MEDIA_GALLERY_DISPLAY},
-			new String[] {"174", PortletKeys.SITE_MEMBERSHIPS_ADMIN},
 			new String[] {"88", PortletKeys.LAYOUTS_ADMIN},
-			new String[] {"140", PortletKeys.MY_PAGES},
-			new String[] {"156", PortletKeys.GROUP_PAGES},
-			new String[] {"127", PortletKeys.USER_GROUPS_ADMIN},
-			new String[] {"125", PortletKeys.USERS_ADMIN},
-			new String[] {"129", PortletKeys.PASSWORD_POLICIES_ADMIN},
-			new String[] {"128", PortletKeys.ROLES_ADMIN},
-			new String[] {"146", PortletKeys.LAYOUT_PROTOTYPE},
-			new String[] {"149", PortletKeys.LAYOUT_SET_PROTOTYPE},
-			new String[] {"192", PortletKeys.SITE_TEMPLATE_SETTINGS}
+			new String[] {"99", PortletKeys.ASSET_TAGS_ADMIN},
 		};
 	}
 
