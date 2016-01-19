@@ -581,7 +581,7 @@
 		<execute function="Click#makeVisibleClickAt" locator1="Portlet#ICON_PLUS_SIGN" />
 
 		<execute function="AssertTextEquals" locator1="Message#INFO_1" value1="This page does not exist yet. Use the form below to create it." />
-		
+
 		<execute macro="WikiEntry#selectPageFormat">
 			<var name="pageFormat" value="HTML" />
 		</execute>
