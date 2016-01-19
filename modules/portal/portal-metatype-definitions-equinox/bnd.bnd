@@ -1,4 +1,4 @@
-Bundle-Name: Liferay Metatype Definitons Equinox
+Bundle-Name: Liferay Portal Metatype Definitons Equinox
 Bundle-SymbolicName: com.liferay.portal.metatype.definitions.equinox
 Bundle-Version: 1.0.0
 Include-Resource: classes
