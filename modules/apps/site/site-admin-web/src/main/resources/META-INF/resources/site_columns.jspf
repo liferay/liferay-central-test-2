@@ -98,11 +98,7 @@
 	name="members"
 >
 
-	<%
-	String message = "inherited-memberships-are-not-included-in-members-count";
-	%>
-
-	<span onmouseover="Liferay.Portal.ToolTip.show(this, '<%= LanguageUtil.get(request, message) %>');">
+	<span onmouseover="Liferay.Portal.ToolTip.show(this, '<liferay-ui:message key="inherited-memberships-are-not-included-in-members-count" unicode="<%= true %>" />');">
 
 		<%
 		int usersCount = UserLocalServiceUtil.getGroupUsersCount(curGroup.getGroupId());
