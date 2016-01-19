@@ -47,8 +47,7 @@ public class UpgradePortletId
 			new String[] {"192", PortletKeys.SITE_TEMPLATE_SETTINGS},
 			new String[] {"199", PortletKeys.DOCUMENT_LIBRARY_ADMIN},
 			new String[] {
-				"1_WAR_soannouncementsportlet",
-				PortletKeys.ANNOUNCEMENTS
+				"1_WAR_soannouncementsportlet", PortletKeys.ANNOUNCEMENTS
 			},
 			new String[] {"20", PortletKeys.DOCUMENT_LIBRARY},
 			new String[] {"31", PortletKeys.MEDIA_GALLERY_DISPLAY},
