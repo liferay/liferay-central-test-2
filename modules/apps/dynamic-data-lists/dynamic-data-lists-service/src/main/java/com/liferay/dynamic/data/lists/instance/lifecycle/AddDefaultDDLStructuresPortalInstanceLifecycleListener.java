@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.dynamic.data.lists.lifecycle;
+package com.liferay.dynamic.data.lists.instance.lifecycle;
 
 import com.liferay.dynamic.data.lists.model.DDLRecordSet;
 import com.liferay.dynamic.data.lists.service.DDLRecordSetLocalService;
@@ -34,7 +34,7 @@ import org.osgi.service.component.annotations.Reference;
  */
 @Component(immediate = true)
 public class AddDefaultDDLStructuresPortalInstanceLifecycleListener
-	extends PortalInstanceLifecycleListener {
+	extends BasePortalInstanceLifecycleListener {
 
 	@Override
 	public void portalInstanceRegistered(Company company) throws Exception {

@@ -12,12 +12,13 @@
  * details.
  */
 
-package com.liferay.journal.lifecycle;
+package com.liferay.journal.instance.lifecycle;
 
 import com.liferay.dynamic.data.mapping.util.DefaultDDMStructureHelper;
 import com.liferay.journal.model.JournalArticle;
 import com.liferay.journal.service.JournalArticleLocalService;
 import com.liferay.portal.instance.lifecycle.BasePortalInstanceLifecycleListener;
+import com.liferay.portal.instance.lifecycle.PortalInstanceLifecycleListener;
 import com.liferay.portal.kernel.module.framework.ModuleServiceLifecycle;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
@@ -34,7 +35,7 @@ import org.osgi.service.component.annotations.Reference;
  */
 @Component(immediate = true, service = PortalInstanceLifecycleListener.class)
 public class AddDefaultJournalStructuresPortalInstanceLifecycleListener
-	extends PortalInstanceLifecycleListener {
+	extends BasePortalInstanceLifecycleListener {
 
 	@Override
 	public void portalInstanceRegistered(Company company) throws Exception {

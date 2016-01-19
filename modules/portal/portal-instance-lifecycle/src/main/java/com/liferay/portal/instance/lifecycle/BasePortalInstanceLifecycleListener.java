@@ -14,8 +14,6 @@
 
 package com.liferay.portal.instance.lifecycle;
 
-import com.liferay.portal.model.Company;
-
 /**
  * @author Michael C. Han
  */

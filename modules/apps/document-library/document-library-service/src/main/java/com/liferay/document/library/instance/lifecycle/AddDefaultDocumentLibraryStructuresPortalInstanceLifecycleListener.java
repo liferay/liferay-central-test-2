@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.document.library.lifecycle;
+package com.liferay.document.library.instance.lifecycle;
 
 import com.liferay.dynamic.data.mapping.io.DDMFormXSDDeserializer;
 import com.liferay.dynamic.data.mapping.model.DDMForm;
@@ -25,6 +25,7 @@ import com.liferay.dynamic.data.mapping.util.DDM;
 import com.liferay.dynamic.data.mapping.util.DDMBeanTranslator;
 import com.liferay.dynamic.data.mapping.util.DefaultDDMStructureHelper;
 import com.liferay.portal.instance.lifecycle.BasePortalInstanceLifecycleListener;
+import com.liferay.portal.instance.lifecycle.PortalInstanceLifecycleListener;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.metadata.RawMetadataProcessorUtil;
 import com.liferay.portal.kernel.module.framework.ModuleServiceLifecycle;
@@ -67,7 +68,7 @@ import org.osgi.service.component.annotations.Reference;
  */
 @Component(immediate = true, service = PortalInstanceLifecycleListener.class)
 public class AddDefaultDocumentLibraryStructuresPortalInstanceLifecycleListener
-	extends PortalInstanceLifecycleListener {
+	extends BasePortalInstanceLifecycleListener {
 
 	@Override
 	public void portalInstanceRegistered(Company company) throws Exception {

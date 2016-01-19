@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.dynamic.data.lists.lifecycle;
+package com.liferay.dynamic.data.lists.instance.lifecycle;
 
 import com.liferay.portal.instance.lifecycle.BasePortalInstanceLifecycleListener;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -41,7 +41,7 @@ import org.osgi.service.component.annotations.Reference;
  */
 @Component(immediate = true)
 public class AddDefaultSharedFormLayoutPortalInstanceLifecycleListener
-	extends PortalInstanceLifecycleListener {
+	extends BasePortalInstanceLifecycleListener {
 
 	@Override
 	public void portalInstanceRegistered(Company company) throws Exception {

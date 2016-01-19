@@ -12,9 +12,8 @@
  * details.
  */
 
-package com.liferay.portal.workflow.kaleo.internal.lifecycle;
+package com.liferay.portal.workflow.kaleo.internal.instance.lifecycle;
 
-import com.liferay.portal.instance.lifecycle.BasePortalInstanceLifecycleListener;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.workflow.kaleo.manager.PortalKaleoManager;
 
