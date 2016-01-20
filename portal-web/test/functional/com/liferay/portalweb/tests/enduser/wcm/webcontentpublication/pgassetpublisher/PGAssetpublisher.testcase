@@ -1,8 +1,6 @@
 <definition component-name="portal-wcm">
 	<property name="testray.main.component.name" value="Asset Publisher" />
 
-	<var name="portletName" value="Asset Publisher" />
-
 	<set-up>
 		<execute macro="TestCase#setUpPortalInstance" />
 
@@ -17,7 +15,7 @@
 		</execute>
 
 		<execute macro="Portlet#addPG">
-			<var name="portletName" value="${portletName}" />
+			<var name="portletName" value="Asset Publisher" />
 		</execute>
 	</set-up>
 
@@ -316,8 +314,6 @@
 	</command>
 
 	<command name="ConfigureAPPortletEnableRatings" priority="4">
-		<var name="assetTitle" value="WC WebContent Title" />
-
 		<execute macro="AssetPublisherPortlet#configureFlaggableDisplaySettingsPG">
 			<var name="enableRatings" value="true" />
 		</execute>
@@ -359,7 +355,7 @@
 		<execute macro="AssetPublisherPortlet#rate4StarsPG" />
 
 		<execute macro="Page#gotoPG">
-			<var name="assetTitle" value="${assetTitle}" />
+			<var name="assetTitle" value="WC WebContent Title" />
 			<var name="pageName" value="Asset Publisher Page" />
 		</execute>
 
@@ -380,7 +376,7 @@
 		</execute>
 
 		<execute macro="Portlet#addDuplicatePG">
-			<var name="portletName" value="${portletName}" />
+			<var name="portletName" value="Asset Publisher" />
 		</execute>
 
 		<execute macro="Page#gotoPG">
