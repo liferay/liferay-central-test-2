@@ -188,10 +188,10 @@ public class DefaultWikiListPagesDisplayContext
 		ThemeDisplay themeDisplay = (ThemeDisplay)_request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		String keywords = ParamUtil.getString(_request, "keywords");
-
 		String navigation = ParamUtil.getString(
 			_request, "navigation", "all-pages");
+
+		String keywords = ParamUtil.getString(_request, "keywords");
 
 		int total = 0;
 		List<WikiPage> results = new ArrayList<>();
