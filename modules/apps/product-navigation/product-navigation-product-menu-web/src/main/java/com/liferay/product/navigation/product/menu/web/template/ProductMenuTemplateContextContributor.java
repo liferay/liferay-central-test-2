@@ -12,13 +12,15 @@
  * details.
  */
 
-package com.liferay.control.menu.theme;
+package com.liferay.product.navigation.product.menu.web.template;
 
 import com.liferay.portal.kernel.template.TemplateContextContributor;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.User;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.SessionClicks;
 
 import java.util.Map;
 
@@ -34,24 +36,30 @@ import org.osgi.service.component.annotations.Component;
 	property = {"type=" + TemplateContextContributor.TYPE_THEME},
 	service = TemplateContextContributor.class
 )
-public class ControlMenuTemplateContextContributor
+public class ProductMenuTemplateContextContributor
 	implements TemplateContextContributor {
 
 	@Override
 	public void prepare(
 		Map<String, Object> contextObjects, HttpServletRequest request) {
 
-		if (!isShowControlMenu(request)) {
+		if (!isShowProductMenu(request)) {
 			return;
 		}
 
 		String cssClass = GetterUtil.getString(
 			contextObjects.get("bodyCssClass"));
 
-		contextObjects.put("bodyCssClass", cssClass + " has-control-menu");
+		contextObjects.put(
+			"bodyCssClass", cssClass + StringPool.SPACE + productMenuState);
+
+		String productMenuState = SessionClicks.get(
+			request, "com.liferay.control.menu.web_productMenuState", "closed");
+
+		contextObjects.put("liferay_product_menu_state", productMenuState);
 	}
 
-	protected boolean isShowControlMenu(HttpServletRequest request) {
+	protected boolean isShowProductMenu(HttpServletRequest request) {
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
