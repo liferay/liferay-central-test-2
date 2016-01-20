@@ -1973,6 +1973,8 @@ public abstract class BaseSourceProcessor implements SourceProcessor {
 				props.load(inputStream);
 
 				propertiesList.add(props);
+
+				break;
 			}
 			catch (FileNotFoundException fnfe) {
 			}
