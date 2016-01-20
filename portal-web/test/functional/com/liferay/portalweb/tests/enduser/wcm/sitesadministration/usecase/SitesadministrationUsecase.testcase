@@ -1296,6 +1296,8 @@
 			<var name="userScreenName" value="usersn2" />
 		</execute>
 
+		<execute macro="IFrame#selectTopFrame" />
+
 		<execute macro="ProductMenu#gotoSite">
 			<var name="site" value="Site Name" />
 		</execute>
