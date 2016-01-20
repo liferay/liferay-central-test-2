@@ -503,7 +503,7 @@
 		</execute>
 
 		<execute macro="Page#add">
-			<var name="pageName" value="Private Page" />
+			<var name="pageName" value="Test Private Page" />
 			<var name="siteName" value="Liferay" />
 			<var name="sitePagePrivacy" value="Private" />
 		</execute>
@@ -740,7 +740,7 @@
 
 		<execute macro="Page#add">
 			<var name="page" value="Private Pages" />
-			<var name="pageName" value="Private Page" />
+			<var name="pageName" value="Test Private Page" />
 			<var name="siteName" value="Liferay" />
 		</execute>
 
@@ -885,7 +885,7 @@
 		</execute>
 
 		<execute macro="Page#viewSpecificPG">
-			<var name="pageNameList" value="Private Page" />
+			<var name="pageNameList" value="Test Private Page" />
 		</execute>
 
 		<execute function="AssertElementNotPresent" locator1="Message#ERROR" />
@@ -985,7 +985,7 @@
 
 		<execute macro="Page#add">
 			<var name="page" value="Private Pages" />
-			<var name="pageName" value="Private Page" />
+			<var name="pageName" value="Test Private Page" />
 			<var name="siteName" value="Liferay" />
 		</execute>
 
