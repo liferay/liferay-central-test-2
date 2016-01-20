@@ -47,7 +47,7 @@ public abstract class BaseProjectConfigurator implements ProjectConfigurator {
 		}
 		catch (Exception e) {
 			throw new GradleException(
-				"Unable to get project dirs from " + rootDir, e);
+				"Unable to get project directories from " + rootDir, e);
 		}
 	}
 
