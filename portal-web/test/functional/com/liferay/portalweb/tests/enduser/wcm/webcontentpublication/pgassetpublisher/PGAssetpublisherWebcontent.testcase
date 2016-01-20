@@ -412,12 +412,9 @@
 		</execute>
 
 		<execute macro="WebContent#viewWithStructureCP">
+			<var name="webContentText" value="WC WebContent Text" />
 			<var name="webContentTitle" value="WC WebContent Title" />
 		</execute>
-
-		<var name="key_fieldName" value="Text" />
-
-		<execute function="AssertTextEquals" locator1="DDMField#TEXT" value1="WC WebContent Text" />
 
 		<execute macro="Page#add">
 			<var name="pageName" value="Test Page 1" />
@@ -535,12 +532,9 @@
 		</execute>
 
 		<execute macro="WebContent#viewWithStructureCP">
+			<var name="webContentText" value="WC WebContent Text" />
 			<var name="webContentTitle" value="WC WebContent Title" />
 		</execute>
-
-		<var name="key_fieldName" value="Text" />
-
-		<execute function="AssertTextEquals" locator1="DDMField#TEXT" value1="WC WebContent Text" />
 
 		<execute macro="ProductMenu#gotoControlPanelSites">
 			<var name="portlet" value="Sites" />
