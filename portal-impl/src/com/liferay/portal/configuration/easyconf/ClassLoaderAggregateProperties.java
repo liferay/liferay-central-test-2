@@ -402,9 +402,6 @@ public class ClassLoaderAggregateProperties extends AggregatedProperties {
 
 	static {
 		try {
-			_layoutDataField = ReflectionUtil.getDeclaredField(
-				PropertiesConfigurationLayout.class, "layoutData");
-
 			ClassLoader classLoader =
 				PropertiesConfigurationLayout.class.getClassLoader();
 
@@ -414,6 +411,9 @@ public class ClassLoaderAggregateProperties extends AggregatedProperties {
 
 			_commentField = ReflectionUtil.getDeclaredField(
 				propertyLayoutDataClass, "comment");
+
+			_layoutDataField = ReflectionUtil.getDeclaredField(
+				PropertiesConfigurationLayout.class, "layoutData");
 		}
 		catch (Exception e) {
 			throw new ExceptionInInitializerError(e);
