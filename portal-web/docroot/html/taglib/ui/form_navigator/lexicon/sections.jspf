@@ -72,8 +72,8 @@
 	<%
 		String errorSection = (String)request.getAttribute("errorSection");
 
-		if (curFormNavigatorEntry.getKey().equals(errorSection)) {
-		%>
+		if (Validator.equals(curFormNavigatorEntry.getKey(), errorSection)) {
+	%>
 
 			<aui:script sandbox="<%= true %>">
 				var sectionContent = $('#<%= errorSection %>Content');
@@ -83,7 +83,7 @@
 				}
 			</aui:script>
 
-		<%
+	<%
 			request.setAttribute("errorSection", null);
 		}
 	}
