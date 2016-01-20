@@ -64,9 +64,10 @@ public class WikiSocialActivityHelper {
 			(fileEntry != null)) {
 
 			return "/wiki/page_activity_attachment_action.jsp";
-		} else if ((type == SocialActivityConstants.TYPE_RESTORE_FROM_TRASH) ||
-			(type == WikiActivityKeys.ADD_PAGE) ||
-			(type == WikiActivityKeys.UPDATE_PAGE)) {
+		}
+		else if ((type == SocialActivityConstants.TYPE_RESTORE_FROM_TRASH) ||
+				 (type == WikiActivityKeys.ADD_PAGE) ||
+				 (type == WikiActivityKeys.UPDATE_PAGE)) {
 
 			return "/wiki/page_activity_page_action.jsp";
 		}
