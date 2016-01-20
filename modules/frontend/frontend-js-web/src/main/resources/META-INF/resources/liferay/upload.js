@@ -539,6 +539,8 @@ AUI.add(
 						instance._updateWarningContainer();
 
 						Liferay.fire('tempFileRemoved');
+
+						instance.fire('tempFileRemoved');
 					},
 
 					_handleDrop: function(event) {
