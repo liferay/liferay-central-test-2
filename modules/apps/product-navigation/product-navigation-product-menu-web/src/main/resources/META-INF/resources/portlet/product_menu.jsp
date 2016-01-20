@@ -17,7 +17,7 @@
 <%@ include file="/portlet/init.jsp" %>
 
 <c:if test="<%= productMenuDisplayContext.isShowProductMenu() %>">
-	<div aria-multiselectable="true" class="panel-group" id="<portlet:namespace />Accordion" role="tablist">
+	<div aria-multiselectable="true" class="panel-group" data-qa-id="productMenuBody" id="<portlet:namespace />Accordion" role="tablist">
 
 		<%
 		List<PanelCategory> childPanelCategories = productMenuDisplayContext.getChildPanelCategories();
