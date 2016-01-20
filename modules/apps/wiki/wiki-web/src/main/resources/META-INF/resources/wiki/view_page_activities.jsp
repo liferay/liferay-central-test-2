@@ -48,8 +48,6 @@ iteratorURL.setParameter("mvcRenderCommandName", "/wiki/view_page_activities");
 iteratorURL.setParameter("redirect", currentURL);
 iteratorURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 iteratorURL.setParameter("title", wikiPage.getTitle());
-
-WikiSocialActivityHelper wikiSocialActivityHelper = new WikiSocialActivityHelper(wikiRequestHelper);
 %>
 
 <div class="page-activities">
@@ -69,6 +67,8 @@ WikiSocialActivityHelper wikiSocialActivityHelper = new WikiSocialActivityHelper
 		>
 
 			<%
+			WikiSocialActivityHelper wikiSocialActivityHelper = new WikiSocialActivityHelper(wikiRequestHelper);
+
 			JSONObject extraDataJSONObject = JSONFactoryUtil.createJSONObject(socialActivity.getExtraData());
 
 			double version = extraDataJSONObject.getDouble("version");
