@@ -117,6 +117,11 @@
 		<execute function="AssertElementPresent" locator1="Icon#ASTERISK" />
 
 		<execute function="AssertTextEquals" locator1="Message#ERROR" value1="Your request failed to complete." />
+
+		<execute macro="Panel#expandPanel">
+			<var name="panelHeading" value="Metadata" />
+		</execute>
+
 		<execute function="AssertTextEquals" locator1="Message#ERROR_2" value1="Please select at least one category for ${vocabularyName}." />
 	</command>
 
