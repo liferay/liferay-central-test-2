@@ -116,8 +116,8 @@ else {
 	</portlet:resourceURL>
 
 	<liferay-frontend:sidebar-panel
-			resourceURL="<%= sidebarPanelURL %>"
-			searchContainerId="wikiPages"
+		resourceURL="<%= sidebarPanelURL %>"
+		searchContainerId="wikiPages"
 	>
 
 		<%
