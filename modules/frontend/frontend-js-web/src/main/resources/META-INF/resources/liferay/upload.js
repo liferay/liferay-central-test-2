@@ -1186,9 +1186,9 @@ AUI.add(
 
 						var totalFiles = instance._fileList.all('li input[name=' + instance._selectUploadedFileCheckboxId + ']');
 
-						if (!totalFiles.size()) {
-							var warningContainer = instance._fileList.one('.upload-error');
+						var warningContainer = instance._fileList.one('.upload-error');
 
+						if (!totalFiles.size() && warningContainer) {
 							warningContainer.hide();
 						}
 					},
