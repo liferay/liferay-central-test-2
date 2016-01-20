@@ -28,8 +28,7 @@
 		<execute function="Type" locator1="NavBar#CONTENT_SEARCH_FIELD" value1="${assetTitle}" />
 
 		<execute function="AssertTextEquals" locator1="ControlMenuAddPanel#CONTENT_TITLE" value1="${assetTitle}" />
-		<execute function="MouseOver" locator1="ControlMenuAddPanel#CONTENT_TITLE" />
-		<execute function="AssertTextEquals" locator1="ControlMenuAddPanel#POPOVER_CONTENT_TITLE" value1="${assetTitle}" />
-		<execute function="AssertClick" locator1="Button#ADD" value1="Add" />
+
+		<execute function="DragAndDrop" locator1="ControlMenuAddPanel#CONTENT_TITLE" locator2="Home#PAGE_COLUMN_1" value1="${assetTitle}" />
 	</command>
 </definition>
