@@ -1635,6 +1635,10 @@
 		<if>
 			<isset var="structureLocalizationName" />
 			<then>
+				<execute macro="Panel#expandPanel">
+					<var name="panelHeading" value="${panelHeading}" />
+				</execute>
+
 				<execute function="AssertTextEquals" locator1="WCEditWebContent#SELECTED_STRUCTURE" value1="${structureLocalizationName}" />
 			</then>
 		</if>
@@ -1642,6 +1646,10 @@
 		<if>
 			<isset var="templateLocalizationName" />
 			<then>
+				<execute macro="Panel#expandPanel">
+					<var name="panelHeading" value="${panelHeading}" />
+				</execute>
+
 				<execute function="AssertTextEquals" locator1="WCEditWebContent#SELECTED_TEMPLATE" value1="${templateLocalizationName}" />
 			</then>
 		</if>
