@@ -36,11 +36,11 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 SearchContainer dlSearchContainer = new SearchContainer(liferayPortletRequest, null, null, "curEntry", SearchContainer.DEFAULT_DELTA, portletURL, null, null);
 
-int foldersAndFileEntriesAndFileShortcutsCount = DLAppServiceUtil.getFoldersAndFileEntriesAndFileShortcutsCount(groupId, folderId,  WorkflowConstants.STATUS_APPROVED, true);
+int foldersAndFileEntriesAndFileShortcutsCount = DLAppServiceUtil.getFoldersAndFileEntriesAndFileShortcutsCount(groupId, folderId, WorkflowConstants.STATUS_APPROVED, true);
 
 dlSearchContainer.setTotal(foldersAndFileEntriesAndFileShortcutsCount);
 
-List<Object> foldersAndFileEntriesAndFileShortcuts = DLAppServiceUtil.getFoldersAndFileEntriesAndFileShortcuts(groupId, folderId,  WorkflowConstants.STATUS_APPROVED, true, dlSearchContainer.getStart(), dlSearchContainer.getEnd(), dlSearchContainer.getOrderByComparator());
+List<Object> foldersAndFileEntriesAndFileShortcuts = DLAppServiceUtil.getFoldersAndFileEntriesAndFileShortcuts(groupId, folderId, WorkflowConstants.STATUS_APPROVED, true, dlSearchContainer.getStart(), dlSearchContainer.getEnd(), dlSearchContainer.getOrderByComparator());
 
 dlSearchContainer.setResults(foldersAndFileEntriesAndFileShortcuts);
 %>
@@ -63,7 +63,6 @@ dlSearchContainer.setResults(foldersAndFileEntriesAndFileShortcuts);
 
 				<c:choose>
 					<c:when test="<%= curFolder != null %>">
-
 						<liferay-portlet:renderURL varImpl="rowURL">
 							<portlet:param name="mvcRenderCommandName" value="/document_library/select_file_entry" />
 							<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
