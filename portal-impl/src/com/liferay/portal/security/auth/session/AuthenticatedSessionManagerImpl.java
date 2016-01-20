@@ -330,19 +330,19 @@ public class AuthenticatedSessionManagerImpl
 
 		String domain = CookieKeys.getDomain(request);
 
-		_deleteCookie(request, response, CookieKeys.COMPANY_ID, domain);
-		_deleteCookie(request, response, CookieKeys.GUEST_LANGUAGE_ID, domain);
-		_deleteCookie(request, response, CookieKeys.ID, domain);
-		_deleteCookie(request, response, CookieKeys.PASSWORD, domain);
+		deleteCookie(request, response, CookieKeys.COMPANY_ID, domain);
+		deleteCookie(request, response, CookieKeys.GUEST_LANGUAGE_ID, domain);
+		deleteCookie(request, response, CookieKeys.ID, domain);
+		deleteCookie(request, response, CookieKeys.PASSWORD, domain);
 
 		boolean rememberMe = GetterUtil.getBoolean(
 			CookieKeys.getCookie(request, CookieKeys.REMEMBER_ME));
 
 		if (!rememberMe) {
-			_deleteCookie(request, response, CookieKeys.LOGIN, domain);
+			deleteCookie(request, response, CookieKeys.LOGIN, domain);
 		}
 
-		_deleteCookie(request, response, CookieKeys.REMEMBER_ME, domain);
+		deleteCookie(request, response, CookieKeys.REMEMBER_ME, domain);
 
 		try {
 			session.invalidate();
@@ -430,7 +430,7 @@ public class AuthenticatedSessionManagerImpl
 		}
 	}
 
-	private void _deleteCookie(
+	protected void deleteCookie(
 		HttpServletRequest request, HttpServletResponse response,
 		String cookieName, String domain) {
 
