@@ -53,8 +53,8 @@ iteratorURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 iteratorURL.setParameter("title", wikiPage.getTitle());
 
 boolean paginate = false;
-int status = WorkflowConstants.STATUS_APPROVED;
 boolean showPageAttachmentAction = false;
+int status = WorkflowConstants.STATUS_APPROVED;
 %>
 
 <%@ include file="/wiki/attachments_list.jspf" %>
