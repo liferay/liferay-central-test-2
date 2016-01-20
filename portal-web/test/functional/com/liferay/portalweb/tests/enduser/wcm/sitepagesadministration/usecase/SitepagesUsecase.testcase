@@ -742,6 +742,7 @@
 			<var name="page" value="Private Pages" />
 			<var name="pageName" value="Test Private Page" />
 			<var name="siteName" value="Liferay" />
+			<var name="sitePagePrivacy" value="Private" />
 		</execute>
 
 		<execute macro="Page#add">
