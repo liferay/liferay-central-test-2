@@ -43,15 +43,15 @@ public class InfoPanelMVCResourceCommand extends BaseMVCResourceCommand {
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws Exception {
 
-		resourceRequest.setAttribute(
-			WikiWebKeys.WIKI_NODES, ActionUtil.getNodes(resourceRequest));
-		resourceRequest.setAttribute(
-			WikiWebKeys.WIKI_PAGES, ActionUtil.getPages(resourceRequest));
-
 		if (ParamUtil.getLong(resourceRequest, "nodeId") != 0) {
 			resourceRequest.setAttribute(
 				WikiWebKeys.WIKI_NODE, ActionUtil.getNode(resourceRequest));
 		}
+
+		resourceRequest.setAttribute(
+			WikiWebKeys.WIKI_NODES, ActionUtil.getNodes(resourceRequest));
+		resourceRequest.setAttribute(
+			WikiWebKeys.WIKI_PAGES, ActionUtil.getPages(resourceRequest));
 
 		include(
 			resourceRequest, resourceResponse, "/wiki_admin/info_panel.jsp");
