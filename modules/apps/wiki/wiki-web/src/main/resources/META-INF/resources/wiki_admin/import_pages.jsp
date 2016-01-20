@@ -40,11 +40,12 @@ portletURL.setParameter("mvcRenderCommandName", "/wiki/import_pages");
 portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("nodeId", String.valueOf(nodeId));
 
+portletDisplay.setShowBackIcon(true);
+
 WikiURLHelper wikiURLHelper = new WikiURLHelper(wikiRequestHelper, renderResponse, wikiGroupServiceConfiguration);
 
 PortletURL backToNodeURL = wikiURLHelper.getBackToNodeURL(node);
 
-portletDisplay.setShowBackIcon(true);
 portletDisplay.setURLBack(backToNodeURL.toString());
 
 renderResponse.setTitle(LanguageUtil.get(request, "import-pages"));
@@ -55,8 +56,8 @@ renderResponse.setTitle(LanguageUtil.get(request, "import-pages"));
 <div class="container-fluid-1280">
 	<aui:form action="<%= importPagesURL %>" enctype="multipart/form-data" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "importPages();" %>'>
 		<aui:input name="<%= Constants.CMD %>" type="hidden" />
-		<aui:input name="importProgressId" type="hidden" value="<%= importProgressId %>" />
 		<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+		<aui:input name="importProgressId" type="hidden" value="<%= importProgressId %>" />
 		<aui:input name="nodeId" type="hidden" value="<%= nodeId %>" />
 		<aui:input name="importer" type="hidden" value="<%= tabs2 %>" />
 
