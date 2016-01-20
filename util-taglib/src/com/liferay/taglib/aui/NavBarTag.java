@@ -55,7 +55,9 @@ public class NavBarTag extends BaseNavBarTag implements BodyTag {
 	protected void cleanUp() {
 		super.cleanUp();
 
+		_dataTarget = null;
 		_responsiveButtonsSB.setIndex(0);
+		_selectedItemName = null;
 	}
 
 	@Override
