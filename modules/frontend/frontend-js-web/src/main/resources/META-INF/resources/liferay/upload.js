@@ -193,6 +193,11 @@ AUI.add(
 						value: false
 					},
 
+					restoreState: {
+						validator: Lang.isBoolean,
+						value: true
+					},
+
 					strings: {
 						value: {
 							allFilesSelectedText: Liferay.Language.get('all-files-selected'),
@@ -997,7 +1002,7 @@ AUI.add(
 
 						var tempFileURL = instance.get('tempFileURL');
 
-						if (tempFileURL) {
+						if (tempFileURL && instance.get('restoreState')) {
 							if (Lang.isString(tempFileURL)) {
 								A.io.request(
 									tempFileURL,
