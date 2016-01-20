@@ -708,7 +708,7 @@ public class WebDriverHelper {
 		javascriptExecutor.executeScript(sb.toString(), locatorWebElement);
 	}
 
-	public static void open(WebDriver webDriver, String url) {
+	public static void open(WebDriver webDriver, String url) throws Exception {
 		String targetURL = "";
 
 		if (url.startsWith("/")) {
@@ -727,7 +727,7 @@ public class WebDriverHelper {
 				}
 
 				if (targetURL.equals(getLocation(webDriver))) {
-					break;
+					return;
 				}
 
 				Thread.sleep(1000);
@@ -735,6 +735,8 @@ public class WebDriverHelper {
 			catch (Exception e) {
 			}
 		}
+
+		throw new Exception("Unable to open " + url);
 	}
 
 	public static void refresh(WebDriver webDriver) {
