@@ -588,6 +588,10 @@
 
 		<execute macro="WikiEntry#confirmHTML" />
 
+		<execute macro="WikiEntry#addPageTitle">
+			<var name="wikiPageTitle" value="Wiki Page Title" />
+		</execute>
+
 		<execute function="Click#clickAt" locator1="AlloyEditor#CONTENT_FIELD" />
 
 		<execute function="Click" locator1="AlloyEditor#CONTENT_EDITOR_SWITCH_ACE_EDITOR" />
@@ -595,10 +599,6 @@
 		<execute function="Pause" locator1="1000" />
 
 		<execute function="Type#typeAceEditor" locator1="TextArea#ACE_EDITOR" value1="${welcomeToLiferay}" />
-
-		<execute macro="WikiEntry#addPageTitle">
-			<var name="wikiPageTitle" value="Wiki Page Title" />
-		</execute>
 
 		<execute macro="WikiEntry#publish" />
 
