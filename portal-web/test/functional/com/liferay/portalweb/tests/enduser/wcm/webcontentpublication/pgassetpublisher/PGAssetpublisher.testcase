@@ -115,7 +115,7 @@
 		</execute>
 	</command>
 
-	<command name="AddCustomTitleViaAP" priority="4">
+	<command name="AddCustomTitleViaAP" priority="3">
 		<execute macro="Page#add">
 			<var name="pageName" value="Test Page" />
 		</execute>
