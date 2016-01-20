@@ -890,18 +890,4 @@
 			<var name="archiveName" value="AP Archive Name" />
 		</execute>
 	</command>
-
-	<command name="SaveAPArchivedSetup" priority="4">
-		<execute macro="AssetPublisherPortlet#saveArchivedSetupPG">
-			<var name="archiveName" value="AP Archive Name" />
-		</execute>
-
-		<execute macro="Page#gotoPG">
-			<var name="pageName" value="Asset Publisher Page" />
-		</execute>
-
-		<execute macro="AssetPublisherPortlet#deleteArchivedSetupPG">
-			<var name="archiveName" value="AP Archive Name" />
-		</execute>
-	</command>
 </definition>
