@@ -33,7 +33,7 @@ public class TinyMCESimpleEditor implements Editor {
 
 	@Override
 	public String[] getModules() {
-		return new String[] {};
+		return new String[0];
 	}
 
 	@Override
