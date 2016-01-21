@@ -323,6 +323,8 @@ public class AssetPublisherPortletToolbarContributor
 			return Collections.emptyMap();
 		}
 
+		Map<Long, Map<String, PortletURL>> scopeAddPortletURLs = new HashMap();
+
 		PortletURL redirectURL = PortletURLFactoryUtil.create(
 			portletRequest, AssetPublisherPortletKeys.ASSET_PUBLISHER,
 			themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
@@ -334,8 +336,6 @@ public class AssetPublisherPortletToolbarContributor
 		redirectURL.setWindowState(LiferayWindowState.POP_UP);
 
 		String redirect = redirectURL.toString();
-
-		Map<Long, Map<String, PortletURL>> scopeAddPortletURLs = new HashMap();
 
 		for (long groupId : groupIds) {
 			Map<String, PortletURL> addPortletURLs =
