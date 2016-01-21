@@ -84,6 +84,8 @@
 			<var name="roleList" value="Guest" />
 		</execute>
 
+		<execute macro="IFrame#selectTopFrame" />
+
 		<execute macro="ProductMenu#gotoSite">
 			<var name="site" value="Site Name" />
 		</execute>
@@ -106,6 +108,8 @@
 			<var name="addOrRemoveViewPermission" value="Add" />
 			<var name="roleList" value="Guest" />
 		</execute>
+
+		<execute macro="IFrame#selectTopFrame" />
 
 		<execute macro="ProductMenu#gotoSite">
 			<var name="site" value="Site Name" />
@@ -220,6 +224,8 @@
 			<var name="roleList" value="Guest" />
 		</execute>
 
+		<execute macro="IFrame#selectTopFrame" />
+
 		<execute macro="ProductMenu#gotoSite">
 			<var name="site" value="Site Name" />
 		</execute>
@@ -242,6 +248,8 @@
 			<var name="addOrRemoveViewPermission" value="Add" />
 			<var name="roleList" value="Guest" />
 		</execute>
+
+		<execute macro="IFrame#selectTopFrame" />
 
 		<execute macro="ProductMenu#gotoSite">
 			<var name="site" value="Site Name" />
@@ -344,6 +352,8 @@
 			<var name="roleList" value="Guest" />
 		</execute>
 
+		<execute macro="IFrame#selectTopFrame" />
+
 		<execute macro="ProductMenu#gotoSite">
 			<var name="site" value="Site Name" />
 		</execute>
@@ -366,6 +376,8 @@
 			<var name="addOrRemoveViewPermission" value="Add" />
 			<var name="roleList" value="Guest" />
 		</execute>
+
+		<execute macro="IFrame#selectTopFrame" />
 
 		<execute macro="ProductMenu#gotoSite">
 			<var name="site" value="Site Name" />
@@ -465,6 +477,8 @@
 			<var name="addOrRemoveViewPermission" value="Add" />
 			<var name="roleList" value="Guest" />
 		</execute>
+
+		<execute macro="IFrame#selectTopFrame" />
 
 		<execute macro="ProductMenu#gotoSite">
 			<var name="site" value="Site Name" />
