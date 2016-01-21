@@ -34,7 +34,6 @@ import org.glassfish.jsp.api.ResourceInjector;
 /**
  * @author Shuyang Zhou
  * @author Preston Crary
- *
  * @see com.liferay.support.tomcat.jasper.runtime.TagHandlerPool
  */
 public class JspTagHandlerPool extends TagHandlerPool {
