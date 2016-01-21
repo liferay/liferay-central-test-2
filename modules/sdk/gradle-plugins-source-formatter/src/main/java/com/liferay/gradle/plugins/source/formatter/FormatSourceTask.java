@@ -40,15 +40,8 @@ public class FormatSourceTask extends JavaExec {
 	}
 
 	@Override
-	public JavaExec classpath(Object... paths) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
 	public void exec() {
 		setArgs(getCompleteArgs());
-
-		super.setClasspath(getClasspath());
 
 		super.exec();
 	}
@@ -56,12 +49,6 @@ public class FormatSourceTask extends JavaExec {
 	public File getBaseDir() {
 		return GradleUtil.toFile(
 			getProject(), _sourceFormatterArgs.getBaseDirName());
-	}
-
-	@Override
-	public FileCollection getClasspath() {
-		return GradleUtil.getConfiguration(
-			getProject(), SourceFormatterPlugin.CONFIGURATION_NAME);
 	}
 
 	public File getCopyrightFile() {

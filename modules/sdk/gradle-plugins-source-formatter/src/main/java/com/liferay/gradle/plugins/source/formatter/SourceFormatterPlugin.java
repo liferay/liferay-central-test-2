@@ -20,6 +20,8 @@ import org.gradle.api.Action;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.artifacts.Configuration;
+import org.gradle.api.file.FileCollection;
+import org.gradle.api.tasks.TaskContainer;
 
 /**
  * @author Raymond Augé
@@ -33,9 +35,12 @@ public class SourceFormatterPlugin implements Plugin<Project> {
 
 	@Override
 	public void apply(Project project) {
-		addConfigurationSourceFormatter(project);
+		Configuration sourceFormatterConfiguration =
+			addConfigurationSourceFormatter(project);
 
 		addTaskFormatSource(project);
+
+		configureTasksFormatSource(project, sourceFormatterConfiguration);
 	}
 
 	protected Configuration addConfigurationSourceFormatter(
@@ -76,6 +81,30 @@ public class SourceFormatterPlugin implements Plugin<Project> {
 			"Runs Liferay Source Formatter to format files.");
 
 		return formatSourceTask;
+	}
+
+	protected void configureTaskFormatSourceClasspath(
+		FormatSourceTask formatSourceTask, FileCollection fileCollection) {
+
+		formatSourceTask.setClasspath(fileCollection);
+	}
+
+	protected void configureTasksFormatSource(
+		Project project, final Configuration sourceFormatterConfiguration) {
+
+		TaskContainer taskContainer = project.getTasks();
+
+		taskContainer.withType(
+			FormatSourceTask.class,
+			new Action<FormatSourceTask>() {
+
+				@Override
+				public void execute(FormatSourceTask formatSourceTask) {
+					configureTaskFormatSourceClasspath(
+						formatSourceTask, sourceFormatterConfiguration);
+				}
+
+			});
 	}
 
 }
