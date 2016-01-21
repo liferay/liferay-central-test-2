@@ -27,7 +27,6 @@ import java.util.List;
 import org.gradle.api.Project;
 import org.gradle.api.file.FileCollection;
 import org.gradle.api.tasks.JavaExec;
-import org.gradle.process.JavaExecSpec;
 
 /**
  * @author Raymond Augé
@@ -40,55 +39,18 @@ public class FormatSourceTask extends JavaExec {
 	}
 
 	@Override
-	public JavaExecSpec args(Iterable<?> args) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public JavaExec args(Object... args) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
 	public JavaExec classpath(Object... paths) {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void exec() {
-		super.setArgs(getArgs());
+		setArgs(getCompleteArgs());
+
 		super.setClasspath(getClasspath());
 		super.setWorkingDir(getWorkingDir());
 
 		super.exec();
-	}
-
-	@Override
-	public List<String> getArgs() {
-		List<String> args = new ArrayList<>();
-
-		args.add("format.current.branch=" + isFormatCurrentBranch());
-		args.add("format.latest.author=" + isFormatLatestAuthor());
-		args.add("format.local.changes=" + isFormatLocalChanges());
-		args.add("source.auto.fix=" + isAutoFix());
-		args.add("source.copyright.file=" + getCopyrightFileName());
-		args.add("source.print.errors=" + isPrintErrors());
-		args.add("source.throw.exception=" + isThrowException());
-		args.add("source.use.properties=" + isUseProperties());
-
-		FileCollection fileCollection = getFiles();
-
-		if (fileCollection.isEmpty()) {
-			Project project = getProject();
-
-			args.add(
-				"source.base.dir=" + project.relativePath(getBaseDir()) + "/");
-		}
-		else {
-			args.add("source.files=" + _merge(fileCollection));
-		}
-
-		return args;
 	}
 
 	public File getBaseDir() {
@@ -176,6 +138,33 @@ public class FormatSourceTask extends JavaExec {
 
 	public void setUseProperties(boolean useProperties) {
 		_sourceFormatterArgs.setUseProperties(useProperties);
+	}
+
+	protected List<String> getCompleteArgs() {
+		List<String> args = new ArrayList<>(getArgs());
+
+		args.add("format.current.branch=" + isFormatCurrentBranch());
+		args.add("format.latest.author=" + isFormatLatestAuthor());
+		args.add("format.local.changes=" + isFormatLocalChanges());
+		args.add("source.auto.fix=" + isAutoFix());
+		args.add("source.copyright.file=" + getCopyrightFileName());
+		args.add("source.print.errors=" + isPrintErrors());
+		args.add("source.throw.exception=" + isThrowException());
+		args.add("source.use.properties=" + isUseProperties());
+
+		FileCollection fileCollection = getFiles();
+
+		if (fileCollection.isEmpty()) {
+			Project project = getProject();
+
+			args.add(
+				"source.base.dir=" + project.relativePath(getBaseDir()) + "/");
+		}
+		else {
+			args.add("source.files=" + _merge(fileCollection));
+		}
+
+		return args;
 	}
 
 	private String _merge(Iterable<File> files) {
