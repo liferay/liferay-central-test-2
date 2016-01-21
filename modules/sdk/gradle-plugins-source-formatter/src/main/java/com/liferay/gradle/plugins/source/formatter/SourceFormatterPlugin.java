@@ -15,6 +15,7 @@
 package com.liferay.gradle.plugins.source.formatter;
 
 import com.liferay.gradle.util.GradleUtil;
+import com.liferay.gradle.util.Validator;
 
 import org.gradle.api.Action;
 import org.gradle.api.Plugin;
@@ -83,10 +84,34 @@ public class SourceFormatterPlugin implements Plugin<Project> {
 		return formatSourceTask;
 	}
 
-	protected void configureTaskFormatSourceClasspath(
-		FormatSourceTask formatSourceTask, FileCollection fileCollection) {
+	protected void configureTaskFormatSource(
+		FormatSourceTask formatSourceTask, FileCollection classpath) {
 
-		formatSourceTask.setClasspath(fileCollection);
+		formatSourceTask.setClasspath(classpath);
+
+		String formatCurrentBranch = GradleUtil.getTaskPrefixedProperty(
+			formatSourceTask, "format.current.branch");
+
+		if (Validator.isNotNull(formatCurrentBranch)) {
+			formatSourceTask.setFormatCurrentBranch(
+				Boolean.parseBoolean(formatCurrentBranch));
+		}
+
+		String formatLatestAuthor = GradleUtil.getTaskPrefixedProperty(
+			formatSourceTask, "format.latest.author");
+
+		if (Validator.isNotNull(formatLatestAuthor)) {
+			formatSourceTask.setFormatLatestAuthor(
+				Boolean.parseBoolean(formatLatestAuthor));
+		}
+
+		String formatLocalChanges = GradleUtil.getTaskPrefixedProperty(
+			formatSourceTask, "format.local.changes");
+
+		if (Validator.isNotNull(formatLocalChanges)) {
+			formatSourceTask.setFormatLocalChanges(
+				Boolean.parseBoolean(formatLocalChanges));
+		}
 	}
 
 	protected void configureTasksFormatSource(
@@ -100,7 +125,7 @@ public class SourceFormatterPlugin implements Plugin<Project> {
 
 				@Override
 				public void execute(FormatSourceTask formatSourceTask) {
-					configureTaskFormatSourceClasspath(
+					configureTaskFormatSource(
 						formatSourceTask, sourceFormatterConfiguration);
 				}
 
