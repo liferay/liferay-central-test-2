@@ -143,7 +143,6 @@ public class AssetAddButtonTag extends IncludeTag {
 		request.setAttribute("liferay-ui:asset-add-button:groupIds", groupIds);
 
 		request.setAttribute("liferay-ui:asset-add-button:redirect", _redirect);
-
 		request.setAttribute(
 			"liferay-ui:asset-add-button:useDialog", _useDialog);
 	}
