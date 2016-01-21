@@ -14,6 +14,7 @@
 
 package com.liferay.gradle.plugins.source.formatter;
 
+import com.liferay.gradle.util.FileUtil;
 import com.liferay.gradle.util.GradleUtil;
 import com.liferay.source.formatter.SourceFormatterArgs;
 
@@ -48,15 +49,13 @@ public class FormatSourceTask extends JavaExec {
 		setArgs(getCompleteArgs());
 
 		super.setClasspath(getClasspath());
-		super.setWorkingDir(getWorkingDir());
 
 		super.exec();
 	}
 
 	public File getBaseDir() {
-		Project project = getProject();
-
-		return project.file(_sourceFormatterArgs.getBaseDirName());
+		return GradleUtil.toFile(
+			getProject(), _sourceFormatterArgs.getBaseDirName());
 	}
 
 	@Override
@@ -65,8 +64,9 @@ public class FormatSourceTask extends JavaExec {
 			getProject(), SourceFormatterPlugin.CONFIGURATION_NAME);
 	}
 
-	public String getCopyrightFileName() {
-		return _sourceFormatterArgs.getCopyrightFileName();
+	public File getCopyrightFile() {
+		return GradleUtil.toFile(
+			getProject(), _sourceFormatterArgs.getCopyrightFileName());
 	}
 
 	public FileCollection getFiles() {
@@ -79,13 +79,6 @@ public class FormatSourceTask extends JavaExec {
 		}
 
 		return project.files(fileNames);
-	}
-
-	@Override
-	public File getWorkingDir() {
-		Project project = getProject();
-
-		return project.getProjectDir();
 	}
 
 	public boolean isAutoFix() {
@@ -147,7 +140,9 @@ public class FormatSourceTask extends JavaExec {
 		args.add("format.latest.author=" + isFormatLatestAuthor());
 		args.add("format.local.changes=" + isFormatLocalChanges());
 		args.add("source.auto.fix=" + isAutoFix());
-		args.add("source.copyright.file=" + getCopyrightFileName());
+		args.add(
+			"source.copyright.file=" +
+				FileUtil.relativize(getCopyrightFile(), getWorkingDir()));
 		args.add("source.print.errors=" + isPrintErrors());
 		args.add("source.throw.exception=" + isThrowException());
 		args.add("source.use.properties=" + isUseProperties());
@@ -155,22 +150,19 @@ public class FormatSourceTask extends JavaExec {
 		FileCollection fileCollection = getFiles();
 
 		if (fileCollection.isEmpty()) {
-			Project project = getProject();
-
 			args.add(
-				"source.base.dir=" + project.relativePath(getBaseDir()) + "/");
+				"source.base.dir=" +
+					FileUtil.relativize(getBaseDir(), getWorkingDir()));
 		}
 		else {
-			args.add("source.files=" + _merge(fileCollection));
+			args.add("source.files=" + _merge(fileCollection, getWorkingDir()));
 		}
 
 		return args;
 	}
 
-	private String _merge(Iterable<File> files) {
+	private String _merge(Iterable<File> files, File startFile) {
 		StringBuilder sb = new StringBuilder();
-
-		Project project = getProject();
 
 		int i = 0;
 
@@ -179,7 +171,7 @@ public class FormatSourceTask extends JavaExec {
 				sb.append(",");
 			}
 
-			sb.append(project.relativePath(file));
+			sb.append(FileUtil.relativize(file, startFile));
 
 			i++;
 		}
