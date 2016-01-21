@@ -33,22 +33,12 @@ public class SourceFormatterPlugin implements Plugin<Project> {
 
 	@Override
 	public void apply(Project project) {
-		addSourceFormatterConfiguration(project);
+		addConfigurationSourceFormatter(project);
 
-		addFormatSourceTask(project);
+		addTaskFormatSource(project);
 	}
 
-	protected FormatSourceTask addFormatSourceTask(Project project) {
-		FormatSourceTask formatSourceTask = GradleUtil.addTask(
-			project, FORMAT_SOURCE_TASK_NAME, FormatSourceTask.class);
-
-		formatSourceTask.setDescription(
-			"Runs Liferay Source Formatter to format files.");
-
-		return formatSourceTask;
-	}
-
-	protected Configuration addSourceFormatterConfiguration(
+	protected Configuration addConfigurationSourceFormatter(
 		final Project project) {
 
 		Configuration configuration = GradleUtil.addConfiguration(
@@ -64,7 +54,7 @@ public class SourceFormatterPlugin implements Plugin<Project> {
 
 				@Override
 				public void execute(Configuration configuration) {
-					addSourceFormatterDependencies(project);
+					addDependenciesSourceFormatter(project);
 				}
 
 			});
@@ -72,10 +62,20 @@ public class SourceFormatterPlugin implements Plugin<Project> {
 		return configuration;
 	}
 
-	protected void addSourceFormatterDependencies(Project project) {
+	protected void addDependenciesSourceFormatter(Project project) {
 		GradleUtil.addDependency(
 			project, CONFIGURATION_NAME, "com.liferay",
 			"com.liferay.source.formatter", "latest.release");
+	}
+
+	protected FormatSourceTask addTaskFormatSource(Project project) {
+		FormatSourceTask formatSourceTask = GradleUtil.addTask(
+			project, FORMAT_SOURCE_TASK_NAME, FormatSourceTask.class);
+
+		formatSourceTask.setDescription(
+			"Runs Liferay Source Formatter to format files.");
+
+		return formatSourceTask;
 	}
 
 }

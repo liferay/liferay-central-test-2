@@ -168,7 +168,7 @@ public class FormatSourceTask extends JavaExec {
 
 		for (File file : files) {
 			if (i > 0) {
-				sb.append(",");
+				sb.append(',');
 			}
 
 			sb.append(FileUtil.relativize(file, startFile));
