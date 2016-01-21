@@ -27,13 +27,13 @@ import org.osgi.service.component.annotations.Component;
 public class AlloyEditorEditor implements Editor {
 
 	@Override
-	public String getJspPath() {
-		return "/alloyeditor.jsp";
+	public String[] getJavaScriptModules() {
+		return new String[] {"liferay-alloy-editor"};
 	}
 
 	@Override
-	public String[] getJavaScriptModules() {
-		return new String[] {"liferay-alloy-editor"};
+	public String getJspPath() {
+		return "/alloyeditor.jsp";
 	}
 
 	@Override
