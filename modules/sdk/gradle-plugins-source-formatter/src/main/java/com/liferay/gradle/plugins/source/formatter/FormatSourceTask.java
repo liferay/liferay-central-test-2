@@ -63,11 +63,11 @@ public class FormatSourceTask extends JavaExec {
 	public List<String> getArgs() {
 		List<String> args = new ArrayList<>();
 
+		args.add("format.current.branch=" + isFormatCurrentBranch());
+		args.add("format.latest.author=" + isFormatLatestAuthor());
+		args.add("format.local.changes=" + isFormatLocalChanges());
 		args.add("source.auto.fix=" + isAutoFix());
 		args.add("source.copyright.file=" + getCopyrightFileName());
-		args.add("source.format.current.branch=" + isFormatCurrentBranch());
-		args.add("source.format.latest.author=" + isFormatLatestAuthor());
-		args.add("source.format.local.changes=" + isFormatLocalChanges());
 		args.add("source.print.errors=" + isPrintErrors());
 		args.add("source.throw.exception=" + isThrowException());
 		args.add("source.use.properties=" + isUseProperties());
