@@ -172,6 +172,7 @@ public class AssetPublisherPortletToolbarContributor
 		data.put("title", title);
 
 		urlMenuItem.setData(data);
+
 		urlMenuItem.setIcon("icon-plus-sign-2");
 
 		LiferayPortletResponse liferayPortletResponse =
@@ -184,6 +185,7 @@ public class AssetPublisherPortletToolbarContributor
 		portletURL.setWindowState(LiferayWindowState.POP_UP);
 
 		urlMenuItem.setURL(portletURL.toString());
+
 		urlMenuItem.setUseDialog(true);
 
 		menuItems.add(urlMenuItem);
