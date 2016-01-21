@@ -173,7 +173,8 @@
 		<execute function="Type" locator1="TextInput#SETUP_XSL_URL" value1="@portal_url@/${xslURL}" />
 
 		<execute function="Click" locator1="Button#SAVE" />
-		<execute function="AssertTextEquals#assertPartialText" locator1="Message#SUCCESS" value1="You have successfully updated the setup." />
+
+		<execute macro="Alert#viewSetupUpdatedSuccessMessage" />
 
 		<execute function="SelectFrameTop" value1="relative=top" />
 
@@ -313,7 +314,8 @@
 		<execute function="Type" locator1="TextInput#SETUP_XSL_URL" value1="@portal_url@/${xslURL}" />
 
 		<execute function="Click" locator1="Button#SAVE" />
-		<execute function="AssertTextEquals#assertPartialText" locator1="Message#SUCCESS" value1="You have successfully updated the setup." />
+
+		<execute macro="Alert#viewSetupUpdatedSuccessMessage" />
 
 		<execute function="SelectFrameTop" value1="relative=top" />
 
@@ -441,7 +443,8 @@
 		<execute function="Type" locator1="TextInput#SETUP_XSL_URL" value1="@portal_url@/${xslURL}" />
 
 		<execute function="Click" locator1="Button#SAVE" />
-		<execute function="AssertTextEquals#assertPartialText" locator1="Message#SUCCESS" value1="You have successfully updated the setup." />
+
+		<execute macro="Alert#viewSetupUpdatedSuccessMessage" />
 
 		<execute function="SelectFrameTop" value1="relative=top" />
 
@@ -565,7 +568,8 @@
 		<execute function="Type" locator1="TextInput#SETUP_XSL_URL" value1="@portal_url@/${xslURL}" />
 
 		<execute function="Click" locator1="Button#SAVE" />
-		<execute function="AssertTextEquals#assertPartialText" locator1="Message#SUCCESS" value1="You have successfully updated the setup." />
+
+		<execute macro="Alert#viewSetupUpdatedSuccessMessage" />
 
 		<execute function="SelectFrameTop" value1="relative=top" />
 
