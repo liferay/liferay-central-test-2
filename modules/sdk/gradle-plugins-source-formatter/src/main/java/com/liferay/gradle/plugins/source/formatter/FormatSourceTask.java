@@ -96,6 +96,10 @@ public class FormatSourceTask extends JavaExec {
 		return _sourceFormatterArgs.isUseProperties();
 	}
 
+	public void setAutoFix(boolean autoFix) {
+		_sourceFormatterArgs.setAutoFix(autoFix);
+	}
+
 	public void setBaseDirName(String baseDirName) {
 		_sourceFormatterArgs.setBaseDirName(baseDirName);
 	}
@@ -106,6 +110,18 @@ public class FormatSourceTask extends JavaExec {
 
 	public void setFileNames(String[] fileNames) {
 		_sourceFormatterArgs.setFileNames(Arrays.asList(fileNames));
+	}
+
+	public void setFormatCurrentBranch(boolean formatCurrentBranch) {
+		_sourceFormatterArgs.setFormatCurrentBranch(formatCurrentBranch);
+	}
+
+	public void setFormatLatestAuthor(boolean formatLatestAuthor) {
+		_sourceFormatterArgs.setFormatLatestAuthor(formatLatestAuthor);
+	}
+
+	public void setFormatLocalChanges(boolean formatLocalChanges) {
+		_sourceFormatterArgs.setFormatLocalChanges(formatLocalChanges);
 	}
 
 	public void setPrintErrors(boolean printErrors) {
