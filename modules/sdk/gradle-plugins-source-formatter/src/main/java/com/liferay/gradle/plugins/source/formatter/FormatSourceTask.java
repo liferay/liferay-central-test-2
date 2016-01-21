@@ -35,6 +35,10 @@ import org.gradle.process.JavaExecSpec;
  */
 public class FormatSourceTask extends JavaExec {
 
+	public FormatSourceTask() {
+		setMain("com.liferay.source.formatter.SourceFormatter");
+	}
+
 	@Override
 	public JavaExecSpec args(Iterable<?> args) {
 		throw new UnsupportedOperationException();
@@ -113,11 +117,6 @@ public class FormatSourceTask extends JavaExec {
 		}
 
 		return project.files(fileNames);
-	}
-
-	@Override
-	public String getMain() {
-		return "com.liferay.source.formatter.SourceFormatter";
 	}
 
 	@Override
