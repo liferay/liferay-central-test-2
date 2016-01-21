@@ -166,10 +166,6 @@ public class DDMFormFactoryHelper {
 		return localizedValue;
 	}
 
-	public LocalizedValue getDDMFormFieldTip() {
-		return createLocalizedValue(_ddmFormField.tip());
-	}
-
 	public String getDDMFormFieldType() {
 		if (Validator.isNotNull(_ddmFormField.type())) {
 			return _ddmFormField.type();
