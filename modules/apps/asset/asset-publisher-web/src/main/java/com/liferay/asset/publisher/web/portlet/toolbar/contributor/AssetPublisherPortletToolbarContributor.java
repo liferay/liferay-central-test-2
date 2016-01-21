@@ -271,11 +271,15 @@ public class AssetPublisherPortletToolbarContributor
 		AssetPublisherDisplayContext assetPublisherDisplayContext, long groupId,
 		String className, PortletURL portletURL) {
 
+		URLMenuItem urlMenuItem = new URLMenuItem();
+
 		AssetRendererFactory<?> assetRendererFactory =
 			AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(
 				_getClassName(className));
 
 		String message = _getMessage(className, themeDisplay.getLocale());
+
+		urlMenuItem.setLabel(HtmlUtil.escape(message));
 
 		long curGroupId = groupId;
 
@@ -299,10 +303,8 @@ public class AssetPublisherPortletToolbarContributor
 			assetRendererFactory.getPortletId(), addDisplayPageParameter,
 			themeDisplay.getLayout());
 
-		URLMenuItem urlMenuItem = new URLMenuItem();
-
-		urlMenuItem.setLabel(HtmlUtil.escape(message));
 		urlMenuItem.setURL(url);
+
 		urlMenuItem.setUseDialog(true);
 
 		return urlMenuItem;
