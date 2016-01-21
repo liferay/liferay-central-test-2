@@ -485,7 +485,7 @@ public class WebDriverHelper {
 				thread.interrupt();
 			}
 
-			System.out.println("WebDriverHelper#getLocation(webDriver):");
+			System.out.println("WebDriverHelper#getLocation(WebDriver):");
 			System.out.println(webDriver.toString());
 
 			Set<String> windowHandles = webDriver.getWindowHandles();
