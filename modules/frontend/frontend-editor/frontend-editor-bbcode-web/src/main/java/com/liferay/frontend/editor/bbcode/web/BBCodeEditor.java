@@ -32,7 +32,7 @@ public class BBCodeEditor implements Editor {
 	}
 
 	@Override
-	public String[] getModules() {
+	public String[] getJavaScriptModules() {
 		return new String[] {"liferay-bbcode-editor"};
 	}
 

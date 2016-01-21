@@ -32,7 +32,7 @@ public class CKEditorEditor implements Editor {
 	}
 
 	@Override
-	public String[] getModules() {
+	public String[] getJavaScriptModules() {
 		return new String[0];
 	}
 
