@@ -196,7 +196,7 @@
 		if (type.equals("editor")) {
 			Editor editor = InputEditorTag.getEditor(request, editorName);
 
-			modules += StringPool.COMMA + StringUtil.merge(editor.getModules());
+			modules += StringPool.COMMA + StringUtil.merge(editor.getJavaScriptModules());
 		}
 		%>
 

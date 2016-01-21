@@ -21,7 +21,7 @@ public interface Editor {
 
 	public String getJspPath();
 
-	public String[] getModules();
+	public String[] getJavaScriptModules();
 
 	public String getName();
 
