@@ -27,13 +27,13 @@ import org.osgi.service.component.annotations.Component;
 public class CKEditorEditor implements Editor {
 
 	@Override
-	public String getJspPath() {
-		return "/ckeditor.jsp";
+	public String[] getJavaScriptModules() {
+		return new String[0];
 	}
 
 	@Override
-	public String[] getJavaScriptModules() {
-		return new String[0];
+	public String getJspPath() {
+		return "/ckeditor.jsp";
 	}
 
 	@Override

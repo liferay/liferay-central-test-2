@@ -27,13 +27,13 @@ import org.osgi.service.component.annotations.Component;
 public class TinyMCEEditor implements Editor {
 
 	@Override
-	public String getJspPath() {
-		return "/tinymce.jsp";
+	public String[] getJavaScriptModules() {
+		return new String[0];
 	}
 
 	@Override
-	public String[] getJavaScriptModules() {
-		return new String[0];
+	public String getJspPath() {
+		return "/tinymce.jsp";
 	}
 
 	@Override
