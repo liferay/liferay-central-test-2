@@ -4,7 +4,6 @@ Bundle-Version: 1.0.0
 Export-Package:\
 	com.liferay.asset.publisher.web,\
 	com.liferay.asset.publisher.web.constants,\
-	com.liferay.asset.publisher.web.display.context,\
 	com.liferay.asset.publisher.web.util
 Include-Resource:\
 	classes,\
