@@ -142,6 +142,7 @@ public class AssetPublisherPortletToolbarContributor
 				iterator.next();
 
 			long groupId = scopeAddPortletURL.getKey();
+
 			Map<String, PortletURL> addPortletURLs =
 				scopeAddPortletURL.getValue();
 
