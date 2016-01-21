@@ -32,6 +32,7 @@ import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -437,32 +438,30 @@ public class WebDriverHelper {
 	public static String getLocation(WebDriver webDriver) throws Exception {
 		List<Exception> exceptions = new ArrayList<>();
 
-		int totalRetries = 3;
-
-		for (int i = 0; i < totalRetries; i++) {
+		for (int i = 0; i < 3; i++) {
 			FutureTask<String> futureTask = new FutureTask<>(
 				new Callable<String>() {
 
-				@Override
-				public String call() throws Exception {
-					return _webDriver.getCurrentUrl();
-				}
+					@Override
+					public String call() throws Exception {
+						return _webDriver.getCurrentUrl();
+					}
 
-				private Callable<String> init(WebDriver webDriver)
-					throws Exception {
+					private Callable<String> init(WebDriver webDriver)
+						throws Exception {
 
-					_webDriver = webDriver;
+						_webDriver = webDriver;
 
-					return this;
-				}
+						return this;
+					}
 
-				private WebDriver _webDriver;
+					private WebDriver _webDriver;
 
-			}.init(webDriver));
+				}.init(webDriver));
 
-			Thread getCurrentUrlThread = new Thread(futureTask);
+			Thread thread = new Thread(futureTask);
 
-			getCurrentUrlThread.start();
+			thread.start();
 
 			try {
 				String location = futureTask.get(
@@ -479,15 +478,14 @@ public class WebDriverHelper {
 			catch (InterruptedException ie) {
 				exceptions.add(ie);
 			}
-			catch (java.util.concurrent.TimeoutException te) {
+			catch (TimeoutException te) {
 				exceptions.add(te);
 			}
 			finally {
-				getCurrentUrlThread.interrupt();
+				thread.interrupt();
 			}
 
-			System.out.println("WebDriverHelper.getLocation(webDriver) failed");
-
+			System.out.println("WebDriverHelper#getLocation(webDriver):");
 			System.out.println(webDriver.toString());
 
 			Set<String> windowHandles = webDriver.getWindowHandles();
@@ -501,7 +499,7 @@ public class WebDriverHelper {
 			throw new Exception(exceptions.get(0));
 		}
 		else {
-			throw new java.util.concurrent.TimeoutException();
+			throw new TimeoutException();
 		}
 	}
 
