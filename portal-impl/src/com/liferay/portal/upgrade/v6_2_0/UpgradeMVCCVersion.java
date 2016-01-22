@@ -21,7 +21,7 @@ public class UpgradeMVCCVersion
 	extends com.liferay.portal.upgrade.util.UpgradeMVCCVersion {
 
 	@Override
-	protected String[] getExcludedTables() {
+	protected String[] getExcludedTableNames() {
 		return new String[] {
 			"RecentLayoutBranch", "RecentLayoutRevision",
 			"RecentLayoutSetBranch", "ExportImportConfiguration"

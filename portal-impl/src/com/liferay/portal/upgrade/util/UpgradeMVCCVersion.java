@@ -40,7 +40,7 @@ public class UpgradeMVCCVersion extends UpgradeProcess {
 			DatabaseMetaData databaseMetaData, String tableName)
 		throws Exception {
 
-		for (String excludeTableName : getExcludedTables()) {
+		for (String excludeTableName : getExcludedTableNames()) {
 			if (excludeTableName.equals(tableName)) {
 				return;
 			}
@@ -119,7 +119,7 @@ public class UpgradeMVCCVersion extends UpgradeProcess {
 		return rootElement.elements("class");
 	}
 
-	protected String[] getExcludedTables() {
+	protected String[] getExcludedTableNames() {
 		return new String[0];
 	}
 
