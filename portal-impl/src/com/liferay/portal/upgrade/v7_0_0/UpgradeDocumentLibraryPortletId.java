@@ -29,23 +29,23 @@ public class UpgradeDocumentLibraryPortletId
 	extends com.liferay.portal.upgrade.util.UpgradePortletId {
 
 	protected void deleteDuplicatedResourceActions() throws SQLException {
-		PreparedStatement ps = null;
+		PreparedStatement ps1 = null;
 		ResultSet rs = null;
 
 		try {
-			ps = connection.prepareStatement(
+			ps1 = connection.prepareStatement(
 				"select actionId from ResourceAction where name = '" +
 					_PORTLET_ID_DOCUMENT_LIBRARY + "'");
 
-			rs = ps.executeQuery();
+			rs = ps1.executeQuery();
 
 			while (rs.next()) {
 				PreparedStatement ps2 = null;
 
 				try {
 					ps2 = connection.prepareStatement(
-						"delete from ResourceAction where name = ? " +
-							"and actionId = ?");
+						"delete from ResourceAction where name = ? and " +
+							"actionId = ?");
 
 					ps2.setString(1, _PORTLET_ID_DL_DISPLAY);
 					ps2.setString(2, rs.getString("actionId"));
@@ -58,32 +58,31 @@ public class UpgradeDocumentLibraryPortletId
 			}
 		}
 		finally {
-			DataAccess.cleanUp(ps, rs);
+			DataAccess.cleanUp(ps1, rs);
 		}
 	}
 
 	protected void deleteDuplicatedResourcePermissions() throws SQLException {
-		PreparedStatement ps = null;
+		PreparedStatement ps1 = null;
 		ResultSet rs = null;
 
 		try {
-			ps = connection.prepareStatement(
-				"select companyId, scope, primKey " +
-					"from ResourcePermission where name = '" +
-						_PORTLET_ID_DOCUMENT_LIBRARY + "'");
+			ps1 = connection.prepareStatement(
+				"select companyId, scope, primKey from ResourcePermission " +
+					"where name = '" + _PORTLET_ID_DOCUMENT_LIBRARY + "'");
 
-			rs = ps.executeQuery();
+			rs = ps1.executeQuery();
 
 			while (rs.next()) {
 				PreparedStatement ps2 = null;
 
 				try {
 					ps2 = connection.prepareStatement(
-						"delete from ResourcePermission where name = ? " +
-							"and companyId = ? and scope = ? and primKey = ?");
+						"delete from ResourcePermission where companyId = ? " +
+							"and name = ? and scope = ? and primKey = ?");
 
-					ps2.setString(1, _PORTLET_ID_DL_DISPLAY);
 					ps2.setString(2, rs.getString("companyId"));
+					ps2.setString(1, _PORTLET_ID_DL_DISPLAY);
 					ps2.setString(3, rs.getString("scope"));
 					ps2.setString(4, rs.getString("primKey"));
 
@@ -95,7 +94,7 @@ public class UpgradeDocumentLibraryPortletId
 			}
 		}
 		finally {
-			DataAccess.cleanUp(ps, rs);
+			DataAccess.cleanUp(ps1, rs);
 		}
 	}
 
