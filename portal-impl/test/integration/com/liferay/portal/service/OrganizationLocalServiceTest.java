@@ -297,17 +297,16 @@ public class OrganizationLocalServiceTest {
 	}
 
 	@Test
-	public void testHasUserOrganization1() throws Exception {
+	public void testHasUserOrganizationCase1() throws Exception {
 		Organization organizationA = OrganizationTestUtil.addOrganization(
 			OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID,
 			"Organization A", false);
-
-		_organizations.add(organizationA);
 
 		Organization organizationB = OrganizationTestUtil.addOrganization(
 			OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID,
 			"Organization B", false);
 
+		_organizations.add(organizationA);
 		_organizations.add(organizationB);
 
 		long userId = TestPropsValues.getUserId();
@@ -318,22 +317,22 @@ public class OrganizationLocalServiceTest {
 		Assert.assertTrue(
 			OrganizationLocalServiceUtil.hasUserOrganization(
 				userId, organizationA.getOrganizationId(), false, false));
+
 		Assert.assertFalse(
 			OrganizationLocalServiceUtil.hasUserOrganization(
 				userId, organizationB.getOrganizationId(), false, false));
 	}
 
 	@Test
-	public void testHasUserOrganization2() throws Exception {
+	public void testHasUserOrganizationCase2() throws Exception {
 		Organization organizationA = OrganizationTestUtil.addOrganization(
 			OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID,
 			"Organization A", false);
 
-		_organizations.add(organizationAA);
-
 		Organization organizationAA = OrganizationTestUtil.addOrganization(
 			organizationA.getOrganizationId(), "Organization AA", false);
 
+		_organizations.add(organizationAA);
 		_organizations.add(organizationA);
 
 		long userId = TestPropsValues.getUserId();
@@ -344,6 +343,7 @@ public class OrganizationLocalServiceTest {
 		Assert.assertTrue(
 			OrganizationLocalServiceUtil.hasUserOrganization(
 				userId, organizationA.getOrganizationId(), true, false));
+
 		Assert.assertTrue(
 			OrganizationLocalServiceUtil.hasUserOrganization(
 				userId, organizationA.getOrganizationId(), true, true));
