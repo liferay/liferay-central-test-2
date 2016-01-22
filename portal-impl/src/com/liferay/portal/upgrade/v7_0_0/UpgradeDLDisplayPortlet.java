@@ -45,9 +45,8 @@ public class UpgradeDLDisplayPortlet
 				"delete from Portlet where portletId = '" +
 					_PORTLET_ID_DL_DISPLAY + "'");
 
-			_deleteDuplicatedResourceActions();
-
-			_deleteDuplicatedResourcePermissions();
+			deleteDuplicatedResourceActions();
+			deleteDuplicatedResourcePermissions();
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
@@ -58,7 +57,7 @@ public class UpgradeDLDisplayPortlet
 		super.updatePortlet(oldRootPortletId, newRootPortletId);
 	}
 
-	private void _deleteDuplicatedResourceActions() throws SQLException {
+	protected void deleteDuplicatedResourceActions() throws SQLException {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
@@ -92,7 +91,7 @@ public class UpgradeDLDisplayPortlet
 		}
 	}
 
-	private void _deleteDuplicatedResourcePermissions() throws SQLException {
+	protected void deleteDuplicatedResourcePermissions() throws SQLException {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
