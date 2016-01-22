@@ -393,7 +393,7 @@ public class DefaultPortalLDAP implements PortalLDAP {
 			return ldapServerConfiguration.ldapServerId();
 		}
 
-		return LDAPServerConfiguration.DEFAULT_LDAP_SERVER_ID;
+		return LDAPServerConfiguration.LDAP_SERVER_ID_DEFAULT;
 	}
 
 	@Override
