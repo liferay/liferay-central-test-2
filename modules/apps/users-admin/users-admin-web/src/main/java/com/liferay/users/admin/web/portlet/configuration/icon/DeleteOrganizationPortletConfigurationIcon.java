@@ -47,17 +47,17 @@ public class DeleteOrganizationPortletConfigurationIcon
 		StringBundler sb = new StringBundler(4);
 
 		try {
-			Organization organization = ActionUtil.getOrganization(
-				portletRequest);
-
-			long organizationId = organization.getOrganizationId();
-
 			PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
 			sb.append(portletDisplay.getNamespace());
 
 			sb.append("deleteOrganization('");
-			sb.append(organizationId);
+
+			Organization organization = ActionUtil.getOrganization(
+				portletRequest);
+
+			sb.append(organization.getOrganizationId());
+
 			sb.append("');");
 		}
 		catch (Exception e) {
