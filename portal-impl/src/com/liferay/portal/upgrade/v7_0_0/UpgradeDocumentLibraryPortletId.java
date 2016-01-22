@@ -25,7 +25,7 @@ import java.sql.SQLException;
 /**
  * @author Cristina González
  */
-public class UpgradeDLDisplayPortlet
+public class UpgradeDocumentLibraryPortletId
 	extends com.liferay.portal.upgrade.util.UpgradePortletId {
 
 	@Override
@@ -133,6 +133,6 @@ public class UpgradeDLDisplayPortlet
 	private static final String _PORTLET_ID_DOCUMENT_LIBRARY = "20";
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		UpgradeDLDisplayPortlet.class);
+		UpgradeDocumentLibraryPortletId.class);
 
 }
