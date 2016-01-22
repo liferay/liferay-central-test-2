@@ -142,6 +142,8 @@ public class RootProjectConfigurator implements Plugin<Project> {
 
 			});
 
+		delete.setDescription("Deletes the build directory.");
+
 		return delete;
 	}
 
