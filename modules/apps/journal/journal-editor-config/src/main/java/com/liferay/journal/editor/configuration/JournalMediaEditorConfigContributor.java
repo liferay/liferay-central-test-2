@@ -38,7 +38,8 @@ import org.osgi.service.component.annotations.Component;
 	},
 	service = EditorConfigContributor.class
 )
-public class JournalMediaConfigContributor extends BaseEditorConfigContributor {
+public class JournalMediaEditorConfigContributor
+	extends BaseEditorConfigContributor {
 
 	@Override
 	public void populateConfigJSONObject(
