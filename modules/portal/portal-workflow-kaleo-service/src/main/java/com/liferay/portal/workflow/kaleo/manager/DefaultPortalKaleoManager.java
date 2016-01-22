@@ -182,15 +182,17 @@ public class DefaultPortalKaleoManager
 
 			Role role = roleLocalService.fetchRole(companyId, name);
 
-			if (role == null) {
-				Map<Locale, String> descriptionMap = new HashMap<>();
-
-				descriptionMap.put(LocaleUtil.getDefault(), entry.getValue());
-
-				roleLocalService.addRole(
-					defaultUser.getUserId(), null, 0, name, null,
-					descriptionMap, RoleConstants.TYPE_REGULAR, null, null);
+			if (role != null) {
+				continue;
 			}
+
+			Map<Locale, String> descriptionMap = new HashMap<>();
+
+			descriptionMap.put(LocaleUtil.getDefault(), entry.getValue());
+
+			roleLocalService.addRole(
+				defaultUser.getUserId(), null, 0, name, null, descriptionMap,
+				RoleConstants.TYPE_REGULAR, null, null);
 		}
 	}
 
