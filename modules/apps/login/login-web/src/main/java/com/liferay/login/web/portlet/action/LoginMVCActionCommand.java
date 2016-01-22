@@ -101,8 +101,10 @@ public class LoginMVCActionCommand extends BaseMVCActionCommand {
 				actionRequest, "doActionAfterLogin");
 
 			if (doActionAfterLogin) {
-				PortletURL renderURL =
-					((LiferayPortletResponse)actionResponse).createRenderURL();
+				LiferayPortletResponse liferayPortletResponse =
+					(LiferayPortletResponse)actionResponse;
+
+				PortletURL renderURL = liferayPortletResponse.createRenderURL();
 
 				renderURL.setParameter(
 					"mvcRenderCommandName", "/login/login_redirect");
