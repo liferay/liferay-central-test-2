@@ -28,35 +28,6 @@ import java.sql.SQLException;
 public class UpgradeDocumentLibraryPortletId
 	extends com.liferay.portal.upgrade.util.UpgradePortletId {
 
-	@Override
-	protected String[][] getRenamePortletIdsArray() {
-		return new String[][] {
-			new String[] {_PORTLET_ID_DL_DISPLAY, _PORTLET_ID_DOCUMENT_LIBRARY}
-		};
-	}
-
-	@Override
-	protected void updatePortlet(
-			String oldRootPortletId, String newRootPortletId)
-		throws Exception {
-
-		try {
-			runSQL(
-				"delete from Portlet where portletId = '" +
-					_PORTLET_ID_DL_DISPLAY + "'");
-
-			deleteDuplicatedResourceActions();
-			deleteDuplicatedResourcePermissions();
-		}
-		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(e, e);
-			}
-		}
-
-		super.updatePortlet(oldRootPortletId, newRootPortletId);
-	}
-
 	protected void deleteDuplicatedResourceActions() throws SQLException {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -126,6 +97,35 @@ public class UpgradeDocumentLibraryPortletId
 		finally {
 			DataAccess.cleanUp(ps, rs);
 		}
+	}
+
+	@Override
+	protected String[][] getRenamePortletIdsArray() {
+		return new String[][] {
+			new String[] {_PORTLET_ID_DL_DISPLAY, _PORTLET_ID_DOCUMENT_LIBRARY}
+		};
+	}
+
+	@Override
+	protected void updatePortlet(
+			String oldRootPortletId, String newRootPortletId)
+		throws Exception {
+
+		try {
+			runSQL(
+				"delete from Portlet where portletId = '" +
+					_PORTLET_ID_DL_DISPLAY + "'");
+
+			deleteDuplicatedResourceActions();
+			deleteDuplicatedResourcePermissions();
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(e, e);
+			}
+		}
+
+		super.updatePortlet(oldRootPortletId, newRootPortletId);
 	}
 
 	private static final String _PORTLET_ID_DL_DISPLAY = "100";
