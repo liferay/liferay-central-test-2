@@ -101,6 +101,7 @@ long usedMemory = totalMemory - runtime.freeMemory();
 				<div class="pull-left">
 					<h5><liferay-ui:message key="run-the-garbage-collector-to-free-up-memory" /></h5>
 				</div>
+
 				<div class="pull-right">
 					<aui:button cssClass="save-server-button" data-cmd="gc" value="execute" />
 				</div>
@@ -109,6 +110,7 @@ long usedMemory = totalMemory - runtime.freeMemory();
 				<div class="pull-left">
 					<h5><liferay-ui:message key="generate-thread-dump" /></h5>
 				</div>
+
 				<div class="pull-right">
 					<aui:button cssClass="save-server-button" data-cmd="threadDump" value="execute" />
 				</div>
@@ -122,6 +124,7 @@ long usedMemory = totalMemory - runtime.freeMemory();
 				<div class="pull-left">
 					<h5><liferay-ui:message key="clear-content-cached-by-this-vm" /></h5>
 				</div>
+
 				<div class="pull-right">
 					<aui:button cssClass="save-server-button" data-cmd="cacheSingle" value="execute" />
 				</div>
@@ -130,6 +133,7 @@ long usedMemory = totalMemory - runtime.freeMemory();
 				<div class="pull-left">
 					<h5><liferay-ui:message key="clear-content-cached-across-the-cluster" /></h5>
 				</div>
+
 				<div class="pull-right">
 					<aui:button cssClass="save-server-button" data-cmd="cacheMulti" value="execute" />
 				</div>
@@ -138,6 +142,7 @@ long usedMemory = totalMemory - runtime.freeMemory();
 				<div class="pull-left">
 					<h5><liferay-ui:message key="clear-the-database-cache" /></h5>
 				</div>
+
 				<div class="pull-right">
 					<aui:button cssClass="save-server-button" data-cmd="cacheDb" value="execute" />
 				</div>
@@ -146,6 +151,7 @@ long usedMemory = totalMemory - runtime.freeMemory();
 				<div class="pull-left">
 					<h5><liferay-ui:message key="clear-the-direct-servlet-cache" /></h5>
 				</div>
+
 				<div class="pull-right">
 					<aui:button cssClass="save-server-button" data-cmd="cacheServlet" value="execute" />
 				</div>
@@ -159,6 +165,7 @@ long usedMemory = totalMemory - runtime.freeMemory();
 				<div class="pull-left">
 					<h5><liferay-ui:message key="reindex-all-search-indexes" /></h5>
 				</div>
+
 				<div class="pull-right">
 
 					<%
@@ -172,6 +179,7 @@ long usedMemory = totalMemory - runtime.freeMemory();
 				<div class="pull-left">
 					<h5><liferay-ui:message key="reindex-all-spell-check-indexes" /></h5>
 				</div>
+
 				<div class="pull-right">
 					<aui:button cssClass="save-server-button" data-cmd="reindexDictionaries" value="execute" />
 				</div>
@@ -189,6 +197,7 @@ long usedMemory = totalMemory - runtime.freeMemory();
 					<div class="pull-left">
 						<h5><liferay-ui:message arguments="<%= indexer.getClassName() %>" key="reindex-x" /></h5>
 					</div>
+
 					<div class="pull-right">
 						<aui:button cssClass="save-server-button" data-classname="<%= indexer.getClassName() %>" data-cmd="reindex" disabled="<%= !indexer.isIndexerEnabled() %>" value="execute" />
 					</div>
@@ -207,6 +216,7 @@ long usedMemory = totalMemory - runtime.freeMemory();
 				<div class="pull-left">
 					<h5><liferay-ui:message key="verify-database-tables-of-all-plugins" /></h5>
 				</div>
+
 				<div class="pull-right">
 					<aui:button cssClass="save-server-button" data-cmd="verifyPluginTables" value="execute" />
 				</div>
@@ -215,6 +225,7 @@ long usedMemory = totalMemory - runtime.freeMemory();
 				<div class="pull-left">
 					<h5><liferay-ui:message key="verify-membership-policies" /></h5>
 				</div>
+
 				<div class="pull-right">
 					<aui:button cssClass="save-server-button" data-cmd="verifyMembershipPolicies" value="execute" />
 				</div>
@@ -228,6 +239,7 @@ long usedMemory = totalMemory - runtime.freeMemory();
 				<div class="pull-left">
 					<h5><liferay-ui:message key="reset-preview-and-thumbnail-files-for-documents-and-media-portlet" /></h5>
 				</div>
+
 				<div class="pull-right">
 					<aui:button cssClass="save-server-button" data-cmd="dlPreviews" value="execute" />
 				</div>
@@ -236,6 +248,7 @@ long usedMemory = totalMemory - runtime.freeMemory();
 				<div class="pull-left">
 					<h5><liferay-ui:message key="clean-up-permissions" /> <liferay-ui:icon-help message="clean-up-permissions-help" /></h5>
 				</div>
+
 				<div class="pull-right">
 					<aui:button cssClass="save-server-button" data-cmd="cleanUpPermissions" value="execute" />
 				</div>
