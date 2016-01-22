@@ -60,7 +60,6 @@ public class TemplateHandlerRegistryImpl implements TemplateHandlerRegistry {
 
 	public long[] getClassNameIds() {
 		long[] classNameIds = new long[_templateHandlers.size()];
-
 		int i = 0;
 
 		for (Map.Entry<String, TemplateHandler> entry :
