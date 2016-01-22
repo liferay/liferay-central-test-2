@@ -309,18 +309,17 @@ public class OrganizationLocalServiceTest {
 		_organizations.add(organizationA);
 		_organizations.add(organizationB);
 
-		long userId = TestPropsValues.getUserId();
-
 		UserLocalServiceUtil.addOrganizationUser(
-			organizationA.getOrganizationId(), userId);
+			organizationA.getOrganizationId(), TestPropsValues.getUserId());
 
 		Assert.assertTrue(
 			OrganizationLocalServiceUtil.hasUserOrganization(
-				userId, organizationA.getOrganizationId(), false, false));
-
+				TestPropsValues.getUserId(), organizationA.getOrganizationId(),
+				false, false));
 		Assert.assertFalse(
 			OrganizationLocalServiceUtil.hasUserOrganization(
-				userId, organizationB.getOrganizationId(), false, false));
+				TestPropsValues.getUserId(), organizationB.getOrganizationId(),
+				false, false));
 	}
 
 	@Test
@@ -335,18 +334,18 @@ public class OrganizationLocalServiceTest {
 		_organizations.add(organizationAA);
 		_organizations.add(organizationA);
 
-		long userId = TestPropsValues.getUserId();
-
 		UserLocalServiceUtil.addOrganizationUser(
-			organizationAA.getOrganizationId(), userId);
+			organizationAA.getOrganizationId(), TestPropsValues.getUserId());
 
 		Assert.assertTrue(
 			OrganizationLocalServiceUtil.hasUserOrganization(
-				userId, organizationA.getOrganizationId(), true, false));
+				TestPropsValues.getUserId(), organizationA.getOrganizationId(),
+				true, false));
 
 		Assert.assertTrue(
 			OrganizationLocalServiceUtil.hasUserOrganization(
-				userId, organizationA.getOrganizationId(), true, true));
+				TestPropsValues.getUserId(), organizationA.getOrganizationId(),
+				true, true));
 	}
 
 	@Test
