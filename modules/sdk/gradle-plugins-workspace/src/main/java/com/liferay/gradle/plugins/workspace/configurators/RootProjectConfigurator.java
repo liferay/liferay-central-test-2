@@ -29,7 +29,6 @@ import java.util.Map;
 import java.util.concurrent.Callable;
 
 import org.gradle.api.Action;
-import org.gradle.api.DefaultTask;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.Task;
@@ -40,6 +39,7 @@ import org.gradle.api.file.FileCollection;
 import org.gradle.api.plugins.ExtensionAware;
 import org.gradle.api.tasks.AbstractCopyTask;
 import org.gradle.api.tasks.Copy;
+import org.gradle.api.tasks.Delete;
 import org.gradle.api.tasks.bundling.AbstractArchiveTask;
 import org.gradle.api.tasks.bundling.Compression;
 import org.gradle.api.tasks.bundling.Tar;
@@ -128,23 +128,21 @@ public class RootProjectConfigurator implements Plugin<Project> {
 			});
 	}
 
-	protected Task addTaskClean(Project project) {
-		final DefaultTask cleanTask = GradleUtil.addTask(
-			project, CLEAN_TASK_NAME, DefaultTask.class);
+	protected Delete addTaskClean(final Project project) {
+		Delete delete = GradleUtil.addTask(
+			project, CLEAN_TASK_NAME, Delete.class);
 
-		cleanTask.doLast(
-			new Action<Task>() {
+		delete.delete(
+			new Callable<File>() {
 
 				@Override
-				public void execute(Task task) {
-					Project project = task.getProject();
-
-					project.delete(project.getBuildDir());
+				public File call() throws Exception {
+					return project.getBuildDir();
 				}
 
 			});
 
-		return cleanTask;
+		return delete;
 	}
 
 	protected <T extends AbstractArchiveTask> T addTaskDistBundle(
