@@ -160,8 +160,8 @@ public class RootProjectConfigurator implements Plugin<Project> {
 
 		task.setBaseName(project.getName());
 		task.setDestinationDir(project.getBuildDir());
-		task.setIncludeEmptyDirs(false);
 		task.setGroup(BUNDLE_GROUP);
+		task.setIncludeEmptyDirs(false);
 
 		project.afterEvaluate(
 			new Action<Project>() {
