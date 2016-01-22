@@ -874,12 +874,12 @@
 		<execute function="AssertElementPresent" locator1="Checkbox#ANONYMOUS" />
 	</command>
 
-	<command name="viewAnswerCP">
+	<command name="viewAnswerPG">
 		<var name="key_threadSubject" value="${threadSubject}" />
 
-		<execute function="AssertTextEquals" locator1="MessageBoards#THREAD_TABLE_ADMIN_FLAG" value1="Resolved" />
-		<execute function="AssertClick" locator1="MessageBoards#THREAD_TABLE_ADMIN_THREAD" value1="${threadSubject}" />
-		<execute function="AssertTextEquals" locator1="MessageBoardsThread#MESSAGE_ANSWER_1" value1="Answer" />
+		<execute function="AssertTextEquals" locator1="MessageBoards#THREAD_TABLE_FLAG" value1="Resolved" />
+		<execute function="AssertClick" locator1="MessageBoards#THREAD_TABLE_THREAD" value1="${threadSubject}" />
+ 		<execute function="AssertTextEquals" locator1="MessageBoardsThread#MESSAGE_ANSWER_1" value1="Answer" />
 		<execute function="AssertClick" locator1="MessageBoardsThread#THREAD_CONTROLS_BACK" value1="Back" />
 	</command>
 
