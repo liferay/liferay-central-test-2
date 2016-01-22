@@ -93,6 +93,8 @@ public class DDMDataProviderInstanceLocalServiceImpl
 			DDMDataProviderInstance dataProviderInstance)
 		throws PortalException {
 
+		// Data provider instance
+
 		ddmDataProviderInstancePersistence.remove(dataProviderInstance);
 
 		// Resources
