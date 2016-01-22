@@ -31,7 +31,7 @@ public class UpgradeDLDisplayPortlet
 	@Override
 	protected String[][] getRenamePortletIdsArray() {
 		return new String[][] {
-			new String[] {_DL_DISPLAY_PORTLET, _DOCUMENT_LIBRARY_PORTLET}
+			new String[] {_PORTLET_ID_DL_DISPLAY, _PORTLET_ID_DOCUMENT_LIBRARY}
 		};
 	}
 
@@ -43,7 +43,7 @@ public class UpgradeDLDisplayPortlet
 		try {
 			runSQL(
 				"delete from Portlet where portletId = '" +
-					_DL_DISPLAY_PORTLET + "'");
+					_PORTLET_ID_DL_DISPLAY + "'");
 
 			_deleteDuplicatedResourceActions();
 
@@ -65,7 +65,7 @@ public class UpgradeDLDisplayPortlet
 		try {
 			ps = connection.prepareStatement(
 				"select actionId from ResourceAction where name = '" +
-					_DOCUMENT_LIBRARY_PORTLET + "'");
+					_PORTLET_ID_DOCUMENT_LIBRARY + "'");
 
 			rs = ps.executeQuery();
 
@@ -77,7 +77,7 @@ public class UpgradeDLDisplayPortlet
 						"delete from ResourceAction where name = ? " +
 							"and actionId = ?");
 
-					ps2.setString(1, _DL_DISPLAY_PORTLET);
+					ps2.setString(1, _PORTLET_ID_DL_DISPLAY);
 					ps2.setString(2, rs.getString("actionId"));
 
 					ps2.execute();
@@ -100,7 +100,7 @@ public class UpgradeDLDisplayPortlet
 			ps = connection.prepareStatement(
 				"select companyId, scope, primKey " +
 					"from ResourcePermission where name = '" +
-						_DOCUMENT_LIBRARY_PORTLET + "'");
+						_PORTLET_ID_DOCUMENT_LIBRARY + "'");
 
 			rs = ps.executeQuery();
 
@@ -112,7 +112,7 @@ public class UpgradeDLDisplayPortlet
 						"delete from ResourcePermission where name = ? " +
 							"and companyId = ? and scope = ? and primKey = ?");
 
-					ps2.setString(1, _DL_DISPLAY_PORTLET);
+					ps2.setString(1, _PORTLET_ID_DL_DISPLAY);
 					ps2.setString(2, rs.getString("companyId"));
 					ps2.setString(3, rs.getString("scope"));
 					ps2.setString(4, rs.getString("primKey"));
@@ -129,9 +129,9 @@ public class UpgradeDLDisplayPortlet
 		}
 	}
 
-	private static final String _DL_DISPLAY_PORTLET = "100";
+	private static final String _PORTLET_ID_DL_DISPLAY = "100";
 
-	private static final String _DOCUMENT_LIBRARY_PORTLET = "20";
+	private static final String _PORTLET_ID_DOCUMENT_LIBRARY = "20";
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		UpgradeDLDisplayPortlet.class);
