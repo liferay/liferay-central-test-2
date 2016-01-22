@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.editor.configuration.EditorConfigContributor;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xuggler.XugglerUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.RequestBackedPortletURLFactory;
@@ -53,19 +52,19 @@ public class JournalMediaConfigContributor extends BaseEditorConfigContributor {
 
 		JSONObject toolbarsJSONObject = jsonObject.getJSONObject("toolbars");
 
-		if (Validator.isNull(toolbarsJSONObject)) {
+		if (toolbarsJSONObject == null) {
 			toolbarsJSONObject = JSONFactoryUtil.createJSONObject();
 		}
 
 		JSONObject addJSONObject = toolbarsJSONObject.getJSONObject("add");
 
-		if (Validator.isNull(addJSONObject)) {
+		if (addJSONObject == null) {
 			addJSONObject = JSONFactoryUtil.createJSONObject();
 		}
 
 		JSONArray buttonsJSONArray = addJSONObject.getJSONArray("buttons");
 
-		if (Validator.isNull(buttonsJSONArray)) {
+		if (buttonsJSONArray == null) {
 			buttonsJSONArray = JSONFactoryUtil.createJSONArray();
 		}
 
