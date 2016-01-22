@@ -7,7 +7,6 @@
 
 	var ButtonVideo = React.createClass(
 		{
-
 			mixins: [AlloyEditor.ButtonCommand],
 
 			displayName: 'ButtonVideo',
