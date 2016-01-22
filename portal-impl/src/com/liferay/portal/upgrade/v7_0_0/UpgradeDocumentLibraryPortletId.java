@@ -28,7 +28,7 @@ import java.sql.SQLException;
 public class UpgradeDocumentLibraryPortletId
 	extends com.liferay.portal.upgrade.util.UpgradePortletId {
 
-	protected void deleteDuplicatedResourceActions() throws SQLException {
+	protected void deleteDuplicateResourceActions() throws SQLException {
 		PreparedStatement ps1 = null;
 		ResultSet rs = null;
 
@@ -62,7 +62,7 @@ public class UpgradeDocumentLibraryPortletId
 		}
 	}
 
-	protected void deleteDuplicatedResourcePermissions() throws SQLException {
+	protected void deleteDuplicateResourcePermissions() throws SQLException {
 		PreparedStatement ps1 = null;
 		ResultSet rs = null;
 
@@ -115,8 +115,8 @@ public class UpgradeDocumentLibraryPortletId
 				"delete from Portlet where portletId = '" +
 					_PORTLET_ID_DL_DISPLAY + "'");
 
-			deleteDuplicatedResourceActions();
-			deleteDuplicatedResourcePermissions();
+			deleteDuplicateResourceActions();
+			deleteDuplicateResourcePermissions();
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
