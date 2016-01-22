@@ -17,13 +17,13 @@
 <%@ include file="/init.jsp" %>
 
 <%
-String keywords = ParamUtil.getString(request, "keywords");
+String[] tab2Names = new String[] {"update-categories", "add-category"};
 
-String[] tabNames = new String[] {"update-categories", "add-category"};
-
-if (!ArrayUtil.contains(tabNames, tabs2)) {
-	tabs2 = tabNames[0];
+if (!ArrayUtil.contains(tab2Names, tabs2)) {
+	tabs2 = tab2Names[0];
 }
+
+String keywords = ParamUtil.getString(request, "keywords");
 
 PortletURL serverURL = renderResponse.createRenderURL();
 
@@ -37,12 +37,12 @@ serverURL.setParameter("tabs2", tabs2);
 		<aui:nav cssClass="navbar-nav">
 
 			<%
-			for (String tabName : tabNames) {
+			for (String tab2Name : tab2Names) {
 
-				serverURL.setParameter("tabs2", tabName);
+				serverURL.setParameter("tabs2", tab2Name);
 			%>
 
-				<aui:nav-item href="<%= serverURL.toString() %>" label="<%= tabName %>" selected="<%= tabs2.equals(tabName) %>" />
+				<aui:nav-item href="<%= serverURL.toString() %>" label="<%= tab2Name %>" selected="<%= tabs2.equals(tab2Name) %>" />
 
 			<%
 			}

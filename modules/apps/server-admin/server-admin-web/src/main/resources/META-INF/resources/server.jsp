@@ -33,14 +33,14 @@ serverURL.setParameter("tabs2", tabs2);
 			<aui:nav cssClass="navbar-nav">
 
 			<%
-			String[] navTabsNames = new String[] {"resources", "log-levels", "properties", "captcha", "data-migration", "file-uploads", "mail", "external-services", "script", "shutdown"};
+			String[] tabs1Names = new String[] {"resources", "log-levels", "properties", "captcha", "data-migration", "file-uploads", "mail", "external-services", "script", "shutdown"};
 
-			for (String navTabName : navTabsNames) {
+			for (String tabs1Name : tabs1Names) {
 
-				serverURL.setParameter("tabs1", navTabName);
+				serverURL.setParameter("tabs1", tabs1Name);
 			%>
 
-				<aui:nav-item href="<%= serverURL.toString() %>" label="<%= navTabName %>" selected="<%= tabs1.equals(navTabName) %>" />
+				<aui:nav-item href="<%= serverURL.toString() %>" label="<%= tabs1Name %>" selected="<%= tabs1.equals(tabs1Name) %>" />
 
 			<%
 			}
