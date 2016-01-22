@@ -17,9 +17,9 @@
 <%@ include file="/init.jsp" %>
 
 <%
-String displayStyle = ParamUtil.getString(request, "displayStyle", "list");
-
 String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-all-organizations");
+
+String displayStyle = ParamUtil.getString(request, "displayStyle", "list");
 
 String usersListView = (String)request.getAttribute("view.jsp-usersListView");
 
