@@ -19,8 +19,8 @@
 <%
 String key = (String)request.getAttribute("liferay-ui:error:key");
 String message = (String)request.getAttribute("liferay-ui:error:message");
-boolean translateMessage = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:error:translateMessage"));
 String rowBreak = (String)request.getAttribute("liferay-ui:error:rowBreak");
+boolean translateMessage = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:error:translateMessage"));
 
 String bodyContentString = StringPool.BLANK;
 
