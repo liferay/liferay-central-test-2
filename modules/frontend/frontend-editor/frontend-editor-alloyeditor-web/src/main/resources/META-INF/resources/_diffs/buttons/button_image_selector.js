@@ -7,7 +7,6 @@
 
 	var ButtonImage = React.createClass(
 		{
-
 			mixins: [AlloyEditor.ButtonCommand],
 
 			displayName: 'ButtonImage',
