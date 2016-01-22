@@ -72,7 +72,7 @@ public class JournalMediaConfigContributor extends BaseEditorConfigContributor {
 		buttonsJSONArray.put("video");
 		buttonsJSONArray.put("audio");
 
-		addJSONObject.put("add", buttonsJSONArray);
+		addJSONObject.put("buttons", buttonsJSONArray);
 
 		toolbarsJSONObject.put("add", addJSONObject);
 
