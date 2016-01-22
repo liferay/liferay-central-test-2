@@ -36,7 +36,7 @@ if (bodyContent != null) {
 		<c:if test="<%= SessionErrors.contains(portletRequest, key) %>">
 			<c:if test="<%= Validator.isNotNull(bodyContentString) %>">
 				<liferay-ui:alert
-					message="<%= HtmlUtil.escapeJS(bodyContentString) %>"
+					message="<%= bodyContentString %>"
 					timeout="0"
 					title='<%= LanguageUtil.get(request, "danger") %>'
 					type="danger"
