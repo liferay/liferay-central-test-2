@@ -341,7 +341,6 @@ public class OrganizationLocalServiceTest {
 			OrganizationLocalServiceUtil.hasUserOrganization(
 				TestPropsValues.getUserId(), organizationA.getOrganizationId(),
 				true, false));
-
 		Assert.assertTrue(
 			OrganizationLocalServiceUtil.hasUserOrganization(
 				TestPropsValues.getUserId(), organizationA.getOrganizationId(),
