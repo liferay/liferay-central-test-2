@@ -297,7 +297,7 @@ public class OrganizationLocalServiceTest {
 	}
 
 	@Test
-	public void testHasUserOrganizationCase1() throws Exception {
+	public void testHasUserOrganization1() throws Exception {
 		Organization organizationA = OrganizationTestUtil.addOrganization(
 			OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID,
 			"Organization A", false);
@@ -324,7 +324,7 @@ public class OrganizationLocalServiceTest {
 	}
 
 	@Test
-	public void testHasUserOrganizationCase2() throws Exception {
+	public void testHasUserOrganization2() throws Exception {
 		Organization organizationA = OrganizationTestUtil.addOrganization(
 			OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID,
 			"Organization A", false);
