@@ -332,7 +332,7 @@
 <!--SIDEBAR-->
 <tr>
 	<td>SIDEBAR_DROPDOWN</td>
-	<td>//div//li[contains(@class,'active dropdown')]</td>
+	<td>//div//li[contains(@class,'active dropdown')]/a/span</td>
 	<td></td>
 </tr>
 <tr>
