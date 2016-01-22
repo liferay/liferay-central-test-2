@@ -129,11 +129,9 @@ public class UpgradeClassNames extends UpgradeProcess {
 		_classNamesMap.put(
 			"com.liferay.portlet.journal.model.JournalArticle",
 			"com.liferay.journal.model.JournalArticle");
-
 		_classNamesMap.put(
 			"com.liferay.portlet.dynamicdatalists.model.DDLRecord",
 			"com.liferay.dynamic.data.lists.model.DDLRecord");
-
 		_classNamesMap.put(
 			"com.liferay.portlet.wiki.model.WikiPage",
 			"com.liferay.wiki.model.WikiPage");
