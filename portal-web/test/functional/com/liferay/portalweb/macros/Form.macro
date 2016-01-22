@@ -19,6 +19,10 @@
 		<execute function="AssertClick" locator1="Form#PAGE_CONTROLS_ADD_NEW_PAGE" value1="Add new page" />
 	</command>
 
+	<command name="clickPublishSwitcher">
+		<execute function="Click" locator1="Form#PUBLISH_FORM_SWITCHER" />
+	</command>
+
 	<command name="configureWorkflow">
 		<execute function="Select" locator1="AssetWorkflow#ALL_STRUCTURES_WORKFLOW_SELECT" value1="${workflowDefinition}" />
 
@@ -107,10 +111,6 @@
 		<execute macro="Alert#viewRequestFailedToComplete" />
 
 		<execute function="AssertTextEquals" locator1="Message#ERROR_2" value1="Please enter a valid form name." />
-	</command>
-
-	<command name="selectPublishSetting">
-		<execute function="Click" locator1="Form#PUBLISH_FORM_SWITCHER" />
 	</command>
 
 	<command name="viewFormName">
