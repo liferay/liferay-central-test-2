@@ -53,6 +53,8 @@ public class RootProjectConfigurator implements Plugin<Project> {
 
 	public static final String BUNDLE_CONFIGURATION_NAME = "bundle";
 
+	public static final String BUNDLE_GROUP = "bundle";
+
 	public static final String CLEAN_TASK_NAME = "clean";
 
 	public static final String DIST_BUNDLE_TAR_TASK_NAME = "distBundleTar";
@@ -159,6 +161,7 @@ public class RootProjectConfigurator implements Plugin<Project> {
 		task.setBaseName(project.getName());
 		task.setDestinationDir(project.getBuildDir());
 		task.setIncludeEmptyDirs(false);
+		task.setGroup(BUNDLE_GROUP);
 
 		project.afterEvaluate(
 			new Action<Project>() {
@@ -208,6 +211,7 @@ public class RootProjectConfigurator implements Plugin<Project> {
 
 			});
 
+		copy.setGroup(BUNDLE_GROUP);
 		copy.setIncludeEmptyDirs(false);
 
 		project.afterEvaluate(
