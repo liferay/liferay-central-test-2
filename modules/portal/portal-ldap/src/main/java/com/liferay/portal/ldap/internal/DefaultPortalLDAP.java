@@ -34,7 +34,6 @@ import com.liferay.portal.ldap.UserConverterKeys;
 import com.liferay.portal.ldap.configuration.ConfigurationProvider;
 import com.liferay.portal.ldap.configuration.LDAPServerConfiguration;
 import com.liferay.portal.ldap.configuration.SystemLDAPConfiguration;
-import com.liferay.portal.ldap.constants.LDAPConstants;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.security.ldap.LDAPSettings;
 import com.liferay.portal.security.ldap.PortalLDAP;
