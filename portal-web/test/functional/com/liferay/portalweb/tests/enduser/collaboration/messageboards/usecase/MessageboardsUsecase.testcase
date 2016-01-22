@@ -1476,4 +1476,66 @@
 			<var name="threadSubject" value="MB Thread Message Subject" />
 		</execute>
 	</command>
+
+	<command name="ViewThreadDefaultQuestion" priority="3">
+		<execute macro="Page#add">
+			<var name="pageName" value="Message Boards Page" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="Message Boards Page" />
+		</execute>
+
+		<execute macro="Portlet#addPG">
+			<var name="portletName" value="Message Boards" />
+		</execute>
+
+		<execute macro="Navigator#openURL" />
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Message Boards" />
+		</execute>
+
+		<execute macro="MessageboardsThread#viewMarkAsQuestionNotCheckedCP" />
+
+		<execute macro="MessageboardsPortlet#configureGeneralCP">
+			<var name="threadAsQuestionByDefaultEnabled" value="true" />
+		</execute>
+
+		<execute macro="Navigator#openURL" />
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Message Boards" />
+		</execute>
+
+		<execute macro="MessageboardsThread#viewMarkAsQuestionCheckedCP" />
+
+		<execute macro="MessageboardsThread#addCP">
+			<var name="threadBody" value="Thread Body" />
+			<var name="threadSubject" value="Thread Subject" />
+		</execute>
+
+		<execute macro="Navigator#openURL" />
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="Message Boards Page" />
+		</execute>
+
+		<execute macro="MessageboardsThread#replyPG">
+			<var name="markAsAnswer" value="true" />
+			<var name="markAsQuestion" value="true" />
+			<var name="threadReplyBody" value="Thread Reply Body" />
+			<var name="threadSubject" value="Thread Subject" />
+		</execute>
+
+		<execute macro="Navigator#openURL" />
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="Message Boards Page" />
+		</execute>
+
+		<execute macro="MessageboardsThread#viewAnswerPG">
+			<var name="threadSubject" value="Thread Subject" />
+		</execute>
+	</command>
 </definition>
