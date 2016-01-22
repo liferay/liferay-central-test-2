@@ -155,13 +155,13 @@ public class WikiAttachmentEditorConfigContributor
 	}
 
 	protected void removeImageButton(JSONObject jsonObject) {
-		JSONObject toolbars = jsonObject.getJSONObject("toolbars");
+		JSONObject toolbarsJSONObject = jsonObject.getJSONObject("toolbars");
 
-		if (toolbars == null) {
+		if (toolbarsJSONObject == null) {
 			return;
 		}
 
-		JSONObject addJSONObject = toolbars.getJSONObject("add");
+		JSONObject addJSONObject = toolbarsJSONObject.getJSONObject("add");
 
 		if (addJSONObject == null) {
 			return;
