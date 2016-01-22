@@ -70,21 +70,21 @@ renderResponse.setTitle(selLayout.getName(locale));
 %>
 
 <c:if test="<%= !group.isLayoutPrototype() && (selLayout != null) && LayoutPermissionUtil.contains(permissionChecker, selLayout, ActionKeys.DELETE) %>">
-
-	<%
-	PortletURL deleteRedirectURL = PortletURLUtil.clone(redirectURL, renderResponse);
-	deleteRedirectURL.setParameter("selPlid", String.valueOf(selLayout.getParentPlid()));
-	%>
-
 	<aui:nav-bar>
 		<aui:nav cssClass="navbar-nav" id="layoutsNav">
 			<aui:nav-item cssClass="remove-layout" label="delete" />
 		</aui:nav>
 	</aui:nav-bar>
 
+	<%
+	PortletURL deleteRedirectURL = PortletURLUtil.clone(redirectURL, renderResponse);
+
+	deleteRedirectURL.setParameter("selPlid", String.valueOf(selLayout.getParentPlid()));
+	%>
+
 	<portlet:actionURL name="deleteLayout" var="deleteLayoutURL">
 		<portlet:param name="mvcPath" value="/view.jsp" />
-		<portlet:param name="redirect" value='<%= deleteRedirectURL.toString() %>' />
+		<portlet:param name="redirect" value="<%= deleteRedirectURL.toString() %>" />
 		<portlet:param name="plid" value="<%= String.valueOf(layoutsAdminDisplayContext.getSelPlid()) %>" />
 	</portlet:actionURL>
 
