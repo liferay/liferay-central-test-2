@@ -29,6 +29,7 @@ import java.util.Map;
 import java.util.concurrent.Callable;
 
 import org.gradle.api.Action;
+import org.gradle.api.DefaultTask;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.Task;
@@ -52,6 +53,8 @@ public class RootProjectConfigurator implements Plugin<Project> {
 
 	public static final String BUNDLE_CONFIGURATION_NAME = "bundle";
 
+	public static final String CLEAN_TASK_NAME = "clean";
+
 	public static final String DIST_BUNDLE_TAR_TASK_NAME = "distBundleTar";
 
 	public static final String DIST_BUNDLE_ZIP_TASK_NAME = "distBundleZip";
@@ -67,6 +70,8 @@ public class RootProjectConfigurator implements Plugin<Project> {
 			project, workspaceExtension);
 
 		addRepositoryBundle(project, workspaceExtension);
+
+		addTaskClean(project);
 
 		Tar distBundleTarTask = addTaskDistBundle(
 			project, DIST_BUNDLE_TAR_TASK_NAME, Tar.class, bundleConfiguration,
@@ -121,6 +126,25 @@ public class RootProjectConfigurator implements Plugin<Project> {
 				}
 
 			});
+	}
+
+	protected Task addTaskClean(Project project) {
+		final DefaultTask cleanTask = GradleUtil.addTask(
+			project, CLEAN_TASK_NAME, DefaultTask.class);
+
+		cleanTask.doLast(
+			new Action<Task>() {
+
+				@Override
+				public void execute(Task task) {
+					Project project = task.getProject();
+
+					project.delete(project.getBuildDir());
+				}
+
+			});
+
+		return cleanTask;
 	}
 
 	protected <T extends AbstractArchiveTask> T addTaskDistBundle(
