@@ -120,7 +120,7 @@ public class UpgradeMVCCVersion extends UpgradeProcess {
 	}
 
 	protected String[] getExcludedTables() {
-		return new String[] {};
+		return new String[0];
 	}
 
 	protected String[] getModuleTableNames() {
