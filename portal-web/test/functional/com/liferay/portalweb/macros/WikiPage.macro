@@ -352,6 +352,10 @@
 	<command name="addPG">
 		<execute function="Click#makeVisibleClickAt" locator1="Portlet#ICON_PLUS_SIGN" />
 
+		<execute function="Click" locator1="Wiki#ADD_PAGE" />
+
+		<execute function="AssertElementPresent" locator1="AlloyEditor#TITLE_FIELD" />
+
 		<execute function="Type#typeAlloyEditor" locator1="AlloyEditor#TITLE_FIELD" value1="${wikiPageTitle}" />
 
 		<var name="key_wikiPageTitle" value="${wikiPageTitle}" />
