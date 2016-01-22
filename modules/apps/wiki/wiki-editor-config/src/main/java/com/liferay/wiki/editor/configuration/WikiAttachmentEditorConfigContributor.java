@@ -167,25 +167,25 @@ public class WikiAttachmentEditorConfigContributor
 			return;
 		}
 
-		JSONArray oldButtonsJSONArray = addJSONObject.getJSONArray("buttons");
+		JSONArray buttonsJSONArray = addJSONObject.getJSONArray("buttons");
 
-		if (oldButtonsJSONArray == null) {
+		if (buttonsJSONArray == null) {
 			return;
 		}
 
-		Iterator iterator = oldButtonsJSONArray.iterator();
+		JSONArray newButtonsJSONArray = JSONFactoryUtil.createJSONArray();
 
-		JSONArray buttonsJSONArray = JSONFactoryUtil.createJSONArray();
+		Iterator iterator = buttonsJSONArray.iterator();
 
 		while (iterator.hasNext()) {
-			String buttonString = (String)iterator.next();
+			String button = (String)iterator.next();
 
-			if (!buttonString.equals("image")) {
-				buttonsJSONArray.put(buttonString);
+			if (!button.equals("image")) {
+				newButtonsJSONArray.put(button);
 			}
 		}
 
-		addJSONObject.put("buttons", buttonsJSONArray);
+		addJSONObject.put("buttons", newButtonsJSONArray);
 	}
 
 	private ItemSelector _itemSelector;
