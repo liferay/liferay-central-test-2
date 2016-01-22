@@ -51,32 +51,32 @@ public class JournalMediaConfigContributor extends BaseEditorConfigContributor {
 			return;
 		}
 
-		JSONObject toolbars = jsonObject.getJSONObject("toolbars");
+		JSONObject toolbarsJSONObject = jsonObject.getJSONObject("toolbars");
 
-		if (Validator.isNull(toolbars)) {
-			toolbars = JSONFactoryUtil.createJSONObject();
+		if (Validator.isNull(toolbarsJSONObject)) {
+			toolbarsJSONObject = JSONFactoryUtil.createJSONObject();
 		}
 
-		JSONObject toolbarAdd = toolbars.getJSONObject("add");
+		JSONObject addJSONObject = toolbarsJSONObject.getJSONObject("add");
 
-		if (Validator.isNull(toolbarAdd)) {
-			toolbarAdd = JSONFactoryUtil.createJSONObject();
+		if (Validator.isNull(addJSONObject)) {
+			addJSONObject = JSONFactoryUtil.createJSONObject();
 		}
 
-		JSONArray buttons = toolbarAdd.getJSONArray("buttons");
+		JSONArray buttonsJSONArray = addJSONObject.getJSONArray("buttons");
 
-		if (Validator.isNull(buttons)) {
-			buttons = JSONFactoryUtil.createJSONArray();
+		if (Validator.isNull(buttonsJSONArray)) {
+			buttonsJSONArray = JSONFactoryUtil.createJSONArray();
 		}
 
-		buttons.put("video");
-		buttons.put("audio");
+		buttonsJSONArray.put("video");
+		buttonsJSONArray.put("audio");
 
-		toolbarAdd.put("add", buttons);
+		addJSONObject.put("add", buttonsJSONArray);
 
-		toolbars.put("add", toolbarAdd);
+		toolbarsJSONObject.put("add", addJSONObject);
 
-		jsonObject.put("toolbars", toolbars);
+		jsonObject.put("toolbars", toolbarsJSONObject);
 	}
 
 }
