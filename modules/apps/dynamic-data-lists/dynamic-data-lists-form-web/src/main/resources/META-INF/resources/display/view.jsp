@@ -66,7 +66,7 @@ DDLRecordSet recordSet = ddlFormDisplayContext.getRecordSet();
 
 								<liferay-ui:message
 									arguments="<%= new Object[] {ddmFormFieldEvaluationResult.getName(), ddmFormFieldEvaluationResult.getErrorMessage()} %>"
-									key="a-validation-failed-for-field-x"
+									key="validation-failed-for-field-x"
 									translateArguments="<%= false %>"
 								/>
 
