@@ -137,24 +137,24 @@ if (portletTitleBasedNavigation) {
 		<div class="sidebar sidebar-default sidenav-menu">
 
 			<%
-			String tabNames = "details";
+			String tabsNames = "details";
 
 			if (showCustomFieldsTab) {
-				tabNames += ",custom-fields";
+				tabsNames += ",custom-fields";
 			}
 
 			if (dlViewFileVersionDisplayContext.getDDMStructuresCount() > 0) {
-				tabNames += ",document-type";
+				tabsNames += ",document-type";
 			}
 
-			tabNames += ",metadata";
+			tabsNames += ",metadata";
 
 			if (dlViewFileVersionDisplayContext.isVersionInfoVisible()) {
-				tabNames += ",versions";
+				tabsNames += ",versions";
 			}
 			%>
 
-			<liferay-ui:tabs names="<%= tabNames %>" refresh="<%= false %>" type="dropdown">
+			<liferay-ui:tabs names="<%= tabsNames %>" refresh="<%= false %>" type="dropdown">
 				<liferay-ui:section>
 					<div class="sidebar-body">
 						<c:if test="<%= dlViewFileVersionDisplayContext.isVersionInfoVisible() %>">
