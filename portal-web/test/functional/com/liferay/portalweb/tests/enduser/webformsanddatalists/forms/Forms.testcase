@@ -97,7 +97,7 @@
 			<var name="portlet" value="Forms" />
 		</execute>
 
-		<execute macro="FormsAdminNavigator#gotoAdd" />
+		<execute macro="FormsAdminNavigator#gotoAddForm" />
 
 		<execute macro="Form#editName">
 			<var name="formName" value="Text" />
@@ -130,7 +130,7 @@
 
 		<execute macro="Navigator#gotoBack" />
 
-		<execute macro="FormsAdminNavigator#gotoAdd" />
+		<execute macro="FormsAdminNavigator#gotoAddForm" />
 
 		<execute macro="Form#editName">
 			<var name="formName" value="Checkbox" />
@@ -290,7 +290,7 @@
 			<var name="portlet" value="Forms" />
 		</execute>
 
-		<execute macro="FormsAdminNavigator#gotoAdd" />
+		<execute macro="FormsAdminNavigator#gotoAddForm" />
 
 		<execute macro="Form#editName">
 			<var name="formName" value="Test Form" />
@@ -409,7 +409,7 @@
 			<var name="portlet" value="Forms" />
 		</execute>
 
-		<execute macro="FormsAdminNavigator#gotoAdd" />
+		<execute macro="FormsAdminNavigator#gotoAddForm" />
 
 		<execute macro="Form#editName" />
 
@@ -593,7 +593,7 @@
 			<var name="portlet" value="Forms" />
 		</execute>
 
-		<execute macro="FormsAdminNavigator#gotoAdd" />
+		<execute macro="FormsAdminNavigator#gotoAddForm" />
 
 		<execute macro="Form#editName" />
 
@@ -700,7 +700,7 @@
 			<var name="portlet" value="Forms" />
 		</execute>
 
-		<execute macro="FormsAdminNavigator#gotoAdd" />
+		<execute macro="FormsAdminNavigator#gotoAddForm" />
 
 		<execute macro="Form#editName" />
 
@@ -899,7 +899,7 @@
 			<var name="portlet" value="Forms" />
 		</execute>
 
-		<execute macro="FormsAdminNavigator#gotoAdd" />
+		<execute macro="FormsAdminNavigator#gotoAddForm" />
 
 		<execute macro="Form#saveWithoutFormName" />
 
@@ -919,7 +919,7 @@
 			<var name="portlet" value="Forms" />
 		</execute>
 
-		<execute macro="FormsAdminNavigator#gotoAdd" />
+		<execute macro="FormsAdminNavigator#gotoAddForm" />
 
 		<execute macro="Form#editName" />
 
@@ -1011,7 +1011,7 @@
 			<var name="portlet" value="Forms" />
 		</execute>
 
-		<execute macro="FormsAdminNavigator#gotoAdd" />
+		<execute macro="FormsAdminNavigator#gotoAddForm" />
 
 		<execute macro="Form#editName" />
 
@@ -1112,7 +1112,7 @@
 			<var name="portlet" value="Forms" />
 		</execute>
 
-		<execute macro="FormsAdminNavigator#gotoAdd" />
+		<execute macro="FormsAdminNavigator#gotoAddForm" />
 
 		<execute macro="Form#editName" />
 
@@ -1222,7 +1222,7 @@
 			<var name="portlet" value="Forms" />
 		</execute>
 
-		<execute macro="FormsAdminNavigator#gotoAdd" />
+		<execute macro="FormsAdminNavigator#gotoAddForm" />
 
 		<execute macro="Form#editName" />
 
@@ -1320,7 +1320,7 @@
 			<var name="portlet" value="Forms" />
 		</execute>
 
-		<execute macro="FormsAdminNavigator#gotoAdd" />
+		<execute macro="FormsAdminNavigator#gotoAddForm" />
 
 		<execute macro="Form#editName" />
 
@@ -1415,7 +1415,7 @@
 			<var name="portlet" value="Forms" />
 		</execute>
 
-		<execute macro="FormsAdminNavigator#gotoAdd" />
+		<execute macro="FormsAdminNavigator#gotoAddForm" />
 
 		<execute macro="Form#editName" />
 
@@ -1505,7 +1505,7 @@
 			<var name="portlet" value="Forms" />
 		</execute>
 
-		<execute macro="FormsAdminNavigator#gotoAdd" />
+		<execute macro="FormsAdminNavigator#gotoAddForm" />
 
 		<execute macro="Form#editName" />
 
@@ -1592,7 +1592,7 @@
 			<var name="portlet" value="Forms" />
 		</execute>
 
-		<execute macro="FormsAdminNavigator#gotoAdd" />
+		<execute macro="FormsAdminNavigator#gotoAddForm" />
 
 		<execute macro="Form#editName" />
 
@@ -1773,7 +1773,7 @@
 			<var name="portlet" value="Forms" />
 		</execute>
 
-		<execute macro="FormsAdminNavigator#gotoAdd" />
+		<execute macro="FormsAdminNavigator#gotoAddForm" />
 
 		<execute macro="Form#editName" />
 
@@ -1845,7 +1845,7 @@
 			<var name="portlet" value="Forms" />
 		</execute>
 
-		<execute macro="FormsAdminNavigator#gotoAdd" />
+		<execute macro="FormsAdminNavigator#gotoAddForm" />
 
 		<execute macro="Form#editName" />
 
