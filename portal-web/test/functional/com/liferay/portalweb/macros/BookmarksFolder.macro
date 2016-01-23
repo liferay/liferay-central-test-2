@@ -258,7 +258,7 @@
 
 		<var name="key_folderName" value="${editSubfolderName}" />
 
-		<execute function="AssertElementPresent" locator1="Checkbox#MERGE_WITH_PARENT_FOLDER" />
+		<execute function="Click" locator1="Bookmarks#PARENT_FOLDER_PANEL" />
 
 		<execute function="Check" locator1="Checkbox#MERGE_WITH_PARENT_FOLDER" value1="Merge with Parent Folder" />
 
