@@ -405,6 +405,12 @@
 		<execute function="SelectFrame" value1="relative=top" />
 	</command>
 
+	<command name="addViaCKEditor">
+		<execute function="Type#mouseOverFocusType" locator1="TextInput#TITLE" value1="${webContentTitle}" />
+
+		<execute function="Type#typeCKEditorWaitForCKEditor" locator1="CKEditor#BODY_FIELD" value1="${webContentContent}" />
+	</command>
+
 	<command name="addWithCategoryCP">
 		<execute macro="WebContent#addCP">
 			<var name="webContentContent" value="${webContentContent}" />
