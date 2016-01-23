@@ -27,8 +27,8 @@ import com.liferay.portal.model.TreeModel;
 	@Deprecated
 </#if>
 
-@ProviderType
 @ImplementationClassName("${packagePath}.model.impl.${entity.name}Impl")
+@ProviderType
 public interface ${entity.name} extends
 	${entity.name}Model
 
