@@ -30,8 +30,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.portlet.asset.model.impl.AssetCategoryModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portlet.asset.model.impl.AssetCategoryImpl")
+@ProviderType
 public interface AssetCategory extends AssetCategoryModel,
 	NestedSetsTreeNodeModel, PersistedModel {
 	/*

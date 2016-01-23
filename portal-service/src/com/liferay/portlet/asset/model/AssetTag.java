@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.portlet.asset.model.impl.AssetTagModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portlet.asset.model.impl.AssetTagImpl")
+@ProviderType
 public interface AssetTag extends AssetTagModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

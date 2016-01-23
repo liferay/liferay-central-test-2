@@ -28,8 +28,8 @@ import com.liferay.portal.kernel.util.Accessor;
  * @see com.liferay.portal.model.impl.RecentLayoutRevisionModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portal.model.impl.RecentLayoutRevisionImpl")
+@ProviderType
 public interface RecentLayoutRevision extends RecentLayoutRevisionModel,
 	PersistedModel {
 	/*

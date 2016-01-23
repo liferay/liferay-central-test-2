@@ -29,8 +29,8 @@ import com.liferay.portal.model.PermissionedModel;
  * @see com.liferay.calendar.model.impl.CalendarModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.calendar.model.impl.CalendarImpl")
+@ProviderType
 public interface Calendar extends CalendarModel, PermissionedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

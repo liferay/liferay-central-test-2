@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.portlet.social.model.impl.SocialActivityCounterModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portlet.social.model.impl.SocialActivityCounterImpl")
+@ProviderType
 public interface SocialActivityCounter extends SocialActivityCounterModel,
 	PersistedModel {
 	/*

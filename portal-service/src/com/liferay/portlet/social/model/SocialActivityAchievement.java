@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.portlet.social.model.impl.SocialActivityAchievementModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portlet.social.model.impl.SocialActivityAchievementImpl")
+@ProviderType
 public interface SocialActivityAchievement
 	extends SocialActivityAchievementModel, PersistedModel {
 	/*

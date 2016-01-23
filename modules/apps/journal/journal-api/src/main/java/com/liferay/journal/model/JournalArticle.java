@@ -30,8 +30,8 @@ import com.liferay.portal.model.TreeModel;
  * @see com.liferay.journal.model.impl.JournalArticleModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.journal.model.impl.JournalArticleImpl")
+@ProviderType
 public interface JournalArticle extends JournalArticleModel, PersistedModel,
 	TreeModel {
 	/*

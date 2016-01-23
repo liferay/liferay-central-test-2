@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.portlet.announcements.model.impl.AnnouncementsFlagModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portlet.announcements.model.impl.AnnouncementsFlagImpl")
+@ProviderType
 public interface AnnouncementsFlag extends AnnouncementsFlagModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

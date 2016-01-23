@@ -28,8 +28,8 @@ import com.liferay.portal.kernel.util.Accessor;
  * @see com.liferay.portal.model.impl.PasswordPolicyModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portal.model.impl.PasswordPolicyImpl")
+@ProviderType
 public interface PasswordPolicy extends PasswordPolicyModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

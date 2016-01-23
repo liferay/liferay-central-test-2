@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.portlet.exportimport.model.impl.ExportImportConfigurationModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portlet.exportimport.model.impl.ExportImportConfigurationImpl")
+@ProviderType
 public interface ExportImportConfiguration
 	extends ExportImportConfigurationModel, PersistedModel {
 	/*

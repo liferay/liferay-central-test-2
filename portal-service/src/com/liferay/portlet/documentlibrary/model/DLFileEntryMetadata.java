@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.portlet.documentlibrary.model.impl.DLFileEntryMetadataModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portlet.documentlibrary.model.impl.DLFileEntryMetadataImpl")
+@ProviderType
 public interface DLFileEntryMetadata extends DLFileEntryMetadataModel,
 	PersistedModel {
 	/*

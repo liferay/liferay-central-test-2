@@ -28,8 +28,8 @@ import com.liferay.portal.kernel.util.Accessor;
  * @see com.liferay.portal.model.impl.ClassNameModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portal.model.impl.ClassNameImpl")
+@ProviderType
 public interface ClassName extends ClassNameModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

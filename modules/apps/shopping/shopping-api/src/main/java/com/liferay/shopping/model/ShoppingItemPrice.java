@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.shopping.model.impl.ShoppingItemPriceModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.shopping.model.impl.ShoppingItemPriceImpl")
+@ProviderType
 public interface ShoppingItemPrice extends ShoppingItemPriceModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

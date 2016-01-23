@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.portlet.messageboards.model.impl.MBThreadModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portlet.messageboards.model.impl.MBThreadImpl")
+@ProviderType
 public interface MBThread extends MBThreadModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

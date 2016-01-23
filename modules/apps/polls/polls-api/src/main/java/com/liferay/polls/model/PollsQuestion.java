@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.polls.model.impl.PollsQuestionModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.polls.model.impl.PollsQuestionImpl")
+@ProviderType
 public interface PollsQuestion extends PollsQuestionModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

@@ -28,8 +28,8 @@ import com.liferay.portal.kernel.util.Accessor;
  * @see com.liferay.portal.model.impl.RepositoryModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portal.model.impl.RepositoryImpl")
+@ProviderType
 public interface Repository extends RepositoryModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

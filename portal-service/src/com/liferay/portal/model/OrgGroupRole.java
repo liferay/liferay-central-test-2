@@ -28,8 +28,8 @@ import com.liferay.portal.kernel.util.Accessor;
  * @see com.liferay.portal.model.impl.OrgGroupRoleModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portal.model.impl.OrgGroupRoleImpl")
+@ProviderType
 public interface OrgGroupRole extends OrgGroupRoleModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

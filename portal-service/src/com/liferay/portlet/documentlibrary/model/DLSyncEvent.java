@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.portlet.documentlibrary.model.impl.DLSyncEventModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portlet.documentlibrary.model.impl.DLSyncEventImpl")
+@ProviderType
 public interface DLSyncEvent extends DLSyncEventModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

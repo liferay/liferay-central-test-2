@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.portlet.asset.model.impl.AssetEntryModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portlet.asset.model.impl.AssetEntryImpl")
+@ProviderType
 public interface AssetEntry extends AssetEntryModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

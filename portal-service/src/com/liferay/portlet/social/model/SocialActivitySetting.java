@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.portlet.social.model.impl.SocialActivitySettingModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portlet.social.model.impl.SocialActivitySettingImpl")
+@ProviderType
 public interface SocialActivitySetting extends SocialActivitySettingModel,
 	PersistedModel {
 	/*

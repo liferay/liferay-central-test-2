@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.dynamic.data.lists.model.impl.DDLRecordModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.dynamic.data.lists.model.impl.DDLRecordImpl")
+@ProviderType
 public interface DDLRecord extends DDLRecordModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

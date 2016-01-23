@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.portal.lock.model.impl.LockModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portal.lock.model.impl.LockImpl")
+@ProviderType
 public interface Lock extends LockModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

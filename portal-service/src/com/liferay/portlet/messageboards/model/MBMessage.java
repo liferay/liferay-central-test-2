@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.portlet.messageboards.model.impl.MBMessageModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portlet.messageboards.model.impl.MBMessageImpl")
+@ProviderType
 public interface MBMessage extends MBMessageModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

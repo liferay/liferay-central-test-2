@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.wiki.model.impl.WikiPageModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.wiki.model.impl.WikiPageImpl")
+@ProviderType
 public interface WikiPage extends WikiPageModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

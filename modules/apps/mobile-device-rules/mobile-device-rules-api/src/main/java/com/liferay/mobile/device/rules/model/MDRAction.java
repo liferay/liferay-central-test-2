@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.mobile.device.rules.model.impl.MDRActionModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.mobile.device.rules.model.impl.MDRActionImpl")
+@ProviderType
 public interface MDRAction extends MDRActionModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

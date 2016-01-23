@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.calendar.model.impl.CalendarNotificationTemplateModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.calendar.model.impl.CalendarNotificationTemplateImpl")
+@ProviderType
 public interface CalendarNotificationTemplate
 	extends CalendarNotificationTemplateModel, PersistedModel {
 	/*

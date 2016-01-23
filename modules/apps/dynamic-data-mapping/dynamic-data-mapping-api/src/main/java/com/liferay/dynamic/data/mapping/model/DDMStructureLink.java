@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.dynamic.data.mapping.model.impl.DDMStructureLinkModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.dynamic.data.mapping.model.impl.DDMStructureLinkImpl")
+@ProviderType
 public interface DDMStructureLink extends DDMStructureLinkModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

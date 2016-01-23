@@ -28,8 +28,8 @@ import com.liferay.portal.kernel.util.Accessor;
  * @see com.liferay.portal.model.impl.LayoutSetPrototypeModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portal.model.impl.LayoutSetPrototypeImpl")
+@ProviderType
 public interface LayoutSetPrototype extends LayoutSetPrototypeModel,
 	PersistedModel {
 	/*

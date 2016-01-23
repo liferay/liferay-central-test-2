@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.portlet.asset.model.impl.AssetLinkModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portlet.asset.model.impl.AssetLinkImpl")
+@ProviderType
 public interface AssetLink extends AssetLinkModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

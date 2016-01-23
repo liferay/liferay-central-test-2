@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.social.networking.model.impl.MeetupsEntryModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.social.networking.model.impl.MeetupsEntryImpl")
+@ProviderType
 public interface MeetupsEntry extends MeetupsEntryModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

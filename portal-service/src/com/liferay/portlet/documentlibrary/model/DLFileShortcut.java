@@ -30,8 +30,8 @@ import com.liferay.portal.model.TreeModel;
  * @see com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutImpl")
+@ProviderType
 public interface DLFileShortcut extends DLFileShortcutModel, PersistedModel,
 	TreeModel {
 	/*

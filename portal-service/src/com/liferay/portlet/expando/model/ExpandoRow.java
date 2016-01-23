@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.portlet.expando.model.impl.ExpandoRowModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portlet.expando.model.impl.ExpandoRowImpl")
+@ProviderType
 public interface ExpandoRow extends ExpandoRowModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

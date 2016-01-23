@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.journal.model.impl.JournalContentSearchModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.journal.model.impl.JournalContentSearchImpl")
+@ProviderType
 public interface JournalContentSearch extends JournalContentSearchModel,
 	PersistedModel {
 	/*

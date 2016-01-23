@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.service.access.policy.model.impl.SAPEntryModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.service.access.policy.model.impl.SAPEntryImpl")
+@ProviderType
 public interface SAPEntry extends SAPEntryModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

@@ -28,8 +28,8 @@ import com.liferay.portal.kernel.util.Accessor;
  * @see com.liferay.portal.model.impl.RegionModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portal.model.impl.RegionImpl")
+@ProviderType
 public interface Region extends RegionModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

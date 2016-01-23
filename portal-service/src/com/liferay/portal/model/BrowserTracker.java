@@ -28,8 +28,8 @@ import com.liferay.portal.kernel.util.Accessor;
  * @see com.liferay.portal.model.impl.BrowserTrackerModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portal.model.impl.BrowserTrackerImpl")
+@ProviderType
 public interface BrowserTracker extends BrowserTrackerModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

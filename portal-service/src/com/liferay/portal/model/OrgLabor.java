@@ -28,8 +28,8 @@ import com.liferay.portal.kernel.util.Accessor;
  * @see com.liferay.portal.model.impl.OrgLaborModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portal.model.impl.OrgLaborImpl")
+@ProviderType
 public interface OrgLabor extends OrgLaborModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

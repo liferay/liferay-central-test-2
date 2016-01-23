@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.journal.model.impl.JournalArticleResourceModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.journal.model.impl.JournalArticleResourceImpl")
+@ProviderType
 public interface JournalArticleResource extends JournalArticleResourceModel,
 	PersistedModel {
 	/*

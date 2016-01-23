@@ -28,8 +28,8 @@ import com.liferay.portal.kernel.util.Accessor;
  * @see com.liferay.portal.model.impl.VirtualHostModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portal.model.impl.VirtualHostImpl")
+@ProviderType
 public interface VirtualHost extends VirtualHostModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

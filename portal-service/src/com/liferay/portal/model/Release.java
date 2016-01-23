@@ -28,8 +28,8 @@ import com.liferay.portal.kernel.util.Accessor;
  * @see com.liferay.portal.model.impl.ReleaseModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portal.model.impl.ReleaseImpl")
+@ProviderType
 public interface Release extends ReleaseModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

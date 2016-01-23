@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.portal.workflow.kaleo.model.impl.KaleoLogModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portal.workflow.kaleo.model.impl.KaleoLogImpl")
+@ProviderType
 public interface KaleoLog extends KaleoLogModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

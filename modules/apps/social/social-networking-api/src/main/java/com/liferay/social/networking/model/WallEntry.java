@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.social.networking.model.impl.WallEntryModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.social.networking.model.impl.WallEntryImpl")
+@ProviderType
 public interface WallEntry extends WallEntryModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

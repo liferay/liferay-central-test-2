@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.portlet.messageboards.model.impl.MBDiscussionModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portlet.messageboards.model.impl.MBDiscussionImpl")
+@ProviderType
 public interface MBDiscussion extends MBDiscussionModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

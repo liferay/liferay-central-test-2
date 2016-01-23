@@ -30,8 +30,8 @@ import com.liferay.portal.model.TreeModel;
  * @see com.liferay.portlet.documentlibrary.model.impl.DLFileVersionModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portlet.documentlibrary.model.impl.DLFileVersionImpl")
+@ProviderType
 public interface DLFileVersion extends DLFileVersionModel, PersistedModel,
 	TreeModel {
 	/*

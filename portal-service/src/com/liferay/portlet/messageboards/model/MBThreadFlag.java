@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.portlet.messageboards.model.impl.MBThreadFlagModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portlet.messageboards.model.impl.MBThreadFlagImpl")
+@ProviderType
 public interface MBThreadFlag extends MBThreadFlagModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

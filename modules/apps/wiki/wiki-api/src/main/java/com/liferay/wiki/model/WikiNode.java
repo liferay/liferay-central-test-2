@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.wiki.model.impl.WikiNodeModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.wiki.model.impl.WikiNodeImpl")
+@ProviderType
 public interface WikiNode extends WikiNodeModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.portal.background.task.model.impl.BackgroundTaskModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portal.background.task.model.impl.BackgroundTaskImpl")
+@ProviderType
 public interface BackgroundTask extends BackgroundTaskModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

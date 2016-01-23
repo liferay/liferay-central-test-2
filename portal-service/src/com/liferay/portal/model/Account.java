@@ -28,8 +28,8 @@ import com.liferay.portal.kernel.util.Accessor;
  * @see com.liferay.portal.model.impl.AccountModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portal.model.impl.AccountImpl")
+@ProviderType
 public interface Account extends AccountModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

@@ -28,8 +28,8 @@ import com.liferay.portal.kernel.util.Accessor;
  * @see com.liferay.portal.model.impl.LayoutSetBranchModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portal.model.impl.LayoutSetBranchImpl")
+@ProviderType
 public interface LayoutSetBranch extends LayoutSetBranchModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

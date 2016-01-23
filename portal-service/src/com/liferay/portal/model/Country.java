@@ -28,8 +28,8 @@ import com.liferay.portal.kernel.util.Accessor;
  * @see com.liferay.portal.model.impl.CountryModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portal.model.impl.CountryImpl")
+@ProviderType
 public interface Country extends CountryModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

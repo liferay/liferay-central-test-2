@@ -30,8 +30,8 @@ import com.liferay.portal.model.TreeModel;
  * @see com.liferay.portlet.documentlibrary.model.impl.DLFolderModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl")
+@ProviderType
 public interface DLFolder extends DLFolderModel, PersistedModel, TreeModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
