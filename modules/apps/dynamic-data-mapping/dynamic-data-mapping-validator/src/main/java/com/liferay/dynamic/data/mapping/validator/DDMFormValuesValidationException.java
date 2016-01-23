@@ -107,8 +107,7 @@ public class DDMFormValuesValidationException extends StorageException {
 		public MustSetValidField(String fieldName) {
 			super(
 				String.format(
-					"There is no field name %s defined on form",
-					fieldName));
+					"There is no field name %s defined on form", fieldName));
 
 			_fieldName = fieldName;
 		}
