@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.portlet.documentlibrary.model.impl.DLFileRankModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl")
+@ProviderType
 public interface DLFileRank extends DLFileRankModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

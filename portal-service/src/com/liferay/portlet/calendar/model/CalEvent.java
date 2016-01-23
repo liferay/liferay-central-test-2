@@ -31,8 +31,8 @@ import com.liferay.portal.model.PersistedModel;
  * @generated
  */
 @Deprecated
-@ProviderType
 @ImplementationClassName("com.liferay.portlet.calendar.model.impl.CalEventImpl")
+@ProviderType
 public interface CalEvent extends CalEventModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.portlet.social.model.impl.SocialRequestModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portlet.social.model.impl.SocialRequestImpl")
+@ProviderType
 public interface SocialRequest extends SocialRequestModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

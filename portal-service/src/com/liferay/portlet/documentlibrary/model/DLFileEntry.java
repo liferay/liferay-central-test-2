@@ -30,8 +30,8 @@ import com.liferay.portal.model.TreeModel;
  * @see com.liferay.portlet.documentlibrary.model.impl.DLFileEntryModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl")
+@ProviderType
 public interface DLFileEntry extends DLFileEntryModel, PersistedModel, TreeModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

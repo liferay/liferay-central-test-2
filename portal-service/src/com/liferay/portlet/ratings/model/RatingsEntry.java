@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.portlet.ratings.model.impl.RatingsEntryModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portlet.ratings.model.impl.RatingsEntryImpl")
+@ProviderType
 public interface RatingsEntry extends RatingsEntryModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

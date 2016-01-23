@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.marketplace.model.impl.ModuleModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.marketplace.model.impl.ModuleImpl")
+@ProviderType
 public interface Module extends ModuleModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

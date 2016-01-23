@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.counter.model.impl.CounterModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.counter.model.impl.CounterImpl")
+@ProviderType
 public interface Counter extends CounterModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

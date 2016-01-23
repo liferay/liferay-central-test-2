@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.portal.workflow.kaleo.model.impl.KaleoNotificationRecipientModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portal.workflow.kaleo.model.impl.KaleoNotificationRecipientImpl")
+@ProviderType
 public interface KaleoNotificationRecipient
 	extends KaleoNotificationRecipientModel, PersistedModel {
 	/*

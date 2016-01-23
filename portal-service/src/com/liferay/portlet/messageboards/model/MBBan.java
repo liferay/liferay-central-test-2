@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.portlet.messageboards.model.impl.MBBanModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portlet.messageboards.model.impl.MBBanImpl")
+@ProviderType
 public interface MBBan extends MBBanModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

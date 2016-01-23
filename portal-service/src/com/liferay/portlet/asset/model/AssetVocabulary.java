@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.portlet.asset.model.impl.AssetVocabularyModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portlet.asset.model.impl.AssetVocabularyImpl")
+@ProviderType
 public interface AssetVocabulary extends AssetVocabularyModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

@@ -28,8 +28,8 @@ import com.liferay.portal.kernel.util.Accessor;
  * @see com.liferay.portal.model.impl.ClusterGroupModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portal.model.impl.ClusterGroupImpl")
+@ProviderType
 public interface ClusterGroup extends ClusterGroupModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.portal.workflow.kaleo.model.impl.KaleoTimerModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portal.workflow.kaleo.model.impl.KaleoTimerImpl")
+@ProviderType
 public interface KaleoTimer extends KaleoTimerModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

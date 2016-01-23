@@ -28,8 +28,8 @@ import com.liferay.portal.kernel.util.Accessor;
  * @see com.liferay.portal.model.impl.ImageModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portal.model.impl.ImageImpl")
+@ProviderType
 public interface Image extends ImageModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

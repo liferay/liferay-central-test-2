@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.dynamic.data.mapping.model.impl.DDMStorageLinkModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.dynamic.data.mapping.model.impl.DDMStorageLinkImpl")
+@ProviderType
 public interface DDMStorageLink extends DDMStorageLinkModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

@@ -28,8 +28,8 @@ import com.liferay.portal.kernel.util.Accessor;
  * @see com.liferay.portal.model.impl.RecentLayoutSetBranchModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portal.model.impl.RecentLayoutSetBranchImpl")
+@ProviderType
 public interface RecentLayoutSetBranch extends RecentLayoutSetBranchModel,
 	PersistedModel {
 	/*

@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.dynamic.data.mapping.model.impl.DDMDataProviderInstanceModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.dynamic.data.mapping.model.impl.DDMDataProviderInstanceImpl")
+@ProviderType
 public interface DDMDataProviderInstance extends DDMDataProviderInstanceModel,
 	PersistedModel {
 	/*

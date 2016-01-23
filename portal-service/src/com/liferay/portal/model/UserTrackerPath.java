@@ -28,8 +28,8 @@ import com.liferay.portal.kernel.util.Accessor;
  * @see com.liferay.portal.model.impl.UserTrackerPathModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portal.model.impl.UserTrackerPathImpl")
+@ProviderType
 public interface UserTrackerPath extends UserTrackerPathModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

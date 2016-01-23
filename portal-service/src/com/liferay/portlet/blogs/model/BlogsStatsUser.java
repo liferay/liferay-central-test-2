@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.portlet.blogs.model.impl.BlogsStatsUserModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portlet.blogs.model.impl.BlogsStatsUserImpl")
+@ProviderType
 public interface BlogsStatsUser extends BlogsStatsUserModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

@@ -28,8 +28,8 @@ import com.liferay.portal.kernel.util.Accessor;
  * @see com.liferay.portal.model.impl.GroupModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portal.model.impl.GroupImpl")
+@ProviderType
 public interface Group extends GroupModel, PersistedModel, TreeModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

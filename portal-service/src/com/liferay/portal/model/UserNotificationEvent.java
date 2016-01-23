@@ -28,8 +28,8 @@ import com.liferay.portal.kernel.util.Accessor;
  * @see com.liferay.portal.model.impl.UserNotificationEventModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portal.model.impl.UserNotificationEventImpl")
+@ProviderType
 public interface UserNotificationEvent extends UserNotificationEventModel,
 	PersistedModel {
 	/*

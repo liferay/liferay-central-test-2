@@ -28,8 +28,8 @@ import com.liferay.portal.kernel.util.Accessor;
  * @see com.liferay.portal.model.impl.PortalPreferencesModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portal.model.impl.PortalPreferencesImpl")
+@ProviderType
 public interface PortalPreferences extends PortalPreferencesModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

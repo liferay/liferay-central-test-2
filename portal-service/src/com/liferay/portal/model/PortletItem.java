@@ -28,8 +28,8 @@ import com.liferay.portal.kernel.util.Accessor;
  * @see com.liferay.portal.model.impl.PortletItemModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portal.model.impl.PortletItemImpl")
+@ProviderType
 public interface PortletItem extends PortletItemModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

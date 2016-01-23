@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.mobile.device.rules.model.impl.MDRRuleModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.mobile.device.rules.model.impl.MDRRuleImpl")
+@ProviderType
 public interface MDRRule extends MDRRuleModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

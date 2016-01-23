@@ -28,8 +28,8 @@ import com.liferay.portal.kernel.util.Accessor;
  * @see com.liferay.portal.model.impl.CompanyModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portal.model.impl.CompanyImpl")
+@ProviderType
 public interface Company extends CompanyModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

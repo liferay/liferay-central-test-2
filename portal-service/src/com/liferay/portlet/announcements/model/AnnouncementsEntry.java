@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.portlet.announcements.model.impl.AnnouncementsEntryModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portlet.announcements.model.impl.AnnouncementsEntryImpl")
+@ProviderType
 public interface AnnouncementsEntry extends AnnouncementsEntryModel,
 	PersistedModel {
 	/*

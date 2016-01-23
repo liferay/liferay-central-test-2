@@ -28,8 +28,8 @@ import com.liferay.portal.kernel.util.Accessor;
  * @see com.liferay.portal.model.impl.ResourceActionModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portal.model.impl.ResourceActionImpl")
+@ProviderType
 public interface ResourceAction extends ResourceActionModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

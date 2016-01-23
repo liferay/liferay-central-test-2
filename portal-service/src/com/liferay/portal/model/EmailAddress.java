@@ -28,8 +28,8 @@ import com.liferay.portal.kernel.util.Accessor;
  * @see com.liferay.portal.model.impl.EmailAddressModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portal.model.impl.EmailAddressImpl")
+@ProviderType
 public interface EmailAddress extends EmailAddressModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

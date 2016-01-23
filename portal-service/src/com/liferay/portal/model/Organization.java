@@ -28,8 +28,8 @@ import com.liferay.portal.kernel.util.Accessor;
  * @see com.liferay.portal.model.impl.OrganizationModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portal.model.impl.OrganizationImpl")
+@ProviderType
 public interface Organization extends OrganizationModel, PersistedModel,
 	TreeModel {
 	/*

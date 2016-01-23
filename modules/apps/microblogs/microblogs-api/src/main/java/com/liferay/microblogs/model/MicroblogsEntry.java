@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.microblogs.model.impl.MicroblogsEntryModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.microblogs.model.impl.MicroblogsEntryImpl")
+@ProviderType
 public interface MicroblogsEntry extends MicroblogsEntryModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

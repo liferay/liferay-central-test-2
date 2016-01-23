@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.dynamic.data.mapping.model.impl.DDMStructureModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.dynamic.data.mapping.model.impl.DDMStructureImpl")
+@ProviderType
 public interface DDMStructure extends DDMStructureModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

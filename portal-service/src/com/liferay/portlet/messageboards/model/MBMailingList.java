@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.portlet.messageboards.model.impl.MBMailingListModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portlet.messageboards.model.impl.MBMailingListImpl")
+@ProviderType
 public interface MBMailingList extends MBMailingListModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

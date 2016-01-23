@@ -28,8 +28,8 @@ import com.liferay.portal.kernel.util.Accessor;
  * @see com.liferay.portal.model.impl.ListTypeModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portal.model.impl.ListTypeImpl")
+@ProviderType
 public interface ListType extends ListTypeModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

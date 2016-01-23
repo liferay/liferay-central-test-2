@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.portlet.asset.model.impl.AssetCategoryPropertyModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portlet.asset.model.impl.AssetCategoryPropertyImpl")
+@ProviderType
 public interface AssetCategoryProperty extends AssetCategoryPropertyModel,
 	PersistedModel {
 	/*

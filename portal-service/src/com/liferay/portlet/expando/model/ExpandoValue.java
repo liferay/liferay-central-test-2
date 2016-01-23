@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.portlet.expando.model.impl.ExpandoValueModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portlet.expando.model.impl.ExpandoValueImpl")
+@ProviderType
 public interface ExpandoValue extends ExpandoValueModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.portal.workflow.kaleo.model.impl.KaleoTaskAssignmentInstanceModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portal.workflow.kaleo.model.impl.KaleoTaskAssignmentInstanceImpl")
+@ProviderType
 public interface KaleoTaskAssignmentInstance
 	extends KaleoTaskAssignmentInstanceModel, PersistedModel {
 	/*

@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.portlet.social.model.impl.SocialActivityLimitModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portlet.social.model.impl.SocialActivityLimitImpl")
+@ProviderType
 public interface SocialActivityLimit extends SocialActivityLimitModel,
 	PersistedModel {
 	/*

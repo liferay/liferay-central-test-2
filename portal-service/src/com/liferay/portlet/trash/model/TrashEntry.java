@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.portlet.trash.model.impl.TrashEntryModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portlet.trash.model.impl.TrashEntryImpl")
+@ProviderType
 public interface TrashEntry extends TrashEntryModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

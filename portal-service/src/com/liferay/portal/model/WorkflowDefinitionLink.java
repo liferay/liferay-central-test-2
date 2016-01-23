@@ -28,8 +28,8 @@ import com.liferay.portal.kernel.util.Accessor;
  * @see com.liferay.portal.model.impl.WorkflowDefinitionLinkModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portal.model.impl.WorkflowDefinitionLinkImpl")
+@ProviderType
 public interface WorkflowDefinitionLink extends WorkflowDefinitionLinkModel,
 	PersistedModel {
 	/*

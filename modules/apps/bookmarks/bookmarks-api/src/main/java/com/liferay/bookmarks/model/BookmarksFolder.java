@@ -30,8 +30,8 @@ import com.liferay.portal.model.TreeModel;
  * @see com.liferay.bookmarks.model.impl.BookmarksFolderModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.bookmarks.model.impl.BookmarksFolderImpl")
+@ProviderType
 public interface BookmarksFolder extends BookmarksFolderModel, PermissionedModel,
 	TreeModel {
 	/*

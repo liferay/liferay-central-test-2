@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryImpl")
+@ProviderType
 public interface AnnouncementsDelivery extends AnnouncementsDeliveryModel,
 	PersistedModel {
 	/*

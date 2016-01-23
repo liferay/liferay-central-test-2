@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.portlet.messageboards.model.impl.MBStatsUserModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portlet.messageboards.model.impl.MBStatsUserImpl")
+@ProviderType
 public interface MBStatsUser extends MBStatsUserModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

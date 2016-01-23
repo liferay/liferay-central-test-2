@@ -28,8 +28,8 @@ import com.liferay.portal.kernel.util.Accessor;
  * @see com.liferay.portal.model.impl.WebsiteModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portal.model.impl.WebsiteImpl")
+@ProviderType
 public interface Website extends WebsiteModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

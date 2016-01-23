@@ -28,8 +28,8 @@ import com.liferay.portal.kernel.util.Accessor;
  * @see com.liferay.portal.model.impl.MembershipRequestModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portal.model.impl.MembershipRequestImpl")
+@ProviderType
 public interface MembershipRequest extends MembershipRequestModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

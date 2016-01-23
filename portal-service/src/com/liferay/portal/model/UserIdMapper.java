@@ -28,8 +28,8 @@ import com.liferay.portal.kernel.util.Accessor;
  * @see com.liferay.portal.model.impl.UserIdMapperModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portal.model.impl.UserIdMapperImpl")
+@ProviderType
 public interface UserIdMapper extends UserIdMapperModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

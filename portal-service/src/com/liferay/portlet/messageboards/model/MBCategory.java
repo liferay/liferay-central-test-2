@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.portlet.messageboards.model.impl.MBCategoryModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portlet.messageboards.model.impl.MBCategoryImpl")
+@ProviderType
 public interface MBCategory extends MBCategoryModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

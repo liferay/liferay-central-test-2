@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.portal.workflow.kaleo.model.impl.KaleoConditionModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portal.workflow.kaleo.model.impl.KaleoConditionImpl")
+@ProviderType
 public interface KaleoCondition extends KaleoConditionModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

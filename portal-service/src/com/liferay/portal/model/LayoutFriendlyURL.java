@@ -28,8 +28,8 @@ import com.liferay.portal.kernel.util.Accessor;
  * @see com.liferay.portal.model.impl.LayoutFriendlyURLModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portal.model.impl.LayoutFriendlyURLImpl")
+@ProviderType
 public interface LayoutFriendlyURL extends LayoutFriendlyURLModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

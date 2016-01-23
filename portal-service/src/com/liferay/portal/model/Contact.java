@@ -28,8 +28,8 @@ import com.liferay.portal.kernel.util.Accessor;
  * @see com.liferay.portal.model.impl.ContactModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portal.model.impl.ContactImpl")
+@ProviderType
 public interface Contact extends ContactModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

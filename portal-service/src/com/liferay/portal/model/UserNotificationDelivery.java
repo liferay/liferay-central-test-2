@@ -28,8 +28,8 @@ import com.liferay.portal.kernel.util.Accessor;
  * @see com.liferay.portal.model.impl.UserNotificationDeliveryModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portal.model.impl.UserNotificationDeliveryImpl")
+@ProviderType
 public interface UserNotificationDelivery extends UserNotificationDeliveryModel,
 	PersistedModel {
 	/*

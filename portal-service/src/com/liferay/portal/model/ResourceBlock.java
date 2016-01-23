@@ -28,8 +28,8 @@ import com.liferay.portal.kernel.util.Accessor;
  * @see com.liferay.portal.model.impl.ResourceBlockModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portal.model.impl.ResourceBlockImpl")
+@ProviderType
 public interface ResourceBlock extends ResourceBlockModel, PermissionedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

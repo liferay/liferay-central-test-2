@@ -29,8 +29,8 @@ import com.liferay.portal.kernel.util.LocaleThreadLocal;
  * @see com.liferay.portal.model.impl.RoleModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portal.model.impl.RoleImpl")
+@ProviderType
 public interface Role extends RoleModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

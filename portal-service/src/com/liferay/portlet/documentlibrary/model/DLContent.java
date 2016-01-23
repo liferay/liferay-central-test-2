@@ -29,8 +29,8 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.portlet.documentlibrary.model.impl.DLContentModelImpl
  * @generated
  */
-@ProviderType
 @ImplementationClassName("com.liferay.portlet.documentlibrary.model.impl.DLContentImpl")
+@ProviderType
 public interface DLContent extends DLContentModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
