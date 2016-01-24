@@ -123,16 +123,16 @@ public class ScriptDataPortletFilter implements RenderFilter, ResourceFilter {
 	}
 
 	private MimeResponseImpl _getMimeResponseImpl(MimeResponse mimeResponse) {
+		while (!(mimeResponse instanceof MimeResponseImpl) &&
+			(mimeResponse instanceof PortletResponseWrapper)) {
 
-		while (!(mimeResponse instanceof MimeResponseImpl)) {
-			if (mimeResponse instanceof PortletResponseWrapper) {
-				PortletResponseWrapper portletResponseWrapper =
-					(PortletResponseWrapper)mimeResponse;
-				mimeResponse =
-					(MimeResponse)portletResponseWrapper.getResponse();
-			}
+			PortletResponseWrapper portletResponseWrapper =
+				(PortletResponseWrapper)mimeResponse;
+
+			mimeResponse = (MimeResponse)portletResponseWrapper.getResponse();
 		}
 
 		return (MimeResponseImpl)mimeResponse;
 	}
+
 }
