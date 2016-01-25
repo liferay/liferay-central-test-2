@@ -35,14 +35,12 @@ AUI.add(
 
 						var namespace = instance.NS;
 
-						if (Liferay.SearchContainer) {
-							var searchContainer = Liferay.SearchContainer.get(namespace + instance.get('searchContainerId'));
+						var searchContainer = Liferay.SearchContainer.get(namespace + instance.get('searchContainerId'));
 
-							searchContainer.registerAction('move-to-folder', A.bind('_moveToFolder', instance));
-							searchContainer.registerAction('move-to-trash', A.bind('_moveToTrash', instance));
+						searchContainer.registerAction('move-to-folder', A.bind('_moveToFolder', instance));
+						searchContainer.registerAction('move-to-trash', A.bind('_moveToTrash', instance));
 
-							instance._searchContainer = searchContainer;
-						}
+						instance._searchContainer = searchContainer;
 
 						instance._bindUI();
 					},
@@ -135,6 +133,6 @@ AUI.add(
 	},
 	'',
 	{
-		requires: ['aui-component', 'liferay-portlet-base']
+		requires: ['aui-component', 'liferay-portlet-base', 'liferay-search-container']
 	}
 );
