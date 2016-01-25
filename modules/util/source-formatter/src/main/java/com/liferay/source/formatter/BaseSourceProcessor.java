@@ -2186,7 +2186,7 @@ public abstract class BaseSourceProcessor implements SourceProcessor {
 	private String _mainReleaseVersion;
 	private final List<String> _modifiedFileNames = new ArrayList<>();
 	private Map<String, Properties> _moduleLangLanguageProperties =
-			new HashMap<>();
+		new HashMap<>();
 	private Map<String, Properties> _moduleLanguageProperties = new HashMap<>();
 	private String _oldCopyright;
 	private Properties _portalLanguageProperties;
