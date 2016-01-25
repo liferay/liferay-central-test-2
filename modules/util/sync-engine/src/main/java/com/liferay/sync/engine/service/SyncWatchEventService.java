@@ -189,11 +189,9 @@ public class SyncWatchEventService {
 
 	public static boolean hasSyncWatchEvents(long syncAccountId) {
 		try {
-			SyncWatchEvent syncWatchEvent =
-				_syncWatchEventPersistence.fetchBySyncAccountId_First(
-					syncAccountId);
+			if (_syncWatchEventPersistence.fetchBySyncAccountId_First(
+					syncAccountId) == null) {
 
-			if (syncWatchEvent == null) {
 				return false;
 			}
 
