@@ -38,7 +38,7 @@ public class PortletPreferencesModelListener
 	public void onAfterRemove(PortletPreferences portletPreferences) {
 		clearCache(portletPreferences);
 
-		removeSubscriptions(portletPreferences);
+		deleteSubscriptions(portletPreferences);
 	}
 
 	@Override
@@ -83,7 +83,7 @@ public class PortletPreferencesModelListener
 		}
 	}
 
-	protected void removeSubscriptions(PortletPreferences portletPreferences) {
+	protected void deleteSubscriptions(PortletPreferences portletPreferences) {
 		if (portletPreferences == null) {
 			return;
 		}
@@ -95,7 +95,7 @@ public class PortletPreferencesModelListener
 				portletPreferences.getPortletPreferencesId());
 		}
 		catch (Exception e) {
-			_log.error("Unable to remove subscriptions", e);
+			_log.error("Unable to delete subscriptions", e);
 		}
 	}
 
