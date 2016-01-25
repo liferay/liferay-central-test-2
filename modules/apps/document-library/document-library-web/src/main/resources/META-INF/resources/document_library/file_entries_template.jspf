@@ -27,7 +27,7 @@
 		url="<%= uploadURL %>"
 	>
 		<liferay-frontend:vertical-card-header>
-			<liferay-ui:message key="right-now-by-x" arguments="<%= HtmlUtil.escape(user.getFullName()) %>" />
+			<liferay-ui:message arguments="<%= HtmlUtil.escape(user.getFullName()) %>" key="right-now-by-x" />
 		</liferay-frontend:vertical-card-header>
 	</liferay-frontend:vertical-card>
 
@@ -42,7 +42,7 @@
 
 		<div class="list-group-item-content">
 			<h5 class="text-default">
-				<liferay-ui:message key="right-now-by-x" arguments="<%= HtmlUtil.escape(user.getFullName()) %>" />
+				<liferay-ui:message arguments="<%= HtmlUtil.escape(user.getFullName()) %>" key="right-now-by-x" />
 			</h5>
 
 			<h4>
