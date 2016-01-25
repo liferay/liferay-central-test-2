@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.portlet.PortletResponseUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.util.PortalUtil;
 
-import javax.portlet.MimeResponse;
 import javax.portlet.PortletException;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
@@ -33,10 +32,6 @@ public abstract class BaseRSSMVCResourceCommand implements MVCResourceCommand {
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws PortletException {
 
-		if (!(resourceResponse instanceof MimeResponse)) {
-			return false;
-		}
-
 		if (!isRSSFeedsEnabled(resourceRequest)) {
 			try {
 				PortalUtil.sendRSSFeedsDisabledError(
@@ -48,11 +43,9 @@ public abstract class BaseRSSMVCResourceCommand implements MVCResourceCommand {
 			return false;
 		}
 
-		MimeResponse mimeResponse = (MimeResponse)resourceResponse;
-
 		try {
 			PortletResponseUtil.sendFile(
-				resourceRequest, mimeResponse, null,
+				resourceRequest, resourceResponse, null,
 				getRSS(resourceRequest, resourceResponse),
 				ContentTypes.TEXT_XML_UTF8);
 		}
