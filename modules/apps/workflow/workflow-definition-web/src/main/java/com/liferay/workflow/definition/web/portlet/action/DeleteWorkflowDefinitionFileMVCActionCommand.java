@@ -16,6 +16,8 @@ package com.liferay.workflow.definition.web.portlet.action;
 
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.JSONPortletResponseUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
@@ -83,8 +85,11 @@ public class DeleteWorkflowDefinitionFileMVCActionCommand
 			deleteTempFileEntry(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			_log.error(e);
 		}
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		DeleteWorkflowDefinitionFileMVCActionCommand.class);
 
 }
