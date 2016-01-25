@@ -658,19 +658,19 @@
 
 		<var name="key_videoGenerationThumbnailResolution" value="640" />
 
-		<execute function="AssertElementNotPresent" locator1="PGDocumentsandmediaVideoGenerationThumbnail#VIDEO_GENERATION_THUMBNAIL_RESOLUTION" />
+		<execute function="AssertElementNotPresent" locator1="DocumentsAndMediaDocument#VIDEO_GENERATION_THUMBNAIL_RESOLUTION" />
 
 		<var name="key_videoGenerationThumbnailResolution" value="360" />
 
-		<execute function="AssertElementNotPresent" locator1="PGDocumentsandmediaVideoGenerationThumbnail#VIDEO_GENERATION_THUMBNAIL_RESOLUTION" />
+		<execute function="AssertElementNotPresent" locator1="DocumentsAndMediaDocument#VIDEO_GENERATION_THUMBNAIL_RESOLUTION" />
 
 		<var name="key_videoGenerationThumbnailResolution" value="1280" />
 
-		<execute function="AssertElementPresent#assertElementPresent" locator1="PGDocumentsandmediaVideoGenerationThumbnail#VIDEO_GENERATION_THUMBNAIL_RESOLUTION" />
+		<execute function="AssertElementPresent#assertElementPresent" locator1="DocumentsAndMediaDocument#VIDEO_GENERATION_THUMBNAIL_RESOLUTION" />
 
 		<var name="key_videoGenerationThumbnailResolution" value="720" />
 
-		<execute function="AssertElementPresent#assertElementPresent" locator1="PGDocumentsandmediaVideoGenerationThumbnail#VIDEO_GENERATION_THUMBNAIL_RESOLUTION" />
+		<execute function="AssertElementPresent#assertElementPresent" locator1="DocumentsAndMediaDocument#VIDEO_GENERATION_THUMBNAIL_RESOLUTION" />
 	</command>
 
 	<command name="ImportDocumentWithDBStore" priority="3">
