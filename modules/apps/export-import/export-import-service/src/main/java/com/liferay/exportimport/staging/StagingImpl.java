@@ -1190,7 +1190,7 @@ public class StagingImpl implements Staging {
 	}
 
 	@Override
-	public boolean isGroupAccesible(Group group, Group fromGroup) {
+	public boolean isGroupAccessible(Group group, Group fromGroup) {
 		if (group.equals(fromGroup)) {
 			return true;
 		}
@@ -1211,10 +1211,10 @@ public class StagingImpl implements Staging {
 	}
 
 	@Override
-	public boolean isGroupAccesible(long groupId, long fromGroupId)
+	public boolean isGroupAccessible(long groupId, long fromGroupId)
 		throws PortalException {
 
-		return isGroupAccesible(
+		return isGroupAccessible(
 			_groupLocalService.getGroup(groupId),
 			_groupLocalService.getGroup(fromGroupId));
 	}
