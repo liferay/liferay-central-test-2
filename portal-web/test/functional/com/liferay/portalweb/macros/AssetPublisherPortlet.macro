@@ -1053,31 +1053,17 @@
 	</command>
 
 	<command name="viewSelectedPG">
-		<if>
-			<equals arg1="${selectedAsset}" arg2="Document" />
-			<then>
-				<execute function="AssertTextEquals" locator1="AP#ADD_NEW_DROPDOWN" value1="Add New" />
+		<var name="key_selectedAsset" value="${selectedAsset}" />
 
-				<execute macro="AssetPublisherPortlet#gotoConfigurationPG" />
+		<execute function="AssertTextEquals" locator1="AP#ADD_ASSET_TOPPER_TYPE" value1="${selectedAsset}" />
 
-				<execute macro="Panel#expandPanel">
-					<var name="panelHeading" value="Source" />
-				</execute>
+		<execute macro="AssetPublisherPortlet#gotoConfigurationPG" />
 
-				<execute function="AssertSelectedLabel" locator1="APConfiguration#SOURCE_SCOPE_ASSET_TYPE_SELECT" value1="${selectedAssetConfiguration}" />
-			</then>
-			<else>
-				<execute function="AssertTextEquals" locator1="AP#ADD_NEW_DROPDOWN" value1="Add ${selectedAsset}" />
+		<execute macro="Panel#expandPanel">
+			<var name="panelHeading" value="Source" />
+		</execute>
 
-				<execute macro="AssetPublisherPortlet#gotoConfigurationPG" />
-
-				<execute macro="Panel#expandPanel">
-					<var name="panelHeading" value="Source" />
-				</execute>
-
-				<execute function="AssertSelectedLabel" locator1="APConfiguration#SOURCE_SCOPE_ASSET_TYPE_SELECT" value1="${selectedAssetConfiguration}" />
-			</else>
-		</if>
+		<execute function="AssertSelectedLabel" locator1="APConfiguration#SOURCE_SCOPE_ASSET_TYPE_SELECT" value1="${selectedAssetConfiguration}" />
 
 		<execute function="SelectFrameTop" />
 	</command>
