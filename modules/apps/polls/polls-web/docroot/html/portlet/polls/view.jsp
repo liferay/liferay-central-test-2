@@ -17,13 +17,12 @@
 <%@ include file="/html/portlet/polls/init.jsp" %>
 
 <%
+boolean showAddPollButton = PollsResourcePermissionChecker.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_QUESTION);
+boolean showPermissionsButton = PollsResourcePermissionChecker.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS);
+
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/polls/view");
-
-boolean showAddPollButton = PollsResourcePermissionChecker.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_QUESTION);
-
-boolean showPermissionsButton = PollsResourcePermissionChecker.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS);
 %>
 
 <aui:nav-bar cssClass="collapse-basic-search" markupView="lexicon">
