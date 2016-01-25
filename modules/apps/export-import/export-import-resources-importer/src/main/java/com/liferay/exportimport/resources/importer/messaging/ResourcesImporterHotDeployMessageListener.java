@@ -14,6 +14,10 @@
 
 package com.liferay.exportimport.resources.importer.messaging;
 
+import com.liferay.exportimport.resources.importer.util.Importer;
+import com.liferay.exportimport.resources.importer.util.ImporterException;
+import com.liferay.exportimport.resources.importer.util.ImporterFactory;
+import com.liferay.exportimport.resources.importer.util.PluginPackageProperties;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.Destination;
@@ -28,10 +32,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.service.CompanyLocalService;
 import com.liferay.portlet.exportimport.lar.ExportImportThreadLocal;
-import com.liferay.exportimport.resources.importer.util.Importer;
-import com.liferay.exportimport.resources.importer.util.ImporterException;
-import com.liferay.exportimport.resources.importer.util.ImporterFactory;
-import com.liferay.exportimport.resources.importer.util.PluginPackageProperties;
 
 import java.util.HashMap;
 import java.util.List;
