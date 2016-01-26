@@ -15,6 +15,7 @@
 package com.liferay.screens.service.impl;
 
 import com.liferay.dynamic.data.lists.model.DDLRecord;
+import com.liferay.dynamic.data.mapping.model.Value;
 import com.liferay.dynamic.data.mapping.storage.DDMFormFieldValue;
 import com.liferay.dynamic.data.mapping.storage.DDMFormValues;
 import com.liferay.dynamic.data.mapping.storage.FieldConstants;
@@ -24,7 +25,7 @@ import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.screens.service.base.ScreensDDLRecordServiceBaseImpl;
-import com.liferay.dynamic.data.mapping.model.Value;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
