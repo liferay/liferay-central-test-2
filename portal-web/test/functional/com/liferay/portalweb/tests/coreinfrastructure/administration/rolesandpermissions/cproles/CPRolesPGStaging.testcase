@@ -454,7 +454,6 @@
 		<execute macro="User#logoutUserPG" />
 
 		<execute macro="Page#openURL">
-			<var name="pageName" value="Blogs Test Page" />
 			<var name="siteName" value="Site Name" />
 			<var name="siteURL" value="true" />
 		</execute>

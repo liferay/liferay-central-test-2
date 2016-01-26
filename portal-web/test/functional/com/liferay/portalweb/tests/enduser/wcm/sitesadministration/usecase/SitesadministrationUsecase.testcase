@@ -1509,9 +1509,7 @@
 			<var name="userEmailAddress" value="userea2@liferay.com" />
 		</execute>
 
-		<execute macro="Page#openURL">
-			<var name="pageName" value="Blog Page Template" />
-		</execute>
+		<execute macro="Page#openURL" />
 
 		<execute function="AssertElementNotPresent" locator1="Home#PAGE_2" />
 

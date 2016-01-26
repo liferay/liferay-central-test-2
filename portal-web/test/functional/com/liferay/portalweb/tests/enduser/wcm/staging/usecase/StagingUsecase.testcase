@@ -2072,7 +2072,6 @@
 		<execute macro="User#logoutUserPG" />
 
 		<execute macro="Page#openURL">
-			<var name="pageName" value="Staging Test Page" />
 			<var name="siteName" value="Organization Name" />
 			<var name="siteURL" value="true" />
 		</execute>
