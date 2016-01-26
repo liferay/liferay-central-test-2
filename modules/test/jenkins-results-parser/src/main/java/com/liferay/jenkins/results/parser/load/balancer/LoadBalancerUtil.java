@@ -495,10 +495,12 @@ public class LoadBalancerUtil {
 				"computer");
 
 			for (int i = 0; i < computersJSONArray.length(); i++) {
-				JSONObject idle = computersJSONArray.getJSONObject(i);
+				JSONObject computer = computersJSONArray.getJSONObject(i);
 
-				if (idle.getBoolean("idle") && !idle.getBoolean("offline")) {
-					String displayName = idle.getString("displayName");
+				if (computer.getBoolean("idle") &&
+					!computer.getBoolean("offline")) {
+
+					String displayName = computer.getString("displayName");
 
 					if (!displayName.equals("master")) {
 						idleCount++;
@@ -512,7 +514,19 @@ public class LoadBalancerUtil {
 				JSONArray itemsJSONArray = queueJSONObject.getJSONArray(
 					"items");
 
-				queueCount = itemsJSONArray.length();
+				for (int i = 0; i < itemsJSONArray.length(); i++) {
+					JSONObject item = itemsJSONArray.getJSONObject(i);
+
+					if (item.has("why")) {
+						String why = item.getString("why");
+
+						if (why.endsWith("is offline")) {
+							continue;
+						}
+
+						queueCount++;
+					}
+				}
 			}
 
 			int availableSlaveCount = idleCount - queueCount;
