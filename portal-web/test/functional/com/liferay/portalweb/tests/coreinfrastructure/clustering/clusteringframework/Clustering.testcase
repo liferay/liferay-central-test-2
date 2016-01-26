@@ -275,7 +275,6 @@
 		</execute>
 
 		<execute macro="Page#openURL">
-			<var name="pageName" value="${pageName}" />
 			<var name="pageStaging" value="true" />
 			<var name="siteURL" value="true" />
 		</execute>
@@ -291,7 +290,6 @@
 		</execute>
 
 		<execute macro="Page#openURL">
-			<var name="pageName" value="${pageName}" />
 			<var name="siteURL" value="true" />
 		</execute>
 
