@@ -162,6 +162,11 @@
 </tr>
 <!--DOCUMENT_DETAILS-->
 <tr>
+	<td>DOCUMENT_DETAILS_DROPDOWN</td>
+	<td>//li/a[contains(@class,'dropdown-toggle')]/span[contains(.,'Details')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>DOCUMENT_DETAILS_VERSION</td>
 	<td>//h3[contains(@class,'version') and not(contains(@class,'icon-lock'))]</td>
 	<td></td>
