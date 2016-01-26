@@ -17,6 +17,7 @@
 			</else>
 		</if>
 	</command>
+
 	<command name="setUpPortalInstance">
 		<var method="TestPropsUtil#get('test.portal.instance')" name="testPortalInstance" />
 
