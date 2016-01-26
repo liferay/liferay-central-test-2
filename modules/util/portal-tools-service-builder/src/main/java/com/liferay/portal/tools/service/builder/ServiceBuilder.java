@@ -557,22 +557,20 @@ public class ServiceBuilder {
 
 			_apiPackagePath = GetterUtil.getString(
 				rootElement.attributeValue("api-package-path"), packagePath);
-
-			_outputPath =
-				_implDirName + "/" + StringUtil.replace(packagePath, ".", "/");
-
 			_oldServiceOutputPath =
 				_apiDirName + "/" + StringUtil.replace(packagePath, ".", "/");
-
-			_serviceOutputPath =
-				_apiDirName + "/" +
-					StringUtil.replace(_apiPackagePath, ".", "/");
+			_outputPath =
+				_implDirName + "/" + StringUtil.replace(packagePath, ".", "/");
 
 			if (Validator.isNotNull(_testDirName)) {
 				_testOutputPath =
 					_testDirName + "/" +
 						StringUtil.replace(packagePath, ".", "/");
 			}
+
+			_serviceOutputPath =
+				_apiDirName + "/" +
+					StringUtil.replace(_apiPackagePath, ".", "/");
 
 			_packagePath = packagePath;
 
@@ -605,15 +603,11 @@ public class ServiceBuilder {
 				_portletPackageName = TextFormatter.format(
 					_portletName, TextFormatter.B);
 
-				_outputPath += "/" + _portletPackageName;
-
-				_serviceOutputPath += "/" + _portletPackageName;
-
-				_testOutputPath += "/" + _portletPackageName;
-
-				_packagePath += "." + _portletPackageName;
-
 				_apiPackagePath += "." + _portletPackageName;
+				_outputPath += "/" + _portletPackageName;
+				_packagePath += "." + _portletPackageName;
+				_serviceOutputPath += "/" + _portletPackageName;
+				_testOutputPath += "/" + _portletPackageName;
 			}
 			else {
 				_portletShortName = namespaceElement.getText();
@@ -5261,30 +5255,24 @@ public class ServiceBuilder {
 		_removeEJBPK(entity, _oldServiceOutputPath);
 		_removeExportActionableDynamicQuery(entity, _oldServiceOutputPath);
 		_removeExtendedModel(entity, _oldServiceOutputPath);
-
 		_removeFinder(entity, _oldServiceOutputPath);
 		_removeFinderUtil(entity, _oldServiceOutputPath);
-
 		_removeModel(entity, _oldServiceOutputPath);
 		_removeModelClp(entity, _oldServiceOutputPath);
 		_removeModelSoap(entity, _oldServiceOutputPath);
 		_removeModelWrapper(entity, _oldServiceOutputPath);
-
 		_removePersistence(entity, _oldServiceOutputPath);
 		_removePersistenceUtil(entity, _oldServiceOutputPath);
-
 		_removeServiceClpMessageListener(_oldServiceOutputPath);
 		_removeServiceClpSerializer(_oldServiceOutputPath);
-
 		_removeService(entity, _SESSION_TYPE_LOCAL, _oldServiceOutputPath);
+		_removeService(entity, _SESSION_TYPE_REMOTE, _oldServiceOutputPath);
 		_removeServiceClp(entity, _SESSION_TYPE_LOCAL, _oldServiceOutputPath);
+		_removeServiceClp(entity, _SESSION_TYPE_REMOTE, _oldServiceOutputPath);
 		_removeServiceUtil(entity, _SESSION_TYPE_LOCAL, _oldServiceOutputPath);
+		_removeServiceUtil(entity, _SESSION_TYPE_REMOTE, _oldServiceOutputPath);
 		_removeServiceWrapper(
 			entity, _SESSION_TYPE_LOCAL, _oldServiceOutputPath);
-
-		_removeService(entity, _SESSION_TYPE_REMOTE, _oldServiceOutputPath);
-		_removeServiceClp(entity, _SESSION_TYPE_REMOTE, _oldServiceOutputPath);
-		_removeServiceUtil(entity, _SESSION_TYPE_REMOTE, _oldServiceOutputPath);
 		_removeServiceWrapper(
 			entity, _SESSION_TYPE_REMOTE, _oldServiceOutputPath);
 	}
