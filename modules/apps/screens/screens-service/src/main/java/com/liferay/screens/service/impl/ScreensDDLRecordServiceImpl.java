@@ -164,7 +164,7 @@ public class ScreensDDLRecordServiceImpl
 			return Boolean.valueOf(fieldValueString);
 		}
 		else if (dataType.equals(FieldConstants.DATE)) {
-			return field.getRenderedValue(locale);
+			return fieldValueString;
 		}
 		else if (dataType.equals(FieldConstants.DOCUMENT_LIBRARY)) {
 			return JSONFactoryUtil.looseSerialize(
