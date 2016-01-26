@@ -17,11 +17,11 @@
 <%@ include file="/init.jsp" %>
 
 <%
-boolean searchEnabled = ParamUtil.getBoolean(request, "searchEnabled");
-
 String tabs1 = ParamUtil.getString(request, "tabs1", "users");
 
 Team team = (Team)request.getAttribute("edit_team_assignments.jsp-team");
+
+boolean searchEnabled = ParamUtil.getBoolean(request, "searchEnabled");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
