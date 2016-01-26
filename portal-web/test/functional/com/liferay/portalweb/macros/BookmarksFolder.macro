@@ -239,6 +239,10 @@
 		<var name="key_assetName" value="${subfolderName}" />
 
 		<execute function="AssertClick#assertPartialTextClickAtAndWait" locator1="Bookmarks#DESCRIPTIVE_ENTRY_TITLE" value1="${subfolderName}" />
+
+		<var name="key_folderName" value="${subfolderName}" />
+
+		<execute function="AssertVisible" locator1="Bookmarks#BREADCRUMB_FOLDER_NAME" />
 	</command>
 
 	<command name="mergeSubfolderToFolderCP">
