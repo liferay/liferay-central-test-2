@@ -335,47 +335,6 @@
 	<td></td>
 	<td></td>
 </tr>
-<!--VERSION_HISTORY_TABLE-->
-<tr>
-	<td>VERSION_HISTORY_TABLE_CHECKBOX</td>
-	<td>//td//input</td>
-	<td></td>
-</tr>
-<tr>
-	<td>VERSION_HISTORY_TABLE_VERSION</td>
-	<td>//td[contains(.,'.')]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>VERSION_HISTORY_TABLE_VERSION_GENERIC</td>
-	<td>//td[contains(.,'${key_dmDocumentVersionNumber}')]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>VERSION_HISTORY_TABLE_DATE</td>
-	<td>//td[contains(.,'Ago')]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>VERSION_HISTORY_TABLE_SIZE</td>
-	<td>//td[contains(.,'KB')]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>VERSION_HISTORY_TABLE_STATUS</td>
-	<td>//td//span[@class='workflow-status']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>VERSION_HISTORY_TABLE_DROPDOWN</td>
-	<td>//tr[contains(.,'${key_dmDocumentVersionNumber}')]/td[5]/div/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td></td>
-	<td></td>
-	<td></td>
-</tr>
 <!--SIDEBAR-->
 <tr>
 	<td>SIDEBAR_DROPDOWN</td>
