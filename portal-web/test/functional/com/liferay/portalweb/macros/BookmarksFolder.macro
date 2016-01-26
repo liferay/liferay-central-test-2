@@ -97,8 +97,6 @@
 	</command>
 
 	<command name="addSubfolderPG">
-		<var name="key_assetName" value="${folderName}" />
-
 		<execute function="Click#makeVisibleClickAt" locator1="Portlet#ICON_PLUS_SIGN" />
 
 		<execute function="AssertClick" locator1="MenuItem#SUBFOLDER" value1="Subfolder" />
