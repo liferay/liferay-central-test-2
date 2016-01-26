@@ -59,7 +59,6 @@ public class LoadBalancerUtil {
 		throws Exception {
 
 		boolean readOnly = false;
-
 		int retryCount = 0;
 
 		while (true) {
@@ -83,9 +82,11 @@ public class LoadBalancerUtil {
 
 			if (!sharedDir.exists() || !sharedDir.isDirectory()) {
 				readOnly = true;
+
 				System.out.println(
-					"Shared Dir: " + sharedDir.getPath() + " not found.\n" +
-						"Load Balancer will run in read-only mode.");
+					"Load balancer will run in read only mode because of " +
+						"missing shared directory " + sharedDir.getPath() +
+							".");
 			}
 
 			Map<String, Integer> recentJobMap = new HashMap<>();
@@ -132,7 +133,7 @@ public class LoadBalancerUtil {
 					catch (TimeoutException te) {
 						System.out.println(
 							"Unable to assess master availability for " +
-								hostNames.get(i));
+								hostNames.get(i) + ".");
 
 						availableSlaveCount = null;
 					}
@@ -200,6 +201,7 @@ public class LoadBalancerUtil {
 			finally {
 				if (!readOnly) {
 					File baseDir = new File(sharedDir, hostNamePrefix);
+
 					File semaphoreFile = new File(
 						baseDir, hostNamePrefix + ".semaphore");
 
@@ -245,10 +247,10 @@ public class LoadBalancerUtil {
 			String propertiesURL, Map<String, String> overrideMap)
 		throws Exception {
 
+		Properties properties = new Properties();
+
 		String propertiesString = JenkinsResultsParserUtil.toString(
 			JenkinsResultsParserUtil.getLocalURL(propertiesURL), false);
-
-		Properties properties = new Properties();
 
 		properties.load(new StringReader(propertiesString));
 
@@ -259,21 +261,21 @@ public class LoadBalancerUtil {
 		return getMostAvailableMasterURL(properties);
 	}
 
-	protected static List<String> getBlackList(Properties properties) {
-		String blackListString = properties.getProperty(
+	protected static List<String> getBlacklist(Properties properties) {
+		String blacklistString = properties.getProperty(
 			"jenkins.load.balancer.blacklist", "");
 
-		if (blackListString.isEmpty()) {
+		if (blacklistString.isEmpty()) {
 			return Collections.emptyList();
 		}
 
-		List<String> blackList = new ArrayList<>();
+		List<String> blacklist = new ArrayList<>();
 
-		for (String blackListItem : blackListString.split(",")) {
-			blackList.add(blackListItem.trim());
+		for (String blacklistItem : blacklistString.split(",")) {
+			blacklist.add(blacklistItem.trim());
 		}
 
-		return blackList;
+		return blacklist;
 	}
 
 	protected static String getHostNamePrefix(String baseInvocationURL) {
@@ -289,10 +291,9 @@ public class LoadBalancerUtil {
 	protected static List<String> getHostNames(
 		Properties properties, String hostNamePrefix) {
 
-		List<String> blackList = getBlackList(properties);
-
-		int i = 1;
+		List<String> blacklist = getBlacklist(properties);
 		List<String> hostNames = new ArrayList<>();
+		int i = 1;
 
 		while (true) {
 			String jenkinsLocalURL = properties.getProperty(
@@ -307,7 +308,7 @@ public class LoadBalancerUtil {
 
 				String jenkinsLocalHostName = matcher.group("hostname");
 
-				if (!blackList.contains(jenkinsLocalHostName)) {
+				if (!blacklist.contains(jenkinsLocalHostName)) {
 					hostNames.add(jenkinsLocalHostName);
 				}
 
@@ -495,12 +496,14 @@ public class LoadBalancerUtil {
 				"computer");
 
 			for (int i = 0; i < computersJSONArray.length(); i++) {
-				JSONObject computer = computersJSONArray.getJSONObject(i);
+				JSONObject curComputerJSONObject =
+					computersJSONArray.getJSONObject(i);
 
-				if (computer.getBoolean("idle") &&
-					!computer.getBoolean("offline")) {
+				if (curComputerJSONObject.getBoolean("idle") &&
+					!curComputerJSONObject.getBoolean("offline")) {
 
-					String displayName = computer.getString("displayName");
+					String displayName = curComputerJSONObject.getString(
+						"displayName");
 
 					if (!displayName.equals("master")) {
 						idleCount++;
@@ -515,10 +518,10 @@ public class LoadBalancerUtil {
 					"items");
 
 				for (int i = 0; i < itemsJSONArray.length(); i++) {
-					JSONObject item = itemsJSONArray.getJSONObject(i);
+					JSONObject itemJSONObject = itemsJSONArray.getJSONObject(i);
 
-					if (item.has("why")) {
-						String why = item.getString("why");
+					if (itemJSONObject.has("why")) {
+						String why = itemJSONObject.getString("why");
 
 						if (why.endsWith("is offline")) {
 							continue;
