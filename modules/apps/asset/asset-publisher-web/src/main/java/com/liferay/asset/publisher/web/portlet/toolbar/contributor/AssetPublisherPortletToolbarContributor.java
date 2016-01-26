@@ -360,8 +360,6 @@ public class AssetPublisherPortletToolbarContributor
 
 		Map<Long, Map<String, PortletURL>> scopeAddPortletURLs = new HashMap();
 
-		LiferayPortletRequest liferayPortletRequest =
-			(LiferayPortletRequest)portletRequest;
 		LiferayPortletResponse liferayPortletResponse =
 			(LiferayPortletResponse)portletResponse;
 
@@ -370,6 +368,9 @@ public class AssetPublisherPortletToolbarContributor
 		redirectURL.setParameter(
 			"hideDefaultSuccessMessage", Boolean.TRUE.toString());
 		redirectURL.setParameter("mvcPath", "/add_asset_redirect.jsp");
+
+		LiferayPortletRequest liferayPortletRequest =
+			(LiferayPortletRequest)portletRequest;
 
 		PortletURL currentURLObj = PortletURLUtil.getCurrent(
 			liferayPortletRequest, liferayPortletResponse);
