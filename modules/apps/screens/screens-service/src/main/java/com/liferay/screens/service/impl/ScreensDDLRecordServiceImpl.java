@@ -160,40 +160,45 @@ public class ScreensDDLRecordServiceImpl
 
 		String dataType = ddmFormFieldValue.getType();
 
-		switch (dataType) {
-			case FieldConstants.BOOLEAN:
-				return Boolean.valueOf(fieldValueString);
-			case FieldConstants.DATE:
-				return ddmFormFieldValue.getValue().getString(locale);
-			case FieldConstants.DOCUMENT_LIBRARY:
-				return JSONFactoryUtil.looseSerialize(
-					JSONFactoryUtil.looseDeserialize(fieldValueString));
-			case FieldConstants.FLOAT:
-			case FieldConstants.NUMBER:
+		if (dataType.equals(FieldConstants.BOOLEAN)) {
+			return Boolean.valueOf(fieldValueString);
+		}
+		else if (dataType.equals(FieldConstants.DATE)) {
+			return field.getRenderedValue(locale);
+		}
+		else if (dataType.equals(FieldConstants.DOCUMENT_LIBRARY)) {
+			return JSONFactoryUtil.looseSerialize(
+				JSONFactoryUtil.looseDeserialize(fieldValueString));
+		}
+		else if (dataType.equals(FieldConstants.FLOAT) ||
+				 dataType.equals(FieldConstants.NUMBER)) {
 
-				if (Validator.isNull(fieldValueString)) {
-					return null;
-				}
+			if (Validator.isNull(fieldValueString)) {
+				return null;
+			}
 
-				return Float.valueOf(fieldValueString);
-			case FieldConstants.INTEGER:
-				if (Validator.isNull(fieldValueString)) {
-					return null;
-				}
+			return Float.valueOf(fieldValueString);
+		}
+		else if (dataType.equals(FieldConstants.INTEGER)) {
+			if (Validator.isNull(fieldValueString)) {
+				return null;
+			}
 
-				return Integer.valueOf(fieldValueString);
-			case FieldConstants.LONG:
-				if (Validator.isNull(fieldValueString)) {
-					return null;
-				}
+			return Integer.valueOf(fieldValueString);
+		}
+		else if (dataType.equals(FieldConstants.LONG)) {
+			if (Validator.isNull(fieldValueString)) {
+				return null;
+			}
 
-				return Long.valueOf(fieldValueString);
-			case FieldConstants.SHORT:
-				if (Validator.isNull(fieldValueString)) {
-					return null;
-				}
+			return Long.valueOf(fieldValueString);
+		}
+		else if (dataType.equals(FieldConstants.SHORT)) {
+			if (Validator.isNull(fieldValueString)) {
+				return null;
+			}
 
-				return Short.valueOf(fieldValueString);
+			return Short.valueOf(fieldValueString);
 		}
 
 		return fieldValueString;
