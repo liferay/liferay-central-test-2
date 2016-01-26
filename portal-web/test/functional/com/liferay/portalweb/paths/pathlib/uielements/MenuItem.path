@@ -270,7 +270,7 @@
 </tr>
 <tr>
 	<td>DELETE_VERSION</td>
-	<td>//a[@role='menuitem' and contains(.,'Delete Version')]</td>
+	<td>//div[contains(@class,'open')]//a[@role='menuitem' and contains(.,'Delete Version')]</td>
 	<td></td>
 </tr>
 <tr>
@@ -645,7 +645,7 @@
 </tr>
 <tr>
 	<td>REVERT</td>
-	<td>//a[@role='menuitem' and contains(.,'Revert')]</td>
+	<td>//div[contains(@class,'open')]//a[@role='menuitem' and contains(.,'Revert')]</td>
 	<td></td>
 </tr>
 <tr>
