@@ -29,21 +29,6 @@ import org.apache.commons.codec.binary.Base64;
  */
 public class JenkinsStopJobUtil {
 
-	public static void main(String[] args) {
-		if (args.length < 3) {
-			System.out.println(
-				"usage: JenkinsStopJobUtil <jobURL> <username> <password>");
-			System.exit(1);
-		}
-
-		try {
-			stopJenkinsJob(args[0], args[1], args[2]);
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
 	public static void stopJenkinsJob(
 			String jobURL, String username, String password)
 		throws Exception {
@@ -64,10 +49,11 @@ public class JenkinsStopJobUtil {
 	private static List<String> getDownstreamURLs(String jobURL)
 		throws Exception {
 
+		List<String> downstreamURLs = new ArrayList<>();
+
 		String consoleOutput = JenkinsResultsParserUtil.toString(
 			JenkinsResultsParserUtil.getLocalURL(
 				jobURL + "/logText/progressiveText"));
-		List<String> downstreamURLs = new ArrayList<>();
 
 		Matcher progressiveTextMatcher = _progressiveTextPattern.matcher(
 			consoleOutput);
@@ -99,19 +85,17 @@ public class JenkinsStopJobUtil {
 	private static void stopJob(String jobURL, String username, String password)
 		throws Exception {
 
-		String stopURL = JenkinsResultsParserUtil.fixURL(
-			JenkinsResultsParserUtil.getLocalURL(jobURL + "/stop"));
-
-		String encodedString = encodeAuthorizationFields(username, password);
-		URL urlObject = new URL(stopURL);
+		URL urlObject = new URL(
+			JenkinsResultsParserUtil.fixURL(
+				JenkinsResultsParserUtil.getLocalURL(jobURL + "/stop")));
 
 		HttpURLConnection httpConnection =
 			(HttpURLConnection)urlObject.openConnection();
 
 		httpConnection.setRequestMethod("POST");
-
 		httpConnection.setRequestProperty(
-			"Authorization", "Basic " + encodedString);
+			"Authorization",
+			"Basic " + encodeAuthorizationFields(username, password));
 
 		System.out.println(
 			"Response from " + jobURL + "/stop: " +
