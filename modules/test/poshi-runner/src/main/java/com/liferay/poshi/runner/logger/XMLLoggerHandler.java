@@ -267,10 +267,6 @@ public final class XMLLoggerHandler {
 							_getMacroExecuteLoggerElement(
 								childElement, "macro"));
 					}
-					else if (childElement.attributeValue("method") != null) {
-						loggerElement.addChildLoggerElement(
-							_getMethodExecuteLoggerElement(childElement));
-					}
 					else if (Validator.isNotNull(
 								childElement.attributeValue("macro-desktop")) &&
 							 !PropsValues.MOBILE_BROWSER) {
@@ -286,6 +282,10 @@ public final class XMLLoggerHandler {
 						loggerElement.addChildLoggerElement(
 							_getMacroExecuteLoggerElement(
 								childElement, "macro-mobile"));
+					}
+					else if (childElement.attributeValue("method") != null) {
+						loggerElement.addChildLoggerElement(
+							_getMethodExecuteLoggerElement(childElement));
 					}
 					else if (childElement.attributeValue("test-case") != null) {
 						loggerElement.addChildLoggerElement(
