@@ -1112,11 +1112,11 @@ public class UpgradeDynamicDataMappingTest {
 	@DeleteAfterTestRun
 	private Group _group;
 
-	private Timestamp _timestamp;
 	private long _parentStructureId;
 	private long _storageLinkId;
 	private long _structureId;
 	private long _templateId;
+	private Timestamp _timestamp;
 	private UpgradeDynamicDataMapping _upgradeDynamicDataMapping;
 
 }
