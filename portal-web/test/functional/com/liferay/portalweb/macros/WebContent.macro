@@ -1064,7 +1064,7 @@
 	<command name="preview">
 		<var name="key_iframeTitle" value="${webContentTitle}" />
 
-		<execute function="AssertTextEquals" locator1="IFrame#IFRAME_TITLE" value1="${webContentTitle}" />
+		<execute function="AssertTextEquals" locator1="WCPreview#PREVIEW_TITLE" value1="${webContentTitle}" />
 
 		<execute function="SelectFrame" locator1="WCPreview#PREVIEW_IFRAME" />
 
