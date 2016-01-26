@@ -77,6 +77,28 @@ public final class CommandLoggerHandler {
 			dividerLineLoggerElement);
 	}
 
+	public static void logExternalMethodCommand(
+			Element element, List<String> arguments, String returnValue)
+		throws Exception {
+
+		LoggerElement loggerElement = new LoggerElement();
+
+		loggerElement.setClassName("line-group linkable");
+		loggerElement.setName("li");
+		loggerElement.addChildLoggerElement(
+			_getExternalMethodLineLoggerElement(
+				element, arguments, returnValue));
+
+		_lineGroupLoggerElement = loggerElement;
+
+		_commandLogLoggerElement.addChildLoggerElement(_lineGroupLoggerElement);
+
+		LoggerElement xmlLoggerElement = XMLLoggerHandler.getXMLLoggerElement(
+			PoshiRunnerStackTraceUtil.getSimpleStackTrace());
+
+		_linkLoggerElements(xmlLoggerElement);
+	}
+
 	public static void logMessage(Element element)
 		throws PoshiRunnerLoggerException {
 
@@ -107,28 +129,6 @@ public final class CommandLoggerHandler {
 
 		loggerElement.addChildLoggerElement(
 			_getRunLineLoggerElement(element, arguments));
-	}
-
-	public static void logExternalMethodCommand(
-			Element element, List<String> arguments, String returnValue) 
-		throws Exception {
-
-		LoggerElement loggerElement = new LoggerElement();
-
-		loggerElement.setClassName("line-group linkable");
-		loggerElement.setName("li");
-		loggerElement.addChildLoggerElement(
-			_getExternalMethodLineLoggerElement(
-				element, arguments, returnValue));
-
-		_lineGroupLoggerElement = loggerElement;
-
-		_commandLogLoggerElement.addChildLoggerElement(_lineGroupLoggerElement);
-
-		LoggerElement xmlLoggerElement = XMLLoggerHandler.getXMLLoggerElement(
-			PoshiRunnerStackTraceUtil.getSimpleStackTrace());
-
-		_linkLoggerElements(xmlLoggerElement);
 	}
 
 	public static void passCommand(Element element) {
@@ -296,6 +296,50 @@ public final class CommandLoggerHandler {
 		return loggerElement;
 	}
 
+	private static LoggerElement _getExternalMethodLineLoggerElement(
+			Element element, List<String> arguments, String returnValue)
+		throws Exception {
+
+		LoggerElement loggerElement = new LoggerElement();
+
+		loggerElement.setClassName("line-container");
+		loggerElement.setText(
+			_getExternalMethodLineText(element, arguments, returnValue));
+
+		return loggerElement;
+	}
+
+	private static String _getExternalMethodLineText(
+			Element element, List<String> arguments, String returnValue)
+		throws Exception {
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(_getLineItemText("misc", "Running "));
+		sb.append(
+			_getLineItemText("command-name", element.attributeValue("method")));
+
+		if (!arguments.isEmpty()) {
+			sb.append(_getLineItemText("misc", " with parameters"));
+
+			for (String argument : arguments) {
+				argument = "Arg: " + argument;
+
+				sb.append(
+					_getLineItemText("param-value", HtmlUtil.escape(argument)));
+			}
+		}
+
+		if (returnValue != null) {
+			returnValue = "Return: " + returnValue;
+
+			sb.append(
+				_getLineItemText("param-value", HtmlUtil.escape(returnValue)));
+		}
+
+		return sb.toString();
+	}
+
 	private static LoggerElement _getLineContainerLoggerElement(Element element)
 		throws Exception {
 
@@ -434,51 +478,6 @@ public final class CommandLoggerHandler {
 			_getMessageContainerLoggerElement(element));
 
 		return loggerElement;
-	}
-
-	private static LoggerElement _getExternalMethodLineLoggerElement(
-			Element element, List<String> arguments, String returnValue)
-		throws Exception {
-
-		LoggerElement loggerElement = new LoggerElement();
-
-		loggerElement.setClassName("line-container");
-		loggerElement.setText(
-			_getExternalMethodLineText(element, arguments, returnValue));
-
-		return loggerElement;
-	}
-
-	private static String _getExternalMethodLineText(
-			Element element, List<String> arguments, String returnValue)
-		throws Exception {
-
-		StringBuilder sb = new StringBuilder();
-
-		sb.append(_getLineItemText("misc", "Running "));
-		sb.append(
-			_getLineItemText(
-				"command-name", element.attributeValue("method")));
-
-		if (!arguments.isEmpty()) {
-			sb.append(_getLineItemText("misc", " with parameters"));
-
-			for (String argument : arguments) {
-				argument = "Arg: " + argument;
-
-				sb.append(
-					_getLineItemText("param-value", HtmlUtil.escape(argument)));
-			}
-		}
-
-		if (returnValue != null) {
-			returnValue = "Return: " + returnValue;
-
-			sb.append(
-				_getLineItemText("param-value", HtmlUtil.escape(returnValue)));
-		}
-
-		return sb.toString();
 	}
 
 	private static LoggerElement _getRunLineLoggerElement(

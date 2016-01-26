@@ -174,8 +174,8 @@ public final class XMLLoggerHandler {
 		List<Element> childElements = element.elements();
 
 		if ((!childElements.isEmpty() && !_isExecutingFunction(element) &&
-			!_isExecutingMethod(element)) || _isExecutingMacro(element) ||
-			_isExecutingTestCase(element)) {
+			 !_isExecutingMethod(element)) ||
+			_isExecutingMacro(element) || _isExecutingTestCase(element)) {
 
 			sb.append(_getBtnItemText("btn-collapse"));
 		}
