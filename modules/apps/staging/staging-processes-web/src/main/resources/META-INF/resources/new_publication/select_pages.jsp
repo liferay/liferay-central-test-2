@@ -100,8 +100,8 @@ boolean disableInputs = ParamUtil.getBoolean(request, "disableInputs");
 		<aui:fieldset label="pages-to-export">
 
 			<%
-			String treeId = ParamUtil.getString(request, "treeId");
 			long selPlid = ParamUtil.getLong(request, "selPlid", LayoutConstants.DEFAULT_PLID);
+			String treeId = ParamUtil.getString(request, "treeId");
 			%>
 
 			<div class="pages-selector">
