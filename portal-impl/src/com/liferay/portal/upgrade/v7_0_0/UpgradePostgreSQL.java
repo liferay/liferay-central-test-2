@@ -91,8 +91,7 @@ public class UpgradePostgreSQL extends UpgradeProcess {
 		sb.append("select lo_unlink(l.oid) from pg_largeobject_metadata l ");
 		sb.append("where ");
 
-		int count = 1;
-		int size = oidColumnNames.size();
+		int i = 1;
 
 		for (Map.Entry<String, String> column : oidColumnNames.entrySet()) {
 			String tableName = column.getKey();
@@ -104,11 +103,11 @@ public class UpgradePostgreSQL extends UpgradeProcess {
 			sb.append(columnName);
 			sb.append(" = l.oid))");
 
-			if (count < size) {
+			if (i < oidColumnNames.size()) {
 				sb.append(" and ");
 			}
 
-			count++;
+			i++;
 		}
 
 		try {
