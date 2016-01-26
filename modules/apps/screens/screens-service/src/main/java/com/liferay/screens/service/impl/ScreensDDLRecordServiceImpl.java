@@ -24,7 +24,7 @@ import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.screens.service.base.ScreensDDLRecordServiceBaseImpl;
-
+import com.liferay.dynamic.data.mapping.model.Value;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -43,8 +43,9 @@ public class ScreensDDLRecordServiceImpl
 
 		DDLRecord ddlRecord = ddlRecordLocalService.getRecord(ddlRecordId);
 
-		Set<Locale> availableLocales =
-			ddlRecord.getDDMFormValues().getAvailableLocales();
+		DDMFormValues ddmFormValues = ddlRecord.getDDMFormValues();
+
+		Set<Locale> availableLocales = ddmFormValues.getAvailableLocales();
 
 		if ((locale == null) || !availableLocales.contains(locale)) {
 			locale = ddlRecord.getDDMFormValues().getDefaultLocale();
@@ -145,8 +146,9 @@ public class ScreensDDLRecordServiceImpl
 			DDMFormFieldValue ddmFormFieldValue, Locale locale)
 		throws PortalException {
 
-		String fieldValueString =
-			ddmFormFieldValue.getValue().getString(locale);
+		Value value = ddmFormFieldValue.getValue();
+
+		String fieldValueString = value.getString(locale);
 
 		if (fieldValueString == null) {
 			return null;
