@@ -41,12 +41,13 @@ public class IconHelpTag extends IconTag {
 
 	@Override
 	protected void setAttributes(HttpServletRequest request) {
+		request.setAttribute("liferay-ui:icon-help:id", StringUtil.randomId());
+
 		ResourceBundle resourceBundle = TagResourceBundleUtil.getResourceBundle(
 			pageContext);
 
 		String message = LanguageUtil.get(resourceBundle, getMessage());
 
-		request.setAttribute("liferay-ui:icon-help:id", StringUtil.randomId());
 		request.setAttribute("liferay-ui:icon-help:message", message);
 
 		super.setAttributes(request);
