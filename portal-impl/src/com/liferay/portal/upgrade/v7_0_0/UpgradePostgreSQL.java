@@ -41,14 +41,14 @@ public class UpgradePostgreSQL extends UpgradeProcess {
 			return;
 		}
 
-		Map<String, String> columnsWithOids = getColumnsWithOids();
+		Map<String, String> oidColumnNames = getOidColumnNames();
 
-		updatePostgreSQLRules(columnsWithOids);
+		updatePostgreSQLRules(oidColumnNames);
 
-		updateOrphanedLargeObjects(columnsWithOids);
+		updateOrphanedLargeObjects(oidColumnNames);
 	}
 
-	protected HashMap<String, String> getColumnsWithOids() throws Exception {
+	protected HashMap<String, String> getOidColumnNames() throws Exception {
 		HashMap<String, String> columnsWithOids = new HashMap<>();
 
 		PreparedStatement ps = null;
@@ -66,10 +66,10 @@ public class UpgradePostgreSQL extends UpgradeProcess {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				String table = (String)rs.getObject("table_name");
-				String column = (String)rs.getObject("column_name");
+				String tableName = (String)rs.getObject("table_name");
+				String columnName = (String)rs.getObject("column_name");
 
-				columnsWithOids.put(table, column);
+				columnsWithOids.put(tableName, columnName);
 			}
 
 			return columnsWithOids;
@@ -81,7 +81,7 @@ public class UpgradePostgreSQL extends UpgradeProcess {
 	}
 
 	protected void updateOrphanedLargeObjects(
-			Map<String, String> columnsWithOids)
+			Map<String, String> oidColumnNames)
 		throws Exception {
 
 		PreparedStatement ps = null;
@@ -92,9 +92,9 @@ public class UpgradePostgreSQL extends UpgradeProcess {
 		sb.append("where ");
 
 		int count = 1;
-		int size = columnsWithOids.size();
+		int size = oidColumnNames.size();
 
-		for (Map.Entry<String, String> column : columnsWithOids.entrySet()) {
+		for (Map.Entry<String, String> column : oidColumnNames.entrySet()) {
 			String tableName = column.getKey();
 			String columnName = column.getValue();
 
@@ -121,18 +121,18 @@ public class UpgradePostgreSQL extends UpgradeProcess {
 		}
 	}
 
-	protected void updatePostgreSQLRules(Map<String, String> columnsWithOids)
+	protected void updatePostgreSQLRules(Map<String, String> oidColumnNames)
 		throws Exception {
 
-		for (Map.Entry<String, String> entry : columnsWithOids.entrySet()) {
+		for (Map.Entry<String, String> entry : oidColumnNames.entrySet()) {
 			PreparedStatement ps = null;
 
-			String table = entry.getKey();
-			String column = entry.getValue();
+			String tableName = entry.getKey();
+			String columnName = entry.getValue();
 
 			try {
 				ps = connection.prepareStatement(
-					PostgreSQLDB.getCreateRulesSQL(table, column));
+					PostgreSQLDB.getCreateRulesSQL(tableName, columnName));
 
 				ps.executeUpdate();
 			}
