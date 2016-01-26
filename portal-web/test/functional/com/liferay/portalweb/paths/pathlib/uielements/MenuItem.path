@@ -274,6 +274,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>DETAILS</td>
+	<td>//ul[contains(@class,'dropdown-menu')]/li/a[contains(.,'Details')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>DISCARD_DRAFT</td>
 	<td>//a[@role='menuitem' and contains(.,'Discard Draft')]</td>
 	<td></td>
@@ -481,6 +486,11 @@
 <tr>
 	<td>MERGE</td>
 	<td>//div[contains(@class,'open')]//a[@role='menuitem' and contains(.,'Merge')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>METADATA</td>
+	<td>//ul[contains(@class,'dropdown-menu')]/li/a[contains(.,'Metadata')]</td>
 	<td></td>
 </tr>
 <tr>
@@ -836,6 +846,11 @@
 <tr>
 	<td>VERSION</td>
 	<td>//span[@class='workflow-version']/strong</td>
+	<td></td>
+</tr>
+<tr>
+	<td>VERSIONS</td>
+	<td>//ul[contains(@class,'dropdown-menu')]/li/a[contains(.,'Versions')]</td>
 	<td></td>
 </tr>
 <tr>
