@@ -1,8 +1,5 @@
 <definition>
-	<var method="TestPropsUtil#get('portal.url')" name="siteName" />
-
-	<var method="StringUtil#replace('${siteName}', 'http://', '')" name="siteName" />
-	<var method="StringUtil#replace('${siteName}', ':8080', '')" name="siteName" />
+	<var name="siteName" value="Liferay" />
 
 	<command name="_assertDialogBoxPresent">
 		<if>
