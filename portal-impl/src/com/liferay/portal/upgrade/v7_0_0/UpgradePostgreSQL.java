@@ -132,7 +132,7 @@ public class UpgradePostgreSQL extends UpgradeProcess {
 
 			try {
 				ps = connection.prepareStatement(
-					PostgreSQLDB.getCreateRulesSql(table, column));
+					PostgreSQLDB.getCreateRulesSQL(table, column));
 
 				ps.executeUpdate();
 			}
