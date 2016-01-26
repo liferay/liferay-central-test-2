@@ -172,12 +172,13 @@
 			<var name="bookmarkURL" value="http://www.liferay.com/" />
 		</execute>
 
-		<execute macro="BookmarksFolder#gotoSubfolderPG">
-			<var name="folderName" value="Folder Name" />
+		<execute macro="Navigator#gotoSitePage">
 			<var name="pageName" value="Test Page" />
 			<var name="siteName" value="Site Name" />
-			<var name="siteURL" value="true" />
-			<var name="subfolderName" value="Subfolder Name" />
+		</execute>
+
+		<execute macro="BookmarksFolder#gotoPG">
+			<var name="folderName" value="Folder Name" />
 		</execute>
 
 		<execute macro="BookmarksFolder#moveSubfolderToRecycleBinPG">
