@@ -33,6 +33,23 @@ else {
 	rootNodeName = LanguageUtil.get(request, "public-pages");
 }
 
+String treeId = "layoutsExportTree" + liveGroupId + privateLayout;
+
+String openNodes = SessionTreeJSClicks.getOpenNodes(request, treeId + "SelectedNode");
+
+long[] selectedLayoutIds = null;
+
+if (openNodes == null) {
+	selectedLayoutIds = ExportImportHelperUtil.getAllLayoutIds(liveGroupId, privateLayout);
+
+	for (long selectedLayoutId : selectedLayoutIds) {
+		SessionTreeJSClicks.openLayoutNodes(request, treeId + "SelectedNode", privateLayout, selectedLayoutId, true);
+	}
+}
+else {
+	selectedLayoutIds = GetterUtil.getLongValues(StringUtil.split(openNodes, ','));
+}
+
 long exportImportConfigurationId = 0;
 
 ExportImportConfiguration exportImportConfiguration = null;
@@ -65,23 +82,6 @@ else {
 }
 
 boolean configuredExport = (exportImportConfiguration == null) ? false : true;
-
-String treeId = "layoutsExportTree" + liveGroupId + privateLayout;
-
-String openNodes = SessionTreeJSClicks.getOpenNodes(request, treeId + "SelectedNode");
-
-long[] selectedLayoutIds = null;
-
-if (openNodes == null) {
-	selectedLayoutIds = ExportImportHelperUtil.getAllLayoutIds(liveGroupId, privateLayout);
-
-	for (long selectedLayoutId : selectedLayoutIds) {
-		SessionTreeJSClicks.openLayoutNodes(request, treeId + "SelectedNode", privateLayout, selectedLayoutId, true);
-	}
-}
-else {
-	selectedLayoutIds = GetterUtil.getLongValues(StringUtil.split(openNodes, ','));
-}
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
