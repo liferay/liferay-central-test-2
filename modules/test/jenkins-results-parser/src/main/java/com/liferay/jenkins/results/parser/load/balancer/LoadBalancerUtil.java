@@ -17,6 +17,7 @@ package com.liferay.jenkins.results.parser.load.balancer;
 import com.liferay.jenkins.results.parser.JenkinsResultsParserUtil;
 
 import java.io.File;
+import java.io.StringReader;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -43,6 +44,15 @@ import org.json.JSONObject;
  * @author Peter Yoo
  */
 public class LoadBalancerUtil {
+
+	public static String getMostAvailableMasterURL(
+			HashMap<String, String> overrideMap)
+		throws Exception {
+
+		return getMostAvailableMasterURL(
+			"http://mirrors/github.com/liferay/liferay-jenkins-ee/commands/" +
+				"build.properties", overrideMap);
+	}
 
 	public static String getMostAvailableMasterURL(Properties properties)
 		throws Exception {
@@ -207,6 +217,24 @@ public class LoadBalancerUtil {
 				JenkinsResultsParserUtil.write(semaphoreFile, "");
 			}
 		}
+	}
+
+	public static String getMostAvailableMasterURL(
+			String propertiesURL, HashMap<String, String> overrideMap)
+		throws Exception {
+
+		String propertiesString = JenkinsResultsParserUtil.toString(
+			JenkinsResultsParserUtil.getLocalURL(propertiesURL), false);
+
+		Properties properties = new Properties();
+
+		properties.load(new StringReader(propertiesString));
+
+		if (overrideMap != null) {
+			properties.putAll(overrideMap);
+		}
+
+		return getMostAvailableMasterURL(properties);
 	}
 
 	protected static List<String> getBlackList(Properties properties) {
