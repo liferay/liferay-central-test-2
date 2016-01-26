@@ -16,39 +16,39 @@
 
 <%@ include file="/init.jsp" %>
 
-<%
-boolean searchEnabled = ParamUtil.getBoolean(request, "searchEnabled");
-
-String tabs1 = siteMembershipsDisplayContext.getTabs1();
-%>
-
 <aui:nav-bar cssClass="collapse-basic-search" markupView="lexicon">
 	<aui:nav cssClass="navbar-nav">
 
 		<%
-			PortletURL usersURL = siteMembershipsDisplayContext.getPortletURL();
+		PortletURL usersURL = siteMembershipsDisplayContext.getPortletURL();
 
-			usersURL.setParameter("tabs1", "users");
+		usersURL.setParameter("tabs1", "users");
+
+		String tabs1 = siteMembershipsDisplayContext.getTabs1();
 		%>
 
 		<aui:nav-item href="<%= usersURL.toString() %>" label="users" selected='<%= tabs1.equals("users") %>' />
 
 		<%
-			PortletURL organizationsURL = siteMembershipsDisplayContext.getPortletURL();
+		PortletURL organizationsURL = siteMembershipsDisplayContext.getPortletURL();
 
-			organizationsURL.setParameter("tabs1", "organizations");
+		organizationsURL.setParameter("tabs1", "organizations");
 		%>
 
 		<aui:nav-item href="<%= organizationsURL.toString() %>" label="organizations" selected='<%= tabs1.equals("organizations") %>' />
 
 		<%
-			PortletURL userGroupsURL = siteMembershipsDisplayContext.getPortletURL();
+		PortletURL userGroupsURL = siteMembershipsDisplayContext.getPortletURL();
 
-			userGroupsURL.setParameter("tabs1", "user-groups");
+		userGroupsURL.setParameter("tabs1", "user-groups");
 		%>
 
 		<aui:nav-item href="<%= userGroupsURL.toString() %>" label="user-groups" selected='<%= tabs1.equals("user-groups") %>' />
 	</aui:nav>
+
+	<%
+	boolean searchEnabled = ParamUtil.getBoolean(request, "searchEnabled");
+	%>
 
 	<c:if test="<%= searchEnabled %>">
 		<aui:nav-bar-search>
