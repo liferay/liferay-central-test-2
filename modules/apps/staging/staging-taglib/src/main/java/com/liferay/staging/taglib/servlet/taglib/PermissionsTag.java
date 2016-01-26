@@ -48,8 +48,8 @@ public class PermissionsTag extends IncludeTag {
 
 	@Override
 	protected void cleanUp() {
-		_global = false;
 		_disableInputs = false;
+		_global = false;
 		_parameterMap = null;
 	}
 
@@ -60,9 +60,9 @@ public class PermissionsTag extends IncludeTag {
 
 	@Override
 	protected void setAttributes(HttpServletRequest request) {
-		request.setAttribute("liferay-staging:deletions:global", _global);
 		request.setAttribute(
 			"liferay-staging:permissions:disableInputs", _disableInputs);
+		request.setAttribute("liferay-staging:deletions:global", _global);
 		request.setAttribute(
 			"liferay-staging:permissions:parameterMap", _parameterMap);
 	}
