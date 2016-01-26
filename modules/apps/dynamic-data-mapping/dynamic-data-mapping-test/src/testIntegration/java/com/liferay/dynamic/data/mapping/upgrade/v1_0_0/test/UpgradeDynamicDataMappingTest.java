@@ -89,7 +89,7 @@ public class UpgradeDynamicDataMappingTest {
 	@Before
 	public void setUp() throws Exception {
 		_group = GroupTestUtil.addGroup();
-		_now = new Timestamp(System.currentTimeMillis());
+		_timestamp = new Timestamp(System.currentTimeMillis());
 
 		setUpClassNameIds();
 		setUpPrimaryKeys();
@@ -99,9 +99,13 @@ public class UpgradeDynamicDataMappingTest {
 	@After
 	public void tearDown() throws Exception {
 		deleteStructure(_structureId);
+
 		deleteStructure(_parentStructureId);
+
 		deleteTemplate(_templateId);
+
 		deleteContent(_contentId);
+
 		deleteStorageLink(_storageLinkId);
 	}
 
@@ -785,8 +789,8 @@ public class UpgradeDynamicDataMappingTest {
 			ps.setLong(3, _group.getCompanyId());
 			ps.setLong(4, TestPropsValues.getUserId());
 			ps.setString(5, null);
-			ps.setTimestamp(6, _now);
-			ps.setTimestamp(7, _now);
+			ps.setTimestamp(6, _timestamp);
+			ps.setTimestamp(7, _timestamp);
 			ps.setString(8, DDMStorageLink.class.getName());
 			ps.setString(9, StringPool.BLANK);
 			ps.setString(10, data);
@@ -899,8 +903,8 @@ public class UpgradeDynamicDataMappingTest {
 			ps.setString(5, null);
 			ps.setLong(6, TestPropsValues.getUserId());
 			ps.setString(7, null);
-			ps.setTimestamp(8, _now);
-			ps.setTimestamp(9, _now);
+			ps.setTimestamp(8, _timestamp);
+			ps.setTimestamp(9, _timestamp);
 			ps.setLong(10, parentStructureId);
 			ps.setLong(11, _classNameIdDDLRecordSet);
 			ps.setString(12, StringUtil.randomString());
@@ -949,8 +953,8 @@ public class UpgradeDynamicDataMappingTest {
 			ps.setString(5, null);
 			ps.setLong(6, TestPropsValues.getUserId());
 			ps.setString(7, null);
-			ps.setTimestamp(8, _now);
-			ps.setTimestamp(9, _now);
+			ps.setTimestamp(8, _timestamp);
+			ps.setTimestamp(9, _timestamp);
 			ps.setLong(10, _classNameIdDDMStructure);
 			ps.setLong(11, structureId);
 			ps.setLong(12, _classNameIdDDLRecordSet);
@@ -1108,7 +1112,7 @@ public class UpgradeDynamicDataMappingTest {
 	@DeleteAfterTestRun
 	private Group _group;
 
-	private Timestamp _now;
+	private Timestamp _timestamp;
 	private long _parentStructureId;
 	private long _storageLinkId;
 	private long _structureId;
