@@ -18,7 +18,9 @@
 	<command name="_gotoAddPGViaWCD">
 		<execute function="Click#makeVisibleClickAt" locator1="WCD#ADD_WEB_CONTENT" />
 
-		<execute function="AssertClick" locator1="WCD#ADD_BASIC_WEB_CONTENT" value1="Basic Web Content" />
+		<var name="key_structureName" value="Basic Web Content" />
+
+		<execute function="AssertClick" locator1="WCD#ADD_STRUCTURED_WEB_CONTENT" value1="Basic Web Content" />
 
 		<execute function="SelectFrame" locator1="IFrame#EDIT_ASSET" />
 
