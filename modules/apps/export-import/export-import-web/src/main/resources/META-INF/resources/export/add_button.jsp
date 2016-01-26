@@ -50,7 +50,7 @@ List<ExportImportConfiguration> exportImportConfigurations = ExportImportConfigu
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.EXPORT %>" />
 		<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
 		<portlet:param name="liveGroupId" value="<%= String.valueOf(liveGroupId) %>" />
-		<portlet:param name="privateLayout" value="<%= String.valueOf(false) %>" />
+		<portlet:param name="privateLayout" value="<%= Boolean.FALSE.toString() %>" />
 	</liferay-portlet:renderURL>
 
 	<liferay-frontend:add-menu-item title='<%= LanguageUtil.get(request, "custom-export") %>' url="<%= addNewCustomExportProcessURL %>" />
