@@ -334,8 +334,8 @@ if (portletTitleBasedNavigation && (folderId != DLFolderConstants.DEFAULT_PARENT
 										</c:if>
 
 										<c:if test="<%= fileEntry.hasLock() %>">
-											<div class="sticker file-icon-color-0 sticker-right">
-												<aui:icon cssClass="icon-monospaced" image="lock" markupView="lexicon" message="locked"/>
+											<div class="file-icon-color-0 sticker sticker-right">
+												<aui:icon cssClass="icon-monospaced" image="lock" markupView="lexicon" message="locked" />
 											</div>
 										</c:if>
 									</liferay-frontend:vertical-card-sticker-bottom>
@@ -368,7 +368,7 @@ if (portletTitleBasedNavigation && (folderId != DLFolderConstants.DEFAULT_PARENT
 
 									<c:if test="<%= fileEntry.hasLock() %>">
 										<span>
-											<aui:icon cssClass="icon-monospaced" image="lock" markupView="lexicon" message="locked"/>
+											<aui:icon cssClass="icon-monospaced" image="lock" markupView="lexicon" message="locked" />
 										</span>
 									</c:if>
 								</liferay-ui:search-container-column-text>
