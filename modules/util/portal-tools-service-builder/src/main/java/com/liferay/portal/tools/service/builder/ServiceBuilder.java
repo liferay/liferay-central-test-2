@@ -562,7 +562,7 @@ public class ServiceBuilder {
 				_implDirName + "/" + StringUtil.replace(packagePath, ".", "/");
 
 			_oldServiceOutputPath =
-				_apiDirName + "/" + StringUtil.replace(packagePath, '.', '/');
+				_apiDirName + "/" + StringUtil.replace(packagePath, ".", "/");
 
 			_serviceOutputPath =
 				_apiDirName + "/" +
