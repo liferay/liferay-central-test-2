@@ -28,21 +28,6 @@ import java.sql.SQLException;
  */
 public class UpgradeKernelPackages extends UpgradeProcess {
 
-	private static final String[][] _CLASS_NAMES = new String[][] {
-		{
-			"com.liferay.portlet.announcements.model.AnnouncementsDelivery",
-			"com.liferay.announcements.kernel.model.AnnouncementsDelivery"
-		},
-		{
-			"com.liferay.portlet.announcements.model.AnnouncementsEntry",
-			"com.liferay.announcements.kernel.model.AnnouncementsEntry"
-		},
-		{
-			"com.liferay.portlet.announcements.model.AnnouncementsFlag",
-			"com.liferay.announcements.kernel.model.AnnouncementsFlag"
-		}
-	};
-
 	@Override
 	protected void doUpgrade() throws SQLException {
 		upgradeTable("Counter", "name");
@@ -113,5 +98,20 @@ public class UpgradeKernelPackages extends UpgradeProcess {
 			ps2.executeBatch();
 		}
 	}
+
+	private static final String[][] _CLASS_NAMES = new String[][] {
+		{
+			"com.liferay.portlet.announcements.model.AnnouncementsDelivery",
+			"com.liferay.announcements.kernel.model.AnnouncementsDelivery"
+		},
+		{
+			"com.liferay.portlet.announcements.model.AnnouncementsEntry",
+			"com.liferay.announcements.kernel.model.AnnouncementsEntry"
+		},
+		{
+			"com.liferay.portlet.announcements.model.AnnouncementsFlag",
+			"com.liferay.announcements.kernel.model.AnnouncementsFlag"
+		}
+	};
 
 }
