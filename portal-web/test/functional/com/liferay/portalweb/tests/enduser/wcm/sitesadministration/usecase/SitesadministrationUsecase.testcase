@@ -560,7 +560,7 @@
 			<var name="virtualHostsURL" value="http://www.able.com:8080/test-private-page" />
 		</execute>
 
-		<execute macro="Site#viewPrivateVirtaulHostUrlUserLoginRedirect">
+		<execute macro="Site#viewPrivateVirtualHostUrlUserLoginRedirect">
 			<var name="userEmailAddress" value="@liferay.com" />
 		</execute>
 
