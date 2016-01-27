@@ -19,8 +19,6 @@ import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.service.GroupLocalServiceUtil;
-import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextThreadLocal;
 import com.liferay.portal.util.PortalUtil;
@@ -72,14 +70,14 @@ public class ScreensUserServiceImpl extends ScreensUserServiceBaseImpl {
 		}
 
 		if (serviceContext.getPlid() == 0) {
-			long plid = LayoutLocalServiceUtil.getDefaultPlid(
+			long plid = layoutLocalService.getDefaultPlid(
 				serviceContext.getScopeGroupId(), false);
 
 			serviceContext.setPlid(plid);
 		}
 
 		if (serviceContext.getScopeGroupId() == 0) {
-			Group guestGroup = GroupLocalServiceUtil.getGroup(
+			Group guestGroup = groupLocalService.getGroup(
 				companyId, GroupConstants.GUEST);
 
 			serviceContext.setScopeGroupId(guestGroup.getGroupId());

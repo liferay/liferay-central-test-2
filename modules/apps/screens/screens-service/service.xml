@@ -6,9 +6,11 @@
 	<namespace>Screens</namespace>
 	<entity name="ScreensAssetEntry" local-service="false" remote-service="true">
 		<reference package-path="com.liferay.journal" entity="JournalArticle" />
+		<reference package-path="com.liferay.journal" entity="JournalArticleResource" />
 		<reference package-path="com.liferay.portal" entity="PortletItem" />
 		<reference package-path="com.liferay.portal" entity="PortletPreferences" />
 		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />
+		<reference package-path="com.liferay.portlet.documentlibrary" entity="DLApp" />
 		<reference package-path="com.liferay.portlet.documentlibrary" entity="DLFileEntry" />
 	</entity>
 	<entity name="ScreensDDLRecord" local-service="false" remote-service="true">
@@ -20,5 +22,7 @@
 	</entity>
 	<entity name="ScreensUser" local-service="false" remote-service="true">
 		<reference package-path="com.liferay.portal" entity="Company" />
+		<reference package-path="com.liferay.portal" entity="Group" />
+		<reference package-path="com.liferay.portal" entity="Layout" />
 	</entity>
 </service-builder>
