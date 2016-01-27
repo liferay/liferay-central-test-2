@@ -50,7 +50,7 @@ public class LoadBalancerUtil {
 		throws Exception {
 
 		return getMostAvailableMasterURL(
-			"http://mirrors.lax.liferay.com/github.com/liferay" + 
+			"http://mirrors.lax.liferay.com/github.com/liferay" +
 				"/liferay-jenkins-ee/commands/build.properties",
 			overrideMap);
 	}
