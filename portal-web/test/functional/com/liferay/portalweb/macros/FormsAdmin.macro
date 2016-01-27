@@ -13,16 +13,6 @@
 		<execute function="AssertTextEquals#assertPartialText" locator1="Message#SUCCESS" value1="Your request completed successfully." />
 	</command>
 
-	<command name="saveDataProvider">
-		<execute function="SelectFrame" value1="relative=top" />
-
-		<execute function="AssertClick" locator1="Button#SAVE" value1="Save" />
-
-		<execute function="SelectFrame" locator1="IFrame#DIALOG" />
-
-		<execute macro="Alert#viewRequestCompletedSuccessMessage" />
-	</command>
-
 	<command name="editDataProvider">
 		<execute macro="FormFields#editText">
 			<var name="fieldName" value="DataProviderPortlet_name" />
@@ -53,6 +43,16 @@
 			<var name="fieldName" value="$password" />
 			<var name="fieldValue" value="${password}" />
 		</execute>
+	</command>
+
+	<command name="saveDataProvider">
+		<execute function="SelectFrame" value1="relative=top" />
+
+		<execute function="AssertClick" locator1="Button#SAVE" value1="Save" />
+
+		<execute function="SelectFrame" locator1="IFrame#DIALOG" />
+
+		<execute macro="Alert#viewRequestCompletedSuccessMessage" />
 	</command>
 
 	<command name="searchFormEntry">
