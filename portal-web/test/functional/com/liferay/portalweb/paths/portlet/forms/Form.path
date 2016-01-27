@@ -101,6 +101,11 @@
 	<td>//div[@class='field-type']/div[contains(.,'${key_fieldType}')]</td>
 	<td></td>
 </tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
 <!--PUBLISH-->
 <tr>
 	<td>PUBLISH_FORM_NAME_FIELD</td>
