@@ -14,7 +14,6 @@
 
 package com.liferay.portal.kernel.trash.bundle.trashhandlerregistryutil;
 
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.search.Query;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.filter.Filter;
@@ -235,14 +234,13 @@ public class TestTrashHandler implements TrashHandler {
 	}
 
 	@Override
-	public int getTrashModelsCount(long classPK) throws PortalException {
+	public int getTrashModelsCount(long classPK) {
 		return 0;
 	}
 
 	@Override
 	public List<TrashRenderer> getTrashModelTrashRenderers(
-			long classPK, int start, int end, OrderByComparator obc)
-		throws PortalException {
+		long classPK, int start, int end, OrderByComparator<?> obc) {
 
 		return null;
 	}
