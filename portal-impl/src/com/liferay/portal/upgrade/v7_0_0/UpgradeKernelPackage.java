@@ -26,7 +26,7 @@ import java.sql.SQLException;
 /**
  * @author Preston Crary
  */
-public class UpgradeKernelPackages extends UpgradeProcess {
+public class UpgradeKernelPackage extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws SQLException {
