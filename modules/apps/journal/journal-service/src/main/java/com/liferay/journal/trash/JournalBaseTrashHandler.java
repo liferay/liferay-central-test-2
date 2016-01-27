@@ -217,16 +217,16 @@ public abstract class JournalBaseTrashHandler extends BaseTrashHandler {
 
 		JournalFolder folder = JournalFolderLocalServiceUtil.getFolder(classPK);
 
-		List<Object> entries =
+		List<Object> foldersAndArticles =
 			JournalFolderLocalServiceUtil.getFoldersAndArticles(
 				folder.getGroupId(), classPK, WorkflowConstants.STATUS_IN_TRASH,
 				start, end, obc);
 
-		for (Object entry : entries) {
+		for (Object folderOrArticle : foldersAndArticles) {
 			TrashRenderer trashRenderer = null;
 
-			if (entry instanceof JournalFolder) {
-				JournalFolder curFolder = (JournalFolder)entry;
+			if (folderOrArticle instanceof JournalFolder) {
+				JournalFolder curFolder = (JournalFolder)folderOrArticle;
 
 				TrashHandler trashHandler =
 					TrashHandlerRegistryUtil.getTrashHandler(
@@ -236,7 +236,7 @@ public abstract class JournalBaseTrashHandler extends BaseTrashHandler {
 					curFolder.getPrimaryKey());
 			}
 			else {
-				JournalArticle article = (JournalArticle)entry;
+				JournalArticle article = (JournalArticle)folderOrArticle;
 
 				TrashHandler trashHandler =
 					TrashHandlerRegistryUtil.getTrashHandler(
