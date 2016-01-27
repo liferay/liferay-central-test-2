@@ -1287,7 +1287,7 @@
 		<var name="key_publishDate" value="${publishDate}" />
 		<var name="separator" value=" " />
 
-		<var method="StringUtil#extractFirst('${key_publishDate}, ${separator}')" name="gmailKBArticleDate" />
+		<var method="StringUtil#extractFirst('${key_publishDate}','${separator}')" name="gmailKBArticleDate" />
 
 		<execute macro="Gmail#login">
 			<var name="userEmailAddress" value="${userEmailAddress}" />
