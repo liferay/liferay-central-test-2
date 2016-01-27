@@ -139,7 +139,6 @@ public class VersionTest {
 		assertNotSame("1.1", "1.1-SNAPSHOT");
 		assertNotSame("1.1.1", "1.1.1-SNAPSHOT");
 		assertNotSame("1.1.1.1", "1.1.1.1-SNAPSHOT");
-
 		assertSame("1.1-snapshot", "1.1-SNAPSHOT");
 	}
 
