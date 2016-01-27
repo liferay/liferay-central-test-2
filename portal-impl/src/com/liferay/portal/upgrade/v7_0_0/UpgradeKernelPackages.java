@@ -26,7 +26,7 @@ import java.sql.SQLException;
 /**
  * @author Preston Crary
  */
-public class UpgradeServicePackages extends UpgradeProcess {
+public class UpgradeKernelPackages extends UpgradeProcess {
 
 	public static final String[][] CLASS_NAMES = new String[][] {
 		{
