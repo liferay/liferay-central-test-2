@@ -17,7 +17,6 @@ package com.liferay.screens.service.impl;
 import com.liferay.asset.publisher.web.util.AssetPublisherUtil;
 import com.liferay.journal.model.JournalArticle;
 import com.liferay.journal.model.JournalArticleResource;
-import com.liferay.journal.service.JournalArticleResourceLocalServiceUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.Property;
@@ -42,7 +41,6 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.asset.service.persistence.AssetEntryQuery;
-import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
 import com.liferay.screens.service.base.ScreensAssetEntryServiceBaseImpl;
 
 import java.util.List;
@@ -163,7 +161,7 @@ public class ScreensAssetEntryServiceImpl
 	protected JSONObject getFileEntryJSONObject(AssetEntry assetEntry)
 		throws PortalException {
 
-		FileEntry fileEntry = DLAppServiceUtil.getFileEntry(
+		FileEntry fileEntry = dlAppService.getFileEntry(
 			assetEntry.getClassPK());
 
 		JSONObject fileEntryJSONObject = JSONFactoryUtil.createJSONObject(
@@ -201,7 +199,7 @@ public class ScreensAssetEntryServiceImpl
 		}
 		catch (Exception nsae) {
 			JournalArticleResource journalArticleResource =
-				JournalArticleResourceLocalServiceUtil.getArticleResource(
+				journalArticleResourceLocalService.getArticleResource(
 					assetEntry.getClassPK());
 
 			journalArticle = journalArticleLocalService.getLatestArticle(
