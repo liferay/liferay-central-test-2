@@ -360,7 +360,7 @@ public class DDMFormValuesExportImportContentProcessor
 
 			if (layout == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn("Unable to find layout with id " + layoutId);
+					_log.warn("Unable to find layout with ID " + layoutId);
 				}
 			}
 
