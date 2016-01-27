@@ -579,6 +579,7 @@
 
 		<execute function="AssertClick" locator1="Button#PREVIEW" value1="Preview" />
 
+		<var name="key_threadBody" value="${threadBody}" />
 		<var name="key_threadSubject" value="${threadSubject}" />
 
 		<execute function="AssertTextEquals" locator1="MessageBoardsThread#TITLE_HEADER" value1="Edit ${threadSubject}" />
@@ -780,8 +781,8 @@
 	</command>
 
 	<command name="splitThreadPG">
-		<var name="key_threadBody" value="${threadReplyBody}" />
 		<var name="key_threadSubject" value="${threadSubject}" />
+		<var name="threadReplyBody" value="${threadReplyBody}" />
 
 		<execute function="Click" locator1="MessageBoards#VERTICAL_ELLIPSIS_REPLY_CARD" />
 
@@ -802,6 +803,8 @@
 		<execute function="Type#typeCKEditorWaitForCKEditor" locator1="CKEditor#BODY_FIELD" value1="${threadSplitReplyBody}" />
 
 		<execute function="AssertClick" locator1="Button#OK" value1="OK" />
+
+		<var name="key_threadBody" value="${threadReplyBody}" />
 
 		<execute function="AssertTextEquals" locator1="MessageBoardsThread#TITLE_HEADER" value1="${threadSplitReplySubject}" />
 		<execute function="AssertTextEquals" locator1="MessageBoardsThread#MESSAGE_BODY_1" value1="${threadReplyBody}" />
@@ -891,11 +894,15 @@
 	</command>
 
 	<command name="viewAsWorkflowAsset">
+		<var name="key_threadBody" value="${threadBody}" />
+		<var name="key_threadSubject" value="${threadSubject}" />
+
 		<execute function="AssertTextEquals" locator1="Home#SITE_ADMINISTRATION_PORTLET_TITLE" value1="${threadSubject}" />
 		<execute function="AssertTextEquals" locator1="MessageBoardsThread#THREAD_BODY" value1="${threadBody}" />
 	</command>
 
 	<command name="viewCP">
+		<var name="key_threadBody" value="${threadBody}" />
 		<var name="key_threadSubject" value="${threadSubject}" />
 		<var name="key_userName" value="${userName}" />
 
@@ -1031,6 +1038,7 @@
 	</command>
 
 	<command name="viewNoXSSPG">
+		<var name="key_threadBody" value="" />
 		<var name="key_threadSubject" value="${threadSubject}" />
 		<var name="key_userName" value="${userName}" />
 
@@ -1042,6 +1050,7 @@
 	</command>
 
 	<command name="viewPG">
+		<var name="key_threadBody" value="${threadBody}" />
 		<var name="key_threadSubject" value="${threadSubject}" />
 		<var name="key_userName" value="${userName}" />
 
@@ -1062,10 +1071,12 @@
 		<if>
 			<isset var="threadSubject2" />
 			<then>
+				<var name="key_threadSubject" value="${threadSubject2}" />
+
 				<execute function="AssertTextEquals" locator1="MessageBoardsThread#TITLE_HEADER" value1="${threadSubject}" />
 				<execute function="AssertTextEquals" locator1="MessageBoardsThread#MESSAGE_USERNAME_2" value1="${userName}" />
 
-				<var name="key_threadSubject" value="${threadSubject2}" />
+				<var name="key_threadBody" value="${threadBody2}" />
 
 				<execute function="AssertTextEquals" locator1="MessageBoardsThread#MESSAGE_SUBJECT_2" value1="${threadSubject2}" />
 				<execute function="AssertTextEquals#assertPartialText" locator1="MessageBoardsThread#MESSAGE_BODY_2" value1="${threadBody2}" />
@@ -1129,6 +1140,7 @@
 	</command>
 
 	<command name="viewReplyPG">
+		<var name="key_threadBody" value="${threadBody}" />
 		<var name="key_threadSubject" value="${threadSubject}" />
 		<var name="key_userName" value="${userName}" />
 
@@ -1155,7 +1167,7 @@
 				<execute function="AssertTextEquals" locator1="MessageBoardsThread#THREAD_BODY" value1="${threadBody}" />
 				<execute function="AssertTextEquals#assertPartialText" locator1="MessageBoardsThread#THREAD_USERNAME" value1="${userName}" />
 				<execute function="AssertTextEquals" locator1="MessageBoardsThread#MESSAGE_SUBJECT_2" value1="RE: ${threadSubject}" />
-				<execute function="AssertTextEquals#assertPartialText" locator1="MessageBoardsThread#MESSAGE_BODY_2" value1="${threadReplyBody}" />
+				<var name="key_threadBody" value="${threadReplyBody}" />
 				<execute function="AssertTextEquals" locator1="MessageBoardsThread#MESSAGE_USERNAME_2_GUEST" value1="Anonymous" />
 			</then>
 			<else>
@@ -1165,7 +1177,7 @@
 				<execute function="AssertTextEquals#assertPartialText" locator1="MessageBoardsThread#THREAD_USERNAME" value1="${userName}" />
 				<execute function="AssertTextEquals" locator1="MessageBoardsThread#MESSAGE_RATING_1_UPVOTE" value1="0" />
 				<execute function="AssertTextEquals" locator1="MessageBoardsThread#MESSAGE_SUBJECT_2" value1="RE: ${threadSubject}" />
-				<execute function="AssertTextEquals#assertPartialText" locator1="MessageBoardsThread#MESSAGE_BODY_2" value1="${threadReplyBody}" />
+				<var name="key_threadBody" value="${threadReplyBody}" />
 				<execute function="AssertTextEquals" locator1="MessageBoardsThread#MESSAGE_USERNAME_2" value1="${userName}" />
 				<execute function="AssertTextEquals" locator1="MessageBoardsThread#MESSAGE_RATING_2_UPVOTE" value1="0" />
 			</else>
@@ -1189,6 +1201,7 @@
 	</command>
 
 	<command name="viewSplitThreadPG">
+		<var name="key_threadBody" value="${threadBody}" />
 		<var name="key_threadSubject" value="${threadSubject}" />
 		<var name="key_userName" value="${userName}" />
 
@@ -1200,6 +1213,10 @@
 		<execute function="AssertTextEquals" locator1="MessageBoardsThread#TITLE_HEADER" value1="${threadSubject}" />
 		<execute function="AssertTextEquals" locator1="MessageBoardsThread#THREAD_SUBJECT" value1="${threadSubject}" />
 		<execute function="AssertTextEquals" locator1="MessageBoardsThread#THREAD_BODY" value1="${threadBody}" />
+
+		<var name="key_threadBody" value="${threadSplitReplyBody}" />
+		<var name="key_threadSubject" value="Thread Split" />
+
 		<execute function="AssertTextEquals" locator1="MessageBoardsThread#MESSAGE_SUBJECT_2" value1="Thread Split" />
 		<execute function="AssertTextEquals#assertPartialText" locator1="MessageBoardsThread#MESSAGE_BODY_2" value1="${threadSplitReplyBody}" />
 
@@ -1211,6 +1228,7 @@
 			<var name="soPage" value="${soPage}" />
 		</execute>
 
+		<var name="key_threadBody" value="${threadReplyBody}" />
 		<var name="key_threadSubject" value="${threadSplitReplySubject}" />
 
 		<execute function="AssertTextEquals" locator1="MessageBoards#THREAD_TABLE_THREAD" value1="${threadSplitReplySubject}" />
