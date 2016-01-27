@@ -39,7 +39,7 @@ import org.junit.Test;
 /**
  * @author Preston Crary
  */
-public class UpgradeServicePackagesTest extends UpgradeServicePackages {
+public class UpgradeKernelPackagesTest extends UpgradeKernelPackages {
 
 	@ClassRule
 	@Rule
