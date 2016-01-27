@@ -84,13 +84,13 @@ public class UpgradeKernelPackages extends UpgradeProcess {
 							connection.prepareStatement(updateSQL))) {
 
 			while (rs.next()) {
-				String oldName = rs.getString(columnName);
+				String oldValue = rs.getString(columnName);
 
-				String newName = StringUtil.replace(
-					oldName, className[0], className[1]);
+				String newValue = StringUtil.replace(
+					oldValue, className[0], className[1]);
 
-				ps2.setString(1, newName);
-				ps2.setString(2, oldName);
+				ps2.setString(1, newValue);
+				ps2.setString(2, oldValue);
 
 				ps2.addBatch();
 			}
