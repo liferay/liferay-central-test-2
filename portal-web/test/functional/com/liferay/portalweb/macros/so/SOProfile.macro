@@ -984,7 +984,7 @@
 	</command>
 
 	<command name="viewLocalizedPG">
-		<execute macro="Navigator#openURL">
+		<execute macro="Navigator#openURL" />
 
 		<execute function="Click" locator1="ControlMenu#USER_NAME" />
 		<execute function="AssertClick" locator1="//span[contains(.,'${myProfileLocalized}')]" value1="${myProfileLocalized}" />
