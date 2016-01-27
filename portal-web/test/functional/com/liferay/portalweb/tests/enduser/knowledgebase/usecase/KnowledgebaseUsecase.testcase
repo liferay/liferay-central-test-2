@@ -1877,6 +1877,7 @@
 		</execute>
 
 		<execute macro="KBArticle#viewKBSuggestionNotificationsInGmail">
+			<var name="folderName" value="Home" />
 			<var name="gmailKBArticleDate" value="true" />
 			<var name="gmailMessageKBArticleURL" value="true" />
 			<var name="kbArticleContent" value="${kbArticleContent}" />
