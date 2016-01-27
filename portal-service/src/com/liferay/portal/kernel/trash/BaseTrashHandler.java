@@ -313,7 +313,7 @@ public abstract class BaseTrashHandler implements TrashHandler {
 	@Override
 	@SuppressWarnings("unused")
 	public List<TrashRenderer> getTrashModelTrashRenderers(
-			long classPK, int start, int end, OrderByComparator obc)
+			long classPK, int start, int end, OrderByComparator<?> obc)
 		throws PortalException {
 
 		return Collections.emptyList();

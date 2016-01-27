@@ -473,7 +473,7 @@ public interface TrashHandler {
 	public int getTrashModelsCount(long classPK) throws PortalException;
 
 	public List<TrashRenderer> getTrashModelTrashRenderers(
-			long classPK, int start, int end, OrderByComparator obc)
+			long classPK, int start, int end, OrderByComparator<?> obc)
 		throws PortalException;
 
 	/**
