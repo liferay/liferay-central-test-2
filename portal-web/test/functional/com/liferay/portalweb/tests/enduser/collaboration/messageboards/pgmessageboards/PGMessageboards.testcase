@@ -928,18 +928,6 @@
 		</execute>
 	</command>
 
-	<command name="PreviewThread" priority="5">
-		<execute macro="Page#gotoPG">
-			<var name="pageName" value="Message Boards Page" />
-		</execute>
-
-		<execute macro="MessageboardsThread#previewAddPG">
-			<var name="threadBody" value="Message boards Preview Body" />
-			<var name="threadSubject" value="Message Boards Preview Subject" />
-			<var name="userName" value="Test Test" />
-		</execute>
-	</command>
-
 	<command name="SaveThreadAsDraft" priority="5">
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="Message Boards Page" />
