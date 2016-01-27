@@ -18,13 +18,16 @@
 
 <%
 int cur = ParamUtil.getInteger(request, SearchContainer.DEFAULT_CUR_PARAM);
-String definitionsNavigation = ParamUtil.getString(request, "definitionsNavigation");
 int delta = ParamUtil.getInteger(request, SearchContainer.DEFAULT_DELTA_PARAM);
+
 String navigation = ParamUtil.getString(request, "navigation", "definitions");
+String definitionsNavigation = ParamUtil.getString(request, "definitionsNavigation");
+
 String orderByCol = ParamUtil.getString(request, "orderByCol", "name");
 String orderByType = ParamUtil.getString(request, "orderByType", "asc");
 
 PortletURL navigationPortletURL = renderResponse.createRenderURL();
+
 navigationPortletURL.setParameter("mvcPath", "/view.jsp");
 
 if (delta > 0) {
@@ -44,13 +47,14 @@ if (cur > 0) {
 	displayStyleURL.setParameter("cur", String.valueOf(cur));
 }
 
+PortletURL searchURL = renderResponse.createRenderURL();
+
+searchURL.setParameter("groupId", String.valueOf(themeDisplay.getScopeGroupId()));
+searchURL.setParameter("mvcPath", "/view.jsp");
+
 PortletURL viewDefinitionsURL = renderResponse.createRenderURL();
 
 viewDefinitionsURL.setParameter("navigation", "definitions");
-
-PortletURL searchURL = renderResponse.createRenderURL();
-searchURL.setParameter("groupId", String.valueOf(themeDisplay.getScopeGroupId()));
-searchURL.setParameter("mvcPath", "/view.jsp");
 
 WorkflowDefinitionSearch workflowDefinitionSearch = new WorkflowDefinitionSearch(renderRequest, portletURL);
 %>
