@@ -28,7 +28,7 @@ import java.sql.SQLException;
  */
 public class UpgradeKernelPackages extends UpgradeProcess {
 
-	public static final String[][] CLASS_NAMES = new String[][] {
+	private static final String[][] _CLASS_NAMES = new String[][] {
 		{
 			"com.liferay.portlet.announcements.model.AnnouncementsDelivery",
 			"com.liferay.announcements.kernel.model.AnnouncementsDelivery"
@@ -52,7 +52,7 @@ public class UpgradeKernelPackages extends UpgradeProcess {
 	}
 
 	protected String[][] getClassNames() {
-		return CLASS_NAMES;
+		return _CLASS_NAMES;
 	}
 
 	protected void upgradeTable(String tableName, String columnName)
