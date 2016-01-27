@@ -1188,9 +1188,7 @@
 	</command>
 
 	<command name="PublishWCIncludingTextsAndImages" priority="3">
-		<execute macro="Navigator#openSiteURL">
-			<var name="siteName" value="Liferay" />
-		</execute>
+		<execute macro="Navigator#openURL" />
 
 		<execute macro="ProductMenu#gotoSitesContent">
 			<var name="portlet" value="Documents and Media" />
