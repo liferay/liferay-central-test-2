@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.TempFileEntryUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
-import com.liferay.portal.kernel.workflow.WorkflowDefinition;
 import com.liferay.portal.kernel.workflow.WorkflowDefinitionFileException;
 import com.liferay.portal.kernel.workflow.WorkflowDefinitionManagerUtil;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -78,22 +77,18 @@ public class UpdateWorkflowDefitionMVCActionCommand
 			UploadWorkflowDefinitionFileMVCActionCommand.TEMP_FOLDER_NAME,
 			tempFileName);
 
-		WorkflowDefinition workflowDefinition = null;
-
 		if (tempFileEntry == null) {
-			workflowDefinition = WorkflowDefinitionManagerUtil.updateTitle(
+			WorkflowDefinitionManagerUtil.updateTitle(
 				themeDisplay.getCompanyId(), themeDisplay.getUserId(), name,
 				version, getTitle(titleMap));
 		}
 		else {
-			workflowDefinition =
-				WorkflowDefinitionManagerUtil.deployWorkflowDefinition(
-					themeDisplay.getCompanyId(), themeDisplay.getUserId(),
-					getTitle(titleMap), getFileBytes(tempFileEntry));
+			WorkflowDefinitionManagerUtil.deployWorkflowDefinition(
+				themeDisplay.getCompanyId(), themeDisplay.getUserId(),
+				getTitle(titleMap), getFileBytes(tempFileEntry));
 		}
 
-		actionRequest.setAttribute(
-			WebKeys.WORKFLOW_DEFINITION, workflowDefinition);
+		sendRedirect(actionRequest, actionResponse);
 	}
 
 	protected byte[] getFileBytes(FileEntry fileEntry) throws Exception {
