@@ -140,18 +140,18 @@ public abstract class BookmarksBaseTrashHandler extends BaseTrashHandler {
 		BookmarksFolder folder = BookmarksFolderLocalServiceUtil.getFolder(
 			classPK);
 
-		List<BookmarksEntry> entries =
+		List<BookmarksEntry> foldersAndEntries =
 			BookmarksEntryLocalServiceUtil.getEntries(
 				folder.getGroupId(), classPK, WorkflowConstants.STATUS_IN_TRASH,
 				start, end);
 
-		for (BookmarksEntry entry : entries) {
+		for (BookmarksEntry folderOrEntry : foldersAndEntries) {
 			TrashHandler trashHandler =
 				TrashHandlerRegistryUtil.getTrashHandler(
 					BookmarksEntry.class.getName());
 
 			TrashRenderer trashRenderer = trashHandler.getTrashRenderer(
-				entry.getEntryId());
+				folderOrEntry.getEntryId());
 
 			trashRenderers.add(trashRenderer);
 		}
@@ -223,16 +223,16 @@ public abstract class BookmarksBaseTrashHandler extends BaseTrashHandler {
 		BookmarksFolder folder = BookmarksFolderLocalServiceUtil.getFolder(
 			classPK);
 
-		List<Object> entries =
+		List<Object> foldersAndEntries =
 			BookmarksFolderLocalServiceUtil.getFoldersAndEntries(
 				folder.getGroupId(), classPK, WorkflowConstants.STATUS_IN_TRASH,
 				start, end, obc);
 
-		for (Object entry : entries) {
+		for (Object folderOrEntry : foldersAndEntries) {
 			TrashRenderer trashRenderer = null;
 
-			if (entry instanceof BookmarksFolder) {
-				BookmarksFolder curFolder = (BookmarksFolder)entry;
+			if (folderOrEntry instanceof BookmarksFolder) {
+				BookmarksFolder curFolder = (BookmarksFolder)folderOrEntry;
 
 				TrashHandler trashHandler =
 					TrashHandlerRegistryUtil.getTrashHandler(
@@ -242,14 +242,14 @@ public abstract class BookmarksBaseTrashHandler extends BaseTrashHandler {
 					curFolder.getPrimaryKey());
 			}
 			else {
-				BookmarksEntry curEntry = (BookmarksEntry)entry;
+				BookmarksEntry entry = (BookmarksEntry)folderOrEntry;
 
 				TrashHandler trashHandler =
 					TrashHandlerRegistryUtil.getTrashHandler(
 						BookmarksEntry.class.getName());
 
 				trashRenderer = trashHandler.getTrashRenderer(
-					curEntry.getEntryId());
+					entry.getEntryId());
 			}
 
 			trashRenderers.add(trashRenderer);

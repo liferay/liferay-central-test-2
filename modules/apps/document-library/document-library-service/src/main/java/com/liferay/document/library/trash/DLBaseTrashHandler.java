@@ -248,12 +248,12 @@ public abstract class DLBaseTrashHandler extends BaseTrashHandler {
 
 		DocumentRepository documentRepository = getDocumentRepository(classPK);
 
-		List<RepositoryEntry> entries =
+		List<RepositoryEntry> repositoryEntries =
 			documentRepository.getFoldersAndFileEntriesAndFileShortcuts(
 				classPK, WorkflowConstants.STATUS_IN_TRASH, false, start, end,
 				obc);
 
-		for (RepositoryEntry repositoryEntry : entries) {
+		for (RepositoryEntry repositoryEntry : repositoryEntries) {
 			TrashRenderer trashRenderer = null;
 
 			if (repositoryEntry instanceof FileShortcut) {

@@ -17,8 +17,6 @@
 <%@ include file="/init.jsp" %>
 
 <%
-String displayStyle = ParamUtil.getString(request, "displayStyle", "list");
-
 String redirect = ParamUtil.getString(request, "redirect");
 
 long trashEntryId = ParamUtil.getLong(request, "trashEntryId");
@@ -50,6 +48,8 @@ if (entry != null) {
 TrashHandler trashHandler = TrashHandlerRegistryUtil.getTrashHandler(className);
 
 TrashRenderer trashRenderer = trashHandler.getTrashRenderer(classPK);
+
+String displayStyle = ParamUtil.getString(request, "displayStyle", "list");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
