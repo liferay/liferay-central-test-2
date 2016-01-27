@@ -52,31 +52,36 @@ public class UpgradeKernelPackagesTest extends UpgradeKernelPackages {
 
 		runSQL("insert into Counter values('" + _OLD_CLASS_NAME + "', 10)");
 
-		long classNameId = CounterLocalServiceUtil.increment(
-			ClassName.class.getName());
-
 		runSQL(
-			"insert into ClassName_ values(0, " + classNameId +
+			"insert into ClassName_ values(0, " + increment(ClassName.class) +
 				", 'PREFIX_" + _OLD_CLASS_NAME + "')");
 
-		long resourceBlockId = CounterLocalServiceUtil.increment(
-			ResourceBlock.class.getName());
+		StringBundler sb = new StringBundler(8);
 
-		runSQL(
-			"insert into ResourceBlock values(0, " + resourceBlockId +
-				", " + TestPropsValues.getCompanyId() + ", " +
-					TestPropsValues.getGroupId() + ", '" + _OLD_CLASS_NAME +
-						"_POSTFIX', 'HASH', 1)");
+		sb.append("insert into ResourceBlock values(0, ");
+		sb.append(increment(ResourceBlock.class));
+		sb.append(", ");
+		sb.append(TestPropsValues.getCompanyId());
+		sb.append(", " + TestPropsValues.getGroupId());
+		sb.append( ", '");
+		sb.append(_OLD_CLASS_NAME);
+		sb.append("_POSTFIX', 'HASH', 1)");
 
-		long resourcePermissionId = CounterLocalServiceUtil.increment(
-			ResourcePermission.class.getName());
+		runSQL(sb.toString());
 
-		runSQL(
-			"insert into ResourcePermission values(0, " +
-				resourcePermissionId + ", " + TestPropsValues.getCompanyId() +
-					", 'PREFIX_" + _OLD_CLASS_NAME + "_POSTFIX', " +
-						ResourceConstants.SCOPE_INDIVIDUAL +
-							", 'PRIM_KEY', 2, 3, 4, 5, [$TRUE$])");
+		sb = new StringBundler(9);
+
+		sb.append("insert into ResourcePermission values(0, ");
+		sb.append(increment(ResourcePermission.class));
+		sb.append(", ");
+		sb.append(TestPropsValues.getCompanyId());
+		sb.append(", 'PREFIX_");
+		sb.append(_OLD_CLASS_NAME);
+		sb.append("_POSTFIX', ");
+		sb.append(ResourceConstants.SCOPE_INDIVIDUAL);
+		sb.append(", 'PRIM_KEY', 2, 3, 4, 5, [$TRUE$])");
+
+		runSQL(sb.toString());
 	}
 
 	@After
@@ -123,56 +128,56 @@ public class UpgradeKernelPackagesTest extends UpgradeKernelPackages {
 	protected void assertUpgradeSuccessful(String tableName, String columnName)
 		throws Exception {
 
-		StringBundler oldNameSB = new StringBundler(9);
+		StringBundler oldSelectSB = new StringBundler(9);
 
-		oldNameSB.append("select ");
-		oldNameSB.append(columnName);
-		oldNameSB.append(" from ");
-		oldNameSB.append(tableName);
-		oldNameSB.append(" where ");
-		oldNameSB.append(columnName);
-		oldNameSB.append(" like '%");
-		oldNameSB.append(_OLD_CLASS_NAME);
-		oldNameSB.append("%'");
+		oldSelectSB.append("select ");
+		oldSelectSB.append(columnName);
+		oldSelectSB.append(" from ");
+		oldSelectSB.append(tableName);
+		oldSelectSB.append(" where ");
+		oldSelectSB.append(columnName);
+		oldSelectSB.append(" like '%");
+		oldSelectSB.append(_OLD_CLASS_NAME);
+		oldSelectSB.append("%'");
 
-		String oldName = null;
+		String oldValue = null;
 
 		try (PreparedStatement ps = connection.prepareStatement(
-				oldNameSB.toString());
+				oldSelectSB.toString());
 			ResultSet rs = ps.executeQuery()) {
 
 			Assert.assertTrue(
-				tableName + "does not have a row whose " + columnName +
-					"'s value contains " + _OLD_CLASS_NAME,
+				"Table " + tableName + " and column " + columnName +
+					" does not contain value " + _OLD_CLASS_NAME,
 				rs.next());
 
-			oldName = rs.getString(columnName);
+			oldValue = rs.getString(columnName);
 		}
 
 		upgradeTable(tableName, columnName);
 
-		String newName = StringUtil.replace(
-			oldName, _OLD_CLASS_NAME, _NEW_CLASS_NAME);
+		String newValue = StringUtil.replace(
+			oldValue, _OLD_CLASS_NAME, _NEW_CLASS_NAME);
 
-		StringBundler newNameSB = new StringBundler(9);
+		StringBundler newSelectSB = new StringBundler(9);
 
-		newNameSB.append("select ");
-		newNameSB.append(columnName);
-		newNameSB.append(" from ");
-		newNameSB.append(tableName);
-		newNameSB.append(" where ");
-		newNameSB.append(columnName);
-		newNameSB.append(" = '");
-		newNameSB.append(newName);
-		newNameSB.append("'");
+		newSelectSB.append("select ");
+		newSelectSB.append(columnName);
+		newSelectSB.append(" from ");
+		newSelectSB.append(tableName);
+		newSelectSB.append(" where ");
+		newSelectSB.append(columnName);
+		newSelectSB.append(" = '");
+		newSelectSB.append(newValue);
+		newSelectSB.append("'");
 
 		try (PreparedStatement ps = connection.prepareStatement(
-				newNameSB.toString());
+				newSelectSB.toString());
 			ResultSet rs = ps.executeQuery()) {
 
 			Assert.assertTrue(
-				tableName + "does not have a row whose " + columnName +
-					"'s value is " + newName,
+				"Table " + tableName + " and column " + columnName +
+					" does not contain value " + newValue,
 				rs.next());
 		}
 	}
@@ -180,6 +185,10 @@ public class UpgradeKernelPackagesTest extends UpgradeKernelPackages {
 	@Override
 	protected String[][] getClassNames() {
 		return new String[][] {{_OLD_CLASS_NAME, _NEW_CLASS_NAME}};
+	}
+
+	protected long increment(Class<?> clazz) throws Exception {
+		return CounterLocalServiceUtil.increment(clazz.getName());
 	}
 
 	private static final String _NEW_CLASS_NAME =
