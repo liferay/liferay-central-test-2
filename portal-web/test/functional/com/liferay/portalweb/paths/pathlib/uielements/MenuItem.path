@@ -754,6 +754,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>SPLIT_THREAD</td>
+	<td>//a[@role='menuitem' and contains(.,'Split Thread')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>SPREADSHEET_VIEW</td>
 	<td>//div[contains(@class,'open')]//a[@role='menuitem' and contains(.,'Spreadsheet View')]</td>
 	<td></td>
