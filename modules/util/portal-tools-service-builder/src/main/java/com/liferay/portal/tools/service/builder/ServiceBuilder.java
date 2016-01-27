@@ -706,9 +706,7 @@ public class ServiceBuilder {
 
 							_createPool(entity);
 
-							if (entity.getPKList().size() > 1) {
-								_createEJBPK(entity);
-							}
+							_createEJBPK(entity);
 						}
 
 						_createFinder(entity);
@@ -1891,6 +1889,12 @@ public class ServiceBuilder {
 	}
 
 	private void _createEJBPK(Entity entity) throws Exception {
+		List<EntityColumn> pkList = entity.getPKList();
+
+		if (pkList.size() <= 1) {
+			return;
+		}
+
 		Map<String, Object> context = _getContext();
 
 		context.put("entity", entity);
@@ -5194,6 +5198,12 @@ public class ServiceBuilder {
 	}
 
 	private void _removeEJBPK(Entity entity, String outputPath) {
+		List<EntityColumn> pkList = entity.getPKList();
+
+		if (pkList.size() <= 1) {
+			return;
+		}
+
 		_deleteFile(
 			outputPath + "/service/persistence/" + entity.getPKClassName() +
 				".java");
@@ -5252,9 +5262,7 @@ public class ServiceBuilder {
 
 		_removeActionableDynamicQuery(entity, _oldServiceOutputPath);
 		_removeBlobModels(entity, _oldServiceOutputPath);
-		if (entity.getPKList().size() > 1) {
-			_removeEJBPK(entity, _oldServiceOutputPath);
-		}
+		_removeEJBPK(entity, _oldServiceOutputPath);
 		_removeExportActionableDynamicQuery(entity, _oldServiceOutputPath);
 		_removeExtendedModel(entity, _oldServiceOutputPath);
 		_removeFinder(entity, _oldServiceOutputPath);
