@@ -219,7 +219,9 @@
 		applyMediaScript: function(mediaNode, dialog, configText) {
 			var instance = this;
 
-			var dialogReplace = { dialog: dialog };
+			var dialogReplace = {
+				dialog: dialog
+			};
 
 			var mediaAUI = 'Audio';
 
