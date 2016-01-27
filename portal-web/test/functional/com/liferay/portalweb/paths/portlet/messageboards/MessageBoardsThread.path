@@ -21,7 +21,7 @@
 <!--THREAD-->
 <tr>
 	<td>THREAD_BODY</td>
-	<td>//div[@class='message-content']</td>
+	<td>//div[@class='message-content' and contains(.,'${key_threadBody}')]</td>
 	<td></td>
 </tr>
 <tr>
