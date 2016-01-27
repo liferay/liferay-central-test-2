@@ -4359,9 +4359,8 @@
 	</command>
 
 	<command name="ViewPageOrderWithStaging" priority="4">
-		<execute macro="Page#openURL">
+		<execute macro="Navigator#openSiteURL">
 			<var name="siteName" value="${siteName}" />
-			<var name="siteURL" value="true" />
 		</execute>
 
 		<execute macro="ProductMenu#gotoControlPanelSites">

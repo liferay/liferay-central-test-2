@@ -1507,7 +1507,7 @@
 			<var name="userEmailAddress" value="userea2@liferay.com" />
 		</execute>
 
-		<execute macro="Page#openURL" />
+		<execute macro="Navigator#openURL" />
 
 		<execute function="AssertElementNotPresent" locator1="Home#PAGE_2" />
 
