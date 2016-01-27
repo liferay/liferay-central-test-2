@@ -244,7 +244,7 @@ public class LoadBalancerUtil {
 	}
 
 	public static String getMostAvailableMasterURL(
-			String propertiesURL, String... overridePropertiesArray)
+			String propertiesURL, String[] overridePropertiesArray)
 		throws Exception {
 
 		Properties properties = new Properties();
