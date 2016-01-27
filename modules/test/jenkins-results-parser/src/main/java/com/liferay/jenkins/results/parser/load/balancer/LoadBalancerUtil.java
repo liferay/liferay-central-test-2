@@ -262,6 +262,10 @@ public class LoadBalancerUtil {
 				String overridePropertyName = overridePropertiesArray[i];
 				String overridePropertyValue = overridePropertiesArray[i + 1];
 
+				if (overridePropertyValue == null) {
+					continue;
+				}
+
 				properties.setProperty(
 					overridePropertyName, overridePropertyValue);
 			}
