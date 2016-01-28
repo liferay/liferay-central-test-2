@@ -46,13 +46,13 @@ public class MainParameters {
 		return _schemaName;
 	}
 
-	public boolean isTables() {
-		return _tables;
+	public boolean isWriteFile() {
+		return _writeFile;
 	}
 
 	public ExportContext toExportContext() {
 		return new ExportContext(
-			_getCompanyIds(), _outputDir, _schemaName, _tables);
+			_getCompanyIds(), _outputDir, _schemaName, _writeFile);
 	}
 
 	private List<Long> _getCompanyIds() {
@@ -91,7 +91,7 @@ public class MainParameters {
 	)
 	private String _schemaName;
 
-	@Parameter(names = {"-T", "--tables"})
-	private boolean _tables;
+	@Parameter(names = {"-W", "--write-file"})
+	private boolean _writeFile;
 
 }
