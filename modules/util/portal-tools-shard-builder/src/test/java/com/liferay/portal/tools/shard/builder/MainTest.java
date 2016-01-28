@@ -47,9 +47,9 @@ public class MainTest {
 	}
 
 	@Test(expected = ParameterException.class)
-	public void testValidateNonexistingPropertiesFile() throws Exception {
+	public void testValidateNonexistingOutputDirectory() throws Exception {
 		String[] arguments = {
-			"-C", _COMPANY_ID, "-O", "bar", "-P", "foo.properties", "-S",
+			"-C", _COMPANY_ID, "-O", "foo", "-P", "foo.properties", "-S",
 			_SCHEMA_NAME
 		};
 
@@ -57,9 +57,9 @@ public class MainTest {
 	}
 
 	@Test(expected = ParameterException.class)
-	public void testValidateNonexistingOutputDirectory() throws Exception {
+	public void testValidateNonexistingPropertiesFile() throws Exception {
 		String[] arguments = {
-			"-C", _COMPANY_ID, "-O", "foo", "-P", "foo.properties", "-S",
+			"-C", _COMPANY_ID, "-O", "bar", "-P", "foo.properties", "-S",
 			_SCHEMA_NAME
 		};
 
