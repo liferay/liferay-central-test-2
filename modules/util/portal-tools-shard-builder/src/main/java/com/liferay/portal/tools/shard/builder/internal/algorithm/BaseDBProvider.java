@@ -70,7 +70,7 @@ public abstract class BaseDBProvider
 		}
 	}
 
-	protected void generateInsert(
+	protected void generateInsertSQL(
 			OutputStream outputStream, String tableName, String[] fields)
 		throws IOException {
 
@@ -103,7 +103,7 @@ public abstract class BaseDBProvider
 
 	@Override
 	public List<String> getControlTableNames(String schemaName) {
-		return _getSchemaTableNames(getControlTablesSql(schemaName));
+		return getSchemaTableNames(getControlTablesSql(schemaName));
 	}
 
 	public abstract String getControlTablesSql(String schema);
@@ -125,7 +125,7 @@ public abstract class BaseDBProvider
 
 	@Override
 	public List<String> getPartitionedTableNames(String schemaName) {
-		return _getSchemaTableNames(getPartitionedTablesSql(schemaName));
+		return getSchemaTableNames(getPartitionedTablesSql(schemaName));
 	}
 
 	public abstract String getPartitionedTablesSql(String schema);
@@ -174,23 +174,23 @@ public abstract class BaseDBProvider
 
 	protected final Properties properties;
 
-	private PreparedStatement _buildPreparedStatement(
+	protected PreparedStatement buildPreparedStatement(
 			Connection connection, String sql, long companyId)
 		throws SQLException {
 
-		PreparedStatement ps = connection.prepareStatement(
+		PreparedStatement preparedStatement = connection.prepareStatement(
 			sql, ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
 
-		ps.setFetchSize(getFetchSize());
+		preparedStatement.setFetchSize(getFetchSize());
 
 		if (companyId > 0) {
-			ps.setLong(1, companyId);
+			preparedStatement.setLong(1, companyId);
 		}
 
-		return ps;
+		return preparedStatement;
 	}
 
-	private List<String> _getSchemaTableNames(String sql) {
+	protected List<String> getSchemaTableNames(String sql) {
 		List<String> tableNames = new ArrayList<>();
 
 		DataSource dataSource = getDataSource();
@@ -217,22 +217,22 @@ public abstract class BaseDBProvider
 	public void write(
 		long companyId, String tableName, OutputStream outputStream) {
 
-		String sql = "SELECT * FROM " + tableName;
-
-		if (companyId > 0) {
-			sql += " WHERE companyId = ?";
-		}
-
 		DataSource dataSource = getDataSource();
 
+		String sql = "select * from " + tableName;
+
+		if (companyId > 0) {
+			sql += " where companyId = ?";
+		}
+
 		try (Connection con = dataSource.getConnection();
-				PreparedStatement ps = _buildPreparedStatement(
+				PreparedStatement ps = buildPreparedStatement(
 					con, sql, companyId);
 				ResultSet rs = ps.executeQuery() ) {
 
-			ResultSetMetaData metaData = rs.getMetaData();
+			ResultSetMetaData resultSetMetaData = rs.getMetaData();
 
-			int columnCount = metaData.getColumnCount();
+			int columnCount = resultSetMetaData.getColumnCount();
 
 			while (rs.next()) {
 				String[] fields = new String[columnCount];
@@ -241,11 +241,11 @@ public abstract class BaseDBProvider
 					fields[i] = serializeTableField(rs.getObject(i + 1));
 				}
 
-				generateInsert(outputStream, tableName, fields);
+				generateInsertSQL(outputStream, tableName, fields);
 			}
 		}
 		catch (IOException | SQLException e) {
-			_logger.error("Error exporting the rows for table " + tableName, e);
+			_logger.error("Unable to export " + tableName, e);
 		}
 	}
 
