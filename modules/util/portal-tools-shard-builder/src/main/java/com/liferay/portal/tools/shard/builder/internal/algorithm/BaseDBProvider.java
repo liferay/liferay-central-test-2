@@ -108,10 +108,12 @@ public abstract class BaseDBProvider
 
 	public abstract String getControlTablesSql(String schema);
 
+	@Override
 	public DataSource getDataSource() {
 		return _dataSource;
 	}
 
+	@Override
 	public String getDateTimeFormat() {
 		return "YYYY-MM-DD HH:MM:SS";
 	}
@@ -129,7 +131,7 @@ public abstract class BaseDBProvider
 	public abstract String getPartitionedTablesSql(String schema);
 
 	@Override
-	public String serializeTableField(Object field) throws SQLException {
+	public String serializeTableField(Object field) {
 		StringBuilder sb = new StringBuilder();
 
 		if (field == null) {
