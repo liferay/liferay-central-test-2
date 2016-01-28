@@ -195,12 +195,13 @@ public abstract class BaseDBProvider
 
 		DataSource dataSource = getDataSource();
 
-		try (Connection con = dataSource.getConnection();
-				PreparedStatement ps = con.prepareStatement(sql);
-					ResultSet rs = ps.executeQuery() ) {
+		try (Connection connection = dataSource.getConnection();
+				PreparedStatement preparedStatement =
+					connection.prepareStatement(sql);
+				ResultSet resultSet = preparedStatement.executeQuery()) {
 
-			while (rs.next()) {
-				tableNames.add(rs.getString(getTableNameFieldName()));
+			while (resultSet.next()) {
+				tableNames.add(resultSet.getString(getTableNameFieldName()));
 			}
 		}
 		catch (SQLException sqle) {
@@ -225,20 +226,20 @@ public abstract class BaseDBProvider
 			sql += " where companyId = ?";
 		}
 
-		try (Connection con = dataSource.getConnection();
-				PreparedStatement ps = buildPreparedStatement(
-					con, sql, companyId);
-				ResultSet rs = ps.executeQuery() ) {
+		try (Connection connection = dataSource.getConnection();
+				PreparedStatement preparedStatement = buildPreparedStatement(
+					connection, sql, companyId);
+				ResultSet resultSet = preparedStatement.executeQuery() ) {
 
-			ResultSetMetaData resultSetMetaData = rs.getMetaData();
+			ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
 
 			int columnCount = resultSetMetaData.getColumnCount();
 
-			while (rs.next()) {
+			while (resultSet.next()) {
 				String[] fields = new String[columnCount];
 
 				for (int i = 0; i < columnCount; i++) {
-					fields[i] = serializeTableField(rs.getObject(i + 1));
+					fields[i] = serializeTableField(resultSet.getObject(i + 1));
 				}
 
 				generateInsertSQL(outputStream, tableName, fields);
