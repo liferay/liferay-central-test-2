@@ -27,7 +27,7 @@ public class RequiredParameterValidator implements IParameterValidator {
 		if (value == null) {
 			throw new ParameterException("Parameter " + name + " is null");
 		}
-		
+
 		value = value.trim();
 
 		if (value.length() == 0) {
