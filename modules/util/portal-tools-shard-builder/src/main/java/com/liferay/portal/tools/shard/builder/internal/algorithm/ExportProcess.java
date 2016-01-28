@@ -62,7 +62,7 @@ public class ExportProcess {
 		else {
 			outputFileName += "control";
 		}
-			
+
 		outputFileName += ".sql";
 
 		File outputFile = new File(
