@@ -160,16 +160,10 @@ public abstract class BaseDBProvider
 		return sb.toString();
 	}
 
-	@Override
-	public void write(
-		long companyId, String tableName, OutputStream outputStream) {
-
-		doWrite(companyId, tableName, outputStream);
-	}
 
 	@Override
 	public void write(String tableName, OutputStream outputStream) {
-		doWrite(0, tableName, outputStream);
+		write(0, tableName, outputStream);
 	}
 
 	protected String formatDateTime(Object date) {
@@ -219,7 +213,8 @@ public abstract class BaseDBProvider
 		return tableNames;
 	}
 
-	protected void doWrite(
+	@Override
+	public void write(
 		long companyId, String tableName, OutputStream outputStream) {
 
 		String sql = "SELECT * FROM " + tableName;
