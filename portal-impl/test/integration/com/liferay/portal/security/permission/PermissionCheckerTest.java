@@ -77,7 +77,6 @@ public class PermissionCheckerTest {
 			permissionChecker.hasPermission(
 				_group.getGroupId(), withExceptionPortletId,
 				_group.getGroupId(), withExceptionActionId));
-
 		Assert.assertFalse(
 			permissionChecker.hasPermission(
 				_group.getGroupId(), withoutExceptionPortletId,
