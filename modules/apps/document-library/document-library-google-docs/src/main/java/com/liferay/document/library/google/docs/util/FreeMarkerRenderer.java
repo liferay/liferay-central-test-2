@@ -42,6 +42,7 @@ public class FreeMarkerRenderer {
 			new DefaultObjectWrapperBuilder(Configuration.getVersion());
 
 		configuration.setObjectWrapper(defaultObjectWrapperBuilder.build());
+
 		configuration.setTemplateLoader(
 			new ClassTemplateLoader(
 				FreeMarkerRenderer.class, StringPool.SLASH));
