@@ -31,11 +31,11 @@ public class Main {
 	public static void main(String[] arguments) throws Exception {
 		MainParameters mainParameters = _validate(arguments);
 
-		Properties databaseProperties = PropsReader.read(
-			mainParameters.getDatabaseProperties());
+		Properties properties = PropsReader.read(
+			mainParameters.getPropertiesFileName());
 
 		ShardExporter shardExporter = ShardExporterFactory.getShardExporter(
-			databaseProperties);
+			properties);
 
 		ExportContext exportContext = mainParameters.toExportContext();
 

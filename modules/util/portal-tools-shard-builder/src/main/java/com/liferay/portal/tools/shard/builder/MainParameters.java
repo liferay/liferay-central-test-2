@@ -30,16 +30,16 @@ import java.util.List;
  */
 public class MainParameters {
 
-	public String getCompanies() {
+	public String getCompanyIds() {
 		return _companyIds;
 	}
 
-	public String getDatabaseProperties() {
-		return _properties;
+	public String getPropertiesFileName() {
+		return _propertiesFileName;
 	}
 
-	public String getOutputDir() {
-		return _outputDir;
+	public String getOutputDirName() {
+		return _outputDirName;
 	}
 
 	public String getSchemaName() {
@@ -52,19 +52,17 @@ public class MainParameters {
 
 	public ExportContext toExportContext() {
 		return new ExportContext(
-			_getCompanyIds(), _outputDir, _schemaName, _writeFile);
+			_getCompanyIds(), _outputDirName, _schemaName, _writeFile);
 	}
 
 	private List<Long> _getCompanyIds() {
-		String[] companyIds = _companyIds.split(",");
+		List<Long> companyIds = new ArrayList<>();
 
-		List<Long> list = new ArrayList<>(companyIds.length);
-
-		for (String companyId : companyIds) {
-			list.add(Long.parseLong(companyId));
+		for (String companyId : _companyIds.split(",")) {
+			companyIds.add(Long.parseLong(companyId));
 		}
 
-		return list;
+		return companyIds;
 	}
 
 	@Parameter(
@@ -77,13 +75,13 @@ public class MainParameters {
 		names = {"-O", "--output-dir"},
 		validateWith = WritableFileRequiredParameterValidator.class
 	)
-	private String _outputDir;
+	private String _outputDirName;
 
 	@Parameter(
-		names = {"-P", "--properties"},
+		names = {"-P", "--properties-file"},
 		validateWith = FileRequiredParameterValidator.class
 	)
-	private String _properties;
+	private String _propertiesFileName;
 
 	@Parameter(
 		names = {"-S", "--schema-name"},
