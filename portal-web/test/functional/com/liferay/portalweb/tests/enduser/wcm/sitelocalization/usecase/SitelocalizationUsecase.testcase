@@ -59,8 +59,8 @@
 		</execute>
 
 		<execute macro="Page#viewPageLocalization">
-			<var name="page" value="Language Test Page" />
 			<var name="defaultSiteLanguageKey" value="es_ES" />
+			<var name="page" value="Language Test Page" />
 		</execute>
 
 		<execute macro="Navigator#openURL" />
