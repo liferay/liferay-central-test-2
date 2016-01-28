@@ -68,13 +68,13 @@ public class ExportProcess {
 
 		OutputStream outputStream = null;
 
-		if (!exportContext.isTableFiles()) {
+		if (!exportContext.isTables()) {
 			outputStream = new BufferedOutputStream(
 				new FileOutputStream(outputFile));
 		}
 
 		for (String tableName : tableNames) {
-			if (exportContext.isTableFiles()) {
+			if (exportContext.isTables()) {
 				outputFileName =
 					exportContext.getSchemaName() + "-" + companyId + "-" +
 						tableName + ".sql";
@@ -95,12 +95,12 @@ public class ExportProcess {
 
 			outputStream.flush();
 
-			if (exportContext.isTableFiles()) {
+			if (exportContext.isTables()) {
 				outputStream.close();
 			}
 		}
 
-		if (!exportContext.isTableFiles()) {
+		if (!exportContext.isTables()) {
 			outputStream.close();
 		}
 	}

@@ -23,12 +23,12 @@ public class ExportContext {
 
 	public ExportContext(
 		List<Long> companyIds, String outputDirName, String schemaName,
-		boolean tableFiles) {
+		boolean tables) {
 
 		_companyIds = companyIds;
 		_outputDirName = outputDirName;
 		_schemaName = schemaName;
-		_tableFiles = tableFiles;
+		_tables = tables;
 	}
 
 	public List<Long> getCompanyIds() {
@@ -43,13 +43,13 @@ public class ExportContext {
 		return _schemaName;
 	}
 
-	public boolean isTableFiles() {
-		return _tableFiles;
+	public boolean isTables() {
+		return _tables;
 	}
 
 	private final List<Long> _companyIds;
 	private final String _outputDirName;
 	private final String _schemaName;
-	private final boolean _tableFiles;
+	private final boolean _tables;
 
 }
