@@ -28,8 +28,8 @@ import java.util.Properties;
  */
 public class Main {
 
-	public static void main(String[] args) throws Exception {
-		MainParameters mainParameters = _validate(args);
+	public static void main(String[] arguments) throws Exception {
+		MainParameters mainParameters = _validate(arguments);
 
 		Properties databaseProperties = PropsReader.read(
 			mainParameters.getDatabaseProperties());
@@ -42,14 +42,16 @@ public class Main {
 		shardExporter.export(exportContext);
 	}
 
-	private static MainParameters _validate(String[] args) throws Exception {
+	private static MainParameters _validate(String[] arguments)
+		throws Exception {
+
 		MainParameters mainParameters = new MainParameters();
 
-		if ((args == null) || (args.length == 0)) {
-			throw new IllegalArgumentException("Arguments cannot be null");
+		if ((arguments == null) || (arguments.length == 0)) {
+			throw new IllegalArgumentException("Arguments are null");
 		}
 
-		new JCommander(mainParameters, args);
+		new JCommander(mainParameters, arguments);
 
 		return mainParameters;
 	}
