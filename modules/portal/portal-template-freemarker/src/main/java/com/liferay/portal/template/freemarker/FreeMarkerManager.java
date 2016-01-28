@@ -169,13 +169,13 @@ public class FreeMarkerManager extends BaseSingleTemplateManager {
 		addTaglibApplication(contextObjects, "Application", servletContext);
 		addTaglibRequest(contextObjects, "Request", request, response);
 
-		// Legacy taglib factory names
+		// Legacy
 
 		addTaglibFactory(contextObjects, "PortalJspTagLibs", servletContext);
 		addTaglibFactory(contextObjects, "PortletJspTagLibs", servletContext);
 		addTaglibFactory(contextObjects, "taglibLiferayHash", servletContext);
 
-		// Contributed taglibs
+		// Contributed
 
 		TaglibFactoryWrapper taglibFactoryWrapper = new TaglibFactoryWrapper(
 			servletContext);
@@ -187,7 +187,7 @@ public class FreeMarkerManager extends BaseSingleTemplateManager {
 			}
 			catch (TemplateModelException tme) {
 				_log.error(
-					"Cannot add taglib " + entry.getKey() + " to context");
+					"Unable to add taglib " + entry.getKey() + " to context");
 			}
 		}
 	}
@@ -291,7 +291,7 @@ public class FreeMarkerManager extends BaseSingleTemplateManager {
 			DebuggerService.getBreakpoints("*");
 		}
 
-		_initTaglibMappings();
+		initTaglibMappings();
 	}
 
 	@Reference(unbind = "-")
@@ -379,7 +379,7 @@ public class FreeMarkerManager extends BaseSingleTemplateManager {
 		return false;
 	}
 
-	private void _initTaglibMappings() {
+	protected void initTaglibMappings() {
 		Enumeration<URL> enumeration = _bundle.findEntries(
 			"/", "*taglib-mapping.properties", false);
 
@@ -397,7 +397,7 @@ public class FreeMarkerManager extends BaseSingleTemplateManager {
 				_taglibMappings.putAll(PropertiesUtil.toMap(properties));
 			}
 			catch (Exception e) {
-				_log.error(e);
+				_log.error(e, e);
 			}
 		}
 	}
