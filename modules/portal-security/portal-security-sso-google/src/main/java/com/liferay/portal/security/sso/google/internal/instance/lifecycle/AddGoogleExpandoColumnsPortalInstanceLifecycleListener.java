@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.security.sso.google.internal.lifecycle;
+package com.liferay.portal.security.sso.google.internal.instance.lifecycle;
 
 import com.liferay.portal.instance.lifecycle.PortalInstanceLifecycleListener;
 import com.liferay.portal.kernel.module.framework.ModuleServiceLifecycle;
