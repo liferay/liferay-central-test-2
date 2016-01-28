@@ -66,23 +66,23 @@ public abstract class BaseDBProvider
 			exportProcess.export(exportContext);
 		}
 		catch (IOException ioe) {
-			_logger.error("Unexpected error during the export process", ioe);
+			_logger.error("Unable to export", ioe);
 		}
 	}
 
-	public void generateInsert(
+	protected void generateInsert(
 			OutputStream outputStream, String tableName, String[] fields)
 		throws IOException {
 
 		if ((fields == null) || (fields.length == 0)) {
-			throw new IllegalArgumentException("Fields cannot be empty");
+			throw new IllegalArgumentException("Fields are null");
 		}
 
 		StringBuilder sb = new StringBuilder();
 
 		sb.append("INSERT INTO ");
 		sb.append(tableName);
-		sb.append(" VALUES(");
+		sb.append(" VALUES (");
 
 		for (int i = 0; i < fields.length; i++) {
 			String field = fields[i];
@@ -96,9 +96,9 @@ public abstract class BaseDBProvider
 
 		sb.append(")");
 
-		String insert = sb.toString() + ";\n";
+		String sql = sb.toString() + ";\n";
 
-		outputStream.write(insert.getBytes());
+		outputStream.write(sql.getBytes());
 	}
 
 	@Override
@@ -164,12 +164,12 @@ public abstract class BaseDBProvider
 	public void write(
 		long companyId, String tableName, OutputStream outputStream) {
 
-		_write(companyId, tableName, outputStream);
+		doWrite(companyId, tableName, outputStream);
 	}
 
 	@Override
 	public void write(String tableName, OutputStream outputStream) {
-		_write(0, tableName, outputStream);
+		doWrite(0, tableName, outputStream);
 	}
 
 	protected String formatDateTime(Object date) {
@@ -219,7 +219,7 @@ public abstract class BaseDBProvider
 		return tableNames;
 	}
 
-	private void _write(
+	protected void doWrite(
 		long companyId, String tableName, OutputStream outputStream) {
 
 		String sql = "SELECT * FROM " + tableName;
