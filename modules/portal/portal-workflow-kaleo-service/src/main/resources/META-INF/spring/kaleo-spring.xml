@@ -20,7 +20,6 @@
 		</property>
 		<property name="methodInterceptor" ref="transactionAdvice" />
 	</bean>
-
 	<bean class="com.liferay.portal.spring.aop.ServiceBeanAutoProxyCreator">
 		<property name="beanMatcher">
 			<bean class="com.liferay.portal.spring.aop.BeanNameMatcher">
@@ -29,7 +28,6 @@
 		</property>
 		<property name="methodInterceptor" ref="transactionAdvice" />
 	</bean>
-
 	<bean class="com.liferay.portal.spring.aop.ServiceBeanAutoProxyCreator">
 		<property name="beanMatcher">
 			<bean class="com.liferay.portal.spring.aop.BeanNameMatcher">
@@ -38,7 +36,6 @@
 		</property>
 		<property name="methodInterceptor" ref="transactionAdvice" />
 	</bean>
-
 	<bean class="com.liferay.portal.spring.aop.ServiceBeanAutoProxyCreator">
 		<property name="beanMatcher">
 			<bean class="com.liferay.portal.spring.aop.BeanNameMatcher">

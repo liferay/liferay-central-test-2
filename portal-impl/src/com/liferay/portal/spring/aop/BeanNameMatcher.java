@@ -24,7 +24,7 @@ public class BeanNameMatcher implements BeanMatcher {
 
 	public void afterPropertiesSet() {
 		if (_beanNamePattern == null) {
-			throw new IllegalStateException("Bean name pattern must be set");
+			throw new IllegalStateException("Bean name pattern is null");
 		}
 	}
 
