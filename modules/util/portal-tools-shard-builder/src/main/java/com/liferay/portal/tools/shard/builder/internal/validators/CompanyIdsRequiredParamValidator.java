@@ -16,22 +16,26 @@ package com.liferay.portal.tools.shard.builder.internal.validators;
 
 import com.beust.jcommander.ParameterException;
 
-import java.io.File;
-
 /**
  * @author Manuel de la Peña
  */
-public class WritableFileParamValidator extends FileParamExistsValidator {
+public class CompanyIdsRequiredParamValidator extends RequiredParamValidator {
 
 	@Override
 	public void validate(String name, String value) throws ParameterException {
 		super.validate(name, value);
 
-		File file = new File(value);
+		String[] companyIds = value.split(",");
 
-		if (!file.canRead() || !file.canWrite()) {
-			throw new ParameterException(
-				"File parameter " + name + " is read-only");
+		for (String companyId : companyIds) {
+			try {
+				Long.parseLong(companyId);
+			}
+			catch (NumberFormatException nfe) {
+				throw new ParameterException(
+					"Parameter " + name + " with value " + companyId +
+						" is not a valid number");
+			}
 		}
 	}
 
