@@ -61,13 +61,12 @@ public class LanguageImplTest {
 			Locale nullableLocale = null;
 
 			try {
-				String format = _languageImpl.format(
-					nullableLocale, _LANG_KEY_WITH_ARGUMENT, "31");
-
 				String expectedMessage = _languageImpl.format(
 					nullableLocale, _LANG_KEY_WITH_ARGUMENT, "31");
+				String actualMessage = _languageImpl.format(
+					nullableLocale, _LANG_KEY_WITH_ARGUMENT, "31");
 
-				Assert.assertEquals(expectedMessage, format);
+				Assert.assertEquals(expectedMessage, actualMessage);
 			}
 			finally {
 				LocaleThreadLocal.setDefaultLocale(defaultLocale);
@@ -86,49 +85,49 @@ public class LanguageImplTest {
 		public void testFormatWithOneNontranslatableAmericanArgument() {
 			Locale locale = LocaleUtil.US;
 
-			String format = _languageImpl.format(
+			String message = _languageImpl.format(
 				locale, _LANG_KEY_WITH_ARGUMENT, _BIG_INTEGER, false);
 
-			Assert.assertEquals("1,234,567,890 Hours", format);
+			Assert.assertEquals("1,234,567,890 Hours", message);
 
-			format = _languageImpl.format(
+			message = _languageImpl.format(
 				locale, _LANG_KEY_WITH_ARGUMENT, _BIG_DOUBLE, false);
 
-			Assert.assertEquals("1,234,567,890.12 Hours", format);
+			Assert.assertEquals("1,234,567,890.12 Hours", message);
 
-			format = _languageImpl.format(
+			message = _languageImpl.format(
 				locale, _LANG_KEY_WITH_ARGUMENT, _BIG_FLOAT, false);
 
-			Assert.assertEquals("1,234,567.875 Hours", format);
+			Assert.assertEquals("1,234,567.875 Hours", message);
 		}
 
 		@Test
 		public void testFormatWithOneNontranslatableSpanishArgument() {
 			Locale locale = LocaleUtil.SPAIN;
 
-			String format = _languageImpl.format(
+			String message = _languageImpl.format(
 				locale, _LANG_KEY_WITH_ARGUMENT, _BIG_INTEGER, false);
 
-			Assert.assertEquals("1.234.567.890 horas", format);
+			Assert.assertEquals("1.234.567.890 horas", message);
 
-			format = _languageImpl.format(
+			message = _languageImpl.format(
 				locale, _LANG_KEY_WITH_ARGUMENT, _BIG_DOUBLE, false);
 
-			Assert.assertEquals("1.234.567.890,12 horas", format);
+			Assert.assertEquals("1.234.567.890,12 horas", message);
 
-			format = _languageImpl.format(
+			message = _languageImpl.format(
 				locale, _LANG_KEY_WITH_ARGUMENT, _BIG_FLOAT, false);
 
-			Assert.assertEquals("1.234.567,875 horas", format);
+			Assert.assertEquals("1.234.567,875 horas", message);
 		}
 
 		@Test
 		public void testFormatWithTwoArguments() {
-			String format = _languageImpl.format(
+			String message = _languageImpl.format(
 				LocaleUtil.US, _LANG_KEY_WITH_ARGUMENTS,
 				new Object[] {"A", "B"});
 
-			Assert.assertEquals("A has invited you to join B.", format);
+			Assert.assertEquals("A has invited you to join B.", message);
 		}
 
 	}
@@ -151,11 +150,11 @@ public class LanguageImplTest {
 			MockLanguageServletRequest mockLanguageServletRequest =
 				new MockLanguageServletRequest(LocaleUtil.US);
 
-			String format = _languageImpl.format(
+			String message = _languageImpl.format(
 				mockLanguageServletRequest.getRequest(),
 				_LANG_KEY_WITH_ARGUMENT, "31");
 
-			Assert.assertEquals("31 Hours", format);
+			Assert.assertEquals("31 Hours", message);
 		}
 
 		@Test
@@ -163,12 +162,12 @@ public class LanguageImplTest {
 			MockLanguageServletRequest mockLanguageServletRequest =
 				new MockLanguageServletRequest(LocaleUtil.US);
 
-			String format = _languageImpl.format(
+			String message = _languageImpl.format(
 				mockLanguageServletRequest.getRequest(),
 				_LANG_KEY_WITH_ARGUMENT,
 				new LanguageWrapper("a", "31", "a"));
 
-			Assert.assertEquals("a31a Hours", format);
+			Assert.assertEquals("a31a Hours", message);
 		}
 
 		@Test
@@ -176,23 +175,23 @@ public class LanguageImplTest {
 			MockLanguageServletRequest mockLanguageServletRequest =
 				new MockLanguageServletRequest(LocaleUtil.US);
 
-			String format = _languageImpl.format(
+			String message = _languageImpl.format(
 				mockLanguageServletRequest.getRequest(),
 				_LANG_KEY_WITH_ARGUMENT, _BIG_INTEGER, false);
 
-			Assert.assertEquals("1,234,567,890 Hours", format);
+			Assert.assertEquals("1,234,567,890 Hours", message);
 
-			format = _languageImpl.format(
+			message = _languageImpl.format(
 				mockLanguageServletRequest.getRequest(),
 				_LANG_KEY_WITH_ARGUMENT, _BIG_DOUBLE, false);
 
-			Assert.assertEquals("1,234,567,890.12 Hours", format);
+			Assert.assertEquals("1,234,567,890.12 Hours", message);
 
-			format = _languageImpl.format(
+			message = _languageImpl.format(
 				mockLanguageServletRequest.getRequest(),
 				_LANG_KEY_WITH_ARGUMENT, _BIG_FLOAT, false);
 
-			Assert.assertEquals("1,234,567.875 Hours", format);
+			Assert.assertEquals("1,234,567.875 Hours", message);
 		}
 
 		@Test
@@ -200,23 +199,23 @@ public class LanguageImplTest {
 			MockLanguageServletRequest mockLanguageServletRequest =
 				new MockLanguageServletRequest(LocaleUtil.SPAIN);
 
-			String format = _languageImpl.format(
+			String message = _languageImpl.format(
 				mockLanguageServletRequest.getRequest(),
 				_LANG_KEY_WITH_ARGUMENT, _BIG_INTEGER, false);
 
-			Assert.assertEquals("1.234.567.890 horas", format);
+			Assert.assertEquals("1.234.567.890 horas", message);
 
-			format = _languageImpl.format(
+			message = _languageImpl.format(
 				mockLanguageServletRequest.getRequest(),
 				_LANG_KEY_WITH_ARGUMENT, _BIG_DOUBLE, false);
 
-			Assert.assertEquals("1.234.567.890,12 horas", format);
+			Assert.assertEquals("1.234.567.890,12 horas", message);
 
-			format = _languageImpl.format(
+			message = _languageImpl.format(
 				mockLanguageServletRequest.getRequest(),
 				_LANG_KEY_WITH_ARGUMENT, _BIG_FLOAT, false);
 
-			Assert.assertEquals("1.234.567,875 horas", format);
+			Assert.assertEquals("1.234.567,875 horas", message);
 		}
 
 		@Test
@@ -224,12 +223,12 @@ public class LanguageImplTest {
 			MockLanguageServletRequest mockLanguageServletRequest =
 				new MockLanguageServletRequest(LocaleUtil.US);
 
-			String format = _languageImpl.format(
+			String message = _languageImpl.format(
 				mockLanguageServletRequest.getRequest(),
 				_LANG_KEY_WITH_ARGUMENTS,
 				new Object[] {"A", "B"});
 
-			Assert.assertEquals("A has invited you to join B.", format);
+			Assert.assertEquals("A has invited you to join B.", message);
 		}
 
 		@Test
