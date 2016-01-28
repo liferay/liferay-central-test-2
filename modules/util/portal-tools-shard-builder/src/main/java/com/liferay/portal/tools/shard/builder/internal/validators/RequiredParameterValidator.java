@@ -14,24 +14,18 @@
 
 package com.liferay.portal.tools.shard.builder.internal.validators;
 
+import com.beust.jcommander.IParameterValidator;
 import com.beust.jcommander.ParameterException;
-
-import java.io.File;
 
 /**
  * @author Manuel de la Peña
  */
-public class FileRequiredParamValidator extends RequiredParamValidator {
+public class RequiredParameterValidator implements IParameterValidator {
 
 	@Override
 	public void validate(String name, String value) throws ParameterException {
-		super.validate(name, value);
-
-		File file = new File(value);
-
-		if (!file.exists()) {
-			throw new ParameterException(
-				"Parameter " + name + " does not reference an existing file");
+		if ((value == null) || value.trim().equals("")) {
+			throw new ParameterException("Parameter " + name + " is required");
 		}
 	}
 

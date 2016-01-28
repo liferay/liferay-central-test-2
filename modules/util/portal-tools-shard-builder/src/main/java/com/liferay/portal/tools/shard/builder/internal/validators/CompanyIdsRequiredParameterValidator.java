@@ -16,23 +16,27 @@ package com.liferay.portal.tools.shard.builder.internal.validators;
 
 import com.beust.jcommander.ParameterException;
 
-import java.io.File;
-
 /**
  * @author Manuel de la Peña
  */
-public class WritableFileRequiredParamValidator
-	extends FileRequiredParamValidator {
+public class CompanyIdsRequiredParameterValidator
+	extends RequiredParameterValidator {
 
 	@Override
 	public void validate(String name, String value) throws ParameterException {
 		super.validate(name, value);
 
-		File file = new File(value);
+		String[] companyIds = value.split(",");
 
-		if (!file.canRead() || !file.canWrite()) {
-			throw new ParameterException(
-				"Parameter " + name + " does not reference a writable file");
+		for (String companyId : companyIds) {
+			try {
+				Long.parseLong(companyId);
+			}
+			catch (NumberFormatException nfe) {
+				throw new ParameterException(
+					"Parameter " + name + " with value " + companyId +
+						" is not a valid number");
+			}
 		}
 	}
 
