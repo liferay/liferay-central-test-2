@@ -108,13 +108,13 @@ public class ResourceBundleUtil {
 	}
 
 	public static ResourceBundleLoader getResourceBundleLoader(
-		final String base, final ClassLoader classLoader) {
+		final String baseName, final ClassLoader classLoader) {
 
 		return new ResourceBundleLoader() {
 
 			@Override
 			public ResourceBundle loadResourceBundle(String languageId) {
-				return ResourceBundleUtil.getBundle(base, classLoader);
+				return ResourceBundleUtil.getBundle(baseName, classLoader);
 			}
 
 		};
