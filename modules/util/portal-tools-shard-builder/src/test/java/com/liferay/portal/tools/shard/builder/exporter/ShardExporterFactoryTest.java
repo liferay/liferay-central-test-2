@@ -26,7 +26,7 @@ import org.junit.Test;
 public class ShardExporterFactoryTest {
 
 	@Test(expected = DatabaseProviderNotAvailableException.class)
-	public void testGetExporterReturnsNotFoundProvider() throws Exception {
+	public void testGetShardExporter() throws Exception {
 		ShardExporterFactory.getShardExporter(new Properties());
 	}
 
