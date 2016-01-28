@@ -17,13 +17,13 @@
 <%@ include file="/init.jsp" %>
 
 <%
-MDRActionDisplayContext mdrActionDisplayContext = new MDRActionDisplayContext(renderRequest, renderResponse);
-
 long ruleGroupInstanceId = ParamUtil.getLong(request, "ruleGroupInstanceId");
 
 MDRRuleGroupInstance ruleGroupInstance = MDRRuleGroupInstanceLocalServiceUtil.getRuleGroupInstance(ruleGroupInstanceId);
 
 MDRRuleGroup ruleGroup = ruleGroupInstance.getRuleGroup();
+
+MDRActionDisplayContext mdrActionDisplayContext = new MDRActionDisplayContext(renderRequest, renderResponse);
 
 PortletURL portletURL = mdrActionDisplayContext.getPortletURL();
 %>
