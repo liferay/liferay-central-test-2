@@ -26,9 +26,7 @@ public class DBProviderNotAvailableException extends RuntimeException {
 		super(message);
 	}
 
-	public DBProviderNotAvailableException(
-		String message, Throwable cause) {
-
+	public DBProviderNotAvailableException(String message, Throwable cause) {
 		super(message, cause);
 	}
 
