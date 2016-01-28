@@ -70,43 +70,10 @@ public abstract class BaseDBProvider
 		}
 	}
 
-	protected void generateInsertSQL(
-			OutputStream outputStream, String tableName, String[] fields)
-		throws IOException {
-
-		if ((fields == null) || (fields.length == 0)) {
-			throw new IllegalArgumentException("Fields are null");
-		}
-
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("INSERT INTO ");
-		sb.append(tableName);
-		sb.append(" VALUES (");
-
-		for (int i = 0; i < fields.length; i++) {
-			String field = fields[i];
-
-			sb.append(field);
-
-			if (i != (fields.length - 1)) {
-				sb.append(", ");
-			}
-		}
-
-		sb.append(")");
-
-		String sql = sb.toString() + ";\n";
-
-		outputStream.write(sql.getBytes());
-	}
-
 	@Override
 	public List<String> getControlTableNames(String schemaName) {
 		return getTableNames(getControlTableNamesSQL(schemaName));
 	}
-
-	protected abstract String getControlTableNamesSQL(String schemaName);
 
 	@Override
 	public DataSource getDataSource() {
@@ -127,8 +94,6 @@ public abstract class BaseDBProvider
 	public List<String> getPartitionedTableNames(String schemaName) {
 		return getTableNames(getPartitionedTableNamesSQL(schemaName));
 	}
-
-	protected abstract String getPartitionedTableNamesSQL(String schemaName);
 
 	@Override
 	public String serializeTableField(Object field) {
@@ -158,59 +123,6 @@ public abstract class BaseDBProvider
 		}
 
 		return sb.toString();
-	}
-
-
-	@Override
-	public void write(String tableName, OutputStream outputStream) {
-		write(0, tableName, outputStream);
-	}
-
-	protected String formatDateTime(Object date) {
-		DateFormat dateFormat = new SimpleDateFormat(getDateTimeFormat());
-
-		return dateFormat.format(date);
-	}
-
-	protected final Properties properties;
-
-	protected PreparedStatement buildPreparedStatement(
-			Connection connection, String sql, long companyId)
-		throws SQLException {
-
-		PreparedStatement preparedStatement = connection.prepareStatement(
-			sql, ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
-
-		preparedStatement.setFetchSize(getFetchSize());
-
-		if (companyId > 0) {
-			preparedStatement.setLong(1, companyId);
-		}
-
-		return preparedStatement;
-	}
-
-	protected List<String> getTableNames(String sql) {
-		List<String> tableNames = new ArrayList<>();
-
-		DataSource dataSource = getDataSource();
-
-		try (Connection connection = dataSource.getConnection();
-				PreparedStatement preparedStatement =
-					connection.prepareStatement(sql);
-				ResultSet resultSet = preparedStatement.executeQuery()) {
-
-			while (resultSet.next()) {
-				tableNames.add(resultSet.getString(getTableNameFieldName()));
-			}
-		}
-		catch (SQLException sqle) {
-			_logger.error(
-				"Unable to get table names using SQL query: " + sql,
-				sqle);
-		}
-
-		return tableNames;
 	}
 
 	@Override
@@ -248,6 +160,92 @@ public abstract class BaseDBProvider
 			_logger.error("Unable to export " + tableName, e);
 		}
 	}
+
+	@Override
+	public void write(String tableName, OutputStream outputStream) {
+		write(0, tableName, outputStream);
+	}
+
+	protected PreparedStatement buildPreparedStatement(
+			Connection connection, String sql, long companyId)
+		throws SQLException {
+
+		PreparedStatement preparedStatement = connection.prepareStatement(
+			sql, ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
+
+		preparedStatement.setFetchSize(getFetchSize());
+
+		if (companyId > 0) {
+			preparedStatement.setLong(1, companyId);
+		}
+
+		return preparedStatement;
+	}
+
+	protected String formatDateTime(Object date) {
+		DateFormat dateFormat = new SimpleDateFormat(getDateTimeFormat());
+
+		return dateFormat.format(date);
+	}
+
+	protected void generateInsertSQL(
+			OutputStream outputStream, String tableName, String[] fields)
+		throws IOException {
+
+		if ((fields == null) || (fields.length == 0)) {
+			throw new IllegalArgumentException("Fields are null");
+		}
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("INSERT INTO ");
+		sb.append(tableName);
+		sb.append(" VALUES (");
+
+		for (int i = 0; i < fields.length; i++) {
+			String field = fields[i];
+
+			sb.append(field);
+
+			if (i != (fields.length - 1)) {
+				sb.append(", ");
+			}
+		}
+
+		sb.append(")");
+
+		String sql = sb.toString() + ";\n";
+
+		outputStream.write(sql.getBytes());
+	}
+
+	protected abstract String getControlTableNamesSQL(String schemaName);
+
+	protected abstract String getPartitionedTableNamesSQL(String schemaName);
+
+	protected List<String> getTableNames(String sql) {
+		List<String> tableNames = new ArrayList<>();
+
+		DataSource dataSource = getDataSource();
+
+		try (Connection connection = dataSource.getConnection();
+				PreparedStatement preparedStatement =
+					connection.prepareStatement(sql);
+				ResultSet resultSet = preparedStatement.executeQuery()) {
+
+			while (resultSet.next()) {
+				tableNames.add(resultSet.getString(getTableNameFieldName()));
+			}
+		}
+		catch (SQLException sqle) {
+			_logger.error(
+				"Unable to get table names using SQL query: " + sql, sqle);
+		}
+
+		return tableNames;
+	}
+
+	protected final Properties properties;
 
 	private static final Logger _logger = LoggerFactory.getLogger(
 		BaseDBProvider.class);
