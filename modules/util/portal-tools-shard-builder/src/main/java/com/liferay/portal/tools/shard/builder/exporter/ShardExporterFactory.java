@@ -24,8 +24,7 @@ import java.util.Properties;
 public class ShardExporterFactory {
 
 	public static ShardExporter getShardExporter(Properties properties) {
-		throw new DBProviderNotAvailableException(
-			"Database exporter not found with properties " + properties);
+		throw new DBProviderNotAvailableException();
 	}
 
 }
