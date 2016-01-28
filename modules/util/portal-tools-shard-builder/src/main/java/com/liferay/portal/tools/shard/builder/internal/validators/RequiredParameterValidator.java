@@ -24,8 +24,14 @@ public class RequiredParameterValidator implements IParameterValidator {
 
 	@Override
 	public void validate(String name, String value) throws ParameterException {
-		if ((value == null) || value.trim().equals("")) {
-			throw new ParameterException("Parameter " + name + " is required");
+		if (value == null) {
+			throw new ParameterException("Parameter " + name + " is null");
+		}
+		
+		value = value.trim();
+
+		if (value.length() == 0) {
+			throw new ParameterException("Parameter " + name + " is empty");
 		}
 	}
 
