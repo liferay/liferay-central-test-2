@@ -231,7 +231,8 @@ public abstract class BaseDBProvider
 		try (Connection connection = dataSource.getConnection();
 				PreparedStatement preparedStatement =
 					connection.prepareStatement(sql);
-				ResultSet resultSet = preparedStatement.executeQuery()) {
+						ResultSet resultSet =
+							preparedStatement.executeQuery()) {
 
 			while (resultSet.next()) {
 				tableNames.add(resultSet.getString(getTableNameFieldName()));
