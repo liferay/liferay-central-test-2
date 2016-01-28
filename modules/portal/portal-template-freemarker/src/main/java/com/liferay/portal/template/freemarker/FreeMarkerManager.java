@@ -369,16 +369,6 @@ public class FreeMarkerManager extends BaseSingleTemplateManager {
 			new ServletContextInvocationHandler(servletContext));
 	}
 
-	protected boolean isEnableDebuggerService() {
-		if ((System.getProperty("freemarker.debug.password") != null) &&
-			(System.getProperty("freemarker.debug.port") != null)) {
-
-			return true;
-		}
-
-		return false;
-	}
-
 	protected void initTaglibMappings() {
 		Enumeration<URL> enumeration = _bundle.findEntries(
 			"/", "*taglib-mapping.properties", false);
@@ -400,6 +390,16 @@ public class FreeMarkerManager extends BaseSingleTemplateManager {
 				_log.error(e, e);
 			}
 		}
+	}
+
+	protected boolean isEnableDebuggerService() {
+		if ((System.getProperty("freemarker.debug.password") != null) &&
+			(System.getProperty("freemarker.debug.port") != null)) {
+
+			return true;
+		}
+
+		return false;
 	}
 
 	private static final Class<?>[] _INTERFACES = {ServletContext.class};
