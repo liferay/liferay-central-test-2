@@ -198,9 +198,9 @@ public abstract class BaseDBProvider
 
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("INSERT INTO ");
+		sb.append("insert into ");
 		sb.append(tableName);
-		sb.append(" VALUES (");
+		sb.append(" values (");
 
 		for (int i = 0; i < fields.length; i++) {
 			String field = fields[i];
