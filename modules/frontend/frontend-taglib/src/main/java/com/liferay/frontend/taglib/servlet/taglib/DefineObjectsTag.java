@@ -41,15 +41,15 @@ public class DefineObjectsTag extends TagSupport {
 
 	@Override
 	public int doStartTag() throws JspException {
-		pageContext.setAttribute("resourceBundle", getResourceBundle());
-		pageContext.setAttribute("windowState", getWindowState());
-
 		PortletURL currentURLObj = getCurrentURLObj();
 
 		if (currentURLObj != null) {
-			pageContext.setAttribute("currentURLObj", currentURLObj);
 			pageContext.setAttribute("currentURL", currentURLObj.toString());
+			pageContext.setAttribute("currentURLObj", currentURLObj);
 		}
+
+		pageContext.setAttribute("resourceBundle", getResourceBundle());
+		pageContext.setAttribute("windowState", getWindowState());
 
 		return SKIP_BODY;
 	}
