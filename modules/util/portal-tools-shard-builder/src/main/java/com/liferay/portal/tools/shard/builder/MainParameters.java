@@ -34,12 +34,12 @@ public class MainParameters {
 		return _companyIds;
 	}
 
-	public String getPropertiesFileName() {
-		return _propertiesFileName;
-	}
-
 	public String getOutputDirName() {
 		return _outputDirName;
+	}
+
+	public String getPropertiesFileName() {
+		return _propertiesFileName;
 	}
 
 	public String getSchemaName() {

@@ -21,8 +21,7 @@ import java.io.File;
 /**
  * @author Manuel de la Peña
  */
-public class FileRequiredParameterValidator
-	extends RequiredParameterValidator {
+public class FileRequiredParameterValidator extends RequiredParameterValidator {
 
 	@Override
 	public void validate(String name, String value) throws ParameterException {
