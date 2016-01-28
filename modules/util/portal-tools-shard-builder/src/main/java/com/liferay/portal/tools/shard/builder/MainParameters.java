@@ -17,10 +17,10 @@ package com.liferay.portal.tools.shard.builder;
 import com.beust.jcommander.Parameter;
 
 import com.liferay.portal.tools.shard.builder.exporter.context.ExportContext;
-import com.liferay.portal.tools.shard.builder.internal.validators.CompanyIdsRequiredParamValidator;
-import com.liferay.portal.tools.shard.builder.internal.validators.FileRequiredParamValidator;
-import com.liferay.portal.tools.shard.builder.internal.validators.RequiredParamValidator;
-import com.liferay.portal.tools.shard.builder.internal.validators.WritableFileRequiredParamValidator;
+import com.liferay.portal.tools.shard.builder.internal.validators.CompanyIdsRequiredParameterValidator;
+import com.liferay.portal.tools.shard.builder.internal.validators.FileRequiredParameterValidator;
+import com.liferay.portal.tools.shard.builder.internal.validators.RequiredParameterValidator;
+import com.liferay.portal.tools.shard.builder.internal.validators.WritableFileRequiredParameterValidator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,25 +69,25 @@ public class MainParameters {
 
 	@Parameter(
 		names = {"-C", "--company-ids"},
-		validateWith = CompanyIdsRequiredParamValidator.class
+		validateWith = CompanyIdsRequiredParameterValidator.class
 	)
 	private String _companyIds;
 
 	@Parameter(
 		names = {"-O", "--output-dir"},
-		validateWith = WritableFileRequiredParamValidator.class
+		validateWith = WritableFileRequiredParameterValidator.class
 	)
 	private String _outputDir;
 
 	@Parameter(
 		names = {"-P", "--properties"},
-		validateWith = FileRequiredParamValidator.class
+		validateWith = FileRequiredParameterValidator.class
 	)
 	private String _properties;
 
 	@Parameter(
 		names = {"-S", "--schema-name"},
-		validateWith = RequiredParamValidator.class
+		validateWith = RequiredParameterValidator.class
 	)
 	private String _schemaName;
 
