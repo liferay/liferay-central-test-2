@@ -53,15 +53,17 @@ public class ExportProcess {
 			ExportContext exportContext, boolean filterByCompanyId)
 		throws IOException {
 
-		String tableType = "control";
+		String outputFileName =
+			exportContext.getSchemaName() + "-" + companyId + "-";
 
 		if (filterByCompanyId) {
-			tableType = "partitioned";
+			outputFileName += "partitioned";
 		}
-
-		String outputFileName =
-			exportContext.getSchemaName() + "-" + companyId + "-" + tableType +
-				".sql";
+		else {
+			outputFileName += "control";
+		}
+			
+		outputFileName += ".sql";
 
 		File outputFile = new File(
 			exportContext.getOutputDirName(), outputFileName);
