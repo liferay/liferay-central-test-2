@@ -2,7 +2,7 @@
 	<command name="addCP">
 		<execute macro="WebContentNavigator#gotoManageTemplates" />
 
-		<execute macro="WebContentNavigator#gotoAddTemplate" />
+		<execute macro="LexiconEntry#gotoAdd" />
 
 		<execute function="Type#clickAtSendKeys" locator1="TextInput#NAME" value1="${templateName}" />
 
