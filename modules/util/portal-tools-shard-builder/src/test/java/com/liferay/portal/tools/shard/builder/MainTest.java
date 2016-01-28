@@ -33,7 +33,7 @@ public class MainTest {
 	}
 
 	@Test(expected = ParameterException.class)
-	public void testValidateNonExistingDatabaseFile() throws Exception {
+	public void testValidateNonexistingDatabaseFile() throws Exception {
 		String[] args = {
 			"-P", "foobar.properties", "-S", _DEFAULT_SCHEMA_NAME, "-C",
 			_DEFAULT_COMPANY_ID, "-O", "neverMindPath"
@@ -43,7 +43,7 @@ public class MainTest {
 	}
 
 	@Test(expected = ParameterException.class)
-	public void testValidateNonExistingOutputFolder() throws Exception {
+	public void testValidateNonexistingOutputFolder() throws Exception {
 		String[] args = {
 			"-P", "foo.properties", "-S", _DEFAULT_SCHEMA_NAME, "-C",
 			_DEFAULT_COMPANY_ID, "-O", "foo"
