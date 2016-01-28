@@ -751,7 +751,7 @@ public class UpgradeDynamicDataMappingTest extends PowerMockito {
 	protected String createLocalizationXML(String[] enData) {
 		StringBundler sb = new StringBundler(6);
 
-		sb.append("<?xml version='1.0' encoding='UTF-8'?>");
+		sb.append("<?xml version=\"1.0\"?>");
 		sb.append("<root available-locales='en_US' default-locale='en_US'>");
 		sb.append("<Data language-id='en_US'>");
 		sb.append(StringUtil.merge(enData));
@@ -764,7 +764,7 @@ public class UpgradeDynamicDataMappingTest extends PowerMockito {
 	protected String createLocalizationXML(String[] enData, String[] ptData) {
 		StringBundler sb = new StringBundler(10);
 
-		sb.append("<?xml version='1.0' encoding='UTF-8'?>");
+		sb.append("<?xml version=\"1.0\"?>");
 		sb.append("<root available-locales='en_US,pt_BR,' ");
 		sb.append("default-locale='en_US'>");
 		sb.append("<Data language-id='en_US'>");
