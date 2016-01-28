@@ -15,6 +15,7 @@
 package com.liferay.portal.kernel.util;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
@@ -31,7 +32,7 @@ public class AggregateResourceBundleLoader implements ResourceBundleLoader {
 
 	@Override
 	public ResourceBundle loadResourceBundle(String languageId) {
-		ArrayList<ResourceBundle> resourceBundles = new ArrayList<>();
+		List<ResourceBundle> resourceBundles = new ArrayList<>();
 
 		for (ResourceBundleLoader resourceBundleLoader :
 				_resourceBundleLoaders) {
@@ -50,9 +51,9 @@ public class AggregateResourceBundleLoader implements ResourceBundleLoader {
 
 		if (resourceBundles.isEmpty()) {
 			throw new MissingResourceException(
-				"ResourceBundleLoader " + this + " failed to load " +
-					"ResourceBundle for " + languageId,
-				"", languageId);
+				"Resource bundle loader " + this + " was unable to load " +
+					"resource bundle for " + languageId, "",
+				languageId);
 		}
 
 		if (resourceBundles.size() == 1) {
