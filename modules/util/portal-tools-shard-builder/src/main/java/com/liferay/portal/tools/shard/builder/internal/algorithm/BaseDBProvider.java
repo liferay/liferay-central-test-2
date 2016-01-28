@@ -106,7 +106,7 @@ public abstract class BaseDBProvider
 		return getTableNames(getControlTableNamesSQL(schemaName));
 	}
 
-	public abstract String getControlTableNamesSQL(String schemaName);
+	protected abstract String getControlTableNamesSQL(String schemaName);
 
 	@Override
 	public DataSource getDataSource() {
@@ -128,7 +128,7 @@ public abstract class BaseDBProvider
 		return getTableNames(getPartitionedTableNamesSQL(schemaName));
 	}
 
-	public abstract String getPartitionedTableNamesSQL(String schemaName);
+	protected abstract String getPartitionedTableNamesSQL(String schemaName);
 
 	@Override
 	public String serializeTableField(Object field) {
