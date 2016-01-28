@@ -103,10 +103,10 @@ public abstract class BaseDBProvider
 
 	@Override
 	public List<String> getControlTableNames(String schemaName) {
-		return getTableNames(getControlTablesSql(schemaName));
+		return getTableNames(getControlTableNamesSQL(schemaName));
 	}
 
-	public abstract String getControlTablesSql(String schema);
+	public abstract String getControlTableNamesSQL(String schemaName);
 
 	@Override
 	public DataSource getDataSource() {
