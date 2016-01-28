@@ -340,32 +340,6 @@
 	<td></td>
 	<td></td>
 </tr>
-<!--SIDEBAR-->
-<tr>
-	<td>SIDEBAR_DROPDOWN</td>
-	<td>//div//li[contains(@class,'active dropdown')]/a/span</td>
-	<td></td>
-</tr>
-<tr>
-	<td>SIDEBAR_DROPDOWN_DETAILS</td>
-	<td>//div//li[contains(@class,'active dropdown')]//ul[contains(@class,'dropdown-menu')]//li/a[contains(.,'Details')]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>SIDEBAR_DROPDOWN_METADATA</td>
-	<td>//div//li[contains(@class,'active dropdown')]//ul[contains(@class,'dropdown-menu')]//li/a[contains(.,'Metadata')]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>SIDEBAR_DROPDOWN_VERSIONS</td>
-	<td>//div//li[contains(@class,'active dropdown')]//ul[contains(@class,'dropdown-menu')]//li/a[contains(.,'Versions')]</td>
-	<td></td>
-</tr>
-<tr>
-	<td></td>
-	<td></td>
-	<td></td>
-</tr>
 <!--VIDEO_GENERATION-->
 <tr>
 	<td>VIDEO_GENERATION_THUMBNAIL_RESOLUTION</td>
