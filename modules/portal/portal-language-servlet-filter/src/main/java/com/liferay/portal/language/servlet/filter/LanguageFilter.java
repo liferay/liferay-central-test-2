@@ -70,7 +70,7 @@ public class LanguageFilter extends BasePortalFilter {
 
 				@Override
 				public ResourceBundle loadResourceBundle(String languageId) {
-					String name;
+					String name = null;
 
 					if (Validator.isNull(languageId)) {
 						name = "content/Language.properties";

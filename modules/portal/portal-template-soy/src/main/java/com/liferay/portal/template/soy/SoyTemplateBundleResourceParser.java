@@ -123,7 +123,7 @@ public class SoyTemplateBundleResourceParser extends URLResourceParser {
 		@Override
 		public void modifiedBundle(
 			Bundle bundle, BundleEvent bundleEvent,
-			List<BundleCapability> object) {
+			List<BundleCapability> bundleCapabilities) {
 		}
 
 		@Override
