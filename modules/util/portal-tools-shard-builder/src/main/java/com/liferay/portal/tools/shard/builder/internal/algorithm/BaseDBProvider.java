@@ -50,12 +50,12 @@ import org.slf4j.LoggerFactory;
 public abstract class BaseDBProvider
 	implements DBExporter, DBProvider, ShardExporter {
 
-	public BaseDBProvider(Properties dbProperties) {
-		this.dbProperties = dbProperties;
+	public BaseDBProvider(Properties properties) {
+		this.properties = properties;
 
-		HikariConfig properties = new HikariConfig(this.dbProperties);
+		HikariConfig hikariConfig = new HikariConfig(this.properties);
 
-		_dataSource = new HikariDataSource(properties);
+		_dataSource = new HikariDataSource(hikariConfig);
 	}
 
 	@Override
@@ -178,7 +178,7 @@ public abstract class BaseDBProvider
 		return simpleDateFormat.format(date);
 	}
 
-	protected final Properties dbProperties;
+	protected final Properties properties;
 
 	private PreparedStatement _buildPreparedStatement(
 			Connection connection, String sql, long companyId)
