@@ -1624,9 +1624,8 @@ public class LanguageImpl implements Language, Serializable {
 	}
 
 	protected MessageFormat decorateMessageFormat(
-			HttpServletRequest request, String pattern,
-			Object[] formattedArguments)
-		throws PortalException {
+		HttpServletRequest request, String pattern,
+		Object[] formattedArguments) {
 
 		Locale locale = _getLocale(request);
 
@@ -1634,8 +1633,7 @@ public class LanguageImpl implements Language, Serializable {
 	}
 
 	protected MessageFormat decorateMessageFormat(
-			Locale locale, String pattern, Object[] formattedArguments)
-		throws PortalException {
+		Locale locale, String pattern, Object[] formattedArguments) {
 
 		if (locale == null) {
 			locale = LocaleUtil.getDefault();
