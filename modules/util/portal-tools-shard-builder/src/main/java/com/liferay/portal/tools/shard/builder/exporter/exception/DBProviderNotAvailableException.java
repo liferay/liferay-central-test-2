@@ -17,29 +17,29 @@ package com.liferay.portal.tools.shard.builder.exporter.exception;
 /**
  * @author Miguel Pastor
  */
-public class DatabaseProviderNotAvailableException extends RuntimeException {
+public class DBProviderNotAvailableException extends RuntimeException {
 
-	public DatabaseProviderNotAvailableException() {
+	public DBProviderNotAvailableException() {
 	}
 
-	public DatabaseProviderNotAvailableException(String message) {
+	public DBProviderNotAvailableException(String message) {
 		super(message);
 	}
 
-	public DatabaseProviderNotAvailableException(
+	public DBProviderNotAvailableException(
 		String message, Throwable cause) {
 
 		super(message, cause);
 	}
 
-	public DatabaseProviderNotAvailableException(
+	public DBProviderNotAvailableException(
 		String message, Throwable cause, boolean enableSuppression,
 		boolean writableStackTrace) {
 
 		super(message, cause, enableSuppression, writableStackTrace);
 	}
 
-	public DatabaseProviderNotAvailableException(Throwable cause) {
+	public DBProviderNotAvailableException(Throwable cause) {
 		super(cause);
 	}
 
