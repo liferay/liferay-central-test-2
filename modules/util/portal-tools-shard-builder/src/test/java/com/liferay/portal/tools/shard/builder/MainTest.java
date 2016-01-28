@@ -33,10 +33,19 @@ public class MainTest {
 	}
 
 	@Test(expected = ParameterException.class)
+	public void testValidateInvalidCompanyId() throws Exception {
+		String[] arguments = {
+			"-C", "foo", "-O", "bar", "-P", "foo.properties", "-S", _SCHEMA_NAME
+		};
+
+		Main.main(arguments);
+	}
+
+	@Test(expected = ParameterException.class)
 	public void testValidateNonexistingDatabaseFile() throws Exception {
 		String[] arguments = {
-			"-P", "foobar.properties", "-S", _SCHEMA_NAME, "-C",
-			_COMPANY_ID, "-O", "neverMindPath"
+			"-C", _COMPANY_ID, "-O", "bar", "-P", "foobar.properties", "-S",
+			_SCHEMA_NAME
 		};
 
 		Main.main(arguments);
@@ -45,18 +54,8 @@ public class MainTest {
 	@Test(expected = ParameterException.class)
 	public void testValidateNonexistingOutputDirectory() throws Exception {
 		String[] arguments = {
-			"-P", "foo.properties", "-S", _SCHEMA_NAME, "-C",
-			_COMPANY_ID, "-O", "foo"
-		};
-
-		Main.main(arguments);
-	}
-
-	@Test(expected = ParameterException.class)
-	public void testValidateInvalidCompanyId() throws Exception {
-		String[] arguments = {
-			"-P", "foo.properties", "-S", _SCHEMA_NAME, "-C", "foo",
-			"-O", "neverMindPath"
+			"-C", _COMPANY_ID, "-O", "foo", "-P", "foo.properties", "-S",
+			_SCHEMA_NAME
 		};
 
 		Main.main(arguments);
@@ -75,8 +74,8 @@ public class MainTest {
 		readOnlyDir.setWritable(false);
 
 		String[] arguments = {
-			"-P", "foo.properties", "-S", _SCHEMA_NAME, "-C",
-			_COMPANY_ID, "-O", readOnlyDir.getAbsolutePath()
+			"-C", _COMPANY_ID, "-O", readOnlyDir.getAbsolutePath(), "-P",
+			"foo.properties", "-S", _SCHEMA_NAME
 		};
 
 		Main.main(arguments);

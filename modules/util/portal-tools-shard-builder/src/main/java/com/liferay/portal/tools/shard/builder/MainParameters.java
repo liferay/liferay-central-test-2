@@ -74,16 +74,16 @@ public class MainParameters {
 	private String _companyIds;
 
 	@Parameter(
-		names = {"-P", "--properties"},
-		validateWith = FileRequiredParamValidator.class
-	)
-	private String _properties;
-
-	@Parameter(
 		names = {"-O", "--output-dir"},
 		validateWith = WritableFileRequiredParamValidator.class
 	)
 	private String _outputDir;
+
+	@Parameter(
+		names = {"-P", "--properties"},
+		validateWith = FileRequiredParamValidator.class
+	)
+	private String _properties;
 
 	@Parameter(
 		names = {"-S", "--schema-name"},
@@ -91,9 +91,7 @@ public class MainParameters {
 	)
 	private String _schemaName;
 
-	@Parameter(
-		names = {"-T", "--tables"}
-	)
+	@Parameter(names = {"-T", "--tables"})
 	private boolean _tables;
 
 }
