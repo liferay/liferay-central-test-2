@@ -180,7 +180,7 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 			ps.executeUpdate();
 		}
 		catch (Exception e) {
-			_log.error("Unable to add dynamic data mapping content ", e);
+			_log.error("Unable to add dynamic data mapping content", e);
 
 			throw e;
 		}
@@ -413,7 +413,7 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 				_expandoTableLocalService.deleteTable(expandoTableId);
 			}
 			catch (PortalException pe) {
-				_log.error("Unable delete expando table ", pe);
+				_log.error("Unable delete expando table", pe);
 
 				throw pe;
 			}
