@@ -60,11 +60,9 @@
 		</execute>
 
 		<execute macro="Page#add">
-			<var name="page" value="Public Pages" />
 			<var name="pageName" value="Site Page" />
 			<var name="pageTemplateName" value="Page Template Name" />
 			<var name="siteName" value="Site Name" />
-			<var name="siteURL" value="true" />
 		</execute>
 
 		<execute macro="Navigator#openSiteURL">
@@ -72,6 +70,7 @@
 		</execute>
 
 		<execute macro="SitePage#viewPageTemplatePG" >
+			<var name="page" value="Site Page" />
 			<var name="pageTemplateName" value="Page Template Name" />
 		</execute>
 	</command>
