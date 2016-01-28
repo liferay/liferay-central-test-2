@@ -78,8 +78,8 @@ public class ExportProcess {
 		for (String tableName : tableNames) {
 			if (exportContext.isWriteFile()) {
 				outputFileName =
-					exportContext.getSchemaName() + "-" + companyId + "-" +
-						tableName + ".sql";
+					exportContext.getSchemaName() + "-" + companyId +
+						"-table-" + tableName + ".sql";
 
 				outputFile = new File(
 					exportContext.getOutputDirName(), outputFileName);
