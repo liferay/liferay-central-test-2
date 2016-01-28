@@ -29,7 +29,6 @@ import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
 import javax.portlet.WindowState;
 
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
@@ -115,7 +114,8 @@ public class DefineObjectsTag extends TagSupport {
 			return liferayPortletRequest;
 		}
 
-		ServletRequest request = pageContext.getRequest();
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
 
 		PortletRequest portletRequest = (PortletRequest)request.getAttribute(
 			JavaConstants.JAVAX_PORTLET_REQUEST);
@@ -136,7 +136,8 @@ public class DefineObjectsTag extends TagSupport {
 			return liferayPortletResponse;
 		}
 
-		ServletRequest request = pageContext.getRequest();
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
 
 		PortletResponse portletResponse = (PortletResponse)request.getAttribute(
 			JavaConstants.JAVAX_PORTLET_RESPONSE);
