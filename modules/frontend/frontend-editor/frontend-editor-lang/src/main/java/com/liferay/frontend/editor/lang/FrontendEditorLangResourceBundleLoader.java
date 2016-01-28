@@ -34,7 +34,9 @@ public class FrontendEditorLangResourceBundleLoader
 
 	@Override
 	public ResourceBundle loadResourceBundle(String languageId) {
-		ClassLoader classLoader = getClass().getClassLoader();
+		Class<?> clazz = getClass();
+
+		ClassLoader classLoader = clazz.getClassLoader();
 
 		return ResourceBundleUtil.getBundle(
 			"content.Language", LocaleUtil.fromLanguageId(languageId),

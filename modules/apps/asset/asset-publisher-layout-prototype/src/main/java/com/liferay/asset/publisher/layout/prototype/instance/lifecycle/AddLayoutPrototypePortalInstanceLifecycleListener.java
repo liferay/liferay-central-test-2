@@ -78,7 +78,6 @@ public class AddLayoutPrototypePortalInstanceLifecycleListener
 
 		Map<Locale, String> nameMap = ResourceBundleUtil.getLocalizationMap(
 			resourceBundleLoader, "layout-prototype-web-content-title");
-
 		Map<Locale, String> descriptionMap =
 			ResourceBundleUtil.getLocalizationMap(
 				resourceBundleLoader,

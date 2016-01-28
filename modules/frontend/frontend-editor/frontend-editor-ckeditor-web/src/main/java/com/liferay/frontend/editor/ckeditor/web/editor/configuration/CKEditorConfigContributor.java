@@ -138,7 +138,7 @@ public class CKEditorConfigContributor extends BaseCKEditorConfigContributor {
 	protected JSONArray getStyleFormatsJSONArray(Locale locale) {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
-		ResourceBundle resourceBundle;
+		ResourceBundle resourceBundle = null;
 
 		try {
 			resourceBundle = _resourceBundleLoader.loadResourceBundle(
