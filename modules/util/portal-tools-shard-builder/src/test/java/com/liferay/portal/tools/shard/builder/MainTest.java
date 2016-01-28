@@ -47,7 +47,7 @@ public class MainTest {
 	}
 
 	@Test(expected = ParameterException.class)
-	public void testValidateNonexistingDatabaseFile() throws Exception {
+	public void testValidateNonexistingPropertiesFile() throws Exception {
 		String[] arguments = {
 			"-C", _COMPANY_ID, "-O", "bar", "-P", "foo.properties", "-S",
 			_SCHEMA_NAME
