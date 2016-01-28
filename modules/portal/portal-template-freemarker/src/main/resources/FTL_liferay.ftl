@@ -9,12 +9,12 @@ LPS-30525.
 
 <#if PortalJspTagLibs??>
 	<#assign liferay_control_menu=PortalJspTagLibs["/META-INF/resources/liferay-control-menu.tld"]>
-	<#assign liferay_ui = PortalJspTagLibs["/WEB-INF/tld/liferay-ui.tld"] />
 	<#assign liferay_portlet = PortalJspTagLibs["/WEB-INF/tld/liferay-portlet-ext.tld"] />
+	<#assign liferay_ui = PortalJspTagLibs["/WEB-INF/tld/liferay-ui.tld"] />
 <#elseif taglibLiferayHash??>
 	<#assign liferay_control_menu=taglibLiferayHash["/META-INF/resources/liferay-control-menu.tld"]>
-	<#assign liferay_ui = taglibLiferayHash["/WEB-INF/tld/liferay-ui.tld"] />
 	<#assign liferay_portlet = taglibLiferayHash["/WEB-INF/tld/liferay-portlet-ext.tld"] />
+	<#assign liferay_ui = taglibLiferayHash["/WEB-INF/tld/liferay-ui.tld"] />
 </#if>
 
 <#assign css_main_file = "" />
