@@ -460,8 +460,8 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 				String definition = rs.getString("definition");
 				String storageType = rs.getString("storageType");
 
-				if (storageType.equals("xml") ||
-					storageType.equals("expando")) {
+				if (storageType.equals("expando") ||
+					storageType.equals("xml")) {
 
 					ddmForm = DDMFormXSDDeserializerUtil.deserialize(
 						definition);
