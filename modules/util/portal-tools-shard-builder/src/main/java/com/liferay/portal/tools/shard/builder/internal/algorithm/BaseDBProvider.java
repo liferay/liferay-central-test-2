@@ -200,20 +200,18 @@ public abstract class BaseDBProvider
 		DataSource dataSource = getDataSource();
 
 		try (Connection con = dataSource.getConnection();
-			PreparedStatement ps = con.prepareStatement(sql);
-			ResultSet rs = ps.executeQuery() ) {
+				PreparedStatement ps = con.prepareStatement(sql);
+					ResultSet rs = ps.executeQuery() ) {
 
 			while (rs.next()) {
 				tableNames.add(rs.getString(getTableNameFieldName()));
 			}
 		}
 		catch (SQLException sqle) {
-			if (_logger.isErrorEnabled()) {
-				_logger.error(
-					"Error retrieving the table names of the schema using " +
-						"the query " + sql,
-					sqle);
-			}
+			_logger.error(
+				"Error retrieving the table names of the schema using " +
+					"the query " + sql,
+				sqle);
 		}
 
 		return tableNames;
@@ -231,8 +229,9 @@ public abstract class BaseDBProvider
 		DataSource dataSource = getDataSource();
 
 		try (Connection con = dataSource.getConnection();
-			PreparedStatement ps = _buildPreparedStatement(con, sql, companyId);
-			ResultSet rs = ps.executeQuery() ) {
+				PreparedStatement ps = _buildPreparedStatement(
+					con, sql, companyId);
+				ResultSet rs = ps.executeQuery() ) {
 
 			ResultSetMetaData metaData = rs.getMetaData();
 
@@ -249,10 +248,7 @@ public abstract class BaseDBProvider
 			}
 		}
 		catch (IOException | SQLException e) {
-			if (_logger.isErrorEnabled()) {
-				_logger.error(
-					"Error exporting the rows for table " + tableName, e);
-			}
+			_logger.error("Error exporting the rows for table " + tableName, e);
 		}
 	}
 
