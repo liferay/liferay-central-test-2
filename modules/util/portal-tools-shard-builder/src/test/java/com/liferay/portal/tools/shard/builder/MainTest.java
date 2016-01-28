@@ -34,32 +34,32 @@ public class MainTest {
 
 	@Test(expected = ParameterException.class)
 	public void testValidateNonexistingDatabaseFile() throws Exception {
-		String[] args = {
+		String[] arguments = {
 			"-P", "foobar.properties", "-S", _SCHEMA_NAME, "-C",
 			_COMPANY_ID, "-O", "neverMindPath"
 		};
 
-		Main.main(args);
+		Main.main(arguments);
 	}
 
 	@Test(expected = ParameterException.class)
 	public void testValidateNonexistingOutputDirectory() throws Exception {
-		String[] args = {
+		String[] arguments = {
 			"-P", "foo.properties", "-S", _SCHEMA_NAME, "-C",
 			_COMPANY_ID, "-O", "foo"
 		};
 
-		Main.main(args);
+		Main.main(arguments);
 	}
 
 	@Test(expected = ParameterException.class)
 	public void testValidateInvalidCompanyId() throws Exception {
-		String[] args = {
+		String[] arguments = {
 			"-P", "foo.properties", "-S", _SCHEMA_NAME, "-C", "foo",
 			"-O", "neverMindPath"
 		};
 
-		Main.main(args);
+		Main.main(arguments);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -74,12 +74,12 @@ public class MainTest {
 		readOnlyDir.setReadable(false);
 		readOnlyDir.setWritable(false);
 
-		String[] args = {
+		String[] arguments = {
 			"-P", "foo.properties", "-S", _SCHEMA_NAME, "-C",
 			_COMPANY_ID, "-O", readOnlyDir.getAbsolutePath()
 		};
 
-		Main.main(args);
+		Main.main(arguments);
 	}
 
 	@Test
