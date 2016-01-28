@@ -15,35 +15,31 @@
 --%>
 
 <%
-List<Group> children = group.getChildren(true);
-
-int childrenCount = children.size();
-
-String siteImageURL = group.getLogoURL(themeDisplay, false);
+List<Group> childGroups = group.getChildren(true);
 %>
 
 <div role="<%= urlData != null ? "button" : "" %>">
 	<c:choose>
-		<c:when test="<%= Validator.isNotNull(siteImageURL) %>">
+		<c:when test="<%= Validator.isNotNull(group.getLogoURL(themeDisplay, false)) %>">
 			<liferay-frontend:vertical-card
-				cssClass='<%= urlData != null ? "selector-button" : "" %>'
+				cssClass='<%= (urlData != null) ? "selector-button" : "" %>'
 				data="<%= urlData %>"
-				imageUrl="<%= siteImageURL %>"
+				imageUrl="<%= group.getLogoURL(themeDisplay, false) %>"
 				resultRow="<%= row %>"
 				rowChecker="<%= searchContainer.getRowChecker() %>"
 				showCheckbox="<%= false %>"
 				title="<%= group.getName(locale) %>"
 			>
 				<liferay-frontend:vertical-card-footer>
-					<label class="<%= childrenCount != 0 ? "text-default" : "disabled" %>">
-						<liferay-ui:message arguments="<%= String.valueOf(childrenCount) %>" key="x-child-sites" />
+					<label class="<%= childGroups.size() != 0 ? "text-default" : "disabled" %>">
+						<liferay-ui:message arguments="<%= String.valueOf(childGroups.size()) %>" key="x-child-sites" />
 					</label>
 				</liferay-frontend:vertical-card-footer>
 			</liferay-frontend:vertical-card>
 		</c:when>
 		<c:otherwise>
 			<liferay-frontend:icon-vertical-card
-				cssClass='<%= urlData != null ? "selector-button" : "" %>'
+				cssClass='<%= (urlData != null) ? "selector-button" : "" %>'
 				data="<%= urlData %>"
 				icon="sites"
 				resultRow="<%= row %>"
@@ -52,8 +48,8 @@ String siteImageURL = group.getLogoURL(themeDisplay, false);
 				title="<%= group.getName(locale) %>"
 			>
 				<liferay-frontend:vertical-card-footer>
-					<label class="<%= childrenCount != 0 ? "text-default" : "disabled" %>">
-						<liferay-ui:message arguments="<%= String.valueOf(childrenCount) %>" key="x-child-sites" />
+					<label class="<%= childGroups.size() != 0 ? "text-default" : "disabled" %>">
+						<liferay-ui:message arguments="<%= String.valueOf(childGroups.size()) %>" key="x-child-sites" />
 					</label>
 				</liferay-frontend:vertical-card-footer>
 			</liferay-frontend:icon-vertical-card>
