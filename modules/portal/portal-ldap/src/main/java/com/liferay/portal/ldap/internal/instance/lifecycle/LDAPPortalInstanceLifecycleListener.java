@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.ldap.internal;
+package com.liferay.portal.ldap.internal.instance.lifecycle;
 
 import com.liferay.portal.instance.lifecycle.PortalInstanceLifecycleListener;
 import com.liferay.portal.kernel.log.Log;
