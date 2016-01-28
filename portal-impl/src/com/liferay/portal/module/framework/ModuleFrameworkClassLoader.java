@@ -37,8 +37,8 @@ public class ModuleFrameworkClassLoader extends URLClassLoader {
 	public ModuleFrameworkClassLoader(URL[] urls, ClassLoader parent) {
 		super(urls, parent);
 
-		Field tomcat8StateField = null;
 		Object tomcat8StartedState = null;
+		Field tomcat8StateField = null;
 
 		try {
 			Class<?> clazz = parent.getClass();
