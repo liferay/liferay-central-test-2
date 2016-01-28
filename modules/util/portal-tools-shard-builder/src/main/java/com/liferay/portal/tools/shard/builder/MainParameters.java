@@ -31,11 +31,11 @@ import java.util.List;
 public class MainParameters {
 
 	public String getCompanies() {
-		return _companies;
+		return _companyIds;
 	}
 
 	public String getDatabaseProperties() {
-		return _databaseProperties;
+		return _properties;
 	}
 
 	public String getOutputDir() {
@@ -46,17 +46,17 @@ public class MainParameters {
 		return _schemaName;
 	}
 
-	public boolean isTableFiles() {
-		return _tableFiles;
+	public boolean isTables() {
+		return _tables;
 	}
 
 	public ExportContext toExportContext() {
 		return new ExportContext(
-			_getCompanyIds(), _outputDir, _schemaName, _tableFiles);
+			_getCompanyIds(), _outputDir, _schemaName, _tables);
 	}
 
 	private List<Long> _getCompanyIds() {
-		String[] companyIds = _companies.split(",");
+		String[] companyIds = _companyIds.split(",");
 
 		List<Long> list = new ArrayList<>(companyIds.length);
 
@@ -68,16 +68,16 @@ public class MainParameters {
 	}
 
 	@Parameter(
-		names = {"-C", "--companies"},
+		names = {"-C", "--company-ids"},
 		validateWith = CompanyIdsParamValidator.class
 	)
-	private String _companies;
+	private String _companyIds;
 
 	@Parameter(
 		names = {"-P", "--properties"},
 		validateWith = FileParamExistsValidator.class
 	)
-	private String _databaseProperties;
+	private String _properties;
 
 	@Parameter(
 		names = {"-O", "--output-dir"},
@@ -94,6 +94,6 @@ public class MainParameters {
 	@Parameter(
 		names = {"-T", "--tables"}
 	)
-	private boolean _tableFiles;
+	private boolean _tables;
 
 }
