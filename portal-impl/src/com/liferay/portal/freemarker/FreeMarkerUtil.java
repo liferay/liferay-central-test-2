@@ -58,6 +58,7 @@ public class FreeMarkerUtil {
 			new DefaultObjectWrapperBuilder(Configuration.getVersion());
 
 		_configuration.setObjectWrapper(defaultObjectWrapperBuilder.build());
+
 		_configuration.setTemplateLoader(
 			new ClassTemplateLoader(FreeMarkerUtil.class, StringPool.SLASH));
 		_configuration.setTemplateUpdateDelayMilliseconds(Long.MAX_VALUE);
