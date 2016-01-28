@@ -1773,7 +1773,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		@Override
 		public void removedService(
 			ServiceReference<PortalInstanceLifecycleManager> serviceReference,
-			PortalInstanceLifecycleManager service) {
+			PortalInstanceLifecycleManager portalInstanceLifecycleManager) {
 		}
 
 	}
