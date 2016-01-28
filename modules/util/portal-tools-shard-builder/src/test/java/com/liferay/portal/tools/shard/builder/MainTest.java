@@ -97,7 +97,7 @@ public class MainTest {
 	}
 
 	@Test(expected = ParameterException.class)
-	public void testValidateWrongOptionArguments() throws Exception {
+	public void testValidateInvalidOptionArguments() throws Exception {
 		Main.main(new String[] {"-X", "arg"});
 	}
 
