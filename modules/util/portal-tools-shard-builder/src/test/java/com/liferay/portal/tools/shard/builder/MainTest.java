@@ -35,27 +35,27 @@ public class MainTest {
 	@Test(expected = ParameterException.class)
 	public void testValidateNonexistingDatabaseFile() throws Exception {
 		String[] args = {
-			"-P", "foobar.properties", "-S", _DEFAULT_SCHEMA_NAME, "-C",
-			_DEFAULT_COMPANY_ID, "-O", "neverMindPath"
+			"-P", "foobar.properties", "-S", _SCHEMA_NAME, "-C",
+			_COMPANY_ID, "-O", "neverMindPath"
 		};
 
 		Main.main(args);
 	}
 
 	@Test(expected = ParameterException.class)
-	public void testValidateNonexistingOutputFolder() throws Exception {
+	public void testValidateNonexistingOutputDirectory() throws Exception {
 		String[] args = {
-			"-P", "foo.properties", "-S", _DEFAULT_SCHEMA_NAME, "-C",
-			_DEFAULT_COMPANY_ID, "-O", "foo"
+			"-P", "foo.properties", "-S", _SCHEMA_NAME, "-C",
+			_COMPANY_ID, "-O", "foo"
 		};
 
 		Main.main(args);
 	}
 
 	@Test(expected = ParameterException.class)
-	public void testValidateNonValidCompanyId() throws Exception {
+	public void testValidateInvalidCompanyId() throws Exception {
 		String[] args = {
-			"-P", "foo.properties", "-S", _DEFAULT_SCHEMA_NAME, "-C", "foo",
+			"-P", "foo.properties", "-S", _SCHEMA_NAME, "-C", "foo",
 			"-O", "neverMindPath"
 		};
 
@@ -68,15 +68,15 @@ public class MainTest {
 	}
 
 	@Test(expected = ParameterException.class)
-	public void testValidateReadOnlyOutputFolder() throws Exception {
-		File readOnlyFolder = temporaryFolder.newFolder();
+	public void testValidateReadOnlyOutputDirectory() throws Exception {
+		File readOnlyDir = temporaryFolder.newFolder();
 
-		readOnlyFolder.setReadable(false);
-		readOnlyFolder.setWritable(false);
+		readOnlyDir.setReadable(false);
+		readOnlyDir.setWritable(false);
 
 		String[] args = {
-			"-P", "foo.properties", "-S", _DEFAULT_SCHEMA_NAME, "-C",
-			_DEFAULT_COMPANY_ID, "-O", readOnlyFolder.getAbsolutePath()
+			"-P", "foo.properties", "-S", _SCHEMA_NAME, "-C",
+			_COMPANY_ID, "-O", readOnlyDir.getAbsolutePath()
 		};
 
 		Main.main(args);
@@ -105,8 +105,8 @@ public class MainTest {
 	@Rule
 	public TemporaryFolder temporaryFolder = new TemporaryFolder();
 
-	private static final String _DEFAULT_COMPANY_ID = "20156";
+	private static final String _COMPANY_ID = "20156";
 
-	private static final String _DEFAULT_SCHEMA_NAME = "lportal";
+	private static final String _SCHEMA_NAME = "lportal";
 
 }
