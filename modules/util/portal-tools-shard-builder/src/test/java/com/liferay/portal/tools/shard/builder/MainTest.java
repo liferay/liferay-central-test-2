@@ -42,6 +42,11 @@ public class MainTest {
 	}
 
 	@Test(expected = ParameterException.class)
+	public void testValidateInvalidOptionArguments() throws Exception {
+		Main.main(new String[] {"-X", "arg"});
+	}
+
+	@Test(expected = ParameterException.class)
 	public void testValidateNonexistingDatabaseFile() throws Exception {
 		String[] arguments = {
 			"-C", _COMPANY_ID, "-O", "bar", "-P", "foo.properties", "-S",
@@ -94,11 +99,6 @@ public class MainTest {
 			catch (ParameterException pe) {
 			}
 		}
-	}
-
-	@Test(expected = ParameterException.class)
-	public void testValidateInvalidOptionArguments() throws Exception {
-		Main.main(new String[] {"-X", "arg"});
 	}
 
 	@Rule
