@@ -203,9 +203,6 @@
 		<execute function="Click" locator1="Icon#ROW_VERTICAL_ELLIPSIS" />
 		<execute function="AssertClick" locator1="MenuItem#EDIT_DEFAULT_VALUES" value1="Edit Default Values" />
 
-		<execute function="SelectFrameTop" />
-		<execute function="SelectFrame" locator1="DDMSelectStructure#DDM_STRUCTURES_IFRAME" />
-
 		<for list="${editSubstructureFieldNames}" param="structureFieldName">
 			<var name="key_fieldDefaultValue" value="${structureFieldName}" />
 			<var method="StringUtil#replace('${structureFieldName}', ' ', '')" name="structureFieldName" />
@@ -215,13 +212,8 @@
 
 		<execute function="AssertClick" locator1="Button#SAVE" value1="Save" />
 
-		<execute function="SelectFrame" value1="relative=top" />
-		<execute function="SelectFrame" locator1="DDMSelectStructure#DDM_STRUCTURES_IFRAME" />
 		<execute function="Click" locator1="Icon#ROW_VERTICAL_ELLIPSIS" />
 		<execute function="AssertClick" locator1="MenuItem#EDIT_DEFAULT_VALUES" value1="Edit Default Values" />
-
-		<execute function="SelectFrameTop" />
-		<execute function="SelectFrame" locator1="DDMSelectStructure#DDM_STRUCTURES_IFRAME" />
 
 		<for list="${editSubstructureFieldNames}" param="structureFieldName">
 			<var name="key_fieldDefaultValue" value="${structureFieldName}" />
@@ -247,8 +239,6 @@
 		<if>
 			<isset var="addRoleViewPermissions" />
 			<then>
-				<execute function="SelectFrame" locator1="IFrame#STRUCTURES" />
-
 				<var name="key_rowEntry" value="${structureName}" />
 
 				<execute function="Click" locator1="Icon#ROW_VERTICAL_ELLIPSIS" />
@@ -258,8 +248,6 @@
 					<var name="addOrRemoveViewPermission" value="Add" />
 					<var name="roleList" value="${addRoleViewPermissions}" />
 				</execute>
-
-				<execute function="SelectFrameTop" />
 			</then>
 		</if>
 	</command>
@@ -320,9 +308,6 @@
 		</if>
 
 		<execute function="AssertClick" locator1="DDMSelectStructure#DDM_STRUCTURE_TABLE_NAME" value1="${structureName}" />
-
-		<execute function="SelectFrameTop" />
-		<execute function="SelectFrame" locator1="DDMSelectStructure#DDM_STRUCTURES_IFRAME" />
 
 		<execute macro="WebContentNavigator#showStructureDetails" />
 
