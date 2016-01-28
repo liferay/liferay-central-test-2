@@ -103,7 +103,7 @@ public abstract class BaseDBProvider
 
 	@Override
 	public List<String> getControlTableNames(String schemaName) {
-		return getSchemaTableNames(getControlTablesSql(schemaName));
+		return getTableNames(getControlTablesSql(schemaName));
 	}
 
 	public abstract String getControlTablesSql(String schema);
@@ -125,10 +125,10 @@ public abstract class BaseDBProvider
 
 	@Override
 	public List<String> getPartitionedTableNames(String schemaName) {
-		return getSchemaTableNames(getPartitionedTablesSql(schemaName));
+		return getTableNames(getPartitionedTableNamesSQL(schemaName));
 	}
 
-	public abstract String getPartitionedTablesSql(String schema);
+	public abstract String getPartitionedTableNamesSQL(String schemaName);
 
 	@Override
 	public String serializeTableField(Object field) {
@@ -167,9 +167,9 @@ public abstract class BaseDBProvider
 	}
 
 	protected String formatDateTime(Object date) {
-		DateFormat simpleDateFormat = new SimpleDateFormat(getDateTimeFormat());
+		DateFormat dateFormat = new SimpleDateFormat(getDateTimeFormat());
 
-		return simpleDateFormat.format(date);
+		return dateFormat.format(date);
 	}
 
 	protected final Properties properties;
@@ -190,7 +190,7 @@ public abstract class BaseDBProvider
 		return preparedStatement;
 	}
 
-	protected List<String> getSchemaTableNames(String sql) {
+	protected List<String> getTableNames(String sql) {
 		List<String> tableNames = new ArrayList<>();
 
 		DataSource dataSource = getDataSource();
@@ -206,8 +206,7 @@ public abstract class BaseDBProvider
 		}
 		catch (SQLException sqle) {
 			_logger.error(
-				"Error retrieving the table names of the schema using " +
-					"the query " + sql,
+				"Unable to get table names using SQL query: " + sql,
 				sqle);
 		}
 
