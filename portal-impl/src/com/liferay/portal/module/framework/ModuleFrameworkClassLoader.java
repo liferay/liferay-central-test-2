@@ -37,8 +37,8 @@ public class ModuleFrameworkClassLoader extends URLClassLoader {
 	public ModuleFrameworkClassLoader(URL[] urls, ClassLoader parent) {
 		super(urls, parent);
 
-		Field stateField = null;
-		Object startedState = null;
+		Field tomcat8StateField = null;
+		Object tomcat8StartedState = null;
 
 		try {
 			Class<?> clazz = parent.getClass();
@@ -50,21 +50,21 @@ public class ModuleFrameworkClassLoader extends URLClassLoader {
 			Method valueOfMethod = lifecycleStateClass.getMethod(
 				"valueOf", String.class);
 
-			startedState = valueOfMethod.invoke(null, "STARTED");
+			tomcat8StartedState = valueOfMethod.invoke(null, "STARTED");
 
 			Class<?> WebappClassLoaderBaseClass = classLoader.loadClass(
 				"org.apache.catalina.loader.WebappClassLoaderBase");
 
-			stateField = ReflectionUtil.getDeclaredField(
+			tomcat8StateField = ReflectionUtil.getDeclaredField(
 				WebappClassLoaderBaseClass, "state");
 		}
 		catch (Exception e) {
-			startedState = null;
-			stateField = null;
+			tomcat8StartedState = null;
+			tomcat8StateField = null;
 		}
 
-		_startedState = startedState;
-		_stateField = stateField;
+		_tomcat8StartedState = tomcat8StartedState;
+		_tomcat8StateField = tomcat8StateField;
 	}
 
 	@Override
@@ -129,7 +129,7 @@ public class ModuleFrameworkClassLoader extends URLClassLoader {
 					clazz = findClass(name);
 				}
 				catch (ClassNotFoundException cnfe) {
-					if (_stateField == null) {
+					if (_tomcat8StateField == null) {
 						clazz = super.loadClass(name, resolve);
 					}
 					else {
@@ -167,19 +167,19 @@ public class ModuleFrameworkClassLoader extends URLClassLoader {
 		ClassLoader classLoader = getParent();
 
 		try {
-			Object state = _stateField.get(classLoader);
+			Object state = _tomcat8StateField.get(classLoader);
 
-			if (state == _startedState) {
+			if (state == _tomcat8StartedState) {
 				return super.loadClass(name, resolve);
 			}
 
-			_stateField.set(classLoader, _startedState);
+			_tomcat8StateField.set(classLoader, _tomcat8StartedState);
 
 			try {
 				return super.loadClass(name, resolve);
 			}
 			finally {
-				_stateField.set(classLoader, state);
+				_tomcat8StateField.set(classLoader, state);
 			}
 		}
 		catch (ReflectiveOperationException roe) {
@@ -193,7 +193,7 @@ public class ModuleFrameworkClassLoader extends URLClassLoader {
 		ClassLoader.registerAsParallelCapable();
 	}
 
-	private final Object _startedState;
-	private final Field _stateField;
+	private final Object _tomcat8StartedState;
+	private final Field _tomcat8StateField;
 
 }
