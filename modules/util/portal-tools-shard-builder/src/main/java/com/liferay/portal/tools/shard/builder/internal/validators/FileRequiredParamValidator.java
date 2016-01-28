@@ -21,7 +21,7 @@ import java.io.File;
 /**
  * @author Manuel de la Peña
  */
-public class FileParamExistsValidator extends RequiredParamValidator {
+public class FileRequiredParamValidator extends RequiredParamValidator {
 
 	@Override
 	public void validate(String name, String value) throws ParameterException {
@@ -31,7 +31,7 @@ public class FileParamExistsValidator extends RequiredParamValidator {
 
 		if (!file.exists()) {
 			throw new ParameterException(
-				"File parameter " + name + " does not exist");
+				"Parameter " + name + " does not reference an existing file");
 		}
 	}
 
