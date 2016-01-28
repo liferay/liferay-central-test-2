@@ -601,12 +601,12 @@ public class PortletContainerImpl implements PortletContainer {
 
 		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
-		Comparator comparator = new PropertyComparator("weight", false, false);
-
-		_portletConfigurationIconMenu.setComparator(comparator);
+		_portletConfigurationIconMenu.setComparator(
+			new PropertyComparator("weight", false, false));
 
 		portletDisplay.setPortletConfigurationIconMenu(
 			_portletConfigurationIconMenu);
+
 		portletDisplay.setPortletToolbar(_portletToolbar);
 
 		PortletDisplay portletDisplayClone = PortletDisplayFactory.create();
