@@ -55,7 +55,6 @@ public class UpgradePortletPreferences extends BaseUpgradePortletPreferences {
 
 		_newDateFormat = dateFormatFactoryUtil.getSimpleDateFormat(
 			"yyyy-MM-dd");
-
 		_oldDateFormat = dateFormatFactoryUtil.getSimpleDateFormat(
 			"yyyyMMddHHmmss");
 	}
