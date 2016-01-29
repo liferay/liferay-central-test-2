@@ -16,6 +16,7 @@ package com.liferay.image.uploader.web.upgrade;
 
 import com.liferay.image.uploader.web.upgrade.v1_0_0.UpgradePortletId;
 import com.liferay.portal.kernel.module.framework.ModuleServiceLifecycle;
+import com.liferay.portal.kernel.upgrade.DummyUpgradeStep;
 import com.liferay.portal.upgrade.registry.UpgradeStepRegistrator;
 
 import org.osgi.service.component.annotations.Component;
@@ -29,6 +30,10 @@ public class ImageUploaderWebUpgrade implements UpgradeStepRegistrator {
 
 	@Override
 	public void register(Registry registry) {
+		registry.register(
+			"com.liferay.image.uploader.web", "0.0.0", "1.0.0",
+			new DummyUpgradeStep());
+
 		registry.register(
 			"com.liferay.image.uploader.web", "0.0.1", "1.0.0",
 			new UpgradePortletId());

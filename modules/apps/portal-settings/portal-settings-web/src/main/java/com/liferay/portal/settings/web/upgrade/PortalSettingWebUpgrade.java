@@ -15,6 +15,7 @@
 package com.liferay.portal.settings.web.upgrade;
 
 import com.liferay.portal.kernel.module.framework.ModuleServiceLifecycle;
+import com.liferay.portal.kernel.upgrade.DummyUpgradeStep;
 import com.liferay.portal.settings.web.upgrade.v1_0_0.UpgradePortletId;
 import com.liferay.portal.upgrade.registry.UpgradeStepRegistrator;
 
@@ -29,6 +30,10 @@ public class PortalSettingWebUpgrade implements UpgradeStepRegistrator {
 
 	@Override
 	public void register(Registry registry) {
+		registry.register(
+			"com.liferay.portal.settings.web", "0.0.0", "1.0.0",
+			new DummyUpgradeStep());
+
 		registry.register(
 			"com.liferay.portal.settings.web", "0.0.1", "1.0.0",
 			new UpgradePortletId());

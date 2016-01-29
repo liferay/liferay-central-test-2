@@ -17,6 +17,7 @@ package com.liferay.bookmarks.web.upgrade;
 import com.liferay.bookmarks.web.upgrade.v1_0_0.UpgradeAdminPortlets;
 import com.liferay.bookmarks.web.upgrade.v1_0_0.UpgradePortletPreferences;
 import com.liferay.portal.kernel.module.framework.ModuleServiceLifecycle;
+import com.liferay.portal.kernel.upgrade.DummyUpgradeStep;
 import com.liferay.portal.upgrade.registry.UpgradeStepRegistrator;
 
 import org.osgi.service.component.annotations.Component;
@@ -30,6 +31,10 @@ public class BookmarksWebUpgrade implements UpgradeStepRegistrator {
 
 	@Override
 	public void register(Registry registry) {
+		registry.register(
+			"com.liferay.bookmarks.web", "0.0.0", "1.0.0",
+			new DummyUpgradeStep());
+
 		registry.register(
 			"com.liferay.bookmarks.web", "0.0.1", "1.0.0",
 			new UpgradeAdminPortlets(), new UpgradePortletPreferences());
