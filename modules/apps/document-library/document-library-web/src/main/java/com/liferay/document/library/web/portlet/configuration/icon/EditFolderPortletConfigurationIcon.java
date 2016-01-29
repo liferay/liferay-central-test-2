@@ -107,7 +107,7 @@ public class EditFolderPortletConfigurationIcon
 				themeDisplay.getPermissionChecker(),
 				themeDisplay.getScopeGroupId(), folderId, ActionKeys.UPDATE);
 		}
-		catch (PortalException e) {
+		catch (PortalException pe) {
 		}
 
 		return false;
