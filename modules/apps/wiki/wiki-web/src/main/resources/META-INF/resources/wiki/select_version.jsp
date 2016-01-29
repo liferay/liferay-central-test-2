@@ -74,7 +74,7 @@ portletURL.setParameter("sourceVersion", String.valueOf(sourceVersion));
 							</aui:a>
 						</c:when>
 						<c:otherwise>
-							<%= String.valueOf(curWikiPage.getVersion()) %>
+							<%= curWikiPage.getVersion() %>
 						</c:otherwise>
 					</c:choose>
 				</liferay-ui:search-container-column-text>
