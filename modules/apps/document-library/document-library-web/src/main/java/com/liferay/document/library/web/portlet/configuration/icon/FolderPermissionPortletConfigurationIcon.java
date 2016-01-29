@@ -84,7 +84,7 @@ public class FolderPermissionPortletConfigurationIcon
 					ActionKeys.PERMISSIONS);
 			}
 		}
-		catch (PortalException e) {
+		catch (PortalException pe) {
 		}
 
 		return false;
