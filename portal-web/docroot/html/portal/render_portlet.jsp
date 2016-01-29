@@ -439,15 +439,16 @@ sb.append("=");
 sb.append(Constants.DELETE);
 sb.append("&referer=");
 
-StringBundler innerSb = new StringBundler(5);
+StringBundler innerSB = new StringBundler(5);
 
-innerSb.append(themeDisplay.getPathMain());
-innerSb.append("/portal/layout?p_l_id=");
-innerSb.append(plid);
-innerSb.append("&doAsUserId=");
-innerSb.append(themeDisplay.getDoAsUserId());
+innerSB.append(themeDisplay.getPathMain());
+innerSB.append("/portal/layout?p_l_id=");
+innerSB.append(plid);
+innerSB.append("&doAsUserId=");
+innerSB.append(themeDisplay.getDoAsUserId());
 
-sb.append(HttpUtil.encodeURL(innerSb.toString()));
+sb.append(HttpUtil.encodeURL(innerSB.toString()));
+
 sb.append("&refresh=1");
 
 String urlClose = sb.toString();
@@ -684,17 +685,18 @@ sb.append("&");
 sb.append(Constants.CMD);
 sb.append("=minimize&referer=");
 
-innerSb = new StringBundler(7);
+innerSB = new StringBundler(7);
 
-innerSb.append(themeDisplay.getPathMain());
-innerSb.append("/portal/layout?p_auth=");
-innerSb.append(AuthTokenUtil.getToken(request));
-innerSb.append("&p_l_id=");
-innerSb.append(plid);
-innerSb.append("&doAsUserId=");
-innerSb.append(themeDisplay.getDoAsUserId());
+innerSB.append(themeDisplay.getPathMain());
+innerSB.append("/portal/layout?p_auth=");
+innerSB.append(AuthTokenUtil.getToken(request));
+innerSB.append("&p_l_id=");
+innerSB.append(plid);
+innerSB.append("&doAsUserId=");
+innerSB.append(themeDisplay.getDoAsUserId());
 
-sb.append(HttpUtil.encodeURL(innerSb.toString()));
+sb.append(HttpUtil.encodeURL(innerSB.toString()));
+
 sb.append("&refresh=1");
 
 portletDisplay.setURLMin(sb.toString());
