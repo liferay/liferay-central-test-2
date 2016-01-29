@@ -279,10 +279,6 @@
 		<execute function="AssertClick" locator1="Home#PAGE_CHILD_PAGE" value1="${childPageName}" />
 	</command>
 
-	<command name="gotoEdit">
-		<execute function="Click" locator1="ControlMenu#EDIT" />
-	</command>
-
 	<command name="gotoMyAccount">
 		<description message="Navigate to My Account > ${portletName}." />
 
