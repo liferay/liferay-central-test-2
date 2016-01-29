@@ -157,11 +157,11 @@ classes {
 dependencies {
 	alloyUI group: "org.webjars.bower", name: "alloy-ui", transitive: false, version: alloyUIVersion
 
+	lexicon group: "org.webjars.bower", name: "lexicon", transitive: false, version: lexiconVersion
+
 	provided group: "com.liferay.portal", name: "portal-service", version: liferay.portalVersion
 	provided group: "javax.servlet", name: "javax.servlet-api", version: "3.0.1"
 	provided group: "org.osgi", name: "org.osgi.service.component.annotations", version: "1.3.0"
-
-	lexicon group: "org.webjars.bower", name: "lexicon", transitive: false, version: lexiconVersion
 }
 
 liferay {
