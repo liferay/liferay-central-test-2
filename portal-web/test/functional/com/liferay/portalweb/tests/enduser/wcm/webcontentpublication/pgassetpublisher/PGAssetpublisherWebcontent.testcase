@@ -447,7 +447,7 @@
 		</execute>
 
 		<execute macro="AssetPublisherPortlet#viewAssetPG">
-			<var name="assetContent" value="WC WebContent Content" />
+			<var name="assetContent" value="WC WebContent Text" />
 			<var name="assetTitle" value="WC WebContent Title" />
 		</execute>
 	</command>
@@ -593,7 +593,7 @@
 		</execute>
 
 		<execute macro="AssetPublisherPortlet#viewAssetPG">
-			<var name="assetContent" value="WC WebContent Content" />
+			<var name="assetContent" value="WC WebContent Text" />
 			<var name="assetTitle" value="WC WebContent Title" />
 		</execute>
 	</command>
