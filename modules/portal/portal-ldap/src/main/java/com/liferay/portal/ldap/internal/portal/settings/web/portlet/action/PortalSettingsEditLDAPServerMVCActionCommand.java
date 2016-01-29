@@ -122,7 +122,7 @@ public class PortalSettingsEditLDAPServerMVCActionCommand
 
 	@Activate
 	protected void activate() {
-		_portletContext = _portletContextFactory.newUntrackedInstance(
+		_portletContext = _portletContextFactory.createUntrackedInstance(
 			_portlet, _servletContext);
 	}
 

@@ -88,7 +88,7 @@ public class PortletContextFactoryImpl implements PortletContextFactory {
 	}
 
 	@Override
-	public PortletContext newUntrackedInstance(
+	public PortletContext createUntrackedInstance(
 		Portlet portlet, ServletContext servletContext) {
 
 		PortletContext portletContext = new PortletContextImpl(
