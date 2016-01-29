@@ -28,8 +28,8 @@ import java.util.regex.Pattern;
 public class StringParserFragment {
 
 	public static StringParserFragment create(String chunk) {
-		StringParserFragment stringParserFragment =
-			_stringParserFragments.get(chunk);
+		StringParserFragment stringParserFragment = _stringParserFragments.get(
+			chunk);
 
 		if (stringParserFragment == null) {
 			stringParserFragment = new StringParserFragment(chunk);
