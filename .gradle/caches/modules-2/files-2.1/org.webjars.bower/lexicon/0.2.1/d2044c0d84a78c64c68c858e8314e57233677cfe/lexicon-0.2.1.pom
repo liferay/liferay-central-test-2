@@ -5,7 +5,7 @@
     <packaging>jar</packaging>
     <groupId>org.webjars.bower</groupId>
     <artifactId>lexicon</artifactId>
-    <version>0.1.31</version>
+    <version>0.2.1</version>
     <name>lexicon</name>
     <description>WebJar for lexicon</description>
     <url>http://webjars.org</url>
@@ -18,7 +18,7 @@
         <url>https://github.com/liferay/lexicon</url>
         <connection>git://github.com/liferay/lexicon.git</connection>
         <developerConnection>git://github.com/liferay/lexicon.git</developerConnection>
-        <tag>v0.1.31</tag>
+        <tag>v0.2.1</tag>
     </scm>
 
     <developers>
