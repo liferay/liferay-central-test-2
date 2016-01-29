@@ -9,24 +9,28 @@ development project in 2000 and was open sourced in 2001.
 To get started, check out the project's community homepage at
 [http://liferay.org](http://liferay.org)!
 
-## Source Code
+## Latest Release Details
 
-Liferay's main source code resides in two repositories:
-[liferay-portal](https://github.com/liferay/liferay-portal) and
-[liferay-plugins](https://github.com/liferay/liferay-plugins). Liferay has
-additional repositories for the following:
+The latest release, Liferay version 7, is built from the source code of
+Liferay Portal and several other related open source projects. It includes
+features for end users, business professionals, system administrators,
+and enterprise developers.
 
-* [AlloyUI](https://github.com/liferay/alloy-ui)
-* [Documentation](https://github.com/liferay/liferay-docs)
-* [Git Tools](https://github.com/liferay/git-tools)
-* [Liferay Faces](https://github.com/liferay/liferay-faces)
-* [Liferay IDE](https://github.com/liferay/liferay-ide)
-* [Maven Support](https://github.com/liferay/liferay-maven-support)
+* Modular architecture for maximum flexibility and reliability
+* Portal features for managing users, groups, and permissions
+* Single Page Applications for blazingly fast performance
+* Rich web services for integrating with other systems
+* Web Content Management including Personalization and Content Targeting
+* Documents and Rich Media Management
+* Complete Mobile development platform
+* Business Forms and Workflow
+* Collaboration features such as blogs, wikis, and social networking
+* Consistent and powerful Lexicon User Experience
+* Integrated Development Environment using [Liferay IDE](https://www.liferay.com/community/liferay-projects/liferay-ide/overview)
 
-Liferay Portal *releases* are built from the liferay-portal repository and
-include select plugins from the liferay-plugins repository. You can build
-Liferay Portal, its plugins, and/or any of the other supporting technologies
-from their respective repositories.
+For more details on these and other features, please see the
+[Discover](https://dev.liferay.com/discover/portal) section on the
+[Liferay Developer Network](https://dev.liferay.com).
 
 ## Quick Start
 
@@ -61,6 +65,19 @@ it's also your place to [participate](https://dev.liferay.com/participate) in
 making Liferay better. Come check out the [Liferay Developer
 Network](https://dev.liferay.com). 
 
+## Source Code
+
+Liferay's main source code resides in two repositories:
+[liferay-portal](https://github.com/liferay/liferay-portal) and
+[liferay-plugins](https://github.com/liferay/liferay-plugins). Liferay maintains
+[several other repositories](https://github.com/liferay) related to features and
+supporting documentation.
+
+Liferay Portal *releases* are built from the liferay-portal repository and
+include select plugins from the liferay-plugins repository. You can build
+Liferay Portal, its plugins, and/or any of the other supporting technologies
+from their respective repositories.
+
 ## Stay Connected
 
 There are many ways for you to learn what's new in Liferay, get answers to
@@ -73,6 +90,8 @@ Follow us on Twitter:
 - [@Liferay](http://twitter.com/Liferay) tweets the Liferay's latest
 announcements
 - [@Liferaydocs](http://twitter.com/Liferaydocs) tweets about new articles
+- [@Liferayeng](http://twitter.com/Liferayeng) tweets from the core engineering
+team
 
 ### Blog
 
@@ -105,17 +124,34 @@ maintain backward compatibility, we make a strong effort to uphold the
 versioning for our software as described in [Understanding Liferay's
 Releases](https://dev.liferay.com/discover/deployment/-/knowledge_base/6-2/understanding-liferays-releases).
 
-## Bug Tracker
+## Bug Reporting and Feature Requests
 
 Did you find a bug? Please file an issue for it at
 [https://issues.liferay.com](https://issues.liferay.com) following [Liferay's
 JIRA Guidelines](http://www.liferay.com/community/wiki/-/wiki/Main/JIRA).
+
+If you'd like to suggest a new feature for Liferay, visit the
+[Ideas Dashboard](https://dev.liferay.com/participate/ideas) to submit and
+track the progress of your idea!
 
 ## Professional Services
 
 If you need professional consultation or help with Liferay and your business, 
 check out the [offerings from Liferay, Inc.](http://www.liferay.com/services)
 and its [partner network](http://www.liferay.com/partners/service-partners).
+
+## The Liferay Development Team
+
+Liferay is produced by the worldwide Liferay Portal engineering team, and
+involves many hours of development, testing, writing documentation, and working
+with the wider Liferay community of customers, partners, and open source
+developers. We are glad you have chosen Liferay, and hope that it meets or
+exceeds your expectations!
+
+In addition to Liferay's engineering staff, a special thanks goes to the many
+open source developers who volunteere their time and energy to help with the
+release, whether it was bugfixing, idea generation, documentation, translations,
+or other contribution that helped to improve this release.
 
 ## Liferay Portal Community Edition License
 
