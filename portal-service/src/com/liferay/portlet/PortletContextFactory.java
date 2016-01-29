@@ -28,9 +28,9 @@ public interface PortletContextFactory {
 	public PortletContext create(
 		Portlet portlet, ServletContext servletContext);
 
-	public void destroy(Portlet portlet);
-
 	public PortletContext createUntrackedInstance(
 		Portlet portlet, ServletContext servletContext);
+
+	public void destroy(Portlet portlet);
 
 }

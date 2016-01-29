@@ -83,11 +83,6 @@ public class PortletContextFactoryImpl implements PortletContextFactory {
 	}
 
 	@Override
-	public void destroy(Portlet portlet) {
-		_pool.remove(portlet.getRootPortletId());
-	}
-
-	@Override
 	public PortletContext createUntrackedInstance(
 		Portlet portlet, ServletContext servletContext) {
 
@@ -95,6 +90,11 @@ public class PortletContextFactoryImpl implements PortletContextFactory {
 			portlet, servletContext);
 
 		return DoPrivilegedUtil.wrap(portletContext);
+	}
+
+	@Override
+	public void destroy(Portlet portlet) {
+		_pool.remove(portlet.getRootPortletId());
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
