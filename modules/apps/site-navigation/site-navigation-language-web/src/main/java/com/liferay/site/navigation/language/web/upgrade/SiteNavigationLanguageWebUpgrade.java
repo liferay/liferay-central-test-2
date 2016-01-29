@@ -14,14 +14,12 @@
 
 package com.liferay.site.navigation.language.web.upgrade;
 
-import com.liferay.portal.kernel.module.framework.ModuleServiceLifecycle;
 import com.liferay.portal.kernel.upgrade.DummyUpgradeStep;
 import com.liferay.portal.upgrade.registry.UpgradeStepRegistrator;
 import com.liferay.site.navigation.language.web.upgrade.v1_0_0.UpgradePortletId;
 import com.liferay.site.navigation.language.web.upgrade.v1_0_0.UpgradePortletPreferences;
 
 import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Eudaldo Alonso
@@ -40,11 +38,6 @@ public class SiteNavigationLanguageWebUpgrade
 		registry.register(
 			"com.liferay.site.navigation.language.web", "0.0.1", "1.0.0",
 			new UpgradePortletId(), new UpgradePortletPreferences());
-	}
-
-	@Reference(target = ModuleServiceLifecycle.PORTAL_INITIALIZED, unbind = "-")
-	protected void setModuleServiceLifecycle(
-		ModuleServiceLifecycle moduleServiceLifecycle) {
 	}
 
 }
