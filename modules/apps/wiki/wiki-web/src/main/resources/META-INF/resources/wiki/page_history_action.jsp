@@ -69,6 +69,6 @@ else {
 			url="javascript:;"
 		/>
 
-		<%@ include file="/wiki/compare_versions_popup.jspf" %>
+		<%@ include file="/wiki/compare_versions_pop_up.jspf" %>
 	</c:if>
 </liferay-ui:icon-menu>
