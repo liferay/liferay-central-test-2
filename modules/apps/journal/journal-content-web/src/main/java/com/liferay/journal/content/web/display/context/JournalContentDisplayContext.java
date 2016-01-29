@@ -447,19 +447,13 @@ public class JournalContentDisplayContext {
 		ThemeDisplay themeDisplay = (ThemeDisplay)_portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		Company company = themeDisplay.getCompany();
-
-		Group scopeGroup = themeDisplay.getScopeGroup();
-
-		User user = themeDisplay.getUser();
-
-		if (scopeGroup.isGuest() || scopeGroup.isRoot()) {
+		if (themeDisplay.getScopeGroupId() == themeDisplay.getSiteGroupId()) {
 			return PortalUtil.getSharedContentSiteGroupIds(
-				company.getCompanyId(), scopeGroup.getGroupId(),
-				user.getUserId());
+				themeDisplay.getCompanyId(), themeDisplay.getScopeGroupId(),
+				themeDisplay.getUserId());
 		}
 
-		return new long[] {scopeGroup.getGroupId()};
+		return new long[] {themeDisplay.getScopeGroupId()};
 	}
 
 	public List<UserToolAssetAddonEntry>
