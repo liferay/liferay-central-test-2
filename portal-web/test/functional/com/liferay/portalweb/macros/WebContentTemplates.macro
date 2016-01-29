@@ -57,7 +57,7 @@
 	<command name="addNullCP">
 		<execute macro="WebContentNavigator#gotoManageTemplates" />
 
-		<execute macro="WebContentNavigator#gotoAddTemplate" />
+		<execute macro="LexiconEntry#gotoAdd" />
 
 		<execute function="AssertElementNotPresent" locator1="TextInput#REQUIRED_ALERT" />
 		<execute function="AssertClick" locator1="Button#SAVE" value1="Save" />

@@ -60,10 +60,6 @@
 		<execute function="AssertVisible" locator1="TextInput#TITLE" />
 	</command>
 
-	<command name="gotoAddTemplate">
-		<execute function="Click" locator1="Button#PLUS" />
-	</command>
-
 	<command name="gotoAddWithStructureCP">
 		<var name="key_structureName" value="${structureName}" />
 
