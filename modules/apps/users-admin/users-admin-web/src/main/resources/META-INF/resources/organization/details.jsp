@@ -33,8 +33,7 @@ if (parentOrganizationId <= 0) {
 	}
 }
 
-String[] organizationsTypes = PropsValues.ORGANIZATIONS_TYPES;
-String type = BeanParamUtil.getString(organization, request, "type", organizationsTypes[0]);
+String type = BeanParamUtil.getString(organization, request, "type", PropsValues.ORGANIZATIONS_TYPES[0]);
 long regionId = BeanParamUtil.getLong(organization, request, "regionId");
 long countryId = BeanParamUtil.getLong(organization, request, "countryId");
 
@@ -83,11 +82,11 @@ User selUser = (User)request.getAttribute("user.selUser");
 		</c:choose>
 
 		<c:choose>
-			<c:when test="<%= organization == null && organizationsTypes.length > 1 %>">
+			<c:when test="<%= organization == null && PropsValues.ORGANIZATIONS_TYPES.length > 1 %>">
 				<aui:select name="type">
 
 					<%
-					for (String curType : organizationsTypes) {
+					for (String curType : PropsValues.ORGANIZATIONS_TYPES) {
 					%>
 
 						<aui:option label="<%= curType %>" selected="<%= type.equals(curType) %>" />
@@ -99,7 +98,7 @@ User selUser = (User)request.getAttribute("user.selUser");
 				</aui:select>
 			</c:when>
 			<c:when test="<%= organization == null %>">
-				<aui:input name="type" type="hidden" value="<%= organizationsTypes[0] %>" />
+				<aui:input name="type" type="hidden" value="<%= PropsValues.ORGANIZATIONS_TYPES[0] %>" />
 			</c:when>
 			<c:otherwise>
 				<aui:input name="typeLabel" type="resource" value="<%= LanguageUtil.get(request, organization.getType()) %>" />
@@ -308,7 +307,7 @@ if (parentOrganization != null) {
 			function(event) {
 
 				<%
-				for (String curType : organizationsTypes) {
+				for (String curType : PropsValues.ORGANIZATIONS_TYPES) {
 				%>
 
 					if ($(event.currentTarget).val() == '<%= curType %>') {
