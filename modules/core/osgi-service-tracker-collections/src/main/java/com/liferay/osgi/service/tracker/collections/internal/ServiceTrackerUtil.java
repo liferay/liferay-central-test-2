@@ -51,12 +51,12 @@ public class ServiceTrackerUtil {
 	}
 
 	public static <T> T throwException(Throwable throwable) {
-		return ServiceTrackerUtil.<T, RuntimeException>_doThrowException(
+		return ServiceTrackerUtil.<T, RuntimeException>_throwException(
 			throwable);
 	}
 
 	@SuppressWarnings("unchecked")
-	private static <T, E extends Throwable> T _doThrowException(
+	private static <T, E extends Throwable> T _throwException(
 			Throwable throwable)
 		throws E {
 
