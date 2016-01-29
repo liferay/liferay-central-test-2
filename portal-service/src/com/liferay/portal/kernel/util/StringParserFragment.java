@@ -29,12 +29,12 @@ public class StringParserFragment {
 
 	public static StringParserFragment create(String chunk) {
 		StringParserFragment stringParserFragment =
-			_stringParserFragmentsCache.get(chunk);
+			_stringParserFragments.get(chunk);
 
 		if (stringParserFragment == null) {
 			stringParserFragment = new StringParserFragment(chunk);
 
-			_stringParserFragmentsCache.put(chunk, stringParserFragment);
+			_stringParserFragments.put(chunk, stringParserFragment);
 		}
 
 		return stringParserFragment;
@@ -113,7 +113,7 @@ public class StringParserFragment {
 
 	private static final Pattern _defaultPattern = Pattern.compile("[^/\\.]+");
 	private static final Map<String, StringParserFragment>
-		_stringParserFragmentsCache = new ConcurrentReferenceValueHashMap<>(
+		_stringParserFragments = new ConcurrentReferenceValueHashMap<>(
 			FinalizeManager.SOFT_REFERENCE_FACTORY);
 
 	private final String _name;
