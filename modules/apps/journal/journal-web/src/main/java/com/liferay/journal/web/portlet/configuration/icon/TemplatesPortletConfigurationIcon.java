@@ -61,19 +61,19 @@ public class TemplatesPortletConfigurationIcon
 			themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
 
 		portletURL.setParameter("mvcPath", "/view_template.jsp");
+		portletURL.setParameter("redirect", themeDisplay.getURLCurrent());
+		portletURL.setParameter(
+			"groupId", String.valueOf(themeDisplay.getScopeGroupId()));
 		portletURL.setParameter(
 			"classNameId",
 			String.valueOf(PortalUtil.getClassNameId(DDMStructure.class)));
 		portletURL.setParameter(
-			"groupId", String.valueOf(themeDisplay.getScopeGroupId()));
-		portletURL.setParameter("redirect", themeDisplay.getURLCurrent());
+			"resourceClassNameId",
+			String.valueOf(PortalUtil.getClassNameId(JournalArticle.class)));
 		portletURL.setParameter(
 			"refererPortletName", JournalPortletKeys.JOURNAL);
 		portletURL.setParameter(
 			"refererWebDAVToken", WebDAVUtil.getStorageToken(portlet));
-		portletURL.setParameter(
-			"resourceClassNameId",
-			String.valueOf(PortalUtil.getClassNameId(JournalArticle.class)));
 		portletURL.setParameter("showAncestorScopes", Boolean.TRUE.toString());
 		portletURL.setParameter("showHeader", Boolean.TRUE.toString());
 
