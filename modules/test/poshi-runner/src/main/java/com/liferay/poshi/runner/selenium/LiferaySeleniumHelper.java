@@ -1160,7 +1160,9 @@ public class LiferaySeleniumHelper {
 		Keyboard keyboard = new DesktopKeyboard();
 
 		keyboard.keyDown(KeyEvent.VK_CONTROL);
+
 		keyboard.type("a");
+
 		keyboard.keyUp(KeyEvent.VK_CONTROL);
 	}
 
