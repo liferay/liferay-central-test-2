@@ -51,7 +51,6 @@ public class RadioDDMFormFieldTypeSettingsTest
 
 		Assert.assertNotNull(inlineDDMFormField);
 		Assert.assertNotNull(inlineDDMFormField.getLabel());
-
 		Assert.assertEquals(
 			"true", inlineDDMFormField.getProperty("showAsSwitcher"));
 
