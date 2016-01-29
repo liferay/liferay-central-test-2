@@ -48,6 +48,7 @@ if (Validator.isNull(keywords)) {
 }
 
 displayStyleURL.setParameter("mvcRenderCommandName", mvcRenderCommandName);
+
 displayStyleURL.setParameter("navigation", HtmlUtil.escapeJS(navigation));
 
 if (curEntry > 0) {
