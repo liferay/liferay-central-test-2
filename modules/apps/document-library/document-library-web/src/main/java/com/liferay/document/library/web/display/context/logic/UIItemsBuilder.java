@@ -383,8 +383,6 @@ public class UIItemsBuilder {
 		portletURL.setParameter(
 			"mvcRenderCommandName", "/document_library/move_entry");
 
-		PortletURL redirectURL = liferayPortletResponse.createRenderURL();
-
 		long folderId = _fileEntry.getFolderId();
 
 		if (folderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
@@ -397,6 +395,9 @@ public class UIItemsBuilder {
 		}
 
 		portletURL.setParameter("folderId", String.valueOf(folderId));
+
+		PortletURL redirectURL = liferayPortletResponse.createRenderURL();
+
 		portletURL.setParameter("redirect", redirectURL.toString());
 
 		portletURL.setParameter(
