@@ -47,7 +47,6 @@ public class CheckboxDDMFormFieldValueAccessorTest {
 			Boolean.TRUE,
 			checkboxDDMFormFieldValueAccessor.getValue(
 				ddmFormFieldValue, LocaleUtil.BRAZIL));
-
 		Assert.assertEquals(
 			Boolean.FALSE,
 			checkboxDDMFormFieldValueAccessor.getValue(
@@ -67,7 +66,6 @@ public class CheckboxDDMFormFieldValueAccessorTest {
 			Boolean.TRUE,
 			checkboxDDMFormFieldValueAccessor.getValue(
 				ddmFormFieldValue, LocaleUtil.BRAZIL));
-
 		Assert.assertEquals(
 			Boolean.TRUE,
 			checkboxDDMFormFieldValueAccessor.getValue(
