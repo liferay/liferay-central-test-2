@@ -110,9 +110,9 @@ GroupDisplayContextHelper groupDisplayContextHelper = new GroupDisplayContextHel
 								</li>
 
 								<%
-								List<Portlet> dataSiteLevelPortlets = ExportImportHelperUtil.getDataSiteLevelPortlets(company.getCompanyId(), false);
-
 								Set<String> portletDataHandlerClassNames = new HashSet<String>();
+
+								List<Portlet> dataSiteLevelPortlets = ExportImportHelperUtil.getDataSiteLevelPortlets(company.getCompanyId(), false);
 
 								if (!dataSiteLevelPortlets.isEmpty()) {
 									for (Portlet portlet : dataSiteLevelPortlets) {
