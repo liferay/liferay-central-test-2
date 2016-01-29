@@ -43,10 +43,10 @@ public class PortletContextFactoryUtil {
 		return _portletContextFactory;
 	}
 
-	public static PortletContext newUntrackedInstance(
+	public static PortletContext createUntrackedInstance(
 		Portlet portlet, ServletContext servletContext) {
 
-		return getPortletContextFactory().newUntrackedInstance(
+		return getPortletContextFactory().createUntrackedInstance(
 			portlet, servletContext);
 	}
 

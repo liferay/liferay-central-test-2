@@ -30,7 +30,7 @@ public interface PortletContextFactory {
 
 	public void destroy(Portlet portlet);
 
-	public PortletContext newUntrackedInstance(
+	public PortletContext createUntrackedInstance(
 		Portlet portlet, ServletContext servletContext);
 
 }
