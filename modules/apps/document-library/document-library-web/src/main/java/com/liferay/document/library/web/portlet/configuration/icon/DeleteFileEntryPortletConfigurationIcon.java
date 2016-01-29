@@ -85,6 +85,7 @@ public class DeleteFileEntryPortletConfigurationIcon
 		redirectURL.setParameter("folderId", String.valueOf(folderId));
 
 		portletURL.setParameter("redirect", redirectURL.toString());
+
 		portletURL.setParameter(
 			"fileEntryId", String.valueOf(_fileEntry.getFileEntryId()));
 
