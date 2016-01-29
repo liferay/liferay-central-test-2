@@ -56,14 +56,13 @@ public class AggregateResourceBundleLoader implements ResourceBundleLoader {
 				StringPool.BLANK, languageId);
 		}
 
-		int size = resourceBundles.size();
-
-		if (size == 1) {
+		if (resourceBundles.size() == 1) {
 			return resourceBundles.get(0);
 		}
 
 		return new AggregateResourceBundle(
-			resourceBundles.toArray(new ResourceBundle[size]));
+			resourceBundles.toArray(
+				new ResourceBundle[resourceBundles.size()]));
 	}
 
 	private final ResourceBundleLoader[] _resourceBundleLoaders;
