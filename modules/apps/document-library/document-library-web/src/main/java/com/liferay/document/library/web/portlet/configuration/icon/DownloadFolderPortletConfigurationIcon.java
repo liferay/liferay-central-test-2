@@ -73,7 +73,7 @@ public class DownloadFolderPortletConfigurationIcon
 				themeDisplay.getScopeGroupId(), _folder.getFolderId(),
 				ActionKeys.VIEW);
 		}
-		catch (PortalException e) {
+		catch (PortalException pe) {
 		}
 
 		return false;
