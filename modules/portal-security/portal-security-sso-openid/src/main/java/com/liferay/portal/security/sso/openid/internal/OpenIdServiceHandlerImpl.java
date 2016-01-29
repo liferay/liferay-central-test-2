@@ -332,10 +332,10 @@ public class OpenIdServiceHandlerImpl implements OpenIdServiceHandler {
 
 		PortletURL portletURL = liferayPortletResponse.createActionURL();
 
-		portletURL.setParameter("saveLastPath", Boolean.FALSE.toString());
-		portletURL.setParameter(Constants.CMD, Constants.READ);
-		portletURL.setParameter("mvcRenderCommandName", "/login/openid");
 		portletURL.setParameter(ActionRequest.ACTION_NAME, "/login/openid");
+		portletURL.setParameter("saveLastPath", Boolean.FALSE.toString());
+		portletURL.setParameter("mvcRenderCommandName", "/login/openid");
+		portletURL.setParameter(Constants.CMD, Constants.READ);
 
 		try {
 			List<DiscoveryInformation> discoveryInformationList =
@@ -408,9 +408,9 @@ public class OpenIdServiceHandlerImpl implements OpenIdServiceHandler {
 			throw new OpenIdServiceException.MessageException(
 				me.getMessage(), me);
 		}
-		catch (IOException e) {
+		catch (IOException ioe) {
 			throw new SystemException(
-				"Error communicating with open id provider", e);
+				"Unable to communicate with OpenId provider", e);
 		}
 	}
 
