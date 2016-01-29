@@ -15,12 +15,10 @@
 package com.liferay.hello.world.web.upgrade;
 
 import com.liferay.hello.world.web.upgrade.v1_0_0.UpgradePortletId;
-import com.liferay.portal.kernel.module.framework.ModuleServiceLifecycle;
 import com.liferay.portal.kernel.upgrade.DummyUpgradeStep;
 import com.liferay.portal.upgrade.registry.UpgradeStepRegistrator;
 
 import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Peter Fellwock
@@ -37,11 +35,6 @@ public class HelloWorldWebUpgrade implements UpgradeStepRegistrator {
 		registry.register(
 			"com.liferay.license.manager.web", "0.0.1", "1.0.0",
 			new UpgradePortletId());
-	}
-
-	@Reference(target = ModuleServiceLifecycle.PORTAL_INITIALIZED, unbind = "-")
-	protected void setModuleServiceLifecycle(
-		ModuleServiceLifecycle moduleServiceLifecycle) {
 	}
 
 }
