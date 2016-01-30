@@ -63,23 +63,23 @@ public class UserPersonalSitePermissions {
 				continue;
 			}
 
-			Group userPersonalSite = getPersonalSiteGroup(companyId);
+			Group userPersonalSiteGroup = getUserPersonalSiteGroup(companyId);
 
-			if (userPersonalSite == null) {
+			if (userPersonalSiteGroup == null) {
 				continue;
 			}
 
 			try {
 				initPermissions(
 					companyId, powerUserRole.getRoleId(), rootPortletId,
-					userPersonalSite.getGroupId());
+					userPersonalSiteGroup.getGroupId());
 			}
-			catch (PortalException e) {
+			catch (PortalException pe) {
 				_log.error(
-					"Unable to initialize user personal site permissions" +
-						" for portlet " + portlet.getPortletId() +
-						" in company " + companyId
-					, e);
+					"Unable to initialize user personal site permissions " +
+						"for portlet " + portlet.getPortletId() +
+							" in company " + companyId,
+					pe);
 			}
 		}
 	}
@@ -91,9 +91,9 @@ public class UserPersonalSitePermissions {
 			return;
 		}
 
-		Group userPersonalSite = getPersonalSiteGroup(companyId);
+		Group userPersonalSiteGroup = getUserPersonalSiteGroup(companyId);
 
-		if (userPersonalSite == null) {
+		if (userPersonalSiteGroup == null) {
 			return;
 		}
 
@@ -101,14 +101,15 @@ public class UserPersonalSitePermissions {
 			try {
 				initPermissions(
 					companyId, powerUserRole.getRoleId(),
-					portlet.getRootPortletId(), userPersonalSite.getGroupId());
+					portlet.getRootPortletId(),
+					userPersonalSiteGroup.getGroupId());
 			}
-			catch (PortalException e) {
+			catch (PortalException pe) {
 				_log.error(
-					"Unable to initialize user personal site permissions" +
-						" for portlet " + portlet.getPortletId() +
-						" in company " + companyId
-					, e);
+					"Unable to initialize user personal site permissions " +
+						"for portlet " + portlet.getPortletId() +
+							" in company " + companyId,
+					pe);
 			}
 		}
 	}
@@ -134,13 +135,15 @@ public class UserPersonalSitePermissions {
 		_serviceTracker.close();
 	}
 
-	protected Group getPersonalSiteGroup(long companyId) {
+	protected Group getUserPersonalSiteGroup(long companyId) {
 		try {
 			return _groupLocalService.getUserPersonalSiteGroup(companyId);
 		}
-		catch (PortalException e) {
+		catch (PortalException pe) {
 			_log.error(
-				"Unable to obtain personal site in company " + companyId, e);
+				"Unable to get user personal site group in company " +
+					companyId,
+				pe);
 		}
 
 		return null;
@@ -151,9 +154,9 @@ public class UserPersonalSitePermissions {
 			return _roleLocalService.getRole(
 				companyId, RoleConstants.POWER_USER);
 		}
-		catch (PortalException e) {
+		catch (PortalException pe) {
 			_log.error(
-				"Unable to obtain power user role in company " + companyId, e);
+				"Unable to get power user role in company " + companyId, pe);
 		}
 
 		return null;
@@ -179,22 +182,22 @@ public class UserPersonalSitePermissions {
 				portletActionIds.toArray(new String[0]));
 		}
 
-		String rootModelName = ResourceActionsUtil.getPortletRootModelResource(
+		String modelName = ResourceActionsUtil.getPortletRootModelResource(
 			rootPortletId);
 
-		if (Validator.isBlank(rootModelName)) {
+		if (Validator.isBlank(modelName)) {
 			return;
 		}
 
 		if (_resourcePermissionLocalService.getResourcePermissionsCount(
-				companyId, rootModelName, ResourceConstants.SCOPE_GROUP,
+				companyId, modelName, ResourceConstants.SCOPE_GROUP,
 				primaryKey) == 0) {
 
 			List<String> modelActionIds =
-				ResourceActionsUtil.getModelResourceActions(rootModelName);
+				ResourceActionsUtil.getModelResourceActions(modelName);
 
 			_resourcePermissionLocalService.setResourcePermissions(
-				companyId, rootModelName, ResourceConstants.SCOPE_GROUP,
+				companyId, modelName, ResourceConstants.SCOPE_GROUP,
 				String.valueOf(userPersonalSiteGroupId), powerUserRoleId,
 				modelActionIds.toArray(new String[0]));
 		}
@@ -204,31 +207,31 @@ public class UserPersonalSitePermissions {
 	protected void setCompanyLocalService(
 		CompanyLocalService companyLocalService) {
 
-		this._companyLocalService = companyLocalService;
+		_companyLocalService = companyLocalService;
 	}
 
 	@Reference(unbind = "-")
 	protected void setGroupLocalService(GroupLocalService groupLocalService) {
-		this._groupLocalService = groupLocalService;
+		_groupLocalService = groupLocalService;
 	}
 
 	@Reference(unbind = "-")
 	protected void setPortletLocalService(
 		PortletLocalService portletLocalService) {
 
-		this._portletLocalService = portletLocalService;
+		_portletLocalService = portletLocalService;
 	}
 
 	@Reference(unbind = "-")
 	protected void setResourcePermissionLocalService(
 		ResourcePermissionLocalService resourcePermissionLocalService) {
 
-		this._resourcePermissionLocalService = resourcePermissionLocalService;
+		_resourcePermissionLocalService = resourcePermissionLocalService;
 	}
 
 	@Reference(unbind = "-")
 	protected void setRoleLocalService(RoleLocalService roleLocalService) {
-		this._roleLocalService = roleLocalService;
+		_roleLocalService = roleLocalService;
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
@@ -259,11 +262,10 @@ public class UserPersonalSitePermissions {
 
 				if (portlet == null) {
 					Class panelAppClass = panelApp.getClass();
+
 					_log.error(
-						"Unable to obtain portlet " + panelApp.getPortletId() +
-							" for PanelApp " + panelAppClass.getName() +
-							". Please register PanelApp to OSGi with " +
-							"satisfied reference to the portlet.");
+						"Unable to get portlet " + panelApp.getPortletId() +
+							" for panel app " + panelAppClass.getName());
 
 					return panelApp;
 				}
@@ -272,26 +274,27 @@ public class UserPersonalSitePermissions {
 
 				return panelApp;
 			}
-			catch (Throwable e) {
+			catch (Throwable t) {
 				_bundleContext.ungetService(reference);
 
-				throw e;
+				throw t;
 			}
 		}
 
 		@Override
 		public void modifiedService(
-			ServiceReference<PanelApp> reference, PanelApp service) {
+			ServiceReference<PanelApp> serviceReference, PanelApp panelApp) {
 
-			removedService(reference, service);
-			addingService(reference);
+			removedService(serviceReference, panelApp);
+
+			addingService(serviceReference);
 		}
 
 		@Override
 		public void removedService(
-			ServiceReference<PanelApp> reference, PanelApp service) {
+			ServiceReference<PanelApp> serviceReference, PanelApp panelApp) {
 
-			_bundleContext.ungetService(reference);
+			_bundleContext.ungetService(serviceReference);
 		}
 
 	}
