@@ -135,6 +135,19 @@ public class UserPersonalSitePermissions {
 		_serviceTracker.close();
 	}
 
+	protected Role getPowerUserRole(long companyId) {
+		try {
+			return _roleLocalService.getRole(
+				companyId, RoleConstants.POWER_USER);
+		}
+		catch (PortalException pe) {
+			_log.error(
+				"Unable to get power user role in company " + companyId, pe);
+		}
+
+		return null;
+	}
+
 	protected Group getUserPersonalSiteGroup(long companyId) {
 		try {
 			return _groupLocalService.getUserPersonalSiteGroup(companyId);
@@ -144,19 +157,6 @@ public class UserPersonalSitePermissions {
 				"Unable to get user personal site group in company " +
 					companyId,
 				pe);
-		}
-
-		return null;
-	}
-
-	protected Role getPowerUserRole(long companyId) {
-		try {
-			return _roleLocalService.getRole(
-				companyId, RoleConstants.POWER_USER);
-		}
-		catch (PortalException pe) {
-			_log.error(
-				"Unable to get power user role in company " + companyId, pe);
 		}
 
 		return null;
