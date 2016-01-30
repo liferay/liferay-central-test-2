@@ -1425,14 +1425,14 @@ public class LDAPUserImporterImpl implements LDAPUserImporter, UserImporter {
 
 		Date modifiedDate = null;
 
+		LDAPImportConfiguration ldapImportConfiguration =
+			_ldapImportConfigurationProvider.getConfiguration(companyId);
+
 		boolean passwordReset = ldapUser.isPasswordReset();
 
 		if (_ldapSettings.isExportEnabled(companyId)) {
 			passwordReset = user.isPasswordReset();
 		}
-
-		LDAPImportConfiguration ldapImportConfiguration =
-			_ldapImportConfigurationProvider.getConfiguration(companyId);
 
 		try {
 			if (Validator.isNotNull(modifyTimestamp)) {
