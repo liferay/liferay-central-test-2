@@ -29,7 +29,7 @@ import org.osgi.service.component.annotations.Component;
  * @author Matthew Tambara
  */
 @Component(immediate = true)
-public class InitFilterInstaller {
+public class InitFilterTracker {
 
 	@Activate
 	protected void activate(BundleContext bundleContext) {
