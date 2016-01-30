@@ -12,13 +12,14 @@
  * details.
  */
 
-package com.liferay.application.list.user.personal.site.permissions;
+package com.liferay.application.list.user.personal.site.permissions.instance.lifecycle;
 
 import com.liferay.application.list.PanelApp;
 import com.liferay.application.list.PanelAppRegistry;
 import com.liferay.application.list.PanelCategoryRegistry;
 import com.liferay.application.list.constants.PanelCategoryKeys;
 import com.liferay.application.list.display.context.logic.PanelCategoryHelper;
+import com.liferay.application.list.user.personal.site.permissions.UserPersonalSitePermissions;
 import com.liferay.portal.instance.lifecycle.BasePortalInstanceLifecycleListener;
 import com.liferay.portal.instance.lifecycle.PortalInstanceLifecycleListener;
 import com.liferay.portal.model.Company;
@@ -35,7 +36,7 @@ import org.osgi.service.component.annotations.Reference;
  * @author Tomas Polesovsky
  */
 @Component(immediate = true, service = PortalInstanceLifecycleListener.class)
-public class PanelAppPermissionsStartupListener
+public class PanelAppPermissionsPortalInstanceLifecycleListener
 	extends BasePortalInstanceLifecycleListener {
 
 	@Override
