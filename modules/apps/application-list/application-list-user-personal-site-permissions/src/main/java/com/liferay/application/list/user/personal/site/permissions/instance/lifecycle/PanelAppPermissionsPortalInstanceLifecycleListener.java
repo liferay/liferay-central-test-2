@@ -50,7 +50,7 @@ public class PanelAppPermissionsPortalInstanceLifecycleListener
 		List<Portlet> portlets = new ArrayList<>(panelApps.size());
 
 		for (PanelApp panelApp : panelApps) {
-			Portlet portlet = portletLocalService.getPortletById(
+			Portlet portlet = _portletLocalService.getPortletById(
 				panelApp.getPortletId());
 
 			portlets.add(portlet);
@@ -76,7 +76,7 @@ public class PanelAppPermissionsPortalInstanceLifecycleListener
 	protected void setPortletLocalService(
 		PortletLocalService portletLocalService) {
 
-		this.portletLocalService = portletLocalService;
+		_portletLocalService = portletLocalService;
 	}
 
 	@Reference(unbind = "-")
@@ -86,10 +86,9 @@ public class PanelAppPermissionsPortalInstanceLifecycleListener
 		_userPersonalSitePermissions = userPersonalSitePermissions;
 	}
 
-	protected PortletLocalService portletLocalService;
-
 	private PanelAppRegistry _panelAppRegistry;
 	private PanelCategoryRegistry _panelCategoryRegistry;
+	private PortletLocalService _portletLocalService;
 	private UserPersonalSitePermissions _userPersonalSitePermissions;
 
 }
