@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.init.filter;
+package com.liferay.portal.init.servlet.filter;
 
 import com.liferay.portal.kernel.util.HashMapDictionary;
 
