@@ -88,11 +88,11 @@ public class PanelCategoryHelper {
 
 		panelApps.addAll(_panelAppRegistry.getPanelApps(panelCategoryKey));
 
-		for (PanelCategory curPanelCategory :
+		for (PanelCategory childPanelCategory :
 				_panelCategoryRegistry.getChildPanelCategories(
 					panelCategoryKey)) {
 
-			panelApps.addAll(getAllPanelApps(curPanelCategory.getKey()));
+			panelApps.addAll(getAllPanelApps(childPanelCategory.getKey()));
 		}
 
 		return panelApps;
