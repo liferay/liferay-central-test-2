@@ -215,8 +215,8 @@ public class ConfigurationModelRetrieverImpl
 
 		try {
 			Configuration[] factoryConfigurations = getFactoryConfigurations(
-				factoryPid, ConfigurationModel.PROPERTY_COMPANY_ID,
-				ConfigurationModel.PROPERTY_COMPANY_ID_DEFAULT);
+				factoryPid, ConfigurationModel.PROPERTY_KEY_COMPANY_ID,
+				ConfigurationModel.PROPERTY_VALUE_COMPANY_ID_DEFAULT);
 
 			if (ArrayUtil.isNotEmpty(factoryConfigurations)) {
 				configuration = factoryConfigurations[0];

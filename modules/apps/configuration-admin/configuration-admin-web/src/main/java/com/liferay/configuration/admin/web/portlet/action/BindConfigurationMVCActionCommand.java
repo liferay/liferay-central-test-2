@@ -178,8 +178,8 @@ public class BindConfigurationMVCActionCommand implements MVCActionCommand {
 
 			if (configurationModel.isCompanyFactory()) {
 				configuredProperties.put(
-					ConfigurationModel.PROPERTY_COMPANY_ID,
-					ConfigurationModel.PROPERTY_COMPANY_ID_DEFAULT);
+					ConfigurationModel.PROPERTY_KEY_COMPANY_ID,
+					ConfigurationModel.PROPERTY_VALUE_COMPANY_ID_DEFAULT);
 			}
 
 			configuration.update(configuredProperties);
