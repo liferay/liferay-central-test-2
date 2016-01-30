@@ -55,24 +55,6 @@ public class ConfigurationModel
 		_factory = factory;
 	}
 
-	public ExtendedAttributeDefinition getExtendedAttributeDefinition(
-		String id) {
-
-		ExtendedAttributeDefinition[] extendedAttributeDefinitions =
-			_extendedObjectClassDefinition.getAttributeDefinitions(
-				ObjectClassDefinition.ALL);
-
-		for (ExtendedAttributeDefinition extendedAttributeDefinition :
-				extendedAttributeDefinitions) {
-
-			if (id.equals(extendedAttributeDefinition.getID())) {
-				return extendedAttributeDefinition;
-			}
-		}
-
-		return null;
-	}
-
 	@Override
 	public ExtendedAttributeDefinition[] getAttributeDefinitions(int filter) {
 		ExtendedAttributeDefinition[] extendedAttributeDefinitions =
@@ -101,6 +83,24 @@ public class ConfigurationModel
 	@Override
 	public String getDescription() {
 		return _extendedObjectClassDefinition.getDescription();
+	}
+
+	public ExtendedAttributeDefinition getExtendedAttributeDefinition(
+		String id) {
+
+		ExtendedAttributeDefinition[] extendedAttributeDefinitions =
+			_extendedObjectClassDefinition.getAttributeDefinitions(
+				ObjectClassDefinition.ALL);
+
+		for (ExtendedAttributeDefinition extendedAttributeDefinition :
+				extendedAttributeDefinitions) {
+
+			if (id.equals(extendedAttributeDefinition.getID())) {
+				return extendedAttributeDefinition;
+			}
+		}
+
+		return null;
 	}
 
 	public com.liferay.portal.metatype.definitions.ExtendedObjectClassDefinition
