@@ -77,7 +77,7 @@ renderResponse.setTitle(factoryConfigurationModel.getName());
 			String labelAttribute = configurationModel.getLabelAttribute();
 
 			if (labelAttribute != null) {
-				AttributeDefinition attributeDefinition = configurationModel.getAttributeDefinition(labelAttribute);
+				AttributeDefinition attributeDefinition = configurationModel.getExtendedAttributeDefinition(labelAttribute);
 
 				if (attributeDefinition != null) {
 					columnLabel = attributeDefinition.getName();

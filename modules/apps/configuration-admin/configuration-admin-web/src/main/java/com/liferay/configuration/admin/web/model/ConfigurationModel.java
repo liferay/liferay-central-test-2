@@ -55,7 +55,9 @@ public class ConfigurationModel
 		_factory = factory;
 	}
 
-	public ExtendedAttributeDefinition getAttributeDefinition(String id) {
+	public ExtendedAttributeDefinition getExtendedAttributeDefinition(
+		String id) {
+
 		ExtendedAttributeDefinition[] extendedAttributeDefinitions =
 			_extendedObjectClassDefinition.getAttributeDefinitions(
 				ObjectClassDefinition.ALL);
