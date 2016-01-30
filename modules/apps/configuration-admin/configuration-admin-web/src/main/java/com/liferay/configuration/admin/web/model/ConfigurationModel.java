@@ -56,15 +56,15 @@ public class ConfigurationModel
 	}
 
 	public ExtendedAttributeDefinition getAttributeDefinition(String id) {
-		ExtendedAttributeDefinition[] attributeDefinitions =
+		ExtendedAttributeDefinition[] extendedAttributeDefinitions =
 			_extendedObjectClassDefinition.getAttributeDefinitions(
 				ObjectClassDefinition.ALL);
 
-		for (ExtendedAttributeDefinition attributeDefinition :
-				attributeDefinitions) {
+		for (ExtendedAttributeDefinition extendedAttributeDefinition :
+				extendedAttributeDefinitions) {
 
-			if (id.equals(attributeDefinition.getID())) {
-				return attributeDefinition;
+			if (id.equals(extendedAttributeDefinition.getID())) {
+				return extendedAttributeDefinition;
 			}
 		}
 
@@ -73,10 +73,11 @@ public class ConfigurationModel
 
 	@Override
 	public ExtendedAttributeDefinition[] getAttributeDefinitions(int filter) {
-		ExtendedAttributeDefinition[] attributeDefinitions =
+		ExtendedAttributeDefinition[] extendedAttributeDefinitions =
 			_extendedObjectClassDefinition.getAttributeDefinitions(filter);
 
-		return removeFactoryInstanceLabelAttribute(attributeDefinitions);
+		return removeFactoryInstanceLabelAttribute(
+			extendedAttributeDefinitions);
 	}
 
 	public String getBundleLocation() {
@@ -224,28 +225,29 @@ public class ConfigurationModel
 	}
 
 	protected ExtendedAttributeDefinition[] removeFactoryInstanceLabelAttribute(
-		ExtendedAttributeDefinition[] attributeDefinitions) {
+		ExtendedAttributeDefinition[] extendedAttributeDefinitions) {
 
 		if (!isCompanyFactory()) {
-			return attributeDefinitions;
+			return extendedAttributeDefinitions;
 		}
 
-		List<ExtendedAttributeDefinition> filteredAttributeDefinitionsList =
-			new ArrayList<>();
+		List<ExtendedAttributeDefinition>
+			filteredExtendedAttributeDefinitionsList = new ArrayList<>();
 
-		for (ExtendedAttributeDefinition attributeDefinition :
-				attributeDefinitions) {
+		for (ExtendedAttributeDefinition extendedAttributeDefinition :
+				extendedAttributeDefinitions) {
 
-			String attributeId = attributeDefinition.getID();
+			String attributeId = extendedAttributeDefinition.getID();
 
 			if (!attributeId.equals(getLabelAttribute())) {
-				filteredAttributeDefinitionsList.add(attributeDefinition);
+				filteredExtendedAttributeDefinitionsList.add(
+					extendedAttributeDefinition);
 			}
 		}
 
-		return filteredAttributeDefinitionsList.toArray(
+		return filteredExtendedAttributeDefinitionsList.toArray(
 			new ExtendedAttributeDefinition[
-				filteredAttributeDefinitionsList.size()]);
+				filteredExtendedAttributeDefinitionsList.size()]);
 	}
 
 	private final String _bundleLocation;
