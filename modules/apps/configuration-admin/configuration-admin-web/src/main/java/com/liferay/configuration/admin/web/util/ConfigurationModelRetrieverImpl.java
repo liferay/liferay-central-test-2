@@ -15,6 +15,7 @@
 package com.liferay.configuration.admin.web.util;
 
 import com.liferay.configuration.admin.web.model.ConfigurationModel;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.ReflectionUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -217,9 +218,7 @@ public class ConfigurationModelRetrieverImpl
 				factoryPid, ConfigurationModel.PROPERTY_COMPANY_ID,
 				ConfigurationModel.PROPERTY_COMPANY_ID_DEFAULT);
 
-			if ((factoryConfigurations != null) &&
-				(factoryConfigurations.length > 0)) {
-
+			if (ArrayUtil.isNotEmpty(factoryConfigurations)) {
 				configuration = factoryConfigurations[0];
 			}
 		}
