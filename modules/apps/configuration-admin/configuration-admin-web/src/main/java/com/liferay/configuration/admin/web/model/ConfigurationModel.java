@@ -40,9 +40,9 @@ public class ConfigurationModel
 	implements
 		com.liferay.portal.metatype.definitions.ExtendedObjectClassDefinition {
 
-	public static final String PROPERTY_COMPANY_ID = "companyId";
+	public static final String PROPERTY_KEY_COMPANY_ID = "companyId";
 
-	public static final String PROPERTY_COMPANY_ID_DEFAULT = "0";
+	public static final String PROPERTY_VALUE_COMPANY_ID_DEFAULT = "0";
 
 	public ConfigurationModel(
 		com.liferay.portal.metatype.definitions.ExtendedObjectClassDefinition
@@ -191,7 +191,7 @@ public class ConfigurationModel
 		if (Validator.equals(
 				getScope(),
 				ExtendedObjectClassDefinition.Scope.COMPANY.toString()) &&
-			Validator.equals(getLabelAttribute(), PROPERTY_COMPANY_ID)) {
+			Validator.equals(getLabelAttribute(), PROPERTY_KEY_COMPANY_ID)) {
 
 			return true;
 		}
