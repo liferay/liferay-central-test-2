@@ -274,6 +274,8 @@ public class ConfigurationModelRetrieverImpl
 			String factoryPid, String property, String value)
 		throws IOException {
 
+		Configuration[] configurations = null;
+
 		StringBundler sb = new StringBundler(13);
 
 		if (Validator.isNotNull(property) && Validator.isNotNull(value)) {
@@ -295,8 +297,6 @@ public class ConfigurationModelRetrieverImpl
 			sb.append(StringPool.CLOSE_PARENTHESIS);
 			sb.append(StringPool.CLOSE_PARENTHESIS);
 		}
-
-		Configuration[] configurations = null;
 
 		try {
 			configurations = _configurationAdmin.listConfigurations(
