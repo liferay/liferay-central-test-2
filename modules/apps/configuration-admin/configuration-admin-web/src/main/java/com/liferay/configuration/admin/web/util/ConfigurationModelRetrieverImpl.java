@@ -274,33 +274,33 @@ public class ConfigurationModelRetrieverImpl
 			String factoryPid, String property, String value)
 		throws IOException {
 
-		StringBundler filter = new StringBundler(5);
+		StringBundler sb = new StringBundler(5);
 
 		if (Validator.isNotNull(property) && Validator.isNotNull(value)) {
-			filter.append(StringPool.OPEN_PARENTHESIS);
-			filter.append(StringPool.AMPERSAND);
+			sb.append(StringPool.OPEN_PARENTHESIS);
+			sb.append(StringPool.AMPERSAND);
 		}
 
-		filter.append(StringPool.OPEN_PARENTHESIS);
-		filter.append(ConfigurationAdmin.SERVICE_FACTORYPID);
-		filter.append(StringPool.EQUAL);
-		filter.append(factoryPid);
-		filter.append(StringPool.CLOSE_PARENTHESIS);
+		sb.append(StringPool.OPEN_PARENTHESIS);
+		sb.append(ConfigurationAdmin.SERVICE_FACTORYPID);
+		sb.append(StringPool.EQUAL);
+		sb.append(factoryPid);
+		sb.append(StringPool.CLOSE_PARENTHESIS);
 
 		if (Validator.isNotNull(property) && Validator.isNotNull(value)) {
-			filter.append(StringPool.OPEN_PARENTHESIS);
-			filter.append(property);
-			filter.append(StringPool.EQUAL);
-			filter.append(value);
-			filter.append(StringPool.CLOSE_PARENTHESIS);
-			filter.append(StringPool.CLOSE_PARENTHESIS);
+			sb.append(StringPool.OPEN_PARENTHESIS);
+			sb.append(property);
+			sb.append(StringPool.EQUAL);
+			sb.append(value);
+			sb.append(StringPool.CLOSE_PARENTHESIS);
+			sb.append(StringPool.CLOSE_PARENTHESIS);
 		}
 
 		Configuration[] configurations = null;
 
 		try {
 			configurations = _configurationAdmin.listConfigurations(
-				filter.toString());
+				sb.toString());
 		}
 		catch (InvalidSyntaxException ise) {
 			ReflectionUtil.throwException(ise);
@@ -310,22 +310,22 @@ public class ConfigurationModelRetrieverImpl
 	}
 
 	protected String getPidFilterString(String pid, boolean factory) {
-		StringBundler filter = new StringBundler(5);
+		StringBundler sb = new StringBundler(5);
 
-		filter.append(StringPool.OPEN_PARENTHESIS);
+		sb.append(StringPool.OPEN_PARENTHESIS);
 
 		if (factory) {
-			filter.append(ConfigurationAdmin.SERVICE_FACTORYPID);
+			sb.append(ConfigurationAdmin.SERVICE_FACTORYPID);
 		}
 		else {
-			filter.append(Constants.SERVICE_PID);
+			sb.append(Constants.SERVICE_PID);
 		}
 
-		filter.append(StringPool.EQUAL);
-		filter.append(pid);
-		filter.append(StringPool.CLOSE_PARENTHESIS);
+		sb.append(StringPool.EQUAL);
+		sb.append(pid);
+		sb.append(StringPool.CLOSE_PARENTHESIS);
 
-		return filter.toString();
+		return sb.toString();
 	}
 
 	@Reference(unbind = "-")
