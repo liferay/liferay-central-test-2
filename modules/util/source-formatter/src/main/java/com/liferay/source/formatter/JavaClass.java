@@ -1295,7 +1295,7 @@ public class JavaClass {
 		List<String> javaTermSortExcludes) {
 
 		if (_fileName.endsWith("Configuration.java") &&
-			_content.contains("@Meta.AD(")) {
+			_content.contains("@Meta.OCD(")) {
 
 			return;
 		}
