@@ -1104,7 +1104,6 @@ public class DLImpl implements DL {
 		long plid = serviceContext.getPlid();
 		long controlPanelPlid = PortalUtil.getControlPanelPlid(
 			serviceContext.getCompanyId());
-
 		String portletId = PortletProviderUtil.getPortletId(
 			FileEntry.class.getName(), PortletProvider.Action.VIEW);
 
@@ -1201,8 +1200,7 @@ public class DLImpl implements DL {
 	private static final ServiceTrackerList<PortletLayoutFinder>
 		_serviceTrackerList = ServiceTrackerCollections.list(
 			PortletLayoutFinder.class,
-			"(model.class.name=" +
-				"com.liferay.portal.kernel.repository.model.FileEntry)");
+			"(model.class.name=" + FileEntry.class.getName() + ")");
 
 	static {
 		_allMediaGalleryMimeTypes.addAll(
