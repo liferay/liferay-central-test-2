@@ -61,9 +61,11 @@ public class LoadBalancerUtil {
 	public static String getMostAvailableMasterURL(Properties properties)
 		throws Exception {
 
-		System.out.println("getMostAvailableMasterURL called.");
-
 		long start = System.currentTimeMillis();
+
+		System.out.println("Get most available master URL for properties:");
+
+		properties.list(System.out);
 
 		boolean readOnly = false;
 		int retryCount = 0;
@@ -217,7 +219,8 @@ public class LoadBalancerUtil {
 							semaphoreFile.lastModified();
 
 					System.out.println(
-						"Semaphore file age: " + (age / 1000F) + "seconds.");
+						"Semaphore " + semaphoreFile + " was last modified " +
+							(age / 1000F) + " seconds ago.");
 
 					String content = JenkinsResultsParserUtil.read(
 						semaphoreFile);
@@ -260,16 +263,14 @@ public class LoadBalancerUtil {
 					}
 					else {
 						System.out.println(
-							"The sempahore file timed out and was " +
-								"overwritten by: " + content +
-									". The recent job data could not be " +
-										"written.");
+							"Sempahore " + semaphoreFile +
+								" was overwritten with: " + content);
 					}
 				}
 
 				System.out.println(
-					"getMostAvailableMasterURL total run " + "time: " +
-						((System.currentTimeMillis() - start)/1000F) +
+					"Got most available master URL in " +
+						((System.currentTimeMillis() - start) / 1000F) +
 							" seconds.");
 			}
 		}
@@ -320,7 +321,7 @@ public class LoadBalancerUtil {
 		String blacklistString = properties.getProperty(
 			"jenkins.load.balancer.blacklist", "");
 
-		System.out.println("blacklistString: " + blacklistString);
+		System.out.println("Blacklist: " + blacklistString);
 
 		if (blacklistString.isEmpty()) {
 			return Collections.emptyList();
@@ -373,9 +374,8 @@ public class LoadBalancerUtil {
 				continue;
 			}
 
-			System.out.println(
-				"hostNamePrefix: " + hostNamePrefix + "\nhostNames: " +
-					hostNames.toString());
+			System.out.println("Host name prefix: " + hostNamePrefix);
+			System.out.println("Host names: " + hostNames);
 
 			return hostNames;
 		}
@@ -488,6 +488,7 @@ public class LoadBalancerUtil {
 			while (true) {
 				if (!file.exists()) {
 					JenkinsResultsParserUtil.write(file, "");
+
 					return;
 				}
 
@@ -502,7 +503,7 @@ public class LoadBalancerUtil {
 					}
 					else {
 						System.out.println(
-							"Sempahore file timed out. " + "Previous owner: " +
+							"Sempahore file " + file + " timed out: " +
 								content);
 					}
 				}
