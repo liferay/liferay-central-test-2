@@ -100,6 +100,13 @@ public class ExportLayoutsMVCActionCommand extends BaseMVCActionCommand {
 				actionRequest, "privateLayout");
 			long[] layoutIds = getLayoutIds(actionRequest);
 
+			Map<String, Serializable> exportLayoutSettingsMap =
+				ExportImportConfigurationSettingsMapFactory.
+					buildExportLayoutSettingsMap(
+						themeDisplay.getUserId(), groupId, privateLayout,
+						layoutIds, actionRequest.getParameterMap(),
+						themeDisplay.getLocale(), themeDisplay.getTimeZone());
+
 			String taskName = ParamUtil.getString(actionRequest, "name");
 
 			if (Validator.isNull(taskName)) {
@@ -112,13 +119,6 @@ public class ExportLayoutsMVCActionCommand extends BaseMVCActionCommand {
 						actionRequest.getLocale(), "public-pages");
 				}
 			}
-
-			Map<String, Serializable> exportLayoutSettingsMap =
-				ExportImportConfigurationSettingsMapFactory.
-					buildExportLayoutSettingsMap(
-						themeDisplay.getUserId(), groupId, privateLayout,
-						layoutIds, actionRequest.getParameterMap(),
-						themeDisplay.getLocale(), themeDisplay.getTimeZone());
 
 			ExportImportConfiguration exportImportConfiguration =
 				_exportImportConfigurationLocalService.
