@@ -50,7 +50,7 @@ if (!roles.isEmpty()) {
 	<aui:input name="redirect" type="hidden" value="<%= configurationRenderURL %>" />
 
 	<aui:fieldset-group markupView="lexicon">
-		<aui:fieldset collapsible="<%= true %>" id="displaySettingsPanel"  label="display-settings">
+		<aui:fieldset collapsible="<%= true %>" id="displaySettingsPanel" label="display-settings">
 			<aui:select label="maximum-items-to-display" name="preferences--pageDelta--">
 
 				<%
