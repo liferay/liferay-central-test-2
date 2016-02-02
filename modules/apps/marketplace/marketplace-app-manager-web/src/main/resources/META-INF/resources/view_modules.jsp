@@ -51,10 +51,6 @@ portletURL.setParameter("moduleGroup", moduleGroup);
 portletURL.setParameter("state", state);
 portletURL.setParameter("orderByType", orderByType);
 
-renderResponse.setTitle((moduleGroupDisplay != null) ? moduleGroupDisplay.getTitle() : appDisplay.getTitle());
-
-MarketplaceAppManagerUtil.addPortletBreadcrumbEntry(appDisplay, moduleGroupDisplay, request, renderResponse);
-
 portletDisplay.setShowBackIcon(true);
 
 PortletURL backURL = renderResponse.createRenderURL();
@@ -69,6 +65,10 @@ else {
 }
 
 portletDisplay.setURLBack(backURL.toString());
+
+renderResponse.setTitle((moduleGroupDisplay != null) ? moduleGroupDisplay.getTitle() : appDisplay.getTitle());
+
+MarketplaceAppManagerUtil.addPortletBreadcrumbEntry(appDisplay, moduleGroupDisplay, request, renderResponse);
 %>
 
 <aui:nav-bar cssClass="collapse-basic-search" markupView="lexicon">

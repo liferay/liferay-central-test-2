@@ -58,6 +58,21 @@ portletURL.setParameter("version", String.valueOf(bundle.getVersion()));
 portletURL.setParameter("pluginType", pluginType);
 portletURL.setParameter("orderByType", orderByType);
 
+portletDisplay.setShowBackIcon(true);
+
+PortletURL backURL = renderResponse.createRenderURL();
+
+if (Validator.isNull(app)) {
+	backURL.setParameter("mvcPath", "/view.jsp");
+}
+else {
+	backURL.setParameter("mvcPath", "/view_modules.jsp");
+	backURL.setParameter("app", app);
+	backURL.setParameter("moduleGroup", moduleGroup);
+}
+
+portletDisplay.setURLBack(backURL.toString());
+
 Dictionary<String, String> headers = bundle.getHeaders();
 
 String bundleName = GetterUtil.getString(headers.get(BundleConstants.BUNDLE_NAME));
@@ -76,21 +91,6 @@ if (Validator.isNull(app)) {
 else {
 	MarketplaceAppManagerUtil.addPortletBreadcrumbEntry(appDisplay, moduleGroupDisplay, bundle, request, renderResponse);
 }
-
-portletDisplay.setShowBackIcon(true);
-
-PortletURL backURL = renderResponse.createRenderURL();
-
-if (Validator.isNull(app)) {
-	backURL.setParameter("mvcPath", "/view.jsp");
-}
-else {
-	backURL.setParameter("mvcPath", "/view_modules.jsp");
-	backURL.setParameter("app", app);
-	backURL.setParameter("moduleGroup", moduleGroup);
-}
-
-portletDisplay.setURLBack(backURL.toString());
 %>
 
 <aui:nav-bar cssClass="collapse-basic-search" markupView="lexicon">
