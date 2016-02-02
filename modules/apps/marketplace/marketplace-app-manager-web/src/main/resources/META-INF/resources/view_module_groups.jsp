@@ -42,10 +42,6 @@ portletURL.setParameter("app", app);
 portletURL.setParameter("state", state);
 portletURL.setParameter("orderByType", orderByType);
 
-renderResponse.setTitle(appDisplay.getTitle());
-
-MarketplaceAppManagerUtil.addPortletBreadcrumbEntry(appDisplay, request, renderResponse);
-
 portletDisplay.setShowBackIcon(true);
 
 PortletURL backURL = renderResponse.createRenderURL();
@@ -53,6 +49,10 @@ PortletURL backURL = renderResponse.createRenderURL();
 portletURL.setParameter("mvcPath", "/view.jsp");
 
 portletDisplay.setURLBack(backURL.toString());
+
+renderResponse.setTitle(appDisplay.getTitle());
+
+MarketplaceAppManagerUtil.addPortletBreadcrumbEntry(appDisplay, request, renderResponse);
 %>
 
 <aui:nav-bar cssClass="collapse-basic-search" markupView="lexicon">
