@@ -3,6 +3,6 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.liferay.webjars</groupId>
-  <artifactId>alloy-ui</artifactId>
-  <version>3.0.3-deprecated.11</version>
+  <artifactId>com.liferay.webjars.metal-components</artifactId>
+  <version>1.0.0-rc.8</version>
 </project>
