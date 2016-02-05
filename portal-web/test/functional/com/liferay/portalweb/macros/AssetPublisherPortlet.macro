@@ -1123,7 +1123,7 @@
 			<var name="panelHeading" value="Asset Entries" />
 		</execute>
 
-		<execute function="AssertTextEquals" locator1="Message#INFO" value1="No assets selected." />
+		<execute function="AssertTextEquals" locator1="Message#EMPTY_INFO" value1="No assets selected." />
 
 		<execute function="SelectFrameTop" />
 	</command>
