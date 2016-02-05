@@ -3,6 +3,6 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.liferay.webjars</groupId>
-  <artifactId>metal-components</artifactId>
-  <version>1.0.0-rc.8</version>
+  <artifactId>com.liferay.webjars.liferay-amd-loader</artifactId>
+  <version>1.4.1</version>
 </project>

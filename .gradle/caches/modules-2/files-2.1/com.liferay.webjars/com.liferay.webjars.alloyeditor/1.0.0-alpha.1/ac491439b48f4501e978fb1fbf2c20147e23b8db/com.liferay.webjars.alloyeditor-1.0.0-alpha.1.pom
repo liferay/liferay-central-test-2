@@ -3,6 +3,6 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.liferay.webjars</groupId>
-  <artifactId>lexicon</artifactId>
-  <version>0.2.1</version>
+  <artifactId>com.liferay.webjars.alloyeditor</artifactId>
+  <version>1.0.0-alpha.1</version>
 </project>
