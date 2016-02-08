@@ -628,6 +628,10 @@
 							onComplete: function(portlet, portletId) {
 								portlet.refreshURL = url;
 
+								if (portlet) {
+									portlet.attr('data-qa-id', 'app-refreshed');
+								}
+
 								Liferay.fire(
 									portlet.portletId + ':portletRefreshed',
 									{
