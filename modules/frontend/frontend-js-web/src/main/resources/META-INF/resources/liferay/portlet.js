@@ -160,6 +160,10 @@
 
 				instance.list.push(portlet.portletId);
 
+				if (portlet) {
+					portlet.attr('data-qa-id', 'app-loaded');
+				}
+
 				Liferay.fire(
 					'addPortlet',
 					{
