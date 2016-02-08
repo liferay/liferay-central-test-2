@@ -28,7 +28,7 @@
 			%>
 
 			<c:if test="<%= !group.isControlPanel() && (hasLayoutUpdatePermission || (layoutTypePortlet.isCustomizable() && layoutTypePortlet.isCustomizedView() && hasLayoutCustomizePermission)) %>">
-				<div class="add-content-menu" id="<portlet:namespace />addPanelContainer">
+				<div class="add-content-menu" data-qa-id="addPanelBody" id="<portlet:namespace />addPanelContainer">
 
 					<%
 					boolean stateMaximized = ParamUtil.getBoolean(request, "stateMaximized");
