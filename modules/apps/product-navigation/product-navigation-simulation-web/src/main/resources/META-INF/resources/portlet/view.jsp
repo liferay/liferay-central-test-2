@@ -22,7 +22,7 @@ PanelCategoryRegistry panelCategoryRegistry = (PanelCategoryRegistry)request.get
 PanelCategory panelCategory = panelCategoryRegistry.getPanelCategory(SimulationPanelCategory.SIMULATION);
 %>
 
-<div class="simulation-menu" id="<portlet:namespace />simulationPanelContainer">
+<div class="simulation-menu" data-qa-id="simulationMenuBody" id="<portlet:namespace />simulationPanelContainer">
 	<div id="<portlet:namespace />simulationCategoriesContainer">
 		<liferay-application-list:panel-category panelCategory="<%= panelCategory %>" showHeader="<%= false %>" />
 	</div>
