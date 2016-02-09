@@ -715,7 +715,7 @@ public class CalendarPortlet extends MVCPortlet {
 			frequency = recurrence.getFrequency();
 		}
 
-		long currentStartTime = editedCalendarBookingInstance.getStartTime();
+		long oldStartTime = editedCalendarBookingInstance.getStartTime();
 		TimeZone timeZone = editedCalendarBookingInstance.getTimeZone();
 
 		if (frequency == Frequency.WEEKLY) {
@@ -723,27 +723,27 @@ public class CalendarPortlet extends MVCPortlet {
 				_calendarBookingService.getCalendarBookingInstance(
 					editedCalendarBookingInstance.getCalendarBookingId(), 0);
 
-			java.util.Calendar currentStartTimeJCalendar =
-				CalendarFactoryUtil.getCalendar(currentStartTime, timeZone);
+			java.util.Calendar oldStartTimeJCalendar =
+				CalendarFactoryUtil.getCalendar(oldStartTime, timeZone);
 
 			java.util.Calendar firstInstanceJCalendar =
 				CalendarFactoryUtil.getCalendar(
 					firstInstance.getStartTime(), timeZone);
 
 			if (!JCalendarUtil.isSameDayOfWeek(
-					currentStartTimeJCalendar, firstInstanceJCalendar)) {
+					oldStartTimeJCalendar, firstInstanceJCalendar)) {
 
 				java.util.Calendar newStartTimeJCalendar =
 					CalendarFactoryUtil.getCalendar(newStartTime, timeZone);
 
 				newStartTimeJCalendar = JCalendarUtil.mergeJCalendar(
-					currentStartTimeJCalendar, newStartTimeJCalendar, timeZone);
+					oldStartTimeJCalendar, newStartTimeJCalendar, timeZone);
 
 				newStartTime = newStartTimeJCalendar.getTimeInMillis();
 			}
 		}
 
-		return newStartTime - currentStartTime;
+		return newStartTime - oldStartTime;
 	}
 
 	protected Recurrence getRecurrence(ActionRequest actionRequest) {
