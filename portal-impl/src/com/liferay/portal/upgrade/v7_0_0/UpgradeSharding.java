@@ -64,15 +64,15 @@ public class UpgradeSharding extends UpgradeProcess {
 	}
 
 	protected void copyControlTables(List<String> shardNames) throws Exception {
-		String defaultShardName = PropsUtil.get("shard.default.name");
+		boolean defaultPartitioningEnabled = false;
 
 		List<String> uniqueShardNames = ListUtil.unique(shardNames);
-
-		boolean defaultPartitioningEnabled = false;
 
 		if (uniqueShardNames.size() < shardNames.size()) {
 			defaultPartitioningEnabled = true;
 		}
+
+		String defaultShardName = PropsUtil.get("shard.default.name");
 
 		if (!defaultPartitioningEnabled && Validator.isNull(defaultShardName)) {
 			throw new RuntimeException(
