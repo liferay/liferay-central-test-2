@@ -33,6 +33,7 @@ public class PortletInstanceSettingsLocator implements SettingsLocator {
 
 		_layout = layout;
 		_portletInstanceKey = portletInstanceKey;
+
 		_configurationPid = PortletConstants.getRootPortletId(
 			portletInstanceKey);
 	}
