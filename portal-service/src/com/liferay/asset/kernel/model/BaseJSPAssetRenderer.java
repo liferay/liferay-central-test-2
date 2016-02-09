@@ -33,9 +33,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.osgi.framework.Bundle;
-import org.osgi.framework.FrameworkUtil;
-
 /**
  * @author Julio Camarero
  */
@@ -90,12 +87,10 @@ public abstract class BaseJSPAssetRenderer<T>
 	}
 
 	protected ResourceBundleLoader getResourceBundleLoader() {
-		Bundle bundle = FrameworkUtil.getBundle(getClass());
-
-		if (bundle != null) {
+		if (_servletContext != null) {
 			return ResourceBundleLoaderUtil.
-				getResourceBundleLoaderByBundleSymbolicName(
-					bundle.getSymbolicName());
+				getResourceBundleLoaderByServletContextName(
+					_servletContext.getServletContextName());
 		}
 
 		return new AggregateResourceBundleLoader(
