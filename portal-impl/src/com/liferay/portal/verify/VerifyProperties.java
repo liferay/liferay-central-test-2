@@ -1685,7 +1685,6 @@ public class VerifyProperties extends VerifyProcess {
 			"ical4j.validation.relaxed", "ical4j.validation.relaxed",
 			"com.liferay.calendar.service"
 		}
-
 	};
 
 	private static final String[] _OBSOLETE_PORTAL_KEYS = new String[] {
