@@ -50,12 +50,11 @@ public class FailureMessageUtil {
 
 	private static final GenericFailureMessageGenerator
 		_genericMessageGenerator = new GenericFailureMessageGenerator();
-	private static final FailureMessageGenerator[] _failureMessageGenerators =
-		new FailureMessageGenerator[] {
-			new PluginFailureMessageGenerator(),
-			new PluginGitIDFailureMessageGenerator(),
-			new RebaseFailureMessageGenerator(),
-			new SourceFormatFailureMessageGenerator()
-		};
+	private static final FailureMessageGenerator[] _failureMessageGenerators = {
+		new PluginFailureMessageGenerator(),
+		new PluginGitIDFailureMessageGenerator(),
+		new RebaseFailureMessageGenerator(),
+		new SourceFormatFailureMessageGenerator()
+	};
 
 }
