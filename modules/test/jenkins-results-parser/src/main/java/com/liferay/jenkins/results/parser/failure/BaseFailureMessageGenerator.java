@@ -32,7 +32,7 @@ public abstract class BaseFailureMessageGenerator
 			String buildURL, String consoleOutput, Project project)
 		throws Exception;
 
-	protected int findSnippetStart(String consoleOutput, int end) {
+	protected int getSnippetStart(String consoleOutput, int end) {
 		Matcher matcher = _pattern.matcher(consoleOutput);
 		int start = 0;
 
@@ -54,7 +54,7 @@ public abstract class BaseFailureMessageGenerator
 			end = consoleOutput.length();
 		}
 
-		int start = findSnippetStart(consoleOutput, end);
+		int start = getSnippetStart(consoleOutput, end);
 
 		if ((end - start) > 2500) {
 			start = end - 2500;
