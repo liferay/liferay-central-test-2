@@ -33,8 +33,8 @@ public class FailureMessageUtil {
 			JenkinsResultsParserUtil.getLocalURL(
 				buildURL + "/logText/progressiveText"));
 
-		for (
-			BaseFailureMessageGenerator messageGenerator : _messageGenerators) {
+		for (BaseFailureMessageGenerator messageGenerator :
+				_messageGenerators) {
 
 			String message = messageGenerator.getMessage(
 				buildURL, consoleOutput, project);

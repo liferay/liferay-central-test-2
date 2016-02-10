@@ -24,8 +24,10 @@ import org.apache.tools.ant.Project;
 /**
  * @author Peter Yoo
  */
-public abstract class BaseFailureMessageGenerator {
+public abstract class BaseFailureMessageGenerator
+	implements FailureMessageGenerator {
 
+	@Override
 	public abstract String getMessage(
 			String buildURL, String consoleOutput, Project project)
 		throws Exception;
