@@ -46,13 +46,13 @@
 <liferay-theme:defineObjects />
 
 <%
+String namespace = PortalUtil.getPortletNamespace(LayoutAdminPortletKeys.LAYOUT_ADMIN);
+
 InformationMessagesControlMenuEntry informationMessagesControlMenuEntry = (InformationMessagesControlMenuEntry)request.getAttribute(LayoutAdminWebKeys.CONTROL_MENU_ENTRY);
 
 Map<String, Object> data = new HashMap<>();
 
 data.put("qa-id", "info");
-
-String namespace = PortalUtil.getPortletNamespace(LayoutAdminPortletKeys.LAYOUT_ADMIN);
 %>
 
 <liferay-ui:icon
