@@ -379,7 +379,7 @@ public class UpgradeJournal extends BaseUpgradePortletPreferences {
 					ps2.addBatch();
 				}
 
-				ps1.executeBatch();
+				ps2.executeBatch();
 			}
 		}
 		finally {
