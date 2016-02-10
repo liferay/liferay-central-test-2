@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.jenkins.results.parser.failure;
+package com.liferay.jenkins.results.parser;
 
 import org.apache.tools.ant.Project;
 

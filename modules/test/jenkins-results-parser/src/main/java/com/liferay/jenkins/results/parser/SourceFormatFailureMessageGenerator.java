@@ -1,4 +1,4 @@
-package com.liferay.jenkins.results.parser.failure;
+package com.liferay.jenkins.results.parser;
 
 /**
  * Copyright (c) 2000-present Liferay, Inc. All rights reserved.

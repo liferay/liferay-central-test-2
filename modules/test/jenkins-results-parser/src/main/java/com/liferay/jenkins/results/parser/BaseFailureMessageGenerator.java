@@ -12,9 +12,7 @@
  * details.
  */
 
-package com.liferay.jenkins.results.parser.failure;
-
-import com.liferay.jenkins.results.parser.JenkinsResultsParserUtil;
+package com.liferay.jenkins.results.parser;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -32,24 +30,6 @@ public abstract class BaseFailureMessageGenerator
 			String buildURL, String consoleOutput, Project project)
 		throws Exception;
 
-	protected int getSnippetStart(String consoleOutput, int end) {
-		int start = 0;
-
-		Matcher matcher = _pattern.matcher(consoleOutput);
-
-		while (matcher.find()) {
-			int x = matcher.start() + 1;
-
-			if (x >= end) {
-				return start;
-			}
-
-			start = x;
-		}
-
-		return start;
-	}
-
 	protected String getConsoleOutputSnippet(String consoleOutput, int end) {
 		if (end == -1) {
 			end = consoleOutput.length();
@@ -66,6 +46,24 @@ public abstract class BaseFailureMessageGenerator
 		return "<pre>" +
 			JenkinsResultsParserUtil.fixJSON(
 				consoleOutput.substring(start, end)) + "</pre>";
+	}
+
+	protected int getSnippetStart(String consoleOutput, int end) {
+		int start = 0;
+
+		Matcher matcher = _pattern.matcher(consoleOutput);
+
+		while (matcher.find()) {
+			int x = matcher.start() + 1;
+
+			if (x >= end) {
+				return start;
+			}
+
+			start = x;
+		}
+
+		return start;
 	}
 
 	private static final Pattern _pattern = Pattern.compile(

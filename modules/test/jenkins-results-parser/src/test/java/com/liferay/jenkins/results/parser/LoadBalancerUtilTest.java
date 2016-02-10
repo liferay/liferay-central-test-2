@@ -12,10 +12,7 @@
  * details.
  */
 
-package com.liferay.jenkins.results.parser.load.balancer;
-
-import com.liferay.jenkins.results.parser.BaseJenkinsResultsParserTestCase;
-import com.liferay.jenkins.results.parser.JenkinsResultsParserUtil;
+package com.liferay.jenkins.results.parser;
 
 import java.io.File;
 
