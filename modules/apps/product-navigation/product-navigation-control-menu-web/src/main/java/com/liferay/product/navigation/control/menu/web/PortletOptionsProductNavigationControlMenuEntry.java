@@ -16,19 +16,14 @@ package com.liferay.product.navigation.control.menu.web;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Layout;
-import com.liferay.portal.kernel.theme.PortletDisplay;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.product.navigation.control.menu.BaseJSPProductNavigationControlMenuEntry;
 import com.liferay.product.navigation.control.menu.ProductNavigationControlMenuEntry;
 import com.liferay.product.navigation.control.menu.constants.ProductNavigationControlMenuCategoryKeys;
-import com.liferay.product.navigation.control.menu.web.constants.ProductNavigationControlMenuWebKeys;
-
-import java.io.IOException;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -39,30 +34,18 @@ import org.osgi.service.component.annotations.Reference;
 @Component(
 	immediate = true,
 	property = {
-		"control.menu.category.key=" + ProductNavigationControlMenuCategoryKeys.SITES,
-		"service.ranking:Integer=200"
+		"control.menu.category.key=" + ProductNavigationControlMenuCategoryKeys.USER,
+		"service.ranking:Integer=100"
 	},
 	service = ProductNavigationControlMenuEntry.class
 )
-public class PortletBackLinkControlMenuEntry
+public class PortletOptionsProductNavigationControlMenuEntry
 	extends BaseJSPProductNavigationControlMenuEntry
 	implements ProductNavigationControlMenuEntry {
 
 	@Override
 	public String getIconJspPath() {
-		return "/entries/portlet_back_link.jsp";
-	}
-
-	@Override
-	public boolean includeIcon(
-			HttpServletRequest request, HttpServletResponse response)
-		throws IOException {
-
-		request.setAttribute(
-			ProductNavigationControlMenuWebKeys.PORTLET_BACK_URL,
-			getPortletBackURL(request));
-
-		return super.includeIcon(request, response);
+		return "/entries/portlet_options.jsp";
 	}
 
 	@Override
@@ -76,12 +59,6 @@ public class PortletBackLinkControlMenuEntry
 			return false;
 		}
 
-		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
-
-		if (!portletDisplay.isShowBackIcon()) {
-			return false;
-		}
-
 		return super.isShow(request);
 	}
 
@@ -92,15 +69,6 @@ public class PortletBackLinkControlMenuEntry
 	)
 	public void setServletContext(ServletContext servletContext) {
 		super.setServletContext(servletContext);
-	}
-
-	protected String getPortletBackURL(HttpServletRequest request) {
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
-
-		return portletDisplay.getURLBack();
 	}
 
 }
