@@ -25,9 +25,9 @@ import org.osgi.service.component.annotations.Component;
 @Component(
 	property = {
 		"javax.portlet.name=" + MBPortletKeys.MESSAGE_BOARDS_ADMIN,
-		"mvc.command.name=/", "mvc.command.name=/message_boards_admin/search",
-		"mvc.command.name=/message_boards/view",
-		"mvc.command.name=/message_boards/view_category"
+		"mvc.command.name=/" "mvc.command.name=/message_boards/view",
+		"mvc.command.name=/message_boards/view_category",
+		"mvc.command.name=/message_boards_admin/search"
 	},
 	service = MVCRenderCommand.class
 )
