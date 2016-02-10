@@ -323,36 +323,6 @@ public class VerifyGroup extends VerifyProcess {
 			stagingGroup.getGroupId());
 	}
 
-	protected void verifyStagingTypeSettingsProperties(
-		UnicodeProperties typeSettingsProperties) {
-
-		Set<String> keys = typeSettingsProperties.keySet();
-
-		Iterator<String> iterator = keys.iterator();
-
-		while (iterator.hasNext()) {
-			String key = iterator.next();
-
-			if (ArrayUtil.contains(
-					_LEGACY_STAGED_PORTLET_TYPE_SETTINGS_KEYS, key)) {
-
-				if (_log.isInfoEnabled()) {
-					_log.info("Removing type settings property " + key);
-				}
-
-				iterator.remove();
-			}
-		}
-	}
-
-	protected void verifyTree() throws Exception {
-		long[] companyIds = PortalInstances.getCompanyIdsBySQL();
-
-		for (long companyId : companyIds) {
-			GroupLocalServiceUtil.rebuildTree(companyId);
-		}
-	}
-
 	protected void verifyStagingGroupRoleMembership(Group stagingGroup) {
 		List<Role> stagingRoles = RoleLocalServiceUtil.getGroupRoles(
 			stagingGroup.getGroupId());
@@ -417,6 +387,28 @@ public class VerifyGroup extends VerifyProcess {
 		}
 
 		UserLocalServiceUtil.clearGroupUsers(stagingGroup.getGroupId());
+	}
+
+	protected void verifyStagingTypeSettingsProperties(
+		UnicodeProperties typeSettingsProperties) {
+
+		Set<String> keys = typeSettingsProperties.keySet();
+
+		Iterator<String> iterator = keys.iterator();
+
+		while (iterator.hasNext()) {
+			String key = iterator.next();
+
+			if (ArrayUtil.contains(
+					_LEGACY_STAGED_PORTLET_TYPE_SETTINGS_KEYS, key)) {
+
+				if (_log.isInfoEnabled()) {
+					_log.info("Removing type settings property " + key);
+				}
+
+				iterator.remove();
+			}
+		}
 	}
 
 	protected void verifyStagingUserGroupGroupRolesAssignments(
@@ -484,6 +476,14 @@ public class VerifyGroup extends VerifyProcess {
 
 		UserGroupRoleLocalServiceUtil.deleteUserGroupRolesByGroupId(
 			stagingGroup.getGroupId());
+	}
+
+	protected void verifyTree() throws Exception {
+		long[] companyIds = PortalInstances.getCompanyIdsBySQL();
+
+		for (long companyId : companyIds) {
+			GroupLocalServiceUtil.rebuildTree(companyId);
+		}
 	}
 
 	private static final String[] _LEGACY_STAGED_PORTLET_TYPE_SETTINGS_KEYS = {
