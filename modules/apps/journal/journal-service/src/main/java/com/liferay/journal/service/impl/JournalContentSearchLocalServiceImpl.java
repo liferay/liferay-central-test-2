@@ -49,6 +49,7 @@ public class JournalContentSearchLocalServiceImpl
 	public void afterPropertiesSet() {
 		Bundle bundle = FrameworkUtil.getBundle(
 			JournalContentSearchLocalServiceImpl.class);
+
 		BundleContext _bundleContext = bundle.getBundleContext();
 
 		_serviceTrackerMap = ServiceTrackerMapFactory.singleValueMap(
