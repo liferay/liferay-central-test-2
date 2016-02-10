@@ -167,18 +167,13 @@
 			<var name="siteName" value="Test Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesPublishingTools">
-			<var name="portlet" value="Staging" />
-		</execute>
-
-		<execute macro="Staging#activateStagingCP">
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="ADT Test Page" />
 			<var name="siteName" value="Test Site Name" />
-		</execute>
 
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="ADT Test Page" />
-			<var name="pageStaging" value="true" />
-			<var name="siteName" value="Test Site Name" />
+			<var name="siteName" value="${siteName}" />
 			<var name="siteURL" value="true" />
 		</execute>
 
@@ -188,8 +183,8 @@
 
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="ADT Test Page" />
-			<var name="pageStaging" value="true" />
 			<var name="siteName" value="Test Site Name" />
+			<var name="siteName" value="${siteName}" />
 			<var name="siteURL" value="true" />
 		</execute>
 
@@ -200,8 +195,8 @@
 
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="ADT Test Page" />
-			<var name="pageStaging" value="true" />
 			<var name="siteName" value="Test Site Name" />
+			<var name="siteName" value="${siteName}" />
 			<var name="siteURL" value="true" />
 		</execute>
 
@@ -213,8 +208,8 @@
 
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="ADT Test Page" />
-			<var name="pageStaging" value="true" />
 			<var name="siteName" value="Test Site Name" />
+			<var name="siteName" value="${siteName}" />
 			<var name="siteURL" value="true" />
 		</execute>
 
@@ -222,8 +217,8 @@
 
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="ADT Test Page" />
-			<var name="pageStaging" value="true" />
 			<var name="siteName" value="Test Site Name" />
+			<var name="siteName" value="${siteName}" />
 			<var name="siteURL" value="true" />
 		</execute>
 
@@ -238,7 +233,6 @@
 
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="ADT Test Page" />
-			<var name="pageStaging" value="true" />
 			<var name="siteName" value="Test Site Name" />
 			<var name="siteURL" value="true" />
 		</execute>
@@ -246,22 +240,6 @@
 		<execute macro="AssetPublisherPortlet#viewCustomADTRichSummaryPG">
 			<var name="assetDescription" value="WC Content" />
 			<var name="assetTitle" value="WC Title" />
-		</execute>
-
-		<execute macro="Staging#gotoPublishToLive" />
-
-		<execute macro="Staging#publishToLive" />
-
-		<execute macro="Page#gotoPG">
-			<var name="pageName" value="ADT Test Page" />
-			<var name="siteName" value="Test Site Name" />
-			<var name="siteURL" value="true" />
-		</execute>
-
-		<execute macro="AssetPublisherPortlet#viewCustomADTRichSummaryPG">
-			<var name="assetDescription" value="WC Content" />
-			<var name="assetTitle" value="WC Title" />
-			<var name="pageStaging" value="true" />
 		</execute>
 	</command>
 
@@ -324,17 +302,8 @@
 			<var name="siteName" value="Test Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesPublishingTools">
-			<var name="portlet" value="Staging" />
-		</execute>
-
-		<execute macro="Staging#activateStagingCP">
-			<var name="siteName" value="Test Site Name" />
-		</execute>
-
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="ADT Test Page" />
-			<var name="pageStaging" value="true" />
 			<var name="siteName" value="Test Site Name" />
 			<var name="siteURL" value="true" />
 		</execute>
@@ -345,7 +314,6 @@
 
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="ADT Test Page" />
-			<var name="pageStaging" value="true" />
 			<var name="siteName" value="Test Site Name" />
 			<var name="siteURL" value="true" />
 		</execute>
@@ -358,7 +326,6 @@
 
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="ADT Test Page" />
-			<var name="pageStaging" value="true" />
 			<var name="siteName" value="Test Site Name" />
 			<var name="siteURL" value="true" />
 		</execute>
@@ -371,22 +338,6 @@
 		<execute macro="ApplicationDisplayTemplates#addADTviaPortletPG">
 			<var name="adtType" value="Categories Navigation" />
 		</execute>
-
-		<execute macro="Page#gotoPG">
-			<var name="pageName" value="ADT Test Page" />
-			<var name="pageStaging" value="true" />
-			<var name="siteName" value="Test Site Name" />
-			<var name="siteURL" value="true" />
-		</execute>
-
-		<execute macro="CategoriesNavigationPortlet#viewCustomADTMultiColumnPG">
-			<var name="categoryName" value="Category Name" />
-			<var name="vocabularyName" value="Vocabulary Name" />
-		</execute>
-
-		<execute macro="Staging#gotoPublishToLive" />
-
-		<execute macro="Staging#publishToLive" />
 
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="ADT Test Page" />
@@ -405,17 +356,8 @@
 			<var name="siteName" value="Test Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesPublishingTools">
-			<var name="portlet" value="Staging" />
-		</execute>
-
-		<execute macro="Staging#activateStagingCP">
-			<var name="siteName" value="Test Site Name" />
-		</execute>
-
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="ADT Test Page" />
-			<var name="pageStaging" value="true" />
 			<var name="siteName" value="Test Site Name" />
 			<var name="siteURL" value="true" />
 		</execute>
@@ -426,7 +368,6 @@
 
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="ADT Test Page" />
-			<var name="pageStaging" value="true" />
 			<var name="siteName" value="Test Site Name" />
 			<var name="siteURL" value="true" />
 		</execute>
@@ -437,7 +378,6 @@
 
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="ADT Test Page" />
-			<var name="pageStaging" value="true" />
 			<var name="siteName" value="Test Site Name" />
 			<var name="siteURL" value="true" />
 		</execute>
@@ -449,7 +389,6 @@
 
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="ADT Test Page" />
-			<var name="pageStaging" value="true" />
 			<var name="siteName" value="Test Site Name" />
 			<var name="siteURL" value="true" />
 		</execute>
@@ -467,7 +406,6 @@
 
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="ADT Test Page" />
-			<var name="pageStaging" value="true" />
 			<var name="siteName" value="Test Site Name" />
 			<var name="siteURL" value="true" />
 		</execute>
@@ -485,7 +423,6 @@
 
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="ADT Test Page" />
-			<var name="pageStaging" value="true" />
 			<var name="siteName" value="Test Site Name" />
 			<var name="siteURL" value="true" />
 		</execute>
@@ -498,7 +435,6 @@
 
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="ADT Test Page" />
-			<var name="pageStaging" value="true" />
 			<var name="siteName" value="Test Site Name" />
 			<var name="siteURL" value="true" />
 		</execute>
@@ -508,17 +444,6 @@
 		<execute macro="ApplicationDisplayTemplates#addADTviaPortletPG">
 			<var name="adtType" value="Documents and Media" />
 		</execute>
-
-		<execute macro="Page#gotoPG">
-			<var name="pageName" value="ADT Test Page" />
-			<var name="pageStaging" value="true" />
-			<var name="siteName" value="Test Site Name" />
-			<var name="siteURL" value="true" />
-		</execute>
-
-		<execute macro="Staging#gotoPublishToLive" />
-
-		<execute macro="Staging#publishToLive" />
 
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="ADT Test Page" />
@@ -534,18 +459,10 @@
 			<var name="siteName" value="Test Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesPublishingTools">
-			<var name="portlet" value="Staging" />
-		</execute>
-
-		<execute macro="Staging#activateStagingCP">
-			<var name="siteName" value="Test Site Name" />
-		</execute>
-
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="ADT Test Page" />
-			<var name="pageStaging" value="true" />
 			<var name="siteName" value="Test Site Name" />
+			<var name="pageName" value="ADT Test Page" />
 			<var name="siteURL" value="true" />
 		</execute>
 
@@ -556,8 +473,6 @@
 		<execute macro="Navigator#openSiteURL">
 			<var name="siteName" value="Test Site Name" />
 		</execute>
-
-		<execute macro="ProductMenu#gotoStagingSite" />
 
 		<execute macro="ProductMenu#gotoSitesPages">
 			<var name="page" value="Public Pages" />
@@ -577,7 +492,6 @@
 
 		<execute macro="Page#add">
 			<var name="pageName" value="ADT Test Page 2" />
-			<var name="pageStaging" value="true" />
 			<var name="siteName" value="Test Site Name" />
 		</execute>
 
@@ -587,13 +501,11 @@
 
 		<execute macro="Page#add">
 			<var name="pageName" value="ADT Test Page 3" />
-			<var name="pageStaging" value="true" />
 			<var name="siteName" value="Test Site Name" />
 		</execute>
 
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="ADT Test Page" />
-			<var name="pageStaging" value="true" />
 			<var name="siteName" value="Test Site Name" />
 			<var name="siteURL" value="true" />
 		</execute>
@@ -606,7 +518,6 @@
 
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="ADT Test Page" />
-			<var name="pageStaging" value="true" />
 			<var name="siteName" value="Test Site Name" />
 			<var name="siteURL" value="true" />
 		</execute>
@@ -618,7 +529,6 @@
 
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="ADT Test Page" />
-			<var name="pageStaging" value="true" />
 			<var name="siteName" value="Test Site Name" />
 			<var name="siteURL" value="true" />
 		</execute>
@@ -629,14 +539,9 @@
 
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="ADT Test Page" />
-			<var name="pageStaging" value="true" />
 			<var name="siteName" value="Test Site Name" />
 			<var name="siteURL" value="true" />
 		</execute>
-
-		<execute macro="Staging#gotoPublishToLive" />
-
-		<execute macro="Staging#publishToLive" />
 
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="ADT Test Page" />
@@ -657,17 +562,8 @@
 			<var name="siteName" value="Test Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesPublishingTools">
-			<var name="portlet" value="Staging" />
-		</execute>
-
-		<execute macro="Staging#activateStagingCP">
-			<var name="siteName" value="Test Site Name" />
-		</execute>
-
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="ADT Test Page" />
-			<var name="pageStaging" value="true" />
 			<var name="siteName" value="Test Site Name" />
 			<var name="siteURL" value="true" />
 		</execute>
@@ -678,7 +574,6 @@
 
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="ADT Test Page" />
-			<var name="pageStaging" value="true" />
 			<var name="siteName" value="Test Site Name" />
 			<var name="siteURL" value="true" />
 		</execute>
@@ -689,7 +584,6 @@
 
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="Blogs Test Page" />
-			<var name="pageStaging" value="true" />
 			<var name="siteName" value="Test Site Name" />
 			<var name="siteURL" value="true" />
 		</execute>
@@ -700,7 +594,6 @@
 
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="Blogs Test Page" />
-			<var name="pageStaging" value="true" />
 			<var name="siteName" value="Test Site Name" />
 			<var name="siteURL" value="true" />
 		</execute>
@@ -713,7 +606,6 @@
 
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="Blogs Test Page" />
-			<var name="pageStaging" value="true" />
 			<var name="siteName" value="Test Site Name" />
 			<var name="siteURL" value="true" />
 		</execute>
@@ -726,7 +618,6 @@
 
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="Blogs Test Page" />
-			<var name="pageStaging" value="true" />
 			<var name="siteName" value="Test Site Name" />
 			<var name="siteURL" value="true" />
 		</execute>
@@ -739,7 +630,6 @@
 
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="ADT Test Page" />
-			<var name="pageStaging" value="true" />
 			<var name="siteName" value="Test Site Name" />
 			<var name="siteURL" value="true" />
 		</execute>
@@ -756,7 +646,6 @@
 
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="ADT Test Page" />
-			<var name="pageStaging" value="true" />
 			<var name="siteName" value="Test Site Name" />
 			<var name="siteURL" value="true" />
 		</execute>
@@ -767,7 +656,6 @@
 
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="ADT Test Page" />
-			<var name="pageStaging" value="true" />
 			<var name="siteName" value="Test Site Name" />
 			<var name="siteURL" value="true" />
 		</execute>
@@ -779,7 +667,6 @@
 
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="ADT Test Page" />
-			<var name="pageStaging" value="true" />
 			<var name="siteName" value="Test Site Name" />
 			<var name="siteURL" value="true" />
 		</execute>
@@ -791,14 +678,9 @@
 
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="ADT Test Page" />
-			<var name="pageStaging" value="true" />
 			<var name="siteName" value="Test Site Name" />
 			<var name="siteURL" value="true" />
 		</execute>
-
-		<execute macro="Staging#gotoPublishToLive" />
-
-		<execute macro="Staging#publishToLive" />
 
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="ADT Test Page" />
@@ -817,17 +699,8 @@
 			<var name="siteName" value="Test Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSitesPublishingTools">
-			<var name="portlet" value="Staging" />
-		</execute>
-
-		<execute macro="Staging#activateStagingCP">
-			<var name="siteName" value="Test Site Name" />
-		</execute>
-
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="ADT Test Page" />
-			<var name="pageStaging" value="true" />
 			<var name="siteName" value="Test Site Name" />
 			<var name="siteURL" value="true" />
 		</execute>
@@ -838,8 +711,6 @@
 
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="ADT Test Page" />
-			<var name="pageStaging" value="true" />
-			<var name="siteName" value="Test Site Name" />
 			<var name="siteURL" value="true" />
 		</execute>
 
@@ -857,8 +728,6 @@
 			<var name="siteName" value="Test Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoStagingSite" />
-
 		<execute macro="ProductMenu#gotoSitesConfiguration">
 			<var name="portlet" value="Application Display Templates" />
 		</execute>
@@ -870,7 +739,6 @@
 
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="ADT Test Page" />
-			<var name="pageStaging" value="true" />
 			<var name="siteName" value="Test Site Name" />
 			<var name="siteURL" value="true" />
 		</execute>
@@ -879,17 +747,6 @@
 			<var name="adtType" value="Wiki" />
 			<var name="portletName" value="Wiki" />
 		</execute>
-
-		<execute macro="Page#gotoPG">
-			<var name="pageName" value="ADT Test Page" />
-			<var name="pageStaging" value="true" />
-			<var name="siteName" value="Test Site Name" />
-			<var name="siteURL" value="true" />
-		</execute>
-
-		<execute macro="Staging#gotoPublishToLive" />
-
-		<execute macro="Staging#publishToLive" />
 
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="ADT Test Page" />
