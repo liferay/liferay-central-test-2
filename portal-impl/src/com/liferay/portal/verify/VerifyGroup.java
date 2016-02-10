@@ -364,10 +364,10 @@ public class VerifyGroup extends VerifyProcess {
 		List<Role> liveRoles = RoleLocalServiceUtil.getGroupRoles(
 			stagingGroup.getLiveGroupId());
 
-		for (Role stagingGroupRole : stagingRoles) {
-			if (!liveRoles.contains(stagingGroupRole)) {
+		for (Role stagingRole : stagingRoles) {
+			if (!liveRoles.contains(stagingRole)) {
 				RoleLocalServiceUtil.addGroupRole(
-					stagingGroup.getLiveGroupId(), stagingGroupRole);
+					stagingGroup.getLiveGroupId(), stagingRole);
 			}
 		}
 
