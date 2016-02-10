@@ -79,10 +79,10 @@
 				<if>
 					<isset var="categoryPostCount" />
 					<then>
-						<execute function="AssertTextEquals" locator1="MessageBoards#THREAD_TABLE_POSTS" value1="${categoryPostCount}" />
+						<execute function="AssertTextEquals" locator1="MessageBoards#THREAD_TABLE_POSTS" value1="${categoryPostCount} Posts" />
 					</then>
 					<else>
-						<execute function="AssertTextEquals" locator1="MessageBoards#THREAD_TABLE_POSTS" value1="1" />
+						<execute function="AssertTextEquals" locator1="MessageBoards#THREAD_TABLE_POSTS" value1="1 Post" />
 					</else>
 				</if>
 
