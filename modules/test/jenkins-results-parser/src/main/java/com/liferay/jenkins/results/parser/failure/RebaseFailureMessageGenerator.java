@@ -31,8 +31,9 @@ public class RebaseFailureMessageGenerator extends BaseFailureMessageGenerator {
 		}
 
 		StringBuilder sb = new StringBuilder();
-		sb.append("<p>Please fix <strong>rebase errors</strong> on ");
-		sb.append("<strong><a href=\\\"https://github.com/");
+
+		sb.append("<p>Please fix <strong>rebase errors</strong> on <strong>");
+		sb.append("<a href=\\\"https://github.com/");
 		sb.append(project.getProperty("github.pull.request.head.username"));
 		sb.append("/");
 		sb.append(project.getProperty("repository"));
@@ -42,10 +43,10 @@ public class RebaseFailureMessageGenerator extends BaseFailureMessageGenerator {
 		sb.append(project.getProperty("github.pull.request.head.username"));
 		sb.append("/");
 		sb.append(project.getProperty("github.pull.request.head.branch"));
-		sb.append("</a></strong>");
-		sb.append(".</p>");
+		sb.append("</a></strong>.</p>");
 
 		int end = consoleOutput.indexOf("BUILD FAILED");
+
 		end = consoleOutput.indexOf("Total time:", end);
 
 		sb.append(getConsoleOutputSnippet(consoleOutput, end));
