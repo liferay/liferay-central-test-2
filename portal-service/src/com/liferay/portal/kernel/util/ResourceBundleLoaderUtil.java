@@ -12,9 +12,8 @@
  * details.
  */
 
-package com.liferay.portal.kernel.resource;
+package com.liferay.portal.kernel.util;
 
-import com.liferay.portal.kernel.util.ResourceBundleLoader;
 import com.liferay.registry.collections.ServiceTrackerCollections;
 import com.liferay.registry.collections.ServiceTrackerMap;
 

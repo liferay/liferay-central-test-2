@@ -15,11 +15,11 @@
 package com.liferay.taglib.util;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.resource.ResourceBundleLoaderUtil;
 import com.liferay.portal.kernel.util.AggregateResourceBundle;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.ResourceBundleLoader;
+import com.liferay.portal.kernel.util.ResourceBundleLoaderUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 
