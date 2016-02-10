@@ -99,20 +99,19 @@ public class OpenIdServiceHandlerImpl implements OpenIdServiceHandler {
 
 		request = PortalUtil.getOriginalServletRequest(request);
 
+		String receivingURL = ParamUtil.getString(request, "openid.return_to");
+		ParameterList parameterList = new ParameterList(
+			request.getParameterMap());
+
 		HttpSession session = request.getSession();
 
 		DiscoveryInformation discoveryInformation =
 			(DiscoveryInformation)session.getAttribute(
 				OpenIdWebKeys.OPEN_ID_DISCO);
 
-		ParameterList parameterList = new ParameterList(
-			request.getParameterMap());
-
 		if (discoveryInformation == null) {
 			return null;
 		}
-
-		String receivingURL = ParamUtil.getString(request, "openid.return_to");
 
 		AuthSuccess authSuccess = null;
 		String firstName = null;
@@ -323,10 +322,11 @@ public class OpenIdServiceHandlerImpl implements OpenIdServiceHandler {
 
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
 			actionRequest);
-		HttpServletResponse response = PortalUtil.getHttpServletResponse(
-			actionResponse);
 
 		request = PortalUtil.getOriginalServletRequest(request);
+
+		HttpServletResponse response = PortalUtil.getHttpServletResponse(
+			actionResponse);
 
 		HttpSession session = request.getSession();
 
