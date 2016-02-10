@@ -44,12 +44,12 @@ public class FailureMessageUtil {
 			}
 		}
 
-		return _genericMessageGenerator.getMessage(
+		return _genericFailureMessageGenerator.getMessage(
 			buildURL, consoleOutput, project);
 	}
 
 	private static final GenericFailureMessageGenerator
-		_genericMessageGenerator = new GenericFailureMessageGenerator();
+		_genericFailureMessageGenerator = new GenericFailureMessageGenerator();
 	private static final FailureMessageGenerator[] _failureMessageGenerators = {
 		new PluginFailureMessageGenerator(),
 		new PluginGitIDFailureMessageGenerator(),
