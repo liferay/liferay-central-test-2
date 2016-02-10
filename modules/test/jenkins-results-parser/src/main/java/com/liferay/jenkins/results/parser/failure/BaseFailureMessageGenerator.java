@@ -33,8 +33,9 @@ public abstract class BaseFailureMessageGenerator
 		throws Exception;
 
 	protected int getSnippetStart(String consoleOutput, int end) {
-		Matcher matcher = _pattern.matcher(consoleOutput);
 		int start = 0;
+
+		Matcher matcher = _pattern.matcher(consoleOutput);
 
 		while (matcher.find()) {
 			int x = matcher.start() + 1;
