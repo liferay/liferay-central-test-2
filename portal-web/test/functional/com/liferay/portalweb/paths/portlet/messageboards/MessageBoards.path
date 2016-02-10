@@ -465,7 +465,7 @@
 </tr>
 <tr>
 	<td>THREAD_TABLE_POSTS</td>
-	<td>//div[contains(@id,'mbThreadsSearchContainer')]//tr[contains(.,'${key_threadSubject}')]/td[4]/a</td>
+	<td>//a[contains(.,'${key_threadSubject}')]/../../span[contains(.,'Posts')]</td>
 	<td></td>
 </tr>
 <tr>
