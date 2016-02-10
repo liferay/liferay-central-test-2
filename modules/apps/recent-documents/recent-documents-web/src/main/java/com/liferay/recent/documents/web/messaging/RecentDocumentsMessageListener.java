@@ -53,11 +53,10 @@ public class RecentDocumentsMessageListener
 			Configurable.createConfigurable(
 				RecentDocumentsConfiguration.class, properties);
 
-		int interval = recentDocumentsConfiguration.checkFileRanksInterval();
-
 		schedulerEntryImpl.setTrigger(
 			TriggerFactoryUtil.createTrigger(
-				getEventListenerClass(), getEventListenerClass(), interval,
+				getEventListenerClass(), getEventListenerClass(),
+				recentDocumentsConfiguration.checkFileRanksInterval(),
 				TimeUnit.MINUTE));
 
 		_schedulerEngineHelper.register(
