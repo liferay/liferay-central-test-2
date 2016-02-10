@@ -48,10 +48,10 @@ public class AxisExtender {
 
 	@Activate
 	protected void activate(ComponentContext componentContext) {
-		BundleContext bundleContext = componentContext.getBundleContext();
+		_bundleContext = componentContext.getBundleContext();
 
 		_bundleTracker = new BundleTracker<>(
-			bundleContext, Bundle.ACTIVE,
+			_bundleContext, Bundle.ACTIVE,
 			new BundleRegistrationInfoBundleTrackerCustomizer());
 
 		_bundleTracker.open();
@@ -64,6 +64,7 @@ public class AxisExtender {
 
 	private static final Log _log = LogFactoryUtil.getLog(AxisExtender.class);
 
+	private BundleContext _bundleContext;
 	private BundleTracker<BundleRegistrationInfo> _bundleTracker;
 
 	private static class BundleRegistrationInfo {
@@ -108,7 +109,7 @@ public class AxisExtender {
 
 	}
 
-	private static class BundleRegistrationInfoBundleTrackerCustomizer
+	private class BundleRegistrationInfoBundleTrackerCustomizer
 		implements BundleTrackerCustomizer<BundleRegistrationInfo> {
 
 		@Override
@@ -121,8 +122,6 @@ public class AxisExtender {
 				return null;
 			}
 
-			BundleContext bundleContext = bundle.getBundleContext();
-
 			Dictionary<String, Object> properties = new Hashtable<>();
 
 			properties.put(
@@ -134,7 +133,7 @@ public class AxisExtender {
 
 			ServiceRegistration<ServletContextHelper>
 				bundleServletContextHelperServiceRegistration =
-					bundleContext.registerService(
+					_bundleContext.registerService(
 						ServletContextHelper.class,
 						new ServletContextHelper(bundle) {
 
@@ -163,7 +162,7 @@ public class AxisExtender {
 				"/api/axis/*");
 
 			ServiceRegistration<Filter> authVerifierFilterServiceRegistration =
-				bundleContext.registerService(
+				_bundleContext.registerService(
 					Filter.class, new AuthVerifierFilter(), properties);
 
 			properties = new Hashtable<>();
@@ -180,8 +179,8 @@ public class AxisExtender {
 			properties.put("servlet.init.httpMethods", "GET,POST,HEAD");
 
 			ServiceRegistration<Servlet> axisServletServiceRegistration =
-				bundleContext.registerService(
-					Servlet.class, (Servlet)new AxisServlet(), properties);
+				_bundleContext.registerService(
+					Servlet.class, servlet, properties);
 
 			return new BundleRegistrationInfo(
 				authVerifierFilterServiceRegistration,
