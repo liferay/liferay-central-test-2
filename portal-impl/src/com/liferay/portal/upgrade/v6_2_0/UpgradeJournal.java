@@ -346,23 +346,23 @@ public class UpgradeJournal extends BaseUpgradePortletPreferences {
 
 	protected void updateAssetEntryClassTypeId() throws Exception {
 		Connection con = null;
-		PreparedStatement ps = null;
+		PreparedStatement ps1 = null;
 		ResultSet rs = null;
 
 		try {
 			con = DataAccess.getUpgradeOptimizedConnection();
 
-			ps = con.prepareStatement(
+			ps1 = con.prepareStatement(
 				"select companyId, groupId, resourcePrimKey, structureId " +
 					"from JournalArticle where structureId != ''");
 
-			rs = ps.executeQuery();
+			rs = ps1.executeQuery();
 
-			try(PreparedStatement ps2 =
+			try (PreparedStatement ps2 =
 					AutoBatchPreparedStatementUtil.autoBatch(
 						con.prepareStatement(
-							"update AssetEntry set classTypeId = " +
-								"? where classPK = ?"));) {
+							"update AssetEntry set classTypeId = ? where " +
+								"classPK = ?"));) {
 
 				while (rs.next()) {
 					long groupId = rs.getLong("groupId");
@@ -379,11 +379,11 @@ public class UpgradeJournal extends BaseUpgradePortletPreferences {
 					ps2.addBatch();
 				}
 
-				ps.executeBatch();
+				ps1.executeBatch();
 			}
 		}
 		finally {
-			DataAccess.cleanUp(con, ps, rs);
+			DataAccess.cleanUp(con, ps1, rs);
 		}
 	}
 
