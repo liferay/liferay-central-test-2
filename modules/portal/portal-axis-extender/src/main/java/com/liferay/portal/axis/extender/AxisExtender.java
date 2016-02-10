@@ -16,8 +16,11 @@ package com.liferay.portal.axis.extender;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.servlet.AxisServlet;
+import com.liferay.portal.kernel.util.AggregateClassLoader;
 import com.liferay.portal.servlet.filters.authverifier.AuthVerifierFilter;
+import com.liferay.util.axis.AxisServlet;
+
+import java.io.IOException;
 
 import java.net.URL;
 
@@ -25,12 +28,18 @@ import java.util.Dictionary;
 import java.util.Hashtable;
 
 import javax.servlet.Filter;
+import javax.servlet.GenericServlet;
 import javax.servlet.Servlet;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleEvent;
 import org.osgi.framework.ServiceRegistration;
+import org.osgi.framework.wiring.BundleWiring;
 import org.osgi.service.component.ComponentContext;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
@@ -45,6 +54,70 @@ import org.osgi.util.tracker.BundleTrackerCustomizer;
  */
 @Component(immediate = true)
 public class AxisExtender {
+
+	public static class TCCLServletWrapper extends GenericServlet {
+
+		public TCCLServletWrapper(
+			ClassLoader classLoader, GenericServlet servlet) {
+
+			_classLoader = classLoader;
+			_servlet = servlet;
+		}
+
+		@Override
+		public void init() throws ServletException {
+			Thread thread = Thread.currentThread();
+
+			ClassLoader contextClassLoader = thread.getContextClassLoader();
+
+			thread.setContextClassLoader(_classLoader);
+
+			try {
+				_servlet.init();
+			}
+			finally {
+				thread.setContextClassLoader(contextClassLoader);
+			}
+		}
+
+		@Override
+		public void init(ServletConfig config) throws ServletException {
+			Thread thread = Thread.currentThread();
+
+			ClassLoader contextClassLoader = thread.getContextClassLoader();
+
+			thread.setContextClassLoader(_classLoader);
+
+			try {
+				_servlet.init(config);
+			}
+			finally {
+				thread.setContextClassLoader(contextClassLoader);
+			}
+		}
+
+		@Override
+		public void service(ServletRequest req, ServletResponse res)
+			throws IOException, ServletException {
+
+			Thread thread = Thread.currentThread();
+
+			ClassLoader contextClassLoader = thread.getContextClassLoader();
+
+			thread.setContextClassLoader(_classLoader);
+
+			try {
+				_servlet.service(req, res);
+			}
+			finally {
+				thread.setContextClassLoader(contextClassLoader);
+			}
+		}
+
+		private final ClassLoader _classLoader;
+		private final GenericServlet _servlet;
+
+	}
 
 	@Activate
 	protected void activate(ComponentContext componentContext) {
@@ -177,6 +250,21 @@ public class AxisExtender {
 				HttpWhiteboardConstants.HTTP_WHITEBOARD_SERVLET_PATTERN,
 				"/api/axis/*");
 			properties.put("servlet.init.httpMethods", "GET,POST,HEAD");
+
+			Bundle extenderBundle = _bundleContext.getBundle();
+
+			BundleWiring extenderBundleWiring = extenderBundle.adapt(
+				BundleWiring.class);
+
+			AggregateClassLoader aggregateClassLoader =
+				new AggregateClassLoader(extenderBundleWiring.getClassLoader());
+
+			BundleWiring bundleWiring = bundle.adapt(BundleWiring.class);
+
+			aggregateClassLoader.addClassLoader(bundleWiring.getClassLoader());
+
+			Servlet servlet = new TCCLServletWrapper(
+				aggregateClassLoader, new AxisServlet());
 
 			ServiceRegistration<Servlet> axisServletServiceRegistration =
 				_bundleContext.registerService(
