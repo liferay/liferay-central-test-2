@@ -592,7 +592,7 @@
 		<if>
 			<equals arg1="${markAsAnswer}" arg2="true" />
 			<then>
-				<execute function="AssertTextEquals" locator1="MessageBoardsThread#MESSAGE_ANSWER_1" value1="Answer" />
+				<execute function="AssertTextEquals#assertPartialText" locator1="MessageBoardsThread#MESSAGE_ANSWER_1" value1="Answer" />
 			</then>
 		</if>
 	</command>
