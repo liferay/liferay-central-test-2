@@ -34,26 +34,25 @@ public class CachingResourceBundleLoader implements ResourceBundleLoader {
 		if (_resourceBundles.containsKey(languageId)) {
 			return _resourceBundles.get(languageId);
 		}
-		else {
-			synchronized (_resourceBundles) {
-				if (_resourceBundles.containsKey(languageId)) {
-					return _resourceBundles.get(languageId);
-				}
 
-				ResourceBundle resourceBundle;
-
-				try {
-					resourceBundle = _resourceBundleLoader.loadResourceBundle(
-						languageId);
-				}
-				catch (Exception e) {
-					resourceBundle = null;
-				}
-
-				_resourceBundles.put(languageId, resourceBundle);
-
-				return resourceBundle;
+		synchronized (_resourceBundles) {
+			if (_resourceBundles.containsKey(languageId)) {
+				return _resourceBundles.get(languageId);
 			}
+
+			ResourceBundle resourceBundle;
+
+			try {
+				resourceBundle = _resourceBundleLoader.loadResourceBundle(
+					languageId);
+			}
+			catch (Exception e) {
+				resourceBundle = null;
+			}
+
+			_resourceBundles.put(languageId, resourceBundle);
+
+			return resourceBundle;
 		}
 	}
 
