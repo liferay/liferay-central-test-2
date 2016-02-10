@@ -609,13 +609,13 @@ public class JournalDisplayContext {
 
 				List results = new ArrayList<>();
 
-				List<SearchResult> searchResultsList =
+				List<SearchResult> searchResults =
 					SearchResultUtil.getSearchResults(
 						hits, searchContext.getLocale(), _liferayPortletRequest,
 						_liferayPortletResponse);
 
-				for (int i = 0; i < searchResultsList.size(); i++) {
-					SearchResult searchResult = searchResultsList.get(i);
+				for (int i = 0; i < searchResults.size(); i++) {
+					SearchResult searchResult = searchResults.get(i);
 
 					Summary summary = searchResult.getSummary();
 
