@@ -11,8 +11,13 @@ Import-Package:\
 	!org.exolab.castor.xml.*,\
 	!org.omg.*,\
 	!sun.awt.image.codec,\
+	com.liferay.portal.kernel.portlet.configuration.icon,\
+	com.liferay.portal.kernel.service.permission,\
+	com.liferay.portal.kernel.portlet.toolbar,\
+	com.liferay.portal.kernel.theme,\
 	*
 Include-Resource:\
+	@lib/util-java.jar!/com/liferay/util/axis/*.class,\
 	@../../../lib/portal/axis.jar,\
 	@../../../lib/portal/wsdl4j.jar
 Liferay-Releng-Module-Group-Description:
