@@ -1217,6 +1217,7 @@
 			<var name="soPage" value="${soPage}" />
 		</execute>
 
+		<var name="key_postsNumber" value="1" />
 		<var name="key_threadBody" value="${threadReplyBody}" />
 		<var name="key_threadSubject" value="${threadSplitReplySubject}" />
 
