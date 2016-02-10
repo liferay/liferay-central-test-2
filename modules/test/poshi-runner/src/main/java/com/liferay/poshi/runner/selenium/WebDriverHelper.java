@@ -321,7 +321,6 @@ public class WebDriverHelper {
 	}
 
 	public static String getEditorName(WebDriver webDriver, String locator) {
-		String idAttribute = getAttribute(webDriver, locator + "@id");
 		String titleAttribute = getAttribute(webDriver, locator + "@title");
 
 		if (titleAttribute.contains("Rich Text Editor,")) {
@@ -334,6 +333,8 @@ public class WebDriverHelper {
 
 			return titleAttribute.substring(x + 2, y);
 		}
+
+		String idAttribute = getAttribute(webDriver, locator + "@id");
 
 		if (idAttribute.contains("cke__")) {
 			int x = idAttribute.indexOf("cke__");
