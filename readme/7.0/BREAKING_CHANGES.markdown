@@ -3757,8 +3757,6 @@ tag.
 
 #### Why was this change made?
 
-#### Why was this change made?
-
 This change was made as a part of the ongoing strategy to remove deprecated
 tags.
 
