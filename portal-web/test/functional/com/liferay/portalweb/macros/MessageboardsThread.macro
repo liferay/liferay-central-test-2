@@ -859,7 +859,7 @@
 	<command name="viewAnswerPG">
 		<var name="key_threadSubject" value="${threadSubject}" />
 
-		<execute function="AssertTextEquals" locator1="MessageBoards#THREAD_TABLE_FLAG" value1="Resolved" />
+		<execute function="AssertTextEquals#assertPartialText" locator1="MessageBoards#THREAD_LIST_ANSWER" value1="Answer" />
 
 		<execute function="AssertClick" locator1="MessageBoards#THREAD_LIST_THREAD" value1="${threadSubject}" />
 

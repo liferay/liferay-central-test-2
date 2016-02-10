@@ -372,6 +372,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>THREAD_LIST_ANSWER</td>
+	<td>//li[contains(.,'${key_threadSubject}')]/div/span[4]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>THREAD_LIST_CHECKBOX</td>
 	<td>//li[contains(.,'${key_threadSubject}')]/div/label/input[contains(@type,'checkbox')]</td>
 	<td></td>
