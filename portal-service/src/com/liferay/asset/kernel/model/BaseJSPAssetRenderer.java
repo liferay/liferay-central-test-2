@@ -56,12 +56,12 @@ public abstract class BaseJSPAssetRenderer<T>
 			return false;
 		}
 
-		RequestDispatcher requestDispatcher =
-			servletContext.getRequestDispatcher(jspPath);
-
 		ResourceBundleLoader resourceBundleLoader =
 			(ResourceBundleLoader)request.getAttribute(
 				WebKeys.RESOURCE_BUNDLE_LOADER);
+
+		RequestDispatcher requestDispatcher =
+			servletContext.getRequestDispatcher(jspPath);
 
 		try {
 			request.setAttribute(

@@ -116,9 +116,11 @@ public class DiffHtmlImpl implements DiffHtml {
 				newDomTreeBuilder, locale);
 
 			contentHandler.startDocument();
+
 			contentHandler.startElement(
 				StringPool.BLANK, _DIFF_REPORT, _DIFF_REPORT,
 				new AttributesImpl());
+
 			contentHandler.startElement(
 				StringPool.BLANK, _DIFF, _DIFF, new AttributesImpl());
 
@@ -130,8 +132,10 @@ public class DiffHtmlImpl implements DiffHtml {
 			htmlDiffer.diff(leftTextNodeComparator, rightTextNodeComparator);
 
 			contentHandler.endElement(StringPool.BLANK, _DIFF, _DIFF);
+
 			contentHandler.endElement(
 				StringPool.BLANK, _DIFF_REPORT, _DIFF_REPORT);
+
 			contentHandler.endDocument();
 
 			unsyncStringWriter.flush();
