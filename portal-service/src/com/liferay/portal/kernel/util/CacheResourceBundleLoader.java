@@ -21,9 +21,9 @@ import java.util.ResourceBundle;
 /**
  * @author Carlos Sierra Andrés
  */
-public class CachingResourceBundleLoader implements ResourceBundleLoader {
+public class CacheResourceBundleLoader implements ResourceBundleLoader {
 
-	public CachingResourceBundleLoader(
+	public CacheResourceBundleLoader(
 		ResourceBundleLoader resourceBundleLoader) {
 
 		_resourceBundleLoader = resourceBundleLoader;
