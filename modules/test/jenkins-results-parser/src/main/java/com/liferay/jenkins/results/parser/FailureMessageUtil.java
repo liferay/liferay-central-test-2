@@ -14,11 +14,6 @@
 
 package com.liferay.jenkins.results.parser;
 
-import com.liferay.jenkins.results.parser.failure.FailureMessageGenerator;
-import com.liferay.jenkins.results.parser.failure.GenericFailureMessageGenerator;
-import com.liferay.jenkins.results.parser.failure.RebaseFailureMessageGenerator;
-import com.liferay.jenkins.results.parser.failure.SourceFormatFailureMessageGenerator;
-
 import org.apache.tools.ant.Project;
 
 /**
@@ -48,13 +43,13 @@ public class FailureMessageUtil {
 			buildURL, consoleOutput, project);
 	}
 
-	private static final GenericFailureMessageGenerator
-		_genericFailureMessageGenerator = new GenericFailureMessageGenerator();
 	private static final FailureMessageGenerator[] _failureMessageGenerators = {
 		new PluginFailureMessageGenerator(),
 		new PluginGitIDFailureMessageGenerator(),
 		new RebaseFailureMessageGenerator(),
 		new SourceFormatFailureMessageGenerator()
 	};
+	private static final GenericFailureMessageGenerator
+		_genericFailureMessageGenerator = new GenericFailureMessageGenerator();
 
 }
