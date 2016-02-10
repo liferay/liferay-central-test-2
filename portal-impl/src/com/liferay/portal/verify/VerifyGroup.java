@@ -353,7 +353,7 @@ public class VerifyGroup extends VerifyProcess {
 		}
 	}
 
-	private void verifyStagingGroupRoleMembership(Group stagingGroup) {
+	protected void verifyStagingGroupRoleMembership(Group stagingGroup) {
 		List<Role> stagingRoles = RoleLocalServiceUtil.getGroupRoles(
 			stagingGroup.getGroupId());
 
@@ -374,7 +374,7 @@ public class VerifyGroup extends VerifyProcess {
 		RoleLocalServiceUtil.clearGroupRoles(stagingGroup.getGroupId());
 	}
 
-	private void verifyStagingGroupUserGroupMembership(Group stagingGroup) {
+	protected void verifyStagingGroupUserGroupMembership(Group stagingGroup) {
 		List<UserGroup> stagingUserGroups =
 			UserGroupLocalServiceUtil.getGroupUserGroups(
 				stagingGroup.getGroupId());
@@ -398,7 +398,7 @@ public class VerifyGroup extends VerifyProcess {
 			stagingGroup.getGroupId());
 	}
 
-	private void verifyStagingGroupUserMembership(Group stagingGroup) {
+	protected void verifyStagingGroupUserMembership(Group stagingGroup) {
 		List<User> stagingGroupUsers = UserLocalServiceUtil.getGroupUsers(
 			stagingGroup.getGroupId());
 
@@ -419,7 +419,7 @@ public class VerifyGroup extends VerifyProcess {
 		UserLocalServiceUtil.clearGroupUsers(stagingGroup.getGroupId());
 	}
 
-	private void verifyStagingUserGroupGroupRolesAssignments(
+	protected void verifyStagingUserGroupGroupRolesAssignments(
 		Group stagingGroup) {
 
 		DynamicQuery dynamicQuery =
@@ -458,7 +458,7 @@ public class VerifyGroup extends VerifyProcess {
 			stagingGroup.getGroupId());
 	}
 
-	private void verifyStagingUserGroupRolesAssignments(Group stagingGroup) {
+	protected void verifyStagingUserGroupRolesAssignments(Group stagingGroup) {
 		List<UserGroupRole> stagingUserGroupRoles =
 			UserGroupRoleLocalServiceUtil.getUserGroupRolesByGroup(
 				stagingGroup.getGroupId());
