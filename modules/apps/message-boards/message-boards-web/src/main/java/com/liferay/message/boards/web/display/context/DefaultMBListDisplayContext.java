@@ -143,14 +143,14 @@ public class DefaultMBListDisplayContext implements MBListDisplayContext {
 
 			searchContext.setKeywords(keywords);
 
+			searchContainer.setResults(
+				SearchResultUtil.getSearchResults(hits, _request.getLocale()));
 			searchContext.setStart(searchContainer.getStart());
+			searchContainer.setSearch(true);
 
 			Hits hits = indexer.search(searchContext);
 
 			searchContainer.setTotal(hits.getLength());
-			searchContainer.setResults(
-				SearchResultUtil.getSearchResults(hits, _request.getLocale()));
-			searchContainer.setSearch(true);
 		}
 		else if (isShowRecentPosts()) {
 			long groupThreadsUserId = ParamUtil.getLong(
