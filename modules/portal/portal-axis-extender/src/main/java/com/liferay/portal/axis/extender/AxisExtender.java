@@ -57,27 +57,9 @@ public class AxisExtender {
 
 	public static class TCCLServletWrapper extends GenericServlet {
 
-		public TCCLServletWrapper(
-			ClassLoader classLoader, GenericServlet servlet) {
-
+		public TCCLServletWrapper(ClassLoader classLoader, Servlet servlet) {
 			_classLoader = classLoader;
 			_servlet = servlet;
-		}
-
-		@Override
-		public void init() throws ServletException {
-			Thread thread = Thread.currentThread();
-
-			ClassLoader contextClassLoader = thread.getContextClassLoader();
-
-			thread.setContextClassLoader(_classLoader);
-
-			try {
-				_servlet.init();
-			}
-			finally {
-				thread.setContextClassLoader(contextClassLoader);
-			}
 		}
 
 		@Override
@@ -115,7 +97,7 @@ public class AxisExtender {
 		}
 
 		private final ClassLoader _classLoader;
-		private final GenericServlet _servlet;
+		private final Servlet _servlet;
 
 	}
 
