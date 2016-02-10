@@ -14,7 +14,7 @@
 
 package com.liferay.jenkins.results.parser;
 
-import com.liferay.jenkins.results.parser.failure.BaseFailureMessageGenerator;
+import com.liferay.jenkins.results.parser.failure.FailureMessageGenerator;
 import com.liferay.jenkins.results.parser.failure.GenericFailureMessageGenerator;
 import com.liferay.jenkins.results.parser.failure.RebaseFailureMessageGenerator;
 import com.liferay.jenkins.results.parser.failure.SourceFormatFailureMessageGenerator;
@@ -33,10 +33,10 @@ public class FailureMessageUtil {
 			JenkinsResultsParserUtil.getLocalURL(
 				buildURL + "/logText/progressiveText"));
 
-		for (BaseFailureMessageGenerator messageGenerator :
-				_messageGenerators) {
+		for (FailureMessageGenerator failureMessageGenerator :
+				_failureMessageGenerators) {
 
-			String message = messageGenerator.getMessage(
+			String message = failureMessageGenerator.getMessage(
 				buildURL, consoleOutput, project);
 
 			if (message != null) {
@@ -50,8 +50,8 @@ public class FailureMessageUtil {
 
 	private static final GenericFailureMessageGenerator
 		_genericMessageGenerator = new GenericFailureMessageGenerator();
-	private static final BaseFailureMessageGenerator[] _messageGenerators =
-		new BaseFailureMessageGenerator[] {
+	private static final FailureMessageGenerator[] _failureMessageGenerators =
+		new FailureMessageGenerator[] {
 			new PluginFailureMessageGenerator(),
 			new PluginGitIDFailureMessageGenerator(),
 			new RebaseFailureMessageGenerator(),
