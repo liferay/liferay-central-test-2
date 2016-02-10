@@ -250,6 +250,7 @@ public class AxisExtender {
 				HttpWhiteboardConstants.HTTP_WHITEBOARD_SERVLET_PATTERN,
 				"/api/axis/*");
 			properties.put("servlet.init.httpMethods", "GET,POST,HEAD");
+			properties.put("servlet.init.axis.servicesPath", "/api/axis/");
 
 			Bundle extenderBundle = _bundleContext.getBundle();
 
