@@ -42,13 +42,13 @@ public class PortletInstance {
 	}
 
 	public static PortletInstance fromPortletNameAndUserIdAndInstanceId(
-		String portletId, String userIdAndInstanceId) {
+		String portletName, String userIdAndInstanceId) {
 
 		UserIdAndInstanceIdEncoder userIdAndInstanceIdEncoder =
 			_buildUserIdAndInstanceIdEncoder(userIdAndInstanceId);
 
 		return new PortletInstance(
-			portletId, userIdAndInstanceIdEncoder.getUserId(),
+			portletName, userIdAndInstanceIdEncoder.getUserId(),
 			userIdAndInstanceIdEncoder.getInstanceId());
 	}
 
