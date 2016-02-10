@@ -429,10 +429,10 @@ public class VerifyGroup extends VerifyProcess {
 			RestrictionsFactoryUtil.eq(
 				"id.groupId", stagingGroup.getGroupId()));
 
-		List<UserGroupGroupRole> staged =
+		List<UserGroupGroupRole> stagingUserGroupGroupRoles =
 			UserGroupGroupRoleLocalServiceUtil.dynamicQuery(dynamicQuery);
 
-		if (staged.isEmpty()) {
+		if (stagingUserGroupGroupRoles.isEmpty()) {
 			return;
 		}
 
@@ -442,13 +442,15 @@ public class VerifyGroup extends VerifyProcess {
 			RestrictionsFactoryUtil.eq(
 				"id.groupId", stagingGroup.getLiveGroupId()));
 
-		List<UserGroupGroupRole> live =
+		List<UserGroupGroupRole> liveUserGroupGroupRoles =
 			UserGroupGroupRoleLocalServiceUtil.dynamicQuery(dynamicQuery);
 
-		for (UserGroupGroupRole userGroupGroupRole : staged) {
+		for (UserGroupGroupRole userGroupGroupRole :
+				stagingUserGroupGroupRoles) {
+
 			userGroupGroupRole.setGroupId(stagingGroup.getLiveGroupId());
 
-			if (!live.contains(userGroupGroupRole)) {
+			if (!liveUserGroupGroupRoles.contains(userGroupGroupRole)) {
 				UserGroupGroupRoleLocalServiceUtil.updateUserGroupGroupRole(
 					userGroupGroupRole);
 			}
