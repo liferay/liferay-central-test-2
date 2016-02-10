@@ -143,12 +143,13 @@ public class DefaultMBListDisplayContext implements MBListDisplayContext {
 
 			searchContext.setKeywords(keywords);
 
+			searchContext.setStart(searchContainer.getStart());
+
 			Hits hits = indexer.search(searchContext);
 
 			searchContainer.setResults(
 				SearchResultUtil.getSearchResults(hits, _request.getLocale()));
 
-			searchContext.setStart(searchContainer.getStart());
 			searchContainer.setSearch(true);
 			searchContainer.setTotal(hits.getLength());
 		}
