@@ -973,6 +973,8 @@
 
 		<execute function="AssertClick" locator1="MenuItem#THREAD" value1="Thread" />
 
+		<execute function="AssertVisible" locator1="Button#PUBLISH" />
+
 		<execute macro="Panel#expandPanel">
 			<var name="panelHeading" value="More Settings" />
 		</execute>
@@ -986,6 +988,8 @@
 		<execute function="Click" locator1="Button#PLUS" />
 
 		<execute function="AssertClick" locator1="MenuItem#THREAD" value1="Thread" />
+
+		<execute function="AssertVisible" locator1="Button#PUBLISH" />
 
 		<execute macro="Panel#expandPanel">
 			<var name="panelHeading" value="More Settings" />
