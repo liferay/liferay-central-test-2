@@ -81,7 +81,7 @@ public class ToggleControlsControlMenuEntry
 
 	@Override
 	public String getLabel(Locale locale) {
-		return LanguageUtil.get(locale, "edit-controls");
+		return LanguageUtil.get(locale, "toggle-controls");
 	}
 
 	@Override
