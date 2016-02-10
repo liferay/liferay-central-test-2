@@ -215,8 +215,7 @@ public class DDLDisplayExportImportPortletPreferencesProcessor
 		if (ddmTemplate == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
-					"Unable to export referenced template with id " +
-						ddmTemplateId);
+					"Unable to export referenced template " + ddmTemplateId);
 			}
 
 			return;
