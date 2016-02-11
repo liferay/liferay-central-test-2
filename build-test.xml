@@ -5049,7 +5049,6 @@ module.framework.properties.osgi.console=11312</echo>
 						</echo>
 					</else>
 				</if>
-
 			</then>
 		</if>
 
