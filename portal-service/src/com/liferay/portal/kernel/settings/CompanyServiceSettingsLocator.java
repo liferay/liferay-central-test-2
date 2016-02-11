@@ -23,6 +23,7 @@ public class CompanyServiceSettingsLocator implements SettingsLocator {
 	public CompanyServiceSettingsLocator(long companyId, String settingsId) {
 		_companyId = companyId;
 		_settingsId = settingsId;
+
 		_configurationPid = settingsId;
 	}
 
