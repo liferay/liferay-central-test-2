@@ -129,8 +129,7 @@ public class ManagementBarDisplayButtonsTag
 	private static final String _PAGE =
 		"/management_bar_display_buttons/page.jsp";
 
-	private final String[] _defaultViews = new String[]
-		{"icon", "descriptive", "list"};
+	private final String[] _defaultViews = {"icon", "descriptive", "list"};
 	private Boolean _disabled;
 	private String[] _displayViews;
 	private PortletURL _portletURL;
