@@ -59,9 +59,8 @@ public class RecentDocumentsMessageListener
 
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"Bypassing RecentDocumentsMessageListener scheduling due " +
-						"to dl.file.rank.enabled being set to false in " +
-						"portal.properties.");
+					"Skipping because the portal property " + 
+						"\"dl.file.rank.enabled being\" is set to false");
 			}
 
 			return;
