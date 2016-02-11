@@ -70,7 +70,8 @@ public class ProxyFactory {
 
 		return (T)ProxyUtil.newProxyInstance(
 			interfaceClass.getClassLoader(), new Class[] {interfaceClass},
-			new ServiceTrackedInvocationHandler<>(interfaceClass, filterString));
+			new ServiceTrackedInvocationHandler<>(
+				interfaceClass, filterString));
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(ProxyFactory.class);
