@@ -239,6 +239,7 @@ SearchContainer searchContainer = new SearchContainer(liferayPortletRequest, por
 							tempRowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
 
 							request.setAttribute("info_panel.jsp-folder", curFolder);
+
 							request.setAttribute("view_entries.jsp-repositoryId", String.valueOf(curFolder.getRepositoryId()));
 							%>
 
