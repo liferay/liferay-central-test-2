@@ -175,6 +175,7 @@ else if (scopeTemplateType.equals(DDMTemplateConstants.TEMPLATE_TYPE_FORM)) {
 }
 
 DDMWebRequestHelper ddmWebRequestHelper = new DDMWebRequestHelper(request);
+
 DDMGroupServiceConfiguration ddmGroupServiceConfiguration = ddmWebRequestHelper.getDDMGroupServiceConfiguration();
 
 DDMWebConfiguration ddmWebConfiguration = (DDMWebConfiguration)request.getAttribute(DDMWebConfiguration.class.getName());
