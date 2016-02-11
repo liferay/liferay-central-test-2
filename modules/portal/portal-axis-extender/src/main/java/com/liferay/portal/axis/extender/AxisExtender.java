@@ -183,13 +183,14 @@ public class AxisExtender {
 			properties.put("servlet.init.axis.servicesPath", "/api/axis/");
 			properties.put("servlet.init.httpMethods", "GET,POST,HEAD");
 
-			Bundle extenderBundle = _bundleContext.getBundle();
+			Bundle bundleContextBundle = _bundleContext.getBundle();
 
-			BundleWiring extenderBundleWiring = extenderBundle.adapt(
-				BundleWiring.class);
+			BundleWiring bundleContextBundleBundleWiring =
+				bundleContextBundle.adapt(BundleWiring.class);
 
 			AggregateClassLoader aggregateClassLoader =
-				new AggregateClassLoader(extenderBundleWiring.getClassLoader());
+				new AggregateClassLoader(
+					bundleContextBundleBundleWiring.getClassLoader());
 
 			BundleWiring bundleWiring = bundle.adapt(BundleWiring.class);
 
