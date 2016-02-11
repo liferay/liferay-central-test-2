@@ -59,7 +59,7 @@ public class RecentDocumentsMessageListener
 
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"Skipping because the portal property " + 
+					"Skipping because the portal property " +
 						"\"dl.file.rank.enabled being\" is set to false");
 			}
 
