@@ -81,7 +81,6 @@ OrderByComparator<BackgroundTask> orderByComparator = BackgroundTaskComparatorFa
 			keyProperty="backgroundTaskId"
 			modelVar="backgroundTask"
 		>
-
 			<c:choose>
 				<c:when test='<%= displayStyle.equals("descriptive") %>'>
 					<liferay-ui:search-container-column-text>
