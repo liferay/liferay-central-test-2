@@ -104,7 +104,7 @@ public class PortletInstance {
 
 	public String getUserIdAndInstanceId() {
 		UserIdAndInstanceIdEncoder userIdAndInstanceIdEncoder =
-			new UserIdAndInstanceIdEncoder(_instanceId, _userId);
+			new UserIdAndInstanceIdEncoder(_userId, _instanceId);
 
 		return userIdAndInstanceIdEncoder.encode();
 	}
@@ -143,7 +143,7 @@ public class PortletInstance {
 		}
 
 		if (userIdAndInstanceId.isEmpty()) {
-			return new UserIdAndInstanceIdEncoder(null, 0);
+			return new UserIdAndInstanceIdEncoder(0, null);
 		}
 
 		int slashCount = StringUtil.count(
@@ -180,10 +180,10 @@ public class PortletInstance {
 				instanceId = userIdAndInstanceId.substring(index + 1);
 			}
 
-			return new UserIdAndInstanceIdEncoder(instanceId, userId);
+			return new UserIdAndInstanceIdEncoder(userId, instanceId);
 		}
 		else {
-			return new UserIdAndInstanceIdEncoder(userIdAndInstanceId, 0);
+			return new UserIdAndInstanceIdEncoder(0, userIdAndInstanceId);
 		}
 	}
 
@@ -254,7 +254,7 @@ public class PortletInstance {
 
 	private static final class UserIdAndInstanceIdEncoder {
 
-		public UserIdAndInstanceIdEncoder(String instanceId, long userId) {
+		public UserIdAndInstanceIdEncoder(long userId, String instanceId) {
 			_instanceId = instanceId;
 			_userId = userId;
 		}
