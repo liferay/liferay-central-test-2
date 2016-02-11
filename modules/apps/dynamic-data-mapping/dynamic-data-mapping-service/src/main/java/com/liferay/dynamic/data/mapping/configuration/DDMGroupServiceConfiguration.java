@@ -25,10 +25,10 @@ import com.liferay.portal.configuration.metatype.annotations.ExtendedObjectClass
 	category = "productivity", scope = ExtendedObjectClassDefinition.Scope.GROUP
 )
 @Meta.OCD(
-	id = "com.liferay.dynamic.data.mapping.configuration.DDMServiceConfiguration",
+	id = "com.liferay.dynamic.data.mapping.configuration.DDMGroupServiceConfiguration",
 	localization = "content/Language", name = "%ddm.service.configuration.name"
 )
-public interface DDMServiceConfiguration {
+public interface DDMGroupServiceConfiguration {
 
 	@Meta.AD(
 		deflt = ".gif|.jpeg|.jpg|.png",
