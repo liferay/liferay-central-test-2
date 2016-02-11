@@ -182,9 +182,8 @@ public class PortletInstance {
 
 			return new UserIdAndInstanceIdEncoder(userId, instanceId);
 		}
-		else {
-			return new UserIdAndInstanceIdEncoder(0, userIdAndInstanceId);
-		}
+
+		return new UserIdAndInstanceIdEncoder(0, userIdAndInstanceId);
 	}
 
 	private static String _getInstanceId(String portletInstanceKey) {
