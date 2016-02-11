@@ -63,6 +63,22 @@ public class AxisExtender {
 		}
 
 		@Override
+		public void destroy() {
+			Thread thread = Thread.currentThread();
+
+			ClassLoader contextClassLoader = thread.getContextClassLoader();
+
+			thread.setContextClassLoader(_classLoader);
+
+			try {
+				_servlet.destroy();
+			}
+			finally {
+				thread.setContextClassLoader(contextClassLoader);
+			}
+		}
+
+		@Override
 		public void init(ServletConfig config) throws ServletException {
 			Thread thread = Thread.currentThread();
 
