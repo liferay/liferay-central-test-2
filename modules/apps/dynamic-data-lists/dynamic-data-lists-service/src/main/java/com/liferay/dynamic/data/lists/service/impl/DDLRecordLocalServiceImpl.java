@@ -130,7 +130,7 @@ public class DDLRecordLocalServiceImpl extends DDLRecordLocalServiceBaseImpl {
 
 		WorkflowHandlerRegistryUtil.startWorkflowInstance(
 			user.getCompanyId(), groupId, userId,
-			getWorkflowAssetClassName(recordVersion),
+			getWorkflowAssetClassName(recordSet),
 			recordVersion.getRecordVersionId(), recordVersion, serviceContext);
 
 		return record;
@@ -180,6 +180,9 @@ public class DDLRecordLocalServiceImpl extends DDLRecordLocalServiceBaseImpl {
 		type = SystemEventConstants.TYPE_DELETE
 	)
 	public DDLRecord deleteRecord(DDLRecord record) throws PortalException {
+		DDLRecordSet recordSet = record.getRecordSet();
+
+		String workflowAssetClassName = getWorkflowAssetClassName(recordSet);
 
 		// Record
 
@@ -201,19 +204,18 @@ public class DDLRecordLocalServiceImpl extends DDLRecordLocalServiceBaseImpl {
 
 			workflowInstanceLinkLocalService.deleteWorkflowInstanceLinks(
 				record.getCompanyId(), record.getGroupId(),
-				getWorkflowAssetClassName(recordVersion),
-				recordVersion.getPrimaryKey());
+				workflowAssetClassName, recordVersion.getPrimaryKey());
 		}
 
 		// Asset
 
 		assetEntryLocalService.deleteEntry(
-			DDLRecord.class.getName(), record.getRecordId());
+			workflowAssetClassName, record.getRecordId());
 
 		// Ratings
 
 		ratingsStatsLocalService.deleteStats(
-			DDLRecord.class.getName(), record.getRecordId());
+			workflowAssetClassName, record.getRecordId());
 
 		return record;
 	}
@@ -780,11 +782,7 @@ public class DDLRecordLocalServiceImpl extends DDLRecordLocalServiceBaseImpl {
 		return versionParts[0] + StringPool.PERIOD + versionParts[1];
 	}
 
-	protected String getWorkflowAssetClassName(DDLRecordVersion recordVersion)
-		throws PortalException {
-
-		DDLRecordSet recordSet = recordVersion.getRecordSet();
-
+	protected String getWorkflowAssetClassName(DDLRecordSet recordSet) {
 		if (recordSet.getScope() == DDLRecordSetConstants.SCOPE_FORMS) {
 			return DDLFormRecord.class.getName();
 		}
