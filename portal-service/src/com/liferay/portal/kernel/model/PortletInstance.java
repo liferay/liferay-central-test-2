@@ -255,8 +255,8 @@ public class PortletInstance {
 	private static final class UserIdAndInstanceIdEncoder {
 
 		public UserIdAndInstanceIdEncoder(String instanceId, long userId) {
-			this._instanceId = instanceId;
-			this._userId = userId;
+			_instanceId = instanceId;
+			_userId = userId;
 		}
 
 		public String encode() {
