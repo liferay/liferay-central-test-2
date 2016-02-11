@@ -14,13 +14,13 @@
 
 package com.liferay.portal.axis.extender;
 
+import com.liferay.portal.kernel.bean.ClassLoaderBeanHandler;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.AggregateClassLoader;
+import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.servlet.filters.authverifier.AuthVerifierFilter;
 import com.liferay.util.axis.AxisServlet;
-
-import java.io.IOException;
 
 import java.net.URL;
 
@@ -28,12 +28,7 @@ import java.util.Dictionary;
 import java.util.Hashtable;
 
 import javax.servlet.Filter;
-import javax.servlet.GenericServlet;
 import javax.servlet.Servlet;
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
@@ -54,68 +49,6 @@ import org.osgi.util.tracker.BundleTrackerCustomizer;
  */
 @Component(immediate = true)
 public class AxisExtender {
-
-	public static class ThreadContextClassLoaderServlet extends GenericServlet {
-
-		public ThreadContextClassLoaderServlet(ClassLoader classLoader, Servlet servlet) {
-			_classLoader = classLoader;
-			_servlet = servlet;
-		}
-
-		@Override
-		public void destroy() {
-			Thread thread = Thread.currentThread();
-
-			ClassLoader contextClassLoader = thread.getContextClassLoader();
-
-			thread.setContextClassLoader(_classLoader);
-
-			try {
-				_servlet.destroy();
-			}
-			finally {
-				thread.setContextClassLoader(contextClassLoader);
-			}
-		}
-
-		@Override
-		public void init(ServletConfig servletConfig) throws ServletException {
-			Thread thread = Thread.currentThread();
-
-			ClassLoader contextClassLoader = thread.getContextClassLoader();
-
-			thread.setContextClassLoader(_classLoader);
-
-			try {
-				_servlet.init(servletConfig);
-			}
-			finally {
-				thread.setContextClassLoader(contextClassLoader);
-			}
-		}
-
-		@Override
-		public void service(ServletRequest req, ServletResponse res)
-			throws IOException, ServletException {
-
-			Thread thread = Thread.currentThread();
-
-			ClassLoader contextClassLoader = thread.getContextClassLoader();
-
-			thread.setContextClassLoader(_classLoader);
-
-			try {
-				_servlet.service(req, res);
-			}
-			finally {
-				thread.setContextClassLoader(contextClassLoader);
-			}
-		}
-
-		private final ClassLoader _classLoader;
-		private final Servlet _servlet;
-
-	}
 
 	@Activate
 	protected void activate(ComponentContext componentContext) {
@@ -262,8 +195,10 @@ public class AxisExtender {
 
 			aggregateClassLoader.addClassLoader(bundleWiring.getClassLoader());
 
-			Servlet servlet = new ThreadContextClassLoaderServlet(
-				aggregateClassLoader, new AxisServlet());
+			Servlet servlet = (Servlet)ProxyUtil.newProxyInstance(
+				aggregateClassLoader, new Class[] {Servlet.class},
+				new ClassLoaderBeanHandler(
+					new AxisServlet(), aggregateClassLoader));
 
 			ServiceRegistration<Servlet> axisServletServiceRegistration =
 				_bundleContext.registerService(
