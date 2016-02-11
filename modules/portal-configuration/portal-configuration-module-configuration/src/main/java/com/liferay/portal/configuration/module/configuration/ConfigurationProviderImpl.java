@@ -47,8 +47,8 @@ public class ConfigurationProviderImpl implements ConfigurationProvider {
 	public <T> T getCompanyConfiguration(Class<T> clazz, long companyId)
 		throws ConfigurationException {
 
+		String settingsId = _getSettingsId(clazz);
 		String configurationPid = _getConfigurationPid(clazz);
-		String settingsId = _getConfigurationSettingsId(clazz);
 
 		return getConfiguration(
 			clazz,
@@ -99,8 +99,8 @@ public class ConfigurationProviderImpl implements ConfigurationProvider {
 	public <T> T getGroupConfiguration(Class<T> clazz, long groupId)
 		throws ConfigurationException {
 
+		String settingsId = _getSettingsId(clazz);
 		String configurationPid = _getConfigurationPid(clazz);
-		String settingsId = _getConfigurationSettingsId(clazz);
 
 		return getConfiguration(
 			clazz,
@@ -154,7 +154,7 @@ public class ConfigurationProviderImpl implements ConfigurationProvider {
 		return ocd.id();
 	}
 
-	private <T> String _getConfigurationSettingsId(Class<T> clazz) {
+	private <T> String _getSettingsId(Class<T> clazz) {
 		ExtendedObjectClassDefinition eocd = clazz.getAnnotation(
 			ExtendedObjectClassDefinition.class);
 
