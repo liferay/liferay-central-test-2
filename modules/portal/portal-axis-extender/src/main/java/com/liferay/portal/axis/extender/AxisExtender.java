@@ -55,9 +55,9 @@ import org.osgi.util.tracker.BundleTrackerCustomizer;
 @Component(immediate = true)
 public class AxisExtender {
 
-	public static class TCCLServletWrapper extends GenericServlet {
+	public static class ThreadContextClassLoaderServlet extends GenericServlet {
 
-		public TCCLServletWrapper(ClassLoader classLoader, Servlet servlet) {
+		public ThreadContextClassLoaderServlet(ClassLoader classLoader, Servlet servlet) {
 			_classLoader = classLoader;
 			_servlet = servlet;
 		}
@@ -79,7 +79,7 @@ public class AxisExtender {
 		}
 
 		@Override
-		public void init(ServletConfig config) throws ServletException {
+		public void init(ServletConfig servletConfig) throws ServletException {
 			Thread thread = Thread.currentThread();
 
 			ClassLoader contextClassLoader = thread.getContextClassLoader();
@@ -87,7 +87,7 @@ public class AxisExtender {
 			thread.setContextClassLoader(_classLoader);
 
 			try {
-				_servlet.init(config);
+				_servlet.init(servletConfig);
 			}
 			finally {
 				thread.setContextClassLoader(contextClassLoader);
@@ -247,8 +247,8 @@ public class AxisExtender {
 			properties.put(
 				HttpWhiteboardConstants.HTTP_WHITEBOARD_SERVLET_PATTERN,
 				"/api/axis/*");
-			properties.put("servlet.init.httpMethods", "GET,POST,HEAD");
 			properties.put("servlet.init.axis.servicesPath", "/api/axis/");
+			properties.put("servlet.init.httpMethods", "GET,POST,HEAD");
 
 			Bundle extenderBundle = _bundleContext.getBundle();
 
@@ -262,7 +262,7 @@ public class AxisExtender {
 
 			aggregateClassLoader.addClassLoader(bundleWiring.getClassLoader());
 
-			Servlet servlet = new TCCLServletWrapper(
+			Servlet servlet = new ThreadContextClassLoaderServlet(
 				aggregateClassLoader, new AxisServlet());
 
 			ServiceRegistration<Servlet> axisServletServiceRegistration =
