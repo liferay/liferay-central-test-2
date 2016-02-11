@@ -103,9 +103,7 @@ public class ConfigurationModel implements ExtendedObjectClassDefinition {
 		return null;
 	}
 
-	public ExtendedObjectClassDefinition
-		getExtendedObjectClassDefinition() {
-
+	public ExtendedObjectClassDefinition getExtendedObjectClassDefinition() {
 		return _extendedObjectClassDefinition;
 	}
 
