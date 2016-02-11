@@ -139,7 +139,7 @@ public class PortletInstance {
 
 		if (userIdAndInstanceId == null) {
 			throw new InvalidParameterException(
-				"The userIdAndInstanceId must not be null.");
+				"User ID and instance ID are null");
 		}
 
 		if (userIdAndInstanceId.isEmpty()) {
@@ -151,7 +151,7 @@ public class PortletInstance {
 
 		if (slashCount > 0) {
 			throw new InvalidParameterException(
-				"The userIdAndInstanceId must not contain slashes.");
+				"User ID and instance ID contain slashes");
 		}
 
 		int underlineCount = StringUtil.count(
@@ -159,8 +159,7 @@ public class PortletInstance {
 
 		if (underlineCount > 1) {
 			throw new InvalidParameterException(
-				"The userIdAndInstanceId must only contain one underscore " +
-					"separating the userId from the instanceId.");
+				"User ID and instance ID has more than one underscore");
 		}
 
 		if (underlineCount == 1) {
@@ -170,8 +169,7 @@ public class PortletInstance {
 				userIdAndInstanceId.substring(0, index), -1);
 
 			if (userId == -1) {
-				throw new InvalidParameterException(
-					"The fullInstanceId's userId must be a valid number.");
+				throw new InvalidParameterException("User ID is not a number");
 			}
 
 			String instanceId = null;
