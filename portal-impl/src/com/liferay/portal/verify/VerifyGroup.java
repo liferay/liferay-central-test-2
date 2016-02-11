@@ -151,7 +151,7 @@ public class VerifyGroup extends VerifyProcess {
 						_log.warn(
 							"Updating user screen name " + screenName + " to " +
 								userId + " because it is generating an " +
-									"invalid friendly URL: " + friendlyURL);
+									"invalid friendly URL " + friendlyURL);
 					}
 
 					UserLocalServiceUtil.updateScreenName(
