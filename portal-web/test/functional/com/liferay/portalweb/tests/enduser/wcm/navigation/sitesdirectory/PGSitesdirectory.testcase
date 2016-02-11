@@ -88,6 +88,10 @@
 			<var name="portlet" value="Sites" />
 		</execute>
 
+		<execute macro="Site#searchInputCP">
+			<var name="siteName" value="Child SiteName 2" />
+		</execute>
+
 		<execute macro="Page#add">
 			<var name="page" value="Public Pages" />
 			<var name="pageName" value="Site Page" />
@@ -105,6 +109,10 @@
 
 		<execute macro="ProductMenu#gotoControlPanelSites">
 			<var name="portlet" value="Sites" />
+		</execute>
+
+		<execute macro="Site#searchInputCP">
+			<var name="siteName" value="Child SiteName 3" />
 		</execute>
 
 		<execute macro="Page#add">
