@@ -1,6 +1,7 @@
 Bundle-Name: Liferay Portal Axis Extender
 Bundle-SymbolicName: com.liferay.portal.axis.extender
 Bundle-Version: 1.0.0
+DynamicImport-Package: com.liferay.*
 Import-Package:\
 	!com.ibm.*,\
 	!com.sun.*,\
@@ -11,10 +12,6 @@ Import-Package:\
 	!org.exolab.castor.xml.*,\
 	!org.omg.*,\
 	!sun.awt.image.codec,\
-	com.liferay.portal.kernel.portlet.configuration.icon,\
-	com.liferay.portal.kernel.service.permission,\
-	com.liferay.portal.kernel.portlet.toolbar,\
-	com.liferay.portal.kernel.theme,\
 	*
 Include-Resource:\
 	@lib/util-java.jar!/com/liferay/util/axis/*.class,\
