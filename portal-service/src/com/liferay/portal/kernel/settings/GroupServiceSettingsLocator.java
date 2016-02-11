@@ -27,6 +27,7 @@ public class GroupServiceSettingsLocator implements SettingsLocator {
 	public GroupServiceSettingsLocator(long groupId, String settingsId) {
 		_groupId = groupId;
 		_settingsId = settingsId;
+
 		_configurationPid = settingsId;
 	}
 
