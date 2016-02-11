@@ -909,9 +909,7 @@ public class LayoutImpl extends LayoutBaseImpl {
 			return false;
 		}
 
-		if (GetterUtil.getBoolean(
-				getTypeSettingsProperty(LayoutConstants.CUSTOMIZABLE_LAYOUT))) {
-
+		if (GetterUtil.getBoolean(getTypeSettingsProperty("customizable"))) {
 			return true;
 		}
 
