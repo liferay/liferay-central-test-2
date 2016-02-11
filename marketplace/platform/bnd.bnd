@@ -60,6 +60,8 @@ Liferay-Releng-Dependent-Apps:\
 	com.liferay.portal.cluster:1.0.0,\
 	com.liferay.portal.compound.session.id:1.0.0,\
 	com.liferay.portal.configuration.cluster:1.0.0,\
+	com.liferay.portal.configuration.metatype.definitions.annotations:1.0.0,\
+	com.liferay.portal.configuration.metatype.definitions.equinox:1.0.0,\
 	com.liferay.portal.configuration.persistence.test:1.0.0,\
 	com.liferay.portal.configuration.persistence:1.0.0,\
 	com.liferay.portal.configurator.extender:1.0.0,\
@@ -84,8 +86,6 @@ Liferay-Releng-Dependent-Apps:\
 	com.liferay.portal.lock.test:1.0.0,\
 	com.liferay.portal.log4j.extender:1.0.0,\
 	com.liferay.portal.messaging:1.0.0,\
-	com.liferay.portal.configuration.metatype.definitions.annotations:1.0.0,\
-	com.liferay.portal.configuration.metatype.definitions.equinox:1.0.0,\
 	com.liferay.portal.mobile.device:1.0.0,\
 	com.liferay.portal.module.configuration:1.0.0,\
 	com.liferay.portal.monitoring:1.0.0,\
