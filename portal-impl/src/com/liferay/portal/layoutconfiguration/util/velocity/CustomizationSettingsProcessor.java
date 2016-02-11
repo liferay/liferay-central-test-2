@@ -106,12 +106,10 @@ public class CustomizationSettingsProcessor implements ColumnProcessor {
 		InputTag inputTag = new InputTag();
 
 		inputTag.setDisabled(!_customizationEnabled);
-
-		inputTag.setDynamicAttribute(
-			StringPool.BLANK, "labelOn", "customizable");
 		inputTag.setDynamicAttribute(
 			StringPool.BLANK, "labelOff", "no-customizable");
-
+		inputTag.setDynamicAttribute(
+			StringPool.BLANK, "labelOn", "customizable");
 		inputTag.setLabel(StringPool.BLANK);
 		inputTag.setName(
 			"TypeSettingsProperties--".concat(customizableKey).concat("--"));
