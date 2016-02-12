@@ -22,12 +22,9 @@ import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.TransactionalTestRule;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 
-import java.io.IOException;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -51,27 +48,28 @@ public class SQLInstrTest {
 	public static void setUpClass() throws Exception {
 		_db = DBManagerUtil.getDB();
 
-		_db.runSQL(_CREATE_TABLE_SQL);
+		_db.runSQL(
+			"create table TestInstr (id LONG not null primary key, data " +
+				"VARCHAR(10) null)");
 
-		_db.runSQL(_INSERT_SQL);
+		_db.runSQL("insert into TestInstr values (1, 'EXAMPLE')");
 	}
 
 	@AfterClass
 	public static void tearDownClass() throws Exception {
-		_db.runSQL(_DROP_TABLE);
+		_db.runSQL("drop table TestInstr");
 	}
 
 	@Test
-	public void testInstr() throws IOException, SQLException {
-		String sql = "select INSTR(data,'X') from TestInstr where id = 1";
+	public void testInstr() throws Exception {
+		String sql = _db.buildSQL(
+			"select INSTR(data,'X') from TestInstr where id = 1");
 
-		String sqlBuild = _db.buildSQL(sql);
-
-		String sqlTransform = SQLTransformer.transform(sqlBuild);
+		sql = SQLTransformer.transform(sql);
 
 		try (Connection connection = DataAccess.getConnection();
 			PreparedStatement preparedStatement =
-				connection.prepareStatement(sqlTransform)) {
+				connection.prepareStatement(sql)) {
 
 			ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -84,16 +82,15 @@ public class SQLInstrTest {
 	}
 
 	@Test
-	public void testInstrNotFound() throws IOException, SQLException {
-		String sql = "select INSTR(data,'?') from TestInstr where id = 1";
+	public void testInstrNotFound() throws Exception {
+		String sql = _db.buildSQL(
+			"select INSTR(data,'?') from TestInstr where id = 1");
 
-		String sqlBuild = _db.buildSQL(sql);
-
-		String sqlTransform = SQLTransformer.transform(sqlBuild);
+		sql = SQLTransformer.transform(sql);
 
 		try (Connection connection = DataAccess.getConnection();
 			PreparedStatement preparedStatement =
-				connection.prepareStatement(sqlTransform)) {
+				connection.prepareStatement(sql)) {
 
 			ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -104,15 +101,6 @@ public class SQLInstrTest {
 			Assert.assertEquals(0, location);
 		}
 	}
-
-	private static final String _CREATE_TABLE_SQL =
-		"create table TestInstr (id LONG not null primary key, " +
-			"data VARCHAR(10) null)";
-
-	private static final String _DROP_TABLE = "drop table TestInstr";
-
-	private static final String _INSERT_SQL =
-		"insert into TestInstr values (1, 'EXAMPLE')";
 
 	private static DB _db;
 
