@@ -22,7 +22,11 @@
 		<execute function="Click" locator1="DDMSelectStructure#DDM_STRUCTURE_ELLIPSIS_1" />
 		<execute function="AssertClick" locator1="MenuItem#MANAGE_TEMPLATES" value1="Manage Templates" />
 
-		<execute function="AssertElementPresent" locator1="Portlet#HEADER" value1="Templates for Structure: ${ddlDataDefinitionName}" />
+		<execute function="AssertElementPresent#assertVisible" locator1="Portlet#HEADER" value1="Templates for Structure: ${ddlDataDefinitionName}" />
+
+		<var name="key_assetTitle" value="Templates" />
+
+		<execute function="AssertElementPresent#assertVisible" locator1="NavBar#ASSET_TITLE" value1="Templates" />
 
 		<execute function="Click" locator1="Button#PLUS" />
 
@@ -86,7 +90,11 @@
 		<execute function="Click" locator1="DDMSelectStructure#DDM_STRUCTURE_ELLIPSIS_1" />
 		<execute function="AssertClick" locator1="MenuItem#MANAGE_TEMPLATES" value1="Manage Templates" />
 
-		<execute function="AssertElementPresent" locator1="Portlet#HEADER" value1="Templates for Structure: Data Definition" />
+		<execute function="AssertElementPresent#assertVisible" locator1="Portlet#HEADER" value1="Templates for Structure: Data Definition" />
+
+		<var name="key_assetTitle" value="Templates" />
+
+		<execute function="AssertElementPresent#assertVisible" locator1="NavBar#ASSET_TITLE" value1="Templates" />
 
 		<execute function="Click" locator1="Button#PLUS" />
 
