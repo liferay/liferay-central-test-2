@@ -31,9 +31,9 @@ import org.osgi.service.component.annotations.Modified;
 @Component(
 	configurationPid = "com.liferay.dynamic.data.lists.form.web.configuration.DDLFormWebConfiguration",
 	configurationPolicy = ConfigurationPolicy.OPTIONAL, immediate = true,
-	service = DDLFormWebConfigurationManager.class
+	service = DDLFormWebConfigurationActivator.class
 )
-public class DDLFormWebConfigurationManager {
+public class DDLFormWebConfigurationActivator {
 
 	public DDLFormWebConfiguration getDDLFormWebConfiguration() {
 		return _ddlFormWebConfiguration;
