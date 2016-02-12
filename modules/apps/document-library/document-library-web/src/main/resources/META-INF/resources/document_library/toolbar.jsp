@@ -147,7 +147,7 @@ boolean search = mvcRenderCommandName.equals("/document_library/search");
 
 <aui:script>
 	function <portlet:namespace />deleteEntries() {
-		if (<%= TrashUtil.isTrashEnabled(scopeGroupId) %> || confirm(' <%= UnicodeLanguageUtil.get(request, "are-you-sure-you-want-to-delete-the-selected-entries") %>')) {
+		if (<%= TrashUtil.isTrashEnabled(scopeGroupId) %> || confirm('<%= UnicodeLanguageUtil.get(request, "are-you-sure-you-want-to-delete-the-selected-entries") %>')) {
 			Liferay.fire(
 				'<%= renderResponse.getNamespace() %>editEntry',
 				{
