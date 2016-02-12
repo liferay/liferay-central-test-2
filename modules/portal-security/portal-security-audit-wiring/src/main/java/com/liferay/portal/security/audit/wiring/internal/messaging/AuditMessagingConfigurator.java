@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.messaging.DestinationFactory;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.proxy.ProxyMessageListener;
 import com.liferay.portal.kernel.util.HashMapDictionary;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.security.audit.configuration.AuditConfiguration;
 
 import java.util.Dictionary;
