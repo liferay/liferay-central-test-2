@@ -47,10 +47,10 @@ public class SchedulerHelperPropertiesVerifyProcess extends VerifyProcess {
 			return;
 		}
 
+		Dictionary<String, Object> properties = new HashMapDictionary<>();
+
 		boolean auditMessageScheduleJob = GetterUtil.getBoolean(
 			audiMessageScheduleJobString);
-
-		Dictionary<String, Object> properties = new HashMapDictionary<>();
 
 		properties.put(AUDIT_SCHEDULER_JOB_ENABLED, auditMessageScheduleJob);
 
