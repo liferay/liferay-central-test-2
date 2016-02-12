@@ -47,15 +47,15 @@ public class SchedulerHelperPropertiesVerifyProcess extends VerifyProcess {
 			return;
 		}
 
+		Configuration configuration = configurationAdmin.getConfiguration(
+			SchedulerEngineHelperConfiguration.class.getName());
+
 		Dictionary<String, Object> properties = new HashMapDictionary<>();
 
 		boolean auditMessageScheduleJob = GetterUtil.getBoolean(
 			audiMessageScheduleJobString);
 
 		properties.put(AUDIT_SCHEDULER_JOB_ENABLED, auditMessageScheduleJob);
-
-		Configuration configuration = configurationAdmin.getConfiguration(
-			SchedulerEngineHelperConfiguration.class.getName());
 
 		configuration.update(properties);
 	}
