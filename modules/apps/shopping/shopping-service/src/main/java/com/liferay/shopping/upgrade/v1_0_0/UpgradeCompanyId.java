@@ -28,34 +28,26 @@ public class UpgradeCompanyId
 	protected void doUpgrade() throws Exception {
 		super.doUpgrade();
 
-		//Upgrade ShoppingOrderItem
-
-		if (_log.isInfoEnabled()) {
-			_log.info("Adding column companyId to table ShoppingOrderItem");
-		}
-
 		runSQL("alter table ShoppingOrderItem add companyId LONG");
 
-		StringBundler sb = new StringBundler(7);
+		StringBundler sb = new StringBundler(6);
 
-		sb.append("update ShoppingOrderItem set companyId = ");
-		sb.append("(select  max(ShoppingItem.companyId) ");
-		sb.append("from ShoppingItem ");
-		sb.append("where SUBSTR(ShoppingOrderItem.itemId, 0, INSTR('|', ");
+		sb.append("update ShoppingOrderItem set companyId = (select ");
+		sb.append("max(ShoppingItem.companyId) from ShoppingItem where ");
+		sb.append("SUBSTR(ShoppingOrderItem.itemId, 0, INSTR('|', ");
 		sb.append("ShoppingOrderItem.itemId)) = ");
-		sb.append("CAST_TEXT(ShoppingItem.itemId))");
-		sb.append("where ShoppingOrderItem.itemId like '%|%' ");
+		sb.append("CAST_TEXT(ShoppingItem.itemId)) where ");
+		sb.append("ShoppingOrderItem.itemId like '%|%' ");
 
 		runSQL(sb.toString());
 
-		sb = new StringBundler(6);
+		sb = new StringBundler(5);
 
-		sb.append("update ShoppingOrderItem set companyId = ");
-		sb.append("(select max(ShoppingItem.companyId) ");
-		sb.append("from ShoppingItem ");
-		sb.append("where ShoppingOrderItem.itemId = ");
-		sb.append("CAST_TEXT(ShoppingItem.itemId)) ");
-		sb.append("where ShoppingOrderItem.itemId not like '%|%' ");
+		sb.append("update ShoppingOrderItem set companyId = (select ");
+		sb.append("max(ShoppingItem.companyId) from ShoppingItem where ");
+		sb.append("ShoppingOrderItem.itemId = ");
+		sb.append("CAST_TEXT(ShoppingItem.itemId)) where ");
+		sb.append("ShoppingOrderItem.itemId not like '%|%' ");
 
 		runSQL(sb.toString());
 	}
