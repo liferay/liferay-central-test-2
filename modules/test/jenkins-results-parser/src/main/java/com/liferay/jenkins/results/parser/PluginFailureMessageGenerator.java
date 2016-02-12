@@ -53,8 +53,8 @@ public class PluginFailureMessageGenerator extends BaseFailureMessageGenerator {
 		sb.append("/git-commit-plugins\">git-commit-plugins</a>. ");
 
 		sb.append("Click <a href=\"https://in.liferay.com/web/");
-		sb.append("global.engineering/blog/-/blogs/new-tests-for-the-");
-		sb.append("pull-request-tester-\">here</a> for more details.</p>");
+		sb.append("global.engineering/blog/-/blogs/new-tests-for-the-pull-");
+		sb.append("request-tester-\">here</a> for more details.</p>");
 
 		int end = consoleOutput.indexOf("merge-test-results:");
 
