@@ -65,7 +65,7 @@ for (long defaultTeamId : defaultTeamIds) {
 <aui:input name="teamsTeamIds" type="hidden" value="<%= ListUtil.toString(defaultTeams, TeamImpl.TEAM_ID_ACCESSOR) %>" />
 
 <p class="text-muted">
-	<liferay-ui:message key="default-roles-and-teams-for-new-members" />
+	<liferay-ui:message key="select-the-default-roles-and-teams-for-new-members" />
 </p>
 
 <h4 class="text-default"><liferay-ui:message key="site-roles" /> <liferay-ui:icon-help message="default-site-roles-assignment-help" /></h4>
