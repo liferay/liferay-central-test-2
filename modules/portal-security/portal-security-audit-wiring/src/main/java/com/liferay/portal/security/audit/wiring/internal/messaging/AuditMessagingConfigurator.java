@@ -52,12 +52,6 @@ public class AuditMessagingConfigurator {
 
 	@Activate
 	protected void activate(ComponentContext componentContext) {
-		Dictionary<String, Object> properties =
-			componentContext.getProperties();
-
-		AuditConfiguration auditConfiguration = Configurable.createConfigurable(
-			AuditConfiguration.class, properties);
-
 		_bundleContext = componentContext.getBundleContext();
 
 		DestinationConfiguration destinationConfiguration =
@@ -67,6 +61,12 @@ public class AuditMessagingConfigurator {
 
 		Destination destination = _destinationFactory.createDestination(
 			destinationConfiguration);
+
+		Dictionary<String, Object> properties =
+			componentContext.getProperties();
+
+		AuditConfiguration auditConfiguration = Configurable.createConfigurable(
+			AuditConfiguration.class, properties);
 
 		destinationConfiguration.setMaximumQueueSize(
 			auditConfiguration.auditMessageMaxQueueSize());
@@ -79,13 +79,10 @@ public class AuditMessagingConfigurator {
 					Runnable runnable, ThreadPoolExecutor threadPoolExecutor) {
 
 					if (_log.isWarnEnabled()) {
-						StringBundler sb = new StringBundler(4);
-
-						sb.append("The audit router's task queue is at its ");
-						sb.append("maximum capacity. The current thread will ");
-						sb.append("handle the request.");
-
-						_log.warn(sb.toString());
+						_log.warn(
+							"The current thread will handle the request " +
+								"because the audit router's task queue is at " +
+									"its maximum capacity");
 					}
 
 					super.rejectedExecution(runnable, threadPoolExecutor);
