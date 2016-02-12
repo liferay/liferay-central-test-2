@@ -41,11 +41,9 @@ public class PluginGitIDFailureMessageGenerator
 		sb.append(project.getProperty("portal.repository"));
 		sb.append("/blob/");
 		sb.append(project.getProperty("github.pull.request.head.branch"));
-		sb.append("/git-commit-plugins\">");
-		sb.append("git-commit-plugins");
-		sb.append("</a></strong>");
-		sb.append(" to an existing git id from ");
-		sb.append("<strong><a href=\"https://github.com/liferay/");
+		sb.append("/git-commit-plugins\">git-commit-plugins</a></strong> to ");
+		sb.append(" an existing git id from <strong>");
+		sb.append("<a href=\"https://github.com/liferay/");
 		sb.append(project.getProperty("plugins.repository"));
 		sb.append("/commits/");
 		sb.append(project.getProperty("plugins.branch.name"));
@@ -53,8 +51,7 @@ public class PluginGitIDFailureMessageGenerator
 		sb.append(project.getProperty("plugins.repository"));
 		sb.append("/");
 		sb.append(project.getProperty("plugins.branch.name"));
-		sb.append("</a>");
-		sb.append(".</strong></p>");
+		sb.append("</a>.</strong></p>");
 
 		int end = consoleOutput.indexOf("merge-test-results:");
 
