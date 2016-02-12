@@ -71,7 +71,7 @@ List<AssetRendererFactory<?>> classTypesAssetRendererFactories = new ArrayList<>
 		%>
 
 		<div id="<portlet:namespace />scopesBoxes">
-			<c:if test="<%= selectedGroups.size() <= 0 %>">
+			<c:if test="<%= selectedGroups.isEmpty() %>">
 				<p class="text-muted">
 					<%= StringUtil.toLowerCase(LanguageUtil.get(request, "none")) %>
 				</p>
