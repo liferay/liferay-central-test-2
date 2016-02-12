@@ -86,7 +86,7 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 			}
 		}
 		else {
-			if (permissionChecker.isCompanyAdmin()) {
+			if (permissionChecker.isOmniadmin()) {
 				return false;
 			}
 		}
