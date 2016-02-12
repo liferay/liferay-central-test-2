@@ -22,12 +22,9 @@ import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.TransactionalTestRule;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 
-import java.io.IOException;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -51,27 +48,28 @@ public class SQLSubstrTest {
 	public static void setUpClass() throws Exception {
 		_db = DBManagerUtil.getDB();
 
-		_db.runSQL(_CREATE_TABLE_SQL);
+		_db.runSQL(
+			"create table TestSubStr (id LONG not null primary key, data " +
+				"VARCHAR(10) null)");
 
-		_db.runSQL(_INSERT_SQL);
+		_db.runSQL("insert into TestSubStr values (1, 'EXAMPLE'" + ")");
 	}
 
 	@AfterClass
 	public static void tearDownClass() throws Exception {
-		_db.runSQL(_DROP_TABLE);
+		_db.runSQL("drop table TestSubStr");
 	}
 
 	@Test
-	public void testSubstr() throws IOException, SQLException {
-		String sql = "select substr(data,3,2) from TestSubStr where id = 1";
+	public void testSubstr() throws Exception {
+		String sql = _db.buildSQL(
+			"select substr(data,3,2) from TestSubStr where id = 1");
 
-		String sqlBuild = _db.buildSQL(sql);
-
-		String sqlTransform = SQLTransformer.transform(sqlBuild);
+		sql = SQLTransformer.transform(sql);
 
 		try (Connection connection = DataAccess.getConnection();
 			PreparedStatement preparedStatement =
-				connection.prepareStatement(sqlTransform)) {
+				connection.prepareStatement(sql)) {
 
 			ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -82,15 +80,6 @@ public class SQLSubstrTest {
 			Assert.assertEquals(substring, "AM");
 		}
 	}
-
-	private static final String _CREATE_TABLE_SQL =
-		"create table TestSubStr (id LONG not null primary key, " +
-			"data VARCHAR(10) null)";
-
-	private static final String _DROP_TABLE = "drop table TestSubStr";
-
-	private static final String _INSERT_SQL =
-		"insert into TestSubStr values (1, 'EXAMPLE'" + ")";
 
 	private static DB _db;
 
