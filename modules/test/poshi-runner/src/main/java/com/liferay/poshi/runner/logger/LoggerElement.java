@@ -145,9 +145,8 @@ public class LoggerElement {
 		for (LoggerElement loggerElement : loggerElements) {
 			String childLoggerElementClassName = loggerElement.getClassName();
 
-			List<String> childLoggerElementClassNames =
-				Arrays.asList(
-					StringUtil.split(childLoggerElementClassName, " "));
+			List<String> childLoggerElementClassNames = Arrays.asList(
+				StringUtil.split(childLoggerElementClassName, " "));
 
 			if (childLoggerElementClassNames.contains(className)) {
 				return loggerElement;
