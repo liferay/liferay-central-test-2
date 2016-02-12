@@ -5,6 +5,7 @@ Import-Package:\
 	!javax.accessibility.*,\
 	!javax.swing.*,\
 	com.liferay.portal.kernel.servlet.filters.invoker,\
+	com.liferay.portlet,\
 	org.apache.commons.chain,\
 	org.apache.commons.chain.generic,\
 	org.apache.commons.chain.impl,\
