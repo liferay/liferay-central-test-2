@@ -93,8 +93,8 @@ public final class SummaryLoggerHandler {
 	public static LoggerElement getSummarySnapshotLoggerElement() {
 		LoggerElement loggerElement = new LoggerElement();
 
-		loggerElement.setName("div");
 		loggerElement.setClassName("summary-log");
+		loggerElement.setName("div");
 
 		LoggerElement causeLoggerElement =
 			_summaryLogLoggerElement.loggerElement("div", "cause");
