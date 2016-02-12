@@ -313,7 +313,6 @@
 		<var name="key_threadSubject" value="${threadSubject}" />
 
 		<execute function="AssertTextEquals" locator1="MessageBoardsSearch#SEARCH_RESULTS_ENTRY_TITLE" value1="${threadSubject}" />
-		<execute function="AssertTextEquals" locator1="MessageBoardsSearch#SEARCH_RESULTS_ENTRY_DESCRIPTION" value1="${threadBody}" />
 
 		<if>
 			<isset var="mbThreadAttachment" />
