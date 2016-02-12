@@ -59,7 +59,7 @@ public class LayoutSetMobileDeviceRulesFormNavigatorEntry
 		ResourceBundle resourceBundle = ResourceBundleUtil.getBundle(
 			"content.Language", locale, getClass());
 
-		return LanguageUtil.get(locale, getKey());
+		return LanguageUtil.get(resourceBundle, getKey());
 	}
 
 	@Override
