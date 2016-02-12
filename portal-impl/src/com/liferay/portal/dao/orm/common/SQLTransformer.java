@@ -300,8 +300,8 @@ public class SQLTransformer {
 		newSQL = _replaceCastLong(newSQL);
 		newSQL = _replaceCastText(newSQL);
 		newSQL = _replaceCrossJoin(newSQL);
-		newSQL = _replaceIntegerDivision(newSQL);
 		newSQL = _replaceInStr(newSQL);
+		newSQL = _replaceIntegerDivision(newSQL);
 		newSQL = _replaceSubstr(newSQL);
 
 		if (_vendorDB2) {
