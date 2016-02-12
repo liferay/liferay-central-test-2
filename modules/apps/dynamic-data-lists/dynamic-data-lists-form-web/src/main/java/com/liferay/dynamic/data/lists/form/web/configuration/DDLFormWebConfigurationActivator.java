@@ -12,11 +12,9 @@
  * details.
  */
 
-package com.liferay.dynamic.data.lists.form.web.util;
+package com.liferay.dynamic.data.lists.form.web.configuration;
 
 import aQute.bnd.annotation.metatype.Configurable;
-
-import com.liferay.dynamic.data.lists.form.web.configuration.DDLFormWebConfiguration;
 
 import java.util.Map;
 

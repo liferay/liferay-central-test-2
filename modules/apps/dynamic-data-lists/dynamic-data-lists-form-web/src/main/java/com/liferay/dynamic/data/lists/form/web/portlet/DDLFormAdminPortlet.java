@@ -15,9 +15,9 @@
 package com.liferay.dynamic.data.lists.form.web.portlet;
 
 import com.liferay.dynamic.data.lists.form.web.configuration.DDLFormWebConfiguration;
+import com.liferay.dynamic.data.lists.form.web.configuration.DDLFormWebConfigurationActivator;
 import com.liferay.dynamic.data.lists.form.web.constants.DDLFormPortletKeys;
 import com.liferay.dynamic.data.lists.form.web.util.DDLFormAdminPortletUtil;
-import com.liferay.dynamic.data.lists.form.web.util.DDLFormWebConfigurationActivator;
 import com.liferay.dynamic.data.lists.model.DDLRecordSet;
 import com.liferay.dynamic.data.lists.model.DDLRecordSetSettings;
 import com.liferay.dynamic.data.lists.service.DDLRecordSetLocalService;
