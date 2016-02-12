@@ -1,9 +1,3 @@
-configurations {
-	compile {
-		transitive = false
-	}
-}
-
 dependencies {
 	provided project(":apps:bookmarks:bookmarks-test")
 	provided project(":apps:journal:journal-test")
