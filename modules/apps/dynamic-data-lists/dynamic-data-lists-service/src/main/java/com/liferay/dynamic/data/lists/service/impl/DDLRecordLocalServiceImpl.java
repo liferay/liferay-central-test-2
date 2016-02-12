@@ -180,9 +180,6 @@ public class DDLRecordLocalServiceImpl extends DDLRecordLocalServiceBaseImpl {
 		type = SystemEventConstants.TYPE_DELETE
 	)
 	public DDLRecord deleteRecord(DDLRecord record) throws PortalException {
-		DDLRecordSet recordSet = record.getRecordSet();
-
-		String workflowAssetClassName = getWorkflowAssetClassName(recordSet);
 
 		// Record
 
@@ -202,20 +199,18 @@ public class DDLRecordLocalServiceImpl extends DDLRecordLocalServiceBaseImpl {
 
 			// Workflow
 
-			workflowInstanceLinkLocalService.deleteWorkflowInstanceLinks(
+			deleteWorkflowInstanceLink(
 				record.getCompanyId(), record.getGroupId(),
-				workflowAssetClassName, recordVersion.getPrimaryKey());
+				recordVersion.getPrimaryKey());
 		}
 
 		// Asset
 
-		assetEntryLocalService.deleteEntry(
-			workflowAssetClassName, record.getRecordId());
+		deleteAssetEntry(record.getRecordId());
 
 		// Ratings
 
-		ratingsStatsLocalService.deleteStats(
-			workflowAssetClassName, record.getRecordId());
+		deleteRatingsStats(record.getRecordId());
 
 		return record;
 	}
@@ -760,6 +755,32 @@ public class DDLRecordLocalServiceImpl extends DDLRecordLocalServiceBaseImpl {
 		ddlRecordVersionPersistence.update(recordVersion);
 
 		return recordVersion;
+	}
+
+	protected void deleteAssetEntry(long recordId) throws PortalException {
+		assetEntryLocalService.deleteEntry(
+			DDLFormRecord.class.getName(), recordId);
+
+		assetEntryLocalService.deleteEntry(DDLRecord.class.getName(), recordId);
+	}
+
+	protected void deleteRatingsStats(long recordId) throws PortalException {
+		ratingsStatsLocalService.deleteStats(
+			DDLFormRecord.class.getName(), recordId);
+
+		ratingsStatsLocalService.deleteStats(
+			DDLRecord.class.getName(), recordId);
+	}
+
+	protected void deleteWorkflowInstanceLink(
+			long companyId, long groupId, long recordVersionId)
+		throws PortalException {
+
+		workflowInstanceLinkLocalService.deleteWorkflowInstanceLinks(
+			companyId, groupId, DDLFormRecord.class.getName(), recordVersionId);
+
+		workflowInstanceLinkLocalService.deleteWorkflowInstanceLinks(
+			companyId, groupId, DDLRecord.class.getName(), recordVersionId);
 	}
 
 	protected String getNextVersion(
