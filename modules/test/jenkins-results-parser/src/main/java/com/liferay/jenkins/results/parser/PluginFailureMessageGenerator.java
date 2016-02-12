@@ -54,8 +54,7 @@ public class PluginFailureMessageGenerator extends BaseFailureMessageGenerator {
 
 		sb.append("Click <a href=\"https://in.liferay.com/web/");
 		sb.append("global.engineering/blog/-/blogs/new-tests-for-the-");
-		sb.append("pull-request-tester-\">here</a> for more details");
-		sb.append(".</p>");
+		sb.append("pull-request-tester-\">here</a> for more details.</p>");
 
 		int end = consoleOutput.indexOf("merge-test-results:");
 
