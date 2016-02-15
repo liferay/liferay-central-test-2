@@ -320,7 +320,7 @@
 				DLFolder
 			WHERE
 				(DLFolder.groupId = ?) AND
-				([$DL_FOLDER_HIDDEN$]) AND
+				([$HIDDEN$]) AND
 				([$STATUS$]) AND
 				[$FOLDER_PARENT_FOLDER_ID$]
 		]]>
@@ -372,7 +372,7 @@
 				DLFolder
 			WHERE
 				(DLFolder.groupId = ?) AND
-				([$DL_FOLDER_HIDDEN$]) AND
+				([$HIDDEN$]) AND
 				([$STATUS$]) AND
 				[$FOLDER_PARENT_FOLDER_ID$]
 		]]>

@@ -818,23 +818,21 @@ public class DLFolderFinderImpl
 		if (showHiddenMountFolders) {
 			if (includeMountFolders) {
 				sql = StringUtil.replace(
-					sql, "([$DL_FOLDER_HIDDEN$]) AND", StringPool.BLANK);
+					sql, "([$HIDDEN$]) AND", StringPool.BLANK);
 			}
 			else {
 				sql = StringUtil.replace(
-					sql, "([$DL_FOLDER_HIDDEN$]) AND",
-					"(DLFolder.mountPoint = ?) AND");
+					sql, "([$HIDDEN$]) AND", "(DLFolder.mountPoint = ?) AND");
 			}
 		}
 		else {
 			if (includeMountFolders) {
 				sql = StringUtil.replace(
-					sql, "([$DL_FOLDER_HIDDEN$]) AND",
-					"(DLFolder.hidden_ = ?) AND");
+					sql, "([$HIDDEN$]) AND", "(DLFolder.hidden_ = ?) AND");
 			}
 			else {
 				sql = StringUtil.replace(
-					sql, "([$DL_FOLDER_HIDDEN$]) AND",
+					sql, "([$HIDDEN$]) AND",
 					"(DLFolder.hidden_ = ?) AND (DLFolder.mountPoint = ?) " +
 						"AND");
 			}
