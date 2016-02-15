@@ -53,6 +53,8 @@ public class BNDSourceProcessor extends BaseSourceProcessor {
 					"modules: " + fileName);
 		}
 
+		content = StringUtil.replace(content, " \\\n", "\\\n");
+
 		Matcher matcher = _incorrectTabPattern.matcher(content);
 
 		while (matcher.find()) {
