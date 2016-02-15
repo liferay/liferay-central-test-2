@@ -39,16 +39,16 @@ public class AxisExtenderTest {
 	public void testGreeter() throws Exception {
 		URL url = new URL(
 			_url,
-			"/o/com.liferay.portal.remote.axis.extender.test/api/axis/" +
-				"CalcService?wsdl");
+			"/o/com.liferay.portal.remote.axis.extender.test/api/axis" +
+				"/CalcService?wsdl");
 
-		CalcServiceSoapService calcServiceSoapServiceLocator =
+		CalcServiceSoapService calcServiceSoapService =
 			new CalcServiceSoapServiceLocator();
 
-		CalcServiceSoap calcServiceSoapPort =
-			calcServiceSoapServiceLocator.getCalcServiceSoapPort(url);
+		CalcServiceSoap calcServiceSoap =
+			calcServiceSoapService.getCalcServiceSoapPort(url);
 
-		Assert.assertEquals(5, calcServiceSoapPort.sum(2, 3));
+		Assert.assertEquals(5, calcServiceSoap.sum(2, 3));
 	}
 
 	@ArquillianResource
