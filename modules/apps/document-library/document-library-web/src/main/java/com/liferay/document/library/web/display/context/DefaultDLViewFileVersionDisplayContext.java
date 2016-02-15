@@ -227,6 +227,8 @@ public class DefaultDLViewFileVersionDisplayContext
 
 		try {
 			_fileVersion = fileVersion;
+			_dlMimeTypeDisplayContext = dlMimeTypeDisplayContext;
+			_resourceBundleLoader = resourceBundleLoader;
 
 			DLRequestHelper dlRequestHelper = new DLRequestHelper(request);
 
@@ -246,10 +248,6 @@ public class DefaultDLViewFileVersionDisplayContext
 			else {
 				_uiItemsBuilder = new UIItemsBuilder(request, fileShortcut);
 			}
-
-			_dlMimeTypeDisplayContext = dlMimeTypeDisplayContext;
-
-			_resourceBundleLoader = resourceBundleLoader;
 		}
 		catch (PortalException pe) {
 			throw new SystemException(
