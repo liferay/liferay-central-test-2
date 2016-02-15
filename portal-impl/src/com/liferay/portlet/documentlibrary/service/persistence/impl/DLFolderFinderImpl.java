@@ -307,90 +307,6 @@ public class DLFolderFinderImpl
 		}
 	}
 
-	protected List<Object> doFindFE_FS_ByG_F(
-		long groupId, long folderId, QueryDefinition<?> queryDefinition,
-		boolean inlineSQLHelper) {
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringBundler sb = new StringBundler(5);
-
-			sb.append("SELECT * FROM (");
-
-			String sql = getFileEntriesSQL(
-				FIND_FE_BY_G_F, groupId, null, queryDefinition,
-				inlineSQLHelper);
-
-			sb.append(sql);
-			sb.append(" UNION ALL ");
-
-			sql = getFileShortcutsSQL(
-				FIND_FS_BY_G_F_A, groupId, null, queryDefinition,
-				inlineSQLHelper);
-
-			sb.append(sql);
-			sb.append(") TEMP_TABLE ORDER BY modelFolder DESC, title ASC");
-
-			sql = sb.toString();
-
-			sql = updateSQL(sql, folderId, false, false);
-
-			SQLQuery q = session.createSynchronizedSQLQuery(sql);
-
-			q.addScalar("modelFolderId", Type.LONG);
-			q.addScalar("name", Type.STRING);
-			q.addScalar("title", Type.STRING);
-			q.addScalar("fileShortcutId", Type.LONG);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-			qPos.add(queryDefinition.getStatus());
-			qPos.add(folderId);
-			qPos.add(groupId);
-			qPos.add(true);
-			qPos.add(queryDefinition.getStatus());
-			qPos.add(folderId);
-
-			List<Object> models = new ArrayList<>();
-
-			Iterator<Object[]> itr = (Iterator<Object[]>)QueryUtil.iterate(
-				q, getDialect(), queryDefinition.getStart(),
-				queryDefinition.getEnd());
-
-			while (itr.hasNext()) {
-				Object[] array = itr.next();
-
-				long folderId2 = (Long)array[0];
-				String name = (String)array[1];
-				//String title = (String)array[2];
-				long fileShortcutId = (Long)array[3];
-
-				Object obj = null;
-
-				if (fileShortcutId > 0) {
-					obj = DLFileShortcutUtil.findByPrimaryKey(fileShortcutId);
-				}
-				else {
-					obj = DLFileEntryUtil.findByG_F_N(groupId, folderId2, name);
-				}
-
-				models.add(obj);
-			}
-
-			return models;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
 	protected int doCountFE_ByG_F(
 		long groupId, long folderId, QueryDefinition<?> queryDefinition,
 		boolean inlineSQLHelper) {
@@ -647,6 +563,90 @@ public class DLFolderFinderImpl
 		}
 	}
 
+	protected List<Object> doFindFE_FS_ByG_F(
+		long groupId, long folderId, QueryDefinition<?> queryDefinition,
+		boolean inlineSQLHelper) {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler sb = new StringBundler(5);
+
+			sb.append("SELECT * FROM (");
+
+			String sql = getFileEntriesSQL(
+				FIND_FE_BY_G_F, groupId, null, queryDefinition,
+				inlineSQLHelper);
+
+			sb.append(sql);
+			sb.append(" UNION ALL ");
+
+			sql = getFileShortcutsSQL(
+				FIND_FS_BY_G_F_A, groupId, null, queryDefinition,
+				inlineSQLHelper);
+
+			sb.append(sql);
+			sb.append(") TEMP_TABLE ORDER BY modelFolder DESC, title ASC");
+
+			sql = sb.toString();
+
+			sql = updateSQL(sql, folderId, false, false);
+
+			SQLQuery q = session.createSynchronizedSQLQuery(sql);
+
+			q.addScalar("modelFolderId", Type.LONG);
+			q.addScalar("name", Type.STRING);
+			q.addScalar("title", Type.STRING);
+			q.addScalar("fileShortcutId", Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+			qPos.add(queryDefinition.getStatus());
+			qPos.add(folderId);
+			qPos.add(groupId);
+			qPos.add(true);
+			qPos.add(queryDefinition.getStatus());
+			qPos.add(folderId);
+
+			List<Object> models = new ArrayList<>();
+
+			Iterator<Object[]> itr = (Iterator<Object[]>)QueryUtil.iterate(
+				q, getDialect(), queryDefinition.getStart(),
+				queryDefinition.getEnd());
+
+			while (itr.hasNext()) {
+				Object[] array = itr.next();
+
+				long folderId2 = (Long)array[0];
+				String name = (String)array[1];
+				//String title = (String)array[2];
+				long fileShortcutId = (Long)array[3];
+
+				Object obj = null;
+
+				if (fileShortcutId > 0) {
+					obj = DLFileShortcutUtil.findByPrimaryKey(fileShortcutId);
+				}
+				else {
+					obj = DLFileEntryUtil.findByG_F_N(groupId, folderId2, name);
+				}
+
+				models.add(obj);
+			}
+
+			return models;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	protected String getFileEntriesSQL(
 		String id, long groupId, String[] mimeTypes,
 		QueryDefinition<?> queryDefinition, boolean inlineSQLHelper) {
@@ -835,8 +835,8 @@ public class DLFolderFinderImpl
 			else {
 				sql = StringUtil.replace(
 					sql, "([$DL_FOLDER_HIDDEN$]) AND",
-					"(DLFolder.hidden_ = ?) AND " +
-						"(DLFolder.mountPoint = ?) AND");
+					"(DLFolder.hidden_ = ?) AND (DLFolder.mountPoint = ?) " +
+						"AND");
 			}
 		}
 
