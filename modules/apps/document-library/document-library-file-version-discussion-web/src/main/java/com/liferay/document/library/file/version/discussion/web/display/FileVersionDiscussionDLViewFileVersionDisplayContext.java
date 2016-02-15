@@ -63,9 +63,9 @@ public class FileVersionDiscussionDLViewFileVersionDisplayContext
 			_resourceBundleLoader.loadResourceBundle(
 				LanguageUtil.getLanguageId(locale));
 
-		String version = fileVersion.getVersion();
-
 		String label = "comments-for-version-x";
+
+		String version = fileVersion.getVersion();
 
 		if (version.equals(DLFileEntryConstants.PRIVATE_WORKING_COPY_VERSION)) {
 			label = "comments-for-draft";
