@@ -165,7 +165,7 @@
 		${printURL.setParameter("viewMode", "print")}
 		${printURL.setParameter("type", entry.getAssetRendererFactory().getType())}
 
-		<#if (assetRenderer.getUrlTitle()??) && validator.isNotNull(assetRenderer.getUrlTitle())>
+		<#if assetRenderer.getUrlTitle()?? && validator.isNotNull(assetRenderer.getUrlTitle())>
 			<#if (assetRenderer.getGroupId() != themeDisplay.getScopeGroupId())>
 				${printURL.setParameter("groupId", assetRenderer.getGroupId()?string)}
 			</#if>
