@@ -7,7 +7,7 @@ Export-Package:\
 	org.quartz,\
 	\
 	org.quartz.impl.triggers
-Import-Package: \
+Import-Package:\
 	!com.mchange.v2.c3p0.*,\
 	!javax.ejb.*,\
 	!javax.jms.*,\
