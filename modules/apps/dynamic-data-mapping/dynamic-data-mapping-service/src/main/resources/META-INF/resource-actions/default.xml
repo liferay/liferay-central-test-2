@@ -27,7 +27,7 @@
 		<portlet-ref>
 			<portlet-name>com_liferay_dynamic_data_mapping_data_provider_web_portlet_DDMDataProviderPortlet</portlet-name>
 		</portlet-ref>
-		<weight>1</weight>
+		<weight>2</weight>
 		<permissions>
 			<supports>
 				<action-key>DELETE</action-key>
@@ -56,7 +56,7 @@
 		<portlet-ref>
 			<portlet-name>com_liferay_dynamic_data_mapping_web_portlet_DDMPortlet</portlet-name>
 		</portlet-ref>
-		<weight>2</weight>
+		<weight>3</weight>
 		<permissions>
 			<supports>
 				<action-key>DELETE</action-key>
@@ -80,7 +80,7 @@
 		<portlet-ref>
 			<portlet-name>com_liferay_dynamic_data_mapping_web_portlet_DDMPortlet</portlet-name>
 		</portlet-ref>
-		<weight>3</weight>
+		<weight>4</weight>
 		<permissions>
 			<supports>
 				<action-key>DELETE</action-key>
