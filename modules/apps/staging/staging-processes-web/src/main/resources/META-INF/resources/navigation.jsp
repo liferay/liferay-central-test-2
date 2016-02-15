@@ -67,12 +67,12 @@ PortletURL portletURL = renderResponse.createRenderURL();
 <c:choose>
 	<c:when test='<%= tabs1.equals("processes") %>'>
 		<liferay-util:include page="/processes_list/view.jsp" servletContext="<%= application %>">
+			<liferay-util:param name="tabs1" value="<%= tabs1 %>" />
 			<liferay-util:param name="displayStyle" value="<%= displayStyle %>" />
 			<liferay-util:param name="navigation" value="<%= navigation %>" />
 			<liferay-util:param name="orderByCol" value="<%= orderByCol %>" />
 			<liferay-util:param name="orderByType" value="<%= orderByType %>" />
 			<liferay-util:param name="searchContainerId" value="<%= searchContainerId %>" />
-			<liferay-util:param name="tabs1" value="<%= tabs1 %>" />
 		</liferay-util:include>
 
 		<liferay-util:include page="/add_button.jsp" servletContext="<%= application %>" />
@@ -86,12 +86,12 @@ PortletURL portletURL = renderResponse.createRenderURL();
 	<liferay-portlet:resourceURL copyCurrentRenderParameters="<%= false %>" id="publishLayouts" var="publishProcessesURL">
 		<portlet:param name="<%= SearchContainer.DEFAULT_CUR_PARAM %>" value="<%= ParamUtil.getString(request, SearchContainer.DEFAULT_CUR_PARAM) %>" />
 		<portlet:param name="<%= SearchContainer.DEFAULT_DELTA_PARAM %>" value="<%= ParamUtil.getString(request, SearchContainer.DEFAULT_DELTA_PARAM) %>" />
+		<portlet:param name="tabs1" value="<%= tabs1 %>" />
 		<portlet:param name="displayStyle" value="<%= displayStyle %>" />
 		<portlet:param name="navigation" value="<%= navigation %>" />
 		<portlet:param name="orderByCol" value="<%= orderByCol %>" />
 		<portlet:param name="orderByType" value="<%= orderByType %>" />
 		<portlet:param name="searchContainerId" value="<%= searchContainerId %>" />
-		<portlet:param name="tabs1" value="<%= tabs1 %>" />
 	</liferay-portlet:resourceURL>
 
 	new Liferay.ExportImport(
