@@ -18,7 +18,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 
 /**
- * @author Carlos Sierra Andrés
+ * @author Carlos Sierra AndrÃ©s
  * @author Hugo Huijser
  */
 public class ImportPackage implements Comparable<ImportPackage> {
