@@ -66,11 +66,6 @@ portletURL.setParameter("searchContainerId", String.valueOf(searchContainerId));
 	</liferay-frontend:management-bar-buttons>
 
 	<liferay-frontend:management-bar-action-buttons>
-
-		<%
-		String taglibURL = "javascript:" + liferayPortletResponse.getNamespace() + "deleteEntries();";
-		%>
-
-		<liferay-frontend:management-bar-button href="<%= taglibURL %>" icon="times" label="delete" />
+		<liferay-frontend:management-bar-button href='<%= "javascript:" + liferayPortletResponse.getNamespace() + "deleteEntries();" %>' icon="times" label="delete" />
 	</liferay-frontend:management-bar-action-buttons>
 </liferay-frontend:management-bar>
