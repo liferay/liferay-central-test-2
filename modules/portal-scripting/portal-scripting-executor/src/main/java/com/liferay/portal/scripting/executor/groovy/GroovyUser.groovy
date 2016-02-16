@@ -61,12 +61,12 @@ class GroovyUser {
 		Boolean resetPassword_) {
 
 		emailAddress = emailAddress_;
-		firstName = firstName_;
-		jobTitle = jobTitle_;
-		lastName = lastName_;
 		password = password_;
-		resetPassword = resetPassword_;
+		firstName = firstName_;
+		lastName = lastName_;
+		jobTitle = jobTitle_;
 		uuid = uuid_;
+		resetPassword = resetPassword_;
 	}
 
 	void addRoles(
@@ -90,8 +90,7 @@ class GroovyUser {
 
 		long[] roleIds = new long[roleNames.length];
 
-		for (int i=0; i<roleNames.length; i++) {
-
+		for (int i = 0; i < roleNames.length; i++) {
 			Role role = RoleLocalServiceUtil.fetchRole(
 				groovyScriptingContext.companyId, roleNames[i]);
 
@@ -166,8 +165,8 @@ class GroovyUser {
 	String jobTitle;
 	String lastName;
 	String password;
+	boolean resetPassword;
 	User user;
 	String uuid;
-	boolean resetPassword;
 
 }
