@@ -152,7 +152,9 @@ public class RubyExecutor extends BaseScriptingExecutor {
 
 			rubyInstanceConfig.setCurrentDirectory(_basePath);
 
-			rubyInstanceConfig.setLoader(getClass().getClassLoader());
+			Class<?> clazz = getClass();
+
+			rubyInstanceConfig.setLoader(clazz.getClassLoader());
 
 			rubyInstanceConfig.setLoadPaths(_loadPaths);
 
@@ -264,7 +266,10 @@ public class RubyExecutor extends BaseScriptingExecutor {
 
 		rubyInstanceConfig.setJitThreshold(
 			_rubyScriptingConfiguration.compileThreshold());
-		rubyInstanceConfig.setLoader(getClass().getClassLoader());
+
+		Class<?> clazz = getClass();
+
+		rubyInstanceConfig.setLoader(clazz.getClassLoader());
 
 		String[] loadPaths = StringUtil.split(
 			_rubyScriptingConfiguration.loadPaths());
