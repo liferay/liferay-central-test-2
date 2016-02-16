@@ -41,8 +41,7 @@ public class ScriptingExecutorMessageListener extends BaseMessageListener {
 	@Override
 	protected void doReceive(Message message) throws Exception {
 		String scriptingLanguage = message.getString(
-			ScriptingExecutorMessagingConstants.
-				MESSAGE_KEY_SCRIPTING_LANGUAGE);
+			ScriptingExecutorMessagingConstants.MESSAGE_KEY_SCRIPTING_LANGUAGE);
 
 		List<URL> urls = (List<URL>)message.get(
 			ScriptingExecutorMessagingConstants.MESSAGE_KEY_URLS);
