@@ -234,8 +234,7 @@ public class DDMDataProviderDisplayContext {
 		return DDMPermission.contains(
 			_ddmDataProviderRequestHelper.getPermissionChecker(),
 			_ddmDataProviderRequestHelper.getScopeGroupId(),
-			DDMActionKeys.ADD_DATA_PROVIDER_INSTANCE,
-			DDMDataProviderInstance.class.getName());
+			DDMActionKeys.ADD_DATA_PROVIDER_INSTANCE);
 	}
 
 	public boolean isShowDeleteDataProviderIcon(
