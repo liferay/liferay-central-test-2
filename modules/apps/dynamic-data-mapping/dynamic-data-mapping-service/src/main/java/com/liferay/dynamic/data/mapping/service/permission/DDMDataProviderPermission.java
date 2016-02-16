@@ -25,7 +25,7 @@ import com.liferay.portal.kernel.security.permission.PermissionChecker;
 /**
  * @author Leonardo Barros
  */
-public class DDMPermission extends BaseResourcePermissionChecker {
+public class DDMDataProviderPermission extends BaseResourcePermissionChecker {
 
 	public static final String RESOURCE_NAME =
 		"com.liferay.dynamic.data.mapping";
