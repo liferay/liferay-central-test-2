@@ -25,11 +25,9 @@ import com.liferay.dynamic.data.lists.service.DDLRecordSetLocalServiceUtil;
  */
 class GroovyDDLRecordSet {
 
-
 	GroovyDDLRecordSet(
-			GroovySite groovySite_, GroovyDDMStructure groovyDDMStructure_,
-			String recordSetKey_, String name_,
-			String description_) {
+		GroovySite groovySite_, GroovyDDMStructure groovyDDMStructure_,
+		String recordSetKey_, String name_, String description_) {
 
 		this(
 			groovySite_, groovyDDMStructure_, recordSetKey_,
@@ -37,13 +35,12 @@ class GroovyDDLRecordSet {
 	}
 
 	GroovyDDLRecordSet(
-			GroovySite groovySite_, GroovyDDMStructure groovyDDMStructure_,
-			String recordSetKey_,String name_, String description_,
-			int scope_) {
+		GroovySite groovySite_, GroovyDDMStructure groovyDDMStructure_,
+		String recordSetKey_, String name_, String description_, int scope_) {
 
 		groovySite = groovySite_;
-		recordSetKey = recordSetKey_;
 		groovyDDMStructure = groovyDDMStructure_;
+		recordSetKey = recordSetKey_;
 		name = name_;
 		description = description_;
 		scope = scope_;
@@ -64,8 +61,7 @@ class GroovyDDLRecordSet {
 			groovyDDMStructure.getDdmStructure().getStructureId(), recordSetKey,
 			GroovyScriptingContext.getLocalizationMap(name),
 			GroovyScriptingContext.getLocalizationMap(description),
-			DDLRecordSetConstants.MIN_DISPLAY_ROWS_DEFAULT,
-			scope,
+			DDLRecordSetConstants.MIN_DISPLAY_ROWS_DEFAULT, scope,
 			groovyScriptingContext.serviceContext);
 	}
 
@@ -83,10 +79,10 @@ class GroovyDDLRecordSet {
 		return ddlRecordSet.getRecords();
 	}
 
-	GroovyDDMStructure groovyDDMStructure;
 	DDLRecordSet ddlRecordSet;
-	GroovySite groovySite;
 	String description;
+	GroovyDDMStructure groovyDDMStructure;
+	GroovySite groovySite;
 	String name;
 	String recordSetKey;
 	int scope;
