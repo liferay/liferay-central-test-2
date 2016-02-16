@@ -50,7 +50,7 @@ class GroovyLARUtil {
 
 	static void importPortletInfo(
 		GroovyUser groovyUser, long groupId, String portletId,
-		InputStream is, GroovyScriptingContext groovyScriptingContext) {
+		InputStream inputStream, GroovyScriptingContext groovyScriptingContext) {
 
 		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
 			groupId, false);
@@ -59,82 +59,66 @@ class GroovyLARUtil {
 			layouts = LayoutLocalServiceUtil.getLayouts(groupId, true);
 		}
 
+		Layout layout = layouts.get(0);
+
 		LayoutLocalServiceUtil.importPortletInfo(
-			groovyUser.user.getUserId(), layouts.get(0).getPlid(),
-			groupId, portletId, getParameterMap(), is);
+			groovyUser.user.getUserId(), layout.getPlid(),
+			groupId, portletId, getParameterMap(), inputStream);
 	}
 
 	static Map<String, String[]> getParameterMap() {
-
 		Map<String, String[]> parameterMap =
 			new LinkedHashMap<String, String[]>();
 
 		parameterMap.put(
 			PortletDataHandlerKeys.DATA_STRATEGY,
 			PortletDataHandlerKeys.DATA_STRATEGY_MIRROR_OVERWRITE);
-
 		parameterMap.put(
 			PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS,
 			Boolean.FALSE.toString());
-
 		parameterMap.put(
 			PortletDataHandlerKeys.DELETE_PORTLET_DATA,
 			Boolean.FALSE.toString());
-
 		parameterMap.put(
 			PortletDataHandlerKeys.LAYOUT_SET_PROTOTYPE_LINK_ENABLED,
 			Boolean.FALSE.toString());
-
 		parameterMap.put(
 			PortletDataHandlerKeys.LAYOUT_SET_SETTINGS,
 			Boolean.TRUE.toString());
-
 		parameterMap.put(
 			PortletDataHandlerKeys.LOGO, Boolean.TRUE.toString());
-
 		parameterMap.put(
 			PortletDataHandlerKeys.PERMISSIONS, Boolean.TRUE.toString());
-
 		parameterMap.put(
 			PortletDataHandlerKeys.PORTLET_ARCHIVED_SETUPS,
 			Boolean.TRUE.toString());
-
 		parameterMap.put(
 			PortletDataHandlerKeys.PORTLET_ARCHIVED_SETUPS_ALL,
 			Boolean.TRUE.toString());
-
 		parameterMap.put(
 			PortletDataHandlerKeys.PORTLET_CONFIGURATION,
 			Boolean.TRUE.toString());
-
 		parameterMap.put(
 			PortletDataHandlerKeys.PORTLET_CONFIGURATION_ALL,
 			Boolean.TRUE.toString());
-
 		parameterMap.put(
 			PortletDataHandlerKeys.PORTLET_DATA,
 			Boolean.TRUE.toString());
-
 		parameterMap.put(
 			PortletDataHandlerKeys.PORTLET_DATA_ALL,
 			Boolean.TRUE.toString());
-
 		parameterMap.put(
 			PortletDataHandlerKeys.PORTLET_SETUP,
 			Boolean.TRUE.toString());
-
 		parameterMap.put(
 			PortletDataHandlerKeys.PORTLET_SETUP_ALL,
 			Boolean.TRUE.toString());
-
 		parameterMap.put(
 			PortletDataHandlerKeys.THEME_REFERENCE,
 			Boolean.TRUE.toString());
-
 		parameterMap.put(
 			PortletDataHandlerKeys.UPDATE_LAST_PUBLISH_DATE,
 			Boolean.FALSE.toString());
-
 		parameterMap.put(
 			PortletDataHandlerKeys.USER_ID_STRATEGY,
 			UserIdStrategy.CURRENT_USER_ID);
