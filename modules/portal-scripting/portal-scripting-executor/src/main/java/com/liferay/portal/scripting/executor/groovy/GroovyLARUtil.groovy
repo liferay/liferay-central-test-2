@@ -27,26 +27,25 @@ import com.liferay.portal.kernel.service.LayoutLocalServiceUtil;
 class GroovyLARUtil {
 
 	static void importGlobal(
-		GroovyUser groovyUser, InputStream is,
+		GroovyUser groovyUser, InputStream inputStream,
 		GroovyScriptingContext groovyScriptingContext) {
 
 		Group companyGroup = GroupLocalServiceUtil.getCompanyGroup(
 			groovyScriptingContext.getCompanyId())
 
 		LayoutLocalServiceUtil.importLayouts(
-			groovyUser.user.getUserId(), companyGroup.getGroupId(),
-			true, getParameterMap(), is);
+			groovyUser.user.getUserId(), companyGroup.getGroupId(), true,
+			getParameterMap(), inputStream);
 	}
 
 	static void importLayouts(
-		GroovyUser groovyUser, GroovySite site, boolean privateLayout,
-		InputStream is, GroovyScriptingContext groovyScriptingContext) {
-
-		long groupId = site.getSite().getGroupId();
+		GroovyUser groovyUser, GroovySite groovySite, boolean privateLayout,
+		InputStream inputStream,
+		GroovyScriptingContext groovyScriptingContext) {
 
 		LayoutLocalServiceUtil.importLayouts(
-			groovyUser.user.getUserId(), groupId, privateLayout,
-			getParameterMap(), is);
+			groovyUser.user.getUserId(), groovySite.group.getGroupId(),
+			privateLayout, getParameterMap(), inputStream);
 	}
 
 	static void importPortletInfo(
