@@ -12,12 +12,16 @@
  * details.
  */
 
-package com.liferay.portal.scripting.executor.groovy;
+package com.liferay.scriptingexecutor.scripts.groovy;
 
-import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserLocalServiceUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
+
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * @author Michael C. Han

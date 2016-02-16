@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.scripting.executor.groovy;
+package com.liferay.scriptingexecutor.scripts.groovy;
 
 import com.liferay.portal.kernel.exception.NoSuchTeamException;
 import com.liferay.portal.kernel.model.Group;

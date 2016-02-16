@@ -12,15 +12,13 @@
  * details.
  */
 
-package com.liferay.portal.scripting.executor.groovy;
+package com.liferay.scriptingexecutor.scripts.groovy;
 
+import com.liferay.portal.kernel.exception.NoSuchOrganizationException;
 import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.model.OrganizationConstants;
-import com.liferay.portal.kernel.service.CountryServiceUtil;
 import com.liferay.portal.kernel.service.OrganizationLocalServiceUtil;
-import com.liferay.portal.kernel.service.RegionServiceUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
 /**
  * @author Michael C. Han
@@ -30,8 +28,14 @@ class GroovyOrganization {
 	static Organization fetchOrganization(
 		GroovyScriptingContext groovyScriptingContext, String name) {
 
-		return OrganizationLocalServiceUtil.fetchOrganization(
-			groovyScriptingContext.companyId, name);
+		try {
+			return OrganizationLocalServiceUtil.getOrganization(
+				groovyScriptingContext.companyId, name);
+		}
+		catch (NoSuchOrganizationException nsoe) {
+		}
+
+		return null;
 	}
 
 	GroovyOrganization(String name_) {
@@ -41,19 +45,6 @@ class GroovyOrganization {
 	GroovyOrganization(String name_, String parentOrganizationName_) {
 		name = name_;
 		parentOrganizationName = parentOrganizationName_;
-	}
-
-	GroovyOrganization(
-		String comments_, String name_, String parentOrganizationName_,
-		String type_, String regionCode_, String country_, boolean site_) {
-
-		comments = comments_
-		countryId = CountryServiceUtil.getCountryByName(country_);
-		name = name_;
-		parentOrganizationName = parentOrganizationName_;
-		regionId = RegionServiceUtil.fetchRegion(countryId, regionCode_);
-		site = site_;
-		type = type_
 	}
 
 	void create(GroovyScriptingContext groovyScriptingContext) {
@@ -75,21 +66,13 @@ class GroovyOrganization {
 			}
 		}
 
-
 		organization = OrganizationLocalServiceUtil.addOrganization(
-			groovyScriptingContext.defaultUserId, parentOrganizationId,
-			name, type, regionId, countryId,
-			WorkflowConstants.STATUS_APPROVED, comments, site,
-			groovyScriptingContext.getServiceContext());
+			groovyScriptingContext.defaultUserId, parentOrganizationId, name,
+			false);
 	}
 
-	String comments;
-	long countryId;
 	String name;
 	Organization organization;
 	String parentOrganizationName;
-	long regionId;
-	boolean site;
-	String type;
 
 }

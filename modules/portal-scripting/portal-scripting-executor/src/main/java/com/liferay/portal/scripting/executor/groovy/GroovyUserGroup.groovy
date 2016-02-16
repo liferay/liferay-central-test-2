@@ -12,13 +12,10 @@
  * details.
  */
 
-package com.liferay.portal.scripting.executor.groovy;
+package com.liferay.scriptingexecutor.scripts.groovy;
 
-import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.model.UserGroup;
 import com.liferay.portal.kernel.service.UserGroupLocalServiceUtil;
-import com.liferay.portal.kernel.service.UserLocalServiceUtil;
-import com.liferay.portal.kernel.util.StringPool;
 
 /**
  * @author Michael C. Han
@@ -31,44 +28,5 @@ class GroovyUserGroup {
 		return UserGroupLocalServiceUtil.fetchUserGroup(
 			groovyScriptingContext.companyId, name);
 	}
-
-	GroovyUserGroup(String name_) {
-		name = name_;
-	}
-
-	void addUsers(
-		GroovyScriptingContext groovyScriptingContext,
-		GroovyUser... groovyUsers) {
-
-		if (userGroup == null) {
-			create(groovyScriptingContext);
-		}
-
-		List<User> users = new ArrayList<Long>(groovyUsers.length);
-
-		for (GroovyUser groovyUser : groovyUsers) {
-			users.add(groovyUser.user);
-		}
-
-		UserLocalServiceUtil.addUserGroupUsers(
-			userGroup.getUserGroupId(), users);
-	}
-
-	void create(GroovyScriptingContext groovyScriptingContext) {
-		userGroup = UserGroupLocalServiceUtil.fetchUserGroup(
-			groovyScriptingContext.companyId, name);
-
-		if (userGroup != null) {
-			return;
-		}
-
-		userGroup = UserGroupLocalServiceUtil.addUserGroup(
-			groovyScriptingContext.defaultUserId,
-			groovyScriptingContext.companyId, name, StringPool.BLANK,
-			groovyScriptingContext.serviceContext);
-	}
-
-	String name;
-	UserGroup userGroup;
 
 }
