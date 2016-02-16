@@ -26,6 +26,6 @@ public class ScriptingExecutorMessagingConstants {
 	public static final String MESSAGE_KEY_SCRIPTING_LANGUAGE =
 		"scriptingLanguage";
 
-	public static final String URLS_MESSAGE_ATTRIBUTE = "urls";
+	public static final String MESSAGE_KEY_URLS = "urls";
 
 }

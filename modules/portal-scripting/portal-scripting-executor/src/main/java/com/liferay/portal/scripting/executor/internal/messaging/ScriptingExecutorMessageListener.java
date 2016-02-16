@@ -45,7 +45,7 @@ public class ScriptingExecutorMessageListener extends BaseMessageListener {
 				MESSAGE_KEY_SCRIPTING_LANGUAGE);
 
 		List<URL> urls = (List<URL>)message.get(
-			ScriptingExecutorMessagingConstants.URLS_MESSAGE_ATTRIBUTE);
+			ScriptingExecutorMessagingConstants.MESSAGE_KEY_URLS);
 
 		for (URL url : urls) {
 			try (InputStream inputStream = url.openStream()) {
