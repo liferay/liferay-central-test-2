@@ -46,6 +46,16 @@ class GroovyDDLRecordSet {
 		scope = scope_;
 	}
 
+	void addRecord(
+		GroovyUser groovyUser, Map<String, Serializable> fieldsMap,
+		GroovyScriptingContext groovyScriptingContext) {
+
+		DDLRecordLocalServiceUtil.addRecord(
+			groovyUser.getUser().getUserId(), groovySite.getSite().getGroupId(),
+			ddlRecordSet.getRecordSetId(), 0, fieldsMap,
+			groovyScriptingContext.serviceContext);
+	}
+
 	void create(
 		GroovyUser groovyUser, GroovyScriptingContext groovyScriptingContext) {
 
@@ -62,16 +72,6 @@ class GroovyDDLRecordSet {
 			GroovyScriptingContext.getLocalizationMap(name),
 			GroovyScriptingContext.getLocalizationMap(description),
 			DDLRecordSetConstants.MIN_DISPLAY_ROWS_DEFAULT, scope,
-			groovyScriptingContext.serviceContext);
-	}
-
-	void addRecord(
-		GroovyUser groovyUser, Map<String, Serializable> fieldsMap,
-		GroovyScriptingContext groovyScriptingContext) {
-
-		DDLRecordLocalServiceUtil.addRecord(
-			groovyUser.getUser().getUserId(), groovySite.getSite().getGroupId(),
-			ddlRecordSet.getRecordSetId(), 0, fieldsMap,
 			groovyScriptingContext.serviceContext);
 	}
 
