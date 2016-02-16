@@ -23,7 +23,7 @@ public class ScriptingExecutorMessagingConstants {
 
 	public static final String DESTINATION_NAME = "liferay/scripting_executor";
 
-	public static final String SCRIPTING_LANGUAGE_MESSAGE_ATTRIBUTE =
+	public static final String MESSAGE_KEY_SCRIPTING_LANGUAGE =
 		"scriptingLanguage";
 
 	public static final String URLS_MESSAGE_ATTRIBUTE = "urls";
