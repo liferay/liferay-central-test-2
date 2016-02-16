@@ -40,12 +40,12 @@ public class MinimizePortletConfigurationIcon
 
 	@Override
 	public String getMessage(PortletRequest portletRequest) {
+		String key = "minimize";
+
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
-
-		String key = "minimize";
 
 		if (portletDisplay.isStateMin()) {
 			key = "restore";

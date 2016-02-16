@@ -56,9 +56,9 @@ public class ThreadSubscriptionPortletConfigurationIcon
 
 	@Override
 	public String getMessage(PortletRequest portletRequest) {
-		MBMessage message = getMBMessage(portletRequest);
-
 		String key = "subscribe";
+
+		MBMessage message = getMBMessage(portletRequest);
 
 		if (isSubscribed(portletRequest, message)) {
 			key = "unsubscribe";

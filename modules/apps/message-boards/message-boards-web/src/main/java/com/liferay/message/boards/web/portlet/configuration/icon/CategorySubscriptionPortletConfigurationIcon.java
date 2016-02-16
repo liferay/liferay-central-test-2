@@ -44,9 +44,9 @@ public class CategorySubscriptionPortletConfigurationIcon
 
 	@Override
 	public String getMessage(PortletRequest portletRequest) {
-		MBCategory category = getCategory(portletRequest);
-
 		String key = "subscribe";
+
+		MBCategory category = getCategory(portletRequest);
 
 		if (isSubscribed(portletRequest, category)) {
 			key = "unsubscribe";
