@@ -154,20 +154,20 @@ public class ScriptingExecutorExtender {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
 						"No " + scriptingLanguage + " executors available " +
-							"to process scripts from : " +
+							"to process scripts from " +
 								bundle.getSymbolicName());
 				}
 
 				return null;
 			}
 
-			Enumeration<URL> scriptsEnum = bundle.findEntries(
+			Enumeration<URL> enumeration = bundle.findEntries(
 				_SCRIPTS_DIR, "*", true);
 
-			if ((scriptsEnum == null) || !scriptsEnum.hasMoreElements()) {
+			if ((enumeration == null) || !enumeration.hasMoreElements()) {
 				if (_log.isDebugEnabled()) {
 					_log.debug(
-						"No scripts in bundle: " + bundle.getSymbolicName());
+						"No scripts in bundle " + bundle.getSymbolicName());
 				}
 
 				return null;
@@ -182,8 +182,8 @@ public class ScriptingExecutorExtender {
 
 			List<URL> scriptURLs = new ArrayList<>();
 
-			while (scriptsEnum.hasMoreElements()) {
-				scriptURLs.add(scriptsEnum.nextElement());
+			while (enumeration.hasMoreElements()) {
+				scriptURLs.add(enumeration.nextElement());
 			}
 
 			message.put(
