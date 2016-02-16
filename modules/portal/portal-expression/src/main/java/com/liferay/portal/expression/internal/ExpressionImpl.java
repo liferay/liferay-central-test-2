@@ -304,141 +304,148 @@ public class ExpressionImpl<T> implements Expression<T> {
 	protected void setExpressionCustomFunctions(
 		com.udojava.evalex.Expression expression) {
 
-		expression.addFunction(expression.new Function("between", 3) {
+		expression.addFunction(
+			expression.new Function("between", 3) {
 
-			@Override
-			public BigDecimal eval(List<BigDecimal> parameters) {
-				BigDecimal parameter = parameters.get(0);
+				@Override
+				public BigDecimal eval(List<BigDecimal> parameters) {
+					BigDecimal parameter = parameters.get(0);
 
-				BigDecimal minParameter = parameters.get(1);
-				BigDecimal maxParameter = parameters.get(2);
+					BigDecimal minParameter = parameters.get(1);
+					BigDecimal maxParameter = parameters.get(2);
 
-				if ((parameter.compareTo(minParameter) >= 0) &&
-					(parameter.compareTo(maxParameter) <= 0)) {
+					if ((parameter.compareTo(minParameter) >= 0) &&
+						(parameter.compareTo(maxParameter) <= 0)) {
 
-					return BigDecimal.ONE;
-				}
-
-				return BigDecimal.ZERO;
-			}
-
-		});
-
-		expression.addFunction(expression.new Function("concat", -1) {
-
-			@Override
-			public BigDecimal eval(List<BigDecimal> parameters) {
-				StringBundler sb = new StringBundler(parameters.size());
-
-				for (BigDecimal parameter : parameters) {
-					if (isStringBlank(parameter)) {
-						continue;
+						return BigDecimal.ONE;
 					}
 
-					String string = decodeString(parameter);
-
-					sb.append(string);
-				}
-
-				if (sb.index() == 0) {
 					return BigDecimal.ZERO;
 				}
 
-				return encode(sb.toString());
-			}
+			});
 
-		});
+		expression.addFunction(
+			expression.new Function("concat", -1) {
 
-		expression.addFunction(expression.new Function("contains", 2) {
+				@Override
+				public BigDecimal eval(List<BigDecimal> parameters) {
+					StringBundler sb = new StringBundler(parameters.size());
 
-			@Override
-			public BigDecimal eval(List<BigDecimal> parameters) {
-				BigDecimal parameter1 = parameters.get(0);
-				BigDecimal parameter2 = parameters.get(1);
+					for (BigDecimal parameter : parameters) {
+						if (isStringBlank(parameter)) {
+							continue;
+						}
 
-				if (isStringBlank(parameter1, parameter2)) {
-					return BigDecimal.ONE;
+						String string = decodeString(parameter);
+
+						sb.append(string);
+					}
+
+					if (sb.index() == 0) {
+						return BigDecimal.ZERO;
+					}
+
+					return encode(sb.toString());
 				}
 
-				String string1 = decodeString(parameter1);
-				String string2 = decodeString(parameter2);
+			});
 
-				if (string1.contains(string2)) {
-					return BigDecimal.ONE;
+		expression.addFunction(
+			expression.new Function("contains", 2) {
+
+				@Override
+				public BigDecimal eval(List<BigDecimal> parameters) {
+					BigDecimal parameter1 = parameters.get(0);
+					BigDecimal parameter2 = parameters.get(1);
+
+					if (isStringBlank(parameter1, parameter2)) {
+						return BigDecimal.ONE;
+					}
+
+					String string1 = decodeString(parameter1);
+					String string2 = decodeString(parameter2);
+
+					if (string1.contains(string2)) {
+						return BigDecimal.ONE;
+					}
+
+					return BigDecimal.ZERO;
 				}
 
-				return BigDecimal.ZERO;
-			}
+			});
 
-		});
+		expression.addFunction(
+			expression.new Function("equals", 2) {
 
-		expression.addFunction(expression.new Function("equals", 2) {
+				@Override
+				public BigDecimal eval(List<BigDecimal> parameters) {
+					BigDecimal parameter1 = parameters.get(0);
+					BigDecimal parameter2 = parameters.get(1);
 
-			@Override
-			public BigDecimal eval(List<BigDecimal> parameters) {
-				BigDecimal parameter1 = parameters.get(0);
-				BigDecimal parameter2 = parameters.get(1);
+					if (isStringBlank(parameter1, parameter2)) {
+						return BigDecimal.ONE;
+					}
 
-				if (isStringBlank(parameter1, parameter2)) {
-					return BigDecimal.ONE;
+					String string1 = decodeString(parameter1);
+					String string2 = decodeString(parameter2);
+
+					if (string1.equals(string2)) {
+						return BigDecimal.ONE;
+					}
+
+					return BigDecimal.ZERO;
 				}
 
-				String string1 = decodeString(parameter1);
-				String string2 = decodeString(parameter2);
+			});
 
-				if (string1.equals(string2)) {
-					return BigDecimal.ONE;
+		expression.addFunction(
+			expression.new Function("isEmailAddress", 1) {
+
+				@Override
+				public BigDecimal eval(List<BigDecimal> parameters) {
+					String string = decodeString(parameters.get(0));
+
+					if (Validator.isEmailAddress(string)) {
+						return BigDecimal.ONE;
+					}
+
+					return BigDecimal.ZERO;
 				}
 
-				return BigDecimal.ZERO;
-			}
+			});
 
-		});
+		expression.addFunction(
+			expression.new Function("isURL", 1) {
 
-		expression.addFunction(expression.new Function("isEmailAddress", 1) {
+				@Override
+				public BigDecimal eval(List<BigDecimal> parameters) {
+					String string = decodeString(parameters.get(0));
 
-			@Override
-			public BigDecimal eval(List<BigDecimal> parameters) {
-				String string = decodeString(parameters.get(0));
+					if (Validator.isUrl(string)) {
+						return BigDecimal.ONE;
+					}
 
-				if (Validator.isEmailAddress(string)) {
-					return BigDecimal.ONE;
+					return BigDecimal.ZERO;
 				}
 
-				return BigDecimal.ZERO;
-			}
+			});
 
-		});
+		expression.addFunction(
+			expression.new Function("sum", -1) {
 
-		expression.addFunction(expression.new Function("isURL", 1) {
+				@Override
+				public BigDecimal eval(List<BigDecimal> parameters) {
+					BigDecimal sum = new BigDecimal(0);
 
-			@Override
-			public BigDecimal eval(List<BigDecimal> parameters) {
-				String string = decodeString(parameters.get(0));
+					for (BigDecimal parameter : parameters) {
+						sum = sum.add(parameter);
+					}
 
-				if (Validator.isUrl(string)) {
-					return BigDecimal.ONE;
+					return sum;
 				}
 
-				return BigDecimal.ZERO;
-			}
-
-		});
-
-		expression.addFunction(expression.new Function("sum", -1) {
-
-			@Override
-			public BigDecimal eval(List<BigDecimal> parameters) {
-				BigDecimal sum = new BigDecimal(0);
-
-				for (BigDecimal parameter : parameters) {
-					sum = sum.add(parameter);
-				}
-
-				return sum;
-			}
-
-		});
+			});
 	}
 
 	protected void setExpressionMathContext(
