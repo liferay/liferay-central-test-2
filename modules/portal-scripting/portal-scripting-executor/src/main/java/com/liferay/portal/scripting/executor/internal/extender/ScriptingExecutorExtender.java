@@ -131,12 +131,12 @@ public class ScriptingExecutorExtender {
 
 			Dictionary<String, String> headers = bundle.getHeaders();
 
-			boolean isClusterMasterOnly = GetterUtil.getBoolean(
-				headers.get(
-					ScriptingExecutorConstants.
-						LIFERAY_SCRIPTING_EXECUTOR_CLUSTER_MASTER_ONLY));
+			if (GetterUtil.getBoolean(
+					headers.get(
+						ScriptingExecutorConstants.
+							LIFERAY_SCRIPTING_EXECUTOR_CLUSTER_MASTER_ONLY)) &&
+				!_clusterMasterExecutor.isMaster()) {
 
-			if (isClusterMasterOnly && !_clusterMasterExecutor.isMaster()) {
 				return null;
 			}
 
