@@ -29,9 +29,8 @@ class GroovyAddress {
 
 		this(
 			groovyUser.user.getUserId(), Contact.class.getName(),
-			groovyUser.user.getContact().getContactId(),
-			street1_, city_, zip_, 0, countryId_, typeId_,
-			true, true);
+			groovyUser.user.contact.getContactId(), street1_, city_, zip_, 0,
+			countryId_, typeId_, true, true);
 	}
 
 	GroovyAddress(
