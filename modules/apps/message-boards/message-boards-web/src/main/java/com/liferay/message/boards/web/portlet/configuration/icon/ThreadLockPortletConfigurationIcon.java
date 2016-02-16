@@ -61,9 +61,9 @@ public class ThreadLockPortletConfigurationIcon
 			return null;
 		}
 
-		MBThread thread = messageDisplay.getThread();
-
 		String key = "lock";
+
+		MBThread thread = messageDisplay.getThread();
 
 		if (thread.isLocked()) {
 			key = "unlock";
