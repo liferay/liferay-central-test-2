@@ -178,7 +178,7 @@ public class ScriptingExecutorExtender {
 
 			message.put(
 				ScriptingExecutorMessagingConstants.
-					SCRIPTING_LANGUAGE_MESSAGE_ATTRIBUTE,
+					MESSAGE_KEY_SCRIPTING_LANGUAGE,
 				scriptingLanguage);
 
 			List<URL> scriptURLs = new ArrayList<>();
