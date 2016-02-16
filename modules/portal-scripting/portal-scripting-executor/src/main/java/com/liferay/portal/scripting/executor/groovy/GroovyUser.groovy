@@ -115,11 +115,11 @@ class GroovyUser {
 
 		user = UserLocalServiceUtil.addUser(
 			groovyScriptingContext.defaultUserId,
-			groovyScriptingContext.companyId, false,
-			password, password, true, null, emailAddress, 0, null,
-			LocaleUtil.getDefault(), firstName, null, lastName, -1, -1, true, 1,
-			1, 1977, jobTitle, new long[0], new long[0], new long[0],
-			new long[0], false, groovyScriptingContext.serviceContext);
+			groovyScriptingContext.companyId, false, password, password, true,
+			null, emailAddress, 0, null, LocaleUtil.getDefault(), firstName,
+			null, lastName, -1, -1, true, 1, 1, 1977, jobTitle, new long[0],
+			new long[0], new long[0], new long[0], false,
+			groovyScriptingContext.serviceContext);
 
 		if (resetPassword) {
 			updatePasswordReset(resetPassword);
