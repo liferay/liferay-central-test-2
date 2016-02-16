@@ -57,7 +57,9 @@ public class BeanShellExecutor extends BaseScriptingExecutor {
 				interpreter.set(entry.getKey(), entry.getValue());
 			}
 
-			interpreter.setClassLoader(getClass().getClassLoader());
+			Class<?> clazz = getClass();
+
+			interpreter.setClassLoader(clazz.getClassLoader());
 
 			interpreter.eval(script);
 
