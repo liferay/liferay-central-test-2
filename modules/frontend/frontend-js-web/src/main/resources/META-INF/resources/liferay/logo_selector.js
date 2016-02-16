@@ -75,9 +75,9 @@ AUI.add(
 						var contentBox = instance.get('contentBox');
 
 						instance._avatar = contentBox.one('#' + randomNamespace + 'avatar');
-						instance._emptyResultMessage = contentBox.one('#' + randomNamespace + 'emptyResultMessage');
 						instance._deleteLogoButton = contentBox.one('.delete-logo');
 						instance._deleteLogoInput = contentBox.one('#' + portletNamespace + 'deleteLogo');
+						instance._emptyResultMessage = contentBox.one('#' + randomNamespace + 'emptyResultMessage');
 						instance._fileEntryIdInput = contentBox.one('#' + portletNamespace + 'fileEntryId');
 					},
 
