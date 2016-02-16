@@ -12,14 +12,14 @@
  * details.
  */
 
-package com.liferay.scriptingexecutor.scripts.groovy;
+package com.liferay.portal.scripting.executor.groovy;
 
 import com.liferay.portal.kernel.model.GroupConstants;
 import com.liferay.portal.kernel.model.ResourceConstants;
 import com.liferay.portal.kernel.model.Role;
-import com.liferay.portal.kernel.model.RoleConstants
-import com.liferay.portal.kernel.service.ResourceBlockLocalServiceUtil
-import com.liferay.portal.kernel.service.ResourcePermissionLocalServiceUtil
+import com.liferay.portal.kernel.model.RoleConstants;
+import com.liferay.portal.kernel.service.ResourceBlockLocalServiceUtil;
+import com.liferay.portal.kernel.service.ResourcePermissionLocalServiceUtil;
 import com.liferay.portal.kernel.service.RoleLocalServiceUtil;
 
 /**
