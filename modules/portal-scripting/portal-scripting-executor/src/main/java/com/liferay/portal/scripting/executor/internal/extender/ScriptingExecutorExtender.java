@@ -188,7 +188,7 @@ public class ScriptingExecutorExtender {
 			}
 
 			message.put(
-				ScriptingExecutorMessagingConstants.URLS_MESSAGE_ATTRIBUTE,
+				ScriptingExecutorMessagingConstants.MESSAGE_KEY_URLS,
 				scriptURLs);
 
 			_singleDestinationMessageSender.send(message);
