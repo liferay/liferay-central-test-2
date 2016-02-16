@@ -51,7 +51,7 @@ class GroovyDDLRecordSet {
 		GroovyScriptingContext groovyScriptingContext) {
 
 		DDLRecordLocalServiceUtil.addRecord(
-			groovyUser.getUser().getUserId(), groovySite.getSite().getGroupId(),
+			groovyUser.user.getUserId(), groovySite.group.getGroupId(),
 			ddlRecordSet.getRecordSetId(), 0, fieldsMap,
 			groovyScriptingContext.serviceContext);
 	}
@@ -60,14 +60,14 @@ class GroovyDDLRecordSet {
 		GroovyUser groovyUser, GroovyScriptingContext groovyScriptingContext) {
 
 		ddlRecordSet = DDLRecordSetLocalServiceUtil.fetchRecordSet(
-			groovySite.getSite().getGroupId(), recordSetKey);
+			groovySite.group.getGroupId(), recordSetKey);
 
 		if (ddlRecordSet != null) {
 			return;
 		}
 
 		DDLRecordSetLocalServiceUtil.addRecordSet(
-			groovyUser.getUser().getUserId(), groovySite.getSite().getGroupId(),
+			groovyUser.user.getUserId(), groovySite.group.getGroupId(),
 			groovyDDMStructure.getDdmStructure().getStructureId(), recordSetKey,
 			GroovyScriptingContext.getLocalizationMap(name),
 			GroovyScriptingContext.getLocalizationMap(description),

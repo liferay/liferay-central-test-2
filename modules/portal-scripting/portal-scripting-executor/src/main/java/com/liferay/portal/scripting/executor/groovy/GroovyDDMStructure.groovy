@@ -46,11 +46,9 @@ class GroovyDDMStructure {
 			return;
 		}
 
-		Group group = groovySite.getSite();
-
 		ddmStructure = DDMStructureLocalServiceUtil.addStructure(
-			scriptingContext.getDefaultUserId(), group.getGroupId(), 0,
-			ClassNameLocalServiceUtil.getClassNameId(DDLRecordSet.class),
+			scriptingContext.getDefaultUserId(), groovySite.group.getGroupId(),
+			0, ClassNameLocalServiceUtil.getClassNameId(DDLRecordSet.class),
 			null, GroovyScriptingContext.getLocalizationMap(name),
 			GroovyScriptingContext.getLocalizationMap(description),
 			xsd, "xml", DDMStructureConstants.TYPE_DEFAULT,
@@ -60,12 +58,11 @@ class GroovyDDMStructure {
 	static DDMStructure fetchStructure(GroovyScriptingContext scriptingContext,
 		GroovySite groovySite_, String structureKey_) {
 
-		Group group = groovySite.getSite();
 		Long classnameId = ClassNameLocalServiceUtil.getClassNameId(
 			DDLRecordSet.class);
 
 		return DDMStructureLocalServiceUtil.fetchStructure(
-			group.getGroupId(), classnameId, structureKey_);
+			groovySite.group.getGroupId(), classnameId, structureKey_);
 	}
 
 	DDMStructure ddmStructure;
