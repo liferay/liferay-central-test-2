@@ -134,8 +134,7 @@ public class ScriptingExecutorExtender {
 			boolean isClusterMasterOnly = GetterUtil.getBoolean(
 				headers.get(
 					ScriptingExecutorConstants.
-						LIFERAY_SCRIPTING_EXECUTOR_CLUSTER_MASTER_ONLY),
-				false);
+						LIFERAY_SCRIPTING_EXECUTOR_CLUSTER_MASTER_ONLY));
 
 			if (isClusterMasterOnly && !_clusterMasterExecutor.isMaster()) {
 				return null;
