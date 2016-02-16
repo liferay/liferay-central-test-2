@@ -50,7 +50,8 @@ class GroovyLARUtil {
 
 	static void importPortletInfo(
 		GroovyUser groovyUser, long groupId, String portletId,
-		InputStream inputStream, GroovyScriptingContext groovyScriptingContext) {
+		InputStream inputStream,
+		GroovyScriptingContext groovyScriptingContext) {
 
 		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
 			groupId, false);
