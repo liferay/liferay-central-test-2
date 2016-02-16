@@ -49,13 +49,12 @@ public class ScriptingExecutorMessagingConfigurator {
 		Destination destination = _destinationFactory.createDestination(
 			destinationConfiguration);
 
-		Dictionary<String, Object> destinationDictionary =
-			new HashMapDictionary<>();
+		Dictionary<String, Object> properties = new HashMapDictionary<>();
 
-		destinationDictionary.put("destination.name", destination.getName());
+		properties.put("destination.name", destination.getName());
 
 		_destinationServiceRegistration = bundleContext.registerService(
-			Destination.class, destination, destinationDictionary);
+			Destination.class, destination, properties);
 
 		ScriptingExecutorMessageListener scriptingExecutorMessageListener =
 			new ScriptingExecutorMessageListener(_scripting);
