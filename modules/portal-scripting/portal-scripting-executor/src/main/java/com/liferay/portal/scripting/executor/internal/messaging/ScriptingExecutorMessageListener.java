@@ -55,8 +55,7 @@ public class ScriptingExecutorMessageListener extends BaseMessageListener {
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"Error while executing script: " + url.getFile(), e);
+					_log.warn("Unable to execute script: " + url.getFile(), e);
 				}
 			}
 		}
