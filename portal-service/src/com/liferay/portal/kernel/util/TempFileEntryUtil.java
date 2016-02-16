@@ -118,7 +118,7 @@ public class TempFileEntryUtil {
 			DLAppHelperThreadLocal.setEnabled(false);
 
 			TemporaryFileEntriesCapability temporaryFileEntriesCapability =
-			_getTemporaryFileEntriesCapability(groupId);
+				_getTemporaryFileEntriesCapability(groupId);
 
 			temporaryFileEntriesCapability.deleteTemporaryFileEntry(
 				new TemporaryFileEntriesScope(_UUID, userId, folderName),
@@ -127,7 +127,6 @@ public class TempFileEntryUtil {
 		finally {
 			DLAppHelperThreadLocal.setEnabled(dlAppHelperEnabled);
 		}
-
 	}
 
 	public static String getOriginalTempFileName(String tempFileName) {
