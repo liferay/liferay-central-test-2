@@ -84,8 +84,7 @@ public class PortletConfigurationIconTracker {
 						return portletConfigurationIcon.isShow(portletRequest);
 					}
 
-				}
-			);
+				});
 
 		portletConfigurationIcons = ListUtil.sort(
 			portletConfigurationIcons,
