@@ -76,12 +76,10 @@ class GroovyOrganization {
 			}
 		}
 
-
 		organization = OrganizationLocalServiceUtil.addOrganization(
 			groovyScriptingContext.defaultUserId, parentOrganizationId,
-			name, type, regionId, countryId,
-			WorkflowConstants.STATUS_APPROVED, comments, site,
-			groovyScriptingContext.getServiceContext());
+			name, type, regionId, countryId, WorkflowConstants.STATUS_APPROVED,
+			comments, site, groovyScriptingContext.getServiceContext());
 	}
 
 	String comments;
