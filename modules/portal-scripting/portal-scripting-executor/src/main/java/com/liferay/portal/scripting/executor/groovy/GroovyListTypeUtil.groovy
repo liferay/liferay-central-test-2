@@ -21,7 +21,7 @@ class GroovyListTypeUtil {
 
 	static Map listTypesmap = new HashMap<String, List>();
 
-	static List<ListType> getListForType(String className) {
+	static List<ListType> getListTypes(String className) {
 		if (!listTypesmap.containsKey(className)) {
 			List<ListType> listTypes = ListTypeServiceUtil.getListTypes(
 				className)
@@ -32,10 +32,10 @@ class GroovyListTypeUtil {
 		return listTypesmap.get(className);
 	}
 
-	static int getListTypeForName(String className, String name) {
+	static int getListType(String className, String name) {
 		int typeId = 0;
 
-		List<ListType> listTypes = getListForType(className);
+		List<ListType> listTypes = getListTypes(className);
 
 		for (ListType listType : listTypes) {
 			if (name.equalsIgnoreCase(listType.getName())) {
