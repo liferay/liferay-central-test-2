@@ -148,7 +148,7 @@ public class ScriptingExecutorExtender {
 			if (scriptingLanguage == null) {
 				scriptingLanguage =
 					ScriptingExecutorMessagingConstants.
-						DEFAULT_SCRIPTING_LANGUAGE;
+						SCRIPTING_LANGUAGE_DEFAULT;
 			}
 
 			if (!_scriptingLanguages.contains(scriptingLanguage)) {

@@ -19,7 +19,7 @@ package com.liferay.portal.scripting.executor.internal;
  */
 public class ScriptingExecutorMessagingConstants {
 
-	public static final String DEFAULT_SCRIPTING_LANGUAGE = "groovy";
+	public static final String SCRIPTING_LANGUAGE_DEFAULT = "groovy";
 
 	public static final String DESTINATION_NAME = "liferay/scripting_executor";
 
