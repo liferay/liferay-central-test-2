@@ -44,8 +44,7 @@ public class DDMDataProviderInstanceServiceImpl
 
 		DDMPermission.check(
 			getPermissionChecker(), groupId,
-			DDMActionKeys.ADD_DATA_PROVIDER_INSTANCE,
-			DDMDataProviderInstance.class.getName());
+			DDMActionKeys.ADD_DATA_PROVIDER_INSTANCE);
 
 		return ddmDataProviderInstanceLocalService.addDataProviderInstance(
 			getUserId(), groupId, nameMap, descriptionMap, ddmFormValues, type,
