@@ -51,8 +51,7 @@ public class DDMDataProviderPortletConfigurationIcon
 		ResourceBundle resourceBundle = ResourceBundleUtil.getBundle(
 			"content.Language", getLocale(portletRequest), getClass());
 
-		return LanguageUtil.get(
-			getResourceBundle(getLocale(portletRequest)), "data-providers");
+		return LanguageUtil.get(resourceBundle, "data-providers");
 	}
 
 	@Override
