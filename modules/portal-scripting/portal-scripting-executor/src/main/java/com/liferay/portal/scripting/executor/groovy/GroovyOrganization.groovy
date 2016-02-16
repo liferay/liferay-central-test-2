@@ -45,15 +45,16 @@ class GroovyOrganization {
 
 	GroovyOrganization(
 		String comments_, String name_, String parentOrganizationName_,
-		String type_, String regionCode_, String country_, boolean site_) {
+		String type_, String regionCode, String countryName, boolean site_) {
 
 		comments = comments_
-		countryId = CountryServiceUtil.getCountryByName(country_);
 		name = name_;
 		parentOrganizationName = parentOrganizationName_;
-		regionId = RegionServiceUtil.fetchRegion(countryId, regionCode_);
-		site = site_;
 		type = type_
+		site = site_;
+
+		regionId = RegionServiceUtil.fetchRegion(countryId, regionCode);
+		countryId = CountryServiceUtil.getCountryByName(countryName);
 	}
 
 	void create(GroovyScriptingContext groovyScriptingContext) {
