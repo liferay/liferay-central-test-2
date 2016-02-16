@@ -35,35 +35,34 @@ class GroovyAddress {
 	}
 
 	GroovyAddress(
-		long userId_, String className_, long classPk_,
-		String street1_, String city_, String zip_,
-		long regionId_, long countryId_, int typeId_, boolean mailing_,
-		boolean primary_) {
+		long userId_, String className_, long classPK_, String street1_,
+		String city_, String zip_, long regionId_, long countryId_,
+		int typeId_, boolean mailing_, boolean primary_) {
 
-		city = city_;
+		userId = userId_;
 		className = className_;
-		classPk = classPk_;
+		classPK = classPK_;
+		street1 = street1_;
+		city = city_;
+		zip = zip_;
+		regionId = regionId_;
 		countryId = countryId_;
+		typeId = typeId_;
 		mailing = mailing_;
 		primary = primary_;
-		regionId = regionId_;
-		street1 = street1_;
-		typeId = typeId_;
-		userId = userId_;
-		zip = zip_;
 	}
 
 	void create(GroovyScriptingContext groovyScriptingContext) {
-
 		address = AddressLocalServiceUtil.addAddress(
-			userId, className, classPk, street1, "", "", city, zip, regionId,
+			userId, className, classPK, street1, "", "", city, zip, regionId,
 			countryId, typeId, true, true,
 			groovyScriptingContext.serviceContext);
 	}
 
+	Address address;
 	String city;
 	String className;
-	long classPk;
+	long classPK;
 	long countryId;
 	boolean mailing;
 	boolean primary;
@@ -73,5 +72,4 @@ class GroovyAddress {
 	long userId;
 	String zip;
 
-	Address address;
 }
