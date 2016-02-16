@@ -15,12 +15,12 @@
 package com.liferay.portal.scripting.executor.groovy;
 
 import com.liferay.portal.kernel.model.ClassName;
-import com.liferay.portal.kernel.service.ClassNameLocalServiceUtil
+import com.liferay.portal.kernel.service.ClassNameLocalServiceUtil;
 import com.liferay.dynamic.data.lists.model.DDLRecordSet;
-import com.liferay.dynamic.data.lists.model.DDLRecordSetConstants
-import com.liferay.dynamic.data.mapping.model.DDMStructure
-import com.liferay.dynamic.data.mapping.model.DDMStructureConstants
-import com.liferay.dynamic.data.mapping.service.DDMStructureLocalServiceUtil
+import com.liferay.dynamic.data.lists.model.DDLRecordSetConstants;
+import com.liferay.dynamic.data.mapping.model.DDMStructure;
+import com.liferay.dynamic.data.mapping.model.DDMStructureConstants;
+import com.liferay.dynamic.data.mapping.service.DDMStructureLocalServiceUtil;
 
 /**
  * @author Michael C. Han
@@ -28,43 +28,50 @@ import com.liferay.dynamic.data.mapping.service.DDMStructureLocalServiceUtil
 class GroovyDDMStructure {
 
 	GroovyDDMStructure(
-		GroovySite groovySite_,
-		String structureKey_, String name_,
+		GroovySite groovySite_, String structureKey_, String name_,
 		String description_, String xsd_) {
-			groovySite = groovySite_
-			structureKey = structureKey_
-			name = name_
-			xsd = xsd_
-			description = description_
+
+		groovySite = groovySite_;
+		structureKey = structureKey_;
+		name = name_;
+		description = description_;
+		xsd = xsd_;
 	}
 		
 	void create(GroovyScriptingContext scriptingContext) {
-		ddmStructure = GroovyDDMStructure.fetchStructure(scriptingContext, groovySite, structureKey)
+		ddmStructure = GroovyDDMStructure.fetchStructure(
+			scriptingContext, groovySite, structureKey);
 
-		if(ddmStructure !=null){
+		if (ddmStructure != null) {
 			return;
 		}
-		ddmStructure = DDMStructureLocalServiceUtil.addStructure(scriptingContext.getDefaultUserId(),
-				groovySite.getSite().getGroupId(), 0,
-				ClassNameLocalServiceUtil.getClassNameId(DDLRecordSet.class),
-				null, GroovyScriptingContext.getLocalizationMap(name),
-				GroovyScriptingContext.getLocalizationMap(description),
-				xsd, "xml",
-				DDMStructureConstants.TYPE_DEFAULT,
-				scriptingContext.getServiceContext());
+
+		Group group = groovySite.getSite();
+
+		ddmStructure = DDMStructureLocalServiceUtil.addStructure(
+			scriptingContext.getDefaultUserId(), group.getGroupId(), 0,
+			ClassNameLocalServiceUtil.getClassNameId(DDLRecordSet.class),
+			null, GroovyScriptingContext.getLocalizationMap(name),
+			GroovyScriptingContext.getLocalizationMap(description),
+			xsd, "xml", DDMStructureConstants.TYPE_DEFAULT,
+			scriptingContext.getServiceContext());
 	}
 
 	static DDMStructure fetchStructure(GroovyScriptingContext scriptingContext,
-		GroovySite groovySite_, String structureKey_){
-			Long classnameId = ClassNameLocalServiceUtil.getClassNameId(DDLRecordSet.class)
-			return DDMStructureLocalServiceUtil.fetchStructure(groovySite_.getSite().getGroupId(),
-			classnameId, structureKey_)
+		GroovySite groovySite_, String structureKey_) {
+
+		Group group = groovySite.getSite();
+		Long classnameId = ClassNameLocalServiceUtil.getClassNameId(
+			DDLRecordSet.class);
+
+		return DDMStructureLocalServiceUtil.fetchStructure(
+			group.getGroupId(), classnameId, structureKey_);
 	}
 
 	DDMStructure ddmStructure;
-	GroovySite groovySite;
 	String description;
+	GroovySite groovySite;
 	String name;
-	String xsd;
 	String structureKey;
+	String xsd;
 }
