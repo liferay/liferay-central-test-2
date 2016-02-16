@@ -70,7 +70,7 @@ class GroovySite {
 
 			if (organization != null) {
 				GroupLocalServiceUtil.addOrganizationGroup(
-					organization.getOrganizationId(), site);
+					organization.getOrganizationId(), group);
 			}
 		}
 	}
@@ -82,11 +82,11 @@ class GroovySite {
 		Team team = null;
 
 		try {
-			team = TeamLocalServiceUtil.getTeam(site.getGroupId(), teamName);
+			team = TeamLocalServiceUtil.getTeam(group.getGroupId(), teamName);
 		}
 		catch (NoSuchTeamException nste) {
 			team = TeamLocalServiceUtil.addTeam(
-				groovyScriptingContext.defaultUserId, site.getGroupId(),
+				groovyScriptingContext.defaultUserId, group.getGroupId(),
 				teamName, null);
 		}
 
@@ -108,11 +108,11 @@ class GroovySite {
 		Team team = null;
 
 		try {
-			team = TeamLocalServiceUtil.getTeam(site.getGroupId(), teamName);
+			team = TeamLocalServiceUtil.getTeam(group.getGroupId(), teamName);
 		}
 		catch (NoSuchTeamException nste) {
 			team = TeamLocalServiceUtil.addTeam(
-				groovyScriptingContext.defaultUserId, site.getGroupId(),
+				groovyScriptingContext.defaultUserId, group.getGroupId(),
 				teamName, null);
 		}
 
@@ -127,14 +127,14 @@ class GroovySite {
 	}
 
 	void create(GroovyScriptingContext groovyScriptingContext) {
-		site = GroupLocalServiceUtil.fetchGroup(
+		group = GroupLocalServiceUtil.fetchGroup(
 			groovyScriptingContext.companyId, name);
 
-		if (site != null) {
+		if (group != null) {
 			return;
 		}
 
-		site = GroupLocalServiceUtil.addGroup(
+		group = GroupLocalServiceUtil.addGroup(
 			groovyScriptingContext.defaultUserId,
 			GroupConstants.DEFAULT_PARENT_GROUP_ID, null, 0, 0, name,
 			description, type, true,
@@ -143,8 +143,8 @@ class GroovySite {
 	}
 
 	String description;
+	Group group;
 	String name;
-	Group site;
 	int type;
 
 }

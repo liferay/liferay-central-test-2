@@ -34,7 +34,7 @@ class GroovyLARUtil {
 			groovyScriptingContext.getCompanyId())
 
 		LayoutLocalServiceUtil.importLayouts(
-			groovyUser.getUser().getUserId(), companyGroup.getGroupId(),
+			groovyUser.user.getUserId(), companyGroup.getGroupId(),
 			true, getParameterMap(), is);
 	}
 
@@ -45,7 +45,7 @@ class GroovyLARUtil {
 		long groupId = site.getSite().getGroupId();
 
 		LayoutLocalServiceUtil.importLayouts(
-			groovyUser.getUser().getUserId(), groupId, privateLayout,
+			groovyUser.user.getUserId(), groupId, privateLayout,
 			getParameterMap(), is);
 	}
 
@@ -61,7 +61,7 @@ class GroovyLARUtil {
 		}
 
 		LayoutLocalServiceUtil.importPortletInfo(
-			groovyUser.getUser().getUserId(), layouts.get(0).getPlid(),
+			groovyUser.user.getUserId(), layouts.get(0).getPlid(),
 			groupId, portletId, getParameterMap(), is);
 	}
 
