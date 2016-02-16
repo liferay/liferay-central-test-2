@@ -151,11 +151,7 @@ public class RubyExecutor extends BaseScriptingExecutor {
 				localContextProvider.getRubyInstanceConfig();
 
 			rubyInstanceConfig.setCurrentDirectory(_basePath);
-
-			Class<?> clazz = getClass();
-
-			rubyInstanceConfig.setLoader(clazz.getClassLoader());
-
+			rubyInstanceConfig.setLoader(getClassLoader());
 			rubyInstanceConfig.setLoadPaths(_loadPaths);
 
 			for (Map.Entry<String, Object> entry : inputObjects.entrySet()) {
@@ -266,10 +262,7 @@ public class RubyExecutor extends BaseScriptingExecutor {
 
 		rubyInstanceConfig.setJitThreshold(
 			_rubyScriptingConfiguration.compileThreshold());
-
-		Class<?> clazz = getClass();
-
-		rubyInstanceConfig.setLoader(clazz.getClassLoader());
+		rubyInstanceConfig.setLoader(getClassLoader());
 
 		String[] loadPaths = StringUtil.split(
 			_rubyScriptingConfiguration.loadPaths());

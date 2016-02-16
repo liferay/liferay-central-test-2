@@ -83,4 +83,10 @@ public abstract class BaseScriptingExecutor implements ScriptingExecutor {
 		return null;
 	}
 
+	protected ClassLoader getClassLoader() {
+		Class<?> clazz = getClass();
+
+		return clazz.getClassLoader();
+	}
+
 }

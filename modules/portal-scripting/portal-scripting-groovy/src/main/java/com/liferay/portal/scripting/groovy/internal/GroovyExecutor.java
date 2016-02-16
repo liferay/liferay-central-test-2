@@ -87,9 +87,7 @@ public class GroovyExecutor extends BaseScriptingExecutor {
 
 	@Activate
 	protected void activate() {
-		Class<?> clazz = getClass();
-
-		_groovyShell = new GroovyShell(clazz.getClassLoader());
+		_groovyShell = new GroovyShell(getClassLoader());
 	}
 
 	private volatile GroovyShell _groovyShell;
