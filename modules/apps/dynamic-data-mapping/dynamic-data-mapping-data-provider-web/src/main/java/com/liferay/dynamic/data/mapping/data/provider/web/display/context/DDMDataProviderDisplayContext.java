@@ -27,7 +27,7 @@ import com.liferay.dynamic.data.mapping.model.DDMForm;
 import com.liferay.dynamic.data.mapping.model.DDMFormLayout;
 import com.liferay.dynamic.data.mapping.service.DDMDataProviderInstanceService;
 import com.liferay.dynamic.data.mapping.service.permission.DDMDataProviderInstancePermission;
-import com.liferay.dynamic.data.mapping.service.permission.DDMPermission;
+import com.liferay.dynamic.data.mapping.service.permission.DDMDataProviderPermission;
 import com.liferay.dynamic.data.mapping.storage.DDMFormValues;
 import com.liferay.dynamic.data.mapping.util.DDMFormFactory;
 import com.liferay.dynamic.data.mapping.util.DDMFormLayoutFactory;
@@ -231,7 +231,7 @@ public class DDMDataProviderDisplayContext {
 	}
 
 	public boolean isShowAddDataProviderButton() {
-		return DDMPermission.contains(
+		return DDMDataProviderPermission.contains(
 			_ddmDataProviderRequestHelper.getPermissionChecker(),
 			_ddmDataProviderRequestHelper.getScopeGroupId(),
 			DDMActionKeys.ADD_DATA_PROVIDER_INSTANCE);
