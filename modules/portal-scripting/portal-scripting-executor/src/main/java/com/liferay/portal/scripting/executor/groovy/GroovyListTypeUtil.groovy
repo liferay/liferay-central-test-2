@@ -19,25 +19,33 @@ import com.liferay.portal.kernel.service.ListTypeServiceUtil;
 
 class GroovyListTypeUtil {
 
-	static Map listCache = new HashMap<String, List>();
+	static Map listTypesmap = new HashMap<String, List>();
 
-	static List<ListType> getListForType(String className){
-		if(!listCache.containsKey(className)){
-			List<ListType> types = ListTypeServiceUtil.getListTypes(className)
-			listCache.put(className, types)
+	static List<ListType> getListForType(String className) {
+		if (!listTypesmap.containsKey(className)) {
+			List<ListType> listTypes = ListTypeServiceUtil.getListTypes(
+				className)
+
+			listTypesmap.put(className, listTypes)
 		}
-		return listCache.get(className);
+
+		return listTypesmap.get(className);
 	}
 
-	static int getListTypeForName(String className, String name){
-		List<ListType> types = getListForType(className);
-		int typeId;
-		for(int i = 0; i<types.size(); i++){
-			if(types.get(i).getName().equalsIgnoreCase(name)){
-				typeId = types.get(i).getListTypeId();
-				continue;
+	static int getListTypeForName(String className, String name) {
+		int typeId = 0;
+
+		List<ListType> listTypes = getListForType(className);
+
+		for (ListType listType : listTypes) {
+			if (name.equalsIgnoreCase(listType.getName())) {
+				typeId = listType.getListTypeId();
+
+				break;
 			}
 		}
+
 		return typeId;
 	}
+
 }
