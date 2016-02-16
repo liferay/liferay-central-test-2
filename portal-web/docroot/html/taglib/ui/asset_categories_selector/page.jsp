@@ -28,6 +28,7 @@ long[] groupIds = (long[])request.getAttribute("liferay-ui:asset-categories-sele
 String hiddenInput = (String)request.getAttribute("liferay-ui:asset-categories-selector:hiddenInput");
 boolean ignoreRequestValue = GetterUtil.getBoolean(request.getAttribute("liferay-ui:asset-categories-selector:ignoreRequestValue"));
 boolean showRequiredLabel = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:asset-categories-selector:showRequiredLabel"), true);
+
 int maxEntries = GetterUtil.getInteger(PropsUtil.get(PropsKeys.ASSET_CATEGORIES_SELECTOR_MAX_ENTRIES));
 
 if (ArrayUtil.isEmpty(groupIds)) {
