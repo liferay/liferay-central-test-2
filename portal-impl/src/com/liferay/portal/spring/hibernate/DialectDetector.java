@@ -81,8 +81,6 @@ public class DialectDetector {
 				dialect = new HSQLDialect();
 
 				if (_log.isWarnEnabled()) {
-					_log.warn("=========================================");
-
 					sb = new StringBundler(6);
 
 					sb.append("Liferay is configured to use Hypersonic as ");
@@ -93,8 +91,6 @@ public class DialectDetector {
 					sb.append("changed in portal-ext.properties.");
 
 					_log.warn(sb.toString());
-
-					_log.warn("=========================================");
 				}
 			}
 			else if (dbName.equals("Adaptive Server Enterprise") &&
