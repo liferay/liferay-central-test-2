@@ -26,47 +26,6 @@ import com.liferay.portal.kernel.service.LayoutLocalServiceUtil;
  */
 class GroovyLARUtil {
 
-	static void importGlobal(
-		GroovyUser groovyUser, InputStream inputStream,
-		GroovyScriptingContext groovyScriptingContext) {
-
-		Group companyGroup = GroupLocalServiceUtil.getCompanyGroup(
-			groovyScriptingContext.getCompanyId())
-
-		LayoutLocalServiceUtil.importLayouts(
-			groovyUser.user.getUserId(), companyGroup.getGroupId(), true,
-			getParameterMap(), inputStream);
-	}
-
-	static void importLayouts(
-		GroovyUser groovyUser, GroovySite groovySite, boolean privateLayout,
-		InputStream inputStream,
-		GroovyScriptingContext groovyScriptingContext) {
-
-		LayoutLocalServiceUtil.importLayouts(
-			groovyUser.user.getUserId(), groovySite.group.getGroupId(),
-			privateLayout, getParameterMap(), inputStream);
-	}
-
-	static void importPortletInfo(
-		GroovyUser groovyUser, long groupId, String portletId,
-		InputStream inputStream,
-		GroovyScriptingContext groovyScriptingContext) {
-
-		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
-			groupId, false);
-
-		if (layouts.isEmpty()) {
-			layouts = LayoutLocalServiceUtil.getLayouts(groupId, true);
-		}
-
-		Layout layout = layouts.get(0);
-
-		LayoutLocalServiceUtil.importPortletInfo(
-			groovyUser.user.getUserId(), layout.getPlid(),
-			groupId, portletId, getParameterMap(), inputStream);
-	}
-
 	static Map<String, String[]> getParameterMap() {
 		Map<String, String[]> parameterMap =
 			new LinkedHashMap<String, String[]>();
@@ -125,6 +84,47 @@ class GroovyLARUtil {
 			UserIdStrategy.CURRENT_USER_ID);
 
 		return parameterMap;
+	}
+
+	static void importGlobal(
+		GroovyUser groovyUser, InputStream inputStream,
+		GroovyScriptingContext groovyScriptingContext) {
+
+		Group companyGroup = GroupLocalServiceUtil.getCompanyGroup(
+			groovyScriptingContext.getCompanyId())
+
+		LayoutLocalServiceUtil.importLayouts(
+			groovyUser.user.getUserId(), companyGroup.getGroupId(), true,
+			getParameterMap(), inputStream);
+	}
+
+	static void importLayouts(
+		GroovyUser groovyUser, GroovySite groovySite, boolean privateLayout,
+		InputStream inputStream,
+		GroovyScriptingContext groovyScriptingContext) {
+
+		LayoutLocalServiceUtil.importLayouts(
+			groovyUser.user.getUserId(), groovySite.group.getGroupId(),
+			privateLayout, getParameterMap(), inputStream);
+	}
+
+	static void importPortletInfo(
+		GroovyUser groovyUser, long groupId, String portletId,
+		InputStream inputStream,
+		GroovyScriptingContext groovyScriptingContext) {
+
+		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
+			groupId, false);
+
+		if (layouts.isEmpty()) {
+			layouts = LayoutLocalServiceUtil.getLayouts(groupId, true);
+		}
+
+		Layout layout = layouts.get(0);
+
+		LayoutLocalServiceUtil.importPortletInfo(
+			groovyUser.user.getUserId(), layout.getPlid(),
+			groupId, portletId, getParameterMap(), inputStream);
 	}
 
 }
