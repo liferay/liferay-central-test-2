@@ -68,7 +68,10 @@ public interface IFramePortletInstanceConfiguration {
 	@Meta.AD(name = "%password", required = false)
 	public String formPassword();
 
-	@Meta.AD(deflt = "var1=hello|var2=world", name = "%hidden-variables", required = false)
+	@Meta.AD(
+		deflt = "var1=hello|var2=world", name = "%hidden-variables",
+		required = false
+	)
 	public String[] hiddenVariables();
 
 	@Meta.AD(deflt = "true", name = "%resize-automatically", required = false)
