@@ -44,6 +44,8 @@ public class MDRRuleGroupInstanceLocalServiceImpl
 			int priority, ServiceContext serviceContext)
 		throws PortalException {
 
+		// Rule group instance
+
 		User user = userPersistence.findByPrimaryKey(
 			serviceContext.getUserId());
 		long classNameId = classNameLocalService.getClassNameId(className);

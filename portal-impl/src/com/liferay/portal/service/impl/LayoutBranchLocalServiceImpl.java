@@ -43,6 +43,8 @@ public class LayoutBranchLocalServiceImpl
 			boolean master, ServiceContext serviceContext)
 		throws PortalException {
 
+		// Layout branch
+
 		User user = userPersistence.findByPrimaryKey(
 			serviceContext.getUserId());
 		LayoutSetBranch layoutSetBranch =

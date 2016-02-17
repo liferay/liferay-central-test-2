@@ -52,6 +52,8 @@ public class MDRRuleGroupLocalServiceImpl
 			Map<Locale, String> descriptionMap, ServiceContext serviceContext)
 		throws PortalException {
 
+		// Rule group
+
 		User user = userPersistence.findByPrimaryKey(
 			serviceContext.getUserId());
 
