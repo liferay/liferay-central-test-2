@@ -205,6 +205,7 @@ public int countBy${finder.name}(
 		<#else>
 			if (!InlineSQLHelperUtil.isEnabled()) {
 		</#if>
+
 			return countBy${finder.name}(
 
 			<#list finderColsList as finderCol>
@@ -313,13 +314,13 @@ public int countBy${finder.name}(
 
 		) {
 			<#if finder.hasColumn("groupId")>
-			if (!InlineSQLHelperUtil.isEnabled(
-				<#if finder.getColumn("groupId").hasArrayableOperator()>
-					groupIds
-				<#else>
-					groupId
-				</#if>
-			)) {
+				if (!InlineSQLHelperUtil.isEnabled(
+					<#if finder.getColumn("groupId").hasArrayableOperator()>
+						groupIds
+					<#else>
+						groupId
+					</#if>
+				)) {
 			<#elseif finder.hasColumn("companyId")>
 				if (!InlineSQLHelperUtil.isEnabled(companyId, 0)) {
 			<#else>
