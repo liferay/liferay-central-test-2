@@ -34,12 +34,6 @@ portletURL.setParameter(teamSearch.getCurParam(), String.valueOf(teamSearch.getC
 int teamsCount = TeamLocalServiceUtil.searchCount(scopeGroupId, searchTerms.getKeywords(), searchTerms.getDescription(), new LinkedHashMap<String, Object>());
 
 teamSearch.setTotal(teamsCount);
-
-Group group = themeDisplay.getScopeGroup();
-
-long[] defaultTeamIds = StringUtil.split(group.getTypeSettingsProperties().getProperty("defaultTeamIds"), 0L);
-
-long[] teamIds = ParamUtil.getLongValues(request, "teamIds", defaultTeamIds);
 %>
 
 <aui:nav-bar cssClass="collapse-basic-search" markupView="lexicon">
@@ -108,6 +102,12 @@ long[] teamIds = ParamUtil.getLongValues(request, "teamIds", defaultTeamIds);
 				data.put("teamdescription", curTeam.getDescription());
 				data.put("teamid", curTeam.getTeamId());
 				data.put("teamname", curTeam.getName());
+
+				Group group = themeDisplay.getScopeGroup();
+
+				long[] defaultTeamIds = StringUtil.split(group.getTypeSettingsProperties().getProperty("defaultTeamIds"), 0L);
+
+				long[] teamIds = ParamUtil.getLongValues(request, "teamIds", defaultTeamIds);
 
 				boolean disabled = ArrayUtil.contains(teamIds, curTeam.getTeamId());
 				%>
