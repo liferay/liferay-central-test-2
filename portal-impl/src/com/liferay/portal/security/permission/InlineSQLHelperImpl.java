@@ -583,8 +583,8 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 				catch (PortalException pe) {
 					if (_log.isDebugEnabled()) {
 						_log.debug(
-							"Unable to retrieve resource permissions for " +
-								className + " inside Group " + groupId,
+							"Unable to get resource permissions for " +
+								className + " with group " + groupId,
 							pe);
 					}
 				}
