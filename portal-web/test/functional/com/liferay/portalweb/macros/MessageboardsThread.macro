@@ -1143,6 +1143,8 @@
 		<if>
 			<equals arg1="${loggedOut}" arg2="true" />
 			<then>
+				<var name="key_threadBody" value="${threadReplyBody}" />
+
 				<execute function="AssertTextEquals" locator1="MessageBoardsThread#THREAD_SUBJECT_2" value1="RE: ${threadSubject}" />
 				<execute function="AssertTextEquals" locator1="MessageBoardsThread#THREAD_BODY" value1="${threadReplyBody}" />
 				<execute function="AssertTextEquals" locator1="MessageBoardsThread#THREAD_BODY" value1="${threadBody}" />
