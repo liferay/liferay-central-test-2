@@ -13,6 +13,10 @@ configurations {
 	}
 }
 
-configurations.provided.dependencies.withType(ProjectDependency) {
-	configurations.default.exclude module: it.name
+List<String> taskNames = gradle.startParameter.taskNames
+
+if (!("eclipse" in taskNames) && !("idea" in taskNames)) {
+	configurations.provided.dependencies.withType(ProjectDependency) {
+		configurations.default.exclude module: it.name
+	}
 }
