@@ -46,7 +46,7 @@ public interface InlineSQLHelper {
 	 * @param  companyId the primary key of the company
 	 * @param  groupId the primary key of the group
 	 * @return <code>true</code> if the inline SQL helper is enabled for the
-	 *         group or company; <code>false</code> otherwise
+	 *         company or group; <code>false</code> otherwise
 	 */
 	public boolean isEnabled(long companyId, long groupId);
 
