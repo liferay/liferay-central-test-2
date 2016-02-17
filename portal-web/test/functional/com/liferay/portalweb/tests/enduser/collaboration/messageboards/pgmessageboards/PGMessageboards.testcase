@@ -448,6 +448,7 @@
 			<var name="threadBody" value="${threadBody}" />
 			<var name="threadReplyBody" value="${threadReplyBody}" />
 			<var name="threadSubject" value="${threadSubject}" />
+			<var name="userName" value="Anonymous" />
 		</execute>
 	</command>
 
