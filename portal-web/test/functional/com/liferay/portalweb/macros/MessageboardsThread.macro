@@ -398,7 +398,7 @@
 	<command name="gotoPG">
 		<var name="key_postsNumber" value="${postCount}" />
 		<var name="key_threadSubject" value="${threadSubject}" />
-		<var name="key_userName" value="${startedByUserName}" />
+		<var name="key_userName" value="${lastPostUserName}" />
 
 		<if>
 			<isset var="messageBoardsThreadURL" />
