@@ -120,7 +120,9 @@ portletURL.setParameter("eventName", eventName);
 					data.put("roletitle", role.getTitle(locale));
 					data.put("searchcontainername", "roles");
 
-					long[] roleIds = ParamUtil.getLongValues(request, "roleIds", selUser.getRoleIds());
+					long[] defaultRoleIds = selUser.getRoleIds();
+
+					long[] roleIds = ParamUtil.getLongValues(request, "roleIds", defaultRoleIds);
 
 					boolean disabled = ArrayUtil.contains(roleIds, role.getRoleId());
 					%>
