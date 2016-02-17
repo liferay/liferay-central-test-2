@@ -443,7 +443,6 @@
 		<execute macro="Page#add">
 			<var name="page" value="Public Pages" />
 			<var name="pageName" value="Site Page" />
-			<var name="siteScopeSelected" value="Liferay" />
 		</execute>
 
 		<execute macro="ProductMenu#gotoSitesPages" >
