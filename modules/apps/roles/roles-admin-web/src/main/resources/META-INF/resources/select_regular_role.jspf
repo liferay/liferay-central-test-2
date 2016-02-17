@@ -31,10 +31,6 @@ if (selUser != null) {
 }
 
 portletURL.setParameter("eventName", eventName);
-
-long[] defaultRoleIds = selUser.getRoleIds();
-
-long[] roleIds = ParamUtil.getLongValues(request, "roleIds", defaultRoleIds);
 %>
 
 <aui:nav-bar cssClass="collapse-basic-search" markupView="lexicon">
@@ -123,6 +119,8 @@ long[] roleIds = ParamUtil.getLongValues(request, "roleIds", defaultRoleIds);
 					data.put("roleid", role.getRoleId());
 					data.put("roletitle", role.getTitle(locale));
 					data.put("searchcontainername", "roles");
+
+					long[] roleIds = ParamUtil.getLongValues(request, "roleIds", selUser.getRoleIds());
 
 					boolean disabled = ArrayUtil.contains(roleIds, role.getRoleId());
 					%>
