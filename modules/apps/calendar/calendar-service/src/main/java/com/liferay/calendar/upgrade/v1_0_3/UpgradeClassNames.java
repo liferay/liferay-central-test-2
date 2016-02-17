@@ -17,6 +17,9 @@ package com.liferay.calendar.upgrade.v1_0_3;
 import com.liferay.portal.kernel.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.v7_0_0.UpgradeKernelPackage;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 /**
  * @author Cristina González
  */
@@ -25,6 +28,8 @@ public class UpgradeClassNames extends UpgradeKernelPackage {
 	@Override
 	public void doUpgrade() throws UpgradeException {
 		_cleanCalEventClassName();
+
+		_cleanRepeatedResources();
 
 		super.doUpgrade();
 	}
@@ -60,6 +65,28 @@ public class UpgradeClassNames extends UpgradeKernelPackage {
 			runSQL(
 				"delete from ResourcePermission where name like '" +
 					_CAL_EVENT_CLASS_NAME + "%'");
+		}
+		catch (Exception e) {
+			throw new UpgradeException(e);
+		}
+	}
+
+	private void _cleanRepeatedResources() throws UpgradeException {
+		String oldName = _RESOURCE_NAMES[0][1];
+		String newName = _RESOURCE_NAMES[0][1];
+
+		String selectSQL =
+			"select actionId from ResourceAction where name = '" + newName +
+				"'";
+
+		try (PreparedStatement ps = connection.prepareStatement(selectSQL);
+			ResultSet rs = ps.executeQuery()) {
+
+			while (rs.next()) {
+				runSQL(
+					"delete from ResourceAction where actionId = '" +
+						rs.getString(1) + "' and name= '"+ oldName + "'");
+			}
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
