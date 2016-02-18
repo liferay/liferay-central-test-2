@@ -730,10 +730,9 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 		MBMessage message = mbMessagePersistence.findByPrimaryKey(messageId);
 
-		long rootMessageId = message.getRootMessageId();
-
 		MBMessagePermission.check(
-			getPermissionChecker(), rootMessageId, ActionKeys.UPDATE);
+			getPermissionChecker(), message.getRootMessageId(),
+			ActionKeys.UPDATE);
 
 		mbMessageLocalService.updateAnswer(messageId, answer, cascade);
 	}
