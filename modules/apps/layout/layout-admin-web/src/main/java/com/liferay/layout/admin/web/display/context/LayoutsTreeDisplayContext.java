@@ -95,7 +95,7 @@ public class LayoutsTreeDisplayContext extends BaseLayoutDisplayContext {
 		try {
 			redirectURL.setWindowState(LiferayWindowState.EXCLUSIVE);
 		}
-		catch (WindowStateException e) {
+		catch (WindowStateException wse) {
 		}
 
 		deleteLayoutURL.setParameter("redirect", redirectURL.toString());
