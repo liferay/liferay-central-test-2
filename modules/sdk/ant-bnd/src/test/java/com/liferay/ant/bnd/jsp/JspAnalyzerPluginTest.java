@@ -31,14 +31,14 @@ import org.junit.Test;
 public class JspAnalyzerPluginTest {
 
 	@Test
-	public void testTaglibURIsParsingNoComments() throws Exception {
+	public void testTaglibURIsParsingWithoutComments() throws Exception {
 		JspAnalyzerPlugin jspAnalyzerPlugin = new JspAnalyzerPlugin();
 
 		URL url = getResource("dependencies/imports_no_comments.jsp");
 
-		InputStream stream = url.openStream();
+		InputStream inputStream = url.openStream();
 
-		String content = IO.collect(stream);
+		String content = IO.collect(inputStream);
 
 		Set<String> taglibURIs = jspAnalyzerPlugin.getTaglibURIs(content);
 
@@ -55,9 +55,9 @@ public class JspAnalyzerPluginTest {
 
 		URL url = getResource("dependencies/imports_with_comments.jsp");
 
-		InputStream stream = url.openStream();
+		InputStream inputStream = url.openStream();
 
-		String content = IO.collect(stream);
+		String content = IO.collect(inputStream);
 
 		Set<String> taglibURIs = jspAnalyzerPlugin.getTaglibURIs(content);
 
