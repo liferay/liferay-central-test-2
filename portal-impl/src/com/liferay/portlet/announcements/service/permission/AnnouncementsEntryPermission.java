@@ -107,25 +107,24 @@ public class AnnouncementsEntryPermission {
 
 		boolean useDefaultPortletPermissions = false;
 
-		String resourcePermissionPrimKey = PortletPermissionUtil.getPrimaryKey(
+		String primKey = PortletPermissionUtil.getPrimaryKey(
 			layout.getPlid(), portletId);
 
 		int count =
 			ResourcePermissionLocalServiceUtil.getResourcePermissionsCount(
 				permissionChecker.getCompanyId(), portletId,
-				ResourceConstants.SCOPE_INDIVIDUAL, resourcePermissionPrimKey);
+				ResourceConstants.SCOPE_INDIVIDUAL, primKey);
 
 		if (count == 0) {
 			useDefaultPortletPermissions = true;
 		}
 
 		if (useDefaultPortletPermissions) {
-			resourcePermissionPrimKey = portletId;
+			primKey = portletId;
 		}
 
 		return permissionChecker.hasPermission(
-			layout.getGroupId(), portletId, resourcePermissionPrimKey,
-			actionId);
+			layout.getGroupId(), portletId, primKey, actionId);
 	}
 
 	public static boolean contains(
