@@ -26,7 +26,7 @@ AUI.add(
 
 				var container = instance.get('container');
 
-				var tabs = container.one('.lfr-ddm-form-tabs')
+				var tabs = container.one('.lfr-ddm-form-tabs');
 
 				if (!instance.tabView && tabs) {
 					instance.tabView = new A.TabView(
