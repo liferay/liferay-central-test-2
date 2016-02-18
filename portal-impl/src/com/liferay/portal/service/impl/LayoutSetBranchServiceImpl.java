@@ -73,8 +73,9 @@ public class LayoutSetBranchServiceImpl extends LayoutSetBranchServiceBaseImpl {
 		catch (PortalException pe) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"Error retrieving LayoutSetBranches for groupId=" +
-						groupId + ", privateLayout=" + privateLayout,
+					"Unable to get layout set branches for group " + groupId +
+						" with " + (privateLayout ? "private" : "public") +
+							" layouts",
 					pe);
 			}
 		}

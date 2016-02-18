@@ -839,13 +839,13 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 		long companyId, String portletId, String preferencesKey,
 		String preferencesValue) {
 
-		LayoutReference[] layoutReferencesArray = layoutLocalService.getLayouts(
+		LayoutReference[] layoutReferences = layoutLocalService.getLayouts(
 			companyId, portletId, preferencesKey, preferencesValue);
 
 		List<LayoutReference> filteredLayoutReferences = new ArrayList<>(
-			layoutReferencesArray.length);
+			layoutReferences.length);
 
-		for (LayoutReference layoutReference : layoutReferencesArray) {
+		for (LayoutReference layoutReference : layoutReferences) {
 			try {
 				if (LayoutPermissionUtil.contains(
 						getPermissionChecker(),
