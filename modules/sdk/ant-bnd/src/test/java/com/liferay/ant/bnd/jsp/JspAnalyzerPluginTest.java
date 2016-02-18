@@ -31,7 +31,7 @@ import org.junit.Test;
 public class JspAnalyzerPluginTest {
 
 	@Test
-	public void testTaglibURIsParsingWithComments() throws Exception {
+	public void tesGetTaglibURIsWithComments() throws Exception {
 		JspAnalyzerPlugin jspAnalyzerPlugin = new JspAnalyzerPlugin();
 
 		URL url = getResource("dependencies/imports_with_comments.jsp");
@@ -50,10 +50,10 @@ public class JspAnalyzerPluginTest {
 	}
 
 	@Test
-	public void testTaglibURIsParsingWithoutComments() throws Exception {
+	public void tesGetTaglibURIsWithoutComments() throws Exception {
 		JspAnalyzerPlugin jspAnalyzerPlugin = new JspAnalyzerPlugin();
 
-		URL url = getResource("dependencies/imports_no_comments.jsp");
+		URL url = getResource("dependencies/imports_without_comments.jsp");
 
 		InputStream inputStream = url.openStream();
 
