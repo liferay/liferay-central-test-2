@@ -43,10 +43,10 @@ public class OrganizationSearchContainerResultsTag<R> extends IncludeTag {
 
 	@Override
 	protected void cleanUp() {
+		_forceDatabase = false;
 		_organizationParams = null;
 		_parentOrganizationId = 0;
 		_searchTerms = null;
-		_forceDatabase = false;
 	}
 
 	@Override
@@ -69,12 +69,6 @@ public class OrganizationSearchContainerResultsTag<R> extends IncludeTag {
 			"liferay-ui:organization-search-container-results:forceDatabase",
 			_forceDatabase);
 		request.setAttribute(
-			"liferay-ui:organization-search-container-results:searchContainer",
-			searchContainer);
-		request.setAttribute(
-			"liferay-ui:organization-search-container-results:searchTerms",
-			_searchTerms);
-		request.setAttribute(
 			"liferay-ui:organization-search-container-results:" +
 				"organizationParams",
 			_organizationParams);
@@ -82,6 +76,12 @@ public class OrganizationSearchContainerResultsTag<R> extends IncludeTag {
 			"liferay-ui:organization-search-container-results:" +
 				"parentOrganizationId",
 			_parentOrganizationId);
+		request.setAttribute(
+			"liferay-ui:organization-search-container-results:searchContainer",
+			searchContainer);
+		request.setAttribute(
+			"liferay-ui:organization-search-container-results:searchTerms",
+			_searchTerms);
 	}
 
 	private static final String _PAGE =
