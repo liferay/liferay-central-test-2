@@ -414,7 +414,7 @@
 		</execute>
 
 		<execute macro="Page#add">
-			<var name="page" value="Private Pages" />
+			<var name="sitePagePrivacy" value="Private Pages" />
 			<var name="pageName" value="Private Page" />
 			<var name="siteName" value="Organization Name" />
 		</execute>
