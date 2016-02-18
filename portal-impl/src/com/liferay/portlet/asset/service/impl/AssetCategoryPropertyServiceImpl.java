@@ -73,7 +73,7 @@ public class AssetCategoryPropertyServiceImpl
 		catch (PortalException pe) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"Error retrieving AssetCategoryProperty for entryId=" +
+					"Unable to get asset category property for asset entry " +
 						entryId,
 					pe);
 			}
@@ -119,7 +119,7 @@ public class AssetCategoryPropertyServiceImpl
 	protected List<AssetCategoryProperty> filterAssetCategoryProperties(
 		List<AssetCategoryProperty> assetCategoryProperties) {
 
-		ArrayList<AssetCategoryProperty> filteredAssetCategoryProperties =
+		List<AssetCategoryProperty> filteredAssetCategoryProperties =
 			new ArrayList<>(assetCategoryProperties.size());
 
 		for (AssetCategoryProperty assetCategoryProperty :
