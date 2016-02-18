@@ -14,8 +14,6 @@
 
 package com.liferay.bookmarks.upgrade.v1_0_0;
 
-import com.liferay.bookmarks.model.BookmarksEntry;
-import com.liferay.bookmarks.model.BookmarksFolder;
 import com.liferay.portal.upgrade.v7_0_0.UpgradeKernelPackage;
 
 /**
