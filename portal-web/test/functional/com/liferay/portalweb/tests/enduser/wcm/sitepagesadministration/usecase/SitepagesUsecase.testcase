@@ -83,7 +83,7 @@
 		</execute>
 
 		<execute macro="Page#add">
-			<var name="page" value="Private Pages" />
+			<var name="sitePagePrivacy" value="Private Pages" />
 			<var name="pageName" value="Site Page Name" />
 		</execute>
 
@@ -742,7 +742,7 @@
 		</execute>
 
 		<execute macro="Page#add">
-			<var name="page" value="Private Pages" />
+			<var name="sitePagePrivacy" value="Private Pages" />
 			<var name="pageName" value="Test Private Page" />
 			<var name="siteName" value="Liferay" />
 			<var name="sitePagePrivacy" value="Private" />
@@ -987,7 +987,7 @@
 		</execute>
 
 		<execute macro="Page#add">
-			<var name="page" value="Private Pages" />
+			<var name="sitePagePrivacy" value="Private Pages" />
 			<var name="pageName" value="Test Private Page" />
 			<var name="siteName" value="Liferay" />
 		</execute>
