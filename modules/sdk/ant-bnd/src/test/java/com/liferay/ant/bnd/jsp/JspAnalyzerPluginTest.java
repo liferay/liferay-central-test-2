@@ -31,25 +31,6 @@ import org.junit.Test;
 public class JspAnalyzerPluginTest {
 
 	@Test
-	public void testTaglibURIsParsingWithoutComments() throws Exception {
-		JspAnalyzerPlugin jspAnalyzerPlugin = new JspAnalyzerPlugin();
-
-		URL url = getResource("dependencies/imports_no_comments.jsp");
-
-		InputStream inputStream = url.openStream();
-
-		String content = IO.collect(inputStream);
-
-		Set<String> taglibURIs = jspAnalyzerPlugin.getTaglibURIs(content);
-
-		Assert.assertNotNull(taglibURIs);
-
-		int size = taglibURIs.size();
-
-		Assert.assertEquals(8, size);
-	}
-
-	@Test
 	public void testTaglibURIsParsingWithComments() throws Exception {
 		JspAnalyzerPlugin jspAnalyzerPlugin = new JspAnalyzerPlugin();
 
@@ -66,6 +47,25 @@ public class JspAnalyzerPluginTest {
 		int size = taglibURIs.size();
 
 		Assert.assertEquals(3, size);
+	}
+
+	@Test
+	public void testTaglibURIsParsingWithoutComments() throws Exception {
+		JspAnalyzerPlugin jspAnalyzerPlugin = new JspAnalyzerPlugin();
+
+		URL url = getResource("dependencies/imports_no_comments.jsp");
+
+		InputStream inputStream = url.openStream();
+
+		String content = IO.collect(inputStream);
+
+		Set<String> taglibURIs = jspAnalyzerPlugin.getTaglibURIs(content);
+
+		Assert.assertNotNull(taglibURIs);
+
+		int size = taglibURIs.size();
+
+		Assert.assertEquals(8, size);
 	}
 
 	protected URL getResource(String path) {
