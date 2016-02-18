@@ -107,7 +107,7 @@ public class PermissionsPortletConfigurationIcon
 
 		String rootPortletId = portletDisplay.getRootPortletId();
 
-		if (!Validator.isBlank(portletDisplay.getPortletResource())) {
+		if (Validator.isNotNull(portletDisplay.getPortletResource())) {
 			String portletResource = portletDisplay.getPortletResource();
 
 			Portlet portlet = _portletLocalService.getPortletById(
