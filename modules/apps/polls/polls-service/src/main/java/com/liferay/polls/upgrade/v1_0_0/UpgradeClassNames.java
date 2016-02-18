@@ -14,9 +14,6 @@
 
 package com.liferay.polls.upgrade.v1_0_0;
 
-import com.liferay.polls.model.PollsChoice;
-import com.liferay.polls.model.PollsQuestion;
-import com.liferay.polls.model.PollsVote;
 import com.liferay.portal.upgrade.v7_0_0.UpgradeKernelPackage;
 
 /**

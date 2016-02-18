@@ -14,11 +14,6 @@
 
 package com.liferay.dynamic.data.mapping.upgrade.v1_0_0;
 
-import com.liferay.dynamic.data.mapping.model.DDMContent;
-import com.liferay.dynamic.data.mapping.model.DDMStorageLink;
-import com.liferay.dynamic.data.mapping.model.DDMStructure;
-import com.liferay.dynamic.data.mapping.model.DDMStructureLink;
-import com.liferay.dynamic.data.mapping.model.DDMTemplate;
 import com.liferay.portal.upgrade.v7_0_0.UpgradeKernelPackage;
 
 /**

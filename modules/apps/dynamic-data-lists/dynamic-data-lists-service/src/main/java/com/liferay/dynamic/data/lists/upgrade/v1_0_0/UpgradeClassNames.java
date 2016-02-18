@@ -14,9 +14,6 @@
 
 package com.liferay.dynamic.data.lists.upgrade.v1_0_0;
 
-import com.liferay.dynamic.data.lists.model.DDLRecord;
-import com.liferay.dynamic.data.lists.model.DDLRecordSet;
-import com.liferay.dynamic.data.lists.model.DDLRecordVersion;
 import com.liferay.portal.upgrade.v7_0_0.UpgradeKernelPackage;
 
 /**

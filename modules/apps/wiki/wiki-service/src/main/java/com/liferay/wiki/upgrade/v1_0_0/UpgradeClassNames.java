@@ -15,9 +15,6 @@
 package com.liferay.wiki.upgrade.v1_0_0;
 
 import com.liferay.portal.upgrade.v7_0_0.UpgradeKernelPackage;
-import com.liferay.wiki.model.WikiNode;
-import com.liferay.wiki.model.WikiPage;
-import com.liferay.wiki.model.WikiPageResource;
 
 /**
  * @author Miguel Pastor

@@ -15,15 +15,6 @@
 package com.liferay.shopping.upgrade.v1_0_0;
 
 import com.liferay.portal.upgrade.v7_0_0.UpgradeKernelPackage;
-import com.liferay.shopping.model.ShoppingCart;
-import com.liferay.shopping.model.ShoppingCartItem;
-import com.liferay.shopping.model.ShoppingCategory;
-import com.liferay.shopping.model.ShoppingCoupon;
-import com.liferay.shopping.model.ShoppingItem;
-import com.liferay.shopping.model.ShoppingItemField;
-import com.liferay.shopping.model.ShoppingItemPrice;
-import com.liferay.shopping.model.ShoppingOrder;
-import com.liferay.shopping.model.ShoppingOrderItem;
 
 /**
  * @author Philip Jones

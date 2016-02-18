@@ -14,12 +14,6 @@
 
 package com.liferay.journal.upgrade.v0_0_2;
 
-import com.liferay.journal.model.JournalArticle;
-import com.liferay.journal.model.JournalArticleImage;
-import com.liferay.journal.model.JournalArticleResource;
-import com.liferay.journal.model.JournalContentSearch;
-import com.liferay.journal.model.JournalFeed;
-import com.liferay.journal.model.JournalFolder;
 import com.liferay.portal.upgrade.v7_0_0.UpgradeKernelPackage;
 
 /**
