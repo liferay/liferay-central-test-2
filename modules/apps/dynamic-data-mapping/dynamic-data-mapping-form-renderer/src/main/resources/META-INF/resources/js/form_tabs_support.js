@@ -11,28 +11,30 @@ AUI.add(
 				instance.after('render', instance._afterTabsRender);
 			},
 
-			getTabView: function() {
+			destructor: function() {
 				var instance = this;
 
-				if (!instance.tabView) {
-					var container = instance.get('container');
+				var tabView = instance.tabView;
 
-					instance.tabView = new A.TabView(
-						{
-							srcNode: container.one('.lfr-ddm-form-tabs')
-						}
-					);
+				if (tabView) {
+					tabView.destroy();
 				}
-
-				return instance.tabView;
 			},
 
 			_afterTabsRender: function() {
 				var instance = this;
 
-				var tabView = instance.getTabView();
+				var container = instance.get('container');
 
-				tabView.render();
+				var tabs = container.one('.lfr-ddm-form-tabs')
+
+				if (!instance.tabView && tabs) {
+					instance.tabView = new A.TabView(
+						{
+							srcNode: tabs
+						}
+					).render();
+				}
 			}
 		};
 
