@@ -349,6 +349,15 @@
 		<execute function="AssertTextEquals#assertPartialText" locator1="Message#SUCCESS" value1="Your request completed successfully." />
 	</command>
 
+	<command name="disallowEditViaSiteAdminEditCP">
+		<var name="key_page" value="${sitePageName}" />
+
+		<execute function="AssertClick" locator1="SitePages#PAGE_TREE_PAGE_SPECIFIC_PAGE" value1="${sitePageName}" />
+
+		<execute function="Uncheck" locator1="Checkbox#ALLOW_SITE_ADMIN_MODIFY_PAGES" />
+		<execute function="AssertClick" locator1="Button#SAVE" value1="Save" />
+	</command>
+
 	<command name="editPageLayoutColumn">
 		<var name="key_columnName" value="${columnName}" />
 
@@ -385,6 +394,14 @@
 		</if>
 
 		<execute function="AssertClick" locator1="Button#SAVE" value1="Save" />
+		<execute macro="Alert#viewRequestCompletedSuccessMessage" />
+	</command>
+
+	<command name="editName">
+		<execute function="Type" locator1="TextInput#NAME" value1="${pageNameEdit}" />
+
+		<execute function="AssertClick#pauseAssertTextClickAt" locator1="Button#SAVE" value1="Save" />
+
 		<execute macro="Alert#viewRequestCompletedSuccessMessage" />
 	</command>
 

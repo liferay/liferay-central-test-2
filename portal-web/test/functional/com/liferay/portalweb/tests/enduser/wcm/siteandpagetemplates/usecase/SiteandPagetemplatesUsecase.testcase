@@ -399,7 +399,7 @@
 			<var name="siteTemplateName" value="Site Template Name" />
 		</execute>
 
-		<execute macro="SitePage#disallowEditViaSiteAdminEditCP">
+		<execute macro="Page#disallowEditViaSiteAdminEditCP">
 			<var name="sitePageName" value="Locked Page Name" />
 		</execute>
 
