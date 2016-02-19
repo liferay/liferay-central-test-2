@@ -270,6 +270,8 @@
 	</command>
 
 	<command name="ADTCategoriesNavigation" priority="5">
+		<property name="portal.acceptance" value="true" />
+		
 		<execute macro="ProductMenu#gotoSite">
 			<var name="site" value="Test Site Name" />
 		</execute>
