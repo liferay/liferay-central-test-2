@@ -46,7 +46,7 @@
 <liferay-theme:defineObjects />
 
 <%
-String namespace = PortalUtil.getPortletNamespace(LayoutAdminPortletKeys.LAYOUT_ADMIN);
+String portletNamespace = PortalUtil.getPortletNamespace(LayoutAdminPortletKeys.LAYOUT_ADMIN);
 
 InformationMessagesProductNavigationControlMenuEntry informationMessagesProductNavigationControlMenuEntry = (InformationMessagesProductNavigationControlMenuEntry)request.getAttribute(LayoutAdminWebKeys.CONTROL_MENU_ENTRY);
 
@@ -58,7 +58,7 @@ data.put("qa-id", "info");
 <liferay-ui:icon
 	data="<%= data %>"
 	icon="information-live"
-	id='<%= namespace + "infoButton" %>'
+	id='<%= portletNamespace + "infoButton" %>'
 	label="<%= false %>"
 	linkCssClass="control-menu-icon"
 	markupView="lexicon"
@@ -67,7 +67,7 @@ data.put("qa-id", "info");
 />
 
 <div class="hide">
-	<div id="<%= namespace %>infoContainer">
+	<div id="<%= portletNamespace %>infoContainer">
 		<c:if test="<%= informationMessagesProductNavigationControlMenuEntry.isModifiedLayout(themeDisplay) %>">
 			<div class="modified-layout">
 				<aui:icon image="information-live" markupView="lexicon" />
@@ -155,7 +155,7 @@ data.put("qa-id", "info");
 
 					<liferay-ui:icon
 						cssClass="view-default"
-						id='<%= namespace + "toggleCustomizedView" %>'
+						id='<%= portletNamespace + "toggleCustomizedView" %>'
 						label="<%= true %>"
 						message="<%= LanguageUtil.get(resourceBundle, taglibMessage) %>"
 						url="javascript:;"
@@ -178,7 +178,7 @@ data.put("qa-id", "info");
 			</div>
 
 			<aui:script position="inline" sandbox="<%= true %>">
-				$('#<%= namespace %>toggleCustomizedView').on(
+				$('#<%= portletNamespace %>toggleCustomizedView').on(
 					'click',
 					function(event) {
 						$.ajax(
@@ -220,7 +220,7 @@ data.put("qa-id", "info");
 </div>
 
 <aui:script position="auto" use="aui-popover,event-outside">
-	var trigger = A.one('#<%= namespace %>infoButton');
+	var trigger = A.one('#<%= portletNamespace %>infoButton');
 
 	var popOver = new A.Popover(
 		{
@@ -228,7 +228,7 @@ data.put("qa-id", "info");
 					node: trigger,
 					points:[A.WidgetPositionAlign.TC, A.WidgetPositionAlign.BC]
 				},
-			bodyContent: A.one('#<%= namespace %>infoContainer'),
+			bodyContent: A.one('#<%= portletNamespace %>infoContainer'),
 			constrain: true,
 			hideOn: [
 				{
