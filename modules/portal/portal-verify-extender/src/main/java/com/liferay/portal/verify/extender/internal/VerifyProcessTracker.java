@@ -173,7 +173,7 @@ public class VerifyProcessTracker {
 		PrintWriter printWriter = new PrintWriter(outputStream, true);
 
 		printWriter.println(
-			"Executing verifiers registered at: " + verifyProcessName);
+			"Executing verifiers registered for " + verifyProcessName);
 
 		List<VerifyProcess> verifyProcesses = getVerifyProcesses(
 			verifyProcessName);
@@ -329,10 +329,8 @@ public class VerifyProcessTracker {
 
 			if (release == null) {
 
-				// Not all the verifiers are associated with a database
-				// service but we need to represent them into the release
-				// table anyway,so we can know their state. We just need to
-				// record the name of the component being verified
+				// Verification state must be persisted even though not all
+				// verifiers are associated with a database service
 
 				release = _releaseLocalService.createRelease(
 					_counterLocalService.increment());
