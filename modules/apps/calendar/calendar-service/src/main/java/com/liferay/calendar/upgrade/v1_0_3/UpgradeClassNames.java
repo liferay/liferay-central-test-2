@@ -29,7 +29,7 @@ public class UpgradeClassNames extends UpgradeKernelPackage {
 	public void doUpgrade() throws UpgradeException {
 		deleteCalEventClassName();
 
-		deleteRepeatedResources();
+		deleteDuplicateResources();
 
 		super.doUpgrade();
 	}
@@ -71,7 +71,7 @@ public class UpgradeClassNames extends UpgradeKernelPackage {
 		}
 	}
 
-	protected void deleteRepeatedResources() throws UpgradeException {
+	protected void deleteDuplicateResources() throws UpgradeException {
 		String oldName = _RESOURCE_NAMES[0][0];
 		String newName = _RESOURCE_NAMES[0][1];
 
