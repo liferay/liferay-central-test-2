@@ -17,6 +17,8 @@
 <%@ include file="/init.jsp" %>
 
 <%
+String backURL = ParamUtil.getString(request, "backURL");
+
 Layout selLayout = layoutsAdminDisplayContext.getSelLayout();
 
 Long groupId = layoutsAdminDisplayContext.getGroupId();
@@ -43,11 +45,8 @@ else {
 
 String[] types = LayoutTypeControllerTracker.getTypes();
 
-String backURL = ParamUtil.getString(request, "backURL");
-
 if (Validator.isNotNull(backURL)) {
 	portletDisplay.setShowBackIcon(true);
-
 	portletDisplay.setURLBack(backURL);
 }
 
