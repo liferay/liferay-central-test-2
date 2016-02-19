@@ -32,7 +32,6 @@ import com.liferay.portal.kernel.service.RoleLocalServiceUtil;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.model.Role;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -140,10 +139,10 @@ public class UpgradePermission extends UpgradeProcess {
 		// LPS-46141
 
 		List<String> modelActions = ResourceActionsUtil.getModelResourceActions(
-			Role.class.getName());
+			"com.liferay.portal.model.Role");
 
 		ResourceActionLocalServiceUtil.checkResourceActions(
-			Role.class.getName(), modelActions);
+			"com.liferay.portal.model.Role", modelActions);
 
 		// LPS-14202 and LPS-17841
 
