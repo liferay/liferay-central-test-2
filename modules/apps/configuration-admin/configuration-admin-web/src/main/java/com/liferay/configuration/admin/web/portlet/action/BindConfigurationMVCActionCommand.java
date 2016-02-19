@@ -97,9 +97,6 @@ public class BindConfigurationMVCActionCommand implements MVCActionCommand {
 		Configuration configuration =
 			_configurationModelRetriever.getConfiguration(pid);
 
-		ConfigurationModelToDDMFormConverter
-			configurationModelToDDMFormConverter;
-
 		ResourceBundleLoader resourceBundleLoader =
 			_resourceBundleLoaderProvider.getResourceBundleLoader(
 				configurationModel.getBundleSymbolicName());
@@ -107,9 +104,11 @@ public class BindConfigurationMVCActionCommand implements MVCActionCommand {
 		ResourceBundle resourceBundle = resourceBundleLoader.loadResourceBundle(
 			themeDisplay.getLanguageId());
 
-		configurationModelToDDMFormConverter =
-			new ConfigurationModelToDDMFormConverter(
-				configurationModel, themeDisplay.getLocale(), resourceBundle);
+		ConfigurationModelToDDMFormConverter
+			configurationModelToDDMFormConverter =
+				new ConfigurationModelToDDMFormConverter(
+					configurationModel, themeDisplay.getLocale(),
+					resourceBundle);
 
 		DDMForm ddmForm = configurationModelToDDMFormConverter.getDDMForm();
 
