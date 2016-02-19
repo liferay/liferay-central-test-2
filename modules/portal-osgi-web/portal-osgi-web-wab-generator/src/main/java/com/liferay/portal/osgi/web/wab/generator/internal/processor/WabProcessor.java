@@ -1107,9 +1107,9 @@ public class WabProcessor {
 
 		analyzer.setBase(_pluginDir);
 		analyzer.setJar(_pluginDir);
+		analyzer.setProperty("-jsp", "*.jsp,*.jspf");
 		analyzer.setProperty(
 			"-plugin", "com.liferay.ant.bnd.jsp.JspAnalyzerPlugin");
-		analyzer.setProperty("-jsp", "*.jsp,*.jspf");
 
 		processBundleVersion(analyzer);
 
