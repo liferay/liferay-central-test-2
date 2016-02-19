@@ -338,7 +338,7 @@
 			<var name="page" value="Site Page Name" />
 		</execute>
 
-		<execute macro="SitePage#changePageTypeLayoutPG">
+		<execute macro="SitePage#editPageTypeLayout">
 			<var name="columnName" value="1_column" />
 		</execute>
 
