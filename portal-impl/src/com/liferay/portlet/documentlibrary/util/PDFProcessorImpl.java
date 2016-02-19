@@ -657,27 +657,27 @@ public class PDFProcessorImpl
 			String processIdentity = String.valueOf(
 				fileVersion.getFileVersionId());
 
-			long pdfboxTimeout =
+			long pdfBoxTimeout =
 				PropsValues.DL_FILE_ENTRY_PREVIEW_GENERATION_TIMEOUT_PDFBOX;
 
 			if (_log.isDebugEnabled()) {
 				if (generateThumbnail && generatePreview) {
 					_log.debug(
-						"Waiting for " + pdfboxTimeout + " seconds to obtain " +
+						"Waiting for " + pdfBoxTimeout + " seconds to obtain " +
 							file.getPath() + " thumbnail and previews " +
 								"generation");
 				}
 				else {
 					if (generateThumbnail) {
 						_log.debug(
-							"Waiting for " + pdfboxTimeout +
+							"Waiting for " + pdfBoxTimeout +
 								" seconds to obtain " + file.getPath() +
 									" thumbnail generation");
 					}
 
 					if (generatePreview) {
 						_log.debug(
-							"Waiting for " + pdfboxTimeout +
+							"Waiting for " + pdfBoxTimeout +
 								" seconds to obtain " + file.getPath() +
 									" previews generation");
 					}
@@ -685,7 +685,7 @@ public class PDFProcessorImpl
 			}
 
 			try {
-				future.get(pdfboxTimeout, TimeUnit.SECONDS);
+				future.get(pdfBoxTimeout, TimeUnit.SECONDS);
 
 				futures.put(processIdentity, future);
 			}
