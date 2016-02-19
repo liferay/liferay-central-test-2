@@ -3328,9 +3328,8 @@
 			<var name="site" value="Community Site Name" />
 		</execute>
 
-		<execute macro="SitePage#deleteSitepagesCP">
-			<var name="siteName" value="Community Site Name" />
-			<var name="sitePageName" value="Wiki" />
+		<execute macro="Page#deletePG">
+			<var name="pageName" value="Wiki" />
 		</execute>
 
 		<execute macro="ProductMenu#gotoSite">

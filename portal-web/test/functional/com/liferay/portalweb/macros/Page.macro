@@ -1,4 +1,70 @@
 <definition>
+	<command name="_addPageTypeEmbedded">
+		<execute function="Type" locator1="SitePagesEditPage#PAGE_TYPE_EMBEDDED_URL_FIELD" value1="${pageTypeURL}" />
+		<execute function="AssertTextEquals#assertPartialText" locator1="SitePagesEditPage#PAGE_TYPE_EMBEDDED_DESCRIPTION_FIELD" value1="Show content from another website." />
+	</command>
+
+	<command name="_addPageTypeLinkToURL">
+		<execute function="Type" locator1="SitePagesEditPage#PAGE_TYPE_LINK_TO_URL_URL_FIELD" value1="${pageTypeURL}" />
+		<execute function="AssertTextEquals#assertPartialText" locator1="SitePagesEditPage#PAGE_TYPE_LINK_TO_URL_DESCRIPTION_FIELD" value1="Link to another website." />
+	</command>
+
+	<command name="_addPageTypePanel">
+		<var name="key_componentOrPortletName" value="${componentName}" />
+
+		<execute function="Click" locator1="SitePagesEditPage#PAGE_TYPE_PANEL_CHECKBOX" />
+		<execute function="AssertChecked#waitForElementPresentAssertChecked" locator1="SitePagesEditPage#PAGE_TYPE_PANEL_CHECKBOX_INPUT" />
+	</command>
+
+	<command name="_selectPageTypeRadio">
+		<if>
+			<equals arg1="${sitePageType}" arg2="Embedded" />
+			<then>
+				<var name="key_pageType" value="${sitePageType}" />
+
+				<execute function="Click" locator1="SitePagesEditPage#PAGE_TYPE_RADIO" />
+
+				<execute macro="Page#_addPageTypeEmbedded">
+					<var name="pageTypeDescription" value="${pageTypeDescription}" />
+					<var name="pageTypeURL" value="${pageTypeURL}" />
+				</execute>
+			</then>
+			<elseif>
+				<equals arg1="${sitePageType}" arg2="Link to URL" />
+				<then>
+					<var name="key_pageType" value="${sitePageType}" />
+
+					<execute function="Click" locator1="SitePagesEditPage#PAGE_TYPE_RADIO" />
+
+					<execute macro="Page#_addPageTypeLinkToURL">
+						<var name="pageTypeDescription" value="${pageTypeDescription}" />
+						<var name="pageTypeURL" value="${pageTypeURL}" />
+					</execute>
+				</then>
+			</elseif>
+			<elseif>
+				<equals arg1="${sitePageType}" arg2="Panel" />
+				<then>
+					<var name="key_pageType" value="${sitePageType}" />
+
+					<execute function="Click" locator1="SitePagesEditPage#PAGE_TYPE_RADIO" />
+
+					<execute macro="Page#_addPageTypePanel">
+						<var name="componentName" value="${componentName}" />
+					</execute>
+				</then>
+			</elseif>
+			<elseif>
+				<equals arg1="${sitePageType}" arg2="Empty Page" />
+				<then>
+					<var name="key_columnName" value="${columnName}" />
+
+					<execute function="Click" locator1="SitePagesEditPage#LAYOUT_RADIO" />
+				</then>
+			</elseif>
+		</if>
+	</command>
+
 	<command name="add" summary="Add a page named '${pageName}'">
 		<var name="key_siteName" value="${siteName}" />
 
@@ -195,21 +261,22 @@
 		</for>
 	</command>
 
-	<command name="_addPageTypeEmbedded">
-		<execute function="Type" locator1="SitePagesEditPage#PAGE_TYPE_EMBEDDED_URL_FIELD" value1="${pageTypeURL}" />
-		<execute function="AssertTextEquals#assertPartialText" locator1="SitePagesEditPage#PAGE_TYPE_EMBEDDED_DESCRIPTION_FIELD" value1="Show content from another website." />
-	</command>
+	<command name="assertCannotDeleteOnlyPage">
+		<var name="key_page" value="${pageName}" />
 
-	<command name="_addPageTypeLinkToURL">
-		<execute function="Type" locator1="SitePagesEditPage#PAGE_TYPE_LINK_TO_URL_URL_FIELD" value1="${pageTypeURL}" />
-		<execute function="AssertTextEquals#assertPartialText" locator1="SitePagesEditPage#PAGE_TYPE_LINK_TO_URL_DESCRIPTION_FIELD" value1="Link to another website." />
-	</command>
+		<execute macro="ProductMenu#gotoEditPage">
+			<var name="page" value="${pageName}" />
+		</execute>
 
-	<command name="_addPageTypePanel">
-		<var name="key_componentOrPortletName" value="${componentName}" />
+		<execute function="Click" locator1="Icon#HEADER_VERTICAL_ELLIPSIS" />
 
-		<execute function="Click" locator1="SitePagesEditPage#PAGE_TYPE_PANEL_CHECKBOX" />
-		<execute function="AssertChecked#waitForElementPresentAssertChecked" locator1="SitePagesEditPage#PAGE_TYPE_PANEL_CHECKBOX_INPUT" />
+		<execute function="ClickNoError" locator1="MenuItem#DELETE" />
+
+		<execute function="Confirm" value1="Are you sure you want to delete the selected page?" />
+
+		<execute macro="Alert#viewRequestFailedToComplete" />
+
+		<execute function="AssertTextNotPresent" locator1="Message#ERROR_2" value1="You must have at least one page." />
 	</command>
 
 	<command name="assertNodePortPG">
@@ -240,34 +307,19 @@
 		<execute macro="Alert#viewRequestCompletedSuccessMessage" />
 	</command>
 
-	<command name="editSelectPageType">
-		<var name="key_pageType" value="${pageType}" />
+	<command name="copyApplicationsFromPageToPage">
+		<execute function="Click" locator1="Icon#HEADER_VERTICAL_ELLIPSIS" />
 
-		<execute macro="ProductMenu#gotoEditPage">
-			<var name="page" value="${sitePageName}" />
-		</execute>
+		<execute function="AssertClick" locator1="MenuItem#COPY_APPLICATIONS" value1="Copy Applications" />
 
-		<execute function="Select" locator1="SitePagesEditPage#PAGE_TYPE_LAYOUT" value1="${pageType}" />
+		<execute function="AssertTextEquals" locator1="SitePagesEditPage#COPY_APPLICATIONS_MESSAGE_INFO" value1="The applications in page ${pageName} will be replaced with the ones in the page you select below." />
+		<execute function="AssertTextEquals" locator1="SitePagesEditPage#COPY_APPLICATIONS_COPY_FROM_PAGE_LABEL" value1="Copy from Page" />
 
-		<if>
-			<equals arg1="${pageType}" arg2="Link to a Page of This Site" />
-			<then>
-				<var name="key_indexNumber" value="${indexNumber}" />
+		<execute function="Click" locator1="SitePagesEditPage#COPY_APPLICATIONS_COPY_FROM_PAGE_SELECT" value1="${sitePageName}" />
 
-				<execute function="Select" locator1="SitePagesEditPage#PAGE_TYPE_LINK_TO_PAGE_PAGE_SELECT" value1="index=${indexNumber}" />
-			</then>
-		</if>
+		<execute function="AssertClick" locator1="SitePagesEditPage#COPY_APPLICATIONS_COPY_BUTTON" value1="Copy" />
 
-		<execute function="AssertClick" locator1="Button#SAVE" value1="Save" />
-		<execute macro="Alert#viewRequestCompletedSuccessMessage" />
-	</command>
-
-	<command name="editPageTypeLayout">
-		<var name="key_columnName" value="${columnName}" />
-
-		<execute function="Click" locator1="SitePagesEditPage#LAYOUT_RADIO" />
-
-		<execute function="Click" locator1="Button#SAVE" value1="Save" />
+		<execute function="AssertTextNotPresent" locator1="Portlet#TITLE" value1="Blogs" />
 	</command>
 
 	<command name="deleteFriendlyURLPG">
@@ -289,7 +341,7 @@
 			<var name="page" value="${pageName}" />
 		</execute>
 
-		<execute function="Click" locator1="Icon#HISTORY_VERTICAL_ELLIPSIS" />
+		<execute function="Click" locator1="Icon#HEADER_VERTICAL_ELLIPSIS" />
 
 		<execute function="ClickNoError" locator1="MenuItem#DELETE" />
 		<execute function="Confirm#waitForConfirmation" value1="Are you sure you want to delete the selected page?" />
@@ -303,6 +355,36 @@
 		<execute function="Click" locator1="SitePagesEditPage#LAYOUT_RADIO" />
 		<execute function="AssertClick#pauseAssertTextClickAt" locator1="Button#SAVE" value1="Save" />
 
+		<execute macro="Alert#viewRequestCompletedSuccessMessage" />
+	</command>
+
+	<command name="editPageTypeLayout">
+		<var name="key_columnName" value="${columnName}" />
+
+		<execute function="Click" locator1="SitePagesEditPage#LAYOUT_RADIO" />
+
+		<execute function="Click" locator1="Button#SAVE" value1="Save" />
+	</command>
+
+	<command name="editSelectPageType">
+		<var name="key_pageType" value="${pageType}" />
+
+		<execute macro="ProductMenu#gotoEditPage">
+			<var name="page" value="${sitePageName}" />
+		</execute>
+
+		<execute function="Select" locator1="SitePagesEditPage#PAGE_TYPE_LAYOUT" value1="${pageType}" />
+
+		<if>
+			<equals arg1="${pageType}" arg2="Link to a Page of This Site" />
+			<then>
+				<var name="key_indexNumber" value="${indexNumber}" />
+
+				<execute function="Select" locator1="SitePagesEditPage#PAGE_TYPE_LINK_TO_PAGE_PAGE_SELECT" value1="index=${indexNumber}" />
+			</then>
+		</if>
+
+		<execute function="AssertClick" locator1="Button#SAVE" value1="Save" />
 		<execute macro="Alert#viewRequestCompletedSuccessMessage" />
 	</command>
 
@@ -512,55 +594,6 @@
 		<execute function="AssertClick" locator1="Button#ADD_PAGE_BTN" value1="Add Page" />
 
 		<execute macro="Alert#viewRequestCompletedSuccessMessage" />
-	</command>
-
-	<command name="_selectPageTypeRadio">
-		<if>
-			<equals arg1="${sitePageType}" arg2="Embedded" />
-			<then>
-				<var name="key_pageType" value="${sitePageType}" />
-
-				<execute function="Click" locator1="SitePagesEditPage#PAGE_TYPE_RADIO" />
-
-				<execute macro="SitePage#_addPageTypeEmbedded">
-					<var name="pageTypeDescription" value="${pageTypeDescription}" />
-					<var name="pageTypeURL" value="${pageTypeURL}" />
-				</execute>
-			</then>
-			<elseif>
-				<equals arg1="${sitePageType}" arg2="Link to URL" />
-				<then>
-					<var name="key_pageType" value="${sitePageType}" />
-
-					<execute function="Click" locator1="SitePagesEditPage#PAGE_TYPE_RADIO" />
-
-					<execute macro="SitePage#_addPageTypeLinkToURL">
-						<var name="pageTypeDescription" value="${pageTypeDescription}" />
-						<var name="pageTypeURL" value="${pageTypeURL}" />
-					</execute>
-				</then>
-			</elseif>
-			<elseif>
-				<equals arg1="${sitePageType}" arg2="Panel" />
-				<then>
-					<var name="key_pageType" value="${sitePageType}" />
-
-					<execute function="Click" locator1="SitePagesEditPage#PAGE_TYPE_RADIO" />
-
-					<execute macro="SitePage#_addPageTypePanel">
-						<var name="componentName" value="${componentName}" />
-					</execute>
-				</then>
-			</elseif>
-			<elseif>
-				<equals arg1="${sitePageType}" arg2="Empty Page" />
-				<then>
-					<var name="key_columnName" value="${columnName}" />
-
-					<execute function="Click" locator1="SitePagesEditPage#LAYOUT_RADIO" />
-				</then>
-			</elseif>
-		</if>
 	</command>
 
 	<command name="tearDownPG" summary="Delete all pages except the Welcome Page">
