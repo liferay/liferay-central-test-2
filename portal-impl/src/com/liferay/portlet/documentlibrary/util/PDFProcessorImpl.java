@@ -524,14 +524,13 @@ public class PDFProcessorImpl
 			if (thumbnail) {
 				_log.debug(
 					"Waiting for " + ghostscriptTimeout +
-						" seconds to obtain " + file.getPath() +
-							" thumbnail generation");
+						" seconds to generate " + file.getPath() +
+							" thumbnail");
 			}
 			else {
 				_log.debug(
 					"Waiting for " + ghostscriptTimeout +
-						" seconds to obtain " + file.getPath() +
-							" preview generation");
+						" seconds to generate " + file.getPath() + " preview ");
 			}
 		}
 
