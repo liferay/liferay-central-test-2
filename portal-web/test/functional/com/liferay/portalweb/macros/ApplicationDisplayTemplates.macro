@@ -86,6 +86,10 @@
 			</then>
 		</if>
 
+		<execute macro="Panel#expandPanel">
+			<var name="panelHeading" value="Display Settings" />
+		</execute>
+
 		<execute function="AssertClick" locator1="ApplicationDisplayTemplatesConfiguration#MANAGE_DISPLAY_TEMPLATES_LINK" value1="Manage Display Templates for ${siteName}" />
 
 		<var name="key_adtType" value="${adtType}" />
