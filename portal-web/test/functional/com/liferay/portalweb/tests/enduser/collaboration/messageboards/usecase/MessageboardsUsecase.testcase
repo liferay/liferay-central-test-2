@@ -1511,7 +1511,7 @@
 			<var name="pageName" value="${pageName}" />
 		</execute>
 
-		<execute macro="MessageboardsThread#viewWaitingForAnswerPG">
+		<execute macro="MessageboardsThread#viewMarkedAsQuestionPG">
 			<var name="threadSubject" value="MB Thread Message Subject" />
 		</execute>
 
@@ -1556,7 +1556,7 @@
 			<var name="pageName" value="${pageName}" />
 		</execute>
 
-		<execute macro="MessageboardsThread#viewWaitingForAnswerPG">
+		<execute macro="MessageboardsThread#viewMarkedAsQuestionPG">
 			<var name="threadSubject" value="MB Thread Message Subject" />
 		</execute>
 	</command>
