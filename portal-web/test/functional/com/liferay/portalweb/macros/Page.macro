@@ -411,6 +411,30 @@
 		<execute macro="Alert#viewRequestCompletedSuccessMessage" />
 	</command>
 
+	<command name="firstPageCanNotBeOfTypeLinkToURL">
+		<execute macro="ProductMenu#gotoEditPage">
+			<var name="page" value="${sitePageName}" />
+		</execute>
+
+		<execute function="AssertElementPresent" locator1="Icon#HEADER_VERTICAL_ELLIPSIS" />
+
+		<execute function="Click" locator1="Icon#HEADER_VERTICAL_ELLIPSIS" />
+
+		<execute function="AssertClickNoError" locator1="MenuItem#DELETE" value1="Delete" />
+
+		<execute function="Confirm" value1="Are you sure you want to delete the selected page?" />
+
+		<execute macro="Alert#viewRequestFailedToComplete" />
+
+		<execute function="AssertTextEquals#assertPartialText" locator1="Message#ERROR_2" value1="The first page cannot be of type Link to URL." />
+
+		<execute macro="ProductMenuHelper#openProductMenu" />
+
+		<var name="key_page" value="${sitePageName}" />
+
+		<execute function="AssertTextEquals" locator1="SitePages#PAGE_TREE_PAGE_LINK" value1="${sitePageName}" />
+	</command>
+
 	<command name="gotoChildPagePG">
 		<execute macro="Page#gotoPG">
 			<var name="friendlyURL" value="${friendlyURL}" />
@@ -740,6 +764,16 @@
 
 		<execute function="AssertElementPresent" locator1="SitePagesEditPage#SEO_HTML_TITLE" />
 		<execute function="AssertElementPresent" locator1="SitePagesEditPage#SEO_HTML_TITLE_META_TAGS" />
+	</command>
+
+	<command name="viewPageLockCheck">
+		<execute function="Click" locator1="Dockbar#PAGE_INFO_MESSAGE_ICON" />
+
+		<execute function="AssertTextEquals#assertPartialText" locator1="Message#CUSTOMIZED_PAGE_INFO" value1="This page is linked to a site template which does not allow modifications to it." />
+	</command>
+
+	<command name="viewPageNoLockCheck">
+		<execute function="AssertElementNotPresent" locator1="Message#CUSTOMIZED_PAGE_INFO" />
 	</command>
 
 	<command name="viewPageOrderStagingLivePG">

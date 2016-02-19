@@ -561,7 +561,7 @@
 			<var name="siteURL" value="true" />
 		</execute>
 
-		<execute macro="SitePage#pageLockCheckPG" />
+		<execute macro="Page#viewPageLockCheck" />
 
 		<execute macro="SitePage#viewOnlyAddOptionViaSiteAdminCP" />
 
@@ -708,7 +708,7 @@
 			<var name="siteURL" value="true" />
 		</execute>
 
-		<execute macro="SitePage#pageLockCheckPG" />
+		<execute macro="Page#viewPageLockCheck" />
 
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="Site Page Name" />
@@ -775,7 +775,7 @@
 			<var name="siteURL" value="true" />
 		</execute>
 
-		<execute macro="SitePage#pageNotLockCheckPG" />
+		<execute macro="Page#viewPageNoLockCheck" />
 
 		<execute macro="Portlet#addPG">
 			<var name="portletName" value="Asset Publisher" />

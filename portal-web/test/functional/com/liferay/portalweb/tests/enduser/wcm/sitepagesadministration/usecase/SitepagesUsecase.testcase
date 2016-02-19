@@ -1243,7 +1243,7 @@
 			<var name="sitePageType" value="Link to URL" />
 		</execute>
 
-		<execute macro="SitePage#firstPageCanNotBeOfTypeLinkToURL">
+		<execute macro="Page#firstPageCanNotBeOfTypeLinkToURL">
 			<var name="sitePageName" value="Blank Page" />
 		</execute>
 
