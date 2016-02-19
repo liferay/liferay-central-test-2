@@ -766,29 +766,28 @@ public class PDFProcessorImpl
 		}
 
 		if (_log.isInfoEnabled()) {
+			long fileVersionId = fileVersion.getFileVersionId();
+			int previewFileCount = getPreviewFileCount(fileVersion);
+			long time = stopWatch.getTime();
+
 			if (generateThumbnail && generatePreview) {
 				_log.info(
-					"PDFBox generated a thumbnail " +
-						"and " + getPreviewFileCount(fileVersion) +
-							" preview pages for " +
-								fileVersion.getFileVersionId() +
-									" in " + stopWatch.getTime() + " ms");
+					"PDFBox generated a thumbnail and " + previewFileCount +
+						" preview pages for " + fileVersionId + " in " + time +
+							" ms");
 			}
 			else {
 				if (generateThumbnail) {
 					_log.info(
-						"PDFBox generated a thumbnail for " +
-							fileVersion.getFileVersionId() +
-								" in " + stopWatch.getTime() + " ms");
+						"PDFBox generated a thumbnail for " + fileVersionId +
+							" in " + time + " ms");
 				}
 
 				if (generatePreview) {
 					_log.info(
-						"PDFBox generated " +
-							getPreviewFileCount(fileVersion) +
-								" preview pages for " +
-									fileVersion.getFileVersionId() +
-									" in " + stopWatch.getTime() + " ms");
+						"PDFBox generated " + previewFileCount +
+							" preview pages for " + fileVersionId + " in " +
+								time + " ms");
 				}
 			}
 		}
