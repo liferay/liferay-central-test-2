@@ -34,16 +34,6 @@ public class UpgradeClassNames extends UpgradeKernelPackage {
 		super.doUpgrade();
 	}
 
-	@Override
-	protected String[][] getClassNames() {
-		return new String[0][0];
-	}
-
-	@Override
-	protected String[][] getResourceNames() {
-		return _RESOURCE_NAMES;
-	}
-
 	protected void deleteCalEventClassName() throws UpgradeException {
 		try {
 			runSQL(
@@ -91,6 +81,16 @@ public class UpgradeClassNames extends UpgradeKernelPackage {
 		catch (Exception e) {
 			throw new UpgradeException(e);
 		}
+	}
+
+	@Override
+	protected String[][] getClassNames() {
+		return new String[0][0];
+	}
+
+	@Override
+	protected String[][] getResourceNames() {
+		return _RESOURCE_NAMES;
 	}
 
 	private static final String _CAL_EVENT_CLASS_NAME =
