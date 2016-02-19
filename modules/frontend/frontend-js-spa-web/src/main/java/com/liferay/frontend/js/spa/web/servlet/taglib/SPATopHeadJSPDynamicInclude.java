@@ -65,6 +65,6 @@ public class SPATopHeadJSPDynamicInclude extends BaseJSPDynamicInclude {
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		SinglePageApplicationTopHeadJSPDynamicInclude.class);
+		SPATopHeadJSPDynamicInclude.class);
 
 }
