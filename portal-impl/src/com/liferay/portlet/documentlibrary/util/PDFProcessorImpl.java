@@ -524,13 +524,12 @@ public class PDFProcessorImpl
 			if (thumbnail) {
 				_log.debug(
 					"Waiting for " + ghostscriptTimeout +
-						" seconds to generate " + file.getPath() +
-							" thumbnail");
+						" seconds to generate thumbnail for " + file.getPath());
 			}
 			else {
 				_log.debug(
 					"Waiting for " + ghostscriptTimeout +
-						" seconds to generate " + file.getPath() + " preview ");
+						" seconds to generate preview for " + file.getPath());
 			}
 		}
 
@@ -664,22 +663,22 @@ public class PDFProcessorImpl
 				if (generateThumbnail && generatePreview) {
 					_log.debug(
 						"Waiting for " + pdfBoxTimeout +
-							" seconds to generate " + file.getPath() +
-								" thumbnail and preview");
+							" seconds to generate thumbnail and preview for " +
+								file.getPath());
 				}
 				else {
 					if (generateThumbnail) {
 						_log.debug(
 							"Waiting for " + pdfBoxTimeout +
-								" seconds to generate " + file.getPath() +
-									" thumbnail");
+								" seconds to generate thumbnail for " +
+									file.getPath());
 					}
 
 					if (generatePreview) {
 						_log.debug(
 							"Waiting for " + pdfBoxTimeout +
-								" seconds to generate " + file.getPath() +
-									" preview");
+								" seconds to generate preview for " +
+									file.getPath());
 					}
 				}
 			}
