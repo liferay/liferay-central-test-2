@@ -297,17 +297,17 @@ public class ConfigurationModelToDDMFormConverter {
 	}
 
 	protected String translate(String key) {
-		if ((_resourceBundle != null) && (key != null)) {
-			String value = ResourceBundleUtil.getString(_resourceBundle, key);
-
-			if (value == null) {
-				return key;
-			}
-
-			return value;
+		if ((_resourceBundle == null) || (key == null)) {
+			return key;
 		}
 
-		return key;
+		String value = ResourceBundleUtil.getString(_resourceBundle, key);
+
+		if (value == null) {
+			return key;
+		}
+
+		return value;
 	}
 
 	private final ConfigurationModel _configurationModel;
