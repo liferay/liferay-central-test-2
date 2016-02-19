@@ -107,7 +107,7 @@ gradle.beforeProject {
 			pluginManager.withPlugin("com.liferay.node") {
 				downloadNode {
 					doFirst {
-						throw new GradleException("Unable to use Node.js on CI, please apply and configure com.liferay.cache instead")
+						throw new GradleException("Unable to use Node.js on CI, please configure com.liferay.cache or update the cache")
 					}
 				}
 			}
