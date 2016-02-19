@@ -52,8 +52,8 @@ public class PermissionsPortletConfigurationIcon
 	@Override
 	public String getMessage(PortletRequest portletRequest) {
 		return LanguageUtil.get(
-			getResourceBundle(
-				getLocale(portletRequest)), "home-folder-permissions");
+			getResourceBundle(getLocale(portletRequest)),
+			"home-folder-permissions");
 	}
 
 	@Override
