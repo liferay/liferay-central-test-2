@@ -220,6 +220,9 @@ public class WabProcessor {
 		return autoDeploymentContext;
 	}
 
+	/**
+	 * @see com.liferay.portal.kernel.deploy.auto.AutoDeployDir#deploy
+	 */
 	protected AutoDeployListener getAutoDeployListener(
 		AutoDeploymentContext autoDeploymentContext,
 		List<AutoDeployListener> autoDeployListeners) {
