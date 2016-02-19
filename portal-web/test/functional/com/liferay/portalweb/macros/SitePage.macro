@@ -1,18 +1,4 @@
 <definition>
-	<command name="editTemplatePagesCP">
-		<var name="key_siteTemplateName" value="${siteTemplateName}" />
-
-		<execute function="Click" locator1="SiteTemplates#SITE_TEMPLATE_TABLE_ACTIONS" value1="${siteTemplateName}" />
-		<execute function="Click" locator1="MenuItem#MANAGE" />
-	</command>
-
-	<command name="embeddedPageTypePG">
-		<execute function="AssertClick" locator1="SitePagesEditPage#TYPE_PAGE_OPTIONS" value1="Embedded" />
-
-		<execute function="Type" locator1="SitePagesEditPage#PAGE_TYPE_EMBEDDED_URL_FIELD" value1="http://www.liferay.com" />
-		<execute function="AssertClick#pauseAssertTextClickAt" locator1="Button#SAVE" value1="Save" />
-	</command>
-
 	<command name="expandRootCP">
 		<execute function="AssertElementPresent#assertElementPresent" locator1="ProductMenu#EDIT_PAGE" />
 

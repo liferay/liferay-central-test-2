@@ -395,7 +395,7 @@
 			<var name="portlet" value="Site Templates" />
 		</execute>
 
-		<execute macro="SitePage#editTemplatePagesCP">
+		<execute macro="Page#gotoEditTemplatePages">
 			<var name="siteTemplateName" value="Site Template Name" />
 		</execute>
 
@@ -442,7 +442,7 @@
 			<var name="portlet" value="Site Templates" />
 		</execute>
 
-		<execute macro="SitePage#editTemplatePagesCP">
+		<execute macro="Page#gotoEditTemplatePages">
 			<var name="siteTemplateName" value="Site Template Name" />
 		</execute>
 
@@ -580,7 +580,7 @@
 			<var name="portlet" value="Site Templates" />
 		</execute>
 
-		<execute macro="SitePage#editTemplatePagesCP">
+		<execute macro="Page#gotoEditTemplatePages">
 			<var name="siteTemplateName" value="Site Template Name" />
 		</execute>
 
@@ -747,7 +747,7 @@
 			<var name="portlet" value="Site Templates" />
 		</execute>
 
-		<execute macro="SitePage#editTemplatePagesCP">
+		<execute macro="Page#gotoEditTemplatePages">
 			<var name="siteTemplateName" value="Site Template Name" />
 		</execute>
 

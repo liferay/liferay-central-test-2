@@ -358,6 +358,14 @@
 		<execute function="AssertClick" locator1="Button#SAVE" value1="Save" />
 	</command>
 
+	<command name="editName">
+		<execute function="Type" locator1="TextInput#NAME" value1="${pageNameEdit}" />
+
+		<execute function="AssertClick#pauseAssertTextClickAt" locator1="Button#SAVE" value1="Save" />
+
+		<execute macro="Alert#viewRequestCompletedSuccessMessage" />
+	</command>
+
 	<command name="editPageLayoutColumn">
 		<var name="key_columnName" value="${columnName}" />
 
@@ -376,11 +384,11 @@
 	</command>
 
 	<command name="editSelectPageType">
-		<var name="key_pageType" value="${pageType}" />
-
 		<execute macro="ProductMenu#gotoEditPage">
-			<var name="page" value="${sitePageName}" />
+			<var name="page" value="${page}" />
 		</execute>
+
+		<var name="key_pageType" value="${pageType}" />
 
 		<execute function="Select" locator1="SitePagesEditPage#PAGE_TYPE_LAYOUT" value1="${pageType}" />
 
@@ -391,17 +399,15 @@
 
 				<execute function="Select" locator1="SitePagesEditPage#PAGE_TYPE_LINK_TO_PAGE_PAGE_SELECT" value1="index=${indexNumber}" />
 			</then>
+			<elseif>
+				<equals arg1="${pageType}" arg2="Embedded" />
+				<then>
+					<execute function="Type" locator1="SitePagesEditPage#PAGE_TYPE_EMBEDDED_URL_FIELD" value1="http://www.liferay.com" />
+				</then>
+			</elseif>
 		</if>
 
 		<execute function="AssertClick" locator1="Button#SAVE" value1="Save" />
-		<execute macro="Alert#viewRequestCompletedSuccessMessage" />
-	</command>
-
-	<command name="editName">
-		<execute function="Type" locator1="TextInput#NAME" value1="${pageNameEdit}" />
-
-		<execute function="AssertClick#pauseAssertTextClickAt" locator1="Button#SAVE" value1="Save" />
-
 		<execute macro="Alert#viewRequestCompletedSuccessMessage" />
 	</command>
 
@@ -425,6 +431,13 @@
 		<var name="key_childPageName" value="${childPageName}" />
 
 		<execute function="AssertClick" locator1="Home#PAGE_CHILD_PAGE" value1="${childPageName}" />
+	</command>
+
+	<command name="gotoEditTemplatePages">
+		<var name="key_siteTemplateName" value="${siteTemplateName}" />
+
+		<execute function="Click" locator1="SiteTemplates#SITE_TEMPLATE_TABLE_ACTIONS" value1="${siteTemplateName}" />
+		<execute function="Click" locator1="MenuItem#MANAGE" />
 	</command>
 
 	<command name="gotoMyAccount">
