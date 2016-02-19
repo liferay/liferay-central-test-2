@@ -19,7 +19,7 @@ import com.liferay.dynamic.data.mapping.service.DDMStructureLocalService;
 import com.liferay.dynamic.data.mapping.storage.DDMFormValues;
 import com.liferay.dynamic.data.mapping.storage.Fields;
 import com.liferay.dynamic.data.mapping.util.DDMIndexer;
-import com.liferay.dynamic.data.mapping.util.FieldsToDDMFormValuesConverterUtil;
+import com.liferay.dynamic.data.mapping.util.FieldsToDDMFormValuesConverter;
 import com.liferay.journal.configuration.JournalServiceConfigurationValues;
 import com.liferay.journal.model.JournalArticle;
 import com.liferay.journal.model.JournalArticleDisplay;
@@ -344,7 +344,7 @@ public class JournalArticleIndexer
 			Fields fields = _journalConverter.getDDMFields(
 				ddmStructure, article.getDocument());
 
-			ddmFormValues = FieldsToDDMFormValuesConverterUtil.convert(
+			ddmFormValues = _fieldsToDDMFormValuesConverter.convert(
 				ddmStructure, fields);
 		}
 		catch (Exception e) {
@@ -666,7 +666,7 @@ public class JournalArticleIndexer
 			Fields fields = _journalConverter.getDDMFields(
 				ddmStructure, article.getDocument());
 
-			ddmFormValues = FieldsToDDMFormValuesConverterUtil.convert(
+			ddmFormValues = _fieldsToDDMFormValuesConverter.convert(
 				ddmStructure, fields);
 		}
 		catch (Exception e) {
@@ -841,6 +841,13 @@ public class JournalArticleIndexer
 	}
 
 	@Reference(unbind = "-")
+	protected void setFieldsToDDMFormValuesConverter(
+		FieldsToDDMFormValuesConverter fieldsToDDMFormValuesConverter) {
+
+		_fieldsToDDMFormValuesConverter = fieldsToDDMFormValuesConverter;
+	}
+
+	@Reference(unbind = "-")
 	protected void setJournalArticleLocalService(
 		JournalArticleLocalService journalArticleLocalService) {
 
@@ -862,6 +869,7 @@ public class JournalArticleIndexer
 
 	private DDMIndexer _ddmIndexer;
 	private DDMStructureLocalService _ddmStructureLocalService;
+	private FieldsToDDMFormValuesConverter _fieldsToDDMFormValuesConverter;
 	private JournalArticleLocalService _journalArticleLocalService;
 	private JournalContent _journalContent;
 	private JournalConverter _journalConverter;
