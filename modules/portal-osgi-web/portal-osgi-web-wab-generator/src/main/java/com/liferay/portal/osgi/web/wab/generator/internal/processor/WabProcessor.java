@@ -220,7 +220,7 @@ public class WabProcessor {
 		return autoDeploymentContext;
 	}
 
-	protected AutoDeployListener computeAutoDeployListener(
+	protected AutoDeployListener getAutoDeployListener(
 		AutoDeploymentContext autoDeploymentContext,
 		List<AutoDeployListener> autoDeployListeners) {
 
@@ -276,7 +276,7 @@ public class WabProcessor {
 			List<AutoDeployListener> autoDeployListeners =
 				GlobalStartupAction.getAutoDeployListeners(false);
 
-			AutoDeployListener autoDeployListener = computeAutoDeployListener(
+			AutoDeployListener autoDeployListener = getAutoDeployListener(
 				autoDeploymentContext, autoDeployListeners);
 
 			autoDeployListener.deploy(autoDeploymentContext);
