@@ -97,14 +97,18 @@ gradle.beforeProject {
 			}
 
 			if (System.getenv("JENKINS_HOME")) {
+				startTestableTomcat {
+					deleteLiferayHome = false
+				}
+			}
+		}
+
+		if (System.getenv("JENKINS_HOME")) {
+			pluginManager.withPlugin("com.liferay.node") {
 				downloadNode {
 					doFirst {
 						throw new GradleException("Unable to use Node.js on CI, please apply and configure com.liferay.cache instead")
 					}
-				}
-
-				startTestableTomcat {
-					deleteLiferayHome = false
 				}
 			}
 		}
