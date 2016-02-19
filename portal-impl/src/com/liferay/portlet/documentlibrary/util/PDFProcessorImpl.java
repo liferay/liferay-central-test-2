@@ -665,7 +665,7 @@ public class PDFProcessorImpl
 					_log.debug(
 						"Waiting for " + pdfBoxTimeout +
 							" seconds to generate " + file.getPath() +
-								" thumbnail and previews");
+								" thumbnail and preview");
 				}
 				else {
 					if (generateThumbnail) {
@@ -679,7 +679,7 @@ public class PDFProcessorImpl
 						_log.debug(
 							"Waiting for " + pdfBoxTimeout +
 								" seconds to generate " + file.getPath() +
-									" previews");
+									" preview");
 					}
 				}
 			}
