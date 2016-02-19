@@ -122,6 +122,8 @@ define("frontend-js-spa-web@1.0.0/liferay/app/App.es", ['exports', 'senna/src/ap
 				this.clearScreensCache();
 			}
 
+			AUI().Get._insertCache = {};
+
 			_dom2.default.removeClasses(document.body, 'lfr-surface-loading');
 		};
 
