@@ -27,9 +27,9 @@ public class UpgradeClassNames extends UpgradeKernelPackage {
 
 	@Override
 	public void doUpgrade() throws UpgradeException {
-		_cleanCalEventClassName();
+		deleteCalEventClassName();
 
-		_cleanRepeatedResources();
+		deleteRepeatedResources();
 
 		super.doUpgrade();
 	}
@@ -44,7 +44,7 @@ public class UpgradeClassNames extends UpgradeKernelPackage {
 		return _RESOURCE_NAMES;
 	}
 
-	private void _cleanCalEventClassName() throws UpgradeException {
+	protected void deleteCalEventClassName() throws UpgradeException {
 		try {
 			runSQL(
 				"delete from Counter where name like '" +
@@ -71,7 +71,7 @@ public class UpgradeClassNames extends UpgradeKernelPackage {
 		}
 	}
 
-	private void _cleanRepeatedResources() throws UpgradeException {
+	protected void deleteRepeatedResources() throws UpgradeException {
 		String oldName = _RESOURCE_NAMES[0][0];
 		String newName = _RESOURCE_NAMES[0][1];
 
@@ -85,7 +85,7 @@ public class UpgradeClassNames extends UpgradeKernelPackage {
 			while (rs.next()) {
 				runSQL(
 					"delete from ResourceAction where actionId = '" +
-						rs.getString(1) + "' and name= '"+ oldName + "'");
+						rs.getString(1) + "' and name= '" + oldName + "'");
 			}
 		}
 		catch (Exception e) {
