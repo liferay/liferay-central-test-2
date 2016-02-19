@@ -453,7 +453,7 @@
 			<var name="page" value="Public Pages" />
 		</execute>
 
-		<execute macro="SitePage#viewCP">
+		<execute macro="Page#view">
 			<var name="sitePageName" value="Site Page Edit" />
 		</execute>
 	</command>

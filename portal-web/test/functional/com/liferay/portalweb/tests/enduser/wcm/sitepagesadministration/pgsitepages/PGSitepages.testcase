@@ -69,8 +69,7 @@
 			<var name="pageName" value="Site Page Edit" />
 		</execute>
 
-		<execute macro="Page#viewPG">
-			<var name="liferaySite" value="true" />
+		<execute macro="Page#view">
 			<var name="pageName" value="Site Page Edit" />
 		</execute>
 	</command>
