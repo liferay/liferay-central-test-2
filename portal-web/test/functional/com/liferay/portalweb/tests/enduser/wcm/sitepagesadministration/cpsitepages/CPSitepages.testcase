@@ -487,7 +487,10 @@
 			<var name="page" value="Site Page" />
 		</execute>
 
-		<execute macro="SitePage#embeddedPageTypePG" />
+		<execute macro="Page#editSelectPageType">
+			<var name="page" value="Site Page" />
+			<var name="pageType" value="Embedded" />
+		</execute>
 
 		<execute macro="Navigator#gotoSpecificURLPage">
 			<var name="pageName" value="Site Page" />
