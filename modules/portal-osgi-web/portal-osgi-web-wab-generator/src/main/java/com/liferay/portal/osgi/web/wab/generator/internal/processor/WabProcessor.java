@@ -220,54 +220,6 @@ public class WabProcessor {
 		return autoDeploymentContext;
 	}
 
-	/**
-	 * @see com.liferay.portal.kernel.deploy.auto.AutoDeployDir#deploy
-	 */
-	protected AutoDeployListener getAutoDeployListener(
-		AutoDeploymentContext autoDeploymentContext,
-		List<AutoDeployListener> autoDeployListeners) {
-
-		List<AutoDeployListener> deployableAutoDeployListeners =
-			new ArrayList<>();
-
-		for (AutoDeployListener autoDeployListener : autoDeployListeners) {
-			try {
-				if (autoDeployListener.isDeployable(autoDeploymentContext)) {
-					deployableAutoDeployListeners.add(autoDeployListener);
-				}
-			}
-			catch (AutoDeployException ade) {
-				throw new RuntimeException(ade);
-			}
-		}
-
-		if (deployableAutoDeployListeners.size() > 1) {
-			StringBundler sb = new StringBundler(
-				3 + (deployableAutoDeployListeners.size() * 2) - 1);
-
-			sb.append("More than one auto deploy listener is available for ");
-			sb.append(autoDeploymentContext.getFile());
-			sb.append(": ");
-
-			for (int i = 0; i < deployableAutoDeployListeners.size(); i++) {
-				AutoDeployListener deployableAutoDeployListener =
-					deployableAutoDeployListeners.get(i);
-
-				Class<?> clazz = deployableAutoDeployListener.getClass();
-
-				if (i != 0) {
-					sb.append(StringPool.COMMA_AND_SPACE);
-				}
-
-				sb.append(clazz.getName());
-			}
-
-			throw new RuntimeException(new AutoDeployException(sb.toString()));
-		}
-
-		return deployableAutoDeployListeners.get(0);
-	}
-
 	protected void executeAutoDeployers(
 		AutoDeploymentContext autoDeploymentContext) {
 
@@ -336,6 +288,54 @@ public class WabProcessor {
 		catch (Exception e) {
 			throw new IOException(e);
 		}
+	}
+
+	/**
+	 * @see com.liferay.portal.kernel.deploy.auto.AutoDeployDir#deploy
+	 */
+	protected AutoDeployListener getAutoDeployListener(
+		AutoDeploymentContext autoDeploymentContext,
+		List<AutoDeployListener> autoDeployListeners) {
+
+		List<AutoDeployListener> deployableAutoDeployListeners =
+			new ArrayList<>();
+
+		for (AutoDeployListener autoDeployListener : autoDeployListeners) {
+			try {
+				if (autoDeployListener.isDeployable(autoDeploymentContext)) {
+					deployableAutoDeployListeners.add(autoDeployListener);
+				}
+			}
+			catch (AutoDeployException ade) {
+				throw new RuntimeException(ade);
+			}
+		}
+
+		if (deployableAutoDeployListeners.size() > 1) {
+			StringBundler sb = new StringBundler(
+				3 + (deployableAutoDeployListeners.size() * 2) - 1);
+
+			sb.append("More than one auto deploy listener is available for ");
+			sb.append(autoDeploymentContext.getFile());
+			sb.append(": ");
+
+			for (int i = 0; i < deployableAutoDeployListeners.size(); i++) {
+				AutoDeployListener deployableAutoDeployListener =
+					deployableAutoDeployListeners.get(i);
+
+				Class<?> clazz = deployableAutoDeployListener.getClass();
+
+				if (i != 0) {
+					sb.append(StringPool.COMMA_AND_SPACE);
+				}
+
+				sb.append(clazz.getName());
+			}
+
+			throw new RuntimeException(new AutoDeployException(sb.toString()));
+		}
+
+		return deployableAutoDeployListeners.get(0);
 	}
 
 	protected String getFileName(String className) {
