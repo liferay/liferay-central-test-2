@@ -712,7 +712,7 @@ public class PDFProcessorImpl
 				}
 
 				if (future.cancel(true)) {
-					errorMessage += ". Cancelled timeout " + future;
+					errorMessage += ". Cancelled timeout " + future + ".";
 				}
 
 				_log.error(errorMessage);
