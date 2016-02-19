@@ -164,7 +164,7 @@
 			<var name="page" value="Public Pages" />
 		</execute>
 
-		<execute macro="SitePage#changePageTypeLayoutCP">
+		<execute macro="Page#editSelectPageType">
 			<var name="indexNumber" value="4" />
 			<var name="pageName" value="- - Child Page Name" />
 			<var name="pageType" value="Link to a Page of This Site" />
