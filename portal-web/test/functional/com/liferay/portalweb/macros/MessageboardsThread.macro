@@ -1002,6 +1002,12 @@
 		<execute function="AssertClick" locator1="Button#CANCEL" value1="Cancel" />
 	</command>
 
+	<command name="viewMarkedAsQuestionPG">
+		<var name="key_threadSubject" value="${threadSubject}" />
+
+		<execute function="AssertElementPresent" locator1="MessageBoards#THREAD_LIST_QUESTION_MARK_ICON" />
+	</command>
+
 	<command name="viewNoAnonymousPostingCheckboxCP">
 		<execute function="Click" locator1="Button#PLUS" />
 
@@ -1323,12 +1329,6 @@
 				<execute function="AssertTextEquals" locator1="MessageBoardsThread#MESSAGE_TAG_1" value1="${tagName}" />
 			</else>
 		</if>
-	</command>
-
-	<command name="viewWaitingForAnswerPG">
-		<var name="key_threadSubject" value="${threadSubject}" />
-
-		<execute function="AssertTextEquals" locator1="MessageBoards#THREAD_TABLE_FLAG" value1="Waiting for an Answer" />
 	</command>
 
 	<command name="viewWithWorkflowPG">
