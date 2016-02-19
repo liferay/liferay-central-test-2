@@ -14,7 +14,6 @@
 
 package com.liferay.site.memberships.web.display.context;
 
-import com.liferay.exportimport.kernel.staging.StagingUtil;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Group;
