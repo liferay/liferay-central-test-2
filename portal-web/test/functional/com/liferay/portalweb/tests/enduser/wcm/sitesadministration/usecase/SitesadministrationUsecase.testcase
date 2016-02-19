@@ -1036,7 +1036,7 @@
 
 		<execute macro="ProductMenu#gotoPublicPages" />
 
-		<execute macro="SitePage#addJavaScript">
+		<execute macro="Page#addJavaScript">
 			<var name="javaScript" value="alert('Welcome to Russia.');" />
 			<var name="sitePageName" value="Arenas" />
 		</execute>
@@ -1058,7 +1058,7 @@
 
 		<execute macro="ProductMenu#gotoPublicPages" />
 
-		<execute macro="SitePage#addJavaScript">
+		<execute macro="Page#addJavaScript">
 			<var name="javaScript" value=" " />
 			<var name="sitePageName" value="Arenas" />
 		</execute>
