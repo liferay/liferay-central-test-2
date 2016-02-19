@@ -1046,7 +1046,7 @@
 		<execute macro="Page#viewCustomLogoPG" />
 
 		<for list="Arena Baltika,Zenit Arena,Kazan Arena" param="childPageName" >
-			<execute macro="Page#viewChildPG">
+			<execute macro="Page#viewChildPageDropdown">
 				<var name="childPageName" value="${childPageName}" />
 				<var name="javaScriptPage" value="Welcome to Russia." />
 				<var name="pageName" value="Arenas" />
@@ -1160,7 +1160,7 @@
 		</execute>
 
 		<for list="Arena Baltika,Zenit Arena,Kazan Arena" param="childPageName" >
-			<execute macro="Page#viewChildPG">
+			<execute macro="Page#viewChildPageDropdown">
 				<var name="childPageName" value="${childPageName}" />
 				<var name="pageName" value="Arenas" />
 				<var name="viewChildPageDropdown" value="PAGE_2" />

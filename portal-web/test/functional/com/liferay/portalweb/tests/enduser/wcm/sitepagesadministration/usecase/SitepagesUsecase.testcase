@@ -31,8 +31,6 @@
 
 				<execute macro="Page#tearDownPG" />
 
-				<execute macro="SitePage#tearDownPrivateCP" />
-
 				<execute macro="User#tearDownCP" />
 
 				<execute macro="Role#tearDownCP" />
@@ -180,7 +178,7 @@
 			<var name="page" value="Public Pages" />
 		</execute>
 
-		<execute macro="SitePage#viewChildPage">
+		<execute macro="Page#viewChildPage">
 			<var name="sitePageName" value="Child Page Name" />
 		</execute>
 	</command>

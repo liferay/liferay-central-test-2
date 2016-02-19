@@ -423,7 +423,7 @@
 			<var name="pageName" value="Test Page Name" />
 		</execute>
 
-		<execute macro="SitePage#pageTemplateLockCheckPG" />
+		<execute macro="Page#viewPageTemplateLockCheck" />
 
 		<execute macro="Page#gotoPG">
 			<var name="defaultURL" value="false" />
@@ -461,7 +461,7 @@
 			<var name="pageName" value="Test Page Name" />
 		</execute>
 
-		<execute macro="SitePage#pageTemplateNotLockedCheckPG" />
+		<execute macro="Page#viewPageTemplateNoLockCheck" />
 
 		<execute function="Close" />
 
