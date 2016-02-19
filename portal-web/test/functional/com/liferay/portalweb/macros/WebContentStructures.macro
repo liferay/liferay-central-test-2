@@ -88,8 +88,6 @@
 
 		<execute macro="DDLDataDefinition#saveCP" />
 
-		<execute function="SelectFrame" locator1="IFrame#STRUCTURES" />
-
 		<var name="key_ddlDataDefinitionName" value="${structureName}" />
 
 		<execute function="AssertClickNoError" locator1="DDMSelectStructure#DDM_STRUCTURE_TABLE_CHOOSE_BUTTON" value1="Choose" />
