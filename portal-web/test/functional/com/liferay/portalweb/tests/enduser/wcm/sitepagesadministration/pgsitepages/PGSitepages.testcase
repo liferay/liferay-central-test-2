@@ -57,16 +57,12 @@
 			<var name="pageName" value="Site Page" />
 		</execute>
 
-		<execute macro="Page#gotoPG">
-			<var name="pageName" value="Site Page" />
-		</execute>
-
 		<execute macro="ProductMenu#gotoEditPage">
 			<var name="page" value="Site Page" />
 		</execute>
 
-		<execute macro="SitePage#editPG">
-			<var name="sitePageNameEdit" value="Site Page Edit" />
+		<execute macro="Page#editName">
+			<var name="pageNameEdit" value="Site Page Edit" />
 		</execute>
 
 		<execute macro="Page#gotoPG">

@@ -1,30 +1,4 @@
 <definition>
-	<command name="disallowEditViaSiteAdminEditCP">
-		<var name="key_page" value="${sitePageName}" />
-
-		<execute function="AssertClick" locator1="SitePages#PAGE_TREE_PAGE_SPECIFIC_PAGE" value1="${sitePageName}"  />
-
-		<execute function="Uncheck" locator1="Checkbox#ALLOW_SITE_ADMIN_MODIFY_PAGES" />
-		<execute function="AssertClick" locator1="Button#SAVE" value1="Save" />
-	</command>
-
-	<command name="editCP">
-		<execute macro="ProductMenu#gotoEditPage">
-			<var name="page" value="${sitePageName}" />
-		</execute>
-
-		<execute function="Type" locator1="TextInput#NAME" value1="${sitePageNameEdit}" />
-
-		<execute function="AssertClick" locator1="Button#SAVE" value1="Save" />
-
-		<execute macro="Alert#viewRequestCompletedSuccessMessage" />
-	</command>
-
-	<command name="editPG">
-		<execute function="Type" locator1="TextInput#NAME" value1="${sitePageNameEdit}" />
-		<execute function="AssertClick#pauseAssertTextClickAt" locator1="Button#SAVE" value1="Save" />
-	</command>
-
 	<command name="editTemplatePagesCP">
 		<var name="key_siteTemplateName" value="${siteTemplateName}" />
 
