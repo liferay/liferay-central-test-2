@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
 
+import java.util.List;
 import java.util.Map;
 
 import org.osgi.service.component.annotations.Component;
@@ -226,10 +227,9 @@ public class DDMTemplatePermission {
 		String resourceName = getResourceName(
 			templatePermissionSupportServiceWrapper, classNameId);
 
-		boolean portletResource =
-			ResourceActionsUtil.getPortletNames().contains(resourceName);
+		List<String> portletNames = ResourceActionsUtil.getPortletNames();
 
-		if (portletResource) {
+		if (portletNames.contains(resourceName)) {
 			return PortletPermissionUtil.contains(
 				permissionChecker, groupId, null, resourceName,
 				getAddTemplateActionId(
