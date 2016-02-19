@@ -338,7 +338,7 @@
 			<var name="page" value="Site Page Name" />
 		</execute>
 
-		<execute macro="SitePage#editPageTypeLayout">
+		<execute macro="Page#editPageTypeLayout">
 			<var name="columnName" value="1_column" />
 		</execute>
 
@@ -388,7 +388,7 @@
 			<var name="page" value="Blog Page" />
 		</execute>
 
-		<execute macro="SitePage#copyApplicationsFromPageToPagePG">
+		<execute macro="Page#copyApplicationsFromPageToPage">
 			<var name="pageName" value="Blog Page" />
 			<var name="sitePageName" value="Site Page" />
 		</execute>
@@ -424,9 +424,8 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="SitePage#deleteSitepagesCP">
-			<var name="siteName" value="Site Name" />
-			<var name="sitePageName" value="${sitePageName2}" />
+		<execute macro="Page#deletePG">
+			<var name="pageName" value="${sitePageName2}" />
 		</execute>
 	</command>
 
