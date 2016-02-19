@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.frontend.js.spa.web;
+package com.liferay.frontend.js.spa.web.servlet.taglib;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -31,8 +31,7 @@ import org.osgi.service.component.annotations.Reference;
  * @author Bruno Basto
  */
 @Component(immediate = true, service = DynamicInclude.class)
-public class SinglePageApplicationTopHeadJSPDynamicInclude
-	extends BaseJSPDynamicInclude {
+public class SPATopHeadJSPDynamicInclude extends BaseJSPDynamicInclude {
 
 	@Override
 	public void register(DynamicIncludeRegistry dynamicIncludeRegistry) {
