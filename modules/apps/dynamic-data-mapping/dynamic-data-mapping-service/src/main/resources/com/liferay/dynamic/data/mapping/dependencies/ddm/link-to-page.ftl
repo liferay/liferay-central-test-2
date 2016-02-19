@@ -27,9 +27,22 @@
 	</#if>
 
 	<div class="form-group">
-		<@liferay_aui.input dir=requestedLanguageDir helpMessage=escape(fieldStructure.tip) label=escape(label) name="${namespacedFieldName}LayoutName" readonly="readonly" required=required type="text" value=selectedLayoutName />
+		<@liferay_aui.input
+			dir=requestedLanguageDir
+			helpMessage=escape(fieldStructure.tip)
+			label=escape(label)
+			name="${namespacedFieldName}LayoutName"
+			readonly="readonly"
+			required=required
+			type="text"
+			value=selectedLayoutName
+		/>
 
-		<@liferay_aui.input name=namespacedFieldName type="hidden" value=fieldRawValue />
+		<@liferay_aui.input
+			name=namespacedFieldName
+			type="hidden"
+			value=fieldRawValue
+		/>
 
 		<@liferay_aui["button-row"]>
 			<@liferay_aui.button

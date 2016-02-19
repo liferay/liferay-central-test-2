@@ -236,8 +236,9 @@ public class UpgradeJournal extends BaseUpgradePortletPreferences {
 				"select groupId from Group_ where classNameId = ? and " +
 					"classPK = ?");
 
-			ps.setLong(1, PortalUtil.getClassNameId(
-				"com.liferay.portal.model.Company"));
+			ps.setLong(
+				1,
+				PortalUtil.getClassNameId("com.liferay.portal.model.Company"));
 			ps.setLong(2, companyId);
 
 			rs = ps.executeQuery();
