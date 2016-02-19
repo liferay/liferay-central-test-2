@@ -1435,11 +1435,11 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		Group parentGroup = groupPersistence.findByPrimaryKey(parentGroupId);
 
 		if (PropsValues.LAYOUT_SCOPE_GROUP_FINDER_THRESHOLD >= 0) {
-			int groupCount = groupLocalService.getGroupsCount(
+			int count = groupLocalService.getGroupsCount(
 				parentGroup.getCompanyId(), Layout.class.getName(),
 				parentGroupId);
 
-			if (groupCount >= PropsValues.LAYOUT_SCOPE_GROUP_FINDER_THRESHOLD) {
+			if (count >= PropsValues.LAYOUT_SCOPE_GROUP_FINDER_THRESHOLD) {
 				return layoutFinder.findByScopeGroup(parentGroupId);
 			}
 		}
@@ -1474,11 +1474,11 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		Group parentGroup = groupPersistence.findByPrimaryKey(parentGroupId);
 
 		if (PropsValues.LAYOUT_SCOPE_GROUP_FINDER_THRESHOLD >= 0) {
-			int groupCount = groupLocalService.getGroupsCount(
+			int count = groupLocalService.getGroupsCount(
 				parentGroup.getCompanyId(), Layout.class.getName(),
 				parentGroupId);
 
-			if (groupCount >= PropsValues.LAYOUT_SCOPE_GROUP_FINDER_THRESHOLD) {
+			if (count >= PropsValues.LAYOUT_SCOPE_GROUP_FINDER_THRESHOLD) {
 				return layoutFinder.findByScopeGroup(
 					parentGroupId, privateLayout);
 			}
