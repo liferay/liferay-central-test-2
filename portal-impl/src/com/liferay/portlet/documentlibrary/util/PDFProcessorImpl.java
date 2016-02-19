@@ -694,13 +694,13 @@ public class PDFProcessorImpl
 
 				if (generateThumbnail && generatePreview) {
 					errorMessage =
-						"Timeout when generating thumbanil and preview for " +
+						"Timeout when generating thumbnail and preview for " +
 							file.getPath();
 				}
 				else {
 					if (generateThumbnail) {
 						errorMessage =
-							"Timeout when generating thumbanil for " +
+							"Timeout when generating thumbnail for " +
 								file.getPath();
 					}
 
