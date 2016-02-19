@@ -144,9 +144,13 @@ public class ConfigurationModelToDDMFormValuesConverter {
 
 	protected String translate(String key) {
 		if ((_resourceBundle != null) && (key != null)) {
-			String result = ResourceBundleUtil.getString(_resourceBundle, key);
+			String value = ResourceBundleUtil.getString(_resourceBundle, key);
 
-			return result == null ? key : result;
+			if (value == null) {
+				return key;
+			}
+
+			return value;
 		}
 
 		return key;
