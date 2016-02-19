@@ -533,12 +533,6 @@
 			<var name="siteURL" value="true" />
 		</execute>
 
-		<execute macro="Page#gotoPG">
-			<var name="pageName" value="ADT Test Page" />
-			<var name="siteName" value="Test Site Name" />
-			<var name="siteURL" value="true" />
-		</execute>
-
 		<execute macro="SiteMapPortlet#viewCustomADTMultiColumnPG">
 			<var name="listChildPageName" value="ADT Child Page Name" />
 			<var name="listPageName" value="ADT Test Page,ADT Test Page 2,ADT Test Page 3" />
