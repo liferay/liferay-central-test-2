@@ -92,12 +92,11 @@ define("frontend-js-spa-web@1.0.0/liferay/screen/EventScreen.es", ['exports', 'm
 		EventScreen.prototype.flip = function flip(surfaces) {
 			var _this2 = this;
 
-			document.documentElement.className = this.virtualDocument.className;
 			document.body.className = this.virtualDocument.querySelector('body').className;
 
 			_dom2.default.addClasses(document.body, 'lfr-surface-loading');
 
-			return _HtmlScreen.prototype.flip.call(this, surfaces).then(function () {
+			return _Promise.CancellablePromise.resolve(_Utils2.default.resetAllPortlets()).then(_HtmlScreen.prototype.flip.call(this, surfaces)).then(function () {
 				Liferay.fire('screenFlip', {
 					app: Liferay.SPA.app,
 					screen: _this2
@@ -114,8 +113,6 @@ define("frontend-js-spa-web@1.0.0/liferay/screen/EventScreen.es", ['exports', 'm
 					content: content,
 					screen: _this3
 				});
-
-				_Utils2.default.resetAllPortlets();
 
 				return content;
 			});

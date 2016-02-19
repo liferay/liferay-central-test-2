@@ -1,4 +1,4 @@
-define("frontend-js-spa-web@1.0.0/senna/src/app/App", ['exports', 'metal/src/metal', 'metal-dom/src/all/dom', 'metal-promise/src/promise/Promise', 'metal-events/src/events', '../globals/globals', '../route/Route', '../screen/Screen', '../surface/Surface', 'metal-uri/src/Uri'], function (exports, _metal, _dom, _Promise, _events, _globals, _Route, _Screen, _Surface, _Uri) {
+define("frontend-js-spa-web@1.0.0/senna/src/app/App", ['exports', 'metal/src/metal', 'metal-dom/src/all/dom', 'metal-promise/src/promise/Promise', 'metal-events/src/events', '../utils/utils', '../globals/globals', '../route/Route', '../screen/Screen', '../surface/Surface', 'metal-uri/src/Uri'], function (exports, _metal, _dom, _Promise, _events, _utils, _globals, _Route, _Screen, _Surface, _Uri) {
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
@@ -8,6 +8,8 @@ define("frontend-js-spa-web@1.0.0/senna/src/app/App", ['exports', 'metal/src/met
 	var _dom2 = _interopRequireDefault(_dom);
 
 	var _Promise2 = _interopRequireDefault(_Promise);
+
+	var _utils2 = _interopRequireDefault(_utils);
 
 	var _globals2 = _interopRequireDefault(_globals);
 
@@ -287,7 +289,7 @@ define("frontend-js-spa-web@1.0.0/senna/src/app/App", ['exports', 'metal/src/met
 		};
 
 		App.prototype.canNavigate = function canNavigate(url) {
-			var path = this.getPath(url);
+			var path = _utils2.default.getUrlPath(url);
 			var uri = new _Uri2.default(url);
 
 			if (!this.isLinkSameOrigin_(uri.getHostname())) {
@@ -349,8 +351,7 @@ define("frontend-js-spa-web@1.0.0/senna/src/app/App", ['exports', 'metal/src/met
 		};
 
 		App.prototype.dispatch = function dispatch() {
-			var currentPath = _globals2.default.window.location.pathname + _globals2.default.window.location.search + _globals2.default.window.location.hash;
-			return this.navigate(currentPath, true);
+			return this.navigate(_utils2.default.getCurrentBrowserPath(), true);
 		};
 
 		App.prototype.doNavigate_ = function doNavigate_(path, opt_replaceHistory) {
@@ -414,11 +415,11 @@ define("frontend-js-spa-web@1.0.0/senna/src/app/App", ['exports', 'metal/src/met
 
 		App.prototype.findRoute = function findRoute(path) {
 			// Prevents navigation if it's a hash change on the same url.
-			if (path.lastIndexOf('#') > -1 && this.isPathCurrentBrowserPath(path)) {
+			if (path.lastIndexOf('#') > -1 && _utils2.default.isCurrentBrowserPath(path)) {
 				return null;
 			}
 
-			path = this.maybeRemovePathHashbang(path).substr(this.basePath.length);
+			path = _utils2.default.getUrlPathWithoutHash(path).substr(this.basePath.length);
 
 			for (var i = 0; i < this.routes.length; i++) {
 				var route = this.routes[i];
@@ -450,36 +451,19 @@ define("frontend-js-spa-web@1.0.0/senna/src/app/App", ['exports', 'metal/src/met
 			return this.loadingCssClass;
 		};
 
-		App.prototype.getPath = function getPath(url) {
-			var uri = new _Uri2.default(url);
-
-			return uri.getPathname() + uri.getSearch() + uri.getHash();
-		};
-
 		App.prototype.getUpdateScrollPosition = function getUpdateScrollPosition() {
 			return this.updateScrollPosition;
 		};
 
 		App.prototype.handleNavigateError_ = function handleNavigateError_(path, nextScreen, err) {
 			console.log('Navigation error for [' + nextScreen + '] (' + err + ')');
-			if (!this.isPathCurrentBrowserPath(path)) {
+			if (!_utils2.default.isCurrentBrowserPath(path)) {
 				this.removeScreen(path);
 			}
 		};
 
 		App.prototype.hasRoutes = function hasRoutes() {
 			return this.routes.length > 0;
-		};
-
-		App.prototype.isPathCurrentBrowserPath = function isPathCurrentBrowserPath(path) {
-			if (path) {
-				return this.maybeRemovePathHashbang(path) === _globals2.default.window.location.pathname + _globals2.default.window.location.search;
-			}
-			return false;
-		};
-
-		App.prototype.isHtml5HistorySupported = function isHtml5HistorySupported() {
-			return _globals2.default.window.history && _globals2.default.window.history.pushState;
 		};
 
 		App.prototype.isLinkSameOrigin_ = function isLinkSameOrigin_(hostname) {
@@ -536,7 +520,7 @@ define("frontend-js-spa-web@1.0.0/senna/src/app/App", ['exports', 'metal/src/met
 
 			var navigateFailed = false;
 			try {
-				this.navigate(this.getPath(href));
+				this.navigate(_utils2.default.getUrlPath(href));
 			} catch (err) {
 				// Do not prevent link navigation in case some synchronous error occurs
 				navigateFailed = true;
@@ -545,14 +529,6 @@ define("frontend-js-spa-web@1.0.0/senna/src/app/App", ['exports', 'metal/src/met
 			if (!navigateFailed) {
 				event.preventDefault();
 			}
-		};
-
-		App.prototype.maybeRemovePathHashbang = function maybeRemovePathHashbang(path) {
-			var hashIndex = path.lastIndexOf('#');
-			if (hashIndex > -1) {
-				path = path.substr(0, hashIndex);
-			}
-			return path;
 		};
 
 		App.prototype.maybeRepositionScrollToHashedAnchor = function maybeRepositionScrollToHashedAnchor() {
@@ -572,7 +548,7 @@ define("frontend-js-spa-web@1.0.0/senna/src/app/App", ['exports', 'metal/src/met
 		};
 
 		App.prototype.navigate = function navigate(path, opt_replaceHistory) {
-			if (!this.isHtml5HistorySupported()) {
+			if (!_utils2.default.isHtml5HistorySupported()) {
 				throw new Error('HTML5 History is not supported. Senna will not intercept navigation.');
 			}
 
@@ -648,7 +624,7 @@ define("frontend-js-spa-web@1.0.0/senna/src/app/App", ['exports', 'metal/src/met
 					// to a different url, reload the browser. This behavior doesn't
 					// require senna to route hashed links and is closer to native
 					// browser behavior.
-					if (this.redirectPath && !this.isPathCurrentBrowserPath(this.redirectPath)) {
+					if (this.redirectPath && !_utils2.default.isCurrentBrowserPath(this.redirectPath)) {
 						this.reloadPage();
 					}
 					// Always try to reposition scroll to the hashed anchor when

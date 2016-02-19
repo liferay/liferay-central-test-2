@@ -1,4 +1,4 @@
-define("frontend-js-spa-web@1.0.0/liferay/init.es", ['exports', './screen/ActionURLScreen.es', './app/App.es', 'metal/src/async/async', 'senna/src/globals/globals', './screen/RenderURLScreen.es', 'metal-uri/src/Uri'], function (exports, _ActionURLScreen, _App, _async, _globals, _RenderURLScreen, _Uri) {
+define("frontend-js-spa-web@1.0.0/liferay/init.es", ['exports', './screen/ActionURLScreen.es', './app/App.es', 'metal/src/async/async', 'senna/src/globals/globals', './screen/RenderURLScreen.es', 'metal-uri/src/Uri', 'senna/src/utils/utils'], function (exports, _ActionURLScreen, _App, _async, _globals, _RenderURLScreen, _Uri, _utils) {
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
@@ -16,6 +16,8 @@ define("frontend-js-spa-web@1.0.0/liferay/init.es", ['exports', './screen/Action
 	var _RenderURLScreen2 = _interopRequireDefault(_RenderURLScreen);
 
 	var _Uri2 = _interopRequireDefault(_Uri);
+
+	var _utils2 = _interopRequireDefault(_utils);
 
 	function _interopRequireDefault(obj) {
 		return obj && obj.__esModule ? obj : {
@@ -57,7 +59,7 @@ define("frontend-js-spa-web@1.0.0/liferay/init.es", ['exports', './screen/Action
 
 				_globals2.default.capturedFormElement = formElement;
 
-				app.navigate(app.getPath(url));
+				app.navigate(_utils2.default.getUrlPath(url));
 			} else {
 				formElement.submit();
 			}
