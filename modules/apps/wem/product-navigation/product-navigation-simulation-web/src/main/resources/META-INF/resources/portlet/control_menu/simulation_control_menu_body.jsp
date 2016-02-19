@@ -19,15 +19,15 @@
 <liferay-util:body-bottom outputKey="simulationMenu">
 
 	<%
-	String namespace = PortalUtil.getPortletNamespace(ProductNavigationSimulationPortletKeys.PRODUCT_NAVIGATION_SIMULATION);
+	String portletNamespace = PortalUtil.getPortletNamespace(ProductNavigationSimulationPortletKeys.PRODUCT_NAVIGATION_SIMULATION);
 	%>
 
-	<div class="closed lfr-admin-panel lfr-product-menu-panel lfr-simulation-panel sidenav-fixed sidenav-menu-slider sidenav-right" id="<%= namespace %>simulationPanelId">
+	<div class="closed lfr-admin-panel lfr-product-menu-panel lfr-simulation-panel sidenav-fixed sidenav-menu-slider sidenav-right" id="<%= portletNamespace %>simulationPanelId">
 		<div class="product-menu sidebar sidebar-body sidebar-inverse">
 			<h4 class="sidebar-header">
 				<span><liferay-ui:message key="simulation" /></span>
 
-				<aui:icon cssClass="close icon-monospaced" id='<%= namespace + "closeSimulationPanel" %>' image="times" markupView="lexicon" url="javascript:;" />
+				<aui:icon cssClass="close icon-monospaced" id='<%= portletNamespace + "closeSimulationPanel" %>' image="times" markupView="lexicon" url="javascript:;" />
 			</h4>
 
 			<div class="loading-animation"></div>
@@ -35,11 +35,11 @@
 	</div>
 
 	<aui:script use="liferay-store,io-request,parse-content">
-		var simulationToggle = $('#<%= namespace %>simulationToggleId');
+		var simulationToggle = $('#<%= portletNamespace %>simulationToggleId');
 
 		simulationToggle.sideNavigation();
 
-		var simulationPanel = $('#<%= namespace %>simulationPanelId');
+		var simulationPanel = $('#<%= portletNamespace %>simulationPanelId');
 
 		simulationPanel.on(
 			'urlLoaded.lexicon.sidenav',
@@ -48,7 +48,7 @@
 			}
 		);
 
-		A.one('#<%= namespace %>closeSimulationPanel').on(
+		A.one('#<%= portletNamespace %>closeSimulationPanel').on(
 			'click',
 			function(event) {
 				simulationToggle.sideNavigation('hide');

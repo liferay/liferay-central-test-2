@@ -19,15 +19,15 @@
 <liferay-util:body-bottom outputKey="addContentMenu">
 
 	<%
-	String namespace = PortalUtil.getPortletNamespace(ProductNavigationControlMenuPortletKeys.PRODUCT_NAVIGATION_CONTROL_MENU);
+	String portletNamespace = PortalUtil.getPortletNamespace(ProductNavigationControlMenuPortletKeys.PRODUCT_NAVIGATION_CONTROL_MENU);
 	%>
 
-	<div class="closed lfr-add-panel lfr-admin-panel lfr-product-menu-panel sidenav-fixed sidenav-menu-slider sidenav-right" id="<%= namespace %>addPanelId">
+	<div class="closed lfr-add-panel lfr-admin-panel lfr-product-menu-panel sidenav-fixed sidenav-menu-slider sidenav-right" id="<%= portletNamespace %>addPanelId">
 		<div class="product-menu sidebar sidebar-body sidebar-inverse">
 			<h4 class="sidebar-header">
 				<span><liferay-ui:message key="add" /></span>
 
-				<aui:icon cssClass="close icon-monospaced" id='<%= namespace + "closePanelAdd" %>' image="times" markupView="lexicon" url="javascript:;" />
+				<aui:icon cssClass="close icon-monospaced" id='<%= portletNamespace + "closePanelAdd" %>' image="times" markupView="lexicon" url="javascript:;" />
 			</h4>
 
 			<div class="loading-animation"></div>
@@ -35,7 +35,7 @@
 	</div>
 
 	<aui:script use="liferay-store,io-request,parse-content">
-		var addToggle = $('#<%= namespace %>addToggleId');
+		var addToggle = $('#<%= portletNamespace %>addToggleId');
 
 		addToggle.sideNavigation();
 
@@ -50,7 +50,7 @@
 			}
 		);
 
-		var addPanel = $('#<%= namespace %>addPanelId');
+		var addPanel = $('#<%= portletNamespace %>addPanelId');
 
 		addPanel.on(
 			'urlLoaded.lexicon.sidenav',
@@ -59,7 +59,7 @@
 			}
 		);
 
-		A.one('#<%= namespace %>closePanelAdd').on(
+		A.one('#<%= portletNamespace %>closePanelAdd').on(
 			'click',
 			function(event) {
 				addToggle.sideNavigation('hide');
