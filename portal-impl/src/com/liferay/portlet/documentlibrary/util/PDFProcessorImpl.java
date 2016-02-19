@@ -663,23 +663,23 @@ public class PDFProcessorImpl
 			if (_log.isDebugEnabled()) {
 				if (generateThumbnail && generatePreview) {
 					_log.debug(
-						"Waiting for " + pdfBoxTimeout + " seconds to obtain " +
-							file.getPath() + " thumbnail and previews " +
-								"generation");
+						"Waiting for " + pdfBoxTimeout +
+							" seconds to generate " + file.getPath() +
+								" thumbnail and previews");
 				}
 				else {
 					if (generateThumbnail) {
 						_log.debug(
 							"Waiting for " + pdfBoxTimeout +
-								" seconds to obtain " + file.getPath() +
-									" thumbnail generation");
+								" seconds to generate " + file.getPath() +
+									" thumbnail");
 					}
 
 					if (generatePreview) {
 						_log.debug(
 							"Waiting for " + pdfBoxTimeout +
-								" seconds to obtain " + file.getPath() +
-									" previews generation");
+								" seconds to generate " + file.getPath() +
+									" previews");
 					}
 				}
 			}
