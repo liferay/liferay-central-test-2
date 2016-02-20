@@ -167,13 +167,13 @@
 			<var name="userEmailAddress" value="userea@liferay.com" />
 		</execute>
 
-		<execute macro="SitePage#viewDefaultSiteTemplatePagesPG">
+		<execute macro="Page#viewDefaultSiteTemplatePagesPG">
 			<var name="pageName" value="Home" />
 			<var name="siteName" value="Organization Name 1" />
 			<var name="siteTemplate" value="Community" />
 		</execute>
 
-		<execute macro="SitePage#viewDefaultSiteTemplatePagesPG">
+		<execute macro="Page#viewDefaultSiteTemplatePagesPG">
 			<var name="pageName" value="Home" />
 			<var name="siteName" value="Organization Name 2" />
 			<var name="siteTemplate" value="Intranet" />
@@ -929,7 +929,7 @@
 			<var name="userEmailAddress" value="userea@liferay.com" />
 		</execute>
 
-		<execute macro="SitePage#viewDefaultSiteTemplatePagesPG">
+		<execute macro="Page#viewDefaultSiteTemplatePagesPG">
 			<var name="pageName" value="Home" />
 			<var name="siteName" value="Site1 Name" />
 			<var name="siteTemplate" value="Community" />

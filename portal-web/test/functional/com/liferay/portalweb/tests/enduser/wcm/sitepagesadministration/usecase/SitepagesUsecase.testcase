@@ -179,7 +179,7 @@
 		</execute>
 
 		<execute macro="Page#viewChildPage">
-			<var name="sitePageName" value="Child Page Name" />
+			<var name="pageName" value="Child Page Name" />
 		</execute>
 	</command>
 
@@ -236,7 +236,7 @@
 			<var name="page" value="Public Pages" />
 		</execute>
 
-		<execute macro="SitePage#viewLoadMoreResultsPages">
+		<execute macro="Page#viewLoadMoreResultsPages">
 			<var name="siteChildPages" value="false" />
 		</execute>
 
@@ -253,7 +253,7 @@
 			<var name="page" value="Public Pages" />
 		</execute>
 
-		<execute macro="SitePage#viewLoadMoreResultsPages">
+		<execute macro="Page#viewLoadMoreResultsPages">
 			<var name="siteChildPages" value="true" />
 		</execute>
 	</command>
@@ -1267,7 +1267,7 @@
 			<var name="sitePageType" value="Panel" />
 		</execute>
 
-		<execute macro="SitePage#viewPanelPortletListCP">
+		<execute macro="Page#viewPanelPortletListCP">
 			<var name="componentName" value="Community" />
 			<var name="portletNameList" value="Bookmarks,Friends Directory,Invitation,My Sites,My Sites Directory,Page Comments,Page Flags,Page Ratings,Portal Directory,Site Members Directory" />
 			<var name="sitePageName" value="Panel Page" />
