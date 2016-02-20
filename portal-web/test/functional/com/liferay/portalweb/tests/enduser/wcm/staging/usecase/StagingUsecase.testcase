@@ -4372,7 +4372,7 @@
 			<var name="siteName" value="${siteName}" />
 		</execute>
 
-		<execute macro="SitePage#viewPagesOrderCP">
+		<execute macro="Page#viewPagesOrder">
 			<var name="pageName1" value="Staging Test Page" />
 			<var name="pageName2" value="Test Page 1" />
 			<var name="pageName3" value="Test Page 2" />
