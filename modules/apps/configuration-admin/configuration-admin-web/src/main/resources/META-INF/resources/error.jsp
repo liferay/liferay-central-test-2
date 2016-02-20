@@ -18,6 +18,6 @@
 
 <liferay-ui:error-header />
 
-<liferay-ui:error key="theEntryCouldNotBeFound" />
+<liferay-ui:error key="theEntryCouldNotBeFound" message="the-entry-could-not-be-found" />
 
 <liferay-ui:error-principal />
