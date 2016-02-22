@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCResourceCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCResourceCommand;
 import com.liferay.portal.kernel.util.WebKeys;
 
-import javax.portlet.PortletRequestDispatcher;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 

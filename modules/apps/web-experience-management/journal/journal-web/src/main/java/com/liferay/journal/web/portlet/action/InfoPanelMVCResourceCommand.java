@@ -23,7 +23,6 @@ import com.liferay.portal.kernel.portlet.bridges.mvc.MVCResourceCommand;
 
 import java.util.List;
 
-import javax.portlet.PortletRequestDispatcher;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 
