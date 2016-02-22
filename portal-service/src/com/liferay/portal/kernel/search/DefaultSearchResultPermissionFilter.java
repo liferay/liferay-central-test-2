@@ -55,8 +55,8 @@ public class DefaultSearchResultPermissionFilter
 
 		for (int i = 0; i < documents.length; i++) {
 			if (_isIncludeDocument(
-					documents[i], _permissionChecker.getCompanyId(), companyAdmin,
-					status)) {
+					documents[i], _permissionChecker.getCompanyId(),
+					companyAdmin, status)) {
 
 				docs.add(documents[i]);
 				scores.add(hits.score(i));
