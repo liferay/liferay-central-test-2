@@ -111,9 +111,9 @@ public class StagingPortletConfigurationIcon
 			rootPortletId.equals(ExportImportPortletKeys.EXPORT_IMPORT) ||
 			rootPortletId.equals(ExportImportPortletKeys.IMPORT) ||
 			rootPortletId.equals(
-				StagingProcessesPortletKeys.STAGING_PROCESSES) ||
+				StagingConfigurationPortletKeys.STAGING_CONFIGURATION) ||
 			rootPortletId.equals(
-				StagingConfigurationPortletKeys.STAGING_CONFIGURATION)) {
+				StagingProcessesPortletKeys.STAGING_PROCESSES)) {
 
 			return false;
 		}
