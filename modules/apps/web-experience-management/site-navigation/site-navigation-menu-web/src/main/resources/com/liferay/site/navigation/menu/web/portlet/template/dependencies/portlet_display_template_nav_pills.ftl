@@ -47,7 +47,7 @@
 							<span><@liferay_theme["layout-icon"] layout=navItem.getLayout() /> ${navItem.getName()} ${nav_item_caret}</span>
 						</a>
 
-						<#if showChildren >
+						<#if showChildren>
 							<ul aria-expanded="false" class="child-menu dropdown-menu" role="menu">
 								<#list navItem.getBrowsableChildren() as childNavigationItem>
 									<#assign nav_child_attr_selected = "" />
