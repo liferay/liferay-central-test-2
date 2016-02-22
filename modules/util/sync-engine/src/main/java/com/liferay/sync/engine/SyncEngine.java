@@ -51,8 +51,10 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
@@ -90,7 +92,16 @@ public class SyncEngine {
 	}
 
 	public static ExecutorService getExecutorService() {
-		return _executorService;
+		if (_threadPoolExecutor != null) {
+			return _threadPoolExecutor;
+		}
+
+		_threadPoolExecutor = new ThreadPoolExecutor(
+			64, 64, 60, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>());
+
+		_threadPoolExecutor.allowCoreThreadTimeOut(true);
+
+		return _threadPoolExecutor;
 	}
 
 	public static synchronized boolean isRunning() {
@@ -114,7 +125,9 @@ public class SyncEngine {
 
 		};
 
-		_executorService.execute(runnable);
+		ExecutorService executorService = getExecutorService();
+
+		executorService.execute(runnable);
 	}
 
 	public static synchronized void start() {
@@ -266,7 +279,10 @@ public class SyncEngine {
 			cancelSyncAccountTasks(syncAccountId);
 		}
 
-		_executorService.shutdownNow();
+		if (_threadPoolExecutor != null) {
+			_threadPoolExecutor.shutdownNow();
+		}
+
 		_localEventsScheduledExecutorService.shutdownNow();
 		_remoteEventsScheduledExecutorService.shutdownNow();
 
@@ -293,7 +309,9 @@ public class SyncEngine {
 		final SyncWatchEventProcessor syncWatchEventProcessor,
 		Watcher watcher) {
 
-		_executorService.execute(watcher);
+		ExecutorService executorService = getExecutorService();
+
+		executorService.execute(watcher);
 
 		ScheduledFuture<?> localEventsScheduledFuture =
 			_localEventsScheduledExecutorService.scheduleWithFixedDelay(
@@ -378,8 +396,6 @@ public class SyncEngine {
 	private static final Logger _logger = LoggerFactory.getLogger(
 		SyncEngine.class);
 
-	private static final ExecutorService _executorService =
-		Executors.newCachedThreadPool();
 	private static final ScheduledExecutorService
 		_localEventsScheduledExecutorService = Executors.newScheduledThreadPool(
 			5);
@@ -389,5 +405,6 @@ public class SyncEngine {
 	private static boolean _running;
 	private static final Map<Long, Object[]> _syncAccountTasks =
 		new HashMap<>();
+	private static ThreadPoolExecutor _threadPoolExecutor;
 
 }
