@@ -1347,7 +1347,7 @@
 
 		<var method="StringUtil#lowerCase('${pageNameURL}')" name="pageNameURL" />
 
-		<var name="friendlyURL" value="http://localhost:8080/web/guest/${pageNameURL}/-/blogs/${entryTitleURL}/maximized" />
+		<var name="friendlyURL" value="http://localhost:8080/web/guest/${pageNameURL}/-/blogs/${entryTitleURL}" />
 
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="${pageName}" />
