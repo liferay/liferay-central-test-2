@@ -20,7 +20,6 @@
 String searchContainerId = ParamUtil.getString(request, "searchContainerId");
 
 String displayStyle = GetterUtil.getString((String)request.getAttribute("view.jsp-displayStyle"));
-
 SearchContainer groupSearch = (SearchContainer)request.getAttribute("view.jsp-groupSearchContainer");
 %>
 

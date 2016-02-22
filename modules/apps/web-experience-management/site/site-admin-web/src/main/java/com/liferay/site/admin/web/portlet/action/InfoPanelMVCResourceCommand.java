@@ -50,10 +50,7 @@ public class InfoPanelMVCResourceCommand extends BaseMVCResourceCommand {
 
 		resourceRequest.setAttribute(SiteAdminWebKeys.GROUP_ENTRIES, groups);
 
-		PortletRequestDispatcher portletRequestDispatcher =
-			getPortletRequestDispatcher(resourceRequest, "/info_panel.jsp");
-
-		portletRequestDispatcher.include(resourceRequest, resourceResponse);
+		include(resourceRequest, resourceResponse, "/info_panel.jsp");
 	}
 
 }
