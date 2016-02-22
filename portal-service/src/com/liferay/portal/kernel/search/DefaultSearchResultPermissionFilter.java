@@ -42,23 +42,21 @@ public class DefaultSearchResultPermissionFilter
 	@Override
 	protected void filterHits(Hits hits, SearchContext searchContext) {
 		List<Document> docs = new ArrayList<>();
+		int excludeDocsSize = 0;
 		List<Float> scores = new ArrayList<>();
 
-		Document[] documents = hits.getDocs();
-
-		int excludeDocsSize = 0;
-
+		boolean companyAdmin = _permissionChecker.isCompanyAdmin(
+			_permissionChecker.getCompanyId());
 		int status = GetterUtil.getInteger(
 			searchContext.getAttribute(Field.STATUS),
 			WorkflowConstants.STATUS_APPROVED);
 
-		long companyId = _permissionChecker.getCompanyId();
-
-		boolean isCompanyAdmin = _permissionChecker.isCompanyAdmin(companyId);
+		Document[] documents = hits.getDocs();
 
 		for (int i = 0; i < documents.length; i++) {
 			if (_isIncludeDocument(
-					documents[i], status, isCompanyAdmin, companyId)) {
+					documents[i], _permissionChecker.getCompanyId(), companyAdmin,
+					status)) {
 
 				docs.add(documents[i]);
 				scores.add(hits.score(i));
@@ -99,7 +97,7 @@ public class DefaultSearchResultPermissionFilter
 	}
 
 	private boolean _isIncludeDocument(
-		Document document, int status, boolean isCompanyAdmin, long companyId) {
+		Document document, long companyId, boolean companyAdmin, int status) {
 
 		long entryCompanyId = GetterUtil.getLong(
 			document.get(Field.COMPANY_ID));
@@ -108,7 +106,7 @@ public class DefaultSearchResultPermissionFilter
 			return false;
 		}
 
-		if (isCompanyAdmin) {
+		if (companyAdmin) {
 			return true;
 		}
 
