@@ -261,11 +261,11 @@
 		</execute>
 	</command>
 
-	<command name="gotoSitesUsers" summary="Navigate to Product Menu > Sites > Users > ${portlet}">
+	<command name="gotoSitesMembers" summary="Navigate to Product Menu > Sites > Members > ${portlet}">
 		<execute macro="ProductMenuHelper#expandPanelSites" />
 
 		<execute macro="ProductMenuHelper#expandCategory">
-			<var name="category" value="Users" />
+			<var name="category" value="Members" />
 		</execute>
 
 		<execute macro="ProductMenuHelper#gotoPortlet">
