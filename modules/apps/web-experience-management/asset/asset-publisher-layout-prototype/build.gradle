@@ -5,8 +5,8 @@ dependencies {
 	provided project(":apps:web-experience-management:asset:asset-categories-navigation-web")
 	provided project(":apps:web-experience-management:asset:asset-publisher-web")
 	provided project(":apps:web-experience-management:asset:asset-tags-navigation-web")
-	provided project(":portal-search:portal-search-web")
-	provided project(":portal:portal-instance-lifecycle")
+	provided project(":apps:platform:portal-search:portal-search-web")
+	provided project(":apps:platform:portal:portal-instance-lifecycle")
 }
 
 liferay {

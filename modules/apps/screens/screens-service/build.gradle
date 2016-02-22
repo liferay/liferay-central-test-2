@@ -16,7 +16,7 @@ dependencies {
 	provided project(":apps:screens:screens-api")
 	provided project(":apps:web-experience-management:asset:asset-publisher-web")
 	provided project(":apps:web-experience-management:journal:journal-api")
-	provided project(":portal:portal-upgrade")
+	provided project(":apps:platform:portal:portal-upgrade")
 }
 
 liferay {

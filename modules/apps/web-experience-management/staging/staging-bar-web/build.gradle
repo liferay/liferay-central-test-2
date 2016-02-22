@@ -8,8 +8,8 @@ dependencies {
 	provided group: "org.osgi", name: "org.osgi.compendium", version: "5.0.0"
 	provided project(":apps:web-experience-management:product-navigation:product-navigation-control-menu-api")
 	provided project(":apps:web-experience-management:staging:staging-lang")
-	provided project(":frontend:frontend-taglib")
-	provided project(":portal:portal-upgrade")
+	provided project(":apps:platform:frontend:frontend-taglib")
+	provided project(":apps:platform:portal:portal-upgrade")
 }
 
 liferay {

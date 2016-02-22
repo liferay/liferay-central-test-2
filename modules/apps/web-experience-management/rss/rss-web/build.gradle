@@ -9,8 +9,8 @@ dependencies {
 	provided group: "rome", name: "rome", version: "1.0"
 	provided project(":apps:business-productivity:dynamic-data-mapping:dynamic-data-mapping-taglib")
 	provided project(":apps:web-experience-management:portlet-display-template:portlet-display-template")
-	provided project(":portal-configuration:portal-configuration-metatype")
-	provided project(":portal:portal-upgrade")
+	provided project(":apps:platform:portal-configuration:portal-configuration-metatype")
+	provided project(":apps:platform:portal:portal-upgrade")
 }
 
 liferay {

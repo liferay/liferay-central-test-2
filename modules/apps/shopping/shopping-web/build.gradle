@@ -11,8 +11,8 @@ dependencies {
 	provided project(":apps:shopping:shopping-api")
 	provided project(":apps:shopping:shopping-service")
 	provided project(":apps:web-experience-management:application-list:application-list-api")
-	provided project(":frontend:frontend-taglib")
-	provided project(":portal:portal-upgrade")
+	provided project(":apps:platform:frontend:frontend-taglib")
+	provided project(":apps:platform:portal:portal-upgrade")
 }
 
 liferay {

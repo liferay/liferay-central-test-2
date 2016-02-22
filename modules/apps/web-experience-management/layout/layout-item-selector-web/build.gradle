@@ -8,7 +8,7 @@ dependencies {
 	provided project(":apps:collaboration:item-selector:item-selector-criteria-api")
 	provided project(":apps:web-experience-management:layout:layout-item-selector-api")
 	provided project(":apps:web-experience-management:layout:layout-taglib")
-	provided project(":frontend:frontend-taglib")
+	provided project(":apps:platform:frontend:frontend-taglib")
 }
 
 liferay {

@@ -10,8 +10,8 @@ dependencies {
 	provided project(":apps:web-experience-management:asset:asset-categories-service")
 	provided project(":apps:web-experience-management:export-import:export-import-api")
 	provided project(":apps:web-experience-management:export-import:export-import-service")
-	provided project(":frontend:frontend-taglib")
-	provided project(":portal:portal-upgrade")
+	provided project(":apps:platform:frontend:frontend-taglib")
+	provided project(":apps:platform:portal:portal-upgrade")
 }
 
 liferay {

@@ -12,9 +12,9 @@ dependencies {
 	provided project(":apps:web-experience-management:layout:layout-taglib")
 	provided project(":apps:web-experience-management:staging:staging-lang")
 	provided project(":apps:web-experience-management:trash:trash-taglib")
-	provided project(":frontend:frontend-taglib")
-	provided project(":portal-background-task:portal-background-task-api")
-	provided project(":portal:portal-upgrade")
+	provided project(":apps:platform:frontend:frontend-taglib")
+	provided project(":apps:platform:portal-background-task:portal-background-task-api")
+	provided project(":apps:platform:portal:portal-upgrade")
 }
 
 liferay {
