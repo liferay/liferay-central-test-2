@@ -1028,6 +1028,7 @@
 			<var name="pageName" value="Site Page Name" />
 			<var name="siteName" value="Blank Site Name" />
 			<var name="siteURL" value="true" />
+			<var name="threadReplyBody" value="MB Thread Message Subject Reply" />
 			<var name="threadSubject" value="MB Thread Message Subject" />
 		</execute>
 
