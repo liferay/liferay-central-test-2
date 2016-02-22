@@ -22,13 +22,10 @@ long groupId = siteAdminDisplayContext.getGroupId();
 Group group = siteAdminDisplayContext.getGroup();
 
 String displayStyle = siteAdminDisplayContext.getDisplayStyle();
-
 SearchContainer groupSearch = siteAdminDisplayContext.getSearchContainer();
-
 PortletURL portletURL = siteAdminDisplayContext.getPortletURL();
 
 request.setAttribute("view.jsp-displayStyle", displayStyle);
-
 request.setAttribute("view.jsp-groupSearchContainer", groupSearch);
 
 PortletURL mainURL = renderResponse.createRenderURL();
