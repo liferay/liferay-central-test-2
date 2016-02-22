@@ -33,7 +33,7 @@ public class CallbackPreferringTransactionExecutor
 	@Override
 	public Object execute(
 			PlatformTransactionManager platformTransactionManager,
-			TransactionAttributeAdaptor transactionAttributeAdaptor,
+			TransactionAttributeAdapter transactionAttributeAdapter,
 			MethodInvocation methodInvocation)
 		throws Throwable {
 
@@ -45,9 +45,9 @@ public class CallbackPreferringTransactionExecutor
 		try {
 			Object result =
 				callbackPreferringPlatformTransactionManager.execute(
-					transactionAttributeAdaptor,
+					transactionAttributeAdapter,
 					createTransactionCallback(
-						transactionAttributeAdaptor, methodInvocation));
+						transactionAttributeAdapter, methodInvocation));
 
 			if (result instanceof ThrowableHolder) {
 				ThrowableHolder throwableHolder = (ThrowableHolder)result;
@@ -63,11 +63,11 @@ public class CallbackPreferringTransactionExecutor
 	}
 
 	protected TransactionCallback<Object> createTransactionCallback(
-		TransactionAttributeAdaptor transactionAttributeAdaptor,
+		TransactionAttributeAdapter transactionAttributeAdapter,
 		MethodInvocation methodInvocation) {
 
 		return new CallbackPreferringTransactionCallback(
-			transactionAttributeAdaptor, methodInvocation);
+			transactionAttributeAdapter, methodInvocation);
 	}
 
 	protected static class ThrowableHolder {
@@ -97,11 +97,11 @@ public class CallbackPreferringTransactionExecutor
 
 		@Override
 		public Object doInTransaction(TransactionStatus transactionStatus) {
-			TransactionStatusAdaptor transactionStatusAdaptor =
-				new TransactionStatusAdaptor(transactionStatus);
+			TransactionStatusAdapter transactionStatusAdapter =
+				new TransactionStatusAdapter(transactionStatus);
 
 			TransactionLifecycleManager.fireTransactionCreatedEvent(
-				_transactionAttributeAdaptor, transactionStatusAdaptor);
+				_transactionAttributeAdapter, transactionStatusAdapter);
 
 			boolean rollback = false;
 
@@ -109,9 +109,9 @@ public class CallbackPreferringTransactionExecutor
 				return _methodInvocation.proceed();
 			}
 			catch (Throwable throwable) {
-				if (_transactionAttributeAdaptor.rollbackOn(throwable)) {
+				if (_transactionAttributeAdapter.rollbackOn(throwable)) {
 					TransactionLifecycleManager.fireTransactionRollbackedEvent(
-						_transactionAttributeAdaptor, transactionStatusAdaptor,
+						_transactionAttributeAdapter, transactionStatusAdapter,
 						throwable);
 
 					if (transactionStatus.isNewTransaction()) {
@@ -132,21 +132,21 @@ public class CallbackPreferringTransactionExecutor
 			finally {
 				if (!rollback) {
 					TransactionLifecycleManager.fireTransactionCommittedEvent(
-						_transactionAttributeAdaptor, transactionStatusAdaptor);
+						_transactionAttributeAdapter, transactionStatusAdapter);
 				}
 			}
 		}
 
 		private CallbackPreferringTransactionCallback(
-			TransactionAttributeAdaptor transactionAttributeAdaptor,
+			TransactionAttributeAdapter transactionAttributeAdapter,
 			MethodInvocation methodInvocation) {
 
-			_transactionAttributeAdaptor = transactionAttributeAdaptor;
+			_transactionAttributeAdapter = transactionAttributeAdapter;
 			_methodInvocation = methodInvocation;
 		}
 
 		private final MethodInvocation _methodInvocation;
-		private final TransactionAttributeAdaptor _transactionAttributeAdaptor;
+		private final TransactionAttributeAdapter _transactionAttributeAdapter;
 
 	}
 

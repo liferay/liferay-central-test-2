@@ -38,7 +38,7 @@ public class TransactionInvokerImpl implements TransactionInvoker {
 
 		return (T)_transactionExecutor.execute(
 			_platformTransactionManager,
-			new TransactionAttributeAdaptor(
+			new TransactionAttributeAdapter(
 				TransactionAttributeBuilder.build(
 					true, transactionConfig.getIsolation(),
 					transactionConfig.getPropagation(),

@@ -26,7 +26,7 @@ public interface TransactionExecutor {
 
 	public Object execute(
 			PlatformTransactionManager platformTransactionManager,
-			TransactionAttributeAdaptor transactionAttributeAdaptor,
+			TransactionAttributeAdapter transactionAttributeAdapter,
 			MethodInvocation methodInvocation)
 		throws Throwable;
 

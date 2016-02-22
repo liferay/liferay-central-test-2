@@ -21,11 +21,11 @@ import org.springframework.transaction.support.DefaultTransactionStatus;
 /**
  * @author Shuyang Zhou
  */
-public class TransactionStatusAdaptor
+public class TransactionStatusAdapter
 	extends DefaultTransactionStatus
 	implements com.liferay.portal.kernel.transaction.TransactionStatus {
 
-	public TransactionStatusAdaptor(TransactionStatus transactionStatus) {
+	public TransactionStatusAdapter(TransactionStatus transactionStatus) {
 		super(null, false, false, false, false, null);
 
 		_transactionStatus = transactionStatus;

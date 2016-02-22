@@ -31,9 +31,9 @@ import com.liferay.portal.kernel.util.PortletKeys;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.ReflectionUtil;
 import com.liferay.portal.spring.transaction.DefaultTransactionExecutor;
-import com.liferay.portal.spring.transaction.TransactionAttributeAdaptor;
+import com.liferay.portal.spring.transaction.TransactionAttributeAdapter;
 import com.liferay.portal.spring.transaction.TransactionInterceptor;
-import com.liferay.portal.spring.transaction.TransactionStatusAdaptor;
+import com.liferay.portal.spring.transaction.TransactionStatusAdapter;
 import com.liferay.portal.test.log.CaptureAppender;
 import com.liferay.portal.test.log.Log4JLoggerTestUtil;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
@@ -459,21 +459,21 @@ public class PortalPreferencesImplTest {
 		@Override
 		public void commit(
 			PlatformTransactionManager platformTransactionManager,
-			TransactionAttributeAdaptor transactionAttributeAdaptor,
-			TransactionStatusAdaptor transactionStatusAdaptor) {
+			TransactionAttributeAdapter transactionAttributeAdapter,
+			TransactionStatusAdapter transactionStatusAdapter) {
 
 			if (!_synchronizeThreadLocal.get()) {
 				_originalTransactionExecutor.commit(
-					platformTransactionManager, transactionAttributeAdaptor,
-					transactionStatusAdaptor);
+					platformTransactionManager, transactionAttributeAdapter,
+					transactionStatusAdapter);
 			}
 
 			try {
 				_cyclicBarrier.await();
 
 				_originalTransactionExecutor.commit(
-					platformTransactionManager, transactionAttributeAdaptor,
-					transactionStatusAdaptor);
+					platformTransactionManager, transactionAttributeAdapter,
+					transactionStatusAdapter);
 			}
 			catch (Throwable t) {
 				ReflectionUtil.throwException(t);
