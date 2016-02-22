@@ -19,11 +19,9 @@ import com.liferay.portal.kernel.portlet.bridges.mvc.MVCResourceCommand;
 import com.liferay.trash.kernel.model.TrashEntry;
 import com.liferay.trash.web.constants.TrashPortletKeys;
 import com.liferay.trash.web.constants.TrashWebKeys;
-import com.liferay.trash.web.util.ActionUtil;
 
 import java.util.List;
 
-import javax.portlet.PortletRequestDispatcher;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 
