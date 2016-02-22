@@ -486,8 +486,6 @@
 			<var name="entryTitle" value="Blogs Entry4 Title" />
 		</execute>
 
-		<var name="ipAddress" value="${getIPAddress()}" />
-
 		<execute macro="User#firstLoginPG">
 			<var name="password" value="test" />
 			<var name="userEmailAddress" value="test@liferay.com" />
@@ -557,13 +555,6 @@
 		<execute macro="BlogsEntry#viewPG">
 			<var name="entryContent" value="Blogs Entry6 Content" />
 			<var name="entryTitle" value="Blogs Entry6 Title" />
-		</execute>
-
-		<execute macro="User#logoutPG" />
-
-		<execute macro="User#loginPG">
-			<var name="password" value="test" />
-			<var name="userEmailAddress" value="test@liferay.com" />
 		</execute>
 	</command>
 
