@@ -569,9 +569,8 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 					if (checkPermissions) {
 						return filterGroups(new ArrayList<>(userSiteGroups));
 					}
-					else {
-						return new ArrayList<>(userSiteGroups);
-					}
+
+					return new ArrayList<>(userSiteGroups);
 				}
 			}
 		}
@@ -607,9 +606,8 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 								return filterGroups(
 									new ArrayList<>(userSiteGroups));
 							}
-							else {
-								return new ArrayList<>(userSiteGroups);
-							}
+
+							return new ArrayList<>(userSiteGroups);
 						}
 					}
 				}
@@ -625,9 +623,8 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 								return filterGroups(
 									new ArrayList<>(userSiteGroups));
 							}
-							else {
-								return new ArrayList<>(userSiteGroups);
-							}
+
+							return new ArrayList<>(userSiteGroups);
 						}
 					}
 				}
@@ -637,9 +634,8 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 		if (checkPermissions) {
 			return filterGroups(new ArrayList<>(userSiteGroups));
 		}
-		else {
-			return new ArrayList<>(userSiteGroups);
-		}
+
+		return new ArrayList<>(userSiteGroups);
 	}
 
 	/**
