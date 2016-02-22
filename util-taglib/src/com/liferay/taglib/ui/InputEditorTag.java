@@ -280,8 +280,8 @@ public class InputEditorTag extends IncludeTag {
 		EditorConfiguration editorConfiguration =
 			EditorConfigurationFactoryUtil.getEditorConfiguration(
 				PortletConstants.getRootPortletId(portletId), getConfigKey(),
-				getEditorName(request), attributes,
-				themeDisplay, getRequestBackedPortletURLFactory());
+				getEditorName(request), attributes, themeDisplay,
+				getRequestBackedPortletURLFactory());
 
 		Map<String, Object> data = editorConfiguration.getData();
 
