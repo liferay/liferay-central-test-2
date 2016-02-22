@@ -221,27 +221,28 @@ public class WabBundleProcessor implements ServletContextListener {
 		}
 
 		@Override
-		public void init(ServletConfig config) throws ServletException {
-			_servlet.init(config);
+		public void init(ServletConfig servletConfig) throws ServletException {
+			_servlet.init(servletConfig);
 		}
 
 		@Override
-		public void service(ServletRequest request, ServletResponse response)
+		public void service(
+				ServletRequest servletRequest, ServletResponse servletResponse)
 			throws IOException, ServletException {
 
-			String curJspFile = (String)request.getAttribute(
+			String curJspFile = (String)servletRequest.getAttribute(
 				org.apache.jasper.Constants.JSP_FILE);
 
 			if (jspFile != null) {
-				request.setAttribute(
+				servletRequest.setAttribute(
 					org.apache.jasper.Constants.JSP_FILE, jspFile);
 			}
 
 			try {
-				_servlet.service(request, response);
+				_servlet.service(servletRequest, servletResponse);
 			}
 			finally {
-				request.setAttribute(
+				servletRequest.setAttribute(
 					org.apache.jasper.Constants.JSP_FILE, curJspFile);
 			}
 		}
