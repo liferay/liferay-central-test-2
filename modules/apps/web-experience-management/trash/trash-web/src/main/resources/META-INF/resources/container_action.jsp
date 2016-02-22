@@ -18,9 +18,7 @@
 
 <%
 TrashEntry trashEntry = trashDisplayContext.getTrashEntry();
-
 TrashHandler trashHandler = trashDisplayContext.getTrashHandler();
-
 TrashRenderer trashRenderer = trashDisplayContext.getTrashRenderer();
 %>
 
