@@ -22,11 +22,11 @@ import org.springframework.transaction.interceptor.TransactionAttribute;
 /**
  * @author Shuyang Zhou
  */
-public class TransactionAttributeAdaptor
+public class TransactionAttributeAdapter
 	implements com.liferay.portal.kernel.transaction.TransactionAttribute,
 			   TransactionAttribute {
 
-	public TransactionAttributeAdaptor(
+	public TransactionAttributeAdapter(
 		TransactionAttribute transactionAttribute) {
 
 		_transactionAttribute = transactionAttribute;

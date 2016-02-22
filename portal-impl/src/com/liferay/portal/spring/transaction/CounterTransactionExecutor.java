@@ -30,12 +30,12 @@ public class CounterTransactionExecutor
 	@Override
 	public void commit(
 		PlatformTransactionManager platformTransactionManager,
-		TransactionAttributeAdaptor transactionAttributeAdaptor,
-		TransactionStatusAdaptor transactionStatusAdaptor) {
+		TransactionAttributeAdapter transactionAttributeAdapter,
+		TransactionStatusAdapter transactionStatusAdapter) {
 
 		try {
 			platformTransactionManager.commit(
-				transactionStatusAdaptor.getTransactionStatus());
+				transactionStatusAdapter.getTransactionStatus());
 		}
 		catch (RuntimeException re) {
 			_log.error(
@@ -53,12 +53,12 @@ public class CounterTransactionExecutor
 	@Override
 	public Object execute(
 			PlatformTransactionManager platformTransactionManager,
-			TransactionAttributeAdaptor transactionAttributeAdaptor,
+			TransactionAttributeAdapter transactionAttributeAdapter,
 			MethodInvocation methodInvocation)
 		throws Throwable {
 
-		TransactionStatusAdaptor transactionStatusAdaptor = start(
-			platformTransactionManager, transactionAttributeAdaptor);
+		TransactionStatusAdapter transactionStatusAdapter = start(
+			platformTransactionManager, transactionAttributeAdapter);
 
 		Object returnValue = null;
 
@@ -68,12 +68,12 @@ public class CounterTransactionExecutor
 		catch (Throwable throwable) {
 			rollback(
 				platformTransactionManager, throwable,
-				transactionAttributeAdaptor, transactionStatusAdaptor);
+				transactionAttributeAdapter, transactionStatusAdapter);
 		}
 
 		commit(
-			platformTransactionManager, transactionAttributeAdaptor,
-			transactionStatusAdaptor);
+			platformTransactionManager, transactionAttributeAdapter,
+			transactionStatusAdapter);
 
 		return returnValue;
 	}
@@ -82,14 +82,14 @@ public class CounterTransactionExecutor
 	public void rollback(
 			PlatformTransactionManager platformTransactionManager,
 			Throwable throwable,
-			TransactionAttributeAdaptor transactionAttributeAdaptor,
-			TransactionStatusAdaptor transactionStatusAdaptor)
+			TransactionAttributeAdapter transactionAttributeAdapter,
+			TransactionStatusAdapter transactionStatusAdapter)
 		throws Throwable {
 
-		if (transactionAttributeAdaptor.rollbackOn(throwable)) {
+		if (transactionAttributeAdapter.rollbackOn(throwable)) {
 			try {
 				platformTransactionManager.rollback(
-					transactionStatusAdaptor.getTransactionStatus());
+					transactionStatusAdapter.getTransactionStatus());
 			}
 			catch (RuntimeException re) {
 				re.addSuppressed(throwable);
@@ -111,21 +111,21 @@ public class CounterTransactionExecutor
 		}
 		else {
 			commit(
-				platformTransactionManager, transactionAttributeAdaptor,
-				transactionStatusAdaptor);
+				platformTransactionManager, transactionAttributeAdapter,
+				transactionStatusAdapter);
 		}
 
 		throw throwable;
 	}
 
 	@Override
-	public TransactionStatusAdaptor start(
+	public TransactionStatusAdapter start(
 		PlatformTransactionManager platformTransactionManager,
-		TransactionAttributeAdaptor transactionAttributeAdaptor) {
+		TransactionAttributeAdapter transactionAttributeAdapter) {
 
-		return new TransactionStatusAdaptor(
+		return new TransactionStatusAdapter(
 			platformTransactionManager.getTransaction(
-				transactionAttributeAdaptor));
+				transactionAttributeAdapter));
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(

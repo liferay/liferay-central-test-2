@@ -27,11 +27,11 @@ public class CounterCallbackPreferringTransactionExecutor
 
 	@Override
 	protected TransactionCallback<Object> createTransactionCallback(
-		TransactionAttributeAdaptor transactionAttributeAdaptor,
+		TransactionAttributeAdapter transactionAttributeAdapter,
 		MethodInvocation methodInvocation) {
 
 		return new CounterCallbackPreferringTransactionCallback(
-			transactionAttributeAdaptor, methodInvocation);
+			transactionAttributeAdapter, methodInvocation);
 	}
 
 	private static class CounterCallbackPreferringTransactionCallback
@@ -43,7 +43,7 @@ public class CounterCallbackPreferringTransactionExecutor
 				return _methodInvocation.proceed();
 			}
 			catch (Throwable throwable) {
-				if (_transactionAttributeAdaptor.rollbackOn(throwable)) {
+				if (_transactionAttributeAdapter.rollbackOn(throwable)) {
 					if (throwable instanceof RuntimeException) {
 						throw (RuntimeException)throwable;
 					}
@@ -58,15 +58,15 @@ public class CounterCallbackPreferringTransactionExecutor
 		}
 
 		private CounterCallbackPreferringTransactionCallback(
-			TransactionAttributeAdaptor transactionAttributeAdaptor,
+			TransactionAttributeAdapter transactionAttributeAdapter,
 			MethodInvocation methodInvocation) {
 
-			_transactionAttributeAdaptor = transactionAttributeAdaptor;
+			_transactionAttributeAdapter = transactionAttributeAdapter;
 			_methodInvocation = methodInvocation;
 		}
 
 		private final MethodInvocation _methodInvocation;
-		private final TransactionAttributeAdaptor _transactionAttributeAdaptor;
+		private final TransactionAttributeAdapter _transactionAttributeAdapter;
 
 	}
 

@@ -23,18 +23,18 @@ public interface TransactionHandler {
 
 	public void commit(
 		PlatformTransactionManager platformTransactionManager,
-		TransactionAttributeAdaptor transactionAttributeAdaptor,
-		TransactionStatusAdaptor transactionStatusAdaptor);
+		TransactionAttributeAdapter transactionAttributeAdapter,
+		TransactionStatusAdapter transactionStatusAdapter);
 
 	public void rollback(
 			PlatformTransactionManager platformTransactionManager,
 			Throwable throwable,
-			TransactionAttributeAdaptor transactionAttributeAdaptor,
-			TransactionStatusAdaptor transactionStatusAdaptor)
+			TransactionAttributeAdapter transactionAttributeAdapter,
+			TransactionStatusAdapter transactionStatusAdapter)
 		throws Throwable;
 
-	public TransactionStatusAdaptor start(
+	public TransactionStatusAdapter start(
 		PlatformTransactionManager platformTransactionManager,
-		TransactionAttributeAdaptor transactionAttributeAdaptor);
+		TransactionAttributeAdapter transactionAttributeAdapter);
 
 }
