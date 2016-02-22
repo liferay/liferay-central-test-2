@@ -20,10 +20,6 @@
 
 	<%
 	Group group = siteAdminDisplayContext.getGroup();
-
-	List<LayoutSetPrototype> layoutSetPrototypes = LayoutSetPrototypeServiceUtil.search(company.getCompanyId(), Boolean.TRUE, null);
-
-	boolean hasAddLayoutSetPrototypePermission = PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_LAYOUT_SET_PROTOTYPE);
 	%>
 
 	<liferay-portlet:renderURL varImpl="addSiteURL">
@@ -34,9 +30,14 @@
 		</c:if>
 	</liferay-portlet:renderURL>
 
+	<%
+	boolean hasAddLayoutSetPrototypePermission = PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_LAYOUT_SET_PROTOTYPE);
+	List<LayoutSetPrototype> layoutSetPrototypes = LayoutSetPrototypeServiceUtil.search(company.getCompanyId(), Boolean.TRUE, null);
+	%>
+
 	<liferay-frontend:add-menu>
 		<c:choose>
-			<c:when test="<%= layoutSetPrototypes.isEmpty() && !hasAddLayoutSetPrototypePermission %>">
+			<c:when test="<%= !hasAddLayoutSetPrototypePermission && layoutSetPrototypes.isEmpty() %>">
 				<liferay-frontend:add-menu-item title='<%= LanguageUtil.get(request, "add") %>' url="<%= addSiteURL.toString() %>" />
 			</c:when>
 			<c:otherwise>
