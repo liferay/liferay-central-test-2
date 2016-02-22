@@ -22,7 +22,6 @@ import com.liferay.site.admin.web.constants.SiteAdminWebKeys;
 
 import java.util.List;
 
-import javax.portlet.PortletRequestDispatcher;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 
