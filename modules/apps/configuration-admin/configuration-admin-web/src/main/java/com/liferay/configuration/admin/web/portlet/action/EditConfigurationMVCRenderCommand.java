@@ -103,7 +103,7 @@ public class EditConfigurationMVCRenderCommand implements MVCRenderCommand {
 			return "/edit_configuration.jsp";
 		}
 
-		SessionErrors.add(renderRequest, "theEntryCouldNotBeFound");
+		SessionErrors.add(renderRequest, "entryInvalid");
 
 		return "/error.jsp";
 	}
