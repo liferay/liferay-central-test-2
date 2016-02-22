@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.trash.web.util;
+package com.liferay.trash.web.portlet.action;
 
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.trash.kernel.model.TrashEntry;
