@@ -537,7 +537,7 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 
 		boolean checkPermissions = true;
 
-		if (userId == getPermissionChecker().getUserId()) {
+		if (userId == getUserId()) {
 			checkPermissions = false;
 		}
 
