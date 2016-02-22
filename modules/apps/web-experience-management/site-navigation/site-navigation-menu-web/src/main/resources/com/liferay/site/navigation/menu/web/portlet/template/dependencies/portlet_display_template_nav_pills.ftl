@@ -18,7 +18,7 @@
 			<#list navItems as navItem>
 				<#assign showChildren = (displayDepth != 1) && navItem.hasBrowsableChildren() />
 
-				<#if navItem.isBrowsable() || showChildren >
+				<#if navItem.isBrowsable() || showChildren>
 					<#assign nav_item_attr_has_popup = "" />
 					<#assign nav_item_attr_selected = "" />
 					<#assign nav_item_caret = "" />
@@ -26,18 +26,18 @@
 					<#assign nav_item_href_link = "" />
 					<#assign nav_item_link_css_class = "" />
 
-					<#if showChildren >
+					<#if showChildren>
 						<#assign nav_item_attr_has_popup = "aria-haspopup='true'" />
 						<#assign nav_item_caret = '<span class="lfr-nav-child-toggle"><i class="icon-caret-down"></i></span>' />
 						<#assign nav_item_css_class = "${nav_item_css_class} dropdown" />
 						<#assign nav_item_link_css_class = "dropdown-toggle" />
 					</#if>
 
-					<#if navItem.isBrowsable() >
+					<#if navItem.isBrowsable()>
 						<#assign nav_item_href_link = "href='${navItem.getURL()}'" />
 					</#if>
 
-					<#if navItem.isSelected() >
+					<#if navItem.isSelected()>
 						<#assign nav_item_attr_selected = "aria-selected='true'" />
 						<#assign nav_item_css_class = "${nav_item_css_class} selected active" />
 					</#if>
