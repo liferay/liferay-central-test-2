@@ -10,7 +10,7 @@ dependencies {
 	provided project(":apps:web-experience-management:export-import:export-import-api")
 	provided project(":apps:web-experience-management:staging:staging-api")
 	provided project(":apps:web-experience-management:staging:staging-lang")
-	provided project(":frontend:frontend-taglib")
+	provided project(":apps:platform:frontend:frontend-taglib")
 }
 
 liferay {

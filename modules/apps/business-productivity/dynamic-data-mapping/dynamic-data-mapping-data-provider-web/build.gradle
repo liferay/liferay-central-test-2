@@ -13,7 +13,7 @@ dependencies {
 	provided project(":apps:business-productivity:dynamic-data-mapping:dynamic-data-mapping-service")
 	provided project(":apps:web-experience-management:application-list:application-list-api")
 	provided project(":core:osgi-service-tracker-collections")
-	provided project(":frontend:frontend-taglib")
+	provided project(":apps:platform:frontend:frontend-taglib")
 }
 
 liferay {
