@@ -414,8 +414,8 @@
 	</command>
 
 	<command name="viewSubcategoryFromSubcategoryPG">
-		<var name="key_categoryDescription" value="${subCategoryDescription}" />
 		<var name="key_categoryName" value="${categoryName}" />
+		<var name="key_subCategoryDescription" value="${subCategoryDescription}" />
 		<var name="key_subCategoryName" value="${subCategoryName}" />
 
 		<execute function="AssertTextEquals" locator1="MessageBoards#CATEGORIES_NAME_HEADER" value1="${categoryName}" />
