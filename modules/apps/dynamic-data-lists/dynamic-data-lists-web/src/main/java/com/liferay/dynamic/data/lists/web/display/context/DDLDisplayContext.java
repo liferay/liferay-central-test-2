@@ -72,11 +72,12 @@ public class DDLDisplayContext {
 		DDLWebConfiguration ddlWebConfiguration,
 		DDMTemplateLocalService ddmTemplateLocalService) {
 
-		_ddlRequestHelper = new DDLRequestHelper(request);
 		_ddl = ddl;
 		_ddlRecordSetLocalService = ddlRecordSetLocalService;
 		_ddlWebConfiguration = ddlWebConfiguration;
 		_ddmTemplateLocalService = ddmTemplateLocalService;
+
+		_ddlRequestHelper = new DDLRequestHelper(request);
 
 		if (Validator.isNotNull(getPortletResource())) {
 			return;
