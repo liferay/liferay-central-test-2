@@ -54,11 +54,9 @@ public class InfoPanelMVCResourceCommand extends BaseMVCResourceCommand {
 			WebKeys.DOCUMENT_LIBRARY_FOLDERS,
 			ActionUtil.getFolders(resourceRequest));
 
-		PortletRequestDispatcher portletRequestDispatcher =
-			getPortletRequestDispatcher(
-				resourceRequest, "/document_library/info_panel.jsp");
-
-		portletRequestDispatcher.include(resourceRequest, resourceResponse);
+		include(
+			resourceRequest, resourceResponse,
+			"/document_library/info_panel.jsp");
 	}
 
 }

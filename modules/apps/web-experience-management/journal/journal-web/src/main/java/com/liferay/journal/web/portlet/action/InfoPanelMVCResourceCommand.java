@@ -55,10 +55,7 @@ public class InfoPanelMVCResourceCommand extends BaseMVCResourceCommand {
 
 		resourceRequest.setAttribute(JournalWebKeys.JOURNAL_FOLDERS, folders);
 
-		PortletRequestDispatcher portletRequestDispatcher =
-			getPortletRequestDispatcher(resourceRequest, "/info_panel.jsp");
-
-		portletRequestDispatcher.include(resourceRequest, resourceResponse);
+		include(resourceRequest, resourceResponse, "/info_panel.jsp");
 	}
 
 }
