@@ -428,7 +428,7 @@
 		</execute>
 
 		<execute macro="Page#deletePG">
-			<var name="pageName" value="${sitePageName2}" />
+			<var name="pageName" value="Site Page 2" />
 		</execute>
 	</command>
 
@@ -457,7 +457,7 @@
 		</execute>
 
 		<execute macro="Page#view">
-			<var name="sitePageName" value="Site Page Edit" />
+			<var name="pageName" value="Site Page Edit" />
 		</execute>
 	</command>
 
