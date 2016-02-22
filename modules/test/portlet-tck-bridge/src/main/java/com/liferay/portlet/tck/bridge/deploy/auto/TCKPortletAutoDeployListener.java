@@ -16,7 +16,6 @@ package com.liferay.portlet.tck.bridge.deploy.auto;
 
 import com.liferay.portal.deploy.auto.PortletAutoDeployListener;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployException;
-import com.liferay.portal.kernel.deploy.auto.AutoDeployListener;
 
 import java.io.File;
 
@@ -30,17 +29,18 @@ public class TCKPortletAutoDeployListener extends PortletAutoDeployListener {
 
 	@Override
 	protected String getSuccessMessage(File file) {
-		return
-			AutoDeployListener.class.getName() + ": TCK Portlets for " +
-				file.getPath() + " copied successfully";
+		return "TCK portlets for " + file.getPath() + " copied successfully";
 	}
 
 	@Override
 	protected boolean isDeployable(File file) throws AutoDeployException {
-		boolean isDeployable = super.isDeployable(file);
 		String fileName = file.getName();
 
-		return fileName.startsWith("portlet_jp_") && isDeployable;
+		if (super.isDeployable(file) && fileName.startsWith("portlet_jp_")) {
+			return true;
+		}
+
+		return false;
 	}
 
 }

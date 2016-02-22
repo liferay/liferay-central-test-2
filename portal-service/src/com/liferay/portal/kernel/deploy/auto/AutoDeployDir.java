@@ -43,9 +43,6 @@ public class AutoDeployDir {
 
 	public static final String DEFAULT_NAME = "defaultAutoDeployDir";
 
-	/**
-	 * @see com.liferay.portal.osgi.web.wab.generator.internal.processor#getAutoDeployListener
-	 */
 	public static void deploy(
 			AutoDeploymentContext autoDeploymentContext,
 			List<AutoDeployListener> autoDeployListeners)
@@ -54,14 +51,6 @@ public class AutoDeployDir {
 		AutoDeployListener autoDeployListener = _serviceTracker.getService();
 
 		if (autoDeployListener != null) {
-
-			// If an AutoDeployListener is registered as an OSGi service, and it
-			// can handle the current deployment, it will take precedence over
-			// any existing listener.
-
-			// This will allow us to override the current behaviour when
-			// deploying the TCK apps
-
 			if (autoDeployListener.isDeployable(autoDeploymentContext)) {
 				autoDeployListener.deploy(autoDeploymentContext);
 
@@ -73,25 +62,23 @@ public class AutoDeployDir {
 			}
 		}
 
-		String[] moduleFrameworkAutoDeployDirs = PropsUtil.getArray(
+		String[] dirNames = PropsUtil.getArray(
 			PropsKeys.MODULE_FRAMEWORK_AUTO_DEPLOY_DIRS);
 
-		String destDir = null;
-
-		if (ArrayUtil.isEmpty(moduleFrameworkAutoDeployDirs)) {
+		if (ArrayUtil.isEmpty(dirNames)) {
 			throw new AutoDeployException(
-				"Empty folders: review the property " +
+				"The portal property \"" +
 					PropsKeys.MODULE_FRAMEWORK_AUTO_DEPLOY_DIRS +
-						" in your portal-ext.properties file");
+						"\" is not set");
 		}
 
-		destDir = moduleFrameworkAutoDeployDirs[0];
+		String dirName = dirNames[0];
 
-		FileUtil.mkdirs(destDir);
+		FileUtil.mkdirs(dirName);
 
 		File file = autoDeploymentContext.getFile();
 
-		FileUtil.move(file, new File(destDir, file.getName()));
+		FileUtil.move(file, new File(dirName, file.getName()));
 	}
 
 	public AutoDeployDir(
