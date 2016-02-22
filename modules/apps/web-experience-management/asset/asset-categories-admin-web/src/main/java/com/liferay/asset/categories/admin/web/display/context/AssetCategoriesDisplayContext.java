@@ -54,9 +54,7 @@ public class AssetCategoriesDisplayContext {
 		HttpServletRequest request) {
 
 		_renderRequest = renderRequest;
-
 		_renderResponse = renderResponse;
-
 		_request = request;
 	}
 
