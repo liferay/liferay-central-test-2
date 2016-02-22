@@ -680,6 +680,12 @@
 	</command>
 
 	<command name="view">
+		<execute macro="ProductMenuHelper#expandPanelSites" />
+
+		<execute macro="ProductMenuHelper#expandCategory">
+			<var name="category" value="Pages" />
+		</execute>
+
 		<execute function="AssertTextEquals" locator1="SitePages#PAGE_TREE_PAGE_LINK" value1="${pageName}">
 			<var name="key_page" value="${pageName}" />
 		</execute>
@@ -690,7 +696,6 @@
 
 		<execute macro="ProductMenuHelper#expandPageTree" />
 
-		<execute function="AssertElementPresent" locator1="SitePages#PAGE_TREE_PAGE_LINK_TO_PAGE" />
 		<execute function="AssertTextEquals" locator1="ProductMenu#PAGES" value1="${pageName}" />
 	</command>
 
