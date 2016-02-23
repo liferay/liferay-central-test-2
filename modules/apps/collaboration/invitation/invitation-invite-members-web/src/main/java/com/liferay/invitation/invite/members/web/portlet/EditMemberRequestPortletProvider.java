@@ -34,7 +34,7 @@ public class EditMemberRequestPortletProvider
 	extends BasePortletProvider implements EditPortletProvider {
 
 	@Override
-	public String getPortletId() {
+	public String getPortletName() {
 		return InviteMembersPortletKeys.INVITE_MEMBERS;
 	}
 
