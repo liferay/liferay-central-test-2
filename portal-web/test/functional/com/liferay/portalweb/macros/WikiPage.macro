@@ -652,7 +652,7 @@
 	<command name="editComment">
 		<var name="key_entryComment" value="${entryComment}" />
 
-		<execute function="AssertTextEquals" locator1="Comments#COMMENT_BODY" value1="${entryComment}" />
+		<execute function="AssertTextEquals" locator1="Comments#COMMENT_BODY_SPECIFIC" value1="${entryComment}" />
 
 		<execute function="AssertClick" locator1="Comments#EDIT_LINK" value1="Edit" />
 
@@ -1183,7 +1183,7 @@
 		<var name="key_entryComment" value="${entryComment}" />
 		<var name="key_wikiPageTitle" value="${wikiPageTitle}" />
 
-		<execute function="AssertTextEquals" locator1="Comments#COMMENT_BODY" value1="${entryComment}" />
+		<execute function="AssertTextEquals" locator1="Comments#COMMENT_BODY_SPECIFIC" value1="${entryComment}" />
 	</command>
 
 	<command name="viewCommentRatingBad">

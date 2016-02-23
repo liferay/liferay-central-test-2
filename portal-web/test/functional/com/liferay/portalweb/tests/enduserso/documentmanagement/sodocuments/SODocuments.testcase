@@ -472,7 +472,7 @@
 		<var name="key_commentBody" value="${commentBody}" />
 
 		<execute function="AssertTextEquals" locator1="Comments#USER_NAME" value1="${userName}" />
-		<execute function="AssertTextEquals" locator1="Comments#COMMENT_BODY" value1="${commentBody}" />
+		<execute function="AssertTextEquals" locator1="Comments#COMMENT_BODY_SPECIFIC" value1="${commentBody}" />
 
 		<execute macro="User#logoutAndLoginPG">
 			<var name="userLoginEmailAddress" value="${adminEmailAddress}" />
@@ -2679,7 +2679,7 @@
 		<var name="key_commentBody" value="${commentBody}" />
 
 		<execute function="AssertTextEquals" locator1="Comments#USER_NAME" value1="${userName}" />
-		<execute function="AssertTextEquals" locator1="Comments#COMMENT_BODY" value1="${commentBodyEdit}" />
+		<execute function="AssertTextEquals" locator1="Comments#COMMENT_BODY_SPECIFIC" value1="${commentBodyEdit}" />
 
 		<execute macro="User#logoutAndLoginPG">
 			<var name="userLoginEmailAddress" value="${adminEmailAddress}" />
