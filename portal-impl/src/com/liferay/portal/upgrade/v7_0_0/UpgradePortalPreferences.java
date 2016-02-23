@@ -68,15 +68,15 @@ public class UpgradePortalPreferences extends UpgradeProcess {
 	}
 
 	protected void upgradePortalPreferences() throws Exception {
-		PreparedStatement ps = null;
+		PreparedStatement ps1 = null;
 		ResultSet rs = null;
 
 		try {
-			ps = connection.prepareStatement(
+			ps1 = connection.prepareStatement(
 				"select portalPreferencesId, preferences from " +
 					"PortalPreferences");
 
-			rs = ps.executeQuery();
+			rs = ps1.executeQuery();
 
 			try (PreparedStatement ps2 =
 					AutoBatchPreparedStatementUtil.autoBatch(
@@ -101,7 +101,7 @@ public class UpgradePortalPreferences extends UpgradeProcess {
 			}
 		}
 		finally {
-			DataAccess.cleanUp(ps, rs);
+			DataAccess.cleanUp(ps1, rs);
 		}
 	}
 
