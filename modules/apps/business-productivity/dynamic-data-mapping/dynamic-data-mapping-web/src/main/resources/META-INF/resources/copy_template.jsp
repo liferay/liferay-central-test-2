@@ -23,14 +23,10 @@ long templateId = BeanParamUtil.getLong(template, request, "templateId");
 long classNameId = BeanParamUtil.getLong(template, request, "classNameId");
 long classPK = BeanParamUtil.getLong(template, request, "classPK");
 long resourceClassNameId = BeanParamUtil.getLong(template, request, "resourceClassNameId");
-
 String portletResource = ParamUtil.getString(request, "portletResource");
-
-DDMTemplateVersion templateVersion = template.getTemplateVersion();
-
 boolean showBackURL = ParamUtil.getBoolean(request, "showBackURL", true);
 
-String backURL = ddmDisplay.getEditTemplateBackURL(liferayPortletRequest, liferayPortletResponse, classNameId, classPK, resourceClassNameId, portletResource);
+DDMTemplateVersion templateVersion = template.getTemplateVersion();
 %>
 
 <portlet:actionURL name="copyTemplate" var="copyTemplateURL">
@@ -38,7 +34,7 @@ String backURL = ddmDisplay.getEditTemplateBackURL(liferayPortletRequest, lifera
 </portlet:actionURL>
 
 <aui:form action="<%= copyTemplateURL %>" cssClass="container-fluid-1280" method="post" name="fm">
-	<aui:input name="redirect" type="hidden" value="<%= backURL %>" />
+	<aui:input name="redirect" type="hidden" value="<%= ddmDisplay.getEditTemplateBackURL(liferayPortletRequest, liferayPortletResponse, classNameId, classPK, resourceClassNameId, portletResource) %>" />
 
 	<aui:input name="templateId" type="hidden" value="<%= String.valueOf(templateId) %>" />
 	<aui:input name="status" type="hidden" value="<%= templateVersion.getStatus() %>" />
@@ -51,7 +47,7 @@ String backURL = ddmDisplay.getEditTemplateBackURL(liferayPortletRequest, lifera
 		String title = LanguageUtil.get(request, "copy-template");
 
 		portletDisplay.setShowBackIcon(true);
-		portletDisplay.setURLBack(backURL);
+		portletDisplay.setURLBack(ddmDisplay.getEditTemplateBackURL(liferayPortletRequest, liferayPortletResponse, classNameId, classPK, resourceClassNameId, portletResource));
 
 		renderResponse.setTitle(title);
 		%>
@@ -71,6 +67,6 @@ String backURL = ddmDisplay.getEditTemplateBackURL(liferayPortletRequest, lifera
 	<aui:button-row>
 		<aui:button cssClass="btn-lg" type="submit" value="copy" />
 
-		<aui:button cssClass="btn-lg" href="<%= backURL %>" type="cancel" />
+		<aui:button cssClass="btn-lg" href="<%= ddmDisplay.getEditTemplateBackURL(liferayPortletRequest, liferayPortletResponse, classNameId, classPK, resourceClassNameId, portletResource) %>" type="cancel" />
 	</aui:button-row>
 </aui:form>

@@ -23,12 +23,9 @@ DDMStructureVersion structureVersion = structure.getStructureVersion();
 
 long classNameId = PortalUtil.getClassNameId(DDMStructure.class);
 long classPK = BeanParamUtil.getLong(structure, request, "structureId");
-
 boolean copyFormTemplates = ParamUtil.getBoolean(request, "copyFormTemplates");
 boolean copyDisplayTemplates = ParamUtil.getBoolean(request, "copyDisplayTemplates");
-
 boolean showBackURL = ParamUtil.getBoolean(request, "showBackURL", true);
-String backURL = ddmDisplay.getViewTemplatesBackURL(liferayPortletRequest, liferayPortletResponse, classPK);
 %>
 
 <portlet:actionURL name="copyStructure" var="copyStructureURL">
@@ -36,7 +33,7 @@ String backURL = ddmDisplay.getViewTemplatesBackURL(liferayPortletRequest, lifer
 </portlet:actionURL>
 
 <aui:form action="<%= copyStructureURL %>" cssClass="container-fluid-1280" method="post" name="fm">
-	<aui:input name="redirect" type="hidden" value="<%= backURL %>" />
+	<aui:input name="redirect" type="hidden" value="<%= ddmDisplay.getViewTemplatesBackURL(liferayPortletRequest, liferayPortletResponse, classPK) %>" />
 	<aui:input name="classNameId" type="hidden" value="<%= String.valueOf(classNameId) %>" />
 	<aui:input name="classPK" type="hidden" value="<%= String.valueOf(classPK) %>" />
 	<aui:input name="resourceClassNameId" type="hidden" value="<%= String.valueOf(scopeClassNameId) %>" />
@@ -50,7 +47,7 @@ String backURL = ddmDisplay.getViewTemplatesBackURL(liferayPortletRequest, lifer
 		String title = LanguageUtil.format(request, "copy-x", ddmDisplay.getStructureName(locale), false);
 
 		portletDisplay.setShowBackIcon(true);
-		portletDisplay.setURLBack(backURL);
+		portletDisplay.setURLBack(ddmDisplay.getViewTemplatesBackURL(liferayPortletRequest, liferayPortletResponse, classPK));
 
 		renderResponse.setTitle(title);
 		%>
@@ -78,6 +75,6 @@ String backURL = ddmDisplay.getViewTemplatesBackURL(liferayPortletRequest, lifer
 	<aui:button-row>
 		<aui:button cssClass="btn-lg" type="submit" value="copy" />
 
-		<aui:button cssClass="btn-lg" href="<%= backURL %>" type="cancel" />
+		<aui:button cssClass="btn-lg" href="<%= ddmDisplay.getViewTemplatesBackURL(liferayPortletRequest, liferayPortletResponse, classPK) %>" type="cancel" />
 	</aui:button-row>
 </aui:form>
