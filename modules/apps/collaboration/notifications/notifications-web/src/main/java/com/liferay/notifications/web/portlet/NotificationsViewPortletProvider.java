@@ -42,7 +42,7 @@ public class NotificationsViewPortletProvider
 	extends BasePortletProvider implements ViewPortletProvider {
 
 	@Override
-	public String getPortletId() {
+	public String getPortletName() {
 		return NotificationsPortletKeys.NOTIFICATIONS;
 	}
 
