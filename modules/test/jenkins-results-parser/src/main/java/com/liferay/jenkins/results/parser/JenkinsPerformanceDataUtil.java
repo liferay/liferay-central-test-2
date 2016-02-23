@@ -69,14 +69,14 @@ public class JenkinsPerformanceDataUtil {
 
 				Result result = new Result(jobName, jsonObject);
 
-				_slaveCount++;
-				_totalDuration += result.getDuration();
-
 				_results.add(result);
 
 				Collections.sort(_results);
 
 				_truncate(_results, size);
+
+				_slaveCount++;
+				_totalDuration += result.getDuration();
 
 				return;
 			}
