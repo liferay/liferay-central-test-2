@@ -45,8 +45,7 @@ public class JenkinsPerformanceTableUtil {
 
 		pElement.add(new DefaultElement("br"));
 
-		pElement.addText(
-			JenkinsPerformanceDataUtil.getTestCount() + " Tests");
+		pElement.addText(JenkinsPerformanceDataUtil.getTestCount() + " Tests");
 
 		pElement.add(new DefaultElement("br"));
 
