@@ -82,7 +82,7 @@ public class UpgradePortalPreferences extends UpgradeProcess {
 					AutoBatchPreparedStatementUtil.autoBatch(
 						connection.prepareStatement(
 							"update PortalPreferences set preferences = ? " +
-								"where portalPreferencesId = ?"));) {
+								"where portalPreferencesId = ?"))) {
 
 				while (rs.next()) {
 					long portalPreferencesId = rs.getLong(
