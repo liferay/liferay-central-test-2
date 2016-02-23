@@ -50,36 +50,38 @@ public class WikiLinksEditorConfigContributor
 
 		JSONObject toolbarsJSONObject = jsonObject.getJSONObject("toolbars");
 
-		if (toolbarsJSONObject != null) {
-			JSONObject stylesToolbarJSONObject =
-				toolbarsJSONObject.getJSONObject("styles");
+		if (toolbarsJSONObject == null) {
+			return;
+		}
 
-			if (stylesToolbarJSONObject != null) {
-				JSONArray selectionsJSONArray =
-					stylesToolbarJSONObject.getJSONArray("selections");
+		JSONObject stylesToolbarJSONObject =
+			toolbarsJSONObject.getJSONObject("styles");
 
-				if (selectionsJSONArray != null) {
-					for (int i = 0; i < selectionsJSONArray.length(); i++) {
-						JSONObject selectionJSONObject =
-							selectionsJSONArray.getJSONObject(i);
+		if (stylesToolbarJSONObject == null) {
+			return;
+		}
 
-						JSONArray buttonsJSONArray =
-							selectionJSONObject.getJSONArray("buttons");
+		JSONArray selectionsJSONArray =
+			stylesToolbarJSONObject.getJSONArray("selections");
 
-						selectionJSONObject.put(
-							"buttons",
-							updateAppendProtocolConfiguration(
-								buttonsJSONArray));
-					}
-				}
-			}
+		if (selectionsJSONArray == null) {
+			return;
+		}
+
+		for (int i = 0; i < selectionsJSONArray.length(); i++) {
+			JSONObject selectionJSONObject =
+				selectionsJSONArray.getJSONObject(i);
+
+			JSONArray buttonsJSONArray =
+				selectionJSONObject.getJSONArray("buttons");
+
+			selectionJSONObject.put(
+				"buttons", updateButtonsJSONArray(buttonsJSONArray));
 		}
 	}
 
 	protected JSONObject getWikiLinkButtonJSONObject(String buttonName) {
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
-
-		jsonObject.put("name", buttonName);
 
 		JSONObject cfgJSONObject = JSONFactoryUtil.createJSONObject();
 
@@ -87,12 +89,12 @@ public class WikiLinksEditorConfigContributor
 
 		jsonObject.put("cfg", cfgJSONObject);
 
+		jsonObject.put("name", buttonName);
+
 		return jsonObject;
 	}
 
-	protected JSONArray updateAppendProtocolConfiguration(
-		JSONArray buttonsJSONArray) {
-
+	protected JSONArray updateButtonsJSONArray(JSONArray buttonsJSONArray) {
 		JSONArray newButtonsJSONArray = JSONFactoryUtil.createJSONArray();
 
 		for (int j = 0; j < buttonsJSONArray.length(); j++) {
@@ -118,15 +120,16 @@ public class WikiLinksEditorConfigContributor
 				if (buttonName.equals("link") ||
 					buttonName.equals("linkEdit")) {
 
-					JSONObject config = buttonJSONObject.getJSONObject("cfg");
+					JSONObject cfgJSONObject = buttonJSONObject.getJSONObject(
+						"cfg");
 
-					if (config == null) {
-						config = JSONFactoryUtil.createJSONObject();
+					if (cfgJSONObject == null) {
+						cfgJSONObject = JSONFactoryUtil.createJSONObject();
 
-						buttonJSONObject.put("cfg", config);
+						buttonJSONObject.put("cfg", cfgJSONObject);
 					}
 
-					config.put("appendProtocol", false);
+					cfgJSONObject.put("appendProtocol", false);
 				}
 
 				newButtonsJSONArray.put(buttonJSONObject);
