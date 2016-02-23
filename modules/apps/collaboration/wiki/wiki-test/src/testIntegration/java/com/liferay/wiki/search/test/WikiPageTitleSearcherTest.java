@@ -82,6 +82,7 @@ public class WikiPageTitleSearcherTest {
 
 		_group = GroupTestUtil.addGroup();
 		_user = UserTestUtil.addUser();
+
 		_node = WikiTestUtil.addNode(_group.getGroupId());
 
 		_searchContext = getSearchContext(_group);
@@ -91,9 +92,9 @@ public class WikiPageTitleSearcherTest {
 
 	@After
 	public void tearDown() {
-		PermissionThreadLocal.setPermissionChecker(_originalPermissionChecker);
+		PermissionThreadLocal.setPermissionChecker(_permissionChecker);
 
-		PrincipalThreadLocal.setName(_originalName);
+		PrincipalThreadLocal.setName(_name);
 	}
 
 	@Test
@@ -145,7 +146,6 @@ public class WikiPageTitleSearcherTest {
 		assertSearch("Gij", 3);
 		assertSearch("Gijo", 2);
 		assertSearch("Gijon", 1);
-
 		assertSearchTitle("Gijon", "Gijon");
 	}
 
@@ -173,10 +173,10 @@ public class WikiPageTitleSearcherTest {
 
 				@Override
 				public Void call() throws Exception {
+					Indexer<?> indexer = WikiPageTitleSearcher.getInstance();
+
 					_searchContext.setKeywords(
 						StringUtil.toLowerCase(keywords));
-
-					Indexer<?> indexer = WikiPageTitleSearcher.getInstance();
 
 					Hits hits = indexer.search(_searchContext);
 
@@ -197,10 +197,10 @@ public class WikiPageTitleSearcherTest {
 
 				@Override
 				public Void call() throws Exception {
+					Indexer<?> indexer = WikiPageTitleSearcher.getInstance();
+
 					_searchContext.setKeywords(
 						StringUtil.toLowerCase(keywords));
-
-					Indexer<?> indexer = WikiPageTitleSearcher.getInstance();
 
 					Hits hits = indexer.search(_searchContext);
 
@@ -230,10 +230,10 @@ public class WikiPageTitleSearcherTest {
 
 				@Override
 				public Void call() throws Exception {
+					Indexer<?> indexer = WikiPageTitleSearcher.getInstance();
+
 					_searchContext.setKeywords(
 						StringUtil.toLowerCase(keywords));
-
-					Indexer<?> indexer = WikiPageTitleSearcher.getInstance();
 
 					Hits hits = indexer.search(_searchContext);
 
@@ -255,7 +255,7 @@ public class WikiPageTitleSearcherTest {
 	}
 
 	protected void setUpPermissionThreadLocal() throws Exception {
-		_originalPermissionChecker =
+		_permissionChecker =
 			PermissionThreadLocal.getPermissionChecker();
 
 		PermissionThreadLocal.setPermissionChecker(
@@ -276,7 +276,7 @@ public class WikiPageTitleSearcherTest {
 	}
 
 	protected void setUpPrincipalThreadLocal() throws Exception {
-		_originalName = PrincipalThreadLocal.getName();
+		_name = PrincipalThreadLocal.getName();
 
 		PrincipalThreadLocal.setName(TestPropsValues.getUserId());
 	}
@@ -285,8 +285,8 @@ public class WikiPageTitleSearcherTest {
 	private Group _group;
 
 	private WikiNode _node;
-	private String _originalName;
-	private PermissionChecker _originalPermissionChecker;
+	private String _name;
+	private PermissionChecker _permissionChecker;
 	private SearchContext _searchContext;
 
 	@DeleteAfterTestRun

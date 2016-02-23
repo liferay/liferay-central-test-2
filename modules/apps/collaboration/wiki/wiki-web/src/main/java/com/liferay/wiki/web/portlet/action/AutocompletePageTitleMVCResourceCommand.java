@@ -92,14 +92,14 @@ public class AutocompletePageTitleMVCResourceCommand
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws PortalException {
 
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
 			resourceRequest);
 
-		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+		SearchContext searchContext = SearchContextFactory.getInstance(request);
 
 		String query = ParamUtil.getString(request, "query");
-
-		SearchContext searchContext = SearchContextFactory.getInstance(request);
 
 		searchContext.setKeywords(StringUtil.toLowerCase(query));
 
