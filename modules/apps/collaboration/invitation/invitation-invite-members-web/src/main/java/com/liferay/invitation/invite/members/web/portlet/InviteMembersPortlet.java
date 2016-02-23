@@ -211,14 +211,14 @@ public class InviteMembersPortlet extends MVCPortlet {
 			return;
 		}
 
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			actionRequest);
+
 		Group group = _groupLocalService.getGroup(groupId);
 
 		PortletURL portletURL = PortletProviderUtil.getPortletURL(
 			actionRequest, group, UserNotificationEvent.class.getName(),
 			PortletProvider.Action.VIEW);
-
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			actionRequest);
 
 		serviceContext.setAttribute("redirectURL", portletURL.toString());
 
