@@ -41,18 +41,18 @@ public class JenkinsPerformanceTableUtil {
 		divElement.add(pElement);
 
 		pElement.addText(
-			(JenkinsPerformanceDataUtil.getSlaveCount() + 1) + " slaves used.");
+			(JenkinsPerformanceDataUtil.getSlaveCount() + 1) + " Slaves");
 
 		pElement.add(new DefaultElement("br"));
 
 		pElement.addText(
-			JenkinsPerformanceDataUtil.getTestCount() + " tests executed.");
+			JenkinsPerformanceDataUtil.getTestCount() + " Tests");
 
 		pElement.add(new DefaultElement("br"));
 
 		pElement.addText(
-			JenkinsPerformanceDataUtil.getTotalDuration() + " seconds of CPU " +
-				"time used.");
+			JenkinsPerformanceDataUtil.getTotalDuration() + " Seconds of CPU " +
+				"Time");
 
 		pElement.add(new DefaultElement("br"));
 
