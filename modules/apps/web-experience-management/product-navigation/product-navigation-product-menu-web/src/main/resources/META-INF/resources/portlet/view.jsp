@@ -40,7 +40,7 @@ String productMenuState = SessionClicks.get(request, ProductNavigationProductMen
 </div>
 
 <aui:script use="liferay-store,io-request,parse-content">
-	var sidenavToggle = $('#sidenavToggleId');
+	var sidenavToggle = $('#<portlet:namespace />sidenavToggleId');
 
 	sidenavToggle.sideNavigation();
 
@@ -55,7 +55,7 @@ String productMenuState = SessionClicks.get(request, ProductNavigationProductMen
 		}
 	);
 
-	var sidenavSlider = $('#sidenavSliderId');
+	var sidenavSlider = $('#<portlet:namespace />sidenavSliderId');
 
 	sidenavSlider.on(
 		'closed.lexicon.sidenav',
