@@ -431,6 +431,11 @@
 </tr>
 <!--COMPARE_VERSIONS-->
 <tr>
+	<td>COMPARE_VERSIONS_DATE</td>
+	<td>//div[contains(@id,'wikiPageVersionSearchContainer')]//tr[contains(.,'${key_wikiPageVersion}')]/td[2]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>COMPARE_VERSIONS_DIFF</td>
 	<td>//span[contains(@class,'diff-html') and contains(.,'${key_wikiPageVersionDiff}')]</td>
 	<td></td>
@@ -446,8 +451,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>COMPARE_VERSIONS_IFRAME</td>
+	<td>//iframe[contains(@id,'compareVersions')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>COMPARE_VERSIONS_PARAGRAPH_FULL</td>
 	<td>//div[contains(@class,'portlet-wiki')]//p[contains(.,'${key_wikiPageContentCompareFull}')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>COMPARE_VERSIONS_VERSION</td>
+	<td>//div[contains(@id,'wikiPageVersionSearchContainer')]//tr[contains(.,'${key_wikiPageVersion}')]/td[1]</td>
 	<td></td>
 </tr>
 <tr>
