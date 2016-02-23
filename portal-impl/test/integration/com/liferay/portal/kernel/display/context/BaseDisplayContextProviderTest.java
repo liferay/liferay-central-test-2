@@ -62,16 +62,17 @@ public class BaseDisplayContextProviderTest {
 			displayContextFactories.iterator();
 
 		while (iterator.hasNext()) {
-			TestDisplayContextFactory displayContextFactory = iterator.next();
+			TestDisplayContextFactory testDisplayContextFactory =
+				iterator.next();
 
-			Class<?> clazz = displayContextFactory.getClass();
+			Class<?> clazz = testDisplayContextFactory.getClass();
 
 			String className = clazz.getName();
 
 			if (className.equals(
 					TestBaseDisplayContextFactoryImpl.class.getName())) {
 
-				testDisplayContextFactoryExtension = displayContextFactory;
+				testDisplayContextFactoryExtension = testDisplayContextFactory;
 			}
 		}
 
