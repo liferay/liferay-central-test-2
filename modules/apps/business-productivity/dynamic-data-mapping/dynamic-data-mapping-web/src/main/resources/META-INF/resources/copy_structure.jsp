@@ -23,8 +23,10 @@ DDMStructureVersion structureVersion = structure.getStructureVersion();
 
 long classNameId = PortalUtil.getClassNameId(DDMStructure.class);
 long classPK = BeanParamUtil.getLong(structure, request, "structureId");
+
 boolean copyFormTemplates = ParamUtil.getBoolean(request, "copyFormTemplates");
 boolean copyDisplayTemplates = ParamUtil.getBoolean(request, "copyDisplayTemplates");
+
 boolean showBackURL = ParamUtil.getBoolean(request, "showBackURL", true);
 %>
 
