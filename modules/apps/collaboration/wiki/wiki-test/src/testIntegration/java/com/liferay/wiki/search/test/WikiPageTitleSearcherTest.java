@@ -255,8 +255,7 @@ public class WikiPageTitleSearcherTest {
 	}
 
 	protected void setUpPermissionThreadLocal() throws Exception {
-		_permissionChecker =
-			PermissionThreadLocal.getPermissionChecker();
+		_permissionChecker = PermissionThreadLocal.getPermissionChecker();
 
 		PermissionThreadLocal.setPermissionChecker(
 			new SimplePermissionChecker() {
@@ -284,8 +283,8 @@ public class WikiPageTitleSearcherTest {
 	@DeleteAfterTestRun
 	private Group _group;
 
-	private WikiNode _node;
 	private String _name;
+	private WikiNode _node;
 	private PermissionChecker _permissionChecker;
 	private SearchContext _searchContext;
 
