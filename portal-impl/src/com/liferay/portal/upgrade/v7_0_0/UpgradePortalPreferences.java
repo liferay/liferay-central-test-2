@@ -54,7 +54,9 @@ public class UpgradePortalPreferences extends UpgradeProcess {
 
 			String preferenceName = preferenceElement.elementText("name");
 
-			if (!preferenceName.contains(_STAGING_CLASS_NAME)) {
+			if (!preferenceName.contains(
+					"com.liferay.portlet.kernel.staging.Staging")) {
+
 				newRootElement.add(preferenceElement.createCopy());
 			}
 		}
@@ -76,7 +78,9 @@ public class UpgradePortalPreferences extends UpgradeProcess {
 				SQLTransformer.transform(
 					"select portalPreferencesId, preferences from " +
 						"PortalPreferences where CAST_TEXT(preferences) like " +
-							"'%" + _STAGING_CLASS_NAME + "%'"));
+							"?"));
+
+			ps1.setString(1, "%com.liferay.portlet.kernel.staging.Staging%");
 
 			rs = ps1.executeQuery();
 
@@ -106,8 +110,5 @@ public class UpgradePortalPreferences extends UpgradeProcess {
 			DataAccess.cleanUp(ps1, rs);
 		}
 	}
-
-	private static final String _STAGING_CLASS_NAME =
-		"com.liferay.portlet.kernel.staging.Staging";
 
 }
