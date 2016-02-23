@@ -405,7 +405,7 @@
 		<if>
 			<isset var="commentBody" />
 			<then>
-				<var name="key_commentBody" value="${commentBody}" />
+				<var name="key_entryComment" value="${commentBody}" />
 
 				<execute function="AssertTextEquals" locator1="Comments#COMMENT_BODY_SPECIFIC" value1="${commentBody}" />
 			</then>
