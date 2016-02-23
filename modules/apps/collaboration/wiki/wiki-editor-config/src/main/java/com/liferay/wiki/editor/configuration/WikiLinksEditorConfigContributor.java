@@ -94,14 +94,14 @@ public class WikiLinksEditorConfigContributor
 		return jsonObject;
 	}
 
-	protected JSONArray updateButtonsJSONArray(JSONArray buttonsJSONArray) {
+	protected JSONArray updateButtonsJSONArray(JSONArray oldButtonsJSONArray) {
 		JSONArray newButtonsJSONArray = JSONFactoryUtil.createJSONArray();
 
-		for (int j = 0; j < buttonsJSONArray.length(); j++) {
-			JSONObject buttonJSONObject = buttonsJSONArray.getJSONObject(j);
+		for (int j = 0; j < oldButtonsJSONArray.length(); j++) {
+			JSONObject buttonJSONObject = oldButtonsJSONArray.getJSONObject(j);
 
 			if (buttonJSONObject == null) {
-				String buttonName = buttonsJSONArray.getString(j);
+				String buttonName = oldButtonsJSONArray.getString(j);
 
 				if (buttonName.equals("link") ||
 					buttonName.equals("linkEdit")) {
