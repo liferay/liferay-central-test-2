@@ -66,10 +66,10 @@ public class UpgradePortalPreferences extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		upgradePortalStagingPreferences();
+		upgradeStagingPortalPreferences();
 	}
 
-	protected void upgradePortalStagingPreferences() throws Exception {
+	protected void upgradeStagingPortalPreferences() throws Exception {
 		PreparedStatement ps1 = null;
 		ResultSet rs = null;
 
