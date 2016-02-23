@@ -34,51 +34,53 @@ public class JenkinsPerformanceTableUtil {
 			return "<p>Performance data is not available.</p>";
 		}
 
-		Element div = new DefaultElement("div");
-		Element p = new DefaultElement("p");
-		Element table = new DefaultElement("table");
+		Element divElement = new DefaultElement("div");
 
-		div.add(p);
+		Element pElement = new DefaultElement("p");
 
-		div.add(table);
+		divElement.add(pElement);
 
-		table.addAttribute("border", "1");
-		table.addAttribute("cellspacing", "0");
+		pElement.addText(
+			(JenkinsPerformanceDataUtil.getSlaveCount() + 1) + " slaves used.");
 
-		table.add(
+		pElement.add(new DefaultElement("br"));
+
+		pElement.addText(
+			JenkinsPerformanceDataUtil.getTestCount() + " tests executed.");
+
+		pElement.add(new DefaultElement("br"));
+
+		pElement.addText(
+			JenkinsPerformanceDataUtil.getTotalDuration() + " seconds of CPU " +
+				"time used.");
+
+		pElement.add(new DefaultElement("br"));
+
+		Element tableElement = new DefaultElement("table");
+
+		divElement.add(tableElement);
+
+		tableElement.addAttribute("border", "1");
+		tableElement.addAttribute("cellspacing", "0");
+
+		tableElement.add(
 			_createRowElement(
 				"th", "Axis", "Class Name", "Duration (Seconds)", "Job Name",
 				"Name", "Status", null));
 
 		for (JenkinsPerformanceDataUtil.Result result : results) {
-			table.add(
+			tableElement.add(
 				_createRowElement(
 					"td", result.getAxis(), result.getClassName(),
 					Float.toString(result.getDuration()), result.getJobName(),
 					result.getName(), result.getStatus(), result.getUrl()));
 		}
 
-		p.addText(
-			(JenkinsPerformanceDataUtil.getSlaveCount() + 1) + " slaves used.");
-
-		p.add(new DefaultElement("br"));
-
-		p.addText(
-			JenkinsPerformanceDataUtil.getTestCount() + " tests executed.");
-
-		p.add(new DefaultElement("br"));
-
-		p.addText(
-			JenkinsPerformanceDataUtil.getTotalDuration() + " seconds of CPU " +
-				"time used.");
-
-		p.add(new DefaultElement("br"));
-
 		JenkinsPerformanceDataUtil.reset();
 
-		System.out.println(JenkinsResultsParserUtil.format(p));
+		System.out.println(JenkinsResultsParserUtil.format(pElement));
 
-		return JenkinsResultsParserUtil.format(div);
+		return JenkinsResultsParserUtil.format(divElement);
 	}
 
 	private static Element _createAxisElement(
