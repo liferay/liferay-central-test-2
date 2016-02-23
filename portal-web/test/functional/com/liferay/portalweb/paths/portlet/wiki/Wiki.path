@@ -429,6 +429,11 @@
 	<td>//tr[contains(.,'${key_wikiPageVersionOld}')]/td[2]</td>
 	<td></td>
 </tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
 <!--COMPARE_VERSIONS-->
 <tr>
 	<td>COMPARE_VERSIONS_DATE</td>
