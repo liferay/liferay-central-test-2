@@ -43,5 +43,16 @@
 				simulationToggle.sideNavigation('hide');
 			}
 		);
+
+		Liferay.once(
+			'screenLoad',
+			function() {
+				var sideNavigation = simulationToggle.data('lexicon.sidenav');
+
+				if (sideNavigation) {
+					sideNavigation.destroy();
+				}
+			}
+		);
 	</aui:script>
 </liferay-util:body-bottom>
