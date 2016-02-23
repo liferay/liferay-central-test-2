@@ -78,10 +78,6 @@ boolean showCacheableInput = ParamUtil.getBoolean(request, "showCacheableInput")
 boolean showHeader = ParamUtil.getBoolean(request, "showHeader", true);
 
 DDMNavigationHelper ddmNavigationHelper = ddmDisplay.getDDMNavigationHelper();
-
-boolean isNavigationStartsOnSelectTemplate = ddmNavigationHelper.isNavigationStartsOnSelectTemplate(liferayPortletRequest);
-
-String backURL = ddmDisplay.getEditTemplateBackURL(liferayPortletRequest, liferayPortletResponse, classNameId, classPK, resourceClassNameId, portletResource);
 %>
 
 <portlet:actionURL name="addTemplate" var="addTemplateURL">
@@ -94,7 +90,7 @@ String backURL = ddmDisplay.getEditTemplateBackURL(liferayPortletRequest, lifera
 
 <div class="container-fluid-1280">
 	<aui:form action="<%= (template == null) ? addTemplateURL : updateTemplateURL %>" cssClass="container-fluid-1280" enctype="multipart/form-data" method="post" name="fm" onSubmit='<%= "event.preventDefault();" %>'>
-		<aui:input name="redirect" type="hidden" value="<%= backURL %>" />
+		<aui:input name="redirect" type="hidden" value="<%= ddmDisplay.getEditTemplateBackURL(liferayPortletRequest, liferayPortletResponse, classNameId, classPK, resourceClassNameId, portletResource) %>" />
 		<aui:input name="closeRedirect" type="hidden" value="<%= closeRedirect %>" />
 		<aui:input name="portletResource" type="hidden" value="<%= portletResource %>" />
 		<aui:input name="portletResourceNamespace" type="hidden" value="<%= portletResourceNamespace %>" />
@@ -147,7 +143,7 @@ String backURL = ddmDisplay.getEditTemplateBackURL(liferayPortletRequest, lifera
 
 					<%
 					portletDisplay.setShowBackIcon(true);
-					portletDisplay.setURLBack(backURL);
+					portletDisplay.setURLBack(ddmDisplay.getEditTemplateBackURL(liferayPortletRequest, liferayPortletResponse, classNameId, classPK, resourceClassNameId, portletResource));
 
 					renderResponse.setTitle(title);
 					%>
@@ -155,7 +151,7 @@ String backURL = ddmDisplay.getEditTemplateBackURL(liferayPortletRequest, lifera
 				</c:when>
 				<c:otherwise>
 					<liferay-ui:header
-						backURL="<%= backURL %>"
+						backURL="<%= ddmDisplay.getEditTemplateBackURL(liferayPortletRequest, liferayPortletResponse, classNameId, classPK, resourceClassNameId, portletResource) %>"
 						localizeTitle="<%= false %>"
 						showBackURL="<%= showBackURL %>"
 						title="<%= title %>"
@@ -175,7 +171,7 @@ String backURL = ddmDisplay.getEditTemplateBackURL(liferayPortletRequest, lifera
 				var toolbarChildren = [
 					<portlet:renderURL var="viewHistoryURL">
 						<portlet:param name="mvcPath" value="/view_template_history.jsp" />
-						<portlet:param name="redirect" value="<%= backURL %>" />
+						<portlet:param name="redirect" value="<%= ddmDisplay.getEditTemplateBackURL(liferayPortletRequest, liferayPortletResponse, classNameId, classPK, resourceClassNameId, portletResource) %>" />
 						<portlet:param name="templateId" value="<%= String.valueOf(template.getTemplateId()) %>" />
 					</portlet:renderURL>
 
@@ -211,7 +207,7 @@ String backURL = ddmDisplay.getEditTemplateBackURL(liferayPortletRequest, lifera
 							<div class="form-group">
 								<aui:input helpMessage="structure-help" name="structure" type="resource" value="<%= (structure != null) ? structure.getName(locale) : StringPool.BLANK %>" />
 
-								<c:if test="<%= !isNavigationStartsOnSelectTemplate && ((template == null) || (template.getClassPK() == 0)) %>">
+								<c:if test="<%= !ddmNavigationHelper.isNavigationStartsOnSelectTemplate(liferayPortletRequest) && ((template == null) || (template.getClassPK() == 0)) %>">
 									<liferay-ui:icon
 										iconCssClass="icon-search"
 										label="<%= true %>"
@@ -449,6 +445,6 @@ String backURL = ddmDisplay.getEditTemplateBackURL(liferayPortletRequest, lifera
 		<aui:button cssClass="btn-lg" onClick='<%= renderResponse.getNamespace() + "saveDraftTemplate();" %>' value='<%= LanguageUtil.get(request, "save-draft") %>' />
 	</c:if>
 
-		<aui:button cssClass="btn-lg" href="<%= backURL %>" type="cancel" />
+		<aui:button cssClass="btn-lg" href="<%= ddmDisplay.getEditTemplateBackURL(liferayPortletRequest, liferayPortletResponse, classNameId, classPK, resourceClassNameId, portletResource) %>" type="cancel" />
 	</aui:button-row>
 </div>
