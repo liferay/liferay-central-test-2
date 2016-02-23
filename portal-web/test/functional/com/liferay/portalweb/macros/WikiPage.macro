@@ -439,12 +439,15 @@
 
 		<execute function="AssertClick" locator1="Wiki#DESCRIPTIVE_VIEW_ENTRY_TITLE" value1="${wikiPageTitle}" />
 
-		<execute function="AssertClick" locator1="Wiki#LINK_DETAILS" value1="Details" />
-		<execute function="AssertClick" locator1="Wiki#PAGE_TABS_HISTORY" value1="History" />
+		<execute function="Click" locator1="Icon#INFO" />
 
-		<var name="key_wikiActivity" value="${wikiPageVersionNew}" />
+		<execute function="AssertClick" locator1="NavBar#DETAILS" value1="Details" />
 
-		<execute function="Click" locator1="Wiki#HISTORY_ACTIVITIES_ACTIONS" />
+		<execute function="AssertClick" locator1="MenuItem#VERSIONS" value1="Versions" />
+
+		<var name="key_wikiPageVersion" value="${wikiPageVersionNew}" />
+
+		<execute function="Click" locator1="Wiki#COMPARE_VERSIONS_VERSION_ACTIONS" />
 
 		<execute function="AssertClick" locator1="Wiki#HISTORY_ACTIVITIES_TABLE_COMPARE_TO_LINK" value1="Compare to..." />
 
