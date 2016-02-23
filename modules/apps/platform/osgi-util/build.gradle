@@ -11,7 +11,7 @@ if (!project.parent) {
 }
 
 dependencies {
-	compile group: "org.osgi", name: "org.osgi.core", version: "5.0.0"
+	provided group: "org.osgi", name: "org.osgi.core", version: "5.0.0"
 
 	testIntegrationCompile group: "com.liferay.arquillian", name: "arquillian-deployment-generator-bnd", version: "1.0.0.Alpha1-20150126.151531-9"
 	testIntegrationCompile group: "com.liferay.portal", name: "portal-service", version: liferay.portalVersion
