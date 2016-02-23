@@ -54,26 +54,26 @@ public class WikiLinksEditorConfigContributor
 			return;
 		}
 
-		JSONObject stylesToolbarJSONObject =
-			toolbarsJSONObject.getJSONObject("styles");
+		JSONObject stylesToolbarJSONObject = toolbarsJSONObject.getJSONObject(
+			"styles");
 
 		if (stylesToolbarJSONObject == null) {
 			return;
 		}
 
-		JSONArray selectionsJSONArray =
-			stylesToolbarJSONObject.getJSONArray("selections");
+		JSONArray selectionsJSONArray = stylesToolbarJSONObject.getJSONArray(
+			"selections");
 
 		if (selectionsJSONArray == null) {
 			return;
 		}
 
 		for (int i = 0; i < selectionsJSONArray.length(); i++) {
-			JSONObject selectionJSONObject =
-				selectionsJSONArray.getJSONObject(i);
+			JSONObject selectionJSONObject = selectionsJSONArray.getJSONObject(
+				i);
 
-			JSONArray buttonsJSONArray =
-				selectionJSONObject.getJSONArray("buttons");
+			JSONArray buttonsJSONArray = selectionJSONObject.getJSONArray(
+				"buttons");
 
 			selectionJSONObject.put(
 				"buttons", updateButtonsJSONArray(buttonsJSONArray));
