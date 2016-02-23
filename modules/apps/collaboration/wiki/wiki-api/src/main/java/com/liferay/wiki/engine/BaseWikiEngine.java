@@ -101,8 +101,8 @@ public abstract class BaseWikiEngine implements WikiEngine {
 		RequestDispatcher requestDispatcher =
 			servletContext.getRequestDispatcher(getEditPageJSP());
 
-		servletRequest.setAttribute(_WIKI_PAGE, page);
 		servletRequest.setAttribute(_WIKI_NODE, node);
+		servletRequest.setAttribute(_WIKI_PAGE, page);
 
 		requestDispatcher.include(servletRequest, servletResponse);
 	}
