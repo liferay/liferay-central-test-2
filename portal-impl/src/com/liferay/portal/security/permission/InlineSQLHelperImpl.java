@@ -629,7 +629,7 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
 					"Unable to get resource permissions for " +
-						className + " with companyId " + companyId,
+						className + " with company " + companyId,
 					pe);
 			}
 		}
