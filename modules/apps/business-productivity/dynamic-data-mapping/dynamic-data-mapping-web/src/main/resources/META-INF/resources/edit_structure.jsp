@@ -94,8 +94,8 @@ if (Validator.isNotNull(requestUpdateStructureURL)) {
 
 <div class="container-fluid-1280">
 	<aui:form action="<%= (structure == null) ? addStructureURL : updateStructureURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveStructure();" %>'>
-		<aui:input name="closeRedirect" type="hidden" value="<%= closeRedirect %>" />
 		<aui:input name="redirect" type="hidden" value="<%= backURL %>" />
+		<aui:input name="closeRedirect" type="hidden" value="<%= closeRedirect %>" />
 		<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
 		<aui:input name="classNameId" type="hidden" value="<%= String.valueOf(classNameId) %>" />
 		<aui:input name="classPK" type="hidden" value="<%= String.valueOf(classPK) %>" />
