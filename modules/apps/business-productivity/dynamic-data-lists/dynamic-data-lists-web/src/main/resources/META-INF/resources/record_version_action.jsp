@@ -17,9 +17,9 @@
 <%@ include file="/init.jsp" %>
 
 <%
-long formDDMTemplateId = ParamUtil.getLong(request, "formDDMTemplateId");
-
 String redirect = ParamUtil.getString(request, "redirect");
+
+long formDDMTemplateId = ParamUtil.getLong(request, "formDDMTemplateId");
 
 DDLRecord record = (DDLRecord)request.getAttribute(DDLWebKeys.DYNAMIC_DATA_LISTS_RECORD);
 
