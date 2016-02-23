@@ -170,12 +170,8 @@ public class InviteMembersUserNotificationHandler
 		if (group.hasPublicLayouts()) {
 			sb.append(" href=\"");
 
-			LayoutSet layoutSet = group.getPublicLayoutSet();
-
-			ThemeDisplay themeDisplay = serviceContext.getThemeDisplay();
-
 			String groupFriendlyURL = PortalUtil.getGroupFriendlyURL(
-				layoutSet, themeDisplay);
+				group.getPublicLayoutSet(), serviceContext.getThemeDisplay());
 
 			sb.append(groupFriendlyURL);
 
