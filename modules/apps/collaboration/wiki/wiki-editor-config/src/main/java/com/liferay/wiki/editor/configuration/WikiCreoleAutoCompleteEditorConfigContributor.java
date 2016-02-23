@@ -66,17 +66,12 @@ public class WikiCreoleAutoCompleteEditorConfigContributor
 		triggerJSONObject.put(
 			"resultFilters", "function(query, results) {return results;}");
 		triggerJSONObject.put("resultTextLocator", "title");
-		triggerJSONObject.put("term", "[");
-		triggerJSONObject.put("tplReplace", "<a href=\"{title}\">{title}</a>");
-		triggerJSONObject.put("tplResults", "{title}");
 
 		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
 		ResourceURL autoCompletePageTitleURL =
 			(ResourceURL)requestBackedPortletURLFactory.createResourceURL(
 				portletDisplay.getId());
-
-		autoCompletePageTitleURL.setResourceID("/wiki/autocomplete_page_title");
 
 		Map<String, String> fileBrowserParams =
 			(Map<String, String>)inputEditorTaglibAttributes.get(
@@ -85,11 +80,17 @@ public class WikiCreoleAutoCompleteEditorConfigContributor
 		autoCompletePageTitleURL.setParameter(
 			"nodeId", fileBrowserParams.get("nodeId"));
 
+		autoCompletePageTitleURL.setResourceID("/wiki/autocomplete_page_title");
+
 		String source =
 			autoCompletePageTitleURL.toString() + "&" +
 				PortalUtil.getPortletNamespace(portletDisplay.getId());
 
 		triggerJSONObject.put("source", source);
+
+		triggerJSONObject.put("term", "[");
+		triggerJSONObject.put("tplReplace", "<a href=\"{title}\">{title}</a>");
+		triggerJSONObject.put("tplResults", "{title}");
 
 		triggerJSONArray.put(triggerJSONObject);
 
