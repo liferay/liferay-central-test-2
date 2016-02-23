@@ -72,8 +72,6 @@ if (fieldsJSONArray != null) {
 }
 
 boolean showBackURL = ParamUtil.getBoolean(request, "showBackURL", true);
-
-String backURL = ddmDisplay.getViewTemplatesBackURL(liferayPortletRequest, liferayPortletResponse, classPK);
 %>
 
 <portlet:actionURL name="addStructure" var="addStructureURL">
@@ -94,7 +92,7 @@ if (Validator.isNotNull(requestUpdateStructureURL)) {
 
 <div class="container-fluid-1280">
 	<aui:form action="<%= (structure == null) ? addStructureURL : updateStructureURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveStructure();" %>'>
-		<aui:input name="redirect" type="hidden" value="<%= backURL %>" />
+		<aui:input name="redirect" type="hidden" value="<%= ddmDisplay.getViewTemplatesBackURL(liferayPortletRequest, liferayPortletResponse, classPK) %>" />
 		<aui:input name="closeRedirect" type="hidden" value="<%= closeRedirect %>" />
 		<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
 		<aui:input name="classNameId" type="hidden" value="<%= String.valueOf(classNameId) %>" />
@@ -179,7 +177,7 @@ if (Validator.isNotNull(requestUpdateStructureURL)) {
 
 					<%
 					portletDisplay.setShowBackIcon(true);
-					portletDisplay.setURLBack(backURL);
+					portletDisplay.setURLBack(ddmDisplay.getViewTemplatesBackURL(liferayPortletRequest, liferayPortletResponse, classPK));
 
 					renderResponse.setTitle(title);
 					%>
@@ -187,7 +185,7 @@ if (Validator.isNotNull(requestUpdateStructureURL)) {
 				</c:when>
 				<c:otherwise>
 					<liferay-ui:header
-						backURL="<%= backURL %>"
+						backURL="<%= ddmDisplay.getViewTemplatesBackURL(liferayPortletRequest, liferayPortletResponse, classPK) %>"
 						localizeTitle="<%= localizeTitle %>"
 						showBackURL="<%= showBackURL %>"
 						title="<%= title %>"
@@ -207,7 +205,7 @@ if (Validator.isNotNull(requestUpdateStructureURL)) {
 				var toolbarChildren = [
 					<portlet:renderURL var="viewHistoryURL">
 						<portlet:param name="mvcPath" value="/view_structure_history.jsp" />
-						<portlet:param name="redirect" value="<%= backURL %>" />
+						<portlet:param name="redirect" value="<%= ddmDisplay.getViewTemplatesBackURL(liferayPortletRequest, liferayPortletResponse, classPK) %>" />
 						<portlet:param name="structureId" value="<%= String.valueOf(structure.getStructureId()) %>" />
 					</portlet:renderURL>
 
@@ -322,7 +320,7 @@ if (Validator.isNotNull(requestUpdateStructureURL)) {
 			<aui:button cssClass="btn-lg" onClick='<%= renderResponse.getNamespace() + "saveStructure(true);" %>' value='<%= LanguageUtil.get(request, "save-draft") %>' />
 		</c:if>
 
-		<aui:button cssClass="btn-lg" href="<%= backURL %>" type="cancel" />
+		<aui:button cssClass="btn-lg" href="<%= ddmDisplay.getViewTemplatesBackURL(liferayPortletRequest, liferayPortletResponse, classPK) %>" type="cancel" />
 	</aui:button-row>
 </div>
 
