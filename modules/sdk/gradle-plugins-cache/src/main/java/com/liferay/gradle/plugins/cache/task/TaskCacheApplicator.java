@@ -202,7 +202,7 @@ public class TaskCacheApplicator {
 
 		StringBuilder sb = new StringBuilder();
 
-		Set<File> testFiles;
+		Set<File> testFiles = null;
 
 		try {
 			testFiles = FileUtil.flattenAndSort(
