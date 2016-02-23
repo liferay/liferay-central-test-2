@@ -14,7 +14,9 @@
 
 package com.liferay.portal.upgrade.v7_0_0;
 
+import com.liferay.portal.kernel.concurrent.ThreadPoolExecutor;
 import com.liferay.portal.kernel.dao.orm.WildcardMode;
+import com.liferay.portal.kernel.executor.PortalExecutorManagerUtil;
 import com.liferay.portal.kernel.upgrade.UpgradeException;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.LoggingTimer;
@@ -27,6 +29,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.Future;
+
 /**
  * @author Preston Crary
  */
@@ -34,33 +41,44 @@ public class UpgradeKernelPackage extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws UpgradeException {
+		String[][] classNames = getClassNames();
+		String[][] resourceNames = getResourceNames();
+
+		List<Future<Void>> futures = new ArrayList<>(
+			(classNames.length * 5) + (resourceNames.length * 3));
+
 		try {
 			upgradeTable(
-				"Counter", "name", getClassNames(), WildcardMode.SURROUND);
+				futures, "Counter", "name", classNames, WildcardMode.SURROUND);
 			upgradeTable(
-				"ClassName_", "value", getClassNames(), WildcardMode.SURROUND);
-			upgradeTable(
-				"ResourceAction", "name", getClassNames(),
+				futures, "ClassName_", "value", classNames,
 				WildcardMode.SURROUND);
 			upgradeTable(
-				"ResourceBlock", "name", getClassNames(),
+				futures, "ResourceAction", "name", classNames,
 				WildcardMode.SURROUND);
 			upgradeTable(
-				"ResourcePermission", "name", getClassNames(),
+				futures, "ResourceBlock", "name", classNames,
+				WildcardMode.SURROUND);
+			upgradeTable(
+				futures, "ResourcePermission", "name", classNames,
 				WildcardMode.SURROUND);
 
 			upgradeTable(
-				"ResourceAction", "name", getResourceNames(),
+				futures, "ResourceAction", "name", resourceNames,
 				WildcardMode.LEADING);
 			upgradeTable(
-				"ResourceBlock", "name", getResourceNames(),
+				futures, "ResourceBlock", "name", resourceNames,
 				WildcardMode.LEADING);
 			upgradeTable(
-				"ResourcePermission", "name", getResourceNames(),
+				futures, "ResourcePermission", "name", resourceNames,
 				WildcardMode.LEADING);
+
+			for (Future<Void> future : futures) {
+				future.get();
+			}
 		}
-		catch (SQLException sqle) {
-			throw new UpgradeException(sqle);
+		catch (Exception e) {
+			throw new UpgradeException(e);
 		}
 	}
 
@@ -99,8 +117,8 @@ public class UpgradeKernelPackage extends UpgradeProcess {
 	}
 
 	protected void upgradeTable(
-			String tableName, String columnName, String[][] names,
-			WildcardMode wildcardMode)
+			List<Future<Void>> futures, String tableName, String columnName,
+			String[][] names, WildcardMode wildcardMode)
 		throws SQLException {
 
 		try (LoggingTimer loggingTimer = new LoggingTimer(tableName)) {
@@ -148,7 +166,10 @@ public class UpgradeKernelPackage extends UpgradeProcess {
 				String selectSQL = selectPrefix.concat(name[0]).concat(
 					selectPostfix);
 
-				upgradeTable(columnName, selectSQL, updateSQL, name);
+				futures.add(
+					_threadPoolExecutor.submit(
+						new UpgradeKernelPackageCallable(
+							columnName, selectSQL, updateSQL, name)));
 			}
 		}
 	}
@@ -647,5 +668,35 @@ public class UpgradeKernelPackage extends UpgradeProcess {
 			"com.liferay.portlet.messageboards", "com.liferay.message.boards"
 		}
 	};
+
+	private final ThreadPoolExecutor _threadPoolExecutor =
+		PortalExecutorManagerUtil.getPortalExecutor(
+			UpgradeKernelPackage.class.getName());
+
+	private class UpgradeKernelPackageCallable implements Callable<Void> {
+
+		@Override
+		public Void call() throws SQLException {
+			upgradeTable(_columnName, _selectSQL, _updateSQL, _name);
+
+			return null;
+		}
+
+		private UpgradeKernelPackageCallable(
+			String columnName, String selectSQL, String updateSQL,
+			String[] name) {
+
+			_columnName = columnName;
+			_selectSQL = selectSQL;
+			_updateSQL = updateSQL;
+			_name = name;
+		}
+
+		private final String _columnName;
+		private final String[] _name;
+		private final String _selectSQL;
+		private final String _updateSQL;
+
+	}
 
 }
