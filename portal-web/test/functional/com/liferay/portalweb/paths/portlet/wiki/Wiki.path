@@ -451,6 +451,16 @@
 	<td></td>
 </tr>
 <tr>
+	<td>COMPARE_VERSIONS_VERSION_ACTIONS</td>
+	<td>//h4[contains(.,'${key_wikiPageVersion}')]/..//span/*[name()='svg'][contains(@class,'icon-ellipsis-v')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>COMPARE_VERSIONS_VERSION_LINK</td>
+	<td>//div[contains(@id,'wikiPageVersionSearchContainer')]//tr/td/a[contains(@class,'selector-button') and contains(.,'${key_wikiPageVersion}')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td></td>
 	<td></td>
 	<td></td>
