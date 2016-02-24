@@ -39,6 +39,7 @@ import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
 import com.amazonaws.services.s3.model.StorageClass;
 import com.amazonaws.services.s3.transfer.TransferManager;
+import com.amazonaws.services.s3.transfer.TransferManagerConfiguration;
 import com.amazonaws.services.s3.transfer.Upload;
 
 import com.liferay.document.library.kernel.exception.DuplicateFileException;
@@ -46,6 +47,7 @@ import com.liferay.document.library.kernel.exception.NoSuchFileException;
 import com.liferay.document.library.kernel.store.BaseStore;
 import com.liferay.document.library.kernel.store.Store;
 import com.liferay.portal.configuration.metatype.bnd.util.ConfigurableUtil;
+import com.liferay.portal.kernel.concurrent.ThreadPoolExecutor;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
@@ -67,6 +69,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
 
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
@@ -82,6 +85,7 @@ import org.osgi.service.component.annotations.Reference;
  * @author Vilmos Papp
  * @author Mate Thurzo
  * @author Manuel de la Peña
+ * @author Daniel Sanz
  */
 @Component(
 	configurationPid = "com.liferay.portal.store.s3.configuration.S3StoreConfiguration",
@@ -486,8 +490,23 @@ public class S3Store extends BaseStore {
 	}
 
 	protected TransferManager getTransferManager(AmazonS3 amazonS3) {
-		TransferManager transferManager = new TransferManager(amazonS3);
+		ExecutorService executorService = new ThreadPoolExecutor(
+			_s3StoreConfiguration.corePoolSize(),
+			_s3StoreConfiguration.maxPoolSize());
 
+		TransferManager transferManager = new TransferManager(
+			amazonS3, executorService, false);
+
+		TransferManagerConfiguration transferManagerConfiguration =
+			new TransferManagerConfiguration();
+
+		transferManagerConfiguration.setMultipartUploadThreshold(
+			_s3StoreConfiguration.multipartUploadThreshold());
+
+		transferManagerConfiguration.setMinimumUploadPartSize(
+			_s3StoreConfiguration.minimumUploadPartSize());
+
+		transferManager.setConfiguration(transferManagerConfiguration);
 		return transferManager;
 	}
 
@@ -508,11 +527,14 @@ public class S3Store extends BaseStore {
 	protected ClientConfiguration getClientConfiguration() {
 		ClientConfiguration clientConfiguration = new ClientConfiguration();
 
-		clientConfiguration.setMaxConnections(
-			_s3StoreConfiguration.httpClientMaxConnections());
-
 		clientConfiguration.setConnectionTimeout(
 			_s3StoreConfiguration.connectionTimeout());
+
+		clientConfiguration.setMaxErrorRetry(
+			_s3StoreConfiguration.httpClientMaxErrorRetry());
+
+		clientConfiguration.setMaxConnections(
+			_s3StoreConfiguration.httpClientMaxConnections());
 
 		configureProxySettings(clientConfiguration);
 
