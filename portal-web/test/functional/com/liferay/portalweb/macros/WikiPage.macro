@@ -1037,16 +1037,16 @@
 		<while>
 			<condition function="IsTextNotEqual" locator1="Wiki#ALL_PAGES_TABLE_REVISION" value1="1.0 (Minor Edit)" />
 			<then>
-				<execute function="Click" locator1="Wiki#ALL_PAGES_TABLE_ACTIONS_DROPDOWN_GENERIC" />
+				<execute function="Click" locator1="Icon#BODY_VERTICAL_ELLIPSIS" />
 				<execute macro="PortletEntry#clickMoveToRecycleBin" />
 				<execute function="AssertElementPresent" locator1="Message#SUCCESS" />
 			</then>
 		</while>
 
 		<while>
-			<condition function="IsElementPresent" locator1="Wiki#ALL_PAGES_TABLE_ACTIONS_DROPDOWN_GENERIC_2" />
+			<condition function="IsElementPresent" locator1="Icon#BODY_VERTICAL_ELLIPSIS_2" />
 			<then>
-				<execute function="Click" locator1="Wiki#ALL_PAGES_TABLE_ACTIONS_DROPDOWN_GENERIC_2" />
+				<execute function="Click" locator1="Icon#BODY_VERTICAL_ELLIPSIS_2" />
 				<execute macro="PortletEntry#clickMoveToRecycleBin" />
 				<execute function="AssertElementPresent" locator1="Message#SUCCESS" />
 			</then>
