@@ -105,14 +105,14 @@ public class KaleoWorkflowMessagingConfigurator {
 		Destination destination = _destinationFactory.createDestination(
 			kaleoGraphWalkerDestinationConfiguration);
 
-		Dictionary<String, Object> destinationProperties =
+		Dictionary<String, Object> properties =
 			new HashMapDictionary<>();
 
-		destinationProperties.put("destination.name", destination.getName());
+		properties.put("destination.name", destination.getName());
 
 		ServiceRegistration<Destination> serviceRegistration =
 			_bundleContext.registerService(
-				Destination.class, destination, destinationProperties);
+				Destination.class, destination, properties);
 
 		_serviceRegistrations.put(destination.getName(), serviceRegistration);
 	}
