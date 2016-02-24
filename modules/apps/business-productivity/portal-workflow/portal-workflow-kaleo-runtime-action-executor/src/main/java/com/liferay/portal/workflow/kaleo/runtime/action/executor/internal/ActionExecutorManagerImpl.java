@@ -24,7 +24,6 @@ import com.liferay.portal.workflow.kaleo.model.KaleoAction;
 import com.liferay.portal.workflow.kaleo.runtime.ExecutionContext;
 import com.liferay.portal.workflow.kaleo.runtime.action.ActionExecutorManager;
 import com.liferay.portal.workflow.kaleo.runtime.action.executor.ActionExecutor;
-import com.liferay.portal.workflow.kaleo.runtime.action.executor.ActionExecutorConstants;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -83,7 +82,8 @@ public class ActionExecutorManagerImpl implements ActionExecutorManager {
 		ActionExecutor actionExecutor, Map<String, Object> properties) {
 
 		Object value = properties.get(
-			ActionExecutorConstants.ACTION_EXECUTOR_LANGUAGE_KEY);
+			"com.liferay.portal.workflow.kaleo.runtime.action.executor." +
+				"language");
 
 		String[] languages = GetterUtil.getStringValues(
 			value, new String[] {String.valueOf(value)});
@@ -100,7 +100,8 @@ public class ActionExecutorManagerImpl implements ActionExecutorManager {
 		ActionExecutor actionExecutor, Map<String, Object> properties) {
 
 		Object value = properties.get(
-			ActionExecutorConstants.ACTION_EXECUTOR_LANGUAGE_KEY);
+			"com.liferay.portal.workflow.kaleo.runtime.action.executor." +
+				"language");
 
 		String[] languages = GetterUtil.getStringValues(
 			value, new String[] {String.valueOf(value)});
