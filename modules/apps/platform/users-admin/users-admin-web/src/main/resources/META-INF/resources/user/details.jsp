@@ -24,6 +24,7 @@ if (selUser == null) {
 }
 
 Contact selContact = (Contact)request.getAttribute("user.selContact");
+PasswordPolicy passwordPolicy = (PasswordPolicy)request.getAttribute("user.passwordPolicy");
 
 Calendar birthday = CalendarFactoryUtil.getCalendar();
 
@@ -34,8 +35,6 @@ birthday.set(Calendar.YEAR, 1970);
 if (selContact != null) {
 	birthday.setTime(selContact.getBirthday());
 }
-
-PasswordPolicy passwordPolicy = (PasswordPolicy)request.getAttribute("user.passwordPolicy");
 %>
 
 <liferay-ui:error-marker key="<%= WebKeys.ERROR_SECTION %>" value="details" />
