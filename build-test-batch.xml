@@ -442,6 +442,8 @@ echo "Sent notification."]]>
 				]]>
 			</execute>
 
+			<antcall target="install-portal-snapshots" inheritAll="false" />
+
 			<echo if:set="env.JENKINS_HOME">ANT_OPTS=${env.ANT_OPTS}</echo>
 
 			<antcall if:set="env.JENKINS_HOME" target="clean-up-db2-processes" inheritAll="false" />
