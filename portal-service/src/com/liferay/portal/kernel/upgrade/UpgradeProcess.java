@@ -24,13 +24,16 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ClassUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Reader;
 
 import java.lang.reflect.Field;
 
@@ -128,15 +131,15 @@ public abstract class UpgradeProcess
 		try {
 			DatabaseMetaData databaseMetaData = connection.getMetaData();
 
-			ResultSet indexInfo = databaseMetaData.getIndexInfo(
+			ResultSet rs = databaseMetaData.getIndexInfo(
 				null, null, normalizeName(tableName, databaseMetaData), false,
 				false);
 
 			Map<String, Set<String>> map = new HashMap<>();
 
-			while (indexInfo.next()) {
+			while (rs.next()) {
 				String indexName = StringUtil.toUpperCase(
-					indexInfo.getString("INDEX_NAME"));
+					rs.getString("INDEX_NAME"));
 
 				Set<String> columnNames = map.get(indexName);
 
@@ -146,15 +149,14 @@ public abstract class UpgradeProcess
 					map.put(indexName, columnNames);
 				}
 
-				columnNames.add(indexInfo.getString("COLUMN_NAME"));
+				columnNames.add(rs.getString("COLUMN_NAME"));
 			}
 
 			for (Map.Entry<String, Set<String>> entry : map.entrySet()) {
-				String indexName = entry.getKey();
 				Set<String> columnNames = entry.getValue();
 
 				if (columnNames.contains(columnName)) {
-					runSQL("drop index " + indexName + " on " + tableName);
+					runSQL("drop index " + entry.getKey() + " on " + tableName);
 				}
 			}
 
@@ -169,7 +171,9 @@ public abstract class UpgradeProcess
 
 			runSQL(sb.toString());
 
-			for (String indexSQL : _getIndexesSQL(tableClass, tableName)) {
+			for (String indexSQL : _getIndexesSQL(
+					tableClass.getClassLoader(), tableName)) {
+
 				if (indexSQL.contains(columnName)) {
 					runSQL(indexSQL);
 				}
@@ -178,20 +182,15 @@ public abstract class UpgradeProcess
 		catch (SQLException sqle) {
 			Field tableColumnsField = tableClass.getField("TABLE_COLUMNS");
 
-			Object[][] tableColumns = (Object[][])tableColumnsField.get(null);
-
 			Field tableSQLCreateField = tableClass.getField("TABLE_SQL_CREATE");
-
-			String tableSQLCreate = (String)tableSQLCreateField.get(null);
 
 			Field tableSQLAddIndexesField = tableClass.getField(
 				"TABLE_SQL_ADD_INDEXES");
 
-			String[] tableSQLAddIndexes = (String[])tableSQLAddIndexesField.get(
-				null);
-
 			upgradeTable(
-				tableName, tableColumns, tableSQLCreate, tableSQLAddIndexes);
+				tableName, (Object[][])tableColumnsField.get(null),
+				(String)tableSQLCreateField.get(null),
+				(String[])tableSQLAddIndexesField.get(null));
 		}
 	}
 
@@ -271,10 +270,9 @@ public abstract class UpgradeProcess
 		upgradeTable.updateTable();
 	}
 
-	private List<String> _getIndexesSQL(Class<?> tableClass, String tableName)
-		throws Exception {
-
-		ClassLoader classLoader = tableClass.getClassLoader();
+	private List<String> _getIndexesSQL(
+			ClassLoader classLoader, String tableName)
+		throws IOException {
 
 		if (!PortalClassLoaderUtil.isPortalClassLoader(classLoader)) {
 			List<String> indexes = new ArrayList<>();
@@ -283,8 +281,9 @@ public abstract class UpgradeProcess
 
 			try (InputStream is = classLoader.getResourceAsStream(
 					"META-INF/sql/indexes.sql");
+				Reader reader = new InputStreamReader(is);
 				UnsyncBufferedReader unsyncBufferedReader =
-					new UnsyncBufferedReader(new InputStreamReader(is))) {
+					new UnsyncBufferedReader(reader)) {
 
 				String line = null;
 
@@ -304,8 +303,9 @@ public abstract class UpgradeProcess
 
 		try (InputStream is = classLoader.getResourceAsStream(
 				"com/liferay/portal/tools/sql/dependencies/indexes.sql");
+			Reader reader = new InputStreamReader(is);
 			UnsyncBufferedReader unsyncBufferedReader =
-				new UnsyncBufferedReader(new InputStreamReader(is))) {
+				new UnsyncBufferedReader(reader)) {
 
 			String line = null;
 
@@ -316,7 +316,7 @@ public abstract class UpgradeProcess
 					continue;
 				}
 
-				int y = line.indexOf(" ", x);
+				int y = line.indexOf(CharPool.SPACE, x);
 
 				String currentTableName = line.substring(x + 4, y);
 
