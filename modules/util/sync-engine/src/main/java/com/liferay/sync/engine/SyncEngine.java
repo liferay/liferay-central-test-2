@@ -16,7 +16,6 @@ package com.liferay.sync.engine;
 
 import com.j256.ormlite.support.ConnectionSource;
 
-import com.liferay.sync.engine.documentlibrary.util.BatchDownloadEvent;
 import com.liferay.sync.engine.documentlibrary.util.BatchEventManager;
 import com.liferay.sync.engine.documentlibrary.util.FileEventUtil;
 import com.liferay.sync.engine.documentlibrary.util.ServerEventUtil;
@@ -344,7 +343,7 @@ public class SyncEngine {
 				Set<Long> syncSiteIds = SyncSiteService.getActiveSyncSiteIds(
 					syncAccount.getSyncAccountId());
 
-				for (long syncSiteId : new HashSet<Long>(syncSiteIds)) {
+				for (long syncSiteId : new HashSet<>(syncSiteIds)) {
 					SyncSite syncSite = SyncSiteService.fetchSyncSite(
 						syncSiteId);
 
@@ -357,11 +356,7 @@ public class SyncEngine {
 						syncSite, true);
 				}
 
-				BatchDownloadEvent batchDownloadEvent =
-					BatchEventManager.getBatchDownloadEvent(
-						syncAccount.getSyncAccountId());
-
-				batchDownloadEvent.fireBatchEvent();
+				BatchEventManager.fireBatchDownloadEvents();
 			}
 
 		};
