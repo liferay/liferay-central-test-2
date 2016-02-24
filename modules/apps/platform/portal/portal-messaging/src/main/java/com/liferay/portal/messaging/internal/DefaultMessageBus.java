@@ -364,7 +364,7 @@ public class DefaultMessageBus implements MessageBus {
 
 		try {
 			ClassLoader operatingClassLoader = (ClassLoader)properties.get(
-				MessageListener.MESSAGE_LISTENER_OPERATING_CLASS_LOADER);
+				"message.listener.operating.class.loader");
 
 			if (operatingClassLoader != null) {
 				currentThread.setContextClassLoader(operatingClassLoader);
