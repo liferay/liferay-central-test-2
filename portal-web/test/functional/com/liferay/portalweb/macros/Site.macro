@@ -920,18 +920,18 @@
 	</command>
 
 	<command name="selectPageType">
-		<execute function="AssertTextEquals" locator1="SitesEditSite#PAGES_LABEL" value1="Pages" />
+		<execute macro="Panel#expandPanel">
+			<var name="panelHeading" value="Pages" />
+		</execute>
 
 		<if>
 			<equals arg1="${selectPublicPages}" arg2="true" />
 			<then>
-				<execute function="AssertClick" locator1="SitesEditSite#PAGES_PUBLIC_PAGES_LABEL" value1="Public Pages" />
 				<execute function="Select" locator1="SitesEditSite#PAGES_PUBLIC_PAGES_SITE_TEMPLATE_SELECT" value1="${siteTemplate}" />
 			</then>
 			<elseif>
 				<equals arg1="${selectPrivatePages}" arg2="true" />
 				<then>
-					<execute function="AssertClick" locator1="SitesEditSite#PAGES_PRIVATE_PAGES_LABEL" value1="Private Pages" />
 					<execute function="Select" locator1="SitesEditSite#PAGES_PRIVATE_PAGES_SITE_TEMPLATE_SELECT" value1="${siteTemplate}" />
 				</then>
 			</elseif>
