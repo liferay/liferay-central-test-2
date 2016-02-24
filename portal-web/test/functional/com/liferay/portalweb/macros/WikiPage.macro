@@ -1272,10 +1272,6 @@
 		<execute function="AssertElementNotPresent" locator1="WikiTable#ALL_PAGES_WIKI_PAGE_TITLE" value1="${wikiPageTitle}" />
 	</command>
 
-	<command name="viewPageContentBodyHeader">
-		<execute function="AssertTextEquals" locator1="Wiki#BODY_HEADER" value1="${wikiPageContent}" />
-	</command>
-
 	<command name="viewPagePG">
 		<var name="key_wikiPageTitle" value="${wikiPageTitle}" />
 
@@ -1415,30 +1411,6 @@
 		<execute function="AssertTextEquals" locator1="WikiRSS#ENTRY_CONTENT" value1="${wikiPageContent}" />
 
 		<execute function="AssertClick" locator1="WikiRSS#ENTRY_TITLE" value1="${wikiPageTitle} ${version}" />
-	</command>
-
-	<command name="viewSaveAsDraftFrontPagePG">
-		<execute function="AssertTextEquals" locator1="Wiki#FRONTPAGE_DEFAULT_MESSAGE" value1="This page is empty. Edit it to add some text." />
-		<execute function="AssertElementNotPresent" locator1="Wiki#BODY" />
-		<execute function="AssertTextNotPresent" value1="${wikiPageContent}" />
-
-		<execute function="AssertClick" locator1="Wiki#LINK_EDIT" value1="Edit" />
-
-		<execute function="AssertTextEquals" locator1="Wiki#WORKFLOW_STATUS" value1="Draft" />
-
-		<var name="key_wikiPageContent" value="${wikiPageContent}" />
-
-		<execute function="AssertTextEquals" locator1="Wiki#VIEW_BODY_FIELD" value1="${wikiPageContent}" />
-
-		<var name="key_wikiPageTitle" value="${wikiPageTitle}" />
-
-		<execute function="AssertClick" locator1="Wiki#NAVIGATION_DRAFT_PAGES" value1="Draft Pages" />
-
-		<execute function="AssertTextEquals" locator1="Wiki#DRAFT_PAGES_TABLE_PAGE_NAME" value1="${wikiPageTitle}" />
-		<execute function="AssertTextEquals" locator1="Wiki#DRAFT_PAGES_TABLE_STATUS" value1="Draft" />
-		<execute function="AssertTextEquals" locator1="Wiki#DRAFT_PAGES_TABLE_REVISION" value1="${wikiPageRevision}" />
-		<execute function="AssertTextEquals" locator1="Wiki#DRAFT_PAGES_TABLE_USER" value1="${wikiPageUsername}" />
-		<execute function="AssertElementPresent" locator1="Wiki#DRAFT_PAGES_TABLE_DATE" />
 	</command>
 
 	<command name="viewSearchResultsPG">
