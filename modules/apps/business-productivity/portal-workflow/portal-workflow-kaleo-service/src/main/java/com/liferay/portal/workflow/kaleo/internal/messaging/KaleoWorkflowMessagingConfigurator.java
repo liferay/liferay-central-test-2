@@ -62,8 +62,7 @@ public class KaleoWorkflowMessagingConfigurator {
 		schedulerEventMessageListenerWrapper.setMessageListener(
 			_timerMessageListener);
 
-		Dictionary<String, Object> properties =
-			new HashMapDictionary<>();
+		Dictionary<String, Object> properties = new HashMapDictionary<>();
 
 		properties.put("destination.name", DestinationNames.WORKFLOW_TIMER);
 
@@ -105,8 +104,7 @@ public class KaleoWorkflowMessagingConfigurator {
 		Destination destination = _destinationFactory.createDestination(
 			kaleoGraphWalkerDestinationConfiguration);
 
-		Dictionary<String, Object> properties =
-			new HashMapDictionary<>();
+		Dictionary<String, Object> properties = new HashMapDictionary<>();
 
 		properties.put("destination.name", destination.getName());
 
