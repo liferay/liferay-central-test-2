@@ -46,7 +46,8 @@ public class NodeExecutorFactory {
 		String nodeType = (String)properties.get("node.type");
 
 		if (nodeType == null) {
-			throw new IllegalArgumentException("Must specify a node type");
+			throw new IllegalArgumentException(
+				"The property \"node.type\" is null");
 		}
 
 		_nodeExecutors.addNodeTypeDependentObject(nodeType, nodeExecutor);
@@ -58,7 +59,8 @@ public class NodeExecutorFactory {
 		String nodeType = (String)properties.get("node.type");
 
 		if (nodeType == null) {
-			throw new IllegalArgumentException("Must specify a node type");
+			throw new IllegalArgumentException(
+				"The property \"node.type\" is null");
 		}
 
 		_nodeExecutors.removeNodeTypeDependentObjects(nodeType);

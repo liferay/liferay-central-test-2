@@ -82,7 +82,7 @@ public class NotificationMessageGeneratorFactory {
 
 		if (ArrayUtil.isEmpty(templateLanguages)) {
 			throw new IllegalArgumentException(
-				"Must have an template.language property for: " +
+				"The property \"template.language\" is invalid for " +
 					ClassUtil.getClassName(notificationMessageGenerator));
 		}
 

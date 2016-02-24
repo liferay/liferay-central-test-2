@@ -86,7 +86,7 @@ public class DefaultNotificationRecipientBuilderRegistry
 
 		if (Validator.isNull(value)) {
 			throw new IllegalArgumentException(
-				"Must have an recipient.type property in order to add: " +
+				"The property \"recipient.type\" is invalid for " +
 					ClassUtil.getClassName(notificationRecipientBuilder));
 		}
 
