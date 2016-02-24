@@ -55,28 +55,22 @@ public class KaleoWorkflowDestinationEventListener
 		_defaultWorkflowDestinationEventListener =
 			new DefaultWorkflowDestinationEventListener();
 
-		_defaultWorkflowDestinationEventListener.setWorkflowEngineName(
-			"Liferay Kaleo Workflow Engine");
-
 		_defaultWorkflowDestinationEventListener.
 			setWorkflowComparatorFactoryListener(
 				_workflowComparatorFactoryProxyMessageListener);
-
 		_defaultWorkflowDestinationEventListener.
 			setWorkflowDefinitionManagerListener(
 				_workflowDefinitionManagerProxyMessageListener);
-
 		_defaultWorkflowDestinationEventListener.
 			setWorkflowEngineManagerListener(
 				_workflowEngineManagerProxyMessageListener);
-
+		_defaultWorkflowDestinationEventListener.setWorkflowEngineName(
+			"Liferay Kaleo Workflow Engine");
 		_defaultWorkflowDestinationEventListener.
 			setWorkflowInstanceManagerListener(
 				_workflowInstanceManagerProxyMessageListener);
-
 		_defaultWorkflowDestinationEventListener.setWorkflowLogManagerListener(
 			_workflowLogManagerProxyMessageListener);
-
 		_defaultWorkflowDestinationEventListener.setWorkflowTaskManagerListener(
 			_workflowTaskManagerProxyMessageListener);
 	}
