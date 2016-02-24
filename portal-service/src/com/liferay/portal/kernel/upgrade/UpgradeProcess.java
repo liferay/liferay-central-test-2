@@ -54,7 +54,7 @@ public abstract class UpgradeProcess
 	extends BaseDBProcess implements UpgradeStep {
 
 	public void clearIndexesCache() {
-		_portalIndexesSQL = null;
+		_portalIndexesSQL.clear();
 	}
 
 	public int getThreshold() {
@@ -298,11 +298,9 @@ public abstract class UpgradeProcess
 			return indexes;
 		}
 
-		if (_portalIndexesSQL != null) {
+		if (!_portalIndexesSQL.isEmpty()) {
 			return _portalIndexesSQL.get(tableName);
 		}
-
-		_portalIndexesSQL = new HashMap<>();
 
 		try (InputStream is = classLoader.getResourceAsStream(
 				"com/liferay/portal/tools/sql/dependencies/indexes.sql");
@@ -339,6 +337,7 @@ public abstract class UpgradeProcess
 
 	private static final Log _log = LogFactoryUtil.getLog(UpgradeProcess.class);
 
-	private static Map<String, List<String>> _portalIndexesSQL;
+	private static final Map<String, List<String>> _portalIndexesSQL =
+		new HashMap<>();
 
 }
