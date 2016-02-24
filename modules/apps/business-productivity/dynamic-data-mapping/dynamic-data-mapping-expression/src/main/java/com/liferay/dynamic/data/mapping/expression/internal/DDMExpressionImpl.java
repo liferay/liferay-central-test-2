@@ -57,6 +57,7 @@ public class DDMExpressionImpl<T> implements DDMExpression<T> {
 		}
 
 		_expressionString = tokenExtractor.getExpression();
+
 		_expressionClass = expressionClass;
 	}
 
