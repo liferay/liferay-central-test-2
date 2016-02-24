@@ -48,7 +48,8 @@ public class NodeExporterRegistry {
 		String nodeType = (String)properties.get("node.type");
 
 		if (nodeType == null) {
-			throw new IllegalArgumentException("Must specify a node type");
+			throw new IllegalArgumentException(
+				"The property \"node.type\" is null");
 		}
 
 		_nodeExporters.addNodeTypeDependentObject(nodeType, nodeExporter);
@@ -60,7 +61,8 @@ public class NodeExporterRegistry {
 		String nodeType = (String)properties.get("node.type");
 
 		if (nodeType == null) {
-			throw new IllegalArgumentException("Must specify a node type");
+			throw new IllegalArgumentException(
+				"The property \"node.type\" is null");
 		}
 
 		_nodeExporters.removeNodeTypeDependentObjects(nodeType);

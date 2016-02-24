@@ -76,7 +76,7 @@ public class NotificationSenderFactory {
 
 		if (ArrayUtil.isEmpty(notificationTypes)) {
 			throw new IllegalArgumentException(
-				"Must have a notification.type property for: " +
+				"The property \"notification.type\" is invalid for " +
 					ClassUtil.getClassName(notificationSender));
 		}
 

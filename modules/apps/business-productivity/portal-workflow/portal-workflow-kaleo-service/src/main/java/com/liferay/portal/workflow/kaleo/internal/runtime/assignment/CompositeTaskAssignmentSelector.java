@@ -90,7 +90,7 @@ public class CompositeTaskAssignmentSelector implements TaskAssignmentSelector {
 
 		if (ArrayUtil.isEmpty(assigneeClassNames)) {
 			throw new IllegalArgumentException(
-				"Must have an assignee.class.name property for: " +
+				"The property \"assignee.class.name\" is invalid for " +
 					ClassUtil.getClassName(taskAssignmentSelector));
 		}
 

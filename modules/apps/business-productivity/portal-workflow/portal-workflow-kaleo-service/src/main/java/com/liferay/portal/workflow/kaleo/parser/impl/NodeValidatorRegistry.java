@@ -49,7 +49,8 @@ public class NodeValidatorRegistry {
 		String nodeType = (String)properties.get("node.type");
 
 		if (nodeType == null) {
-			throw new IllegalArgumentException("Must specify a node type");
+			throw new IllegalArgumentException(
+				"The property \"node.type\" is null");
 		}
 
 		_nodeValidators.addNodeTypeDependentObject(nodeType, nodeValidator);
@@ -61,7 +62,8 @@ public class NodeValidatorRegistry {
 		String nodeType = (String)properties.get("node.type");
 
 		if (nodeType == null) {
-			throw new IllegalArgumentException("Must specify a node type");
+			throw new IllegalArgumentException(
+				"The property \"node.type\" is null");
 		}
 
 		_nodeValidators.removeNodeTypeDependentObjects(nodeType);

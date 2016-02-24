@@ -87,7 +87,7 @@ public class MultiLanguageConditionEvaluator implements ConditionEvaluator {
 
 		if (ArrayUtil.isEmpty(scriptingLanguages)) {
 			throw new IllegalArgumentException(
-				"Must have a scripting.language property for: " +
+				"The property \"scripting.language\" is invalid for " +
 					ClassUtil.getClassName(conditionEvaluator));
 		}
 

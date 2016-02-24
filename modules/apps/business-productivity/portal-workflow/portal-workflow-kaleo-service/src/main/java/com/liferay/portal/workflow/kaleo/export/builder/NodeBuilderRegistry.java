@@ -47,7 +47,8 @@ public class NodeBuilderRegistry {
 		String nodeType = (String)properties.get("node.type");
 
 		if (nodeType == null) {
-			throw new IllegalArgumentException("Must specify a node type");
+			throw new IllegalArgumentException(
+				"The property \"node.type\" is null");
 		}
 
 		_nodeBuilders.addNodeTypeDependentObject(nodeType, nodeBuilder);
@@ -59,7 +60,8 @@ public class NodeBuilderRegistry {
 		String nodeType = (String)properties.get("node.type");
 
 		if (nodeType == null) {
-			throw new IllegalArgumentException("Must specify a node type");
+			throw new IllegalArgumentException(
+				"The property \"node.type\" is null");
 		}
 
 		_nodeBuilders.removeNodeTypeDependentObjects(nodeType);
