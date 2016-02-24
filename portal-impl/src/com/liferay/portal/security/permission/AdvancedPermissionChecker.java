@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.exception.MissingIndividualScopeResourcePermiss
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.GroupConstants;
 import com.liferay.portal.kernel.model.GroupedModel;
@@ -693,27 +692,6 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 		}
 	}
 
-	protected String fixLegacyPrimaryKey(
-		long companyId, String name, String primKey) {
-
-		if (((primKey.length() == 1) && (primKey.charAt(0) == 48)) ||
-			(primKey.equals(String.valueOf(companyId)) &&
-			 !name.equals(Company.class.getName()))) {
-
-			String message =
-				"Legacy primary key " + primKey + " was used for " +
-					"permission checking of " + name + " in company " +
-					companyId + ". Please use " + name + " as the " +
-					"primary key.";
-
-			_log.error(message, new IllegalArgumentException(message));
-
-			return name;
-		}
-
-		return primKey;
-	}
-
 	/**
 	 * Returns representations of the resource at each scope level.
 	 *
@@ -820,11 +798,8 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 
 		long companyId = user.getCompanyId();
 
-		if (groupId > 0) {
-			Group group = GroupLocalServiceUtil.getGroup(groupId);
-
-			companyId = group.getCompanyId();
-		}
+		List<Resource> resources = getResources(
+			companyId, groupId, name, primKey, actionId);
 
 		try {
 			if (ResourceBlockLocalServiceUtil.isSupported(name)) {
@@ -835,11 +810,6 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 					name, GetterUtil.getLong(primKey), actionId,
 					resourceBlockIdsBag);
 			}
-
-			primKey = fixLegacyPrimaryKey(companyId, name, primKey);
-
-			List<Resource> resources = getResources(
-				companyId, groupId, name, primKey, actionId);
 
 			return ResourceLocalServiceUtil.hasUserPermissions(
 				defaultUserId, groupId, resources, actionId,
@@ -912,8 +882,6 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 
 			companyId = group.getCompanyId();
 		}
-
-		primKey = fixLegacyPrimaryKey(companyId, name, primKey);
 
 		try {
 			boolean hasPermission = doCheckPermission(
