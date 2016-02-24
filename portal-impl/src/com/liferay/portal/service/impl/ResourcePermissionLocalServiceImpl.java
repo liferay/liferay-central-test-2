@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
+import com.liferay.portal.kernel.exception.MissingIndividualScopeResourcePermissionException;
 import com.liferay.portal.kernel.exception.NoSuchResourcePermissionException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -690,7 +691,7 @@ public class ResourcePermissionLocalServiceImpl
 				individualResource.getScope(),
 				individualResource.getPrimKey()) < 1) {
 
-			throw new NoSuchResourcePermissionException(
+			throw new MissingIndividualScopeResourcePermissionException(
 				"There is no " + individualResource.getName() +
 					" with primary key " + individualResource.getPrimKey() +
 						" and companyId " + individualResource.getCompanyId());

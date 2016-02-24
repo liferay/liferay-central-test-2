@@ -15,7 +15,7 @@
 package com.liferay.portal.security.permission;
 
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
-import com.liferay.portal.kernel.exception.NoSuchResourcePermissionException;
+import com.liferay.portal.kernel.exception.MissingIndividualScopeResourcePermissionException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -845,12 +845,12 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 				defaultUserId, groupId, resources, actionId,
 				getGuestUserRoleIds());
 		}
-		catch (NoSuchResourcePermissionException nsrpe) {
+		catch (MissingIndividualScopeResourcePermissionException misrpe) {
 			throw new IllegalArgumentException(
 				"Somebody is trying to circumvent permission framework " +
 					"or there is a bug in permission framework caller: " +
-						nsrpe.getMessage(),
-				nsrpe);
+						misrpe.getMessage(),
+				misrpe);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -924,12 +924,12 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 				return true;
 			}
 		}
-		catch (NoSuchResourcePermissionException nsrpe) {
+		catch (MissingIndividualScopeResourcePermissionException misrpe) {
 			throw new IllegalArgumentException(
 				"Somebody is trying to circumvent permission framework " +
 					"or there is a bug in permission framework caller: " +
-						nsrpe.getMessage(),
-				nsrpe);
+						misrpe.getMessage(),
+				misrpe);
 		}
 
 		if (isCompanyAdminImpl(companyId)) {
