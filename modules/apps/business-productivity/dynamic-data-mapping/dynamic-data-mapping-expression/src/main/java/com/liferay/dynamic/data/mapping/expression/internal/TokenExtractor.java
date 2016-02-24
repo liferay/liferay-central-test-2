@@ -35,7 +35,7 @@ public class TokenExtractor {
 
 	public TokenExtractor(String expressionString) {
 		if (Validator.isNull(expressionString)) {
-			throw new IllegalArgumentException("Expression cannot be null");
+			throw new IllegalArgumentException("Expression is null");
 		}
 
 		_expression = expressionString;

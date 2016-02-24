@@ -41,7 +41,7 @@ public class DDMExpressionException extends PortalException {
 		public FunctionNotAllowed(String functionName) {
 			super(
 				String.format(
-					"The function name '%s' is not allowed.", functionName));
+					"The function name \"%s\" is not allowed", functionName));
 
 			_functionName = functionName;
 		}
@@ -58,7 +58,7 @@ public class DDMExpressionException extends PortalException {
 		extends DDMExpressionException {
 
 		public NumberExceedsSupportedRange() {
-			super("The number entered exceeds the supported range.");
+			super("The number entered exceeds the supported range");
 		}
 
 	}
