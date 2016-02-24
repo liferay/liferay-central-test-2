@@ -41,7 +41,6 @@ import com.liferay.portal.kernel.transaction.TransactionCommitCallbackUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.service.base.ResourcePermissionLocalServiceBaseImpl;
@@ -691,19 +690,10 @@ public class ResourcePermissionLocalServiceImpl
 				individualResource.getScope(),
 				individualResource.getPrimKey()) < 1) {
 
-			StringBundler sb = new StringBundler(9);
-
-			sb.append("{companyId=");
-			sb.append(individualResource.getCompanyId());
-			sb.append(", name=");
-			sb.append(individualResource.getName());
-			sb.append(", primKey=");
-			sb.append(individualResource.getPrimKey());
-			sb.append(", scope=");
-			sb.append(individualResource.getScope());
-			sb.append("}");
-
-			throw new NoSuchResourcePermissionException(sb.toString());
+			throw new NoSuchResourcePermissionException(
+				"There is no " + individualResource.getName() +
+					" with primary key " + individualResource.getPrimKey() +
+						" and companyId " + individualResource.getCompanyId());
 		}
 
 		// Iterate the list of resources in reverse order to test permissions
