@@ -16,7 +16,6 @@ package com.liferay.mentions.configuration;
 
 import aQute.bnd.annotation.metatype.Meta;
 
-import com.liferay.mentions.constants.MentionsConstants;
 import com.liferay.portal.configuration.metatype.annotations.ExtendedObjectClassDefinition;
 import com.liferay.portal.kernel.settings.LocalizedValuesMap;
 
