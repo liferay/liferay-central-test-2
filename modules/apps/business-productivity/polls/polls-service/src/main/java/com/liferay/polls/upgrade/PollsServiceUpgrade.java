@@ -14,7 +14,7 @@
 
 package com.liferay.polls.upgrade;
 
-import com.liferay.polls.upgrade.v1_0_0.UpgradeKernelPackages;
+import com.liferay.polls.upgrade.v1_0_0.UpgradeKernelPackage;
 import com.liferay.polls.upgrade.v1_0_0.UpgradeLastPublishDate;
 import com.liferay.polls.upgrade.v1_0_0.UpgradePortletId;
 import com.liferay.portal.kernel.log.Log;
@@ -33,7 +33,7 @@ public class PollsServiceUpgrade implements UpgradeStepRegistrator {
 	public void register(Registry registry) {
 		registry.register(
 			"com.liferay.polls.service", "0.0.1", "0.0.2",
-			new UpgradeKernelPackages(), new UpgradePortletId());
+			new UpgradeKernelPackage(), new UpgradePortletId());
 
 		registry.register(
 			"com.liferay.polls.service", "0.0.2", "1.0.0",

@@ -12,14 +12,13 @@
  * details.
  */
 
-package com.liferay.wiki.upgrade.v1_0_0;
-
-import com.liferay.portal.upgrade.v7_0_0.UpgradeKernelPackage;
+package com.liferay.bookmarks.upgrade.v1_0_0;
 
 /**
  * @author Miguel Pastor
  */
-public class UpgradeKernelPackages extends UpgradeKernelPackage {
+public class UpgradeKernelPackage
+	extends com.liferay.portal.upgrade.v7_0_0.UpgradeKernelPackage {
 
 	@Override
 	protected String[][] getClassNames() {
@@ -33,22 +32,18 @@ public class UpgradeKernelPackages extends UpgradeKernelPackage {
 
 	private static final String[][] _CLASS_NAMES = new String[][] {
 		{
-			"com.liferay.portlet.wiki.model.WikiNode",
-			"com.liferay.wiki.model.WikiNode"
+			"com.liferay.portlet.bookmarks.model.BookmarksEntry",
+			"com.liferay.bookmarks.model.BookmarksEntry"
 		},
 		{
-			"com.liferay.portlet.wiki.model.WikiPageResource",
-			"com.liferay.wiki.model.WikiPageResource"
-		},
-		{
-			"com.liferay.portlet.wiki.model.WikiPage",
-			"com.liferay.wiki.model.WikiPage"
+			"com.liferay.portlet.bookmarks.model.BookmarksFolder",
+			"com.liferay.bookmarks.model.BookmarksFolder"
 		}
 	};
 
 	private static final String[][] _RESOURCE_NAMES = new String[][] {
 		{
-			"com.liferay.portlet.wiki", "com.liferay.wiki"
+			"com.liferay.portlet.bookmarks", "com.liferay.bookmarks"
 		}
 	};
 

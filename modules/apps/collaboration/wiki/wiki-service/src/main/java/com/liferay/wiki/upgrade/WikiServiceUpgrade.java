@@ -17,7 +17,7 @@ package com.liferay.wiki.upgrade;
 import com.liferay.portal.kernel.settings.SettingsFactory;
 import com.liferay.portal.upgrade.registry.UpgradeStepRegistrator;
 import com.liferay.wiki.upgrade.v1_0_0.UpgradeCompanyId;
-import com.liferay.wiki.upgrade.v1_0_0.UpgradeKernelPackages;
+import com.liferay.wiki.upgrade.v1_0_0.UpgradeKernelPackage;
 import com.liferay.wiki.upgrade.v1_0_0.UpgradeLastPublishDate;
 import com.liferay.wiki.upgrade.v1_0_0.UpgradePortletId;
 import com.liferay.wiki.upgrade.v1_0_0.UpgradePortletPreferences;
@@ -42,7 +42,7 @@ public class WikiServiceUpgrade implements UpgradeStepRegistrator {
 
 		registry.register(
 			"com.liferay.wiki.service", "0.0.2", "0.0.3",
-			new UpgradeKernelPackages(), new UpgradePortletId(),
+			new UpgradeKernelPackage(), new UpgradePortletId(),
 			new UpgradePortletPreferences());
 
 		registry.register(

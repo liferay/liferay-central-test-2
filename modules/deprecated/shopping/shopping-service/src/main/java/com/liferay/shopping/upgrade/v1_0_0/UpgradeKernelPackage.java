@@ -14,12 +14,11 @@
 
 package com.liferay.shopping.upgrade.v1_0_0;
 
-import com.liferay.portal.upgrade.v7_0_0.UpgradeKernelPackage;
-
 /**
  * @author Philip Jones
  */
-public class UpgradeKernelPackages extends UpgradeKernelPackage {
+public class UpgradeKernelPackage
+	extends com.liferay.portal.upgrade.v7_0_0.UpgradeKernelPackage {
 
 	@Override
 	protected String[][] getClassNames() {
