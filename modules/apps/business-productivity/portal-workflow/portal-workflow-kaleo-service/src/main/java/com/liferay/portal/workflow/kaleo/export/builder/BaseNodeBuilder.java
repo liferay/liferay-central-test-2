@@ -87,7 +87,7 @@ public abstract class BaseNodeBuilder<T extends Node> implements NodeBuilder {
 
 		node.setTimers(timers);
 
-		return t;
+		return node;
 	}
 
 	protected void addNotificationRecipients(
