@@ -68,24 +68,24 @@ public abstract class BaseNodeBuilder<T extends Node> implements NodeBuilder {
 
 	@Override
 	public T buildNode(KaleoNode kaleoNode) throws PortalException {
-		T t = createNode(kaleoNode);
+		T node = createNode(kaleoNode);
 
 		Set<Action> actions = buildActions(
 			KaleoNode.class.getName(), kaleoNode.getKaleoNodeId());
 
-		t.setActions(actions);
+		node.setActions(actions);
 
-		t.setMetadata(kaleoNode.getMetadata());
+		node.setMetadata(kaleoNode.getMetadata());
 
 		Set<Notification> notifications = buildNotifications(
 			KaleoNode.class.getName(), kaleoNode.getKaleoNodeId());
 
-		t.setNotifications(notifications);
+		node.setNotifications(notifications);
 
 		Set<Timer> timers = buildTimers(
 			KaleoNode.class.getName(), kaleoNode.getKaleoNodeId());
 
-		t.setTimers(timers);
+		node.setTimers(timers);
 
 		return t;
 	}
