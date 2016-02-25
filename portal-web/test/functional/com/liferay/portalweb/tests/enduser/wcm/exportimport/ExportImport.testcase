@@ -560,8 +560,6 @@
 			<var name="portletName" value="Sample LAR" />
 		</execute>
 
-		<execute function="Refresh" />
-
 		<execute macro="SampleLARPortlet#addSampleBooking" />
 
 		<var method="selenium#getText('//tbody[@class=\'table-data\']/tr/td[2]')" name="bookingNumber" />
@@ -604,8 +602,6 @@
 		<execute macro="Portlet#addPG">
 			<var name="portletName" value="Sample LAR" />
 		</execute>
-
-		<execute function="Refresh" />
 
 		<execute macro="LAR#importPortlet">
 			<var name="larFileName" value="SampleLARPortlet.lar" />
