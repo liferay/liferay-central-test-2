@@ -921,7 +921,7 @@ public class PermissionCheckerTest {
 		"com.liferay.portal.security.permission.nonsite";
 
 	private static final String _PORTLET_RESOURCE_NAME =
-		"com_liferay_portal_security_PermissionCheckerTestSiteRelatedPortlet";
+		"com_liferay_portal_security_PermissionCheckerTestSitePortlet";
 
 	private static final String _ROOT_MODEL_RESOURCE_NAME =
 		"com.liferay.portal.security.permission.site";
