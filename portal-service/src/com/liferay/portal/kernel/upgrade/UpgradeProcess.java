@@ -201,80 +201,6 @@ public abstract class UpgradeProcess
 
 	protected abstract void doUpgrade() throws Exception;
 
-	protected long increment() {
-		DB db = DBManagerUtil.getDB();
-
-		return db.increment();
-	}
-
-	protected long increment(String name) {
-		DB db = DBManagerUtil.getDB();
-
-		return db.increment(name);
-	}
-
-	protected boolean isSupportsAlterColumnName() {
-		DB db = DBManagerUtil.getDB();
-
-		return db.isSupportsAlterColumnName();
-	}
-
-	protected boolean isSupportsAlterColumnType() {
-		DB db = DBManagerUtil.getDB();
-
-		return db.isSupportsAlterColumnType();
-	}
-
-	protected boolean isSupportsStringCaseSensitiveQuery() {
-		DB db = DBManagerUtil.getDB();
-
-		return db.isSupportsStringCaseSensitiveQuery();
-	}
-
-	protected boolean isSupportsUpdateWithInnerJoin() {
-		DB db = DBManagerUtil.getDB();
-
-		return db.isSupportsUpdateWithInnerJoin();
-	}
-
-	protected String normalizeName(
-			String name, DatabaseMetaData databaseMetaData)
-		throws SQLException {
-
-		if (databaseMetaData.storesLowerCaseIdentifiers()) {
-			return StringUtil.toLowerCase(name);
-		}
-
-		if (databaseMetaData.storesUpperCaseIdentifiers()) {
-			return StringUtil.toUpperCase(name);
-		}
-
-		return name;
-	}
-
-	protected void upgradeTable(String tableName, Object[][] tableColumns)
-		throws Exception {
-
-		UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
-			tableName, tableColumns);
-
-		upgradeTable.updateTable();
-	}
-
-	protected void upgradeTable(
-			String tableName, Object[][] tableColumns, String sqlCreate,
-			String[] sqlAddIndexes)
-		throws Exception {
-
-		UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
-			tableName, tableColumns);
-
-		upgradeTable.setCreateSQL(sqlCreate);
-		upgradeTable.setIndexesSQL(sqlAddIndexes);
-
-		upgradeTable.updateTable();
-	}
-
 	protected List<ObjectValuePair<String, IndexMetadata>> getIndexesSQL(
 			ClassLoader classLoader, String tableName)
 		throws IOException {
@@ -347,6 +273,80 @@ public abstract class UpgradeProcess
 		}
 
 		return _portalIndexesSQL.get(tableName);
+	}
+
+	protected long increment() {
+		DB db = DBManagerUtil.getDB();
+
+		return db.increment();
+	}
+
+	protected long increment(String name) {
+		DB db = DBManagerUtil.getDB();
+
+		return db.increment(name);
+	}
+
+	protected boolean isSupportsAlterColumnName() {
+		DB db = DBManagerUtil.getDB();
+
+		return db.isSupportsAlterColumnName();
+	}
+
+	protected boolean isSupportsAlterColumnType() {
+		DB db = DBManagerUtil.getDB();
+
+		return db.isSupportsAlterColumnType();
+	}
+
+	protected boolean isSupportsStringCaseSensitiveQuery() {
+		DB db = DBManagerUtil.getDB();
+
+		return db.isSupportsStringCaseSensitiveQuery();
+	}
+
+	protected boolean isSupportsUpdateWithInnerJoin() {
+		DB db = DBManagerUtil.getDB();
+
+		return db.isSupportsUpdateWithInnerJoin();
+	}
+
+	protected String normalizeName(
+			String name, DatabaseMetaData databaseMetaData)
+		throws SQLException {
+
+		if (databaseMetaData.storesLowerCaseIdentifiers()) {
+			return StringUtil.toLowerCase(name);
+		}
+
+		if (databaseMetaData.storesUpperCaseIdentifiers()) {
+			return StringUtil.toUpperCase(name);
+		}
+
+		return name;
+	}
+
+	protected void upgradeTable(String tableName, Object[][] tableColumns)
+		throws Exception {
+
+		UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
+			tableName, tableColumns);
+
+		upgradeTable.updateTable();
+	}
+
+	protected void upgradeTable(
+			String tableName, Object[][] tableColumns, String sqlCreate,
+			String[] sqlAddIndexes)
+		throws Exception {
+
+		UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
+			tableName, tableColumns);
+
+		upgradeTable.setCreateSQL(sqlCreate);
+		upgradeTable.setIndexesSQL(sqlAddIndexes);
+
+		upgradeTable.updateTable();
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(UpgradeProcess.class);
