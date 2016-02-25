@@ -76,31 +76,6 @@ public class TokenExtractor {
 			"\\b" + token + "\\b", variableName);
 	}
 
-	protected Iterator<String> getExpressionTokens() {
-		com.udojava.evalex.Expression expression =
-			new com.udojava.evalex.Expression(_expression);
-
-		return expression.getExpressionTokenizer();
-	}
-
-	protected boolean isBooleanConstant(String token) {
-		return _booleanConstants.contains(StringUtil.toLowerCase(token));
-	}
-
-	protected boolean isFunction(String token) {
-		return _availableFunctions.contains(StringUtil.toLowerCase(token));
-	}
-
-	protected boolean isFunctionAllowed(String token) {
-		return _allowedFunctions.contains(StringUtil.toLowerCase(token));
-	}
-
-	protected boolean isOperator(String token) {
-		Matcher tokenMatcher = _operatorsPattern.matcher(token);
-
-		return tokenMatcher.matches();
-	}
-
 	protected void extract() throws DDMExpressionException {
 		try {
 			Matcher matcher = _stringPattern.matcher(_expression);
@@ -139,12 +114,36 @@ public class TokenExtractor {
 		}
 	}
 
+	protected Iterator<String> getExpressionTokens() {
+		com.udojava.evalex.Expression expression =
+			new com.udojava.evalex.Expression(_expression);
+
+		return expression.getExpressionTokenizer();
+	}
+
+	protected boolean isBooleanConstant(String token) {
+		return _booleanConstants.contains(StringUtil.toLowerCase(token));
+	}
+
+	protected boolean isFunction(String token) {
+		return _availableFunctions.contains(StringUtil.toLowerCase(token));
+	}
+
+	protected boolean isFunctionAllowed(String token) {
+		return _allowedFunctions.contains(StringUtil.toLowerCase(token));
+	}
+
+	protected boolean isOperator(String token) {
+		Matcher tokenMatcher = _operatorsPattern.matcher(token);
+
+		return tokenMatcher.matches();
+	}
+
 	private static final Set<String> _allowedFunctions = SetUtil.fromArray(
 		new String[] {
 			"between", "concat", "contains", "equals", "if", "isemailaddress",
 			"isurl", "max", "min", "not", "sum"
 		});
-
 	private static final Set<String> _availableFunctions = SetUtil.fromArray(
 		new String[] {
 			"abs", "acos", "asin", "atan", "between", "ceiling", "concat",
@@ -153,10 +152,8 @@ public class TokenExtractor {
 			"rad", "random", "round", "sin", "sinh", "sqrt", "sum", "tan",
 			"tanh"
 		});
-
 	private static final Set<String> _booleanConstants = SetUtil.fromArray(
 		new String[] {"false", "true"});
-
 	private static final Pattern _operatorsPattern = Pattern.compile(
 		"[+-/\\*%\\^\\(\\)]|[<>=!]=?|&&|\\|\\|");
 	private static final Pattern _stringPattern = Pattern.compile(
@@ -165,6 +162,6 @@ public class TokenExtractor {
 		"\\b([a-zA-Z]+[\\w_]*)(?!\\()\\b");
 
 	private String _expression;
-	private Map<String, String> _variableMap = new HashMap<>();
+	private final Map<String, String> _variableMap = new HashMap<>();
 
 }
