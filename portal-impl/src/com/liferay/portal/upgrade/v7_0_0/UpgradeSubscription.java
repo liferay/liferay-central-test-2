@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.model.PortletPreferences;
 import com.liferay.portal.kernel.model.WorkflowInstanceLink;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
-import com.liferay.portal.kernel.upgrade.util.ClassNameUpgradeUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -46,6 +45,27 @@ import java.util.Map;
  * @author Iván Zaera
  */
 public class UpgradeSubscription extends UpgradeProcess {
+
+	protected void addClassName(long classNameId, String className)
+		throws Exception {
+
+		PreparedStatement ps = null;
+
+		try {
+			ps = connection.prepareStatement(
+				"insert into ClassName_ (mvccVersion, classNameId, value) " +
+					"values (?, ?, ?)");
+
+			ps.setLong(1, 0);
+			ps.setLong(2, classNameId);
+			ps.setString(3, className);
+
+			ps.executeUpdate();
+		}
+		finally {
+			DataAccess.cleanUp(ps);
+		}
+	}
 
 	protected void deleteOrphanedSubscriptions() throws Exception {
 		long classNameId = PortalUtil.getClassNameId(
@@ -79,7 +99,7 @@ public class UpgradeSubscription extends UpgradeProcess {
 
 		classNameId = increment();
 
-		ClassNameUpgradeUtil.addClassName(connection, classNameId, className);
+		addClassName(classNameId, className);
 
 		return classNameId;
 	}
