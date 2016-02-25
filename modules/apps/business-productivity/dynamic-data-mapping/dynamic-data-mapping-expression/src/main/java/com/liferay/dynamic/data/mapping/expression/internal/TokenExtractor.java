@@ -43,7 +43,7 @@ public class TokenExtractor {
 
 		_expression = expressionString;
 
-		_extract();
+		extract();
 	}
 
 	public String getExpression() {
@@ -101,7 +101,7 @@ public class TokenExtractor {
 		return tokenMatcher.matches();
 	}
 
-	private void _extract() throws DDMExpressionException {
+	protected void extract() throws DDMExpressionException {
 		try {
 			Matcher matcher = _stringPattern.matcher(_expression);
 
