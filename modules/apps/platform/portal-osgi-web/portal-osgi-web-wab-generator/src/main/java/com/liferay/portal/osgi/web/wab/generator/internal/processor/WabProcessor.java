@@ -490,7 +490,7 @@ public class WabProcessor {
 
 		if (!Version.isVersion(_bundleVersion)) {
 
-			// Check if it's in Maven format and convert it to OSGi.
+			// Convert from the Maven format to the OSGi format
 
 			Matcher matcher = _versionPatternMaven.matcher(_bundleVersion);
 
