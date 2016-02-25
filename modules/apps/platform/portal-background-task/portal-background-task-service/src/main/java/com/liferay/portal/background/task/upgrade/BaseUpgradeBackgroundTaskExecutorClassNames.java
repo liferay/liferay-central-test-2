@@ -14,8 +14,6 @@
 
 package com.liferay.portal.background.task.upgrade;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.StringBundler;
 
@@ -46,7 +44,8 @@ public class BaseUpgradeBackgroundTaskExecutorClassNames
 	}
 
 	protected void updateTaskExecutorClassName(
-		String oldTaskExecutorClassName, String newTaskExecutorClassName) {
+			String oldTaskExecutorClassName, String newTaskExecutorClassName)
+		throws Exception {
 
 		StringBundler sb = new StringBundler(5);
 
@@ -56,17 +55,7 @@ public class BaseUpgradeBackgroundTaskExecutorClassNames
 		sb.append(oldTaskExecutorClassName);
 		sb.append("'");
 
-		try {
-			runSQL(sb.toString());
-		}
-		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(e, e);
-			}
-		}
+		runSQL(sb.toString());
 	}
-
-	private static final Log _log = LogFactoryUtil.getLog(
-		BaseUpgradeBackgroundTaskExecutorClassNames.class);
 
 }

@@ -16,8 +16,6 @@ package com.liferay.exportimport.upgrade.v1_0_0;
 
 import com.liferay.exportimport.kernel.background.task.BackgroundTaskExecutorNames;
 import com.liferay.portal.background.task.upgrade.BaseUpgradeBackgroundTaskExecutorClassNames;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 /**
  * @author Daniel Kocsis
@@ -25,25 +23,14 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 public class UpgradeBackgroundTaskExecutorClassNames
 	extends BaseUpgradeBackgroundTaskExecutorClassNames {
 
-	protected void deleteStagingIndexingBackgroundTasks() {
-		try {
-			runSQL(
-				"delete from BackgroundTask where taskExecutorClassName='" +
-					"com.liferay.portal.lar.backgroundtask." +
-						"StagingIndexingBackgroundTaskExecutor'");
-		}
-		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(e, e);
-			}
-		}
-	}
-
 	@Override
 	protected void doUpgrade() throws Exception {
 		super.doUpgrade();
 
-		deleteStagingIndexingBackgroundTasks();
+		runSQL(
+			"delete from BackgroundTask where taskExecutorClassName = '" +
+				"com.liferay.portal.lar.backgroundtask." +
+					"StagingIndexingBackgroundTaskExecutor'");
 	}
 
 	@Override
@@ -93,8 +80,5 @@ public class UpgradeBackgroundTaskExecutorClassNames
 			}
 		};
 	}
-
-	private static final Log _log = LogFactoryUtil.getLog(
-		UpgradeBackgroundTaskExecutorClassNames.class);
 
 }
