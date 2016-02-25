@@ -53,9 +53,9 @@ public class DefaultWikiPageTitleValidator implements WikiPageTitleValidator {
 		}
 	}
 
-	private static Pattern _pageTitlePattern = Pattern.compile(
+	private static final Pattern _pageTitlePattern = Pattern.compile(
 		"[^\\\\\\[\\]\\|:;%<>]+");
-	private static Pattern _pageTitleRemovePattern = Pattern.compile(
+	private static final Pattern _pageTitleRemovePattern = Pattern.compile(
 		"[\\\\\\[\\]\\|:;%<>]+");
 
 }
