@@ -838,7 +838,7 @@ public class PermissionCheckerTest {
 
 	protected static void registerResourceActions() throws Exception {
 		Package pkg = PermissionCheckerTest.class.getPackage();
-		
+
 		String packageName = pkg.getName();
 
 		ResourceActionsUtil.read(
