@@ -84,15 +84,15 @@ public class TokenExtractor {
 	}
 
 	protected boolean isBooleanConstant(String token) {
-		return _BOOLEAN_CONSTANTS.contains(StringUtil.toLowerCase(token));
+		return _booleanConstants.contains(StringUtil.toLowerCase(token));
 	}
 
 	protected boolean isFunction(String token) {
-		return _AVAILABLE_FUNCTIONS.contains(StringUtil.toLowerCase(token));
+		return _availableFunctions.contains(StringUtil.toLowerCase(token));
 	}
 
 	protected boolean isFunctionAllowed(String token) {
-		return _ALLOWED_FUNCTIONS.contains(StringUtil.toLowerCase(token));
+		return _allowedFunctions.contains(StringUtil.toLowerCase(token));
 	}
 
 	protected boolean isOperator(String token) {
@@ -139,26 +139,23 @@ public class TokenExtractor {
 		}
 	}
 
-	private static final Set<String> _ALLOWED_FUNCTIONS = SetUtil.fromArray(
+	private static final Set<String> _allowedFunctions = SetUtil.fromArray(
 		new String[] {
 			"between", "concat", "contains", "equals", "if", "isemailaddress",
 			"isurl", "max", "min", "not", "sum"
-		}
-	);
+		});
 
-	private static final Set<String> _AVAILABLE_FUNCTIONS = SetUtil.fromArray(
+	private static final Set<String> _availableFunctions = SetUtil.fromArray(
 		new String[] {
 			"abs", "acos", "asin", "atan", "between", "ceiling", "concat",
 			"contains", "cos", "cosh", "deg", "equals", "floor", "if",
 			"isemailaddress", "isurl", "log", "log10", "max", "min", "not",
 			"rad", "random", "round", "sin", "sinh", "sqrt", "sum", "tan",
 			"tanh"
-		}
-	);
+		});
 
-	private static final Set<String> _BOOLEAN_CONSTANTS = SetUtil.fromArray(
-		new String[] {"false", "true"}
-	);
+	private static final Set<String> _booleanConstants = SetUtil.fromArray(
+		new String[] {"false", "true"});
 
 	private static final Pattern _operatorsPattern = Pattern.compile(
 		"[+-/\\*%\\^\\(\\)]|[<>=!]=?|&&|\\|\\|");
