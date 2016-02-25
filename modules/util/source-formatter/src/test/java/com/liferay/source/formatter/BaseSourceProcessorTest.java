@@ -35,22 +35,22 @@ public class BaseSourceProcessorTest {
 	@Test
 	public void testGetModuleLangPath() {
 		Assert.assertEquals(
-			"./modules/apps/business-productivity/dynamic-data-mapping/" +
-				"dynamic-data-mapping-lang",
+			"./modules/apps/business-productivity/dynamic-data-mapping" +
+				"/dynamic-data-mapping-lang",
 			_baseSourceProcessor.getModuleLangDirName(
-				"./modules/apps/business-productivity/dynamic-data-mapping/" +
-					"dynamic-data-mapping-web"));
+				"./modules/apps/business-productivity/dynamic-data-mapping" +
+					"/dynamic-data-mapping-web"));
 		Assert.assertEquals(
 			"./modules/apps/web-experience-management/staging/staging-lang",
 			_baseSourceProcessor.getModuleLangDirName(
 				"./modules/apps/web-experience-management/staging" +
 					"/staging-bar-web"));
 		Assert.assertEquals(
-			"./modules/apps/business-productivity/portal-workflow/" +
-				"portal-workflow-lang",
+			"./modules/apps/business-productivity/portal-workflow" +
+				"/portal-workflow-lang",
 			_baseSourceProcessor.getModuleLangDirName(
-				"./modules/apps/business-productivity/portal-workflow/" +
-					"portal-workflow-definition-web"));
+				"./modules/apps/business-productivity/portal-workflow" +
+					"/portal-workflow-definition-web"));
 	}
 
 	protected void setUpBaseSourceProcessor() {
