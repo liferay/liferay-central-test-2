@@ -101,7 +101,9 @@ public abstract class UpgradeCompanyId extends UpgradeProcess {
 				ResultSet rs = ps.executeQuery()) {
 
 				while (rs.next()) {
-					companyIds.add(rs.getLong(1));
+					long companyId = rs.getLong(1);
+
+					companyIds.add(companyId);
 				}
 			}
 
