@@ -508,10 +508,6 @@ public class WabProcessor {
 				_bundleVersion = sb.toString();
 			}
 			else {
-
-				// Use the entire spring as only the qualifier since we can't
-				// decipher it.
-
 				_bundleVersion = "0.0.0." + _bundleVersion;
 			}
 		}
