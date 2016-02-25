@@ -24,7 +24,7 @@ import java.sql.PreparedStatement;
 /**
  * @author Adolfo Pérez
  */
-public class UpgradePortletRepository extends UpgradeProcess {
+public class UpgradeRepository extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
