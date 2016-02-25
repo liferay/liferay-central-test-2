@@ -568,11 +568,7 @@
 		<var method="StringUtil#replace('${roleName}', ' ', '-')" name="key_roleName" />
 		<var method="StringUtil#lowerCase('${key_roleName}')" name="key_roleName" />
 
-		<execute function="SelectFrame" locator1="Permissions#PERMISSIONS_IFRAME" />
-
-		<var name="key_assetTitle" value="${calendarName}" />
-
-		<execute function="AssertTextEquals" locator1="Permissions#ASSET_TITLE" value1="${calendarName}" />
+		<execute macro="IFrame#selectPermissionsFrame" />
 
 		<execute function="Check" locator1="Permissions#EVENT_PERMISSIONS_VIEW_EVENT_DETAILS_CHECKBOX" value1="${roleName}" />
 
@@ -666,11 +662,7 @@
 		<var method="StringUtil#replace('${roleName}', ' ', '-')" name="key_roleName" />
 		<var method="StringUtil#lowerCase('${key_roleName}')" name="key_roleName" />
 
-		<execute function="SelectFrame" locator1="Permissions#PERMISSIONS_IFRAME" />
-
-		<var name="key_assetTitle" value="${calendarName}" />
-
-		<execute function="AssertTextEquals" locator1="Permissions#ASSET_TITLE" value1="${calendarName}" />
+		<execute macro="IFrame#selectPermissionsFrame" />
 
 		<execute function="Uncheck" locator1="Permissions#EVENT_PERMISSIONS_VIEW_CHECKBOX" value1="${roleName}" />
 
