@@ -492,7 +492,7 @@ public class WabProcessor {
 
 			// Convert from the Maven format to the OSGi format
 
-			Matcher matcher = _versionPatternMaven.matcher(_bundleVersion);
+			Matcher matcher = _versionMavenPattern.matcher(_bundleVersion);
 
 			if (matcher.matches()) {
 				StringBuilder sb = new StringBuilder();
@@ -1289,7 +1289,7 @@ public class WabProcessor {
 	private String _servicePackageName;
 	private final Pattern _tldPackagesPattern = Pattern.compile(
 		"<[^>]+?-class>\\p{Space}*?(.*?)\\p{Space}*?</[^>]+?-class>");
-	private final Pattern _versionPatternMaven = Pattern.compile(
+	private final Pattern _versionMavenPattern = Pattern.compile(
 		"(\\d{1,9})(\\.(\\d{1,9})(\\.(\\d{1,9})(-([-_\\da-zA-Z]+))?)?)?");
 
 }
