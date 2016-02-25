@@ -50,6 +50,7 @@ public class UpgradeKernelPackage extends UpgradeProcess {
 			upgradeTable(
 				"ResourcePermission", "name", getClassNames(),
 				WildcardMode.SURROUND);
+
 			upgradeTable(
 				"ResourceAction", "name", getResourceNames(),
 				WildcardMode.LEADING);
