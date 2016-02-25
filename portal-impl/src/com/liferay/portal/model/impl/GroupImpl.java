@@ -672,7 +672,7 @@ public class GroupImpl extends GroupBaseImpl {
 		catch (Exception e) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"Error getting staging group for " + getGroupId(), e);
+					"Unable to get staging group for group " + getGroupId(), e);
 			}
 
 			return null;
