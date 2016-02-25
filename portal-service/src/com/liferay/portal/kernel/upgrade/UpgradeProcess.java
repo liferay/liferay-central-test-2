@@ -175,7 +175,7 @@ public abstract class UpgradeProcess
 			runSQL(sb.toString());
 
 			for (ObjectValuePair<String, IndexMetadata> objectValuePair :
-					_getIndexesSQL(tableClass.getClassLoader(), tableName)) {
+					getIndexesSQL(tableClass.getClassLoader(), tableName)) {
 
 				IndexMetadata indexMetadata = objectValuePair.getValue();
 
@@ -188,9 +188,7 @@ public abstract class UpgradeProcess
 		}
 		catch (SQLException sqle) {
 			Field tableColumnsField = tableClass.getField("TABLE_COLUMNS");
-
 			Field tableSQLCreateField = tableClass.getField("TABLE_SQL_CREATE");
-
 			Field tableSQLAddIndexesField = tableClass.getField(
 				"TABLE_SQL_ADD_INDEXES");
 
@@ -277,7 +275,7 @@ public abstract class UpgradeProcess
 		upgradeTable.updateTable();
 	}
 
-	private List<ObjectValuePair<String, IndexMetadata>> _getIndexesSQL(
+	protected List<ObjectValuePair<String, IndexMetadata>> getIndexesSQL(
 			ClassLoader classLoader, String tableName)
 		throws IOException {
 
