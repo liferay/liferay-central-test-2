@@ -836,12 +836,14 @@ public class PermissionCheckerTest {
 	}
 
 	protected static void registerResourceActions() throws Exception {
-		String packageName = PermissionCheckerTest.class.getPackage().getName();
-		String packagePath = packageName.replace('.', '/');
+		Package pkg = PermissionCheckerTest.class.getPackage();
+		
+		String packageName = pkg.getName();
 
 		ResourceActionsUtil.read(
 			null, PermissionCheckerTest.class.getClassLoader(),
-			packagePath + "/dependencies/resource-actions.xml");
+			packageName.replace('.', '/') +
+				"/dependencies/resource-actions.xml");
 	}
 
 	protected static void removeResourceActions(String portletName) {
