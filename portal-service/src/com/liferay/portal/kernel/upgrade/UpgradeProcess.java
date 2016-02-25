@@ -18,14 +18,17 @@ import com.liferay.portal.kernel.dao.db.BaseDBProcess;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBManagerUtil;
 import com.liferay.portal.kernel.dao.db.DBProcessContext;
+import com.liferay.portal.kernel.dao.db.IndexMetadata;
+import com.liferay.portal.kernel.dao.db.IndexMetadataFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
-import com.liferay.portal.kernel.util.CharPool;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.ClassUtil;
+import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -171,11 +174,15 @@ public abstract class UpgradeProcess
 
 			runSQL(sb.toString());
 
-			for (String indexSQL : _getIndexesSQL(
-					tableClass.getClassLoader(), tableName)) {
+			for (ObjectValuePair<String, IndexMetadata> objectValuePair :
+					_getIndexesSQL(tableClass.getClassLoader(), tableName)) {
 
-				if (indexSQL.contains(columnName)) {
-					runSQL(indexSQL);
+				IndexMetadata indexMetadata = objectValuePair.getValue();
+
+				if (ArrayUtil.contains(
+						indexMetadata.getColumnNames(), columnName)) {
+
+					runSQL(objectValuePair.getKey());
 				}
 			}
 		}
@@ -270,14 +277,13 @@ public abstract class UpgradeProcess
 		upgradeTable.updateTable();
 	}
 
-	private List<String> _getIndexesSQL(
+	private List<ObjectValuePair<String, IndexMetadata>> _getIndexesSQL(
 			ClassLoader classLoader, String tableName)
 		throws IOException {
 
 		if (!PortalClassLoaderUtil.isPortalClassLoader(classLoader)) {
-			List<String> indexes = new ArrayList<>();
-
-			String onTableName = " on " + tableName;
+			List<ObjectValuePair<String, IndexMetadata>> objectValuePairs =
+				new ArrayList<>();
 
 			try (InputStream is = classLoader.getResourceAsStream(
 					"META-INF/sql/indexes.sql");
@@ -288,13 +294,21 @@ public abstract class UpgradeProcess
 				String line = null;
 
 				while ((line = unsyncBufferedReader.readLine()) != null) {
-					if (line.contains(onTableName)) {
-						indexes.add(line);
+					line = line.trim();
+
+					if (line.isEmpty()) {
+						continue;
 					}
+
+					objectValuePairs.add(
+						new ObjectValuePair<>(
+							line,
+							IndexMetadataFactoryUtil.createIndexMetadata(
+								line)));
 				}
 			}
 
-			return indexes;
+			return objectValuePairs;
 		}
 
 		if (!_portalIndexesSQL.isEmpty()) {
@@ -310,25 +324,27 @@ public abstract class UpgradeProcess
 			String line = null;
 
 			while ((line = unsyncBufferedReader.readLine()) != null) {
-				int x = line.indexOf(" on ");
+				line = line.trim();
 
-				if (x < 0) {
+				if (line.isEmpty()) {
 					continue;
 				}
 
-				int y = line.indexOf(CharPool.SPACE, x);
+				IndexMetadata indexMetadata =
+					IndexMetadataFactoryUtil.createIndexMetadata(line);
 
-				String currentTableName = line.substring(x + 4, y);
+				List<ObjectValuePair<String, IndexMetadata>> objectValuePairs =
+					_portalIndexesSQL.get(indexMetadata.getTableName());
 
-				List<String> indexes = _portalIndexesSQL.get(currentTableName);
+				if (objectValuePairs == null) {
+					objectValuePairs = new ArrayList<>();
 
-				if (indexes == null) {
-					indexes = new ArrayList<>();
-
-					_portalIndexesSQL.put(currentTableName, indexes);
+					_portalIndexesSQL.put(
+						indexMetadata.getTableName(), objectValuePairs);
 				}
 
-				indexes.add(line);
+				objectValuePairs.add(
+					new ObjectValuePair<>(line, indexMetadata));
 			}
 		}
 
@@ -337,7 +353,8 @@ public abstract class UpgradeProcess
 
 	private static final Log _log = LogFactoryUtil.getLog(UpgradeProcess.class);
 
-	private static final Map<String, List<String>> _portalIndexesSQL =
-		new HashMap<>();
+	private static final Map
+		<String, List<ObjectValuePair<String, IndexMetadata>>>
+			_portalIndexesSQL = new HashMap<>();
 
 }
