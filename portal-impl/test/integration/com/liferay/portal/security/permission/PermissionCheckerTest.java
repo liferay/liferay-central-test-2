@@ -128,7 +128,7 @@ public class PermissionCheckerTest {
 	}
 
 	@Test
-	public void testHasPermissionOnDefaultPortletResourcesWithNonSitePortlet()
+	public void testHasPermissionOnDefaultPortletResourcesWithNonsitePortlet()
 		throws Exception {
 
 		_user = UserTestUtil.addUser();
@@ -915,7 +915,7 @@ public class PermissionCheckerTest {
 		"test.com.liferay.portal.security.permission.SiteTest";
 
 	private static final String _NONSITE_PORTLET_RESOURCE_NAME =
-		"com_liferay_portal_security_PermissionCheckerTestNonSitePortlet";
+		"com_liferay_portal_security_PermissionCheckerTestNonsitePortlet";
 
 	private static final String _NONSITE_ROOT_MODEL_RESOURCE_NAME =
 		"com.liferay.portal.security.permission.nonsite";

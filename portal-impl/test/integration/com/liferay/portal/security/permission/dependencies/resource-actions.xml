@@ -3,7 +3,7 @@
 
 <resource-action-mapping>
 	<portlet-resource>
-		<portlet-name>com_liferay_portal_security_PermissionCheckerTestNonSitePortlet</portlet-name>
+		<portlet-name>com_liferay_portal_security_PermissionCheckerTestNonsitePortlet</portlet-name>
 		<permissions>
 			<supports>
 				<action-key>ADD_TEST_RESULT</action-key>
@@ -39,7 +39,7 @@
 	<model-resource>
 		<model-name>com.liferay.portal.security.permission.nonsite</model-name>
 		<portlet-ref>
-			<portlet-name>com_liferay_portal_security_PermissionCheckerTestNonSitePortlet</portlet-name>
+			<portlet-name>com_liferay_portal_security_PermissionCheckerTestNonsitePortlet</portlet-name>
 		</portlet-ref>
 		<root>true</root>
 		<permissions>
