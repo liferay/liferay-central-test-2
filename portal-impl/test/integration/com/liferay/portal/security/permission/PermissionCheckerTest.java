@@ -42,6 +42,7 @@ import com.liferay.portal.kernel.test.rule.SynchronousDestinationTestRule;
 import com.liferay.portal.kernel.test.util.CompanyTestUtil;
 import com.liferay.portal.kernel.test.util.GroupTestUtil;
 import com.liferay.portal.kernel.test.util.OrganizationTestUtil;
+import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.test.util.RoleTestUtil;
 import com.liferay.portal.kernel.test.util.TestPropsValues;
 import com.liferay.portal.kernel.test.util.UserTestUtil;
@@ -155,7 +156,7 @@ public class PermissionCheckerTest {
 			Assert.assertFalse(hasPermission);
 
 			_role = RoleTestUtil.addRole(
-				"PermissionTestRole", RoleConstants.TYPE_REGULAR);
+				RandomTestUtil.randomString(), RoleConstants.TYPE_REGULAR);
 
 			UserLocalServiceUtil.setRoleUsers(
 				_role.getRoleId(), new long[] {_user.getUserId()});
@@ -227,7 +228,7 @@ public class PermissionCheckerTest {
 		_user = UserTestUtil.addUser();
 
 		_role = RoleTestUtil.addRole(
-			"PermissionTestRole", RoleConstants.TYPE_REGULAR);
+			RandomTestUtil.randomString(), RoleConstants.TYPE_REGULAR);
 
 		UserLocalServiceUtil.setRoleUsers(
 			_role.getRoleId(), new long[] {_user.getUserId()});
@@ -337,7 +338,7 @@ public class PermissionCheckerTest {
 		_user = UserTestUtil.addUser();
 
 		_role = RoleTestUtil.addRole(
-			"PermissionTestRole", RoleConstants.TYPE_REGULAR);
+			RandomTestUtil.randomString(), RoleConstants.TYPE_REGULAR);
 
 		UserLocalServiceUtil.setRoleUsers(
 			_role.getRoleId(), new long[] {_user.getUserId()});
@@ -390,7 +391,7 @@ public class PermissionCheckerTest {
 		_user = UserTestUtil.addUser();
 
 		_role = RoleTestUtil.addRole(
-			"PermissionTestRole", RoleConstants.TYPE_REGULAR);
+			RandomTestUtil.randomString(), RoleConstants.TYPE_REGULAR);
 
 		UserLocalServiceUtil.setRoleUsers(
 			_role.getRoleId(), new long[] {_user.getUserId()});
@@ -442,7 +443,7 @@ public class PermissionCheckerTest {
 		_user = UserTestUtil.addUser();
 
 		_role = RoleTestUtil.addRole(
-			"PermissionTestRole", RoleConstants.TYPE_REGULAR);
+			RandomTestUtil.randomString(), RoleConstants.TYPE_REGULAR);
 
 		UserLocalServiceUtil.setRoleUsers(
 			_role.getRoleId(), new long[] {_user.getUserId()});
