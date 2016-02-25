@@ -63,14 +63,8 @@ public class ReindexStatusMessageSenderImpl
 			message);
 	}
 
-	@Reference(unbind = "-")
-	protected void setBackgroundTaskStatusMessageSender(
-		BackgroundTaskStatusMessageSender backgroundTaskStatusMessageSender) {
-
-		_backgroundTaskStatusMessageSender = backgroundTaskStatusMessageSender;
-	}
-
-	private volatile BackgroundTaskStatusMessageSender
+	@Reference
+	private BackgroundTaskStatusMessageSender
 		_backgroundTaskStatusMessageSender;
 
 }
