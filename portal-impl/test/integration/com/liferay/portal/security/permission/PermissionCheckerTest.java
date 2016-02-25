@@ -292,10 +292,10 @@ public class PermissionCheckerTest {
 
 			PermissionChecker permissionChecker = _getPermissionChecker(_user);
 
-			boolean isCompanyAdmin = permissionChecker.isCompanyAdmin(
+			boolean companyAdmin = permissionChecker.isCompanyAdmin(
 				_company.getCompanyId());
 
-			Assert.assertTrue(isCompanyAdmin);
+			Assert.assertTrue(companyAdmin);
 
 			permissionChecker.hasPermission(
 				0, _MODEL_RESOURCE_NAME, resourceId, ActionKeys.VIEW);
