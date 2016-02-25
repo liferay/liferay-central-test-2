@@ -91,8 +91,9 @@ public class UpgradeKernelPackage extends UpgradeProcess {
 	}
 
 	protected void upgradeTable(
-		List<Future<Void>> futures, String tableName, String columnName,
-		String[][] names, WildcardMode wildcardMode) {
+			List<Future<Void>> futures, String tableName, String columnName,
+			String[][] names, WildcardMode wildcardMode)
+		throws SQLException {
 
 		StringBundler updateSB = new StringBundler(7);
 
