@@ -319,6 +319,7 @@ public class DDMFormRendererImpl implements DDMFormRenderer {
 		}
 
 		template.put("showSubmitButton", showSubmitButton);
+
 		template.put("strings", getLanguageStringsMap(resourceBundle));
 
 		String submitLabel = GetterUtil.getString(
