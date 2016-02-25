@@ -93,7 +93,7 @@ public abstract class UpgradeCompanyId extends UpgradeProcess {
 			}
 		}
 
-		protected List<Long> getCompanyIds() {
+		protected List<Long> getCompanyIds() throws SQLException {
 			List<Long> companyIds = new ArrayList<>();
 
 			try (PreparedStatement ps = connection.prepareStatement(
@@ -104,15 +104,13 @@ public abstract class UpgradeCompanyId extends UpgradeProcess {
 					companyIds.add(rs.getLong(1));
 				}
 			}
-			catch (SQLException sqle) {
-				throw new RuntimeException(sqle);
-			}
 
 			return companyIds;
 		}
 
 		protected String getSelectSQL(
-			String foreignTableName, String foreignColumnName) {
+				String foreignTableName, String foreignColumnName)
+			throws SQLException {
 
 			List<Long> companyIds = getCompanyIds();
 
@@ -149,7 +147,8 @@ public abstract class UpgradeCompanyId extends UpgradeProcess {
 		}
 
 		protected String getUpdateSQL(
-			String foreignTableName, String foreignColumnName) {
+				String foreignTableName, String foreignColumnName)
+			throws SQLException {
 
 			return getUpdateSQL(
 				getSelectSQL(foreignTableName, foreignColumnName));
