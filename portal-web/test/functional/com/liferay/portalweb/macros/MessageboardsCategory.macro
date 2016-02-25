@@ -212,6 +212,7 @@
 		<var method="StringUtil#lowerCase('${key_roleName}')" name="key_roleName" />
 
 		<execute function="Click" locator1="MessageBoards#CATEGORY_LIST_ACTIONS" />
+
 		<execute function="AssertClick" locator1="MenuItem#PERMISSIONS" value1="Permissions" />
 
 		<execute macro="IFrame#selectPermissionsFrame" />
