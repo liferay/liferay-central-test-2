@@ -15,20 +15,51 @@
 package com.liferay.portal.upgrade.v7_0_0;
 
 import com.liferay.message.boards.kernel.constants.MBConstants;
-import com.liferay.portal.kernel.upgrade.BaseUpgradePortletRepository;
+import com.liferay.portal.kernel.dao.jdbc.DataAccess;
+import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portlet.blogs.constants.BlogsConstants;
+
+import java.sql.PreparedStatement;
 
 /**
  * @author Adolfo Pérez
  */
-public class UpgradePortletRepository extends BaseUpgradePortletRepository {
+public class UpgradePortletRepository extends UpgradeProcess {
 
 	@Override
+	protected void doUpgrade() throws Exception {
+		updateRepositoryPortletId();
+	}
+
 	protected String[][] getRenamePortletNamesArray() {
 		return new String[][] {
 			new String[] {"19", MBConstants.SERVICE_NAME},
 			new String[] {"33", BlogsConstants.SERVICE_NAME}
 		};
+	}
+
+	protected void updateRepositoryPortletId() throws Exception {
+		for (String[] renamePortletNames : getRenamePortletNamesArray()) {
+			String oldPortletName = renamePortletNames[0];
+			String newPortletName = renamePortletNames[1];
+
+			PreparedStatement ps = null;
+
+			try {
+				ps = connection.prepareStatement(
+					"update Repository set portletId = ?, name = ? where " +
+						"portletId = ?");
+
+				ps.setString(1, newPortletName);
+				ps.setString(2, newPortletName);
+				ps.setString(3, oldPortletName);
+
+				ps.executeUpdate();
+			}
+			finally {
+				DataAccess.cleanUp(ps);
+			}
+		}
 	}
 
 }
