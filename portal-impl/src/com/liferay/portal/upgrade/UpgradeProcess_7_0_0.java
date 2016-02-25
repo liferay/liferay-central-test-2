@@ -89,11 +89,11 @@ public class UpgradeProcess_7_0_0 extends UpgradeProcess {
 		upgrade(UpgradePhone.class);
 		upgrade(UpgradePortalPreferences.class);
 		upgrade(UpgradePortletDisplayTemplatePreferences.class);
-		upgrade(UpgradeRepository.class);
 		upgrade(UpgradePortletId.class);
 		upgrade(UpgradePostgreSQL.class);
 		upgrade(UpgradeRatings.class);
 		upgrade(UpgradeRelease.class);
+		upgrade(UpgradeRepository.class);
 		upgrade(UpgradeRepositoryEntry.class);
 		upgrade(UpgradeResourcePermission.class);
 		upgrade(UpgradeSharding.class);
