@@ -73,10 +73,6 @@
 		<execute macro="Alert#viewSuccessMessage" />
 	</command>
 
-	<command name="publish">
-		<execute macro="PortletEntry#save" />
-	</command>
-
 	<command name="tearDownCP">
 		<execute macro="Navigator#openURL" />
 
