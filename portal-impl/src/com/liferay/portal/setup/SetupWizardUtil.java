@@ -162,6 +162,7 @@ public class SetupWizardUtil {
 			PropsKeys.SETUP_WIZARD_ENABLED, String.valueOf(false));
 
 		_updateCompany(request);
+
 		_updateAdminUser(request, response, unicodeProperties);
 
 		HttpSession session = request.getSession();
