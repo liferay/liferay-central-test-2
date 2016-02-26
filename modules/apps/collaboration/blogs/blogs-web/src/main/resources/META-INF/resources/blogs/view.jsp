@@ -17,14 +17,14 @@
 <%@ include file="/blogs/init.jsp" %>
 
 <%
+String mvcRenderCommandName = ParamUtil.getString(request, "mvcRenderCommandName");
+
 long assetCategoryId = ParamUtil.getLong(request, "categoryId");
 String assetTagName = ParamUtil.getString(request, "tag");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("mvcRenderCommandName", "/blogs/view");
-
-String mvcRenderCommandName = ParamUtil.getString(request, "mvcRenderCommandName");
 %>
 
 <portlet:actionURL name="/blogs/edit_entry" var="restoreTrashEntriesURL">
