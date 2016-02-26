@@ -155,7 +155,7 @@ public abstract class UpgradeProcess
 				}
 			}
 
-			Map<String, Set<String>> indexMap = new HashMap<>();
+			Map<String, Set<String>> columnNamesMap = new HashMap<>();
 
 			while (rs2.next()) {
 				String indexName = rs2.getString("INDEX_NAME");
@@ -166,12 +166,12 @@ public abstract class UpgradeProcess
 					continue;
 				}
 
-				Set<String> columnNames = indexMap.get(indexName);
+				Set<String> columnNames = columnNamesMap.get(indexName);
 
 				if (columnNames == null) {
 					columnNames = new HashSet<>();
 
-					indexMap.put(indexName, columnNames);
+					columnNamesMap.put(indexName, columnNames);
 				}
 
 				columnNames.add(rs2.getString("COLUMN_NAME"));
@@ -181,7 +181,7 @@ public abstract class UpgradeProcess
 				String columnName = columnInfo[0];
 
 				for (Map.Entry<String, Set<String>> entry :
-						indexMap.entrySet()) {
+						columnNamesMap.entrySet()) {
 
 					Set<String> columnNames = entry.getValue();
 
@@ -219,7 +219,7 @@ public abstract class UpgradeProcess
 		}
 		catch (SQLException sqle) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Fallback to table backup", sqle);
+				_log.warn("Fallback to recreating the table", sqle);
 			}
 
 			Field tableColumnsField = tableClass.getField("TABLE_COLUMNS");
