@@ -1948,8 +1948,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	 */
 	@Override
 	public void rebuildTree(long companyId) throws PortalException {
-		final long[] hierarchicalClassNameIds =
-			getClassNameIdsOfHierarchicalEntities();
+		final long classNameId = classNameLocalService.getClassNameId(
+			Group.class);
 
 		TreePathUtil.rebuildTree(
 			companyId, GroupConstants.DEFAULT_PARENT_GROUP_ID, StringPool.SLASH,
@@ -1961,9 +1961,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 					int size) {
 
 					return groupPersistence.findByG_C_C_P(
-						previousId, companyId, hierarchicalClassNameIds,
-						parentPrimaryKey, QueryUtil.ALL_POS, size,
-						new GroupIdComparator(true));
+						previousId, companyId, classNameId, parentPrimaryKey,
+						QueryUtil.ALL_POS, size, new GroupIdComparator(true));
 				}
 
 			}
@@ -3854,10 +3853,6 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		}
 
 		return _classNameIds;
-	}
-
-	protected long[] getClassNameIdsOfHierarchicalEntities() {
-		return new long[] {classNameLocalService.getClassNameId(Group.class)};
 	}
 
 	protected String getFriendlyURL(
