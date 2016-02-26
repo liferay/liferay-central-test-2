@@ -637,7 +637,7 @@
 
 		<execute macro="PortletEntry#publish" />
 
-		<execute macro="Alert#viewRequestCompletedSuccessMessage" />
+		<execute macro="Alert#viewSuccessMessage" />
 	</command>
 
 	<command name="editFrontPagePG">
