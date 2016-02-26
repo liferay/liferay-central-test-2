@@ -77,7 +77,6 @@
 
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="Web Content Page" />
-			<var name="siteName" value="Liferay" />
 		</execute>
 
 		<execute macro="WebContent#viewPGViaWCD">
