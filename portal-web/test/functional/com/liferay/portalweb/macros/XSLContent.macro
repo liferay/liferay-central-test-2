@@ -43,6 +43,7 @@
 
 	<command name="viewConfigurationXSLContent">
 		<execute function="SelectFrame" locator1="IFrame#DIALOG" />
+
 		<execute function="AssertTextEquals" locator1="TextInput#SETUP_XML_URL" value1="@portlet_context_url@/example.xml" />
 		<execute function="AssertTextEquals" locator1="TextInput#SETUP_XSL_URL" value1="@portlet_context_url@/example.xsl" />
 
