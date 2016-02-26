@@ -342,9 +342,7 @@
 	</command>
 
 	<command name="publish">
-		<execute macro="Button#clickPublish" />
-
-		<execute macro="Alert#viewSuccessMessage" />
+		<execute macro="PortletEntry#publish" />
 	</command>
 
 	<command name="publishViaDDLDisplayPG">
@@ -370,9 +368,7 @@
 	</command>
 
 	<command name="save">
-		<execute macro="Button#clickSave" />
-
-		<execute macro="Alert#viewSuccessMessage" />
+		<execute macro="PortletEntry#save" />
 	</command>
 
 	<command name="saveAsDraftCP">
