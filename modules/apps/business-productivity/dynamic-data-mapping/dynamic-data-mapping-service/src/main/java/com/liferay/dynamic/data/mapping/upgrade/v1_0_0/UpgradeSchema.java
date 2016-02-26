@@ -57,6 +57,7 @@ public class UpgradeSchema extends UpgradeProcess {
 		}
 
 		alterColumnType(DDMStructureTable.class, "description", "TEXT null");
+
 		alterColumnType(DDMTemplateTable.class, "description", "TEXT null");
 	}
 
