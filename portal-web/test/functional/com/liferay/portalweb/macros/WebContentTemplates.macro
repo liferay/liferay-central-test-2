@@ -207,10 +207,6 @@
 		</if>
 	</command>
 
-	<command name="save">
-		<execute macro="PortletEntry#save" />
-	</command>
-
 	<command name="tearDownCP">
 		<execute macro="Navigator#openURL" />
 

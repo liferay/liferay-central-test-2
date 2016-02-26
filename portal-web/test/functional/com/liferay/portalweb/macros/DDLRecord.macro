@@ -340,7 +340,7 @@
 			</then>
 		</while>
 	</command>
-	
+
 	<command name="publishViaDDLDisplayPG">
 		<if>
 			<isset var="workflowDefinition" />
@@ -361,10 +361,6 @@
 		<execute function="ClickNoError" locator1="Translation#REMOVE_TRANSLATION" />
 
 		<execute function="Confirm" value1="Are you sure you want to deactivate this language?" />
-	</command>
-
-	<command name="save">
-		<execute macro="PortletEntry#save" />
 	</command>
 
 	<command name="saveAsDraftCP">

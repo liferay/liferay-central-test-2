@@ -671,10 +671,6 @@
 		<execute function="SelectFrame" value1="relative=top" />
 	</command>
 
-	<command name="save">
-		<execute macro="PortletEntry#save" />
-	</command>
-
 	<command name="searchOtherCalendars">
 		<execute function="Type" locator1="Calendar#OTHER_CALENDARS_SEARCH" value1="${searchValue}" />
 	</command>

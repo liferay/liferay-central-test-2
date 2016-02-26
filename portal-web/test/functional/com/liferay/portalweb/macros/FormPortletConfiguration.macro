@@ -1,10 +1,6 @@
 <definition>
 	<var name="formName" value="Created Form Name" />
 
-	<command name="save">
-		<execute macro="PortletEntry#save" />
-	</command>
-
 	<command name="selectForm">
 		<var name="key_formName" value="${formName}" />
 
