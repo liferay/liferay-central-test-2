@@ -97,7 +97,7 @@
 
 		<execute function="Check" locator1="Checkbox#ANONYMOUS" />
 
-		<execute macro="MessageboardsThread#publish" />
+		<execute macro="PortletEntry#publish" />
 
 		<execute function="AssertTextEquals#assertPartialText" locator1="MessageBoardsThread#THREAD_USERNAME" value1="Anonymous" />
 	</command>
@@ -115,7 +115,7 @@
 
 		<execute function="Check" locator1="Checkbox#MARK_AS_A_QUESTION" />
 
-		<execute macro="MessageboardsThread#publish" />
+		<execute macro="PortletEntry#publish" />
 
 		<execute function="Click" locator1="Icon#BACK" />
 
@@ -137,7 +137,7 @@
 
 		<execute function="UploadCommonFile" locator1="MessageBoardsEditMessage#ATTACHMENTS_FILE_FIELD_1" value1="${mbThreadAttachment}" />
 
-		<execute macro="MessageboardsThread#publish" />
+		<execute macro="PortletEntry#publish" />
 	</command>
 
 	<command name="addPGWithPermissions">
@@ -153,7 +153,7 @@
 
 		<execute function="Select" locator1="AssetPermissions#VIEWABLE_AS_SELECT" value1="${viewableBySelection}" />
 
-		<execute macro="MessageboardsThread#publish" />
+		<execute macro="PortletEntry#publish" />
 	</command>
 
 	<command name="addPGWithPriority">
@@ -169,7 +169,7 @@
 
 		<execute function="Select" locator1="MessageBoardsEditMessage#PRIORITY_SELECT" value1="${threadPriority}" />
 
-		<execute macro="MessageboardsThread#publish" />
+		<execute macro="PortletEntry#publish" />
 	</command>
 
 	<command name="addTagPGCmd">
@@ -575,7 +575,7 @@
 
 		<execute function="Type#typeCKEditorWaitForCKEditor" locator1="CKEditor#BODY_FIELD" value1="${threadReplyBody}" />
 
-		<execute macro="MessageboardsThread#publish" />
+		<execute macro="PortletEntry#publish" />
 	</command>
 
 	<command name="ratePG">

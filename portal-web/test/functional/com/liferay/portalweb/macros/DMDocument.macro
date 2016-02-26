@@ -254,7 +254,7 @@
 			<var name="googleDocName" value="${googleDocName}" />
 		</execute>
 
-		<execute macro="GoogleDoc#publish" />
+		<execute macro="PortletEntry#publish" />
 	</command>
 
 	<command name="addMultiplePG">
