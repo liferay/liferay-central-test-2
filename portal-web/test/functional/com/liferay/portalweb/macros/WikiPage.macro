@@ -594,7 +594,7 @@
 		<execute function="Click" locator1="WikiTable#ALL_PAGES_VERTICAL_ELLIPSIS" />
 		<execute macro="PortletEntry#clickMoveToRecycleBin" />
 		<execute function="AssertElementPresent" locator1="Message#SUCCESS" />
-		<execute function="AssertTextEquals#assertPartialText" locator1="Wiki#ALL_PAGES_TABLE_REVISION" value1="1.0" />
+		<execute function="AssertTextEquals#assertPartialText" locator1="WikiTable#ALL_PAGES_REVISION" value1="1.0" />
 
 		<execute macro="Navigator#openURL" />
 
@@ -658,7 +658,7 @@
 		<execute function="AssertClick" locator1="Button#PUBLISH" value1="Publish" />
 
 		<execute function="AssertTextEquals" locator1="WikiEntry#BODY" value1="${wikiPageContentEdit}" />
-		
+
 		<execute macro="Alert#viewSuccessMessage" />
 	</command>
 
