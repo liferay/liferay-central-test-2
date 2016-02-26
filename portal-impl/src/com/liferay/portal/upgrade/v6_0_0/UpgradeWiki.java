@@ -29,6 +29,7 @@ public class UpgradeWiki extends UpgradeProcess {
 			WikiPageTable.class,
 			new String[] {"parentTitle", "VARCHAR(255) null"},
 			new String[] {"redirectTitle", "VARCHAR(255) null"});
+
 		alterColumnType(
 			WikiPageResourceTable.class, "title", "VARCHAR(255) null");
 	}
