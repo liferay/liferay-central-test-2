@@ -122,6 +122,9 @@
 		<var name="key_dmDocumentTitle" value="Test XML Title" />
 
 		<execute function="AssertClick" locator1="DocumentsAndMedia#ICON_DOCUMENT_TITLE" value1="Test XML Title" />
+		
+		<execute function="Click" locator1="Icon#INFO" />
+
 		<execute function="ClickNoError" locator1="Link#URL" />
 
 		<execute function="Pause" locator1="5000" />
@@ -145,6 +148,9 @@
 		<var name="key_dmDocumentTitle" value="Test XSL Title" />
 
 		<execute function="AssertClick" locator1="DocumentsAndMedia#ICON_DOCUMENT_TITLE" value1="Test XSL Title" />
+		
+		<execute function="Click" locator1="Icon#INFO" />
+
 		<execute function="ClickNoError" locator1="Link#URL" />
 
 		<execute function="Pause" locator1="5000" />
@@ -263,6 +269,9 @@
 		<var name="key_dmDocumentTitle" value="Test Corrupt XML Title" />
 
 		<execute function="AssertClick" locator1="DocumentsAndMedia#ICON_DOCUMENT_TITLE" value1="Test Corrupt XML Title" />
+
+		<execute function="Click" locator1="Icon#INFO" />
+
 		<execute function="ClickNoError" locator1="Link#URL" />
 
 		<execute function="Pause" locator1="5000" />
@@ -286,6 +295,9 @@
 		<var name="key_dmDocumentTitle" value="Test XSL Title" />
 
 		<execute function="AssertClick" locator1="DocumentsAndMedia#ICON_DOCUMENT_TITLE" value1="Test XSL Title" />
+
+		<execute function="Click" locator1="Icon#INFO" />
+
 		<execute function="ClickNoError" locator1="Link#URL" />
 
 		<execute function="Pause" locator1="5000" />
@@ -392,6 +404,9 @@
 		<var name="key_dmDocumentTitle" value="Test XML Title" />
 
 		<execute function="AssertClick" locator1="DocumentsAndMedia#ICON_DOCUMENT_TITLE" value1="Test XML Title" />
+		
+		<execute function="Click" locator1="Icon#INFO" />
+
 		<execute function="ClickNoError" locator1="Link#URL" />
 
 		<execute function="Pause" locator1="5000" />
@@ -415,6 +430,9 @@
 		<var name="key_dmDocumentTitle" value="Test Corrupt XSL Title" />
 
 		<execute function="AssertClick" locator1="DocumentsAndMedia#ICON_DOCUMENT_TITLE" value1="Test Corrupt XSL Title" />
+
+		<execute function="Click" locator1="Icon#INFO" />
+
 		<execute function="ClickNoError" locator1="Link#URL" />
 
 		<execute function="Pause" locator1="5000" />
@@ -519,6 +537,9 @@
 		<var name="key_dmDocumentTitle" value="Test XML Title" />
 
 		<execute function="AssertClick" locator1="DocumentsAndMedia#ICON_DOCUMENT_TITLE" value1="Test XML Title" />
+
+		<execute function="Click" locator1="Icon#INFO" />
+
 		<execute function="ClickNoError" locator1="Link#URL" />
 
 		<execute function="Pause" locator1="5000" />
@@ -542,6 +563,9 @@
 		<var name="key_dmDocumentTitle" value="Test XSL Title" />
 
 		<execute function="AssertClick" locator1="DocumentsAndMedia#ICON_DOCUMENT_TITLE" value1="Test XSL Title" />
+
+		<execute function="Click" locator1="Icon#INFO" />
+
 		<execute function="ClickNoError" locator1="Link#URL" />
 
 		<execute function="Pause" locator1="5000" />
