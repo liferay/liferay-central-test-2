@@ -908,10 +908,10 @@ public class JournalServiceVerifyProcess extends VerifyLayout {
 	}
 
 	protected void verifyURLTitle() throws Exception {
-		try (PreparedStatement ps = connection.prepareStatement(
+		try (PreparedStatement ps1 = connection.prepareStatement(
 				"select distinct groupId, articleId, urlTitle from " +
 					"JournalArticle");
-			ResultSet rs = ps.executeQuery()) {
+			ResultSet rs = ps1.executeQuery()) {
 
 			try (PreparedStatement ps2 =
 					AutoBatchPreparedStatementUtil.autoBatch(
