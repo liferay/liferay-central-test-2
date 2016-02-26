@@ -50,32 +50,20 @@ public class UpgradePostgreSQL extends UpgradeProcess {
 	}
 
 	protected String getCurrentSchema() throws Exception {
-		String schema = null;
-
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			ps = connection.prepareStatement("select current_schema();");
-
-			rs = ps.executeQuery();
+		try (PreparedStatement ps = connection.prepareStatement(
+				"select current_schema();");
+			ResultSet rs = ps.executeQuery()) {
 
 			if (rs.next()) {
-				schema = (String)rs.getObject("current_schema");
+				return (String)rs.getObject("current_schema");
 			}
+			
+			return null;
 		}
-		finally {
-			DataAccess.cleanUp(ps, rs);
-		}
-
-		return schema;
 	}
 
 	protected Map<String, String> getOidColumnNames() throws Exception {
 		Map<String, String> columnsWithOids = new HashMap<>();
-
-		PreparedStatement ps = null;
-		ResultSet rs = null;
 
 		StringBundler sb = new StringBundler(4);
 
@@ -92,10 +80,8 @@ public class UpgradePostgreSQL extends UpgradeProcess {
 
 		sb.append("' and data_type='oid';");
 
-		try {
-			ps = connection.prepareStatement(sb.toString());
-
-			rs = ps.executeQuery();
+		try (PreparedStatement ps = connection.prepareStatement(sb.toString());
+			ResultSet rs = ps.executeQuery()) {
 
 			while (rs.next()) {
 				String tableName = (String)rs.getObject("table_name");
@@ -106,17 +92,11 @@ public class UpgradePostgreSQL extends UpgradeProcess {
 
 			return columnsWithOids;
 		}
-
-		finally {
-			DataAccess.cleanUp(ps, rs);
-		}
 	}
 
 	protected void updateOrphanedLargeObjects(
 			Map<String, String> oidColumnNames)
 		throws Exception {
-
-		PreparedStatement ps = null;
 
 		StringBundler sb = new StringBundler();
 
@@ -142,13 +122,10 @@ public class UpgradePostgreSQL extends UpgradeProcess {
 			i++;
 		}
 
-		try {
-			ps = connection.prepareStatement(sb.toString());
+		try (PreparedStatement ps = connection.prepareStatement(
+				sb.toString())) {
 
 			ps.execute();
-		}
-		finally {
-			DataAccess.cleanUp(ps);
 		}
 	}
 
@@ -156,19 +133,13 @@ public class UpgradePostgreSQL extends UpgradeProcess {
 		throws Exception {
 
 		for (Map.Entry<String, String> entry : oidColumnNames.entrySet()) {
-			PreparedStatement ps = null;
-
 			String tableName = entry.getKey();
 			String columnName = entry.getValue();
 
-			try {
-				ps = connection.prepareStatement(
-					PostgreSQLDB.getCreateRulesSQL(tableName, columnName));
+			try (PreparedStatement ps = connection.prepareStatement(
+					PostgreSQLDB.getCreateRulesSQL(tableName, columnName))) {
 
 				ps.executeUpdate();
-			}
-			finally {
-				DataAccess.cleanUp(ps);
 			}
 		}
 	}
