@@ -130,7 +130,8 @@ public abstract class UpgradeProcess
 		alterColumnType(tableClass, new String[] {columnName, columnType});
 	}
 
-	protected void alterColumnType(Class<?> tableClass, String[]... columnInfos)
+	protected void alterColumnType(
+			Class<?> tableClass, String[]... columnNamesAndColumnTypes)
 		throws Exception {
 
 		Field tableNameField = tableClass.getField("TABLE_NAME");
@@ -177,8 +178,10 @@ public abstract class UpgradeProcess
 				columnNames.add(rs2.getString("COLUMN_NAME"));
 			}
 
-			for (String[] columnInfo : columnInfos) {
-				String columnName = columnInfo[0];
+			for (String[] columnNameAndColumnType :
+					columnNamesAndColumnTypes) {
+
+				String columnName = columnNameAndColumnType[0];
 
 				for (Map.Entry<String, Set<String>> entry :
 						columnNamesMap.entrySet()) {
@@ -199,7 +202,7 @@ public abstract class UpgradeProcess
 				sb.append(" ");
 				sb.append(columnName);
 				sb.append(" ");
-				sb.append(columnInfo[1]);
+				sb.append(columnNameAndColumnType[1]);
 
 				runSQL(sb.toString());
 
