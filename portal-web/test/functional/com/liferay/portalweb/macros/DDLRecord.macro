@@ -340,11 +340,7 @@
 			</then>
 		</while>
 	</command>
-
-	<command name="publish">
-		<execute macro="PortletEntry#publish" />
-	</command>
-
+	
 	<command name="publishViaDDLDisplayPG">
 		<if>
 			<isset var="workflowDefinition" />

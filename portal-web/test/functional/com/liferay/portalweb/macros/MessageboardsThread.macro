@@ -564,10 +564,6 @@
 		<execute function="AssertTextEquals" locator1="MessageBoardsThread#THREAD_BODY" value1="${threadBody}" />
 	</command>
 
-	<command name="publish">
-		<execute macro="PortletEntry#publish" />
-	</command>
-
 	<command name="quickReplyPG">
 		<var name="key_threadSubject" value="${threadSubject}" />
 
