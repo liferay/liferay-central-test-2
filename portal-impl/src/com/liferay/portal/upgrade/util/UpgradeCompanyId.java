@@ -39,7 +39,7 @@ public abstract class UpgradeCompanyId extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		List<Callable<Void>> callableTableUpdaters = new ArrayList<>();
+		List<Callable<Void>> callables = new ArrayList<>();
 
 		for (TableUpdater tableUpdater : getTableUpdaters()) {
 			if (hasColumn(tableUpdater.getTableName(), "companyId")) {
@@ -50,15 +50,14 @@ public abstract class UpgradeCompanyId extends UpgradeProcess {
 				continue;
 			}
 
-			callableTableUpdaters.add(tableUpdater);
+			callables.add(tableUpdater);
 		}
 
 		ExecutorService executorService = Executors.newFixedThreadPool(
-			callableTableUpdaters.size());
+			callables.size());
 
 		try {
-			List<Future<Void>> futures = executorService.invokeAll(
-				callableTableUpdaters);
+			List<Future<Void>> futures = executorService.invokeAll(callables);
 
 			for (Future<Void> future : futures) {
 				future.get();
