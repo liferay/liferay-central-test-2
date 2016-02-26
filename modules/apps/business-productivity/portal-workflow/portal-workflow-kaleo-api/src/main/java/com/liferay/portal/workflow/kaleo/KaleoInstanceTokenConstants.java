@@ -19,6 +19,6 @@ package com.liferay.portal.workflow.kaleo;
  */
 public class KaleoInstanceTokenConstants {
 
-	public static final long DEFAULT_PARENT_KALEO_INSTANCE_TOKEN_ID = 0;
+	public static final long PARENT_KALEO_INSTANCE_TOKEN_ID_DEFAULT = 0;
 
 }

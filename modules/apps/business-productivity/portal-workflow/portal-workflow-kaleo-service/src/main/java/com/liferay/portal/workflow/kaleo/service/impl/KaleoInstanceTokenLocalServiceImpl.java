@@ -212,7 +212,7 @@ public class KaleoInstanceTokenLocalServiceImpl
 		kaleoInstanceToken.setKaleoInstanceId(
 			kaleoInstance.getKaleoInstanceId());
 		kaleoInstanceToken.setParentKaleoInstanceTokenId(
-			KaleoInstanceTokenConstants.DEFAULT_PARENT_KALEO_INSTANCE_TOKEN_ID);
+			KaleoInstanceTokenConstants.PARENT_KALEO_INSTANCE_TOKEN_ID_DEFAULT);
 		kaleoInstanceToken.setClassName(
 			(String)workflowContext.get(
 				WorkflowConstants.CONTEXT_ENTRY_CLASS_NAME));

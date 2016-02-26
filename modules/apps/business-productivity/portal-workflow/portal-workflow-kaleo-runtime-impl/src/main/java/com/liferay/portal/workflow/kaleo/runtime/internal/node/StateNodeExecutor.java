@@ -67,7 +67,7 @@ public class StateNodeExecutor extends BaseNodeExecutor {
 
 			if (kaleoInstanceToken.getParentKaleoInstanceTokenId() ==
 					KaleoInstanceTokenConstants.
-						DEFAULT_PARENT_KALEO_INSTANCE_TOKEN_ID) {
+						PARENT_KALEO_INSTANCE_TOKEN_ID_DEFAULT) {
 
 				_kaleoInstanceLocalService.completeKaleoInstance(
 					kaleoInstanceToken.getKaleoInstanceId());
