@@ -164,12 +164,6 @@ public class InitUtil {
 	}
 
 	public synchronized static void initWithSpring(
-		boolean initModuleFramework) {
-
-		initWithSpring(initModuleFramework, true);
-	}
-
-	public synchronized static void initWithSpring(
 		boolean initModuleFramework, boolean registerContext) {
 
 		List<String> configLocations = ListUtil.fromArray(
@@ -177,12 +171,6 @@ public class InitUtil {
 				com.liferay.portal.kernel.util.PropsKeys.SPRING_CONFIGS));
 
 		initWithSpring(configLocations, initModuleFramework, registerContext);
-	}
-
-	public synchronized static void initWithSpring(
-		List<String> configLocations, boolean initModuleFramework) {
-
-		initWithSpring(configLocations, initModuleFramework, true);
 	}
 
 	public synchronized static void initWithSpring(
