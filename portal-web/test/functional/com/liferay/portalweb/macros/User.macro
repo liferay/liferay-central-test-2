@@ -1077,7 +1077,7 @@
 	</command>
 
 	<command name="editDetailsViaMyAccount">
-		<execute function="AssertClick" locator1="NavListItem#DETAILS" value1="Details" />
+		<execute function="AssertElementPresent#assertElementPresent" locator1="TextInput#FIRST_NAME" />
 
 		<if>
 			<isset var="userFirstNameEdit" />
