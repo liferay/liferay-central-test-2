@@ -707,7 +707,7 @@ public class GroupFinderImpl
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(liveGroupId);
-			qPos.add("%" + typeSettings + "%");
+			qPos.add(StringUtil.quote(typeSettings, StringPool.PERCENT));
 			qPos.add(site);
 			qPos.add(remoteStagingGroupCount);
 
