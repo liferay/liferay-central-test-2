@@ -1960,8 +1960,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 					long previousId, long companyId, long parentPrimaryKey,
 					int size) {
 
-					return groupPersistence.findByC_G_C_P(
-						hierarchicalClassNameIds, previousId, companyId,
+					return groupPersistence.findByG_C_C_P(
+						previousId, companyId, hierarchicalClassNameIds,
 						parentPrimaryKey, QueryUtil.ALL_POS, size,
 						new GroupIdComparator(true));
 				}
