@@ -32,9 +32,9 @@ public class UpgradeJournalArticleImage extends UpgradeProcess {
 	}
 
 	protected void updateJournalArticleImages() throws Exception {
-		try (PreparedStatement ps = connection.prepareStatement(
+		try (PreparedStatement ps1 = connection.prepareStatement(
 				"select articleImageId, elName from JournalArticleImage");
-			ResultSet rs = ps.executeQuery()) {
+			ResultSet rs = ps1.executeQuery()) {
 
 			try (PreparedStatement ps2 =
 					AutoBatchPreparedStatementUtil.autoBatch(
