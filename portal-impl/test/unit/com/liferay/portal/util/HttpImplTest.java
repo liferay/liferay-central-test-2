@@ -102,12 +102,12 @@ public class HttpImplTest extends PowerMockito {
 
 	@Test
 	public void testDecodeURLWithNotHexChars() throws Exception {
-		testDecodeURLWithNotHexChars("%0" + (char) (CharPool.NUMBER_0 - 1));
-		testDecodeURLWithNotHexChars("%0" + (char) (CharPool.NUMBER_9 + 1));
-		testDecodeURLWithNotHexChars("%0" + (char) (CharPool.UPPER_CASE_A - 1));
-		testDecodeURLWithNotHexChars("%0" + (char) (CharPool.UPPER_CASE_F + 1));
-		testDecodeURLWithNotHexChars("%0" + (char) (CharPool.LOWER_CASE_A - 1));
-		testDecodeURLWithNotHexChars("%0" + (char) (CharPool.LOWER_CASE_F + 1));
+		testDecodeURLWithNotHexChars("%0" + (char)(CharPool.NUMBER_0 - 1));
+		testDecodeURLWithNotHexChars("%0" + (char)(CharPool.NUMBER_9 + 1));
+		testDecodeURLWithNotHexChars("%0" + (char)(CharPool.UPPER_CASE_A - 1));
+		testDecodeURLWithNotHexChars("%0" + (char)(CharPool.UPPER_CASE_F + 1));
+		testDecodeURLWithNotHexChars("%0" + (char)(CharPool.LOWER_CASE_A - 1));
+		testDecodeURLWithNotHexChars("%0" + (char)(CharPool.LOWER_CASE_F + 1));
 	}
 
 	@Test
@@ -243,9 +243,7 @@ public class HttpImplTest extends PowerMockito {
 	}
 
 	protected void testDecodeURLWithInvalidURLEncoding(String url) {
-		String expectedMessage = "Invalid URL encoding " + url;
-
-		_testDecodeURL(url, expectedMessage);
+		_testDecodeURL(url, "Invalid URL encoding " + url);
 	}
 
 	protected void testDecodeURLWithNotHexChars(String url) {
