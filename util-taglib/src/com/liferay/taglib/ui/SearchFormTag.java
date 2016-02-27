@@ -50,7 +50,7 @@ public class SearchFormTag<R> extends IncludeTag {
 			request.setAttribute(
 				"liferay-ui:search:compactEmptyResultsMessage",
 				String.valueOf(
-					searchContainerTag.getCompactEmptyResultsMessage()));
+					searchContainerTag.isCompactEmptyResultsMessage()));
 		}
 
 		request.setAttribute(
