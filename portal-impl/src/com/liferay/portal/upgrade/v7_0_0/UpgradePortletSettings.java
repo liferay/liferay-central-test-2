@@ -49,12 +49,12 @@ public abstract class UpgradePortletSettings extends UpgradeProcess {
 			PortletPreferencesRow portletPreferencesRow)
 		throws Exception {
 
-		try (PreparedStatement ps = connection.prepareStatement(
-				"insert into PortletPreferences (mvccVersion, " +
-					"portletPreferencesId, ownerId, ownerType, plid, " +
-						"portletId, preferences) values " +
-							"(?, ?, ?, ?, ?, ?, ?)")) {
+		String sql =
+			"insert into PortletPreferences (mvccVersion, " +
+				"portletPreferencesId, ownerId, ownerType, plid, portletId, " +
+					"preferences) values (?, ?, ?, ?, ?, ?, ?)";
 
+		try (PreparedStatement ps = connection.prepareStatement(sql)) {
 			ps.setLong(1, portletPreferencesRow.getMvccVersion());
 			ps.setLong(2, portletPreferencesRow.getPortletPreferencesId());
 			ps.setLong(3, portletPreferencesRow.getOwnerId());

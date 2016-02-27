@@ -79,11 +79,12 @@ public class UpgradeSharding extends UpgradeProcess {
 			if (!defaultPartitioningEnabled &&
 				Validator.isNull(defaultShardName)) {
 
+				String shardNamesString = StringUtil.merge(shardNames, ", ");
+
 				throw new RuntimeException(
 					"The property \"shard.default.name\" is not set in " +
 						"portal.properties. Please specify a default shard " +
-							"name from: " + StringUtil.merge(shardNames, ", ") +
-								".");
+							"name from: " + shardNamesString + ".");
 			}
 
 			for (String uniqueShardName : uniqueShardNames) {

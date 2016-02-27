@@ -152,17 +152,15 @@ public class UpgradeJournalArticleType extends UpgradeProcess {
 			Map<String, Long> journalArticleTypesToAssetCategoryIds)
 		throws Exception {
 
-		StringBundler sb = new StringBundler(10);
+		StringBundler sb = new StringBundler(8);
 
 		sb.append("select JournalArticle.resourcePrimKey, ");
 		sb.append("JournalArticle.type_ from JournalArticle ");
 		sb.append("left join JournalArticle tempJournalArticle on ");
-		sb.append("(JournalArticle.groupId = tempJournalArticle.groupId) ");
-		sb.append("and (JournalArticle.articleId = ");
-		sb.append("tempJournalArticle.articleId) and ");
-		sb.append(" (JournalArticle.version < ");
-		sb.append("tempJournalArticle.version) where ");
-		sb.append("JournalArticle.companyId = ? and ");
+		sb.append("(JournalArticle.groupId = tempJournalArticle.groupId) and ");
+		sb.append("(JournalArticle.articleId = tempJournalArticle.articleId) ");
+		sb.append("and (JournalArticle.version < tempJournalArticle.version) ");
+		sb.append("where JournalArticle.companyId = ? and ");
 		sb.append("tempJournalArticle.id_ is null");
 
 		try (PreparedStatement ps = connection.prepareStatement(

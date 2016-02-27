@@ -130,11 +130,11 @@ public class DLServiceVerifyProcess extends VerifyProcess {
 					getMismatchedCompanyIdFileEntryMetadatas();
 
 			if (_log.isDebugEnabled()) {
+				int size = mismatchedCompanyIdDLFileEntryMetadatas.size();
+
 				_log.debug(
-					"Deleting " +
-						mismatchedCompanyIdDLFileEntryMetadatas.size() +
-							" file entry metadatas with mismatched company " +
-								"IDs");
+					"Deleting " + size + " file entry metadatas with " +
+						"mismatched company IDs");
 			}
 
 			for (DLFileEntryMetadata dlFileEntryMetadata :
