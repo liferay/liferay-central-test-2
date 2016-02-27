@@ -154,9 +154,6 @@ public abstract class BaseNodeExecutor implements NodeExecutor {
 	protected ExecutionContextHelper executionContextHelper;
 
 	@Reference
-	protected NotificationHelper notificationHelper;
-
-	@Reference
 	protected KaleoActionExecutor kaleoActionExecutor;
 
 	@Reference
@@ -165,5 +162,8 @@ public abstract class BaseNodeExecutor implements NodeExecutor {
 
 	@Reference
 	protected KaleoTimerLocalService kaleoTimerLocalService;
+
+	@Reference
+	protected NotificationHelper notificationHelper;
 
 }
