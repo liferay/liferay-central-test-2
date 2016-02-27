@@ -180,10 +180,6 @@ public class SearchContainerTag<R> extends ParamAndPropertyAncestorTagImpl {
 		}
 	}
 
-	public boolean isCompactEmptyResultsMessage() {
-		return _compactEmptyResultsMessage;
-	}
-
 	public String getCssClass() {
 		return _cssClass;
 	}
@@ -254,6 +250,10 @@ public class SearchContainerTag<R> extends ParamAndPropertyAncestorTagImpl {
 
 	public String getVar() {
 		return _var;
+	}
+
+	public boolean isCompactEmptyResultsMessage() {
+		return _compactEmptyResultsMessage;
 	}
 
 	public boolean isDeltaConfigurable() {
