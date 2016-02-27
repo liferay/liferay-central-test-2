@@ -71,23 +71,25 @@ public class UpgradePostgreSQL extends UpgradeProcess {
 		return schema;
 	}
 
-	protected HashMap<String, String> getOidColumnNames() throws Exception {
-		HashMap<String, String> columnsWithOids = new HashMap<>();
+	protected Map<String, String> getOidColumnNames() throws Exception {
+		Map<String, String> columnsWithOids = new HashMap<>();
 
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-
-		String schema = getCurrentSchema();
-
-		if (schema == null) {
-			throw new UpgradeException("Could not find current schema");
-		}
 
 		StringBundler sb = new StringBundler(4);
 
 		sb.append("select table_name, column_name from ");
 		sb.append("information_schema.columns where table_schema='");
+
+		String schema = getCurrentSchema();
+
+		if (schema == null) {
+			throw new UpgradeException("Unable to get current schema");
+		}
+
 		sb.append(schema);
+
 		sb.append("' and data_type='oid';");
 
 		try {
