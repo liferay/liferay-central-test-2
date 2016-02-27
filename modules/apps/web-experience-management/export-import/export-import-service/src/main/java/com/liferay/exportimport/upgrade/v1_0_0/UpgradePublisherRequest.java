@@ -138,7 +138,9 @@ public class UpgradePublisherRequest extends UpgradeProcess {
 	protected void updateScheduledPublications(Group group)
 		throws PortalException {
 
-		try (LoggingTimer loggingTimer = new LoggingTimer(group.getGroupId())) {
+		try (LoggingTimer loggingTimer = new LoggingTimer(
+				String.valueOf(group.getGroupId()))) {
+
 			boolean localStaging = true;
 
 			if (group.isStagedRemotely() || group.hasRemoteStagingGroup()) {
