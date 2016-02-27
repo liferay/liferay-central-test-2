@@ -1229,7 +1229,7 @@
 
 		<execute function="MouseOver" locator1="DocumentsAndMedia#ICON_DOCUMENT" />
 		<execute function="AssertElementPresent" locator1="DocumentsAndMedia#ICON_DOCUMENT_CHECKBOX" />
-		<execute function="Click" locator1="DocumentsAndMedia#ICON_DOCUMENT_CHECKBOX" />
+		<execute function="Check" locator1="DocumentsAndMedia#ICON_DOCUMENT_CHECKBOX" />
 
 		<execute function="Click" locator1="Icon#MOVE_TO_RECYCLE_BIN" />
 
