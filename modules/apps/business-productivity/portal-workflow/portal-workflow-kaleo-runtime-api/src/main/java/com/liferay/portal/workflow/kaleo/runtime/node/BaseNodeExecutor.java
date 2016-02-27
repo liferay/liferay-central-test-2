@@ -54,7 +54,7 @@ public abstract class BaseNodeExecutor implements NodeExecutor {
 			KaleoNode.class.getName(), currentKaleoNode.getKaleoNodeId(),
 			ExecutionType.ON_ENTRY, executionContext);
 
-		_notificationHelper.sendKaleoNotifications(
+		notificationHelper.sendKaleoNotifications(
 			KaleoNode.class.getName(), currentKaleoNode.getKaleoNodeId(),
 			ExecutionType.ON_ENTRY, executionContext);
 
@@ -76,7 +76,7 @@ public abstract class BaseNodeExecutor implements NodeExecutor {
 			List<PathElement> remainingPathElements)
 		throws PortalException {
 
-		if (_executionContextHelper.isKaleoInstanceBlocked(executionContext)) {
+		if (executionContextHelper.isKaleoInstanceBlocked(executionContext)) {
 			return;
 		}
 
@@ -99,7 +99,7 @@ public abstract class BaseNodeExecutor implements NodeExecutor {
 			KaleoTimer.class.getName(), kaleoTimer.getKaleoTimerId(),
 			ExecutionType.ON_TIMER, executionContext);
 
-		_notificationHelper.sendKaleoNotifications(
+		notificationHelper.sendKaleoNotifications(
 			KaleoTimer.class.getName(), kaleoTimer.getKaleoTimerId(),
 			ExecutionType.ON_TIMER, executionContext);
 
@@ -118,7 +118,7 @@ public abstract class BaseNodeExecutor implements NodeExecutor {
 			List<PathElement> remainingPathElements)
 		throws PortalException {
 
-		_executionContextHelper.completeKaleoTimerInstances(executionContext);
+		executionContextHelper.completeKaleoTimerInstances(executionContext);
 
 		doExit(currentKaleoNode, executionContext, remainingPathElements);
 
@@ -126,7 +126,7 @@ public abstract class BaseNodeExecutor implements NodeExecutor {
 			KaleoNode.class.getName(), currentKaleoNode.getKaleoNodeId(),
 			ExecutionType.ON_EXIT, executionContext);
 
-		_notificationHelper.sendKaleoNotifications(
+		notificationHelper.sendKaleoNotifications(
 			KaleoNode.class.getName(), currentKaleoNode.getKaleoNodeId(),
 			ExecutionType.ON_EXIT, executionContext);
 	}
@@ -151,10 +151,10 @@ public abstract class BaseNodeExecutor implements NodeExecutor {
 		throws PortalException;
 
 	@Reference
-	protected ExecutionContextHelper _executionContextHelper;
+	protected ExecutionContextHelper executionContextHelper;
 
 	@Reference
-	protected NotificationHelper _notificationHelper;
+	protected NotificationHelper notificationHelper;
 
 	@Reference
 	protected KaleoActionExecutor kaleoActionExecutor;
