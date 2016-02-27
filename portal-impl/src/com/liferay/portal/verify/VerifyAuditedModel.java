@@ -276,7 +276,7 @@ public class VerifyAuditedModel extends VerifyProcess {
 			VerifiableAuditedModel verifiableAuditedModel)
 		throws Exception {
 
-		PreparedStatement ps = null;
+		PreparedStatement ps1 = null;
 		ResultSet rs = null;
 
 		try (Connection con = DataAccess.getUpgradeOptimizedConnection()) {
@@ -295,15 +295,15 @@ public class VerifyAuditedModel extends VerifyProcess {
 			sb.append(verifiableAuditedModel.getTableName());
 			sb.append(" where userName is null order by companyId");
 
-			ps = con.prepareStatement(sb.toString());
+			ps1 = con.prepareStatement(sb.toString());
 
-			rs = ps.executeQuery();
+			rs = ps1.executeQuery();
 
 			Object[] auditedModelArray = null;
 
 			long previousCompanyId = 0;
 
-			try (PreparedStatement preparedStatement =
+			try (PreparedStatement ps2 =
 					AutoBatchPreparedStatementUtil.autoBatch(
 						createPreparedStatement(
 							con, verifiableAuditedModel.getTableName(),
@@ -338,17 +338,17 @@ public class VerifyAuditedModel extends VerifyProcess {
 					}
 
 					verifyAuditedModel(
-						con, preparedStatement,
+						con, ps2,
 						verifiableAuditedModel.getTableName(), primKey,
 						auditedModelArray,
 						verifiableAuditedModel.isUpdateDates());
 				}
 
-				preparedStatement.executeBatch();
+				ps2.executeBatch();
 			}
 		}
 		finally {
-			DataAccess.cleanUp(ps, rs);
+			DataAccess.cleanUp(ps1, rs);
 		}
 	}
 

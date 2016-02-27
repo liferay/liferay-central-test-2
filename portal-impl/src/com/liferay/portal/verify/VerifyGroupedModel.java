@@ -141,7 +141,7 @@ public class VerifyGroupedModel extends VerifyProcess {
 			VerifiableGroupedModel verifiableGroupedModel)
 		throws Exception {
 
-		PreparedStatement ps = null;
+		PreparedStatement ps1 = null;
 		ResultSet rs = null;
 
 		try (Connection con = DataAccess.getUpgradeOptimizedConnection()) {
@@ -155,9 +155,9 @@ public class VerifyGroupedModel extends VerifyProcess {
 			sb.append(verifiableGroupedModel.getTableName());
 			sb.append(" where groupId is null");
 
-			ps = con.prepareStatement(sb.toString());
+			ps1 = con.prepareStatement(sb.toString());
 
-			rs = ps.executeQuery();
+			rs = ps1.executeQuery();
 
 			sb = new StringBundler(6);
 
@@ -198,7 +198,7 @@ public class VerifyGroupedModel extends VerifyProcess {
 			}
 		}
 		finally {
-			DataAccess.cleanUp(ps, rs);
+			DataAccess.cleanUp(ps1, rs);
 		}
 	}
 
