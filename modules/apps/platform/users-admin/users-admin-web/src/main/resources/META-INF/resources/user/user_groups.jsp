@@ -41,7 +41,7 @@ currentURLObj.setParameter("historyKey", renderResponse.getNamespace() + "userGr
 <liferay-ui:search-container
 	compactEmptyResultsMessage="<%= true %>"
 	curParam="userGroupsCur"
-	emptyResultsMessage="this-user-does-not-belong-to-any-user-group"
+	emptyResultsMessage="this-user-does-not-belong-to-a-user-group"
 	headerNames="name,null"
 	iteratorURL="<%= currentURLObj %>"
 	total="<%= userGroups.size() %>"
