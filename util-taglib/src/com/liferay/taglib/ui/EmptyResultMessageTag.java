@@ -37,6 +37,7 @@ public class EmptyResultMessageTag extends IncludeTag {
 
 	@Override
 	protected void cleanUp() {
+		_compact = false;
 		_message = null;
 		_search = false;
 	}
