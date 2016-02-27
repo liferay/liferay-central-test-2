@@ -77,16 +77,16 @@ public class VerifyUUID extends VerifyProcess {
 	protected void verifyUUID(VerifiableUUIDModel verifiableUUIDModel)
 		throws Exception {
 
-		PreparedStatement ps = null;
+		PreparedStatement ps1 = null;
 		ResultSet rs = null;
 
 		try (Connection con = DataAccess.getUpgradeOptimizedConnection()) {
-			ps = con.prepareStatement(
+			ps1 = con.prepareStatement(
 				"select " + verifiableUUIDModel.getPrimaryKeyColumnName() +
 					" from " + verifiableUUIDModel.getTableName() +
 						" where uuid_ is null or uuid_ = ''");
 
-			rs = ps.executeQuery();
+			rs = ps1.executeQuery();
 
 			StringBundler sb = new StringBundler(6);
 
@@ -115,7 +115,7 @@ public class VerifyUUID extends VerifyProcess {
 			}
 		}
 		finally {
-			DataAccess.cleanUp(ps, rs);
+			DataAccess.cleanUp(ps1, rs);
 		}
 	}
 
