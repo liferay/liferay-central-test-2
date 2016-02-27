@@ -338,9 +338,8 @@ public class VerifyAuditedModel extends VerifyProcess {
 					}
 
 					verifyAuditedModel(
-						con, ps2,
-						verifiableAuditedModel.getTableName(), primKey,
-						auditedModelArray,
+						con, ps2, verifiableAuditedModel.getTableName(),
+						primKey, auditedModelArray,
 						verifiableAuditedModel.isUpdateDates());
 				}
 
