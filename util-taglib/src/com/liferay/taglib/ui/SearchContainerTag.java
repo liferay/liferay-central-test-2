@@ -180,7 +180,7 @@ public class SearchContainerTag<R> extends ParamAndPropertyAncestorTagImpl {
 		}
 	}
 
-	public boolean getCompactEmptyResultsMessage() {
+	public boolean isCompactEmptyResultsMessage() {
 		return _compactEmptyResultsMessage;
 	}
 
