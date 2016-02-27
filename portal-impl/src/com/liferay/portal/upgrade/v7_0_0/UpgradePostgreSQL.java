@@ -18,7 +18,6 @@ import com.liferay.portal.dao.db.PostgreSQLDB;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBManagerUtil;
 import com.liferay.portal.kernel.dao.db.DBType;
-import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.upgrade.UpgradeException;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -57,7 +56,7 @@ public class UpgradePostgreSQL extends UpgradeProcess {
 			if (rs.next()) {
 				return (String)rs.getObject("current_schema");
 			}
-			
+
 			return null;
 		}
 	}
