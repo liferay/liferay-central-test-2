@@ -53,7 +53,7 @@ public class ParamOverrideInvocationHandler<S> implements InvocationHandler {
 	}
 
 	@Override
-	public Object invoke(Object proxy, Method method, Object[] args)
+	public Object invoke(Object proxy, Method method, Object[] arguments)
 		throws InvocationTargetException {
 
 		Object result = null;
@@ -69,7 +69,7 @@ public class ParamOverrideInvocationHandler<S> implements InvocationHandler {
 		}
 
 		try {
-			return _invokeConfigurationInstance(method, args);
+			return _invokeConfigurationInstance(method, arguments);
 		}
 		catch (Exception e) {
 			return null;
@@ -97,7 +97,8 @@ public class ParamOverrideInvocationHandler<S> implements InvocationHandler {
 		return values;
 	}
 
-	private Object _invokeConfigurationInstance(Method method, Object[] args)
+	private Object _invokeConfigurationInstance(
+			Method method, Object[] arguments)
 		throws IllegalAccessException, InvocationTargetException,
 			   NoSuchMethodException {
 
@@ -105,7 +106,7 @@ public class ParamOverrideInvocationHandler<S> implements InvocationHandler {
 
 		method = clazz.getMethod(method.getName(), method.getParameterTypes());
 
-		return method.invoke(_bean, args);
+		return method.invoke(_bean, arguments);
 	}
 
 	private Object _invokeMap(Method method)
