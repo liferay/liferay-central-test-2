@@ -28,15 +28,15 @@ import java.util.Map;
 /**
  * @author Jorge Ferrer
  */
-public class ParamOverrideInvocationHandler<S> implements InvocationHandler {
+public class ParameterMapInvocationHandler<S> implements InvocationHandler {
 
-	public ParamOverrideInvocationHandler(
+	public ParameterMapInvocationHandler(
 		Class clazz, Object bean, Map<String, String[]> parameterMap) {
 
 		this(clazz, bean, parameterMap, StringPool.BLANK, StringPool.BLANK);
 	}
 
-	public ParamOverrideInvocationHandler(
+	public ParameterMapInvocationHandler(
 		Class clazz, Object bean, Map<String, String[]> parameterMap,
 		String parameterPrefix, String parameterSuffix) {
 
