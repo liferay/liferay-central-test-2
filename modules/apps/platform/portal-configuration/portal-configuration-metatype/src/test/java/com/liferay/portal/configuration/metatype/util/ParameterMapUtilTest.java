@@ -32,15 +32,15 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class ParameterMapUtilTest {
 
-	public static final String BEAN_STRING = "BEAN";
+	public static final String TEST_BEAN_STRING = "TEST_BEAN";
 
-	public static final String[] BEAN_STRING_ARRAY =
-		new String[] {"BEAN1", "BEAN2"};
+	public static final String[] TEST_BEAN_STRING_ARRAY =
+		new String[] {"TEST_BEAN1", "TEST_BEAN2"};
 
-	public static final String PARAM_STRING = "PARAM";
+	public static final String PARAMETER_MAP_STRING = "PARAMETER_MAP";
 
-	public static final String[] PARAM_STRING_ARRAY =
-		new String[] {"PARAM1", "PARAM2"};
+	public static final String[] PARAMETER_MAP_STRING_ARRAY =
+		new String[] {"PARAMETER_MAP1", "PARAMETER_MAP2"};
 
 	public static class WhenSettingAParameterMap {
 
@@ -51,8 +51,9 @@ public class ParameterMapUtilTest {
 			Map<String, String[]> parameterMap = new HashMap<>();
 
 			parameterMap.put("testBoolean1", new String[] {"false"});
-			parameterMap.put("testString1", new String[] {PARAM_STRING});
-			parameterMap.put("testStringArray1", PARAM_STRING_ARRAY);
+			parameterMap.put(
+				"testString1", new String[] {PARAMETER_MAP_STRING});
+			parameterMap.put("testStringArray1", PARAMETER_MAP_STRING_ARRAY);
 
 			_testBean = ParameterMapUtil.setParameterMap(
 				TestBean.class, testBean, parameterMap);
@@ -61,9 +62,9 @@ public class ParameterMapUtilTest {
 		@Test
 		public void valuesInTheParameterMapAreReadFirst() throws Exception {
 			Assert.assertEquals(false, _testBean.testBoolean1());
-			Assert.assertEquals(PARAM_STRING, _testBean.testString1());
+			Assert.assertEquals(PARAMETER_MAP_STRING, _testBean.testString1());
 			Assert.assertArrayEquals(
-				PARAM_STRING_ARRAY, _testBean.testStringArray1());
+				PARAMETER_MAP_STRING_ARRAY, _testBean.testStringArray1());
 		}
 
 		@Test
@@ -71,9 +72,9 @@ public class ParameterMapUtilTest {
 			throws Exception {
 
 			Assert.assertEquals(true, _testBean.testBoolean2());
-			Assert.assertEquals(BEAN_STRING, _testBean.testString2());
+			Assert.assertEquals(TEST_BEAN_STRING, _testBean.testString2());
 			Assert.assertArrayEquals(
-				BEAN_STRING_ARRAY, _testBean.testStringArray2());
+				TEST_BEAN_STRING_ARRAY, _testBean.testStringArray2());
 		}
 
 		private TestBean _testBean;
@@ -90,8 +91,9 @@ public class ParameterMapUtilTest {
 
 			parameterMap.put("prefix--testBoolean1--", new String[] {"false"});
 			parameterMap.put(
-				"prefix--testString1--", new String[] {PARAM_STRING});
-			parameterMap.put("prefix--testStringArray1--", PARAM_STRING_ARRAY);
+				"prefix--testString1--", new String[] {PARAMETER_MAP_STRING});
+			parameterMap.put(
+				"prefix--testStringArray1--", PARAMETER_MAP_STRING_ARRAY);
 
 			_testBean = ParameterMapUtil.setParameterMap(
 				TestBean.class, testBean, parameterMap, "prefix--",
@@ -101,9 +103,9 @@ public class ParameterMapUtilTest {
 		@Test
 		public void valuesInTheParameterMapAreReadFirst() throws Exception {
 			Assert.assertEquals(false, _testBean.testBoolean1());
-			Assert.assertEquals(PARAM_STRING, _testBean.testString1());
+			Assert.assertEquals(PARAMETER_MAP_STRING, _testBean.testString1());
 			Assert.assertArrayEquals(
-				PARAM_STRING_ARRAY, _testBean.testStringArray1());
+				PARAMETER_MAP_STRING_ARRAY, _testBean.testStringArray1());
 		}
 
 		@Test
@@ -111,9 +113,9 @@ public class ParameterMapUtilTest {
 			throws Exception {
 
 			Assert.assertEquals(true, _testBean.testBoolean2());
-			Assert.assertEquals(BEAN_STRING, _testBean.testString2());
+			Assert.assertEquals(TEST_BEAN_STRING, _testBean.testString2());
 			Assert.assertArrayEquals(
-				BEAN_STRING_ARRAY, _testBean.testStringArray2());
+				TEST_BEAN_STRING_ARRAY, _testBean.testStringArray2());
 		}
 
 		private TestBean _testBean;
@@ -135,22 +137,22 @@ public class ParameterMapUtilTest {
 
 			@Override
 			public String testString1() {
-				return BEAN_STRING;
+				return TEST_BEAN_STRING;
 			}
 
 			@Override
 			public String testString2() {
-				return BEAN_STRING;
+				return TEST_BEAN_STRING;
 			}
 
 			@Override
 			public String[] testStringArray1() {
-				return BEAN_STRING_ARRAY;
+				return TEST_BEAN_STRING_ARRAY;
 			}
 
 			@Override
 			public String[] testStringArray2() {
-				return BEAN_STRING_ARRAY;
+				return TEST_BEAN_STRING_ARRAY;
 			}
 
 		};
