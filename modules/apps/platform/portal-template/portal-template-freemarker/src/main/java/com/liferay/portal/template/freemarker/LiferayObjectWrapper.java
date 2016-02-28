@@ -54,7 +54,7 @@ public class LiferayObjectWrapper extends DefaultObjectWrapper {
 				new HashSet<Object>() {
 
 					@Override
-					public boolean add(Object e) {
+					public boolean add(Object object) {
 						return false;
 					}
 
@@ -63,12 +63,12 @@ public class LiferayObjectWrapper extends DefaultObjectWrapper {
 					}
 
 					@Override
-					public boolean contains(Object o) {
+					public boolean contains(Object object) {
 						return false;
 					}
 
 					@Override
-					public boolean remove(Object o) {
+					public boolean remove(Object object) {
 						return false;
 					}
 
