@@ -32,15 +32,15 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class ParameterMapUtilTest {
 
-	public static final String TEST_BEAN_STRING = "TEST_BEAN";
-
-	public static final String[] TEST_BEAN_STRING_ARRAY =
-		new String[] {"TEST_BEAN1", "TEST_BEAN2"};
-
 	public static final String PARAMETER_MAP_STRING = "PARAMETER_MAP";
 
 	public static final String[] PARAMETER_MAP_STRING_ARRAY =
 		new String[] {"PARAMETER_MAP1", "PARAMETER_MAP2"};
+
+	public static final String TEST_BEAN_STRING = "TEST_BEAN";
+
+	public static final String[] TEST_BEAN_STRING_ARRAY =
+		new String[] {"TEST_BEAN1", "TEST_BEAN2"};
 
 	public static class WhenSettingAParameterMap {
 
