@@ -46,7 +46,7 @@ public class ParameterMapUtilTest {
 
 		@Before
 		public void setUp() throws ConfigurationException {
-			TestBeanInterface originalBean = _getTestBeanInterface();
+			TestBean testBean = _getTestBean();
 
 			Map<String, String[]> parameterMap = new HashMap<>();
 
@@ -55,7 +55,7 @@ public class ParameterMapUtilTest {
 			parameterMap.put("testStringArray1", PARAM_STRING_ARRAY);
 
 			_testBean = ParameterMapUtil.setParameterMap(
-				TestBeanInterface.class, originalBean, parameterMap);
+				TestBean.class, testBean, parameterMap);
 		}
 
 		@Test
@@ -76,7 +76,7 @@ public class ParameterMapUtilTest {
 				BEAN_STRING_ARRAY, _testBean.testStringArray2());
 		}
 
-		private TestBeanInterface _testBean;
+		private TestBean _testBean;
 
 	}
 
@@ -84,7 +84,7 @@ public class ParameterMapUtilTest {
 
 		@Before
 		public void setUp() throws ConfigurationException {
-			TestBeanInterface originalBean = _getTestBeanInterface();
+			TestBean testBean = _getTestBean();
 
 			Map<String, String[]> parameterMap = new HashMap<>();
 
@@ -94,7 +94,7 @@ public class ParameterMapUtilTest {
 			parameterMap.put("prefix--testStringArray1--", PARAM_STRING_ARRAY);
 
 			_testBean = ParameterMapUtil.setParameterMap(
-				TestBeanInterface.class, originalBean, parameterMap, "prefix--",
+				TestBean.class, testBean, parameterMap, "prefix--",
 				StringPool.DOUBLE_DASH);
 		}
 
@@ -116,12 +116,12 @@ public class ParameterMapUtilTest {
 				BEAN_STRING_ARRAY, _testBean.testStringArray2());
 		}
 
-		private TestBeanInterface _testBean;
+		private TestBean _testBean;
 
 	}
 
-	private static TestBeanInterface _getTestBeanInterface() {
-		return new TestBeanInterface() {
+	private static TestBean _getTestBean() {
+		return new TestBean() {
 
 			@Override
 			public boolean testBoolean1() {
@@ -156,7 +156,7 @@ public class ParameterMapUtilTest {
 		};
 	}
 
-	private interface TestBeanInterface {
+	private interface TestBean {
 
 		public boolean testBoolean1();
 
