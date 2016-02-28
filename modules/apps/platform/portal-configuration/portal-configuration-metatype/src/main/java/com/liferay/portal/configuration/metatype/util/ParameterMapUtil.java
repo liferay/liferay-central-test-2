@@ -21,19 +21,18 @@ import java.util.Map;
 /**
  * @author Jorge Ferrer
  */
-public class ParamUtil {
+public class ParameterMapUtil {
 
 	public static <T> T setParameterMap(
 			Class<T> clazz, T configurationBean,
 			Map<String, String[]> parameterMap)
 		throws ConfigurationException {
 
-		ParamOverrideInvocationHandler<T>
-			paramOverrideInvocationHandler =
-				new ParamOverrideInvocationHandler<>(
-					clazz, configurationBean, parameterMap);
+		ParameterMapInvocationHandler<T> parameterMapInvocationHandler =
+			new ParameterMapInvocationHandler<>(
+				clazz, configurationBean, parameterMap);
 
-		return paramOverrideInvocationHandler.createProxy();
+		return parameterMapInvocationHandler.createProxy();
 	}
 
 	public static <T> T setParameterMap(
@@ -42,13 +41,12 @@ public class ParamUtil {
 			String parameterSuffix)
 		throws ConfigurationException {
 
-		ParamOverrideInvocationHandler<T>
-			paramOverrideInvocationHandler =
-				new ParamOverrideInvocationHandler<>(
-					clazz, configurationBean, parameterMap, parameterPrefix,
-					parameterSuffix);
+		ParameterMapInvocationHandler<T> parameterMapInvocationHandler =
+			new ParameterMapInvocationHandler<>(
+				clazz, configurationBean, parameterMap, parameterPrefix,
+				parameterSuffix);
 
-		return paramOverrideInvocationHandler.createProxy();
+		return parameterMapInvocationHandler.createProxy();
 	}
 
 }

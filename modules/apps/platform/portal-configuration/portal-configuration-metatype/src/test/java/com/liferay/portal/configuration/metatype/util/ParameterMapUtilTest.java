@@ -30,7 +30,7 @@ import org.junit.runner.RunWith;
  * @author Jorge Ferrer
  */
 @RunWith(Enclosed.class)
-public class ParamUtilTest {
+public class ParameterMapUtilTest {
 
 	public static final String BEAN_STRING = "BEAN";
 
@@ -54,7 +54,7 @@ public class ParamUtilTest {
 			parameterMap.put("testString1", new String[] {PARAM_STRING});
 			parameterMap.put("testStringArray1", PARAM_STRING_ARRAY);
 
-			_testBean = ParamUtil.setParameterMap(
+			_testBean = ParameterMapUtil.setParameterMap(
 				TestBeanInterface.class, originalBean, parameterMap);
 		}
 
@@ -93,7 +93,7 @@ public class ParamUtilTest {
 				"prefix--testString1--", new String[] {PARAM_STRING});
 			parameterMap.put("prefix--testStringArray1--", PARAM_STRING_ARRAY);
 
-			_testBean = ParamUtil.setParameterMap(
+			_testBean = ParameterMapUtil.setParameterMap(
 				TestBeanInterface.class, originalBean, parameterMap, "prefix--",
 				StringPool.DOUBLE_DASH);
 		}
