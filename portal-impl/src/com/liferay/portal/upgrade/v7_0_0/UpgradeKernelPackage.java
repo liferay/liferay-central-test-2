@@ -70,52 +70,52 @@ public class UpgradeKernelPackage extends UpgradeProcess {
 			WildcardMode wildcardMode)
 		throws Exception {
 
-		StringBundler tableSQLSB = new StringBundler(7);
+		StringBundler sb1 = new StringBundler(7);
 
-		tableSQLSB.append("update ");
-		tableSQLSB.append(tableName);
-		tableSQLSB.append(" set ");
-		tableSQLSB.append(columnName);
-		tableSQLSB.append(" = replace(");
-		tableSQLSB.append(columnName);
-		tableSQLSB.append(", '");
+		sb1.append("update ");
+		sb1.append(tableName);
+		sb1.append(" set ");
+		sb1.append(columnName);
+		sb1.append(" = replace(");
+		sb1.append(columnName);
+		sb1.append(", '");
 
-		String tableSQL = tableSQLSB.toString();
+		String tableSQL = sb1.toString();
 
 		try (LoggingTimer loggingTimer = new LoggingTimer(tableName)) {
-			StringBundler sb = new StringBundler(9);
+			StringBundler sb2 = new StringBundler(9);
 
 			for (String[] name : names) {
-				sb.append(tableSQL);
-				sb.append(name[0]);
-				sb.append("', '");
-				sb.append(name[1]);
-				sb.append("') where ");
-				sb.append(columnName);
+				sb2.append(tableSQL);
+				sb2.append(name[0]);
+				sb2.append("', '");
+				sb2.append(name[1]);
+				sb2.append("') where ");
+				sb2.append(columnName);
 
 				if (wildcardMode.equals(WildcardMode.LEADING) ||
 					wildcardMode.equals(WildcardMode.SURROUND)) {
 
-					sb.append(" like '%");
+					sb2.append(" like '%");
 				}
 				else {
-					sb.append(" like '");
+					sb2.append(" like '");
 				}
 
-				sb.append(name[0]);
+				sb2.append(name[0]);
 
 				if (wildcardMode.equals(WildcardMode.SURROUND) ||
 					wildcardMode.equals(WildcardMode.TRAILING)) {
 
-					sb.append("%'");
+					sb2.append("%'");
 				}
 				else {
-					sb.append("'");
+					sb2.append("'");
 				}
 
-				runSQL(sb.toString());
+				runSQL(sb2.toString());
 
-				sb.setIndex(0);
+				sb2.setIndex(0);
 			}
 		}
 	}
