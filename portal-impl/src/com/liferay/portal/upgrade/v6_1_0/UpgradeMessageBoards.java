@@ -193,7 +193,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 		throws Exception {
 
 		try (PreparedStatement ps = connection.prepareStatement(
-				"update MBThread set question = ? where threadId =" +
+				"update MBThread set question = ? where threadId = " +
 					threadId)) {
 
 			ps.setBoolean(1, question);
