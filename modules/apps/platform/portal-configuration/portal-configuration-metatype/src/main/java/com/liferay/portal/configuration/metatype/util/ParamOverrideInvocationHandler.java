@@ -109,8 +109,8 @@ public class ParamOverrideInvocationHandler<S> implements InvocationHandler {
 	}
 
 	private Object _invokeMap(Method method)
-		throws NoSuchMethodException, IllegalAccessException,
-			   InvocationTargetException, InstantiationException {
+		throws IllegalAccessException, InstantiationException,
+			   InvocationTargetException, NoSuchMethodException {
 
 		Class<?> returnType = method.getReturnType();
 
