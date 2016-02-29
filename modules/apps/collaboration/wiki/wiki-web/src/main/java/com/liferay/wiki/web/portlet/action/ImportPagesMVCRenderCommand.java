@@ -49,11 +49,12 @@ public class ImportPagesMVCRenderCommand implements MVCRenderCommand {
 		throws PortletException {
 
 		try {
+			renderRequest.setAttribute(
+				WikiWebKeys.WIKI_IMPORTER_TRACKER, _wikiImporterTracker);
+
 			WikiNode node = ActionUtil.getNode(renderRequest);
 
 			renderRequest.setAttribute(WikiWebKeys.WIKI_NODE, node);
-			renderRequest.setAttribute(
-				WikiWebKeys.WIKI_IMPORTER_TRACKER, _wikiImporterTracker);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchNodeException ||

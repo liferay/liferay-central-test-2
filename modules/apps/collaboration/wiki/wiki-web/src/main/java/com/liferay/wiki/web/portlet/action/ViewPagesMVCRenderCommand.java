@@ -46,10 +46,10 @@ public class ViewPagesMVCRenderCommand implements MVCRenderCommand {
 		throws PortletException {
 
 		renderRequest.setAttribute(
+			WikiWebKeys.WIKI_ENGINE_RENDERER, _wikiEngineRenderer);
+		renderRequest.setAttribute(
 			WikiWebKeys.WIKI_PORTLET_TOOLBAR_CONTRIBUTOR,
 			_wikiPortletToolbarContributor);
-		renderRequest.setAttribute(
-			WikiWebKeys.WIKI_ENGINE_RENDERER, _wikiEngineRenderer);
 
 		return ActionUtil.viewNode(renderRequest, "/wiki_admin/view_pages.jsp");
 	}
