@@ -33,21 +33,6 @@ public class UpgradePortletPreferences extends BaseUpgradePortletPreferences {
 		return new String[] {SearchPortletKeys.SEARCH};
 	}
 
-	protected void upgradeSearchConfiguration(
-			PortletPreferences portletPreferences)
-		throws Exception {
-
-		String searchConfiguration = portletPreferences.getValue(
-			"searchConfiguration", StringPool.BLANK);
-
-		for (String[] classNames : _CLASS_NAMES) {
-			searchConfiguration = StringUtil.replace(
-				searchConfiguration, classNames[0], classNames[1]);
-		}
-
-		portletPreferences.setValue("searchConfiguration", searchConfiguration);
-	}
-
 	@Override
 	protected String upgradePreferences(
 			long companyId, long ownerId, int ownerType, long plid,
@@ -65,6 +50,21 @@ public class UpgradePortletPreferences extends BaseUpgradePortletPreferences {
 		upgradeSearchConfiguration(portletPreferences);
 
 		return PortletPreferencesFactoryUtil.toXML(portletPreferences);
+	}
+
+	protected void upgradeSearchConfiguration(
+			PortletPreferences portletPreferences)
+		throws Exception {
+
+		String searchConfiguration = portletPreferences.getValue(
+			"searchConfiguration", StringPool.BLANK);
+
+		for (String[] classNames : _CLASS_NAMES) {
+			searchConfiguration = StringUtil.replace(
+				searchConfiguration, classNames[0], classNames[1]);
+		}
+
+		portletPreferences.setValue("searchConfiguration", searchConfiguration);
 	}
 
 	private static final String[][] _CLASS_NAMES = new String[][] {
