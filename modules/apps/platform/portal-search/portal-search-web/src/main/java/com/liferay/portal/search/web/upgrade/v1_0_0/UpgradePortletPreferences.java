@@ -40,9 +40,9 @@ public class UpgradePortletPreferences extends BaseUpgradePortletPreferences {
 		String searchConfiguration = portletPreferences.getValue(
 			"searchConfiguration", StringPool.BLANK);
 
-		for (String[] name : _CLASS_NAMES) {
+		for (String[] classNames : _CLASS_NAMES) {
 			searchConfiguration = StringUtil.replace(
-				searchConfiguration, name[0], name[1]);
+				searchConfiguration, classNames[0], classNames[1]);
 		}
 
 		portletPreferences.setValue("searchConfiguration", searchConfiguration);
