@@ -33,7 +33,7 @@ public class UpgradePortletPreferences extends BaseUpgradePortletPreferences {
 		return new String[] {SearchPortletKeys.SEARCH};
 	}
 
-	protected void upgradeAssetEntriesSearchFacetValues(
+	protected void upgradeSearchConfiguration(
 			PortletPreferences portletPreferences)
 		throws Exception {
 
@@ -62,7 +62,7 @@ public class UpgradePortletPreferences extends BaseUpgradePortletPreferences {
 			"searchScope",
 			SearchScopePreference.LET_THE_USER_CHOOSE.getPreferenceString());
 
-		upgradeAssetEntriesSearchFacetValues(portletPreferences);
+		upgradeSearchConfiguration(portletPreferences);
 
 		return PortletPreferencesFactoryUtil.toXML(portletPreferences);
 	}
