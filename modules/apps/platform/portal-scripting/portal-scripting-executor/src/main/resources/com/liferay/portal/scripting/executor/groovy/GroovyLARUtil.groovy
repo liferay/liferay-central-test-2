@@ -98,7 +98,7 @@ class GroovyLARUtil {
 		Group companyGroup = GroupLocalServiceUtil.getCompanyGroup(
 			groovyScriptingContext.getCompanyId())
 
-		Map<String, Serializable> importPortletSettingsMap =
+		Map<String, Serializable> importLayoutSettingsMap =
 			ExportImportConfigurationSettingsMapFactory.
 				buildImportLayoutSettingsMap(
 					groovyUser.user, companyGroup.getGroupId(), true, null,
@@ -109,7 +109,7 @@ class GroovyLARUtil {
 				addDraftExportImportConfiguration(
 					groovyUser.user.getUserId(),
 					ExportImportConfigurationConstants.TYPE_IMPORT_LAYOUT,
-					importPortletSettingsMap);
+					importLayoutSettingsMap);
 
 		ExportImportLocalServiceUtil.importLayouts(
 			exportImportConfiguration, inputStream);
@@ -119,19 +119,18 @@ class GroovyLARUtil {
 		GroovyUser groovyUser, GroovySite groovySite, boolean privateLayout,
 		InputStream inputStream) {
 
-		Map<String, Serializable> importPortletSettingsMap =
+		Map<String, Serializable> importLayoutSettingsMap =
 			ExportImportConfigurationSettingsMapFactory.
 				buildImportLayoutSettingsMap(
 					groovyUser.user, groovySite.group.getGroupId(),
 					privateLayout, null, getParameterMap());
-
 
 		ExportImportConfiguration exportImportConfiguration =
 			ExportImportConfigurationLocalServiceUtil.
 				addDraftExportImportConfiguration(
 					groovyUser.user.getUserId(),
 					ExportImportConfigurationConstants.TYPE_IMPORT_LAYOUT,
-					importPortletSettingsMap);
+					importLayoutSettingsMap);
 
 		ExportImportLocalServiceUtil.importLayouts(
 			exportImportConfiguration, inputStream);
