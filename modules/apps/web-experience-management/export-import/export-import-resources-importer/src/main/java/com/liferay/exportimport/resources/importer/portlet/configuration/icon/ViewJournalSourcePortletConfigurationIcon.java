@@ -165,14 +165,14 @@ public class ViewJournalSourcePortletConfigurationIcon
 	}
 
 	protected String getDialogJS(JournalArticle article) {
-		StringBundler sb = new StringBundler(18);
+		StringBundler sb = new StringBundler(6);
 
 		sb.append("{bodyContent: '<pre>");
 		sb.append(HtmlUtil.escapeJS(HtmlUtil.escape(article.getContent())));
-		sb.append("</pre>', modal: true, toolbars: {");
-		sb.append("footer: [{label:Liferay.Language.get('close'),");
-		sb.append(" on: {click: function(event) {");
-		sb.append("event.domEvent.preventDefault(); sourceModal.hide();}}}]}}");
+		sb.append("</pre>', modal: true, toolbars: {footer: ");
+		sb.append("[{label:Liferay.Language.get('close'), on: {click: ");
+		sb.append("function(event) {event.domEvent.preventDefault(); ");
+		sb.append("sourceModal.hide();}}}]}}");
 
 		return sb.toString();
 	}
@@ -180,12 +180,10 @@ public class ViewJournalSourcePortletConfigurationIcon
 	protected String getWindowJS(
 		PortletRequest portletRequest, JournalArticle article) {
 
-		StringBundler sb = new StringBundler(16);
+		StringBundler sb = new StringBundler(13);
 
-		sb.append("Liferay.Util.Window.getWindow({");
-		sb.append("bodyCssClass: 'dialog-with-footer'");
-		sb.append(", destroyOnHide: true");
-		sb.append(", dialog: ");
+		sb.append("Liferay.Util.Window.getWindow({bodyCssClass: ");
+		sb.append("'dialog-with-footer', destroyOnHide: true, dialog: ");
 		sb.append(getDialogJS(article));
 		sb.append(", id: '");
 
