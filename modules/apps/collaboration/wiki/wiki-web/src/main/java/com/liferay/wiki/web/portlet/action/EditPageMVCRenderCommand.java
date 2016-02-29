@@ -64,12 +64,12 @@ public class EditPageMVCRenderCommand implements MVCRenderCommand {
 		throws PortletException {
 
 		try {
+			renderRequest.setAttribute(
+				WikiWebKeys.WIKI_ENGINE_RENDERER, _wikiEngineRenderer);
+
 			WikiNode node = ActionUtil.getNode(renderRequest);
 
 			renderRequest.setAttribute(WikiWebKeys.WIKI_NODE, node);
-
-			renderRequest.setAttribute(
-				WikiWebKeys.WIKI_ENGINE_RENDERER, _wikiEngineRenderer);
 
 			if (!SessionErrors.contains(
 					renderRequest, DuplicatePageException.class.getName())) {

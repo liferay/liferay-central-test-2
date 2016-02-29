@@ -17,9 +17,9 @@
 <%@ include file="/wiki/init.jsp" %>
 
 <%
-WikiPageInfoPanelDisplayContext wikiPageInfoPanelDisplayContext = wikiDisplayContextProvider.getWikiPageInfoPanelDisplayContext(request, response);
-
 WikiEngineRenderer wikiEngineRenderer = (WikiEngineRenderer)request.getAttribute(WikiWebKeys.WIKI_ENGINE_RENDERER);
+
+WikiPageInfoPanelDisplayContext wikiPageInfoPanelDisplayContext = wikiDisplayContextProvider.getWikiPageInfoPanelDisplayContext(request, response);
 %>
 
 <c:if test="<%= wikiPageInfoPanelDisplayContext.isShowSidebarHeader() %>">

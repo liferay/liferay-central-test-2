@@ -45,13 +45,11 @@ public class PageInfoPanelMVCResourceCommand extends BaseMVCResourceCommand {
 		throws Exception {
 
 		resourceRequest.setAttribute(
+			WikiWebKeys.WIKI_ENGINE_RENDERER, _wikiEngineRenderer);
+		resourceRequest.setAttribute(
 			WikiWebKeys.WIKI_NODE, ActionUtil.getNode(resourceRequest));
-
 		resourceRequest.setAttribute(
 			WikiWebKeys.WIKI_PAGES, ActionUtil.getPages(resourceRequest));
-
-		resourceRequest.setAttribute(
-			WikiWebKeys.WIKI_ENGINE_RENDERER, _wikiEngineRenderer);
 
 		include(
 			resourceRequest, resourceResponse,

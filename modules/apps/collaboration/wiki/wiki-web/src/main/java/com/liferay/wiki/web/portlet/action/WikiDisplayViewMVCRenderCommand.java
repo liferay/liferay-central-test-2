@@ -96,10 +96,10 @@ public class WikiDisplayViewMVCRenderCommand implements MVCRenderCommand {
 					wikiGroupServiceConfiguration.frontPageName());
 			}
 
-			renderRequest.setAttribute(WikiWebKeys.WIKI_NODE, node);
-			renderRequest.setAttribute(WikiWebKeys.WIKI_PAGE, page);
 			renderRequest.setAttribute(
 				WikiWebKeys.WIKI_ENGINE_RENDERER, _wikiEngineRenderer);
+			renderRequest.setAttribute(WikiWebKeys.WIKI_NODE, node);
+			renderRequest.setAttribute(WikiWebKeys.WIKI_PAGE, page);
 
 			return "/wiki_display/view.jsp";
 		}
