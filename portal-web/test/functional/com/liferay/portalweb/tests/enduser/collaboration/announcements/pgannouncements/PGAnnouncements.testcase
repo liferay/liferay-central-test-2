@@ -133,6 +133,7 @@
 		</execute>
 
 		<execute function="AssertTextNotPresent" value1="${entryTitle}" />
+
 		<execute function="Click" locator1="Announcements#NAVIGATION_MANAGE_ENTRIES" />
 
 		<execute function="Select#selectAndWait" locator1="AnnouncementsManageEntries#DISTRIBUTION_SCOPE_SELECT" value1="${distributionScope}" />
