@@ -784,7 +784,7 @@ public class PoshiRunnerExecutor {
 					"\nElement turned stale while running " + selenium +
 						". Retrying in " +
 							PropsValues.TEST_RETRY_COMMAND_WAIT_TIME +
-								"seconds\n");
+								"seconds.");
 
 				try {
 					_returnObject = method.invoke(

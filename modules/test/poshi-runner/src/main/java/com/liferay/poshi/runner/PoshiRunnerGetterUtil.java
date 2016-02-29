@@ -417,7 +417,7 @@ public class PoshiRunnerGetterUtil {
 						"\nElement turned stale while running " + commandName +
 							". Retrying in " +
 								PropsValues.TEST_RETRY_COMMAND_WAIT_TIME +
-									"seconds\n");
+									"seconds.");
 
 					try {
 						returnObject = method.invoke(
