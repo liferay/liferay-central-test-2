@@ -77,7 +77,7 @@ public class UpgradeClassNames extends UpgradeProcess {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
 					String.format(
-						"Workflow Context Java class name renamed " +
+						"Workflow context Java class name renamed " +
 							"from \"%s\" to \"%s\"",
 						oldPortalJavaClassName, newPortalJavaClassName));
 			}
