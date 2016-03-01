@@ -62,7 +62,8 @@ public class LanguageExtender extends AbstractExtender {
 			return null;
 		}
 
-		return new LanguageExtension(_bundleContext, bundle, capabilities);
+		return new LanguageExtension(
+			_bundleContext, _logger, bundle, capabilities);
 	}
 
 	@Override
