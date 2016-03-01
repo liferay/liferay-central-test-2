@@ -31,9 +31,7 @@ if (folderId == 0) {
 	entriesChecker.setRememberCheckBoxStateURLRegex("mvcRenderCommandName=/bookmarks/view(&.|$)");
 }
 else {
-	entriesChecker.setRememberCheckBoxStateURLRegex(
-		"^(?!.*" + liferayPortletResponse.getNamespace() +
-		"redirect).*(folderId=" + folderId + ")");
+	entriesChecker.setRememberCheckBoxStateURLRegex("^(?!.*" + liferayPortletResponse.getNamespace() + "redirect).*(folderId=" + folderId + ")");
 }
 
 EntriesMover entriesMover = new EntriesMover(scopeGroupId);
