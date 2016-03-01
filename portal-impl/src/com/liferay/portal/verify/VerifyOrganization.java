@@ -90,13 +90,13 @@ public class VerifyOrganization extends VerifyProcess {
 			Organization.class.getName());
 
 		try (LoggingTimer loggingTimer = new LoggingTimer();
-			PreparedStatement ps = connection.prepareStatement(
+			PreparedStatement ps1 = connection.prepareStatement(
 				"select AssetEntry.entryId, Organization_.uuid_" +
 					" from AssetEntry, Organization_" +
 					" where AssetEntry.classNameId = " + classNameId +
 					" and AssetEntry.classPK = Organization_.organizationId" +
 					" and AssetEntry.classUuid is null");
-			ResultSet rs = ps.executeQuery()) {
+			ResultSet rs = ps1.executeQuery()) {
 
 			try (PreparedStatement ps2 =
 					AutoBatchPreparedStatementUtil.autoBatch(
