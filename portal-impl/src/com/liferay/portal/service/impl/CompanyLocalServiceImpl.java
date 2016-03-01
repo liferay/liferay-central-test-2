@@ -304,7 +304,8 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		CompanyProvider currentCompanyProvider =
 			_companyProviderWrapper.getCompanyProvider();
 
-		Locale currentDefaultLocale = LocaleThreadLocal.getDefaultLocale();
+		Locale localeThreadLocalDefaultLocale =
+			LocaleThreadLocal.getDefaultLocale();
 
 		try {
 			Locale companyDefaultLocale = LocaleUtil.fromLanguageId(
@@ -452,7 +453,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		finally {
 			_companyProviderWrapper.setCompanyProvider(currentCompanyProvider);
 
-			LocaleThreadLocal.setDefaultLocale(currentDefaultLocale);
+			LocaleThreadLocal.setDefaultLocale(localeThreadLocalDefaultLocale);
 		}
 
 		return company;
