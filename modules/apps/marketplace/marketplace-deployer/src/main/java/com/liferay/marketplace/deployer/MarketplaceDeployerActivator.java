@@ -40,7 +40,7 @@ import org.osgi.util.tracker.BundleTracker;
  * @author Miguel Pastor
  */
 @Component(immediate = true)
-public class LiferayPackageDeployer {
+public class MarketplaceDeployerActivator {
 
 	@Activate
 	protected void activate(BundleContext bundleContext) {
