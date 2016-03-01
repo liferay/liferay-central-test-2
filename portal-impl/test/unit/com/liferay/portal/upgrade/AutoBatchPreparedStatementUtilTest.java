@@ -99,7 +99,7 @@ public class AutoBatchPreparedStatementUtilTest {
 	)
 	@NewEnv(type = NewEnv.Type.CLASSLOADER)
 	@Test
-	public void testConcurrentCancellationException() throws SQLException {
+	public void testConcurrentCancellationException() {
 		doTestConcurrentCancellationException(true);
 		doTestConcurrentCancellationException(false);
 	}
@@ -107,7 +107,7 @@ public class AutoBatchPreparedStatementUtilTest {
 	@AdviseWith(adviceClasses = {PortalExecutorManagerUtilAdvice.class})
 	@NewEnv(type = NewEnv.Type.CLASSLOADER)
 	@Test
-	public void testConcurrentExecutionException() throws SQLException {
+	public void testConcurrentExecutionException() {
 		doTestConcurrentExecutionExceptions(true);
 		doTestConcurrentExecutionExceptions(false);
 	}
@@ -149,8 +149,7 @@ public class AutoBatchPreparedStatementUtilTest {
 	}
 
 	protected void doTestConcurrentCancellationException(
-			boolean supportBatchUpdates)
-		throws SQLException {
+		boolean supportBatchUpdates) {
 
 		try (PreparedStatement preparedStatement =
 				AutoBatchPreparedStatementUtil.concurrentAutoBatch(
@@ -189,8 +188,7 @@ public class AutoBatchPreparedStatementUtilTest {
 	}
 
 	protected void doTestConcurrentExecutionExceptions(
-			boolean supportBatchUpdates)
-		throws SQLException {
+		boolean supportBatchUpdates) {
 
 		PreparedStatementInvocationHandler preparedStatementInvocationHandler =
 			new PreparedStatementInvocationHandler(supportBatchUpdates);
