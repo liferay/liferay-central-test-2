@@ -147,10 +147,10 @@ public class LiferayPackageConnection extends URLConnection {
 
 		jarOutputStream.closeEntry();
 
-		Enumeration<? extends ZipEntry> entries = zipFile.entries();
+		Enumeration<? extends ZipEntry> zipEntries = zipFile.entries();
 
-		while (entries.hasMoreElements()) {
-			zipEntry = entries.nextElement();
+		while (zipEntries.hasMoreElements()) {
+			zipEntry = zipEntries.nextElement();
 
 			newZipEntry = new ZipEntry(zipEntry.getName());
 
