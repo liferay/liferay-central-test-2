@@ -72,11 +72,6 @@
 	<bean id="com.liferay.dynamic.data.mapping.storage.StorageEngineUtil" class="com.liferay.dynamic.data.mapping.storage.StorageEngineUtil">
 		<property name="storageEngine" ref="com.liferay.dynamic.data.mapping.storage.StorageEngine" />
 	</bean>
-	<bean id="com.liferay.dynamic.data.mapping.util.DDMTemplateHelperUtil" class="com.liferay.dynamic.data.mapping.util.DDMTemplateHelperUtil">
-		<property name="DDMTemplateHelper">
-			<bean class="com.liferay.dynamic.data.mapping.util.impl.DDMTemplateHelperImpl" />
-		</property>
-	</bean>
 	<bean id="com.liferay.dynamic.data.mapping.util.DDMXML" class="com.liferay.dynamic.data.mapping.util.impl.DDMXMLImpl">
 		<property name="XMLSchema">
 			<bean class="com.liferay.portal.xml.XMLSchemaImpl">
