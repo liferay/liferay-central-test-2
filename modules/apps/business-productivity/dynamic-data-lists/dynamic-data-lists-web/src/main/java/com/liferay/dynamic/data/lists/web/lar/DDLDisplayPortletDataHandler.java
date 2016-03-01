@@ -69,8 +69,8 @@ public class DDLDisplayPortletDataHandler extends BasePortletDataHandler {
 		portletPreferences.setValue("displayDDMTemplateId", StringPool.BLANK);
 		portletPreferences.setValue("editable", Boolean.TRUE.toString());
 		portletPreferences.setValue("formDDMTemplateId", StringPool.BLANK);
-		portletPreferences.setValue("recordSetId", StringPool.BLANK);
 		portletPreferences.setValue("formView", Boolean.FALSE.toString());
+		portletPreferences.setValue("recordSetId", StringPool.BLANK);
 		portletPreferences.setValue("spreadsheet", Boolean.FALSE.toString());
 
 		return portletPreferences;
