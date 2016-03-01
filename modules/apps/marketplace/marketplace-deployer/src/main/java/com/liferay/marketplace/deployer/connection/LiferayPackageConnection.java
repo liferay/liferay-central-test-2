@@ -79,7 +79,8 @@ public class LiferayPackageConnection extends URLConnection {
 				byteArrayOutputStream.toByteArray());
 		}
 		catch (Exception e) {
-			throw new IOException("Error dealing with file " + getURL());
+			throw new IOException(
+				"Unable to get input stream for " + getURL());
 		}
 		finally {
 			byteArrayOutputStream.close();
@@ -107,13 +108,13 @@ public class LiferayPackageConnection extends URLConnection {
 		throws IOException {
 
 		ZipFile zipFile = new ZipFile(file);
-
 		JarOutputStream jarOutputStream = new JarOutputStream(outputStream);
-		Properties properties = new Properties();
 
 		ZipEntry zipEntry = zipFile.getEntry("liferay-marketplace.properties");
 
 		InputStream inputStream = zipFile.getInputStream(zipEntry);
+
+		Properties properties = new Properties();
 
 		properties.load(new StringReader(StringUtil.read(inputStream)));
 
