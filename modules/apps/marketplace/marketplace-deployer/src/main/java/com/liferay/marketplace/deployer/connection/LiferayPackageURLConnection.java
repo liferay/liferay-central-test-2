@@ -79,8 +79,7 @@ public class LiferayPackageURLConnection extends URLConnection {
 				byteArrayOutputStream.toByteArray());
 		}
 		catch (Exception e) {
-			throw new IOException(
-				"Unable to get input stream for " + getURL());
+			throw new IOException("Unable to get input stream for " + getURL());
 		}
 		finally {
 			byteArrayOutputStream.close();
@@ -91,19 +90,6 @@ public class LiferayPackageURLConnection extends URLConnection {
 		}
 	}
 
-	protected File transferToTempFile(URL url) throws IOException {
-		String path = url.getPath();
-
-		String fileName = path.substring(
-			path.lastIndexOf(StringPool.SLASH) + 1);
-
-		File file = new File(FileUtil.createTempFolder(), fileName);
-
-		StreamUtil.transfer(url.openStream(), new FileOutputStream(file));
-
-		return file;
-	}
-	
 	protected Manifest getManifest(Properties properties) {
 		Manifest manifest = new Manifest();
 
@@ -118,8 +104,21 @@ public class LiferayPackageURLConnection extends URLConnection {
 			properties.getProperty("description"));
 		attributes.putValue(
 			Constants.BUNDLE_VERSION, properties.getProperty("version"));
-		
+
 		return manifest;
+	}
+
+	protected File transferToTempFile(URL url) throws IOException {
+		String path = url.getPath();
+
+		String fileName = path.substring(
+			path.lastIndexOf(StringPool.SLASH) + 1);
+
+		File file = new File(FileUtil.createTempFolder(), fileName);
+
+		StreamUtil.transfer(url.openStream(), new FileOutputStream(file));
+
+		return file;
 	}
 
 	protected void transform(File file, OutputStream outputStream)
