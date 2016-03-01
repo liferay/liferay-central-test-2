@@ -14,7 +14,7 @@
 
 package com.liferay.marketplace.deployer;
 
-import com.liferay.marketplace.deployer.handler.LiferayPackageStreamHandlerService;
+import com.liferay.marketplace.deployer.handler.LiferayPackageURLStreamHandlerService;
 import com.liferay.marketplace.deployer.installer.LiferayPackageInstaller;
 import com.liferay.marketplace.deployer.transformer.LiferayPackageURLTransformer;
 import com.liferay.marketplace.service.AppLocalService;
@@ -85,7 +85,7 @@ public class LiferayPackageDeployer {
 
 		return bundleContext.registerService(
 			URLStreamHandlerService.class.getName(),
-			new LiferayPackageStreamHandlerService(), properties);
+			new LiferayPackageURLStreamHandlerService(), properties);
 	}
 
 	@Reference(unbind = "-")
