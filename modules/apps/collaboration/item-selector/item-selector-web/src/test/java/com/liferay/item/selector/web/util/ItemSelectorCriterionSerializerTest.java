@@ -95,9 +95,8 @@ public class ItemSelectorCriterionSerializerTest {
 
 		String json =
 			"{\"desiredItemSelectorReturnTypes\":\"" +
-				testURLItemSelectorReturnTypeClass.getName() + "\",\"" +
-					"tags\":[\"tag1\",\"tag2\",\"tag3\"],\"user\":\"" +
-						"Joe Bloggs\"}";
+				testURLItemSelectorReturnTypeClass.getName() + "\",\"tags\":" +
+					"[\"tag1\",\"tag2\",\"tag3\"],\"user\":\"Joe Bloggs\"}";
 
 		_flickrItemSelectorCriterion =
 			_itemSelectorCriterionSerializer.deserialize(
