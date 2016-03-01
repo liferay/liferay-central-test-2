@@ -26,10 +26,13 @@ portletDisplay.setShowBackIcon(true);
 portletDisplay.setURLBack(redirect);
 
 ResourceBundleLoaderProvider resourceBundleLoaderProvider = (ResourceBundleLoaderProvider)request.getAttribute(ConfigurationAdminWebKeys.RESOURCE_BUNDLE_LOADER_PROVIDER);
+
 ResourceBundleLoader resourceBundleLoader = resourceBundleLoaderProvider.getResourceBundleLoader(configurationModel.getBundleSymbolicName());
+
 ResourceBundle componentResourceBundle = resourceBundleLoader.loadResourceBundle(LanguageUtil.getLanguageId(request));
 
 String configurationModelName = (componentResourceBundle != null) ? LanguageUtil.get(componentResourceBundle, configurationModel.getName()) : configurationModel.getName();
+
 renderResponse.setTitle(configurationModelName);
 %>
 
