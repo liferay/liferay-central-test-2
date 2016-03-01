@@ -95,19 +95,19 @@ public class LanguageExtension implements Extension {
 	}
 
 	protected ResourceBundleLoader processAggregate(String aggregate) {
-		String[] filters = aggregate.split(",");
+		String[] filterStrings = aggregate.split(",");
 
 		List<ServiceTracker<ResourceBundleLoader, ResourceBundleLoader>>
-			serviceTrackers = new ArrayList<>(filters.length);
+			serviceTrackers = new ArrayList<>(filterStrings.length);
 
-		for (String filter : filters) {
-			filter =
+		for (String filterString : filterStrings) {
+			filterString =
 				"(&(objectClass=" + ResourceBundleLoader.class.getName() + ")" +
-					filter + ")";
+					filterString + ")";
 
 			ServiceTracker<ResourceBundleLoader, ResourceBundleLoader>
 				serviceTracker = ServiceTrackerFactory.open(
-					_bundleContext, filter);
+					_bundleContext, filterString);
 
 			serviceTrackers.add(serviceTracker);
 		}
