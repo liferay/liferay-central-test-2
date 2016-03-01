@@ -103,6 +103,24 @@ public class LiferayPackageConnection extends URLConnection {
 
 		return file;
 	}
+	
+	protected Manifest getManifest(Properties properties) {
+		Manifest manifest = new Manifest();
+
+		Attributes attributes = manifest.getMainAttributes();
+
+		attributes.putValue("Manifest-Version", "2");
+		attributes.putValue(Constants.BUNDLE_MANIFESTVERSION, "2");
+		attributes.putValue(
+			Constants.BUNDLE_SYMBOLICNAME, properties.getProperty("title"));
+		attributes.putValue(
+			Constants.BUNDLE_DESCRIPTION,
+			properties.getProperty("description"));
+		attributes.putValue(
+			Constants.BUNDLE_VERSION, properties.getProperty("version"));
+		
+		return manifest;
+	}
 
 	protected void transform(File file, OutputStream outputStream)
 		throws IOException {
@@ -118,19 +136,7 @@ public class LiferayPackageConnection extends URLConnection {
 
 		properties.load(new StringReader(StringUtil.read(inputStream)));
 
-		Manifest manifest = new Manifest();
-
-		Attributes attributes = manifest.getMainAttributes();
-
-		attributes.putValue("Manifest-Version", "2");
-		attributes.putValue(Constants.BUNDLE_MANIFESTVERSION, "2");
-		attributes.putValue(
-			Constants.BUNDLE_SYMBOLICNAME, properties.getProperty("title"));
-		attributes.putValue(
-			Constants.BUNDLE_DESCRIPTION,
-			properties.getProperty("description"));
-		attributes.putValue(
-			Constants.BUNDLE_VERSION, properties.getProperty("version"));
+		Manifest manifest = getManifest(properties);
 
 		ZipEntry newZipEntry = new ZipEntry(JarFile.MANIFEST_NAME);
 
