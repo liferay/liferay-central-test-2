@@ -140,15 +140,7 @@
 				</execute>
 			</then>
 			<else>
-				<if>
-					<and>
-						<condition function="IsElementPresent" locator1="Message#SUCCESS" />
-						<condition function="IsVisible" locator1="Message#SUCCESS" />
-					</and>
-					<then>
-						<execute macro="Alert#viewSuccessMessage" />
-					</then>
-				</if>
+				<execute macro="Alert#viewSuccessMessage" />
 			</else>
 		</if>
 	</command>
@@ -651,15 +643,7 @@
 	<command name="saveAddPage">
 		<execute function="AssertClick" locator1="Button#ADD_PAGE_BTN" value1="Add Page" />
 
-		<if>
-			<and>
-				<condition function="IsElementPresent" locator1="Message#SUCCESS" />
-				<condition function="IsVisible" locator1="Message#SUCCESS" />
-			</and>
-			<then>
-				<execute macro="Alert#viewSuccessMessage" />
-			</then>
-		</if>
+		<execute macro="Alert#viewSuccessMessage" />
 	</command>
 
 	<command name="selectSitePagesVariationName">
