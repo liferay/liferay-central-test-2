@@ -105,8 +105,8 @@ public abstract class UpgradeCompanyId extends UpgradeProcess {
 				_con = DataAccess.getUpgradeOptimizedConnection();
 
 				runSQL(
-					_con, "alter table " + getTableName() +
-						" add companyId LONG");
+					_con,
+					"alter table " + getTableName() + " add companyId LONG");
 
 				update();
 			}
