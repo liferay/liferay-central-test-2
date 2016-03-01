@@ -400,12 +400,13 @@ public abstract class TestOrderHelper {
 			String indexType, String type)
 		throws Exception {
 
-		_optionValues = unsortedValues;
 		_unsortedValues = toJsonArrays(unsortedValues);
 		_sortedValues = toJsonArrays(sortedValues);
 		_dataType = dataType;
 		_indexType = indexType;
 		_type = type;
+
+		_optionValues = unsortedValues;
 		_repeatable = false;
 
 		testOrderByDDMField();
