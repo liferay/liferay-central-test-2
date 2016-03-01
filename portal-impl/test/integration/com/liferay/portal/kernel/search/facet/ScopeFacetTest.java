@@ -160,13 +160,15 @@ public class ScopeFacetTest {
 			final SearchContext searchContext, Map<Group, Integer> frequencies)
 		throws Exception {
 
-		final ArrayList<String> expectedList = new ArrayList<>();
+		final List<String> expectedList = new ArrayList<>();
 
 		for (Map.Entry<Group, Integer> entry : frequencies.entrySet()) {
 			Group group = entry.getKey();
 
 			expectedList.add(group.getGroupId() + "=" + entry.getValue());
 		}
+
+		Collections.sort(expectedList);
 
 		IdempotentRetryAssert.retryAssert(
 			10, TimeUnit.SECONDS,
@@ -184,22 +186,21 @@ public class ScopeFacetTest {
 
 					FacetCollector facetCollector = facet.getFacetCollector();
 
+					List<String> actualList = new ArrayList<>();
+
 					List<TermCollector> termCollectors =
 						facetCollector.getTermCollectors();
 
-					List<String> list = new ArrayList<>();
-
 					for (TermCollector termCollector : termCollectors) {
-						list.add(
+						actualList.add(
 							termCollector.getTerm() + "=" +
 								termCollector.getFrequency());
 					}
 
-					Collections.sort(expectedList);
-					Collections.sort(list);
+					Collections.sort(actualList);
 
 					Assert.assertEquals(
-						expectedList.toString(), list.toString());
+						expectedList.toString(), actualList.toString());
 
 					return null;
 				}
