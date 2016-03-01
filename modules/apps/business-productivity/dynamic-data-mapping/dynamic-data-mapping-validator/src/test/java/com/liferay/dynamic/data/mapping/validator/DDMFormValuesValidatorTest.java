@@ -518,13 +518,15 @@ public class DDMFormValuesValidatorTest {
 
 		DDMFormField ddmFormField = new DDMFormField("option", "select");
 
+		ddmFormField.setDataType("string");
+
 		DDMFormFieldOptions ddmFormFieldOptions = new DDMFormFieldOptions();
 
 		ddmFormFieldOptions.addOptionLabel("A", LocaleUtil.US, "Option A");
 		ddmFormFieldOptions.addOptionLabel("B", LocaleUtil.US, "Option B");
 
-		ddmFormField.setDataType("string");
 		ddmFormField.setDDMFormFieldOptions(ddmFormFieldOptions);
+
 		ddmFormField.setLocalizable(false);
 
 		ddmForm.addDDMFormField(ddmFormField);
@@ -580,7 +582,7 @@ public class DDMFormValuesValidatorTest {
 
 	protected void setUpDDMFormValuesValidator() throws Exception {
 
-		// DDM Form Evaluator
+		// DDM form evaluator
 
 		DDMFormEvaluator _ddFormEvaluator = mock(DDMFormEvaluator.class);
 
@@ -610,7 +612,7 @@ public class DDMFormValuesValidatorTest {
 			ddmFormEvaluationResult
 		);
 
-		// JSON Factory
+		// JSON factory
 
 		field(
 			DDMFormValuesValidatorImpl.class, "_jsonFactory"
