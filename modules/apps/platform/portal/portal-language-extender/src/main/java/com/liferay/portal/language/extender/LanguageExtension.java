@@ -29,8 +29,8 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 import org.apache.felix.utils.extender.Extension;
-
 import org.apache.felix.utils.log.Logger;
+
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
@@ -43,13 +43,6 @@ import org.osgi.util.tracker.ServiceTracker;
  */
 public class LanguageExtension implements Extension {
 
-	private final BundleContext _bundleContext;
-	private Logger _logger;
-	private final Bundle _bundle;
-	private final List<BundleCapability> _capabilities;
-	private Collection<ServiceRegistration<ResourceBundleLoader>>
-		_serviceRegistrations = new ArrayList<>();
-
 	public LanguageExtension(
 		BundleContext bundleContext, Logger logger, Bundle bundle,
 		List<BundleCapability> capabilities) {
@@ -58,6 +51,15 @@ public class LanguageExtension implements Extension {
 		_logger = logger;
 		_bundle = bundle;
 		_capabilities = capabilities;
+	}
+
+	@Override
+	public void destroy() throws Exception {
+		for (ServiceRegistration<ResourceBundleLoader> serviceRegistration :
+				_serviceRegistrations) {
+
+			serviceRegistration.unregister();
+		}
 	}
 
 	@Override
@@ -85,28 +87,14 @@ public class LanguageExtension implements Extension {
 			}
 			else {
 				_logger.log(
-					Logger.LOG_WARNING, "Could not handle " + capability +
+					Logger.LOG_WARNING,
+					"Could not handle " + capability +
 						" in " + _bundle.getSymbolicName());
 			}
 		}
 	}
 
-	protected void registerResourceBundleLoader(
-		Map<String, Object> attributes,
-		ResourceBundleLoader resourceBundleLoader) {
-
-		Dictionary<String, Object> properties = new Hashtable<>(attributes);
-
-		properties.put("bundle.symbolic.name", _bundle.getSymbolicName());
-		properties.put("service.ranking", Integer.MIN_VALUE);
-
-		_serviceRegistrations.add(
-			_bundleContext.registerService(
-				ResourceBundleLoader.class, resourceBundleLoader, properties));
-	}
-
 	protected ResourceBundleLoader processAggregate(String aggregate) {
-
 		String[] filters = aggregate.split(",");
 
 		List<ServiceTracker<ResourceBundleLoader, ResourceBundleLoader>>
@@ -134,20 +122,29 @@ public class LanguageExtension implements Extension {
 			ResourceBundleUtil.getResourceBundleLoader(baseName, classLoader));
 	}
 
-	@Override
-	public void destroy() throws Exception {
-		for (ServiceRegistration<ResourceBundleLoader> serviceRegistration :
-				_serviceRegistrations) {
+	protected void registerResourceBundleLoader(
+		Map<String, Object> attributes,
+		ResourceBundleLoader resourceBundleLoader) {
 
-			serviceRegistration.unregister();
-		}
+		Dictionary<String, Object> properties = new Hashtable<>(attributes);
+
+		properties.put("bundle.symbolic.name", _bundle.getSymbolicName());
+		properties.put("service.ranking", Integer.MIN_VALUE);
+
+		_serviceRegistrations.add(
+			_bundleContext.registerService(
+				ResourceBundleLoader.class, resourceBundleLoader, properties));
 	}
+
+	private final Bundle _bundle;
+	private final BundleContext _bundleContext;
+	private final List<BundleCapability> _capabilities;
+	private final Logger _logger;
+	private final Collection<ServiceRegistration<ResourceBundleLoader>>
+		_serviceRegistrations = new ArrayList<>();
 
 	private static class ServiceTrackerResourceBundleLoader
 		implements ResourceBundleLoader {
-
-		private List<ServiceTracker<ResourceBundleLoader, ResourceBundleLoader>>
-			_serviceTrackers;
 
 		public ServiceTrackerResourceBundleLoader(
 			List<ServiceTracker<ResourceBundleLoader, ResourceBundleLoader>>
@@ -187,5 +184,10 @@ public class LanguageExtension implements Extension {
 					new ResourceBundle[resourceBundles.size()]));
 		}
 
+		private final
+			List<ServiceTracker<ResourceBundleLoader, ResourceBundleLoader>>
+				_serviceTrackers;
+
 	}
+
 }
