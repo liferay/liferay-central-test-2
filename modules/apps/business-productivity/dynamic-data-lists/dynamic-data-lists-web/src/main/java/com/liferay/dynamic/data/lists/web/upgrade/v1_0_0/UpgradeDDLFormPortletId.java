@@ -64,8 +64,8 @@ public class UpgradeDDLFormPortletId
 
 		try (PreparedStatement ps = connection.prepareStatement(
 				"select count(*) from ResourcePermission where companyId = ? " +
-					"and name = ? and scope = ? and primKey = ? and " +
-						"roleId = ? ")) {
+					"and name = ? and scope = ? and primKey = ? and roleId " +
+						"= ?")) {
 
 			ps.setLong(1, companyId);
 			ps.setString(2, name);
@@ -146,9 +146,9 @@ public class UpgradeDDLFormPortletId
 				resourcePermission.getScope(), primKey,
 				resourcePermission.getRoleId())) {
 
-			// Resource permission may have already been added by DDL Display
-			// portlet, in this case it's safe to remove 1_WAR_ddlformportlet
-			// resource permission
+			// Resource permission may have already been added by the DDL
+			// Display portlet, in this case it's safe to remove
+			// 1_WAR_ddlformportlet resource permission
 
 			_resourcePermissionLocalService.deleteResourcePermission(
 				resourcePermission.getResourcePermissionId());
