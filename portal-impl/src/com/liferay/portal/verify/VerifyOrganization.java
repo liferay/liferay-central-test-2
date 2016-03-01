@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.service.ClassNameLocalServiceUtil;
 import com.liferay.portal.kernel.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.kernel.util.LoggingTimer;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.upgrade.AutoBatchPreparedStatementUtil;
 import com.liferay.portal.util.PortalInstances;
 
@@ -86,16 +87,22 @@ public class VerifyOrganization extends VerifyProcess {
 	}
 
 	protected void updateOrganizationAssetEntries() throws Exception {
+		StringBundler sb = new StringBundler();
+
+		sb.append("select AssetEntry.entryId, Organization_.uuid_ from ");
+		sb.append("AssetEntry, Organization_ where AssetEntry.classNameId = ");
+
 		long classNameId = ClassNameLocalServiceUtil.getClassNameId(
 			Organization.class.getName());
 
+		sb.append(classNameId);
+
+		sb.append(" and AssetEntry.classPK = Organization_.organizationId ");
+		sb.append("and AssetEntry.classUuid is null");
+
 		try (LoggingTimer loggingTimer = new LoggingTimer();
-			PreparedStatement ps1 = connection.prepareStatement(
-				"select AssetEntry.entryId, Organization_.uuid_" +
-					" from AssetEntry, Organization_" +
-					" where AssetEntry.classNameId = " + classNameId +
-					" and AssetEntry.classPK = Organization_.organizationId" +
-					" and AssetEntry.classUuid is null");
+
+			PreparedStatement ps1 = connection.prepareStatement(sb.toString());
 			ResultSet rs = ps1.executeQuery()) {
 
 			try (PreparedStatement ps2 =
