@@ -196,8 +196,8 @@ public abstract class UpgradeProcess
 
 	public class AlterTableAddColumn implements Alterable {
 
-		public AlterTableAddColumn(String column) {
-			_column = column;
+		public AlterTableAddColumn(String columnName) {
+			_columnName = columnName;
 		}
 
 		@Override
@@ -212,12 +212,12 @@ public abstract class UpgradeProcess
 			sb.append("alter table ");
 			sb.append(tableName);
 			sb.append(" add column ");
-			sb.append(_column);
+			sb.append(_columnName);
 
 			return sb.toString();
 		}
 
-		private final String _column;
+		private final String _columnName;
 
 	}
 
