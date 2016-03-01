@@ -63,7 +63,7 @@ public class LiferayPackageInstaller
 	}
 
 	@Override
-	public Bundle addingBundle(Bundle bundle, BundleEvent event) {
+	public Bundle addingBundle(Bundle bundle, BundleEvent bundleEvent) {
 		URL url = bundle.getEntry("liferay-marketplace.properties");
 
 		if (url == null) {
@@ -72,27 +72,29 @@ public class LiferayPackageInstaller
 
 		List<Bundle> bundles = new ArrayList<>();
 
-		Enumeration<URL> jarEntries = bundle.findEntries("/", "*.jar", false);
-		Enumeration<URL> warEntries = bundle.findEntries("/", "*.war", false);
+		Enumeration<URL> jarEnumeration = bundle.findEntries(
+			"/", "*.jar", false);
+		Enumeration<URL> warEnumeration = bundle.findEntries(
+			"/", "*.war", false);
 
 		try {
 			bundles.addAll(
 				installArtifacts(
-					jarEntries, new JarArtifactInstaller(_bundleContext)));
+					jarEnumeration, new JarArtifactInstaller(_bundleContext)));
 			bundles.addAll(
 				installArtifacts(
-					warEntries, new WARArtifactInstaller(_bundleContext)));
+					warEnumeration, new WarArtifactInstaller(_bundleContext)));
 
 			for (Bundle installedBundle : bundles) {
 				installedBundle.start();
 			}
 
-			_registerAppInMarketplace(url);
+			registerAppInMarketplace(url);
 		}
 		catch (Exception e) {
 			bundles.add(bundle);
 
-			_uninstallBundles(bundles);
+			uninstallBundles(bundles);
 
 			return null;
 		}
@@ -104,20 +106,22 @@ public class LiferayPackageInstaller
 
 	@Override
 	public void modifiedBundle(
-		Bundle bundle, BundleEvent event, Bundle object) {
+		Bundle bundle, BundleEvent bundleEvent, Bundle objectBundle) {
 
-		removedBundle(bundle, event, object);
+		removedBundle(bundle, bundleEvent, objectBundle);
 
-		addingBundle(bundle, event);
+		addingBundle(bundle, bundleEvent);
 	}
 
 	@Override
-	public void removedBundle(Bundle bundle, BundleEvent event, Bundle object) {
-		List<Bundle> bundles = _installedLpkgFiles.get(object.getBundleId());
+	public void removedBundle(
+		Bundle bundle, BundleEvent bundleEvent, Bundle objectBundle) {
 
-		_uninstallBundles(bundles);
+		List<Bundle> bundles = _installedLpkgFiles.get(bundle.getBundleId());
 
-		_installedLpkgFiles.remove(object.getBundleId());
+		uninstallBundles(bundles);
+
+		_installedLpkgFiles.remove(bundle.getBundleId());
 	}
 
 	protected List<Bundle> installArtifacts(
@@ -137,7 +141,7 @@ public class LiferayPackageInstaller
 		return bundles;
 	}
 
-	private void _registerAppInMarketplace(URL url)
+	protected void registerAppInMarketplace(URL url)
 		throws IOException, PortalException {
 
 		Properties properties = PropertiesUtil.load(
@@ -186,7 +190,7 @@ public class LiferayPackageInstaller
 		_appLocalService.processMarketplaceProperties(properties);
 	}
 
-	private void _uninstallBundles(List<Bundle> bundles) {
+	protected void uninstallBundles(List<Bundle> bundles) {
 		for (Bundle bundle : bundles) {
 			try {
 				bundle.uninstall();
@@ -222,10 +226,10 @@ public class LiferayPackageInstaller
 
 	}
 
-	private static final class WARArtifactInstaller
+	private static final class WarArtifactInstaller
 		implements ArtifactInstaller {
 
-		public WARArtifactInstaller(BundleContext bundleContext) {
+		public WarArtifactInstaller(BundleContext bundleContext) {
 			_bundleContext = bundleContext;
 		}
 
@@ -244,21 +248,21 @@ public class LiferayPackageInstaller
 				contextName = matcher.group(1);
 			}
 
-			File tempFile = File.createTempFile(
+			File file = File.createTempFile(
 				"lpkg-module-" + contextName, ".war");
 
 			try {
 				StreamUtil.transfer(
-					url.openStream(), new FileOutputStream(tempFile));
+					url.openStream(), new FileOutputStream(file));
 
 				String location =
-					"webbundle:file://" + tempFile.getAbsolutePath() +
+					"webbundle:file://" + file.getAbsolutePath() +
 						"?Web-ContextPath=/" + contextName;
 
 				return _bundleContext.installBundle(location);
 			}
 			finally {
-				tempFile.delete();
+				file.delete();
 			}
 		}
 
