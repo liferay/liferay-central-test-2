@@ -46,9 +46,9 @@ import org.osgi.framework.Constants;
 /**
  * @author Miguel Pastor
  */
-public class LiferayPackageConnection extends URLConnection {
+public class LiferayPackageURLConnection extends URLConnection {
 
-	public LiferayPackageConnection(URL url) {
+	public LiferayPackageURLConnection(URL url) {
 		super(url);
 
 		try {

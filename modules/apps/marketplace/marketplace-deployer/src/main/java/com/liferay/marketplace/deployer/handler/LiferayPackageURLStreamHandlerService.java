@@ -14,7 +14,7 @@
 
 package com.liferay.marketplace.deployer.handler;
 
-import com.liferay.marketplace.deployer.connection.LiferayPackageConnection;
+import com.liferay.marketplace.deployer.connection.LiferayPackageURLConnection;
 
 import java.net.URL;
 import java.net.URLConnection;
@@ -24,12 +24,12 @@ import org.osgi.service.url.AbstractURLStreamHandlerService;
 /**
  * @author Miguel Pastor
  */
-public class LiferayPackageStreamHandlerService
+public class LiferayPackageURLStreamHandlerService
 	extends AbstractURLStreamHandlerService {
 
 	@Override
 	public URLConnection openConnection(URL url) {
-		return new LiferayPackageConnection(url);
+		return new LiferayPackageURLConnection(url);
 	}
 
 }
