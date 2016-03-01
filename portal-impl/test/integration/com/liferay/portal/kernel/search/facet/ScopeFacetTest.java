@@ -187,7 +187,7 @@ public class ScopeFacetTest {
 					List<TermCollector> termCollectors =
 						facetCollector.getTermCollectors();
 
-					ArrayList<String> list = new ArrayList<>();
+					List<String> list = new ArrayList<>();
 
 					for (TermCollector termCollector : termCollectors) {
 						list.add(
