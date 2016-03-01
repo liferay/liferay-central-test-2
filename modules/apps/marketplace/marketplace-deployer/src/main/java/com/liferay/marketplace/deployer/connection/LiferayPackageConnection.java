@@ -125,8 +125,13 @@ public class LiferayPackageConnection extends URLConnection {
 	protected void transform(File file, OutputStream outputStream)
 		throws IOException {
 
-		ZipFile zipFile = new ZipFile(file);
 		JarOutputStream jarOutputStream = new JarOutputStream(outputStream);
+
+		ZipEntry newZipEntry = new ZipEntry(JarFile.MANIFEST_NAME);
+
+		jarOutputStream.putNextEntry(newZipEntry);
+
+		ZipFile zipFile = new ZipFile(file);
 
 		ZipEntry zipEntry = zipFile.getEntry("liferay-marketplace.properties");
 
@@ -137,10 +142,6 @@ public class LiferayPackageConnection extends URLConnection {
 		properties.load(new StringReader(StringUtil.read(inputStream)));
 
 		Manifest manifest = getManifest(properties);
-
-		ZipEntry newZipEntry = new ZipEntry(JarFile.MANIFEST_NAME);
-
-		jarOutputStream.putNextEntry(newZipEntry);
 
 		manifest.write(jarOutputStream);
 
