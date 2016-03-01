@@ -571,7 +571,17 @@ app.server.type=@{app.server.type}]]></echo>
 							</antcall>
 						</then>
 						<else>
-							<prepare-test-environment app.server.type="${app.server.type}" />
+							<if>
+								<isset property="env.DIST_PATH" />
+								<then>
+									<prepare-test-environment app.server.type="${app.server.type}" />
+								</then>
+								<else>
+									<antcall target="compile" />
+
+									<ant antfile="build-dist.xml" target="build-dist-${app.server.type}" />
+								</else>
+							</if>
 
 							<if>
 								<equals arg1="${app.server.type}" arg2="tomcat" />
@@ -622,10 +632,6 @@ app.server.type=@{app.server.type}]]></echo>
 				<test-action>
 					<database-test-run-test database.type="@{database.type}" database.version="@{database.version}">
 						<test-action>
-							<antcall target="record-test-class-file-names" inheritAll="false">
-								<param name="test.class.groups.size" value="${test.batch.size}" />
-							</antcall>
-
 							<print-test-class-group test.class.group.index="${axis.variable}" />
 
 							<ant dir="portal-impl" target="test-class-group" inheritAll="false">
@@ -638,7 +644,19 @@ app.server.type=@{app.server.type}]]></echo>
 				</test-action>
 
 				<test-set-up>
-					<prepare-test-environment />
+					<if>
+						<isset property="env.DIST_PATH" />
+						<then>
+							<prepare-test-environment />
+
+							<antcall target="record-test-class-file-names" inheritAll="false">
+								<param name="test.class.groups.size" value="${test.batch.size}" />
+							</antcall>
+						</then>
+						<else>
+							<prepare-test-build />
+						</else>
+					</if>
 				</test-set-up>
 			</run-batch-test>
 		</sequential>
@@ -652,10 +670,6 @@ app.server.type=@{app.server.type}]]></echo>
 				<test-action>
 					<database-test-run-test database.type="@{database.type}" stop.app.server="true">
 						<test-action>
-							<antcall target="record-test-class-file-names" inheritAll="false">
-								<param name="test.class.groups.size" value="${test.batch.size}" />
-							</antcall>
-
 							<print-test-class-group test.class.group.index="${axis.variable}" />
 
 							<antcall target="prepare-log4j-ext-xml" inheritAll="false">
@@ -681,7 +695,19 @@ app.server.type=@{app.server.type}]]></echo>
 				</test-action>
 
 				<test-set-up>
-					<prepare-test-environment />
+					<if>
+						<isset property="env.DIST_PATH" />
+						<then>
+							<prepare-test-environment />
+
+							<antcall target="record-test-class-file-names" inheritAll="false">
+								<param name="test.class.groups.size" value="${test.batch.size}" />
+							</antcall>
+						</then>
+						<else>
+							<prepare-test-build />
+						</else>
+					</if>
 				</test-set-up>
 			</run-batch-test>
 		</sequential>
@@ -708,7 +734,15 @@ app.server.type=@{app.server.type}]]></echo>
 			</test-action>
 
 			<test-set-up>
-				<prepare-test-environment />
+				<if>
+					<isset property="env.DIST_PATH" />
+					<then>
+						<prepare-test-environment />
+					</then>
+					<else>
+						<prepare-test-build />
+					</else>
+				</if>
 			</test-set-up>
 		</run-batch-test>
 	</target>
@@ -811,17 +845,25 @@ app.server.type=@{app.server.type}]]></echo>
 	<target name="modules-unit-jdk7">
 		<run-batch-test>
 			<test-action>
-				<antcall target="record-test-class-file-names" inheritAll="false">
-					<param name="test.class.groups.size" value="${test.batch.size}" />
-				</antcall>
-
 				<gradle-execute dir="modules" task="test">
 					<arg value="-Dtest.class.group.index=${axis.variable}" />
 				</gradle-execute>
 			</test-action>
 
 			<test-set-up>
-				<prepare-test-environment />
+				<if>
+					<isset property="env.DIST_PATH" />
+					<then>
+						<prepare-test-environment />
+
+						<antcall target="record-test-class-file-names" inheritAll="false">
+							<param name="test.class.groups.size" value="${test.batch.size}" />
+						</antcall>
+					</then>
+					<else>
+						<prepare-test-build />
+					</else>
+				</if>
 			</test-set-up>
 		</run-batch-test>
 	</target>
@@ -866,17 +908,25 @@ ${output.content}</echo>
 	<target name="plugins-compile-jdk7">
 		<run-batch-test>
 			<test-action>
-				<antcall target="record-test-plugin-names" inheritAll="false">
-					<param name="test.plugin.groups.size" value="${test.batch.size}" />
-				</antcall>
-
 				<ant antfile="build-test-plugins.xml" target="test-plugin-group">
 					<property name="test.plugin.group.index" value="${axis.variable}" />
 				</ant>
 			</test-action>
 
 			<test-set-up>
-				<prepare-test-environment />
+				<if>
+					<isset property="env.DIST_PATH" />
+					<then>
+						<prepare-test-environment />
+
+						<antcall target="record-test-plugin-names" inheritAll="false">
+							<param name="test.plugin.groups.size" value="${test.batch.size}" />
+						</antcall>
+					</then>
+					<else>
+						<prepare-test-build />
+					</else>
+				</if>
 			</test-set-up>
 		</run-batch-test>
 	</target>
@@ -917,7 +967,15 @@ ${output.content}</echo>
 			</test-action>
 
 			<test-set-up>
-				<prepare-test-environment />
+				<if>
+					<isset property="env.DIST_PATH" />
+					<then>
+						<prepare-test-environment />
+					</then>
+					<else>
+						<prepare-test-build />
+					</else>
+				</if>
 			</test-set-up>
 		</run-batch-test>
 	</target>
@@ -988,7 +1046,15 @@ information. Make sure to commit in all build services results.
 			</test-action>
 
 			<test-set-up>
-				<prepare-test-environment />
+				<if>
+					<isset property="env.DIST_PATH" />
+					<then>
+						<prepare-test-environment />
+					</then>
+					<else>
+						<prepare-test-build />
+					</else>
+				</if>
 			</test-set-up>
 		</run-batch-test>
 	</target>
@@ -1111,7 +1177,15 @@ ${output.content}</echo>
 			</test-action>
 
 			<test-set-up>
-				<prepare-test-environment />
+				<if>
+					<isset property="env.DIST_PATH" />
+					<then>
+						<prepare-test-environment />
+					</then>
+					<else>
+						<prepare-test-build />
+					</else>
+				</if>
 
 				<antcall target="prepare-portal-ext-properties">
 					<param name="hot.deploy.dependency.management.enabled" value="false" />
@@ -1125,10 +1199,6 @@ ${output.content}</echo>
 	<target name="unit-jdk7">
 		<run-batch-test>
 			<test-action>
-				<antcall target="record-test-class-file-names" inheritAll="false">
-					<param name="test.class.groups.size" value="${test.batch.size}" />
-				</antcall>
-
 				<ant dir="portal-kernel" target="test-class-group" inheritAll="false">
 					<property name="test.class.group.index" value="${axis.variable}" />
 				</ant>
@@ -1144,7 +1214,19 @@ ${output.content}</echo>
 			</test-action>
 
 			<test-set-up>
-				<prepare-test-environment />
+				<if>
+					<isset property="env.DIST_PATH" />
+					<then>
+						<prepare-test-environment />
+
+						<antcall target="record-test-class-file-names" inheritAll="false">
+							<param name="test.class.groups.size" value="${test.batch.size}" />
+						</antcall>
+					</then>
+					<else>
+						<prepare-test-build-unit />
+					</else>
+				</if>
 			</test-set-up>
 		</run-batch-test>
 	</target>
