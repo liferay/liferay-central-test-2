@@ -141,7 +141,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		try (LoggingTimer loggingTimer = new LoggingTimer()) {
 			runSQL("alter table DLFileEntry add fileName VARCHAR(255) null");
 
-			try (PreparedStatement ps = connection.prepareStatement(
+			try (PreparedStatement ps1 = connection.prepareStatement(
 					"select fileEntryId, groupId, folderId, extension, title," +
 						" version from DLFileEntry");
 				PreparedStatement ps2 =
@@ -159,7 +159,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 						connection.prepareStatement(
 							"update DLFileVersion set title = ? where " +
 								"fileEntryId = " + "? and version = ?"));
-				ResultSet rs = ps.executeQuery()) {
+				ResultSet rs = ps1.executeQuery()) {
 
 				while (rs.next()) {
 					long fileEntryId = rs.getLong("fileEntryId");
@@ -221,7 +221,9 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 				}
 
 				ps2.executeBatch();
+
 				ps3.executeBatch();
+
 				ps4.executeBatch();
 			}
 		}
@@ -425,7 +427,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		try (LoggingTimer loggingTimer = new LoggingTimer()) {
 			runSQL("alter table DLFileVersion add fileName VARCHAR(255) null");
 
-			try (PreparedStatement ps = connection.prepareStatement(
+			try (PreparedStatement ps1 = connection.prepareStatement(
 					"select fileVersionId, extension, title from " +
 						"DLFileVersion");
 				PreparedStatement ps2 =
@@ -433,7 +435,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 						connection.prepareStatement(
 							"update DLFileVersion set fileName = ? where " +
 								"fileVersionId = ?"));
-				ResultSet rs = ps.executeQuery()) {
+				ResultSet rs = ps1.executeQuery()) {
 
 				while (rs.next()) {
 					long fileVersionId = rs.getLong("fileVersionId");
