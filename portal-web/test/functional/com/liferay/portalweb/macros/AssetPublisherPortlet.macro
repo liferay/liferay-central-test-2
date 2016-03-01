@@ -70,7 +70,7 @@
 
 		<execute function="SelectFrame" locator1="IFrame#DIALOG" />
 
-		<execute macro="PortletEntry#save" />
+		<execute macro="Alert#viewSuccessMessage" />
 	</command>
 
 	<command name="configureAnyCategoriesFilterPG">
