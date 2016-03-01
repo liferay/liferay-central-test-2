@@ -798,6 +798,10 @@
 	<command name="RestoreAPArchivedSetup" priority="4">
 		<execute macro="AssetPublisherPortlet#configureManualAssetSelectionPG" />
 
+		<execute macro="Navigator#gotoPage">
+			<var name="pageName" value="Asset Publisher Page" />
+		</execute>
+
 		<execute macro="AssetPublisherPortlet#saveConfigurationTemplatePG">
 			<var name="configurationName" value="AP Manual Display" />
 		</execute>
