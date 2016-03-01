@@ -61,7 +61,7 @@ public class LiferayPackageConnection extends URLConnection {
 	}
 
 	@Override
-	public void connect() throws IOException {
+	public void connect() {
 	}
 
 	@Override
