@@ -54,7 +54,7 @@ public class ReindexBackgroundTaskDisplay extends BaseBackgroundTaskDisplay {
 	}
 
 	private static final String _PROGRESS_TEMPLATE =
-		"com/liferay/portal/search/internal/background/task/display/" +
-			"dependencies/reindex_background_task_progress.ftl";
+		"com/liferay/portal/search/internal/background/task/display" +
+			"/dependencies/reindex_background_task_progress.ftl";
 
 }
