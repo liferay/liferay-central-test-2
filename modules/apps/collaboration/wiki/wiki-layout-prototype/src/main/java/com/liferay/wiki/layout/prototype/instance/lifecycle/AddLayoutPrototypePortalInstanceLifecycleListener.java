@@ -93,6 +93,7 @@ public class AddLayoutPrototypePortalInstanceLifecycleListener
 			layout,
 			AssetCategoriesNavigationPortletKeys.ASSET_CATEGORIES_NAVIGATION,
 			"column-2");
+
 		DefaultLayoutPrototypesUtil.addPortletId(
 			layout, AssetTagsNavigationPortletKeys.ASSET_TAGS_NAVIGATION,
 			"column-2");
