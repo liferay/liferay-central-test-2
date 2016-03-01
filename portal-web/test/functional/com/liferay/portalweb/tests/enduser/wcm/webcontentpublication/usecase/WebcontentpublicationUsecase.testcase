@@ -1379,9 +1379,7 @@
 			<var name="portletName" value="Asset Publisher" />
 		</execute>
 
-		<execute macro="AssetPublisherPortlet#viewDynamicAssetSelectionConfigurationPG">
-			<var name="portletName" value="Asset Publisher" />
-		</execute>
+		<execute macro="AssetPublisherPortlet#viewDynamicAssetSelectionConfigurationPG" />
 
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="Asset Publisher Page" />

@@ -874,7 +874,7 @@
 
 	<command name="viewDynamicAssetSelectionConfigurationPG">
 		<execute macro="Portlet#gotoPortletOptions">
-			<var name="portletName" value="${portletName}" />
+			<var name="portletName" value="Asset Publisher" />
 			<var name="portletOption" value="Configuration" />
 		</execute>
 
