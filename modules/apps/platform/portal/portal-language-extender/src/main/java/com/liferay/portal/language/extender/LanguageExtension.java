@@ -30,6 +30,7 @@ import java.util.ResourceBundle;
 
 import org.apache.felix.utils.extender.Extension;
 
+import org.apache.felix.utils.log.Logger;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
@@ -43,16 +44,18 @@ import org.osgi.util.tracker.ServiceTracker;
 public class LanguageExtension implements Extension {
 
 	private final BundleContext _bundleContext;
+	private Logger _logger;
 	private final Bundle _bundle;
 	private final List<BundleCapability> _capabilities;
 	private Collection<ServiceRegistration<ResourceBundleLoader>>
 		_serviceRegistrations = new ArrayList<>();
 
 	public LanguageExtension(
-		BundleContext bundleContext, Bundle bundle,
+		BundleContext bundleContext, Logger logger, Bundle bundle,
 		List<BundleCapability> capabilities) {
 
 		_bundleContext = bundleContext;
+		_logger = logger;
 		_bundle = bundle;
 		_capabilities = capabilities;
 	}
@@ -81,7 +84,9 @@ public class LanguageExtension implements Extension {
 				registerResourceBundleLoader(attributes, resourceBundleLoader);
 			}
 			else {
-				//TODO: log
+				_logger.log(
+					Logger.LOG_WARNING, "Could not handle " + capability +
+						" in " + _bundle.getSymbolicName());
 			}
 		}
 	}
