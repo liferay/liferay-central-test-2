@@ -30,6 +30,7 @@ public class UpgradeLastPublishDate
 			DDMPortletKeys.DYNAMIC_DATA_MAPPING, "DDMStructure");
 
 		addLastPublishDateColumn("DDMTemplate");
+
 		updateLastPublishDates(
 			DDMPortletKeys.DYNAMIC_DATA_MAPPING, "DDMTemplate");
 	}
