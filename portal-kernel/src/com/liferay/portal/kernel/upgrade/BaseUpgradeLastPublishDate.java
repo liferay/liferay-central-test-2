@@ -23,11 +23,8 @@ import com.liferay.portal.kernel.util.PortletKeys;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 
-import java.io.IOException;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -38,20 +35,18 @@ import java.util.List;
  */
 public abstract class BaseUpgradeLastPublishDate extends UpgradeProcess {
 
-	protected void addLastPublishDateColumn(String tableName)
-		throws IOException {
-
-		try {
-			runSQL(
-				"alter table " + tableName + " add lastPublishDate DATE null");
-		}
-		catch (SQLException sqle) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Table " + tableName + " has been previously recreated, " +
-						"there is not need to add the column");
+	protected void addLastPublishDateColumn(String tableName) throws Exception {
+		if (hasColumn(tableName, "lastPublishDate")) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Table " + tableName +
+						" already has the column lastPublishDate");
 			}
+
+			return;
 		}
+
+		runSQL("alter table " + tableName + " add lastPublishDate DATE null");
 	}
 
 	protected Date getLayoutSetLastPublishDate(long groupId) throws Exception {
