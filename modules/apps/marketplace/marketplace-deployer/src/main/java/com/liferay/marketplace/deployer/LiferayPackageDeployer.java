@@ -44,10 +44,11 @@ public class LiferayPackageDeployer {
 
 	@Activate
 	protected void activate(BundleContext bundleContext) {
-		_urlStreamHandlerServiceServiceRegistration = registerHandlerService(
-			bundleContext);
 		_artifactUrlTransformerServiceRegistration =
 			registerArtifactUrlTransformer(bundleContext);
+
+		_urlStreamHandlerServiceServiceRegistration = registerHandlerService(
+			bundleContext);
 
 		_bundleTracker = new BundleTracker<>(
 			bundleContext, Bundle.ACTIVE,
@@ -59,8 +60,9 @@ public class LiferayPackageDeployer {
 
 	@Deactivate
 	protected void deactivate() {
-		_urlStreamHandlerServiceServiceRegistration.unregister();
 		_artifactUrlTransformerServiceRegistration.unregister();
+
+		_urlStreamHandlerServiceServiceRegistration.unregister();
 
 		_bundleTracker.close();
 	}
