@@ -36,8 +36,9 @@ import javax.servlet.ServletContext;
 public class PortalWebResourcesUtil {
 
 	public static String getContextPath(String resourceType) {
-		return PortalUtil.getPathContext().concat(
-			getModuleContextPath(resourceType));
+		String contextPath = PortalUtil.getPathContext();
+
+		return contextPath.concat(getModuleContextPath(resourceType));
 	}
 
 	public static long getLastModified(String resourceType) {
