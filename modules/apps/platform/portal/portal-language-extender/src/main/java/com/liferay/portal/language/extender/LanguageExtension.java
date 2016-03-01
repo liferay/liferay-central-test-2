@@ -40,7 +40,7 @@ import org.osgi.util.tracker.ServiceTracker;
 /**
  * @author Carlos Sierra Andrés
  */
-class LanguageExtension implements Extension {
+public class LanguageExtension implements Extension {
 
 	private final BundleContext _bundleContext;
 	private final Bundle _bundle;
