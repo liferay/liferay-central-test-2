@@ -188,10 +188,6 @@
 		</for>
 	</command>
 
-	<command name="viewNoSearchResultsCP">
-		<execute function="AssertTextEquals" locator1="Message#EMPTY_INFO" value1="There are no results." />
-	</command>
-
 	<command name="viewPG">
 		<if>
 			<condition function="IsElementPresent" locator1="Relatedassets#ASSET_TITLE_IMAGE_1" />
