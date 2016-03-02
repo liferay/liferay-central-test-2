@@ -31,14 +31,14 @@ public class ResourceBundleLoaderUtil {
 	public static ResourceBundleLoader
 		getResourceBundleLoaderByBundleSymbolicName(String bundleSymbolicName) {
 
-		return _instance._resourceBundleLoaderByBundleSymbolicName.getService(
+		return _instance._bundleSymbolicNameServiceTrackerMap.getService(
 			bundleSymbolicName);
 	}
 
 	public static ResourceBundleLoader
 		getResourceBundleLoaderByServletContextName(String servletContextName) {
 
-		return _instance._resourceBundleLoaderByServletName.getService(
+		return _instance._servletContextNameServiceTrackerMap.getService(
 			servletContextName);
 	}
 
@@ -46,7 +46,7 @@ public class ResourceBundleLoaderUtil {
 		getResourceBundleLoaderByServletContextNameAndBaseName(
 			String servletContextName, String baseName) {
 
-		return _instance._resourceBundleLoaderByServletContextNameAndBaseName.
+		return _instance._servletContextNameAndBaseNameServiceTrackerMap.
 			getService(baseName + "#" + servletContextName);
 	}
 
@@ -57,10 +57,10 @@ public class ResourceBundleLoaderUtil {
 	}
 
 	private ResourceBundleLoaderUtil() {
-		_resourceBundleLoaderByBundleSymbolicName =
+		_bundleSymbolicNameServiceTrackerMap =
 			ServiceTrackerCollections.openSingleValueMap(
 				ResourceBundleLoader.class, "bundle.symbolic.name");
-		_resourceBundleLoaderByServletContextNameAndBaseName =
+		_servletContextNameAndBaseNameServiceTrackerMap =
 			ServiceTrackerCollections.openSingleValueMap(
 				ResourceBundleLoader.class,
 				"(&(resource.bundle.base.name=*)(servlet.context.name=*))",
@@ -81,7 +81,7 @@ public class ResourceBundleLoaderUtil {
 					}
 
 				});
-		_resourceBundleLoaderByServletName =
+		_servletContextNameServiceTrackerMap =
 			ServiceTrackerCollections.openSingleValueMap(
 				ResourceBundleLoader.class, "servlet.context.name");
 	}
@@ -92,10 +92,10 @@ public class ResourceBundleLoaderUtil {
 	private static ResourceBundleLoader _portalResourceBundleLoader;
 
 	private final ServiceTrackerMap<String, ResourceBundleLoader>
-		_resourceBundleLoaderByBundleSymbolicName;
+		_bundleSymbolicNameServiceTrackerMap;
 	private final ServiceTrackerMap<String, ResourceBundleLoader>
-		_resourceBundleLoaderByServletContextNameAndBaseName;
+		_servletContextNameAndBaseNameServiceTrackerMap;
 	private final ServiceTrackerMap<String, ResourceBundleLoader>
-		_resourceBundleLoaderByServletName;
+		_servletContextNameServiceTrackerMap;
 
 }
