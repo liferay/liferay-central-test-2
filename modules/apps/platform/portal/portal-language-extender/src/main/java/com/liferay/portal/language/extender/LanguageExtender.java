@@ -50,7 +50,7 @@ public class LanguageExtender extends AbstractExtender {
 	}
 
 	@Override
-	protected Extension doCreateExtension(final Bundle bundle)
+	protected Extension doCreateExtension(Bundle bundle)
 		throws Exception {
 
 		BundleWiring bundleWiring = bundle.adapt(BundleWiring.class);
