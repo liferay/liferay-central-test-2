@@ -352,7 +352,7 @@
 
 		<execute macro="PortletEntry#save" />
 
-		<execute macro="Navigation#gotoPage">
+		<execute macro="Navigator#gotoPage">
 			<var name="pageName" value="Page Name" />
 		</execute>
 
@@ -373,7 +373,7 @@
 
 		<execute macro="PortletEntry#save" />
 
-		<execute macro="Navigation#gotoPage">
+		<execute macro="Navigator#gotoPage">
 			<var name="pageName" value="Page Name" />
 		</execute>
 
@@ -547,7 +547,7 @@
 			<var name="portletName" value="RSS Publisher" />
 		</execute>
 
-		<execute macro="Navigation#gotoPage">
+		<execute macro="Navigator#gotoPage">
 			<var name="pageName" value="Page Name" />
 		</execute>
 

@@ -188,7 +188,7 @@
 			<var name="pageName" value="Page Name" />
 		</execute>
 
-		<execute macro="Navigation#gotoPage">
+		<execute macro="Navigator#gotoPage">
 			<var name="pageName" value="Page Name" />
 		</execute>
 
@@ -205,7 +205,7 @@
 			<var name="friendlyUrlLocalized" value="en_US" />
 		</execute>
 
-		<execute macro="Navigation#gotoPage">
+		<execute macro="Navigator#gotoPage">
 			<var name="pageName" value="Page Name" />
 		</execute>
 

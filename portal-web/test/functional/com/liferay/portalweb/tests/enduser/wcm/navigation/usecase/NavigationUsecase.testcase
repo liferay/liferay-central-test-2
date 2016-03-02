@@ -158,7 +158,7 @@
 			<var name="pageName" value="Navigation Page" />
 		</execute>
 
-		<execute macro="Navigation#gotoPage">
+		<execute macro="Navigator#gotoPage">
 			<var name="pageName" value="Navigation Page" />
 		</execute>
 
@@ -201,7 +201,7 @@
 			<var name="userEmailAddress" value="userea@liferay.com" />
 		</execute>
 
-		<execute macro="Navigation#gotoPage">
+		<execute macro="Navigator#gotoPage">
 			<var name="pageName" value="Navigation Page" />
 		</execute>
 
