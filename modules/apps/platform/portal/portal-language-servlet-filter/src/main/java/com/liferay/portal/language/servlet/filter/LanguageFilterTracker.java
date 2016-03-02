@@ -180,7 +180,7 @@ public class LanguageFilterTracker {
 				List<ServiceRegistration<?>> serviceRegistrations =
 					new ArrayList<>();
 
-				Hashtable<String, Object> properties = new Hashtable<>(
+				Dictionary<String, Object> properties = new Hashtable<>(
 					_properties);
 
 				properties.put(
