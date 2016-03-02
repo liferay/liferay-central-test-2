@@ -190,6 +190,7 @@ public class LanguageFilterTracker {
 
 				ResourceBundleLoader resourceBundleLoader =
 					_bundleContext.getService(serviceReference);
+
 				serviceRegistrations.add(
 					_bundleContext.registerService(
 						ResourceBundleLoader.class, resourceBundleLoader,
