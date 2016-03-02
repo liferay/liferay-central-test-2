@@ -1736,17 +1736,8 @@ rerun your task.
 	</target>
 
 	<target name="install-portal-snapshot">
-		<property file="bnd.bnd" />
 
 		<property name="artifact.name" value="${ant.project.name}" />
-
-		<condition property="artifact.version" value="${Bundle-Version}" else="${release.info.version}">
-			<isset property="Bundle-Version" />
-		</condition>
-
-		<condition property="artifact.packaging" value="war" else="jar">
-			<equals arg1="${artifact.name}" arg2="portal-web" />
-		</condition>
 
 		<propertyregex
 			global="true"
@@ -1756,6 +1747,16 @@ rerun your task.
 			regexp="-"
 			replace="."
 		/>
+
+		<condition property="artifact.packaging" value="war" else="jar">
+			<equals arg1="${artifact.name}" arg2="portal-web" />
+		</condition>
+
+		<property file="bnd.bnd" />
+
+		<condition property="artifact.version" value="${Bundle-Version}" else="${release.info.version}">
+			<isset property="Bundle-Version" />
+		</condition>
 
 		<artifact:pom
 			artifactId="com.liferay.${processed.artifact.name}"
