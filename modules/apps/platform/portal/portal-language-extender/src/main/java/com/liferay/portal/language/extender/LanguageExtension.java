@@ -137,8 +137,8 @@ public class LanguageExtension implements Extension {
 	}
 
 	private final Bundle _bundle;
-	private final BundleContext _bundleContext;
 	private final List<BundleCapability> _bundleCapabilities;
+	private final BundleContext _bundleContext;
 	private final Logger _logger;
 	private final Collection<ServiceRegistration<ResourceBundleLoader>>
 		_serviceRegistrations = new ArrayList<>();
