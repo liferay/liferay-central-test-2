@@ -20,7 +20,7 @@ import aQute.lib.spring.SpringComponent;
 
 import com.liferay.ant.bnd.jsp.JspAnalyzerPlugin;
 import com.liferay.ant.bnd.npm.NpmAnalyzerPlugin;
-import com.liferay.ant.bnd.resourcebundle.ResourceBundleLoaderAnalyzerPlugin;
+import com.liferay.ant.bnd.resource.bundle.ResourceBundleLoaderAnalyzerPlugin;
 import com.liferay.ant.bnd.sass.SassAnalyzerPlugin;
 import com.liferay.ant.bnd.spring.SpringDependencyAnalyzerPlugin;
 import com.liferay.gradle.plugins.util.GradleUtil;
