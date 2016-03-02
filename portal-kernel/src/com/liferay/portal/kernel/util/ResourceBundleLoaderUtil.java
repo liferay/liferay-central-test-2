@@ -47,7 +47,7 @@ public class ResourceBundleLoaderUtil {
 			String servletContextName, String baseName) {
 
 		return _instance._resourceBundleLoaderByServletContextNameAndBaseName.
-			getService(servletContextName + ":" + baseName);
+			getService(servletContextName + "#" + baseName);
 	}
 
 	public static void setPortalResourceBundleLoader(
@@ -63,7 +63,7 @@ public class ResourceBundleLoaderUtil {
 		_resourceBundleLoaderByServletContextNameAndBaseName =
 			ServiceTrackerCollections.openSingleValueMap(
 				ResourceBundleLoader.class,
-				"(&(servlet.context.name=*)(baseName=*))",
+				"(&(resource.bundle.base.name=*)(servlet.context.name=*))",
 				new ServiceReferenceMapper<String, ResourceBundleLoader>() {
 
 					@Override
@@ -75,9 +75,9 @@ public class ResourceBundleLoaderUtil {
 							serviceReference.getProperty(
 								"servlet.context.name");
 						Object baseName = serviceReference.getProperty(
-							"baseName");
+							"resource.bundle.base.name");
 
-						emitter.emit(servletContextName + ":" + baseName);
+						emitter.emit(servletContextName + "#" + baseName);
 					}
 
 				});
