@@ -50,9 +50,7 @@ public class LanguageExtender extends AbstractExtender {
 	}
 
 	@Override
-	protected Extension doCreateExtension(Bundle bundle)
-		throws Exception {
-
+	protected Extension doCreateExtension(Bundle bundle) throws Exception {
 		BundleWiring bundleWiring = bundle.adapt(BundleWiring.class);
 
 		List<BundleCapability> bundleCapabilities =
@@ -63,7 +61,7 @@ public class LanguageExtender extends AbstractExtender {
 		}
 
 		return new LanguageExtension(
-			_bundleContext, _logger, bundle, bundleCapabilities);
+			_bundleContext, bundle, bundleCapabilities, _logger);
 	}
 
 	@Override
