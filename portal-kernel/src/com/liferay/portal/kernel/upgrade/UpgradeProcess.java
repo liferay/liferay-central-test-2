@@ -326,7 +326,7 @@ public abstract class UpgradeProcess
 
 					if (!ArrayUtil.contains(
 							indexMetadata.getColumnNames(), columnName)) {
-						
+
 						continue;
 					}
 
