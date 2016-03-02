@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.ant.bnd.resourcebundle;
+package com.liferay.ant.bnd.resource.bundle;
 
 import aQute.bnd.header.Attrs;
 import aQute.bnd.header.Parameters;
