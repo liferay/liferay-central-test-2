@@ -360,6 +360,10 @@
 		</while>
 	</command>
 
+	<command name="viewEmptyMessage">
+		<execute function="AssertTextEquals" locator1="Message#EMPTY_INFO" value1="There are no results." />
+	</command>
+
 	<command name="viewNoSpecificPG">
 		<var name="key_portletTitleName" value="${portletName}" />
 
