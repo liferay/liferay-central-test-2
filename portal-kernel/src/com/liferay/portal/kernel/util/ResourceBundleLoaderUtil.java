@@ -47,7 +47,7 @@ public class ResourceBundleLoaderUtil {
 			String servletContextName, String baseName) {
 
 		return _instance._resourceBundleLoaderByServletContextNameAndBaseName.
-			getService(servletContextName + "#" + baseName);
+			getService(baseName + "#" + servletContextName);
 	}
 
 	public static void setPortalResourceBundleLoader(
@@ -71,13 +71,13 @@ public class ResourceBundleLoaderUtil {
 						ServiceReference<ResourceBundleLoader> serviceReference,
 						Emitter<String> emitter) {
 
+						Object baseName = serviceReference.getProperty(
+							"resource.bundle.base.name");
 						Object servletContextName =
 							serviceReference.getProperty(
 								"servlet.context.name");
-						Object baseName = serviceReference.getProperty(
-							"resource.bundle.base.name");
 
-						emitter.emit(servletContextName + "#" + baseName);
+						emitter.emit(baseName + "#" + servletContextName);
 					}
 
 				});
