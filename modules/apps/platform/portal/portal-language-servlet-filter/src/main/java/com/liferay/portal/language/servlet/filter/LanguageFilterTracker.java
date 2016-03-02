@@ -123,7 +123,7 @@ public class LanguageFilterTracker {
 			String filterString =
 				"(&(bundle.symbolic.name=" + bundle.getSymbolicName() +
 					")(objectClass=" + ResourceBundleLoader.class.getName() +
-						")(baseName=*))";
+						")(resource.bundle.base.name=*))";
 
 			Map<String, Object> properties = new HashMap<>();
 
@@ -184,7 +184,8 @@ public class LanguageFilterTracker {
 					_properties);
 
 				properties.put(
-					"baseName", serviceReference.getProperty("baseName"));
+					"resource.bundle.base.name",
+					serviceReference.getProperty("resource.bundle.base.name"));
 
 				ResourceBundleLoader resourceBundleLoader =
 					_bundleContext.getService(serviceReference);
