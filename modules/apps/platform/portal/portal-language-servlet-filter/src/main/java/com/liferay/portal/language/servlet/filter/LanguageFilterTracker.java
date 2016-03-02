@@ -127,10 +127,11 @@ public class LanguageFilterTracker {
 
 			Map<String, Object> properties = new HashMap<>();
 
+			properties.put("service.ranking", Integer.MIN_VALUE);
+
 			Object contextName = serviceReference.getProperty(
 				HttpWhiteboardConstants.HTTP_WHITEBOARD_CONTEXT_NAME);
 
-			properties.put("service.ranking", Integer.MIN_VALUE);
 			properties.put("servlet.context.name", contextName);
 
 			return ServiceTrackerFactory.open(
