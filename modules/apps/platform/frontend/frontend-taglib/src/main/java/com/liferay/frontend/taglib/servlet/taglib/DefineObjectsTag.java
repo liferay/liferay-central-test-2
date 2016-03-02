@@ -76,30 +76,6 @@ public class DefineObjectsTag extends TagSupport {
 			liferayPortletRequest, liferayPortletResponse);
 	}
 
-	protected ResourceBundle getResourceBundle() {
-		if (_overrideResourceBundle != null) {
-			return _overrideResourceBundle;
-		}
-
-		HttpServletRequest request =
-			(HttpServletRequest)pageContext.getRequest();
-
-		Locale locale = PortalUtil.getLocale(request);
-
-		return TagResourceBundleUtil.getResourceBundle(request, locale);
-	}
-
-	protected WindowState getWindowState() {
-		LiferayPortletRequest liferayPortletRequest =
-			getLiferayPortletRequest();
-
-		if (liferayPortletRequest == null) {
-			return null;
-		}
-
-		return liferayPortletRequest.getWindowState();
-	}
-
 	protected LiferayPortletRequest getLiferayPortletRequest() {
 		LiferayPortletRequest liferayPortletRequest =
 			(LiferayPortletRequest)pageContext.getAttribute(
@@ -142,6 +118,30 @@ public class DefineObjectsTag extends TagSupport {
 		}
 
 		return PortalUtil.getLiferayPortletResponse(portletResponse);
+	}
+
+	protected ResourceBundle getResourceBundle() {
+		if (_overrideResourceBundle != null) {
+			return _overrideResourceBundle;
+		}
+
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
+
+		Locale locale = PortalUtil.getLocale(request);
+
+		return TagResourceBundleUtil.getResourceBundle(request, locale);
+	}
+
+	protected WindowState getWindowState() {
+		LiferayPortletRequest liferayPortletRequest =
+			getLiferayPortletRequest();
+
+		if (liferayPortletRequest == null) {
+			return null;
+		}
+
+		return liferayPortletRequest.getWindowState();
 	}
 
 	private ResourceBundle _overrideResourceBundle;
