@@ -30,27 +30,27 @@ public class ResourceBundleLoaderAnalyzerPlugin implements AnalyzerPlugin {
 	public boolean analyzeJar(Analyzer analyzer) throws Exception {
 		Jar jar = analyzer.getJar();
 
-		if (jar.exists("content/Language.properties")) {
-			Parameters headerParameters = new Parameters(
-				analyzer.getProperty(Constants.PROVIDE_CAPABILITY));
-
-			Parameters capabilities = new Parameters();
-
-			Attrs attrs = new Attrs();
-
-			attrs.put("baseName", "content.Language");
-
-			capabilities.add("liferay.resource.bundle", attrs);
-
-			headerParameters.mergeWith(capabilities, false);
-
-			analyzer.setProperty(
-				Constants.PROVIDE_CAPABILITY, headerParameters.toString());
-
-			return true;
+		if (!jar.exists("content/Language.properties")) {
+			return false;
 		}
 
-		return false;
+		Parameters provideCapabilityHeaders = new Parameters(
+			analyzer.getProperty(Constants.PROVIDE_CAPABILITY));
+
+		Parameters parameters = new Parameters();
+
+		Attrs attrs = new Attrs();
+
+		attrs.put("baseName", "content.Language");
+
+		parameters.add("liferay.resource.bundle", attrs);
+
+		provideCapabilityHeaders.mergeWith(parameters, false);
+
+		analyzer.setProperty(
+			Constants.PROVIDE_CAPABILITY, provideCapabilityHeaders.toString());
+
+		return true;
 	}
 
 }
