@@ -300,9 +300,11 @@
 			<var name="userLoginFullName" value="Test Test" />
 		</execute>
 
-		<execute macro="PermissionsInline#gotoBlogsCP">
-			<var name="pageName" value="Blogs Page" />
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Blogs" />
 		</execute>
+
+		<execute macro="PermissionsInline#gotoBlogsEntriesCP" />
 
 		<execute macro="Role#definePermissionPG">
 			<var name="permissionDefinitionKey" value="INLINE_PERMISSIONS_ADD_ENTRY_CHECKBOX" />
@@ -328,9 +330,11 @@
 			<var name="userLoginFullName" value="Test Test" />
 		</execute>
 
-		<execute macro="PermissionsInline#gotoBlogsCP">
-			<var name="pageName" value="Blogs Page" />
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Blogs" />
 		</execute>
+
+		<execute macro="PermissionsInline#gotoBlogsEntriesCP" />
 
 		<execute macro="Role#removePermissionPG">
 			<var name="permissionDefinitionKey" value="INLINE_PERMISSIONS_ADD_ENTRY_CHECKBOX" />
@@ -454,11 +458,15 @@
 			<var name="userLoginFullName" value="Test Test" />
 		</execute>
 
-		<execute macro="PermissionsInline#gotoBlogsCP">
-			<var name="pageName" value="Blogs Page" />
-			<var name="siteName" value="Site Name" />
-			<var name="siteURL" value="true" />
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="Site Name" />
 		</execute>
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Blogs" />
+		</execute>
+
+		<execute macro="PermissionsInline#gotoBlogsEntriesCP" />
 
 		<execute macro="Role#definePermissionPG">
 			<var name="permissionDefinitionKey" value="INLINE_PERMISSIONS_ADD_ENTRY_CHECKBOX" />
@@ -486,10 +494,15 @@
 			<var name="userLoginFullName" value="Test Test" />
 		</execute>
 
-		<execute macro="PermissionsInline#gotoBlogsCP">
-			<var name="pageName" value="Blogs Page" />
-			<var name="siteName" value="Site Name" />
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="Site Name" />
 		</execute>
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Blogs" />
+		</execute>
+
+		<execute macro="PermissionsInline#gotoBlogsEntriesCP" />
 
 		<execute macro="Role#removePermissionPG">
 			<var name="permissionDefinitionKey" value="INLINE_PERMISSIONS_ADD_ENTRY_CHECKBOX" />
@@ -1561,9 +1574,11 @@
 			<var name="userLoginFullName" value="Test Test" />
 		</execute>
 
-		<execute macro="PermissionsInline#gotoBlogsCP">
-			<var name="pageName" value="Blogs Page" />
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Blogs" />
 		</execute>
+
+		<execute macro="PermissionsInline#gotoBlogsEntriesCP" />
 
 		<execute macro="Role#definePermissionPG">
 			<var name="permissionDefinitionKey" value="INLINE_PERMISSIONS_SUBSCRIBE_CHECKBOX" />
@@ -1586,9 +1601,11 @@
 			<var name="userLoginFullName" value="Test Test" />
 		</execute>
 
-		<execute macro="PermissionsInline#gotoBlogsCP">
-			<var name="pageName" value="Blogs Page" />
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Blogs" />
 		</execute>
+
+		<execute macro="PermissionsInline#gotoBlogsEntriesCP" />
 
 		<execute macro="Role#removePermissionPG">
 			<var name="permissionDefinitionKey" value="INLINE_PERMISSIONS_SUBSCRIBE_CHECKBOX" />
@@ -1917,9 +1934,11 @@
 			<var name="userLoginFullName" value="Test Test" />
 		</execute>
 
-		<execute macro="PermissionsInline#gotoBlogsCP">
-			<var name="pageName" value="Blogs Page" />
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Blogs" />
 		</execute>
+
+		<execute macro="PermissionsInline#gotoBlogsEntriesCP" />
 
 		<execute macro="Role#definePermissionPG">
 			<var name="permissionDefinitionKey" value="INLINE_PERMISSIONS_PERMISSIONS_CHECKBOX" />
@@ -1942,9 +1961,11 @@
 			<var name="userLoginFullName" value="Test Test" />
 		</execute>
 
-		<execute macro="PermissionsInline#gotoBlogsCP">
-			<var name="pageName" value="Blogs Page" />
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Blogs" />
 		</execute>
+
+		<execute macro="PermissionsInline#gotoBlogsEntriesCP" />
 
 		<execute macro="Role#removePermissionPG">
 			<var name="permissionDefinitionKey" value="INLINE_PERMISSIONS_PERMISSIONS_CHECKBOX" />
@@ -2065,10 +2086,15 @@
 			<var name="userLoginFullName" value="Test Test" />
 		</execute>
 
-		<execute macro="PermissionsInline#gotoBlogsCP">
-			<var name="pageName" value="Blogs Page" />
-			<var name="siteName" value="Site Name" />
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="Site Name" />
 		</execute>
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Blogs" />
+		</execute>
+
+		<execute macro="PermissionsInline#gotoBlogsEntriesCP" />
 
 		<execute macro="Role#definePermissionPG">
 			<var name="permissionDefinitionKey" value="INLINE_PERMISSIONS_PERMISSIONS_CHECKBOX" />
@@ -2093,10 +2119,15 @@
 			<var name="userLoginFullName" value="Test Test" />
 		</execute>
 
-		<execute macro="PermissionsInline#gotoBlogsCP">
-			<var name="pageName" value="Blogs Page" />
+		<execute macro="ProductMenu#gotoSite">
 			<var name="siteName" value="Site Name" />
 		</execute>
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Blogs" />
+		</execute>
+
+		<execute macro="PermissionsInline#gotoBlogsEntriesCP" />
 
 		<execute macro="Role#removePermissionPG">
 			<var name="permissionDefinitionKey" value="INLINE_PERMISSIONS_PERMISSIONS_CHECKBOX" />
