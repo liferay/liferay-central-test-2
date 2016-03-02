@@ -78,7 +78,7 @@ public class LanguageExtension implements Extension {
 				resourceBundleLoader = processAggregate((String)aggregate);
 			}
 			else if (baseName instanceof String) {
-				resourceBundleLoader = processBasename(
+				resourceBundleLoader = processBaseName(
 					bundleWiring.getClassLoader(), (String)baseName);
 			}
 
@@ -115,7 +115,7 @@ public class LanguageExtension implements Extension {
 		return new ServiceTrackerResourceBundleLoader(serviceTrackers);
 	}
 
-	protected ResourceBundleLoader processBasename(
+	protected ResourceBundleLoader processBaseName(
 		ClassLoader classLoader, String baseName) {
 
 		return new CacheResourceBundleLoader(
