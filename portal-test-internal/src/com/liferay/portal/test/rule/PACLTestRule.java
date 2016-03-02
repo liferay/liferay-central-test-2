@@ -114,6 +114,7 @@ public class PACLTestRule implements TestRule {
 		ClassLoaderPool.register(
 			hotDeployEvent.getServletContextName(),
 			servletContext.getClassLoader());
+
 		PortletClassLoaderUtil.setServletContextName(
 			hotDeployEvent.getServletContextName());
 
