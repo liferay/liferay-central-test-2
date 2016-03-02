@@ -64,7 +64,7 @@ public class PortletBagImpl implements PortletBag {
 
 	public PortletBagImpl(
 		String portletName, ServletContext servletContext,
-		Portlet portletInstance,
+		Portlet portletInstance, String resourceBundleBaseName,
 		List<ConfigurationAction> configurationActionInstances,
 		List<Indexer<?>> indexerInstances, List<OpenSearch> openSearchInstances,
 		List<SchedulerEventMessageListener> schedulerEventMessageListeners,
@@ -89,12 +89,12 @@ public class PortletBagImpl implements PortletBag {
 		List<PermissionPropagator> permissionPropagatorInstances,
 		List<TrashHandler> trashHandlerInstances,
 		List<WorkflowHandler<?>> workflowHandlerInstances,
-		List<PreferencesValidator> preferencesValidatorInstances,
-		String resourceBundle) {
+		List<PreferencesValidator> preferencesValidatorInstances) {
 
 		_portletName = portletName;
 		_servletContext = servletContext;
 		_portletInstance = portletInstance;
+		_resourceBundleBaseName = resourceBundleBaseName;
 		_configurationActionInstances = configurationActionInstances;
 		_indexerInstances = indexerInstances;
 		_openSearchInstances = openSearchInstances;
@@ -123,17 +123,16 @@ public class PortletBagImpl implements PortletBag {
 		_trashHandlerInstances = trashHandlerInstances;
 		_workflowHandlerInstances = workflowHandlerInstances;
 		_preferencesValidatorInstances = preferencesValidatorInstances;
-		_resourceBundle = resourceBundle;
 	}
 
 	@Override
 	public Object clone() {
 		return new PortletBagImpl(
 			getPortletName(), getServletContext(), getPortletInstance(),
-			getConfigurationActionInstances(), getIndexerInstances(),
-			getOpenSearchInstances(), getSchedulerEventMessageListeners(),
-			getFriendlyURLMapperTracker(), getURLEncoderInstances(),
-			getPortletDataHandlerInstances(),
+			getResourceBundleBaseName(), getConfigurationActionInstances(),
+			getIndexerInstances(), getOpenSearchInstances(),
+			getSchedulerEventMessageListeners(), getFriendlyURLMapperTracker(),
+			getURLEncoderInstances(), getPortletDataHandlerInstances(),
 			getStagedModelDataHandlerInstances(), getTemplateHandlerInstances(),
 			getPortletLayoutListenerInstances(), getPollerProcessorInstances(),
 			getPopMessageListenerInstances(),
@@ -146,8 +145,7 @@ public class PortletBagImpl implements PortletBag {
 			getAtomCollectionAdapterInstances(),
 			getCustomAttributesDisplayInstances(),
 			getPermissionPropagatorInstances(), getTrashHandlerInstances(),
-			getWorkflowHandlerInstances(), getPreferencesValidatorInstances(),
-			getResourceBundle());
+			getWorkflowHandlerInstances(), getPreferencesValidatorInstances());
 	}
 
 	@Override
@@ -266,7 +264,7 @@ public class PortletBagImpl implements PortletBag {
 			ResourceBundleLoaderUtil.
 				getResourceBundleLoaderByServletContextNameAndBaseName(
 					_servletContext.getServletContextName(),
-					getResourceBundle());
+					getResourceBundleBaseName());
 
 		if (resourceBundleLoader == null) {
 			return null;
@@ -274,6 +272,11 @@ public class PortletBagImpl implements PortletBag {
 
 		return resourceBundleLoader.loadResourceBundle(
 			LocaleUtil.toLanguageId(locale));
+	}
+
+	@Override
+	public String getResourceBundleBaseName() {
+		return _resourceBundleBaseName;
 	}
 
 	@Override
@@ -375,10 +378,6 @@ public class PortletBagImpl implements PortletBag {
 		}
 	}
 
-	private String getResourceBundle() {
-		return _resourceBundle;
-	}
-
 	private final List<AssetRendererFactory<?>> _assetRendererFactoryInstances;
 	private final List<AtomCollectionAdapter<?>>
 		_atomCollectionAdapterInstances;
@@ -397,7 +396,7 @@ public class PortletBagImpl implements PortletBag {
 	private final List<PortletLayoutListener> _portletLayoutListenerInstances;
 	private String _portletName;
 	private final List<PreferencesValidator> _preferencesValidatorInstances;
-	private final String _resourceBundle;
+	private final String _resourceBundleBaseName;
 	private final List<SchedulerEventMessageListener>
 		_schedulerEventMessageListeners;
 	private final ServletContext _servletContext;
