@@ -100,7 +100,7 @@ public class DefineObjectsTag extends TagSupport {
 		return liferayPortletRequest.getWindowState();
 	}
 
-	private LiferayPortletRequest getLiferayPortletRequest() {
+	protected LiferayPortletRequest getLiferayPortletRequest() {
 		LiferayPortletRequest liferayPortletRequest =
 			(LiferayPortletRequest)pageContext.getAttribute(
 				"liferayPortletRequest");
@@ -122,7 +122,7 @@ public class DefineObjectsTag extends TagSupport {
 		return PortalUtil.getLiferayPortletRequest(portletRequest);
 	}
 
-	private LiferayPortletResponse getLiferayPortletResponse() {
+	protected LiferayPortletResponse getLiferayPortletResponse() {
 		LiferayPortletResponse liferayPortletResponse =
 			(LiferayPortletResponse)pageContext.getAttribute(
 				"liferayPortletResponse");
