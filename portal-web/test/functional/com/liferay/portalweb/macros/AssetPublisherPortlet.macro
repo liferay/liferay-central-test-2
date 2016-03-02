@@ -383,13 +383,10 @@
 				<execute function="SelectFrameTop" />
 
 				<execute function="SelectFrame" locator1="IFrame#DIALOG" />
-
-				<execute macro="Alert#viewSuccessMessage" />
 			</then>
-			<else>
-				<execute macro="Alert#viewSuccessMessage" />
-			</else>
 		</if>
+
+		<execute macro="Alert#viewSuccessMessage" />
 
 		<execute function="SelectFrameTop" />
 	</command>
