@@ -70,7 +70,7 @@ public class LanguageExtension implements Extension {
 			Map<String, Object> attributes = capability.getAttributes();
 
 			Object baseName = attributes.get("resource.bundle.base.name");
-			Object aggregate = attributes.get("aggregate");
+			Object aggregate = attributes.get("resource.bundle.aggregate");
 
 			ResourceBundleLoader resourceBundleLoader = null;
 
