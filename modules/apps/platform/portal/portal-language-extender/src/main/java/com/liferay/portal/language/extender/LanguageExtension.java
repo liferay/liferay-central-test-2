@@ -44,13 +44,13 @@ import org.osgi.util.tracker.ServiceTracker;
 public class LanguageExtension implements Extension {
 
 	public LanguageExtension(
-		BundleContext bundleContext, Logger logger, Bundle bundle,
-		List<BundleCapability> bundleCapabilities) {
+		BundleContext bundleContext, Bundle bundle,
+		List<BundleCapability> bundleCapabilities, Logger logger) {
 
 		_bundleContext = bundleContext;
-		_logger = logger;
 		_bundle = bundle;
 		_bundleCapabilities = bundleCapabilities;
+		_logger = logger;
 	}
 
 	@Override
