@@ -88,8 +88,8 @@ public class LanguageExtension implements Extension {
 			else {
 				_logger.log(
 					Logger.LOG_WARNING,
-					"Could not handle " + capability +
-						" in " + _bundle.getSymbolicName());
+					"Unable to handle " + capability + " in " +
+						_bundle.getSymbolicName());
 			}
 		}
 	}
