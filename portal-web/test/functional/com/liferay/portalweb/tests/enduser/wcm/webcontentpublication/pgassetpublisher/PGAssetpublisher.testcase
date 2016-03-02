@@ -796,6 +796,25 @@
 	</command>
 
 	<command name="RestoreAPArchivedSetup" priority="4">
+		<execute macro="Navigator#openURL" />
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Web Content" />
+		</execute>
+
+		<execute macro="WebContentNavigator#gotoAddCP" />
+
+		<execute macro="WebContent#addCP">
+			<var name="webContentContent" value="WC WebContent Content" />
+			<var name="webContentTitle" value="WC WebContent Title" />
+		</execute>
+
+		<execute macro="PortletEntry#publish" />
+
+		<execute macro="Navigator#gotoPage">
+			<var name="pageName" value="Asset Publisher Page" />
+		</execute>
+
 		<execute macro="AssetPublisherPortlet#configureManualAssetSelectionPG" />
 
 		<execute macro="Navigator#gotoPage">
@@ -810,7 +829,19 @@
 			<var name="pageName" value="Asset Publisher Page" />
 		</execute>
 
-		<execute macro="AssetPublisherPortlet#restoreArchivedSetupPG">
+		<execute macro="Portlet#deletePG">
+			<var name="portletName" value="Asset Publisher" />
+		</execute>
+
+		<execute macro="Navigator#gotoPage">
+			<var name="pageName" value="Asset Publisher Page" />
+		</execute>
+
+		<execute macro="Portlet#addPG">
+			<var name="portletName" value="Asset Publisher" />
+		</execute>
+
+		<execute macro="AssetPublisherPortlet#restoreConfigurationTemplatePG">
 			<var name="configurationName" value="AP Manual Display" />
 		</execute>
 
@@ -818,9 +849,9 @@
 			<var name="pageName" value="Asset Publisher Page" />
 		</execute>
 
-		<execute macro="AssetPublisherPortlet#viewRestoredSetupPG">
-			<var name="configurationName" value="AP Manual Display" />
-		</execute>
+		<execute macro="AssetPublisherPortlet#viewManualNoAssetsMessagePG" />
+
+		<execute macro="AssetPublisherPortlet#viewRestoredSetupPG" />
 
 		<execute macro="Navigator#gotoPage">
 			<var name="pageName" value="Asset Publisher Page" />
