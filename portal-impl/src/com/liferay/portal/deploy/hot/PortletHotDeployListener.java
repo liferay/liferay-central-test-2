@@ -182,7 +182,8 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 
 		Map<String, Object> properties = new HashMap<>();
 
-		properties.put("baseName", portlet.getResourceBundle());
+		properties.put(
+			"resource.bundle.base.name", portlet.getResourceBundle());
 		properties.put("service.ranking", Integer.MIN_VALUE);
 		properties.put("servlet.context.name", portlet.getContextName());
 
