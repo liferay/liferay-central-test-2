@@ -195,7 +195,8 @@ public class PortletBagFactory {
 
 		PortletBag portletBag = new PortletBagImpl(
 			portlet.getPortletId(), _servletContext, portletInstance,
-			configurationActionInstances, indexerInstances, openSearchInstances,
+			portlet.getResourceBundle(), configurationActionInstances,
+			indexerInstances, openSearchInstances,
 			schedulerEventMessageListeners, friendlyURLMapperTracker,
 			urlEncoderInstances, portletDataHandlerInstances,
 			stagedModelDataHandlerInstances, templateHandlerInstances,
@@ -208,7 +209,7 @@ public class PortletBagFactory {
 			assetRendererFactoryInstances, atomCollectionAdapterInstances,
 			customAttributesDisplayInstances, permissionPropagatorInstances,
 			trashHandlerInstances, workflowHandlerInstances,
-			preferencesValidatorInstances, portlet.getResourceBundle());
+			preferencesValidatorInstances);
 
 		PortletBagPool.put(portlet.getRootPortletId(), portletBag);
 
