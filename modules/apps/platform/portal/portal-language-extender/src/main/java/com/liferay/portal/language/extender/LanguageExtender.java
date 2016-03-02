@@ -55,15 +55,15 @@ public class LanguageExtender extends AbstractExtender {
 
 		BundleWiring bundleWiring = bundle.adapt(BundleWiring.class);
 
-		List<BundleCapability> capabilities =
+		List<BundleCapability> bundleCapabilities =
 			bundleWiring.getCapabilities("liferay.resource.bundle");
 
-		if (capabilities == null) {
+		if (bundleCapabilities == null) {
 			return null;
 		}
 
 		return new LanguageExtension(
-			_bundleContext, _logger, bundle, capabilities);
+			_bundleContext, _logger, bundle, bundleCapabilities);
 	}
 
 	@Override

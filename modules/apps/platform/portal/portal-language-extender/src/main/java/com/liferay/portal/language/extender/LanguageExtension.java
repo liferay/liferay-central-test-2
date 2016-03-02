@@ -45,12 +45,12 @@ public class LanguageExtension implements Extension {
 
 	public LanguageExtension(
 		BundleContext bundleContext, Logger logger, Bundle bundle,
-		List<BundleCapability> capabilities) {
+		List<BundleCapability> bundleCapabilities) {
 
 		_bundleContext = bundleContext;
 		_logger = logger;
 		_bundle = bundle;
-		_capabilities = capabilities;
+		_bundleCapabilities = bundleCapabilities;
 	}
 
 	@Override
@@ -66,7 +66,7 @@ public class LanguageExtension implements Extension {
 	public void start() throws Exception {
 		BundleWiring bundleWiring = _bundle.adapt(BundleWiring.class);
 
-		for (BundleCapability capability : _capabilities) {
+		for (BundleCapability capability : _bundleCapabilities) {
 			Map<String, Object> attributes = capability.getAttributes();
 
 			Object aggregate = attributes.get("resource.bundle.aggregate");
@@ -138,7 +138,7 @@ public class LanguageExtension implements Extension {
 
 	private final Bundle _bundle;
 	private final BundleContext _bundleContext;
-	private final List<BundleCapability> _capabilities;
+	private final List<BundleCapability> _bundleCapabilities;
 	private final Logger _logger;
 	private final Collection<ServiceRegistration<ResourceBundleLoader>>
 		_serviceRegistrations = new ArrayList<>();
