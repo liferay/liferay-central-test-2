@@ -422,6 +422,8 @@
 		<execute function="AssertTextEquals" locator1="UsersAndOrganizations#ORGANIZATION_TABLE_NAME" value1="${orgName}" />
 
 		<execute function="AssertClick" locator1="UsersAndOrganizations#ORGANIZATION_TABLE_NAME" value1="${orgName}" />
+
+		<execute function="AssertVisible" locator1="UsersAndOrganizations#BREADCRUMB" />
 	</command>
 
 	<command name="manageMembershipOptionsInSites">
