@@ -42,10 +42,11 @@ public class BundlePortletApp implements PortletApp {
 		String contextPath) {
 
 		_portalPortletModel = portalPortletModel;
-		_pluginPackage = new BundlePluginPackage(bundle, this);
-		_portletApp = portalPortletModel.getPortletApp();
 		_servletContextName = servletContextName;
 		_contextPath = contextPath;
+
+		_pluginPackage = new BundlePluginPackage(bundle, this);
+		_portletApp = portalPortletModel.getPortletApp();
 	}
 
 	@Override

@@ -977,11 +977,11 @@ public class PortletTracker
 			_portletLocalService.getPortletById(
 				CompanyConstants.SYSTEM, PortletKeys.PORTAL);
 
-		ServletContextHelperRegistration registration =
+		ServletContextHelperRegistration servletContextHelperRegistration =
 			getServletContextHelperRegistration(bundle, serviceRegistrations);
 
 		ServiceReference<ServletContextHelper> serviceReference =
-			registration.getServiceReference();
+			servletContextHelperRegistration.getServiceReference();
 
 		String servletContextName = GetterUtil.getString(
 			serviceReference.getProperty(
@@ -994,7 +994,8 @@ public class PortletTracker
 			bundle, portalPortletModel, servletContextName,
 			_httpServiceEndpoint + contextPath);
 
-		bundlePortletApp.setServletContext(registration.getServletContext());
+		bundlePortletApp.setServletContext(
+			servletContextHelperRegistration.getServletContext());
 
 		serviceRegistrations.setBundlePortletApp(bundlePortletApp);
 
@@ -1507,9 +1508,8 @@ public class PortletTracker
 			}
 
 			_bundlePortletApp = null;
-
-			_serviceRegistrations.clear();
 			_serviceReferences.clear();
+			_serviceRegistrations.clear();
 		}
 
 		protected synchronized void doConfiguration(ClassLoader classLoader) {
