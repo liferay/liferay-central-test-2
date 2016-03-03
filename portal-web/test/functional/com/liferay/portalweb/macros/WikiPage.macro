@@ -1074,7 +1074,7 @@
 		<execute function="AssertTextEquals" locator1="WikiEntry#BODY_ASSET" value1="${wikiPageContent}" />
 	</command>
 
-	<command name="viewAttachmentPG">
+	<command name="viewAttachmentPGViaEdit">
 		<var name="key_attachmentFileName" value="${attachmentFileName}" />
 		<var name="key_wikiPageTitle" value="${wikiPageTitle}" />
 
