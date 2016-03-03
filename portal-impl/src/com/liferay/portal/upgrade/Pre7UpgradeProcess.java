@@ -36,7 +36,7 @@ public abstract class Pre7UpgradeProcess extends UpgradeProcess {
 		try (Closeable closeable = ServiceWrapperProxyUtil.injectFieldProxy(
 				PortalBeanLocatorUtil.locate(
 					CounterLocalService.class.getName()),
-				"counterFinder", SwitchClassNameCounterFinderWrapper.class)) {
+				"counterFinder", Pre7CounterFinder.class)) {
 
 			super.upgrade();
 		}
@@ -48,8 +48,7 @@ public abstract class Pre7UpgradeProcess extends UpgradeProcess {
 		}
 	}
 
-	private static class SwitchClassNameCounterFinderWrapper
-		implements CounterFinder {
+	private static class Pre7CounterFinder implements CounterFinder {
 
 		@Override
 		public List<String> getNames() {
@@ -111,7 +110,7 @@ public abstract class Pre7UpgradeProcess extends UpgradeProcess {
 			_counterFinder.reset(name, size);
 		}
 
-		private SwitchClassNameCounterFinderWrapper(
+		private Pre7CounterFinder(
 			CounterFinder counterFinder) {
 
 			_counterFinder = counterFinder;
