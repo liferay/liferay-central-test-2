@@ -45,8 +45,10 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.spring.aop.ServiceWrapperProxyUtil;
 
 import java.io.Closeable;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+
 import java.util.List;
 
 /**
@@ -325,9 +327,7 @@ public class UpgradePermission extends UpgradeProcess {
 			return super.deleteRole(role);
 		}
 
-		private Pre7RoleLocalServiceImpl(
-			RoleLocalService roleLocalService) {
-
+		private Pre7RoleLocalServiceImpl(RoleLocalService roleLocalService) {
 			super(roleLocalService);
 		}
 

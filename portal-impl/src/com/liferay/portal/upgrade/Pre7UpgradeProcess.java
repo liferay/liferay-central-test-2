@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.spring.aop.ServiceWrapperProxyUtil;
 
 import java.io.Closeable;
+
 import java.util.List;
 
 /**
@@ -110,9 +111,7 @@ public abstract class Pre7UpgradeProcess extends UpgradeProcess {
 			_counterFinder.reset(name, size);
 		}
 
-		private Pre7CounterFinderImpl(
-			CounterFinder counterFinder) {
-
+		private Pre7CounterFinderImpl(CounterFinder counterFinder) {
 			_counterFinder = counterFinder;
 		}
 
