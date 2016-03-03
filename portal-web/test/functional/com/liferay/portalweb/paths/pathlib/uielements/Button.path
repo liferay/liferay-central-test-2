@@ -384,6 +384,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>MORE_MESSAGES</td>
+	<td>//a[contains(@class,'btn') and contains(.,'More Messages')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>MOVE</td>
 	<td>//a[contains(@class,'btn') and contains(.,'Move')] | //button[contains(.,'Move')]</td>
 	<td></td>
