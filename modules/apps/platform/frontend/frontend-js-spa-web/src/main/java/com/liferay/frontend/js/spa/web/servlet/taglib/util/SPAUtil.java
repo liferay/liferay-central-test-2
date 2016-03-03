@@ -37,32 +37,6 @@ import javax.servlet.http.HttpSession;
  */
 public class SPAUtil {
 
-	public static boolean isClearScreensCache(
-		HttpServletRequest request, HttpSession session) {
-
-		boolean singlePageApplicationClearCache = GetterUtil.getBoolean(
-			request.getAttribute(WebKeys.SINGLE_PAGE_APPLICATION_CLEAR_CACHE));
-
-		if (singlePageApplicationClearCache) {
-			return true;
-		}
-
-		String portletId = request.getParameter("p_p_id");
-
-		String singlePageApplicationLastPortletId =
-			(String)session.getAttribute(
-				WebKeys.SINGLE_PAGE_APPLICATION_LAST_PORTLET_ID);
-
-		if (Validator.isNotNull(portletId) &&
-			Validator.isNotNull(singlePageApplicationLastPortletId) &&
-			!Validator.equals(portletId, singlePageApplicationLastPortletId)) {
-
-			return true;
-		}
-
-		return false;
-	}
-
 	public static String getPortletsBlacklist(ThemeDisplay themeDisplay) {
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
@@ -95,6 +69,32 @@ public class SPAUtil {
 		}
 
 		return jsonArray.toJSONString();
+	}
+
+	public static boolean isClearScreensCache(
+		HttpServletRequest request, HttpSession session) {
+
+		boolean singlePageApplicationClearCache = GetterUtil.getBoolean(
+			request.getAttribute(WebKeys.SINGLE_PAGE_APPLICATION_CLEAR_CACHE));
+
+		if (singlePageApplicationClearCache) {
+			return true;
+		}
+
+		String portletId = request.getParameter("p_p_id");
+
+		String singlePageApplicationLastPortletId =
+			(String)session.getAttribute(
+				WebKeys.SINGLE_PAGE_APPLICATION_LAST_PORTLET_ID);
+
+		if (Validator.isNotNull(portletId) &&
+			Validator.isNotNull(singlePageApplicationLastPortletId) &&
+			!Validator.equals(portletId, singlePageApplicationLastPortletId)) {
+
+			return true;
+		}
+
+		return false;
 	}
 
 }
