@@ -105,8 +105,8 @@ public class DBBuilder {
 		_buildSQLFile(sqlDir, "update-6.0.6-6.1.0");
 		_buildSQLFile(sqlDir, "update-6.0.12-6.1.0");
 		_buildSQLFile(sqlDir, "update-6.1.0-6.1.1");
-		_buildSQLFile(sqlDir, new SQLFileGlob("update-6.1.1-6.2.0*"));
-		_buildSQLFile(sqlDir, new SQLFileGlob("update-6.2.0-7.0.0*"));
+		_buildSQLFiles(sqlDir, "update-6.1.1-6.2.0*");
+		_buildSQLFiles(sqlDir, "update-6.2.0-7.0.0*");
 
 		_buildCreateFile(sqlDir);
 	}
@@ -130,16 +130,16 @@ public class DBBuilder {
 		}
 	}
 
-	private void _buildSQLFile(String sqlDir, SQLFileGlob sqlFileGlob)
+	private void _buildSQLFiles(String sqlDir, String regex)
 		throws IOException {
 
-		try (DirectoryStream<Path> sqlFiles = Files.newDirectoryStream(
-				Paths.get(sqlDir), sqlFileGlob.getPattern())) {
+		try (DirectoryStream<Path> paths = Files.newDirectoryStream(
+				Paths.get(sqlDir), regex)) {
 
-			for (Path sqlFile : sqlFiles) {
-				Path path = sqlFile.getFileName();
+			for (Path path : paths) {
+				Path fileNamePath = path.getFileName();
 
-				String fileName = path.toString();
+				String fileName = fileNamePath.toString();
 
 				_generateSQLFile(
 					sqlDir, fileName.replace(".sql", StringPool.BLANK));
@@ -171,25 +171,5 @@ public class DBBuilder {
 
 	private final String _databaseName;
 	private final DBType[] _dbTypes;
-
-	private static class SQLFileGlob {
-
-		public SQLFileGlob(String sqlFile) {
-			if (!sqlFile.endsWith("*")) {
-				throw new IllegalArgumentException(
-					"Expected a glob pattern: " + sqlFile +
-						" is not a valid glob");
-			}
-
-			_sqlFile = sqlFile;
-		}
-
-		public String getPattern() {
-			return _sqlFile;
-		}
-
-		private final String _sqlFile;
-
-	}
 
 }
