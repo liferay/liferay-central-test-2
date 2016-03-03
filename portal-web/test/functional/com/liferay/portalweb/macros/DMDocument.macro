@@ -1459,9 +1459,7 @@
 	</command>
 
 	<command name="revertPG">
-		<execute function="Click" locator1="DocumentsAndMediaDocument#DOCUMENT_DETAILS_DROPDOWN" />
-
-		<execute function="AssertClick" locator1="MenuItem#VERSIONS" value1="Versions" />
+		<execute macro="DMNavigator#gotoDocumentVersion" />
 
 		<var name="key_dmDocumentVersionNumber" value="Version ${dmDocumentVersionNumber}" />
 
@@ -2080,9 +2078,7 @@
 	</command>
 
 	<command name="viewOlderVersionPG">
-		<execute function="Click" locator1="DocumentsAndMediaDocument#DOCUMENT_DETAILS_DROPDOWN" />
-
-		<execute function="AssertClick" locator1="MenuItem#VERSIONS" value1="Versions" />
+		<execute macro="DMNavigator#gotoDocumentVersion" />
 
 		<var name="key_dmDocumentVersionNumber" value="Version ${dmDocumentVersionNumber}" />
 
@@ -2095,7 +2091,10 @@
 
 		<execute function="AssertTextEquals" locator1="DocumentsAndMediaDocument#DOCUMENT_INFO_TITLE" value1="${dmDocumentTitle} (Version ${dmDocumentVersionNumber})" />
 		<execute function="AssertTextEquals" locator1="DocumentsAndMediaDocument#DOCUMENT_INFO_DESCRIPTION" value1="${dmDocumentDescription}" />
-		<execute function="AssertTextEquals" locator1="DocumentsAndMediaDocument#DOCUMENT_INFO_VERSION" value1="Version ${dmDocumentVersionNumber}" />
+
+		<execute macro="DMDocument#viewDocumentVersionNumberCmdPG">
+			<var name="dmDocumentVersionNumber" value="${dmDocumentVersionNumber}" />
+		</execute>
 	</command>
 
 	<command name="viewPG">
