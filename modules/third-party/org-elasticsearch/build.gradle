@@ -17,6 +17,5 @@ patch {
 	}
 
 	fileNames "org/elasticsearch/bootstrap/JarHell.java"
-
 	originalLibModuleName = "elasticsearch"
 }
