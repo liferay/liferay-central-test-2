@@ -19,7 +19,7 @@ import com.liferay.counter.kernel.service.CounterLocalServiceWrapper;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.model.ResourcePermission;
 import com.liferay.portal.kernel.upgrade.BaseUpgradeAdminPortlets;
-import com.liferay.portal.upgrade.ServiceWrapperProxyUtil;
+import com.liferay.portal.service.ServiceWrapperProxyUtil;
 
 import java.io.Closeable;
 
