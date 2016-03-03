@@ -217,7 +217,7 @@ public class ImageToolImpl implements ImageTool {
 
 							renderedImage = imageBag.getRenderedImage();
 						}
-						catch (IOException | ImageResolutionException e) {
+						catch (ImageResolutionException | IOException e) {
 							if (_log.isDebugEnabled()) {
 								_log.debug("Unable to convert " + type, e);
 							}
