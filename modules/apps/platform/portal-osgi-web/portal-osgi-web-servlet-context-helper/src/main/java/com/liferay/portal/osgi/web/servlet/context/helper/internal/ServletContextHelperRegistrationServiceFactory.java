@@ -33,7 +33,7 @@ import org.osgi.service.http.whiteboard.HttpWhiteboardConstants;
  * @author Juan Gonzalez
  * @author Raymond Augé
  */
-public class ServletContextHelperRegistrationFactory
+public class ServletContextHelperRegistrationServiceFactory
 	implements ServiceFactory<ServletContextHelperRegistration> {
 
 	@Override
