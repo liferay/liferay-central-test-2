@@ -168,6 +168,9 @@ public class PoshiRunnerExecutor {
 				if (childElement.attributeValue("function") != null) {
 					runFunctionExecuteElement(childElement);
 				}
+				else if (childElement.attributeValue("groovy-script") != null) {
+					runGroovyScriptElement(childElement);
+				}
 				else if (childElement.attributeValue("macro") != null) {
 					runMacroExecuteElement(childElement, "macro");
 				}
@@ -182,9 +185,6 @@ public class PoshiRunnerExecutor {
 						 PropsValues.MOBILE_BROWSER) {
 
 					runMacroExecuteElement(childElement, "macro-mobile");
-				}
-				else if (childElement.attributeValue("groovy-script") != null) {
-					runGroovyScriptElement(childElement);
 				}
 				else if (childElement.attributeValue("selenium") != null) {
 					runSeleniumElement(childElement);
