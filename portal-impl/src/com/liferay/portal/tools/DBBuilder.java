@@ -130,6 +130,16 @@ public class DBBuilder {
 		}
 	}
 
+	private void _buildSQLFile(String sqlDir, String fileName)
+		throws IOException {
+
+		if (!FileUtil.exists(sqlDir + "/" + fileName + ".sql")) {
+			return;
+		}
+
+		_generateSQLFile(sqlDir, fileName);
+	}
+
 	private void _buildSQLFiles(String sqlDir, String regex)
 		throws IOException {
 
@@ -145,16 +155,6 @@ public class DBBuilder {
 					sqlDir, fileName.replace(".sql", StringPool.BLANK));
 			}
 		}
-	}
-
-	private void _buildSQLFile(String sqlDir, String fileName)
-		throws IOException {
-
-		if (!FileUtil.exists(sqlDir + "/" + fileName + ".sql")) {
-			return;
-		}
-
-		_generateSQLFile(sqlDir, fileName);
 	}
 
 	private void _generateSQLFile(String sqlDir, String fileName)
