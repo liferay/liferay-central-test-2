@@ -445,7 +445,7 @@
 </tr>
 <tr>
 	<td>POST</td>
-	<td>//button[contains(.,'Post')]</td>
+	<td>//button[contains(.,'Post') and not(contains(@class,'disabled'))]</td>
 	<td></td>
 </tr>
 <tr>
