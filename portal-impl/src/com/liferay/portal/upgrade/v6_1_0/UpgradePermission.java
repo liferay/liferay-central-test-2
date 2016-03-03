@@ -156,7 +156,8 @@ public class UpgradePermission extends UpgradeProcess {
 
 			ResourceActionsUtil.read(
 				null, upgradePermissionClass.getClassLoader(),
-				"resource-actions/portal-6.1.0.xml");
+				"com/liferay/portal/upgrade/v6_1_0/dependencies/" +
+					"resource-actions.xml");
 
 			// LPS-46141
 
