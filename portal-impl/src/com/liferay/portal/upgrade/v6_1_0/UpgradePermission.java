@@ -139,15 +139,15 @@ public class UpgradePermission extends UpgradeProcess {
 	protected void doUpgrade() throws Exception {
 		try (Closeable closeable1 = ServiceWrapperProxyUtil.createProxy(
 				PortalBeanLocatorUtil.locate(RoleLocalService.class.getName()),
-				SwitchClassNameRoleLocalServiceWrapper.class);
+				Pre7RoleLocalServiceImpl.class);
 			Closeable closeable2 = ServiceWrapperProxyUtil.createProxy(
 				PortalBeanLocatorUtil.locate(
 					ResourceLocalService.class.getName()),
-				SwitchClassNameResourceLocalServiceWrapper.class);
+				Pre7ResourceLocalServiceImpl.class);
 			Closeable closeable3 = ServiceWrapperProxyUtil.createProxy(
 				PortalBeanLocatorUtil.locate(
 					ResourcePermissionLocalService.class.getName()),
-				SwitchClassNameResourcePermissionLocalServiceWrapper.class)) {
+				Pre7ResourcePermissionLocalServiceImpl.class)) {
 
 			Class<? extends UpgradePermission> upgradePermissionClass =
 				this.getClass();
@@ -246,7 +246,7 @@ public class UpgradePermission extends UpgradeProcess {
 	private static final Log _log = LogFactoryUtil.getLog(
 		UpgradePermission.class);
 
-	private static class SwitchClassNameResourceLocalServiceWrapper
+	private static class Pre7ResourceLocalServiceImpl
 		extends ResourceLocalServiceWrapper {
 
 		@Override
@@ -265,7 +265,7 @@ public class UpgradePermission extends UpgradeProcess {
 				addGroupPermissions, addGuestPermissions);
 		}
 
-		private SwitchClassNameResourceLocalServiceWrapper(
+		private Pre7ResourceLocalServiceImpl(
 			ResourceLocalService resourceLocalService) {
 
 			super(resourceLocalService);
@@ -273,7 +273,7 @@ public class UpgradePermission extends UpgradeProcess {
 
 	}
 
-	private static class SwitchClassNameResourcePermissionLocalServiceWrapper
+	private static class Pre7ResourcePermissionLocalServiceImpl
 		extends ResourcePermissionLocalServiceWrapper {
 
 		@Override
@@ -290,7 +290,7 @@ public class UpgradePermission extends UpgradeProcess {
 				companyId, name, scope, primKey, roleId, actionIds);
 		}
 
-		private SwitchClassNameResourcePermissionLocalServiceWrapper(
+		private Pre7ResourcePermissionLocalServiceImpl(
 			ResourcePermissionLocalService resourcePermissionLocalService) {
 
 			super(resourcePermissionLocalService);
@@ -298,7 +298,7 @@ public class UpgradePermission extends UpgradeProcess {
 
 	}
 
-	private static class SwitchClassNameRoleLocalServiceWrapper
+	private static class Pre7RoleLocalServiceImpl
 		extends RoleLocalServiceWrapper {
 
 		@Override
@@ -325,7 +325,7 @@ public class UpgradePermission extends UpgradeProcess {
 			return super.deleteRole(role);
 		}
 
-		private SwitchClassNameRoleLocalServiceWrapper(
+		private Pre7RoleLocalServiceImpl(
 			RoleLocalService roleLocalService) {
 
 			super(roleLocalService);
