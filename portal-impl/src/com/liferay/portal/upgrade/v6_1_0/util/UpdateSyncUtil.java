@@ -66,7 +66,7 @@ public class UpdateSyncUtil {
 					long parentFolderId = rs.getLong("parentFolderId");
 					String type = rs.getString("type");
 
-					ps2.setLong(1, increment());
+					ps2.setLong(1, _increment());
 					ps2.setLong(2, companyId);
 					ps2.setTimestamp(3, createDate);
 					ps2.setTimestamp(4, createDate);
@@ -84,7 +84,7 @@ public class UpdateSyncUtil {
 		}
 	}
 
-	protected static long increment() {
+	private static long _increment() {
 		DB db = DBManagerUtil.getDB();
 
 		return db.increment();
