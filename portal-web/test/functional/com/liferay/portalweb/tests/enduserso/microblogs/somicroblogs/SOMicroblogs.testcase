@@ -2145,30 +2145,6 @@
 		</execute>
 	</command>
 
-	<command name="DeleteMicroblogsEntry" priority="4">
-		<var name="microblogsEntryContent" value="Microblogs Post" />
-
-		<execute macro="Page#gotoPG">
-			<var name="pageName" value="${pageName}" />
-			<var name="soDashboard" value="true" />
-		</execute>
-
-		<execute macro="SOMicroblogs#addMicroblogsEntry">
-			<var name="microblogsEntryContent" value="${microblogsEntryContent}" />
-		</execute>
-
-		<execute macro="SOUserBar#gotoDashboardPG" />
-
-		<execute function="Click" locator1="SODashboard#NAVIGATION_MICROBLOGS" />
-
-		<execute macro="SOMicroblogs#deleteMicroblogsEntry" />
-
-		<var name="key_microblogsEntryContent" value="${microblogsEntryContent}" />
-
-		<execute function="AssertTextEquals" locator1="SOMicroblogs#INFO_MESSAGE" value1="You do not have any microblog entries." />
-		<execute function="AssertElementNotPresent" locator1="SOMicroblogs#MICROBLOGS_ENTRY_CONTENT" value1="${microblogsEntryContent}" />
-	</command>
-
 	<command name="DeleteMicroblogsEntryMention" priority="4">
 		<var name="microblogsEntryContent1" value="Microblogs Post1" />
 		<var name="microblogsEntryContent2" value="Microblogs Post2" />
