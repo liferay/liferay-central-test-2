@@ -81,8 +81,8 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		}
 		catch (Exception e) {
 			_log.error(
-				"Unable to add dynamic data mapping structure link " +
-					"for file entry type " + classPK);
+				"Unable to add dynamic data mapping structure link for file " +
+					"entry type " + classPK);
 
 			throw e;
 		}
@@ -154,8 +154,8 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 				PreparedStatement ps3 =
 					AutoBatchPreparedStatementUtil.concurrentAutoBatch(
 						connection,
-						"update DLFileEntry set title = ? where " +
-							"fileEntryId = ?");
+						"update DLFileEntry set title = ? where fileEntryId " +
+							"= ?");
 				PreparedStatement ps4 =
 					AutoBatchPreparedStatementUtil.concurrentAutoBatch(
 						connection,
