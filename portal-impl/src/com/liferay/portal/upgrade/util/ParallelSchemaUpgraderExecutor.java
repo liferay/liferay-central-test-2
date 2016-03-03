@@ -30,8 +30,8 @@ import java.util.concurrent.Future;
  */
 public class ParallelSchemaUpgraderExecutor {
 
-	public ParallelSchemaUpgraderExecutor(String... sqlFiles) {
-		_sqlFiles = sqlFiles;
+	public ParallelSchemaUpgraderExecutor(String... sqlFileNames) {
+		_sqlFileNames = sqlFileNames;
 	}
 
 	public void execute() throws Exception {
@@ -40,10 +40,10 @@ public class ParallelSchemaUpgraderExecutor {
 		List<Future<Void>> futures = new ArrayList<>();
 
 		try {
-			for (int i = 0; i < _sqlFiles.length; i++) {
+			for (int i = 0; i < _sqlFileNames.length; i++) {
 				futures.add(
 					executorService.submit(
-						new CallableSQLExecutor(_sqlFiles[i])));
+						new CallableSQLExecutor(_sqlFileNames[i])));
 			}
 		}
 		finally {
@@ -55,28 +55,26 @@ public class ParallelSchemaUpgraderExecutor {
 		}
 	}
 
-	private final String[] _sqlFiles;
+	private final String[] _sqlFileNames;
 
 	private class CallableSQLExecutor implements Callable<Void> {
 
 		public CallableSQLExecutor(String sqlFile) {
-			_sqlFile = sqlFile;
+			_sqlFileName = sqlFile;
 		}
 
 		@Override
 		public Void call() throws Exception {
 			DB db = DBManagerUtil.getDB();
 
-			try (LoggingTimer loggingTimer = new LoggingTimer(
-					"runSQLTemplate(" + _sqlFile + ")")) {
-
-				db.runSQLTemplate(_sqlFile, false);
+			try (LoggingTimer loggingTimer = new LoggingTimer(_sqlFileName)) {
+				db.runSQLTemplate(_sqlFileName, false);
 			}
 
 			return null;
 		}
 
-		private final String _sqlFile;
+		private final String _sqlFileName;
 
 	}
 
