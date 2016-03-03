@@ -838,6 +838,11 @@ $horizontal-spacing: 35px;
 		background-color: transparent;
 	}
 
+	.layout-builder-move-row-target {
+		margin-right: $side-spacing;
+		margin-left: $side-spacing;
+	}
+
 	.lfr-ddm-repeatable-add-button {
 		position: absolute;
 		right: 0;
