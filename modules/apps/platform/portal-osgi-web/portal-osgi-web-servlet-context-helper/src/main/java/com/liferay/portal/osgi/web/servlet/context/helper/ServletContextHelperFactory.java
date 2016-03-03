@@ -14,7 +14,7 @@
 
 package com.liferay.portal.osgi.web.servlet.context.helper;
 
-import com.liferay.portal.osgi.web.servlet.context.helper.internal.ServletContextHelperRegistrationFactory;
+import com.liferay.portal.osgi.web.servlet.context.helper.internal.ServletContextHelperRegistrationServiceFactory;
 
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
@@ -34,7 +34,7 @@ public class ServletContextHelperFactory {
 	protected void activate(BundleContext bundleContext) throws Exception {
 		_serviceRegistration = bundleContext.registerService(
 			ServletContextHelperRegistration.class.getName(),
-			new ServletContextHelperRegistrationFactory(), null);
+			new ServletContextHelperRegistrationServiceFactory(), null);
 	}
 
 	@Deactivate
