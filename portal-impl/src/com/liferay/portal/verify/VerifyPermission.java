@@ -308,14 +308,6 @@ public class VerifyPermission extends VerifyProcess {
 			long userClassNameId, long userGroupClassNameId, long[] companyIds)
 		throws Exception {
 
-		String insertSQL =
-			"insert into ResourcePermissionPlid(" +
-				"select ResourcePermission.resourcePermissionId, " +
-					"SUBSTR(ResourcePermission.primKey, 0, " +
-						"INSTR(ResourcePermission.primKey, '_LAYOUT_') -1) " +
-							"as plid from ResourcePermission where " +
-								"ResourcePermission.primKey like '%_LAYOUT_%')";
-
 		try {
 			runSQL(
 				"create table ResourcePermissionPlid (resourcePermissionId " +
@@ -325,7 +317,16 @@ public class VerifyPermission extends VerifyProcess {
 			runSQL("delete from ResourcePermissionPlid");
 		}
 
-		runSQL(insertSQL);
+		StringBundler sb = new StringBundler(6);
+
+		sb.append("insert into ResourcePermissionPlid(select ");
+		sb.append("ResourcePermission.resourcePermissionId, ");
+		sb.append("SUBSTR(ResourcePermission.primKey, 0, ");
+		sb.append("INSTR(ResourcePermission.primKey, '_LAYOUT_') -1) as plid ");
+		sb.append("from ResourcePermission where ResourcePermission.primKey ");
+		sb.append("like '%_LAYOUT_%')");
+
+		runSQL(sb.toString());
 
 		for (long companyId : companyIds) {
 			Role powerUserRole = RoleLocalServiceUtil.getRole(
@@ -333,7 +334,7 @@ public class VerifyPermission extends VerifyProcess {
 			Role userRole = RoleLocalServiceUtil.getRole(
 				companyId, RoleConstants.USER);
 
-			StringBundler sb = new StringBundler(20);
+			sb = new StringBundler(20);
 
 			sb.append("update ResourcePermission set roleId = ");
 			sb.append(userRole.getRoleId());
