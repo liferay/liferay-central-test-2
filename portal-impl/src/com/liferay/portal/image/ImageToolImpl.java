@@ -512,7 +512,7 @@ public class ImageToolImpl implements ImageTool {
 						sb.append(PropsValues.IMAGE_TOOL_IMAGE_MAX_HEIGHT);
 						sb.append(" px high and ");
 						sb.append(PropsValues.IMAGE_TOOL_IMAGE_MAX_WIDTH);
-						sb.append(" px wide).");
+						sb.append(" px wide)");
 
 						throw new ImageResolutionException(sb.toString());
 					}
