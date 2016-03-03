@@ -32,28 +32,30 @@ public class UpdateSyncUtil {
 
 	public static void updateSyncs(Connection connection) throws Exception {
 		try (LoggingTimer loggingTimer = new LoggingTimer()) {
-			StringBundler sb = new StringBundler(10);
+			StringBundler sb1 = new StringBundler(10);
 
-			sb.append("select DLFileEntry.fileEntryId as fileId, ");
-			sb.append("DLFileEntry.groupId as groupId, DLFileEntry.companyId");
-			sb.append(" as companyId, DLFileEntry.createDate as createDate, ");
-			sb.append("DLFileEntry.folderId as parentFolderId, 'file' as ");
-			sb.append("type from DLFileEntry union all select ");
-			sb.append("DLFolder.folderId as fileId, DLFolder.groupId as ");
-			sb.append("groupId, DLFolder.companyId as companyId, ");
-			sb.append("DLFolder.createDate as createDate, ");
-			sb.append("DLFolder.parentFolderId as parentFolderId, 'folder' ");
-			sb.append("as type from DLFolder");
+			sb1.append("select DLFileEntry.fileEntryId as fileId, ");
+			sb1.append("DLFileEntry.groupId as groupId, DLFileEntry.companyId");
+			sb1.append(" as companyId, DLFileEntry.createDate as createDate, ");
+			sb1.append("DLFileEntry.folderId as parentFolderId, 'file' as ");
+			sb1.append("type from DLFileEntry union all select ");
+			sb1.append("DLFolder.folderId as fileId, DLFolder.groupId as ");
+			sb1.append("groupId, DLFolder.companyId as companyId, ");
+			sb1.append("DLFolder.createDate as createDate, ");
+			sb1.append("DLFolder.parentFolderId as parentFolderId, 'folder' ");
+			sb1.append("as type from DLFolder");
+
+			StringBundler sb2 = new StringBundler(3);
+
+			sb2.append("insert into DLSync (syncId, companyId, createDate, ");
+			sb2.append("modifiedDate, fileId, repositoryId, parentFolderId, ");
+			sb2.append("event, type_) values (?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
 			try (PreparedStatement ps1 = connection.prepareStatement(
-					sb.toString());
+					sb1.toString());
 				PreparedStatement ps2 =
 					AutoBatchPreparedStatementUtil.concurrentAutoBatch(
-						connection,
-						"insert into DLSync (syncId, companyId, createDate, " +
-							"modifiedDate, fileId, repositoryId, " +
-							"parentFolderId, event, type_) " +
-							"values (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+						connection, sb2.toString());
 				ResultSet rs = ps1.executeQuery()) {
 
 				while (rs.next()) {
