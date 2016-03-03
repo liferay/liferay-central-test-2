@@ -45,7 +45,7 @@ public class UpdateSyncUtil {
 			sb.append("DLFolder.parentFolderId as parentFolderId, 'folder' ");
 			sb.append("as type from DLFolder");
 
-			try (PreparedStatement ps = connection.prepareStatement(
+			try (PreparedStatement ps1 = connection.prepareStatement(
 					sb.toString());
 				PreparedStatement ps2 =
 					AutoBatchPreparedStatementUtil.concurrentAutoBatch(
@@ -54,7 +54,7 @@ public class UpdateSyncUtil {
 							"modifiedDate, fileId, repositoryId, " +
 							"parentFolderId, event, type_) " +
 							"values (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-				ResultSet rs = ps.executeQuery()) {
+				ResultSet rs = ps1.executeQuery()) {
 
 				while (rs.next()) {
 					long fileId = rs.getLong("fileId");
