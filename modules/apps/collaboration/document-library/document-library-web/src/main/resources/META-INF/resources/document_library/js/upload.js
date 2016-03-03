@@ -133,6 +133,8 @@ AUI.add(
 				'</a>' +
 			'</span>';
 
+		var TPL_ENTRY_WRAPPER_DISPLAY_STYLE_ICON = '<div class="col-md-2 col-sm-4 col-xs-6" data-title="{title}"></div>';
+
 		var TPL_ERROR_FOLDER = new A.Template(
 			'<span class="lfr-status-success-label">{validFilesLength}</span>',
 
@@ -514,11 +516,9 @@ AUI.add(
 						);
 
 						if (displayStyle == CSS_ICON) {
-							wrapperTpl = '<div class="col-md-2 col-sm-4 col-xs-6" data-title="{title}"></div>';
-
 							var entryNodeWrapper = A.Node.create(
 								Lang.sub(
-									wrapperTpl,
+									TPL_ENTRY_WRAPPER_DISPLAY_STYLE_ICON,
 									{
 										title: name
 									}
@@ -1096,7 +1096,7 @@ AUI.add(
 
 						var id = searchContainer.getAttribute('id');
 
-						var emptyResultsMessage = A.one('#' + id + 'EmptyResultsMessage')
+						var emptyResultsMessage = A.one('#' + id + 'EmptyResultsMessage');
 
 						if (emptyResultsMessage) {
 							emptyResultsMessage.hide();
@@ -1337,7 +1337,7 @@ AUI.add(
 						imageNode.attr('src', thumbnailPath);
 
 						if (instance._getDisplayStyle() === CSS_ICON) {
-							imageNode.ancestor('div').setStyle('backgroundImage', "url('" + thumbnailPath + "')");
+							imageNode.ancestor('div').setStyle('backgroundImage', 'url("' + thumbnailPath + '")');
 						}
 					},
 
