@@ -22,6 +22,7 @@ import com.liferay.dynamic.data.lists.model.DDLRecordVersion;
 import com.liferay.dynamic.data.lists.service.DDLRecordLocalService;
 import com.liferay.dynamic.data.lists.service.DDLRecordSetLocalService;
 import com.liferay.dynamic.data.lists.service.permission.DDLPermission;
+import com.liferay.dynamic.data.lists.util.comparator.DDLRecordSetNameComparator;
 import com.liferay.dynamic.data.mapping.model.DDMStructure;
 import com.liferay.dynamic.data.mapping.model.DDMTemplate;
 import com.liferay.dynamic.data.mapping.service.DDMStructureLocalService;
@@ -42,7 +43,6 @@ import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.module.framework.ModuleServiceLifecycle;
-import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.xml.Element;
 
 import java.util.List;
@@ -86,6 +86,35 @@ public class DDLPortletDataHandler extends BasePortletDataHandler {
 				DDLRecord.class.getName()));
 	}
 
+	protected void deleteDDLRecordSets(PortletDataContext portletDataContext)
+		throws PortalException {
+
+		int totalRecordSets = _ddlRecordSetLocalService.searchCount(
+			portletDataContext.getCompanyId(),
+			portletDataContext.getScopeGroupId(), null,
+			DDLRecordSetConstants.SCOPE_DYNAMIC_DATA_LISTS);
+
+		if (totalRecordSets > 0) {
+			List<DDLRecordSet> ddlRecordSets = _ddlRecordSetLocalService.search(
+				portletDataContext.getCompanyId(),
+				portletDataContext.getScopeGroupId(), null,
+				DDLRecordSetConstants.SCOPE_DYNAMIC_DATA_LISTS, 1,
+				totalRecordSets, new DDLRecordSetNameComparator());
+
+			for (DDLRecordSet ddlRecordSet : ddlRecordSets) {
+				_ddlRecordSetLocalService.deleteDDLRecordSet(ddlRecordSet);
+
+				DDMStructure ddmStructure =
+					_ddmStructureLocalService.fetchDDMStructure(
+						ddlRecordSet.getDDMStructureId());
+
+				if (ddmStructure != null) {
+					_ddmStructureLocalService.deleteDDMStructure(ddmStructure);
+				}
+			}
+		}
+	}
+
 	@Override
 	protected PortletPreferences doDeleteData(
 			PortletDataContext portletDataContext, String portletId,
@@ -98,12 +127,7 @@ public class DDLPortletDataHandler extends BasePortletDataHandler {
 			return portletPreferences;
 		}
 
-		_ddlRecordSetLocalService.deleteRecordSets(
-			portletDataContext.getScopeGroupId());
-
-		_ddmStructureLocalService.deleteStructures(
-			portletDataContext.getScopeGroupId(),
-			PortalUtil.getClassNameId(DDLRecordSet.class));
+		deleteDDLRecordSets(portletDataContext);
 
 		return portletPreferences;
 	}
@@ -320,30 +344,34 @@ public class DDLPortletDataHandler extends BasePortletDataHandler {
 							DDLRecordSetConstants.SCOPE_DYNAMIC_DATA_LISTS));
 				}
 
-		});
+			}
+		);
 
 		actionableDynamicQuery.setPerformActionMethod(
 			new ActionableDynamicQuery.PerformActionMethod<DDLRecordSet>() {
 
-			@Override
-			public void performAction(DDLRecordSet ddlRecordSet)
-				throws PortalException {
+				@Override
+				public void performAction(DDLRecordSet ddlRecordSet)
+					throws PortalException {
 
-				StagedModelDataHandlerUtil.exportStagedModel(
-					portletDataContext, ddlRecordSet);
-
-				DDMStructure ddmStructure = ddlRecordSet.getDDMStructure();
-
-				StagedModelDataHandlerUtil.exportStagedModel(
-					portletDataContext, ddmStructure);
-
-				for (DDMTemplate ddmTemplate : ddmStructure.getTemplates()) {
 					StagedModelDataHandlerUtil.exportStagedModel(
-						portletDataContext, ddmTemplate);
-				}
-			}
+						portletDataContext, ddlRecordSet);
 
-		});
+					DDMStructure ddmStructure = ddlRecordSet.getDDMStructure();
+
+					StagedModelDataHandlerUtil.exportStagedModel(
+						portletDataContext, ddmStructure);
+
+					for (DDMTemplate ddmTemplate :
+							ddmStructure.getTemplates()) {
+
+						StagedModelDataHandlerUtil.exportStagedModel(
+							portletDataContext, ddmTemplate);
+					}
+				}
+
+			}
+		);
 
 		return actionableDynamicQuery;
 	}
