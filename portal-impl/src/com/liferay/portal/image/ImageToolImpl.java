@@ -502,19 +502,7 @@ public class ImageToolImpl implements ImageTool {
 					if ((height > PropsValues.IMAGE_TOOL_IMAGE_MAX_HEIGHT) ||
 						(width > PropsValues.IMAGE_TOOL_IMAGE_MAX_WIDTH)) {
 
-						StringBundler sb = new StringBundler(9);
-
-						sb.append("Image is ");
-						sb.append(height);
-						sb.append("px height and ");
-						sb.append(width);
-						sb.append("px width, larger than max height ");
-						sb.append(PropsValues.IMAGE_TOOL_IMAGE_MAX_HEIGHT);
-						sb.append("px and max width ");
-						sb.append(PropsValues.IMAGE_TOOL_IMAGE_MAX_WIDTH);
-						sb.append("px");
-
-						throw new ImageResolutionException(sb.toString());
+						throw new ImageResolutionException();
 					}
 
 					renderedImage = imageReader.read(0);
