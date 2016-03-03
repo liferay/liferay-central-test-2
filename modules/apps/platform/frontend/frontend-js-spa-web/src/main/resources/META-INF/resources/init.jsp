@@ -31,5 +31,5 @@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
 <aui:script>
 	Liferay.SPA = Liferay.SPA || {};
 
-	Liferay.SPA.clearScreensCache = <%= SPAUtil.getClearScreensCache(request, session) %>;
+	Liferay.SPA.clearScreensCache = <%= SPAUtil.isClearScreensCache(request, session) %>;
 </aui:script>
