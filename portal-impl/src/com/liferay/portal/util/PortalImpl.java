@@ -3954,9 +3954,7 @@ public class PortalImpl implements Portal {
 					refererPlid);
 			}
 
-			LayoutSet virtualHostLayoutSet = virtualHostLayout.getLayoutSet();
-
-			return getPortalURL(virtualHostLayoutSet, themeDisplay);
+			return getPortalURL(virtualHostLayout.getLayoutSet(), themeDisplay);
 		}
 
 		return getPortalURL(
