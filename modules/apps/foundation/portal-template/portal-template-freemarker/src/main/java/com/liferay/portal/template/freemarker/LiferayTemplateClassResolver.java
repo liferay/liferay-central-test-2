@@ -127,7 +127,6 @@ public class LiferayTemplateClassResolver implements TemplateClassResolver {
 	}
 
 	@Activate
-	@Modified
 	protected void activate(
 		BundleContext bundleContext, Map<String, Object> properties) {
 
@@ -140,17 +139,31 @@ public class LiferayTemplateClassResolver implements TemplateClassResolver {
 
 		_classResolverBundleTracker.open();
 
-		Set<ClassLoader> allowedClassLoaders = _findAllowedClassLoaders(
-			_freemarkerEngineConfiguration.allowedClasses(), bundleContext);
-
-		_whiteListedClassloaders.addAll(allowedClassLoaders);
-
-		_whiteListedClassloaders.add(getClass().getClassLoader());
+		_whiteListedClassloaders.add(
+			LiferayTemplateClassResolver.class.getClassLoader());
 	}
 
 	@Deactivate
 	protected void deactivate() {
 		_classResolverBundleTracker.close();
+	}
+
+	@Modified
+	protected void modified(
+		BundleContext bundleContext, Map<String, Object> properties) {
+
+		_freemarkerEngineConfiguration = Configurable.createConfigurable(
+			FreeMarkerEngineConfiguration.class, properties);
+
+		for (Bundle bundle : _bundles) {
+			ClassLoader classLoader = _findClassLoader(
+				_freemarkerEngineConfiguration.allowedClasses(),
+				bundle.getBundleContext());
+
+			if (classLoader != null) {
+				_whiteListedClassloaders.add(classLoader);
+			}
+		}
 	}
 
 	private ClassLoader _findClassLoader(
@@ -272,6 +285,7 @@ public class LiferayTemplateClassResolver implements TemplateClassResolver {
 	private static final Log _log = LogFactoryUtil.getLog(
 		LiferayTemplateClassResolver.class);
 
+	private final Set<Bundle> _bundles = new ConcurrentHashSet<>();
 	private BundleTracker<ClassLoader> _classResolverBundleTracker;
 	private volatile FreeMarkerEngineConfiguration
 		_freemarkerEngineConfiguration;
@@ -293,6 +307,8 @@ public class LiferayTemplateClassResolver implements TemplateClassResolver {
 				_whiteListedClassloaders.add(classLoader);
 			}
 
+			_bundles.add(bundle);
+
 			BundleWiring bundleWiring = bundle.adapt(BundleWiring.class);
 
 			return bundleWiring.getClassLoader();
@@ -308,6 +324,8 @@ public class LiferayTemplateClassResolver implements TemplateClassResolver {
 			Bundle bundle, BundleEvent bundleEvent, ClassLoader classLoader) {
 
 			_whiteListedClassloaders.remove(classLoader);
+
+			_bundles.remove(bundle);
 		}
 
 	}
