@@ -351,11 +351,11 @@ public class WabBundleProcessor {
 		_serviceReference = _bundleContext.getServiceReference(
 			ServletContextHelperRegistration.class);
 
-		ServletContextHelperRegistration registration =
+		ServletContextHelperRegistration servletContextHelperRegistration =
 			_bundleContext.getService(_serviceReference);
 
 		ServiceRegistration<ServletContextHelper> serviceRegistration =
-			registration.getServiceRegistration();
+			servletContextHelperRegistration.getServiceRegistration();
 
 		ServiceReference<ServletContextHelper> serviceReference =
 			serviceRegistration.getReference();
@@ -386,7 +386,8 @@ public class WabBundleProcessor {
 			serviceRegistration.setProperties(properties);
 		}
 
-		ServletContext servletContext = registration.getServletContext();
+		ServletContext servletContext =
+			servletContextHelperRegistration.getServletContext();
 
 		servletContext.setAttribute("jsp.taglib.mappings", _jspTaglibMappings);
 		servletContext.setAttribute("osgi-bundlecontext", _bundleContext);
