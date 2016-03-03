@@ -17,6 +17,7 @@ package com.liferay.dynamic.data.lists.web.lar;
 import com.liferay.dynamic.data.lists.constants.DDLPortletKeys;
 import com.liferay.dynamic.data.lists.model.DDLRecord;
 import com.liferay.dynamic.data.lists.model.DDLRecordSet;
+import com.liferay.dynamic.data.lists.model.DDLRecordSetConstants;
 import com.liferay.dynamic.data.lists.model.DDLRecordVersion;
 import com.liferay.dynamic.data.lists.service.DDLRecordLocalService;
 import com.liferay.dynamic.data.lists.service.DDLRecordSetLocalService;
@@ -141,8 +142,7 @@ public class DDLPortletDataHandler extends BasePortletDataHandler {
 
 		if (portletDataContext.getBooleanParameter(NAMESPACE, "record-sets")) {
 			ActionableDynamicQuery recordSetActionableDynamicQuery =
-				_ddlRecordSetLocalService.getExportActionableDynamicQuery(
-					portletDataContext);
+				getRecordSetActionableDynamicQuery(portletDataContext);
 
 			recordSetActionableDynamicQuery.performActions();
 		}
@@ -235,8 +235,7 @@ public class DDLPortletDataHandler extends BasePortletDataHandler {
 		ddmStructureActionableDynamicQuery.performCount();
 
 		ActionableDynamicQuery recordSetActionableDynamicQuery =
-			_ddlRecordSetLocalService.getExportActionableDynamicQuery(
-				portletDataContext);
+			getRecordSetActionableDynamicQuery(portletDataContext);
 
 		recordSetActionableDynamicQuery.performCount();
 
@@ -274,6 +273,7 @@ public class DDLPortletDataHandler extends BasePortletDataHandler {
 				}
 
 			});
+		
 		exportActionableDynamicQuery.setPerformActionMethod(
 			new ActionableDynamicQuery.PerformActionMethod<DDMStructure>() {
 
@@ -347,9 +347,64 @@ public class DDLPortletDataHandler extends BasePortletDataHandler {
 
 					dynamicQuery.add(
 						recordIdProperty.in(recordVersionDynamicQuery));
+
+					DynamicQuery recordSetDynamicQuery =
+						DynamicQueryFactoryUtil.forClass(
+							DDLRecordSet.class, "recordSet",
+							clazz.getClassLoader());
+
+					recordSetDynamicQuery.setProjection(
+						ProjectionFactoryUtil.property("recordSetId"));
+
+					recordSetDynamicQuery.add(
+						RestrictionsFactoryUtil.eqProperty(
+							"recordSet.recordSetId", "recordSetId"));
+
+					Property scopeProperty = PropertyFactoryUtil.forName(
+						"scope");
+
+					recordSetDynamicQuery.add(
+						scopeProperty.eq(
+							DDLRecordSetConstants.SCOPE_DYNAMIC_DATA_LISTS));
+
+					Property recordSetIdProperty = PropertyFactoryUtil.forName(
+						"recordSetId");
+
+					dynamicQuery.add(
+						recordSetIdProperty.in(recordSetDynamicQuery));
 				}
 
 			});
+
+		return actionableDynamicQuery;
+	}
+
+	protected ActionableDynamicQuery getRecordSetActionableDynamicQuery(
+		final PortletDataContext portletDataContext) {
+
+		ActionableDynamicQuery actionableDynamicQuery =
+			_ddlRecordSetLocalService.getExportActionableDynamicQuery(
+				portletDataContext);
+
+		final ActionableDynamicQuery.AddCriteriaMethod addCriteriaMethod =
+			actionableDynamicQuery.getAddCriteriaMethod();
+
+		actionableDynamicQuery.setAddCriteriaMethod(
+			new ActionableDynamicQuery.AddCriteriaMethod() {
+
+				@Override
+				public void addCriteria(DynamicQuery dynamicQuery) {
+					addCriteriaMethod.addCriteria(dynamicQuery);
+
+					Property scopeProperty = PropertyFactoryUtil.forName(
+						"scope");
+
+					dynamicQuery.add(
+						scopeProperty.eq(
+							DDLRecordSetConstants.SCOPE_DYNAMIC_DATA_LISTS));
+				}
+
+		});
 
 		return actionableDynamicQuery;
 	}
