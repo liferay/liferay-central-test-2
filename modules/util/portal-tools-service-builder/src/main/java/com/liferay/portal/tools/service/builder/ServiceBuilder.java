@@ -3552,7 +3552,7 @@ public class ServiceBuilder {
 			if (Validator.isNotNull(createTableSQL)) {
 				_createSQLTables(sqlFile, createTableSQL, entity, true);
 
-				List<Path> updateSQLFilePaths = _getUpdateSQLFilePath();
+				List<Path> updateSQLFilePaths = _getUpdateSQLFilePaths();
 
 				for (Path updateSQLFilePath : updateSQLFilePaths) {
 					if ((updateSQLFilePath != null) &&
@@ -4458,19 +4458,19 @@ public class ServiceBuilder {
 		return transients;
 	}
 
-	private List<Path> _getUpdateSQLFilePath() throws IOException {
+	private List<Path> _getUpdateSQLFilePaths() throws IOException {
 		if (!_osgiModule) {
-			final List<Path> sqlPaths = new ArrayList<>();
+			final List<Path> updateSQLFilePaths = new ArrayList<>();
 
-			try (DirectoryStream<Path> sqlFiles = Files.newDirectoryStream(
+			try (DirectoryStream<Path> paths = Files.newDirectoryStream(
 					Paths.get(_sqlDirName), "update-6.2.0-7.0.0*.sql")) {
 
-				for (Path path : sqlFiles) {
-					sqlPaths.add(path);
+				for (Path path : paths) {
+					updateSQLFilePaths.add(path);
 				}
 			}
 
-			return sqlPaths;
+			return updateSQLFilePaths;
 		}
 
 		final AtomicReference<Path> atomicReference = new AtomicReference<>();
