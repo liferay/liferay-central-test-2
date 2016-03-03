@@ -470,12 +470,12 @@ public class PoshiRunnerExecutor {
 
 			String fileSeparator = FileUtil.getSeparator();
 
-			GroovyScriptEngine gse = new GroovyScriptEngine(
+			GroovyScriptEngine groovyScriptEngine = new GroovyScriptEngine(
 				LiferaySeleniumHelper.getSourceDirFilePath(
 					fileSeparator + PropsValues.TEST_DEPENDENCIES_DIR_NAME +
 						fileSeparator + fileName));
 
-			Object result = gse.run(fileName, binding);
+			Object result = groovyScriptEngine.run(fileName, binding);
 
 			String returnVariable = executeElement.attributeValue("return");
 
