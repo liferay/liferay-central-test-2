@@ -35,9 +35,9 @@ public class IndexerRequest {
 
 		_method = method;
 		_classedModel = classedModel;
-		_forceSync = ProxyModeThreadLocal.isForceSync();
 		_indexer = new NoAutoCommitIndexer<>(indexer);
 
+		_forceSync = ProxyModeThreadLocal.isForceSync();
 		_modelClassName = classedModel.getModelClassName();
 		_modelPrimaryKey = (Long)_classedModel.getPrimaryKeyObj();
 	}
@@ -48,11 +48,11 @@ public class IndexerRequest {
 
 		_method = method;
 		_indexer = new NoAutoCommitIndexer<>(indexer);
-		_forceSync = ProxyModeThreadLocal.isForceSync();
 		_modelClassName = modelClassName;
 		_modelPrimaryKey = modelPrimaryKey;
 
 		_classedModel = null;
+		_forceSync = ProxyModeThreadLocal.isForceSync();
 	}
 
 	@Override
