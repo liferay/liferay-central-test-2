@@ -138,16 +138,16 @@ public class UpgradePermission extends UpgradeProcess {
 	@Override
 	protected void doUpgrade() throws Exception {
 		try (Closeable closeable1 = ServiceWrapperProxyUtil.createProxy(
-				PortalBeanLocatorUtil.locate(RoleLocalService.class.getName()),
-				Pre7RoleLocalServiceImpl.class);
-			Closeable closeable2 = ServiceWrapperProxyUtil.createProxy(
 				PortalBeanLocatorUtil.locate(
 					ResourceLocalService.class.getName()),
 				Pre7ResourceLocalServiceImpl.class);
-			Closeable closeable3 = ServiceWrapperProxyUtil.createProxy(
+			Closeable closeable2 = ServiceWrapperProxyUtil.createProxy(
 				PortalBeanLocatorUtil.locate(
 					ResourcePermissionLocalService.class.getName()),
-				Pre7ResourcePermissionLocalServiceImpl.class)) {
+				Pre7ResourcePermissionLocalServiceImpl.class);
+			Closeable closeable3 = ServiceWrapperProxyUtil.createProxy(
+				PortalBeanLocatorUtil.locate(RoleLocalService.class.getName()),
+				Pre7RoleLocalServiceImpl.class)) {
 
 			Class<? extends UpgradePermission> upgradePermissionClass =
 				this.getClass();
