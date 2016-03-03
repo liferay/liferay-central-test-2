@@ -265,9 +265,8 @@ public final class XMLLoggerHandler {
 						loggerElement.addChildLoggerElement(
 							_getFunctionExecuteLoggerElement(childElement));
 					}
-					else if (
-								childElement.attributeValue("groovy-script") !=
-									null) {
+					else if (childElement.attributeValue("groovy-script") !=
+								null) {
 
 						loggerElement.addChildLoggerElement(
 							_getGroovyScriptLoggerElement(childElement));
