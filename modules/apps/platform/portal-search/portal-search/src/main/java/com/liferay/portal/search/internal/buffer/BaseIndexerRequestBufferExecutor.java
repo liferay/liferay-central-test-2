@@ -43,8 +43,7 @@ public abstract class BaseIndexerRequestBufferExecutor
 	protected void commit(Set<String> searchEngineIds) {
 		if (indexWriterHelper == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"Cannot issue commit.  IndexWriterHelper not initialized");
+				_log.warn("Index writer helper is null");
 			}
 
 			return;
@@ -73,7 +72,7 @@ public abstract class BaseIndexerRequestBufferExecutor
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
-					"Unable to execute index request: " + indexerRequest, e);
+					"Unable to execute index request " + indexerRequest, e);
 			}
 		}
 	}

@@ -54,8 +54,8 @@ public class IndexerRequestBufferExecutorWatcher {
 		if (indexerRequestBufferExecutor == null) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"No IndexerRequestBufferedExecutor configured for :" +
-						bufferedExecutionMode + " using default");
+					"Using default indexer request buffered executor for " +
+						bufferedExecutionMode);
 			}
 
 			indexerRequestBufferExecutor = _defaultIndexerRequestBufferExecutor;
@@ -102,7 +102,7 @@ public class IndexerRequestBufferExecutorWatcher {
 
 		if (Validator.isNull(bufferedExecutionMode)) {
 			throw new IllegalArgumentException(
-				"Must specify buffered.execution.mode: " +
+				"The property \"buffered.execution.mode\" is invalid for " +
 					ClassUtil.getClassName(bufferedExecutionMode));
 		}
 
