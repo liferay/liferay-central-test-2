@@ -238,18 +238,17 @@ public class VerifyPermission extends VerifyProcess {
 				Role userRole = RoleLocalServiceUtil.getRole(
 					companyId, RoleConstants.USER);
 
-				StringBundler sb = new StringBundler(20);
+				StringBundler sb = new StringBundler(19);
 
 				sb.append("update ResourcePermission set roleId = ");
 				sb.append(userRole.getRoleId());
 				sb.append(" where resourcePermissionId in (select ");
-				sb.append("resourcePermissionId from ");
-				sb.append("ResourcePermission inner join Layout on ");
-				sb.append("ResourcePermission.primKey like ");
-				sb.append("replace('[$PLID$]_LAYOUT_%', '[$PLID$]', ");
+				sb.append("resourcePermissionId from ResourcePermission ");
+				sb.append("inner join Layout on ResourcePermission.primKey ");
+				sb.append("like replace('[$PLID$]_LAYOUT_%', '[$PLID$]', ");
 				sb.append("cast_text(Layout.plid)) inner join Group_ on ");
-				sb.append("Layout.groupId = Group_.groupId");
-				sb.append(" where ResourcePermission.scope = ");
+				sb.append("Layout.groupId = Group_.groupId where ");
+				sb.append("ResourcePermission.scope = ");
 				sb.append(ResourceConstants.SCOPE_INDIVIDUAL);
 				sb.append(" and ResourcePermission.roleId = ");
 				sb.append(powerUserRole.getRoleId());
@@ -280,15 +279,14 @@ public class VerifyPermission extends VerifyProcess {
 			Role userRole = RoleLocalServiceUtil.getRole(
 				companyId, RoleConstants.USER);
 
-			StringBundler sb = new StringBundler(19);
+			StringBundler sb = new StringBundler(18);
 
-			sb.append("update ResourcePermission ");
-			sb.append("inner join Layout on ");
+			sb.append("update ResourcePermission inner join Layout on ");
 			sb.append("ResourcePermission.primKey like ");
 			sb.append("replace('[$PLID$]_LAYOUT_%', '[$PLID$]', ");
 			sb.append("cast_text(Layout.plid)) inner join Group_ on ");
-			sb.append("Layout.groupId = Group_.groupId");
-			sb.append(" set ResourcePermission.roleId = ");
+			sb.append("Layout.groupId = Group_.groupId set ");
+			sb.append("ResourcePermission.roleId = ");
 			sb.append(userRole.getRoleId());
 			sb.append(" where ResourcePermission.scope = ");
 			sb.append(ResourceConstants.SCOPE_INDIVIDUAL);
@@ -320,8 +318,8 @@ public class VerifyPermission extends VerifyProcess {
 
 		try {
 			runSQL(
-				"create table ResourcePermissionPlid" +
-					"(resourcePermissionId LONG null, plid LONG null)");
+				"create table ResourcePermissionPlid (resourcePermissionId " +
+					"LONG null, plid LONG null)");
 		}
 		catch (SQLException sqle) {
 			runSQL("delete from ResourcePermissionPlid");
@@ -335,21 +333,18 @@ public class VerifyPermission extends VerifyProcess {
 			Role userRole = RoleLocalServiceUtil.getRole(
 				companyId, RoleConstants.USER);
 
-			StringBundler sb = new StringBundler(23);
+			StringBundler sb = new StringBundler(20);
 
 			sb.append("update ResourcePermission set roleId = ");
 			sb.append(userRole.getRoleId());
 			sb.append(" where resourcePermissionId in (select ");
 			sb.append("ResourcePermission.resourcePermissionId from ");
-			sb.append("ResourcePermission inner join ");
-			sb.append("ResourcePermissionPlid on ");
-			sb.append("ResourcePermission.resourcePermissionId = ");
-			sb.append("ResourcePermissionPlid.resourcePermissionId ");
-			sb.append("inner join Layout on ");
-			sb.append("ResourcePermissionPlid.plid = Layout.plid ");
-			sb.append("inner join Group_ on ");
-			sb.append("Layout.groupId = Group_.groupId");
-			sb.append(" where ResourcePermission.scope = ");
+			sb.append("ResourcePermission inner join ResourcePermissionPlid ");
+			sb.append("on ResourcePermission.resourcePermissionId = ");
+			sb.append("ResourcePermissionPlid.resourcePermissionId inner ");
+			sb.append("join Layout on ResourcePermissionPlid.plid = ");
+			sb.append("Layout.plid inner join Group_ on Layout.groupId = ");
+			sb.append("Group_.groupId where ResourcePermission.scope = ");
 			sb.append(ResourceConstants.SCOPE_INDIVIDUAL);
 			sb.append(" and ResourcePermission.roleId = ");
 			sb.append(powerUserRole.getRoleId());
