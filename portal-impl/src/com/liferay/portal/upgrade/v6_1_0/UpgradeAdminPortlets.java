@@ -33,14 +33,14 @@ public class UpgradeAdminPortlets extends BaseUpgradeAdminPortlets {
 		try (Closeable closeable = ServiceWrapperProxyUtil.createProxy(
 				PortalBeanLocatorUtil.locate(
 					CounterLocalService.class.getName()),
-				SwitchClassNameCounterLocalServiceWrapper.class)) {
+				Pre7CounterLocalService.class)) {
 
 			updateAccessInControlPanelPermission("19", "162");
 			updateAccessInControlPanelPermission("33", "161");
 		}
 	}
 
-	private static class SwitchClassNameCounterLocalServiceWrapper
+	private static class Pre7CounterLocalService
 		extends CounterLocalServiceWrapper {
 
 		@Override
@@ -52,7 +52,7 @@ public class UpgradeAdminPortlets extends BaseUpgradeAdminPortlets {
 			return super.increment(name);
 		}
 
-		private SwitchClassNameCounterLocalServiceWrapper(
+		private Pre7CounterLocalService(
 			CounterLocalService counterLocalService) {
 
 			super(counterLocalService);
