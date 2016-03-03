@@ -37,7 +37,7 @@ import javax.servlet.http.HttpSession;
  */
 public class SPAUtil {
 
-	public static boolean getClearScreensCache(
+	public static boolean isClearScreensCache(
 		HttpServletRequest request, HttpSession session) {
 
 		boolean singlePageApplicationClearCache = GetterUtil.getBoolean(
