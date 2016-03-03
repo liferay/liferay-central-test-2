@@ -18,6 +18,7 @@ import com.liferay.counter.kernel.model.Counter;
 import com.liferay.counter.kernel.service.CounterLocalService;
 import com.liferay.counter.kernel.service.persistence.CounterFinder;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.model.ResourcePermission;
 import com.liferay.portal.kernel.upgrade.UpgradeException;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 
@@ -71,6 +72,9 @@ public abstract class Pre7UpgradeProcess extends UpgradeProcess {
 			if (name.equals(Counter.class.getName())) {
 				name = "com.liferay.counter.model.Counter";
 			}
+			else if (name.equals(ResourcePermission.class.getName())) {
+				name = "com.liferay.portal.model.ResourcePermission";
+			}
 
 			return _counterFinder.increment(name);
 		}
@@ -79,6 +83,9 @@ public abstract class Pre7UpgradeProcess extends UpgradeProcess {
 		public long increment(String name, int size) {
 			if (name.equals(Counter.class.getName())) {
 				name = "com.liferay.counter.model.Counter";
+			}
+			else if (name.equals(ResourcePermission.class.getName())) {
+				name = "com.liferay.portal.model.ResourcePermission";
 			}
 
 			return _counterFinder.increment(name, size);
