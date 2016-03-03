@@ -1609,8 +1609,6 @@
 			</else>
 		</if>
 
-		<execute function="Click" locator1="Icon#INFO" />
-
 		<execute macro="DMDocument#viewDocumentVersionNumberCmdPG">
 			<var name="dmDocumentVersionNumber" value="${dmDocumentVersionNumber}" />
 		</execute>
