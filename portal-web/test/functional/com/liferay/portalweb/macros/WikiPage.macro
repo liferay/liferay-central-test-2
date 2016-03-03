@@ -1293,6 +1293,21 @@
 		</if>
 	</command>
 
+	<command name="viewPageWithAttachment">
+		<var name="key_attachmentFileName" value="${attachmentFileName}" />
+		<var name="key_wikiPageContent" value="${wikiPageContent}" />
+		<var name="key_wikiPageTitle" value="${wikiPageTitle}" />
+
+		<execute macro="WikiPage#viewPG">
+			<var name="wikiPageContent" value="${wikiPageContent}" />
+			<var name="wikiPageTitle" value="${wikiPageTitle}" />
+		</execute>
+
+		<execute function="AssertElementPresent" locator1="WikiEntry#ATTACHMENTS_LABEL" />
+
+		<execute function="AssertTextEquals" locator1="WikiEntry#ATTACHMENT_FILE_NAME" value1="${attachmentFileName}" />
+	</command>
+
 	<command name="viewPageWithWorkflowPG">
 		<var name="key_wikiPageTitle" value="${wikiPageTitle}" />
 
