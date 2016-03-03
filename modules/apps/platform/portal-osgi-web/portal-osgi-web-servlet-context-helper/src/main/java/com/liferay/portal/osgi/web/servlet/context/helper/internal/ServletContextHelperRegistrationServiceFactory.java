@@ -45,6 +45,7 @@ public class ServletContextHelperRegistrationServiceFactory
 		Dictionary<String, Object> properties = new Hashtable<>();
 
 		String contextPath = getContextPath(bundle);
+
 		String servletContextName = getServletContextName(bundle, contextPath);
 
 		properties.put(
