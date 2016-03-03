@@ -28,9 +28,9 @@ import java.util.concurrent.Future;
 /**
  * @author Miguel Pastor
  */
-public class ParallelSchemaUpgraderExecutor {
+public class ParallelUpgradeSchemaExecutor {
 
-	public ParallelSchemaUpgraderExecutor(String... sqlFileNames) {
+	public ParallelUpgradeSchemaExecutor(String... sqlFileNames) {
 		_sqlFileNames = sqlFileNames;
 	}
 
