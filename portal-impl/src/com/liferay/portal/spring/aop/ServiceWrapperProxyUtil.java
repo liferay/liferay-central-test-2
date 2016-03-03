@@ -12,15 +12,13 @@
  * details.
  */
 
-package com.liferay.portal.service;
+package com.liferay.portal.spring.aop;
 
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.ReflectionUtil;
-import com.liferay.portal.spring.aop.ServiceBeanAopProxy;
 
 import java.io.Closeable;
 import java.io.IOException;
-
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 

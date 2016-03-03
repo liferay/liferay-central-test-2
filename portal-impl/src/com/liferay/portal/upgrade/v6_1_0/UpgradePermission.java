@@ -42,13 +42,11 @@ import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LoggingTimer;
 import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.service.ServiceWrapperProxyUtil;
+import com.liferay.portal.spring.aop.ServiceWrapperProxyUtil;
 
 import java.io.Closeable;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
 import java.util.List;
 
 /**
