@@ -22,7 +22,6 @@ import com.liferay.message.boards.kernel.service.MBCategoryLocalServiceUtil;
 import com.liferay.message.boards.kernel.service.MBMessageLocalServiceUtil;
 import com.liferay.message.boards.kernel.service.MBThreadLocalServiceUtil;
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.LoggingTimer;
@@ -160,8 +159,7 @@ public class VerifyMessageBoards extends VerifyProcess {
 						}
 					}
 
-				}
-			);
+				});
 
 			actionableDynamicQuery.performActions();
 
@@ -198,8 +196,7 @@ public class VerifyMessageBoards extends VerifyProcess {
 						}
 					}
 
-				}
-			);
+				});
 
 			actionableDynamicQuery.performActions();
 
