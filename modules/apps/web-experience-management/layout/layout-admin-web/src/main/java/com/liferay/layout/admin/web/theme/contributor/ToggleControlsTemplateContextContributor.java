@@ -71,7 +71,6 @@ public class ToggleControlsTemplateContextContributor
 		contextObjects.put("bodyCssClass", cssClass);
 
 		contextObjects.put("liferay_toggle_controls", liferayToggleControls);
-
 		contextObjects.put("show_toggle_controls", themeDisplay.isSignedIn());
 
 		if (themeDisplay.isSignedIn()) {
