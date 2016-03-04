@@ -172,7 +172,6 @@ public class JournalConverterImpl implements JournalConverter {
 
 		String[] availableLanguageIds = StringUtil.split(
 			rootElement.attributeValue("available-locales"));
-
 		String defaultLanguageId = rootElement.attributeValue("default-locale");
 
 		List<Element> dynamicElementElements = rootElement.elements(
