@@ -19,8 +19,6 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.FileImpl;
 
-import java.io.IOException;
-
 import java.net.URL;
 
 import org.junit.Assert;
@@ -40,7 +38,7 @@ public class URLResourceParserTest {
 		URLResourceParser urlResourceParser = new URLResourceParser() {
 
 			@Override
-			public URL getURL(String templateId) throws IOException {
+			public URL getURL(String templateId) {
 				return null;
 			}
 
