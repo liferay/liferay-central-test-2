@@ -222,7 +222,7 @@ AUI.add(
 									show: 0
 								},
 								duration: 500,
-								message: Liferay.Language.get('the-application-has-been-added-to-the-page'),
+								message: Liferay.Language.get('the-application-was-added-to-the-page'),
 								type: 'success'
 							}
 						).render('body');
