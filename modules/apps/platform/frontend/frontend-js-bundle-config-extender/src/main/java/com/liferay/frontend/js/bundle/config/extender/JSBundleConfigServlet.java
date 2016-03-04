@@ -88,7 +88,7 @@ public class JSBundleConfigServlet extends HttpServlet {
 			printWriter.println("(function() {");
 
 			for (JSConfig jsConfig : jsConfigs) {
-				URL url = jsConfig.getUrl();
+				URL url = jsConfig.getURL();
 
 				try (InputStream inputStream = url.openStream()) {
 					servletOutputStream.println("try {");
