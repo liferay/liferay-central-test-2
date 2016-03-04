@@ -40,6 +40,7 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.Property;
 import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.module.framework.ModuleServiceLifecycle;
@@ -82,36 +83,80 @@ public class DDLFormAdminPortletDataHandler extends BasePortletDataHandler {
 				NAMESPACE, "forms", true, false, null,
 				DDLRecordSet.class.getName()),
 			new PortletDataHandlerBoolean(
-				NAMESPACE, "form-records", true, false, null,
+				NAMESPACE, "form-entries", true, false, null,
 				DDLRecord.class.getName()));
 	}
 
-	protected void deleteDDLRecordSets(PortletDataContext portletDataContext)
+	protected DynamicQuery createRecordSetDynamicQuery() {
+		StagedModelDataHandler<?> stagedModelDataHandler =
+			StagedModelDataHandlerRegistryUtil.getStagedModelDataHandler(
+				DDLRecord.class.getName());
+
+		Class<?> clazz = stagedModelDataHandler.getClass();
+
+		DynamicQuery recordSetDynamicQuery = DynamicQueryFactoryUtil.forClass(
+			DDLRecordSet.class, "recordSet", clazz.getClassLoader());
+
+		recordSetDynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("recordSetId"));
+
+		recordSetDynamicQuery.add(
+			RestrictionsFactoryUtil.eqProperty(
+				"recordSet.recordSetId", "recordSetId"));
+
+		Property scopeProperty = PropertyFactoryUtil.forName("scope");
+
+		recordSetDynamicQuery.add(
+			scopeProperty.eq(DDLRecordSetConstants.SCOPE_FORMS));
+
+		return recordSetDynamicQuery;
+	}
+
+	protected DynamicQuery createRecordVersionDynamicQuery() {
+		StagedModelDataHandler<?> stagedModelDataHandler =
+			StagedModelDataHandlerRegistryUtil.getStagedModelDataHandler(
+				DDLRecord.class.getName());
+
+		Class<?> clazz = stagedModelDataHandler.getClass();
+
+		DynamicQuery recordVersionDynamicQuery =
+			DynamicQueryFactoryUtil.forClass(
+				DDLRecordVersion.class, "recordVersion",
+				clazz.getClassLoader());
+
+		recordVersionDynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("recordId"));
+
+		Property statusProperty = PropertyFactoryUtil.forName("status");
+
+		recordVersionDynamicQuery.add(
+			statusProperty.in(stagedModelDataHandler.getExportableStatuses()));
+
+		recordVersionDynamicQuery.add(
+			RestrictionsFactoryUtil.eqProperty(
+				"recordVersion.version", "version"));
+
+		recordVersionDynamicQuery.add(
+			RestrictionsFactoryUtil.eqProperty(
+				"recordVersion.recordId", "recordId"));
+
+		return recordVersionDynamicQuery;
+	}
+
+	protected void deleteRecordSets(PortletDataContext portletDataContext)
 		throws PortalException {
 
-		int totalRecordSets = _ddlRecordSetLocalService.searchCount(
+		List<DDLRecordSet> recordSets = _ddlRecordSetLocalService.search(
 			portletDataContext.getCompanyId(),
 			portletDataContext.getScopeGroupId(), null,
-			DDLRecordSetConstants.SCOPE_FORMS);
+			DDLRecordSetConstants.SCOPE_FORMS, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, new DDLRecordSetNameComparator());
 
-		if (totalRecordSets > 0) {
-			List<DDLRecordSet> ddlRecordSets = _ddlRecordSetLocalService.search(
-				portletDataContext.getCompanyId(),
-				portletDataContext.getScopeGroupId(), null,
-				DDLRecordSetConstants.SCOPE_FORMS, 1, totalRecordSets,
-				new DDLRecordSetNameComparator());
+		for (DDLRecordSet recordSet : recordSets) {
+			_ddmStructureLocalService.deleteStructure(
+				recordSet.getDDMStructureId());
 
-			for (DDLRecordSet ddlRecordSet : ddlRecordSets) {
-				_ddlRecordSetLocalService.deleteDDLRecordSet(ddlRecordSet);
-
-				DDMStructure ddmStructure =
-					_ddmStructureLocalService.fetchDDMStructure(
-						ddlRecordSet.getDDMStructureId());
-
-				if (ddmStructure != null) {
-					_ddmStructureLocalService.deleteDDMStructure(ddmStructure);
-				}
-			}
+			_ddlRecordSetLocalService.deleteRecordSet(recordSet);
 		}
 	}
 
@@ -127,7 +172,7 @@ public class DDLFormAdminPortletDataHandler extends BasePortletDataHandler {
 			return portletPreferences;
 		}
 
-		deleteDDLRecordSets(portletDataContext);
+		deleteRecordSets(portletDataContext);
 
 		return portletPreferences;
 	}
@@ -255,59 +300,17 @@ public class DDLFormAdminPortletDataHandler extends BasePortletDataHandler {
 					Property recordIdProperty = PropertyFactoryUtil.forName(
 						"recordId");
 
-					StagedModelDataHandler<?> stagedModelDataHandler =
-						StagedModelDataHandlerRegistryUtil.
-							getStagedModelDataHandler(
-								DDLRecord.class.getName());
-
-					Class<?> clazz = stagedModelDataHandler.getClass();
-
 					DynamicQuery recordVersionDynamicQuery =
-						DynamicQueryFactoryUtil.forClass(
-							DDLRecordVersion.class, "recordVersion",
-							clazz.getClassLoader());
-
-					recordVersionDynamicQuery.setProjection(
-						ProjectionFactoryUtil.property("recordId"));
-
-					Property statusProperty = PropertyFactoryUtil.forName(
-						"status");
-
-					recordVersionDynamicQuery.add(
-						statusProperty.in(
-							stagedModelDataHandler.getExportableStatuses()));
-
-					recordVersionDynamicQuery.add(
-						RestrictionsFactoryUtil.eqProperty(
-							"recordVersion.version", "version"));
-
-					recordVersionDynamicQuery.add(
-						RestrictionsFactoryUtil.eqProperty(
-							"recordVersion.recordId", "recordId"));
+						createRecordVersionDynamicQuery();
 
 					dynamicQuery.add(
 						recordIdProperty.in(recordVersionDynamicQuery));
 
-					DynamicQuery recordSetDynamicQuery =
-						DynamicQueryFactoryUtil.forClass(
-							DDLRecordSet.class, "recordSet",
-							clazz.getClassLoader());
-
-					recordSetDynamicQuery.setProjection(
-						ProjectionFactoryUtil.property("recordSetId"));
-
-					recordSetDynamicQuery.add(
-						RestrictionsFactoryUtil.eqProperty(
-							"recordSet.recordSetId", "recordSetId"));
-
-					Property scopeProperty = PropertyFactoryUtil.forName(
-						"scope");
-
-					recordSetDynamicQuery.add(
-						scopeProperty.eq(DDLRecordSetConstants.SCOPE_FORMS));
-
 					Property recordSetIdProperty = PropertyFactoryUtil.forName(
 						"recordSetId");
+
+					DynamicQuery recordSetDynamicQuery =
+						createRecordSetDynamicQuery();
 
 					dynamicQuery.add(
 						recordSetIdProperty.in(recordSetDynamicQuery));
@@ -344,7 +347,6 @@ public class DDLFormAdminPortletDataHandler extends BasePortletDataHandler {
 
 			}
 		);
-
 		actionableDynamicQuery.setPerformActionMethod(
 			new ActionableDynamicQuery.PerformActionMethod<DDLRecordSet>() {
 
