@@ -109,10 +109,6 @@ for (long curGroupId : selectedGroupIds) {
 		active = true;
 	}
 
-	PortletURL groupURL = PortletURLUtil.clone(portletURL, liferayPortletResponse);
-
-	groupURL.setParameter("groupId", String.valueOf(curGroupId));
-
 	String label = StringPool.BLANK;
 
 	if (curGroup != null) {
@@ -121,6 +117,10 @@ for (long curGroupId : selectedGroupIds) {
 	else {
 		label = LanguageUtil.get(request, "all");
 	}
+
+	PortletURL groupURL = PortletURLUtil.clone(portletURL, liferayPortletResponse);
+
+	groupURL.setParameter("groupId", String.valueOf(curGroupId));
 
 	ManagementBarFilterItem managementBarFilterItem = new ManagementBarFilterItem(active, label, groupURL.toString());
 
