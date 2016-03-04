@@ -125,7 +125,7 @@ public class JSBundleConfigTracker
 			return _servletContext;
 		}
 
-		public URL getUrl() {
+		public URL getURL() {
 			return _url;
 		}
 
