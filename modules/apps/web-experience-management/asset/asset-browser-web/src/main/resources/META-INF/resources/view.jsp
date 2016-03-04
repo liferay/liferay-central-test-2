@@ -36,6 +36,12 @@ if (Validator.isNotNull(listableValue)) {
 String displayStyle = ParamUtil.getString(request, "displayStyle", "list");
 String eventName = ParamUtil.getString(request, "eventName", liferayPortletResponse.getNamespace() + "selectAsset");
 
+long[] filterGroupIds = selectedGroupIds;
+
+if (groupId > 0) {
+	filterGroupIds = new long[] {groupId};
+}
+
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("groupId", String.valueOf(groupId));
@@ -51,12 +57,6 @@ if (listable != null) {
 portletURL.setParameter("eventName", eventName);
 
 request.setAttribute("view.jsp-portletURL", portletURL);
-
-long[] filterGroupIds = selectedGroupIds;
-
-if (groupId > 0) {
-	filterGroupIds = new long[] {groupId};
-}
 
 AssetBrowserSearch assetBrowserSearch = new AssetBrowserSearch(renderRequest, PortletURLUtil.clone(portletURL, liferayPortletResponse));
 
