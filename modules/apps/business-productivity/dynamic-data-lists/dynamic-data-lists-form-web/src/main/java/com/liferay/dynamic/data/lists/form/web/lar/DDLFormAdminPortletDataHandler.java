@@ -194,7 +194,7 @@ public class DDLFormAdminPortletDataHandler extends BasePortletDataHandler {
 			recordSetActionableDynamicQuery.performActions();
 		}
 
-		if (portletDataContext.getBooleanParameter(NAMESPACE, "form-records")) {
+		if (portletDataContext.getBooleanParameter(NAMESPACE, "form-entries")) {
 			ActionableDynamicQuery recordActionableDynamicQuery =
 				getRecordActionableDynamicQuery(portletDataContext);
 
@@ -248,7 +248,7 @@ public class DDLFormAdminPortletDataHandler extends BasePortletDataHandler {
 			}
 		}
 
-		if (portletDataContext.getBooleanParameter(NAMESPACE, "form-records")) {
+		if (portletDataContext.getBooleanParameter(NAMESPACE, "form-entries")) {
 			Element recordsElement =
 				portletDataContext.getImportDataGroupElement(DDLRecord.class);
 
