@@ -1286,10 +1286,11 @@ public class DataFactory {
 
 		StringBundler sb = new StringBundler(3 + _maxDDLCustomFieldCount * 4);
 
-		sb.append("{\"defaultLanguageId\":\"en_US\",\"pages\":[{\"rows\":[");
+		sb.append(
+			"{\"defaultLanguageId\": \"en_US\", \"pages\": [{\"rows\": [");
 
 		for (int i = 0; i < _maxDDLCustomFieldCount; i++) {
-			sb.append("{\"columns\":[{\"fieldNames\": [\"");
+			sb.append("{\"columns\": [{\"fieldNames\": [\"");
 			sb.append(nextDDLCustomFieldName(groupId, i));
 			sb.append("\"]}]}");
 			sb.append(",");
@@ -1299,7 +1300,7 @@ public class DataFactory {
 			sb.setIndex(sb.index() - 1);
 		}
 
-		sb.append("\"],\"size\":12}]},],\"title\":{\"en_US\": \"\"}}],");
+		sb.append("\"], \"size\": 12}]},], \"title\": {\"en_US\": \"\"}}],");
 		sb.append("\"paginationMode\": \"single-page\"}");
 
 		return newDDMStructureLayoutModel(
@@ -2187,6 +2188,9 @@ public class DataFactory {
 	public List<ResourcePermissionModel> newResourcePermissionModels(
 		DDMStructureModel ddmStructureModel) {
 
+		List<ResourcePermissionModel> resourcePermissionModels =
+			new ArrayList<>(3);
+
 		StringBundler sb = new StringBundler(3);
 
 		sb.append(getClassName(ddmStructureModel.getClassNameId()));
@@ -2194,10 +2198,8 @@ public class DataFactory {
 		sb.append(DDMStructure.class.getName());
 
 		String name = sb.toString();
-		String primKey = String.valueOf(ddmStructureModel.getStructureId());
 
-		List<ResourcePermissionModel> resourcePermissionModels =
-			new ArrayList<>(3);
+		String primKey = String.valueOf(ddmStructureModel.getStructureId());
 
 		resourcePermissionModels.add(
 			newResourcePermissionModel(
@@ -2216,6 +2218,9 @@ public class DataFactory {
 	public List<ResourcePermissionModel> newResourcePermissionModels(
 		DDMTemplateModel ddmTemplateModel) {
 
+		List<ResourcePermissionModel> resourcePermissionModels =
+			new ArrayList<>(3);
+
 		StringBundler sb = new StringBundler(3);
 
 		sb.append(getClassName(ddmTemplateModel.getResourceClassNameId()));
@@ -2223,10 +2228,8 @@ public class DataFactory {
 		sb.append(DDMTemplate.class.getName());
 
 		String name = sb.toString();
-		String primKey = String.valueOf(ddmTemplateModel.getTemplateId());
 
-		List<ResourcePermissionModel> resourcePermissionModels =
-			new ArrayList<>(3);
+		String primKey = String.valueOf(ddmTemplateModel.getTemplateId());
 
 		resourcePermissionModels.add(
 			newResourcePermissionModel(
@@ -2422,9 +2425,9 @@ public class DataFactory {
 		else {
 			StringBundler sb = new StringBundler(5);
 
-			sb.append("{\"messageId\":\"");
+			sb.append("{\"messageId\": \"");
 			sb.append(mbMessageModel.getMessageId());
-			sb.append("\", \"title\":");
+			sb.append("\", \"title\": ");
 			sb.append(mbMessageModel.getSubject());
 			sb.append("}");
 
