@@ -65,13 +65,13 @@ public abstract class URLResourceParser implements TemplateResourceParser {
 			return true;
 		}
 
-		char[] templateIdChars = templateId.toCharArray();
+		char[] chars = templateId.toCharArray();
 
-		for (int i = 0; i < templateIdChars.length; i++) {
-			char ch = templateIdChars[i];
+		for (int i = 0; i < chars.length; i++) {
+			char c = chars[i];
 
-			if ((ch == CharPool.PERCENT) || (ch == CharPool.POUND) ||
-				(ch == CharPool.QUESTION) || (ch == CharPool.SEMICOLON)) {
+			if ((c == CharPool.PERCENT) || (c == CharPool.POUND) ||
+				(c == CharPool.QUESTION) || (c == CharPool.SEMICOLON)) {
 
 				if (_log.isWarnEnabled()) {
 					_log.warn(
@@ -83,7 +83,7 @@ public abstract class URLResourceParser implements TemplateResourceParser {
 				return false;
 			}
 
-			if (ch == CharPool.BACK_SLASH) {
+			if (c == CharPool.BACK_SLASH) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
 						"Unable to load template " + templateId +
