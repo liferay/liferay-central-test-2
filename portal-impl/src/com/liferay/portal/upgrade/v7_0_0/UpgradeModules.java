@@ -171,7 +171,7 @@ public class UpgradeModules extends UpgradeProcess {
 		"com.liferay.polls.service",
 		"com.liferay.portal.background.task.service",
 		"com.liferay.portal.instances.web", "com.liferay.portal.lock.service",
-		"com.liferay.portal.search.web", "com.liferay.portal.scheduler.quartz",
+		"com.liferay.portal.scheduler.quartz", "com.liferay.portal.search.web",
 		"com.liferay.portal.settings.web",
 		"com.liferay.portlet.configuration.css.web",
 		"com.liferay.portlet.configuration.web", "com.liferay.quick.note.web",
