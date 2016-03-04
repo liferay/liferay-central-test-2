@@ -1293,11 +1293,11 @@ public class DataFactory {
 			sb.append("{\"columns\": [{\"fieldNames\": [\"");
 			sb.append(nextDDLCustomFieldName(groupId, i));
 			sb.append("\"]}]}");
-			sb.append(",");
+			sb.append(", ");
 		}
 
 		if (_maxDDLCustomFieldCount > 0) {
-			sb.setIndex(sb.index() - 1);
+			sb.setIndex(sb.index() - 2);
 		}
 
 		sb.append("\"], \"size\": 12}]},], \"title\": {\"en_US\": \"\"}}],");
