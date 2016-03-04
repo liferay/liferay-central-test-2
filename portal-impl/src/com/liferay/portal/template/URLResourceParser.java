@@ -76,8 +76,8 @@ public abstract class URLResourceParser implements TemplateResourceParser {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
 						"Unable to load template " + templateId +
-							", template name contains one or more special " +
-								"URL characters %, #, ? or ;");
+							" because the template name contains one or more " +
+								"special characters: %, #, ?, or ;");
 				}
 
 				return false;
@@ -87,7 +87,7 @@ public abstract class URLResourceParser implements TemplateResourceParser {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
 						"Unable to load template " + templateId +
-							", template name contains backslash character");
+							" because the template name contains a backslash");
 				}
 
 				return false;

@@ -75,7 +75,9 @@ public class VelocityTemplateTest {
 	public static void setUpClass() throws Exception {
 		ToolDependencies.wireCaches();
 
-		new FileUtil().setFile(new FileImpl());
+		FileUtil fileUtil = new FileUtil();
+
+		fileUtil.setFile(new FileImpl());
 
 		_templateResourceLoader = new MockTemplateResourceLoader();
 

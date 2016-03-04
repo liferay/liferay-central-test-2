@@ -64,7 +64,6 @@ public class URLResourceParserTest {
 		Assert.assertTrue(
 			urlResourceParser.isTemplateResourceValid(
 				"_SEPARATOR_/template.custom", "custom"));
-
 		Assert.assertFalse(
 			urlResourceParser.isTemplateResourceValid(
 				"portal-ext.properties", TemplateConstants.LANG_TYPE_CSS));
@@ -80,7 +79,6 @@ public class URLResourceParserTest {
 		Assert.assertFalse(
 			urlResourceParser.isTemplateResourceValid(
 				"portal-ext.properties", TemplateConstants.LANG_TYPE_XSL));
-
 		Assert.assertFalse(
 			urlResourceParser.isTemplateResourceValid(
 				"..\\file", StringPool.BLANK));
