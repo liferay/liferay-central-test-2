@@ -663,9 +663,7 @@
 
 		<execute macro="Navigator#openURL" />
 
-		<execute macro="ProductMenu#gotoSitesPages">
-			<var name="page" value="Public Pages" />
-		</execute>
+		<execute macro="SitePageNavigator#gotoAddPage" />
 
 		<execute macro="Page#add">
 			<var name="pageName" value="WCD Page" />
