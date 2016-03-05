@@ -137,6 +137,10 @@ AUI.add(
 
 						var indexActionsNode = A.one(instance.get(STR_INDEX_ACTIONS_PANEL));
 
+						if (!indexActionsNode) {
+							return false;
+						}
+
 						return !!indexActionsNode.one('.background-task-status-in-progress');
 					},
 
@@ -183,6 +187,14 @@ AUI.add(
 							renderInterval = INTERVAL_RENDER_IN_PROGRESS;
 						}
 
+						var currentAdminIndexPanel = A.one(instance.get(STR_INDEX_ACTIONS_PANEL))
+
+						if (!currentAdminIndexPanel) {
+							instance._laterTimeout = A.later(renderInterval, instance, '_updateIndexActions');
+
+							return;
+						}
+
 						A.io.request(
 							instance.get(STR_URL),
 							{
@@ -193,8 +205,6 @@ AUI.add(
 										var responseAdminIndexPanel = responseDataNode.one(instance.get(STR_INDEX_ACTIONS_PANEL));
 
 										var responseAdminIndexNodeList = responseAdminIndexPanel.all('.index-action-wrapper');
-
-										var currentAdminIndexPanel = A.one(instance.get(STR_INDEX_ACTIONS_PANEL));
 
 										var currentAdminIndexNodeList = currentAdminIndexPanel.all('.index-action-wrapper');
 
