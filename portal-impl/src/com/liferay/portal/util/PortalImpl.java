@@ -740,14 +740,14 @@ public class PortalImpl implements Portal {
 		}
 
 		if (layout.isTypeControlPanel()) {
-			if (themeDisplay.getDoAsGroupId() > 0) {
-				url = HttpUtil.setParameter(
-					url, "doAsGroupId", themeDisplay.getDoAsGroupId());
-			}
-
 			if (Validator.isNotNull(themeDisplay.getPpid())) {
 				url = HttpUtil.setParameter(
 					url, "p_p_id", themeDisplay.getPpid());
+			}
+
+			if (themeDisplay.getDoAsGroupId() > 0) {
+				url = HttpUtil.setParameter(
+					url, "doAsGroupId", themeDisplay.getDoAsGroupId());
 			}
 
 			if (themeDisplay.getRefererGroupId() !=
