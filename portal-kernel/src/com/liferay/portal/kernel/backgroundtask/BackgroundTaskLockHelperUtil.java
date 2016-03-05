@@ -73,6 +73,11 @@ public class BackgroundTaskLockHelperUtil {
 					StringPool.POUND + backgroundTask.getCompanyId();
 		}
 		else if (backgroundTaskExecutor.getIsolationLevel() ==
+					BackgroundTaskConstants.ISOLATION_LEVEL_CUSTOM) {
+
+			lockKey = backgroundTaskExecutor.generateLockKey(backgroundTask);
+		}
+		else if (backgroundTaskExecutor.getIsolationLevel() ==
 					BackgroundTaskConstants.ISOLATION_LEVEL_GROUP) {
 
 			lockKey =
@@ -85,11 +90,6 @@ public class BackgroundTaskLockHelperUtil {
 			lockKey =
 				backgroundTask.getTaskExecutorClassName() +
 					StringPool.POUND + backgroundTask.getName();
-		}
-		else if (backgroundTaskExecutor.getIsolationLevel() ==
-					BackgroundTaskConstants.ISOLATION_LEVEL_CUSTOM) {
-
-			lockKey = backgroundTaskExecutor.generateLockKey(backgroundTask);
 		}
 		else {
 			lockKey =
