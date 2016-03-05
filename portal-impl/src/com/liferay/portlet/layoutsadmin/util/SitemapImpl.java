@@ -235,11 +235,11 @@ public class SitemapImpl implements Sitemap {
 
 		rootElement.addAttribute("xmlns:xhtml", "http://www.w3.org/1999/xhtml");
 
-		List<SitemapURLProvider> sitemapURLProviders =
-			SitemapURLProviderRegistryUtil.getSitemapURLProviders();
-
 		LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
 			groupId, privateLayout);
+
+		List<SitemapURLProvider> sitemapURLProviders =
+			SitemapURLProviderRegistryUtil.getSitemapURLProviders();
 
 		for (SitemapURLProvider sitemapURLProvider : sitemapURLProviders) {
 			sitemapURLProvider.visitLayoutSet(
