@@ -42,7 +42,9 @@ public class BackgroundTaskQueuingMessageListener extends BaseMessageListener {
 
 		if (Validator.isNull(taskExecutorClassName)) {
 			if (_log.isDebugEnabled()) {
-				_log.debug("No taskExecutorClassName on message: " + message);
+				_log.debug(
+					"Message " + message +
+						" is missing the key \"taskExecutorClassName\"");
 			}
 
 			return;
@@ -74,7 +76,7 @@ public class BackgroundTaskQueuingMessageListener extends BaseMessageListener {
 	private void executeQueuedBackgroundTasks(String taskExecutorClassName) {
 		if (_log.isDebugEnabled()) {
 			_log.debug(
-				"Acquiring next queued BackgroundTask for:" +
+				"Acquiring next queued background task for " +
 					taskExecutorClassName);
 		}
 
@@ -85,7 +87,7 @@ public class BackgroundTaskQueuingMessageListener extends BaseMessageListener {
 		if (backgroundTask == null) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"No additional queued BackgroundTasks for :" +
+					"No additional queued background tasks for " +
 						taskExecutorClassName);
 			}
 
