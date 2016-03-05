@@ -78,7 +78,7 @@ public class BackgroundTaskMessageListener extends BaseMessageListener {
 		if (backgroundTask == null) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"Unable to find BackgroundTask: " + backgroundTaskId);
+					"Unable to find background task " + backgroundTaskId);
 			}
 
 			return;
@@ -131,7 +131,7 @@ public class BackgroundTaskMessageListener extends BaseMessageListener {
 
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"Unable to acquire lock. Queuing BackgroundTask: " +
+					"Unable to acquire lock, queuing background task " +
 						backgroundTaskId);
 			}
 		}
@@ -166,7 +166,7 @@ public class BackgroundTaskMessageListener extends BaseMessageListener {
 		finally {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"Completing BackgroundTask: " + backgroundTaskId +
+					"Completing background task " + backgroundTaskId +
 						" with status: " + status);
 			}
 

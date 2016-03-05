@@ -593,8 +593,8 @@ public class BackgroundTaskLocalServiceImpl
 
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"No BackgroundTask found in STATUS_QUEUED with " +
-						"backgroundTaskId: " + backgroundTaskId);
+					"No background task found with queued status for " +
+						"background task ID " + backgroundTaskId);
 			}
 
 			return;
@@ -602,7 +602,7 @@ public class BackgroundTaskLocalServiceImpl
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
-				"Attempting to resume BackgroundTask: " + backgroundTaskId);
+				"Attempting to resume background task " + backgroundTaskId);
 		}
 
 		Message message = new Message();
@@ -618,7 +618,7 @@ public class BackgroundTaskLocalServiceImpl
 	public void triggerBackgroundTask(long backgroundTaskId) {
 		if (_log.isDebugEnabled()) {
 			_log.debug(
-				"Attempting to trigger BackgroundTask: " + backgroundTaskId);
+				"Attempting to trigger background task " + backgroundTaskId);
 		}
 
 		Message message = new Message();
