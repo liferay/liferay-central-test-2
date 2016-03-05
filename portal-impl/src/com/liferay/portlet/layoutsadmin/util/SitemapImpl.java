@@ -158,36 +158,25 @@ public class SitemapImpl implements Sitemap {
 		for (int i = 0; i < input.length(); i++) {
 			char c = input.charAt(i);
 
-			String replacement = null;
+			String html = null;
 
-			switch (c) {
-				case '&':
-					replacement = "&amp;";
-
-					break;
-
-				case '<':
-					replacement = "&lt;";
-
-					break;
-
-				case '>':
-					replacement = "&gt;";
-
-					break;
-
-				case '\'':
-					replacement = "&apos;";
-
-					break;
-
-				case '"':
-					replacement = "&quot;";
-
-					break;
+			if (c == '&') {
+				html = "&amp;";
+			}
+			else if (c == '<') {
+				html = "&lt;";
+			}
+			else if (c == '>') {
+				html = "&gt;";
+			}
+			else if (c == '\'') {
+				html = "&apos;";
+			}
+			else if (c == '"') {
+				html = "&quot;";
 			}
 
-			if (replacement != null) {
+			if (html != null) {
 				if (sb == null) {
 					sb = new StringBundler();
 				}
@@ -196,7 +185,7 @@ public class SitemapImpl implements Sitemap {
 					sb.append(input.substring(lastReplacementIndex, i));
 				}
 
-				sb.append(replacement);
+				sb.append(html);
 
 				lastReplacementIndex = i + 1;
 			}
