@@ -49,7 +49,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		updateActivities();
 	}
 
-	protected String generateExtraDataForActivity(
+	protected String createExtraData(
 			ExtraDataGenerator extraDataGenerator, long companyId, long groupId,
 			long userId, long classNameId, long classPK, int type,
 			String extraData)
@@ -113,7 +113,7 @@ public class UpgradeSocial extends UpgradeProcess {
 					int type = rs.getInt("type_");
 					long userId = rs.getLong("userId");
 
-					String newExtraData = generateExtraDataForActivity(
+					String newExtraData = createExtraData(
 						extraDataGenerator, groupId, companyId, userId,
 						classNameId, classPK, type, extraData);
 
