@@ -330,7 +330,12 @@ public abstract class Watcher implements Runnable {
 
 			removeCreatedFilePathName(filePath.toString());
 
-			if (_deletedFilePathNames.remove(filePath.toString())) {
+			if (_deletedFilePathNames.remove(filePath.toString()) ||
+				FileUtil.isIgnoredFileName(
+					String.valueOf(filePath.getFileName())) ||
+				FileUtil.isHidden(filePath) || FileUtil.isShortcut(filePath) ||
+				FileUtil.isTempFile(filePath)) {
+
 				return;
 			}
 
@@ -348,7 +353,9 @@ public abstract class Watcher implements Runnable {
 				 !FileUtil.isValidChecksum(filePath)) ||
 				FileUtil.isIgnoredFileName(
 					String.valueOf(filePath.getFileName())) ||
-				Files.notExists(filePath) || Files.isDirectory(filePath)) {
+				Files.notExists(filePath) || Files.isDirectory(filePath) ||
+				FileUtil.isHidden(filePath) || FileUtil.isShortcut(filePath) ||
+				FileUtil.isTempFile(filePath)) {
 
 				return;
 			}
@@ -358,6 +365,12 @@ public abstract class Watcher implements Runnable {
 		else if (eventType.equals(SyncWatchEvent.EVENT_TYPE_RENAME_FROM)) {
 			removeCreatedFilePathName(filePath.toString());
 
+			if (FileUtil.isHidden(filePath) || FileUtil.isShortcut(filePath) ||
+				FileUtil.isTempFile(filePath)) {
+
+				return;
+			}
+
 			processMissingFilePath(filePath);
 
 			fireWatchEventListener(
@@ -365,7 +378,10 @@ public abstract class Watcher implements Runnable {
 		}
 		else if (eventType.equals(SyncWatchEvent.EVENT_TYPE_RENAME_TO)) {
 			if (_downloadedFilePathNames.remove(filePath.toString()) ||
-				isIgnoredFilePath(filePath)) {
+				FileUtil.isIgnoredFileName(
+					String.valueOf(filePath.getFileName())) ||
+				Files.notExists(filePath) || Files.isDirectory(filePath) ||
+				FileUtil.isHidden(filePath) || FileUtil.isShortcut(filePath)) {
 
 				return;
 			}
