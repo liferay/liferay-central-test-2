@@ -49,8 +49,6 @@ public class UpgradeSocial extends UpgradeProcess {
 			return null;
 		}
 
-		String result = null;
-
 		try (PreparedStatement ps = connection.prepareStatement(
 				extraDataGenerator.getSQL())) {
 
@@ -67,11 +65,9 @@ public class UpgradeSocial extends UpgradeProcess {
 							rs, extraData);
 				}
 
-				result = extraDataJSONObject.toString();
+				return extraDataJSONObject.toString();
 			}
 		}
-
-		return result;
 	}
 
 	@Override
