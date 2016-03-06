@@ -49,20 +49,20 @@ public class UpgradeSocial extends UpgradeProcess {
 			return null;
 		}
 
-		try (PreparedStatement ps = connection.prepareStatement(
+		try (PreparedStatement preparedStatement = connection.prepareStatement(
 				extraDataFactory.getSQL())) {
 
 			extraDataFactory.setModelSQLParameters(
-				ps, groupId, companyId, userId, classNameId, classPK, type,
-				extraData);
+				preparedStatement, groupId, companyId, userId, classNameId,
+				classPK, type, extraData);
 
-			try (ResultSet rs = ps.executeQuery()) {
+			try (ResultSet resultSet = preparedStatement.executeQuery()) {
 				JSONObject extraDataJSONObject = null;
 
-				while (rs.next()) {
+				while (resultSet.next()) {
 					extraDataJSONObject =
 						extraDataFactory.createExtraDataJSONObject(
-							rs, extraData);
+							resultSet, extraData);
 				}
 
 				return extraDataJSONObject.toString();
@@ -96,16 +96,16 @@ public class UpgradeSocial extends UpgradeProcess {
 
 			extraDataFactory.setActivitySQLParameters(ps);
 
-			try (ResultSet rs = ps.executeQuery()) {
-				while (rs.next()) {
-					long activityId = rs.getLong("activityId");
-					long classNameId = rs.getLong("classNameId");
-					long classPK = rs.getLong("classPK");
-					long companyId = rs.getLong("companyId");
-					String extraData = rs.getString("extraData");
-					long groupId = rs.getLong("groupId");
-					int type = rs.getInt("type_");
-					long userId = rs.getLong("userId");
+			try (ResultSet resultSet = ps.executeQuery()) {
+				while (resultSet.next()) {
+					long activityId = resultSet.getLong("activityId");
+					long classNameId = resultSet.getLong("classNameId");
+					long classPK = resultSet.getLong("classPK");
+					long companyId = resultSet.getLong("companyId");
+					String extraData = resultSet.getString("extraData");
+					long groupId = resultSet.getLong("groupId");
+					int type = resultSet.getInt("type_");
+					long userId = resultSet.getLong("userId");
 
 					String newExtraData = createExtraData(
 						extraDataFactory, groupId, companyId, userId,
@@ -193,11 +193,11 @@ public class UpgradeSocial extends UpgradeProcess {
 
 			try (PreparedStatement ps = connection.prepareStatement(
 					"select activityId, activitySetId from SO_SocialActivity");
-				ResultSet rs = ps.executeQuery()) {
+				ResultSet resultSet = ps.executeQuery()) {
 
-				while (rs.next()) {
-					long activityId = rs.getLong("activityId");
-					long activitySetId = rs.getLong("activitySetId");
+				while (resultSet.next()) {
+					long activityId = resultSet.getLong("activityId");
+					long activitySetId = resultSet.getLong("activitySetId");
 
 					StringBundler sb = new StringBundler(4);
 
@@ -588,17 +588,17 @@ public class UpgradeSocial extends UpgradeProcess {
 				ResultSet resultSet, String extraData)
 			throws SQLException {
 
-			long classnameId = resultSet.getLong("classNameId");
-			long classpk = resultSet.getLong("classPK");
+			long classNameId = resultSet.getLong("classNameId");
+			long classPK = resultSet.getLong("classPK");
 
 			ExtraDataFactory extraDataFactory = null;
 
-			if (classnameId == PortalUtil.getClassNameId(
+			if (classNameId == PortalUtil.getClassNameId(
 					_kbArticleExtraDataFactory.getActivityClassName())) {
 
 				extraDataFactory = _kbArticleExtraDataFactory;
 			}
-			else if (classnameId == PortalUtil.getClassNameId(
+			else if (classNameId == PortalUtil.getClassNameId(
 						_kbTemplateExtraDataFactory.getActivityClassName())) {
 
 				extraDataFactory = _kbTemplateExtraDataFactory;
@@ -608,15 +608,18 @@ public class UpgradeSocial extends UpgradeProcess {
 				return null;
 			}
 			
-			try (PreparedStatement ps = connection.prepareStatement(
-					extraDataFactory.getSQL())) {
+			try (PreparedStatement preparedStatement =
+					connection.prepareStatement(
+						extraDataFactory.getSQL())) {
 
-				ps.setLong(1, classpk);
+				preparedStatement.setLong(1, classPK);
 
-				try (ResultSet rs = ps.executeQuery()) {
-					while (rs.next()) {
+				try (ResultSet curResultSet =
+						preparedStatement.executeQuery()) {
+
+					while (curResultSet.next()) {
 						return extraDataFactory.createExtraDataJSONObject(
-							rs, StringPool.BLANK);
+							curResultSet, StringPool.BLANK);
 					}
 				}
 			}
