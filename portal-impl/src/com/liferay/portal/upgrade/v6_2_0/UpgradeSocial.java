@@ -55,27 +55,29 @@ public class UpgradeSocial extends UpgradeProcess {
 			String extraData)
 		throws Exception {
 
+		if (extraDataGenerator == null) {
+			return null;
+		}
+
 		String result = null;
 
-		if (extraDataGenerator != null) {
-			try (PreparedStatement ps = connection.prepareStatement(
-					extraDataGenerator.getEntityQuery())) {
+		try (PreparedStatement ps = connection.prepareStatement(
+				extraDataGenerator.getEntityQuery())) {
 
-				extraDataGenerator.setEntityQueryParameters(
-					ps, groupId, companyId, userId, classNameId, classPK, type,
-					extraData);
+			extraDataGenerator.setEntityQueryParameters(
+				ps, groupId, companyId, userId, classNameId, classPK, type,
+				extraData);
 
-				try (ResultSet rs = ps.executeQuery()) {
-					JSONObject extraDataJSONObject = null;
+			try (ResultSet rs = ps.executeQuery()) {
+				JSONObject extraDataJSONObject = null;
 
-					while (rs.next()) {
-						extraDataJSONObject =
-							extraDataGenerator.getExtraDataJSONObject(
-								rs, extraData);
-					}
-
-					result = extraDataJSONObject.toString();
+				while (rs.next()) {
+					extraDataJSONObject =
+						extraDataGenerator.getExtraDataJSONObject(
+							rs, extraData);
 				}
+
+				result = extraDataJSONObject.toString();
 			}
 		}
 
