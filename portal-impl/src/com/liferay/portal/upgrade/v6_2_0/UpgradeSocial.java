@@ -50,7 +50,7 @@ public class UpgradeSocial extends UpgradeProcess {
 	}
 
 	protected String createExtraData(
-			ExtraDataGenerator extraDataGenerator, long companyId, long groupId,
+			ExtraDataFactory extraDataGenerator, long companyId, long groupId,
 			long userId, long classNameId, long classPK, int type,
 			String extraData)
 		throws Exception {
@@ -73,7 +73,7 @@ public class UpgradeSocial extends UpgradeProcess {
 
 				while (rs.next()) {
 					extraDataJSONObject =
-						extraDataGenerator.getExtraDataJSONObject(
+						extraDataGenerator.createExtraDataJSONObject(
 							rs, extraData);
 				}
 
@@ -85,7 +85,7 @@ public class UpgradeSocial extends UpgradeProcess {
 	}
 
 	protected Map<Long, String> getExtraDataMap(
-			ExtraDataGenerator extraDataGenerator)
+			ExtraDataFactory extraDataGenerator)
 		throws Exception {
 
 		Map<Long, String> extraDataMap = new HashMap<>();
@@ -128,14 +128,14 @@ public class UpgradeSocial extends UpgradeProcess {
 	}
 
 	protected void updateActivities() throws Exception {
-		populateExtraDataGeneratorMap();
+		populateExtraDataFactories();
 
-		for (ExtraDataGenerator extraDataGenerator : _extraDataGenerators) {
+		for (ExtraDataFactory extraDataGenerator : _extraDataFactories) {
 			updateActivities(extraDataGenerator);
 		}
 	}
 
-	protected void updateActivities(ExtraDataGenerator extraDataGenerator)
+	protected void updateActivities(ExtraDataFactory extraDataGenerator)
 		throws Exception {
 
 		Map<Long, String> extraDataMap = getExtraDataMap(extraDataGenerator);
@@ -215,7 +215,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 	}
 
-	protected interface ExtraDataGenerator {
+	protected interface ExtraDataFactory {
 
 		public String getActivityClassName();
 
@@ -223,7 +223,7 @@ public class UpgradeSocial extends UpgradeProcess {
 
 		public String getEntityQuery();
 
-		public JSONObject getExtraDataJSONObject(
+		public JSONObject createExtraDataJSONObject(
 				ResultSet entityResultSet, String extraData)
 			throws SQLException;
 
@@ -237,25 +237,25 @@ public class UpgradeSocial extends UpgradeProcess {
 
 	}
 
-	private void populateExtraDataGeneratorMap() {
-		_extraDataGenerators.add(new AddAssetCommentExtraDataGenerator());
-		_extraDataGenerators.add(new AddMessageExtraDataGenerator());
-		_extraDataGenerators.add(new BlogsEntryExtraDataGenerator());
-		_extraDataGenerators.add(new BookmarksEntryExtraDataGenerator());
-		_extraDataGenerators.add(new DLFileEntryExtraDataGenerator());
-		_extraDataGenerators.add(new KBArticleExtraDataGenerator());
-		_extraDataGenerators.add(new KBCommentExtraDataGenerator());
-		_extraDataGenerators.add(new KBTemplateExtraDataGenerator());
-		_extraDataGenerators.add(new WikiPageExtraDataGenerator());
+	private void populateExtraDataFactories() {
+		_extraDataFactories.add(new AddAssetCommentExtraDataFactory());
+		_extraDataFactories.add(new AddMessageExtraDataFactory());
+		_extraDataFactories.add(new BlogsEntryExtraDataFactory());
+		_extraDataFactories.add(new BookmarksEntryExtraDataFactory());
+		_extraDataFactories.add(new DLFileEntryExtraDataFactory());
+		_extraDataFactories.add(new KBArticleExtraDataFactory());
+		_extraDataFactories.add(new KBCommentExtraDataFactory());
+		_extraDataFactories.add(new KBTemplateExtraDataFactory());
+		_extraDataFactories.add(new WikiPageExtraDataFactory());
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(UpgradeSocial.class);
 
-	private static final List<ExtraDataGenerator> _extraDataGenerators =
+	private static final List<ExtraDataFactory> _extraDataFactories =
 		new ArrayList<>();
 
-	private class AddAssetCommentExtraDataGenerator
-		implements ExtraDataGenerator {
+	private class AddAssetCommentExtraDataFactory
+		implements ExtraDataFactory {
 
 		@Override
 		public String getActivityClassName() {
@@ -273,7 +273,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public JSONObject getExtraDataJSONObject(
+		public JSONObject createExtraDataJSONObject(
 				ResultSet entityResultSet, String extraData)
 			throws SQLException {
 
@@ -329,7 +329,7 @@ public class UpgradeSocial extends UpgradeProcess {
 
 	};
 
-	private class AddMessageExtraDataGenerator implements ExtraDataGenerator {
+	private class AddMessageExtraDataFactory implements ExtraDataFactory {
 
 		@Override
 		public String getActivityClassName() {
@@ -347,7 +347,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public JSONObject getExtraDataJSONObject(
+		public JSONObject createExtraDataJSONObject(
 				ResultSet entityResultSet, String extraData)
 			throws SQLException {
 
@@ -383,7 +383,7 @@ public class UpgradeSocial extends UpgradeProcess {
 
 	};
 
-	private class BlogsEntryExtraDataGenerator implements ExtraDataGenerator {
+	private class BlogsEntryExtraDataFactory implements ExtraDataFactory {
 
 		@Override
 		public String getActivityClassName() {
@@ -401,7 +401,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public JSONObject getExtraDataJSONObject(
+		public JSONObject createExtraDataJSONObject(
 				ResultSet entityResultSet, String extraData)
 			throws SQLException {
 
@@ -437,8 +437,8 @@ public class UpgradeSocial extends UpgradeProcess {
 
 	};
 
-	private class BookmarksEntryExtraDataGenerator
-		implements ExtraDataGenerator {
+	private class BookmarksEntryExtraDataFactory
+		implements ExtraDataFactory {
 
 		@Override
 		public String getActivityClassName() {
@@ -456,7 +456,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public JSONObject getExtraDataJSONObject(
+		public JSONObject createExtraDataJSONObject(
 				ResultSet entityResultSet, String extraData)
 			throws SQLException {
 
@@ -491,7 +491,7 @@ public class UpgradeSocial extends UpgradeProcess {
 
 	};
 
-	private class DLFileEntryExtraDataGenerator implements ExtraDataGenerator {
+	private class DLFileEntryExtraDataFactory implements ExtraDataFactory {
 
 		@Override
 		public String getActivityClassName() {
@@ -510,7 +510,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public JSONObject getExtraDataJSONObject(
+		public JSONObject createExtraDataJSONObject(
 				ResultSet entityResultSet, String extraData)
 			throws SQLException {
 
@@ -542,7 +542,7 @@ public class UpgradeSocial extends UpgradeProcess {
 
 	};
 
-	private class KBArticleExtraDataGenerator implements ExtraDataGenerator {
+	private class KBArticleExtraDataFactory implements ExtraDataFactory {
 
 		@Override
 		public String getActivityClassName() {
@@ -560,7 +560,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public JSONObject getExtraDataJSONObject(
+		public JSONObject createExtraDataJSONObject(
 				ResultSet entityResultSet, String extraData)
 			throws SQLException {
 
@@ -599,7 +599,7 @@ public class UpgradeSocial extends UpgradeProcess {
 
 	};
 
-	private class KBCommentExtraDataGenerator implements ExtraDataGenerator {
+	private class KBCommentExtraDataFactory implements ExtraDataFactory {
 
 		@Override
 		public String getActivityClassName() {
@@ -618,7 +618,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public JSONObject getExtraDataJSONObject(
+		public JSONObject createExtraDataJSONObject(
 				ResultSet entityResultSet, String extraData)
 			throws SQLException {
 
@@ -627,7 +627,7 @@ public class UpgradeSocial extends UpgradeProcess {
 			long classnameId = entityResultSet.getLong("classNameId");
 			long classpk = entityResultSet.getLong("classPK");
 
-			ExtraDataGenerator extraDataGenerator = null;
+			ExtraDataFactory extraDataGenerator = null;
 
 			if (classnameId == PortalUtil.getClassNameId(
 					_kbArticleExtraDataGenerator.getActivityClassName())) {
@@ -650,7 +650,7 @@ public class UpgradeSocial extends UpgradeProcess {
 					try (ResultSet rs = ps.executeQuery()) {
 						while (rs.next()) {
 							extraDataJSONObject =
-								extraDataGenerator.getExtraDataJSONObject(
+								extraDataGenerator.createExtraDataJSONObject(
 									rs, StringPool.BLANK);
 						}
 					}
@@ -682,14 +682,14 @@ public class UpgradeSocial extends UpgradeProcess {
 
 		private static final int _UPDATE_KB_COMMENT = 6;
 
-		private final KBArticleExtraDataGenerator
-			_kbArticleExtraDataGenerator = new KBArticleExtraDataGenerator();
-		private final KBTemplateExtraDataGenerator
-			_kbTemplateExtraDataGenerator = new KBTemplateExtraDataGenerator();
+		private final KBArticleExtraDataFactory
+			_kbArticleExtraDataGenerator = new KBArticleExtraDataFactory();
+		private final KBTemplateExtraDataFactory
+			_kbTemplateExtraDataGenerator = new KBTemplateExtraDataFactory();
 
 	};
 
-	private class KBTemplateExtraDataGenerator implements ExtraDataGenerator {
+	private class KBTemplateExtraDataFactory implements ExtraDataFactory {
 
 		@Override
 		public String getActivityClassName() {
@@ -707,7 +707,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public JSONObject getExtraDataJSONObject(
+		public JSONObject createExtraDataJSONObject(
 				ResultSet entityResultSet, String extraData)
 			throws SQLException {
 
@@ -743,7 +743,7 @@ public class UpgradeSocial extends UpgradeProcess {
 
 	};
 
-	private class WikiPageExtraDataGenerator implements ExtraDataGenerator {
+	private class WikiPageExtraDataFactory implements ExtraDataFactory {
 
 		@Override
 		public String getActivityClassName() {
@@ -763,7 +763,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public JSONObject getExtraDataJSONObject(
+		public JSONObject createExtraDataJSONObject(
 				ResultSet entityResultSet, String extraData)
 			throws SQLException {
 
