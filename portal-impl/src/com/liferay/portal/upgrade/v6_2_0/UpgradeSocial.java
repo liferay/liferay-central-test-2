@@ -39,14 +39,6 @@ import java.util.Map;
  */
 public class UpgradeSocial extends UpgradeProcess {
 
-	@Override
-	protected void doUpgrade() throws Exception {
-		updateJournalActivities();
-		updateSOSocialActivities();
-
-		updateActivities();
-	}
-
 	protected String createExtraData(
 			ExtraDataFactory extraDataGenerator, long companyId, long groupId,
 			long userId, long classNameId, long classPK, int type,
@@ -80,6 +72,14 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		return result;
+	}
+
+	@Override
+	protected void doUpgrade() throws Exception {
+		updateJournalActivities();
+		updateSOSocialActivities();
+
+		updateActivities();
 	}
 
 	protected Map<Long, String> getExtraDataMap(
@@ -128,13 +128,10 @@ public class UpgradeSocial extends UpgradeProcess {
 	protected void updateActivities() throws Exception {
 		ExtraDataFactory[] extraDataFactories = {
 			new AddAssetCommentExtraDataFactory(),
-			new AddMessageExtraDataFactory(),
-			new BlogsEntryExtraDataFactory(),
+			new AddMessageExtraDataFactory(), new BlogsEntryExtraDataFactory(),
 			new BookmarksEntryExtraDataFactory(),
-			new DLFileEntryExtraDataFactory(),
-			new KBArticleExtraDataFactory(),
-			new KBCommentExtraDataFactory(),
-			new KBTemplateExtraDataFactory(),
+			new DLFileEntryExtraDataFactory(), new KBArticleExtraDataFactory(),
+			new KBCommentExtraDataFactory(), new KBTemplateExtraDataFactory(),
 			new WikiPageExtraDataFactory()
 		};
 
@@ -225,15 +222,15 @@ public class UpgradeSocial extends UpgradeProcess {
 
 	protected interface ExtraDataFactory {
 
+		public JSONObject createExtraDataJSONObject(
+				ResultSet entityResultSet, String extraData)
+			throws SQLException;
+
 		public String getActivityClassName();
 
 		public String getActivitySQLWhereClause();
 
 		public String getSQL();
-
-		public JSONObject createExtraDataJSONObject(
-				ResultSet entityResultSet, String extraData)
-			throws SQLException;
 
 		public void setActivitySQLParameters(PreparedStatement ps)
 			throws SQLException;
@@ -247,23 +244,7 @@ public class UpgradeSocial extends UpgradeProcess {
 
 	private static final Log _log = LogFactoryUtil.getLog(UpgradeSocial.class);
 
-	private class AddAssetCommentExtraDataFactory
-		implements ExtraDataFactory {
-
-		@Override
-		public String getActivityClassName() {
-			return StringPool.BLANK;
-		}
-
-		@Override
-		public String getActivitySQLWhereClause() {
-			return "type_ = ?";
-		}
-
-		@Override
-		public String getSQL() {
-			return "select subject from MBMessage where messageId = ?";
-		}
+	private class AddAssetCommentExtraDataFactory implements ExtraDataFactory {
 
 		@Override
 		public JSONObject createExtraDataJSONObject(
@@ -289,6 +270,21 @@ public class UpgradeSocial extends UpgradeProcess {
 			extraDataJSONObject.put("messageId", messageId);
 
 			return extraDataJSONObject;
+		}
+
+		@Override
+		public String getActivityClassName() {
+			return StringPool.BLANK;
+		}
+
+		@Override
+		public String getActivitySQLWhereClause() {
+			return "type_ = ?";
+		}
+
+		@Override
+		public String getSQL() {
+			return "select subject from MBMessage where messageId = ?";
 		}
 
 		@Override
@@ -325,6 +321,19 @@ public class UpgradeSocial extends UpgradeProcess {
 	private class AddMessageExtraDataFactory implements ExtraDataFactory {
 
 		@Override
+		public JSONObject createExtraDataJSONObject(
+				ResultSet entityResultSet, String extraData)
+			throws SQLException {
+
+			JSONObject extraDataJSONObject = JSONFactoryUtil.createJSONObject();
+
+			extraDataJSONObject.put(
+				"title", entityResultSet.getString("subject"));
+
+			return extraDataJSONObject;
+		}
+
+		@Override
 		public String getActivityClassName() {
 			return "com.liferay.portlet.messageboards.model.MBMessage";
 		}
@@ -337,19 +346,6 @@ public class UpgradeSocial extends UpgradeProcess {
 		@Override
 		public String getSQL() {
 			return "select subject from MBMessage where messageId = ?";
-		}
-
-		@Override
-		public JSONObject createExtraDataJSONObject(
-				ResultSet entityResultSet, String extraData)
-			throws SQLException {
-
-			JSONObject extraDataJSONObject = JSONFactoryUtil.createJSONObject();
-
-			extraDataJSONObject.put(
-				"title", entityResultSet.getString("subject"));
-
-			return extraDataJSONObject;
 		}
 
 		@Override
@@ -379,6 +375,19 @@ public class UpgradeSocial extends UpgradeProcess {
 	private class BlogsEntryExtraDataFactory implements ExtraDataFactory {
 
 		@Override
+		public JSONObject createExtraDataJSONObject(
+				ResultSet entityResultSet, String extraData)
+			throws SQLException {
+
+			JSONObject extraDataJSONObject = JSONFactoryUtil.createJSONObject();
+
+			extraDataJSONObject.put(
+				"title", entityResultSet.getString("title"));
+
+			return extraDataJSONObject;
+		}
+
+		@Override
 		public String getActivityClassName() {
 			return "com.liferay.portlet.blogs.model.BlogsEntry";
 		}
@@ -391,19 +400,6 @@ public class UpgradeSocial extends UpgradeProcess {
 		@Override
 		public String getSQL() {
 			return "select title from BlogsEntry where entryId = ?";
-		}
-
-		@Override
-		public JSONObject createExtraDataJSONObject(
-				ResultSet entityResultSet, String extraData)
-			throws SQLException {
-
-			JSONObject extraDataJSONObject = JSONFactoryUtil.createJSONObject();
-
-			extraDataJSONObject.put(
-				"title", entityResultSet.getString("title"));
-
-			return extraDataJSONObject;
 		}
 
 		@Override
@@ -430,8 +426,19 @@ public class UpgradeSocial extends UpgradeProcess {
 
 	};
 
-	private class BookmarksEntryExtraDataFactory
-		implements ExtraDataFactory {
+	private class BookmarksEntryExtraDataFactory implements ExtraDataFactory {
+
+		@Override
+		public JSONObject createExtraDataJSONObject(
+				ResultSet entityResultSet, String extraData)
+			throws SQLException {
+
+			JSONObject extraDataJSONObject = JSONFactoryUtil.createJSONObject();
+
+			extraDataJSONObject.put("title", entityResultSet.getString("name"));
+
+			return extraDataJSONObject;
+		}
 
 		@Override
 		public String getActivityClassName() {
@@ -446,18 +453,6 @@ public class UpgradeSocial extends UpgradeProcess {
 		@Override
 		public String getSQL() {
 			return "select name from BookmarksEntry where entryId = ?";
-		}
-
-		@Override
-		public JSONObject createExtraDataJSONObject(
-				ResultSet entityResultSet, String extraData)
-			throws SQLException {
-
-			JSONObject extraDataJSONObject = JSONFactoryUtil.createJSONObject();
-
-			extraDataJSONObject.put("title", entityResultSet.getString("name"));
-
-			return extraDataJSONObject;
 		}
 
 		@Override
@@ -487,6 +482,19 @@ public class UpgradeSocial extends UpgradeProcess {
 	private class DLFileEntryExtraDataFactory implements ExtraDataFactory {
 
 		@Override
+		public JSONObject createExtraDataJSONObject(
+				ResultSet entityResultSet, String extraData)
+			throws SQLException {
+
+			JSONObject extraDataJSONObject = JSONFactoryUtil.createJSONObject();
+
+			extraDataJSONObject.put(
+				"title", entityResultSet.getString("title"));
+
+			return extraDataJSONObject;
+		}
+
+		@Override
 		public String getActivityClassName() {
 			return "com.liferay.portlet.documentlibrary.model.DLFileEntry";
 		}
@@ -500,19 +508,6 @@ public class UpgradeSocial extends UpgradeProcess {
 		public String getSQL() {
 			return "select title from DLFileEntry where companyId = ? " +
 				"and groupId = ? and fileEntryId = ?";
-		}
-
-		@Override
-		public JSONObject createExtraDataJSONObject(
-				ResultSet entityResultSet, String extraData)
-			throws SQLException {
-
-			JSONObject extraDataJSONObject = JSONFactoryUtil.createJSONObject();
-
-			extraDataJSONObject.put(
-				"title", entityResultSet.getString("title"));
-
-			return extraDataJSONObject;
 		}
 
 		@Override
@@ -538,6 +533,19 @@ public class UpgradeSocial extends UpgradeProcess {
 	private class KBArticleExtraDataFactory implements ExtraDataFactory {
 
 		@Override
+		public JSONObject createExtraDataJSONObject(
+				ResultSet entityResultSet, String extraData)
+			throws SQLException {
+
+			JSONObject extraDataJSONObject = JSONFactoryUtil.createJSONObject();
+
+			extraDataJSONObject.put(
+				"title", entityResultSet.getString("title"));
+
+			return extraDataJSONObject;
+		}
+
+		@Override
 		public String getActivityClassName() {
 			return "com.liferay.knowledgebase.model.KBArticle";
 		}
@@ -550,19 +558,6 @@ public class UpgradeSocial extends UpgradeProcess {
 		@Override
 		public String getSQL() {
 			return "select title from KBArticle where resourcePrimKey = ?";
-		}
-
-		@Override
-		public JSONObject createExtraDataJSONObject(
-				ResultSet entityResultSet, String extraData)
-			throws SQLException {
-
-			JSONObject extraDataJSONObject = JSONFactoryUtil.createJSONObject();
-
-			extraDataJSONObject.put(
-				"title", entityResultSet.getString("title"));
-
-			return extraDataJSONObject;
 		}
 
 		@Override
@@ -593,22 +588,6 @@ public class UpgradeSocial extends UpgradeProcess {
 	};
 
 	private class KBCommentExtraDataFactory implements ExtraDataFactory {
-
-		@Override
-		public String getActivityClassName() {
-			return "com.liferay.knowledgebase.model.KBComment";
-		}
-
-		@Override
-		public String getActivitySQLWhereClause() {
-			return "classNameId = ? and (type_ = ? or type_ = ?)";
-		}
-
-		@Override
-		public String getSQL() {
-			return "select classNameId, classPK from KBComment where " +
-				"kbCommentId = ?";
-		}
 
 		@Override
 		public JSONObject createExtraDataJSONObject(
@@ -654,6 +633,22 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
+		public String getActivityClassName() {
+			return "com.liferay.knowledgebase.model.KBComment";
+		}
+
+		@Override
+		public String getActivitySQLWhereClause() {
+			return "classNameId = ? and (type_ = ? or type_ = ?)";
+		}
+
+		@Override
+		public String getSQL() {
+			return "select classNameId, classPK from KBComment where " +
+				"kbCommentId = ?";
+		}
+
+		@Override
 		public void setActivitySQLParameters(PreparedStatement ps)
 			throws SQLException {
 
@@ -677,12 +672,25 @@ public class UpgradeSocial extends UpgradeProcess {
 
 		private final KBArticleExtraDataFactory _kbArticleExtraDataGenerator =
 			new KBArticleExtraDataFactory();
-		private final KBTemplateExtraDataFactory
-			_kbTemplateExtraDataGenerator = new KBTemplateExtraDataFactory();
+		private final KBTemplateExtraDataFactory _kbTemplateExtraDataGenerator =
+			new KBTemplateExtraDataFactory();
 
 	};
 
 	private class KBTemplateExtraDataFactory implements ExtraDataFactory {
+
+		@Override
+		public JSONObject createExtraDataJSONObject(
+				ResultSet entityResultSet, String extraData)
+			throws SQLException {
+
+			JSONObject extraDataJSONObject = JSONFactoryUtil.createJSONObject();
+
+			extraDataJSONObject.put(
+				"title", entityResultSet.getString("title"));
+
+			return extraDataJSONObject;
+		}
 
 		@Override
 		public String getActivityClassName() {
@@ -697,19 +705,6 @@ public class UpgradeSocial extends UpgradeProcess {
 		@Override
 		public String getSQL() {
 			return "select title from KBTemplate where kbTemplateId = ?";
-		}
-
-		@Override
-		public JSONObject createExtraDataJSONObject(
-				ResultSet entityResultSet, String extraData)
-			throws SQLException {
-
-			JSONObject extraDataJSONObject = JSONFactoryUtil.createJSONObject();
-
-			extraDataJSONObject.put(
-				"title", entityResultSet.getString("title"));
-
-			return extraDataJSONObject;
 		}
 
 		@Override
@@ -739,6 +734,21 @@ public class UpgradeSocial extends UpgradeProcess {
 	private class WikiPageExtraDataFactory implements ExtraDataFactory {
 
 		@Override
+		public JSONObject createExtraDataJSONObject(
+				ResultSet entityResultSet, String extraData)
+			throws SQLException {
+
+			JSONObject extraDataJSONObject = JSONFactoryUtil.createJSONObject();
+
+			extraDataJSONObject.put(
+				"title", entityResultSet.getString("title"));
+			extraDataJSONObject.put(
+				"version", entityResultSet.getDouble("version"));
+
+			return extraDataJSONObject;
+		}
+
+		@Override
 		public String getActivityClassName() {
 			return "com.liferay.portlet.wiki.model.WikiPage";
 		}
@@ -752,21 +762,6 @@ public class UpgradeSocial extends UpgradeProcess {
 		public String getSQL() {
 			return "select title, version from WikiPage where companyId = ? " +
 				"and groupId = ? and resourcePrimKey = ? and head = ?";
-		}
-
-		@Override
-		public JSONObject createExtraDataJSONObject(
-				ResultSet entityResultSet, String extraData)
-			throws SQLException {
-
-			JSONObject extraDataJSONObject = JSONFactoryUtil.createJSONObject();
-
-			extraDataJSONObject.put(
-				"title", entityResultSet.getString("title"));
-			extraDataJSONObject.put(
-				"version", entityResultSet.getDouble("version"));
-
-			return extraDataJSONObject;
 		}
 
 		@Override
