@@ -78,7 +78,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		updateActivities();
 	}
 
-	protected Map<Long, String> getExtraDataMap(
+	protected Map<Long, String> createExtraDataMap(
 			ExtraDataFactory extraDataFactory)
 		throws Exception {
 
@@ -139,17 +139,15 @@ public class UpgradeSocial extends UpgradeProcess {
 	protected void updateActivities(ExtraDataFactory extraDataFactory)
 		throws Exception {
 
-		Map<Long, String> extraDataMap = getExtraDataMap(extraDataFactory);
-
-		String updateActivityQuery =
-			"update SocialActivity set extraData = ? where activityId = ?";
+		Map<Long, String> extraDataMap = createExtraDataMap(extraDataFactory);
 
 		for (Map.Entry<Long, String> entry : extraDataMap.entrySet()) {
 			long activityId = entry.getKey();
 			String extraData = entry.getValue();
 
 			try (PreparedStatement ps = connection.prepareStatement(
-					updateActivityQuery)) {
+					"update SocialActivity set extraData = ? where " + 
+						"activityId = ?")) {
 
 				ps.setString(1, extraData);
 				ps.setLong(2, activityId);
