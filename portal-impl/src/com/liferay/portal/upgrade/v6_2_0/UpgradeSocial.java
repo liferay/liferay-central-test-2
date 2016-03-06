@@ -62,7 +62,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		try (PreparedStatement ps = connection.prepareStatement(
 				extraDataGenerator.getEntityQuery())) {
 
-			extraDataGenerator.setEntityQueryParameters(
+			extraDataGenerator.setModelQueryParameters(
 				ps, groupId, companyId, userId, classNameId, classPK, type,
 				extraData);
 
@@ -238,7 +238,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		public void setActivityQueryParameters(PreparedStatement ps)
 			throws SQLException;
 
-		public void setEntityQueryParameters(
+		public void setModelQueryParameters(
 				PreparedStatement ps, long companyId, long groupId, long userId,
 				long classNameId, long classPK, int type, String extraData)
 			throws SQLException;
@@ -299,7 +299,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public void setEntityQueryParameters(
+		public void setModelQueryParameters(
 				PreparedStatement ps, long companyId, long groupId, long userId,
 				long classNameId, long classPK, int type, String extraData)
 			throws SQLException {
@@ -362,7 +362,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public void setEntityQueryParameters(
+		public void setModelQueryParameters(
 				PreparedStatement ps, long companyId, long groupId, long userId,
 				long classNameId, long classPK, int type, String extraData)
 			throws SQLException {
@@ -416,7 +416,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public void setEntityQueryParameters(
+		public void setModelQueryParameters(
 				PreparedStatement ps, long companyId, long groupId, long userId,
 				long classNameId, long classPK, int type, String extraData)
 			throws SQLException {
@@ -470,7 +470,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public void setEntityQueryParameters(
+		public void setModelQueryParameters(
 				PreparedStatement ps, long companyId, long groupId, long userId,
 				long classNameId, long classPK, int type, String extraData)
 			throws SQLException {
@@ -523,7 +523,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public void setEntityQueryParameters(
+		public void setModelQueryParameters(
 				PreparedStatement ps, long companyId, long groupId, long userId,
 				long classNameId, long classPK, int type, String extraData)
 			throws SQLException {
@@ -576,7 +576,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public void setEntityQueryParameters(
+		public void setModelQueryParameters(
 				PreparedStatement ps, long companyId, long groupId, long userId,
 				long classNameId, long classPK, int type, String extraData)
 			throws SQLException {
@@ -663,7 +663,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public void setEntityQueryParameters(
+		public void setModelQueryParameters(
 				PreparedStatement ps, long companyId, long groupId, long userId,
 				long classNameId, long classPK, int type, String extraData)
 			throws SQLException {
@@ -722,7 +722,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public void setEntityQueryParameters(
+		public void setModelQueryParameters(
 				PreparedStatement ps, long companyId, long groupId, long userId,
 				long classNameId, long classPK, int type, String extraData)
 			throws SQLException {
@@ -780,7 +780,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public void setEntityQueryParameters(
+		public void setModelQueryParameters(
 				PreparedStatement ps, long companyId, long groupId, long userId,
 				long classNameId, long classPK, int type, String extraData)
 			throws SQLException {
