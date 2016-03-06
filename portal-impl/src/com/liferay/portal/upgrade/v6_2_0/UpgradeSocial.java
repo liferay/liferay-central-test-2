@@ -588,8 +588,6 @@ public class UpgradeSocial extends UpgradeProcess {
 				ResultSet resultSet, String extraData)
 			throws SQLException {
 
-			JSONObject extraDataJSONObject = null;
-
 			long classnameId = resultSet.getLong("classNameId");
 			long classpk = resultSet.getLong("classPK");
 
@@ -606,23 +604,24 @@ public class UpgradeSocial extends UpgradeProcess {
 				extraDataFactory = _kbTemplateExtraDataFactory;
 			}
 
-			if (extraDataFactory != null) {
-				try (PreparedStatement ps = connection.prepareStatement(
-						extraDataFactory.getSQL())) {
+			if (extraDataFactory == null) {
+				return null;
+			}
+			
+			try (PreparedStatement ps = connection.prepareStatement(
+					extraDataFactory.getSQL())) {
 
-					ps.setLong(1, classpk);
+				ps.setLong(1, classpk);
 
-					try (ResultSet rs = ps.executeQuery()) {
-						while (rs.next()) {
-							extraDataJSONObject =
-								extraDataFactory.createExtraDataJSONObject(
-									rs, StringPool.BLANK);
-						}
+				try (ResultSet rs = ps.executeQuery()) {
+					while (rs.next()) {
+						return extraDataFactory.createExtraDataJSONObject(
+							rs, StringPool.BLANK);
 					}
 				}
 			}
 
-			return extraDataJSONObject;
+			return null;
 		}
 
 		@Override
