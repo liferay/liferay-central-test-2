@@ -29,9 +29,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -128,9 +126,19 @@ public class UpgradeSocial extends UpgradeProcess {
 	}
 
 	protected void updateActivities() throws Exception {
-		populateExtraDataFactories();
+		ExtraDataFactory[] extraDataFactories = {
+			new AddAssetCommentExtraDataFactory(),
+			new AddMessageExtraDataFactory(),
+			new BlogsEntryExtraDataFactory(),
+			new BookmarksEntryExtraDataFactory(),
+			new DLFileEntryExtraDataFactory(),
+			new KBArticleExtraDataFactory(),
+			new KBCommentExtraDataFactory(),
+			new KBTemplateExtraDataFactory(),
+			new WikiPageExtraDataFactory()
+		};
 
-		for (ExtraDataFactory extraDataGenerator : _extraDataFactories) {
+		for (ExtraDataFactory extraDataGenerator : extraDataFactories) {
 			updateActivities(extraDataGenerator);
 		}
 	}
@@ -237,22 +245,7 @@ public class UpgradeSocial extends UpgradeProcess {
 
 	}
 
-	private void populateExtraDataFactories() {
-		_extraDataFactories.add(new AddAssetCommentExtraDataFactory());
-		_extraDataFactories.add(new AddMessageExtraDataFactory());
-		_extraDataFactories.add(new BlogsEntryExtraDataFactory());
-		_extraDataFactories.add(new BookmarksEntryExtraDataFactory());
-		_extraDataFactories.add(new DLFileEntryExtraDataFactory());
-		_extraDataFactories.add(new KBArticleExtraDataFactory());
-		_extraDataFactories.add(new KBCommentExtraDataFactory());
-		_extraDataFactories.add(new KBTemplateExtraDataFactory());
-		_extraDataFactories.add(new WikiPageExtraDataFactory());
-	}
-
 	private static final Log _log = LogFactoryUtil.getLog(UpgradeSocial.class);
-
-	private static final List<ExtraDataFactory> _extraDataFactories =
-		new ArrayList<>();
 
 	private class AddAssetCommentExtraDataFactory
 		implements ExtraDataFactory {
