@@ -675,8 +675,8 @@ public class UpgradeSocial extends UpgradeProcess {
 
 		private static final int _UPDATE_KB_COMMENT = 6;
 
-		private final KBArticleExtraDataFactory
-			_kbArticleExtraDataGenerator = new KBArticleExtraDataFactory();
+		private final KBArticleExtraDataFactory _kbArticleExtraDataGenerator =
+			new KBArticleExtraDataFactory();
 		private final KBTemplateExtraDataFactory
 			_kbTemplateExtraDataGenerator = new KBTemplateExtraDataFactory();
 
