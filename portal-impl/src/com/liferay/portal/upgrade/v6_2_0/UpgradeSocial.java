@@ -60,9 +60,9 @@ public class UpgradeSocial extends UpgradeProcess {
 		String result = null;
 
 		try (PreparedStatement ps = connection.prepareStatement(
-				extraDataGenerator.getEntityQuery())) {
+				extraDataGenerator.getSQL())) {
 
-			extraDataGenerator.setModelQueryParameters(
+			extraDataGenerator.setModelSQLParameters(
 				ps, groupId, companyId, userId, classNameId, classPK, type,
 				extraData);
 
@@ -98,7 +98,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		try (PreparedStatement ps = connection.prepareStatement(
 				sb.toString())) {
 
-			extraDataGenerator.setActivityQueryParameters(ps);
+			extraDataGenerator.setActivitySQLParameters(ps);
 
 			try (ResultSet rs = ps.executeQuery()) {
 				while (rs.next()) {
@@ -229,16 +229,16 @@ public class UpgradeSocial extends UpgradeProcess {
 
 		public String getActivityQueryWhereClause();
 
-		public String getEntityQuery();
+		public String getSQL();
 
 		public JSONObject createExtraDataJSONObject(
 				ResultSet entityResultSet, String extraData)
 			throws SQLException;
 
-		public void setActivityQueryParameters(PreparedStatement ps)
+		public void setActivitySQLParameters(PreparedStatement ps)
 			throws SQLException;
 
-		public void setModelQueryParameters(
+		public void setModelSQLParameters(
 				PreparedStatement ps, long companyId, long groupId, long userId,
 				long classNameId, long classPK, int type, String extraData)
 			throws SQLException;
@@ -261,7 +261,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public String getEntityQuery() {
+		public String getSQL() {
 			return "select subject from MBMessage where messageId = ?";
 		}
 
@@ -292,14 +292,14 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public void setActivityQueryParameters(PreparedStatement ps)
+		public void setActivitySQLParameters(PreparedStatement ps)
 			throws SQLException {
 
 			ps.setInt(1, _TYPE_ADD_COMMENT);
 		}
 
 		@Override
-		public void setModelQueryParameters(
+		public void setModelSQLParameters(
 				PreparedStatement ps, long companyId, long groupId, long userId,
 				long classNameId, long classPK, int type, String extraData)
 			throws SQLException {
@@ -335,7 +335,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public String getEntityQuery() {
+		public String getSQL() {
 			return "select subject from MBMessage where messageId = ?";
 		}
 
@@ -353,7 +353,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public void setActivityQueryParameters(PreparedStatement ps)
+		public void setActivitySQLParameters(PreparedStatement ps)
 			throws SQLException {
 
 			ps.setLong(1, PortalUtil.getClassNameId(getActivityClassName()));
@@ -362,7 +362,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public void setModelQueryParameters(
+		public void setModelSQLParameters(
 				PreparedStatement ps, long companyId, long groupId, long userId,
 				long classNameId, long classPK, int type, String extraData)
 			throws SQLException {
@@ -389,7 +389,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public String getEntityQuery() {
+		public String getSQL() {
 			return "select title from BlogsEntry where entryId = ?";
 		}
 
@@ -407,7 +407,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public void setActivityQueryParameters(PreparedStatement ps)
+		public void setActivitySQLParameters(PreparedStatement ps)
 			throws SQLException {
 
 			ps.setLong(1, PortalUtil.getClassNameId(getActivityClassName()));
@@ -416,7 +416,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public void setModelQueryParameters(
+		public void setModelSQLParameters(
 				PreparedStatement ps, long companyId, long groupId, long userId,
 				long classNameId, long classPK, int type, String extraData)
 			throws SQLException {
@@ -444,7 +444,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public String getEntityQuery() {
+		public String getSQL() {
 			return "select name from BookmarksEntry where entryId = ?";
 		}
 
@@ -461,7 +461,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public void setActivityQueryParameters(PreparedStatement ps)
+		public void setActivitySQLParameters(PreparedStatement ps)
 			throws SQLException {
 
 			ps.setLong(1, PortalUtil.getClassNameId(getActivityClassName()));
@@ -470,7 +470,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public void setModelQueryParameters(
+		public void setModelSQLParameters(
 				PreparedStatement ps, long companyId, long groupId, long userId,
 				long classNameId, long classPK, int type, String extraData)
 			throws SQLException {
@@ -497,7 +497,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public String getEntityQuery() {
+		public String getSQL() {
 			return "select title from DLFileEntry where companyId = ? " +
 				"and groupId = ? and fileEntryId = ?";
 		}
@@ -516,14 +516,14 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public void setActivityQueryParameters(PreparedStatement ps)
+		public void setActivitySQLParameters(PreparedStatement ps)
 			throws SQLException {
 
 			ps.setLong(1, PortalUtil.getClassNameId(getActivityClassName()));
 		}
 
 		@Override
-		public void setModelQueryParameters(
+		public void setModelSQLParameters(
 				PreparedStatement ps, long companyId, long groupId, long userId,
 				long classNameId, long classPK, int type, String extraData)
 			throws SQLException {
@@ -548,7 +548,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public String getEntityQuery() {
+		public String getSQL() {
 			return "select title from KBArticle where resourcePrimKey = ?";
 		}
 
@@ -566,7 +566,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public void setActivityQueryParameters(PreparedStatement ps)
+		public void setActivitySQLParameters(PreparedStatement ps)
 			throws SQLException {
 
 			ps.setLong(1, PortalUtil.getClassNameId(getActivityClassName()));
@@ -576,7 +576,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public void setModelQueryParameters(
+		public void setModelSQLParameters(
 				PreparedStatement ps, long companyId, long groupId, long userId,
 				long classNameId, long classPK, int type, String extraData)
 			throws SQLException {
@@ -605,7 +605,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public String getEntityQuery() {
+		public String getSQL() {
 			return "select classNameId, classPK from KBComment where " +
 				"kbCommentId = ?";
 		}
@@ -636,7 +636,7 @@ public class UpgradeSocial extends UpgradeProcess {
 
 			if (extraDataGenerator != null) {
 				try (PreparedStatement ps = connection.prepareStatement(
-						extraDataGenerator.getEntityQuery())) {
+						extraDataGenerator.getSQL())) {
 
 					ps.setLong(1, classpk);
 
@@ -654,7 +654,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public void setActivityQueryParameters(PreparedStatement ps)
+		public void setActivitySQLParameters(PreparedStatement ps)
 			throws SQLException {
 
 			ps.setLong(1, PortalUtil.getClassNameId(getActivityClassName()));
@@ -663,7 +663,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public void setModelQueryParameters(
+		public void setModelSQLParameters(
 				PreparedStatement ps, long companyId, long groupId, long userId,
 				long classNameId, long classPK, int type, String extraData)
 			throws SQLException {
@@ -695,7 +695,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public String getEntityQuery() {
+		public String getSQL() {
 			return "select title from KBTemplate where kbTemplateId = ?";
 		}
 
@@ -713,7 +713,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public void setActivityQueryParameters(PreparedStatement ps)
+		public void setActivitySQLParameters(PreparedStatement ps)
 			throws SQLException {
 
 			ps.setLong(1, PortalUtil.getClassNameId(getActivityClassName()));
@@ -722,7 +722,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public void setModelQueryParameters(
+		public void setModelSQLParameters(
 				PreparedStatement ps, long companyId, long groupId, long userId,
 				long classNameId, long classPK, int type, String extraData)
 			throws SQLException {
@@ -749,7 +749,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public String getEntityQuery() {
+		public String getSQL() {
 			return "select title, version from WikiPage where " +
 				"companyId = ? and groupId = ? and resourcePrimKey = ? " +
 					"and head = ?";
@@ -771,7 +771,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public void setActivityQueryParameters(PreparedStatement ps)
+		public void setActivitySQLParameters(PreparedStatement ps)
 			throws SQLException {
 
 			ps.setLong(1, PortalUtil.getClassNameId(getActivityClassName()));
@@ -780,7 +780,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public void setModelQueryParameters(
+		public void setModelSQLParameters(
 				PreparedStatement ps, long companyId, long groupId, long userId,
 				long classNameId, long classPK, int type, String extraData)
 			throws SQLException {
