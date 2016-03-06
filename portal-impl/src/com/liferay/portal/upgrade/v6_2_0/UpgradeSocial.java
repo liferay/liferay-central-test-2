@@ -70,14 +70,6 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 	}
 
-	@Override
-	protected void doUpgrade() throws Exception {
-		updateJournalActivities();
-		updateSOSocialActivities();
-
-		updateActivities();
-	}
-
 	protected Map<Long, String> createExtraDataMap(
 			ExtraDataFactory extraDataFactory)
 		throws Exception {
@@ -91,12 +83,12 @@ public class UpgradeSocial extends UpgradeProcess {
 		sb.append("SocialActivity where ");
 		sb.append(extraDataFactory.getActivitySQLWhereClause());
 
-		try (PreparedStatement ps = connection.prepareStatement(
+		try (PreparedStatement preparedStatement = connection.prepareStatement(
 				sb.toString())) {
 
-			extraDataFactory.setActivitySQLParameters(ps);
+			extraDataFactory.setActivitySQLParameters(preparedStatement);
 
-			try (ResultSet resultSet = ps.executeQuery()) {
+			try (ResultSet resultSet = preparedStatement.executeQuery()) {
 				while (resultSet.next()) {
 					long activityId = resultSet.getLong("activityId");
 					long classNameId = resultSet.getLong("classNameId");
@@ -119,6 +111,14 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		return extraDataMap;
+	}
+
+	@Override
+	protected void doUpgrade() throws Exception {
+		updateJournalActivities();
+		updateSOSocialActivities();
+
+		updateActivities();
 	}
 
 	protected void updateActivities() throws Exception {
@@ -145,14 +145,15 @@ public class UpgradeSocial extends UpgradeProcess {
 			long activityId = entry.getKey();
 			String extraData = entry.getValue();
 
-			try (PreparedStatement ps = connection.prepareStatement(
-					"update SocialActivity set extraData = ? where " + 
-						"activityId = ?")) {
+			try (PreparedStatement preparedStatement =
+					connection.prepareStatement(
+						"update SocialActivity set extraData = ? where " +
+							"activityId = ?")) {
 
-				ps.setString(1, extraData);
-				ps.setLong(2, activityId);
+				preparedStatement.setString(1, extraData);
+				preparedStatement.setLong(2, activityId);
 
-				ps.executeUpdate();
+				preparedStatement.executeUpdate();
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
@@ -191,9 +192,11 @@ public class UpgradeSocial extends UpgradeProcess {
 				return;
 			}
 
-			try (PreparedStatement ps = connection.prepareStatement(
-					"select activityId, activitySetId from SO_SocialActivity");
-				ResultSet resultSet = ps.executeQuery()) {
+			try (PreparedStatement preparedStatement =
+					connection.prepareStatement(
+						"select activityId, activitySetId from " +
+							"SO_SocialActivity");
+				ResultSet resultSet = preparedStatement.executeQuery()) {
 
 				while (resultSet.next()) {
 					long activityId = resultSet.getLong("activityId");
@@ -226,12 +229,14 @@ public class UpgradeSocial extends UpgradeProcess {
 
 		public String getSQL();
 
-		public void setActivitySQLParameters(PreparedStatement ps)
+		public void setActivitySQLParameters(
+				PreparedStatement preparedStatement)
 			throws SQLException;
 
 		public void setModelSQLParameters(
-				PreparedStatement ps, long companyId, long groupId, long userId,
-				long classNameId, long classPK, int type, String extraData)
+				PreparedStatement preparedStatement, long companyId,
+				long groupId, long userId, long classNameId, long classPK,
+				int type, String extraData)
 			throws SQLException;
 
 	}
@@ -260,8 +265,7 @@ public class UpgradeSocial extends UpgradeProcess {
 
 			extraDataJSONObject.put("messageId", messageId);
 
-			extraDataJSONObject.put(
-				"title", resultSet.getString("subject"));
+			extraDataJSONObject.put("title", resultSet.getString("subject"));
 
 			return extraDataJSONObject;
 		}
@@ -282,16 +286,18 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public void setActivitySQLParameters(PreparedStatement ps)
+		public void setActivitySQLParameters(
+				PreparedStatement preparedStatement)
 			throws SQLException {
 
-			ps.setInt(1, _TYPE_ADD_COMMENT);
+			preparedStatement.setInt(1, _TYPE_ADD_COMMENT);
 		}
 
 		@Override
 		public void setModelSQLParameters(
-				PreparedStatement ps, long companyId, long groupId, long userId,
-				long classNameId, long classPK, int type, String extraData)
+				PreparedStatement preparedStatement, long companyId,
+				long groupId, long userId, long classNameId, long classPK,
+				int type, String extraData)
 			throws SQLException {
 
 			long messageId = 0;
@@ -305,7 +311,7 @@ public class UpgradeSocial extends UpgradeProcess {
 			catch (JSONException jsone) {
 			}
 
-			ps.setLong(1, messageId);
+			preparedStatement.setLong(1, messageId);
 		}
 
 		private static final int _TYPE_ADD_COMMENT = 10005;
@@ -321,8 +327,7 @@ public class UpgradeSocial extends UpgradeProcess {
 
 			JSONObject extraDataJSONObject = JSONFactoryUtil.createJSONObject();
 
-			extraDataJSONObject.put(
-				"title", resultSet.getString("subject"));
+			extraDataJSONObject.put("title", resultSet.getString("subject"));
 
 			return extraDataJSONObject;
 		}
@@ -343,21 +348,24 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public void setActivitySQLParameters(PreparedStatement ps)
+		public void setActivitySQLParameters(
+				PreparedStatement preparedStatement)
 			throws SQLException {
 
-			ps.setLong(1, PortalUtil.getClassNameId(getActivityClassName()));
-			ps.setInt(2, _ADD_MESSAGE);
-			ps.setInt(3, _REPLY_MESSAGE);
+			preparedStatement.setLong(
+				1, PortalUtil.getClassNameId(getActivityClassName()));
+			preparedStatement.setInt(2, _ADD_MESSAGE);
+			preparedStatement.setInt(3, _REPLY_MESSAGE);
 		}
 
 		@Override
 		public void setModelSQLParameters(
-				PreparedStatement ps, long companyId, long groupId, long userId,
-				long classNameId, long classPK, int type, String extraData)
+				PreparedStatement preparedStatement, long companyId,
+				long groupId, long userId, long classNameId, long classPK,
+				int type, String extraData)
 			throws SQLException {
 
-			ps.setLong(1, classPK);
+			preparedStatement.setLong(1, classPK);
 		}
 
 		private static final int _ADD_MESSAGE = 1;
@@ -375,8 +383,7 @@ public class UpgradeSocial extends UpgradeProcess {
 
 			JSONObject extraDataJSONObject = JSONFactoryUtil.createJSONObject();
 
-			extraDataJSONObject.put(
-				"title", resultSet.getString("title"));
+			extraDataJSONObject.put("title", resultSet.getString("title"));
 
 			return extraDataJSONObject;
 		}
@@ -397,21 +404,24 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public void setActivitySQLParameters(PreparedStatement ps)
+		public void setActivitySQLParameters(
+				PreparedStatement preparedStatement)
 			throws SQLException {
 
-			ps.setLong(1, PortalUtil.getClassNameId(getActivityClassName()));
-			ps.setInt(2, _ADD_ENTRY);
-			ps.setInt(3, _UPDATE_ENTRY);
+			preparedStatement.setLong(
+				1, PortalUtil.getClassNameId(getActivityClassName()));
+			preparedStatement.setInt(2, _ADD_ENTRY);
+			preparedStatement.setInt(3, _UPDATE_ENTRY);
 		}
 
 		@Override
 		public void setModelSQLParameters(
-				PreparedStatement ps, long companyId, long groupId, long userId,
-				long classNameId, long classPK, int type, String extraData)
+				PreparedStatement preparedStatement, long companyId,
+				long groupId, long userId, long classNameId, long classPK,
+				int type, String extraData)
 			throws SQLException {
 
-			ps.setLong(1, classPK);
+			preparedStatement.setLong(1, classPK);
 		}
 
 		private static final int _ADD_ENTRY = 2;
@@ -450,21 +460,24 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public void setActivitySQLParameters(PreparedStatement ps)
+		public void setActivitySQLParameters(
+				PreparedStatement preparedStatement)
 			throws SQLException {
 
-			ps.setLong(1, PortalUtil.getClassNameId(getActivityClassName()));
-			ps.setInt(2, _ADD_ENTRY);
-			ps.setInt(3, _UPDATE_ENTRY);
+			preparedStatement.setLong(
+				1, PortalUtil.getClassNameId(getActivityClassName()));
+			preparedStatement.setInt(2, _ADD_ENTRY);
+			preparedStatement.setInt(3, _UPDATE_ENTRY);
 		}
 
 		@Override
 		public void setModelSQLParameters(
-				PreparedStatement ps, long companyId, long groupId, long userId,
-				long classNameId, long classPK, int type, String extraData)
+				PreparedStatement preparedStatement, long companyId,
+				long groupId, long userId, long classNameId, long classPK,
+				int type, String extraData)
 			throws SQLException {
 
-			ps.setLong(1, classPK);
+			preparedStatement.setLong(1, classPK);
 		}
 
 		private static final int _ADD_ENTRY = 1;
@@ -482,8 +495,7 @@ public class UpgradeSocial extends UpgradeProcess {
 
 			JSONObject extraDataJSONObject = JSONFactoryUtil.createJSONObject();
 
-			extraDataJSONObject.put(
-				"title", resultSet.getString("title"));
+			extraDataJSONObject.put("title", resultSet.getString("title"));
 
 			return extraDataJSONObject;
 		}
@@ -505,21 +517,24 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public void setActivitySQLParameters(PreparedStatement ps)
+		public void setActivitySQLParameters(
+				PreparedStatement preparedStatement)
 			throws SQLException {
 
-			ps.setLong(1, PortalUtil.getClassNameId(getActivityClassName()));
+			preparedStatement.setLong(
+				1, PortalUtil.getClassNameId(getActivityClassName()));
 		}
 
 		@Override
 		public void setModelSQLParameters(
-				PreparedStatement ps, long companyId, long groupId, long userId,
-				long classNameId, long classPK, int type, String extraData)
+				PreparedStatement preparedStatement, long companyId,
+				long groupId, long userId, long classNameId, long classPK,
+				int type, String extraData)
 			throws SQLException {
 
-			ps.setLong(1, companyId);
-			ps.setLong(2, groupId);
-			ps.setLong(3, classPK);
+			preparedStatement.setLong(1, companyId);
+			preparedStatement.setLong(2, groupId);
+			preparedStatement.setLong(3, classPK);
 		}
 
 	};
@@ -533,8 +548,7 @@ public class UpgradeSocial extends UpgradeProcess {
 
 			JSONObject extraDataJSONObject = JSONFactoryUtil.createJSONObject();
 
-			extraDataJSONObject.put(
-				"title", resultSet.getString("title"));
+			extraDataJSONObject.put("title", resultSet.getString("title"));
 
 			return extraDataJSONObject;
 		}
@@ -555,22 +569,25 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public void setActivitySQLParameters(PreparedStatement ps)
+		public void setActivitySQLParameters(
+				PreparedStatement preparedStatement)
 			throws SQLException {
 
-			ps.setLong(1, PortalUtil.getClassNameId(getActivityClassName()));
-			ps.setInt(2, _ADD_KB_ARTICLE);
-			ps.setInt(3, _UPDATE_KB_ARTICLE);
-			ps.setInt(4, _MOVE_KB_ARTICLE);
+			preparedStatement.setLong(
+				1, PortalUtil.getClassNameId(getActivityClassName()));
+			preparedStatement.setInt(2, _ADD_KB_ARTICLE);
+			preparedStatement.setInt(3, _UPDATE_KB_ARTICLE);
+			preparedStatement.setInt(4, _MOVE_KB_ARTICLE);
 		}
 
 		@Override
 		public void setModelSQLParameters(
-				PreparedStatement ps, long companyId, long groupId, long userId,
-				long classNameId, long classPK, int type, String extraData)
+				PreparedStatement preparedStatement, long companyId,
+				long groupId, long userId, long classNameId, long classPK,
+				int type, String extraData)
 			throws SQLException {
 
-			ps.setLong(1, classPK);
+			preparedStatement.setLong(1, classPK);
 		}
 
 		private static final int _ADD_KB_ARTICLE = 1;
@@ -607,7 +624,7 @@ public class UpgradeSocial extends UpgradeProcess {
 			if (extraDataFactory == null) {
 				return null;
 			}
-			
+
 			try (PreparedStatement preparedStatement =
 					connection.prepareStatement(
 						extraDataFactory.getSQL())) {
@@ -644,21 +661,24 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public void setActivitySQLParameters(PreparedStatement ps)
+		public void setActivitySQLParameters(
+				PreparedStatement preparedStatement)
 			throws SQLException {
 
-			ps.setLong(1, PortalUtil.getClassNameId(getActivityClassName()));
-			ps.setInt(2, _ADD_KB_COMMENT);
-			ps.setInt(3, _UPDATE_KB_COMMENT);
+			preparedStatement.setLong(
+				1, PortalUtil.getClassNameId(getActivityClassName()));
+			preparedStatement.setInt(2, _ADD_KB_COMMENT);
+			preparedStatement.setInt(3, _UPDATE_KB_COMMENT);
 		}
 
 		@Override
 		public void setModelSQLParameters(
-				PreparedStatement ps, long companyId, long groupId, long userId,
-				long classNameId, long classPK, int type, String extraData)
+				PreparedStatement preparedStatement, long companyId,
+				long groupId, long userId, long classNameId, long classPK,
+				int type, String extraData)
 			throws SQLException {
 
-			ps.setLong(1, classPK);
+			preparedStatement.setLong(1, classPK);
 		}
 
 		private static final int _ADD_KB_COMMENT = 5;
@@ -681,8 +701,7 @@ public class UpgradeSocial extends UpgradeProcess {
 
 			JSONObject extraDataJSONObject = JSONFactoryUtil.createJSONObject();
 
-			extraDataJSONObject.put(
-				"title", resultSet.getString("title"));
+			extraDataJSONObject.put("title", resultSet.getString("title"));
 
 			return extraDataJSONObject;
 		}
@@ -703,21 +722,24 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public void setActivitySQLParameters(PreparedStatement ps)
+		public void setActivitySQLParameters(
+				PreparedStatement preparedStatement)
 			throws SQLException {
 
-			ps.setLong(1, PortalUtil.getClassNameId(getActivityClassName()));
-			ps.setInt(2, _ADD_KB_TEMPLATE);
-			ps.setInt(3, _UPDATE_KB_TEMPLATE);
+			preparedStatement.setLong(
+				1, PortalUtil.getClassNameId(getActivityClassName()));
+			preparedStatement.setInt(2, _ADD_KB_TEMPLATE);
+			preparedStatement.setInt(3, _UPDATE_KB_TEMPLATE);
 		}
 
 		@Override
 		public void setModelSQLParameters(
-				PreparedStatement ps, long companyId, long groupId, long userId,
-				long classNameId, long classPK, int type, String extraData)
+				PreparedStatement preparedStatement, long companyId,
+				long groupId, long userId, long classNameId, long classPK,
+				int type, String extraData)
 			throws SQLException {
 
-			ps.setLong(1, classPK);
+			preparedStatement.setLong(1, classPK);
 		}
 
 		private static final int _ADD_KB_TEMPLATE = 2;
@@ -735,10 +757,8 @@ public class UpgradeSocial extends UpgradeProcess {
 
 			JSONObject extraDataJSONObject = JSONFactoryUtil.createJSONObject();
 
-			extraDataJSONObject.put(
-				"title", resultSet.getString("title"));
-			extraDataJSONObject.put(
-				"version", resultSet.getDouble("version"));
+			extraDataJSONObject.put("title", resultSet.getString("title"));
+			extraDataJSONObject.put("version", resultSet.getDouble("version"));
 
 			return extraDataJSONObject;
 		}
@@ -760,24 +780,27 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public void setActivitySQLParameters(PreparedStatement ps)
+		public void setActivitySQLParameters(
+				PreparedStatement preparedStatement)
 			throws SQLException {
 
-			ps.setLong(1, PortalUtil.getClassNameId(getActivityClassName()));
-			ps.setInt(2, _ADD_PAGE);
-			ps.setInt(3, _UPDATE_PAGE);
+			preparedStatement.setLong(
+				1, PortalUtil.getClassNameId(getActivityClassName()));
+			preparedStatement.setInt(2, _ADD_PAGE);
+			preparedStatement.setInt(3, _UPDATE_PAGE);
 		}
 
 		@Override
 		public void setModelSQLParameters(
-				PreparedStatement ps, long companyId, long groupId, long userId,
-				long classNameId, long classPK, int type, String extraData)
+				PreparedStatement preparedStatement, long companyId,
+				long groupId, long userId, long classNameId, long classPK,
+				int type, String extraData)
 			throws SQLException {
 
-			ps.setLong(1, companyId);
-			ps.setLong(2, groupId);
-			ps.setLong(3, classPK);
-			ps.setBoolean(4, true);
+			preparedStatement.setLong(1, companyId);
+			preparedStatement.setLong(2, groupId);
+			preparedStatement.setLong(3, classPK);
+			preparedStatement.setBoolean(4, true);
 		}
 
 		private static final int _ADD_PAGE = 1;
