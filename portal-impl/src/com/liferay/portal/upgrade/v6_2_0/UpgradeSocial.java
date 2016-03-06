@@ -297,10 +297,10 @@ public class UpgradeSocial extends UpgradeProcess {
 			long messageId = 0;
 
 			try {
-				JSONObject extraDataJSONObject =
-					JSONFactoryUtil.createJSONObject(extraData);
+				JSONObject jsonObject = JSONFactoryUtil.createJSONObject(
+					extraData);
 
-				messageId = extraDataJSONObject.getLong("messageId");
+				messageId = jsonObject.getLong("messageId");
 			}
 			catch (JSONException jsone) {
 			}
