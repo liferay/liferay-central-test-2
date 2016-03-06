@@ -245,23 +245,23 @@ public class UpgradeSocial extends UpgradeProcess {
 				ResultSet entityResultSet, String extraData)
 			throws SQLException {
 
+			JSONObject extraDataJSONObject = JSONFactoryUtil.createJSONObject();
+
 			long messageId = 0;
 
 			try {
-				JSONObject extraDataJsonObject =
-					JSONFactoryUtil.createJSONObject(extraData);
+				JSONObject jsonObject = JSONFactoryUtil.createJSONObject(
+					extraData);
 
-				messageId = extraDataJsonObject.getLong("messageId");
+				messageId = jsonObject.getLong("messageId");
 			}
 			catch (JSONException jsone) {
 			}
 
-			JSONObject extraDataJSONObject = JSONFactoryUtil.createJSONObject();
+			extraDataJSONObject.put("messageId", messageId);
 
 			extraDataJSONObject.put(
 				"title", entityResultSet.getString("subject"));
-
-			extraDataJSONObject.put("messageId", messageId);
 
 			return extraDataJSONObject;
 		}
