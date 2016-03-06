@@ -93,7 +93,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		sb.append("select activityId, groupId, companyId, userId, ");
 		sb.append("classNameId, classPK, type_, extraData ");
 		sb.append("from SocialActivity where ");
-		sb.append(extraDataGenerator.getActivityQueryWhereClause());
+		sb.append(extraDataGenerator.getActivitySQLWhereClause());
 
 		try (PreparedStatement ps = connection.prepareStatement(
 				sb.toString())) {
@@ -227,7 +227,7 @@ public class UpgradeSocial extends UpgradeProcess {
 
 		public String getActivityClassName();
 
-		public String getActivityQueryWhereClause();
+		public String getActivitySQLWhereClause();
 
 		public String getSQL();
 
@@ -256,7 +256,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public String getActivityQueryWhereClause() {
+		public String getActivitySQLWhereClause() {
 			return "type_ = ?";
 		}
 
@@ -330,7 +330,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public String getActivityQueryWhereClause() {
+		public String getActivitySQLWhereClause() {
 			return "classNameId = ? and (type_ = ? or type_ = ?)";
 		}
 
@@ -384,7 +384,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public String getActivityQueryWhereClause() {
+		public String getActivitySQLWhereClause() {
 			return "classNameId = ? and (type_ = ? or type_ = ?)";
 		}
 
@@ -439,7 +439,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public String getActivityQueryWhereClause() {
+		public String getActivitySQLWhereClause() {
 			return "classNameId = ? and (type_ = ? or type_ = ?)";
 		}
 
@@ -492,7 +492,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public String getActivityQueryWhereClause() {
+		public String getActivitySQLWhereClause() {
 			return "classNameId = ?";
 		}
 
@@ -543,7 +543,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public String getActivityQueryWhereClause() {
+		public String getActivitySQLWhereClause() {
 			return "classNameId = ? and (type_ = ? or type_ = ? or type_ = ?)";
 		}
 
@@ -600,7 +600,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public String getActivityQueryWhereClause() {
+		public String getActivitySQLWhereClause() {
 			return "classNameId = ? and (type_ = ? or type_ = ?)";
 		}
 
@@ -690,7 +690,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public String getActivityQueryWhereClause() {
+		public String getActivitySQLWhereClause() {
 			return "classNameId = ? and (type_ = ? or type_ = ?)";
 		}
 
@@ -744,15 +744,14 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 
 		@Override
-		public String getActivityQueryWhereClause() {
+		public String getActivitySQLWhereClause() {
 			return "classNameId = ? and (type_ = ? or type_ = ?)";
 		}
 
 		@Override
 		public String getSQL() {
-			return "select title, version from WikiPage where " +
-				"companyId = ? and groupId = ? and resourcePrimKey = ? " +
-					"and head = ?";
+			return "select title, version from WikiPage where companyId = ? " +
+				"and groupId = ? and resourcePrimKey = ? and head = ?";
 		}
 
 		@Override
