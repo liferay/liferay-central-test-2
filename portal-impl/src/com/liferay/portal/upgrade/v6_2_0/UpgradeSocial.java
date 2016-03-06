@@ -217,7 +217,7 @@ public class UpgradeSocial extends UpgradeProcess {
 	protected interface ExtraDataFactory {
 
 		public JSONObject createExtraDataJSONObject(
-				ResultSet entityResultSet, String extraData)
+				ResultSet resultSet, String extraData)
 			throws SQLException;
 
 		public String getActivityClassName();
@@ -242,7 +242,7 @@ public class UpgradeSocial extends UpgradeProcess {
 
 		@Override
 		public JSONObject createExtraDataJSONObject(
-				ResultSet entityResultSet, String extraData)
+				ResultSet resultSet, String extraData)
 			throws SQLException {
 
 			JSONObject extraDataJSONObject = JSONFactoryUtil.createJSONObject();
@@ -261,7 +261,7 @@ public class UpgradeSocial extends UpgradeProcess {
 			extraDataJSONObject.put("messageId", messageId);
 
 			extraDataJSONObject.put(
-				"title", entityResultSet.getString("subject"));
+				"title", resultSet.getString("subject"));
 
 			return extraDataJSONObject;
 		}
@@ -316,13 +316,13 @@ public class UpgradeSocial extends UpgradeProcess {
 
 		@Override
 		public JSONObject createExtraDataJSONObject(
-				ResultSet entityResultSet, String extraData)
+				ResultSet resultSet, String extraData)
 			throws SQLException {
 
 			JSONObject extraDataJSONObject = JSONFactoryUtil.createJSONObject();
 
 			extraDataJSONObject.put(
-				"title", entityResultSet.getString("subject"));
+				"title", resultSet.getString("subject"));
 
 			return extraDataJSONObject;
 		}
@@ -370,13 +370,13 @@ public class UpgradeSocial extends UpgradeProcess {
 
 		@Override
 		public JSONObject createExtraDataJSONObject(
-				ResultSet entityResultSet, String extraData)
+				ResultSet resultSet, String extraData)
 			throws SQLException {
 
 			JSONObject extraDataJSONObject = JSONFactoryUtil.createJSONObject();
 
 			extraDataJSONObject.put(
-				"title", entityResultSet.getString("title"));
+				"title", resultSet.getString("title"));
 
 			return extraDataJSONObject;
 		}
@@ -424,12 +424,12 @@ public class UpgradeSocial extends UpgradeProcess {
 
 		@Override
 		public JSONObject createExtraDataJSONObject(
-				ResultSet entityResultSet, String extraData)
+				ResultSet resultSet, String extraData)
 			throws SQLException {
 
 			JSONObject extraDataJSONObject = JSONFactoryUtil.createJSONObject();
 
-			extraDataJSONObject.put("title", entityResultSet.getString("name"));
+			extraDataJSONObject.put("title", resultSet.getString("name"));
 
 			return extraDataJSONObject;
 		}
@@ -477,13 +477,13 @@ public class UpgradeSocial extends UpgradeProcess {
 
 		@Override
 		public JSONObject createExtraDataJSONObject(
-				ResultSet entityResultSet, String extraData)
+				ResultSet resultSet, String extraData)
 			throws SQLException {
 
 			JSONObject extraDataJSONObject = JSONFactoryUtil.createJSONObject();
 
 			extraDataJSONObject.put(
-				"title", entityResultSet.getString("title"));
+				"title", resultSet.getString("title"));
 
 			return extraDataJSONObject;
 		}
@@ -500,8 +500,8 @@ public class UpgradeSocial extends UpgradeProcess {
 
 		@Override
 		public String getSQL() {
-			return "select title from DLFileEntry where companyId = ? " +
-				"and groupId = ? and fileEntryId = ?";
+			return "select title from DLFileEntry where companyId = ? and " +
+				"groupId = ? and fileEntryId = ?";
 		}
 
 		@Override
@@ -528,13 +528,13 @@ public class UpgradeSocial extends UpgradeProcess {
 
 		@Override
 		public JSONObject createExtraDataJSONObject(
-				ResultSet entityResultSet, String extraData)
+				ResultSet resultSet, String extraData)
 			throws SQLException {
 
 			JSONObject extraDataJSONObject = JSONFactoryUtil.createJSONObject();
 
 			extraDataJSONObject.put(
-				"title", entityResultSet.getString("title"));
+				"title", resultSet.getString("title"));
 
 			return extraDataJSONObject;
 		}
@@ -585,13 +585,13 @@ public class UpgradeSocial extends UpgradeProcess {
 
 		@Override
 		public JSONObject createExtraDataJSONObject(
-				ResultSet entityResultSet, String extraData)
+				ResultSet resultSet, String extraData)
 			throws SQLException {
 
 			JSONObject extraDataJSONObject = null;
 
-			long classnameId = entityResultSet.getLong("classNameId");
-			long classpk = entityResultSet.getLong("classPK");
+			long classnameId = resultSet.getLong("classNameId");
+			long classpk = resultSet.getLong("classPK");
 
 			ExtraDataFactory extraDataFactory = null;
 
@@ -674,13 +674,13 @@ public class UpgradeSocial extends UpgradeProcess {
 
 		@Override
 		public JSONObject createExtraDataJSONObject(
-				ResultSet entityResultSet, String extraData)
+				ResultSet resultSet, String extraData)
 			throws SQLException {
 
 			JSONObject extraDataJSONObject = JSONFactoryUtil.createJSONObject();
 
 			extraDataJSONObject.put(
-				"title", entityResultSet.getString("title"));
+				"title", resultSet.getString("title"));
 
 			return extraDataJSONObject;
 		}
@@ -728,15 +728,15 @@ public class UpgradeSocial extends UpgradeProcess {
 
 		@Override
 		public JSONObject createExtraDataJSONObject(
-				ResultSet entityResultSet, String extraData)
+				ResultSet resultSet, String extraData)
 			throws SQLException {
 
 			JSONObject extraDataJSONObject = JSONFactoryUtil.createJSONObject();
 
 			extraDataJSONObject.put(
-				"title", entityResultSet.getString("title"));
+				"title", resultSet.getString("title"));
 			extraDataJSONObject.put(
-				"version", entityResultSet.getDouble("version"));
+				"version", resultSet.getDouble("version"));
 
 			return extraDataJSONObject;
 		}
