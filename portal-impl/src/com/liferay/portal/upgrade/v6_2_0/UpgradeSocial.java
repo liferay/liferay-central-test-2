@@ -40,19 +40,19 @@ import java.util.Map;
 public class UpgradeSocial extends UpgradeProcess {
 
 	protected String createExtraData(
-			ExtraDataFactory extraDataGenerator, long companyId, long groupId,
+			ExtraDataFactory extraDataFactory, long companyId, long groupId,
 			long userId, long classNameId, long classPK, int type,
 			String extraData)
 		throws Exception {
 
-		if (extraDataGenerator == null) {
+		if (extraDataFactory == null) {
 			return null;
 		}
 
 		try (PreparedStatement ps = connection.prepareStatement(
-				extraDataGenerator.getSQL())) {
+				extraDataFactory.getSQL())) {
 
-			extraDataGenerator.setModelSQLParameters(
+			extraDataFactory.setModelSQLParameters(
 				ps, groupId, companyId, userId, classNameId, classPK, type,
 				extraData);
 
@@ -61,7 +61,7 @@ public class UpgradeSocial extends UpgradeProcess {
 
 				while (rs.next()) {
 					extraDataJSONObject =
-						extraDataGenerator.createExtraDataJSONObject(
+						extraDataFactory.createExtraDataJSONObject(
 							rs, extraData);
 				}
 
@@ -79,7 +79,7 @@ public class UpgradeSocial extends UpgradeProcess {
 	}
 
 	protected Map<Long, String> getExtraDataMap(
-			ExtraDataFactory extraDataGenerator)
+			ExtraDataFactory extraDataFactory)
 		throws Exception {
 
 		Map<Long, String> extraDataMap = new HashMap<>();
@@ -87,14 +87,14 @@ public class UpgradeSocial extends UpgradeProcess {
 		StringBundler sb = new StringBundler(4);
 
 		sb.append("select activityId, groupId, companyId, userId, ");
-		sb.append("classNameId, classPK, type_, extraData ");
-		sb.append("from SocialActivity where ");
-		sb.append(extraDataGenerator.getActivitySQLWhereClause());
+		sb.append("classNameId, classPK, type_, extraData from ");
+		sb.append("SocialActivity where ");
+		sb.append(extraDataFactory.getActivitySQLWhereClause());
 
 		try (PreparedStatement ps = connection.prepareStatement(
 				sb.toString())) {
 
-			extraDataGenerator.setActivitySQLParameters(ps);
+			extraDataFactory.setActivitySQLParameters(ps);
 
 			try (ResultSet rs = ps.executeQuery()) {
 				while (rs.next()) {
@@ -108,7 +108,7 @@ public class UpgradeSocial extends UpgradeProcess {
 					long userId = rs.getLong("userId");
 
 					String newExtraData = createExtraData(
-						extraDataGenerator, groupId, companyId, userId,
+						extraDataFactory, groupId, companyId, userId,
 						classNameId, classPK, type, extraData);
 
 					if (newExtraData != null) {
@@ -131,15 +131,15 @@ public class UpgradeSocial extends UpgradeProcess {
 			new WikiPageExtraDataFactory()
 		};
 
-		for (ExtraDataFactory extraDataGenerator : extraDataFactories) {
-			updateActivities(extraDataGenerator);
+		for (ExtraDataFactory extraDataFactory : extraDataFactories) {
+			updateActivities(extraDataFactory);
 		}
 	}
 
-	protected void updateActivities(ExtraDataFactory extraDataGenerator)
+	protected void updateActivities(ExtraDataFactory extraDataFactory)
 		throws Exception {
 
-		Map<Long, String> extraDataMap = getExtraDataMap(extraDataGenerator);
+		Map<Long, String> extraDataMap = getExtraDataMap(extraDataFactory);
 
 		String updateActivityQuery =
 			"update SocialActivity set extraData = ? where activityId = ?";
@@ -595,30 +595,29 @@ public class UpgradeSocial extends UpgradeProcess {
 			long classnameId = entityResultSet.getLong("classNameId");
 			long classpk = entityResultSet.getLong("classPK");
 
-			ExtraDataFactory extraDataGenerator = null;
+			ExtraDataFactory extraDataFactory = null;
 
 			if (classnameId == PortalUtil.getClassNameId(
-					_kbArticleExtraDataGenerator.getActivityClassName())) {
+					_kbArticleExtraDataFactory.getActivityClassName())) {
 
-				extraDataGenerator = _kbArticleExtraDataGenerator;
+				extraDataFactory = _kbArticleExtraDataFactory;
 			}
 			else if (classnameId == PortalUtil.getClassNameId(
-						_kbTemplateExtraDataGenerator.getActivityClassName(
-							))) {
+						_kbTemplateExtraDataFactory.getActivityClassName())) {
 
-				extraDataGenerator = _kbTemplateExtraDataGenerator;
+				extraDataFactory = _kbTemplateExtraDataFactory;
 			}
 
-			if (extraDataGenerator != null) {
+			if (extraDataFactory != null) {
 				try (PreparedStatement ps = connection.prepareStatement(
-						extraDataGenerator.getSQL())) {
+						extraDataFactory.getSQL())) {
 
 					ps.setLong(1, classpk);
 
 					try (ResultSet rs = ps.executeQuery()) {
 						while (rs.next()) {
 							extraDataJSONObject =
-								extraDataGenerator.createExtraDataJSONObject(
+								extraDataFactory.createExtraDataJSONObject(
 									rs, StringPool.BLANK);
 						}
 					}
@@ -666,9 +665,9 @@ public class UpgradeSocial extends UpgradeProcess {
 
 		private static final int _UPDATE_KB_COMMENT = 6;
 
-		private final KBArticleExtraDataFactory _kbArticleExtraDataGenerator =
+		private final KBArticleExtraDataFactory _kbArticleExtraDataFactory =
 			new KBArticleExtraDataFactory();
-		private final KBTemplateExtraDataFactory _kbTemplateExtraDataGenerator =
+		private final KBTemplateExtraDataFactory _kbTemplateExtraDataFactory =
 			new KBTemplateExtraDataFactory();
 
 	};
