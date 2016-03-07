@@ -412,7 +412,7 @@ public class LayoutImpl extends LayoutBaseImpl {
 
 		List<Portlet> portlets = new ArrayList<>();
 
-		List<String> layoutPortlets = _getLayoutPortlets();
+		List<String> layoutPortletIds = _getLayoutPortletIds();
 
 		for (PortletPreferences portletPreference : portletPreferences) {
 			String portletId = portletPreference.getPortletId();
@@ -422,7 +422,7 @@ public class LayoutImpl extends LayoutBaseImpl {
 
 			if ((portlet == null) || !portlet.isReady() ||
 				portlet.isUndeployedPortlet() || !portlet.isActive() ||
-				!layoutPortlets.contains(portletId)) {
+				!layoutPortletIds.contains(portletId)) {
 
 				continue;
 			}
@@ -1270,8 +1270,8 @@ public class LayoutImpl extends LayoutBaseImpl {
 		}
 	}
 
-	private List<String> _getLayoutPortlets() {
-		List<String> layoutPortlets = new ArrayList<>();
+	private List<String> _getLayoutPortletIds() {
+		List<String> layoutPortletIds = new ArrayList<>();
 
 		List<PortletPreferences> portletPreferences =
 			PortletPreferencesLocalServiceUtil.getPortletPreferences(
@@ -1279,10 +1279,10 @@ public class LayoutImpl extends LayoutBaseImpl {
 				PortletKeys.PREFS_OWNER_TYPE_LAYOUT, getPlid());
 
 		for (PortletPreferences portletPreference : portletPreferences) {
-			layoutPortlets.add(portletPreference.getPortletId());
+			layoutPortletIds.add(portletPreference.getPortletId());
 		}
 
-		return layoutPortlets;
+		return layoutPortletIds;
 	}
 
 	private String _getLayoutTypeControllerType() {
