@@ -32,7 +32,6 @@ DDLRecordSet selRecordSet = DDLRecordSetServiceUtil.fetchRecordSet(recordSetId);
 
 String orderByCol = ParamUtil.getString(request, "orderByCol", "modified-date");
 String orderByType = ParamUtil.getString(request, "orderByType", "asc");
-String tabsNames = (selRecordSet == null) ? "lists" : "lists,optional-configuration";
 %>
 
 <liferay-portlet:actionURL portletConfiguration="<%= true %>" var="configurationActionURL" />
@@ -40,7 +39,7 @@ String tabsNames = (selRecordSet == null) ? "lists" : "lists,optional-configurat
 <liferay-portlet:renderURL portletConfiguration="<%= true %>" varImpl="configurationRenderURL" />
 
 <liferay-ui:tabs
-	names="<%= tabsNames %>"
+	names='<%= (selRecordSet == null) ? "lists" : "lists,optional-configuration" %>'
 	refresh="<%= false %>"
 	type="tabs nav-tabs-default"
 >
