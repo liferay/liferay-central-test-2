@@ -18,9 +18,9 @@
 
 <%
 String portletResourceNamespace = ParamUtil.getString(request, "portletResourceNamespace");
+String className = ParamUtil.getString(request, "className");
 String script = ParamUtil.getString(request, "script");
 String fieldsJSONArrayString = ParamUtil.getString(request, "fieldsJSONArrayString");
-String className = ParamUtil.getString(request, "className");
 
 scopeAvailableFields = ParamUtil.getString(request, "scopeAvailableFields");
 scopeClassNameId = PortalUtil.getClassNameId(className);
