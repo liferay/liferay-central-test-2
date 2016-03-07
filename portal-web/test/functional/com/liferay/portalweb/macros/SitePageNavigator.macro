@@ -1,7 +1,5 @@
 <definition>
 	<command name="gotoAddPage">
-		<execute macro="ProductMenuHelper#openProductMenu" />
-
 		<execute macro="ProductMenuHelper#expandPanelSites" />
 
 		<execute macro="ProductMenuHelper#expandCategory">
