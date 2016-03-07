@@ -33,6 +33,26 @@
 			</else>
 		</if>
 
+		<execute macro="Panel#expandPanel">
+			<var name="panelHeading" value="Details" />
+		</execute>
+
+		<if>
+			<equals arg1="${templateLanguage}" arg2="ftl" />
+			<then>
+				<execute function="AssertSelectedLabel" locator1="DDMEditTemplate#DETAILS_LANGUAGE_SELECT" value1="FreeMarker (.ftl)" />
+			</then>
+			<elseif>
+				<equals arg1="${templateLanguage}" arg2="xsl" />
+				<then>
+					<execute function="AssertSelectedLabel" locator1="DDMEditTemplate#DETAILS_LANGUAGE_SELECT" value1="Extensible Stylesheet Language (.xsl)" />
+				</then>
+			</elseif>
+			<else>
+				<execute function="AssertSelectedLabel" locator1="DDMEditTemplate#DETAILS_LANGUAGE_SELECT" value1="Velocity (.vm)" />
+			</else>
+		</if>
+
 		<if>
 			<isset var="templateFile" />
 			<then>
