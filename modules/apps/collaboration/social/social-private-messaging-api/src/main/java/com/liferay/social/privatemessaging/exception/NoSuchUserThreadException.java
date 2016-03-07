@@ -12,16 +12,28 @@
  * details.
  */
 
-package com.liferay.privatemessaging.constants;
+package com.liferay.social.privatemessaging.exception;
+
+import com.liferay.portal.kernel.exception.NoSuchModelException;
 
 /**
- * @author Eudaldo Alonso
- * @author Peter Fellwock
+ * @author Brian Wing Shun Chan
  */
-public class PrivateMessagingPortletKeys
-	extends com.liferay.portal.kernel.util.PortletKeys {
+public class NoSuchUserThreadException extends NoSuchModelException {
 
-	public static final String PRIVATE_MESSAGING =
-		"com_liferay_privatemessaging_web_portlet_PrivateMessagingPortlet";
+	public NoSuchUserThreadException() {
+	}
+
+	public NoSuchUserThreadException(String msg) {
+		super(msg);
+	}
+
+	public NoSuchUserThreadException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
+
+	public NoSuchUserThreadException(Throwable cause) {
+		super(cause);
+	}
 
 }
