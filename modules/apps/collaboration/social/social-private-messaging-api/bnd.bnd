@@ -3,6 +3,7 @@ Bundle-SymbolicName: com.liferay.privatemessaging.api
 Bundle-Version: 1.0.0
 Export-Package:\
 	com.liferay.privatemessaging.configuration,\
+	com.liferay.privatemessaging.constants,\
 	com.liferay.privatemessaging.exception,\
 	com.liferay.privatemessaging.model,\
 	com.liferay.privatemessaging.service,\
