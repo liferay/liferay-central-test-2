@@ -62,8 +62,8 @@ public class GradleUtil extends com.liferay.gradle.util.GradleUtil {
 			BasePortalToolDefaultsPlugin.class.getClassLoader();
 
 		try (InputStream inputStream = classLoader.getResourceAsStream(
-				"com/liferay/gradle/plugins/dependencies/" +
-					"portal-tools.properties")) {
+				"com/liferay/gradle/plugins/dependencies" +
+					"/portal-tools.properties")) {
 
 			_portalToolVersions.load(inputStream);
 		}
