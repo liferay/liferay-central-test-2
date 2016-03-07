@@ -6,7 +6,9 @@
 
 		<execute function="Type#clickAtSendKeys" locator1="TextInput#NAME" value1="${templateName}" />
 
-		<execute macro="WebContentNavigator#showTemplateDetails" />
+		<execute macro="Panel#expandPanel">
+			<var name="panelHeading" value="Details" />
+		</execute>
 
 		<if>
 			<isset var="templateDescription" />
@@ -276,7 +278,9 @@
 
 		<execute function="AssertTextEquals" locator1="TextInput#NAME" value1="${templateName}" />
 
-		<execute macro="WebContentNavigator#showTemplateDetails" />
+		<execute macro="Panel#expandPanel">
+			<var name="panelHeading" value="Details" />
+		</execute>
 
 		<execute function="AssertTextEquals" locator1="TextArea#DESCRIPTION" value1="${templateDescription}" />
 
