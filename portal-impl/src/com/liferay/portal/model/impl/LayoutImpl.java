@@ -70,20 +70,20 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.PortletURLImpl;
 
 import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 import javax.portlet.PortletException;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletRequest;
 import javax.portlet.WindowState;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -412,7 +412,7 @@ public class LayoutImpl extends LayoutBaseImpl {
 
 		List<Portlet> portlets = new ArrayList<>();
 
-		List<String> layoutPortletIds = _getLayoutPortletIds();
+		Set<String> layoutPortletIds = _getLayoutPortletIds();
 
 		for (PortletPreferences portletPreference : portletPreferences) {
 			String portletId = portletPreference.getPortletId();
@@ -1270,8 +1270,8 @@ public class LayoutImpl extends LayoutBaseImpl {
 		}
 	}
 
-	private List<String> _getLayoutPortletIds() {
-		List<String> layoutPortletIds = new ArrayList<>();
+	private Set<String> _getLayoutPortletIds() {
+		Set<String> layoutPortletIds = new HashSet<>();
 
 		List<PortletPreferences> portletPreferences =
 			PortletPreferencesLocalServiceUtil.getPortletPreferences(
