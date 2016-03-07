@@ -47,10 +47,10 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.webserver.WebServerServletTokenUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.privatemessaging.configuration.PrivateMessagingConfiguration;
+import com.liferay.privatemessaging.constants.PrivateMessagingConstants;
+import com.liferay.privatemessaging.constants.PrivateMessagingPortletKeys;
 import com.liferay.privatemessaging.model.UserThread;
 import com.liferay.privatemessaging.service.base.UserThreadLocalServiceBaseImpl;
-import com.liferay.privatemessaging.util.PrivateMessagingConstants;
-import com.liferay.privatemessaging.util.PrivateMessagingPortletKeys;
 import com.liferay.util.ContentUtil;
 
 import java.io.InputStream;

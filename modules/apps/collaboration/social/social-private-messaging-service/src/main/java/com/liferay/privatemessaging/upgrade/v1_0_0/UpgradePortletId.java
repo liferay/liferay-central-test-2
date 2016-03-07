@@ -14,7 +14,7 @@
 
 package com.liferay.privatemessaging.upgrade.v1_0_0;
 
-import com.liferay.privatemessaging.util.PrivateMessagingPortletKeys;
+import com.liferay.privatemessaging.constants.PrivateMessagingPortletKeys;
 
 /**
  * @author Peter Fellwock

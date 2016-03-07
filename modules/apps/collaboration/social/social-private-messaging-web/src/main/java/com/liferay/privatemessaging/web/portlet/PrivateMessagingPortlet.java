@@ -53,8 +53,8 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.privatemessaging.configuration.PrivateMessagingConfiguration;
+import com.liferay.privatemessaging.constants.PrivateMessagingPortletKeys;
 import com.liferay.privatemessaging.service.UserThreadLocalService;
-import com.liferay.privatemessaging.util.PrivateMessagingPortletKeys;
 import com.liferay.privatemessaging.util.PrivateMessagingUtil;
 
 import java.io.File;

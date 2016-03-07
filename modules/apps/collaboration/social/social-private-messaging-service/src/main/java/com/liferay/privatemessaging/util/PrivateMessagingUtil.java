@@ -45,6 +45,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.comparator.UserFirstNameComparator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.privatemessaging.configuration.PrivateMessagingConfiguration;
+import com.liferay.privatemessaging.constants.RoleConstants;
 import com.liferay.privatemessaging.exception.NoSuchUserThreadException;
 import com.liferay.privatemessaging.model.UserThread;
 import com.liferay.privatemessaging.service.UserThreadLocalServiceUtil;
