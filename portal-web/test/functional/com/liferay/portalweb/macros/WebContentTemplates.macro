@@ -33,6 +33,10 @@
 			</else>
 		</if>
 
+		<var name="key_panelHeading" value="Details" />
+
+		<execute function="AssertElementPresent" locator1="Panel#PANEL_HEADING_COLLAPSED" value1="Details" />
+
 		<execute macro="Panel#expandPanel">
 			<var name="panelHeading" value="Details" />
 		</execute>
