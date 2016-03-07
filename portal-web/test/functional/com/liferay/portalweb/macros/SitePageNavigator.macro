@@ -14,7 +14,7 @@
 			<condition function="IsElementNotPresent" locator1="ProductMenu#PUBLIC_PAGES" />
 			<then>
 				<execute macro="ProductMenuHelper#addFirstPage">
-					<var name="${sitePagePrivacy}" value="${sitePagePrivacy}" />
+					<var name="sitePagePrivacy" value="${sitePagePrivacy}" />
 				</execute>
 			</then>
 			<else>
