@@ -44,14 +44,14 @@ import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.comparator.UserFirstNameComparator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
+import com.liferay.sites.kernel.util.SitesUtil;
+import com.liferay.social.kernel.model.SocialRelationConstants;
 import com.liferay.social.privatemessaging.configuration.PrivateMessagingConfiguration;
 import com.liferay.social.privatemessaging.constants.RoleConstants;
 import com.liferay.social.privatemessaging.exception.NoSuchUserThreadException;
 import com.liferay.social.privatemessaging.model.UserThread;
 import com.liferay.social.privatemessaging.service.UserThreadLocalServiceUtil;
 import com.liferay.social.privatemessaging.service.UserThreadServiceUtil;
-import com.liferay.sites.kernel.util.SitesUtil;
-import com.liferay.social.kernel.model.SocialRelationConstants;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
