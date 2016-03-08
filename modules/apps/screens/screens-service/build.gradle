@@ -13,7 +13,7 @@ dependencies {
 	provided project(":apps:business-productivity:dynamic-data-lists:dynamic-data-lists-api")
 	provided project(":apps:business-productivity:dynamic-data-lists:dynamic-data-lists-service")
 	provided project(":apps:business-productivity:dynamic-data-mapping:dynamic-data-mapping-api")
-	provided project(":apps:platform:portal:portal-upgrade")
+	provided project(":apps:foundation:portal:portal-upgrade")
 	provided project(":apps:screens:screens-api")
 	provided project(":apps:web-experience:asset:asset-publisher-web")
 	provided project(":apps:web-experience:journal:journal-api")

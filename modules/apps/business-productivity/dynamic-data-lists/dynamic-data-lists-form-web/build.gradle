@@ -25,7 +25,7 @@ dependencies {
 	provided project(":apps:business-productivity:dynamic-data-mapping:dynamic-data-mapping-form-values-query")
 	provided project(":apps:business-productivity:dynamic-data-mapping:dynamic-data-mapping-io")
 	provided project(":apps:business-productivity:dynamic-data-mapping:dynamic-data-mapping-validator")
-	provided project(":apps:platform:frontend:frontend-taglib")
+	provided project(":apps:foundation:frontend:frontend-taglib")
 	provided project(":apps:web-experience:application-list:application-list-api")
 }
 
