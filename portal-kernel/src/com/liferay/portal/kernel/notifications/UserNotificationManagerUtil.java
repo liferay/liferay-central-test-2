@@ -207,6 +207,30 @@ public class UserNotificationManagerUtil {
 		}
 	}
 
+	private UserNotificationDefinition _fetchUserNotificationDefinition(
+		String portletId, long classNameId, int notificationType) {
+
+		List<UserNotificationDefinition> userNotificationDefinitions =
+			_userNotificationDefinitions.getService(portletId);
+
+		if (userNotificationDefinitions == null) {
+			return null;
+		}
+
+		for (UserNotificationDefinition userNotificationDefinition :
+				userNotificationDefinitions) {
+
+			if ((userNotificationDefinition.getClassNameId() == classNameId) &&
+				(userNotificationDefinition.getNotificationType() ==
+					notificationType)) {
+
+				return userNotificationDefinition;
+			}
+		}
+
+		return null;
+	}
+
 	private Map<String, List<UserNotificationDefinition>>
 		_getUserNotificationDefinitions(boolean active) {
 
@@ -236,30 +260,6 @@ public class UserNotificationManagerUtil {
 		}
 
 		return Collections.unmodifiableMap(userNotificationDefinitionsMap);
-	}
-
-	private UserNotificationDefinition _fetchUserNotificationDefinition(
-		String portletId, long classNameId, int notificationType) {
-
-		List<UserNotificationDefinition> userNotificationDefinitions =
-			_userNotificationDefinitions.getService(portletId);
-
-		if (userNotificationDefinitions == null) {
-			return null;
-		}
-
-		for (UserNotificationDefinition userNotificationDefinition :
-				userNotificationDefinitions) {
-
-			if ((userNotificationDefinition.getClassNameId() == classNameId) &&
-				(userNotificationDefinition.getNotificationType() ==
-					notificationType)) {
-
-				return userNotificationDefinition;
-			}
-		}
-
-		return null;
 	}
 
 	private UserNotificationFeedEntry _interpret(
