@@ -49,8 +49,8 @@ public class MappingSqlQueryImpl<T> implements MappingSqlQuery<T> {
 	public List<T> execute(Object... params) throws SQLException {
 		if (_paramSetters.length != params.length) {
 			throw new IllegalArgumentException(
-				"Wrong parameter number, expected " + _paramSetters.length +
-					", actual " + params.length);
+				"Expected " + _paramSetters.length + " parameters instead of " +
+					params.length + " parameters");
 		}
 
 		try (Connection connection = ConnectionUtil.getConnection(_dataSource);
