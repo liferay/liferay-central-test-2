@@ -51,8 +51,9 @@ Map<String, String[]> parameterMap = (Map<String, String[]>)GetterUtil.getObject
 				<c:if test="<%= LayoutStagingUtil.isBranchingLayoutSet(group, privateLayout) %>">
 
 					<%
-					long layoutSetBranchId = MapUtil.getLong(parameterMap, "layoutSetBranchId");
 					List<LayoutSetBranch> layoutSetBranches = null;
+
+					long layoutSetBranchId = MapUtil.getLong(parameterMap, "layoutSetBranchId");
 
 					if (disableInputs && (layoutSetBranchId > 0)) {
 						layoutSetBranches = new ArrayList<>(1);
