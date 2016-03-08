@@ -1,5 +1,5 @@
 dependencies {
-	provided project(":apps:platform:map:map-taglib")
+	provided project(":apps:foundation:map:map-taglib")
 }
 
 liferay {

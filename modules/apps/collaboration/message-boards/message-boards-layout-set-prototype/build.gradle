@@ -5,7 +5,7 @@ dependencies {
 	provided project(":apps:collaboration:message-boards:message-boards-web")
 	provided project(":apps:collaboration:social:social-user-statistics-web")
 	provided project(":apps:collaboration:wiki:wiki-api")
-	provided project(":apps:platform:portal:portal-instance-lifecycle")
+	provided project(":apps:foundation:portal:portal-instance-lifecycle")
 	provided project(":apps:web-experience:asset:asset-categories-navigation-web")
 	provided project(":apps:web-experience:asset:asset-tags-navigation-web")
 	provided project(":apps:web-experience:layout:layout-set-prototype-api")

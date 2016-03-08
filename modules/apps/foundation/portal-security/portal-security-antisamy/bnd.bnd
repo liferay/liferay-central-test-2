@@ -20,4 +20,4 @@ Include-Resource:\
 	@lib/xml-apis-ext.jar
 Liferay-Releng-Module-Group-Description:
 Liferay-Releng-Module-Group-Title:
--include: ../../../../../marketplace/platform/bnd.bnd
+-include: ../../../../../marketplace/foundation/bnd.bnd

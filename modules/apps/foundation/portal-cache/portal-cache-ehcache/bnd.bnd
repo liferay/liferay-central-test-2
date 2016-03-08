@@ -7,4 +7,4 @@ Export-Package:\
 	com.liferay.portal.cache.ehcache.event
 Liferay-Releng-Module-Group-Description:
 Liferay-Releng-Module-Group-Title: Cache Engines
--include: ../../../../../marketplace/platform/bnd.bnd
+-include: ../../../../../marketplace/foundation/bnd.bnd

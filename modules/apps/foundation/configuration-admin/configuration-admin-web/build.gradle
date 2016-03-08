@@ -12,8 +12,8 @@ dependencies {
 	provided project(":apps:business-productivity:dynamic-data-mapping:dynamic-data-mapping-api")
 	provided project(":apps:business-productivity:dynamic-data-mapping:dynamic-data-mapping-form-renderer")
 	provided project(":apps:business-productivity:dynamic-data-mapping:dynamic-data-mapping-form-values-factory")
-	provided project(":apps:platform:frontend:frontend-taglib")
-	provided project(":apps:platform:osgi-service-tracker-collections")
+	provided project(":apps:foundation:frontend:frontend-taglib")
+	provided project(":apps:foundation:osgi-service-tracker-collections")
 	provided project(":apps:web-experience:application-list:application-list-api")
 
 	testCompile group: "com.liferay.portal", name: "com.liferay.portal.impl", version: "1.0.0"

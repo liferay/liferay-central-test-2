@@ -9,8 +9,8 @@ dependencies {
 	provided project(":apps:marketplace:marketplace-api")
 	provided project(":apps:marketplace:marketplace-service")
 	provided project(":apps:marketplace:marketplace-store-web")
-	provided project(":apps:platform:frontend:frontend-taglib")
-	provided project(":apps:platform:osgi-service-tracker-collections")
+	provided project(":apps:foundation:frontend:frontend-taglib")
+	provided project(":apps:foundation:osgi-service-tracker-collections")
 	provided project(":apps:web-experience:application-list:application-list-api")
 }
 

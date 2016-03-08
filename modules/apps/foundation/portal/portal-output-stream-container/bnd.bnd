@@ -5,4 +5,4 @@ Export-Package: com.liferay.portal.output.stream.container
 Include-Resource: @lib/org.apache.felix.utils.jar!/org/apache/felix/utils/log/*
 Liferay-Releng-Module-Group-Description:
 Liferay-Releng-Module-Group-Title: Runtime
--include: ../../../../../marketplace/platform/bnd.bnd
+-include: ../../../../../marketplace/foundation/bnd.bnd
