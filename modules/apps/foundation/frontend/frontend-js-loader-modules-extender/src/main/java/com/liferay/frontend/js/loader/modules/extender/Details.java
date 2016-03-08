@@ -21,7 +21,7 @@ import com.liferay.portal.configuration.metatype.annotations.ExtendedObjectClass
 /**
  * @author Raymond Augé
  */
-@ExtendedObjectClassDefinition(category = "platform")
+@ExtendedObjectClassDefinition(category = "foundation")
 @Meta.OCD(
 	id = "com.liferay.frontend.js.loader.modules.extender.LoaderModulesServlet",
 	localization = "content/Language", name = "details.configuration.name"

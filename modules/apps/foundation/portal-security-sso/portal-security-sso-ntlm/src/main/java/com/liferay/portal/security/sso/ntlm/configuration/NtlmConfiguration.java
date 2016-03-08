@@ -29,7 +29,7 @@ import com.liferay.portal.configuration.metatype.annotations.ExtendedObjectClass
  *
  * @author Michael C. Han
  */
-@ExtendedObjectClassDefinition(category = "platform")
+@ExtendedObjectClassDefinition(category = "foundation")
 @Meta.OCD(
 	id = "com.liferay.portal.security.sso.ntlm.configuration.NtlmConfiguration",
 	localization = "content/Language", name = "ntlm.configuration.name"

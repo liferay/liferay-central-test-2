@@ -21,7 +21,7 @@ import com.liferay.portal.configuration.metatype.annotations.ExtendedObjectClass
 /**
  * @author Manuel de la Peña
  */
-@ExtendedObjectClassDefinition(category = "platform")
+@ExtendedObjectClassDefinition(category = "foundation")
 @Meta.OCD(
 	id = "com.liferay.portal.store.jcr.configuration.JCRStoreConfiguration",
 	localization = "content/Language", name = "jcr.store.configuration.name"

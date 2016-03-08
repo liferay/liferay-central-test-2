@@ -21,7 +21,7 @@ import com.liferay.portal.configuration.metatype.annotations.ExtendedObjectClass
 /**
  * @author Manuel de la Peña
  */
-@ExtendedObjectClassDefinition(category = "platform")
+@ExtendedObjectClassDefinition(category = "foundation")
 @Meta.OCD(
 	id = "com.liferay.portal.store.cmis.configuration.CMISStoreConfiguration",
 	localization = "content/Language", name = "cmis.store.configuration.name"

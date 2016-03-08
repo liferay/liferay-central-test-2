@@ -22,7 +22,7 @@ import com.liferay.portal.kernel.scheduler.TimeUnit;
 /**
  * @author Michael C. Han
  */
-@ExtendedObjectClassDefinition(category = "platform")
+@ExtendedObjectClassDefinition(category = "foundation")
 @Meta.OCD(
 	id = "com.liferay.server.admin.web.configuration.PluginRepositoriesConfiguration",
 	localization = "content/Language",
