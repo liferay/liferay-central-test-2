@@ -126,7 +126,7 @@
 		<execute function="AssertTextEquals" locator1="Notifications#NOTIFICATION_DELIVERY_TEXT_2" value1="comments on a microblog you are tagged in." />
 		<execute function="AssertTextEquals" locator1="Notifications#NOTIFICATION_DELIVERY_TEXT_3" value1="comments on your microblog." />
 		<execute function="AssertTextEquals" locator1="Notifications#NOTIFICATION_DELIVERY_TEXT_4" value1="tags you in a microblog." />
-		<execute function="AssertTextEquals" locator1="Notifications#NOTIFICATION_DELIVERY_EMAIL_OPTION" value1="mobile" />
+		<execute function="AssertTextEquals" locator1="Notifications#NOTIFICATION_DELIVERY_MOBILE_OPTION" value1="mobile" />
 		<execute function="AssertTextEquals" locator1="Notifications#NOTIFICATION_DELIVERY_WEBSITE_OPTION" value1="Website" />
 
 		<var name="key_contentType" value="Web Content" />
