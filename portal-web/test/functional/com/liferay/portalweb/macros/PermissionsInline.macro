@@ -191,7 +191,7 @@
 		<execute function="SelectFrame" locator1="Permissions#PERMISSIONS_IFRAME" />
 	</command>
 
-	<command name="gotoDocumentsAndMediaPG">
+	<command name="gotoDocumentsAndMediaHomeFolderPG">
 		<execute macro="Page#gotoPG">
 			<var name="defaultURL" value="${defaultURL}" />
 			<var name="nodePort" value="${nodePort}" />
