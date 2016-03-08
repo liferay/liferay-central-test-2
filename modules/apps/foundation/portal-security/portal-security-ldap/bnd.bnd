@@ -24,4 +24,4 @@ Include-Resource:\
 	@../../../../../lib/portal/stringtemplate.jar
 Liferay-Releng-Module-Group-Description:
 Liferay-Releng-Module-Group-Title: LDAP
--include: ../../../../../marketplace/foundation/bnd.bnd
+-include: ../../bnd.bnd

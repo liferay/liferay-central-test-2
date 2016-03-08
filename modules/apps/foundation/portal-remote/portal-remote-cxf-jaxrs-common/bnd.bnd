@@ -63,4 +63,4 @@ Provide-Capability:\
 		osgi.contract=JavaJSONP;\
 		uses:="javax.json,javax.json.spi,javax.json.stream";\
 		version:Version=1
--include: ../../../../../marketplace/foundation/bnd.bnd
+-include: ../../bnd.bnd
