@@ -102,7 +102,7 @@ public class CSSBuilderTest {
 	private void _testSassToCssBuilder(String compiler) throws Exception {
 		CSSBuilder cssBuilder = new CSSBuilder(
 			_docrootDirName, false,
-			"../../apps/platform/frontend/frontend-common-css/tmp/META-INF" +
+			"../../apps/foundation/frontend/frontend-common-css/tmp/META-INF" +
 				"/resources",
 			6, new String[0], compiler);
 
