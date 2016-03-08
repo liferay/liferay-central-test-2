@@ -331,7 +331,8 @@ public abstract class Watcher implements Runnable {
 			removeCreatedFilePathName(filePath.toString());
 
 			if (_deletedFilePathNames.remove(filePath.toString()) ||
-				FileUtil.isHidden(filePath) || FileUtil.isIgnoredFileName(
+				FileUtil.isHidden(filePath) ||
+				FileUtil.isIgnoredFileName(
 					String.valueOf(filePath.getFileName())) ||
 				FileUtil.isShortcut(filePath) ||
 				FileUtil.isTempFile(filePath)) {
