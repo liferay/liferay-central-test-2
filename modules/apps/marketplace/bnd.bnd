@@ -3,12 +3,6 @@ Liferay-Releng-App-Title: Marketplace${liferay.releng.app.title.suffix}
 Liferay-Releng-Bundle: true
 Liferay-Releng-Category: Utility
 Liferay-Releng-Demo-Url:
-Liferay-Releng-Dependent-Apps:\
-	com.liferay.marketplace.api:1.0.0,\
-	com.liferay.marketplace.app.manager.web:1.0.0,\
-	com.liferay.marketplace.service:1.0.0,\
-	com.liferay.marketplace.store.web:1.0.0,\
-	com.liferay.marketplace.test:1.0.0
 Liferay-Releng-Labs: false
 Liferay-Releng-Marketplace: true
 Liferay-Releng-Public: ${liferay.releng.public}
