@@ -106,6 +106,7 @@ structureSearch.setOrderByType(ddmDisplayContext.getOrderByType());
 				%>
 
 				<liferay-ui:search-container-column-text
+					cssClass="text-strong"
 					href="<%= rowHREF %>"
 					name="id"
 					orderable="<%= true %>"
@@ -114,6 +115,7 @@ structureSearch.setOrderByType(ddmDisplayContext.getOrderByType());
 				/>
 
 				<liferay-ui:search-container-column-text
+					cssClass="text-strong"
 					href="<%= rowHREF %>"
 					name="name"
 					value="<%= HtmlUtil.escape(structure.getName(locale)) %>"
