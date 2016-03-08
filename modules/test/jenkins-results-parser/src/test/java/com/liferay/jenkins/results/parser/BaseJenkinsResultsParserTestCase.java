@@ -42,7 +42,7 @@ public abstract class BaseJenkinsResultsParserTestCase {
 
 		String expectedMessage = read(expectedMessageFile);
 
-		String actualMessage = _fixMessage(
+		String actualMessage = fixMessage(
 			getMessage(
 				"${dependencies.url}/" + getSimpleClassName() + "/" +
 					caseDir.getName() + "/"));
@@ -220,7 +220,7 @@ public abstract class BaseJenkinsResultsParserTestCase {
 	protected void writeExpectedMessage(File sampleDir) throws Exception {
 		File expectedMessageFile = new File(sampleDir, "expected_message.html");
 
-		String expectedMessage = _fixMessage(
+		String expectedMessage = fixMessage(
 			getMessage(toURLString(sampleDir)));
 
 		JenkinsResultsParserUtil.write(expectedMessageFile, expectedMessage);
@@ -229,7 +229,7 @@ public abstract class BaseJenkinsResultsParserTestCase {
 	protected File dependenciesDir = new File(
 		"src/test/resources/dependencies/" + getSimpleClassName());
 
-	private String _fixMessage(String message) {
+	protected String fixMessage(String message) {
 		String fixedMessage = message;
 
 		if (fixedMessage.contains(
