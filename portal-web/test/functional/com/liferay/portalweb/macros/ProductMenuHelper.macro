@@ -137,9 +137,7 @@
 
 	<command name="openProductMenu">
 		<if>
-			<not>
-				<condition function="IsElementPresent" locator1="ProductMenu#PRODUCT_MENU_OPENED" />
-			</not>
+			<condition function="IsElementNotPresent" locator1="ProductMenu#PRODUCT_MENU_OPENED" />
 			<then>
 				<execute function="Click" locator1="ProductMenu#TOGGLE" />
 			</then>
