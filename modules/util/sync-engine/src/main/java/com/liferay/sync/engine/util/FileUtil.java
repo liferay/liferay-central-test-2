@@ -411,8 +411,8 @@ public class FileUtil {
 	public static boolean isIgnoredFilePath(Path filePath) {
 		String fileName = String.valueOf(filePath.getFileName());
 
-		if (isIgnoredFileName(fileName) || isTempFile(filePath) ||
-			isHidden(filePath) || isShortcut(filePath)) {
+		if (isHidden(filePath) || isIgnoredFileName(fileName) ||
+			isShortcut(filePath) || isTempFile(filePath)) {
 
 			return true;
 		}
