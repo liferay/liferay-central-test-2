@@ -146,6 +146,7 @@ TemplateSearchTerms templateSearchTerms = (TemplateSearchTerms)templateSearch.ge
 
 				<c:if test='<%= !excludedColumnNames.contains("id") %>'>
 					<liferay-ui:search-container-column-text
+						cssClass="text-strong"
 						href="<%= rowHREF %>"
 						name="id"
 						orderable="<%= true %>"
@@ -156,6 +157,7 @@ TemplateSearchTerms templateSearchTerms = (TemplateSearchTerms)templateSearch.ge
 
 				<c:if test='<%= !excludedColumnNames.contains("name") %>'>
 					<liferay-ui:search-container-column-text
+						cssClass="text-strong"
 						href="<%= rowHREF %>"
 						name="name"
 						value="<%= HtmlUtil.escape(template.getName(locale)) %>"
