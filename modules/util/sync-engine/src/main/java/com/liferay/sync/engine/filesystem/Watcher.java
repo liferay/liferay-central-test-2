@@ -331,9 +331,9 @@ public abstract class Watcher implements Runnable {
 			removeCreatedFilePathName(filePath.toString());
 
 			if (_deletedFilePathNames.remove(filePath.toString()) ||
-				FileUtil.isIgnoredFileName(
+				FileUtil.isHidden(filePath) || FileUtil.isIgnoredFileName(
 					String.valueOf(filePath.getFileName())) ||
-				FileUtil.isHidden(filePath) || FileUtil.isShortcut(filePath) ||
+				FileUtil.isShortcut(filePath) ||
 				FileUtil.isTempFile(filePath)) {
 
 				return;
@@ -351,11 +351,11 @@ public abstract class Watcher implements Runnable {
 			if (_downloadedFilePathNames.remove(filePath.toString()) ||
 				(removeCreatedFilePathName(filePath.toString()) &&
 				 !FileUtil.isValidChecksum(filePath)) ||
+				Files.isDirectory(filePath) || FileUtil.isHidden(filePath) ||
 				FileUtil.isIgnoredFileName(
 					String.valueOf(filePath.getFileName())) ||
-				Files.notExists(filePath) || Files.isDirectory(filePath) ||
-				FileUtil.isHidden(filePath) || FileUtil.isShortcut(filePath) ||
-				FileUtil.isTempFile(filePath)) {
+				FileUtil.isShortcut(filePath) ||
+				FileUtil.isTempFile(filePath) || Files.notExists(filePath)) {
 
 				return;
 			}
