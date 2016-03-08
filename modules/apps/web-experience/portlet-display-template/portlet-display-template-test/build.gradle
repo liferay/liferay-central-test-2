@@ -3,5 +3,5 @@ dependencies {
 	testIntegrationCompile group: "com.liferay.portal", name: "com.liferay.portal.kernel", version: "1.0.2"
 	testIntegrationCompile project(":apps:business-productivity:dynamic-data-mapping:dynamic-data-mapping-api")
 	testIntegrationCompile project(":apps:business-productivity:dynamic-data-mapping:dynamic-data-mapping-test-util")
-	testIntegrationCompile project(":apps:web-experience-management:portlet-display-template:portlet-display-template")
+	testIntegrationCompile project(":apps:web-experience:portlet-display-template:portlet-display-template")
 }

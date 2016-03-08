@@ -26,7 +26,7 @@ dependencies {
 	provided project(":apps:business-productivity:dynamic-data-mapping:dynamic-data-mapping-io")
 	provided project(":apps:business-productivity:dynamic-data-mapping:dynamic-data-mapping-validator")
 	provided project(":apps:platform:frontend:frontend-taglib")
-	provided project(":apps:web-experience-management:application-list:application-list-api")
+	provided project(":apps:web-experience:application-list:application-list-api")
 }
 
 liferay {

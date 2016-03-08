@@ -45,9 +45,9 @@ public class BaseSourceProcessorTest {
 			"./modules/apps/business-productivity/dynamic-data-mapping" +
 				"/dynamic-data-mapping-lang/src/main/resources/content");
 		testGetModuleLangPath(
-			"./modules/apps/web-experience-management/staging/staging-bar-web",
-			"./modules/apps/web-experience-management/staging/staging-lang/" +
-				"src/main/resources/content");
+			"./modules/apps/web-experience/staging/staging-bar-web",
+			"./modules/apps/web-experience/staging/staging-lang/src/main" +
+				"/resources/content");
 		testGetModuleLangPath(
 			"./modules/apps/business-productivity/portal-workflow" +
 				"/portal-workflow-definition-web",

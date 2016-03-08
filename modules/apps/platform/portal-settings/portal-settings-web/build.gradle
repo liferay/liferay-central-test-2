@@ -9,7 +9,7 @@ dependencies {
 	provided project(":apps:platform:map:map-api")
 	provided project(":apps:platform:portal:portal-upgrade")
 	provided project(":apps:platform:users-admin:users-admin-web")
-	provided project(":apps:web-experience-management:application-list:application-list-api")
+	provided project(":apps:web-experience:application-list:application-list-api")
 }
 
 liferay {

@@ -1,5 +1,5 @@
 dependencies {
-	provided project(":apps:web-experience-management:asset:asset-taglib")
+	provided project(":apps:web-experience:asset:asset-taglib")
 }
 
 liferay {

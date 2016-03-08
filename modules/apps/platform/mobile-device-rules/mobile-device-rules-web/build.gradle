@@ -10,7 +10,7 @@ dependencies {
 	provided project(":apps:platform:mobile-device-rules:mobile-device-rules-api")
 	provided project(":apps:platform:mobile-device-rules:mobile-device-rules-service")
 	provided project(":apps:platform:portal:portal-upgrade")
-	provided project(":apps:web-experience-management:application-list:application-list-api")
+	provided project(":apps:web-experience:application-list:application-list-api")
 }
 
 liferay {

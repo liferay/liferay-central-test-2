@@ -3,6 +3,6 @@ dependencies {
 	testIntegrationCompile group: "com.liferay.portal", name: "com.liferay.portal.kernel", version: "1.0.2"
 	testIntegrationCompile project(":apps:business-productivity:polls:polls-api")
 	testIntegrationCompile project(":apps:business-productivity:polls:polls-service")
-	testIntegrationCompile project(":apps:web-experience-management:export-import:export-import-api")
-	testIntegrationCompile project(":apps:web-experience-management:export-import:export-import-service")
+	testIntegrationCompile project(":apps:web-experience:export-import:export-import-api")
+	testIntegrationCompile project(":apps:web-experience:export-import:export-import-service")
 }

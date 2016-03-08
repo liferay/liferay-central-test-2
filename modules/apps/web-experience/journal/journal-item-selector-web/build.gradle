@@ -7,9 +7,9 @@ dependencies {
 	provided project(":apps:collaboration:item-selector:item-selector-api")
 	provided project(":apps:collaboration:item-selector:item-selector-criteria-api")
 	provided project(":apps:collaboration:item-selector:item-selector-taglib")
-	provided project(":apps:web-experience-management:journal:journal-api")
-	provided project(":apps:web-experience-management:journal:journal-item-selector-api")
-	provided project(":apps:web-experience-management:journal:journal-web")
+	provided project(":apps:web-experience:journal:journal-api")
+	provided project(":apps:web-experience:journal:journal-item-selector-api")
+	provided project(":apps:web-experience:journal:journal-web")
 }
 
 liferay {
