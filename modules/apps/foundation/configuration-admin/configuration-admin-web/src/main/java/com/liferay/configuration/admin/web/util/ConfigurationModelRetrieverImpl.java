@@ -348,15 +348,11 @@ public class ConfigurationModelRetrieverImpl
 			if (configurationCategory1.equals("other")) {
 				return 1;
 			}
-			else if (configurationCategory1.equals(
-						"web-experience")) {
-
+			else if (configurationCategory1.equals("web-experience")) {
 				return -1;
 			}
 			else if (configurationCategory1.equals("collaboration")) {
-				if (configurationCategory2.equals(
-						"web-experience")) {
-
+				if (configurationCategory2.equals("web-experience")) {
 					return 1;
 				}
 				else {
