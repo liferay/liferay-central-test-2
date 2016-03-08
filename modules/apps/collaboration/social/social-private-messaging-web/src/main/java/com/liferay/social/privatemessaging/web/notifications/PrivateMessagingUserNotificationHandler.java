@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.social.privatemessaging.notifications;
+package com.liferay.social.privatemessaging.web.notifications;
 
 import com.liferay.message.boards.kernel.model.MBMessage;
 import com.liferay.message.boards.kernel.model.MBThread;
