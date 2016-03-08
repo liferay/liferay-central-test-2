@@ -74,4 +74,4 @@ Include-Resource:\
 Liferay-Releng-Module-Group-Description:
 Liferay-Releng-Module-Group-Title: Wiki
 Liferay-Service: true
--include: ../../bnd.bnd
+-include: ../../app.bnd

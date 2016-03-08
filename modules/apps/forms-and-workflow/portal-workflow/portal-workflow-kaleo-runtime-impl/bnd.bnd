@@ -5,4 +5,4 @@ Liferay-Releng-Module-Group-Description:
 Liferay-Releng-Module-Group-Title: Kaleo Workflow Engine
 Liferay-Service: true
 -dsannotations-options: inherit
--include: ../../bnd.bnd
+-include: ../../app.bnd
