@@ -871,7 +871,7 @@ public class LiferayDefaultsPlugin extends BaseDefaultsPlugin<LiferayPlugin> {
 		bundleDefaultInstructions.put(Constants.BUNDLE_VENDOR, "Liferay, Inc.");
 		bundleDefaultInstructions.put(
 			Constants.DONOTCOPY,
-			"(" + LiferayOSGiExtension.DEFAULT_DONOTCOPY + "|.touch" + ")");
+			"(" + LiferayOSGiExtension.DONOTCOPY_DEFAULT + "|.touch" + ")");
 		bundleDefaultInstructions.put(Constants.SOURCES, "false");
 
 		if (publishing) {
