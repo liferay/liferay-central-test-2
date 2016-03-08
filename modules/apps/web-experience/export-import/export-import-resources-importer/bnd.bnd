@@ -5,4 +5,4 @@ Include-Resource: content=../../staging/staging-lang/src/main/resources/content
 Liferay-Releng-Module-Group-Description:
 Liferay-Releng-Module-Group-Title: Data Management
 -dsannotations-options: inherit
--include: ../../../../../marketplace/web-content-management/bnd.bnd
+-include: ../../../../../marketplace/web-experience/bnd.bnd

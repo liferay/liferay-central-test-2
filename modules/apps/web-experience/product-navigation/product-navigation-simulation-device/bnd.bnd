@@ -5,4 +5,4 @@ Liferay-JS-Config: /META-INF/resources/js/config.js
 Liferay-Releng-Module-Group-Description:
 Liferay-Releng-Module-Group-Title:
 Web-ContextPath: /product-navigation-simulation-device
--include: ../../../../../marketplace/web-content-management/bnd.bnd
+-include: ../../../../../marketplace/web-experience/bnd.bnd
