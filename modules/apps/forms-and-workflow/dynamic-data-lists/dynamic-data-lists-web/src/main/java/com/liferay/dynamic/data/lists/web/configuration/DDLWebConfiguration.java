@@ -21,7 +21,7 @@ import com.liferay.portal.configuration.metatype.annotations.ExtendedObjectClass
 /**
  * @author Lino Alves
  */
-@ExtendedObjectClassDefinition(category = "productivity")
+@ExtendedObjectClassDefinition(category = "forms-and-workflow")
 @Meta.OCD(
 	id = "com.liferay.dynamic.data.lists.web.configuration.DDLWebConfiguration",
 	localization = "content/Language", name = "ddl.web.configuration.name"

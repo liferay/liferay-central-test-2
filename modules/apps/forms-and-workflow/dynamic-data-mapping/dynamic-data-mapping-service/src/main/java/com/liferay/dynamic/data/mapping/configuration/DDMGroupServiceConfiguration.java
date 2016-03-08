@@ -22,7 +22,7 @@ import com.liferay.portal.configuration.metatype.annotations.ExtendedObjectClass
  * @author Lino Alves
  */
 @ExtendedObjectClassDefinition(
-	category = "productivity", scope = ExtendedObjectClassDefinition.Scope.GROUP
+	category = "forms-and-workflow", scope = ExtendedObjectClassDefinition.Scope.GROUP
 )
 @Meta.OCD(
 	id = "com.liferay.dynamic.data.mapping.configuration.DDMGroupServiceConfiguration",
