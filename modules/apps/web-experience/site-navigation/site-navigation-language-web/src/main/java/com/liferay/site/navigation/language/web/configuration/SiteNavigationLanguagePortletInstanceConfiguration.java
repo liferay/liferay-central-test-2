@@ -22,7 +22,7 @@ import com.liferay.portal.configuration.metatype.annotations.ExtendedObjectClass
  * @author Juergen Kappler
  */
 @ExtendedObjectClassDefinition(
-	category = "web-experience-management",
+	category = "web-experience",
 	scope = ExtendedObjectClassDefinition.Scope.PORTLET_INSTANCE
 )
 @Meta.OCD(

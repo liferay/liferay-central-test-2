@@ -23,7 +23,7 @@ import com.liferay.portal.kernel.settings.LocalizedValuesMap;
  * @author Juergen Kappler
  */
 @ExtendedObjectClassDefinition(
-	category = "web-experience-management",
+	category = "web-experience",
 	scope = ExtendedObjectClassDefinition.Scope.GROUP
 )
 @Meta.OCD(

@@ -21,7 +21,7 @@ import com.liferay.portal.configuration.metatype.annotations.ExtendedObjectClass
 /**
  * @author Jürgen Kappler
  */
-@ExtendedObjectClassDefinition(category = "web-experience-management")
+@ExtendedObjectClassDefinition(category = "web-experience")
 @Meta.OCD(
 	id = "com.liferay.journal.web.configuration.JournalWebConfiguration",
 	localization = "content/Language", name = "journal.web.configuration.name"

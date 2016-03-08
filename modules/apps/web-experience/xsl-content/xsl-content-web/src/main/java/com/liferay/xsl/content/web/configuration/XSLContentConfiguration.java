@@ -21,7 +21,7 @@ import com.liferay.portal.configuration.metatype.annotations.ExtendedObjectClass
 /**
  * @author Raymond Augé
  */
-@ExtendedObjectClassDefinition(category = "web-experience-management")
+@ExtendedObjectClassDefinition(category = "web-experience")
 @Meta.OCD(
 	id = "com.liferay.xsl.content.web.configuration.XSLContentConfiguration",
 	localization = "content/Language", name = "xsl.content.configuration.name"
