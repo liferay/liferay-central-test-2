@@ -233,18 +233,19 @@ public abstract class BaseJenkinsResultsParserTestCase {
 		String fixedMessage = message;
 
 		if (fixedMessage.contains(
-				JenkinsResultsParserUtil.DEPENDENCIES_URL_HTTP)) {
-
-			fixedMessage = fixedMessage.replace(
-				JenkinsResultsParserUtil.DEPENDENCIES_URL_HTTP,
-				"${dependencies.url}");
-		}
-
-		if (fixedMessage.contains(
 				JenkinsResultsParserUtil.DEPENDENCIES_URL_FILE)) {
 
 			fixedMessage = fixedMessage.replace(
 				JenkinsResultsParserUtil.DEPENDENCIES_URL_FILE,
+				"${dependencies.url}");
+		}
+
+
+		if (fixedMessage.contains(
+				JenkinsResultsParserUtil.DEPENDENCIES_URL_HTTP)) {
+
+			fixedMessage = fixedMessage.replace(
+				JenkinsResultsParserUtil.DEPENDENCIES_URL_HTTP,
 				"${dependencies.url}");
 		}
 
