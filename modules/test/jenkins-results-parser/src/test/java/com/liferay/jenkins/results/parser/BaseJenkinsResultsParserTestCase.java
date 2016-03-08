@@ -230,26 +230,19 @@ public abstract class BaseJenkinsResultsParserTestCase {
 		"src/test/resources/dependencies/" + getSimpleClassName());
 
 	protected String fixMessage(String message) {
-		String fixedMessage = message;
-
-		if (fixedMessage.contains(
-				JenkinsResultsParserUtil.DEPENDENCIES_URL_FILE)) {
-
-			fixedMessage = fixedMessage.replace(
+		if (message.contains(JenkinsResultsParserUtil.DEPENDENCIES_URL_FILE)) {
+			message = message.replace(
 				JenkinsResultsParserUtil.DEPENDENCIES_URL_FILE,
 				"${dependencies.url}");
 		}
 
-
-		if (fixedMessage.contains(
-				JenkinsResultsParserUtil.DEPENDENCIES_URL_HTTP)) {
-
-			fixedMessage = fixedMessage.replace(
+		if (message.contains(JenkinsResultsParserUtil.DEPENDENCIES_URL_HTTP)) {
+			message = message.replace(
 				JenkinsResultsParserUtil.DEPENDENCIES_URL_HTTP,
 				"${dependencies.url}");
 		}
 
-		return fixedMessage.replaceAll("[^\\S\\r\\n]+\n", "\n");
+		return message.replaceAll("[^\\S\\r\\n]+\n", "\n");
 	}
 
 	private static final String[][] _XML_REPLACEMENTS = new String[][] {
