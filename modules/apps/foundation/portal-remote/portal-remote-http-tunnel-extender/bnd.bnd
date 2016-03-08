@@ -10,4 +10,4 @@ Provide-Capability:\
 	liferay.extender;\
 	liferay.extender="http.tunnel.extender";\
 	version:Version="${plugin.full.version}"
--include: ../../../../../marketplace/foundation/bnd.bnd
+-include: ../../bnd.bnd
