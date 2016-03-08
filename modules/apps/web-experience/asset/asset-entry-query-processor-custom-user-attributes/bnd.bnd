@@ -5,4 +5,4 @@ Liferay-Releng-Module-Group-Description:
 Liferay-Releng-Module-Group-Title: Asset
 Liferay-Require-SchemaVersion: 1.0.0
 Web-ContextPath: /asset-entry-query-processor-custom-user-attributes
--include: ../../../../../marketplace/web-content-management/bnd.bnd
+-include: ../../../../../marketplace/web-experience/bnd.bnd
