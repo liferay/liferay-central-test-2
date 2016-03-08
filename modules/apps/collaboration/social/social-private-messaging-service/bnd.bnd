@@ -17,4 +17,4 @@ Include-Resource:\
 Liferay-Releng-Module-Group-Description:
 Liferay-Releng-Module-Group-Title: Social Private Messaging
 Liferay-Service: true
--include: ../../bnd.bnd
+-include: ../../app.bnd
