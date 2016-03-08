@@ -6,7 +6,7 @@ dependencies {
 	provided project(":apps:platform:frontend:frontend-taglib")
 	provided project(":apps:platform:portal:portal-upgrade")
 	provided project(":apps:platform:user-groups-admin:user-groups-admin-api")
-	provided project(":apps:web-experience-management:application-list:application-list-api")
+	provided project(":apps:web-experience:application-list:application-list-api")
 }
 
 liferay {

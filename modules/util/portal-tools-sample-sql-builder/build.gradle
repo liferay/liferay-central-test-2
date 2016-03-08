@@ -16,8 +16,8 @@ dependencies {
 	compile project(":apps:collaboration:wiki:wiki-api")
 	compile project(":apps:collaboration:wiki:wiki-service")
 	compile project(":apps:platform:login:login-web")
-	compile project(":apps:web-experience-management:journal:journal-api")
-	compile project(":apps:web-experience-management:journal:journal-service")
+	compile project(":apps:web-experience:journal:journal-api")
+	compile project(":apps:web-experience:journal:journal-service")
 
 	provided group: "com.liferay.portal", name: "com.liferay.portal.impl", version: "1.0.0"
 	provided group: "com.liferay.portal", name: "com.liferay.portal.kernel", version: "1.0.2"

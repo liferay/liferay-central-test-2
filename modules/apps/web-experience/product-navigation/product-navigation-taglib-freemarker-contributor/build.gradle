@@ -1,5 +1,5 @@
 dependencies {
-	provided project(":apps:web-experience-management:product-navigation:product-navigation-taglib")
+	provided project(":apps:web-experience:product-navigation:product-navigation-taglib")
 }
 
 liferay {

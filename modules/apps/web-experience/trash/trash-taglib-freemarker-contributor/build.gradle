@@ -1,5 +1,5 @@
 dependencies {
-	provided project(":apps:web-experience-management:trash:trash-taglib")
+	provided project(":apps:web-experience:trash:trash-taglib")
 }
 
 liferay {
