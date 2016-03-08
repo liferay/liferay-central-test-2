@@ -49,8 +49,7 @@ public class MSOfficeFileUtilTest {
 				"test.csv", "test.xls", "test.xlsb", "test.xlsm", "test.xlsx",
 				"test.xltx"
 			},
-			new String[] {"CF19E4A8.tmp", "6CFEC200"}
-		);
+			new String[] {"CF19E4A8.tmp", "6CFEC200"});
 
 		Assert.assertFalse(
 			MSOfficeFileUtil.isTempRenamedFile(
@@ -64,8 +63,7 @@ public class MSOfficeFileUtilTest {
 				"test.pps", "test.ppsm", "test.ppsx", "test.ppt", "test.pptm",
 				"test.pptx"
 			},
-			new String[] {"CF19E4A8.tmp", "6CFEC200"}
-		);
+			new String[] {"CF19E4A8.tmp", "6CFEC200"});
 
 		Assert.assertFalse(
 			MSOfficeFileUtil.isTempRenamedFile(
@@ -84,8 +82,7 @@ public class MSOfficeFileUtilTest {
 				"test.doc", "test.docb", "test.docm", "test.docx", "test.dot",
 				"test.dotm", "test.dotx"
 			},
-			new String[] {"~WRD1001.tmp", "~WRL0001.tmp", "~WRF1233.tmp"}
-		);
+			new String[] {"~WRD1001.tmp", "~WRL0001.tmp", "~WRF1233.tmp"});
 
 		Assert.assertFalse(
 			MSOfficeFileUtil.isTempRenamedFile(
