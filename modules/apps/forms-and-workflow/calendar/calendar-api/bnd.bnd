@@ -21,4 +21,4 @@ Import-Package:\
 Include-Resource: @lib/com.google.ical.jar
 Liferay-Releng-Module-Group-Description:
 Liferay-Releng-Module-Group-Title: Calendar
--include: ../../../../../marketplace/business-productivity/bnd.bnd
+-include: ../../../../../marketplace/forms-and-workflow/bnd.bnd
