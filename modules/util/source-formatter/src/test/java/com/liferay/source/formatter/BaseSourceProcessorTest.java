@@ -40,20 +40,6 @@ public class BaseSourceProcessorTest {
 	@Test
 	public void testGetModuleLangPath() throws Exception {
 		testGetModuleLangPath(
-			"./modules/apps/forms-and-workflow/dynamic-data-mapping" +
-				"/dynamic-data-mapping-web",
-			"./modules/apps/forms-and-workflow/dynamic-data-mapping" +
-				"/dynamic-data-mapping-lang/src/main/resources/content");
-		testGetModuleLangPath(
-			"./modules/apps/web-experience/staging/staging-bar-web",
-			"./modules/apps/web-experience/staging/staging-lang/src/main" +
-				"/resources/content");
-		testGetModuleLangPath(
-			"./modules/apps/forms-and-workflow/portal-workflow" +
-				"/portal-workflow-definition-web",
-			"./modules/apps/forms-and-workflow/portal-workflow" +
-				"/portal-workflow-lang/src/main/resources/content");
-		testGetModuleLangPath(
 			"./modules/apps/forms-and-workflow/dynamic-data-lists" +
 				"/dynamic-data-lists-form-web",
 			"./modules/apps/forms-and-workflow/dynamic-data-lists" +
@@ -61,6 +47,20 @@ public class BaseSourceProcessorTest {
 					"/dynamic-data-mapping-lang/src/main/resources/content",
 			"./modules/apps/forms-and-workflow/dynamic-data-lists" +
 				"/dynamic-data-lists-form-web/src/main/resources/content");
+		testGetModuleLangPath(
+			"./modules/apps/forms-and-workflow/dynamic-data-mapping" +
+				"/dynamic-data-mapping-web",
+			"./modules/apps/forms-and-workflow/dynamic-data-mapping" +
+				"/dynamic-data-mapping-lang/src/main/resources/content");
+		testGetModuleLangPath(
+			"./modules/apps/forms-and-workflow/portal-workflow" +
+				"/portal-workflow-definition-web",
+			"./modules/apps/forms-and-workflow/portal-workflow" +
+				"/portal-workflow-lang/src/main/resources/content");
+		testGetModuleLangPath(
+			"./modules/apps/web-experience/staging/staging-bar-web",
+			"./modules/apps/web-experience/staging/staging-lang/src/main" +
+				"/resources/content");
 	}
 
 	protected void setUpBaseSourceProcessor() {
