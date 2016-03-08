@@ -139,6 +139,22 @@ public abstract class BaseJenkinsResultsParserTestCase {
 				JenkinsResultsParserUtil.getLocalURL(urlString)));
 	}
 
+	protected String fixMessage(String message) {
+		if (message.contains(JenkinsResultsParserUtil.DEPENDENCIES_URL_FILE)) {
+			message = message.replace(
+				JenkinsResultsParserUtil.DEPENDENCIES_URL_FILE,
+				"${dependencies.url}");
+		}
+
+		if (message.contains(JenkinsResultsParserUtil.DEPENDENCIES_URL_HTTP)) {
+			message = message.replace(
+				JenkinsResultsParserUtil.DEPENDENCIES_URL_HTTP,
+				"${dependencies.url}");
+		}
+
+		return message.replaceAll("[^\\S\\r\\n]+\n", "\n");
+	}
+
 	protected String formatXML(String xml)
 		throws DocumentException, IOException {
 
@@ -220,30 +236,13 @@ public abstract class BaseJenkinsResultsParserTestCase {
 	protected void writeExpectedMessage(File sampleDir) throws Exception {
 		File expectedMessageFile = new File(sampleDir, "expected_message.html");
 
-		String expectedMessage = fixMessage(
-			getMessage(toURLString(sampleDir)));
+		String expectedMessage = fixMessage(getMessage(toURLString(sampleDir)));
 
 		JenkinsResultsParserUtil.write(expectedMessageFile, expectedMessage);
 	}
 
 	protected File dependenciesDir = new File(
 		"src/test/resources/dependencies/" + getSimpleClassName());
-
-	protected String fixMessage(String message) {
-		if (message.contains(JenkinsResultsParserUtil.DEPENDENCIES_URL_FILE)) {
-			message = message.replace(
-				JenkinsResultsParserUtil.DEPENDENCIES_URL_FILE,
-				"${dependencies.url}");
-		}
-
-		if (message.contains(JenkinsResultsParserUtil.DEPENDENCIES_URL_HTTP)) {
-			message = message.replace(
-				JenkinsResultsParserUtil.DEPENDENCIES_URL_HTTP,
-				"${dependencies.url}");
-		}
-
-		return message.replaceAll("[^\\S\\r\\n]+\n", "\n");
-	}
 
 	private static final String[][] _XML_REPLACEMENTS = new String[][] {
 		{"<pre>", "<pre><![CDATA["}, {"</pre>", "]]></pre>"},

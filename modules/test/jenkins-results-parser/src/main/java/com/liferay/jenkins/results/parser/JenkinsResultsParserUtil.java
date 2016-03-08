@@ -471,6 +471,10 @@ public class JenkinsResultsParserUtil {
 
 	protected static final String DEPENDENCIES_URL_FILE;
 
+	protected static final String DEPENDENCIES_URL_HTTP =
+		"http://mirrors-no-cache.lax.liferay.com/github.com/liferay" +
+			"/liferay-jenkins-results-parser-samples-ee/1/";
+
 	static {
 		File dependenciesDir = new File("src/test/resources/dependencies/");
 
@@ -485,10 +489,6 @@ public class JenkinsResultsParserUtil {
 			throw new RuntimeException(murle);
 		}
 	}
-
-	protected static final String DEPENDENCIES_URL_HTTP =
-		"http://mirrors-no-cache.lax.liferay.com/github.com/liferay" +
-			"/liferay-jenkins-results-parser-samples-ee/1/";
 
 	private static final Pattern _localURLPattern1 = Pattern.compile(
 		"https://test.liferay.com/([0-9]+)/");
