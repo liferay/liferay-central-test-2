@@ -145,9 +145,9 @@
 			</then>
 		</if>
 
-		<execute function="AssertElementPresent" locator1="ProductMenu#PRODUCT_MENU_BODY" />
+		<execute function="AssertElementPresent" locator1="ProductMenu#PRODUCT_MENU_OPENED" />
 
-		<execute function="AssertVisible" locator1="ProductMenu#PRODUCT_MENU_OPENED" />
+		<execute function="AssertVisible" locator1="ProductMenu#PRODUCT_MENU_BODY" />
 	</command>
 
 	<command name="openSitesPopup">
