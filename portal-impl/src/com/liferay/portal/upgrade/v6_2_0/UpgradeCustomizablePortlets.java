@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.model.PortletPreferences;
 import com.liferay.portal.kernel.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.LoggingTimer;
 import com.liferay.portal.kernel.util.PortletKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -47,27 +48,7 @@ public class UpgradeCustomizablePortlets extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		try (PreparedStatement ps = connection.prepareStatement(
-				"select ownerId, ownerType, preferences from " +
-					"PortalPreferences where preferences like " +
-						"'%com.liferay.portal.model.CustomizedPages%'");
-			ResultSet rs = ps.executeQuery()) {
-
-			while (rs.next()) {
-				long ownerId = rs.getLong("ownerId");
-				int ownerType = rs.getInt("ownerType");
-				String preferences = rs.getString("preferences");
-
-				PortalPreferencesWrapper portalPreferencesWrapper =
-					getPortalPreferencesInstance(
-						ownerId, ownerType, preferences);
-
-				upgradeCustomizablePreferences(
-					portalPreferencesWrapper, ownerId, ownerType, preferences);
-
-				portalPreferencesWrapper.store();
-			}
-		}
+		upgradeCustomizablePreferences();
 	}
 
 	protected PortalPreferencesWrapper getPortalPreferencesInstance(
@@ -153,6 +134,31 @@ public class UpgradeCustomizablePortlets extends UpgradeProcess {
 			ps.setString(8, portletId);
 
 			ps.executeUpdate();
+		}
+	}
+
+	protected void upgradeCustomizablePreferences() throws Exception {
+		try (LoggingTimer loggingTimer = new LoggingTimer();
+			PreparedStatement ps = connection.prepareStatement(
+				"select ownerId, ownerType, preferences from " +
+					"PortalPreferences where preferences like " +
+						"'%com.liferay.portal.model.CustomizedPages%'");
+			ResultSet rs = ps.executeQuery()) {
+
+			while (rs.next()) {
+				long ownerId = rs.getLong("ownerId");
+				int ownerType = rs.getInt("ownerType");
+				String preferences = rs.getString("preferences");
+
+				PortalPreferencesWrapper portalPreferencesWrapper =
+					getPortalPreferencesInstance(
+						ownerId, ownerType, preferences);
+
+				upgradeCustomizablePreferences(
+					portalPreferencesWrapper, ownerId, ownerType, preferences);
+
+				portalPreferencesWrapper.store();
+			}
 		}
 	}
 
