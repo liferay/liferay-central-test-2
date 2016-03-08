@@ -81,13 +81,13 @@ public class UserNotificationManagerUtil {
 	public static Map<String, List<UserNotificationDefinition>>
 		getActiveUserNotificationDefinitions() {
 
-		return _instance._doGetUserNotificationDefinitions(true);
+		return _instance._getUserNotificationDefinitions(true);
 	}
 
 	public static Map<String, List<UserNotificationDefinition>>
 		getUserNotificationDefinitions() {
 
-		return _instance._doGetUserNotificationDefinitions(false);
+		return _instance._getUserNotificationDefinitions(false);
 	}
 
 	public static Map<String, Map<String, UserNotificationHandler>>
@@ -208,7 +208,7 @@ public class UserNotificationManagerUtil {
 	}
 
 	private Map<String, List<UserNotificationDefinition>>
-		_doGetUserNotificationDefinitions(boolean active) {
+		_getUserNotificationDefinitions(boolean active) {
 
 		Map<String, List<UserNotificationDefinition>>
 			userNotificationDefinitionsMap = new ConcurrentHashMap<>();
