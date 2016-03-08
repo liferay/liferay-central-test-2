@@ -72,7 +72,7 @@ public class JenkinsResultsParserUtil {
 		if ((jsonObject.getInt("duration") == 0) && result.equals("FAILURE")) {
 			String actualResult = getActualResult(url);
 
-			System.out.println("actual result: " + actualResult);
+			System.out.println("Actual Result: " + actualResult);
 
 			jsonObject.putOpt("result", actualResult);
 		}
