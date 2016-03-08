@@ -41,7 +41,7 @@ import org.gradle.api.tasks.compile.JavaCompile;
  */
 public class LiferayOSGiExtension extends LiferayExtension {
 
-	public static final String DEFAULT_DONOTCOPY = ".*\\.wsdd";
+	public static final String DONOTCOPY_DEFAULT = ".*\\.wsdd";
 
 	public LiferayOSGiExtension(Project project) {
 		super(project);
@@ -49,7 +49,7 @@ public class LiferayOSGiExtension extends LiferayExtension {
 		_bundleDefaultInstructions.put(
 			Constants.BUNDLE_SYMBOLICNAME, project.getName());
 		_bundleDefaultInstructions.put(
-			Constants.DONOTCOPY, "(" + DEFAULT_DONOTCOPY + ")");
+			Constants.DONOTCOPY, "(" + DONOTCOPY_DEFAULT + ")");
 		_bundleDefaultInstructions.put(Constants.DSANNOTATIONS, "*");
 		_bundleDefaultInstructions.put(Constants.METATYPE, "*");
 		_bundleDefaultInstructions.put(
