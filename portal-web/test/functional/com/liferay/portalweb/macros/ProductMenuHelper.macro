@@ -142,12 +142,12 @@
 			</not>
 			<then>
 				<execute function="Click" locator1="ProductMenu#TOGGLE" />
-
-				<execute function="AssertElementPresent" locator1="ProductMenu#PRODUCT_MENU_BODY" />
-
-				<execute function="AssertVisible" locator1="ProductMenu#PRODUCT_MENU_OPENED" />
 			</then>
 		</if>
+
+		<execute function="AssertElementPresent" locator1="ProductMenu#PRODUCT_MENU_BODY" />
+
+		<execute function="AssertVisible" locator1="ProductMenu#PRODUCT_MENU_OPENED" />
 	</command>
 
 	<command name="openSitesPopup">
