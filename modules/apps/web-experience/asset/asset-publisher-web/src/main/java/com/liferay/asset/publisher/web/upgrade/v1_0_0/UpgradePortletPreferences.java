@@ -22,7 +22,6 @@ import com.liferay.dynamic.data.mapping.model.DDMStructure;
 import com.liferay.dynamic.data.mapping.model.DDMStructureLink;
 import com.liferay.dynamic.data.mapping.service.DDMStructureLinkLocalService;
 import com.liferay.dynamic.data.mapping.service.DDMStructureLocalService;
-import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portal.kernel.upgrade.BaseUpgradePortletPreferences;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -39,7 +38,9 @@ import com.liferay.portal.kernel.xml.SAXReader;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+
 import java.text.DateFormat;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -88,7 +89,6 @@ public class UpgradePortletPreferences extends BaseUpgradePortletPreferences {
 		Map<String, DDMFormField> ddmFormFieldsMap =
 			ddmForm.getDDMFormFieldsMap(false);
 		return ddmFormFieldsMap.get(fieldName);
-
 	}
 
 	protected String getJournalArticleResourceUuid(String journalArticleUuid)
@@ -365,9 +365,6 @@ public class UpgradePortletPreferences extends BaseUpgradePortletPreferences {
 
 	private static final String _DDM_FIELD_SEPARATOR =
 		StringPool.DOUBLE_UNDERLINE;
-
-	private static final String DDM_FIELD_PREFIX =
-		_DDM_FIELD_NAMESPACE + _DDM_FIELD_SEPARATOR;
 
 	private static final String _DDM_STRUCTURE_FIELD_NAME =
 		"ddmStructureFieldName";
