@@ -89,34 +89,34 @@ public class ServletContextHelperRegistrationImpl
 		_customServletContextHelper = new CustomServletContextHelper(
 			bundle, wabShapedBundle);
 
-		_servletContextHelperRegistration = createServletContextHelper(
+		_servletContextHelperServiceRegistration = createServletContextHelper(
 			bundleContext, servletContextName, contextPath);
-		_servletContextListenerRegistration = createServletContextListener(
+		_servletContextListenerServiceRegistration = createServletContextListener(
 			bundleContext, servletContextName);
-		_defaultServletRegistration = createDefaultServlet(
+		_defaultServletServiceRegistration = createDefaultServlet(
 			bundleContext, servletContextName, wabShapedBundle);
-		_jspServletRegistration = createJspServlet(
+		_jspServletServiceRegistration = createJspServlet(
 			bundleContext, servletContextName);
-		_portletServletRegistration = createPortletServlet(
+		_portletServletServiceRegistration = createPortletServlet(
 			bundleContext, servletContextName, wabShapedBundle);
-		_portletServletRequestFilterRegistration =
+		_portletServletRequestFilterServiceRegistration =
 			createRestrictPortletServletRequestFilter(
 				bundleContext, servletContextName);
 	}
 
 	@Override
 	public void close() {
-		_servletContextHelperRegistration.unregister();
-		_servletContextListenerRegistration.unregister();
-		_defaultServletRegistration.unregister();
-		_jspServletRegistration.unregister();
+		_servletContextHelperServiceRegistration.unregister();
+		_servletContextListenerServiceRegistration.unregister();
+		_defaultServletServiceRegistration.unregister();
+		_jspServletServiceRegistration.unregister();
 
-		if (_portletServletRegistration != null) {
-			_portletServletRegistration.unregister();
+		if (_portletServletServiceRegistration != null) {
+			_portletServletServiceRegistration.unregister();
 		}
 
-		if (_portletServletRequestFilterRegistration != null) {
-			_portletServletRequestFilterRegistration.unregister();
+		if (_portletServletRequestFilterServiceRegistration != null) {
+			_portletServletRequestFilterServiceRegistration.unregister();
 		}
 	}
 
@@ -127,16 +127,16 @@ public class ServletContextHelperRegistrationImpl
 
 	@Override
 	public ServiceReference<ServletContextHelper>
-		getServletContextHelperReference() {
+		getServletContextHelperSeviceReference() {
 
-		return _servletContextHelperRegistration.getReference();
+		return _servletContextHelperServiceRegistration.getReference();
 	}
 
 	@Override
 	public ServiceReference<ServletContextListener>
-		getServletContextListenerReference() {
+		getServletContextListenerSeviceReference() {
 
-		return _servletContextListenerRegistration.getReference();
+		return _servletContextListenerServiceRegistration.getReference();
 	}
 
 	@Override
@@ -146,7 +146,7 @@ public class ServletContextHelperRegistrationImpl
 		}
 
 		ServiceReference<ServletContextHelper> serviceReference =
-			_servletContextHelperRegistration.getReference();
+			_servletContextHelperServiceRegistration.getReference();
 
 		Dictionary<String, Object> properties = new Hashtable<>();
 
@@ -166,7 +166,7 @@ public class ServletContextHelperRegistrationImpl
 				value);
 		}
 
-		_servletContextHelperRegistration.setProperties(properties);
+		_servletContextHelperServiceRegistration.setProperties(properties);
 	}
 
 	protected Object createContextSelectFilter(String servletContextName) {
@@ -364,17 +364,17 @@ public class ServletContextHelperRegistrationImpl
 		HttpWhiteboardConstants.HTTP_WHITEBOARD_SERVLET_INIT_PARAM_PREFIX;
 
 	private final CustomServletContextHelper _customServletContextHelper;
-	private final ServiceRegistration<?> _defaultServletRegistration;
-	private final ServiceRegistration<Servlet> _jspServletRegistration;
-	private final ServiceRegistration<Servlet> _portletServletRegistration;
+	private final ServiceRegistration<?> _defaultServletServiceRegistration;
+	private final ServiceRegistration<Servlet> _jspServletServiceRegistration;
+	private final ServiceRegistration<Servlet> _portletServletServiceRegistration;
 	private final ServiceRegistration<?>
-		_portletServletRequestFilterRegistration;
+		_portletServletRequestFilterServiceRegistration;
 	private final Map<String, Object> _properties;
 	private final Props _props;
 	private final ServiceRegistration<ServletContextHelper>
-		_servletContextHelperRegistration;
+		_servletContextHelperServiceRegistration;
 	private final ServiceRegistration<ServletContextListener>
-		_servletContextListenerRegistration;
+		_servletContextListenerServiceRegistration;
 
 	private static class JspServletWrapper extends HttpServlet {
 
