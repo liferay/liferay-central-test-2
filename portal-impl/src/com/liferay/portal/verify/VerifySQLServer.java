@@ -169,19 +169,18 @@ public class VerifySQLServer extends VerifyProcess {
 	}
 
 	protected void dropNonunicodeTableIndexes() {
-		StringBundler sb = new StringBundler(15);
+		StringBundler sb = new StringBundler(14);
 
 		sb.append("select distinct sysobjects.name as table_name, ");
 		sb.append("sysindexes.name as index_name FROM sysobjects inner ");
-		sb.append("join sysindexes on sysobjects.id = sysindexes.id ");
-		sb.append("inner join syscolumns on sysobjects.id = ");
-		sb.append("syscolumns.id inner join sysindexkeys on ");
-		sb.append("((sysobjects.id = sysindexkeys.id) and ");
-		sb.append("(syscolumns.colid = sysindexkeys.colid) and ");
-		sb.append("(sysindexes.indid = sysindexkeys.indid)) inner join ");
-		sb.append("systypes on syscolumns.xtype = systypes.xtype where ");
-		sb.append("(sysobjects.type = 'U') and (sysobjects.category != ");
-		sb.append("2) and ");
+		sb.append("join sysindexes on sysobjects.id = sysindexes.id inner ");
+		sb.append("join syscolumns on sysobjects.id = syscolumns.id ");
+		sb.append("inner join sysindexkeys on ((sysobjects.id = ");
+		sb.append("sysindexkeys.id) and (syscolumns.colid = ");
+		sb.append("sysindexkeys.colid) and (sysindexes.indid = ");
+		sb.append("sysindexkeys.indid)) inner join systypes on ");
+		sb.append("syscolumns.xtype = systypes.xtype where (sysobjects.type ");
+		sb.append("= 'U') and (sysobjects.category != 2) and ");
 		sb.append(_FILTER_NONUNICODE_DATA_TYPES);
 		sb.append(" and ");
 		sb.append(_FILTER_EXCLUDED_TABLES);
