@@ -133,11 +133,11 @@ public class LiferayTemplateClassResolver implements TemplateClassResolver {
 		_freemarkerEngineConfiguration = ConfigurableUtil.createConfigurable(
 			FreeMarkerEngineConfiguration.class, properties);
 
-		_classResolverBundleTracker = new BundleTracker<>(
+		_classLoaderBundleTracker = new BundleTracker<>(
 			bundleContext, Bundle.ACTIVE,
-			new ClassResolverBundleTrackerCustomizer());
+			new ClassLoaderBundleTrackerCustomizer());
 
-		_classResolverBundleTracker.open();
+		_classLoaderBundleTracker.open();
 
 		_wwhitelistedClassLoaders.add(
 			LiferayTemplateClassResolver.class.getClassLoader());
@@ -145,7 +145,7 @@ public class LiferayTemplateClassResolver implements TemplateClassResolver {
 
 	@Deactivate
 	protected void deactivate() {
-		_classResolverBundleTracker.close();
+		_classLoaderBundleTracker.close();
 	}
 
 	protected ClassLoader findClassLoader(
@@ -287,13 +287,13 @@ public class LiferayTemplateClassResolver implements TemplateClassResolver {
 		LiferayTemplateClassResolver.class);
 
 	private final Set<Bundle> _bundles = new ConcurrentHashSet<>();
-	private BundleTracker<ClassLoader> _classResolverBundleTracker;
+	private BundleTracker<ClassLoader> _classLoaderBundleTracker;
 	private volatile FreeMarkerEngineConfiguration
 		_freemarkerEngineConfiguration;
 	private final Set<ClassLoader> _wwhitelistedClassLoaders =
 		new ConcurrentHashSet<>();
 
-	private class ClassResolverBundleTrackerCustomizer
+	private class ClassLoaderBundleTrackerCustomizer
 		implements BundleTrackerCustomizer<ClassLoader> {
 
 		@Override
