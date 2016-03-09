@@ -110,7 +110,8 @@ public class UpgradeJournalArticleType extends UpgradeProcess {
 	@Override
 	protected void doUpgrade() throws Exception {
 		updateArticleType();
-		updateTable();
+
+		alterTable();
 	}
 
 	protected List<String> getArticleTypes() throws Exception {
@@ -250,7 +251,7 @@ public class UpgradeJournalArticleType extends UpgradeProcess {
 		}
 	}
 
-	protected void updateTable() throws Exception {
+	protected void alterTable() throws Exception {
 		try (LoggingTimer loggingTimer = new LoggingTimer()) {
 			runSQL("alter table JournalArticle drop column type_");
 		}

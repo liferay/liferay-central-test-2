@@ -196,11 +196,10 @@ public class UpgradeJournalArticles extends UpgradePortletId {
 			String oldRootPortletId, String newRootPortletId)
 		throws Exception {
 
-		StringBundler sb = new StringBundler(9);
+		StringBundler sb = new StringBundler(8);
 
-		sb.append("select portletPreferencesId, plid, portletId, ");
-		sb.append("preferences from PortletPreferences where portletId ");
-		sb.append("= '");
+		sb.append("select portletPreferencesId, plid, portletId, preferences ");
+		sb.append("from PortletPreferences where portletId = '");
 		sb.append(oldRootPortletId);
 		sb.append("' OR portletId like '");
 		sb.append(oldRootPortletId);
