@@ -72,7 +72,7 @@ public class RemoveOnCompletionBackgroundTaskStatusMessageListener
 		if (status == BackgroundTaskConstants.STATUS_SUCCESSFUL) {
 			if (_log.isInfoEnabled()) {
 				_log.info(
-					"Delete background task " + backgroundTask.toString());
+					"Deleting background task " + backgroundTask.toString());
 			}
 
 			_backgroundTaskManager.deleteBackgroundTask(backgroundTaskId);
