@@ -105,7 +105,7 @@ public class LiferayTemplateClassResolverTest {
 
 		_freemarkerTemplateConfiguration.update(properties);
 
-		Thread.sleep(_DEFAULT_TIMEOUT);
+		Thread.sleep(_SLEEP);
 
 		_liferayTemplateClassResolver.resolve(
 			"freemarker.template.utility.ClassUtil", null, null);
@@ -120,7 +120,7 @@ public class LiferayTemplateClassResolverTest {
 
 		_freemarkerTemplateConfiguration.update(properties);
 
-		Thread.sleep(_DEFAULT_TIMEOUT);
+		Thread.sleep(_SLEEP);
 
 		_liferayTemplateClassResolver.resolve(
 			"freemarker.template.utility.ClassUtil", null, null);
@@ -135,7 +135,7 @@ public class LiferayTemplateClassResolverTest {
 
 		_freemarkerTemplateConfiguration.update(properties);
 
-		Thread.sleep(_DEFAULT_TIMEOUT);
+		Thread.sleep(_SLEEP);
 
 		_liferayTemplateClassResolver.resolve(
 			"freemarker.template.utility.Execute", null, null);
@@ -150,7 +150,7 @@ public class LiferayTemplateClassResolverTest {
 
 		_freemarkerTemplateConfiguration.update(properties);
 
-		Thread.sleep(_DEFAULT_TIMEOUT);
+		Thread.sleep(_SLEEP);
 
 		_liferayTemplateClassResolver.resolve(
 			"freemarker.template.utility.ObjectConstructor", null, null);
@@ -165,7 +165,7 @@ public class LiferayTemplateClassResolverTest {
 
 		_freemarkerTemplateConfiguration.update(properties);
 
-		Thread.sleep(_DEFAULT_TIMEOUT);
+		Thread.sleep(_SLEEP);
 
 		_liferayTemplateClassResolver.resolve(
 			"com.liferay.portal.kernel.model.User", null, null);
@@ -184,7 +184,7 @@ public class LiferayTemplateClassResolverTest {
 
 		_freemarkerTemplateConfiguration.update(properties);
 
-		Thread.sleep(_DEFAULT_TIMEOUT);
+		Thread.sleep(_SLEEP);
 
 		_liferayTemplateClassResolver.resolve(
 			"com.liferay.portal.kernel.model.User", null, null);
@@ -224,7 +224,7 @@ public class LiferayTemplateClassResolverTest {
 		_liferayTemplateClassResolver.resolve("java.lang.Thread", null, null);
 	}
 
-	private static final long _DEFAULT_TIMEOUT = 1000;
+	private static final long _SLEEP = 1000;
 
 	private static TemplateClassResolver _liferayTemplateClassResolver;
 	private static ServiceTracker<TemplateClassResolver, TemplateClassResolver>
