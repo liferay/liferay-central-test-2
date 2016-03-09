@@ -111,6 +111,19 @@ public class UnstableMessageUtil {
 			String failureBuildURL, StringBuilder sb)
 		throws Exception {
 
+		sb.append("<li><strong><a href=\"");
+		sb.append(failureBuildURL);
+		sb.append("\">");
+
+		JSONObject failureJSONObject = JenkinsResultsParserUtil.toJSONObject(
+			JenkinsResultsParserUtil.getLocalURL(failureBuildURL + "api/json"));
+
+		sb.append(
+			JenkinsResultsParserUtil.fixJSON(
+				failureJSONObject.getString("fullDisplayName")));
+
+		sb.append("</a></strong>");
+
 		GenericFailureMessageGenerator genericFailureMessageGenerator =
 			new GenericFailureMessageGenerator();
 
@@ -118,19 +131,10 @@ public class UnstableMessageUtil {
 			JenkinsResultsParserUtil.getLocalURL(
 				failureBuildURL + "/logText/progressiveText"));
 
-		JSONObject failureJSONObject = JenkinsResultsParserUtil.toJSONObject(
-			JenkinsResultsParserUtil.getLocalURL(failureBuildURL + "api/json"));
-
-		sb.append("<li><strong><a href=\"");
-		sb.append(failureBuildURL);
-		sb.append("\">");
-		sb.append(
-			JenkinsResultsParserUtil.fixJSON(
-				failureJSONObject.getString("fullDisplayName")));
-		sb.append("</a></strong>");
 		sb.append(
 			genericFailureMessageGenerator.getMessage(
 				failureBuildURL, consoleOutput, null));
+
 		sb.append("</li>");
 	}
 
