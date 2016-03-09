@@ -26,7 +26,7 @@ import com.liferay.portal.kernel.util.StringUtil;
  */
 public class UpgradeSchema extends UpgradeProcess {
 
-	protected void alterColumn() throws Exception {
+	protected void alterTables() throws Exception {
 		try (LoggingTimer loggingTimer = new LoggingTimer()) {
 			alter(
 				DDMContentTable.class,
@@ -44,7 +44,8 @@ public class UpgradeSchema extends UpgradeProcess {
 	@Override
 	protected void doUpgrade() throws Exception {
 		updateSQL();
-		alterColumn();
+
+		alterTables();
 	}
 
 	protected void updateSQL() throws Exception {

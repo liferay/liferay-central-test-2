@@ -60,6 +60,7 @@ public class UpgradeKaleoTaskInstanceToken extends UpgradeProcess {
 	@Override
 	protected void doUpgrade() throws Exception {
 		updateKaleoTaskInstanceTokens();
+
 		deleteKaleoInstanceTokens();
 	}
 
@@ -124,7 +125,7 @@ public class UpgradeKaleoTaskInstanceToken extends UpgradeProcess {
 					continue;
 				}
 
-				StringBundler sb = new StringBundler();
+				StringBundler sb = new StringBundler(5);
 
 				sb.append("update KaleoTaskInstanceToken set ");
 				sb.append("kaleoInstanceTokenId = ");
