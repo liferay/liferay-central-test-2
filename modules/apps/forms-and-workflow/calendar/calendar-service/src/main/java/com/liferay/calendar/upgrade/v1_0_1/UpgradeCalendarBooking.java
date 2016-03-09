@@ -34,8 +34,8 @@ public class UpgradeCalendarBooking extends UpgradeProcess {
 			}
 
 			runSQL(
-				"update CalendarBooking set vEventUid = uuid_ where vEventUid" +
-					" is null or vEventUid = ''");
+				"update CalendarBooking set vEventUid = uuid_ where " +
+					"vEventUid is null or vEventUid = ''");
 		}
 	}
 
