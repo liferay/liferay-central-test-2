@@ -25,18 +25,18 @@ public class UpgradeLastPublishDate
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		updateTables();
+		addLastPublishDateColumns();
 
 		updateLastPublishDates(PollsPortletKeys.POLLS, "PollsChoice");
 		updateLastPublishDates(PollsPortletKeys.POLLS, "PollsQuestion");
 		updateLastPublishDates(PollsPortletKeys.POLLS, "PollsVote");
 	}
 
-	protected void updateTables() throws Exception {
+	protected void addLastPublishDateColumns() throws Exception {
 		try (LoggingTimer loggingTimer = new LoggingTimer()) {
-			runSQL("alter table PollsChoice add lastPublishDate DATE null");
-			runSQL("alter table PollsQuestion add lastPublishDate DATE null");
-			runSQL("alter table PollsVote add lastPublishDate DATE null");
+			addLastPublishDateColumn("PollsChoice");
+			addLastPublishDateColumn("PollsQuestion");
+			addLastPublishDateColumn("PollsVote");
 		}
 	}
 

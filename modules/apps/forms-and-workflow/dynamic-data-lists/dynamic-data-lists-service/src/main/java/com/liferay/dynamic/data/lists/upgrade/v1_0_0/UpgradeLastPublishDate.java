@@ -25,17 +25,17 @@ public class UpgradeLastPublishDate
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		updateTables();
+		addLastPublishDateColumns();
 
 		updateLastPublishDates(DDLPortletKeys.DYNAMIC_DATA_LISTS, "DDLRecord");
 		updateLastPublishDates(
 			DDLPortletKeys.DYNAMIC_DATA_LISTS, "DDLRecordSet");
 	}
 
-	protected void updateTables() throws Exception {
+	protected void addLastPublishDateColumns() throws Exception {
 		try (LoggingTimer loggingTimer = new LoggingTimer()) {
-			runSQL("alter table DDLRecord add lastPublishDate DATE null");
-			runSQL("alter table DDLRecordSet add lastPublishDate DATE null");
+			addLastPublishDateColumn("DDLRecord");
+			addLastPublishDateColumn("DDLRecordSet");
 		}
 	}
 

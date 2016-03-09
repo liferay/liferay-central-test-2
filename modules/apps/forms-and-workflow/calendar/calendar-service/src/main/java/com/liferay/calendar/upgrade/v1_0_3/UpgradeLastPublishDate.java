@@ -25,7 +25,7 @@ public class UpgradeLastPublishDate
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		updateTables();
+		addLastPublishDateColumns();
 
 		updateLastPublishDates(CalendarPortletKeys.CALENDAR, "Calendar");
 		updateLastPublishDates(CalendarPortletKeys.CALENDAR, "CalendarBooking");
@@ -35,15 +35,12 @@ public class UpgradeLastPublishDate
 			CalendarPortletKeys.CALENDAR, "CalendarResource");
 	}
 
-	protected void updateTables() throws Exception {
+	protected void addLastPublishDateColumns() throws Exception {
 		try (LoggingTimer loggingTimer = new LoggingTimer()) {
-			runSQL("alter table Calendar add lastPublishDate DATE null");
-			runSQL("alter table CalendarBooking add lastPublishDate DATE null");
-			runSQL(
-				"alter table CalendarNotificationTemplate add lastPublishDate" +
-					" DATE null");
-			runSQL(
-				"alter table CalendarResource add lastPublishDate DATE null");
+			addLastPublishDateColumn("Calendar");
+			addLastPublishDateColumn("CalendarBooking");
+			addLastPublishDateColumn("CalendarNotificationTemplate");
+			addLastPublishDateColumn("CalendarResource");
 		}
 	}
 
