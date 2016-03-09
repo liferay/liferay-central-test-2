@@ -72,8 +72,7 @@ public class IndexOnStartupIndexerServiceCustomizer
 			if (_serviceRegistrations.containsKey(className)) {
 				if (_log.isInfoEnabled()) {
 					_log.info(
-						"IndexOnStartupPortalInstanceLifecycleListener " +
-							"already registered for: " + className);
+						"Skip duplicate service registration for " + className);
 				}
 
 				return indexer;
