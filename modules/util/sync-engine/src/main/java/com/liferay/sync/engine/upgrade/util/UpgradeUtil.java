@@ -14,7 +14,6 @@
 
 package com.liferay.sync.engine.upgrade.util;
 
-import com.liferay.portal.kernel.util.LoggingTimer;
 import com.liferay.sync.engine.service.SyncAccountService;
 import com.liferay.sync.engine.service.SyncFileService;
 import com.liferay.sync.engine.service.SyncPropService;
@@ -58,20 +57,18 @@ import org.slf4j.LoggerFactory;
 public class UpgradeUtil {
 
 	public static void copyLoggerConfiguration() throws Exception {
-		try (LoggingTimer loggingTimer = new LoggingTimer()) {
-			ClassLoader classLoader = LoggerUtil.class.getClassLoader();
+		ClassLoader classLoader = LoggerUtil.class.getClassLoader();
 
-			InputStream inputStream = classLoader.getResourceAsStream(
-				PropsValues.SYNC_LOGGER_CONFIGURATION_FILE);
+		InputStream inputStream = classLoader.getResourceAsStream(
+			PropsValues.SYNC_LOGGER_CONFIGURATION_FILE);
 
-			Path loggerConfigurationFilePath = Paths.get(
-				PropsValues.SYNC_CONFIGURATION_DIRECTORY,
-				PropsValues.SYNC_LOGGER_CONFIGURATION_FILE);
+		Path loggerConfigurationFilePath = Paths.get(
+			PropsValues.SYNC_CONFIGURATION_DIRECTORY,
+			PropsValues.SYNC_LOGGER_CONFIGURATION_FILE);
 
-			Files.copy(
-				inputStream, loggerConfigurationFilePath,
-				StandardCopyOption.REPLACE_EXISTING);
-		}
+		Files.copy(
+			inputStream, loggerConfigurationFilePath,
+			StandardCopyOption.REPLACE_EXISTING);
 	}
 
 	public static void upgrade() throws Exception {

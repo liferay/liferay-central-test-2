@@ -14,7 +14,6 @@
 
 package com.liferay.sync.engine.upgrade.v3_0_11;
 
-import com.liferay.portal.kernel.util.LoggingTimer;
 import com.liferay.sync.engine.model.SyncAccount;
 import com.liferay.sync.engine.model.SyncFile;
 import com.liferay.sync.engine.model.SyncSite;
@@ -45,12 +44,6 @@ public class UpgradeProcess_3_0_11 extends BaseUpgradeProcess {
 		List<SyncAccount> syncAccounts = SyncAccountService.findAll();
 
 		for (SyncAccount syncAccount : syncAccounts) {
-			updateSyncSites(syncAccount);
-		}
-	}
-
-	protected void updateSyncSites(SyncAccount syncAccount) throws Exception {
-		try (LoggingTimer loggingTimer = new LoggingTimer()) {
 			List<SyncSite> syncSites = SyncSiteService.findSyncSites(
 				syncAccount.getSyncAccountId());
 
