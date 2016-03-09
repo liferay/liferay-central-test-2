@@ -102,8 +102,8 @@ public class LiferayTemplateClassResolver implements TemplateClassResolver {
 		if (allowed) {
 			try {
 				ClassLoader[] wwhitelistedClassLoaders =
-					_wwhitelistedClassloaders.toArray(
-						new ClassLoader[_wwhitelistedClassloaders.size()]);
+					_wwhitelistedClassLoaders.toArray(
+						new ClassLoader[_wwhitelistedClassLoaders.size()]);
 
 				ClassLoader[] classLoaders = ArrayUtil.append(
 					wwhitelistedClassLoaders,
@@ -139,7 +139,7 @@ public class LiferayTemplateClassResolver implements TemplateClassResolver {
 
 		_classResolverBundleTracker.open();
 
-		_wwhitelistedClassloaders.add(
+		_wwhitelistedClassLoaders.add(
 			LiferayTemplateClassResolver.class.getClassLoader());
 	}
 
@@ -161,7 +161,7 @@ public class LiferayTemplateClassResolver implements TemplateClassResolver {
 				bundle.getBundleContext());
 
 			if (classLoader != null) {
-				_wwhitelistedClassloaders.add(classLoader);
+				_wwhitelistedClassLoaders.add(classLoader);
 			}
 		}
 	}
@@ -289,7 +289,7 @@ public class LiferayTemplateClassResolver implements TemplateClassResolver {
 	private BundleTracker<ClassLoader> _classResolverBundleTracker;
 	private volatile FreeMarkerEngineConfiguration
 		_freemarkerEngineConfiguration;
-	private final Set<ClassLoader> _wwhitelistedClassloaders =
+	private final Set<ClassLoader> _wwhitelistedClassLoaders =
 		new ConcurrentHashSet<>();
 
 	private class ClassResolverBundleTrackerCustomizer
@@ -304,7 +304,7 @@ public class LiferayTemplateClassResolver implements TemplateClassResolver {
 				bundle.getBundleContext());
 
 			if (classLoader != null) {
-				_wwhitelistedClassloaders.add(classLoader);
+				_wwhitelistedClassLoaders.add(classLoader);
 			}
 
 			_bundles.add(bundle);
@@ -323,7 +323,7 @@ public class LiferayTemplateClassResolver implements TemplateClassResolver {
 		public void removedBundle(
 			Bundle bundle, BundleEvent bundleEvent, ClassLoader classLoader) {
 
-			_wwhitelistedClassloaders.remove(classLoader);
+			_wwhitelistedClassLoaders.remove(classLoader);
 
 			_bundles.remove(bundle);
 		}
