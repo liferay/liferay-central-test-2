@@ -3,10 +3,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.liferay.portal</groupId>
-	<artifactId>com.liferay.portal.impl</artifactId>
-	<name>Liferay Portal Impl</name>
-	<version>1.0.0</version>
-	<description>Contains implementation for the portal services.</description>
+	<artifactId>com.liferay.portal.kernel</artifactId>
+	<name>Liferay Portal Kernel</name>
+	<version>1.0.3</version>
+	<description>Contains interfaces for the portal services. Interfaces are only loaded by the global class loader and are shared by all plugins.</description>
 	<licenses>
 		<license>
 			<name>LGPL 2.1</name>
@@ -25,24 +25,4 @@
 		<developerConnection>scm:git:git@github.com:liferay/liferay-portal.git</developerConnection>
 		<url>http://github.com/liferay/liferay-portal</url>
 	</scm>
-	<dependencies>
-		<dependency>
-			<groupId>com.liferay.portal</groupId>
-			<artifactId>com.liferay.portal.kernel</artifactId>
-			<version>1.0.0</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.liferay.portal</groupId>
-			<artifactId>com.liferay.util.bridges</artifactId>
-			<version>1.0.0</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.liferay.portal</groupId>
-			<artifactId>com.liferay.util.java</artifactId>
-			<version>1.0.0</version>
-			<scope>provided</scope>
-		</dependency>
-	</dependencies>
 </project>
