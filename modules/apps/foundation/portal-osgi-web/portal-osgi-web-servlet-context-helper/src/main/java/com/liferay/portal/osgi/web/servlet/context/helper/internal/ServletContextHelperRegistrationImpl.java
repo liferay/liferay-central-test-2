@@ -91,14 +91,19 @@ public class ServletContextHelperRegistrationImpl
 
 		_servletContextHelperServiceRegistration = createServletContextHelper(
 			bundleContext, servletContextName, contextPath);
+
 		_servletContextListenerServiceRegistration =
 			createServletContextListener(bundleContext, servletContextName);
+
 		_defaultServletServiceRegistration = createDefaultServlet(
 			bundleContext, servletContextName, wabShapedBundle);
+
 		_jspServletServiceRegistration = createJspServlet(
 			bundleContext, servletContextName);
+
 		_portletServletServiceRegistration = createPortletServlet(
 			bundleContext, servletContextName, wabShapedBundle);
+
 		_portletServletRequestFilterServiceRegistration =
 			createRestrictPortletServletRequestFilter(
 				bundleContext, servletContextName);
@@ -107,8 +112,11 @@ public class ServletContextHelperRegistrationImpl
 	@Override
 	public void close() {
 		_servletContextHelperServiceRegistration.unregister();
+
 		_servletContextListenerServiceRegistration.unregister();
+		
 		_defaultServletServiceRegistration.unregister();
+		
 		_jspServletServiceRegistration.unregister();
 
 		if (_portletServletServiceRegistration != null) {
