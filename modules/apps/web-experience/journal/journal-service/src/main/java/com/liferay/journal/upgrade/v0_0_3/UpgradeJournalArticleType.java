@@ -107,6 +107,12 @@ public class UpgradeJournalArticleType extends UpgradeProcess {
 			assetVocabularySettingsHelper.toString(), serviceContext);
 	}
 
+	protected void alterTable() throws Exception {
+		try (LoggingTimer loggingTimer = new LoggingTimer()) {
+			runSQL("alter table JournalArticle drop column type_");
+		}
+	}
+
 	@Override
 	protected void doUpgrade() throws Exception {
 		updateArticleType();
@@ -248,12 +254,6 @@ public class UpgradeJournalArticleType extends UpgradeProcess {
 				LocaleThreadLocal.setDefaultLocale(
 					localeThreadLocalDefaultLocale);
 			}
-		}
-	}
-
-	protected void alterTable() throws Exception {
-		try (LoggingTimer loggingTimer = new LoggingTimer()) {
-			runSQL("alter table JournalArticle drop column type_");
 		}
 	}
 
