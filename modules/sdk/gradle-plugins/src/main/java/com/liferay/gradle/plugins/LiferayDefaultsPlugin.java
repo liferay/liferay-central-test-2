@@ -482,12 +482,6 @@ public class LiferayDefaultsPlugin extends BaseDefaultsPlugin<LiferayPlugin> {
 						_getGitCommitCommand(project, "apply", true, false));
 
 					System.out.println();
-					System.out.println('#');
-					System.out.println(
-						"# " +
-							FileUtil.getAbsolutePath(project.getProjectDir()));
-					System.out.println('#');
-					System.out.println();
 
 					for (String command : commands) {
 						System.out.println(command);
