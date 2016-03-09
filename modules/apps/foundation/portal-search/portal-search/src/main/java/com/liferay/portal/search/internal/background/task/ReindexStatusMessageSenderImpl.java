@@ -40,8 +40,8 @@ public class ReindexStatusMessageSenderImpl
 			BackgroundTaskThreadLocal.getBackgroundTaskId());
 		message.put(ReindexBackgroundTaskConstants.CLASS_NAME, className);
 		message.put(ReindexBackgroundTaskConstants.COUNT, count);
-		message.put("status", BackgroundTaskConstants.STATUS_IN_PROGRESS);
 		message.put(ReindexBackgroundTaskConstants.TOTAL, total);
+		message.put("status", BackgroundTaskConstants.STATUS_IN_PROGRESS);
 
 		_backgroundTaskStatusMessageSender.sendBackgroundTaskStatusMessage(
 			message);
@@ -58,8 +58,8 @@ public class ReindexStatusMessageSenderImpl
 			BackgroundTaskThreadLocal.getBackgroundTaskId());
 		message.put(ReindexBackgroundTaskConstants.COMPANY_ID, companyId);
 		message.put(ReindexBackgroundTaskConstants.COMPANY_IDS, companyIds);
-		message.put("status", BackgroundTaskConstants.STATUS_IN_PROGRESS);
 		message.put(ReindexBackgroundTaskConstants.PHASE, phase);
+		message.put("status", BackgroundTaskConstants.STATUS_IN_PROGRESS);
 
 		_backgroundTaskStatusMessageSender.sendBackgroundTaskStatusMessage(
 			message);
