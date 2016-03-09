@@ -91,8 +91,8 @@ public class ServletContextHelperRegistrationImpl
 
 		_servletContextHelperServiceRegistration = createServletContextHelper(
 			bundleContext, servletContextName, contextPath);
-		_servletContextListenerServiceRegistration = createServletContextListener(
-			bundleContext, servletContextName);
+		_servletContextListenerServiceRegistration =
+			createServletContextListener(bundleContext, servletContextName);
 		_defaultServletServiceRegistration = createDefaultServlet(
 			bundleContext, servletContextName, wabShapedBundle);
 		_jspServletServiceRegistration = createJspServlet(
@@ -366,9 +366,10 @@ public class ServletContextHelperRegistrationImpl
 	private final CustomServletContextHelper _customServletContextHelper;
 	private final ServiceRegistration<?> _defaultServletServiceRegistration;
 	private final ServiceRegistration<Servlet> _jspServletServiceRegistration;
-	private final ServiceRegistration<Servlet> _portletServletServiceRegistration;
 	private final ServiceRegistration<?>
 		_portletServletRequestFilterServiceRegistration;
+	private final ServiceRegistration<Servlet>
+		_portletServletServiceRegistration;
 	private final Map<String, Object> _properties;
 	private final Props _props;
 	private final ServiceRegistration<ServletContextHelper>
