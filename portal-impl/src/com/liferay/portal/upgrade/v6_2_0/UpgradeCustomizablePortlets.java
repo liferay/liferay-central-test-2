@@ -183,8 +183,8 @@ public class UpgradeCustomizablePortlets extends UpgradeProcess {
 
 		while (x != -1) {
 
-			// <name>com.liferay.portal.model.CustomizedPages10415#
-			// column-1</name>
+			// <name>com.liferay.portal.model.CustomizedPages10415#column-1
+			// </name>
 
 			String[] parts = StringUtil.split(
 				preferences.substring(x, y), StringPool.POUND);
