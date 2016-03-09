@@ -6116,17 +6116,17 @@ public class JournalArticleLocalServiceImpl
 						new ArticleVersionComparator(true));
 
 				for (JournalArticle currentArticle : currentArticles) {
-					if (Validator.isNotNull(
-							currentArticle.getExpirationDate()) &&
-						(currentArticle.getVersion() <= article.getVersion())) {
+					if ((currentArticle.getExpirationDate() == null) ||
+						(currentArticle.getVersion() > article.getVersion())) {
 
-						currentArticle.setExpirationDate(
-							article.getExpirationDate());
-						currentArticle.setStatus(
-							WorkflowConstants.STATUS_EXPIRED);
-
-						journalArticlePersistence.update(currentArticle);
+						continue;
 					}
+
+					currentArticle.setExpirationDate(
+						article.getExpirationDate());
+					currentArticle.setStatus(WorkflowConstants.STATUS_EXPIRED);
+
+					journalArticlePersistence.update(currentArticle);
 				}
 			}
 			else {
