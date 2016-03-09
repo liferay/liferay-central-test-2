@@ -39,7 +39,9 @@ public class VerifyProperties extends VerifyProcess {
 	@Override
 	protected void doVerify() throws Exception {
 		verifySystemProperties();
+
 		verifyPortalProperties();
+
 		verifyDocumentLibrary();
 	}
 
