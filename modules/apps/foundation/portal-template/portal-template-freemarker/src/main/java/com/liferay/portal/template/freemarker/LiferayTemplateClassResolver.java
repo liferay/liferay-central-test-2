@@ -189,25 +189,26 @@ public class LiferayTemplateClassResolver implements TemplateClassResolver {
 				clazz = clazz.substring(0, clazz.length() - 1);
 
 				if (exportPackage.startsWith(clazz)) {
-					BundleRevision provider = bundleCapability.getRevision();
+					BundleRevision bundleRevision =
+						bundleCapability.getRevision();
 
-					Bundle providerBundle = provider.getBundle();
+					Bundle bundleRevisionBundle = bundleRevision.getBundle();
 
-					BundleWiring providerBundleWiring = providerBundle.adapt(
-						BundleWiring.class);
+					BundleWiring bundleRevisionBundleWiring =
+						bundleRevisionBundle.adapt(BundleWiring.class);
 
-					return providerBundleWiring.getClassLoader();
+					return bundleRevisionBundleWiring.getClassLoader();
 				}
 			}
 			else if (clazz.equals(exportPackage)) {
 				BundleRevision bundleRevision = bundleCapability.getRevision();
 
-				Bundle revisionBundle = bundleRevision.getBundle();
+				Bundle bundleRevisionBundle = bundleRevision.getBundle();
 
-				BundleWiring providerBundleWiring = revisionBundle.adapt(
-					BundleWiring.class);
+				BundleWiring bundleRevisionBundleWiring =
+					bundleRevisionBundle.adapt(BundleWiring.class);
 
-				return providerBundleWiring.getClassLoader();
+				return bundleRevisionBundleWiring.getClassLoader();
 			}
 			else {
 				String allowedClassPackage = clazz.substring(
@@ -217,12 +218,12 @@ public class LiferayTemplateClassResolver implements TemplateClassResolver {
 					BundleRevision bundleRevision =
 						bundleCapability.getRevision();
 
-					Bundle revisionBundle = bundleRevision.getBundle();
+					Bundle bundleRevisionBundle = bundleRevision.getBundle();
 
-					BundleWiring providerBundleWiring = revisionBundle.adapt(
-						BundleWiring.class);
+					BundleWiring bundleRevisionBundleWiring =
+						bundleRevisionBundle.adapt(BundleWiring.class);
 
-					return providerBundleWiring.getClassLoader();
+					return bundleRevisionBundleWiring.getClassLoader();
 				}
 			}
 		}
