@@ -101,19 +101,19 @@ public class LiferayTemplateClassResolver implements TemplateClassResolver {
 
 		if (allowed) {
 			try {
-				ClassLoader[] whiteListedClassLoaders =
-					_whiteListedClassloaders.toArray(
-						new ClassLoader[_whiteListedClassloaders.size()]);
+				ClassLoader[] wwhitelistedClassLoaders =
+					_wwhitelistedClassloaders.toArray(
+						new ClassLoader[_wwhitelistedClassloaders.size()]);
 
 				ClassLoader[] classLoaders = ArrayUtil.append(
-					whiteListedClassLoaders,
+					wwhitelistedClassLoaders,
 					ClassLoaderUtil.getContextClassLoader());
 
-				ClassLoader whiteListedAggregateClassLoader =
+				ClassLoader wwhitelistedAggregateClassLoader =
 					AggregateClassLoader.getAggregateClassLoader(classLoaders);
 
 				return Class.forName(
-					className, true, whiteListedAggregateClassLoader);
+					className, true, wwhitelistedAggregateClassLoader);
 			}
 			catch (Exception e) {
 				throw new TemplateException(e, environment);
@@ -139,7 +139,7 @@ public class LiferayTemplateClassResolver implements TemplateClassResolver {
 
 		_classResolverBundleTracker.open();
 
-		_whiteListedClassloaders.add(
+		_wwhitelistedClassloaders.add(
 			LiferayTemplateClassResolver.class.getClassLoader());
 	}
 
@@ -161,7 +161,7 @@ public class LiferayTemplateClassResolver implements TemplateClassResolver {
 				bundle.getBundleContext());
 
 			if (classLoader != null) {
-				_whiteListedClassloaders.add(classLoader);
+				_wwhitelistedClassloaders.add(classLoader);
 			}
 		}
 	}
@@ -289,7 +289,7 @@ public class LiferayTemplateClassResolver implements TemplateClassResolver {
 	private BundleTracker<ClassLoader> _classResolverBundleTracker;
 	private volatile FreeMarkerEngineConfiguration
 		_freemarkerEngineConfiguration;
-	private final Set<ClassLoader> _whiteListedClassloaders =
+	private final Set<ClassLoader> _wwhitelistedClassloaders =
 		new ConcurrentHashSet<>();
 
 	private class ClassResolverBundleTrackerCustomizer
@@ -304,7 +304,7 @@ public class LiferayTemplateClassResolver implements TemplateClassResolver {
 				bundle.getBundleContext());
 
 			if (classLoader != null) {
-				_whiteListedClassloaders.add(classLoader);
+				_wwhitelistedClassloaders.add(classLoader);
 			}
 
 			_bundles.add(bundle);
@@ -323,7 +323,7 @@ public class LiferayTemplateClassResolver implements TemplateClassResolver {
 		public void removedBundle(
 			Bundle bundle, BundleEvent bundleEvent, ClassLoader classLoader) {
 
-			_whiteListedClassloaders.remove(classLoader);
+			_wwhitelistedClassloaders.remove(classLoader);
 
 			_bundles.remove(bundle);
 		}
