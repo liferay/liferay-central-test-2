@@ -15,8 +15,6 @@
 package com.liferay.portal.kernel.service.permission;
 
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.model.Portlet;
 import com.liferay.portal.kernel.security.pacl.permission.PortalRuntimePermission;
@@ -328,9 +326,6 @@ public class PortletPermissionUtil {
 
 		_portletPermission = portletPermission;
 	}
-
-	private static final Log _log = LogFactoryUtil.getLog(
-		PortletPermissionUtil.class);
 
 	private static PortletPermission _portletPermission;
 

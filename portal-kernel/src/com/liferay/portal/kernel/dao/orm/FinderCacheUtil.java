@@ -14,8 +14,6 @@
 
 package com.liferay.portal.kernel.dao.orm;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.BaseModel;
 import com.liferay.portal.kernel.security.pacl.permission.PortalRuntimePermission;
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
@@ -74,9 +72,6 @@ public class FinderCacheUtil {
 	public static void removeResult(FinderPath finderPath, Object[] args) {
 		_finderCache.removeResult(finderPath, args);
 	}
-
-	private static final Log _log = LogFactoryUtil.getLog(
-		FinderCacheUtil.class);
 
 	private static final FinderCache _finderCache =
 		ProxyFactory.newServiceTrackedInstance(FinderCache.class);
