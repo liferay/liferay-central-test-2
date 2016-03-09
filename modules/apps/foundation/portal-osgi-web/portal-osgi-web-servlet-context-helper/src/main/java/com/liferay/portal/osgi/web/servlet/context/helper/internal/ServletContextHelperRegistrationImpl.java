@@ -162,11 +162,9 @@ public class ServletContextHelperRegistrationImpl
 			properties.put(key, serviceReference.getProperty(key));
 		}
 
-		for (Entry<String, String> contextParametersEntry :
-				contextParameters.entrySet()) {
-
-			String key = contextParametersEntry.getKey();
-			String value = contextParametersEntry.getValue();
+		for (Entry<String, String> entry : contextParameters.entrySet()) {
+			String key = entry.getKey();
+			String value = entry.getValue();
 
 			properties.put(
 				HttpWhiteboardConstants.
