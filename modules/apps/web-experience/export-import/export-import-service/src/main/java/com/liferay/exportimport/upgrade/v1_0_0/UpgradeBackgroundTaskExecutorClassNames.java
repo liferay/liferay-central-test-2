@@ -24,7 +24,7 @@ import com.liferay.portal.kernel.util.LoggingTimer;
 public class UpgradeBackgroundTaskExecutorClassNames
 	extends BaseUpgradeBackgroundTaskExecutorClassNames {
 
-	protected void deleteBackgroundTask() throws Exception {
+	protected void deleteBackgroundTasks() throws Exception {
 		try (LoggingTimer loggingTimer = new LoggingTimer()) {
 			runSQL(
 				"delete from BackgroundTask where taskExecutorClassName = '" +
@@ -37,7 +37,7 @@ public class UpgradeBackgroundTaskExecutorClassNames
 	protected void doUpgrade() throws Exception {
 		super.doUpgrade();
 
-		deleteBackgroundTask();
+		deleteBackgroundTasks();
 	}
 
 	@Override
