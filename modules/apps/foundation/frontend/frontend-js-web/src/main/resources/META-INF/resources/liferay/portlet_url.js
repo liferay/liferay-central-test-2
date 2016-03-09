@@ -122,8 +122,8 @@ AUI.add(
 				var reservedParams = instance.reservedParams;
 
 				if (lifecycle === PortletURL.ACTION_PHASE) {
-					reservedParams.p_p_lifecycle = PortletURL.ACTION_PHASE;
 					reservedParams.p_auth = Liferay.authToken;
+					reservedParams.p_p_lifecycle = PortletURL.ACTION_PHASE;
 				}
 				else if (lifecycle === PortletURL.RENDER_PHASE) {
 					reservedParams.p_p_lifecycle = PortletURL.RENDER_PHASE;
