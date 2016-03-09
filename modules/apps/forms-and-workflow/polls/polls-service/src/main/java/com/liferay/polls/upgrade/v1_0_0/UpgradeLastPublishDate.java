@@ -23,6 +23,14 @@ import com.liferay.portal.kernel.util.LoggingTimer;
 public class UpgradeLastPublishDate
 	extends com.liferay.portal.upgrade.v7_0_0.UpgradeLastPublishDate {
 
+	protected void addLastPublishDateColumns() throws Exception {
+		try (LoggingTimer loggingTimer = new LoggingTimer()) {
+			addLastPublishDateColumn("PollsChoice");
+			addLastPublishDateColumn("PollsQuestion");
+			addLastPublishDateColumn("PollsVote");
+		}
+	}
+
 	@Override
 	protected void doUpgrade() throws Exception {
 		addLastPublishDateColumns();
@@ -30,14 +38,6 @@ public class UpgradeLastPublishDate
 		updateLastPublishDates(PollsPortletKeys.POLLS, "PollsChoice");
 		updateLastPublishDates(PollsPortletKeys.POLLS, "PollsQuestion");
 		updateLastPublishDates(PollsPortletKeys.POLLS, "PollsVote");
-	}
-
-	protected void addLastPublishDateColumns() throws Exception {
-		try (LoggingTimer loggingTimer = new LoggingTimer()) {
-			addLastPublishDateColumn("PollsChoice");
-			addLastPublishDateColumn("PollsQuestion");
-			addLastPublishDateColumn("PollsVote");
-		}
 	}
 
 }

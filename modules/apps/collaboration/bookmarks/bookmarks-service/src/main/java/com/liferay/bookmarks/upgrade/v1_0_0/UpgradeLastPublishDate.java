@@ -23,6 +23,13 @@ import com.liferay.portal.kernel.util.LoggingTimer;
 public class UpgradeLastPublishDate
 	extends com.liferay.portal.upgrade.v7_0_0.UpgradeLastPublishDate {
 
+	protected void addLastPublishDateColumns() throws Exception {
+		try (LoggingTimer loggingTimer = new LoggingTimer()) {
+			addLastPublishDateColumn("BookmarksEntry");
+			addLastPublishDateColumn("BookmarksFolder");
+		}
+	}
+
 	@Override
 	protected void doUpgrade() throws Exception {
 		addLastPublishDateColumns();
@@ -31,13 +38,6 @@ public class UpgradeLastPublishDate
 			BookmarksPortletKeys.BOOKMARKS, "BookmarksEntry");
 		updateLastPublishDates(
 			BookmarksPortletKeys.BOOKMARKS, "BookmarksFolder");
-	}
-
-	protected void addLastPublishDateColumns() throws Exception {
-		try (LoggingTimer loggingTimer = new LoggingTimer()) {
-			addLastPublishDateColumn("BookmarksEntry");
-			addLastPublishDateColumn("BookmarksFolder");
-		}
 	}
 
 }
