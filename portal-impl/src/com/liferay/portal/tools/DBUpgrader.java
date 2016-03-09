@@ -57,7 +57,7 @@ import org.apache.commons.lang.time.StopWatch;
  */
 public class DBUpgrader {
 
-	public static void checkUpgradeSchemaVersion(long upgradeVersion)
+	public static void checkRequiredBuildNumber(int requiredBuildNumber)
 		throws PortalException {
 
 		int buildNumber = ReleaseLocalServiceUtil.getBuildNumberOrCreate();
@@ -66,17 +66,18 @@ public class DBUpgrader {
 			StringBundler sb = new StringBundler(6);
 
 			sb.append("Attempting to deploy an older Liferay Portal version. ");
-			sb.append("Current build version is ");
+			sb.append("Current build number is ");
 			sb.append(buildNumber);
-			sb.append(" and attempting to deploy version ");
+			sb.append(" and attempting to deploy number ");
 			sb.append(ReleaseInfo.getParentBuildNumber());
 			sb.append(".");
 
 			throw new IllegalStateException(sb.toString());
 		}
-		else if (buildNumber < upgradeVersion) {
+		else if (buildNumber < requiredBuildNumber) {
 			String msg =
-				"You must first upgrade to Liferay Portal " + upgradeVersion;
+				"You must first upgrade to Liferay Portal " +
+					requiredBuildNumber;
 
 			System.out.println(msg);
 
@@ -134,9 +135,9 @@ public class DBUpgrader {
 
 		CacheRegistryUtil.setActive(false);
 
-		// Check release
+		// Check required build number
 
-		checkUpgradeSchemaVersion(ReleaseInfo.RELEASE_5_2_3_BUILD_NUMBER);
+		checkRequiredBuildNumber(ReleaseInfo.RELEASE_5_2_3_BUILD_NUMBER);
 
 		// Upgrade
 
