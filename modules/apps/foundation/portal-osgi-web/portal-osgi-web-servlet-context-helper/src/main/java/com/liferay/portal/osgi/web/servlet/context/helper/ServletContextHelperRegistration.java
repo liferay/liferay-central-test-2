@@ -32,10 +32,10 @@ public interface ServletContextHelperRegistration {
 	public ServletContext getServletContext();
 
 	public ServiceReference<ServletContextHelper>
-		getServletContextHelperReference();
+		getServletContextHelperSeviceReference();
 
 	public ServiceReference<ServletContextListener>
-		getServletContextListenerReference();
+		getServletContextListenerSeviceReference();
 
 	public void setProperties(Map<String, String> contextParameters);
 
