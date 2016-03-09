@@ -264,7 +264,7 @@ public interface AssetLinkLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<AssetLink> getDirectLinks(long entryId,
-		boolean excludeNonVisibleLinks);
+		boolean excludeInvisibleLinks);
 
 	/**
 	* Returns all the asset links of the given link type whose first entry ID
@@ -284,7 +284,7 @@ public interface AssetLinkLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<AssetLink> getDirectLinks(long entryId, int typeId,
-		boolean excludeNonVisibleLinks);
+		boolean excludeInvisibleLinks);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ExportActionableDynamicQuery getExportActionbleDynamicQuery(
