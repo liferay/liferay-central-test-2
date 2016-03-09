@@ -97,7 +97,7 @@ public class WabBundleProcessor {
 			_servletContextRegistration.unregister();
 
 			_bundleContext.ungetService(
-				_servletContextHelperRegistrationReference);
+				_servletContextHelperRegistrationServiceReference);
 		}
 		finally {
 			currentThread.setContextClassLoader(contextClassLoader);
@@ -282,13 +282,13 @@ public class WabBundleProcessor {
 		Map<String, String> contextParameters,
 		Map<String, String> jspTaglibMappings) {
 
-		_servletContextHelperRegistrationReference =
+		_servletContextHelperRegistrationServiceReference =
 			_bundleContext.getServiceReference(
 				ServletContextHelperRegistration.class);
 
 		ServletContextHelperRegistration servletContextHelperRegistration =
 			_bundleContext.getService(
-				_servletContextHelperRegistrationReference);
+				_servletContextHelperRegistrationServiceReference);
 
 		servletContextHelperRegistration.setProperties(contextParameters);
 
@@ -515,7 +515,7 @@ public class WabBundleProcessor {
 		new ConcurrentSkipListSet<>();
 	private final Logger _logger;
 	private ServiceReference<ServletContextHelperRegistration>
-		_servletContextHelperRegistrationReference;
+		_servletContextHelperRegistrationServiceReference;
 	private ServiceRegistration<ServletContext> _servletContextRegistration;
 	private final Set<ServiceRegistration<Servlet>> _servletRegistrations =
 		new ConcurrentSkipListSet<>();
