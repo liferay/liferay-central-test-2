@@ -221,11 +221,11 @@ public class AssetLinkLocalServiceImpl extends AssetLinkLocalServiceBaseImpl {
 
 	@Override
 	public List<AssetLink> getDirectLinks(
-		long entryId, boolean excludeNonVisibleLinks) {
+		long entryId, boolean excludeInvisibleLinks) {
 
 		List<AssetLink> assetLinks = assetLinkPersistence.findByE1(entryId);
 
-		return filterAssetLinks(assetLinks, excludeNonVisibleLinks);
+		return filterAssetLinks(assetLinks, excludeInvisibleLinks);
 	}
 
 	/**
@@ -248,12 +248,12 @@ public class AssetLinkLocalServiceImpl extends AssetLinkLocalServiceBaseImpl {
 
 	@Override
 	public List<AssetLink> getDirectLinks(
-		long entryId, int typeId, boolean excludeNonVisibleLinks) {
+		long entryId, int typeId, boolean excludeInvisibleLinks) {
 
 		List<AssetLink> assetLinks = assetLinkPersistence.findByE1_T(
 			entryId, typeId);
 
-		return filterAssetLinks(assetLinks, excludeNonVisibleLinks);
+		return filterAssetLinks(assetLinks, excludeInvisibleLinks);
 	}
 
 	@Override
@@ -481,9 +481,9 @@ public class AssetLinkLocalServiceImpl extends AssetLinkLocalServiceBaseImpl {
 	}
 
 	protected List<AssetLink> filterAssetLinks(
-		List<AssetLink> assetLinks, boolean excludeNonVisibleLinks) {
+		List<AssetLink> assetLinks, boolean excludeInvisibleLinks) {
 
-		if (!assetLinks.isEmpty() && excludeNonVisibleLinks) {
+		if (!assetLinks.isEmpty() && excludeInvisibleLinks) {
 			List<AssetLink> filteredAssetLinks = new ArrayList<>(
 				assetLinks.size());
 
