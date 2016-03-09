@@ -17,6 +17,8 @@
 <%@ include file="/init.jsp" %>
 
 <%
+String tabs1 = ParamUtil.getString(request, "tabs1", "templates");
+
 long groupId = ParamUtil.getLong(request, "groupId", themeDisplay.getSiteGroupId());
 long classNameId = ParamUtil.getLong(request, "classNameId");
 long classPK = ParamUtil.getLong(request, "classPK");
@@ -25,8 +27,6 @@ long resourceClassNameId = ParamUtil.getLong(request, "resourceClassNameId");
 if (resourceClassNameId == 0) {
 	resourceClassNameId = PortalUtil.getClassNameId(PortletDisplayTemplate.class);
 }
-
-String tabs1 = ParamUtil.getString(request, "tabs1", "templates");
 %>
 
 <portlet:renderURL var="portletURL">
