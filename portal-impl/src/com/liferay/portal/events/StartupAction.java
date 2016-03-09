@@ -160,14 +160,13 @@ public class StartupAction extends SimpleAction {
 			System.exit(1);
 		}
 
-		// Check Schema Version
+		// Check required build number
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Check Schema Version");
+			_log.debug("Check required build number");
 		}
 
-		DBUpgrader.checkUpgradeSchemaVersion(
-			ReleaseInfo.getParentBuildNumber());
+		DBUpgrader.checkRequiredBuildNumber(ReleaseInfo.getParentBuildNumber());
 
 		// Check class names
 
