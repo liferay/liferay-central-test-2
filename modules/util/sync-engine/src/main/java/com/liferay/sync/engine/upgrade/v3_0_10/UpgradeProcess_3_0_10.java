@@ -14,7 +14,6 @@
 
 package com.liferay.sync.engine.upgrade.v3_0_10;
 
-import com.liferay.portal.kernel.util.LoggingTimer;
 import com.liferay.sync.engine.model.SyncAccount;
 import com.liferay.sync.engine.model.SyncFile;
 import com.liferay.sync.engine.model.SyncSite;
@@ -76,99 +75,94 @@ public class UpgradeProcess_3_0_10 extends BaseUpgradeProcess {
 	}
 
 	protected void upgradeLogger() throws Exception {
-		try (LoggingTimer loggingTimer = new LoggingTimer()) {
-			Path logsFolderPath = Paths.get(
-				PropsValues.SYNC_CONFIGURATION_DIRECTORY, "logs");
+		Path logsFolderPath = Paths.get(
+			PropsValues.SYNC_CONFIGURATION_DIRECTORY, "logs");
 
-			Path archiveFilePath = logsFolderPath.resolve("archive");
+		Path archiveFilePath = logsFolderPath.resolve("archive");
 
-			Files.createDirectories(archiveFilePath);
+		Files.createDirectories(archiveFilePath);
 
-			Calendar calendar = Calendar.getInstance();
+		Calendar calendar = Calendar.getInstance();
 
-			calendar.add(Calendar.DAY_OF_MONTH, -7);
+		calendar.add(Calendar.DAY_OF_MONTH, -7);
 
-			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-			Path archiveZipFilePath = archiveFilePath.resolve(
-				"sync-" + dateFormat.format(calendar.getTime()) + ".log.zip");
+		Path archiveZipFilePath = archiveFilePath.resolve(
+			"sync-" + dateFormat.format(calendar.getTime()) + ".log.zip");
 
-			FileOutputStream fileOutputStream = new FileOutputStream(
-				archiveZipFilePath.toFile());
+		FileOutputStream fileOutputStream = new FileOutputStream(
+			archiveZipFilePath.toFile());
 
-			ZipOutputStream zipOutputStream = new ZipOutputStream(
-				fileOutputStream);
+		ZipOutputStream zipOutputStream = new ZipOutputStream(fileOutputStream);
 
-			try (DirectoryStream<Path> filePaths =
-					Files.newDirectoryStream(logsFolderPath)) {
+		try (DirectoryStream<Path> filePaths =
+				Files.newDirectoryStream(logsFolderPath)) {
 
-				for (Path filePath : filePaths) {
-					if (filePath.equals(archiveFilePath)) {
-						continue;
-					}
-
-					ZipEntry zipEntry = new ZipEntry(
-						String.valueOf(filePath.getFileName()));
-
-					zipOutputStream.putNextEntry(zipEntry);
-
-					InputStream inputStream = Files.newInputStream(filePath);
-
-					byte[] bytes = new byte[4096];
-					int length = 0;
-
-					while ((length = inputStream.read(bytes)) > 0) {
-						zipOutputStream.write(bytes, 0, length);
-					}
-
-					zipOutputStream.closeEntry();
-
-					StreamUtil.cleanUp(inputStream);
-
-					Files.delete(filePath);
+			for (Path filePath : filePaths) {
+				if (filePath.equals(archiveFilePath)) {
+					continue;
 				}
 
-				zipOutputStream.close();
-			}
-			catch (Exception e) {
-			}
-			finally {
-				StreamUtil.cleanUp(zipOutputStream);
+				ZipEntry zipEntry = new ZipEntry(
+					String.valueOf(filePath.getFileName()));
+
+				zipOutputStream.putNextEntry(zipEntry);
+
+				InputStream inputStream = Files.newInputStream(filePath);
+
+				byte[] bytes = new byte[4096];
+				int length = 0;
+
+				while ((length = inputStream.read(bytes)) > 0) {
+					zipOutputStream.write(bytes, 0, length);
+				}
+
+				zipOutputStream.closeEntry();
+
+				StreamUtil.cleanUp(inputStream);
+
+				Files.delete(filePath);
 			}
 
-			UpgradeUtil.copyLoggerConfiguration();
+			zipOutputStream.close();
 		}
+		catch (Exception e) {
+		}
+		finally {
+			StreamUtil.cleanUp(zipOutputStream);
+		}
+
+		UpgradeUtil.copyLoggerConfiguration();
 	}
 
 	protected void upgradeSyncSites() throws Exception {
-		try (LoggingTimer loggingTimer = new LoggingTimer()) {
-			List<SyncAccount> syncAccounts = SyncAccountService.findAll();
+		List<SyncAccount> syncAccounts = SyncAccountService.findAll();
 
-			for (SyncAccount syncAccount : syncAccounts) {
-				List<SyncSite> syncSites = SyncSiteService.findSyncSites(
-					syncAccount.getSyncAccountId());
+		for (SyncAccount syncAccount : syncAccounts) {
+			List<SyncSite> syncSites = SyncSiteService.findSyncSites(
+				syncAccount.getSyncAccountId());
 
-				for (SyncSite syncSite : syncSites) {
-					if (syncSite.isActive() &&
-						!Files.exists(Paths.get(syncSite.getFilePathName()))) {
+			for (SyncSite syncSite : syncSites) {
+				if (syncSite.isActive() &&
+					!Files.exists(Paths.get(syncSite.getFilePathName()))) {
 
-						Files.createDirectories(
-							Paths.get(syncSite.getFilePathName()));
-					}
-
-					SyncFile syncFile = SyncFileService.fetchSyncFile(
-						syncSite.getFilePathName());
-
-					if (syncFile != null) {
-						continue;
-					}
-
-					SyncFileService.addSyncFile(
-						null, null, false, null, syncSite.getFilePathName(),
-						null, syncSite.getName(), 0, syncSite.getGroupId(), 0,
-						SyncFile.STATE_SYNCED, syncSite.getSyncAccountId(),
-						SyncFile.TYPE_SYSTEM);
+					Files.createDirectories(
+						Paths.get(syncSite.getFilePathName()));
 				}
+
+				SyncFile syncFile = SyncFileService.fetchSyncFile(
+					syncSite.getFilePathName());
+
+				if (syncFile != null) {
+					continue;
+				}
+
+				SyncFileService.addSyncFile(
+					null, null, false, null, syncSite.getFilePathName(), null,
+					syncSite.getName(), 0, syncSite.getGroupId(), 0,
+					SyncFile.STATE_SYNCED, syncSite.getSyncAccountId(),
+					SyncFile.TYPE_SYSTEM);
 			}
 		}
 	}
