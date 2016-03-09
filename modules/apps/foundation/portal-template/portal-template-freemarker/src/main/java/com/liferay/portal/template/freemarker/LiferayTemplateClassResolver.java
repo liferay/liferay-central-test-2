@@ -316,7 +316,7 @@ public class LiferayTemplateClassResolver implements TemplateClassResolver {
 
 		@Override
 		public void modifiedBundle(
-			Bundle bundle, BundleEvent bundleEvent, ClassLoader classLoaders) {
+			Bundle bundle, BundleEvent bundleEvent, ClassLoader classLoader) {
 		}
 
 		@Override
