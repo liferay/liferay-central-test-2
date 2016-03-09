@@ -57,7 +57,7 @@ public class IndexOnStartupPortalInstanceLifecycleListener
 		try {
 			_indexWriterHelper.reindex(
 				UserConstants.USER_ID_DEFAULT,
-				"reindexOnActivate." + _className,
+				"reindexOnActivate#" + _className,
 				new long[] {company.getCompanyId()}, _className, null);
 		}
 		catch (SearchException se) {
