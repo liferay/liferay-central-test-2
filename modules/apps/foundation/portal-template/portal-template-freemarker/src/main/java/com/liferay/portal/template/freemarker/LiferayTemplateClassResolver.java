@@ -148,24 +148,6 @@ public class LiferayTemplateClassResolver implements TemplateClassResolver {
 		_classResolverBundleTracker.close();
 	}
 
-	@Modified
-	protected void modified(
-		BundleContext bundleContext, Map<String, Object> properties) {
-
-		_freemarkerEngineConfiguration = ConfigurableUtil.createConfigurable(
-			FreeMarkerEngineConfiguration.class, properties);
-
-		for (Bundle bundle : _bundles) {
-			ClassLoader classLoader = findClassLoader(
-				_freemarkerEngineConfiguration.allowedClasses(),
-				bundle.getBundleContext());
-
-			if (classLoader != null) {
-				_wwhitelistedClassLoaders.add(classLoader);
-			}
-		}
-	}
-
 	protected ClassLoader findClassLoader(
 		String clazz, BundleContext bundleContext) {
 
@@ -281,6 +263,24 @@ public class LiferayTemplateClassResolver implements TemplateClassResolver {
 		}
 
 		return false;
+	}
+
+	@Modified
+	protected void modified(
+		BundleContext bundleContext, Map<String, Object> properties) {
+
+		_freemarkerEngineConfiguration = ConfigurableUtil.createConfigurable(
+			FreeMarkerEngineConfiguration.class, properties);
+
+		for (Bundle bundle : _bundles) {
+			ClassLoader classLoader = findClassLoader(
+				_freemarkerEngineConfiguration.allowedClasses(),
+				bundle.getBundleContext());
+
+			if (classLoader != null) {
+				_wwhitelistedClassLoaders.add(classLoader);
+			}
+		}
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
