@@ -56,14 +56,13 @@ public class UpgradeJournal extends BaseUpgradePortletPreferences {
 			String storageType, int type)
 		throws Exception {
 
-		StringBundler sb = new StringBundler(6);
+		StringBundler sb = new StringBundler(5);
 
-		sb.append("insert into DDMStructure (uuid_, structureId, ");
-		sb.append("groupId, companyId, userId, userName, createDate, ");
-		sb.append("modifiedDate, parentStructureId, classNameId, ");
-		sb.append("structureKey, name, description, xsd, storageType, ");
-		sb.append("type_) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ");
-		sb.append("?, ?, ?)");
+		sb.append("insert into DDMStructure (uuid_, structureId, groupId, ");
+		sb.append("companyId, userId, userName, createDate, modifiedDate, ");
+		sb.append("parentStructureId, classNameId, structureKey, name, ");
+		sb.append("description, xsd, storageType, type_) values (?, ?, ?, ?, ");
+		sb.append("?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
 		String sql = sb.toString();
 
