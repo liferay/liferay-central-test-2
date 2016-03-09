@@ -53,11 +53,11 @@ public class UpgradeLayoutSetBranch extends UpgradeProcess {
 
 		StringBundler sb = new StringBundler(5);
 
-		sb.append("update LayoutSetBranch set themeId = ?, colorSchemeId ");
-		sb.append("= ?, wapThemeId = ?, wapColorSchemeId = ?, css = ?, ");
+		sb.append("update LayoutSetBranch set themeId = ?, colorSchemeId = ");
+		sb.append("?, wapThemeId = ?, wapColorSchemeId = ?, css = ?, ");
 		sb.append("settings_ = ?, layoutSetPrototypeUuid = ?, ");
-		sb.append("layoutSetPrototypeLinkEnabled = ? where ");
-		sb.append("layoutSetBranchId = ?");
+		sb.append("layoutSetPrototypeLinkEnabled = ? where layoutSetBranchId ");
+		sb.append("= ?");
 
 		try (PreparedStatement ps = connection.prepareStatement(
 				sb.toString())) {
