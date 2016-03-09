@@ -114,9 +114,9 @@ public class ServletContextHelperRegistrationImpl
 		_servletContextHelperServiceRegistration.unregister();
 
 		_servletContextListenerServiceRegistration.unregister();
-		
+
 		_defaultServletServiceRegistration.unregister();
-		
+
 		_jspServletServiceRegistration.unregister();
 
 		if (_portletServletServiceRegistration != null) {
@@ -207,6 +207,7 @@ public class ServletContextHelperRegistrationImpl
 
 		properties.put(
 			HttpWhiteboardConstants.HTTP_WHITEBOARD_RESOURCE_PREFIX, prefix);
+
 		properties.put(
 			HttpWhiteboardConstants.HTTP_WHITEBOARD_RESOURCE_PATTERN, "/*");
 
@@ -224,11 +225,11 @@ public class ServletContextHelperRegistrationImpl
 				continue;
 			}
 
-			String paramName =
+			String name =
 				_SERVLET_INIT_PARAM_PREFIX +
 					key.substring(_JSP_SERVLET_INIT_PARAM_PREFIX.length());
 
-			properties.put(paramName, _properties.get(key));
+			properties.put(name, _properties.get(key));
 		}
 
 		properties.put(

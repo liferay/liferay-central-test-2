@@ -41,7 +41,8 @@ public class ServletContextHelperFactory {
 		_serviceRegistration = bundleContext.registerService(
 			ServletContextHelperRegistration.class.getName(),
 			new ServletContextHelperRegistrationServiceFactory(
-				_props, properties), null);
+				_props, properties),
+			null);
 	}
 
 	@Deactivate
