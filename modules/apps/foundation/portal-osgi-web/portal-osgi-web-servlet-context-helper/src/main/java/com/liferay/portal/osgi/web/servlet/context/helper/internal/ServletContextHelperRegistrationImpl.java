@@ -175,7 +175,9 @@ public class ServletContextHelperRegistrationImpl
 		_servletContextHelperServiceRegistration.setProperties(properties);
 	}
 
-	protected Object createContextSelectFilter(String servletContextName) {
+	protected String createContextSelectFilterString(
+		String servletContextName) {
+
 		StringBuilder sb = new StringBuilder();
 
 		sb.append('(');
@@ -195,7 +197,7 @@ public class ServletContextHelperRegistrationImpl
 
 		properties.put(
 			HttpWhiteboardConstants.HTTP_WHITEBOARD_CONTEXT_SELECT,
-			createContextSelectFilter(servletContextName));
+			createContextSelectFilterString(servletContextName));
 
 		String prefix = "/META-INF/resources";
 
@@ -231,7 +233,7 @@ public class ServletContextHelperRegistrationImpl
 
 		properties.put(
 			HttpWhiteboardConstants.HTTP_WHITEBOARD_CONTEXT_SELECT,
-			createContextSelectFilter(servletContextName));
+			createContextSelectFilterString(servletContextName));
 		properties.put(
 			HttpWhiteboardConstants.HTTP_WHITEBOARD_SERVLET_NAME, "jsp");
 		properties.put(
@@ -253,7 +255,7 @@ public class ServletContextHelperRegistrationImpl
 
 		properties.put(
 			HttpWhiteboardConstants.HTTP_WHITEBOARD_CONTEXT_SELECT,
-			createContextSelectFilter(servletContextName));
+			createContextSelectFilterString(servletContextName));
 		properties.put(
 			HttpWhiteboardConstants.HTTP_WHITEBOARD_SERVLET_NAME,
 			"Portlet Servlet");
@@ -278,7 +280,7 @@ public class ServletContextHelperRegistrationImpl
 
 		properties.put(
 			HttpWhiteboardConstants.HTTP_WHITEBOARD_CONTEXT_SELECT,
-			createContextSelectFilter(servletContextName));
+			createContextSelectFilterString(servletContextName));
 		properties.put(
 			HttpWhiteboardConstants.HTTP_WHITEBOARD_FILTER_ASYNC_SUPPORTED,
 			Boolean.TRUE);
@@ -325,7 +327,7 @@ public class ServletContextHelperRegistrationImpl
 
 		properties.put(
 			HttpWhiteboardConstants.HTTP_WHITEBOARD_CONTEXT_SELECT,
-			createContextSelectFilter(servletContextName));
+			createContextSelectFilterString(servletContextName));
 		properties.put(
 			HttpWhiteboardConstants.HTTP_WHITEBOARD_LISTENER,
 			Boolean.TRUE.toString());
