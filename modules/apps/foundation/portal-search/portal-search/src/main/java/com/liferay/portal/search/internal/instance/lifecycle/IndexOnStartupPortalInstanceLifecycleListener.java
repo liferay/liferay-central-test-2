@@ -25,7 +25,6 @@ import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Props;
 import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.search.internal.SearchConstants;
 
 /**
  * @author Michael C. Han
@@ -58,8 +57,7 @@ public class IndexOnStartupPortalInstanceLifecycleListener
 		try {
 			_indexWriterHelper.reindex(
 				UserConstants.USER_ID_DEFAULT,
-				SearchConstants.INDEX_ON_ACTIVATE_BACKGROUND_TASK_NAME + "." +
-					_className,
+				"reindexOnActivate." + _className,
 				new long[] {company.getCompanyId()}, _className, null);
 		}
 		catch (SearchException se) {
