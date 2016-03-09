@@ -725,9 +725,9 @@ public class JournalDisplayContext {
 		PermissionChecker permissionChecker =
 			themeDisplay.getPermissionChecker();
 
-		if (isShowEditActions() || isNavigationMine() ||
-			permissionChecker.isContentReviewer(
-				themeDisplay.getCompanyId(), themeDisplay.getScopeGroupId())) {
+		if (permissionChecker.isContentReviewer(
+				themeDisplay.getCompanyId(), themeDisplay.getScopeGroupId()) ||
+			isNavigationMine()) {
 
 			defaultStatus = WorkflowConstants.STATUS_ANY;
 		}
