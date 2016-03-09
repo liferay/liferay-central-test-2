@@ -14,8 +14,6 @@
 
 package com.liferay.portal.upgrade.v6_2_0;
 
-import com.liferay.portal.kernel.dao.jdbc.DataAccess;
-import com.liferay.portal.kernel.model.CustomizedPages;
 import com.liferay.portal.kernel.model.LayoutTypePortletConstants;
 import com.liferay.portal.kernel.model.PortletConstants;
 import com.liferay.portal.kernel.model.PortletPreferences;
