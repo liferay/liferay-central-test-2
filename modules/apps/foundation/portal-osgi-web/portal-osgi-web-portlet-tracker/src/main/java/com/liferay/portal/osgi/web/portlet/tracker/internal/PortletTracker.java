@@ -1026,8 +1026,9 @@ public class PortletTracker
 			serviceReference = bundleContext.getServiceReference(
 				ServletContextHelperRegistration.class);
 
-		serviceRegistrations.setServletContextHelperRegistrationReference(
-			serviceReference);
+		serviceRegistrations.
+			setServletContextHelperRegistrationServiceReference(
+				serviceReference);
 
 		return bundleContext.getService(serviceReference);
 	}
@@ -1178,7 +1179,7 @@ public class PortletTracker
 			BundleContext bundleContext = _bundle.getBundleContext();
 
 			bundleContext.ungetService(
-				_servletContextHelperRegistrationReference);
+				_servletContextHelperRegistrationServiceReference);
 		}
 
 		public synchronized void setBundlePortletApp(
@@ -1187,12 +1188,13 @@ public class PortletTracker
 			_bundlePortletApp = bundlePortletApp;
 		}
 
-		public synchronized void setServletContextHelperRegistrationReference(
-			ServiceReference<ServletContextHelperRegistration>
-				servletContextHelperRegistrationReference) {
+		public synchronized void
+			setServletContextHelperRegistrationServiceReference(
+				ServiceReference<ServletContextHelperRegistration>
+					servletContextHelperRegistrationServiceReference) {
 
-			_servletContextHelperRegistrationReference =
-				servletContextHelperRegistrationReference;
+			_servletContextHelperRegistrationServiceReference =
+				servletContextHelperRegistrationServiceReference;
 		}
 
 		protected synchronized void doConfiguration(ClassLoader classLoader) {
@@ -1218,7 +1220,7 @@ public class PortletTracker
 		private final List<ServiceReference<Portlet>> _serviceReferences =
 			new ArrayList<>();
 		private ServiceReference<ServletContextHelperRegistration>
-			_servletContextHelperRegistrationReference;
+			_servletContextHelperRegistrationServiceReference;
 
 	}
 
