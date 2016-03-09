@@ -484,7 +484,8 @@ public class LiferayDefaultsPlugin extends BaseDefaultsPlugin<LiferayPlugin> {
 					System.out.println();
 
 					for (String command : commands) {
-						System.out.println(command);
+						System.out.print(" && ");
+						System.out.print(command);
 					}
 
 					if (GradleUtil.getProperty(project, "first", false)) {
