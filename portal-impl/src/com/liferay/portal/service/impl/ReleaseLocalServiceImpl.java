@@ -308,7 +308,8 @@ public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 		}
 
 		releaseLocalService.updateRelease(
-			release.getReleaseId(), buildNumber, null, true);
+			release.getReleaseId(), release.getSchemaVersion(), buildNumber,
+			null, true);
 	}
 
 	@Override
