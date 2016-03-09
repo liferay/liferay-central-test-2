@@ -78,7 +78,7 @@ public class LiferayTemplateClassResolver implements TemplateClassResolver {
 			_freemarkerEngineConfiguration.restrictedClasses());
 
 		for (String restrictedClassName : restrictedClassNames) {
-			if (_match(restrictedClassName, className)) {
+			if (match(restrictedClassName, className)) {
 				throw new TemplateException(
 					"Instantiating " + className + " is not allowed in the " +
 						"template for security reasons",
@@ -92,7 +92,7 @@ public class LiferayTemplateClassResolver implements TemplateClassResolver {
 			_freemarkerEngineConfiguration.allowedClasses());
 
 		for (String allowedClassName : allowedClasseNames) {
-			if (_match(allowedClassName, className)) {
+			if (match(allowedClassName, className)) {
 				allowed = true;
 
 				break;
@@ -156,7 +156,7 @@ public class LiferayTemplateClassResolver implements TemplateClassResolver {
 			FreeMarkerEngineConfiguration.class, properties);
 
 		for (Bundle bundle : _bundles) {
-			ClassLoader classLoader = _findClassLoader(
+			ClassLoader classLoader = findClassLoader(
 				_freemarkerEngineConfiguration.allowedClasses(),
 				bundle.getBundleContext());
 
@@ -166,7 +166,7 @@ public class LiferayTemplateClassResolver implements TemplateClassResolver {
 		}
 	}
 
-	private ClassLoader _findClassLoader(
+	protected ClassLoader findClassLoader(
 		String clazz, BundleContext bundleContext) {
 
 		Bundle bundle = bundleContext.getBundle();
@@ -231,16 +231,16 @@ public class LiferayTemplateClassResolver implements TemplateClassResolver {
 		return null;
 	}
 
-	private ClassLoader _findClassLoader(
-		String[] allowedClasses, BundleContext bundleContext) {
+	protected ClassLoader findClassLoader(
+		String[] allowedClassNames, BundleContext bundleContext) {
 
-		if (allowedClasses == null) {
-			allowedClasses = new String[0];
+		if (allowedClassNames == null) {
+			allowedClassNames = new String[0];
 		}
 
-		for (String allowedClass : allowedClasses) {
-			ClassLoader classLoader = _findClassLoader(
-				allowedClass, bundleContext);
+		for (String allowedClassName : allowedClassNames) {
+			ClassLoader classLoader = findClassLoader(
+				allowedClassName, bundleContext);
 
 			if (classLoader != null) {
 				return classLoader;
@@ -250,14 +250,14 @@ public class LiferayTemplateClassResolver implements TemplateClassResolver {
 				Bundle bundle = bundleContext.getBundle();
 				_log.warn(
 					"Bundle " + bundle.getSymbolicName() + " does not export " +
-						allowedClass);
+						allowedClassName);
 			}
 		}
 
 		return null;
 	}
 
-	private boolean _match(String className, String matchedClassName) {
+	protected boolean match(String className, String matchedClassName) {
 		if (className.equals(StringPool.STAR)) {
 			return true;
 		}
@@ -272,10 +272,10 @@ public class LiferayTemplateClassResolver implements TemplateClassResolver {
 			return true;
 		}
 		else {
-			String classNamePackage = matchedClassName.substring(
+			String packageName = matchedClassName.substring(
 				0, matchedClassName.lastIndexOf("."));
 
-			if (classNamePackage.equals(className)) {
+			if (packageName.equals(className)) {
 				return true;
 			}
 		}
@@ -300,7 +300,7 @@ public class LiferayTemplateClassResolver implements TemplateClassResolver {
 		public ClassLoader addingBundle(
 			Bundle bundle, BundleEvent bundleEvent) {
 
-			ClassLoader classLoader = _findClassLoader(
+			ClassLoader classLoader = findClassLoader(
 				_freemarkerEngineConfiguration.allowedClasses(),
 				bundle.getBundleContext());
 
