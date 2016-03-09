@@ -25,7 +25,7 @@ public class UpgradeLastPublishDate
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		updateTables();
+		addLastPublishDateColumns();
 
 		updateLastPublishDates(
 			BookmarksPortletKeys.BOOKMARKS, "BookmarksEntry");
@@ -33,10 +33,10 @@ public class UpgradeLastPublishDate
 			BookmarksPortletKeys.BOOKMARKS, "BookmarksFolder");
 	}
 
-	protected void updateTables() throws Exception {
+	protected void addLastPublishDateColumns() throws Exception {
 		try (LoggingTimer loggingTimer = new LoggingTimer()) {
-			runSQL("alter table BookmarksEntry add lastPublishDate DATE null");
-			runSQL("alter table BookmarksFolder add lastPublishDate DATE null");
+			addLastPublishDateColumn("BookmarksEntry");
+			addLastPublishDateColumn("BookmarksFolder");
 		}
 	}
 

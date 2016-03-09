@@ -25,16 +25,16 @@ public class UpgradeLastPublishDate
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		updateTables();
+		addLastPublishDateColumns();
 
 		updateLastPublishDates(WikiPortletKeys.WIKI, "WikiNode");
 		updateLastPublishDates(WikiPortletKeys.WIKI, "WikiPage");
 	}
 
-	protected void updateTables() throws Exception {
+	protected void addLastPublishDateColumns() throws Exception {
 		try (LoggingTimer loggingTimer = new LoggingTimer()) {
-			runSQL("alter table WikiNode add lastPublishDate DATE null");
-			runSQL("alter table WikiPage add lastPublishDate DATE null");
+			addLastPublishDateColumn("WikiNode");
+			addLastPublishDateColumn("WikiPage");
 		}
 	}
 
