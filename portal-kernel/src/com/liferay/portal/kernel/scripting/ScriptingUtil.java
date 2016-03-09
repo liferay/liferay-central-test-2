@@ -15,7 +15,6 @@
 package com.liferay.portal.kernel.scripting;
 
 import com.liferay.portal.kernel.security.pacl.permission.PortalRuntimePermission;
-import com.liferay.portal.kernel.util.ClassLoaderPool;
 import com.liferay.portal.kernel.util.ProxyFactory;
 
 import java.util.Map;
@@ -95,19 +94,6 @@ public class ScriptingUtil {
 
 	public static Set<String> getSupportedLanguages() {
 		return getScripting().getSupportedLanguages();
-	}
-
-	private static String[] _getServletContextNames(
-		ClassLoader[] classLoaders) {
-
-		String[] servletContextNames = new String[classLoaders.length];
-
-		for (int i = 0; i < classLoaders.length; i++) {
-			servletContextNames[i] = ClassLoaderPool.getContextName(
-				classLoaders[i]);
-		}
-
-		return servletContextNames;
 	}
 
 	private static final Scripting _scripting =
