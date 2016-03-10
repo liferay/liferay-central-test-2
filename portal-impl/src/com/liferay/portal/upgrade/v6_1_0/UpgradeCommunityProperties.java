@@ -31,6 +31,7 @@ public class UpgradeCommunityProperties extends UpgradeProcess {
 	@Override
 	protected void doUpgrade() throws Exception {
 		upgradePortletPreferences();
+
 		upgradePortalPreferences();
 	}
 
