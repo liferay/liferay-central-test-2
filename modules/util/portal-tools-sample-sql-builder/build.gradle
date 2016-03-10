@@ -5,7 +5,7 @@ dependencies {
 	compile project(":apps:collaboration:blogs:blogs-web")
 	compile project(":apps:collaboration:document-library:document-library-api")
 	compile project(":apps:collaboration:document-library:document-library-web")
-	compile project(":apps:collaboration:message-boards:message-boards-api")
+	compile group: "com.liferay", name: "com.liferay.message.boards.api", version: "1.0.0"
 	compile project(":apps:collaboration:message-boards:message-boards-web")
 	compile project(":apps:collaboration:wiki:wiki-api")
 	compile project(":apps:collaboration:wiki:wiki-service")
