@@ -9,7 +9,7 @@ dependencies {
 	compile project(":apps:collaboration:blogs:blogs-web")
 	compile project(":apps:collaboration:document-library:document-library-web")
 	compile project(":apps:collaboration:message-boards:message-boards-web")
-	compile project(":apps:collaboration:wiki:wiki-api")
+	compile group: "com.liferay", name: "com.liferay.wiki.api", version: "1.0.0"
 	compile project(":apps:collaboration:wiki:wiki-service")
 	compile project(":apps:forms-and-workflow:dynamic-data-lists:dynamic-data-lists-service")
 	compile project(":apps:forms-and-workflow:dynamic-data-lists:dynamic-data-lists-web")
