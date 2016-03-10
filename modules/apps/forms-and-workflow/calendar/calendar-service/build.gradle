@@ -8,7 +8,7 @@ dependencies {
 	provided group: "biz.aQute.bnd", name: "biz.aQute.bndlib", version: "3.1.0"
 	provided group: "com.liferay", name: "com.google.ical", version: "20110304"
 	provided group: "com.liferay", name: "com.liferay.exportimport.api", version: "1.0.0"
-	provided group: "com.liferay", name: "com.liferay.portal.spring.extender", version: "1.0.4"
+	provided group: "com.liferay", name: "com.liferay.portal.spring.extender", version: "1.0.5"
 	provided group: "com.liferay", name: "com.liferay.registry.api", version: "1.0.0"
 	provided group: "com.liferay", name: "com.liferay.xstream.configurator.api", version: "1.0.0"
 	provided group: "com.liferay", name: "net.fortuna.ical4j", version: "1.0"
