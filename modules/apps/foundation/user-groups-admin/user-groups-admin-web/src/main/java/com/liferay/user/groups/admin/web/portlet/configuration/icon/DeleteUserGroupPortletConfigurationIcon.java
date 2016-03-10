@@ -67,9 +67,7 @@ public class DeleteUserGroupPortletConfigurationIcon
 			sb.append(portletDisplay.getNamespace());
 
 			sb.append("doDeleteUserGroup('");
-
 			sb.append(UserGroup.class.getName());
-
 			sb.append("','");
 
 			UserGroup userGroup = ActionUtil.getUserGroup(portletRequest);
