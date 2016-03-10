@@ -17,7 +17,7 @@ dependencies {
 	provided project(":apps:forms-and-workflow:portal-workflow:portal-workflow-kaleo-api")
 	provided project(":apps:forms-and-workflow:portal-workflow:portal-workflow-kaleo-definition-api")
 	provided project(":apps:forms-and-workflow:portal-workflow:portal-workflow-kaleo-runtime-api")
-	provided project(":apps:foundation:portal:portal-upgrade")
+	provided group: "com.liferay", name: "com.liferay.portal.upgrade", version: "1.0.0"
 }
 
 liferay {
