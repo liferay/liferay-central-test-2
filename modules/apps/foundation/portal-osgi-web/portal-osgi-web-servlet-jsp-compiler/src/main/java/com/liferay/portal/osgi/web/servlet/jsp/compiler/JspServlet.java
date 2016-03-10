@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.osgi.web.servlet.jsp.compiler.internal.JspBundleClassloader;
 import com.liferay.portal.osgi.web.servlet.jsp.compiler.internal.JspTagHandlerPool;
 import com.liferay.taglib.servlet.JspFactorySwapper;
@@ -283,8 +284,9 @@ public class JspServlet extends HttpServlet {
 		try {
 			currentThread.setContextClassLoader(_jspBundleClassloader);
 
-			if (_DEBUG.equals(
-					_jspServlet.getInitParameter("logVerbosityLevel"))) {
+			if (Validator.equals(
+					_jspServlet.getInitParameter("logVerbosityLevel"),
+					"DEBUG")) {
 
 				String path = (String)request.getAttribute(
 					RequestDispatcher.INCLUDE_SERVLET_PATH);
@@ -480,8 +482,6 @@ public class JspServlet extends HttpServlet {
 
 	private static final String _ANALYZED_TLDS =
 		JspServlet.class.getName().concat("#ANALYZED_TLDS");
-
-	private static final String _DEBUG = "DEBUG";
 
 	private static final Class<?>[] _INTERFACES = {ServletContext.class};
 
