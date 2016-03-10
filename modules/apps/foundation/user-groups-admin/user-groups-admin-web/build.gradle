@@ -6,7 +6,7 @@ dependencies {
 	provided project(":apps:foundation:frontend:frontend-taglib")
 	provided project(":apps:foundation:portal:portal-upgrade")
 	provided project(":apps:foundation:user-groups-admin:user-groups-admin-api")
-	provided project(":apps:web-experience:application-list:application-list-api")
+	provided group: "com.liferay", name: "com.liferay.application.list.api", version: "1.0.0"
 }
 
 liferay {

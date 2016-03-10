@@ -11,7 +11,7 @@ dependencies {
 	provided project(":apps:marketplace:marketplace-api")
 	provided project(":apps:marketplace:marketplace-service")
 	provided project(":apps:marketplace:marketplace-store-web")
-	provided project(":apps:web-experience:application-list:application-list-api")
+	provided group: "com.liferay", name: "com.liferay.application.list.api", version: "1.0.0"
 }
 
 liferay {
