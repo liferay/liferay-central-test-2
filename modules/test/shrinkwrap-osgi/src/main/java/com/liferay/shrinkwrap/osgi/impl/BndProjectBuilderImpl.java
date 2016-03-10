@@ -138,11 +138,17 @@ public class BndProjectBuilderImpl implements BndProjectBuilder {
 	public BndProjectBuilder setBndFile(File bnd) {
 		File bndParentDir = bnd.getAbsoluteFile().getParentFile();
 
-		if (_workspaceFile == null)setWorkspace(bndParentDir);
+		if (_workspaceFile == null) {
+			setWorkspace(bndParentDir);
+		}
 
-		if (_projectFile == null)setProject(bndParentDir);
+		if (_projectFile == null) {
+			setProject(bndParentDir);
+		}
 
-		if (_baseFile == null)setBase(bndParentDir);
+		if (_baseFile == null) {
+			setBase(bndParentDir);
+		}
 
 		_bndFile = bnd;
 
@@ -151,7 +157,9 @@ public class BndProjectBuilderImpl implements BndProjectBuilder {
 
 	@Override
 	public BndProjectBuilder setProject(File project) {
-		if (_workspaceFile == null)setWorkspace(project);
+		if (_workspaceFile == null) {
+			setWorkspace(project);
+		}
 
 		_projectFile = project;
 
