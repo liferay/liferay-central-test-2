@@ -48,7 +48,7 @@ if (bbcoceEditorName.equals("bbcode")) {
 	bbcoceEditorName = "ckeditor_bbcode";
 
 	if (_log.isWarnEnabled()) {
-		_log.warn("BBCode editor is no longer supported. Replacing it with CKEditor BBCode");
+		_log.warn("Replacing unsupported BBCode editor with CKEditor BBCode");
 	}
 }
 %>
