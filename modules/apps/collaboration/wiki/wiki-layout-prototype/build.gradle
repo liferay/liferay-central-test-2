@@ -6,7 +6,7 @@ dependencies {
 	provided project(":apps:collaboration:wiki:wiki-api")
 	provided project(":apps:collaboration:wiki:wiki-web")
 	provided project(":apps:web-experience:asset:asset-categories-navigation-web")
-	provided project(":apps:web-experience:asset:asset-tags-navigation-web")
+	provided group: "com.liferay", name: "com.liferay.asset.tags.navigation.web", version: "1.0.0"
 }
 
 liferay {
