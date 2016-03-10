@@ -97,13 +97,17 @@ public class EditUserGroupPortletConfigurationIcon
 
 			UserGroup userGroup = ActionUtil.getUserGroup(portletRequest);
 
-			return
-				UserGroupPermissionUtil.contains(
+			if (UserGroupPermissionUtil.contains(
 					themeDisplay.getPermissionChecker(),
 					userGroup.getUserGroupId(), ActionKeys.UPDATE) &&
 				UserGroupPermissionUtil.contains(
 					themeDisplay.getPermissionChecker(),
-					userGroup.getUserGroupId(), ActionKeys.VIEW);
+					userGroup.getUserGroupId(), ActionKeys.VIEW)) {
+
+				return true;
+			}
+
+			return false;
 		}
 		catch (Exception e) {
 		}
