@@ -10,7 +10,7 @@ dependencies {
 	provided project(":apps:foundation:frontend:frontend-taglib")
 	provided group: "com.liferay", name: "com.liferay.application.list.api", version: "1.0.0"
 	provided group: "com.liferay", name: "com.liferay.exportimport.api", version: "1.0.0"
-	provided project(":apps:web-experience:layout:layout-taglib")
+	provided group: "com.liferay", name: "com.liferay.layout.taglib", version: "1.0.0"
 	provided project(":apps:web-experience:staging:staging-api")
 	provided project(":apps:web-experience:staging:staging-lang")
 }
