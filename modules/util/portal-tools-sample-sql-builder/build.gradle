@@ -16,7 +16,7 @@ dependencies {
 	compile project(":apps:forms-and-workflow:dynamic-data-mapping:dynamic-data-mapping-service")
 	compile project(":apps:forms-and-workflow:dynamic-data-mapping:dynamic-data-mapping-web")
 	compile project(":apps:foundation:login:login-web")
-	compile project(":apps:web-experience:journal:journal-api")
+	compile group: "com.liferay", name: "com.liferay.journal.api", version: "1.0.0"
 	compile project(":apps:web-experience:journal:journal-service")
 
 	provided group: "com.liferay.portal", name: "com.liferay.portal.impl", version: "1.0.1"
