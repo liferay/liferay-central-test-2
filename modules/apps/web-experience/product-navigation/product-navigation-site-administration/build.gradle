@@ -10,7 +10,7 @@ dependencies {
 	provided project(":apps:collaboration:item-selector:item-selector-criteria-api")
 	provided project(":apps:web-experience:application-list:application-list-taglib")
 	provided project(":apps:web-experience:product-navigation:product-navigation-product-menu-web")
-	provided project(":apps:web-experience:site:site-item-selector-api")
+	provided group: "com.liferay", name: "com.liferay.site.item.selector", version: "1.0.0"
 }
 
 liferay {
