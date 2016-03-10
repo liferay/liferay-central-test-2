@@ -17,7 +17,6 @@ package com.liferay.xsl.content.web.util;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.HttpUtil;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.xsl.content.web.configuration.XSLContentConfiguration;
 
@@ -49,14 +48,12 @@ public class XSLContentUtil {
 	public static String replaceUrlTokens(
 		ThemeDisplay themeDisplay, String contextPath, String url) {
 
-		StringBundler sb = new StringBundler(2);
-
-		sb.append(themeDisplay.getPortalURL());
-		sb.append(contextPath);
-
 		return StringUtil.replace(
 			url, new String[] {"@portal_url@", "@portlet_context_url@"},
-			new String[] {themeDisplay.getPortalURL(), sb.toString()});
+			new String[] {
+				themeDisplay.getPortalURL(),
+				themeDisplay.getPortalURL() + contextPath
+			});
 	}
 
 	public static String transform(
