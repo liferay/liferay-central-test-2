@@ -8,7 +8,7 @@ dependencies {
 	provided project(":apps:foundation:frontend:frontend-taglib")
 	provided project(":apps:foundation:portal-security:portal-security-service-access-policy-api")
 	provided project(":apps:foundation:portal-security:portal-security-service-access-policy-service")
-	provided project(":apps:web-experience:application-list:application-list-api")
+	provided group: "com.liferay", name: "com.liferay.application.list.api", version: "1.0.0"
 }
 
 liferay {
