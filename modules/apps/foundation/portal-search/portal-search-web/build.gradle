@@ -10,7 +10,7 @@ dependencies {
 	provided project(":apps:foundation:frontend:frontend-taglib")
 	provided project(":apps:foundation:portal-search:portal-search-facet")
 	provided project(":apps:foundation:portal:portal-upgrade")
-	provided project(":apps:web-experience:product-navigation:product-navigation-control-menu-api")
+	provided group: "com.liferay", name: "com.liferay.product.navigation.control.menu.api", version: "1.0.0"
 }
 
 liferay {
