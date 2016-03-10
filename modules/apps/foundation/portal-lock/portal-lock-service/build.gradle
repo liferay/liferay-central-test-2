@@ -13,7 +13,7 @@ dependencies {
 	provided group: "org.hibernate", name: "hibernate-core", version: "3.6.10.Final"
 	provided project(":apps:foundation:portal-lock:portal-lock-api")
 	provided project(":apps:foundation:portal:portal-upgrade")
-	provided project(":apps:foundation:xstream:xstream-configurator-api")
+	provided group: "com.liferay", name: "com.liferay.xstream.configurator.api", version: "1.0.0"
 }
 
 liferay {
