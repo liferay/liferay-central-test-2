@@ -8,7 +8,7 @@ dependencies {
 	provided project(":apps:foundation:portal:portal-instance-lifecycle")
 	provided project(":apps:web-experience:asset:asset-categories-navigation-web")
 	provided project(":apps:web-experience:asset:asset-tags-navigation-web")
-	provided project(":apps:web-experience:layout:layout-set-prototype-api")
+	provided group: "com.liferay", name: "com.liferay.layout.set.prototype", version: "1.0.0"
 }
 
 liferay {
