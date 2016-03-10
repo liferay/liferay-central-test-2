@@ -17,18 +17,13 @@ package com.liferay.dynamic.data.lists.lar.test;
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 import com.liferay.dynamic.data.lists.helper.DDLRecordSetTestHelper;
 import com.liferay.dynamic.data.lists.model.DDLRecordSet;
-import com.liferay.dynamic.data.lists.model.DDLRecordSetSettings;
 import com.liferay.dynamic.data.lists.service.DDLRecordSetLocalServiceUtil;
-import com.liferay.dynamic.data.mapping.model.DDMForm;
 import com.liferay.dynamic.data.mapping.model.DDMStructure;
 import com.liferay.dynamic.data.mapping.model.DDMTemplate;
 import com.liferay.dynamic.data.mapping.service.DDMStructureLocalServiceUtil;
 import com.liferay.dynamic.data.mapping.service.DDMTemplateLocalServiceUtil;
-import com.liferay.dynamic.data.mapping.storage.DDMFormValues;
-import com.liferay.dynamic.data.mapping.test.util.DDMFormValuesTestUtil;
 import com.liferay.dynamic.data.mapping.test.util.DDMStructureTestUtil;
 import com.liferay.dynamic.data.mapping.test.util.DDMTemplateTestUtil;
-import com.liferay.dynamic.data.mapping.util.DDMFormFactory;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.StagedModel;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
@@ -45,7 +40,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.runner.RunWith;
@@ -65,15 +59,6 @@ public class DDLRecordSetStagedModelDataHandlerTest
 			new LiferayIntegrationTestRule(),
 			SynchronousDestinationTestRule.INSTANCE,
 			TransactionalTestRule.INSTANCE);
-
-	@Before
-	@Override
-	public void setUp() throws Exception {
-		super.setUp();
-
-		_recordSetSettingsDDMFormValues =
-			createRecordSetSettingsDDMFormValues();
-	}
 
 	@Override
 	protected Map<String, List<StagedModel>> addDependentStagedModelsMap(
@@ -120,51 +105,7 @@ public class DDLRecordSetStagedModelDataHandlerTest
 
 		DDMStructure ddmStructure = (DDMStructure)dependentStagedModels.get(0);
 
-		DDLRecordSet recordSet = recordSetTestHelper.addRecordSet(ddmStructure);
-
-		return recordSetTestHelper.updateRecordSet(
-			recordSet.getRecordSetId(), _recordSetSettingsDDMFormValues);
-	}
-
-	protected DDMFormValues createRecordSetSettingsDDMFormValues() {
-		DDMForm recordSetSettingsDDMForm = DDMFormFactory.create(
-			DDLRecordSetSettings.class);
-
-		DDMFormValues recordSetSettingsDDMFormValues =
-			DDMFormValuesTestUtil.createDDMFormValues(recordSetSettingsDDMForm);
-
-		recordSetSettingsDDMFormValues.addDDMFormFieldValue(
-			DDMFormValuesTestUtil.createUnlocalizedDDMFormFieldValue(
-				"emailFromName", "Joe Bloggs"));
-		recordSetSettingsDDMFormValues.addDDMFormFieldValue(
-			DDMFormValuesTestUtil.createUnlocalizedDDMFormFieldValue(
-				"emailFromAddress", "from@liferay.com"));
-		recordSetSettingsDDMFormValues.addDDMFormFieldValue(
-			DDMFormValuesTestUtil.createUnlocalizedDDMFormFieldValue(
-				"emailSubject", "New Form Submission"));
-		recordSetSettingsDDMFormValues.addDDMFormFieldValue(
-			DDMFormValuesTestUtil.createUnlocalizedDDMFormFieldValue(
-				"emailToAddress", "to@liferay.com"));
-		recordSetSettingsDDMFormValues.addDDMFormFieldValue(
-			DDMFormValuesTestUtil.createUnlocalizedDDMFormFieldValue(
-				"published", "Joe Bloggs"));
-		recordSetSettingsDDMFormValues.addDDMFormFieldValue(
-			DDMFormValuesTestUtil.createUnlocalizedDDMFormFieldValue(
-				"redirectURL", "http://www.google.com"));
-		recordSetSettingsDDMFormValues.addDDMFormFieldValue(
-			DDMFormValuesTestUtil.createUnlocalizedDDMFormFieldValue(
-				"requireCaptcha", "true"));
-		recordSetSettingsDDMFormValues.addDDMFormFieldValue(
-			DDMFormValuesTestUtil.createUnlocalizedDDMFormFieldValue(
-				"sendEmailNotification", "true"));
-		recordSetSettingsDDMFormValues.addDDMFormFieldValue(
-			DDMFormValuesTestUtil.createUnlocalizedDDMFormFieldValue(
-				"storageType", "json"));
-		recordSetSettingsDDMFormValues.addDDMFormFieldValue(
-			DDMFormValuesTestUtil.createUnlocalizedDDMFormFieldValue(
-				"workflowDefinition", "Single Approver@1"));
-
-		return recordSetSettingsDDMFormValues;
+		return recordSetTestHelper.addRecordSet(ddmStructure);
 	}
 
 	@Override
@@ -239,11 +180,6 @@ public class DDLRecordSetStagedModelDataHandlerTest
 			recordSet.getMinDisplayRows(),
 			importedRecordSet.getMinDisplayRows());
 		Assert.assertEquals(recordSet.getScope(), importedRecordSet.getScope());
-		Assert.assertEquals(
-			_recordSetSettingsDDMFormValues,
-			importedRecordSet.getSettingsDDMFormValues());
 	}
-
-	private DDMFormValues _recordSetSettingsDDMFormValues;
 
 }
