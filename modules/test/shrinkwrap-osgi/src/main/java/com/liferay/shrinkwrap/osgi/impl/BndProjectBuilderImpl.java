@@ -120,7 +120,9 @@ public class BndProjectBuilderImpl implements BndProjectBuilder {
 	}
 
 	@Override
-	public BndProjectBuilder setBase(File base) {
+	public BndProjectBuilder setBase(File baseFile) {
+		_baseFile = baseFile;
+
 		if (_workspaceFile == null) {
 			setWorkspace(base);
 		}
@@ -128,8 +130,6 @@ public class BndProjectBuilderImpl implements BndProjectBuilder {
 		if (_projectFile == null) {
 			setProject(base);
 		}
-
-		_baseFile = base;
 
 		return this;
 	}
