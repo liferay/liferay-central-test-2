@@ -294,16 +294,16 @@ public class UpgradePortletPreferencesTest {
 		portletPreferencesMap.put(
 			"subtypeFieldsFilterEnabled", Boolean.TRUE.toString());
 
-		StringBundler orderByColumn = new StringBundler(5);
-		orderByColumn.append("ddm");
-		orderByColumn.append(StringPool.DOUBLE_UNDERLINE);
-		orderByColumn.append(ddmStructure.getStructureId());
-		orderByColumn.append(StringPool.DOUBLE_UNDERLINE);
-		orderByColumn.append(ddmFormField.getName());
+		StringBundler sb = new StringBundler(5);
 
-		portletPreferencesMap.put("orderByColumn1", orderByColumn.toString());
+		sb.append("ddm");
+		sb.append(StringPool.DOUBLE_UNDERLINE);
+		sb.append(ddmStructure.getStructureId());
+		sb.append(StringPool.DOUBLE_UNDERLINE);
+		sb.append(ddmFormField.getName());
 
-		portletPreferencesMap.put("orderByColumn2", orderByColumn.toString());
+		portletPreferencesMap.put("orderByColumn1", sb.toString());
+		portletPreferencesMap.put("orderByColumn2", sb.toString());
 
 		String portletId = getPortletId();
 
@@ -339,27 +339,27 @@ public class UpgradePortletPreferencesTest {
 		portletPreferencesMap.put(
 			"subtypeFieldsFilterEnabled", Boolean.TRUE.toString());
 
-		StringBundler orderByColumn1OldValue = new StringBundler(5);
-		orderByColumn1OldValue.append("ddm");
-		orderByColumn1OldValue.append(StringPool.FORWARD_SLASH);
-		orderByColumn1OldValue.append(ddmStructure.getStructureId());
-		orderByColumn1OldValue.append(StringPool.FORWARD_SLASH);
-		orderByColumn1OldValue.append(ddmFormField.getName());
+		StringBundler sb = new StringBundler(5);
 
-		StringBundler orderByColumn2OldValue = new StringBundler(7);
-		orderByColumn2OldValue.append("ddm");
-		orderByColumn2OldValue.append(StringPool.FORWARD_SLASH);
-		orderByColumn2OldValue.append(ddmFormField.getIndexType());
-		orderByColumn2OldValue.append(StringPool.FORWARD_SLASH);
-		orderByColumn2OldValue.append(ddmStructure.getStructureId());
-		orderByColumn2OldValue.append(StringPool.FORWARD_SLASH);
-		orderByColumn2OldValue.append(ddmFormField.getName());
+		sb.append("ddm");
+		sb.append(StringPool.FORWARD_SLASH);
+		sb.append(ddmStructure.getStructureId());
+		sb.append(StringPool.FORWARD_SLASH);
+		sb.append(ddmFormField.getName());
 
-		portletPreferencesMap.put(
-			"orderByColumn1", orderByColumn1OldValue.toString());
+		portletPreferencesMap.put("orderByColumn1", sb.toString());
 
-		portletPreferencesMap.put(
-			"orderByColumn2", orderByColumn2OldValue.toString());
+		sb = new StringBundler(7);
+
+		sb.append("ddm");
+		sb.append(StringPool.FORWARD_SLASH);
+		sb.append(ddmFormField.getIndexType());
+		sb.append(StringPool.FORWARD_SLASH);
+		sb.append(ddmStructure.getStructureId());
+		sb.append(StringPool.FORWARD_SLASH);
+		sb.append(ddmFormField.getName());
+
+		portletPreferencesMap.put("orderByColumn2", sb.toString());
 
 		String portletId = getPortletId();
 
@@ -406,17 +406,17 @@ public class UpgradePortletPreferencesTest {
 	protected String getExpectedOrderByColumnValue(
 		DDMStructure ddmStructure, DDMFormField ddmFormField) {
 
-		StringBundler orderByColumn = new StringBundler(7);
+		StringBundler sb = new StringBundler(7);
 
-		orderByColumn.append("ddm");
-		orderByColumn.append(StringPool.DOUBLE_UNDERLINE);
-		orderByColumn.append(ddmFormField.getIndexType());
-		orderByColumn.append(StringPool.DOUBLE_UNDERLINE);
-		orderByColumn.append(ddmStructure.getStructureId());
-		orderByColumn.append(StringPool.DOUBLE_UNDERLINE);
-		orderByColumn.append(ddmFormField.getName());
+		sb.append("ddm");
+		sb.append(StringPool.DOUBLE_UNDERLINE);
+		sb.append(ddmFormField.getIndexType());
+		sb.append(StringPool.DOUBLE_UNDERLINE);
+		sb.append(ddmStructure.getStructureId());
+		sb.append(StringPool.DOUBLE_UNDERLINE);
+		sb.append(ddmFormField.getName());
 
-		return orderByColumn.toString();
+		return sb.toString();
 	}
 
 	protected String getPortletId() {
