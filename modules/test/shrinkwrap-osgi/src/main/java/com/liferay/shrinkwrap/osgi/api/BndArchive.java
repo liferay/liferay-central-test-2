@@ -35,14 +35,15 @@ public class BndArchive implements Assignable {
 	@Override
 	public <TYPE extends Assignable> TYPE as(Class<TYPE> typeClass) {
 		try {
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			ByteArrayOutputStream byteArrayOutputStream =
+				new ByteArrayOutputStream();
 
-			_jar.write(baos);
+			_jar.write(byteArrayOutputStream);
 
 			ZipImporter zipImporter = ShrinkWrap.create(ZipImporter.class);
 
 			zipImporter.importFrom(
-				new ByteArrayInputStream(baos.toByteArray()));
+				new ByteArrayInputStream(byteArrayOutputStream.toByteArray()));
 
 			return zipImporter.as(typeClass);
 		}
