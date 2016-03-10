@@ -182,13 +182,13 @@ public class BndProjectBuilderImpl implements BndProjectBuilder {
 		return properties;
 	}
 
-	private File _baseFile = null;
-	private File _bndFile = null;
+	private File _baseFile;
+	private File _bndFile;
 	private final Collection<File> _classPath = new ArrayList<>();
 	private boolean _generateManifest = true;
-	private File _projectFile = null;
+	private File _projectFile;
 	private final List<File> _projectPropertiesFiles = new ArrayList<>();
-	private File _workspaceFile = null;
+	private File _workspaceFile;
 	private final List<File> _workspacePropertiesFiles = new ArrayList<>();
 
 }
