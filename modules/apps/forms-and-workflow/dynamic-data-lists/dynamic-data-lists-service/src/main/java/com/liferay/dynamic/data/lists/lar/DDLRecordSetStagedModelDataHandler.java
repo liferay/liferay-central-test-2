@@ -197,8 +197,6 @@ public class DDLRecordSetStagedModelDataHandler
 				recordSet.getScope(), serviceContext);
 		}
 
-		// Record set settings
-
 		if (recordSet.getScope() == DDLRecordSetConstants.SCOPE_FORMS) {
 			DDMFormValues settingsDDMFormValues = getImportRecordSetSettings(
 				portletDataContext, recordSetElement);
