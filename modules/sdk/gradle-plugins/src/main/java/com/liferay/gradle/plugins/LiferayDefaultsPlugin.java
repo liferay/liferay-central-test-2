@@ -1604,6 +1604,13 @@ public class LiferayDefaultsPlugin extends BaseDefaultsPlugin<LiferayPlugin> {
 		return s.replaceAll("[\\Q\\{}()[]*+?.|^$\\E]", "\\\\$0");
 	}
 
+	protected String getArchivesBaseName(Project project) {
+		BasePluginConvention basePluginConvention = GradleUtil.getConvention(
+			project, BasePluginConvention.class);
+
+		return basePluginConvention.getArchivesBaseName();
+	}
+
 	protected String getArtifactRemoteURL(
 			AbstractArchiveTask abstractArchiveTask, boolean cdn)
 		throws Exception {
@@ -1704,12 +1711,7 @@ public class LiferayDefaultsPlugin extends BaseDefaultsPlugin<LiferayPlugin> {
 		sb.append("group: \"");
 		sb.append(project.getGroup());
 		sb.append("\", name: \"");
-
-		BasePluginConvention basePluginConvention = GradleUtil.getConvention(
-			project, BasePluginConvention.class);
-
-		sb.append(basePluginConvention.getArchivesBaseName());
-
+		sb.append(getArchivesBaseName(project));
 		sb.append("\", version: \"");
 		sb.append(project.getVersion());
 		sb.append('"');
@@ -1723,12 +1725,7 @@ public class LiferayDefaultsPlugin extends BaseDefaultsPlugin<LiferayPlugin> {
 		sb.append("group: \"");
 		sb.append(project.getGroup());
 		sb.append("\", name: \"");
-
-		BasePluginConvention basePluginConvention = GradleUtil.getConvention(
-			project, BasePluginConvention.class);
-
-		sb.append(basePluginConvention.getArchivesBaseName());
-
+		sb.append(getArchivesBaseName(project));
 		sb.append("\", version: \"");
 
 		return Pattern.quote(sb.toString()) + "(\\d.+)\"";
