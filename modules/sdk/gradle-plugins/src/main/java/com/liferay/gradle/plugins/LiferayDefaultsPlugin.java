@@ -1868,6 +1868,10 @@ public class LiferayDefaultsPlugin extends BaseDefaultsPlugin<LiferayPlugin> {
 			String[] lines = output.split("\\r?\\n");
 
 			for (String line : lines) {
+				if (_logger.isInfoEnabled()) {
+					_logger.info(line);
+				}
+
 				if (Validator.isNull(line)) {
 					continue;
 				}
