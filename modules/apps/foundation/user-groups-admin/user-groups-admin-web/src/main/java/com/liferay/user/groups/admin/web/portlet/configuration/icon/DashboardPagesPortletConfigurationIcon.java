@@ -90,10 +90,15 @@ public class DashboardPagesPortletConfigurationIcon
 
 			Group group = userGroup.getGroup();
 
-			return GroupPermissionUtil.contains(
-				themeDisplay.getPermissionChecker(), userGroupGroup,
-				ActionKeys.VIEW) &&
-				group.getPrivateLayoutsPageCount() > 0;
+			if (GroupPermissionUtil.contains(
+					themeDisplay.getPermissionChecker(), userGroupGroup,
+					ActionKeys.VIEW) &&
+				(group.getPrivateLayoutsPageCount() > 0)) {
+
+				return true;
+			}
+
+			return false;
 		}
 		catch (Exception e) {
 		}
