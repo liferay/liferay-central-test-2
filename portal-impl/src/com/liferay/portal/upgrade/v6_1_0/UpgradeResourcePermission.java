@@ -42,9 +42,8 @@ public class UpgradeResourcePermission extends UpgradeProcess {
 			sb.append(GroupConstants.DEFAULT_PARENT_GROUP_ID);
 			sb.append("' where scope = ");
 			sb.append(ResourceConstants.SCOPE_COMPANY);
-			sb.append(
-				" and primKey = CAST_TEXT(companyId) and exists (select ");
-			sb.append("roleId from Role_ where Role_.roleId = ");
+			sb.append(" and primKey = CAST_TEXT(companyId) and exists ");
+			sb.append("(select roleId from Role_ where Role_.roleId = ");
 			sb.append("ResourcePermission.roleId and Role_.type_ = ");
 			sb.append(RoleConstants.TYPE_PROVIDER);
 			sb.append(StringPool.CLOSE_PARENTHESIS);
