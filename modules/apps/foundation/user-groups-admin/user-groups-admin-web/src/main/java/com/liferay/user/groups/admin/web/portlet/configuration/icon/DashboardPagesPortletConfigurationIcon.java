@@ -64,7 +64,9 @@ public class DashboardPagesPortletConfigurationIcon
 
 			UserGroup userGroup = ActionUtil.getUserGroup(portletRequest);
 
-			return userGroup.getGroup().getDisplayURL(themeDisplay, true);
+			Group group = userGroup.getGroup();
+
+			return group.getDisplayURL(themeDisplay, true);
 		}
 		catch (Exception e) {
 		}
@@ -86,12 +88,12 @@ public class DashboardPagesPortletConfigurationIcon
 
 			UserGroup userGroup = ActionUtil.getUserGroup(portletRequest);
 
-			Group userGroupGroup = userGroup.getGroup();
+			Group group = userGroup.getGroup();
 
 			return GroupPermissionUtil.contains(
 				themeDisplay.getPermissionChecker(), userGroupGroup,
 				ActionKeys.VIEW) &&
-				userGroupGroup.getPrivateLayoutsPageCount() > 0;
+				group.getPrivateLayoutsPageCount() > 0;
 		}
 		catch (Exception e) {
 		}
