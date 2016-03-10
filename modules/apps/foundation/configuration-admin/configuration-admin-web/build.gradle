@@ -17,7 +17,7 @@ dependencies {
 	provided project(":apps:foundation:frontend:frontend-taglib")
 
 	testCompile group: "com.liferay.portal", name: "com.liferay.portal.impl", version: "1.0.1"
-	testCompile project(":apps:forms-and-workflow:dynamic-data-mapping:dynamic-data-mapping-test-util")
+	testCompile group: "com.liferay", name: "com.liferay.dynamic.data.mapping.test.util", version: "1.0.0"
 }
 
 liferay {
