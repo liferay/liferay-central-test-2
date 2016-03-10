@@ -13,7 +13,7 @@ dependencies {
 	provided group: "com.liferay", name: "com.liferay.application.list.api", version: "1.0.0"
 	provided project(":apps:web-experience:export-import:export-import-api")
 	provided group: "com.liferay", name: "com.liferay.layout.taglib", version: "1.0.0"
-	provided project(":apps:web-experience:staging:staging-lang")
+	provided group: "com.liferay", name: "com.liferay.staging.lang", version: "1.0.0"
 	provided project(":apps:web-experience:trash:trash-taglib")
 }
 
