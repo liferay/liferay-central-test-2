@@ -3,8 +3,8 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.liferay</groupId>
-  <artifactId>com.liferay.osgi.util</artifactId>
-  <version>2.0.5</version>
+  <artifactId>com.liferay.bnd.util</artifactId>
+  <version>1.0.1</version>
   <licenses>
     <license>
       <name>LGPL 2.1</name>
@@ -25,10 +25,16 @@
   </scm>
   <dependencies>
     <dependency>
-      <groupId>org.osgi</groupId>
-      <artifactId>org.osgi.core</artifactId>
-      <version>5.0.0</version>
-      <scope>compile</scope>
+      <groupId>com.liferay.portal</groupId>
+      <artifactId>com.liferay.portal.kernel</artifactId>
+      <version>1.0.3</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>biz.aQute.bnd</groupId>
+      <artifactId>biz.aQute.bndlib</artifactId>
+      <version>3.1.0</version>
+      <scope>provided</scope>
     </dependency>
   </dependencies>
 </project>
