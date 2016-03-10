@@ -35,12 +35,12 @@ public interface BndProjectBuilder extends Assignable {
 
 	public BndProjectBuilder generateManifest(boolean generateManifest);
 
-	public BndProjectBuilder setBase(File baseFile);
+	public BndProjectBuilder setBaseDir(File baseDir);
 
 	public BndProjectBuilder setBndFile(File bndFile);
 
-	public BndProjectBuilder setProject(File projectFile);
+	public BndProjectBuilder setProjectDir(File projectDir);
 
-	public BndProjectBuilder setWorkspace(File workspaceFile);
+	public BndProjectBuilder setWorkspaceDir(File workspaceDir);
 
 }
