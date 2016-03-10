@@ -12,7 +12,7 @@ dependencies {
 	provided project(":apps:forms-and-workflow:dynamic-data-mapping:dynamic-data-mapping-io")
 	provided project(":apps:forms-and-workflow:dynamic-data-mapping:dynamic-data-mapping-service")
 	provided project(":apps:foundation:frontend:frontend-taglib")
-	provided project(":apps:foundation:osgi:osgi-service-tracker-collections")
+	provided group: "com.liferay", name: "com.liferay.osgi.service.tracker.collections", version: "1.0.1"
 	provided project(":apps:web-experience:application-list:application-list-api")
 }
 
