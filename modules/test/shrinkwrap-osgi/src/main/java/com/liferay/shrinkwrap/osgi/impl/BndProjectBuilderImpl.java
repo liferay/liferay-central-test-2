@@ -135,40 +135,42 @@ public class BndProjectBuilderImpl implements BndProjectBuilder {
 	}
 
 	@Override
-	public BndProjectBuilder setBndFile(File bnd) {
-		File bndParentDir = bnd.getAbsoluteFile().getParentFile();
+	public BndProjectBuilder setBndFile(File bndFile) {
+		File absoluteBndFile = bndFile.getAbsoluteFile();
+
+		File parentBndFile = absoluteBndFile.getParentFile();
 
 		if (_workspaceFile == null) {
-			setWorkspace(bndParentDir);
+			setWorkspace(parentBndFile);
 		}
 
 		if (_projectFile == null) {
-			setProject(bndParentDir);
+			setProject(parentBndFile);
 		}
 
 		if (_baseFile == null) {
-			setBase(bndParentDir);
+			setBase(parentBndFile);
 		}
 
-		_bndFile = bnd;
+		_bndFile = bndFile;
 
 		return this;
 	}
 
 	@Override
-	public BndProjectBuilder setProject(File project) {
+	public BndProjectBuilder setProject(File projectFile) {
 		if (_workspaceFile == null) {
-			setWorkspace(project);
+			setWorkspace(projectFile);
 		}
 
-		_projectFile = project;
+		_projectFile = projectFile;
 
 		return this;
 	}
 
 	@Override
-	public BndProjectBuilder setWorkspace(File workspace) {
-		_workspaceFile = workspace;
+	public BndProjectBuilder setWorkspace(File workspaceFile) {
+		_workspaceFile = workspaceFile;
 
 		return this;
 	}
