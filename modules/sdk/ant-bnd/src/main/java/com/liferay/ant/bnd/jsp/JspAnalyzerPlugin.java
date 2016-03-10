@@ -294,9 +294,9 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 			// Check to see if the JAR provides this TLD itself which would
 			// indicate that it already has access to the required classes
 
-			if (containsTld(analyzer, analyzer.getJar(), "META-INF", uri) ||
-				containsTld(analyzer, analyzer.getJar(), "WEB-INF/tld", uri) ||
-				containsTldInBundleClassPath(analyzer, "META-INF", uri)) {
+			if (containsTLD(analyzer, analyzer.getJar(), "META-INF", uri) ||
+				containsTLD(analyzer, analyzer.getJar(), "WEB-INF/tld", uri) ||
+				containsTLDInBundleClassPath(analyzer, "META-INF", uri)) {
 
 				continue;
 			}
@@ -371,7 +371,7 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 		return taglibURis;
 	}
 
-	protected boolean containsTld(
+	protected boolean containsTLD(
 		Analyzer analyzer, Jar jar, String root, String uri) {
 
 		Map<String, Map<String, Resource>> resourceMaps = jar.getDirectories();
@@ -406,7 +406,7 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 		return false;
 	}
 
-	protected boolean containsTldInBundleClassPath(
+	protected boolean containsTLDInBundleClassPath(
 		Analyzer analyzer, String root, String uri) {
 
 		Parameters parameters = new Parameters(
@@ -436,7 +436,7 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 			try {
 				Jar classPathJar = new Jar(entry, resource.openInputStream());
 
-				if (containsTld(analyzer, classPathJar, root, uri)) {
+				if (containsTLD(analyzer, classPathJar, root, uri)) {
 					return true;
 				}
 			}
