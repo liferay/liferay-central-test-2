@@ -162,9 +162,9 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 	protected void addJarApiUses(
 		Analyzer analyzer, String content, PackageRef packageRef, Jar jar) {
 
-		Map<String, Map<String, Resource>> directories = jar.getDirectories();
+		Map<String, Map<String, Resource>> resourceMaps = jar.getDirectories();
 
-		Map<String, Resource> resourceMap = directories.get(
+		Map<String, Resource> resourceMap = resourceMaps.get(
 			packageRef.getPath());
 
 		if ((resourceMap == null) || resourceMap.isEmpty()) {
@@ -291,8 +291,8 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 
 		for (String uri : getTaglibURIs(content)) {
 
-			// Check to see if the jar provides this TLD itself which would
-			// indicate that it also have the classes, so don't require it.
+			// Check to see if the JAR provides this TLD itself which would
+			// indicate that it already has access to the required classes
 
 			if (containsTld(analyzer, analyzer.getJar(), "META-INF", uri) ||
 				containsTld(analyzer, analyzer.getJar(), "WEB-INF/tld", uri) ||
@@ -374,10 +374,11 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 	protected boolean containsTld(
 		Analyzer analyzer, Jar jar, String root, String uri) {
 
-		Map<String, Map<String, Resource>> directories = jar.getDirectories();
-		Map<String,Resource> dir = directories.get(root);
+		Map<String, Map<String, Resource>> resourceMaps = jar.getDirectories();
 
-		if (dir == null || dir.isEmpty()) {
+		Map<String, Resource> resourceMap = resourceMaps.get(root);
+
+		if (resourceMap == null || resourceMap.isEmpty()) {
 			Resource resource = jar.getResource(root);
 
 			if ((resource != null) &&
@@ -389,7 +390,7 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 			return false;
 		}
 
-		for (Entry<String, Resource> entry : dir.entrySet()) {
+		for (Entry<String, Resource> entry : resourceMap.entrySet()) {
 			String path = entry.getKey();
 			Resource resource = entry.getValue();
 
