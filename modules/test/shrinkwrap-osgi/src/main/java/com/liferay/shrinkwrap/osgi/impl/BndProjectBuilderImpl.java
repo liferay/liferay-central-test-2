@@ -42,22 +42,26 @@ public class BndProjectBuilderImpl implements BndProjectBuilder {
 	}
 
 	@Override
-	public BndProjectBuilder addClassPath(File file) {
-		_classPath.add(file);
+	public BndProjectBuilder addClassPath(File classPathFile) {
+		_classPathFiles.add(classPathFile);
 
 		return this;
 	}
 
 	@Override
-	public BndProjectBuilder addProjectPropertiesFile(File file) {
-		_projectPropertiesFiles.add(file);
+	public BndProjectBuilder addProjectPropertiesFile(
+		File projectPropertiesFile) {
+
+		_projectPropertiesFiles.add(projectPropertiesFile);
 
 		return this;
 	}
 
 	@Override
-	public BndProjectBuilder addWorkspacePropertiesFile(File file) {
-		_workspacePropertiesFiles.add(file);
+	public BndProjectBuilder addWorkspacePropertiesFile(
+		File workspacePropertiesFile) {
+
+		_workspacePropertiesFiles.add(workspacePropertiesFile);
 
 		return this;
 	}
@@ -97,8 +101,8 @@ public class BndProjectBuilderImpl implements BndProjectBuilder {
 
 			projectBuilder.setBase(_baseFile);
 
-			for (File file : _classPath) {
-				projectBuilder.addClasspath(file);
+			for (File classPathFile : _classPathFiles) {
+				projectBuilder.addClasspath(classPathFile);
 			}
 
 			if (!_generateManifest) {
@@ -123,12 +127,12 @@ public class BndProjectBuilderImpl implements BndProjectBuilder {
 	public BndProjectBuilder setBase(File baseFile) {
 		_baseFile = baseFile;
 
-		if (_workspaceFile == null) {
-			setWorkspace(base);
+		if (_projectFile == null) {
+			setProject(baseFile);
 		}
 
-		if (_projectFile == null) {
-			setProject(base);
+		if (_workspaceFile == null) {
+			setWorkspace(baseFile);
 		}
 
 		return this;
@@ -136,23 +140,23 @@ public class BndProjectBuilderImpl implements BndProjectBuilder {
 
 	@Override
 	public BndProjectBuilder setBndFile(File bndFile) {
+		_bndFile = bndFile;
+
 		File absoluteBndFile = bndFile.getAbsoluteFile();
 
 		File parentBndFile = absoluteBndFile.getParentFile();
 
-		if (_workspaceFile == null) {
-			setWorkspace(parentBndFile);
+		if (_baseFile == null) {
+			setBase(parentBndFile);
 		}
 
 		if (_projectFile == null) {
 			setProject(parentBndFile);
 		}
 
-		if (_baseFile == null) {
-			setBase(parentBndFile);
+		if (_workspaceFile == null) {
+			setWorkspace(parentBndFile);
 		}
-
-		_bndFile = bndFile;
 
 		return this;
 	}
@@ -194,7 +198,7 @@ public class BndProjectBuilderImpl implements BndProjectBuilder {
 
 	private File _baseFile;
 	private File _bndFile;
-	private final Collection<File> _classPath = new ArrayList<>();
+	private final Collection<File> _classPathFiles = new ArrayList<>();
 	private boolean _generateManifest = true;
 	private File _projectFile;
 	private final List<File> _projectPropertiesFiles = new ArrayList<>();

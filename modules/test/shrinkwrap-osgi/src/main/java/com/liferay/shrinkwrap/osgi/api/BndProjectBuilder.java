@@ -23,22 +23,24 @@ import org.jboss.shrinkwrap.api.Assignable;
  */
 public interface BndProjectBuilder extends Assignable {
 
-	public BndProjectBuilder addClassPath(File file);
+	public BndProjectBuilder addClassPath(File classPathFile);
 
-	public BndProjectBuilder addProjectPropertiesFile(File file);
+	public BndProjectBuilder addProjectPropertiesFile(
+		File projectPropertiesFile);
 
-	public BndProjectBuilder addWorkspacePropertiesFile(File file);
+	public BndProjectBuilder addWorkspacePropertiesFile(
+		File workspacePropertiesFile);
 
 	public BndArchive asBndJar();
 
-	public BndProjectBuilder generateManifest(boolean enableAnalyze);
+	public BndProjectBuilder generateManifest(boolean generateManifest);
 
-	public BndProjectBuilder setBase(File file);
+	public BndProjectBuilder setBase(File baseFile);
 
-	public BndProjectBuilder setBndFile(File file);
+	public BndProjectBuilder setBndFile(File bndFile);
 
-	public BndProjectBuilder setProject(File file);
+	public BndProjectBuilder setProject(File projectFile);
 
-	public BndProjectBuilder setWorkspace(File file);
+	public BndProjectBuilder setWorkspace(File workspaceFile);
 
 }
