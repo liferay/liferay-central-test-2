@@ -7,5 +7,5 @@ dependencies {
 	testIntegrationCompile group: "com.liferay.portal", name: "com.liferay.portal.kernel", version: "1.0.3"
 	testIntegrationCompile group: "com.liferay", name: "com.liferay.dynamic.data.mapping.test.util", version: "1.0.0"
 	testIntegrationCompile project(":apps:web-experience:asset:asset-categories-admin-web")
-	testIntegrationCompile project(":apps:web-experience:journal:journal-api")
+	testIntegrationCompile group: "com.liferay", name: "com.liferay.journal.api", version: "1.0.0"
 }

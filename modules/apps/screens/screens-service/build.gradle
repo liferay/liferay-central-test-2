@@ -16,7 +16,7 @@ dependencies {
 	provided group: "com.liferay", name: "com.liferay.portal.upgrade", version: "1.0.0"
 	provided project(":apps:screens:screens-api")
 	provided project(":apps:web-experience:asset:asset-publisher-web")
-	provided project(":apps:web-experience:journal:journal-api")
+	provided group: "com.liferay", name: "com.liferay.journal.api", version: "1.0.0"
 	provided project(":apps:web-experience:journal:journal-service")
 }
 
