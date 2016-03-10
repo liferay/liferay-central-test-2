@@ -3,7 +3,7 @@ dependencies {
 	provided group: "com.liferay", name: "com.liferay.bnd.util", version: "1.0.1"
 	provided group: "com.liferay", name: "com.liferay.osgi.util", version: "2.0.9"
 	provided group: "com.liferay", name: "com.liferay.portal.configuration.metatype", version: "1.0.1"
-	provided group: "com.liferay", name: "com.liferay.portal.remote.dependency.manager.tccl", version: "1.0.1"
+	provided project(":apps:foundation:portal-remote:portal-remote-dependency-manager-tccl")
 	provided group: "org.apache.cxf", name: "cxf-core", version: "3.0.3"
 	provided group: "org.apache.cxf", name: "cxf-rt-bindings-xml", version: "3.0.3"
 	provided group: "org.apache.cxf", name: "cxf-rt-frontend-jaxws", version: "3.0.3"
