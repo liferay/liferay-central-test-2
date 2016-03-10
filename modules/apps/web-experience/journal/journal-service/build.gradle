@@ -14,7 +14,7 @@ dependencies {
 	provided group: "com.liferay", name: "com.liferay.osgi.service.tracker.collections", version: "1.0.1"
 	provided group: "com.liferay", name: "com.liferay.portal.configuration.metatype", version: "1.0.1"
 	provided group: "com.liferay", name: "com.liferay.portal.instance.lifecycle", version: "1.0.0"
-	provided group: "com.liferay", name: "com.liferay.portal.spring.extender", version: "1.0.4"
+	provided group: "com.liferay", name: "com.liferay.portal.spring.extender", version: "1.0.5"
 	provided group: "com.liferay", name: "com.liferay.registry.api", version: "1.0.0"
 	provided group: "com.liferay", name: "com.liferay.xstream.configurator.api", version: "1.0.0"
 	provided group: "com.liferay.portal", name: "com.liferay.portal.impl", version: "1.0.1"
