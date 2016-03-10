@@ -104,8 +104,8 @@ public class DeleteUserGroupPortletConfigurationIcon
 			UserGroup userGroup = ActionUtil.getUserGroup(portletRequest);
 
 			return UserGroupPermissionUtil.contains(
-				themeDisplay.getPermissionChecker(),
-				userGroup.getUserGroupId(), ActionKeys.DELETE);
+				themeDisplay.getPermissionChecker(), userGroup.getUserGroupId(),
+				ActionKeys.DELETE);
 		}
 		catch (Exception e) {
 		}
