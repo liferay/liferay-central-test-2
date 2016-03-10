@@ -39,10 +39,9 @@ public class UpgradeShopping extends UpgradeProcess {
 		try (LoggingTimer loggingTimer = new LoggingTimer()) {
 			StringBundler sb = new StringBundler(3);
 
-			sb.append(
-				"update ShoppingItem set groupId = (select groupId from ");
-			sb.append("ShoppingCategory where ShoppingCategory.categoryId = ");
-			sb.append("ShoppingItem.categoryId)");
+			sb.append("update ShoppingItem set groupId = (select groupId ");
+			sb.append("from ShoppingCategory where ");
+			sb.append("ShoppingCategory.categoryId = ShoppingItem.categoryId)");
 
 			runSQL(sb.toString());
 		}
