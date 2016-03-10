@@ -3,6 +3,7 @@ dependencies {
 	provided group: "com.liferay", name: "com.liferay.application.list.api", version: "1.0.0"
 	provided group: "com.liferay", name: "com.liferay.bnd.util", version: "1.0.1"
 	provided group: "com.liferay", name: "com.liferay.flags.taglib", version: "1.0.0"
+	provided group: "com.liferay", name: "com.liferay.portal.upgrade", version: "1.0.0"
 	provided group: "com.liferay", name: "com.liferay.trash.taglib", version: "1.0.0"
 	provided group: "com.liferay.portal", name: "com.liferay.portal.impl", version: "1.0.1"
 	provided group: "com.liferay.portal", name: "com.liferay.portal.kernel", version: "1.0.3"
@@ -15,7 +16,6 @@ dependencies {
 	provided project(":apps:collaboration:message-boards:message-boards-api")
 	provided project(":apps:collaboration:message-boards:message-boards-service")
 	provided project(":apps:foundation:frontend:frontend-taglib")
-	provided group: "com.liferay", name: "com.liferay.portal.upgrade", version: "1.0.0"
 }
 
 liferay {
