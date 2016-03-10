@@ -454,19 +454,21 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 		try {
 			URIFinder uriFinder = new URIFinder(uri);
 
-			SAXParser saxParser = _saxFactory.newSAXParser();
+			SAXParser saxParser = _saxParserFactory.newSAXParser();
 
-			XMLReader reader = saxParser.getXMLReader();
-			reader.setContentHandler(uriFinder);
-			reader.setFeature(_LOAD_EXTERNAL_DTD, false);
-			reader.setEntityResolver(new NullResolver());
-			reader.parse(new InputSource(resource.openInputStream()));
+			XMLReader xmlReader = saxParser.getXMLReader();
+
+			xmlReader.setContentHandler(uriFinder);
+			xmlReader.setFeature(_LOAD_EXTERNAL_DTD, false);
+			xmlReader.setEntityResolver(new NullEntityResolver());
+
+			xmlReader.parse(new InputSource(resource.openInputStream()));
 
 			return uriFinder.hasURI();
 		}
 		catch (Exception e) {
 			analyzer.error(
-				"Unexpected exception in processing tld " + path + " " + e);
+				"Unexpected exception in processing TLD " + path + ": " + e);
 		}
 
 		return false;
@@ -490,9 +492,10 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 
 	private static final Pattern _tldPattern = Pattern.compile(".*\\.tld");
 
-	private final SAXParserFactory _saxFactory = SAXParserFactory.newInstance();
+	private final SAXParserFactory _saxParserFactory =
+		SAXParserFactory.newInstance();
 
-	private class NullResolver implements EntityResolver {
+	private class NullEntityResolver implements EntityResolver {
 
 		@Override
 		public InputSource resolveEntity(
@@ -531,14 +534,14 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 		}
 
 		@Override
-		public void characters(char[] ch, int start, int length)
+		public void characters(char[] chars, int start, int length)
 			throws SAXException {
 
 			if (!_inURI) {
 				return;
 			}
 
-			String value = new String(ch, start, length);
+			String value = new String(chars, start, length);
 
 			_hasURI = _uri.equals(value.trim());
 		}
@@ -547,8 +550,8 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 			return _hasURI;
 		}
 
-		private boolean _hasURI = false;
-		private boolean _inURI = false;
+		private boolean _hasURI;
+		private boolean _inURI;
 		private String _uri;
 
 	}
