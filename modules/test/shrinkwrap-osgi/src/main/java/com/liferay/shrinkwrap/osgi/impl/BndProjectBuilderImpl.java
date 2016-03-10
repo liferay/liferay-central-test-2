@@ -121,7 +121,9 @@ public class BndProjectBuilderImpl implements BndProjectBuilder {
 
 	@Override
 	public BndProjectBuilder setBase(File base) {
-		if (_workspaceFile == null)setWorkspace(base);
+		if (_workspaceFile == null) {
+			setWorkspace(base);
+		}
 
 		if (_projectFile == null)setProject(base);
 		_baseFile = base;
