@@ -25,7 +25,7 @@ dependencies {
 	provided project(":apps:forms-and-workflow:dynamic-data-mapping:dynamic-data-mapping-data-provider-web")
 	provided group: "com.liferay", name: "com.liferay.dynamic.data.mapping.form.values.factory", version: "1.0.0"
 	provided group: "com.liferay", name: "com.liferay.dynamic.data.mapping.form.values.query", version: "1.0.0"
-	provided project(":apps:forms-and-workflow:dynamic-data-mapping:dynamic-data-mapping-io")
+	provided group: "com.liferay", name: "com.liferay.dynamic.data.mapping.io", version: "1.0.0"
 	provided project(":apps:forms-and-workflow:dynamic-data-mapping:dynamic-data-mapping-validator")
 	provided project(":apps:foundation:frontend:frontend-taglib")
 }
