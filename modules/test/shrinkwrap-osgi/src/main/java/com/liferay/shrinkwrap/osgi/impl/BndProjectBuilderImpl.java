@@ -125,7 +125,10 @@ public class BndProjectBuilderImpl implements BndProjectBuilder {
 			setWorkspace(base);
 		}
 
-		if (_projectFile == null)setProject(base);
+		if (_projectFile == null) {
+			setProject(base);
+		}
+
 		_baseFile = base;
 
 		return this;
