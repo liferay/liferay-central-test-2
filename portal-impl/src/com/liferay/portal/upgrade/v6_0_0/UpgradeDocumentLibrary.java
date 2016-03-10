@@ -82,7 +82,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		updateFiles();
+		updateFileEntries();
 
 		synchronizeFileVersions();
 
@@ -170,7 +170,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		}
 	}
 
-	protected void updateFiles() throws Exception {
+	protected void updateFileEntries() throws Exception {
 		try (LoggingTimer loggingTimer = new LoggingTimer();
 			PreparedStatement ps = connection.prepareStatement(
 				"select * from DLFileEntry");
