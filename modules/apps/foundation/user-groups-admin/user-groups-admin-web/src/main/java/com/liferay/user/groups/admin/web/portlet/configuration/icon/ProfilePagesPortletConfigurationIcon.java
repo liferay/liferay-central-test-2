@@ -64,7 +64,9 @@ public class ProfilePagesPortletConfigurationIcon
 
 			UserGroup userGroup = ActionUtil.getUserGroup(portletRequest);
 
-			return userGroup.getGroup().getDisplayURL(themeDisplay, false);
+			Group group = userGroup.getGroup();
+
+			return group.getDisplayURL(themeDisplay, false);
 		}
 		catch (Exception e) {
 		}
@@ -86,12 +88,17 @@ public class ProfilePagesPortletConfigurationIcon
 
 			UserGroup userGroup = ActionUtil.getUserGroup(portletRequest);
 
-			Group userGroupGroup = userGroup.getGroup();
+			Group group = userGroup.getGroup();
 
-			return GroupPermissionUtil.contains(
-				themeDisplay.getPermissionChecker(), userGroupGroup,
-				ActionKeys.VIEW) &&
-				userGroupGroup.getPublicLayoutsPageCount() > 0;
+			if (GroupPermissionUtil.contains(
+					themeDisplay.getPermissionChecker(), userGroupGroup,
+					ActionKeys.VIEW) &&
+				(group.getPublicLayoutsPageCount() > 0)) {
+
+				return true;
+			}
+
+			return false;
 		}
 		catch (Exception e) {
 		}
