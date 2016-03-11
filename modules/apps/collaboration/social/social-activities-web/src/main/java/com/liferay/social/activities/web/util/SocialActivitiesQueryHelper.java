@@ -81,10 +81,6 @@ public class SocialActivitiesQueryHelper {
 		ALL("all"), CONNECTIONS("connections"), FOLLOWING("following"),
 		ME("me"), MY_SITES("my-sites");
 
-		Scope(String value) {
-			_value = value;
-		}
-
 		public static Scope fromValue(String value) {
 			for (Scope scope : values()) {
 				if (value.equals(scope.getValue())) {
@@ -97,6 +93,10 @@ public class SocialActivitiesQueryHelper {
 
 		public String getValue() {
 			return _value;
+		}
+
+		private Scope(String value) {
+			_value = value;
 		}
 
 		private final String _value;

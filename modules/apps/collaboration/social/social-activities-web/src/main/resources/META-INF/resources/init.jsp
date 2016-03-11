@@ -36,7 +36,6 @@ page import="com.liferay.social.activities.web.util.SocialActivitiesQueryHelper"
 <portlet:defineObjects />
 
 <%
-
 SocialActivitiesRequestHelper socialActivitiesRequestHelper = new SocialActivitiesRequestHelper(request);
 SocialActivitiesQueryHelper socialActivitiesQueryHelper = (SocialActivitiesQueryHelper)request.getAttribute(SocialActivitiesWebKeys.SOCIAL_ACTIVITIES_QUERY_HELPER);
 
