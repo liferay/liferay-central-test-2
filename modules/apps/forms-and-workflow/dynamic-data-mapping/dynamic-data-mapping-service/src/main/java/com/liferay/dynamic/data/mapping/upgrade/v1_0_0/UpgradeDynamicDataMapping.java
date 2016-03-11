@@ -655,12 +655,12 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 		sb.append("fileVersionId and DLFileEntryMetadata.fileEntryId = ");
 		sb.append("DLFileVersion.fileEntryId");
 
-		try (PreparedStatement ps = connection.prepareStatement(sb.toString());
+		try (PreparedStatement ps1 = connection.prepareStatement(sb.toString());
 			PreparedStatement ps2 =
 				AutoBatchPreparedStatementUtil.concurrentAutoBatch(
 					connection,
 					"update DDMContent set data_= ? where contentId = ?");
-			ResultSet rs = ps.executeQuery()) {
+			ResultSet rs = ps1.executeQuery()) {
 
 			while (rs.next()) {
 				long groupId = rs.getLong("groupId");
@@ -714,7 +714,7 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 			sb3.append("update DDMStorageLink set classNameId = ? where ");
 			sb3.append("classNameId = ? and classPK = ?");
 
-			try (PreparedStatement ps = connection.prepareStatement(
+			try (PreparedStatement ps1 = connection.prepareStatement(
 					sb.toString());
 				PreparedStatement ps2 =
 					AutoBatchPreparedStatementUtil.concurrentAutoBatch(
@@ -722,7 +722,7 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 				PreparedStatement ps3 =
 					AutoBatchPreparedStatementUtil.concurrentAutoBatch(
 						connection, sb3.toString());
-				ResultSet rs = ps.executeQuery()) {
+				ResultSet rs = ps1.executeQuery()) {
 
 				Set<Long> expandoRowIds = new HashSet<>();
 
@@ -830,7 +830,7 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 		sb2.append("?, ?, ?, ?, ?, ?)");
 
 		try (LoggingTimer loggingTimer = new LoggingTimer();
-			PreparedStatement ps = connection.prepareStatement(
+			PreparedStatement ps1 = connection.prepareStatement(
 				"select * from DDMStructure");
 			PreparedStatement ps2 =
 				AutoBatchPreparedStatementUtil.concurrentAutoBatch(
@@ -843,7 +843,7 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 			PreparedStatement ps4 =
 				AutoBatchPreparedStatementUtil.concurrentAutoBatch(
 					connection, sb2.toString());
-			ResultSet rs = ps.executeQuery()) {
+			ResultSet rs = ps1.executeQuery()) {
 
 			while (rs.next()) {
 				long structureId = rs.getLong("structureId");
@@ -984,7 +984,7 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 		sb.append("?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
 		try (LoggingTimer loggingTimer = new LoggingTimer();
-			PreparedStatement ps = connection.prepareStatement(
+			PreparedStatement ps1 = connection.prepareStatement(
 				"select * from DDMTemplate");
 			PreparedStatement ps2 =
 				AutoBatchPreparedStatementUtil.concurrentAutoBatch(
@@ -998,7 +998,7 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 			PreparedStatement ps4 =
 				AutoBatchPreparedStatementUtil.concurrentAutoBatch(
 					connection, sb.toString());
-			ResultSet rs = ps.executeQuery()) {
+			ResultSet rs = ps1.executeQuery()) {
 
 			while (rs.next()) {
 				long groupId = rs.getLong("groupId");
@@ -1106,7 +1106,7 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 			sb.append("DDMStructure.structureId) where DDMStorageLink.");
 			sb.append("classNameId = ? and DDMStructure.storageType = ?");
 
-			try (PreparedStatement ps = connection.prepareStatement(
+			try (PreparedStatement ps1 = connection.prepareStatement(
 					sb.toString());
 				PreparedStatement ps2 = connection.prepareStatement(
 					"select companyId, data_ from DDMContent where contentId " +
@@ -1119,7 +1119,7 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 				ps.setLong(1, _ddmContentClassNameId);
 				ps.setString(2, "xml");
 
-				try (ResultSet rs = ps.executeQuery()) {
+				try (ResultSet rs = ps1.executeQuery()) {
 					while (rs.next()) {
 						long structureId = rs.getLong("structureId");
 						long classPK = rs.getLong("classPK");
