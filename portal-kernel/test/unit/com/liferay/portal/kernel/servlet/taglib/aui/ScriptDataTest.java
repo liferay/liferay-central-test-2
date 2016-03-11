@@ -71,7 +71,7 @@ public class ScriptDataTest {
 
 		for (String variable : variables) {
 			Assert.assertTrue(
-				variable + " was not found.", strings.contains(variable));
+				variable + " was not found", strings.contains(variable));
 		}
 	}
 
