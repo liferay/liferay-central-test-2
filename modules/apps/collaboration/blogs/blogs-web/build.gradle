@@ -23,7 +23,7 @@ dependencies {
 	provided project(":apps:collaboration:blogs:blogs-item-selector-api")
 	provided project(":apps:collaboration:item-selector:item-selector-taglib")
 	provided project(":apps:foundation:frontend:frontend-taglib")
-	provided project(":apps:web-experience:export-import:export-import-service")
+	provided group: "com.liferay", name: "com.liferay.exportimport.service", version: "1.0.0"
 }
 
 liferay {
