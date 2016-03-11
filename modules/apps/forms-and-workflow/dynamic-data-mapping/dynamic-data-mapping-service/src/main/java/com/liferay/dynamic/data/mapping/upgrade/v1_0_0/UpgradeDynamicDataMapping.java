@@ -984,8 +984,8 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 		sb.append("groupId, companyId, userId, userName, createDate, ");
 		sb.append("classNameId, classPK, templateId, version, name, ");
 		sb.append("description, language, script, status, ");
-		sb.append("statusByUserId, statusByUserName, statusDate) values (");
-		sb.append("?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+		sb.append("statusByUserId, statusByUserName, statusDate) values ");
+		sb.append("(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
 		try (LoggingTimer loggingTimer = new LoggingTimer();
 			PreparedStatement ps1 = connection.prepareStatement(
