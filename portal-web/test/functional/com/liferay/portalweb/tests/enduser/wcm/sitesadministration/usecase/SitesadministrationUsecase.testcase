@@ -607,6 +607,10 @@
 			<var name="virtualHostsURL" value="http://www.able.com:8080/test-private-page" />
 		</execute>
 
+		<execute macro="Navigator#openSpecificURL">
+			<var name="url" value="http://www.able.com:8080/test-private-page" />
+		</execute>
+
 		<execute function="AssertLocation" value1="http://www.able.com:8080/test-private-page" />
 
 		<execute macro="User#firstLoginPG">
@@ -1099,6 +1103,10 @@
 			<var name="password" value="test" />
 			<var name="userEmailAddress" value="userea@liferay.com" />
 			<var name="virtualHostsURL" value="www.baker.com:8080/group/russia2018" />
+		</execute>
+
+		<execute macro="Navigator#openSpecificURL">
+			<var name="url" value="http://www.baker.com:8080/group/russia2018" />
 		</execute>
 
 		<execute macro="Page#viewSpecificPG">
