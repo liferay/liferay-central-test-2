@@ -27,6 +27,21 @@ import java.sql.Statement;
  */
 public class UpgradeSocial extends UpgradeProcess {
 
+	protected void addSocialActivitySets(long delta) throws Exception {
+		try (Statement s = connection.createStatement()) {
+			StringBundler sb = new StringBundler(6);
+
+			sb.append("insert into SocialActivitySet select (activityId + ");
+			sb.append(delta);
+			sb.append(") as activitySetId, groupId, companyId, userId, ");
+			sb.append("createDate, createDate AS modifiedDate, classNameId, ");
+			sb.append("classPK, type_, extraData, 1 as activityCount ");
+			sb.append("from SocialActivity where mirrorActivityId = 0");
+
+			s.execute(sb.toString());
+		}
+	}
+
 	@Override
 	protected void doUpgrade() throws Exception {
 		if (getSocialActivitySetsCount() > 0) {
@@ -71,21 +86,6 @@ public class UpgradeSocial extends UpgradeProcess {
 
 				return 0;
 			}
-		}
-	}
-
-	protected void addSocialActivitySets(long delta) throws Exception {
-		try (Statement s = connection.createStatement()) {
-			StringBundler sb = new StringBundler(6);
-
-			sb.append("insert into SocialActivitySet select (activityId + ");
-			sb.append(delta);
-			sb.append(") as activitySetId, groupId, companyId, userId, ");
-			sb.append("createDate, createDate AS modifiedDate, classNameId, ");
-			sb.append("classPK, type_, extraData, 1 as activityCount ");
-			sb.append("from SocialActivity where mirrorActivityId = 0");
-
-			s.execute(sb.toString());
 		}
 	}
 
