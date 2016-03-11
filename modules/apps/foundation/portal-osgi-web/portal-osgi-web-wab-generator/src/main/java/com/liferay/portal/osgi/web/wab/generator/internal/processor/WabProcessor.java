@@ -1285,15 +1285,15 @@ public class WabProcessor {
 
 		List<Node> nodes = rootElement.selectNodes("//custom-jsp-dir");
 
-		String property = analyzer.getProperty("-jsp");
+		String value = analyzer.getProperty("-jsp");
 
 		for (Node node : nodes) {
 			String text = node.getText();
 
-			property = "!" + text +"," + property;
+			value = "!" + text +"," + value;
 		}
 
-		analyzer.setProperty("-jsp", property);
+		analyzer.setProperty("-jsp", value);
 	}
 
 	private static final String _SERVICE_BEAN_POST_PROCESSOR_SPRING_XML =
