@@ -1175,30 +1175,6 @@ public class WabProcessor {
 		writeManifest(manifest);
 	}
 
-	private void processExcludedJSPs(Analyzer analyzer) throws IOException {
-		File file = new File(_pluginDir, "/WEB-INF/liferay-hook.xml");
-
-		if (!file.exists()) {
-			return;
-		}
-
-		Document document = readDocument(file);
-
-		Element rootElement = document.getRootElement();
-
-		List<Node> nodes = rootElement.selectNodes("//custom-jsp-dir");
-
-		String property = analyzer.getProperty("-jsp");
-
-		for (Node node : nodes) {
-			String text = node.getText();
-
-			property = "!" + text +"," + property;
-		}
-
-		analyzer.setProperty("-jsp", property);
-	}
-
 	protected void writeGeneratedWab(File file) throws IOException {
 		File dir = new File(
 			PropsValues.
@@ -1294,6 +1270,30 @@ public class WabProcessor {
 		try (OutputStream outputStream = new FileOutputStream(file)) {
 			manifest.write(outputStream);
 		}
+	}
+
+	private void processExcludedJSPs(Analyzer analyzer) throws IOException {
+		File file = new File(_pluginDir, "/WEB-INF/liferay-hook.xml");
+
+		if (!file.exists()) {
+			return;
+		}
+
+		Document document = readDocument(file);
+
+		Element rootElement = document.getRootElement();
+
+		List<Node> nodes = rootElement.selectNodes("//custom-jsp-dir");
+
+		String property = analyzer.getProperty("-jsp");
+
+		for (Node node : nodes) {
+			String text = node.getText();
+
+			property = "!" + text +"," + property;
+		}
+
+		analyzer.setProperty("-jsp", property);
 	}
 
 	private static final String _SERVICE_BEAN_POST_PROCESSOR_SPRING_XML =
