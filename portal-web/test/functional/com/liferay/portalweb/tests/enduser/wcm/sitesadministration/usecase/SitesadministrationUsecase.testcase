@@ -552,10 +552,6 @@
 			<var name="privateVirtualHosts" value="true" />
 		</execute>
 
-		<execute macro="SitePageNavigator#gotoPages">
-			<var name="page" value="Private Pages" />
-		</execute>
-
 		<execute macro="Page#add">
 			<var name="pageName" value="Test Private Page" />
 			<var name="sitePagePrivacy" value="Private" />
@@ -1004,15 +1000,11 @@
 			<var name="siteFriendlyURLEdit" value="/russia2018" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoPublicPages" />
-
 		<for list="Home,Arenas" param="publicPageName" >
 			<execute macro="Page#add">
 				<var name="pageName" value="${publicPageName}" />
 			</execute>
 		</for>
-
-		<execute macro="ProductMenu#gotoPublicPages" />
 
 		<for list="Arena Baltika,Zenit Arena,Kazan Arena" param="childPageName" >
 			<execute macro="Page#addChild">
@@ -1023,8 +1015,6 @@
 				<var name="siteScopeSelected" value="true" />
 			</execute>
 		</for>
-
-		<execute macro="ProductMenu#gotoPrivatePages" />
 
 		<for list="Accomodations,Maps" param="privatePageName" >
 			<execute macro="Page#add">
@@ -1039,8 +1029,6 @@
 			<var name="logoFile" value="Document_3.png" />
 			<var name="page" value="Public Pages" />
 		</execute>
-
-		<execute macro="ProductMenu#gotoPublicPages" />
 
 		<execute macro="Page#addJavaScript">
 			<var name="javaScript" value="alert('Welcome to Russia.');" />
