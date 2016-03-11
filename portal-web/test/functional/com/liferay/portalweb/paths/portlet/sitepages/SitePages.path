@@ -391,7 +391,7 @@
 </tr>
 <tr>
 	<td>EDIT_PUBLIC_PAGE_MENUITEM</td>
-	<td>//*[@data-qa-id='editPublicPage']</td>
+	<td>//*[@data-qa-id='editPublicPages']</td>
 	<td></td>
 </tr>
 <tr>
@@ -400,8 +400,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>EDIT_PUBLIC_PAGE_MENUITEM</td>
-	<td>//*[@data-qa-id='editPrivatePage']</td>
+	<td>EDIT_PRIVATE_PAGE_MENUITEM</td>
+	<td>//*[@data-qa-id='editPrivatePages']</td>
 	<td></td>
 </tr>
 <tr>
