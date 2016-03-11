@@ -93,9 +93,9 @@
 
 				<setup-sdk />
 
-				<exec dir="${project.dir}/modules" executable="git">
-					<arg line="clean -d -f -x" />
-				</exec>
+				<gradle-execute dir="${project.dir}/modules" task="clean">
+					<arg value="-Dportal.build=true" />
+				</gradle-execute>
 			</sequential>
 
 			<delete dir="${doc.dir}" />
