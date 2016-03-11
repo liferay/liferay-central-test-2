@@ -603,12 +603,12 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 		sb.append("inner join DDMStructure on DDLRecordSet.");
 		sb.append("DDMStructureId = DDMStructure.structureId");
 
-		try (PreparedStatement ps = connection.prepareStatement(sb.toString());
+		try (PreparedStatement ps1 = connection.prepareStatement(sb.toString());
 			PreparedStatement ps2 =
 				AutoBatchPreparedStatementUtil.concurrentAutoBatch(
 					connection,
 					"update DDMContent set data_= ? where contentId = ?");
-			ResultSet rs = ps.executeQuery()) {
+			ResultSet rs = ps1.executeQuery()) {
 
 			while (rs.next()) {
 				long groupId = rs.getLong("groupId");
