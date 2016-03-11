@@ -809,6 +809,13 @@
 		<execute function="AssertTextEquals#assertPartialText" locator1="DDLRecord#FIELD_1" value1="${fieldFieldLabel} ${ddlRecordFieldData}" />
 	</command>
 
+	<command name="viewViaDDLDisplayTable">
+		<var name="key_fieldFieldLabel" value="${fieldFieldLabel}" />
+		<var name="key_ddlRecordFieldData" value="${ddlRecordFieldData}" />
+
+		<execute function="AssertTextEquals" locator1="DDL#RECORD_TABLE_ENTRY" value1="${ddlRecordFieldData}" />
+	</command>
+
 	<command name="viewViaDDLDisplayPG">
 		<execute function="AssertTextEquals" locator1="Portlet#H2_HEADER" value1="${ddlListName}" />
 
