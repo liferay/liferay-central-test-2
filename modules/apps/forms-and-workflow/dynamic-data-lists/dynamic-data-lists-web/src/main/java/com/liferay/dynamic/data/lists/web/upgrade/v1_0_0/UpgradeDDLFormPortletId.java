@@ -107,58 +107,6 @@ public class UpgradeDDLFormPortletId
 		}
 	}
 
-	@Override
-	protected void updatePortletPreference(
-			long portletPreferencesId, String portletId)
-		throws Exception {
-
-		PortletPreferences portletPreferences =
-			_portletPreferencesLocalService.getPortletPreferences(
-				portletPreferencesId);
-
-		String preferences = StringUtil.replace(
-			portletPreferences.getPreferences(), "</portlet-preferences>",
-			"<preference><name>formView</name><value>true</value>" +
-				"</preference></portlet-preferences>");
-
-		try (PreparedStatement ps = connection.prepareStatement(
-				"update PortletPreferences set portletId = ?, preferences = " +
-					"? where portletPreferencesId = " + portletPreferencesId)) {
-
-			ps.setString(1, portletId);
-			ps.setString(2, preferences);
-
-			ps.executeUpdate();
-		}
-	}
-
-	@Override
-	protected void updateResourcePermission(
-			long resourcePermissionId, String name, String primKey)
-		throws Exception {
-
-		ResourcePermission resourcePermission =
-			_resourcePermissionLocalService.getResourcePermission(
-				resourcePermissionId);
-
-		if (hasResourcePermission(
-				resourcePermission.getCompanyId(), name,
-				resourcePermission.getScope(), primKey,
-				resourcePermission.getRoleId())) {
-
-			// Resource permission may have already been added by the DDL
-			// Display portlet, in this case it's safe to remove
-			// 1_WAR_ddlformportlet resource permission
-
-			_resourcePermissionLocalService.deleteResourcePermission(
-				resourcePermission.getResourcePermissionId());
-
-			return;
-		}
-
-		super.updateResourcePermission(resourcePermissionId, name, primKey);
-	}
-
 	private static final Log _log = LogFactoryUtil.getLog(
 		UpgradeDDLFormPortletId.class);
 
