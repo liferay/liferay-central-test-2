@@ -768,6 +768,7 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 				}
 
 				ps2.executeBatch();
+
 				ps3.executeBatch();
 
 				updateDDMStructureStorageType();
@@ -928,7 +929,9 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 			}
 
 			ps2.executeBatch();
+
 			ps3.executeBatch();
+
 			ps4.executeBatch();
 		}
 	}
@@ -1077,7 +1080,9 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 			}
 
 			ps2.executeBatch();
+
 			ps3.executeBatch();
+
 			ps4.executeBatch();
 		}
 	}
