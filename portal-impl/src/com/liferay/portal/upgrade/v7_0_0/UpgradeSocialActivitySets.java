@@ -42,7 +42,7 @@ public class UpgradeSocialActivitySets extends UpgradeProcess {
 
 		insertSocialActivitySets(delta);
 
-		updateSocialActivityForeignKeys(delta);
+		updateSocialActivities(delta);
 
 		count = getSocialActivitySetsCount();
 
@@ -51,9 +51,9 @@ public class UpgradeSocialActivitySets extends UpgradeProcess {
 
 	protected long getDelta(long increment) throws Exception {
 		try (Statement s = connection.createStatement()) {
-			String query = "SELECT MIN(activityId) FROM SocialActivity";
+			try (ResultSet rs = s.executeQuery(
+					"select min(activityId) from SocialActivity")) {
 
-			try (ResultSet rs = s.executeQuery(query)) {
 				if (rs.next()) {
 					long minActivityId = rs.getLong(1);
 
@@ -67,7 +67,7 @@ public class UpgradeSocialActivitySets extends UpgradeProcess {
 
 	protected int getSocialActivitySetsCount() throws Exception {
 		try (Statement s = connection.createStatement()) {
-			String query = "SELECT COUNT(activitySetId) FROM SocialActivitySet";
+			String query = "select count(activitySetId) from SocialActivitySet";
 
 			try (ResultSet rs = s.executeQuery(query)) {
 				if (rs.next()) {
@@ -81,27 +81,23 @@ public class UpgradeSocialActivitySets extends UpgradeProcess {
 
 	protected void insertSocialActivitySets(long delta) throws Exception {
 		try (Statement s = connection.createStatement()) {
-			StringBundler sb = new StringBundler(7);
+			StringBundler sb = new StringBundler(6);
 
-			sb.append("INSERT INTO SocialActivitySet ");
-			sb.append("SELECT (activityId + ");
+			sb.append("insert into SocialActivitySet select (activityId + ");
 			sb.append(delta);
-			sb.append(") AS activitySetId, groupId, companyId, userId, ");
+			sb.append(") as activitySetId, groupId, companyId, userId, ");
 			sb.append("createDate, createDate AS modifiedDate, classNameId, ");
 			sb.append("classPK, type_, extraData, 1 as activityCount ");
-			sb.append("FROM SocialActivity WHERE mirrorActivityId = 0");
+			sb.append("from SocialActivity where mirrorActivityId = 0");
 
 			s.execute(sb.toString());
 		}
 	}
 
-	protected void updateSocialActivityForeignKeys(long delta)
-		throws Exception {
+	protected void updateSocialActivities(long delta) throws Exception {
+		try (PreparedStatement ps = connection.prepareStatement(
+				"update SocialActivity set activitySetId = (activityId + ?)")) {
 
-		String query =
-			"UPDATE SocialActivity SET activitySetId = (activityId + ?)";
-
-		try (PreparedStatement ps = connection.prepareStatement(query)) {
 			ps.setLong(1, delta);
 
 			ps.execute();
