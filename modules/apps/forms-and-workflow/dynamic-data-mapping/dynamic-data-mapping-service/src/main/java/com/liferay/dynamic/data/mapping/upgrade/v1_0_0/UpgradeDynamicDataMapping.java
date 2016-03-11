@@ -1122,8 +1122,8 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 						connection,
 						"update DDMContent set data_= ? where contentId = ?")) {
 
-				ps.setLong(1, _ddmContentClassNameId);
-				ps.setString(2, "xml");
+				ps1.setLong(1, _ddmContentClassNameId);
+				ps1.setString(2, "xml");
 
 				try (ResultSet rs = ps1.executeQuery()) {
 					while (rs.next()) {
