@@ -15,7 +15,6 @@
 package com.liferay.portal.upgrade.v7_0_0;
 
 import com.liferay.counter.kernel.model.Counter;
-import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.StringBundler;
 
@@ -46,7 +45,7 @@ public class UpgradeSocialActivitySets extends UpgradeProcess {
 
 		count = getSocialActivitySetsCount();
 
-		CounterLocalServiceUtil.increment(Counter.class.getName(), count);
+		increment(Counter.class.getName(), count);
 	}
 
 	protected long getDelta(long increment) throws Exception {
