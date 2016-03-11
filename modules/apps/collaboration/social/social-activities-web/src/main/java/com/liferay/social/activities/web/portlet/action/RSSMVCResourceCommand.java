@@ -174,6 +174,11 @@ public class RSSMVCResourceCommand extends BaseRSSMVCResourceCommand {
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws Exception {
 
+		ThemeDisplay themeDisplay = (ThemeDisplay)resourceRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		String tabs1 = ParamUtil.getString(resourceRequest, "tabs1", "all");
+
 		String feedTitle = ParamUtil.getString(resourceRequest, "feedTitle");
 		String format = ParamUtil.getString(
 			resourceRequest, "type", RSSUtil.FORMAT_DEFAULT);
@@ -183,10 +188,6 @@ public class RSSMVCResourceCommand extends BaseRSSMVCResourceCommand {
 			resourceRequest, "displayStyle", RSSUtil.DISPLAY_STYLE_DEFAULT);
 		int max = ParamUtil.getInteger(
 			resourceRequest, "max", SearchContainer.DEFAULT_DELTA);
-		String tabs1 = ParamUtil.getString(resourceRequest, "tabs1", "all");
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)resourceRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
 
 		Group group = _groupLocalService.getGroup(
 			themeDisplay.getScopeGroupId());
