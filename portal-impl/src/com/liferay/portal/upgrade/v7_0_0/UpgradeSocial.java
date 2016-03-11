@@ -29,9 +29,7 @@ public class UpgradeSocial extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		int count = getSocialActivitySetsCount();
-
-		if (count > 0) {
+		if (getSocialActivitySetsCount() > 0) {
 			return;
 		}
 
@@ -39,13 +37,11 @@ public class UpgradeSocial extends UpgradeProcess {
 
 		long delta = getDelta(increment);
 
-		insertSocialActivitySets(delta);
+		addSocialActivitySets(delta);
 
 		updateSocialActivities(delta);
 
-		count = getSocialActivitySetsCount();
-
-		increment(Counter.class.getName(), count);
+		increment(Counter.class.getName(), getSocialActivitySetsCount());
 	}
 
 	protected long getDelta(long increment) throws Exception {
@@ -78,7 +74,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 	}
 
-	protected void insertSocialActivitySets(long delta) throws Exception {
+	protected void addSocialActivitySets(long delta) throws Exception {
 		try (Statement s = connection.createStatement()) {
 			StringBundler sb = new StringBundler(6);
 
