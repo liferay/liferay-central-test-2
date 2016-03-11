@@ -183,9 +183,13 @@
 			<var name="portletOption" value="Configuration" />
 		</execute>
 
-		<execute macro="DDLDisplayPortlet#configureListViewPG">
-			<var name="configureCheckBoxName" value="TEMPLATES_SPREADSHEET_VIEW_CHECKBOX" />
+		<execute macro="DDLNavigator#gotoOptionalConfiguration" />
+
+		<execute macro="FormFields#enableCheckbox">
+			<var name="fieldName" value="spreadsheet" />
 		</execute>
+
+		<execute macro="PortletEntry#save" />
 
 		<execute macro="Navigator#gotoPage">
 			<var name="pageName" value="Company Picnic" />
