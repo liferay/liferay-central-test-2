@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.liferay</groupId>
   <artifactId>com.liferay.source.formatter</artifactId>
-  <version>1.0.162</version>
+  <version>1.0.163</version>
   <licenses>
     <license>
       <name>LGPL 2.1</name>
@@ -37,12 +37,6 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>com.liferay.portal</groupId>
-      <artifactId>com.liferay.portal.kernel</artifactId>
-      <version>1.0.3</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
       <groupId>commons-io</groupId>
       <artifactId>commons-io</artifactId>
       <version>2.1</version>
@@ -70,6 +64,12 @@
       <groupId>com.liferay.portal</groupId>
       <artifactId>com.liferay.portal.impl</artifactId>
       <version>1.0.1</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.liferay.portal</groupId>
+      <artifactId>com.liferay.portal.kernel</artifactId>
+      <version>default</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
