@@ -136,10 +136,6 @@ public class ExportLayoutsMVCActionCommand extends BaseMVCActionCommand {
 		boolean privateLayout = ParamUtil.getBoolean(
 			actionRequest, "privateLayout");
 
-		// This point we should have an exportImportConfigurationSettingsMap if
-		// exporting based on a configuration. If the settings map is null then
-		// fall back to the original logic
-
 		if (exportLayoutSettingsMap == null) {
 			long groupId = ParamUtil.getLong(actionRequest, "liveGroupId");
 			long[] layoutIds = getLayoutIds(actionRequest);
