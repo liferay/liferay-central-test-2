@@ -814,14 +814,14 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 	protected void upgradeStructuresAndAddStructureVersionsAndLayouts()
 		throws Exception {
 
-		StringBundler sb = new StringBundler(6);
+		StringBundler sb1 = new StringBundler(6);
 
-		sb.append("insert into DDMStructureVersion (structureVersionId, ");
-		sb.append("groupId, companyId, userId, userName, createDate, ");
-		sb.append("structureId, version, parentStructureId, name, ");
-		sb.append("description, definition, storageType, type_, status, ");
-		sb.append("statusByUserId, statusByUserName, statusDate) values ");
-		sb.append("(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+		sb1.append("insert into DDMStructureVersion (structureVersionId, ");
+		sb1.append("groupId, companyId, userId, userName, createDate, ");
+		sb1.append("structureId, version, parentStructureId, name, ");
+		sb1.append("description, definition, storageType, type_, status, ");
+		sb1.append("statusByUserId, statusByUserName, statusDate) values ");
+		sb1.append("(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
 		StringBundler sb2 = new StringBundler(5);
 
@@ -841,7 +841,7 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 						" = ?");
 			PreparedStatement ps3 =
 				AutoBatchPreparedStatementUtil.concurrentAutoBatch(
-					connection, sb.toString());
+					connection, sb1.toString());
 			PreparedStatement ps4 =
 				AutoBatchPreparedStatementUtil.concurrentAutoBatch(
 					connection, sb2.toString());
