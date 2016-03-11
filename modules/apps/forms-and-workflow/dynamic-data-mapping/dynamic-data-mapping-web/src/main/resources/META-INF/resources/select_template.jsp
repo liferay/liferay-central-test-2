@@ -59,8 +59,8 @@ templateSearch.setOrderByType(ddmDisplayContext.getOrderByType());
 	<liferay-util:param name="groupId" value="<%= String.valueOf(groupId) %>" />
 	<liferay-util:param name="classNameId" value="<%= String.valueOf(classNameId) %>" />
 	<liferay-util:param name="classPK" value="<%= String.valueOf(classPK) %>" />
-	<liferay-util:param name="eventName" value="<%= eventName %>" />
 	<liferay-util:param name="resourceClassNameId" value="<%= String.valueOf(resourceClassNameId) %>" />
+	<liferay-util:param name="eventName" value="<%= eventName %>" />
 </liferay-util:include>
 
 <aui:form action="<%= selectURL.toString() %>" method="post" name="selectTemplateFm">
