@@ -695,12 +695,13 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 
 	protected void upgradeExpandoStorageAdapter() throws Exception {
 		try (LoggingTimer loggingTimer = new LoggingTimer()) {
-			StringBundler sb = new StringBundler(5);
+			StringBundler sb1 = new StringBundler(6);
 
-			sb.append("select DDMStructure.*, DDMStorageLink.* from ");
-			sb.append("DDMStorageLink inner join DDMStructure on ");
-			sb.append("DDMStorageLink.structureId = DDMStructure.structureId ");
-			sb.append("where DDMStructure.storageType = 'expando'");
+			sb1.append("select DDMStructure.*, DDMStorageLink.* from ");
+			sb1.append("DDMStorageLink inner join DDMStructure on ");
+			sb1.append("DDMStorageLink.structureId = ");
+			sb1.append("DDMStructure.structureId where ");
+			sb1.append("DDMStructure.storageType = 'expando'");
 
 			StringBundler sb2 = new StringBundler(4);
 
@@ -715,7 +716,7 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 			sb3.append("classNameId = ? and classPK = ?");
 
 			try (PreparedStatement ps1 = connection.prepareStatement(
-					sb.toString());
+					sb1.toString());
 				PreparedStatement ps2 =
 					AutoBatchPreparedStatementUtil.concurrentAutoBatch(
 						connection, sb2.toString());
