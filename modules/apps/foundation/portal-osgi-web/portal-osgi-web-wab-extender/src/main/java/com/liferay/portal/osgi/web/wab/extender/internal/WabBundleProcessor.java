@@ -694,14 +694,14 @@ public class WabBundleProcessor {
 			return;
 		}
 
-		HandlesTypes handledTypesAnnotation = initializerClass.getAnnotation(
+		HandlesTypes handledTypes = initializerClass.getAnnotation(
 			HandlesTypes.class);
 
-		if (handledTypesAnnotation == null) {
-			handledTypesAnnotation = _NULL_HANDLES_TYPES;
+		if (handledTypes == null) {
+			handledTypes = _NULL_HANDLES_TYPES;
 		}
 
-		Class<?>[] handledTypesArray = handledTypesAnnotation.value();
+		Class<?>[] handledTypesArray = handledTypes.value();
 
 		if (handledTypesArray == null) {
 			handledTypesArray = new Class[0];
