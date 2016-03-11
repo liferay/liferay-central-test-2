@@ -317,6 +317,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>LOGO_UPLOAD_IMAGE_BUTTON</td>
+	<td>//label[contains(@for,'ImageUploaderPortlet')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td></td>
 	<td></td>
 	<td></td>
