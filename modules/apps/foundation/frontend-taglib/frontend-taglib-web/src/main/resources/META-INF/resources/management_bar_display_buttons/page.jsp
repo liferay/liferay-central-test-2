@@ -26,6 +26,12 @@ String selectedDisplayStyle = (String)request.getAttribute("liferay-frontend:man
 PortletURL displayStyleURL = PortletURLUtil.clone(portletURL, liferayPortletResponse);
 
 for (String displayStyle : defaultViews) {
+	String cssClass = StringPool.BLANK;
+
+	if (displayStyle.equals("list")) {
+		cssClass = "hidden-xs";
+	}
+
 	displayStyleURL.setParameter("displayStyle", displayStyle);
 
 	String icon = "table2";
@@ -35,12 +41,6 @@ for (String displayStyle : defaultViews) {
 	}
 	else if (displayStyle.equals("icon")) {
 		icon = "cards2";
-	}
-
-	String cssClass = StringPool.BLANK;
-
-	if (displayStyle.equals("list")) {
-		cssClass = "hidden-xs";
 	}
 %>
 
