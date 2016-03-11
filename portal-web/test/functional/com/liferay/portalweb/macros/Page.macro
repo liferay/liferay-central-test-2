@@ -258,7 +258,7 @@
 
 		<execute macro="Alert#viewRequestFailedToComplete" />
 
-		<execute function="AssertTextNotPresent" locator1="Message#ERROR_2" value1="You must have at least one page." />
+		<execute function="AssertTextPresent" locator1="Message#ERROR_2" value1="You must have at least one page." />
 	</command>
 
 	<command name="assertNodePortPG">
