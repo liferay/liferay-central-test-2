@@ -152,7 +152,7 @@ for (long defaultTeamId : defaultTeamIds) {
 			},
 			'.modify-link'
 		);
-	}
+	};
 
 	var bindSelectLink = function(config) {
 		var searchContainer = config.searchContainer;
@@ -188,7 +188,7 @@ for (long defaultTeamId : defaultTeamIds) {
 				);
 			}
 		);
-	}
+	};
 
 	<%
 	PortletURL selectSiteRoleURL = PortletProviderUtil.getPortletURL(request, Role.class.getName(), PortletProvider.Action.BROWSE);
