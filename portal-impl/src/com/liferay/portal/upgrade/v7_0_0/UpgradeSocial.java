@@ -25,7 +25,7 @@ import java.sql.Statement;
 /**
  * @author Adolfo Pérez
  */
-public class UpgradeSocialActivitySets extends UpgradeProcess {
+public class UpgradeSocial extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
