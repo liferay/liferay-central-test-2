@@ -134,13 +134,13 @@ public class UpgradePortletId extends UpgradeProcess {
 		sb.append(oldRootPortletId);
 		sb.append("_USER_%_INSTANCE_%'");
 
-		try (PreparedStatement ps = connection.prepareStatement(sb.toString());
+		try (PreparedStatement ps1 = connection.prepareStatement(sb.toString());
 			PreparedStatement ps2 =
 				AutoBatchPreparedStatementUtil.concurrentAutoBatch(
 					connection,
 					"update PortletPreferences set portletId = ? where " +
 						"portletPreferencesId = ?");
-			ResultSet rs = ps.executeQuery()) {
+			ResultSet rs = ps1.executeQuery()) {
 
 			while (rs.next()) {
 				long portletPreferencesId = rs.getLong("portletPreferencesId");
@@ -278,7 +278,7 @@ public class UpgradePortletId extends UpgradeProcess {
 			boolean updateName)
 		throws Exception {
 
-		try (PreparedStatement ps = connection.prepareStatement(
+		try (PreparedStatement ps1 = connection.prepareStatement(
 				"select resourcePermissionId, name, scope, primKey from " +
 					"ResourcePermission where name = '" + oldRootPortletId +
 						"'");
@@ -287,7 +287,7 @@ public class UpgradePortletId extends UpgradeProcess {
 					connection,
 					"update ResourcePermission set name = ?, primKey = ? " +
 						"where resourcePermissionId = ?");
-			ResultSet rs = ps.executeQuery()) {
+			ResultSet rs = ps1.executeQuery()) {
 
 			while (rs.next()) {
 				long resourcePermissionId = rs.getLong("resourcePermissionId");
