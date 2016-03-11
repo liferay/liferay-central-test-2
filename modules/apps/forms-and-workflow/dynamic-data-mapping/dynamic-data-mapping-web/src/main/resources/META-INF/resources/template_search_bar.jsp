@@ -18,7 +18,9 @@
 
 <%
 String mvcPath = ParamUtil.getString(request, "mvcPath", "/view_template.jsp");
+
 String tabs1 = ParamUtil.getString(request, "tabs1", "templates");
+
 long templateId = ParamUtil.getLong(request, "templateId");
 
 long groupId = ParamUtil.getLong(request, "groupId", themeDisplay.getSiteGroupId());
@@ -39,8 +41,8 @@ if (resourceClassNameId == 0) {
 	<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
 	<portlet:param name="classNameId" value="<%= String.valueOf(classNameId) %>" />
 	<portlet:param name="classPK" value="<%= String.valueOf(classPK) %>" />
-	<portlet:param name="eventName" value="<%= eventName %>" />
 	<portlet:param name="resourceClassNameId" value="<%= String.valueOf(resourceClassNameId) %>" />
+	<portlet:param name="eventName" value="<%= eventName %>" />
 </portlet:renderURL>
 
 <aui:nav-bar cssClass="collapse-basic-search" markupView="lexicon">
