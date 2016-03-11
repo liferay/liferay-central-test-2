@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.liferay</groupId>
   <artifactId>com.liferay.arquillian.extension.junit.bridge</artifactId>
-  <version>1.0.3</version>
+  <version>1.0.4</version>
   <licenses>
     <license>
       <name>LGPL 2.1</name>
@@ -31,28 +31,22 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
+      <groupId>com.liferay.arquillian</groupId>
+      <artifactId>com.liferay.arquillian.arquillian-container-liferay</artifactId>
+      <version>1.0.2</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
       <groupId>com.liferay</groupId>
       <artifactId>aQute.bnd</artifactId>
       <version>2.3.0</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>com.liferay.arquillian</groupId>
-      <artifactId>com.liferay.arquillian.arquillian-deployment-generator-bnd</artifactId>
-      <version>1.0.0</version>
-      <scope>runtime</scope>
-    </dependency>
-    <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.12</version>
       <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.liferay.arquillian</groupId>
-      <artifactId>com.liferay.arquillian.arquillian-container-liferay</artifactId>
-      <version>1.0.0</version>
-      <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>org.jboss.arquillian.junit</groupId>
@@ -71,6 +65,12 @@
       <artifactId>org.osgi.enterprise</artifactId>
       <version>5.0.0</version>
       <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.liferay.arquillian</groupId>
+      <artifactId>com.liferay.arquillian.arquillian-deployment-generator-bnd</artifactId>
+      <version>1.0.2</version>
+      <scope>runtime</scope>
     </dependency>
   </dependencies>
 </project>
