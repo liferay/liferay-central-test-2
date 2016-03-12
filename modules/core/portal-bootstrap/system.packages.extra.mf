@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1457763093762
+Bnd-LastModified: 1457798247300
 Bundle-ManifestVersion: 2
 Bundle-Name: portal-bootstrap
 Bundle-SymbolicName: portal-bootstrap
