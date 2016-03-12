@@ -1045,12 +1045,12 @@ ${output.content}</echo>
 					</not>
 					<then>
 						<echo></echo>
-						<echo>The semantic versioning was incorrect for the following packages:</echo>
+						<echo>Semantic versioning is incorrect for the following packages:</echo>
 						<echo></echo>
 						<echo>${git.status.log}</echo>
 						<echo></echo>
 
-						<fail message="The semantic versioning was incorrect" />
+						<fail message="Semantic versioning is incorrect." />
 					</then>
 				</if>
 			</test-action>
