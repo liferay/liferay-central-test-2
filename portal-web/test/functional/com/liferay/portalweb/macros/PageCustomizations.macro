@@ -30,7 +30,7 @@
 
 		<execute function="Check#checkToggleSwitch" locator1="SitePagesEditPage#CUSTOMIZATION_SETTINGS_SHOW_CUSTOMIZABLE_SECTIONS" />
 
-		<execute function="AssertChecked" locator1="SitePagesEditPage#CUSTOMIZATION_SETTINGS_CUSTOMIZABLE_COLUMN" />
+		<execute function="AssertChecked#assertCheckedToggleSwitch" locator1="SitePagesEditPage#CUSTOMIZATION_SETTINGS_CUSTOMIZABLE_COLUMN" />
 	</command>
 
 	<command name="enableSectionCustomizablePG">
