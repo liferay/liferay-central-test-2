@@ -287,7 +287,11 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 			return false;
 		}
 
-		boolean ownerIsDefaultUser = ownerId == defaultUserId;
+		boolean ownerIsDefaultUser = false;
+		
+		if (ownerId == defaultUserId) {
+			ownerIsDefaultUser = true;
+		}
 
 		if (ownerIsDefaultUser) {
 			List<String> guestUnsupportedActions;
