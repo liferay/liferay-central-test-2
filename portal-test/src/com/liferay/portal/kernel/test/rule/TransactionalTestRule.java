@@ -138,11 +138,11 @@ public class TransactionalTestRule implements TestRule {
 	}
 
 	protected void replaceFrameworkMethods(Statement statement, String name) {
+		List<FrameworkMethod> newFrameworkMethods = new ArrayList<>();
+
 		List<FrameworkMethod> frameworkMethods =
 			ReflectionTestUtil.<List<FrameworkMethod>>getFieldValue(
 				statement, name);
-
-		List<FrameworkMethod> newFrameworkMethods = new ArrayList<>();
 
 		for (FrameworkMethod frameworkMethod : frameworkMethods) {
 			if (frameworkMethod instanceof TransactionalFrameworkMethod) {
