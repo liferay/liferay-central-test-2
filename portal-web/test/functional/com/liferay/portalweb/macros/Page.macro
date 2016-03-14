@@ -831,7 +831,7 @@
 		</if>
 
 		<execute macro="ProductMenu#gotoLocalizedEditPage">
-			<var name="category" value="${category}" />
+			<var name="category" value="Navigation" />
 			<var name="page" value="${page}" />
 		</execute>
 
