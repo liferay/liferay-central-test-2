@@ -69,8 +69,8 @@ public class TransactionalTestRuleArquillianTest
 
 		if (beanLocator == null) {
 
-			// When beanLocator is null, it means we are on client side, simply
-			// do nothing.
+			// When the bean locator is null, it means we are on the client
+			// side, simply do nothing
 
 			_transactionInvoker = null;
 		}
