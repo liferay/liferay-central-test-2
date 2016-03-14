@@ -1023,8 +1023,6 @@ public class BaseTextExportImportContentProcessor
 
 		String portalURL = PortalUtil.getPathContext();
 
-		StringBundler stringBundler = new StringBundler(2);
-
 		ServiceContext serviceContext =
 			ServiceContextThreadLocal.getServiceContext();
 
@@ -1033,10 +1031,9 @@ public class BaseTextExportImportContentProcessor
 
 			ThemeDisplay themeDisplay = serviceContext.getThemeDisplay();
 
-			stringBundler.append(PortalUtil.getPortalURL(themeDisplay));
-			stringBundler.append(PortalUtil.getPathContext());
-
-			portalURL = stringBundler.toString();
+			portalURL =
+				PortalUtil.getPortalURL(themeDisplay) +
+					PortalUtil.getPathContext();
 		}
 
 		String[] patterns = {
