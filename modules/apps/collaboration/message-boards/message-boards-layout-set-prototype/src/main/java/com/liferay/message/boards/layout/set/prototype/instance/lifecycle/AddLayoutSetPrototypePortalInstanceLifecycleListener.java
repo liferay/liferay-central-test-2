@@ -88,7 +88,6 @@ public class AddLayoutSetPrototypePortalInstanceLifecycleListener
 
 		Layout homeLayout = DefaultLayoutPrototypesUtil.addLayout(
 			layoutSet, "home", "/home", "2_columns_iii");
-
 		String portletId = PortletProviderUtil.getPortletId(
 			MBMessage.class.getName(), PortletProvider.Action.EDIT);
 

@@ -151,8 +151,8 @@ public class AddLayoutSetPrototypePortalInstanceLifecycleListener
 		preferences.put("portletSetupUseCustomTitle", Boolean.TRUE.toString());
 		preferences.put(
 			"urls",
-			"https://www.liferay.com/about-us/newsroom/press-releases/-/" +
-				"asset_publisher/2oZC/rss");
+			"https://www.liferay.com/about-us/newsroom/press-releases/-" +
+				"/asset_publisher/2oZC/rss");
 		preferences.put("titles", "Liferay Press Releases");
 
 		DefaultLayoutPrototypesUtil.updatePortletSetup(
