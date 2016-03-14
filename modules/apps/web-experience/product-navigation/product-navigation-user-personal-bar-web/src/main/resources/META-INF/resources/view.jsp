@@ -20,7 +20,6 @@
 	<c:when test="<%= themeDisplay.isSignedIn() %>">
 		<span class="user-avatar-link">
 			<a class="text-default" data-qa-id="openUserMenu" href="javascript:;" id="<portlet:namespace />sidenavUserToggle">
-
 				<c:if test="<%= themeDisplay.isImpersonated() %>">
 					<aui:icon image="asterisk" markupView="lexicon" />
 				</c:if>
