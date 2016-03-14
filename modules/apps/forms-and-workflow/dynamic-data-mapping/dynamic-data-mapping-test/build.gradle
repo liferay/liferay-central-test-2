@@ -1,3 +1,7 @@
+copyLibs {
+	enabled = true
+}
+
 dependencies {
 	provided group: "org.json", name: "json", version: "20090211"
 	provided group: "org.skyscreamer", name: "jsonassert", version: "1.2.3"
