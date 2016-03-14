@@ -436,6 +436,83 @@ public class CalendarPortlet extends MVCPortlet {
 		actionRequest.setAttribute(WebKeys.REDIRECT, redirect);
 	}
 
+	public void updateCalendarBookingAsync(
+			ActionRequest actionRequest, ActionResponse actionResponse)
+		throws IOException, PortalException {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		long calendarBookingId = ParamUtil.getLong(
+			actionRequest, "calendarBookingId");
+
+		CalendarBooking calendarBooking =
+			_calendarBookingService.fetchCalendarBooking(calendarBookingId);
+
+		long calendarId = ParamUtil.getLong(actionRequest, "calendarId");
+
+		Calendar calendar = _calendarService.getCalendar(calendarId);
+
+		long[] childCalendarIds = {};
+		Map<Locale, String> titleMap = new HashMap<>();
+		Map<Locale, String> descriptionMap = new HashMap<>();
+		String location = null;
+		java.util.Calendar startTimeJCalendar = getJCalendar(
+			actionRequest, "startTime");
+		java.util.Calendar endTimeJCalendar = getJCalendar(
+			actionRequest, "endTime");
+		boolean allDay = ParamUtil.getBoolean(actionRequest, "allDay");
+
+		TimeZone timeZone = getTimeZone(actionRequest);
+
+		Recurrence recurrence = RecurrenceSerializer.deserialize(
+			ParamUtil.getString(actionRequest, "recurrence"), timeZone);
+
+		long[] reminders = {0, 0};
+		String[] remindersType = {"email", "email"};
+		int instanceIndex = ParamUtil.getInteger(
+			actionRequest, "instanceIndex");
+		boolean updateInstance = ParamUtil.getBoolean(
+			actionRequest, "updateInstance");
+		boolean allFollowing = ParamUtil.getBoolean(
+			actionRequest, "allFollowing");
+
+		if (calendarBooking != null) {
+			childCalendarIds = _calendarBookingLocalService.getChildCalendarIds(
+				calendarBookingId, calendarId);
+			titleMap = calendarBooking.getTitleMap();
+			descriptionMap = calendarBooking.getDescriptionMap();
+			location = calendarBooking.getLocation();
+			reminders = new long[] {
+				calendarBooking.getFirstReminder(),
+				calendarBooking.getSecondReminder()
+			};
+			remindersType = new String[] {
+				calendarBooking.getFirstReminderType(),
+				calendarBooking.getSecondReminderType()
+			};
+		}
+
+		String title = ParamUtil.getString(actionRequest, "title");
+
+		titleMap.put(themeDisplay.getLocale(), title);
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			CalendarBooking.class.getName(), actionRequest);
+
+		calendarBooking = updateCalendarBooking(
+			calendarBookingId, calendar, childCalendarIds, titleMap,
+			descriptionMap, location, startTimeJCalendar.getTimeInMillis(),
+			endTimeJCalendar.getTimeInMillis(), allDay, recurrence, reminders,
+			remindersType, instanceIndex, updateInstance, allFollowing,
+			serviceContext);
+
+		JSONObject jsonObject = CalendarUtil.toCalendarBookingJSONObject(
+			themeDisplay, calendarBooking, timeZone);
+
+		writeJSON(actionRequest, actionResponse, jsonObject);
+	}
+
 	public void updateCalendarNotificationTemplate(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
@@ -1280,83 +1357,6 @@ public class CalendarPortlet extends MVCPortlet {
 		jsonObject.put("success", false);
 
 		writeJSON(resourceRequest, resourceResponse, jsonObject);
-	}
-
-	public void updateCalendarBookingAsync(
-			ActionRequest actionRequest, ActionResponse actionResponse)
-		throws IOException, PortalException {
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		long calendarBookingId = ParamUtil.getLong(
-			actionRequest, "calendarBookingId");
-
-		CalendarBooking calendarBooking =
-			_calendarBookingService.fetchCalendarBooking(calendarBookingId);
-
-		long calendarId = ParamUtil.getLong(actionRequest, "calendarId");
-
-		Calendar calendar = _calendarService.getCalendar(calendarId);
-
-		long[] childCalendarIds = {};
-		Map<Locale, String> titleMap = new HashMap<>();
-		Map<Locale, String> descriptionMap = new HashMap<>();
-		String location = null;
-		java.util.Calendar startTimeJCalendar = getJCalendar(
-			actionRequest, "startTime");
-		java.util.Calendar endTimeJCalendar = getJCalendar(
-			actionRequest, "endTime");
-		boolean allDay = ParamUtil.getBoolean(actionRequest, "allDay");
-
-		TimeZone timeZone = getTimeZone(actionRequest);
-
-		Recurrence recurrence = RecurrenceSerializer.deserialize(
-			ParamUtil.getString(actionRequest, "recurrence"), timeZone);
-
-		long[] reminders = {0, 0};
-		String[] remindersType = {"email", "email"};
-		int instanceIndex = ParamUtil.getInteger(
-			actionRequest, "instanceIndex");
-		boolean updateInstance = ParamUtil.getBoolean(
-			actionRequest, "updateInstance");
-		boolean allFollowing = ParamUtil.getBoolean(
-			actionRequest, "allFollowing");
-
-		if (calendarBooking != null) {
-			childCalendarIds = _calendarBookingLocalService.getChildCalendarIds(
-				calendarBookingId, calendarId);
-			titleMap = calendarBooking.getTitleMap();
-			descriptionMap = calendarBooking.getDescriptionMap();
-			location = calendarBooking.getLocation();
-			reminders = new long[] {
-				calendarBooking.getFirstReminder(),
-				calendarBooking.getSecondReminder()
-			};
-			remindersType = new String[] {
-				calendarBooking.getFirstReminderType(),
-				calendarBooking.getSecondReminderType()
-			};
-		}
-
-		String title = ParamUtil.getString(actionRequest, "title");
-
-		titleMap.put(themeDisplay.getLocale(), title);
-
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			CalendarBooking.class.getName(), actionRequest);
-
-		calendarBooking = updateCalendarBooking(
-			calendarBookingId, calendar, childCalendarIds, titleMap,
-			descriptionMap, location, startTimeJCalendar.getTimeInMillis(),
-			endTimeJCalendar.getTimeInMillis(), allDay, recurrence, reminders,
-			remindersType, instanceIndex, updateInstance, allFollowing,
-			serviceContext);
-
-		JSONObject jsonObject = CalendarUtil.toCalendarBookingJSONObject(
-			themeDisplay, calendarBooking, timeZone);
-
-		writeJSON(actionRequest, actionResponse, jsonObject);
 	}
 
 	@Reference(unbind = "-")
