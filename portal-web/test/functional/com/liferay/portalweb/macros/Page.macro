@@ -199,7 +199,9 @@
 			<var name="siteTemplateName" value="${siteTemplateName}" />
 		</execute>
 
-		<execute macro="SitePageNavigator#gotoAddPage" />
+		<execute macro="SitePageNavigator#gotoAddPage">
+			<var name="sitePagePrivacy" value="Private" />
+		</execute>
 
 		<execute macro="Page#addPageTitle">
 			<var name="pageName" value="${pageName}" />
