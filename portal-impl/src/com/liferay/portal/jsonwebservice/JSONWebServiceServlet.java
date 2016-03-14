@@ -70,20 +70,20 @@ public class JSONWebServiceServlet extends JSONServlet {
 		String portalContextPath =
 			PortalContextLoaderListener.getPortalServletContextPath();
 
-		String currentContextPath = request.getContextPath();
+		String requestContextPath = request.getContextPath();
 
-		if (currentContextPath.equals(portalContextPath)) {
+		if (requestContextPath.equals(portalContextPath)) {
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher(
 				Portal.PATH_MAIN + "/portal/api/jsonws");
 
 			requestDispatcher.forward(request, response);
 		}
 		else {
-			String contextName = getServletContext().getServletContextName();
+			ServletContext servletContext = getServletContext();
 
 			String redirectPath =
 				PortalUtil.getPathContext() + "/api/jsonws?contextName=" +
-					HttpUtil.encodeURL(contextName);
+					HttpUtil.encodeURL(servletContext.getServletContextName());
 
 			response.sendRedirect(redirectPath);
 		}
