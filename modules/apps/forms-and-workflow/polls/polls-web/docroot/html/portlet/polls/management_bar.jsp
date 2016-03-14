@@ -18,6 +18,7 @@
 
 <%
 PortletURL portletURL = pollsDisplayContext.getBasePortletURL();
+
 portletURL.setParameter("struts_action", "/polls/view");
 %>
 

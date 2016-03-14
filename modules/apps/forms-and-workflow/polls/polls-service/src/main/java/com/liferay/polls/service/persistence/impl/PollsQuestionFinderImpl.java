@@ -80,20 +80,6 @@ public class PollsQuestionFinderImpl
 	}
 
 	@Override
-	public List<PollsQuestion> findByC_G_T_D(
-		long companyId, long[] groupIds, String title, String description,
-		boolean andOperator, int start, int end,
-		OrderByComparator<PollsQuestion> orderByComparator) {
-
-		String[] titles = CustomSQLUtil.keywords(title);
-		String[] descriptions = CustomSQLUtil.keywords(description, false);
-
-		return doFindByC_G_T_D(
-			companyId, groupIds, titles, descriptions, andOperator, start, end,
-			orderByComparator, false);
-	}
-
-	@Override
 	public List<PollsQuestion> findByKeywords(
 		long companyId, long[] groupIds, String keywords, int start, int end,
 		OrderByComparator<PollsQuestion> orderByComparator) {
@@ -109,6 +95,20 @@ public class PollsQuestionFinderImpl
 		else {
 			andOperator = true;
 		}
+
+		return doFindByC_G_T_D(
+			companyId, groupIds, titles, descriptions, andOperator, start, end,
+			orderByComparator, false);
+	}
+
+	@Override
+	public List<PollsQuestion> findByC_G_T_D(
+		long companyId, long[] groupIds, String title, String description,
+		boolean andOperator, int start, int end,
+		OrderByComparator<PollsQuestion> orderByComparator) {
+
+		String[] titles = CustomSQLUtil.keywords(title);
+		String[] descriptions = CustomSQLUtil.keywords(description, false);
 
 		return doFindByC_G_T_D(
 			companyId, groupIds, titles, descriptions, andOperator, start, end,

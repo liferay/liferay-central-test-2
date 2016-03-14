@@ -87,7 +87,6 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 
 	</tbody>
 	</table>
-
 </div>
 
 <div>

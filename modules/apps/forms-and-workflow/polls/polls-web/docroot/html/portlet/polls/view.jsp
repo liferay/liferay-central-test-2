@@ -37,7 +37,6 @@ portletURL.setParameter("struts_action", "/polls/view");
 			orderByComparator="<%= pollsDisplayContext.getPollsQuestionOrderByComparator() %>"
 			searchTerms="<%= new DisplayTerms(renderRequest) %>"
 		>
-
 			<liferay-ui:search-container-results>
 				<%@ include file="/html/portlet/polls/question_search_results.jspf" %>
 			</liferay-ui:search-container-results>
