@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.exception.CookieNotSupportedException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
