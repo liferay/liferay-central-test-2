@@ -29,13 +29,13 @@ public interface PollsQuestionFinder {
 		java.lang.String title, java.lang.String description,
 		boolean andOperator);
 
-	public java.util.List<com.liferay.polls.model.PollsQuestion> findByC_G_T_D(
-		long companyId, long[] groupIds, java.lang.String title,
-		java.lang.String description, boolean andOperator, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.polls.model.PollsQuestion> orderByComparator);
-
 	public java.util.List<com.liferay.polls.model.PollsQuestion> findByKeywords(
 		long companyId, long[] groupIds, java.lang.String keywords, int start,
 		int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.polls.model.PollsQuestion> orderByComparator);
+
+	public java.util.List<com.liferay.polls.model.PollsQuestion> findByC_G_T_D(
+		long companyId, long[] groupIds, java.lang.String title,
+		java.lang.String description, boolean andOperator, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.polls.model.PollsQuestion> orderByComparator);
 }
