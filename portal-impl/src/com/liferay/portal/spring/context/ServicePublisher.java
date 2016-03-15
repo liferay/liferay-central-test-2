@@ -24,7 +24,7 @@ import org.springframework.context.event.ContextRefreshedEvent;
 /**
  * @author Miguel Pastor
  */
-public class ServicePublisher implements ApplicationListener {
+public class ServicePublisher implements ApplicationListener<ApplicationEvent> {
 
 	@Override
 	public void onApplicationEvent(ApplicationEvent applicationEvent) {
