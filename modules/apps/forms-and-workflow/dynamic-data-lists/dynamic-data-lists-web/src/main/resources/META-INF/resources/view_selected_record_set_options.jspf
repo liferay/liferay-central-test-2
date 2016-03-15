@@ -27,6 +27,7 @@
 			<aui:button href="<%= addRecordURL %>" icon="icon-plus" value="<%= ddlDisplayContext.getAddRecordLabel() %>" />
 		</c:if>
 	</div>
+
 	<c:if test="<%= ddlDisplayContext.isShowIconsActions() %>">
 		<div class="lfr-icon-actions">
 			<liferay-portlet:renderURL varImpl="redirectURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
