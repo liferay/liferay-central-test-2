@@ -24,7 +24,7 @@ import org.springframework.context.event.ContextRefreshedEvent;
 /**
  * @author Miguel Pastor
  */
-public class ModuleFrameworkApplicationListener
+public class ServiceBeanPublisher
 	implements ApplicationListener<ApplicationEvent> {
 
 	@Override
