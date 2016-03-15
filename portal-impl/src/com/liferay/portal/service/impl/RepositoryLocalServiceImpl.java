@@ -149,7 +149,7 @@ public class RepositoryLocalServiceImpl extends RepositoryLocalServiceBaseImpl {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
 					"Repository deletion events for this repository will not " +
-						"be raised",
+						"be triggered",
 					uere);
 			}
 		}
