@@ -75,8 +75,8 @@ public class RegistryImpl implements Registry {
 			}
 		}
 
-		// Drain the reference queue, as the service tracker referenes is empty
-		// now
+		// Drain the reference queue since there are no more service tracker
+		// references
 
 		while (_referenceQueue.poll() != null);
 	}
