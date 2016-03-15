@@ -176,23 +176,14 @@ public class UpgradeClassNames extends UpgradeProcess {
 
 	static {
 		_classNamesMap.put(
-			"com.liferay.portlet.blogs.model.BlogsEntry",
-			"com.liferay.blogs.kernel.model.BlogsEntry");
-		_classNamesMap.put(
 			"com.liferay.portal.model.Company",
 			"com.liferay.portal.kernel.model.Company");
-		_classNamesMap.put(
-			"com.liferay.portlet.documentlibrary.model.DLFileEntry",
-			"com.liferay.document.library.kernel.model.DLFileEntry");
 		_classNamesMap.put(
 			"com.liferay.portal.model.Group",
 			"com.liferay.portal.kernel.model.Group");
 		_classNamesMap.put(
 			"com.liferay.portal.model.LayoutRevision",
 			"com.liferay.portal.kernel.model.LayoutRevision");
-		_classNamesMap.put(
-			"com.liferay.portlet.messageboards.model.MBMessage",
-			"com.liferay.message.boards.kernel.model.MBMessage");
 		_classNamesMap.put(
 			"com.liferay.portal.model.Role",
 			"com.liferay.portal.kernel.model.Role");
@@ -203,11 +194,20 @@ public class UpgradeClassNames extends UpgradeProcess {
 			"com.liferay.portal.model.UserGroup",
 			"com.liferay.portal.kernel.model.UserGroup");
 		_classNamesMap.put(
-			"com.liferay.portlet.journal.model.JournalArticle",
-			"com.liferay.journal.model.JournalArticle");
+			"com.liferay.portlet.blogs.model.BlogsEntry",
+			"com.liferay.blogs.kernel.model.BlogsEntry");
+		_classNamesMap.put(
+			"com.liferay.portlet.documentlibrary.model.DLFileEntry",
+			"com.liferay.document.library.kernel.model.DLFileEntry");
 		_classNamesMap.put(
 			"com.liferay.portlet.dynamicdatalists.model.DDLRecord",
 			"com.liferay.dynamic.data.lists.model.DDLRecord");
+		_classNamesMap.put(
+			"com.liferay.portlet.journal.model.JournalArticle",
+			"com.liferay.journal.model.JournalArticle");
+		_classNamesMap.put(
+			"com.liferay.portlet.messageboards.model.MBMessage",
+			"com.liferay.message.boards.kernel.model.MBMessage");
 		_classNamesMap.put(
 			"com.liferay.portlet.wiki.model.WikiPage",
 			"com.liferay.wiki.model.WikiPage");
