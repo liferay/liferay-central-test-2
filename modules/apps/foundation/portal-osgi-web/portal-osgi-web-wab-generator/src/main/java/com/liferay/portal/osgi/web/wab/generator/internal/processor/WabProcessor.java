@@ -182,7 +182,7 @@ public class WabProcessor {
 
 			if (manifest == null) {
 				if (_log.isDebugEnabled()) {
-					_log.debug("No manifest found for: " + jar.getName());
+					_log.debug("No manifest found for " + jar.getName());
 				}
 
 				return;
@@ -194,7 +194,8 @@ public class WabProcessor {
 
 			if (Validator.isNull(classPathHeader)) {
 				if (_log.isDebugEnabled()) {
-					_log.debug("No Class-Path header found: " + jar.getName());
+					_log.debug(
+						"No Class-Path header found for " + jar.getName());
 				}
 
 				return;
@@ -204,29 +205,29 @@ public class WabProcessor {
 				classPathHeader, ",");
 
 			for (String classPathHeaderPart : classPathHeaderParts) {
-				File subFile = Analyzer.getFile(
+				File childFile = Analyzer.getFile(
 					file.getParentFile(), classPathHeaderPart);
 
-				if (!subFile.exists() ||
-					!subFile.getParentFile().equals(file.getParentFile())) {
+				if (!childFile.exists() ||
+					!childFile.getParentFile().equals(file.getParentFile())) {
 
 					analyzer.warning(
-						"Invalid Class-Path entry %s in %s, must " +
-							"exist and must reside in same directory",
-						subFile, file);
+						"Invalid Class-Path entry %s in %s must exist and " +
+							"reside in same directory",
+						childFile, file);
 				}
 				else {
-					wabLibPath = "WEB-INF/lib/" + subFile.getName();
+					wabLibPath = "WEB-INF/lib/" + childFile.getName();
 
 					appendProperty(
 						analyzer, Constants.BUNDLE_CLASSPATH, wabLibPath);
 
-					addWabLib(analyzer, wab, subFile);
+					addWabLib(analyzer, wab, childFile);
 				}
 			}
 		}
 		catch (Exception e) {
-			_log.error("Cannot load manifest for: " + jar.getName(), e);
+			_log.error("Unable to load manifest for " + jar.getName(), e);
 		}
 	}
 
@@ -1204,10 +1205,10 @@ public class WabProcessor {
 
 		Set<Object> plugins = analyzer.getPlugins();
 
-		// Do not reorder
-
 		plugins.add(_dsAnnotations);
+
 		plugins.add(_metatypePlugin);
+
 		plugins.add(_metatypeAnnotations);
 
 		Properties pluginPackageProperties = getPluginPackageProperties();
