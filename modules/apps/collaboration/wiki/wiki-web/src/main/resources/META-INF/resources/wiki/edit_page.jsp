@@ -105,12 +105,6 @@ if (portletTitleBasedNavigation) {
 
 	renderResponse.setTitle(headerTitle);
 }
-
-boolean pending = false;
-
-if (wikiPage != null) {
-	pending = wikiPage.isPending();
-}
 %>
 
 <c:if test="<%= portletTitleBasedNavigation && (wikiPage != null) && !wikiPage.isNew() %>">
@@ -322,6 +316,14 @@ if (wikiPage != null) {
 						</aui:fieldset>
 					</c:if>
 				</aui:fieldset-group>
+
+				<%
+				boolean pending = false;
+
+				if (wikiPage != null) {
+					pending = wikiPage.isPending();
+				}
+				%>
 
 				<c:if test="<%= pending %>">
 					<div class="alert alert-info">

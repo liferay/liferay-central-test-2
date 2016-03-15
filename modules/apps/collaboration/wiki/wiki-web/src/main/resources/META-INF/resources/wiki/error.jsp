@@ -24,11 +24,12 @@ String title = ParamUtil.getString(request, "title");
 boolean portletTitleBasedNavigation = GetterUtil.getBoolean(portletConfig.getInitParameter("portlet-title-based-navigation"));
 
 if (portletTitleBasedNavigation) {
+	portletDisplay.setShowBackIcon(true);
+
 	WikiURLHelper wikiURLHelper = new WikiURLHelper(wikiRequestHelper, renderResponse, wikiGroupServiceConfiguration);
 
 	PortletURL backToViewPagesURL = wikiURLHelper.getBackToViewPagesURL(node);
 
-	portletDisplay.setShowBackIcon(true);
 	portletDisplay.setURLBack(backToViewPagesURL.toString());
 
 	renderResponse.setTitle(title);
