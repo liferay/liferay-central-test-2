@@ -22,9 +22,6 @@ import com.liferay.social.privatemessaging.model.PrivateMessagingConstants;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * @author Scott Lee
  */
@@ -41,17 +38,9 @@ public class UpgradePrivateMessaging extends UpgradeProcess {
 
 		ResultSet rs = ps.executeQuery();
 
-		List<Long> mbThreadIds = new ArrayList<>();
-
 		while (rs.next()) {
+			long mbThreadId = rs.getLong(1);
 
-			// We can load into memory all the elements, this plugin is not
-			// widely used, so the amount of data will be small
-
-			mbThreadIds.add(rs.getLong(1));
-		}
-
-		for (Long mbThreadId : mbThreadIds) {
 			_mBThreadLocalService.moveThread(
 				GroupConstants.DEFAULT_PARENT_GROUP_ID,
 				PrivateMessagingConstants.PRIVATE_MESSAGING_CATEGORY_ID,
