@@ -43,9 +43,10 @@ public class UpgradeClassNames extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		updateClassName("KaleoInstance");
-		updateClassName("KaleoInstanceToken");
-		updateClassName("KaleoTaskInstanceToken");
+		updateClassName("KaleoInstance", "className");
+		updateClassName("KaleoInstanceToken", "className");
+		updateClassName("KaleoLog", "currentAssigneeClassName");
+		updateClassName("KaleoTaskInstanceToken", "className");
 
 		updateWorkflowContextEntryClassName("KaleoInstance", "kaleoInstanceId");
 		updateWorkflowContextEntryClassName("KaleoLog", "kaleoLogId");
@@ -92,13 +93,13 @@ public class UpgradeClassNames extends UpgradeProcess {
 			ArrayUtil.toStringArray(newSubs));
 	}
 
-	protected void updateClassName(String tableName) {
+	protected void updateClassName(String tableName, String columnName) {
 		try (LoggingTimer loggingTimer = new LoggingTimer(tableName)) {
 			Table table = new Table(tableName);
 
 			for (Map.Entry<String, String> entry : _classNamesMap.entrySet()) {
 				table.updateColumnValue(
-					"className", entry.getKey(), entry.getValue());
+					columnName, entry.getKey(), entry.getValue());
 			}
 		}
 	}
