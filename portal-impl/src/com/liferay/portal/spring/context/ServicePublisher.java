@@ -28,19 +28,19 @@ public class ServicePublisher implements ApplicationListener {
 
 	@Override
 	public void onApplicationEvent(ApplicationEvent applicationEvent) {
-		if (applicationEvent instanceof ContextRefreshedEvent) {
-			ContextRefreshedEvent contextRefreshedEvent =
-				(ContextRefreshedEvent)applicationEvent;
-
-			ModuleFrameworkUtilAdapter.registerContext(
-				contextRefreshedEvent.getApplicationContext());
-		}
-		else if (applicationEvent instanceof ContextClosedEvent) {
+		if (applicationEvent instanceof ContextClosedEvent) {
 			ContextClosedEvent contextClosedEvent =
 				(ContextClosedEvent)applicationEvent;
 
 			ModuleFrameworkUtilAdapter.unregisterContext(
 				contextClosedEvent.getApplicationContext());
+		}
+		else if (applicationEvent instanceof ContextRefreshedEvent) {
+			ContextRefreshedEvent contextRefreshedEvent =
+				(ContextRefreshedEvent)applicationEvent;
+
+			ModuleFrameworkUtilAdapter.registerContext(
+				contextRefreshedEvent.getApplicationContext());
 		}
 	}
 

@@ -977,8 +977,6 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 			_log.debug("Register application context");
 		}
 
-		BundleContext bundleContext = _framework.getBundleContext();
-
 		List<ServiceRegistration<?>> serviceRegistrations = new ArrayList<>();
 
 		for (String beanName : applicationContext.getBeanDefinitionNames()) {
@@ -995,7 +993,7 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 
 			if (bean != null) {
 				ServiceRegistration<?> serviceRegistration = _registerService(
-					bundleContext, beanName, bean);
+					_framework.getBundleContext(), beanName, bean);
 
 				if (serviceRegistration != null) {
 					serviceRegistrations.add(serviceRegistration);
