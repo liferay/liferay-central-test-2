@@ -499,14 +499,14 @@ public class DDMStructureLocalServiceImpl
 
 		ddmStructurePersistence.remove(structure);
 
-		// Structure links
-
-		ddmStructureLinkPersistence.removeByStructureId(
-			structure.getStructureId());
-
 		// Data provider instance links
 
 		ddmDataProviderInstanceLinkPersistence.removeByStructureId(
+			structure.getStructureId());
+
+		// Structure links
+
+		ddmStructureLinkPersistence.removeByStructureId(
 			structure.getStructureId());
 
 		// Structure versions
