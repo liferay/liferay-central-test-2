@@ -12,27 +12,24 @@
  * details.
  */
 
-package com.liferay.portal.tools.data.partitioning.sql.builder.exporter;
+package com.liferay.portal.tools.data.partitioning.sql.builder.internal.exporter;
 
-import com.liferay.portal.tools.data.partitioning.sql.builder.db.postgresql.PostgreSQLProvider;
+import java.io.OutputStream;
 
-import org.junit.Assert;
-import org.junit.Test;
+import java.util.List;
 
 /**
  * @author Manuel de la Peña
  */
-public class ShardExporterFactoryTest {
+public interface DBExporter {
 
-	@Test
-	public void testGetShardExporterReturnsPostgreSQLProvider()
-		throws Exception {
+	public List<String> getControlTableNames(String schemaName);
 
-		ShardExporter shardExporter = ShardExporterFactory.getShardExporter();
+	public List<String> getPartitionedTableNames(String schemaName);
 
-		Class<PostgreSQLProvider> clazz = PostgreSQLProvider.class;
+	public void write(
+		long companyId, String tableName, OutputStream outputStream);
 
-		Assert.assertTrue(clazz.isInstance(shardExporter));
-	}
+	public void write(String tableName, OutputStream outputStream);
 
 }

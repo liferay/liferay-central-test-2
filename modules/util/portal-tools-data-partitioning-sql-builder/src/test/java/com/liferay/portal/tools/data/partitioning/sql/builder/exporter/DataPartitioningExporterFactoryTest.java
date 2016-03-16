@@ -21,11 +21,11 @@ import org.junit.Test;
 /**
  * @author Manuel de la Peña
  */
-public class ShardExporterFactoryTest {
+public class DataPartitioningExporterFactoryTest {
 
 	@Test(expected = DBProviderNotAvailableException.class)
-	public void testGetShardExporter() throws Exception {
-		ShardExporterFactory.getShardExporter();
+	public void testGetDataPartitioningExporter() throws Exception {
+		DataPartitioningExporterFactory.getDataPartitioningExporter();
 	}
 
 }

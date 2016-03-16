@@ -19,7 +19,7 @@ import com.liferay.portal.tools.data.partitioning.sql.builder.exporter.context.E
 /**
  * @author Manuel de la Peña
  */
-public interface ShardExporter {
+public interface DataPartitioningExporter {
 
 	public void export(ExportContext exportContext);
 
