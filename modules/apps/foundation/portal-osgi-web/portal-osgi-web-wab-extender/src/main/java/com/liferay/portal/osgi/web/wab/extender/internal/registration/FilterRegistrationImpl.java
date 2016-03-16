@@ -72,6 +72,7 @@ public class FilterRegistrationImpl implements FilterRegistration.Dynamic {
 			}
 			else {
 				_filterMapping.addURLPattern(i, servletName);
+
 				i++;
 			}
 		}
@@ -131,7 +132,9 @@ public class FilterRegistrationImpl implements FilterRegistration.Dynamic {
 	@Override
 	public boolean setInitParameter(String name, String value) {
 		boolean exists = _initParameters.containsKey(name);
+
 		_initParameters.put(name, value);
+
 		return exists;
 	}
 
