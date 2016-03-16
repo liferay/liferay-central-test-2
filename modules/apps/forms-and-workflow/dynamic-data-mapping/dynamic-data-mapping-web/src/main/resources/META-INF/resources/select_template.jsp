@@ -138,6 +138,11 @@ templateSearch.setOrderByType(ddmDisplayContext.getOrderByType());
 						<%
 						Map<String, Object> data = new HashMap<String, Object>();
 
+						if (ddmDisplay.isShowConfirmSelectTemplate()) {
+							data.put("confirm-selection", Boolean.TRUE.toString());
+							data.put("confirm-selection-message", ddmDisplay.getConfirmSelectTemplateMessage(locale));
+						}
+
 						data.put("ddmtemplateid", template.getTemplateId());
 						data.put("ddmtemplatekey", template.getTemplateKey());
 						data.put("description", template.getDescription(locale));
