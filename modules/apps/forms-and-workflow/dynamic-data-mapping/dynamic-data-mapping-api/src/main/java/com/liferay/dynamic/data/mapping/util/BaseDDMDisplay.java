@@ -321,6 +321,16 @@ public abstract class BaseDDMDisplay implements DDMDisplay {
 	}
 
 	@Override
+	public boolean isShowConfirmSelectStructure() {
+		return false;
+	}
+
+	@Override
+	public boolean isShowConfirmSelectTemplate() {
+		return false;
+	}
+
+	@Override
 	public boolean isShowStructureSelector() {
 		return false;
 	}
