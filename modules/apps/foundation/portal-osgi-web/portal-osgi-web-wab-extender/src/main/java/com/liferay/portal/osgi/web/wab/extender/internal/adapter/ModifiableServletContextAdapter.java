@@ -400,54 +400,55 @@ public class ModifiableServletContextAdapter
 		for (ServletRegistrationImpl servletRegistrationImpl :
 				_servletRegistrations.values()) {
 
-			if (servletRegistrationImpl.getInstance() == null) {
-				String servletClassName =
-					servletRegistrationImpl.getClassName();
+			if (servletRegistrationImpl.getInstance() != null) {
+				continue;
+			}
 
-				try {
-					String jspFile = servletRegistrationImpl.getJspFile();
+			String servletClassName = servletRegistrationImpl.getClassName();
 
-					Servlet servlet = null;
+			try {
+				String jspFile = servletRegistrationImpl.getJspFile();
 
-					if (Validator.isNotNull(jspFile)) {
-						servlet = new WabBundleProcessor.JspServletWrapper(
-							jspFile);
-					}
-					else {
-						Class<?> clazz = _bundle.loadClass(servletClassName);
+				Servlet servlet = null;
 
-						Class<? extends Servlet> servletClass =
-							clazz.asSubclass(Servlet.class);
-
-						servlet = servletClass.newInstance();
-					}
-
-					servletRegistrationImpl.setInstance(servlet);
-
-					ServletDefinition servletDefinition =
-						new ServletDefinition();
-
-					servletDefinition.setAsyncSupported(
-						servletRegistrationImpl.isAsyncSupported());
-					servletDefinition.setInitParameters(
-						servletRegistrationImpl.getInitParameters());
-					servletDefinition.setJSPFile(
-						servletRegistrationImpl.getJspFile());
-					servletDefinition.setName(
-						servletRegistrationImpl.getName());
-					servletDefinition.setServlet(servlet);
-					servletDefinition.setURLPatterns(
-						new ArrayList<>(servletRegistrationImpl.getMappings()));
-
-					servletDefinitions.put(
-						servletRegistrationImpl.getName(), servletDefinition);
+				if (Validator.isNotNull(jspFile)) {
+					servlet = new WabBundleProcessor.JspServletWrapper(
+						jspFile);
 				}
-				catch (Exception e) {
-					_logger.log(
-						Logger.LOG_ERROR,
-						"Bundle " + _bundle + " is unable to load servlet " +
-							servletClassName);
+				else {
+					Class<?> clazz = _bundle.loadClass(servletClassName);
+
+					Class<? extends Servlet> servletClass =
+						clazz.asSubclass(Servlet.class);
+
+					servlet = servletClass.newInstance();
 				}
+
+				servletRegistrationImpl.setInstance(servlet);
+
+				ServletDefinition servletDefinition =
+					new ServletDefinition();
+
+				servletDefinition.setAsyncSupported(
+					servletRegistrationImpl.isAsyncSupported());
+				servletDefinition.setInitParameters(
+					servletRegistrationImpl.getInitParameters());
+				servletDefinition.setJSPFile(
+					servletRegistrationImpl.getJspFile());
+				servletDefinition.setName(
+					servletRegistrationImpl.getName());
+				servletDefinition.setServlet(servlet);
+				servletDefinition.setURLPatterns(
+					new ArrayList<>(servletRegistrationImpl.getMappings()));
+
+				servletDefinitions.put(
+					servletRegistrationImpl.getName(), servletDefinition);
+			}
+			catch (Exception e) {
+				_logger.log(
+					Logger.LOG_ERROR,
+					"Bundle " + _bundle + " is unable to load servlet " +
+						servletClassName);
 			}
 		}
 	}
