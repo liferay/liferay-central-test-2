@@ -125,11 +125,11 @@ public class CustomSQL {
 	public String get(Class<?> clazz, String id) {
 		BundleContext bundleContext = getBundleContext(clazz);
 
-		if (!_sqlPool.isBundleContextLoaded(bundleContext)) {
+		if (!_customSQLPool.isBundleContextLoaded(bundleContext)) {
 			_loadCustomSQL(clazz);
 		}
 
-		return _sqlPool.get(bundleContext, id);
+		return _customSQLPool.get(bundleContext, id);
 	}
 
 	public String get(
@@ -201,7 +201,7 @@ public class CustomSQL {
 	}
 
 	public String get(String id) {
-		return _sqlPool.get(id);
+		return _customSQLPool.get(id);
 	}
 
 	/**
@@ -484,11 +484,11 @@ public class CustomSQL {
 			DataAccess.cleanUp(con);
 		}
 
-		if (_sqlPool == null) {
-			_sqlPool = new CustomSQLPool();
+		if (_customSQLPool == null) {
+			_customSQLPool = new CustomSQLPool();
 		}
 		else {
-			_sqlPool.clear();
+			_customSQLPool.clear();
 		}
 
 		_loadCustomSQL(clazz);
@@ -830,7 +830,7 @@ public class CustomSQL {
 
 					content = replaceIsNull(content);
 
-					_sqlPool.put(bundleContext, id, content);
+					_customSQLPool.put(bundleContext, id, content);
 				}
 			}
 		}
@@ -935,9 +935,9 @@ public class CustomSQL {
 
 	private static final Log _log = LogFactoryUtil.getLog(CustomSQL.class);
 
+	private CustomSQLPool _customSQLPool;
 	private String _functionIsNotNull;
 	private String _functionIsNull;
-	private CustomSQLPool _sqlPool;
 	private boolean _vendorDB2;
 	private boolean _vendorHSQL;
 	private boolean _vendorInformix;
