@@ -40,14 +40,14 @@ public class UserSearchFixture {
 		return group;
 	}
 
-	public void addUser(Group group, String... tags) throws Exception {
+	public void addUser(Group group, String... assetTagNames) throws Exception {
 		User user = UserTestUtil.addUser(group.getGroupId());
 
 		_users.add(user);
 
 		ServiceContext serviceContext = getServiceContext(group);
 
-		serviceContext.setAssetTagNames(tags);
+		serviceContext.setAssetTagNames(assetTagNames);
 
 		UserTestUtil.updateUser(user, serviceContext);
 

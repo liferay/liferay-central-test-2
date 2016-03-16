@@ -245,16 +245,15 @@ public class DocumentImplTest {
 
 		Hits results = IndexSearcherHelperUtil.search(searchContext, query);
 
-		List<String> screenNamesList = new ArrayList<>(screenNames.length);
-
 		List<String> searchResultValues = new ArrayList<>(screenNames.length);
+		List<String> screenNamesList = new ArrayList<>(screenNames.length);
 
 		for (int i = 0; i < screenNames.length; i++) {
 			Document document = results.doc(i);
 
-			screenNamesList.add(document.get("screenName"));
-
 			searchResultValues.add(document.get(sort.getFieldName()));
+
+			screenNamesList.add(document.get("screenName"));
 		}
 
 		Assert.assertEquals(
