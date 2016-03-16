@@ -26,43 +26,42 @@ import org.osgi.framework.BundleContext;
 public class CustomSQLPool {
 
 	public CustomSQLPool() {
-		_sqlPoolMaps = new WeakHashMap<>();
+		_maps = new WeakHashMap<>();
 	}
 
 	public void clear() {
-		_sqlPoolMaps = null;
+		_maps = null;
 
-		_sqlPoolMaps = new WeakHashMap<>();
+		_maps = new WeakHashMap<>();
 	}
 
 	public String get(BundleContext bundleContext, String id) {
-		Map<String, String> sqlPoolMap = _sqlPoolMaps.get(bundleContext);
+		Map<String, String> map = _maps.get(bundleContext);
 
-		if (sqlPoolMap != null) {
-			return sqlPoolMap.get(id);
+		if (map != null) {
+			return map.get(id);
 		}
 
 		return null;
 	}
 
-	public String get(Map<String, String> sqlPoolMap, String id) {
-		return sqlPoolMap.get(id);
+	public String get(Map<String, String> map, String id) {
+		return map.get(id);
 	}
 
 	public String get(String id) {
-		for (BundleContext bundleContext : _sqlPoolMaps.keySet()) {
+		for (BundleContext bundleContext : _maps.keySet()) {
 			if (bundleContext == null) {
 				continue;
 			}
 
-			Map<String, String> sqlPoolMap = _sqlPoolMaps.get(
-				bundleContext);
+			Map<String, String> map = _maps.get(bundleContext);
 
-			if (sqlPoolMap == null) {
+			if (map == null) {
 				continue;
 			}
 
-			String content = sqlPoolMap.get(id);
+			String content = map.get(id);
 
 			if (content != null) {
 				return content;
@@ -73,10 +72,9 @@ public class CustomSQLPool {
 	}
 
 	public boolean isBundleContextLoaded(BundleContext bundleContext) {
-		Map<String, String> sqlPoolMap = _sqlPoolMaps.get(
-			bundleContext);
+		Map<String, String> map = _maps.get(bundleContext);
 
-		if (sqlPoolMap != null) {
+		if (map != null) {
 			return true;
 		}
 
@@ -84,18 +82,18 @@ public class CustomSQLPool {
 	}
 
 	public void put(BundleContext bundleContext, String id, String content) {
-		Map<String, String> sqlPoolMap = _sqlPoolMaps.get(bundleContext);
+		Map<String, String> map = _maps.get(bundleContext);
 
-		if (sqlPoolMap == null) {
-			sqlPoolMap = new HashMap<>();
+		if (map == null) {
+			map = new HashMap<>();
 
-			_sqlPoolMaps.put(bundleContext, sqlPoolMap);
+			_maps.put(bundleContext, map);
 		}
 
-		sqlPoolMap.put(id, content);
+		map.put(id, content);
 	}
 
-	private static Map<BundleContext, Map<String, String>> _sqlPoolMaps =
+	private static Map<BundleContext, Map<String, String>> _maps =
 		new WeakHashMap<>();
 
 }
