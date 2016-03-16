@@ -339,55 +339,56 @@ public class ModifiableServletContextAdapter
 		for (FilterRegistrationImpl filterRegistrationImpl :
 				_filterRegistrations.values()) {
 
-			if (filterRegistrationImpl.getInstance() == null) {
-				String filterClassName = filterRegistrationImpl.getClassName();
+			if (filterRegistrationImpl.getInstance() != null) {
+				continue;
+			}
 
-				try {
-					Class<?> clazz = _bundle.loadClass(filterClassName);
+			String filterClassName = filterRegistrationImpl.getClassName();
 
-					Class<? extends Filter> filterClass = clazz.asSubclass(
-						Filter.class);
+			try {
+				Class<?> clazz = _bundle.loadClass(filterClassName);
 
-					Filter filter = filterClass.newInstance();
+				Class<? extends Filter> filterClass = clazz.asSubclass(
+					Filter.class);
 
-					filterRegistrationImpl.setInstance(filter);
+				Filter filter = filterClass.newInstance();
 
-					FilterDefinition filterDefinition = new FilterDefinition();
+				filterRegistrationImpl.setInstance(filter);
 
-					filterDefinition.setAsyncSupported(
-						filterRegistrationImpl.isAsyncSupported());
+				FilterDefinition filterDefinition = new FilterDefinition();
 
-					FilterRegistrationImpl.FilterMapping filterMapping =
-						filterRegistrationImpl.getFilterMapping();
+				filterDefinition.setAsyncSupported(
+					filterRegistrationImpl.isAsyncSupported());
 
-					for (DispatcherType dispatcherType :
-							filterMapping.getDispatchers()) {
+				FilterRegistrationImpl.FilterMapping filterMapping =
+					filterRegistrationImpl.getFilterMapping();
 
-						filterDefinition.addDispatcher(
-							dispatcherType.toString());
-					}
+				for (DispatcherType dispatcherType :
+						filterMapping.getDispatchers()) {
 
-					filterDefinition.setFilter(filter);
-					filterDefinition.setInitParameters(
-						filterRegistrationImpl.getInitParameters());
-					filterDefinition.setName(filterRegistrationImpl.getName());
-					filterDefinition.setServletNames(
-						new ArrayList<>(
-							filterRegistrationImpl.getServletNameMappings()));
-
-					filterDefinition.setURLPatterns(
-						new ArrayList<>(
-							filterRegistrationImpl.getUrlPatternMappings()));
-
-					filterDefinitions.put(
-						filterRegistrationImpl.getName(), filterDefinition);
+					filterDefinition.addDispatcher(
+						dispatcherType.toString());
 				}
-				catch (Exception e) {
-					_logger.log(
-						Logger.LOG_ERROR,
-						"Bundle " + _bundle + " is unable to load filter " +
-							filterClassName);
-				}
+
+				filterDefinition.setFilter(filter);
+				filterDefinition.setInitParameters(
+					filterRegistrationImpl.getInitParameters());
+				filterDefinition.setName(filterRegistrationImpl.getName());
+				filterDefinition.setServletNames(
+					new ArrayList<>(
+						filterRegistrationImpl.getServletNameMappings()));
+				filterDefinition.setURLPatterns(
+					new ArrayList<>(
+						filterRegistrationImpl.getUrlPatternMappings()));
+
+				filterDefinitions.put(
+					filterRegistrationImpl.getName(), filterDefinition);
+			}
+			catch (Exception e) {
+				_logger.log(
+					Logger.LOG_ERROR,
+					"Bundle " + _bundle + " is unable to load filter " +
+						filterClassName);
 			}
 		}
 	}
