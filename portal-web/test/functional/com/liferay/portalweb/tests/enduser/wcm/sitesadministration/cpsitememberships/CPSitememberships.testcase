@@ -576,7 +576,6 @@
 
 		<execute macro="Site#viewMemberOrganizationCP">
 			<var name="orgName" value="Organization Name 1" />
-			<var name="toolTip" value="true" />
 		</execute>
 
 		<execute macro="ProductMenu#gotoControlPanelUsers">
