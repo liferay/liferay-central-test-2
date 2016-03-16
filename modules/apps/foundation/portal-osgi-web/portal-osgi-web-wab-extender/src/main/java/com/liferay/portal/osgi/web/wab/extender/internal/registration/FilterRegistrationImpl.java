@@ -38,7 +38,7 @@ public class FilterRegistrationImpl implements FilterRegistration.Dynamic {
 
 	@Override
 	public void addMappingForServletNames(
-		EnumSet<DispatcherType> dispatcherTypes, boolean isMatchAfter,
+		EnumSet<DispatcherType> dispatcherTypes, boolean matchAfter,
 		String... servletNames) {
 
 		_filterMapping.setDispatcher(dispatcherTypes);
@@ -46,7 +46,7 @@ public class FilterRegistrationImpl implements FilterRegistration.Dynamic {
 		int i = 0;
 
 		for (String servletName : servletNames) {
-			if (isMatchAfter) {
+			if (matchAfter) {
 				_filterMapping.addServletName(servletName);
 			}
 			else {
@@ -59,7 +59,7 @@ public class FilterRegistrationImpl implements FilterRegistration.Dynamic {
 
 	@Override
 	public void addMappingForUrlPatterns(
-		EnumSet<DispatcherType> dispatcherTypes, boolean isMatchAfter,
+		EnumSet<DispatcherType> dispatcherTypes, boolean matchAfter,
 		String... urlPatterns) {
 
 		_filterMapping.setDispatcher(dispatcherTypes);
@@ -67,7 +67,7 @@ public class FilterRegistrationImpl implements FilterRegistration.Dynamic {
 		int i = 0;
 
 		for (String servletName : urlPatterns) {
-			if (isMatchAfter) {
+			if (matchAfter) {
 				_filterMapping.addURLPattern(servletName);
 			}
 			else {
