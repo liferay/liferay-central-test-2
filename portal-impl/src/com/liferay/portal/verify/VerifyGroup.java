@@ -167,13 +167,13 @@ public class VerifyGroup extends VerifyProcess {
 			sb.append(GroupLocalServiceImpl.ORGANIZATION_NAME_SUFFIX);
 			sb.append("'");
 
-			try (PreparedStatement ps = connection.prepareStatement(
+			try (PreparedStatement ps1 = connection.prepareStatement(
 					sb.toString());
 				PreparedStatement ps2 =
 					AutoBatchPreparedStatementUtil.concurrentAutoBatch(
 						connection,
 						"update Group_ set name = ? where groupId = ?");
-				ResultSet rs = ps.executeQuery()) {
+				ResultSet rs = ps1.executeQuery()) {
 
 				while (rs.next()) {
 					long groupId = rs.getLong("groupId");
