@@ -126,7 +126,7 @@ public class CustomSQL {
 		BundleContext bundleContext = getBundleContext(clazz);
 
 		if (!_sqlPool.isBundleContextLoaded(bundleContext)) {
-			loadCustomSQL(clazz);
+			_loadCustomSQL(clazz);
 		}
 
 		return _sqlPool.get(bundleContext, id);
@@ -491,7 +491,7 @@ public class CustomSQL {
 			_sqlPool.clear();
 		}
 
-		loadCustomSQL(clazz);
+		_loadCustomSQL(clazz);
 	}
 
 	public String removeGroupBy(String sql) {
@@ -892,7 +892,7 @@ public class CustomSQL {
 		return bundle.getBundleContext();
 	}
 
-	private void loadCustomSQL(Class<?> clazz) {
+	private void _loadCustomSQL(Class<?> clazz) {
 		try {
 			ClassLoader classLoader = clazz.getClassLoader();
 
