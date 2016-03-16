@@ -18,7 +18,7 @@ import com.liferay.calendar.model.Calendar;
 import com.liferay.calendar.model.impl.CalendarImpl;
 import com.liferay.calendar.model.impl.CalendarModelImpl;
 import com.liferay.calendar.service.persistence.CalendarFinder;
-import com.liferay.portal.dao.orm.CustomSQLUtil;
+import com.liferay.portal.dao.orm.custom.sql.CustomSQLUtil;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;

@@ -20,7 +20,7 @@ import com.liferay.bookmarks.model.impl.BookmarksFolderImpl;
 import com.liferay.bookmarks.service.persistence.BookmarksEntryUtil;
 import com.liferay.bookmarks.service.persistence.BookmarksFolderFinder;
 import com.liferay.bookmarks.service.persistence.BookmarksFolderUtil;
-import com.liferay.portal.dao.orm.CustomSQLUtil;
+import com.liferay.portal.dao.orm.custom.sql.CustomSQLUtil;
 import com.liferay.portal.kernel.dao.orm.QueryDefinition;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
