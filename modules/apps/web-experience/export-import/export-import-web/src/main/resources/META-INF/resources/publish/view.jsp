@@ -19,12 +19,13 @@
 <liferay-staging:defineObjects />
 
 <%
-String publishConfigurationButtons = ParamUtil.getString(request, "publishConfigurationButtons", "custom");
 String cmd = ParamUtil.getString(request, Constants.CMD);
 
 if (Validator.isNull(cmd)) {
 	cmd = ParamUtil.getString(request, "originalCmd", Constants.PUBLISH_TO_LIVE);
 }
+
+String publishConfigurationButtons = ParamUtil.getString(request, "publishConfigurationButtons", "custom");
 
 long exportImportConfigurationId = 0;
 

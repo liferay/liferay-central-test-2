@@ -20,8 +20,11 @@
 
 <%
 String cmd = ParamUtil.getString(request, Constants.CMD, Constants.PUBLISH_TO_LIVE);
+
 String tabs1 = ParamUtil.getString(request, "tabs1", "public-pages");
+
 String closeRedirect = ParamUtil.getString(request, "closeRedirect");
+
 long exportImportConfigurationId = ParamUtil.getLong(request, "exportImportConfigurationId");
 
 ExportImportConfiguration exportImportConfiguration = null;
