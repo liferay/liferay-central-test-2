@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.dao.orm;
+package com.liferay.portal.dao.orm.custom.sql;
 
 import com.liferay.portal.kernel.configuration.Configuration;
 import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
