@@ -1118,7 +1118,7 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 				if (_log.isDebugEnabled()) {
 					_log.debug(
 						"Service registration " + serviceRegistration +
-							" has already been unregistered");
+							" is already unregistered");
 				}
 			}
 		}
