@@ -141,6 +141,7 @@ public class FilterRegistrationImpl implements FilterRegistration.Dynamic {
 	@Override
 	public Set<String> setInitParameters(Map<String, String> initParameters) {
 		_initParameters = initParameters;
+
 		return new HashSet<>();
 	}
 
@@ -155,28 +156,28 @@ public class FilterRegistrationImpl implements FilterRegistration.Dynamic {
 	public class FilterMapping {
 
 		public void addServletName(int index, String servletName) {
-			FilterMappingItem item = new FilterMappingItem();
+			FilterMappingItem filterMappingItem = new FilterMappingItem();
 
-			item.setItemContent(servletName);
+			filterMappingItem.setItemContent(servletName);
 
-			_items.add(index, item);
+			_filterMappingItems.add(index, filterMappingItem);
 		}
 
 		public void addServletName(String servletName) {
-			addServletName(_items.size(), servletName);
+			addServletName(_filterMappingItems.size(), servletName);
 		}
 
 		public void addURLPattern(int index, String urlPattern) {
-			FilterMappingItem item = new FilterMappingItem();
+			FilterMappingItem filterMappingItem = new FilterMappingItem();
 
-			item.setUrlPattern(true);
-			item.setItemContent(urlPattern);
+			filterMappingItem.setUrlPattern(true);
+			filterMappingItem.setItemContent(urlPattern);
 
-			_items.add(index, item);
+			_filterMappingItems.add(index, filterMappingItem);
 		}
 
 		public void addURLPattern(String urlPattern) {
-			addURLPattern(_items.size(), urlPattern);
+			addURLPattern(_filterMappingItems.size(), urlPattern);
 		}
 
 		public EnumSet<DispatcherType> getDispatchers() {
@@ -184,32 +185,33 @@ public class FilterRegistrationImpl implements FilterRegistration.Dynamic {
 		}
 
 		public List<String> getServletNames() {
-			return Collections.unmodifiableList(getItems(false));
+			return Collections.unmodifiableList(_getFilterMappingItems(false));
 		}
 
 		public List<String> getURLPatterns() {
-			return Collections.unmodifiableList(getItems(true));
+			return Collections.unmodifiableList(_getFilterMappingItems(true));
 		}
 
 		public void setDispatcher(EnumSet<DispatcherType> dispatcher) {
 			_dispatchers = dispatcher;
 		}
 
-		private List<String> getItems(boolean urlPattern) {
-			List<String> items = new ArrayList<>();
+		private List<String> _getFilterMappingItems(boolean urlPattern) {
+			List<String> filterMappingItems = new ArrayList<>();
 
-			for (FilterMappingItem item : _items) {
-				if (urlPattern == item.isUrlPattern()) {
-					items.add(item.getItemContent());
+			for (FilterMappingItem filterMappingItem : _filterMappingItems) {
+				if (urlPattern == filterMappingItem.isUrlPattern()) {
+					filterMappingItems.add(filterMappingItem.getItemContent());
 				}
 			}
 
-			return items;
+			return filterMappingItems;
 		}
 
 		private EnumSet<DispatcherType> _dispatchers = EnumSet.noneOf(
 			DispatcherType.class);
-		private final List<FilterMappingItem> _items = new ArrayList<>();
+		private final List<FilterMappingItem> _filterMappingItems =
+			new ArrayList<>();
 
 	}
 

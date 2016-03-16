@@ -21,7 +21,7 @@ import com.liferay.portal.osgi.web.servlet.context.helper.ServletContextHelperRe
 import com.liferay.portal.osgi.web.servlet.jsp.compiler.JspServlet;
 import com.liferay.portal.osgi.web.wab.extender.internal.adapter.FilterExceptionAdapter;
 import com.liferay.portal.osgi.web.wab.extender.internal.adapter.ModifiableServletContext;
-import com.liferay.portal.osgi.web.wab.extender.internal.adapter.ModifiableServletContextAdaptor;
+import com.liferay.portal.osgi.web.wab.extender.internal.adapter.ModifiableServletContextAdapter;
 import com.liferay.portal.osgi.web.wab.extender.internal.adapter.ServletContextListenerExceptionAdapter;
 import com.liferay.portal.osgi.web.wab.extender.internal.adapter.ServletExceptionAdapter;
 import com.liferay.portal.osgi.web.wab.extender.internal.definition.FilterDefinition;
@@ -152,7 +152,7 @@ public class WabBundleProcessor {
 			}
 
 			ServletContext servletContext =
-				ModifiableServletContextAdaptor.createInstance(
+				ModifiableServletContextAdapter.createInstance(
 					servletContextHelperRegistration.getServletContext(),
 					_bundle.getBundleContext(), webXMLDefinition, _logger);
 
