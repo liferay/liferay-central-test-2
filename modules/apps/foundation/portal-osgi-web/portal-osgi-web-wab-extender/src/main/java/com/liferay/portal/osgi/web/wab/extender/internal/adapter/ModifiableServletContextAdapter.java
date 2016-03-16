@@ -123,8 +123,8 @@ public class ModifiableServletContextAdapter
 		return filterRegistrationImpl;
 	}
 
-	public void addListener(Class<? extends EventListener> listenerClass) {
-		_listeners.put(listenerClass, null);
+	public void addListener(Class<? extends EventListener> eventListenerClass) {
+		_eventListeners.put(eventListenerClass, null);
 	}
 
 	public void addListener(String className) {
@@ -135,10 +135,10 @@ public class ModifiableServletContextAdapter
 				throw new IllegalArgumentException();
 			}
 
-			Class<? extends EventListener> listenerClass = clazz.asSubclass(
+			Class<? extends EventListener> eventListenerClass = clazz.asSubclass(
 				EventListener.class);
 
-			_listeners.put(listenerClass, null);
+			_eventListeners.put(eventListenerClass, null);
 		}
 		catch (Exception e) {
 			_logger.log(
@@ -150,7 +150,7 @@ public class ModifiableServletContextAdapter
 	}
 
 	public <T extends EventListener> void addListener(T t) {
-		_listeners.put(t.getClass(), t);
+		_eventListeners.put(t.getClass(), t);
 	}
 
 	public Dynamic addServlet(
@@ -261,27 +261,29 @@ public class ModifiableServletContextAdapter
 		List<ListenerDefinition> listenerDefinitions = new ArrayList<>();
 
 		for (Entry<Class<? extends EventListener>, EventListener> entry :
-				_listeners.entrySet()) {
+				_eventListeners.entrySet()) {
 
-			if (entry.getValue() == null) {
-				Class<? extends EventListener> listenerClass = entry.getKey();
+			if (entry.getValue() != null) {
+				continue;
+			}
 
-				try {
-					EventListener listener = listenerClass.newInstance();
+			Class<? extends EventListener> eventListenerClass = entry.getKey();
 
-					ListenerDefinition listenerDefinition =
-						new ListenerDefinition();
+			try {
+				EventListener listener = eventListenerClass.newInstance();
 
-					listenerDefinition.setEventListener(listener);
+				ListenerDefinition listenerDefinition =
+					new ListenerDefinition();
 
-					listenerDefinitions.add(listenerDefinition);
-				}
-				catch (Exception e) {
-					_logger.log(
-						Logger.LOG_ERROR,
-						"Bundle " + _bundle + " is unable to load listener " +
-							listenerClass);
-				}
+				listenerDefinition.setEventListener(listener);
+
+				listenerDefinitions.add(listenerDefinition);
+			}
+			catch (Exception e) {
+				_logger.log(
+					Logger.LOG_ERROR,
+					"Bundle " + _bundle + " is unable to load listener " +
+						eventListenerClass);
 			}
 		}
 
@@ -291,7 +293,7 @@ public class ModifiableServletContextAdapter
 	public Map<Class<? extends EventListener>, EventListener>
 		getListenersImpl() {
 
-		return _listeners;
+		return _eventListeners;
 	}
 
 	public ServletRegistration getServletRegistration(String servletName) {
@@ -474,9 +476,6 @@ public class ModifiableServletContextAdapter
 					methods.put(method, adapterMethod);
 				}
 				catch (NoSuchMethodException nsme2) {
-
-					// do nothing
-
 				}
 			}
 		}
@@ -499,7 +498,7 @@ public class ModifiableServletContextAdapter
 	private final LinkedHashMap<String, FilterRegistrationImpl>
 		_filterRegistrations = new LinkedHashMap<>();
 	private final LinkedHashMap<Class<? extends EventListener>, EventListener>
-		_listeners = new LinkedHashMap<>();
+		_eventListeners = new LinkedHashMap<>();
 	private final Logger _logger;
 	private final ServletContext _servletContext;
 	private final LinkedHashMap<String, ServletRegistrationImpl>
