@@ -28,9 +28,9 @@ public class ShardExporterFactoryTest {
 	public void testGetShardExporterReturnsMySQLProvider() throws Exception {
 		ShardExporter shardExporter = ShardExporterFactory.getShardExporter();
 
-		Class<MySQLProvider> providerClass = MySQLProvider.class;
+		Class<MySQLProvider> clazz = MySQLProvider.class;
 
-		Assert.assertTrue(providerClass.isInstance(shardExporter));
+		Assert.assertTrue(clazz.isInstance(shardExporter));
 	}
 
 }

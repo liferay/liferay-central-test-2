@@ -30,9 +30,9 @@ public class ShardExporterFactoryTest {
 
 		ShardExporter shardExporter = ShardExporterFactory.getShardExporter();
 
-		Class<PostgreSQLProvider> providerClass = PostgreSQLProvider.class;
+		Class<PostgreSQLProvider> clazz = PostgreSQLProvider.class;
 
-		Assert.assertTrue(providerClass.isInstance(shardExporter));
+		Assert.assertTrue(clazz.isInstance(shardExporter));
 	}
 
 }
