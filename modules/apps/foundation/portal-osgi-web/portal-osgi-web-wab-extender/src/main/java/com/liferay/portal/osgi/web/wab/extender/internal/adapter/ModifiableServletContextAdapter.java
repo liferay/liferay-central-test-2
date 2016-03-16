@@ -270,12 +270,12 @@ public class ModifiableServletContextAdapter
 			Class<? extends EventListener> eventListenerClass = entry.getKey();
 
 			try {
-				EventListener listener = eventListenerClass.newInstance();
+				EventListener eventListener = eventListenerClass.newInstance();
 
 				ListenerDefinition listenerDefinition =
 					new ListenerDefinition();
 
-				listenerDefinition.setEventListener(listener);
+				listenerDefinition.setEventListener(eventListener);
 
 				listenerDefinitions.add(listenerDefinition);
 			}
