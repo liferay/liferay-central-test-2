@@ -679,9 +679,9 @@ public class BaseTextExportImportContentProcessor
 				else if (_log.isWarnEnabled()) {
 					StringBundler exceptionSB = new StringBundler(6);
 
-					exceptionSB.append("Unable to process layout url '");
+					exceptionSB.append("Unable to process layout URL ");
 					exceptionSB.append(url);
-					exceptionSB.append("' for ");
+					exceptionSB.append(" for staged model ");
 					exceptionSB.append(stagedModel.getModelClassName());
 					exceptionSB.append(" with primary key ");
 					exceptionSB.append(stagedModel.getPrimaryKeyObj());
