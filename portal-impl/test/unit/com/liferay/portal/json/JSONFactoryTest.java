@@ -61,7 +61,7 @@ public class JSONFactoryTest {
 	}
 
 	@Test
-	public void testDeserializeArrayOfSmallLongsReturnsArrayOfInteger() {
+	public void testDeserializeLongArrayToIntegerArray() {
 		Map<String, long[]> map = new HashMap<>();
 
 		map.put("key", new long[] {1L, 2L, 3L, 4L, 5L});

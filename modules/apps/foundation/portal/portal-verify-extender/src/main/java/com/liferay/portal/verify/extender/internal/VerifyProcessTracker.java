@@ -203,7 +203,6 @@ public class VerifyProcessTracker {
 		}
 		finally {
 			IndexWriterHelperUtil.setIndexReadOnly(indexReadOnly);
-
 			NotificationThreadLocal.setEnabled(true);
 			StagingAdvicesThreadLocal.setEnabled(true);
 			WorkflowThreadLocal.setEnabled(true);
