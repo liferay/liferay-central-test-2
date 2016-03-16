@@ -542,8 +542,8 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 			return _hasURI;
 		}
 
-		private boolean _hasURI = false;
-		private boolean _inURI = false;
+		private boolean _hasURI;
+		private boolean _inURI;
 		private String _uri;
 
 	}
