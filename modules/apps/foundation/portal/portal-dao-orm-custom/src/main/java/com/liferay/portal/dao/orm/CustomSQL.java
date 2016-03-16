@@ -858,6 +858,23 @@ public class CustomSQL {
 		return sb.toString();
 	}
 
+	private void _loadCustomSQL(Class<?> clazz) {
+		try {
+			ClassLoader classLoader = clazz.getClassLoader();
+
+			BundleContext bundleContext = getBundleContext(clazz);
+
+			String[] configs = getConfigs();
+
+			for (String config : configs) {
+				read(bundleContext, classLoader, config);
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+	}
+
 	private String escapeWildCards(String keywords) {
 		if (!isVendorMySQL() && !isVendorOracle()) {
 			return keywords;
@@ -890,23 +907,6 @@ public class CustomSQL {
 		Bundle bundle = FrameworkUtil.getBundle(clazz);
 
 		return bundle.getBundleContext();
-	}
-
-	private void _loadCustomSQL(Class<?> clazz) {
-		try {
-			ClassLoader classLoader = clazz.getClassLoader();
-
-			BundleContext bundleContext = getBundleContext(clazz);
-
-			String[] configs = getConfigs();
-
-			for (String config : configs) {
-				read(bundleContext, classLoader, config);
-			}
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
 	}
 
 	private static final boolean _CUSTOM_SQL_AUTO_ESCAPE_WILDCARDS_ENABLED =
