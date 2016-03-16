@@ -106,6 +106,7 @@ Ticket ticket = TicketLocalServiceUtil.addTicket(user.getCompanyId(), User.class
 				var rowColumns = [];
 
 				var deleteURL = Liferay.PortletURL.createURL('<%= deleteURL.toString() %>');
+
 				deleteURL.setParameter('fileName', event.name);
 
 				rowColumns.push(event.name);
