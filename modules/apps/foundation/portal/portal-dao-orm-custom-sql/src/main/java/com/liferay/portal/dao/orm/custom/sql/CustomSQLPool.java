@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.dao.orm;
+package com.liferay.portal.dao.orm.custom.sql;
 
 import java.util.HashMap;
 import java.util.Map;
