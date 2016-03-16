@@ -231,7 +231,7 @@
 
 		<execute function="SelectFrameTop" />
 
-		<execute function="Click" locator1="Button#ADD" />
+		<execute function="Click" locator1="Button#DONE" />
 
 		<execute macro="Alert#viewSuccessMessage" />
 	</command>
