@@ -135,8 +135,8 @@ public class ModifiableServletContextAdapter
 				throw new IllegalArgumentException();
 			}
 
-			Class<? extends EventListener> eventListenerClass = clazz.asSubclass(
-				EventListener.class);
+			Class<? extends EventListener> eventListenerClass =
+				clazz.asSubclass(EventListener.class);
 
 			_eventListeners.put(eventListenerClass, null);
 		}
@@ -366,8 +366,7 @@ public class ModifiableServletContextAdapter
 				for (DispatcherType dispatcherType :
 						filterMapping.getDispatchers()) {
 
-					filterDefinition.addDispatcher(
-						dispatcherType.toString());
+					filterDefinition.addDispatcher(dispatcherType.toString());
 				}
 
 				filterDefinition.setFilter(filter);
@@ -413,22 +412,20 @@ public class ModifiableServletContextAdapter
 				Servlet servlet = null;
 
 				if (Validator.isNotNull(jspFile)) {
-					servlet = new WabBundleProcessor.JspServletWrapper(
-						jspFile);
+					servlet = new WabBundleProcessor.JspServletWrapper(jspFile);
 				}
 				else {
 					Class<?> clazz = _bundle.loadClass(servletClassName);
 
-					Class<? extends Servlet> servletClass =
-						clazz.asSubclass(Servlet.class);
+					Class<? extends Servlet> servletClass = clazz.asSubclass(
+						Servlet.class);
 
 					servlet = servletClass.newInstance();
 				}
 
 				servletRegistrationImpl.setInstance(servlet);
 
-				ServletDefinition servletDefinition =
-					new ServletDefinition();
+				ServletDefinition servletDefinition = new ServletDefinition();
 
 				servletDefinition.setAsyncSupported(
 					servletRegistrationImpl.isAsyncSupported());
@@ -436,8 +433,7 @@ public class ModifiableServletContextAdapter
 					servletRegistrationImpl.getInitParameters());
 				servletDefinition.setJSPFile(
 					servletRegistrationImpl.getJspFile());
-				servletDefinition.setName(
-					servletRegistrationImpl.getName());
+				servletDefinition.setName(servletRegistrationImpl.getName());
 				servletDefinition.setServlet(servlet);
 				servletDefinition.setURLPatterns(
 					new ArrayList<>(servletRegistrationImpl.getMappings()));
@@ -497,10 +493,10 @@ public class ModifiableServletContextAdapter
 
 	private final Bundle _bundle;
 	private final BundleContext _bundleContext;
-	private final LinkedHashMap<String, FilterRegistrationImpl>
-		_filterRegistrations = new LinkedHashMap<>();
 	private final LinkedHashMap<Class<? extends EventListener>, EventListener>
 		_eventListeners = new LinkedHashMap<>();
+	private final LinkedHashMap<String, FilterRegistrationImpl>
+		_filterRegistrations = new LinkedHashMap<>();
 	private final Logger _logger;
 	private final ServletContext _servletContext;
 	private final LinkedHashMap<String, ServletRegistrationImpl>
