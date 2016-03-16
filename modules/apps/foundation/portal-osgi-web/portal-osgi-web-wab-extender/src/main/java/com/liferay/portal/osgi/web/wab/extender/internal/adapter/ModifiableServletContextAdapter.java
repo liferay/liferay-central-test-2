@@ -53,7 +53,7 @@ import org.osgi.framework.BundleContext;
 /**
  * @author Raymond Augé
  */
-public class ModifiableServletContextAdaptor
+public class ModifiableServletContextAdapter
 	implements InvocationHandler, ModifiableServletContext {
 
 	public static ServletContext createInstance(
@@ -61,12 +61,12 @@ public class ModifiableServletContextAdaptor
 		WebXMLDefinition webXMLDefinition, Logger logger) {
 
 		return (ServletContext)Proxy.newProxyInstance(
-			ModifiableServletContextAdaptor.class.getClassLoader(), _INTERFACES,
-			new ModifiableServletContextAdaptor(
+			ModifiableServletContextAdapter.class.getClassLoader(), _INTERFACES,
+			new ModifiableServletContextAdapter(
 				servletContext, bundleContext, webXMLDefinition, logger));
 	}
 
-	public ModifiableServletContextAdaptor(
+	public ModifiableServletContextAdapter(
 		ServletContext servletContext, BundleContext bundleContext,
 		WebXMLDefinition webXMLDefinition, Logger logger) {
 
@@ -320,10 +320,10 @@ public class ModifiableServletContextAdaptor
 	public Object invoke(Object proxy, Method method, Object[] args)
 		throws Throwable {
 
-		Method adaptorMethod = _contextAdaptorMethods.get(method);
+		Method adapterMethod = _contextAdapterMethods.get(method);
 
-		if (adaptorMethod != null) {
-			return adaptorMethod.invoke(this, args);
+		if (adapterMethod != null) {
+			return adapterMethod.invoke(this, args);
 		}
 
 		return method.invoke(_servletContext, args);
@@ -450,28 +450,28 @@ public class ModifiableServletContextAdaptor
 		}
 	}
 
-	private static Map<Method, Method> createContextAdaptorMethods() {
+	private static Map<Method, Method> createContextAdapterMethods() {
 		Map<Method, Method> methods = new HashMap<>();
 
-		Method[] adaptorMethods =
-			ModifiableServletContextAdaptor.class.getDeclaredMethods();
+		Method[] adapterMethods =
+			ModifiableServletContextAdapter.class.getDeclaredMethods();
 
-		for (Method adaptorMethod : adaptorMethods) {
-			String name = adaptorMethod.getName();
-			Class<?>[] parameterTypes = adaptorMethod.getParameterTypes();
+		for (Method adapterMethod : adapterMethods) {
+			String name = adapterMethod.getName();
+			Class<?>[] parameterTypes = adapterMethod.getParameterTypes();
 
 			try {
 				Method method = ServletContext.class.getMethod(
 					name, parameterTypes);
 
-				methods.put(method, adaptorMethod);
+				methods.put(method, adapterMethod);
 			}
 			catch (NoSuchMethodException nsme1) {
 				try {
 					Method method = ModifiableServletContext.class.getMethod(
 						name, parameterTypes);
 
-					methods.put(method, adaptorMethod);
+					methods.put(method, adapterMethod);
 				}
 				catch (NoSuchMethodException nsme2) {
 
@@ -488,10 +488,10 @@ public class ModifiableServletContextAdaptor
 		ModifiableServletContext.class, ServletContext.class
 	};
 
-	private static final Map<Method, Method> _contextAdaptorMethods;
+	private static final Map<Method, Method> _contextAdapterMethods;
 
 	static {
-		_contextAdaptorMethods = createContextAdaptorMethods();
+		_contextAdapterMethods = createContextAdapterMethods();
 	}
 
 	private final Bundle _bundle;
