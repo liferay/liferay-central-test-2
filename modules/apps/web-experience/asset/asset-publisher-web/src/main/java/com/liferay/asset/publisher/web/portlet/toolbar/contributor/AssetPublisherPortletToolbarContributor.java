@@ -212,7 +212,7 @@ public class AssetPublisherPortletToolbarContributor
 
 		menu.setData(data);
 
-		menu.setDirection("down");
+		menu.setDirection("right");
 		menu.setExtended(false);
 		menu.setIcon("plus");
 		menu.setMarkupView("lexicon");
