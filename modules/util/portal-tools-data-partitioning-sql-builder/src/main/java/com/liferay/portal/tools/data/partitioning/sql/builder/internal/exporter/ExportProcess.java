@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.tools.data.partitioning.sql.builder.internal.algorithm;
+package com.liferay.portal.tools.data.partitioning.sql.builder.internal.exporter;
 
 import com.liferay.portal.tools.data.partitioning.sql.builder.exporter.context.ExportContext;
 

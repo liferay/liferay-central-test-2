@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.tools.data.partitioning.sql.builder.internal;
+package com.liferay.portal.tools.data.partitioning.sql.builder.internal.exporter;
 
 import javax.sql.DataSource;
 

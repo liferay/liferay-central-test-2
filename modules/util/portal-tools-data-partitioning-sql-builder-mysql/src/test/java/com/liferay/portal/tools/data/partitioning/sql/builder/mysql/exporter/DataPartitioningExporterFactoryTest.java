@@ -12,9 +12,10 @@
  * details.
  */
 
-package com.liferay.portal.tools.data.partitioning.sql.builder.exporter;
+package com.liferay.portal.tools.data.partitioning.sql.builder.mysql.exporter;
 
-import com.liferay.portal.tools.data.partitioning.sql.builder.db.mysql.MySQLProvider;
+import com.liferay.portal.tools.data.partitioning.sql.builder.exporter.DataPartitioningExporter;
+import com.liferay.portal.tools.data.partitioning.sql.builder.exporter.DataPartitioningExporterFactory;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -22,15 +23,19 @@ import org.junit.Test;
 /**
  * @author Manuel de la Peña
  */
-public class ShardExporterFactoryTest {
+public class DataPartitioningExporterFactoryTest {
 
 	@Test
-	public void testGetShardExporterReturnsMySQLProvider() throws Exception {
-		ShardExporter shardExporter = ShardExporterFactory.getShardExporter();
+	public void testGetDataPartitioningExporterReturnsMySQLProvider()
+		throws Exception {
 
-		Class<MySQLProvider> clazz = MySQLProvider.class;
+		DataPartitioningExporter dataPartitioningExporter =
+			DataPartitioningExporterFactory.getDataPartitioningExporter();
 
-		Assert.assertTrue(clazz.isInstance(shardExporter));
+		Class<MySQLDataPartitioningExporter> clazz =
+			MySQLDataPartitioningExporter.class;
+
+		Assert.assertTrue(clazz.isInstance(dataPartitioningExporter));
 	}
 
 }

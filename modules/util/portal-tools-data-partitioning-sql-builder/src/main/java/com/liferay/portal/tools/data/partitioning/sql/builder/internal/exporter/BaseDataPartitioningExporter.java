@@ -12,11 +12,10 @@
  * details.
  */
 
-package com.liferay.portal.tools.data.partitioning.sql.builder.internal.algorithm;
+package com.liferay.portal.tools.data.partitioning.sql.builder.internal.exporter;
 
-import com.liferay.portal.tools.data.partitioning.sql.builder.exporter.ShardExporter;
+import com.liferay.portal.tools.data.partitioning.sql.builder.exporter.DataPartitioningExporter;
 import com.liferay.portal.tools.data.partitioning.sql.builder.exporter.context.ExportContext;
-import com.liferay.portal.tools.data.partitioning.sql.builder.internal.DBProvider;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -47,10 +46,10 @@ import org.slf4j.LoggerFactory;
 /**
  * @author Manuel de la Peña
  */
-public abstract class BaseDBProvider
-	implements DBExporter, DBProvider, ShardExporter {
+public abstract class BaseDataPartitioningExporter
+	implements DataPartitioningExporter, DBExporter, DBProvider {
 
-	public BaseDBProvider() {
+	public BaseDataPartitioningExporter() {
 	}
 
 	@Override
@@ -249,7 +248,7 @@ public abstract class BaseDBProvider
 	}
 
 	private static final Logger _logger = LoggerFactory.getLogger(
-		BaseDBProvider.class);
+		BaseDataPartitioningExporter.class);
 
 	private DataSource _dataSource;
 

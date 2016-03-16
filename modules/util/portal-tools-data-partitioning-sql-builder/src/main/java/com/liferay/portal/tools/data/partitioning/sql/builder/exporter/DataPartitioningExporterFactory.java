@@ -26,33 +26,44 @@ import org.slf4j.LoggerFactory;
 /**
  * @author Manuel de la Peña
  */
-public class ShardExporterFactory {
+public class DataPartitioningExporterFactory {
 
-	public static ShardExporter getShardExporter() {
-		ServiceLoader<ShardExporter> serviceLoader = ServiceLoader.load(
-			ShardExporter.class);
+	public static DataPartitioningExporter getDataPartitioningExporter() {
+		ServiceLoader<DataPartitioningExporter> serviceLoader =
+			ServiceLoader.load(DataPartitioningExporter.class);
 
-		List<ShardExporter> shardExporters = new ArrayList<>();
+		List<DataPartitioningExporter> dataPartitioningExporters =
+			new ArrayList<>();
 
-		for (ShardExporter shardExporter : serviceLoader) {
-			shardExporters.add(shardExporter);
+		for (DataPartitioningExporter dataPartitioningExporter :
+				serviceLoader) {
+
+			dataPartitioningExporters.add(dataPartitioningExporter);
 		}
 
-		_logger.info(shardExporters.size() + " exporters available");
+		_logger.info(
+			dataPartitioningExporters.size() +
+				" data partitioning exporters available");
 
-		for (ShardExporter shardExporter : shardExporters) {
-			_logger.info("Shard exporter " + shardExporter);
+		for (DataPartitioningExporter dataPartitioningExporter :
+				dataPartitioningExporters) {
+
+			_logger.info(
+				"Data partitioning exporter " + dataPartitioningExporter);
 		}
 
-		if (shardExporters.isEmpty() || (shardExporters.size() > 1)) {
+		if (dataPartitioningExporters.isEmpty() ||
+			(dataPartitioningExporters.size() > 1)) {
+
 			throw new DBProviderNotAvailableException(
-				shardExporters.size() + " exporters available");
+				dataPartitioningExporters.size() +
+					" data partitioning exporters available");
 		}
 
-		return shardExporters.get(0);
+		return dataPartitioningExporters.get(0);
 	}
 
 	private static final Logger _logger = LoggerFactory.getLogger(
-		ShardExporterFactory.class);
+		DataPartitioningExporterFactory.class);
 
 }

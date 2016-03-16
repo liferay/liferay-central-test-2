@@ -12,11 +12,10 @@
  * details.
  */
 
-package com.liferay.portal.tools.data.partitioning.sql.builder.internal.algorithm;
+package com.liferay.portal.tools.data.partitioning.sql.builder.internal.exporter;
 
-import com.liferay.portal.tools.data.partitioning.sql.builder.exporter.ShardExporter;
-import com.liferay.portal.tools.data.partitioning.sql.builder.exporter.ShardExporterFactory;
-import com.liferay.portal.tools.data.partitioning.sql.builder.internal.DBProvider;
+import com.liferay.portal.tools.data.partitioning.sql.builder.exporter.DataPartitioningExporter;
+import com.liferay.portal.tools.data.partitioning.sql.builder.exporter.DataPartitioningExporterFactory;
 import com.liferay.portal.tools.data.partitioning.sql.builder.test.util.DBProviderTestUtil;
 
 import java.sql.Connection;
@@ -37,7 +36,7 @@ import org.junit.Test;
 /**
  * @author Manuel de la Peña
  */
-public abstract class BaseDBProviderTestCase {
+public abstract class BaseDataPartitioningExporterTestCase {
 
 	public int executeUpdate(DataSource dataSource, String sql)
 		throws SQLException {
@@ -55,9 +54,10 @@ public abstract class BaseDBProviderTestCase {
 		properties = DBProviderTestUtil.readProperties(
 			getTestPropertiesFileName());
 
-		ShardExporter shardExporter = ShardExporterFactory.getShardExporter();
+		DataPartitioningExporter dataPartitioningExporter =
+			DataPartitioningExporterFactory.getDataPartitioningExporter();
 
-		dbProvider = (DBProvider)shardExporter;
+		dbProvider = (DBProvider)dataPartitioningExporter;
 
 		executeUpdate(dbProvider.getDataSource(), getCreateTableSQL());
 	}

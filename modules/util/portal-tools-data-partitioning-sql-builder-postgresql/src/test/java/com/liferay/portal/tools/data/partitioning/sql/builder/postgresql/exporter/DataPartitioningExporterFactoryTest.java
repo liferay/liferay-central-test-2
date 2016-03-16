@@ -12,42 +12,30 @@
  * details.
  */
 
-package com.liferay.portal.tools.data.partitioning.sql.builder;
-
-import com.beust.jcommander.JCommander;
+package com.liferay.portal.tools.data.partitioning.sql.builder.postgresql.exporter;
 
 import com.liferay.portal.tools.data.partitioning.sql.builder.exporter.DataPartitioningExporter;
 import com.liferay.portal.tools.data.partitioning.sql.builder.exporter.DataPartitioningExporterFactory;
-import com.liferay.portal.tools.data.partitioning.sql.builder.exporter.context.ExportContext;
+
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author Manuel de la Peña
  */
-public class Main {
+public class DataPartitioningExporterFactoryTest {
 
-	public static void main(String[] arguments) throws Exception {
-		MainParameters mainParameters = _validate(arguments);
+	@Test
+	public void testGetDataPartitioningExporterReturnsPostgreSQLProvider()
+		throws Exception {
 
 		DataPartitioningExporter dataPartitioningExporter =
 			DataPartitioningExporterFactory.getDataPartitioningExporter();
 
-		ExportContext exportContext = mainParameters.toExportContext();
+		Class<PostgreSQLDataPartitioningExporter> clazz =
+			PostgreSQLDataPartitioningExporter.class;
 
-		dataPartitioningExporter.export(exportContext);
-	}
-
-	private static MainParameters _validate(String[] arguments)
-		throws Exception {
-
-		MainParameters mainParameters = new MainParameters();
-
-		if ((arguments == null) || (arguments.length == 0)) {
-			throw new IllegalArgumentException("Arguments are null");
-		}
-
-		new JCommander(mainParameters, arguments);
-
-		return mainParameters;
+		Assert.assertTrue(clazz.isInstance(dataPartitioningExporter));
 	}
 
 }

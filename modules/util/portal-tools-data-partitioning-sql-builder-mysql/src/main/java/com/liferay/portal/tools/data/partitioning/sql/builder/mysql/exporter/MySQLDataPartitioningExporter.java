@@ -12,14 +12,15 @@
  * details.
  */
 
-package com.liferay.portal.tools.data.partitioning.sql.builder.db.mysql;
+package com.liferay.portal.tools.data.partitioning.sql.builder.mysql.exporter;
 
-import com.liferay.portal.tools.data.partitioning.sql.builder.internal.algorithm.BaseDBProvider;
+import com.liferay.portal.tools.data.partitioning.sql.builder.internal.exporter.BaseDataPartitioningExporter;
 
 /**
  * @author Manuel de la Peña
  */
-public class MySQLProvider extends BaseDBProvider {
+public class MySQLDataPartitioningExporter
+	extends BaseDataPartitioningExporter {
 
 	@Override
 	public String getControlTableNamesSQL(String schemaName) {

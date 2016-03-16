@@ -12,9 +12,9 @@
  * details.
  */
 
-package com.liferay.portal.tools.data.partitioning.sql.builder.db.postgresql;
+package com.liferay.portal.tools.data.partitioning.sql.builder.postgresql.exporter;
 
-import com.liferay.portal.tools.data.partitioning.sql.builder.internal.algorithm.BaseDBProvider;
+import com.liferay.portal.tools.data.partitioning.sql.builder.internal.exporter.BaseDataPartitioningExporter;
 
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -22,7 +22,8 @@ import java.sql.Timestamp;
 /**
  * @author Manuel de la Peña
  */
-public class PostgreSQLProvider extends BaseDBProvider {
+public class PostgreSQLDataPartitioningExporter
+	extends BaseDataPartitioningExporter {
 
 	@Override
 	public String getControlTableNamesSQL(String schema) {
