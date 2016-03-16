@@ -452,7 +452,7 @@ public class ModifiableServletContextAdapter
 		}
 	}
 
-	private static Map<Method, Method> createContextAdapterMethods() {
+	private static Map<Method, Method> _createContextAdapterMethods() {
 		Map<Method, Method> methods = new HashMap<>();
 
 		Method[] adapterMethods =
@@ -490,7 +490,7 @@ public class ModifiableServletContextAdapter
 	private static final Map<Method, Method> _contextAdapterMethods;
 
 	static {
-		_contextAdapterMethods = createContextAdapterMethods();
+		_contextAdapterMethods = _createContextAdapterMethods();
 	}
 
 	private final Bundle _bundle;
