@@ -114,6 +114,10 @@ public interface DDMDisplay {
 
 	public boolean isShowBackURLInTitleBar();
 
+	public boolean isShowConfirmSelectStructure();
+
+	public boolean isShowConfirmSelectTemplate();
+
 	public boolean isShowStructureSelector();
 
 	public boolean isVersioningEnabled();
