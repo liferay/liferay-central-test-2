@@ -604,7 +604,7 @@ public class LiferayDefaultsPlugin extends BaseDefaultsPlugin<LiferayPlugin> {
 						"cd " +
 							FileUtil.getAbsolutePath(project.getProjectDir()));
 
-					// Publish if never been published
+					// Publish if the artifact has never been published
 
 					if (!hasBaseline(project)) {
 						commands.addAll(
@@ -619,7 +619,7 @@ public class LiferayDefaultsPlugin extends BaseDefaultsPlugin<LiferayPlugin> {
 							gradleRelativePath, BASELINE_TASK_NAME,
 							gradleDaemon));
 
-					// Publish if has packageinfo changes
+					// Publish if there are packageinfo changes
 
 					List<String> publishCommands = _getPublishCommands(
 						gradleRelativePath, gradleDaemon, false);
