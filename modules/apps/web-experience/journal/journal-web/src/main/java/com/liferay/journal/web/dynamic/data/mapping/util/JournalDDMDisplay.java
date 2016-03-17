@@ -33,7 +33,6 @@ import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.util.Locale;
-import java.util.ResourceBundle;
 import java.util.Set;
 
 import javax.portlet.PortletRequest;
@@ -56,20 +55,15 @@ public class JournalDDMDisplay extends BaseDDMDisplay {
 	}
 
 	public String getConfirmSelectStructureMessage(Locale locale) {
-		ResourceBundle resourceBundle = getResourceBundle(locale);
-
-		String key =
+		return LanguageUtil.get(
+			getResourceBundle(locale),
 			"selecting-a-new-structure-changes-the-available-input-fields-" +
-				"and-available-templates";
-
-		return LanguageUtil.get(resourceBundle, key);
+				"and-available-templates");
 	}
 
 	public String getConfirmSelectTemplateMessage(Locale locale) {
-		ResourceBundle resourceBundle = getResourceBundle(locale);
-
 		return LanguageUtil.get(
-			resourceBundle,
+			getResourceBundle(locale),
 			"selecting-a-new-template-deletes-all-unsaved-content");
 	}
 
