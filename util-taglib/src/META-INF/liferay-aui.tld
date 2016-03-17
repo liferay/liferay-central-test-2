@@ -702,7 +702,6 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The optional path to a custom SVG file. If not supplied, default icons will be used.]]></description>
 			<name>src</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>

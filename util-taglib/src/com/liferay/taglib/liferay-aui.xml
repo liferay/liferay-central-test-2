@@ -614,7 +614,6 @@
 				<outputType>java.lang.String</outputType>
 			</attribute>
 			<attribute>
-				<description>The optional path to a custom SVG file. If not supplied, default icons will be used.</description>
 				<name>src</name>
 				<inputType>java.lang.String</inputType>
 				<outputType>java.lang.String</outputType>
