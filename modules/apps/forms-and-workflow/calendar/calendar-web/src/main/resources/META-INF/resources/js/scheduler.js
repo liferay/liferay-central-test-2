@@ -516,9 +516,9 @@ AUI.add(
 
 				var url = Liferay.PortletURL.createActionURL();
 
+				url.setName(params.actionName);
 				url.setParameters(params.queryParameters);
 				url.setPortletId('com_liferay_calendar_web_portlet_CalendarPortlet');
-				url.setName(params.actionName);
 
 				var payload;
 
