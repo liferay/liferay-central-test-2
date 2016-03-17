@@ -19,7 +19,7 @@ import org.apache.tools.ant.Project;
 /**
  * @author Peter Yoo
  */
-public class LocalGitFailureMessageGenerator
+public class LocalGitMirrorFailureMessageGenerator
 	extends BaseFailureMessageGenerator {
 
 	@Override
@@ -27,16 +27,16 @@ public class LocalGitFailureMessageGenerator
 			String buildURL, String consoleOutput, Project project)
 		throws Exception {
 
-		if (!consoleOutput.contains(_LOCAL_GIT_FAILURE_START_STRING) ||
-			!consoleOutput.contains(_LOCAL_GIT_FAILURE_END_STRING)) {
+		if (!consoleOutput.contains(_LOCAL_GIT_FAILURE_END_STRING) ||
+			!consoleOutput.contains(_LOCAL_GIT_FAILURE_START_STRING)) {
 
 			return null;
 		}
 
 		StringBuilder sb = new StringBuilder();
 
-		sb.append(
-			"<p>Unable to synchronize with <strong>local git</strong>.</p>");
+		sb.append("<p>Unable to synchronize with <strong>local Git mirror");
+		sb.append("</strong>.</p>");
 
 		int end = consoleOutput.indexOf(_LOCAL_GIT_FAILURE_END_STRING);
 

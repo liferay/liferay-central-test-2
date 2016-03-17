@@ -44,7 +44,7 @@ public class FailureMessageUtil {
 	}
 
 	private static final FailureMessageGenerator[] _failureMessageGenerators = {
-		new LocalGitFailureMessageGenerator(),
+		new LocalGitMirrorFailureMessageGenerator(),
 		new PluginFailureMessageGenerator(),
 		new PluginGitIDFailureMessageGenerator(),
 		new RebaseFailureMessageGenerator(),
