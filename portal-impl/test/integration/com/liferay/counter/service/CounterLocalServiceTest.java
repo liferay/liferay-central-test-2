@@ -216,7 +216,7 @@ public class CounterLocalServiceTest {
 			System.setProperty("catalina.base", ".");
 			System.setProperty("external-properties", "portal-test.properties");
 
-			// c3p0
+			// C3PO
 
 			System.setProperty("portal:jdbc.default.maxPoolSize", "1");
 			System.setProperty("portal:jdbc.default.minPoolSize", "0");
