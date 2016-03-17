@@ -19,11 +19,9 @@
 <%
 FileEntry fileEntry = (FileEntry)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY);
 
-FileVersion fileVersion = fileEntry.getFileVersion();
-
-DLViewFileVersionDisplayContext dlViewFileVersionDisplayContext = dlDisplayContextProvider.getDLViewFileVersionDisplayContext(request, response, fileVersion);
-
 boolean showExtraInfo = ParamUtil.getBoolean(request, "showExtraInfo");
+
+DLViewFileVersionDisplayContext dlViewFileVersionDisplayContext = dlDisplayContextProvider.getDLViewFileVersionDisplayContext(request, response, fileEntry.getFileVersion());
 %>
 
 <c:choose>
