@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.util.Tuple;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
 
@@ -29,7 +28,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.dom4j.Document;
-import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
@@ -66,9 +64,9 @@ public class BaseModelHintsImplTest {
 
 		modelElement.addAttribute("name", _MODEL);
 
-		Element defaultHints = modelElement.addElement("default-hints");
+		Element defaultHintsElement = modelElement.addElement("default-hints");
 
-		addHintElement(defaultHints, "display-width", "210");
+		addHintElement(defaultHintsElement, "display-width", "210");
 
 		Element hintFieldElement = addFieldElement(
 			modelElement, "hintField", "long");
@@ -76,10 +74,10 @@ public class BaseModelHintsImplTest {
 		addHintElement(hintFieldElement, "type", "Date");
 		addHintElement(hintFieldElement, "max-length", "150");
 
-		Element localizedField = addFieldElement(
+		Element localizedFieldElement = addFieldElement(
 			modelElement, "localizedField", "String");
 
-		localizedField.addAttribute("localized", "true");
+		localizedFieldElement.addAttribute("localized", "true");
 
 		Element sanitizeFieldElement = addFieldElement
 			(modelElement, "sanitizeField", "String");
@@ -94,7 +92,7 @@ public class BaseModelHintsImplTest {
 		addValidatorElement(validatorFieldElement, "required");
 		addValidatorElement(validatorFieldElement, "email");
 
-		// type fields
+		// Type fields
 
 		addFieldElement(modelElement, "intField", "int");
 		addFieldElement(modelElement, "longField", "long");
@@ -104,7 +102,7 @@ public class BaseModelHintsImplTest {
 		addFieldElement(modelElement, "blobField", "Blob");
 		addFieldElement(modelElement, "stringField", "String");
 
-		// combined Field
+		// Combined Field
 
 		Element combinedFieldElement = addFieldElement(
 			modelElement, "combinedField", "String");
@@ -125,7 +123,6 @@ public class BaseModelHintsImplTest {
 
 		String validatorName1 = _testBaseModelHints.buildCustomValidatorName(
 			custom);
-
 		String validatorName2 = _testBaseModelHints.buildCustomValidatorName(
 			custom);
 
@@ -138,7 +135,6 @@ public class BaseModelHintsImplTest {
 			_MODEL);
 
 		Assert.assertEquals(1, defaultHints.size());
-
 		Assert.assertEquals("210", defaultHints.get("display-width"));
 	}
 
@@ -205,7 +201,6 @@ public class BaseModelHintsImplTest {
 			_MODEL, "sanitizeField");
 
 		Assert.assertEquals(3, sanitizeTuple.getSize());
-
 		Assert.assertEquals("sanitizeField", sanitizeTuple.getObject(0));
 		Assert.assertEquals("text/html", sanitizeTuple.getObject(1));
 		Assert.assertEquals("ALL", sanitizeTuple.getObject(2));
@@ -317,7 +312,6 @@ public class BaseModelHintsImplTest {
 	public void testIsLocalized() {
 		Assert.assertFalse(
 			_testBaseModelHints.isLocalized(_MODEL, "simpleField"));
-
 		Assert.assertTrue(
 			_testBaseModelHints.isLocalized(_MODEL, "localizedField"));
 	}
@@ -335,6 +329,7 @@ public class BaseModelHintsImplTest {
 		Element parentElement, String name, String type) {
 
 		Element fieldElement = parentElement.addElement("field");
+
 		fieldElement.addAttribute("name", name);
 		fieldElement.addAttribute("type", type);
 
@@ -356,6 +351,7 @@ public class BaseModelHintsImplTest {
 		Element parentElement, String name, String value) {
 
 		Element hintElement = parentElement.addElement("hint");
+
 		hintElement.addAttribute("name", name);
 		hintElement.setText(value);
 
@@ -377,6 +373,7 @@ public class BaseModelHintsImplTest {
 		Element parentElement, String name) {
 
 		Element validatorElement = parentElement.addElement("validator");
+
 		validatorElement.addAttribute("name", name);
 
 		return validatorElement;
@@ -416,7 +413,7 @@ public class BaseModelHintsImplTest {
 	private static class TestInputStream extends InputStream {
 
 		@Override
-		public int read() throws IOException {
+		public int read() {
 			return 0;
 		}
 
@@ -424,39 +421,43 @@ public class BaseModelHintsImplTest {
 
 	private static class TestSAXReader extends SAXReader {
 
-		public Document read(File file) throws DocumentException {
+		@Override
+		public Document read(File file) {
 			return _document;
 		}
 
-		public Document read(InputSource in) throws DocumentException {
+		@Override
+		public Document read(InputSource in) {
 			return _document;
 		}
 
-		public Document read(InputStream in) throws DocumentException {
+		@Override
+		public Document read(InputStream in) {
 			return _document;
 		}
 
-		public Document read(InputStream in, String systemId)
-			throws DocumentException {
-
+		@Override
+		public Document read(InputStream in, String systemId) {
 			return _document;
 		}
 
-		public Document read(Reader reader) throws DocumentException {
+		@Override
+		public Document read(Reader reader) {
 			return _document;
 		}
 
-		public Document read(Reader reader, String systemId)
-			throws DocumentException {
-
+		@Override
+		public Document read(Reader reader, String systemId) {
 			return _document;
 		}
 
-		public Document read(String systemId) throws DocumentException {
+		@Override
+		public Document read(String systemId) {
 			return _document;
 		}
 
-		public Document read(URL url) throws DocumentException {
+		@Override
+		public Document read(URL url) {
 			return _document;
 		}
 
