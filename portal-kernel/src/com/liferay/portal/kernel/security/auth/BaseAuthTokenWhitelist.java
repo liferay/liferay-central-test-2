@@ -196,8 +196,8 @@ public abstract class BaseAuthTokenWhitelist implements AuthTokenWhitelist {
 
 	protected final StringServiceRegistrationMap<Object> serviceRegistrations =
 		new StringServiceRegistrationMapImpl<>();
-	protected final List<ServiceTracker<Object, Object>>
-		serviceTrackers = new ArrayList<>();
+	protected final List<ServiceTracker<Object, Object>> serviceTrackers =
+		new ArrayList<>();
 
 	private static class TokenWhitelistTrackerCustomizer
 		implements ServiceTrackerCustomizer<Object, Object> {
