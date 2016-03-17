@@ -33,6 +33,10 @@ public interface DDMDisplay {
 
 	public String getAvailableFields();
 
+	public String getConfirmSelectStructureMessage(Locale locale);
+
+	public String getConfirmSelectTemplateMessage(Locale locale);
+
 	public DDMNavigationHelper getDDMNavigationHelper();
 
 	public String getDefaultTemplateLanguage();
