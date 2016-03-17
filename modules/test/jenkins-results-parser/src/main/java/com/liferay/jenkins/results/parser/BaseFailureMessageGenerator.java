@@ -30,24 +30,20 @@ public abstract class BaseFailureMessageGenerator
 			String buildURL, String consoleOutput, Project project)
 		throws Exception;
 
-	protected String getConsoleOutputSnippet(String consoleOutput, int end) {
+	protected String getConsoleOutputSnippet(
+		String consoleOutput, boolean truncateTop, int end) {
+
 		if (end == -1) {
 			end = consoleOutput.length();
 		}
 
 		int start = getSnippetStart(consoleOutput, end);
 
-		return getConsoleOutputSnippet(consoleOutput, start, end, true);
+		return getConsoleOutputSnippet(consoleOutput, truncateTop, start, end);
 	}
 
 	protected String getConsoleOutputSnippet(
-		String consoleOutput, int start, int end) {
-
-		return getConsoleOutputSnippet(consoleOutput, start, end, true);
-	}
-
-	protected String getConsoleOutputSnippet(
-		String consoleOutput, int start, int end, boolean truncateTop) {
+		String consoleOutput, boolean truncateTop, int start, int end) {
 
 		if ((end - start) > 2500) {
 			if (truncateTop) {
