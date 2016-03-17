@@ -183,10 +183,9 @@ public abstract class BaseAuthTokenWhitelist implements AuthTokenWhitelist {
 
 		Registry registry = RegistryUtil.getRegistry();
 
-		ServiceTracker<Object, Object>
-			serviceTracker = registry.trackServices(
-				registry.getFilter("(" + whitelistName + "=*)"),
-				new TokenWhitelistTrackerCustomizer(whitelistName, whiteList));
+		ServiceTracker<Object, Object> serviceTracker = registry.trackServices(
+			registry.getFilter("(" + whitelistName + "=*)"),
+			new TokenWhitelistTrackerCustomizer(whitelistName, whiteList));
 
 		serviceTracker.open();
 
