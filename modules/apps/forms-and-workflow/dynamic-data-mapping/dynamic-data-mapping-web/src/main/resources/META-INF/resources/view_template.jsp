@@ -177,8 +177,8 @@ TemplateSearchTerms templateSearchTerms = (TemplateSearchTerms)templateSearch.ge
 				<liferay-ui:search-container-column-jsp
 					cssClass="content-column description-column"
 					name="description"
-					truncate="<%= true %>"
 					path="/template_description.jsp"
+					truncate="<%= true %>"
 				/>
 
 				<c:if test='<%= !excludedColumnNames.contains("structure") && (structure == null) %>'>
