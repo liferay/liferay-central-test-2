@@ -147,26 +147,26 @@ public class EventsProcessorUtil {
 	}
 
 	protected void _registerEvent(String key, Object event) {
+		Registry registry = RegistryUtil.getRegistry();
+
 		Map<String, Object> properties = new HashMap<>();
 
 		properties.put("key", key);
-
-		Registry registry = RegistryUtil.getRegistry();
 
 		ServiceRegistration<LifecycleAction> serviceRegistration =
 			registry.registerService(
 				LifecycleAction.class, (LifecycleAction)event, properties);
 
 		Map<Object, ServiceRegistration<LifecycleAction>>
-			serviceRegistrationMap = _serviceRegistrations.get(key);
+			serviceRegistrationMap = _serviceRegistrationMaps.get(key);
 
 		if (serviceRegistrationMap == null) {
-			_serviceRegistrations.putIfAbsent(
+			_serviceRegistrationMaps.putIfAbsent(
 				key,
 				new ConcurrentHashMap
 					<Object, ServiceRegistration<LifecycleAction>>());
 
-			serviceRegistrationMap = _serviceRegistrations.get(key);
+			serviceRegistrationMap = _serviceRegistrationMaps.get(key);
 		}
 
 		serviceRegistrationMap.put(event, serviceRegistration);
@@ -174,7 +174,7 @@ public class EventsProcessorUtil {
 
 	protected void _unregisterEvent(String key, Object event) {
 		Map<Object, ServiceRegistration<LifecycleAction>>
-			serviceRegistrationMap = _serviceRegistrations.get(key);
+			serviceRegistrationMap = _serviceRegistrationMaps.get(key);
 
 		if (serviceRegistrationMap != null) {
 			ServiceRegistration<LifecycleAction> serviceRegistration =
@@ -184,7 +184,7 @@ public class EventsProcessorUtil {
 				serviceRegistration.unregister();
 			}
 
-			_serviceRegistrations.remove(key, Collections.emptyList());
+			_serviceRegistrationMaps.remove(key, Collections.emptyList());
 		}
 	}
 
@@ -199,6 +199,6 @@ public class EventsProcessorUtil {
 			LifecycleAction.class, "key");
 	private final
 		ConcurrentMap<String, Map<Object, ServiceRegistration<LifecycleAction>>>
-			_serviceRegistrations = new ConcurrentHashMap<>();
+			_serviceRegistrationMaps = new ConcurrentHashMap<>();
 
 }
