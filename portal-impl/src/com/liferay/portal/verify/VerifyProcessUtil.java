@@ -67,9 +67,8 @@ public class VerifyProcessUtil {
 
 		NotificationThreadLocal.setEnabled(false);
 		StagingAdvicesThreadLocal.setEnabled(false);
-		WorkflowThreadLocal.setEnabled(false);
-
 		VerifyThreadLocal.setVerifyInProgress(true);
+		WorkflowThreadLocal.setEnabled(false);
 
 		try {
 			String[] verifyProcessClassNames = PropsUtil.getArray(
@@ -86,12 +85,10 @@ public class VerifyProcessUtil {
 		}
 		finally {
 			IndexWriterHelperUtil.setIndexReadOnly(tempIndexReadOnly);
-
 			NotificationThreadLocal.setEnabled(true);
 			StagingAdvicesThreadLocal.setEnabled(true);
-			WorkflowThreadLocal.setEnabled(true);
-
 			VerifyThreadLocal.setVerifyInProgress(false);
+			WorkflowThreadLocal.setEnabled(true);
 		}
 
 		return ranVerifyProcess;
