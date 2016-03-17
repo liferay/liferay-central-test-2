@@ -273,13 +273,13 @@ public class MVCPortletAuthTokenWhitelist extends BaseAuthTokenWhitelist {
 
 		@Override
 		public Object addingService(ServiceReference<Object> serviceReference) {
+			Collection<String> whitelistValues = new ArrayList<>();
+
 			List<String> whitelistActions = StringPlus.asList(
 				serviceReference.getProperty("mvc.command.name"));
 
 			List<String> portletNames = StringPlus.asList(
 				serviceReference.getProperty("javax.portlet.name"));
-
-			Collection<String> whitelistValues = new ArrayList<>();
 
 			for (String portletName : portletNames) {
 				for (String whitelistAction : whitelistActions) {
