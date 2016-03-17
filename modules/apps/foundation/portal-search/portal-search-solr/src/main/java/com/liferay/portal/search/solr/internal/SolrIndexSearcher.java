@@ -540,17 +540,19 @@ public class SolrIndexSearcher extends BaseIndexSearcher {
 		Collection<String> fieldNames = solrDocument.getFieldNames();
 
 		for (String fieldName : fieldNames) {
-			if (!fieldName.equals(_VERSION_FIELD)) {
-				Collection<Object> fieldValues = solrDocument.getFieldValues(
-					fieldName);
-
-				Field field = new Field(
-					fieldName,
-					ArrayUtil.toStringArray(
-						fieldValues.toArray(new Object[fieldValues.size()])));
-
-				document.add(field);
+			if (fieldName.equals(_VERSION_FIELD)) {
+				continue;
 			}
+
+			Collection<Object> fieldValues = solrDocument.getFieldValues(
+				fieldName);
+
+			Field field = new Field(
+				fieldName,
+				ArrayUtil.toStringArray(
+					fieldValues.toArray(new Object[fieldValues.size()])));
+
+			document.add(field);
 		}
 
 		populateUID(document, queryConfig);
