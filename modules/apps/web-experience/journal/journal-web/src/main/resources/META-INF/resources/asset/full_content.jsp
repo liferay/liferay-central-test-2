@@ -41,11 +41,11 @@ JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribu
 	PortletURL articlePageURL = renderResponse.createRenderURL();
 
 	articlePageURL.setParameter("mvcPath", "/view_content.jsp");
+	articlePageURL.setParameter("cur", String.valueOf(cur));
+	articlePageURL.setParameter("redirect", pageRedirect);
 	articlePageURL.setParameter("type", assetRendererFactory.getType());
 	articlePageURL.setParameter("groupId", String.valueOf(articleDisplay.getGroupId()));
-	articlePageURL.setParameter("redirect", pageRedirect);
 	articlePageURL.setParameter("urlTitle", articleDisplay.getUrlTitle());
-	articlePageURL.setParameter("cur", String.valueOf(cur));
 	%>
 
 	<br />
