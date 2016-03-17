@@ -67,7 +67,7 @@ public class LocalGitFailureMessageGenerator
 
 		end = consoleOutput.lastIndexOf("\n");
 
-		sb.append(getConsoleOutputSnippet(consoleOutput, start, end, false));
+		sb.append(getConsoleOutputSnippet(consoleOutput, false, start, end));
 
 		return sb.toString();
 	}
