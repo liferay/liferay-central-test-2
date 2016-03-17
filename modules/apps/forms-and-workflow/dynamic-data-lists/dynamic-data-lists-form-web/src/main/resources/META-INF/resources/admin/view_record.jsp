@@ -19,12 +19,12 @@
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 
+DDLRecordVersion recordVersion = ddlFormAdminDisplayContext.getRecordVersion();
+
 portletDisplay.setShowBackIcon(true);
 portletDisplay.setURLBack(redirect);
 
 renderResponse.setTitle(LanguageUtil.get(request, "view-form"));
-
-DDLRecordVersion recordVersion = ddlFormAdminDisplayContext.getRecordVersion();
 %>
 
 <div class="container-fluid-1280">
