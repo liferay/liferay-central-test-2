@@ -239,14 +239,22 @@ public class ModifiableServletContextAdapter
 	}
 
 	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
 		if (!(obj instanceof ModifiableServletContext)) {
 			return false;
 		}
 
-		ModifiableServletContext objModifiableServletContext =
+		ModifiableServletContext modifiableServletContext =
 			(ModifiableServletContext)obj;
 
-		return (_bundle.equals(objModifiableServletContext.getBundle()));
+		if (Validator.equals(_bundle, modifiableServletContext.getBundle())) {
+			return true;
+		}
+
+		return false;
 	}
 
 	public Bundle getBundle() {
