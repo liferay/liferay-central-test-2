@@ -130,21 +130,6 @@ page import="java.util.TimeZone" %>
 <portlet:defineObjects />
 
 <%
-CalendarBooking calendarBooking = (CalendarBooking)request.getAttribute(CalendarWebKeys.CALENDAR_BOOKING);
-
-CalendarResource groupCalendarResource = CalendarResourceUtil.getScopeGroupCalendarResource(liferayPortletRequest, scopeGroupId);
-CalendarResource userCalendarResource = CalendarResourceUtil.getUserCalendarResource(liferayPortletRequest, themeDisplay.getUserId());
-
-Calendar userDefaultCalendar = null;
-
-if (userCalendarResource != null) {
-	long defaultCalendarId = userCalendarResource.getDefaultCalendarId();
-
-	if (defaultCalendarId > 0) {
-		userDefaultCalendar = CalendarServiceUtil.getCalendar(defaultCalendarId);
-	}
-}
-
 int defaultDuration = GetterUtil.getInteger(portletPreferences.getValue("defaultDuration", null), 60);
 String defaultView = portletPreferences.getValue("defaultView", "week");
 String timeFormat = GetterUtil.getString(portletPreferences.getValue("timeFormat", "locale"));
@@ -165,6 +150,21 @@ int rssDelta = GetterUtil.getInteger(portletPreferences.getValue("rssDelta", Str
 String rssDisplayStyle = portletPreferences.getValue("rssDisplayStyle", RSSUtil.DISPLAY_STYLE_DEFAULT);
 String rssFeedType = portletPreferences.getValue("rssFeedType", RSSUtil.FEED_TYPE_DEFAULT);
 long rssTimeInterval = GetterUtil.getLong(portletPreferences.getValue("rssTimeInterval", StringPool.BLANK), Time.WEEK);
+
+CalendarBooking calendarBooking = (CalendarBooking)request.getAttribute(CalendarWebKeys.CALENDAR_BOOKING);
+
+CalendarResource groupCalendarResource = CalendarResourceUtil.getScopeGroupCalendarResource(liferayPortletRequest, scopeGroupId);
+CalendarResource userCalendarResource = CalendarResourceUtil.getUserCalendarResource(liferayPortletRequest, themeDisplay.getUserId());
+
+Calendar userDefaultCalendar = null;
+
+if (userCalendarResource != null) {
+	long defaultCalendarId = userCalendarResource.getDefaultCalendarId();
+
+	if (defaultCalendarId > 0) {
+		userDefaultCalendar = CalendarServiceUtil.getCalendar(defaultCalendarId);
+	}
+}
 
 TimeZone userTimeZone = CalendarUtil.getCalendarBookingDisplayTimeZone(calendarBooking, TimeZone.getTimeZone(timeZoneId));
 TimeZone utcTimeZone = TimeZone.getTimeZone(StringPool.UTC);
