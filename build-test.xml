@@ -3902,7 +3902,7 @@ go]]></replacevalue>
 			</then>
 		</if>
 
-		<delete dir="/tmp/sprite-root" />
+		<delete dir="/tmp/sprite" />
 	</target>
 
 	<target name="deploy-extra-apps">
@@ -4828,11 +4828,11 @@ setup.wizard.enabled=false
 
 mail.session.jndi.name=
 
+sprite.root.dir=/tmp/sprite
+
 axis.servlet.hosts.allowed=
 
-tunnel.servlet.hosts.allowed=
-
-sprite.root.dir=/tmp/sprite-root</echo>
+tunnel.servlet.hosts.allowed=</echo>
 
 		<get-testcase-property property.name="captcha.max.challenges" />
 
