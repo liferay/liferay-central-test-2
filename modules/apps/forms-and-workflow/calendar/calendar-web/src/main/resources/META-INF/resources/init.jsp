@@ -171,6 +171,57 @@ if (userCalendarResource != null) {
 	}
 }
 
+
+List<Calendar> groupCalendars = Collections.emptyList();
+
+boolean showSiteCalendars = false;
+
+if (groupCalendarResource != null) {
+	showSiteCalendars = (userCalendarResource == null) || (groupCalendarResource.getCalendarResourceId() != userCalendarResource.getCalendarResourceId());
+}
+
+if (showSiteCalendars) {
+	groupCalendars = CalendarServiceUtil.search(themeDisplay.getCompanyId(), null, new long[] {groupCalendarResource.getCalendarResourceId()}, null, true, QueryUtil.ALL_POS, QueryUtil.ALL_POS, (OrderByComparator)null);
+}
+
+List<Calendar> userCalendars = Collections.emptyList();
+
+if (userCalendarResource != null) {
+	userCalendars = CalendarServiceUtil.search(themeDisplay.getCompanyId(), null, new long[] {userCalendarResource.getCalendarResourceId()}, null, true, QueryUtil.ALL_POS, QueryUtil.ALL_POS, (OrderByComparator)null);
+}
+
+List<Calendar> otherCalendars = new ArrayList<Calendar>();
+
+long[] calendarIds = StringUtil.split(SessionClicks.get(request, "com.liferay.calendar.web_otherCalendars", StringPool.BLANK), 0L);
+
+Calendar defaultCalendar = null;
+
+for (long calendarId : calendarIds) {
+	Calendar calendar = CalendarServiceUtil.fetchCalendar(calendarId);
+
+	if (calendar != null) {
+		CalendarResource calendarResource = calendar.getCalendarResource();
+
+		if (calendarResource.isActive()) {
+			otherCalendars.add(calendar);
+		}
+	}
+}
+
+for (Calendar groupCalendar : groupCalendars) {
+	if (groupCalendar.isDefaultCalendar() && CalendarPermission.contains(themeDisplay.getPermissionChecker(), groupCalendar, CalendarActionKeys.MANAGE_BOOKINGS)) {
+		defaultCalendar = groupCalendar;
+	}
+}
+
+if (defaultCalendar == null) {
+	for (Calendar userCalendar : userCalendars) {
+		if (userCalendar.isDefaultCalendar()) {
+			defaultCalendar = userCalendar;
+		}
+	}
+}
+
 TimeZone userTimeZone = CalendarUtil.getCalendarBookingDisplayTimeZone(calendarBooking, TimeZone.getTimeZone(timeZoneId));
 TimeZone utcTimeZone = TimeZone.getTimeZone(StringPool.UTC);
 
