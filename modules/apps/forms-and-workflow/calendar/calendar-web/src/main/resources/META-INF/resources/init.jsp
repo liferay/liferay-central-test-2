@@ -171,7 +171,6 @@ if (userCalendarResource != null) {
 	}
 }
 
-
 List<Calendar> groupCalendars = Collections.emptyList();
 
 boolean showSiteCalendars = false;
