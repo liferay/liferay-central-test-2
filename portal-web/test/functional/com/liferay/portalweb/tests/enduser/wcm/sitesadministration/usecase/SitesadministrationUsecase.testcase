@@ -1128,7 +1128,7 @@
 			<var name="displayStyle" value="List" />
 		</execute>
 
-		<var method="selenium#getText('//tr/td[7]/span/a')" name="valueName" />
+		<var method="selenium#getText('//tr/td[7]//span/a')" name="valueName" />
 
 		<echo message="value name ${valueName}" />
 
