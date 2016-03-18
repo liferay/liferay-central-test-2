@@ -290,11 +290,10 @@ request.setAttribute("view_user.jsp-user", user2);
 													for (AssetTag assetTag : assetTags) {
 														PortletURL searchURL = ((LiferayPortletResponse)renderResponse).createRenderURL(searchPortletId);
 
-														searchURL.setWindowState(WindowState.MAXIMIZED);
-
+														searchURL.setParameter("mvcPath", "/search.jsp");
 														searchURL.setParameter("groupId", "0");
 														searchURL.setParameter("keywords", assetTag.getName());
-														searchURL.setParameter("mvcPath", "/search.jsp");
+														searchURL.setWindowState(WindowState.MAXIMIZED);
 
 														sb.append("<li><a href=\"");
 														sb.append(searchURL);
