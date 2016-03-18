@@ -15,6 +15,7 @@
 package com.liferay.portal.rss;
 
 import com.ibm.icu.text.Transliterator;
+
 import com.liferay.portal.kernel.util.StringUtil;
 
 /**
