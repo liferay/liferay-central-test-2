@@ -5,3 +5,4 @@ Export-Package: com.liferay.portal.rss
 Liferay-Releng-Module-Group-Description:
 Liferay-Releng-Module-Group-Title:
 -include: ../../app.bnd
+-liferay-includeresource: @icu4j-*.jar
