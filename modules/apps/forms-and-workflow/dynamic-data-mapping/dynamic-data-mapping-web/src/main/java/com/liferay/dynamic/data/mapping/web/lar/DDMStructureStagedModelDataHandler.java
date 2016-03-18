@@ -381,7 +381,7 @@ public class DDMStructureStagedModelDataHandler
 			Element structureElement)
 		throws PortalException {
 
-		Set<Long> ddmDataProviderInstanceIdSet = new HashSet<>();
+		Set<Long> ddmDataProviderInstanceIdsSet = new HashSet<>();
 
 		List<DDMDataProviderInstanceLink> ddmDataProviderInstanceLinks =
 			_ddmDataProviderInstanceLinkLocalService.
@@ -401,13 +401,13 @@ public class DDMStructureStagedModelDataHandler
 				portletDataContext, structure, ddmDataProviderInstance,
 				PortletDataContext.REFERENCE_TYPE_STRONG);
 
-			ddmDataProviderInstanceIdSet.add(
+			ddmDataProviderInstanceIdsSet.add(
 				ddmDataProviderInstance.getDataProviderInstanceId());
 		}
 
 		String ddmDataProviderInstanceIds = ArrayUtil.toString(
-			ddmDataProviderInstanceIdSet.toArray(
-				new Long[ddmDataProviderInstanceIdSet.size()]),
+			ddmDataProviderInstanceIdsSet.toArray(
+				new Long[ddmDataProviderInstanceIdsSet.size()]),
 			StringPool.BLANK);
 
 		structureElement.addAttribute(
@@ -503,7 +503,7 @@ public class DDMStructureStagedModelDataHandler
 			return;
 		}
 
-		Map<Long, Long> dataProviderInstanceIdMap =
+		Map<Long, Long> dataProviderInstanceIdsMap =
 			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
 				DDMDataProviderInstance.class);
 
@@ -512,7 +512,7 @@ public class DDMStructureStagedModelDataHandler
 				ddmDataProviderInstanceId);
 
 			long newDDMDataProviderInstanceId = MapUtil.getLong(
-				dataProviderInstanceIdMap, oldDDMDataProviderInstanceId);
+				dataProviderInstanceIdsMap, oldDDMDataProviderInstanceId);
 
 			StagedModelDataHandlerUtil.importReferenceStagedModel(
 				portletDataContext, DDMDataProviderInstance.class,
@@ -531,7 +531,7 @@ public class DDMStructureStagedModelDataHandler
 					ddmFormField.getProperty("ddmDataProviderInstanceId")));
 
 			long newDDMDataProviderInstanceId = MapUtil.getLong(
-				dataProviderInstanceIdMap, oldDDMDataProviderInstanceId);
+				dataProviderInstanceIdsMap, oldDDMDataProviderInstanceId);
 
 			ddmFormField.setProperty(
 				"ddmDataProviderInstanceId", newDDMDataProviderInstanceId);

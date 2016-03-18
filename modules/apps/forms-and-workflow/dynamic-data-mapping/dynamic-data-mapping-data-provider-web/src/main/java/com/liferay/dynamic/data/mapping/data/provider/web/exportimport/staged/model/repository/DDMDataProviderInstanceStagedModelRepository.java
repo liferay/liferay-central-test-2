@@ -184,7 +184,7 @@ public class DDMDataProviderInstanceStagedModelRepository
 
 		if (ddmDataProvider == null) {
 			throw new IllegalStateException(
-				"No such DataProvider of type " + type);
+				"No data provider found for type " + type);
 		}
 
 		return DDMFormFactory.create(ddmDataProvider.getSettings());

@@ -169,6 +169,7 @@ public class DDMDataProviderInstanceLocalServiceImpl
 			});
 
 		actionableDynamicQuery.setCompanyId(companyId);
+
 		actionableDynamicQuery.performActions();
 	}
 
