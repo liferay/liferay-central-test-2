@@ -761,7 +761,7 @@ AUI.add(
 
 				instance.invokeActionURL(
 					{
-						actionName: 'updateCalendarBookingAsync',
+						actionName: 'updateSchedulerCalendarBooking',
 						callback: function(data) {
 							schedulerEvent.set(
 									'loading',
