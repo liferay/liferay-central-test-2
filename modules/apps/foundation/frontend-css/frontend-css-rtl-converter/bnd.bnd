@@ -1,7 +1,7 @@
-Bundle-Name: Liferay RTL CSS
-Bundle-SymbolicName: com.liferay.rtl.css
-Bundle-Version: 2.0.0
-Export-Package: com.liferay.rtl.css
+Bundle-Name: Liferay Frontend CSS RTL Converter
+Bundle-SymbolicName: com.liferay.frontend.css.rtl.converter
+Bundle-Version: 1.0.0
+Export-Package: com.liferay.frontend.css.rtl.converter
 Import-Package:\
 	!org.junit,\
 	!org.junit.*,\
@@ -11,7 +11,6 @@ Import-Package:\
 	*
 Liferay-Releng-Module-Group-Description:
 Liferay-Releng-Module-Group-Title:
-Main-Class: com.liferay.rtl.css.RTLConverter
 -liferay-includeresource:\
 	@annotations-*.jar,\
 	@ph-commons-*.jar,\
