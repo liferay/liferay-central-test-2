@@ -856,8 +856,8 @@ public class LiferayDefaultsPlugin extends BaseDefaultsPlugin<LiferayPlugin> {
 
 					for (Object file : replaceRegexTask.getMatchedFiles()) {
 						_logger.lifecycle(
-							"Project version in " + project.relativePath(file) +
-								" updated");
+							"Updated project version in " +
+								project.relativePath(file));
 					}
 				}
 
