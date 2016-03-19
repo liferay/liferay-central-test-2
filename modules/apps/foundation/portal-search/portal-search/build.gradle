@@ -10,5 +10,5 @@ dependencies {
 	provided project(":apps:foundation:portal-background-task:portal-background-task-api")
 	provided project(":apps:foundation:portal-configuration:portal-configuration-metatype")
 	provided project(":apps:foundation:portal:portal-instance-lifecycle")
-	provided project(":core:registry-api")
+	provided group: "com.liferay", name: "com.liferay.registry.api", version: "1.0.0"
 }

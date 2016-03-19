@@ -20,5 +20,5 @@ dependencies {
 	testIntegrationCompile project(":apps:web-experience:journal:journal-api")
 	testIntegrationCompile project(":apps:web-experience:journal:journal-service")
 	testIntegrationCompile project(":apps:web-experience:journal:journal-web")
-	testIntegrationCompile project(":core:registry-api")
+	testIntegrationCompile group: "com.liferay", name: "com.liferay.registry.api", version: "1.0.0"
 }
