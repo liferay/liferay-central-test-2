@@ -623,7 +623,7 @@ public class LiferayDefaultsPlugin extends BaseDefaultsPlugin<LiferayPlugin> {
 
 					commands.add("git add --all");
 
-					commands.add(_getGitCommitCommand("change log", false));
+					commands.add(_getGitCommitCommand("change log", true));
 
 					// Baseline
 
