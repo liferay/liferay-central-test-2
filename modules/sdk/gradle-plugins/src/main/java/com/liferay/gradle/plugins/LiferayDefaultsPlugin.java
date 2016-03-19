@@ -2013,7 +2013,7 @@ public class LiferayDefaultsPlugin extends BaseDefaultsPlugin<LiferayPlugin> {
 	}
 
 	protected String getModuleDependency(
-		Project project, boolean roundedMajorVersion) {
+		Project project, boolean roundToMajorVersion) {
 
 		StringBuilder sb = new StringBuilder();
 
@@ -2025,7 +2025,7 @@ public class LiferayDefaultsPlugin extends BaseDefaultsPlugin<LiferayPlugin> {
 
 		String versionString = String.valueOf(project.getVersion());
 
-		if (roundedMajorVersion) {
+		if (roundToMajorVersion) {
 			Version version = getVersion(versionString);
 
 			if (version != null) {
