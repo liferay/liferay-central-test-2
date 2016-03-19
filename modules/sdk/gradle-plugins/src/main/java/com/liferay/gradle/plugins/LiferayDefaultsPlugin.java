@@ -621,7 +621,7 @@ public class LiferayDefaultsPlugin extends BaseDefaultsPlugin<LiferayPlugin> {
 							ChangeLogBuilderPlugin.BUILD_CHANGE_LOG_TASK_NAME,
 							gradleDaemon));
 
-					commands.add("git add --all");
+					commands.add("git add --all .");
 
 					commands.add(_getGitCommitCommand("change log", true));
 
@@ -637,7 +637,7 @@ public class LiferayDefaultsPlugin extends BaseDefaultsPlugin<LiferayPlugin> {
 					List<String> publishCommands = _getPublishCommands(
 						gradleRelativePath, gradleDaemon, false);
 
-					publishCommands.add(0, "git add --all");
+					publishCommands.add(0, "git add --all .");
 					publishCommands.add(
 						1, _getGitCommitCommand("packageinfo", false));
 
