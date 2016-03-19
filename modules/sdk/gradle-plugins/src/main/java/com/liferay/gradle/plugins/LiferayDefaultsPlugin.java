@@ -141,7 +141,6 @@ import org.gradle.plugins.ide.idea.IdeaPlugin;
 import org.gradle.plugins.ide.idea.model.IdeaModel;
 import org.gradle.plugins.ide.idea.model.IdeaModule;
 import org.gradle.process.ExecSpec;
-import org.gradle.util.CollectionUtils;
 import org.gradle.util.VersionNumber;
 
 /**
@@ -621,9 +620,8 @@ public class LiferayDefaultsPlugin extends BaseDefaultsPlugin<LiferayPlugin> {
 							ChangeLogBuilderPlugin.BUILD_CHANGE_LOG_TASK_NAME,
 							gradleDaemon));
 
-					commands.add("git add --all .");
-
-					commands.add(_getGitCommitCommand("change log", true));
+					commands.add(
+						_getGitCommitCommand("change log", true, true));
 
 					// Baseline
 
@@ -632,20 +630,15 @@ public class LiferayDefaultsPlugin extends BaseDefaultsPlugin<LiferayPlugin> {
 							gradleRelativePath, BASELINE_TASK_NAME,
 							gradleDaemon));
 
-					// Publish if there are packageinfo changes
-
-					commands.add("git add --all .");
-
-					List<String> publishCommands = _getPublishCommands(
-						gradleRelativePath, gradleDaemon, false);
-
-					publishCommands.add(
-						0, _getGitCommitCommand("packageinfo", false));
-
 					commands.add(
-						"(git diff-index --quiet HEAD || (" +
-							CollectionUtils.join(" && ", publishCommands) +
-								"))");
+						_getGitCommitCommand("packageinfo", true, false));
+
+					// Publish the artifact since there will either be change
+					// log or baseline changes
+
+					commands.addAll(
+						_getPublishCommands(
+							gradleRelativePath, gradleDaemon, false));
 
 					System.out.println();
 
