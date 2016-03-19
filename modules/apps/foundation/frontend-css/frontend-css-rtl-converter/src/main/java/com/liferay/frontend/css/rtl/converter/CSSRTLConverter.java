@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.rtl.css;
+package com.liferay.frontend.css.rtl.converter;
 
 import com.helger.commons.charset.CCharset;
 import com.helger.css.ECSSVersion;
@@ -41,13 +41,13 @@ import java.util.regex.Pattern;
 /**
  * @author David Truong
  */
-public class RTLCSSConverter {
+public class CSSRTLConverter {
 
-	public RTLCSSConverter() {
+	public CSSRTLConverter() {
 		this(true);
 	}
 
-	public RTLCSSConverter(boolean compress) {
+	public CSSRTLConverter(boolean compress) {
 		_cssWriterSettings = new CSSWriterSettings(ECSSVersion.CSS30, compress);
 
 		_cssWriterSettings.setOptimizedOutput(compress);
