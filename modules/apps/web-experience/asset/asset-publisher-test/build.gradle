@@ -12,5 +12,5 @@ dependencies {
 	testIntegrationCompile project(":apps:foundation:portal:portal-upgrade")
 	testIntegrationCompile project(":apps:web-experience:asset:asset-publisher-web")
 	testIntegrationCompile project(":apps:web-experience:journal:journal-api")
-	testIntegrationCompile project(":core:registry-api")
+	testIntegrationCompile group: "com.liferay", name: "com.liferay.registry.api", version: "1.0.0"
 }

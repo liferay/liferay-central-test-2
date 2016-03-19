@@ -15,5 +15,5 @@ dependencies {
 	provided project(":apps:foundation:portal:portal-dao-orm-custom-sql")
 	provided project(":apps:foundation:portal:portal-spring-extender")
 	provided project(":apps:foundation:portal:portal-upgrade")
-	provided project(":core:registry-api")
+	provided group: "com.liferay", name: "com.liferay.registry.api", version: "1.0.0"
 }

@@ -60,7 +60,7 @@ dependencies {
 	provided project(":apps:foundation:osgi:osgi-service-tracker-collections")
 	provided project(":core:jaxws-osgi-bridge")
 	provided project(":core:portal-app-license-api")
-	provided project(":core:registry-api")
+	provided group: "com.liferay", name: "com.liferay.registry.api", version: "1.0.0"
 	provided project(":core:registry-impl")
 }
 

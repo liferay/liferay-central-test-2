@@ -6,5 +6,5 @@ dependencies {
 	provided project(":apps:collaboration:item-selector:item-selector-api")
 	provided project(":apps:collaboration:item-selector:item-selector-criteria-api")
 	provided project(":apps:foundation:osgi:osgi-service-tracker-collections")
-	provided project(":core:registry-api")
+	provided group: "com.liferay", name: "com.liferay.registry.api", version: "1.0.0"
 }
