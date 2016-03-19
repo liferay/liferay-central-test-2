@@ -874,20 +874,19 @@ public class LiferayDefaultsPlugin extends BaseDefaultsPlugin<LiferayPlugin> {
 						return content;
 					}
 
-					if ((gitRepoDir != null) &&
+					/*if ((gitRepoDir != null) &&
 						FileUtil.isChild(file, gitRepoDir)) {
 
 						return content.replaceAll(
 							getModuleDependencyRegex(project),
 							Matcher.quoteReplacement(
 								getProjectDependency(project)));
-					}
-					else {
-						return content.replaceAll(
-							Pattern.quote(getProjectDependency(project)),
-							Matcher.quoteReplacement(
-								getModuleDependency(project, true)));
-					}
+					}*/
+
+					return content.replaceAll(
+						Pattern.quote(getProjectDependency(project)),
+						Matcher.quoteReplacement(
+							getModuleDependency(project, true)));
 				}
 
 			});
@@ -2189,7 +2188,11 @@ public class LiferayDefaultsPlugin extends BaseDefaultsPlugin<LiferayPlugin> {
 			Project project = task.getProject();
 
 			for (Configuration configuration : project.getConfigurations()) {
-				if (_hasExternalProjectDependencies(project, configuration)) {
+				/*if (_hasExternalProjectDependencies(project, configuration)) {
+					return false;
+				}*/
+
+				if (_hasProjectDependencies(project, configuration)) {
 					return false;
 				}
 			}
@@ -2197,7 +2200,7 @@ public class LiferayDefaultsPlugin extends BaseDefaultsPlugin<LiferayPlugin> {
 			return true;
 		}
 
-		private boolean _hasExternalProjectDependencies(
+		/*private boolean _hasExternalProjectDependencies(
 			Project project, Configuration configuration) {
 
 			for (Dependency dependency : configuration.getDependencies()) {
@@ -2219,6 +2222,18 @@ public class LiferayDefaultsPlugin extends BaseDefaultsPlugin<LiferayPlugin> {
 			}
 
 			return false;
+		}*/
+
+		private boolean _hasProjectDependencies(
+			Project project, Configuration configuration) {
+
+			for (Dependency dependency : configuration.getDependencies()) {
+				if (dependency instanceof ProjectDependency) {
+					return true;
+				}
+			}
+
+			return false;
 		}
 
 		private final File _gitRepoDir;
@@ -2235,7 +2250,7 @@ public class LiferayDefaultsPlugin extends BaseDefaultsPlugin<LiferayPlugin> {
 		public boolean isSatisfiedBy(Task task) {
 			final Project project = task.getProject();
 
-			Properties artifactProperties;
+			Properties artifactProperties = null;
 
 			try {
 				artifactProperties = FileUtil.readProperties(
