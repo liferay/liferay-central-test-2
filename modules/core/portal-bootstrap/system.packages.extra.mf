@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1458340452538
+Bnd-LastModified: 1458514113418
 Bundle-ManifestVersion: 2
 Bundle-Name: portal-bootstrap
 Bundle-SymbolicName: portal-bootstrap
@@ -4267,7 +4267,7 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  gs.kernel,com.liferay.ratings.kernel.model,javax.portlet",com.liferay
  .registry;version="1.0.0";uses:="com.liferay.registry.dependency",com
  .liferay.registry.collections;version="1.0.0";uses:="com.liferay.regi
- stry",com.liferay.registry.dependency;version="1.0.1";uses:="com.life
+ stry",com.liferay.registry.dependency;version="1.0.0";uses:="com.life
  ray.registry",com.liferay.registry.util;version="1.0.0",com.liferay.r
  oles.admin.kernel.util;version="1.0.0";uses:="com.liferay.portal.kern
  el.model",com.liferay.sites.kernel.util;version="1.0.0";uses:="com.li
