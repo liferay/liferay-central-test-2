@@ -94,8 +94,7 @@ public class PortalImplTest {
 			PersistentHttpServletRequestWrapper1.class,
 			originalRequest.getClass());
 		Assert.assertNotSame(requestWrapper3, originalRequest);
-		Assert.assertSame(
-			request, ((HttpServletRequestWrapper)originalRequest).getRequest());
+		Assert.assertSame(request, getWrappedRequest(originalRequest));
 
 		HttpServletRequestWrapper requestWrapper4 =
 			new PersistentHttpServletRequestWrapper2(requestWrapper3);
@@ -107,16 +106,13 @@ public class PortalImplTest {
 			originalRequest.getClass());
 		Assert.assertNotSame(requestWrapper4, originalRequest);
 
-		originalRequest =
-			(HttpServletRequest)
-				((HttpServletRequestWrapper)originalRequest).getRequest();
+		originalRequest = getWrappedRequest(originalRequest);
 
 		Assert.assertSame(
 			PersistentHttpServletRequestWrapper1.class,
 			originalRequest.getClass());
 		Assert.assertNotSame(requestWrapper3, originalRequest);
-		Assert.assertSame(
-			request, ((HttpServletRequestWrapper)originalRequest).getRequest());
+		Assert.assertSame(request, getWrappedRequest(originalRequest));
 	}
 
 	@Test
@@ -205,6 +201,15 @@ public class PortalImplTest {
 		Assert.assertFalse(PortalUtil.isValidResourceId("/WEB-INF\\web.xml"));
 		Assert.assertFalse(PortalUtil.isValidResourceId("\\WEB-INF/web.xml"));
 		Assert.assertFalse(PortalUtil.isValidResourceId("\\WEB-INF\\web.xml"));
+	}
+
+	protected HttpServletRequest getWrappedRequest(
+		HttpServletRequest requestRequest) {
+
+		HttpServletRequestWrapper requestWrapper =
+			(HttpServletRequestWrapper)requestRequest;
+
+		return (HttpServletRequest)requestWrapper.getRequest();
 	}
 
 	private static AtomicState _atomicState;
