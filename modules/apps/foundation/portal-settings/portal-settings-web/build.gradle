@@ -13,5 +13,5 @@ dependencies {
 	provided project(":apps:forms-and-workflow:dynamic-data-mapping:dynamic-data-mapping-taglib")
 	provided group: "com.liferay", name: "com.liferay.map.taglib", version: "1.0.0"
 	provided group: "com.liferay", name: "com.liferay.users.admin.web", version: "1.0.0"
-	provided project(":apps:web-experience:staging:staging-taglib")
+	provided group: "com.liferay", name: "com.liferay.staging.taglib", version: "2.0.0"
 }
