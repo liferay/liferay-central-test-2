@@ -10,5 +10,5 @@ dependencies {
 	provided project(":apps:web-experience:asset:asset-categories-navigation-web")
 	provided project(":apps:web-experience:asset:asset-publisher-web")
 	provided project(":apps:web-experience:asset:asset-tags-navigation-web")
-	provided project(":apps:web-experience:layout:layout-set-prototype-api")
+	provided group: "com.liferay", name: "com.liferay.layout.set.prototype", version: "2.0.0"
 }
