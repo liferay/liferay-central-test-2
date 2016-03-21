@@ -16,5 +16,5 @@ dependencies {
 	provided project(":apps:web-experience:layout:layout-taglib")
 	provided project(":apps:web-experience:product-navigation:product-navigation-control-menu-api")
 	provided project(":apps:web-experience:product-navigation:product-navigation-site-administration")
-	provided project(":apps:web-experience:site:site-api")
+	provided group: "com.liferay", name: "com.liferay.site.api", version: "2.0.0"
 }
