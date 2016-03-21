@@ -25,6 +25,6 @@ dependencies {
 	provided group: "rome", name: "rome", version: "1.0"
 	provided project(":apps:forms-and-workflow:dynamic-data-mapping:dynamic-data-mapping-service")
 	provided project(":apps:forms-and-workflow:dynamic-data-mapping:dynamic-data-mapping-taglib")
-	provided project(":apps:web-experience:journal:journal-api")
+	provided group: "com.liferay", name: "com.liferay.journal.api", version: "2.0.0"
 	provided project(":apps:web-experience:journal:journal-service")
 }
