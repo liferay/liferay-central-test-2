@@ -23,7 +23,7 @@ dependencies {
 	provided project(":apps:forms-and-workflow:dynamic-data-mapping:dynamic-data-mapping-api")
 	provided project(":apps:forms-and-workflow:dynamic-data-mapping:dynamic-data-mapping-service")
 	provided project(":apps:foundation:mobile-device-rules:mobile-device-rules-api")
-	provided project(":apps:foundation:portal:portal-dao-orm-custom-sql")
+	provided group: "com.liferay", name: "com.liferay.portal.dao.orm.custom.sql", version: "1.0.0"
 	provided project(":apps:foundation:portal:portal-instance-lifecycle")
 	provided project(":apps:foundation:portal:portal-spring-extender")
 	provided project(":apps:foundation:portal:portal-upgrade")
