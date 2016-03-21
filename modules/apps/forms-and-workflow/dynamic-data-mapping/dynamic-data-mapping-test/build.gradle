@@ -13,7 +13,7 @@ dependencies {
 	testCompile project(":apps:forms-and-workflow:dynamic-data-mapping:dynamic-data-mapping-io")
 	testCompile project(":apps:forms-and-workflow:dynamic-data-mapping:dynamic-data-mapping-service")
 	testCompile group: "com.liferay", name: "com.liferay.dynamic.data.mapping.test.util", version: "2.0.0"
-	testCompile project(":apps:forms-and-workflow:dynamic-data-mapping:dynamic-data-mapping-type-checkbox")
+	testCompile group: "com.liferay", name: "com.liferay.dynamic.data.mapping.type.checkbox", version: "2.0.0"
 	testCompile project(":apps:forms-and-workflow:dynamic-data-mapping:dynamic-data-mapping-type-date")
 	testCompile project(":apps:forms-and-workflow:dynamic-data-mapping:dynamic-data-mapping-type-key-value")
 	testCompile project(":apps:forms-and-workflow:dynamic-data-mapping:dynamic-data-mapping-type-paragraph")
