@@ -12,5 +12,5 @@ dependencies {
 	provided group: "com.liferay.portal", name: "com.liferay.portal.kernel", version: "2.0.0"
 	provided group: "com.liferay.portal", name: "com.liferay.util.java", version: "2.0.0"
 	provided group: "org.hibernate", name: "hibernate-core", version: "3.6.10.Final"
-	provided project(":apps:foundation:portal:portal-spring-extender")
+	provided group: "com.liferay", name: "com.liferay.portal.spring.extender", version: "2.0.0"
 }
