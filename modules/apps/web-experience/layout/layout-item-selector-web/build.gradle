@@ -9,5 +9,5 @@ dependencies {
 	provided project(":apps:collaboration:item-selector:item-selector-criteria-api")
 	provided project(":apps:foundation:frontend-taglib:frontend-taglib-web")
 	provided project(":apps:web-experience:layout:layout-item-selector-api")
-	provided project(":apps:web-experience:layout:layout-taglib")
+	provided group: "com.liferay", name: "com.liferay.layout.taglib", version: "2.0.0"
 }
