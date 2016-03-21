@@ -7,9 +7,9 @@ dependencies {
 	provided group: "org.skyscreamer", name: "jsonassert", version: "1.2.3"
 
 	testCompile group: "com.liferay", name: "com.liferay.dynamic.data.mapping.api", version: "2.0.0"
+	testCompile group: "com.liferay", name: "com.liferay.dynamic.data.mapping.form.field.type", version: "2.0.0"
 	testCompile project(":apps:forms-and-workflow:dynamic-data-mapping:dynamic-data-mapping-data-provider")
 	testCompile project(":apps:forms-and-workflow:dynamic-data-mapping:dynamic-data-mapping-form-evaluator")
-	testCompile group: "com.liferay", name: "com.liferay.dynamic.data.mapping.form.field.type", version: "2.0.0"
 	testCompile project(":apps:forms-and-workflow:dynamic-data-mapping:dynamic-data-mapping-io")
 	testCompile project(":apps:forms-and-workflow:dynamic-data-mapping:dynamic-data-mapping-service")
 	testCompile project(":apps:forms-and-workflow:dynamic-data-mapping:dynamic-data-mapping-test-util")
