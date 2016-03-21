@@ -13,5 +13,5 @@ dependencies {
 	provided project(":apps:forms-and-workflow:polls:polls-api")
 	provided project(":apps:forms-and-workflow:polls:polls-service")
 	provided project(":apps:foundation:frontend-taglib:frontend-taglib-web")
-	provided project(":apps:web-experience:application-list:application-list-api")
+	provided group: "com.liferay", name: "com.liferay.application.list.api", version: "2.0.0"
 }
