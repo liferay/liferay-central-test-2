@@ -14,5 +14,5 @@ dependencies {
 	provided group: "com.liferay", name: "com.liferay.exportimport.api", version: "2.0.0"
 	provided project(":apps:web-experience:staging:staging-lang")
 	provided project(":apps:web-experience:staging:staging-taglib")
-	provided project(":apps:web-experience:trash:trash-taglib")
+	provided group: "com.liferay", name: "com.liferay.trash.taglib", version: "2.0.0"
 }
