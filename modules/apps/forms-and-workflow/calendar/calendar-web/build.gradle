@@ -11,7 +11,7 @@ dependencies {
 	provided project(":apps:forms-and-workflow:calendar:calendar-api")
 	provided project(":apps:forms-and-workflow:calendar:calendar-service")
 	provided project(":apps:foundation:frontend-taglib:frontend-taglib-web")
-	provided project(":apps:foundation:portal:portal-dao-orm-custom-sql")
+	provided group: "com.liferay", name: "com.liferay.portal.dao.orm.custom.sql", version: "1.0.0"
 	provided project(":apps:foundation:portal:portal-upgrade")
 	provided project(":apps:foundation:rss:rss-util")
 }
