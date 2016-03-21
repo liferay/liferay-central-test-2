@@ -113,6 +113,10 @@ $horizontal-spacing: 35px;
 		outline: none;
 	}
 
+	.alloy-editor {
+		padding-right: 4px;
+	}
+
 	.form-builder-field-settings-content {
 		.form-group {
 			margin-bottom: 40px;
@@ -366,6 +370,12 @@ $horizontal-spacing: 35px;
 
 .lfr-ddl-field-settings-modal,
 .portlet-forms {
+	.liferay-ddm-form-field-editor .form-control-feedback {
+		margin-top: -25px;
+		position: absolute;
+		z-index: 2;
+	}
+
 	.form-control {
 		font-size: 14px;
 		height: 40px;
