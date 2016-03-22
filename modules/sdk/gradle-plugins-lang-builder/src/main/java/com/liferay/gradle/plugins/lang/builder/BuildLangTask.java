@@ -143,8 +143,8 @@ public class BuildLangTask extends JavaExec {
 
 				if (_logger.isWarnEnabled()) {
 					_logger.warn(
-						"Credentials have not been specified, translation is " +
-							"disabled.");
+						"Translation is disabled because credentials are not " +
+							"specified");
 				}
 
 				translate = false;
