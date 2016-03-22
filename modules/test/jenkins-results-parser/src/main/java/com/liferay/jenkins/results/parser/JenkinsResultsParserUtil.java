@@ -435,17 +435,17 @@ public class JenkinsResultsParserUtil {
 
 				bufferedReader.close();
 
-				String content = sb.toString();
+				String string = sb.toString();
 
-				byte[] contentBytes = content.getBytes();
+				byte[] bytes = string.getBytes();
 
 				if (!url.startsWith("file:") &&
-					(contentBytes.length < (3 * 1024 * 1024))) {
+					(bytes.length < (3 * 1024 * 1024))) {
 
-					_toStringCache.put(key, content);
+					_toStringCache.put(key, string);
 				}
 
-				return content;
+				return string;
 			}
 			catch (FileNotFoundException fnfe) {
 				retryCount++;
@@ -507,7 +507,11 @@ public class JenkinsResultsParserUtil {
 
 			@Override
 			protected boolean removeEldestEntry(Entry<String, String> entry) {
-				return size() > 50;
+				if (size() > 50) {
+					return true;
+				}
+
+				return false;
 			}
 
 		};
