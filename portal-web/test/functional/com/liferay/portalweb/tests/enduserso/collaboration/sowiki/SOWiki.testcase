@@ -165,41 +165,6 @@
 		</execute>
 	</command>
 
-	<command name="AddSOWikiFrontPageContentJavascript" priority="4">
-		<var name="wikiPageContent">
-			<![CDATA[
-				<p id="demo">FAIL</p><script type="text/javascript">document.getElementById('demo').innerHTML="PASS";</script>
-			]]>
-		</var>
-		<var name="wikiPageRevision" value="1.1" />
-		<var name="wikiPageText" value="PASS" />
-		<var name="wikiPageTitle" value="FrontPage" />
-		<var name="wikiPageUsername" value="${adminName}" />
-
-		<execute macro="Navigator#gotoPage">
-			<var name="siteName" value="${siteName}" />
-			<var name="siteURL" value="true" />
-		</execute>
-
-		<execute macro="WikiPage#addFrontPagePG">
-			<var name="htmlSource" value="true" />
-			<var name="wikiPageContent" value="${wikiPageContent}" />
-			<var name="wikiPageText" value="${wikiPageText}" />
-		</execute>
-
-		<execute macro="Navigator#gotoPage">
-			<var name="siteName" value="${siteName}" />
-			<var name="siteURL" value="true" />
-		</execute>
-
-		<execute macro="WikiNavigator#gotoFrontPagePG" />
-
-		<execute macro="WikiPage#viewFrontPagePG">
-			<var name="wikiPageContent" value="${wikiPageText}" />
-			<var name="wikiPageTitle" value="${wikiPageTitle}" />
-		</execute>
-	</command>
-
 	<command name="AddSOWikiFrontPageTag" priority="3">
 		<var name="tagName" value="Tag Name 1" />
 		<var name="wikiPageContent" value="Wiki FrontPage Content" />
