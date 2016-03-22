@@ -30,50 +30,6 @@
 		<execute macro="SOUser#tearDownCP" />
 	</tear-down>
 
-	<command name="AddSOWikiFrontPageAttachment" priority="4">
-		<var name="attachmentFileName" value="Document_1.jpg" />
-		<var name="attachmentFileSize" value="13k" />
-		<var name="wikiPageContent" value="Wiki FrontPage Content" />
-
-		<execute macro="Navigator#gotoPage">
-			<var name="siteName" value="${siteName}" />
-			<var name="siteURL" value="true" />
-		</execute>
-
-		<execute macro="WikiPage#addFrontPagePG">
-			<var name="wikiPageContent" value="${wikiPageContent}" />
-		</execute>
-
-		<execute macro="Navigator#gotoPage">
-			<var name="siteName" value="${siteName}" />
-			<var name="siteURL" value="true" />
-		</execute>
-
-		<execute macro="WikiNavigator#gotoPG">
-			<var name="wikiPageTitle" value="${wikiPageTitle}" />
-		</execute>
-
-		<execute macro="WikiPage#addAttachmentViaPageEdit">
-			<var name="attachmentFileName" value="${attachmentFileName}" />
-			<var name="wikiPageTitle" value="FrontPage" />
-		</execute>
-
-		<execute macro="Navigator#gotoPage">
-			<var name="siteName" value="${siteName}" />
-			<var name="siteURL" value="true" />
-		</execute>
-
-		<execute macro="WikiNavigator#gotoPG">
-			<var name="wikiPageTitle" value="${wikiPageTitle}" />
-		</execute>
-
-		<execute macro="WikiPage#viewAttachmentPGViaEdit">
-			<var name="attachmentFileName" value="${attachmentFileName}" />
-			<var name="attachmentFileSize" value="${attachmentFileSize}" />
-			<var name="wikiPageTitle" value="FrontPage" />
-		</execute>
-	</command>
-
 	<command name="AddSOWikiFrontPageAttachments" priority="4">
 		<var name="attachmentFileName1" value="Document_1.jpg" />
 		<var name="attachmentFileName2" value="Document_2.mp3" />

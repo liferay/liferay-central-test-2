@@ -63,6 +63,43 @@
 		</execute>
 	</command>
 
+	<command name="AddWikiFrontPageAttachment" priority="4">
+		<execute macro="Navigator#gotoPage">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="WikiPage#addFrontPagePG">
+			<var name="wikiPageContent" value="Wiki FrontPage Content" />
+		</execute>
+
+		<execute macro="Navigator#gotoPage">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="WikiNavigator#gotoPG">
+			<var name="wikiPageTitle" value="FrontPage" />
+		</execute>
+
+		<execute macro="WikiPage#addAttachmentViaPageEdit">
+			<var name="attachmentFileName" value="Document_1.jpg" />
+			<var name="wikiPageTitle" value="FrontPage" />
+		</execute>
+
+		<execute macro="Navigator#gotoPage">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="WikiNavigator#gotoPG">
+			<var name="wikiPageTitle" value="FrontPage" />
+		</execute>
+
+		<execute macro="WikiPage#viewAttachmentPGViaEdit">
+			<var name="attachmentFileName" value="Document_1.jpg" />
+			<var name="attachmentFileSize" value="13KB" />
+			<var name="wikiPageTitle" value="FrontPage" />
+		</execute>
+	</command>
+
 	<command name="AddWikiFrontPageChildPage" priority="5">
 		<var name="wikiChildPageContent" value="Wiki FrontPage Child Page Content" />
 		<var name="wikiChildPageTitle" value="Wiki FrontPage Child Page Title" />
