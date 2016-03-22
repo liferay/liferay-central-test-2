@@ -570,9 +570,9 @@ public class LayoutStagedModelDataHandler
 		if (_log.isDebugEnabled()) {
 			StringBundler sb = new StringBundler(4);
 
-			sb.append("Importing layout with layout id ");
+			sb.append("Importing layout with layout ID ");
 			sb.append(layoutId);
-			sb.append(" and parent layout id ");
+			sb.append(" and parent layout ID ");
 			sb.append(parentLayoutId);
 
 			_log.debug(sb.toString());
@@ -1373,9 +1373,9 @@ public class LayoutStagedModelDataHandler
 
 					sb.append("Unable to link layout with friendly URL ");
 					sb.append(layout.getFriendlyURL());
-					sb.append(" and layout id ");
+					sb.append(" and layout ID ");
 					sb.append(layout.getLayoutId());
-					sb.append(" to layout with layout uuid ");
+					sb.append(" to layout with layout UUID ");
 					sb.append(_linkedToLayoutUuid);
 
 					_log.warn(sb.toString());
