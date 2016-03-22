@@ -35,12 +35,6 @@ import java.util.concurrent.ConcurrentHashMap;
 @DoPrivileged
 public class PortletQNameImpl implements PortletQName {
 
-	public PortletQNameImpl() {
-		_qNames = new ConcurrentHashMap<>();
-		_qNameStrings = new ConcurrentHashMap<>();
-		_identifiers = new ConcurrentHashMap<>();
-	}
-
 	@Override
 	public String getKey(QName qName) {
 		return getKey(qName.getNamespaceURI(), qName.getLocalPart());
@@ -180,8 +174,8 @@ public class PortletQNameImpl implements PortletQName {
 	private static final Log _log = LogFactoryUtil.getLog(
 		PortletQNameImpl.class);
 
-	private final Map<String, String> _identifiers;
-	private final Map<String, QName> _qNames;
-	private final Map<QName, String> _qNameStrings;
+	private final Map<String, String> _identifiers = new ConcurrentHashMap<>();
+	private final Map<String, QName> _qNames = new ConcurrentHashMap<>();
+	private final Map<QName, String> _qNameStrings = new ConcurrentHashMap<>();
 
 }
