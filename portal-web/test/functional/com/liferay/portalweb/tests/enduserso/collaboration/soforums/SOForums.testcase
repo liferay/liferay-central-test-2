@@ -1688,30 +1688,6 @@
 		</execute>
 	</command>
 
-	<command name="DeleteMBCategory" priority="4">
-		<var name="categoryName" value="MB Category Name" />
-
-		<execute macro="Navigator#gotoPage">
-			<var name="siteName" value="${siteName}" />
-			<var name="siteURL" value="true" />
-		</execute>
-
-		<execute macro="MessageboardsCategory#addPG">
-			<var name="categoryName" value="${categoryName}" />
-		</execute>
-
-		<execute macro="MessageboardsCategory#deletePG">
-			<var name="categoryName" value="${categoryName}" />
-		</execute>
-
-		<execute macro="Navigator#gotoPage">
-			<var name="siteName" value="${siteName}" />
-			<var name="siteURL" value="true" />
-		</execute>
-
-		<execute macro="MessageboardsCategory#viewDefaultPG" />
-	</command>
-
 	<command name="DeleteMBCategorySubcategoryThread" priority="4">
 		<var name="categoryName" value="MB Category Name" />
 		<var name="subCategoryDescription" value="MB Subcategory Description" />
