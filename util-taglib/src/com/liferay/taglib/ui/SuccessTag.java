@@ -55,8 +55,8 @@ public class SuccessTag extends IncludeTag implements BodyTag {
 		_targetNode = targetNode;
 	}
 
-	public void setTimeOut(int timeOut) {
-		_timeOut = timeOut;
+	public void setTimeout(int timeout) {
+		_timeout = timeout;
 	}
 
 	public void setTranslateMessage(boolean translateMessage) {
@@ -83,7 +83,7 @@ public class SuccessTag extends IncludeTag implements BodyTag {
 		request.setAttribute("liferay-ui:success:key", _key);
 		request.setAttribute("liferay-ui:success:message", _message);
 		request.setAttribute("liferay-ui:success:targetNode", _targetNode);
-		request.setAttribute("liferay-ui:success:timeOut", _timeOut);
+		request.setAttribute("liferay-ui:success:timeout", _timeout);
 		request.setAttribute(
 			"liferay-ui:success:translateMessage",
 			String.valueOf(_translateMessage));
@@ -98,7 +98,7 @@ public class SuccessTag extends IncludeTag implements BodyTag {
 	private String _key;
 	private String _message;
 	private String _targetNode;
-	private int _timeOut = 5000;
+	private int _timeout = 5000;
 	private boolean _translateMessage = true;
 
 }
