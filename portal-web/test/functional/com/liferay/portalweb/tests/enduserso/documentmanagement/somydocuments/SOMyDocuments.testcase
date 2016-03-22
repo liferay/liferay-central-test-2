@@ -1471,34 +1471,6 @@
 		</execute>
 	</command>
 
-	<command name="AddFolderTitleInvalidCharacters" priority="3">
-		<var name="dmFolder" value="Invalid" />
-		<var name="dmFolderDescription" value="DM Folder Description" />
-		<var name="dmFolderName" value="&lt;DM Folder Invalid Name&gt;" />
-
-		<execute macro="Navigator#gotoPage">
-			<var name="pageName" value="${pageName}" />
-			<var name="soDashboard" value="true" />
-			<var name="soPage" value="true" />
-		</execute>
-
-		<execute macro="DMFolder#addPG">
-			<var name="dmFolder" value="${dmFolder}" />
-			<var name="dmFolderDescription" value="${dmFolderDescription}" />
-			<var name="dmFolderName" value="${dmFolderName}" />
-		</execute>
-
-		<execute macro="Navigator#gotoPage">
-			<var name="pageName" value="${pageName}" />
-			<var name="soDashboard" value="true" />
-			<var name="soPage" value="true" />
-		</execute>
-
-		<var name="key_dmFolderName" value="${dmFolderName}" />
-
-		<execute function="AssertElementNotPresent" locator1="DocumentsAndMedia#ICON_FOLDER_THUMBNAIL" />
-	</command>
-
 	<command name="AddSubFolderDocument" priority="4">
 		<var name="dmDocumentDescription" value="DM Document Description" />
 		<var name="dmDocumentFile" value="Document_1.doc" />
