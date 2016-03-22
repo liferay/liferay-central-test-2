@@ -49,7 +49,7 @@ Group group = GroupLocalServiceUtil.getGroup(scopeGroupId);
 				<aui:button name="emailButton" value="add-email-address" />
 			</div>
 
-			<label><liferay-ui:message key="emails-to-invite" /></label>
+			<label><liferay-ui:message key="email-addresses-to-send-invite" /></label>
 
 			<div class="email-invited" id="<portlet:namespace />invitedEmailList"></div>
 
