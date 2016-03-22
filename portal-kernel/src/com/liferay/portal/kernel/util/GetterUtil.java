@@ -1145,6 +1145,9 @@ public class GetterUtil {
 		return (short)i;
 	}
 
+	/**
+	 * @see com.liferay.portal.kernel.util.StringUtil#toLowerCase
+	 */
 	private static String _toLowerCase(String s) {
 		if (s == null) {
 			return null;
