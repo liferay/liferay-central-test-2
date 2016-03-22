@@ -1117,42 +1117,6 @@
 		</execute>
 	</command>
 
-	<command name="AddFolderImageDuplicate" priority="4">
-		<var name="dmDocumentDescription" value="DM Image Description" />
-		<var name="dmDocumentFile" value="Document_1.jpg" />
-		<var name="dmDocumentTitle" value="DM Image Title" />
-		<var name="dmFolderDescription" value="DM Folder Description" />
-		<var name="dmFolderName" value="DM Folder Name" />
-
-		<execute macro="Navigator#gotoPage">
-			<var name="pageName" value="${pageName}" />
-			<var name="soDashboard" value="true" />
-			<var name="soPage" value="true" />
-		</execute>
-
-		<execute macro="DMFolder#addPG">
-			<var name="dmFolderDescription" value="${dmFolderDescription}" />
-			<var name="dmFolderName" value="${dmFolderName}" />
-		</execute>
-
-		<execute macro="DMNavigator#gotoFolderPG">
-			<var name="dmFolderName" value="${dmFolderName}" />
-		</execute>
-
-		<execute macro="DMDocument#addPG">
-			<var name="dmDocumentDescription" value="${dmDocumentDescription}" />
-			<var name="dmDocumentFile" value="${dmDocumentFile}" />
-			<var name="dmDocumentTitle" value="${dmDocumentTitle}" />
-		</execute>
-
-		<execute macro="DMDocument#addPG">
-			<var name="dmDocument" value="Duplicate" />
-			<var name="dmDocumentDescription" value="${dmDocumentDescription}" />
-			<var name="dmDocumentFile" value="${dmDocumentFile}" />
-			<var name="dmDocumentTitle" value="${dmDocumentTitle}" />
-		</execute>
-	</command>
-
 	<command name="AddFolderImages" priority="4">
 		<var name="dmDocumentDescription1" value="DM Folder Image1 Description" />
 		<var name="dmDocumentDescription2" value="DM Folder Image2 Description" />
