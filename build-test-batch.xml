@@ -1072,7 +1072,7 @@ ${output.content}</echo>
 							<then>
 								<for list="${modules.base.dir.names.with.changes}" param="modules.base.dir.name">
 									<sequential>
-										<echo>Executing 'baseline' on '@{modules.base.dir.name}'</echo>
+										<echo>Executing baseline on @{modules.base.dir.name}.</echo>
 
 										<gradle-execute dir="@{modules.base.dir.name}" task="baseline" />
 									</sequential>
