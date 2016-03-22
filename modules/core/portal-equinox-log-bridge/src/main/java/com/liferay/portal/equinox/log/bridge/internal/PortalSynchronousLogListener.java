@@ -109,7 +109,7 @@ public class PortalSynchronousLogListener implements SynchronousLogListener {
 			String throwableMessage = throwable.getMessage();
 
 			if (throwableMessage.startsWith("Could not resolve module")) {
-				log.error(_FORMAT, "Stopping the portal", context, throwable);
+				log.error(_FORMAT, "Exiting the JVM", context, throwable);
 
 				System.exit(1);
 			}
