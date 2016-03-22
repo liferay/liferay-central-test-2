@@ -1548,32 +1548,6 @@
 		</execute>
 	</command>
 
-	<command name="AddMBThreadNullBody" priority="3">
-		<var name="threadBody" value="" />
-		<var name="threadSubject" value="MB Thread Message Subject" />
-
-		<execute macro="Navigator#gotoPage">
-			<var name="siteName" value="${siteName}" />
-			<var name="siteURL" value="true" />
-		</execute>
-
-		<execute macro="MessageboardsThread#addPG">
-			<var name="threadBody" value="${threadBody}" />
-			<var name="threadSubject" value="${threadSubject}" />
-		</execute>
-
-		<execute macro="Navigator#gotoPage">
-			<var name="siteName" value="${siteName}" />
-			<var name="siteURL" value="true" />
-		</execute>
-
-		<execute macro="MessageboardsThread#viewPG">
-			<var name="postCount" value="1" />
-			<var name="threadBody" value="${threadSubject}" />
-			<var name="threadSubject" value="${threadSubject}" />
-		</execute>
-	</command>
-
 	<command name="BanSOUser" priority="4">
 		<var name="categoryName" value="MB Category Name" />
 		<var name="threadBody" value="MB Category Thread Message Body" />
