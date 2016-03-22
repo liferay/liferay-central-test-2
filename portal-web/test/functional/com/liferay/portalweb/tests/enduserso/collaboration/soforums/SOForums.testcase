@@ -185,41 +185,6 @@
 		<execute function="AssertTextEquals#assertText" locator1="Message#INFO" value1="There are no threads in this category." />
 	</command>
 
-	<command name="AddMBCategorySubcategoryNullName" priority="3">
-		<var name="categoryName" value="MB Category Name" />
-		<var name="subCategoryDescription" value="MB Subcategory Description" />
-		<var name="subCategoryNullName" value=" " />
-
-		<execute macro="Navigator#gotoPage">
-			<var name="siteName" value="${siteName}" />
-			<var name="siteURL" value="true" />
-		</execute>
-
-		<execute macro="MessageboardsCategory#addPG">
-			<var name="categoryName" value="${categoryName}" />
-		</execute>
-
-		<execute macro="Navigator#gotoPage">
-			<var name="siteName" value="${siteName}" />
-			<var name="siteURL" value="true" />
-		</execute>
-
-		<execute macro="MessageboardsCategory#addSubcategoryNullPG">
-			<var name="categoryName" value="${categoryName}" />
-			<var name="subCategoryDescription" value="${subCategoryDescription}" />
-			<var name="subCategoryNullName" value="${subCategoryNullName}" />
-		</execute>
-
-		<execute macro="Navigator#gotoPage">
-			<var name="siteName" value="${siteName}" />
-			<var name="siteURL" value="true" />
-		</execute>
-
-		<execute macro="MessageboardsCategory#viewCategoryDefaultPG">
-			<var name="categoryName" value="${categoryName}" />
-		</execute>
-	</command>
-
 	<command name="AddMBCategorySubcategoryThread" priority="4">
 		<var name="categoryName" value="MB Category Name" />
 		<var name="subCategoryDescription" value="MB Subcategory Description" />
