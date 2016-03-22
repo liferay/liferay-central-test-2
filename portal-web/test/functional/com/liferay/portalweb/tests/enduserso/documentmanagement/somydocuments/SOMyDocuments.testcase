@@ -1375,47 +1375,6 @@
 		</execute>
 	</command>
 
-	<command name="DeleteDocumentType" priority="4">
-		<var name="dmDocumentTypeDescription" value="DM Document Type Description" />
-		<var name="dmDocumentTypeName" value="DM Document Type Name" />
-
-		<execute macro="Navigator#gotoPage">
-			<var name="pageName" value="${pageName}" />
-			<var name="soDashboard" value="true" />
-			<var name="soPage" value="true" />
-		</execute>
-
-		<execute macro="DMNavigator#gotoDocumentType" />
-
-		<execute macro="DMDocumentType#add">
-			<var name="dmDocumentTypeDescription" value="${dmDocumentTypeDescription}" />
-			<var name="dmDocumentTypeFieldNames" value="Text Box" />
-			<var name="dmDocumentTypeName" value="${dmDocumentTypeName}" />
-		</execute>
-
-		<execute macro="Navigator#gotoPage">
-			<var name="pageName" value="${pageName}" />
-			<var name="soDashboard" value="true" />
-			<var name="soPage" value="true" />
-		</execute>
-
-		<execute macro="DMDocumentType#viewMenulistOption">
-			<var name="dmDocumentTypeName" value="${dmDocumentTypeName}" />
-		</execute>
-
-		<execute macro="Navigator#gotoPage">
-			<var name="pageName" value="${pageName}" />
-			<var name="soDashboard" value="true" />
-			<var name="soPage" value="true" />
-		</execute>
-
-		<execute macro="DMNavigator#gotoDocumentType" />
-
-		<execute macro="DMDocumentType#deletePG">
-			<var name="dmDocumentTypeName" value="${dmDocumentTypeName}" />
-		</execute>
-	</command>
-
 	<command name="DeleteSubFolderDocument" priority="4">
 		<var name="dmDocumentDescription" value="DM Document Description" />
 		<var name="dmDocumentFile" value="Document_1.doc" />
