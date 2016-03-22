@@ -20,7 +20,7 @@
 String key = (String)request.getAttribute("liferay-ui:success:key");
 String message = (String)request.getAttribute("liferay-ui:success:message");
 String targetNode = (String)request.getAttribute("liferay-ui:success:targetNode");
-int timeOut = GetterUtil.getInteger(request.getAttribute("liferay-ui:success:timeOut"));
+int timeout = GetterUtil.getInteger(request.getAttribute("liferay-ui:success:timeout"));
 boolean translateMessage = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:success:translateMessage"));
 
 String bodyContentString = StringPool.BLANK;
@@ -44,7 +44,7 @@ else if (translateMessage) {
 		icon="check"
 		message="<%= message %>"
 		targetNode="<%= targetNode %>"
-		timeout="<%= timeOut %>"
+		timeout="<%= timeout %>"
 		type="success"
 	/>
 </c:if>
