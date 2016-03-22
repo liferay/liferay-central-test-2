@@ -104,17 +104,20 @@ public class PortalSynchronousLogListener implements SynchronousLogListener {
 		}
 
 		if ((throwable != null) && (throwable instanceof BundleException) &&
-			(_JENKINS_HOME != null) &&
-			throwable.getMessage().startsWith("Could not resolve module")) {
+			(_JENKINS_HOME != null)) {
 
-			log.error(_FORMAT, "Stopping the portal!", context, throwable);
+			String throwableMessage = throwable.getMessage();
 
-			System.exit(1);
+			if (throwableMessage.startsWith("Could not resolve module")) {
+				log.error(_FORMAT, "Stopping the portal", context, throwable);
+
+				System.exit(1);
+			}
 		}
 	}
 
-	private static final String _JENKINS_HOME = System.getenv("JENKINS_HOME");
-
 	private static final String _FORMAT = "{} {}";
+
+	private static final String _JENKINS_HOME = System.getenv("JENKINS_HOME");
 
 }
