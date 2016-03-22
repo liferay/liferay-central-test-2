@@ -3254,59 +3254,6 @@
 		</execute>
 	</command>
 
-	<command name="MoveFolderDocumentToFolder" priority="4">
-		<var name="dmDocumentDescription" value="DM Document Description" />
-		<var name="dmDocumentFile" value="Document_1.doc" />
-		<var name="dmDocumentTitle" value="DM Document Title" />
-		<var name="dmFolder1Description" value="DM Folder1 Description" />
-		<var name="dmFolder1Name" value="DM Folder1 Name" />
-		<var name="dmFolder2Description" value="DM Folder2 Description" />
-		<var name="dmFolder2Name" value="DM Folder2 Name" />
-
-		<execute macro="Navigator#gotoPage">
-			<var name="siteName" value="${siteName}" />
-			<var name="siteURL" value="true" />
-		</execute>
-
-		<execute macro="DMFolder#addPG">
-			<var name="dmFolderDescription" value="${dmFolder1Description}" />
-			<var name="dmFolderName" value="${dmFolder1Name}" />
-		</execute>
-
-		<execute macro="DMFolder#addPG">
-			<var name="dmFolderDescription" value="${dmFolder2Description}" />
-			<var name="dmFolderName" value="${dmFolder2Name}" />
-		</execute>
-
-		<execute macro="DMNavigator#gotoFolderPG">
-			<var name="dmFolderName" value="${dmFolder1Name}" />
-		</execute>
-
-		<execute macro="DMDocument#addPG">
-			<var name="dmDocumentDescription" value="${dmDocumentDescription}" />
-			<var name="dmDocumentFile" value="${dmDocumentFile}" />
-			<var name="dmDocumentTitle" value="${dmDocumentTitle}" />
-		</execute>
-
-		<execute macro="DMDocument#moveToFolderPG">
-			<var name="dmDocumentTitle" value="${dmDocumentTitle}" />
-			<var name="dmFolderName" value="${dmFolder2Name}" />
-		</execute>
-
-		<execute macro="Navigator#gotoPage">
-			<var name="siteName" value="${siteName}" />
-			<var name="siteURL" value="true" />
-		</execute>
-
-		<execute macro="DMNavigator#gotoFolderPG">
-			<var name="dmFolderName" value="${dmFolder2Name}" />
-		</execute>
-
-		<execute macro="DMDocument#viewPG">
-			<var name="dmDocumentTitle" value="${dmDocumentTitle}" />
-		</execute>
-	</command>
-
 	<command name="MoveFolderDocumentToHome" priority="4">
 		<var name="dmDocumentDescription" value="DM Document Description" />
 		<var name="dmDocumentFile" value="Document_1.doc" />
