@@ -43,7 +43,7 @@ public class SoyPortletHelper {
 
 		_moduleName = getModuleName();
 
-		_javaScriptTpl = getJavaScriptTpl();
+		_javaScriptTPL = getJavaScriptTPL();
 	}
 
 	public String getPortletJavaScript(
@@ -111,7 +111,7 @@ public class SoyPortletHelper {
 		return controllerName;
 	}
 
-	protected String getJavaScriptTpl() throws Exception {
+	protected String getJavaScriptTPL() throws Exception {
 		Class<?> clazz = getClass();
 
 		InputStream inputStream = clazz.getResourceAsStream(
@@ -154,7 +154,7 @@ public class SoyPortletHelper {
 		String context, String controllerName, String portletNamespace) {
 
 		return StringUtil.replace(
-			_javaScriptTpl,
+			_javaScriptTPL,
 			new String[] {
 				"$CONTEXT", "$CONTROLLER_NAME", "$MODULE_NAME",
 				"$PORTLET_NAMESPACE"
@@ -166,7 +166,7 @@ public class SoyPortletHelper {
 
 	private final Bundle _bundle;
 	private final Map<String, String> _controllersMap = new HashMap<>();
-	private final String _javaScriptTpl;
+	private final String _javaScriptTPL;
 	private final String _moduleName;
 
 }
