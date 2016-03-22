@@ -156,7 +156,7 @@ public class PortletQNameImpl implements PortletQName {
 		_identifiers.put(publicRenderParameterName, identifier);
 	}
 
-	private static String _toString(String prefix, QName qName) {
+	private String _toString(String prefix, QName qName) {
 		StringBundler sb = new StringBundler(6);
 
 		sb.append(prefix);
