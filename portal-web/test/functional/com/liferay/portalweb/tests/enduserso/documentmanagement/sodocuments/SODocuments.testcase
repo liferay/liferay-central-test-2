@@ -898,36 +898,6 @@
 		</execute>
 	</command>
 
-	<command name="AddDocument" priority="4">
-		<var name="dmDocumentDescription" value="DM Document Description" />
-		<var name="dmDocumentFile" value="Document_1.doc" />
-		<var name="dmDocumentTitle" value="DM Document Title" />
-		<var name="dmDocumentUploader" value="DM Document Description" />
-		<var name="dmDocumentVersionNumber" value="1.0" />
-
-		<execute macro="Navigator#gotoPage">
-			<var name="siteName" value="${siteName}" />
-			<var name="siteURL" value="true" />
-		</execute>
-
-		<execute macro="DMDocument#addPG">
-			<var name="dmDocumentDescription" value="${dmDocumentDescription}" />
-			<var name="dmDocumentFile" value="${dmDocumentFile}" />
-			<var name="dmDocumentTitle" value="${dmDocumentTitle}" />
-		</execute>
-
-		<execute macro="Navigator#gotoPage">
-			<var name="siteName" value="${siteName}" />
-			<var name="siteURL" value="true" />
-		</execute>
-
-		<execute macro="DMDocument#viewAllPG">
-			<var name="dmDocumentDescription" value="${dmDocumentDescription}" />
-			<var name="dmDocumentTitle" value="${dmDocumentTitle}" />
-			<var name="dmDocumentVersionNumber" value="${dmDocumentVersionNumber}" />
-		</execute>
-	</command>
-
 	<command name="AddDocumentAllFileTypes" priority="4">
 		<var name="dmDocumentDescription" value="DM Document Description" />
 
