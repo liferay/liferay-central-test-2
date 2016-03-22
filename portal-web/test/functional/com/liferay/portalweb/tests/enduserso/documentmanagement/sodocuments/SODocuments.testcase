@@ -1715,53 +1715,6 @@
 		<execute macro="DMDocument#viewDocumentNoCommentsCmdPG" />
 	</command>
 
-	<command name="DeleteDMFolderImage" priority="4">
-		<var name="dmDocumentDescription" value="DM Folder Image Description" />
-		<var name="dmDocumentFile" value="Document_1.jpeg" />
-		<var name="dmDocumentTitle" value="DM Folder Image Title" />
-		<var name="dmDocumentUploader" value="Test Test" />
-		<var name="dmFolderDescription" value="DM Folder Description" />
-		<var name="dmFolderName" value="DM Folder Name" />
-
-		<execute macro="Navigator#gotoPage">
-			<var name="siteName" value="${siteName}" />
-			<var name="siteURL" value="true" />
-		</execute>
-
-		<execute macro="DMFolder#addPG">
-			<var name="dmFolderDescription" value="${dmFolderDescription}" />
-			<var name="dmFolderName" value="${dmFolderName}" />
-		</execute>
-
-		<execute macro="Navigator#gotoPage">
-			<var name="siteName" value="${siteName}" />
-			<var name="siteURL" value="true" />
-		</execute>
-
-		<execute macro="DMNavigator#gotoFolderPG">
-			<var name="dmFolderName" value="${dmFolderName}" />
-		</execute>
-
-		<execute macro="DMDocument#addPG">
-			<var name="dmDocumentDescription" value="${dmDocumentDescription}" />
-			<var name="dmDocumentFile" value="${dmDocumentFile}" />
-			<var name="dmDocumentTitle" value="${dmDocumentTitle}" />
-		</execute>
-
-		<execute macro="Navigator#gotoPage">
-			<var name="siteName" value="${siteName}" />
-			<var name="siteURL" value="true" />
-		</execute>
-
-		<execute macro="DMNavigator#gotoFolderPG">
-			<var name="dmFolderName" value="${dmFolderName}" />
-		</execute>
-
-		<execute macro="DMDocument#deletePG">
-			<var name="dmDocumentTitle" value="${dmDocumentTitle}" />
-		</execute>
-	</command>
-
 	<command name="DeleteDMSubFolderDocument" priority="4">
 		<var name="dmDocumentDescription" value="DM Document Description" />
 		<var name="dmDocumentFile" value="Document_1.doc" />
