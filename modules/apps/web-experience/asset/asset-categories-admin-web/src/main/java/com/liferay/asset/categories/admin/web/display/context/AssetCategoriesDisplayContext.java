@@ -180,8 +180,8 @@ public class AssetCategoriesDisplayContext {
 
 		categoriesSearchContainer.setOrderByType(orderByType);
 
-		EmptyOnClickRowChecker rowChecker = new EmptyOnClickRowChecker(
-			_renderResponse);
+		EmptyOnClickRowChecker emptyOnClickRowChecker =
+			new EmptyOnClickRowChecker(_renderResponse);
 
 		StringBundler sb = new StringBundler(7);
 
@@ -193,9 +193,9 @@ public class AssetCategoriesDisplayContext {
 		sb.append(getCategoryId());
 		sb.append(")");
 
-		rowChecker.setRememberCheckBoxStateURLRegex(sb.toString());
+		emptyOnClickRowChecker.setRememberCheckBoxStateURLRegex(sb.toString());
 
-		categoriesSearchContainer.setRowChecker(rowChecker);
+		categoriesSearchContainer.setRowChecker(emptyOnClickRowChecker);
 
 		List<AssetCategory> categories = null;
 		int categoriesCount = 0;
@@ -373,8 +373,8 @@ public class AssetCategoriesDisplayContext {
 
 		vocabulariesSearchContainer.setOrderByType(orderByType);
 
-		EmptyOnClickRowChecker rowChecker = new EmptyOnClickRowChecker(
-			_renderResponse);
+		EmptyOnClickRowChecker emptyOnClickRowChecker =
+			new EmptyOnClickRowChecker(_renderResponse);
 
 		StringBundler sb = new StringBundler(5);
 
@@ -384,9 +384,9 @@ public class AssetCategoriesDisplayContext {
 		sb.append(getVocabularyId());
 		sb.append(")");
 
-		rowChecker.setRememberCheckBoxStateURLRegex(sb.toString());
+		emptyOnClickRowChecker.setRememberCheckBoxStateURLRegex(sb.toString());
 
-		vocabulariesSearchContainer.setRowChecker(rowChecker);
+		vocabulariesSearchContainer.setRowChecker(emptyOnClickRowChecker);
 
 		List<AssetVocabulary> vocabularies = null;
 		int vocabulariesCount = 0;
