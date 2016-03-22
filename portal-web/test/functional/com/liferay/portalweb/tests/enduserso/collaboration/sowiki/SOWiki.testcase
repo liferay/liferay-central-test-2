@@ -30,19 +30,6 @@
 		<execute macro="SOUser#tearDownCP" />
 	</tear-down>
 
-	<command name="AddSOWikiFrontPage" priority="4">
-		<var name="wikiPageContent" value="Wiki FrontPage Content" />
-
-		<execute macro="Navigator#gotoPage">
-			<var name="siteName" value="${siteName}" />
-			<var name="siteURL" value="true" />
-		</execute>
-
-		<execute macro="WikiPage#addFrontPagePG">
-			<var name="wikiPageContent" value="${wikiPageContent}" />
-		</execute>
-	</command>
-
 	<command name="AddSOWikiFrontPageAttachment" priority="4">
 		<var name="attachmentFileName" value="Document_1.jpg" />
 		<var name="attachmentFileSize" value="13k" />
