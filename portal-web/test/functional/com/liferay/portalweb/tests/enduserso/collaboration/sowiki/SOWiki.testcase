@@ -546,29 +546,6 @@
 </execute>
 	</command>
 
-	<command name="EditSOWikiFrontPage" priority="4">
-		<var name="wikiPageContent" value="Wiki FrontPage Content" />
-		<var name="wikiPageContentEdit" value="Wiki FrontPage Content Edit" />
-
-		<execute macro="Navigator#gotoPage">
-			<var name="siteName" value="${siteName}" />
-			<var name="siteURL" value="true" />
-		</execute>
-
-		<execute macro="WikiPage#addFrontPagePG">
-			<var name="wikiPageContent" value="${wikiPageContent}" />
-		</execute>
-
-		<execute macro="Navigator#gotoPage">
-			<var name="siteName" value="${siteName}" />
-			<var name="siteURL" value="true" />
-		</execute>
-
-		<execute macro="WikiPage#editFrontPagePG">
-			<var name="wikiPageContentEdit" value="${wikiPageContentEdit}" />
-		</execute>
-	</command>
-
 	<command name="EditSOWikiFrontPageChildPageAsMember" priority="4">
 		<var name="userEmailAddress" value="socialoffice01@liferay.com" />
 		<var name="userFirstName" value="Social01" />
