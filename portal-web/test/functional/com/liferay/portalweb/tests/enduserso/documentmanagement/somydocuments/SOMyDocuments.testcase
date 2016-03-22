@@ -2493,29 +2493,6 @@
 		</execute>
 	</command>
 
-	<command name="SearchDocument" priority="4">
-		<var name="dmDocumentDescription" value="DM Document Description" />
-		<var name="dmDocumentFile" value="Document_1.doc" />
-		<var name="dmDocumentTitle" value="DM Document Title" />
-
-		<execute macro="Navigator#gotoPage">
-			<var name="pageName" value="${pageName}" />
-			<var name="soDashboard" value="true" />
-			<var name="soPage" value="true" />
-		</execute>
-
-		<execute macro="DMDocument#addPG">
-			<var name="dmDocumentDescription" value="${dmDocumentDescription}" />
-			<var name="dmDocumentFile" value="${dmDocumentFile}" />
-			<var name="dmDocumentTitle" value="${dmDocumentTitle}" />
-		</execute>
-
-		<execute macro="DMDocument#searchPG">
-			<var name="dmDocumentKeyword" value="${dmDocumentTitle}" />
-			<var name="dmDocumentTitle" value="${dmDocumentTitle}" />
-		</execute>
-	</command>
-
 	<command name="SearchFolderDocument" priority="4">
 		<var name="dmDocumentDescription" value="DM Document Description" />
 		<var name="dmDocumentFile" value="Document_1.doc" />
