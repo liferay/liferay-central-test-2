@@ -265,7 +265,7 @@ public class LiferayDefaultsPlugin extends BaseDefaultsPlugin<LiferayPlugin> {
 	protected Task addTaskBaseline(
 		final Project project, final Configuration baselineConfiguration) {
 
-		Task task;
+		Task task = null;
 
 		if (baselineConfiguration != null) {
 			GradleUtil.applyPlugin(project, ReportingBasePlugin.class);
