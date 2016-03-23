@@ -45,7 +45,7 @@
 		<fail message="Please provide a value for the property &quot;app.version&quot; when running this target.">
 			<condition>
 				<not>
-					<isset property="${app.version}" />
+					<isset property="app.version" />
 				</not>
 			</condition>
 		</fail>
