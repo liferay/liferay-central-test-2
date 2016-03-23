@@ -165,9 +165,12 @@
 			<var name="virtualHostsURL" value="http://www.able.com:8080" />
 		</execute>
 
+		<execute macro="ProductMenu#gotoControlPanelSites">
+			<var name="portlet" value="Sites" />
+		</execute>
+
 		<execute macro="Page#add">
 			<var name="pageName" value="Web Content Page" />
-			<var name="siteName" value="http://www.able.com:8080" />
 			<var name="virtualHostsURL" value="http://www.able.com:8080" />
 		</execute>
 
