@@ -253,7 +253,7 @@ public class VerifyGroup extends VerifyProcess {
 					}
 
 				});
-
+			actionableDynamicQuery.setParallel(true);
 			actionableDynamicQuery.setPerformActionMethod(
 				new ActionableDynamicQuery.PerformActionMethod<Group>() {
 
@@ -271,8 +271,6 @@ public class VerifyGroup extends VerifyProcess {
 					}
 
 				});
-
-			actionableDynamicQuery.setParallel(true);
 
 			actionableDynamicQuery.performActions();
 		}
