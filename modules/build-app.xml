@@ -163,8 +163,11 @@
 
 	<target name="write-app-change-log" depends="dist-module-artifacts">
 		<antcall target="write-app-change-log-header" />
+
 		<antcall target="record-app-change-log" />
+
 		<antcall target="record-app-git-id" />
+
 		<antcall target="record-app-module-versions" />
 	</target>
 
@@ -174,7 +177,9 @@
 		</condition>
 
 		<echo append="true" file="${releng.app.dir}/app.changelog" message="${app.change.log.version.separator}#${line.separator}" />
+
 		<echo append="true" file="${releng.app.dir}/app.changelog" message="# Liferay App Version ${app.version}${line.separator}" />
+
 		<echo append="true" file="${releng.app.dir}/app.changelog" message="#${line.separator}" />
 	</target>
 </project>
