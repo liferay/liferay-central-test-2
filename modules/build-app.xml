@@ -42,11 +42,11 @@
 	<target name="build-app" depends="dist-module-artifacts,write-app-changelog" />
 
 	<target name="check-stale-artifacts">
-		<exec executable="${gradle.wrapper.path}" outputproperty="stale.artifacts">
+		<exec executable="${gradle.wrapper.path}" outputproperty="stale.artifacts.output">
 			<arg value="printStaleArtifact" />
 			<arg value="-q" />
 		</exec>
-		<fail if="${stale.artifacts}" message="Stale artifacts detected:{line.separator}${stale.artifacts}" />
+		<fail if="${stale.artifacts.output}" message="Stale artifacts detected:{line.separator}${stale.artifacts.output}" />
 	</target>
 
 	<target name="clean-app">
