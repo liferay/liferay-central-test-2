@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE project>
 
-<project name="build-app-module" xmlns:artifact="antlib:org.apache.maven.artifact.ant">
+<project name="build-app-module">
 	<property file="bnd.bnd" />
 
 	<pathconvert property="releng.dir">
@@ -31,8 +31,6 @@
 				<linecontains>
 					<contains value="artifact.url=" />
 				</linecontains>
-
-				<replacestring from="https://cdn." to="http://" />
 			</filterchain>
 		</loadproperties>
 
@@ -60,7 +58,6 @@
 
 				<tokenfilter>
 					<filetokenizer />
-
 					<replaceregex flags="g" pattern="[0-9a-f]{40}\^\.\.[0-9a-f]{40}=" replace="" />
 					<replaceregex flags="g" pattern="\n|\r\n" replace=" " />
 				</tokenfilter>
@@ -94,7 +91,6 @@
 
 				<tokenfilter>
 					<filetokenizer />
-
 					<replaceregex flags="g" pattern="[0-9a-f]{40}\^\.\.[0-9a-f]{40}=" replace="" />
 					<replaceregex flags="g" pattern="\n|\r\n" replace=" " />
 				</tokenfilter>

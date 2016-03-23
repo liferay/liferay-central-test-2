@@ -1,7 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE project>
 
-<project name="build-app" xmlns:artifact="antlib:org.apache.maven.artifact.ant">
+<project name="build-app">
+	<import file="build-app-module.xml" />
+
 	<condition property="app.first.version">
 		<not>
 			<available file="app.changelog" />
@@ -14,7 +16,6 @@
 
 	<pathconvert pathsep="," property="app.module.dirs">
 		<globmapper from="${modules.dir}${file.separator}*" to="*" />
-
 		<path>
 			<dirset dir="${basedir}" excludes="**/*-test">
 				<present targetdir="${basedir}">
@@ -45,7 +46,6 @@
 			<arg value="printStaleArtifact" />
 			<arg value="-q" />
 		</exec>
-
 		<fail if="${stale.artifacts}" message="Stale artifacts detected:{line.separator}${stale.artifacts}" />
 	</target>
 
@@ -56,7 +56,6 @@
 	<target name="dist-module-artifacts" depends="check-stale-artifacts,get-artifact-versions-previous-release">
 		<subant target="dist-module-artifact">
 			<dirset dir="${modules.dir}" excludes="${build.modules.excludes}" includes="${app.module.dirs}" />
-
 			<property name="app.dir" value="${basedir}" />
 			<property name="app.first.version" value="${app.first.version}" />
 			<property name="artifact.versions.previous.release" value="${artifact.versions.previous.release}" />
@@ -90,6 +89,18 @@
 		<set-artifact-versions-previous-release app.version.previous.release="${app.version.previous.release}" />
 	</target>
 
+	<target name="record-app-module-versions" depends="dist-module-artifacts,record-app-ticket-list">
+		<pathconvert property="module.versions.list" pathsep=",\${line.separator}&#x0009;">
+			<flattenmapper />
+
+			<path>
+				<fileset dir="${dist.dir}" includes="*.jar" />
+			</path>
+		</pathconvert>
+
+		<echo append="true" file="app.changelog" message="${line.separator}${line.separator}modules-${app.version}=\${line.separator}&#x0009;${module.versions.list}" />
+	</target>
+
 	<target name="record-app-ticket-list" depends="dist-module-artifacts">
 		<condition property="app.change.log.version.separator" value="" else="${line.separator}${line.separator}">
 			<istrue value="${app.first.version}" />
@@ -108,18 +119,6 @@
 		</loadfile>
 
 		<echo append="true" file="app.changelog" message="${line.separator}change-log-${app.version}=${app.ticket.list}" />
-	</target>
-
-	<target name="record-app-module-versions" depends="dist-module-artifacts,record-app-ticket-list">
-		<pathconvert property="module.versions.list" pathsep=",\${line.separator}&#x0009;">
-			<flattenmapper />
-
-			<path>
-				<fileset dir="${dist.dir}" includes="*.jar" />
-			</path>
-		</pathconvert>
-
-		<echo append="true" file="app.changelog" message="${line.separator}${line.separator}modules-${app.version}=\${line.separator}&#x0009;${module.versions.list}" />
 	</target>
 
 	<target name="write-app-changelog" depends="dist-module-artifacts,record-app-module-versions,record-app-ticket-list" />
