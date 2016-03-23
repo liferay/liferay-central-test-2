@@ -30,8 +30,6 @@ import com.liferay.portal.kernel.service.PortletPreferencesLocalService;
 import com.liferay.portal.kernel.service.ResourcePermissionLocalService;
 import com.liferay.portal.kernel.util.StringUtil;
 
-import java.util.List;
-
 /**
  * @author Marcellus Tavares
  */
@@ -47,28 +45,47 @@ public class UpgradeDDLFormPortletId
 	}
 
 	protected void deleteResourcePermissions(
-		String oldRootPortletId, String newRootPortletId) {
+			final String oldRootPortletId, final String newRootPortletId)
+		throws PortalException {
 
-		DynamicQuery dynamicQuery =
-			_resourcePermissionLocalService.dynamicQuery();
+		ActionableDynamicQuery actionableDynamicQuery =
+			_resourcePermissionLocalService.getActionableDynamicQuery();
 
-		Property nameProperty = PropertyFactoryUtil.forName("name");
+		actionableDynamicQuery.setAddCriteriaMethod(
+			new ActionableDynamicQuery.AddCriteriaMethod() {
 
-		dynamicQuery.add(nameProperty.eq(new String(oldRootPortletId)));
+				@Override
+				public void addCriteria(DynamicQuery dynamicQuery) {
+					Property nameProperty = PropertyFactoryUtil.forName("name");
 
-		List<ResourcePermission> resourcePermissions =
-			_resourcePermissionLocalService.dynamicQuery(dynamicQuery);
+					dynamicQuery.add(
+						nameProperty.eq(new String(oldRootPortletId)));
+				}
 
-		for (ResourcePermission resourcePermission : resourcePermissions) {
-			long total = getResourcePermissionCount(
-				resourcePermission.getCompanyId(), newRootPortletId,
-				resourcePermission.getScope(), resourcePermission.getRoleId());
+			});
 
-			if (total > 0) {
-				_resourcePermissionLocalService.deleteResourcePermission(
-					resourcePermission);
-			}
-		}
+		actionableDynamicQuery.setPerformActionMethod(
+			new ActionableDynamicQuery.
+				PerformActionMethod<ResourcePermission>() {
+
+				@Override
+				public void performAction(ResourcePermission resourcePermission)
+					throws PortalException {
+
+					long total = getResourcePermissionCount(
+						resourcePermission.getCompanyId(), newRootPortletId,
+						resourcePermission.getScope(),
+						resourcePermission.getRoleId());
+
+					if (total > 0) {
+						_resourcePermissionLocalService.
+							deleteResourcePermission(resourcePermission);
+					}
+				}
+
+			});
+
+		actionableDynamicQuery.performActions();
 	}
 
 	@Override
@@ -82,28 +99,41 @@ public class UpgradeDDLFormPortletId
 	}
 
 	protected long getResourcePermissionCount(
-		long companyId, String name, int scope, long roleId) {
+			final long companyId, final String name, final int scope,
+			final long roleId)
+		throws PortalException {
 
-		DynamicQuery dynamicQuery =
-			_resourcePermissionLocalService.dynamicQuery();
+		ActionableDynamicQuery actionableDynamicQuery =
+			_resourcePermissionLocalService.getActionableDynamicQuery();
 
-		Property companyIdProperty = PropertyFactoryUtil.forName("companyId");
+		actionableDynamicQuery.setAddCriteriaMethod(
+			new ActionableDynamicQuery.AddCriteriaMethod() {
 
-		dynamicQuery.add(companyIdProperty.eq(companyId));
+				@Override
+				public void addCriteria(DynamicQuery dynamicQuery) {
+					Property companyIdProperty = PropertyFactoryUtil.forName(
+						"companyId");
 
-		Property nameProperty = PropertyFactoryUtil.forName("name");
+					dynamicQuery.add(companyIdProperty.eq(companyId));
 
-		dynamicQuery.add(nameProperty.eq(name));
+					Property nameProperty = PropertyFactoryUtil.forName("name");
 
-		Property scopeProperty = PropertyFactoryUtil.forName("scope");
+					dynamicQuery.add(nameProperty.eq(name));
 
-		dynamicQuery.add(scopeProperty.eq(scope));
+					Property scopeProperty = PropertyFactoryUtil.forName(
+						"scope");
 
-		Property roleIdProperty = PropertyFactoryUtil.forName("roleId");
+					dynamicQuery.add(scopeProperty.eq(scope));
 
-		dynamicQuery.add(roleIdProperty.eq(roleId));
+					Property roleIdProperty = PropertyFactoryUtil.forName(
+						"roleId");
 
-		return _resourcePermissionLocalService.dynamicQueryCount(dynamicQuery);
+					dynamicQuery.add(roleIdProperty.eq(roleId));
+				}
+
+			});
+
+		return actionableDynamicQuery.performCount();
 	}
 
 	@Override
