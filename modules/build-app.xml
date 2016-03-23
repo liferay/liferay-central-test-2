@@ -39,7 +39,9 @@
 		</sequential>
 	</macrodef>
 
-	<target name="build-app" depends="dist-module-artifacts,write-app-changelog" />
+	<target name="build-app" depends="dist-module-artifacts,write-app-changelog">
+		<delete file="${dist.dir}/ticket.list.tmp" />
+	</target>
 
 	<target name="check-app-version">
 		<fail message="Please provide a value for the property &quot;app.version&quot; when running this target.">
