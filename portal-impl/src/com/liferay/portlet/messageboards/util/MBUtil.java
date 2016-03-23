@@ -809,7 +809,8 @@ public class MBUtil {
 			editorName = "ckeditor_bbcode";
 
 			if (_log.isWarnEnabled()) {
-				_log.warn("Replacing unsupported BBCode editor with CKEditor BBCode");
+				_log.warn(
+					"Replacing unsupported BBCode editor with CKEditor BBCode");
 			}
 		}
 
