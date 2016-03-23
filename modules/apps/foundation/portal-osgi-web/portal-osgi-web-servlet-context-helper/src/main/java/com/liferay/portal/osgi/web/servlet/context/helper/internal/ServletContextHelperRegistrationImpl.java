@@ -317,7 +317,7 @@ public class ServletContextHelperRegistrationImpl
 			xmlReader.parse(new InputSource(inputStream));
 		}
 		catch (Exception e) {
-			_logger.log(Logger.LOG_WARNING, "Could not parse web.xml", e);
+			_logger.log(Logger.LOG_WARNING, "Unable to parse web.xml", e);
 		}
 	}
 
