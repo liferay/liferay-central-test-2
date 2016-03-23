@@ -48,6 +48,7 @@ roles = UsersAdminUtil.filterGroupRoles(permissionChecker, groupId, roles);
 int rolesCount = roles.size();
 
 roleSearch.setTotal(rolesCount);
+
 roleSearch.setResults(ListUtil.subList(roles, roleSearch.getStart(), roleSearch.getEnd()));
 %>
 
