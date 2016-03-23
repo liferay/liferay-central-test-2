@@ -1,4 +1,4 @@
-Bundle-Name: Liferay Portal Content
+Bundle-Name: Liferay Content Utilities
 Bundle-SymbolicName: com.liferay.content.util
 Bundle-Version: 1.0.0
 Export-Package: com.liferay.content.util
