@@ -17,11 +17,9 @@
 <%@ include file="/init.jsp" %>
 
 <%
-String windowId = HtmlUtil.escape(PortalUtil.getPortletId(request)) + "_editAsset";
-
 Map<String, Object> data = new HashMap<String, Object>();
 
-data.put("id", windowId);
+data.put("id", HtmlUtil.escape(PortalUtil.getPortletId(request)) + "_editAsset");
 %>
 
 <liferay-ui:icon
