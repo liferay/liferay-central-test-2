@@ -122,12 +122,6 @@
 		<property name="app.version.previous" value="0.0.0" />
 	</target>
 
-	<target name="get-artifact-versions-previous-release" depends="get-app-version-previous-release">
-		<property file="${releng.app.dir}/app.changelog" />
-
-		<set-artifact-versions-previous-release app.version.previous.release="${app.version.previous.release}" />
-	</target>
-
 	<target name="get-app-artifacts">
 		<pathconvert property="module.versions.list" pathsep=",\${line.separator}&#x0009;">
 			<flattenmapper />
@@ -167,6 +161,12 @@
 		</exec>
 
 		<property name="app.git.id" value="app.git.id-${app.version}=${git.rev.parse.output}" />
+	</target>
+
+	<target name="get-artifact-versions-previous-release" depends="get-app-version-previous-release">
+		<property file="${releng.app.dir}/app.changelog" />
+
+		<set-artifact-versions-previous-release app.version.previous.release="${app.version.previous.release}" />
 	</target>
 
 	<target name="write-app-change-log" depends="dist-module-artifacts,get-app-artifacts,get-app-change-log,get-app-change-log-header,get-app-git-id">
