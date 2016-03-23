@@ -170,6 +170,15 @@ public class UpgradeSubscription extends UpgradeProcess {
 		}
 	}
 
+	/**
+	 * @deprecated As of 7.0.0, with no direct replacement
+	 */
+	@Deprecated
+	protected void updateSubscriptionGroupId(
+			long subscriptionId, long classNameId, long classPK)
+		throws Exception {
+	}
+
 	protected void updateSubscriptionGroupIds() throws Exception {
 		try (LoggingTimer loggingTimer = new LoggingTimer();
 			PreparedStatement ps1 = connection.prepareStatement(
