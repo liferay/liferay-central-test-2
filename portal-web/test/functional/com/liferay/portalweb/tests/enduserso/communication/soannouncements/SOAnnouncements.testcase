@@ -1545,41 +1545,6 @@
 		</execute>
 	</command>
 
-	<command name="MarkAsReadSOAnnouncementsEntry" priority="4">
-		<var name="entryContent" value="Announcements Entry Content" />
-		<var name="entryTitle" value="Announcements Entry Title" />
-		<var name="entryURL" value="http://www.google.com" />
-
-		<execute macro="SOUserBar#addSOSite">
-			<var name="siteDescription" value="${siteDescription}" />
-			<var name="siteName" value="${siteName}" />
-			<var name="siteType" value="${siteType}" />
-		</execute>
-
-		<execute macro="Navigator#openSiteURL">
-			<var name="siteName" value="${siteName}" />
-		</execute>
-
-		<execute macro="SOAnnouncementsEntry#addPG">
-			<var name="distributionScope" value="${siteName}" />
-			<var name="entryContent" value="${entryContent}" />
-			<var name="entryTitle" value="${entryTitle}" />
-			<var name="entryURL" value="${entryURL}" />
-		</execute>
-
-		<execute macro="Navigator#openSiteURL">
-			<var name="siteName" value="${siteName}" />
-		</execute>
-
-		<execute macro="SOAnnouncementsEntry#markAsReadPG">
-			<var name="distributionScope" value="${siteName}" />
-			<var name="entryAuthor" value="${adminName}" />
-			<var name="entryContent" value="${entryContent}" />
-			<var name="entryTitle" value="${entryTitle}" />
-			<var name="entryURL" value="${entryURL}" />
-		</execute>
-	</command>
-
 	<command name="MarkAsReadSOAnnouncementsEntryAndViewMore" priority="4">
 		<var name="entryContent">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam iaculis lacus risus, a dignissim turpis volutpat lobortis. Etiam tincidunt quis nisl a mollis. Fusce eget ultricies ligula, vel pharetra mi. Vivamus ut congue eros. Integer sit amet diam libero. Sed at justo aliquam, sodales arcu id, ullamcorper metus. Vestibulum feugiat nisl eu lectus egestas, sit amet vestibulum diam volutpat. Vivamus et congue dui. Etiam ac viverra urna, a rhoncus metus. Maecenas lorem est, semper vitae tempor in, gravida in neque. Morbi lacinia varius laoreet. Aenean in ipsum vel mauris volutpat varius. Donec feugiat nunc at diam sagittis, eu tempus turpis porta. Praesent non interdum est. Curabitur tincidunt congue tempor. Mauris ac imperdiet augue, sed gravida ligula. Ut ac gravida est, vitae dignissim erat. Curabitur placerat vulputate fringilla. Nam commodo ante vitae tempor convallis. Donec at est at turpis scelerisque ornare. Donec tincidunt, ex quis ornare commodo, orci nibh ornare leo, vitae lobortis leo purus vitae felis. Pellentesque non libero et orci faucibus viverra. Vivamus dignissim ante ut mollis cursus. Pellentesque eu lorem mi. Fusce eu sem dictum, aliquet risus vel, molestie sapien. Maecenas dapibus nulla ante, vitae tristique nisi ultricies non. Proin egestas facilisis neque, ut accumsan leo finibus eu. Phasellus faucibus turpis sit amet nibh rhoncus pulvinar.</var>
 		<var name="entryTitle" value="Announcements Entry Title" />
