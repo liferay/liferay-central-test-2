@@ -20,7 +20,7 @@
 
 <aui:nav-bar markupView="lexicon">
 	<aui:nav cssClass="navbar-nav">
-		<aui:nav-item href="<%= layoutPrototypeDisplayContext.getPortletURL().toString() %>" label="templates" selected="<%= true %>" />
+		<aui:nav-item href="<%= String.valueOf(layoutPrototypeDisplayContext.getPortletURL()) %>" label="templates" selected="<%= true %>" />
 	</aui:nav>
 </aui:nav-bar>
 
