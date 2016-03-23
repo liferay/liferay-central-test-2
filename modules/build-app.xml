@@ -6,7 +6,7 @@
 
 	<pathconvert property="releng.app.dir">
 		<filtermapper>
-			<replacestring from="modules" to="modules${file.separator}.releng" />
+			<replacestring from="modules${file.separator}apps" to="modules${file.separator}.releng${file.separator}apps" />
 		</filtermapper>
 
 		<path>
@@ -173,17 +173,11 @@
 		<property name="double.space" value="${line.separator}${line.separator}" />
 
 		<echo append="true" file="${releng.app.dir}/app.changelog" message="${app.change.log.header}" />
-
 		<echo append="true" file="${releng.app.dir}/app.changelog" message="${double.space}" />
-
 		<echo append="true" file="${releng.app.dir}/app.changelog" message="${app.artifacts}" />
-
 		<echo append="true" file="${releng.app.dir}/app.changelog" message="${double.space}" />
-
 		<echo append="true" file="${releng.app.dir}/app.changelog" message="${app.change.log}" />
-
 		<echo append="true" file="${releng.app.dir}/app.changelog" message="${double.space}" />
-
 		<echo append="true" file="${releng.app.dir}/app.changelog" message="${app.git.id}" />
 	</target>
 </project>
