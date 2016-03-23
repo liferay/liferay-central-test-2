@@ -18,5 +18,4 @@ dependencies {
 	provided group: "org.jabsorb", name: "jabsorb", version: "1.3.1"
 	provided group: "org.osgi", name: "org.osgi.service.component.annotations", version: "1.3.0"
 	provided group: "org.springframework", name: "spring-context", version: "3.2.15.RELEASE"
-	provided project(":apps:foundation:content:content-util")
 }
