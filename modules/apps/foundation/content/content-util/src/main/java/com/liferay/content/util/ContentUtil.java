@@ -26,6 +26,7 @@ import java.util.Map;
 /**
  * @author Brian Wing Shun Chan
  * @author Raymond Augé
+ * @author Peter Fellwock
  */
 public class ContentUtil {
 
