@@ -102,26 +102,6 @@
 		</subant>
 	</target>
 
-	<target name="get-app-version-previous-release">
-		<loadfile failonerror="false" property="app.version.previous.release" srcfile="${releng.app.dir}/app.changelog">
-			<filterchain>
-				<linecontains>
-					<contains value="# " />
-				</linecontains>
-
-				<striplinebreaks />
-
-				<tailfilter lines="1" />
-
-				<tokenfilter>
-					<replaceregex pattern="^.*?(\d[\d.]+\d)$" replace="\1" />
-				</tokenfilter>
-			</filterchain>
-		</loadfile>
-
-		<property name="app.version.previous" value="0.0.0" />
-	</target>
-
 	<target name="get-app-artifacts">
 		<pathconvert property="module.versions.list" pathsep=",\${line.separator}&#x0009;">
 			<flattenmapper />
@@ -161,6 +141,26 @@
 		</exec>
 
 		<property name="app.git.id" value="app.git.id-${app.version}=${git.rev.parse.output}" />
+	</target>
+
+	<target name="get-app-version-previous-release">
+		<loadfile failonerror="false" property="app.version.previous.release" srcfile="${releng.app.dir}/app.changelog">
+			<filterchain>
+				<linecontains>
+					<contains value="# " />
+				</linecontains>
+
+				<striplinebreaks />
+
+				<tailfilter lines="1" />
+
+				<tokenfilter>
+					<replaceregex pattern="^.*?(\d[\d.]+\d)$" replace="\1" />
+				</tokenfilter>
+			</filterchain>
+		</loadfile>
+
+		<property name="app.version.previous" value="0.0.0" />
 	</target>
 
 	<target name="get-artifact-versions-previous-release" depends="get-app-version-previous-release">
