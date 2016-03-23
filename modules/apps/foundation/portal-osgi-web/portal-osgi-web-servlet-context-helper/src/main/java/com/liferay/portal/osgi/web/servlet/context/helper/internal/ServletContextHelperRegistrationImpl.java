@@ -293,34 +293,6 @@ public class ServletContextHelperRegistrationImpl
 			properties);
 	}
 
-	private void collectContextInitParams(
-		Dictionary<String, Object> properties) {
-
-		if (!_wabShapedBundle) {
-			return;
-		}
-
-		URL url = _bundle.getEntry("WEB-INF/web.xml");
-
-		if (url == null) {
-			return;
-		}
-
-		try (InputStream inputStream = url.openStream()) {
-			SAXParser saxParser = _saxParserFactory.newSAXParser();
-
-			XMLReader xmlReader = saxParser.getXMLReader();
-
-			xmlReader.setContentHandler(
-				new ContextInitParamHandler(properties));
-
-			xmlReader.parse(new InputSource(inputStream));
-		}
-		catch (Exception e) {
-			_logger.log(Logger.LOG_WARNING, "Unable to parse web.xml", e);
-		}
-	}
-
 	protected ServiceRegistration<ServletContextListener>
 		createServletContextListener() {
 
@@ -364,6 +336,34 @@ public class ServletContextHelperRegistrationImpl
 		contextPath = contextPath.substring(1);
 
 		return contextPath.replaceAll("[^a-zA-Z0-9\\-]", "");
+	}
+
+	private void collectContextInitParams(
+		Dictionary<String, Object> properties) {
+
+		if (!_wabShapedBundle) {
+			return;
+		}
+
+		URL url = _bundle.getEntry("WEB-INF/web.xml");
+
+		if (url == null) {
+			return;
+		}
+
+		try (InputStream inputStream = url.openStream()) {
+			SAXParser saxParser = _saxParserFactory.newSAXParser();
+
+			XMLReader xmlReader = saxParser.getXMLReader();
+
+			xmlReader.setContentHandler(
+				new ContextInitParamHandler(properties));
+
+			xmlReader.parse(new InputSource(inputStream));
+		}
+		catch (Exception e) {
+			_logger.log(Logger.LOG_WARNING, "Unable to parse web.xml", e);
+		}
 	}
 
 	private static final String _JSP_SERVLET_INIT_PARAM_PREFIX =
