@@ -240,8 +240,9 @@
 
 		<execute macro="User#firstLoginPG" />
 
-		<execute macro="Navigator#gotoPage">
+		<execute macro="Navigator#gotoSitePage">
 			<var name="pageName" value="Web Content Page" />
+			<var name="siteName" value="Organization Name" />
 		</execute>
 
 		<execute macro="WebContent#viewPGViaAP">
