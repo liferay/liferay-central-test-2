@@ -6,7 +6,7 @@
 
 	<pathconvert property="releng.module.dir">
 		<filtermapper>
-			<replacestring from="modules" to="modules${file.separator}.releng" />
+			<replacestring from="modules${file.separator}apps" to="modules${file.separator}.releng${file.separator}apps" />
 		</filtermapper>
 
 		<path>
