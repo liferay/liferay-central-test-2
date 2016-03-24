@@ -63,7 +63,6 @@ public class UpgradeDDLFormPortletId
 				}
 
 			});
-
 		actionableDynamicQuery.setPerformActionMethod(
 			new ActionableDynamicQuery.
 				PerformActionMethod<ResourcePermission>() {
@@ -72,7 +71,7 @@ public class UpgradeDDLFormPortletId
 				public void performAction(ResourcePermission resourcePermission)
 					throws PortalException {
 
-					long total = getResourcePermissionCount(
+					long total = getResourcePermissionsCount(
 						resourcePermission.getCompanyId(), newRootPortletId,
 						resourcePermission.getScope(),
 						resourcePermission.getRoleId());
@@ -98,7 +97,7 @@ public class UpgradeDDLFormPortletId
 		};
 	}
 
-	protected long getResourcePermissionCount(
+	protected long getResourcePermissionsCount(
 			final long companyId, final String name, final int scope,
 			final long roleId)
 		throws PortalException {
