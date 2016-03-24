@@ -185,6 +185,7 @@ public class UpgradeCustomizablePortlets extends UpgradeProcess {
 							ps.setString(8, newPortletId);
 
 							newPortletIds.add(newPortletId);
+
 							ps.addBatch();
 						}
 					}
