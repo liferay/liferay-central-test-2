@@ -177,11 +177,17 @@
 		<property name="double.space" value="${line.separator}${line.separator}" />
 
 		<echo append="true" file="${releng.app.dir}/app.changelog" message="${app.change.log.header}" />
+
 		<echo append="true" file="${releng.app.dir}/app.changelog" message="${double.space}" />
+
 		<echo append="true" file="${releng.app.dir}/app.changelog" message="${app.artifacts}" />
+
 		<echo append="true" file="${releng.app.dir}/app.changelog" message="${double.space}" />
+
 		<echo append="true" file="${releng.app.dir}/app.changelog" message="${app.change.log}" />
+
 		<echo append="true" file="${releng.app.dir}/app.changelog" message="${double.space}" />
+
 		<echo append="true" file="${releng.app.dir}/app.changelog" message="${app.git.id}" />
 	</target>
 </project>
