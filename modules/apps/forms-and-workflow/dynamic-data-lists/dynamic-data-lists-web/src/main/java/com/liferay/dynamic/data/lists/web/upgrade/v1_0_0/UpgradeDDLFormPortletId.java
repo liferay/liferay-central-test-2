@@ -209,12 +209,13 @@ public class UpgradeDDLFormPortletId
 			portletPreferences.getPortletId(), oldRootPortletId,
 			newRootPortletId);
 
+		portletPreferences.setPortletId(newPortletId);
+
 		String newPreferences = StringUtil.replace(
 			portletPreferences.getPreferences(), "</portlet-preferences>",
 			"<preference><name>formView</name><value>true</value>" +
 				"</preference></portlet-preferences>");
 
-		portletPreferences.setPortletId(newPortletId);
 		portletPreferences.setPreferences(newPreferences);
 
 		_portletPreferencesLocalService.updatePortletPreferences(
