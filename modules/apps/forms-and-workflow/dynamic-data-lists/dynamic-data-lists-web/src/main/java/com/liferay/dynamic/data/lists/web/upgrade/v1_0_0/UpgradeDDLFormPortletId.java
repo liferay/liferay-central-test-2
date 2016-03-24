@@ -148,21 +148,20 @@ public class UpgradeDDLFormPortletId
 
 				@Override
 				public void addCriteria(DynamicQuery dynamicQuery) {
-					Junction disjunction =
-						RestrictionsFactoryUtil.disjunction();
+					Junction junction = RestrictionsFactoryUtil.disjunction();
 
 					Property portletIdProperty = PropertyFactoryUtil.forName(
 						"portletId");
 
-					disjunction.add(portletIdProperty.eq(oldRootPortletId));
-					disjunction.add(
+					junction.add(portletIdProperty.eq(oldRootPortletId));
+					junction.add(
 						portletIdProperty.like(
 							oldRootPortletId + "_INSTANCE_%"));
-					disjunction.add(
+					junction.add(
 						portletIdProperty.like(
 							oldRootPortletId + "_USER_%_INSTANCE_%"));
 
-					dynamicQuery.add(disjunction);
+					dynamicQuery.add(junction);
 				}
 
 			});
