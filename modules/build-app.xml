@@ -119,6 +119,10 @@
 			<filterchain>
 				<sortfilter />
 
+				<tokenfilter>
+					<replacestring from="  " to=" " />
+				</tokenfilter>
+
 				<uniqfilter />
 			</filterchain>
 		</loadfile>
