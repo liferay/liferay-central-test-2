@@ -363,6 +363,19 @@
 			<var name="portlet" value="Forms" />
 		</execute>
 
+		<execute macro="FormsAdminNavigator#gotoViewEntries" />
+
+		<execute macro="FormsAdmin#viewFormTableEntry">
+			<var name="fieldLabel" value="Text Field" />
+			<var name="fieldValue" value="Published form text entry" />
+		</execute>
+
+		<execute macro="Navigator#openURL" />
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Forms" />
+		</execute>
+
 		<execute macro="FormsAdminNavigator#gotoEditFormByName" />
 
 		<execute macro="FormsAdminNavigator#gotoPublish" />
