@@ -587,31 +587,6 @@
 		</execute>
 	</command>
 
-	<command name="AddSOBlogsEntryTitleNull" priority="4">
-		<var name="entryContent" value="Blogs Entry Content" />
-		<var name="entryTitle" value="" />
-
-		<execute macro="Navigator#gotoPage">
-			<var name="siteName" value="${siteName}" />
-			<var name="siteURL" value="true" />
-		</execute>
-
-		<execute macro="Blogs#addEntry">
-			<var name="entryContent" value="${entryContent}" />
-			<var name="entryInvalidTitle" value="true" />
-			<var name="entryTitle" value="${entryTitle}" />
-		</execute>
-
-		<execute macro="Navigator#gotoPage">
-			<var name="siteName" value="${siteName}" />
-			<var name="siteURL" value="true" />
-		</execute>
-
-		<execute macro="BlogsEntry#viewNoPG">
-			<var name="entryTitle" value="${entryContent}" />
-		</execute>
-	</command>
-
 	<command name="AddSOBlogsEntryWithSamePageScope" priority="3">
 		<var name="entryContent" value="Blogs Entry1 Content" />
 		<var name="entryContent2" value="Blogs Entry2 Content" />
