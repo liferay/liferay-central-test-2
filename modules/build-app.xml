@@ -120,7 +120,7 @@
 				<sortfilter />
 
 				<tokenfilter>
-					<replacestring from="  " to=" " />
+					<replaceregex flags="g" pattern="([^ ]|^) +([^ ]|$)" replace="\1 \2" />
 				</tokenfilter>
 
 				<uniqfilter />
