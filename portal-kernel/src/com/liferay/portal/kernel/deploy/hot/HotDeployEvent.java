@@ -47,10 +47,6 @@ import javax.servlet.ServletContext;
 @ProviderType
 public class HotDeployEvent {
 
-	/**
-	 * Only use this constructor in situations where
-	 * {@link javax.servlet.SerlvetContext#getClassLoader()} is allowed.
-	 */
 	public HotDeployEvent(ServletContext servletContext) {
 		this(servletContext, servletContext.getClassLoader());
 	}
