@@ -33,11 +33,11 @@ public class ReplacePortletId extends UpgradePortletId {
 			"select count(*) from ResourceAction where name = ?", name);
 	}
 
-	protected boolean hasResourcePermission(String newName)
+	protected boolean hasResourcePermission(String name)
 		throws SQLException {
 
 		return hasRow(
-			"select count(*) from ResourcePermission where name = ?", newName);
+			"select count(*) from ResourcePermission where name = ?", name);
 	}
 
 	protected boolean hasRow(String sql, String value)
@@ -75,9 +75,9 @@ public class ReplacePortletId extends UpgradePortletId {
 		throws Exception {
 
 		if (hasResourceAction(newName)) {
-			String sql = "delete from ResourceAction where name = ?";
+			try (PreparedStatement ps = connection.prepareStatement(
+					"delete from ResourceAction where name = ?")) {
 
-			try (PreparedStatement ps = connection.prepareStatement(sql)) {
 				ps.setString(1, oldName);
 
 				ps.execute();
@@ -95,9 +95,8 @@ public class ReplacePortletId extends UpgradePortletId {
 		throws Exception {
 
 		if (hasResourcePermission(newRootPortletId)) {
-			String sql = "delete from ResourcePermission where name = ?";
-
-			try (PreparedStatement ps = connection.prepareStatement(sql)) {
+			try (PreparedStatement ps = connection.prepareStatement(
+					"delete from ResourcePermission where name = ?")) {
 				ps.setString(1, oldRootPortletId);
 
 				ps.execute();
