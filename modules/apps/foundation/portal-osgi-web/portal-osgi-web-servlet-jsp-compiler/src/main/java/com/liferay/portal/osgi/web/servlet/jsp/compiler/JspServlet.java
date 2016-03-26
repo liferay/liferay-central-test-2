@@ -479,6 +479,7 @@ public class JspServlet extends HttpServlet {
 			Method equalsHandlerMethod =
 				JspServletContextInvocationHandler.class.getMethod(
 					"equals", Object.class);
+
 			methods.put(equalsMethod, equalsHandlerMethod);
 
 			Method hashCodeMethod = Object.class.getMethod(
@@ -487,6 +488,7 @@ public class JspServlet extends HttpServlet {
 			Method hashCodeHandlerMethod =
 				JspServletContextInvocationHandler.class.getMethod(
 					"hashCode", (Class<?>[])null);
+
 			methods.put(hashCodeMethod, hashCodeHandlerMethod);
 		}
 		catch (NoSuchMethodException nsme) {
