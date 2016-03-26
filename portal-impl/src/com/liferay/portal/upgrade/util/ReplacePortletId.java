@@ -25,24 +25,19 @@ public class ReplacePortletId extends UpgradePortletId {
 
 	protected boolean hasPortlet(String portletId) throws SQLException {
 		return hasRow(
-			"select count(portletId) from Portlet where portletId = ?",
-			portletId);
+			"select count(*) from Portlet where portletId = ?", portletId);
 	}
 
 	protected boolean hasResourceAction(String name) throws SQLException {
 		return hasRow(
-			"select count(resourceActionId) from ResourceAction where name " +
-				"= ?",
-			name);
+			"select count(*) from ResourceAction where name = ?", name);
 	}
 
 	protected boolean hasResourcePermission(String newName)
 		throws SQLException {
 
 		return hasRow(
-			"select count(resourcePermissionId) from ResourcePermission " +
-				"where name = ?",
-			newName);
+			"select count(*) from ResourcePermission where name = ?", newName);
 	}
 
 	protected boolean hasRow(String sql, String value)
