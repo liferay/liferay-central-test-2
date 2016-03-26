@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1459032042288
+Bnd-LastModified: 1459033438511
 Bundle-ManifestVersion: 2
 Bundle-Name: portal-bootstrap
 Bundle-SymbolicName: portal-bootstrap
@@ -3474,7 +3474,7 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  .portal.kernel.upgrade";version="1.0.0",com.liferay.portal.upgrade.da
  o.orm;uses:="com.liferay.portal.kernel.dao.db,com.liferay.portal.kern
  el.upgrade.dao.orm";version="1.0.0",com.liferay.portal.upgrade.util;v
- ersion="1.0.2";uses:="com.liferay.portal.kernel.security.pacl,com.lif
+ ersion="1.1.0";uses:="com.liferay.portal.kernel.security.pacl,com.lif
  eray.portal.kernel.upgrade,com.liferay.portal.kernel.upgrade.util,com
  .liferay.portal.kernel.xml",com.liferay.portal.upgrade.v5_2_5_to_6_0_
  0;uses:="com.liferay.portal.kernel.upgrade";version="1.0.0",com.lifer
@@ -3508,7 +3508,7 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  iferay.portal.kernel.xml,com.liferay.portal.upgrade.util,com.liferay.
  portlet,javax.portlet";version="1.0.0",com.liferay.portal.upgrade.v6_
  2_0.util;version="1.0.0",com.liferay.portal.upgrade.v7_0_0;version="1
- .0.2";uses:="com.liferay.portal.kernel.dao.orm,com.liferay.portal.ker
+ .1.0";uses:="com.liferay.portal.kernel.dao.orm,com.liferay.portal.ker
  nel.settings,com.liferay.portal.kernel.upgrade,com.liferay.portal.upg
  rade.util,com.liferay.portal.upgrade.v7_0_0.util,javax.portlet",com.l
  iferay.portal.upgrade.v7_0_0.util;version="1.0.0",com.liferay.portal.
