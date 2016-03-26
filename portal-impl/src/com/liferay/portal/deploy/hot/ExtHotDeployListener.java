@@ -203,10 +203,6 @@ public class ExtHotDeployListener extends BaseHotDeployListener {
 		}
 	}
 
-	/**
-	 * Only use where {@link javax.servlet.ServletContext#getClassLoader()} is
-	 * allowed.
-	 */
 	@Deprecated
 	protected void installExt(ServletContext servletContext) throws Exception {
 		installExt(servletContext, servletContext.getClassLoader());
