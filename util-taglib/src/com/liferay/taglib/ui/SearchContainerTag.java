@@ -53,8 +53,8 @@ public class SearchContainerTag<R> extends ParamAndPropertyAncestorTagImpl {
 		_deltaConfigurable = SearchContainer.DEFAULT_DELTA_CONFIGURABLE;
 		_deltaParam = SearchContainer.DEFAULT_DELTA_PARAM;
 		_displayTerms = null;
-		_emptyResultsMessageCssClass = null;
 		_emptyResultsMessage = null;
+		_emptyResultsMessageCssClass = null;
 		_headerNames = null;
 		_id = null;
 		_iteratorURL = null;
@@ -100,13 +100,13 @@ public class SearchContainerTag<R> extends ParamAndPropertyAncestorTagImpl {
 
 			_searchContainer.setDeltaConfigurable(_deltaConfigurable);
 
+			if (Validator.isNotNull(_emptyResultsMessage)) {
+				_searchContainer.setEmptyResultsMessage(_emptyResultsMessage);
+			}
+
 			if (Validator.isNotNull(_emptyResultsMessageCssClass)) {
 				_searchContainer.setEmptyResultsMessageCssClass(
 					_emptyResultsMessageCssClass);
-			}
-
-			if (Validator.isNotNull(_emptyResultsMessage)) {
-				_searchContainer.setEmptyResultsMessage(_emptyResultsMessage);
 			}
 
 			if (_headerNames != null) {
