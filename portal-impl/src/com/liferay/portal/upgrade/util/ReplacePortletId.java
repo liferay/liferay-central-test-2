@@ -23,15 +23,15 @@ import java.sql.SQLException;
  */
 public class ReplacePortletId extends UpgradePortletId {
 
-	protected boolean isPortletIdPresent(String portletId) throws SQLException {
-		String sql = "SELECT COUNT(portletId) FROM Portlet WHERE portletId = ?";
+	protected boolean hasPortlet(String portletId) throws SQLException {
+		String sql = "select count(portletId) from Portlet where portletId = ?";
 
 		return isRowPresent(portletId, sql);
 	}
 
 	protected boolean isResourceActionPresent(String name) throws SQLException {
 		String sql =
-			"SELECT COUNT(resourceActionId) FROM ResourceAction WHERE name = ?";
+			"select count(resourceActionId) from ResourceAction where name = ?";
 
 		return isRowPresent(name, sql);
 	}
@@ -40,8 +40,8 @@ public class ReplacePortletId extends UpgradePortletId {
 		throws SQLException {
 
 		String sql =
-			"SELECT COUNT(resourcePermissionId) FROM ResourcePermission " +
-				"WHERE name = ?";
+			"select count(resourcePermissionId) from ResourcePermission " +
+				"where name = ?";
 
 		return isRowPresent(newName, sql);
 	}
@@ -71,7 +71,7 @@ public class ReplacePortletId extends UpgradePortletId {
 			String oldRootPortletId, String newRootPortletId)
 		throws Exception {
 
-		if (!isPortletIdPresent(newRootPortletId)) {
+		if (!hasPortlet(newRootPortletId)) {
 			super.updatePortletId(oldRootPortletId, newRootPortletId);
 		}
 	}
