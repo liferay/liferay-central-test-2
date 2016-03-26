@@ -24,33 +24,32 @@ import java.sql.SQLException;
 public class ReplacePortletId extends UpgradePortletId {
 
 	protected boolean hasPortlet(String portletId) throws SQLException {
-		String sql = "select count(portletId) from Portlet where portletId = ?";
-
-		return isRowPresent(portletId, sql);
+		return hasRow(
+			"select count(portletId) from Portlet where portletId = ?",
+			portletId);
 	}
 
-	protected boolean isResourceActionPresent(String name) throws SQLException {
-		String sql =
-			"select count(resourceActionId) from ResourceAction where name = ?";
-
-		return isRowPresent(name, sql);
+	protected boolean hasResourceAction(String name) throws SQLException {
+		return hasRow(
+			"select count(resourceActionId) from ResourceAction where name " +
+				"= ?",
+			name);
 	}
 
-	protected boolean isResourcePermissionPresent(String newName)
+	protected boolean hasResourcePermission(String newName)
 		throws SQLException {
 
-		String sql =
+		return hasRow(
 			"select count(resourcePermissionId) from ResourcePermission " +
-				"where name = ?";
-
-		return isRowPresent(newName, sql);
+				"where name = ?",
+			newName);
 	}
 
-	protected boolean isRowPresent(String name, String sql)
+	protected boolean hasRow(String sql, String value)
 		throws SQLException {
 
 		try (PreparedStatement ps = connection.prepareStatement(sql)) {
-			ps.setString(1, name);
+			ps.setString(1, value);
 
 			try (ResultSet rs = ps.executeQuery()) {
 				if (rs.next()) {
@@ -80,7 +79,7 @@ public class ReplacePortletId extends UpgradePortletId {
 	protected void updateResourceAction(String oldName, String newName)
 		throws Exception {
 
-		if (isResourceActionPresent(newName)) {
+		if (hasResourceAction(newName)) {
 			String sql = "delete from ResourceAction where name = ?";
 
 			try (PreparedStatement ps = connection.prepareStatement(sql)) {
@@ -100,7 +99,7 @@ public class ReplacePortletId extends UpgradePortletId {
 			boolean updateName)
 		throws Exception {
 
-		if (isResourcePermissionPresent(newRootPortletId)) {
+		if (hasResourcePermission(newRootPortletId)) {
 			String sql = "delete from ResourcePermission where name = ?";
 
 			try (PreparedStatement ps = connection.prepareStatement(sql)) {
