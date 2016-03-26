@@ -858,11 +858,11 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	public BlogsEntry moveEntryToTrash(long userId, BlogsEntry entry)
 		throws PortalException {
 
+		// Entry
+
 		if (entry.isInTrash()) {
 			throw new TrashEntryException();
 		}
-
-		// Entry
 
 		int oldStatus = entry.getStatus();
 
@@ -926,14 +926,14 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	public BlogsEntry restoreEntryFromTrash(long userId, long entryId)
 		throws PortalException {
 
+		// Entry
+
 		BlogsEntry entry = blogsEntryPersistence.findByPrimaryKey(entryId);
 
 		if (!entry.isInTrash()) {
 			throw new RestoreEntryException(
 				RestoreEntryException.INVALID_STATUS);
 		}
-
-		// Entry
 
 		TrashEntry trashEntry = trashEntryLocalService.getEntry(
 			BlogsEntry.class.getName(), entryId);

@@ -378,11 +378,11 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 	public WikiNode moveNodeToTrash(long userId, WikiNode node)
 		throws PortalException {
 
+		// Node
+
 		if (node.isInTrash()) {
 			throw new TrashEntryException();
 		}
-
-		// Node
 
 		int oldStatus = node.getStatus();
 
@@ -416,12 +416,12 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 	public void restoreNodeFromTrash(long userId, WikiNode node)
 		throws PortalException {
 
+		// Node
+
 		if (!node.isInTrash()) {
 			throw new RestoreEntryException(
 				RestoreEntryException.INVALID_STATUS);
 		}
-
-		// Node
 
 		node.setName(TrashUtil.getOriginalTitle(node.getName()));
 

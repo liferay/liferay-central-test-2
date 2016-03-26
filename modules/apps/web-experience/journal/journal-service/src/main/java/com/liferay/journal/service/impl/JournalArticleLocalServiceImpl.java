@@ -3486,11 +3486,11 @@ public class JournalArticleLocalServiceImpl
 			long userId, JournalArticle article)
 		throws PortalException {
 
+		// Article
+
 		if (article.isInTrash()) {
 			throw new TrashEntryException();
 		}
-
-		// Article
 
 		int oldStatus = article.getStatus();
 
@@ -3699,12 +3699,12 @@ public class JournalArticleLocalServiceImpl
 			long userId, JournalArticle article)
 		throws PortalException {
 
+		// Article
+
 		if (!article.isInTrash()) {
 			throw new RestoreEntryException(
 				RestoreEntryException.INVALID_STATUS);
 		}
-
-		// Article
 
 		String trashArticleId = TrashUtil.getOriginalTitle(
 			article.getArticleId());

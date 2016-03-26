@@ -647,14 +647,14 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 	public MBCategory moveCategoryToTrash(long userId, long categoryId)
 		throws PortalException {
 
+		// Category
+
 		MBCategory category = mbCategoryPersistence.findByPrimaryKey(
 			categoryId);
 
 		if (category.isInTrash()) {
 			throw new TrashEntryException();
 		}
-
-		// Category
 
 		category = updateStatus(
 			userId, categoryId, WorkflowConstants.STATUS_IN_TRASH);
@@ -683,6 +683,8 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 	public void restoreCategoryFromTrash(long userId, long categoryId)
 		throws PortalException {
 
+		// Category
+
 		MBCategory category = mbCategoryPersistence.findByPrimaryKey(
 			categoryId);
 
@@ -690,8 +692,6 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			throw new RestoreEntryException(
 				RestoreEntryException.INVALID_STATUS);
 		}
-
-		// Category
 
 		TrashEntry trashEntry = trashEntryLocalService.getEntry(
 			MBCategory.class.getName(), categoryId);
