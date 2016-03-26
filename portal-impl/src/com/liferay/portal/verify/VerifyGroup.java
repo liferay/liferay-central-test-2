@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.exception.GroupFriendlyURLException;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Company;
@@ -258,9 +257,7 @@ public class VerifyGroup extends VerifyProcess {
 				new ActionableDynamicQuery.PerformActionMethod<Group>() {
 
 					@Override
-					public void performAction(Group group)
-						throws PortalException {
-
+					public void performAction(Group group) {
 						if ((group.getPrivateLayoutsPageCount() > 0) ||
 							(group.getPublicLayoutsPageCount() > 0)) {
 
