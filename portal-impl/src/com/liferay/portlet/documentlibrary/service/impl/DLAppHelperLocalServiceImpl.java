@@ -1484,13 +1484,13 @@ public class DLAppHelperLocalServiceImpl
 	protected Folder doMoveFolderToTrash(long userId, Folder folder)
 		throws PortalException {
 
+		// Folder
+
 		DLFolder dlFolder = (DLFolder)folder.getModel();
 
 		if (dlFolder.isInTrash()) {
 			throw new TrashEntryException();
 		}
-
-		// Folder
 
 		dlFolder = dlFolderLocalService.updateStatus(
 			userId, folder.getFolderId(), WorkflowConstants.STATUS_IN_TRASH,

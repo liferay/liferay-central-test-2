@@ -239,7 +239,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 			}
 		}
 
-		// Thread Asset
+		// Asset
 
 		AssetEntry assetEntry = assetEntryLocalService.fetchEntry(
 			MBThread.class.getName(), thread.getThreadId());
@@ -750,11 +750,11 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 	public MBThread moveThreadToTrash(long userId, MBThread thread)
 		throws PortalException {
 
+		// Thread
+
 		if (thread.isInTrash()) {
 			throw new TrashEntryException();
 		}
-
-		// Thread
 
 		if (thread.getCategoryId() ==
 				MBCategoryConstants.DISCUSSION_CATEGORY_ID) {
