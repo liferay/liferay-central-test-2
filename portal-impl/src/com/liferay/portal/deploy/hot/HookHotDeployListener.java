@@ -611,8 +611,7 @@ public class HookHotDeployListener
 			locale = LocaleUtil.fromLanguageId(localeKey, true, false);
 
 			if (locale == null) {
-				throw new SystemException(
-					"Language: " + localeKey + " is not valid");
+				throw new SystemException("Invalid locale " + localeKey);
 			}
 		}
 
@@ -1182,15 +1181,14 @@ public class HookHotDeployListener
 			String languagePropertiesLocation =
 				languagePropertiesElement.getText();
 
-			Locale locale;
+			Locale locale = null;
 
 			try {
 				locale = getLocale(languagePropertiesLocation);
 			}
 			catch (Exception e) {
 				if (_log.isInfoEnabled()) {
-					_log.info(
-						"Ignoring " + languagePropertiesLocation + ": " + e);
+					_log.info("Ignoring " + languagePropertiesLocation, e);
 				}
 
 				continue;
