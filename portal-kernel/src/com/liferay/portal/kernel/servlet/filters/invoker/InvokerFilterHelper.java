@@ -17,11 +17,9 @@ package com.liferay.portal.kernel.servlet.filters.invoker;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.ServletContextPool;
-import com.liferay.portal.kernel.util.AggregateClassLoader;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstanceFactory;
 import com.liferay.portal.kernel.util.ObjectValuePair;
-import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -273,22 +271,21 @@ public class InvokerFilterHelper {
 
 	protected Filter initFilter(
 		ServletContext servletContext, String filterClassName,
-		FilterConfig filterConfig) {
+		String filterName, FilterConfig filterConfig) {
+
+		ClassLoader pluginClassLoader = servletContext.getClassLoader();
 
 		Thread currentThread = Thread.currentThread();
 
 		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
-		ClassLoader aggregateClassLoader =
-			AggregateClassLoader.getAggregateClassLoader(
-				PortalClassLoaderUtil.getClassLoader(),
-				servletContext.getClassLoader());
-
-		currentThread.setContextClassLoader(aggregateClassLoader);
+		if (contextClassLoader != pluginClassLoader) {
+			currentThread.setContextClassLoader(pluginClassLoader);
+		}
 
 		try {
 			Filter filter = (Filter)InstanceFactory.newInstance(
-				aggregateClassLoader, filterClassName);
+				pluginClassLoader, filterClassName);
 
 			filter.init(filterConfig);
 
@@ -300,20 +297,10 @@ public class InvokerFilterHelper {
 			return null;
 		}
 		finally {
-			currentThread.setContextClassLoader(contextClassLoader);
+			if (contextClassLoader != pluginClassLoader) {
+				currentThread.setContextClassLoader(contextClassLoader);
+			}
 		}
-	}
-
-	/**
-	 * @deprecated As of 7.0.0, replaced by {@link
-	 *             #initFilter(ServletContext, String, FilterConfig)}
-	 */
-	@Deprecated
-	protected Filter initFilter(
-		ServletContext servletContext, String filterClassName,
-		String filterName, FilterConfig filterConfig) {
-
-		return initFilter(servletContext, filterClassName, filterConfig);
 	}
 
 	protected void readLiferayFilterWebXML(
@@ -353,7 +340,7 @@ public class InvokerFilterHelper {
 				servletContext, filterName, initParameterMap);
 
 			Filter filter = initFilter(
-				servletContext, filterClassName, filterConfig);
+				servletContext, filterClassName, filterName, filterConfig);
 
 			if (filter != null) {
 				filterObjectValuePairs.put(
