@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.asset.kernel.util;
+package com.liferay.asset.kernel.validator;
 
 import com.liferay.portal.kernel.exception.PortalException;
 
