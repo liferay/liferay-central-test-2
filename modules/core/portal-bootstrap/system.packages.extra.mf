@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1459198009347
+Bnd-LastModified: 1459199740547
 Bundle-ManifestVersion: 2
 Bundle-Name: portal-bootstrap
 Bundle-SymbolicName: portal-bootstrap
@@ -2903,7 +2903,7 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  version="1.0.0",com.liferay.portal.kernel.security.sso;version="1.0.0
  ";uses:="javax.servlet.http",com.liferay.portal.kernel.security.xml;v
  ersion="1.0.0";uses:="javax.xml.parsers,javax.xml.stream,org.xml.sax"
- ,com.liferay.portal.kernel.service;version="1.0.0";uses:="com.liferay
+ ,com.liferay.portal.kernel.service;version="1.1.0";uses:="com.liferay
  .announcements.kernel.model,com.liferay.expando.kernel.model,com.life
  ray.exportimport.kernel.lar,com.liferay.exportimport.kernel.model,com
  .liferay.portal.kernel.cache.thread.local,com.liferay.portal.kernel.c
@@ -3685,7 +3685,7 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  .model,com.liferay.portal.kernel.bean,com.liferay.portal.kernel.model
  ,com.liferay.portal.kernel.social,com.liferay.portal.kernel.spring.os
  gi,com.liferay.social.kernel.service";version="1.0.0",com.liferay.por
- tlet.asset.util;version="1.1.0";uses:="com.liferay.asset.kernel.model
+ tlet.asset.util;version="1.0.2";uses:="com.liferay.asset.kernel.model
  ,com.liferay.asset.kernel.service.persistence,com.liferay.portal.kern
  el.exception,com.liferay.portal.kernel.model,com.liferay.portal.kerne
  l.portlet,com.liferay.portal.kernel.search,com.liferay.portal.kernel.
