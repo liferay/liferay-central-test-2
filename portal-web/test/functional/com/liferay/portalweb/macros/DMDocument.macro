@@ -2360,6 +2360,8 @@
 
 		<execute function="AssertElementNotPresent" locator1="Portlet#ICON_PLUS_SIGN" />
 
+		<var name="key_dmDocumentTitle" value="Document_1.jpeg" />
+
 		<execute function="Click" locator1="DocumentsAndMedia#DESCRIPTIVE_LIST_DOCUMENT_VERTICAL_ELLIPSIS" />
 
 		<execute function="AssertTextEquals#assertPartialText" locator1="MenuItem#DOWNLOAD" value1="Download" />
