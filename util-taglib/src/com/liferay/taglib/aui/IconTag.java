@@ -41,13 +41,13 @@ public class IconTag extends BaseIconTag {
 	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		if (getSrc() == null) {
-			String src = (String)request.getAttribute("aui:icon:src-ext");
+			String src = (String)request.getAttribute("aui:icon:src:ext");
 
 			if (Validator.isNotNull(src)) {
 				setSrc(src);
 			}
 
-			request.removeAttribute("aui:icon:src-ext");
+			request.removeAttribute("aui:icon:src:ext");
 		}
 
 		super.setAttributes(request);
