@@ -23,14 +23,16 @@ import java.util.Comparator;
 /**
  * @author Leonardo Barros
  */
-public class DDMFormFieldTypeDisplayOrderComparator
+public class DDMFormFieldTypeServiceWrapperDisplayOrderComparator
 	implements Comparator<ServiceWrapper<DDMFormFieldType>> {
 
-	public DDMFormFieldTypeDisplayOrderComparator() {
+	public DDMFormFieldTypeServiceWrapperDisplayOrderComparator() {
 		this(true);
 	}
 
-	public DDMFormFieldTypeDisplayOrderComparator(boolean ascending) {
+	public DDMFormFieldTypeServiceWrapperDisplayOrderComparator(
+		boolean ascending) {
+
 		_ascending = ascending;
 	}
 
