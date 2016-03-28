@@ -281,51 +281,6 @@
 		</execute>
 	</command>
 
-	<command name="AddSOWikiPageFormatCreole" priority="4">
-		<var name="wikiPageContent1" value="Wiki Page Content# " />
-		<var name="wikiPageContent2" value=" Creole Formatting 1 Creole Formatting 2 Creole Formatting 3" />
-		<var name="wikiPageTitle" value="Wiki Page Title" />
-
-		<execute macro="Navigator#gotoPage">
-			<var name="siteName" value="${siteName}" />
-			<var name="siteURL" value="true" />
-		</execute>
-
-		<execute macro="WikiNavigator#gotoAllPagesPG" />
-
-		<execute function="Click#makeVisibleClickAt" locator1="Portlet#ICON_PLUS_SIGN" />
-
-		<execute macro="WikiEntry#addPageTitle">
-			<var name="wikiPageTitle" value="${wikiPageTitle}" />
-		</execute>
-
-		<execute macro="WikiEntry#selectPageFormat">
-			<var name="pageFormat" value="Creole" />
-		</execute>
-
-		<execute function="Type#typeEditor" locator1="AlloyEditor#CONTENT_FIELD" value1="${wikiPageContent1}${wikiPageContent2}" />
-
-		<execute macro="PortletEntry#publish" />
-
-		<execute macro="Navigator#gotoPage">
-			<var name="siteName" value="${siteName}" />
-			<var name="siteURL" value="true" />
-		</execute>
-
-		<execute macro="WikiNavigator#gotoPG">
-			<var name="wikiPageContent" value="${wikiPageContent1}${wikiPageContent2}" />
-			<var name="wikiPageRevision" value="1.0" />
-			<var name="wikiPageTitle" value="${wikiPageTitle}" />
-			<var name="wikiPageUsername" value="${adminName}" />
-		</execute>
-
-		<execute macro="WikiPage#viewPG">
-			<var name="wikiPageContent" value="${wikiPageContent1}${wikiPageContent2}" />
-			<var name="wikiPageContentGeneric" value="true" />
-			<var name="wikiPageTitle" value="${wikiPageTitle}" />
-		</execute>
-	</command>
-
 	<command name="AddSOWikiPageFormatMediawiki" priority="4">
 		<var name="wikiPageContent" value="1 Wiki Page Content Wiki Page Content # MediaWiki Formatting 1 * MediaWiki Formatting 2 MediaWiki Formatting 3" />
 		<var name="wikiPageMediaWikiContent">
