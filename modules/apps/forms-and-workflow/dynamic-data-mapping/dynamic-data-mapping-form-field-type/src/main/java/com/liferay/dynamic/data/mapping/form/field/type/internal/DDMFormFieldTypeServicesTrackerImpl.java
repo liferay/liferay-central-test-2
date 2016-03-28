@@ -95,13 +95,16 @@ public class DDMFormFieldTypeServicesTrackerImpl
 	public List<DDMFormFieldType> getDDMFormFieldTypes() {
 		List<DDMFormFieldType> ddmFormFieldTypes = new ArrayList<>();
 
-		List<ServiceWrapper<DDMFormFieldType>> values = ListUtil.fromCollection(
-			_ddmFormFieldTypeServiceTrackerMap.values());
+		List<ServiceWrapper<DDMFormFieldType>> ddmFormFieldTypeServiceWrappers =
+			ListUtil.fromCollection(
+				_ddmFormFieldTypeServiceTrackerMap.values());
 
-		Collections.sort(values, _ddmFormFieldTypeDisplayOrderComparator);
+		Collections.sort(
+			ddmFormFieldTypeServiceWrappers,
+			_ddmFormFieldTypeDisplayOrderComparator);
 
 		for (ServiceWrapper<DDMFormFieldType> ddmFormFieldTypeServiceWrapper :
-				values) {
+				ddmFormFieldTypeServiceWrappers) {
 
 			ddmFormFieldTypes.add(ddmFormFieldTypeServiceWrapper.getService());
 		}
