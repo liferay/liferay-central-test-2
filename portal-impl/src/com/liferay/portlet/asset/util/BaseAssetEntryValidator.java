@@ -19,12 +19,14 @@ import com.liferay.portal.kernel.exception.PortalException;
 
 /**
  * @author Brian Wing Shun Chan
- * @deprecated As of 7.0.0, see {@link
- *             com.liferay.asset.kernel.util.AssetEntryValidator}
+ * @deprecated As of 7.0.0, with no direct replacement
  */
 @Deprecated
 public class BaseAssetEntryValidator implements AssetEntryValidator {
 
+	/**
+	 * @throws PortalException
+	 */
 	@Override
 	public void validate(
 			long groupId, String className, long classTypePK,
@@ -36,6 +38,9 @@ public class BaseAssetEntryValidator implements AssetEntryValidator {
 		return true;
 	}
 
+	/**
+	 * @throws PortalException
+	 */
 	protected void validate(
 			long classNameId, long classTypePK, final long[] categoryIds,
 			AssetVocabulary vocabulary)

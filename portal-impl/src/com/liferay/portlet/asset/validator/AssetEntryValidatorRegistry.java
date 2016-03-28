@@ -12,9 +12,9 @@
  * details.
  */
 
-package com.liferay.portlet.asset.util;
+package com.liferay.portlet.asset.validator;
 
-import com.liferay.asset.kernel.util.AssetEntryValidator;
+import com.liferay.asset.kernel.validator.AssetEntryValidator;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.registry.collections.ServiceTrackerCollections;
