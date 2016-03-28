@@ -1759,8 +1759,7 @@
 		<var name="kbArticleTitle" value="KB Article Title" />
 		<var name="kbSuggestionBody" value="KB Article Suggestion Content" />
 		<var name="pageName" value="Knowledge Base Display Page" />
-		<var method="TestPropsUtil#get('email.address.4')" name="userEmailAddress" />
-		<var method="TestPropsUtil#get('email.password.4')" name="userEmailPassword" />
+		<var name="userEmailAddress" value="userea@liferay.com" />
 		<var name="userName" value="Test Test" />
 		<var name="userScreenName" value="usersn" />
 		<var name="virtualHost" value="localhost" />
