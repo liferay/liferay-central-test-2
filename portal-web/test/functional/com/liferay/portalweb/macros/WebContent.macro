@@ -61,9 +61,7 @@
 	</command>
 
 	<command name="addDraftPGViaAP">
-		<execute macro="WebContent#_gotoAddPGViaAP">
-			<var name="assetTypeConfigured" value="${assetTypeConfigured}" />
-		</execute>
+		<execute macro="WebContent#_gotoAddPGViaAP" />
 
 		<execute macro="WebContent#addCP">
 			<var name="webContentContent" value="${webContentContent}" />
@@ -168,9 +166,7 @@
 	</command>
 
 	<command name="addPGViaAP">
-		<execute macro="WebContent#_gotoAddPGViaAP">
-			<var name="assetTypeConfigured" value="${assetTypeConfigured}" />
-		</execute>
+		<execute macro="WebContent#_gotoAddPGViaAP" />
 
 		<execute macro="WebContent#addCP">
 			<var name="webContentContent" value="${webContentContent}" />
