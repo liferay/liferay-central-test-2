@@ -94,8 +94,8 @@ public interface PropsKeys {
 	public static final String ASSET_CATEGORIES_SELECTOR_MAX_ENTRIES = "asset.categories.selector.max.entries";
 
 	/**
-	* @deprecated As of 7.0.0, with no direct replacement
-	*/
+	 * @deprecated As of 7.0.0, with no direct replacement
+	 */
 	@Deprecated
 	public static final String ASSET_ENTRY_VALIDATOR = "asset.entry.validator";
 
