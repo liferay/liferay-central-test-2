@@ -1881,6 +1881,13 @@
 			<var name="kbSuggestionBody" value="${kbSuggestionBody}" />
 		</execute>
 
+		<execute macro="User#logoutPG" />
+
+		<execute macro="User#loginUserPG">
+			<var name="password" value="test" />
+			<var name="userEmailAddress" value="test@liferay.com" />
+		</execute>
+
 		<execute macro="Navigator#gotoPage">
 			<var name="pageName" value="${pageName}" />
 		</execute>
