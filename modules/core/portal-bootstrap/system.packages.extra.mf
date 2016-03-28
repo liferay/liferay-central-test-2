@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1459200262749
+Bnd-LastModified: 1459201844698
 Bundle-ManifestVersion: 2
 Bundle-Name: portal-bootstrap
 Bundle-SymbolicName: portal-bootstrap
@@ -2698,7 +2698,7 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  welder.socket;version="6.2.0";uses:="com.liferay.portal.kernel.nio.in
  traband,com.liferay.portal.kernel.nio.intraband.welder,com.liferay.po
  rtal.kernel.util",com.liferay.portal.kernel.notifications;version="7.
- 0.0";uses:="com.liferay.asset.kernel.model,com.liferay.portal.kernel.
+ 1.0";uses:="com.liferay.asset.kernel.model,com.liferay.portal.kernel.
  exception,com.liferay.portal.kernel.json,com.liferay.portal.kernel.mo
  del,com.liferay.portal.kernel.service",com.liferay.portal.kernel.oaut
  h;version="6.2.0";uses:="com.liferay.portal.kernel.exception",com.lif
@@ -3005,7 +3005,7 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  al.kernel.security.permission,com.liferay.portal.kernel.service,com.l
  iferay.portal.kernel.theme,javax.portlet,javax.servlet.http",com.life
  ray.portal.kernel.url;version="1.0.0";uses:="javax.servlet",com.lifer
- ay.portal.kernel.util;version="7.1.0";uses:="com.liferay.expando.kern
+ ay.portal.kernel.util;version="7.2.0";uses:="com.liferay.expando.kern
  el.model,com.liferay.mail.kernel.model,com.liferay.portal.kernel.conc
  urrent,com.liferay.portal.kernel.configuration,com.liferay.portal.ker
  nel.dao.jdbc.aop,com.liferay.portal.kernel.dao.search,com.liferay.por
