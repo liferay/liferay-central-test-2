@@ -32,7 +32,7 @@
 					<var name="pageName" value="${pageName}" />
 				</execute>
 
-				<execute macro="AnnouncementsEntry#tearDownPG">
+				<execute macro="AnnouncementsEntry#tearDownPG" />
 
 				<execute macro="Page#tearDownPG" />
 			</else>
