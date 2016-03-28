@@ -159,7 +159,7 @@ else if (calendar != null) {
 	hasWorkflowDefinitionLink = WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(themeDisplay.getCompanyId(), calendarResource.getGroupId(), CalendarBooking.class.getName());
 }
 
-long[] groupIds;
+long[] groupIds = null;
 
 if (showUserEvents) {
 	groupIds = ArrayUtil.append(user.getGroupIds(), new long[] {user.getGroupId(), scopeGroupId});
