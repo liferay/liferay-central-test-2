@@ -39,15 +39,14 @@ public class DDMFormFieldTypeDisplayOrderComparator
 		ServiceWrapper<DDMFormFieldType> serviceWrapper1,
 		ServiceWrapper<DDMFormFieldType> serviceWrapper2) {
 
-		Integer propertyValue1 = MapUtil.getInteger(
+		Integer displayOrder1 = MapUtil.getInteger(
 			serviceWrapper1.getProperties(),
 			"ddm.form.field.type.display.order", Integer.MAX_VALUE);
-
-		Integer propertyValue2 = MapUtil.getInteger(
+		Integer displayOrder2 = MapUtil.getInteger(
 			serviceWrapper2.getProperties(),
 			"ddm.form.field.type.display.order", Integer.MAX_VALUE);
 
-		int value = propertyValue1.compareTo(propertyValue2);
+		int value = displayOrder1.compareTo(displayOrder2);
 
 		if (_ascending) {
 			return value;
