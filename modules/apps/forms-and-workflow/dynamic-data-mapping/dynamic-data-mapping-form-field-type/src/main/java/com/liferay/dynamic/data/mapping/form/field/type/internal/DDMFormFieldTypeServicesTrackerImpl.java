@@ -101,7 +101,7 @@ public class DDMFormFieldTypeServicesTrackerImpl
 
 		Collections.sort(
 			ddmFormFieldTypeServiceWrappers,
-			_ddmFormFieldTypeDisplayOrderComparator);
+			_ddmFormFieldTypeServiceWrapperDisplayOrderComparator);
 
 		for (ServiceWrapper<DDMFormFieldType> ddmFormFieldTypeServiceWrapper :
 				ddmFormFieldTypeServiceWrappers) {
@@ -172,11 +172,11 @@ public class DDMFormFieldTypeServicesTrackerImpl
 
 	private ServiceTrackerMap<String, DDMFormFieldRenderer>
 		_ddmFormFieldRendererServiceTrackerMap;
-	private final Comparator<ServiceWrapper<DDMFormFieldType>>
-		_ddmFormFieldTypeDisplayOrderComparator =
-			new DDMFormFieldTypeDisplayOrderComparator();
 	private ServiceTrackerMap<String, ServiceWrapper<DDMFormFieldType>>
 		_ddmFormFieldTypeServiceTrackerMap;
+	private final Comparator<ServiceWrapper<DDMFormFieldType>>
+		_ddmFormFieldTypeServiceWrapperDisplayOrderComparator =
+			new DDMFormFieldTypeServiceWrapperDisplayOrderComparator();
 	private ServiceTrackerMap<String, DDMFormFieldValueAccessor>
 		_ddmFormFieldValueAccessorServiceTrackerMap;
 	private ServiceTrackerMap<String, DDMFormFieldValueRenderer>
