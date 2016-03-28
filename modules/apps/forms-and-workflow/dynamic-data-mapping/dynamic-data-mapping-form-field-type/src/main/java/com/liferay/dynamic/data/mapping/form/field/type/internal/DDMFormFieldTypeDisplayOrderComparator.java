@@ -41,11 +41,11 @@ public class DDMFormFieldTypeDisplayOrderComparator
 
 		Integer propertyValue1 = MapUtil.getInteger(
 			serviceWrapper1.getProperties(),
-			_DDM_FORM_FIELD_TYPE_DISPLAY_ORDER_PROPERTY, Integer.MAX_VALUE);
+			"ddm.form.field.type.display.order", Integer.MAX_VALUE);
 
 		Integer propertyValue2 = MapUtil.getInteger(
 			serviceWrapper2.getProperties(),
-			_DDM_FORM_FIELD_TYPE_DISPLAY_ORDER_PROPERTY, Integer.MAX_VALUE);
+			"ddm.form.field.type.display.order", Integer.MAX_VALUE);
 
 		int value = propertyValue1.compareTo(propertyValue2);
 
@@ -60,9 +60,6 @@ public class DDMFormFieldTypeDisplayOrderComparator
 	public boolean isAscending() {
 		return _ascending;
 	}
-
-	private static final String _DDM_FORM_FIELD_TYPE_DISPLAY_ORDER_PROPERTY =
-		"ddm.form.field.type.display.order";
 
 	private final boolean _ascending;
 
