@@ -22,14 +22,12 @@ import com.liferay.portal.kernel.test.SwappableSecurityManager;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.CodeCoverageAssertor;
 import com.liferay.portal.kernel.test.rule.NewEnv;
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.ReflectionUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.test.rule.AdviseWith;
 import com.liferay.portal.test.rule.AspectJNewEnvTestRule;
+import com.liferay.portal.util.PropsValues;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationHandler;
@@ -372,9 +370,10 @@ public class AutoBatchPreparedStatementUtilTest {
 
 		List<Method> methods = preparedStatementInvocationHandler.getMethods();
 
+		int hibernateJDBCBatchSize = PropsValues.HIBERNATE_JDBC_BATCH_SIZE;
+
 		ReflectionTestUtil.setFieldValue(
-			AutoBatchPreparedStatementUtil.class, "_HIBERNATE_JDBC_BATCH_SIZE",
-			2);
+			PropsValues.class, "HIBERNATE_JDBC_BATCH_SIZE", 2);
 
 		try (PreparedStatement preparedStatement =
 				AutoBatchPreparedStatementUtil.autoBatch(
@@ -468,8 +467,8 @@ public class AutoBatchPreparedStatementUtilTest {
 		}
 		finally {
 			ReflectionTestUtil.setFieldValue(
-				AutoBatchPreparedStatementUtil.class,
-				"_HIBERNATE_JDBC_BATCH_SIZE", _HIBERNATE_JDBC_BATCH_SIZE);
+				PropsValues.class, "HIBERNATE_JDBC_BATCH_SIZE",
+				hibernateJDBCBatchSize);
 		}
 
 		Assert.assertEquals(methods.toString(), 1, methods.size());
@@ -483,9 +482,10 @@ public class AutoBatchPreparedStatementUtilTest {
 
 		List<Method> methods = preparedStatementInvocationHandler.getMethods();
 
+		int hibernateJDBCBatchSize = PropsValues.HIBERNATE_JDBC_BATCH_SIZE;
+
 		ReflectionTestUtil.setFieldValue(
-			AutoBatchPreparedStatementUtil.class, "_HIBERNATE_JDBC_BATCH_SIZE",
-			2);
+			PropsValues.class, "HIBERNATE_JDBC_BATCH_SIZE", 2);
 
 		try (PreparedStatement preparedStatement =
 				AutoBatchPreparedStatementUtil.concurrentAutoBatch(
@@ -585,17 +585,14 @@ public class AutoBatchPreparedStatementUtilTest {
 		}
 		finally {
 			ReflectionTestUtil.setFieldValue(
-				AutoBatchPreparedStatementUtil.class,
-				"_HIBERNATE_JDBC_BATCH_SIZE", _HIBERNATE_JDBC_BATCH_SIZE);
+				PropsValues.class, "HIBERNATE_JDBC_BATCH_SIZE",
+				hibernateJDBCBatchSize);
 		}
 
 		Assert.assertEquals(methods.toString(), 1, methods.size());
 		Assert.assertEquals(
 			PreparedStatement.class.getMethod("close"), methods.remove(0));
 	}
-
-	private static final int _HIBERNATE_JDBC_BATCH_SIZE = GetterUtil.getInteger(
-		PropsUtil.get(PropsKeys.HIBERNATE_JDBC_BATCH_SIZE));
 
 	private static class ConnectionInvocationHandler
 		implements InvocationHandler {
