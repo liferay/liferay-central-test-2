@@ -1824,7 +1824,7 @@
 			<var name="suggestionInProgress" value="true" />
 			<var name="suggestionReceived" value="true" />
 			<var name="suggestionResolved" value="true" />
-			<var name="userEmailAddress" value="${userEmailAddress}" />
+			<var name="userEmailAddress" value="test@liferay.com" />
 			<var name="userName" value="${userName}" />
 		</execute>
 
