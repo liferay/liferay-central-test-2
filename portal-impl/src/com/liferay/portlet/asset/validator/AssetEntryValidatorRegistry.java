@@ -40,11 +40,11 @@ public class AssetEntryValidatorRegistry {
 	public List<AssetEntryValidator> getAssetEntryValidators(String className) {
 		List<AssetEntryValidator> assetEntryValidators = new ArrayList<>();
 
-		List<AssetEntryValidator> genericAssetEntryValidators =
+		List<AssetEntryValidator> generalAssetEntryValidators =
 			_serviceTrackerMap.getService("*");
 
-		if (!ListUtil.isEmpty(genericAssetEntryValidators)) {
-			assetEntryValidators.addAll(genericAssetEntryValidators);
+		if (!ListUtil.isEmpty(generalAssetEntryValidators)) {
+			assetEntryValidators.addAll(generalAssetEntryValidators);
 		}
 
 		if (Validator.isNotNull(className)) {
