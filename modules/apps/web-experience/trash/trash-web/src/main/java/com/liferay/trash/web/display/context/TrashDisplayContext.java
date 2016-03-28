@@ -90,14 +90,14 @@ public class TrashDisplayContext {
 		String redirect = ParamUtil.getString(_request, "redirect");
 
 		if (Validator.isNull(redirect)) {
+			PortletURL redirectURL = _liferayPortletResponse.createRenderURL();
+
+			redirectURL.setParameter("mvcPath", "/view_content.jsp");
+
 			long trashEntryId = getTrashEntryId();
 
 			long classNameId = getClassNameId();
 			long classPK = getClassPK();
-
-			PortletURL redirectURL = _liferayPortletResponse.createRenderURL();
-
-			redirectURL.setParameter("mvcPath", "/view_content.jsp");
 
 			if (trashEntryId > 0) {
 				redirectURL.setParameter(
