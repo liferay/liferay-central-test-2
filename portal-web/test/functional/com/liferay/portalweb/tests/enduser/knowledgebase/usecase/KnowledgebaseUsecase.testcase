@@ -1753,6 +1753,8 @@
 	</command>
 
 	<command name="ViewKBArticleSuggestionsWorkflowNotificationInGmail" priority="3">
+		<property name="test.smtp.server.enabled" value="true" />
+
 		<var name="kbArticleContent" value="KB Article Content" />
 		<var name="kbArticleTitle" value="KB Article Title" />
 		<var name="kbSuggestionBody" value="KB Article Suggestion Content" />
