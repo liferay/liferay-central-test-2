@@ -1027,7 +1027,7 @@
 					</license>
 				</licenses>
 				<comments>
-					Older versions of required removing testdata.* because it conflicted
+					Older versions required removing testdata.* because it conflicted
 					with JBoss 5.1.
 				</comments>
 			</library>
