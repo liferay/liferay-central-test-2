@@ -874,18 +874,31 @@ public class GroupImpl extends GroupBaseImpl {
 
 	@Override
 	public boolean isLayout() {
-		return getClassNameId() == ClassNameIds._LAYOUT_CLASS_NAME_ID;
+		if (getClassNameId() == ClassNameIds._LAYOUT_CLASS_NAME_ID) {
+			return true;
+		}
+
+		return false;
 	}
 
 	@Override
 	public boolean isLayoutPrototype() {
-		return getClassNameId() == ClassNameIds._LAYOUT_PROTOTYPE_CLASS_NAME_ID;
+		if (getClassNameId() == ClassNameIds._LAYOUT_PROTOTYPE_CLASS_NAME_ID) {
+			return true;
+		}
+
+		return false;
 	}
 
 	@Override
 	public boolean isLayoutSetPrototype() {
-		return getClassNameId() ==
-			ClassNameIds._LAYOUT_SET_PROTOTYPE_CLASS_NAME_ID;
+		if (getClassNameId() ==
+				ClassNameIds._LAYOUT_SET_PROTOTYPE_CLASS_NAME_ID) {
+
+			return true;
+		}
+
+		return false;
 	}
 
 	@Override
@@ -902,12 +915,20 @@ public class GroupImpl extends GroupBaseImpl {
 
 	@Override
 	public boolean isOrganization() {
-		return getClassNameId() == ClassNameIds._ORGANIZATION_CLASS_NAME_ID;
+		if (getClassNameId() == ClassNameIds._ORGANIZATION_CLASS_NAME_ID) {
+			return true;
+		}
+
+		return false;
 	}
 
 	@Override
 	public boolean isRegularSite() {
-		return getClassNameId() == ClassNameIds._GROUP_CLASS_NAME_ID;
+		if (getClassNameId() == ClassNameIds._GROUP_CLASS_NAME_ID) {
+			return true;
+		}
+
+		return false;
 	}
 
 	@Override
