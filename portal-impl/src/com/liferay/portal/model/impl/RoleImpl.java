@@ -86,7 +86,11 @@ public class RoleImpl extends RoleBaseImpl {
 
 	@Override
 	public boolean isTeam() {
-		return getClassNameId() == ClassNameIds._TEAM_CLASS_NAME_ID;
+		if (getClassNameId() == ClassNameIds._TEAM_CLASS_NAME_ID) {
+			return true;
+		}
+
+		return false;
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(RoleImpl.class);
