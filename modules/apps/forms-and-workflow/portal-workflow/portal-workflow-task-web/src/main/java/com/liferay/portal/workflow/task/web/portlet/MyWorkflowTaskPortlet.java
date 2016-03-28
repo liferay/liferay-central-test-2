@@ -37,7 +37,6 @@ import com.liferay.portal.workflow.task.web.configuration.WorkflowTaskWebConfigu
 
 import java.io.IOException;
 
-import java.util.List;
 import java.util.Map;
 
 import javax.portlet.ActionRequest;
@@ -144,10 +143,9 @@ public class MyWorkflowTaskPortlet extends MVCPortlet {
 		}
 	}
 
-	protected boolean hasPermission(
-			long groupId, PermissionChecker permissionChecker,
-			WorkflowTask workflowTask)
-		throws WorkflowException {
+	protected boolean hasViewPermission(
+		long groupId, WorkflowTask workflowTask,
+		PermissionChecker permissionChecker) {
 
 		if (permissionChecker.isOmniadmin() ||
 			permissionChecker.isCompanyAdmin()) {
@@ -155,28 +153,18 @@ public class MyWorkflowTaskPortlet extends MVCPortlet {
 			return true;
 		}
 
-		List<WorkflowTaskAssignee> assignees =
-			workflowTask.getWorkflowTaskAssignees();
-
 		long[] roleIds = permissionChecker.getRoleIds(
 			permissionChecker.getUserId(), groupId);
 
-		for (WorkflowTaskAssignee assignee : assignees) {
-			String assigneeClassName = assignee.getAssigneeClassName();
+		for (WorkflowTaskAssignee workflowTaskAssignee :
+				workflowTask.getWorkflowTaskAssignees()) {
 
-			if (assigneeClassName.equals(User.class.getName())) {
-				if (assignee.getAssigneeClassPK() ==
-						permissionChecker.getUserId()) {
+			if (isWorkflowTaskAssignableToRoles(
+					workflowTaskAssignee, roleIds) ||
+				isWorkflowTaskAssignableToUser(
+					workflowTaskAssignee, permissionChecker.getUserId())) {
 
-					return true;
-				}
-			}
-			else if(assigneeClassName.equals(Role.class.getName())) {
-				if (ArrayUtil.contains(
-						roleIds, assignee.getAssigneeClassPK())) {
-
-					return true;
-				}
+				return true;
 			}
 		}
 
@@ -188,6 +176,40 @@ public class MyWorkflowTaskPortlet extends MVCPortlet {
 		if (cause instanceof WorkflowException ||
 			cause instanceof PrincipalException) {
 
+			return true;
+		}
+
+		return false;
+	}
+
+	protected boolean isWorkflowTaskAssignableToRoles(
+		WorkflowTaskAssignee workflowTaskAssignee, long[] roleIds) {
+
+		String assigneeClassName = workflowTaskAssignee.getAssigneeClassName();
+
+		if (!assigneeClassName.equals(Role.class.getName())) {
+			return false;
+		}
+
+		if (ArrayUtil.contains(
+				roleIds, workflowTaskAssignee.getAssigneeClassPK())) {
+
+			return true;
+		}
+
+		return false;
+	}
+
+	protected boolean isWorkflowTaskAssignableToUser(
+		WorkflowTaskAssignee workflowTaskAssignee, long userId) {
+
+		String assigneeClassName = workflowTaskAssignee.getAssigneeClassName();
+
+		if (!assigneeClassName.equals(User.class.getName())) {
+			return false;
+		}
+
+		if (workflowTaskAssignee.getAssigneeClassPK() == userId) {
 			return true;
 		}
 
@@ -211,9 +233,9 @@ public class MyWorkflowTaskPortlet extends MVCPortlet {
 			WorkflowTask workflowTask = WorkflowTaskManagerUtil.getWorkflowTask(
 				themeDisplay.getCompanyId(), workflowTaskId);
 
-			if (!hasPermission(
-					themeDisplay.getScopeGroupId(), permissionChecker,
-					workflowTask)) {
+			if (!hasViewPermission(
+					themeDisplay.getScopeGroupId(), workflowTask,
+					permissionChecker)) {
 
 				throw new PrincipalException.MustHavePermission(
 					permissionChecker, ActionKeys.VIEW);
