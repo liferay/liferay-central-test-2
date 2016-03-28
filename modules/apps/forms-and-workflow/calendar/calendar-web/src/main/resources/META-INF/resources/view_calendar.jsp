@@ -80,8 +80,6 @@ boolean columnOptionsVisible = GetterUtil.getBoolean(SessionClicks.get(request, 
 						</c:if>
 					</div>
 				</div>
-
-				<div id="<portlet:namespace />message"></div>
 			</aui:col>
 		</c:if>
 
@@ -146,7 +144,11 @@ boolean columnOptionsVisible = GetterUtil.getBoolean(SessionClicks.get(request, 
 	</aui:row>
 </aui:container>
 
-<%@ include file="/view_calendar_menus.jspf" %>
+<div id="<portlet:namespace />message"></div>
+
+<c:if test="<%= !displaySchedulerOnly %>">
+	<%@ include file="/view_calendar_menus.jspf" %>
+</c:if>
 
 <aui:script use="aui-toggler,liferay-calendar-list,liferay-scheduler,liferay-store,json">
 	Liferay.CalendarUtil.USER_CLASS_NAME_ID = <%= PortalUtil.getClassNameId(User.class) %>;
