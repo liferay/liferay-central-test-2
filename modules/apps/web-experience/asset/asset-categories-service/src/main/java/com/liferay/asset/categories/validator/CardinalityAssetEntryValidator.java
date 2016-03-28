@@ -61,7 +61,7 @@ public class CardinalityAssetEntryValidator implements AssetEntryValidator {
 			}
 		}
 
-		List<AssetVocabulary> vocabularies =
+		List<AssetVocabulary> assetVocabularies =
 			_assetVocabularyLocalService.getGroupVocabularies(groupId, false);
 
 		Group group = _groupLocalService.getGroup(groupId);
@@ -71,9 +71,9 @@ public class CardinalityAssetEntryValidator implements AssetEntryValidator {
 				group.getCompanyId());
 
 			if (companyGroup != null) {
-				vocabularies = ListUtil.copy(vocabularies);
+				assetVocabularies = ListUtil.copy(assetVocabularies);
 
-				vocabularies.addAll(
+				assetVocabularies.addAll(
 					_assetVocabularyLocalService.getGroupVocabularies(
 						companyGroup.getGroupId()));
 			}
@@ -81,14 +81,15 @@ public class CardinalityAssetEntryValidator implements AssetEntryValidator {
 
 		long classNameId = _classNameLocalService.getClassNameId(className);
 
-		if (isAssetCategorizable(classNameId)) {
-			for (AssetVocabulary vocabulary : vocabularies) {
-				validate(classNameId, classTypePK, categoryIds, vocabulary);
+		if (isCategorizable(classNameId)) {
+			for (AssetVocabulary assetVocabulary : assetVocabularies) {
+				validate(
+					classNameId, classTypePK, categoryIds, assetVocabulary);
 			}
 		}
 	}
 
-	protected boolean isAssetCategorizable(long classNameId) {
+	protected boolean isCategorizable(long classNameId) {
 		String className = PortalUtil.getClassName(classNameId);
 
 		AssetRendererFactory<?> assetRendererFactory =
@@ -132,27 +133,27 @@ public class CardinalityAssetEntryValidator implements AssetEntryValidator {
 
 	protected void validate(
 			long classNameId, long classTypePK, final long[] categoryIds,
-			AssetVocabulary vocabulary)
+			AssetVocabulary assetVocabulary)
 		throws PortalException {
 
-		if (!vocabulary.isAssociatedToClassNameIdAndClassTypePK(
+		if (!assetVocabulary.isAssociatedToClassNameIdAndClassTypePK(
 				classNameId, classTypePK)) {
 
 			return;
 		}
 
-		if (vocabulary.isMissingRequiredCategory(
+		if (assetVocabulary.isMissingRequiredCategory(
 				classNameId, classTypePK, categoryIds)) {
 
 			throw new AssetCategoryException(
-				vocabulary, AssetCategoryException.AT_LEAST_ONE_CATEGORY);
+				assetVocabulary, AssetCategoryException.AT_LEAST_ONE_CATEGORY);
 		}
 
-		if (!vocabulary.isMultiValued() &&
-			vocabulary.hasMoreThanOneCategorySelected(categoryIds)) {
+		if (!assetVocabulary.isMultiValued() &&
+			assetVocabulary.hasMoreThanOneCategorySelected(categoryIds)) {
 
 			throw new AssetCategoryException(
-				vocabulary, AssetCategoryException.TOO_MANY_CATEGORIES);
+				assetVocabulary, AssetCategoryException.TOO_MANY_CATEGORIES);
 		}
 	}
 
