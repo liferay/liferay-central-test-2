@@ -1103,13 +1103,22 @@ public class GroupImpl extends GroupBaseImpl {
 
 	@Override
 	public boolean isUserGroup() {
-		return getClassNameId() == ClassNameIds._USER_GROUP_CLASS_NAME_ID;
+		if (getClassNameId() == ClassNameIds._USER_GROUP_CLASS_NAME_ID) {
+			return true;
+		}
+
+		return false;
 	}
 
 	@Override
 	public boolean isUserPersonalSite() {
-		return getClassNameId() ==
-			ClassNameIds._USER_PERSONAL_SITE_CLASS_NAME_ID;
+		if (getClassNameId() ==
+				ClassNameIds._USER_PERSONAL_SITE_CLASS_NAME_ID) {
+
+			return true;
+		}
+
+		return false;
 	}
 
 	@Override
