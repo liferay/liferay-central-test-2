@@ -353,7 +353,9 @@
 
 		<var name="key_teamName" value="${teamName}" />
 
-		<execute function="AssertClick" locator1="ContentRow#ENTRY_CONTENT_ROW_1_BUTTON" value1="${teamName}" />
+		<var name="key_rowEntry" value="${teamName}" />
+
+		<execute function="AssertClick" locator1="ContentRow#ENTRY_CONTENT_ENTRY_NAME_LINK" value1="${teamName}" />
 		<execute function="SelectFrame" value1="relative=top" />
 
 		<execute macro="PortletEntry#save" />
