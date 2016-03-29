@@ -276,7 +276,7 @@ public class SitesImpl implements Sites {
 
 		copyLookAndFeel(targetLayout, layoutPrototypeLayout);
 
-		deleteObsoletePortlets(
+		deleteUnreferencedPortlets(
 			targetLayoutPortletIds, targetLayout, layoutPrototypeLayout);
 
 		targetLayout = LayoutLocalServiceUtil.getLayout(targetLayout.getPlid());
@@ -1571,7 +1571,7 @@ public class SitesImpl implements Sites {
 		}
 	}
 
-	protected void deleteObsoletePortlets(
+	protected void deleteUnreferencedPortlets(
 			List<String> targetLayoutPortletIds, Layout targetLayout,
 			Layout sourceLayout)
 		throws Exception {
@@ -1579,13 +1579,15 @@ public class SitesImpl implements Sites {
 		LayoutTypePortlet sourceLayoutType =
 			(LayoutTypePortlet)sourceLayout.getLayoutType();
 
-		List<String> removePortletIds = new ArrayList<>(targetLayoutPortletIds);
+		List<String> unreferencedPortletIds = new ArrayList<>(
+			targetLayoutPortletIds);
 
-		removePortletIds.removeAll(sourceLayoutType.getPortletIds());
+		unreferencedPortletIds.removeAll(sourceLayoutType.getPortletIds());
 
 		PortletLocalServiceUtil.deletePortlets(
 			targetLayout.getCompanyId(),
-			removePortletIds.toArray(new String[removePortletIds.size()]),
+			unreferencedPortletIds.toArray(
+				new String[unreferencedPortletIds.size()]),
 			targetLayout.getPlid());
 	}
 
