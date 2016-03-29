@@ -192,19 +192,19 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 
 	protected void doAddPermissionFields_6(
 			long companyId, long groupId, String className, String classPK,
-			String actionId, Document doc)
+			String viewActionId, Document doc)
 		throws Exception {
 
 		List<Role> roles = null;
 
 		if (_resourceBlockLocalService.isSupported(className)) {
 			roles = _resourceBlockLocalService.getRoles(
-				className, Long.valueOf(classPK), actionId);
+				className, Long.valueOf(classPK), viewActionId);
 		}
 		else {
 			roles = _resourcePermissionLocalService.getRoles(
 				companyId, className, ResourceConstants.SCOPE_INDIVIDUAL,
-				classPK, actionId);
+				classPK, viewActionId);
 		}
 
 		if (roles.isEmpty()) {
