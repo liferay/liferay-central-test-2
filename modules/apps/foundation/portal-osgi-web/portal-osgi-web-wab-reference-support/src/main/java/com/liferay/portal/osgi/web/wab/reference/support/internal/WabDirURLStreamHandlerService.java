@@ -71,11 +71,11 @@ public class WabDirURLStreamHandlerService
 			File warDir = new File(uri);
 
 			if (contextName == StringPool.BLANK) {
-				contextName = _detectContextNameFromFilePath(warDir);
+				contextName = _getContextNameFromFilePath(warDir);
 			}
 
 			if (contextName == StringPool.BLANK) {
-				contextName = _detectContextNameFromDescriptor(warDir);
+				contextName = _getContextNameFromDescriptor(warDir);
 			}
 
 			if (contextName == StringPool.BLANK) {
@@ -118,13 +118,13 @@ public class WabDirURLStreamHandlerService
 		_classLoader = clazz.getClassLoader();
 	}
 
-	private String _detectContextNameFromDescriptor(File warDir)
+	private String _getContextNameFromDescriptor(File warDir)
 		throws IOException {
 
 		File lookAndFeelXmlFile = new File(
 			warDir, "WEB-INF/liferay-look-and-feel.xml");
 
-		Document document = readDocument(lookAndFeelXmlFile);
+		Document document = _readDocument(lookAndFeelXmlFile);
 
 		Element rootElement = document.getRootElement();
 
@@ -147,7 +147,7 @@ public class WabDirURLStreamHandlerService
 		return null;
 	}
 
-	private String _detectContextNameFromFilePath(File warDir) {
+	private String _getContextNameFromFilePath(File warDir) {
 		Matcher matcher = _pattern.matcher(warDir.getAbsolutePath());
 
 		if (matcher.matches()) {
@@ -157,7 +157,7 @@ public class WabDirURLStreamHandlerService
 		return null;
 	}
 
-	private Document readDocument(File file) throws IOException {
+	private Document _readDocument(File file) throws IOException {
 		String content = FileUtil.read(file);
 
 		try {
