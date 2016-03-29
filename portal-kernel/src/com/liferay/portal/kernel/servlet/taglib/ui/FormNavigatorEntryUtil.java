@@ -177,6 +177,9 @@ public class FormNavigatorEntryUtil {
 	private final ServiceTrackerMap<String, List<FormNavigatorEntry>>
 		_formNavigatorEntries;
 
+	/**
+	 * @see com.liferay.osgi.service.tracker.collections.map.PropertyServiceReferenceComparator
+	 */
 	private class PropertyServiceReferenceComparator<T>
 		implements Comparator<ServiceReference<T>>, Serializable {
 
