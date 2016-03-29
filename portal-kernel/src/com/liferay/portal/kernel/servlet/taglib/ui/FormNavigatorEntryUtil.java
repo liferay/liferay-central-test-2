@@ -166,7 +166,7 @@ public class FormNavigatorEntryUtil {
 				}
 
 			},
-			new PropertyServiceReferenceComparator(
+			new PropertyServiceReferenceComparator<FormNavigatorEntry>(
 				"form.navigator.entry.order"));
 	}
 
