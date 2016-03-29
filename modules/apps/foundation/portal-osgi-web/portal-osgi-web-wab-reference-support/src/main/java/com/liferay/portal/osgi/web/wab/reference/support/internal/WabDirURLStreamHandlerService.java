@@ -85,7 +85,7 @@ public class WabDirURLStreamHandlerService
 
 			Map<String, String[]> parameters = new HashMap<>();
 
-			parameters.put("Web-ContextPath", new String {contextName});
+			parameters.put("Web-ContextPath", new String[] {contextName});
 
 			_wabGenerator.generate(_classLoader, warDir, parameters);
 
