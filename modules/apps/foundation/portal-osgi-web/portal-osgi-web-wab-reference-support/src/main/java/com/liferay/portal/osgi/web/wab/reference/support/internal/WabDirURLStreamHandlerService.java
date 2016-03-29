@@ -63,12 +63,12 @@ public class WabDirURLStreamHandlerService
 	@Override
 	public URLConnection openConnection(URL url) {
 		try {
-			URI filePath = new URI(url.getPath());
-
-			File warDir = new File(filePath);
-
 			String contextName = HttpUtil.getParameter(
 				url.toExternalForm(), "Web-ContextPath");
+
+			URI uri = new URI(url.getPath());
+
+			File warDir = new File(uri);
 
 			if (contextName == StringPool.BLANK) {
 				contextName = detectContextNameFromFilePath(warDir);
@@ -85,9 +85,7 @@ public class WabDirURLStreamHandlerService
 
 			Map<String, String[]> parameters = new HashMap<>();
 
-			String[] webContextPath = {contextName};
-
-			parameters.put("Web-ContextPath", webContextPath);
+			parameters.put("Web-ContextPath", new String {contextName});
 
 			_wabGenerator.generate(_classLoader, warDir, parameters);
 
