@@ -21,7 +21,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 /**
  * @author Eudaldo Alonso
  */
-public class MembershipRequestsCreateDateComparator
+public class MembershipRequestCreateDateComparator
 	extends OrderByComparator<MembershipRequest> {
 
 	public static final String ORDER_BY_ASC =
@@ -32,7 +32,7 @@ public class MembershipRequestsCreateDateComparator
 
 	public static final String[] ORDER_BY_FIELDS = {"createDate"};
 
-	public MembershipRequestsCreateDateComparator(boolean ascending) {
+	public MembershipRequestCreateDateComparator(boolean ascending) {
 		_ascending = ascending;
 	}
 
