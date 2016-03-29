@@ -71,11 +71,11 @@ public class WabDirURLStreamHandlerService
 			File warDir = new File(uri);
 
 			if (contextName == StringPool.BLANK) {
-				contextName = detectContextNameFromFilePath(warDir);
+				contextName = _detectContextNameFromFilePath(warDir);
 			}
 
 			if (contextName == StringPool.BLANK) {
-				contextName = detectContextNameFromDescriptor(warDir);
+				contextName = _detectContextNameFromDescriptor(warDir);
 			}
 
 			if (contextName == StringPool.BLANK) {
@@ -118,7 +118,7 @@ public class WabDirURLStreamHandlerService
 		_classLoader = clazz.getClassLoader();
 	}
 
-	private String detectContextNameFromDescriptor(File warDir)
+	private String _detectContextNameFromDescriptor(File warDir)
 		throws IOException {
 
 		File lookAndFeelXmlFile = new File(
@@ -147,7 +147,7 @@ public class WabDirURLStreamHandlerService
 		return null;
 	}
 
-	private String detectContextNameFromFilePath(File warDir) {
+	private String _detectContextNameFromFilePath(File warDir) {
 		Matcher matcher = _pattern.matcher(warDir.getAbsolutePath());
 
 		if (matcher.matches()) {
