@@ -1571,6 +1571,24 @@ public class SitesImpl implements Sites {
 		}
 	}
 
+	protected void deleteObsoletePortlets(
+			List<String> targetLayoutPortletIds, Layout targetLayout,
+			Layout sourceLayout)
+		throws Exception {
+
+		LayoutTypePortlet sourceLayoutType =
+			(LayoutTypePortlet)sourceLayout.getLayoutType();
+
+		List<String> removePortletIds = new ArrayList<>(targetLayoutPortletIds);
+
+		removePortletIds.removeAll(sourceLayoutType.getPortletIds());
+
+		PortletLocalServiceUtil.deletePortlets(
+			targetLayout.getCompanyId(),
+			removePortletIds.toArray(new String[removePortletIds.size()]),
+			targetLayout.getPlid());
+	}
+
 	protected void doMergeLayoutPrototypeLayout(Group group, Layout layout)
 		throws Exception {
 
@@ -2004,24 +2022,6 @@ public class SitesImpl implements Sites {
 			groupId, privateLayout);
 
 		mergeLayoutSetPrototypeLayouts(group, layoutSet);
-	}
-
-	protected void deleteObsoletePortlets(
-			List<String> targetLayoutPortletIds, Layout targetLayout,
-			Layout sourceLayout)
-		throws Exception {
-
-		LayoutTypePortlet sourceLayoutType =
-			(LayoutTypePortlet)sourceLayout.getLayoutType();
-
-		List<String> removePortletIds = new ArrayList<>(targetLayoutPortletIds);
-
-		removePortletIds.removeAll(sourceLayoutType.getPortletIds());
-
-		PortletLocalServiceUtil.deletePortlets(
-			targetLayout.getCompanyId(),
-			removePortletIds.toArray(new String[removePortletIds.size()]),
-			targetLayout.getPlid());
 	}
 
 	private static final String _TEMP_DIR =
