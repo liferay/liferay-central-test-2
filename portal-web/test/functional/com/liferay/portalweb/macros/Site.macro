@@ -407,36 +407,6 @@
 		<execute macro="Alert#viewSuccessMessage" />
 	</command>
 
-	<command name="assignSiteRolesSiteOwnerUserGroupsCP">
-		<var name="key_userGroupName" value="${userGroupName}" />
-
-		<execute macro="Navigator#gotoNavItem">
-			<var name="navItem" value="User Groups" />
-		</execute>
-
-		<execute function="Type" locator1="TextInput#SEARCH" value1="${userGroupName}" />
-
-		<execute function="Click" locator1="Button#SUBMIT" />
-
-		<execute function="Click" locator1="Icon#DISPLAY_STYLE_LIST" />
-
-		<execute function="AssertTextEquals" locator1="SiteMembershipsUserGroups#USER_GROUP_TABLE_NAME" value1="${userGroupName}" />
-
-		<execute function="Click" locator1="SiteMembershipsUserGroups#USER_GROUP_TABLE_ACTIONS" />
-
-		<execute function="AssertClick" locator1="MenuItem#ASSIGN_SITE_ROLES" value1="Assign Site Roles" />
-
-		<execute function="SelectFrame" locator1="IFrame#DIALOG" />
-
-		<execute function="Check" locator1="Checkbox#SITE_OWNER" />
-
-		<execute function="SelectFrameTop" value1="relative=top" />
-
-		<execute function="Click" locator1="Button#ADD" />
-
-		<execute macro="Alert#viewSuccessMessage" />
-	</command>
-
 	<command name="assignSiteRolesUserGroupsCP">
 		<execute macro="Navigator#gotoNavItem">
 			<var name="navItem" value="User Groups" />
