@@ -348,11 +348,11 @@ public class ServletContextHelperRegistrationImpl
 
 		Dictionary<String, Object> properties = new HashMapDictionary<>();
 
-		properties.put("osgi.web.symbolicname", _bundle.getSymbolicName());
-		properties.put("osgi.web.version", _bundle.getVersion());
 		properties.put(
 			"osgi.web.contextname", servletContext.getServletContextName());
 		properties.put("osgi.web.contextpath", servletContext.getContextPath());
+		properties.put("osgi.web.symbolicname", _bundle.getSymbolicName());
+		properties.put("osgi.web.version", _bundle.getVersion());
 
 		_servletContextRegistration = _bundleContext.registerService(
 			ServletContext.class, servletContext, properties);
