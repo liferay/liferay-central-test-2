@@ -6,4 +6,3 @@ Import-Package:\
 	*
 Liferay-Releng-Module-Group-Description:
 Liferay-Releng-Module-Group-Title: WAB
-Private-Package: com.liferay.portal.osgi.web.wab.reference.support.internal
