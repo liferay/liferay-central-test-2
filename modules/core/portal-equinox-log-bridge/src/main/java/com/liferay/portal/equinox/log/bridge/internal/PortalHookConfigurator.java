@@ -31,8 +31,8 @@ public class PortalHookConfigurator
 	implements ActivatorHookFactory, BundleActivator, HookConfigurator {
 
 	public PortalHookConfigurator() {
-		_portalSynchronousLogListener = new PortalSynchronousLogListener();
 		_bundleStartStopLogger = new BundleStartStopLogger();
+		_portalSynchronousLogListener = new PortalSynchronousLogListener();
 	}
 
 	@Override
