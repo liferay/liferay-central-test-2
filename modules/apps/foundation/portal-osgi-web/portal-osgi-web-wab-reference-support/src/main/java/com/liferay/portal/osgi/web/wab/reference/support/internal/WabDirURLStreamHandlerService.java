@@ -89,7 +89,9 @@ public class WabDirURLStreamHandlerService
 
 			_wabGenerator.generate(_classLoader, warDir, parameters);
 
-			URL wabDirURL = warDir.toURI().toURL();
+			uri = warDir.toURI();
+
+			URL wabDirURL = uri.toURL();
 
 			WabDirHandler wabDirHandler = new WabDirHandler(
 				wabDirURL.toExternalForm());
