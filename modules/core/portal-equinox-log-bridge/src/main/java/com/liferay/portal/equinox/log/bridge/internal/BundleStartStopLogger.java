@@ -26,16 +26,16 @@ import org.slf4j.LoggerFactory;
 public class BundleStartStopLogger implements SynchronousBundleListener {
 
 	@Override
-	public void bundleChanged(BundleEvent event) {
+	public void bundleChanged(BundleEvent bundleEvent) {
 		if (!_log.isInfoEnabled()) {
 			return;
 		}
 
-		if (event.getType() == BundleEvent.STARTED) {
-			_log.info("STARTED {}", event.getBundle());
+		if (bundleEvent.getType() == BundleEvent.STARTED) {
+			_log.info("STARTED {}", bundleEvent.getBundle());
 		}
-		else if (event.getType() == BundleEvent.STOPPED) {
-			_log.info("STOPPED {}", event.getBundle());
+		else if (bundleEvent.getType() == BundleEvent.STOPPED) {
+			_log.info("STOPPED {}", bundleEvent.getBundle());
 		}
 	}
 
