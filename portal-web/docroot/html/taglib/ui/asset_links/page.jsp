@@ -74,9 +74,7 @@ if (assetEntryId > 0) {
 					String asseLinktEntryTitle = assetLinkEntry.getTitle(locale);
 
 					if (portletURL == null) {
-						portletURL = PortletProviderUtil.getPortletURL(
-								request, assetRenderer.getClassName(),
-								PortletProvider.Action.VIEW);
+						portletURL = PortletProviderUtil.getPortletURL(request, assetRenderer.getClassName(), PortletProvider.Action.VIEW);
 
 						portletURL.setWindowState(WindowState.MAXIMIZED);
 					}
