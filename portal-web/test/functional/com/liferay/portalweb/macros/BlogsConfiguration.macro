@@ -92,11 +92,11 @@
 	</command>
 
 	<command name="uncheckRSSSubscriptionCheckbox">
-		<execute function="Uncheck" locator1="Checkbox#ENABLE_RSS_SUBSCRIPTION" />
+		<execute function="Uncheck#uncheckToggleSwitch" locator1="Checkbox#ENABLE_RSS_SUBSCRIPTION" />
 	</command>
 
 	<command name="uncheckSocialBookmarks">
-		<execute function="Uncheck" locator1="Checkbox#ENABLE_SOCIAL_BOOKMARKS" />
+		<execute function="Uncheck#uncheckToggleSwitch" locator1="Checkbox#ENABLE_SOCIAL_BOOKMARKS" />
 	</command>
 
 	<command name="viewAsSiteMemberPG">
