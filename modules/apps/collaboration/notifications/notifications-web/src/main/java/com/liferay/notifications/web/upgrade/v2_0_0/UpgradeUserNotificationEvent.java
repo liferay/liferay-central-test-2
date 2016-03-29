@@ -64,18 +64,18 @@ public class UpgradeUserNotificationEvent extends UpgradeProcess {
 				JSONObject jsonObject = JSONFactoryUtil.createJSONObject(
 					userNotificationEvent.getPayload());
 
-				boolean actionRequired = jsonObject.getBoolean(
-					"actionRequired");
-
-				userNotificationEvent.setActionRequired(actionRequired);
-
-				userNotificationEvent.setDelivered(true);
 				userNotificationEvent.setDeliveryType(
 					UserNotificationDeliveryConstants.TYPE_WEBSITE);
+				userNotificationEvent.setDelivered(true);
+
+				boolean actionRequired = jsonObject.getBoolean(
+					"actionRequired");
 
 				jsonObject.remove("actionRequired");
 
 				userNotificationEvent.setPayload(jsonObject.toString());
+
+				userNotificationEvent.setActionRequired(actionRequired);
 
 				_userNotificationEventLocalService.updateUserNotificationEvent(
 					userNotificationEvent);
