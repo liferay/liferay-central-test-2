@@ -25,7 +25,7 @@ import java.util.Map;
 public interface WabGenerator {
 
 	public File generate(
-			ClassLoader _classLoader, File file,
+			ClassLoader classLoader, File file,
 			Map<String, String[]> parameters)
 		throws IOException;
 
