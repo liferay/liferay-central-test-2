@@ -115,8 +115,6 @@ public class AutoDeployDir {
 			}
 		}
 
-		FileUtil.mkdirs(dirName);
-
 		FileUtil.move(file, new File(dirName, fileName));
 	}
 
