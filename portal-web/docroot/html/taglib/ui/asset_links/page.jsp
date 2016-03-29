@@ -81,9 +81,8 @@ if (assetEntryId > 0) {
 					else {
 						viewAssetURL = PortletProviderUtil.getPortletURL(request, assetRenderer.getClassName(), PortletProvider.Action.VIEW);
 
-						viewAssetURL.setWindowState(WindowState.MAXIMIZED);
-
 						viewAssetURL.setParameter("redirect", currentURL);
+						viewAssetURL.setWindowState(WindowState.MAXIMIZED);
 					}
 
 					viewAssetURL.setParameter("assetEntryId", String.valueOf(assetLinkEntry.getEntryId()));

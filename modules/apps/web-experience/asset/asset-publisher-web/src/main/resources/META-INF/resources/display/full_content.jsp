@@ -23,8 +23,6 @@ if (Validator.isNull(redirect)) {
 	redirect = ParamUtil.getString(PortalUtil.getOriginalServletRequest(request), "redirect");
 }
 
-List results = (List)request.getAttribute("view.jsp-results");
-
 boolean showBackURL = GetterUtil.getBoolean(request.getAttribute("view.jsp-showBackURL"));
 
 if (Validator.isNull(redirect)) {
@@ -34,6 +32,8 @@ if (Validator.isNull(redirect)) {
 
 	redirect = portletURL.toString();
 }
+
+List results = (List)request.getAttribute("view.jsp-results");
 
 int assetEntryIndex = ((Integer)request.getAttribute("view.jsp-assetEntryIndex")).intValue();
 
