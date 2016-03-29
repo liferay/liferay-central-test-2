@@ -68,6 +68,7 @@ public class UpgradeUserNotificationEvent extends UpgradeProcess {
 					"actionRequired");
 
 				userNotificationEvent.setActionRequired(actionRequired);
+
 				userNotificationEvent.setDelivered(true);
 				userNotificationEvent.setDeliveryType(
 					UserNotificationDeliveryConstants.TYPE_WEBSITE);
