@@ -1283,7 +1283,7 @@
 		</execute>
 
 		<execute macro="User#addCP">
-			<var method="TestPropsUtil#get('email.address.2')" name="userEmailAddress" />
+			<var name="userEmailAddress" value="userea@liferay.com" />
 			<var name="userFirstName" value="userfn" />
 			<var name="userLastName" value="userln" />
 			<var name="userScreenName" value="usersn" />
@@ -1294,7 +1294,7 @@
 		</execute>
 
 		<execute macro="User#editPasswordCP">
-			<var method="TestPropsUtil#get('email.address.2')" name="userEmailAddress" />
+			<var name="userEmailAddress" value="userea@liferay.com" />
 			<var name="userScreenName" value="usersn" />
 		</execute>
 
@@ -1311,7 +1311,7 @@
 
 		<execute macro="User#loginPG">
 			<var name="password" value="test" />
-			<var method="TestPropsUtil#get('email.address.2')" name="userEmailAddress" />
+			<var name="userEmailAddress" value="userea@liferay.com" />
 		</execute>
 
 		<execute macro="Navigator#gotoPage">
