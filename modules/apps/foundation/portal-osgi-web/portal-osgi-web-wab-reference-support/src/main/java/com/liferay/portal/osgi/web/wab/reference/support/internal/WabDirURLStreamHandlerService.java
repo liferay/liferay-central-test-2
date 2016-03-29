@@ -80,7 +80,7 @@ public class WabDirURLStreamHandlerService
 
 			if (contextName == StringPool.BLANK) {
 				throw new IllegalArgumentException(
-					"Could not determine contextName from url " + url);
+					"Unable to determine context name from " + url);
 			}
 
 			Map<String, String[]> parameters = new HashMap<>();
