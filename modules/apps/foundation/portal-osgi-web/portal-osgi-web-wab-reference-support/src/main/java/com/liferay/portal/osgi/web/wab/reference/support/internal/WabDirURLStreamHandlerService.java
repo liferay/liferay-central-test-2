@@ -118,9 +118,17 @@ public class WabDirURLStreamHandlerService
 		_classLoader = clazz.getClassLoader();
 	}
 
-	private String _getContextNameFromXMLFile(File warDir)
-		throws IOException {
+	private String _getContextNameFromDirectory(File warDir) {
+		Matcher matcher = _pattern.matcher(warDir.getAbsolutePath());
 
+		if (matcher.matches()) {
+			return matcher.group(1);
+		}
+
+		return null;
+	}
+
+	private String _getContextNameFromXMLFile(File warDir) throws IOException {
 		File lookAndFeelXmlFile = new File(
 			warDir, "WEB-INF/liferay-look-and-feel.xml");
 
@@ -142,16 +150,6 @@ public class WabDirURLStreamHandlerService
 
 		if (themeId != null) {
 			return themeId + "-theme";
-		}
-
-		return null;
-	}
-
-	private String _getContextNameFromDirectory(File warDir) {
-		Matcher matcher = _pattern.matcher(warDir.getAbsolutePath());
-
-		if (matcher.matches()) {
-			return matcher.group(1);
 		}
 
 		return null;
