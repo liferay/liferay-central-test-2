@@ -116,7 +116,7 @@ public class FormNavigatorCategoryUtil {
 				}
 
 			},
-			new PropertyServiceReferenceComparator(
+			new PropertyServiceReferenceComparator<FormNavigatorCategory>(
 				"form.navigator.category.order"));
 	}
 
