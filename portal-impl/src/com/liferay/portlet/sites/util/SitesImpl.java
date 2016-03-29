@@ -2006,7 +2006,7 @@ public class SitesImpl implements Sites {
 		mergeLayoutSetPrototypeLayouts(group, layoutSet);
 	}
 
-	private void deleteObsoletePortlets(
+	protected void deleteObsoletePortlets(
 			List<String> targetLayoutPortletIds, Layout targetLayout,
 			Layout sourceLayout)
 		throws Exception {
