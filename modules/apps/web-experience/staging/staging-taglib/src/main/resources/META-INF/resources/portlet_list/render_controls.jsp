@@ -73,8 +73,9 @@ for (int i = 0; i < controls.length; i++) {
 
 				String controlName = Validator.isNotNull(control.getNamespace()) ? control.getNamespacedControlName() : (control.getControlName() + StringPool.UNDERLINE + portletId);
 
-				boolean disabled = controls[i].isDisabled() || disableInputs;
 				String controlInputName = controlName;
+
+				boolean disabled = controls[i].isDisabled() || disableInputs;
 
 				if (disabled) {
 					controlInputName += "Display";
