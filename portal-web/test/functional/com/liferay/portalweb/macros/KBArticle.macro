@@ -200,7 +200,7 @@
 			<isset var="suggestionReceived" />
 			<then>
 				<execute function="AssertClick" locator1="CPKnowledgebaseadminConfiguration#NAVIGATION_SUGGESTION_RECEIVED_TAB" value1="Suggestion Received Email" />
-				<execute function="Type" locator1="KnowledgeBaseConfiguration#SUGGESTION_RECEIVED_EMAIL_BODY_FIELD" value1="[$COMMENT_CREATE_DATE$] &lt;a href=&quot;[$ARTICLE_URL$]&quot;&gt;Article Link &lt;/a&gt;" />
+				<execute function="Type" locator1="KnowledgeBaseConfiguration#SUGGESTION_RECEIVED_EMAIL_BODY_FIELD" value1="[$COMMENT_CREATE_DATE$] &lt;a href=&quot;[$ARTICLE_URL$]&quot;&gt;View your received suggestion here&lt;/a&gt;" />
 				<execute macro="Button#clickSave" />
 				<execute macro="Alert#viewSuccessMessage" />
 			</then>
@@ -210,7 +210,7 @@
 			<isset var="suggestionInProgress" />
 			<then>
 				<execute function="AssertClick" locator1="CPKnowledgebaseadminConfiguration#NAVIGATION_SUGGESTION_IN_PROGRESS_TAB" value1="Suggestion in Progress Email" />
-				<execute function="Type" locator1="KnowledgeBaseConfiguration#SUGGESTION_IN_PROGRESS_EMAIL_BODY_FIELD" value1="[$COMMENT_CREATE_DATE$] &lt;a href=&quot;[$ARTICLE_URL$]&quot;&gt;Article Link &lt;/a&gt;" />
+				<execute function="Type" locator1="KnowledgeBaseConfiguration#SUGGESTION_IN_PROGRESS_EMAIL_BODY_FIELD" value1="[$COMMENT_CREATE_DATE$] &lt;a href=&quot;[$ARTICLE_URL$]&quot;&gt;View your suggestion that is in progress here&lt;/a&gt;" />
 				<execute macro="Button#clickSave" />
 				<execute macro="Alert#viewSuccessMessage" />
 			</then>
@@ -220,7 +220,7 @@
 			<isset var="suggestionResolved" />
 			<then>
 				<execute function="AssertClick" locator1="CPKnowledgebaseadminConfiguration#NAVIGATION_SUGGESTION_RESOLVED_TAB" value1="Suggestion Resolved Email" />
-				<execute function="Type" locator1="KnowledgeBaseConfiguration#SUGGESTION_RESOLVED_EMAIL_BODY_FIELD" value1="[$COMMENT_CREATE_DATE$] &lt;a href=&quot;[$ARTICLE_URL$]&quot;&gt;Article Link &lt;/a&gt;" />
+				<execute function="Type" locator1="KnowledgeBaseConfiguration#SUGGESTION_RESOLVED_EMAIL_BODY_FIELD" value1="[$COMMENT_CREATE_DATE$] &lt;a href=&quot;[$ARTICLE_URL$]&quot;&gt;View your resolved suggestion here&lt;/a&gt;" />
 				<execute macro="Button#clickSave" />
 				<execute macro="Alert#viewSuccessMessage" />
 			</then>
