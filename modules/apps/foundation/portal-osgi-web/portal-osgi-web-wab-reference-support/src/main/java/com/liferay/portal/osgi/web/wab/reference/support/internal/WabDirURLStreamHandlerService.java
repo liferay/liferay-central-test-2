@@ -121,10 +121,10 @@ public class WabDirURLStreamHandlerService
 	private String detectContextNameFromDescriptor(File warDir)
 		throws IOException {
 
-		File lookAndFeelXml = new File(
+		File lookAndFeelXmlFile = new File(
 			warDir, "WEB-INF/liferay-look-and-feel.xml");
 
-		Document document = readDocument(lookAndFeelXml);
+		Document document = readDocument(lookAndFeelXmlFile);
 
 		Element rootElement = document.getRootElement();
 
@@ -148,10 +148,10 @@ public class WabDirURLStreamHandlerService
 	}
 
 	private String detectContextNameFromFilePath(File warDir) {
-		Matcher m = _pattern.matcher(warDir.getAbsolutePath());
+		Matcher matcher = _pattern.matcher(warDir.getAbsolutePath());
 
-		if (m.matches()) {
-			return m.group(1);
+		if (matcher.matches()) {
+			return matcher.group(1);
 		}
 
 		return null;
