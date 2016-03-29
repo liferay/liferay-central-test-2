@@ -215,8 +215,8 @@ public class SearchUtil {
 		}
 		catch (Exception e) {
 			_log.error(
-				"Unable to retrieve individual view URL for " + className +
-					": " + classPK,
+				"Unable to retrieve individual view URL for class " +
+					className + " with primary key " + classPK,
 				e);
 
 			return "";
