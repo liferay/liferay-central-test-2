@@ -1866,7 +1866,7 @@ public class StagingImpl implements Staging {
 			sourceGroupId, targetGroupId, privateLayout, layoutIds,
 			parameterMap, scheduleInformation.getGroupName(),
 			scheduleInformation.getCronText(),
-			scheduleInformation.getStartTime(),
+			scheduleInformation.getStartDate(),
 			scheduleInformation.getSchedulerEndDate(), name);
 	}
 
@@ -1922,7 +1922,7 @@ public class StagingImpl implements Staging {
 			sourceGroupId, targetGroupId, privateLayout, layoutIds,
 			parameterMap, scheduleInformation.getGroupName(),
 			scheduleInformation.getCronText(),
-			scheduleInformation.getStartTime(),
+			scheduleInformation.getStartDate(),
 			scheduleInformation.getSchedulerEndDate(), name);
 	}
 
@@ -2019,7 +2019,7 @@ public class StagingImpl implements Staging {
 			remotePort, remotePathContext, secureConnection, remoteGroupId,
 			remotePrivateLayout, null, null, scheduleInformation.getGroupName(),
 			scheduleInformation.getCronText(),
-			scheduleInformation.getStartTime(),
+			scheduleInformation.getStartDate(),
 			scheduleInformation.getSchedulerEndDate(), name);
 	}
 
@@ -2999,6 +2999,10 @@ public class StagingImpl implements Staging {
 
 		public Calendar getStartCalendar() {
 			return _startCalendar;
+		}
+
+		public Date getStartDate() {
+			return _startCalendar.getTime();
 		}
 
 		public void setCronText(String cronText) {
