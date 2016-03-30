@@ -36,9 +36,9 @@ RowChecker rowChecker = new EmptyOnClickRowChecker(renderResponse);
 
 OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)organizationSearch.getSearchTerms();
 
-boolean isShowAddButton = GroupPermissionUtil.contains(permissionChecker, siteMembershipsDisplayContext.getGroupId(), ActionKeys.ASSIGN_MEMBERS);
+boolean hasAssignMembersPermission = GroupPermissionUtil.contains(permissionChecker, siteMembershipsDisplayContext.getGroupId(), ActionKeys.ASSIGN_MEMBERS);
 
-if (!searchTerms.isSearch() && isShowAddButton) {
+if (!searchTerms.isSearch() && hasAssignMembersPermission) {
 	organizationSearch.setEmptyResultsMessageCssClass("taglib-empty-result-message-header-has-plus-btn");
 }
 
@@ -136,7 +136,7 @@ organizationSearch.setResults(organizations);
 	<aui:input name="tabs1" type="hidden" value="organizations" />
 </aui:form>
 
-<c:if test="<%= isShowAddButton %>">
+<c:if test="<%= hasAssignMembersPermission %>">
 	<liferay-frontend:add-menu>
 		<liferay-frontend:add-menu-item id="selectOrganizations" title='<%= LanguageUtil.get(request, "assign-organizations") %>' url="javascript:;" />
 	</liferay-frontend:add-menu>

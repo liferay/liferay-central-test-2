@@ -36,9 +36,9 @@ RowChecker rowChecker = new EmptyOnClickRowChecker(renderResponse);
 
 UserSearchTerms searchTerms = (UserSearchTerms)userSearch.getSearchTerms();
 
-boolean isShowAddButton = GroupPermissionUtil.contains(permissionChecker, siteMembershipsDisplayContext.getGroupId(), ActionKeys.ASSIGN_MEMBERS);
+boolean hasAssignMembersPermission = GroupPermissionUtil.contains(permissionChecker, siteMembershipsDisplayContext.getGroupId(), ActionKeys.ASSIGN_MEMBERS);
 
-if (!searchTerms.isSearch() && isShowAddButton) {
+if (!searchTerms.isSearch() && hasAssignMembersPermission) {
 	userSearch.setEmptyResultsMessageCssClass("taglib-empty-result-message-header-has-plus-btn");
 }
 
@@ -150,7 +150,7 @@ userSearch.setResults(users);
 	<aui:input name="p_u_i_d" type="hidden" />
 </aui:form>
 
-<c:if test="<%= isShowAddButton %>">
+<c:if test="<%= hasAssignMembersPermission %>">
 	<liferay-frontend:add-menu>
 		<liferay-frontend:add-menu-item id="selectUsers" title='<%= LanguageUtil.get(request, "assign-users") %>' url="javascript:;" />
 	</liferay-frontend:add-menu>
