@@ -157,10 +157,10 @@ public abstract class BaseUserNotificationHandler
 			StringBundler sb = new StringBundler(6);
 
 			sb.append("<div class=\"title\">[$TITLE$]</div><div ");
-			sb.append("class=\"body\"><div class=\"button-holder\">");
-			sb.append("<a class=\"btn btn-lg btn-primary\"");
-			sb.append("href=\"[$CONFIRM_URL$]\">[$CONFIRM$]</a>");
-			sb.append("<a class=\"btn btn-lg btn-default\" href=\"");
+			sb.append("class=\"body\"><div class=\"button-holder\"><a ");
+			sb.append("class=\"btn btn-lg btn-primary\"");
+			sb.append("href=\"[$CONFIRM_URL$]\">[$CONFIRM$]</a><a ");
+			sb.append("class=\"btn btn-lg btn-default\" href=\"");
 			sb.append("[$IGNORE_URL$]\">[$IGNORE$]</a></div></div>");
 
 			return sb.toString();
