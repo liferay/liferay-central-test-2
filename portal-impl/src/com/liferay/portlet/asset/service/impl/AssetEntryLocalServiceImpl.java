@@ -564,9 +564,6 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 
 			AssetEntryQuery assetEntryQuery = new AssetEntryQuery();
 
-			assetEntryQuery.setClassNameIds(
-				getClassNameIds(companyId, className));
-
 			assetEntryQuery.setAttribute("showInvisible", showInvisible);
 
 			String[] assetTagNamesArray = StringUtil.split(assetTagNames);
@@ -590,6 +587,9 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 						getTagIds(groupIds, assetTagNames));
 				}
 			}
+
+			assetEntryQuery.setClassNameIds(
+				getClassNameIds(companyId, className));
 
 			SearchContext searchContext = buildSearchContext(
 				companyId, groupIds, userId, classTypeId, userName, title,
