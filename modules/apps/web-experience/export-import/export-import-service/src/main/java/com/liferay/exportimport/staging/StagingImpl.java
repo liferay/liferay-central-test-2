@@ -2533,6 +2533,17 @@ public class StagingImpl implements Staging {
 
 		ScheduleInformation scheduleInformation = new ScheduleInformation();
 
+		int recurrenceType = ParamUtil.getInteger(
+			portletRequest, "recurrenceType");
+
+		Calendar startCalendar = ExportImportDateUtil.getCalendar(
+			portletRequest, "schedulerStartDate", true);
+
+		String cronText = SchedulerEngineHelperUtil.getCronText(
+			portletRequest, startCalendar, true, recurrenceType);
+
+		scheduleInformation.setCronText(cronText);
+
 		String destinationName = DestinationNames.LAYOUTS_LOCAL_PUBLISHER;
 
 		if (remote) {
@@ -2543,19 +2554,6 @@ public class StagingImpl implements Staging {
 			destinationName, targetGroupId);
 
 		scheduleInformation.setGroupName(groupName);
-
-		int recurrenceType = ParamUtil.getInteger(
-			portletRequest, "recurrenceType");
-
-		Calendar startCalendar = ExportImportDateUtil.getCalendar(
-			portletRequest, "schedulerStartDate", true);
-
-		scheduleInformation.setStartCalendar(startCalendar);
-
-		String cronText = SchedulerEngineHelperUtil.getCronText(
-			portletRequest, startCalendar, true, recurrenceType);
-
-		scheduleInformation.setCronText(cronText);
 
 		Date schedulerEndDate = null;
 
@@ -2569,6 +2567,8 @@ public class StagingImpl implements Staging {
 		}
 
 		scheduleInformation.setSchedulerEndDate(schedulerEndDate);
+
+		scheduleInformation.setStartCalendar(startCalendar);
 
 		return scheduleInformation;
 	}
