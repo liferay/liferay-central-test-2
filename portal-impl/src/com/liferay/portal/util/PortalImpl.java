@@ -6134,12 +6134,12 @@ public class PortalImpl implements Portal {
 
 	@Override
 	public boolean isForwardedSecure(HttpServletRequest request) {
-		if (PropsValues.WEB_SERVER_FORWARDED_PROTO_ENABLED) {
-			String forwardedProto = request.getHeader(
-				PropsValues.WEB_SERVER_FORWARDED_PROTO_HEADER);
+		if (PropsValues.WEB_SERVER_FORWARDED_PROTOCOL_ENABLED) {
+			String forwardedProtocol = request.getHeader(
+				PropsValues.WEB_SERVER_FORWARDED_PROTOCOL_HEADER);
 
-			if (Validator.isNotNull(forwardedProto) &&
-				Validator.equals(Http.HTTPS, forwardedProto)) {
+			if (Validator.isNotNull(forwardedProtocol) &&
+				Validator.equals(Http.HTTPS, forwardedProtocol)) {
 
 				return true;
 			}
@@ -6299,7 +6299,7 @@ public class PortalImpl implements Portal {
 	public boolean isSecure(HttpServletRequest request) {
 		boolean secure = false;
 
-		if (PropsValues.WEB_SERVER_FORWARDED_PROTO_ENABLED) {
+		if (PropsValues.WEB_SERVER_FORWARDED_PROTOCOL_ENABLED) {
 			return isForwardedSecure(request);
 		}
 

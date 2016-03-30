@@ -1594,9 +1594,9 @@ public class PropsValues {
 
 	public static final String WEB_SERVER_FORWARDED_PORT_HEADER = PropsUtil.get(PropsKeys.WEB_SERVER_FORWARDED_PORT_HEADER);
 
-	public static final boolean WEB_SERVER_FORWARDED_PROTO_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.WEB_SERVER_FORWARDED_PROTO_ENABLED));
+	public static final boolean WEB_SERVER_FORWARDED_PROTOCOL_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.WEB_SERVER_FORWARDED_PROTOCOL_ENABLED));
 
-	public static final String WEB_SERVER_FORWARDED_PROTO_HEADER = PropsUtil.get(PropsKeys.WEB_SERVER_FORWARDED_PROTO_HEADER);
+	public static final String WEB_SERVER_FORWARDED_PROTOCOL_HEADER = PropsUtil.get(PropsKeys.WEB_SERVER_FORWARDED_PROTOCOL_HEADER);
 
 	public static final String WEB_SERVER_HOST = PropsUtil.get(PropsKeys.WEB_SERVER_HOST);
 
