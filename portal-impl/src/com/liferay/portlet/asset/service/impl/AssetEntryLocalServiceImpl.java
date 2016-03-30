@@ -554,8 +554,8 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 	public long searchCount(
 		long companyId, long[] groupIds, long userId, String className,
 		long classTypeId, String userName, String title, String description,
-		String assetCategoryIds, String assetTagNames, boolean showNonindexable,
-		boolean showInvisible, int[] statuses, boolean andSearch) {
+		String assetCategoryIds, String assetTagNames, boolean showInvisible,
+		boolean showNonindexable, int[] statuses, boolean andSearch) {
 
 		try {
 			Indexer<?> indexer = AssetSearcher.getInstance();
