@@ -49,15 +49,13 @@ public class OutputTag extends PositionTagSupport {
 				String bodyContentString =
 					getBodyContentAsStringBundler().toString();
 
-				bodyContentString = _addAtrributeIfAbsent(
+				bodyContentString = _addAtrribute(
 					bodyContentString, "link", "data-senna-track",
 					"\"temporary\"");
-
-				bodyContentString = _addAtrributeIfAbsent(
+				bodyContentString = _addAtrribute(
 					bodyContentString, "script", "data-senna-track",
 					"\"permanent\"");
-
-				bodyContentString = _addAtrributeIfAbsent(
+				bodyContentString = _addAtrribute(
 					bodyContentString, "style", "data-senna-track",
 					"\"temporary\"");
 
@@ -122,31 +120,32 @@ public class OutputTag extends PositionTagSupport {
 		return outputData;
 	}
 
-	private String _addAtrributeIfAbsent(
-		String content, String tag, String attribute, String attributeValue) {
+	private String _addAtrribute(
+		String content, String tagName, String attributeName,
+		String attributeValue) {
 
-		int beginPos = 0;
-		int endPos = 0;
+		int x = 0;
+		int y = 0;
 
-		while (beginPos >= 0) {
-			beginPos = content.indexOf("<" + tag, endPos);
+		while (x >= 0) {
+			x = content.indexOf("<" + tagName, y);
 
-			if (beginPos < 0) {
+			if (x < 0) {
 				break;
 			}
 
-			endPos = content.indexOf(">", beginPos);
+			y = content.indexOf(">", x);
 
-			if (endPos < 0) {
+			if (y < 0) {
 				break;
 			}
 
-			String subContent = content.substring(beginPos, endPos);
+			String subcontent = content.substring(x, y);
 
-			if (!subContent.contains(attribute)) {
+			if (!subcontent.contains(attributeName)) {
 				content = StringUtil.insert(
-					content, " " + attribute + "=" + attributeValue,
-					beginPos + tag.length() + 1);
+					content, " " + attributeName + "=" + attributeValue,
+					x + tagName.length() + 1);
 			}
 		}
 
