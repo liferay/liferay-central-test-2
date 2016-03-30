@@ -175,14 +175,14 @@ public class SoyPortletHelper {
 	protected String getRequiredModulesString(Set<String> requiredModules) {
 		StringBundler sb = new StringBundler(requiredModules.size() * 4);
 
-		Iterator<String> it = requiredModules.iterator();
+		Iterator<String> iterator = requiredModules.iterator();
 
-		while (it.hasNext()) {
+		while (iterator.hasNext()) {
 			sb.append(StringPool.QUOTE);
-			sb.append(it.next());
+			sb.append(iterator.next());
 			sb.append(StringPool.QUOTE);
 
-			if (it.hasNext()) {
+			if (iterator.hasNext()) {
 				sb.append(StringPool.COMMA);
 			}
 		}
