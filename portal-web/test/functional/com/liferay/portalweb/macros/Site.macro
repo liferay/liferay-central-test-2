@@ -320,7 +320,10 @@
 		<execute macro="Button#clickSave" />
 
 		<execute function="AssertElementPresent" locator1="Message#SUCCESS" />
-		<execute function="AssertClick" locator1="SiteMembershipsViewMembershipRequests#VIEW_MEMBERSHIP_NAVIGATION_APPROVED" value1="Approved" />
+
+		<execute macro="Navigator#gotoNavItem">
+			<var name="navItem" value="Approved" />
+		</execute>
 
 		<execute function="AssertTextEquals" locator1="SiteMembershipsViewMembershipRequests#USER_NAME" value1="${userFirstName} ${userLastName}" />
 		<execute function="AssertTextEquals" locator1="SiteMembershipsViewMembershipRequests#USER_COMMENTS" value1="Please allow me to join the Restricted Site." />
