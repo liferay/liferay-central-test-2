@@ -2315,9 +2315,9 @@ public interface PropsKeys {
 
 	public static final String WEB_SERVER_FORWARDED_PORT_HEADER = "web.server.forwarded.port.header";
 
-	public static final String WEB_SERVER_FORWARDED_PROTO_ENABLED = "web.server.forwarded.proto.enabled";
+	public static final String WEB_SERVER_FORWARDED_PROTOCOL_ENABLED = "web.server.forwarded.protocol.enabled";
 
-	public static final String WEB_SERVER_FORWARDED_PROTO_HEADER = "web.server.forwarded.proto.header";
+	public static final String WEB_SERVER_FORWARDED_PROTOCOL_HEADER = "web.server.forwarded.protocol.header";
 
 	public static final String WEB_SERVER_HOST = "web.server.host";
 
