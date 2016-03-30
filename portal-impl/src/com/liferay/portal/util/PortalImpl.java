@@ -2339,11 +2339,9 @@ public class PortalImpl implements Portal {
 			return request.getServerName();
 		}
 
-		String serverName = GetterUtil.get(
+		return GetterUtil.get(
 			request.getHeader(PropsValues.WEB_SERVER_FORWARDED_HOST_HEADER),
 			request.getServerName());
-
-		return serverName;
 	}
 
 	@Override
@@ -2352,11 +2350,9 @@ public class PortalImpl implements Portal {
 			return request.getServerPort();
 		}
 
-		int serverPort = GetterUtil.getInteger(
+		return GetterUtil.getInteger(
 			request.getHeader(PropsValues.WEB_SERVER_FORWARDED_PORT_HEADER),
 			request.getServerPort());
-
-		return serverPort;
 	}
 
 	@Override
@@ -3966,7 +3962,6 @@ public class PortalImpl implements Portal {
 	@Override
 	public String getPortalURL(HttpServletRequest request, boolean secure) {
 		String serverName = getForwardedHost(request);
-
 		int serverPort = getForwardedPort(request);
 
 		return getPortalURL(serverName, serverPort, secure);

@@ -744,18 +744,14 @@ public class ServicePreAction extends Action {
 
 		boolean secure = PortalUtil.isForwardedSecure(request);
 
-		String serverName = PortalUtil.getForwardedHost(request);
-
-		int serverPort = PortalUtil.getForwardedPort(request);
-
 		themeDisplay.setCDNHost(cdnHost);
 		themeDisplay.setCDNDynamicResourcesHost(dynamicResourcesCDNHost);
 		themeDisplay.setFacebookCanvasPageURL(facebookCanvasPageURL);
 		themeDisplay.setPortalURL(portalURL);
 		themeDisplay.setRefererPlid(refererPlid);
 		themeDisplay.setSecure(secure);
-		themeDisplay.setServerName(serverName);
-		themeDisplay.setServerPort(serverPort);
+		themeDisplay.setServerName(PortalUtil.getForwardedHost(request));
+		themeDisplay.setServerPort(PortalUtil.getForwardedPort(request));
 		themeDisplay.setWidget(widget);
 
 		themeDisplay.setCompany(company);
