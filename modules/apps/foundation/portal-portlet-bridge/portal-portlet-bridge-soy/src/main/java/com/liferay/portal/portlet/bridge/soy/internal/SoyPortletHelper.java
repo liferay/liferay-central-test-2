@@ -173,7 +173,7 @@ public class SoyPortletHelper {
 	}
 
 	protected String getRequiredModulesString(Set<String> requiredModules) {
-		StringBundler sb = new StringBundler(requiredModules.size() * 4);
+		StringBundler sb = new StringBundler((requiredModules.size() * 4) -1);
 
 		Iterator<String> iterator = requiredModules.iterator();
 
