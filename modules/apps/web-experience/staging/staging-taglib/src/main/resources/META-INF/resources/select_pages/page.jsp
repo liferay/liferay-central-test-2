@@ -85,10 +85,10 @@
 					<c:when test="<%= disableInputs %>">
 
 						<%
-						int groupLayoutsCount = LayoutLocalServiceUtil.getLayoutsCount(group, privateLayout);
+						int layoutsCount = LayoutLocalServiceUtil.getLayoutsCount(group, privateLayout);
 						%>
 
-						<liferay-ui:message arguments="<%= new String[] {String.valueOf(selectedLayoutIdsArray.length), String.valueOf(groupLayoutsCount)} %>" key="x-selected-out-of-x" />
+						<liferay-ui:message arguments="<%= new String[] {String.valueOf(selectedLayoutIdsArray.length), String.valueOf(layoutsCount)} %>" key="x-selected-out-of-x" />
 					</c:when>
 					<c:otherwise>
 						<div class="pages-selector">
