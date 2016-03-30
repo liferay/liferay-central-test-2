@@ -40,9 +40,9 @@ public class LicenseInstaller implements ArtifactInstaller {
 		}
 
 		try {
-			String licenseFileContent = FileUtil.read(artifact);
+			String content = FileUtil.read(artifact);
 
-			Document document = SAXReaderUtil.read(licenseFileContent);
+			Document document = SAXReaderUtil.read(content);
 
 			Element rootElement = document.getRootElement();
 
@@ -62,9 +62,9 @@ public class LicenseInstaller implements ArtifactInstaller {
 	public void install(File file) throws Exception {
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		String licenseFileContent = FileUtil.read(file);
+		String content = FileUtil.read(file);
 
-		jsonObject.put("licenseXML", licenseFileContent);
+		jsonObject.put("licenseXML", content);
 
 		LicenseManagerUtil.registerLicense(jsonObject);
 	}
