@@ -135,12 +135,9 @@ public class ConfigurationModelToDDMFormValuesConverter {
 			return false;
 		}
 
-		Dictionary<String, Object> configurationProperties =
-			configuration.getProperties();
+		Dictionary<String, Object> properties = configuration.getProperties();
 
-		String attributeId = attributeDefinition.getID();
-
-		return Validator.isNotNull(configurationProperties.get(attributeId));
+		return Validator.isNotNull(properties.get(attributeDefinition.getID()));
 	}
 
 	protected void setDDMFormFieldValueLocalizedValue(
