@@ -91,9 +91,8 @@ public class WabDirURLStreamHandlerService
 
 			uri = warDir.toURI();
 
-			String installURL = uri.toASCIIString();
-
-			WabDirHandler wabDirHandler = new WabDirHandler(installURL);
+			WabDirHandler wabDirHandler = new WabDirHandler(
+				uri.toASCIIString());
 
 			return wabDirHandler.openConnection(url);
 		}
