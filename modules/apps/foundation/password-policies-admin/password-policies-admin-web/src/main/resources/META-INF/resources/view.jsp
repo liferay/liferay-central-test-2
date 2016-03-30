@@ -104,7 +104,6 @@ PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(request, "passwor
 	</c:if>
 
 	<c:if test="<%= !passwordPolicyEnabled && windowState.equals(WindowState.MAXIMIZED) %>">
-
 		<liferay-ui:search-container
 			id="passwordPolicies"
 			searchContainer="<%= searchContainer %>"
