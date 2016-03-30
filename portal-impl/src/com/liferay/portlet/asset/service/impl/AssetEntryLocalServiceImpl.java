@@ -555,7 +555,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		long companyId, long[] groupIds, long userId, String className,
 		long classTypeId, String userName, String title, String description,
 		String assetCategoryIds, String assetTagNames, boolean showNonindexable,
-		boolean showNonVisible, int[] statuses, boolean andSearch) {
+		boolean showInvisible, int[] statuses, boolean andSearch) {
 
 		try {
 			Indexer<?> indexer = AssetSearcher.getInstance();
@@ -567,7 +567,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			assetEntryQuery.setClassNameIds(
 				getClassNameIds(companyId, className));
 
-			assetEntryQuery.setAttribute("showNonVisible", showNonVisible);
+			assetEntryQuery.setAttribute("showInvisible", showInvisible);
 
 			String[] assetTagNamesArray = StringUtil.split(assetTagNames);
 
