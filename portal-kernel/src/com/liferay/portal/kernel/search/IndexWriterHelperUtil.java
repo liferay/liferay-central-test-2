@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.backgroundtask.BackgroundTask;
 import com.liferay.portal.kernel.util.ProxyFactory;
 
 import java.io.Serializable;
+
 import java.util.Collection;
 import java.util.Locale;
 import java.util.Map;
