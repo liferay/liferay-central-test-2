@@ -2626,6 +2626,30 @@ public class StagingImpl implements Staging {
 		return false;
 	}
 
+	/**
+	 * @deprecated As of 7.0.0, with no direct replacement
+	 */
+	@Deprecated
+	protected long publishLayouts(
+			PortletRequest portletRequest, long sourceGroupId,
+			long targetGroupId, Map<String, String[]> parameterMap,
+			boolean schedule)
+		throws PortalException {
+
+		return 0;
+	}
+
+	/**
+	 * @deprecated As of 7.0.0, with no direct replacement
+	 */
+	@Deprecated
+	protected long publishToRemote(
+			PortletRequest portletRequest, boolean schedule)
+		throws PortalException {
+
+		return 0;
+	}
+
 	@Reference(unbind = "-")
 	protected void setExportImportConfigurationLocalService(
 		ExportImportConfigurationLocalService
