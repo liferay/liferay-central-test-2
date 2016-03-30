@@ -262,8 +262,8 @@ public class RubyExecutor extends BaseScriptingExecutor {
 			_rubyScriptingConfiguration.compileThreshold());
 		rubyInstanceConfig.setLoader(getClassLoader());
 
-		_loadPaths = new ArrayList<>(Arrays.asList(
-			_rubyScriptingConfiguration.loadPaths()));
+		_loadPaths = new ArrayList<>(
+			Arrays.asList(_rubyScriptingConfiguration.loadPaths()));
 
 		rubyInstanceConfig.setLoadPaths(_loadPaths);
 
