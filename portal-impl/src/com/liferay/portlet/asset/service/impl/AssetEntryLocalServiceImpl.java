@@ -1093,23 +1093,23 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			return assetTagLocalService.getTagIds(groupIds, tagName);
 		}
 
+		List<Long> tagIds = new ArrayList<>();
+
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
 			AssetTag.class);
 
-		Property tagNameProperty = PropertyFactoryUtil.forName("name");
+		Property property = PropertyFactoryUtil.forName("name");
 
-		dynamicQuery.add(tagNameProperty.eq(tagName));
+		dynamicQuery.add(property.eq(tagName));
 
 		List<AssetTag> assetTags = assetTagPersistence.findWithDynamicQuery(
 			dynamicQuery);
 
-		List<Long> tagIdList = new ArrayList<>();
-
 		for (AssetTag assetTag : assetTags) {
-			tagIdList.add(assetTag.getTagId());
+			tagIds.add(assetTag.getTagId());
 		}
 
-		return ArrayUtil.toLongArray(tagIdList);
+		return ArrayUtil.toLongArray(tagIds);
 	}
 
 	protected void reindex(AssetEntry entry) throws PortalException {
