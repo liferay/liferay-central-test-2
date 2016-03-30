@@ -375,8 +375,8 @@ public class AssetCategoriesDisplayContext {
 		if (Validator.isNull(keywords)) {
 			if (isShowVocabulariesAddButton()) {
 				vocabulariesSearchContainer.setEmptyResultsMessage(
-					"there-are-no-vocabularies.-you-can-add-a-vocabulary-by" +
-						"-clicking-the-plus-button-on-the-bottom-right-corner");
+					"there-are-no-vocabularies.-you-can-add-a-vocabulary-by-" +
+						"clicking-the-plus-button-on-the-bottom-right-corner");
 				vocabulariesSearchContainer.setEmptyResultsMessageCssClass(
 					"taglib-empty-result-message-header-has-plus-btn");
 			}
