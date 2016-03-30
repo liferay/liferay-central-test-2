@@ -4,5 +4,5 @@ Bundle-Version: 3.0.0
 Export-Package: com.liferay.staging.taglib.servlet.taglib
 Liferay-Releng-Module-Group-Description:
 Liferay-Releng-Module-Group-Title: Data Management
-Provide-Capability: osgi.extender;osgi.extender="jsp.taglib";uri="http://liferay.com/tld/staging";version:Version="1.0.0"
+Provide-Capability: osgi.extender;osgi.extender="jsp.taglib";uri="http://liferay.com/tld/staging";version:Version="${Bundle-Version}"
 Web-ContextPath: /staging-taglib
