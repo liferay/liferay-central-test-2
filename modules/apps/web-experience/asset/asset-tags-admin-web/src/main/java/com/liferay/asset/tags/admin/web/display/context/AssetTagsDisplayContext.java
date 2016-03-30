@@ -172,7 +172,7 @@ public class AssetTagsDisplayContext {
 		return _tagId;
 	}
 
-	public long getTagsFullCount(AssetTag tag) {
+	public long getFullTagsCount(AssetTag tag) {
 		int[] statuses = new int[] {
 			WorkflowConstants.STATUS_APPROVED, WorkflowConstants.STATUS_PENDING,
 			WorkflowConstants.STATUS_SCHEDULED
