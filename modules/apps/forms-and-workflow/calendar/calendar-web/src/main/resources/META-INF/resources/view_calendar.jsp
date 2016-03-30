@@ -121,7 +121,7 @@ boolean columnOptionsVisible = GetterUtil.getBoolean(SessionClicks.get(request, 
 				<liferay-util:param name="hideDayView" value="<%= String.valueOf(!showDayView) %>" />
 				<liferay-util:param name="hideWeekView" value="<%= String.valueOf(!showWeekView) %>" />
 				<liferay-util:param name="hideMonthView" value="<%= String.valueOf(!showMonthView) %>" />
-				<liferay-util:param name="readOnly" value="<%= String.valueOf(false) %>" />
+				<liferay-util:param name="readOnly" value="<%= Boolean.FALSE.toString() %>" />
 
 				<liferay-security:permissionsURL
 					modelResource="<%= CalendarBooking.class.getName() %>"
