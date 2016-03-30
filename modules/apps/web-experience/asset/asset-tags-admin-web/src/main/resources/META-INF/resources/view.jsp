@@ -89,7 +89,7 @@
 		>
 
 			<%
-			long tagsFullCount = assetTagsDisplayContext.getTagsFullCount(tag);
+			long fullTagsCount = assetTagsDisplayContext.getFullTagsCount(tag);
 			%>
 
 			<c:choose>
@@ -107,7 +107,7 @@
 						</h5>
 
 						<h6 class="text-default">
-							<strong><liferay-ui:message key="usages" /></strong>: <span><%= String.valueOf(tagsFullCount) %></span>
+							<strong><liferay-ui:message key="usages" /></strong>: <span><%= String.valueOf(fullTagsCount) %></span>
 						</h6>
 					</liferay-ui:search-container-column-text>
 
@@ -131,7 +131,7 @@
 							title="<%= tag.getName() %>"
 						>
 							<liferay-frontend:vertical-card-footer>
-								<strong><liferay-ui:message key="usages" /></strong>: <span><%= String.valueOf(tagsFullCount) %></span>
+								<strong><liferay-ui:message key="usages" /></strong>: <span><%= String.valueOf(fullTagsCount) %></span>
 							</liferay-frontend:vertical-card-footer>
 						</liferay-frontend:icon-vertical-card>
 					</liferay-ui:search-container-column-text>
@@ -147,7 +147,7 @@
 					<liferay-ui:search-container-column-text
 						cssClass="usages-column"
 						name="usages"
-						value="<%= String.valueOf(tagsFullCount) %>"
+						value="<%= String.valueOf(fullTagsCount) %>"
 					/>
 
 					<liferay-ui:search-container-column-jsp
