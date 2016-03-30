@@ -255,6 +255,7 @@ public class StagingImpl implements Staging {
 		boolean privateLayout = getPrivateLayout(portletRequest);
 		long[] layoutIds = ExportImportHelperUtil.getLayoutIds(
 			portletRequest, targetGroupId);
+
 		Map<String, String[]> parameterMap =
 			ExportImportConfigurationParameterMapFactory.buildParameterMap(
 				portletRequest);
@@ -1600,6 +1601,7 @@ public class StagingImpl implements Staging {
 		Group sourceGroup = targetGroup.getStagingGroup();
 
 		long sourceGroupId = sourceGroup.getGroupId();
+
 		long targetGroupId = targetGroup.getGroupId();
 
 		Map<String, Serializable> publishLayoutLocalSettingsMap = null;
@@ -1628,7 +1630,6 @@ public class StagingImpl implements Staging {
 
 		if (publishLayoutLocalSettingsMap == null) {
 			boolean privateLayout = getPrivateLayout(portletRequest);
-
 			long[] layoutIds = ExportImportHelperUtil.getLayoutIds(
 				portletRequest, targetGroupId);
 
@@ -1757,6 +1758,7 @@ public class StagingImpl implements Staging {
 			if (exportImportConfiguration != null) {
 				publishLayoutRemoteSettingsMap =
 					exportImportConfiguration.getSettingsMap();
+
 				remoteAddress = MapUtil.getString(
 					publishLayoutRemoteSettingsMap, "remoteAddress");
 				remotePort = MapUtil.getInteger(
@@ -1772,18 +1774,14 @@ public class StagingImpl implements Staging {
 
 		if (publishLayoutRemoteSettingsMap == null) {
 			boolean privateLayout = getPrivateLayout(portletRequest);
-
 			Map<Long, Boolean> layoutIdMap =
 				ExportImportHelperUtil.getLayoutIdMap(portletRequest);
-
 			Map<String, String[]> parameterMap =
 				ExportImportConfigurationParameterMapFactory.buildParameterMap(
 					portletRequest);
-
 			remoteAddress = ParamUtil.getString(
 				portletRequest, "remoteAddress",
 				groupTypeSettingsProperties.getProperty("remoteAddress"));
-
 			remotePort = ParamUtil.getInteger(
 				portletRequest, "remotePort",
 				GetterUtil.getInteger(
@@ -1860,17 +1858,15 @@ public class StagingImpl implements Staging {
 		Map<String, String[]> parameterMap =
 			ExportImportConfigurationParameterMapFactory.buildParameterMap(
 				portletRequest);
-
 		ScheduleInformation scheduleInformation = getScheduleInformation(
 			portletRequest, targetGroupId, false);
-
 		String name = ParamUtil.getString(portletRequest, "name");
 
 		_layoutService.schedulePublishToLive(
 			sourceGroupId, targetGroupId, privateLayout, layoutIds,
 			parameterMap, scheduleInformation.getGroupName(),
 			scheduleInformation.getCronText(),
-			scheduleInformation.getStartCalendar().getTime(),
+			scheduleInformation.getStartTime(),
 			scheduleInformation.getSchedulerEndDate(), name);
 	}
 
@@ -1911,10 +1907,8 @@ public class StagingImpl implements Staging {
 
 		if (parameterMap == null) {
 			privateLayout = getPrivateLayout(portletRequest);
-
 			layoutIds = ExportImportHelperUtil.getLayoutIds(
 				portletRequest, targetGroupId);
-
 			parameterMap =
 				ExportImportConfigurationParameterMapFactory.buildParameterMap(
 					portletRequest);
@@ -1922,14 +1916,13 @@ public class StagingImpl implements Staging {
 
 		ScheduleInformation scheduleInformation = getScheduleInformation(
 			portletRequest, targetGroupId, false);
-
 		String name = ParamUtil.getString(portletRequest, "name");
 
 		_layoutService.schedulePublishToLive(
 			sourceGroupId, targetGroupId, privateLayout, layoutIds,
 			parameterMap, scheduleInformation.getGroupName(),
 			scheduleInformation.getCronText(),
-			scheduleInformation.getStartCalendar().getTime(),
+			scheduleInformation.getStartTime(),
 			scheduleInformation.getSchedulerEndDate(), name);
 	}
 
@@ -1984,13 +1977,10 @@ public class StagingImpl implements Staging {
 
 		if (parameterMap == null) {
 			privateLayout = getPrivateLayout(portletRequest);
-
 			layoutIdMap = ExportImportHelperUtil.getLayoutIdMap(portletRequest);
-
 			parameterMap =
 				ExportImportConfigurationParameterMapFactory.buildParameterMap(
 					portletRequest);
-
 			remoteAddress = ParamUtil.getString(
 				portletRequest, "remoteAddress",
 				groupTypeSettingsProperties.getProperty("remoteAddress"));
@@ -2011,7 +2001,6 @@ public class StagingImpl implements Staging {
 		}
 
 		remoteAddress = stripProtocolFromRemoteAddress(remoteAddress);
-
 		long remoteGroupId = ParamUtil.getLong(
 			portletRequest, "remoteGroupId",
 			GetterUtil.getLong(
@@ -2023,7 +2012,6 @@ public class StagingImpl implements Staging {
 
 		ScheduleInformation scheduleInformation = getScheduleInformation(
 			portletRequest, groupId, true);
-
 		String name = ParamUtil.getString(portletRequest, "name");
 
 		_layoutService.schedulePublishToRemote(
@@ -2031,7 +2019,7 @@ public class StagingImpl implements Staging {
 			remotePort, remotePathContext, secureConnection, remoteGroupId,
 			remotePrivateLayout, null, null, scheduleInformation.getGroupName(),
 			scheduleInformation.getCronText(),
-			scheduleInformation.getStartCalendar().getTime(),
+			scheduleInformation.getStartTime(),
 			scheduleInformation.getSchedulerEndDate(), name);
 	}
 
