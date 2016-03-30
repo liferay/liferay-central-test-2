@@ -435,10 +435,10 @@ public class AssetSearcher extends BaseSearcher {
 			BooleanQuery fullQuery, SearchContext searchContext)
 		throws Exception {
 
-		boolean showNonVisible = GetterUtil.getBoolean(
-			_assetEntryQuery.getAttribute("showNonVisible"));
+		boolean showInvisible = GetterUtil.getBoolean(
+			_assetEntryQuery.getAttribute("showInvisible"));
 
-		if (showNonVisible) {
+		if (showInvisible) {
 			return;
 		}
 
@@ -450,7 +450,7 @@ public class AssetSearcher extends BaseSearcher {
 
 		booleanFilter.addRequiredTerm("visible", true);
 
-		if (booleanFilter.hasClauses() && !showNonVisible) {
+		if (booleanFilter.hasClauses() && !showInvisible) {
 			fullQuery.setPreBooleanFilter(booleanFilter);
 		}
 	}
