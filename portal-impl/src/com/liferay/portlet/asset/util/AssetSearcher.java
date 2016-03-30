@@ -436,7 +436,7 @@ public class AssetSearcher extends BaseSearcher {
 		throws Exception {
 
 		boolean showNonVisible = GetterUtil.getBoolean(
-			_assetEntryQuery.getAttribute("showNonVisible"), false);
+			_assetEntryQuery.getAttribute("showNonVisible"));
 
 		if (showNonVisible) {
 			return;
