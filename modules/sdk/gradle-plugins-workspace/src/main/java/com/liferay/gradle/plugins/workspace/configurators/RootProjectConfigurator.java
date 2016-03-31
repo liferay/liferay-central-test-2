@@ -16,6 +16,7 @@ package com.liferay.gradle.plugins.workspace.configurators;
 
 import com.liferay.gradle.plugins.workspace.WorkspaceExtension;
 import com.liferay.gradle.plugins.workspace.util.GradleUtil;
+import com.liferay.gradle.util.Validator;
 import com.liferay.gradle.util.copy.StripPathSegmentsAction;
 
 import de.undercouch.gradle.tasks.download.Download;
@@ -130,6 +131,10 @@ public class RootProjectConfigurator implements Plugin<Project> {
 
 				@Override
 				public void execute(Project project) {
+					if (Validator.isNotNull(task.getDescription())) {
+						return;
+					}
+
 					task.setDescription(
 						"Assembles the Liferay bundle and zips it up into '" +
 							project.relativePath(task.getArchivePath()) + "'.");
@@ -230,6 +235,10 @@ public class RootProjectConfigurator implements Plugin<Project> {
 
 				@Override
 				public void execute(Project project) {
+					if (Validator.isNotNull(copy.getDescription())) {
+						return;
+					}
+
 					copy.setDescription(
 						"Downloads and unzips the bundle into '" +
 							project.relativePath(copy.getDestinationDir()) +
