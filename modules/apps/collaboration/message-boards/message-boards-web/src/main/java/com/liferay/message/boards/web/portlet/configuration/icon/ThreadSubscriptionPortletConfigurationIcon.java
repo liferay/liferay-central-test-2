@@ -138,13 +138,6 @@ public class ThreadSubscriptionPortletConfigurationIcon
 		return false;
 	}
 
-	@Reference(unbind = "-")
-	protected void setSubscriptionLocalService(
-		SubscriptionLocalService subscriptionLocalService) {
-
-		_subscriptionLocalService = subscriptionLocalService;
-	}
-
 	protected boolean isSubscribed(
 		PortletRequest portletRequest, long threadId) {
 
@@ -154,6 +147,13 @@ public class ThreadSubscriptionPortletConfigurationIcon
 		return _subscriptionLocalService.isSubscribed(
 			themeDisplay.getCompanyId(), themeDisplay.getUserId(),
 			MBThread.class.getName(), threadId);
+	}
+
+	@Reference(unbind = "-")
+	protected void setSubscriptionLocalService(
+		SubscriptionLocalService subscriptionLocalService) {
+
+		_subscriptionLocalService = subscriptionLocalService;
 	}
 
 	private SubscriptionLocalService _subscriptionLocalService;
