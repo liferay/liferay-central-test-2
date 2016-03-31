@@ -45,7 +45,6 @@
 	</command>
 
 	<command name="selectDMImage">
-		<var name="key_imageFileName" value="${imageFileName}" />
 		<var name="key_uploadFileName" value="${imageFileName}" />
 
 		<execute function="SelectFrame" locator1="ItemSelector#ITEM_SELECTOR_IFRAME" />
