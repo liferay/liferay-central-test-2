@@ -17,7 +17,7 @@ dependencies {
 	compile group: "com.liferay", name: "com.liferay.wiki.service", version: "1.0.0"
 	compile group: "com.liferay.portal", name: "com.liferay.util.java", version: "2.0.0"
 	compile group: "javax.portlet", name: "portlet-api", version: "2.0"
-	compile project(":apps:collaboration:document-library:document-library-api")
+	compile group: "com.liferay", name: "com.liferay.document.library.api", version: "3.0.0"
 
 	provided group: "com.liferay", name: "org.freemarker", version: "2.3.23.LIFERAY-PATCHED-1"
 	provided group: "com.liferay.portal", name: "com.liferay.portal.impl", version: "2.0.0"
