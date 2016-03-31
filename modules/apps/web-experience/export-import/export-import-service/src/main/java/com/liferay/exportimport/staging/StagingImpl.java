@@ -303,8 +303,6 @@ public class StagingImpl implements Staging {
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		long scopeGroupId = PortalUtil.getScopeGroupId(portletRequest);
-
 		long plid = ParamUtil.getLong(portletRequest, "plid");
 
 		Map<String, String[]> parameterMap =
@@ -312,7 +310,7 @@ public class StagingImpl implements Staging {
 				portletRequest);
 
 		return publishPortlet(
-			themeDisplay.getUserId(), scopeGroupId, plid,
+			themeDisplay.getUserId(), themeDisplay.getScopeGroupId(), plid,
 			portlet.getPortletId(), parameterMap, true);
 	}
 
@@ -1672,8 +1670,6 @@ public class StagingImpl implements Staging {
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		long scopeGroupId = PortalUtil.getScopeGroupId(portletRequest);
-
 		long plid = ParamUtil.getLong(portletRequest, "plid");
 
 		Map<String, String[]> parameterMap =
@@ -1681,7 +1677,7 @@ public class StagingImpl implements Staging {
 				portletRequest);
 
 		return publishPortlet(
-			themeDisplay.getUserId(), scopeGroupId, plid,
+			themeDisplay.getUserId(), themeDisplay.getScopeGroupId(), plid,
 			portlet.getPortletId(), parameterMap, false);
 	}
 
