@@ -31,6 +31,7 @@ import org.apache.commons.validator.routines.EmailValidator;
 
 /**
  * @author Alexander Chow
+ * @see com.liferay.mail.util.InternetAddressUtil
  */
 public class InternetAddressUtil {
 

@@ -12,12 +12,13 @@
  * details.
  */
 
-package com.liferay.util.mail;
+package com.liferay.mail.util;
 
 import com.liferay.portal.kernel.exception.NestableException;
 
 /**
  * @author Brian Wing Shun Chan
+ * @see com.liferay.util.mail.MailEngineException
  */
 public class MailEngineException extends NestableException {
 
