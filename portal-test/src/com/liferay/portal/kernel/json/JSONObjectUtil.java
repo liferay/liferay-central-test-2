@@ -54,10 +54,13 @@ public class JSONObjectUtil {
 							new Comparator<Object>() {
 
 								@Override
-								public int compare(Object o1, Object o2) {
-									String s1 = o1.toString();
+								public int compare(
+									Object object1, Object object2) {
 
-									return s1.compareTo(o2.toString());
+									String string1 = object1.toString();
+
+									return string1.compareTo(
+										object2.toString());
 								}
 
 							});
