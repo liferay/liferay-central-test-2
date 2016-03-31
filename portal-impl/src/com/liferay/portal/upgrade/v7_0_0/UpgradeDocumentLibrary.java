@@ -150,6 +150,9 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		try (LoggingTimer loggingTimer = new LoggingTimer()) {
 			runSQL("alter table DLFileEntry add fileName VARCHAR(255) null");
 
+			Set<String> generatedUniqueFileNames = new HashSet<>();
+			Set<String> generatedUniqueTitles = new HashSet<>();
+
 			try (PreparedStatement ps1 = connection.prepareStatement(
 					"select fileEntryId, groupId, folderId, extension, title," +
 						" version from DLFileEntry");
@@ -164,9 +167,6 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 						"update DLFileVersion set title = ? where " +
 							"fileEntryId = " + "? and version = ?");
 				ResultSet rs = ps1.executeQuery()) {
-
-				Set<String> generatedUniqueFileNames = new HashSet<>();
-				Set<String> generatedUniqueTitles = new HashSet<>();
 
 				while (rs.next()) {
 					long fileEntryId = rs.getLong("fileEntryId");
@@ -188,9 +188,8 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 						titleWithoutExtension = FileUtil.stripExtension(title);
 					}
 
+					boolean generatedUniqueFileName = false;
 					String uniqueTitle = title;
-
-					boolean foundNameClash = false;
 
 					for (int i = 1;; i++) {
 						if (!generatedUniqueFileNames.contains(
@@ -203,7 +202,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 							break;
 						}
 
-						foundNameClash = true;
+						generatedUniqueFileName = true;
 
 						uniqueTitle =
 							titleWithoutExtension + StringPool.UNDERLINE +
@@ -218,7 +217,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 							uniqueTitle, extension);
 					}
 
-					if (foundNameClash) {
+					if (generatedUniqueFileName) {
 						generatedUniqueFileNames.add(uniqueFileName);
 						generatedUniqueTitles.add(uniqueTitle);
 					}
