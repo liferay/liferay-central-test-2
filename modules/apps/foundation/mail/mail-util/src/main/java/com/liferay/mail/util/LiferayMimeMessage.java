@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.util.mail;
+package com.liferay.mail.util;
 
 import com.liferay.portal.kernel.util.ArrayUtil;
 
@@ -22,6 +22,7 @@ import javax.mail.internet.MimeMessage;
 
 /**
  * @author Jorge Ferrer
+ * @see com.liferay.util.mail.LiferayMimeMessage
  */
 public class LiferayMimeMessage extends MimeMessage {
 

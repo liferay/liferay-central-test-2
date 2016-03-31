@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.util.mail;
+package com.liferay.mail.util;
 
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.FileUtil;
@@ -29,6 +29,7 @@ import javax.mail.internet.InternetAddress;
 
 /**
  * @author Brian Wing Shun Chan
+ * @see com.liferay.util.mail.JavaMailUtil
  */
 public class JavaMailUtil {
 
