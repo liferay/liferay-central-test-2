@@ -64,10 +64,10 @@ import java.rmi.RemoteException;
  */
 @ProviderType
 public class ClassNameServiceSoap {
-	public static com.liferay.portal.kernel.model.ClassNameSoap fetchClassName(
-		java.lang.String value) throws RemoteException {
+	public static com.liferay.portal.kernel.model.ClassNameSoap fetchByClassNameId(
+		long classNameId) throws RemoteException {
 		try {
-			com.liferay.portal.kernel.model.ClassName returnValue = ClassNameServiceUtil.fetchClassName(value);
+			com.liferay.portal.kernel.model.ClassName returnValue = ClassNameServiceUtil.fetchByClassNameId(classNameId);
 
 			return com.liferay.portal.kernel.model.ClassNameSoap.toSoapModel(returnValue);
 		}
@@ -78,10 +78,10 @@ public class ClassNameServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.kernel.model.ClassNameSoap fetchByClassNameId(
-		long classNameId) throws RemoteException {
+	public static com.liferay.portal.kernel.model.ClassNameSoap fetchClassName(
+		java.lang.String value) throws RemoteException {
 		try {
-			com.liferay.portal.kernel.model.ClassName returnValue = ClassNameServiceUtil.fetchByClassNameId(classNameId);
+			com.liferay.portal.kernel.model.ClassName returnValue = ClassNameServiceUtil.fetchClassName(value);
 
 			return com.liferay.portal.kernel.model.ClassNameSoap.toSoapModel(returnValue);
 		}
