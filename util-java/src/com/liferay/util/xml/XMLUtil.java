@@ -25,6 +25,7 @@ import java.io.IOException;
 
 /**
  * @author Leonardo Barros
+ * @see com.liferay.xml.util.XMLUtil
  */
 public class XMLUtil {
 
