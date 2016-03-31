@@ -158,7 +158,6 @@ public class DraftExportImportConfigurationMessageListener
 				}
 
 			});
-
 		actionableDynamicQuery.setPerformActionMethod(
 			new ActionableDynamicQuery.
 				PerformActionMethod<ExportImportConfiguration>() {
