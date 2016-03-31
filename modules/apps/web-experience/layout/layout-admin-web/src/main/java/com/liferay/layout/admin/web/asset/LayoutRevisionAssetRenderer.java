@@ -106,15 +106,15 @@ public class LayoutRevisionAssetRenderer
 		sb.append(LanguageUtil.get(locale, "page"));
 		sb.append(": ");
 		sb.append(_layoutRevision.getHTMLTitle(locale));
-		sb.append(", ");
+		sb.append("\n");
 		sb.append(LanguageUtil.get(locale, "site-pages-variation"));
 		sb.append(": ");
 		sb.append(LanguageUtil.get(locale, _layoutSetBranch.getName()));
-		sb.append(", ");
+		sb.append("\n");
 		sb.append(LanguageUtil.get(locale, "page-variation"));
 		sb.append(": ");
 		sb.append(LanguageUtil.get(locale, _layoutBranch.getName()));
-		sb.append(", ");
+		sb.append("\n");
 		sb.append(LanguageUtil.get(locale, "revision-id"));
 		sb.append(": ");
 		sb.append(_layoutRevision.getLayoutRevisionId());
