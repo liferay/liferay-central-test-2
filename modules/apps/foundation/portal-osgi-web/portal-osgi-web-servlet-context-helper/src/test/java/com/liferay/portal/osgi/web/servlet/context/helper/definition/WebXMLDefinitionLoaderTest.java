@@ -55,7 +55,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 public class WebXMLDefinitionLoaderTest {
 
 	@Test
-	public void testLoadCustomDependencies() throws Exception {
+	public void testLoadCustomWebXML() throws Exception {
 		TestBundle testBundle = new TestBundle("dependencies/custom-web.xml");
 
 		WebXMLDefinitionLoader webXMLDefinitionLoader =
@@ -67,7 +67,7 @@ public class WebXMLDefinitionLoaderTest {
 	}
 
 	@Test
-	public void testLoadCustomDependenciesAbsoluteOrdering() throws Exception {
+	public void testLoadCustomWebAbsoluteOrdering1XML() throws Exception {
 		TestBundle testBundle = new TestBundle(
 			"dependencies/custom-web-absolute-ordering-1.xml");
 
@@ -87,7 +87,7 @@ public class WebXMLDefinitionLoaderTest {
 	}
 
 	@Test
-	public void testLoadCustomWebFragment1Dependencies() throws Exception {
+	public void testLoadCustomWebFragment1XML() throws Exception {
 		TestBundle testBundle = new TestBundle(
 			"dependencies/custom-web-fragment-1.xml");
 
@@ -101,7 +101,7 @@ public class WebXMLDefinitionLoaderTest {
 	}
 
 	@Test
-	public void testLoadCustomWebFragment2Dependencies() throws Exception {
+	public void testLoadCustomWebFragment2XML() throws Exception {
 		TestBundle testBundle = new TestBundle(
 			"dependencies/custom-web-fragment-2.xml");
 
@@ -121,7 +121,7 @@ public class WebXMLDefinitionLoaderTest {
 	}
 
 	@Test
-	public void testLoadCustomWebFragment3Dependencies() throws Exception {
+	public void testLoadCustomWebFragment4XML() throws Exception {
 		TestBundle testBundle = new TestBundle(
 			"dependencies/custom-web-fragment-4.xml");
 
@@ -141,7 +141,7 @@ public class WebXMLDefinitionLoaderTest {
 	}
 
 	@Test
-	public void testLoadDefaultDependencies() throws Exception {
+	public void testLoadWebXML() throws Exception {
 		Bundle bundle = new MockBundle();
 
 		WebXMLDefinitionLoader webXMLDefinitionLoader =
