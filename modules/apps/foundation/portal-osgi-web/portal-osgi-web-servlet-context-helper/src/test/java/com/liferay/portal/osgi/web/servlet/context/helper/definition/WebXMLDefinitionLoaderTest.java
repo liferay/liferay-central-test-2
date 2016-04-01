@@ -193,16 +193,7 @@ public class WebXMLDefinitionLoaderTest {
 
 	@Test
 	public void testOrderBeforeAndAfterException() throws Exception {
-		EntryLoaderMockBundle entryLoaderMockBundle = new EntryLoaderMockBundle(
-			"dependencies/custom-web.xml");
-
-		WebXMLDefinitionLoader webXMLDefinitionLoader =
-			new WebXMLDefinitionLoader(
-				entryLoaderMockBundle, SAXParserFactory.newInstance(),
-				new Logger(null));
-
-		WebXMLDefinition webXMLDefinition = webXMLDefinitionLoader.loadWebXML(
-			entryLoaderMockBundle.getEntry());
+		List<WebXMLDefinition> webXMLDefinitions = new ArrayList<>();
 
 		EntryLoaderMockBundle fragment5EntryLoaderMockBundle =
 			new EntryLoaderMockBundle("dependencies/custom-web-fragment-5.xml");
@@ -216,9 +207,18 @@ public class WebXMLDefinitionLoaderTest {
 			fragment5WebXMLDefinitionLoader.loadWebXML(
 				fragment5EntryLoaderMockBundle.getEntry());
 
-		List<WebXMLDefinition> webXMLDefinitions = new ArrayList<>();
-
 		webXMLDefinitions.add(fragment5WebXMLDefinition);
+
+		EntryLoaderMockBundle entryLoaderMockBundle = new EntryLoaderMockBundle(
+			"dependencies/custom-web.xml");
+
+		WebXMLDefinitionLoader webXMLDefinitionLoader =
+			new WebXMLDefinitionLoader(
+				entryLoaderMockBundle, SAXParserFactory.newInstance(),
+				new Logger(null));
+
+		WebXMLDefinition webXMLDefinition = webXMLDefinitionLoader.loadWebXML(
+			entryLoaderMockBundle.getEntry());
 
 		boolean threwOrderBeforeAndAfterException = false;
 
