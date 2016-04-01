@@ -850,7 +850,7 @@ public class SyncFileService {
 							filePath.toString());
 
 						if (childSyncFile != null) {
-							deleteSyncFile(childSyncFile, true);
+							deleteSyncFile(childSyncFile, false);
 						}
 
 						return FileVisitResult.CONTINUE;
