@@ -149,14 +149,8 @@ public class WebXMLDefinitionLoaderTest {
 
 	@Test
 	public void testLoadCustomWebXMLMetadataComplete() throws Exception {
-		TestBundle testBundle = new TestBundle("dependencies/custom-web.xml");
-
-		WebXMLDefinitionLoader webXMLDefinitionLoader =
-			new WebXMLDefinitionLoader(
-				testBundle, SAXParserFactory.newInstance(), new Logger(null));
-
-		WebXMLDefinition webXMLDefinition = webXMLDefinitionLoader.loadWebXMLDefinition(
-			testBundle.getURL());
+		WebXMLDefinition webXMLDefinition = loadWebXMLDefinition(
+			"dependencies/custom-web.xml");
 
 		Assert.assertTrue(webXMLDefinition.isMetadataComplete());
 	}
@@ -165,15 +159,8 @@ public class WebXMLDefinitionLoaderTest {
 	public void testLoadCustomWebAbsoluteOrdering1XMLMetadataIncomplete()
 		throws Exception {
 
-		TestBundle testBundle = new TestBundle(
+		WebXMLDefinition webXMLDefinition = loadWebXMLDefinition(
 			"dependencies/custom-web-absolute-ordering-1.xml");
-
-		WebXMLDefinitionLoader webXMLDefinitionLoader =
-			new WebXMLDefinitionLoader(
-				testBundle, SAXParserFactory.newInstance(), new Logger(null));
-
-		WebXMLDefinition webXMLDefinition = webXMLDefinitionLoader.loadWebXMLDefinition(
-			testBundle.getURL());
 
 		Assert.assertFalse(webXMLDefinition.isMetadataComplete());
 	}
