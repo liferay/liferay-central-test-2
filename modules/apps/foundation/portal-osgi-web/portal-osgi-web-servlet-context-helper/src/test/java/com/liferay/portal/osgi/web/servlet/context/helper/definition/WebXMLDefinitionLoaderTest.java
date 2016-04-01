@@ -707,31 +707,28 @@ public class WebXMLDefinitionLoaderTest {
 		}
 
 		if (order != null) {
+			EnumMap<Order.Path, String[]> expectedRoutes = order.getRoutes();
+
 			Order webXMLDefinitionOrder = webXMLDefinition.getOrder();
 
 			EnumMap<Order.Path, String[]> actualRoutes =
 				webXMLDefinitionOrder.getRoutes();
 
-			EnumMap<Order.Path, String[]> expectedRoutes = order.getRoutes();
-
 			Assert.assertArrayEquals(
 				expectedRoutes.get(Order.Path.AFTER),
 				actualRoutes.get(Order.Path.AFTER));
-
 			Assert.assertArrayEquals(
 				expectedRoutes.get(Order.Path.BEFORE),
 				actualRoutes.get(Order.Path.BEFORE));
 		}
 
 		if (ListUtil.isNotEmpty(absoluteOrderNames)) {
-			String[] absoluteOrderNamesArray = absoluteOrderNames.toArray(
-				new String[0]);
-			List<String> definitionAbsoluteOrderNames =
+			List<String> webXMLDefinitionAbsoluteOrderNames =
 				webXMLDefinition.getAbsoluteOrderNames();
-			String[] definitionAbsoluteOrderNamesArray =
-				definitionAbsoluteOrderNames.toArray(new String[0]);
+
 			Assert.assertArrayEquals(
-				absoluteOrderNamesArray, definitionAbsoluteOrderNamesArray);
+				absoluteOrderNames.toArray(new String[0]),
+				webXMLDefinitionAbsoluteOrderNames.toArray(new String[0]));
 		}
 
 		List<ListenerDefinition> listenerDefinitions =
