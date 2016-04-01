@@ -368,41 +368,7 @@ public class WebXMLDefinitionLoaderTest {
 
 	@Test
 	public void testOrderCustomWebFragments2() throws Exception {
-		TestBundle absolute2TestBundle = new TestBundle(
-			"dependencies/custom-web-absolute-ordering-2.xml");
-
-		WebXMLDefinitionLoader absolute2WebXMLDefinitionLoader =
-			new WebXMLDefinitionLoader(
-				absolute2TestBundle, SAXParserFactory.newInstance(),
-				new Logger(null));
-
-		WebXMLDefinition absolute2WebXMLDefinition =
-			absolute2WebXMLDefinitionLoader.loadWebXML(
-				absolute2TestBundle.getEntry());
-
-		TestBundle fragment1TestBundle = new TestBundle(
-			"dependencies/custom-web-fragment-1.xml");
-
-		WebXMLDefinitionLoader fragment1WebXMLDefinitionLoader =
-			new WebXMLDefinitionLoader(
-				fragment1TestBundle, SAXParserFactory.newInstance(),
-				new Logger(null));
-
-		WebXMLDefinition fragment1WebXMLDefinition =
-			fragment1WebXMLDefinitionLoader.loadWebXML(
-				fragment1TestBundle.getEntry());
-
-		TestBundle fragment2TestBundle = new TestBundle(
-			"dependencies/custom-web-fragment-2.xml");
-
-		WebXMLDefinitionLoader fragment2WebXMLDefinitionLoader =
-			new WebXMLDefinitionLoader(
-				fragment2TestBundle, SAXParserFactory.newInstance(),
-				new Logger(null));
-
-		WebXMLDefinition fragment2WebXMLDefinition =
-			fragment2WebXMLDefinitionLoader.loadWebXML(
-				fragment2TestBundle.getEntry());
+		List<WebXMLDefinition> webXMLDefinitions = new ArrayList<>();
 
 		TestBundle fragment3TestBundle = new TestBundle(
 			"dependencies/custom-web-fragment-3.xml");
@@ -416,10 +382,47 @@ public class WebXMLDefinitionLoaderTest {
 			fragment3WebXMLDefinitionLoader.loadWebXML(
 				fragment3TestBundle.getEntry());
 
-		List<WebXMLDefinition> webXMLDefinitions = new ArrayList<>();
 		webXMLDefinitions.add(fragment3WebXMLDefinition);
+
+		TestBundle fragment2TestBundle = new TestBundle(
+			"dependencies/custom-web-fragment-2.xml");
+
+		WebXMLDefinitionLoader fragment2WebXMLDefinitionLoader =
+			new WebXMLDefinitionLoader(
+				fragment2TestBundle, SAXParserFactory.newInstance(),
+				new Logger(null));
+
+		WebXMLDefinition fragment2WebXMLDefinition =
+			fragment2WebXMLDefinitionLoader.loadWebXML(
+				fragment2TestBundle.getEntry());
+
 		webXMLDefinitions.add(fragment2WebXMLDefinition);
+
+		TestBundle fragment1TestBundle = new TestBundle(
+			"dependencies/custom-web-fragment-1.xml");
+
+		WebXMLDefinitionLoader fragment1WebXMLDefinitionLoader =
+			new WebXMLDefinitionLoader(
+				fragment1TestBundle, SAXParserFactory.newInstance(),
+				new Logger(null));
+
+		WebXMLDefinition fragment1WebXMLDefinition =
+			fragment1WebXMLDefinitionLoader.loadWebXML(
+				fragment1TestBundle.getEntry());
+
 		webXMLDefinitions.add(fragment1WebXMLDefinition);
+
+		TestBundle absolute2TestBundle = new TestBundle(
+			"dependencies/custom-web-absolute-ordering-2.xml");
+
+		WebXMLDefinitionLoader absolute2WebXMLDefinitionLoader =
+			new WebXMLDefinitionLoader(
+				absolute2TestBundle, SAXParserFactory.newInstance(),
+				new Logger(null));
+
+		WebXMLDefinition absolute2WebXMLDefinition =
+			absolute2WebXMLDefinitionLoader.loadWebXML(
+				absolute2TestBundle.getEntry());
 
 		List<WebXMLDefinition> orderedWebXMLDefinitions =
 			OrderUtil.getOrderedWebXMLDefinitions(
