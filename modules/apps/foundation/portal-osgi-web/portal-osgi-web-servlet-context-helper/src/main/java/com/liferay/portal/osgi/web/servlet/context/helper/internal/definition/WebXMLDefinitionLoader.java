@@ -95,10 +95,10 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 				_absoluteOrderingNames.add(Order.OTHERS);
 			}
 
-			List<String> absoluteOrderNames =
-				_webXMLDefinition.getAbsoluteOrderNames();
+			List<String> absoluteOrderingNames =
+				_webXMLDefinition.getAbsoluteOrderingNames();
 
-			absoluteOrderNames.addAll(_absoluteOrderingNames);
+			absoluteOrderingNames.addAll(_absoluteOrderingNames);
 
 			_absoluteOrderingNames = null;
 			_othersAbsoluteOrderingSet = false;
@@ -410,7 +410,7 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 
 		if (ListUtil.isNotEmpty(webXMLDefinitions)) {
 			orderedWebXMLDefinitions = OrderUtil.getOrderedWebXMLDefinitions(
-				webXMLDefinitions, webXMLDefinition.getAbsoluteOrderNames());
+				webXMLDefinitions, webXMLDefinition.getAbsoluteOrderingNames());
 		}
 
 		return _assembleWebXMLDefinition(

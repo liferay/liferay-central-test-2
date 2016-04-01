@@ -37,7 +37,7 @@ public class WebXMLDefinition {
 	public Object clone() {
 		WebXMLDefinition webXMLDefinition = new WebXMLDefinition();
 
-		webXMLDefinition.setAbsoluteOrderNames(_absoluteOrderNames);
+		webXMLDefinition.setAbsoluteOrderingNames(_absoluteOrderingNames);
 		webXMLDefinition.setContextParameters(_contextParameters);
 		webXMLDefinition.setFilterDefinitions(_filterDefinitions);
 		webXMLDefinition.setFragmentName(_fragmentName);
@@ -50,8 +50,8 @@ public class WebXMLDefinition {
 		return webXMLDefinition;
 	}
 
-	public List<String> getAbsoluteOrderNames() {
-		return _absoluteOrderNames;
+	public List<String> getAbsoluteOrderingNames() {
+		return _absoluteOrderingNames;
 	}
 
 	public Map<String, String> getContextParameters() {
@@ -90,8 +90,8 @@ public class WebXMLDefinition {
 		return _metadataComplete;
 	}
 
-	public void setAbsoluteOrderNames(List<String> absoluteOrderNames) {
-		_absoluteOrderNames = absoluteOrderNames;
+	public void setAbsoluteOrderingNames(List<String> absoluteOrderingNames) {
+		_absoluteOrderingNames = absoluteOrderingNames;
 	}
 
 	public void setContextParameter(String name, String value) {
@@ -156,7 +156,7 @@ public class WebXMLDefinition {
 		_servletDefinitions = servletDefinitions;
 	}
 
-	private List<String> _absoluteOrderNames = new ArrayList<>();
+	private List<String> _absoluteOrderingNames = new ArrayList<>();
 	private Map<String, String> _contextParameters = new HashMap<>();
 	private Exception _exception;
 	private Map<String, FilterDefinition> _filterDefinitions = new HashMap<>();
