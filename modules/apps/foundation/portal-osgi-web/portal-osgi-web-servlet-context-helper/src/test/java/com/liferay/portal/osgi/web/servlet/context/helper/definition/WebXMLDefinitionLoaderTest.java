@@ -709,17 +709,18 @@ public class WebXMLDefinitionLoaderTest {
 		if (order != null) {
 			Order webXMLDefinitionOrder = webXMLDefinition.getOrder();
 
-			EnumMap<Order.Path, String[]> routes = webXMLDefinitionOrder.getRoutes();
+			EnumMap<Order.Path, String[]> actualRoutes =
+				webXMLDefinitionOrder.getRoutes();
 
 			EnumMap<Order.Path, String[]> expectedRoutes = order.getRoutes();
 
 			Assert.assertArrayEquals(
 				expectedRoutes.get(Order.Path.AFTER),
-				routes.get(Order.Path.AFTER));
+				actualRoutes.get(Order.Path.AFTER));
 
 			Assert.assertArrayEquals(
 				expectedRoutes.get(Order.Path.BEFORE),
-				routes.get(Order.Path.BEFORE));
+				actualRoutes.get(Order.Path.BEFORE));
 		}
 
 		if (ListUtil.isNotEmpty(absoluteOrderNames)) {
