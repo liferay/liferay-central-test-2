@@ -84,13 +84,15 @@ public class RestExtender {
 		}
 
 		for (String contextPath : contextPaths) {
-			if (Validator.isNotNull(contextPath)) {
-				addTCCLServiceDependency(
-					true, Bus.class,
-					"(" + HttpWhiteboardConstants.HTTP_WHITEBOARD_CONTEXT_PATH +
-						"=" + contextPath + ")",
-					"addBus", "removeBus");
+			if (Validator.isNull(contextPath)) {
+				continue;
 			}
+
+			addTCCLServiceDependency(
+				true, Bus.class,
+				"(" + HttpWhiteboardConstants.HTTP_WHITEBOARD_CONTEXT_PATH +
+					"=" + contextPath + ")",
+				"addBus", "removeBus");
 		}
 	}
 
@@ -108,11 +110,13 @@ public class RestExtender {
 		for (String jaxRsApplicationFilterString :
 				jaxRsApplicationFilterStrings) {
 
-			if (Validator.isNotNull(jaxRsApplicationFilterString)) {
-				addTCCLServiceDependency(
-					false, Application.class, jaxRsApplicationFilterString,
-					"addApplication", "removeApplication");
+			if (Validator.isNull(jaxRsApplicationFilterString)) {
+				continue;
 			}
+
+			addTCCLServiceDependency(
+				false, Application.class, jaxRsApplicationFilterString,
+				"addApplication", "removeApplication");
 		}
 	}
 
@@ -128,11 +132,13 @@ public class RestExtender {
 		}
 
 		for (String jaxRsProviderFilterString : jaxRsProviderFilterStrings) {
-			if (Validator.isNotNull(jaxRsProviderFilterString)) {
-				addTCCLServiceDependency(
-					false, null, jaxRsProviderFilterString, "addProvider",
-					"removeProvider");
+			if (Validator.isNull(jaxRsProviderFilterString)) {
+				continue;
 			}
+
+			addTCCLServiceDependency(
+				false, null, jaxRsProviderFilterString, "addProvider",
+				"removeProvider");
 		}
 	}
 
@@ -148,11 +154,13 @@ public class RestExtender {
 		}
 
 		for (String jaxRsServiceFilterString : jaxRsServiceFilterStrings) {
-			if (Validator.isNotNull(jaxRsServiceFilterString)) {
-				addTCCLServiceDependency(
-					false, null, jaxRsServiceFilterString, "addService",
-					"removeService");
+			if (Validator.isNull(jaxRsServiceFilterString)) {
+				continue;
 			}
+
+			addTCCLServiceDependency(
+				false, null, jaxRsServiceFilterString, "addService",
+				"removeService");
 		}
 	}
 
