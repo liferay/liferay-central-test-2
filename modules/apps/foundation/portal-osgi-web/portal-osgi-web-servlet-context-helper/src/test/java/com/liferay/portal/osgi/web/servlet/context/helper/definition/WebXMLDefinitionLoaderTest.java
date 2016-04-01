@@ -58,7 +58,7 @@ public class WebXMLDefinitionLoaderTest {
 	public void testLoadCustomWebAbsoluteOrdering1XML() throws Exception {
 		WebXMLDefinition webXMLDefinition = loadWebXMLDefinition(
 			"dependencies/custom-web-absolute-ordering-1.xml");
-		
+
 		List<String> absoluteOrderingNames = new ArrayList<>();
 
 		absoluteOrderingNames.add("fragment2");
@@ -100,8 +100,7 @@ public class WebXMLDefinitionLoaderTest {
 		routes.put(Order.Path.AFTER, new String[] {"fragment1"});
 
 		testWebXMLDefinition(
-			webXMLDefinition, 0, 0, 0, "fragment2",
-			order, null);
+			webXMLDefinition, 0, 0, 0, "fragment2", order, null);
 	}
 
 	@Test
@@ -116,8 +115,7 @@ public class WebXMLDefinitionLoaderTest {
 		routes.put(Order.Path.BEFORE, new String[] {Order.OTHERS});
 
 		testWebXMLDefinition(
-			webXMLDefinition, 0, 0, 0, "fragment4",
-			order, null);
+			webXMLDefinition, 0, 0, 0, "fragment4", order, null);
 	}
 
 	@Test
@@ -145,8 +143,9 @@ public class WebXMLDefinitionLoaderTest {
 				bundle, SAXParserFactory.newInstance(), new Logger(null));
 
 		WebXMLDefinition webXMLDefinition =
-			webXMLDefinitionLoader.loadWebXMLDefinition(bundle.getEntry("WEB-INF/web.xml"));
-			
+			webXMLDefinitionLoader.loadWebXMLDefinition(
+				bundle.getEntry("WEB-INF/web.xml"));
+
 		testWebXMLDefinition(webXMLDefinition, 0, 0, 0);
 	}
 
@@ -468,22 +467,20 @@ public class WebXMLDefinitionLoaderTest {
 	}
 
 	protected void testWebXMLDefinition(
-			WebXMLDefinition webXMLDefinition,
-			int listenerDefinitionsCount, int filterDefinitionsCount,
-			int servletDefinitionsCount)
+			WebXMLDefinition webXMLDefinition, int listenerDefinitionsCount,
+			int filterDefinitionsCount, int servletDefinitionsCount)
 		throws Exception {
 
 		testWebXMLDefinition(
-			webXMLDefinition, listenerDefinitionsCount,
-			filterDefinitionsCount, servletDefinitionsCount, null, null,
-			null);
+			webXMLDefinition, listenerDefinitionsCount, filterDefinitionsCount,
+			servletDefinitionsCount, null, null, null);
 	}
 
 	protected void testWebXMLDefinition(
-			WebXMLDefinition webXMLDefinition,
-			int listenerDefinitionsCount, int filterDefinitionsCount,
-			int servletDefinitionsCount, String fragmentName,
-			Order order, List<String> absoluteOrderingNames)
+			WebXMLDefinition webXMLDefinition, int listenerDefinitionsCount,
+			int filterDefinitionsCount, int servletDefinitionsCount,
+			String fragmentName, Order order,
+			List<String> absoluteOrderingNames)
 		throws Exception {
 
 		if (Validator.isNotNull(fragmentName)) {
