@@ -71,8 +71,7 @@ public class FieldsetTag extends BaseFieldsetTag {
 
 	@Override
 	protected void setAttributes(HttpServletRequest request) {
-		if (Validator.isNull(getId()) &&
-			Validator.isNotNull(getLabel()) &&
+		if (Validator.isNull(getId()) && Validator.isNotNull(getLabel()) &&
 			getCollapsible()) {
 
 			setId(
