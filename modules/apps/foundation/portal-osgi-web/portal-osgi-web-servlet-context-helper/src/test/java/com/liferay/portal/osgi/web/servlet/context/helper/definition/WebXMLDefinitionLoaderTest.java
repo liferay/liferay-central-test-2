@@ -361,17 +361,23 @@ public class WebXMLDefinitionLoaderTest {
 
 		Assert.assertEquals(3, orderedWebXMLDefinitions.size());
 
-		WebXMLDefinition firstWebXMLDefinition = orderedWebXMLDefinitions.get(0);
+		WebXMLDefinition firstWebXMLDefinition = orderedWebXMLDefinitions.get(
+			0);
 
-		Assert.assertEquals("fragment2", firstWebXMLDefinition.getFragmentName());
+		Assert.assertEquals(
+			"fragment2", firstWebXMLDefinition.getFragmentName());
 
-		WebXMLDefinition secondWebXMLDefinition = orderedWebXMLDefinitions.get(1);
+		WebXMLDefinition secondWebXMLDefinition = orderedWebXMLDefinitions.get(
+			1);
 
-		Assert.assertEquals("fragment1", secondWebXMLDefinition.getFragmentName());
+		Assert.assertEquals(
+			"fragment1", secondWebXMLDefinition.getFragmentName());
 
-		WebXMLDefinition thirdWebXMLDefinition = orderedWebXMLDefinitions.get(2);
+		WebXMLDefinition thirdWebXMLDefinition = orderedWebXMLDefinitions.get(
+			2);
 
-		Assert.assertEquals("fragment3", thirdWebXMLDefinition.getFragmentName());
+		Assert.assertEquals(
+			"fragment3", thirdWebXMLDefinition.getFragmentName());
 	}
 
 	@Test
@@ -437,13 +443,17 @@ public class WebXMLDefinitionLoaderTest {
 
 		Assert.assertEquals(2, orderedWebXMLDefinitions.size());
 
-		WebXMLDefinition firstWebXMLDefinition = orderedWebXMLDefinitions.get(0);
+		WebXMLDefinition firstWebXMLDefinition = orderedWebXMLDefinitions.get(
+			0);
 
-		Assert.assertEquals("fragment1", firstWebXMLDefinition.getFragmentName());
+		Assert.assertEquals(
+			"fragment1", firstWebXMLDefinition.getFragmentName());
 
-		WebXMLDefinition secondWebXMLDefinition = orderedWebXMLDefinitions.get(1);
+		WebXMLDefinition secondWebXMLDefinition = orderedWebXMLDefinitions.get(
+			1);
 
-		Assert.assertEquals("fragment2", secondWebXMLDefinition.getFragmentName());
+		Assert.assertEquals(
+			"fragment2", secondWebXMLDefinition.getFragmentName());
 	}
 
 	@Test
@@ -509,17 +519,23 @@ public class WebXMLDefinitionLoaderTest {
 
 		Assert.assertEquals(3, orderedWebXMLDefinitions.size());
 
-		WebXMLDefinition firstWebXMLDefinition = orderedWebXMLDefinitions.get(0);
+		WebXMLDefinition firstWebXMLDefinition = orderedWebXMLDefinitions.get(
+			0);
 
-		Assert.assertEquals("fragment1", firstWebXMLDefinition.getFragmentName());
+		Assert.assertEquals(
+			"fragment1", firstWebXMLDefinition.getFragmentName());
 
-		WebXMLDefinition secondWebXMLDefinition = orderedWebXMLDefinitions.get(1);
+		WebXMLDefinition secondWebXMLDefinition = orderedWebXMLDefinitions.get(
+			1);
 
-		Assert.assertEquals("fragment3", secondWebXMLDefinition.getFragmentName());
+		Assert.assertEquals(
+			"fragment3", secondWebXMLDefinition.getFragmentName());
 
-		WebXMLDefinition thirdWebXMLDefinition = orderedWebXMLDefinitions.get(2);
+		WebXMLDefinition thirdWebXMLDefinition = orderedWebXMLDefinitions.get(
+			2);
 
-		Assert.assertEquals("fragment2", thirdWebXMLDefinition.getFragmentName());
+		Assert.assertEquals(
+			"fragment2", thirdWebXMLDefinition.getFragmentName());
 	}
 
 	@Test
@@ -567,7 +583,7 @@ public class WebXMLDefinitionLoaderTest {
 				fragment4EntryLoaderMockBundle.getEntry());
 
 		webXMLDefinitions.add(fragment4WebXMLDefinition);
-		
+
 		EntryLoaderMockBundle entryLoaderMockBundle = new EntryLoaderMockBundle(
 			"dependencies/custom-web.xml");
 
@@ -585,17 +601,23 @@ public class WebXMLDefinitionLoaderTest {
 
 		Assert.assertEquals(3, orderedWebXMLDefinitions.size());
 
-		WebXMLDefinition firstWebXMLDefinition = orderedWebXMLDefinitions.get(0);
+		WebXMLDefinition firstWebXMLDefinition = orderedWebXMLDefinitions.get(
+			0);
 
-		Assert.assertEquals("fragment4", firstWebXMLDefinition.getFragmentName());
+		Assert.assertEquals(
+			"fragment4", firstWebXMLDefinition.getFragmentName());
 
-		WebXMLDefinition secondWebXMLDefinition = orderedWebXMLDefinitions.get(1);
+		WebXMLDefinition secondWebXMLDefinition = orderedWebXMLDefinitions.get(
+			1);
 
-		Assert.assertEquals("fragment1", secondWebXMLDefinition.getFragmentName());
+		Assert.assertEquals(
+			"fragment1", secondWebXMLDefinition.getFragmentName());
 
-		WebXMLDefinition thirdWebXMLDefinition = orderedWebXMLDefinitions.get(2);
+		WebXMLDefinition thirdWebXMLDefinition = orderedWebXMLDefinitions.get(
+			2);
 
-		Assert.assertEquals("fragment2", thirdWebXMLDefinition.getFragmentName());
+		Assert.assertEquals(
+			"fragment2", thirdWebXMLDefinition.getFragmentName());
 	}
 
 	@Test
@@ -645,13 +667,17 @@ public class WebXMLDefinitionLoaderTest {
 
 		Assert.assertEquals(2, orderedWebXMLDefinitions.size());
 
-		WebXMLDefinition firstWebXMLDefinition = orderedWebXMLDefinitions.get(0);
+		WebXMLDefinition firstWebXMLDefinition = orderedWebXMLDefinitions.get(
+			0);
 
-		Assert.assertEquals("fragment1", firstWebXMLDefinition.getFragmentName());
+		Assert.assertEquals(
+			"fragment1", firstWebXMLDefinition.getFragmentName());
 
-		WebXMLDefinition secondWebXMLDefinition = orderedWebXMLDefinitions.get(1);
+		WebXMLDefinition secondWebXMLDefinition = orderedWebXMLDefinitions.get(
+			1);
 
-		Assert.assertEquals("fragment3", secondWebXMLDefinition.getFragmentName());
+		Assert.assertEquals(
+			"fragment3", secondWebXMLDefinition.getFragmentName());
 	}
 
 	protected void testLoadDependencies(
