@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.content.util;
+package com.liferay.petra.content.util;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
