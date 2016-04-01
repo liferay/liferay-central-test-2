@@ -382,7 +382,7 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 	}
 
 	public WebXMLDefinition loadWebXML() throws Exception {
-		WebXMLDefinition webXMLDefinition = loadWebXML(
+		WebXMLDefinition webXMLDefinition = loadWebXMLDefinition(
 			_bundle.getEntry("WEB-INF/web.xml"));
 
 		if (webXMLDefinition.isMetadataComplete()) {
@@ -402,7 +402,7 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 					new WebXMLDefinitionLoader(
 						_bundle, _saxParserFactory, _logger);
 
-				webXMLDefinitions.add(webXMLDefinitionLoader.loadWebXML(url));
+				webXMLDefinitions.add(webXMLDefinitionLoader.loadWebXMLDefinition(url));
 			}
 		}
 
@@ -417,7 +417,7 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 			webXMLDefinition, orderedWebXMLDefinitions);
 	}
 
-	public WebXMLDefinition loadWebXML(URL url) throws Exception {
+	public WebXMLDefinition loadWebXMLDefinition(URL url) throws Exception {
 		if (url == null) {
 			return _webXMLDefinition;
 		}
