@@ -229,9 +229,9 @@ public class UpgradeJournal extends BaseUpgradePortletPreferences {
 		sb.append(HtmlUtil.escapeXPathAttribute(attributeValue));
 		sb.append(StringPool.CLOSE_BRACKET);
 
-		XPath xPathSelector = SAXReaderUtil.createXPath(sb.toString());
+		XPath xPath = SAXReaderUtil.createXPath(sb.toString());
 
-		return (Element)xPathSelector.selectSingleNode(parentElement);
+		return (Element)xPath.selectSingleNode(parentElement);
 	}
 
 	protected long getCompanyGroupId(long companyId) throws Exception {
