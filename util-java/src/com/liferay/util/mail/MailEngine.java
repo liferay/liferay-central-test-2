@@ -67,7 +67,7 @@ import javax.mail.internet.MimeMultipart;
  * @author Neil Griffin
  * @author Thiago Moreira
  * @author Brett Swaim
- * @see com.liferay.mail.util.MailEngine
+ * @see com.liferay.petra.mail.util.MailEngine
  */
 public class MailEngine {
 

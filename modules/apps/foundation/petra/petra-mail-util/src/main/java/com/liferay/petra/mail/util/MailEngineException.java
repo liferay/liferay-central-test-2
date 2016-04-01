@@ -12,36 +12,29 @@
  * details.
  */
 
-package com.liferay.mail.util;
+package com.liferay.petra.mail.util;
 
-import com.liferay.portal.kernel.util.ArrayUtil;
-
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.internet.MimeMessage;
+import com.liferay.portal.kernel.exception.NestableException;
 
 /**
- * @author Jorge Ferrer
- * @see com.liferay.util.mail.LiferayMimeMessage
+ * @author Brian Wing Shun Chan
+ * @see com.liferay.util.mail.MailEngineException
  */
-public class LiferayMimeMessage extends MimeMessage {
+public class MailEngineException extends NestableException {
 
-	public LiferayMimeMessage(Session session) {
-		super(session);
+	public MailEngineException() {
 	}
 
-	@Override
-	protected void updateMessageID() throws MessagingException {
-		String[] messageIds = getHeader("Message-ID");
+	public MailEngineException(String msg) {
+		super(msg);
+	}
 
-		if (ArrayUtil.isNotEmpty(messageIds)) {
+	public MailEngineException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
 
-			// Keep current value
-
-			return;
-		}
-
-		super.updateMessageID();
+	public MailEngineException(Throwable cause) {
+		super(cause);
 	}
 
 }

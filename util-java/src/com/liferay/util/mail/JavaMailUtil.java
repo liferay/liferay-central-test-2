@@ -29,7 +29,7 @@ import javax.mail.internet.InternetAddress;
 
 /**
  * @author Brian Wing Shun Chan
- * @see com.liferay.mail.util.JavaMailUtil
+ * @see com.liferay.petra.mail.util.JavaMailUtil
  */
 public class JavaMailUtil {
 
