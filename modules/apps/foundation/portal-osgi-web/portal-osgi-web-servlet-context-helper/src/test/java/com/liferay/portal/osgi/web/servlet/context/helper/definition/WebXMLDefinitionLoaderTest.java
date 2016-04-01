@@ -182,28 +182,11 @@ public class WebXMLDefinitionLoaderTest {
 	public void testOrderBeforeAndAfterException() throws Exception {
 		List<WebXMLDefinition> webXMLDefinitions = new ArrayList<>();
 
-		TestBundle fragment5TestBundle = new TestBundle(
-			"dependencies/custom-web-fragment-5.xml");
+		webXMLDefinitions.add(
+			loadWebXMLDefinition("dependencies/custom-web-fragment-5.xml"));
 
-		WebXMLDefinitionLoader fragment5WebXMLDefinitionLoader =
-			new WebXMLDefinitionLoader(
-				fragment5TestBundle, SAXParserFactory.newInstance(),
-				new Logger(null));
-
-		WebXMLDefinition fragment5WebXMLDefinition =
-			fragment5WebXMLDefinitionLoader.loadWebXMLDefinition(
-				fragment5TestBundle.getURL());
-
-		webXMLDefinitions.add(fragment5WebXMLDefinition);
-
-		TestBundle testBundle = new TestBundle("dependencies/custom-web.xml");
-
-		WebXMLDefinitionLoader webXMLDefinitionLoader =
-			new WebXMLDefinitionLoader(
-				testBundle, SAXParserFactory.newInstance(), new Logger(null));
-
-		WebXMLDefinition webXMLDefinition = webXMLDefinitionLoader.loadWebXMLDefinition(
-			testBundle.getURL());
+		WebXMLDefinition webXMLDefinition = loadWebXMLDefinition(
+			"dependencies/custom-web.xml");
 
 		boolean threwOrderBeforeAndAfterException = false;
 
@@ -224,42 +207,13 @@ public class WebXMLDefinitionLoaderTest {
 	public void testOrderCircularDependencyException() throws Exception {
 		List<WebXMLDefinition> webXMLDefinitions = new ArrayList<>();
 
-		TestBundle circular1TestBundle = new TestBundle(
-			"dependencies/custom-web-fragment-circular-1.xml");
-
-		WebXMLDefinitionLoader circular1WebXMLDefinitionLoader =
-			new WebXMLDefinitionLoader(
-				circular1TestBundle, SAXParserFactory.newInstance(),
-				new Logger(null));
-
-		WebXMLDefinition circular1WebXMLDefinition =
-			circular1WebXMLDefinitionLoader.loadWebXMLDefinition(
-				circular1TestBundle.getURL());
-
-		webXMLDefinitions.add(circular1WebXMLDefinition);
-
-		TestBundle circular2TestBundle = new TestBundle(
-			"dependencies/custom-web-fragment-circular-2.xml");
-
-		WebXMLDefinitionLoader circular2WebXMLDefinitionLoader =
-			new WebXMLDefinitionLoader(
-				circular2TestBundle, SAXParserFactory.newInstance(),
-				new Logger(null));
-
-		WebXMLDefinition circular2WebXMLDefinition =
-			circular2WebXMLDefinitionLoader.loadWebXMLDefinition(
-				circular2TestBundle.getURL());
-
-		webXMLDefinitions.add(circular2WebXMLDefinition);
-
-		TestBundle testBundle = new TestBundle("dependencies/custom-web.xml");
-
-		WebXMLDefinitionLoader webXMLDefinitionLoader =
-			new WebXMLDefinitionLoader(
-				testBundle, SAXParserFactory.newInstance(), new Logger(null));
-
-		WebXMLDefinition webXMLDefinition = webXMLDefinitionLoader.loadWebXMLDefinition(
-			testBundle.getURL());
+		webXMLDefinitions.add(
+			loadWebXMLDefinition("dependencies/custom-web-fragment-circular-1.xml"));
+		webXMLDefinitions.add(
+			loadWebXMLDefinition("dependencies/custom-web-fragment-circular-2.xml"));
+		
+		WebXMLDefinition webXMLDefinition = loadWebXMLDefinition(
+			"dependencies/custom-web.xml");
 
 		boolean threwOrderCircularDependencyException = false;
 
