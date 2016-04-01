@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.mail.util;
+package com.liferay.petra.mail.util;
 
 import org.apache.commons.lang.exception.NestableException;
 
