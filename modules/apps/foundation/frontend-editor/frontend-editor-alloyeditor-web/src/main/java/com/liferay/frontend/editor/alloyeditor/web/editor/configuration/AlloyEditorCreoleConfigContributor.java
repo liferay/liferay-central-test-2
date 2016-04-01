@@ -102,7 +102,8 @@ public class AlloyEditorCreoleConfigContributor
 
 		JSONObject cfgJSONObject = JSONFactoryUtil.createJSONObject();
 
-		cfgJSONObject.put("tableAttributes", JSONFactoryUtil.createJSONObject());
+		cfgJSONObject.put(
+			"tableAttributes", JSONFactoryUtil.createJSONObject());
 
 		buttonJSONObject.put("cfg", cfgJSONObject);
 
