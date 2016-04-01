@@ -329,44 +329,35 @@ public class OrderUtil {
 			List<WebXMLDefinition> webXMLDefinitions)
 		throws OrderCircularDependencyException {
 
-		String fragmentName = webXMLDefinition.getFragmentName();
 		Order order = webXMLDefinition.getOrder();
 
 		EnumMap<Order.Path, String[]> orderRoutes = order.getRoutes();
-		String[] routePathNames = orderRoutes.get(path);
 
-		for (String routePathName : routePathNames) {
-			if (routePathName.equals(Order.OTHERS)) {
+		String[] pathNames = orderRoutes.get(path);
+
+		for (String pathName : pathNames) {
+			if (pathName.equals(Order.OTHERS)) {
 				continue;
 			}
 
-			for (WebXMLDefinition otherConfig : webXMLDefinitions) {
-				String otherConfigName = otherConfig.getFragmentName();
-
-				if (!routePathName.equals(otherConfigName)) {
+			for (WebXMLDefinition curWebXMLDefinition : webXMLDefinitions) {
+				if (!pathName.equals(curWebXMLDefinition.getFragmentName())) {
 					continue;
 				}
 
-				Order otherConfigOrder = otherConfig.getOrder();
+				Order curOrder = curWebXMLDefinition.getOrder();
 
-				EnumMap<Order.Path, String[]> otherConfigOrderRoutes =
-					otherConfigOrder.getRoutes();
+				EnumMap<Order.Path, String[]> curRoutes = curOrder.getRoutes();
 
-				String[] otherRoutePathNames = otherConfigOrderRoutes.get(path);
+				String[] curPathNames = curRoutes.get(path);
+				String fragmentName = webXMLDefinition.getFragmentName();
 
-				if (Arrays.binarySearch(
-						otherRoutePathNames, fragmentName) >= 0) {
-
+				if (Arrays.binarySearch(curPathNames, fragmentName) >= 0) {
 					throw new OrderCircularDependencyException(
 						path, webXMLDefinitions);
 				}
 
-				// If I am before them, they should be informed
-				// that they are after me. Similarly, if I am after
-				// them, then they should be informed that they are
-				// before me.
-
-				Order.Path oppositePath;
+				Order.Path oppositePath = null;
 
 				if (path == Order.Path.BEFORE) {
 					oppositePath = Order.Path.AFTER;
@@ -375,36 +366,30 @@ public class OrderUtil {
 					oppositePath = Order.Path.BEFORE;
 				}
 
-				String[] oppositePathNames = otherConfigOrderRoutes.get(
+				String[] oppositePathNames = curRoutes.get(
 					oppositePath);
 
 				if (Arrays.binarySearch(oppositePathNames, fragmentName) < 0) {
 					EnumMap<Order.Path, String[]> routes = new EnumMap<>(
 						Order.Path.class);
 
-					routes.put(path, otherRoutePathNames);
+					routes.put(path, curPathNames);
 					routes.put(
 						oppositePath,
 						_appendAndSort(
-							otherConfigOrderRoutes.get(oppositePath),
+							curRoutes.get(oppositePath),
 							new String[] {fragmentName}));
 
-					otherConfigOrder.setRoutes(routes);
+					curOrder.setRoutes(routes);
 				}
 
-				// If I am before them and they are before others,
-				// then I should be informed that I am before
-				// others too. Similarly, if I am after them and
-				// they are after others, then I should be informed
-				// that I am after others too.
-
-				if (ArrayUtil.isNotEmpty(otherRoutePathNames)) {
+				if (ArrayUtil.isNotEmpty(curPathNames)) {
 					EnumMap<Order.Path, String[]> routes = new EnumMap<>(
 						Order.Path.class);
 
 					routes.put(
 						path,
-						_appendAndSort(routePathNames, otherRoutePathNames));
+						_appendAndSort(pathNames, curPathNames));
 					routes.put(oppositePath, orderRoutes.get(oppositePath));
 
 					order.setRoutes(routes);
@@ -424,42 +409,26 @@ public class OrderUtil {
 			for (int j = 0; j < webXMLDefinitions.length; j++) {
 				int k = 0;
 
-				for (String currentName : fragmentNames) {
-					String fragmentName =
-						webXMLDefinitions[j].getFragmentName();
+				for (String curFragmentName : fragmentNames) {
+					if (curFragmentName.equals(
+							webXMLDefinitions[j].getFragmentName())) {
 
-					if (fragmentName.equals(currentName)) {
 						break;
 					}
 
 					Order order = webXMLDefinitions[j].getOrder();
 
-					if (order.isBefore(currentName)) {
-
-						// We have a document that is out of order,
-						// and his index is k, he belongs at index j, and all
-						// the documents in between need to be shifted left.
-
+					if (order.isBefore(curFragmentName)) {
 						WebXMLDefinition webXMLDefinition = null;
 
 						for (int m = 0; m < webXMLDefinitions.length; m++) {
-
-							// This is one that is out of order and needs
-							// to be moved.
-
 							if (m == k) {
 								webXMLDefinition = webXMLDefinitions[m];
 							}
 
-							// This is one in between that needs to be shifted
-							// left.
-
 							if ((webXMLDefinition != null) && (m != j)) {
 								webXMLDefinitions[m] = webXMLDefinitions[m + 1];
 							}
-
-							// This is where the one that is out of order needs
-							// to be moved to.
 
 							if (m == j) {
 								webXMLDefinitions[m] = webXMLDefinition;
