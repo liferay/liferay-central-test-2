@@ -707,9 +707,9 @@ public class WebXMLDefinitionLoaderTest {
 		}
 
 		if (order != null) {
-			Order definitionOrder = webXMLDefinition.getOrder();
+			Order webXMLDefinitionOrder = webXMLDefinition.getOrder();
 
-			EnumMap<Order.Path, String[]> routes = definitionOrder.getRoutes();
+			EnumMap<Order.Path, String[]> routes = webXMLDefinitionOrder.getRoutes();
 
 			EnumMap<Order.Path, String[]> expectedRoutes = order.getRoutes();
 
