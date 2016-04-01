@@ -67,7 +67,7 @@ public class WebXMLDefinitionLoaderTest {
 	}
 
 	@Test
-	public void testLoadCustomDependenciesAbsoluteOrder() throws Exception {
+	public void testLoadCustomDependenciesAbsoluteOrdering() throws Exception {
 		TestBundle testBundle = new TestBundle(
 			"dependencies/custom-web-absolute-ordering-1.xml");
 
