@@ -14,7 +14,7 @@
 
 package com.liferay.petra.mail.util;
 
-import org.apache.commons.lang.exception.NestableException;
+import com.liferay.portal.kernel.exception.NestableException;
 
 /**
  * @author Alexander Chow
