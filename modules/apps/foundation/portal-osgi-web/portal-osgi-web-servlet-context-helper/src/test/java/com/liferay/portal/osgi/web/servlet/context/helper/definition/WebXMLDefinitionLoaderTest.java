@@ -69,7 +69,7 @@ public class WebXMLDefinitionLoaderTest {
 		absoluteOrderingNames.add("fragment1");
 		absoluteOrderingNames.add(Order.OTHERS);
 
-		testLoadDependencies(
+		testWebXMLDefinition(
 			webXMLDefinitionLoader, 1, 1, 1, testBundle.getURL(), null, null,
 			absoluteOrderingNames);
 	}
@@ -93,7 +93,7 @@ public class WebXMLDefinitionLoaderTest {
 			new WebXMLDefinitionLoader(
 				testBundle, SAXParserFactory.newInstance(), new Logger(null));
 
-		testLoadDependencies(
+		testWebXMLDefinition(
 			webXMLDefinitionLoader, 1, 1, 0, testBundle.getURL(), "fragment1",
 			null, null);
 	}
@@ -113,7 +113,7 @@ public class WebXMLDefinitionLoaderTest {
 
 		routes.put(Order.Path.AFTER, new String[] {"fragment1"});
 
-		testLoadDependencies(
+		testWebXMLDefinition(
 			webXMLDefinitionLoader, 0, 0, 0, testBundle.getURL(), "fragment2",
 			order, null);
 	}
@@ -133,7 +133,7 @@ public class WebXMLDefinitionLoaderTest {
 
 		routes.put(Order.Path.BEFORE, new String[] {Order.OTHERS});
 
-		testLoadDependencies(
+		testWebXMLDefinition(
 			webXMLDefinitionLoader, 0, 0, 0, testBundle.getURL(), "fragment4",
 			order, null);
 	}
@@ -146,7 +146,7 @@ public class WebXMLDefinitionLoaderTest {
 			new WebXMLDefinitionLoader(
 				testBundle, SAXParserFactory.newInstance(), new Logger(null));
 
-		testLoadDependencies(
+		testWebXMLDefinition(
 			webXMLDefinitionLoader, 1, 1, 1, testBundle.getURL());
 	}
 
@@ -166,7 +166,7 @@ public class WebXMLDefinitionLoaderTest {
 			new WebXMLDefinitionLoader(
 				bundle, SAXParserFactory.newInstance(), new Logger(null));
 
-		testLoadDependencies(
+		testWebXMLDefinition(
 			webXMLDefinitionLoader, 0, 0, 0,
 			bundle.getEntry("WEB-INF/web.xml"));
 	}
@@ -488,19 +488,19 @@ public class WebXMLDefinitionLoaderTest {
 		return webXMLDefinitionLoader.loadWebXMLDefinition(testBundle.getURL());
 	}
 
-	protected void testLoadDependencies(
+	protected void testWebXMLDefinition(
 			WebXMLDefinitionLoader webXMLDefinitionLoader,
 			int listenerDefinitionsCount, int filterDefinitionsCount,
 			int servletDefinitionsCount, URL webXML)
 		throws Exception {
 
-		testLoadDependencies(
+		testWebXMLDefinition(
 			webXMLDefinitionLoader, listenerDefinitionsCount,
 			filterDefinitionsCount, servletDefinitionsCount, webXML, null, null,
 			null);
 	}
 
-	protected void testLoadDependencies(
+	protected void testWebXMLDefinition(
 			WebXMLDefinitionLoader webXMLDefinitionLoader,
 			int listenerDefinitionsCount, int filterDefinitionsCount,
 			int servletDefinitionsCount, URL webXML, String fragmentName,
