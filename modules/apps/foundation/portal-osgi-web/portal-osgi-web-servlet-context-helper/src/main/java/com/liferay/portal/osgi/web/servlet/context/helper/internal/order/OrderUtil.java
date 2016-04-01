@@ -162,8 +162,8 @@ public class OrderUtil {
 
 	private static List<WebXMLDefinition> _getOrderedWebXMLDefinitions(
 			List<WebXMLDefinition> webXMLDefinitions)
-		throws OrderBeforeAndAfterException,
-			OrderCircularDependencyException, OrderMaxAttemptsException {
+		throws OrderBeforeAndAfterException, OrderCircularDependencyException,
+			   OrderMaxAttemptsException {
 
 		_checkForSpecExceptions(webXMLDefinitions);
 
@@ -183,12 +183,12 @@ public class OrderUtil {
 		List<WebXMLDefinition> webXMLDefinitions,
 		List<String> absoluteOrderNames) {
 
-		List<WebXMLDefinition> orderedList = new ArrayList<>();
+		List<WebXMLDefinition> orderedWebXMLDefinitions = new ArrayList<>();
 
-		List<WebXMLDefinition> webXMLDefinitionsList =
+		List<WebXMLDefinition> tempWebXMLDefinitions =
 			new CopyOnWriteArrayList<>();
 
-		webXMLDefinitionsList.addAll(webXMLDefinitions);
+		tempWebXMLDefinitions.addAll(webXMLDefinitions);
 
 		for (String absoluteOrderName : absoluteOrderNames) {
 			if (Order.OTHERS.equals(absoluteOrderName)) {
@@ -197,15 +197,15 @@ public class OrderUtil {
 
 			boolean found = false;
 
-			for (WebXMLDefinition webXMLDefinition : webXMLDefinitionsList) {
+			for (WebXMLDefinition webXMLDefinition : tempWebXMLDefinitions) {
 				String fragmentName = webXMLDefinition.getFragmentName();
 
 				if (!found && absoluteOrderName.equals(fragmentName)) {
 					found = true;
 
-					orderedList.add(webXMLDefinition);
+					orderedWebXMLDefinitions.add(webXMLDefinition);
 
-					webXMLDefinitionsList.remove(webXMLDefinition);
+					tempWebXMLDefinitions.remove(webXMLDefinition);
 				}
 				else if (found && absoluteOrderName.equals(fragmentName)) {
 					break;
@@ -213,15 +213,15 @@ public class OrderUtil {
 			}
 		}
 
-		int othersIndex = absoluteOrderNames.indexOf(Order.OTHERS);
+		int index = absoluteOrderNames.indexOf(Order.OTHERS);
 
-		if (othersIndex != -1) {
-			for (WebXMLDefinition webXMLDefinition : webXMLDefinitionsList) {
-				orderedList.add(othersIndex, webXMLDefinition);
+		if (index != -1) {
+			for (WebXMLDefinition webXMLDefinition : tempWebXMLDefinitions) {
+				orderedWebXMLDefinitions.add(index, webXMLDefinition);
 			}
 		}
 
-		return orderedList;
+		return orderedWebXMLDefinitions;
 	}
 
 	private static Map<String, WebXMLDefinition> _getWebXMLDefinitionsMap(
