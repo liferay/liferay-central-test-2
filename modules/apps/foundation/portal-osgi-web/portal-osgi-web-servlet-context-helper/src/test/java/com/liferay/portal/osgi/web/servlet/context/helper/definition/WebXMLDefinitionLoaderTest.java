@@ -660,13 +660,13 @@ public class WebXMLDefinitionLoaderTest {
 	}
 
 	protected void testLoadDependencies(
-			WebXMLDefinitionLoader webXMLDefinitionLoader, int numfOfListeners,
-			int numOfFilters, int numfOfServlets, URL webXML)
+			WebXMLDefinitionLoader webXMLDefinitionLoader, int listenerDefinitionsCount,
+			int filterDefinitionsCount, int servletDefinitionsCount, URL webXML)
 		throws Exception {
 
 		testLoadDependencies(
-			webXMLDefinitionLoader, numfOfListeners, numOfFilters,
-			numfOfServlets, webXML, null, null, null);
+			webXMLDefinitionLoader, listenerDefinitionsCount, filterDefinitionsCount,
+			servletDefinitionsCount, webXML, null, null, null);
 	}
 
 	protected void testLoadDependencies(
