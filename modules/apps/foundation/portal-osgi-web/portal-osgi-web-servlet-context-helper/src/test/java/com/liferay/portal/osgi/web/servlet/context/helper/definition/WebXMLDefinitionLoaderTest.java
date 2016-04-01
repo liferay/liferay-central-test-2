@@ -354,22 +354,22 @@ public class WebXMLDefinitionLoaderTest {
 			absolute1WebXMLDefinitionLoader.loadWebXML(
 				absolute1EntryLoaderMockBundle.getEntry());
 
-		List<WebXMLDefinition> sortedDefinitions =
+		List<WebXMLDefinition> orderedWebXMLDefinitions =
 			OrderUtil.getOrderedWebXMLDefinitions(
 				webXMLDefinitions,
 				absolute1WebXMLDefinition.getAbsoluteOrderNames());
 
-		Assert.assertEquals(3, sortedDefinitions.size());
+		Assert.assertEquals(3, orderedWebXMLDefinitions.size());
 
-		WebXMLDefinition firstDefinition = sortedDefinitions.get(0);
+		WebXMLDefinition firstDefinition = orderedWebXMLDefinitions.get(0);
 
 		Assert.assertEquals("fragment2", firstDefinition.getFragmentName());
 
-		WebXMLDefinition secondDefinition = sortedDefinitions.get(1);
+		WebXMLDefinition secondDefinition = orderedWebXMLDefinitions.get(1);
 
 		Assert.assertEquals("fragment1", secondDefinition.getFragmentName());
 
-		WebXMLDefinition thirdDefinition = sortedDefinitions.get(2);
+		WebXMLDefinition thirdDefinition = orderedWebXMLDefinitions.get(2);
 
 		Assert.assertEquals("fragment3", thirdDefinition.getFragmentName());
 	}
