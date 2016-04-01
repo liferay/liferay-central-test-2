@@ -421,17 +421,17 @@ public class OrderUtil {
 					if (order.isBefore(curFragmentName)) {
 						WebXMLDefinition webXMLDefinition = null;
 
-						for (int m = 0; m < webXMLDefinitions.length; m++) {
-							if (m == k) {
-								webXMLDefinition = webXMLDefinitions[m];
+						for (int l = 0; l < webXMLDefinitions.length; l++) {
+							if (l == k) {
+								webXMLDefinition = webXMLDefinitions[l];
 							}
 
-							if ((webXMLDefinition != null) && (m != j)) {
-								webXMLDefinitions[m] = webXMLDefinitions[m + 1];
+							if ((webXMLDefinition != null) && (l != j)) {
+								webXMLDefinitions[l] = webXMLDefinitions[l + 1];
 							}
 
-							if (m == j) {
-								webXMLDefinitions[m] = webXMLDefinition;
+							if (l == j) {
+								webXMLDefinitions[l] = webXMLDefinition;
 
 								done = false;
 
