@@ -318,56 +318,15 @@ public class WebXMLDefinitionLoaderTest {
 	public void testOrderCustomWebFragments4() throws Exception {
 		List<WebXMLDefinition> webXMLDefinitions = new ArrayList<>();
 
-		TestBundle fragment2TestBundle = new TestBundle(
-			"dependencies/custom-web-fragment-2.xml");
+		webXMLDefinitions.add(
+			loadWebXMLDefinition("dependencies/custom-web-fragment-2.xml"));
+		webXMLDefinitions.add(
+			loadWebXMLDefinition("dependencies/custom-web-fragment-1.xml"));
+		webXMLDefinitions.add(
+			loadWebXMLDefinition("dependencies/custom-web-fragment-4.xml"));
 
-		WebXMLDefinitionLoader fragment2webXMLDefinitionLoader =
-			new WebXMLDefinitionLoader(
-				fragment2TestBundle, SAXParserFactory.newInstance(),
-				new Logger(null));
-
-		WebXMLDefinition fragment2webXMLDefinition =
-			fragment2webXMLDefinitionLoader.loadWebXMLDefinition(
-				fragment2TestBundle.getURL());
-
-		webXMLDefinitions.add(fragment2webXMLDefinition);
-
-		TestBundle fragment1TestBundle = new TestBundle(
-			"dependencies/custom-web-fragment-1.xml");
-
-		WebXMLDefinitionLoader fragment1WebXMLDefinitionLoader =
-			new WebXMLDefinitionLoader(
-				fragment1TestBundle, SAXParserFactory.newInstance(),
-				new Logger(null));
-
-		WebXMLDefinition fragment1WebXMLDefinition =
-			fragment1WebXMLDefinitionLoader.loadWebXMLDefinition(
-				fragment1TestBundle.getURL());
-
-		webXMLDefinitions.add(fragment1WebXMLDefinition);
-
-		TestBundle fragment4TestBundle = new TestBundle(
-			"dependencies/custom-web-fragment-4.xml");
-
-		WebXMLDefinitionLoader fragment4WebXMLDefinitionLoader =
-			new WebXMLDefinitionLoader(
-				fragment4TestBundle, SAXParserFactory.newInstance(),
-				new Logger(null));
-
-		WebXMLDefinition fragment4WebXMLDefinition =
-			fragment4WebXMLDefinitionLoader.loadWebXMLDefinition(
-				fragment4TestBundle.getURL());
-
-		webXMLDefinitions.add(fragment4WebXMLDefinition);
-
-		TestBundle testBundle = new TestBundle("dependencies/custom-web.xml");
-
-		WebXMLDefinitionLoader webXMLDefinitionLoader =
-			new WebXMLDefinitionLoader(
-				testBundle, SAXParserFactory.newInstance(), new Logger(null));
-
-		WebXMLDefinition webXMLDefinition =
-			webXMLDefinitionLoader.loadWebXMLDefinition(testBundle.getURL());
+		WebXMLDefinition webXMLDefinition = loadWebXMLDefinition(
+			"dependencies/custom-web.xml");
 
 		List<WebXMLDefinition> orderedWebXMLDefinitions =
 			OrderUtil.getOrderedWebXMLDefinitions(
