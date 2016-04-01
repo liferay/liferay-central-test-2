@@ -75,15 +75,15 @@ public class WebXMLDefinitionLoaderTest {
 			new WebXMLDefinitionLoader(
 				testBundle, SAXParserFactory.newInstance(), new Logger(null));
 
-		List<String> absoluteOrderNames = new ArrayList<>();
+		List<String> absoluteOrderingNames = new ArrayList<>();
 
-		absoluteOrderNames.add("fragment2");
-		absoluteOrderNames.add("fragment1");
-		absoluteOrderNames.add(Order.OTHERS);
+		absoluteOrderingNames.add("fragment2");
+		absoluteOrderingNames.add("fragment1");
+		absoluteOrderingNames.add(Order.OTHERS);
 
 		testLoadDependencies(
 			webXMLDefinitionLoader, 1, 1, 1, testBundle.getEntry(), null, null,
-			absoluteOrderNames);
+			absoluteOrderingNames);
 	}
 
 	@Test
@@ -213,7 +213,7 @@ public class WebXMLDefinitionLoaderTest {
 
 		try {
 			OrderUtil.getOrderedWebXMLDefinitions(
-				webXMLDefinitions, webXMLDefinition.getAbsoluteOrderNames());
+				webXMLDefinitions, webXMLDefinition.getAbsoluteOrderingNames());
 		}
 		catch (Exception e) {
 			if (e instanceof OrderBeforeAndAfterException) {
@@ -269,7 +269,7 @@ public class WebXMLDefinitionLoaderTest {
 
 		try {
 			OrderUtil.getOrderedWebXMLDefinitions(
-				webXMLDefinitions, webXMLDefinition.getAbsoluteOrderNames());
+				webXMLDefinitions, webXMLDefinition.getAbsoluteOrderingNames());
 		}
 		catch (Exception e) {
 			if (e instanceof OrderCircularDependencyException) {
@@ -341,7 +341,7 @@ public class WebXMLDefinitionLoaderTest {
 		List<WebXMLDefinition> orderedWebXMLDefinitions =
 			OrderUtil.getOrderedWebXMLDefinitions(
 				webXMLDefinitions,
-				absolute1WebXMLDefinition.getAbsoluteOrderNames());
+				absolute1WebXMLDefinition.getAbsoluteOrderingNames());
 
 		Assert.assertEquals(3, orderedWebXMLDefinitions.size());
 
@@ -422,7 +422,7 @@ public class WebXMLDefinitionLoaderTest {
 		List<WebXMLDefinition> orderedWebXMLDefinitions =
 			OrderUtil.getOrderedWebXMLDefinitions(
 				webXMLDefinitions,
-				absolute2WebXMLDefinition.getAbsoluteOrderNames());
+				absolute2WebXMLDefinition.getAbsoluteOrderingNames());
 
 		Assert.assertEquals(2, orderedWebXMLDefinitions.size());
 
@@ -496,7 +496,7 @@ public class WebXMLDefinitionLoaderTest {
 
 		List<WebXMLDefinition> orderedWebXMLDefinitions =
 			OrderUtil.getOrderedWebXMLDefinitions(
-				webXMLDefinitions, webXMLDefinition.getAbsoluteOrderNames());
+				webXMLDefinitions, webXMLDefinition.getAbsoluteOrderingNames());
 
 		Assert.assertEquals(3, orderedWebXMLDefinitions.size());
 
@@ -576,7 +576,7 @@ public class WebXMLDefinitionLoaderTest {
 
 		List<WebXMLDefinition> orderedWebXMLDefinitions =
 			OrderUtil.getOrderedWebXMLDefinitions(
-				webXMLDefinitions, webXMLDefinition.getAbsoluteOrderNames());
+				webXMLDefinitions, webXMLDefinition.getAbsoluteOrderingNames());
 
 		Assert.assertEquals(3, orderedWebXMLDefinitions.size());
 
@@ -642,7 +642,7 @@ public class WebXMLDefinitionLoaderTest {
 
 		List<WebXMLDefinition> orderedWebXMLDefinitions =
 			OrderUtil.getOrderedWebXMLDefinitions(
-				webXMLDefinitions, webXMLDefinition.getAbsoluteOrderNames());
+				webXMLDefinitions, webXMLDefinition.getAbsoluteOrderingNames());
 
 		Assert.assertEquals(2, orderedWebXMLDefinitions.size());
 
@@ -673,7 +673,7 @@ public class WebXMLDefinitionLoaderTest {
 			WebXMLDefinitionLoader webXMLDefinitionLoader,
 			int listenerDefinitionsCount, int filterDefinitionsCount,
 			int servletDefinitionsCount, URL webXML, String fragmentName,
-			Order order, List<String> absoluteOrderNames)
+			Order order, List<String> absoluteOrderingNames)
 		throws Exception {
 
 		WebXMLDefinition webXMLDefinition = webXMLDefinitionLoader.loadWebXML(
@@ -700,13 +700,13 @@ public class WebXMLDefinitionLoaderTest {
 				actualRoutes.get(Order.Path.BEFORE));
 		}
 
-		if (ListUtil.isNotEmpty(absoluteOrderNames)) {
-			List<String> webXMLDefinitionAbsoluteOrderNames =
-				webXMLDefinition.getAbsoluteOrderNames();
+		if (ListUtil.isNotEmpty(absoluteOrderingNames)) {
+			List<String> webXMLDefinitionAbsoluteOrderingNames =
+				webXMLDefinition.getAbsoluteOrderingNames();
 
 			Assert.assertArrayEquals(
-				absoluteOrderNames.toArray(new String[0]),
-				webXMLDefinitionAbsoluteOrderNames.toArray(new String[0]));
+				absoluteOrderingNames.toArray(new String[0]),
+				webXMLDefinitionAbsoluteOrderingNames.toArray(new String[0]));
 		}
 
 		List<ListenerDefinition> listenerDefinitions =

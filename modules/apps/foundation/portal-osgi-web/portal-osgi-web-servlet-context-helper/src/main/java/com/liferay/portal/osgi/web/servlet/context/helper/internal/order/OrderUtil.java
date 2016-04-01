@@ -45,16 +45,16 @@ public class OrderUtil {
 
 	public static List<WebXMLDefinition> getOrderedWebXMLDefinitions(
 			List<WebXMLDefinition> webXMLDefinitions,
-			List<String> absoluteOrderNames)
+			List<String> absoluteOrderingNames)
 		throws OrderBeforeAndAfterException, OrderCircularDependencyException,
 			   OrderMaxAttemptsException {
 
-		if (ListUtil.isEmpty(absoluteOrderNames)) {
+		if (ListUtil.isEmpty(absoluteOrderingNames)) {
 			return _getOrderedWebXMLDefinitions(webXMLDefinitions);
 		}
 
 		return _getOrderedWebXMLDefinitions(
-			webXMLDefinitions, absoluteOrderNames);
+			webXMLDefinitions, absoluteOrderingNames);
 	}
 
 	private static String[] _appendAndSort(String[]... namesArray) {
@@ -181,7 +181,7 @@ public class OrderUtil {
 
 	private static List<WebXMLDefinition> _getOrderedWebXMLDefinitions(
 		List<WebXMLDefinition> webXMLDefinitions,
-		List<String> absoluteOrderNames) {
+		List<String> absoluteOrderingNames) {
 
 		List<WebXMLDefinition> orderedWebXMLDefinitions = new ArrayList<>();
 
@@ -190,8 +190,8 @@ public class OrderUtil {
 
 		tempWebXMLDefinitions.addAll(webXMLDefinitions);
 
-		for (String absoluteOrderName : absoluteOrderNames) {
-			if (Order.OTHERS.equals(absoluteOrderName)) {
+		for (String absoluteOrderingName : absoluteOrderingNames) {
+			if (Order.OTHERS.equals(absoluteOrderingName)) {
 				continue;
 			}
 
@@ -200,20 +200,20 @@ public class OrderUtil {
 			for (WebXMLDefinition webXMLDefinition : tempWebXMLDefinitions) {
 				String fragmentName = webXMLDefinition.getFragmentName();
 
-				if (!found && absoluteOrderName.equals(fragmentName)) {
+				if (!found && absoluteOrderingName.equals(fragmentName)) {
 					found = true;
 
 					orderedWebXMLDefinitions.add(webXMLDefinition);
 
 					tempWebXMLDefinitions.remove(webXMLDefinition);
 				}
-				else if (found && absoluteOrderName.equals(fragmentName)) {
+				else if (found && absoluteOrderingName.equals(fragmentName)) {
 					break;
 				}
 			}
 		}
 
-		int index = absoluteOrderNames.indexOf(Order.OTHERS);
+		int index = absoluteOrderingNames.indexOf(Order.OTHERS);
 
 		if (index != -1) {
 			for (WebXMLDefinition webXMLDefinition : tempWebXMLDefinitions) {
