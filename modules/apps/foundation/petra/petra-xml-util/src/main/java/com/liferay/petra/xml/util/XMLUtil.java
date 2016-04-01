@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.xml.util;
+package com.liferay.petra.xml.util;
 
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.CharPool;

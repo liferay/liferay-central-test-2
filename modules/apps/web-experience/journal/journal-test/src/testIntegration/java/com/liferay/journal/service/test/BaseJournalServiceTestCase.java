@@ -21,7 +21,7 @@ import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.test.util.GroupTestUtil;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.xml.util.XMLUtil;
+import com.liferay.petra.xml.util.XMLUtil;
 
 import java.io.InputStream;
 

@@ -165,7 +165,7 @@ import com.liferay.trash.kernel.exception.TrashEntryException;
 import com.liferay.trash.kernel.model.TrashEntry;
 import com.liferay.trash.kernel.model.TrashVersion;
 import com.liferay.trash.kernel.util.TrashUtil;
-import com.liferay.xml.util.XMLUtil;
+import com.liferay.petra.xml.util.XMLUtil;
 
 import java.io.File;
 import java.io.IOException;
