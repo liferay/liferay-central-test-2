@@ -1,6 +1,6 @@
 Bundle-Name: Liferay XML Utilities
-Bundle-SymbolicName: com.liferay.xml.util
+Bundle-SymbolicName: com.liferay.petra.xml.util
 Bundle-Version: 1.0.0
-Export-Package: com.liferay.xml.util
+Export-Package: com.liferay.petra.xml.util
 Liferay-Releng-Module-Group-Description:
 Liferay-Releng-Module-Group-Title:
