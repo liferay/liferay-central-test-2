@@ -93,10 +93,10 @@ public class OrderUtil {
 
 		Map<String, Integer> map = new HashMap<>();
 
-		String[] beforeRoutes = routes.get(Order.Path.BEFORE);
+		String[] beforeNames = routes.get(Order.Path.BEFORE);
 
-		for (String beforeRouteName : beforeRoutes) {
-			Integer value = map.get(beforeRouteName);
+		for (String beforeName : beforeNames) {
+			Integer value = map.get(beforeName);
 
 			if (value == null) {
 				value = 1;
@@ -105,13 +105,13 @@ public class OrderUtil {
 				value += 1;
 			}
 
-			map.put(beforeRouteName, value);
+			map.put(beforeName, value);
 		}
 
-		String[] afterRoutes = routes.get(Order.Path.AFTER);
+		String[] afterNames = routes.get(Order.Path.AFTER);
 
-		for (String afterRouteName : afterRoutes) {
-			Integer value = map.get(afterRouteName);
+		for (String afterName : afterNames) {
+			Integer value = map.get(afterName);
 
 			if (value == null) {
 				value = 1;
@@ -120,14 +120,14 @@ public class OrderUtil {
 				value += 1;
 			}
 
-			map.put(afterRouteName, value);
+			map.put(afterName, value);
 		}
 
 		Set<String> set = map.keySet();
 
-		String[] namesToCheck = set.toArray(new String[set.size()]);
+		String[] names = set.toArray(new String[set.size()]);
 
-		for (String name : namesToCheck) {
+		for (String name : names) {
 			if (map.get(name) > 1) {
 				throw new OrderBeforeAndAfterException(
 					webXMLDefinition.getFragmentName(), name);
