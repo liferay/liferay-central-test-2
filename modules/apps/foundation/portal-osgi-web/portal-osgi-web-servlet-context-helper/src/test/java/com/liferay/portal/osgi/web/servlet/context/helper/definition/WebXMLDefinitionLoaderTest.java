@@ -154,7 +154,7 @@ public class WebXMLDefinitionLoaderTest {
 	}
 
 	@Test
-	public void testLoadMetadataComplete() throws Exception {
+	public void testLoadCustomWebXMLMetadataComplete() throws Exception {
 		TestBundle testBundle = new TestBundle("dependencies/custom-web.xml");
 
 		WebXMLDefinitionLoader webXMLDefinitionLoader =
@@ -168,7 +168,9 @@ public class WebXMLDefinitionLoaderTest {
 	}
 
 	@Test
-	public void testLoadNotMetadataComplete() throws Exception {
+	public void testLoadCustomWebAbsoluteOrdering1XMLMetadataIncomplete()
+		throws Exception {
+
 		TestBundle testBundle = new TestBundle(
 			"dependencies/custom-web-absolute-ordering-1.xml");
 
