@@ -56,13 +56,9 @@ public class WebXMLDefinitionLoaderTest {
 
 	@Test
 	public void testLoadCustomWebAbsoluteOrdering1XML() throws Exception {
-		TestBundle testBundle = new TestBundle(
+		WebXMLDefinition webXMLDefinition = loadWebXMLDefinition(
 			"dependencies/custom-web-absolute-ordering-1.xml");
-
-		WebXMLDefinitionLoader webXMLDefinitionLoader =
-			new WebXMLDefinitionLoader(
-				testBundle, SAXParserFactory.newInstance(), new Logger(null));
-
+		
 		List<String> absoluteOrderingNames = new ArrayList<>();
 
 		absoluteOrderingNames.add("fragment2");
@@ -70,8 +66,7 @@ public class WebXMLDefinitionLoaderTest {
 		absoluteOrderingNames.add(Order.OTHERS);
 
 		testWebXMLDefinition(
-			webXMLDefinitionLoader, 1, 1, 1, testBundle.getURL(), null, null,
-			absoluteOrderingNames);
+			webXMLDefinition, 1, 1, 1, null, null, absoluteOrderingNames);
 	}
 
 	@Test
@@ -86,26 +81,17 @@ public class WebXMLDefinitionLoaderTest {
 
 	@Test
 	public void testLoadCustomWebFragment1XML() throws Exception {
-		TestBundle testBundle = new TestBundle(
+		WebXMLDefinition webXMLDefinition = loadWebXMLDefinition(
 			"dependencies/custom-web-fragment-1.xml");
 
-		WebXMLDefinitionLoader webXMLDefinitionLoader =
-			new WebXMLDefinitionLoader(
-				testBundle, SAXParserFactory.newInstance(), new Logger(null));
-
 		testWebXMLDefinition(
-			webXMLDefinitionLoader, 1, 1, 0, testBundle.getURL(), "fragment1",
-			null, null);
+			webXMLDefinition, 1, 1, 0, "fragment1", null, null);
 	}
 
 	@Test
 	public void testLoadCustomWebFragment2XML() throws Exception {
-		TestBundle testBundle = new TestBundle(
+		WebXMLDefinition webXMLDefinition = loadWebXMLDefinition(
 			"dependencies/custom-web-fragment-2.xml");
-
-		WebXMLDefinitionLoader webXMLDefinitionLoader =
-			new WebXMLDefinitionLoader(
-				testBundle, SAXParserFactory.newInstance(), new Logger(null));
 
 		Order order = new OrderImpl();
 
@@ -114,18 +100,14 @@ public class WebXMLDefinitionLoaderTest {
 		routes.put(Order.Path.AFTER, new String[] {"fragment1"});
 
 		testWebXMLDefinition(
-			webXMLDefinitionLoader, 0, 0, 0, testBundle.getURL(), "fragment2",
+			webXMLDefinition, 0, 0, 0, "fragment2",
 			order, null);
 	}
 
 	@Test
 	public void testLoadCustomWebFragment4XML() throws Exception {
-		TestBundle testBundle = new TestBundle(
+		WebXMLDefinition webXMLDefinition = loadWebXMLDefinition(
 			"dependencies/custom-web-fragment-4.xml");
-
-		WebXMLDefinitionLoader webXMLDefinitionLoader =
-			new WebXMLDefinitionLoader(
-				testBundle, SAXParserFactory.newInstance(), new Logger(null));
 
 		Order order = new OrderImpl();
 
@@ -134,20 +116,16 @@ public class WebXMLDefinitionLoaderTest {
 		routes.put(Order.Path.BEFORE, new String[] {Order.OTHERS});
 
 		testWebXMLDefinition(
-			webXMLDefinitionLoader, 0, 0, 0, testBundle.getURL(), "fragment4",
+			webXMLDefinition, 0, 0, 0, "fragment4",
 			order, null);
 	}
 
 	@Test
 	public void testLoadCustomWebXML() throws Exception {
-		TestBundle testBundle = new TestBundle("dependencies/custom-web.xml");
+		WebXMLDefinition webXMLDefinition = loadWebXMLDefinition(
+			"dependencies/custom-web.xml");
 
-		WebXMLDefinitionLoader webXMLDefinitionLoader =
-			new WebXMLDefinitionLoader(
-				testBundle, SAXParserFactory.newInstance(), new Logger(null));
-
-		testWebXMLDefinition(
-			webXMLDefinitionLoader, 1, 1, 1, testBundle.getURL());
+		testWebXMLDefinition(webXMLDefinition, 1, 1, 1);
 	}
 
 	@Test
@@ -166,9 +144,10 @@ public class WebXMLDefinitionLoaderTest {
 			new WebXMLDefinitionLoader(
 				bundle, SAXParserFactory.newInstance(), new Logger(null));
 
-		testWebXMLDefinition(
-			webXMLDefinitionLoader, 0, 0, 0,
-			bundle.getEntry("WEB-INF/web.xml"));
+		WebXMLDefinition webXMLDefinition =
+			webXMLDefinitionLoader.loadWebXMLDefinition(bundle.getEntry("WEB-INF/web.xml"));
+			
+		testWebXMLDefinition(webXMLDefinition, 0, 0, 0);
 	}
 
 	@Test
@@ -489,26 +468,23 @@ public class WebXMLDefinitionLoaderTest {
 	}
 
 	protected void testWebXMLDefinition(
-			WebXMLDefinitionLoader webXMLDefinitionLoader,
+			WebXMLDefinition webXMLDefinition,
 			int listenerDefinitionsCount, int filterDefinitionsCount,
-			int servletDefinitionsCount, URL webXML)
+			int servletDefinitionsCount)
 		throws Exception {
 
 		testWebXMLDefinition(
-			webXMLDefinitionLoader, listenerDefinitionsCount,
-			filterDefinitionsCount, servletDefinitionsCount, webXML, null, null,
+			webXMLDefinition, listenerDefinitionsCount,
+			filterDefinitionsCount, servletDefinitionsCount, null, null,
 			null);
 	}
 
 	protected void testWebXMLDefinition(
-			WebXMLDefinitionLoader webXMLDefinitionLoader,
+			WebXMLDefinition webXMLDefinition,
 			int listenerDefinitionsCount, int filterDefinitionsCount,
-			int servletDefinitionsCount, URL webXML, String fragmentName,
+			int servletDefinitionsCount, String fragmentName,
 			Order order, List<String> absoluteOrderingNames)
 		throws Exception {
-
-		WebXMLDefinition webXMLDefinition =
-			webXMLDefinitionLoader.loadWebXMLDefinition(webXML);
 
 		if (Validator.isNotNull(fragmentName)) {
 			Assert.assertEquals(
