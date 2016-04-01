@@ -24,6 +24,7 @@ import com.liferay.portal.osgi.web.servlet.context.helper.order.OrderBeforeAndAf
 import com.liferay.portal.osgi.web.servlet.context.helper.order.OrderCircularDependencyException;
 
 import java.net.URL;
+
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.EventListener;
@@ -32,14 +33,19 @@ import java.util.Map;
 
 import javax.servlet.Servlet;
 import javax.servlet.ServletContextListener;
+
 import javax.xml.parsers.SAXParserFactory;
 
 import org.apache.felix.utils.log.Logger;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
 import org.mockito.Mock;
+
 import org.osgi.framework.Bundle;
+
 import org.powermock.modules.junit4.PowerMockRunner;
 
 /**
@@ -47,18 +53,6 @@ import org.powermock.modules.junit4.PowerMockRunner;
  */
 @RunWith(PowerMockRunner.class)
 public class WebXMLDefinitionLoaderTest {
-
-	@Test
-	public void testLoadCustomWebXML() throws Exception {
-		TestBundle testBundle = new TestBundle("dependencies/custom-web.xml");
-
-		WebXMLDefinitionLoader webXMLDefinitionLoader =
-			new WebXMLDefinitionLoader(
-				testBundle, SAXParserFactory.newInstance(), new Logger(null));
-
-		testLoadDependencies(
-			webXMLDefinitionLoader, 1, 1, 1, testBundle.getURL());
-	}
 
 	@Test
 	public void testLoadCustomWebAbsoluteOrdering1XML() throws Exception {
@@ -78,6 +72,16 @@ public class WebXMLDefinitionLoaderTest {
 		testLoadDependencies(
 			webXMLDefinitionLoader, 1, 1, 1, testBundle.getURL(), null, null,
 			absoluteOrderingNames);
+	}
+
+	@Test
+	public void testLoadCustomWebAbsoluteOrdering1XMLMetadataIncomplete()
+		throws Exception {
+
+		WebXMLDefinition webXMLDefinition = loadWebXMLDefinition(
+			"dependencies/custom-web-absolute-ordering-1.xml");
+
+		Assert.assertFalse(webXMLDefinition.isMetadataComplete());
 	}
 
 	@Test
@@ -135,16 +139,15 @@ public class WebXMLDefinitionLoaderTest {
 	}
 
 	@Test
-	public void testLoadWebXML() throws Exception {
-		Bundle bundle = new MockBundle();
+	public void testLoadCustomWebXML() throws Exception {
+		TestBundle testBundle = new TestBundle("dependencies/custom-web.xml");
 
 		WebXMLDefinitionLoader webXMLDefinitionLoader =
 			new WebXMLDefinitionLoader(
-				bundle, SAXParserFactory.newInstance(), new Logger(null));
+				testBundle, SAXParserFactory.newInstance(), new Logger(null));
 
 		testLoadDependencies(
-			webXMLDefinitionLoader, 0, 0, 0,
-			bundle.getEntry("WEB-INF/web.xml"));
+			webXMLDefinitionLoader, 1, 1, 1, testBundle.getURL());
 	}
 
 	@Test
@@ -156,13 +159,16 @@ public class WebXMLDefinitionLoaderTest {
 	}
 
 	@Test
-	public void testLoadCustomWebAbsoluteOrdering1XMLMetadataIncomplete()
-		throws Exception {
+	public void testLoadWebXML() throws Exception {
+		Bundle bundle = new MockBundle();
 
-		WebXMLDefinition webXMLDefinition = loadWebXMLDefinition(
-			"dependencies/custom-web-absolute-ordering-1.xml");
+		WebXMLDefinitionLoader webXMLDefinitionLoader =
+			new WebXMLDefinitionLoader(
+				bundle, SAXParserFactory.newInstance(), new Logger(null));
 
-		Assert.assertFalse(webXMLDefinition.isMetadataComplete());
+		testLoadDependencies(
+			webXMLDefinitionLoader, 0, 0, 0,
+			bundle.getEntry("WEB-INF/web.xml"));
 	}
 
 	@Test
@@ -195,10 +201,12 @@ public class WebXMLDefinitionLoaderTest {
 		List<WebXMLDefinition> webXMLDefinitions = new ArrayList<>();
 
 		webXMLDefinitions.add(
-			loadWebXMLDefinition("dependencies/custom-web-fragment-circular-1.xml"));
+			loadWebXMLDefinition(
+				"dependencies/custom-web-fragment-circular-1.xml"));
 		webXMLDefinitions.add(
-			loadWebXMLDefinition("dependencies/custom-web-fragment-circular-2.xml"));
-		
+			loadWebXMLDefinition(
+				"dependencies/custom-web-fragment-circular-2.xml"));
+
 		WebXMLDefinition webXMLDefinition = loadWebXMLDefinition(
 			"dependencies/custom-web.xml");
 
@@ -233,8 +241,7 @@ public class WebXMLDefinitionLoaderTest {
 
 		List<WebXMLDefinition> orderedWebXMLDefinitions =
 			OrderUtil.getOrderedWebXMLDefinitions(
-				webXMLDefinitions,
-				webXMLDefinition.getAbsoluteOrderingNames());
+				webXMLDefinitions, webXMLDefinition.getAbsoluteOrderingNames());
 
 		Assert.assertEquals(3, orderedWebXMLDefinitions.size());
 
@@ -288,19 +295,6 @@ public class WebXMLDefinitionLoaderTest {
 
 		Assert.assertEquals(
 			"fragment2", secondWebXMLDefinition.getFragmentName());
-	}
-	
-	protected WebXMLDefinition loadWebXMLDefinition(String path)
-		throws Exception {
-
-		TestBundle testBundle = new TestBundle(path);
-
-		WebXMLDefinitionLoader webXMLDefinitionLoader =
-			new WebXMLDefinitionLoader(
-				testBundle, SAXParserFactory.newInstance(),
-				new Logger(null));
-
-		return webXMLDefinitionLoader.loadWebXMLDefinition(testBundle.getURL());
 	}
 
 	@Test
@@ -394,8 +388,8 @@ public class WebXMLDefinitionLoaderTest {
 			new WebXMLDefinitionLoader(
 				testBundle, SAXParserFactory.newInstance(), new Logger(null));
 
-		WebXMLDefinition webXMLDefinition = webXMLDefinitionLoader.loadWebXMLDefinition(
-			testBundle.getURL());
+		WebXMLDefinition webXMLDefinition =
+			webXMLDefinitionLoader.loadWebXMLDefinition(testBundle.getURL());
 
 		List<WebXMLDefinition> orderedWebXMLDefinitions =
 			OrderUtil.getOrderedWebXMLDefinitions(
@@ -460,8 +454,8 @@ public class WebXMLDefinitionLoaderTest {
 			new WebXMLDefinitionLoader(
 				testBundle, SAXParserFactory.newInstance(), new Logger(null));
 
-		WebXMLDefinition webXMLDefinition = webXMLDefinitionLoader.loadWebXMLDefinition(
-			testBundle.getURL());
+		WebXMLDefinition webXMLDefinition =
+			webXMLDefinitionLoader.loadWebXMLDefinition(testBundle.getURL());
 
 		List<WebXMLDefinition> orderedWebXMLDefinitions =
 			OrderUtil.getOrderedWebXMLDefinitions(
@@ -482,14 +476,28 @@ public class WebXMLDefinitionLoaderTest {
 			"fragment3", secondWebXMLDefinition.getFragmentName());
 	}
 
+	protected WebXMLDefinition loadWebXMLDefinition(String path)
+		throws Exception {
+
+		TestBundle testBundle = new TestBundle(path);
+
+		WebXMLDefinitionLoader webXMLDefinitionLoader =
+			new WebXMLDefinitionLoader(
+				testBundle, SAXParserFactory.newInstance(), new Logger(null));
+
+		return webXMLDefinitionLoader.loadWebXMLDefinition(testBundle.getURL());
+	}
+
 	protected void testLoadDependencies(
-			WebXMLDefinitionLoader webXMLDefinitionLoader, int listenerDefinitionsCount,
-			int filterDefinitionsCount, int servletDefinitionsCount, URL webXML)
+			WebXMLDefinitionLoader webXMLDefinitionLoader,
+			int listenerDefinitionsCount, int filterDefinitionsCount,
+			int servletDefinitionsCount, URL webXML)
 		throws Exception {
 
 		testLoadDependencies(
-			webXMLDefinitionLoader, listenerDefinitionsCount, filterDefinitionsCount,
-			servletDefinitionsCount, webXML, null, null, null);
+			webXMLDefinitionLoader, listenerDefinitionsCount,
+			filterDefinitionsCount, servletDefinitionsCount, webXML, null, null,
+			null);
 	}
 
 	protected void testLoadDependencies(
@@ -499,8 +507,8 @@ public class WebXMLDefinitionLoaderTest {
 			Order order, List<String> absoluteOrderingNames)
 		throws Exception {
 
-		WebXMLDefinition webXMLDefinition = webXMLDefinitionLoader.loadWebXMLDefinition(
-			webXML);
+		WebXMLDefinition webXMLDefinition =
+			webXMLDefinitionLoader.loadWebXMLDefinition(webXML);
 
 		if (Validator.isNotNull(fragmentName)) {
 			Assert.assertEquals(

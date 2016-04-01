@@ -402,7 +402,8 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 					new WebXMLDefinitionLoader(
 						_bundle, _saxParserFactory, _logger);
 
-				webXMLDefinitions.add(webXMLDefinitionLoader.loadWebXMLDefinition(url));
+				webXMLDefinitions.add(
+					webXMLDefinitionLoader.loadWebXMLDefinition(url));
 			}
 		}
 
