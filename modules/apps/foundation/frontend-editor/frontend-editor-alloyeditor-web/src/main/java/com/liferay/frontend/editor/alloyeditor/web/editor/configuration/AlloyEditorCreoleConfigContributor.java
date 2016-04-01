@@ -98,21 +98,22 @@ public class AlloyEditorCreoleConfigContributor
 
 		buttonsJSONArray.put("image");
 
-		JSONObject tableButtonJSONObject = JSONFactoryUtil.createJSONObject();
+		JSONObject buttonJSONObject = JSONFactoryUtil.createJSONObject();
 
-		JSONObject tableCfgJSONObject = JSONFactoryUtil.createJSONObject();
+		JSONObject cfgJSONObject = JSONFactoryUtil.createJSONObject();
 
-		tableCfgJSONObject.put(
-			"tableAttributes", JSONFactoryUtil.createJSONObject());
+		cfgJSONObject.put("tableAttributes", JSONFactoryUtil.createJSONObject());
 
-		tableButtonJSONObject.put("cfg", tableCfgJSONObject);
-		tableButtonJSONObject.put("name", "table");
+		buttonJSONObject.put("cfg", cfgJSONObject);
 
-		buttonsJSONArray.put(tableButtonJSONObject);
+		buttonJSONObject.put("name", "table");
+
+		buttonsJSONArray.put(buttonJSONObject);
 
 		buttonsJSONArray.put("hline");
 
 		jsonObject.put("buttons", buttonsJSONArray);
+
 		jsonObject.put("tabIndex", 2);
 
 		return jsonObject;
