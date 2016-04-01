@@ -24,7 +24,6 @@ import com.liferay.portal.osgi.web.servlet.context.helper.order.OrderBeforeAndAf
 import com.liferay.portal.osgi.web.servlet.context.helper.order.OrderCircularDependencyException;
 
 import java.net.URL;
-
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.EventListener;
@@ -33,19 +32,14 @@ import java.util.Map;
 
 import javax.servlet.Servlet;
 import javax.servlet.ServletContextListener;
-
 import javax.xml.parsers.SAXParserFactory;
 
 import org.apache.felix.utils.log.Logger;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import org.mockito.Mock;
-
 import org.osgi.framework.Bundle;
-
 import org.powermock.modules.junit4.PowerMockRunner;
 
 /**
@@ -443,61 +437,33 @@ public class WebXMLDefinitionLoaderTest {
 		Assert.assertEquals(
 			"fragment2", secondWebXMLDefinition.getFragmentName());
 	}
+	
+	protected WebXMLDefinition loadWebXMLDefinition(String path)
+		throws Exception {
+
+		TestBundle testBundle = new TestBundle(path);
+
+		WebXMLDefinitionLoader webXMLDefinitionLoader =
+			new WebXMLDefinitionLoader(
+				testBundle, SAXParserFactory.newInstance(),
+				new Logger(null));
+
+		return webXMLDefinitionLoader.loadWebXML(testBundle.getEntry());
+	}
 
 	@Test
 	public void testOrderCustomWebFragments3() throws Exception {
 		List<WebXMLDefinition> webXMLDefinitions = new ArrayList<>();
 
-		TestBundle fragment3TestBundle = new TestBundle(
-			"dependencies/custom-web-fragment-3.xml");
+		webXMLDefinitions.add(
+			loadWebXMLDefinition("dependencies/custom-web-fragment-3.xml"));
+		webXMLDefinitions.add(
+			loadWebXMLDefinition("dependencies/custom-web-fragment-2.xml"));
+		webXMLDefinitions.add(
+			loadWebXMLDefinition("dependencies/custom-web-fragment-1.xml"));
 
-		WebXMLDefinitionLoader fragment3WebXMLDefinitionLoader =
-			new WebXMLDefinitionLoader(
-				fragment3TestBundle, SAXParserFactory.newInstance(),
-				new Logger(null));
-
-		WebXMLDefinition fragment3WebXMLDefinition =
-			fragment3WebXMLDefinitionLoader.loadWebXML(
-				fragment3TestBundle.getEntry());
-
-		webXMLDefinitions.add(fragment3WebXMLDefinition);
-
-		TestBundle fragment2TestBundle = new TestBundle(
-			"dependencies/custom-web-fragment-2.xml");
-
-		WebXMLDefinitionLoader fragment2WebXMLDefinitionLoader =
-			new WebXMLDefinitionLoader(
-				fragment2TestBundle, SAXParserFactory.newInstance(),
-				new Logger(null));
-
-		WebXMLDefinition fragment2WebXMLDefinition =
-			fragment2WebXMLDefinitionLoader.loadWebXML(
-				fragment2TestBundle.getEntry());
-
-		webXMLDefinitions.add(fragment2WebXMLDefinition);
-
-		TestBundle fragment1TestBundle = new TestBundle(
-			"dependencies/custom-web-fragment-1.xml");
-
-		WebXMLDefinitionLoader fragment1WebXMLDefinitionLoader =
-			new WebXMLDefinitionLoader(
-				fragment1TestBundle, SAXParserFactory.newInstance(),
-				new Logger(null));
-
-		WebXMLDefinition fragment1WebXMLDefinition =
-			fragment1WebXMLDefinitionLoader.loadWebXML(
-				fragment1TestBundle.getEntry());
-
-		webXMLDefinitions.add(fragment1WebXMLDefinition);
-
-		TestBundle testBundle = new TestBundle("dependencies/custom-web.xml");
-
-		WebXMLDefinitionLoader webXMLDefinitionLoader =
-			new WebXMLDefinitionLoader(
-				testBundle, SAXParserFactory.newInstance(), new Logger(null));
-
-		WebXMLDefinition webXMLDefinition = webXMLDefinitionLoader.loadWebXML(
-			testBundle.getEntry());
+		WebXMLDefinition webXMLDefinition = loadWebXMLDefinition(
+			"dependencies/custom-web.xml");
 
 		List<WebXMLDefinition> orderedWebXMLDefinitions =
 			OrderUtil.getOrderedWebXMLDefinitions(
