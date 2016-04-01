@@ -241,8 +241,8 @@ public class OrderUtil {
 	private static int _innerSort(WebXMLDefinition[] webXMLDefinitions)
 		throws OrderMaxAttemptsException {
 
-		int attempts = 0;
 		boolean attempting = true;
+		int attempts = 0;
 
 		while (attempting) {
 			if (attempts > _MAX_ATTEMPTS) {
@@ -251,27 +251,26 @@ public class OrderUtil {
 
 			attempting = false;
 
-			int webXMLDefinitionsLength = webXMLDefinitions.length;
+			int last = webXMLDefinitions.length - 1;
 
-			int last = webXMLDefinitionsLength - 1;
+			for (int i = 0; i < webXMLDefinitions.length; i++) {
+				int x = i;
 
-			for (int i = 0; i < webXMLDefinitionsLength; i++) {
-				int first = i;
-				int second = first + 1;
+				int y = x + 1;
 
-				if (first == last) {
-					second = first;
-					first = 0;
+				if (x == last) {
+					y = x;
+
+					x = 0;
 				}
 
-				if (_isDisordered(
-						webXMLDefinitions[first], webXMLDefinitions[second])) {
-
+				if (_isDisordered(webXMLDefinitions[x], webXMLDefinitions[y])) {
 					WebXMLDefinition webXMLDefinition =
-						webXMLDefinitions[first];
+						webXMLDefinitions[x];
 
-					webXMLDefinitions[first] = webXMLDefinitions[second];
-					webXMLDefinitions[second] = webXMLDefinition;
+					webXMLDefinitions[x] = webXMLDefinitions[y];
+
+					webXMLDefinitions[y] = webXMLDefinition;
 
 					attempting = true;
 				}
@@ -287,9 +286,6 @@ public class OrderUtil {
 		WebXMLDefinition webXMLDefinition1,
 		WebXMLDefinition webXMLDefinition2) {
 
-		String fragmentName1 = webXMLDefinition1.getFragmentName();
-		String fragmentName2 = webXMLDefinition2.getFragmentName();
-
 		Order order1 = webXMLDefinition1.getOrder();
 		Order order2 = webXMLDefinition2.getOrder();
 
@@ -303,26 +299,22 @@ public class OrderUtil {
 			}
 		}
 
-		// they are not in the specified order
+		if (order2.isBefore(webXMLDefinition1.getFragmentName()) ||
+			order1.isAfter(webXMLDefinition2.getFragmentName())) {
 
-		if (order2.isBefore(fragmentName1) || order1.isAfter(fragmentName2)) {
 			return true;
 		}
 
-		// fragmentName1 should be after others, but it is not
-
 		if (order1.isAfterOthers() &&
-			!order1.isBefore(fragmentName2) &&
+			!order1.isBefore(webXMLDefinition2.getFragmentName()) &&
 			!(order1.isAfterOthers() &&
 			order2.isAfterOthers())) {
 
 			return true;
 		}
 
-		// fragmentName2 should be before others, but it is not
-
 		if (order2.isBeforeOthers() &&
-			!order2.isAfter(fragmentName1) &&
+			!order2.isAfter(webXMLDefinition1.getFragmentName()) &&
 			!(order1.isBeforeOthers() &&
 			order2.isBeforeOthers())) {
 
