@@ -283,7 +283,7 @@ public class WebXMLDefinitionLoaderTest {
 	}
 
 	@Test
-	public void testSortFragments1() throws Exception {
+	public void testOrderCustomWebFragments1() throws Exception {
 		List<WebXMLDefinition> webXMLDefinitions = new ArrayList<>();
 
 		TestBundle fragment3TestBundle = new TestBundle(
@@ -367,7 +367,7 @@ public class WebXMLDefinitionLoaderTest {
 	}
 
 	@Test
-	public void testSortFragments2() throws Exception {
+	public void testOrderCustomWebFragments2() throws Exception {
 		TestBundle absolute2TestBundle = new TestBundle(
 			"dependencies/custom-web-absolute-ordering-2.xml");
 
@@ -442,7 +442,7 @@ public class WebXMLDefinitionLoaderTest {
 	}
 
 	@Test
-	public void testSortFragments3() throws Exception {
+	public void testOrderCustomWebFragments3() throws Exception {
 		List<WebXMLDefinition> webXMLDefinitions = new ArrayList<>();
 
 		TestBundle fragment3TestBundle = new TestBundle(
@@ -522,7 +522,7 @@ public class WebXMLDefinitionLoaderTest {
 	}
 
 	@Test
-	public void testSortFragments4() throws Exception {
+	public void testOrderCustomWebFragments4() throws Exception {
 		List<WebXMLDefinition> webXMLDefinitions = new ArrayList<>();
 
 		TestBundle fragment2TestBundle = new TestBundle(
@@ -602,7 +602,7 @@ public class WebXMLDefinitionLoaderTest {
 	}
 
 	@Test
-	public void testUnsortedFragments() throws Exception {
+	public void testUnorderedWebFragments() throws Exception {
 		List<WebXMLDefinition> webXMLDefinitions = new ArrayList<>();
 
 		TestBundle fragment1TestBundle = new TestBundle(
