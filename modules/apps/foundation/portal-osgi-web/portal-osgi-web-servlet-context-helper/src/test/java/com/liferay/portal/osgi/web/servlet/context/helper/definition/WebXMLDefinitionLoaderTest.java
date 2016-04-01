@@ -693,8 +693,8 @@ public class WebXMLDefinitionLoaderTest {
 	}
 
 	protected void testLoadDependencies(
-			WebXMLDefinitionLoader webXMLDefinitionLoader, int numfOfListeners,
-			int numOfFilters, int numfOfServlets, URL webXML,
+			WebXMLDefinitionLoader webXMLDefinitionLoader, int listenerDefinitionsCount,
+			int filterDefinitionsCount, int servletDefinitionsCount, URL webXML,
 			String fragmentName, Order order, List<String> absoluteOrderNames)
 		throws Exception {
 
@@ -734,7 +734,7 @@ public class WebXMLDefinitionLoaderTest {
 		List<ListenerDefinition> listenerDefinitions =
 			webXMLDefinition.getListenerDefinitions();
 
-		Assert.assertEquals(numfOfListeners, listenerDefinitions.size());
+		Assert.assertEquals(listenerDefinitionsCount, listenerDefinitions.size());
 
 		for (ListenerDefinition listenerDefinition : listenerDefinitions) {
 			EventListener eventListener = listenerDefinition.getEventListener();
@@ -745,12 +745,12 @@ public class WebXMLDefinitionLoaderTest {
 		Map<String, ServletDefinition> servletDefinitions =
 			webXMLDefinition.getServletDefinitions();
 
-		Assert.assertEquals(numfOfServlets, servletDefinitions.size());
+		Assert.assertEquals(servletDefinitionsCount, servletDefinitions.size());
 
 		Map<String, FilterDefinition> filterDefinitions =
 			webXMLDefinition.getFilterDefinitions();
 
-		Assert.assertEquals(numOfFilters, filterDefinitions.size());
+		Assert.assertEquals(filterDefinitionsCount, filterDefinitions.size());
 	}
 
 	@Mock
