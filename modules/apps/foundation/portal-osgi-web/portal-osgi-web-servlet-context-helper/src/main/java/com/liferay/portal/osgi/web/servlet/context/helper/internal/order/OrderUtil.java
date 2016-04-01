@@ -57,17 +57,17 @@ public class OrderUtil {
 			webXMLDefinitions, absoluteOrderNames);
 	}
 
-	private static String[] _appendAndSort(String[]... groups) {
+	private static String[] _appendAndSort(String[]... namesArray) {
 		Map<String, Integer> map = new HashMap<>();
 
-		if (groups[0] != null) {
-			if (Arrays.binarySearch(groups[0], Order.OTHERS) >= 0) {
+		if (namesArray[0] != null) {
+			if (Arrays.binarySearch(namesArray[0], Order.OTHERS) >= 0) {
 				map.put(Order.OTHERS, 1);
 			}
 		}
 
-		for (String[] group : groups) {
-			for (String name : group) {
+		for (String[] names : namesArray) {
+			for (String name : names) {
 				if (!name.equals(Order.OTHERS)) {
 					map.put(name, 1);
 				}
@@ -87,14 +87,13 @@ public class OrderUtil {
 			WebXMLDefinition webXMLDefinition)
 		throws OrderBeforeAndAfterException {
 
-		String fragmentName = webXMLDefinition.getFragmentName();
 		Order order = webXMLDefinition.getOrder();
 
-		EnumMap<Order.Path, String[]> orderRoutes = order.getRoutes();
+		EnumMap<Order.Path, String[]> routes = order.getRoutes();
 
 		Map<String, Integer> map = new HashMap<>();
 
-		String[] beforeRoutes = orderRoutes.get(Order.Path.BEFORE);
+		String[] beforeRoutes = routes.get(Order.Path.BEFORE);
 
 		for (String beforeRouteName : beforeRoutes) {
 			Integer value = map.get(beforeRouteName);
@@ -109,7 +108,7 @@ public class OrderUtil {
 			map.put(beforeRouteName, value);
 		}
 
-		String[] afterRoutes = orderRoutes.get(Order.Path.AFTER);
+		String[] afterRoutes = routes.get(Order.Path.AFTER);
 
 		for (String afterRouteName : afterRoutes) {
 			Integer value = map.get(afterRouteName);
@@ -130,7 +129,8 @@ public class OrderUtil {
 
 		for (String name : namesToCheck) {
 			if (map.get(name) > 1) {
-				throw new OrderBeforeAndAfterException(fragmentName, name);
+				throw new OrderBeforeAndAfterException(
+					webXMLDefinition.getFragmentName(), name);
 			}
 		}
 	}
