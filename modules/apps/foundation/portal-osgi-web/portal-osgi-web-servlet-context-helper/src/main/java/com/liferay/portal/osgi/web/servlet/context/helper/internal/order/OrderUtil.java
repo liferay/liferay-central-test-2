@@ -265,8 +265,7 @@ public class OrderUtil {
 				}
 
 				if (_isDisordered(webXMLDefinitions[x], webXMLDefinitions[y])) {
-					WebXMLDefinition webXMLDefinition =
-						webXMLDefinitions[x];
+					WebXMLDefinition webXMLDefinition = webXMLDefinitions[x];
 
 					webXMLDefinitions[x] = webXMLDefinitions[y];
 
@@ -366,8 +365,7 @@ public class OrderUtil {
 					oppositePath = Order.Path.BEFORE;
 				}
 
-				String[] oppositePathNames = curRoutes.get(
-					oppositePath);
+				String[] oppositePathNames = curRoutes.get(oppositePath);
 
 				if (Arrays.binarySearch(oppositePathNames, fragmentName) < 0) {
 					EnumMap<Order.Path, String[]> routes = new EnumMap<>(
@@ -457,52 +455,47 @@ public class OrderUtil {
 	private static List<WebXMLDefinition> _preSort(
 		List<WebXMLDefinition> webXMLDefinitions) {
 
-		List<WebXMLDefinition> webXMLDefinitionList = new ArrayList<>();
-		List<WebXMLDefinition> anonymousAndUnordered = new LinkedList<>();
-		Map<String, Integer> namedMap = new LinkedHashMap<>();
+		List<WebXMLDefinition> preSortWebXMLDefinitions = new ArrayList<>();
+
+		Map<String, Integer> map = new LinkedHashMap<>();
+		List<WebXMLDefinition> tempWebXMLDefinitions = new LinkedList<>();
 
 		for (WebXMLDefinition webXMLDefinition : webXMLDefinitions) {
 			Order order = webXMLDefinition.getOrder();
 
-			EnumMap<Order.Path, String[]> webXMLDefinitionOrderRoutes =
-				order.getRoutes();
-			String[] beforePathNames = webXMLDefinitionOrderRoutes.get(
-				Order.Path.BEFORE);
-			String[] afterPathNames = webXMLDefinitionOrderRoutes.get(
-				Order.Path.AFTER);
+			if (Validator.isNull(webXMLDefinition.getFragmentName()) &&
+				!order.isOrdered()) {
 
-			String fragmentName = webXMLDefinition.getFragmentName();
-
-			if (Validator.isNull(fragmentName) && !order.isOrdered()) {
-				anonymousAndUnordered.add(webXMLDefinition);
+				tempWebXMLDefinitions.add(webXMLDefinition);
 			}
 			else {
-				int totalPathNames =
-					beforePathNames.length + afterPathNames.length;
-				namedMap.put(fragmentName, totalPathNames);
+				EnumMap<Order.Path, String[]> routes = order.getRoutes();
+
+				String[] afterPathNames = routes.get(Order.Path.AFTER);
+				String[] beforePathNames = routes.get(Order.Path.BEFORE);
+
+				map.put(
+					webXMLDefinition.getFragmentName(),
+					afterPathNames.length + beforePathNames.length);
 			}
 		}
 
-		namedMap = _sortDescendingByValue(namedMap);
+		map = _sortDescendingByValue(map);
 
-		Map<String, WebXMLDefinition> configMap = _getWebXMLDefinitionsMap(
-			webXMLDefinitions);
+		Map<String, WebXMLDefinition> webXMLDefinitionsMap =
+			_getWebXMLDefinitionsMap(webXMLDefinitions);
 
-		// add named definitions to the list in the correct preSorted order
-
-		for (Map.Entry<String, Integer> entry : namedMap.entrySet()) {
+		for (Map.Entry<String, Integer> entry : map.entrySet()) {
 			String key = entry.getKey();
-			webXMLDefinitionList.add(configMap.get(key));
+
+			preSortWebXMLDefinitions.add(webXMLDefinitionsMap.get(key));
 		}
 
-		// add definitions that are both anonymous and unordered, to the list in
-		// their original, incoming order
-
-		for (WebXMLDefinition webXMLDefinition : anonymousAndUnordered) {
-			webXMLDefinitionList.add(webXMLDefinition);
+		for (WebXMLDefinition webXMLDefinition : tempWebXMLDefinitions) {
+			preSortWebXMLDefinitions.add(webXMLDefinition);
 		}
 
-		return webXMLDefinitionList;
+		return preSortWebXMLDefinitions;
 	}
 
 	private static Map<String, Integer> _sortDescendingByValue(
@@ -513,33 +506,32 @@ public class OrderUtil {
 
 		Collections.sort(list, _COMPARATOR);
 
-		Map<String, Integer> result = new LinkedHashMap<>();
+		Map<String, Integer> sortedMap = new LinkedHashMap<>();
 
 		for (Map.Entry<String, Integer> entry : list) {
-			result.put(entry.getKey(), entry.getValue());
+			sortedMap.put(entry.getKey(), entry.getValue());
 		}
 
-		return result;
+		return sortedMap;
 	}
 
-	private static final MapEntryComparator _COMPARATOR =
+	private static final Comparator<Map.Entry<String, Integer>> _COMPARATOR =
 		new MapEntryComparator();
 
 	private static final int _MAX_ATTEMPTS =
-		(Integer.MAX_VALUE / (Byte.MAX_VALUE * Byte.MAX_VALUE *
-			Byte.MAX_VALUE));
+		Integer.MAX_VALUE / (Byte.MAX_VALUE * Byte.MAX_VALUE * Byte.MAX_VALUE);
 
 	private static class MapEntryComparator
 		implements Comparator<Map.Entry<String, Integer>> {
 
 		@Override
 		public int compare(
-			Map.Entry<String, Integer> a, Map.Entry<String, Integer> b) {
+			Map.Entry<String, Integer> map1, Map.Entry<String, Integer> map2) {
 
-			Integer valueA = a.getValue();
-			Integer valueB = b.getValue();
+			Integer integer1 = map1.getValue();
+			Integer integer2 = map2.getValue();
 
-			return valueB.compareTo(valueA);
+			return integer2.compareTo(integer1);
 		}
 
 	}
