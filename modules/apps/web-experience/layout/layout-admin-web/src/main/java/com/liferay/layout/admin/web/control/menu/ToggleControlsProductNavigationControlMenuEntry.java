@@ -57,7 +57,7 @@ public class ToggleControlsProductNavigationControlMenuEntry
 
 	@Override
 	public Map<String, Object> getData(HttpServletRequest request) {
-		return _dataMap;
+		return _data;
 	}
 
 	@Override
@@ -168,7 +168,7 @@ public class ToggleControlsProductNavigationControlMenuEntry
 			ActionKeys.UPDATE);
 	}
 
-	private static final Map<String, Object> _dataMap =
+	private static final Map<String, Object> _data =
 		Collections.<String, Object>singletonMap("qa-id", "showControls");
 
 }
