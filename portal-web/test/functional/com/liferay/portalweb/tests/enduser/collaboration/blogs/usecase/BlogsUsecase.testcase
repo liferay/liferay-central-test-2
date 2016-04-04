@@ -231,6 +231,78 @@
 		<execute macro="BlogsConfiguration#viewDefaultConfigurationRSS" />
 	</command>
 
+	<command name="ChangeBlogsEntryCoverImage" priority="3">
+		<execute macro="Navigator#openURL" />
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Documents and Media" />
+		</execute>
+
+		<var name="dmDocumentCounterList" value="1,2" />
+
+		<for list="${dmDocumentCounterList}" param="entryCount" >
+			<execute macro="DMDocument#addCP">
+				<var name="dmDocumentDescription" value="DM Document Description" />
+				<var name="dmDocumentFile" value="Document_${entryCount}.jpg" />
+				<var name="dmDocumentTitle" value="Document_${entryCount}.jpg" />
+			</execute>
+		</for>
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Blogs" />
+		</execute>
+
+		<execute macro="Blogs#addEntryWithUploadedCoverImage">
+			<var name="entryContent" value="Blogs Entry Content" />
+			<var name="entrySubtitle" value="Blogs Entry Subtitle" />
+			<var name="entryTitle" value="Blogs Entry Title" />
+			<var name="navTab" value="Documents and Media" />
+			<var name="uploadFileName" value="Document_3.jpg" />
+		</execute>
+
+		<execute macro="PortletEntry#publish" />
+
+		<execute macro="BlogsNavigator#gotoEntryCP">
+			<var name="entryTitle" value="Blogs Entry Title" />
+		</execute>
+
+		<execute macro="BlogsEntry#viewEntry">
+			<var name="entryContent" value="Blogs Entry Content" />
+			<var name="entrySubtitle" value="Blogs Entry Subtitle" />
+			<var name="entryTitle" value="Blogs Entry Title" />
+			<var name="uploadFileName" value="Document_3" />
+		</execute>
+
+		<execute macro="BlogsNavigator#gotoBrowseImage" />
+
+		<execute macro="ItemSelector#searchDMImages">
+			<var name="imageFileName" value="Document_1.jpg" />
+		</execute>
+
+		<execute function="SelectFrame" locator1="ItemSelector#ITEM_SELECTOR_IFRAME" />
+
+		<var name="key_imageFileName" value="Document_1.jpg" />
+
+		<execute function="Click" locator1="ItemSelector#SELECT_FILE_IMAGE_PREVIEW" />
+
+		<execute function="SelectFrameTop" value1="relative=top" />
+
+		<execute function="AssertClick" locator1="ItemSelector#ADD_BUTTON" value1="Add" />
+
+		<execute macro="PortletEntry#publish" />
+
+		<execute macro="BlogsNavigator#gotoEntryCP">
+			<var name="entryTitle" value="Blogs Entry Title" />
+		</execute>
+
+		<execute macro="BlogsEntry#viewEntry">
+			<var name="entryContent" value="Blogs Entry Content" />
+			<var name="entrySubtitle" value="Blogs Entry Subtitle" />
+			<var name="entryTitle" value="Blogs Entry Title" />
+			<var name="uploadFileName" value="Document_1" />
+		</execute>
+	</command>
+
 	<command name="DeleteBlogsEntry" priority="5">
 		<property name="portal.acceptance" value="true" />
 
