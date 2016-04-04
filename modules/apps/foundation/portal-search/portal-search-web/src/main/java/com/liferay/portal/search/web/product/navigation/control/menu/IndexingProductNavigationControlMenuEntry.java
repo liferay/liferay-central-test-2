@@ -50,7 +50,7 @@ public class IndexingProductNavigationControlMenuEntry
 
 	@Override
 	public Map<String, Object> getData(HttpServletRequest request) {
-		return _dataMap;
+		return _data;
 	}
 
 	@Override
@@ -89,7 +89,7 @@ public class IndexingProductNavigationControlMenuEntry
 		_indexWriterHelper = indexWriterHelper;
 	}
 
-	private static final Map<String, Object> _dataMap =
+	private static final Map<String, Object> _data =
 		Collections.<String, Object>singletonMap("qa-id", "indexing");
 
 	private IndexWriterHelper _indexWriterHelper;
