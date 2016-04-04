@@ -925,6 +925,8 @@
 	</command>
 
 	<command name="ViewDefaultEmailFromConfigurationAndSubscriptionEmail" priority="4">
+		<property name="test.smtp.server.enabled" value="true" />
+
 		<execute macro="ProductMenu#gotoControlPanelUsers">
 			<var name="portlet" value="Users and Organizations" />
 		</execute>
