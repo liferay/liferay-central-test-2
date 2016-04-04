@@ -27,6 +27,7 @@
 
 	<command name="_viewMailFromInbox">
 		<var name="key_columnEntry" value="${asset}" />
+		<var name="key_recipient" value="${recipient}" />
 
 		<execute function="AssertTextEquals#assertPartialText" locator1="MockMock#MOCKMOCK_HAVE_EMAILS_MESSAGE" value1="You have" />
 		<execute function="AssertTextEquals#assertPartialText" locator1="MockMock#MOCKMOCK_FROM_FIELD" value1="${sender}" />
@@ -52,6 +53,7 @@
 
 		<execute macro="MockMock#_gotoMailMessage">
 			<var name="asset" value="${asset}" />
+			<var name="recipient" value="${recipient}" />
 		</execute>
 
 		<execute macro="MockMock#_viewMailMessage">
