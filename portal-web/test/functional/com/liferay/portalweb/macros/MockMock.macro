@@ -12,7 +12,17 @@
 	<command name="_gotoMailMessage">
 		<var name="key_columnEntry" value="${asset}" />
 
-		<execute function="AssertClick#assertPartialTextClickAt" locator1="MockMock#MOCKMOCK_SUBJECT_FIELD_LINK" value1="${asset}" />
+		<if>
+			<isset var="${recipient}" />
+			<then>
+				<var name="key_recipient" value="${recipient}" />
+
+				<execute function="AssertClick#assertPartialTextClickAt" locator1="MockMock#MOCKMOCK_TO_FIELD" value1="${asset}" />
+			</then>
+			<else>
+				<execute function="AssertClick#assertPartialTextClickAt" locator1="MockMock#MOCKMOCK_SUBJECT_FIELD_LINK" value1="${asset}" />
+			</else>
+		</if>
 	</command>
 
 	<command name="_viewMailFromInbox">
