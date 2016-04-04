@@ -925,6 +925,7 @@
 	</command>
 
 	<command name="ViewDefaultEmailFromConfigurationAndSubscriptionEmail" priority="4">
+		<property name="custom.properties" value="message.boards.email.bulk=false" />
 		<property name="test.smtp.server.enabled" value="true" />
 
 		<execute macro="ProductMenu#gotoControlPanelUsers">
