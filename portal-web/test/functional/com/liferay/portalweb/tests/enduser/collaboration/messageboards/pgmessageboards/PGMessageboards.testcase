@@ -1003,6 +1003,22 @@
 			<var name="threadBody" value="MB Thread Message Body" />
 			<var name="threadSubject" value="MB Thread Message Subject" />
 		</execute>
+
+		<execute macro="MockMock#viewMail">
+			<var name="asset" value="MB Category Name" />
+			<var name="content" value="MB Category Name" />
+			<var name="recipient" value="Test Test" />
+			<var name="sender" value="Test Test" />
+			<var name="subject" value="MB Category Name" />
+		</execute>
+
+		<execute macro="MockMock#viewMail">
+			<var name="asset" value="MB Category Name" />
+			<var name="content" value="MB Category Name" />
+			<var name="recipient" value="userfn userln" />
+			<var name="sender" value="Test Test" />
+			<var name="subject" value="MB Category Name" />
+		</execute>
 	</command>
 
 	<command name="ViewMBThreadAndReplyThreadInGmail" priority="4">
