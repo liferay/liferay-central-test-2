@@ -78,8 +78,8 @@ public class SearchMVCRenderCommand implements MVCRenderCommand {
 		QueryConfig queryConfig = searchContext.getQueryConfig();
 
 		queryConfig.setHighlightEnabled(true);
-		queryConfig.setScoreEnabled(true);
 		queryConfig.setLocale(renderRequest.getLocale());
+		queryConfig.setScoreEnabled(true);
 
 		try {
 			Hits hits = indexer.search(searchContext);
