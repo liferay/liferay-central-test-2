@@ -207,7 +207,7 @@ public class ConfigurationModelIndexer extends BaseIndexer<ConfigurationModel> {
 		document.addLocalizedText(
 			Field.DESCRIPTION,
 			_translate(
-				LanguageUtil.getAvailableLocales(), resourceBundleLoader,
+				resourceBundleLoader,
 				GetterUtil.getString(configurationModel.getDescription())));
 
 		document.addKeyword(Field.ENTRY_CLASS_NAME, getClassName());
@@ -240,7 +240,7 @@ public class ConfigurationModelIndexer extends BaseIndexer<ConfigurationModel> {
 		document.addLocalizedText(
 			Field.TITLE,
 			_translate(
-				LanguageUtil.getAvailableLocales(), resourceBundleLoader,
+				resourceBundleLoader,
 				GetterUtil.getString(configurationModel.getName())));
 
 		return document;
@@ -288,8 +288,7 @@ public class ConfigurationModelIndexer extends BaseIndexer<ConfigurationModel> {
 	}
 
 	private Map<Locale, String> _translate(
-		Iterable<Locale> locales, ResourceBundleLoader resourceBundleLoader,
-		String key) {
+		ResourceBundleLoader resourceBundleLoader, String key) {
 
 		Map<Locale, String> values = new HashMap<>();
 
@@ -297,7 +296,7 @@ public class ConfigurationModelIndexer extends BaseIndexer<ConfigurationModel> {
 			resourceBundleLoader.loadResourceBundle(
 				LocaleUtil.toLanguageId(LocaleUtil.getDefault()));
 
-		for (Locale locale : locales) {
+		for (Locale locale : LanguageUtil.getAvailableLocales()) {
 			ResourceBundle resourceBundle =
 				resourceBundleLoader.loadResourceBundle(
 					LocaleUtil.toLanguageId(locale));
