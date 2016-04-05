@@ -206,7 +206,7 @@ public class ConfigurationModelIndexer extends BaseIndexer<ConfigurationModel> {
 
 		document.addLocalizedText(
 			Field.DESCRIPTION,
-			_translateForLocales(
+			_translate(
 				LanguageUtil.getAvailableLocales(), resourceBundleLoader,
 				GetterUtil.getString(configurationModel.getDescription())));
 
@@ -239,7 +239,7 @@ public class ConfigurationModelIndexer extends BaseIndexer<ConfigurationModel> {
 
 		document.addLocalizedText(
 			Field.TITLE,
-			_translateForLocales(
+			_translate(
 				LanguageUtil.getAvailableLocales(), resourceBundleLoader,
 				GetterUtil.getString(configurationModel.getName())));
 
@@ -287,11 +287,11 @@ public class ConfigurationModelIndexer extends BaseIndexer<ConfigurationModel> {
 		}
 	}
 
-	private Map<Locale, String> _translateForLocales(
+	private Map<Locale, String> _translate(
 		Iterable<Locale> locales, ResourceBundleLoader resourceBundleLoader,
 		String key) {
 
-		Map<Locale, String> result = new HashMap<>();
+		Map<Locale, String> values = new HashMap<>();
 
 		ResourceBundle defaultResourceBundle =
 			resourceBundleLoader.loadResourceBundle(
@@ -303,24 +303,24 @@ public class ConfigurationModelIndexer extends BaseIndexer<ConfigurationModel> {
 					LocaleUtil.toLanguageId(locale));
 
 			if (resourceBundle != null) {
-				String translated = ResourceBundleUtil.getString(
+				String value = ResourceBundleUtil.getString(
 					resourceBundle, key);
 
-				if (Validator.isNotNull(translated)) {
-					result.put(locale, translated);
+				if (Validator.isNotNull(value)) {
+					values.put(locale, value);
 				}
 			}
 			else if (defaultResourceBundle != null) {
-				String translated = ResourceBundleUtil.getString(
+				String value = ResourceBundleUtil.getString(
 					defaultResourceBundle, key);
 
-				if (Validator.isNotNull(translated)) {
-					result.put(locale, translated);
+				if (Validator.isNotNull(value)) {
+					values.put(locale, value);
 				}
 			}
 		}
 
-		return result;
+		return values;
 	}
 
 	@Reference
