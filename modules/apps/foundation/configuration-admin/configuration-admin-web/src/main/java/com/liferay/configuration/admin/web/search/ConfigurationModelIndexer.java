@@ -201,26 +201,20 @@ public class ConfigurationModelIndexer extends BaseIndexer<ConfigurationModel> {
 		document.addKeyword(Field.COMPANY_ID, CompanyConstants.SYSTEM);
 		document.addKeyword(Field.ENTRY_CLASS_NAME, getClassName());
 
-		String description = GetterUtil.getString(
-			configurationModel.getDescription());
-		String name = GetterUtil.getString(configurationModel.getName());
-
-		String bundleSymbolicName = configurationModel.getBundleSymbolicName();
-
 		ResourceBundleLoader resourceBundleLoader =
 			_resourceBundleLoaderProvider.getResourceBundleLoader(
-				bundleSymbolicName);
+				configurationModel.getBundleSymbolicName());
 
 		document.addLocalizedText(
 			Field.DESCRIPTION,
 			_translateForLocales(
 				LanguageUtil.getAvailableLocales(), resourceBundleLoader,
-				description));
+				GetterUtil.getString(configurationModel.getDescription())));
 		document.addLocalizedText(
 			Field.TITLE,
 			_translateForLocales(
 				LanguageUtil.getAvailableLocales(), resourceBundleLoader,
-				name));
+				GetterUtil.getString(configurationModel.getName())));
 
 		AttributeDefinition[] requiredAttributeDefinitions =
 			configurationModel.getAttributeDefinitions(
@@ -291,7 +285,7 @@ public class ConfigurationModelIndexer extends BaseIndexer<ConfigurationModel> {
 		}
 	}
 
-	private static Map<Locale, String> _translateForLocales(
+	private Map<Locale, String> _translateForLocales(
 		Iterable<Locale> locales, ResourceBundleLoader resourceBundleLoader,
 		String key) {
 
