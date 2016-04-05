@@ -55,11 +55,9 @@ public class ResourceImporter extends FileSystemImporter {
 			String parentDirName, String dirName, long classNameId)
 		throws Exception {
 
-		String resourceBasePath = buildResourcePath(
-			resourcesDir, parentDirName, StringPool.SLASH, dirName);
-
 		Set<String> resourcePaths = servletContext.getResourcePaths(
-			resourceBasePath);
+			buildResourcePath(
+				resourcesDir, parentDirName, StringPool.SLASH, dirName));
 
 		if (resourcePaths == null) {
 			return;
@@ -91,11 +89,9 @@ public class ResourceImporter extends FileSystemImporter {
 			groupId, PortalUtil.getClassNameId(DDLRecordSet.class),
 			ddmStructureKey);
 
-		String resourceBasePath = buildResourcePath(
-			resourcesDir, dirName, StringPool.SLASH, fileName);
-
 		Set<String> resourcePaths = servletContext.getResourcePaths(
-			resourceBasePath);
+			buildResourcePath(
+				resourcesDir, dirName, StringPool.SLASH, fileName));
 
 		if (resourcePaths == null) {
 			return;
@@ -128,11 +124,9 @@ public class ResourceImporter extends FileSystemImporter {
 			groupId, PortalUtil.getClassNameId(DDLRecordSet.class),
 			ddmStructureKey);
 
-		String resourceBasePath = buildResourcePath(
-			resourcesDir, dirName, StringPool.SLASH, fileName);
-
 		Set<String> resourcePaths = servletContext.getResourcePaths(
-			resourceBasePath);
+			buildResourcePath(
+				resourcesDir, dirName, StringPool.SLASH, fileName));
 
 		if (resourcePaths == null) {
 			return;
@@ -351,20 +345,20 @@ public class ResourceImporter extends FileSystemImporter {
 		}
 	}
 
-	protected String buildResourcePath(String... resourcePathFragments) {
-		StringBundler sb = new StringBundler(resourcePathFragments.length);
+	protected String buildResourcePath(String... resourcePathParts) {
+		StringBundler sb = new StringBundler(resourcePathParts.length);
 
-		for (String resourcePathFragment : resourcePathFragments) {
-			sb = sb.append(resourcePathFragment);
+		for (String resourcePathPart : resourcePathParts) {
+			sb = sb.append(resourcePathPart);
 		}
 
-		String path = PathUtil.toUnixPath(sb.toString());
+		String resourcePath = PathUtil.toUnixPath(sb.toString());
 
-		if (!path.startsWith(StringPool.SLASH)) {
-			path = StringPool.SLASH + path;
+		if (!resourcePath.startsWith(StringPool.SLASH)) {
+			resourcePath = StringPool.SLASH + resourcePath;
 		}
 
-		return path;
+		return resourcePath;
 	}
 
 	@Override
