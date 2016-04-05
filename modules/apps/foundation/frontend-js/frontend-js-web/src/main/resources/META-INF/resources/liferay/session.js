@@ -316,17 +316,15 @@ AUI.add(
 
 						instance._intervalId = A.setInterval(
 							function() {
-								var elapsed;
 								var timeOffset;
 
 								var timestamp = instance.get('timestamp');
 
+								var elapsed = sessionLength;
+
 								var value = parseInt(timestamp, 10);
 
-								if (isNaN(value)) {
-									elapsed = sessionLength;
-								}
-								else {
+								if (!isNaN(value)) {
 									timeOffset = Math.floor((Date.now() - timestamp) / 1000) * 1000;
 
 									elapsed = timeOffset;
