@@ -72,19 +72,19 @@ public class WorkflowDefinitionLinkDisplayContext {
 				workflowDefinitionLinkLocalService)
 		throws PortalException {
 
+		_workflowDefinitionLinkLocalService =
+			workflowDefinitionLinkLocalService;
+
 		_liferayPortletRequest = PortalUtil.getLiferayPortletRequest(
 			renderRequest);
 		_liferayPortletResponse = PortalUtil.getLiferayPortletResponse(
 			renderResponse);
 		_request = PortalUtil.getHttpServletRequest(renderRequest);
+		_workflowDefinitionLinkRequestHelper =
+			new WorkflowDefinitionLinkRequestHelper(renderRequest);
 
 		_portalPreferences = PortletPreferencesFactoryUtil.getPortalPreferences(
 			_request);
-
-		_workflowDefinitionLinkLocalService =
-			workflowDefinitionLinkLocalService;
-		_workflowDefinitionLinkRequestHelper =
-			new WorkflowDefinitionLinkRequestHelper(renderRequest);
 	}
 
 	public String getDefaultWorkflowDefinitionLabel(String className)
