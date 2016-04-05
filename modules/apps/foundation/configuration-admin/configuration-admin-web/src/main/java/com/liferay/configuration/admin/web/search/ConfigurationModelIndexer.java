@@ -199,7 +199,6 @@ public class ConfigurationModelIndexer extends BaseIndexer<ConfigurationModel> {
 		document.addKeyword(
 			FieldNames.CONFIGURATION_MODEL_ID, configurationModel.getID());
 		document.addKeyword(Field.COMPANY_ID, CompanyConstants.SYSTEM);
-		document.addKeyword(Field.ENTRY_CLASS_NAME, getClassName());
 
 		ResourceBundleLoader resourceBundleLoader =
 			_resourceBundleLoaderProvider.getResourceBundleLoader(
@@ -210,11 +209,8 @@ public class ConfigurationModelIndexer extends BaseIndexer<ConfigurationModel> {
 			_translateForLocales(
 				LanguageUtil.getAvailableLocales(), resourceBundleLoader,
 				GetterUtil.getString(configurationModel.getDescription())));
-		document.addLocalizedText(
-			Field.TITLE,
-			_translateForLocales(
-				LanguageUtil.getAvailableLocales(), resourceBundleLoader,
-				GetterUtil.getString(configurationModel.getName())));
+
+		document.addKeyword(Field.ENTRY_CLASS_NAME, getClassName());
 
 		AttributeDefinition[] requiredAttributeDefinitions =
 			configurationModel.getAttributeDefinitions(
@@ -240,6 +236,12 @@ public class ConfigurationModelIndexer extends BaseIndexer<ConfigurationModel> {
 			FieldNames.CONFIGURATION_MODEL_ATTRIBUTE_DESCRIPTION,
 			attributeDescriptions.toArray(
 				new String[attributeDescriptions.size()]));
+
+		document.addLocalizedText(
+			Field.TITLE,
+			_translateForLocales(
+				LanguageUtil.getAvailableLocales(), resourceBundleLoader,
+				GetterUtil.getString(configurationModel.getName())));
 
 		return document;
 	}
