@@ -42,7 +42,7 @@
 
 		<execute function="AssertClick#pauseAssertTextClickAt" locator1="Button#SAVE" value1="Save" />
 
-		<execute function="AssertNotVisible" locator1="Message#SUCCESS_ALERT_HIDDEN" />
+		<execute macro="Alert#viewSuccessMessage" />
 	</command>
 
 	<command name="gotoCustomizationSettingsPG">
