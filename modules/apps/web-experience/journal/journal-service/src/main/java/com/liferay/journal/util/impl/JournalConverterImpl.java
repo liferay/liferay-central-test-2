@@ -1057,7 +1057,6 @@ public class JournalConverterImpl implements JournalConverter {
 					"name",
 					"option" + parentElement.attributeValue("name") +
 						StringUtil.randomString(8));
-
 				element.addAttribute("type", "option");
 				element.addAttribute("value", decodeURL(type));
 
