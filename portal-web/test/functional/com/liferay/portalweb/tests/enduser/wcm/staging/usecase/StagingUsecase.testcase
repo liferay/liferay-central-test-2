@@ -2999,6 +2999,11 @@
 			<var name="siteName" value="Child Site" />
 		</execute>
 
+		<execute macro="Navigator#gotoSitePage">
+			<var name="pageName" value="Page 1" />
+			<var name="siteName" value="Child Site" />
+		</execute>
+
 		<execute macro="Portlet#addPG">
 			<var name="portletName" value="Web Content Display" />
 		</execute>
