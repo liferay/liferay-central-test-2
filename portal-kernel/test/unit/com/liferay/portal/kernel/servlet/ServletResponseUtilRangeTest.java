@@ -183,7 +183,9 @@ public class ServletResponseUtilRangeTest extends PowerMockito {
 	}
 
 	protected void setUpBrowserSniffer() {
-		new BrowserSnifferUtil().setBrowserSniffer(_browserSniffer);
+		BrowserSnifferUtil browserSnifferUtil = new BrowserSnifferUtil();
+
+		browserSnifferUtil.setBrowserSniffer(_browserSniffer);
 
 		when(
 			_browserSniffer.isIe(Matchers.any(HttpServletRequest.class))
@@ -193,7 +195,9 @@ public class ServletResponseUtilRangeTest extends PowerMockito {
 	}
 
 	protected void setUpFileUtil() {
-		new FileUtil().setFile(_file);
+		FileUtil fileUtil = new FileUtil();
+
+		fileUtil.setFile(_file);
 
 		when(
 			_file.createTempFile()
