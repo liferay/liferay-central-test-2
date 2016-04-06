@@ -64,7 +64,7 @@ public class RemoteOptionsTag extends IncludeTag {
 
 	private static final String _PAGE = "/remote_options/page.jsp";
 
-	private long _exportImportConfigurationId = 0;
-	private boolean _privateLayout = false;
+	private long _exportImportConfigurationId;
+	private boolean _privateLayout;
 
 }
