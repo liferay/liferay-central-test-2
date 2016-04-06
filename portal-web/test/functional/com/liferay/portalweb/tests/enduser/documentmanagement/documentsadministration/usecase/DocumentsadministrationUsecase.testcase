@@ -1227,12 +1227,9 @@
 
 		<var name="key_categoryName" value="${categoryName}" />
 
-		<if>
-			<condition function="IsNotVisible" locator1="AssetCategorization#CATEGORY" />
-			<then>
-				<execute function="AssertClick" locator1="Panel#ENTRY_CATEGORIZATION" value1="Categorization" />
-			</then>
-		</if>
+		<execute macro="Panel#expandPanel">
+			<var name="panelHeading" value="Categorization" />
+		</execute>
 
 		<execute function="AssertTextEquals" locator1="AssetCategorization#CATEGORY" value1="${categoryName}" />
 
