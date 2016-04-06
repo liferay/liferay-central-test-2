@@ -134,7 +134,7 @@ public class SearchResultManagerImpl implements SearchResultManager {
 
 		if (className == null) {
 			throw new PortalException(
-				"Unable to get class name from id " + classNameId);
+				"Unable to get class name from class name ID " + classNameId);
 		}
 
 		long classPK = GetterUtil.getLong(document.get(Field.CLASS_PK));
