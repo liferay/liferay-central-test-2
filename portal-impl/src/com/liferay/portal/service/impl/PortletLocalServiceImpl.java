@@ -1192,41 +1192,44 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 	protected void initPortletRootModelDefaultPermissions(Portlet portlet)
 		throws PortalException {
 
-		String rootModel = ResourceActionsUtil.getPortletRootModelResource(
-			portlet.getRootPortletId());
+		String rootModelResource =
+			ResourceActionsUtil.getPortletRootModelResource(
+				portlet.getRootPortletId());
 
-		if (Validator.isBlank(rootModel)) {
+		if (Validator.isBlank(rootModelResource)) {
 			return;
 		}
 
 		Role guestRole = roleLocalService.getRole(
 			portlet.getCompanyId(), RoleConstants.GUEST);
-		List<String> guestActions =
-			ResourceActionsUtil.getModelResourceGuestDefaultActions(rootModel);
+		List<String> guestActionIds =
+			ResourceActionsUtil.getModelResourceGuestDefaultActions(
+				rootModelResource);
 
 		resourcePermissionLocalService.setResourcePermissions(
-			portlet.getCompanyId(), rootModel,
-			ResourceConstants.SCOPE_INDIVIDUAL, rootModel,
-			guestRole.getRoleId(), guestActions.toArray(new String[0]));
+			portlet.getCompanyId(), rootModelResource,
+			ResourceConstants.SCOPE_INDIVIDUAL, rootModelResource,
+			guestRole.getRoleId(), guestActionIds.toArray(new String[0]));
 
 		Role ownerRole = roleLocalService.getRole(
 			portlet.getCompanyId(), RoleConstants.OWNER);
 		List<String> ownerActionIds =
-			ResourceActionsUtil.getModelResourceActions(rootModel);
+			ResourceActionsUtil.getModelResourceActions(rootModelResource);
 
 		resourcePermissionLocalService.setOwnerResourcePermissions(
-			portlet.getCompanyId(), rootModel,
-			ResourceConstants.SCOPE_INDIVIDUAL, rootModel,
+			portlet.getCompanyId(), rootModelResource,
+			ResourceConstants.SCOPE_INDIVIDUAL, rootModelResource,
 			ownerRole.getRoleId(), 0, ownerActionIds.toArray(new String[0]));
 
 		Role siteMemberRole = roleLocalService.getRole(
 			portlet.getCompanyId(), RoleConstants.SITE_MEMBER);
 		List<String> groupActionIds =
-			ResourceActionsUtil.getModelResourceGroupDefaultActions(rootModel);
+			ResourceActionsUtil.getModelResourceGroupDefaultActions(
+				rootModelResource);
 
 		resourcePermissionLocalService.setResourcePermissions(
-			portlet.getCompanyId(), rootModel,
-			ResourceConstants.SCOPE_INDIVIDUAL, rootModel,
+			portlet.getCompanyId(), rootModelResource,
+			ResourceConstants.SCOPE_INDIVIDUAL, rootModelResource,
 			siteMemberRole.getRoleId(), groupActionIds.toArray(new String[0]));
 	}
 
