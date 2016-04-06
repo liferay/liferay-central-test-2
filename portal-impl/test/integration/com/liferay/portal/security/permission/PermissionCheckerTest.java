@@ -125,7 +125,7 @@ public class PermissionCheckerTest {
 
 			hasPermission = permissionChecker.hasPermission(
 				_group.getGroupId(), _ROOT_MODEL_RESOURCE_NAME,
-				_ROOT_MODEL_RESOURCE_NAME, _ADD_SITE_TEST_ACTION);
+				_ROOT_MODEL_RESOURCE_NAME, _ADD_SITE_TEST_1_ACTION);
 
 			Assert.assertTrue(hasPermission);
 		}
@@ -211,7 +211,7 @@ public class PermissionCheckerTest {
 		try {
 			boolean hasPermission = permissionChecker.hasPermission(
 				_group.getGroupId(), _ROOT_MODEL_RESOURCE_NAME,
-				_group.getGroupId(), _ADD_SITE_TEST_ACTION);
+				_group.getGroupId(), _ADD_SITE_TEST_1_ACTION);
 
 			Assert.assertFalse(hasPermission);
 
@@ -222,13 +222,13 @@ public class PermissionCheckerTest {
 
 			hasPermission = permissionChecker.hasPermission(
 				_group.getGroupId(), _ROOT_MODEL_RESOURCE_NAME,
-				_group.getGroupId(), _ADD_SITE_TEST_ACTION);
+				_group.getGroupId(), _ADD_SITE_TEST_1_ACTION);
 
 			Assert.assertTrue(hasPermission);
 
 			hasPermission = permissionChecker.hasPermission(
 				_group.getGroupId(), _ROOT_MODEL_RESOURCE_NAME,
-				_group.getGroupId(), _ADD_SITE_TEST2_ACTION);
+				_group.getGroupId(), _ADD_SITE_TEST_2_ACTION);
 
 			Assert.assertFalse(hasPermission);
 
@@ -236,12 +236,12 @@ public class PermissionCheckerTest {
 				_user.getCompanyId(), _ROOT_MODEL_RESOURCE_NAME,
 				ResourceConstants.SCOPE_INDIVIDUAL,
 				String.valueOf(_group.getGroupId()), _role.getRoleId(),
-				new String[] {_ADD_SITE_TEST2_ACTION});
+				new String[] {_ADD_SITE_TEST_2_ACTION});
 
 			try {
 				hasPermission = permissionChecker.hasPermission(
 					_group.getGroupId(), _ROOT_MODEL_RESOURCE_NAME,
-					_group.getGroupId(), _ADD_SITE_TEST2_ACTION);
+					_group.getGroupId(), _ADD_SITE_TEST_2_ACTION);
 
 				Assert.assertTrue(hasPermission);
 			}
@@ -945,9 +945,9 @@ public class PermissionCheckerTest {
 		return PermissionCheckerFactoryUtil.create(user);
 	}
 
-	private static final String _ADD_SITE_TEST_ACTION = "ADD_SITE_TEST";
+	private static final String _ADD_SITE_TEST_1_ACTION = "ADD_SITE_TEST_1";
 
-	private static final String _ADD_SITE_TEST2_ACTION = "ADD_SITE_TEST2";
+	private static final String _ADD_SITE_TEST_2_ACTION = "ADD_SITE_TEST_2";
 
 	private static final String _ADD_TEST_ACTION = "ADD_TEST";
 
