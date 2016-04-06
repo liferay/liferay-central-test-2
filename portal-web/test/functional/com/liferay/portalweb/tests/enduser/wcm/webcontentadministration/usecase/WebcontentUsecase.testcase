@@ -132,7 +132,7 @@
 			<var name="templateLanguage" value="ftl" />
 		</execute>
 
-		<execute macro="PortletEntry#save" />
+		<execute macro="WebContentTemplates#save" />
 
 		<execute function="Click" locator1="Icon#ROW_VERTICAL_ELLIPSIS">
 			<var name="key_rowEntry" value="WC Template Name" />
