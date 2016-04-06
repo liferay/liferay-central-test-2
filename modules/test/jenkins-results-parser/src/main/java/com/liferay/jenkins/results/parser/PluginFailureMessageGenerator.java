@@ -58,9 +58,9 @@ public class PluginFailureMessageGenerator extends BaseFailureMessageGenerator {
 
 			int x = matcher.start() + group.length() + 1;
 
-			int failures = Integer.parseInt(matcher.group(1));
+			int count = Integer.parseInt(matcher.group(1));
 
-			for (int i = 0; i < failures; i++) {
+			for (int i = 0; i < count; i++) {
 				if (i == 10) {
 					sb.append("<li>...</li>");
 
