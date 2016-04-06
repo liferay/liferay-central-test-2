@@ -225,6 +225,10 @@
 		</if>
 	</command>
 
+	<command name="save">
+		<execute function="AssertClick" locator1="DDMEditTemplate#SAVE_BUTTON" value1="Save" />
+	</command>
+
 	<command name="tearDownCP">
 		<execute macro="Navigator#openURL" />
 
