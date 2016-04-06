@@ -251,15 +251,13 @@
 
 		<execute function="AssertTextNotPresent" value1="WC Structure Name" />
 
-		<execute function="SelectFrameTop" />
-
-		<execute function="Refresh" />
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Web Content" />
+		</execute>
 
 		<execute macro="WebContentNavigator#gotoManageTemplates" />
 
 		<execute function="AssertTextNotPresent" value1="WC Template Name" />
-
-		<execute function="SelectFrameTop" />
 	</command>
 
 	<command name="AddAudioViaWebContent" priority="4">
