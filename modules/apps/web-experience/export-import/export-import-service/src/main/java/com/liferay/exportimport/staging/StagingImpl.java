@@ -306,7 +306,6 @@ public class StagingImpl implements Staging {
 		long scopeGroupId = PortalUtil.getScopeGroupId(
 			PortalUtil.getHttpServletRequest(portletRequest),
 			portlet.getPortletId());
-
 		long plid = ParamUtil.getLong(portletRequest, "plid");
 
 		Map<String, String[]> parameterMap =
