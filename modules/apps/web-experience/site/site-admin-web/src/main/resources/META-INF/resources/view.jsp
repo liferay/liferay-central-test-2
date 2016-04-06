@@ -78,12 +78,19 @@ if (group != null) {
 
 					NoSuchLayoutSetException nslse = (NoSuchLayoutSetException)errorException;
 
-					if (nslse.getMessage().indexOf("{") > 0) {
-						String msg = nslse.getMessage();
-						JSONObject jsonObject = JSONFactoryUtil.createJSONObject(msg.substring(msg.indexOf("{")));
-						long errorGroupId = jsonObject.getLong("groupId");
+					String message = nslse.getMessage();
 
-						curGroup = GroupLocalServiceUtil.getGroup(errorGroupId);
+					int index = message.indexOf("{");
+
+					if (index > 0) {
+						try {
+							JSONObject jsonObject = JSONFactoryUtil.createJSONObject(message.substring(index));
+
+							curGroup = GroupLocalServiceUtil.getGroup(jsonObject.getLong("groupId"));
+						}
+						catch (Exception e) {
+							_log.error(e, e);
+						}
 					}
 					%>
 
@@ -101,3 +108,7 @@ if (group != null) {
 		</div>
 	</div>
 </div>
+
+<%!
+private static Log _log = LogFactoryUtil.getLog("com_liferay_site_admin_web.view_jsp");
+%>
