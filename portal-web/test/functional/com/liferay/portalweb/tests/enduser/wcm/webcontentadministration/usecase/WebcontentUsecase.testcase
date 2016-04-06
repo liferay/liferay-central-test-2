@@ -83,8 +83,6 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="Navigator#openURL" />
-
 		<execute macro="ProductMenu#gotoSitesContent">
 			<var name="portlet" value="Web Content" />
 		</execute>
@@ -212,8 +210,6 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
-		<execute macro="Navigator#openURL" />
-
 		<execute macro="ProductMenu#gotoSitesContent">
 			<var name="portlet" value="Web Content" />
 		</execute>
@@ -246,8 +242,6 @@
 		<execute macro="ProductMenu#gotoSite">
 			<var name="site" value="Site Name" />
 		</execute>
-
-		<execute macro="Navigator#openURL" />
 
 		<execute macro="ProductMenu#gotoSitesContent">
 			<var name="portlet" value="Web Content" />
