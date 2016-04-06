@@ -758,7 +758,7 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 		else if ((groupId > 0) &&
 				 ResourceActionsUtil.isRootModelResource(name)) {
 
-			// There are no custom permissions defined for root model-resource,
+			// There are no custom permissions defined for root model resource,
 			// use defaults
 
 			newIndividualResourcePrimKey = name;
