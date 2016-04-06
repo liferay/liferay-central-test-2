@@ -251,10 +251,12 @@ AUI.add(
 							{
 								data: {
 									returnType: link.getData('returntype'),
-									value: link.getData('value')
+									value: instance._inputFileValue ? instance._inputFileValue : link.getData('value')
 								}
 							}
 						);
+
+						instance._inputFileValue = null;
 					},
 
 					_onItemUploadCancel: function(event) {
@@ -265,6 +267,8 @@ AUI.add(
 						if (uploadItemViewer) {
 							uploadItemViewer.hide();
 						}
+
+						instance._inputFileValue = null;
 					},
 
 					_onItemUploadComplete: function(itemData) {
@@ -287,6 +291,8 @@ AUI.add(
 						if (uploadItemViewer) {
 							uploadItemViewer.hide();
 						}
+
+						instance._inputFileValue = null;
 
 						instance._getUploadErrorMessage(event.error).show();
 					},
@@ -321,6 +327,12 @@ AUI.add(
 						var instance = this;
 
 						var returnType = instance.get('uploadItemReturnType');
+
+						instance._inputFileValue = preview;
+
+						if (!file.type.match(/image.*/)) {
+							preview = Liferay.ThemeDisplay.getPathThemeImages() + '/file_system/large/default.png';
+						}
 
 						var linkNode = A.Node.create(
 							Lang.sub(
