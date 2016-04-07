@@ -22,7 +22,7 @@ dependencies {
 
 mergeLang {
 	sourceDirs = [
-		"../portal-settings-lang/src/main/resources/content",
-		"../../login/login-authentication-google-web/src/main/resources/content"
+		"../../login/login-authentication-google-web/src/main/resources/content",
+		"../portal-settings-lang/src/main/resources/content"
 	]
 }
