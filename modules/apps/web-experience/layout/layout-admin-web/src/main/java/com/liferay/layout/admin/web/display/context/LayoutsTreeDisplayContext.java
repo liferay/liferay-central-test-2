@@ -107,6 +107,10 @@ public class LayoutsTreeDisplayContext extends BaseLayoutDisplayContext {
 
 		deleteLayoutURL.setParameter("redirect", redirectURL.toString());
 
+		if (selPlid >= LayoutConstants.DEFAULT_PLID) {
+			deleteLayoutURL.setParameter("selPlid", String.valueOf(selPlid));
+		}
+
 		try {
 			LayoutSetBranch layoutSetBranch = getLayoutSetBranch();
 
@@ -122,10 +126,6 @@ public class LayoutsTreeDisplayContext extends BaseLayoutDisplayContext {
 			}
 		}
 		catch (PortalException pe) {
-		}
-
-		if (selPlid >= LayoutConstants.DEFAULT_PLID) {
-			deleteLayoutURL.setParameter("selPlid", String.valueOf(selPlid));
 		}
 
 		return deleteLayoutURL;
