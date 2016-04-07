@@ -177,15 +177,15 @@ public class ScreensAssetEntryServiceImpl
 
 			return getFileEntryJSONObject(assetEntry);
 		}
-		else if (className.equals("com.liferay.journal.model.JournalArticle")) {
-			return getJournalArticleJSONObject(assetEntry);
-		}
 		else if (className.equals(
 					"com.liferay.dynamic.data.lists.model.DDLRecord")) {
 
 			JSONObject ddlRecord = screensDDLRecordService.getDDLRecord(
 				assetEntry.getClassPK(), locale);
 			return ddlRecord;
+		}
+		else if (className.equals("com.liferay.journal.model.JournalArticle")) {
+			return getJournalArticleJSONObject(assetEntry);
 		}
 
 		return JSONFactoryUtil.createJSONObject();
