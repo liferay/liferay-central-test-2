@@ -29,11 +29,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>FILTER</td>
-	<td>xpath=(//*[contains(@class,'lexicon-icon-caret')])[1]</td>
-	<td></td>
-</tr>
-<tr>
 	<td></td>
 	<td></td>
 	<td></td>

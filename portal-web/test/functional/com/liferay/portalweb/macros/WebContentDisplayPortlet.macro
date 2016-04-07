@@ -276,7 +276,7 @@
 
 		<execute function="SelectFrame" locator1="IFrame#DIALOG" />
 
-		<execute function="Click" locator1="WCD#FILTER" />
+		<execute function="Click" locator1="Dropdown#FILTER" />
 
 		<var name="key_filterValue" value="${parentSiteName}" />
 
