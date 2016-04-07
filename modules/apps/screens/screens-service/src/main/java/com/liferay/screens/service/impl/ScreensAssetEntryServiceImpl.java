@@ -177,8 +177,8 @@ public class ScreensAssetEntryServiceImpl
 			return getFileEntryJSONObject(assetEntry);
 		}
 		else if (className.equals(
-					"com.liferay.portlet.journal.model.JournalArticle")) {
 
+					"com.liferay.journal.model.JournalArticle")) {
 			return getJournalArticleJSONObject(assetEntry);
 		}
 
