@@ -198,9 +198,10 @@ public class ScreensAssetEntryServiceImpl
 
 		JSONObject fileEntryJSONObject = JSONFactoryUtil.createJSONObject();
 
-		fileEntryJSONObject.put("fileEntry", JSONFactoryUtil.createJSONObject(
-			JSONFactoryUtil.looseSerialize(fileEntry)));
-
+		fileEntryJSONObject.put(
+			"fileEntry",
+			JSONFactoryUtil.createJSONObject(
+				JSONFactoryUtil.looseSerialize(fileEntry)));
 		fileEntryJSONObject.put("url", getFileEntryPreviewURL(fileEntry));
 
 		return fileEntryJSONObject;
@@ -247,18 +248,20 @@ public class ScreensAssetEntryServiceImpl
 		JSONObject journalArticleJSONObject =
 			JSONFactoryUtil.createJSONObject();
 
+		journalArticleJSONObject.put(
+			"DDMStructure",
+			JSONFactoryUtil.createJSONObject(
+				JSONFactoryUtil.looseSerialize(
+					journalArticle.getDDMStructure())));
+
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject(
 			JSONFactoryUtil.looseSerialize(journalArticle));
+
 		journalArticleJSONObject.put("modelAttributes", jsonObject);
 		journalArticleJSONObject.put(
 			"modelValues", jsonObject.getString("content"));
 
 		jsonObject.remove("content");
-
-		journalArticleJSONObject.put(
-			"DDMStructure", JSONFactoryUtil.createJSONObject(
-				JSONFactoryUtil.looseSerialize(
-					journalArticle.getDDMStructure())));
 
 		return journalArticleJSONObject;
 	}
