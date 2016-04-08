@@ -174,23 +174,23 @@ public abstract class BaseWebDriverImpl
 		String sourceDirFilePath = LiferaySeleniumHelper.getSourceDirFilePath(
 			getTestDependenciesDirName());
 
-		File axeFile = new File(sourceDirFilePath + "/axe.min.js");
+		File file = new File(sourceDirFilePath + "/axe.min.js");
 
-		URI axeURI = axeFile.toURI();
+		URI uri = file.toURI();
 
-		URL axeURL = axeURI.toURL();
+		URL url = uri.toURL();
 
-		AXE.Builder axeBuilder = new AXE.Builder(webDriver, axeURL);
+		AXE.Builder axeBuilder = new AXE.Builder(webDriver, url);
 
-		AXE.Builder axeBuilderOptions = axeBuilder.options(
+		axeBuilder = axeBuilder.options(
 			PropsValues.ACCESSIBILITY_STANDARDS_JSON);
 
-		JSONObject responseJSON = axeBuilderOptions.analyze();
+		JSONObject jsonObject = axeBuilder.analyze();
 
-		JSONArray violations = responseJSON.getJSONArray("violations");
+		JSONArray jsonArray = jsonObject.getJSONArray("violations");
 
-		if (violations.length() != 0) {
-			throw new Exception(AXE.report(violations));
+		if (jsonArray.length() != 0) {
+			throw new Exception(AXE.report(jsonArray));
 		}
 	}
 
