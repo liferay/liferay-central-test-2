@@ -192,7 +192,7 @@ if (layout != null) {
 								<aui:icon image="home" label="go-to-remote-live" markupView="lexicon" />
 							</a>
 
-							<liferay-ui:icon icon="exclamation-full" markupView="lexicon" message="an-unexpected-error-occurred-while-accessing-the-remote-live" toolTip="<%= true %>" />
+							<liferay-ui:icon icon="exclamation-full" markupView="lexicon" message="an-unexpected-error-occurred" toolTip="<%= true %>" />
 
 						<%
 						}
