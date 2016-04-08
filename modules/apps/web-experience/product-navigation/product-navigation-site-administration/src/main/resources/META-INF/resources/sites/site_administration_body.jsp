@@ -62,7 +62,7 @@ SiteAdministrationPanelCategoryDisplayContext siteAdministrationPanelCategoryDis
 						<aui:script use="aui-tooltip">
 							new A.Tooltip(
 								{
-									bodyContent: Liferay.Language.get('an-unexpected-error-occurred-while-accessing-the-remote-live'),
+									bodyContent: Liferay.Language.get('an-unexpected-error-occurred'),
 									position: 'right',
 									trigger: A.one('#<portlet:namespace />remoteLiveLink'),
 									visible: false,
