@@ -162,8 +162,9 @@ public class PortletProviderUtil {
 		_manageServiceTrackerMap = ServiceTrackerCollections.openSingleValueMap(
 			ManagePortletProvider.class, "model.class.name");
 	private static final ServiceTrackerMap<String, PreviewPortletProvider>
-		_previewServiceTrackerMap = ServiceTrackerCollections.openSingleValueMap(
-			PreviewPortletProvider.class, "model.class.name");
+		_previewServiceTrackerMap =
+			ServiceTrackerCollections.openSingleValueMap(
+				PreviewPortletProvider.class, "model.class.name");
 	private static final ServiceTrackerMap<String, ViewPortletProvider>
 		_viewServiceTrackerMap = ServiceTrackerCollections.openSingleValueMap(
 			ViewPortletProvider.class, "model.class.name");
