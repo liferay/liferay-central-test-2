@@ -14,8 +14,6 @@
 
 package com.liferay.portal.kernel.portlet;
 
-import com.liferay.portal.kernel.portlet.PortletProvider;
-
 /**
  * @author Eudaldo Alonso
  */
