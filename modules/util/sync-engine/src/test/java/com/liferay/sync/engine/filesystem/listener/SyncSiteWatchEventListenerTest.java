@@ -15,6 +15,7 @@
 package com.liferay.sync.engine.filesystem.listener;
 
 import com.liferay.sync.engine.BaseTestCase;
+import com.liferay.sync.engine.model.SyncFile;
 import com.liferay.sync.engine.model.SyncSite;
 import com.liferay.sync.engine.model.SyncWatchEvent;
 import com.liferay.sync.engine.service.SyncSiteService;
@@ -46,14 +47,14 @@ public class SyncSiteWatchEventListenerTest extends BaseTestCase {
 			syncAccount.getSyncAccountId());
 
 		SyncSiteService.activateSyncSite(
-			_syncSite1.getSyncSiteId(), new ArrayList<>(), true);
+			_syncSite1.getSyncSiteId(), new ArrayList<SyncFile>(), true);
 
 		_syncSite2 = SyncSiteTestUtil.addSyncSite(
 			10158, FileUtil.getFilePathName(filePathName, "test-site2"), 10186,
 			syncAccount.getSyncAccountId());
 
 		SyncSiteService.activateSyncSite(
-			_syncSite2.getSyncSiteId(), new ArrayList<>(), true);
+			_syncSite2.getSyncSiteId(), new ArrayList<SyncFile>(), true);
 	}
 
 	@After
