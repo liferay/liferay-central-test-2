@@ -2230,7 +2230,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		Group group = groupPersistence.findByPrimaryKey(message.getGroupId());
 
-		User user = userPersistence.fetchByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 
 		String emailAddress = user.getEmailAddress();
 		String fullName = user.getFullName();
