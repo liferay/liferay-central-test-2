@@ -181,7 +181,7 @@
 	<command name="addDocumentTypePG">
 		<var name="key_dmDocumentTypeName" value="${dmDocumentTypeName}" />
 
-		<execute function="Click" locator1="Button#PLUS" />
+		<execute function="Click#makeVisibleClickAt" locator1="Portlet#ICON_PLUS_SIGN" />
 
 		<execute function="AssertClick" locator1="MenuItem#DOCUMENT_TYPE" value1="${dmDocumentTypeName}" />
 
