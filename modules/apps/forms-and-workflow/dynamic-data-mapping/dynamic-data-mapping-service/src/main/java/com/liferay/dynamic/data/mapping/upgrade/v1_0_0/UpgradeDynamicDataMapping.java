@@ -2078,17 +2078,14 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 		protected long getDLFolderId(
 			long groupId, long parentFolderId, String name) {
 
-			try {
-				DLFolder dlFolder = _dlFolderLocalService.getFolder(
-					groupId, parentFolderId, name);
+			DLFolder dlFolder = _dlFolderLocalService.fetchFolder(
+				groupId, parentFolderId, name);
 
-				return dlFolder.getFolderId();
-			}
-			catch (PortalException pe) {
-				_log.error("Unable to get DLfolder ID " + pe);
-
+			if (dlFolder == null) {
 				return 0;
 			}
+
+			return dlFolder.getFolderId();
 		}
 
 		protected String getExtension(String fileName) {
