@@ -103,7 +103,8 @@ public class ReleaseManager {
 			System.out.println(
 				"Would upgrade " + bundleSymbolicName + " from " +
 					schemaVersionString + " to " +
-						lastUpgradeInfo.getToSchemaVersionString());
+						lastUpgradeInfo.getToSchemaVersionString() + " and " +
+							"its dependent modules");
 		}
 	}
 
