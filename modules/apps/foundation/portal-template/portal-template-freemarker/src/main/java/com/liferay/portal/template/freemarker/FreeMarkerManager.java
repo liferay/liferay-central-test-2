@@ -79,8 +79,6 @@ import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleEvent;
 import org.osgi.framework.wiring.BundleCapability;
-import org.osgi.framework.wiring.BundleRevision;
-import org.osgi.framework.wiring.BundleWire;
 import org.osgi.framework.wiring.BundleWiring;
 import org.osgi.service.component.ComponentContext;
 import org.osgi.service.component.annotations.Activate;
@@ -395,110 +393,6 @@ public class FreeMarkerManager extends BaseSingleTemplateManager {
 	private final Map<String, TemplateModel> _templateModels =
 		new ConcurrentHashMap<>();
 
-	private class TaglibBundleTrackerCustomizer
-		implements BundleTrackerCustomizer<Bundle> {
-
-		@Override
-		public Bundle addingBundle(
-			Bundle bundle, BundleEvent bundleEvent) {
-
-			boolean track = false;
-
-			Enumeration<URL> enumeration = bundle.findEntries(
-				"/", "*taglib-mapping.properties", false);
-
-			if (enumeration != null) {
-				while (enumeration.hasMoreElements()) {
-					URL url = enumeration.nextElement();
-
-					try (InputStream inputStream = url.openStream()) {
-						Properties properties = PropertiesUtil.load(
-							inputStream, StringPool.UTF8);
-
-						_taglibMappings.putAll(
-							PropertiesUtil.toMap(properties));
-
-						track = true;
-					}
-					catch (Exception e) {
-						_log.error(e, e);
-					}
-				}
-			}
-
-			BundleWiring bundleWiring = bundle.adapt(BundleWiring.class);
-
-			List<BundleCapability> bundleCapabilities =
-				bundleWiring.getCapabilities("osgi.extender");
-
-			for (BundleCapability bundleCapability : bundleCapabilities) {
-				Map<String, Object> attributes =
-					bundleCapability.getAttributes();
-
-				Object value = attributes.get("osgi.extender");
-
-				if (value.equals("jsp.taglib")) {
-					Bundle[] bundles = ArrayUtil.append(
-						_classLoader.getBundles(), bundle);
-
-					_classLoader = new FreeMarkerBundleClassloader(bundles);
-
-					track = true;
-
-					break;
-				}
-			}
-
-			if (track) {
-				return bundle;
-			}
-
-			return null;
-		}
-
-		@Override
-		public void modifiedBundle(
-			Bundle bundle, BundleEvent bundleEvent,
-			Bundle bundleCapabilities) {
-		}
-
-		@Override
-		public void removedBundle(
-			Bundle bundle, BundleEvent bundleEvent, Bundle trackedBundle) {
-
-			Bundle[] bundles = _classLoader.getBundles();
-
-			if (ArrayUtil.contains(bundles, trackedBundle)) {
-				bundles = ArrayUtil.remove(bundles, trackedBundle);
-
-				_classLoader = new FreeMarkerBundleClassloader(bundles);
-			}
-
-			Enumeration<URL> enumeration = trackedBundle.findEntries(
-				"/", "*taglib-mapping.properties", false);
-
-			if (enumeration == null) {
-				return;
-			}
-
-			while (enumeration.hasMoreElements()) {
-				URL url = enumeration.nextElement();
-
-				try (InputStream inputStream = url.openStream()) {
-					Properties properties = PropertiesUtil.load(
-						inputStream, StringPool.UTF8);
-
-					for (Object keyObject : properties.keySet()) {
-						_taglibMappings.remove(keyObject);
-					}
-				}
-				catch (Exception e) {
-					_log.error(e, e);
-				}
-			}
-		}
-	}
-
 	private class ServletContextInvocationHandler implements InvocationHandler {
 
 		public ServletContextInvocationHandler(ServletContext servletContext) {
@@ -615,6 +509,108 @@ public class FreeMarkerManager extends BaseSingleTemplateManager {
 		}
 
 		private final ServletContext _servletContext;
+
+	}
+
+	private class TaglibBundleTrackerCustomizer
+		implements BundleTrackerCustomizer<Bundle> {
+
+		@Override
+		public Bundle addingBundle(Bundle bundle, BundleEvent bundleEvent) {
+			boolean track = false;
+
+			Enumeration<URL> enumeration = bundle.findEntries(
+				"/", "*taglib-mapping.properties", false);
+
+			if (enumeration != null) {
+				while (enumeration.hasMoreElements()) {
+					URL url = enumeration.nextElement();
+
+					try (InputStream inputStream = url.openStream()) {
+						Properties properties = PropertiesUtil.load(
+							inputStream, StringPool.UTF8);
+
+						_taglibMappings.putAll(
+							PropertiesUtil.toMap(properties));
+
+						track = true;
+					}
+					catch (Exception e) {
+						_log.error(e, e);
+					}
+				}
+			}
+
+			BundleWiring bundleWiring = bundle.adapt(BundleWiring.class);
+
+			List<BundleCapability> bundleCapabilities =
+				bundleWiring.getCapabilities("osgi.extender");
+
+			for (BundleCapability bundleCapability : bundleCapabilities) {
+				Map<String, Object> attributes =
+					bundleCapability.getAttributes();
+
+				Object value = attributes.get("osgi.extender");
+
+				if (value.equals("jsp.taglib")) {
+					Bundle[] bundles = ArrayUtil.append(
+						_classLoader.getBundles(), bundle);
+
+					_classLoader = new FreeMarkerBundleClassloader(bundles);
+
+					track = true;
+
+					break;
+				}
+			}
+
+			if (track) {
+				return bundle;
+			}
+
+			return null;
+		}
+
+		@Override
+		public void modifiedBundle(
+			Bundle bundle, BundleEvent bundleEvent, Bundle bundleCapabilities) {
+		}
+
+		@Override
+		public void removedBundle(
+			Bundle bundle, BundleEvent bundleEvent, Bundle trackedBundle) {
+
+			Bundle[] bundles = _classLoader.getBundles();
+
+			if (ArrayUtil.contains(bundles, trackedBundle)) {
+				bundles = ArrayUtil.remove(bundles, trackedBundle);
+
+				_classLoader = new FreeMarkerBundleClassloader(bundles);
+			}
+
+			Enumeration<URL> enumeration = trackedBundle.findEntries(
+				"/", "*taglib-mapping.properties", false);
+
+			if (enumeration == null) {
+				return;
+			}
+
+			while (enumeration.hasMoreElements()) {
+				URL url = enumeration.nextElement();
+
+				try (InputStream inputStream = url.openStream()) {
+					Properties properties = PropertiesUtil.load(
+						inputStream, StringPool.UTF8);
+
+					for (Object keyObject : properties.keySet()) {
+						_taglibMappings.remove(keyObject);
+					}
+				}
+				catch (Exception e) {
+					_log.error(e, e);
+				}
+			}
+		}
 
 	}
 
