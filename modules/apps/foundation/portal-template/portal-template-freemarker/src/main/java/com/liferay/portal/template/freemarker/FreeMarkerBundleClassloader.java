@@ -30,12 +30,11 @@ import org.osgi.framework.Bundle;
  */
 public class FreeMarkerBundleClassloader extends URLClassLoader {
 
-	public FreeMarkerBundleClassloader(Bundle ... bundles) {
+	public FreeMarkerBundleClassloader(Bundle... bundles) {
 		super(new URL[0]);
 
 		if (bundles.length == 0) {
-			throw new IllegalArgumentException(
-				"At least one bundle is required");
+			throw new IllegalArgumentException("Bundles are empty");
 		}
 
 		_bundles = bundles;
