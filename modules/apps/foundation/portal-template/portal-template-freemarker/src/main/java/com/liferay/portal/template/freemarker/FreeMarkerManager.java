@@ -315,7 +315,7 @@ public class FreeMarkerManager extends BaseSingleTemplateManager {
 
 		_bundle = bundleContext.getBundle();
 
-		_classLoader = new FreeMarkerBundleClassloader(_bundle);
+		_freeMarkerBundleClassloader = new FreeMarkerBundleClassloader(_bundle);
 
 		int stateMask = Bundle.ACTIVE | Bundle.RESOLVED;
 
@@ -362,7 +362,7 @@ public class FreeMarkerManager extends BaseSingleTemplateManager {
 		ServletContext servletContext) {
 
 		return (ServletContext)ProxyUtil.newProxyInstance(
-			_classLoader, _INTERFACES,
+			_freeMarkerBundleClassloader, _INTERFACES,
 			new ServletContextInvocationHandler(servletContext));
 	}
 
@@ -383,8 +383,8 @@ public class FreeMarkerManager extends BaseSingleTemplateManager {
 
 	private Bundle _bundle;
 	private BundleTracker<Bundle> _bundleTracker;
-	private volatile FreeMarkerBundleClassloader _classLoader;
 	private Configuration _configuration;
+	private volatile FreeMarkerBundleClassloader _freeMarkerBundleClassloader;
 	private volatile FreeMarkerEngineConfiguration
 		_freemarkerEngineConfiguration;
 	private final Map<String, String> _taglibMappings =
@@ -406,7 +406,7 @@ public class FreeMarkerManager extends BaseSingleTemplateManager {
 			String methodName = method.getName();
 
 			if (methodName.equals("getClassLoader")) {
-				return _classLoader;
+				return _freeMarkerBundleClassloader;
 			}
 			else if (methodName.equals("getResource")) {
 				return _getResource((String)args[0]);
@@ -445,7 +445,7 @@ public class FreeMarkerManager extends BaseSingleTemplateManager {
 				return url;
 			}
 
-			url = _classLoader.getResource(path);
+			url = _freeMarkerBundleClassloader.getResource(path);
 
 			if (url != null) {
 				return url;
@@ -554,9 +554,10 @@ public class FreeMarkerManager extends BaseSingleTemplateManager {
 
 				if (value.equals("jsp.taglib")) {
 					Bundle[] bundles = ArrayUtil.append(
-						_classLoader.getBundles(), bundle);
+						_freeMarkerBundleClassloader.getBundles(), bundle);
 
-					_classLoader = new FreeMarkerBundleClassloader(bundles);
+					_freeMarkerBundleClassloader =
+						new FreeMarkerBundleClassloader(bundles);
 
 					track = true;
 
@@ -580,12 +581,13 @@ public class FreeMarkerManager extends BaseSingleTemplateManager {
 		public void removedBundle(
 			Bundle bundle, BundleEvent bundleEvent, Bundle trackedBundle) {
 
-			Bundle[] bundles = _classLoader.getBundles();
+			Bundle[] bundles = _freeMarkerBundleClassloader.getBundles();
 
 			if (ArrayUtil.contains(bundles, trackedBundle)) {
 				bundles = ArrayUtil.remove(bundles, trackedBundle);
 
-				_classLoader = new FreeMarkerBundleClassloader(bundles);
+				_freeMarkerBundleClassloader = new FreeMarkerBundleClassloader(
+					bundles);
 			}
 
 			Enumeration<URL> enumeration = trackedBundle.findEntries(
@@ -634,7 +636,8 @@ public class FreeMarkerManager extends BaseSingleTemplateManager {
 					currentThread.getContextClassLoader();
 
 				try {
-					currentThread.setContextClassLoader(_classLoader);
+					currentThread.setContextClassLoader(
+						_freeMarkerBundleClassloader);
 
 					templateModel = _taglibFactory.get(uri);
 				}
