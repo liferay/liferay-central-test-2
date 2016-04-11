@@ -99,17 +99,16 @@ renderResponse.setTitle(trashRenderer.getTitle(locale));
 
 					PortletURL rowURL = renderResponse.createRenderURL();
 
-					rowURL.setParameter("classNameId", String.valueOf(PortalUtil.getClassNameId(curTrashRenderer.getClassName())));
-					rowURL.setParameter("classPK", String.valueOf(curTrashRenderer.getClassPK()));
-
 					if (curTrashHandler.isContainerModel()) {
 						rowURL.setParameter("mvcPath", "/view_content.jsp");
 					}
 					else {
 						rowURL.setParameter("mvcPath", "/preview.jsp");
-
 						rowURL.setWindowState(LiferayWindowState.POP_UP);
 					}
+
+					rowURL.setParameter("classNameId", String.valueOf(PortalUtil.getClassNameId(curTrashRenderer.getClassName())));
+					rowURL.setParameter("classPK", String.valueOf(curTrashRenderer.getClassPK()));
 					%>
 
 					<c:choose>
