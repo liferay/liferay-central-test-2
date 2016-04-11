@@ -1788,7 +1788,7 @@ public abstract class BaseSourceProcessor implements SourceProcessor {
 
 		return getLevel(
 			s, new String[] {increaseLevelString},
-			new String[] {decreaseLevelString}, 0);	
+			new String[] {decreaseLevelString}, 0);
 	}
 
 	protected int getLevel(
@@ -2256,10 +2256,10 @@ public abstract class BaseSourceProcessor implements SourceProcessor {
 		return absolutePath.contains("/modules/");
 	}
 
-	protected void preFormat() throws Exception {
+	protected void postFormat() throws Exception {
 	}
 
-	protected void postFormat() throws Exception {
+	protected void preFormat() throws Exception {
 	}
 
 	protected void printError(String fileName, String message) {
@@ -2671,8 +2671,10 @@ public abstract class BaseSourceProcessor implements SourceProcessor {
 	}
 
 	private Set<String> _annotationsExclusions;
-	private Map<String, Tuple> _bndFileLocationAndContentMap = new HashMap<>();
-	private Map<String, Properties> _bndLanguagePropertiesMap = new HashMap<>();
+	private final Map<String, Tuple> _bndFileLocationAndContentMap =
+		new HashMap<>();
+	private final Map<String, Properties> _bndLanguagePropertiesMap =
+		new HashMap<>();
 	private Map<String, String> _compatClassNamesMap;
 	private String _copyright;
 	private Map<String, List<String>> _errorMessagesMap = new HashMap<>();
@@ -2681,9 +2683,10 @@ public abstract class BaseSourceProcessor implements SourceProcessor {
 	private Set<String> _immutableFieldTypes;
 	private String _mainReleaseVersion;
 	private final List<String> _modifiedFileNames = new ArrayList<>();
-	private Map<String, Properties> _moduleLangLanguageProperties =
+	private final Map<String, Properties> _moduleLangLanguageProperties =
 		new HashMap<>();
-	private Map<String, Properties> _moduleLanguageProperties = new HashMap<>();
+	private final Map<String, Properties> _moduleLanguageProperties =
+		new HashMap<>();
 	private String _oldCopyright;
 	private Properties _portalLanguageProperties;
 	private Properties _properties;
