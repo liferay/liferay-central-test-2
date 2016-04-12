@@ -41,7 +41,7 @@ import javax.crypto.KeyGenerator;
 /**
  * @author Brian Wing Shun Chan
  * @author Shuyang Zhou
- * @see com.liferay.petra.encryptor.util.Encryptor
+ * @see com.liferay.petra.encryptor.Encryptor
  */
 public class Encryptor {
 

@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.petra.encryptor.util;
+package com.liferay.petra.encryptor;
 
 /**
  * @author Brian Wing Shun Chan

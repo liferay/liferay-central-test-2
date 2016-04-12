@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.petra.encryptor.util;
+package com.liferay.petra.encryptor;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
