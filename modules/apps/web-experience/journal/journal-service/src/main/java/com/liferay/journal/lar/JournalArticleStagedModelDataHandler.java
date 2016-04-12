@@ -331,7 +331,7 @@ public class JournalArticleStagedModelDataHandler
 					if (_log.isWarnEnabled()) {
 						StringBundler sb = new StringBundler(4);
 
-						sb.append("Unable to export small image with id ");
+						sb.append("Unable to export small image ");
 						sb.append(article.getSmallImageId());
 						sb.append(" to article ");
 						sb.append(article.getArticleId());

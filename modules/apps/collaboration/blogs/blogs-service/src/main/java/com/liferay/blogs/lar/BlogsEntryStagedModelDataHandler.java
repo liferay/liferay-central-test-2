@@ -135,7 +135,7 @@ public class BlogsEntryStagedModelDataHandler
 					String smallImagePath = ExportImportPathUtil.getModelPath(
 						entry,
 						smallImage.getImageId() + StringPool.PERIOD +
-						smallImage.getType());
+							smallImage.getType());
 
 					entryElement.addAttribute(
 						"small-image-path", smallImagePath);
@@ -149,9 +149,9 @@ public class BlogsEntryStagedModelDataHandler
 					if (_log.isWarnEnabled()) {
 						StringBundler sb = new StringBundler(4);
 
-						sb.append("Unable to export small image with id ");
+						sb.append("Unable to export small image ");
 						sb.append(entry.getSmallImageId());
-						sb.append(" to blog entry ");
+						sb.append(" to blogs entry ");
 						sb.append(entry.getEntryId());
 
 						_log.warn(sb.toString());
