@@ -693,7 +693,7 @@ public class LayoutStagedModelDataHandler
 			if (_log.isWarnEnabled()) {
 				StringBundler sb = new StringBundler(4);
 
-				sb.append("Unable to export icon image with id ");
+				sb.append("Unable to export icon image ");
 				sb.append(layout.getIconImageId());
 				sb.append(" to layout ");
 				sb.append(layout.getLayoutId());

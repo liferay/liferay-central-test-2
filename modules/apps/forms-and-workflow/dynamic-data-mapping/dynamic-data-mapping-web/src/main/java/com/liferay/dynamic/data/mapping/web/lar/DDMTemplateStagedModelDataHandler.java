@@ -227,7 +227,7 @@ public class DDMTemplateStagedModelDataHandler
 					if (_log.isWarnEnabled()) {
 						StringBundler sb = new StringBundler(4);
 
-						sb.append("Unable to export small image with id ");
+						sb.append("Unable to export small image ");
 						sb.append(template.getSmallImageId());
 						sb.append(" to template ");
 						sb.append(template.getTemplateKey());
