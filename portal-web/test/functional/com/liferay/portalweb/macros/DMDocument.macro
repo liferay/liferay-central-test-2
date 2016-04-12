@@ -1916,7 +1916,7 @@
 			<then>
 				<var name="key_numberValue" value="${numberValue}" />
 
-				<execute function="AssertTextEquals#assertValue" locator1="DocumentsAndMediaDocument#METADATA_PANEL_NUMBER" value1="${numberValue}" />
+				<execute function="AssertTextEquals#assertPartialText" locator1="DocumentsAndMediaDocument#METADATA_PANEL_NUMBER" value1="${numberValue}" />
 			</then>
 		</if>
 	</command>
