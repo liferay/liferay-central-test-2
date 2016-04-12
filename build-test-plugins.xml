@@ -232,7 +232,7 @@ app.server.tomcat.dir=${app.server.parent.dir}/tomcat-7.0.42</echo>
 	</target>
 
 	<target name="test-plugin">
-		<echo>Compiling ${test.plugin}</echo>
+		<echo>Compiling ${test.plugin}.</echo>
 
 		<if>
 			<or>
@@ -323,18 +323,24 @@ plugins.includes=${test.plugin}</echo>
 
 				<beanshell>
 					<![CDATA[
-						String failedPluginsString = project.getProperty("failed.plugins");
-						String testPluginsString = project.getProperty("test.plugins");
-
-						String[] failedPlugins = failedPluginsString.split(",");
-						String[] testPlugins = testPluginsString.split(",");
-
 						StringBuilder sb = new StringBuilder();
 
 						sb.append("\n");
+
+						String failedPluginsString = project.getProperty("failed.plugins");
+
+						String[] failedPlugins = failedPluginsString.split(",");
+
 						sb.append(failedPlugins.length);
+
 						sb.append(" of ");
+
+						String testPluginsString = project.getProperty("test.plugins");
+
+						String[] testPlugins = testPluginsString.split(",");
+
 						sb.append(testPlugins.length);
+
 						sb.append(" plugin");
 
 						if (testPlugins.length != 1) {
