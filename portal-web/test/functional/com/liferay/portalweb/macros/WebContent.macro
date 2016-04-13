@@ -1773,7 +1773,7 @@
 
 		<execute function="AssertTextEquals" locator1="DDMField#TEXT_BOX" value1="${webContentTextBox}" />
 
-		<var name="key_translationLocale" value="es_ES" />
+		<var name="key_localizedLanguage" value="Spanish (Spain)" />
 
 		<execute function="Click" locator1="Translation#CURRENT_LOCALE" />
 
