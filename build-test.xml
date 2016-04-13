@@ -2994,7 +2994,7 @@ org.apache.catalina.startup.ClassLoaderFactory.level=INFO]]>
 
 							<delete file="jps_output" />
 
-							<fail if="app.server.stopping.timeout" message="Server is still available at ${app.server.waiting.url}" />
+							<fail if="app.server.stopping.timeout" message="Server is still available at ${app.server.waiting.url}." />
 						</then>
 					</if>
 				</sequential>
