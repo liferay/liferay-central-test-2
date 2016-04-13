@@ -44,7 +44,7 @@ public class VerifyLayout extends VerifyProcess {
 			runSQL(
 				"delete from Layout where layoutPrototypeUuid != '' and " +
 					"layoutPrototypeUuid not in (select uuid_ from " +
-						"LayoutPrototype) and layoutPrototypeLinkEnabled = 1");
+						"LayoutPrototype) and layoutPrototypeLinkEnabled = TRUE");
 		}
 	}
 
@@ -97,7 +97,7 @@ public class VerifyLayout extends VerifyProcess {
 			sb.append("update Layout set layoutPrototypeUuid = null where ");
 			sb.append("layoutPrototypeUuid != '' and layoutPrototypeUuid not ");
 			sb.append("in (select uuid_ from LayoutPrototype) and ");
-			sb.append("layoutPrototypeLinkEnabled = 0");
+			sb.append("layoutPrototypeLinkEnabled = FALSE");
 
 			runSQL(sb.toString());
 		}
