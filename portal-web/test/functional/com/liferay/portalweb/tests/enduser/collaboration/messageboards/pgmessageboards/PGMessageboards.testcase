@@ -1034,6 +1034,10 @@
 			<var method="TestPropsUtil#get('email.password.1')" name="userPassword" />
 		</execute>
 
+		<execute macro="Navigator#gotoPage">
+			<var name="pageName" value="Welcome" />
+		</execute>
+
 		<execute macro="ProductMenu#gotoControlPanelConfiguration">
 			<var name="portlet" value="Virtual Instances" />
 		</execute>
