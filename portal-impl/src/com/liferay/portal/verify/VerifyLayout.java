@@ -41,7 +41,7 @@ public class VerifyLayout extends VerifyProcess {
 
 	protected void deleteLinkedOrphanedLayouts() throws Exception {
 		try (LoggingTimer loggingTimer = new LoggingTimer()) {
-			StringBundler sb  = new StringBundler(3);
+			StringBundler sb = new StringBundler(3);
 
 			sb.append("delete from Layout where layoutPrototypeUuid != '' ");
 			sb.append("and layoutPrototypeUuid not in (select uuid_ from ");
