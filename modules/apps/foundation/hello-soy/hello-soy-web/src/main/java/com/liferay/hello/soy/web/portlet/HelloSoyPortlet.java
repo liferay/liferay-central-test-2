@@ -14,6 +14,7 @@
 
 package com.liferay.hello.soy.web.portlet;
 
+import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -64,11 +65,6 @@ public class HelloSoyPortlet extends SoyPortlet {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		template.put("userName", themeDisplay.getUser().getFirstName());
-
 		PortletURL portletURL = renderResponse.createRenderURL();
 
 		portletURL.setParameter("mvcPath", "hello_soy_description");
@@ -85,6 +81,13 @@ public class HelloSoyPortlet extends SoyPortlet {
 		}
 
 		template.put("portletURL", portletURL.toString());
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		User user = themeDisplay.getUser();
+
+		template.put("userName", user.getFirstName());
 
 		super.render(renderRequest, renderResponse);
 	}
