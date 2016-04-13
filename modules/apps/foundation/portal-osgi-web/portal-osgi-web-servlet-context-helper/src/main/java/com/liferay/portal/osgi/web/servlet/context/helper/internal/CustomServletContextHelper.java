@@ -77,7 +77,7 @@ public class CustomServletContextHelper
 
 	@Override
 	public URL getResource(String name) {
-		if (name == null) {
+		if ((name == null) || name.contains("*")) {
 			return null;
 		}
 
