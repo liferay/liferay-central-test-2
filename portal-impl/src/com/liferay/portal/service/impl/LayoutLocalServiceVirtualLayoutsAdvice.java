@@ -89,9 +89,9 @@ public class LayoutLocalServiceVirtualLayoutsAdvice
 				return layout;
 			}
 
-			LayoutSet layoutSet = layout.getLayoutSet();
-
 			boolean workflowEnabled = WorkflowThreadLocal.isEnabled();
+
+			LayoutSet layoutSet = layout.getLayoutSet();
 
 			try {
 				WorkflowThreadLocal.setEnabled(false);
