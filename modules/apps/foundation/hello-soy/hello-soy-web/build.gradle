@@ -14,7 +14,3 @@ transpileJS {
 	soySrcIncludes = ""
 	srcIncludes = "**/*.es.js"
 }
-
-liferay {
-	deployDir = file("${liferayHome}/osgi/modules")
-}
