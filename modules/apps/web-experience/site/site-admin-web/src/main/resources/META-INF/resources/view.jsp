@@ -109,6 +109,8 @@ if (group != null) {
 	</div>
 </div>
 
+<liferay-util:include page="/add_button.jsp" servletContext="<%= application %>" />
+
 <%!
 private static Log _log = LogFactoryUtil.getLog("com_liferay_site_admin_web.view_jsp");
 %>

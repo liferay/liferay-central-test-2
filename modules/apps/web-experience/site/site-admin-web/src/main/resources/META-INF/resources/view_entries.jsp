@@ -147,5 +147,3 @@ siteChecker.setRememberCheckBoxStateURLRegex("^(?!.*" + liferayPortletResponse.g
 
 	<liferay-ui:search-iterator displayStyle="<%= displayStyle %>" markupView="lexicon" />
 </liferay-ui:search-container>
-
-<liferay-util:include page="/add_button.jsp" servletContext="<%= application %>" />
