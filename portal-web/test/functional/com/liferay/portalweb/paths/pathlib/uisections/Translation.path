@@ -54,11 +54,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>TITLE</td>
-	<td>//span[contains(@class,'translation-manager') and contains(.,'${key_localizedLanguage}')]</td>
-	<td></td>
-</tr>
-<tr>
 	<td>LOCALIZATION_NAME</td>
 	<td>//li[@data-value='${key_localizationName}']</td>
 	<td></td>
