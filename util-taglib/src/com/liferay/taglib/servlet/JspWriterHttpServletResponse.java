@@ -24,8 +24,7 @@ import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
 
 /**
- * @deprecated As of 7.0.0, replaced by {@link
- *             com.liferay.taglib.servlet.PipingServletResponse}
+ * @deprecated As of 7.0.0, replaced by {@link PipingServletResponse}
  * @author Carlos Sierra Andrés
  */
 @Deprecated
