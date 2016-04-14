@@ -37,12 +37,13 @@ PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(request, "sites")
 if (group != null) {
 	SitesUtil.addPortletBreadcrumbEntries(group, request, mainURL);
 
+	portletDisplay.setShowBackIcon(true);
+
 	PortletURL backURL = renderResponse.createRenderURL();
 
 	backURL.setParameter("mvcPath", "/view.jsp");
 	backURL.setParameter("groupId", String.valueOf(group.getParentGroupId()));
 
-	portletDisplay.setShowBackIcon(true);
 	portletDisplay.setURLBack(backURL.toString());
 
 	renderResponse.setTitle(HtmlUtil.escape(group.getDescriptiveName(locale)));
