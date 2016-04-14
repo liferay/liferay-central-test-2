@@ -12,10 +12,12 @@
  * details.
  */
 
-package com.liferay.polls.web.polls.portlet.action;
+package com.liferay.polls.web.portlet.action;
 
 import com.liferay.polls.service.PollsVoteServiceUtil;
-import com.liferay.polls.web.util.PollsUtil;
+import com.liferay.polls.web.constants.PollsPortletKeys;
+import com.liferay.polls.web.portlet.util.PollsUtil;
+import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -24,11 +26,20 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 
+import org.osgi.service.component.annotations.Component;
+
 /**
  * @author Brian Wing Shun Chan
- * @author Mate Thurzo
+ * @author Peter Fellwock
  */
-public class ViewQuestionAction extends EditQuestionAction {
+@Component(
+	property = {
+		"javax.portlet.name=" + PollsPortletKeys.POLLS,
+		"mvc.command.name=/polls_display/vote_question"
+	},
+	service = MVCActionCommand.class
+)
+public class VoteQuestionMVCActionCommand extends EditQuestionMVCActionCommand {
 
 	@Override
 	protected void updateQuestion(
