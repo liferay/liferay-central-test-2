@@ -328,8 +328,8 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 
 			_logger.log(
 				Logger.LOG_WARNING,
-				qName + " from web.xml in Bundle " + _bundle +
-					" is not supported. This value will be ignored");
+				qName + " from web.xml in bundle " + _bundle +
+					" is not supported");
 		}
 		else if (qName.equals("servlet")) {
 			_webXMLDefinition.setServletDefinition(
@@ -408,25 +408,27 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 				webResourceCollectionDefinitions =
 					_webXMLDefinition.getWebResourceCollectionDefinitions();
 
-			WebResourceCollectionDefinition definition =
+			WebResourceCollectionDefinition webResourceCollectionDefinition =
 				new WebResourceCollectionDefinition(
 					_webResourceCollection.webResourceName);
 
 			for (String httpMethod : _webResourceCollection.httpMethods) {
-				definition.addHttpMethod(httpMethod);
+				webResourceCollectionDefinition.addHttpMethod(httpMethod);
 			}
 
 			for (String httpMethodException :
 					_webResourceCollection.httpMethodExceptions) {
 
-				definition.addHttpMethodException(httpMethodException);
+				webResourceCollectionDefinition.addHttpMethodException(
+					httpMethodException);
 			}
 
 			for (String urlPattern : _webResourceCollection.urlPatterns) {
-				definition.addURLPattern(urlPattern);
+				webResourceCollectionDefinition.addURLPattern(urlPattern);
 			}
 
-			webResourceCollectionDefinitions.add(definition);
+			webResourceCollectionDefinitions.add(
+				webResourceCollectionDefinition);
 
 			_webResourceCollection = null;
 		}
