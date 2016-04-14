@@ -148,7 +148,6 @@ public class CustomServletContextHelper
 				// Servlet 3 spec 12.2
 
 				if (urlPattern.startsWith("*.")) {
-
 					String patternExtension = urlPattern.substring(2);
 
 					if (Validator.isNotNull(patternExtension) &&
@@ -161,8 +160,7 @@ public class CustomServletContextHelper
 
 					int index = path.lastIndexOf(".");
 
-					String pathExtension = path.substring(
-						index + 1);
+					String pathExtension = path.substring(index + 1);
 
 					if (Validator.equals(patternExtension, pathExtension)) {
 						forbidden = true;
@@ -215,8 +213,7 @@ public class CustomServletContextHelper
 				}
 
 				List<String> httpMethodExceptions =
-					webResourceCollectionDefinition.
-						getHttpMethodExceptions();
+					webResourceCollectionDefinition.getHttpMethodExceptions();
 
 				if (ListUtil.isNotEmpty(httpMethodExceptions) &&
 					httpMethodExceptions.contains(request.getMethod())) {
