@@ -132,108 +132,110 @@ public class CustomServletContextHelper
 			return forbiddenPath(request, response, path);
 		}
 
-		if (ListUtil.isNotEmpty(_webResourceCollectionDefinitions)) {
-			for (WebResourceCollectionDefinition
-					webResourceCollectionDefinition :
-						_webResourceCollectionDefinitions) {
+		if (ListUtil.isEmpty(_webResourceCollectionDefinitions)) {
+			return true;
+		}
 
-				boolean forbidden = false;
+		for (WebResourceCollectionDefinition
+				webResourceCollectionDefinition :
+					_webResourceCollectionDefinitions) {
 
-				// URL pattern checks
+			boolean forbidden = false;
 
-				for (String urlPattern :
-						webResourceCollectionDefinition.getUrlPatterns()) {
+			// URL pattern checks
 
-					if (urlPattern.startsWith("*.")) {
+			for (String urlPattern :
+					webResourceCollectionDefinition.getUrlPatterns()) {
 
-						// Servlet 3 spec section 12.2: extension mapping
+				if (urlPattern.startsWith("*.")) {
 
-						// Check for *.* pattern
+					// Servlet 3 spec section 12.2: extension mapping
 
-						String patternExtension = urlPattern.substring(2);
+					// Check for *.* pattern
 
-						if (Validator.isNotNull(patternExtension) &&
-							Validator.equals("*", patternExtension)) {
+					String patternExtension = urlPattern.substring(2);
 
-							forbidden = true;
-							break;
-						}
+					if (Validator.isNotNull(patternExtension) &&
+						Validator.equals("*", patternExtension)) {
 
-						// Check for extension
-
-						int pathExtensionLastIndexOf = path.lastIndexOf(".");
-
-						String pathExtension = path.substring(
-							pathExtensionLastIndexOf + 1);
-
-						if (Validator.equals(patternExtension, pathExtension)) {
-							forbidden = true;
-							break;
-						}
+						forbidden = true;
+						break;
 					}
-					else if (urlPattern.endsWith("/*")) {
 
-						// Servlet 3 spec section 12.2: path mapping
+					// Check for extension
 
-						if (urlPattern.equals("/*")) {
-							forbidden = true;
-							break;
-						}
+					int pathExtensionLastIndexOf = path.lastIndexOf(".");
 
-						String pathCompare = path;
+					String pathExtension = path.substring(
+						pathExtensionLastIndexOf + 1);
 
-						String urlPatternPath = urlPattern.substring(
-							0, urlPattern.indexOf("/*") +1);
-
-						int pathCompareSlashIndexOf = pathCompare.lastIndexOf(
-							"/");
-
-						if (pathCompareSlashIndexOf > 0) {
-							pathCompare = pathCompare.substring(
-								0, pathCompareSlashIndexOf +1);
-						}
-
-						if (Validator.equals(urlPatternPath, pathCompare)) {
-							forbidden = true;
-							break;
-						}
-					}
-					else if (Validator.equals(urlPattern, path)) {
+					if (Validator.equals(patternExtension, pathExtension)) {
 						forbidden = true;
 						break;
 					}
 				}
+				else if (urlPattern.endsWith("/*")) {
 
-				if (forbidden) {
-					String requestMethod = request.getMethod();
+					// Servlet 3 spec section 12.2: path mapping
 
-					// Http method checks. Servlet 3 spec. 13.8.1
-
-					List<String> httpMethods =
-						webResourceCollectionDefinition.getHttpMethods();
-
-					if (ListUtil.isNotEmpty(httpMethods) &&
-						!httpMethods.contains(requestMethod)) {
-
-						forbidden = false;
+					if (urlPattern.equals("/*")) {
+						forbidden = true;
+						break;
 					}
 
-					// Http method exception checks. Servlet 3 spec. 13.8.1
+					String pathCompare = path;
 
-					List<String> httpMethodExceptions =
-						webResourceCollectionDefinition.
-							getHttpMethodExceptions();
+					String urlPatternPath = urlPattern.substring(
+						0, urlPattern.indexOf("/*") +1);
 
-					if (ListUtil.isNotEmpty(httpMethodExceptions) &&
-						httpMethodExceptions.contains(requestMethod)) {
+					int pathCompareSlashIndexOf = pathCompare.lastIndexOf(
+						"/");
 
-						forbidden = false;
+					if (pathCompareSlashIndexOf > 0) {
+						pathCompare = pathCompare.substring(
+							0, pathCompareSlashIndexOf +1);
+					}
+
+					if (Validator.equals(urlPatternPath, pathCompare)) {
+						forbidden = true;
+						break;
 					}
 				}
-
-				if (forbidden) {
-					return forbiddenPath(request, response, path);
+				else if (Validator.equals(urlPattern, path)) {
+					forbidden = true;
+					break;
 				}
+			}
+
+			if (forbidden) {
+				String requestMethod = request.getMethod();
+
+				// Http method checks. Servlet 3 spec. 13.8.1
+
+				List<String> httpMethods =
+					webResourceCollectionDefinition.getHttpMethods();
+
+				if (ListUtil.isNotEmpty(httpMethods) &&
+					!httpMethods.contains(requestMethod)) {
+
+					forbidden = false;
+				}
+
+				// Http method exception checks. Servlet 3 spec. 13.8.1
+
+				List<String> httpMethodExceptions =
+					webResourceCollectionDefinition.
+						getHttpMethodExceptions();
+
+				if (ListUtil.isNotEmpty(httpMethodExceptions) &&
+					httpMethodExceptions.contains(requestMethod)) {
+
+					forbidden = false;
+				}
+			}
+
+			if (forbidden) {
+				return forbiddenPath(request, response, path);
 			}
 		}
 
