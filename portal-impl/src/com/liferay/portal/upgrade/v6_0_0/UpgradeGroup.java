@@ -30,39 +30,39 @@ import java.sql.Statement;
  */
 public class UpgradeGroup extends UpgradeProcess {
 
-	protected void checkGlobalFriendlyURL(long companyId) throws Exception {
-		long globalGroupId = getGroupId(
+	protected void updateGlobalFriendlyURL(long companyId) throws Exception {
+		long groupId = getGroupId(
 			companyId, GroupConstants.GLOBAL_FRIENDLY_URL);
 
-		if (globalGroupId == 0) {
+		if (groupId == 0) {
 			return;
 		}
 
-		String friendlyURL = getNewFriendlyURL(companyId, globalGroupId);
+		String friendlyURL = getNewFriendlyURL(companyId, groupId);
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
-				"Modifying friendlyURL " + GroupConstants.GLOBAL_FRIENDLY_URL +
-					" of groupId " + globalGroupId + " to " + friendlyURL);
+				"Updating friendly URL " + GroupConstants.GLOBAL_FRIENDLY_URL +
+					" of global group " + groupId + " to " + friendlyURL);
 		}
 
 		try (PreparedStatement ps = connection.prepareStatement(
 				"update Group_ set friendlyURL = ? where groupId = ?")) {
 
 			ps.setString(1, friendlyURL);
-			ps.setLong(2, globalGroupId);
+			ps.setLong(2, groupId);
 
 			ps.execute();
 		}
 	}
 
-	protected void checkGlobalFriendlyURLs() throws Exception {
+	protected void updateGlobalFriendlyURLs() throws Exception {
 		try (Statement s = connection.createStatement()) {
 			String query = "select companyId from Company";
 
 			try (ResultSet rs = s.executeQuery(query)) {
 				while (rs.next()) {
-					checkGlobalFriendlyURL(rs.getLong(1));
+					updateGlobalFriendlyURL(rs.getLong(1));
 				}
 			}
 		}
@@ -70,7 +70,7 @@ public class UpgradeGroup extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		checkGlobalFriendlyURLs();
+		updateGlobalFriendlyURLs();
 		updateParentGroupId();
 	}
 
