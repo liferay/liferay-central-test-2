@@ -139,16 +139,17 @@ public class CustomServletContextHelper
 
 				boolean forbidden = false;
 
-				// url pattern checks
+				// URL pattern checks
 
 				for (String urlPattern :
 						webResourceCollectionDefinition.getUrlPatterns()) {
 
 					if (urlPattern.startsWith("*.")) {
 
-						// Servlet 3 spec section 12.2: Extension mapping
+						// Servlet 3 spec section 12.2: extension mapping
 
-						//Check for *.* pattern
+						// Check for *.* pattern
+
 						String patternExtension = urlPattern.substring(2);
 
 						if (Validator.isNotNull(patternExtension) &&
@@ -158,7 +159,8 @@ public class CustomServletContextHelper
 							break;
 						}
 
-						//Check for extension
+						// Check for extension
+
 						int pathExtensionLastIndexOf = path.lastIndexOf(".");
 
 						String pathExtension = path.substring(
@@ -170,7 +172,8 @@ public class CustomServletContextHelper
 						}
 					}
 					else if (urlPattern.endsWith("/*")) {
-						// Servlet 3 spec section 12.2: Path mapping
+
+						// Servlet 3 spec section 12.2: path mapping
 
 						if (urlPattern.equals("/*")) {
 							forbidden = true;
