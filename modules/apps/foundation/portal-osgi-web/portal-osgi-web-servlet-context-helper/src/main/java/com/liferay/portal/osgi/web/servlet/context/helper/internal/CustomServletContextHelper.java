@@ -155,45 +155,48 @@ public class CustomServletContextHelper
 						Validator.equals("*", patternExtension)) {
 
 						forbidden = true;
+
 						break;
 					}
 
-					int pathExtensionLastIndexOf = path.lastIndexOf(".");
+					int index = path.lastIndexOf(".");
 
 					String pathExtension = path.substring(
-						pathExtensionLastIndexOf + 1);
+						index + 1);
 
 					if (Validator.equals(patternExtension, pathExtension)) {
 						forbidden = true;
+
 						break;
 					}
 				}
 				else if (urlPattern.endsWith("/*")) {
 					if (urlPattern.equals("/*")) {
 						forbidden = true;
+
 						break;
 					}
 
-					String pathCompare = path;
+					String subpath = path;
 
 					String urlPatternPath = urlPattern.substring(
 						0, urlPattern.indexOf("/*") +1);
 
-					int pathCompareSlashIndexOf = pathCompare.lastIndexOf(
-						"/");
+					int index = subpath.lastIndexOf("/");
 
-					if (pathCompareSlashIndexOf > 0) {
-						pathCompare = pathCompare.substring(
-							0, pathCompareSlashIndexOf +1);
+					if (index > 0) {
+						subpath = subpath.substring(0, index +1);
 					}
 
-					if (Validator.equals(urlPatternPath, pathCompare)) {
+					if (Validator.equals(urlPatternPath, subpath)) {
 						forbidden = true;
+
 						break;
 					}
 				}
 				else if (Validator.equals(urlPattern, path)) {
 					forbidden = true;
+
 					break;
 				}
 			}
@@ -202,13 +205,11 @@ public class CustomServletContextHelper
 
 				// Servlet 3 spec 13.8.1
 
-				String requestMethod = request.getMethod();
-
 				List<String> httpMethods =
 					webResourceCollectionDefinition.getHttpMethods();
 
 				if (ListUtil.isNotEmpty(httpMethods) &&
-					!httpMethods.contains(requestMethod)) {
+					!httpMethods.contains(request.getMethod())) {
 
 					forbidden = false;
 				}
@@ -218,7 +219,7 @@ public class CustomServletContextHelper
 						getHttpMethodExceptions();
 
 				if (ListUtil.isNotEmpty(httpMethodExceptions) &&
-					httpMethodExceptions.contains(requestMethod)) {
+					httpMethodExceptions.contains(request.getMethod())) {
 
 					forbidden = false;
 				}
