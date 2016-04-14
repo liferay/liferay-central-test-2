@@ -12,37 +12,42 @@
  * details.
  */
 
-package com.liferay.polls.web.display.portlet.action;
+package com.liferay.polls.web.portlet.action;
 
 import com.liferay.polls.constants.PollsWebKeys;
 import com.liferay.polls.exception.NoSuchQuestionException;
 import com.liferay.polls.model.PollsQuestion;
 import com.liferay.polls.service.PollsQuestionServiceUtil;
+import com.liferay.polls.web.constants.PollsPortletKeys;
+import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.struts.PortletAction;
 
-import javax.portlet.PortletConfig;
+import javax.portlet.PortletException;
 import javax.portlet.PortletPreferences;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
+import org.osgi.service.component.annotations.Component;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Peter Fellwock
  */
-public class ViewAction extends PortletAction {
+@Component(
+	property = {
+		"javax.portlet.name=" + PollsPortletKeys.POLLS_DISPLAY,
+		"mvc.command.name=/polls_display/view"
+	},
+	service = MVCRenderCommand.class
+)
+public class ViewActionMVCRenderCommand implements MVCRenderCommand {
 
 	@Override
-	public ActionForward render(
-			ActionMapping actionMapping, ActionForm actionForm,
-			PortletConfig portletConfig, RenderRequest renderRequest,
-			RenderResponse renderResponse)
-		throws Exception {
+	public String render(
+			RenderRequest renderRequest, RenderResponse renderResponse)
+		throws PortletException {
 
 		try {
 			PortletPreferences portletPreferences =
@@ -63,11 +68,11 @@ public class ViewAction extends PortletAction {
 			if (!(e instanceof NoSuchQuestionException)) {
 				SessionErrors.add(renderRequest, e.getClass());
 
-				return actionMapping.findForward("portlet.polls_display.error");
+				return "/polls_display/error.jsp";
 			}
 		}
 
-		return actionMapping.findForward("portlet.polls_display.view");
+		return "/polls_display/view.jsp";
 	}
 
 }
