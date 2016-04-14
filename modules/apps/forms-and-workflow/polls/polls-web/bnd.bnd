@@ -24,11 +24,8 @@ Import-Package:\
 Liferay-Releng-Module-Group-Description:
 Liferay-Releng-Module-Group-Title: Polls
 Web-ContextPath: /polls-web
--donotcopy: (docroot/WEB-INF/src|.*\.jar|.*\.java)
 -liferay-includeresource:\
 	WEB-INF/classes/=@com.liferay.util.java-*.jar!/com/liferay/util/bean/PortletBeanLocatorUtil.class,\
-	WEB-INF/classes/=@com.liferay.util.java-*.jar!/com/liferay/util/portlet/PortletProps.class
--wab: docroot
--wablib:\
-	../../../../../lib/portal/jcommon.jar,\
-	../../../../../lib/portal/jfreechart.jar
+	WEB-INF/classes/=@com.liferay.util.java-*.jar!/com/liferay/util/portlet/PortletProps.class,\
+	@jcommon-*.jar,\
+	@jfreechart-*.jar
