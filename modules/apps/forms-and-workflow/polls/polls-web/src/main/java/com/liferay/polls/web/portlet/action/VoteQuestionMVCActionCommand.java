@@ -14,7 +14,7 @@
 
 package com.liferay.polls.web.portlet.action;
 
-import com.liferay.polls.service.PollsVoteServiceUtil;
+import com.liferay.polls.service.PollsVoteService;
 import com.liferay.polls.web.constants.PollsPortletKeys;
 import com.liferay.polls.web.portlet.util.PollsUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
@@ -27,6 +27,7 @@ import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Brian Wing Shun Chan
@@ -41,6 +42,11 @@ import org.osgi.service.component.annotations.Component;
 )
 public class VoteQuestionMVCActionCommand extends EditQuestionMVCActionCommand {
 
+	@Reference(unbind = "-")
+	protected void setPollsVoteService(PollsVoteService pollsVoteService) {
+		_pollsVoteService = pollsVoteService;
+	}
+
 	@Override
 	protected void updateQuestion(
 			PortletConfig portletConfig, ActionRequest actionRequest,
@@ -53,9 +59,11 @@ public class VoteQuestionMVCActionCommand extends EditQuestionMVCActionCommand {
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			actionRequest);
 
-		PollsVoteServiceUtil.addVote(questionId, choiceId, serviceContext);
+		_pollsVoteService.addVote(questionId, choiceId, serviceContext);
 
 		PollsUtil.saveVote(actionRequest, actionResponse, questionId);
 	}
+
+	private PollsVoteService _pollsVoteService;
 
 }
