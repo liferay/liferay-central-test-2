@@ -142,16 +142,12 @@ public class CustomServletContextHelper
 
 			boolean forbidden = false;
 
-			// URL pattern checks
-
 			for (String urlPattern :
 					webResourceCollectionDefinition.getUrlPatterns()) {
 
+				// Servlet 3 spec 12.2
+
 				if (urlPattern.startsWith("*.")) {
-
-					// Servlet 3 spec section 12.2: extension mapping
-
-					// Check for *.* pattern
 
 					String patternExtension = urlPattern.substring(2);
 
@@ -161,8 +157,6 @@ public class CustomServletContextHelper
 						forbidden = true;
 						break;
 					}
-
-					// Check for extension
 
 					int pathExtensionLastIndexOf = path.lastIndexOf(".");
 
@@ -175,9 +169,6 @@ public class CustomServletContextHelper
 					}
 				}
 				else if (urlPattern.endsWith("/*")) {
-
-					// Servlet 3 spec section 12.2: path mapping
-
 					if (urlPattern.equals("/*")) {
 						forbidden = true;
 						break;
@@ -208,9 +199,10 @@ public class CustomServletContextHelper
 			}
 
 			if (forbidden) {
-				String requestMethod = request.getMethod();
 
-				// Http method checks. Servlet 3 spec. 13.8.1
+				// Servlet 3 spec 13.8.1
+
+				String requestMethod = request.getMethod();
 
 				List<String> httpMethods =
 					webResourceCollectionDefinition.getHttpMethods();
@@ -220,8 +212,6 @@ public class CustomServletContextHelper
 
 					forbidden = false;
 				}
-
-				// Http method exception checks. Servlet 3 spec. 13.8.1
 
 				List<String> httpMethodExceptions =
 					webResourceCollectionDefinition.
