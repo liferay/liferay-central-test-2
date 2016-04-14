@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.polls.web.polls.portlet.display.context;
+package com.liferay.polls.web.portlet.display.context;
 
 import com.liferay.polls.model.PollsQuestion;
 import com.liferay.polls.util.comparator.PollsQuestionCreateDateComparator;

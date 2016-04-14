@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.polls.web.polls.portlet.action.configuration.icon;
+package com.liferay.polls.web.portlet.action.configuration.icon;
 
 import com.liferay.polls.constants.PollsPortletKeys;
 import com.liferay.polls.service.permission.PollsResourcePermissionChecker;

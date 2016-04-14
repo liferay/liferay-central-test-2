@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.polls.web.polls.portlet.action;
+package com.liferay.polls.web.portlet.action;
 
 import com.liferay.polls.constants.PollsWebKeys;
 import com.liferay.polls.model.PollsQuestion;

@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.polls.web.polls.portlet.path;
+package com.liferay.polls.web.portlet.path;
 
 import org.osgi.service.component.annotations.Component;
 
