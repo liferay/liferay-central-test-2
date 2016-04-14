@@ -24,7 +24,7 @@ import com.liferay.polls.exception.QuestionExpiredException;
 import com.liferay.polls.exception.QuestionTitleException;
 import com.liferay.polls.model.PollsChoice;
 import com.liferay.polls.model.PollsQuestion;
-import com.liferay.polls.service.PollsQuestionServiceUtil;
+import com.liferay.polls.service.PollsQuestionService;
 import com.liferay.polls.service.persistence.PollsChoiceUtil;
 import com.liferay.polls.constants.PollsPortletKeys;
 import com.liferay.portal.kernel.model.Layout;
@@ -33,7 +33,7 @@ import com.liferay.portal.kernel.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
-import com.liferay.portal.kernel.service.LayoutLocalServiceUtil;
+import com.liferay.portal.kernel.service.LayoutLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.servlet.SessionErrors;
@@ -65,6 +65,7 @@ import javax.portlet.PortletRequest;
 import javax.portlet.WindowState;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Brian Wing Shun Chan
@@ -98,7 +99,7 @@ public class EditQuestionMVCActionCommand extends BaseMVCActionCommand {
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		Layout layout = LayoutLocalServiceUtil.getLayout(
+		Layout layout = _layoutLocalService.getLayout(
 			themeDisplay.getRefererPlid());
 
 		PortletPreferences portletPreferences =
@@ -122,7 +123,7 @@ public class EditQuestionMVCActionCommand extends BaseMVCActionCommand {
 
 		long questionId = ParamUtil.getLong(actionRequest, "questionId");
 
-		PollsQuestionServiceUtil.deleteQuestion(questionId);
+		_pollsQuestionService.deleteQuestion(questionId);
 	}
 
 	@Override
@@ -189,6 +190,20 @@ public class EditQuestionMVCActionCommand extends BaseMVCActionCommand {
 				throw e;
 			}
 		}
+	}
+
+	@Reference(unbind = "-")
+	protected void setLayoutLocalService(
+		LayoutLocalService layoutLocalService) {
+
+		_layoutLocalService = layoutLocalService;
+	}
+
+	@Reference(unbind = "-")
+	protected void setPollsQuestionService(
+		PollsQuestionService pollsQuestionService) {
+
+		_pollsQuestionService = pollsQuestionService;
 	}
 
 	protected void updateQuestion(
@@ -269,7 +284,7 @@ public class EditQuestionMVCActionCommand extends BaseMVCActionCommand {
 
 			// Add question
 
-			PollsQuestion question = PollsQuestionServiceUtil.addQuestion(
+			PollsQuestion question = _pollsQuestionService.addQuestion(
 				titleMap, descriptionMap, expirationDateMonth,
 				expirationDateDay, expirationDateYear, expirationDateHour,
 				expirationDateMinute, neverExpire, choices, serviceContext);
@@ -282,11 +297,14 @@ public class EditQuestionMVCActionCommand extends BaseMVCActionCommand {
 
 			// Update question
 
-			PollsQuestionServiceUtil.updateQuestion(
+			_pollsQuestionService.updateQuestion(
 				questionId, titleMap, descriptionMap, expirationDateMonth,
 				expirationDateDay, expirationDateYear, expirationDateHour,
 				expirationDateMinute, neverExpire, choices, serviceContext);
 		}
 	}
+
+	private LayoutLocalService _layoutLocalService;
+	private PollsQuestionService _pollsQuestionService;
 
 }

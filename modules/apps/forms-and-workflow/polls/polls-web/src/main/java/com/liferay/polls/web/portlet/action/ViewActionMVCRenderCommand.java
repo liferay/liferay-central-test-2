@@ -17,7 +17,7 @@ package com.liferay.polls.web.portlet.action;
 import com.liferay.polls.constants.PollsWebKeys;
 import com.liferay.polls.exception.NoSuchQuestionException;
 import com.liferay.polls.model.PollsQuestion;
-import com.liferay.polls.service.PollsQuestionServiceUtil;
+import com.liferay.polls.service.PollsQuestionService;
 import com.liferay.polls.web.constants.PollsPortletKeys;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.kernel.servlet.SessionErrors;
@@ -30,6 +30,7 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Brian Wing Shun Chan
@@ -57,7 +58,7 @@ public class ViewActionMVCRenderCommand implements MVCRenderCommand {
 				portletPreferences.getValue("questionId", StringPool.BLANK));
 
 			if (questionId > 0) {
-				PollsQuestion question = PollsQuestionServiceUtil.getQuestion(
+				PollsQuestion question = _pollsQuestionService.getQuestion(
 					questionId);
 
 				renderRequest.setAttribute(
@@ -74,5 +75,14 @@ public class ViewActionMVCRenderCommand implements MVCRenderCommand {
 
 		return "/polls_display/view.jsp";
 	}
+
+	@Reference(unbind = "-")
+	protected void setPollsQuestionService(
+		PollsQuestionService pollsQuestionService) {
+
+		_pollsQuestionService = pollsQuestionService;
+	}
+
+	private PollsQuestionService _pollsQuestionService;
 
 }
