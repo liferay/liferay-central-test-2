@@ -887,10 +887,10 @@ Please set the environment variable ANT_OPTS to the recommended value of
 	</macrodef>
 
 	<macrodef name="install-portal-artifact">
-		<attribute name="packaging" default="jar" />
-		<attribute name="snapshot" default="false" />
+		<attribute default="jar" name="packaging" />
+		<attribute default="false" name="snapshot" />
 
-		<element name="attach-files" implicit="true" optional="true" />
+		<element implicit="true" name="attach-files" optional="true" />
 
 		<sequential>
 			<condition property="snapshot.version.suffix" value="-SNAPSHOT" else="">
