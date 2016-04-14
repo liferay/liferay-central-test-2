@@ -3502,17 +3502,17 @@ public class PortletImpl extends PortletBaseImpl {
 	 */
 	@Override
 	public void setReady(boolean ready) {
-		Boolean currentStatus = _readyMap.putIfAbsent(
+		Boolean readyMapValue = _readyMap.putIfAbsent(
 			getRootPortletId(), ready);
 
-		if (ready && (currentStatus != null) &&
-			currentStatus.equals(Boolean.TRUE)) {
+		if (ready && (readyMapValue != null) &&
+			readyMapValue.equals(Boolean.TRUE)) {
 
 			return;
 		}
 
-		if (!ready && (currentStatus != null) &&
-			currentStatus.equals(Boolean.FALSE)) {
+		if (!ready && (readyMapValue != null) &&
+			readyMapValue.equals(Boolean.FALSE)) {
 
 			return;
 		}
