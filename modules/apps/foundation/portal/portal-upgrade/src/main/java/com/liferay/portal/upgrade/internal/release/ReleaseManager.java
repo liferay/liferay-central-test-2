@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.dao.db.DBProcessContext;
 import com.liferay.portal.kernel.model.Release;
 import com.liferay.portal.kernel.service.ReleaseLocalService;
 import com.liferay.portal.kernel.upgrade.UpgradeStep;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.output.stream.container.OutputStreamContainer;
 import com.liferay.portal.output.stream.container.OutputStreamContainerFactory;
@@ -95,16 +96,24 @@ public class ReleaseManager {
 				continue;
 			}
 
+			StringBundler sb = new StringBundler(7);
+
+			sb.append("Dry run upgrade ");
+			sb.append(bundleSymbolicName);
+			sb.append(" from ");
+			sb.append(schemaVersionString);
+			sb.append(" to ");
+
 			List<UpgradeInfo> upgradeInfos = upgradeInfosList.get(0);
 
 			UpgradeInfo lastUpgradeInfo = upgradeInfos.get(
 				upgradeInfos.size() - 1);
 
-			System.out.println(
-				"Would upgrade " + bundleSymbolicName + " from " +
-					schemaVersionString + " to " +
-						lastUpgradeInfo.getToSchemaVersionString() + " and " +
-							"its dependent modules");
+			sb.append(lastUpgradeInfo.getToSchemaVersionString());
+
+			sb.append(" and its dependent modules");
+
+			System.out.println(sb.toString());
 		}
 	}
 
