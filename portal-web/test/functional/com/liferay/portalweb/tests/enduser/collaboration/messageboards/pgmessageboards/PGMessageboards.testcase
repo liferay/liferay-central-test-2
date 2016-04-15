@@ -1035,7 +1035,7 @@
 		</execute>
 
 		<execute macro="Navigator#gotoPage">
-			<var name="pageName" value="Welcome" />
+			<var name="pageName" value="Message Boards Page" />
 		</execute>
 
 		<execute macro="ProductMenu#gotoControlPanelConfiguration">
