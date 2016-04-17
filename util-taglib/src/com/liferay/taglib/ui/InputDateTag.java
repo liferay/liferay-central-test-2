@@ -140,7 +140,9 @@ public class InputDateTag extends BaseValidatorTagSupport {
 		request.setAttribute(
 			"liferay-ui:input-date:autoFocus", String.valueOf(_autoFocus));
 		request.setAttribute("liferay-ui:input-date:cssClass", _cssClass);
-		request.setAttribute("liferay-ui:input-date:dateTogglerCheckboxLabel", _dateTogglerCheckboxLabel);
+		request.setAttribute(
+			"liferay-ui:input-date:dateTogglerCheckboxLabel",
+			_dateTogglerCheckboxLabel);
 		request.setAttribute("liferay-ui:input-date:dayParam", _dayParam);
 		request.setAttribute(
 			"liferay-ui:input-date:dayValue", String.valueOf(_dayValue));
