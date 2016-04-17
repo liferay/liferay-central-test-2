@@ -17,6 +17,7 @@ package com.liferay.portal.kernel.mobile.device;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.portal.kernel.security.pacl.permission.PortalRuntimePermission;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.registry.Registry;
 import com.liferay.registry.RegistryUtil;
@@ -139,9 +140,10 @@ public class DeviceDetectionUtil {
 			DeviceRecognitionProvider deviceRecognitionProvider =
 				registry.getService(serviceReference);
 
-			String type = (String)serviceReference.getProperty("type");
+			String type = GetterUtil.getString(
+				serviceReference.getProperty("type"));
 
-			if (Validator.isNotNull(type) && type.equals("default")) {
+			if (type.equals("default")) {
 				_defaultDeviceRecognitionProvider = deviceRecognitionProvider;
 			}
 			else {
