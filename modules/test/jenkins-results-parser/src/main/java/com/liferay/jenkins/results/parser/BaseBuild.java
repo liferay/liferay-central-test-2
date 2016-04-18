@@ -37,13 +37,7 @@ public abstract class BaseBuild implements Build {
 			return null;
 		}
 
-		StringBuilder sb = new StringBuilder();
-
-		sb.append(jobURL);
-		sb.append(buildNumber);
-		sb.append("/");
-
-		return sb.toString();
+		return jobURL + buildNumber + "/";
 	}
 
 	@Override
@@ -57,15 +51,7 @@ public abstract class BaseBuild implements Build {
 			return null;
 		}
 
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("http://");
-		sb.append(master);
-		sb.append("/job/");
-		sb.append(jobName);
-		sb.append("/");
-
-		return sb.toString();
+		return "http://" + master + "/job/" + jobName + "/";
 	}
 
 	@Override
@@ -161,8 +147,8 @@ public abstract class BaseBuild implements Build {
 	protected long statusModifiedTime;
 
 	private static final Pattern _buildURLPattern = Pattern.compile(
-		"\\w+://(?<master>[^/]+)/+job/+(?<jobName>[^/]+).*/" +
-			"(?<buildNumber>\\d+)/?");
+		"\\w+://(?<master>[^/]+)/+job/+(?<jobName>[^/]+).*/(?<buildNumber>" +
+			"\\d+)/?");
 
 	private String _status;
 
