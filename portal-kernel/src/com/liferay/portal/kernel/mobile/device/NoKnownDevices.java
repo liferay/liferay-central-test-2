@@ -43,6 +43,10 @@ public class NoKnownDevices implements KnownDevices {
 		return _unknownVersionableNames;
 	}
 
+	/**
+	 * @deprecated As of 7.0.0, with no direct replacement
+	 */
+	@Deprecated
 	@Override
 	public Map<Capability, Set<String>> getDeviceIds() {
 		return Collections.emptyMap();
