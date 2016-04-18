@@ -785,13 +785,8 @@ public class WebDriverHelper {
 		JavascriptExecutor javascriptExecutor =
 			(JavascriptExecutor)wrappedWebDriver;
 
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("window.scrollBy(");
-		sb.append(coordString);
-		sb.append(");");
-
-		javascriptExecutor.executeScript(sb.toString());
+		javascriptExecutor.executeScript(
+			"window.scrollBy(" + coordString + ");");
 	}
 
 	public static void select(
