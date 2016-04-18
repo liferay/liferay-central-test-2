@@ -1929,11 +1929,10 @@ public class AssetPublisherUtil {
 		String taskExecutorName =
 			AssetPublisherNotificationBackgroundTaskExecutor.class.getName();
 
-		BackgroundTask backgroundTask =
-			BackgroundTaskManagerUtil.addBackgroundTask(
-				portletPreferencesModel.getOwnerId(), layout.getGroupId(),
-				taskExecutorName, taskExecutorName, contextMap,
-				new ServiceContext());
+		BackgroundTaskManagerUtil.addBackgroundTask(
+			portletPreferencesModel.getOwnerId(), layout.getGroupId(),
+			taskExecutorName, taskExecutorName, contextMap,
+			new ServiceContext());
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
