@@ -41,7 +41,6 @@ import java.io.IOException;
 import java.io.Serializable;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -98,17 +97,10 @@ public class AssetPublisherNotificationBackgroundTaskExecutor
 				portletPreferencesModel.getPortletId(),
 				portletPreferencesModel.getPreferences());
 
-		Map<Subscription, List<AssetEntry>> subscriptionsMap =
-			filterAssetEntries(subscriptions, assetEntries);
-
-		for (Subscription subscription : subscriptionsMap.keySet()) {
-			List<Subscription> subscriptionList = new ArrayList<>();
-
-			subscriptionList.add(subscription);
-
-			AssetPublisherUtil.notifySubscribers(
-				portletPreferences, subscriptionList,
-				subscriptionsMap.get(subscription));
+		for (Subscription subscription : subscriptions) {
+			AssetPublisherUtil.notifySubscriber(
+				subscription.getUserId(), portletPreferences,
+				filterAssetEntries(subscription.getUserId(), assetEntries));
 		}
 
 		try {
@@ -163,29 +155,19 @@ public class AssetPublisherNotificationBackgroundTaskExecutor
 		}
 	}
 
-	protected Map<Subscription, List<AssetEntry>> filterAssetEntries(
-			List<Subscription> subscriptions, List<AssetEntry> assetEntries)
+	protected List<AssetEntry> filterAssetEntries(
+			long userId, List<AssetEntry> assetEntries)
 		throws PortalException {
 
-		Map<Subscription, List<AssetEntry>> subscriptionsMap = new HashMap<>();
+		List<AssetEntry> filteredAssetEntries = new ArrayList<>();
 
-		for (Subscription subscription : subscriptions) {
-			List<AssetEntry> subscriptionAssetEntries = new ArrayList<>();
-
-			for (AssetEntry assetEntry : assetEntries) {
-				if (hasPermission(subscription.getUserId(), assetEntry)) {
-					subscriptionAssetEntries.add(assetEntry);
-				}
+		for (AssetEntry assetEntry : assetEntries) {
+			if (hasPermission(userId, assetEntry)) {
+				filteredAssetEntries.add(assetEntry);
 			}
-
-			if (subscriptionAssetEntries.isEmpty()) {
-				continue;
-			}
-
-			subscriptionsMap.put(subscription, subscriptionAssetEntries);
 		}
 
-		return subscriptionsMap;
+		return filteredAssetEntries;
 	}
 
 }
