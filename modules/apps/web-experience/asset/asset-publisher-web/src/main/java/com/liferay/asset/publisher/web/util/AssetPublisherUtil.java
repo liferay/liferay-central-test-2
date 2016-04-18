@@ -14,6 +14,8 @@
 
 package com.liferay.asset.publisher.web.util;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.asset.kernel.AssetRendererFactoryRegistryUtil;
 import com.liferay.asset.kernel.model.AssetCategory;
 import com.liferay.asset.kernel.model.AssetEntry;
@@ -135,6 +137,7 @@ import org.osgi.service.component.annotations.ReferencePolicyOption;
  * @author Julio Camarero
  */
 @Component
+@ProviderType
 public class AssetPublisherUtil {
 
 	public static final String SCOPE_ID_CHILD_GROUP_PREFIX = "ChildGroup_";
