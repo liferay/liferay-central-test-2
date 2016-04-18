@@ -87,8 +87,7 @@ public class SocialActivityDefinition implements Serializable {
 			Validator.equals(
 				_activityProcessor,
 				activityDefinition.getActivityProcessor()) &&
-			Validator.equals(
-				_activityType, activityDefinition.getActivityType()) &&
+			(_activityType == activityDefinition.getActivityType()) &&
 			(_countersEnabled == activityDefinition.isCountersEnabled()) &&
 			Validator.equals(
 				_languageKey, activityDefinition.getLanguageKey()) &&
