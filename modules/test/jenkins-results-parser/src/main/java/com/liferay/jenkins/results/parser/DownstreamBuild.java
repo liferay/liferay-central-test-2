@@ -85,8 +85,8 @@ public class DownstreamBuild extends BaseBuild {
 			return;
 		}
 
-		if (status.equals("queued") || status.equals("starting") ||
-			status.equals("missing")) {
+		if (status.equals("missing") || status.equals("queued") ||
+			status.equals("starting")) {
 
 			JSONObject buildJSONObject = getRunningBuildJSONObject();
 
