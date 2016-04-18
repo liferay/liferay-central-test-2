@@ -68,17 +68,18 @@ public class AssetPublisherNotificationBackgroundTaskExecutor
 
 		BackgroundTaskResult backgroundTaskResult = new BackgroundTaskResult();
 
-		Map<String, Serializable> context = backgroundTask.getTaskContextMap();
+		Map<String, Serializable> taskContextMap =
+			backgroundTask.getTaskContextMap();
 
-		List<AssetEntry> assetEntries = (List<AssetEntry>)context.get(
+		List<AssetEntry> assetEntries = (List<AssetEntry>)taskContextMap.get(
 			"assetEntries");
 
-		long companyId = GetterUtil.getLong(context.get("companyId"));
+		long companyId = GetterUtil.getLong(taskContextMap.get("companyId"));
 
 		com.liferay.portal.kernel.model.PortletPreferences
 			portletPreferencesModel =
 				(com.liferay.portal.kernel.model.PortletPreferences)
-					context.get("portletPreferences");
+					taskContextMap.get("portletPreferences");
 
 		List<Subscription> subscriptions =
 			SubscriptionLocalServiceUtil.getSubscriptions(
