@@ -341,7 +341,7 @@ public class Field implements Serializable {
 		}
 
 		setValue(
-			"lat:" + geoLocationPoint.getLatitude() + ",lon:" +
+			"lat: " + geoLocationPoint.getLatitude() + ", lon: " +
 				geoLocationPoint.getLongitude());
 	}
 
