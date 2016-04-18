@@ -306,6 +306,7 @@ public class DownstreamBuild extends BaseBuild {
 			sb.append(getBuildURL());
 			sb.append(". ");
 			sb.append(getResult());
+
 			return sb.toString();
 		}
 
@@ -313,6 +314,7 @@ public class DownstreamBuild extends BaseBuild {
 			sb.append(" is queued at ");
 			sb.append(getJobURL());
 			sb.append(".");
+
 			return sb.toString();
 		}
 
@@ -320,6 +322,7 @@ public class DownstreamBuild extends BaseBuild {
 			sb.append(" started at ");
 			sb.append(getBuildURL());
 			sb.append(".");
+
 			return sb.toString();
 		}
 
@@ -327,6 +330,7 @@ public class DownstreamBuild extends BaseBuild {
 			sb.append(" invoked at ");
 			sb.append(getJobURL());
 			sb.append(".");
+
 			return sb.toString();
 		}
 
@@ -334,6 +338,7 @@ public class DownstreamBuild extends BaseBuild {
 			sb.append(" is missing ");
 			sb.append(getJobURL());
 			sb.append(".");
+
 			return sb.toString();
 		}
 
