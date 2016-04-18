@@ -105,7 +105,7 @@ public class CounterLocalServiceTest {
 								objectName, "softEvictConnections", null, null);
 						}
 
-						// Tomcat JDBC Connection Pool
+						// Tomcat
 
 						for (ObjectName objectName :
 								mBeanServer.queryNames(
@@ -240,7 +240,7 @@ public class CounterLocalServiceTest {
 			System.setProperty("portal:jdbc.default.maximumPoolSize", "1");
 			System.setProperty("portal:jdbc.default.minimumIdle", "0");
 
-			// Tomcat JDBC Connection Pool
+			// Tomcat
 
 			System.setProperty("portal:jdbc.default.initialSize", "0");
 			System.setProperty("portal:jdbc.default.maxActive", "1");
