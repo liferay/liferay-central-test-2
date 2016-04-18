@@ -273,11 +273,10 @@ public class AssetPublisherUtil {
 		String taskExecutorName =
 			AssetPublisherNotificationBackgroundTaskExecutor.class.getName();
 
-		BackgroundTask backgroundTask =
-			BackgroundTaskManagerUtil.addBackgroundTask(
-				themeDisplay.getUserId(), themeDisplay.getScopeGroupId(),
-				taskExecutorName, taskExecutorName, contextMap,
-				new ServiceContext());
+		BackgroundTaskManagerUtil.addBackgroundTask(
+			themeDisplay.getUserId(), themeDisplay.getScopeGroupId(),
+			taskExecutorName, taskExecutorName, contextMap,
+			new ServiceContext());
 	}
 
 	public static void addUserAttributes(
