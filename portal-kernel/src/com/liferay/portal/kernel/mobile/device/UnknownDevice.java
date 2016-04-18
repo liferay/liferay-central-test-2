@@ -46,11 +46,19 @@ public class UnknownDevice extends AbstractDevice {
 		return VersionableName.UNKNOWN.getName();
 	}
 
+	/**
+	 * @deprecated As of 7.0.0, with no direct replacement
+	 */
+	@Deprecated
 	@Override
 	public Map<String, Capability> getCapabilities() {
 		return Collections.emptyMap();
 	}
 
+	/**
+	 * @deprecated As of 7.0.0, with no direct replacement
+	 */
+	@Deprecated
 	@Override
 	public String getCapability(String name) {
 		return null;

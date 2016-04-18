@@ -70,6 +70,10 @@ public class DeviceDetectionUtil {
 		return knownDevices.getBrowsers();
 	}
 
+	/**
+	 * @deprecated As of 7.0.0, with no direct replacement
+	 */
+	@Deprecated
 	public static Set<String> getKnownDeviceIdsByCapability(
 		Capability capability) {
 
