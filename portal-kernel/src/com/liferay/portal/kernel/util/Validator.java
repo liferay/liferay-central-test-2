@@ -34,6 +34,7 @@ public class Validator {
 	/**
 	 * @deprecated As of 7.0.0
 	 */
+	@Deprecated
 	public static boolean equals(boolean boolean1, boolean boolean2) {
 		if (boolean1 == boolean2) {
 			return true;
@@ -46,6 +47,7 @@ public class Validator {
 	/**
 	 * @deprecated As of 7.0.0
 	 */
+	@Deprecated
 	public static boolean equals(byte byte1, byte byte2) {
 		if (byte1 == byte2) {
 			return true;
@@ -58,6 +60,7 @@ public class Validator {
 	/**
 	 * @deprecated As of 7.0.0
 	 */
+	@Deprecated
 	public static boolean equals(char char1, char char2) {
 		if (char1 == char2) {
 			return true;
@@ -70,6 +73,7 @@ public class Validator {
 	/**
 	 * @deprecated As of 7.0.0
 	 */
+	@Deprecated
 	public static boolean equals(double double1, double double2) {
 		if (Double.compare(double1, double2) == 0) {
 			return true;
@@ -82,6 +86,7 @@ public class Validator {
 	/**
 	 * @deprecated As of 7.0.0
 	 */
+	@Deprecated
 	public static boolean equals(float float1, float float2) {
 		if (Float.compare(float1, float2) == 0) {
 			return true;
@@ -94,6 +99,7 @@ public class Validator {
 	/**
 	 * @deprecated As of 7.0.0
 	 */
+	@Deprecated
 	public static boolean equals(int int1, int int2) {
 		if (int1 == int2) {
 			return true;
@@ -106,6 +112,7 @@ public class Validator {
 	/**
 	 * @deprecated As of 7.0.0
 	 */
+	@Deprecated
 	public static boolean equals(long long1, long long2) {
 		if (long1 == long2) {
 			return true;
@@ -139,6 +146,7 @@ public class Validator {
 	/**
 	 * @deprecated As of 7.0.0
 	 */
+	@Deprecated
 	public static boolean equals(short short1, short short2) {
 		if (short1 == short2) {
 			return true;
