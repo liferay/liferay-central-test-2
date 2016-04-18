@@ -1337,7 +1337,18 @@ public class AssetPublisherUtil {
 			List<AssetEntry> assetEntries)
 		throws PortalException {
 
-		notifySubscribers(portletPreferences, null, assetEntries);
+		Layout layout = _layoutLocalService.fetchLayout(plid);
+
+		String subscriptionClassName =
+			com.liferay.portal.kernel.model.PortletPreferences.class.getName();
+
+		List<Subscription> subscriptions =
+			_subscriptionLocalService.getSubscriptions(
+				layout.getCompanyId(), subscriptionClassName,
+				getSubscriptionClassPK(plid, portletId));
+
+		notifySubscribers(
+			portletPreferences, subscriptions, assetEntries);
 	}
 
 	public static void processAssetEntryQuery(
