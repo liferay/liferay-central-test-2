@@ -73,18 +73,13 @@ public class SocialActivityCounterDefinition implements Serializable {
 
 		if ((activityCounterDefinition != null) &&
 			(_enabled == activityCounterDefinition._enabled) &&
-			Validator.equals(
-				_increment, activityCounterDefinition._increment) &&
+			(_increment == activityCounterDefinition._increment) &&
 			(_limitEnabled == activityCounterDefinition._limitEnabled) &&
-			Validator.equals(
-				_limitPeriod, activityCounterDefinition._limitPeriod) &&
-			Validator.equals(
-				_limitValue, activityCounterDefinition._limitValue) &&
+			(_limitPeriod == activityCounterDefinition._limitPeriod) &&
+			(_limitValue == activityCounterDefinition._limitValue) &&
 			Validator.equals(_name, activityCounterDefinition._name) &&
-			Validator.equals(
-				_ownerType, activityCounterDefinition._ownerType) &&
-			Validator.equals(
-				_periodLength, activityCounterDefinition._periodLength) &&
+			(_ownerType == activityCounterDefinition._ownerType) &&
+			(_periodLength == activityCounterDefinition._periodLength) &&
 			(_transient == activityCounterDefinition._transient)) {
 
 			return true;
