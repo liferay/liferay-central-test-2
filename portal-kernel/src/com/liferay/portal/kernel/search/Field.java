@@ -336,13 +336,12 @@ public class Field implements Serializable {
 
 		if (geoLocationPoint == null) {
 			_values = null;
-
-			return;
 		}
-
-		setValue(
-			"lat: " + geoLocationPoint.getLatitude() + ", lon: " +
-				geoLocationPoint.getLongitude());
+		else {
+			setValue(
+				"lat: " + geoLocationPoint.getLatitude() + ", lon: " +
+					geoLocationPoint.getLongitude());
+		}
 	}
 
 	public void setLocalizedValues(Map<Locale, String> localizedValues) {
