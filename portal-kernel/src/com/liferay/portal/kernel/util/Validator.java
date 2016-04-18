@@ -125,6 +125,7 @@ public class Validator {
 	/**
 	 * @deprecated As of 7.0.0
 	 */
+	@Deprecated
 	public static boolean equals(Object obj1, Object obj2) {
 		if (obj1 == obj2) {
 			return true;
