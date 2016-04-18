@@ -1285,14 +1285,20 @@ public class AssetPublisherUtil {
 			getSubscriptionClassPK(plid, portletId));
 	}
 
-	public static void notifySubscribers(
-			PortletPreferences portletPreferences,
-			List<Subscription> subscriptions, List<AssetEntry> assetEntries)
+	public static void notifySubscriber(
+			long userId, PortletPreferences portletPreferences,
+			List<AssetEntry> assetEntries)
 		throws PortalException {
 
 		if (!getEmailAssetEntryAddedEnabled(portletPreferences) ||
 			assetEntries.isEmpty()) {
 
+			return;
+		}
+
+		User user = _userLocalService.fetchUser(userId);
+
+		if ((user == null) || !user.isActive()) {
 			return;
 		}
 
@@ -1326,7 +1332,8 @@ public class AssetPublisherUtil {
 			AssetPublisherPortletKeys.ASSET_PUBLISHER);
 		subscriptionSender.setReplyToAddress(fromAddress);
 
-		subscriptionSender.setSubscriptions(subscriptions);
+		subscriptionSender.addRuntimeSubscribers(
+			user.getEmailAddress(), user.getFullName());
 
 		subscriptionSender.flushNotificationsAsync();
 	}
@@ -1347,8 +1354,10 @@ public class AssetPublisherUtil {
 				layout.getCompanyId(), subscriptionClassName,
 				getSubscriptionClassPK(plid, portletId));
 
-		notifySubscribers(
-			portletPreferences, subscriptions, assetEntries);
+		for (Subscription subscription : subscriptions) {
+			notifySubscriber(
+				subscription.getUserId(), portletPreferences, assetEntries);
+		}
 	}
 
 	public static void processAssetEntryQuery(
