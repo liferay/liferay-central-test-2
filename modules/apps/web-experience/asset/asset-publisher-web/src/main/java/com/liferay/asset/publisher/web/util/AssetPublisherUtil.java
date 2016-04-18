@@ -247,15 +247,24 @@ public class AssetPublisherUtil {
 			throw new SystemException(pe);
 		}
 
+		String taskExecutorName =
+			AssetPublisherNotificationBackgroundTaskExecutor.class.getName();
+
+		Map<String, Serializable> taskContextMap = new HashMap<>();
+
+		ArrayList<AssetEntry> assetEntries = new ArrayList<>();
+
+		assetEntries.add(assetEntry);
+
+		taskContextMap.put("assetEntries", assetEntries);
+
+		taskContextMap.put("companyId", themeDisplay.getCompanyId());
+
 		long plid = themeDisplay.getRefererPlid();
 
 		if (plid == 0) {
 			plid = themeDisplay.getPlid();
 		}
-
-		ArrayList<AssetEntry> assetEntries = new ArrayList<>();
-
-		assetEntries.add(assetEntry);
 
 		com.liferay.portal.kernel.model.PortletPreferences
 			portletPreferencesModel =
@@ -263,18 +272,11 @@ public class AssetPublisherUtil {
 					PortletKeys.PREFS_OWNER_ID_DEFAULT,
 					PortletKeys.PREFS_OWNER_TYPE_LAYOUT, plid, portletId);
 
-		Map<String, Serializable> contextMap = new HashMap<>();
-
-		contextMap.put("assetEntries", assetEntries);
-		contextMap.put("companyId", themeDisplay.getCompanyId());
-		contextMap.put("portletPreferences", portletPreferencesModel);
-
-		String taskExecutorName =
-			AssetPublisherNotificationBackgroundTaskExecutor.class.getName();
+		taskContextMap.put("portletPreferences", portletPreferencesModel);
 
 		BackgroundTaskManagerUtil.addBackgroundTask(
 			themeDisplay.getUserId(), themeDisplay.getScopeGroupId(),
-			taskExecutorName, taskExecutorName, contextMap,
+			taskExecutorName, taskExecutorName, taskContextMap,
 			new ServiceContext());
 	}
 
@@ -1926,6 +1928,11 @@ public class AssetPublisherUtil {
 			return;
 		}
 
+		String taskExecutorName =
+			AssetPublisherNotificationBackgroundTaskExecutor.class.getName();
+
+		Map<String, Serializable> taskContextMap = new HashMap<>();
+
 		long[] notifiedAssetEntryIds = GetterUtil.getLongValues(
 			portletPreferences.getValues("notifiedAssetEntryIds", null));
 
@@ -1941,18 +1948,14 @@ public class AssetPublisherUtil {
 			}
 		}
 
-		Map<String, Serializable> contextMap = new HashMap<>();
+		taskContextMap.put("assetEntries", newAssetEntries);
 
-		contextMap.put("assetEntries", newAssetEntries);
-		contextMap.put("companyId", layout.getCompanyId());
-		contextMap.put("portletPreferences", portletPreferencesModel);
-
-		String taskExecutorName =
-			AssetPublisherNotificationBackgroundTaskExecutor.class.getName();
+		taskContextMap.put("companyId", layout.getCompanyId());
+		taskContextMap.put("portletPreferences", portletPreferencesModel);
 
 		BackgroundTaskManagerUtil.addBackgroundTask(
 			portletPreferencesModel.getOwnerId(), layout.getGroupId(),
-			taskExecutorName, taskExecutorName, contextMap,
+			taskExecutorName, taskExecutorName, taskContextMap,
 			new ServiceContext());
 	}
 
