@@ -4369,8 +4369,6 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  0.0",org.apache.commons.validator.routines;version="1.5.0",org.apache
  .xml.serializer;version="2.7.1",org.objectweb.asm.attrs;version="5.0.
  1"
-Git-Descriptor: 4728ff1-dirty
-Git-SHA: 4728ff1e78764190e41d3f94554fd6607de8b3d4
 Javac-Debug: on
 Javac-Deprecation: off
 Javac-Encoding: UTF-8
