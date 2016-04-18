@@ -2,7 +2,7 @@
 <!DOCTYPE project>
 
 <project name="build-app">
-	<fail message="Please provide a value &quot;app.name&quot; when running this command.">
+	<fail message="Please specify a value for &quot;app.name&quot; when running this command.">
 		<condition>
 			<not>
 				<isset property="app.name" />
