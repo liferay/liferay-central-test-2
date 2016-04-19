@@ -49,8 +49,6 @@ import org.apache.commons.cli.ParseException;
  */
 public class UpgradeClient {
 
-	private static final String _JAVA_HOME = System.getenv("JAVA_HOME");
-
 	public static void main(String[] args) {
 		try {
 			Options options = _getOptions();
@@ -600,6 +598,8 @@ public class UpgradeClient {
 				"liferay.home", liferayHome.getCanonicalPath());
 		}
 	}
+
+	private static final String _JAVA_HOME = System.getenv("JAVA_HOME");
 
 	private static final Map<String, AppServer> _appServers =
 		new LinkedHashMap<>();

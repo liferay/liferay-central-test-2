@@ -33,8 +33,7 @@ public class AppServer {
 	}
 
 	public static AppServer getResinAppServer() {
-		return new AppServer(
-			"./resin-4.0.44", "/ext-lib", "/webapps/ROOT");
+		return new AppServer("./resin-4.0.44", "/ext-lib", "/webapps/ROOT");
 	}
 
 	public static AppServer getTCServerAppServer() {
@@ -43,8 +42,7 @@ public class AppServer {
 	}
 
 	public static AppServer getTomcatAppServer() {
-		return new AppServer(
-			"../tomcat-8.0.32", "/lib", "/webapps/ROOT");
+		return new AppServer("../tomcat-8.0.32", "/lib", "/webapps/ROOT");
 	}
 
 	public static AppServer getWebLogicAppServer() {
