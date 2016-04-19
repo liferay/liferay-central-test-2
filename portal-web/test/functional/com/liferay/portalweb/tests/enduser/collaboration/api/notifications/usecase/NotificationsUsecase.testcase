@@ -117,12 +117,8 @@
 			<var name="siteName" value="Community Site Name" />
 		</execute>
 
-		<execute macro="SOMembersPortlet#inviteMember">
-			<var name="userEmailAddress" value="userea@liferay.com" />
-			<var name="userFirstName" value="userfn" />
-			<var name="userLastName" value="userln" />
-			<var name="userMiddleName" value="" />
-			<var name="userName" value="userfn userln" />
+		<execute macro="InviteMembers#inviteMembers">
+			<var name="inviteUserFullName" value="userfn userln" />
 		</execute>
 
 		<execute macro="User#logoutPG" />
@@ -181,11 +177,11 @@
 			<var name="requestsTitle" value="Test Test invited you to join Community Site Name." />
 		</execute>
 
-		<execute macro="Notifications#viewBadgeCount" >
+		<execute function="Refresh" />
 
 		<execute macro="Notifications#viewNoRequest" />
 
-		<execute macro="Notifications#viewBadgeCount" >
+		<execute macro="Notifications#viewNoNotifications" />
 
 		<execute macro="User#logoutPG" />
 
