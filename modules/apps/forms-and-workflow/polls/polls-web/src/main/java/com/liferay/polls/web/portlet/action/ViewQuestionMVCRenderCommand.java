@@ -15,7 +15,7 @@
 package com.liferay.polls.web.portlet.action;
 
 import com.liferay.polls.exception.NoSuchQuestionException;
-import com.liferay.polls.web.constants.PollsPortletKeys;
+import com.liferay.polls.constants.PollsPortletKeys;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
@@ -33,6 +33,7 @@ import org.osgi.service.component.annotations.Component;
 @Component(
 	property = {
 		"javax.portlet.name=" + PollsPortletKeys.POLLS,
+		"javax.portlet.name=" + PollsPortletKeys.POLLS_DISPLAY,
 		"mvc.command.name=/polls/view_question"
 	},
 	service = MVCRenderCommand.class

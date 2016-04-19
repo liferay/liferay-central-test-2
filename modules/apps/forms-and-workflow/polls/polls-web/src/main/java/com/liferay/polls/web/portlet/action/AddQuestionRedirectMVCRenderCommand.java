@@ -14,7 +14,7 @@
 
 package com.liferay.polls.web.portlet.action;
 
-import com.liferay.polls.web.constants.PollsPortletKeys;
+import com.liferay.polls.constants.PollsPortletKeys;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 
 import javax.portlet.PortletException;
