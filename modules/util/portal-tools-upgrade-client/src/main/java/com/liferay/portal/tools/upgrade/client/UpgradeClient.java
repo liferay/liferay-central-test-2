@@ -499,7 +499,7 @@ public class UpgradeClient {
 			_dataSourceProperties.setProperty(
 				"jdbc.default.driverClassName", dataSource.getClassName());
 			_dataSourceProperties.setProperty(
-				"jdbc.default.url", dataSource.getUrl());
+				"jdbc.default.url", dataSource.getURL());
 			_dataSourceProperties.setProperty(
 				"jdbc.default.username", username);
 			_dataSourceProperties.setProperty(
@@ -616,13 +616,13 @@ public class UpgradeClient {
 		_appServers.put("websphere", AppServer.getWebSphereAppServer());
 		_appServers.put("wildfly", AppServer.getWildFlyAppServer());
 
-		_dataSources.put("db2", DataSource.getDB2());
-		_dataSources.put("mariadb", DataSource.getMariaDB());
-		_dataSources.put("mysql", DataSource.getMySQL());
-		_dataSources.put("oracle", DataSource.getOracle());
-		_dataSources.put("postgresql", DataSource.getPostgreSQL());
-		_dataSources.put("sqlserver", DataSource.getSQLServer());
-		_dataSources.put("sybase", DataSource.getSybase());
+		_dataSources.put("db2", DataSource.getDB2DataSource());
+		_dataSources.put("mariadb", DataSource.getMariaDBDataSource());
+		_dataSources.put("mysql", DataSource.getMySQLDataSource());
+		_dataSources.put("oracle", DataSource.getOracleDataSource());
+		_dataSources.put("postgresql", DataSource.getPostgreSQLDataSource());
+		_dataSources.put("sqlserver", DataSource.getSQLServerDataSource());
+		_dataSources.put("sybase", DataSource.getSybaseDataSource());
 	}
 
 	private AppServer _appServer;

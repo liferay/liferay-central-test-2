@@ -19,7 +19,7 @@ package com.liferay.portal.tools.upgrade.client;
  */
 public class DataSource {
 
-	public static DataSource getDB2() {
+	public static DataSource getDB2DataSource() {
 		return new DataSource(
 			"com.ibm.db2.jcc.DB2Driver", "jdbc:db2://", "localhost", 50000,
 			"/lportal",
@@ -28,7 +28,7 @@ public class DataSource {
 					"progressiveStreaming=2;");
 	}
 
-	public static DataSource getMariaDB() {
+	public static DataSource getMariaDBDataSource() {
 		return new DataSource(
 			"org.mariadb.jdbc.Driver", "jdbc:mariadb://", "localhost", 0,
 			"/lportal",
@@ -36,7 +36,7 @@ public class DataSource {
 				"&useFastDateParsing=false");
 	}
 
-	public static DataSource getMySQL() {
+	public static DataSource getMySQLDataSource() {
 		return new DataSource(
 			"com.mysql.jdbc.Driver", "jdbc:mysql://", "localhost", 0,
 			"/lportal",
@@ -45,25 +45,25 @@ public class DataSource {
 					"&useFastDateParsing=false&useUnicode=true");
 	}
 
-	public static DataSource getOracle() {
+	public static DataSource getOracleDataSource() {
 		return new DataSource(
 			"oracle.jdbc.OracleDriver", "jdbc:oracle:thin:@", "localhost", 1521,
 			":xe", "");
 	}
 
-	public static DataSource getPostgreSQL() {
+	public static DataSource getPostgreSQLDataSource() {
 		return new DataSource(
 			"org.postgresql.Driver", "jdbc:postgresql://", "localhost", 5432,
 			"/lportal", "");
 	}
 
-	public static DataSource getSQLServer() {
+	public static DataSource getSQLServerDataSource() {
 		return new DataSource(
 			"com.microsoft.sqlserver.jdbc.SQLServerDriver", "jdbc:sqlserver://",
 			"localhost", 0, "/lportal", "");
 	}
 
-	public static DataSource getSybase() {
+	public static DataSource getSybaseDataSource() {
 		return new DataSource(
 			"com.sybase.jdbc4.jdbc.SybDriver", "jdbc:sybase:Tds:", "localhost",
 			5000, "/lportal", "");
@@ -89,7 +89,7 @@ public class DataSource {
 		return _protocol;
 	}
 
-	public String getUrl() {
+	public String getURL() {
 		StringBuilder sb = new StringBuilder();
 
 		sb.append(_protocol);
