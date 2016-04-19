@@ -12,26 +12,24 @@
  * details.
  */
 
-package com.liferay.polls.web.polls.portlet.action;
+package com.liferay.polls.web.portlet.action;
 
-import com.liferay.polls.web.util.PollsUtil;
+import com.liferay.polls.constants.PollsPortletKeys;
+import com.liferay.polls.web.portlet.util.PollsUtil;
+import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCResourceCommand;
+import com.liferay.portal.kernel.portlet.bridges.mvc.MVCResourceCommand;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
-import com.liferay.portal.struts.PortletAction;
 
 import java.io.OutputStream;
 
-import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletRequestDispatcher;
 import javax.portlet.PortletSession;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
-
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionMapping;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtilities;
@@ -41,16 +39,26 @@ import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.general.DatasetUtilities;
 import org.jfree.data.general.PieDataset;
 
+import org.osgi.service.component.annotations.Component;
+
 /**
  * @author Brian Wing Shun Chan
+ * @author Peter Fellwock
  */
-public class ViewChartAction extends PortletAction {
+@Component(
+	immediate = true,
+	property = {
+		"javax.portlet.name=" + PollsPortletKeys.POLLS,
+		"javax.portlet.name=" + PollsPortletKeys.POLLS_DISPLAY,
+		"mvc.command.name=/polls/view_chart"
+	},
+	service = MVCResourceCommand.class
+)
+public class ViewChartMVCResourceCommand extends BaseMVCResourceCommand {
 
 	@Override
-	public void serveResource(
-			ActionMapping actionMapping, ActionForm actionForm,
-			PortletConfig portletConfig, ResourceRequest resourceRequest,
-			ResourceResponse renderResponse)
+	protected void doServeResource(
+			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws Exception {
 
 		try {
@@ -99,9 +107,10 @@ public class ViewChartAction extends PortletAction {
 					chartName, pieDataset, true, false, false);
 			}
 
-			renderResponse.setContentType(ContentTypes.IMAGE_JPEG);
+			resourceResponse.setContentType(ContentTypes.IMAGE_JPEG);
 
-			OutputStream outputStream = renderResponse.getPortletOutputStream();
+			OutputStream outputStream =
+				resourceResponse.getPortletOutputStream();
 
 			ChartUtilities.writeChartAsJPEG(outputStream, jFreeChat, 400, 400);
 		}
@@ -111,10 +120,9 @@ public class ViewChartAction extends PortletAction {
 			PortletContext portletContext = portletSession.getPortletContext();
 
 			PortletRequestDispatcher requestDispatcher =
-				portletContext.getRequestDispatcher(
-					"/html/portlet/polls/error.jsp");
+				portletContext.getRequestDispatcher("/polls/error.jsp");
 
-			requestDispatcher.forward(resourceRequest, renderResponse);
+			requestDispatcher.forward(resourceRequest, resourceResponse);
 		}
 	}
 
