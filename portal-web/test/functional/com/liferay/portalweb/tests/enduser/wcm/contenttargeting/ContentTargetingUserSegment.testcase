@@ -1172,12 +1172,6 @@
 			<var name="userSegmentName" value="User Segment Name" />
 		</execute>
 
-		<execute macro="ContentTargetingUserSegment#addUserAttributesGenderRuleCP">
-			<var name="genderRadio" value="Female" />
-		</execute>
-
-		<execute macro="ContentTargetingUserSegment#addUserAttributesUserSignedInRuleCP" />
-
 		<execute macro="ContentTargetingUserSegment#saveCP" />
 
 		<execute macro="ProductMenu#gotoSite">
@@ -1207,12 +1201,6 @@
 			<var name="userSegmentName" value="User Segment Name" />
 		</execute>
 
-		<execute macro="ContentTargetingUserSegment#addUserAttributesGenderRuleCP">
-			<var name="genderRadio" value="Female" />
-		</execute>
-
-		<execute macro="ContentTargetingUserSegment#addUserAttributesUserSignedInRuleCP" />
-
 		<execute macro="ContentTargetingUserSegment#saveCP" />
 
 		<execute macro="ProductMenu#gotoSite">
@@ -1227,8 +1215,6 @@
 			<var name="userSegmentDescriptionEdit" value="User Segment Description Edit" />
 			<var name="userSegmentName" value="User Segment Name" />
 			<var name="userSegmentNameEdit" value="User Segment Name Edit" />
-			<var name="userSegmentRuleAddList" value="Site Role,Regular Role" />
-			<var name="userSegmentRuleDeleteList" value="UserLoggedRule,GenderRule" />
 		</execute>
 
 		<execute macro="ContentTargetingUserSegment#saveCP" />
@@ -1241,12 +1227,9 @@
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
-		<execute macro="ContentTargetingUserSegment#viewRulesCP">
-			<var name="regularRole" value="Administrator" />
-			<var name="siteRole" value="Site Administrator" />
-			<var name="siteRoleSite" value="Global" />
+		<execute macro="ContentTargetingUserSegment#viewCP">
 			<var name="userSegmentName" value="User Segment Name Edit" />
-			<var name="viewUserSegmentRuleList" value="Site Role,Regular Role" />
+			<var name="userSegmentDescription" value="User Segment Description Edit" />
 		</execute>
 	</command>
 
