@@ -839,7 +839,6 @@ public class AssetPublisherExportImportPortletPreferencesProcessor
 
 			groupIdMappingElement.addAttribute(
 				"group-id", String.valueOf(groupId));
-
 			groupIdMappingElement.addAttribute(
 				"live-group-id", String.valueOf(liveGroupId));
 		}
