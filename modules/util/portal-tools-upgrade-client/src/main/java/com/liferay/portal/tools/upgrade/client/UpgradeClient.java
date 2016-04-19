@@ -49,7 +49,7 @@ import org.apache.commons.cli.ParseException;
  */
 public class UpgradeClient {
 
-	public static final String JAVA_HOME = System.getenv("JAVA_HOME");
+	private static final String _JAVA_HOME = System.getenv("JAVA_HOME");
 
 	public static void main(String[] args) {
 		try {
@@ -144,8 +144,8 @@ public class UpgradeClient {
 
 		List<String> commands = new ArrayList<>();
 
-		if (JAVA_HOME != null) {
-			commands.add(JAVA_HOME + "/bin/java");
+		if (_JAVA_HOME != null) {
+			commands.add(_JAVA_HOME + "/bin/java");
 		}
 		else {
 			commands.add("java");
