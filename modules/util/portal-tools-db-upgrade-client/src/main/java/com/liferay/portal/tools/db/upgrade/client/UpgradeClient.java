@@ -77,7 +77,7 @@ public class UpgradeClient {
 						"-Duser.language=en -Duser.timezone=GMT";
 			}
 
-			File logFile;
+			File logFile = null;
 
 			if (commandLine.hasOption("logFile")) {
 				logFile = new File(commandLine.getOptionValue("logFile"));
@@ -112,16 +112,13 @@ public class UpgradeClient {
 	}
 
 	public UpgradeClient(String jvmOpts, File logFile) throws IOException {
-		_consoleReader = new ConsoleReader();
+		_jvmOpts = jvmOpts;
+		_logFile = logFile;
 
 		_dataSourcePropertiesFile = new File(
 			"portal-upgrade-datasource.properties");
 
 		_dataSourceProperties = _readProperties(_dataSourcePropertiesFile);
-
-		_jvmOpts = jvmOpts;
-
-		_logFile = logFile;
 
 		_serverPropertiesFile = new File("server.properties");
 
@@ -626,7 +623,7 @@ public class UpgradeClient {
 	}
 
 	private AppServer _appServer;
-	private final ConsoleReader _consoleReader;
+	private final ConsoleReader _consoleReader = new ConsoleReader();
 	private final Properties _dataSourceProperties;
 	private final File _dataSourcePropertiesFile;
 	private final String _jvmOpts;
