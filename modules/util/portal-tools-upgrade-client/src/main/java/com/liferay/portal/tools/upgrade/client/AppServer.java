@@ -47,13 +47,13 @@ public class AppServer {
 			"../tomcat-8.0.32", "/lib", "/webapps/ROOT");
 	}
 
-	public static AppServer getWeblogicAppServer() {
+	public static AppServer getWebLogicAppServer() {
 		return new AppServer(
 			"../weblogic-12.1.3", "/domains/liferay/lib",
 			"/domains/liferay/autodeploy/ROOT");
 	}
 
-	public static AppServer getWebsphereAppServer() {
+	public static AppServer getWebSphereAppServer() {
 		return new AppServer(
 			"../websphere-8.5.5.0", "/lib/ext",
 			"/profiles/liferay/installedApps/liferay-cell/liferay-portal.ear/" +

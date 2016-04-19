@@ -612,8 +612,8 @@ public class UpgradeClient {
 		_appServers.put("resin", AppServer.getResinAppServer());
 		_appServers.put("tcserver", AppServer.getTCServerAppServer());
 		_appServers.put("tomcat", AppServer.getTomcatAppServer());
-		_appServers.put("weblogic", AppServer.getWeblogicAppServer());
-		_appServers.put("websphere", AppServer.getWebsphereAppServer());
+		_appServers.put("weblogic", AppServer.getWebLogicAppServer());
+		_appServers.put("websphere", AppServer.getWebSphereAppServer());
 		_appServers.put("wildfly", AppServer.getWildFlyAppServer());
 
 		_dataSources.put("db2", DataSource.getDB2());
