@@ -32,6 +32,7 @@ import com.liferay.taglib.ui.RatingsTag;
 
 import javax.portlet.PortletURL;
 import javax.portlet.WindowState;
+
 import javax.servlet.ServletContext;
 import javax.servlet.jsp.PageContext;
 
