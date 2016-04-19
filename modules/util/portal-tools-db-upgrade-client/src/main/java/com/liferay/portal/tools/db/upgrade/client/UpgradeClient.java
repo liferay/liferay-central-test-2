@@ -187,7 +187,7 @@ public class UpgradeClient {
 
 		while (upgrading) {
 			try (GogoTelnetClient gogoTelnetClient = new GogoTelnetClient()) {
-				System.out.println("You are now connected to Gogo Shell");
+				System.out.println("You are connected to Gogo shell.");
 
 				_printHelp();
 
@@ -208,7 +208,7 @@ public class UpgradeClient {
 				}
 
 				System.out.print(
-					"Making sure all upgrades steps have been completed");
+					"Making sure all upgrades steps have been completed.");
 
 				String upgradeSteps = gogoTelnetClient.send(
 					"upgrade:list | grep Registered | grep step");
@@ -217,7 +217,7 @@ public class UpgradeClient {
 
 				if (upgrading) {
 					System.out.println(
-						"...one of your upgrades is still running or failed");
+						"...one of your upgrades is still running or failed.");
 					System.out.println("Are you sure you want to exit (y/N)?");
 
 					_consoleReader.setPrompt("");
@@ -229,7 +229,7 @@ public class UpgradeClient {
 					}
 				}
 				else {
-					System.out.println("...done.");
+					System.out.println("... done.");
 				}
 			}
 			catch (Exception e) {
@@ -237,11 +237,11 @@ public class UpgradeClient {
 			}
 		}
 
-		System.out.println("Exiting Gogo Shell");
+		System.out.println("Exiting Gogo shell.");
 
+		_close(process.getErrorStream());
 		_close(process.getInputStream());
 		_close(process.getOutputStream());
-		_close(process.getErrorStream());
 
 		process.destroy();
 	}
@@ -249,9 +249,7 @@ public class UpgradeClient {
 	public void verifyProperties() {
 		try {
 			_verifyDataSourceProperties();
-
 			_verifyServerProperties();
-
 			_verifyUpgradeProperties();
 
 			_saveProperties();
@@ -264,11 +262,14 @@ public class UpgradeClient {
 	private static Options _getOptions() {
 		Options options = new Options();
 
-		options.addOption(new Option("h", "help", false, "print this message"));
+		options.addOption(
+			new Option("h", "help", false, "Print this message."));
 		options.addOption(
 			new Option(
-				"j", "jvmOpts", true, "set the JVM_OPTS of the upgrade"));
-		options.addOption(new Option("l", "logFile", true, "name of log file"));
+				"j", "jvmOpts", true,
+				"Set the JVM_OPTS used for the upgrade."));
+		options.addOption(
+			new Option("l", "logFile", true, "Set the name of log file."));
 
 		return options;
 	}
@@ -368,8 +369,8 @@ public class UpgradeClient {
 
 	private void _saveProperties() throws IOException {
 		_store(_dataSourceProperties, _dataSourcePropertiesFile);
-		_store(_serverProperties, _serverPropertiesFile);
 		_store(_upgradeProperties, _upgradePropertiesFile);
+		_store(_serverProperties, _serverPropertiesFile);
 	}
 
 	private void _store(Properties properties, File file) throws IOException {
