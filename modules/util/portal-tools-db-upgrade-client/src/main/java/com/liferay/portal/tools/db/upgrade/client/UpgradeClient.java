@@ -61,12 +61,12 @@ public class UpgradeClient {
 				HelpFormatter helpFormatter = new HelpFormatter();
 
 				helpFormatter.printHelp(
-					"Liferay Database Upgrade Tool", options);
+					"Liferay Portal Tools Database Upgrade Client", options);
 
 				return;
 			}
 
-			String jvmOpts;
+			String jvmOpts = null;
 
 			if (commandLine.hasOption("jvmOpts")) {
 				jvmOpts = commandLine.getOptionValue("jvmOpts");
