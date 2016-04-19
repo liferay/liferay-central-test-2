@@ -6,9 +6,10 @@
 
 		<execute function="Click" locator1="ContentTargetingEditUserSegment#USER_SEGMENT_RULE_BEHAVIOR_CONTENT_VISITED_SELECT_CONTENT_BUTTON" />
 
-		<var name="key_menulistContent" value="${contentVisitedContent}" />
+		<var name="key_menuItem" value="${contentVisitedContent}" />
 
-		<execute function="Click" locator1="ContentTargetingEditUserSegment#USER_SEGMENT_RULE_BEHAVIOR_CONTENT_VISITED_MENULIST_CONTENT" />
+		<execute function="Click" locator1="MenuItem#ANY_MENU_ITEM" />
+
 		<execute function="SelectFrame" locator1="ContentTargetingEditUserSegment#USER_SEGMENT_RULE_BEHAVIOR_CONTENT_VISITED_SELECT_WEB_CONTENT_IFRAME" />
 
 		<var name="key_webContentTitle" value="${webContentTitle}" />
@@ -264,9 +265,10 @@
 	</command>
 
 	<command name="deleteUserSegmentCP">
+		<var name="key_rowEntry" value="${userSegmentName}" />
 		<var name="key_userSegment" value="${userSegmentName}" />
 
-		<execute function="Click" locator1="ContentTargetingEditUserSegment#USER_SEGMENT_TABLE_ACTIONS" />
+		<execute function="Click" locator1="Icon#ROW_VERTICAL_ELLIPSIS" />
 		<execute function="ClickNoError" locator1="MenuItem#DELETE" />
 		<execute function="Confirm" value1="Are you sure you want to delete this? It will be deleted immediately." />
 		<execute macro="Alert#viewSuccessMessage" />
@@ -274,18 +276,20 @@
 	</command>
 
 	<command name="editGenderRule">
+		<var name="key_rowEntry" value="${userSegmentName}" />
 		<var name="key_userSegment" value="${userSegmentName}" />
 
-		<execute function="Click" locator1="CPContenttargetingEditusersegment#USER_SEGMENT_TABLE_ACTIONS" />
+		<execute function="Click" locator1="Icon#ROW_VERTICAL_ELLIPSIS" />
 		<execute function="Click" locator1="CPContenttargetingEditusersegment#USER_SEGMENT_TABLE_ACTIONS_MENULIST_EDIT" />
 
 		<execute function="Click" locator1="CPContenttargetingAddusersegment#USER_SEGMENT_RULE_USER_ATTRIBUTES_GENDER_${genderRadioPath}_RADIO" />
 	</command>
 
 	<command name="editUserSegmentCP">
+		<var name="key_rowEntry" value="${userSegmentName}" />
 		<var name="key_userSegment" value="${userSegmentName}" />
 
-		<execute function="Click" locator1="CPContenttargetingEditusersegment#USER_SEGMENT_TABLE_ACTIONS" />
+		<execute function="Click" locator1="Icon#ROW_VERTICAL_ELLIPSIS" />
 		<execute function="Click" locator1="CPContenttargetingEditusersegment#USER_SEGMENT_TABLE_ACTIONS_MENULIST_EDIT" />
 		<execute function="Type" locator1="CPContenttargetingEditusersegment#USER_SEGMENT_NAME_FIELD" value1="${userSegmentNameEdit}" />
 		<execute function="Type" locator1="CPContenttargetingEditusersegment#USER_SEGMENT_DESCRIPTION_FIELD" value1="${userSegmentDescriptionEdit}" />
@@ -323,16 +327,18 @@
 	<command name="viewCP">
 		<execute function="Click" locator1="ContentTargeting#NAVIGATION_USER_SEGMENTS" />
 
-		<var name="key_userSegmentName" value="${userSegmentName}" />
+		<var name="key_rowEntry" value="${userSegmentName}" />
 
-		<execute function="AssertTextEquals" locator1="ContentTargeting#USER_SEGMENT_TABLE_NAME" value1="${userSegmentName}" />
+		<execute function="AssertTextEquals" locator1="ContentRow#ENTRY_CONTENT_ENTRY_CHECKBOX" value1="${userSegmentName}" />
+
 		<execute function="AssertTextEquals" locator1="ContentTargeting#USER_SEGMENT_TABLE_DESCRIPTION" value1="${userSegmentDescription}" />
 	</command>
 
 	<command name="viewImportContentVisitedRuleEmpty">
+		<var name="key_rowEntry" value="${userSegmentName}" />
 		<var name="key_userSegment" value="${userSegmentName}" />
 
-		<execute function="Click" locator1="CPContenttargetingEditusersegment#USER_SEGMENT_TABLE_ACTIONS" />
+		<execute function="Click" locator1="Icon#ROW_VERTICAL_ELLIPSIS" />
 		<execute function="Click" locator1="CPContenttargetingEditusersegment#USER_SEGMENT_TABLE_ACTIONS_MENULIST_EDIT" />
 
 		<execute function="AssertElementNotPresent#assertNotVisible" locator1="CPContenttargetingEditusersegment#USER_SEGMENT_RULE_CONTENT_VISITED_CONTENT_TITLE" />
@@ -374,9 +380,10 @@
 	</command>
 
 	<command name="viewRulesCP">
+		<var name="key_rowEntry" value="${userSegmentName}" />
 		<var name="key_userSegment" value="${userSegmentName}" />
 
-		<execute function="Click" locator1="CPContenttargetingEditusersegment#USER_SEGMENT_TABLE_ACTIONS" />
+		<execute function="Click" locator1="Icon#ROW_VERTICAL_ELLIPSIS" />
 		<execute function="Click" locator1="CPContenttargetingEditusersegment#USER_SEGMENT_TABLE_ACTIONS_MENULIST_EDIT" />
 
 		<for list="${viewUserSegmentRuleList}" param="usersegmentRuleName">
