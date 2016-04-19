@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.tools.upgrade.client;
+package com.liferay.portal.tools.db.upgrade.client;
 
 import java.io.IOException;
 import java.io.OutputStream;
