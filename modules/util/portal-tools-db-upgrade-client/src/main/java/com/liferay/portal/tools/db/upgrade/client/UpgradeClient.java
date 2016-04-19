@@ -135,6 +135,8 @@ public class UpgradeClient {
 		System.setOut(
 			new TeePrintStream(new FileOutputStream(_logFile), System.out));
 
+		ProcessBuilder processBuilder = new ProcessBuilder();
+
 		List<String> commands = new ArrayList<>();
 
 		if (_JAVA_HOME != null) {
@@ -150,9 +152,8 @@ public class UpgradeClient {
 		commands.add(_getClassPath());
 		commands.add("com.liferay.portal.tools.DBUpgrader");
 
-		ProcessBuilder processBuilder = new ProcessBuilder();
-
 		processBuilder.command(commands);
+
 		processBuilder.redirectErrorStream(true);
 
 		Process process = processBuilder.start();
@@ -167,7 +168,7 @@ public class UpgradeClient {
 			while ((line = bufferedReader.readLine()) != null) {
 				if (line.equals(
 						"Running modules upgrades. Connect to your Gogo " +
-							"Shell to check the status.")) {
+							"shell to check the status.")) {
 
 					break;
 				}
