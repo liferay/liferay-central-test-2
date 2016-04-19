@@ -3,5 +3,5 @@ Bundle-SymbolicName: com.liferay.portal.tools.upgrade.client
 Bundle-Version: 1.0.0
 Main-Class: com.liferay.portal.tools.upgrade.client.UpgradeClient
 -liferay-includeresource:\
-	@jline-*.jar,\
-	@commons-cli-*.jar
+	@commons-cli-*.jar,\
+	@jline-*.jar
