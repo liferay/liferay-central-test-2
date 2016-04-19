@@ -878,6 +878,8 @@
 
 		<execute function="Click" locator1="KnowledgeBase#SCOPE_DROPDOWN" />
 
+		<var name="key_scopeSelection" value="${kbPageScope}" />
+
 		<execute function="AssertClick#assertPartialTextClickAt" locator1="MenuItem#SCOPE_SELECTION" value1="${kbPageScope}" />
 	</command>
 
