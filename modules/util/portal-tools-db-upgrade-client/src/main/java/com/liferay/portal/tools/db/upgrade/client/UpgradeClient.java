@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.tools.upgrade.client;
+package com.liferay.portal.tools.db.upgrade.client;
 
 import java.io.BufferedReader;
 import java.io.Closeable;
