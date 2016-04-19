@@ -1232,8 +1232,8 @@
 		</execute>
 
 		<execute macro="ContentTargetingUserSegment#viewCP">
-			<var name="userSegmentName" value="User Segment Name Edit" />
 			<var name="userSegmentDescription" value="User Segment Description Edit" />
+			<var name="userSegmentName" value="User Segment Name Edit" />
 		</execute>
 	</command>
 
