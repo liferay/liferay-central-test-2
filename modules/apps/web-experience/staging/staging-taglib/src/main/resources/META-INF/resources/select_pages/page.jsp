@@ -87,20 +87,20 @@
 							<span class="badge badge-info">
 
 								<%
-								int layoutsCountTemplate = LayoutLocalServiceUtil.getLayoutsCount(group, privateLayout, selectedLayoutIdsArray);
-								int layoutsCountTotal = LayoutLocalServiceUtil.getLayoutsCount(group, privateLayout);
+								int templateLayoutsCount = LayoutLocalServiceUtil.getLayoutsCount(group, privateLayout, selectedLayoutIdsArray);
+								int totalLayoutsCount = LayoutLocalServiceUtil.getLayoutsCount(group, privateLayout);
 
-								if (layoutsCountTemplate > layoutsCountTotal) {
-									layoutsCountTemplate = layoutsCountTotal;
+								if (templateLayoutsCount > totalLayoutsCount) {
+									templateLayoutsCount = totalLayoutsCount;
 								}
 								%>
 
 								<c:choose>
-									<c:when test="<%= layoutsCountTotal == 0 %>">
+									<c:when test="<%= totalLayoutsCount == 0 %>">
 										<liferay-ui:message key="none" />
 									</c:when>
 									<c:otherwise>
-										<liferay-ui:message arguments='<%= new String[] {"<strong>" + String.valueOf(layoutsCountTemplate) + "</strong>", String.valueOf(layoutsCountTotal)} %>' key="x-of-x" />
+										<liferay-ui:message arguments='<%= new String[] {"<strong>" + String.valueOf(templateLayoutsCount) + "</strong>", String.valueOf(totalLayoutsCount)} %>' key="x-of-x" />
 									</c:otherwise>
 								</c:choose>
 							</span>
