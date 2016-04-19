@@ -86,7 +86,7 @@
 		</execute>
 
 		<execute macro="Navigator#gotoSitePage">
-			<var name="pageName" value="Public Pages" />
+			<var name="pageName" value="Home" />
 			<var name="siteName" value="Community Site Name" />
 		</execute>
 
@@ -95,7 +95,7 @@
 		</execute>
 
 		<execute macro="Navigator#gotoSitePage">
-			<var name="pageName" value="Public Pages" />
+			<var name="pageName" value="Home" />
 			<var name="siteName" value="Community Site Name" />
 		</execute>
 
@@ -174,11 +174,11 @@
 		</execute>
 
 		<execute macro="Notifications#viewRequest">
-			<var name="requestsContent" value="Test Test invited you to join Community Site Name." />
+			<var name="requestsTitle" value="Test Test invited you to join Community Site Name." />
 		</execute>
 
 		<execute macro="Notifications#acceptRequest" >
-			<var name="requestsContent" value="Test Test invited you to join Community Site Name." />
+			<var name="requestsTitle" value="Test Test invited you to join Community Site Name." />
 		</execute>
 
 		<execute macro="Notifications#viewBadgeCount" >
