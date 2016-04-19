@@ -88,14 +88,14 @@ public class DefineObjectsTag extends IncludeTag {
 
 		Group liveGroup = StagingUtil.getLiveGroup(group.getGroupId());
 
+		pageContext.setAttribute("liveGroup", liveGroup);
+		pageContext.setAttribute("liveGroupId", liveGroup.getGroupId());
+
 		Group stagingGroup = null;
 
 		if (!group.hasRemoteStagingGroup() || group.isStagedRemotely()) {
 			stagingGroup = StagingUtil.getStagingGroup(group.getGroupId());
 		}
-
-		pageContext.setAttribute("liveGroup", liveGroup);
-		pageContext.setAttribute("liveGroupId", liveGroup.getGroupId());
 
 		if (stagingGroup != null) {
 			pageContext.setAttribute("stagingGroup", stagingGroup);
