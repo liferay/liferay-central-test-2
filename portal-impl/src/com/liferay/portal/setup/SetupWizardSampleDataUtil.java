@@ -136,8 +136,8 @@ public class SetupWizardSampleDataUtil {
 
 	public static User updateAdminUser(
 			Company company, Locale locale, String languageId,
-			String adminEmailAddress, String adminFirstName,
-			String adminLastName, boolean resetPassword)
+			String emailAddress, String firstName,
+			String lastName, boolean resetPassword)
 		throws PortalException {
 
 		ScreenNameGenerator screenNameGenerator =
@@ -147,23 +147,23 @@ public class SetupWizardSampleDataUtil {
 			PropsValues.DEFAULT_ADMIN_EMAIL_ADDRESS_PREFIX, "test");
 
 		try {
-			screenName = screenNameGenerator.generate(0, 0, adminEmailAddress);
+			screenName = screenNameGenerator.generate(0, 0, emailAddress);
 		}
 		catch (Exception e) {
 		}
 
 		User adminUser = UserLocalServiceUtil.fetchUserByEmailAddress(
-			company.getCompanyId(), adminEmailAddress);
+			company.getCompanyId(), emailAddress);
 
 		if (adminUser != null) {
 			FullNameGenerator fullNameGenerator =
 				FullNameGeneratorFactory.getInstance();
 
-			String adminFullName = fullNameGenerator.getFullName(
-				adminFirstName, null, adminLastName);
+			String fullName = fullNameGenerator.getFullName(
+				firstName, null, lastName);
 
 			String greeting = LanguageUtil.format(
-				locale, "welcome-x", adminFullName, false);
+				locale, "welcome-x", fullName, false);
 
 			Contact contact = adminUser.getContact();
 
@@ -179,10 +179,10 @@ public class SetupWizardSampleDataUtil {
 				adminUser.getUserId(), StringPool.BLANK, StringPool.BLANK,
 				StringPool.BLANK, false, adminUser.getReminderQueryQuestion(),
 				adminUser.getReminderQueryAnswer(), screenName,
-				adminEmailAddress, adminUser.getFacebookId(),
+				emailAddress, adminUser.getFacebookId(),
 				adminUser.getOpenId(), false, null, languageId,
 				adminUser.getTimeZoneId(), greeting, adminUser.getComments(),
-				adminFirstName, adminUser.getMiddleName(), adminLastName,
+				firstName, adminUser.getMiddleName(), lastName,
 				contact.getPrefixId(), contact.getSuffixId(), contact.isMale(),
 				birthdayMonth, birthdayDay, birthdayYear, contact.getSmsSn(),
 				contact.getFacebookSn(), contact.getJabberSn(),
@@ -192,17 +192,17 @@ public class SetupWizardSampleDataUtil {
 		}
 		else {
 			UserLocalServiceUtil.addDefaultAdminUser(
-				company.getCompanyId(), screenName, adminEmailAddress, locale,
-				adminFirstName, StringPool.BLANK, adminLastName);
+				company.getCompanyId(), screenName, emailAddress, locale,
+				firstName, StringPool.BLANK, lastName);
 
 			adminUser = UserLocalServiceUtil.getUserByEmailAddress(
-				company.getCompanyId(), adminEmailAddress);
+				company.getCompanyId(), emailAddress);
 
 			String defaultAdminEmailAddress =
 				PropsValues.DEFAULT_ADMIN_EMAIL_ADDRESS_PREFIX + "@" +
 					PropsValues.COMPANY_DEFAULT_WEB_ID;
 
-			if (!adminEmailAddress.equals(defaultAdminEmailAddress)) {
+			if (!emailAddress.equals(defaultAdminEmailAddress)) {
 				User testUser = UserLocalServiceUtil.fetchUserByEmailAddress(
 					company.getCompanyId(), defaultAdminEmailAddress);
 
