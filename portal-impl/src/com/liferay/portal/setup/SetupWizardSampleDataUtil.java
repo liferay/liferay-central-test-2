@@ -136,8 +136,8 @@ public class SetupWizardSampleDataUtil {
 
 	public static User updateAdminUser(
 			Company company, Locale locale, String languageId,
-			String emailAddress, String firstName,
-			String lastName, boolean resetPassword)
+			String emailAddress, String firstName, String lastName,
+			boolean resetPassword)
 		throws PortalException {
 
 		ScreenNameGenerator screenNameGenerator =
@@ -178,17 +178,16 @@ public class SetupWizardSampleDataUtil {
 			adminUser = UserLocalServiceUtil.updateUser(
 				adminUser.getUserId(), StringPool.BLANK, StringPool.BLANK,
 				StringPool.BLANK, false, adminUser.getReminderQueryQuestion(),
-				adminUser.getReminderQueryAnswer(), screenName,
-				emailAddress, adminUser.getFacebookId(),
-				adminUser.getOpenId(), false, null, languageId,
-				adminUser.getTimeZoneId(), greeting, adminUser.getComments(),
-				firstName, adminUser.getMiddleName(), lastName,
-				contact.getPrefixId(), contact.getSuffixId(), contact.isMale(),
-				birthdayMonth, birthdayDay, birthdayYear, contact.getSmsSn(),
-				contact.getFacebookSn(), contact.getJabberSn(),
-				contact.getSkypeSn(), contact.getTwitterSn(),
-				contact.getJobTitle(), null, null, null, null, null,
-				new ServiceContext());
+				adminUser.getReminderQueryAnswer(), screenName, emailAddress,
+				adminUser.getFacebookId(), adminUser.getOpenId(), false, null,
+				languageId, adminUser.getTimeZoneId(), greeting,
+				adminUser.getComments(), firstName, adminUser.getMiddleName(),
+				lastName, contact.getPrefixId(), contact.getSuffixId(),
+				contact.isMale(), birthdayMonth, birthdayDay, birthdayYear,
+				contact.getSmsSn(), contact.getFacebookSn(),
+				contact.getJabberSn(), contact.getSkypeSn(),
+				contact.getTwitterSn(), contact.getJobTitle(), null, null, null,
+				null, null, new ServiceContext());
 		}
 		else {
 			UserLocalServiceUtil.addDefaultAdminUser(
