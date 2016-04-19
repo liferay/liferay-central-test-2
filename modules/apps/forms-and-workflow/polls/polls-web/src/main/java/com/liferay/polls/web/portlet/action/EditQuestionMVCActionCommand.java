@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.polls.web.polls.portlet.action;
+package com.liferay.polls.web.portlet.action;
 
 import com.liferay.polls.exception.DuplicateVoteException;
 import com.liferay.polls.exception.NoSuchChoiceException;
@@ -26,8 +26,12 @@ import com.liferay.polls.model.PollsChoice;
 import com.liferay.polls.model.PollsQuestion;
 import com.liferay.polls.service.PollsQuestionServiceUtil;
 import com.liferay.polls.service.persistence.PollsChoiceUtil;
+import com.liferay.polls.constants.PollsPortletKeys;
 import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
+import com.liferay.portal.kernel.portlet.PortletPreferencesFactoryUtil;
+import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
+import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.service.LayoutLocalServiceUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -37,12 +41,12 @@ import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
-import com.liferay.portal.struts.PortletAction;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -58,29 +62,76 @@ import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
 import javax.portlet.WindowState;
 
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
+import org.osgi.service.component.annotations.Component;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Peter Fellwock
  */
-public class EditQuestionAction extends PortletAction {
+@Component(
+	property = {
+		"javax.portlet.name=" + PollsPortletKeys.POLLS,
+		"javax.portlet.name=" + PollsPortletKeys.POLLS_DISPLAY,
+		"mvc.command.name=/polls/edit_question"
+	},
+	service = MVCActionCommand.class
+)
+public class EditQuestionMVCActionCommand extends BaseMVCActionCommand {
 
 	public static final String CHOICE_DESCRIPTION_PREFIX = "choiceDescription";
 
 	public static final String CHOICE_NAME_PREFIX = "choiceName";
 
-	@Override
-	public void processAction(
-			ActionMapping actionMapping, ActionForm actionForm,
-			PortletConfig portletConfig, ActionRequest actionRequest,
-			ActionResponse actionResponse)
+	protected void addAndStoreSelection(
+			PortletRequest portletRequest, PollsQuestion question)
 		throws Exception {
+
+		String referringPortletResource = ParamUtil.getString(
+			portletRequest, "referringPortletResource");
+
+		if (Validator.isNull(referringPortletResource)) {
+			return;
+		}
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		Layout layout = LayoutLocalServiceUtil.getLayout(
+			themeDisplay.getRefererPlid());
+
+		PortletPreferences portletPreferences =
+			PortletPreferencesFactoryUtil.getStrictPortletSetup(
+				themeDisplay.getLayout(), themeDisplay.getPpid());
+
+		portletPreferences.setValue(
+			"questionId", String.valueOf(question.getQuestionId()));
+
+		portletPreferences.store();
+
+		SessionMessages.add(
+			portletRequest,
+			PortalUtil.getPortletId(portletRequest) +
+				SessionMessages.KEY_SUFFIX_REFRESH_PORTLET,
+			referringPortletResource);
+	}
+
+	protected void deleteQuestion(ActionRequest actionRequest)
+		throws Exception {
+
+		long questionId = ParamUtil.getLong(actionRequest, "questionId");
+
+		PollsQuestionServiceUtil.deleteQuestion(questionId);
+	}
+
+	@Override
+	protected void doProcessAction(
+			ActionRequest actionRequest, ActionResponse actionResponse)
+		throws Exception {
+
+		PortletConfig portletConfig = (PortletConfig)actionRequest.getAttribute(
+			JavaConstants.JAVAX_PORTLET_CONFIG);
 
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
@@ -118,7 +169,8 @@ public class EditQuestionAction extends PortletAction {
 
 				SessionErrors.add(actionRequest, e.getClass());
 
-				setForward(actionRequest, "portlet.polls.error");
+				actionResponse.setRenderParameter(
+					"mvcPath", "/polls/error.jsp");
 			}
 			else if (e instanceof DuplicateVoteException ||
 					 e instanceof NoSuchChoiceException ||
@@ -137,73 +189,6 @@ public class EditQuestionAction extends PortletAction {
 				throw e;
 			}
 		}
-	}
-
-	@Override
-	public ActionForward render(
-			ActionMapping actionMapping, ActionForm actionForm,
-			PortletConfig portletConfig, RenderRequest renderRequest,
-			RenderResponse renderResponse)
-		throws Exception {
-
-		try {
-			ActionUtil.getQuestion(renderRequest);
-		}
-		catch (Exception e) {
-			if (e instanceof NoSuchQuestionException ||
-				e instanceof PrincipalException) {
-
-				SessionErrors.add(renderRequest, e.getClass());
-
-				return actionMapping.findForward("portlet.polls.error");
-			}
-			else {
-				throw e;
-			}
-		}
-
-		return actionMapping.findForward(
-			getForward(renderRequest, "portlet.polls.edit_question"));
-	}
-
-	protected void addAndStoreSelection(
-			PortletRequest portletRequest, PollsQuestion question)
-		throws Exception {
-
-		String referringPortletResource = ParamUtil.getString(
-			portletRequest, "referringPortletResource");
-
-		if (Validator.isNull(referringPortletResource)) {
-			return;
-		}
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		Layout layout = LayoutLocalServiceUtil.getLayout(
-			themeDisplay.getRefererPlid());
-
-		PortletPreferences portletPreferences = getStrictPortletSetup(
-			layout, referringPortletResource);
-
-		portletPreferences.setValue(
-			"questionId", String.valueOf(question.getQuestionId()));
-
-		portletPreferences.store();
-
-		SessionMessages.add(
-			portletRequest,
-			PortalUtil.getPortletId(portletRequest) +
-				SessionMessages.KEY_SUFFIX_REFRESH_PORTLET,
-			referringPortletResource);
-	}
-
-	protected void deleteQuestion(ActionRequest actionRequest)
-		throws Exception {
-
-		long questionId = ParamUtil.getLong(actionRequest, "questionId");
-
-		PollsQuestionServiceUtil.deleteQuestion(questionId);
 	}
 
 	protected void updateQuestion(
