@@ -1227,6 +1227,10 @@
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
 
+		<execute macro="Portlet#changeDisplayStyle">
+			<var name="displayStyle" value="List" />
+		</execute>
+
 		<execute macro="ContentTargetingUserSegment#viewCP">
 			<var name="userSegmentName" value="User Segment Name Edit" />
 			<var name="userSegmentDescription" value="User Segment Description Edit" />
