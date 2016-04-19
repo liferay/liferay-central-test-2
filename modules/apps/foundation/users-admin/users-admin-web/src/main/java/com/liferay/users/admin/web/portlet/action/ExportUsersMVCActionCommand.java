@@ -65,7 +65,6 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Brian Wing Shun Chan
  * @author Mika Koivisto
- * @deprecated As of 7.0.0, replaced by {@link ExportUsersMVCResourceCommand}
  */
 @Component(
 	immediate = true,
