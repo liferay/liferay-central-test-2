@@ -18,6 +18,7 @@ import com.liferay.polls.model.PollsChoice;
 import com.liferay.polls.model.PollsQuestion;
 import com.liferay.polls.model.PollsVote;
 import com.liferay.polls.service.PollsChoiceLocalServiceUtil;
+import com.liferay.polls.service.PollsQuestionServiceUtil;
 import com.liferay.polls.service.PollsVoteLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
@@ -28,6 +29,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.WebKeys;
 
+import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 
@@ -41,8 +43,23 @@ import org.jfree.data.category.DefaultCategoryDataset;
 /**
  * @author Brian Wing Shun Chan
  * @author Shepherd Ching
+ * @author Peter Fellwock
  */
 public class PollsUtil {
+
+	public static PollsQuestion getQuestionByPortlet(
+			PortletPreferences portletPreferences)
+		throws Exception {
+
+		long questionId = GetterUtil.getLong(
+			portletPreferences.getValue("questionId", StringPool.BLANK));
+
+		if (questionId > 0) {
+			return PollsQuestionServiceUtil.getQuestion(questionId);
+		}
+
+		return null;
+	}
 
 	public static CategoryDataset getVotesDataset(long questionId) {
 		DefaultCategoryDataset defaultCategoryDataset =

@@ -17,7 +17,7 @@
 <%@ include file="/polls_display/init.jsp" %>
 
 <%
-PollsQuestion question = (PollsQuestion)request.getAttribute(PollsWebKeys.POLLS_QUESTION);
+PollsQuestion question = PollsUtil.getQuestionByPortlet(portletPreferences);
 %>
 
 <%@ include file="/polls_display/view_options.jspf" %>
@@ -56,7 +56,7 @@ PollsQuestion question = (PollsQuestion)request.getAttribute(PollsWebKeys.POLLS_
 		boolean hasVoted = PollsUtil.hasVoted(request, question.getQuestionId());
 		%>
 
-		<portlet:actionURL var="voteQuestionURL">
+		<portlet:actionURL name="/polls_display/vote_question" var="voteQuestionURL">
 			<portlet:param name="mvcActionCommand" value="/polls_display/vote_question" />
 		</portlet:actionURL>
 
