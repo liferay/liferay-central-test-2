@@ -66,10 +66,12 @@ public class AppServer {
 			"/standalone/deployments/ROOT.war");
 	}
 
-	public AppServer(String dir, String globalLibDir, String portalDir) {
-		_dir = new File(dir);
-		_globalLibDir = new File(dir, globalLibDir);
-		_portalDir = new File(dir, portalDir);
+	public AppServer(
+		String dirName, String globalLibDirName, String portalDirName) {
+
+		_dir = new File(dirName);
+		_globalLibDir = new File(dirName, globalLibDirName);
+		_portalDir = new File(dirName, portalDirName);
 	}
 
 	public File getDir() {
@@ -92,16 +94,16 @@ public class AppServer {
 		return new File(_portalDir, "/WEB-INF/lib");
 	}
 
-	public void setDir(String dir) {
-		_dir = new File(dir);
+	public void setDirName(String dirName) {
+		_dir = new File(dirName);
 	}
 
-	public void setGlobalLibDir(String globalLibDir) {
-		_globalLibDir = new File(_dir, globalLibDir);
+	public void setGlobalLibDirName(String globalLibDirName) {
+		_globalLibDir = new File(_dir, globalLibDirName);
 	}
 
-	public void setPortalDir(String portalDir) {
-		_portalDir = new File(_dir, portalDir);
+	public void setPortalDirName(String portalDirName) {
+		_portalDir = new File(_dir, portalDirName);
 	}
 
 	private File _dir;
