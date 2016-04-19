@@ -102,11 +102,10 @@ public class SetupWizardSampleDataUtil {
 		GroupLocalServiceUtil.updateFriendlyURL(
 			organization.getGroupId(), "/main");
 
-		String extranetName = account.getLegalName() + " Extranet";
-
 		Layout extranetLayout = LayoutLocalServiceUtil.addLayout(
 			defaultUser.getUserId(), organization.getGroupId(), false,
-			LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, extranetName, null, null,
+			LayoutConstants.DEFAULT_PARENT_LAYOUT_ID,
+			account.getLegalName() + " Extranet", null, null,
 			LayoutConstants.TYPE_PORTLET, false, "/extranet",
 			new ServiceContext());
 
@@ -114,11 +113,10 @@ public class SetupWizardSampleDataUtil {
 			extranetLayout.getGroupId(), false, extranetLayout.getLayoutId(),
 			extranetLayout.getTypeSettings());
 
-		String intranetName = account.getLegalName() + " Intranet";
-
 		Layout intranetLayout = LayoutLocalServiceUtil.addLayout(
 			defaultUser.getUserId(), organization.getGroupId(), true,
-			LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, intranetName, null, null,
+			LayoutConstants.DEFAULT_PARENT_LAYOUT_ID,
+			account.getLegalName() + " Intranet", null, null,
 			LayoutConstants.TYPE_PORTLET, false, "/intranet",
 			new ServiceContext());
 
@@ -227,7 +225,6 @@ public class SetupWizardSampleDataUtil {
 		Account account = company.getAccount();
 
 		account.setName(companyName);
-
 		account.setLegalName(companyName + ", Inc.");
 
 		AccountLocalServiceUtil.updateAccount(account);
@@ -278,14 +275,15 @@ public class SetupWizardSampleDataUtil {
 			};
 
 			for (int i = 1; i <= 10; i++) {
-				String defaultUserEmailAddress = defaultUser.getEmailAddress();
-
-				String[] emailAddressSplit = defaultUserEmailAddress.split(
-					StringPool.AT);
-
 				StringBundler sb = new StringBundler(5);
 
-				sb.append(emailAddressSplit[0]);
+				String defaultUserEmailAddress = defaultUser.getEmailAddress();
+
+				String[] defaultUserEmailAddressParts =
+					defaultUserEmailAddress.split(StringPool.AT);
+
+				sb.append(defaultUserEmailAddressParts[0]);
+
 				sb.append(StringPool.PERIOD);
 				sb.append(organizationPrefix);
 				sb.append(StringPool.PERIOD);
@@ -293,7 +291,8 @@ public class SetupWizardSampleDataUtil {
 
 				String screenName = sb.toString();
 
-				String emailAddress = screenName + emailAddressSplit[1];
+				String emailAddress =
+					screenName + defaultUserEmailAddressParts[1];
 
 				String lastName = organizationPrefix + StringPool.SPACE + i;
 
