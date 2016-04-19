@@ -101,11 +101,8 @@ public class ExportUsersMVCResourceCommand extends BaseMVCResourceCommand {
 
 			String csv = getUsersCSV(resourceRequest, resourceResponse);
 
-			String fileName = "users.csv";
-			byte[] bytes = csv.getBytes();
-
 			PortletResponseUtil.sendFile(
-				resourceRequest, resourceResponse, fileName, bytes,
+				resourceRequest, resourceResponse, "users.csv", csv.getBytes(),
 				ContentTypes.TEXT_CSV_UTF8);
 		}
 		catch (Exception e) {
