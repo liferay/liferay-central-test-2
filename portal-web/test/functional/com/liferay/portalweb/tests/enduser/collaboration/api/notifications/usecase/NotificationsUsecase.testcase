@@ -30,8 +30,6 @@
 	</tear-down>
 
 	<command name="MarkNotificationAsReadAndAcceptRequest" priority="4">
-		<property name="portlet.plugins.includes" value="contacts-portlet,microblogs-portlet,notifications-portlet,private-messaging-portlet,so-portlet" />
-
 		<execute macro="ProductMenu#gotoControlPanelUsers">
 			<var name="portlet" value="Users and Organizations" />
 		</execute>
@@ -179,29 +177,15 @@
 			<var name="requestsContent" value="Test Test invited you to join Community Site Name." />
 		</execute>
 
-		<execute macro="Notifications#markAllAsRead" />
-
-		<execute macro="Notifications#viewBadgeCount" >
-			<var name="notificationCount" value="1" />
-		</execute>
-
-		<execute macro="Notifications#viewRequest">
-			<var name="requestsContent" value="Test Test invited you to join Community Site Name." />
-		</execute>
-
 		<execute macro="Notifications#acceptRequest" >
 			<var name="requestsContent" value="Test Test invited you to join Community Site Name." />
 		</execute>
 
 		<execute macro="Notifications#viewBadgeCount" >
-			<var name="notificationCount" value="0" />
-		</execute>
 
 		<execute macro="Notifications#viewNoRequest" />
 
 		<execute macro="Notifications#viewBadgeCount" >
-			<var name="notificationCount" value="0" />
-		</execute>
 
 		<execute macro="User#logoutPG" />
 
