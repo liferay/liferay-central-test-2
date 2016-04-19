@@ -203,12 +203,12 @@ public class SetupWizardSampleDataUtil {
 					PropsValues.COMPANY_DEFAULT_WEB_ID;
 
 			if (!emailAddress.equals(defaultAdminEmailAddress)) {
-				User testUser = UserLocalServiceUtil.fetchUserByEmailAddress(
+				User user = UserLocalServiceUtil.fetchUserByEmailAddress(
 					company.getCompanyId(), defaultAdminEmailAddress);
 
-				if (testUser != null) {
+				if (user != null) {
 					UserLocalServiceUtil.updateStatus(
-						testUser.getUserId(), WorkflowConstants.STATUS_INACTIVE,
+						user.getUserId(), WorkflowConstants.STATUS_INACTIVE,
 						new ServiceContext());
 				}
 			}
