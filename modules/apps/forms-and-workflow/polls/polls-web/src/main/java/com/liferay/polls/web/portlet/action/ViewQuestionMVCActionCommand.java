@@ -15,7 +15,7 @@
 package com.liferay.polls.web.portlet.action;
 
 import com.liferay.polls.service.PollsVoteService;
-import com.liferay.polls.web.constants.PollsPortletKeys;
+import com.liferay.polls.constants.PollsPortletKeys;
 import com.liferay.polls.web.portlet.util.PollsUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -36,6 +36,7 @@ import org.osgi.service.component.annotations.Reference;
 @Component(
 	property = {
 		"javax.portlet.name=" + PollsPortletKeys.POLLS,
+		"javax.portlet.name=" + PollsPortletKeys.POLLS_DISPLAY,
 		"mvc.command.name=/polls/view_question"
 	},
 	service = MVCActionCommand.class
