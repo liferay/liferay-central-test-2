@@ -135,8 +135,6 @@ public class UpgradeClient {
 		System.setOut(
 			new TeePrintStream(new FileOutputStream(_logFile), System.out));
 
-		String classPath = _getClassPath();
-
 		List<String> commands = new ArrayList<>();
 
 		if (_JAVA_HOME != null) {
@@ -149,7 +147,7 @@ public class UpgradeClient {
 		commands.addAll(Arrays.asList(_jvmOpts.split(" ")));
 		commands.add("-Dexternal-properties=portal-upgrade.properties");
 		commands.add("-cp");
-		commands.add(classPath);
+		commands.add(_getClassPath());
 		commands.add("com.liferay.portal.tools.DBUpgrader");
 
 		ProcessBuilder processBuilder = new ProcessBuilder();
