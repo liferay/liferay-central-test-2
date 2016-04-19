@@ -73,8 +73,8 @@ public class UpgradeClient {
 			}
 			else {
 				jvmOpts =
-					"-Xmx2048m -Dfile.encoding=UTF8 -Duser.country=US " +
-						"-Duser.language=en -Duser.timezone=GMT";
+					"-Dfile.encoding=UTF8 -Duser.country=US " +
+						"-Duser.language=en -Duser.timezone=GMT -Xmx2048m ";
 			}
 
 			File logFile = null;
