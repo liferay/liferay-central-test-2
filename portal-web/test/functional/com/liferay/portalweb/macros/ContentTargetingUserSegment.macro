@@ -320,10 +320,6 @@
 		</if>
 	</command>
 
-	<command name="saveCP">
-		<execute macro="PortletEntry#save" />
-	</command>
-
 	<command name="viewCP">
 		<execute function="Click" locator1="ContentTargeting#NAVIGATION_USER_SEGMENTS" />
 
