@@ -85,19 +85,22 @@ public class GogoTelnetClient implements AutoCloseable {
 		_readOneCommand();
 		_readOneCommand();
 
-		// First we negotiate the terminal type:
-		// 255(IAC),251(WILL),24(terminal type)
+		// First we negotiate the terminal type
+
+		// 255 (IAC), 251 (WILL), 24 (terminal type)
 
 		_sendCommand(255, 251, 24);
 
-		// Server should respond:
-		// 255(IAC),250(SB),24,1,255(IAC),240(SE)
+		// Server should respond
+
+		// 255 (IAC), 250 (SB), 24, 1, 255 (IAC), 240 (SE)
 
 		_readOneCommand();
 
-		// Send the terminal type:
+		// Send the terminal type
 
-		//255(IAC),250(SB),24,0,'V','T','2','2','0',255(IAC),240(SE)
+		// 255 (IAC), 250 (SB), 24, 0, 'V', 'T', '2', '2', '0', 255 (IAC),
+		// 240(SE)
 
 		_sendCommand(255, 250, 24, 0, 'V', 'T', '2', '2', '0', 255, 240);
 

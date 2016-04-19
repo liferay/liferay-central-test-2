@@ -29,12 +29,6 @@ public class TeePrintStream extends PrintStream {
 		_printStream = printStream;
 	}
 
-	/**
-	 * Closes the main stream.
-	 * The _printStream stream is just flushed but <b>not</b> closed.
-	 *
-	 * @see java.io.PrintStream#close()
-	 */
 	@Override
 	public void close() {
 		super.close();
@@ -57,10 +51,10 @@ public class TeePrintStream extends PrintStream {
 	}
 
 	@Override
-	public void write(byte[] bytes, int off, int len) {
-		super.write(bytes, off, len);
+	public void write(byte[] bytes, int offset, int length) {
+		super.write(bytes, offset, length);
 
-		_printStream.write(bytes, off, len);
+		_printStream.write(bytes, offset, length);
 	}
 
 	@Override
