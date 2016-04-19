@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.portlet.DynamicResourceRequest;
+import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.portlet.PortletResponseUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCResourceCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCResourceCommand;
@@ -46,7 +47,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portlet.ResourceResponseImpl;
 import com.liferay.portlet.usersadmin.search.UserSearch;
 import com.liferay.portlet.usersadmin.search.UserSearchTerms;
 import com.liferay.users.admin.constants.UsersAdminPortletKeys;
@@ -166,9 +166,11 @@ public class ExportUsersMVCResourceCommand extends BaseMVCResourceCommand {
 			return Collections.emptyList();
 		}
 
-		PortletURL portletURL =
-			((ResourceResponseImpl)resourceResponse).createRenderURL(
-				UsersAdminPortletKeys.USERS_ADMIN);
+		LiferayPortletResponse liferayPortletResponse =
+			(LiferayPortletResponse)resourceResponse;
+
+		PortletURL portletURL = liferayPortletResponse.createRenderURL(
+			UsersAdminPortletKeys.USERS_ADMIN);
 
 		UserSearch userSearch = new UserSearch(resourceRequest, portletURL);
 
