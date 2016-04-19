@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.portlet.DynamicResourceRequest;
+import com.liferay.portal.kernel.portlet.PortletResponseUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCResourceCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCResourceCommand;
 import com.liferay.portal.kernel.search.Indexer;
@@ -30,7 +31,6 @@ import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
 import com.liferay.portal.kernel.service.permission.PortletPermissionUtil;
-import com.liferay.portal.kernel.servlet.ServletResponseUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
@@ -58,9 +58,6 @@ import java.util.List;
 import javax.portlet.PortletURL;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -107,13 +104,9 @@ public class ExportUsersMVCResourceCommand extends BaseMVCResourceCommand {
 			String fileName = "users.csv";
 			byte[] bytes = csv.getBytes();
 
-			HttpServletRequest request = PortalUtil.getHttpServletRequest(
-				resourceRequest);
-			HttpServletResponse response = PortalUtil.getHttpServletResponse(
-				resourceResponse);
-
-			ServletResponseUtil.sendFile(
-				request, response, fileName, bytes, ContentTypes.TEXT_CSV_UTF8);
+			PortletResponseUtil.sendFile(
+				resourceRequest, resourceResponse, fileName, bytes,
+				ContentTypes.TEXT_CSV_UTF8);
 		}
 		catch (Exception e) {
 			SessionErrors.add(resourceRequest, e.getClass());
