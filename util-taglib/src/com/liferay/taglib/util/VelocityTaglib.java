@@ -32,7 +32,6 @@ import com.liferay.taglib.ui.RatingsTag;
 
 import javax.portlet.PortletURL;
 import javax.portlet.WindowState;
-
 import javax.servlet.ServletContext;
 import javax.servlet.jsp.PageContext;
 
@@ -91,6 +90,7 @@ public interface VelocityTaglib {
 	 * @deprecated As of 7.0.0, replaced by {@link #breadcrumb(long, String,
 	 * 				boolean, boolean, boolean, boolean)}}
 	 */
+	@Deprecated
 	public void breadcrumb(
 			String ddmTemplateKey, boolean showGuestGroup,
 			boolean showParentGroups, boolean showLayout,
