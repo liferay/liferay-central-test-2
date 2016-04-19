@@ -17,10 +17,10 @@ package com.liferay.portal.tools.db.upgrade.client;
 /**
  * @author David Truong
  */
-public class DataSource {
+public class Database {
 
-	public static DataSource getDB2DataSource() {
-		return new DataSource(
+	public static Database getDB2Database() {
+		return new Database(
 			"com.ibm.db2.jcc.DB2Driver", "jdbc:db2://", "localhost", 50000,
 			"/lportal",
 			":deferPrepares=false;fullyMaterializeInputStreams=true;" +
@@ -28,16 +28,16 @@ public class DataSource {
 					"progressiveStreaming=2;");
 	}
 
-	public static DataSource getMariaDBDataSource() {
-		return new DataSource(
+	public static Database getMariaDBDatabase() {
+		return new Database(
 			"org.mariadb.jdbc.Driver", "jdbc:mariadb://", "localhost", 0,
 			"/lportal",
 			"?useUnicode=true&characterEncoding=UTF-8" +
 				"&useFastDateParsing=false");
 	}
 
-	public static DataSource getMySQLDataSource() {
-		return new DataSource(
+	public static Database getMySQLDatabase() {
+		return new Database(
 			"com.mysql.jdbc.Driver", "jdbc:mysql://", "localhost", 0,
 			"/lportal",
 			"?characterEncoding=UTF-8&dontTrackOpenResources=true" +
@@ -45,26 +45,26 @@ public class DataSource {
 					"&useFastDateParsing=false&useUnicode=true");
 	}
 
-	public static DataSource getOracleDataSource() {
-		return new DataSource(
+	public static Database getOracleDataSource() {
+		return new Database(
 			"oracle.jdbc.OracleDriver", "jdbc:oracle:thin:@", "localhost", 1521,
 			":xe", "");
 	}
 
-	public static DataSource getPostgreSQLDataSource() {
-		return new DataSource(
+	public static Database getPostgreSQLDatabase() {
+		return new Database(
 			"org.postgresql.Driver", "jdbc:postgresql://", "localhost", 5432,
 			"/lportal", "");
 	}
 
-	public static DataSource getSQLServerDataSource() {
-		return new DataSource(
+	public static Database getSQLServerDatabase() {
+		return new Database(
 			"com.microsoft.sqlserver.jdbc.SQLServerDriver", "jdbc:sqlserver://",
 			"localhost", 0, "/lportal", "");
 	}
 
-	public static DataSource getSybaseDataSource() {
-		return new DataSource(
+	public static Database getSybaseDatabase() {
+		return new Database(
 			"com.sybase.jdbc4.jdbc.SybDriver", "jdbc:sybase:Tds:", "localhost",
 			5000, "/lportal", "");
 	}
@@ -130,7 +130,7 @@ public class DataSource {
 		_protocol = protocol;
 	}
 
-	private DataSource(
+	private Database(
 		String className, String protocol, String host, int port,
 		String databaseName, String params) {
 

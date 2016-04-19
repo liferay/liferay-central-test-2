@@ -393,12 +393,12 @@ public class UpgradeClient {
 		if ((value == null) || value.isEmpty()) {
 			String response;
 
-			DataSource dataSource = null;
+			Database dataSource = null;
 
 			while (dataSource == null) {
 				System.out.print("[ ");
 
-				for (String name : _dataSources.keySet()) {
+				for (String name : _databases.keySet()) {
 					System.out.print(name + " ");
 				}
 
@@ -412,7 +412,7 @@ public class UpgradeClient {
 					response = "mysql";
 				}
 
-				dataSource = _dataSources.get(response);
+				dataSource = _databases.get(response);
 
 				if (dataSource == null) {
 					System.err.println(
@@ -600,7 +600,7 @@ public class UpgradeClient {
 
 	private static final Map<String, AppServer> _appServers =
 		new LinkedHashMap<>();
-	private static final Map<String, DataSource> _dataSources =
+	private static final Map<String, Database> _databases =
 		new LinkedHashMap<>();
 
 	static {
@@ -613,13 +613,13 @@ public class UpgradeClient {
 		_appServers.put("websphere", AppServer.getWebSphereAppServer());
 		_appServers.put("wildfly", AppServer.getWildFlyAppServer());
 
-		_dataSources.put("db2", DataSource.getDB2DataSource());
-		_dataSources.put("mariadb", DataSource.getMariaDBDataSource());
-		_dataSources.put("mysql", DataSource.getMySQLDataSource());
-		_dataSources.put("oracle", DataSource.getOracleDataSource());
-		_dataSources.put("postgresql", DataSource.getPostgreSQLDataSource());
-		_dataSources.put("sqlserver", DataSource.getSQLServerDataSource());
-		_dataSources.put("sybase", DataSource.getSybaseDataSource());
+		_databases.put("db2", Database.getDB2Database());
+		_databases.put("mariadb", Database.getMariaDBDatabase());
+		_databases.put("mysql", Database.getMySQLDatabase());
+		_databases.put("oracle", Database.getOracleDataSource());
+		_databases.put("postgresql", Database.getPostgreSQLDatabase());
+		_databases.put("sqlserver", Database.getSQLServerDatabase());
+		_databases.put("sybase", Database.getSybaseDatabase());
 	}
 
 	private AppServer _appServer;
