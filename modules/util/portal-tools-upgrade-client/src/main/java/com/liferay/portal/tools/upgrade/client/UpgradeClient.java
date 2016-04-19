@@ -607,14 +607,14 @@ public class UpgradeClient {
 		new LinkedHashMap<>();
 
 	static {
-		_appServers.put("jboss", AppServer.getJBossEAP());
-		_appServers.put("jonas", AppServer.getJOnAS());
-		_appServers.put("resin", AppServer.getResin());
-		_appServers.put("tcserver", AppServer.getTCServer());
-		_appServers.put("tomcat", AppServer.getTomcat());
-		_appServers.put("weblogic", AppServer.getWeblogic());
-		_appServers.put("websphere", AppServer.getWebsphere());
-		_appServers.put("wildfly", AppServer.getWildFly());
+		_appServers.put("jboss", AppServer.getJBossEAPAppServer());
+		_appServers.put("jonas", AppServer.getJOnASAppServer());
+		_appServers.put("resin", AppServer.getResinAppServer());
+		_appServers.put("tcserver", AppServer.getTCServerAppServer());
+		_appServers.put("tomcat", AppServer.getTomcatAppServer());
+		_appServers.put("weblogic", AppServer.getWeblogicAppServer());
+		_appServers.put("websphere", AppServer.getWebsphereAppServer());
+		_appServers.put("wildfly", AppServer.getWildFlyAppServer());
 
 		_dataSources.put("db2", DataSource.getDB2());
 		_dataSources.put("mariadb", DataSource.getMariaDB());
