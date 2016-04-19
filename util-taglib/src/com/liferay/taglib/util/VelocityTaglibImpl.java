@@ -55,7 +55,6 @@ import com.liferay.taglib.ui.SocialBookmarksTag;
 import com.liferay.taglib.ui.ToggleTag;
 
 import java.io.Writer;
-
 import java.util.Map;
 import java.util.Set;
 
@@ -63,7 +62,6 @@ import javax.portlet.PortletMode;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 import javax.portlet.WindowState;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -259,6 +257,7 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 	 * @deprecated As of 7.0.0, replaced by {@link #breadcrumb(long, String,
 	 * 				boolean, boolean, boolean, boolean)}}
 	 */
+	@Deprecated
 	@Override
 	public void breadcrumb(
 			String ddmTemplateKey, boolean showGuestGroup,
