@@ -548,7 +548,7 @@ public class UpgradeClient {
 			response = _consoleReader.readLine();
 
 			if (!response.isEmpty()) {
-				_appServer.setDir(response);
+				_appServer.setDirName(response);
 			}
 
 			System.out.println(
@@ -557,7 +557,7 @@ public class UpgradeClient {
 			response = _consoleReader.readLine();
 
 			if (!response.isEmpty()) {
-				_appServer.setGlobalLibDir(response);
+				_appServer.setGlobalLibDirName(response);
 			}
 
 			System.out.println(
@@ -566,7 +566,7 @@ public class UpgradeClient {
 			response = _consoleReader.readLine();
 
 			if (!response.isEmpty()) {
-				_appServer.setPortalDir(response);
+				_appServer.setPortalDirName(response);
 			}
 
 			_serverProperties.setProperty("dir", dir.getCanonicalPath());
