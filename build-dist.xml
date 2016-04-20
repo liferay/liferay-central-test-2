@@ -2046,7 +2046,7 @@ closeTemplate()
 		<if>
 			<os family="windows" />
 			<then>
-				<exec dir="${app.server.weblogic.dir}/wlserver/server/bin/" executable="cmd">
+				<exec dir="${app.server.weblogic.dir}/wlserver/server/bin" executable="cmd">
 					<env key="MW_HOME" value="${app.server.weblogic.dir.windows}" />
 					<arg value="/c" />
 					<arg value="setWLSEnv.cmd" />
@@ -2126,13 +2126,13 @@ closeTemplate()
 				<if>
 					<os family="unix" />
 					<then>
-						<exec dir="${app.server.weblogic.dir}/wlserver/server/bin/" executable="./setWLSEnv.sh">
+						<exec dir="${app.server.weblogic.dir}/wlserver/server/bin" executable="./setWLSEnv.sh">
 							<env key="MW_HOME" file="${app.server.weblogic.dir}" />
 							<arg value="${app.server.weblogic.configure.silent}" />
 						</exec>
 					</then>
 					<else>
-						<exec dir="${app.server.weblogic.dir}/wlserver/server/bin/" executable="sh">
+						<exec dir="${app.server.weblogic.dir}/wlserver/server/bin" executable="sh">
 							<env key="MW_HOME" file="${app.server.weblogic.dir}" />
 							<arg value="setWLSEnv.sh" />
 						</exec>
