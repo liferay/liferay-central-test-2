@@ -27,19 +27,19 @@ import java.sql.ResultSet;
  */
 public class UpgradeResourcePermission extends UpgradeProcess {
 
-	@Override
-	protected void doUpgrade() throws Exception {
-		createIndex();
-
-		upgradeResourcePermissions();
-	}
-
 	protected void createIndex() throws Exception {
 		try (LoggingTimer loggingTimer = new LoggingTimer()) {
 			runSQL(
 				"create index IX_D5F1E2A2 on ResourcePermission " +
 					"(name[$COLUMN_LENGTH:255$])");
 		}
+	}
+
+	@Override
+	protected void doUpgrade() throws Exception {
+		createIndex();
+
+		upgradeResourcePermissions();
 	}
 
 	protected void upgradeResourcePermissions() throws Exception {
