@@ -14,10 +14,10 @@
  */
 --%>
 
-<%@ include file="/html/portlet/polls/init.jsp" %>
+<%@ include file="/polls/init.jsp" %>
 
 <portlet:renderURL var="searchURL">
-	<portlet:param name="struts_action" value="/polls/view" />
+	<portlet:param name="mvcRenderCommandName" value="/polls/view" />
 </portlet:renderURL>
 
 <aui:nav-bar cssClass="collapse-basic-search" markupView="lexicon">

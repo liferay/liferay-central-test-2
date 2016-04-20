@@ -102,7 +102,7 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 
 			ResourceURL resourceURL = renderResponse.createResourceURL();
 
-			resourceURL.setParameter("struts_action", "/polls/view_chart");
+			resourceURL.setParameter("mvcRenderCommandName", "/polls/view_chart");
 			resourceURL.setParameter("questionId", Long.toString(question.getQuestionId()));
 			resourceURL.setParameter("chartType", TextFormatter.format(chart, TextFormatter.N));
 
@@ -128,7 +128,7 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 		<%
 		PortletURL portletURL = renderResponse.createRenderURL();
 
-		portletURL.setParameter("struts_action", "/polls/view_question");
+		portletURL.setParameter("mvcRenderCommandName", "/polls/view_question");
 		portletURL.setParameter("redirect", redirect);
 		portletURL.setParameter("questionId", String.valueOf(question.getQuestionId()));
 		portletURL.setParameter("viewResults", Boolean.TRUE.toString());

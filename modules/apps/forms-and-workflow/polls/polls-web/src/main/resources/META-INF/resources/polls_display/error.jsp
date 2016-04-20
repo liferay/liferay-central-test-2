@@ -14,6 +14,6 @@
  */
 --%>
 
-<%@ include file="/html/portlet/polls_display/init.jsp" %>
+<%@ include file="/polls_display/init.jsp" %>
 
 <liferay-ui:error-principal />

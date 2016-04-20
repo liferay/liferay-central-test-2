@@ -14,19 +14,19 @@
  */
 --%>
 
-<%@ include file="/html/portlet/polls/init.jsp" %>
+<%@ include file="/polls/init.jsp" %>
 
 <%
 boolean showAddPollButton = PollsResourcePermissionChecker.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_QUESTION);
 
 PortletURL portletURL = pollsDisplayContext.getBasePortletURL();
 
-portletURL.setParameter("struts_action", "/polls/view");
+portletURL.setParameter("mvcRenderCommandName", "/polls/view");
 %>
 
-<liferay-util:include page="/html/portlet/polls/navigation_bar.jsp" servletContext="<%= application %>" />
+<liferay-util:include page="/polls/navigation_bar.jsp" servletContext="<%= application %>" />
 
-<liferay-util:include page="/html/portlet/polls/management_bar.jsp" servletContext="<%= application %>" />
+<liferay-util:include page="/polls/management_bar.jsp" servletContext="<%= application %>" />
 
 <div class="container-fluid-1280 main-content-body">
 	<aui:form method="post" name="fm">
@@ -37,7 +37,7 @@ portletURL.setParameter("struts_action", "/polls/view");
 			searchTerms="<%= new DisplayTerms(renderRequest) %>"
 		>
 			<liferay-ui:search-container-results>
-				<%@ include file="/html/portlet/polls/question_search_results.jspf" %>
+				<%@ include file="/polls/question_search_results.jspf" %>
 			</liferay-ui:search-container-results>
 
 			<liferay-ui:search-container-row
@@ -48,7 +48,7 @@ portletURL.setParameter("struts_action", "/polls/view");
 				<%
 				PortletURL rowURL = renderResponse.createRenderURL();
 
-				rowURL.setParameter("struts_action", "/polls/view_question");
+				rowURL.setParameter("mvcRenderCommandName", "/polls/view_question");
 				rowURL.setParameter("redirect", currentURL);
 				rowURL.setParameter("questionId", String.valueOf(question.getQuestionId()));
 				%>
@@ -109,7 +109,7 @@ portletURL.setParameter("struts_action", "/polls/view");
 				<liferay-ui:search-container-column-jsp
 					align="right"
 					cssClass="entry-action-column"
-					path="/html/portlet/polls/question_action.jsp"
+					path="/polls/question_action.jsp"
 				/>
 			</liferay-ui:search-container-row>
 
@@ -120,7 +120,7 @@ portletURL.setParameter("struts_action", "/polls/view");
 
 <c:if test="<%= showAddPollButton %>">
 	<portlet:renderURL var="editQuestionURL">
-		<portlet:param name="struts_action" value="/polls/edit_question" />
+		<portlet:param name="mvcRenderCommandName" value="/polls/edit_question" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
 	</portlet:renderURL>
 

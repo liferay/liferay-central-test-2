@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/polls/init.jsp" %>
+<%@ include file="/polls/init.jsp" %>
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");
@@ -67,8 +67,8 @@ portletDisplay.setShowBackIcon(true);
 portletDisplay.setURLBack(redirect);
 %>
 
-<liferay-portlet:actionURL refererPlid="<%= themeDisplay.getRefererPlid() %>" var="editQuestionURL">
-	<portlet:param name="struts_action" value="/polls/edit_question" />
+<liferay-portlet:actionURL name="/polls/edit_question" refererPlid="<%= themeDisplay.getRefererPlid() %>" var="editQuestionURL">
+	<portlet:param name="mvcActionCommand" value="/polls/edit_question" />
 </liferay-portlet:actionURL>
 
 <aui:form action="<%= editQuestionURL %>" cssClass="container-fluid-1280" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveQuestion();" %>'>
@@ -105,10 +105,10 @@ portletDisplay.setURLBack(redirect);
 					String paramName = null;
 
 					if (deleteChoice && (i >= choiceName)) {
-						paramName = EditQuestionAction.CHOICE_DESCRIPTION_PREFIX + ((char)(96 + i + 1));
+						paramName = EditQuestionMVCActionCommand.CHOICE_DESCRIPTION_PREFIX + ((char)(96 + i + 1));
 					}
 					else {
-						paramName = EditQuestionAction.CHOICE_DESCRIPTION_PREFIX + c;
+						paramName = EditQuestionMVCActionCommand.CHOICE_DESCRIPTION_PREFIX + c;
 					}
 
 					if ((question != null) && ((i - 1) < choices.size())) {
@@ -119,7 +119,7 @@ portletDisplay.setURLBack(redirect);
 					<div class="choice <%= (i == choicesCount) ? "last-choice" : StringPool.BLANK %>">
 						<aui:model-context bean="<%= choice %>" model="<%= PollsChoice.class %>" />
 
-						<aui:input name="<%= EditQuestionAction.CHOICE_NAME_PREFIX + c %>" type="hidden" value="<%= c %>" />
+						<aui:input name="<%= EditQuestionMVCActionCommand.CHOICE_NAME_PREFIX + c %>" type="hidden" value="<%= c %>" />
 
 						<aui:input fieldParam="<%= paramName %>" label="<%= c + StringPool.PERIOD %>" name="description" />
 
@@ -158,10 +158,11 @@ portletDisplay.setURLBack(redirect);
 	function <portlet:namespace />addPollChoice() {
 		document.<portlet:namespace />fm.<portlet:namespace />choicesCount.value = '<%= choicesCount + 1 %>';
 
-		<liferay-portlet:actionURL allowEmptyParam="<%= true %>" var="addPollChoiceURL">
-			<liferay-portlet:param name="struts_action" value="/polls/edit_question" />
-			<liferay-portlet:param name="<%= EditQuestionAction.CHOICE_DESCRIPTION_PREFIX + (char)(96 + choicesCount + 1) %>" value="" />
-		</liferay-portlet:actionURL>
+		<liferay-portlet:renderURL allowEmptyParam="<%= true %>" var="addPollChoiceURL">
+			<liferay-portlet:param name="redirect" value="<%= currentURL %>" />
+			<liferay-portlet:param name="mvcRenderCommandName" value="/polls/edit_question" />
+			<liferay-portlet:param name="<%= EditQuestionMVCActionCommand.CHOICE_DESCRIPTION_PREFIX + (char)(96 + choicesCount + 1) %>" value="" />
+		</liferay-portlet:renderURL>
 
 		submitForm(document.<portlet:namespace />fm, '<%= addPollChoiceURL %>');
 	}

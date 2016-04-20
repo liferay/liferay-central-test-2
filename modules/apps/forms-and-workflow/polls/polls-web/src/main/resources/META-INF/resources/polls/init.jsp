@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/init.jsp" %>
+<%@ include file="/init.jsp" %>
 
 <%
 PollsDisplayContext pollsDisplayContext = new PollsDisplayContext(renderRequest, renderResponse);

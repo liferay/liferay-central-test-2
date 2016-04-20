@@ -14,13 +14,13 @@
  */
 --%>
 
-<%@ include file="/html/portlet/polls_display/init.jsp" %>
+<%@ include file="/polls_display/init.jsp" %>
 
 <%
 PollsQuestion question = (PollsQuestion)request.getAttribute(PollsWebKeys.POLLS_QUESTION);
 %>
 
-<%@ include file="/html/portlet/polls_display/view_options.jspf" %>
+<%@ include file="/polls_display/view_options.jspf" %>
 
 <c:choose>
 	<c:when test="<%= question == null %>">
@@ -57,7 +57,7 @@ PollsQuestion question = (PollsQuestion)request.getAttribute(PollsWebKeys.POLLS_
 		%>
 
 		<portlet:actionURL var="voteQuestionURL">
-			<portlet:param name="struts_action" value="/polls_display/vote_question" />
+			<portlet:param name="mvcActionCommand" value="/polls_display/vote_question" />
 		</portlet:actionURL>
 
 		<aui:form action="<%= voteQuestionURL %>" method="post" name="fm">
@@ -93,7 +93,7 @@ PollsQuestion question = (PollsQuestion)request.getAttribute(PollsWebKeys.POLLS_
 					</aui:fieldset>
 				</c:when>
 				<c:otherwise>
-					<%@ include file="/html/portlet/polls/view_question_results.jspf" %>
+					<%@ include file="/polls/view_question_results.jspf" %>
 
 					<c:if test="<%= !themeDisplay.isSignedIn() && !question.isExpired() && !PollsQuestionPermissionChecker.contains(permissionChecker, question, ActionKeys.ADD_VOTE) %>">
 						<div class="alert alert-info">
