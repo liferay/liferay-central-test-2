@@ -115,7 +115,17 @@ public abstract class BaseImporter implements Importer {
 					companyId, targetValue);
 
 				if (group != null) {
-					existing = true;
+					int privateLayoutPageCount =
+						group.getPrivateLayoutsPageCount();
+
+					int publicLayoutPageCount =
+						group.getPublicLayoutsPageCount();
+
+					if ((privateLayoutPageCount != 0) ||
+						(publicLayoutPageCount != 0)) {
+
+						existing = true;
+					}
 				}
 				else {
 					group = GroupLocalServiceUtil.addGroup(
