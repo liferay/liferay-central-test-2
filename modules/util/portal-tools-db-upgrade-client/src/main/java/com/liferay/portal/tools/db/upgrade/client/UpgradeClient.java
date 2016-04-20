@@ -393,7 +393,7 @@ public class UpgradeClient {
 		String value = _appServerProperties.getProperty("dir");
 
 		if ((value == null) || value.isEmpty()) {
-			String response;
+			String response = null;
 
 			while (_appServer == null) {
 				System.out.print("[ ");
@@ -403,8 +403,8 @@ public class UpgradeClient {
 				}
 
 				System.out.println("]");
-
-				System.out.println("Please enter your app server (tomcat): ");
+				System.out.println(
+					"Please enter your application server (tomcat): ");
 
 				response = _consoleReader.readLine();
 
@@ -416,7 +416,7 @@ public class UpgradeClient {
 
 				if (_appServer == null) {
 					System.err.println(
-						response + " is not a supported app server");
+						response + " is an unsupported application server.");
 				}
 			}
 
@@ -425,7 +425,8 @@ public class UpgradeClient {
 			File portalDir = _appServer.getPortalDir();
 
 			System.out.println(
-				"Please enter your app server dir (" + dir + "): ");
+				"Please enter your application server directory (" + dir +
+					"): ");
 
 			response = _consoleReader.readLine();
 
@@ -434,7 +435,8 @@ public class UpgradeClient {
 			}
 
 			System.out.println(
-				"Please enter your global lib dir (" + globalLibDir + "): ");
+				"Please enter your global library directory (" + globalLibDir +
+					"): ");
 
 			response = _consoleReader.readLine();
 
@@ -443,7 +445,7 @@ public class UpgradeClient {
 			}
 
 			System.out.println(
-				"Please enter your portal dir (" + portalDir + "): ");
+				"Please enter your portal directory (" + portalDir + "): ");
 
 			response = _consoleReader.readLine();
 
@@ -469,15 +471,15 @@ public class UpgradeClient {
 			"jdbc.default.driverClassName");
 
 		if ((value == null) || value.isEmpty()) {
-			String response;
+			String response = null;
 
 			Database dataSource = null;
 
 			while (dataSource == null) {
 				System.out.print("[ ");
 
-				for (String name : _databases.keySet()) {
-					System.out.print(name + " ");
+				for (String database : _databases.keySet()) {
+					System.out.print(database + " ");
 				}
 
 				System.out.println("]");
@@ -494,7 +496,7 @@ public class UpgradeClient {
 
 				if (dataSource == null) {
 					System.err.println(
-						response + " is not a supported database");
+						response + " is an unsupported database.");
 				}
 			}
 
