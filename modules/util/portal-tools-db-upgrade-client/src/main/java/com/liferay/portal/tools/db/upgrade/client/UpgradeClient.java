@@ -277,7 +277,7 @@ public class UpgradeClient {
 		return options;
 	}
 
-	private void _appendLibs(StringBuilder classPath, File dir)
+	private void _appendClassPath(StringBuilder sb, File dir)
 		throws IOException {
 
 		if (dir.exists() && dir.isDirectory()) {
@@ -285,11 +285,10 @@ public class UpgradeClient {
 				String fileName = file.getName();
 
 				if (file.isFile() && fileName.endsWith("jar")) {
-					classPath.append(
-						file.getCanonicalPath() + File.pathSeparator);
+					sb.append(file.getCanonicalPath() + File.pathSeparator);
 				}
 				else if (file.isDirectory()) {
-					_appendLibs(classPath, file);
+					_appendClassPath(sb, file);
 				}
 			}
 		}
@@ -300,28 +299,27 @@ public class UpgradeClient {
 	}
 
 	private String _getClassPath() throws IOException {
-		StringBuilder classPath = new StringBuilder();
+		StringBuilder sb = new StringBuilder();
 
 		String liferayClassPath = System.getenv("LIFERAY_CLASSPATH");
 
 		if ((liferayClassPath != null) && !liferayClassPath.isEmpty()) {
-			classPath.append(liferayClassPath);
-
-			classPath.append(File.pathSeparator);
+			sb.append(liferayClassPath);
+			sb.append(File.pathSeparator);
 		}
 
-		_appendLibs(classPath, new File("lib"));
-		_appendLibs(classPath, new File("."));
-		_appendLibs(classPath, new File(_appServer.getDir(), "bin"));
-		_appendLibs(classPath, _appServer.getGlobalLibDir());
+		_appendClassPath(sb, new File("lib"));
+		_appendClassPath(sb, new File("."));
+		_appendClassPath(sb, new File(_appServer.getDir(), "bin"));
+		_appendClassPath(sb, _appServer.getGlobalLibDir());
 
 		File portalClassesDir = _appServer.getPortalClassesDir();
 
-		classPath.append(portalClassesDir.getCanonicalPath());
+		sb.append(portalClassesDir.getCanonicalPath());
 
-		_appendLibs(classPath, _appServer.getPortalLibDir());
+		_appendClassPath(sb, _appServer.getPortalLibDir());
 
-		return classPath.toString();
+		return sb.toString();
 	}
 
 	private String _getRelativePath(File baseFile, File pathFile) {
