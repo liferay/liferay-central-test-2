@@ -530,17 +530,17 @@ public class UpgradeClient {
 				dataSource.setHost(response);
 			}
 
-			String portString;
+			String port = null;
 
 			if (dataSource.getPort() > 0) {
-				portString = String.valueOf(dataSource.getPort());
+				port = String.valueOf(dataSource.getPort());
 			}
 			else {
-				portString = "none";
+				port = "none";
 			}
 
 			System.out.println(
-				"Please enter your database port (" + portString + "): ");
+				"Please enter your database port (" + port + "): ");
 
 			response = _consoleReader.readLine();
 
@@ -574,11 +574,11 @@ public class UpgradeClient {
 			_portalUpgradeDatabaseProperties.setProperty(
 				"jdbc.default.driverClassName", dataSource.getClassName());
 			_portalUpgradeDatabaseProperties.setProperty(
+				"jdbc.default.password", password);
+			_portalUpgradeDatabaseProperties.setProperty(
 				"jdbc.default.url", dataSource.getURL());
 			_portalUpgradeDatabaseProperties.setProperty(
 				"jdbc.default.username", username);
-			_portalUpgradeDatabaseProperties.setProperty(
-				"jdbc.default.password", password);
 		}
 	}
 
