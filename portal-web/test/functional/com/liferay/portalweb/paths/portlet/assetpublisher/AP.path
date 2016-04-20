@@ -20,7 +20,7 @@
 </tr>
 <tr>
 	<td>ADD_ASSET_SCOPED</td>
-	<td>//a[contains(@id,'add-content-select-scope')]</td>
+	<td>//a[@data-title='Add Content (Select Scope and Type)']</td>
 	<td></td>
 </tr>
 <tr>
