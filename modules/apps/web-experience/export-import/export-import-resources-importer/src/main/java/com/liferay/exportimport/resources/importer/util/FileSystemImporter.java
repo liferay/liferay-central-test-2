@@ -14,11 +14,8 @@
 
 package com.liferay.exportimport.resources.importer.util;
 
-import com.liferay.asset.kernel.model.AssetCategory;
-import com.liferay.asset.kernel.model.AssetEntry;
 import com.liferay.asset.kernel.model.AssetTag;
 import com.liferay.asset.kernel.service.AssetTagLocalServiceUtil;
-import com.liferay.blogs.kernel.model.BlogsEntry;
 import com.liferay.document.library.kernel.exception.DuplicateFileEntryException;
 import com.liferay.document.library.kernel.model.DLFileEntry;
 import com.liferay.document.library.kernel.model.DLFolder;
@@ -57,7 +54,6 @@ import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.model.LayoutConstants;
 import com.liferay.portal.kernel.model.LayoutPrototype;
-import com.liferay.portal.kernel.model.LayoutSet;
 import com.liferay.portal.kernel.model.LayoutSetPrototype;
 import com.liferay.portal.kernel.model.LayoutTypePortlet;
 import com.liferay.portal.kernel.model.LayoutTypePortletConstants;
@@ -96,7 +92,6 @@ import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.search.index.IndexStatusManager;
-import com.liferay.wiki.model.WikiPage;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -225,11 +220,11 @@ public class FileSystemImporter extends BaseImporter {
 		for (Object[] applicationDisplayTemplateType :
 				_APPLICATION_DISPLAY_TEMPLATE_TYPES) {
 
-			Class<?> clazz = (Class<?>)applicationDisplayTemplateType[1];
+			String className = (String)applicationDisplayTemplateType[1];
 
 			addApplicationDisplayTemplate(
 				dirName, (String)applicationDisplayTemplateType[0],
-				PortalUtil.getClassNameId(clazz));
+				PortalUtil.getClassNameId(className));
 		}
 	}
 
@@ -1847,12 +1842,19 @@ public class FileSystemImporter extends BaseImporter {
 
 	private static final Object[][] _APPLICATION_DISPLAY_TEMPLATE_TYPES =
 		new Object[][] {
-			{"asset_category", AssetCategory.class},
-			{"asset_entry", AssetEntry.class}, {"asset_tag", AssetTag.class},
-			{"blogs_entry", BlogsEntry.class},
-			{"document_library", FileEntry.class},
-			{"site_map", LayoutSet.class},
-			{"wiki_page", WikiPage.class}
+			{"asset_category", "com.liferay.asset.kernel.model.AssetCategory"},
+			{"asset_entry", "com.liferay.asset.kernel.model.AssetEntry"},
+			{"asset_tag", "com.liferay.asset.kernel.model.AssetTag"},
+			{"blogs_entry", "com.liferay.blogs.kernel.model.BlogsEntry"},
+			{"bread_crumb",
+				"com.liferay.portal.kernel.servlet.taglib.ui.BreadcrumbEntry"},
+			{"document_library",
+				"com.liferay.portal.kernel.repository.model.FileEntry"},
+			{"language_entry",
+				"com.liferay.portal.kernel.servlet.taglib.ui.LanguageEntry"},
+			{"rss_feed", "com.liferay.rss.web.util.RSSFeed"},
+			{"site_map", "com.liferay.portal.kernel.model.LayoutSet"},
+			{"wiki_page", "com.liferay.wiki.model.WikiPage"}
 		};
 
 	private static final String _DDL_STRUCTURE_DIR_NAME =
