@@ -115,18 +115,18 @@ public class UpgradeClient {
 		_jvmOpts = jvmOpts;
 		_logFile = logFile;
 
-		_dataSourcePropertiesFile = new File(
+		_portalUpgradeDatabasePropertiesFile = new File(
 			"portal-upgrade-datasource.properties");
 
-		_dataSourceProperties = _readProperties(_dataSourcePropertiesFile);
+		_portalUpgradeDatabaseProperties = _readProperties(_portalUpgradeDatabasePropertiesFile);
 
-		_serverPropertiesFile = new File("app-server.properties");
+		_appServerPropertiesFile = new File("app-server.properties");
 
-		_serverProperties = _readProperties(_serverPropertiesFile);
+		_appServerProperties = _readProperties(_appServerPropertiesFile);
 
-		_upgradePropertiesFile = new File("portal-upgrade-ext.properties");
+		_portalUpgradeExtPropertiesFile = new File("portal-upgrade-ext.properties");
 
-		_upgradeProperties = _readProperties(_upgradePropertiesFile);
+		_portalUpgradeExtProperties = _readProperties(_portalUpgradeExtPropertiesFile);
 	}
 
 	public void upgrade() throws IOException {
@@ -248,9 +248,9 @@ public class UpgradeClient {
 
 	public void verifyProperties() {
 		try {
-			_verifyDataSourceProperties();
-			_verifyServerProperties();
-			_verifyUpgradeProperties();
+			_verifyPortalUpgradeDatabaseProperties();
+			_verifyAppServerProperties();
+			_verifyPortalUpgradeExtProperties();
 
 			_saveProperties();
 		}
@@ -368,9 +368,9 @@ public class UpgradeClient {
 	}
 
 	private void _saveProperties() throws IOException {
-		_store(_dataSourceProperties, _dataSourcePropertiesFile);
-		_store(_upgradeProperties, _upgradePropertiesFile);
-		_store(_serverProperties, _serverPropertiesFile);
+		_store(_portalUpgradeDatabaseProperties, _portalUpgradeDatabasePropertiesFile);
+		_store(_portalUpgradeExtProperties, _portalUpgradeExtPropertiesFile);
+		_store(_appServerProperties, _appServerPropertiesFile);
 	}
 
 	private void _store(Properties properties, File file) throws IOException {
@@ -386,8 +386,8 @@ public class UpgradeClient {
 		}
 	}
 
-	private void _verifyDataSourceProperties() throws IOException {
-		String value = _dataSourceProperties.getProperty(
+	private void _verifyPortalUpgradeDatabaseProperties() throws IOException {
+		String value = _portalUpgradeDatabaseProperties.getProperty(
 			"jdbc.default.driverClassName");
 
 		if ((value == null) || value.isEmpty()) {
@@ -491,19 +491,19 @@ public class UpgradeClient {
 
 			String password = _consoleReader.readLine();
 
-			_dataSourceProperties.setProperty(
+			_portalUpgradeDatabaseProperties.setProperty(
 				"jdbc.default.driverClassName", dataSource.getClassName());
-			_dataSourceProperties.setProperty(
+			_portalUpgradeDatabaseProperties.setProperty(
 				"jdbc.default.url", dataSource.getURL());
-			_dataSourceProperties.setProperty(
+			_portalUpgradeDatabaseProperties.setProperty(
 				"jdbc.default.username", username);
-			_dataSourceProperties.setProperty(
+			_portalUpgradeDatabaseProperties.setProperty(
 				"jdbc.default.password", password);
 		}
 	}
 
-	private void _verifyServerProperties() throws IOException {
-		String value = _serverProperties.getProperty("dir");
+	private void _verifyAppServerProperties() throws IOException {
+		String value = _appServerProperties.getProperty("dir");
 
 		if ((value == null) || value.isEmpty()) {
 			String response;
@@ -564,21 +564,21 @@ public class UpgradeClient {
 				_appServer.setPortalDirName(response);
 			}
 
-			_serverProperties.setProperty("dir", dir.getCanonicalPath());
-			_serverProperties.setProperty(
+			_appServerProperties.setProperty("dir", dir.getCanonicalPath());
+			_appServerProperties.setProperty(
 				"global.dir.lib", _getRelativePath(dir, globalLibDir));
-			_serverProperties.setProperty(
+			_appServerProperties.setProperty(
 				"portal.dir", _getRelativePath(dir, portalDir));
 		}
 		else {
 			_appServer = new AppServer(
-				value, _serverProperties.getProperty("global.dir.lib"),
-				_serverProperties.getProperty("portal.dir"));
+				value, _appServerProperties.getProperty("global.dir.lib"),
+				_appServerProperties.getProperty("portal.dir"));
 		}
 	}
 
-	private void _verifyUpgradeProperties() throws IOException {
-		String value = _upgradeProperties.getProperty("liferay.home");
+	private void _verifyPortalUpgradeExtProperties() throws IOException {
+		String value = _portalUpgradeExtProperties.getProperty("liferay.home");
 
 		if ((value == null) || value.isEmpty()) {
 			System.out.println("Please enter your Liferay home (../): ");
@@ -591,7 +591,7 @@ public class UpgradeClient {
 
 			File liferayHome = new File(response);
 
-			_upgradeProperties.setProperty(
+			_portalUpgradeExtProperties.setProperty(
 				"liferay.home", liferayHome.getCanonicalPath());
 		}
 	}
@@ -624,13 +624,13 @@ public class UpgradeClient {
 
 	private AppServer _appServer;
 	private final ConsoleReader _consoleReader = new ConsoleReader();
-	private final Properties _dataSourceProperties;
-	private final File _dataSourcePropertiesFile;
+	private final Properties _portalUpgradeDatabaseProperties;
+	private final File _portalUpgradeDatabasePropertiesFile;
 	private final String _jvmOpts;
 	private final File _logFile;
-	private final Properties _serverProperties;
-	private final File _serverPropertiesFile;
-	private final Properties _upgradeProperties;
-	private final File _upgradePropertiesFile;
+	private final Properties _appServerProperties;
+	private final File _appServerPropertiesFile;
+	private final Properties _portalUpgradeExtProperties;
+	private final File _portalUpgradeExtPropertiesFile;
 
 }
