@@ -10,5 +10,5 @@ deploy {
 }
 
 liferay {
-	deployDir = file("${liferayHome}/tools")
+	deployDir = file("${liferayHome}/tools/${projectDir.name}")
 }
