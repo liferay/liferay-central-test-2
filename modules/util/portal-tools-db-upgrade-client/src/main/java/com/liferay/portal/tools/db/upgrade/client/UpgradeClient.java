@@ -149,10 +149,10 @@ public class UpgradeClient {
 			commands.add("java");
 		}
 
-		commands.addAll(Arrays.asList(_jvmOpts.split(" ")));
-		commands.add("-Dexternal-properties=portal-upgrade.properties");
 		commands.add("-cp");
 		commands.add(_getClassPath());
+		commands.addAll(Arrays.asList(_jvmOpts.split(" ")));
+		commands.add("-Dexternal-properties=portal-upgrade.properties");
 		commands.add("com.liferay.portal.tools.DBUpgrader");
 
 		processBuilder.command(commands);
