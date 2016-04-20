@@ -369,11 +369,11 @@ public class UpgradeClient {
 	}
 
 	private void _saveProperties() throws IOException {
+		_store(_appServerProperties, _appServerPropertiesFile);
 		_store(
 			_portalUpgradeDatabaseProperties,
 			_portalUpgradeDatabasePropertiesFile);
 		_store(_portalUpgradeExtProperties, _portalUpgradeExtPropertiesFile);
-		_store(_appServerProperties, _appServerPropertiesFile);
 	}
 
 	private void _store(Properties properties, File file) throws IOException {
