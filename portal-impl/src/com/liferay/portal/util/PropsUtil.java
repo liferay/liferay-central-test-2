@@ -48,71 +48,99 @@ import javax.servlet.Servlet;
 public class PropsUtil {
 
 	public static void addProperties(Company company, Properties properties) {
-		_getConfiguration(company).addProperties(properties);
+		Configuration configuration = _getConfiguration(company);
+
+		configuration.addProperties(properties);
 	}
 
 	public static void addProperties(
 		Company company, UnicodeProperties unicodeProperties) {
 
+		Configuration configuration = _getConfiguration(company);
+
 		Properties properties = new Properties();
 
 		properties.putAll(unicodeProperties);
 
-		_getConfiguration(company).addProperties(properties);
+		configuration.addProperties(properties);
 	}
 
 	public static void addProperties(Properties properties) {
-		_getConfiguration().addProperties(properties);
+		Configuration configuration = _getConfiguration();
+
+		configuration.addProperties(properties);
 	}
 
 	public static void addProperties(UnicodeProperties unicodeProperties) {
+		Configuration configuration = _getConfiguration();
+
 		Properties properties = new Properties();
 
 		properties.putAll(unicodeProperties);
 
-		_getConfiguration().addProperties(properties);
+		configuration.addProperties(properties);
 	}
 
 	public static boolean contains(Company company, String key) {
-		return _getConfiguration(company).contains(key);
+		Configuration configuration = _getConfiguration(company);
+
+		return configuration.contains(key);
 	}
 
 	public static boolean contains(String key) {
-		return _getConfiguration().contains(key);
+		Configuration configuration = _getConfiguration();
+
+		return configuration.contains(key);
 	}
 
 	public static String get(Company company, String key) {
-		return _getConfiguration(company).get(key);
+		Configuration configuration = _getConfiguration(company);
+
+		return configuration.get(key);
 	}
 
 	public static String get(Company company, String key, Filter filter) {
-		return _getConfiguration(company).get(key, filter);
+		Configuration configuration = _getConfiguration(company);
+
+		return configuration.get(key, filter);
 	}
 
 	public static String get(String key) {
-		return _getConfiguration().get(key);
+		Configuration configuration = _getConfiguration();
+
+		return configuration.get(key);
 	}
 
 	public static String get(String key, Filter filter) {
-		return _getConfiguration().get(key, filter);
+		Configuration configuration = _getConfiguration();
+
+		return configuration.get(key, filter);
 	}
 
 	public static String[] getArray(Company company, String key) {
-		return _getConfiguration(company).getArray(key);
+		Configuration configuration = _getConfiguration(company);
+
+		return configuration.getArray(key);
 	}
 
 	public static String[] getArray(
 		Company company, String key, Filter filter) {
 
-		return _getConfiguration(company).getArray(key, filter);
+		Configuration configuration = _getConfiguration(company);
+
+		return configuration.getArray(key, filter);
 	}
 
 	public static String[] getArray(String key) {
-		return _getConfiguration().getArray(key);
+		Configuration configuration = _getConfiguration();
+
+		return configuration.getArray(key);
 	}
 
 	public static String[] getArray(String key, Filter filter) {
-		return _getConfiguration().getArray(key, filter);
+		Configuration configuration = _getConfiguration();
+
+		return configuration.getArray(key, filter);
 	}
 
 	public static Properties getProperties() {
@@ -120,7 +148,9 @@ public class PropsUtil {
 	}
 
 	public static Properties getProperties(boolean includeSystem) {
-		Properties properties = _getConfiguration().getProperties();
+		Configuration configuration = _getConfiguration();
+
+		Properties properties = configuration.getProperties();
 
 		if (!includeSystem) {
 			return properties;
@@ -143,7 +173,9 @@ public class PropsUtil {
 	public static Properties getProperties(
 		Company company, boolean includeSystem) {
 
-		Properties properties = _getConfiguration(company).getProperties();
+		Configuration configuration = _getConfiguration(company);
+
+		Properties properties = configuration.getProperties();
 
 		if (!includeSystem) {
 			return properties;
@@ -162,13 +194,17 @@ public class PropsUtil {
 	public static Properties getProperties(
 		Company company, String prefix, boolean removePrefix) {
 
-		return _getConfiguration(company).getProperties(prefix, removePrefix);
+		Configuration configuration = _getConfiguration(company);
+
+		return configuration.getProperties(prefix, removePrefix);
 	}
 
 	public static Properties getProperties(
 		String prefix, boolean removePrefix) {
 
-		return _getConfiguration().getProperties(prefix, removePrefix);
+		Configuration configuration = _getConfiguration();
+
+		return configuration.getProperties(prefix, removePrefix);
 	}
 
 	/**
@@ -181,19 +217,27 @@ public class PropsUtil {
 	public static void removeProperties(
 		Company company, Properties properties) {
 
-		_getConfiguration(company).removeProperties(properties);
+		Configuration configuration = _getConfiguration(company);
+
+		configuration.removeProperties(properties);
 	}
 
 	public static void removeProperties(Properties properties) {
-		_getConfiguration().removeProperties(properties);
+		Configuration configuration = _getConfiguration();
+
+		configuration.removeProperties(properties);
 	}
 
 	public static void set(Company company, String key, String value) {
-		_getConfiguration(company).set(key, value);
+		Configuration configuration = _getConfiguration(company);
+
+		configuration.set(key, value);
 	}
 
 	public static void set(String key, String value) {
-		_getConfiguration().set(key, value);
+		Configuration configuration = _getConfiguration();
+
+		configuration.set(key, value);
 	}
 
 	private static Configuration _getConfiguration() {
