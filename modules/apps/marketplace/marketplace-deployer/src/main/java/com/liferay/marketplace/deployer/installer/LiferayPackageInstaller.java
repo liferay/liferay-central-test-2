@@ -97,7 +97,8 @@ public class LiferayPackageInstaller
 			bundles.add(bundle);
 
 			_log.error(
-				"Uninstalling bundles " + bundles + " due to: " e.getMessage(),
+				"Uninstalling bundles " + bundles + " due to: " +
+					e.getMessage(),
 				e);
 
 			uninstallBundles(bundles);
