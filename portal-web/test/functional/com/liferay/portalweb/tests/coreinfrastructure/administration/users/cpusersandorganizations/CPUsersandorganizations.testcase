@@ -1442,7 +1442,7 @@
 		</execute>
 
 		<execute macro="ProductMenuHelper#expandCategory">
-			<var name="category" value="Users" />
+			<var name="category" value="Members" />
 		</execute>
 
 		<execute macro="ProductMenuHelper#gotoPortlet">
