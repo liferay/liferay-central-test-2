@@ -95,6 +95,7 @@ import com.liferay.portal.kernel.xml.Attribute;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
+import com.liferay.portal.search.index.IndexStatusManager;
 import com.liferay.wiki.model.WikiPage;
 
 import java.io.BufferedInputStream;
@@ -956,6 +957,12 @@ public class FileSystemImporter extends BaseImporter {
 
 		boolean hidden = layoutJSONObject.getBoolean("hidden");
 
+		String themeId = layoutJSONObject.getString("themeId");
+
+		String layoutCss = layoutJSONObject.getString("layoutCss");
+
+		String colorSchemeId = layoutJSONObject.getString("colorSchemeId");
+
 		Map<Locale, String> friendlyURLMap = new HashMap<>();
 
 		String friendlyURL = layoutJSONObject.getString("friendlyURL");
@@ -1037,6 +1044,21 @@ public class FileSystemImporter extends BaseImporter {
 					layout.getDescriptionMap(), layout.getKeywordsMap(),
 					layout.getRobotsMap(), type, hidden, friendlyURLMap,
 					layout.getIconImage(), null, serviceContext);
+			}
+
+			if (Validator.isNotNull(themeId) ||
+				Validator.isNotNull(colorSchemeId)) {
+
+				long layoutId = layout.getLayoutId();
+
+				/* If the themeId or the colorSchemeId are not null, then the
+				 * layout has a custom look and feel and should be updated in
+				 * the database.
+				 */
+
+				LayoutLocalServiceUtil.updateLookAndFeel(
+					groupId, privateLayout, layoutId, themeId, colorSchemeId,
+					layoutCss);
 			}
 
 			LayoutTypePortlet layoutTypePortlet =
@@ -1314,6 +1336,7 @@ public class FileSystemImporter extends BaseImporter {
 		primaryKeys.add(primaryKey);
 	}
 
+	@SuppressWarnings("unchecked")
 	protected void doImportResources() throws Exception {
 		serviceContext = new ServiceContext();
 
@@ -1339,7 +1362,6 @@ public class FileSystemImporter extends BaseImporter {
 			}
 
 			index();
-
 			if (_log.isDebugEnabled()) {
 				_log.debug(
 					"Indexing completed in " +
@@ -1468,6 +1490,7 @@ public class FileSystemImporter extends BaseImporter {
 		return name;
 	}
 
+	@SuppressWarnings("unchecked")
 	protected Map<Locale, String> getMap(
 		JSONObject layoutJSONObject, String name) {
 
