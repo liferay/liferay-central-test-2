@@ -366,10 +366,11 @@ public class CompanyImpl extends CompanyBaseImpl {
 	}
 
 	private static boolean _getPrefsPropsBoolean(
-		PortletPreferences preferences, Company company, String name,
+		PortletPreferences portletPreferences, Company company, String name,
 		boolean defaultValue) {
 
-		String value = preferences.getValue(name, PropsUtil.get(company, name));
+		String value = portletPreferences.getValue(
+			name, PropsUtil.get(company, name));
 
 		if (value != null) {
 			return GetterUtil.getBoolean(value);
@@ -379,10 +380,11 @@ public class CompanyImpl extends CompanyBaseImpl {
 	}
 
 	private static String _getPrefsPropsString(
-		PortletPreferences preferences, Company company, String name,
+		PortletPreferences portletPreferences, Company company, String name,
 		String defaultValue) {
 
-		String value = preferences.getValue(name, PropsUtil.get(company, name));
+		String value = portletPreferences.getValue(
+			name, PropsUtil.get(company, name));
 
 		if (value != null) {
 			return value;
