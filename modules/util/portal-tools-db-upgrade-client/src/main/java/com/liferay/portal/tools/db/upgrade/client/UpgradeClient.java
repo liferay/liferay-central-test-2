@@ -166,12 +166,12 @@ public class UpgradeClient {
 			BufferedReader bufferedReader = new BufferedReader(
 				inputStreamReader)) {
 
-			String line;
+			String line = null;
 
 			while ((line = bufferedReader.readLine()) != null) {
 				if (line.equals(
-						"Running modules upgrades. Connect to your Gogo " +
-							"shell to check the status.")) {
+						"Running modules upgrades. Connect to Gogo shell to " +
+							"check the status.")) {
 
 					break;
 				}
@@ -211,7 +211,7 @@ public class UpgradeClient {
 				}
 
 				System.out.print(
-					"Making sure all upgrades steps have been completed.");
+					"Checking to see if all upgrades steps have completed...");
 
 				String upgradeSteps = gogoTelnetClient.send(
 					"upgrade:list | grep Registered | grep step");
@@ -220,7 +220,7 @@ public class UpgradeClient {
 
 				if (upgrading) {
 					System.out.println(
-						"...one of your upgrades is still running or failed.");
+						" one of your upgrades is still running or failed.");
 					System.out.println("Are you sure you want to exit (y/N)?");
 
 					_consoleReader.setPrompt("");
@@ -232,7 +232,7 @@ public class UpgradeClient {
 					}
 				}
 				else {
-					System.out.println("... done.");
+					System.out.println(" done.");
 				}
 			}
 			catch (Exception e) {
