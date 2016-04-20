@@ -120,7 +120,7 @@ public class UpgradeClient {
 
 		_dataSourceProperties = _readProperties(_dataSourcePropertiesFile);
 
-		_serverPropertiesFile = new File("server.properties");
+		_serverPropertiesFile = new File("app-server.properties");
 
 		_serverProperties = _readProperties(_serverPropertiesFile);
 
