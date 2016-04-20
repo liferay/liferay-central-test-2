@@ -16,9 +16,12 @@ package com.liferay.exportimport.resources.importer.util;
 
 import com.liferay.document.library.kernel.model.DLFolderConstants;
 import com.liferay.dynamic.data.lists.model.DDLRecordSet;
+import com.liferay.dynamic.data.mapping.io.DDMFormJSONDeserializer;
+import com.liferay.dynamic.data.mapping.io.DDMFormXSDDeserializer;
 import com.liferay.dynamic.data.mapping.model.DDMStructure;
 import com.liferay.dynamic.data.mapping.model.DDMTemplateConstants;
 import com.liferay.dynamic.data.mapping.service.DDMStructureLocalServiceUtil;
+import com.liferay.dynamic.data.mapping.util.DDMXML;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -37,10 +40,17 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  * @author Ryan Park
  */
 public class ResourceImporter extends FileSystemImporter {
+
+	public ResourceImporter(
+		DDMFormJSONDeserializer ddmFormJSONDeserializer,
+		DDMFormXSDDeserializer ddmFormXSDDeserializer, DDMXML ddmxml) {
+
+		super(ddmFormJSONDeserializer, ddmFormXSDDeserializer, ddmxml);
+	}
 
 	@Override
 	public void importResources() throws Exception {
