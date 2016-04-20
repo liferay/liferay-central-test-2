@@ -251,8 +251,8 @@ public class UpgradeClient {
 
 	public void verifyProperties() {
 		try {
-			_verifyPortalUpgradeDatabaseProperties();
 			_verifyAppServerProperties();
+			_verifyPortalUpgradeDatabaseProperties();
 			_verifyPortalUpgradeExtProperties();
 
 			_saveProperties();
