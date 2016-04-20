@@ -115,15 +115,15 @@ public class UpgradeClient {
 		_jvmOpts = jvmOpts;
 		_logFile = logFile;
 
+		_appServerPropertiesFile = new File("app-server.properties");
+
+		_appServerProperties = _readProperties(_appServerPropertiesFile);
+
 		_portalUpgradeDatabasePropertiesFile = new File(
 			"portal-upgrade-datasource.properties");
 
 		_portalUpgradeDatabaseProperties = _readProperties(
 			_portalUpgradeDatabasePropertiesFile);
-
-		_appServerPropertiesFile = new File("app-server.properties");
-
-		_appServerProperties = _readProperties(_appServerPropertiesFile);
 
 		_portalUpgradeExtPropertiesFile = new File(
 			"portal-upgrade-ext.properties");
