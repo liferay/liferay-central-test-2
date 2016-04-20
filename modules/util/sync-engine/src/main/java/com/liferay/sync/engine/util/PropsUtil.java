@@ -64,6 +64,7 @@ public class PropsUtil {
 				path.toFile());
 
 			_compositeConfiguration.addConfiguration(extConfiguration);
+
 			_compositeConfiguration.addConfiguration(configuration);
 		}
 		catch (ConfigurationException ce) {
