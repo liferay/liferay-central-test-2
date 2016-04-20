@@ -94,13 +94,13 @@ public class ImporterFactory {
 			importer = larImporter;
 		}
 		else if ((resourcePaths != null) && !resourcePaths.isEmpty()) {
-			importer = _resourceImporter;
+			importer = getResourceImporter();
 
 			importer.setJournalConverter(_journalConverter);
 			importer.setResourcesDir(RESOURCES_DIR);
 		}
 		else if ((templatePaths != null) && !templatePaths.isEmpty()) {
-			importer = _resourceImporter;
+			importer = getResourceImporter();
 
 			Group group = _groupLocalService.getCompanyGroup(companyId);
 
@@ -109,7 +109,7 @@ public class ImporterFactory {
 			importer.setResourcesDir(TEMPLATES_DIR);
 		}
 		else if (Validator.isNotNull(resourcesDir)) {
-			importer = _fileSystemImporter;
+			importer = getFileSystemImporter();
 
 			importer.setJournalConverter(_journalConverter);
 			importer.setResourcesDir(resourcesDir);
@@ -164,15 +164,16 @@ public class ImporterFactory {
 		importer.afterPropertiesSet();
 	}
 
+	protected FileSystemImporter getFileSystemImporter() {
+		return new FileSystemImporter();
+	}
+
 	protected LARImporter getLARImporter() {
 		return new LARImporter();
 	}
 
-	@Reference(unbind = "-")
-	protected void setFileSystemImporter(
-		FileSystemImporter fileSystemImporter) {
-
-		_fileSystemImporter = fileSystemImporter;
+	protected ResourceImporter getResourceImporter() {
+		return new ResourceImporter();
 	}
 
 	@Reference(unbind = "-")
@@ -185,14 +186,7 @@ public class ImporterFactory {
 		_journalConverter = journalConverter;
 	}
 
-	@Reference(unbind = "-")
-	protected void setResourceImporter(ResourceImporter resourceImporter) {
-		_resourceImporter = resourceImporter;
-	}
-
-	private FileSystemImporter _fileSystemImporter;
 	private GroupLocalService _groupLocalService;
 	private JournalConverter _journalConverter;
-	private ResourceImporter _resourceImporter;
 
 }
