@@ -118,15 +118,18 @@ public class UpgradeClient {
 		_portalUpgradeDatabasePropertiesFile = new File(
 			"portal-upgrade-datasource.properties");
 
-		_portalUpgradeDatabaseProperties = _readProperties(_portalUpgradeDatabasePropertiesFile);
+		_portalUpgradeDatabaseProperties = _readProperties(
+			_portalUpgradeDatabasePropertiesFile);
 
 		_appServerPropertiesFile = new File("app-server.properties");
 
 		_appServerProperties = _readProperties(_appServerPropertiesFile);
 
-		_portalUpgradeExtPropertiesFile = new File("portal-upgrade-ext.properties");
+		_portalUpgradeExtPropertiesFile = new File(
+			"portal-upgrade-ext.properties");
 
-		_portalUpgradeExtProperties = _readProperties(_portalUpgradeExtPropertiesFile);
+		_portalUpgradeExtProperties = _readProperties(
+			_portalUpgradeExtPropertiesFile);
 	}
 
 	public void upgrade() throws IOException {
@@ -368,7 +371,9 @@ public class UpgradeClient {
 	}
 
 	private void _saveProperties() throws IOException {
-		_store(_portalUpgradeDatabaseProperties, _portalUpgradeDatabasePropertiesFile);
+		_store(
+			_portalUpgradeDatabaseProperties,
+			_portalUpgradeDatabasePropertiesFile);
 		_store(_portalUpgradeExtProperties, _portalUpgradeExtPropertiesFile);
 		_store(_appServerProperties, _appServerPropertiesFile);
 	}
@@ -383,6 +388,81 @@ public class UpgradeClient {
 
 				printWriter.println(key + "=" + value);
 			}
+		}
+	}
+
+	private void _verifyAppServerProperties() throws IOException {
+		String value = _appServerProperties.getProperty("dir");
+
+		if ((value == null) || value.isEmpty()) {
+			String response;
+
+			while (_appServer == null) {
+				System.out.print("[ ");
+
+				for (String appServer : _appServers.keySet()) {
+					System.out.print(appServer + " ");
+				}
+
+				System.out.println("]");
+
+				System.out.println("Please enter your app server (tomcat): ");
+
+				response = _consoleReader.readLine();
+
+				if (response.isEmpty()) {
+					response = "tomcat";
+				}
+
+				_appServer = _appServers.get(response);
+
+				if (_appServer == null) {
+					System.err.println(
+						response + " is not a supported app server");
+				}
+			}
+
+			File dir = _appServer.getDir();
+			File globalLibDir = _appServer.getGlobalLibDir();
+			File portalDir = _appServer.getPortalDir();
+
+			System.out.println(
+				"Please enter your app server dir (" + dir + "): ");
+
+			response = _consoleReader.readLine();
+
+			if (!response.isEmpty()) {
+				_appServer.setDirName(response);
+			}
+
+			System.out.println(
+				"Please enter your global lib dir (" + globalLibDir + "): ");
+
+			response = _consoleReader.readLine();
+
+			if (!response.isEmpty()) {
+				_appServer.setGlobalLibDirName(response);
+			}
+
+			System.out.println(
+				"Please enter your portal dir (" + portalDir + "): ");
+
+			response = _consoleReader.readLine();
+
+			if (!response.isEmpty()) {
+				_appServer.setPortalDirName(response);
+			}
+
+			_appServerProperties.setProperty("dir", dir.getCanonicalPath());
+			_appServerProperties.setProperty(
+				"global.dir.lib", _getRelativePath(dir, globalLibDir));
+			_appServerProperties.setProperty(
+				"portal.dir", _getRelativePath(dir, portalDir));
+		}
+		else {
+			_appServer = new AppServer(
+				value, _appServerProperties.getProperty("global.dir.lib"),
+				_appServerProperties.getProperty("portal.dir"));
 		}
 	}
 
@@ -502,81 +582,6 @@ public class UpgradeClient {
 		}
 	}
 
-	private void _verifyAppServerProperties() throws IOException {
-		String value = _appServerProperties.getProperty("dir");
-
-		if ((value == null) || value.isEmpty()) {
-			String response;
-
-			while (_appServer == null) {
-				System.out.print("[ ");
-
-				for (String appServer : _appServers.keySet()) {
-					System.out.print(appServer + " ");
-				}
-
-				System.out.println("]");
-
-				System.out.println("Please enter your app server (tomcat): ");
-
-				response = _consoleReader.readLine();
-
-				if (response.isEmpty()) {
-					response = "tomcat";
-				}
-
-				_appServer = _appServers.get(response);
-
-				if (_appServer == null) {
-					System.err.println(
-						response + " is not a supported app server");
-				}
-			}
-
-			File dir = _appServer.getDir();
-			File globalLibDir = _appServer.getGlobalLibDir();
-			File portalDir = _appServer.getPortalDir();
-
-			System.out.println(
-				"Please enter your app server dir (" + dir + "): ");
-
-			response = _consoleReader.readLine();
-
-			if (!response.isEmpty()) {
-				_appServer.setDirName(response);
-			}
-
-			System.out.println(
-				"Please enter your global lib dir (" + globalLibDir + "): ");
-
-			response = _consoleReader.readLine();
-
-			if (!response.isEmpty()) {
-				_appServer.setGlobalLibDirName(response);
-			}
-
-			System.out.println(
-				"Please enter your portal dir (" + portalDir + "): ");
-
-			response = _consoleReader.readLine();
-
-			if (!response.isEmpty()) {
-				_appServer.setPortalDirName(response);
-			}
-
-			_appServerProperties.setProperty("dir", dir.getCanonicalPath());
-			_appServerProperties.setProperty(
-				"global.dir.lib", _getRelativePath(dir, globalLibDir));
-			_appServerProperties.setProperty(
-				"portal.dir", _getRelativePath(dir, portalDir));
-		}
-		else {
-			_appServer = new AppServer(
-				value, _appServerProperties.getProperty("global.dir.lib"),
-				_appServerProperties.getProperty("portal.dir"));
-		}
-	}
-
 	private void _verifyPortalUpgradeExtProperties() throws IOException {
 		String value = _portalUpgradeExtProperties.getProperty("liferay.home");
 
@@ -623,13 +628,13 @@ public class UpgradeClient {
 	}
 
 	private AppServer _appServer;
-	private final ConsoleReader _consoleReader = new ConsoleReader();
-	private final Properties _portalUpgradeDatabaseProperties;
-	private final File _portalUpgradeDatabasePropertiesFile;
-	private final String _jvmOpts;
-	private final File _logFile;
 	private final Properties _appServerProperties;
 	private final File _appServerPropertiesFile;
+	private final ConsoleReader _consoleReader = new ConsoleReader();
+	private final String _jvmOpts;
+	private final File _logFile;
+	private final Properties _portalUpgradeDatabaseProperties;
+	private final File _portalUpgradeDatabasePropertiesFile;
 	private final Properties _portalUpgradeExtProperties;
 	private final File _portalUpgradeExtPropertiesFile;
 
