@@ -29,14 +29,11 @@ public class UpgradeResourcePermission extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		try {
-			runSQL("create index TempIndex on ResourcePermission (name)");
+		runSQL("create index N on ResourcePermission (name)");
 
-			upgradeResourcePermissions();
-		}
-		finally {
-			runSQL("drop index TempIndex on ResourcePermission");
-		}
+		upgradeResourcePermissions();
+
+		runSQL("drop index N on ResourcePermission");
 	}
 
 	protected void upgradeResourcePermissions() throws Exception {
