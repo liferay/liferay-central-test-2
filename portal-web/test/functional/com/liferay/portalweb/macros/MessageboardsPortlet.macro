@@ -39,6 +39,7 @@
 		</execute>
 
 		<execute function="Click" locator1="BasePortlet#OPTIONS_ICON" />
+
 		<execute function="AssertClick" locator1="MenuItem#CONFIGURATION" value1="Configuration" />
 
 		<execute function="Pause" locator1="10000" />
@@ -63,6 +64,7 @@
 		</execute>
 
 		<execute function="Click" locator1="BasePortlet#OPTIONS_ICON" />
+
 		<execute function="AssertClick" locator1="MenuItem#CONFIGURATION" value1="Configuration" />
 
 		<execute function="SelectFrame" locator1="IFrame#CONFIGURATION" />
@@ -90,6 +92,7 @@
 		</execute>
 
 		<execute function="Click" locator1="BasePortlet#OPTIONS_ICON" />
+
 		<execute function="AssertClick" locator1="MenuItem#CONFIGURATION" value1="Configuration" />
 
 		<execute function="SelectFrame" locator1="IFrame#CONFIGURATION" />
@@ -121,6 +124,7 @@
 		</execute>
 
 		<execute function="Click" locator1="BasePortlet#OPTIONS_ICON" />
+
 		<execute function="AssertClick" locator1="MenuItem#CONFIGURATION" value1="Configuration" />
 
 		<execute function="SelectFrame" locator1="IFrame#CONFIGURATION" />
@@ -284,6 +288,7 @@
 		</execute>
 
 		<execute function="Click" locator1="BasePortlet#OPTIONS_ICON" />
+
 		<execute function="AssertClick" locator1="MenuItem#CONFIGURATION" value1="Configuration" />
 
 		<execute function="SelectFrame" locator1="IFrame#CONFIGURATION" />
