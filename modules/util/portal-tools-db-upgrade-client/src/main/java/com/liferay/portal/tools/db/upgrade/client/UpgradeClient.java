@@ -285,7 +285,8 @@ public class UpgradeClient {
 				String fileName = file.getName();
 
 				if (file.isFile() && fileName.endsWith("jar")) {
-					sb.append(file.getCanonicalPath() + File.pathSeparator);
+					sb.append(file.getCanonicalPath());
+					sb.append(File.pathSeparator);
 				}
 				else if (file.isDirectory()) {
 					_appendClassPath(sb, file);
@@ -539,7 +540,6 @@ public class UpgradeClient {
 				port = "none";
 			}
 
-
 			System.out.println(
 				"Please enter your database name (" +
 					dataSource.getDatabaseName() + "): ");
@@ -620,7 +620,7 @@ public class UpgradeClient {
 
 	private static final Map<String, Database> _databases =
 		new LinkedHashMap<>();
-		
+
 	static {
 		_databases.put("db2", Database.getDB2Database());
 		_databases.put("mariadb", Database.getMariaDBDatabase());
