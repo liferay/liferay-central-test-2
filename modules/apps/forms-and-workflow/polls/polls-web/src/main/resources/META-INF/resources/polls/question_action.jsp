@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/polls/init.jsp" %>
+<%@ include file="/polls/init.jsp" %>
 
 <%
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
@@ -25,7 +25,7 @@ PollsQuestion question = (PollsQuestion)row.getObject();
 <liferay-ui:icon-menu direction="left-side" icon="<%= StringPool.BLANK %>" markupView="lexicon" message="<%= StringPool.BLANK %>" showWhenSingleIcon="<%= true %>">
 	<c:if test="<%= PollsQuestionPermissionChecker.contains(permissionChecker, question, ActionKeys.UPDATE) %>">
 		<portlet:renderURL var="editURL">
-			<portlet:param name="struts_action" value="/polls/edit_question" />
+			<portlet:param name="mvcRenderCommandName" value="/polls/edit_question" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="questionId" value="<%= String.valueOf(question.getQuestionId()) %>" />
 		</portlet:renderURL>
@@ -54,8 +54,8 @@ PollsQuestion question = (PollsQuestion)row.getObject();
 	</c:if>
 
 	<c:if test="<%= PollsQuestionPermissionChecker.contains(permissionChecker, question, ActionKeys.DELETE) %>">
-		<portlet:actionURL var="deleteURL">
-			<portlet:param name="struts_action" value="/polls/edit_question" />
+		<portlet:actionURL name="/polls/edit_question" var="deleteURL">
+			<portlet:param name="mvcActionCommand" value="/polls/edit_question" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="questionId" value="<%= String.valueOf(question.getQuestionId()) %>" />

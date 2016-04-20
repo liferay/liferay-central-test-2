@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/init.jsp" %>
+<%@ include file="/init.jsp" %>
 
 <%
 long questionId = GetterUtil.getLong(portletPreferences.getValue("questionId", StringPool.BLANK));

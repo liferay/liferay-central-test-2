@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/polls/init.jsp" %>
+<%@ include file="/polls/init.jsp" %>
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");
@@ -39,13 +39,13 @@ portletDisplay.setShowBackIcon(true);
 portletDisplay.setURLBack(redirect);
 %>
 
-<portlet:actionURL var="viewQuestionActionURL">
-	<portlet:param name="struts_action" value="/polls/view_question" />
+<portlet:actionURL name="/polls/view_question" var="viewQuestionActionURL">
+	<portlet:param name="mvcActionCommand" value="/polls/view_question" />
 </portlet:actionURL>
 
 <aui:form action="<%= viewQuestionActionURL %>" cssClass="container-fluid-1280" method="post" name="fm">
 	<portlet:renderURL var="viewQuestionRenderURL">
-		<portlet:param name="struts_action" value="/polls/view_question" />
+		<portlet:param name="mvcRenderCommandName" value="/polls/view_question" />
 		<portlet:param name="redirect" value="<%= redirect %>" />
 		<portlet:param name="questionId" value="<%= String.valueOf(question.getQuestionId()) %>" />
 	</portlet:renderURL>
@@ -82,7 +82,7 @@ portletDisplay.setURLBack(redirect);
 
 					<c:if test="<%= PollsQuestionPermissionChecker.contains(permissionChecker, question, ActionKeys.UPDATE) %>">
 						<portlet:renderURL var="viewResultsURL">
-							<portlet:param name="struts_action" value="/polls/view_question" />
+							<portlet:param name="mvcRenderCommandName" value="/polls/view_question" />
 							<portlet:param name="redirect" value="<%= redirect %>" />
 							<portlet:param name="questionId" value="<%= String.valueOf(question.getQuestionId()) %>" />
 							<portlet:param name="viewResults" value="1" />
@@ -108,10 +108,10 @@ portletDisplay.setURLBack(redirect);
 
 				</c:when>
 				<c:otherwise>
-					<%@ include file="/html/portlet/polls/view_question_results.jspf" %>
+					<%@ include file="/polls/view_question_results.jspf" %>
 
 					<portlet:renderURL var="viewQuestionURL">
-						<portlet:param name="struts_action" value="/polls/view_question" />
+						<portlet:param name="mvcRenderCommandName" value="/polls/view_question" />
 						<portlet:param name="redirect" value="<%= redirect %>" />
 						<portlet:param name="questionId" value="<%= String.valueOf(question.getQuestionId()) %>" />
 					</portlet:renderURL>

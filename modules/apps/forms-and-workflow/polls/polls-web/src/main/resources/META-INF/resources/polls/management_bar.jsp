@@ -14,12 +14,12 @@
  */
 --%>
 
-<%@ include file="/html/portlet/polls/init.jsp" %>
+<%@ include file="/polls/init.jsp" %>
 
 <%
 PortletURL portletURL = pollsDisplayContext.getBasePortletURL();
 
-portletURL.setParameter("struts_action", "/polls/view");
+portletURL.setParameter("mvcRenderCommandName", "/polls/view");
 %>
 
 <liferay-frontend:management-bar
