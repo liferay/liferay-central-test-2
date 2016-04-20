@@ -14,16 +14,36 @@
 
 package com.liferay.exportimport.resources.importer.util;
 
+import com.liferay.asset.kernel.service.AssetTagLocalService;
+import com.liferay.document.library.kernel.service.DLAppLocalService;
+import com.liferay.document.library.kernel.service.DLFileEntryLocalService;
+import com.liferay.document.library.kernel.service.DLFolderLocalService;
 import com.liferay.dynamic.data.mapping.io.DDMFormJSONDeserializer;
 import com.liferay.dynamic.data.mapping.io.DDMFormXSDDeserializer;
+import com.liferay.dynamic.data.mapping.service.DDMStructureLocalService;
+import com.liferay.dynamic.data.mapping.service.DDMTemplateLocalService;
 import com.liferay.dynamic.data.mapping.util.DDMXML;
+import com.liferay.journal.service.JournalArticleLocalService;
+import com.liferay.journal.service.JournalArticleService;
 import com.liferay.journal.util.JournalConverter;
 import com.liferay.portal.kernel.deploy.DeployManagerUtil;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.plugin.PluginPackage;
+import com.liferay.portal.kernel.portlet.PortletPreferencesFactory;
+import com.liferay.portal.kernel.search.IndexerRegistry;
 import com.liferay.portal.kernel.service.GroupLocalService;
+import com.liferay.portal.kernel.service.LayoutLocalService;
+import com.liferay.portal.kernel.service.LayoutPrototypeLocalService;
+import com.liferay.portal.kernel.service.LayoutSetLocalService;
+import com.liferay.portal.kernel.service.LayoutSetPrototypeLocalService;
+import com.liferay.portal.kernel.service.RepositoryLocalService;
+import com.liferay.portal.kernel.service.ThemeLocalService;
+import com.liferay.portal.kernel.util.MimeTypes;
+import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.TextFormatter;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.xml.SAXReader;
+import com.liferay.portal.search.index.IndexStatusManager;
 
 import java.net.URL;
 import java.net.URLConnection;
@@ -172,7 +192,16 @@ public class ImporterFactory {
 
 	protected FileSystemImporter getFileSystemImporter() {
 		return new FileSystemImporter(
-			_ddmFormJSONDeserializer, _ddmFormXSDDeserializer, _ddmxml);
+			_assetTagLocalService, _ddmFormJSONDeserializer,
+			_ddmFormXSDDeserializer, _ddmStructureLocalService,
+			_ddmTemplateLocalService, _ddmxml, _dlAppLocalService,
+			_dlFileEntryLocalService, _dlFolderLocalService,
+			_indexStatusManager, _indexerRegistry, _journalArticleLocalService,
+			_journalArticleService, _layoutLocalService,
+			_layoutPrototypeLocalService, _layoutSetLocalService,
+			_layoutSetPrototypeLocalService, _mimeTypes, _portal,
+			_portletPreferencesFactory, _repositoryLocalService, _saxReader,
+			_themeLocalService);
 	}
 
 	protected LARImporter getLARImporter() {
@@ -181,8 +210,20 @@ public class ImporterFactory {
 
 	protected ResourceImporter getResourceImporter() {
 		return new ResourceImporter(
-			_ddmFormJSONDeserializer, _ddmFormXSDDeserializer, _ddmxml);
+			_assetTagLocalService, _ddmFormJSONDeserializer,
+			_ddmFormXSDDeserializer, _ddmStructureLocalService,
+			_ddmTemplateLocalService, _ddmxml, _dlAppLocalService,
+			_dlFileEntryLocalService, _dlFolderLocalService,
+			_indexStatusManager, _indexerRegistry, _journalArticleLocalService,
+			_journalArticleService, _layoutLocalService,
+			_layoutPrototypeLocalService, _layoutSetLocalService,
+			_layoutSetPrototypeLocalService, _mimeTypes, _portal,
+			_portletPreferencesFactory, _repositoryLocalService, _saxReader,
+			_themeLocalService);
 	}
+
+	@Reference
+	private AssetTagLocalService _assetTagLocalService;
 
 	@Reference
 	private DDMFormJSONDeserializer _ddmFormJSONDeserializer;
@@ -191,12 +232,69 @@ public class ImporterFactory {
 	private DDMFormXSDDeserializer _ddmFormXSDDeserializer;
 
 	@Reference
+	private DDMStructureLocalService _ddmStructureLocalService;
+
+	@Reference
+	private DDMTemplateLocalService _ddmTemplateLocalService;
+
+	@Reference
 	private DDMXML _ddmxml;
+
+	@Reference
+	private DLAppLocalService _dlAppLocalService;
+
+	@Reference
+	private DLFileEntryLocalService _dlFileEntryLocalService;
+
+	@Reference
+	private DLFolderLocalService _dlFolderLocalService;
 
 	@Reference
 	private GroupLocalService _groupLocalService;
 
 	@Reference
+	private IndexerRegistry _indexerRegistry;
+
+	@Reference
+	private IndexStatusManager _indexStatusManager;
+
+	@Reference
+	private JournalArticleLocalService _journalArticleLocalService;
+
+	@Reference
+	private JournalArticleService _journalArticleService;
+
+	@Reference
 	private JournalConverter _journalConverter;
+
+	@Reference
+	private LayoutLocalService _layoutLocalService;
+
+	@Reference
+	private LayoutPrototypeLocalService _layoutPrototypeLocalService;
+
+	@Reference
+	private LayoutSetLocalService _layoutSetLocalService;
+
+	@Reference
+	private LayoutSetPrototypeLocalService _layoutSetPrototypeLocalService;
+
+	@Reference
+	private MimeTypes _mimeTypes;
+
+	@Reference
+	private Portal _portal;
+
+	@Reference
+	private PortletPreferencesFactory _portletPreferencesFactory;
+
+	@Reference
+	private RepositoryLocalService _repositoryLocalService;
+
+	@Reference
+	private SAXReader _saxReader;
+
+	@Reference
+	private ThemeLocalService _themeLocalService;
 
 }
