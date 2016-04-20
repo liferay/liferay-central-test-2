@@ -181,7 +181,7 @@ public class DataSourceFactoryImpl implements DataSourceFactory {
 			_log.debug("Created data source " + dataSource.getClass());
 		}
 
-		if ((PropsValues.RETRY_DATA_SOURCE_WRAPPER_MAX_RETRIES > 0) &&
+		if ((PropsValues.RETRY_DATA_SOURCE_MAX_RETRIES > 0) &&
 			(DBType.SYBASE ==
 				DBManagerUtil.getDBType(
 					DialectDetector.getDialect(dataSource)))) {
