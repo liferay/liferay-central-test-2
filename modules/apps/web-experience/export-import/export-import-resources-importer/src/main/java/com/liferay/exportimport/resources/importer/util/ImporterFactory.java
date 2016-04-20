@@ -137,6 +137,9 @@ public class ImporterFactory {
 		importer.setDeveloperModeEnabled(
 			pluginPackageProperties.isDeveloperModeEnabled());
 
+		importer.setIndexAfterImport(
+			pluginPackageProperties.indexAfterImport());
+
 		importer.setServletContext(servletContext);
 		importer.setServletContextName(servletContext.getServletContextName());
 
