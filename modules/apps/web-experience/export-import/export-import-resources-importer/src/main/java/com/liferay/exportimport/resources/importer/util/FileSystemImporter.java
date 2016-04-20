@@ -91,7 +91,6 @@ import com.liferay.portal.kernel.xml.Attribute;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
-import com.liferay.portal.search.index.IndexStatusManager;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -497,7 +496,7 @@ public class FileSystemImporter extends BaseImporter {
 			throw pe;
 		}
 
-		_ddmStructures.add(ddmStructure.getStructureKey());
+		_ddmStructureKeys.add(ddmStructure.getStructureKey());
 
 		addDDMTemplates(
 			ddmStructure.getStructureKey(),
@@ -1356,7 +1355,10 @@ public class FileSystemImporter extends BaseImporter {
 				_log.debug("Commence indexing");
 			}
 
-			index();
+			if (isIndexAfterImport()) {
+				index();
+			}
+
 			if (_log.isDebugEnabled()) {
 				_log.debug(
 					"Indexing completed in " +
@@ -1365,6 +1367,9 @@ public class FileSystemImporter extends BaseImporter {
 		}
 		finally {
 			IndexWriterHelperUtil.setIndexReadOnly(indexReadOnly);
+
+			_ddmStructureKeys.clear();
+			_primaryKeys.clear();
 		}
 	}
 
@@ -1561,7 +1566,7 @@ public class FileSystemImporter extends BaseImporter {
 			}
 		}
 
-		if (_ddmStructures.isEmpty()) {
+		if (_ddmStructureKeys.isEmpty()) {
 			return;
 		}
 
@@ -1571,7 +1576,7 @@ public class FileSystemImporter extends BaseImporter {
 		Indexer indexer = IndexerRegistryUtil.getIndexer(
 			JournalArticle.class.getName());
 
-		for (String ddmStructureKey : _ddmStructures) {
+		for (String ddmStructureKey : _ddmStructureKeys) {
 			List<JournalArticle> journalArticles =
 				JournalArticleServiceUtil.getArticlesByStructureId(
 					getGroupId(), ddmStructureKey, QueryUtil.ALL_POS,
@@ -1887,7 +1892,7 @@ public class FileSystemImporter extends BaseImporter {
 		FileSystemImporter.class);
 
 	private final Map<String, JSONObject> _assetJSONObjectMap = new HashMap<>();
-	private final Set<String> _ddmStructures = new HashSet<>();
+	private final Set<String> _ddmStructureKeys = new HashSet<>();
 	private String _defaultLayoutTemplateId;
 	private final Map<String, FileEntry> _fileEntries = new HashMap<>();
 	private final Pattern _fileEntryPattern = Pattern.compile(
