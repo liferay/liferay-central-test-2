@@ -120,9 +120,9 @@ public class Encryptor {
 	}
 
 	public static Key deserializeKey(String base64String) {
-		byte[] encodedKey = Base64.decode(base64String);
+		byte[] bytes = Base64.decode(base64String);
 
-		return new SecretKeySpec(encodedKey, Encryptor.KEY_ALGORITHM);
+		return new SecretKeySpec(bytes, Encryptor.KEY_ALGORITHM);
 	}
 
 	public static String digest(String text) {
