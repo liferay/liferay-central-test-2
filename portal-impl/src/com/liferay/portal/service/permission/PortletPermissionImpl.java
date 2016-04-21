@@ -318,7 +318,9 @@ public class PortletPermissionImpl implements PortletPermission {
 					permissionChecker, layout, portletId, actionId);
 			}
 
-			layout = ((VirtualLayout)layout).getSourceLayout();
+			VirtualLayout virtualLayout = (VirtualLayout)layout;
+
+			layout = virtualLayout.getSourceLayout();
 		}
 
 		if (!group.isLayoutSetPrototype() &&
