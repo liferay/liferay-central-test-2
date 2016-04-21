@@ -14,13 +14,15 @@
 
 package com.liferay.shopping.web.portlet.action;
 
+import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
+import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.struts.PortletAction;
+import com.liferay.shopping.constants.ShoppingPortletKeys;
 import com.liferay.shopping.exception.CartMinQuantityException;
 import com.liferay.shopping.exception.CouponActiveException;
 import com.liferay.shopping.exception.CouponEndDateException;
@@ -35,24 +37,26 @@ import com.liferay.shopping.util.ShoppingUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
-import javax.portlet.PortletConfig;
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
 
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
+import org.osgi.service.component.annotations.Component;
 
 /**
- * @author Brian Wing Shun Chan
+ * @author Peter Fellwock
  */
-public class CartAction extends PortletAction {
+@Component(
+	immediate = true,
+	property = {
+		"javax.portlet.name=" + ShoppingPortletKeys.SHOPPING,
+		"javax.portlet.name=" + ShoppingPortletKeys.SHOPPING_ADMIN,
+		"mvc.command.name=/shopping/cart"
+	},
+	service = MVCActionCommand.class
+)
+public class CartMVCActionCommand extends BaseMVCActionCommand {
 
 	@Override
-	public void processAction(
-			ActionMapping actionMapping, ActionForm actionForm,
-			PortletConfig portletConfig, ActionRequest actionRequest,
-			ActionResponse actionResponse)
+	protected void doProcessAction(
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
 		try {
@@ -71,7 +75,7 @@ public class CartAction extends PortletAction {
 
 				SessionErrors.add(actionRequest, e.getClass());
 
-				setForward(actionRequest, "portlet.shopping.error");
+				actionResponse.setRenderParameter("mvcPath", "/error.jsp");
 			}
 			else if (e instanceof CartMinQuantityException ||
 					 e instanceof CouponActiveException ||
@@ -85,17 +89,6 @@ public class CartAction extends PortletAction {
 				throw e;
 			}
 		}
-	}
-
-	@Override
-	public ActionForward render(
-			ActionMapping actionMapping, ActionForm actionForm,
-			PortletConfig portletConfig, RenderRequest renderRequest,
-			RenderResponse renderResponse)
-		throws Exception {
-
-		return actionMapping.findForward(
-			getForward(renderRequest, "portlet.shopping.cart"));
 	}
 
 	protected void updateCart(
