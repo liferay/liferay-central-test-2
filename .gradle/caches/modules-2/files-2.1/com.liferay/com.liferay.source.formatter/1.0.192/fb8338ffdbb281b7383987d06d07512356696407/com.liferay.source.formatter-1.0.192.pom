@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.liferay</groupId>
   <artifactId>com.liferay.source.formatter</artifactId>
-  <version>1.0.191</version>
+  <version>1.0.192</version>
   <licenses>
     <license>
       <name>LGPL 2.1</name>
@@ -49,6 +49,12 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
+      <groupId>com.liferay.portal</groupId>
+      <artifactId>com.liferay.portal.impl</artifactId>
+      <version>default</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
       <groupId>org.apache.maven</groupId>
       <artifactId>maven-plugin-api</artifactId>
       <version>3.0.4</version>
@@ -70,12 +76,6 @@
       <groupId>xerces</groupId>
       <artifactId>xercesImpl</artifactId>
       <version>2.11.0</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.liferay.portal</groupId>
-      <artifactId>com.liferay.portal.impl</artifactId>
-      <version>2.0.0</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
