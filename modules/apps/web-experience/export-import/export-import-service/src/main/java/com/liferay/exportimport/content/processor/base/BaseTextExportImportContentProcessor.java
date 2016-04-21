@@ -212,8 +212,8 @@ public class BaseTextExportImportContentProcessor
 				new PredicateFilter<String>() {
 
 					@Override
-					public boolean filter(String parameter) {
-						if (Validator.isNotNull(parameter)) {
+					public boolean filter(String imageId) {
+						if (Validator.isNotNull(imageId)) {
 							return true;
 						}
 
