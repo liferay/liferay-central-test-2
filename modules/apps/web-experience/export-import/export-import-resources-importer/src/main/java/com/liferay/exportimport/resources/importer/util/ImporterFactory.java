@@ -154,18 +154,13 @@ public class ImporterFactory {
 		throws Exception {
 
 		importer.setAppendVersion(pluginPackageProperties.isAppendVersion());
-
 		importer.setCompanyId(companyId);
-
 		importer.setDeveloperModeEnabled(
 			pluginPackageProperties.isDeveloperModeEnabled());
-
 		importer.setIndexAfterImport(
 			pluginPackageProperties.indexAfterImport());
-
 		importer.setServletContext(servletContext);
 		importer.setServletContextName(servletContext.getServletContextName());
-
 		importer.setTargetClassName(
 			pluginPackageProperties.getTargetClassName());
 
