@@ -20,7 +20,7 @@
 
 	<target name="dist-module-artifact" depends="download-artifact,record-artifact-change-log" />
 
-	<target name="dist-module-artifact-src" depends="copy-artifact" />
+	<target name="dist-module-artifact-lpkg" depends="copy-artifact" />
 
 	<target name="download-artifact">
 		<fail message="Missing artifact.properties file in ${releng.module.dir}.">

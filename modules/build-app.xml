@@ -49,7 +49,7 @@
 		<delete file="${dist.dir}/ticket.list.tmp" />
 	</target>
 
-	<target name="build-app-src" depends="dist-module-artifacts-src,write-lpkg-marketplace-properties">
+	<target name="build-app-lpkg" depends="dist-module-artifacts-lpkg,write-lpkg-marketplace-properties">
 		<zip basedir="${dist.dir}" destfile="${dist.dir}/${app.name}.lpkg" includes="*.jar,liferay-marketplace.properties" />
 	</target>
 
@@ -111,8 +111,8 @@
 		</subant>
 	</target>
 
-	<target name="dist-module-artifacts-src">
-		<subant genericantfile="${basedir}/build-app-module.xml" target="dist-module-artifact-src">
+	<target name="dist-module-artifacts-lpkg">
+		<subant genericantfile="${basedir}/build-app-module.xml" target="dist-module-artifact-lpkg">
 			<dirset dir="${modules.dir}" excludes="${build.modules.excludes}" includes="${app.module.dirs}" />
 			<property name="app.dir" value="${basedir}" />
 			<property name="dist.dir" value="${dist.dir}" />
@@ -198,7 +198,7 @@
 		<set-artifact-versions-previous-release app.version.previous.release="${app.version.previous.release}" />
 	</target>
 
-	<target name="get-lpkg-artifacts-list" depends="dist-module-artifacts-src">
+	<target name="get-lpkg-artifacts-list" depends="dist-module-artifacts-lpkg">
 		<pathconvert property="lpkg.artifacts.list" pathsep=",">
 			<chainedmapper>
 				<flattenmapper />
@@ -252,7 +252,7 @@
 
 		<echo append="true" file="${dist.dir}/liferay-marketplace.properties" message="${line.separator}" />
 
-		<echo append="true" file="${dist.dir}/liferay-marketplace.properties" message="title=Liferay Collaboration CE" />
+		<echo append="true" file="${dist.dir}/liferay-marketplace.properties" message="title=Liferay CE Collaboration" />
 
 		<echo append="true" file="${dist.dir}/liferay-marketplace.properties" message="${line.separator}" />
 
