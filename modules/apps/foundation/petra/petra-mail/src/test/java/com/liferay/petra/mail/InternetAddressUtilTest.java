@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.util.mail;
+package com.liferay.petra.mail;
 
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
@@ -23,7 +23,7 @@ import org.junit.Test;
 
 /**
  * @author Miguel Pastor
- * @see com.liferay.petra.mail.InternetAddressUtilTest
+ * @see com.liferay.util.mail.InternetAddressUtilTest
  */
 public class InternetAddressUtilTest {
 
