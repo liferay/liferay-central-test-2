@@ -1913,10 +1913,12 @@ public class FileSystemImporter extends BaseImporter {
 				"bread_crumb",
 				"com.liferay.portal.kernel.servlet.taglib.ui.BreadcrumbEntry"
 			},
-			{"document_library",
+			{
+				"document_library",
 				"com.liferay.portal.kernel.repository.model.FileEntry"
 			},
-			{"language_entry",
+			{
+				"language_entry",
 				"com.liferay.portal.kernel.servlet.taglib.ui.LanguageEntry"
 			},
 			{"rss_feed", "com.liferay.rss.web.util.RSSFeed"},
