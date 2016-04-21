@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.knowledge.base.listener;
+package com.liferay.knowledge.base.model.listener;
 
 import com.liferay.knowledge.base.service.KBArticleLocalService;
 import com.liferay.knowledge.base.service.KBTemplateLocalService;
