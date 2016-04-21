@@ -42,7 +42,7 @@ import org.osgi.service.component.annotations.Reference;
 	property = {"key=servlet.service.events.pre"},
 	service = LifecycleAction.class
 )
-public class JournalArticleServicePreAction extends Action {
+public class JournalServicePreAction extends Action {
 
 	@Override
 	public void run(HttpServletRequest request, HttpServletResponse response)
@@ -103,7 +103,7 @@ public class JournalArticleServicePreAction extends Action {
 	private static final String _PATH_PORTAL_LAYOUT = "/portal/layout";
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		JournalArticleServicePreAction.class);
+		JournalServicePreAction.class);
 
 	private AssetEntryLocalService _assetEntryLocalService;
 	private JournalArticleService _journalArticleService;
