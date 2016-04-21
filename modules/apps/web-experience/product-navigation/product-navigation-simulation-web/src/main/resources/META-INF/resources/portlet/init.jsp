@@ -44,6 +44,6 @@ page import="javax.portlet.PortletURL" %>
 
 <liferay-frontend:defineObjects />
 
-<portlet:defineObjects />
-
 <liferay-theme:defineObjects />
+
+<portlet:defineObjects />
