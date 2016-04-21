@@ -16,9 +16,9 @@ package com.liferay.knowledge.base.importer.util;
 
 import com.liferay.document.library.kernel.util.DLUtil;
 import com.liferay.knowledge.base.exception.KBArticleImportException;
-import com.liferay.knowledge.base.model.KBArticle;
 import com.liferay.knowledge.base.markdown.converter.MarkdownConverter;
 import com.liferay.knowledge.base.markdown.converter.factory.MarkdownConverterFactoryUtil;
+import com.liferay.knowledge.base.model.KBArticle;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
