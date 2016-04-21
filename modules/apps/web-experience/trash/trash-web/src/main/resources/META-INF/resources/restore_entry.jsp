@@ -17,10 +17,11 @@
 <%@ include file="/init.jsp" %>
 
 <%
+long trashEntryId = ParamUtil.getLong(request, "trashEntryId");
+
 long duplicateEntryId = ParamUtil.getLong(request, "duplicateEntryId");
 String oldName = ParamUtil.getString(request, "oldName");
 boolean overridable = ParamUtil.getBoolean(request, "overridable");
-long trashEntryId = ParamUtil.getLong(request, "trashEntryId");
 
 PortletURL backURL = renderResponse.createRenderURL();
 

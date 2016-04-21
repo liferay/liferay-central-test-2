@@ -279,14 +279,14 @@ public class TrashPortlet extends MVCPortlet {
 			PortletURL renderURL = liferayPortletResponse.createRenderURL();
 
 			renderURL.setParameter("mvcPath", "/restore_entry.jsp");
+			renderURL.setParameter("redirect", redirect);
+			renderURL.setParameter(
+				"trashEntryId", String.valueOf(ree.getTrashEntryId()));
 			renderURL.setParameter(
 				"duplicateEntryId", String.valueOf(ree.getDuplicateEntryId()));
 			renderURL.setParameter("oldName", ree.getOldName());
 			renderURL.setParameter(
 				"overridable", String.valueOf(ree.isOverridable()));
-			renderURL.setParameter("redirect", redirect);
-			renderURL.setParameter(
-				"trashEntryId", String.valueOf(ree.getTrashEntryId()));
 
 			actionRequest.setAttribute(WebKeys.REDIRECT, renderURL.toString());
 
