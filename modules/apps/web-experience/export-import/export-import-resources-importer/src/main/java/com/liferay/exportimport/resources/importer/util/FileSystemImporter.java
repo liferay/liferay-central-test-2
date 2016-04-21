@@ -1084,16 +1084,13 @@ public class FileSystemImporter extends BaseImporter {
 			if (Validator.isNotNull(themeId) ||
 				Validator.isNotNull(colorSchemeId)) {
 
-				long layoutId = layout.getLayoutId();
-
-				/* If the themeId or the colorSchemeId are not null, then the
-				 * layout has a custom look and feel and should be updated in
-				 * the database.
-				 */
+				// If the theme ID or the color scheme ID are not null, then the
+				// layout has a custom look and feel and should be updated in
+				// the database
 
 				layoutLocalService.updateLookAndFeel(
-					groupId, privateLayout, layoutId, themeId, colorSchemeId,
-					layoutCss);
+					groupId, privateLayout, layout.getLayoutId(), themeId,
+					colorSchemeId, layoutCss);
 			}
 
 			LayoutTypePortlet layoutTypePortlet =
@@ -1370,7 +1367,6 @@ public class FileSystemImporter extends BaseImporter {
 		primaryKeys.add(primaryKey);
 	}
 
-	@SuppressWarnings("unchecked")
 	protected void doImportResources() throws Exception {
 		serviceContext = new ServiceContext();
 
@@ -1530,7 +1526,6 @@ public class FileSystemImporter extends BaseImporter {
 		return name;
 	}
 
-	@SuppressWarnings("unchecked")
 	protected Map<Locale, String> getMap(
 		JSONObject layoutJSONObject, String name) {
 
