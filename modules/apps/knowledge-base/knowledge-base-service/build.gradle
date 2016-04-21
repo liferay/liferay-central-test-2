@@ -1,6 +1,6 @@
 buildService {
-		apiDir = "../knowledge-base-api/src/main/java"
-		testDir = "../knowledge-base-test/src/testIntegration/java"
+	apiDir = "../knowledge-base-api/src/main/java"
+	testDir = "../knowledge-base-test/src/testIntegration/java"
 }
 
 dependencies {
