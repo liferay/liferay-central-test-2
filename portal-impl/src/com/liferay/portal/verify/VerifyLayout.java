@@ -155,7 +155,6 @@ public class VerifyLayout extends VerifyProcess {
 					}
 
 				});
-
 			actionableDynamicQuery.setPerformActionMethod(
 				new ActionableDynamicQuery.
 					PerformActionMethod<LayoutFriendlyURL>() {
