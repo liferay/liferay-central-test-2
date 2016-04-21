@@ -439,9 +439,9 @@ public class UpgradePortletId extends UpgradeProcess {
 				String newRootPortletId = renamePortletIds[1];
 
 				updatePortlet(oldRootPortletId, newRootPortletId);
-				updateLayouts(oldRootPortletId, newRootPortletId, false);
 				updateLayoutRevisions(
 					oldRootPortletId, newRootPortletId, false);
+				updateLayouts(oldRootPortletId, newRootPortletId, false);
 			}
 		}
 	}
@@ -473,12 +473,12 @@ public class UpgradePortletId extends UpgradeProcess {
 				String newPortletInstanceKey =
 					newPortletInstance.getPortletInstanceKey();
 
-				updateResourcePermission(
-					portletId, newPortletInstanceKey, false);
 				updateInstanceablePortletPreferences(
 					portletId, newPortletInstanceKey);
-				updateLayouts(portletId, newPortletInstanceKey, true);
+				updateResourcePermission(
+					portletId, newPortletInstanceKey, false);
 				updateLayoutRevisions(portletId, newPortletInstanceKey, true);
+				updateLayouts(portletId, newPortletInstanceKey, true);
 			}
 		}
 	}
