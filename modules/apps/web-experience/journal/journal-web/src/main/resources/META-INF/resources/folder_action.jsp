@@ -164,8 +164,8 @@ else {
 		if (currentFolderId == folder.getFolderId()) {
 			PortletURL redirectURL = liferayPortletResponse.createRenderURL();
 
-			redirectURL.setParameter("folderId", String.valueOf(folder.getParentFolderId()));
 			redirectURL.setParameter("groupId", String.valueOf(folder.getGroupId()));
+			redirectURL.setParameter("folderId", String.valueOf(folder.getParentFolderId()));
 
 			redirect = redirectURL.toString();
 		}
