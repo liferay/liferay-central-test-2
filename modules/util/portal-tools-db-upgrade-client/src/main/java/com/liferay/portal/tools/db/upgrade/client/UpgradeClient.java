@@ -334,27 +334,27 @@ public class UpgradeClient {
 		return sb.toString();
 	}
 
-	private String _getRelativePath(File baseFile, File pathFile) {
-		return _getRelativePath(baseFile.toPath(), pathFile.toPath());
+	private String _getRelativeFileName(File baseFile, File pathFile) {
+		return _getRelativeFileName(baseFile.toPath(), pathFile.toPath());
 	}
 
-	private String _getRelativePath(Path basePath, Path path) {
+	private String _getRelativeFileName(Path basePath, Path path) {
 		Path relativePath = basePath.relativize(path);
 
 		return relativePath.toString();
 	}
 
-	private List<String> _getRelativePaths(
+	private List<String> _getRelativeFileNames(
 		File baseFile, List<File> pathFiles) {
 
-		List<String> relativePaths = new ArrayList<>(pathFiles.size());
+		List<String> relativeFileNames = new ArrayList<>(pathFiles.size());
 
 		for (File pathFile : pathFiles) {
-			relativePaths.add(
-				_getRelativePath(baseFile.toPath(), pathFile.toPath()));
+			relativeFileNames.add(
+				_getRelativeFileName(baseFile.toPath(), pathFile.toPath()));
 		}
 
-		return relativePaths;
+		return relativeFileNames;
 	}
 
 	private void _printHelp() {
@@ -495,11 +495,11 @@ public class UpgradeClient {
 			_appServerProperties.setProperty(
 				"extra.lib.dirs",
 				StringUtil.join(
-					_getRelativePaths(dir, _appServer.getExtraLibDirs()), ','));
+					_getRelativeFileNames(dir, _appServer.getExtraLibDirs()), ','));
 			_appServerProperties.setProperty(
-				"global.lib.dir", _getRelativePath(dir, globalLibDir));
+				"global.lib.dir", _getRelativeFileName(dir, globalLibDir));
 			_appServerProperties.setProperty(
-				"portal.dir", _getRelativePath(dir, portalDir));
+				"portal.dir", _getRelativeFileName(dir, portalDir));
 		}
 		else {
 			_appServer = new AppServer(
