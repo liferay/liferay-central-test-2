@@ -544,6 +544,16 @@ public class UpgradeClient {
 			}
 
 			System.out.println(
+				"Please enter your database host (" + dataSource.getHost() +
+					"): ");
+
+			response = _consoleReader.readLine();
+
+			if (!response.isEmpty()) {
+				dataSource.setHost(response);
+			}
+
+			System.out.println(
 				"Please enter your database JDBC driver class name(" +
 					dataSource.getClassName() + "): ");
 
@@ -563,15 +573,6 @@ public class UpgradeClient {
 				dataSource.setProtocol(response);
 			}
 
-			System.out.println(
-				"Please enter your database host (" + dataSource.getHost() +
-					"): ");
-
-			response = _consoleReader.readLine();
-
-			if (!response.isEmpty()) {
-				dataSource.setHost(response);
-			}
 
 			String port = null;
 
