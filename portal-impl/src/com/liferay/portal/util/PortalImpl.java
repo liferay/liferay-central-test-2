@@ -3181,7 +3181,7 @@ public class PortalImpl implements Portal {
 	public Locale getLocale(HttpServletRequest request) {
 		Locale locale = (Locale)request.getAttribute(WebKeys.LOCALE);
 
-		if (locale == _NULL_HOLDER) {
+		if (locale == _NULL_LOCALE) {
 			return null;
 		}
 
@@ -3189,7 +3189,7 @@ public class PortalImpl implements Portal {
 			locale = getLocale(request, null, false);
 
 			if (locale == null) {
-				request.setAttribute(WebKeys.LOCALE, _NULL_HOLDER);
+				request.setAttribute(WebKeys.LOCALE, _NULL_LOCALE);
 			}
 			else {
 				request.setAttribute(WebKeys.LOCALE, locale);
@@ -8133,7 +8133,7 @@ public class PortalImpl implements Portal {
 
 	private static final String _LOCALHOST = "localhost";
 
-	private static final Locale _NULL_HOLDER;
+	private static final Locale _NULL_LOCALE;
 
 	private static final String _PRIVATE_GROUP_SERVLET_MAPPING =
 		PropsValues.LAYOUT_FRIENDLY_URL_PRIVATE_GROUP_SERVLET_MAPPING;
@@ -8155,7 +8155,7 @@ public class PortalImpl implements Portal {
 	static {
 		Locale locale = Locale.getDefault();
 
-		_NULL_HOLDER = (Locale)locale.clone();
+		_NULL_LOCALE = (Locale)locale.clone();
 	}
 
 	private final String[] _allSystemGroups;
