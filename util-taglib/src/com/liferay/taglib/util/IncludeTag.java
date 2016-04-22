@@ -398,11 +398,21 @@ public class IncludeTag extends AttributesTagSupport {
 			return;
 		}
 
+		StringBundler sb = new StringBundler(8);
+
+		sb.append("Unable to find ");
+		sb.append(page);
+		sb.append(" in the context ");
+
 		String contextPath = servletContext.getContextPath();
 
 		if (contextPath.equals(StringPool.BLANK)) {
 			contextPath = StringPool.SLASH;
 		}
+
+		sb.append(contextPath);
+
+		sb.append(".");
 
 		boolean portalContext = false;
 
@@ -415,14 +425,6 @@ public class IncludeTag extends AttributesTagSupport {
 		if (contextPath.equals(portalContextPath)) {
 			portalContext = true;
 		}
-
-		StringBundler sb = new StringBundler(8);
-
-		sb.append("Unable to find ");
-		sb.append(page);
-		sb.append(" in the context ");
-		sb.append(contextPath);
-		sb.append(".");
 
 		if (isPortalPage(page)) {
 			if (portalContext) {
