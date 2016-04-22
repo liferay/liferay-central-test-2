@@ -449,9 +449,9 @@ public class UpgradeClient {
 			}
 
 			File dir = _appServer.getDir();
+			List<File> extraDirs = _appServer.getExtraDirs();
 			File globalLibDir = _appServer.getGlobalLibDir();
 			File portalDir = _appServer.getPortalDir();
-			List<File> serverDirs = _appServer.getExtraDirs();
 
 			System.out.println(
 				"Please enter your application server directory (" + dir +
@@ -495,12 +495,12 @@ public class UpgradeClient {
 
 			_appServerProperties.setProperty("dir", dir.getCanonicalPath());
 			_appServerProperties.setProperty(
+				"extra.dirs",
+				StringUtil.join(_getRelativePaths(dir, extraDirs), ','));
+			_appServerProperties.setProperty(
 				"global.lib.dir", _getRelativePath(dir, globalLibDir));
 			_appServerProperties.setProperty(
 				"portal.dir", _getRelativePath(dir, portalDir));
-			_appServerProperties.setProperty(
-				"server.dirs",
-				StringUtil.join(_getRelativePaths(dir, serverDirs), ','));
 		}
 		else {
 			_appServer = new AppServer(
