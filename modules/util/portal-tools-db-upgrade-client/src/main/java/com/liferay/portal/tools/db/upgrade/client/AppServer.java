@@ -78,17 +78,17 @@ public class AppServer {
 
 	public AppServer(
 		String dirName, String globalLibDirName, String portalDirName,
-		String serverDirNames) {
+		String extraDirNames) {
 
 		_dir = new File(dirName);
 		_globalLibDir = new File(dirName, globalLibDirName);
 		_portalDir = new File(dirName, portalDirName);
 
-		_serverDirs = new ArrayList<>();
+		_extraDirs = new ArrayList<>();
 
-		if (serverDirNames != null) {
-			for (String serverDir : serverDirNames.split(",")) {
-				_serverDirs.add(new File(dirName, serverDir));
+		if (extraDirNames != null) {
+			for (String extraDir : extraDirNames.split(",")) {
+				_extraDirs.add(new File(dirName, extraDir));
 			}
 		}
 	}
@@ -114,11 +114,11 @@ public class AppServer {
 	}
 
 	public String getServerDirNames() {
-		return StringUtil.join(_serverDirs, ',');
+		return StringUtil.join(_extraDirs, ',');
 	}
 
-	public List<File> getServerDirs() {
-		return _serverDirs;
+	public List<File> getExtraDirs() {
+		return _extraDirs;
 	}
 
 	public void setDirName(String dirName) {
@@ -133,10 +133,10 @@ public class AppServer {
 		_portalDir = new File(_dir, portalDirName);
 	}
 
-	public void setServerDirNames(String serverDirNames) {
-		if (serverDirNames != null) {
-			for (String serverDir : serverDirNames.split(",")) {
-				_serverDirs.add(new File(serverDirNames, serverDir));
+	public void setExtraDirNames(String extraDirNames) {
+		if (extraDirNames != null) {
+			for (String extraDirName : extraDirNames.split(",")) {
+				_extraDirs.add(new File(extraDirNames, extraDirName));
 			}
 		}
 	}
@@ -144,6 +144,6 @@ public class AppServer {
 	private File _dir;
 	private File _globalLibDir;
 	private File _portalDir;
-	private final List<File> _serverDirs;
+	private final List<File> _extraDirs;
 
 }
