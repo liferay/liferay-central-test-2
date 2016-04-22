@@ -67,25 +67,25 @@ public class AppServer {
 	}
 
 	public static AppServer getWildFlyAppServer() {
-		String extraDirPrefix = "/modules/system/layers/base/";
+		String extraLibDirPrefix = "/modules/system/layers/base/";
 
 		return new AppServer(
 			"../../wildfly-10.0.0",
-			extraDirPrefix + "javax/mail," + extraDirPrefix +
-				"javax/persistence," + extraDirPrefix + "javax/servlet",
+			extraLibDirPrefix + "javax/mail," + extraLibDirPrefix +
+				"javax/persistence," + extraLibDirPrefix + "javax/servlet",
 			"/modules/com/liferay/portal/main",
 			"/standalone/deployments/ROOT.war");
 	}
 
 	public AppServer(
-		String dirName, String extraDirNames, String globalLibDirName,
+		String dirName, String extraLibDirNames, String globalLibDirName,
 		String portalDirName) {
 
 		_dir = new File(dirName);
 
-		if (extraDirNames != null) {
-			for (String extraDir : extraDirNames.split(",")) {
-				_extraDirs.add(new File(dirName, extraDir));
+		if (extraLibDirNames != null) {
+			for (String extraLibDir : extraLibDirNames.split(",")) {
+				_extraLibDirs.add(new File(dirName, extraLibDir));
 			}
 		}
 
@@ -97,12 +97,12 @@ public class AppServer {
 		return _dir;
 	}
 
-	public String getExtraDirNames() {
-		return StringUtil.join(_extraDirs, ',');
+	public String getExtraLibDirNames() {
+		return StringUtil.join(_extraLibDirs, ',');
 	}
 
-	public List<File> getExtraDirs() {
-		return _extraDirs;
+	public List<File> getExtraLibDirs() {
+		return _extraLibDirs;
 	}
 
 	public File getGlobalLibDir() {
@@ -125,10 +125,10 @@ public class AppServer {
 		_dir = new File(dirName);
 	}
 
-	public void setExtraDirNames(String extraDirNames) {
-		if (extraDirNames != null) {
-			for (String extraDirName : extraDirNames.split(",")) {
-				_extraDirs.add(new File(extraDirNames, extraDirName));
+	public void setExtraLibDirNames(String extraLibDirNames) {
+		if (extraLibDirNames != null) {
+			for (String extraLibDirName : extraLibDirNames.split(",")) {
+				_extraLibDirs.add(new File(extraLibDirNames, extraLibDirName));
 			}
 		}
 	}
@@ -142,7 +142,7 @@ public class AppServer {
 	}
 
 	private File _dir;
-	private final List<File> _extraDirs = new ArrayList<>();
+	private final List<File> _extraLibDirs = new ArrayList<>();
 	private File _globalLibDir;
 	private File _portalDir;
 
