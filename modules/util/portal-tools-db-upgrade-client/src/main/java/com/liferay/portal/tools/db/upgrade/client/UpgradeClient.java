@@ -449,7 +449,6 @@ public class UpgradeClient {
 			}
 
 			File dir = _appServer.getDir();
-			List<File> extraDirs = _appServer.getExtraDirs();
 			File globalLibDir = _appServer.getGlobalLibDir();
 			File portalDir = _appServer.getPortalDir();
 
@@ -496,7 +495,8 @@ public class UpgradeClient {
 			_appServerProperties.setProperty("dir", dir.getCanonicalPath());
 			_appServerProperties.setProperty(
 				"extra.dirs",
-				StringUtil.join(_getRelativePaths(dir, extraDirs), ','));
+				StringUtil.join(
+					_getRelativePaths(dir, _appServer.getExtraDirs()), ','));
 			_appServerProperties.setProperty(
 				"global.lib.dir", _getRelativePath(dir, globalLibDir));
 			_appServerProperties.setProperty(
