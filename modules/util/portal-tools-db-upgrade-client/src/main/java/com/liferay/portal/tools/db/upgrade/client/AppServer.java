@@ -97,6 +97,10 @@ public class AppServer {
 		return _dir;
 	}
 
+	public String getExtraDirNames() {
+		return StringUtil.join(_extraDirs, ',');
+	}
+
 	public List<File> getExtraDirs() {
 		return _extraDirs;
 	}
@@ -115,10 +119,6 @@ public class AppServer {
 
 	public File getPortalLibDir() {
 		return new File(_portalDir, "/WEB-INF/lib");
-	}
-
-	public String getExtraDirNames() {
-		return StringUtil.join(_extraDirs, ',');
 	}
 
 	public void setDirName(String dirName) {
