@@ -448,11 +448,6 @@
 			<finder-column name="companyId" />
 			<finder-column name="parentGroupId" />
 		</finder>
-		<finder name="C_G_P" return-type="Collection">
-			<finder-column name="companyId" />
-			<finder-column name="groupId" />
-			<finder-column name="parentGroupId" />
-		</finder>
 		<finder name="C_C_C" return-type="Group" unique="true">
 			<finder-column name="companyId" />
 			<finder-column name="classNameId" />
