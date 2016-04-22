@@ -172,8 +172,8 @@ public class UpgradeClient {
 
 			while ((line = bufferedReader.readLine()) != null) {
 				if (line.equals(
-						"Running modules upgrades. Connect to your Gogo Shell" +
-							" to check the status.")) {
+						"Running modules upgrades. Connect to Gogo Shell " +
+							"to check the status.")) {
 
 					break;
 				}
@@ -242,7 +242,7 @@ public class UpgradeClient {
 			}
 		}
 
-		System.out.println("Exiting Gogo shell.");
+		System.out.println("Exiting from Gogo shell.");
 
 		_close(process.getErrorStream());
 		_close(process.getInputStream());
