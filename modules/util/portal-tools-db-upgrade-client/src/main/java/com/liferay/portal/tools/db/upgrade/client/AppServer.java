@@ -67,11 +67,12 @@ public class AppServer {
 	}
 
 	public static AppServer getWildFlyAppServer() {
+		String extraDirPrefix = "/modules/system/layers/base/";
+
 		return new AppServer(
 			"../../wildfly-10.0.0",
-			"/modules/system/layers/base/javax/mail," +
-				"/modules/system/layers/base/javax/persistence," +
-					"/modules/system/layers/base/javax/servlet",
+			extraDirPrefix + "javax/mail," + extraDirPrefix +
+				"javax/persistence," + extraDirPrefix + "javax/servlet",
 			"/modules/com/liferay/portal/main",
 			"/standalone/deployments/ROOT.war");
 	}
