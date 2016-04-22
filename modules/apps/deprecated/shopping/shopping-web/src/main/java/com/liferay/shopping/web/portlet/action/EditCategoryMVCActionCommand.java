@@ -41,7 +41,8 @@ import org.osgi.service.component.annotations.Component;
 	property = {
 		"javax.portlet.name=" + ShoppingPortletKeys.SHOPPING,
 		"javax.portlet.name=" + ShoppingPortletKeys.SHOPPING_ADMIN,
-		"mvc.command.name=/shopping/edit_category"
+		"mvc.command.name=/shopping/edit_category",
+		"mvc.command.name=/shopping/select_category"
 	},
 	service = MVCActionCommand.class
 )
