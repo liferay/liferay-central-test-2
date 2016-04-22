@@ -23,13 +23,9 @@ import com.liferay.portal.upgrade.v7_0_0.util.GroupTable;
  */
 public class UpgradeGroup extends UpgradeProcess {
 
-	protected void createIndexes() throws Exception {
+	protected void createIndex() throws Exception {
 		try (LoggingTimer loggingTimer = new LoggingTimer()) {
 			runSQL("create index IX_8257E37B on Group_ (classNameId, classPK)");
-
-			runSQL(
-				"create index IX_B41E3F78 on Group_ " +
-					"(companyId, groupId, parentGroupId)");
 		}
 	}
 
@@ -37,7 +33,7 @@ public class UpgradeGroup extends UpgradeProcess {
 	protected void doUpgrade() throws Exception {
 		alter(GroupTable.class, new AlterColumnType("name", "STRING null"));
 
-		createIndexes();
+		createIndex();
 	}
 
 }
