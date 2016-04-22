@@ -42,13 +42,11 @@ public class EncryptorTest extends PowerMockito {
 
 	@Before
 	public void setUp() {
-		_propsUtil = new PropsUtil();
-
-		_props = _propsUtil.getProps();
+		_props = PropsUtil.getProps();
 
 		Props props = mock(Props.class);
 
-		_propsUtil.setProps(props);
+		PropsUtil.setProps(props);
 
 		when(
 			props.get(Mockito.eq(PropsKeys.COMPANY_ENCRYPTION_ALGORITHM))
@@ -65,7 +63,7 @@ public class EncryptorTest extends PowerMockito {
 
 	@After
 	public void tearDown() {
-		_propsUtil.setProps(_props);
+		PropsUtil.setProps(_props);
 	}
 
 	@Test
@@ -83,6 +81,5 @@ public class EncryptorTest extends PowerMockito {
 	}
 
 	private Props _props;
-	private PropsUtil _propsUtil;
 
 }
