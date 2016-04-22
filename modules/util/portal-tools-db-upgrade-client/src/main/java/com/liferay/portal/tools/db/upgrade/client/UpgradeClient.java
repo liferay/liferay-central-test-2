@@ -407,6 +407,7 @@ public class UpgradeClient {
 
 			while (enumeration.hasMoreElements()) {
 				String key = (String)enumeration.nextElement();
+
 				String value = properties.getProperty(key);
 
 				value = value.replace('\\', '/');
