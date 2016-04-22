@@ -503,9 +503,9 @@ public class UpgradeClient {
 		}
 		else {
 			_appServer = new AppServer(
-				value, _appServerProperties.getProperty("global.lib.dir"),
-				_appServerProperties.getProperty("portal.dir"),
-				_appServerProperties.getProperty("extra.dirs"));
+				value, _appServerProperties.getProperty("extra.dirs"),
+				_appServerProperties.getProperty("global.lib.dir"),
+				_appServerProperties.getProperty("portal.dir"));
 		}
 	}
 
