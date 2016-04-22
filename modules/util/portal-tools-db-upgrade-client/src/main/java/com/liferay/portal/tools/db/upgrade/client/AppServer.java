@@ -117,7 +117,7 @@ public class AppServer {
 		return new File(_portalDir, "/WEB-INF/lib");
 	}
 
-	public String getServerDirNames() {
+	public String getExtraDirNames() {
 		return StringUtil.join(_extraDirs, ',');
 	}
 
