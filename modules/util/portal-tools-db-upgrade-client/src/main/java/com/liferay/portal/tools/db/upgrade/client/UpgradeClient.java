@@ -323,7 +323,7 @@ public class UpgradeClient {
 		_appendClassPath(sb, new File("."));
 		_appendClassPath(sb, new File(_appServer.getDir(), "bin"));
 		_appendClassPath(sb, _appServer.getGlobalLibDir());
-		_appendClassPath(sb, _appServer.getServerDirs());
+		_appendClassPath(sb, _appServer.getExtraDirs());
 
 		File portalClassesDir = _appServer.getPortalClassesDir();
 
@@ -450,7 +450,7 @@ public class UpgradeClient {
 			File dir = _appServer.getDir();
 			File globalLibDir = _appServer.getGlobalLibDir();
 			File portalDir = _appServer.getPortalDir();
-			List<File> serverDirs = _appServer.getServerDirs();
+			List<File> serverDirs = _appServer.getExtraDirs();
 
 			System.out.println(
 				"Please enter your application server directory (" + dir +
@@ -489,7 +489,7 @@ public class UpgradeClient {
 			response = _consoleReader.readLine();
 
 			if (!response.isEmpty()) {
-				_appServer.setServerDirNames(response);
+				_appServer.setExtraDirNames(response);
 			}
 
 			_appServerProperties.setProperty("dir", dir.getCanonicalPath());
