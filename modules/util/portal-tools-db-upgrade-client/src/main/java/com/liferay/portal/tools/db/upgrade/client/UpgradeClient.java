@@ -495,7 +495,8 @@ public class UpgradeClient {
 			_appServerProperties.setProperty(
 				"extra.lib.dirs",
 				StringUtil.join(
-					_getRelativeFileNames(dir, _appServer.getExtraLibDirs()), ','));
+					_getRelativeFileNames(
+						dir, _appServer.getExtraLibDirs()), ','));
 			_appServerProperties.setProperty(
 				"global.lib.dir", _getRelativeFileName(dir, globalLibDir));
 			_appServerProperties.setProperty(
