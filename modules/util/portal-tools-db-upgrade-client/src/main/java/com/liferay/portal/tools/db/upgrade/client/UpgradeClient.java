@@ -482,8 +482,8 @@ public class UpgradeClient {
 			}
 
 			System.out.println(
-				"Please enter a comma delimited list of any extra directories" +
-					" you need for the upgrade (" +
+				"Please enter a comma delimited list of any extra " +
+					"directories needed for the upgrade (" +
 						_appServer.getExtraDirNames() + "): ");
 
 			response = _consoleReader.readLine();
