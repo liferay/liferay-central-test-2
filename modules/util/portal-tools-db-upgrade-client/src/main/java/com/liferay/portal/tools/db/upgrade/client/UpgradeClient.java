@@ -573,7 +573,6 @@ public class UpgradeClient {
 				dataSource.setProtocol(response);
 			}
 
-
 			String port = null;
 
 			if (dataSource.getPort() > 0) {
