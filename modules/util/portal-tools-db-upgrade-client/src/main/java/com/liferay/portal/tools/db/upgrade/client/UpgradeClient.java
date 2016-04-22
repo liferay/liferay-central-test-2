@@ -494,7 +494,7 @@ public class UpgradeClient {
 
 			_appServerProperties.setProperty("dir", dir.getCanonicalPath());
 			_appServerProperties.setProperty(
-				"global.dir.lib", _getRelativePath(dir, globalLibDir));
+				"global.lib.dir", _getRelativePath(dir, globalLibDir));
 			_appServerProperties.setProperty(
 				"portal.dir", _getRelativePath(dir, portalDir));
 			_appServerProperties.setProperty(
@@ -503,7 +503,7 @@ public class UpgradeClient {
 		}
 		else {
 			_appServer = new AppServer(
-				value, _appServerProperties.getProperty("global.dir.lib"),
+				value, _appServerProperties.getProperty("global.lib.dir"),
 				_appServerProperties.getProperty("portal.dir"),
 				_appServerProperties.getProperty("server.dirs"));
 		}
