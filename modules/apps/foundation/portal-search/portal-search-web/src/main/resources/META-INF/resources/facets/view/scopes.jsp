@@ -21,12 +21,7 @@ if (Validator.isNull(fieldParam)) {
 	fieldParam = String.valueOf(searchDisplayContext.getSearchScopeGroupId());
 }
 
-ScopeSearchFacetDisplayContext scopeSearchFacetDisplayContext =
-	new ScopeSearchFacetDisplayContext(
-		facet, fieldParam, locale, dataJSONObject.getInt("frequencyThreshold"),
-		dataJSONObject.getInt("maxTerms"),
-		dataJSONObject.getBoolean("showAssetCount", true),
-		GroupLocalServiceUtil.getService());
+ScopeSearchFacetDisplayContext scopeSearchFacetDisplayContext = new ScopeSearchFacetDisplayContext(facet, fieldParam, locale, dataJSONObject.getInt("frequencyThreshold"), dataJSONObject.getInt("maxTerms"), dataJSONObject.getBoolean("showAssetCount", true), GroupLocalServiceUtil.getService());
 %>
 
 <c:choose>
