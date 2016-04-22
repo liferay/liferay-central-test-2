@@ -37,6 +37,9 @@ public class BlogsDemo extends BasePortalInstanceLifecycleListener {
 
 	@Override
 	public void portalInstanceRegistered(Company company) throws Exception {
+		_basicUserDemoDataCreator.create(
+			company.getCompanyId(), "nikki.prudencio@liferay.com");
+
 		_omniAdminUserDemoDataCreator.create(
 			company.getCompanyId(), "sergio.gonzalez@liferay.com");
 
@@ -45,14 +48,12 @@ public class BlogsDemo extends BasePortalInstanceLifecycleListener {
 
 		_siteAdminUserDemoDataCreator.create(
 			guestGroup.getGroupId(), "sharon.choi@liferay.com");
-		_basicUserDemoDataCreator.create(
-			company.getCompanyId(), "nikki.prudencio@liferay.com");
 	}
 
 	@Deactivate
 	protected void deactivate() throws PortalException {
-		_omniAdminUserDemoDataCreator.delete();
 		_basicUserDemoDataCreator.delete();
+		_omniAdminUserDemoDataCreator.delete();
 		_siteAdminUserDemoDataCreator.delete();
 	}
 
