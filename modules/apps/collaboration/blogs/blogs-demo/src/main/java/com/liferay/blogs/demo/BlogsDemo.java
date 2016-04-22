@@ -69,16 +69,16 @@ public class BlogsDemo extends BasePortalInstanceLifecycleListener {
 		_groupLocalService = groupLocalService;
 	}
 
+	@Reference(target = ModuleServiceLifecycle.PORTAL_INITIALIZED, unbind = "-")
+	protected void setModuleServiceLifecycle(
+		ModuleServiceLifecycle moduleServiceLifecycle) {
+	}
+
 	@Reference(unbind = "-")
 	protected void setOmniAdminUserDemoDataCreator(
 		OmniAdminUserDemoDataCreator omniAdminUserDemoDataCreator) {
 
 		_omniAdminUserDemoDataCreator = omniAdminUserDemoDataCreator;
-	}
-
-	@Reference(unbind = "-", target = ModuleServiceLifecycle.PORTAL_INITIALIZED)
-	protected void setModuleServiceLifecycle(
-		ModuleServiceLifecycle moduleServiceLifecycle) {
 	}
 
 	@Reference(unbind = "-")
