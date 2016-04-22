@@ -48,14 +48,13 @@ public class DDMFormRendererTopHeadDynamicInclude extends BaseDynamicInclude {
 
 		PrintWriter printWriter = response.getWriter();
 
-		StringBundler sb = new StringBundler(6);
+		StringBundler sb = new StringBundler(5);
 
 		sb.append("<link href=\"");
 		sb.append(themeDisplay.getPortalURL());
 		sb.append(PortalUtil.getPathProxy());
 		sb.append(_servletContext.getContextPath());
-		sb.append("/css/main.css");
-		sb.append("\" rel=\"stylesheet\" type = \"text/css\" />");
+		sb.append("/css/main.css\" rel=\"stylesheet\" type = \"text/css\" />");
 
 		printWriter.println(sb.toString());
 	}
