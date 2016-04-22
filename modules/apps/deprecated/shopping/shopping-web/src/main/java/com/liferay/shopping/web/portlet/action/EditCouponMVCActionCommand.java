@@ -14,6 +14,8 @@
 
 package com.liferay.shopping.web.portlet.action;
 
+import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
+import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
@@ -22,7 +24,7 @@ import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
-import com.liferay.portal.struts.PortletAction;
+import com.liferay.shopping.constants.ShoppingPortletKeys;
 import com.liferay.shopping.exception.CouponCodeException;
 import com.liferay.shopping.exception.CouponDateException;
 import com.liferay.shopping.exception.CouponDescriptionException;
@@ -42,25 +44,41 @@ import java.util.Calendar;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
-import javax.portlet.PortletConfig;
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
 
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
+import org.osgi.service.component.annotations.Component;
 
 /**
  * @author Brian Wing Shun Chan
  * @author Huang Jie
+ * @author Peter Fellwock
  */
-public class EditCouponAction extends PortletAction {
+@Component(
+	immediate = true,
+	property = {
+		"javax.portlet.name=" + ShoppingPortletKeys.SHOPPING,
+		"javax.portlet.name=" + ShoppingPortletKeys.SHOPPING_ADMIN,
+		"mvc.command.name=/shopping/edit_coupon"
+	},
+	service = MVCActionCommand.class
+)
+public class EditCouponMVCActionCommand extends BaseMVCActionCommand {
+
+	protected void deleteCoupons(ActionRequest actionRequest) throws Exception {
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		long[] deleteCouponIds = ParamUtil.getLongValues(
+			actionRequest, "rowIds");
+
+		for (long deleteCouponId : deleteCouponIds) {
+			ShoppingCouponServiceUtil.deleteCoupon(
+				themeDisplay.getScopeGroupId(), deleteCouponId);
+		}
+	}
 
 	@Override
-	public void processAction(
-			ActionMapping actionMapping, ActionForm actionForm,
-			PortletConfig portletConfig, ActionRequest actionRequest,
-			ActionResponse actionResponse)
+	protected void doProcessAction(
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
@@ -81,7 +99,7 @@ public class EditCouponAction extends PortletAction {
 
 				SessionErrors.add(actionRequest, e.getClass());
 
-				setForward(actionRequest, "portlet.shopping.error");
+				actionResponse.setRenderParameter("mvcPath", "/error.jsp");
 			}
 			else if (e instanceof CouponCodeException ||
 					 e instanceof CouponDateException ||
@@ -116,46 +134,6 @@ public class EditCouponAction extends PortletAction {
 			else {
 				throw e;
 			}
-		}
-	}
-
-	@Override
-	public ActionForward render(
-			ActionMapping actionMapping, ActionForm actionForm,
-			PortletConfig portletConfig, RenderRequest renderRequest,
-			RenderResponse renderResponse)
-		throws Exception {
-
-		try {
-			ActionUtil.getCoupon(renderRequest);
-		}
-		catch (Exception e) {
-			if (e instanceof NoSuchCouponException ||
-				e instanceof PrincipalException) {
-
-				SessionErrors.add(renderRequest, e.getClass());
-
-				return actionMapping.findForward("portlet.shopping.error");
-			}
-			else {
-				throw e;
-			}
-		}
-
-		return actionMapping.findForward(
-			getForward(renderRequest, "portlet.shopping.edit_coupon"));
-	}
-
-	protected void deleteCoupons(ActionRequest actionRequest) throws Exception {
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		long[] deleteCouponIds = ParamUtil.getLongValues(
-			actionRequest, "rowIds");
-
-		for (long deleteCouponId : deleteCouponIds) {
-			ShoppingCouponServiceUtil.deleteCoupon(
-				themeDisplay.getScopeGroupId(), deleteCouponId);
 		}
 	}
 
