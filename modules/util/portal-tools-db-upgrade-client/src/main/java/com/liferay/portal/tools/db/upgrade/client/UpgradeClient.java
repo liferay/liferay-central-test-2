@@ -463,7 +463,7 @@ public class UpgradeClient {
 			}
 
 			System.out.println(
-				"Please enter your extra directories (" +
+				"Please enter your extra library directories (" +
 					_appServer.getExtraLibDirNames() + "): ");
 
 			response = _consoleReader.readLine();
