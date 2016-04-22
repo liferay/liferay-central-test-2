@@ -463,6 +463,16 @@ public class UpgradeClient {
 			}
 
 			System.out.println(
+				"Please enter your extra directories (" +
+					_appServer.getExtraDirNames() + "): ");
+
+			response = _consoleReader.readLine();
+
+			if (!response.isEmpty()) {
+				_appServer.setExtraDirNames(response);
+			}
+
+			System.out.println(
 				"Please enter your global library directory (" + globalLibDir +
 					"): ");
 
@@ -479,17 +489,6 @@ public class UpgradeClient {
 
 			if (!response.isEmpty()) {
 				_appServer.setPortalDirName(response);
-			}
-
-			System.out.println(
-				"Please enter a comma delimited list of any extra " +
-					"directories needed for the upgrade (" +
-						_appServer.getExtraDirNames() + "): ");
-
-			response = _consoleReader.readLine();
-
-			if (!response.isEmpty()) {
-				_appServer.setExtraDirNames(response);
 			}
 
 			_appServerProperties.setProperty("dir", dir.getCanonicalPath());
