@@ -323,7 +323,7 @@ public class UpgradeClient {
 		_appendClassPath(sb, new File("."));
 		_appendClassPath(sb, new File(_appServer.getDir(), "bin"));
 		_appendClassPath(sb, _appServer.getGlobalLibDir());
-		_appendClassPath(sb, _appServer.getExtraDirs());
+		_appendClassPath(sb, _appServer.getExtraLibDirs());
 
 		File portalClassesDir = _appServer.getPortalClassesDir();
 
@@ -464,12 +464,12 @@ public class UpgradeClient {
 
 			System.out.println(
 				"Please enter your extra directories (" +
-					_appServer.getExtraDirNames() + "): ");
+					_appServer.getExtraLibDirNames() + "): ");
 
 			response = _consoleReader.readLine();
 
 			if (!response.isEmpty()) {
-				_appServer.setExtraDirNames(response);
+				_appServer.setExtraLibDirNames(response);
 			}
 
 			System.out.println(
@@ -493,9 +493,9 @@ public class UpgradeClient {
 
 			_appServerProperties.setProperty("dir", dir.getCanonicalPath());
 			_appServerProperties.setProperty(
-				"extra.dirs",
+				"extra.lib.dirs",
 				StringUtil.join(
-					_getRelativePaths(dir, _appServer.getExtraDirs()), ','));
+					_getRelativePaths(dir, _appServer.getExtraLibDirs()), ','));
 			_appServerProperties.setProperty(
 				"global.lib.dir", _getRelativePath(dir, globalLibDir));
 			_appServerProperties.setProperty(
@@ -503,7 +503,7 @@ public class UpgradeClient {
 		}
 		else {
 			_appServer = new AppServer(
-				value, _appServerProperties.getProperty("extra.dirs"),
+				value, _appServerProperties.getProperty("extra.lib.dirs"),
 				_appServerProperties.getProperty("global.lib.dir"),
 				_appServerProperties.getProperty("portal.dir"));
 		}
