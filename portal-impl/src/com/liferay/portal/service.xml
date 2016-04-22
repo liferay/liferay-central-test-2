@@ -435,7 +435,7 @@
 			<finder-column name="companyId" />
 			<finder-column name="active" />
 		</finder>
-		<finder name="C_Cpk" return-type="Collection">
+		<finder name="C_CPK" return-type="Collection">
 			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
 		</finder>
