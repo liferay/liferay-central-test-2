@@ -28,11 +28,13 @@ public class JSONCurlUtil {
 	public static String get(String curlOptions, String jsonPath)
 		throws Exception {
 
+		Runtime runtime = Runtime.getRuntime();
+
+		StringBuilder sb = new StringBuilder();
+
 		curlOptions = curlOptions.trim();
 
 		curlOptions = curlOptions.replaceAll("\\s+\\\\?\\s+", " ");
-
-		StringBuilder sb = new StringBuilder();
 
 		for (String curlOption : curlOptions.split(" ")) {
 			if (curlOption.matches("https?:\\/\\/.+")) {
@@ -41,7 +43,7 @@ public class JSONCurlUtil {
 			else if (curlOption.matches("[^\\=]*\\=[^\\=]*")) {
 				int x = curlOption.indexOf("=");
 
-				String param = curlOption.substring(0, x);
+				String name = curlOption.substring(0, x);
 				String value = curlOption.substring(x + 1);
 
 				if (value.startsWith("{") && value.endsWith("}") &&
@@ -53,7 +55,7 @@ public class JSONCurlUtil {
 				}
 
 				sb.append(" ");
-				sb.append(param);
+				sb.append(name);
 				sb.append("=");
 				sb.append(value);
 			}
@@ -62,8 +64,6 @@ public class JSONCurlUtil {
 				sb.append(curlOption);
 			}
 		}
-
-		Runtime runtime = Runtime.getRuntime();
 
 		System.out.println("curl " + sb.toString());
 
