@@ -36,6 +36,9 @@ import javax.portlet.ReadOnlyException;
  */
 public abstract class BaseUpgradePortletPreferences extends UpgradeProcess {
 
+	/**
+	 * @deprecated As of 7.0.0, with no direct replacement
+	 */
 	@Deprecated
 	protected void deletePortletPreferences(long portletPreferencesId)
 		throws Exception {
@@ -311,6 +314,7 @@ public abstract class BaseUpgradePortletPreferences extends UpgradeProcess {
 					}
 
 					ps2.executeBatch();
+
 					ps3.executeBatch();
 				}
 			}
