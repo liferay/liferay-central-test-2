@@ -15,6 +15,8 @@
 package com.liferay.shopping.web.portlet.action;
 
 import com.liferay.portal.kernel.module.configuration.ConfigurationProviderUtil;
+import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
+import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
@@ -28,6 +30,7 @@ import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.shopping.configuration.ShoppingGroupServiceOverriddenConfiguration;
 import com.liferay.shopping.constants.ShoppingConstants;
+import com.liferay.shopping.constants.ShoppingPortletKeys;
 import com.liferay.shopping.exception.BillingCityException;
 import com.liferay.shopping.exception.BillingCountryException;
 import com.liferay.shopping.exception.BillingEmailAddressException;
@@ -58,21 +61,36 @@ import com.liferay.shopping.util.ShoppingUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
-import javax.portlet.PortletConfig;
 
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionMapping;
+import org.osgi.service.component.annotations.Component;
 
 /**
- * @author Brian Wing Shun Chan
+ * @author Peter Fellwock
  */
-public class CheckoutAction extends CartAction {
+@Component(
+	immediate = true,
+	property = {
+		"javax.portlet.name=" + ShoppingPortletKeys.SHOPPING,
+		"javax.portlet.name=" + ShoppingPortletKeys.SHOPPING_ADMIN,
+		"mvc.command.name=/shopping/checkout"
+	},
+	service = MVCActionCommand.class
+)
+public class CheckoutMVCActionCommand extends BaseMVCActionCommand {
+
+	protected void checkout(ActionRequest actionRequest) throws Exception {
+		if (!hasLatestOrder(actionRequest)) {
+			ThemeDisplay themeDisplay =
+				(ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
+
+			ShoppingOrderLocalServiceUtil.addLatestOrder(
+				themeDisplay.getUserId(), themeDisplay.getScopeGroupId());
+		}
+	}
 
 	@Override
-	public void processAction(
-			ActionMapping actionMapping, ActionForm actionForm,
-			PortletConfig portletConfig, ActionRequest actionRequest,
-			ActionResponse actionResponse)
+	protected void doProcessAction(
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
 		if (redirectToLogin(actionRequest, actionResponse)) {
@@ -84,10 +102,10 @@ public class CheckoutAction extends CartAction {
 		if (cmd.equals(Constants.CHECKOUT)) {
 			checkout(actionRequest);
 
-			setForward(actionRequest, "portlet.shopping.checkout_first");
+			actionResponse.setRenderParameter("mvcPath", "/checkout_first.jsp");
 		}
 		else if (!hasLatestOrder(actionRequest)) {
-			setForward(actionRequest, "portlet.shopping.checkout_third");
+			actionResponse.setRenderParameter("mvcPath", "/checkout_third.jsp");
 		}
 		else if (cmd.equals(Constants.SAVE)) {
 			saveLatestOrder(actionRequest, actionResponse);
@@ -96,7 +114,8 @@ public class CheckoutAction extends CartAction {
 			try {
 				updateLatestOrder(actionRequest);
 
-				setForward(actionRequest, "portlet.shopping.checkout_second");
+				actionResponse.setRenderParameter(
+					"mvcPath", "checkout_second.jsp");
 			}
 			catch (Exception e) {
 				if (e instanceof BillingCityException ||
@@ -124,11 +143,11 @@ public class CheckoutAction extends CartAction {
 
 					SessionErrors.add(actionRequest, e.getClass());
 
-					setForward(
-						actionRequest, "portlet.shopping.checkout_first");
+					actionResponse.setRenderParameter(
+						"mvcPath", "checkout_first.jsp");
 				}
 				else if (e instanceof PrincipalException) {
-					setForward(actionRequest, "portlet.shopping.error");
+					actionResponse.setRenderParameter("mvcPath", "/error.jsp");
 				}
 				else {
 					throw e;
@@ -136,20 +155,10 @@ public class CheckoutAction extends CartAction {
 			}
 		}
 		else if (cmd.equals(Constants.VIEW)) {
-			setForward(actionRequest, "portlet.shopping.checkout_third");
+			actionResponse.setRenderParameter("mvcPath", "/checkout_third.jsp");
 		}
 		else {
-			setForward(actionRequest, "portlet.shopping.checkout_first");
-		}
-	}
-
-	protected void checkout(ActionRequest actionRequest) throws Exception {
-		if (!hasLatestOrder(actionRequest)) {
-			ThemeDisplay themeDisplay =
-				(ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
-
-			ShoppingOrderLocalServiceUtil.addLatestOrder(
-				themeDisplay.getUserId(), themeDisplay.getScopeGroupId());
+			actionResponse.setRenderParameter("mvcPath", "/checkout_first.jsp");
 		}
 	}
 
@@ -214,7 +223,6 @@ public class CheckoutAction extends CartAction {
 		}
 	}
 
-	@Override
 	protected boolean isCheckMethodOnProcessAction() {
 		return _CHECK_METHOD_ON_PROCESS_ACTION;
 	}
