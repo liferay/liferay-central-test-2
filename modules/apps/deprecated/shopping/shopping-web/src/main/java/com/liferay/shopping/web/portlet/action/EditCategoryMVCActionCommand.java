@@ -14,13 +14,15 @@
 
 package com.liferay.shopping.web.portlet.action;
 
+import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
+import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.struts.PortletAction;
+import com.liferay.shopping.constants.ShoppingPortletKeys;
 import com.liferay.shopping.exception.CategoryNameException;
 import com.liferay.shopping.exception.NoSuchCategoryException;
 import com.liferay.shopping.model.ShoppingCategory;
@@ -28,24 +30,34 @@ import com.liferay.shopping.service.ShoppingCategoryServiceUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
-import javax.portlet.PortletConfig;
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
 
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
+import org.osgi.service.component.annotations.Component;
 
 /**
- * @author Brian Wing Shun Chan
+ * @author Peter Fellwock
  */
-public class EditCategoryAction extends PortletAction {
+@Component(
+	immediate = true,
+	property = {
+		"javax.portlet.name=" + ShoppingPortletKeys.SHOPPING,
+		"javax.portlet.name=" + ShoppingPortletKeys.SHOPPING_ADMIN,
+		"mvc.command.name=/shopping/edit_category"
+	},
+	service = MVCActionCommand.class
+)
+public class EditCategoryMVCActionCommand extends BaseMVCActionCommand {
+
+	protected void deleteCategory(ActionRequest actionRequest)
+		throws Exception {
+
+		long categoryId = ParamUtil.getLong(actionRequest, "categoryId");
+
+		ShoppingCategoryServiceUtil.deleteCategory(categoryId);
+	}
 
 	@Override
-	public void processAction(
-			ActionMapping actionMapping, ActionForm actionForm,
-			PortletConfig portletConfig, ActionRequest actionRequest,
-			ActionResponse actionResponse)
+	protected void doProcessAction(
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
@@ -66,7 +78,7 @@ public class EditCategoryAction extends PortletAction {
 
 				SessionErrors.add(actionRequest, e.getClass());
 
-				setForward(actionRequest, "portlet.shopping.error");
+				actionResponse.setRenderParameter("mvcPath", "/error.jsp");
 			}
 			else if (e instanceof CategoryNameException) {
 				SessionErrors.add(actionRequest, e.getClass());
@@ -75,41 +87,6 @@ public class EditCategoryAction extends PortletAction {
 				throw e;
 			}
 		}
-	}
-
-	@Override
-	public ActionForward render(
-			ActionMapping actionMapping, ActionForm actionForm,
-			PortletConfig portletConfig, RenderRequest renderRequest,
-			RenderResponse renderResponse)
-		throws Exception {
-
-		try {
-			ActionUtil.getCategory(renderRequest);
-		}
-		catch (Exception e) {
-			if (e instanceof NoSuchCategoryException ||
-				e instanceof PrincipalException) {
-
-				SessionErrors.add(renderRequest, e.getClass());
-
-				return actionMapping.findForward("portlet.shopping.error");
-			}
-			else {
-				throw e;
-			}
-		}
-
-		return actionMapping.findForward(
-			getForward(renderRequest, "portlet.shopping.edit_category"));
-	}
-
-	protected void deleteCategory(ActionRequest actionRequest)
-		throws Exception {
-
-		long categoryId = ParamUtil.getLong(actionRequest, "categoryId");
-
-		ShoppingCategoryServiceUtil.deleteCategory(categoryId);
 	}
 
 	protected void updateCategory(ActionRequest actionRequest)
