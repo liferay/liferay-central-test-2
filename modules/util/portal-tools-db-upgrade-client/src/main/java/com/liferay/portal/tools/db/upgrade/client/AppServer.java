@@ -62,8 +62,8 @@ public class AppServer {
 	public static AppServer getWebSphereAppServer() {
 		return new AppServer(
 			"../../websphere-8.5.5.0", "/lib/ext",
-			"/profiles/liferay/installedApps/liferay-cell/liferay-portal.ear/" +
-				"liferay-portal.war",
+			"/profiles/liferay/installedApps/liferay-cell/liferay-portal.ear" +
+				"/liferay-portal.war",
 			"");
 	}
 
@@ -71,9 +71,9 @@ public class AppServer {
 		return new AppServer(
 			"../../wildfly-10.0.0", "/modules/com/liferay/portal/main",
 			"/standalone/deployments/ROOT.war",
-			"/modules/system/layers/base/javax/mail/," +
-				"/modules/system/layers/base/javax/persistence/," +
-					"/modules/system/layers/base/javax/servlet/");
+			"/modules/system/layers/base/javax/mail," +
+				"/modules/system/layers/base/javax/persistence," +
+					"/modules/system/layers/base/javax/servlet");
 	}
 
 	public AppServer(
