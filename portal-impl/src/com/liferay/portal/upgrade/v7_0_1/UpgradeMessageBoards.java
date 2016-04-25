@@ -50,22 +50,25 @@ public class UpgradeMessageBoards extends BaseUpgradePortletPreferences {
 				"priorities" + StringPool.UNDERLINE +
 					LanguageUtil.getLanguageId(availableLocale);
 
-			String[] threadPriorities = portletPreferences.getValues(
+			String[] oldThreadPriorities = portletPreferences.getValues(
 				key, StringPool.EMPTY_ARRAY);
 
-			if (ArrayUtil.isNotEmpty(threadPriorities)) {
-				String[] upgradedThreadPriorities =
-					new String[threadPriorities.length];
-
-				for (int i = 0; i < threadPriorities.length; i++) {
-					String[] parts = StringUtil.split(threadPriorities[i]);
-
-					upgradedThreadPriorities[i] = StringUtil.merge(
-						parts, StringPool.PIPE);
-				}
-
-				portletPreferences.setValues(key, upgradedThreadPriorities);
+			if (ArrayUtil.isEmpty(oldThreadPriorities)) {
+				continue;
 			}
+
+			String[] newThreadPriorities =
+				new String[oldThreadPriorities.length];
+
+			for (int i = 0; i < oldThreadPriorities.length; i++) {
+				String[] oldThreadPrioritiesParts = StringUtil.split(
+					oldThreadPriorities[i]);
+
+				newThreadPriorities[i] = StringUtil.merge(
+					oldThreadPrioritiesParts, StringPool.PIPE);
+			}
+
+			portletPreferences.setValues(key, newThreadPriorities);
 		}
 	}
 
