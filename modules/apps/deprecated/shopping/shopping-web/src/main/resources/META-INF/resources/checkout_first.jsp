@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/shopping/init.jsp" %>
+<%@ include file="/init.jsp" %>
 
 <%
 ShoppingOrder order = ShoppingOrderLocalServiceUtil.getLatestOrder(user.getUserId(), themeDisplay.getScopeGroupId());
@@ -55,12 +55,12 @@ if (request.getParameter("ccExpMonth") == null) {
 List addresses = AddressServiceUtil.getAddresses(Contact.class.getName(), contact.getContactId());
 %>
 
-<liferay-util:include page="/html/portlet/shopping/tabs1.jsp" servletContext="<%= application %>">
+<liferay-util:include page="/tabs1.jsp" servletContext="<%= application %>">
 	<liferay-util:param name="tabs1" value="cart" />
 </liferay-util:include>
 
-<portlet:actionURL var="checkoutURL">
-	<portlet:param name="struts_action" value="/shopping/checkout" />
+<portlet:actionURL name="/shopping/checkout" var="checkoutURL">
+	<portlet:param name="mvcActionCommand" value="/shopping/checkout" />
 </portlet:actionURL>
 
 <aui:form action="<%= checkoutURL %>" cssClass="container-fluid-1280" method="post" name="fm">
@@ -104,7 +104,7 @@ List addresses = AddressServiceUtil.getAddresses(Contact.class.getName(), contac
 					</aui:select>
 				</c:if>
 
-				<%@ include file="/html/portlet/shopping/checkout_first_billing_address.jspf" %>
+				<%@ include file="/checkout_first_billing_address.jspf" %>
 			</aui:fieldset>
 		</aui:fieldset>
 
@@ -143,7 +143,7 @@ List addresses = AddressServiceUtil.getAddresses(Contact.class.getName(), contac
 					</aui:select>
 				</c:if>
 
-				<%@ include file="/html/portlet/shopping/checkout_first_shipping_address.jspf" %>
+				<%@ include file="/checkout_first_shipping_address.jspf" %>
 			</aui:fieldset>
 		</aui:fieldset>
 
@@ -246,7 +246,7 @@ List addresses = AddressServiceUtil.getAddresses(Contact.class.getName(), contac
 		<aui:button cssClass="btn-lg" type="submit" value="continue" />
 
 		<portlet:renderURL var="cartURL">
-			<portlet:param name="struts_action" value="/shopping/cart" />
+			<portlet:param name="mvcRenderCommandName" value="/shopping/cart" />
 		</portlet:renderURL>
 
 		<aui:button cssClass="btn-lg" href="<%= cartURL.toString() %>" value="back-to-cart" />

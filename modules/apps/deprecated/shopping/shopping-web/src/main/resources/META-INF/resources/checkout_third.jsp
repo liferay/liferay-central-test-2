@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/shopping/init.jsp" %>
+<%@ include file="/init.jsp" %>
 
 <%
 try {
@@ -26,7 +26,7 @@ catch (Exception e) {
 }
 %>
 
-<liferay-util:include page="/html/portlet/shopping/tabs1.jsp" servletContext="<%= application %>">
+<liferay-util:include page="/tabs1.jsp" servletContext="<%= application %>">
 	<liferay-util:param name="tabs1" value="cart" />
 </liferay-util:include>
 
@@ -55,7 +55,7 @@ catch (Exception e) {
 	</aui:fieldset-group>
 
 	<portlet:renderURL var="continueShoppingURL">
-		<portlet:param name="struts_action" value="/shopping/view" />
+		<portlet:param name="mvcRenderCommandName" value="/shopping/view" />
 	</portlet:renderURL>
 
 	<aui:button-row>

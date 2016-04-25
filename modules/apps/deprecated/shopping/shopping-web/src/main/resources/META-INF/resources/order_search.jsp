@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/shopping/init.jsp" %>
+<%@ include file="/init.jsp" %>
 
 <%
 OrderSearch searchContainer = (OrderSearch)request.getAttribute("liferay-ui:search:searchContainer");
@@ -33,7 +33,7 @@ OrderDisplayTerms displayTerms = (OrderDisplayTerms)searchContainer.getDisplayTe
 	</aui:col>
 
 	<aui:col width="<%= 33 %>">
-		<%@ include file="/html/portlet/shopping/order_search_user_name.jspf" %>
+		<%@ include file="/order_search_user_name.jspf" %>
 	</aui:col>
 
 	<aui:col width="<%= 33 %>">

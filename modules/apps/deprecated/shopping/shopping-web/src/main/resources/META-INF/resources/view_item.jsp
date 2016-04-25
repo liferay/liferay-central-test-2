@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/shopping/init.jsp" %>
+<%@ include file="/init.jsp" %>
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");
@@ -32,12 +32,12 @@ portletDisplay.setURLBack(redirect);
 renderResponse.setTitle(item.getName());
 %>
 
-<portlet:actionURL var="cartURL">
-	<portlet:param name="struts_action" value="/shopping/cart" />
+<portlet:actionURL name="/shopping/cart" var="cartURL">
+	<portlet:param name="mvcActionCommand" value="/shopping/cart" />
 </portlet:actionURL>
 
 <portlet:renderURL var="redirectURL">
-	<portlet:param name="struts_action" value="/shopping/cart" />
+	<portlet:param name="mvcRenderCommandName" value="/shopping/cart" />
 	<portlet:param name="tabs1" value="cart" />
 	<portlet:param name="redirect" value="<%= currentURL %>" />
 </portlet:renderURL>

@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/shopping/init.jsp" %>
+<%@ include file="/init.jsp" %>
 
 <%
 List<String> names = new ArrayList<String>();
@@ -78,7 +78,7 @@ for (int i = values.size() - 1; i >= 0; i--) {
 
 				<liferay-ui:search-container-column-jsp
 					name="quantity"
-					path="/html/portlet/shopping/edit_item_quantities_column.jsp"
+					path="/edit_item_quantities_column.jsp"
 				/>
 			</liferay-ui:search-container-row>
 

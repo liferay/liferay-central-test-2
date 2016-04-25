@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/shopping/init.jsp" %>
+<%@ include file="/init.jsp" %>
 
 <%
 ShoppingCart cart = ShoppingUtil.getCart(renderRequest);
@@ -34,7 +34,7 @@ boolean minQuantityMultiple = PrefsPropsUtil.getBoolean(company.getCompanyId(), 
 
 		if (<portlet:namespace />itemsInStock || confirm('<%= UnicodeLanguageUtil.get(request, "your-cart-has-items-that-are-out-of-stock") %>')) {
 			form.fm('<%= Constants.CMD %>').val('<%= Constants.CHECKOUT %>');
-			form.fm('redirect').val('<portlet:actionURL><portlet:param name="struts_action" value="/shopping/checkout" /><portlet:param name="cmd" value="<%= Constants.CHECKOUT %>" /></portlet:actionURL>');
+			form.fm('redirect').val('<portlet:actionURL name="/shopping/checkout"><portlet:param name="mvcActionCommand" value="/shopping/checkout" /><portlet:param name="cmd" value="<%= Constants.CHECKOUT %>" /></portlet:actionURL>');
 			<portlet:namespace />updateCart();
 		}
 	}
@@ -102,10 +102,10 @@ boolean minQuantityMultiple = PrefsPropsUtil.getBoolean(company.getCompanyId(), 
 	}
 </aui:script>
 
-<liferay-util:include page="/html/portlet/shopping/tabs1.jsp" servletContext="<%= application %>" />
+<liferay-util:include page="/tabs1.jsp" servletContext="<%= application %>" />
 
-<portlet:actionURL var="cartURL">
-	<portlet:param name="struts_action" value="/shopping/cart" />
+<portlet:actionURL name="/shopping/cart" var="cartURL">
+	<portlet:param name="mvcActionCommand" value="/shopping/cart" />
 </portlet:actionURL>
 
 <aui:form action="<%= cartURL %>" cssClass="container-fluid-1280" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "updateCart();" %>'>
@@ -184,7 +184,7 @@ boolean minQuantityMultiple = PrefsPropsUtil.getBoolean(company.getCompanyId(), 
 			%>
 
 			<portlet:renderURL var="rowURL">
-				<portlet:param name="struts_action" value="/shopping/view_item" />
+				<portlet:param name="mvcRenderCommandName" value="/shopping/view_item" />
 				<portlet:param name="redirect" value="<%= currentURL %>" />
 				<portlet:param name="itemId" value="<%= String.valueOf(item.getItemId()) %>" />
 			</portlet:renderURL>
@@ -455,7 +455,7 @@ boolean minQuantityMultiple = PrefsPropsUtil.getBoolean(company.getCompanyId(), 
 					id: '<portlet:namespace />viewCoupon',
 					refreshWindow: window,
 					title: '<%= UnicodeLanguageUtil.get(request, "coupon") %>',
-					uri: '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/shopping/view_coupon" /><portlet:param name="couponId" value="<%= String.valueOf(coupon.getCouponId()) %>" /></portlet:renderURL>'
+					uri: '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="mvcRenderCommandName" value="/shopping/view_coupon" /><portlet:param name="couponId" value="<%= String.valueOf(coupon.getCouponId()) %>" /></portlet:renderURL>'
 				}
 			);
 		}

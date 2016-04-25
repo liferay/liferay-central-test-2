@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/shopping/init.jsp" %>
+<%@ include file="/init.jsp" %>
 
 <%
 shoppingGroupServiceOverriddenConfiguration = ConfigurationProviderUtil.getConfiguration(ShoppingGroupServiceOverriddenConfiguration.class, new ParameterMapSettingsLocator(request.getParameterMap(), new GroupServiceSettingsLocator(scopeGroupId, ShoppingConstants.SERVICE_NAME)));
