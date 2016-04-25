@@ -14,6 +14,9 @@
 
 package com.liferay.portal.cluster.single.internal.activator;
 
+import com.liferay.portal.cluster.single.internal.SingleClusterExecutor;
+import com.liferay.portal.cluster.single.internal.SingleClusterLink;
+import com.liferay.portal.cluster.single.internal.SingleClusterMasterExecutor;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 
 import org.osgi.service.component.ComponentContext;
