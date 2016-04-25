@@ -14,11 +14,12 @@
 
 package com.liferay.portal.upgrade.v7_0_1;
 
+import com.liferay.portal.kernel.upgrade.BaseUpgradeModules;
+
 /**
  * @author Roberto Díaz
  */
-public class UpgradeModules
-	extends com.liferay.portal.upgrade.util.UpgradeModules {
+public class UpgradeModules extends BaseUpgradeModules {
 
 	@Override
 	public String[] getBundleSymbolicNames() {
