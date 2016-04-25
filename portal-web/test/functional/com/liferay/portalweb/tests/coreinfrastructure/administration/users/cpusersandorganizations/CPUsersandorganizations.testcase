@@ -1441,11 +1441,7 @@
 			<var name="siteName" value="Organization Name" />
 		</execute>
 
-		<execute macro="ProductMenuHelper#expandCategory">
-			<var name="category" value="Members" />
-		</execute>
-
-		<execute macro="ProductMenuHelper#gotoPortlet">
+		<execute macro="ProductMenu#gotoSitesMembers">
 			<var name="portlet" value="Site Teams" />
 		</execute>
 
