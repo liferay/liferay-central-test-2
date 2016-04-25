@@ -32,11 +32,11 @@ import java.sql.Timestamp;
 public class UpgradeModules extends UpgradeProcess {
 
 	public String[] getBundleSymbolicNames() {
-		return _bundleSymbolicNames;
+		return _BUNDLE_SYMBOLIC_NAMES;
 	}
 
 	public String[][] getConvertedLegacyModules() {
-		return _convertedLegacyModules;
+		return _CONVERTED_LEGACY_MODULES;
 	}
 
 	protected void addRelease(String... bundleSymbolicNames)
@@ -147,7 +147,7 @@ public class UpgradeModules extends UpgradeProcess {
 					oldServletContextName + "'");
 	}
 
-	private static final String[] _bundleSymbolicNames = new String[] {
+	private static final String[] _BUNDLE_SYMBOLIC_NAMES = new String[] {
 		"com.liferay.amazon.rankings.web", "com.liferay.asset.browser.web",
 		"com.liferay.asset.categories.navigation.web",
 		"com.liferay.asset.publisher.web",
@@ -200,7 +200,7 @@ public class UpgradeModules extends UpgradeProcess {
 		"com.liferay.wiki.service", "com.liferay.wiki.web",
 		"com.liferay.xsl.content.web"
 	};
-	private static final String[][] _convertedLegacyModules = {
+	private static final String[][] _CONVERTED_LEGACY_MODULES = {
 		{
 			"calendar-portlet", "com.liferay.calendar.service", "Calendar"
 		},
