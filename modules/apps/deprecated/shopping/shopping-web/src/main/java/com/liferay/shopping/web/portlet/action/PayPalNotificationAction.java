@@ -21,12 +21,15 @@ import com.liferay.portal.kernel.module.configuration.ConfigurationProviderUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
+import com.liferay.portal.kernel.struts.BaseStrutsAction;
+import com.liferay.portal.kernel.struts.StrutsAction;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.UnsyncPrintWriterPool;
 import com.liferay.shopping.configuration.ShoppingGroupServiceOverriddenConfiguration;
 import com.liferay.shopping.constants.ShoppingConstants;
+import com.liferay.shopping.constants.ShoppingPortletKeys;
 import com.liferay.shopping.exception.NoSuchOrderException;
 import com.liferay.shopping.model.ShoppingOrder;
 import com.liferay.shopping.service.ShoppingOrderLocalServiceUtil;
@@ -43,19 +46,24 @@ import java.util.Enumeration;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.struts.action.Action;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
+import org.osgi.service.component.annotations.Component;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Peter Fellwock
  */
-public class PayPalNotificationAction extends Action {
+@Component(
+	property = {
+		"javax.portlet.name=" + ShoppingPortletKeys.SHOPPING,
+		"javax.portlet.name=" + ShoppingPortletKeys.SHOPPING_ADMIN,
+		"path=/shopping/notify"
+	},
+	service = StrutsAction.class
+)
+public class PayPalNotificationAction extends BaseStrutsAction {
 
 	@Override
-	public ActionForward execute(
-			ActionMapping actionMapping, ActionForm actionForm,
+	public String execute(
 			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
