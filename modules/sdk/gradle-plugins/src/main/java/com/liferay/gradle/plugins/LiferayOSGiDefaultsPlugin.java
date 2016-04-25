@@ -168,9 +168,6 @@ public class LiferayOSGiDefaultsPlugin implements Plugin<Project> {
 
 	public static final String PORTAL_TEST_CONFIGURATION_NAME = "portalTest";
 
-	public static final String UPDATE_BUNDLE_VERSION_TASK_NAME =
-		"updateBundleVersion";
-
 	public static final String UPDATE_FILE_VERSIONS_TASK_NAME =
 		"updateFileVersions";
 
@@ -238,10 +235,10 @@ public class LiferayOSGiDefaultsPlugin implements Plugin<Project> {
 		final Jar jarSourcesTask = addTaskJarSources(project, testProject);
 		final Jar jarTLDDocTask = addTaskJarTLDDoc(project);
 
-		addTaskUpdateBundleVersion(project);
-
 		final ReplaceRegexTask updateFileVersionsTask =
 			addTaskUpdateFileVersions(project);
+		final ReplaceRegexTask updateVersionTask = addTaskUpdateVersion(
+			project);
 
 		configureBasePlugin(project, portalRootDir);
 		configureBundleDefaultInstructions(project, publishing);
@@ -295,7 +292,7 @@ public class LiferayOSGiDefaultsPlugin implements Plugin<Project> {
 					// to know if we are publishing a snapshot or not.
 
 					configureTaskUploadArchives(
-						project, updateFileVersionsTask);
+						project, updateFileVersionsTask, updateVersionTask);
 
 					configureProjectBndProperties(project);
 				}
@@ -792,57 +789,6 @@ public class LiferayOSGiDefaultsPlugin implements Plugin<Project> {
 		return jar;
 	}
 
-	protected ReplaceRegexTask addTaskUpdateBundleVersion(Project project) {
-		final ReplaceRegexTask replaceRegexTask = GradleUtil.addTask(
-			project, UPDATE_BUNDLE_VERSION_TASK_NAME, ReplaceRegexTask.class);
-
-		replaceRegexTask.match("Bundle-Version: (.+)(?:\\s|$)", "bnd.bnd");
-
-		replaceRegexTask.onlyIf(
-			new Spec<Task>() {
-
-				@Override
-				public boolean isSatisfiedBy(Task task) {
-					Project project = task.getProject();
-
-					String version = String.valueOf(project.getVersion());
-
-					if (version.contains("LIFERAY-PATCHED-")) {
-						return false;
-					}
-
-					return true;
-				}
-
-			});
-
-		replaceRegexTask.setDescription(
-			"Updates the project version in the " + Constants.BUNDLE_VERSION +
-				" header.");
-
-		replaceRegexTask.setReplacement(
-			IncrementVersionClosure.MICRO_INCREMENT);
-
-		project.afterEvaluate(
-			new Action<Project>() {
-
-				@Override
-				public void execute(Project project) {
-					File moduleConfigFile = getModuleConfigFile(project);
-
-					if (moduleConfigFile == null) {
-						return;
-					}
-
-					replaceRegexTask.match(
-						"\\n\\t\"version\": \"(.+)\"", moduleConfigFile);
-				}
-
-			});
-
-		return replaceRegexTask;
-	}
-
 	protected ReplaceRegexTask addTaskUpdateFileVersions(
 		final Project project) {
 
@@ -912,6 +858,58 @@ public class LiferayOSGiDefaultsPlugin implements Plugin<Project> {
 				@Override
 				public Object call() throws Exception {
 					return project.getVersion();
+				}
+
+			});
+
+		return replaceRegexTask;
+	}
+
+	protected ReplaceRegexTask addTaskUpdateVersion(Project project) {
+		final ReplaceRegexTask replaceRegexTask = GradleUtil.addTask(
+			project, LiferayRelengPlugin.UPDATE_VERSION_TASK_NAME,
+			ReplaceRegexTask.class);
+
+		replaceRegexTask.match("Bundle-Version: (.+)(?:\\s|$)", "bnd.bnd");
+
+		replaceRegexTask.onlyIf(
+			new Spec<Task>() {
+
+				@Override
+				public boolean isSatisfiedBy(Task task) {
+					Project project = task.getProject();
+
+					String version = String.valueOf(project.getVersion());
+
+					if (version.contains("LIFERAY-PATCHED-")) {
+						return false;
+					}
+
+					return true;
+				}
+
+			});
+
+		replaceRegexTask.setDescription(
+			"Updates the project version in the " + Constants.BUNDLE_VERSION +
+				" header.");
+
+		replaceRegexTask.setReplacement(
+			IncrementVersionClosure.MICRO_INCREMENT);
+
+		project.afterEvaluate(
+			new Action<Project>() {
+
+				@Override
+				public void execute(Project project) {
+					File moduleConfigFile = getModuleConfigFile(project);
+
+					if (moduleConfigFile == null) {
+						return;
+					}
+
+					replaceRegexTask.match(
+						"\\n\\t\"version\": \"(.+)\"", moduleConfigFile);
 				}
 
 			});
@@ -1858,7 +1856,8 @@ public class LiferayOSGiDefaultsPlugin implements Plugin<Project> {
 	}
 
 	protected void configureTaskUploadArchives(
-		Project project, ReplaceRegexTask updateFileVersionsTask) {
+		Project project, ReplaceRegexTask updateFileVersionsTask,
+		ReplaceRegexTask updateVersionTask) {
 
 		if (GradleUtil.isSnapshot(project)) {
 			return;
@@ -1874,14 +1873,8 @@ public class LiferayOSGiDefaultsPlugin implements Plugin<Project> {
 
 		uploadArchivesTask.dependsOn(publishNodeModuleTasks);
 
-		Task updateBundleVersionTask = taskContainer.findByName(
-			UPDATE_BUNDLE_VERSION_TASK_NAME);
-
-		if (updateBundleVersionTask != null) {
-			uploadArchivesTask.finalizedBy(updateBundleVersionTask);
-		}
-
-		uploadArchivesTask.finalizedBy(updateFileVersionsTask);
+		uploadArchivesTask.finalizedBy(
+			updateFileVersionsTask, updateVersionTask);
 	}
 
 	protected void forceProjectDependenciesEvaluation(Project project) {

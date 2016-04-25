@@ -77,6 +77,8 @@ public class LiferayRelengPlugin implements Plugin<Project> {
 
 	public static final String RECORD_ARTIFACT_TASK_NAME = "recordArtifact";
 
+	public static final String UPDATE_VERSION_TASK_NAME = "updateVersion";
+
 	@Override
 	public void apply(final Project project) {
 		File relengDir = getRelengDir(project);
@@ -161,20 +163,6 @@ public class LiferayRelengPlugin implements Plugin<Project> {
 		}
 
 		GradleUtil.withPlugin(
-			project, LiferayAntDefaultsPlugin.class,
-			new Action<LiferayAntDefaultsPlugin>() {
-
-				@Override
-				public void execute(
-					LiferayAntDefaultsPlugin liferayAntDefaultsPlugin) {
-
-					configureTaskPrintArtifactPublishCommandsForAnt(
-						printArtifactPublishCommandsTask);
-				}
-
-			});
-
-		GradleUtil.withPlugin(
 			project, LiferayOSGiDefaultsPlugin.class,
 			new Action<LiferayOSGiDefaultsPlugin>() {
 
@@ -188,16 +176,27 @@ public class LiferayRelengPlugin implements Plugin<Project> {
 
 			});
 
-		GradleUtil.withPlugin(
-			project, LiferayThemeDefaultsPlugin.class,
-			new Action<LiferayThemeDefaultsPlugin>() {
+		project.afterEvaluate(
+			new Action<Project>() {
 
 				@Override
-				public void execute(
-					LiferayThemeDefaultsPlugin liferayThemeDefaultsPlugin) {
+				public void execute(Project project) {
+					TaskContainer taskContainer = project.getTasks();
 
-					configureTaskPrintArtifactPublishCommandsForTheme(
-						printArtifactPublishCommandsTask);
+					Task task = taskContainer.findByName(
+						UPDATE_VERSION_TASK_NAME);
+
+					if (!(task instanceof ReplaceRegexTask)) {
+						return;
+					}
+
+					ReplaceRegexTask replaceRegexTask = (ReplaceRegexTask)task;
+
+					Map<String, FileCollection> matches =
+						replaceRegexTask.getMatches();
+
+					printArtifactPublishCommandsTask.prepNextFiles(
+						matches.values());
 				}
 
 			});
@@ -488,14 +487,6 @@ public class LiferayRelengPlugin implements Plugin<Project> {
 			});
 	}
 
-	protected void configureTaskPrintArtifactPublishCommandsForAnt(
-		PrintArtifactPublishCommandsTask printArtifactPublishCommandsTask) {
-
-		configureTaskPrintArtifactPublishCommandsPrepNextFiles(
-			printArtifactPublishCommandsTask,
-			LiferayAntDefaultsPlugin.UPDATE_PLUGIN_VERSION_TASK_NAME);
-	}
-
 	protected void configureTaskPrintArtifactPublishCommandsForOSGi(
 		PrintArtifactPublishCommandsTask printArtifactPublishCommandsTask) {
 
@@ -507,45 +498,6 @@ public class LiferayRelengPlugin implements Plugin<Project> {
 
 		printArtifactPublishCommandsTask.setFirstPublishExcludedTaskName(
 			LiferayOSGiDefaultsPlugin.UPDATE_FILE_VERSIONS_TASK_NAME);
-
-		configureTaskPrintArtifactPublishCommandsPrepNextFiles(
-			printArtifactPublishCommandsTask,
-			LiferayOSGiDefaultsPlugin.UPDATE_BUNDLE_VERSION_TASK_NAME);
-	}
-
-	protected void configureTaskPrintArtifactPublishCommandsForTheme(
-		PrintArtifactPublishCommandsTask printArtifactPublishCommandsTask) {
-
-		configureTaskPrintArtifactPublishCommandsPrepNextFiles(
-			printArtifactPublishCommandsTask,
-			LiferayThemeDefaultsPlugin.UPDATE_THEME_VERSION_TASK_NAME);
-	}
-
-	protected void configureTaskPrintArtifactPublishCommandsPrepNextFiles(
-		final PrintArtifactPublishCommandsTask
-			printArtifactPublishCommandsTask,
-		final String updateVersionTaskName) {
-
-		Project project = printArtifactPublishCommandsTask.getProject();
-
-		Action<Project> action = new Action<Project>() {
-
-			@Override
-			public void execute(Project project) {
-				ReplaceRegexTask replaceRegexTask =
-					(ReplaceRegexTask)GradleUtil.getTask(
-						project, updateVersionTaskName);
-
-				Map<String, FileCollection> matches =
-					replaceRegexTask.getMatches();
-
-				printArtifactPublishCommandsTask.prepNextFiles(
-					matches.values());
-			}
-
-		};
-
-		project.afterEvaluate(action);
 	}
 
 	protected void configureTaskPrintStaleArtifactForOSGi(Task task) {
