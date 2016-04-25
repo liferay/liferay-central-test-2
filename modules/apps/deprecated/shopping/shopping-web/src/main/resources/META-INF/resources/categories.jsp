@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/shopping/init.jsp" %>
+<%@ include file="/init.jsp" %>
 
 <%
 ShoppingCategory category = (ShoppingCategory)request.getAttribute(WebKeys.SHOPPING_CATEGORY);
@@ -26,7 +26,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setParameter("struts_action", "/shopping/view");
+portletURL.setParameter("mvcRenderCommandName", "/shopping/view");
 portletURL.setParameter("tabs1", "categories");
 portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
@@ -84,7 +84,7 @@ categoriesSearch.setResults(results);
 boolean showSearch = (categoriesAndItemsCount > 0);
 %>
 
-<liferay-util:include page="/html/portlet/shopping/tabs1.jsp" servletContext="<%= application %>">
+<liferay-util:include page="/tabs1.jsp" servletContext="<%= application %>">
 	<liferay-util:param name="showSearch" value="<%= String.valueOf(showSearch) %>" />
 </liferay-util:include>
 
@@ -145,7 +145,7 @@ boolean showSearch = (categoriesAndItemsCount > 0);
 					<%
 					PortletURL rowURL = renderResponse.createRenderURL();
 
-					rowURL.setParameter("struts_action", "/shopping/view_item");
+					rowURL.setParameter("mvcRenderCommandName", "/shopping/view_item");
 					rowURL.setParameter("redirect", currentURL);
 					rowURL.setParameter("itemId", String.valueOf(curItem.getItemId()));
 					%>
@@ -229,7 +229,7 @@ boolean showSearch = (categoriesAndItemsCount > 0);
 
 					<liferay-ui:search-container-column-jsp
 						cssClass="list-group-item-field"
-						path="/html/portlet/shopping/item_action.jsp"
+						path="/item_action.jsp"
 					/>
 				</c:when>
 				<c:when test="<%= curCategory != null %>">
@@ -237,7 +237,7 @@ boolean showSearch = (categoriesAndItemsCount > 0);
 					<%
 					PortletURL rowURL = renderResponse.createRenderURL();
 
-					rowURL.setParameter("struts_action", "/shopping/view");
+					rowURL.setParameter("mvcRenderCommandName", "/shopping/view");
 					rowURL.setParameter("categoryId", String.valueOf(curCategory.getCategoryId()));
 					%>
 
@@ -288,7 +288,7 @@ boolean showSearch = (categoriesAndItemsCount > 0);
 
 					<liferay-ui:search-container-column-jsp
 						cssClass="list-group-item-field"
-						path="/html/portlet/shopping/category_action.jsp"
+						path="/category_action.jsp"
 					/>
 				</c:when>
 			</c:choose>
@@ -307,7 +307,7 @@ boolean showAddItemButton = ShoppingCategoryPermission.contains(permissionChecke
 	<liferay-frontend:add-menu>
 		<c:if test="<%= showAddCategoryButton %>">
 			<portlet:renderURL var="addCategoriesURL">
-				<portlet:param name="struts_action" value="/shopping/edit_category" />
+				<portlet:param name="mvcRenderCommandName" value="/shopping/edit_category" />
 				<portlet:param name="redirect" value="<%= currentURL %>" />
 				<portlet:param name="parentCategoryId" value="<%= String.valueOf(categoryId) %>" />
 			</portlet:renderURL>
@@ -317,7 +317,7 @@ boolean showAddItemButton = ShoppingCategoryPermission.contains(permissionChecke
 
 		<c:if test="<%= showAddItemButton %>">
 			<portlet:renderURL var="addItemURL">
-				<portlet:param name="struts_action" value="/shopping/edit_item" />
+				<portlet:param name="mvcRenderCommandName" value="/shopping/edit_item" />
 				<portlet:param name="redirect" value="<%= currentURL %>" />
 				<portlet:param name="categoryId" value="<%= String.valueOf(categoryId) %>" />
 			</portlet:renderURL>

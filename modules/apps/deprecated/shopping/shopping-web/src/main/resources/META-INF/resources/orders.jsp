@@ -14,16 +14,16 @@
  */
 --%>
 
-<%@ include file="/html/portlet/shopping/init.jsp" %>
+<%@ include file="/init.jsp" %>
 
 <%
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setParameter("struts_action", "/shopping/view");
+portletURL.setParameter("mvcRenderCommandName", "/shopping/view");
 portletURL.setParameter("tabs1", "order");
 %>
 
-<liferay-util:include page="/html/portlet/shopping/tabs1.jsp" servletContext="<%= application %>" />
+<liferay-util:include page="/tabs1.jsp" servletContext="<%= application %>" />
 
 <aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
@@ -40,7 +40,7 @@ portletURL.setParameter("tabs1", "order");
 	%>
 
 	<liferay-ui:search-form
-		page="/html/portlet/shopping/order_search.jsp"
+		page="/order_search.jsp"
 		searchContainer="<%= searchContainer %>"
 		servletContext="<%= application %>"
 	/>
@@ -83,7 +83,7 @@ portletURL.setParameter("tabs1", "order");
 
 		PortletURL rowURL = renderResponse.createRenderURL();
 
-		rowURL.setParameter("struts_action", "/shopping/edit_order");
+		rowURL.setParameter("mvcRenderCommandName", "/shopping/edit_order");
 		rowURL.setParameter("redirect", currentURL);
 		rowURL.setParameter("orderId", String.valueOf(order.getOrderId()));
 
@@ -105,7 +105,7 @@ portletURL.setParameter("tabs1", "order");
 
 		// Action
 
-		row.addJSP("/html/portlet/shopping/order_action.jsp", "entry-action", application, request, response);
+		row.addJSP("/order_action.jsp", "entry-action", application, request, response);
 
 		// Add result row
 
@@ -127,7 +127,7 @@ portletURL.setParameter("tabs1", "order");
 				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = '<%= Constants.DELETE %>';
 				document.<portlet:namespace />fm.<portlet:namespace />deleteOrderIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, '<portlet:namespace />allRowIds');
 
-				submitForm(document.<portlet:namespace />fm, '<portlet:actionURL><portlet:param name="struts_action" value="/shopping/edit_order" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:actionURL>');
+				submitForm(document.<portlet:namespace />fm, '<portlet:actionURL name="/shopping/edit_order"><portlet:param name="mvcActionCommand" value="/shopping/edit_order" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:actionURL>');
 			}
 		},
 		['liferay-util-list-fields']

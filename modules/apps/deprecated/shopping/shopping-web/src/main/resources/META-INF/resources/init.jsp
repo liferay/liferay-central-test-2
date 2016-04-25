@@ -208,4 +208,4 @@ NumberFormat taxFormat = NumberFormat.getPercentInstance(locale);
 taxFormat.setMinimumFractionDigits(3);
 %>
 
-<%@ include file="/html/portlet/shopping/init-ext.jsp" %>
+<%@ include file="/init-ext.jsp" %>

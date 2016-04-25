@@ -14,14 +14,14 @@
  */
 --%>
 
-<%@ include file="/html/portlet/shopping/init.jsp" %>
+<%@ include file="/init.jsp" %>
 
 <%
 String displayStyle = ParamUtil.getString(request, "displayStyle", "list");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setParameter("struts_action", "/shopping/view");
+portletURL.setParameter("mvcRenderCommandName", "/shopping/view");
 portletURL.setParameter("tabs1", "coupons");
 
 CouponSearch couponSearch = new CouponSearch(renderRequest, PortletURLUtil.clone(portletURL, renderResponse));
@@ -37,7 +37,7 @@ List coupons = ShoppingCouponServiceUtil.search(scopeGroupId, company.getCompany
 couponSearch.setResults(coupons);
 %>
 
-<liferay-util:include page="/html/portlet/shopping/tabs1.jsp" servletContext="<%= application %>">
+<liferay-util:include page="/tabs1.jsp" servletContext="<%= application %>">
 	<liferay-util:param name="showSearch" value="<%= Boolean.TRUE.toString() %>" />
 </liferay-util:include>
 
@@ -85,8 +85,8 @@ couponSearch.setResults(coupons);
 	</liferay-frontend:management-bar-action-buttons>
 </liferay-frontend:management-bar>
 
-<portlet:actionURL var="editCouponURL">
-	<portlet:param name="struts_action" value="/shopping/edit_coupon" />
+<portlet:actionURL name="/shopping/edit_coupon" var="editCouponURL">
+	<portlet:param name="mvcActionCommand" value="/shopping/edit_coupon" />
 	<portlet:param name="redirect" value="<%= currentURL %>" />
 </portlet:actionURL>
 
@@ -147,7 +147,7 @@ couponSearch.setResults(coupons);
 
 			<liferay-ui:search-container-column-jsp
 				cssClass="list-group-item-field"
-				path="/html/portlet/shopping/coupon_action.jsp"
+				path="/coupon_action.jsp"
 			/>
 		</liferay-ui:search-container-row>
 
@@ -156,7 +156,7 @@ couponSearch.setResults(coupons);
 </aui:form>
 
 <portlet:renderURL var="editCouponURL">
-	<portlet:param name="struts_action" value="/shopping/edit_coupon" />
+	<portlet:param name="mvcRenderCommandName" value="/shopping/edit_coupon" />
 	<portlet:param name="redirect" value="<%= currentURL %>" />
 </portlet:renderURL>
 

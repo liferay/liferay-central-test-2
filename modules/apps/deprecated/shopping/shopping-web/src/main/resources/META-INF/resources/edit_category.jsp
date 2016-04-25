@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/shopping/init.jsp" %>
+<%@ include file="/init.jsp" %>
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");
@@ -31,8 +31,8 @@ portletDisplay.setURLBack(redirect);
 renderResponse.setTitle(((category == null) ? LanguageUtil.get(request, "new-category") : category.getName()));
 %>
 
-<portlet:actionURL var="editCategoryURL">
-	<portlet:param name="struts_action" value="/shopping/edit_category" />
+<portlet:actionURL name="/shopping/edit_category" var="editCategoryURL">
+	<portlet:param name="mvcActionCommand" value="/shopping/edit_category" />
 </portlet:actionURL>
 
 <aui:form action="<%= editCategoryURL %>" cssClass="container-fluid-1280" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveCategory();" %>'>
@@ -134,7 +134,7 @@ renderResponse.setTitle(((category == null) ? LanguageUtil.get(request, "new-cat
 					},
 					id: '<portlet:namespace />selectCategory',
 					title: '<liferay-ui:message arguments="category" key="select-x" />',
-					uri: '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/shopping/select_category" /><portlet:param name="categoryId" value="<%= String.valueOf(parentCategoryId) %>" /></portlet:renderURL>'
+					uri: '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="mvcRenderCommandName" value="/shopping/select_category" /><portlet:param name="categoryId" value="<%= String.valueOf(parentCategoryId) %>" /></portlet:renderURL>'
 				},
 				function(event) {
 					var form = AUI.$(document.<portlet:namespace />fm);

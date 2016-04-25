@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/shopping/init.jsp" %>
+<%@ include file="/init.jsp" %>
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");
@@ -81,8 +81,8 @@ portletDisplay.setURLBack(redirect);
 renderResponse.setTitle(((item == null) ? LanguageUtil.get(request, "new-item") : item.getName()));
 %>
 
-<portlet:actionURL var="editItemURL">
-	<portlet:param name="struts_action" value="/shopping/edit_item" />
+<portlet:actionURL name="/shopping/edit_item" var="editItemURL">
+	<portlet:param name="mvcActionCommand" value="/shopping/edit_item" />
 </portlet:actionURL>
 
 <aui:form action="<%= editItemURL %>" cssClass="container-fluid-1280" enctype="multipart/form-data" method="post" name="fm">
@@ -162,7 +162,7 @@ renderResponse.setTitle(((item == null) ? LanguageUtil.get(request, "new-item") 
 									},
 									id: '<portlet:namespace />selectCategory',
 									title: '<liferay-ui:message arguments="category" key="select-x" />',
-									uri: '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/shopping/select_category" /><portlet:param name="categoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>'
+									uri: '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="mvcRenderCommandName" value="/shopping/select_category" /><portlet:param name="categoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>'
 								},
 								function(event) {
 									var form = $(document.<portlet:namespace />fm);
@@ -571,7 +571,7 @@ renderResponse.setTitle(((item == null) ? LanguageUtil.get(request, "new-item") 
 	function <portlet:namespace />editItemQuantities() {
 		var form = AUI.$(document.<portlet:namespace />fm);
 
-		var itemQuantitiesURL = '<liferay-portlet:renderURL anchor="<%= false %>" windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/shopping/edit_item_quantities" /></liferay-portlet:renderURL>';
+		var itemQuantitiesURL = '<liferay-portlet:renderURL anchor="<%= false %>" windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="mvcRenderCommandName" value="/shopping/edit_item_quantities" /></liferay-portlet:renderURL>';
 
 		<%
 		for (int i = 0; i < fieldsCount; i++) {

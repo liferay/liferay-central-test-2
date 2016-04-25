@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/shopping/init.jsp" %>
+<%@ include file="/init.jsp" %>
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");
@@ -43,8 +43,8 @@ portletDisplay.setURLBack(redirect);
 renderResponse.setTitle(((coupon == null) ? LanguageUtil.get(request, "coupon") : coupon.getName()));
 %>
 
-<portlet:actionURL var="editCouponURL">
-	<portlet:param name="struts_action" value="/shopping/edit_coupon" />
+<portlet:actionURL name="/shopping/edit_coupon" var="editCouponURL">
+	<portlet:param name="mvcActionCommand" value="/shopping/edit_coupon" />
 </portlet:actionURL>
 
 <aui:form action="<%= editCouponURL %>" cssClass="container-fluid-1280" method="post" name="fm">

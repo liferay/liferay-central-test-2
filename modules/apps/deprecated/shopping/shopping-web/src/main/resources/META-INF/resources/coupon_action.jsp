@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/shopping/init.jsp" %>
+<%@ include file="/init.jsp" %>
 
 <%
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
@@ -24,7 +24,7 @@ ShoppingCoupon coupon = (ShoppingCoupon)row.getObject();
 
 <liferay-ui:icon-menu direction="left-side" icon="<%= StringPool.BLANK %>" markupView="lexicon" message="<%= StringPool.BLANK %>" showWhenSingleIcon="<%= true %>">
 	<portlet:renderURL var="editURL">
-		<portlet:param name="struts_action" value="/shopping/edit_coupon" />
+		<portlet:param name="mvcRenderCommandName" value="/shopping/edit_coupon" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
 		<portlet:param name="couponId" value="<%= String.valueOf(coupon.getCouponId()) %>" />
 	</portlet:renderURL>
@@ -34,8 +34,8 @@ ShoppingCoupon coupon = (ShoppingCoupon)row.getObject();
 		url="<%= editURL %>"
 	/>
 
-	<portlet:actionURL var="deleteURL">
-		<portlet:param name="struts_action" value="/shopping/edit_coupon" />
+	<portlet:actionURL name="/shopping/edit_coupon" var="deleteURL">
+		<portlet:param name="mvcActionCommand" value="/shopping/edit_coupon" />
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
 		<portlet:param name="deleteCouponIds" value="<%= String.valueOf(coupon.getCouponId()) %>" />

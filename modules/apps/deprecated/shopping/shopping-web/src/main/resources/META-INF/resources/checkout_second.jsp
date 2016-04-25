@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/shopping/init.jsp" %>
+<%@ include file="/init.jsp" %>
 
 <%
 ShoppingCart cart = ShoppingUtil.getCart(renderRequest);
@@ -29,11 +29,11 @@ String altShippingName = shoppingGroupServiceOverriddenConfiguration.getAlternat
 ShoppingOrder order = ShoppingOrderLocalServiceUtil.getLatestOrder(user.getUserId(), themeDisplay.getScopeGroupId());
 %>
 
-<portlet:actionURL var="checkoutSecondURL">
-	<portlet:param name="struts_action" value="/shopping/checkout" />
+<portlet:actionURL name="/shopping/checkout" var="checkoutSecondURL">
+	<portlet:param name="mvcActionCommand" value="/shopping/checkout" />
 </portlet:actionURL>
 
-<liferay-util:include page="/html/portlet/shopping/tabs1.jsp" servletContext="<%= application %>">
+<liferay-util:include page="/tabs1.jsp" servletContext="<%= application %>">
 	<liferay-util:param name="tabs1" value="cart" />
 </liferay-util:include>
 
@@ -73,7 +73,7 @@ ShoppingOrder order = ShoppingOrderLocalServiceUtil.getLatestOrder(user.getUserI
 			<div class="well">
 				<h4><liferay-ui:message key="billing-address" /></h4>
 
-				<%@ include file="/html/portlet/shopping/checkout_second_billing_address.jspf" %>
+				<%@ include file="/checkout_second_billing_address.jspf" %>
 			</div>
 		</div>
 
@@ -81,7 +81,7 @@ ShoppingOrder order = ShoppingOrderLocalServiceUtil.getLatestOrder(user.getUserI
 			<div class="well">
 				<h4><liferay-ui:message key="shipping-address" /></h4>
 
-				<%@ include file="/html/portlet/shopping/checkout_second_shipping_address.jspf" %>
+				<%@ include file="/checkout_second_shipping_address.jspf" %>
 			</div>
 		</div>
 	</div>
@@ -304,8 +304,8 @@ ShoppingOrder order = ShoppingOrderLocalServiceUtil.getLatestOrder(user.getUserI
 	<aui:button-row>
 		<aui:button cssClass="btn-lg" type="submit" value='<%= shoppingGroupServiceOverriddenConfiguration.usePayPal() ? "continue" : "finished" %>' />
 
-		<portlet:actionURL var="checkoutURL">
-			<portlet:param name="struts_action" value="/shopping/checkout" />
+		<portlet:actionURL name="/shopping/checkout" var="checkoutURL">
+			<portlet:param name="mvcActionCommand" value="/shopping/checkout" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.CHECKOUT %>" />
 		</portlet:actionURL>
 
@@ -325,7 +325,7 @@ ShoppingOrder order = ShoppingOrderLocalServiceUtil.getLatestOrder(user.getUserI
 					id: '<portlet:namespace />viewCoupon',
 					refreshWindow: window,
 					title: '<%= UnicodeLanguageUtil.get(request, "coupon") %>',
-					uri: '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/shopping/view_coupon" /><portlet:param name="couponId" value="<%= String.valueOf(coupon.getCouponId()) %>" /></portlet:renderURL>'
+					uri: '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="mvcRenderCommandName" value="/shopping/view_coupon" /><portlet:param name="couponId" value="<%= String.valueOf(coupon.getCouponId()) %>" /></portlet:renderURL>'
 				}
 			);
 		}

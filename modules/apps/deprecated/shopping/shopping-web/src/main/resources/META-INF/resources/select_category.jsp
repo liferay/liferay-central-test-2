@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/shopping/init.jsp" %>
+<%@ include file="/init.jsp" %>
 
 <%
 ShoppingCategory category = (ShoppingCategory)request.getAttribute(WebKeys.SHOPPING_CATEGORY);
@@ -34,7 +34,7 @@ String eventName = ParamUtil.getString(request, "eventName", liferayPortletRespo
 	<%
 	PortletURL portletURL = renderResponse.createRenderURL();
 
-	portletURL.setParameter("struts_action", "/shopping/select_category");
+	portletURL.setParameter("mvcRenderCommandName", "/shopping/select_category");
 	portletURL.setParameter("categoryId", String.valueOf(categoryId));
 	%>
 
@@ -54,7 +54,7 @@ String eventName = ParamUtil.getString(request, "eventName", liferayPortletRespo
 			modelVar="curCategory"
 		>
 			<portlet:renderURL var="rowURL">
-				<portlet:param name="struts_action" value="/shopping/select_category" />
+				<portlet:param name="mvcRenderCommandName" value="/shopping/select_category" />
 				<portlet:param name="categoryId" value="<%= String.valueOf(curCategory.getCategoryId()) %>" />
 			</portlet:renderURL>
 

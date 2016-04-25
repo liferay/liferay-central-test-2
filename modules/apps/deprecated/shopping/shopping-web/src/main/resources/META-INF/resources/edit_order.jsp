@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/shopping/init.jsp" %>
+<%@ include file="/init.jsp" %>
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");
@@ -24,8 +24,8 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 long orderId = BeanParamUtil.getLong(order, request, "orderId");
 %>
 
-<portlet:actionURL var="editOrderURL">
-	<portlet:param name="struts_action" value="/shopping/edit_order" />
+<portlet:actionURL name="/shopping/edit_order" var="editOrderURL">
+	<portlet:param name="mvcActionCommand" value="/shopping/edit_order" />
 </portlet:actionURL>
 
 <aui:form action="<%= editOrderURL %>" method="post" name="fm">
@@ -86,7 +86,7 @@ long orderId = BeanParamUtil.getLong(order, request, "orderId");
 			<div class="well">
 				<h4><liferay-ui:message key="billing-address" /></h4>
 
-				<%@ include file="/html/portlet/shopping/checkout_second_billing_address.jspf" %>
+				<%@ include file="/checkout_second_billing_address.jspf" %>
 			</div>
 		</div>
 
@@ -94,7 +94,7 @@ long orderId = BeanParamUtil.getLong(order, request, "orderId");
 			<div class="well">
 				<h4><liferay-ui:message key="shipping-address" /></h4>
 
-				<%@ include file="/html/portlet/shopping/checkout_second_shipping_address.jspf" %>
+				<%@ include file="/checkout_second_shipping_address.jspf" %>
 			</div>
 		</div>
 	</div>
@@ -246,7 +246,7 @@ long orderId = BeanParamUtil.getLong(order, request, "orderId");
 		if (item != null) {
 			rowURL = renderResponse.createRenderURL();
 
-			rowURL.setParameter("struts_action", "/shopping/view_item");
+			rowURL.setParameter("mvcRenderCommandName", "/shopping/view_item");
 			rowURL.setParameter("itemId", String.valueOf(item.getItemId()));
 		}
 
@@ -359,7 +359,7 @@ long orderId = BeanParamUtil.getLong(order, request, "orderId");
 			</c:if>
 
 			<portlet:renderURL var="viewInvoiceURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
-				<portlet:param name="struts_action" value="/shopping/edit_order" />
+				<portlet:param name="mvcRenderCommandName" value="/shopping/edit_order" />
 				<portlet:param name="orderId" value="<%= String.valueOf(orderId) %>" />
 			</portlet:renderURL>
 
@@ -435,7 +435,7 @@ long orderId = BeanParamUtil.getLong(order, request, "orderId");
 				id: '<portlet:namespace />viewCoupon',
 				refreshWindow: window,
 				title: '<%= UnicodeLanguageUtil.get(request, "coupons") %>',
-				uri: '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/shopping/view_coupon" /><portlet:param name="code" value="<%= order.getCouponCodes() %>" /></portlet:renderURL>'
+				uri: '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="mvcRenderCommandName" value="/shopping/view_coupon" /><portlet:param name="code" value="<%= order.getCouponCodes() %>" /></portlet:renderURL>'
 			}
 		);
 	}

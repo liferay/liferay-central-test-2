@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/shopping/init.jsp" %>
+<%@ include file="/init.jsp" %>
 
 <%
 String tabs1 = ParamUtil.getString(request, "tabs1", "categories");
@@ -23,7 +23,7 @@ boolean showSearch = ParamUtil.getBoolean(request, "showSearch");
 
 PortletURL viewURL = renderResponse.createRenderURL();
 
-viewURL.setParameter("struts_action", "/shopping/view");
+viewURL.setParameter("mvcRenderCommandName", "/shopping/view");
 %>
 
 <aui:nav-bar cssClass="collapse-basic-search" markupView="lexicon">

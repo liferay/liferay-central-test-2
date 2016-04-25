@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/shopping/init.jsp" %>
+<%@ include file="/init.jsp" %>
 
 <%
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
@@ -24,7 +24,7 @@ ShoppingOrder order = (ShoppingOrder)row.getObject();
 
 <liferay-ui:icon-menu direction="left-side" icon="<%= StringPool.BLANK %>" markupView="lexicon" message="<%= StringPool.BLANK %>" showWhenSingleIcon="<%= true %>">
 	<portlet:renderURL var="editURL">
-		<portlet:param name="struts_action" value="/shopping/edit_order" />
+		<portlet:param name="mvcRenderCommandName" value="/shopping/edit_order" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
 		<portlet:param name="orderId" value="<%= String.valueOf(order.getOrderId()) %>" />
 	</portlet:renderURL>
@@ -35,8 +35,8 @@ ShoppingOrder order = (ShoppingOrder)row.getObject();
 	/>
 
 	<c:if test="<%= ShoppingOrderPermission.contains(permissionChecker, scopeGroupId, order, ActionKeys.DELETE) %>">
-		<portlet:actionURL var="deleteURL">
-			<portlet:param name="struts_action" value="/shopping/edit_order" />
+		<portlet:actionURL name="/shopping/edit_order" var="deleteURL">
+			<portlet:param name="mvcActionCommand" value="/shopping/edit_order" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="deleteOrderIds" value="<%= String.valueOf(order.getOrderId()) %>" />
