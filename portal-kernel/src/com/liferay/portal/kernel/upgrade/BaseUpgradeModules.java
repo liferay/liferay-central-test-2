@@ -12,10 +12,9 @@
  * details.
  */
 
-package com.liferay.portal.upgrade.util;
+package com.liferay.portal.kernel.upgrade;
 
 import com.liferay.portal.kernel.model.ReleaseConstants;
-import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.LoggingTimer;
 import com.liferay.portal.kernel.util.StringBundler;
 
@@ -29,7 +28,7 @@ import java.sql.Timestamp;
 /**
  * @author Miguel Pastor
  */
-public abstract class UpgradeModules extends UpgradeProcess {
+public abstract class BaseUpgradeModules extends UpgradeProcess {
 
 	public abstract String[] getBundleSymbolicNames();
 
