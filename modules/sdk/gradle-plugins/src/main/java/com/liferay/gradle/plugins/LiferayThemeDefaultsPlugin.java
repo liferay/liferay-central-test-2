@@ -14,8 +14,6 @@
 
 package com.liferay.gradle.plugins;
 
-import aQute.bnd.osgi.Constants;
-
 import com.liferay.gradle.plugins.extensions.LiferayExtension;
 import com.liferay.gradle.plugins.tasks.UpdateVersionTask;
 import com.liferay.gradle.plugins.util.GradleUtil;
@@ -104,8 +102,7 @@ public class LiferayThemeDefaultsPlugin implements Plugin<Project> {
 			"\"version\": \"" + UpdateVersionTask.VERSION_PLACEHOLDER + "\"");
 
 		updateVersionTask.setDescription(
-			"Updates the project version in the " + Constants.BUNDLE_VERSION +
-				" header.");
+			"Updates the project version in the package.json file.");
 
 		updateVersionTask.setVersion(
 			new Callable<Object>() {
