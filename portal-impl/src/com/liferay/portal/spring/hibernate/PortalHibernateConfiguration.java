@@ -132,6 +132,10 @@ public class PortalHibernateConfiguration extends LocalSessionFactoryBean {
 
 		Dialect dialect = DialectDetector.getDialect(getDataSource());
 
+		if (DBManagerUtil.getDBType(dialect) == DBType.SYBASE) {
+			properties.setProperty(PropsKeys.HIBERNATE_JDBC_BATCH_SIZE, "0");
+		}
+
 		if (Validator.isNull(PropsValues.HIBERNATE_DIALECT)) {
 			DBManagerUtil.setDB(dialect, getDataSource());
 
@@ -145,10 +149,6 @@ public class PortalHibernateConfiguration extends LocalSessionFactoryBean {
 			"hibernate.cache.use_second_level_cache", "false");
 
 		properties.remove("hibernate.cache.region.factory_class");
-
-		if (DBManagerUtil.getDBType(dialect) == DBType.SYBASE) {
-			properties.setProperty(PropsKeys.HIBERNATE_JDBC_BATCH_SIZE, "0");
-		}
 
 		configuration.setProperties(properties);
 
