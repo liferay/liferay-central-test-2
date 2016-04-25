@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.cluster.single.internal;
+package com.liferay.portal.cluster.single.internal.activator;
 
 import com.liferay.portal.kernel.util.ReleaseInfo;
 
@@ -24,7 +24,7 @@ import org.osgi.service.component.annotations.Component;
  * @author Shuyang Zhou
  */
 @Component(immediate = true)
-public class GateKeeper {
+public class GatekeeperActivator {
 
 	@Activate
 	public void activate(ComponentContext componentContext) {
