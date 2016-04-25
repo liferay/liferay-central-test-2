@@ -349,6 +349,123 @@
 		</execute>
 	</command>
 
+	<command name="AddRecordWithRepeatableField" priority="4">
+		<execute macro="Navigator#openURL" />
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Dynamic Data Lists" />
+		</execute>
+
+		<execute macro="DDLDataDefinition#addCP">
+			<var name="ddlDataDefinitionName" value="Data Definition" />
+		</execute>
+
+		<execute macro="DynamicDataMapping#addField">
+			<var name="field" value="Text" />
+			<var name="fieldFieldLabel" value="Text" />
+			<var name="fieldName" value="Text" />
+		</execute>
+
+		<execute macro="DynamicDataMapping#editFieldRepeatable">
+			<var name="fieldFieldLabel" value="Text" />
+		</execute>
+
+		<execute macro="DDLDataDefinition#save" />
+
+		<execute macro="Navigator#openURL" />
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Dynamic Data Lists" />
+		</execute>
+
+		<execute macro="DDLList#addCP">
+			<var name="ddlListName" value="Dynamic Data List" />
+		</execute>
+
+		<execute macro="DDLDataDefinition#selectCP">
+			<var name="ddlDataDefinitionName" value="Data Definition" />
+		</execute>
+
+		<execute macro="DDLList#save" />
+
+		<execute macro="Navigator#openURL" />
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Dynamic Data Lists" />
+		</execute>
+
+		<execute macro="DDLRecord#addCP">
+			<var name="ddlDataDefinitionName" value="Data Definition" />
+			<var name="ddlListName" value="Dynamic Data List" />
+		</execute>
+
+		<execute macro="DDLRecord#addRepeatableField">
+			<var name="fieldName" value="Text" />
+		</execute>
+
+		<execute macro="DDLRecord#populateFieldText">
+			<var name="ddlRecordFieldData" value="Content" />
+			<var name="fieldName" value="Text" />
+		</execute>
+
+		<execute macro="DDLRecord#viewTextFieldRepeated">
+			<var name="ddlRecordFieldData1" value="Content" />
+			<var name="ddlRecordFieldData2" value="Content 2" />
+		</execute>
+
+		<execute macro="PortletEntry#publish" />
+
+		<execute macro="Navigator#openURL" />
+
+		<execute macro="Page#add">
+			<var name="pageName" value="DDL Page" />
+		</execute>
+
+		<execute macro="Navigator#gotoPage">
+			<var name="pageName" value="DDL Page" />
+		</execute>
+
+		<execute macro="Portlet#addPG">
+			<var name="pageName" value="DDL Page" />
+			<var name="portletName" value="Dynamic Data Lists Display" />
+		</execute>
+
+		<execute macro="DDLList#addViaDDLDisplayPG">
+			<var name="ddlListName" value="Dynamic Data List 2" />
+		</execute>
+
+		<execute macro="DDLDataDefinition#selectViaDDLDisplayPG">
+			<var name="ddlDataDefinitionName" value="Data Definition" />
+		</execute>
+
+		<execute macro="DDLList#saveViaDDLDisplayPG" />
+
+		<execute macro="Navigator#gotoPage">
+			<var name="pageName" value="DDL Page" />
+		</execute>
+
+		<execute macro="DDLRecord#addViaDDLDisplayPG">
+			<var name="ddlDataDefinitionName" value="Data Definition" />
+			<var name="ddlListName" value="Dynamic Data List 2" />
+		</execute>
+
+		<execute macro="DDLRecord#addRepeatableField">
+			<var name="fieldName" value="Text" />
+		</execute>
+
+		<execute macro="DDLRecord#populateFieldText">
+			<var name="ddlRecordFieldData" value="Content" />
+			<var name="fieldName" value="Text" />
+		</execute>
+
+		<execute macro="DDLRecord#viewTextFieldRepeated">
+			<var name="ddlRecordFieldData1" value="Content" />
+			<var name="ddlRecordFieldData2" value="Content 2" />
+		</execute>
+
+		<execute macro="PortletEntry#publish" />
+	</command>
+
 	<command name="AddRepeatableFieldAndAssertOrderInTranslation" priority="4">
 		<execute macro="Navigator#openURL" />
 
