@@ -12,10 +12,8 @@
  * details.
  */
 
-package com.liferay.portal.cache.single.internal;
+package com.liferay.portal.scheduler.single.internal.activator;
 
-import com.liferay.portal.cache.single.internal.bootstrap.SinglePortalCacheBootstrapLoaderFactory;
-import com.liferay.portal.cache.single.internal.distribution.SinglePortalCacheReplicatorFactory;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 
 import org.osgi.service.component.ComponentContext;
@@ -26,7 +24,7 @@ import org.osgi.service.component.annotations.Component;
  * @author Shuyang Zhou
  */
 @Component(immediate = true)
-public class GateKeeper {
+public class GatekeeperActivator {
 
 	@Activate
 	public void activate(ComponentContext componentContext) {
@@ -37,9 +35,7 @@ public class GateKeeper {
 		}
 
 		componentContext.enableComponent(
-			SinglePortalCacheBootstrapLoaderFactory.class.getName());
-		componentContext.enableComponent(
-			SinglePortalCacheReplicatorFactory.class.getName());
+			SingleSchedulerEngineConfigurator.class.getName());
 	}
 
 }
