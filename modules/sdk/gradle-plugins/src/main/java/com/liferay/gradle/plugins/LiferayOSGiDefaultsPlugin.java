@@ -864,26 +864,6 @@ public class LiferayOSGiDefaultsPlugin implements Plugin<Project> {
 		ReplaceRegexTask replaceRegexTask = GradleUtil.addTask(
 			project, UPDATE_FILE_VERSIONS_TASK_NAME, ReplaceRegexTask.class);
 
-		replaceRegexTask.doLast(
-			new Action<Task>() {
-
-				@Override
-				public void execute(Task task) {
-					ReplaceRegexTask replaceRegexTask = (ReplaceRegexTask)task;
-
-					if (!_logger.isLifecycleEnabled()) {
-						return;
-					}
-
-					for (Object file : replaceRegexTask.getMatchedFiles()) {
-						_logger.lifecycle(
-							"Updated project version in " +
-								project.relativePath(file));
-					}
-				}
-
-			});
-
 		replaceRegexTask.pre(
 			new Closure<String>(null) {
 
