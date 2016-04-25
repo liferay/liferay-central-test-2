@@ -161,6 +161,20 @@ public class LiferayRelengPlugin implements Plugin<Project> {
 		}
 
 		GradleUtil.withPlugin(
+			project, LiferayAntDefaultsPlugin.class,
+			new Action<LiferayAntDefaultsPlugin>() {
+
+				@Override
+				public void execute(
+					LiferayAntDefaultsPlugin liferayAntDefaultsPlugin) {
+
+					configureTaskPrintArtifactPublishCommandsForAnt(
+						printArtifactPublishCommandsTask);
+				}
+
+			});
+
+		GradleUtil.withPlugin(
 			project, LiferayOSGiDefaultsPlugin.class,
 			new Action<LiferayOSGiDefaultsPlugin>() {
 
@@ -472,6 +486,14 @@ public class LiferayRelengPlugin implements Plugin<Project> {
 				}
 
 			});
+	}
+
+	protected void configureTaskPrintArtifactPublishCommandsForAnt(
+		PrintArtifactPublishCommandsTask printArtifactPublishCommandsTask) {
+
+		configureTaskPrintArtifactPublishCommandsPrepNextFiles(
+			printArtifactPublishCommandsTask,
+			LiferayAntDefaultsPlugin.UPDATE_PLUGIN_VERSION_TASK_NAME);
 	}
 
 	protected void configureTaskPrintArtifactPublishCommandsForOSGi(
