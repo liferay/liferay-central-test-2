@@ -28,10 +28,8 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -50,10 +48,6 @@ import org.gradle.util.GUtil;
  * @author Andrea Di Giorgi
  */
 public class ReplaceRegexTask extends DefaultTask {
-
-	public Iterable<File> getMatchedFiles() {
-		return _matchedFiles;
-	}
 
 	@Input
 	@SkipWhenEmpty
@@ -127,8 +121,6 @@ public class ReplaceRegexTask extends DefaultTask {
 
 	@TaskAction
 	public void replaceRegex() throws IOException {
-		_matchedFiles.clear();
-
 		Map<String, FileCollection> matches = getMatches();
 		String replacement = getReplacement();
 
@@ -238,7 +230,11 @@ public class ReplaceRegexTask extends DefaultTask {
 		if (!content.equals(newContent)) {
 			Files.write(path, newContent.getBytes(StandardCharsets.UTF_8));
 
-			_matchedFiles.add(file);
+			if (_logger.isLifecycleEnabled()) {
+				Project project = getProject();
+
+				_logger.lifecycle("Updated " + project.relativePath(file));
+			}
 		}
 	}
 
@@ -246,7 +242,6 @@ public class ReplaceRegexTask extends DefaultTask {
 		ReplaceRegexTask.class);
 
 	private boolean _ignoreUnmatched;
-	private final Set<File> _matchedFiles = new LinkedHashSet<>();
 	private final Map<String, FileCollection> _matches = new LinkedHashMap<>();
 	private final List<Closure<String>> _preClosures = new ArrayList<>();
 	private Object _replacement;
