@@ -56,13 +56,14 @@ import com.liferay.shopping.exception.ShippingStreetException;
 import com.liferay.shopping.exception.ShippingZipException;
 import com.liferay.shopping.model.ShoppingCart;
 import com.liferay.shopping.model.ShoppingOrder;
-import com.liferay.shopping.service.ShoppingOrderLocalServiceUtil;
+import com.liferay.shopping.service.ShoppingOrderLocalService;
 import com.liferay.shopping.util.ShoppingUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Peter Fellwock
@@ -83,7 +84,7 @@ public class CheckoutMVCActionCommand extends BaseMVCActionCommand {
 			ThemeDisplay themeDisplay =
 				(ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
 
-			ShoppingOrderLocalServiceUtil.addLatestOrder(
+			_shoppingOrderLocalService.addLatestOrder(
 				themeDisplay.getUserId(), themeDisplay.getScopeGroupId());
 		}
 	}
@@ -199,7 +200,7 @@ public class CheckoutMVCActionCommand extends BaseMVCActionCommand {
 			ServiceContext serviceContext = ServiceContextFactory.getInstance(
 				actionRequest);
 
-			ShoppingOrderLocalServiceUtil.sendEmail(
+			_shoppingOrderLocalService.sendEmail(
 				order, "confirmation", serviceContext);
 
 			actionResponse.sendRedirect(returnURL);
@@ -213,7 +214,7 @@ public class CheckoutMVCActionCommand extends BaseMVCActionCommand {
 			ThemeDisplay themeDisplay =
 				(ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
 
-			ShoppingOrderLocalServiceUtil.getLatestOrder(
+			_shoppingOrderLocalService.getLatestOrder(
 				themeDisplay.getUserId(), themeDisplay.getScopeGroupId());
 
 			return true;
@@ -233,10 +234,16 @@ public class CheckoutMVCActionCommand extends BaseMVCActionCommand {
 
 		ShoppingCart cart = ShoppingUtil.getCart(actionRequest);
 
-		ShoppingOrder order = ShoppingOrderLocalServiceUtil.saveLatestOrder(
-			cart);
+		ShoppingOrder order = _shoppingOrderLocalService.saveLatestOrder(cart);
 
 		forwardCheckout(actionRequest, actionResponse, order);
+	}
+
+	@Reference(unbind = "-")
+	protected void setShoppingOrderLocalService(
+		ShoppingOrderLocalService shoppingOrderLocalService) {
+
+		_shoppingOrderLocalService = shoppingOrderLocalService;
 	}
 
 	protected void updateLatestOrder(ActionRequest actionRequest)
@@ -309,7 +316,7 @@ public class CheckoutMVCActionCommand extends BaseMVCActionCommand {
 
 		String comments = ParamUtil.getString(actionRequest, "comments");
 
-		ShoppingOrderLocalServiceUtil.updateLatestOrder(
+		_shoppingOrderLocalService.updateLatestOrder(
 			themeDisplay.getUserId(), themeDisplay.getScopeGroupId(),
 			billingFirstName, billingLastName, billingEmailAddress,
 			billingCompany, billingStreet, billingCity, billingState,
@@ -321,5 +328,7 @@ public class CheckoutMVCActionCommand extends BaseMVCActionCommand {
 	}
 
 	private static final boolean _CHECK_METHOD_ON_PROCESS_ACTION = false;
+
+	private ShoppingOrderLocalService _shoppingOrderLocalService;
 
 }

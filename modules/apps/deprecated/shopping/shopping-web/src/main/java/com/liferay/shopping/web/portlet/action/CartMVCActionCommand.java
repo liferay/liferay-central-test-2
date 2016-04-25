@@ -31,14 +31,15 @@ import com.liferay.shopping.exception.NoSuchCouponException;
 import com.liferay.shopping.exception.NoSuchItemException;
 import com.liferay.shopping.model.ShoppingCart;
 import com.liferay.shopping.model.ShoppingItem;
-import com.liferay.shopping.service.ShoppingCartLocalServiceUtil;
-import com.liferay.shopping.service.ShoppingItemLocalServiceUtil;
+import com.liferay.shopping.service.ShoppingCartLocalService;
+import com.liferay.shopping.service.ShoppingItemLocalService;
 import com.liferay.shopping.util.ShoppingUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Peter Fellwock
@@ -91,6 +92,20 @@ public class CartMVCActionCommand extends BaseMVCActionCommand {
 		}
 	}
 
+	@Reference(unbind = "-")
+	protected void setShoppingCartLocalService(
+		ShoppingCartLocalService shoppingCartLocalService) {
+
+		_shoppingCartLocalService = shoppingCartLocalService;
+	}
+
+	@Reference(unbind = "-")
+	protected void setShoppingItemLocalService(
+		ShoppingItemLocalService shoppingItemLocalService) {
+
+		_shoppingItemLocalService = shoppingItemLocalService;
+	}
+
 	protected void updateCart(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
@@ -108,7 +123,7 @@ public class CartMVCActionCommand extends BaseMVCActionCommand {
 				fields = "|" + fields;
 			}
 
-			ShoppingItem item = ShoppingItemLocalServiceUtil.getItem(itemId);
+			ShoppingItem item = _shoppingItemLocalService.getItem(itemId);
 
 			if (item.getMinQuantity() > 0) {
 				for (int i = 0; i < item.getMinQuantity(); i++) {
@@ -133,7 +148,7 @@ public class CartMVCActionCommand extends BaseMVCActionCommand {
 			cart.setInsure(insure);
 		}
 
-		ShoppingCartLocalServiceUtil.updateCart(
+		_shoppingCartLocalService.updateCart(
 			cart.getUserId(), cart.getGroupId(), cart.getItemIds(),
 			cart.getCouponCodes(), cart.getAltShipping(), cart.isInsure());
 
@@ -141,5 +156,8 @@ public class CartMVCActionCommand extends BaseMVCActionCommand {
 			addSuccessMessage(actionRequest, actionResponse);
 		}
 	}
+
+	private ShoppingCartLocalService _shoppingCartLocalService;
+	private ShoppingItemLocalService _shoppingItemLocalService;
 
 }
