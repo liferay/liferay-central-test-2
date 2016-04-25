@@ -34,9 +34,6 @@ import org.gradle.api.tasks.Upload;
  */
 public class LiferayAntDefaultsPlugin implements Plugin<Project> {
 
-	public static final String UPDATE_PLUGIN_VERSION_TASK_NAME =
-		"updatePluginVersion";
-
 	@Override
 	public void apply(Project project) {
 		GradleUtil.applyPlugin(project, LiferayAntPlugin.class);
@@ -49,8 +46,8 @@ public class LiferayAntDefaultsPlugin implements Plugin<Project> {
 
 		applyConfigScripts(project);
 
-		final ReplaceRegexTask updatePluginVersionTask =
-			addTaskUpdatePluginVersion(project);
+		final ReplaceRegexTask updateVersionTask = addTaskUpdateVersion(
+			project);
 
 		configureProject(project);
 
@@ -65,8 +62,7 @@ public class LiferayAntDefaultsPlugin implements Plugin<Project> {
 					// configureTaskUploadArchives, because the latter one needs
 					// to know if we are publishing a snapshot or not.
 
-					configureTaskUploadArchives(
-						project, updatePluginVersionTask);
+					configureTaskUploadArchives(project, updateVersionTask);
 				}
 
 			});
@@ -87,11 +83,10 @@ public class LiferayAntDefaultsPlugin implements Plugin<Project> {
 		return upload;
 	}
 
-	protected ReplaceRegexTask addTaskUpdatePluginVersion(
-		final Project project) {
-
+	protected ReplaceRegexTask addTaskUpdateVersion(final Project project) {
 		ReplaceRegexTask replaceRegexTask = GradleUtil.addTask(
-			project, UPDATE_PLUGIN_VERSION_TASK_NAME, ReplaceRegexTask.class);
+			project, LiferayRelengPlugin.UPDATE_VERSION_TASK_NAME,
+			ReplaceRegexTask.class);
 
 		replaceRegexTask.match(
 			"module-incremental-version=(\\d+)",
