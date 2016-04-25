@@ -15,8 +15,9 @@
 package com.liferay.gradle.plugins;
 
 import com.liferay.gradle.plugins.extensions.LiferayExtension;
-import com.liferay.gradle.plugins.tasks.UpdateVersionTask;
+import com.liferay.gradle.plugins.tasks.ReplaceRegexTask;
 import com.liferay.gradle.plugins.util.GradleUtil;
+import com.liferay.gradle.plugins.util.IncrementVersionClosure;
 
 import java.io.File;
 
@@ -52,7 +53,7 @@ public class LiferayThemeDefaultsPlugin implements Plugin<Project> {
 
 		applyConfigScripts(project);
 
-		final UpdateVersionTask updateThemeVersionTask =
+		final ReplaceRegexTask updateThemeVersionTask =
 			addTaskUpdateThemeVersion(project);
 
 		configureDeployDir(project);
@@ -91,30 +92,21 @@ public class LiferayThemeDefaultsPlugin implements Plugin<Project> {
 		return upload;
 	}
 
-	protected UpdateVersionTask addTaskUpdateThemeVersion(
+	protected ReplaceRegexTask addTaskUpdateThemeVersion(
 		final Project project) {
 
-		UpdateVersionTask updateVersionTask = GradleUtil.addTask(
-			project, UPDATE_THEME_VERSION_TASK_NAME, UpdateVersionTask.class);
+		ReplaceRegexTask replaceRegexTask = GradleUtil.addTask(
+			project, UPDATE_THEME_VERSION_TASK_NAME, ReplaceRegexTask.class);
 
-		updateVersionTask.pattern(
-			"package.json",
-			"\"version\": \"" + UpdateVersionTask.VERSION_PLACEHOLDER + "\"");
+		replaceRegexTask.match("\\n\\t\"version\": \"(.+)\"", "package.json");
 
-		updateVersionTask.setDescription(
+		replaceRegexTask.setDescription(
 			"Updates the project version in the package.json file.");
 
-		updateVersionTask.setVersion(
-			new Callable<Object>() {
+		replaceRegexTask.setReplacement(
+			IncrementVersionClosure.MICRO_INCREMENT);
 
-				@Override
-				public Object call() throws Exception {
-					return project.getVersion();
-				}
-
-			});
-
-		return updateVersionTask;
+		return replaceRegexTask;
 	}
 
 	protected void applyConfigScripts(Project project) {
@@ -149,7 +141,7 @@ public class LiferayThemeDefaultsPlugin implements Plugin<Project> {
 	}
 
 	protected void configureTaskUploadArchives(
-		Project project, UpdateVersionTask updateThemeVersionTask) {
+		Project project, Task updateThemeVersionTask) {
 
 		if (GradleUtil.isSnapshot(project)) {
 			return;
