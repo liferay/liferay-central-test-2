@@ -15,11 +15,13 @@
 package com.liferay.shopping.web.portlet.action;
 
 import com.liferay.portal.kernel.portlet.BaseJSPSettingsConfigurationAction;
+import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.shopping.constants.ShoppingPortletKeys;
 
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -28,9 +30,20 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 
+import org.osgi.service.component.annotations.Component;
+
 /**
  * @author Brian Wing Shun Chan
+ * @author Peter Fellwock
  */
+@Component(
+	immediate = true,
+	property = {
+		"javax.portlet.name=" + ShoppingPortletKeys.SHOPPING,
+		"javax.portlet.name=" + ShoppingPortletKeys.SHOPPING_ADMIN
+	},
+	service = ConfigurationAction.class
+)
 public class ShoppingConfigurationAction
 	extends BaseJSPSettingsConfigurationAction {
 
