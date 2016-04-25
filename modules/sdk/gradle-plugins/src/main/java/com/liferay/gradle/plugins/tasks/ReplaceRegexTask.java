@@ -60,8 +60,8 @@ public class ReplaceRegexTask extends DefaultTask {
 	}
 
 	@Input
-	public String getReplacement() {
-		return GradleUtil.toString(_replacement);
+	public Object getReplacement() {
+		return _replacement;
 	}
 
 	public List<Closure<Boolean>> getReplaceOnlyIf() {
@@ -122,14 +122,13 @@ public class ReplaceRegexTask extends DefaultTask {
 	@TaskAction
 	public void replaceRegex() throws IOException {
 		Map<String, FileCollection> matches = getMatches();
-		String replacement = getReplacement();
 
 		for (Map.Entry<String, FileCollection> entry : matches.entrySet()) {
 			Pattern pattern = Pattern.compile(entry.getKey());
 			FileCollection fileCollection = entry.getValue();
 
 			for (File file : fileCollection) {
-				replaceRegex(file, pattern, replacement);
+				replaceRegex(file, pattern);
 			}
 		}
 	}
@@ -170,9 +169,7 @@ public class ReplaceRegexTask extends DefaultTask {
 		replaceOnlyIf(replaceOnlyIfClosures);
 	}
 
-	protected void replaceRegex(File file, Pattern pattern, String replacement)
-		throws IOException {
-
+	protected void replaceRegex(File file, Pattern pattern) throws IOException {
 		Path path = file.toPath();
 
 		String content = new String(
@@ -192,6 +189,20 @@ public class ReplaceRegexTask extends DefaultTask {
 			int groupCount = matcher.groupCount();
 
 			String group = matcher.group(groupCount);
+
+			String replacement;
+
+			Object replacementObj = getReplacement();
+
+			if (replacementObj instanceof Closure<?>) {
+				Closure<String> replacementClosure =
+					(Closure<String>)replacementObj;
+
+				replacement = replacementClosure.call(group);
+			}
+			else {
+				replacement = GradleUtil.toString(replacementObj);
+			}
 
 			for (Closure<Boolean> closure : getReplaceOnlyIf()) {
 				if (!closure.call(group, replacement, newContent)) {
