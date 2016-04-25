@@ -27,13 +27,13 @@ import com.liferay.gradle.plugins.service.builder.ServiceBuilderPlugin;
 import com.liferay.gradle.plugins.tasks.BaselineTask;
 import com.liferay.gradle.plugins.tasks.InstallCacheTask;
 import com.liferay.gradle.plugins.tasks.ReplaceRegexTask;
-import com.liferay.gradle.plugins.tasks.UpdateVersionTask;
 import com.liferay.gradle.plugins.test.integration.TestIntegrationBasePlugin;
 import com.liferay.gradle.plugins.tlddoc.builder.TLDDocBuilderPlugin;
 import com.liferay.gradle.plugins.tlddoc.builder.tasks.TLDDocTask;
 import com.liferay.gradle.plugins.upgrade.table.builder.UpgradeTableBuilderPlugin;
 import com.liferay.gradle.plugins.util.FileUtil;
 import com.liferay.gradle.plugins.util.GradleUtil;
+import com.liferay.gradle.plugins.util.IncrementVersionClosure;
 import com.liferay.gradle.plugins.whip.WhipPlugin;
 import com.liferay.gradle.plugins.wsdd.builder.WSDDBuilderPlugin;
 import com.liferay.gradle.plugins.wsdl.builder.WSDLBuilderPlugin;
@@ -792,19 +792,20 @@ public class LiferayOSGiDefaultsPlugin implements Plugin<Project> {
 		return jar;
 	}
 
-	protected UpdateVersionTask addTaskUpdateBundleVersion(Project project) {
-		final UpdateVersionTask updateVersionTask = GradleUtil.addTask(
-			project, UPDATE_BUNDLE_VERSION_TASK_NAME, UpdateVersionTask.class);
+	protected ReplaceRegexTask addTaskUpdateBundleVersion(Project project) {
+		final ReplaceRegexTask replaceRegexTask = GradleUtil.addTask(
+			project, UPDATE_BUNDLE_VERSION_TASK_NAME, ReplaceRegexTask.class);
 
-		updateVersionTask.onlyIf(
+		replaceRegexTask.match("Bundle-Version: (.+)(?:\\s|$)", "bnd.bnd");
+
+		replaceRegexTask.onlyIf(
 			new Spec<Task>() {
 
 				@Override
 				public boolean isSatisfiedBy(Task task) {
-					UpdateVersionTask updateVersionTask =
-						(UpdateVersionTask)task;
+					Project project = task.getProject();
 
-					String version = updateVersionTask.getVersion();
+					String version = String.valueOf(project.getVersion());
 
 					if (version.contains("LIFERAY-PATCHED-")) {
 						return false;
@@ -815,26 +816,12 @@ public class LiferayOSGiDefaultsPlugin implements Plugin<Project> {
 
 			});
 
-		updateVersionTask.pattern(
-			"bnd.bnd",
-			Constants.BUNDLE_VERSION + ": " +
-				UpdateVersionTask.VERSION_PLACEHOLDER);
-
-		updateVersionTask.setDescription(
+		replaceRegexTask.setDescription(
 			"Updates the project version in the " + Constants.BUNDLE_VERSION +
 				" header.");
 
-		updateVersionTask.setVersion(
-			new Callable<Object>() {
-
-				@Override
-				public Object call() throws Exception {
-					Project project = updateVersionTask.getProject();
-
-					return project.getVersion();
-				}
-
-			});
+		replaceRegexTask.setReplacement(
+			IncrementVersionClosure.MICRO_INCREMENT);
 
 		project.afterEvaluate(
 			new Action<Project>() {
@@ -847,15 +834,13 @@ public class LiferayOSGiDefaultsPlugin implements Plugin<Project> {
 						return;
 					}
 
-					updateVersionTask.pattern(
-						moduleConfigFile,
-						"\"version\": \"" +
-							UpdateVersionTask.VERSION_PLACEHOLDER + "\"");
+					replaceRegexTask.match(
+						"\\n\\t\"version\": \"(.+)\"", moduleConfigFile);
 				}
 
 			});
 
-		return updateVersionTask;
+		return replaceRegexTask;
 	}
 
 	protected ReplaceRegexTask addTaskUpdateFileVersions(

@@ -17,7 +17,7 @@ package com.liferay.gradle.plugins;
 import com.liferay.gradle.plugins.change.log.builder.BuildChangeLogTask;
 import com.liferay.gradle.plugins.change.log.builder.ChangeLogBuilderPlugin;
 import com.liferay.gradle.plugins.tasks.PrintArtifactPublishCommandsTask;
-import com.liferay.gradle.plugins.tasks.UpdateVersionTask;
+import com.liferay.gradle.plugins.tasks.ReplaceRegexTask;
 import com.liferay.gradle.plugins.tasks.WritePropertiesTask;
 import com.liferay.gradle.plugins.util.FileUtil;
 import com.liferay.gradle.plugins.util.GradleUtil;
@@ -510,16 +510,15 @@ public class LiferayRelengPlugin implements Plugin<Project> {
 
 			@Override
 			public void execute(Project project) {
-				UpdateVersionTask updateVersionTask =
-					(UpdateVersionTask)GradleUtil.getTask(
+				ReplaceRegexTask replaceRegexTask =
+					(ReplaceRegexTask)GradleUtil.getTask(
 						project, updateVersionTaskName);
 
-				Map<Object, Object> patterns = updateVersionTask.getPatterns();
+				Map<String, FileCollection> matches =
+					replaceRegexTask.getMatches();
 
-				FileCollection fileCollection = project.files(
-					patterns.keySet());
-
-				printArtifactPublishCommandsTask.prepNextFiles(fileCollection);
+				printArtifactPublishCommandsTask.prepNextFiles(
+					matches.values());
 			}
 
 		};
