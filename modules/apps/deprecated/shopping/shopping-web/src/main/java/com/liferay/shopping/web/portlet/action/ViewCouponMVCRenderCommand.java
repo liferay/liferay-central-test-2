@@ -22,13 +22,14 @@ import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.shopping.constants.ShoppingPortletKeys;
 import com.liferay.shopping.exception.NoSuchCouponException;
 import com.liferay.shopping.model.ShoppingCoupon;
-import com.liferay.shopping.service.ShoppingCouponLocalServiceUtil;
+import com.liferay.shopping.service.ShoppingCouponLocalService;
 
 import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Brian Wing Shun Chan
@@ -58,10 +59,10 @@ public class ViewCouponMVCRenderCommand implements MVCRenderCommand {
 			ShoppingCoupon coupon = null;
 
 			if (couponId > 0) {
-				coupon = ShoppingCouponLocalServiceUtil.getCoupon(couponId);
+				coupon = _shoppingCouponLocalService.getCoupon(couponId);
 			}
 			else {
-				coupon = ShoppingCouponLocalServiceUtil.getCoupon(code);
+				coupon = _shoppingCouponLocalService.getCoupon(code);
 			}
 
 			renderRequest.setAttribute(WebKeys.SHOPPING_COUPON, coupon);
@@ -81,5 +82,14 @@ public class ViewCouponMVCRenderCommand implements MVCRenderCommand {
 
 		return "/view_coupon.jsp";
 	}
+
+	@Reference(unbind = "-")
+	protected void setShoppingCouponLocalService(
+		ShoppingCouponLocalService shoppingCouponLocalService) {
+
+		_shoppingCouponLocalService = shoppingCouponLocalService;
+	}
+
+	private ShoppingCouponLocalService _shoppingCouponLocalService;
 
 }

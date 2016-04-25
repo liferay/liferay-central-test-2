@@ -32,7 +32,7 @@ import com.liferay.shopping.constants.ShoppingConstants;
 import com.liferay.shopping.constants.ShoppingPortletKeys;
 import com.liferay.shopping.exception.NoSuchOrderException;
 import com.liferay.shopping.model.ShoppingOrder;
-import com.liferay.shopping.service.ShoppingOrderLocalServiceUtil;
+import com.liferay.shopping.service.ShoppingOrderLocalService;
 import com.liferay.shopping.util.ShoppingUtil;
 
 import java.io.InputStreamReader;
@@ -47,6 +47,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Brian Wing Shun Chan
@@ -140,7 +141,7 @@ public class PayPalNotificationAction extends BaseStrutsAction {
 				ServiceContext serviceContext =
 					ServiceContextFactory.getInstance(request);
 
-				ShoppingOrderLocalServiceUtil.completeOrder(
+				_shoppingOrderLocalService.completeOrder(
 					invoice, txnId, paymentStatus, paymentGross, receiverEmail,
 					payerEmail, true, serviceContext);
 			}
@@ -156,13 +157,20 @@ public class PayPalNotificationAction extends BaseStrutsAction {
 		}
 	}
 
+	@Reference(unbind = "-")
+	protected void setShoppingOrderLocalService(
+		ShoppingOrderLocalService shoppingOrderLocalService) {
+
+		_shoppingOrderLocalService = shoppingOrderLocalService;
+	}
+
 	protected boolean validate(HttpServletRequest request) throws Exception {
 
 		// Invoice
 
 		String ppInvoice = ParamUtil.getString(request, "invoice");
 
-		ShoppingOrder order = ShoppingOrderLocalServiceUtil.getOrder(ppInvoice);
+		ShoppingOrder order = _shoppingOrderLocalService.getOrder(ppInvoice);
 
 		ShoppingGroupServiceOverriddenConfiguration
 			shoppingGroupServiceOverriddenConfiguration =
@@ -208,7 +216,7 @@ public class PayPalNotificationAction extends BaseStrutsAction {
 		String ppTxnId = ParamUtil.getString(request, "txn_id");
 
 		try {
-			ShoppingOrderLocalServiceUtil.getPayPalTxnIdOrder(ppTxnId);
+			_shoppingOrderLocalService.getPayPalTxnIdOrder(ppTxnId);
 
 			return false;
 		}
@@ -220,5 +228,7 @@ public class PayPalNotificationAction extends BaseStrutsAction {
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		PayPalNotificationAction.class);
+
+	private ShoppingOrderLocalService _shoppingOrderLocalService;
 
 }

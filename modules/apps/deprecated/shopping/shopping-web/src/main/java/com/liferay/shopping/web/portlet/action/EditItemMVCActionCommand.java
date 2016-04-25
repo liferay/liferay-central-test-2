@@ -45,7 +45,7 @@ import com.liferay.shopping.model.ShoppingItemField;
 import com.liferay.shopping.model.ShoppingItemPrice;
 import com.liferay.shopping.model.ShoppingItemPriceConstants;
 import com.liferay.shopping.model.impl.ShoppingItemImpl;
-import com.liferay.shopping.service.ShoppingItemServiceUtil;
+import com.liferay.shopping.service.ShoppingItemService;
 import com.liferay.shopping.service.persistence.ShoppingItemFieldUtil;
 import com.liferay.shopping.service.persistence.ShoppingItemPriceUtil;
 
@@ -58,6 +58,7 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Brian Wing Shun Chan
@@ -77,7 +78,7 @@ public class EditItemMVCActionCommand extends BaseMVCActionCommand {
 	protected void deleteItem(ActionRequest actionRequest) throws Exception {
 		long itemId = ParamUtil.getLong(actionRequest, "itemId");
 
-		ShoppingItemServiceUtil.deleteItem(itemId);
+		_shoppingItemService.deleteItem(itemId);
 	}
 
 	@Override
@@ -125,6 +126,13 @@ public class EditItemMVCActionCommand extends BaseMVCActionCommand {
 				throw e;
 			}
 		}
+	}
+
+	@Reference(unbind = "-")
+	protected void setShoppingItemService(
+		ShoppingItemService shoppingItemService) {
+
+		_shoppingItemService = shoppingItemService;
 	}
 
 	protected void updateItem(ActionRequest actionRequest) throws Exception {
@@ -261,7 +269,7 @@ public class EditItemMVCActionCommand extends BaseMVCActionCommand {
 
 			// Add item
 
-			ShoppingItemServiceUtil.addItem(
+			_shoppingItemService.addItem(
 				groupId, categoryId, sku, name, description, properties,
 				fieldsQuantities, requiresShipping, stockQuantity, featured,
 				sale, smallImage, smallImageURL, smallFile, mediumImage,
@@ -272,7 +280,7 @@ public class EditItemMVCActionCommand extends BaseMVCActionCommand {
 
 			// Update item
 
-			ShoppingItemServiceUtil.updateItem(
+			_shoppingItemService.updateItem(
 				itemId, groupId, categoryId, sku, name, description, properties,
 				fieldsQuantities, requiresShipping, stockQuantity, featured,
 				sale, smallImage, smallImageURL, smallFile, mediumImage,
@@ -280,5 +288,7 @@ public class EditItemMVCActionCommand extends BaseMVCActionCommand {
 				largeFile, itemFields, itemPrices, serviceContext);
 		}
 	}
+
+	private ShoppingItemService _shoppingItemService;
 
 }

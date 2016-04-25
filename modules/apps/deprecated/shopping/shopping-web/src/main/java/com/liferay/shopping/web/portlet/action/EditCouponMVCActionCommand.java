@@ -38,7 +38,7 @@ import com.liferay.shopping.exception.CouponStartDateException;
 import com.liferay.shopping.exception.DuplicateCouponCodeException;
 import com.liferay.shopping.exception.NoSuchCouponException;
 import com.liferay.shopping.model.ShoppingCoupon;
-import com.liferay.shopping.service.ShoppingCouponServiceUtil;
+import com.liferay.shopping.service.ShoppingCouponService;
 
 import java.util.Calendar;
 
@@ -46,6 +46,7 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Brian Wing Shun Chan
@@ -71,7 +72,7 @@ public class EditCouponMVCActionCommand extends BaseMVCActionCommand {
 			actionRequest, "rowIds");
 
 		for (long deleteCouponId : deleteCouponIds) {
-			ShoppingCouponServiceUtil.deleteCoupon(
+			_shoppingCouponService.deleteCoupon(
 				themeDisplay.getScopeGroupId(), deleteCouponId);
 		}
 	}
@@ -137,6 +138,13 @@ public class EditCouponMVCActionCommand extends BaseMVCActionCommand {
 		}
 	}
 
+	@Reference(unbind = "-")
+	protected void setShoppingCouponService(
+		ShoppingCouponService shoppingCouponService) {
+
+		_shoppingCouponService = shoppingCouponService;
+	}
+
 	protected void updateCoupon(ActionRequest actionRequest) throws Exception {
 		long couponId = ParamUtil.getLong(actionRequest, "couponId");
 
@@ -192,7 +200,7 @@ public class EditCouponMVCActionCommand extends BaseMVCActionCommand {
 
 			// Add coupon
 
-			ShoppingCouponServiceUtil.addCoupon(
+			_shoppingCouponService.addCoupon(
 				code, autoCode, name, description, startDateMonth, startDateDay,
 				startDateYear, startDateHour, startDateMinute, endDateMonth,
 				endDateDay, endDateYear, endDateHour, endDateMinute,
@@ -203,7 +211,7 @@ public class EditCouponMVCActionCommand extends BaseMVCActionCommand {
 
 			// Update coupon
 
-			ShoppingCouponServiceUtil.updateCoupon(
+			_shoppingCouponService.updateCoupon(
 				couponId, name, description, startDateMonth, startDateDay,
 				startDateYear, startDateHour, startDateMinute, endDateMonth,
 				endDateDay, endDateYear, endDateHour, endDateMinute,
@@ -211,5 +219,7 @@ public class EditCouponMVCActionCommand extends BaseMVCActionCommand {
 				discount, discountType, serviceContext);
 		}
 	}
+
+	private ShoppingCouponService _shoppingCouponService;
 
 }

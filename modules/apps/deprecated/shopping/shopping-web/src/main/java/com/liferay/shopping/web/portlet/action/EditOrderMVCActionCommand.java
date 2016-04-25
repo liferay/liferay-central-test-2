@@ -27,13 +27,14 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.shopping.constants.ShoppingPortletKeys;
 import com.liferay.shopping.exception.NoSuchOrderException;
-import com.liferay.shopping.service.ShoppingOrderServiceUtil;
+import com.liferay.shopping.service.ShoppingOrderService;
 import com.liferay.shopping.util.ShoppingUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Brian Wing Shun Chan
@@ -58,7 +59,7 @@ public class EditOrderMVCActionCommand extends BaseMVCActionCommand {
 			ParamUtil.getString(actionRequest, "deleteOrderIds"), 0L);
 
 		for (long deleteOrderId : deleteOrderIds) {
-			ShoppingOrderServiceUtil.deleteOrder(
+			_shoppingOrderService.deleteOrder(
 				themeDisplay.getScopeGroupId(), deleteOrderId);
 		}
 	}
@@ -108,8 +109,15 @@ public class EditOrderMVCActionCommand extends BaseMVCActionCommand {
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			actionRequest);
 
-		ShoppingOrderServiceUtil.sendEmail(
+		_shoppingOrderService.sendEmail(
 			themeDisplay.getScopeGroupId(), orderId, emailType, serviceContext);
+	}
+
+	@Reference(unbind = "-")
+	protected void setShoppingOrderService(
+		ShoppingOrderService shoppingOrderService) {
+
+		_shoppingOrderService = shoppingOrderService;
 	}
 
 	protected void updateOrder(ActionRequest actionRequest) throws Exception {
@@ -130,9 +138,11 @@ public class EditOrderMVCActionCommand extends BaseMVCActionCommand {
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			actionRequest);
 
-		ShoppingOrderServiceUtil.completeOrder(
+		_shoppingOrderService.completeOrder(
 			themeDisplay.getScopeGroupId(), number, ppTxnId, ppPaymentStatus,
 			ppPaymentGross, ppReceiverEmail, ppPayerEmail, serviceContext);
 	}
+
+	private ShoppingOrderService _shoppingOrderService;
 
 }

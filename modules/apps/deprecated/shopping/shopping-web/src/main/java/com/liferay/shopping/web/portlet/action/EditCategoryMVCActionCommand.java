@@ -26,12 +26,13 @@ import com.liferay.shopping.constants.ShoppingPortletKeys;
 import com.liferay.shopping.exception.CategoryNameException;
 import com.liferay.shopping.exception.NoSuchCategoryException;
 import com.liferay.shopping.model.ShoppingCategory;
-import com.liferay.shopping.service.ShoppingCategoryServiceUtil;
+import com.liferay.shopping.service.ShoppingCategoryService;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Peter Fellwock
@@ -53,7 +54,7 @@ public class EditCategoryMVCActionCommand extends BaseMVCActionCommand {
 
 		long categoryId = ParamUtil.getLong(actionRequest, "categoryId");
 
-		ShoppingCategoryServiceUtil.deleteCategory(categoryId);
+		_shoppingCategoryService.deleteCategory(categoryId);
 	}
 
 	@Override
@@ -90,6 +91,13 @@ public class EditCategoryMVCActionCommand extends BaseMVCActionCommand {
 		}
 	}
 
+	@Reference(unbind = "-")
+	protected void setShoppingCategoryService(
+		ShoppingCategoryService shoppingCategoryService) {
+
+		_shoppingCategoryService = shoppingCategoryService;
+	}
+
 	protected void updateCategory(ActionRequest actionRequest)
 		throws Exception {
 
@@ -110,17 +118,19 @@ public class EditCategoryMVCActionCommand extends BaseMVCActionCommand {
 
 			// Add category
 
-			ShoppingCategoryServiceUtil.addCategory(
+			_shoppingCategoryService.addCategory(
 				parentCategoryId, name, description, serviceContext);
 		}
 		else {
 
 			// Update category
 
-			ShoppingCategoryServiceUtil.updateCategory(
+			_shoppingCategoryService.updateCategory(
 				categoryId, parentCategoryId, name, description,
 				mergeWithParentCategory, serviceContext);
 		}
 	}
+
+	private ShoppingCategoryService _shoppingCategoryService;
 
 }
