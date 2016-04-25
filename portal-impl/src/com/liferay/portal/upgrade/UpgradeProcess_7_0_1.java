@@ -32,10 +32,9 @@ public class UpgradeProcess_7_0_1 extends UpgradeProcess {
 	@Override
 	protected void doUpgrade() throws Exception {
 		upgrade(UpgradeCompany.class);
+		upgrade(UpgradeMessageBoards.class);
 
 		clearIndexesCache();
-
-		upgrade(UpgradeMessageBoards.class);
 	}
 
 }
