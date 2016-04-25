@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portal.kernel.upgrade.BaseUpgradePortletPreferences;
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.PortletKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -47,7 +48,7 @@ public class UpgradeMessageBoards extends BaseUpgradePortletPreferences {
 
 		for (Locale availableLocale : availableLocales) {
 			String key =
-				"priorities" + StringPool.UNDERLINE +
+				"priorities" + CharPool.UNDERLINE +
 					LanguageUtil.getLanguageId(availableLocale);
 
 			String[] oldThreadPriorities = portletPreferences.getValues(
@@ -62,7 +63,7 @@ public class UpgradeMessageBoards extends BaseUpgradePortletPreferences {
 
 			for (int i = 0; i < oldThreadPriorities.length; i++) {
 				newThreadPriorities[i] = StringUtil.replace(
-					oldThreadPriorities[i], StringPool.COMMA, StringPool.PIPE);
+					oldThreadPriorities[i], CharPool.COMMA, CharPool.PIPE);
 			}
 
 			portletPreferences.setValues(key, newThreadPriorities);
