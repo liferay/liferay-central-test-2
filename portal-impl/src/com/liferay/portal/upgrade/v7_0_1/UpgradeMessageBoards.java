@@ -61,11 +61,8 @@ public class UpgradeMessageBoards extends BaseUpgradePortletPreferences {
 				new String[oldThreadPriorities.length];
 
 			for (int i = 0; i < oldThreadPriorities.length; i++) {
-				String[] oldThreadPrioritiesParts = StringUtil.split(
-					oldThreadPriorities[i]);
-
-				newThreadPriorities[i] = StringUtil.merge(
-					oldThreadPrioritiesParts, StringPool.PIPE);
+				newThreadPriorities[i] = StringUtil.replace(
+					oldThreadPriorities[i], StringPool.COMMA, StringPool.PIPE);
 			}
 
 			portletPreferences.setValues(key, newThreadPriorities);
