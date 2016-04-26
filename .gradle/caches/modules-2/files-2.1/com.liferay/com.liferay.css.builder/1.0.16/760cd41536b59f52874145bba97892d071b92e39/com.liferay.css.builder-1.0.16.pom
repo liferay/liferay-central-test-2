@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.liferay</groupId>
   <artifactId>com.liferay.css.builder</artifactId>
-  <version>1.0.15</version>
+  <version>1.0.16</version>
   <licenses>
     <license>
       <name>LGPL 2.1</name>
@@ -32,21 +32,15 @@
     </dependency>
     <dependency>
       <groupId>com.liferay</groupId>
-      <artifactId>com.liferay.sass.compiler.ruby</artifactId>
-      <version>2.0.2</version>
+      <artifactId>com.liferay.sass.compiler.jni</artifactId>
+      <version>2.0.3</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>com.liferay</groupId>
-      <artifactId>com.liferay.sass.compiler.jni</artifactId>
-      <version>2.0.2</version>
+      <artifactId>com.liferay.sass.compiler.ruby</artifactId>
+      <version>2.0.3</version>
       <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.liferay.portal</groupId>
-      <artifactId>com.liferay.portal.impl</artifactId>
-      <version>default</version>
-      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.maven</groupId>
@@ -62,8 +56,8 @@
     </dependency>
     <dependency>
       <groupId>com.liferay.portal</groupId>
-      <artifactId>com.liferay.portal.kernel</artifactId>
-      <version>default</version>
+      <artifactId>com.liferay.portal.impl</artifactId>
+      <version>2.0.0</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
@@ -71,6 +65,12 @@
       <artifactId>slf4j-log4j12</artifactId>
       <version>1.7.2</version>
       <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.liferay.portal</groupId>
+      <artifactId>com.liferay.portal.kernel</artifactId>
+      <version>2.0.0</version>
+      <scope>provided</scope>
     </dependency>
   </dependencies>
 </project>
