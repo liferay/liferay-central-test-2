@@ -39,8 +39,8 @@ public class ExecutorServiceRegistry {
 		return Collections.unmodifiableSet(_executors.keySet());
 	}
 
-	public Executor getExecutor(String path) {
-		return _executors.get(path);
+	public Executor getExecutor(String executorPath) {
+		return _executors.get(executorPath);
 	}
 
 	@Reference(
@@ -56,10 +56,8 @@ public class ExecutorServiceRegistry {
 			properties, "server.manager.executor.path");
 
 		if (Validator.isNull(executorPath)) {
-			throw new IllegalStateException(
-				"Unable to register the Executor. " +
-					"Please specify the \"server.manager.executor.path\""+
-						" property.");
+			throw new IllegalArgumentException(
+				"The property \"server.manager.executor.path\" is null");
 		}
 
 		_executors.put(executorPath, executor);
