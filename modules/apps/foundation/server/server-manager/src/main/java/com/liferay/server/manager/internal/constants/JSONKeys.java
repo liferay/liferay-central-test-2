@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.server.manager.internal;
+package com.liferay.server.manager.internal.constants;
 
 /**
  * @author Jonathan Potter

@@ -32,7 +32,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.server.manager.Executor;
 import com.liferay.server.manager.internal.ExecutorPathResolver;
 import com.liferay.server.manager.internal.ExecutorServiceRegistry;
-import com.liferay.server.manager.internal.JSONKeys;
+import com.liferay.server.manager.internal.constants.JSONKeys;
 
 import java.io.IOException;
 
