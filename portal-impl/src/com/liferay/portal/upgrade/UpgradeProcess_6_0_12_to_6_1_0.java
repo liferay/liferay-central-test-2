@@ -51,7 +51,6 @@ public class UpgradeProcess_6_0_12_to_6_1_0 extends Pre7UpgradeProcess {
 		upgrade(UpgradeSchema.class);
 
 		upgrade(UpgradeCompanyId.class);
-
 		upgrade(UpgradeUserName.class);
 
 		upgrade(UpgradeAdminPortlets.class);
