@@ -152,10 +152,6 @@
 		<move file="${artifact.location.old}" tofile="${artifact.location.new}" />
 	</target>
 
-	<target name="reset-artifact">
-		<move failonerror="false" file="${artifact.location.new}" tofile="${artifact.location.old}" />
-	</target>
-
 	<target
 		name="record-artifact-change-log"
 		depends="get-artifact-change-log-ticket-list"
@@ -163,5 +159,9 @@
 		if="${artifact.has.change.log.ticket.list}"
 	>
 		<echo append="true" file="${dist.dir}/ticket.list.tmp">${artifact.change.log.ticket.list} </echo>
+	</target>
+
+	<target name="reset-artifact">
+		<move failonerror="false" file="${artifact.location.new}" tofile="${artifact.location.old}" />
 	</target>
 </project>
