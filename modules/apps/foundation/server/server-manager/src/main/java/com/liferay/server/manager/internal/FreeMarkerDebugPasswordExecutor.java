@@ -17,6 +17,7 @@ package com.liferay.server.manager.internal;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.server.manager.BaseExecutor;
 import com.liferay.server.manager.Executor;
+import com.liferay.server.manager.internal.constants.JSONKeys;
 
 import java.util.Queue;
 
