@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.server.manager;
+package com.liferay.server.manager.executor;
 
 import com.liferay.portal.kernel.json.JSONObject;
 
