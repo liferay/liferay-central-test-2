@@ -74,12 +74,12 @@ public class ExecutorPathResolverTest {
 		Set<String> availableExecutorPaths = new HashSet<>();
 
 		availableExecutorPaths.add("/");
-		availableExecutorPaths.add("/server");
-		availableExecutorPaths.add("/server/log");
-		availableExecutorPaths.add("/server/log/output");
-		availableExecutorPaths.add("/server/log/error");
-		availableExecutorPaths.add("/server/freemarker/debug-port");
 		availableExecutorPaths.add("/plugins");
+		availableExecutorPaths.add("/server");
+		availableExecutorPaths.add("/server/freemarker/debug-port");
+		availableExecutorPaths.add("/server/log");
+		availableExecutorPaths.add("/server/log/error");
+		availableExecutorPaths.add("/server/log/output");
 
 		_executorPathResolver = new ExecutorPathResolver(
 			availableExecutorPaths);
