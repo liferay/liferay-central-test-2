@@ -43,9 +43,9 @@ public class ExecutorPathResolver {
 		while (!executorPath.isEmpty() &&
 			   !_availableExecutorPaths.contains(executorPath)) {
 
-			int pos = executorPath.lastIndexOf(StringPool.SLASH);
+			int index = executorPath.lastIndexOf(StringPool.SLASH);
 
-			executorPath = executorPath.substring(0, pos);
+			executorPath = executorPath.substring(0, index);
 		}
 
 		if (!executorPath.isEmpty()) {
