@@ -200,6 +200,7 @@ public class UpgradeModules extends UpgradeProcess {
 		"com.liferay.wiki.service", "com.liferay.wiki.web",
 		"com.liferay.xsl.content.web"
 	};
+
 	private static final String[][] _CONVERTED_LEGACY_MODULES = {
 		{
 			"calendar-portlet", "com.liferay.calendar.service", "Calendar"
