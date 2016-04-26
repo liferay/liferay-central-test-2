@@ -12,32 +12,38 @@
  * details.
  */
 
-package com.liferay.server.manager.internal;
+package com.liferay.server.manager.executor;
 
 import com.liferay.portal.kernel.json.JSONObject;
-import com.liferay.server.manager.BaseExecutor;
-import com.liferay.server.manager.Executor;
 
 import java.util.Queue;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.osgi.service.component.annotations.Component;
-
 /**
  * @author Jonathan Potter
  * @author Brian Wing Shun Chan
  */
-@Component(
-	immediate = true, property = {"server.manager.executor.path=/status"},
-	service = Executor.class
-)
-public class StatusExecutor extends BaseExecutor {
+public interface Executor {
 
-	@Override
+	public void executeCreate(
+			HttpServletRequest request, JSONObject responseJSONObject,
+			Queue<String> arguments)
+		throws Exception;
+
+	public void executeDelete(
+			HttpServletRequest request, JSONObject responseJSONObject,
+			Queue<String> arguments)
+		throws Exception;
+
 	public void executeRead(
-		HttpServletRequest request, JSONObject responseJSONObject,
-		Queue<String> arguments) {
-	}
+			HttpServletRequest request, JSONObject responseJSONObject,
+			Queue<String> arguments)
+		throws Exception;
+
+	public void executeUpdate(
+			HttpServletRequest request, JSONObject responseJSONObject,
+			Queue<String> arguments)
+		throws Exception;
 
 }

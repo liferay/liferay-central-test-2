@@ -12,13 +12,13 @@
  * details.
  */
 
-package com.liferay.server.manager.internal;
+package com.liferay.server.manager.internal.executor;
 
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.server.manager.BaseExecutor;
-import com.liferay.server.manager.Executor;
+import com.liferay.server.manager.executor.BaseExecutor;
+import com.liferay.server.manager.executor.Executor;
 import com.liferay.server.manager.internal.constants.JSONKeys;
 
 import java.util.List;
@@ -34,13 +34,12 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Jonathan Potter
  * @author Brian Wing Shun Chan
- * @author Cindy Li
  */
 @Component(
-	immediate = true, property = {"server.manager.executor.path=/server"},
+	immediate = true, property = {"server.manager.executor.path=/"},
 	service = Executor.class
 )
-public class ServerExecutor extends BaseExecutor {
+public class RootExecutor extends BaseExecutor {
 
 	@Override
 	public void executeRead(

@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.server.manager.internal;
+package com.liferay.server.manager.internal.executor;
 
 import com.liferay.portal.kernel.deploy.DeployManagerUtil;
 import com.liferay.portal.kernel.deploy.auto.context.AutoDeploymentContext;
@@ -27,8 +27,8 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.SystemProperties;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
-import com.liferay.server.manager.BaseExecutor;
-import com.liferay.server.manager.Executor;
+import com.liferay.server.manager.executor.BaseExecutor;
+import com.liferay.server.manager.executor.Executor;
 import com.liferay.server.manager.internal.constants.JSONKeys;
 
 import java.io.BufferedReader;

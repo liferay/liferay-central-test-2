@@ -12,10 +12,10 @@
  * details.
  */
 
-package com.liferay.server.manager.internal;
+package com.liferay.server.manager.internal.executor;
 
 import com.liferay.portal.kernel.util.ServerDetector;
-import com.liferay.server.manager.Executor;
+import com.liferay.server.manager.executor.Executor;
 
 import java.io.File;
 
