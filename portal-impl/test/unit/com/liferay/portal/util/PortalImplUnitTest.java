@@ -53,8 +53,7 @@ public class PortalImplUnitTest extends PowerMockito {
 		mockHttpServletRequest.setServerName("serverName");
 
 		Assert.assertEquals(
-			"serverName",
-			_portalImpl.getForwardedHost(mockHttpServletRequest));
+			"serverName", _portalImpl.getForwardedHost(mockHttpServletRequest));
 	}
 
 	@Test
@@ -70,10 +69,10 @@ public class PortalImplUnitTest extends PowerMockito {
 			setPropsValuesValue("WEB_SERVER_FORWARDED_HOST_ENABLED", true);
 			setPropsValuesValue(
 				"WEB_SERVER_FORWARDED_HOST_HEADER", "X-Forwarded-Custom-Host");
-	
+
 			MockHttpServletRequest mockHttpServletRequest =
 				new MockHttpServletRequest();
-	
+
 			mockHttpServletRequest.addHeader(
 				"X-Forwarded-Custom-Host", "forwardedServer");
 			mockHttpServletRequest.setServerName("serverName");
@@ -104,7 +103,7 @@ public class PortalImplUnitTest extends PowerMockito {
 
 			MockHttpServletRequest mockHttpServletRequest =
 				new MockHttpServletRequest();
-	
+
 			mockHttpServletRequest.addHeader(
 				"X-Forwarded-Host", "forwardedServer");
 			mockHttpServletRequest.setServerName("serverName");
@@ -129,18 +128,17 @@ public class PortalImplUnitTest extends PowerMockito {
 
 		try {
 			setPropsValuesValue("WEB_SERVER_FORWARDED_HOST_ENABLED", true);
-	
+
 			MockHttpServletRequest mockHttpServletRequest =
 				new MockHttpServletRequest();
-	
+
 			mockHttpServletRequest.addHeader(
 				"X-Forwarded-Host", "forwardedServer");
 			mockHttpServletRequest.setServerName("serverName");
 
-			String newServerName = _portalImpl.getForwardedHost(
-				mockHttpServletRequest);
-
-			Assert.assertEquals("forwardedServer", newServerName);
+			Assert.assertEquals(
+				"forwardedServer",
+				_portalImpl.getForwardedHost(mockHttpServletRequest));
 		}
 		finally {
 			setPropsValuesValue(
@@ -156,25 +154,17 @@ public class PortalImplUnitTest extends PowerMockito {
 
 		mockHttpServletRequest.setServerPort(8080);
 
-		int newServerPort = _portalImpl.getForwardedPort(
-			mockHttpServletRequest);
-
-		Assert.assertEquals(8080, newServerPort);
+		Assert.assertEquals(
+			8080, _portalImpl.getForwardedPort(mockHttpServletRequest));
 	}
 
 	@Test
-	public void testGetForwardedPortWithCustomXForwardedPort() throws Exception {
-		MockHttpServletRequest mockHttpServletRequest =
-			new MockHttpServletRequest();
+	public void testGetForwardedPortWithCustomXForwardedPort()
+		throws Exception {
 
-		mockHttpServletRequest.addHeader("X-Forwarded-Custom-Port", 8081);
-
-		mockHttpServletRequest.setServerPort(8080);
-
-		boolean originalForwardedPort =
+		boolean webServerForwardedPortEnabled =
 			PropsValues.WEB_SERVER_FORWARDED_PORT_ENABLED;
-
-		String originalForwardedPortHeader =
+		String webServerForwardedPortHeader =
 			PropsValues.WEB_SERVER_FORWARDED_PORT_HEADER;
 
 		try {
@@ -182,83 +172,79 @@ public class PortalImplUnitTest extends PowerMockito {
 			setPropsValuesValue(
 				"WEB_SERVER_FORWARDED_PORT_HEADER", "X-Forwarded-Custom-Port");
 
-			int newServerPort = _portalImpl.getForwardedPort(
-				mockHttpServletRequest);
+			MockHttpServletRequest mockHttpServletRequest =
+				new MockHttpServletRequest();
 
-			Assert.assertEquals(8080, newServerPort);
+			mockHttpServletRequest.addHeader("X-Forwarded-Custom-Port", 8081);
+			mockHttpServletRequest.setServerPort(8080);
+
+			Assert.assertEquals(
+				8080, _portalImpl.getForwardedPort(mockHttpServletRequest));
 		}
 		finally {
 			setPropsValuesValue(
-				"WEB_SERVER_FORWARDED_PORT_ENABLED", originalForwardedPort);
+				"WEB_SERVER_FORWARDED_PORT_ENABLED",
+				webServerForwardedPortEnabled);
 			setPropsValuesValue(
 				"WEB_SERVER_FORWARDED_PORT_HEADER",
-				originalForwardedPortHeader);
+				webServerForwardedPortHeader);
 		}
 	}
 
 	@Test
-	public void testGetForwardedPortWithXForwardedPortDisabled() throws Exception {
-		MockHttpServletRequest mockHttpServletRequest =
-			new MockHttpServletRequest();
+	public void testGetForwardedPortWithXForwardedPortDisabled()
+		throws Exception {
 
-		mockHttpServletRequest.addHeader("X-Forwarded-Port", 8081);
-
-		mockHttpServletRequest.setServerPort(8080);
-
-		boolean originalForwardedPort =
+		boolean webServerForwardedHostEnabled =
 			PropsValues.WEB_SERVER_FORWARDED_PORT_ENABLED;
 
 		try {
 			setPropsValuesValue("WEB_SERVER_FORWARDED_PORT_ENABLED", false);
 
-			int newServerPort = _portalImpl.getForwardedPort(
-				mockHttpServletRequest);
+			MockHttpServletRequest mockHttpServletRequest =
+				new MockHttpServletRequest();
 
-			Assert.assertEquals(8080, newServerPort);
+			mockHttpServletRequest.addHeader("X-Forwarded-Port", 8081);
+			mockHttpServletRequest.setServerPort(8080);
+
+			Assert.assertEquals(
+				8080, _portalImpl.getForwardedPort(mockHttpServletRequest));
 		}
 		finally {
 			setPropsValuesValue(
-				"WEB_SERVER_FORWARDED_PORT_ENABLED", originalForwardedPort);
+				"WEB_SERVER_FORWARDED_PORT_ENABLED",
+				webServerForwardedHostEnabled);
 		}
 	}
 
 	@Test
-	public void testGetForwardedPortWithXForwardedPortEnabled() throws Exception {
-		MockHttpServletRequest mockHttpServletRequest =
-			new MockHttpServletRequest();
+	public void testGetForwardedPortWithXForwardedPortEnabled()
+		throws Exception {
 
-		mockHttpServletRequest.addHeader("X-Forwarded-Port", "8081");
-
-		mockHttpServletRequest.setServerPort(8080);
-
-		boolean originalForwardedPort =
+		boolean webServerForwardedPortEnabled =
 			PropsValues.WEB_SERVER_FORWARDED_PORT_ENABLED;
 
 		try {
 			setPropsValuesValue("WEB_SERVER_FORWARDED_PORT_ENABLED", true);
 
-			int newServerPort = _portalImpl.getForwardedPort(
-				mockHttpServletRequest);
+			MockHttpServletRequest mockHttpServletRequest =
+				new MockHttpServletRequest();
 
-			Assert.assertEquals(8081, newServerPort);
+			mockHttpServletRequest.addHeader("X-Forwarded-Port", "8081");
+			mockHttpServletRequest.setServerPort(8080);
+
+			Assert.assertEquals(
+				8081, _portalImpl.getForwardedPort(mockHttpServletRequest));
 		}
 		finally {
 			setPropsValuesValue(
-				"WEB_SERVER_FORWARDED_PORT_ENABLED", originalForwardedPort);
+				"WEB_SERVER_FORWARDED_PORT_ENABLED",
+				webServerForwardedPortEnabled);
 		}
 	}
 
 	@Test
 	public void testIsSecureWithHttpsInitialFalse() throws Exception {
-		MockHttpServletRequest mockHttpServletRequest =
-			new MockHttpServletRequest();
-
-		mockHttpServletRequest.setSecure(true);
-
-		HttpSession mockSession = mockHttpServletRequest.getSession();
-
-		mockSession.setAttribute(WebKeys.HTTPS_INITIAL, Boolean.FALSE);
-
 		boolean originalSecurityAuth =
 			PropsValues.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS;
 		boolean originalEnablePhising =
@@ -268,9 +254,16 @@ public class PortalImplUnitTest extends PowerMockito {
 			setPropsValuesValue("COMPANY_SECURITY_AUTH_REQUIRES_HTTPS", true);
 			setPropsValuesValue("SESSION_ENABLE_PHISHING_PROTECTION", false);
 
-			boolean secure = _portalImpl.isSecure(mockHttpServletRequest);
+			MockHttpServletRequest mockHttpServletRequest =
+				new MockHttpServletRequest();
 
-			Assert.assertFalse(secure);
+			mockHttpServletRequest.setSecure(true);
+
+			HttpSession httpSession = mockHttpServletRequest.getSession();
+
+			httpSession.setAttribute(WebKeys.HTTPS_INITIAL, Boolean.FALSE);
+
+			Assert.assertFalse(_portalImpl.isSecure(mockHttpServletRequest));
 		}
 		finally {
 			setPropsValuesValue(
@@ -284,16 +277,6 @@ public class PortalImplUnitTest extends PowerMockito {
 	public void testIsSecureWithHttpsInitialFalseXForwardedHttps()
 		throws Exception {
 
-		MockHttpServletRequest mockHttpServletRequest =
-			new MockHttpServletRequest();
-
-		mockHttpServletRequest.addHeader("X-Forwarded-Proto", "https");
-		mockHttpServletRequest.setSecure(false);
-
-		HttpSession mockSession = mockHttpServletRequest.getSession();
-
-		mockSession.setAttribute(WebKeys.HTTPS_INITIAL, Boolean.FALSE);
-
 		boolean originalSecurityAuth =
 			PropsValues.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS;
 		boolean originalEnablePhising =
@@ -305,9 +288,18 @@ public class PortalImplUnitTest extends PowerMockito {
 			setPropsValuesValue("COMPANY_SECURITY_AUTH_REQUIRES_HTTPS", false);
 			setPropsValuesValue("SESSION_ENABLE_PHISHING_PROTECTION", true);
 			setPropsValuesValue("WEB_SERVER_FORWARDED_PROTOCOL_ENABLED", true);
-			boolean secure = _portalImpl.isSecure(mockHttpServletRequest);
 
-			Assert.assertTrue(secure);
+			MockHttpServletRequest mockHttpServletRequest =
+				new MockHttpServletRequest();
+
+			mockHttpServletRequest.addHeader("X-Forwarded-Proto", "https");
+			mockHttpServletRequest.setSecure(false);
+
+			HttpSession httpSession = mockHttpServletRequest.getSession();
+
+			httpSession.setAttribute(WebKeys.HTTPS_INITIAL, Boolean.FALSE);
+
+			Assert.assertTrue(_portalImpl.isSecure(mockHttpServletRequest));
 		}
 		finally {
 			setPropsValuesValue(
@@ -322,15 +314,6 @@ public class PortalImplUnitTest extends PowerMockito {
 
 	@Test
 	public void testIsSecureWithHttpsInitialTrue() throws Exception {
-		MockHttpServletRequest mockHttpServletRequest =
-			new MockHttpServletRequest();
-
-		mockHttpServletRequest.setSecure(true);
-
-		HttpSession mockSession = mockHttpServletRequest.getSession();
-
-		mockSession.setAttribute(WebKeys.HTTPS_INITIAL, Boolean.TRUE);
-
 		boolean originalSecurityAuth =
 			PropsValues.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS;
 		boolean originalEnablePhising =
@@ -340,9 +323,16 @@ public class PortalImplUnitTest extends PowerMockito {
 			setPropsValuesValue("COMPANY_SECURITY_AUTH_REQUIRES_HTTPS", true);
 			setPropsValuesValue("SESSION_ENABLE_PHISHING_PROTECTION", false);
 
-			boolean secure = _portalImpl.isSecure(mockHttpServletRequest);
+			MockHttpServletRequest mockHttpServletRequest =
+				new MockHttpServletRequest();
 
-			Assert.assertTrue(secure);
+			mockHttpServletRequest.setSecure(true);
+
+			HttpSession httpSession = mockHttpServletRequest.getSession();
+
+			httpSession.setAttribute(WebKeys.HTTPS_INITIAL, Boolean.TRUE);
+
+			Assert.assertTrue(_portalImpl.isSecure(mockHttpServletRequest));
 		}
 		finally {
 			setPropsValuesValue(
@@ -355,12 +345,6 @@ public class PortalImplUnitTest extends PowerMockito {
 	@Test
 	public void testIsSecureWithHttpsInitialTrueCustomXForwardedHttps()
 		throws Exception {
-
-		MockHttpServletRequest mockHttpServletRequest =
-			new MockHttpServletRequest();
-
-		mockHttpServletRequest.addHeader("X-Forwarded-Custom-Proto", "https");
-		mockHttpServletRequest.setSecure(false);
 
 		boolean originalSecurityAuth =
 			PropsValues.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS;
@@ -380,9 +364,14 @@ public class PortalImplUnitTest extends PowerMockito {
 				"WEB_SERVER_FORWARDED_PROTOCOL_HEADER",
 				"X-Forwarded-Custom-Proto");
 
-			boolean secure = _portalImpl.isSecure(mockHttpServletRequest);
+			MockHttpServletRequest mockHttpServletRequest =
+				new MockHttpServletRequest();
 
-			Assert.assertTrue(secure);
+			mockHttpServletRequest.addHeader(
+				"X-Forwarded-Custom-Proto", "https");
+			mockHttpServletRequest.setSecure(false);
+
+			Assert.assertTrue(_portalImpl.isSecure(mockHttpServletRequest));
 		}
 		finally {
 			setPropsValuesValue(
@@ -402,16 +391,6 @@ public class PortalImplUnitTest extends PowerMockito {
 	public void testIsSecureWithHttpsInitialTrueXForwardedHttps()
 		throws Exception {
 
-		MockHttpServletRequest mockHttpServletRequest =
-			new MockHttpServletRequest();
-
-		mockHttpServletRequest.addHeader("X-Forwarded-Proto", "https");
-		mockHttpServletRequest.setSecure(false);
-
-		HttpSession mockSession = mockHttpServletRequest.getSession();
-
-		mockSession.setAttribute(WebKeys.HTTPS_INITIAL, Boolean.TRUE);
-
 		boolean originalSecurityAuth =
 			PropsValues.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS;
 		boolean originalEnablePhising =
@@ -424,9 +403,17 @@ public class PortalImplUnitTest extends PowerMockito {
 			setPropsValuesValue("SESSION_ENABLE_PHISHING_PROTECTION", false);
 			setPropsValuesValue("WEB_SERVER_FORWARDED_PROTOCOL_ENABLED", true);
 
-			boolean secure = _portalImpl.isSecure(mockHttpServletRequest);
+			MockHttpServletRequest mockHttpServletRequest =
+				new MockHttpServletRequest();
 
-			Assert.assertTrue(secure);
+			mockHttpServletRequest.addHeader("X-Forwarded-Proto", "https");
+			mockHttpServletRequest.setSecure(false);
+
+			HttpSession httpSession = mockHttpServletRequest.getSession();
+
+			httpSession.setAttribute(WebKeys.HTTPS_INITIAL, Boolean.TRUE);
+
+			Assert.assertTrue(_portalImpl.isSecure(mockHttpServletRequest));
 		}
 		finally {
 			setPropsValuesValue(
@@ -446,9 +433,7 @@ public class PortalImplUnitTest extends PowerMockito {
 
 		mockHttpServletRequest.setSecure(true);
 
-		boolean secure = _portalImpl.isSecure(mockHttpServletRequest);
-
-		Assert.assertTrue(secure);
+		Assert.assertTrue(_portalImpl.isSecure(mockHttpServletRequest));
 	}
 
 	@Test
