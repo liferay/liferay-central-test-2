@@ -42,7 +42,6 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.MimeTypes;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.PortalUtil;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -108,16 +107,8 @@ public class ResourceImporter extends FileSystemImporter {
 			String parentDirName, String dirName, long classNameId)
 		throws Exception {
 
-		StringBundler sb = new StringBundler(4);
-
-		String resourcesPath = _getResourcePath(parentDirName);
-
-		sb.append(resourcesPath);
-		sb.append("/");
-		sb.append(dirName);
-
 		Set<String> resourcePaths = servletContext.getResourcePaths(
-			sb.toString());
+			_getResourcePath(parentDirName) + StringPool.SLASH + dirName);
 
 		if (resourcePaths == null) {
 			return;
@@ -149,16 +140,8 @@ public class ResourceImporter extends FileSystemImporter {
 			groupId, PortalUtil.getClassNameId(DDLRecordSet.class),
 			ddmStructureKey);
 
-		StringBundler sb = new StringBundler(4);
-
-		String resourcesPath = _getResourcePath(dirName);
-
-		sb.append(resourcesPath);
-		sb.append(StringPool.SLASH);
-		sb.append(fileName);
-
 		Set<String> resourcePaths = servletContext.getResourcePaths(
-			sb.toString());
+			_getResourcePath(dirName) + StringPool.SLASH + fileName);
 
 		if (resourcePaths == null) {
 			return;
@@ -191,16 +174,8 @@ public class ResourceImporter extends FileSystemImporter {
 			groupId, PortalUtil.getClassNameId(DDLRecordSet.class),
 			ddmStructureKey);
 
-		StringBundler sb = new StringBundler(4);
-
-		String resourcesPath = _getResourcePath(dirName);
-
-		sb.append(resourcesPath);
-		sb.append(StringPool.SLASH);
-		sb.append(fileName);
-
 		Set<String> resourcePaths = servletContext.getResourcePaths(
-			sb.toString());
+			_getResourcePath(dirName) + StringPool.SLASH + fileName);
 
 		if (resourcePaths == null) {
 			return;
