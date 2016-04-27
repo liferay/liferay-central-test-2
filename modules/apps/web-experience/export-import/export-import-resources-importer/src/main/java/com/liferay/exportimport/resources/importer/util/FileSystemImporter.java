@@ -138,8 +138,8 @@ public class FileSystemImporter extends BaseImporter {
 		LayoutSetPrototypeLocalService layoutSetPrototypeLocalService,
 		MimeTypes mimeTypes, Portal portal,
 		PortletPreferencesFactory portletPreferencesFactory,
-		Map<String, PortletPreferencesRetriever> portletPreferencesRetrievers, RepositoryLocalService repositoryLocalService,
-		SAXReader saxReader,
+		Map<String, PortletPreferencesRetriever> portletPreferencesRetrievers,
+		RepositoryLocalService repositoryLocalService, SAXReader saxReader,
 		ThemeLocalService themeLocalService) {
 
 		this.assetTagLocalService = assetTagLocalService;
