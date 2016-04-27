@@ -204,7 +204,7 @@ public class ImporterFactory {
 			_journalArticleService, _layoutLocalService,
 			_layoutPrototypeLocalService, _layoutSetLocalService,
 			_layoutSetPrototypeLocalService, _mimeTypes, _portal,
-			_portletPreferencesFactory, _portletPreferencesRetrievers,
+			_portletPreferencesFactory, _portletPreferencesTranslators,
 			_repositoryLocalService, _saxReader, _themeLocalService);
 	}
 
@@ -222,7 +222,7 @@ public class ImporterFactory {
 			_journalArticleService, _layoutLocalService,
 			_layoutPrototypeLocalService, _layoutSetLocalService,
 			_layoutSetPrototypeLocalService, _mimeTypes, _portal,
-			_portletPreferencesFactory, _portletPreferencesRetrievers,
+			_portletPreferencesFactory, _portletPreferencesTranslators,
 			_repositoryLocalService, _saxReader, _themeLocalService);
 	}
 
@@ -230,10 +230,10 @@ public class ImporterFactory {
 		cardinality = ReferenceCardinality.AT_LEAST_ONE,
 		policy = ReferencePolicy.DYNAMIC,
 		policyOption = ReferencePolicyOption.GREEDY,
-		unbind = "unsetPortletPreferencesRetriever"
+		unbind = "unsetPortletPreferencesTranslator"
 	)
-	protected void setPortletPreferencesRetriever(
-		PortletPreferencesTranslator portletPreferencesRetriever,
+	protected void setPortletPreferencesTranslator(
+		PortletPreferencesTranslator portletPreferencesTranslator,
 		Map<String, Object> properties) {
 
 		String rootPortletId = GetterUtil.getString(
@@ -243,18 +243,18 @@ public class ImporterFactory {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
 					"No rootPortletId defined for service: " +
-						portletPreferencesRetriever);
+						portletPreferencesTranslator);
 			}
 
 			return;
 		}
 
-		_portletPreferencesRetrievers.put(
-			rootPortletId, portletPreferencesRetriever);
+		_portletPreferencesTranslators.put(
+			rootPortletId, portletPreferencesTranslator);
 	}
 
-	protected void unsetPortletPreferencesRetriever(
-		PortletPreferencesTranslator portletPreferencesRetriever,
+	protected void unsetPortletPreferencesTranslator(
+		PortletPreferencesTranslator portletPreferencesTranslator,
 		Map<String, Object> properties) {
 
 		String rootPortletId = GetterUtil.getString(
@@ -264,13 +264,13 @@ public class ImporterFactory {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
 					"No rootPortletId defined for service: " +
-						portletPreferencesRetriever);
+						portletPreferencesTranslator);
 			}
 
 			return;
 		}
 
-		_portletPreferencesRetrievers.remove(rootPortletId);
+		_portletPreferencesTranslators.remove(rootPortletId);
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
@@ -343,7 +343,7 @@ public class ImporterFactory {
 	private PortletPreferencesFactory _portletPreferencesFactory;
 
 	private final Map<String, PortletPreferencesTranslator>
-		_portletPreferencesRetrievers = new ConcurrentHashMap<>();
+		_portletPreferencesTranslators = new ConcurrentHashMap<>();
 
 	@Reference
 	private RepositoryLocalService _repositoryLocalService;
