@@ -1579,7 +1579,7 @@ public class FileSystemImporter extends BaseImporter {
 
 			Set<Long> primaryKeys = primaryKeysEntry.getValue();
 
-			Indexer indexer = indexerRegistry.getIndexer(className);
+			Indexer<?> indexer = indexerRegistry.getIndexer(className);
 
 			if (indexer == null) {
 				if (_log.isWarnEnabled()) {
@@ -1617,7 +1617,7 @@ public class FileSystemImporter extends BaseImporter {
 		Set<Long> primaryKeys = _primaryKeys.get(
 			JournalArticle.class.getName());
 
-		Indexer indexer = indexerRegistry.getIndexer(
+		Indexer<?> indexer = indexerRegistry.getIndexer(
 			JournalArticle.class.getName());
 
 		for (String ddmStructureKey : _ddmStructureKeys) {
