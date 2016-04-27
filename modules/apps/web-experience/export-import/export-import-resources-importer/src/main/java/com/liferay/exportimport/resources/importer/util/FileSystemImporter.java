@@ -138,7 +138,7 @@ public class FileSystemImporter extends BaseImporter {
 		LayoutSetPrototypeLocalService layoutSetPrototypeLocalService,
 		MimeTypes mimeTypes, Portal portal,
 		PortletPreferencesFactory portletPreferencesFactory,
-		Map<String, PortletPreferencesTranslator> portletPreferencesRetrievers,
+		Map<String, PortletPreferencesTranslator> portletPreferencesTranslators,
 		RepositoryLocalService repositoryLocalService, SAXReader saxReader,
 		ThemeLocalService themeLocalService) {
 
@@ -162,7 +162,7 @@ public class FileSystemImporter extends BaseImporter {
 		this.mimeTypes = mimeTypes;
 		this.portal = portal;
 		this.portletPreferencesFactory = portletPreferencesFactory;
-		this.portletPreferencesRetrievers = portletPreferencesRetrievers;
+		this.portletPreferencesTranslators = portletPreferencesTranslators;
 		this.repositoryLocalService = repositoryLocalService;
 		this.saxReader = saxReader;
 		this.themeLocalService = themeLocalService;
@@ -1195,20 +1195,20 @@ public class FileSystemImporter extends BaseImporter {
 		while (iterator.hasNext()) {
 			String key = iterator.next();
 
-			PortletPreferencesTranslator portletPreferencesRetriever =
-				portletPreferencesRetrievers.get(key);
+			PortletPreferencesTranslator portletPreferencesTranslator =
+				portletPreferencesTranslators.get(key);
 
-			if (portletPreferencesRetriever == null) {
+			if (portletPreferencesTranslator == null) {
 				if (_log.isDebugEnabled()) {
 					_log.debug(
-						"No portlet preferences retriever for portlet " +
+						"No portlet preferences translator for portlet " +
 							rootPortletId);
 				}
 
 				continue;
 			}
 
-			portletPreferencesRetriever.translate(
+			portletPreferencesTranslator.translate(
 				portletPreferencesJSONObject, key, portletSetup);
 		}
 
@@ -1903,7 +1903,7 @@ public class FileSystemImporter extends BaseImporter {
 	protected final Portal portal;
 	protected final PortletPreferencesFactory portletPreferencesFactory;
 	protected final Map<String, PortletPreferencesTranslator>
-		portletPreferencesRetrievers;
+		portletPreferencesTranslators;
 	protected final RepositoryLocalService repositoryLocalService;
 	protected final SAXReader saxReader;
 	protected ServiceContext serviceContext;
