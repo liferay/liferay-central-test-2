@@ -138,9 +138,9 @@ public class FileSystemImporter extends BaseImporter {
 		LayoutSetPrototypeLocalService layoutSetPrototypeLocalService,
 		MimeTypes mimeTypes, Portal portal,
 		PortletPreferencesFactory portletPreferencesFactory,
-		RepositoryLocalService repositoryLocalService, SAXReader saxReader,
-		ThemeLocalService themeLocalService,
-		Map<String, PortletPreferencesRetriever> portletPreferencesRetrievers) {
+		Map<String, PortletPreferencesRetriever> portletPreferencesRetrievers, RepositoryLocalService repositoryLocalService,
+		SAXReader saxReader,
+		ThemeLocalService themeLocalService) {
 
 		this.assetTagLocalService = assetTagLocalService;
 		this.ddmFormJSONDeserializer = ddmFormJSONDeserializer;
@@ -162,10 +162,10 @@ public class FileSystemImporter extends BaseImporter {
 		this.mimeTypes = mimeTypes;
 		this.portal = portal;
 		this.portletPreferencesFactory = portletPreferencesFactory;
+		this.portletPreferencesRetrievers = portletPreferencesRetrievers;
 		this.repositoryLocalService = repositoryLocalService;
 		this.saxReader = saxReader;
 		this.themeLocalService = themeLocalService;
-		this.portletPreferencesRetrievers = portletPreferencesRetrievers;
 	}
 
 	@Override
@@ -1201,7 +1201,7 @@ public class FileSystemImporter extends BaseImporter {
 			if (portletPreferencesRetriever == null) {
 				if (_log.isDebugEnabled()) {
 					_log.debug(
-						"No PortletPreferenceRetriever configured for : " +
+						"No portlet preferences retriever for portlet " +
 							rootPortletId);
 				}
 

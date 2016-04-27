@@ -204,8 +204,8 @@ public class ImporterFactory {
 			_journalArticleService, _layoutLocalService,
 			_layoutPrototypeLocalService, _layoutSetLocalService,
 			_layoutSetPrototypeLocalService, _mimeTypes, _portal,
-			_portletPreferencesFactory, _repositoryLocalService, _saxReader,
-			_themeLocalService, _portletPreferencesRetrievers);
+			_portletPreferencesFactory, _portletPreferencesRetrievers, _repositoryLocalService,
+			_saxReader, _themeLocalService);
 	}
 
 	protected LARImporter getLARImporter() {
