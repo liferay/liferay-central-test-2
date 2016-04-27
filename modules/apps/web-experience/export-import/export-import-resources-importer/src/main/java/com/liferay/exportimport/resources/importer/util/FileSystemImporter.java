@@ -1583,16 +1583,14 @@ public class FileSystemImporter extends BaseImporter {
 
 			if (indexer == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"No indexer within the IndexerRegistry for: " +
-							className);
+					_log.warn("No indexer for with " + className);
 				}
 
 				continue;
 			}
 
 			if (_log.isDebugEnabled()) {
-				_log.debug("Indexing: " + className);
+				_log.debug("Indexing " + className);
 			}
 
 			for (long primaryKey : primaryKeys) {
@@ -1602,8 +1600,8 @@ public class FileSystemImporter extends BaseImporter {
 				catch (SearchException se) {
 					if (_log.isWarnEnabled()) {
 						_log.warn(
-							"Cannot index entry: className=" + className +
-								", primaryKey=" + primaryKey,
+							"Unable to index entry for class name " +
+								className + " and primary key " + primaryKey,
 							se);
 					}
 				}

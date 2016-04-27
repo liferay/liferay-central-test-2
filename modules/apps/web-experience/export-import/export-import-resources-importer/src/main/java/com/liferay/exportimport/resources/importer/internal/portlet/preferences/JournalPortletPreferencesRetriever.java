@@ -44,14 +44,13 @@ public class JournalPortletPreferencesRetriever
 
 		String value = portletPreferencesJSONObject.getString(key);
 
-		String id = FileUtil.stripExtension(value);
+		String portletPreferencesKey = FileUtil.stripExtension(value);
 
-		id = StringUtil.toUpperCase(id);
+		portletPreferencesKey = StringUtil.replace(
+			portletPreferencesKey, CharPool.SPACE, CharPool.DASH);
+		portletPreferencesKey = StringUtil.toUpperCase(portletPreferencesKey);
 
-		String journalId = StringUtil.replace(
-			id, CharPool.SPACE, CharPool.DASH);
-
-		portletPreferences.setValue(journalId, value);
+		portletPreferences.setValue(portletPreferencesKey, value);
 	}
 
 }
