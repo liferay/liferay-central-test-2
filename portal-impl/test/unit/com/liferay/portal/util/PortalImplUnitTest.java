@@ -46,7 +46,7 @@ import org.springframework.mock.web.MockHttpServletRequest;
 public class PortalImplUnitTest extends PowerMockito {
 
 	@Test
-	public void testForwardedHost() {
+	public void testGetForwardedHost() {
 		MockHttpServletRequest mockHttpServletRequest =
 			new MockHttpServletRequest();
 
@@ -59,7 +59,7 @@ public class PortalImplUnitTest extends PowerMockito {
 	}
 
 	@Test
-	public void testForwardedHostWithCustomXForwardedHostEnabled()
+	public void testGetForwardedHostWithCustomXForwardedHostEnabled()
 		throws Exception {
 
 		MockHttpServletRequest mockHttpServletRequest =
@@ -96,7 +96,7 @@ public class PortalImplUnitTest extends PowerMockito {
 	}
 
 	@Test
-	public void testForwardedHostWithXForwardedHostDisabled() throws Exception {
+	public void testGetForwardedHostWithXForwardedHostDisabled() throws Exception {
 		MockHttpServletRequest mockHttpServletRequest =
 			new MockHttpServletRequest();
 
@@ -122,7 +122,7 @@ public class PortalImplUnitTest extends PowerMockito {
 	}
 
 	@Test
-	public void testForwardedHostWithXForwardedHostEnabled() throws Exception {
+	public void testGetForwardedHostWithXForwardedHostEnabled() throws Exception {
 		MockHttpServletRequest mockHttpServletRequest =
 			new MockHttpServletRequest();
 
@@ -148,7 +148,7 @@ public class PortalImplUnitTest extends PowerMockito {
 	}
 
 	@Test
-	public void testForwardedPort() {
+	public void testGetForwardedPort() {
 		MockHttpServletRequest mockHttpServletRequest =
 			new MockHttpServletRequest();
 
@@ -161,7 +161,7 @@ public class PortalImplUnitTest extends PowerMockito {
 	}
 
 	@Test
-	public void testForwardedPortWithCustomXForwardedPort() throws Exception {
+	public void testGetForwardedPortWithCustomXForwardedPort() throws Exception {
 		MockHttpServletRequest mockHttpServletRequest =
 			new MockHttpServletRequest();
 
@@ -195,7 +195,7 @@ public class PortalImplUnitTest extends PowerMockito {
 	}
 
 	@Test
-	public void testForwardedPortWithXForwardedPortDisabled() throws Exception {
+	public void testGetForwardedPortWithXForwardedPortDisabled() throws Exception {
 		MockHttpServletRequest mockHttpServletRequest =
 			new MockHttpServletRequest();
 
@@ -221,7 +221,7 @@ public class PortalImplUnitTest extends PowerMockito {
 	}
 
 	@Test
-	public void testForwardedPortWithXForwardedPortEnabled() throws Exception {
+	public void testGetForwardedPortWithXForwardedPortEnabled() throws Exception {
 		MockHttpServletRequest mockHttpServletRequest =
 			new MockHttpServletRequest();
 
@@ -247,7 +247,7 @@ public class PortalImplUnitTest extends PowerMockito {
 	}
 
 	@Test
-	public void testSecureWithHttpsInitialFalse() throws Exception {
+	public void testIsSecureWithHttpsInitialFalse() throws Exception {
 		MockHttpServletRequest mockHttpServletRequest =
 			new MockHttpServletRequest();
 
@@ -279,7 +279,7 @@ public class PortalImplUnitTest extends PowerMockito {
 	}
 
 	@Test
-	public void testSecureWithHttpsInitialFalseXForwardedHttps()
+	public void testIsSecureWithHttpsInitialFalseXForwardedHttps()
 		throws Exception {
 
 		MockHttpServletRequest mockHttpServletRequest =
@@ -319,7 +319,7 @@ public class PortalImplUnitTest extends PowerMockito {
 	}
 
 	@Test
-	public void testSecureWithHttpsInitialTrue() throws Exception {
+	public void testIsSecureWithHttpsInitialTrue() throws Exception {
 		MockHttpServletRequest mockHttpServletRequest =
 			new MockHttpServletRequest();
 
@@ -351,7 +351,7 @@ public class PortalImplUnitTest extends PowerMockito {
 	}
 
 	@Test
-	public void testSecureWithHttpsInitialTrueCustomXForwardedHttps()
+	public void testIsSecureWithHttpsInitialTrueCustomXForwardedHttps()
 		throws Exception {
 
 		MockHttpServletRequest mockHttpServletRequest =
@@ -397,7 +397,7 @@ public class PortalImplUnitTest extends PowerMockito {
 	}
 
 	@Test
-	public void testSecureWithHttpsInitialTrueXForwardedHttps()
+	public void testIsSecureWithHttpsInitialTrueXForwardedHttps()
 		throws Exception {
 
 		MockHttpServletRequest mockHttpServletRequest =
@@ -438,7 +438,7 @@ public class PortalImplUnitTest extends PowerMockito {
 	}
 
 	@Test
-	public void testSecureWithSecureRequest() {
+	public void testIsSecureWithSecureRequest() {
 		MockHttpServletRequest mockHttpServletRequest =
 			new MockHttpServletRequest();
 
