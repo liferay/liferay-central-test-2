@@ -1197,7 +1197,7 @@ Please set the environment variable ANT_OPTS to the recommended value of
 	<macrodef name="setup-sdk">
 		<sequential>
 			<mirrors-get
-				dest="${project.dir}/tools/com.liferay.portal.plugins.sdk.with.dependencies-7.0.0.zip"
+				dest="${project.dir}/tools/com.liferay.portal.plugins.sdk.with.dependencies.zip"
 				src="${sdk.zip.url}"
 			/>
 
@@ -1205,7 +1205,7 @@ Please set the environment variable ANT_OPTS to the recommended value of
 				<not>
 					<uptodate>
 						<mapper to="${sdk.dir}" type="merge" />
-						<srcfiles dir="${project.dir}/tools" includes="com.liferay.portal.plugins.sdk.with.dependencies-7.0.0.zip*" />
+						<srcfiles dir="${project.dir}/tools" includes="com.liferay.portal.plugins.sdk.with.dependencies.zip*" />
 					</uptodate>
 				</not>
 				<then>
@@ -1213,7 +1213,7 @@ Please set the environment variable ANT_OPTS to the recommended value of
 
 					<unzip
 						dest="${project.dir}/tools"
-						src="${project.dir}/tools/com.liferay.portal.plugins.sdk.with.dependencies-7.0.0.zip"
+						src="${project.dir}/tools/com.liferay.portal.plugins.sdk.with.dependencies.zip"
 					>
 						<mapper
 							type="glob"
