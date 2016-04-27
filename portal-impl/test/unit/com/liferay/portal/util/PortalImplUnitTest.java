@@ -245,9 +245,9 @@ public class PortalImplUnitTest extends PowerMockito {
 
 	@Test
 	public void testIsSecureWithHttpsInitialFalse() throws Exception {
-		boolean originalSecurityAuth =
+		boolean companySecurityAuthRequiresHttps =
 			PropsValues.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS;
-		boolean originalEnablePhising =
+		boolean sessionEnablePhishingProtection =
 			PropsValues.SESSION_ENABLE_PHISHING_PROTECTION;
 
 		try {
@@ -267,9 +267,11 @@ public class PortalImplUnitTest extends PowerMockito {
 		}
 		finally {
 			setPropsValuesValue(
-				"COMPANY_SECURITY_AUTH_REQUIRES_HTTPS", originalSecurityAuth);
+				"COMPANY_SECURITY_AUTH_REQUIRES_HTTPS",
+				companySecurityAuthRequiresHttps);
 			setPropsValuesValue(
-				"SESSION_ENABLE_PHISHING_PROTECTION", originalEnablePhising);
+				"SESSION_ENABLE_PHISHING_PROTECTION",
+				sessionEnablePhishingProtection);
 		}
 	}
 
@@ -277,11 +279,11 @@ public class PortalImplUnitTest extends PowerMockito {
 	public void testIsSecureWithHttpsInitialFalseXForwardedHttps()
 		throws Exception {
 
-		boolean originalSecurityAuth =
+		boolean companySecurityAuthRequiresHttps =
 			PropsValues.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS;
-		boolean originalEnablePhising =
+		boolean sessionEnablePhishingProtection =
 			PropsValues.SESSION_ENABLE_PHISHING_PROTECTION;
-		boolean originalForwardedProtocol =
+		boolean webServerForwardedProtocolEnabled =
 			PropsValues.WEB_SERVER_FORWARDED_PROTOCOL_ENABLED;
 
 		try {
@@ -303,20 +305,22 @@ public class PortalImplUnitTest extends PowerMockito {
 		}
 		finally {
 			setPropsValuesValue(
-				"COMPANY_SECURITY_AUTH_REQUIRES_HTTPS", originalSecurityAuth);
+				"COMPANY_SECURITY_AUTH_REQUIRES_HTTPS",
+				companySecurityAuthRequiresHttps);
 			setPropsValuesValue(
-				"SESSION_ENABLE_PHISHING_PROTECTION", originalEnablePhising);
+				"SESSION_ENABLE_PHISHING_PROTECTION",
+				sessionEnablePhishingProtection);
 			setPropsValuesValue(
 				"WEB_SERVER_FORWARDED_PROTOCOL_ENABLED",
-				originalForwardedProtocol);
+				webServerForwardedProtocolEnabled);
 		}
 	}
 
 	@Test
 	public void testIsSecureWithHttpsInitialTrue() throws Exception {
-		boolean originalSecurityAuth =
+		boolean companySecurityAuthRequiresHttps =
 			PropsValues.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS;
-		boolean originalEnablePhising =
+		boolean sessionEnablePhishingProtection =
 			PropsValues.SESSION_ENABLE_PHISHING_PROTECTION;
 
 		try {
@@ -336,9 +340,11 @@ public class PortalImplUnitTest extends PowerMockito {
 		}
 		finally {
 			setPropsValuesValue(
-				"COMPANY_SECURITY_AUTH_REQUIRES_HTTPS", originalSecurityAuth);
+				"COMPANY_SECURITY_AUTH_REQUIRES_HTTPS",
+				companySecurityAuthRequiresHttps);
 			setPropsValuesValue(
-				"SESSION_ENABLE_PHISHING_PROTECTION", originalEnablePhising);
+				"SESSION_ENABLE_PHISHING_PROTECTION",
+				sessionEnablePhishingProtection);
 		}
 	}
 
@@ -346,14 +352,14 @@ public class PortalImplUnitTest extends PowerMockito {
 	public void testIsSecureWithHttpsInitialTrueCustomXForwardedHttps()
 		throws Exception {
 
-		boolean originalSecurityAuth =
+		boolean companySecurityAuthRequiresHttps =
 			PropsValues.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS;
-		boolean originalEnablePhising =
+		boolean sessionEnablePhishingProtection =
 			PropsValues.SESSION_ENABLE_PHISHING_PROTECTION;
-		boolean originalForwardedProtocol =
+		boolean webServerForwardedProtocolEnabled =
 			PropsValues.WEB_SERVER_FORWARDED_PROTOCOL_ENABLED;
 
-		String originalForwardedProtocolHeader =
+		String webServerForwardedProtocolEnabledHeader =
 			PropsValues.WEB_SERVER_FORWARDED_PROTOCOL_HEADER;
 
 		try {
@@ -375,15 +381,17 @@ public class PortalImplUnitTest extends PowerMockito {
 		}
 		finally {
 			setPropsValuesValue(
-				"COMPANY_SECURITY_AUTH_REQUIRES_HTTPS", originalSecurityAuth);
+				"COMPANY_SECURITY_AUTH_REQUIRES_HTTPS",
+				companySecurityAuthRequiresHttps);
 			setPropsValuesValue(
-				"SESSION_ENABLE_PHISHING_PROTECTION", originalEnablePhising);
+				"SESSION_ENABLE_PHISHING_PROTECTION",
+				sessionEnablePhishingProtection);
 			setPropsValuesValue(
 				"WEB_SERVER_FORWARDED_PROTOCOL_ENABLED",
-				originalForwardedProtocol);
+				webServerForwardedProtocolEnabled);
 			setPropsValuesValue(
 				"WEB_SERVER_FORWARDED_PROTOCOL_HEADER",
-				originalForwardedProtocolHeader);
+				webServerForwardedProtocolEnabledHeader);
 		}
 	}
 
@@ -391,11 +399,11 @@ public class PortalImplUnitTest extends PowerMockito {
 	public void testIsSecureWithHttpsInitialTrueXForwardedHttps()
 		throws Exception {
 
-		boolean originalSecurityAuth =
+		boolean companySecurityAuthRequiresHttps =
 			PropsValues.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS;
-		boolean originalEnablePhising =
+		boolean sessionEnablePhishingProtection =
 			PropsValues.SESSION_ENABLE_PHISHING_PROTECTION;
-		boolean originalForwardedProtocol =
+		boolean webServerForwardedProtocolEnabled =
 			PropsValues.WEB_SERVER_FORWARDED_PROTOCOL_ENABLED;
 
 		try {
@@ -417,12 +425,14 @@ public class PortalImplUnitTest extends PowerMockito {
 		}
 		finally {
 			setPropsValuesValue(
-				"COMPANY_SECURITY_AUTH_REQUIRES_HTTPS", originalSecurityAuth);
+				"COMPANY_SECURITY_AUTH_REQUIRES_HTTPS",
+				companySecurityAuthRequiresHttps);
 			setPropsValuesValue(
-				"SESSION_ENABLE_PHISHING_PROTECTION", originalEnablePhising);
+				"SESSION_ENABLE_PHISHING_PROTECTION",
+				sessionEnablePhishingProtection);
 			setPropsValuesValue(
 				"WEB_SERVER_FORWARDED_PROTOCOL_ENABLED",
-				originalForwardedProtocol);
+				webServerForwardedProtocolEnabled);
 		}
 	}
 
