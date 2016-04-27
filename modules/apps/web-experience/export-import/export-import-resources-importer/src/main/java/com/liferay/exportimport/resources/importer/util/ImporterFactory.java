@@ -239,17 +239,16 @@ public class ImporterFactory {
 		String rootPortletId = GetterUtil.getString(
 			properties.get("portlet.preferences.translator.portlet.id"));
 
-		if (Validator.isNull(rootPortletId)) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"The property \"portlet.preferences.translator.portlet.id\" is null");
-			}
-
-			return;
+		if (Validator.isNotNull(rootPortletId)) {
+			_portletPreferencesTranslators.put(
+				rootPortletId, portletPreferencesTranslator);
 		}
 
-		_portletPreferencesTranslators.put(
-			rootPortletId, portletPreferencesTranslator);
+		if (_log.isWarnEnabled()) {
+			_log.warn(
+				"The property \"portlet.preferences.translator.portlet.id\" " +
+					"is null");
+		}
 	}
 
 	protected void unsetPortletPreferencesTranslator(
