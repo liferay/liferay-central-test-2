@@ -237,11 +237,12 @@ public class ImporterFactory {
 		Map<String, Object> properties) {
 
 		String rootPortletId = GetterUtil.getString(
-			properties.get("rootPortletId"));
+			properties.get("translator.root.portlet.id"));
 
 		if (Validator.isNull(rootPortletId)) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("The property \"rootPortletId\" is null");
+				_log.warn(
+					"The property \"translator.root.portlet.id\" is null");
 			}
 
 			return;
