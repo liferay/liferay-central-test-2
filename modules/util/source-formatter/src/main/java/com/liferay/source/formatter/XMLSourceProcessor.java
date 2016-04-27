@@ -857,6 +857,18 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 		checkOrder(
 			fileName, document.getRootElement(), "preference", null,
 			new PortletPreferenceElementComparator());
+
+		Matcher matcher = _incorrectDefaultPreferencesFileName.matcher(
+			fileName);
+
+		if (matcher.find()) {
+			String correctFileName =
+				matcher.group(1) + "-default-portlet-preferences.xml";
+
+			processErrorMessage(
+				fileName,
+				"Rename file to " + correctFileName + ": " + fileName);
+		}
 	}
 
 	protected void formatResourceActionXML(String fileName, String content)
@@ -1359,6 +1371,8 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 	private List<String> _columnNames;
 	private final Pattern _importFilePattern = Pattern.compile(
 		"<import file=\"(.*)\"");
+	private final Pattern _incorrectDefaultPreferencesFileName =
+		Pattern.compile("/default-([\\w-]+)-portlet-preferences\\.xml$");
 	private List<String> _numericalPortletNameElementExcludes;
 	private final Pattern _poshiClosingTagPattern = Pattern.compile(
 		"</[^>/]*>");
