@@ -38,7 +38,7 @@ import com.liferay.dynamic.data.mapping.service.DDMTemplateLocalService;
 import com.liferay.dynamic.data.mapping.storage.StorageType;
 import com.liferay.dynamic.data.mapping.util.DDMUtil;
 import com.liferay.dynamic.data.mapping.util.DDMXML;
-import com.liferay.exportimport.resources.importer.portlet.preferences.PortletPreferencesRetriever;
+import com.liferay.exportimport.resources.importer.portlet.preferences.PortletPreferencesTranslator;
 import com.liferay.journal.configuration.JournalServiceConfigurationValues;
 import com.liferay.journal.model.JournalArticle;
 import com.liferay.journal.model.JournalArticleConstants;
@@ -138,7 +138,7 @@ public class FileSystemImporter extends BaseImporter {
 		LayoutSetPrototypeLocalService layoutSetPrototypeLocalService,
 		MimeTypes mimeTypes, Portal portal,
 		PortletPreferencesFactory portletPreferencesFactory,
-		Map<String, PortletPreferencesRetriever> portletPreferencesRetrievers,
+		Map<String, PortletPreferencesTranslator> portletPreferencesRetrievers,
 		RepositoryLocalService repositoryLocalService, SAXReader saxReader,
 		ThemeLocalService themeLocalService) {
 
@@ -1195,7 +1195,7 @@ public class FileSystemImporter extends BaseImporter {
 		while (iterator.hasNext()) {
 			String key = iterator.next();
 
-			PortletPreferencesRetriever portletPreferencesRetriever =
+			PortletPreferencesTranslator portletPreferencesRetriever =
 				portletPreferencesRetrievers.get(key);
 
 			if (portletPreferencesRetriever == null) {
@@ -1208,7 +1208,7 @@ public class FileSystemImporter extends BaseImporter {
 				continue;
 			}
 
-			portletPreferencesRetriever.updatePortletPreferences(
+			portletPreferencesRetriever.translate(
 				portletPreferencesJSONObject, key, portletSetup);
 		}
 
@@ -1902,7 +1902,7 @@ public class FileSystemImporter extends BaseImporter {
 	protected final MimeTypes mimeTypes;
 	protected final Portal portal;
 	protected final PortletPreferencesFactory portletPreferencesFactory;
-	protected final Map<String, PortletPreferencesRetriever>
+	protected final Map<String, PortletPreferencesTranslator>
 		portletPreferencesRetrievers;
 	protected final RepositoryLocalService repositoryLocalService;
 	protected final SAXReader saxReader;

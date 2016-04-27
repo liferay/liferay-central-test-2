@@ -23,7 +23,7 @@ import com.liferay.dynamic.data.mapping.io.DDMFormXSDDeserializer;
 import com.liferay.dynamic.data.mapping.service.DDMStructureLocalService;
 import com.liferay.dynamic.data.mapping.service.DDMTemplateLocalService;
 import com.liferay.dynamic.data.mapping.util.DDMXML;
-import com.liferay.exportimport.resources.importer.portlet.preferences.PortletPreferencesRetriever;
+import com.liferay.exportimport.resources.importer.portlet.preferences.PortletPreferencesTranslator;
 import com.liferay.journal.service.JournalArticleLocalService;
 import com.liferay.journal.service.JournalArticleService;
 import com.liferay.journal.util.JournalConverter;
@@ -233,7 +233,7 @@ public class ImporterFactory {
 		unbind = "unsetPortletPreferencesRetriever"
 	)
 	protected void setPortletPreferencesRetriever(
-		PortletPreferencesRetriever portletPreferencesRetriever,
+		PortletPreferencesTranslator portletPreferencesRetriever,
 		Map<String, Object> properties) {
 
 		String rootPortletId = GetterUtil.getString(
@@ -254,7 +254,7 @@ public class ImporterFactory {
 	}
 
 	protected void unsetPortletPreferencesRetriever(
-		PortletPreferencesRetriever portletPreferencesRetriever,
+		PortletPreferencesTranslator portletPreferencesRetriever,
 		Map<String, Object> properties) {
 
 		String rootPortletId = GetterUtil.getString(
@@ -342,7 +342,7 @@ public class ImporterFactory {
 	@Reference
 	private PortletPreferencesFactory _portletPreferencesFactory;
 
-	private final Map<String, PortletPreferencesRetriever>
+	private final Map<String, PortletPreferencesTranslator>
 		_portletPreferencesRetrievers = new ConcurrentHashMap<>();
 
 	@Reference
