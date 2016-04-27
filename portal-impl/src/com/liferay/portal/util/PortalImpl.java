@@ -6357,11 +6357,10 @@ public class PortalImpl implements Portal {
 			return false;
 		}
 
-		ServletContext servletContext =
-			(ServletContext)httpServletRequest.getAttribute(WebKeys.CTX);
-
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(
 			group.getCompanyId(), portletDisplay.getId());
+		ServletContext servletContext =
+			(ServletContext)httpServletRequest.getAttribute(WebKeys.CTX);
 
 		InvokerPortlet invokerPortlet = PortletInstanceFactoryUtil.create(
 			portlet, servletContext);
