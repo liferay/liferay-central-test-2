@@ -95,8 +95,8 @@ public class ResourceImporter extends FileSystemImporter {
 			indexerRegistry, journalArticleLocalService, journalArticleService,
 			layoutLocalService, layoutPrototypeLocalService,
 			layoutSetLocalService, layoutSetPrototypeLocalService, mimeTypes,
-			portal, portletPreferencesFactory, repositoryLocalService,
-			saxReader, themeLocalService, portletPreferencesRetrievers);
+			portal, portletPreferencesFactory, portletPreferencesRetrievers,
+			repositoryLocalService, saxReader, themeLocalService);
 	}
 
 	@Override
