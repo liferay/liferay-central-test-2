@@ -242,10 +242,10 @@ public class PrintArtifactPublishCommandsTask extends DefaultTask {
 		String[] arguments = new String[0];
 
 		if (firstPublish) {
-			String taskName = getFirstPublishExcludedTaskName();
+			Task task = getTask(getFirstPublishExcludedTaskName());
 
-			if (Validator.isNotNull(taskName)) {
-				arguments = new String[] {"-x", taskName};
+			if (task != null) {
+				arguments = new String[] {"-x", task.getPath()};
 			}
 		}
 
@@ -366,6 +366,18 @@ public class PrintArtifactPublishCommandsTask extends DefaultTask {
 		Project rootProject = project.getRootProject();
 
 		return rootProject.relativePath(file);
+	}
+
+	protected Task getTask(String name) {
+		if (Validator.isNull(name)) {
+			return null;
+		}
+
+		Project project = getProject();
+
+		TaskContainer taskContainer = project.getTasks();
+
+		return taskContainer.findByName(name);
 	}
 
 	protected boolean isPublished() {
