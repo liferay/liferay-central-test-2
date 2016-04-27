@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.server.manager.internal;
+package com.liferay.server.manager.internal.executor;
 
 import java.util.Arrays;
 import java.util.HashSet;
