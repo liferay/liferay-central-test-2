@@ -241,9 +241,7 @@ public class ImporterFactory {
 
 		if (Validator.isNull(rootPortletId)) {
 			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"No rootPortletId defined for service: " +
-						portletPreferencesTranslator);
+				_log.warn("The property \"rootPortletId\" is null");
 			}
 
 			return;

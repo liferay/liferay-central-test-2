@@ -1583,7 +1583,7 @@ public class FileSystemImporter extends BaseImporter {
 
 			if (indexer == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn("No indexer for with " + className);
+					_log.warn("No indexer for " + className);
 				}
 
 				continue;
