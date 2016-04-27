@@ -83,9 +83,9 @@ public class ResourceImporter extends FileSystemImporter {
 		LayoutSetPrototypeLocalService layoutSetPrototypeLocalService,
 		MimeTypes mimeTypes, Portal portal,
 		PortletPreferencesFactory portletPreferencesFactory,
-		RepositoryLocalService repositoryLocalService, SAXReader saxReader,
-		ThemeLocalService themeLocalService, Map<String,
-		PortletPreferencesRetriever> portletPreferencesRetrievers) {
+		Map<String,
+		PortletPreferencesRetriever> portletPreferencesRetrievers, RepositoryLocalService repositoryLocalService,
+		SAXReader saxReader, ThemeLocalService themeLocalService) {
 
 		super(
 			assetTagLocalService, ddmFormJSONDeserializer,
