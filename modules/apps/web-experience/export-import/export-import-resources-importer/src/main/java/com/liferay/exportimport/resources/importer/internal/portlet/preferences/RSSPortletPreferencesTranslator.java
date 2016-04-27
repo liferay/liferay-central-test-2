@@ -14,11 +14,13 @@
 
 package com.liferay.exportimport.resources.importer.internal.portlet.preferences;
 
-import com.liferay.exportimport.resources.importer.portlet.preferences.PortletPreferencesRetriever;
+import com.liferay.exportimport.resources.importer.portlet.preferences.PortletPreferencesTranslator;
 import com.liferay.portal.kernel.json.JSONObject;
-import com.liferay.portal.kernel.util.CharPool;
-import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.kernel.util.StringUtil;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.portlet.PortletException;
 import javax.portlet.PortletPreferences;
@@ -30,27 +32,41 @@ import org.osgi.service.component.annotations.Component;
  */
 @Component(
 	immediate = true,
-	property = {"rootPortletId=com_liferay_journal_content_web_portlet_JournalContentPortlet"},
-	service = PortletPreferencesRetriever.class
+	property = {"rootPortletId=com_liferay_rss_web_portlet_RSSPortlet"},
+	service = PortletPreferencesTranslator.class
 )
-public class JournalPortletPreferencesRetriever
-	implements PortletPreferencesRetriever {
+public class RSSPortletPreferencesTranslator
+	implements PortletPreferencesTranslator {
 
 	@Override
-	public void updatePortletPreferences(
+	public void translate(
 			JSONObject portletPreferencesJSONObject, String key,
 			PortletPreferences portletPreferences)
 		throws PortletException {
 
-		String value = portletPreferencesJSONObject.getString(key);
+		if (!key.equals("urls") && !key.equals("titles")) {
+			return;
+		}
 
-		String portletPreferencesKey = FileUtil.stripExtension(value);
+		JSONObject jsonObject = portletPreferencesJSONObject.getJSONObject(key);
 
-		portletPreferencesKey = StringUtil.replace(
-			portletPreferencesKey, CharPool.SPACE, CharPool.DASH);
-		portletPreferencesKey = StringUtil.toUpperCase(portletPreferencesKey);
+		List<String> valuesList = new ArrayList<>();
 
-		portletPreferences.setValue(portletPreferencesKey, value);
+		Iterator<String> iterator = jsonObject.keys();
+
+		while (iterator.hasNext()) {
+			String jsonObjectKey = iterator.next();
+
+			valuesList.add(jsonObject.getString(jsonObjectKey));
+		}
+
+		if (key.equals("urls")) {
+			Collections.reverse(valuesList);
+		}
+
+		String[] values = valuesList.toArray(new String[valuesList.size()]);
+
+		portletPreferences.setValues(key, values);
 	}
 
 }

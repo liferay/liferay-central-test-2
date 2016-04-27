@@ -22,9 +22,9 @@ import javax.portlet.PortletPreferences;
 /**
  * @author Michael C. Han
  */
-public interface PortletPreferencesRetriever {
+public interface PortletPreferencesTranslator {
 
-	public void updatePortletPreferences(
+	public void translate(
 			JSONObject portletPreferencesJSONObject, String key,
 			PortletPreferences portletPreferences)
 		throws PortletException;
