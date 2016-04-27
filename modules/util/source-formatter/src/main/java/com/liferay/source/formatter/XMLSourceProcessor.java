@@ -318,6 +318,9 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 		else if (fileName.endsWith("-model-hints.xml")) {
 			formatModelHintsXML(fileName, newContent);
 		}
+		else if (fileName.endsWith("portlet-preferences.xml")) {
+			formatPortletPreferencesXML(fileName, newContent);
+		}
 		else if (fileName.endsWith("/liferay-portlet.xml") ||
 				 (portalSource && fileName.endsWith("/portlet-custom.xml")) ||
 				 (!portalSource && fileName.endsWith("/portlet.xml"))) {
@@ -844,6 +847,16 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 		content = fixPoshiXMLEndLines(content);
 
 		return fixPoshiXMLNumberOfTabs(content);
+	}
+
+	protected void formatPortletPreferencesXML(String fileName, String content)
+		throws Exception {
+
+		Document document = readXML(content);
+
+		checkOrder(
+			fileName, document.getRootElement(), "preference", null,
+			new PortletPreferenceElementComparator());
 	}
 
 	protected void formatResourceActionXML(String fileName, String content)
@@ -1420,6 +1433,18 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 			}
 
 			return elementName.substring(0, pos);
+		}
+
+	}
+
+	private static class PortletPreferenceElementComparator
+		extends ElementComparator {
+
+		@Override
+		protected String getElementName(Element preferenceElement) {
+			Element nameElement = preferenceElement.element(getNameAttribute());
+
+			return nameElement.getStringValue();
 		}
 
 	}
