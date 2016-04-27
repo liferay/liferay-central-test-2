@@ -1205,7 +1205,7 @@ Please set the environment variable ANT_OPTS to the recommended value of
 				<not>
 					<uptodate>
 						<mapper to="${sdk.dir}" type="merge" />
-						<srcfiles dir="${project.dir}/tools" includes="com.liferay.portal.plugins.sdk.with.dependencies.zip*" />
+						<srcfiles dir="${project.dir}/tools" includes="com.liferay.portal.plugins.sdk.with.dependencies.zip" />
 					</uptodate>
 				</not>
 				<then>
