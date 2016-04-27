@@ -141,11 +141,8 @@ public class PrintArtifactPublishCommandsTask extends DefaultTask {
 
 		// Change log
 
-		TaskContainer taskContainer = project.getTasks();
-
-		BuildChangeLogTask buildChangeLogTask =
-			(BuildChangeLogTask)taskContainer.findByName(
-				ChangeLogBuilderPlugin.BUILD_CHANGE_LOG_TASK_NAME);
+		BuildChangeLogTask buildChangeLogTask = (BuildChangeLogTask)getTask(
+			ChangeLogBuilderPlugin.BUILD_CHANGE_LOG_TASK_NAME);
 
 		if (buildChangeLogTask != null) {
 			commands.add(getGradleCommand(buildChangeLogTask));
@@ -159,7 +156,7 @@ public class PrintArtifactPublishCommandsTask extends DefaultTask {
 
 		// Baseline
 
-		Task baselineTask = taskContainer.findByName(
+		Task baselineTask = getTask(
 			LiferayOSGiDefaultsPlugin.BASELINE_TASK_NAME);
 
 		if (baselineTask instanceof BaselineTask) {
