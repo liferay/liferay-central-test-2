@@ -52,10 +52,9 @@ public class PortalImplUnitTest extends PowerMockito {
 
 		mockHttpServletRequest.setServerName("serverName");
 
-		String newServerName = _portalImpl.getForwardedHost(
-			mockHttpServletRequest);
-
-		Assert.assertEquals("serverName", newServerName);
+		Assert.assertEquals(
+			"serverName",
+			_portalImpl.getForwardedHost(mockHttpServletRequest));
 	}
 
 	@Test
@@ -67,13 +66,11 @@ public class PortalImplUnitTest extends PowerMockito {
 
 		mockHttpServletRequest.addHeader(
 			"X-Forwarded-Custom-Host", "forwardedServer");
-
 		mockHttpServletRequest.setServerName("serverName");
 
-		boolean originalForwardedHost =
+		boolean webServerForwardedHostEnabled =
 			PropsValues.WEB_SERVER_FORWARDED_HOST_ENABLED;
-
-		String originalForwardedHostHeader =
+		String webServerForwardedHostHeader =
 			PropsValues.WEB_SERVER_FORWARDED_HOST_HEADER;
 
 		try {
@@ -81,56 +78,58 @@ public class PortalImplUnitTest extends PowerMockito {
 			setPropsValuesValue(
 				"WEB_SERVER_FORWARDED_HOST_HEADER", "X-Forwarded-Custom-Host");
 
-			String newServerName = _portalImpl.getForwardedHost(
-				mockHttpServletRequest);
-
-			Assert.assertEquals("forwardedServer", newServerName);
+			Assert.assertEquals(
+				"forwardedServer",
+				_portalImpl.getForwardedHost(mockHttpServletRequest));
 		}
 		finally {
 			setPropsValuesValue(
-				"WEB_SERVER_FORWARDED_HOST_ENABLED", originalForwardedHost);
+				"WEB_SERVER_FORWARDED_HOST_ENABLED",
+				webServerForwardedHostEnabled);
 			setPropsValuesValue(
 				"WEB_SERVER_FORWARDED_HOST_HEADER",
-				originalForwardedHostHeader);
+				webServerForwardedHostHeader);
 		}
 	}
 
 	@Test
-	public void testGetForwardedHostWithXForwardedHostDisabled() throws Exception {
+	public void testGetForwardedHostWithXForwardedHostDisabled()
+		throws Exception {
+
 		MockHttpServletRequest mockHttpServletRequest =
 			new MockHttpServletRequest();
 
 		mockHttpServletRequest.addHeader("X-Forwarded-Host", "forwardedServer");
-
 		mockHttpServletRequest.setServerName("serverName");
 
-		boolean originalForwardedHost =
+		boolean webServerForwardedHostEnabled =
 			PropsValues.WEB_SERVER_FORWARDED_HOST_ENABLED;
 
 		try {
 			setPropsValuesValue("WEB_SERVER_FORWARDED_HOST_ENABLED", false);
 
-			String newServerName = _portalImpl.getForwardedHost(
-				mockHttpServletRequest);
-
-			Assert.assertEquals("serverName", newServerName);
+			Assert.assertEquals(
+				"serverName",
+				_portalImpl.getForwardedHost(mockHttpServletRequest));
 		}
 		finally {
 			setPropsValuesValue(
-				"WEB_SERVER_FORWARDED_HOST_ENABLED", originalForwardedHost);
+				"WEB_SERVER_FORWARDED_HOST_ENABLED",
+				webServerForwardedHostEnabled);
 		}
 	}
 
 	@Test
-	public void testGetForwardedHostWithXForwardedHostEnabled() throws Exception {
+	public void testGetForwardedHostWithXForwardedHostEnabled()
+		throws Exception {
+
 		MockHttpServletRequest mockHttpServletRequest =
 			new MockHttpServletRequest();
 
 		mockHttpServletRequest.addHeader("X-Forwarded-Host", "forwardedServer");
-
 		mockHttpServletRequest.setServerName("serverName");
 
-		boolean originalForwardedHost =
+		boolean webServerForwardedHostEnabled =
 			PropsValues.WEB_SERVER_FORWARDED_HOST_ENABLED;
 
 		try {
@@ -143,7 +142,8 @@ public class PortalImplUnitTest extends PowerMockito {
 		}
 		finally {
 			setPropsValuesValue(
-				"WEB_SERVER_FORWARDED_HOST_ENABLED", originalForwardedHost);
+				"WEB_SERVER_FORWARDED_HOST_ENABLED",
+				webServerForwardedHostEnabled);
 		}
 	}
 
