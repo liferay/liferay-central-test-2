@@ -880,8 +880,11 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 						ResourceConstants.SCOPE_INDIVIDUAL, group.getGroupId());
 				}
 				catch (Exception e) {
-					_log.error(
-						"No resources found for group " + group.getGroupId());
+					if (_log.isWarnEnabled()) {
+						_log.warn(
+							"No resources found for group " +
+								group.getGroupId());
+					}
 				}
 
 				groupPersistence.remove(group);
