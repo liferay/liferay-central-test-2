@@ -181,7 +181,7 @@ public class AxisExtender {
 				"liferay.axis." + bundle.getSymbolicName());
 			properties.put(
 				HttpWhiteboardConstants.HTTP_WHITEBOARD_SERVLET_NAME,
-				AxisServlet.class.getName());
+				"AxisServlet");
 			properties.put(
 				HttpWhiteboardConstants.HTTP_WHITEBOARD_SERVLET_PATTERN,
 				"/api/axis/*");

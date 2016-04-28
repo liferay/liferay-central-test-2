@@ -230,8 +230,7 @@ public class ServletContextHelperRegistrationImpl
 			HttpWhiteboardConstants.HTTP_WHITEBOARD_CONTEXT_SELECT,
 			createContextSelectFilterString());
 		properties.put(
-			HttpWhiteboardConstants.HTTP_WHITEBOARD_SERVLET_NAME,
-			JspServletWrapper.class.getName());
+			HttpWhiteboardConstants.HTTP_WHITEBOARD_SERVLET_NAME, "jsp");
 		properties.put(
 			HttpWhiteboardConstants.HTTP_WHITEBOARD_SERVLET_PATTERN,
 			new String[] {"*.jsp", "*.jspx"});
@@ -252,7 +251,7 @@ public class ServletContextHelperRegistrationImpl
 			createContextSelectFilterString());
 		properties.put(
 			HttpWhiteboardConstants.HTTP_WHITEBOARD_SERVLET_NAME,
-			PortletServletWrapper.class.getName());
+			"Portlet Servlet");
 		properties.put(
 			HttpWhiteboardConstants.HTTP_WHITEBOARD_SERVLET_PATTERN,
 			"/portlet-servlet/*");
