@@ -355,9 +355,9 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 				Map<String, String> ddmTemplateScriptMap = new HashMap<>();
 
 				while (rs.next()) {
-					Long templateId = rs.getLong("templateId");
-					String script = rs.getString("script");
+					long templateId = rs.getLong("templateId");
 					String language = rs.getString("language");
+					String script = rs.getString("script");
 
 					String key = templateId + StringPool.DOLLAR + language;
 
