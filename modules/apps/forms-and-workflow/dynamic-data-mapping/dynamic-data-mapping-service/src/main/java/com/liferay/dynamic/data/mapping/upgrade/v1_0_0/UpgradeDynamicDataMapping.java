@@ -352,7 +352,7 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 			ps.setString(2, DDMTemplateConstants.TEMPLATE_TYPE_DISPLAY);
 
 			try (ResultSet rs = ps.executeQuery()) {
-				Map<String, String> ddmTemplateIdsToScriptMap = new HashMap<>();
+				Map<String, String> ddmTemplateScriptMap = new HashMap<>();
 
 				while (rs.next()) {
 					Long templateId = rs.getLong("templateId");
@@ -361,10 +361,10 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 
 					String key = templateId + StringPool.DOLLAR + language;
 
-					ddmTemplateIdsToScriptMap.put(key, script);
+					ddmTemplateScriptMap.put(key, script);
 				}
 
-				return ddmTemplateIdsToScriptMap;
+				return ddmTemplateScriptMap;
 			}
 		}
 	}
