@@ -7896,6 +7896,24 @@ public class JournalArticleLocalServiceImpl
 				" for folder " + folderId);
 	}
 
+
+	/**
+	 * @deprecated As of 7.0.0, replaced by {@link #validateReferences(long,
+	 *             String, String, String, boolean, String, byte[], long,
+	 *             String)}
+	 */
+	@Deprecated
+	protected void validateReferences(
+			long groupId, String ddmStructureKey, String ddmTemplateKey,
+			String layoutUuid, boolean smallImage, String smallImageURL,
+			byte[] smallImageBytes, String content)
+		throws PortalException {
+
+		validateReferences(
+			groupId, ddmStructureKey, ddmTemplateKey, layoutUuid, smallImage,
+			smallImageURL, smallImageBytes, 0, content);
+	}
+
 	protected void validateReferences(
 			long groupId, String ddmStructureKey, String ddmTemplateKey,
 			String layoutUuid, boolean smallImage, String smallImageURL,
