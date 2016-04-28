@@ -35,41 +35,42 @@ import java.util.concurrent.Executors;
 public class FilePropagator {
 
 	public FilePropagator(
-		String[] fileNames, String dirPath, String originDirPath,
+		String[] fileNames, String sourceDirName, String targetDirName,
 		List<String> targetSlaves) {
 
 		for (String fileName : fileNames) {
 			_filePropagatorTasks.add(
 				new FilePropagatorTask(
-					dirPath + "/" + fileName, originDirPath + "/" + fileName));
+					sourceDirName + "/" + fileName,
+					targetDirName + "/" + fileName));
 		}
 
 		_targetSlaves.addAll(targetSlaves);
 
-		_copyFromOrigin();
+		_copyFromSource();
 	}
 
 	public long getAverageThreadDuration() {
-		if (_filePropogatorThreadCompletedCount == 0) {
+		if (_threadsCompletedCount == 0) {
 			return 0;
 		}
 
-		return _totalFilePropogatorThreadsDuration /
-			_filePropogatorThreadCompletedCount;
+		return _threadsDurationTotal / _threadsCompletedCount;
 	}
 
 	public void start(int threadCount) {
 		ExecutorService executorService = Executors.newFixedThreadPool(
 			threadCount);
+
 		System.out.println(
-			"File Propagation starting with " + threadCount + " threads.");
+			"File propagation starting with " + threadCount + " threads.");
 
 		try {
 			long start = System.currentTimeMillis();
 
 			while (!_targetSlaves.isEmpty() || !_busySlaves.isEmpty()) {
 				synchronized(this) {
-					for (String sourceSlave : _sourceSlaves) {
+					for (String mirrorSlave : _mirrorSlaves) {
 						if (_targetSlaves.isEmpty()) {
 							break;
 						}
@@ -78,51 +79,43 @@ public class FilePropagator {
 
 						executorService.execute(
 							new FilePropagatorThread(
-								this, sourceSlave, targetSlave));
+								this, mirrorSlave, targetSlave));
 
-						_busySlaves.add(sourceSlave);
+						_busySlaves.add(mirrorSlave);
 						_busySlaves.add(targetSlave);
 					}
 
-					_sourceSlaves.removeAll(_busySlaves);
+					_mirrorSlaves.removeAll(_busySlaves);
 				}
 
 				StringBuffer sb = new StringBuffer();
 
-				sb.append("Busy slaves:");
-				sb.append(Integer.toString(_busySlaves.size()));
-				sb.append("\nSource slaves:");
-				sb.append(Integer.toString(_sourceSlaves.size()));
+				sb.append("Average thread duration: ");
+				sb.append(getAverageThreadDuration());
+				sb.append("ms\nBusy slaves:");
+				sb.append(_busySlaves.size());
+				sb.append("\nMirror slaves:");
+				sb.append(_mirrorSlaves.size());
 				sb.append("\nTarget slaves:");
-				sb.append(Integer.toString(_targetSlaves.size()));
+				sb.append(_targetSlaves.size());
 				sb.append("\nTotal duration: ");
-				sb.append(Long.toString((System.currentTimeMillis() - start)));
-				sb.append("\nAverage thread duration: ");
-				sb.append(Long.toString(getAverageThreadDuration()));
-				sb.append("ms\n");
+				sb.append(System.currentTimeMillis() - start);
+				sb.append("\n");
 
 				System.out.println(sb.toString());
 
 				JenkinsResultsParserUtil.sleep(5000);
 			}
 
-			StringBuffer sb = new StringBuffer();
+			System.out.println(
+				"File propagation completed in " +
+					(System.currentTimeMillis() - start) + "ms.");
 
-			sb.append("File Propagation complete.\nTotal duration: ");
-			sb.append(Long.toString(System.currentTimeMillis() - start));
-			sb.append("ms\n");
-			sb.append("Average thread duration: ");
-			sb.append(Long.toString(getAverageThreadDuration()));
-			sb.append("ms\n");
-			sb.append(Integer.toString(_errorSlaves.size()));
-			sb.append(" failures occurred.\n");
-
-			if (_errorSlaves.size() > 0) {
-				sb.append("Slaves that failed to respond:\n");
-				sb.append(_errorSlaves.toString());
+			if (!_errorSlaves.isEmpty()) {
+				System.out.println(
+					_errorSlaves.size() + " slaves failed to respond:\n" +
+						_errorSlaves);
 			}
-
-			System.out.println(sb.toString());
 		}
 		finally {
 			executorService.shutdown();
@@ -131,16 +124,16 @@ public class FilePropagator {
 
 	private static String _readInputStream(InputStream inputStream) {
 		try {
-			byte[] inputBytes = new byte[1024];
-
-			int size = inputStream.read(inputBytes);
-
 			StringBuffer sb = new StringBuffer();
 
-			while (size > 0) {
-				sb.append(new String(Arrays.copyOf(inputBytes, size)));
+			byte[] bytes = new byte[1024];
 
-				size = inputStream.read(inputBytes);
+			int size = inputStream.read(bytes);
+
+			while (size > 0) {
+				sb.append(new String(Arrays.copyOf(bytes, size)));
+
+				size = inputStream.read(bytes);
 			}
 
 			return sb.toString();
@@ -150,53 +143,55 @@ public class FilePropagator {
 		}
 	}
 
-	private void _copyFromOrigin() {
+	private void _copyFromSource() {
 		List<String> commands = new ArrayList<>();
 
 		String targetSlave = null;
 
 		for (FilePropagatorTask filePropagatorTask : _filePropagatorTasks) {
-			String originFilePath = filePropagatorTask._originFilePath;
-
-			System.out.println("Copying from origin: " + originFilePath);
-
 			targetSlave = _targetSlaves.get(0);
 
-			String filePath = filePropagatorTask._filePath;
+			String sourceFileName = filePropagatorTask._sourceFileName;
 
-			commands.add(_getMkdirCommand(filePath));
+			System.out.println("Copying from source " + sourceFileName);
 
-			if (originFilePath.startsWith("http")) {
-				commands.add(" curl -o " + filePath + " " + originFilePath);
+			String targetFileName = filePropagatorTask._targetFileName;
+
+			commands.add(_getMkdirCommand(targetFileName));
+
+			if (sourceFileName.startsWith("http")) {
+				commands.add(
+					" curl -o " + targetFileName + " " + sourceFileName);
 			}
 			else {
-				commands.add("rsync -vI " + originFilePath + " " + filePath);
+				commands.add(
+					"rsync -vI " + sourceFileName + " " + targetFileName);
 			}
 
-			String fileDirPath = filePath.substring(
-				0, filePath.lastIndexOf("/"));
+			String targetDirName = targetFileName.substring(
+				0, targetFileName.lastIndexOf("/"));
 
-			commands.add("ls -al " + fileDirPath);
+			commands.add("ls -al " + targetDirName);
 		}
 
 		try {
 			if (_executeCommands(commands, true, targetSlave) != 0) {
 				throw new RuntimeException(
-					"Copy from origin failed. Commands executed: " + commands);
+					"Unable to copy from source. Executed: " + commands);
 			}
 		}
 		catch (Exception e) {
 			throw new RuntimeException(
-				"Copy from origin failed. Commands executed: " + commands, e);
+				"Unable to copy from source. Executed: " + commands, e);
 		}
 
 		if (targetSlave != null) {
-			_targetSlaves.remove(targetSlave);
+			_mirrorSlaves.add(targetSlave);
 
-			_sourceSlaves.add(targetSlave);
+			_targetSlaves.remove(targetSlave);
 		}
 
-		System.out.println("Copy from origin complete.");
+		System.out.println("Finished copying from source.");
 	}
 
 	private int _executeCommands(
@@ -208,10 +203,11 @@ public class FilePropagator {
 		try {
 			FileSystem fileSystem = FileSystems.getDefault();
 
-			System.out.println("Executing commands:\n" +
-				new String(
-					Files.readAllBytes(
-						fileSystem.getPath(shellFile.getAbsolutePath()))));
+			System.out.println(
+				"Executing commands:\n" +
+					new String(
+						Files.readAllBytes(
+							fileSystem.getPath(shellFile.getAbsolutePath()))));
 
 			String errorText = null;
 			Integer exitCode = null;
@@ -221,11 +217,14 @@ public class FilePropagator {
 
 			while (exitCode == null) {
 				try {
-					process = Runtime.getRuntime().exec(
-						"./" + shellFile.getName());
+					Runtime runtime = Runtime.getRuntime();
+
+					process = runtime.exec("./" + shellFile.getName());
 				}
 				catch (IOException ioe) {
-					if (ioe.getMessage().contains("Text file busy") &&
+					String message = ioe.getMessage();
+
+					if (message.contains("Text file busy") &&
 						(System.currentTimeMillis() - start) < 2000) {
 
 						JenkinsResultsParserUtil.sleep(100);
@@ -279,42 +278,16 @@ public class FilePropagator {
 		}
 	}
 
-	private String _getMkdirCommand(String filePath) {
-		String directoryPath = filePath.substring(
-			0, (filePath.lastIndexOf("/") + 1));
-		return "mkdir -pv " + directoryPath;
-	}
+	private String _getMkdirCommand(String fileName) {
+		String dirName = fileName.substring(0, fileName.lastIndexOf("/") + 1);
 
-	private void _recordFilePropagatorThreadCompletion(
-		FilePropagatorThread filePropagatorThread) {
-
-		synchronized(this) {
-			_filePropogatorThreadCompletedCount++;
-
-			_totalFilePropogatorThreadsDuration +=
-				filePropagatorThread._duration;
-
-			_busySlaves.remove(filePropagatorThread._sourceSlave);
-			_busySlaves.remove(filePropagatorThread._targetSlave);
-
-			_sourceSlaves.add(filePropagatorThread._sourceSlave);
-
-			if (!filePropagatorThread._successful) {
-				_errorSlaves.add(filePropagatorThread._targetSlave);
-
-				return;
-			}
-
-			_sourceSlaves.add(filePropagatorThread._targetSlave);
-		}
+		return "mkdir -pv " + dirName;
 	}
 
 	private File _writeShellFile(List<String> commands, String targetSlave)
 		throws IOException {
 
-		String shellFileName = Integer.toString(commands.hashCode());
-
-		File shellFile = new File(shellFileName + ".sh");
+		File file = new File(commands.hashCode() + ".sh");
 
 		StringBuffer sb = new StringBuffer("ssh ");
 
@@ -332,17 +305,17 @@ public class FilePropagator {
 		sb.append("'\n");
 
 		try {
-			try (FileWriter shellFileWriter = new FileWriter(shellFile)) {
-				shellFileWriter.write(sb.toString());
+			try (FileWriter fileWriter = new FileWriter(file)) {
+				fileWriter.write(sb.toString());
 			}
 
-			shellFile.setExecutable(true);
+			file.setExecutable(true);
 
-			return shellFile;
+			return file;
 		}
 		catch (IOException ioe) {
-			if ((shellFile != null) && shellFile.exists()) {
-				shellFile.delete();
+			if ((file != null) && file.exists()) {
+				file.delete();
 			}
 
 			throw ioe;
@@ -353,20 +326,22 @@ public class FilePropagator {
 	private final List<String> _errorSlaves = new ArrayList<>();
 	private final List<FilePropagatorTask> _filePropagatorTasks =
 		new ArrayList<>();
-	private int _filePropogatorThreadCompletedCount;
-	private final List<String> _sourceSlaves = new ArrayList<>();
+	private int _threadsCompletedCount;
+	private final List<String> _mirrorSlaves = new ArrayList<>();
 	private final List<String> _targetSlaves = new ArrayList<>();
-	private long _totalFilePropogatorThreadsDuration = 0;
+	private long _threadsDurationTotal;
 
 	private static class FilePropagatorTask {
 
-		private FilePropagatorTask(String filePath, String originFilePath) {
-			_filePath = filePath;
-			_originFilePath = originFilePath;
+		private FilePropagatorTask(
+			String sourceFileName, String targetFileName) {
+
+			_sourceFileName = sourceFileName;
+			_targetFileName = targetFileName;
 		}
 
-		private final String _filePath;
-		private final String _originFilePath;
+		private final String _sourceFileName;
+		private final String _targetFileName;
 
 	}
 
@@ -384,12 +359,12 @@ public class FilePropagator {
 
 				commands.add(
 					_filePropagator._getMkdirCommand(
-						filePropagatorTask._filePath));
+						filePropagatorTask._targetFileName));
 
 				commands.add(
-					"rsync -vI " + _sourceSlave + ":" +
-						filePropagatorTask._filePath + " " +
-							filePropagatorTask._filePath);
+					"rsync -vI " + _mirrorSlave + ":" +
+						filePropagatorTask._targetFileName + " " +
+							filePropagatorTask._targetFileName);
 			}
 
 			try {
@@ -402,21 +377,35 @@ public class FilePropagator {
 
 			_duration = System.currentTimeMillis() - start;
 
-			_filePropagator._recordFilePropagatorThreadCompletion(this);
+			synchronized(_filePropagator) {
+				_filePropagator._busySlaves.remove(_mirrorSlave);
+				_filePropagator._busySlaves.remove(_targetSlave);
+				_filePropagator._mirrorSlaves.add(_mirrorSlave);
+				_filePropagator._threadsCompletedCount++;
+				_filePropagator._threadsDurationTotal += _duration;
+	
+				if (!_successful) {
+					_filePropagator._errorSlaves.add(_targetSlave);
+	
+					return;
+				}
+	
+				_filePropagator._mirrorSlaves.add(_targetSlave);
+			}
 		}
 
 		private FilePropagatorThread(
-			FilePropagator filePropagator, String sourceSlave,
+			FilePropagator filePropagator, String mirrorSlave,
 			String targetSlave) {
 
 			_filePropagator = filePropagator;
-			_sourceSlave = sourceSlave;
+			_mirrorSlave = mirrorSlave;
 			_targetSlave = targetSlave;
 		}
 
-		private long _duration = 0;
+		private long _duration;
 		private final FilePropagator _filePropagator;
-		private final String _sourceSlave;
+		private final String _mirrorSlave;
 		private boolean _successful;
 		private final String _targetSlave;
 
