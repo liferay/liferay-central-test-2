@@ -215,15 +215,15 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 	 * added.
 	 *
 	 * @param userId the primary key of the user
-	 * @param Roles the roles
+	 * @param roles the roles
 	 * @see   com.liferay.portal.kernel.service.persistence.UserPersistence#addRoles(
 	 *        long, List)
 	 */
 	@Override
-	public void addUserRoles(long userId, List<Role> Roles)
+	public void addUserRoles(long userId, List<Role> roles)
 		throws PortalException {
 
-		userPersistence.addRoles(userId, Roles);
+		userPersistence.addRoles(userId, roles);
 
 		reindex(userId);
 
@@ -534,15 +534,15 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 	 * are removed.
 	 *
 	 * @param userId the primary key of the user
-	 * @param Roles the roles
+	 * @param roles the roles
 	 * @see   com.liferay.portal.kernel.service.persistence.UserPersistence#removeRoles(
 	 *        long, List)
 	 */
 	@Override
-	public void deleteUserRoles(long userId, List<Role> Roles)
+	public void deleteUserRoles(long userId, List<Role> roles)
 		throws PortalException {
 
-		userPersistence.removeRoles(userId, Roles);
+		userPersistence.removeRoles(userId, roles);
 
 		reindex(userId);
 
