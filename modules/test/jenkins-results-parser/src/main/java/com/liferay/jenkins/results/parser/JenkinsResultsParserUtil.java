@@ -361,9 +361,7 @@ public class JenkinsResultsParserUtil {
 		return remoteURL;
 	}
 
-	public static List<String> getSlaves(String master)
-		throws Exception {
-
+	public static List<String> getSlaves(String master) throws Exception {
 		List<String> slaves = new ArrayList<>(100);
 
 		Properties properties = new Properties();
