@@ -209,7 +209,7 @@ public class GroupServiceTest {
 		GroupServiceUtil.deleteGroup(group.getGroupId());
 
 		Role ownerRole = RoleLocalServiceUtil.getRole(
-			stagingGroup.getCompanyId(), "Owner");
+			stagingGroup.getCompanyId(), RoleConstants.OWNER);
 
 		ResourcePermissionLocalServiceUtil.getResourcePermission(
 			stagingGroup.getCompanyId(), Group.class.getName(),
