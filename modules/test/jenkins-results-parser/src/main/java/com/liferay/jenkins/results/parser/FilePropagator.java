@@ -326,9 +326,9 @@ public class FilePropagator {
 	private final List<String> _errorSlaves = new ArrayList<>();
 	private final List<FilePropagatorTask> _filePropagatorTasks =
 		new ArrayList<>();
-	private int _threadsCompletedCount;
 	private final List<String> _mirrorSlaves = new ArrayList<>();
 	private final List<String> _targetSlaves = new ArrayList<>();
+	private int _threadsCompletedCount;
 	private long _threadsDurationTotal;
 
 	private static class FilePropagatorTask {
@@ -383,13 +383,13 @@ public class FilePropagator {
 				_filePropagator._mirrorSlaves.add(_mirrorSlave);
 				_filePropagator._threadsCompletedCount++;
 				_filePropagator._threadsDurationTotal += _duration;
-	
+
 				if (!_successful) {
 					_filePropagator._errorSlaves.add(_targetSlave);
-	
+
 					return;
 				}
-	
+
 				_filePropagator._mirrorSlaves.add(_targetSlave);
 			}
 		}
