@@ -361,8 +361,10 @@ public class JenkinsResultsParserUtil {
 		return remoteURL;
 	}
 
-	public static List<String> getSlaveList(String masterName)
+	public static List<String> getSlaves(String master)
 		throws Exception {
+
+		List<String> slaves = new ArrayList<>(100);
 
 		Properties properties = new Properties();
 
@@ -370,12 +372,10 @@ public class JenkinsResultsParserUtil {
 			new StringReader(
 				toString(
 					getLocalURL(
-						"http://mirrors-no-cache.lax.liferay.com/github.com/" +
-							"liferay/liferay-jenkins-ee/build.properties"))));
+						"http://mirrors-no-cache.lax.liferay.com/github.com" +
+							"/liferay/liferay-jenkins-ee/build.properties"))));
 
-		String masterSlavesKey = "master.slaves(" + masterName + ")";
-
-		List<String> slaves = new ArrayList<>(100);
+		String masterSlavesKey = "master.slaves(" + master + ")";
 
 		if (properties.containsKey(masterSlavesKey)) {
 			String slavesString = expandSlaveRange(
