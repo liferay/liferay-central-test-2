@@ -866,7 +866,7 @@ public class UpgradeDynamicDataMappingTest {
 
 		for (String dateFieldName : dateFieldNames) {
 
-			// Assign Statement
+			// Assign statement
 
 			sb = new StringBundler(5);
 
@@ -878,7 +878,7 @@ public class UpgradeDynamicDataMappingTest {
 
 			Assert.assertTrue(actualDefinition.contains(sb.toString()));
 
-			// If Statement
+			// If statement
 
 			sb = new StringBundler(3);
 
@@ -888,7 +888,7 @@ public class UpgradeDynamicDataMappingTest {
 
 			Assert.assertTrue(actualDefinition.contains(sb.toString()));
 
-			// DateParse Statement
+			// Date parse statement
 
 			sb = new StringBundler(5);
 
@@ -1002,7 +1002,7 @@ public class UpgradeDynamicDataMappingTest {
 
 		for (String dateFieldName : dateFieldNames) {
 
-			// Assign Statement
+			// Assign statement
 
 			sb = new StringBundler(5);
 
@@ -1014,7 +1014,7 @@ public class UpgradeDynamicDataMappingTest {
 
 			Assert.assertTrue(actualDefinition.contains(sb.toString()));
 
-			// If Statement
+			// If statement
 
 			sb = new StringBundler(3);
 
@@ -1024,7 +1024,7 @@ public class UpgradeDynamicDataMappingTest {
 
 			Assert.assertTrue(actualDefinition.contains(sb.toString()));
 
-			// DateParse Statement
+			// Date parse statement
 
 			sb = new StringBundler(5);
 
