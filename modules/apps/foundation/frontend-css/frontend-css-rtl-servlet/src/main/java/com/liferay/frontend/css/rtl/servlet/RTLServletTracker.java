@@ -69,7 +69,7 @@ public class RTLServletTracker {
 
 					properties.put(
 						HttpWhiteboardConstants.HTTP_WHITEBOARD_SERVLET_NAME,
-						RTLServlet.class.getName());
+						"RTL Servlet");
 					properties.put(
 						HttpWhiteboardConstants.HTTP_WHITEBOARD_SERVLET_PATTERN,
 						"*.css");

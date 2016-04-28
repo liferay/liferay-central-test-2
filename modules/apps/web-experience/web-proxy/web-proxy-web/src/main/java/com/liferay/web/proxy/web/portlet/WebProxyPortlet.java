@@ -178,7 +178,7 @@ public class WebProxyPortlet extends PortletBridgePortlet {
 			portletContext.getPortletContextName());
 		properties.put(
 			HttpWhiteboardConstants.HTTP_WHITEBOARD_SERVLET_NAME,
-			PortletBridgeServlet.class.getName());
+			"Portlet Bridge Servlet");
 		properties.put(
 			HttpWhiteboardConstants.HTTP_WHITEBOARD_SERVLET_PATTERN, "/pbhs/*");
 		properties.put(
