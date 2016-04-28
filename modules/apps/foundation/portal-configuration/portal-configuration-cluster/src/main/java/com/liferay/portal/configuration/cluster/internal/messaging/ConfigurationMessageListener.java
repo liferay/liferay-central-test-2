@@ -76,8 +76,8 @@ public class ConfigurationMessageListener extends BaseMessageListener {
 
 		_reloadablePersistenceManager.reload(pid);
 
-		Dictionary<String, ?> updatedProperties =
-			_reloadablePersistenceManager.load(pid);
+		Dictionary<String, ?> properties = _reloadablePersistenceManager.load(
+			pid);
 
 		try {
 			ConfigurationThreadLocal.setLocalUpdate(true);
@@ -96,7 +96,7 @@ public class ConfigurationMessageListener extends BaseMessageListener {
 					configuration.delete();
 				}
 				else {
-					configuration.update(updatedProperties);
+					configuration.update(properties);
 				}
 			}
 		}
