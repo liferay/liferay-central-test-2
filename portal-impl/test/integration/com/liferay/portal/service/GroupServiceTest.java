@@ -208,13 +208,13 @@ public class GroupServiceTest {
 
 		GroupServiceUtil.deleteGroup(group.getGroupId());
 
-		Role ownerRole = RoleLocalServiceUtil.getRole(
+		Role role = RoleLocalServiceUtil.getRole(
 			stagingGroup.getCompanyId(), RoleConstants.OWNER);
 
 		ResourcePermissionLocalServiceUtil.getResourcePermission(
 			stagingGroup.getCompanyId(), Group.class.getName(),
 			ResourceConstants.SCOPE_INDIVIDUAL,
-			String.valueOf(stagingGroup.getGroupId()), ownerRole.getRoleId());
+			String.valueOf(stagingGroup.getGroupId()), role.getRoleId());
 	}
 
 	@Test

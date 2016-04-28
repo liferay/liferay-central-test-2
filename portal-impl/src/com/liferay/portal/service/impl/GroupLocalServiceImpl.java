@@ -872,7 +872,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 				userGroupGroupRoleLocalService.
 					deleteUserGroupGroupRolesByGroupId(group.getGroupId());
 
-				// Resource permissions
+				// Resources
 
 				try {
 					resourceLocalService.deleteResource(
@@ -881,8 +881,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 				}
 				catch (Exception e) {
 					_log.error(
-						"No resource permissions found for group " +
-							group.getGroupId());
+						"No resources found for group " + group.getGroupId());
 				}
 
 				groupPersistence.remove(group);
