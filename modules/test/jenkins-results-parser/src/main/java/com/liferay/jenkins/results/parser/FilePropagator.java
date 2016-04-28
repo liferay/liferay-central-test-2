@@ -298,7 +298,7 @@ public class FilePropagator {
 			sb.append(commands.get(i));
 
 			if (i < (commands.size() -1)) {
-				sb.append("; ");
+				sb.append(" && ");
 			}
 		}
 
