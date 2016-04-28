@@ -66,13 +66,12 @@ public class ConfigurationPersistenceBundleActivator
 
 		properties.put(Constants.SERVICE_RANKING, (Integer.MAX_VALUE - 1000));
 
-		String[] serviceInterfaces = {
-			PersistenceManager.class.getName(),
-			ReloadablePersistenceManager.class.getName()
-		};
-
 		_serviceRegistration = bundleContext.registerService(
-			serviceInterfaces, _configurationPersistenceManager, properties);
+			new String[] {
+				PersistenceManager.class.getName(),
+				ReloadablePersistenceManager.class.getName()
+			},
+			_configurationPersistenceManager, properties);
 	}
 
 	@Override
