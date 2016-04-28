@@ -1168,6 +1168,19 @@ public class FileSystemImporter extends BaseImporter {
 			throw new ImporterException("portletId is not specified");
 		}
 
+		PortletPreferencesTranslator portletPreferencesTranslator =
+			portletPreferencesTranslators.get(rootPortletId);
+
+		if (portletPreferencesTranslator == null) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"No PortletPreferenceRetriever configured for : " +
+						rootPortletId);
+			}
+
+			return;
+		}
+
 		String portletId = layoutTypePortlet.addPortletId(
 			userId, rootPortletId, columnId, -1, false);
 
@@ -1191,19 +1204,6 @@ public class FileSystemImporter extends BaseImporter {
 
 		while (iterator.hasNext()) {
 			String key = iterator.next();
-
-			PortletPreferencesTranslator portletPreferencesTranslator =
-				portletPreferencesTranslators.get(key);
-
-			if (portletPreferencesTranslator == null) {
-				if (_log.isDebugEnabled()) {
-					_log.debug(
-						"No portlet preferences translator for portlet " +
-							rootPortletId);
-				}
-
-				continue;
-			}
 
 			portletPreferencesTranslator.translate(
 				portletPreferencesJSONObject, key, portletSetup);
@@ -1928,6 +1928,8 @@ public class FileSystemImporter extends BaseImporter {
 			},
 			{"rss_feed", "com.liferay.rss.web.util.RSSFeed"},
 			{"site_map", "com.liferay.portal.kernel.model.LayoutSet"},
+			{"site_navigation", "com.liferay.portal.kernel.theme.NavItem"},
+
 			{"wiki_page", "com.liferay.wiki.model.WikiPage"}
 		};
 
