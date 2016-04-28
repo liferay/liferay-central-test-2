@@ -439,7 +439,7 @@ public class DDMFormRendererImpl implements DDMFormRenderer {
 	}
 
 	@Reference(
-		target = "(osgi.http.whiteboard.servlet.name=com.liferay.dynamic.data.mapping.form.evaluator.internal.servlet.DDMFormEvaluatorServlet)",
+		target = "(osgi.http.whiteboard.servlet.name=DDMFormEvaluatorServlet)",
 		unbind = "-"
 	)
 	protected void setDDMFormEvaluatorServlet(Servlet ddmFormEvaluatorServlet) {
