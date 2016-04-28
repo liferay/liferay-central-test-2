@@ -1041,8 +1041,8 @@ public class RoleLocalServiceUtil {
 	}
 
 	public static void addGroupRoles(long groupId,
-		java.util.List<com.liferay.portal.kernel.model.Role> Roles) {
-		getService().addGroupRoles(groupId, Roles);
+		java.util.List<com.liferay.portal.kernel.model.Role> roles) {
+		getService().addGroupRoles(groupId, roles);
 	}
 
 	public static void addGroupRoles(long groupId, long[] roleIds) {
@@ -1070,9 +1070,9 @@ public class RoleLocalServiceUtil {
 	* @throws PortalException
 	*/
 	public static void addUserRoles(long userId,
-		java.util.List<com.liferay.portal.kernel.model.Role> Roles)
+		java.util.List<com.liferay.portal.kernel.model.Role> roles)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		getService().addUserRoles(userId, Roles);
+		getService().addUserRoles(userId, roles);
 	}
 
 	/**
@@ -1125,8 +1125,8 @@ public class RoleLocalServiceUtil {
 	}
 
 	public static void deleteGroupRoles(long groupId,
-		java.util.List<com.liferay.portal.kernel.model.Role> Roles) {
-		getService().deleteGroupRoles(groupId, Roles);
+		java.util.List<com.liferay.portal.kernel.model.Role> roles) {
+		getService().deleteGroupRoles(groupId, roles);
 	}
 
 	public static void deleteGroupRoles(long groupId, long[] roleIds) {
@@ -1154,9 +1154,9 @@ public class RoleLocalServiceUtil {
 	* @throws PortalException
 	*/
 	public static void deleteUserRoles(long userId,
-		java.util.List<com.liferay.portal.kernel.model.Role> Roles)
+		java.util.List<com.liferay.portal.kernel.model.Role> roles)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		getService().deleteUserRoles(userId, Roles);
+		getService().deleteUserRoles(userId, roles);
 	}
 
 	/**

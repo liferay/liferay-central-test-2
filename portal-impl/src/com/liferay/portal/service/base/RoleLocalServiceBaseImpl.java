@@ -456,8 +456,8 @@ public abstract class RoleLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 */
 	@Override
-	public void addGroupRoles(long groupId, List<Role> Roles) {
-		groupPersistence.addRoles(groupId, Roles);
+	public void addGroupRoles(long groupId, List<Role> roles) {
+		groupPersistence.addRoles(groupId, roles);
 	}
 
 	/**
@@ -491,8 +491,8 @@ public abstract class RoleLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 */
 	@Override
-	public void deleteGroupRoles(long groupId, List<Role> Roles) {
-		groupPersistence.removeRoles(groupId, Roles);
+	public void deleteGroupRoles(long groupId, List<Role> roles) {
+		groupPersistence.removeRoles(groupId, roles);
 	}
 
 	/**
@@ -585,9 +585,9 @@ public abstract class RoleLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 * @throws PortalException
 	 */
 	@Override
-	public void addUserRoles(long userId, List<Role> Roles)
+	public void addUserRoles(long userId, List<Role> roles)
 		throws PortalException {
-		userPersistence.addRoles(userId, Roles);
+		userPersistence.addRoles(userId, roles);
 	}
 
 	/**
@@ -629,9 +629,9 @@ public abstract class RoleLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 * @throws PortalException
 	 */
 	@Override
-	public void deleteUserRoles(long userId, List<Role> Roles)
+	public void deleteUserRoles(long userId, List<Role> roles)
 		throws PortalException {
-		userPersistence.removeRoles(userId, Roles);
+		userPersistence.removeRoles(userId, roles);
 	}
 
 	/**

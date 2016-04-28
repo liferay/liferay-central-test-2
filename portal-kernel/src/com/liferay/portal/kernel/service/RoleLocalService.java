@@ -909,7 +909,7 @@ public interface RoleLocalService extends BaseLocalService,
 
 	public void addGroupRole(long groupId, long roleId);
 
-	public void addGroupRoles(long groupId, List<Role> Roles);
+	public void addGroupRoles(long groupId, List<Role> roles);
 
 	public void addGroupRoles(long groupId, long[] roleIds);
 
@@ -926,7 +926,7 @@ public interface RoleLocalService extends BaseLocalService,
 	/**
 	* @throws PortalException
 	*/
-	public void addUserRoles(long userId, List<Role> Roles)
+	public void addUserRoles(long userId, List<Role> roles)
 		throws PortalException;
 
 	/**
@@ -961,7 +961,7 @@ public interface RoleLocalService extends BaseLocalService,
 
 	public void deleteGroupRole(long groupId, long roleId);
 
-	public void deleteGroupRoles(long groupId, List<Role> Roles);
+	public void deleteGroupRoles(long groupId, List<Role> roles);
 
 	public void deleteGroupRoles(long groupId, long[] roleIds);
 
@@ -980,7 +980,7 @@ public interface RoleLocalService extends BaseLocalService,
 	/**
 	* @throws PortalException
 	*/
-	public void deleteUserRoles(long userId, List<Role> Roles)
+	public void deleteUserRoles(long userId, List<Role> roles)
 		throws PortalException;
 
 	/**

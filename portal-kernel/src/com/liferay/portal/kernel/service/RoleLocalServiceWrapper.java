@@ -1114,8 +1114,8 @@ public class RoleLocalServiceWrapper implements RoleLocalService,
 
 	@Override
 	public void addGroupRoles(long groupId,
-		java.util.List<com.liferay.portal.kernel.model.Role> Roles) {
-		_roleLocalService.addGroupRoles(groupId, Roles);
+		java.util.List<com.liferay.portal.kernel.model.Role> roles) {
+		_roleLocalService.addGroupRoles(groupId, roles);
 	}
 
 	@Override
@@ -1147,9 +1147,9 @@ public class RoleLocalServiceWrapper implements RoleLocalService,
 	*/
 	@Override
 	public void addUserRoles(long userId,
-		java.util.List<com.liferay.portal.kernel.model.Role> Roles)
+		java.util.List<com.liferay.portal.kernel.model.Role> roles)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		_roleLocalService.addUserRoles(userId, Roles);
+		_roleLocalService.addUserRoles(userId, roles);
 	}
 
 	/**
@@ -1210,8 +1210,8 @@ public class RoleLocalServiceWrapper implements RoleLocalService,
 
 	@Override
 	public void deleteGroupRoles(long groupId,
-		java.util.List<com.liferay.portal.kernel.model.Role> Roles) {
-		_roleLocalService.deleteGroupRoles(groupId, Roles);
+		java.util.List<com.liferay.portal.kernel.model.Role> roles) {
+		_roleLocalService.deleteGroupRoles(groupId, roles);
 	}
 
 	@Override
@@ -1243,9 +1243,9 @@ public class RoleLocalServiceWrapper implements RoleLocalService,
 	*/
 	@Override
 	public void deleteUserRoles(long userId,
-		java.util.List<com.liferay.portal.kernel.model.Role> Roles)
+		java.util.List<com.liferay.portal.kernel.model.Role> roles)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		_roleLocalService.deleteUserRoles(userId, Roles);
+		_roleLocalService.deleteUserRoles(userId, roles);
 	}
 
 	/**
