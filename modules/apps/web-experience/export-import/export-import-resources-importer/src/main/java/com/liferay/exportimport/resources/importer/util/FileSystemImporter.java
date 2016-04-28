@@ -1929,7 +1929,6 @@ public class FileSystemImporter extends BaseImporter {
 			{"rss_feed", "com.liferay.rss.web.util.RSSFeed"},
 			{"site_map", "com.liferay.portal.kernel.model.LayoutSet"},
 			{"site_navigation", "com.liferay.portal.kernel.theme.NavItem"},
-
 			{"wiki_page", "com.liferay.wiki.model.WikiPage"}
 		};
 
