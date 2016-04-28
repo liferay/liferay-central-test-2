@@ -43,7 +43,7 @@ public class RSSPortletPreferencesTranslator
 			PortletPreferences portletPreferences)
 		throws PortletException {
 
-		if (!key.equals("urls") && !key.equals("titles")) {
+		if (!key.equals("titles") && !key.equals("urls")) {
 			String value = portletPreferencesJSONObject.getString(key);
 
 			portletPreferences.setValue(key, value);
