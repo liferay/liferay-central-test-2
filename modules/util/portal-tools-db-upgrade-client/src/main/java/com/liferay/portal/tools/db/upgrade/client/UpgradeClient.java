@@ -292,7 +292,7 @@ public class UpgradeClient {
 		options.addOption(
 			new Option("l", "logFile", true, "Set the name of log file."));
 		options.addOption(
-			new Option("n", "noShell", false, "Don't connect to GoGo Shell."));
+			new Option("n", "noShell", false, "Do not connect to GoGo shell."));
 
 		return options;
 	}
