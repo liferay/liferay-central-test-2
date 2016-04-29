@@ -147,7 +147,7 @@ public class LPKGDeployerImpl implements LPKGDeployer {
 					Files.deleteIfExists(Paths.get(bundle.getLocation())) &&
 					_log.isInfoEnabled()) {
 
-					_log.info("Removed old LPKG file " + bundle.getLocation());
+					_log.info("Removed old LPKG bundle " + bundle.getLocation());
 				}
 			}
 			catch (BundleException be) {
