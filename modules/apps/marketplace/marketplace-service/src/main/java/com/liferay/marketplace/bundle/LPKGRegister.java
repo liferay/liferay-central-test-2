@@ -14,7 +14,6 @@
 
 package com.liferay.marketplace.bundle;
 
-import com.liferay.lpkg.deployer.LPKGDeployer;
 import com.liferay.marketplace.model.App;
 import com.liferay.marketplace.service.AppLocalService;
 import com.liferay.marketplace.service.ModuleLocalService;
@@ -24,6 +23,7 @@ import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.lpkg.deployer.LPKGDeployer;
 
 import java.net.URL;
 
