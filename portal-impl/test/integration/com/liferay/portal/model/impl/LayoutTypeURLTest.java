@@ -46,12 +46,7 @@ public class LayoutTypeURLTest extends PortalImplBaseURLTestCase {
 		new LiferayIntegrationTestRule();
 
 	@Test
-	public void testRegularURLLayoutTypeURL() throws Exception {
-
-		// See LPS-64818
-
-		String invalidURLInput = "javascript:alert(1)";
-
+	public void testGetRegularURLLayoutTypeURL() throws Exception {
 		ThemeDisplay themeDisplay = initThemeDisplay(
 			company, group, publicLayout, VIRTUAL_HOSTNAME);
 
@@ -72,14 +67,11 @@ public class LayoutTypeURLTest extends PortalImplBaseURLTestCase {
 		UnicodeProperties properties =
 			layoutURLType.getTypeSettingsProperties();
 
-		properties.setProperty("url", invalidURLInput);
-
-		String regularURL = layoutURLType.getRegularURL(mockHttpServletRequest);
+		properties.setProperty("url", "javascript:alert(1)");
 
 		Assert.assertTrue(
-			"LayoutImpl#getRegularURL() failed to provide a valid URL to " +
-				"layout of type URL",
-			Validator.isUrl(regularURL, true));
+			Validator.isUrl(
+				layoutURLType.getRegularURL(mockHttpServletRequest), true));
 	}
 
 }
