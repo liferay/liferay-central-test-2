@@ -99,9 +99,10 @@ public class LPKGDeployerImpl implements LPKGDeployer {
 
 					if (fileName.endsWith(".lpkg")) {
 						try {
-							for (Bundle bundle :
-									deploy(bundleContext, filePath.toFile())) {
+							List<Bundle> bundles = deploy(
+								bundleContext, filePath.toFile());
 
+							for (Bundle bundle : bundles) {
 								try {
 									bundle.start();
 								}
