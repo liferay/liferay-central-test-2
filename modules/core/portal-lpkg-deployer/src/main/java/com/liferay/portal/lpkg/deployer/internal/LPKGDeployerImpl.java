@@ -137,7 +137,7 @@ public class LPKGDeployerImpl implements LPKGDeployer {
 
 				if (_log.isInfoEnabled()) {
 					_log.info(
-						"Uninstalled older version LPKG bundle " + bundle +
+						"Uninstalled older LPKG bundle " + bundle +
 							" in order to install " + lpkgFile);
 				}
 
@@ -147,7 +147,7 @@ public class LPKGDeployerImpl implements LPKGDeployer {
 					Files.deleteIfExists(Paths.get(bundle.getLocation())) &&
 					_log.isInfoEnabled()) {
 
-					_log.info("Removed old lpkg file " + bundle.getLocation());
+					_log.info("Removed old LPKG file " + bundle.getLocation());
 				}
 			}
 			catch (BundleException be) {
