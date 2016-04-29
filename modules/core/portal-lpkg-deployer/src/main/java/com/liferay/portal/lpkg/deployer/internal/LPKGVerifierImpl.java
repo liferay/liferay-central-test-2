@@ -63,19 +63,19 @@ public class LPKGVerifierImpl implements LPKGVerifier {
 
 			if (Validator.isNull(symbolicName)) {
 				throw new LPKGVerifyException(
-					lpkeFile + " does not have a valid symbolicName");
+					lpkeFile + " does not have a valid symbolic name");
 			}
 
-			String versionString = properties.getProperty("version");
-
 			Version version = null;
+
+			String versionString = properties.getProperty("version");
 
 			try {
 				version = new Version(versionString);
 			}
 			catch (IllegalArgumentException iae) {
 				throw new LPKGVerifyException(
-					lpkeFile + " does not have a valid version :" +
+					lpkeFile + " does not have a valid version: " +
 						versionString,
 					iae);
 			}
@@ -87,12 +87,12 @@ public class LPKGVerifierImpl implements LPKGVerifier {
 					continue;
 				}
 
-				int result = version.compareTo(bundle.getVersion());
+				int value = version.compareTo(bundle.getVersion());
 
-				if (result > 0) {
+				if (value > 0) {
 					oldBundles.add(bundle);
 				}
-				else if (result == 0) {
+				else if (value == 0) {
 					String path = lpkeFile.getCanonicalPath();
 
 					if (path.equals(bundle.getLocation())) {
@@ -100,13 +100,14 @@ public class LPKGVerifierImpl implements LPKGVerifier {
 					}
 
 					throw new LPKGVerifyException(
-						"LPKG bundle " + bundle + " has the same symbolic " +
-							"name and version as LPKG file :" + lpkeFile);
+						"Existing LPKG bundle " + bundle + " has the same " +
+							"symbolic name and version as LPKG file " +
+								lpkeFile);
 				}
 				else {
 					throw new LPKGVerifyException(
-						"A newer version LPKG bundle " + bundle +
-							" has been installed comparing to " + lpkeFile);
+						"Existing LPKG bundle " + bundle +
+							" is a newer version of LPKG file " + lpkeFile);
 				}
 			}
 
