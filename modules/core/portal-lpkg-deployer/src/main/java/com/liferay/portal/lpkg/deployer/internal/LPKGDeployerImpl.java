@@ -118,7 +118,7 @@ public class LPKGDeployerImpl implements LPKGDeployer {
 						}
 					}
 					catch (Exception e) {
-						_log.error("Unable to deploy lpkg file " + filePath, e);
+						_log.error("Unable to deploy LPKG file " + filePath, e);
 					}
 
 					return FileVisitResult.CONTINUE;
