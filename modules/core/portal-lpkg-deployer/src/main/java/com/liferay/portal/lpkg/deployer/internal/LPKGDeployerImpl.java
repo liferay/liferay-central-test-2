@@ -97,27 +97,28 @@ public class LPKGDeployerImpl implements LPKGDeployer {
 					String fileName = StringUtil.toLowerCase(
 						fileNamePath.toString());
 
-					if (fileName.endsWith(".lpkg")) {
-						try {
-							List<Bundle> bundles = deploy(
-								bundleContext, filePath.toFile());
+					if (!fileName.endsWith(".lpkg")) {
+						return FileVisitResult.CONTINUE;
+					}
 
-							for (Bundle bundle : bundles) {
-								try {
-									bundle.start();
-								}
-								catch (BundleException be) {
-									_log.error(
-										"Unable to start " + bundle + " for " +
-											filePath,
-										be);
-								}
+					try {
+						List<Bundle> bundles = deploy(
+							bundleContext, filePath.toFile());
+
+						for (Bundle bundle : bundles) {
+							try {
+								bundle.start();
+							}
+							catch (BundleException be) {
+								_log.error(
+									"Unable to start " + bundle + " for " +
+										filePath,
+									be);
 							}
 						}
-						catch (Exception e) {
-							_log.error(
-								"Unable to deploy lpkg file " + filePath, e);
-						}
+					}
+					catch (Exception e) {
+						_log.error("Unable to deploy lpkg file " + filePath, e);
 					}
 
 					return FileVisitResult.CONTINUE;
