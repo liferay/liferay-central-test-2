@@ -74,7 +74,7 @@ public class LPKGDeployerImpl implements LPKGDeployer {
 		_lpkgBundleTracker.open();
 
 		String deploymentDir = GetterUtil.getString(
-			bundleContext.getProperty("lpkg.deployment.dir"),
+			bundleContext.getProperty("lpkg.deployer.dir"),
 			PropsValues.MODULE_FRAMEWORK_BASE_DIR + "marketplace");
 
 		Path deploymentDirPath = Paths.get(deploymentDir);
