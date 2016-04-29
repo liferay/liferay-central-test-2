@@ -40,7 +40,7 @@ import org.osgi.service.component.annotations.Reference;
  * @author Shuyang Zhou
  */
 @Component(immediate = true)
-public class LPKGRegister {
+public class LPKGDeployerRegistrar {
 
 	@Activate
 	public void activate() throws Exception {
