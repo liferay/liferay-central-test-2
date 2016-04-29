@@ -2937,10 +2937,10 @@ plugins.includes=</echo>
 			/>
 		</copy>
 
-		<zip destfile="dist/liferay-portal-db-upgrade-${lp.version}.zip">
+		<zip destfile="dist/liferay-portal-tools-db-upgrade-client-${lp.version}.zip">
 			<zipfileset
 				dir="${tstamp.value}"
-				prefix="liferay-portal-db-upgrade-${lp.version}"
+				prefix="liferay-portal-tools-db-upgrade-client-${lp.version}"
 			/>
 		</zip>
 
