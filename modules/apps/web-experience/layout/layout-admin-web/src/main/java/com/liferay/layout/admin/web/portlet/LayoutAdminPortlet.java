@@ -389,7 +389,7 @@ public class LayoutAdminPortlet extends MVCPortlet {
 			selPlid = layout.getPlid();
 		}
 
-		Layout deletedLayout = layoutLocalService.getLayout(selPlid);
+		Layout deleteLayout = layoutLocalService.getLayout(selPlid);
 
 		Object[] returnValue = SitesUtil.deleteLayout(
 			actionRequest, actionResponse);
@@ -406,8 +406,8 @@ public class LayoutAdminPortlet extends MVCPortlet {
 			}
 			else {
 				redirect = getEmptyLayoutSetURL(
-					actionRequest, deletedLayout.getGroupId(),
-					deletedLayout.isPrivateLayout());
+					actionRequest, deleteLayout.getGroupId(),
+					deleteLayout.isPrivateLayout());
 			}
 		}
 
