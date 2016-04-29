@@ -587,15 +587,15 @@ public class SitesImpl implements Sites {
 				}
 
 				if (newPlid <= 0) {
-					Layout firstLayoutOtherLayoutSet =
+					Layout otherLayoutSetFirstLayout =
 						LayoutLocalServiceUtil.fetchFirstLayout(
 							layout.getGroupId(), !layout.isPrivateLayout(),
 							LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
 
-					if ((firstLayoutOtherLayoutSet != null) &&
-						(firstLayoutOtherLayoutSet.getPlid() != selPlid)) {
+					if ((otherLayoutSetFirstLayout != null) &&
+						(otherLayoutSetFirstLayout.getPlid() != selPlid)) {
 
-						newPlid = firstLayoutOtherLayoutSet.getPlid();
+						newPlid = otherLayoutSetFirstLayout.getPlid();
 					}
 				}
 			}
