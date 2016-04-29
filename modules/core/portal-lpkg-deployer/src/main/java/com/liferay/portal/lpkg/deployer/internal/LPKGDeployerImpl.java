@@ -163,7 +163,7 @@ public class LPKGDeployerImpl implements LPKGDeployer {
 			List<Bundle> bundles = new ArrayList<>();
 
 			Bundle lpkgBundle = bundleContext.installBundle(
-				lpkgFile.getCanonicalPath(), _lpkgToOSGiBundle(lpkgFile));
+				lpkgFile.getCanonicalPath(), _toBundle(lpkgFile));
 
 			BundleStartLevel bundleStartLevel = lpkgBundle.adapt(
 				BundleStartLevel.class);
@@ -196,7 +196,7 @@ public class LPKGDeployerImpl implements LPKGDeployer {
 		_lpkgBundleTracker.close();
 	}
 
-	private InputStream _lpkgToOSGiBundle(File lpkgFile) throws IOException {
+	private InputStream _toBundle(File lpkgFile) throws IOException {
 		try (UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
 				new UnsyncByteArrayOutputStream()) {
 
