@@ -147,12 +147,15 @@ public class LPKGDeployerImpl implements LPKGDeployer {
 					Files.deleteIfExists(Paths.get(bundle.getLocation())) &&
 					_log.isInfoEnabled()) {
 
-					_log.info("Removed old LPKG bundle " + bundle.getLocation());
+					_log.info(
+						"Removed old LPKG bundle " + bundle.getLocation());
 				}
 			}
 			catch (BundleException be) {
 				_log.error(
-					"Unable to uninstall " + bundle + " for " + lpkgFile, be);
+					"Unable to uninstall " + bundle + " in order to install " +
+						lpkgFile,
+					be);
 			}
 		}
 
