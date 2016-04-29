@@ -45,14 +45,14 @@ public class LPKGVerifierImpl implements LPKGVerifier {
 	}
 
 	@Override
-	public List<Bundle> verify(File lpkeFile) {
-		try (ZipFile zipFile = new ZipFile(lpkeFile)) {
+	public List<Bundle> verify(File lpkgFile) {
+		try (ZipFile zipFile = new ZipFile(lpkgFile)) {
 			ZipEntry zipEntry = zipFile.getEntry(
 				"liferay-marketplace.properties");
 
 			if (zipEntry == null) {
 				throw new LPKGVerifyException(
-					lpkeFile + " does not have liferay-marketplace.properties");
+					lpkgFile + " does not have liferay-marketplace.properties");
 			}
 
 			Properties properties = new Properties();
@@ -63,7 +63,7 @@ public class LPKGVerifierImpl implements LPKGVerifier {
 
 			if (Validator.isNull(symbolicName)) {
 				throw new LPKGVerifyException(
-					lpkeFile + " does not have a valid symbolic name");
+					lpkgFile + " does not have a valid symbolic name");
 			}
 
 			Version version = null;
@@ -75,7 +75,7 @@ public class LPKGVerifierImpl implements LPKGVerifier {
 			}
 			catch (IllegalArgumentException iae) {
 				throw new LPKGVerifyException(
-					lpkeFile + " does not have a valid version: " +
+					lpkgFile + " does not have a valid version: " +
 						versionString,
 					iae);
 			}
@@ -93,7 +93,7 @@ public class LPKGVerifierImpl implements LPKGVerifier {
 					oldBundles.add(bundle);
 				}
 				else if (value == 0) {
-					String path = lpkeFile.getCanonicalPath();
+					String path = lpkgFile.getCanonicalPath();
 
 					if (path.equals(bundle.getLocation())) {
 						continue;
@@ -102,12 +102,12 @@ public class LPKGVerifierImpl implements LPKGVerifier {
 					throw new LPKGVerifyException(
 						"Existing LPKG bundle " + bundle + " has the same " +
 							"symbolic name and version as LPKG file " +
-								lpkeFile);
+								lpkgFile);
 				}
 				else {
 					throw new LPKGVerifyException(
 						"Existing LPKG bundle " + bundle +
-							" is a newer version of LPKG file " + lpkeFile);
+							" is a newer version of LPKG file " + lpkgFile);
 				}
 			}
 
