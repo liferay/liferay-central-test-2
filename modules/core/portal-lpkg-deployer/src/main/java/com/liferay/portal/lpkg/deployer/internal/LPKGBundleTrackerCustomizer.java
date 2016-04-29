@@ -82,10 +82,11 @@ public class LPKGBundleTrackerCustomizer
 				while (enumeration.hasMoreElements()) {
 					url = enumeration.nextElement();
 
-					String path = url.getPath();
+					String pathString = url.getPath();
 
-					String contextName = path.substring(
-						path.lastIndexOf('/') + 1, path.lastIndexOf(".war"));
+					String contextName = pathString.substring(
+						pathString.lastIndexOf('/') + 1,
+						pathString.lastIndexOf(".war"));
 
 					int index = contextName.lastIndexOf('-');
 
