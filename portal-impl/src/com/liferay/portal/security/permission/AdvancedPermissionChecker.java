@@ -750,39 +750,34 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 
 		if (primKey.contains(PortletConstants.LAYOUT_SEPARATOR)) {
 
-			// There are no custom permissions defined for portlet, use defaults
+			// Using defaults because custom permissions defined for portlet
+			// resource are not defined
 
 			newIndividualResourcePrimKey = name;
 
 			if (_log.isDebugEnabled()) {
-				StringBundler sb = new StringBundler(9);
+				String message =
+					"Using defaults because custom permissions for " +
+						"portlet resource " + name + " are not defined";
 
-				sb.append("Custom permissions for portlet resource ");
-				sb.append(name);
-				sb.append(" are not defined, using defaults.");
-
-				_log.debug(
-					sb.toString(), new IllegalArgumentException(sb.toString()));
+				_log.debug(message, new IllegalArgumentException(message));
 			}
 		}
 
 		else if ((groupId > 0) &&
 				 ResourceActionsUtil.isRootModelResource(name)) {
 
-			// There are no custom permissions defined for root model resource,
-			// use defaults
+			// Using defaults because custom permissions defined for root model
+			// resource are not defined
 
 			newIndividualResourcePrimKey = name;
 
 			if (_log.isDebugEnabled()) {
-				StringBundler sb = new StringBundler(9);
+				String message =
+					"Using defaults because custom permissions for " +
+						"root model resource " + name + " are not defined";
 
-				sb.append("Custom permissions for root model resource ");
-				sb.append(name);
-				sb.append(" are not defined, using defaults.");
-
-				_log.debug(
-					sb.toString(), new IllegalArgumentException(sb.toString()));
+				_log.debug(message, new IllegalArgumentException(message));
 			}
 		}
 
