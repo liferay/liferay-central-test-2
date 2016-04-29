@@ -83,8 +83,6 @@ public class LayoutsTreeDisplayContext extends BaseLayoutDisplayContext {
 				liferayPortletRequest, LayoutAdminPortletKeys.GROUP_PAGES,
 				PortletRequest.ACTION_PHASE);
 
-		deleteLayoutURL.setRefererPlid(themeDisplay.getPlid());
-
 		deleteLayoutURL.setParameter(ActionRequest.ACTION_NAME, "deleteLayout");
 		deleteLayoutURL.setParameter("mvcPath", "/edit_layout.jsp");
 
@@ -113,6 +111,8 @@ public class LayoutsTreeDisplayContext extends BaseLayoutDisplayContext {
 		}
 		catch (PortalException pe) {
 		}
+
+		deleteLayoutURL.setRefererPlid(themeDisplay.getPlid());
 
 		return deleteLayoutURL;
 	}
