@@ -794,10 +794,8 @@ public class LayoutAdminPortlet extends MVCPortlet {
 			PortletRequest.RENDER_PHASE);
 
 		emptyLayoutSetURL.setParameter("mvcPath", "/empty_layout_set.jsp");
-
 		emptyLayoutSetURL.setParameter(
 			"selPlid", String.valueOf(LayoutConstants.DEFAULT_PLID));
-
 		emptyLayoutSetURL.setParameter("groupId", String.valueOf(groupId));
 		emptyLayoutSetURL.setParameter(
 			"privateLayout", String.valueOf(privateLayout));
