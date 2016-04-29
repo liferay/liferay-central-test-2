@@ -12,10 +12,10 @@
  * details.
  */
 
-package com.liferay.lpkg.deployer.internal;
+package com.liferay.portal.lpkg.deployer.internal;
 
-import com.liferay.lpkg.deployer.LPKGVerifier;
-import com.liferay.lpkg.deployer.LPKGVerifyException;
+import com.liferay.portal.lpkg.deployer.LPKGVerifier;
+import com.liferay.portal.lpkg.deployer.LPKGVerifyException;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.io.File;

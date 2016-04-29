@@ -12,10 +12,10 @@
  * details.
  */
 
-package com.liferay.lpkg.deployer.internal;
+package com.liferay.portal.lpkg.deployer.internal;
 
-import com.liferay.lpkg.deployer.LPKGDeployer;
-import com.liferay.lpkg.deployer.LPKGVerifier;
+import com.liferay.portal.lpkg.deployer.LPKGDeployer;
+import com.liferay.portal.lpkg.deployer.LPKGVerifier;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.log.Log;

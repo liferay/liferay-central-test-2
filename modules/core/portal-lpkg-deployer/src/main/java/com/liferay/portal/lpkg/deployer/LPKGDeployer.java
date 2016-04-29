@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.lpkg.deployer;
+package com.liferay.portal.lpkg.deployer;
 
 import java.io.File;
 import java.io.IOException;
