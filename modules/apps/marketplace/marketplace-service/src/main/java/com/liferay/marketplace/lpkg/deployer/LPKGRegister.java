@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.marketplace.bundle;
+package com.liferay.marketplace.lpkg.deployer;
 
 import com.liferay.marketplace.model.App;
 import com.liferay.marketplace.service.AppLocalService;
