@@ -131,8 +131,6 @@ public class LPKGDeployerImpl implements LPKGDeployer {
 	public List<Bundle> deploy(BundleContext bundleContext, File lpkgFile)
 		throws IOException {
 
-		String canonicalPath = lpkgFile.getCanonicalPath();
-
 		for (Bundle bundle : _lpkgVerifier.verify(lpkgFile)) {
 			try {
 				bundle.uninstall();
@@ -145,7 +143,7 @@ public class LPKGDeployerImpl implements LPKGDeployer {
 
 				String location = bundle.getLocation();
 
-				if (!location.equals(canonicalPath) &&
+				if (!location.equals(lpkgFile.getCanonicalPath()) &&
 					Files.deleteIfExists(Paths.get(bundle.getLocation())) &&
 					_log.isInfoEnabled()) {
 
@@ -162,7 +160,7 @@ public class LPKGDeployerImpl implements LPKGDeployer {
 			List<Bundle> bundles = new ArrayList<>();
 
 			Bundle lpkgBundle = bundleContext.installBundle(
-				canonicalPath, _lpkgToOSGiBundle(lpkgFile));
+				lpkgFile.getCanonicalPath(), _lpkgToOSGiBundle(lpkgFile));
 
 			BundleStartLevel bundleStartLevel = lpkgBundle.adapt(
 				BundleStartLevel.class);
