@@ -2924,6 +2924,29 @@ plugins.includes=</echo>
 		</xmltask>
 	</target>
 
+	<target name="zip-db-upgrade">
+		<tstamp>
+			<format pattern="yyyyMMddkkmmssSSS" property="tstamp.value" />
+		</tstamp>
+
+		<mkdir dir="${tstamp.value}" />
+
+		<copy todir="${tstamp.value}">
+			<fileset
+				dir="${liferay.home}/tools/portal-tools-db-upgrade-client"
+			/>
+		</copy>
+
+		<zip destfile="dist/liferay-portal-db-upgrade-${lp.version}.zip">
+			<zipfileset
+				dir="${tstamp.value}"
+				prefix="liferay-portal-db-upgrade-${lp.version}"
+			/>
+		</zip>
+
+		<delete dir="${tstamp.value}" />
+	</target>
+
 	<target name="zip-executable">
 		<delete failonerror="false" file="dist/${zip.executable.file}-${lp.version}.zip" />
 
