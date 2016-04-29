@@ -48,11 +48,11 @@ public class LPKGDeployerRegistrar {
 			_lpkgDeployer.getDeployedLPKGBundles();
 
 		for (Bundle bundle : deployedLPKGBundles.keySet()) {
-			_registerBundle(bundle);
+			_register(bundle);
 		}
 	}
 
-	private void _registerBundle(Bundle bundle) throws Exception {
+	private void _register(Bundle bundle) throws Exception {
 		URL url = bundle.getEntry("liferay-marketplace.properties");
 
 		Properties properties = PropertiesUtil.load(
@@ -77,16 +77,16 @@ public class LPKGDeployerRegistrar {
 			0, remoteAppId, title, description, category, iconURL, version,
 			required, null);
 
-		String[] bundleInfos = StringUtil.split(
+		String[] bundleStrings = StringUtil.split(
 			properties.getProperty("bundles"));
 
-		for (String bundleInfo : bundleInfos) {
-			String[] bundleInfoParts = StringUtil.split(
-				bundleInfo, CharPool.POUND);
+		for (String bundleString : bundleStrings) {
+			String[] bundleStringParts = StringUtil.split(
+				bundleString, CharPool.POUND);
 
-			String bundleSymbolicName = bundleInfoParts[0];
-			String bundleVersion = bundleInfoParts[1];
-			String contextName = bundleInfoParts[2];
+			String bundleSymbolicName = bundleStringParts[0];
+			String bundleVersion = bundleStringParts[1];
+			String contextName = bundleStringParts[2];
 
 			_moduleLocalService.addModule(
 				0, app.getAppId(), bundleSymbolicName, bundleVersion,
