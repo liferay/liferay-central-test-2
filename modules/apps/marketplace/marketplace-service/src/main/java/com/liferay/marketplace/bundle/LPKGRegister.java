@@ -44,16 +44,16 @@ public class LPKGRegister {
 
 	@Activate
 	public void activate() throws Exception {
-		Map<Bundle, List<Bundle>> lpkgBundles =
+		Map<Bundle, List<Bundle>> deployedLPKGBundles =
 			_lpkgDeployer.getDeployedLPKGBundles();
 
-		for (Bundle bundle : lpkgBundles.keySet()) {
-			registerLPKGBundle(bundle);
+		for (Bundle bundle : deployedLPKGBundles.keySet()) {
+			_registerBundle(bundle);
 		}
 	}
 
-	public void registerLPKGBundle(Bundle lpkgBundle) throws Exception {
-		URL url = lpkgBundle.getEntry("liferay-marketplace.properties");
+	private void _registerBundle(Bundle bundle) throws Exception {
+		URL url = bundle.getEntry("liferay-marketplace.properties");
 
 		Properties properties = PropertiesUtil.load(
 			url.openStream(), StringPool.ISO_8859_1);
