@@ -236,8 +236,8 @@ public class LPKGDeployerImpl implements LPKGDeployer {
 
 		Attributes attributes = manifest.getMainAttributes();
 
-		attributes.putValue("Manifest-Version", "2");
 		attributes.putValue(Constants.BUNDLE_MANIFESTVERSION, "2");
+		attributes.putValue("Manifest-Version", "2");
 
 		Properties properties = new Properties();
 
