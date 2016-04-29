@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.service.PortletLocalService;
 import com.liferay.portal.kernel.servlet.ServletResponseConstants;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
@@ -86,8 +87,7 @@ public class SPAUtil {
 		String portletNamespace = PortalUtil.getPortletNamespace(
 			PropsUtil.get(PropsKeys.AUTH_LOGIN_PORTLET_NAME));
 
-		return GetterUtil.getString(
-			request.getParameter(portletNamespace + "redirect"));
+		return ParamUtil.getString(request, portletNamespace + "redirect");
 	}
 
 	public String getPortletsBlacklist(ThemeDisplay themeDisplay) {
