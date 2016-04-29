@@ -236,9 +236,6 @@ public class LPKGDeployerImpl implements LPKGDeployer {
 
 		Attributes attributes = manifest.getMainAttributes();
 
-		attributes.putValue(Constants.BUNDLE_MANIFESTVERSION, "2");
-		attributes.putValue("Manifest-Version", "2");
-
 		Properties properties = new Properties();
 
 		properties.load(
@@ -246,12 +243,14 @@ public class LPKGDeployerImpl implements LPKGDeployer {
 				zipFile.getEntry("liferay-marketplace.properties")));
 
 		attributes.putValue(
-			Constants.BUNDLE_SYMBOLICNAME, properties.getProperty("title"));
-		attributes.putValue(
 			Constants.BUNDLE_DESCRIPTION,
 			properties.getProperty("description"));
+		attributes.putValue(Constants.BUNDLE_MANIFESTVERSION, "2");
+		attributes.putValue(
+			Constants.BUNDLE_SYMBOLICNAME, properties.getProperty("title"));
 		attributes.putValue(
 			Constants.BUNDLE_VERSION, properties.getProperty("version"));
+		attributes.putValue("Manifest-Version", "2");
 
 		jarOutputStream.putNextEntry(new ZipEntry(JarFile.MANIFEST_NAME));
 
