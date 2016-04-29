@@ -399,55 +399,7 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 
 		_setUpInitialBundles();
 
-		FrameworkStartLevel frameworkStartLevel = _framework.adapt(
-			FrameworkStartLevel.class);
-
-		final DefaultNoticeableFuture<FrameworkEvent> defaultNoticeableFuture =
-			new DefaultNoticeableFuture<>();
-
-		frameworkStartLevel.setStartLevel(
-			PropsValues.MODULE_FRAMEWORK_DYNAMIC_INSTALL_START_LEVEL,
-			new FrameworkListener() {
-
-				@Override
-				public void frameworkEvent(FrameworkEvent fe) {
-					defaultNoticeableFuture.set(fe);
-				}
-
-			});
-
-		FrameworkEvent frameworkEvent = defaultNoticeableFuture.get();
-
-		if (frameworkEvent.getType() == FrameworkEvent.ERROR) {
-			ReflectionUtil.throwException(frameworkEvent.getThrowable());
-		}
-
-		BundleContext bundleContext = _framework.getBundleContext();
-
-		for (Bundle bundle : bundleContext.getBundles()) {
-			if ((bundle.getState() != Bundle.INSTALLED) &&
-				(bundle.getState() != Bundle.RESOLVED)) {
-
-				continue;
-			}
-
-			BundleRevision bundleRevision = bundle.adapt(BundleRevision.class);
-
-			if ((bundleRevision.getTypes() & BundleRevision.TYPE_FRAGMENT) !=
-					0) {
-
-				continue;
-			}
-
-			BundleStartLevel bundleStartLevel = bundle.adapt(
-				BundleStartLevel.class);
-
-			if (bundleStartLevel.getStartLevel() ==
-					PropsValues.MODULE_FRAMEWORK_DYNAMIC_INSTALL_START_LEVEL) {
-
-				bundle.start();
-			}
-		}
+		_startDynamicBundles();
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Started the OSGi framework");
@@ -1166,6 +1118,58 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Registered required services");
+		}
+	}
+
+	private void _startDynamicBundles() throws Exception {
+		FrameworkStartLevel frameworkStartLevel = _framework.adapt(
+			FrameworkStartLevel.class);
+
+		final DefaultNoticeableFuture<FrameworkEvent> defaultNoticeableFuture =
+			new DefaultNoticeableFuture<>();
+
+		frameworkStartLevel.setStartLevel(
+			PropsValues.MODULE_FRAMEWORK_DYNAMIC_INSTALL_START_LEVEL,
+			new FrameworkListener() {
+
+				@Override
+				public void frameworkEvent(FrameworkEvent fe) {
+					defaultNoticeableFuture.set(fe);
+				}
+
+			});
+
+		FrameworkEvent frameworkEvent = defaultNoticeableFuture.get();
+
+		if (frameworkEvent.getType() == FrameworkEvent.ERROR) {
+			ReflectionUtil.throwException(frameworkEvent.getThrowable());
+		}
+
+		BundleContext bundleContext = _framework.getBundleContext();
+
+		for (Bundle bundle : bundleContext.getBundles()) {
+			if ((bundle.getState() != Bundle.INSTALLED) &&
+				(bundle.getState() != Bundle.RESOLVED)) {
+
+				continue;
+			}
+
+			BundleRevision bundleRevision = bundle.adapt(BundleRevision.class);
+
+			if ((bundleRevision.getTypes() & BundleRevision.TYPE_FRAGMENT) !=
+					0) {
+
+				continue;
+			}
+
+			BundleStartLevel bundleStartLevel = bundle.adapt(
+				BundleStartLevel.class);
+
+			if (bundleStartLevel.getStartLevel() ==
+					PropsValues.MODULE_FRAMEWORK_DYNAMIC_INSTALL_START_LEVEL) {
+
+				bundle.start();
+			}
 		}
 	}
 
