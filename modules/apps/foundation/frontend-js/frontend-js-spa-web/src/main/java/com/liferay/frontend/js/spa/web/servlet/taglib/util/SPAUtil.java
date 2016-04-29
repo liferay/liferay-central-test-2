@@ -83,13 +83,11 @@ public class SPAUtil {
 	}
 
 	public String getLoginRedirect(HttpServletRequest request) {
-		String loginPortletNamespace = PortalUtil.getPortletNamespace(
+		String portletNamespace = PortalUtil.getPortletNamespace(
 			PropsUtil.get(PropsKeys.AUTH_LOGIN_PORTLET_NAME));
 
-		String loginRedirectParameter = loginPortletNamespace + "redirect";
-
 		return GetterUtil.getString(
-			request.getParameter(loginRedirectParameter));
+			request.getParameter(portletNamespace + "redirect"));
 	}
 
 	public String getPortletsBlacklist(ThemeDisplay themeDisplay) {
