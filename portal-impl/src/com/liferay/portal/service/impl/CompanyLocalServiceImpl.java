@@ -1311,15 +1311,6 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		deleteOrganizationActionableDynamicQuery.performActions();
 
-		// User groups
-
-		DeleteUserGroupActionableDynamicQuery
-			deleteUserGroupActionableDynamicQuery =
-				new DeleteUserGroupActionableDynamicQuery(
-					company.getCompanyId());
-
-		deleteUserGroupActionableDynamicQuery.performActions();
-
 		// Roles
 
 		ActionableDynamicQuery roleActionableDynamicQuery =
@@ -1337,6 +1328,15 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			});
 
 		roleActionableDynamicQuery.performActions();
+
+		// User groups
+
+		DeleteUserGroupActionableDynamicQuery
+			deleteUserGroupActionableDynamicQuery =
+				new DeleteUserGroupActionableDynamicQuery(
+					company.getCompanyId());
+
+		deleteUserGroupActionableDynamicQuery.performActions();
 
 		// Password policy
 
