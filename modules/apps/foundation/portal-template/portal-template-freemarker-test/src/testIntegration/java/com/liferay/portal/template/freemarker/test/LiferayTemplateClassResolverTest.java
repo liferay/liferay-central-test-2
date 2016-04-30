@@ -229,14 +229,16 @@ public class LiferayTemplateClassResolverTest {
 
 			@Override
 			public void serviceChanged(ServiceEvent serviceEvent) {
+				if (serviceEvent.getType() != ServiceEvent.MODIFIED) {
+					return;
+				}
+
 				ServiceReference<?> serviceReference =
 					serviceEvent.getServiceReference();
 
 				Object service = bundleContext.getService(serviceReference);
 
-				if ((serviceEvent.getType() == ServiceEvent.MODIFIED) &&
-					(service == _liferayTemplateClassResolver)) {
-
+				if (service == _liferayTemplateClassResolver) {
 					countDownLatch.countDown();
 				}
 			}
