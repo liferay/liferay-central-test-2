@@ -136,8 +136,6 @@ public class LiferayAppDataService implements AppDataService {
 				ShindigUtil.getTableOpenSocial(), expandoColumn.getName(),
 				userIdLong);
 		}
-
-		return;
 	}
 
 	protected DataCollection doGetPersonData(
@@ -208,17 +206,14 @@ public class LiferayAppDataService implements AppDataService {
 				ShindigUtil.getTableOpenSocial(), expandoColumn.getName(),
 				userIdLong, value);
 		}
-
-		return;
 	}
 
 	protected String getColumnName(String appId, String field) {
 		if (Validator.isNotNull(appId)) {
 			return appId.concat(field);
 		}
-		else {
-			return field;
-		}
+
+		return field;
 	}
 
 	protected long getCompanyId(SecurityToken securityToken) throws Exception {
