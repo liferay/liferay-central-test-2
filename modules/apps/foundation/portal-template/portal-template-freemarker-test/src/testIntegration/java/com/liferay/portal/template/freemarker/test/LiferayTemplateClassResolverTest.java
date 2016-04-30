@@ -235,7 +235,7 @@ public class LiferayTemplateClassResolverTest {
 				Object service = bundleContext.getService(serviceReference);
 
 				if ((serviceEvent.getType() == ServiceEvent.MODIFIED) &&
-					TemplateClassResolver.class.isInstance(service)) {
+					(service == _liferayTemplateClassResolver)) {
 
 					countDownLatch.countDown();
 				}
