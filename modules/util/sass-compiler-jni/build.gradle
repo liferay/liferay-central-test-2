@@ -117,12 +117,12 @@ generateJNALibrary {
 
 		javaexec {
 			args configurations.jnaerator.singleFile
+			args "-beautifyNames"
 			args "-f"
 			args "-library", "liferaysass"
 			args "-mode", "Directory"
 			args "-o", FileUtil.relativize(file("src/main/java"), libSassDir)
 			args "-package", "com.liferay.sass.compiler.jni.internal.libsass"
-			args "-beautifyNames"
 			args "sass/context.h"
 
 			main = "-jar"
