@@ -57,6 +57,8 @@
 
 		<execute macro="PortletEntry#save" />
 
+		<execute macro="ProductMenuHelper#closeProductMenu" />
+
 		<execute macro="DMRepository#gotoCP">
 			<var name="dmRepositoryName" value="Documentum Repository Name" />
 		</execute>
