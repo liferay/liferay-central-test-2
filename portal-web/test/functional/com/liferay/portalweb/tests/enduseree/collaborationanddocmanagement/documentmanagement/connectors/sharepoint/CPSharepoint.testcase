@@ -772,7 +772,7 @@
 			<var name="dmRepositoryName" value="Sharepoint Repository Name" />
 		</execute>
 
-		<execute macro="DMRepository#viewCP">
+		<execute macro="DMRepository#viewBreadcrumb">
 			<var name="dmRepositoryName" value="SHAREPOINT REPOSITORY NAME" />
 		</execute>
 	</command>

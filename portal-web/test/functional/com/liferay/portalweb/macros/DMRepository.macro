@@ -69,7 +69,7 @@
 		</while>
 	</command>
 
-	<command name="viewCP">
+	<command name="viewBreadcrumb">
 		<var name="key_dmFolderName" value="${dmRepositoryName}" />
 
 		<execute function="AssertTextEquals" locator1="DocumentsAndMedia#BREADCRUMB_LAST" value1="${dmRepositoryName}" />
