@@ -796,7 +796,7 @@
 			<var name="dmRepositoryName" value="Documentum Repository Name" />
 		</execute>
 
-		<execute macro="DMRepository#viewCP">
+		<execute macro="DMRepository#viewBreadcrumb">
 			<var name="dmRepositoryName" value="DOCUMENTUM REPOSITORY NAME" />
 		</execute>
 	</command>
