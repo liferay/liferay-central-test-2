@@ -15,7 +15,10 @@
 package com.liferay.polls.web.portlet.action;
 
 import com.liferay.polls.constants.PollsPortletKeys;
+import com.liferay.polls.exception.NoSuchQuestionException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
+import com.liferay.portal.kernel.security.auth.PrincipalException;
+import com.liferay.portal.kernel.servlet.SessionErrors;
 
 import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
@@ -40,6 +43,22 @@ public class AddQuestionRedirectMVCRenderCommand implements MVCRenderCommand {
 	public String render(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws PortletException {
+
+		try {
+			ActionUtil.getQuestion(renderRequest);
+		}
+		catch (Exception e) {
+			if (e instanceof NoSuchQuestionException ||
+				e instanceof PrincipalException) {
+
+				SessionErrors.add(renderRequest, e.getClass());
+
+				return "/polls/error.jsp";
+			}
+			else {
+				throw new PortletException(e);
+			}
+		}
 
 		return "/polls/view_question.jsp";
 	}

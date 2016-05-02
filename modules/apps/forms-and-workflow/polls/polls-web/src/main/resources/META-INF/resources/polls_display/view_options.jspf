@@ -33,6 +33,9 @@ boolean showIconsActions = themeDisplay.isSignedIn() && !layout.isLayoutPrototyp
 	<%
 	PortletURL redirectURL = liferayPortletResponse.createRenderURL();
 
+	if (question != null) {
+		redirectURL.setParameter("questionId", String.valueOf(question.getQuestionId()));
+	}
 	redirectURL.setParameter("mvcRenderCommandName", "/polls_display/add_question_redirect");
 	redirectURL.setWindowState(LiferayWindowState.POP_UP);
 	%>
