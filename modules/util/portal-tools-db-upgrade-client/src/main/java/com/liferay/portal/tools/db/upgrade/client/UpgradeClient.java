@@ -202,62 +202,40 @@ public class UpgradeClient {
 			ioe.printStackTrace();
 		}
 
-		boolean upgrading = !_noShell;
+		boolean upgrading = true;
 
 		while (upgrading) {
 			try (GogoTelnetClient gogoTelnetClient = new GogoTelnetClient()) {
-				System.out.println("You are connected to Gogo shell.");
-
-				_printHelp();
-
-				_consoleReader.setPrompt("g! ");
-
-				String line;
-
-				while ((line = _consoleReader.readLine()) != null) {
-					if (line.equals("exit") || line.equals("quit")) {
-						break;
-					}
-					else if (line.equals("upgrade:help")) {
-						_printHelp();
-					}
-					else {
-						System.out.println(gogoTelnetClient.send(line));
-					}
-				}
-
-				System.out.print(
-					"Checking to see if all upgrades steps have completed...");
-
-				String upgradeSteps = gogoTelnetClient.send(
-					"upgrade:list | grep Registered | grep step");
-
-				upgrading = upgradeSteps.contains("true");
-
-				if (upgrading) {
-					System.out.println(
-						" one of your upgrades is still running or failed.");
-					System.out.println("Are you sure you want to exit (y/N)?");
-
-					_consoleReader.setPrompt("");
-
-					String response = _consoleReader.readLine();
-
-					if (response.equals("y")) {
-						upgrading = false;
-					}
+				if (_noShell) {
+					upgrading = _status(gogoTelnetClient);
 				}
 				else {
-					System.out.println(" done.");
+					System.out.println("You are connected to Gogo shell.");
+
+					_printHelp();
+
+					_consoleReader.setPrompt("g! ");
+
+					String line;
+
+					while ((line = _consoleReader.readLine()) != null) {
+						if (line.equals("exit") || line.equals("quit")) {
+							break;
+						}
+						else if (line.equals("upgrade:help")) {
+							_printHelp();
+						}
+						else {
+							System.out.println(gogoTelnetClient.send(line));
+						}
+					}
+
+					upgrading = _status(gogoTelnetClient);
 				}
 			}
 			catch (Exception e) {
 				upgrading = false;
 			}
-		}
-
-		if (!_noShell) {
-			System.out.println("Exiting from Gogo shell.");
 		}
 
 		_close(process.getErrorStream());
@@ -417,6 +395,40 @@ public class UpgradeClient {
 			_portalUpgradeDatabaseProperties,
 			_portalUpgradeDatabasePropertiesFile);
 		_store(_portalUpgradeExtProperties, _portalUpgradeExtPropertiesFile);
+	}
+
+	private boolean _status(GogoTelnetClient gogoTelnetClient)
+		throws IOException {
+
+		System.out.print(
+		"Checking to see if all upgrades steps have completed...");
+
+		String upgradeSteps = gogoTelnetClient.send(
+			"upgrade:list | grep Registered | grep step");
+
+		Boolean upgrading = upgradeSteps.contains("true");
+
+		if (upgrading) {
+			System.out.println(
+				" one of your upgrades is still running or failed.");
+			System.out.println("Are you sure you want to exit (y/N)?");
+
+			_consoleReader.setPrompt("");
+
+			String response = _consoleReader.readLine();
+
+			if (response.equals("y")) {
+				return false;
+			}
+			else {
+				return true;
+			}
+		}
+		else {
+			System.out.println(" done.");
+
+			return false;
+		}
 	}
 
 	private void _store(Properties properties, File file) throws IOException {
