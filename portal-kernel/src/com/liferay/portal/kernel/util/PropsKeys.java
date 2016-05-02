@@ -2119,6 +2119,12 @@ public interface PropsKeys {
 
 	public static final String SYSTEM_SITE_ROLES = "system.site.roles";
 
+	/**
+	 * @deprecated As of 7.0.0, replaced by {@link #TABLE_MAPPER_CACHELESS_MAPPING_TABLE_NAMES}
+	 */
+	@Deprecated
+	public static final String TABLE_MAPPER_CACHE_MAPPING_TABLE_NAMES = "table.mapper.cache.mapping.table.names";
+
 	public static final String TABLE_MAPPER_CACHELESS_MAPPING_TABLE_NAMES = "table.mapper.cacheless.mapping.table.names";
 
 	public static final String TERMS_OF_USE_REQUIRED = "terms.of.use.required";
