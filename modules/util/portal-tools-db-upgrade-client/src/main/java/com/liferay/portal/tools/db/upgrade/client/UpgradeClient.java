@@ -208,6 +208,10 @@ public class UpgradeClient {
 			try (GogoTelnetClient gogoTelnetClient = new GogoTelnetClient()) {
 				if (_noShell) {
 					upgrading = _status(gogoTelnetClient);
+
+					if (upgrading) {
+						_noShell = false;
+					}
 				}
 				else {
 					System.out.println("You are connected to Gogo shell.");
@@ -710,7 +714,7 @@ public class UpgradeClient {
 	private final ConsoleReader _consoleReader = new ConsoleReader();
 	private final String _jvmOpts;
 	private final File _logFile;
-	private final boolean _noShell;
+	private boolean _noShell;
 	private final Properties _portalUpgradeDatabaseProperties;
 	private final File _portalUpgradeDatabasePropertiesFile;
 	private final Properties _portalUpgradeExtProperties;
