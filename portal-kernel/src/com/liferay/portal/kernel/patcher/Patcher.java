@@ -15,14 +15,16 @@
 package com.liferay.portal.kernel.patcher;
 
 import java.io.File;
-
 import java.util.Properties;
+
+import aQute.bnd.annotation.ProviderType;
 
 /**
  * @author Zsolt Balogh
  * @author Brian Wing Shun Chan
  * @author Zoltán Takács
  */
+@ProviderType
 public interface Patcher {
 
 	public static final String PATCHER_PROPERTIES = "patcher.properties";
