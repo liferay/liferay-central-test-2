@@ -38,6 +38,7 @@ public class WeatherWebCacheItem implements WebCacheItem {
 		}
 
 		_zip = zip;
+
 		_apiKey = apiKey;
 	}
 
