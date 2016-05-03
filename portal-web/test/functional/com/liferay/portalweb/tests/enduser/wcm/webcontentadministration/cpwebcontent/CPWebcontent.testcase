@@ -769,8 +769,8 @@
 
 		<execute macro="WebContentTemplates#addCP">
 			<var name="templateDescription" value="WC Template Description" />
-			<var name="templateName" value="WC Template Name" />
 			<var name="templateLanguage" value="ftl" />
+			<var name="templateName" value="WC Template Name" />
 		</execute>
 
 		<execute macro="WebContentTemplates#addStructure">
