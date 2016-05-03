@@ -1460,6 +1460,10 @@
 	</command>
 
 	<command name="viewRSS">
+		<var name="wikiNodeName" value="${wikiNodeName}" />
+		<var name="wikiPageContent" value="${wikiPageContent}" />
+		<var name="wikiPageTitle" value="${wikiPageTitle}" />
+
 		<execute function="Click" locator1="Icon#INFO" />
 
 		<execute function="AssertClick" locator1="WikiRSS#FEED_LINK" value1="Feed" />
