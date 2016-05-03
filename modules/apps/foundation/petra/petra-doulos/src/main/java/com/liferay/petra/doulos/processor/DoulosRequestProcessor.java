@@ -26,7 +26,7 @@ public interface DoulosRequestProcessor {
 	public void destroy();
 
 	public void process(
-			String method, Map<String, String[]> parameterMap,
+			String method, String pathInfo, Map<String, String[]> parameterMap,
 			JSONObject payloadJSONObject, JSONObject responseJSONObject)
 		throws Exception;
 
