@@ -34,7 +34,7 @@
 
 		<for list="${app.names}" param="app.name">
 			<sequential>
-				<antcall target="build-app-lpkg" inheritall="false">
+				<antcall inheritall="false" target="build-app-lpkg">
 					<param name="app.name" value="@{app.name}" />
 				</antcall>
 			</sequential>
@@ -144,7 +144,7 @@
 	</target>
 
 	<target name="get-app-change-log-header">
-		<condition property="app.change.log.version.separator" value="" else="${line.separator}${line.separator}">
+		<condition else="${line.separator}${line.separator}" property="app.change.log.version.separator" value="">
 			<istrue value="${app.first.version}" />
 		</condition>
 
@@ -253,8 +253,8 @@
 	</target>
 
 	<target name="reset-all">
-		<property name="deploy.dir.absolute" location="${osgi.dir}/../deploy" />
-		<property name="osgi.dir.absolute" location="${osgi.dir}" />
+		<property location="${osgi.dir}/../deploy" name="deploy.dir.absolute" />
+		<property location="${osgi.dir}" name="osgi.dir.absolute" />
 
 		<fail message="${osgi.dir.absolute} and ${deploy.dir.absolute} cannot be reset if ${osgi.dir.absolute}_backup and/or ${deploy.dir.absolute}_backup are not present.">
 			<condition>
