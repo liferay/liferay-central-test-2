@@ -1466,6 +1466,12 @@
 
 		<execute function="Pause" locator1="3000" />
 
+		<execute macro="WikiPage#_checkForRSSTitleCP">
+			<var name="wikiNodeName" value="${wikiNodeName}" />
+			<var name="wikiPageContent" value="${wikiPageContent}" />
+			<var name="wikiPageTitle" value="${wikiPageTitle}" />
+		</execute>
+
 		<execute function="SelectWindow" locator1="title=${wikiPageTitle}" />
 
 		<execute function="AssertTextEquals" locator1="WikiRSS#FEED_TITLE" value1="${wikiPageTitle}" />
