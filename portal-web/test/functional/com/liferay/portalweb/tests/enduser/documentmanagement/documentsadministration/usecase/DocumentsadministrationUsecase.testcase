@@ -811,6 +811,8 @@
 			<var name="roleType" value="Site" />
 		</execute>
 
+		<execute function="Refresh" />
+
 		<execute macro="Role#viewPermissionCP">
 			<var name="permissionDefinitionValue" value="Delete" />
 			<var name="permissionNavigationValue" value="Document" />
@@ -845,6 +847,8 @@
 			<var name="permissionDefinitionValue" value="Update" />
 			<var name="permissionNavigationValue" value="Documents Folder" />
 		</execute>
+
+		<execute function="Refresh" />
 
 		<execute macro="ProductMenu#gotoControlPanelUsers">
 			<var name="portlet" value="Users and Organizations" />
