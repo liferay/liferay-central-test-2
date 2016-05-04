@@ -346,12 +346,12 @@ public class UpgradeClient {
 		System.out.print(
 			"Checking to see if all upgrades steps have completed...");
 
-		String unfinished = gogoTelnetClient.send("upgrade:dryRun");
+		String unfinishedUpgrades = gogoTelnetClient.send("upgrade:dryRun");
 
 		String upgradeSteps = gogoTelnetClient.send(
 			"upgrade:list | grep Registered | grep step");
 
-		if (!unfinished.equals("upgrade:dryRun") ||
+		if (!unfinishedUpgrades.equals("upgrade:dryRun") ||
 			upgradeSteps.contains("true")) {
 
 			System.out.println(
