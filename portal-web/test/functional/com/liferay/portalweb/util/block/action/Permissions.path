@@ -116,12 +116,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>INLINE_PERMISSIONS_UPDATE</td>
+	<td>INLINE_PERMISSIONS_UPDATE_CHECKBOX</td>
 	<td>//input[@id='${key_roleName}_ACTION_UPDATE']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>INLINE_PERMISSIONS_VIEW</td>
+	<td>INLINE_PERMISSIONS_VIEW_CHECKBOX</td>
 	<td>//input[@id='${key_roleName}_ACTION_VIEW']</td>
 	<td></td>
 </tr>
