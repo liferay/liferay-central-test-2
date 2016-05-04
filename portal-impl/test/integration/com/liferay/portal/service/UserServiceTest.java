@@ -85,14 +85,14 @@ public class UserServiceTest {
 		@Before
 		public void setUp() throws Exception {
 			_group = GroupTestUtil.addGroup();
-			_organization = OrganizationTestUtil.addOrganization(true);
-			_siteRole = RoleTestUtil.addRole(RoleConstants.TYPE_SITE);
 
 			UnicodeProperties properties = new UnicodeProperties();
 
 			properties.put(
 				PropsKeys.ADMIN_DEFAULT_GROUP_NAMES,
 				_group.getDescriptiveName());
+
+			_organization = OrganizationTestUtil.addOrganization(true);
 
 			Group organizationGroup = _organization.getGroup();
 
@@ -105,6 +105,8 @@ public class UserServiceTest {
 
 			UnicodeProperties typeSettingsProperties =
 				_group.getTypeSettingsProperties();
+
+			_siteRole = RoleTestUtil.addRole(RoleConstants.TYPE_SITE);
 
 			typeSettingsProperties.put(
 				"defaultSiteRoleIds", String.valueOf(_siteRole.getRoleId()));
