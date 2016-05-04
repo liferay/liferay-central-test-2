@@ -369,23 +369,25 @@ public class UpgradeClient {
 	private void _printHelp() {
 		System.out.println("\nUpgrade commands:");
 		System.out.println("exit or quit - Exit Gogo Shell");
-		System.out.println("upgrade:dryRun - List the upgrades that failed");
+		System.out.println("upgrade:dryRun - List failed upgrades");
 		System.out.println(
-			"upgrade:execute {module_name} - Execute upgrade for that module");
+			"upgrade:execute {module_name} - Execute upgrade for specified " +
+				"module");
 		System.out.println("upgrade:help - Show upgrade commands");
-		System.out.println("upgrade:list - List all registered upgrades");
+		System.out.println("upgrade:list - List registered upgrades");
 		System.out.println(
-			"upgrade:list {module_name} - " +
-				"List the upgrade steps required for that module");
+			"upgrade:list {module_name} - List upgrade steps required for " +
+				"specified module");
 		System.out.println(
-			"upgrade:list | grep Registered - " +
-				"List upgrades that are registered and what version they are " +
-					"at");
+			"upgrade:list | grep Registered - List upgrades that are " +
+				"registered and their current version");
 		System.out.println(
-			"upgrade:list | grep Registered | grep steps - " +
-				"List upgrades in progress");
-		System.out.println("verify:execute {module_name} - execute a verifier");
-		System.out.println("verify:list - List all registered verifiers");
+			"upgrade:list | grep Registered | grep steps - List upgrades in " +
+				"progress");
+		System.out.println(
+			"verify:execute {module_name} - Execute verifier for specified " +
+				"module");
+		System.out.println("verify:list - List registered verifiers");
 	}
 
 	private Properties _readProperties(File file) {
