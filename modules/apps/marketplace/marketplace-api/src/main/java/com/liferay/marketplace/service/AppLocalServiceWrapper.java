@@ -348,12 +348,6 @@ public class AppLocalServiceWrapper implements AppLocalService,
 	}
 
 	@Override
-	public void processMarketplaceProperties(java.util.Properties properties)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		_appLocalService.processMarketplaceProperties(properties);
-	}
-
-	@Override
 	public void uninstallApp(long remoteAppId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		_appLocalService.uninstallApp(remoteAppId);

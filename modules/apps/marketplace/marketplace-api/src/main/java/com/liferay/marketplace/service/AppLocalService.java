@@ -42,7 +42,6 @@ import java.io.Serializable;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 /**
  * Provides the local service interface for App. Methods of this
@@ -282,9 +281,6 @@ public interface AppLocalService extends BaseLocalService,
 	public void clearInstalledAppsCache();
 
 	public void installApp(long remoteAppId) throws PortalException;
-
-	public void processMarketplaceProperties(Properties properties)
-		throws PortalException;
 
 	public void uninstallApp(long remoteAppId) throws PortalException;
 }
