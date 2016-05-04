@@ -27,13 +27,11 @@ import com.liferay.polls.model.PollsChoice;
 import com.liferay.polls.model.PollsQuestion;
 import com.liferay.polls.service.PollsQuestionService;
 import com.liferay.polls.service.persistence.PollsChoiceUtil;
-import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
-import com.liferay.portal.kernel.service.LayoutLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.servlet.SessionErrors;
@@ -98,9 +96,6 @@ public class EditQuestionMVCActionCommand extends BaseMVCActionCommand {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
-
-		Layout layout = _layoutLocalService.getLayout(
-			themeDisplay.getRefererPlid());
 
 		PortletPreferences portletPreferences =
 			PortletPreferencesFactoryUtil.getStrictPortletSetup(
@@ -190,13 +185,6 @@ public class EditQuestionMVCActionCommand extends BaseMVCActionCommand {
 				throw e;
 			}
 		}
-	}
-
-	@Reference(unbind = "-")
-	protected void setLayoutLocalService(
-		LayoutLocalService layoutLocalService) {
-
-		_layoutLocalService = layoutLocalService;
 	}
 
 	@Reference(unbind = "-")
@@ -304,7 +292,6 @@ public class EditQuestionMVCActionCommand extends BaseMVCActionCommand {
 		}
 	}
 
-	private LayoutLocalService _layoutLocalService;
 	private PollsQuestionService _pollsQuestionService;
 
 }
