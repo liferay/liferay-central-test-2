@@ -303,7 +303,9 @@ public class UpgradeClient {
 		String upgradeSteps = gogoTelnetClient.send(
 			"upgrade:list | grep Registered | grep step");
 
-		if (unfinished.contains("true") || upgradeSteps.contains("true")) {
+		if (!unfinished.equals("upgrade:dryRun") ||
+			upgradeSteps.contains("true")) {
+
 			System.out.println(
 				" one of your upgrades is still running or failed.");
 
