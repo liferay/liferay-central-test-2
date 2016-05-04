@@ -207,7 +207,7 @@ public class UpgradeClient {
 		while (upgrading) {
 			try (GogoTelnetClient gogoTelnetClient = new GogoTelnetClient()) {
 				if (_noShell) {
-					upgrading = _status(gogoTelnetClient);
+					upgrading = _checkStatus(gogoTelnetClient);
 
 					if (upgrading) {
 						_noShell = false;
@@ -234,7 +234,7 @@ public class UpgradeClient {
 						}
 					}
 
-					upgrading = _status(gogoTelnetClient);
+					upgrading = _checkStatus(gogoTelnetClient);
 				}
 			}
 			catch (Exception e) {
@@ -302,6 +302,40 @@ public class UpgradeClient {
 
 		for (File dir : dirs) {
 			_appendClassPath(sb, dir);
+		}
+	}
+
+	private boolean _checkStatus(GogoTelnetClient gogoTelnetClient)
+		throws IOException {
+
+		System.out.print(
+			"Checking to see if all upgrades steps have completed...");
+
+		String upgradeSteps = gogoTelnetClient.send(
+			"upgrade:list | grep Registered | grep step");
+
+		boolean upgrading = upgradeSteps.contains("true");
+
+		if (upgrading) {
+			System.out.println(
+				" one of your upgrades is still running or failed.");
+			System.out.println("Are you sure you want to exit (y/N)?");
+
+			_consoleReader.setPrompt("");
+
+			String response = _consoleReader.readLine();
+
+			if (response.equals("y")) {
+				return false;
+			}
+			else {
+				return true;
+			}
+		}
+		else {
+			System.out.println(" done.");
+
+			return false;
 		}
 	}
 
@@ -399,40 +433,6 @@ public class UpgradeClient {
 			_portalUpgradeDatabaseProperties,
 			_portalUpgradeDatabasePropertiesFile);
 		_store(_portalUpgradeExtProperties, _portalUpgradeExtPropertiesFile);
-	}
-
-	private boolean _status(GogoTelnetClient gogoTelnetClient)
-		throws IOException {
-
-		System.out.print(
-		"Checking to see if all upgrades steps have completed...");
-
-		String upgradeSteps = gogoTelnetClient.send(
-			"upgrade:list | grep Registered | grep step");
-
-		Boolean upgrading = upgradeSteps.contains("true");
-
-		if (upgrading) {
-			System.out.println(
-				" one of your upgrades is still running or failed.");
-			System.out.println("Are you sure you want to exit (y/N)?");
-
-			_consoleReader.setPrompt("");
-
-			String response = _consoleReader.readLine();
-
-			if (response.equals("y")) {
-				return false;
-			}
-			else {
-				return true;
-			}
-		}
-		else {
-			System.out.println(" done.");
-
-			return false;
-		}
 	}
 
 	private void _store(Properties properties, File file) throws IOException {
