@@ -327,12 +327,6 @@ public class AppLocalServiceUtil {
 		getService().installApp(remoteAppId);
 	}
 
-	public static void processMarketplaceProperties(
-		java.util.Properties properties)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		getService().processMarketplaceProperties(properties);
-	}
-
 	public static void uninstallApp(long remoteAppId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		getService().uninstallApp(remoteAppId);
