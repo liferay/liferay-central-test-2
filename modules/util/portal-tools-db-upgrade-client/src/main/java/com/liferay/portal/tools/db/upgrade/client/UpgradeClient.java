@@ -369,7 +369,7 @@ public class UpgradeClient {
 	private void _printHelp() {
 		System.out.println("\nUpgrade commands:");
 		System.out.println("exit or quit - Exit Gogo Shell");
-		System.out.println("upgrade:dryRun - List failed upgrades");
+		System.out.println("upgrade:dryRun - List unfinished upgrades");
 		System.out.println(
 			"upgrade:execute {module_name} - Execute upgrade for specified " +
 				"module");
