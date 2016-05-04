@@ -14,6 +14,7 @@
 
 package com.liferay.polls.web.portlet.action;
 
+import com.liferay.polls.constants.PollsPortletKeys;
 import com.liferay.polls.exception.DuplicateVoteException;
 import com.liferay.polls.exception.NoSuchChoiceException;
 import com.liferay.polls.exception.NoSuchQuestionException;
@@ -26,7 +27,6 @@ import com.liferay.polls.model.PollsChoice;
 import com.liferay.polls.model.PollsQuestion;
 import com.liferay.polls.service.PollsQuestionService;
 import com.liferay.polls.service.persistence.PollsChoiceUtil;
-import com.liferay.polls.constants.PollsPortletKeys;
 import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.portlet.PortletPreferencesFactoryUtil;

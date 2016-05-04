@@ -14,8 +14,8 @@
 
 package com.liferay.polls.web.portlet.action;
 
-import com.liferay.polls.exception.NoSuchQuestionException;
 import com.liferay.polls.constants.PollsPortletKeys;
+import com.liferay.polls.exception.NoSuchQuestionException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
