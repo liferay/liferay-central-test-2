@@ -107,9 +107,10 @@ public class LayoutRevisionLocalServiceImpl
 
 		copyPortletPreferences(layoutRevision, portletPreferencesPlid);
 
-		boolean major = ParamUtil.getBoolean(serviceContext, "major");
+		boolean updateMajor = ParamUtil.getBoolean(
+			serviceContext, "updateMajor");
 
-		if (major || !isWorkflowEnabled(plid)) {
+		if (updateMajor || !isWorkflowEnabled(plid)) {
 			updateMajor(layoutRevision);
 		}
 
@@ -480,9 +481,10 @@ public class LayoutRevisionLocalServiceImpl
 			_layoutRevisionId.set(layoutRevision.getLayoutRevisionId());
 		}
 
-		boolean major = ParamUtil.getBoolean(serviceContext, "major");
+		boolean updateMajor = ParamUtil.getBoolean(
+			serviceContext, "updateMajor");
 
-		if (major || !isWorkflowEnabled(layoutRevision.getPlid())) {
+		if (updateMajor || !isWorkflowEnabled(layoutRevision.getPlid())) {
 			updateMajor(layoutRevision);
 		}
 
