@@ -150,7 +150,7 @@ buildSvg4everybody {
 	filter {
 		String line ->
 
-		line.replace('"function" == typeof define', 'false && "function" == typeof define')
+		line.replace '"function" == typeof define', 'false && "function" == typeof define'
 	}
 
 	from {
