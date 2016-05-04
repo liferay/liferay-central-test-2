@@ -46,7 +46,7 @@ public class DDMFormValuesMergerTest {
 			DDMFormTestUtil.createTextDDMFormField(
 				"text2", false, false, true));
 
-		// Existing ddm form values
+		// Existing dynamic data mapping form values
 
 		String text1StringValue = RandomTestUtil.randomString();
 
@@ -61,7 +61,7 @@ public class DDMFormValuesMergerTest {
 		DDMFormValues existingDDMFormValues = createDDMFormValues(
 			ddmForm, text1DDMFormFieldValue);
 
-		// New ddm form values
+		// New dynamic data mapping form values
 
 		String text2StringValue = RandomTestUtil.randomString();
 
@@ -108,7 +108,7 @@ public class DDMFormValuesMergerTest {
 		ddmForm.addDDMFormField(
 			DDMFormTestUtil.createTextDDMFormField("text", false, false, true));
 
-		// Existing ddm form values
+		// Existing dynamic data mapping form values
 
 		String enStringValue = RandomTestUtil.randomString();
 
@@ -123,7 +123,7 @@ public class DDMFormValuesMergerTest {
 		DDMFormValues existingDDMFormValues = createDDMFormValues(
 			ddmForm, textDDMFormFieldValue);
 
-		// New ddm form values
+		// New dynamic data mapping form values
 
 		String ptStringValue = RandomTestUtil.randomString();
 
@@ -163,7 +163,7 @@ public class DDMFormValuesMergerTest {
 		ddmForm.addDDMFormField(
 			DDMFormTestUtil.createTextDDMFormField("text", false, false, true));
 
-		// Existing ddm form values
+		// Existing dynamic data mapping form values
 
 		String existingEnStringValue = RandomTestUtil.randomString();
 
@@ -178,7 +178,7 @@ public class DDMFormValuesMergerTest {
 		DDMFormValues existingDDMFormValues = createDDMFormValues(
 			ddmForm, textDDMFormFieldValue);
 
-		// New ddm form values
+		// New dynamic data mapping form values
 
 		String newEnStringValue = RandomTestUtil.randomString();
 		String newPtStringValue = RandomTestUtil.randomString();
@@ -219,7 +219,7 @@ public class DDMFormValuesMergerTest {
 		ddmForm.addDDMFormField(
 			DDMFormTestUtil.createTextDDMFormField("text", false, false, true));
 
-		// Existing ddm form values
+		// Existing dynamic data mapping form values
 
 		String existingEnStringValue = RandomTestUtil.randomString();
 
@@ -234,7 +234,7 @@ public class DDMFormValuesMergerTest {
 		DDMFormValues existingDDMFormValues = createDDMFormValues(
 			ddmForm, textDDMFormFieldValue);
 
-		// New ddm form values
+		// New dynamic data mapping form values
 
 		String newEnStringValue = RandomTestUtil.randomString();
 
