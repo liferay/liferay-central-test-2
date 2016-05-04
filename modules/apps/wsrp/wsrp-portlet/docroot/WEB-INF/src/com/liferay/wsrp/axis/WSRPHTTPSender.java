@@ -181,7 +181,7 @@ public class WSRPHTTPSender extends HTTPSender {
 		new InitialThreadLocal<>(
 			SimpleHTTPSender.class + "._currentRequest", null);
 
-	private final String[] _forwardCookies = new String[0];
-	private final String[] _forwardHeaders = new String[0];
+	private String[] _forwardCookies = new String[0];
+	private String[] _forwardHeaders = new String[0];
 
 }
