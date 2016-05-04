@@ -17,8 +17,8 @@
 <%@ include file="/init.jsp" %>
 
 <%
-String titleXml = GetterUtil.getString(LocalizationUtil.getLocalizationXmlFromPreferences(portletPreferences, renderRequest, "title"), StringPool.BLANK);
-String descriptionXml = GetterUtil.getString(LocalizationUtil.getLocalizationXmlFromPreferences(portletPreferences, renderRequest, "description"), StringPool.BLANK);
+String titleXml = GetterUtil.getString(LocalizationUtil.getLocalizationXmlFromPreferences(portletPreferences, renderRequest, "title"));
+String descriptionXml = GetterUtil.getString(LocalizationUtil.getLocalizationXmlFromPreferences(portletPreferences, renderRequest, "description"));
 boolean requireCaptcha = GetterUtil.getBoolean(portletPreferences.getValue("requireCaptcha", StringPool.BLANK));
 String successURL = portletPreferences.getValue("successURL", StringPool.BLANK);
 
