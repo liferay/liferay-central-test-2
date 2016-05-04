@@ -24,10 +24,12 @@
 	</command>
 
 	<command name="viewUserSegmentsViaSimulator">
-		<for list="${userSegments}" param="userSegment">
-			<var name="key_userSegmentNotMatched" value="${userSegmentNotMatched}" />
+		<execute function="SelectFrame#selectFrameTop" />
 
-			<execute function="AssertTextEquals" locator1="CTSimulator#USER_SEGMENT_NOT_MATCHED" />
+		<for list="${userSegments}" param="userSegment">
+			<var name="key_userSegmentNotMatched" value="${userSegment}" />
+
+			<execute function="AssertTextEquals" locator1="CTSimulator#USER_SEGMENT_NOT_MATCHED" value1="${userSegment}" />
 		</for>
 	</command>
 </definition>
