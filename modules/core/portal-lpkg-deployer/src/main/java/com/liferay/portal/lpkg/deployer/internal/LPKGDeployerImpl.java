@@ -111,16 +111,18 @@ public class LPKGDeployerImpl implements LPKGDeployer {
 							String fragmentHost = headers.get(
 								Constants.FRAGMENT_HOST);
 
-							if (fragmentHost == null) {
-								try {
-									bundle.start();
-								}
-								catch (BundleException be) {
-									_log.error(
-										"Unable to start " + bundle + " for " +
-											filePath,
-										be);
-								}
+							if (fragmentHost != null) {
+								continue;
+							}
+
+							try {
+								bundle.start();
+							}
+							catch (BundleException be) {
+								_log.error(
+									"Unable to start " + bundle + " for " +
+										filePath,
+									be);
 							}
 						}
 					}
