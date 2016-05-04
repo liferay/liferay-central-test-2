@@ -4228,9 +4228,7 @@
 			<var name="siteName" value="Site Name" />
 		</execute>
 
-		<execute macro="MobileDevice#previewPG">
-			<var name="deviceType" value="desktop" />
-		</execute>
+		<execute macro="MobileDevice#previewPG" />
 
 		<execute macro="ContentTargetingSimulator#viewUserSegmentsViaSimulator">
 			<var name="userSegments" value="Site Member Name,Male User Segment Name,Age 25 - 50,Site Admin Role Name,Female User Segment Name,Age 50 - 100,Age 18 - 25" />
