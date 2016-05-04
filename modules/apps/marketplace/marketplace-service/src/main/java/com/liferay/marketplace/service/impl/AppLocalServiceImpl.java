@@ -289,24 +289,6 @@ public class AppLocalServiceImpl extends AppLocalServiceBaseImpl {
 		}
 	}
 
-	@Deprecated
-	@Override
-	public void processMarketplaceProperties(Properties properties)
-		throws PortalException {
-
-		long[] supersedesRemoteAppIds = StringUtil.split(
-			properties.getProperty("supersedes-remote-app-ids"), 0L);
-
-		for (long supersedesRemoteAppId : supersedesRemoteAppIds) {
-			App supersedesApp = appPersistence.fetchByRemoteAppId(
-				supersedesRemoteAppId);
-
-			if ((supersedesApp != null) && supersedesApp.isInstalled()) {
-				uninstallApp(supersedesRemoteAppId);
-			}
-		}
-	}
-
 	@Override
 	public void uninstallApp(long remoteAppId) throws PortalException {
 		clearInstalledAppsCache();
