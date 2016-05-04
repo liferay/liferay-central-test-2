@@ -199,7 +199,7 @@ public class UpgradeClient {
 		}
 
 		try (GogoTelnetClient gogoTelnetClient = new GogoTelnetClient()) {
-			if (_shell || !_finished(gogoTelnetClient)) {
+			if (_shell || !_isFinished(gogoTelnetClient)) {
 				System.out.println("You are connected to Gogo shell.");
 
 				_printHelp();
@@ -292,32 +292,6 @@ public class UpgradeClient {
 		closeable.close();
 	}
 
-	private boolean _finished(GogoTelnetClient gogoTelnetClient)
-		throws IOException {
-
-		System.out.print(
-			"Checking to see if all upgrades steps have completed...");
-
-		String unfinished = gogoTelnetClient.send("upgrade:dryRun");
-
-		String upgradeSteps = gogoTelnetClient.send(
-			"upgrade:list | grep Registered | grep step");
-
-		if (!unfinished.equals("upgrade:dryRun") ||
-			upgradeSteps.contains("true")) {
-
-			System.out.println(
-				" one of your upgrades is still running or failed.");
-
-			return false;
-		}
-		else {
-			System.out.println(" done.");
-
-			return true;
-		}
-	}
-
 	private String _getClassPath() throws IOException {
 		StringBuilder sb = new StringBuilder();
 
@@ -364,6 +338,32 @@ public class UpgradeClient {
 		}
 
 		return relativeFileNames;
+	}
+
+	private boolean _isFinished(GogoTelnetClient gogoTelnetClient)
+		throws IOException {
+
+		System.out.print(
+			"Checking to see if all upgrades steps have completed...");
+
+		String unfinished = gogoTelnetClient.send("upgrade:dryRun");
+
+		String upgradeSteps = gogoTelnetClient.send(
+			"upgrade:list | grep Registered | grep step");
+
+		if (!unfinished.equals("upgrade:dryRun") ||
+			upgradeSteps.contains("true")) {
+
+			System.out.println(
+				" one of your upgrades is still running or failed.");
+
+			return false;
+		}
+		else {
+			System.out.println(" done.");
+
+			return true;
+		}
 	}
 
 	private void _printHelp() {
