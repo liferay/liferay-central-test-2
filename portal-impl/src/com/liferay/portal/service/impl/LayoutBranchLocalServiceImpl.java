@@ -96,7 +96,7 @@ public class LayoutBranchLocalServiceImpl
 			layoutRevision.getLayoutSetBranchId(), layoutRevision.getPlid(),
 			name, description, master, serviceContext);
 
-		serviceContext.setAttribute("major", Boolean.TRUE.toString());
+		serviceContext.setAttribute("updateMajor", Boolean.TRUE.toString());
 
 		layoutRevisionLocalService.addLayoutRevision(
 			layoutBranch.getUserId(), layoutRevision.getLayoutSetBranchId(),
