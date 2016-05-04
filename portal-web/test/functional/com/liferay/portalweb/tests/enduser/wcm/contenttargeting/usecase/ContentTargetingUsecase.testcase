@@ -4292,8 +4292,18 @@
 			<var name="portletName" value="User Segment Content List" />
 		</execute>
 
+		<execute macro="Navigator#gotoSitePage">
+			<var name="pageName" value="Test Page Name" />
+			<var name="siteName" value="Site Name" />
+		</execute>
+
 		<execute macro="UserSegmentContentListPortlet#configureDisplayFilter">
 			<var name="assetTypeFilter" value="Web Content Article" />
+		</execute>
+
+		<execute macro="Navigator#gotoSitePage">
+			<var name="pageName" value="Test Page Name" />
+			<var name="siteName" value="Site Name" />
 		</execute>
 
 		<execute macro="UserSegmentContentListPortlet#viewContent">
