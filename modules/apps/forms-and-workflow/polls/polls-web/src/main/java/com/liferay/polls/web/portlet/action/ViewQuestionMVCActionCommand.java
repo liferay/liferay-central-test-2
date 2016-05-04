@@ -14,8 +14,8 @@
 
 package com.liferay.polls.web.portlet.action;
 
-import com.liferay.polls.service.PollsVoteService;
 import com.liferay.polls.constants.PollsPortletKeys;
+import com.liferay.polls.service.PollsVoteService;
 import com.liferay.polls.web.portlet.util.PollsUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.service.ServiceContext;
