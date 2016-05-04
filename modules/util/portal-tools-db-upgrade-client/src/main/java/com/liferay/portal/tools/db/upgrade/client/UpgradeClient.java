@@ -379,8 +379,8 @@ public class UpgradeClient {
 			"upgrade:list {module_name} - List upgrade steps required for " +
 				"specified module");
 		System.out.println(
-			"upgrade:list | grep Registered - List upgrades that are " +
-				"registered and their current version");
+			"upgrade:list | grep Registered - List registered upgrades and " +
+				"their current version");
 		System.out.println(
 			"upgrade:list | grep Registered | grep steps - List upgrades in " +
 				"progress");
