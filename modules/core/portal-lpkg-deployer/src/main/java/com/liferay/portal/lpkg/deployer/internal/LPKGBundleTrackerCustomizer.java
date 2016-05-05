@@ -24,15 +24,13 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.lpkg.deployer.LPKGWarBundleRegistry;
-import com.liferay.portal.lpkg.deployer.internal.wrapperbundle.URLStreamHandlerServiceServiceTrackerCustomizer;
-import com.liferay.portal.lpkg.deployer.internal.wrapperbundle.WarBundleWrapperBundleActivator;
+import com.liferay.portal.lpkg.deployer.internal.wrapper.bundle.URLStreamHandlerServiceServiceTrackerCustomizer;
+import com.liferay.portal.lpkg.deployer.internal.wrapper.bundle.WarBundleWrapperBundleActivator;
 import com.liferay.portal.util.PropsValues;
 
 import java.io.IOException;
 import java.io.InputStream;
-
 import java.net.URL;
-
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
