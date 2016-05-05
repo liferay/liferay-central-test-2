@@ -5171,7 +5171,7 @@ public class JournalArticleLocalServiceImpl
 
 				addNewVersion = true;
 
-				version = obtainNextVersionNumber(article);
+				version = getNextVersionNumber(article);
 			}
 		}
 
@@ -5461,7 +5461,7 @@ public class JournalArticleLocalServiceImpl
 		Locale defaultLocale = getArticleDefaultLocale(content);
 
 		if (incrementVersion) {
-			double newVersion = obtainNextVersionNumber(oldArticle);
+			double newVersion = getNextVersionNumber(oldArticle);
 
 			long id = counterLocalService.increment();
 
@@ -7312,7 +7312,7 @@ public class JournalArticleLocalServiceImpl
 		subscriptionSender.flushNotificationsAsync();
 	}
 
-	protected double obtainNextVersionNumber(JournalArticle article)
+	protected double getNextVersionNumber(JournalArticle article)
 		throws PortalException {
 
 		double oldVersion = article.getVersion();
