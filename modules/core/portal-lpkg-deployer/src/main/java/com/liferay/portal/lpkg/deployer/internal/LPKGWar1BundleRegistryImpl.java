@@ -26,7 +26,7 @@ import org.osgi.service.component.annotations.Component;
  * @author Shuyang Zhou
  */
 @Component(immediate = true)
-public class LPKGWarBundleRegistryImpl implements LPKGWarBundleRegistry {
+public class LPKGWar1BundleRegistryImpl implements LPKGWarBundleRegistry {
 
 	@Override
 	public Bundle register(Bundle warWrapperBundle, Bundle warBundle) {
