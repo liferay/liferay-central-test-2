@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.lpkg.deployer.internal.wrapperbundle;
+package com.liferay.portal.lpkg.deployer.internal.wrapper.bundle;
 
 import com.liferay.portal.lpkg.deployer.LPKGWarBundleRegistry;
 
