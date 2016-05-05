@@ -100,32 +100,30 @@ public class LPKGBundleTrackerCustomizer
 
 			enumeration = bundle.findEntries("/", "*.war", false);
 
-			if (enumeration != null) {
-				while (enumeration.hasMoreElements()) {
-					url = enumeration.nextElement();
+			if (enumeration == null) {
+				return bundles;
+			}
 
-					// Install a wrapper bundle for this WAR bundle. The wrapper
-					// bundle defers the WAR bundle installation until the WAB
-					// protocol handler is ready.
+			while (enumeration.hasMoreElements()) {
+				url = enumeration.nextElement();
 
-					// The installed WAR bundle is always tied its wrapper
-					// bundle.
+				// Install a wrapper bundle for this WAR bundle. The wrapper
+				// bundle defers the WAR bundle installation until the WAB
+				// protocol handler is ready. The installed WAR bundle is always
+				// tied its wrapper bundle. When the wrapper bundle is
+				// uninstalled, its wrapped WAR bundle will also be unintalled.
 
-					// When the wrapper bundle is uninstalled, its wrapped WAR
-					// bundle will also be unintalled.
+				Bundle newBundle = _bundleContext.installBundle(
+					url.getPath(), _toWARWrapperBundle(bundle, url));
 
-					Bundle newBundle = _bundleContext.installBundle(
-						url.getPath(), _toWARWrapperBundle(bundle, url));
+				BundleStartLevel bundleStartLevel = newBundle.adapt(
+					BundleStartLevel.class);
 
-					BundleStartLevel bundleStartLevel = newBundle.adapt(
-						BundleStartLevel.class);
+				bundleStartLevel.setStartLevel(
+					PropsValues.
+						MODULE_FRAMEWORK_DYNAMIC_INSTALL_START_LEVEL);
 
-					bundleStartLevel.setStartLevel(
-						PropsValues.
-							MODULE_FRAMEWORK_DYNAMIC_INSTALL_START_LEVEL);
-
-					bundles.add(newBundle);
-				}
+				bundles.add(newBundle);
 			}
 		}
 		catch (Exception e) {

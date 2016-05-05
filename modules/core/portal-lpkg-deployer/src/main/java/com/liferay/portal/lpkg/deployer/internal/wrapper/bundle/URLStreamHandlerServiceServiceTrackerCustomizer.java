@@ -35,35 +35,37 @@ public class URLStreamHandlerServiceServiceTrackerCustomizer
 
 	public URLStreamHandlerServiceServiceTrackerCustomizer(
 		BundleContext bundleContext, String contextName, URL lpkgURL,
-		int startLevel, LPKGWARBundleRegistry lpkgWarBundleRegistry) {
+		int startLevel, LPKGWARBundleRegistry lpkgWARBundleRegistry) {
 
 		_bundleContext = bundleContext;
 		_contextName = contextName;
 		_lpkgURL = lpkgURL;
 		_startLevel = startLevel;
-		_lpkgWarBundleRegistry = lpkgWarBundleRegistry;
+		_lpkgWARBundleRegistry = lpkgWARBundleRegistry;
 	}
 
 	@Override
 	public Bundle addingService(
 		ServiceReference<URLStreamHandlerService> serviceReference) {
 
-		// Due to this is tracking the WabURLStreamHandlerService, this
-		// ServiceTracker might be noticed before org.eclipse.osgi.internal.url.
-		// URLStreamHandlerFactoryImpl.
-
-		// In case of that, directly constructs a webbundle URL with validation
-		// will cause "unknown protocol" MalformedURLException.
-
-		// To overcome this random "race condition", here we construct webbundle
-		// URL without validation and directly use the incoming
-		// WabURLStreamHandlerService to open the URL.
+		// Both org.eclipse.osgi.internal.url.URLStreamHandlerFactoryImpl and
+		// WARBundleWrapperBundleActivator are both tracking
+		// com.liferay.portal.osgi.web.wab.generator.internal.handler.
+		// WabURLStreamHandlerService. In the case where
+		// WARBundleWrapperBundleActivator is notified before
+		// URLStreamHandlerFactoryImpl, then a MalformedURLException will be
+		// thrown. To overcome this race condition, we must construct the WAB
+		// URL without validation and without opening the URL directly.
 
 		AbstractURLStreamHandlerService abstractURLStreamHandlerService =
 			(AbstractURLStreamHandlerService)_bundleContext.getService(
 				serviceReference);
 
 		try {
+
+			// The WAB URL must not change over reboots. See
+			// LPKGBundleTrackerCustomizer#_toWARWrapperBundle.
+
 			URL wabURL = new URL(
 				"webbundle", null, -1,
 				_lpkgURL.toExternalForm() + "?Web-ContextPath=/" +
@@ -73,17 +75,10 @@ public class URLStreamHandlerServiceServiceTrackerCustomizer
 			URLConnection urlConnection =
 				abstractURLStreamHandlerService.openConnection(wabURL);
 
-			// It is important that this wabURL is stable over reboots to ensure
-			// the same war bundle won't be installed multiple times over
-			// reboots.
-
 			Bundle newBundle = _bundleContext.installBundle(
 				wabURL.toExternalForm(), urlConnection.getInputStream());
 
-			// Register war bundle in order to tie its life to the current
-			// wrapper bundle.
-
-			_lpkgWarBundleRegistry.register(
+			_lpkgWARBundleRegistry.register(
 				_bundleContext.getBundle(), newBundle);
 
 			BundleStartLevel bundleStartLevel = newBundle.adapt(
@@ -115,7 +110,7 @@ public class URLStreamHandlerServiceServiceTrackerCustomizer
 	private final BundleContext _bundleContext;
 	private final String _contextName;
 	private final URL _lpkgURL;
-	private final LPKGWARBundleRegistry _lpkgWarBundleRegistry;
+	private final LPKGWARBundleRegistry _lpkgWARBundleRegistry;
 	private final int _startLevel;
 
 }
