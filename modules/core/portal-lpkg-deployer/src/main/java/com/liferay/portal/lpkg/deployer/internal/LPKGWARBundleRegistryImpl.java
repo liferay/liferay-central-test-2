@@ -14,7 +14,7 @@
 
 package com.liferay.portal.lpkg.deployer.internal;
 
-import com.liferay.portal.lpkg.deployer.LPKGWarBundleRegistry;
+import com.liferay.portal.lpkg.deployer.LPKGWar1BundleRegistry;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -26,7 +26,7 @@ import org.osgi.service.component.annotations.Component;
  * @author Shuyang Zhou
  */
 @Component(immediate = true)
-public class LPKGWARBundleRegistryImpl implements LPKGWarBundleRegistry {
+public class LPKGWARBundleRegistryImpl implements LPKGWar1BundleRegistry {
 
 	@Override
 	public Bundle register(Bundle warWrapperBundle, Bundle warBundle) {

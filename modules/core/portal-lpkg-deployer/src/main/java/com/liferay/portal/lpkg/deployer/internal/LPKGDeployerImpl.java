@@ -24,7 +24,7 @@ import com.liferay.portal.kernel.util.StreamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.lpkg.deployer.LPKGDeployer;
 import com.liferay.portal.lpkg.deployer.LPKGVerifier;
-import com.liferay.portal.lpkg.deployer.LPKGWarBundleRegistry;
+import com.liferay.portal.lpkg.deployer.LPKGWar1BundleRegistry;
 import com.liferay.portal.util.PropsValues;
 
 import java.io.File;
@@ -299,7 +299,7 @@ public class LPKGDeployerImpl implements LPKGDeployer {
 	private LPKGVerifier _lpkgVerifier;
 
 	@Reference
-	private LPKGWarBundleRegistry _lpkgWarBundleRegistry;
+	private LPKGWar1BundleRegistry _lpkgWarBundleRegistry;
 
 	private final Map<String, URL> _urls = new ConcurrentHashMap<>();
 	private BundleTracker<Bundle> _warWrapperBundlerTracker;
