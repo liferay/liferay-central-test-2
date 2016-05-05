@@ -209,7 +209,7 @@ public class DeploymentHelper {
 
 		Option fileNamesOption = new Option(
 			"f", "fileNames", true,
-			"Set the files you would like to include in the war.");
+			"Set the files you would like to include in the WAR.");
 
 		fileNamesOption.setRequired(true);
 
@@ -229,7 +229,8 @@ public class DeploymentHelper {
 			new Option(
 				"p", "path", true,
 				"Set the path the files will be deployed. If this is not " +
-					"set, it will deploy to auto.deploy.deploy.dir."));
+					"set, it will deploy to the value set in the portal " +
+						"property \"auto.deploy.deploy.dir\"."));
 
 		return options;
 	}
