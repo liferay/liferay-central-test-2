@@ -110,8 +110,7 @@ public class LPKGDeployerImpl implements LPKGDeployer {
 
 				@Override
 				public FileVisitResult visitFile(
-						Path filePath, BasicFileAttributes basicFileAttributes)
-					throws IOException {
+					Path filePath, BasicFileAttributes basicFileAttributes) {
 
 					Path fileNamePath = filePath.getFileName();
 
