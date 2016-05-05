@@ -267,8 +267,6 @@ public class CompanyLocalServiceTest {
 
 		Company company = addCompany();
 
-		long companyId = company.getCompanyId();
-
 		User companyAdminUser = UserTestUtil.addCompanyAdminUser(company);
 
 		Organization companyOrganzation =
