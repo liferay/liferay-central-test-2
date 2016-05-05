@@ -38,23 +38,23 @@ public class WARBundleWrapperBundleActivator implements BundleActivator {
 
 		Dictionary<String, String> headers = bundle.getHeaders();
 
-		String contextName = headers.get("wab-contextName");
+		String contextName = headers.get("Liferay-WAB-Context-Name");
 
 		if (contextName == null) {
 			throw new IllegalArgumentException(
-				"Missing wab-contextName header");
+				"Missing Liferay-WAB-Context-Name header");
 		}
 
-		String lpkgURLString = headers.get("wab-lpkg-url");
+		String lpkgURLString = headers.get("Liferay-WAB-LPKG-URL");
 
 		if (lpkgURLString == null) {
-			throw new IllegalArgumentException("Missing wab-lpkg-url header");
+			throw new IllegalArgumentException("Missing Liferay-WAB-LPKG-URL header");
 		}
 
-		String startLevelString = headers.get("wab-startLevel");
+		String startLevelString = headers.get("Liferay-WAB-Start-Level");
 
 		if (startLevelString == null) {
-			throw new IllegalArgumentException("Missing wab-startLevel header");
+			throw new IllegalArgumentException("Missing Liferay-WAB-Start-Level header");
 		}
 
 		int startLevel = Integer.parseInt(startLevelString);
