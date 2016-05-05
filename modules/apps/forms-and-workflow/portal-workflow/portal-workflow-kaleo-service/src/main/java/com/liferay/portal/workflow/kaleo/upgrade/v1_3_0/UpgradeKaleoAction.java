@@ -28,8 +28,8 @@ public class UpgradeKaleoAction extends UpgradeProcess {
 	protected void doUpgrade() throws Exception {
 		try(
 			PreparedStatement ps = connection.prepareStatement(
-				"select kaleoActionId, script from KaleoAction " +
-					"where script like '%WorkflowConstants.toStatus(%'");
+				"select kaleoActionId, script from KaleoAction where script " +
+					"like '%WorkflowConstants.toStatus(%'");
 			ResultSet rs = ps.executeQuery();) {
 
 			while (rs.next()) {
@@ -49,8 +49,7 @@ public class UpgradeKaleoAction extends UpgradeProcess {
 		throws Exception {
 
 		try (PreparedStatement ps = connection.prepareStatement(
-				"update KaleoAction set script = ? where " +
-					"kaleoActionId = ?")) {
+				"update KaleoAction set script = ? where kaleoActionId = ?")) {
 
 			ps.setString(1, script);
 			ps.setLong(2, kaleoActionId);
