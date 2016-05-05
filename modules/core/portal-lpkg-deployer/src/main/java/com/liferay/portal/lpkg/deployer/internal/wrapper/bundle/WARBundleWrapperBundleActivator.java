@@ -42,19 +42,21 @@ public class WARBundleWrapperBundleActivator implements BundleActivator {
 
 		if (contextName == null) {
 			throw new IllegalArgumentException(
-				"Missing Liferay-WAB-Context-Name header");
+				"The header \"Liferay-WAB-Context-Name\" is null");
 		}
 
 		String lpkgURLString = headers.get("Liferay-WAB-LPKG-URL");
 
 		if (lpkgURLString == null) {
-			throw new IllegalArgumentException("Missing Liferay-WAB-LPKG-URL header");
+			throw new IllegalArgumentException(
+				"The header \"Liferay-WAB-LPKG-URL\" is null");
 		}
 
 		String startLevelString = headers.get("Liferay-WAB-Start-Level");
 
 		if (startLevelString == null) {
-			throw new IllegalArgumentException("Missing Liferay-WAB-Start-Level header");
+			throw new IllegalArgumentException(
+				"The header \"Liferay-WAB-Start-Level\" is null");
 		}
 
 		int startLevel = Integer.parseInt(startLevelString);
