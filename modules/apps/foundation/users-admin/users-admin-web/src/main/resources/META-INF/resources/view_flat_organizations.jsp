@@ -25,8 +25,6 @@ String usersListView = (String)request.getAttribute("view.jsp-usersListView");
 
 PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 
-String keywords = ParamUtil.getString(request, "keywords");
-
 LinkedHashMap<String, Object> organizationParams = new LinkedHashMap<String, Object>();
 
 boolean showList = true;
@@ -43,6 +41,8 @@ if (filterManageableOrganizations) {
 }
 
 boolean hasAddOrganizationPermission = PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_ORGANIZATION);
+
+String keywords = ParamUtil.getString(request, "keywords");
 %>
 
 <c:choose>
