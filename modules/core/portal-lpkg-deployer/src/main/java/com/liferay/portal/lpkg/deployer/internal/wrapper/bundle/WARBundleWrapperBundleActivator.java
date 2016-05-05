@@ -62,7 +62,7 @@ public class WARBundleWrapperBundleActivator implements BundleActivator {
 		LPKGWARBundleRegistry lpkgWarBundleRegistry = bundleContext.getService(
 			bundleContext.getServiceReference(LPKGWARBundleRegistry.class));
 
-		// Defer war bundle installation until wab protocol handler is ready.
+		// Defer WAR bundle installation until WAB protocol handler is ready
 
 		_serviceTracker = new ServiceTracker<>(
 			bundleContext,
