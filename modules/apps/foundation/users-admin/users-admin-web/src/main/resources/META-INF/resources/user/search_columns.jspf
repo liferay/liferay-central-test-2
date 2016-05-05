@@ -22,6 +22,7 @@
 	truncate="<%= true %>"
 >
 	<aui:a href="<%= String.valueOf(rowURL) %>"><strong><%= user2.getFullName() %></strong></aui:a>
+
 </liferay-ui:search-container-column-text>
 
 <liferay-ui:search-container-column-text
