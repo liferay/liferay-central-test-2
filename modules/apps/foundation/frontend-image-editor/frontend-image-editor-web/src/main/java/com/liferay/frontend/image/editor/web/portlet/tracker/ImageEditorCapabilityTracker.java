@@ -133,9 +133,8 @@ public class ImageEditorCapabilityTracker {
 						imageEditorCapability.getResourceURLs();
 
 					for (URL resourceURL : resourceURLs) {
-						String fullFileName = resourceURL.getFile();
-
-						String fileName = _getJavaScriptFileName(fullFileName);
+						String fileName = _getJavaScriptFileName(
+							resourceURL.getFile());
 
 						requiredModules.add(
 							moduleName.concat(StringPool.SLASH).concat(
