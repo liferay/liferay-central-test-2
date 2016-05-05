@@ -26,10 +26,10 @@ import org.osgi.util.tracker.BundleTrackerCustomizer;
 /**
  * @author Shuyang Zhou
  */
-public class War1WrapperBundleTrackCustomizer
+public class WARWrapperBundleTrackCustomizer
 	implements BundleTrackerCustomizer<Bundle> {
 
-	public War1WrapperBundleTrackCustomizer(
+	public WARWrapperBundleTrackCustomizer(
 		LPKGWarBundleRegistry lpkgWarBundleRegistry) {
 
 		_lpkgWarBundleRegistry = lpkgWarBundleRegistry;
@@ -72,7 +72,7 @@ public class War1WrapperBundleTrackCustomizer
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		War1WrapperBundleTrackCustomizer.class);
+		WARWrapperBundleTrackCustomizer.class);
 
 	private final LPKGWarBundleRegistry _lpkgWarBundleRegistry;
 
