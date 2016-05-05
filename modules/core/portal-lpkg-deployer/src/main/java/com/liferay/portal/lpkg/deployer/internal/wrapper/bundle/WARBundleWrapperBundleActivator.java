@@ -14,7 +14,7 @@
 
 package com.liferay.portal.lpkg.deployer.internal.wrapper.bundle;
 
-import com.liferay.portal.lpkg.deployer.LPKGWar1BundleRegistry;
+import com.liferay.portal.lpkg.deployer.LPKGWARBundleRegistry;
 
 import java.net.URL;
 
@@ -59,8 +59,8 @@ public class WARBundleWrapperBundleActivator implements BundleActivator {
 
 		int startLevel = Integer.parseInt(startLevelString);
 
-		LPKGWar1BundleRegistry lpkgWarBundleRegistry = bundleContext.getService(
-			bundleContext.getServiceReference(LPKGWar1BundleRegistry.class));
+		LPKGWARBundleRegistry lpkgWarBundleRegistry = bundleContext.getService(
+			bundleContext.getServiceReference(LPKGWARBundleRegistry.class));
 
 		// Defer war bundle installation until wab protocol handler is ready.
 
