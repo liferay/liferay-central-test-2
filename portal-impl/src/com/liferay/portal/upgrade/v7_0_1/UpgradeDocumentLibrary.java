@@ -70,8 +70,8 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		}
 
 		try (PreparedStatement ps = connection.prepareStatement(
-				"update DDMStructure set classNameId = ? where " +
-					"structureKey = ?")) {
+				"update DDMStructure set classNameId = ? where structureKey " +
+					"= ?")) {
 
 			ps.setLong(1, classNameId);
 			ps.setString(2, "TIKARAWMETADATA");
