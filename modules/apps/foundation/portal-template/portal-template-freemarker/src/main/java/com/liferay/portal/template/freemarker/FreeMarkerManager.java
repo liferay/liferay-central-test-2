@@ -602,6 +602,7 @@ public class FreeMarkerManager extends BaseSingleTemplateManager {
 				_taglibMappings.remove(key);
 			}
 
+			_templateModels.clear();
 		}
 
 	}
