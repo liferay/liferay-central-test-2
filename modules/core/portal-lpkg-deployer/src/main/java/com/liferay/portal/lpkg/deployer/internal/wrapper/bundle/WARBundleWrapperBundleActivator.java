@@ -69,8 +69,9 @@ public class WARBundleWrapperBundleActivator implements BundleActivator {
 		_serviceTracker = new ServiceTracker<>(
 			bundleContext,
 			bundleContext.createFilter(
-				"(&(objectClass=" + URLStreamHandlerService.class.getName() +
-					")(" + URLConstants.URL_HANDLER_PROTOCOL + "=webbundle))"),
+				"(&(" + URLConstants.URL_HANDLER_PROTOCOL +
+					"=webbundle)(objectClass=" +
+						URLStreamHandlerService.class.getName() + "))"),
 			new URLStreamHandlerServiceServiceTrackerCustomizer(
 				bundleContext, contextName, new URL(lpkgURLString), startLevel,
 				lpkgWarBundleRegistry));
