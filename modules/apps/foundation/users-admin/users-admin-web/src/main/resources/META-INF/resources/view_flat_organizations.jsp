@@ -42,7 +42,7 @@ if (filterManageableOrganizations) {
 
 boolean hasAddOrganizationPermission = PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_ORGANIZATION);
 
-String keywords = ParamUtil.getString(request, "keywords", null);
+String keywords = ParamUtil.getString(request, "keywords");
 %>
 
 <c:choose>
