@@ -188,9 +188,10 @@ public class JspJavaFileObjectResolver implements JavaFileObjectResolver {
 			if (index > 0) {
 				fileName = fileName.substring(0, index);
 			}
-		} else {
+		}
+		else {
 
-			// We don't know how to handle this kind of files; ignore them
+			// Ignore files that we do not know how to handle
 
 			return null;
 		}
