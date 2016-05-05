@@ -62,7 +62,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 	protected void updateTikaRawMetadataDDMStructure() throws Exception {
 		long classNameId = addRawMetadataProcessorClassName();
 
-		long ddmStructureId = _getDDMStructureId(
+		long ddmStructureId = getDDMStructureId(
 			"TIKARAWMETADATA", classNameId);
 
 		if (ddmStructureId != 0) {
@@ -82,7 +82,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 	protected void updateTikaRawMetadataFileEntryMetadata() throws Exception {
 		try (LoggingTimer loggingTimer = new LoggingTimer()) {
-			long oldDDMStructureId = _getDDMStructureId(
+			long oldDDMStructureId = getDDMStructureId(
 				"TIKARAWMETADATA",
 				PortalUtil.getClassNameId(DLFileEntry.class));
 
@@ -90,7 +90,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 				return;
 			}
 
-			long newDDMStructureId = _getDDMStructureId(
+			long newDDMStructureId = getDDMStructureId(
 				"TIKARAWMETADATA",
 				PortalUtil.getClassNameId(RawMetadataProcessor.class));
 
@@ -110,7 +110,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		}
 	}
 
-	private long _getDDMStructureId(String structureKey, long classNameId)
+	protected long getDDMStructureId(String structureKey, long classNameId)
 		throws Exception {
 
 		try (LoggingTimer loggingTimer = new LoggingTimer();
