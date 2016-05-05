@@ -7320,10 +7320,12 @@ public class JournalArticleLocalServiceImpl
 		// The version must also higher than the live version of the article
 		// to avoid some versions not being published
 
-		JournalArticle liveArticle = fetchLatestLiveArticle(article);
+		JournalArticle latestLiveArticle = fetchLatestLiveArticle(article);
 
-		if ((liveArticle != null) && (liveArticle.getVersion() > oldVersion)) {
-			oldVersion = liveArticle.getVersion();
+		if ((latestLiveArticle != null) &&
+			(latestLiveArticle.getVersion() > oldVersion)) {
+
+			oldVersion = latestLiveArticle.getVersion();
 		}
 
 		return MathUtil.format(oldVersion + 0.1, 1, 1);
