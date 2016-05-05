@@ -77,7 +77,7 @@ public class EditorConfigContributorTest {
 						EditorConfigContributor editorConfigContributor =
 							iterator.next();
 
-						if (!_editorConfigContributorWhiteList.contains(
+						if (!_editorConfigContributors.contains(
 								editorConfigContributor.getClass())) {
 
 							iterator.remove();
@@ -571,7 +571,7 @@ public class EditorConfigContributorTest {
 	private static final String _PORTLET_NAME = "testPortletName";
 
 	private static final List<Class<? extends EditorConfigContributor>>
-		_editorConfigContributorWhiteList = Arrays.asList(
+		_editorConfigContributors = Arrays.asList(
 			EmoticonsEditorConfigContributor.class,
 			ImageEditorConfigContributor.class,
 			TablesEditorConfigContributor.class,
