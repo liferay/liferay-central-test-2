@@ -19,7 +19,7 @@ import org.osgi.framework.Bundle;
 /**
  * @author Shuyang Zhou
  */
-public interface LPKGWar1BundleRegistry {
+public interface LPKGWARBundleRegistry {
 
 	public Bundle register(Bundle warWrapperBundle, Bundle warBundle);
 

@@ -16,7 +16,7 @@ package com.liferay.portal.lpkg.deployer.internal;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.lpkg.deployer.LPKGWar1BundleRegistry;
+import com.liferay.portal.lpkg.deployer.LPKGWARBundleRegistry;
 
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleEvent;
@@ -30,7 +30,7 @@ public class WARWrapperBundleTrackCustomizer
 	implements BundleTrackerCustomizer<Bundle> {
 
 	public WARWrapperBundleTrackCustomizer(
-		LPKGWar1BundleRegistry lpkgWarBundleRegistry) {
+		LPKGWARBundleRegistry lpkgWarBundleRegistry) {
 
 		_lpkgWarBundleRegistry = lpkgWarBundleRegistry;
 	}
@@ -74,6 +74,6 @@ public class WARWrapperBundleTrackCustomizer
 	private static final Log _log = LogFactoryUtil.getLog(
 		WARWrapperBundleTrackCustomizer.class);
 
-	private final LPKGWar1BundleRegistry _lpkgWarBundleRegistry;
+	private final LPKGWARBundleRegistry _lpkgWarBundleRegistry;
 
 }
