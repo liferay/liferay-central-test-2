@@ -41,7 +41,7 @@ public class MVCCommandCache {
 
 	public MVCCommandCache(
 		MVCCommand emptyMVCCommand, String packagePrefix, String portletName,
-		Class<? extends MVCCommand> mvcCommandClazz, String mvcCommandPostFix) {
+		Class<? extends MVCCommand> mvcCommandClass, String mvcCommandPostFix) {
 
 		_emptyMVCCommand = emptyMVCCommand;
 		_mvcComandPostFix = mvcCommandPostFix;
@@ -55,7 +55,7 @@ public class MVCCommandCache {
 		_packagePrefix = packagePrefix;
 
 		_serviceTrackerMap = ServiceTrackerCollections.openSingleValueMap(
-			mvcCommandClazz,
+			mvcCommandClass,
 			"(&(javax.portlet.name=" + portletName +")" +
 				"(mvc.command.name=*))",
 			new ServiceReferenceMapper<String, MVCCommand>() {
@@ -77,8 +77,8 @@ public class MVCCommandCache {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, replaced by {@link MVCCommandCache(MVCCommand,
-	 *             String, String, Class<? extends MVCCommand>, String)}
+	 * @deprecated As of 7.0.0, replaced by {@link #MVCCommandCache(MVCCommand,
+	 *             String, String, Class, String)}
 	 */
 	@Deprecated
 	public MVCCommandCache(
@@ -87,7 +87,7 @@ public class MVCCommandCache {
 
 		this(
 			emptyMVCCommand, packagePrefix, portletName,
-			_getMVCCommandClazz(mvcCommandClassName), mvcCommandPostFix);
+			_getMVCCommandClass(mvcCommandClassName), mvcCommandPostFix);
 	}
 
 	public void close() {
@@ -189,26 +189,26 @@ public class MVCCommandCache {
 		return _mvcCommandCache.isEmpty();
 	}
 
-	private static Class<? extends MVCCommand> _getMVCCommandClazz(
+	private static Class<? extends MVCCommand> _getMVCCommandClass(
 		String mvcCommandClassName) {
 
-		Class<? extends MVCCommand> mvcCommandClazz = null;
+		Class<? extends MVCCommand> mvcCommandClass = null;
 
-		for (Class<? extends MVCCommand> curMVCCommandClazz :
+		for (Class<? extends MVCCommand> curMVCCommandClass :
 				_mvcCommandClasses) {
 
-			if (mvcCommandClassName.equals(curMVCCommandClazz.getName())) {
-				mvcCommandClazz = curMVCCommandClazz;
+			if (mvcCommandClassName.equals(curMVCCommandClass.getName())) {
+				mvcCommandClass = curMVCCommandClass;
 
 				break;
 			}
 		}
 
-		if (mvcCommandClazz == null) {
+		if (mvcCommandClass == null) {
 			throw new IllegalArgumentException();
 		}
 
-		return mvcCommandClazz;
+		return mvcCommandClass;
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
