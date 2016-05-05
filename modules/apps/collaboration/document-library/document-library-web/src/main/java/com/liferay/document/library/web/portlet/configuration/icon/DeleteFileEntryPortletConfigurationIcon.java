@@ -154,9 +154,9 @@ public class DeleteFileEntryPortletConfigurationIcon
 		return false;
 	}
 
-	protected boolean isTrashEnabled(long groupId, long repository) {
+	protected boolean isTrashEnabled(long groupId, long repositoryId) {
 		try {
-			return DLTrashUtil.isTrashEnabled(groupId, repository);
+			return DLTrashUtil.isTrashEnabled(groupId, repositoryId);
 		}
 		catch (PortalException pe) {
 			throw new RuntimeException(pe);
