@@ -53,8 +53,8 @@ public class WarWrapperBundleTrackCustomizer
 			return;
 		}
 
-		// Uninstall registered war bundle when its wrapper bundle has been
-		// uninstalled.
+		// Uninstall registered WAR bundle when its wrapper bundle is
+		// uninstalled
 
 		Bundle warBundle = _lpkgWarBundleRegistry.unregister(bundle);
 
@@ -64,8 +64,8 @@ public class WarWrapperBundleTrackCustomizer
 			}
 			catch (BundleException be) {
 				_log.error(
-					"Unable to unregister war bundle " + warBundle +
-						", wrapped by " + bundle,
+					"Unable to unregister WAR bundle " + warBundle +
+						" that is wrapped by " + bundle,
 					be);
 			}
 		}

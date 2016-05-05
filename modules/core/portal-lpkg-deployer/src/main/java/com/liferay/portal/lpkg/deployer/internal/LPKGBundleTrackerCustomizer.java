@@ -106,19 +106,18 @@ public class LPKGBundleTrackerCustomizer
 				while (enumeration.hasMoreElements()) {
 					url = enumeration.nextElement();
 
-					// Install a wrapper bundle for this war bundle.
-					// The wrapper bundle defers the war bundle installation
-					// until wab protocol handler is ready.
+					// Install a wrapper bundle for this WAR bundle. The wrapper
+					// bundle defers the WAR bundle installation until the WAB
+					// protocol handler is ready.
 
-					// The war bundle once installed will be tied to its wrapper
+					// The installed WAR bundle is always tied its wrapper
 					// bundle.
 
-					// When wrapper bundle gets uninstalled, its wrapped war
-					// bundle will automatically be unintalled too.
+					// When the wrapper bundle is uninstalled, its wrapped WAR
+					// bundle will also be unintalled.
 
 					Bundle newBundle = _bundleContext.installBundle(
-						url.getPath(),
-						_toWarBundleWrapperBundle(bundle, url));
+						url.getPath(), _toWARWrapperBundle(bundle, url));
 
 					BundleStartLevel bundleStartLevel = newBundle.adapt(
 						BundleStartLevel.class);
@@ -194,7 +193,7 @@ public class LPKGBundleTrackerCustomizer
 		return sb.toString();
 	}
 
-	private InputStream _toWarBundleWrapperBundle(Bundle bundle, URL url)
+	private InputStream _toWARWrapperBundle(Bundle bundle, URL url)
 		throws IOException {
 
 		String pathString = url.getPath();
@@ -220,11 +219,9 @@ public class LPKGBundleTrackerCustomizer
 
 		String lpkgURL = sb.toString();
 
-		// The url is bundle url which changes over reboot. To ensure we won't
-		// install the same war bundle multiple times over reboots, we must map
-		// this changing URL to a stable version, then when acutally installs
-		// the war bundle, use this stable URL as bundle location to prevent
-		// duplicated installations.
+		// The bundle URL changes after a reboot. To ensure we do not install
+		// the same bundle multiple times over reboots, we must map the ever
+		// changing bundle URL to a fixed LPKG URL.
 
 		_urls.put(lpkgURL, url);
 
