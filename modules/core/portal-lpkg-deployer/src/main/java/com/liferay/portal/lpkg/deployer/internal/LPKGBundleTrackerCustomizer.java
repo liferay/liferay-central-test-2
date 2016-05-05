@@ -290,13 +290,13 @@ public class LPKGBundleTrackerCustomizer
 				BundleActivator.class, BundleStartLevel.class,
 				ServiceTrackerCustomizer.class, LPKGWARBundleRegistry.class,
 				URLConstants.class));
-		attributes.putValue("Manifest-Version", "2");
 		attributes.putValue("Liferay-WAB-Context-Name", contextName);
 		attributes.putValue("Liferay-WAB-LPKG-URL", lpkgURL);
 		attributes.putValue(
 			"Liferay-WAB-Start-Level",
 			String.valueOf(
 				PropsValues.MODULE_FRAMEWORK_DYNAMIC_INSTALL_START_LEVEL));
+		attributes.putValue("Manifest-Version", "2");
 
 		jarOutputStream.putNextEntry(new ZipEntry(JarFile.MANIFEST_NAME));
 
