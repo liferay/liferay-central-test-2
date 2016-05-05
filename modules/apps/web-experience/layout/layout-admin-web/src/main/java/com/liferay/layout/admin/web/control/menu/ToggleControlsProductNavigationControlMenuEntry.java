@@ -112,7 +112,7 @@ public class ToggleControlsProductNavigationControlMenuEntry
 		Group group = layout.getGroup();
 
 		if (group.hasStagingGroup() && !group.isStagingGroup() &&
-			!PropsValues.STAGING_DISABLE_LIVE_SITE_LOCKING) {
+			PropsValues.STAGING_LIVE_GROUP_LOCKING_ENABLED) {
 
 			return false;
 		}

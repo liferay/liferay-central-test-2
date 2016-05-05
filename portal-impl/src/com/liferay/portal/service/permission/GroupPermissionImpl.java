@@ -90,7 +90,7 @@ public class GroupPermissionImpl
 		if ((actionId.equals(ActionKeys.ADD_LAYOUT) ||
 			 actionId.equals(ActionKeys.MANAGE_LAYOUTS)) &&
 			((group.hasLocalOrRemoteStagingGroup() &&
-			  !PropsValues.STAGING_DISABLE_LIVE_SITE_LOCKING) ||
+			  PropsValues.STAGING_LIVE_GROUP_LOCKING_ENABLED) ||
 			 group.isLayoutPrototype())) {
 
 			return false;
