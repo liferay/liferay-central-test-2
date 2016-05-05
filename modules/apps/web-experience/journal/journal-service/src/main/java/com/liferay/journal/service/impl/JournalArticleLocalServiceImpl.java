@@ -7315,20 +7315,20 @@ public class JournalArticleLocalServiceImpl
 	protected double getNextVersion(JournalArticle article)
 		throws PortalException {
 
-		double oldVersion = article.getVersion();
+		double nextVersion = article.getVersion();
 
-		// The version must also higher than the live version of the article
-		// to avoid some versions not being published
+		// The next version must be greater than the version of the latest live
+		// article
 
 		JournalArticle latestLiveArticle = fetchLatestLiveArticle(article);
 
 		if ((latestLiveArticle != null) &&
-			(latestLiveArticle.getVersion() > oldVersion)) {
+			(latestLiveArticle.getVersion() > nextVersion)) {
 
-			oldVersion = latestLiveArticle.getVersion();
+			nextVersion = latestLiveArticle.getVersion();
 		}
 
-		return MathUtil.format(oldVersion + 0.1, 1, 1);
+		return MathUtil.format(nextVersion + 0.1, 1, 1);
 	}
 
 	protected void saveImages(
