@@ -30,7 +30,7 @@ import org.osgi.util.tracker.ServiceTracker;
 /**
  * @author Shuyang Zhou
  */
-public class War1BundleWrapperBundleActivator implements BundleActivator {
+public class WARBundleWrapperBundleActivator implements BundleActivator {
 
 	@Override
 	public void start(final BundleContext bundleContext) throws Exception {
