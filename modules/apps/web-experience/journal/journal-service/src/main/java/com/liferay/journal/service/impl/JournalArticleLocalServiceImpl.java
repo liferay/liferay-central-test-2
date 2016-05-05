@@ -6441,7 +6441,7 @@ public class JournalArticleLocalServiceImpl
 		}
 	}
 
-	protected JournalArticle fetchLatestArticleFromLive(JournalArticle article)
+	protected JournalArticle fetchLatestLiveArticle(JournalArticle article)
 		throws PortalException {
 
 		Group group = groupLocalService.getGroup(article.getGroupId());
@@ -7320,7 +7320,7 @@ public class JournalArticleLocalServiceImpl
 		// The version must also higher than the live version of the article
 		// to avoid some versions not being published
 
-		JournalArticle liveArticle = fetchLatestArticleFromLive(article);
+		JournalArticle liveArticle = fetchLatestLiveArticle(article);
 
 		if ((liveArticle != null) && (liveArticle.getVersion() > oldVersion)) {
 			oldVersion = liveArticle.getVersion();
