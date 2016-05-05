@@ -41,8 +41,6 @@ if (filterManageableOrganizations) {
 }
 
 boolean hasAddOrganizationPermission = PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_ORGANIZATION);
-
-String keywords = ParamUtil.getString(request, "keywords", null);
 %>
 
 <c:choose>
@@ -118,7 +116,7 @@ String keywords = ParamUtil.getString(request, "keywords", null);
 				<%
 				long parentOrganizationId = ParamUtil.getLong(request, "parentOrganizationId", OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID);
 
-				if (Validator.isNotNull(keywords)) {
+				if (parentOrganizationId <= 0) {
 					parentOrganizationId = OrganizationConstants.ANY_PARENT_ORGANIZATION_ID;
 				}
 				%>
