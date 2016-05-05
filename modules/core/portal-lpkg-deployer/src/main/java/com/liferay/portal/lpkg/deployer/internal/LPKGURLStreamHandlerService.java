@@ -38,7 +38,7 @@ public class LPKGURLStreamHandlerService
 		URL url = _urls.remove(lpkgURL.toExternalForm());
 
 		if (url == null) {
-			throw new IllegalArgumentException("Unknown lpkg url " + lpkgURL);
+			throw new IllegalArgumentException("Unknown LPKG URL " + lpkgURL);
 		}
 
 		return url.openConnection();
