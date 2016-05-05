@@ -114,7 +114,7 @@ public class AssetPublisherPortletToolbarContributor
 		if (!assetPublisherDisplayContext.isShowAddContentButton() ||
 			(scopeGroup == null) || scopeGroup.isLayoutPrototype() ||
 			(scopeGroup.hasStagingGroup() && !scopeGroup.isStagingGroup() &&
-			 !PropsValues.STAGING_DISABLE_LIVE_SITE_LOCKING) ||
+			 PropsValues.STAGING_LIVE_GROUP_LOCKING_ENABLED) ||
 			portletName.equals(
 				AssetPublisherPortletKeys.HIGHEST_RATED_ASSETS) ||
 			portletName.equals(AssetPublisherPortletKeys.MOST_VIEWED_ASSETS) ||

@@ -222,7 +222,7 @@ public abstract class BaseAssetRenderer<T> implements AssetRenderer<T> {
 			group = layout.getGroup();
 		}
 
-		if (group.hasStagingGroup() && !_STAGING_DISABLE_LIVE_SITE_LOCKING) {
+		if (group.hasStagingGroup() && _STAGING_LIVE_GROUP_LOCKING_ENABLED) {
 			return null;
 		}
 
@@ -429,9 +429,9 @@ public abstract class BaseAssetRenderer<T> implements AssetRenderer<T> {
 
 	private static final String[] _AVAILABLE_LANGUAGE_IDS = new String[0];
 
-	private static final boolean _STAGING_DISABLE_LIVE_SITE_LOCKING =
+	private static final boolean _STAGING_LIVE_GROUP_LOCKING_ENABLED =
 		GetterUtil.getBoolean(
-			PropsUtil.get(PropsKeys.STAGING_DISABLE_LIVE_SITE_LOCKING));
+			PropsUtil.get(PropsKeys.STAGING_LIVE_GROUP_LOCKING_ENABLED));
 
 	private static final DDMFormValuesReader _nullDDMFormValuesReader =
 		new NullDDMFormValuesReader();

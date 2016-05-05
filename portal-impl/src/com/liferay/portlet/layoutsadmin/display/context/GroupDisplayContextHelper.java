@@ -39,7 +39,7 @@ public class GroupDisplayContextHelper {
 			return _group;
 		}
 
-		if (PropsValues.STAGING_DISABLE_LIVE_SITE_LOCKING &&
+		if (!PropsValues.STAGING_LIVE_GROUP_LOCKING_ENABLED &&
 			(getSelGroup() != null)) {
 
 			_group = getSelGroup();

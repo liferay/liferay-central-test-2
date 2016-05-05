@@ -76,7 +76,7 @@ public class StagingPermissionImpl implements StagingPermission {
 			long classPK, String portletId, String actionId)
 		throws Exception {
 
-		if (PropsValues.STAGING_DISABLE_LIVE_SITE_LOCKING) {
+		if (!PropsValues.STAGING_LIVE_GROUP_LOCKING_ENABLED) {
 			return null;
 		}
 

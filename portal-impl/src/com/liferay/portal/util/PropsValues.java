@@ -1436,11 +1436,11 @@ public class PropsValues {
 
 	public static boolean STAGING_DELETE_TEMP_LAR_ON_SUCCESS = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.STAGING_DELETE_TEMP_LAR_ON_SUCCESS));
 
-	public static final boolean STAGING_DISABLE_LIVE_SITE_LOCKING = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.STAGING_DISABLE_LIVE_SITE_LOCKING));
-
 	public static int STAGING_DRAFT_EXPORT_IMPORT_CONFIGURATION_CHECK_INTERVAL = GetterUtil.getInteger(PropsUtil.get(PropsKeys.STAGING_DRAFT_EXPORT_IMPORT_CONFIGURATION_CHECK_INTERVAL));
 
 	public static int STAGING_DRAFT_EXPORT_IMPORT_CONFIGURATION_CLEAN_UP_COUNT = GetterUtil.getInteger(PropsUtil.get(PropsKeys.STAGING_DRAFT_EXPORT_IMPORT_CONFIGURATION_CLEAN_UP_COUNT));
+
+	public static final boolean STAGING_LIVE_GROUP_LOCKING_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.STAGING_LIVE_GROUP_LOCKING_ENABLED));
 
 	public static boolean STAGING_LIVE_GROUP_REMOTE_STAGING_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.STAGING_LIVE_GROUP_REMOTE_STAGING_ENABLED));
 
