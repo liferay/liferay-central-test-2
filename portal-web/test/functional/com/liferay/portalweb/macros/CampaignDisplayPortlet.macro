@@ -84,14 +84,16 @@
 		<if>
 			<isset var="previewCampaignList" />
 			<then>
+				<var name="key_portletName" value="Campaign Content Display" />
+
+				<execute function="Click#makeVisibleClickAt" locator1="BasePortlet#SPECIFIC_PORTLET_BORDERLESS_BAR" />
+				<execute function="Click" locator1="CampaignContentDisplay#PREVIEW_BUTTON" />
+
+				<execute function="AssertElementPresent" locator1="CampaignContentDisplay#PREVIEW_BUTTON_EXPANDED" />
+
 				<for list="${previewCampaignList}" param="currentCampaign">
 					<var name="key_currentCampaign" value="${currentCampaign}" />
-					<var name="key_portletName" value="Campaign Content Display" />
 
-					<execute function="Click#makeVisibleClickAt" locator1="BasePortlet#SPECIFIC_PORTLET_BORDERLESS_BAR" />
-					<execute function="Click" locator1="CampaignContentDisplay#PREVIEW_BUTTON" />
-
-					<execute function="AssertElementPresent" locator1="CampaignContentDisplay#PREVIEW_BUTTON_EXPANDED" />
 					<execute function="AssertTextEquals" locator1="ContentTargeting#PREVIEW" value1="${currentCampaign}" />
 				</for>
 			</then>
