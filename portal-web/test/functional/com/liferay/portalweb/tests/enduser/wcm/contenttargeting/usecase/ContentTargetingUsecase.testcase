@@ -4062,7 +4062,6 @@
 
 		<execute macro="UserSegmentContentDisplayPortlet#viewEntryPG">
 			<var name="entryContentText" value="Web Content Content Female" />
-			<var name="viewUserSegmentSelected" value="Default" />
 		</execute>
 	</command>
 
