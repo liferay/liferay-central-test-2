@@ -30,7 +30,9 @@ import com.liferay.portal.util.PropsValues;
 
 import java.io.IOException;
 import java.io.InputStream;
+
 import java.net.URL;
+
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
@@ -120,8 +122,7 @@ public class LPKGBundleTrackerCustomizer
 					BundleStartLevel.class);
 
 				bundleStartLevel.setStartLevel(
-					PropsValues.
-						MODULE_FRAMEWORK_DYNAMIC_INSTALL_START_LEVEL);
+					PropsValues.MODULE_FRAMEWORK_DYNAMIC_INSTALL_START_LEVEL);
 
 				bundles.add(newBundle);
 			}
