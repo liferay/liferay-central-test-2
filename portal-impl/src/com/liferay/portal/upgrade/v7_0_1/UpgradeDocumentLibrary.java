@@ -59,11 +59,31 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		updateTikaRawMetadataFileEntryMetadata();
 	}
 
+	protected long getDDMStructureId(String structureKey, long classNameId)
+		throws Exception {
+
+		try (LoggingTimer loggingTimer = new LoggingTimer();
+			PreparedStatement ps = connection.prepareStatement(
+				"select structureId from DDMStructure where structureKey = ? " +
+					"and classNameId = ?")) {
+
+			ps.setString(1, structureKey);
+			ps.setLong(2, classNameId);
+
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
+				return rs.getLong("structureId");
+			}
+
+			return 0;
+		}
+	}
+
 	protected void updateTikaRawMetadataDDMStructure() throws Exception {
 		long classNameId = addRawMetadataProcessorClassName();
 
-		long ddmStructureId = getDDMStructureId(
-			"TIKARAWMETADATA", classNameId);
+		long ddmStructureId = getDDMStructureId("TIKARAWMETADATA", classNameId);
 
 		if (ddmStructureId != 0) {
 			return;
@@ -107,27 +127,6 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 				ps.execute();
 			}
-		}
-	}
-
-	protected long getDDMStructureId(String structureKey, long classNameId)
-		throws Exception {
-
-		try (LoggingTimer loggingTimer = new LoggingTimer();
-			PreparedStatement ps = connection.prepareStatement(
-				"select structureId from DDMStructure where structureKey = ? " +
-					"and classNameId = ?")) {
-
-			ps.setString(1, structureKey);
-			ps.setLong(2, classNameId);
-
-			ResultSet rs = ps.executeQuery();
-
-			if (rs.next()) {
-				return rs.getLong("structureId");
-			}
-
-			return 0;
 		}
 	}
 
