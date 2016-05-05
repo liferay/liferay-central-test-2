@@ -86,7 +86,7 @@ public class LPKGDeployerImpl implements LPKGDeployer {
 
 		_warWrapperBundlerTracker = new BundleTracker<>(
 			bundleContext, ~Bundle.UNINSTALLED,
-			new WarWrapperBundleTrackCustomizer(_lpkgWarBundleRegistry));
+			new War1WrapperBundleTrackCustomizer(_lpkgWarBundleRegistry));
 
 		_warWrapperBundlerTracker.open();
 

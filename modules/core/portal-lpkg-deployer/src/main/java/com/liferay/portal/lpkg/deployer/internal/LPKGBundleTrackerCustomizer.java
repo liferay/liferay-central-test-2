@@ -25,7 +25,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.lpkg.deployer.LPKGWarBundleRegistry;
 import com.liferay.portal.lpkg.deployer.internal.wrapper.bundle.URLStreamHandlerServiceServiceTrackerCustomizer;
-import com.liferay.portal.lpkg.deployer.internal.wrapper.bundle.WarBundleWrapperBundleActivator;
+import com.liferay.portal.lpkg.deployer.internal.wrapper.bundle.War1BundleWrapperBundleActivator;
 import com.liferay.portal.util.PropsValues;
 
 import java.io.IOException;
@@ -232,7 +232,7 @@ public class LPKGBundleTrackerCustomizer
 				_writeManifest(bundle, contextName, lpkgURL, jarOutputStream);
 
 				_writeClasses(
-					jarOutputStream, WarBundleWrapperBundleActivator.class,
+					jarOutputStream, War1BundleWrapperBundleActivator.class,
 					URLStreamHandlerServiceServiceTrackerCustomizer.class);
 			}
 
@@ -277,7 +277,7 @@ public class LPKGBundleTrackerCustomizer
 
 		attributes.putValue(
 			Constants.BUNDLE_ACTIVATOR,
-			WarBundleWrapperBundleActivator.class.getName());
+			War1BundleWrapperBundleActivator.class.getName());
 		attributes.putValue(Constants.BUNDLE_MANIFESTVERSION, "2");
 		attributes.putValue(
 			Constants.BUNDLE_SYMBOLICNAME,
