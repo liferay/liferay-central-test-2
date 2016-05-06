@@ -53,6 +53,9 @@ public class AlternateKeywordQueryHitsProcessor implements HitsProcessor {
 			return true;
 		}
 
+		FacetedSearcher facetedSearcher =
+			facetedSearcherManager.createFacetedSearcher();
+
 		String spellCheckedKeywords = hits.getCollatedSpellCheckResult();
 
 		searchContext.overrideKeywords(spellCheckedKeywords);
@@ -67,9 +70,6 @@ public class AlternateKeywordQueryHitsProcessor implements HitsProcessor {
 		QueryConfig queryConfig = searchContext.getQueryConfig();
 
 		queryConfig.setHitsProcessingEnabled(false);
-
-		FacetedSearcher facetedSearcher =
-			facetedSearcherManager.createFacetedSearcher();
 
 		Hits alternateResults = facetedSearcher.search(searchContext);
 

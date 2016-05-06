@@ -91,6 +91,12 @@ public class SearchDisplayContext {
 		SearchContainer<Document> searchContainer = new SearchContainer<>(
 			_renderRequest, getPortletURL(), null, emptyResultMessage);
 
+		FacetedSearcherManager facetedSearcherManager =
+			FacetedSearcherManagerUtil.getFacetedSearcherManager();
+
+		FacetedSearcher facetedSearcher =
+			facetedSearcherManager.createFacetedSearcher();
+
 		SearchContext searchContext = SearchContextFactory.getInstance(request);
 
 		searchContext.setAttribute("paginationType", "more");
@@ -103,12 +109,6 @@ public class SearchDisplayContext {
 		addScopeFacet(searchContext);
 
 		addEnabledSearchFacets(themeDisplay.getCompanyId(), searchContext);
-
-		FacetedSearcherManager facetedSearcherManager =
-			FacetedSearcherManagerUtil.getFacetedSearcherManager();
-
-		FacetedSearcher facetedSearcher =
-			facetedSearcherManager.createFacetedSearcher();
 
 		Hits hits = facetedSearcher.search(searchContext);
 
