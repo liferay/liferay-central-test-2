@@ -99,7 +99,7 @@ public class AssetTagNamesFacetTest extends BaseFacetedSearcherTestCase {
 			});
 	}
 
-	protected static SearchContext getSearchContext(String keywords)
+	protected SearchContext getSearchContext(String keywords)
 		throws Exception {
 
 		SearchContext searchContext = SearchContextTestUtil.getSearchContext();

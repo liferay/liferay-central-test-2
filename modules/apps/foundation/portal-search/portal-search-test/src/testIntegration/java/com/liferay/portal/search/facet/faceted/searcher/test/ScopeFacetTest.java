@@ -140,9 +140,7 @@ public class ScopeFacetTest extends BaseFacetedSearcherTestCase {
 		assertFrequencies(searchContext, Collections.singletonMap(group1, 1));
 	}
 
-	protected static SearchContext getSearchContext(String keywords)
-		throws Exception {
-
+	protected SearchContext getSearchContext(String keywords) throws Exception {
 		SearchContext searchContext = SearchContextTestUtil.getSearchContext();
 
 		searchContext.setKeywords(keywords);

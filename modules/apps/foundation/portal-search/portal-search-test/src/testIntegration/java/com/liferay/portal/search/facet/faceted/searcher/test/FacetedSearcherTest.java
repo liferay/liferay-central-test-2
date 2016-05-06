@@ -85,15 +85,13 @@ public class FacetedSearcherTest extends BaseFacetedSearcherTestCase {
 		assertSearch("Liferay", 0);
 	}
 
-	protected static void deactivate(Group group) {
+	protected void deactivate(Group group) {
 		group.setActive(false);
 
 		GroupLocalServiceUtil.updateGroup(group);
 	}
 
-	protected static SearchContext getSearchContext(String keywords)
-		throws Exception {
-
+	protected SearchContext getSearchContext(String keywords) throws Exception {
 		SearchContext searchContext = SearchContextTestUtil.getSearchContext();
 
 		searchContext.setKeywords(keywords);
