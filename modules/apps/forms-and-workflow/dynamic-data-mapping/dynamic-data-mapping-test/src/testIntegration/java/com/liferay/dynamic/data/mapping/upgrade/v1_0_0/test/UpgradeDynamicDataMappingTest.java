@@ -1442,10 +1442,10 @@ public class UpgradeDynamicDataMappingTest {
 	protected void setUpUpgradeDynamicDataMapping() {
 		Registry registry = RegistryUtil.getRegistry();
 
-		UpgradeStepRegistrator ddmUpgradeStepRegistror = registry.getService(
+		UpgradeStepRegistrator upgradeStepRegistror = registry.getService(
 			"com.liferay.dynamic.data.mapping.upgrade.DDMServiceUpgrade");
 
-		ddmUpgradeStepRegistror.register(
+		upgradeStepRegistror.register(
 			new UpgradeStepRegistrator.Registry() {
 
 				@Override
