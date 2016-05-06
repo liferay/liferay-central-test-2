@@ -17,7 +17,6 @@ package com.liferay.portal.workflow.kaleo.upgrade;
 import com.liferay.portal.upgrade.registry.UpgradeStepRegistrator;
 import com.liferay.portal.workflow.kaleo.upgrade.v1_0_0.UpgradeKaleoTaskInstanceToken;
 import com.liferay.portal.workflow.kaleo.upgrade.v1_1_0.UpgradeWorkflowContext;
-import com.liferay.portal.workflow.kaleo.upgrade.v1_2_0.UpgradeSchema;
 import com.liferay.portal.workflow.kaleo.upgrade.v1_2_1.UpgradeKaleoLog;
 import com.liferay.portal.workflow.kaleo.upgrade.v1_2_1.UpgradeKaleoNotificationRecipient;
 import com.liferay.portal.workflow.kaleo.upgrade.v1_3_0.UpgradeClassNames;
@@ -46,7 +45,8 @@ public class KaleoServiceUpgrade implements UpgradeStepRegistrator {
 
 		registry.register(
 			"com.liferay.portal.workflow.kaleo.service", "1.1.0", "1.2.0",
-			new UpgradeSchema());
+			new com.liferay.portal.workflow.kaleo.upgrade.v1_2_0.
+				UpgradeSchema());
 
 		registry.register(
 			"com.liferay.portal.workflow.kaleo.service", "1.2.0", "1.2.1",
