@@ -14,8 +14,6 @@
 
 package com.liferay.product.navigation.product.menu.web.upgrade.v1_0_0;
 
-import com.liferay.portal.kernel.dao.db.DB;
-import com.liferay.portal.kernel.dao.db.DBManagerUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
@@ -36,9 +34,7 @@ public class UpgradePortletPreferences extends UpgradeProcess {
 			_log.debug("Delete control panel menu portlet preferences");
 		}
 
-		DB db = DBManagerUtil.getDB();
-
-		db.runSQL(
+		runSQL(
 			"delete from PortletPreferences where portletId = " +
 				_CONTROL_PANEL_MENU_PORTLET);
 	}
@@ -48,9 +44,7 @@ public class UpgradePortletPreferences extends UpgradeProcess {
 			_log.debug("Delete dockbar portlet preferences");
 		}
 
-		DB db = DBManagerUtil.getDB();
-
-		db.runSQL(
+		runSQL(
 			"delete from PortletPreferences where portletId = " +
 				_DOCKBAR_PORTLET);
 	}
