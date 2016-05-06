@@ -783,18 +783,18 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		long companyId, long userId, String portletId, long groupId,
 		String type, String keywords, int start, int end) {
 
+		FacetedSearcherManager facetedSearcherManager =
+			FacetedSearcherManagerUtil.getFacetedSearcherManager();
+
+		FacetedSearcher facetedSearcher =
+			facetedSearcherManager.createFacetedSearcher();
+
 		SearchContext searchContext = createSearchContext(
 			companyId, userId, portletId, groupId, keywords, start, end);
 
 		addAssetEntriesFacet(searchContext);
 
 		addScopeFacet(searchContext);
-
-		FacetedSearcherManager facetedSearcherManager =
-			FacetedSearcherManagerUtil.getFacetedSearcherManager();
-
-		FacetedSearcher facetedSearcher =
-			facetedSearcherManager.createFacetedSearcher();
 
 		try {
 			return facetedSearcher.search(searchContext);
