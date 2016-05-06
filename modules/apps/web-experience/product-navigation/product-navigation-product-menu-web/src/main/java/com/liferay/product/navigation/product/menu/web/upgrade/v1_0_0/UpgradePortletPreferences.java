@@ -25,11 +25,11 @@ public class UpgradePortletPreferences extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		_deleteControlPanelMenuPortletPreferences();
-		_deleteDockbarPortletPreferences();
+		deleteControlPanelMenuPortletPreferences();
+		deleteDockbarPortletPreferences();
 	}
 
-	private void _deleteControlPanelMenuPortletPreferences() throws Exception {
+	protected void deleteControlPanelMenuPortletPreferences() throws Exception {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Delete control panel menu portlet preferences");
 		}
@@ -37,7 +37,7 @@ public class UpgradePortletPreferences extends UpgradeProcess {
 		runSQL("delete from PortletPreferences where portletId = 160");
 	}
 
-	private void _deleteDockbarPortletPreferences() throws Exception {
+	protected void deleteDockbarPortletPreferences() throws Exception {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Delete dockbar portlet preferences");
 		}
