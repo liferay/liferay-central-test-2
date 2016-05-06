@@ -163,6 +163,7 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 
 		_dlFolderModelPermissions = ModelPermissionsFactory.create(
 			_DLFOLDER_GROUP_PERMISSIONS, _DLFOLDER_GUEST_PERMISSIONS);
+
 		_dlFolderModelPermissions.addRolePermissions(
 			RoleConstants.OWNER, _DLFOLDER_OWNER_PERMISSIONS);
 	}
@@ -2031,6 +2032,7 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 
 			_modelPermissions = ModelPermissionsFactory.create(
 				_groupPermissions, _guestPermissions);
+
 			_modelPermissions.addRolePermissions(
 				RoleConstants.OWNER, _ownerPermissions);
 		}
@@ -2224,10 +2226,6 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 				String name, String description, Timestamp lastPostDate)
 			throws Exception {
 
-			ServiceContext serviceContext = new ServiceContext();
-
-			serviceContext.setModelPermissions(_dlFolderModelPermissions);
-
 			DLFolder dlFolder = _dlFolderLocalService.createDLFolder(folderId);
 
 			dlFolder.setUuid(uuid);
@@ -2251,6 +2249,10 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 			dlFolder.setRestrictionType(0);
 
 			_dlFolderLocalService.updateDLFolder(dlFolder);
+
+			ServiceContext serviceContext = new ServiceContext();
+
+			serviceContext.setModelPermissions(_dlFolderModelPermissions);
 
 			_resourceLocalService.addModelResources(dlFolder, serviceContext);
 		}
@@ -2353,10 +2355,6 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 			throws PortalException {
 
 			try {
-				ServiceContext serviceContext = new ServiceContext();
-
-				serviceContext.setModelPermissions(_modelPermissions);
-
 				long dlFolderId = addDLFolderTree(ddmFormFieldName);
 
 				JSONObject jsonObject = JSONFactoryUtil.createJSONObject(
@@ -2401,6 +2399,12 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 					_userId, _userName, _createDate);
 
 				_dlFileEntryLocalService.updateDLFileEntry(dlFileEntry);
+
+				// Resources
+
+				ServiceContext serviceContext = new ServiceContext();
+
+				serviceContext.setModelPermissions(_modelPermissions);
 
 				_resourceLocalService.addModelResources(
 					dlFileEntry, serviceContext);
