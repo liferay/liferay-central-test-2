@@ -23,12 +23,6 @@ import com.liferay.portal.kernel.upgrade.UpgradeProcess;
  */
 public class UpgradePortletPreferences extends UpgradeProcess {
 
-	@Override
-	protected void doUpgrade() throws Exception {
-		deleteControlPanelMenuPortletPreferences();
-		deleteDockbarPortletPreferences();
-	}
-
 	protected void deleteControlPanelMenuPortletPreferences() throws Exception {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Delete control panel menu portlet preferences");
@@ -43,6 +37,12 @@ public class UpgradePortletPreferences extends UpgradeProcess {
 		}
 
 		runSQL("delete from PortletPreferences where portletId = 145");
+	}
+
+	@Override
+	protected void doUpgrade() throws Exception {
+		deleteControlPanelMenuPortletPreferences();
+		deleteDockbarPortletPreferences();
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
