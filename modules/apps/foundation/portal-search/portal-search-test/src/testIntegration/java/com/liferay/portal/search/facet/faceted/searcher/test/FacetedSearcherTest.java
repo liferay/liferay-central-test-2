@@ -85,20 +85,6 @@ public class FacetedSearcherTest extends BaseFacetedSearcherTestCase {
 		assertSearch("Liferay", 0);
 	}
 
-	protected void deactivate(Group group) {
-		group.setActive(false);
-
-		GroupLocalServiceUtil.updateGroup(group);
-	}
-
-	protected SearchContext getSearchContext(String keywords) throws Exception {
-		SearchContext searchContext = SearchContextTestUtil.getSearchContext();
-
-		searchContext.setKeywords(keywords);
-
-		return searchContext;
-	}
-
 	protected void assertSearch(final String tag, final int count)
 		throws Exception {
 
@@ -118,6 +104,20 @@ public class FacetedSearcherTest extends BaseFacetedSearcherTestCase {
 				}
 
 			});
+	}
+
+	protected void deactivate(Group group) {
+		group.setActive(false);
+
+		GroupLocalServiceUtil.updateGroup(group);
+	}
+
+	protected SearchContext getSearchContext(String keywords) throws Exception {
+		SearchContext searchContext = SearchContextTestUtil.getSearchContext();
+
+		searchContext.setKeywords(keywords);
+
+		return searchContext;
 	}
 
 }

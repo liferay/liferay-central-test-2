@@ -140,20 +140,6 @@ public class ScopeFacetTest extends BaseFacetedSearcherTestCase {
 		assertFrequencies(searchContext, Collections.singletonMap(group1, 1));
 	}
 
-	protected SearchContext getSearchContext(String keywords) throws Exception {
-		SearchContext searchContext = SearchContextTestUtil.getSearchContext();
-
-		searchContext.setKeywords(keywords);
-
-		ScopeFacet scopeFacet = new ScopeFacet(searchContext);
-
-		scopeFacet.setStatic(false);
-
-		searchContext.addFacet(scopeFacet);
-
-		return searchContext;
-	}
-
 	protected void assertFrequencies(
 			final SearchContext searchContext, Map<Group, Integer> frequencies)
 		throws Exception {
@@ -204,6 +190,20 @@ public class ScopeFacetTest extends BaseFacetedSearcherTestCase {
 				}
 
 			});
+	}
+
+	protected SearchContext getSearchContext(String keywords) throws Exception {
+		SearchContext searchContext = SearchContextTestUtil.getSearchContext();
+
+		searchContext.setKeywords(keywords);
+
+		ScopeFacet scopeFacet = new ScopeFacet(searchContext);
+
+		scopeFacet.setStatic(false);
+
+		searchContext.addFacet(scopeFacet);
+
+		return searchContext;
 	}
 
 }

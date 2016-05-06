@@ -1199,6 +1199,22 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		searchContext.addFacet(scopeFacet);
 	}
 
+	protected Company checkLogo(long companyId) throws PortalException {
+		Company company = companyPersistence.findByPrimaryKey(companyId);
+
+		long logoId = company.getLogoId();
+
+		if (logoId <= 0) {
+			logoId = counterLocalService.increment();
+
+			company.setLogoId(logoId);
+
+			company = companyPersistence.update(company);
+		}
+
+		return company;
+	}
+
 	protected SearchContext createSearchContext(
 		long companyId, long userId, String portletId, long groupId,
 		String keywords, int start, int end) {
@@ -1224,22 +1240,6 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		searchContext.setUserId(userId);
 
 		return searchContext;
-	}
-
-	protected Company checkLogo(long companyId) throws PortalException {
-		Company company = companyPersistence.findByPrimaryKey(companyId);
-
-		long logoId = company.getLogoId();
-
-		if (logoId <= 0) {
-			logoId = counterLocalService.increment();
-
-			company.setLogoId(logoId);
-
-			company = companyPersistence.update(company);
-		}
-
-		return company;
 	}
 
 	protected Company doDeleteCompany(final long companyId)
