@@ -469,6 +469,7 @@ if (Validator.isNotNull(keywords)) {
 			closeCaption: '<%= UnicodeLanguageUtil.get(request, tabName) %>',
 
 			<c:if test="<%= uploadURL != null %>">
+
 				<%
 				String imageEditorPortletId = PortletProviderUtil.getPortletId(Image.class.getName(), PortletProvider.Action.EDIT);
 				%>
