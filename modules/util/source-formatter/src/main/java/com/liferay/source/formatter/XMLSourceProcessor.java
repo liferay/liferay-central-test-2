@@ -1238,7 +1238,7 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 			if (!importFile) {
 				processErrorMessage(
 					fileName,
-					fileName + " contains an ant element pointing to " +
+					fileName + " contains an Ant element pointing to " +
 						"non-existing " + buildfileName);
 			}
 
