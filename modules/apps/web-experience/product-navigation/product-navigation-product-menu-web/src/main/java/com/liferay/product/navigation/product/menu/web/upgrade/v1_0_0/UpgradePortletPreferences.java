@@ -27,13 +27,13 @@ public class UpgradePortletPreferences extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		_deleteControlPanelMenuPreferences();
-		_deleteDockbarPreferences();
+		_deleteControlPanelMenuPortletPreferences();
+		_deleteDockbarPortletPreferences();
 	}
 
-	private void _deleteControlPanelMenuPreferences() throws Exception {
+	private void _deleteControlPanelMenuPortletPreferences() throws Exception {
 		if (_log.isDebugEnabled()) {
-			_log.debug("Delete control panel menu preferences");
+			_log.debug("Delete control panel menu portlet preferences");
 		}
 
 		DB db = DBManagerUtil.getDB();
@@ -43,9 +43,9 @@ public class UpgradePortletPreferences extends UpgradeProcess {
 				_CONTROL_PANEL_MENU_PORTLET);
 	}
 
-	private void _deleteDockbarPreferences() throws Exception {
+	private void _deleteDockbarPortletPreferences() throws Exception {
 		if (_log.isDebugEnabled()) {
-			_log.debug("Delete dockbar preferences");
+			_log.debug("Delete dockbar portlet preferences");
 		}
 
 		DB db = DBManagerUtil.getDB();
