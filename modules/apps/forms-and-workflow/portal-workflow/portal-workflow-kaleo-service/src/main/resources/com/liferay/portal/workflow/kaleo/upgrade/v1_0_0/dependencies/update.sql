@@ -40,3 +40,5 @@ create table KaleoTimerInstanceToken (
 	completionDate DATE null,
 	workflowContext TEXT null
 );
+
+COMMIT_TRANSACTION;
