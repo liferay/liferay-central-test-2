@@ -1183,7 +1183,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		_clearCompanyCache(companyId);
 	}
 
-	protected static void addAssetEntriesFacet(SearchContext searchContext) {
+	protected void addAssetEntriesFacet(SearchContext searchContext) {
 		Facet assetEntriesFacet = new AssetEntriesFacet(searchContext);
 
 		assetEntriesFacet.setStatic(true);
@@ -1191,7 +1191,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		searchContext.addFacet(assetEntriesFacet);
 	}
 
-	protected static void addScopeFacet(SearchContext searchContext) {
+	protected void addScopeFacet(SearchContext searchContext) {
 		Facet scopeFacet = new ScopeFacet(searchContext);
 
 		scopeFacet.setStatic(true);
@@ -1199,7 +1199,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		searchContext.addFacet(scopeFacet);
 	}
 
-	protected static SearchContext createSearchContext(
+	protected SearchContext createSearchContext(
 		long companyId, long userId, String portletId, long groupId,
 		String keywords, int start, int end) {
 
