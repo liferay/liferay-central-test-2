@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.util;
+package com.liferay.shopping.util;
 
 import java.util.Arrays;
 
