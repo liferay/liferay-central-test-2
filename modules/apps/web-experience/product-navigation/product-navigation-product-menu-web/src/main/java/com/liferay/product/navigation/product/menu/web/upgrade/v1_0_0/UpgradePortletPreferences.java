@@ -34,9 +34,7 @@ public class UpgradePortletPreferences extends UpgradeProcess {
 			_log.debug("Delete control panel menu portlet preferences");
 		}
 
-		runSQL(
-			"delete from PortletPreferences where portletId = " +
-				_CONTROL_PANEL_MENU_PORTLET);
+		runSQL("delete from PortletPreferences where portletId = 160");
 	}
 
 	private void _deleteDockbarPortletPreferences() throws Exception {
@@ -44,14 +42,8 @@ public class UpgradePortletPreferences extends UpgradeProcess {
 			_log.debug("Delete dockbar portlet preferences");
 		}
 
-		runSQL(
-			"delete from PortletPreferences where portletId = " +
-				_DOCKBAR_PORTLET);
+		runSQL("delete from PortletPreferences where portletId = 145");
 	}
-
-	private static final String _CONTROL_PANEL_MENU_PORTLET = "160";
-
-	private static final String _DOCKBAR_PORTLET = "145";
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		UpgradePortletPreferences.class);
