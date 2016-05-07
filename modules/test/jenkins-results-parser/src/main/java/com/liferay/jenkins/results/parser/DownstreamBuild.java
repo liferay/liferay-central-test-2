@@ -93,7 +93,7 @@ public class DownstreamBuild extends BaseBuild {
 		JenkinsResultsParserUtil.toString(
 			JenkinsResultsParserUtil.getLocalURL(invocationURL));
 
-		System.out.println("Reinvoked build: " + invocationURL);
+		System.out.println("Reinvoked: " + invocationURL);
 	}
 
 	@Override
