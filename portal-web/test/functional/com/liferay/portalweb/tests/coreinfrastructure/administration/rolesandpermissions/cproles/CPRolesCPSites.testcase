@@ -375,8 +375,9 @@
 
 		<execute macro="Navigator#openURL" />
 
-		<execute function="AssertClick#assertTextClickAtClickDockbar" locator1="ControlMenu#ADMIN" value1="Admin" />
-		<execute function="AssertClick" locator1="ControlMenu#ADMIN_CONTROL_PANEL" value1="Control Panel" />
+		<execute macro="ProductMenu#gotoControlPanelSites">
+			<var name="portlet" value="Sites" />
+		</execute>
 
 		<var name="key_siteName" value="Site Name" />
 
@@ -390,8 +391,9 @@
 
 		<execute macro="Navigator#openURL" />
 
-		<execute function="AssertClick#assertTextClickAtClickDockbar" locator1="ControlMenu#ADMIN" value1="Admin" />
-		<execute function="AssertClick" locator1="ControlMenu#ADMIN_CONTROL_PANEL" value1="Control Panel" />
+		<execute macro="ProductMenu#gotoControlPanelSites">
+			<var name="portlet" value="Sites" />
+		</execute>
 
 		<var name="key_siteName" value="Child SiteName1" />
 
@@ -414,8 +416,9 @@
 
 		<execute macro="Navigator#openURL" />
 
-		<execute function="AssertClick#assertTextClickAtClickDockbar" locator1="ControlMenu#ADMIN" value1="Admin" />
-		<execute function="AssertClick" locator1="ControlMenu#ADMIN_CONTROL_PANEL" value1="Control Panel" />
+		<execute macro="ProductMenu#gotoControlPanelSites">
+			<var name="portlet" value="Sites" />
+		</execute>
 
 		<var name="key_siteName" value="Child SiteName1" />
 
@@ -438,8 +441,9 @@
 
 		<execute macro="Navigator#openURL" />
 
-		<execute function="AssertClick#assertTextClickAtClickDockbar" locator1="ControlMenu#ADMIN" value1="Admin" />
-		<execute function="AssertClick" locator1="ControlMenu#ADMIN_CONTROL_PANEL" value1="Control Panel" />
+		<execute macro="ProductMenu#gotoControlPanelSites">
+			<var name="portlet" value="Sites" />
+		</execute>
 
 		<var name="key_siteName" value="Child SiteName1" />
 
@@ -491,8 +495,9 @@
 
 		<execute macro="Navigator#openURL" />
 
-		<execute function="AssertClick#assertTextClickAtClickDockbar" locator1="ControlMenu#ADMIN" value1="Admin" />
-		<execute function="AssertClick" locator1="ControlMenu#ADMIN_CONTROL_PANEL" value1="Control Panel" />
+		<execute macro="ProductMenu#gotoControlPanelSites">
+			<var name="portlet" value="Sites" />
+		</execute>
 
 		<execute function="AssertTextEquals" locator1="Message#INFO" value1="No sites were found." />
 
@@ -514,8 +519,9 @@
 
 		<execute macro="Navigator#openURL" />
 
-		<execute function="AssertClick#assertTextClickAtClickDockbar" locator1="ControlMenu#ADMIN" value1="Admin" />
-		<execute function="AssertClick" locator1="ControlMenu#ADMIN_CONTROL_PANEL" value1="Control Panel" />
+		<execute macro="ProductMenu#gotoControlPanelSites">
+			<var name="portlet" value="Sites" />
+		</execute>
 
 		<var name="key_siteName" value="Liferay" />
 
@@ -545,8 +551,9 @@
 
 		<execute macro="Navigator#openURL" />
 
-		<execute function="AssertClick#assertTextClickAtClickDockbar" locator1="ControlMenu#ADMIN" value1="Admin" />
-		<execute function="AssertClick" locator1="ControlMenu#ADMIN_CONTROL_PANEL" value1="Control Panel" />
+		<execute macro="ProductMenu#gotoControlPanelSites">
+			<var name="portlet" value="Sites" />
+		</execute>
 
 		<execute function="AssertTextEquals" locator1="Message#INFO" value1="No sites were found." />
 	</command>
