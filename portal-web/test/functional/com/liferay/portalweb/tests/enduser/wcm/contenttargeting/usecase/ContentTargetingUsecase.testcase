@@ -2988,7 +2988,7 @@
 			<var name="campaignName" value="Campaign Name" />
 			<var name="campaignPriority" value="2" />
 			<var name="campaignStatus" value="Started" />
-			<var name="userSegmentSelect" value="User Segment Name"/>
+			<var name="userSegmentSelect" value="User Segment Name" />
 		</execute>
 	</command>
 
@@ -3144,8 +3144,8 @@
 		</execute>
 
 		<execute macro="User#editUserGenderCP">
-			<var name="userGender" value="Female" />
 			<var name="userFirstName" value="female" />
+			<var name="userGender" value="Female" />
 		</execute>
 
 		<execute macro="Navigator#openSiteURL">
