@@ -59,21 +59,23 @@ public class LPKGDeployerTest {
 
 		BundleContext bundleContext = testBundle.getBundleContext();
 
-		final String deploymentDir = bundleContext.getProperty(
+		final String lpkgDeployerDirString = bundleContext.getProperty(
 			"lpkg.deployer.dir");
 
 		Assert.assertNotNull(
-			"Missing configuration for \"lpkg.deployer.dir\"", deploymentDir);
+			"The property \"lpkg.deployer.dir\" is null",
+			lpkgDeployerDirString);
 
-		Path deploymentDirPath = Paths.get(deploymentDir);
+		Path lpkgDeployerDirPath = Paths.get(lpkgDeployerDirString);
 
 		Assert.assertTrue(
-			deploymentDir + " does not exist", Files.exists(deploymentDirPath));
+			"The path " + lpkgDeployerDirString + " does not exist",
+			Files.exists(lpkgDeployerDirPath));
 
 		final List<File> lpkgFiles = new ArrayList<>();
 
 		Files.walkFileTree(
-			deploymentDirPath,
+			lpkgDeployerDirPath,
 			new SimpleFileVisitor<Path>() {
 
 				@Override
@@ -89,7 +91,7 @@ public class LPKGDeployerTest {
 					if (!fileName.endsWith(".lpkg")) {
 						Assert.fail(
 							"Unexpected file " + filePath + " in " +
-								deploymentDir);
+								lpkgDeployerDirString);
 					}
 
 					lpkgFiles.add(filePath.toFile());
@@ -100,7 +102,8 @@ public class LPKGDeployerTest {
 			});
 
 		Assert.assertFalse(
-			"No lpkg file in " + deploymentDir, lpkgFiles.isEmpty());
+			"There are no LPKG files in " + lpkgDeployerDirString,
+			lpkgFiles.isEmpty());
 
 		ServiceTracker<LPKGDeployer, LPKGDeployer> serviceTracker =
 			new ServiceTracker<>(bundleContext, LPKGDeployer.class, null);
@@ -111,22 +114,22 @@ public class LPKGDeployerTest {
 
 		serviceTracker.close();
 
-		Map<Bundle, List<Bundle>> bundleMap =
+		Map<Bundle, List<Bundle>> deployedLPKGBundles =
 			lpkgDeployer.getDeployedLPKGBundles();
 
-		for (File file : lpkgFiles) {
+		for (File lpkgFile : lpkgFiles) {
 			Bundle lpkgBundle = bundleContext.getBundle(
-				file.getCanonicalPath());
+				lpkgFile.getCanonicalPath());
 
 			Assert.assertNotNull(
-				"No matching lpkg bundle for " + file.getCanonicalPath(),
+				"No matching LPKG bundle for " + lpkgFile.getCanonicalPath(),
 				lpkgBundle);
 
 			List<Bundle> expectedAppBundles = new ArrayList<>(
-				bundleMap.get(lpkgBundle));
+				deployedLPKGBundles.get(lpkgBundle));
 
 			Assert.assertNotNull(
-				"Registered lpkg bundles " + bundleMap.keySet() +
+				"Registered LPKG bundles " + deployedLPKGBundles.keySet() +
 					" do not contain " + lpkgBundle,
 				expectedAppBundles);
 
@@ -134,7 +137,7 @@ public class LPKGDeployerTest {
 
 			List<Bundle> actualAppBundles = new ArrayList<>();
 
-			ZipFile zipFile = new ZipFile(file);
+			ZipFile zipFile = new ZipFile(lpkgFile);
 
 			Enumeration<? extends ZipEntry> enumeration = zipFile.entries();
 
@@ -185,7 +188,7 @@ public class LPKGDeployerTest {
 					String location = sb.toString();
 
 					Assert.assertNotNull(
-						"Missing war bundle for wrapper bundle " + bundle +
+						"Missing WAR bundle for wrapper bundle " + bundle +
 							" with expected location " + location,
 						bundleContext.getBundle(location));
 				}
@@ -194,8 +197,8 @@ public class LPKGDeployerTest {
 			Collections.sort(actualAppBundles);
 
 			Assert.assertEquals(
-				"For lpkg bundle " + lpkgBundle + ", expected app bundles " +
-					expectedAppBundles + ", actual app bundles " +
+				"LPKG bundle " + lpkgBundle + " expects app bundles " +
+					expectedAppBundles + " but has actual app bundles " +
 						actualAppBundles,
 				expectedAppBundles, actualAppBundles);
 		}
