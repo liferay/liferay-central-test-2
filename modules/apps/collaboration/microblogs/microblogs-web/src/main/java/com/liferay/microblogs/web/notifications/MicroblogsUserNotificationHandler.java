@@ -56,6 +56,8 @@ public class MicroblogsUserNotificationHandler
 		JSONObject jsonObject, AssetRenderer<?> assetRenderer,
 		ServiceContext serviceContext) {
 
+		String title = StringPool.BLANK;
+
 		ResourceBundle resourceBundle =
 			_resourceBundleLoader.loadResourceBundle(
 				serviceContext.getLanguageId());
@@ -63,8 +65,6 @@ public class MicroblogsUserNotificationHandler
 		MicroblogsEntry microblogsEntry =
 			_microblogsEntryLocalService.fetchMicroblogsEntry(
 				assetRenderer.getClassPK());
-
-		String title = StringPool.BLANK;
 
 		String userFullName = HtmlUtil.escape(
 			PortalUtil.getUserName(
