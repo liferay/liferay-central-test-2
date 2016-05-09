@@ -69,8 +69,8 @@ public class UpgradeSharding extends UpgradeProcess {
 		catch (SQLException sqle) {
 			if (_log.isInfoEnabled()) {
 				_log.info(
-					"Skip dropping control table " + tableName + " because it" +
-						" does not exist in the target shard");
+					"Unable to drop control table " + tableName +
+						" because it  does not exist in the target shard");
 			}
 		}
 
