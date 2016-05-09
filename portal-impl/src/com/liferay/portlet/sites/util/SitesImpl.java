@@ -243,6 +243,13 @@ public class SitesImpl implements Sites {
 			boolean linkEnabled)
 		throws Exception {
 
+		Locale siteDefaultLocale = LocaleThreadLocal.getSiteDefaultLocale();
+
+		LayoutTypePortlet targetLayoutType =
+			(LayoutTypePortlet)targetLayout.getLayoutType();
+
+		List<String> targetLayoutPortletIds = targetLayoutType.getPortletIds();
+
 		Layout layoutPrototypeLayout = layoutPrototype.getLayout();
 
 		ServiceContext serviceContext =
@@ -251,13 +258,6 @@ public class SitesImpl implements Sites {
 		serviceContext.setAttribute("layoutPrototypeLinkEnabled", linkEnabled);
 		serviceContext.setAttribute(
 			"layoutPrototypeUuid", layoutPrototype.getUuid());
-
-		LayoutTypePortlet targetLayoutType =
-			(LayoutTypePortlet)targetLayout.getLayoutType();
-
-		List<String> targetLayoutPortletIds = targetLayoutType.getPortletIds();
-
-		Locale siteDefaultLocale = LocaleThreadLocal.getSiteDefaultLocale();
 
 		try {
 			Locale targetSiteDefaultLocale = PortalUtil.getSiteDefaultLocale(
