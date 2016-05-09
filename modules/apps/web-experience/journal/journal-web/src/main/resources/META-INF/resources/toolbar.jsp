@@ -126,17 +126,17 @@ String searchContainerId = ParamUtil.getString(request, "searchContainerId");
 <aui:script use="liferay-item-selector-dialog">
 	var form = $(document.<portlet:namespace />fm);
 
-	<portlet:renderURL var="viewDDMStructureArticlesURL">
-		<portlet:param name="navigation" value="structure" />
-		<portlet:param name="folderId" value="<%= String.valueOf(JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID) %>" />
-		<portlet:param name="showEditActions" value="<%= String.valueOf(journalDisplayContext.isShowEditActions()) %>" />
-	</portlet:renderURL>
-
 	<portlet:renderURL var="selectStructureURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
 		<portlet:param name="mvcPath" value="/select_structure.jsp" />
 		<portlet:param name="folderId" value="<%= String.valueOf(journalDisplayContext.getFolderId()) %>" />
 		<portlet:param name="navigationStartsOn" value="<%= DDMNavigationHelper.SELECT_STRUCTURE %>" />
 		<portlet:param name="ddmStructureKey" value="<%= journalDisplayContext.getDDMStructureKey() %>" />
+	</portlet:renderURL>
+
+	<portlet:renderURL var="viewDDMStructureArticlesURL">
+		<portlet:param name="navigation" value="structure" />
+		<portlet:param name="folderId" value="<%= String.valueOf(JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID) %>" />
+		<portlet:param name="showEditActions" value="<%= String.valueOf(journalDisplayContext.isShowEditActions()) %>" />
 	</portlet:renderURL>
 
 	$('#<portlet:namespace />structures').on(
