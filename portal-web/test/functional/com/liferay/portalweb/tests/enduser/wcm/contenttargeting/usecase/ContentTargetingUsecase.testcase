@@ -2377,6 +2377,8 @@
 			<var name="portlet" value="Web Content" />
 		</execute>
 
+		<execute macro="Navigator#gotoStagedView" />
+
 		<execute macro="WebContentNavigator#gotoAddCP" />
 
 		<execute macro="WebContent#addWithCategoryCP">
