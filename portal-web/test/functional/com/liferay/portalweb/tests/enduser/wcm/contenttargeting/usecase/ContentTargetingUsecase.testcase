@@ -2891,7 +2891,7 @@
 			<var name="campaignPriorityField" value="3" />
 			<var name="campaignStartDate" value="1/1/2015" />
 			<var name="campaignStartTime" value="12:00 AM" />
-			<var name="userSegmentSelect" value="User Segment Name (Global)" />
+			<var name="userSegmentSelect" value="User Segment Name" />
 		</execute>
 
 		<execute macro="ContentTargetingCampaign#saveCP" />
@@ -2909,7 +2909,7 @@
 			<var name="campaignName" value="Campaign Name" />
 			<var name="campaignPriority" value="3" />
 			<var name="campaignStatus" value="Started" />
-			<var name="userSegmentSelect" value="User Segment Name (Global)" />
+			<var name="userSegmentSelect" value="User Segment Name" />
 		</execute>
 	</command>
 
