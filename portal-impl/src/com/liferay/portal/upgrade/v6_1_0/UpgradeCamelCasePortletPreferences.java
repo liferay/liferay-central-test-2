@@ -82,6 +82,7 @@ public class UpgradeCamelCasePortletPreferences
 
 		for (Map.Entry<String, String[]> entry : preferencesMap.entrySet()) {
 			String oldName = entry.getKey();
+
 			String newName = _camelCasePreferenceNames.get(oldName);
 
 			if (Validator.isNull(newName)) {
