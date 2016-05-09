@@ -21,9 +21,7 @@ String tabs1 = ParamUtil.getString(request, "tabs1", "structures");
 
 long groupId = ParamUtil.getLong(request, "groupId", themeDisplay.getSiteGroupId());
 
-String title = ddmDisplay.getTitle(locale);
-
-String scopedLabel = Validator.isNull(scopeTitle) ? title : scopeTitle;
+String scopedLabel = Validator.isNull(scopeTitle) ? ddmDisplay.getTitle(locale) : scopeTitle;
 %>
 
 <portlet:renderURL var="portletURL">
