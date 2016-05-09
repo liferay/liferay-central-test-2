@@ -64,7 +64,7 @@ import org.osgi.util.tracker.ServiceTrackerCustomizer;
 	configurationPid = "com.liferay.portal.upgrade.internal.configuration.ReleaseManagerConfiguration",
 	configurationPolicy = ConfigurationPolicy.OPTIONAL, immediate = true,
 	property = {
-		"osgi.command.function=incomplete", "osgi.command.function=execute",
+		"osgi.command.function=execute", "osgi.command.function=incomplete",
 		"osgi.command.function=list", "osgi.command.scope=upgrade"
 	},
 	service = Object.class
