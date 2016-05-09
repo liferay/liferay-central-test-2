@@ -15,8 +15,6 @@
 package com.liferay.portal.upgrade.v7_0_0;
 
 import com.liferay.portal.dao.jdbc.spring.DataSourceFactoryBean;
-import com.liferay.portal.kernel.dao.db.DB;
-import com.liferay.portal.kernel.dao.db.DBManagerUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
@@ -175,9 +173,7 @@ public class UpgradeSharding extends UpgradeProcess {
 	protected void dropTable(Connection connection, String tableName)
 		throws IOException, SQLException {
 
-		DB db = DBManagerUtil.getDB();
-
-		db.runSQL(connection, "drop table " + tableName);
+		runSQL(connection, "drop table " + tableName);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Deleted table " + tableName);
