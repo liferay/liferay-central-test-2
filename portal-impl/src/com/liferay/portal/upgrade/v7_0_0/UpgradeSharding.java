@@ -60,7 +60,7 @@ public class UpgradeSharding extends UpgradeProcess {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
 						"Control table " + tableName + " should not contain " +
-							"data in a non-default shard.");
+							"data in a nondefault shard");
 				}
 			}
 
