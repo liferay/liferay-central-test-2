@@ -1281,6 +1281,11 @@
 
 		<execute macro="FormsAdminNavigator#gotoView" />
 
+		<execute macro="FormFields#viewParagraphField">
+			<var name="fieldTitle" value="Paragraph" />
+			<var name="fieldValue" value="Paragraph body text." />
+		</execute>
+
 		<execute macro="FormsAdmin#viewTextEntry">
 			<var name="fieldLabel" value="SingleLineText" />
 			<var name="fieldName" value="SingleLineText" />
