@@ -132,7 +132,7 @@ String searchContainerId = ParamUtil.getString(request, "searchContainerId");
 		<portlet:param name="showEditActions" value="<%= String.valueOf(journalDisplayContext.isShowEditActions()) %>" />
 	</portlet:renderURL>
 
-	<portlet:renderURL var="selectStructure" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
+	<portlet:renderURL var="selectStructureURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
 		<portlet:param name="mvcPath" value="/select_structure.jsp" />
 		<portlet:param name="folderId" value="<%= String.valueOf(journalDisplayContext.getFolderId()) %>" />
 		<portlet:param name="navigationStartsOn" value="<%= DDMNavigationHelper.SELECT_STRUCTURE %>" />
@@ -162,7 +162,7 @@ String searchContainerId = ParamUtil.getString(request, "searchContainerId");
 					},
 					'strings.add': '<liferay-ui:message key="done" />',
 					title: '<liferay-ui:message key="select-structure" />',
-					url: '<%= selectStructure %>'
+					url: '<%= selectStructureURL %>'
 				}
 			);
 
