@@ -108,16 +108,13 @@ public class ContactsCenterUserNotificationHandler
 				new Object[] {creatorUserName});
 		}
 
-		boolean isOutdatedNotification =
-			(socialRequest.getModifiedDate() >
-				userNotificationEvent.getTimestamp());
-
 		if ((socialRequest.getStatus() !=
 				SocialRequestConstants.STATUS_PENDING) ||
-			isOutdatedNotification) {
+			(socialRequest.getModifiedDate() >
+				userNotificationEvent.getTimestamp())) {
 
 			return StringUtil.replace(
-				_BODY_TEMPLATE_DEFAULT, new String[] {"[$BODY$]", "[$TITLE$]"},
+				_BODY, new String[] {"[$BODY$]", "[$TITLE$]"},
 				new String[] {StringPool.BLANK, title});
 		}
 
@@ -208,7 +205,7 @@ public class ContactsCenterUserNotificationHandler
 			resourceBundleLoader, LanguageResources.RESOURCE_BUNDLE_LOADER);
 	}
 
-	private static final String _BODY_TEMPLATE_DEFAULT =
+	private static final String _BODY =
 		"<div class=\"title\">[$TITLE$]</div><div class=\"body\">[$BODY$]" +
 			"</div>";
 
