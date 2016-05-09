@@ -97,13 +97,11 @@ public class MultiLanguageNotificationRecipientEvaluator
 		ScriptLanguage scriptLanguage = ScriptLanguage.parse(language);
 
 		if (scriptLanguage.equals(ScriptLanguage.JAVA)) {
-			return
-				language + StringPool.COLON +
-					notificationRecipientEvaluatorClassName;
+			return language + StringPool.COLON +
+				notificationRecipientEvaluatorClassName;
 		}
-		else {
-			return language;
-		}
+
+		return language;
 	}
 
 	protected void removeNotificationRecipientEvaluator(

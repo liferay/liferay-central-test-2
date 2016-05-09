@@ -140,12 +140,11 @@ public class MultiLanguageTaskAssignmentSelector
 		ScriptLanguage scriptLanguage = ScriptLanguage.parse(language);
 
 		if (scriptLanguage.equals(ScriptLanguage.JAVA)) {
-			return
-				language + StringPool.COLON + taskAssignmentSelectorClassName;
+			return language + StringPool.COLON +
+				taskAssignmentSelectorClassName;
 		}
-		else {
-			return language;
-		}
+
+		return language;
 	}
 
 	protected void removeTaskAssignmentSelector(
