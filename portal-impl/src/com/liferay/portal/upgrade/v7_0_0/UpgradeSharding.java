@@ -36,12 +36,10 @@ import com.liferay.portal.upgrade.v7_0_0.util.VirtualHostTable;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.IOException;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,7 +56,7 @@ public class UpgradeSharding extends UpgradeProcess {
 		throws Exception {
 
 		try {
-			if (!isTableEmpty(targetConnection, tableName)) {
+			if (!hasRows(targetConnection, tableName)) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
 						"Control table " + tableName + " should not contain " +
@@ -196,21 +194,27 @@ public class UpgradeSharding extends UpgradeProcess {
 		}
 	}
 
-	protected boolean isTableEmpty(Connection connection, String tableName)
-		throws SQLException {
+	/**
+	 * @see com.liferay.portal.kernel.dao.db.BaseDBProcess#hasRows(String)
+	 */
+	protected boolean hasRows(Connection connection, String tableName) {
+		try (PreparedStatement ps = connection.prepareStatement(
+				"select count(*) from " + tableName);
+			ResultSet rs = ps.executeQuery()) {
 
-		try (LoggingTimer loggingTimer = new LoggingTimer();
-			PreparedStatement preparedStatement = connection.prepareStatement(
-				"select 1 from " + tableName);
-			ResultSet rs = preparedStatement.executeQuery()) {
+			while (rs.next()) {
+				int count = rs.getInt(1);
 
-			if (rs.next()) {
-				return false;
-			}
-			else {
-				return true;
+				if (count > 0) {
+					return true;
+				}
 			}
 		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		return false;
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
