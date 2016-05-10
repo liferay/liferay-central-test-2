@@ -1,6 +1,6 @@
 <definition>
 	<command name="configureDisplayContent">
-		<execute function="SelectFrame" locator1="IFrame#CONFIGURATION" />
+		<execute function="SelectFrame" locator1="IFrame#CONFIGURATION_DIALOG" />
 
 		<var method="selenium#getNumberDecrement('${rowNumber}')" name="rowIndexNumber" />
 
