@@ -218,7 +218,7 @@
 			<type>java.util.List</type>
 		</attribute>
 		<attribute>
-			<description>Whether to render all available portlets in the portlet list; otherwise, only the portlets that currently have content in them are rendered.</description>
+			<description>Whether to render all the available portlets in the portlet list; otherwise, only the portlets that currently have content in them are rendered.</description>
 			<name>showAllPortlets</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
