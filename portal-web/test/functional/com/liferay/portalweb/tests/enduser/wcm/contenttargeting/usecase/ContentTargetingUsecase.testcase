@@ -1414,6 +1414,10 @@
 
 		<execute function="AssertTextEquals" locator1="SitePagesExport#CURRENT_AND_PREVIOUS_STATUS" value1="Successful" />
 
+		<execute macro="Portlet#changeDisplayStyle">
+			<var name="displayStyle" value="list" />
+		</execute>
+
 		<var method="selenium#getText('//tr/td[7]//span/a')" name="valueName" />
 
 		<echo message="value name ${valueName}" />
@@ -1475,6 +1479,10 @@
 		<var name="key_larFileName" value="${larFileName}" />
 
 		<execute function="AssertTextEquals" locator1="SitePagesExport#CURRENT_AND_PREVIOUS_STATUS" value1="Successful" />
+
+		<execute macro="Portlet#changeDisplayStyle">
+			<var name="displayStyle" value="list" />
+		</execute>
 
 		<var method="selenium#getText('//tr/td[7]//span/a')" name="valueName" />
 
@@ -1543,6 +1551,10 @@
 		<var name="key_larFileName" value="${larFileName}" />
 
 		<execute function="AssertTextEquals" locator1="SitePagesExport#CURRENT_AND_PREVIOUS_STATUS" value1="Successful" />
+
+		<execute macro="Portlet#changeDisplayStyle">
+			<var name="displayStyle" value="list" />
+		</execute>
 
 		<var method="selenium#getText('//tr/td[7]//span/a')" name="valueName" />
 
@@ -1687,6 +1699,10 @@
 
 		<execute function="AssertTextEquals" locator1="SitePagesExport#CURRENT_AND_PREVIOUS_STATUS" value1="Successful" />
 
+		<execute macro="Portlet#changeDisplayStyle">
+			<var name="displayStyle" value="list" />
+		</execute>
+
 		<var method="selenium#getText('//tr/td[7]//span/a')" name="valueName" />
 
 		<echo message="value name ${valueName}" />
@@ -1783,6 +1799,10 @@
 
 		<execute function="AssertTextEquals" locator1="SitePagesExport#CURRENT_AND_PREVIOUS_STATUS" value1="Successful" />
 
+		<execute macro="Portlet#changeDisplayStyle">
+			<var name="displayStyle" value="list" />
+		</execute>
+
 		<var method="selenium#getText('//tr/td[7]//span/a')" name="valueName" />
 
 		<echo message="value name ${valueName}" />
@@ -1839,6 +1859,10 @@
 
 		<execute function="AssertTextEquals" locator1="SitePagesExport#CURRENT_AND_PREVIOUS_STATUS" value1="Successful" />
 
+		<execute macro="Portlet#changeDisplayStyle">
+			<var name="displayStyle" value="list" />
+		</execute>
+
 		<var method="selenium#getText('//tr/td[7]//span/a')" name="valueName" />
 
 		<echo message="value name ${valueName}" />
@@ -1894,6 +1918,10 @@
 		<var name="key_larFileName" value="${larFileName}" />
 
 		<execute function="AssertTextEquals" locator1="SitePagesExport#CURRENT_AND_PREVIOUS_STATUS" value1="Successful" />
+
+		<execute macro="Portlet#changeDisplayStyle">
+			<var name="displayStyle" value="list" />
+		</execute>
 
 		<var method="selenium#getText('//tr/td[7]//span/a')" name="valueName" />
 
@@ -2031,6 +2059,10 @@
 
 		<execute function="AssertTextEquals" locator1="SitePagesExport#CURRENT_AND_PREVIOUS_STATUS" value1="Successful" />
 
+		<execute macro="Portlet#changeDisplayStyle">
+			<var name="displayStyle" value="list" />
+		</execute>
+
 		<var method="selenium#getText('//tr/td[7]//span/a')" name="valueName" />
 
 		<echo message="value name ${valueName}" />
@@ -2160,6 +2192,10 @@
 		<var name="key_larFileName" value="${larFileName}" />
 
 		<execute function="AssertTextEquals" locator1="SitePagesExport#CURRENT_AND_PREVIOUS_STATUS" value1="Successful" />
+
+		<execute macro="Portlet#changeDisplayStyle">
+			<var name="displayStyle" value="list" />
+		</execute>
 
 		<var method="selenium#getText('//tr/td[7]//span/a')" name="valueName" />
 
