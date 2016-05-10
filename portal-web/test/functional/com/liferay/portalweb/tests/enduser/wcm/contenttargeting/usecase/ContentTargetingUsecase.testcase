@@ -1426,6 +1426,10 @@
 
 		<echo message="lar file name ${larFileName}" />
 
+		<execute macro="Portlet#changeDisplayStyle">
+			<var name="displayStyle" value="descriptive" />
+		</execute>
+
 		<execute function="Click" locator1="SitePagesExport#CURRENT_AND_PREVIOUS_DOWNLOAD" />
 		<execute function="DownloadTempFile" />
 		<execute function="SelectFrame" value1="relative=top" />
@@ -1491,6 +1495,10 @@
 		<var group="1" input="${valueName}" name="larFileName" pattern="([a-zA-z0-9_.-]*)[(0-9KB)]*" />
 
 		<echo message="lar file name ${larFileName}" />
+
+		<execute macro="Portlet#changeDisplayStyle">
+			<var name="displayStyle" value="descriptive" />
+		</execute>
 
 		<execute function="Click" locator1="SitePagesExport#CURRENT_AND_PREVIOUS_DOWNLOAD" />
 		<execute function="DownloadTempFile" />
@@ -1563,6 +1571,10 @@
 		<var group="1" input="${valueName}" name="larFileName" pattern="([a-zA-z0-9_.-]*)[(0-9KB)]*" />
 
 		<echo message="lar file name ${larFileName}" />
+
+		<execute macro="Portlet#changeDisplayStyle">
+			<var name="displayStyle" value="descriptive" />
+		</execute>
 
 		<execute function="Click" locator1="SitePagesExport#CURRENT_AND_PREVIOUS_DOWNLOAD" />
 		<execute function="DownloadTempFile" />
@@ -1711,6 +1723,10 @@
 
 		<echo message="lar file name ${larFileName}" />
 
+		<execute macro="Portlet#changeDisplayStyle">
+			<var name="displayStyle" value="descriptive" />
+		</execute>
+
 		<execute function="Click" locator1="SitePagesExport#CURRENT_AND_PREVIOUS_DOWNLOAD" />
 		<execute function="DownloadTempFile" />
 		<execute function="SelectFrame" value1="relative=top" />
@@ -1811,6 +1827,10 @@
 
 		<echo message="lar file name ${larFileName}" />
 
+		<execute macro="Portlet#changeDisplayStyle">
+			<var name="displayStyle" value="descriptive" />
+		</execute>
+
 		<execute function="Click" locator1="SitePagesExport#CURRENT_AND_PREVIOUS_DOWNLOAD" />
 		<execute function="DownloadTempFile" />
 		<execute function="SelectFrame" value1="relative=top" />
@@ -1871,6 +1891,10 @@
 
 		<echo message="lar file name ${larFileName}" />
 
+		<execute macro="Portlet#changeDisplayStyle">
+			<var name="displayStyle" value="descriptive" />
+		</execute>
+
 		<execute function="Click" locator1="SitePagesExport#CURRENT_AND_PREVIOUS_DOWNLOAD" />
 		<execute function="DownloadTempFile" />
 		<execute function="SelectFrame" value1="relative=top" />
@@ -1930,6 +1954,10 @@
 		<var group="1" input="${valueName}" name="larFileName" pattern="([a-zA-z0-9_.-]*)[(0-9KB)]*" />
 
 		<echo message="lar file name ${larFileName}" />
+
+		<execute macro="Portlet#changeDisplayStyle">
+			<var name="displayStyle" value="descriptive" />
+		</execute>
 
 		<execute function="Click" locator1="SitePagesExport#CURRENT_AND_PREVIOUS_DOWNLOAD" />
 		<execute function="DownloadTempFile" />
@@ -2071,6 +2099,10 @@
 
 		<echo message="lar file name ${larFileName}" />
 
+		<execute macro="Portlet#changeDisplayStyle">
+			<var name="displayStyle" value="descriptive" />
+		</execute>
+
 		<execute function="Click" locator1="SitePagesExport#CURRENT_AND_PREVIOUS_DOWNLOAD" />
 		<execute function="DownloadTempFile" />
 		<execute function="SelectFrame" value1="relative=top" />
@@ -2204,6 +2236,10 @@
 		<var group="1" input="${valueName}" name="larFileName" pattern="([a-zA-z0-9_.-]*)[(0-9KB)]*" />
 
 		<echo message="lar file name ${larFileName}" />
+
+		<execute macro="Portlet#changeDisplayStyle">
+			<var name="displayStyle" value="descriptive" />
+		</execute>
 
 		<execute function="Click" locator1="SitePagesExport#CURRENT_AND_PREVIOUS_DOWNLOAD" />
 		<execute function="DownloadTempFile" />
