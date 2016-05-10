@@ -121,8 +121,8 @@ public class ServiceComponentLocalServiceTest {
 
 		Map<String, Object> properties = new HashMap<>();
 
-		properties.put("upgrade.initial.database.creation", true);
 		properties.put("upgrade.from.schema.version", "0.0.0");
+		properties.put("upgrade.initial.database.creation", true);
 
 		final DB db = DBManagerUtil.getDB();
 
