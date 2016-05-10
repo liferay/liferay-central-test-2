@@ -118,11 +118,10 @@ public class TableMapperImpl<L extends BaseModel<L>, R extends BaseModel<R>>
 	public long[] addTableMappings(
 		long companyId, long leftPrimaryKey, long[] rightPrimaryKeys) {
 
+		List<Long> addedRightPrimaryKeys = new ArrayList<>();
 		long[] currentRightPrimaryKeys = getPrimaryKeys(
 			leftToRightPortalCache, getRightPrimaryKeysSqlQuery, leftPrimaryKey,
 			false);
-
-		List<Long> addedRightPrimaryKeys = new ArrayList<>();
 
 		for (long rightPrimaryKey : rightPrimaryKeys) {
 			if (Arrays.binarySearch(currentRightPrimaryKeys, rightPrimaryKey) <
@@ -147,11 +146,10 @@ public class TableMapperImpl<L extends BaseModel<L>, R extends BaseModel<R>>
 	public long[] addTableMappings(
 		long companyId, long[] leftPrimaryKeys, long rightPrimaryKey) {
 
+		List<Long> addedLeftPrimaryKeys = new ArrayList<>();
 		long[] currentLeftPrimaryKeys = getPrimaryKeys(
 			rightToLeftPortalCache, getLeftPrimaryKeysSqlQuery, rightPrimaryKey,
 			false);
-
-		List<Long> addedLeftPrimaryKeys = new ArrayList<>();
 
 		for (long leftPrimaryKey : leftPrimaryKeys) {
 			if (Arrays.binarySearch(currentLeftPrimaryKeys, leftPrimaryKey) <
@@ -213,13 +211,11 @@ public class TableMapperImpl<L extends BaseModel<L>, R extends BaseModel<R>>
 	public long[] deleteTableMappings(
 		long leftPrimaryKey, long[] rightPrimaryKeys) {
 
+		boolean clearCache = false;
 		long[] currentRightPrimaryKeys = getPrimaryKeys(
 			leftToRightPortalCache, getRightPrimaryKeysSqlQuery, leftPrimaryKey,
 			false);
-
 		List<Long> deletedRightPrimaryKeys = new ArrayList<>();
-
-		boolean clearCache = false;
 
 		for (long rightPrimaryKey : rightPrimaryKeys) {
 			if (Arrays.binarySearch(currentRightPrimaryKeys, rightPrimaryKey) >=
@@ -246,13 +242,11 @@ public class TableMapperImpl<L extends BaseModel<L>, R extends BaseModel<R>>
 	public long[] deleteTableMappings(
 		long[] leftPrimaryKeys, long rightPrimaryKey) {
 
+		boolean clearCache = false;
 		long[] currentLeftPrimaryKeys = getPrimaryKeys(
 			rightToLeftPortalCache, getLeftPrimaryKeysSqlQuery, rightPrimaryKey,
 			false);
-
 		List<Long> deletedLeftPrimaryKeys = new ArrayList<>();
-
-		boolean clearCache = false;
 
 		for (long leftPrimaryKey : leftPrimaryKeys) {
 			if (Arrays.binarySearch(currentLeftPrimaryKeys, leftPrimaryKey) >=
