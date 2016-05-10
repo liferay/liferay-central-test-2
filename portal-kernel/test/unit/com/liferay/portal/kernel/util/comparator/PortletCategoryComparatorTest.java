@@ -60,21 +60,19 @@ public class PortletCategoryComparatorTest extends PowerMockito {
 	}
 
 	protected void setUpLanguageUtil() {
-		whenLanguageGet(LocaleUtil.SPAIN, "area", "Área");
-		whenLanguageGet(LocaleUtil.SPAIN, "zone", "Zona");
-
 		LanguageUtil languageUtil = new LanguageUtil();
 
 		languageUtil.setLanguage(_language);
+
+		whenLanguageGet(LocaleUtil.SPAIN, "area", "Área");
+		whenLanguageGet(LocaleUtil.SPAIN, "zone", "Zona");
 	}
 
-	protected void whenLanguageGet(
-		Locale locale, String key, String returnValue) {
-
+	protected void whenLanguageGet(Locale locale, String key, String value) {
 		when(
 			_language.get(Matchers.eq(locale), Matchers.eq(key))
 		).thenReturn(
-			returnValue
+			value
 		);
 	}
 
