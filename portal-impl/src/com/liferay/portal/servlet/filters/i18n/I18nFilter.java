@@ -230,8 +230,11 @@ public class I18nFilter extends BasePortalFilter {
 				Locale locale = (Locale)session.getAttribute(
 					Globals.LOCALE_KEY);
 
-				return !userLanguageId.equals(LocaleUtil.toLanguageId(locale)) ?
-					LocaleUtil.toLanguageId(locale) : null;
+				if (userLanguageId.equals(LocaleUtil.toLanguageId(locale))) {
+					return null;
+				}
+
+				return LocaleUtil.toLanguageId(locale);
 			}
 			else {
 				return _prependIfRequestedLocaleDiffersFromDefaultLocale(
@@ -269,8 +272,11 @@ public class I18nFilter extends BasePortalFilter {
 	private String _prependIfRequestedLocaleDiffersFromDefaultLocale(
 		String defaultLanguageId, String guestLanguageId) {
 
-		return (!defaultLanguageId.equals(guestLanguageId)) ?
-			guestLanguageId : null;
+		if (defaultLanguageId.equals(guestLanguageId))  {
+			return null;
+		}
+
+		return guestLanguageId;
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(I18nFilter.class);
