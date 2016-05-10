@@ -50,10 +50,10 @@ public class PortletCategoryComparator
 			return 1;
 		}
 
+		Collator collator = Collator.getInstance(_locale);
+
 		name1 = LanguageUtil.get(_locale, name1);
 		name2 = LanguageUtil.get(_locale, name2);
-
-		Collator collator = Collator.getInstance(_locale);
 
 		return collator.compare(name1, name2);
 	}
