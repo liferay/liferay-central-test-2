@@ -155,15 +155,15 @@ public class ServiceComponentLocalServiceTest {
 	}
 
 	@Test
-	public void testVerifyFromSchemaVersion001WithInitialDatabaseCreation()
+	public void testVerifyFromSchemaVersion000WitouthInitialDatabaseCreation()
 		throws Exception {
 
 		Registry registry = RegistryUtil.getRegistry();
 
 		Map<String, Object> properties = new HashMap<>();
 
-		properties.put("upgrade.from.schema.version", "0.0.1");
-		properties.put("upgrade.initial.database.creation", true);
+		properties.put("upgrade.from.schema.version", "0.0.0");
+		properties.put("upgrade.initial.database.creation", false);
 
 		final DB db = DBManagerUtil.getDB();
 
@@ -192,15 +192,15 @@ public class ServiceComponentLocalServiceTest {
 	}
 
 	@Test
-	public void testVerifyFromSchemaVersion000WitouthInitialDatabaseCreation()
+	public void testVerifyFromSchemaVersion001WithInitialDatabaseCreation()
 		throws Exception {
 
 		Registry registry = RegistryUtil.getRegistry();
 
 		Map<String, Object> properties = new HashMap<>();
 
-		properties.put("upgrade.from.schema.version", "0.0.0");
-		properties.put("upgrade.initial.database.creation", false);
+		properties.put("upgrade.from.schema.version", "0.0.1");
+		properties.put("upgrade.initial.database.creation", true);
 
 		final DB db = DBManagerUtil.getDB();
 
