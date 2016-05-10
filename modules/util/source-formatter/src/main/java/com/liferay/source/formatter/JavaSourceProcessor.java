@@ -4327,7 +4327,7 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 	@Override
 	protected void preFormat() {
 		_maxLineLength = GetterUtil.getInteger(
-			System.getProperty("source.formatter.max.line.length"));
+			System.getProperty("source.formatter.max.line.length"), 80);
 
 		_addMissingDeprecationReleaseVersion = GetterUtil.getBoolean(
 			getProperty("add.missing.deprecation.release.version"));
