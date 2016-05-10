@@ -217,7 +217,7 @@ public class I18nFilter extends BasePortalFilter {
 		}
 
 		if (prependFriendlyUrlStyle == 1) {
-			return _prependIfRequestedLocaleDiffersFromDefaultLocale(
+			return prependIfRequestedLocaleDiffersFromDefaultLocale(
 				defaultLanguageId, guestLanguageId);
 		}
 		else if (prependFriendlyUrlStyle == 2) {
@@ -237,7 +237,7 @@ public class I18nFilter extends BasePortalFilter {
 				return LocaleUtil.toLanguageId(locale);
 			}
 			else {
-				return _prependIfRequestedLocaleDiffersFromDefaultLocale(
+				return prependIfRequestedLocaleDiffersFromDefaultLocale(
 					defaultLanguageId, guestLanguageId);
 			}
 		}
@@ -269,7 +269,7 @@ public class I18nFilter extends BasePortalFilter {
 		response.sendRedirect(redirect);
 	}
 
-	private String _prependIfRequestedLocaleDiffersFromDefaultLocale(
+	protected String prependIfRequestedLocaleDiffersFromDefaultLocale(
 		String defaultLanguageId, String guestLanguageId) {
 
 		if (defaultLanguageId.equals(guestLanguageId))  {
