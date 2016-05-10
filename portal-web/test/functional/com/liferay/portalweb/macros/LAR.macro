@@ -43,17 +43,23 @@
 		<if>
 			<equals arg1="${contentDeletion}" arg2="true" />
 			<then>
-				<execute function="Click" locator1="Radio#CONTENT_CHOOSE_CONTENT" />
-				<execute function="Click" locator1="BasePortletExport#CONTENT_CHOOSE_CONTENT_EXTRA_CHANGE_LINK" />
-				<execute function="Check" locator1="BasePortletExport#CONTENT_CHOOSE_CONTENT_EXTRA_CHANGE_LINK_DELETIONS_CHECKBOX" />
-				<execute function="AssertClick" locator1="Button#OK" value1="OK" />
+				<execute macro="Panel#expandPanel">
+					<var name="panelHeading" value="Deletions" />
+				</execute>
+
+				<execute function="Check#checkToggleSwitch" locator1="ToggleSwitch#DELETE_PORTLET_DATA" />
+				<execute function="Check#checkToggleSwitch" locator1="ToggleSwitch#REPLICATE_INDIVIDUAL_DELETIONS" />
 			</then>
 		</if>
 
 		<if>
 			<isset var="checkContentNameList" />
 			<then>
-				<execute function="Check" locator1="SitePagesExport#CONTENT_CHOOSE_CONTENT" />
+				<execute macro="Panel#expandPanel">
+					<var name="panelHeading" value="Content" />
+				</execute>
+
+				<execute function="Select" locator1="Select#EXPORT_IMPORT_CONTENT" value1="Choose Content" />
 
 				<for list="${checkContentNameList}" param="contentName">
 					<var name="key_contentName" value="${contentName}" />
@@ -66,7 +72,11 @@
 		<if>
 			<isset var="uncheckContentNameList" />
 			<then>
-				<execute function="Check" locator1="SitePagesExport#CONTENT_CHOOSE_CONTENT" />
+				<execute macro="Panel#expandPanel">
+					<var name="panelHeading" value="Content" />
+				</execute>
+
+				<execute function="Select" locator1="Select#EXPORT_IMPORT_CONTENT" value1="Choose Content" />
 
 				<for list="${uncheckContentNameList}" param="contentName">
 					<var name="key_contentName" value="${contentName}" />
@@ -233,7 +243,11 @@
 		<if>
 			<isset var="checkContentNameList" />
 			<then>
-				<execute function="Click" locator1="BasePortletImport#CONTENT_CHOOSE_CONTENT_RADIO" />
+				<execute macro="Panel#expandPanel">
+					<var name="panelHeading" value="Content" />
+				</execute>
+
+				<execute function="Select" locator1="Select#EXPORT_IMPORT_CONTENT" value1="Choose Content" />
 
 				<for list="${checkContentNameList}" param="contentName">
 					<var name="key_contentName" value="${contentName}" />
@@ -246,9 +260,11 @@
 		<if>
 			<equals arg1="${contentDeletion}" arg2="true" />
 			<then>
-				<execute function="Click" locator1="BasePortletImport#DELETIONS_TITLE" />
+				<execute macro="Panel#expandPanel">
+					<var name="panelHeading" value="Deletions" />
+				</execute>
 
-				<execute function="Check#checkToggleSwitch" locator1="BasePortletImport#DELETE_PORTLET_DATA_CHECKBOX" />
+				<execute function="Check#checkToggleSwitch" locator1="ToggleSwitch#DELETE_PORTLET_DATA" />
 			</then>
 		</if>
 
