@@ -12,11 +12,10 @@
  * details.
  */
 
-package com.liferay.portal.upgrade.util;
+package com.liferay.portal.kernel.upgrade;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.LoggingTimer;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.xml.Document;
@@ -31,11 +30,8 @@ import java.sql.ResultSet;
 import java.util.List;
 
 /**
- * @author     Shuyang Zhou
- * @deprecated As of 7.0.0, replaced by {@link
- *             com.liferay.portal.kernel.upgrade.UpgradeMVCCVersion}
+ * @author Shuyang Zhou
  */
-@Deprecated
 public class UpgradeMVCCVersion extends UpgradeProcess {
 
 	public void upgradeMVCCVersion(
