@@ -40,8 +40,9 @@ public class WorkflowDefinitionTitleComparator
 
 	public WorkflowDefinitionTitleComparator(boolean ascending, Locale locale) {
 		_ascending = ascending;
-		_languageId = LocaleUtil.toLanguageId(locale);
 		_locale = locale;
+
+		_languageId = LocaleUtil.toLanguageId(locale);
 	}
 
 	@Override
@@ -49,12 +50,12 @@ public class WorkflowDefinitionTitleComparator
 		WorkflowDefinition workflowDefinition1,
 		WorkflowDefinition workflowDefinition2) {
 
+		Collator collator = Collator.getInstance(_locale);
+
 		String workflowDefinitionTitle1 = workflowDefinition1.getTitle(
 			_languageId);
 		String workflowDefinitionTitle2 = workflowDefinition2.getTitle(
 			_languageId);
-
-		Collator collator = Collator.getInstance(_locale);
 
 		int value = collator.compare(
 			workflowDefinitionTitle1, workflowDefinitionTitle2);

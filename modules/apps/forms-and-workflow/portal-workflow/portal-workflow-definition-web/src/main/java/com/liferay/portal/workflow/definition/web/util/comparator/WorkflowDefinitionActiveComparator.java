@@ -50,10 +50,10 @@ public class WorkflowDefinitionActiveComparator
 		WorkflowDefinition workflowDefinition1,
 		WorkflowDefinition workflowDefinition2) {
 
+		Collator collator = Collator.getInstance(_locale);
+
 		String activeLabel1 = getActiveLabel(workflowDefinition1.isActive());
 		String activeLabel2 = getActiveLabel(workflowDefinition2.isActive());
-
-		Collator collator = Collator.getInstance(_locale);
 
 		int value = collator.compare(activeLabel1, activeLabel2);
 

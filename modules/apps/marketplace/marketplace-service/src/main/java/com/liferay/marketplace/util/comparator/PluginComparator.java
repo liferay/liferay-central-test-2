@@ -49,10 +49,10 @@ public class PluginComparator implements Comparator, Serializable {
 
 	@Override
 	public int compare(Object plugin1, Object plugin2) {
+		Collator collator = Collator.getInstance(_locale);
+
 		String name1 = _getName(plugin1);
 		String name2 = _getName(plugin2);
-
-		Collator collator = Collator.getInstance(_locale);
 
 		return collator.compare(name1, name2);
 	}

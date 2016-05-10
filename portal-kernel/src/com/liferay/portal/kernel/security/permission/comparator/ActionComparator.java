@@ -34,10 +34,10 @@ public class ActionComparator implements Comparator<String>, Serializable {
 
 	@Override
 	public int compare(String action1, String action2) {
+		Collator collator = Collator.getInstance(_locale);
+
 		action1 = ResourceActionsUtil.getAction(_locale, action1);
 		action2 = ResourceActionsUtil.getAction(_locale, action2);
-
-		Collator collator = Collator.getInstance(_locale);
 
 		return collator.compare(action1, action2);
 	}
