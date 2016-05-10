@@ -290,7 +290,11 @@
 		<execute function="Click#waitForMenuToggleJSClick" locator1="Icon#ROW_VERTICAL_ELLIPSIS" />
 		<execute function="Click" locator1="MenuItem#EDIT" />
 
-		<execute function="Click" locator1="CPContenttargetingAddusersegment#USER_SEGMENT_RULE_USER_ATTRIBUTES_GENDER_${genderRadioPath}_RADIO" />
+		<execute macro="ContentTargetingUserSegment#openFormField">
+			<var name="usersegmentRuleName" value="Gender" />
+		</execute>
+
+		<execute function="Click" locator1="EditUserSegment#USER_SEGMENT_RULE_USER_ATTRIBUTES_GENDER_${genderRadioPath}_RADIO" />
 	</command>
 
 	<command name="editUserSegmentCP">
@@ -353,6 +357,17 @@
 		<execute function="Pause" locator1="1000" />
 	</command>
 
+	<command name="openFormField">
+		<var name="key_fieldName" value="${usersegmentRuleName}" />
+
+		<if>
+			<condition function="IsElementPresent" locator1="ContentTargeting#FORM_FIELD_COLLAPSED" />
+			<then>
+				<execute function="Click" locator1="ContentTargeting#FORM_FIELD_COLLAPSED" />
+			</then>
+		</if>
+	</command>
+
 	<command name="viewCP">
 		<execute macro="Navigator#gotoNavItem">
 			<var name="navItem" value="User Segments" />
@@ -404,14 +419,9 @@
 
 			<execute function="AssertTextEquals#assertPartialText" locator1="EditUserSegment#USER_SEGMENT_RULE_APPLIED" value1="${usersegmentRuleName}" />
 
-			<var name="key_fieldName" value="${usersegmentRuleName}" />
-
-			<if>
-				<condition function="IsElementPresent" locator1="ContentTargeting#FORM_FIELD_COLLAPSED" />
-				<then>
-					<execute function="Click" locator1="ContentTargeting#FORM_FIELD_COLLAPSED" />
-				</then>
-			</if>
+			<execute macro="ContentTargetingUserSegment#openFormField">
+				<var name="usersegmentRuleName" value="${usersegmentRuleName}" />
+			</execute>
 
 			<if>
 				<equals arg1="${usersegmentRuleName}" arg2="Content Visited" />
