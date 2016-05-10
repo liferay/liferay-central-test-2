@@ -83,7 +83,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.portlet.PreferencesValidator;
-
 import javax.servlet.ServletContext;
 
 /**
@@ -236,6 +235,9 @@ public class PortletBagFactory {
 		_warFile = warFile;
 	}
 
+	/**
+	 * @see FriendlyURLMapperTrackerImpl#getContent(ClassLoader, String)
+	 */
 	protected String getContent(String fileName) throws Exception {
 		String queryString = HttpUtil.getQueryString(fileName);
 

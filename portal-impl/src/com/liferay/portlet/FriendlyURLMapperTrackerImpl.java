@@ -103,6 +103,45 @@ public class FriendlyURLMapperTrackerImpl implements FriendlyURLMapperTracker {
 		}
 	}
 
+	/**
+	 * @see PortletBagFactory#getContent(String)
+	 */
+	protected String getContent(ClassLoader classLoader, String fileName)
+		throws Exception {
+
+		String queryString = HttpUtil.getQueryString(fileName);
+
+		if (Validator.isNull(queryString)) {
+			return StringUtil.read(classLoader, fileName);
+		}
+
+		int pos = fileName.indexOf(StringPool.QUESTION);
+
+		String xml = StringUtil.read(classLoader, fileName.substring(0, pos));
+
+		Map<String, String[]> parameterMap = HttpUtil.getParameterMap(
+			queryString);
+
+		if (parameterMap == null) {
+			return xml;
+		}
+
+		for (Map.Entry<String, String[]> entry : parameterMap.entrySet()) {
+			String name = entry.getKey();
+			String[] values = entry.getValue();
+
+			if (values.length == 0) {
+				continue;
+			}
+
+			String value = values[0];
+
+			xml = StringUtil.replace(xml, "@" + name + "@", value);
+		}
+
+		return xml;
+	}
+	
 	private static final Log _log = LogFactoryUtil.getLog(
 		FriendlyURLMapperTrackerImpl.class);
 
@@ -147,7 +186,7 @@ public class FriendlyURLMapperTrackerImpl implements FriendlyURLMapperTracker {
 				if (Validator.isNotNull(friendlyURLRoutes)) {
 					Class<?> clazz = friendlyURLMapper.getClass();
 
-					xml = getContent(friendlyURLRoutes, clazz.getClassLoader());
+					xml = getContent(clazz.getClassLoader(), friendlyURLRoutes);
 				}
 
 				friendlyURLMapper.setRouter(newFriendlyURLRouter(xml));
@@ -175,43 +214,6 @@ public class FriendlyURLMapperTrackerImpl implements FriendlyURLMapperTracker {
 			Registry registry = RegistryUtil.getRegistry();
 
 			registry.ungetService(serviceReference);
-		}
-
-		protected String getContent(String fileName, ClassLoader classLoader)
-			throws Exception {
-
-			String queryString = HttpUtil.getQueryString(fileName);
-
-			if (Validator.isNull(queryString)) {
-				return StringUtil.read(classLoader, fileName);
-			}
-
-			int pos = fileName.indexOf(StringPool.QUESTION);
-
-			String xml = StringUtil.read(
-				classLoader, fileName.substring(0, pos));
-
-			Map<String, String[]> parameterMap = HttpUtil.getParameterMap(
-				queryString);
-
-			if (parameterMap == null) {
-				return xml;
-			}
-
-			for (Map.Entry<String, String[]> entry : parameterMap.entrySet()) {
-				String name = entry.getKey();
-				String[] values = entry.getValue();
-
-				if (values.length == 0) {
-					continue;
-				}
-
-				String value = values[0];
-
-				xml = StringUtil.replace(xml, "@" + name + "@", value);
-			}
-
-			return xml;
 		}
 
 		protected Router newFriendlyURLRouter(String xml) throws Exception {
