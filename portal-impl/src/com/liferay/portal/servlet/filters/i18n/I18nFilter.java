@@ -245,6 +245,16 @@ public class I18nFilter extends BasePortalFilter {
 		return null;
 	}
 
+	protected String prependIfRequestedLocaleDiffersFromDefaultLocale(
+		String defaultLanguageId, String guestLanguageId) {
+
+		if (defaultLanguageId.equals(guestLanguageId)) {
+			return null;
+		}
+
+		return guestLanguageId;
+	}
+
 	@Override
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
@@ -267,16 +277,6 @@ public class I18nFilter extends BasePortalFilter {
 		}
 
 		response.sendRedirect(redirect);
-	}
-
-	protected String prependIfRequestedLocaleDiffersFromDefaultLocale(
-		String defaultLanguageId, String guestLanguageId) {
-
-		if (defaultLanguageId.equals(guestLanguageId))  {
-			return null;
-		}
-
-		return guestLanguageId;
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(I18nFilter.class);
