@@ -18,34 +18,25 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 
-import java.sql.PreparedStatement;
-
 /**
  * @author Jürgen Kappler
  */
 public class UpgradePortletPreferences extends UpgradeProcess {
 
-	protected void deletePortletPreferences(
-			String portletId, String portletName)
-		throws Exception {
-
+	protected void deletePortletPreferences(String portletId) throws Exception {
 		if (_log.isDebugEnabled()) {
-			_log.debug("Delete " + portletName + " portlet preferences");
+			_log.debug("Delete portlet preferences for portlet " + portletId);
 		}
 
-		try (PreparedStatement ps2 = connection.prepareStatement(
-				"delete from PortletPreferences where portletId = ?")) {
-
-			ps2.setString(1, portletId);
-
-			ps2.execute();
-		}
+		runSQL(
+			"delete from PortletPreferences where portletId = '" + portletId +
+				"'");
 	}
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		deletePortletPreferences("145", "Dockbar");
-		deletePortletPreferences("160", "Control Panel Menu");
+		deletePortletPreferences("145");
+		deletePortletPreferences("160");
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
