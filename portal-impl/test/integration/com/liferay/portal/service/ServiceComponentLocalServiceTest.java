@@ -114,7 +114,7 @@ public class ServiceComponentLocalServiceTest {
 	}
 
 	@Test
-	public void testVerifyDBWithUpgradeInitialDatabaseCreationTrueAndUpgradeFromSchemaVersion000()
+	public void testVerifyFromSchemaVersion000WithInitialDatabaseCreation()
 		throws Exception {
 
 		Registry registry = RegistryUtil.getRegistry();
@@ -155,7 +155,7 @@ public class ServiceComponentLocalServiceTest {
 	}
 
 	@Test
-	public void testVerifyWithoutUpgradeFromSchemaVersion000()
+	public void testVerifyFromSchemaVersion001WithInitialDatabaseCreation()
 		throws Exception {
 
 		Registry registry = RegistryUtil.getRegistry();
@@ -192,7 +192,7 @@ public class ServiceComponentLocalServiceTest {
 	}
 
 	@Test
-	public void testVerifyWithUpgradeInitialDatabaseCreationFalse()
+	public void testVerifyFromSchemaVersion000WitouthInitialDatabaseCreation()
 		throws Exception {
 
 		Registry registry = RegistryUtil.getRegistry();
