@@ -65,20 +65,20 @@ public class PortletCategoryComparatorTest extends PowerMockito {
 
 		LanguageUtil languageUtil = new LanguageUtil();
 
-		languageUtil.setLanguage(language);
+		languageUtil.setLanguage(_language);
 	}
 
 	protected void whenLanguageGet(
 		Locale locale, String key, String returnValue) {
 
 		when(
-			language.get(Matchers.eq(locale), Matchers.eq(key))
+			_language.get(Matchers.eq(locale), Matchers.eq(key))
 		).thenReturn(
 			returnValue
 		);
 	}
 
 	@Mock
-	protected Language language;
+	private Language _language;
 
 }
