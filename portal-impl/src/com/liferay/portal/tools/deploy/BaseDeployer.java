@@ -246,9 +246,8 @@ public class BaseDeployer implements AutoDeployer, Deployer {
 			String appServerType3 = ServerDetector.getServerId();
 
 			_log.error(
-				"Null appServerType:" + appServerType +
-					", from ServerDetector:" + appServerType2 +
-						", ServerDetector reloaded:" + appServerType3);
+				"App server type: " + appServerType + ", app server type 2: " +
+					appServerType2 + ", app server type 3: " + appServerType3);
 
 			throw new IllegalArgumentException(
 				"The system property deployer.app.server.type is not set");
