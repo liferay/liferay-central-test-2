@@ -1406,6 +1406,8 @@
 			<var name="siteScopeName" value="Site Name" />
 		</execute>
 
+		<execute macro="LexiconEntry#gotoAdd" />
+
 		<execute function="AssertClick" locator1="SitePagesExport#EXPORT_BUTTON" value1="Export" />
 
 		<var name="key_larFileName" value="${larFileName}" />
@@ -1460,6 +1462,8 @@
 		<execute macro="LAR#_gotoExportSite">
 			<var name="siteScopeName" value="Site Name" />
 		</execute>
+
+		<execute macro="LexiconEntry#gotoAdd" />
 
 		<execute macro="LAR#configureExportSiteOptions">
 			<var name="checkContentNameList" value="Audience Targeting" />
@@ -1531,6 +1535,8 @@
 		<execute macro="LAR#_gotoExportSite">
 			<var name="siteScopeName" value="Site Name" />
 		</execute>
+
+		<execute macro="LexiconEntry#gotoAdd" />
 
 		<execute function="AssertClick" locator1="SitePagesExport#EXPORT_BUTTON" value1="Export" />
 
@@ -1657,6 +1663,8 @@
 			<var name="siteScopeName" value="Site Name" />
 		</execute>
 
+		<execute macro="LexiconEntry#gotoAdd" />
+
 		<execute macro="LAR#configureExportSiteOptions">
 			<var name="contentName" value="Audience Targeting" />
 			<var name="subContent" value="Campaigns" />
@@ -1749,6 +1757,8 @@
 			<var name="siteScopeName" value="Site Name" />
 		</execute>
 
+		<execute macro="LexiconEntry#gotoAdd" />
+
 		<execute macro="LAR#configureExportSiteOptions">
 			<var name="mainApplication" value="User Segment Content Display" />
 			<var name="uncheckSubApplicationList" value="Referenced User Segments,Referenced Content" />
@@ -1807,6 +1817,8 @@
 			<var name="siteScopeName" value="Site Name" />
 		</execute>
 
+		<execute macro="LexiconEntry#gotoAdd" />
+
 		<execute macro="LAR#configureExportSiteOptions">
 			<var name="mainApplication" value="User Segment Content Display" />
 			<var name="uncheckSubApplicationList" value="Referenced User Segments,Referenced Content" />
@@ -1860,6 +1872,8 @@
 		<execute macro="LAR#_gotoExportSite">
 			<var name="siteScopeName" value="Site Name" />
 		</execute>
+
+		<execute macro="LexiconEntry#gotoAdd" />
 
 		<execute macro="LAR#configureExportSiteOptions">
 			<var name="mainApplication" value="User Segment Content Display" />
@@ -2001,6 +2015,8 @@
 			<var name="siteScopeName" value="Site Name" />
 		</execute>
 
+		<execute macro="LexiconEntry#gotoAdd" />
+
 		<execute macro="LAR#configureExportSiteOptions">
 			<var name="checkContentNameList" value="Audience Targeting" />
 		</execute>
@@ -2132,6 +2148,8 @@
 		<execute macro="LAR#_gotoExportSite">
 			<var name="siteScopeName" value="Site Name" />
 		</execute>
+
+		<execute macro="LexiconEntry#gotoAdd" />
 
 		<execute macro="LAR#configureExportSiteOptions">
 			<var name="uncheckContentNameList" value="Audience Targeting,Web Content" />
