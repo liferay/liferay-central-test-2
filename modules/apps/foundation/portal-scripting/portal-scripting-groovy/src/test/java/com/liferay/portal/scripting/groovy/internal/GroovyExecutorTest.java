@@ -39,9 +39,7 @@ public class GroovyExecutorTest extends ScriptingExecutorTestCase {
 
 	@Override
 	public ScriptingExecutor getScriptingExecutor() {
-		GroovyExecutor groovyExecutor = new GroovyExecutor();
-
-		return groovyExecutor;
+		return new GroovyExecutor();
 	}
 
 	@Test(expected = RuntimeException.class)
