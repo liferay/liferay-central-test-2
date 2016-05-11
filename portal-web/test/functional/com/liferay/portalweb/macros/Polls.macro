@@ -136,7 +136,7 @@
 	<command name="votePollPG">
 		<var name="key_pollsQuestionChoice" value="${pollsQuestionChoice}" />
 
-		<execute function="AssertClick#assertPartialTextClickAt" locator1="Polls#POLL_QUESTION_CHOICE" value1="${pollsQuestionChoice}" />
+		<execute function="Click" locator1="Polls#POLL_QUESTION_CHOICE" />
 		<execute function="AssertClick" locator1="Button#VOTE" value1="Vote" />
 
 		<execute function="AssertTextEquals#assertPartialText" locator1="PGPollsdisplayVotes#SUCCESS_MESSAGE" value1="Thank you for your vote." />
