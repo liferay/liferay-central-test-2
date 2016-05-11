@@ -15,16 +15,14 @@
 package com.liferay.portal.util;
 
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.ReflectionUtil;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
-
 import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
 import org.powermock.api.mockito.PowerMockito;
 
 /**
@@ -219,15 +217,8 @@ public class PortalImplEscapeRedirectTest extends PowerMockito {
 	protected void setPropsValuesValue(String name, Object value)
 		throws Exception {
 
-		Field modifiersField = Field.class.getDeclaredField("modifiers");
-
-		modifiersField.setAccessible(true);
-
-		Field field = field(PropsValues.class, name);
-
-		field.setAccessible(true);
-
-		modifiersField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
+		Field field = ReflectionUtil.unfinalField(
+			field(PropsValues.class, name));
 
 		field.set(PropsValues.class, value);
 	}
