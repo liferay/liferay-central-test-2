@@ -16,28 +16,21 @@ package com.liferay.petra.doulos.processor;
 
 import com.googlecode.concurrentlinkedhashmap.ConcurrentLinkedHashMap;
 
-import java.util.Map;
-import java.util.Queue;
-import java.util.concurrent.LinkedBlockingQueue;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
+import java.util.Queue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.json.JSONObject;
 import org.json.JSONObject;
 
 /**
@@ -84,8 +77,6 @@ public abstract class BaseShellDoulosRequestProcessor
 		super.destroy();
 	}
 
-	protected abstract boolean isValid(JSONObject payloadJSONObject);
-
 	@Override
 	public void process(
 			String method, String pathInfo, Map<String, String[]> parameterMap,
@@ -110,20 +101,8 @@ public abstract class BaseShellDoulosRequestProcessor
 		}
 	}
 
-	protected void populateResponseJSONObject(
-		JSONObject responseJSONObject, ShellStatus shellStatus) {
-
-		responseJSONObject.put("exception", shellStatus.exception);
-		responseJSONObject.put("exitValue", shellStatus.exitValue);
-		responseJSONObject.put("shellCommands", shellStatus.shellCommands);
-		responseJSONObject.put("output", shellStatus.output);
-		responseJSONObject.put("status", shellStatus.status);
-	}
-
 	protected abstract ShellStatus createShellStatus(
 		JSONObject payloadJSONObject);
-
-	protected abstract List<String> getShellCommands(ShellStatus shellStatus);
 
 	protected void execute(ShellStatus shellStatus) throws Exception {
 		shellStatus.status = "executing";
@@ -189,6 +168,12 @@ public abstract class BaseShellDoulosRequestProcessor
 
 	protected abstract String getKey(JSONObject payloadJSONObject);
 
+	protected abstract List<String> getShellCommands(ShellStatus shellStatus);
+
+	protected long getShellStatusesSize() {
+		return _SHELL_STATUSES_SIZE;
+	}
+
 	protected int getThreadDestroyInterval() {
 		return _THREAD_DESTROY_INTERVAL;
 	}
@@ -197,8 +182,16 @@ public abstract class BaseShellDoulosRequestProcessor
 		return _THREAD_EXECUTE_INTERVAL;
 	}
 
-	protected long getShellStatusesSize() {
-		return _SHELL_STATUSES_SIZE;
+	protected abstract boolean isValid(JSONObject payloadJSONObject);
+
+	protected void populateResponseJSONObject(
+		JSONObject responseJSONObject, ShellStatus shellStatus) {
+
+		responseJSONObject.put("exception", shellStatus.exception);
+		responseJSONObject.put("exitValue", shellStatus.exitValue);
+		responseJSONObject.put("output", shellStatus.output);
+		responseJSONObject.put("shellCommands", shellStatus.shellCommands);
+		responseJSONObject.put("status", shellStatus.status);
 	}
 
 	protected ShellStatus queue(JSONObject payloadJSONObject) {
@@ -243,30 +236,31 @@ public abstract class BaseShellDoulosRequestProcessor
 			this.key = key;
 		}
 
-		public String key = "";
-		public String exitValue = "";
-		public String output = "";
-		public String status = "queued";
 		public String exception = "";
+		public String exitValue = "";
+		public String key = "";
+		public String output = "";
 		public String shellCommands = "";
+		public String status = "queued";
 		public long time = System.currentTimeMillis();
 
 	}
 
 	private static final int _EXPIRED_TIME = 0;
 
+	private static final long _SHELL_STATUSES_SIZE = 1000;
+
 	private static final int _THREAD_DESTROY_INTERVAL = 10 * 1000;
 
 	private static final int _THREAD_EXECUTE_INTERVAL = 3 * 1000;
-
-	private static final long _SHELL_STATUSES_SIZE = 1000;
 
 	private static final Log _log = LogFactory.getLog(
 		BaseShellDoulosRequestProcessor.class);
 
 	private boolean _destroy;
-	private boolean _destroyed;
+	private final boolean _destroyed;
 	private final Queue<ShellStatus> _queue = new LinkedBlockingQueue<>();
+	private final Map<String, ShellStatus> _shellStatuses;
 
 	private final Thread _thread = new Thread() {
 
@@ -313,7 +307,5 @@ public abstract class BaseShellDoulosRequestProcessor
 		}
 
 	};
-
-	private final Map<String, ShellStatus> _shellStatuses;
 
 }
