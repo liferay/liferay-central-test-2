@@ -103,7 +103,7 @@ public class SimpleCaptchaImpl implements Captcha {
 
 	@Override
 	public boolean isEnabled(HttpServletRequest request) {
-		if (isMaxChallenges(request)) {
+		if (isExceededMaxChallenges(request)) {
 			return false;
 		}
 
@@ -117,7 +117,7 @@ public class SimpleCaptchaImpl implements Captcha {
 
 	@Override
 	public boolean isEnabled(PortletRequest portletRequest) {
-		if (isMaxChallenges(portletRequest)) {
+		if (isExceededMaxChallenges(portletRequest)) {
 			return false;
 		}
 
@@ -347,20 +347,20 @@ public class SimpleCaptchaImpl implements Captcha {
 		}
 	}
 
-	protected boolean isMaxChallenges(HttpServletRequest request) {
+	protected boolean isExceededMaxChallenges(HttpServletRequest request) {
 		if (PropsValues.CAPTCHA_MAX_CHALLENGES > 0) {
 			HttpSession session = request.getSession();
 
 			Integer count = (Integer)session.getAttribute(
 				WebKeys.CAPTCHA_COUNT);
 
-			return isMaxChallenges(count);
+			return isExceededMaxChallenges(count);
 		}
 
 		return false;
 	}
 
-	protected boolean isMaxChallenges(Integer count) {
+	protected boolean isExceededMaxChallenges(Integer count) {
 		if ((count != null) && (count >= PropsValues.CAPTCHA_MAX_CHALLENGES)) {
 			return true;
 		}
@@ -368,14 +368,14 @@ public class SimpleCaptchaImpl implements Captcha {
 		return false;
 	}
 
-	protected boolean isMaxChallenges(PortletRequest portletRequest) {
+	protected boolean isExceededMaxChallenges(PortletRequest portletRequest) {
 		if (PropsValues.CAPTCHA_MAX_CHALLENGES > 0) {
 			PortletSession portletSession = portletRequest.getPortletSession();
 
 			Integer count = (Integer)portletSession.getAttribute(
 				WebKeys.CAPTCHA_COUNT);
 
-			return isMaxChallenges(count);
+			return isExceededMaxChallenges(count);
 		}
 
 		return false;
