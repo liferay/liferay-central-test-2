@@ -14,6 +14,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>ADD_NEW_POLL</td>
+	<td>//span[contains(@class,'lfr-icon-action')]/a[contains(.,'Add')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>ADD_QUESTION</td>
 	<td>//div[contains(@class,'lfr-icon-actions')]/span[2]/a</td>
 	<td></td>
