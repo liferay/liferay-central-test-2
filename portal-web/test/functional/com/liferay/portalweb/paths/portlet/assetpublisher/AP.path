@@ -120,7 +120,7 @@
 <!--ASSET_ABSTRACT_DETAIL-->
 <tr>
 	<td>ASSET_ABSTRACT_DETAIL_TITLE</td>
-	<td>//h3[contains(.,'${key_assetTitle}')]</td>
+	<td>//h4[contains(.,'${key_assetTitle}')]</td>
 	<td></td>
 </tr>
 <tr>
@@ -168,7 +168,7 @@
 <!--ASSET_ABSTRACT_BOOKMARK_DETAIL-->
 <tr>
 	<td>ASSET_ABSTRACT_BOOKMARK_DETAIL_NAME</td>
-	<td>//h3[contains(.,'${key_bookmarkName}')]</td>
+	<td>//h4[contains(.,'${key_bookmarkName}')]</td>
 	<td></td>
 </tr>
 <tr>
