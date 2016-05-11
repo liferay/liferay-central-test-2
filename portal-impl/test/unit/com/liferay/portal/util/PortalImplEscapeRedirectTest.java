@@ -41,8 +41,9 @@ public class PortalImplEscapeRedirectTest extends PowerMockito {
 
 	@Test
 	public void testEscapeRedirectWithDomains() throws Exception {
-		String securityMode = PropsValues.REDIRECT_URL_SECURITY_MODE;
-		String[] allowedDomains = PropsValues.REDIRECT_URL_DOMAINS_ALLOWED;
+		String redirectURLSecurityMode = PropsValues.REDIRECT_URL_SECURITY_MODE;
+		String[] redirectURLDomainsAllowed =
+			PropsValues.REDIRECT_URL_DOMAINS_ALLOWED;
 
 		setPropsValuesValue("REDIRECT_URL_SECURITY_MODE", "domain");
 		setPropsValuesValue(
@@ -92,8 +93,10 @@ public class PortalImplEscapeRedirectTest extends PowerMockito {
 			Assert.assertNull(_portalImpl.escapeRedirect("prefix.google.com"));
 		}
 		finally {
-			setPropsValuesValue("REDIRECT_URL_DOMAINS_ALLOWED", allowedDomains);
-			setPropsValuesValue("REDIRECT_URL_SECURITY_MODE", securityMode);
+			setPropsValuesValue(
+				"REDIRECT_URL_DOMAINS_ALLOWED", redirectURLDomainsAllowed);
+			setPropsValuesValue(
+				"REDIRECT_URL_SECURITY_MODE", redirectURLSecurityMode);
 		}
 	}
 
