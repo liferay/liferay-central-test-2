@@ -55,7 +55,7 @@
 		<execute function="Click" locator1="Button#PLUS" />
 
 		<execute function="Type" locator1="TextInput#TITLE" value1="${pollsQuestionTitle}" />
-		<execute function="Type" locator1="TextArea#POLLS_QUESTION" value1="${pollsQuestion}" />
+		<execute function="Type" locator1="TextArea#DESCRIPTION" value1="${pollsQuestion}" />
 		<execute function="Type" locator1="TextInput#POLL_CHOICE_A" value1="${pollsQuestionChoiceA}" />
 		<execute function="Type" locator1="TextInput#POLL_CHOICE_B" value1="${pollsQuestionChoiceB}" />
 		<execute macro="Button#clickSave" />
