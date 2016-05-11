@@ -45,6 +45,7 @@ public class EhcachePortalCacheListenerFactory
 	implements PortalCacheListenerFactory {
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public <K extends Serializable, V> PortalCacheListener<K, V> create(
 		Properties properties) {
 
@@ -52,9 +53,18 @@ public class EhcachePortalCacheListenerFactory
 			properties.get(PortalCacheReplicator.REPLICATOR));
 
 		if (replicator) {
-			return
-				(PortalCacheListener<K, V>)new EhcachePortalCacheReplicator<>(
-					_portalCacheReplicatorFactory.create(properties));
+			PortalCacheListener<K, V> portalCacheListener =
+				(PortalCacheListener<K, V>)
+					_portalCacheReplicatorFactory.create(properties);
+
+			if (portalCacheListener == null) {
+				return null;
+			}
+
+			return (PortalCacheListener<K, V>)
+				new EhcachePortalCacheReplicator<>(
+					(PortalCacheReplicator<K, Serializable>)
+						portalCacheListener);
 		}
 
 		String className = properties.getProperty(
