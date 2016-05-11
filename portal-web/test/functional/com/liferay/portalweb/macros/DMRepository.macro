@@ -72,6 +72,8 @@
 	<command name="viewBreadcrumb">
 		<var name="key_dmFolderName" value="${dmRepositoryName}" />
 
-		<execute function="AssertTextEquals" locator1="DocumentsAndMedia#BREADCRUMB_LAST" value1="${dmRepositoryName}" />
+		<var method="StringUtil#upperCase('${dmRepositoryName}')" name="breadcrumbNameUppercase" />
+
+		<execute function="AssertTextEquals" locator1="DocumentsAndMedia#BREADCRUMB_LAST" value1="${breadcrumbNameUppercase}" />
 	</command>
 </definition>
