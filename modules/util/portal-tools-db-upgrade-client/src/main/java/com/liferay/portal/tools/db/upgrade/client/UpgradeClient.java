@@ -354,7 +354,7 @@ public class UpgradeClient {
 			upgradeSteps.contains("true")) {
 
 			System.out.println(
-				" one or more of your upgrades failed, has not been started, " +
+				" one or more of your upgrades failed, has not started, " +
 					"or is still running.");
 
 			return false;
@@ -370,8 +370,8 @@ public class UpgradeClient {
 		System.out.println("\nUpgrade commands:");
 		System.out.println("exit or quit - Exit Gogo Shell");
 		System.out.println(
-			"upgrade:check - List upgrades that failed or has not been " +
-				"started");
+			"upgrade:check - List upgrades that failed, has not started, or " +
+				"is still running");
 		System.out.println(
 			"upgrade:execute {module_name} - Execute upgrade for specified " +
 				"module");
