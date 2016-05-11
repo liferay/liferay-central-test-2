@@ -20,12 +20,12 @@
 </tr>
 <tr>
 	<td>POLL_QUESTION</td>
-	<td>//form[contains(@id,'INSTANCE') and contains(.,'${key_pollsQuestion}')]</td>
+	<td>//form[contains(@id,'PollsDisplayPortlet') and contains(.,'${key_pollsQuestion}')]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>POLL_QUESTION_CHOICE</td>
-	<td>//label[contains(@for,'pollsweb') and contains(.,'${key_pollsQuestionChoice}')]</td>
+	<td>//fieldset[contains(@class,'fieldset')]//label[contains(.,'${key_pollsQuestionChoice}')]/input</td>
 	<td></td>
 </tr>
 <tr>
@@ -77,7 +77,7 @@
 </tr>
 <tr>
 	<td>VOTES_TOTAL</td>
-	<td>//form[contains(@id,'pollsweb')]//div[contains(.,'Total Votes: ${key_pollsQuestionTotalVotes}')]</td>
+	<td>//form[contains(@id,'PollsDisplayPortlet')]//div[contains(.,'Total Votes: ${key_pollsQuestionTotalVotes}')]</td>
 	<td></td>
 </tr>
 </tbody>
