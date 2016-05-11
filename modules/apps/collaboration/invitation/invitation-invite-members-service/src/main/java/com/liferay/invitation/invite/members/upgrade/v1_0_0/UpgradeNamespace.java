@@ -67,7 +67,7 @@ public class UpgradeNamespace extends UpgradeProcess {
 				return;
 			}
 
-			if (!hasOldTable && !hasNewTable) {
+			if (!hasNewTable && !hasOldTable) {
 				runSQL(tableSqlCreate);
 
 				return;
