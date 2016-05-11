@@ -146,7 +146,7 @@ public class FilePropagator {
 		}
 
 		try {
-			if (_executeRemoteCommands(commands, targetSlave) != 0) {
+			if (_executeBashCommands(commands, targetSlave) != 0) {
 				_errorSlaves.add(targetSlave);
 				_targetSlaves.remove(targetSlave);
 
@@ -169,8 +169,7 @@ public class FilePropagator {
 		System.out.println("Finished copying from source.");
 	}
 
-	private int _executeRemoteCommands(
-			List<String> commands, String targetSlave)
+	private int _executeBashCommands(List<String> commands, String targetSlave)
 		throws InterruptedException, IOException {
 
 		StringBuffer sb = new StringBuffer("ssh ");
@@ -246,7 +245,7 @@ public class FilePropagator {
 			}
 
 			try {
-				_successful = _filePropagator._executeRemoteCommands(
+				_successful = _filePropagator._executeBashCommands(
 					commands, _targetSlave) == 0;
 			}
 			catch (Exception e) {
