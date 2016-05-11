@@ -141,6 +141,7 @@ if (ratingsEntry != null) {
 
 							<%
 							int positiveVotes = (int)Math.round(ratingsStats.getTotalScore());
+
 							int negativeVotes = ratingsStats.getTotalEntries() - positiveVotes;
 
 							boolean thumbUp = (yourScore != -1.0) && (yourScore >= 0.5);
