@@ -47,9 +47,8 @@ public class PortalImplEscapeRedirectTest extends PowerMockito {
 
 		setPropsValuesValue("REDIRECT_URL_SECURITY_MODE", "domain");
 		setPropsValuesValue(
-			"REDIRECT_URL_DOMAINS_ALLOWED", new String[]{
-				"google.com", "localhost"
-			});
+			"REDIRECT_URL_DOMAINS_ALLOWED",
+			new String[] {"google.com", "localhost"});
 
 		try {
 			Assert.assertEquals(
