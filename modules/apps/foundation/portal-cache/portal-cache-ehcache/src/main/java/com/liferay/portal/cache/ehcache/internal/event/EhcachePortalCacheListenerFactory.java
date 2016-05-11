@@ -45,7 +45,6 @@ public class EhcachePortalCacheListenerFactory
 	implements PortalCacheListenerFactory {
 
 	@Override
-	@SuppressWarnings("unchecked")
 	public <K extends Serializable, V> PortalCacheListener<K, V> create(
 		Properties properties) {
 
