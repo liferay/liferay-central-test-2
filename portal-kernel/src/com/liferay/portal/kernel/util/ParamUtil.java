@@ -1191,7 +1191,6 @@ public class ParamUtil {
 	 * @return the request parameter value as a float
 	 */
 	public static float getFloat(HttpServletRequest request, String param) {
-
 		return GetterUtil.getFloat(request.getParameter(param));
 	}
 
@@ -2241,7 +2240,6 @@ public class ParamUtil {
 	 * @return the request parameter value as a String
 	 */
 	public static String getString(HttpServletRequest request, String param) {
-
 		return GetterUtil.getString(request.getParameter(param));
 	}
 
