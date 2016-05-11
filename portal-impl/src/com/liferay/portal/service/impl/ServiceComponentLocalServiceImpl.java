@@ -69,8 +69,8 @@ public class ServiceComponentLocalServiceImpl
 
 		Filter filter = registry.getFilter(
 			"(&(objectClass=" + UpgradeStep.class.getName() +
-				")(upgrade.from.schema.version=0.0.0)" +
-					"(upgrade.initial.database.creation=true))");
+				")(upgrade.from.schema.version=0.0.0)(upgrade.initial." +
+					"database.creation=true))");
 
 		_serviceTrackerList = ServiceTrackerCollections.openList(
 			UpgradeStep.class, filter);
