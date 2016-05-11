@@ -197,7 +197,7 @@ List<AssetRendererFactory<?>> classTypesAssetRendererFactories = new ArrayList<>
 					}
 					%>
 
-					<c:if test="<%= !types.isEmpty() && !siteGroup.isLayoutPrototype() && !siteGroup.isLayoutSetPrototype() && (siteBrowserURL != null) %>">
+					<c:if test="<%= (siteBrowserURL != null) && !types.isEmpty() && !siteGroup.isLayoutPrototype() && !siteGroup.isLayoutSetPrototype() %>">
 
 						<%
 						data = new HashMap<String, Object>();
