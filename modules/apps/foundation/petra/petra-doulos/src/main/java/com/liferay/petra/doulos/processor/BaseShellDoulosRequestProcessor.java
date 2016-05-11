@@ -41,8 +41,6 @@ public abstract class BaseShellDoulosRequestProcessor
 	extends BaseDoulosRequestProcessor {
 
 	public BaseShellDoulosRequestProcessor() {
-		_destroyed = false;
-
 		ConcurrentLinkedHashMap.Builder<String, ShellStatus> builder =
 			new ConcurrentLinkedHashMap.Builder<String, ShellStatus>();
 
@@ -258,7 +256,7 @@ public abstract class BaseShellDoulosRequestProcessor
 		BaseShellDoulosRequestProcessor.class);
 
 	private boolean _destroy;
-	private final boolean _destroyed;
+	private boolean _destroyed;
 	private final Queue<ShellStatus> _queue = new LinkedBlockingQueue<>();
 	private final Map<String, ShellStatus> _shellStatuses;
 
