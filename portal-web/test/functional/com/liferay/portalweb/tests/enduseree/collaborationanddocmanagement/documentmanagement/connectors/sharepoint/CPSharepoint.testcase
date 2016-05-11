@@ -773,7 +773,7 @@
 		</execute>
 
 		<execute macro="DMRepository#viewBreadcrumb">
-			<var name="dmRepositoryName" value="SHAREPOINT REPOSITORY NAME" />
+			<var name="dmRepositoryName" value="Sharepoint Repository Name" />
 		</execute>
 	</command>
 </definition>
