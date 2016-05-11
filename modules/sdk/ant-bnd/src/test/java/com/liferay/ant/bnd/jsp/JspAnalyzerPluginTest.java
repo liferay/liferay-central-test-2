@@ -87,15 +87,15 @@ public class JspAnalyzerPluginTest {
 
 		jspAnalyzerPlugin.addTaglibRequirements(builder, content);
 
-		String requireCapabilityBefore = builder.getProperty(
+		String requireCapability1 = builder.getProperty(
 			Constants.REQUIRE_CAPABILITY);
 
 		jspAnalyzerPlugin.addTaglibRequirements(builder, content);
 
-		String requireCapabilityAfter = builder.getProperty(
+		String requireCapabilityAfte2 = builder.getProperty(
 			Constants.REQUIRE_CAPABILITY);
 
-		Assert.assertEquals(requireCapabilityBefore, requireCapabilityAfter);
+		Assert.assertEquals(requireCapability1, requireCapabilityAfte2);
 	}
 
 	protected URL getResource(String path) {
