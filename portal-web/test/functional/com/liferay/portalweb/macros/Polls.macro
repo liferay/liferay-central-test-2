@@ -48,9 +48,9 @@
 	</command>
 
 	<command name="addPollPG">
-		<execute function="Click" locator1="Polls#ADD_QUESTION" value1="Add Question" />
-
 		<execute function="SelectFrame" locator1="BasePortlet#IFRAME" />
+
+		<execute function="Click" locator1="Button#PLUS" />
 
 		<execute function="Type" locator1="TextInput#TITLE" value1="${pollsQuestionTitle}" />
 		<execute function="Type" locator1="TextArea#POLLS_QUESTION" value1="${pollsQuestion}" />
