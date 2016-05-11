@@ -76,7 +76,7 @@ public class ImageEditorDLDisplayContextHelper {
 		}
 		catch (PortalException pe) {
 			throw new SystemException(
-				"Unable to build image editor document library display " +
+				"Unable to create image editor document library display " +
 					"context helper for file version " + fileVersion,
 				pe);
 		}

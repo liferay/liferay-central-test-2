@@ -69,7 +69,7 @@ public class ImageEditorDLViewFileVersionDisplayContext
 		}
 		catch (PortalException pe) {
 			throw new SystemException(
-				"Unable to build image editor document library view file " +
+				"Unable to create image editor document library view file " +
 					"version display context for file version " + fileVersion,
 				pe);
 		}
