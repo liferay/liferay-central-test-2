@@ -166,7 +166,7 @@ public class EditFileEntryImageEditorMVCActionCommand
 		SessionMessages.add(
 			actionRequest, "requestProcessed",
 			LanguageUtil.get(
-				resourceBundle, "the-image-has-been-edited-successfully"));
+				resourceBundle, "the-image-was-edited-successfully"));
 
 		JSONPortletResponseUtil.writeJSON(
 			actionRequest, actionResponse, jsonObject);
