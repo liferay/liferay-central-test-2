@@ -41,9 +41,9 @@ public class PortalImplEscapeRedirectTest extends PowerMockito {
 
 	@Test
 	public void testEscapeRedirectWithDomains() throws Exception {
-		String redirectURLSecurityMode = PropsValues.REDIRECT_URL_SECURITY_MODE;
 		String[] redirectURLDomainsAllowed =
 			PropsValues.REDIRECT_URL_DOMAINS_ALLOWED;
+		String redirectURLSecurityMode = PropsValues.REDIRECT_URL_SECURITY_MODE;
 
 		setPropsValuesValue("REDIRECT_URL_SECURITY_MODE", "domain");
 		setPropsValuesValue(
@@ -54,38 +54,30 @@ public class PortalImplEscapeRedirectTest extends PowerMockito {
 			Assert.assertEquals(
 				"/web/guest",
 				_portalImpl.escapeRedirect("/web/guest"));
-
 			Assert.assertEquals(
 				"/a/b;c=d?e=f&g=h#x=y",
 				_portalImpl.escapeRedirect("/a/b;c=d?e=f&g=h#x=y"));
-
 			Assert.assertEquals(
 				"http://localhost",
 				_portalImpl.escapeRedirect("http://localhost"));
-
 			Assert.assertEquals(
 				"https://localhost:8080/a/b;c=d?e=f&g=h#x=y",
 				_portalImpl.escapeRedirect(
 					"https://localhost:8080/a/b;c=d?e=f&g=h#x=y"));
-
 			Assert.assertEquals(
 				"google.com",
 				_portalImpl.escapeRedirect("google.com"));
-
 			Assert.assertEquals(
 				"http://google.com",
 				_portalImpl.escapeRedirect("http://google.com"));
-
 			Assert.assertEquals(
 				"https://google.com:8080/a/b;c=d?e=f&g=h#x=y",
 				_portalImpl.escapeRedirect(
 					"https://google.com:8080/a/b;c=d?e=f&g=h#x=y"));
-
 			Assert.assertNull(_portalImpl.escapeRedirect("liferay.com"));
 			Assert.assertNull(_portalImpl.escapeRedirect("http://liferay.com"));
 			Assert.assertNull(_portalImpl.escapeRedirect(
 				"https://liferay.com:8080/a/b;c=d?e=f&g=h#x=y"));
-
 			Assert.assertNull(_portalImpl.escapeRedirect("google.comsuffix"));
 			Assert.assertNull(_portalImpl.escapeRedirect("google.com.suffix"));
 			Assert.assertNull(_portalImpl.escapeRedirect("prefixgoogle.com"));
@@ -101,8 +93,8 @@ public class PortalImplEscapeRedirectTest extends PowerMockito {
 
 	@Test
 	public void testEscapeRedirectWithIPs() throws Exception {
-		String securityMode = PropsValues.REDIRECT_URL_SECURITY_MODE;
-		String[] allowedIPs = PropsValues.REDIRECT_URL_IPS_ALLOWED;
+		String[] redirectURLIPsAllowed = PropsValues.REDIRECT_URL_IPS_ALLOWED;
+		String redirectURLSecurityMode = PropsValues.REDIRECT_URL_SECURITY_MODE;
 
 		setPropsValuesValue("REDIRECT_URL_SECURITY_MODE", "ip");
 		setPropsValuesValue(
@@ -112,15 +104,12 @@ public class PortalImplEscapeRedirectTest extends PowerMockito {
 			Assert.assertEquals(
 				"/web/guest",
 				_portalImpl.escapeRedirect("/web/guest"));
-
 			Assert.assertEquals(
 				"/a/b;c=d?e=f&g=h#x=y",
 				_portalImpl.escapeRedirect("/a/b;c=d?e=f&g=h#x=y"));
-
 			Assert.assertEquals(
 				"http://localhost",
 				_portalImpl.escapeRedirect("http://localhost"));
-
 			Assert.assertEquals(
 				"https://localhost:8080/a/b;c=d?e=f&g=h#x=y",
 				_portalImpl.escapeRedirect(
@@ -132,7 +121,6 @@ public class PortalImplEscapeRedirectTest extends PowerMockito {
 				Assert.assertEquals(
 					"http://" + computerAddress,
 					_portalImpl.escapeRedirect("http://" + computerAddress));
-
 				Assert.assertEquals(
 					"https://" + computerAddress + "/a/b;c=d?e=f&g=h#x=y",
 					_portalImpl.escapeRedirect(
@@ -143,111 +131,102 @@ public class PortalImplEscapeRedirectTest extends PowerMockito {
 			Assert.assertNull(_portalImpl.escapeRedirect("http://liferay.com"));
 			Assert.assertNull(_portalImpl.escapeRedirect(
 				"https://liferay.com:8080/a/b;c=d?e=f&g=h#x=y"));
-
 			Assert.assertNull(_portalImpl.escapeRedirect("127.0.0.1suffix"));
 			Assert.assertNull(_portalImpl.escapeRedirect("127.0.0.1.suffix"));
 			Assert.assertNull(_portalImpl.escapeRedirect("prefix127.0.0.1"));
 			Assert.assertNull(_portalImpl.escapeRedirect("prefix.127.0.0.1"));
 		}
 		finally {
-			setPropsValuesValue("REDIRECT_URL_IPS_ALLOWED", allowedIPs);
-			setPropsValuesValue("REDIRECT_URL_SECURITY_MODE", securityMode);
+			setPropsValuesValue(
+				"REDIRECT_URL_IPS_ALLOWED", redirectURLIPsAllowed);
+			setPropsValuesValue(
+				"REDIRECT_URL_SECURITY_MODE", redirectURLSecurityMode);
 		}
 	}
 
 	@Test
-	public void testEscapeRedirectWithSubDomains() throws Exception {
-		String securityMode = PropsValues.REDIRECT_URL_SECURITY_MODE;
-		String[] allowedDomains = PropsValues.REDIRECT_URL_DOMAINS_ALLOWED;
+	public void testEscapeRedirectWithSubdomains() throws Exception {
+		String[] redirectURLDomainsAllowed =
+			PropsValues.REDIRECT_URL_DOMAINS_ALLOWED;
+		String redirectURLSecurityMode = PropsValues.REDIRECT_URL_SECURITY_MODE;
 
 		setPropsValuesValue("REDIRECT_URL_SECURITY_MODE", "domain");
 		setPropsValuesValue(
-			"REDIRECT_URL_DOMAINS_ALLOWED", new String[]{
-				"*.test.liferay.com", "google.com"
-			});
+			"REDIRECT_URL_DOMAINS_ALLOWED",
+			new String[] {"*.test.liferay.com", "google.com"});
 
 		try {
 			Assert.assertEquals(
 				"/web/guest",
 				_portalImpl.escapeRedirect("/web/guest"));
-
 			Assert.assertEquals(
 				"/a/b;c=d?e=f&g=h#x=y",
 				_portalImpl.escapeRedirect("/a/b;c=d?e=f&g=h#x=y"));
-
 			Assert.assertEquals(
 				"test.liferay.com",
 				_portalImpl.escapeRedirect("test.liferay.com"));
-
 			Assert.assertEquals(
 				"http://test.liferay.com",
 				_portalImpl.escapeRedirect("http://test.liferay.com"));
-
 			Assert.assertEquals(
 				"https://test.liferay.com:8080/a/b;c=d?e=f&g=h#x=y",
 				_portalImpl.escapeRedirect(
 					"https://test.liferay.com:8080/a/b;c=d?e=f&g=h#x=y"));
-
 			Assert.assertEquals(
 				"second.test.liferay.com",
 				_portalImpl.escapeRedirect("second.test.liferay.com"));
-
 			Assert.assertEquals(
 				"http://second.test.liferay.com",
 				_portalImpl.escapeRedirect("http://second.test.liferay.com"));
-
 			Assert.assertEquals(
 				"https://second.test.liferay.com:8080/a/b;c=d?e=f&g=h#x=y",
 				_portalImpl.escapeRedirect(
 					"https://second.test.liferay.com:8080/" +
 						"a/b;c=d?e=f&g=h#x=y"));
-
 			Assert.assertEquals(
 				"google.com",
 				_portalImpl.escapeRedirect("google.com"));
-
 			Assert.assertEquals(
 				"http://google.com",
 				_portalImpl.escapeRedirect("http://google.com"));
-
 			Assert.assertEquals(
 				"https://google.com:8080/a/b;c=d?e=f&g=h#x=y",
 				_portalImpl.escapeRedirect(
 					"https://google.com:8080/a/b;c=d?e=f&g=h#x=y"));
-
 			Assert.assertNull(_portalImpl.escapeRedirect("liferay.com"));
 			Assert.assertNull(_portalImpl.escapeRedirect("http://liferay.com"));
 			Assert.assertNull(_portalImpl.escapeRedirect(
 				"https://liferay.com:8080/a/b;c=d?e=f&g=h#x=y"));
-
 			Assert.assertNull(_portalImpl.escapeRedirect(
 				"test.liferay.comsuffix"));
 			Assert.assertNull(_portalImpl.escapeRedirect(
 				"test.liferay.com.suffix"));
 			Assert.assertNull(_portalImpl.escapeRedirect(
 				"prefixtest.liferay.com"));
-
 			Assert.assertNull(_portalImpl.escapeRedirect("google.comsuffix"));
 			Assert.assertNull(_portalImpl.escapeRedirect("google.com.suffix"));
 			Assert.assertNull(_portalImpl.escapeRedirect("prefixgoogle.com"));
 			Assert.assertNull(_portalImpl.escapeRedirect("prefix.google.com"));
 		}
 		finally {
-			setPropsValuesValue("REDIRECT_URL_DOMAINS_ALLOWED", allowedDomains);
-			setPropsValuesValue("REDIRECT_URL_SECURITY_MODE", securityMode);
+			setPropsValuesValue(
+				"REDIRECT_URL_DOMAINS_ALLOWED", redirectURLDomainsAllowed);
+			setPropsValuesValue(
+				"REDIRECT_URL_SECURITY_MODE", redirectURLSecurityMode);
 		}
 	}
 
-	protected void setPropsValuesValue(String fieldName, Object value)
+	protected void setPropsValuesValue(String name, Object value)
 		throws Exception {
-
-		Field field = field(PropsValues.class, fieldName);
-
-		field.setAccessible(true);
 
 		Field modifiersField = Field.class.getDeclaredField("modifiers");
 
 		modifiersField.setAccessible(true);
+
+		Field field = field(PropsValues.class, name);
+
+		field.setAccessible(true);
+
 		modifiersField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
 
 		field.set(PropsValues.class, value);
