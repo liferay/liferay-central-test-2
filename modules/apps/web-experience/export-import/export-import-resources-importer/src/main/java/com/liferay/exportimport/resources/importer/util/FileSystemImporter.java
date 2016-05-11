@@ -1713,10 +1713,10 @@ public class FileSystemImporter extends BaseImporter {
 	protected void resetLayoutColumns(Layout layout) {
 		UnicodeProperties typeSettings = layout.getTypeSettingsProperties();
 
-		int counter = 1;
+		int count = 1;
 
 		do {
-			String portletIds = typeSettings.remove("column-" + counter++);
+			String portletIds = typeSettings.remove("column-" + count++);
 
 			if (Validator.isNull(portletIds)) {
 				break;
@@ -1734,7 +1734,8 @@ public class FileSystemImporter extends BaseImporter {
 				catch (PortalException pe) {
 					if (_log.isWarnEnabled()) {
 						_log.warn(
-							"Could not delete preferences for: " + portletId,
+							"Unable to delete portlet preferences for " +
+								"portlet " + portletId,
 							pe);
 					}
 				}
