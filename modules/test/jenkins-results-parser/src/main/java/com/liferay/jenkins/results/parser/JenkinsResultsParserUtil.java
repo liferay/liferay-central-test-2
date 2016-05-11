@@ -135,20 +135,20 @@ public class JenkinsResultsParserUtil {
 			sb.append(" ");
 		}
 
-		sb.append("echo BASH COMMANDS COMPLETE\n");
+		sb.append("echo Finished executing Bash commands.\n");
 
 		bashCommands[2] = sb.toString();
 
 		Process process = runtime.exec(bashCommands);
 
-		System.out.println("Output stream: " + readInputStream(
-			process.getInputStream()));
+		System.out.println(
+			"Output stream: " + readInputStream(process.getInputStream()));
 
 		int returnCode = process.waitFor();
 
 		if (returnCode != 0) {
-			System.out.println("Error stream: " + readInputStream(
-				process.getErrorStream()));
+			System.out.println(
+				"Error stream: " + readInputStream(process.getErrorStream()));
 		}
 
 		return process;
@@ -467,7 +467,7 @@ public class JenkinsResultsParserUtil {
 		return sb.toString();
 	}
 
-	public static void sendNotification(
+	public static void sendEmail(
 			String body, String from, String subject, String to)
 		throws Exception {
 
