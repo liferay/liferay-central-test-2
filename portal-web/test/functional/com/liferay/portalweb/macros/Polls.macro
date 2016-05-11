@@ -10,7 +10,7 @@
 		<if>
 			<isset var="pollsQuestionChoiceC" />
 			<then>
-				<execute function="AssertClick" locator1="CPPollsAddquestion#ADD_CHOICE_BUTTON" value1="Add Choice" />
+				<execute function="AssertClick" locator1="Polls#ADD_CHOICE_BUTTON" value1="Add Choice" />
 				<execute function="Type" locator1="CPPollsAddquestion#CHOICE_C_FIELD" value1="${pollsQuestionChoiceC}" />
 			</then>
 		</if>
@@ -18,7 +18,7 @@
 		<if>
 			<isset var="pollsQuestionChoiceD" />
 			<then>
-				<execute function="AssertClick" locator1="CPPollsAddquestion#ADD_CHOICE_BUTTON" value1="Add Choice" />
+				<execute function="AssertClick" locator1="Polls#ADD_CHOICE_BUTTON" value1="Add Choice" />
 				<execute function="Type" locator1="CPPollsAddquestion#CHOICE_D_FIELD" value1="${pollsQuestionChoiceD}" />
 			</then>
 		</if>
@@ -26,7 +26,7 @@
 		<if>
 			<isset var="pollsQuestionChoiceE" />
 			<then>
-				<execute function="AssertClick" locator1="CPPollsAddquestion#ADD_CHOICE_BUTTON" value1="Add Choice" />
+				<execute function="AssertClick" locator1="Polls#ADD_CHOICE_BUTTON" value1="Add Choice" />
 				<execute function="Type" locator1="CPPollsAddquestion#CHOICE_E_FIELD" value1="${pollsQuestionChoiceE}" />
 			</then>
 		</if>
