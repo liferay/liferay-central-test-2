@@ -27,7 +27,7 @@
 		<var name="key_dmDocumentTitle" value="${dmDocumentTitle}" />
 
 		<if>
-			<condition function="IsElementPresent" locator1="DocumentsAndMedia#DESCRIPTIVE_VIEW_ACTIVE" />
+			<condition function="IsElementPresent" locator1="Icon#DISPLAY_STYLE_DESCRIPTIVE_ACTIVE" />
 			<then>
 				<execute function="AssertClick" locator1="DocumentsAndMedia#DESCRIPTIVE_LIST_DOCUMENT_TITLE" value1="${dmDocumentTitle}" />
 			</then>
