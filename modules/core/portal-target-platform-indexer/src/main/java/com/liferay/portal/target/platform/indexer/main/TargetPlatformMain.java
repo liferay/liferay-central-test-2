@@ -117,20 +117,20 @@ public class TargetPlatformMain implements Indexer {
 			StringUtil.merge(moduleFrameworkInitialBundles));
 
 		String bundleSymbolicName = "com.liferay.target.platform";
-		String version = ReleaseInfo.getVersion();
+		String bundleVersion = ReleaseInfo.getVersion();
 
 		File targetPlatformDir = new File(
 			PropsValues.MODULE_FRAMEWORK_BASE_DIR, DIR_NAME_TARGET_PLATFORM);
 
 		if (!targetPlatformDir.exists() && !targetPlatformDir.mkdirs()) {
 			System.err.printf(
-				"== Cannot create directory %s\n", targetPlatformDir);
+				"== Unable to create directory %s\n", targetPlatformDir);
 
 			return;
 		}
 
 		TargetPlatformMain targetPlatformIndexer = new TargetPlatformMain(
-			bundleSymbolicName, version);
+			bundleSymbolicName, bundleVersion);
 
 		try {
 			File indexFile = targetPlatformIndexer.index(targetPlatformDir);
@@ -142,30 +142,33 @@ public class TargetPlatformMain implements Indexer {
 		}
 	}
 
-	public TargetPlatformMain(String bundleSymbolicName, String version) {
+	public TargetPlatformMain(String bundleSymbolicName, String bundleVersion) {
 		_bundleSymbolicName = bundleSymbolicName;
-		_version = version;
+		_bundleVersion = bundleVersion;
 
 		_moduleFrameworkImpl = new ModuleFrameworkImpl();
 
-		_indexerConfig = new HashMap<>();
+		_config = new HashMap<>();
 
-		_indexerConfig.put("compressed", "false");
-		_indexerConfig.put(
+		_config.put("compressed", "false");
+		_config.put(
 			"license.url", "https://www.liferay.com/downloads/ce-license");
-		_indexerConfig.put("pretty", "true");
-		_indexerConfig.put("repository.name", ReleaseInfo.getReleaseInfo());
-		_indexerConfig.put(
+		_config.put("pretty", "true");
+		_config.put("repository.name", ReleaseInfo.getReleaseInfo());
+		_config.put(
 			"stylesheet", "http://www.osgi.org/www/obr2html.xsl");
 	}
 
 	@Override
-	public File index(File output) throws Exception {
-		Path tempFolder = Files.createTempDirectory(null);
+	public File index(File outputFile) throws Exception {
+		Path tempPath = Files.createTempDirectory(null);
+		
+		File tempDir = tempPath.toFile();
 
-		_indexerConfig.put("root.url", tempFolder.toFile().getCanonicalPath());
+		_config.put("root.url", tempDir.getCanonicalPath());
 
 		_moduleFrameworkImpl.initFramework();
+
 		_moduleFrameworkImpl.startFramework();
 
 		Framework framework = _moduleFrameworkImpl.getFramework();
@@ -176,16 +179,16 @@ public class TargetPlatformMain implements Indexer {
 
 		Manifest manifest = new Manifest();
 
-		Attributes mainAttributes = manifest.getMainAttributes();
+		Attributes attributes = manifest.getMainAttributes();
 
-		mainAttributes.putValue(Constants.BUNDLE_MANIFESTVERSION, "2");
-		mainAttributes.putValue(Constants.BUNDLE_SYMBOLICNAME, _bundleSymbolicName);
-		mainAttributes.putValue(Constants.BUNDLE_VERSION, _version);
+		attributes.putValue(Constants.BUNDLE_MANIFESTVERSION, "2");
+		attributes.putValue(Constants.BUNDLE_SYMBOLICNAME, _bundleSymbolicName);
+		attributes.putValue(Constants.BUNDLE_VERSION, _bundleVersion);
 
 		String exportPackage = StringUtil.replace(
 			_packages.toString(), "version:Version", "version");
 
-		mainAttributes.putValue(Constants.EXPORT_PACKAGE, exportPackage);
+		attributes.putValue(Constants.EXPORT_PACKAGE, exportPackage);
 
 		StringBundler sb = new StringBundler();
 
@@ -198,16 +201,16 @@ public class TargetPlatformMain implements Indexer {
 
 		String capabilities = sb.toString();
 
-		mainAttributes.putValue(Constants.PROVIDE_CAPABILITY, capabilities);
-		mainAttributes.putValue(
+		attributes.putValue(Constants.PROVIDE_CAPABILITY, capabilities);
+		attributes.putValue(
 			Constants.BUNDLE_DESCRIPTION, ReleaseInfo.getReleaseInfo());
-		mainAttributes.putValue(
+		attributes.putValue(
 			Constants.BUNDLE_LICENSE,
 			"http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt");
-		mainAttributes.putValue(
+		attributes.putValue(
 			Constants.BUNDLE_COPYRIGHT,
 			"Copyright (c) 2000-present All rights reserved.");
-		mainAttributes.putValue(
+		attributes.putValue(
 			Constants.BUNDLE_VENDOR, ReleaseInfo.getVendor());
 
 		Jar jar = new Jar("distro");
@@ -246,7 +249,7 @@ public class TargetPlatformMain implements Indexer {
 			}
 
 			File outputJar = new File(
-				tempFolder.toFile(), _bundleSymbolicName + "-" + _version + ".jar");
+				tempPath.toFile(), _bundleSymbolicName + "-" + _bundleVersion + ".jar");
 
 			jar.write(outputJar);
 
@@ -260,7 +263,7 @@ public class TargetPlatformMain implements Indexer {
 					PropsValues.MODULE_FRAMEWORK_INITIAL_BUNDLES) {
 
 				addBundleToIndex(
-					initialBundle, baseDir, tempFolder.toFile(), fileList);
+					initialBundle, baseDir, tempPath.toFile(), fileList);
 			}
 
 			String[] autoDeployDirs = ArrayUtil.append(
@@ -286,20 +289,20 @@ public class TargetPlatformMain implements Indexer {
 
 				for (File additionalBundle : additionalBundles) {
 					addBundleToIndex(
-						additionalBundle, tempFolder.toFile(), fileList);
+						additionalBundle, tempPath.toFile(), fileList);
 				}
 			}
 
 			File tempIndexFile = new File(
-				tempFolder.toFile(), _bundleSymbolicName + "-" + _version + "-index.xml");
+				tempPath.toFile(), _bundleSymbolicName + "-" + _bundleVersion + "-index.xml");
 
 			ResourceIndexer resourceIndexer = new RepoIndex();
 
 			try (FileOutputStream fos = new FileOutputStream(tempIndexFile)) {
-				resourceIndexer.index(fileList, fos, _indexerConfig);
+				resourceIndexer.index(fileList, fos, _config);
 			}
 
-			File indexFile = new File(output, tempIndexFile.getName());
+			File indexFile = new File(outputFile, tempIndexFile.getName());
 
 			Files.copy(
 				tempIndexFile.toPath(), indexFile.toPath(),
@@ -309,7 +312,7 @@ public class TargetPlatformMain implements Indexer {
 			return indexFile;
 		}
 		finally {
-			PathUtil.deltree(tempFolder);
+			PathUtil.deltree(tempPath);
 
 			_moduleFrameworkImpl.stopFramework(0);
 		}
@@ -423,10 +426,10 @@ public class TargetPlatformMain implements Indexer {
 	}
 
 	private final String _bundleSymbolicName;
-	private final Map<String, String> _indexerConfig;
+	private final Map<String, String> _config;
 	private final ModuleFrameworkImpl _moduleFrameworkImpl;
 	private final Parameters _packages = new Parameters();
 	private final List<Parameters> _provided = new ArrayList<>();
-	private final String _version;
+	private final String _bundleVersion;
 
 }
