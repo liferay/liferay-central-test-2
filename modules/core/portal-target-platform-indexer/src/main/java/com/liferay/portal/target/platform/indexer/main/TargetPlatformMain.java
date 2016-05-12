@@ -116,7 +116,7 @@ public class TargetPlatformMain implements Indexer {
 			PropsKeys.MODULE_FRAMEWORK_INITIAL_BUNDLES,
 			StringUtil.merge(moduleFrameworkInitialBundles));
 
-		String bsn = "com.liferay.target.platform";
+		String bundleSymbolicName = "com.liferay.target.platform";
 		String version = ReleaseInfo.getVersion();
 
 		File targetPlatformDir = new File(
@@ -130,7 +130,7 @@ public class TargetPlatformMain implements Indexer {
 		}
 
 		TargetPlatformMain targetPlatformIndexer = new TargetPlatformMain(
-			bsn, version);
+			bundleSymbolicName, version);
 
 		try {
 			File indexFile = targetPlatformIndexer.index(targetPlatformDir);
@@ -142,8 +142,8 @@ public class TargetPlatformMain implements Indexer {
 		}
 	}
 
-	public TargetPlatformMain(String bsn, String version) {
-		_bsn = bsn;
+	public TargetPlatformMain(String bundleSymbolicName, String version) {
+		_bundleSymbolicName = bundleSymbolicName;
 		_version = version;
 
 		_moduleFrameworkImpl = new ModuleFrameworkImpl();
@@ -179,7 +179,7 @@ public class TargetPlatformMain implements Indexer {
 		Attributes mainAttributes = manifest.getMainAttributes();
 
 		mainAttributes.putValue(Constants.BUNDLE_MANIFESTVERSION, "2");
-		mainAttributes.putValue(Constants.BUNDLE_SYMBOLICNAME, _bsn);
+		mainAttributes.putValue(Constants.BUNDLE_SYMBOLICNAME, _bundleSymbolicName);
 		mainAttributes.putValue(Constants.BUNDLE_VERSION, _version);
 
 		String exportPackage = StringUtil.replace(
@@ -246,7 +246,7 @@ public class TargetPlatformMain implements Indexer {
 			}
 
 			File outputJar = new File(
-				tempFolder.toFile(), _bsn + "-" + _version + ".jar");
+				tempFolder.toFile(), _bundleSymbolicName + "-" + _version + ".jar");
 
 			jar.write(outputJar);
 
@@ -291,7 +291,7 @@ public class TargetPlatformMain implements Indexer {
 			}
 
 			File tempIndexFile = new File(
-				tempFolder.toFile(), _bsn + "-" + _version + "-index.xml");
+				tempFolder.toFile(), _bundleSymbolicName + "-" + _version + "-index.xml");
 
 			ResourceIndexer resourceIndexer = new RepoIndex();
 
@@ -422,7 +422,7 @@ public class TargetPlatformMain implements Indexer {
 		_ignoredNamespaces.add(PackageNamespace.PACKAGE_NAMESPACE);
 	}
 
-	private final String _bsn;
+	private final String _bundleSymbolicName;
 	private final Map<String, String> _indexerConfig;
 	private final ModuleFrameworkImpl _moduleFrameworkImpl;
 	private final Parameters _packages = new Parameters();
