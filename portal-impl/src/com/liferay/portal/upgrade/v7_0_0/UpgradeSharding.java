@@ -63,14 +63,15 @@ public class UpgradeSharding extends UpgradeProcess {
 			sourceConnection, targetConnection, CompanyTable.TABLE_NAME,
 			CompanyTable.TABLE_COLUMNS, CompanyTable.TABLE_SQL_CREATE);
 
-		List<Long> companyIdsList = getCompanyIds(shardName);
+		List<Long> companyIds = getCompanyIds(shardName);
 
-		String companyIds = ListUtil.toString(
-			companyIdsList, StringPool.NULL, StringPool.COMMA);
+		String companyIdsString = ListUtil.toString(
+			companyIds, StringPool.NULL, StringPool.COMMA);
 
 		runSQL(
 			targetConnection,
-			"delete from Company where companyId not in (" + companyIds + ")");
+			"delete from Company where companyId not in (" + companyIdsString +
+				")");
 	}
 
 	protected void copyControlTable(
