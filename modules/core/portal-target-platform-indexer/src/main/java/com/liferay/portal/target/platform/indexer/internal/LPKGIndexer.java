@@ -44,40 +44,44 @@ public class LPKGIndexer implements Indexer {
 	public LPKGIndexer(File lpkgFile) {
 		_lpkgFile = lpkgFile;
 
-		_indexerConfig = new HashMap<>();
+		_config = new HashMap<>();
 
-		_indexerConfig.put("compressed", "false");
-		_indexerConfig.put(
+		_config.put("compressed", "false");
+		_config.put(
 			"license.url", "https://www.liferay.com/downloads/ce-license");
-		_indexerConfig.put("pretty", "true");
-		_indexerConfig.put("repository.name", ReleaseInfo.getReleaseInfo());
-		_indexerConfig.put(
+		_config.put("pretty", "true");
+		_config.put("repository.name", ReleaseInfo.getReleaseInfo());
+		_config.put(
 			"stylesheet", "http://www.osgi.org/www/obr2html.xsl");
 	}
 
 	@Override
-	public File index(File output) throws Exception {
-		Path tempFolder = Files.createTempDirectory(null);
+	public File index(File outputFile) throws Exception {
+		Path tempPath = Files.createTempDirectory(null);
 
-		_indexerConfig.put("root.url", tempFolder.toFile().getCanonicalPath());
+		File tempDir = tempPath.toFile();
+
+		_config.put("root.url", tempDir.getCanonicalPath());
 
 		String bsn = _lpkgFile.getName();
 		String version = "1.0.0";
 
 		try (ZipFile zipFile = new ZipFile(_lpkgFile)) {
-			Enumeration<? extends ZipEntry> entries = zipFile.entries();
+			ResourceIndexer resourceIndexer = new RepoIndex();
+			
+			Enumeration<? extends ZipEntry> enumeration = zipFile.entries();
 
-			Set<File> fileList = new LinkedHashSet<>();
+			Set<File> files = new LinkedHashSet<>();
 
-			while (entries.hasMoreElements()) {
-				ZipEntry entry = entries.nextElement();
+			while (enumeration.hasMoreElements()) {
+				ZipEntry zipEntry = enumeration.nextElement();
 
-				String name = entry.getName();
+				String name = zipEntry.getName();
 
 				if (name.endsWith("liferay-marketplace.properties")) {
 					Properties properties = new Properties();
 
-					properties.load(zipFile.getInputStream(entry));
+					properties.load(zipFile.getInputStream(zipEntry));
 
 					bsn = properties.getProperty("title");
 					version = properties.getProperty("version");
@@ -88,39 +92,39 @@ public class LPKGIndexer implements Indexer {
 					continue;
 				}
 
-				File tempFile = new File(tempFolder.toFile(), name);
+				File file = new File(tempDir, name);
 
-				Files.copy(zipFile.getInputStream(entry), tempFile.toPath());
+				Files.copy(zipFile.getInputStream(zipEntry), file.toPath());
 
-				fileList.add(tempFile);
+				files.add(file);
 			}
 
-			File tempIndexFile = new File(
-				tempFolder.toFile(), bsn + "-" + version + "-index.xml");
+			File indexFile = new File(
+				tempDir, bsn + "-" + version + "-index.xml");
 
-			ResourceIndexer resourceIndexer = new RepoIndex();
+			try (FileOutputStream fileOutputStream =
+					new FileOutputStream(indexFile)) {
 
-			try (FileOutputStream fos = new FileOutputStream(tempIndexFile)) {
-				resourceIndexer.index(fileList, fos, _indexerConfig);
+				resourceIndexer.index(files, fileOutputStream, _config);
 			}
 
-			if (output.isDirectory()) {
-				output = new File(output, tempIndexFile.getName());
+			if (outputFile.isDirectory()) {
+				outputFile = new File(outputFile, indexFile.getName());
 			}
 
 			Files.copy(
-				tempIndexFile.toPath(), output.toPath(),
+				indexFile.toPath(), outputFile.toPath(),
 				StandardCopyOption.COPY_ATTRIBUTES,
 				StandardCopyOption.REPLACE_EXISTING);
 
-			return output;
+			return outputFile;
 		}
 		finally {
-			PathUtil.deltree(tempFolder);
+			PathUtil.deltree(tempPath);
 		}
 	}
 
-	private final Map<String, String> _indexerConfig;
+	private final Map<String, String> _config;
 	private final File _lpkgFile;
 
 }
