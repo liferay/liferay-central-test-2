@@ -144,18 +144,15 @@ public class AssetUtil {
 			portletURL.setParameter(
 				"categoryId", String.valueOf(ancestorCategory.getCategoryId()));
 
-			ancestorCategory.setTitleCurrentLanguageId(
-				themeDisplay.getLanguageId());
 			PortalUtil.addPortletBreadcrumbEntry(
-				request, ancestorCategory.getTitleCurrentValue(),
+				request, ancestorCategory.getTitle(themeDisplay.getLocale()),
 				portletURL.toString());
 		}
 
 		portletURL.setParameter("categoryId", String.valueOf(assetCategoryId));
 
-		assetCategory.setTitleCurrentLanguageId(themeDisplay.getLanguageId());
 		PortalUtil.addPortletBreadcrumbEntry(
-			request, assetCategory.getTitleCurrentValue(),
+			request, assetCategory.getTitle(themeDisplay.getLocale()),
 			portletURL.toString());
 	}
 
