@@ -127,9 +127,7 @@ public class ServerDetector {
 	}
 
 	/**
-	 * @return     true since this is always possible with OSGi
-	 *
-	 * @deprecated As of 7.3.0, with no direct replacement
+	 * @deprecated As of 7.0.0, with no direct replacement
 	 */
 	@Deprecated
 	public static boolean isSupportsHotDeploy() {
