@@ -44,8 +44,6 @@ public class LPKGIndexer implements Indexer {
 	public LPKGIndexer(File lpkgFile) {
 		_lpkgFile = lpkgFile;
 
-		_config = new HashMap<>();
-
 		_config.put("compressed", "false");
 		_config.put(
 			"license.url", "https://www.liferay.com/downloads/ce-license");
@@ -68,9 +66,9 @@ public class LPKGIndexer implements Indexer {
 		try (ZipFile zipFile = new ZipFile(_lpkgFile)) {
 			ResourceIndexer resourceIndexer = new RepoIndex();
 
-			Enumeration<? extends ZipEntry> enumeration = zipFile.entries();
-
 			Set<File> files = new LinkedHashSet<>();
+
+			Enumeration<? extends ZipEntry> enumeration = zipFile.entries();
 
 			while (enumeration.hasMoreElements()) {
 				ZipEntry zipEntry = enumeration.nextElement();
@@ -124,7 +122,7 @@ public class LPKGIndexer implements Indexer {
 		}
 	}
 
-	private final Map<String, String> _config;
+	private final Map<String, String> _config = new HashMap<>();
 	private final File _lpkgFile;
 
 }
