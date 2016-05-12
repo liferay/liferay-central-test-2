@@ -39,7 +39,7 @@ public class IndexValidatorMain {
 			return;
 		}
 
-		List<URI> indexFiles = new ArrayList<>();
+		List<URI> indexURIs = new ArrayList<>();
 
 		for (String arg : args) {
 			File file = new File(arg);
@@ -52,13 +52,13 @@ public class IndexValidatorMain {
 				String name = file.getName();
 
 				if (name.endsWith(".xml") || name.endsWith(".xml.gz")) {
-					indexFiles.add(file.toURI());
+					indexURIs.add(file.toURI());
 				}
 
 				continue;
 			}
 
-			File[] files = file.listFiles(
+			File[] childFiles = file.listFiles(
 				new FilenameFilter() {
 
 					@Override
@@ -72,14 +72,14 @@ public class IndexValidatorMain {
 
 				});
 
-			for (File entry : files) {
-				if (entry.exists() && entry.canRead()) {
-					indexFiles.add(entry.toURI());
+			for (File childFile : childFiles) {
+				if (childFile.exists() && childFile.canRead()) {
+					indexURIs.add(childFile.toURI());
 				}
 			}
 		}
 
-		if (indexFiles.isEmpty()) {
+		if (indexURIs.isEmpty()) {
 			System.err.println(
 				"== No index files found in " + Arrays.toString(args));
 
@@ -88,12 +88,12 @@ public class IndexValidatorMain {
 
 		IndexValidator indexValidator = new IndexValidator();
 
-		List<String> errors = indexValidator.validate(indexFiles);
+		List<String> messages = indexValidator.validate(indexURIs);
 
-		if (!errors.isEmpty()) {
+		if (!messages.isEmpty()) {
 			System.out.println("== Validation errors");
 
-			for (String message : errors) {
+			for (String message : messages) {
 				System.out.println("== " + message);
 			}
 		}
