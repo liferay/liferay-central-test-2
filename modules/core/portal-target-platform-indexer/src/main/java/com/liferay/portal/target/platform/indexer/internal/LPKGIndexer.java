@@ -64,7 +64,7 @@ public class LPKGIndexer implements Indexer {
 		_config.put("root.url", tempDir.getCanonicalPath());
 
 		String bundleSymbolicName = _lpkgFile.getName();
-		String version = "1.0.0";
+		String bundleVersion = "1.0.0";
 
 		try (ZipFile zipFile = new ZipFile(_lpkgFile)) {
 			ResourceIndexer resourceIndexer = new RepoIndex();
@@ -84,7 +84,7 @@ public class LPKGIndexer implements Indexer {
 					properties.load(zipFile.getInputStream(zipEntry));
 
 					bundleSymbolicName = properties.getProperty("title");
-					version = properties.getProperty("version");
+					bundleVersion = properties.getProperty("version");
 
 					continue;
 				}
@@ -100,7 +100,7 @@ public class LPKGIndexer implements Indexer {
 			}
 
 			File indexFile = new File(
-				tempDir, bundleSymbolicName + "-" + version + "-index.xml");
+				tempDir, bundleSymbolicName + "-" + bundleVersion + "-index.xml");
 
 			try (FileOutputStream fileOutputStream =
 					new FileOutputStream(indexFile)) {
