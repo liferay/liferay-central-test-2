@@ -36,7 +36,7 @@ import java.util.List;
  */
 public class IndexValidator implements Validator {
 
-	public void includeTargetPlatform(boolean includeTargetPlatform) {
+	public void setIncludeTargetPlatform(boolean includeTargetPlatform) {
 		_includeTargetPlatform = includeTargetPlatform;
 	}
 

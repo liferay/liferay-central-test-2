@@ -27,7 +27,7 @@ public class ValidatorFactory {
 	public Validator create() {
 		IndexValidator indexValidator = new IndexValidator();
 
-		indexValidator.includeTargetPlatform(true);
+		indexValidator.setIncludeTargetPlatform(true);
 
 		return indexValidator;
 	}
