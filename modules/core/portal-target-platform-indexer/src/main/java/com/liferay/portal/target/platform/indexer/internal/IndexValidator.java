@@ -50,7 +50,7 @@ public class IndexValidator implements Validator {
 				Indexer.DIR_NAME_TARGET_PLATFORM);
 
 			if (targetPlatformDir.exists() && targetPlatformDir.canRead()) {
-				File[] targetPlatformIndexes = targetPlatformDir.listFiles(
+				File[] indexFiles = targetPlatformDir.listFiles(
 					new FilenameFilter() {
 
 						@Override
@@ -66,8 +66,8 @@ public class IndexValidator implements Validator {
 
 					});
 
-				for (File targetPlatformIndex : targetPlatformIndexes) {
-					indexURIs.add(targetPlatformIndex.toURI());
+				for (File indexFile : indexFiles) {
+					indexURIs.add(indexFile.toURI());
 				}
 			}
 		}

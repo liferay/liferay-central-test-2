@@ -115,9 +115,6 @@ public class TargetPlatformMain implements Indexer {
 			PropsKeys.MODULE_FRAMEWORK_INITIAL_BUNDLES,
 			StringUtil.merge(moduleFrameworkInitialBundles));
 
-		String bundleSymbolicName = "com.liferay.target.platform";
-		String bundleVersion = ReleaseInfo.getVersion();
-
 		File targetPlatformDir = new File(
 			PropsValues.MODULE_FRAMEWORK_BASE_DIR, DIR_NAME_TARGET_PLATFORM);
 
@@ -128,11 +125,11 @@ public class TargetPlatformMain implements Indexer {
 			return;
 		}
 
-		TargetPlatformMain targetPlatformIndexer = new TargetPlatformMain(
-			bundleSymbolicName, bundleVersion);
+		TargetPlatformMain targetPlatformMain = new TargetPlatformMain(
+			"com.liferay.target.platform", ReleaseInfo.getVersion());
 
 		try {
-			File indexFile = targetPlatformIndexer.index(targetPlatformDir);
+			File indexFile = targetPlatformMain.index(targetPlatformDir);
 
 			System.out.println("== Wrote index file " + indexFile);
 		}
@@ -144,10 +141,6 @@ public class TargetPlatformMain implements Indexer {
 	public TargetPlatformMain(String bundleSymbolicName, String bundleVersion) {
 		_bundleSymbolicName = bundleSymbolicName;
 		_bundleVersion = bundleVersion;
-
-		_moduleFrameworkImpl = new ModuleFrameworkImpl();
-
-		_config = new HashMap<>();
 
 		_config.put("compressed", "false");
 		_config.put(
@@ -319,28 +312,28 @@ public class TargetPlatformMain implements Indexer {
 		}
 	}
 
-	protected void addBundle(Set<File> files, File bundleFile, File tempDir)
+	protected void addBundle(Set<File> jarFiles, File bundleFile, File tempDir)
 		throws IOException {
 
-		File file = new File(tempDir, bundleFile.getName());
+		File jarFile = new File(tempDir, bundleFile.getName());
 
 		Files.copy(
-			bundleFile.toPath(), file.toPath(),
+			bundleFile.toPath(), jarFile.toPath(),
 			StandardCopyOption.COPY_ATTRIBUTES,
 			StandardCopyOption.REPLACE_EXISTING);
 
-		files.add(file);
+		jarFiles.add(jarFile);
 	}
 
 	protected void addBundle(
-			Set<File> files, String bundleLocation, String baseDirName,
+			Set<File> jarFiles, String bundleLocation, String baseDirName,
 			File tempDir)
 		throws IOException {
 
-		int pos = bundleLocation.indexOf('@');
+		int index = bundleLocation.indexOf('@');
 
-		if (pos != -1) {
-			bundleLocation = bundleLocation.substring(0, pos);
+		if (index != -1) {
+			bundleLocation = bundleLocation.substring(0, index);
 		}
 
 		if (!bundleLocation.startsWith("file:")) {
@@ -353,20 +346,20 @@ public class TargetPlatformMain implements Indexer {
 
 		URI uri = URI.create(bundleLocation);
 
-		File initialBundleFile = new File(uri);
+		File bundleFile = new File(uri);
 
-		if (!initialBundleFile.exists() || !initialBundleFile.canRead()) {
+		if (!bundleFile.exists() || !bundleFile.canRead()) {
 			return;
 		}
 
-		File copy = new File(tempDir, initialBundleFile.getName());
+		File jarFile = new File(tempDir, bundleFile.getName());
 
 		Files.copy(
-			initialBundleFile.toPath(), copy.toPath(),
+			bundleFile.toPath(), jarFile.toPath(),
 			StandardCopyOption.COPY_ATTRIBUTES,
 			StandardCopyOption.REPLACE_EXISTING);
 
-		files.add(copy);
+		jarFiles.add(jarFile);
 	}
 
 	protected void processBundle(Bundle bundle) throws Exception {
@@ -426,8 +419,9 @@ public class TargetPlatformMain implements Indexer {
 
 	private final String _bundleSymbolicName;
 	private final String _bundleVersion;
-	private final Map<String, String> _config;
-	private final ModuleFrameworkImpl _moduleFrameworkImpl;
+	private final Map<String, String> _config = new HashMap<>();
+	private final ModuleFrameworkImpl _moduleFrameworkImpl =
+		new ModuleFrameworkImpl();
 	private final Parameters _packagesParamters = new Parameters();
 	private final List<Parameters> _parametersList = new ArrayList<>();
 
