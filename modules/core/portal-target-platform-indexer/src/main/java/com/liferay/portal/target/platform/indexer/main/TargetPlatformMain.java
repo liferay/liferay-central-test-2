@@ -102,10 +102,13 @@ public class TargetPlatformMain implements Indexer {
 			PropsKeys.MODULE_FRAMEWORK_INITIAL_BUNDLES);
 
 		for (int i = 0; i < moduleFrameworkInitialBundles.length; i++) {
-			if (moduleFrameworkInitialBundles[i].endsWith("@start")) {
+			String moduleFrameworkInitialBundle =
+				moduleFrameworkInitialBundles[i];
+			
+			if (moduleFrameworkInitialBundle.endsWith("@start")) {
 				moduleFrameworkInitialBundles[i] =
-					moduleFrameworkInitialBundles[i].substring(
-						0, moduleFrameworkInitialBundles[i].length() - 6);
+					moduleFrameworkInitialBundle.substring(
+						0, moduleFrameworkInitialBundle.length() - 6);
 			}
 		}
 
