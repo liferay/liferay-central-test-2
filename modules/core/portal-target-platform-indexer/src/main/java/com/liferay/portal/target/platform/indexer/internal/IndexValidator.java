@@ -46,7 +46,7 @@ public class IndexValidator implements Validator {
 			indexes = new ArrayList<>(indexes);
 
 			File targetPlatformDir = new File(
-				PropsValues.MODULE_FRAMEWORK_BASE_DIR, Indexer.TARGET_PLATFORM);
+				PropsValues.MODULE_FRAMEWORK_BASE_DIR, Indexer.DIR_NAME_TARGET_PLATFORM);
 
 			if (targetPlatformDir.exists() && targetPlatformDir.canRead()) {
 				File[] targetPlatformIndexes = targetPlatformDir.listFiles(

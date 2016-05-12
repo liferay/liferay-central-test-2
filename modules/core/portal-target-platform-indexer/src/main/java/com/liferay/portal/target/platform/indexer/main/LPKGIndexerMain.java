@@ -58,7 +58,7 @@ public class LPKGIndexerMain {
 		PropsUtil.setProps(new PropsImpl());
 
 		File targetPlatformDir = new File(
-			PropsValues.MODULE_FRAMEWORK_BASE_DIR, Indexer.TARGET_PLATFORM);
+			PropsValues.MODULE_FRAMEWORK_BASE_DIR, Indexer.DIR_NAME_TARGET_PLATFORM);
 
 		if (!targetPlatformDir.exists() && !targetPlatformDir.mkdirs()) {
 			System.err.printf(
