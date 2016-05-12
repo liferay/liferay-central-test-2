@@ -51,8 +51,7 @@ public class LPKGIndexer implements Indexer {
 			"license.url", "https://www.liferay.com/downloads/ce-license");
 		_config.put("pretty", "true");
 		_config.put("repository.name", ReleaseInfo.getReleaseInfo());
-		_config.put(
-			"stylesheet", "http://www.osgi.org/www/obr2html.xsl");
+		_config.put("stylesheet", "http://www.osgi.org/www/obr2html.xsl");
 	}
 
 	@Override
@@ -68,7 +67,7 @@ public class LPKGIndexer implements Indexer {
 
 		try (ZipFile zipFile = new ZipFile(_lpkgFile)) {
 			ResourceIndexer resourceIndexer = new RepoIndex();
-			
+
 			Enumeration<? extends ZipEntry> enumeration = zipFile.entries();
 
 			Set<File> files = new LinkedHashSet<>();
@@ -100,7 +99,8 @@ public class LPKGIndexer implements Indexer {
 			}
 
 			File indexFile = new File(
-				tempDir, bundleSymbolicName + "-" + bundleVersion + "-index.xml");
+				tempDir,
+				bundleSymbolicName + "-" + bundleVersion + "-index.xml");
 
 			try (FileOutputStream fileOutputStream =
 					new FileOutputStream(indexFile)) {

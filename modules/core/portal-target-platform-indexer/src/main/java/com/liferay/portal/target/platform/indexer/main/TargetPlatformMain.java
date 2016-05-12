@@ -89,12 +89,11 @@ public class TargetPlatformMain implements Indexer {
 		fileUtil.setFile(new FileImpl());
 
 		Path tempPath = Files.createTempDirectory(null);
-		
+
 		File tempDir = tempPath.toFile();
 
 		com.liferay.portal.util.PropsUtil.set(
-			PropsKeys.MODULE_FRAMEWORK_STATE_DIR,
-			tempDir.getCanonicalPath());
+			PropsKeys.MODULE_FRAMEWORK_STATE_DIR, tempDir.getCanonicalPath());
 
 		PropsUtil.setProps(new PropsImpl());
 
@@ -104,7 +103,7 @@ public class TargetPlatformMain implements Indexer {
 		for (int i = 0; i < moduleFrameworkInitialBundles.length; i++) {
 			String moduleFrameworkInitialBundle =
 				moduleFrameworkInitialBundles[i];
-			
+
 			if (moduleFrameworkInitialBundle.endsWith("@start")) {
 				moduleFrameworkInitialBundles[i] =
 					moduleFrameworkInitialBundle.substring(
@@ -155,14 +154,13 @@ public class TargetPlatformMain implements Indexer {
 			"license.url", "https://www.liferay.com/downloads/ce-license");
 		_config.put("pretty", "true");
 		_config.put("repository.name", ReleaseInfo.getReleaseInfo());
-		_config.put(
-			"stylesheet", "http://www.osgi.org/www/obr2html.xsl");
+		_config.put("stylesheet", "http://www.osgi.org/www/obr2html.xsl");
 	}
 
 	@Override
 	public File index(File outputFile) throws Exception {
 		Path tempPath = Files.createTempDirectory(null);
-		
+
 		File tempDir = tempPath.toFile();
 
 		_config.put("root.url", tempDir.getCanonicalPath());
@@ -191,8 +189,7 @@ public class TargetPlatformMain implements Indexer {
 			"http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt");
 		attributes.putValue(Constants.BUNDLE_MANIFESTVERSION, "2");
 		attributes.putValue(Constants.BUNDLE_SYMBOLICNAME, _bundleSymbolicName);
-		attributes.putValue(
-			Constants.BUNDLE_VENDOR, ReleaseInfo.getVendor());
+		attributes.putValue(Constants.BUNDLE_VENDOR, ReleaseInfo.getVendor());
 		attributes.putValue(Constants.BUNDLE_VERSION, _bundleVersion);
 
 		String exportPackage = StringUtil.replace(
@@ -250,7 +247,8 @@ public class TargetPlatformMain implements Indexer {
 			}
 
 			File jarFile = new File(
-				tempPath.toFile(), _bundleSymbolicName + "-" + _bundleVersion + ".jar");
+				tempPath.toFile(),
+				_bundleSymbolicName + "-" + _bundleVersion + ".jar");
 
 			jar.write(jarFile);
 
@@ -262,9 +260,9 @@ public class TargetPlatformMain implements Indexer {
 					PropsValues.MODULE_FRAMEWORK_INITIAL_BUNDLES) {
 
 				addBundle(
-					jarFiles,
-					moduleFrameworkInitialBundle,
-					PropsValues.MODULE_FRAMEWORK_BASE_DIR + "/static/", tempPath.toFile());
+					jarFiles, moduleFrameworkInitialBundle,
+					PropsValues.MODULE_FRAMEWORK_BASE_DIR + "/static/",
+					tempPath.toFile());
 			}
 
 			String[] autoDeployDirs = ArrayUtil.append(
@@ -289,8 +287,7 @@ public class TargetPlatformMain implements Indexer {
 					});
 
 				for (File childFile : childFiles) {
-					addBundle(
-						jarFiles, childFile, tempPath.toFile());
+					addBundle(jarFiles, childFile, tempPath.toFile());
 				}
 			}
 
@@ -322,8 +319,7 @@ public class TargetPlatformMain implements Indexer {
 		}
 	}
 
-	protected void addBundle(
-			Set<File> files, File bundleFile, File tempDir)
+	protected void addBundle(Set<File> files, File bundleFile, File tempDir)
 		throws IOException {
 
 		File file = new File(tempDir, bundleFile.getName());
@@ -337,7 +333,8 @@ public class TargetPlatformMain implements Indexer {
 	}
 
 	protected void addBundle(
-			Set<File> files, String bundleLocation, String baseDirName, File tempDir)
+			Set<File> files, String bundleLocation, String baseDirName,
+			File tempDir)
 		throws IOException {
 
 		int pos = bundleLocation.indexOf('@');
@@ -378,7 +375,8 @@ public class TargetPlatformMain implements Indexer {
 		for (Capability capability : bundleRevision.getCapabilities(null)) {
 			String namespace = capability.getNamespace();
 
-			CapabilityBuilder capabilityBuilder = new CapabilityBuilder(namespace);
+			CapabilityBuilder capabilityBuilder = new CapabilityBuilder(
+				namespace);
 
 			capabilityBuilder.addAttributes(capability.getAttributes());
 			capabilityBuilder.addDirectives(capability.getDirectives());
@@ -427,10 +425,10 @@ public class TargetPlatformMain implements Indexer {
 	}
 
 	private final String _bundleSymbolicName;
+	private final String _bundleVersion;
 	private final Map<String, String> _config;
 	private final ModuleFrameworkImpl _moduleFrameworkImpl;
 	private final Parameters _packagesParamters = new Parameters();
 	private final List<Parameters> _parametersList = new ArrayList<>();
-	private final String _bundleVersion;
 
 }
