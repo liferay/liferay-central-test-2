@@ -88,28 +88,30 @@ public class TargetPlatformMain implements Indexer {
 
 		fileUtil.setFile(new FileImpl());
 
-		Path tempFolder = Files.createTempDirectory(null);
+		Path tempPath = Files.createTempDirectory(null);
+		
+		File tempDir = tempPath.toFile();
 
 		com.liferay.portal.util.PropsUtil.set(
 			PropsKeys.MODULE_FRAMEWORK_STATE_DIR,
-			tempFolder.toFile().getCanonicalPath());
+			tempDir.getCanonicalPath());
 
 		PropsUtil.setProps(new PropsImpl());
 
-		String[] moduleFrameworkAutoDeployDirs = PropsUtil.getArray(
+		String[] moduleFrameworkInitialBundles = PropsUtil.getArray(
 			PropsKeys.MODULE_FRAMEWORK_INITIAL_BUNDLES);
 
-		for (int i = 0; i < moduleFrameworkAutoDeployDirs.length; i++) {
-			if (moduleFrameworkAutoDeployDirs[i].endsWith("@start")) {
-				moduleFrameworkAutoDeployDirs[i] =
-					moduleFrameworkAutoDeployDirs[i].substring(
-						0, moduleFrameworkAutoDeployDirs[i].length() - 6);
+		for (int i = 0; i < moduleFrameworkInitialBundles.length; i++) {
+			if (moduleFrameworkInitialBundles[i].endsWith("@start")) {
+				moduleFrameworkInitialBundles[i] =
+					moduleFrameworkInitialBundles[i].substring(
+						0, moduleFrameworkInitialBundles[i].length() - 6);
 			}
 		}
 
 		com.liferay.portal.util.PropsUtil.set(
 			PropsKeys.MODULE_FRAMEWORK_INITIAL_BUNDLES,
-			StringUtil.merge(moduleFrameworkAutoDeployDirs));
+			StringUtil.merge(moduleFrameworkInitialBundles));
 
 		String bsn = "com.liferay.target.platform";
 		String version = ReleaseInfo.getVersion();
@@ -133,7 +135,7 @@ public class TargetPlatformMain implements Indexer {
 			System.out.println("== Wrote index file " + indexFile);
 		}
 		finally {
-			PathUtil.deltree(tempFolder);
+			PathUtil.deltree(tempPath);
 		}
 	}
 

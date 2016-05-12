@@ -58,11 +58,12 @@ public class LPKGIndexerMain {
 		PropsUtil.setProps(new PropsImpl());
 
 		File targetPlatformDir = new File(
-			PropsValues.MODULE_FRAMEWORK_BASE_DIR, Indexer.DIR_NAME_TARGET_PLATFORM);
+			PropsValues.MODULE_FRAMEWORK_BASE_DIR,
+			Indexer.DIR_NAME_TARGET_PLATFORM);
 
 		if (!targetPlatformDir.exists() && !targetPlatformDir.mkdirs()) {
 			System.err.printf(
-				"== Cannot create directory %s\n", targetPlatformDir);
+				"== Unable to create directory %s\n", targetPlatformDir);
 
 			return;
 		}
@@ -86,7 +87,7 @@ public class LPKGIndexerMain {
 				continue;
 			}
 
-			File[] files = file.listFiles(
+			File[] childFiles = file.listFiles(
 				new FilenameFilter() {
 
 					@Override
@@ -96,16 +97,16 @@ public class LPKGIndexerMain {
 
 				});
 
-			for (File entry : files) {
-				if (entry.exists() && entry.canRead()) {
-					lpkgFiles.add(entry);
+			for (File childFile : childFiles) {
+				if (childFile.exists() && childFile.canRead()) {
+					lpkgFiles.add(childFile);
 				}
 			}
 		}
 
 		if (lpkgFiles.isEmpty()) {
 			System.err.println(
-				"== No lpkg files found in " + Arrays.toString(args));
+				"== No LPKG files found in " + Arrays.toString(args));
 
 			return;
 		}
