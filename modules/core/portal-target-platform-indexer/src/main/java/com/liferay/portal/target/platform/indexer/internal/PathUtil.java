@@ -25,7 +25,7 @@ import java.nio.file.attribute.BasicFileAttributes;
 /**
  * @author Raymond Augé
  */
-public class Util {
+public class PathUtil {
 
 	public static void deltree(Path path) throws IOException {
 		Files.walkFileTree(

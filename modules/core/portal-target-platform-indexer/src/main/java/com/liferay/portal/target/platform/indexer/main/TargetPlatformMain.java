@@ -31,7 +31,7 @@ import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.target.platform.indexer.Indexer;
-import com.liferay.portal.target.platform.indexer.internal.Util;
+import com.liferay.portal.target.platform.indexer.internal.PathUtil;
 import com.liferay.portal.util.FastDateFormatFactoryImpl;
 import com.liferay.portal.util.FileImpl;
 import com.liferay.portal.util.PropsImpl;
@@ -133,7 +133,7 @@ public class TargetPlatformMain implements Indexer {
 			System.out.println("== Wrote index file " + indexFile);
 		}
 		finally {
-			Util.deltree(tempFolder);
+			PathUtil.deltree(tempFolder);
 		}
 	}
 
@@ -304,7 +304,7 @@ public class TargetPlatformMain implements Indexer {
 			return indexFile;
 		}
 		finally {
-			Util.deltree(tempFolder);
+			PathUtil.deltree(tempFolder);
 
 			_moduleFrameworkImpl.stopFramework(0);
 		}

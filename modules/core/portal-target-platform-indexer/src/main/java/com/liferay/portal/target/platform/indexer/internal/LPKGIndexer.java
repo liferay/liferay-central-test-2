@@ -116,7 +116,7 @@ public class LPKGIndexer implements Indexer {
 			return output;
 		}
 		finally {
-			Util.deltree(tempFolder);
+			PathUtil.deltree(tempFolder);
 		}
 	}
 
