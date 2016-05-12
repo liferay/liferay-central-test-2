@@ -62,13 +62,14 @@ public class UTF8Control extends Control {
 		urlConnection.setUseCaches(!reload);
 
 		if (!reload) {
-			CacheContent cacheContent = _resourceBundles.get(url);
+			CachedResourceBundle cachedResourceBundle =
+				_cachedResourceBundles.get(url);
 
-			if (cacheContent != null) {
+			if (cachedResourceBundle != null) {
 				if (urlConnection.getLastModified() <=
-						cacheContent.getLastModified()) {
+						cachedResourceBundle.getLastModified()) {
 
-					return cacheContent.getResourceBundle();
+					return cachedResourceBundle.getResourceBundle();
 				}
 			}
 		}
@@ -77,24 +78,27 @@ public class UTF8Control extends Control {
 			ResourceBundle resourceBundle = new PropertyResourceBundle(
 				new InputStreamReader(inputStream, StringPool.UTF8));
 
-			CacheContent cacheContent = new CacheContent(
-				urlConnection.getLastModified(), resourceBundle);
+			CachedResourceBundle cachedResourceBundle =
+				new CachedResourceBundle(
+					resourceBundle, urlConnection.getLastModified());
 
-			_resourceBundles.put(url, cacheContent);
+			_cachedResourceBundles.put(url, cachedResourceBundle);
 
 			return resourceBundle;
 		}
 	}
 
-	private static final Map<URL, CacheContent> _resourceBundles =
+	private static final Map<URL, CachedResourceBundle> _cachedResourceBundles =
 		new ConcurrentReferenceValueHashMap<>(
 			FinalizeManager.SOFT_REFERENCE_FACTORY);
 
-	private static final class CacheContent {
+	private static final class CachedResourceBundle {
 
-		public CacheContent(long lastModified, ResourceBundle resourceBundle) {
-			_lastModified = lastModified;
+		public CachedResourceBundle(
+			ResourceBundle resourceBundle, long lastModified) {
+
 			_resourceBundle = resourceBundle;
+			_lastModified = lastModified;
 		}
 
 		public long getLastModified() {
