@@ -21,7 +21,7 @@ import java.io.File;
  */
 public interface Indexer {
 
-	public static final String TARGET_PLATFORM = "target-platform";
+	public static final String DIR_NAME_TARGET_PLATFORM = "target-platform";
 
 	public File index(File outputFile) throws Exception;
 
