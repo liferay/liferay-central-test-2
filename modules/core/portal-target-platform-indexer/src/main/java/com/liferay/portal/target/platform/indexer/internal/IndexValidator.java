@@ -41,12 +41,13 @@ public class IndexValidator implements Validator {
 	}
 
 	@Override
-	public List<String> validate(List<URI> indexes) throws Exception {
+	public List<String> validate(List<URI> indexURIs) throws Exception {
 		if (_includeTargetPlatform) {
-			indexes = new ArrayList<>(indexes);
+			indexURIs = new ArrayList<>(indexURIs);
 
 			File targetPlatformDir = new File(
-				PropsValues.MODULE_FRAMEWORK_BASE_DIR, Indexer.DIR_NAME_TARGET_PLATFORM);
+				PropsValues.MODULE_FRAMEWORK_BASE_DIR,
+				Indexer.DIR_NAME_TARGET_PLATFORM);
 
 			if (targetPlatformDir.exists() && targetPlatformDir.canRead()) {
 				File[] targetPlatformIndexes = targetPlatformDir.listFiles(
@@ -65,27 +66,28 @@ public class IndexValidator implements Validator {
 
 					});
 
-				for (File index : targetPlatformIndexes) {
-					indexes.add(index.toURI());
+				for (File targetPlatformIndex : targetPlatformIndexes) {
+					indexURIs.add(targetPlatformIndex.toURI());
 				}
 			}
 		}
 
-		try (ResolverValidator validator = new ResolverValidator()) {
-			ResourceBuilder system = new ResourceBuilder();
+		try (ResolverValidator resolverValidator = new ResolverValidator()) {
+			List<String> messages = new ArrayList<>();
 
-			validator.setSystem(system.build());
+			ResourceBuilder resourceBuilder = new ResourceBuilder();
 
-			for (URI uri : indexes) {
-				validator.addRepository(uri);
+			for (URI indexURI : indexURIs) {
+				resolverValidator.addRepository(indexURI);
 			}
 
-			List<String> messages = new ArrayList<>();
-			List<Resolution> results = validator.validate();
+			resolverValidator.setSystem(resourceBuilder.build());
 
-			validator.check();
+			List<Resolution> resolutions = resolverValidator.validate();
 
-			for (Resolution resolution : results) {
+			resolverValidator.check();
+
+			for (Resolution resolution : resolutions) {
 				String message = resolution.message;
 
 				if (message == null) {

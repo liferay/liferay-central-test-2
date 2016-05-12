@@ -23,6 +23,6 @@ import java.util.List;
  */
 public interface Validator {
 
-	public List<String> validate(List<URI> indexes) throws Exception;
+	public List<String> validate(List<URI> indexURIs) throws Exception;
 
 }
