@@ -181,8 +181,18 @@ public class TargetPlatformMain implements Indexer {
 
 		Attributes attributes = manifest.getMainAttributes();
 
+		attributes.putValue(
+			Constants.BUNDLE_DESCRIPTION, ReleaseInfo.getReleaseInfo());
+		attributes.putValue(
+			Constants.BUNDLE_COPYRIGHT,
+			"Copyright (c) 2000-present All rights reserved.");
+		attributes.putValue(
+			Constants.BUNDLE_LICENSE,
+			"http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt");
 		attributes.putValue(Constants.BUNDLE_MANIFESTVERSION, "2");
 		attributes.putValue(Constants.BUNDLE_SYMBOLICNAME, _bundleSymbolicName);
+		attributes.putValue(
+			Constants.BUNDLE_VENDOR, ReleaseInfo.getVendor());
 		attributes.putValue(Constants.BUNDLE_VERSION, _bundleVersion);
 
 		String exportPackage = StringUtil.replace(
@@ -202,16 +212,6 @@ public class TargetPlatformMain implements Indexer {
 		String capabilities = sb.toString();
 
 		attributes.putValue(Constants.PROVIDE_CAPABILITY, capabilities);
-		attributes.putValue(
-			Constants.BUNDLE_DESCRIPTION, ReleaseInfo.getReleaseInfo());
-		attributes.putValue(
-			Constants.BUNDLE_LICENSE,
-			"http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt");
-		attributes.putValue(
-			Constants.BUNDLE_COPYRIGHT,
-			"Copyright (c) 2000-present All rights reserved.");
-		attributes.putValue(
-			Constants.BUNDLE_VENDOR, ReleaseInfo.getVendor());
 
 		Jar jar = new Jar("distro");
 
