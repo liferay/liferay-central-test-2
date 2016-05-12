@@ -130,15 +130,15 @@ public class AssetUtil {
 			PortletURL portletURL)
 		throws Exception {
 
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
 		AssetCategory assetCategory = AssetCategoryLocalServiceUtil.getCategory(
 			assetCategoryId);
 
 		List<AssetCategory> ancestorCategories = assetCategory.getAncestors();
 
 		Collections.reverse(ancestorCategories);
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
 
 		for (AssetCategory ancestorCategory : ancestorCategories) {
 			portletURL.setParameter(
