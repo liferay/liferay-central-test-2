@@ -196,13 +196,13 @@ public class TargetPlatformMain implements Indexer {
 		attributes.putValue(Constants.BUNDLE_VERSION, _bundleVersion);
 
 		String exportPackage = StringUtil.replace(
-			_packages.toString(), "version:Version", "version");
+			_packagesParamters.toString(), "version:Version", "version");
 
 		attributes.putValue(Constants.EXPORT_PACKAGE, exportPackage);
 
 		StringBundler sb = new StringBundler();
 
-		for (Parameters parameter : _parameters) {
+		for (Parameters parameter : _parametersList) {
 			sb.append(parameter.toString());
 			sb.append(",");
 		}
@@ -224,6 +224,7 @@ public class TargetPlatformMain implements Indexer {
 					"capabilities");
 
 			verifier.verify();
+
 			verifier.getErrors();
 
 			if (!verifier.isOk()) {
@@ -231,7 +232,7 @@ public class TargetPlatformMain implements Indexer {
 
 				sb = new StringBundler((errors.size() * 4) + 3);
 
-				sb.append(_SHORT_NAME);
+				sb.append(TargetPlatformMain.class.getName());
 				sb.append(" failed with {");
 
 				for (String error : verifier.getErrors()) {
@@ -248,22 +249,22 @@ public class TargetPlatformMain implements Indexer {
 				throw new Exception(sb.toString());
 			}
 
-			File outputJar = new File(
+			File jarFile = new File(
 				tempPath.toFile(), _bundleSymbolicName + "-" + _bundleVersion + ".jar");
 
-			jar.write(outputJar);
+			jar.write(jarFile);
 
-			Set<File> fileList = new LinkedHashSet<>();
+			Set<File> jarFiles = new LinkedHashSet<>();
 
-			fileList.add(outputJar);
+			jarFiles.add(jarFile);
 
-			String baseDir = PropsValues.MODULE_FRAMEWORK_BASE_DIR + "/static/";
-
-			for (String initialBundle :
+			for (String moduleFrameworkInitialBundle :
 					PropsValues.MODULE_FRAMEWORK_INITIAL_BUNDLES) {
 
-				addBundleToIndex(
-					initialBundle, baseDir, tempPath.toFile(), fileList);
+				addBundle(
+					jarFiles,
+					moduleFrameworkInitialBundle,
+					PropsValues.MODULE_FRAMEWORK_BASE_DIR + "/static/", tempPath.toFile());
 			}
 
 			String[] autoDeployDirs = ArrayUtil.append(
@@ -277,7 +278,7 @@ public class TargetPlatformMain implements Indexer {
 					continue;
 				}
 
-				File[] additionalBundles = dir.listFiles(
+				File[] childFiles = dir.listFiles(
 					new FilenameFilter() {
 
 						@Override
@@ -287,19 +288,22 @@ public class TargetPlatformMain implements Indexer {
 
 					});
 
-				for (File additionalBundle : additionalBundles) {
-					addBundleToIndex(
-						additionalBundle, tempPath.toFile(), fileList);
+				for (File childFile : childFiles) {
+					addBundle(
+						jarFiles, childFile, tempPath.toFile());
 				}
 			}
 
-			File tempIndexFile = new File(
-				tempPath.toFile(), _bundleSymbolicName + "-" + _bundleVersion + "-index.xml");
-
 			ResourceIndexer resourceIndexer = new RepoIndex();
 
-			try (FileOutputStream fos = new FileOutputStream(tempIndexFile)) {
-				resourceIndexer.index(fileList, fos, _config);
+			File tempIndexFile = new File(
+				tempPath.toFile(),
+				_bundleSymbolicName + "-" + _bundleVersion + "-index.xml");
+
+			try (FileOutputStream fileOutputStream =
+					new FileOutputStream(tempIndexFile)) {
+
+				resourceIndexer.index(jarFiles, fileOutputStream, _config);
 			}
 
 			File indexFile = new File(outputFile, tempIndexFile.getName());
@@ -318,39 +322,39 @@ public class TargetPlatformMain implements Indexer {
 		}
 	}
 
-	protected void addBundleToIndex(
-			File initialBundleFile, File tempDir, Set<File> fileList)
+	protected void addBundle(
+			Set<File> files, File bundleFile, File tempDir)
 		throws IOException {
 
-		File copy = new File(tempDir, initialBundleFile.getName());
+		File file = new File(tempDir, bundleFile.getName());
 
 		Files.copy(
-			initialBundleFile.toPath(), copy.toPath(),
+			bundleFile.toPath(), file.toPath(),
 			StandardCopyOption.COPY_ATTRIBUTES,
 			StandardCopyOption.REPLACE_EXISTING);
 
-		fileList.add(copy);
+		files.add(file);
 	}
 
-	protected void addBundleToIndex(
-			String location, String baseDir, File tempDir, Set<File> fileList)
+	protected void addBundle(
+			Set<File> files, String bundleLocation, String baseDirName, File tempDir)
 		throws IOException {
 
-		int pos = location.indexOf('@');
+		int pos = bundleLocation.indexOf('@');
 
 		if (pos != -1) {
-			location = location.substring(0, pos);
+			bundleLocation = bundleLocation.substring(0, pos);
 		}
 
-		if (!location.startsWith("file:")) {
-			location = "file:" + baseDir + location;
+		if (!bundleLocation.startsWith("file:")) {
+			bundleLocation = "file:" + baseDirName + bundleLocation;
 		}
 
-		if (!location.endsWith(".jar")) {
+		if (!bundleLocation.endsWith(".jar")) {
 			return;
 		}
 
-		URI uri = URI.create(location);
+		URI uri = URI.create(bundleLocation);
 
 		File initialBundleFile = new File(uri);
 
@@ -365,7 +369,7 @@ public class TargetPlatformMain implements Indexer {
 			StandardCopyOption.COPY_ATTRIBUTES,
 			StandardCopyOption.REPLACE_EXISTING);
 
-		fileList.add(copy);
+		files.add(copy);
 	}
 
 	protected void processBundle(Bundle bundle) throws Exception {
@@ -374,14 +378,14 @@ public class TargetPlatformMain implements Indexer {
 		for (Capability capability : bundleRevision.getCapabilities(null)) {
 			String namespace = capability.getNamespace();
 
-			CapabilityBuilder cb = new CapabilityBuilder(namespace);
+			CapabilityBuilder capabilityBuilder = new CapabilityBuilder(namespace);
 
-			cb.addAttributes(capability.getAttributes());
-			cb.addDirectives(capability.getDirectives());
+			capabilityBuilder.addAttributes(capability.getAttributes());
+			capabilityBuilder.addDirectives(capability.getDirectives());
 
-			Attrs attrs = cb.toAttrs();
+			Attrs attrs = capabilityBuilder.toAttrs();
 
-			if (cb.isPackage()) {
+			if (capabilityBuilder.isPackage()) {
 				attrs.remove(Constants.BUNDLE_SYMBOLIC_NAME_ATTRIBUTE);
 				attrs.remove(Constants.BUNDLE_VERSION_ATTRIBUTE);
 
@@ -389,16 +393,16 @@ public class TargetPlatformMain implements Indexer {
 					PackageNamespace.PACKAGE_NAMESPACE);
 
 				if (packageName != null) {
-					_packages.put(packageName, attrs);
+					_packagesParamters.put(packageName, attrs);
 				}
 			}
 			else if (!_ignoredNamespaces.contains(namespace)) {
 				Parameters parameters = new Parameters();
 
 				if (namespace.equals(NativeNamespace.NATIVE_NAMESPACE)) {
-					Set<String> keySet = new LinkedHashSet<>(attrs.keySet());
+					Set<String> keys = new LinkedHashSet<>(attrs.keySet());
 
-					for (String key : keySet) {
+					for (String key : keys) {
 						if (!key.startsWith(NativeNamespace.NATIVE_NAMESPACE)) {
 							attrs.remove(key);
 						}
@@ -407,13 +411,10 @@ public class TargetPlatformMain implements Indexer {
 
 				parameters.put(namespace, attrs);
 
-				_parameters.add(parameters);
+				_parametersList.add(parameters);
 			}
 		}
 	}
-
-	private static final String _SHORT_NAME =
-		TargetPlatformMain.class.getName();
 
 	private static final Set<String> _ignoredNamespaces = new HashSet<>();
 
@@ -428,8 +429,8 @@ public class TargetPlatformMain implements Indexer {
 	private final String _bundleSymbolicName;
 	private final Map<String, String> _config;
 	private final ModuleFrameworkImpl _moduleFrameworkImpl;
-	private final Parameters _packages = new Parameters();
-	private final List<Parameters> _parameters = new ArrayList<>();
+	private final Parameters _packagesParamters = new Parameters();
+	private final List<Parameters> _parametersList = new ArrayList<>();
 	private final String _bundleVersion;
 
 }
