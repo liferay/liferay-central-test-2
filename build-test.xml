@@ -345,7 +345,7 @@ counter.jdbc.prefix=jdbc.counter.]]></echo>
 				input="${database.version}"
 				override="true"
 				property="database.major.version"
-				regexp="(\d+\.?\d+?).*"
+				regexp="(\d+\.?\d+?(r2)?).*"
 				replace="\1"
 			/>
 
