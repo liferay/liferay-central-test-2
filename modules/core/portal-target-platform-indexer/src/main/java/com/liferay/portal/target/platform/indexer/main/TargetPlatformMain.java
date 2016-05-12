@@ -192,7 +192,7 @@ public class TargetPlatformMain implements Indexer {
 
 		StringBundler sb = new StringBundler();
 
-		for (Parameters parameter : _provided) {
+		for (Parameters parameter : _parameters) {
 			sb.append(parameter.toString());
 			sb.append(",");
 		}
@@ -407,7 +407,7 @@ public class TargetPlatformMain implements Indexer {
 
 				parameters.put(namespace, attrs);
 
-				_provided.add(parameters);
+				_parameters.add(parameters);
 			}
 		}
 	}
@@ -429,7 +429,7 @@ public class TargetPlatformMain implements Indexer {
 	private final Map<String, String> _config;
 	private final ModuleFrameworkImpl _moduleFrameworkImpl;
 	private final Parameters _packages = new Parameters();
-	private final List<Parameters> _provided = new ArrayList<>();
+	private final List<Parameters> _parameters = new ArrayList<>();
 	private final String _bundleVersion;
 
 }
