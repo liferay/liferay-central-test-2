@@ -513,8 +513,8 @@ app.server.type=@{app.server.type}]]></echo>
 		<attribute name="database.type" />
 		<attribute default="${database.@{database.type}.version}" name="database.version" />
 		<attribute default="" name="test.build.fix.pack.zip.url" />
-		<attribute default="" name="test.legacy.database.dump" />
 		<attribute default="" name="test.fix.pack.base.url" />
+		<attribute default="" name="test.legacy.database.dump" />
 		<attribute default="" name="test.license.xml.url" />
 		<attribute default="" name="test.plugin.zip.url" />
 		<attribute default="" name="test.portal.bundle.zip.url" />
