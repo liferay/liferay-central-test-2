@@ -619,38 +619,40 @@ public class JspServlet extends HttpServlet {
 				return null;
 			}
 
-			Enumeration<URL> jsps = bundle.findEntries(
+			Enumeration<URL> enumeration = bundle.findEntries(
 				_DIR_NAME_RESOURCES, "*.jsp", true);
 
-			if (jsps != null) {
-				String scratchdir = _jspServlet.getInitParameter(
-					_INIT_PARAMETER_NAME_SCRATCH_DIR);
-
-				while (jsps.hasMoreElements()) {
-					URL url = jsps.nextElement();
-
-					String urlPath = url.getPath();
-
-					String[] urlPathParts = urlPath.split(_DIR_NAME_RESOURCES);
-
-					String jspPath = urlPathParts[1];
-
-					StringBuilder sb = new StringBuilder(4);
-
-					sb.append(scratchdir);
-					sb.append("/org/apache/jsp");
-					sb.append(
-						jspPath.replace(
-							StringPool.PERIOD, StringPool.UNDERLINE));
-					sb.append(".class");
-
-					FileSystem fileSystem = FileSystems.getDefault();
-
-					paths.add(fileSystem.getPath(sb.toString()));
-				}
-
-				_deleteOutdatedJspFiles(scratchdir, paths);
+			if (enumeration == null) {
+				return paths;
 			}
+
+			String scratchdir = _jspServlet.getInitParameter(
+				_INIT_PARAMETER_NAME_SCRATCH_DIR);
+
+			while (enumeration.hasMoreElements()) {
+				URL url = enumeration.nextElement();
+
+				String urlPath = url.getPath();
+
+				String[] urlPathParts = urlPath.split(_DIR_NAME_RESOURCES);
+
+				String jspPath = urlPathParts[1];
+
+				StringBuilder sb = new StringBuilder(4);
+
+				sb.append(scratchdir);
+				sb.append("/org/apache/jsp");
+				sb.append(
+					jspPath.replace(
+						StringPool.PERIOD, StringPool.UNDERLINE));
+				sb.append(".class");
+
+				FileSystem fileSystem = FileSystems.getDefault();
+
+				paths.add(fileSystem.getPath(sb.toString()));
+			}
+
+			_deleteOutdatedJspFiles(scratchdir, paths);
 
 			return paths;
 		}
