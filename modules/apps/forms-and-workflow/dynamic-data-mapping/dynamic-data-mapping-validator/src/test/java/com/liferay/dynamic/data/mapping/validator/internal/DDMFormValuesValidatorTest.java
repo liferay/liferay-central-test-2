@@ -234,7 +234,7 @@ public class DDMFormValuesValidatorTest {
 	}
 
 	@Test
-	public void testValidationWithNonRequiredFieldAndEmptyDefaultLocaleValue()
+	public void testValidationWithNonrequiredFieldAndEmptyDefaultLocaleValue()
 		throws Exception {
 
 		DDMForm ddmForm = DDMFormTestUtil.createDDMForm(
@@ -263,7 +263,7 @@ public class DDMFormValuesValidatorTest {
 	}
 
 	@Test
-	public void testValidationWithNonRequiredFieldValue() throws Exception {
+	public void testValidationWithNonrequiredFieldValue() throws Exception {
 		DDMForm ddmForm = DDMFormTestUtil.createDDMForm(
 			DDMFormTestUtil.createAvailableLocales(LocaleUtil.US),
 			LocaleUtil.US);
@@ -280,7 +280,7 @@ public class DDMFormValuesValidatorTest {
 	}
 
 	@Test
-	public void testValidationWithNonRequiredSelect() throws Exception {
+	public void testValidationWithNonrequiredSelect() throws Exception {
 		DDMForm ddmForm = DDMFormTestUtil.createDDMForm();
 
 		DDMFormField ddmFormField = new DDMFormField("option", "select");
@@ -320,7 +320,7 @@ public class DDMFormValuesValidatorTest {
 	}
 
 	@Test
-	public void testValidationWithNonRequiredSelectAndEmptyDefaultLocaleValue()
+	public void testValidationWithNonrequiredSelectAndEmptyDefaultLocaleValue()
 		throws Exception {
 
 		DDMForm ddmForm = DDMFormTestUtil.createDDMForm();
@@ -362,7 +362,7 @@ public class DDMFormValuesValidatorTest {
 	}
 
 	@Test(expected = MustSetValidValue.class)
-	public void testValidationWithNonRequiredSelectAndInvalidLocalizedValue()
+	public void testValidationWithNonrequiredSelectAndInvalidLocalizedValue()
 		throws Exception {
 
 		DDMForm ddmForm = DDMFormTestUtil.createDDMForm();
