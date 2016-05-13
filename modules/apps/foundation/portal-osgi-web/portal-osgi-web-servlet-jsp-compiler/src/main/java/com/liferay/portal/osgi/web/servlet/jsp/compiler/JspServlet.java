@@ -540,14 +540,14 @@ public class JspServlet extends HttpServlet {
 	private static final String _ANALYZED_TLDS =
 		JspServlet.class.getName().concat("#ANALYZED_TLDS");
 
-	private static final Class<?>[] _INTERFACES = {
-		JspServletContext.class, ServletContext.class
-	};
-
 	private static final String _DIR_NAME_RESOURCES =
 		File.separator + "META-INF" + File.separator + "resources";
 
 	private static final String _INIT_PARAMETER_NAME_SCRATCH_DIR = "scratchdir";
+
+	private static final Class<?>[] _INTERFACES = {
+		JspServletContext.class, ServletContext.class
+	};
 
 	private static final String _WORK_DIR =
 		PropsUtil.get(PropsKeys.LIFERAY_HOME) + File.separator + "work" +
@@ -623,7 +623,8 @@ public class JspServlet extends HttpServlet {
 				_DIR_NAME_RESOURCES, "*.jsp", true);
 
 			if (jsps != null) {
-				String scratchdir = _jspServlet.getInitParameter(_INIT_PARAMETER_NAME_SCRATCH_DIR);
+				String scratchdir = _jspServlet.getInitParameter(
+					_INIT_PARAMETER_NAME_SCRATCH_DIR);
 
 				while (jsps.hasMoreElements()) {
 					URL url = jsps.nextElement();
@@ -663,7 +664,8 @@ public class JspServlet extends HttpServlet {
 		public void removedBundle(
 			Bundle bundle, BundleEvent bundleEvent, final List<Path> paths) {
 
-			String scratchdir = _jspServlet.getInitParameter(_INIT_PARAMETER_NAME_SCRATCH_DIR);
+			String scratchdir = _jspServlet.getInitParameter(
+				_INIT_PARAMETER_NAME_SCRATCH_DIR);
 
 			_deleteOutdatedJspFiles(scratchdir, paths);
 		}
