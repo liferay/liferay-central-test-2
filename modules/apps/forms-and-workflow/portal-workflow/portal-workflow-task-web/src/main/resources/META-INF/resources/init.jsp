@@ -30,7 +30,6 @@ page import="com.liferay.asset.kernel.model.AssetRenderer" %><%@
 page import="com.liferay.asset.kernel.model.AssetRendererFactory" %><%@
 page import="com.liferay.portal.kernel.dao.search.ResultRow" %><%@
 page import="com.liferay.portal.kernel.portlet.PortletURLUtil" %><%@
-page import="com.liferay.portal.kernel.util.GetterUtil" %><%@
 page import="com.liferay.portal.kernel.util.HtmlUtil" %><%@
 page import="com.liferay.portal.kernel.util.ParamUtil" %><%@
 page import="com.liferay.portal.kernel.util.PortletKeys" %><%@
@@ -48,10 +47,7 @@ page import="com.liferay.portal.workflow.task.web.display.context.WorkflowTaskDi
 page import="com.liferay.portal.workflow.task.web.search.WorkflowTaskSearch" %><%@
 page import="com.liferay.taglib.search.DateSearchEntry" %>
 
-<%@ page import="java.io.Serializable" %>
-
-<%@ page import="java.util.List" %><%@
-page import="java.util.Map" %>
+<%@ page import="java.util.List" %>
 
 <%@ page import="javax.portlet.PortletURL" %>
 

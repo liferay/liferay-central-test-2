@@ -33,9 +33,7 @@ AssetRenderer<?> assetRenderer = workflowHandler.getAssetRenderer(classPK);
 
 AssetRendererFactory<?> assetRendererFactory = assetRenderer.getAssetRendererFactory();
 
-Map<String, Serializable> optionalAttributes = workflowTask.getOptionalAttributes();
-
-AssetEntry assetEntry = assetRendererFactory.getAssetEntry(GetterUtil.getString(optionalAttributes.get("entryClassName")), assetRenderer.getClassPK());
+AssetEntry assetEntry = assetRendererFactory.getAssetEntry(workflowHandler.getClassName(), assetRenderer.getClassPK());
 
 String headerTitle = workflowTaskDisplayContext.getHeaderTitle(workflowTask);
 
