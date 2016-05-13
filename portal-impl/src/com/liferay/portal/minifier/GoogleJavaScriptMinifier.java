@@ -56,6 +56,11 @@ public class GoogleJavaScriptMinifier implements JavaScriptMinifier {
 				DiagnosticType.error("JSC_NON_GLOBAL_DEFINE_INIT_ERROR", "")),
 			CheckLevel.OFF);
 
+		compilerOptions.setWarningLevel(
+			DiagnosticGroup.forType(
+				DiagnosticType.error("JSC_MISSING_PROVIDE_ERROR", "")),
+			CheckLevel.OFF);
+
 		setCompileOptions(compilerOptions);
 
 		compiler.compile(
