@@ -626,10 +626,17 @@ public class JspServlet extends HttpServlet {
 				return paths;
 			}
 
-			String scratchdir = _jspServlet.getInitParameter(
+			String scratchDirName = _jspServlet.getInitParameter(
 				_INIT_PARAMETER_NAME_SCRATCH_DIR);
 
 			while (enumeration.hasMoreElements()) {
+				FileSystem fileSystem = FileSystems.getDefault();
+
+				StringBuilder sb = new StringBuilder(4);
+
+				sb.append(scratchDirName);
+				sb.append("/org/apache/jsp");
+
 				URL url = enumeration.nextElement();
 
 				String urlPath = url.getPath();
@@ -638,21 +645,15 @@ public class JspServlet extends HttpServlet {
 
 				String jspPath = urlPathParts[1];
 
-				StringBuilder sb = new StringBuilder(4);
-
-				sb.append(scratchdir);
-				sb.append("/org/apache/jsp");
 				sb.append(
-					jspPath.replace(
-						StringPool.PERIOD, StringPool.UNDERLINE));
-				sb.append(".class");
+					jspPath.replace(StringPool.PERIOD, StringPool.UNDERLINE));
 
-				FileSystem fileSystem = FileSystems.getDefault();
+				sb.append(".class");
 
 				paths.add(fileSystem.getPath(sb.toString()));
 			}
 
-			_deleteOutdatedJspFiles(scratchdir, paths);
+			_deleteOutdatedJspFiles(scratchDirName, paths);
 
 			return paths;
 		}
@@ -666,10 +667,10 @@ public class JspServlet extends HttpServlet {
 		public void removedBundle(
 			Bundle bundle, BundleEvent bundleEvent, final List<Path> paths) {
 
-			String scratchdir = _jspServlet.getInitParameter(
+			String scratchDirName = _jspServlet.getInitParameter(
 				_INIT_PARAMETER_NAME_SCRATCH_DIR);
 
-			_deleteOutdatedJspFiles(scratchdir, paths);
+			_deleteOutdatedJspFiles(scratchDirName, paths);
 		}
 
 	}
