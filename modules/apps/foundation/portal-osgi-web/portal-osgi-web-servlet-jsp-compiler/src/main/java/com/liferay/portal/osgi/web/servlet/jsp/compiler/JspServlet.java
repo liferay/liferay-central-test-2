@@ -520,7 +520,7 @@ public class JspServlet extends HttpServlet {
 		return Collections.unmodifiableMap(methods);
 	}
 
-	private void _deleteOutDatedJspFiles(String dir, List<Path> paths) {
+	private void _deleteOutdatedJspFiles(String dir, List<Path> paths) {
 		FileSystem fileSystem = FileSystems.getDefault();
 
 		Path dirPath = fileSystem.getPath(dir);
@@ -647,7 +647,7 @@ public class JspServlet extends HttpServlet {
 					paths.add(fileSystem.getPath(sb.toString()));
 				}
 
-				_deleteOutDatedJspFiles(scratchdir, paths);
+				_deleteOutdatedJspFiles(scratchdir, paths);
 			}
 
 			return paths;
@@ -664,7 +664,7 @@ public class JspServlet extends HttpServlet {
 
 			String scratchdir = _jspServlet.getInitParameter(_SCRATCH_DIR);
 
-			_deleteOutDatedJspFiles(scratchdir, paths);
+			_deleteOutdatedJspFiles(scratchdir, paths);
 		}
 
 	}
