@@ -289,7 +289,7 @@ public class JspServlet extends HttpServlet {
 		sb.append(StringPool.DASH);
 		sb.append(_bundle.getVersion());
 
-		defaults.put(_SCRATCH_DIR, sb.toString());
+		defaults.put(_INIT_PARAMETER_NAME_SCRATCH_DIR, sb.toString());
 
 		defaults.put(
 			TagHandlerPool.OPTION_TAGPOOL, JspTagHandlerPool.class.getName());
@@ -544,10 +544,10 @@ public class JspServlet extends HttpServlet {
 		JspServletContext.class, ServletContext.class
 	};
 
-	private static final String _RESOURCES_DIR =
+	private static final String _DIR_NAME_RESOURCES =
 		File.separator + "META-INF" + File.separator + "resources";
 
-	private static final String _SCRATCH_DIR = "scratchdir";
+	private static final String _INIT_PARAMETER_NAME_SCRATCH_DIR = "scratchdir";
 
 	private static final String _WORK_DIR =
 		PropsUtil.get(PropsKeys.LIFERAY_HOME) + File.separator + "work" +
@@ -620,17 +620,17 @@ public class JspServlet extends HttpServlet {
 			}
 
 			Enumeration<URL> jsps = bundle.findEntries(
-				_RESOURCES_DIR, "*.jsp", true);
+				_DIR_NAME_RESOURCES, "*.jsp", true);
 
 			if (jsps != null) {
-				String scratchdir = _jspServlet.getInitParameter(_SCRATCH_DIR);
+				String scratchdir = _jspServlet.getInitParameter(_INIT_PARAMETER_NAME_SCRATCH_DIR);
 
 				while (jsps.hasMoreElements()) {
 					URL url = jsps.nextElement();
 
 					String urlPath = url.getPath();
 
-					String[] urlPathParts = urlPath.split(_RESOURCES_DIR);
+					String[] urlPathParts = urlPath.split(_DIR_NAME_RESOURCES);
 
 					String jspPath = urlPathParts[1];
 
@@ -663,7 +663,7 @@ public class JspServlet extends HttpServlet {
 		public void removedBundle(
 			Bundle bundle, BundleEvent bundleEvent, final List<Path> paths) {
 
-			String scratchdir = _jspServlet.getInitParameter(_SCRATCH_DIR);
+			String scratchdir = _jspServlet.getInitParameter(_INIT_PARAMETER_NAME_SCRATCH_DIR);
 
 			_deleteOutdatedJspFiles(scratchdir, paths);
 		}
@@ -739,11 +739,11 @@ public class JspServlet extends HttpServlet {
 			if (matcher.matches()) {
 				path = matcher.group("file") + matcher.group("extension");
 
-				return _bundle.getEntry(_RESOURCES_DIR + path);
+				return _bundle.getEntry(_DIR_NAME_RESOURCES + path);
 			}
 
 			Enumeration<URL> enumeration = _bundle.findEntries(
-				_RESOURCES_DIR, path.substring(1), false);
+				_DIR_NAME_RESOURCES, path.substring(1), false);
 
 			if (enumeration == null) {
 				return null;
@@ -784,7 +784,7 @@ public class JspServlet extends HttpServlet {
 
 				if (!path.startsWith("/META-INF/")) {
 					url = _servletContext.getResource(
-						_RESOURCES_DIR.concat(path));
+						_DIR_NAME_RESOURCES.concat(path));
 				}
 
 				if (url != null) {
