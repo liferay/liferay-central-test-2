@@ -12,23 +12,23 @@
  * details.
  */
 
-package com.liferay.portal.profile.gatekeeper;
+package com.liferay.portal.profile;
 
 import java.util.Set;
 
 /**
  * @author Shuyang Zhou
  */
-public interface Profile {
+public interface PortalProfile {
 
-	public static final String CE_PORTAL_PROFILE_NAME = "CE";
+	public static final String PORTAL_PROFILE_NAME_CE = "CE";
 
-	public static final String EE_PORTAL_PROFILE_NAME = "EE";
+	public static final String PORTAL_PROFILE_NAME_DXP = "DXP";
 
 	public static final String PORTAL_PROFILE_NAMES = "portal.profile.names";
 
 	public void activate();
 
-	public Set<String> getSupportedPortalProfileNames();
+	public Set<String> getPortalProfileNames();
 
 }

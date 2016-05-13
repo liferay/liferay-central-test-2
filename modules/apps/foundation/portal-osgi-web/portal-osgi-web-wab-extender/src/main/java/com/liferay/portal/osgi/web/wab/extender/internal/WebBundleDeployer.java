@@ -17,7 +17,7 @@ package com.liferay.portal.osgi.web.wab.extender.internal;
 import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.osgi.web.wab.extender.internal.event.EventUtil;
-import com.liferay.portal.profile.gatekeeper.Profile;
+import com.liferay.portal.profile.PortalProfile;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -61,7 +61,7 @@ public class WebBundleDeployer {
 		}
 	}
 
-	public ServiceRegistration<Profile> doStart(Bundle bundle) {
+	public ServiceRegistration<PortalProfile> doStart(Bundle bundle) {
 		_eventUtil.sendEvent(bundle, EventUtil.DEPLOYING, null, false);
 
 		String contextPath = WabUtil.getWebContextPath(bundle);
@@ -98,21 +98,21 @@ public class WebBundleDeployer {
 			_eventUtil.sendEvent(bundle, EventUtil.FAILED, ioe, false);
 		}
 
-		Set<String> supportedPortalProfiles = SetUtil.fromArray(
+		Set<String> portalProfileNames = SetUtil.fromArray(
 			StringUtil.split(
-				properties.getProperty(Profile.PORTAL_PROFILE_NAMES)));
+				properties.getProperty(PortalProfile.PORTAL_PROFILE_NAMES)));
 
-		if (supportedPortalProfiles.isEmpty()) {
+		if (portalProfileNames.isEmpty()) {
 			_initWabBundle(bundle);
 
 			return null;
 		}
 
-		supportedPortalProfiles.add(bundle.getSymbolicName());
+		portalProfileNames.add(bundle.getSymbolicName());
 
 		return _bundleContext.registerService(
-			Profile.class,
-			new WarModuleProfile(bundle, supportedPortalProfiles), null);
+			PortalProfile.class,
+			new WarModuleProfile(bundle, portalProfileNames), null);
 	}
 
 	public void doStop(Bundle bundle) {
@@ -197,27 +197,27 @@ public class WebBundleDeployer {
 	private final ConcurrentMap<Bundle, WabBundleProcessor>
 		_wabBundleProcessors = new ConcurrentHashMap<>();
 
-	private class WarModuleProfile implements Profile {
+	private class WarModuleProfile implements PortalProfile {
 
 		@Override
 		public void activate() {
-			_initWabBundle(_wabBundle);
+			_initWabBundle(_bundle);
 		}
 
 		@Override
-		public Set<String> getSupportedPortalProfileNames() {
-			return _supportedPortalProfiles;
+		public Set<String> getPortalProfileNames() {
+			return _portalProfileNames;
 		}
 
 		private WarModuleProfile(
-			Bundle wabBundle, Set<String> supportedPortalProfiles) {
+			Bundle bundle, Set<String> portalProfileNames) {
 
-			_wabBundle = wabBundle;
-			_supportedPortalProfiles = supportedPortalProfiles;
+			_bundle = bundle;
+			_portalProfileNames = portalProfileNames;
 		}
 
-		private final Set<String> _supportedPortalProfiles;
-		private final Bundle _wabBundle;
+		private final Bundle _bundle;
+		private final Set<String> _portalProfileNames;
 
 	}
 

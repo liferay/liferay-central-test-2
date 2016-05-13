@@ -12,13 +12,12 @@
  * details.
  */
 
-package com.liferay.portal.cluster.single.internal.profile;
+package com.liferay.portal.cache.single.internal.portal.profile;
 
-import com.liferay.portal.cluster.single.internal.SingleClusterExecutor;
-import com.liferay.portal.cluster.single.internal.SingleClusterLink;
-import com.liferay.portal.cluster.single.internal.SingleClusterMasterExecutor;
-import com.liferay.portal.profile.gatekeeper.BaseDSModuleProfile;
-import com.liferay.portal.profile.gatekeeper.Profile;
+import com.liferay.portal.cache.single.internal.bootstrap.SinglePortalCacheBootstrapLoaderFactory;
+import com.liferay.portal.cache.single.internal.distribution.SinglePortalCacheReplicatorFactory;
+import com.liferay.portal.profile.BaseDSModulePortalProfile;
+import com.liferay.portal.profile.PortalProfile;
 
 import java.util.Collections;
 
@@ -29,17 +28,16 @@ import org.osgi.service.component.annotations.Component;
 /**
  * @author Shuyang Zhou
  */
-@Component(immediate = true, service = Profile.class)
-public class DSModuleProfile extends BaseDSModuleProfile {
+@Component(immediate = true, service = PortalProfile.class)
+public class ModulePortalProfile extends BaseDSModulePortalProfile {
 
 	@Activate
 	public void activate(ComponentContext componentContext) {
 		init(
 			componentContext,
-			Collections.singleton(Profile.CE_PORTAL_PROFILE_NAME),
-			SingleClusterExecutor.class.getName(),
-			SingleClusterLink.class.getName(),
-			SingleClusterMasterExecutor.class.getName());
+			Collections.singleton(PortalProfile.PORTAL_PROFILE_NAME_CE),
+			SinglePortalCacheBootstrapLoaderFactory.class.getName(),
+			SinglePortalCacheReplicatorFactory.class.getName());
 	}
 
 }
