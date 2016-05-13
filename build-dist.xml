@@ -3243,8 +3243,6 @@ plugins.includes=</echo>
 	</target>
 
 	<target name="zip-portal-dependencies">
-		<gradle-execute dir="modules/core/registry-api" task="jar" />
-
 		<delete failonerror="false" file="dist/liferay-portal-dependencies-${lp.version}.zip" />
 
 		<zip destfile="dist/liferay-portal-dependencies-${lp.version}.zip">
