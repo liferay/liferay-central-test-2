@@ -531,7 +531,8 @@ public class JspServlet extends HttpServlet {
 			}
 			catch (IOException ioe) {
 				_logger.log(
-					Logger.LOG_WARNING, "Can't delete outdated files " + paths);
+					Logger.LOG_WARNING,
+					"Unable to delete outdated files: " + paths);
 			}
 		}
 	}
