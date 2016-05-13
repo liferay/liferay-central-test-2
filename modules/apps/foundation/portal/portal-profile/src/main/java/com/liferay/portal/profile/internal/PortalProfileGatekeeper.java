@@ -12,12 +12,12 @@
  * details.
  */
 
-package com.liferay.portal.profile.gatekeeper.internal;
+package com.liferay.portal.profile.internal;
 
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.profile.gatekeeper.Profile;
+import com.liferay.portal.profile.PortalProfile;
 
 import java.util.Set;
 
@@ -33,28 +33,28 @@ import org.osgi.util.tracker.ServiceTrackerCustomizer;
  * @author Shuyang Zhou
  */
 @Component(immediate = true)
-public class ProfileGatekeeper {
+public class PortalProfileGatekeeper {
 
 	@Activate
 	public void activate(BundleContext bundleContext) {
 		Set<String> portalProfileNames = SetUtil.fromArray(
 			StringUtil.split(
-				bundleContext.getProperty(Profile.PORTAL_PROFILE_NAMES)));
+				bundleContext.getProperty(PortalProfile.PORTAL_PROFILE_NAMES)));
 
 		if (portalProfileNames.isEmpty()) {
 			String name = ReleaseInfo.getName();
 
 			if (name.contains("Community")) {
-				portalProfileNames.add(Profile.CE_PORTAL_PROFILE_NAME);
+				portalProfileNames.add(PortalProfile.PORTAL_PROFILE_NAME_CE);
 			}
 			else {
-				portalProfileNames.add(Profile.EE_PORTAL_PROFILE_NAME);
+				portalProfileNames.add(PortalProfile.PORTAL_PROFILE_NAME_DXP);
 			}
 		}
 
 		_serviceTracker = new ServiceTracker<>(
-			bundleContext, Profile.class,
-			new ProfileServiceTrackerCustomizer(
+			bundleContext, PortalProfile.class,
+			new PortalProfileServiceTrackerCustomizer(
 				bundleContext, portalProfileNames));
 
 		_serviceTracker.open();
@@ -65,20 +65,23 @@ public class ProfileGatekeeper {
 		_serviceTracker.close();
 	}
 
-	private ServiceTracker<Profile, Void> _serviceTracker;
+	private ServiceTracker<PortalProfile, Void> _serviceTracker;
 
-	private static class ProfileServiceTrackerCustomizer
-		implements ServiceTrackerCustomizer<Profile, Void> {
+	private static class PortalProfileServiceTrackerCustomizer
+		implements ServiceTrackerCustomizer<PortalProfile, Void> {
 
 		@Override
-		public Void addingService(ServiceReference<Profile> serviceReference) {
-			Profile profile = _bundleContext.getService(serviceReference);
+		public Void addingService(
+			ServiceReference<PortalProfile> serviceReference) {
+
+			PortalProfile portalProfile = _bundleContext.getService(
+				serviceReference);
 
 			for (String portalProfileName :
-					profile.getSupportedPortalProfileNames()) {
+					portalProfile.getPortalProfileNames()) {
 
 				if (_portalProfileNames.contains(portalProfileName)) {
-					profile.activate();
+					portalProfile.activate();
 
 					break;
 				}
@@ -89,15 +92,15 @@ public class ProfileGatekeeper {
 
 		@Override
 		public void modifiedService(
-			ServiceReference<Profile> serviceReference, Void v) {
+			ServiceReference<PortalProfile> serviceReference, Void v) {
 		}
 
 		@Override
 		public void removedService(
-			ServiceReference<Profile> serviceReference, Void v) {
+			ServiceReference<PortalProfile> serviceReference, Void v) {
 		}
 
-		private ProfileServiceTrackerCustomizer(
+		private PortalProfileServiceTrackerCustomizer(
 			BundleContext bundleContext, Set<String> portalProfileNames) {
 
 			_bundleContext = bundleContext;

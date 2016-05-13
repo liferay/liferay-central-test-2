@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.profile.gatekeeper;
+package com.liferay.portal.profile;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -24,7 +24,7 @@ import org.osgi.service.component.ComponentContext;
 /**
  * @author Shuyang Zhou
  */
-public class BaseDSModuleProfile implements Profile {
+public class BaseDSModulePortalProfile implements PortalProfile {
 
 	@Override
 	public void activate() {
@@ -34,7 +34,7 @@ public class BaseDSModuleProfile implements Profile {
 	}
 
 	@Override
-	public Set<String> getSupportedPortalProfileNames() {
+	public Set<String> getPortalProfileNames() {
 		return _supportedPortalProfileNames;
 	}
 

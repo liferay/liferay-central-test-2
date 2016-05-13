@@ -1,4 +1,0 @@
-Bundle-Name: Liferay Portal Profile Gatekeeper
-Bundle-SymbolicName: com.liferay.portal.profile.gatekeeper
-Bundle-Version: 1.0.0
-Export-Package: com.liferay.portal.profile.gatekeeper

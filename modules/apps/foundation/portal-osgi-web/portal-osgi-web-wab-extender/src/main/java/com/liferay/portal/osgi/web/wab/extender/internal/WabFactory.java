@@ -19,7 +19,7 @@ import com.liferay.portal.kernel.module.framework.ModuleServiceLifecycle;
 import com.liferay.portal.osgi.web.servlet.context.helper.ServletContextHelperFactory;
 import com.liferay.portal.osgi.web.wab.extender.internal.configuration.WabExtenderConfiguration;
 import com.liferay.portal.osgi.web.wab.extender.internal.event.EventUtil;
-import com.liferay.portal.profile.gatekeeper.Profile;
+import com.liferay.portal.profile.PortalProfile;
 
 import java.util.Dictionary;
 import java.util.concurrent.CountDownLatch;
@@ -167,7 +167,7 @@ public class WabFactory extends AbstractExtender {
 		}
 
 		private final Bundle _bundle;
-		private ServiceRegistration<Profile> _serviceRegistration;
+		private ServiceRegistration<PortalProfile> _serviceRegistration;
 		private final CountDownLatch _started = new CountDownLatch(1);
 
 	}
