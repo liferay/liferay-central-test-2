@@ -97,12 +97,9 @@ public class ImageEditorDLDisplayContextHelper {
 		JavaScriptMenuItem javascriptMenuItem = new JavaScriptMenuItem();
 
 		javascriptMenuItem.setKey("#edit-with-image-editor");
-
 		javascriptMenuItem.setLabel(
 			LanguageUtil.get(resourceBundle, "edit-with-image-editor"));
-
 		javascriptMenuItem.setOnClick(_getOnclickMethod());
-
 		javascriptMenuItem.setJavaScript(_getJavaScript());
 
 		return javascriptMenuItem;
@@ -116,12 +113,9 @@ public class ImageEditorDLDisplayContextHelper {
 			new JavaScriptToolbarItem();
 
 		javascriptToolbarItem.setKey("#edit-with-image-editor");
-
 		javascriptToolbarItem.setLabel(
 			LanguageUtil.get(resourceBundle, "edit-with-image-editor"));
-
 		javascriptToolbarItem.setOnClick(_getOnclickMethod());
-
 		javascriptToolbarItem.setJavaScript(_getJavaScript());
 
 		return javascriptToolbarItem;
@@ -174,12 +168,9 @@ public class ImageEditorDLDisplayContextHelper {
 	}
 
 	private String _getJavaScript() throws PortalException {
-		LiferayPortletResponse liferayPortletResponse =
-			_getLiferayPortletResponse();
-
 		String javaScript =
-			"/com/liferay/frontend/image/editor/integration/document/library/" +
-				"display/context/dependencies/edit_with_image_editor_js.ftl";
+			"/com/liferay/frontend/image/editor/integration/document/library" +
+				"/display/context/dependencies/edit_with_image_editor_js.ftl";
 
 		Class<?> clazz = getClass();
 
@@ -190,6 +181,10 @@ public class ImageEditorDLDisplayContextHelper {
 			TemplateConstants.LANG_TYPE_FTL, urlTemplateResource, false);
 
 		template.put("editLanguageKey", LanguageUtil.get(_request, "edit"));
+
+		LiferayPortletResponse liferayPortletResponse =
+			_getLiferayPortletResponse();
+
 		template.put("namespace", liferayPortletResponse.getNamespace());
 
 		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
