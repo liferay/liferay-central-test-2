@@ -29,6 +29,9 @@ The command to execute the tool should be similar to this:
 
     java -classpath "PATH-TO-LIBS/*:/PATH-TO-TOOL/com.liferay.portal.tools.data.partitioning.sql.builder-1.0.0.jar" com.liferay.portal.tools.data.partitioning.sql.builder.Main [-P|--properties-file] PATH-TO-DB-PROPERTIES [-S|--schema-name] SCHEMA_NAME [-C|--company-ids] COMMA-SEPARATED-COMPANY_IDS [-O|--output-dir] OUTPUT-DIR [-W|--write-file]
 
+Remember that you should use colon (:) as file separator on Unix-like machines,
+and semicolon (;) on Windows machines.
+
 Here are examples of executing the tool using MySQL as the DB provider:
 
     java -classpath "/opt/jdbc-drivers/*:com.liferay.portal.tools.data.partitioning.sql.builder-1.0.0.jar" com.liferay.portal.tools.data.partitioning.sql.builder.Main -P ~/shardingTool/mysql.properties -S lportal -C 20156 -O /tmp [-W]
