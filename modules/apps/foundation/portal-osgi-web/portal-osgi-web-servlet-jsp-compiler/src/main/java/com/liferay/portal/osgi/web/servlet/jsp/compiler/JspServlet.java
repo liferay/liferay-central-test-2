@@ -341,7 +341,7 @@ public class JspServlet extends HttpServlet {
 
 		_bundleTracker = new BundleTracker<>(
 			_bundle.getBundleContext(), Bundle.RESOLVED,
-			new JSPFragmentTrackerCustomizer());
+			new JspFragmentTrackerCustomizer());
 
 		_bundleTracker.open();
 	}
@@ -594,7 +594,7 @@ public class JspServlet extends HttpServlet {
 
 	}
 
-	private class JSPFragmentTrackerCustomizer
+	private class JspFragmentTrackerCustomizer
 		implements BundleTrackerCustomizer<List<Path>> {
 
 		@Override
