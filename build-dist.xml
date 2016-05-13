@@ -1964,10 +1964,8 @@ closeTemplate()
 						<echo file="${tstamp.value}/create-weblogic-domain.bat">
 							@echo off
 
-							set "USER_MEM_ARGS=-Xmx1024m -XX:MetaspaceSize=256m"
-
 							set "MW_HOME=${app.server.weblogic.dir.windows}"
-
+							set "USER_MEM_ARGS=-Xmx1024m -XX:MetaspaceSize=256m"
 							set "WL_HOME=${app.server.weblogic.wlserver.dir.windows}"
 
 							call %MW_HOME%/oracle_common/common/bin/commEnv.cmd
@@ -1988,10 +1986,8 @@ closeTemplate()
 						<echo file="${tstamp.value}/create-weblogic-domain.bat">
 							@echo off
 
-							set "USER_MEM_ARGS=-Xmx1024m -XX:MetaspaceSize=256m"
-
 							set "MW_HOME=${app.server.weblogic.dir.windows}"
-
+							set "USER_MEM_ARGS=-Xmx1024m -XX:MetaspaceSize=256m"
 							set "WL_HOME=${app.server.weblogic.wlserver.dir.windows}"
 
 							call %WL_HOME%/common/bin/commEnv.cmd
@@ -2015,13 +2011,10 @@ closeTemplate()
 						<![CDATA[
 							SETLOCAL
 
-							set "USER_MEM_ARGS=-Xmx1024m -XX:PermSize=512m"
-
 							set DERBY_FLAG="false"
-
-							set "MW_HOME=${app.server.weblogic.dir.windows}"
-
 							set "JAVA_OPTIONS=%JAVA_OPTIONS% -Dfile.encoding=UTF-8 @java.security.manager.option@ -da:org.apache.lucene... -da:org.aspectj..."
+							set "MW_HOME=${app.server.weblogic.dir.windows}"
+							set "USER_MEM_ARGS=-Xmx1024m -XX:PermSize=512m"
 						]]>
 					</replacevalue>
 				</replace>
@@ -2127,10 +2120,8 @@ closeTemplate()
 						<echo file="${tstamp.value}/create-weblogic-domain.sh">
 							#!/bin/sh
 
-							export USER_MEM_ARGS="-Xmx1024m -XX:MetaspaceSize=256m"
-
 							export MW_HOME="${app.server.weblogic.dir}"
-
+							export USER_MEM_ARGS="-Xmx1024m -XX:MetaspaceSize=256m"
 							export WL_HOME="${app.server.weblogic.wlserver.dir}"
 
 							${source.command} ${MW_HOME}/oracle_common/common/bin/commEnv.sh
@@ -2144,10 +2135,8 @@ closeTemplate()
 						<echo file="${tstamp.value}/create-weblogic-domain.sh">
 							#!/bin/sh
 
-							export USER_MEM_ARGS="-Xmx1024m -XX:MetaspaceSize=256m"
-
 							export MW_HOME="${app.server.weblogic.dir}"
-
+							export USER_MEM_ARGS="-Xmx1024m -XX:MetaspaceSize=256m"
 							export WL_HOME="${app.server.weblogic.wlserver.dir}"
 
 							${source.command} ${WL_HOME}/common/bin/commEnv.sh
@@ -2175,13 +2164,10 @@ closeTemplate()
 						<![CDATA[
 							# Any changes to this script may be lost when adding extensions to this configuration.
 
-							export USER_MEM_ARGS="-Xmx1024m -XX:MetaspaceSize=512m"
-
 							export DERBY_FLAG="false"
-
-							export MW_HOME="${app.server.weblogic.dir}"
-
 							export JAVA_OPTIONS="${JAVA_OPTIONS} @java.security.manager.option@ -da:org.apache.lucene... -da:org.aspectj..."
+							export MW_HOME="${app.server.weblogic.dir}"
+							export USER_MEM_ARGS="-Xmx1024m -XX:MetaspaceSize=512m"
 						]]>
 					</replacevalue>
 				</replace>
