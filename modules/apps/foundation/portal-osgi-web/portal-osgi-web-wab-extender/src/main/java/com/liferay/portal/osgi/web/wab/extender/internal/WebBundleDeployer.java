@@ -100,7 +100,7 @@ public class WebBundleDeployer {
 
 		Set<String> portalProfileNames = SetUtil.fromArray(
 			StringUtil.split(
-				properties.getProperty(PortalProfile.PORTAL_PROFILE_NAMES)));
+				properties.getProperty("liferay-portal-profile-names")));
 
 		if (portalProfileNames.isEmpty()) {
 			_initWabBundle(bundle);
