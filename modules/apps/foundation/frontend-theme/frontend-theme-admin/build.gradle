@@ -2,26 +2,10 @@ import com.liferay.gradle.plugins.gulp.ExecuteGulpTask
 import com.liferay.gradle.plugins.util.GradleUtil
 import com.liferay.gradle.util.copy.StripPathSegmentsAction
 
-apply plugin: "com.liferay.cache"
-
 task expandFrontendCSSCommon(type: Copy)
 
 File frontendCSSCommonDir = new File(buildDir, "frontend-css-common")
 String frontendCSSCommonVersion = GradleUtil.getPortalToolVersion(project, "com.liferay.frontend.css.common")
-
-cache {
-	task(gulpBuild) {
-		baseDir = "dist"
-		cacheDir = ".task-cache"
-
-		skipTaskDependency downloadNode
-		skipTaskDependency npmInstall
-
-		testFile "gulpfile.js"
-		testFile "package.json"
-		testFile "src"
-	}
-}
 
 configurations {
 	frontendCSSCommon
