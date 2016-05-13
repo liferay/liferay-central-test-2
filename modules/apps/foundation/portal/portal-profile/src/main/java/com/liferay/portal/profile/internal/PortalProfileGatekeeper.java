@@ -39,7 +39,7 @@ public class PortalProfileGatekeeper {
 	public void activate(BundleContext bundleContext) {
 		Set<String> portalProfileNames = SetUtil.fromArray(
 			StringUtil.split(
-				bundleContext.getProperty(PortalProfile.PORTAL_PROFILE_NAMES)));
+				bundleContext.getProperty("portal.profile.names")));
 
 		if (portalProfileNames.isEmpty()) {
 			String name = ReleaseInfo.getName();

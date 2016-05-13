@@ -25,8 +25,6 @@ public interface PortalProfile {
 
 	public static final String PORTAL_PROFILE_NAME_DXP = "DXP";
 
-	public static final String PORTAL_PROFILE_NAMES = "portal.profile.names";
-
 	public void activate();
 
 	public Set<String> getPortalProfileNames();
