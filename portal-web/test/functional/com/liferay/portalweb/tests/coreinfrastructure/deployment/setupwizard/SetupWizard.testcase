@@ -22,9 +22,8 @@
 	</command>
 
 	<command name="HypersonicToMySQL" priority="5">
-		<property name="portal.acceptance.tomcat.mysql" value="false" />
 		<property name="portal.acceptance.quarantine" value="true" />
-
+		<property name="portal.acceptance.tomcat.mysql" value="false" />
 		<property name="portal.release" value="true" />
 
 		<execute macro="SetupWizard#configurePG">
