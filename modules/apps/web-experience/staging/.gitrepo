@@ -5,7 +5,7 @@
 [subrepo]
 	branch = 7.0.x
 	cmdver = liferay
-	commit = a27ed25392672fcb45f4ddff6f6d4ddfb8a648cb
+	commit = 9927eb0b2b1613f1cdefc0cd2a8dda0a93797074
 	mode = push
-	parent = 6e39e7f50af7916607926452dd91797962a53cef
+	parent = d488a68fe16ffd620f5c0ace7fdfad7920c6f6e8
 	remote = git@github.com:liferay-continuous-integration/com-liferay-staging.git
