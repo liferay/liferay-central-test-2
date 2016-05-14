@@ -5,7 +5,7 @@
 [subrepo]
 	branch = 7.0.x
 	cmdver = liferay
-	commit = a27ed25392672fcb45f4ddff6f6d4ddfb8a648cb
+	commit = 2536b4c7f80e8b386cf391ca6b04f08ecf438493
 	mode = push
-	parent = 6e39e7f50af7916607926452dd91797962a53cef
+	parent = 79f08d3e977f012e8878ddba19977571eca0d34b
 	remote = git@github.com:liferay-continuous-integration/com-liferay-item-selector.git
