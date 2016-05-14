@@ -5,7 +5,7 @@
 [subrepo]
 	branch = 7.0.x
 	cmdver = liferay
-	commit = a27ed25392672fcb45f4ddff6f6d4ddfb8a648cb
+	commit = c06ce185e1f67da6bcd3f63966b8e48db9ff8b7a
 	mode = push
-	parent = 6e39e7f50af7916607926452dd91797962a53cef
+	parent = 74d5fe6bbe3b2d0ea2af8a9345ba4f96a3345a2c
 	remote = git@github.com:liferay-continuous-integration/com-liferay-frontend-theme.git
