@@ -5,7 +5,7 @@
 [subrepo]
 	branch = 7.0.x
 	cmdver = liferay
-	commit = a27ed25392672fcb45f4ddff6f6d4ddfb8a648cb
+	commit = a4c3e286c91cd82a1172a0f567333d68e52b3ed0
 	mode = push
-	parent = 6e39e7f50af7916607926452dd91797962a53cef
+	parent = 376f367e1a90b8dacf58a2230bfeb3caad5b3224
 	remote = git@github.com:liferay-continuous-integration/com-liferay-roles.git
