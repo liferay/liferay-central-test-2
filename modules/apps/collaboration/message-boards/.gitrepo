@@ -5,7 +5,7 @@
 [subrepo]
 	branch = 7.0.x
 	cmdver = liferay
-	commit = a27ed25392672fcb45f4ddff6f6d4ddfb8a648cb
+	commit = e570132f90d9efb3f7683ad9fc55fdb419da1bc1
 	mode = push
-	parent = 6e39e7f50af7916607926452dd91797962a53cef
+	parent = 0be8454ebbedc337e7cbd784162949da9dfcf02f
 	remote = git@github.com:liferay-continuous-integration/com-liferay-message-boards.git
