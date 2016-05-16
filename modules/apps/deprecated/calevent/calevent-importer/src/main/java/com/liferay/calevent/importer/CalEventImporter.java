@@ -735,7 +735,7 @@ public class CalEventImporter {
 		}
 
 		if (linkedAssetEntry.getClassNameId() ==
-				_classNameLocalService.getClassNameId(_CAL_EVENT_CLASS_NAME)) {
+				_classNameLocalService.getClassNameId(_CLASS_NAME)) {
 
 			CalendarBooking calendarBooking = importCalEvent(
 				linkedAssetEntry.getClassPK());
@@ -774,7 +774,7 @@ public class CalEventImporter {
 		// Asset entry
 
 		AssetEntry assetEntry = _assetEntryLocalService.fetchEntry(
-			_CAL_EVENT_CLASS_NAME, eventId);
+			_CLASS_NAME, eventId);
 
 		if (assetEntry == null) {
 			return;
@@ -840,7 +840,7 @@ public class CalEventImporter {
 			_calendarBookingLocalService.getCalendarBooking(calendarBookingId);
 
 		long actionIds = getActionIds(
-			resourcePermission, _CAL_EVENT_CLASS_NAME,
+			resourcePermission, _CLASS_NAME,
 			CalendarBooking.class.getName());
 
 		_resourceBlockLocalService.updateIndividualScopePermissions(
@@ -856,7 +856,7 @@ public class CalEventImporter {
 
 		List<ResourcePermission> resourcePermissions =
 			_resourcePermissionLocalService.getResourcePermissions(
-				companyId, _CAL_EVENT_CLASS_NAME,
+				companyId, _CLASS_NAME,
 				ResourceConstants.SCOPE_INDIVIDUAL, String.valueOf(eventId));
 
 		for (ResourcePermission resourcePermission : resourcePermissions) {
@@ -981,7 +981,7 @@ public class CalEventImporter {
 		// Ratings
 
 		importRatings(
-			_CAL_EVENT_CLASS_NAME, eventId, CalendarBooking.class.getName(),
+			_CLASS_NAME, eventId, CalendarBooking.class.getName(),
 			calendarBookingId);
 
 		return calendarBooking;
@@ -1043,7 +1043,7 @@ public class CalEventImporter {
 		throws PortalException {
 
 		MBDiscussion mbDiscussion = _mbDiscussionLocalService.fetchDiscussion(
-			_CAL_EVENT_CLASS_NAME, eventId);
+			_CLASS_NAME, eventId);
 
 		if (mbDiscussion == null) {
 			return;
@@ -1189,7 +1189,7 @@ public class CalEventImporter {
 
 		List<SocialActivity> socialActivities =
 			_socialActivityLocalService.getActivities(
-				_CAL_EVENT_CLASS_NAME, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+				_CLASS_NAME, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 		for (SocialActivity socialActivity : socialActivities) {
 			if (socialActivity.getClassPK() == eventId) {
@@ -1227,7 +1227,7 @@ public class CalEventImporter {
 
 		List<Subscription> subscriptions =
 			_subscriptionLocalService.getSubscriptions(
-				companyId, _CAL_EVENT_CLASS_NAME, eventId);
+				companyId, _CLASS_NAME, eventId);
 
 		for (Subscription subscription : subscriptions) {
 			importSubscription(subscription, calendarBookingId);
@@ -1423,7 +1423,7 @@ public class CalEventImporter {
 
 	private static final String _ASSET_VOCABULARY_NAME = "Calendar Event Types";
 
-	private static final String _CAL_EVENT_CLASS_NAME =
+	private static final String _CLASS_NAME =
 		"com.liferay.portlet.calendar.model.CalEvent";
 
 	private static final Log _log = LogFactoryUtil.getLog(
