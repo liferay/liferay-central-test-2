@@ -1,4 +1,4 @@
-Portal Tools - DB Upgrade Client
+# Portal Tools - DB Upgrade Client
 
 The DB Upgrade Client is a standalone client used for upgrading your Liferay DXP database.
 
