@@ -606,6 +606,7 @@ public class IconTag extends IncludeTag {
 
 		request.setAttribute(
 			"liferay-ui:icon:toolTip", String.valueOf(toolTip));
+
 		request.setAttribute("liferay-ui:icon:url", getProcessedUrl());
 		request.setAttribute(
 			"liferay-ui:icon:useDialog", String.valueOf(_useDialog));
