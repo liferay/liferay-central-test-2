@@ -39,6 +39,10 @@ public class ServerInfo {
 		return isCompatible(syncAccountId, "1.0.0");
 	}
 
+	public static boolean supportsModuleFramework(String pluginVersion) {
+		return isCompatible(pluginVersion, "1.0.0");
+	}
+
 	public static boolean supportsPartialDownloads(long syncAccountId) {
 		return isCompatible(syncAccountId, "1.0.0", "6.2.0.5");
 	}
