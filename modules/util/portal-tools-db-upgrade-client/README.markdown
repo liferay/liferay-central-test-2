@@ -14,13 +14,13 @@ To install and execute the DB Upgrade Client, there are two methods you can foll
 
 3. Unzip the client into your Liferay instance  (e.g., *${liferayHome}/tools/portal-tools-db-upgrade-client*)
 
-4. Run* java -jar com.liferay.portal.tools.db.upgrade.client.jar*
+4. Run *java -jar com.liferay.portal.tools.db.upgrade.client.jar*
 
 ### Using JPM:
 
-1. Install[ jpm](https://jpm4j.org/#!/)
+1. Install [jpm](https://jpm4j.org/#!/)
 
-2. Run* jpm install com.liferay.portal.tools.db.upgrade.client*
+2. Run *jpm install com.liferay.portal.tools.db.upgrade.client*
 
 3. Run *liferay-upgrade-db*
 
@@ -68,7 +68,7 @@ You can reference options for command line execution, Gogo shell commands, and c
 
 ### Configuration Options
 
-##### app-server.properties
+#### app-server.properties
 
 **dir** - the application server directory *(required)*
 
