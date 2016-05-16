@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.io.delta;
+package com.liferay.petra.io.delta;
 
 import java.io.IOException;
 
