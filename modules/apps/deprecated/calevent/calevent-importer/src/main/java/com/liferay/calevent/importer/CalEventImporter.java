@@ -840,8 +840,7 @@ public class CalEventImporter {
 			_calendarBookingLocalService.getCalendarBooking(calendarBookingId);
 
 		long actionIds = getActionIds(
-			resourcePermission, _CLASS_NAME,
-			CalendarBooking.class.getName());
+			resourcePermission, _CLASS_NAME, CalendarBooking.class.getName());
 
 		_resourceBlockLocalService.updateIndividualScopePermissions(
 			calendarBooking.getCompanyId(), calendarBooking.getGroupId(),
@@ -856,8 +855,8 @@ public class CalEventImporter {
 
 		List<ResourcePermission> resourcePermissions =
 			_resourcePermissionLocalService.getResourcePermissions(
-				companyId, _CLASS_NAME,
-				ResourceConstants.SCOPE_INDIVIDUAL, String.valueOf(eventId));
+				companyId, _CLASS_NAME, ResourceConstants.SCOPE_INDIVIDUAL,
+				String.valueOf(eventId));
 
 		for (ResourcePermission resourcePermission : resourcePermissions) {
 			importCalendarBookingResourcePermission(
@@ -1429,8 +1428,7 @@ public class CalEventImporter {
 	private static final Log _log = LogFactoryUtil.getLog(
 		CalEventImporter.class);
 
-	private static final Map<Integer, Frequency> _frequencies =
-		new HashMap<>();
+	private static final Map<Integer, Frequency> _frequencies = new HashMap<>();
 
 	static {
 		_frequencies.put(TZSRecurrence.DAILY, Frequency.DAILY);
