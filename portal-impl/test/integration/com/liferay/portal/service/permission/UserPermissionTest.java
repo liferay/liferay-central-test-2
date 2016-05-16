@@ -51,7 +51,7 @@ public class UserPermissionTest {
 	}
 
 	@Test
-	public void testViewUserPermission() throws Exception {
+	public void testContainsViewActionId() throws Exception {
 		_role = RoleTestUtil.addRole(RoleConstants.TYPE_REGULAR);
 
 		RoleTestUtil.addResourcePermission(
