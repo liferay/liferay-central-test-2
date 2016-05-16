@@ -17,6 +17,7 @@ package com.liferay.gradle.plugins;
 import com.liferay.gradle.plugins.source.formatter.FormatSourceTask;
 import com.liferay.gradle.plugins.source.formatter.SourceFormatterPlugin;
 import com.liferay.gradle.plugins.util.GradleUtil;
+import com.liferay.gradle.util.Validator;
 
 import org.gradle.api.Action;
 import org.gradle.api.Project;
@@ -41,19 +42,22 @@ public class SourceFormatterDefaultsPlugin
 	protected void configureTasksFormatSource(
 		FormatSourceTask formatSourceTask) {
 
-		int maxLineLength = GradleUtil.toInteger(
-			GradleUtil.getProperty(
-				formatSourceTask.getProject(),
-				"source.formatter.max.line.length", (String)null));
+		String maxLineLength = GradleUtil.getProperty(
+			formatSourceTask.getProject(), "source.formatter.max.line.length",
+			(String)null);
 
-		formatSourceTask.setMaxLineLength(maxLineLength);
+		if (Validator.isNotNull(maxLineLength)) {
+			formatSourceTask.setMaxLineLength(Integer.parseInt(maxLineLength));
+		}
 
-		int processorThreadCount = GradleUtil.toInteger(
-			GradleUtil.getProperty(
-				formatSourceTask.getProject(),
-				"source.formatter.processor.thread.count", (String)null));
+		String processorThreadCount = GradleUtil.getProperty(
+			formatSourceTask.getProject(),
+			"source.formatter.processor.thread.count", (String)null);
 
-		formatSourceTask.setProcessorThreadCount(processorThreadCount);
+		if (Validator.isNotNull(processorThreadCount)) {
+			formatSourceTask.setProcessorThreadCount(
+				Integer.parseInt(processorThreadCount));
+		}
 	}
 
 	protected void configureTasksFormatSource(Project project) {
