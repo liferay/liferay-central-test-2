@@ -38,59 +38,59 @@ You can reference options for command line execution, Gogo shell commands, and c
 
 ### Command Line Options
 
-**--jvm-opts** or **-j** - sets any JVM options for the upgrade process
+- **--jvm-opts** or **-j** - sets any JVM options for the upgrade process
 
-**--log-file** or **-l** - uses a custom name for your log file
+- **--log-file** or **-l** - uses a custom name for your log file
 
-**--shell** or **-s** - connects to GoGo Shell after upgrades are completed
+- **--shell** or **-s** - connects to GoGo Shell after upgrades are completed
 
 ### Gogo Shell Command Options
 
-**exit** or **quit** - exits the Gogo shell
+- **exit** or **quit** - exits the Gogo shell
 
-**upgrade:help** - displays upgrade commands
+- **upgrade:help** - displays upgrade commands
 
-**upgrade:check** - lists upgrades that need have not started or failed to complete
+- **upgrade:check** - lists upgrades that need have not started or failed to complete
 
-**upgrade:execute _{module_name}_** - executes upgrade for that module
+- **upgrade:execute _{module_name}_** - executes upgrade for that module
 
-**upgrade:list** - lists all registered upgrades
+- **upgrade:list** - lists all registered upgrades
 
-**upgrade:list _{module_name}_** - lists the upgrade steps required for that module
+- **upgrade:list _{module_name}_** - lists the upgrade steps required for that module
 
-**upgrade:list | grep Registered** - lists registered upgrades and their versions
+- **upgrade:list | grep Registered** - lists registered upgrades and their versions
 
-**upgrade:list | grep Registered | grep steps** - lists registered upgrades in progress
+- **upgrade:list | grep Registered | grep steps** - lists registered upgrades in progress
 
-**verify:execute _{module_name}_** - executes a verifier
+- **verify:execute _{module_name}_** - executes a verifier
 
-**verify:list** - lists all registered verifiers
+- **verify:list** - lists all registered verifiers
 
 ### Configuration Options
 
 #### app-server.properties
 
-**dir** - the application server directory *(required)*
+- **dir** - the application server directory *(required)*
 
-**extra.lib.dirs** - a comma delimited list of extra directories you want to add to the classpath *(required)*
+- **extra.lib.dirs** - a comma delimited list of extra directories you want to add to the classpath *(required)*
 
-**global.lib.dir** - the global lib directory of your application server *(required)*
+- **global.lib.dir** - the global lib directory of your application server *(required)*
 
-**portal.dir** - the portal directory *(required)*
+- **portal.dir** - the portal directory *(required)*
 
 #### portal-upgrade-database.properties
 
-**jdbc.default.driverClassName** *(required)*
+- **jdbc.default.driverClassName** *(required)*
 
-**jdbc.default.url** *(required)*
+- **jdbc.default.url** *(required)*
 
-**jdbc.default.username** *(required)*
+- **jdbc.default.username** *(required)*
 
-**jdbc.default.password** *(required)*
+- **jdbc.default.password** *(required)*
 
 #### portal-upgrade-ext.properties
 
-**liferay.home** - the Liferay home directory *(required)*
+- **liferay.home** - the Liferay home directory *(required)*
 
-**hibernate.jdbc.batch_size** - the JDBC batch size used to improve performance; set to *250* by default *(optional)*
+- **hibernate.jdbc.batch_size** - the JDBC batch size used to improve performance; set to *250* by default *(optional)*
 
