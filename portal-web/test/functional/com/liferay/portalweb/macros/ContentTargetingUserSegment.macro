@@ -334,7 +334,7 @@
 
 	<command name="gotoViewReport">
 		<execute macro="LexiconEntry#gotoEntry">
-			<var name="key_rowEntry" value="${userSegmentName}" />
+			<var name="rowEntry" value="${userSegmentName}" />
 		</execute>
 
 		<execute macro="Navigator#gotoNavItem">
@@ -404,6 +404,7 @@
 
 		<for list="${reportsContentTableList}" param="contentReports">
 			<var name="key_contentReports" value="${contentReports}" />
+			<var name="key_reportTitle" value="${reportTitle}" />
 
 			<execute function="AssertTextEquals" locator1="ContentTargeting#REPORT_TABLE_CONTENT" value1="${contentReports}" />
 		</for>
