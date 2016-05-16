@@ -973,15 +973,15 @@ public class CalEventImporter {
 
 		importMBDiscussion(eventId, calendarBookingId);
 
-		// Social
-
-		importSocialActivities(eventId, calendarBookingId);
-
 		// Ratings
 
 		importRatings(
 			_CLASS_NAME, eventId, CalendarBooking.class.getName(),
 			calendarBookingId);
+
+		// Social
+
+		importSocialActivities(eventId, calendarBookingId);
 
 		return calendarBooking;
 	}
