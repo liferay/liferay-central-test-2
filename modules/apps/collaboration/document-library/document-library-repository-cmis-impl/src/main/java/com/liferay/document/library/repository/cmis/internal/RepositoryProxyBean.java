@@ -45,8 +45,8 @@ public class RepositoryProxyBean
 	public RepositoryProxyBean(Repository repository, ClassLoader classLoader) {
 		super(classLoader);
 
-		_classLoader = classLoader;
 		_repository = repository;
+		_classLoader = classLoader;
 	}
 
 	@Override
@@ -412,7 +412,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ClassLoaderSetter classLoaderSetter = new ClassLoaderSetter(
-			_classLoader)) {
+				_classLoader)) {
 
 			List<FileEntry> fileEntries = _repository.getFileEntries(
 				folderId, start, end, obc);
