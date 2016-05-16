@@ -57,8 +57,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			FileEntry fileEntry = _repository.addFileEntry(
 				userId, folderId, sourceFileName, mimeType, title, description,
@@ -76,8 +75,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			FileEntry fileEntry = _repository.addFileEntry(
 				userId, folderId, sourceFileName, mimeType, title, description,
@@ -96,8 +94,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			FileEntry fileEntry = _repository.addFileEntry(
 				folderId, sourceFileName, mimeType, title, description,
@@ -116,8 +113,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			FileEntry fileEntry = _repository.addFileEntry(
 				folderId, sourceFileName, mimeType, title, description,
@@ -134,8 +130,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			FileShortcut fileShortcut = _repository.addFileShortcut(
 				userId, folderId, toFileEntryId, serviceContext);
@@ -151,8 +146,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			Folder folder = _repository.addFolder(
 				userId, parentFolderId, name, description, serviceContext);
@@ -169,8 +163,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			Folder folder = _repository.addFolder(
 				parentFolderId, name, description, serviceContext);
@@ -182,8 +175,7 @@ public class RepositoryProxyBean
 	@Override
 	public FileVersion cancelCheckOut(long fileEntryId) throws PortalException {
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			FileVersion fileVersion = _repository.cancelCheckOut(fileEntryId);
 
@@ -199,8 +191,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			_repository.checkInFileEntry(
 				fileEntryId, major, changeLog, serviceContext);
@@ -214,8 +205,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			_repository.checkInFileEntry(
 				userId, fileEntryId, majorVersion, changeLog, serviceContext);
@@ -229,8 +219,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			_repository.checkInFileEntry(
 				userId, fileEntryId, lockUuid, serviceContext);
@@ -244,8 +233,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			_repository.checkInFileEntry(fileEntryId, lockUuid, serviceContext);
 		}
@@ -257,8 +245,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			FileEntry fileEntry = _repository.checkOutFileEntry(
 				fileEntryId, serviceContext);
@@ -274,8 +261,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			FileEntry fileEntry = _repository.checkOutFileEntry(
 				fileEntryId, owner, expirationTime, serviceContext);
@@ -291,8 +277,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			FileEntry fileEntry = _repository.copyFileEntry(
 				userId, groupId, fileEntryId, destFolderId, serviceContext);
@@ -309,8 +294,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			FileEntry fileEntry = _repository.copyFileEntry(
 				groupId, fileEntryId, destFolderId, serviceContext);
@@ -322,8 +306,7 @@ public class RepositoryProxyBean
 	@Override
 	public void deleteAll() throws PortalException {
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			_repository.deleteAll();
 		}
@@ -332,8 +315,7 @@ public class RepositoryProxyBean
 	@Override
 	public void deleteFileEntry(long fileEntryId) throws PortalException {
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			_repository.deleteFileEntry(fileEntryId);
 		}
@@ -344,8 +326,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			_repository.deleteFileEntry(folderId, title);
 		}
@@ -354,8 +335,7 @@ public class RepositoryProxyBean
 	@Override
 	public void deleteFileShortcut(long fileShortcutId) throws PortalException {
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			_repository.deleteFileShortcut(fileShortcutId);
 		}
@@ -364,8 +344,7 @@ public class RepositoryProxyBean
 	@Override
 	public void deleteFileShortcuts(long toFileEntryId) throws PortalException {
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			_repository.deleteFileShortcuts(toFileEntryId);
 		}
@@ -376,8 +355,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			_repository.deleteFileVersion(fileEntryId, version);
 		}
@@ -386,8 +364,7 @@ public class RepositoryProxyBean
 	@Override
 	public void deleteFolder(long folderId) throws PortalException {
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			_repository.deleteFolder(folderId);
 		}
@@ -398,8 +375,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			_repository.deleteFolder(parentFolderId, name);
 		}
@@ -408,8 +384,7 @@ public class RepositoryProxyBean
 	@Override
 	public <T extends Capability> T getCapability(Class<T> capabilityClass) {
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			return _repository.getCapability(capabilityClass);
 		}
@@ -422,8 +397,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			List<FileEntry> fileEntries = _repository.getFileEntries(
 				folderId, status, start, end, obc);
@@ -438,8 +412,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			List<FileEntry> fileEntries = _repository.getFileEntries(
 				folderId, start, end, obc);
@@ -455,8 +428,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			List<FileEntry> fileEntries = _repository.getFileEntries(
 				folderId, fileEntryTypeId, start, end, obc);
@@ -472,8 +444,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			List<FileEntry> fileEntries = _repository.getFileEntries(
 				folderId, mimeTypes, start, end, obc);
@@ -488,8 +459,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			List<RepositoryEntry> fileEntriesAndFileShortcuts =
 				_repository.getFileEntriesAndFileShortcuts(
@@ -504,8 +474,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			return _repository.getFileEntriesAndFileShortcutsCount(
 				folderId, status);
@@ -518,8 +487,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			return _repository.getFileEntriesAndFileShortcutsCount(
 				folderId, status, mimeTypes);
@@ -529,8 +497,7 @@ public class RepositoryProxyBean
 	@Override
 	public int getFileEntriesCount(long folderId) throws PortalException {
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			return _repository.getFileEntriesCount(folderId);
 		}
@@ -541,8 +508,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			return _repository.getFileEntriesCount(folderId, status);
 		}
@@ -553,8 +519,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			return _repository.getFileEntriesCount(folderId, fileEntryTypeId);
 		}
@@ -565,8 +530,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			return _repository.getFileEntriesCount(folderId, mimeTypes);
 		}
@@ -575,8 +539,7 @@ public class RepositoryProxyBean
 	@Override
 	public FileEntry getFileEntry(long fileEntryId) throws PortalException {
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			FileEntry fileEntry = _repository.getFileEntry(fileEntryId);
 
@@ -589,8 +552,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			FileEntry fileEntry = _repository.getFileEntry(folderId, title);
 
@@ -601,8 +563,7 @@ public class RepositoryProxyBean
 	@Override
 	public FileEntry getFileEntryByUuid(String uuid) throws PortalException {
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			FileEntry fileEntryByUuid = _repository.getFileEntryByUuid(uuid);
 
@@ -615,8 +576,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			FileShortcut fileShortcut = _repository.getFileShortcut(
 				fileShortcutId);
@@ -630,8 +590,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			FileVersion fileVersion = _repository.getFileVersion(fileVersionId);
 
@@ -642,8 +601,7 @@ public class RepositoryProxyBean
 	@Override
 	public Folder getFolder(long folderId) throws PortalException {
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			Folder folder = _repository.getFolder(folderId);
 
@@ -656,8 +614,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			Folder folder = _repository.getFolder(parentFolderId, name);
 
@@ -672,8 +629,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			List<Folder> folders = _repository.getFolders(
 				parentFolderId, includeMountFolders, start, end, obc);
@@ -689,8 +645,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			List<Folder> folders = _repository.getFolders(
 				parentFolderId, status, includeMountFolders, start, end, obc);
@@ -706,8 +661,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			List<RepositoryEntry> foldersAndFileEntriesAndFileShortcuts =
 				_repository.getFoldersAndFileEntriesAndFileShortcuts(
@@ -725,8 +679,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			List<RepositoryEntry> foldersAndFileEntriesAndFileShortcuts =
 				_repository.getFoldersAndFileEntriesAndFileShortcuts(
@@ -743,8 +696,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			return _repository.getFoldersAndFileEntriesAndFileShortcutsCount(
 				folderId, status, includeMountFolders);
@@ -758,8 +710,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			return _repository.getFoldersAndFileEntriesAndFileShortcutsCount(
 				folderId, status, mimetypes, includeMountFolders);
@@ -771,8 +722,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			return _repository.getFoldersCount(
 				parentFolderId, includeMountfolders);
@@ -785,8 +735,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			return _repository.getFoldersCount(
 				parentFolderId, status, includeMountfolders);
@@ -798,8 +747,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			return _repository.getFoldersFileEntriesCount(folderIds, status);
 		}
@@ -812,8 +760,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			List<Folder> mountFolders = _repository.getMountFolders(
 				parentFolderId, start, end, obc);
@@ -827,8 +774,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			return _repository.getMountFoldersCount(parentFolderId);
 		}
@@ -841,8 +787,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			List<FileEntry> repositoryFileEntries =
 				_repository.getRepositoryFileEntries(
@@ -859,8 +804,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			List<FileEntry> repositoryFileEntries =
 				_repository.getRepositoryFileEntries(
@@ -875,8 +819,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			return _repository.getRepositoryFileEntriesCount(
 				userId, rootFolderId);
@@ -889,8 +832,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			return _repository.getRepositoryFileEntriesCount(
 				userId, rootFolderId, mimeTypes, status);
@@ -900,8 +842,7 @@ public class RepositoryProxyBean
 	@Override
 	public long getRepositoryId() {
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			return _repository.getRepositoryId();
 		}
@@ -912,8 +853,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			_repository.getSubfolderIds(folderIds, folderId);
 		}
@@ -924,8 +864,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			return _repository.getSubfolderIds(folderId, recurse);
 		}
@@ -936,8 +875,7 @@ public class RepositoryProxyBean
 		Class<T> capabilityClass) {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			return _repository.isCapabilityProvided(capabilityClass);
 		}
@@ -946,8 +884,7 @@ public class RepositoryProxyBean
 	@Override
 	public Lock lockFolder(long folderId) throws PortalException {
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			return _repository.lockFolder(folderId);
 		}
@@ -960,8 +897,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			return _repository.lockFolder(
 				folderId, owner, inheritable, expirationTime);
@@ -975,8 +911,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			FileEntry fileEntry = _repository.moveFileEntry(
 				userId, fileEntryId, newFolderId, serviceContext);
@@ -992,8 +927,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			return newFileEntryProxyBean(
 				_repository.moveFileEntry(
@@ -1008,8 +942,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			Folder folder = _repository.moveFolder(
 				userId, folderId, parentFolderId, serviceContext);
@@ -1026,8 +959,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			Folder folder = _repository.moveFolder(
 				folderId, newParentFolderId, serviceContext);
@@ -1042,8 +974,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			return _repository.refreshFileEntryLock(
 				lockUuid, companyId, expirationTime);
@@ -1056,8 +987,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			return _repository.refreshFolderLock(
 				lockUuid, companyId, expirationTime);
@@ -1071,8 +1001,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			_repository.revertFileEntry(
 				userId, fileEntryId, version, serviceContext);
@@ -1086,8 +1015,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			_repository.revertFileEntry(fileEntryId, version, serviceContext);
 		}
@@ -1098,8 +1026,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			return _repository.search(creatorUserId, status, start, end);
 		}
@@ -1112,8 +1039,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			return _repository.search(
 				creatorUserId, folderId, mimeTypes, status, start, end);
@@ -1123,8 +1049,7 @@ public class RepositoryProxyBean
 	@Override
 	public Hits search(SearchContext searchContext) throws SearchException {
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			return _repository.search(searchContext);
 		}
@@ -1135,8 +1060,7 @@ public class RepositoryProxyBean
 		throws SearchException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			return _repository.search(searchContext, query);
 		}
@@ -1147,8 +1071,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			_repository.unlockFolder(folderId, lockUuid);
 		}
@@ -1159,8 +1082,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			_repository.unlockFolder(parentFolderId, name, lockUuid);
 		}
@@ -1174,8 +1096,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			FileEntry fileEntry = _repository.updateFileEntry(
 				userId, fileEntryId, sourceFileName, mimeType, title,
@@ -1194,8 +1115,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			FileEntry fileEntry = _repository.updateFileEntry(
 				userId, fileEntryId, sourceFileName, mimeType, title,
@@ -1214,8 +1134,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			FileEntry fileEntry = _repository.updateFileEntry(
 				fileEntryId, sourceFileName, mimeType, title, description,
@@ -1235,8 +1154,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			FileEntry fileEntry = _repository.updateFileEntry(
 				fileEntryId, sourceFileName, mimeType, title, description,
@@ -1253,8 +1171,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			FileShortcut fileShortcut = _repository.updateFileShortcut(
 				userId, fileShortcutId, folderId, toFileEntryId,
@@ -1270,8 +1187,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			_repository.updateFileShortcuts(oldToFileEntryId, newToFileEntryId);
 		}
@@ -1284,8 +1200,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			Folder folder = _repository.updateFolder(
 				folderId, parentFolderId, name, description, serviceContext);
@@ -1301,8 +1216,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			Folder folder = _repository.updateFolder(
 				folderId, name, description, serviceContext);
@@ -1316,8 +1230,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			return _repository.verifyFileEntryCheckOut(fileEntryId, lockUuid);
 		}
@@ -1328,8 +1241,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			return _repository.verifyFileEntryLock(fileEntryId, lockUuid);
 		}
@@ -1340,8 +1252,7 @@ public class RepositoryProxyBean
 		throws PortalException {
 
 		try (ContextClassLoaderSetter contextClassLoaderSetter =
-				new ContextClassLoaderSetter(
-					_classLoader)) {
+				new ContextClassLoaderSetter(_classLoader)) {
 
 			return _repository.verifyInheritableLock(folderId, lockUuid);
 		}
