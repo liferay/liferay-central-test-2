@@ -32,7 +32,7 @@ The first time you run the tool, it will automatically configure properties for 
 
 The DB Upgrade Client also connects to the Gogo shell automatically after the upgrade if there were any issues. This lets you check the status of any module upgrades that failed to complete.
 
-**Note:** You can configure the portal to only upgrade the core, and not external modules by adding a file called *com.liferay.portal.upgrade.internal.configuration.ReleaseManagerConfiguration.cfg* in the *osgi/configs/ *folder with the following content: **_autoUpgrade=false_**.
+**Note:** You can configure the portal to only upgrade the core, and not external modules by adding a file called *com.liferay.portal.upgrade.internal.configuration.ReleaseManagerConfiguration.cfg* in the *osgi/configs/* folder with the following content: *autoUpgrade=false*.
 
 You can reference options for command line execution, Gogo shell commands, and configuration below.
 
@@ -40,9 +40,9 @@ You can reference options for command line execution, Gogo shell commands, and c
 
 **--jvm-opts** or **-j** - sets any JVM options for the upgrade process
 
-**--log-file **or **-l** - uses a custom name for your log file
+**--log-file** or **-l** - uses a custom name for your log file
 
-**--shell **or **-s** - connects to GoGo Shell after upgrades are completed
+**--shell** or **-s** - connects to GoGo Shell after upgrades are completed
 
 ### Gogo Shell Command Options
 
