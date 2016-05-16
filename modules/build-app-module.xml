@@ -125,7 +125,6 @@
 		<property file="docroot/WEB-INF/liferay-plugin-package.properties" />
 
 		<property name="artifact.location.dest" value="${osgi.dir}/marketplace/${artifact.name}-${lp.version}.${module-incremental-version}.war" />
-
 		<property name="artifact.location.src" value="${osgi.dir}/../deploy/${artifact.name}-${lp.version}.${module-incremental-version}.war" />
 	</target>
 
@@ -181,7 +180,6 @@
 		</loadfile>
 
 		<property name="artifact.location.dest" value="${osgi.dir}/marketplace/${artifact.name}-${artifact.version}.war" />
-
 		<property name="artifact.location.src" value="${osgi.dir}/../deploy/${artifact.name}.war" />
 	</target>
 
