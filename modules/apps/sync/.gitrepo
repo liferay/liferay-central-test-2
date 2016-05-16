@@ -5,7 +5,7 @@
 [subrepo]
 	branch = 7.0.x
 	cmdver = liferay
-	commit = ba1fd7dc840098f4c8bab4dda7a88d86c0e1dcc8
+	commit = 29a0193d07b9611afd39ac9ed8cd7a0ff83620ee
 	mode = push
-	parent = 6c6662d3d253cf26368a8176e5f5623c28f92aad
+	parent = e6cbf5491e6fec5f0ae32389c842fdf77adb0baf
 	remote = git@github.com:liferay-continuous-integration/com-liferay-sync.git
