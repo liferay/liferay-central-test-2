@@ -929,8 +929,9 @@ public class RepositoryProxyBean
 		try (ClassLoaderSetter classLoaderSetter = new ClassLoaderSetter(
 				_classLoader)) {
 
-			return newFileEntryProxyBean(_repository.moveFileEntry(
-				fileEntryId, newFolderId, serviceContext));
+			return newFileEntryProxyBean(
+				_repository.moveFileEntry(
+					fileEntryId, newFolderId, serviceContext));
 		}
 	}
 
