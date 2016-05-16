@@ -441,7 +441,7 @@ public class CalEventImporter {
 
 		Recurrence recurrence = new Recurrence();
 
-		Frequency frequency = _frequencyMap.get(tzsRecurrence.getFrequency());
+		Frequency frequency = _frequencies.get(tzsRecurrence.getFrequency());
 
 		int interval = tzsRecurrence.getInterval();
 
@@ -463,7 +463,7 @@ public class CalEventImporter {
 
 			if (dayAndPositions != null) {
 				for (DayAndPosition dayAndPosition : dayAndPositions) {
-					Weekday weekday = _weekdayMap.get(
+					Weekday weekday = _weekdays.get(
 						dayAndPosition.getDayOfWeek());
 
 					PositionalWeekday positionalWeekday = new PositionalWeekday(
@@ -1429,23 +1429,26 @@ public class CalEventImporter {
 	private static final Log _log = LogFactoryUtil.getLog(
 		CalEventImporter.class);
 
-	private static final Map<Integer, Frequency> _frequencyMap =
+	private static final Map<Integer, Frequency> _frequencies =
 		new HashMap<>();
-	private static final Map<Integer, Weekday> _weekdayMap = new HashMap<>();
 
 	static {
-		_frequencyMap.put(TZSRecurrence.DAILY, Frequency.DAILY);
-		_frequencyMap.put(TZSRecurrence.WEEKLY, Frequency.WEEKLY);
-		_frequencyMap.put(TZSRecurrence.MONTHLY, Frequency.MONTHLY);
-		_frequencyMap.put(TZSRecurrence.YEARLY, Frequency.YEARLY);
+		_frequencies.put(TZSRecurrence.DAILY, Frequency.DAILY);
+		_frequencies.put(TZSRecurrence.WEEKLY, Frequency.WEEKLY);
+		_frequencies.put(TZSRecurrence.MONTHLY, Frequency.MONTHLY);
+		_frequencies.put(TZSRecurrence.YEARLY, Frequency.YEARLY);
+	}
 
-		_weekdayMap.put(java.util.Calendar.SUNDAY, Weekday.SUNDAY);
-		_weekdayMap.put(java.util.Calendar.MONDAY, Weekday.MONDAY);
-		_weekdayMap.put(java.util.Calendar.TUESDAY, Weekday.TUESDAY);
-		_weekdayMap.put(java.util.Calendar.WEDNESDAY, Weekday.WEDNESDAY);
-		_weekdayMap.put(java.util.Calendar.THURSDAY, Weekday.THURSDAY);
-		_weekdayMap.put(java.util.Calendar.FRIDAY, Weekday.FRIDAY);
-		_weekdayMap.put(java.util.Calendar.SATURDAY, Weekday.SATURDAY);
+	private static final Map<Integer, Weekday> _weekdays = new HashMap<>();
+
+	static {
+		_weekdays.put(java.util.Calendar.SUNDAY, Weekday.SUNDAY);
+		_weekdays.put(java.util.Calendar.MONDAY, Weekday.MONDAY);
+		_weekdays.put(java.util.Calendar.TUESDAY, Weekday.TUESDAY);
+		_weekdays.put(java.util.Calendar.WEDNESDAY, Weekday.WEDNESDAY);
+		_weekdays.put(java.util.Calendar.THURSDAY, Weekday.THURSDAY);
+		_weekdays.put(java.util.Calendar.FRIDAY, Weekday.FRIDAY);
+		_weekdays.put(java.util.Calendar.SATURDAY, Weekday.SATURDAY);
 	}
 
 	private AssetCategoryLocalService _assetCategoryLocalService;
