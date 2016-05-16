@@ -91,7 +91,7 @@ public class EditRepositoryMVCActionCommand extends BaseMVCActionCommand {
 					 e instanceof RepositoryNameException) {
 
 				if (e instanceof InvalidRepositoryException) {
-					_log.error(e);
+					_log.error(e, e);
 				}
 
 				SessionErrors.add(actionRequest, e.getClass());
