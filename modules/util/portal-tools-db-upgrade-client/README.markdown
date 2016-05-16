@@ -21,7 +21,7 @@ follow.
 
 ### Using JPM:
 
-1. Install [jpm](https://jpm4j.org)
+1. Install [JPM](https://jpm4j.org)
 
 2. Run *jpm install com.liferay.portal.tools.db.upgrade.client*
 
