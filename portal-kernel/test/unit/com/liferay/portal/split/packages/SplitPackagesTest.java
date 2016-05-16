@@ -101,18 +101,18 @@ public class SplitPackagesTest {
 			Path sourcePath)
 		throws IOException {
 
-		Set<String> packages = _getPackageNames(sourcePath);
+		Set<String> packageNames = _getPackageNames(sourcePath);
 
 		boolean addedToImpl = false;
 
 		for (Map.Entry<Path, Set<String>> entry : moduleMap.entrySet()) {
-			Set<String> modulePackages = new HashSet<>(entry.getValue());
+			Set<String> modulePackageNames = new HashSet<>(entry.getValue());
 
-			modulePackages.retainAll(packages);
+			modulePackageNames.retainAll(packageNames);
 
 			Path modulePath = entry.getKey();
 
-			if (!modulePackages.isEmpty() &&
+			if (!modulePackageNames.isEmpty() &&
 				modulePath.equals(Paths.get("portal-impl"))) {
 
 				String buildGradleContent = new String(
@@ -124,22 +124,22 @@ public class SplitPackagesTest {
 
 					Set<String> portalImplPackages = entry.getValue();
 
-					portalImplPackages.addAll(packages);
+					portalImplPackages.addAll(packageNames);
 
 					addedToImpl = true;
 
-					modulePackages.clear();
+					modulePackageNames.clear();
 				}
 			}
 
 			Assert.assertTrue(
 				"Detected split packages in " + portalPath.relativize(dirPath) +
-					" and " + modulePath + ": " + modulePackages,
-				modulePackages.isEmpty());
+					" and " + modulePath + ": " + modulePackageNames,
+				modulePackageNames.isEmpty());
 		}
 
 		if (!addedToImpl) {
-			moduleMap.put(portalPath.relativize(dirPath), packages);
+			moduleMap.put(portalPath.relativize(dirPath), packageNames);
 		}
 	}
 
