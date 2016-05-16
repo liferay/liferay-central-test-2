@@ -43,7 +43,7 @@ public abstract class BaseCMISRepositoryFactory<T extends CMISRepositoryHandler>
 	public LocalRepository createLocalRepository(long repositoryId)
 		throws PortalException {
 
-		try (ClassLoaderSetter classLoaderSetter = new ClassLoaderSetter(
+		try (ContextClassLoaderSetter contextClassLoaderSetter = new ContextClassLoaderSetter(
 				BaseCMISRepositoryFactory.class.getClassLoader())) {
 
 			BaseRepository baseRepository = createBaseRepository(repositoryId);
@@ -56,7 +56,7 @@ public abstract class BaseCMISRepositoryFactory<T extends CMISRepositoryHandler>
 	public Repository createRepository(long repositoryId)
 		throws PortalException {
 
-		try (ClassLoaderSetter classLoaderSetter = new ClassLoaderSetter(
+		try (ContextClassLoaderSetter contextClassLoaderSetter = new ContextClassLoaderSetter(
 				BaseCMISRepositoryFactory.class.getClassLoader())) {
 
 			return new RepositoryProxyBean(

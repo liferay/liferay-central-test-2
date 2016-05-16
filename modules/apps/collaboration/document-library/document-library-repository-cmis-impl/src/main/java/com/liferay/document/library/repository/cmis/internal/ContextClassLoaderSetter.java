@@ -21,9 +21,9 @@ import java.io.Closeable;
 /**
  * @author Adolfo Pérez
  */
-public class ClassLoaderSetter implements Closeable {
+public class ContextClassLoaderSetter implements Closeable {
 
-	public ClassLoaderSetter(ClassLoader classLoader) {
+	public ContextClassLoaderSetter(ClassLoader classLoader) {
 		_originalClassLoader = ClassLoaderUtil.getContextClassLoader();
 
 		ClassLoaderUtil.setContextClassLoader(classLoader);
