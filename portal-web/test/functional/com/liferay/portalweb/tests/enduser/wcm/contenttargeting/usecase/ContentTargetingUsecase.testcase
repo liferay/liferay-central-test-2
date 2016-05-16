@@ -608,7 +608,7 @@
 		</execute>
 
 		<execute macro="ContentTargetingCampaign#viewContentReportCP">
-			<var name="reportsContentTableList" value="DM Document Title,Document,View,4" />
+			<var name="reportsContentTableList" value="DM Document Title,Document,View,8" />
 			<var name="reportTitle" value="DM Document Title" />
 		</execute>
 	</command>
@@ -3082,7 +3082,7 @@
 			<var name="userSegmentName" value="Male User Segment" />
 		</execute>
 
-		<execute macro="UserSegmentContentDisplayPortlet#configureOtherwiseContenDisplayRule">
+		<execute macro="UserSegmentContentDisplayPortlet#configureOtherwiseContentDisplayRule">
 			<var name="otherwiseContentTitle" value="WC Title Woman" />
 			<var name="otherwiseContentType" value="Web Content Article" />
 		</execute>
@@ -3288,7 +3288,7 @@
 			<var name="userSegmentName" value="User Segment Name Age,User Segment Name Reg Role" />
 		</execute>
 
-		<execute macro="UserSegmentContentDisplayPortlet#configureOtherwiseContenDisplayRule">
+		<execute macro="UserSegmentContentDisplayPortlet#configureOtherwiseContentDisplayRule">
 			<var name="otherwiseContentTitle" value="Web Content Title Otherwise" />
 			<var name="otherwiseContentType" value="Web Content Article" />
 		</execute>
@@ -3411,7 +3411,7 @@
 			<var name="userSegmentName" value="User Segment Name Age,User Segment Name Reg Role" />
 		</execute>
 
-		<execute macro="UserSegmentContentDisplayPortlet#configureOtherwiseContenDisplayRule">
+		<execute macro="UserSegmentContentDisplayPortlet#configureOtherwiseContentDisplayRule">
 			<var name="otherwiseContentTitle" value="Web Content Title Otherwise" />
 			<var name="otherwiseContentType" value="Web Content Article" />
 		</execute>
@@ -3499,7 +3499,7 @@
 			<var name="userSegmentName" value="User Segment Name" />
 		</execute>
 
-		<execute macro="UserSegmentContentDisplayPortlet#configureOtherwiseContenDisplayRule">
+		<execute macro="UserSegmentContentDisplayPortlet#configureOtherwiseContentDisplayRule">
 			<var name="otherwiseContentTitle" value="DM Document Title 2" />
 			<var name="otherwiseContentType" value="Document" />
 		</execute>
@@ -3648,7 +3648,7 @@
 			<var name="userSegmentName" value="User Segment Name" />
 		</execute>
 
-		<execute macro="UserSegmentContentDisplayPortlet#configureOtherwiseContenDisplayRule">
+		<execute macro="UserSegmentContentDisplayPortlet#configureOtherwiseContentDisplayRule">
 			<var name="otherwiseContentTitle" value="Web Content Title Male" />
 			<var name="otherwiseContentType" value="Web Content Article" />
 		</execute>
@@ -3711,7 +3711,7 @@
 			<var name="siteName" value="Site Name" />
 		</execute>
 
-		<execute macro="UserSegmentContentDisplayPortlet#viewEntryPG">
+		<execute macro="UserSegmentContentDisplayPortlet#viewContentOnly">
 			<var name="entryContentText" value="Web Content Content Female" />
 		</execute>
 	</command>
@@ -3952,7 +3952,7 @@
 			<var name="userSegmentName" value="Male User Segment Name" />
 		</execute>
 
-		<execute macro="UserSegmentContentDisplayPortlet#configureOtherwiseContenDisplayRule">
+		<execute macro="UserSegmentContentDisplayPortlet#configureOtherwiseContentDisplayRule">
 			<var name="otherwiseContentTitle" value="Web Content Title Female" />
 			<var name="otherwiseContentType" value="Web Content Article" />
 		</execute>

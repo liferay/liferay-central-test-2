@@ -1432,7 +1432,7 @@
 			<var name="viewEntryPG" value="Female Users" />
 		</execute>
 
-		<execute macro="UserSegmentContentDisplayPortlet#configureOtherwiseContenDisplayRule">
+		<execute macro="UserSegmentContentDisplayPortlet#configureOtherwiseContentDisplayRule">
 			<var name="otherwiseContentTitle" value="Targeted Web Content Title 2" />
 			<var name="otherwiseContentType" value="Web Content Article" />
 		</execute>
