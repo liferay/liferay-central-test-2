@@ -73,8 +73,9 @@ public class CMISRepositoryUtil {
 			createSession(Map<String, String> parameters)
 		throws PrincipalException, RepositoryException {
 
-		try (ContextClassLoaderSetter contextClassLoaderSetter = new ContextClassLoaderSetter(
-				CMISRepositoryUtil.class.getClassLoader())) {
+		try (ContextClassLoaderSetter contextClassLoaderSetter =
+				new ContextClassLoaderSetter(
+					CMISRepositoryUtil.class.getClassLoader())) {
 
 			Session session = _sessionFactory.createSession(parameters);
 
@@ -112,8 +113,9 @@ public class CMISRepositoryUtil {
 	protected static org.apache.chemistry.opencmis.client.api.Repository
 		getCMISRepository(Map<String, String> parameters) {
 
-		try (ContextClassLoaderSetter contextClassLoaderSetter = new ContextClassLoaderSetter(
-				CMISRepositoryUtil.class.getClassLoader())) {
+		try (ContextClassLoaderSetter contextClassLoaderSetter =
+				new ContextClassLoaderSetter(
+					CMISRepositoryUtil.class.getClassLoader())) {
 
 			return _sessionFactory.getRepositories(parameters).get(0);
 		}
