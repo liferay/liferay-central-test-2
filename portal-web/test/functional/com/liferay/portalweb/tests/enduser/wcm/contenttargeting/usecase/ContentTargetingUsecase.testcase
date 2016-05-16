@@ -2233,6 +2233,8 @@
 			<var name="site" value="Site Name" />
 		</execute>
 
+		<execute macro="Navigator#gotoStagedView" />
+
 		<execute macro="ProductMenu#gotoSitesConfiguration">
 			<var name="portlet" value="Audience Targeting" />
 		</execute>
@@ -2242,6 +2244,8 @@
 		<execute macro="ProductMenu#gotoSite">
 			<var name="site" value="Site Name" />
 		</execute>
+
+		<execute macro="Navigator#gotoStagedView" />
 
 		<execute macro="ProductMenu#gotoSitesConfiguration">
 			<var name="portlet" value="Audience Targeting" />
