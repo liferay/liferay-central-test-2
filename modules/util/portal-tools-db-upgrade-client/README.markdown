@@ -30,7 +30,7 @@ Both methods have separate ways of executing the tool. The command line options 
 
 The first time you run the tool, it will automatically configure properties for your installation of Liferay. You can also do this manually by configuring *app-server.properties*, *portal-upgrade-database.properties*, and *portal-upgrade-ext.properties*. Make sure to place these *.properties* files in the same directory from which you execute the tool.
 
-The DB Upgrade Client also connects to the Gogo shell automatically after the upgrade if there were any issues. This lets you check the status of any module upgrades that failed to complete. 
+The DB Upgrade Client also connects to the Gogo shell automatically after the upgrade if there were any issues. This lets you check the status of any module upgrades that failed to complete.
 
 **Note:** You can configure the portal to only upgrade the core, and not external modules by adding a file called *com.liferay.portal.upgrade.internal.configuration.ReleaseManagerConfiguration.cfg* in the *osgi/configs/ *folder with the following content: **_autoUpgrade=false_**.
 
