@@ -93,4 +93,3 @@ You can reference options for command line execution, Gogo shell commands, and c
 - **liferay.home** - the Liferay home directory *(required)*
 
 - **hibernate.jdbc.batch_size** - the JDBC batch size used to improve performance; set to *250* by default *(optional)*
-
