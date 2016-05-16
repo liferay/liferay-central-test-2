@@ -5,7 +5,7 @@
 [subrepo]
 	branch = 7.0.x
 	cmdver = liferay
-	commit = a636c4335f93515919401b7f38f703ac9b4e492b
+	commit = f73786e20102921f571de952081511278f0f964a
 	mode = push
-	parent = ced9d9124049145d4542b87695a5e5009d5a2697
+	parent = 79c7b1f91988def0a9b94bd3f625e5376f1f5cf8
 	remote = git@github.com:liferay-continuous-integration/com-liferay-polls.git
