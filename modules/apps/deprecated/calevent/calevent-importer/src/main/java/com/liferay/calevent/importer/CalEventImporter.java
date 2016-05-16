@@ -926,6 +926,8 @@ public class CalEventImporter {
 			int firstReminder, int secondReminder)
 		throws Exception {
 
+		// Calendar booking
+
 		CalendarResource calendarResource = getCalendarResource(
 			companyId, groupId);
 
