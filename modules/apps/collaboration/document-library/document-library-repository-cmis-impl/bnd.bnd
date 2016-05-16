@@ -1,21 +1,21 @@
 Bundle-ClassPath:\
 	.,\
-	lib/cxf-rt-transports-http.jar,\
-	lib/cxf-rt-databinding-jaxb.jar,\
-	lib/cxf-rt-ws-policy.jar,\
-	lib/cxf-rt-ws-addr.jar,\
-	lib/cxf-rt-core.jar,\
-	lib/cxf-rt-bindings-xml.jar,\
-	lib/cxf-rt-frontend-simple.jar,\
-	lib/cxf-rt-frontend-jaxws.jar,\
-	lib/cxf-rt-bindings-soap.jar,\
-	lib/cxf-api.jar,\
-	lib/neethi.jar,\
 	lib/chemistry-opencmis-client-api.jar,\
 	lib/chemistry-opencmis-client-bindings.jar,\
 	lib/chemistry-opencmis-client-impl.jar,\
 	lib/chemistry-opencmis-commons-api.jar,\
-	lib/chemistry-opencmis-commons-impl.jar
+	lib/chemistry-opencmis-commons-impl.jar,\
+	lib/cxf-api.jar,\
+	lib/cxf-rt-bindings-soap.jar,\
+	lib/cxf-rt-bindings-xml.jar,\
+	lib/cxf-rt-core.jar,\
+	lib/cxf-rt-databinding-jaxb.jar,\
+	lib/cxf-rt-frontend-jaxws.jar,\
+	lib/cxf-rt-frontend-simple.jar,\
+	lib/cxf-rt-transports-http.jar,\
+	lib/cxf-rt-ws-addr.jar,\
+	lib/cxf-rt-ws-policy.jar,\
+	lib/neethi.jar
 Bundle-Name: Liferay Document Library Repository CMIS Implementation
 Bundle-SymbolicName: com.liferay.document.library.repository.cmis.impl
 Bundle-Version: 2.0.3
