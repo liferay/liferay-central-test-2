@@ -1418,7 +1418,7 @@
 			<var name="displayStyle" value="list" />
 		</execute>
 
-		<var method="selenium#getText('//ul/li/div/h5')" name="valueName" />
+		<var method="selenium#getText('//div/span/span/a')" name="valueName" />
 
 		<echo message="value name ${valueName}" />
 
@@ -1488,7 +1488,7 @@
 			<var name="displayStyle" value="list" />
 		</execute>
 
-		<var method="selenium#getText('//ul/li/div/h5')" name="valueName" />
+		<var method="selenium#getText('//div/span/span/a')" name="valueName" />
 
 		<echo message="value name ${valueName}" />
 
@@ -1564,7 +1564,7 @@
 			<var name="displayStyle" value="list" />
 		</execute>
 
-		<var method="selenium#getText('//ul/li/div/h5')" name="valueName" />
+		<var method="selenium#getText('//div/span/span/a')" name="valueName" />
 
 		<echo message="value name ${valueName}" />
 
@@ -1734,7 +1734,7 @@
 			<var name="displayStyle" value="list" />
 		</execute>
 
-		<var method="selenium#getText('//ul/li/div/h5')" name="valueName" />
+		<var method="selenium#getText('//div/span/span/a')" name="valueName" />
 
 		<echo message="value name ${valueName}" />
 
@@ -1914,7 +1914,7 @@
 			<var name="displayStyle" value="list" />
 		</execute>
 
-		<var method="selenium#getText('//ul/li/div/h5')" name="valueName" />
+		<var method="selenium#getText('//div/span/span/a')" name="valueName" />
 
 		<echo message="value name ${valueName}" />
 
