@@ -40,9 +40,9 @@ You can reference options for command line execution, Gogo shell commands, and c
 
 **--jvm-opts** or **-j** - sets any JVM options for the upgrade process
 
-**--log-file **or **-l**- uses a custom name for your log file
+**--log-file **or **-l** - uses a custom name for your log file
 
-**--shell **or **-s**- connect to GoGo Shell after upgrades are completed
+**--shell **or **-s** - connects to GoGo Shell after upgrades are completed
 
 ### Gogo Shell Command Options
 
@@ -50,7 +50,7 @@ You can reference options for command line execution, Gogo shell commands, and c
 
 **upgrade:help** - displays upgrade commands
 
-**upgrade:check** - list upgrades that need have not started or failed to complete
+**upgrade:check** - lists upgrades that need have not started or failed to complete
 
 **upgrade:execute _{module_name}_** - executes upgrade for that module
 
