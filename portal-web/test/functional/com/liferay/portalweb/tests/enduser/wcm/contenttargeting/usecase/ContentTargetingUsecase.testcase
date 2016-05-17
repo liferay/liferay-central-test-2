@@ -3977,9 +3977,7 @@
 			<var name="configureUserSegmentNotMatched" value="Male User Segment Name" />
 		</execute>
 
-		<execute macro="UserSegmentContentDisplayPortlet#viewEntryPG">
-			<var name="entryContentText" value="Web Content Content Female" />
-		</execute>
+		<execute function="AssertTextEquals" locator1="UserSegmentContentDisplay#ENTRY_CONTENT" value1="Web Content Content Female" />
 	</command>
 
 	<command name="UserSegmentViewAnyContentWithCategorizationViaContentListPortlet" priority="4">
