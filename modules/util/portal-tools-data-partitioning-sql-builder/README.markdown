@@ -2,8 +2,8 @@
 
 The data partitioning SQL builder tool (partitioning tool) allows you to
 physically separate a Liferay Portal instance from an already existing
-`logically partitioned` Liferay Portal instance. The existing instance is
-`logically partitioned` in that it has several companies in its database (i.e.,
+*logically partitioned* Liferay Portal instance. The existing instance is
+logically partitioned in that it has several companies in its database (i.e.,
 the database's `Company` table has multiple rows). Using the partitioning tool,
 you can move a subset of the companies to another database for a completely
 different new Liferay Portal instance to use.
