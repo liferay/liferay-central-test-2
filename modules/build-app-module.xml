@@ -117,17 +117,6 @@
 
 	<target depends="get-artifact-properties-bnd,get-artifact-properties-json,get-artifact-properties-legacy" name="get-artifact-properties" />
 
-	<target if="artifact.legacy" name="get-artifact-properties-legacy">
-		<basename file="${basedir}" property="artifact.name" />
-
-		<property file="${ant.file}/../../release.properties" />
-
-		<property file="docroot/WEB-INF/liferay-plugin-package.properties" />
-
-		<property name="artifact.location.dest" value="${osgi.dir}/marketplace/${artifact.name}-${lp.version}.${module-incremental-version}.war" />
-		<property name="artifact.location.src" value="${osgi.dir}/../deploy/${artifact.name}-${lp.version}.${module-incremental-version}.war" />
-	</target>
-
 	<target if="artifact.bnd" name="get-artifact-properties-bnd">
 		<property file="bnd.bnd" />
 
@@ -144,6 +133,17 @@
 		<condition property="osgi.static">
 			<contains string="${osgi.static.modules}" substring="${artifact.file.name}" />
 		</condition>
+	</target>
+
+	<target if="artifact.legacy" name="get-artifact-properties-legacy">
+		<basename file="${basedir}" property="artifact.name" />
+
+		<property file="${ant.file}/../../release.properties" />
+
+		<property file="docroot/WEB-INF/liferay-plugin-package.properties" />
+
+		<property name="artifact.location.dest" value="${osgi.dir}/marketplace/${artifact.name}-${lp.version}.${module-incremental-version}.war" />
+		<property name="artifact.location.src" value="${osgi.dir}/../deploy/${artifact.name}-${lp.version}.${module-incremental-version}.war" />
 	</target>
 
 	<target if="artifact.json" name="get-artifact-properties-json">
