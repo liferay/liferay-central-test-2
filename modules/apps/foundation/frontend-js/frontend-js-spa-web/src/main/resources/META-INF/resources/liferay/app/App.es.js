@@ -52,6 +52,7 @@ class LiferayApp extends App {
 		return Object.keys(this.portletsBlacklist).some(
 			(portletId) => {
 				var boundaryId = Utils.getPortletBoundaryId(portletId);
+
 				var portlets = document.querySelectorAll('[id^="' + boundaryId + '"]');
 
 				return Array.prototype.slice.call(portlets).some(portlet => dom.contains(portlet, element));
