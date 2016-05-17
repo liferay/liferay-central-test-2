@@ -175,12 +175,12 @@ public class EditServerMVCActionCommand extends BaseMVCActionCommand {
 		else if (cmd.equals("cleanUpPermissions")) {
 			CleanUpPermissionsUtil.cleanUpAddToPagePermissions(actionRequest);
 		}
-		else if (cmd.startsWith("convertProcess.")) {
-			redirect = convertProcess(actionRequest, actionResponse, cmd);
-		}
 		else if (cmd.equals("cleanUpPortletPreferences")) {
 			CleanUpPortletPreferencesUtil.
 				cleanUpLayoutRevisionPortletPreferences();
+		}
+		else if (cmd.startsWith("convertProcess.")) {
+			redirect = convertProcess(actionRequest, actionResponse, cmd);
 		}
 		else if (cmd.equals("dlPreviews")) {
 			DLPreviewableProcessor.deleteFiles();
