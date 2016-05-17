@@ -1,5 +1,25 @@
 # Partitioning Tool
 
+The data partitioning tool allows you to physically separate one portal
+instance from an already existing `logically partitioned` Liferay Portal.
+
+What does it mean `logically partitioned`? It means you have several companies
+in the same database, and you want to move a few of them to another
+database. If you'd query the `Company` table, you'd have more than one row
+there.
+
+Depending on the `-W|--write-file` optional parameter, the output of the tool
+will be one or several SQL files, a single file or one per table on your
+current Liferay database, **you have to execute on your target database**.
+After that, just start a completely different Liferay installation configured
+to use this separated database to complete the separation. 
+
+It's **important** to say that this tool does not allow moving one portal
+instance to another database manager system (DBMS), because its output will
+always be SQL code for the underlying DBMS. See it as an utility to isolate
+companies' data into SQL files for the only purpose of moving them to
+separated databases. Nothing more, nothing less.
+
 ## Executing the tool
 
 To execute this tool, you must add both your JDBC driver and your database data
