@@ -665,7 +665,7 @@ public class PortalImpl implements Portal {
 		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
 		boolean portletBreadcrumbEntry = false;
-		
+
 		if (Validator.isNotNull(portletDisplay.getId()) &&
 			!portletDisplay.isFocused()) {
 
