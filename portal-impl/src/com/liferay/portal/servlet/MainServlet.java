@@ -865,14 +865,7 @@ public class MainServlet extends ActionServlet {
 			servletContext);
 	}
 
-	/**
-	 * @see SetupWizardUtil#_initPlugins
-	 */
 	protected void initPlugins() throws Exception {
-
-		// See LEP-2885. Don't flush hot deploy events until after the portal
-		// has initialized.
-
 		HotDeployUtil.setCapturePrematureEvents(false);
 
 		PortalLifecycleUtil.flushInits();
