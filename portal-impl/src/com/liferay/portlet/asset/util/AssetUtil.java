@@ -135,8 +135,13 @@ public class AssetUtil {
 
 		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
-		boolean portletBreadcrumbEntry = Validator.isNotNull(
-			portletDisplay.getId()) && !portletDisplay.isFocused();
+		boolean portletBreadcrumbEntry = false;
+
+		if (Validator.isNotNull(portletDisplay.getId()) &&
+			!portletDisplay.isFocused()) {
+
+			portletBreadcrumbEntry = true;
+		}
 
 		addPortletBreadcrumbEntries(
 			assetCategoryId, request, portletURL, portletBreadcrumbEntry);
