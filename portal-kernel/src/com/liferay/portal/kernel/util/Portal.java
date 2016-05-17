@@ -183,12 +183,10 @@ public interface Portal {
 	 * @param title the title of the new breakcrumb entry
 	 * @param url the URL of the new breadcrumb entry
 	 * @param data the HTML5 data parameters of the new breadcrumb entry
-	 * @param isPortletBreadcrumbEntry specifies if the the entry is a portlet
-	 *        breadcrumb entry
 	 */
 	public void addPortletBreadcrumbEntry(
 		HttpServletRequest request, String title, String url,
-		Map<String, Object> data, boolean isPortletBreadcrumbEntry);
+		Map<String, Object> data, boolean portletBreadcrumbEntry);
 
 	/**
 	 * Adds the default resource permissions for the portlet to the page.

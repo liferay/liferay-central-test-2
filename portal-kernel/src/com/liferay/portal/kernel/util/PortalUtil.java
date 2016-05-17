@@ -194,15 +194,13 @@ public class PortalUtil {
 	 * @param title the title of the new breadcrumb entry
 	 * @param url the URL of the new breadcrumb entry
 	 * @param data the HTML5 data parameters of the new breadcrumb entry
-	 * @param isPortletBreadcrumbEntry specifies if the the entry is a portlet
-	 *        breadcrumb entry
 	 */
 	public static void addPortletBreadcrumbEntry(
 		HttpServletRequest request, String title, String url,
-		Map<String, Object> data, boolean isPortletBreadcrumbEntry) {
+		Map<String, Object> data, boolean portletBreadcrumbEntry) {
 
 		getPortal().addPortletBreadcrumbEntry(
-			request, title, url, data, isPortletBreadcrumbEntry);
+			request, title, url, data, portletBreadcrumbEntry);
 	}
 
 	/**

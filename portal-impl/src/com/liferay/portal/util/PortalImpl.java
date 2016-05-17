@@ -664,17 +664,17 @@ public class PortalImpl implements Portal {
 
 		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
-		boolean isPortletBreadcrumbEntry = Validator.isNotNull(
+		boolean portletBreadcrumbEntry = Validator.isNotNull(
 			portletDisplay.getId()) && !portletDisplay.isFocused();
 
 		addPortletBreadcrumbEntry(
-			request, title, url, null, isPortletBreadcrumbEntry);
+			request, title, url, null, portletBreadcrumbEntry);
 	}
 
 	@Override
 	public void addPortletBreadcrumbEntry(
 		HttpServletRequest request, String title, String url,
-		Map<String, Object> data, boolean isPortletBreadcrumbEntry) {
+		Map<String, Object> data, boolean portletBreadcrumbEntry) {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
@@ -683,7 +683,7 @@ public class PortalImpl implements Portal {
 
 		String name = WebKeys.PORTLET_BREADCRUMBS;
 
-		if (isPortletBreadcrumbEntry) {
+		if (portletBreadcrumbEntry) {
 			name += StringPool.UNDERLINE + portletDisplay.getId();
 		}
 
