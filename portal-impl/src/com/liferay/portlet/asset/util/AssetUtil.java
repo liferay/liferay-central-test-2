@@ -135,16 +135,16 @@ public class AssetUtil {
 
 		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
-		boolean isPortletBreadcrumbEntry = Validator.isNotNull(
+		boolean portletBreadcrumbEntry = Validator.isNotNull(
 			portletDisplay.getId()) && !portletDisplay.isFocused();
 
 		addPortletBreadcrumbEntries(
-			assetCategoryId, request, portletURL, isPortletBreadcrumbEntry);
+			assetCategoryId, request, portletURL, portletBreadcrumbEntry);
 	}
 
 	public static void addPortletBreadcrumbEntries(
 			long assetCategoryId, HttpServletRequest request,
-			PortletURL portletURL, boolean isPortletBreadcrumbEntry)
+			PortletURL portletURL, boolean portletBreadcrumbEntry)
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
@@ -163,14 +163,14 @@ public class AssetUtil {
 
 			PortalUtil.addPortletBreadcrumbEntry(
 				request, ancestorCategory.getTitle(themeDisplay.getLocale()),
-				portletURL.toString(), null, isPortletBreadcrumbEntry);
+				portletURL.toString(), null, portletBreadcrumbEntry);
 		}
 
 		portletURL.setParameter("categoryId", String.valueOf(assetCategoryId));
 
 		PortalUtil.addPortletBreadcrumbEntry(
 			request, assetCategory.getTitle(themeDisplay.getLocale()),
-			portletURL.toString(), null, isPortletBreadcrumbEntry);
+			portletURL.toString(), null, portletBreadcrumbEntry);
 	}
 
 	public static String checkViewURL(
