@@ -544,7 +544,7 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Unable to shutdown", e);
+				_log.warn("Unable to deactivate scheduler", e);
 			}
 		}
 	}
