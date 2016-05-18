@@ -94,14 +94,14 @@ public class ImageToolImpl implements ImageTool {
 		ClassLoader classLoader = clazz.getClassLoader();
 
 		try {
-			InputStream is = classLoader.getResourceAsStream(
+			InputStream inputStream = classLoader.getResourceAsStream(
 				PropsUtil.get(PropsKeys.IMAGE_DEFAULT_SPACER));
 
-			if (is == null) {
+			if (inputStream == null) {
 				_log.error("Default spacer is not available");
 			}
 
-			_defaultSpacer = getImage(is);
+			_defaultSpacer = getImage(inputStream);
 		}
 		catch (Exception e) {
 			_log.error(
@@ -109,15 +109,15 @@ public class ImageToolImpl implements ImageTool {
 		}
 
 		try {
+			InputStream inputStream = null;
+
 			String imageDefaultCompanyLogo = PropsUtil.get(
 				PropsKeys.IMAGE_DEFAULT_COMPANY_LOGO);
-
-			InputStream is = null;
 
 			int index = imageDefaultCompanyLogo.indexOf(CharPool.SEMICOLON);
 
 			if (index == -1) {
-				is = classLoader.getResourceAsStream(
+				inputStream = classLoader.getResourceAsStream(
 					PropsUtil.get(PropsKeys.IMAGE_DEFAULT_COMPANY_LOGO));
 			}
 			else {
@@ -131,26 +131,25 @@ public class ImageToolImpl implements ImageTool {
 				if (bundleId < 0) {
 					if (_log.isWarnEnabled()) {
 						_log.warn(
-							"Invalid bundle id string: " + bundleIdString +
-								", fallback to load " + name +
-									" by portal classloader");
+							"Fallback to portal class loader because of " +
+								"invalid bundle ID " + bundleIdString);
 					}
 
-					is = classLoader.getResourceAsStream(name);
+					inputStream = classLoader.getResourceAsStream(name);
 				}
 				else {
 					URL url = ModuleFrameworkUtilAdapter.getBundleResource(
 						bundleId, name);
 
-					is = url.openStream();
+					inputStream = url.openStream();
 				}
 			}
 
-			if (is == null) {
+			if (inputStream == null) {
 				_log.error("Default company logo is not available");
 			}
 
-			_defaultCompanyLogo = getImage(is);
+			_defaultCompanyLogo = getImage(inputStream);
 		}
 		catch (Exception e) {
 			_log.error(
