@@ -92,6 +92,19 @@ public class BlogsContentEditorConfigContributor
 		_itemSelector = itemSelector;
 	}
 
+	protected String getAllowedContentLists() {
+		return "li ol ul;";
+	}
+
+	protected String getAllowedContentTable() {
+		return "table[border, cellpadding, cellspacing] {width} thead tbody " +
+			"tr[scope] th[scope] td;";
+	}
+
+	protected String getAllowedContentText() {
+		return "b code em h1 h2 h3 h4 h5 h6 hr i pre strong u;";
+	}
+
 	protected void populateFileBrowserURL(
 		JSONObject jsonObject, ThemeDisplay themeDisplay,
 		RequestBackedPortletURLFactory requestBackedPortletURLFactory,
@@ -159,19 +172,6 @@ public class BlogsContentEditorConfigContributor
 		jsonObject.put(
 			"filebrowserImageBrowseLinkUrl", itemSelectorURL.toString());
 		jsonObject.put("filebrowserImageBrowseUrl", itemSelectorURL.toString());
-	}
-
-	protected String getAllowedContentLists() {
-		return "li ol ul;";
-	}
-
-	protected String getAllowedContentTable() {
-		return "table[border, cellpadding, cellspacing] {width} thead tbody " +
-			"tr[scope] th[scope] td;";
-	}
-
-	protected String getAllowedContentText() {
-		return "b code em h1 h2 h3 h4 h5 h6 hr i pre strong u;";
 	}
 
 	private ItemSelector _itemSelector;
