@@ -209,51 +209,51 @@ public class ResourcesImporterTest {
 
 		addWebInfResource(
 			webArchive,
-			"classes/resources-importer/document_library/documents/" +
-				"company_logo.png");
+			"classes/resources-importer/document_library/documents" +
+				"/company_logo.png");
 		addWebInfResource(
 			webArchive,
-			"classes/resources-importer/document_library/documents/" +
-				"Parent Folder/child_document.txt");
+			"classes/resources-importer/document_library/documents" +
+				"/Parent Folder/child_document.txt");
 
 		// Journal
 
 		addWebInfResource(
 			webArchive,
-			"classes/resources-importer/journal/articles/BASIC_WEB_CONTENT/" +
-				"Basic Article.xml");
+			"classes/resources-importer/journal/articles/BASIC_WEB_CONTENT" +
+				"/Basic Article.xml");
 		addWebInfResource(
 			webArchive,
-			"classes/resources-importer/journal/structures/" +
-				"BASIC_WEB_CONTENT.json");
+			"classes/resources-importer/journal/structures" +
+				"/BASIC_WEB_CONTENT.json");
 		addWebInfResource(
 			webArchive,
-			"classes/resources-importer/journal/templates/" +
-				"BASIC_WEB_CONTENT/BASIC_WEB_CONTENT.ftl");
+			"classes/resources-importer/journal/templates/BASIC_WEB_CONTENT" +
+				"/BASIC_WEB_CONTENT.ftl");
 		addWebInfResource(
 			webArchive,
-			"classes/resources-importer/journal/articles/Child Template/" +
-				"Child Template Article.xml");
+			"classes/resources-importer/journal/articles/Child Template" +
+				"/Child Template Article.xml");
 		addWebInfResource(
 			webArchive,
-			"classes/resources-importer/journal/structures/Parent Structure/" +
-				"Child Structure.json");
+			"classes/resources-importer/journal/structures/Parent Structure" +
+				"/Child Structure.json");
 		addWebInfResource(
 			webArchive,
-			"classes/resources-importer/journal/templates/Child Structure/" +
-				"Child Template.ftl");
+			"classes/resources-importer/journal/templates/Child Structure" +
+				"/Child Template.ftl");
 		addWebInfResource(
 			webArchive,
-			"classes/resources-importer/journal/articles/Parent Template/" +
-				"Parent Template Article.xml");
+			"classes/resources-importer/journal/articles/Parent Template" +
+				"/Parent Template Article.xml");
 		addWebInfResource(
 			webArchive,
-			"classes/resources-importer/journal/structures/" +
-				"Parent Structure.json");
+			"classes/resources-importer/journal/structures/Parent " +
+				"Structure.json");
 		addWebInfResource(
 			webArchive,
-			"classes/resources-importer/journal/templates/Parent Structure/" +
-				"Parent Template.ftl");
+			"classes/resources-importer/journal/templates/Parent Structure" +
+				"/Parent Template.ftl");
 
 		// Page templates
 
