@@ -110,8 +110,8 @@ public class ResourcesImporterTest {
 
 		javaArchive.add(
 			new ArchiveAsset(buildTestWebArchive(), ZipExporter.class),
-			"com/liferay/exportimport/resources/importer/test/dependencies/" +
-				"test.war");
+			"com/liferay/exportimport/resources/importer/test/dependencies" +
+				"/test.war");
 
 		return javaArchive;
 	}
@@ -123,16 +123,16 @@ public class ResourcesImporterTest {
 
 		_bundleContext = testBundle.getBundleContext();
 
-		URL resource = ResourcesImporterTest.class.getResource(
+		URL warURL = ResourcesImporterTest.class.getResource(
 			"dependencies/test.war");
 
-		resource = new URL(
-			resource.toExternalForm() +
+		warURL = new URL(
+			warURL.toExternalForm() +
 				"?Web-ContextPath=/test-resource-importer");
 
-		URL url = new URL("webbundle", null, resource.toString());
+		URL bundleURL = new URL("webbundle", null, warURL.toString());
 
-		_wabBundle = _bundleContext.installBundle(url.toString());
+		_wabBundle = _bundleContext.installBundle(bundleURL.toString());
 
 		Dictionary<String, Object> properties = new Hashtable<>();
 
@@ -198,14 +198,14 @@ public class ResourcesImporterTest {
 	protected static WebArchive buildTestWebArchive() {
 		WebArchive webArchive = ShrinkWrap.create(WebArchive.class);
 
-		// Generic resources
+		// General
 
 		addWebInfResource(webArchive, "liferay-plugin-package.properties");
 		addWebInfResource(webArchive, "classes/resources-importer/assets.json");
 		addWebInfResource(
 			webArchive, "classes/resources-importer/sitemap.json");
 
-		// Document Library specific resources
+		// Document library
 
 		addWebInfResource(
 			webArchive,
@@ -216,7 +216,7 @@ public class ResourcesImporterTest {
 			"classes/resources-importer/document_library/documents/" +
 				"Parent Folder/child_document.txt");
 
-		// Journal specific resources
+		// Journal
 
 		addWebInfResource(
 			webArchive,
@@ -255,7 +255,7 @@ public class ResourcesImporterTest {
 			"classes/resources-importer/journal/templates/Parent Structure/" +
 				"Parent Template.ftl");
 
-		// Page Templates
+		// Page templates
 
 		addWebInfResource(
 			webArchive,
