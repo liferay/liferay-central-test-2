@@ -92,8 +92,6 @@ import org.osgi.framework.ServiceRegistration;
 @RunWith(Arquillian.class)
 public class ResourcesImporterTest {
 
-	public static final String TEST_CONTEXT_NAME = "test-resource-importer";
-
 	@ClassRule
 	@Rule
 	public static final AggregateTestRule aggregateTestRule =
@@ -129,8 +127,8 @@ public class ResourcesImporterTest {
 			"dependencies/test.war");
 
 		resource = new URL(
-			resource.toExternalForm() + "?Web-ContextPath=/" +
-				TEST_CONTEXT_NAME);
+			resource.toExternalForm() +
+				"?Web-ContextPath=/test-resource-importer");
 
 		URL url = new URL("webbundle", null, resource.toString());
 
