@@ -421,6 +421,7 @@ public class ResourcesImporterTest {
 
 	private static final String _RESOURCES_BASE_PATH = "dependencies/WEB-INF/";
 
+	private Bundle _bundle;
 	private BundleContext _bundleContext;
 
 	@DeleteAfterTestRun
@@ -428,7 +429,5 @@ public class ResourcesImporterTest {
 
 	@DeleteAfterTestRun
 	private List<LayoutPrototype> _layoutPrototypes;
-
-	private Bundle _bundle;
 
 }
