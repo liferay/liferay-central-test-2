@@ -97,12 +97,12 @@ public class WarArtifactUrlTransformer implements ArtifactUrlTransformer {
 		StringBundler sb = new StringBundler(7);
 
 		sb.append(artifact.getPath());
-		sb.append("?Web-ContextPath=/");
-		sb.append(contextName);
-		sb.append("&");
+		sb.append("?");
 		sb.append(Constants.BUNDLE_SYMBOLICNAME);
 		sb.append("=");
 		sb.append(symbolicName);
+		sb.append("&Web-ContextPath=/");
+		sb.append(contextName);
 
 		URL url = new URL("file", null, sb.toString());
 
