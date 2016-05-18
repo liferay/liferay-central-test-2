@@ -69,9 +69,9 @@ public class BlogsContentEditorConfigContributor
 
 		sb.append("a[*]; ");
 		sb.append(_getTextAllowedContent());
-		sb.append(" div[*]; img[class, !src] { height, width }; ");
+		sb.append(" div[*]; img[class, !src] {height, width}; ");
 		sb.append(_getListsAllowedContent());
-		sb.append(" p { text-align }; ");
+		sb.append(" p {text-align}; ");
 		sb.append(_getTableAllowedContent());
 
 		jsonObject.put("allowedContent", sb.toString());
@@ -166,8 +166,8 @@ public class BlogsContentEditorConfigContributor
 	}
 
 	private String _getTableAllowedContent() {
-		return "table[border, cellpadding, cellspacing] { width } " +
-			"thead tbody tr[scope] th[scope] td;";
+		return "table[border, cellpadding, cellspacing] {width} thead tbody " +
+			"tr[scope] th[scope] td;";
 	}
 
 	private String _getTextAllowedContent() {
