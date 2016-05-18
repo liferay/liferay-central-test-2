@@ -68,11 +68,11 @@ public class BlogsContentEditorConfigContributor
 		StringBundler sb = new StringBundler(6);
 
 		sb.append("a[*]; ");
-		sb.append(_getTextAllowedContent());
+		sb.append(getAllowedContentText());
 		sb.append(" div[*]; img[class, !src] {height, width}; ");
-		sb.append(_getListsAllowedContent());
+		sb.append(getAllowedContentLists());
 		sb.append(" p {text-align}; ");
-		sb.append(_getTableAllowedContent());
+		sb.append(getAllowedContentTable());
 
 		jsonObject.put("allowedContent", sb.toString());
 
@@ -161,16 +161,16 @@ public class BlogsContentEditorConfigContributor
 		jsonObject.put("filebrowserImageBrowseUrl", itemSelectorURL.toString());
 	}
 
-	private String _getListsAllowedContent() {
+	protected String getAllowedContentLists() {
 		return "li ol ul;";
 	}
 
-	private String _getTableAllowedContent() {
+	protected String getAllowedContentTable() {
 		return "table[border, cellpadding, cellspacing] {width} thead tbody " +
 			"tr[scope] th[scope] td;";
 	}
 
-	private String _getTextAllowedContent() {
+	protected String getAllowedContentText() {
 		return "b code em h1 h2 h3 h4 h5 h6 hr i pre strong u;";
 	}
 
