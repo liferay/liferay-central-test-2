@@ -132,7 +132,7 @@ public class ResourcesImporterTest {
 
 		URL bundleURL = new URL("webbundle", null, warURL.toString());
 
-		_wabBundle = _bundleContext.installBundle(bundleURL.toString());
+		_bundle = _bundleContext.installBundle(bundleURL.toString());
 
 		Dictionary<String, Object> properties = new Hashtable<>();
 
@@ -154,7 +154,7 @@ public class ResourcesImporterTest {
 				},
 				properties);
 
-		_wabBundle.start();
+		_bundle.start();
 
 		countDownLatch.await(1, TimeUnit.MINUTES);
 
@@ -163,8 +163,8 @@ public class ResourcesImporterTest {
 
 	@After
 	public void tearDown() throws Exception {
-		if (_wabBundle != null) {
-			_wabBundle.uninstall();
+		if (_bundle != null) {
+			_bundle.uninstall();
 		}
 	}
 
@@ -429,6 +429,6 @@ public class ResourcesImporterTest {
 	@DeleteAfterTestRun
 	private List<LayoutPrototype> _layoutPrototypes;
 
-	private Bundle _wabBundle;
+	private Bundle _bundle;
 
 }
