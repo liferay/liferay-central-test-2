@@ -507,8 +507,8 @@ public class JenkinsResultsParserUtil {
 
 	public static JSONObject toJSONObject(String url) throws Exception {
 		return toJSONObject(
-			url, true, _DEFAULT_MAX_RETRIES, _DEFAULT_RETRY_PERIOD,
-			_DEFAULT_TIMEOUT);
+			url, true, _MAX_RETRIES_DEFAULT, _RETRY_PERIOD_DEFAULT,
+			_TIMEOUT_DEFAULT);
 	}
 
 	public static JSONObject toJSONObject(String url, boolean checkCache)
@@ -516,8 +516,8 @@ public class JenkinsResultsParserUtil {
 
 		return createJSONObject(
 			toString(
-				url, checkCache, _DEFAULT_MAX_RETRIES, _DEFAULT_RETRY_PERIOD,
-				_DEFAULT_TIMEOUT));
+				url, checkCache, _MAX_RETRIES_DEFAULT, _RETRY_PERIOD_DEFAULT,
+				_TIMEOUT_DEFAULT));
 	}
 
 	public static JSONObject toJSONObject(
@@ -525,7 +525,7 @@ public class JenkinsResultsParserUtil {
 		throws Exception {
 
 		return toJSONObject(
-			url, checkCache, _DEFAULT_MAX_RETRIES, _DEFAULT_RETRY_PERIOD,
+			url, checkCache, _MAX_RETRIES_DEFAULT, _RETRY_PERIOD_DEFAULT,
 			timeout);
 	}
 
@@ -540,23 +540,23 @@ public class JenkinsResultsParserUtil {
 
 	public static String toString(String url) throws Exception {
 		return toString(
-			url, true, _DEFAULT_MAX_RETRIES, _DEFAULT_RETRY_PERIOD,
-			_DEFAULT_TIMEOUT);
+			url, true, _MAX_RETRIES_DEFAULT, _RETRY_PERIOD_DEFAULT,
+			_TIMEOUT_DEFAULT);
 	}
 
 	public static String toString(String url, boolean checkCache)
 		throws Exception {
 
 		return toString(
-			url, checkCache, _DEFAULT_MAX_RETRIES, _DEFAULT_RETRY_PERIOD,
-			_DEFAULT_TIMEOUT);
+			url, checkCache, _MAX_RETRIES_DEFAULT, _RETRY_PERIOD_DEFAULT,
+			_TIMEOUT_DEFAULT);
 	}
 
 	public static String toString(String url, boolean checkCache, int timeout)
 		throws Exception {
 
 		return toString(
-			url, checkCache, _DEFAULT_MAX_RETRIES, _DEFAULT_RETRY_PERIOD,
+			url, checkCache, _MAX_RETRIES_DEFAULT, _RETRY_PERIOD_DEFAULT,
 			timeout);
 	}
 
@@ -671,11 +671,11 @@ public class JenkinsResultsParserUtil {
 		}
 	}
 
-	private static final int _DEFAULT_MAX_RETRIES = 3;
+	private static final int _MAX_RETRIES_DEFAULT = 3;
 
-	private static final int _DEFAULT_RETRY_PERIOD = 5;
+	private static final int _RETRY_PERIOD_DEFAULT = 5;
 
-	private static final int _DEFAULT_TIMEOUT = 0;
+	private static final int _TIMEOUT_DEFAULT = 0;
 
 	private static final Pattern _localURLPattern1 = Pattern.compile(
 		"https://test.liferay.com/([0-9]+)/");
