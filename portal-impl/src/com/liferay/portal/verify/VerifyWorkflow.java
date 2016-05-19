@@ -98,12 +98,12 @@ public class VerifyWorkflow extends VerifyProcess {
 			"DDLRecord", "recordId"
 		},
 		new String[] {
-			"WorkflowDefinitionLink", "classNameId",
-			_CLASS_NAME_ID, "KaleoProcess", "kaleoProcessId"
+			"WorkflowDefinitionLink", "classNameId", _CLASS_NAME_ID,
+			"KaleoProcess", "kaleoProcessId"
 		},
 		new String[] {
-			"WorkflowInstanceLink", "classNameId", _CLASS_NAME_ID,
-			"DDLRecord", "recordId"
+			"WorkflowInstanceLink", "classNameId", _CLASS_NAME_ID, "DDLRecord",
+			"recordId"
 		}
 	};
 
