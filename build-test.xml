@@ -7764,7 +7764,7 @@ jdbc.default.password=${database.mysql.password}</echo>
 					<equals arg1="${cmis.repository.type}" arg2="documentum6" />
 					<then>
 						<replace
-							file="${lp.plugins.dir}/hooks/documentum-hook/docroot/WEB-INF/src/dfc.properties"
+							file="${project.dir}/modules/private/apps/documentum/documentum-hook/docroot/WEB-INF/src/dfc.properties"
 							token="dfc.docbroker.host[0]=localhost"
 							value="dfc.docbroker.host[0]=${cmis.repository.vm.host.name}"
 						/>
