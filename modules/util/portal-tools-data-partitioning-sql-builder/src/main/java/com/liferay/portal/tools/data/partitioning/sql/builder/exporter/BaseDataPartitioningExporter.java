@@ -153,7 +153,10 @@ public abstract class BaseDataPartitioningExporter
 			}
 		}
 		catch (IOException | SQLException e) {
-			_logger.error("Unable to export " + tableName, e);
+			_logger.error(
+				"Unable to generate insert SQL statements for table " +
+					tableName,
+				e);
 		}
 	}
 
@@ -185,7 +188,8 @@ public abstract class BaseDataPartitioningExporter
 		}
 		catch (IOException | SQLException e) {
 			_logger.error(
-				"Unable to generate delete statements for table " + tableName,
+				"Unable to generate delete SQL statements for table " +
+					tableName,
 				e);
 		}
 	}
