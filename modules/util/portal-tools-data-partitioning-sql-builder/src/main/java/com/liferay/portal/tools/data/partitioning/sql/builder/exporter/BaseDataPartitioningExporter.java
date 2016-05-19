@@ -168,19 +168,19 @@ public abstract class BaseDataPartitioningExporter
 
 		DataSource dataSource = getDataSource();
 
-		String sql = "select * from " + tableName +" where companyId = ?";
-
 		try (Connection connection = dataSource.getConnection();
 			PreparedStatement preparedStatement = buildPreparedStatement(
-				connection, sql, companyId);
+				connection,
+				"select * from " + tableName +" where companyId = ?",
+				companyId);
 			ResultSet resultSet = preparedStatement.executeQuery()) {
 
 			if (resultSet.next()) {
-				String deleteSql =
+				String deleteSQL =
 					"delete from " + tableName + " where companyId = " +
 						companyId + ";\n";
 
-				outputStream.write(deleteSql.getBytes());
+				outputStream.write(deleteSQL.getBytes());
 			}
 		}
 		catch (IOException | SQLException e) {
