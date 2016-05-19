@@ -41,15 +41,15 @@ public class ScriptingExecutorMessageListener extends BaseMessageListener {
 
 	@Override
 	protected void doReceive(Message message) throws Exception {
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+
 		String scriptingLanguage = message.getString(
 			ScriptingExecutorMessagingConstants.MESSAGE_KEY_SCRIPTING_LANGUAGE);
 
 		List<URL> urls = (List<URL>)message.get(
 			ScriptingExecutorMessagingConstants.MESSAGE_KEY_URLS);
-
-		Thread currentThread = Thread.currentThread();
-
-		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
 		for (URL url : urls) {
 			try (InputStream inputStream = url.openStream()) {
