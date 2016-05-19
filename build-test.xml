@@ -7804,7 +7804,7 @@ jdbc.default.password=${database.mysql.password}</echo>
 
 		<antcall target="deploy-specified-plugins">
 			<param name="test.class" value="${test.class}" />
-		</antcall> 
+		</antcall>
 
 		<antcall target="deploy-extra-apps" />
 
