@@ -176,7 +176,8 @@ public class ScriptingExecutorExtender {
 			ClassLoader bundleClassLoader = bundleWiring.getClassLoader();
 
 			message.put(
-				ScriptingExecutorMessagingConstants.BUNDLE_CLASS_LOADER,
+				ScriptingExecutorMessagingConstants.
+					MESSAGE_KEY_BUNDLE_CLASS_LOADER,
 				bundleClassLoader);
 
 			message.put(

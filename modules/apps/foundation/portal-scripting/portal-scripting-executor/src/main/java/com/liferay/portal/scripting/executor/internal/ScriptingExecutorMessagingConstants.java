@@ -19,9 +19,10 @@ package com.liferay.portal.scripting.executor.internal;
  */
 public class ScriptingExecutorMessagingConstants {
 
-	public static final String BUNDLE_CLASS_LOADER = "bundleClassLoader";
-
 	public static final String DESTINATION_NAME = "liferay/scripting_executor";
+
+	public static final String MESSAGE_KEY_BUNDLE_CLASS_LOADER =
+		"bundleClassLoader";
 
 	public static final String MESSAGE_KEY_SCRIPTING_LANGUAGE =
 		"scriptingLanguage";

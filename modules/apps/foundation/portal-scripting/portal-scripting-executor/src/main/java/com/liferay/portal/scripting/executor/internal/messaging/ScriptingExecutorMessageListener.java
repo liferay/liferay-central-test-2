@@ -54,7 +54,8 @@ public class ScriptingExecutorMessageListener extends BaseMessageListener {
 		for (URL url : urls) {
 			try (InputStream inputStream = url.openStream()) {
 				ClassLoader bundleClassLoader = (ClassLoader)message.get(
-					ScriptingExecutorMessagingConstants.BUNDLE_CLASS_LOADER);
+					ScriptingExecutorMessagingConstants.
+						MESSAGE_KEY_BUNDLE_CLASS_LOADER);
 
 				if (bundleClassLoader != null) {
 					ClassLoader aggregateClassLoader =
