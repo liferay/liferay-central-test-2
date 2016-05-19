@@ -39,9 +39,8 @@ public class DeleteExportProcessCommand extends BaseExportProcessCommand {
 	}
 
 	protected String getOutputFileName(String tableName) {
-		return
-			exportContext.getSchemaName() + "-" + companyId + "-table-" +
-				tableName + "-delete.sql";
+		return exportContext.getSchemaName() + "-" + companyId + "-table-" +
+			tableName + "-delete.sql";
 	}
 
 	protected void write(String tableName, OutputStream outputStream) {
