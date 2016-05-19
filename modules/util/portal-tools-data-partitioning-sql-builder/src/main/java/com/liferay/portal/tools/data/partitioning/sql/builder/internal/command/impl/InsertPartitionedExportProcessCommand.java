@@ -42,9 +42,8 @@ public class InsertPartitionedExportProcessCommand
 	}
 
 	protected String getOutputFileName(String tableName) {
-		return
-			exportContext.getSchemaName() + "-" + companyId + "-table-" +
-				tableName + ".sql";
+		return exportContext.getSchemaName() + "-" + companyId + "-table-" +
+			tableName + ".sql";
 	}
 
 	protected void write(String tableName, OutputStream outputStream) {
