@@ -87,7 +87,7 @@ public class DDMFormValuesToPropertiesConverter {
 		return properties;
 	}
 
-	protected String getDefaultValueForType(String dataType) {
+	protected String getDataTypeDefaultValue(String dataType) {
 		if (dataType.equals(FieldConstants.BOOLEAN)) {
 			return "false";
 		}
@@ -143,7 +143,7 @@ public class DDMFormValuesToPropertiesConverter {
 		String dataType = getDDMFormFieldDataType(ddmFormFieldValue.getName());
 
 		if (valueString.equals(StringPool.BLANK)) {
-			valueString = getDefaultValueForType(dataType);
+			valueString = getDataTypeDefaultValue(dataType);
 		}
 
 		return valueString;
