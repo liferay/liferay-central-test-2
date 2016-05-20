@@ -53,7 +53,7 @@ public class SplitPackagesTest {
 	@Test
 	public void testSplitPackages() throws IOException {
 		Map<ExportPackage, Set<String>> allowedSplitPackageNames =
-			_getAllowedSplitPackages();
+			_getAllowedSplitPackageNames();
 		Map<Bundle, Set<ExportPackage>> exportPackagesMap = new HashMap<>();
 
 		Bundle systemBundle = (Bundle)ModuleFrameworkUtilAdapter.getFramework();
@@ -84,7 +84,7 @@ public class SplitPackagesTest {
 		}
 	}
 
-	private Map<ExportPackage, Set<String>> _getAllowedSplitPackages()
+	private Map<ExportPackage, Set<String>> _getAllowedSplitPackageNames()
 		throws IOException {
 
 		Map<ExportPackage, Set<String>> allowedSplitPackageNames = new HashMap<>();
