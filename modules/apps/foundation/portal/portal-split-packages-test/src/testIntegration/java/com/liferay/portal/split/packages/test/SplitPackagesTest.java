@@ -70,13 +70,13 @@ public class SplitPackagesTest {
 			for (Map.Entry<Bundle, Set<ExportPackage>> entry :
 					exportPackagesMap.entrySet()) {
 
-				Set<ExportPackage> duplicatedExportPackages = new HashSet<>(
+				Set<ExportPackage> duplicateExportPackages = new HashSet<>(
 					entry.getValue());
 
-				duplicatedExportPackages.retainAll(exportPackages);
+				duplicateExportPackages.retainAll(exportPackages);
 
 				_processSplitPackages(
-					bundle, entry.getKey(), duplicatedExportPackages,
+					bundle, entry.getKey(), duplicateExportPackages,
 					allowedSplitPackageNames);
 			}
 
@@ -136,19 +136,19 @@ public class SplitPackagesTest {
 
 	private void _processSplitPackages(
 		Bundle currentBundle, Bundle previousBundle,
-		Collection<ExportPackage> duplicatedExportPackages,
+		Collection<ExportPackage> duplicateExportPackages,
 		Map<ExportPackage, Set<String>> allowedSplitPackageNames) {
 
-		for (ExportPackage duplicatedExportPackage : duplicatedExportPackages) {
+		for (ExportPackage duplicateExportPackage : duplicateExportPackages) {
 			Set<String> symbolicNames = allowedSplitPackageNames.get(
-				duplicatedExportPackage);
+				duplicateExportPackage);
 
 			if ((symbolicNames == null) ||
 				!symbolicNames.contains(currentBundle.getSymbolicName()) ||
 				!symbolicNames.contains(previousBundle.getSymbolicName())) {
 
 				Assert.fail(
-					"Detected split packages " + duplicatedExportPackage +
+					"Detected split packages " + duplicateExportPackage +
 						" in " + previousBundle + " and " + currentBundle);
 			}
 		}
