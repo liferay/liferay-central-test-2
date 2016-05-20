@@ -17,7 +17,7 @@
 <%@ include file="/document_library/init.jsp" %>
 
 <%
-boolean checkedOut = GetterUtil.getBoolean(request.getAttribute("version_details.jsp-checkedOut"));
+boolean checkedOut = GetterUtil.getBoolean(request.getAttribute("edit_file_entry.jsp-checkedOut"));
 %>
 
 <div id="<portlet:namespace />versionDetails" style="display: none">
