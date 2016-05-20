@@ -8244,96 +8244,89 @@ jdbc.default.password=${database.password}</echo>
 	<target name="wait-for-plugins-deployment">
 		<fail message="Please set the property ${test.class}." unless="test.class" />
 
+		<condition property="required.plugins.includes" value="">
+			<not>
+				<isset property="required.plugins.includes" />
+			</not>
+		</condition>
+
 		<if>
 			<not>
-				<equals arg1="${liferay.portal.bundle}" arg2="6.0.6" />
+				<available file="${liferay.home}/logs" type="dir" />
 			</not>
 			<then>
-				<condition property="required.plugins.includes" value="">
-					<not>
-						<isset property="required.plugins.includes" />
-					</not>
-				</condition>
-
-				<if>
-					<not>
-						<available file="${liferay.home}/logs" type="dir" />
-					</not>
-					<then>
-						<fail message="${liferay.home}/logs is not available." />
-					</then>
-				</if>
-
-				<first id="first">
-					<fileset dir="${liferay.home}/logs" includes="*.log" />
-				</first>
-
-				<var name="log.file.path" value="${toString:first}" />
-
-				<get-testcase-property property.name="hook.plugins.includes" />
-				<get-testcase-property property.name="layouttpl.plugins.includes" />
-				<get-testcase-property property.name="portlet.plugins.includes" />
-				<get-testcase-property property.name="theme.plugins.includes" />
-				<get-testcase-property property.name="web.plugins.includes" />
-
-				<beanshell>
-					<![CDATA[
-						import org.apache.commons.io.FileUtils;
-
-						Set requiredPluginNamesSet = new HashSet();
-
-						String[] pluginTypes = {"hook", "layouttpl", "portlet", "required", "theme", "web"};
-
-						for (String pluginType : pluginTypes) {
-							String pluginNamesString = project.getProperty(pluginType + ".plugins.includes");
-
-							if (pluginNamesString != null) {
-								String[] pluginNames = pluginNamesString.split(",");
-
-								for (String pluginName : pluginNames) {
-									requiredPluginNamesSet.add(pluginName);
-								}
-							}
-						}
-
-						System.out.println("Ensuring the following plugins have been deployed:");
-						System.out.println(requiredPluginNamesSet);
-
-						String logFilePath = project.getProperty("log.file.path");
-
-						logFilePath = logFilePath.replaceAll("\\\\", "/");
-
-						int second = 0;
-
-						for (String pluginName : requiredPluginNamesSet) {
-							while (true) {
-								try {
-									File file = new File(logFilePath);
-
-									String content = FileUtils.readFileToString(file);
-
-									if (content.contains(pluginName + " is available for use") ||
-										content.contains(pluginName + " are available for use")) {
-
-										break;
-									}
-								}
-								catch (Exception e) {
-									e.printStackTrace();
-								}
-
-								if (second >= 120) {
-									break;
-								}
-
-								second++;
-
-								Thread.sleep(1000);
-							}
-						}
-					]]>
-				</beanshell>
+				<fail message="${liferay.home}/logs is not available." />
 			</then>
 		</if>
+
+		<first id="first">
+			<fileset dir="${liferay.home}/logs" includes="*.log" />
+		</first>
+
+		<var name="log.file.path" value="${toString:first}" />
+
+		<get-testcase-property property.name="hook.plugins.includes" />
+		<get-testcase-property property.name="layouttpl.plugins.includes" />
+		<get-testcase-property property.name="portlet.plugins.includes" />
+		<get-testcase-property property.name="theme.plugins.includes" />
+		<get-testcase-property property.name="web.plugins.includes" />
+
+		<beanshell>
+			<![CDATA[
+				import org.apache.commons.io.FileUtils;
+
+				Set requiredPluginNamesSet = new HashSet();
+
+				String[] pluginTypes = {"hook", "layouttpl", "portlet", "required", "theme", "web"};
+
+				for (String pluginType : pluginTypes) {
+					String pluginNamesString = project.getProperty(pluginType + ".plugins.includes");
+
+					if (pluginNamesString != null) {
+						String[] pluginNames = pluginNamesString.split(",");
+
+						for (String pluginName : pluginNames) {
+							requiredPluginNamesSet.add(pluginName);
+						}
+					}
+				}
+
+				System.out.println("Ensuring the following plugins have been deployed:");
+				System.out.println(requiredPluginNamesSet);
+
+				String logFilePath = project.getProperty("log.file.path");
+
+				logFilePath = logFilePath.replaceAll("\\\\", "/");
+
+				int second = 0;
+
+				for (String pluginName : requiredPluginNamesSet) {
+					while (true) {
+						try {
+							File file = new File(logFilePath);
+
+							String content = FileUtils.readFileToString(file);
+
+							if (content.contains(pluginName + " is available for use") ||
+								content.contains(pluginName + " are available for use")) {
+
+								break;
+							}
+						}
+						catch (Exception e) {
+							e.printStackTrace();
+						}
+
+						if (second >= 120) {
+							break;
+						}
+
+						second++;
+
+						Thread.sleep(1000);
+					}
+				}
+			]]>
+		</beanshell>
 	</target>
 </project>
