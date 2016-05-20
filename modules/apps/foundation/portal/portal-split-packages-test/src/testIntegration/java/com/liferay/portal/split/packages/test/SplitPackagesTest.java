@@ -108,13 +108,13 @@ public class SplitPackagesTest {
 	private Set<ExportPackage> _getExportPackages(Bundle bundle) {
 		Dictionary<String, String> headers = bundle.getHeaders();
 
-		String exportPackage = headers.get(Constants.EXPORT_PACKAGE);
+		String exportPackageName = headers.get(Constants.EXPORT_PACKAGE);
 
-		if (exportPackage == null) {
+		if (exportPackageName == null) {
 			return null;
 		}
 
-		Parameters parameters = OSGiHeader.parseHeader(exportPackage);
+		Parameters parameters = OSGiHeader.parseHeader(exportPackageName);
 
 		Map<String, ? extends Map<String, String>> exportPackagesMap =
 			parameters.asMapMap();
