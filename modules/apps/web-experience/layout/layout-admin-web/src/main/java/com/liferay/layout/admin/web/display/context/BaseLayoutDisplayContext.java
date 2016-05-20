@@ -94,9 +94,9 @@ public class BaseLayoutDisplayContext {
 		Group liveGroup = getLiveGroup();
 
 		editLayoutURL.setParameter(
-			"groupId", String.valueOf(liveGroup.getGroupId()));
-		editLayoutURL.setParameter(
 			"backURL", PortalUtil.getCurrentURL(liferayPortletRequest));
+		editLayoutURL.setParameter(
+			"groupId", String.valueOf(liveGroup.getGroupId()));
 
 		return editLayoutURL;
 	}
