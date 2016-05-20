@@ -52,7 +52,7 @@ public class SplitPackagesTest {
 
 	@Test
 	public void testSplitPackages() throws IOException {
-		Map<ExportPackage, Set<String>> allowedSplitPackages =
+		Map<ExportPackage, Set<String>> allowedSplitPackageNames =
 			_getAllowedSplitPackages();
 		Map<Bundle, Set<ExportPackage>> exportPackagesMap = new HashMap<>();
 
@@ -77,7 +77,7 @@ public class SplitPackagesTest {
 
 				_processSplitPackages(
 					bundle, entry.getKey(), duplicatedExportPackages,
-					allowedSplitPackages);
+					allowedSplitPackageNames);
 			}
 
 			exportPackagesMap.put(bundle, exportPackages);
@@ -87,7 +87,7 @@ public class SplitPackagesTest {
 	private Map<ExportPackage, Set<String>> _getAllowedSplitPackages()
 		throws IOException {
 
-		Map<ExportPackage, Set<String>> allowedSplitPackages = new HashMap<>();
+		Map<ExportPackage, Set<String>> allowedSplitPackageNames = new HashMap<>();
 
 		for (String line : StringUtil.splitLines(
 				StringUtil.read(
@@ -96,12 +96,12 @@ public class SplitPackagesTest {
 
 			String[] lineParts = StringUtil.split(line, StringPool.SEMICOLON);
 
-			allowedSplitPackages.put(
+			allowedSplitPackageNames.put(
 				new ExportPackage(lineParts[0], lineParts[1]),
 				SetUtil.fromArray(StringUtil.split(lineParts[2])));
 		}
 
-		return allowedSplitPackages;
+		return allowedSplitPackageNames;
 	}
 
 	private Set<ExportPackage> _getExportPackages(Bundle bundle) {
@@ -137,10 +137,10 @@ public class SplitPackagesTest {
 	private void _processSplitPackages(
 		Bundle currentBundle, Bundle previousBundle,
 		Collection<ExportPackage> duplicatedExportPackages,
-		Map<ExportPackage, Set<String>> allowedSplitPackages) {
+		Map<ExportPackage, Set<String>> allowedSplitPackageNames) {
 
 		for (ExportPackage duplicatedExportPackage : duplicatedExportPackages) {
-			Set<String> symbolicNames = allowedSplitPackages.get(
+			Set<String> symbolicNames = allowedSplitPackageNames.get(
 				duplicatedExportPackage);
 
 			if ((symbolicNames == null) ||
