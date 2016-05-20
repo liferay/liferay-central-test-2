@@ -3480,7 +3480,7 @@ create database lportal${database.index} character set utf8;</echo>
 							</then>
 						</if>
 
-						<echo>Copying ${sql.dir}${sql.file} to create.sql.</echo>
+						<echo>Copying '${sql.dir}${sql.file}' to 'create.sql'</echo>
 
 						<copy file="${sql.dir}${sql.file}" tofile="create.sql" />
 					</else>
