@@ -87,7 +87,8 @@ public class SplitPackagesTest {
 	private Map<ExportPackage, Set<String>> _getAllowedSplitPackageNames()
 		throws IOException {
 
-		Map<ExportPackage, Set<String>> allowedSplitPackageNames = new HashMap<>();
+		Map<ExportPackage, Set<String>> allowedSplitPackageNames =
+			new HashMap<>();
 
 		for (String line : StringUtil.splitLines(
 				StringUtil.read(
