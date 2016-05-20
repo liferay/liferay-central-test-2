@@ -92,7 +92,7 @@ public class SplitPackagesTest {
 		for (String line : StringUtil.splitLines(
 				StringUtil.read(
 					SplitPackagesTest.class.getResourceAsStream(
-						"allowed_split_packages.txt")))) {
+						"dependencies/allowed_split_packages.txt")))) {
 
 			String[] lineParts = StringUtil.split(line, StringPool.SEMICOLON);
 
