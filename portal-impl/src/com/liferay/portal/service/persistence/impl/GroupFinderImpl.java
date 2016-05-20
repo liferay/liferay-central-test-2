@@ -71,6 +71,9 @@ public class GroupFinderImpl
 	public static final String COUNT_BY_C_PG_N_D =
 		GroupFinder.class.getName() + ".countByC_PG_N_D";
 
+	public static final String FIND_BY_COMPANY_ID =
+		GroupFinder.class.getName() + ".findByCompanyId";
+
 	public static final String FIND_BY_LAYOUTS =
 		GroupFinder.class.getName() + ".findByLayouts";
 
@@ -85,9 +88,6 @@ public class GroupFinderImpl
 
 	public static final String FIND_BY_SYSTEM =
 		GroupFinder.class.getName() + ".findBySystem";
-
-	public static final String FIND_BY_COMPANY_ID =
-		GroupFinder.class.getName() + ".findByCompanyId";
 
 	public static final String FIND_BY_C_P =
 		GroupFinder.class.getName() + ".findByC_P";
