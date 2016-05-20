@@ -201,9 +201,8 @@ public class VerifyProcessTracker {
 
 			if (release == null) {
 
-				// Verification state must be persisted even though
-				// not all verifiers are associated with a database
-				// service
+				// Verification state must be persisted even though not all
+				// verifiers are associated with a database service
 
 				release = _releaseLocalService.createRelease(
 					_counterLocalService.increment());
