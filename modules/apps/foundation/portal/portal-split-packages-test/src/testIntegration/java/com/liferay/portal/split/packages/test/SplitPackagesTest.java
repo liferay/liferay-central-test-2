@@ -54,12 +54,11 @@ public class SplitPackagesTest {
 	public void testSplitPackages() throws IOException {
 		Map<ExportPackage, Set<String>> allowedSplitPackages =
 			_getAllowedSplitPackages();
+		Map<Bundle, Set<ExportPackage>> exportPackagesMap = new HashMap<>();
 
 		Bundle systemBundle = (Bundle)ModuleFrameworkUtilAdapter.getFramework();
 
 		BundleContext bundleContext = systemBundle.getBundleContext();
-
-		Map<Bundle, Set<ExportPackage>> exportPackagesMap = new HashMap<>();
 
 		for (Bundle bundle : bundleContext.getBundles()) {
 			Set<ExportPackage> exportPackages = _getExportPackages(bundle);
@@ -90,18 +89,16 @@ public class SplitPackagesTest {
 
 		Map<ExportPackage, Set<String>> allowedSplitPackages = new HashMap<>();
 
-		for (String splitPackagesLine :
-				StringUtil.splitLines(
-					StringUtil.read(
-						SplitPackagesTest.class.getResourceAsStream(
-							"allowed_split_packages.txt")))) {
+		for (String line : StringUtil.splitLines(
+				StringUtil.read(
+					SplitPackagesTest.class.getResourceAsStream(
+						"allowed_split_packages.txt")))) {
 
-			String[] splitPackagesParts = StringUtil.split(
-				splitPackagesLine, StringPool.SEMICOLON);
+			String[] lineParts = StringUtil.split(line, StringPool.SEMICOLON);
 
 			allowedSplitPackages.put(
-				new ExportPackage(splitPackagesParts[0], splitPackagesParts[1]),
-				SetUtil.fromArray(StringUtil.split(splitPackagesParts[2])));
+				new ExportPackage(lineParts[0], lineParts[1]),
+				SetUtil.fromArray(StringUtil.split(lineParts[2])));
 		}
 
 		return allowedSplitPackages;
