@@ -114,12 +114,12 @@ public class SplitPackagesTest {
 			return null;
 		}
 
+		Set<ExportPackage> exportPackages = new HashSet<>();
+
 		Parameters parameters = OSGiHeader.parseHeader(exportPackageName);
 
 		Map<String, ? extends Map<String, String>> exportPackagesMap =
 			parameters.asMapMap();
-
-		Set<ExportPackage> exportPackages = new HashSet<>();
 
 		for (Map.Entry<String, ? extends Map<String, String>> entry :
 				exportPackagesMap.entrySet()) {
