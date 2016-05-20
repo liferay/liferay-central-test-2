@@ -2102,6 +2102,70 @@
 		<execute macro="DDLTemplate#saveFormTemplateCP" />
 	</command>
 
+	<command name="RemoveRepeatableDateField" priority="4">
+		<description message="This is a use case for LPS-65479." />
+
+		<execute macro="Navigator#openURL" />
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Dynamic Data Lists" />
+		</execute>
+
+		<execute macro="DDLDataDefinition#addCP" />
+
+		<execute macro="DynamicDataMapping#addField">
+			<var name="field" value="Date" />
+			<var name="fieldFieldLabel" value="Date" />
+			<var name="fieldName" value="Date" />
+		</execute>
+
+		<execute macro="DynamicDataMapping#editFieldRepeatable">
+			<var name="fieldFieldLabel" value="Date" />
+		</execute>
+
+		<execute macro="DDLDataDefinition#save" />
+
+		<execute macro="Navigator#openURL" />
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Dynamic Data Lists" />
+		</execute>
+
+		<execute macro="DDLList#addCP" />
+
+		<execute macro="DDLDataDefinition#selectCP" />
+
+		<execute macro="DDLList#save" />
+
+		<execute macro="Navigator#openURL" />
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Dynamic Data Lists" />
+		</execute>
+
+		<execute macro="DDLRecord#addCP" />
+
+		<execute macro="DDLRecord#addRepeatableField">
+			<var name="fieldName" value="Date" />
+		</execute>
+
+		<execute macro="DDLRecord#addRepeatableField">
+			<var name="fieldName" value="Date" />
+		</execute>
+
+		<execute macro="DDLRecord#deleteRepeatableField">
+			<var name="fieldName" value="Date" />
+			<var name="fieldNumber" value="2" />
+		</execute>
+
+		<execute macro="DDLRecord#deleteRepeatableField">
+			<var name="fieldName" value="Date" />
+			<var name="fieldNumber" value="2" />
+		</execute>
+
+		<execute macro="PortletEntry#publish" />
+	</command>
+
 	<command name="RemoveRepeatableFieldAndAssertOrderInTranslation" priority="3">
 		<execute macro="Navigator#openURL" />
 
