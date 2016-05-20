@@ -3325,9 +3325,12 @@ org.apache.catalina.startup.ClassLoaderFactory.level=INFO]]>
 		<get-testcase-property property.name="portal.version" />
 
 		<condition property="portal.version" value="${liferay.portal.bundle}">
-			<not>
-				<isset property="portal.version" />
-			</not>
+			<and>
+				<isset property="liferay.portal.bundle" />
+				<not>
+					<equals arg1="${liferay.portal.bundle}" arg2="" />
+				</not>
+			</and>
 		</condition>
 
 		<if>
