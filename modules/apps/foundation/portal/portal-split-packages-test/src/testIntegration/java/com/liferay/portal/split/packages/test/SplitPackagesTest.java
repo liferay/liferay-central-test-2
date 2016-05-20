@@ -94,7 +94,7 @@ public class SplitPackagesTest {
 				StringUtil.splitLines(
 					StringUtil.read(
 						SplitPackagesTest.class.getResourceAsStream(
-							"AllowedSplitPackages.txt")))) {
+							"allowed_split_packages.txt")))) {
 
 			String[] splitPackagesParts = StringUtil.split(
 				splitPackagesLine, StringPool.SEMICOLON);
