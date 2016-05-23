@@ -72,8 +72,6 @@ public class CalendarDefaultPolicy {
 		sb.append("#searchCount");
 
 		String allowedServiceSignatures = sb.toString();
-		boolean defaultSAPEntry = true;
-		boolean enabled = true;
 
 		ResourceBundleLoader resourceBundleLoader =
 			new AggregateResourceBundleLoader(
@@ -84,11 +82,11 @@ public class CalendarDefaultPolicy {
 
 		Map<Locale, String> titleMap = ResourceBundleUtil.getLocalizationMap(
 			resourceBundleLoader,
-			"calendar-default-service-access-policy-title");
+			"service-access-policy-entry-default-calendar-title");
 
 		_sapEntryLocalService.addSAPEntry(
 			_userLocalService.getDefaultUserId(companyId),
-			allowedServiceSignatures, defaultSAPEntry, enabled,
+			allowedServiceSignatures, true, true,
 			_SAP_ENTRY_NAME, titleMap, new ServiceContext());
 	}
 
