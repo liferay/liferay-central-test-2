@@ -29,7 +29,7 @@ import java.util.Objects;
 /**
  * @author Miguel Pastor
  */
-public class ClasspathUtil {
+public class ClassPathUtil {
 
 	public static File getFile(URL url) throws IOException {
 		String fileName = null;

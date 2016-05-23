@@ -20,7 +20,7 @@ import com.liferay.portal.kernel.concurrent.ConcurrentReferenceValueHashMap;
 import com.liferay.portal.kernel.memory.FinalizeManager;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.osgi.web.servlet.jsp.compiler.internal.util.ClasspathUtil;
+import com.liferay.portal.osgi.web.servlet.jsp.compiler.internal.util.ClassPathUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -256,7 +256,7 @@ public class JspCompiler extends Jsr199JavaCompiler {
 		URL url = codeSource.getLocation();
 
 		try {
-			File file = ClasspathUtil.getFile(url);
+			File file = ClassPathUtil.getFile(url);
 
 			if (file == null) {
 				_logger.log(

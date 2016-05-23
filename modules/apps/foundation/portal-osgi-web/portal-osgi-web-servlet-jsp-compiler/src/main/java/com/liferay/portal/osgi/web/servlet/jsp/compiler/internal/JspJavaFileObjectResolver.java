@@ -18,7 +18,7 @@ import com.liferay.portal.kernel.concurrent.ConcurrentReferenceValueHashMap;
 import com.liferay.portal.kernel.memory.FinalizeManager;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.osgi.web.servlet.jsp.compiler.internal.util.ClasspathUtil;
+import com.liferay.portal.osgi.web.servlet.jsp.compiler.internal.util.ClassPathUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -143,7 +143,7 @@ public class JspJavaFileObjectResolver implements JavaFileObjectResolver {
 		else if (protocol.equals("jar")) {
 			try {
 				return new JarJavaFileObject(
-					className, ClasspathUtil.getFile(resourceURL),
+					className, ClassPathUtil.getFile(resourceURL),
 					resourceName);
 			}
 			catch (IOException ioe) {
@@ -213,7 +213,7 @@ public class JspJavaFileObjectResolver implements JavaFileObjectResolver {
 
 		for (URL url : urls) {
 			try {
-				File file = ClasspathUtil.getFile(url);
+				File file = ClassPathUtil.getFile(url);
 
 				if (file == null) {
 					_logger.log(
