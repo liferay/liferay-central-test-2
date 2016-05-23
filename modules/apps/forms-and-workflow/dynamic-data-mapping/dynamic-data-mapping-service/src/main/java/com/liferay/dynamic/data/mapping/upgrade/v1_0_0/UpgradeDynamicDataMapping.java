@@ -2317,7 +2317,7 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 			return entryVersionFolderId;
 		}
 
-		protected File fetchFile(String filePath) {
+		protected File fetchFile(String filePath) throws PortalException {
 			try {
 				return DLStoreUtil.getFile(
 					_companyId, CompanyConstants.SYSTEM, filePath);
@@ -2328,9 +2328,8 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 						"Unable to find the binary file with path \"%s\" " +
 							"referenced by %s",
 						filePath, getModelInfo()));
+				throw pe;
 			}
-
-			return null;
 		}
 
 		protected long getDLFolderId(
@@ -2397,10 +2396,6 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 				String extension = getExtension(fileName);
 
 				File file = fetchFile(filePath);
-
-				if (file == null) {
-					return fileEntryUuid;
-				}
 
 				DLFileEntry dlFileEntry = addDLFileEntry(
 					fileEntryUuid, fileEntryId, _groupId, _companyId, _userId,
