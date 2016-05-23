@@ -17,11 +17,9 @@
 <%@ include file="/message_boards/init.jsp" %>
 
 <%
-MBRequestHelper mbRequestHelper = new MBRequestHelper(request);
-
-MBHomeDisplayContext mbHomeDisplayContext = mbDisplayContextProvider.getMBHomeDisplayContext(request, response);
-
 String redirect = ParamUtil.getString(request, "redirect");
+
+MBRequestHelper mbRequestHelper = new MBRequestHelper(request);
 
 MBCategory category = mbRequestHelper.getCategory();
 
@@ -67,6 +65,8 @@ else {
 }
 
 boolean portletTitleBasedNavigation = GetterUtil.getBoolean(portletConfig.getInitParameter("portlet-title-based-navigation"));
+
+MBHomeDisplayContext mbHomeDisplayContext = mbDisplayContextProvider.getMBHomeDisplayContext(request, response);
 
 if (portletTitleBasedNavigation) {
 	portletDisplay.setShowBackIcon(true);
