@@ -55,4 +55,4 @@ editPageURL.setParameter("privateLayout", String.valueOf(layout.isPrivateLayout(
 	</a>
 </li>
 
-<liferay-ui:success key="layoutUpdated" message='<%= LanguageUtil.get(resourceBundle, "the-page-has-been-updated-succesfully") %>' targetNode="#controlMenuAlertsContainer" />
+<liferay-ui:success key="layoutUpdated" message='<%= LanguageUtil.get(resourceBundle, "the-page-was-updated-succesfully") %>' targetNode="#controlMenuAlertsContainer" />
