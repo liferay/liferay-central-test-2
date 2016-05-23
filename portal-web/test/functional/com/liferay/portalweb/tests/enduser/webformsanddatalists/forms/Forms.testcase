@@ -2570,7 +2570,7 @@
 			<var name="fieldValue" value="Radio" />
 		</execute>
 
-		<execute macro="FormFields#viewFormName">
+		<execute macro="FormFields#viewFieldName">
 			<var name="fieldName" value="Radio" />
 		</execute>
 
