@@ -41,15 +41,12 @@ if (group.isLayoutPrototype()) {
 	portletId = LayoutAdminPortletKeys.LAYOUT_PROTOTYPE_PAGE;
 }
 
-PortletURL editPageURL = PortalUtil.getControlPanelPortletURL(
-	request, portletId, PortletRequest.RENDER_PHASE);
+PortletURL editPageURL = PortalUtil.getControlPanelPortletURL(request, portletId, PortletRequest.RENDER_PHASE);
 
-editPageURL.setParameter(
-	"groupId", String.valueOf(layout.getGroupId()));
-editPageURL.setParameter("selPlid", String.valueOf(layout.getPlid()));
-editPageURL.setParameter(
-	"privateLayout", String.valueOf(layout.isPrivateLayout()));
 editPageURL.setParameter("backURL", PortalUtil.getCurrentURL(request));
+editPageURL.setParameter("groupId", String.valueOf(layout.getGroupId()));
+editPageURL.setParameter("selPlid", String.valueOf(layout.getPlid()));
+editPageURL.setParameter("privateLayout", String.valueOf(layout.isPrivateLayout()));
 %>
 
 <li class="control-menu-nav-item">
