@@ -46,7 +46,7 @@ import org.osgi.service.component.annotations.Reference;
  * @author Tomas Polesovsky
  */
 @Component(immediate = true)
-public class CalendarDefaultPolicy {
+public class CalendarSAPEntryActivator {
 
 	@Activate
 	protected void activate(BundleContext bundleContext) {
@@ -77,7 +77,7 @@ public class CalendarDefaultPolicy {
 			new AggregateResourceBundleLoader(
 				ResourceBundleUtil.getResourceBundleLoader(
 					"content.Language",
-					CalendarDefaultPolicy.class.getClassLoader()),
+					CalendarSAPEntryActivator.class.getClassLoader()),
 				LanguageResources.RESOURCE_BUNDLE_LOADER);
 
 		Map<Locale, String> titleMap = ResourceBundleUtil.getLocalizationMap(
@@ -100,7 +100,7 @@ public class CalendarDefaultPolicy {
 	private static final String _SAP_ENTRY_NAME = "CALENDAR_DEFAULT";
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		CalendarDefaultPolicy.class);
+		CalendarSAPEntryActivator.class);
 
 	@Reference(unbind = "-")
 	private SAPEntryLocalService _sapEntryLocalService;
