@@ -57,7 +57,7 @@ public class CalendarDefaultPolicy {
 
 	protected void create(long companyId) throws PortalException {
 		SAPEntry sapEntry = _sapEntryLocalService.fetchSAPEntry(
-			companyId, _CALENDAR_DEFAULT);
+			companyId, _SAP_ENTRY_NAME);
 
 		if (sapEntry != null) {
 			return;
@@ -89,7 +89,7 @@ public class CalendarDefaultPolicy {
 		_sapEntryLocalService.addSAPEntry(
 			_userLocalService.getDefaultUserId(companyId),
 			allowedServiceSignatures, defaultSAPEntry, enabled,
-			_CALENDAR_DEFAULT, titleMap, new ServiceContext());
+			_SAP_ENTRY_NAME, titleMap, new ServiceContext());
 	}
 
 	@Deactivate
@@ -99,7 +99,7 @@ public class CalendarDefaultPolicy {
 		}
 	}
 
-	private static final String _CALENDAR_DEFAULT = "CALENDAR_DEFAULT";
+	private static final String _SAP_ENTRY_NAME = "CALENDAR_DEFAULT";
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		CalendarDefaultPolicy.class);
