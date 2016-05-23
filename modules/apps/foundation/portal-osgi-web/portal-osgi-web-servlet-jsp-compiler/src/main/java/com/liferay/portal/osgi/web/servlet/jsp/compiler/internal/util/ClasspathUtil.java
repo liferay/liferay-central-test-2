@@ -32,9 +32,9 @@ import java.util.Objects;
 public class ClasspathUtil {
 
 	public static File getFile(URL url) throws IOException {
-		URLConnection urlConnection = url.openConnection();
+		String fileName = null;
 
-		String fileName;
+		URLConnection urlConnection = url.openConnection();
 
 		if (urlConnection instanceof JarURLConnection) {
 			JarURLConnection jarURLConnection = (JarURLConnection)urlConnection;
