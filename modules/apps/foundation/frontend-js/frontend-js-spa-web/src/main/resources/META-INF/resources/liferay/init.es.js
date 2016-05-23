@@ -60,7 +60,9 @@ var initSPA = function(callback) {
 				let formElement = form.getDOM();
 				let url = formElement.action;
 
-				if (app.canNavigate(url) && formElement.method !== 'get') {
+				if (app.canNavigate(url) && formElement.method !== 'get' &&
+					!app.isInPortletBlacklist(formElement)) {
+
 					Liferay.Util._submitLocked = false;
 
 					globals.capturedFormElement = formElement;
