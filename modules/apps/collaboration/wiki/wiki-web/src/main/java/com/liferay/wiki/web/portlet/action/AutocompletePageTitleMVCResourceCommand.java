@@ -99,6 +99,8 @@ public class AutocompletePageTitleMVCResourceCommand
 
 		SearchContext searchContext = SearchContextFactory.getInstance(request);
 
+		searchContext.setEnd(20);
+
 		String query = ParamUtil.getString(request, "query");
 
 		searchContext.setKeywords(StringUtil.toLowerCase(query));
@@ -108,7 +110,6 @@ public class AutocompletePageTitleMVCResourceCommand
 		searchContext.setNodeIds(new long[] {nodeId});
 
 		searchContext.setStart(0);
-		searchContext.setEnd(20);
 
 		Hits hits = _wikiPageTitleSearcher.search(searchContext);
 
