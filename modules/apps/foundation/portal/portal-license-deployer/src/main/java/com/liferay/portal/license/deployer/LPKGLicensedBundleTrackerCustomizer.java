@@ -24,8 +24,8 @@ import java.net.URL;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
-
 import java.nio.file.StandardCopyOption;
+
 import java.util.Enumeration;
 
 import org.apache.felix.fileinstall.ArtifactInstaller;
