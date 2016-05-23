@@ -52,10 +52,10 @@ public class CalendarDefaultPolicy {
 	protected void activate(BundleContext bundleContext) {
 		_serviceRegistration = bundleContext.registerService(
 			PortalInstanceLifecycleListener.class,
-			new PolicyPortalInstanceLifecycleListener(), null);
+			new CalendarPortalInstanceLifecycleListener(), null);
 	}
 
-	protected void create(long companyId) throws PortalException {
+	protected void addSAPEntry(long companyId) throws PortalException {
 		SAPEntry sapEntry = _sapEntryLocalService.fetchSAPEntry(
 			companyId, _SAP_ENTRY_NAME);
 
@@ -111,16 +111,16 @@ public class CalendarDefaultPolicy {
 	@Reference(unbind = "-")
 	private UserLocalService _userLocalService;
 
-	private class PolicyPortalInstanceLifecycleListener
+	private class CalendarPortalInstanceLifecycleListener
 		extends BasePortalInstanceLifecycleListener {
 
 		public void portalInstanceRegistered(Company company) throws Exception {
 			try {
-				create(company.getCompanyId());
+				addSAPEntry(company.getCompanyId());
 			}
 			catch (PortalException pe) {
 				_log.error(
-					"Unable to add CalendarDefaultPolicy for company " +
+					"Unable to add service access policy entry for company " +
 						company.getCompanyId(),
 					pe);
 			}
