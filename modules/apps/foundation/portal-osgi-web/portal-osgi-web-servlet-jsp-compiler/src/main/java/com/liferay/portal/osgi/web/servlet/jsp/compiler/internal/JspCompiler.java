@@ -261,7 +261,7 @@ public class JspCompiler extends Jsr199JavaCompiler {
 			if (file == null) {
 				_logger.log(
 					Logger.LOG_DEBUG,
-					"Ignoring url " + url + "Unknown protocol " +
+					"Ignoring URL " + url + " because of unknown protocol " +
 						url.getProtocol());
 			}
 
