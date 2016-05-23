@@ -86,8 +86,8 @@ public class CalendarDefaultPolicy {
 
 		_sapEntryLocalService.addSAPEntry(
 			_userLocalService.getDefaultUserId(companyId),
-			allowedServiceSignatures, true, true,
-			_SAP_ENTRY_NAME, titleMap, new ServiceContext());
+			allowedServiceSignatures, true, true, _SAP_ENTRY_NAME, titleMap,
+			new ServiceContext());
 	}
 
 	@Deactivate
