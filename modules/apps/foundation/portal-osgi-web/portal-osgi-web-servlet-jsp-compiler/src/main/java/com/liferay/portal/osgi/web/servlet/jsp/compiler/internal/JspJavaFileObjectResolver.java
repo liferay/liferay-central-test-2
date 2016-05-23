@@ -257,8 +257,8 @@ public class JspJavaFileObjectResolver implements JavaFileObjectResolver {
 				if ((enumeration == null) ||
 					((enumeration != null) && !enumeration.hasMoreElements())) {
 
-					// This is just a fallback to make WebSphere happy when
-					// looking for some resources during JSP compilation process
+					// This is a fallback so that WebSphere can find resources
+					// during the JSP compilation process
 
 					enumeration = classLoader.getResources(
 						path + StringPool.SLASH);
