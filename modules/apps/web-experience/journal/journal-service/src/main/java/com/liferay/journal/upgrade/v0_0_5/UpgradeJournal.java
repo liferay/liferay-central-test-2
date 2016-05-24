@@ -247,8 +247,8 @@ public class UpgradeJournal extends UpgradeProcess {
 	protected void doUpgrade() throws Exception {
 		updateJournalArticles();
 
-		addDDMTemplateLinks();
 		addDDMStorageLinks();
+		addDDMTemplateLinks();
 	}
 
 	protected String getContent(String fileName) {
