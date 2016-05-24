@@ -159,8 +159,7 @@ public class RatingsTag extends IncludeTag {
 
 	private static final String _PAGE = "/html/taglib/ui/ratings/page.jsp";
 
-	private static final Log _log = LogFactoryUtil.getLog(
-		RatingsTag.class);
+	private static final Log _log = LogFactoryUtil.getLog(RatingsTag.class);
 
 	private String _className;
 	private long _classPK;
