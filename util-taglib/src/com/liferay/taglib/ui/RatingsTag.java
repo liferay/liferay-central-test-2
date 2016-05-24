@@ -118,7 +118,7 @@ public class RatingsTag extends IncludeTag {
 			}
 			catch (PortalException pe) {
 				_log.error(
-					"Unable to obtain rating type for group " +
+					"Unable to get ratings type for group " +
 						group.getGroupId());
 			}
 		}
