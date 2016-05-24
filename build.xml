@@ -627,7 +627,6 @@
 			use="yes"
 			windowtitle="Liferay ${lp.version} ${module.dir} API"
 		>
-
 			<group packages="com.liferay.portal.*:com.liferay.counter.*:com.liferay.mail.*" title="Portal Services" />
 			<group packages="com.liferay.portal.kernel.*" title="Portal Kernel" />
 			<group packages="com.liferay.*" title="Portlet Services" />
