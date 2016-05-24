@@ -301,10 +301,8 @@ public class UpgradeJournal extends UpgradeProcess {
 			null, UpgradeJournal.class.getClassLoader(),
 			"/META-INF/resource-actions/journal_ddm_composite_models.xml");
 
-		String portletId = JournalPortletKeys.JOURNAL;
-
 		List<String> modelNames = _resourceActions.getPortletModelResources(
-			portletId);
+			JournalPortletKeys.JOURNAL);
 
 		for (String modelName : modelNames) {
 			List<String> modelActions =
