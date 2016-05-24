@@ -525,8 +525,7 @@ public class LayoutExportController implements ExportController {
 						portletDataContext));
 
 				_portletExportController.exportPortlet(
-					portletDataContext, layout, portletsElement,
-					permissions,
+					portletDataContext, layout, portletsElement, permissions,
 					exportPortletControlsMap.get(
 						PortletDataHandlerKeys.PORTLET_ARCHIVED_SETUPS),
 					exportPortletControlsMap.get(
