@@ -3249,7 +3249,7 @@ org.apache.catalina.startup.ClassLoaderFactory.level=INFO]]>
 			<if>
 				<equals arg1="${app.server.type}" arg2="tomcat" />
 				<then>
-					<wait-for-app-server-startup-message />
+					<wait-for-app-server-log />
 				</then>
 			</if>
 
@@ -3329,7 +3329,7 @@ org.apache.catalina.startup.ClassLoaderFactory.level=INFO]]>
 		</sequential>
 	</macrodef>
 
-	<macrodef name="wait-for-app-server-startup-message">
+	<macrodef name="wait-for-app-server-log">
 		<sequential>
 			<local name="app.server.log.file.path" />
 
@@ -3339,7 +3339,7 @@ org.apache.catalina.startup.ClassLoaderFactory.level=INFO]]>
 
 			<record action="start" name="${app.server.log.file.path}" />
 
-			<local name="app.server.timed.out.message" />
+			<local name="wait.for.app.server.log.timed.out.message" />
 
 			<beanshell>
 				<![CDATA[
@@ -3368,7 +3368,7 @@ org.apache.catalina.startup.ClassLoaderFactory.level=INFO]]>
 						}
 
 						if (second >= 900) {
-							project.setProperty("app.server.timed.out.message", "Unable to find startup message after 15 minutes.");
+							project.setProperty("wait.for.app.server.log.timed.out.message", "Unable to find startup message after 15 minutes.");
 
 							break;
 						}
@@ -3385,9 +3385,9 @@ org.apache.catalina.startup.ClassLoaderFactory.level=INFO]]>
 			<delete file="${app.server.log.file.path}" />
 
 			<if>
-				<isset property="app.server.timed.out.message" />
+				<isset property="wait.for.app.server.log.timed.out.message" />
 				<then>
-					<fail message="${app.server.timed.out.message}" />
+					<fail message="${wait.for.app.server.log.timed.out.message}" />
 				</then>
 			</if>
 		</sequential>
