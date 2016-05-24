@@ -71,17 +71,17 @@ public class UpgradeJournal extends UpgradeProcess {
 		DDMStorageLinkLocalService ddmStorageLinkLocalService,
 		DDMTemplateLinkLocalService ddmTemplateLinkLocalService,
 		DefaultDDMStructureHelper defaultDDMStructureHelper,
-		GroupLocalService groupLocalService, ResourceActions resourceActions,
+		GroupLocalService groupLocalService,
 		ResourceActionLocalService resourceActionLocalService,
-		UserLocalService userLocalService) {
+		ResourceActions resourceActions, UserLocalService userLocalService) {
 
 		_companyLocalService = companyLocalService;
 		_ddmStorageLinkLocalService = ddmStorageLinkLocalService;
 		_ddmTemplateLinkLocalService = ddmTemplateLinkLocalService;
 		_defaultDDMStructureHelper = defaultDDMStructureHelper;
 		_groupLocalService = groupLocalService;
-		_resourceActions = resourceActions;
 		_resourceActionLocalService = resourceActionLocalService;
+		_resourceActions = resourceActions;
 		_userLocalService = userLocalService;
 	}
 
