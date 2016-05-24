@@ -86,12 +86,12 @@ public class PortletRatingsDefinitionUtil {
 			PortletPreferences companyPortletPreferences =
 				PrefsPropsUtil.getPreferences(companyId);
 
-			String type = companyPortletPreferences.getValue(
+			String value = companyPortletPreferences.getValue(
 				propertyKey, defaultRatingsType.getValue());
 
-			type = groupTypeSettings.getProperty(propertyKey, type);
+			value = groupTypeSettings.getProperty(propertyKey, value);
 
-			return RatingsType.parse(type);
+			return RatingsType.parse(value);
 		}
 
 		return null;
