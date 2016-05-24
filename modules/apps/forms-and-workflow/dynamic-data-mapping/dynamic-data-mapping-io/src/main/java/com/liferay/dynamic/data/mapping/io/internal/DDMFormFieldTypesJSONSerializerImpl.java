@@ -111,18 +111,16 @@ public class DDMFormFieldTypesJSONSerializerImpl
 				ddmFormFieldTypeProperties, "ddm.form.field.type.js.module",
 				"liferay-ddm-form-renderer-field"));
 
-		String labelKey = MapUtil.getString(
+		String label = MapUtil.getString(
 			ddmFormFieldTypeProperties, "ddm.form.field.type.label");
 
-		if (Validator.isNotNull(labelKey)) {
+		if (Validator.isNotNull(label)) {
 			Locale locale = LocaleThreadLocal.getThemeDisplayLocale();
 
 			ResourceBundle resourceBundle = ResourceBundleUtil.getBundle(
 				"content.Language", locale, ddmFormFieldType.getClass());
 
-			String translatedLabel = LanguageUtil.get(resourceBundle, labelKey);
-
-			jsonObject.put("label", translatedLabel);
+			jsonObject.put("label", LanguageUtil.get(resourceBundle, label));
 		}
 
 		jsonObject.put("name", ddmFormFieldType.getName());
