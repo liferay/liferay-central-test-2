@@ -420,7 +420,7 @@
 		<execute macro="BlogsNavigator#gotoConfigurationScopePG" />
 
 		<execute macro="BlogsConfiguration#selectScopePG">
-			<var name="scopeSelection" value="Liferay" />
+			<var name="scopeSelection" value="Liferay DXP" />
 		</execute>
 
 		<execute macro="Navigator#gotoPage">
