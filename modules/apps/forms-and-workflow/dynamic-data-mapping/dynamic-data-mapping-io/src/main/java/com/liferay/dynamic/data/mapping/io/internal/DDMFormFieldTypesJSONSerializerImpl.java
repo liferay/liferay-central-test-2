@@ -120,8 +120,7 @@ public class DDMFormFieldTypesJSONSerializerImpl
 			ResourceBundle resourceBundle = ResourceBundleUtil.getBundle(
 				"content.Language", locale, ddmFormFieldType.getClass());
 
-			String translatedLabel = LanguageUtil.get(
-				resourceBundle, labelKey, StringPool.BLANK);
+			String translatedLabel = LanguageUtil.get(resourceBundle, labelKey);
 
 			jsonObject.put("label", translatedLabel);
 		}
