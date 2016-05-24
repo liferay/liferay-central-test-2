@@ -68,18 +68,18 @@ public class ExportImportConfigurationParameterMapFactory {
 		}
 
 		if (!parameterMap.containsKey(
-				PortletDataHandlerKeys.LAYOUT_SET_PROTOTYPE_SETTINGS)) {
-
-			parameterMap.put(
-				PortletDataHandlerKeys.LAYOUT_SET_PROTOTYPE_SETTINGS,
-				new String[] {Boolean.FALSE.toString()});
-		}
-
-		if (!parameterMap.containsKey(
 				PortletDataHandlerKeys.LAYOUT_SET_PROTOTYPE_LINK_ENABLED)) {
 
 			parameterMap.put(
 				PortletDataHandlerKeys.LAYOUT_SET_PROTOTYPE_LINK_ENABLED,
+				new String[] {Boolean.FALSE.toString()});
+		}
+
+		if (!parameterMap.containsKey(
+				PortletDataHandlerKeys.LAYOUT_SET_PROTOTYPE_SETTINGS)) {
+
+			parameterMap.put(
+				PortletDataHandlerKeys.LAYOUT_SET_PROTOTYPE_SETTINGS,
 				new String[] {Boolean.FALSE.toString()});
 		}
 
@@ -204,19 +204,6 @@ public class ExportImportConfigurationParameterMapFactory {
 			PortletDataHandlerKeys.IGNORE_LAST_PUBLISH_DATE,
 			new String[] {String.valueOf(ignoreLastPublishDateParameter)});
 
-		// Layout set prototype settings
-
-		boolean layoutSetPrototypeSettingsParameter = false;
-
-		if (layoutSetPrototypeLinkEnabled != null) {
-			layoutSetPrototypeSettingsParameter =
-				layoutSetPrototypeLinkEnabled.booleanValue();
-		}
-
-		parameterMap.put(
-			PortletDataHandlerKeys.LAYOUT_SET_PROTOTYPE_SETTINGS,
-			new String[] {String.valueOf(layoutSetPrototypeSettingsParameter)});
-
 		// Layout set prototype link enabled
 
 		boolean layoutSetPrototypeLinkEnabledParameter = false;
@@ -231,6 +218,19 @@ public class ExportImportConfigurationParameterMapFactory {
 			new String[] {
 				String.valueOf(layoutSetPrototypeLinkEnabledParameter)
 			});
+
+		// Layout set prototype settings
+
+		boolean layoutSetPrototypeSettingsParameter = false;
+
+		if (layoutSetPrototypeLinkEnabled != null) {
+			layoutSetPrototypeSettingsParameter =
+				layoutSetPrototypeLinkEnabled.booleanValue();
+		}
+
+		parameterMap.put(
+			PortletDataHandlerKeys.LAYOUT_SET_PROTOTYPE_SETTINGS,
+			new String[] {String.valueOf(layoutSetPrototypeSettingsParameter)});
 
 		// Layout set settings
 
