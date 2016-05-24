@@ -219,7 +219,7 @@
 <!--DOCUMENT_EXTRACTED_METADATA-->
 <tr>
 	<td>DOCUMENT_EXTRACTED_METADATA_FIELD</td>
-	<td>//div[@id='documentLibraryAssetMetadataPanelContent']/div/div/div/label[contains(.,'${key_metadataLabel}')]/../../div[contains(.,'${key_metadataData}')]</td>
+	<td>//div[contains(@id,'documentLibraryMetadataPanel')]//label[contains(.,'${key_metadataLabel}')]/../../div[contains(.,'${key_metadataData}')]</td>
 	<td></td>
 </tr>
 <tr>
