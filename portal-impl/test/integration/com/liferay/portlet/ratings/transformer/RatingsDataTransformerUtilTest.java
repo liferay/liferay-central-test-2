@@ -64,11 +64,13 @@ public class RatingsDataTransformerUtilTest {
 		oldPortletPreferences.setValue(
 			"com.liferay.bookmarks.model.BookmarksEntry_RatingsType", "like");
 		oldPortletPreferences.setValue(
-			"com.liferay.journal.model.JournalArticle_RatingsType", "like");
-		oldPortletPreferences.setValue(
 			"com.liferay.document.library.kernel.model.DLFileEntry" +
 				"_RatingsType",
 			"like");
+		oldPortletPreferences.setValue(
+			"com.liferay.journal.model.JournalArticle_RatingsType", "like");
+		oldPortletPreferences.setValue(
+			"com.liferay.knowledge.base.model.KBArticle_RatingsType", "like");
 		oldPortletPreferences.setValue(
 			"com.liferay.message.boards.kernel.model.MBDiscussion" +
 				"_RatingsType",
@@ -78,8 +80,6 @@ public class RatingsDataTransformerUtilTest {
 			"like");
 		oldPortletPreferences.setValue(
 			"com.liferay.wiki.model.WikiPage_RatingsType", "like");
-		oldPortletPreferences.setValue(
-			"com.liferay.knowledge.base.model.KBArticle_RatingsType", "like");
 
 		UnicodeProperties unicodeProperties = new UnicodeProperties();
 
@@ -88,11 +88,13 @@ public class RatingsDataTransformerUtilTest {
 		unicodeProperties.setProperty(
 			"com.liferay.bookmarks.model.BookmarksEntry_RatingsType", "stars");
 		unicodeProperties.setProperty(
-			"com.liferay.journal.model.JournalArticle_RatingsType", "stars");
-		unicodeProperties.setProperty(
 			"com.liferay.document.library.kernel.model.DLFileEntry" +
 				"_RatingsType",
 			"stars");
+		unicodeProperties.setProperty(
+			"com.liferay.journal.model.JournalArticle_RatingsType", "stars");
+		unicodeProperties.setProperty(
+			"com.liferay.knowledge.base.model.KBArticle_RatingsType", "stars");
 		unicodeProperties.setProperty(
 			"com.liferay.message.boards.kernel.model.MBDiscussion" +
 				"_RatingsType",
@@ -102,8 +104,6 @@ public class RatingsDataTransformerUtilTest {
 			"stars");
 		unicodeProperties.setProperty(
 			"com.liferay.wiki.model.WikiPage_RatingsType", "stars");
-		unicodeProperties.setProperty(
-			"com.liferay.knowledge.base.model.KBArticle_RatingsType", "stars");
 
 		RatingsDataTransformerUtil.transformCompanyRatingsData(
 			1, oldPortletPreferences, unicodeProperties);
@@ -122,11 +122,13 @@ public class RatingsDataTransformerUtilTest {
 		oldUnicodeProperties.setProperty(
 			"com.liferay.bookmarks.model.BookmarksEntry_RatingsType", "like");
 		oldUnicodeProperties.setProperty(
-			"com.liferay.journal.model.JournalArticle_RatingsType", "like");
-		oldUnicodeProperties.setProperty(
 			"com.liferay.document.library.kernel.model.DLFileEntry" +
 				"_RatingsType",
 			"like");
+		oldUnicodeProperties.setProperty(
+			"com.liferay.journal.model.JournalArticle_RatingsType", "like");
+		oldUnicodeProperties.setProperty(
+			"com.liferay.knowledge.base.model.KBArticle_RatingsType", "like");
 		oldUnicodeProperties.setProperty(
 			"com.liferay.message.boards.kernel.model.MBDiscussion" +
 				"_RatingsType",
@@ -136,8 +138,6 @@ public class RatingsDataTransformerUtilTest {
 			"like");
 		oldUnicodeProperties.setProperty(
 			"com.liferay.wiki.model.WikiPage_RatingsType", "like");
-		oldUnicodeProperties.setProperty(
-			"com.liferay.knowledge.base.model.KBArticle_RatingsType", "like");
 
 		UnicodeProperties unicodeProperties = new UnicodeProperties();
 
@@ -146,11 +146,13 @@ public class RatingsDataTransformerUtilTest {
 		unicodeProperties.setProperty(
 			"com.liferay.bookmarks.model.BookmarksEntry_RatingsType", "stars");
 		unicodeProperties.setProperty(
-			"com.liferay.journal.model.JournalArticle_RatingsType", "stars");
-		unicodeProperties.setProperty(
 			"com.liferay.document.library.kernel.model.DLFileEntry" +
 				"_RatingsType",
 			"stars");
+		unicodeProperties.setProperty(
+			"com.liferay.journal.model.JournalArticle_RatingsType", "stars");
+		unicodeProperties.setProperty(
+			"com.liferay.knowledge.base.model.KBArticle_RatingsType", "stars");
 		unicodeProperties.setProperty(
 			"com.liferay.message.boards.kernel.model.MBDiscussion" +
 				"_RatingsType",
@@ -160,8 +162,6 @@ public class RatingsDataTransformerUtilTest {
 			"stars");
 		unicodeProperties.setProperty(
 			"com.liferay.wiki.model.WikiPage_RatingsType", "stars");
-		unicodeProperties.setProperty(
-			"com.liferay.knowledge.base.model.KBArticle_RatingsType", "stars");
 
 		RatingsDataTransformerUtil.transformGroupRatingsData(
 			1, oldUnicodeProperties, unicodeProperties);
