@@ -111,8 +111,6 @@ public class DDMFormFieldTypesJSONSerializerImpl
 				ddmFormFieldTypeProperties, "ddm.form.field.type.js.module",
 				"liferay-ddm-form-renderer-field"));
 
-		jsonObject.put("name", ddmFormFieldType.getName());
-
 		String labelKey = MapUtil.getString(
 			ddmFormFieldTypeProperties, "ddm.form.field.type.label");
 
@@ -127,6 +125,8 @@ public class DDMFormFieldTypesJSONSerializerImpl
 
 			jsonObject.put("label", translatedLabel);
 		}
+
+		jsonObject.put("name", ddmFormFieldType.getName());
 
 		DDMFormFieldTypeSettingsSerializerHelper
 			ddmFormFieldTypeSettingsSerializerHelper =
