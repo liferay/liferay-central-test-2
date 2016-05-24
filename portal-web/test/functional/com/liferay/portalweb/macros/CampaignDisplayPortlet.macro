@@ -19,11 +19,6 @@
 		<execute function="ClickNoError" locator1="ContentRow#ENTRY_CONTENT_ENTRY_NAME_LINK" />
 
 		<execute function="SelectFrame" value1="relative=top" />
-		<execute function="SelectFrame" locator1="IFrame#CONFIGURATION" />
-
-		<execute function="ClickNoError" locator1="CampaignContentDisplay#RULE_PANEL_ADD_ROW_BUTTON" />
-
-		<execute function="SelectFrame" value1="relative=top" />
 	</command>
 
 	<command name="configureOtherwiseRule">
