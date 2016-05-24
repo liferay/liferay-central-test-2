@@ -96,10 +96,10 @@ public class JournalArticleStagedModelDataHandlerTest
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(liveGroup.getGroupId());
 
-		serviceContext.setCommand(Constants.ADD);
-		serviceContext.setLayoutFullURL("http://localhost");
 		serviceContext.setAttribute(
 			"articleResourceUuid", journalArticle.getArticleResourceUuid());
+		serviceContext.setCommand(Constants.ADD);
+		serviceContext.setLayoutFullURL("http://localhost");
 
 		JournalArticle importJournalArticle = JournalTestUtil.addArticle(
 			liveGroup.getGroupId(), journalArticle.getFolderId(),
