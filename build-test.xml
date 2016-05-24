@@ -4183,11 +4183,11 @@ go]]></replacevalue>
 							<else>
 								<var name="osgi.module.dir" unset="true" />
 
-								<dirset dir="${project.dir}/modules" id="dir.id">
+								<dirset dir="${project.dir}/modules" id="osgi.module.dir.id">
 									<include name="**/@{osgi.module}" />
 								</dirset>
 
-								<property name="osgi.module.dir" refid="dir.id" />
+								<property name="osgi.module.dir" refid="osgi.module.dir.id" />
 
 								<gradle-execute dir="modules/${osgi.module.dir}" task="deploy" />
 							</else>
