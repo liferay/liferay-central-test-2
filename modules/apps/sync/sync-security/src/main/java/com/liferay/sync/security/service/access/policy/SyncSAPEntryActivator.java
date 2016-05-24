@@ -42,9 +42,9 @@ import org.osgi.service.component.annotations.Reference;
  * @author Tomas Polesovsky
  */
 @Component(immediate = true)
-public class SyncPolicies {
+public class SyncSAPEntryActivator {
 
-	public static final Object[][] POLICIES = new Object[][] {
+	public static final Object[][] SAP_ENTRY_OBJECT_ARRAYS = new Object[][] {
 		{
 			"SYNC_DEFAULT",
 			"com.liferay.sync.service.SyncDLObjectService#getSyncContext", true
@@ -59,11 +59,13 @@ public class SyncPolicies {
 			new PolicyPortalInstanceLifecycleListener(), null);
 	}
 
-	protected void create(long companyId) throws PortalException {
-		for (Object[] policy : POLICIES) {
-			String name = String.valueOf(policy[0]);
-			String allowedServiceSignatures = String.valueOf(policy[1]);
-			boolean defaultSAPEntry = GetterUtil.getBoolean(policy[2]);
+	protected void addSAPEntry(long companyId) throws PortalException {
+		for (Object[] sapEntryObjectArray : SAP_ENTRY_OBJECT_ARRAYS) {
+			String name = String.valueOf(sapEntryObjectArray[0]);
+			String allowedServiceSignatures = String.valueOf(
+				sapEntryObjectArray[1]);
+			boolean defaultSAPEntry = GetterUtil.getBoolean(
+				sapEntryObjectArray[2]);
 
 			SAPEntry sapEntry = _sapEntryLocalService.fetchSAPEntry(
 				companyId, name);
@@ -90,7 +92,8 @@ public class SyncPolicies {
 		}
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(SyncPolicies.class);
+	private static final Log _log = LogFactoryUtil.getLog(
+		SyncSAPEntryActivator.class);
 
 	@Reference(unbind = "-")
 	private SAPEntryLocalService _sapEntryLocalService;
@@ -106,7 +109,7 @@ public class SyncPolicies {
 
 		public void portalInstanceRegistered(Company company) throws Exception {
 			try {
-				create(company.getCompanyId());
+				addSAPEntry(company.getCompanyId());
 			}
 			catch (PortalException pe) {
 				_log.error(
