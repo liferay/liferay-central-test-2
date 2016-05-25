@@ -799,10 +799,12 @@ public class ResourceActionsImpl implements ResourceActions {
 			new Comparator<Element>() {
 
 				public int compare(Element element1, Element element2) {
-					String textTrim = GetterUtil.getString(
+					String textTrim1 = GetterUtil.getString(
 						element1.getTextTrim());
+					String textTrim2 = GetterUtil.getString(
+						element2.getTextTrim());
 
-					return textTrim.compareTo(element2.getTextTrim());
+					return textTrim1.compareTo(textTrim2);
 				}
 
 			});
