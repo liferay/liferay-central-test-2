@@ -218,7 +218,7 @@
 
 		<property name="dist.dir" value="${releng.app.dir}/dist" />
 
-		<pathconvert pathsep="," property="app.module.dirs.ce.excludes">
+		<pathconvert pathsep="," property="app.module.dirs.excludes">
 			<chainedmapper>
 				<globmapper from="${modules.dir}${file.separator}*" to="*" />
 
@@ -242,7 +242,7 @@
 		<pathconvert pathsep="," property="app.module.dirs">
 			<globmapper from="${modules.dir}${file.separator}*" to="*" />
 			<path>
-				<dirset dir="${basedir}" excludes="**/*-test*,${app.module.dirs.ce.excludes}" includes="apps/${app.name}/**">
+				<dirset dir="${basedir}" excludes="**/*-test*,${app.module.dirs.excludes}" includes="apps/${app.name}/**">
 					<present targetdir="${basedir}">
 						<mapper from="*" to="*/.lfrbuild-portal" type="glob" />
 					</present>
