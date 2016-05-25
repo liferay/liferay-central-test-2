@@ -158,26 +158,6 @@ public class DBMetadata {
 		return false;
 	}
 
-	private boolean _hasTable(String tableName) throws Exception {
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			DatabaseMetaData metadata = _connection.getMetaData();
-
-			rs = metadata.getTables(null, null, tableName, null);
-
-			while (rs.next()) {
-				return true;
-			}
-		}
-		finally {
-			DataAccess.cleanUp(ps, rs);
-		}
-
-		return false;
-	}
-
 	private int _getColumnDataType(Class<?> tableClass, String columnName)
 		throws Exception {
 
@@ -194,26 +174,6 @@ public class DBMetadata {
 		throw new UpgradeException(
 			"Table class " + tableClass + " does not have column " +
 				columnName);
-	}
-
-	private boolean _isColumnNullable(String typeName) {
-		typeName = typeName.trim();
-
-		int i = typeName.indexOf("null");
-
-		if (i == -1) {
-			return false;
-		}
-
-		if ((i > 0) && !Character.isSpaceChar(typeName.charAt(i - 1))) {
-			return false;
-		}
-
-		if ((i + 4) < typeName.length()) {
-			return false;
-		}
-
-		return true;
 	}
 
 	private int _getColumnSize(String columnType) throws UpgradeException {
@@ -238,6 +198,46 @@ public class DBMetadata {
 		}
 
 		return -1;
+	}
+
+	private boolean _hasTable(String tableName) throws Exception {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			DatabaseMetaData metadata = _connection.getMetaData();
+
+			rs = metadata.getTables(null, null, tableName, null);
+
+			while (rs.next()) {
+				return true;
+			}
+		}
+		finally {
+			DataAccess.cleanUp(ps, rs);
+		}
+
+		return false;
+	}
+
+	private boolean _isColumnNullable(String typeName) {
+		typeName = typeName.trim();
+
+		int i = typeName.indexOf("null");
+
+		if (i == -1) {
+			return false;
+		}
+
+		if ((i > 0) && !Character.isSpaceChar(typeName.charAt(i - 1))) {
+			return false;
+		}
+
+		if ((i + 4) < typeName.length()) {
+			return false;
+		}
+
+		return true;
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(DBMetadata.class);
