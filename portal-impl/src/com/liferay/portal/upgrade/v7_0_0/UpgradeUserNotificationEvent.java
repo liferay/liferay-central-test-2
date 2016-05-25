@@ -21,7 +21,7 @@ import com.liferay.portal.upgrade.v7_0_0.util.UserNotificationEventTable;
 /**
  * @author Adolfo Pérez
  */
-public class UpgradeNotifications extends UpgradeProcess {
+public class UpgradeUserNotificationEvent extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
