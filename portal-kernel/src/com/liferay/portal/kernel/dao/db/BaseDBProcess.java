@@ -17,6 +17,7 @@ package com.liferay.portal.kernel.dao.db;
 import com.liferay.portal.kernel.util.LoggingTimer;
 
 import java.io.IOException;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 
