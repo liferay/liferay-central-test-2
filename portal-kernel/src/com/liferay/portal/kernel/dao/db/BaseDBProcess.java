@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.LoggingTimer;
 
 import java.io.IOException;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -121,6 +120,15 @@ public abstract class BaseDBProcess implements DBProcess {
 		DBMetadata dbMetadata = new DBMetadata(connection);
 
 		return dbMetadata.hasColumn(tableName, columnName);
+	}
+
+	protected boolean hasColumnType(
+			Class<?> tableClass, String columnName, String typeName)
+		throws Exception {
+
+		DBMetadata dbMetadata = new DBMetadata(connection);
+
+		return dbMetadata.hasColumnType(tableClass, columnName, typeName);
 	}
 
 	protected boolean hasRows(Connection connection, String tableName) {
