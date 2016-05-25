@@ -35,9 +35,9 @@ import java.util.regex.Pattern;
 /**
  * @author Adolfo Pérez
  */
-public class DBMetadata {
+public class DBInspector {
 
-	public DBMetadata(Connection connection) {
+	public DBInspector(Connection connection) {
 		_connection = connection;
 	}
 
@@ -240,7 +240,7 @@ public class DBMetadata {
 		return true;
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(DBMetadata.class);
+	private static final Log _log = LogFactoryUtil.getLog(DBInspector.class);
 
 	private static final Pattern _columnSizePattern = Pattern.compile(
 		"^\\w+(?:\\((\\d+)\\))?.*", Pattern.CASE_INSENSITIVE);
