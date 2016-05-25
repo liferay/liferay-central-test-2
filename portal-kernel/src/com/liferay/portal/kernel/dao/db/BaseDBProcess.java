@@ -106,32 +106,32 @@ public abstract class BaseDBProcess implements DBProcess {
 	}
 
 	protected boolean doHasTable(String tableName) throws Exception {
-		DBMetadata dbMetadata = new DBMetadata(connection);
+		DBInspector dbInspector = new DBInspector(connection);
 
-		return dbMetadata.hasTable(tableName, true);
+		return dbInspector.hasTable(tableName, true);
 	}
 
 	protected boolean hasColumn(String tableName, String columnName)
 		throws Exception {
 
-		DBMetadata dbMetadata = new DBMetadata(connection);
+		DBInspector dbInspector = new DBInspector(connection);
 
-		return dbMetadata.hasColumn(tableName, columnName);
+		return dbInspector.hasColumn(tableName, columnName);
 	}
 
 	protected boolean hasColumnType(
 			Class<?> tableClass, String columnName, String columnType)
 		throws Exception {
 
-		DBMetadata dbMetadata = new DBMetadata(connection);
+		DBInspector dbInspector = new DBInspector(connection);
 
-		return dbMetadata.hasColumnType(tableClass, columnName, columnType);
+		return dbInspector.hasColumnType(tableClass, columnName, columnType);
 	}
 
 	protected boolean hasRows(Connection connection, String tableName) {
-		DBMetadata dbMetadata = new DBMetadata(connection);
+		DBInspector dbInspector = new DBInspector(connection);
 
-		return dbMetadata.hasRows(tableName);
+		return dbInspector.hasRows(tableName);
 	}
 
 	protected boolean hasRows(String tableName) throws Exception {
@@ -139,9 +139,9 @@ public abstract class BaseDBProcess implements DBProcess {
 	}
 
 	protected boolean hasTable(String tableName) throws Exception {
-		DBMetadata dbMetadata = new DBMetadata(connection);
+		DBInspector dbInspector = new DBInspector(connection);
 
-		return dbMetadata.hasTable(tableName);
+		return dbInspector.hasTable(tableName);
 	}
 
 	protected Connection connection;
