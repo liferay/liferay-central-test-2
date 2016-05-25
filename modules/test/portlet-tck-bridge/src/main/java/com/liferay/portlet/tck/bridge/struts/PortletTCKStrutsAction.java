@@ -171,14 +171,14 @@ public class PortletTCKStrutsAction extends BaseStrutsAction {
 			String jobTitle = StringPool.BLANK;
 			long[] groupIds = null;
 			long[] organizationIds = null;
-			long[] roleIds = null;
-			long[] userGroupIds = null;
-			boolean sendEmail = false;
 
 			Role powerUserRole = RoleLocalServiceUtil.getRole(
 				companyId, RoleConstants.POWER_USER);
 
-			roleIds = new long[] {powerUserRole.getRoleId()};
+			long[] roleIds = new long[] {powerUserRole.getRoleId()};
+
+			long[] userGroupIds = null;
+			boolean sendEmail = false;
 
 			ServiceContext serviceContext = new ServiceContext();
 
