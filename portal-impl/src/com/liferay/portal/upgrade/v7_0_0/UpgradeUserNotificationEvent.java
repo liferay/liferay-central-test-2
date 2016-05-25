@@ -24,14 +24,20 @@ public class UpgradeUserNotificationEvent extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		if (!hasColumnType(
+
+		// Check the column type because this class is also used in
+		// UpgradeProcess_7_0_1
+
+		if (hasColumnType(
 				UserNotificationEventTable.class, "type_",
 				"VARCHAR(200) null")) {
-
-			alter(
-				UserNotificationEventTable.class,
-				new AlterColumnType("type_", "VARCHAR(200) null"));
+				
+			return;
 		}
+
+		alter(
+			UserNotificationEventTable.class,
+			new AlterColumnType("type_", "VARCHAR(200) null"));
 	}
 
 }
