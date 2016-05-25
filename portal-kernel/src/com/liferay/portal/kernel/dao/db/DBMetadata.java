@@ -82,9 +82,9 @@ public class DBMetadata {
 				return false;
 			}
 
-			int columnType = getColumnType(tableClass, columnName);
-			int columnTypeSize = parseColumnTypeSize(typeName);
-			boolean columnTypeNullable = isColumnTypeNullable(typeName);
+			int columnType = _getColumnType(tableClass, columnName);
+			int columnTypeSize = _parseColumnTypeSize(typeName);
+			boolean columnTypeNullable = _isColumnTypeNullable(typeName);
 
 			int columnSize = rs.getInt("COLUMN_SIZE");
 			int dataType = rs.getInt("DATA_TYPE");
@@ -138,16 +138,16 @@ public class DBMetadata {
 		throws Exception {
 
 		if (caseSensitive) {
-			if (doHasTable(tableName)) {
+			if (_hasTable(tableName)) {
 				return true;
 			}
 
 			return false;
 		}
 
-		if (doHasTable(StringUtil.toLowerCase(tableName)) ||
-			doHasTable(StringUtil.toUpperCase(tableName)) ||
-			doHasTable(tableName)) {
+		if (_hasTable(StringUtil.toLowerCase(tableName)) ||
+			_hasTable(StringUtil.toUpperCase(tableName)) ||
+			_hasTable(tableName)) {
 
 			return true;
 		}
@@ -155,7 +155,7 @@ public class DBMetadata {
 		return false;
 	}
 
-	protected boolean doHasTable(String tableName) throws Exception {
+	private boolean _hasTable(String tableName) throws Exception {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
@@ -175,7 +175,7 @@ public class DBMetadata {
 		return false;
 	}
 
-	protected int getColumnType(Class<?> tableClass, String columnName)
+	private int _getColumnType(Class<?> tableClass, String columnName)
 		throws Exception {
 
 		Field tableColumnsField = tableClass.getField("TABLE_COLUMNS");
@@ -193,7 +193,7 @@ public class DBMetadata {
 				" has no row in TABLE_COLUMNS for column " + columnName);
 	}
 
-	protected boolean isColumnTypeNullable(String typeName) {
+	private boolean _isColumnTypeNullable(String typeName) {
 		typeName = typeName.trim();
 
 		int i = typeName.indexOf("null");
@@ -213,7 +213,7 @@ public class DBMetadata {
 		return true;
 	}
 
-	protected int parseColumnTypeSize(String typeName) throws UpgradeException {
+	private int _parseColumnTypeSize(String typeName) throws UpgradeException {
 		Matcher matcher = _columnTypeSizePattern.matcher(typeName);
 
 		if (!matcher.matches()) {
