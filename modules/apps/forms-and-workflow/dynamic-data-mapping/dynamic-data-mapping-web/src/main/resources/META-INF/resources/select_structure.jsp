@@ -19,8 +19,8 @@
 <%
 long groupId = ParamUtil.getLong(request, "groupId", scopeGroupId);
 long classPK = ParamUtil.getLong(request, "classPK");
-String eventName = ParamUtil.getString(request, "eventName", "selectStructure");
 String displayStyle = ParamUtil.getString(request, "displayStyle", "list");
+String eventName = ParamUtil.getString(request, "eventName", "selectStructure");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
