@@ -66,7 +66,7 @@ public class DBMetadata {
 	}
 
 	public boolean hasColumnType(
-			Class<?> tableClass, String columnName, String typeName)
+			Class<?> tableClass, String columnName, String columnType)
 		throws Exception {
 
 		Field tableNameField = tableClass.getField("TABLE_NAME");
@@ -82,26 +82,29 @@ public class DBMetadata {
 				return false;
 			}
 
-			int columnType = _getColumnType(tableClass, columnName);
-			int columnTypeSize = _parseColumnTypeSize(typeName);
-			boolean columnTypeNullable = _isColumnTypeNullable(typeName);
+			int expectedColumnDataType = _getColumnDataType(
+				tableClass, columnName);
+			int expectedColumnSize = _getColumnSize(columnType);
+			boolean expectedColumnNullable = _isColumnNullable(columnType);
 
-			int columnSize = rs.getInt("COLUMN_SIZE");
-			int dataType = rs.getInt("DATA_TYPE");
-			int nullable = rs.getInt("NULLABLE");
+			int actualColumnDataType = rs.getInt("DATA_TYPE");
+			int actualColumnSize = rs.getInt("COLUMN_SIZE");
+			int actualColumnNullable = rs.getInt("NULLABLE");
 
-			if ((columnTypeSize != -1) && (columnTypeSize != columnSize)) {
+			if ((expectedColumnSize != -1) &&
+				(expectedColumnSize != actualColumnSize)) {
+
 				return false;
 			}
 
-			if (dataType != columnType) {
+			if (actualColumnDataType != expectedColumnDataType) {
 				return false;
 			}
 
-			if ((columnTypeNullable &&
-				 (nullable != DatabaseMetaData.columnNullable)) ||
-				(!columnTypeNullable &&
-				 (nullable != DatabaseMetaData.columnNoNulls))) {
+			if ((expectedColumnNullable &&
+				 (actualColumnNullable != DatabaseMetaData.columnNullable)) ||
+				(!expectedColumnNullable &&
+				 (actualColumnNullable != DatabaseMetaData.columnNoNulls))) {
 
 				return false;
 			}
@@ -175,7 +178,7 @@ public class DBMetadata {
 		return false;
 	}
 
-	private int _getColumnType(Class<?> tableClass, String columnName)
+	private int _getColumnDataType(Class<?> tableClass, String columnName)
 		throws Exception {
 
 		Field tableColumnsField = tableClass.getField("TABLE_COLUMNS");
@@ -193,7 +196,7 @@ public class DBMetadata {
 				columnName);
 	}
 
-	private boolean _isColumnTypeNullable(String typeName) {
+	private boolean _isColumnNullable(String typeName) {
 		typeName = typeName.trim();
 
 		int i = typeName.indexOf("null");
@@ -213,23 +216,23 @@ public class DBMetadata {
 		return true;
 	}
 
-	private int _parseColumnTypeSize(String typeName) throws UpgradeException {
-		Matcher matcher = _columnTypeSizePattern.matcher(typeName);
+	private int _getColumnSize(String columnType) throws UpgradeException {
+		Matcher matcher = _columnSizePattern.matcher(columnType);
 
 		if (!matcher.matches()) {
 			return -1;
 		}
 
-		String size = matcher.group(1);
+		String columnSize = matcher.group(1);
 
-		if (Validator.isNotNull(size)) {
+		if (Validator.isNotNull(columnSize)) {
 			try {
-				return Integer.parseInt(size);
+				return Integer.parseInt(columnSize);
 			}
 			catch (NumberFormatException nfe) {
 				throw new UpgradeException(
-					"Invalid SQL type " + typeName +
-						". Type size must be a non negative integer.",
+					"Column type " + columnType +
+						" has an invalid column size " + columnSize,
 					nfe);
 			}
 		}
@@ -239,7 +242,7 @@ public class DBMetadata {
 
 	private static final Log _log = LogFactoryUtil.getLog(DBMetadata.class);
 
-	private static final Pattern _columnTypeSizePattern = Pattern.compile(
+	private static final Pattern _columnSizePattern = Pattern.compile(
 		"^\\w+(?:\\((\\d+)\\))?.*", Pattern.CASE_INSENSITIVE);
 
 	private final Connection _connection;
