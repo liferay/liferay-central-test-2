@@ -90,7 +90,7 @@ public class DBMetadata {
 		return false;
 	}
 
-	public boolean hasType(
+	public boolean hasColumnType(
 			Class<?> tableClass, String columnName, String typeName)
 		throws Exception {
 
