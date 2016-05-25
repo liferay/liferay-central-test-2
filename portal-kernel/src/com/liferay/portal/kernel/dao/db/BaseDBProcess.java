@@ -120,12 +120,12 @@ public abstract class BaseDBProcess implements DBProcess {
 	}
 
 	protected boolean hasColumnType(
-			Class<?> tableClass, String columnName, String typeName)
+			Class<?> tableClass, String columnName, String columnType)
 		throws Exception {
 
 		DBMetadata dbMetadata = new DBMetadata(connection);
 
-		return dbMetadata.hasColumnType(tableClass, columnName, typeName);
+		return dbMetadata.hasColumnType(tableClass, columnName, columnType);
 	}
 
 	protected boolean hasRows(Connection connection, String tableName) {
