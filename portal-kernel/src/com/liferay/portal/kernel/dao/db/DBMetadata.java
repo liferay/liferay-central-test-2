@@ -189,8 +189,8 @@ public class DBMetadata {
 		}
 
 		throw new UpgradeException(
-			"Table class " + tableClass +
-				" has no row in TABLE_COLUMNS for column " + columnName);
+			"Table class " + tableClass + " does not have column " +
+				columnName);
 	}
 
 	private boolean _isColumnTypeNullable(String typeName) {
