@@ -14,7 +14,6 @@
 
 package com.liferay.portal.upgrade.v7_0_0;
 
-import com.liferay.portal.kernel.dao.db.DBMetadata;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.v7_0_0.util.UserNotificationEventTable;
 
@@ -25,9 +24,7 @@ public class UpgradeUserNotificationEvent extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		DBMetadata dbMetadata = new DBMetadata(connection);
-
-		if (!dbMetadata.hasColumnType(
+		if (!hasColumnType(
 				UserNotificationEventTable.class, "type_",
 				"VARCHAR(200) null")) {
 
