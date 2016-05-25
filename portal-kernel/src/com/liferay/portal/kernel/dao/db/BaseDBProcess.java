@@ -14,14 +14,10 @@
 
 package com.liferay.portal.kernel.dao.db;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.LoggingTimer;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.naming.NamingException;
@@ -132,23 +128,9 @@ public abstract class BaseDBProcess implements DBProcess {
 	}
 
 	protected boolean hasRows(Connection connection, String tableName) {
-		try (PreparedStatement ps = connection.prepareStatement(
-				"select count(*) from " + tableName);
-			ResultSet rs = ps.executeQuery()) {
+		DBMetadata dbMetadata = new DBMetadata(connection);
 
-			while (rs.next()) {
-				int count = rs.getInt(1);
-
-				if (count > 0) {
-					return true;
-				}
-			}
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-
-		return false;
+		return dbMetadata.hasRows(tableName);
 	}
 
 	protected boolean hasRows(String tableName) throws Exception {
@@ -162,7 +144,5 @@ public abstract class BaseDBProcess implements DBProcess {
 	}
 
 	protected Connection connection;
-
-	private static final Log _log = LogFactoryUtil.getLog(BaseDBProcess.class);
 
 }
