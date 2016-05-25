@@ -113,7 +113,7 @@ public class UpgradeDynamicDataMappingTest extends PowerMockito {
 		_upgradeDynamicDataMapping = new UpgradeDynamicDataMapping(
 			null, null, null, null, null, _ddmFormValuesJSONDeserializer,
 			_ddmFormValuesJSONSerializer, null, null, null, null, null, null,
-			null, new MockResourceActions(), null, null);
+			null, new TestResourceActions(), null, null);
 	}
 
 	@Test(expected = UpgradeException.class)
@@ -988,7 +988,7 @@ public class UpgradeDynamicDataMappingTest extends PowerMockito {
 
 	private UpgradeDynamicDataMapping _upgradeDynamicDataMapping;
 
-	private static class MockResourceActions implements ResourceActions {
+	private static class TestResourceActions implements ResourceActions {
 
 		public void checkAction(String name, String actionId)
 			throws NoSuchResourceActionException {
