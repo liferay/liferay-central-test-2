@@ -27,7 +27,7 @@ public class UpgradeUserNotificationEvent extends UpgradeProcess {
 	protected void doUpgrade() throws Exception {
 		DBMetadata dbMetadata = new DBMetadata(connection);
 
-		if (!dbMetadata.hasType(
+		if (!dbMetadata.hasColumnType(
 				UserNotificationEventTable.class, "type_",
 				"VARCHAR(200) null")) {
 
