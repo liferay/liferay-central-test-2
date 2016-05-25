@@ -31,7 +31,7 @@ public class UpgradeUserNotificationEvent extends UpgradeProcess {
 		if (hasColumnType(
 				UserNotificationEventTable.class, "type_",
 				"VARCHAR(200) null")) {
-				
+
 			return;
 		}
 

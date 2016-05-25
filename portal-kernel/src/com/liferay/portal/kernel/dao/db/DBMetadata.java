@@ -22,11 +22,13 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.lang.reflect.Field;
+
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -58,51 +60,6 @@ public class DBMetadata {
 		}
 		catch (Exception e) {
 			_log.error(e, e);
-		}
-
-		return false;
-	}
-
-	public boolean hasRows(String tableName) {
-		try (PreparedStatement ps = _connection.prepareStatement(
-				"select count(*) from " + tableName);
-			ResultSet rs = ps.executeQuery()) {
-
-			while (rs.next()) {
-				int count = rs.getInt(1);
-
-				if (count > 0) {
-					return true;
-				}
-			}
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-
-		return false;
-	}
-
-	public boolean hasTable(String tableName) throws Exception {
-		return hasTable(tableName, false);
-	}
-
-	public boolean hasTable(String tableName, boolean caseSensitive)
-		throws Exception {
-
-		if (caseSensitive) {
-			if (doHasTable(tableName)) {
-				return true;
-			}
-
-			return false;
-		}
-
-		if (doHasTable(StringUtil.toLowerCase(tableName)) ||
-			doHasTable(StringUtil.toUpperCase(tableName)) ||
-			doHasTable(tableName)) {
-
-			return true;
 		}
 
 		return false;
@@ -151,6 +108,51 @@ public class DBMetadata {
 
 			return true;
 		}
+	}
+
+	public boolean hasRows(String tableName) {
+		try (PreparedStatement ps = _connection.prepareStatement(
+				"select count(*) from " + tableName);
+			ResultSet rs = ps.executeQuery()) {
+
+			while (rs.next()) {
+				int count = rs.getInt(1);
+
+				if (count > 0) {
+					return true;
+				}
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		return false;
+	}
+
+	public boolean hasTable(String tableName) throws Exception {
+		return hasTable(tableName, false);
+	}
+
+	public boolean hasTable(String tableName, boolean caseSensitive)
+		throws Exception {
+
+		if (caseSensitive) {
+			if (doHasTable(tableName)) {
+				return true;
+			}
+
+			return false;
+		}
+
+		if (doHasTable(StringUtil.toLowerCase(tableName)) ||
+			doHasTable(StringUtil.toUpperCase(tableName)) ||
+			doHasTable(tableName)) {
+
+			return true;
+		}
+
+		return false;
 	}
 
 	protected boolean doHasTable(String tableName) throws Exception {
