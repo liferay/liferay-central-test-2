@@ -91,7 +91,8 @@ public abstract class BaseUpgradePortletId extends UpgradeProcess {
 			}
 
 			typeSettingsProperties.setProperty(
-				columnId, StringUtil.merge(portletIds).concat(StringPool.COMMA));
+				columnId,
+				StringUtil.merge(portletIds).concat(StringPool.COMMA));
 		}
 
 		return typeSettingsProperties.toString();
@@ -252,7 +253,8 @@ public abstract class BaseUpgradePortletId extends UpgradeProcess {
 
 				List<String> layoutColumnIds = _getLayoutColumnIds();
 
-				layoutColumnIds.addAll(_getNestedPortletColumnIds(typeSettings));
+				layoutColumnIds.addAll(
+					_getNestedPortletColumnIds(typeSettings));
 
 				String newTypeSettings = getNewTypeSettings(
 					typeSettings, oldRootPortletId, newRootPortletId,
@@ -281,7 +283,8 @@ public abstract class BaseUpgradePortletId extends UpgradeProcess {
 
 				List<String> layoutColumnIds = _getLayoutColumnIds();
 
-				layoutColumnIds.addAll(_getNestedPortletColumnIds(typeSettings));
+				layoutColumnIds.addAll(
+					_getNestedPortletColumnIds(typeSettings));
 
 				String newTypeSettings = getNewTypeSettings(
 					typeSettings, oldRootPortletId, newRootPortletId,
