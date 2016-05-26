@@ -65,9 +65,9 @@ if (forcePost && (portletURL != null)) {
 	url = url.split(namespace)[0];
 %>
 
-<form action="<%= url %>" id="<%= namespace %>pageIteratorFm" method="post" name="<%= namespace %>pageIteratorFm">
-	<liferay-portlet:renderURLParams portletURL="<%= portletURL %>" />
-</form>
+	<form action="<%= url %>" id="<%= namespace %>pageIteratorFm" method="post" name="<%= namespace %>pageIteratorFm">
+		<liferay-portlet:renderURLParams portletURL="<%= portletURL %>" />
+	</form>
 
 <%
 }
