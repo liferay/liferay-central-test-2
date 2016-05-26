@@ -19,6 +19,6 @@ package com.liferay.exportimport.resources.importer.constants;
  */
 public class ResourcesImporterConstants {
 
-	public static final String DEFAULT = "default";
+	public static final String PORTLET_ID_DEFAULT = "default";
 
 }
