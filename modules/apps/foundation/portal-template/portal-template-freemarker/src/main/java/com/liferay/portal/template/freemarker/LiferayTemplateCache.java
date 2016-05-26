@@ -45,10 +45,11 @@ import java.util.Locale;
 public class LiferayTemplateCache extends TemplateCache {
 
 	public LiferayTemplateCache(
-		Configuration configuration,
-		FreeMarkerEngineConfiguration freemarkerEngineConfiguration,
-		TemplateResourceLoader templateResourceLoader,
-		SingleVMPool singleVMPool) throws Exception {
+			Configuration configuration,
+			FreeMarkerEngineConfiguration freemarkerEngineConfiguration,
+			TemplateResourceLoader templateResourceLoader,
+			SingleVMPool singleVMPool)
+		throws Exception {
 
 		super(null, configuration);
 
