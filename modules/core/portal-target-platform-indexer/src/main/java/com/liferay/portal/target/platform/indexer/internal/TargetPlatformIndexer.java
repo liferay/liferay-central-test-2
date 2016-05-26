@@ -21,7 +21,6 @@ import aQute.bnd.osgi.Jar;
 import aQute.bnd.osgi.resource.CapabilityBuilder;
 
 import com.liferay.portal.target.platform.indexer.Indexer;
-import com.liferay.portal.target.platform.indexer.internal.PathUtil;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -239,7 +238,7 @@ public class TargetPlatformIndexer implements Indexer {
 				Constants.BUNDLE_VERSION, systemBundle.getVersion().toString());
 
 			String exportPackage = _packagesParamters.toString();
-			
+
 			exportPackage = exportPackage.replace("version:Version", "version");
 
 			attributes.putValue(Constants.EXPORT_PACKAGE, exportPackage);

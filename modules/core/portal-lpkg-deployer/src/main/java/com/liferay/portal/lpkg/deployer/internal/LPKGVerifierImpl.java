@@ -23,10 +23,10 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.lpkg.deployer.LPKGVerifier;
 import com.liferay.portal.lpkg.deployer.LPKGVerifyException;
-import com.liferay.portal.target.platform.indexer.Indexer;
-import com.liferay.portal.target.platform.indexer.IndexerFactory;
 import com.liferay.portal.target.platform.indexer.IndexValidator;
 import com.liferay.portal.target.platform.indexer.IndexValidatorFactory;
+import com.liferay.portal.target.platform.indexer.Indexer;
+import com.liferay.portal.target.platform.indexer.IndexerFactory;
 import com.liferay.portal.util.PropsValues;
 
 import java.io.File;
