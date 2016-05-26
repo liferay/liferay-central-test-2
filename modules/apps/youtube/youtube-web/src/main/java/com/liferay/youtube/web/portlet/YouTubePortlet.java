@@ -30,7 +30,7 @@ import org.osgi.service.component.annotations.Component;
 		"com.liferay.portlet.css-class-wrapper=youtube-portlet",
 		"com.liferay.portlet.display-category=category.entertainment",
 		"com.liferay.portlet.header-portlet-css=/css/main.css",
-		"com.liferay.portlet.icon=/icons/icon.png",
+		"com.liferay.portlet.icon=/icons/youtube.png",
 		"com.liferay.portlet.use-default-template=true",
 		"javax.portlet.display-name=YouTube",
 		"javax.portlet.expiration-cache=0",
