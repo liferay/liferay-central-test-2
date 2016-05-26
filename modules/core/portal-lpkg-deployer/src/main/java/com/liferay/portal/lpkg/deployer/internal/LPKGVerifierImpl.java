@@ -77,20 +77,20 @@ public class LPKGVerifierImpl implements LPKGVerifier {
 			long start = System.currentTimeMillis();
 
 			try {
-				List<String> errors = indexValidator.validate(
+				List<String> messages = indexValidator.validate(
 					Collections.singletonList(indexFile.toURI()));
 
-				if (!errors.isEmpty()) {
+				if (!messages.isEmpty()) {
 					indexFile.delete();
 
 					StringBundler sb = new StringBundler(
-						(errors.size() * 4) + 2);
+						(messages.size() * 4) + 2);
 
 					sb.append("LPKG validation failed with {");
 
-					for (String error : errors) {
+					for (String message : messages) {
 						sb.append("[");
-						sb.append(error);
+						sb.append(message);
 						sb.append("]");
 						sb.append(", ");
 					}
