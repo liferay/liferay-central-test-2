@@ -108,7 +108,7 @@ public class IndexValidatorMain {
 		indexValidator.setIncludeTargetPlatform(includeTargetPlatform);
 
 		if (includeTargetPlatform) {
-			indexValidator.setModuleFrameworkBaseDir(moduleFrameworkBaseDir);
+			indexValidator.setModuleFrameworkBaseDirName(moduleFrameworkBaseDir);
 		}
 
 		long start = System.currentTimeMillis();
