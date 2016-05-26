@@ -64,12 +64,12 @@ public class SelectLayoutSetBranchMVCActionCommand
 			LayoutSet layoutSet = _layoutSetLocalService.getLayoutSet(
 				groupId, privateLayout);
 
+			long layoutSetBranchId = ParamUtil.getLong(
+				actionRequest, "layoutSetBranchId");
+
 			LayoutSetBranch layoutSetBranch =
 				_layoutSetBranchLocalService.getLayoutSetBranch(
 					layoutSetBranchId);
-
-			long layoutSetBranchId = ParamUtil.getLong(
-				actionRequest, "layoutSetBranchId");
 
 			StagingUtil.setRecentLayoutSetBranchId(
 				request, layoutSet.getLayoutSetId(),
