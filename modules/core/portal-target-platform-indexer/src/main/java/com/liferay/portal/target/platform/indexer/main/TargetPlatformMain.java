@@ -152,8 +152,8 @@ public class TargetPlatformMain implements Indexer {
 				_moduleFrameworkModulesDirName, _moduleFrameworkPortalDirName
 			};
 
-			for (String moduleDir : moduleDirNames) {
-				File dir = new File(moduleDir);
+			for (String moduleDirName : moduleDirNames) {
+				File dir = new File(moduleDirName);
 
 				if (!dir.isDirectory() || !dir.canRead()) {
 					continue;
@@ -292,8 +292,9 @@ public class TargetPlatformMain implements Indexer {
 			attributes.putValue(
 				Constants.BUNDLE_VERSION, systemBundle.getVersion().toString());
 
-			String exportPackage = _packagesParamters.toString().replace(
-				"version:Version", "version");
+			String exportPackage = _packagesParamters.toString();
+			
+			exportPackage = exportPackage.replace("version:Version", "version");
 
 			attributes.putValue(Constants.EXPORT_PACKAGE, exportPackage);
 
