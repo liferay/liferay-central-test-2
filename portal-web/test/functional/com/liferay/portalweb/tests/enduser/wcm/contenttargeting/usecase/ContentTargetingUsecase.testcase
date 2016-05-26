@@ -3039,8 +3039,8 @@
 		</execute>
 
 		<execute macro="User#editUserGenderCP">
-			<var name="userName" value="woman woman" />
 			<var name="userGender" value="Female" />
+			<var name="userName" value="woman woman" />
 		</execute>
 
 		<execute macro="Navigator#openSiteURL">
