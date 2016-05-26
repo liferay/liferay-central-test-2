@@ -45,10 +45,10 @@ public class IndexValidatorMain {
 		Boolean includeTargetPlatform = Boolean.getBoolean(
 			"include.target.platform");
 
-		String moduleFrameworkBaseDir = System.getProperty(
+		String moduleFrameworkBaseDirName = System.getProperty(
 			"module.framework.base.dir");
 
-		if (includeTargetPlatform && (moduleFrameworkBaseDir == null)) {
+		if (includeTargetPlatform && (moduleFrameworkBaseDirName == null)) {
 			System.err.println(
 				"== -Dmodule.framework.base.dir must be set when " +
 					"-Dinclude.target.platform is set.");
@@ -108,7 +108,7 @@ public class IndexValidatorMain {
 		indexValidator.setIncludeTargetPlatform(includeTargetPlatform);
 
 		if (includeTargetPlatform) {
-			indexValidator.setModuleFrameworkBaseDirName(moduleFrameworkBaseDir);
+			indexValidator.setModuleFrameworkBaseDirName(moduleFrameworkBaseDirName);
 		}
 
 		long start = System.currentTimeMillis();

@@ -64,34 +64,36 @@ import org.osgi.service.repository.ContentNamespace;
 public class TargetPlatformMain implements Indexer {
 
 	public static void main(String[] args) throws Exception {
-		String moduleFrameworkBaseDir = System.getProperty(
+		String moduleFrameworkBaseDirName = System.getProperty(
 			"module.framework.base.dir");
 
-		if (moduleFrameworkBaseDir == null) {
+		if (moduleFrameworkBaseDirName == null) {
 			System.err.println(
 				"== -Dmodule.framework.base.dir must point to a valid path");
 
 			return;
 		}
 
-		String moduleFrameworkModulesDir = System.getProperty(
+		String moduleFrameworkModulesDirName = System.getProperty(
 			"module.framework.modules.dir");
 
-		if (moduleFrameworkModulesDir == null) {
-			moduleFrameworkModulesDir = moduleFrameworkBaseDir + "/modules/";
+		if (moduleFrameworkModulesDirName == null) {
+			moduleFrameworkModulesDirName =
+				moduleFrameworkBaseDirName + "/modules/";
 		}
 
-		String moduleFrameworkPortalDir = System.getProperty(
+		String moduleFrameworkPortalDirName = System.getProperty(
 			"module.framework.portal.dir");
 
-		if (moduleFrameworkPortalDir == null) {
-			moduleFrameworkPortalDir = moduleFrameworkBaseDir + "/portal/";
+		if (moduleFrameworkPortalDirName == null) {
+			moduleFrameworkPortalDirName =
+				moduleFrameworkBaseDirName + "/portal/";
 		}
 
 		Path tempPath = Files.createTempDirectory(null);
 
 		File targetPlatformDir = new File(
-			moduleFrameworkBaseDir, DIR_NAME_TARGET_PLATFORM);
+			moduleFrameworkBaseDirName, DIR_NAME_TARGET_PLATFORM);
 
 		if (!targetPlatformDir.exists() && !targetPlatformDir.mkdirs()) {
 			System.err.printf(
@@ -101,8 +103,8 @@ public class TargetPlatformMain implements Indexer {
 		}
 
 		TargetPlatformMain targetPlatformMain = new TargetPlatformMain(
-			moduleFrameworkBaseDir, moduleFrameworkModulesDir,
-			moduleFrameworkPortalDir);
+			moduleFrameworkBaseDirName, moduleFrameworkModulesDirName,
+			moduleFrameworkPortalDirName);
 
 		try {
 			File indexFile = targetPlatformMain.index(targetPlatformDir);
@@ -115,12 +117,12 @@ public class TargetPlatformMain implements Indexer {
 	}
 
 	public TargetPlatformMain(
-		String moduleFrameworkBaseDir, String moduleFrameworkModulesDir,
-		String moduleFrameworkPortalDir) {
+		String moduleFrameworkBaseDirName, String moduleFrameworkModulesDirName,
+		String moduleFrameworkPortalDirName) {
 
-		_moduleFrameworkBaseDir = moduleFrameworkBaseDir;
-		_moduleFrameworkModulesDir = moduleFrameworkModulesDir;
-		_moduleFrameworkPortalDir = moduleFrameworkPortalDir;
+		_moduleFrameworkBaseDirName = moduleFrameworkBaseDirName;
+		_moduleFrameworkModulesDirName = moduleFrameworkModulesDirName;
+		_moduleFrameworkPortalDirName = moduleFrameworkPortalDirName;
 
 		_config.put("compressed", "false");
 		_config.put(
@@ -145,8 +147,8 @@ public class TargetPlatformMain implements Indexer {
 			_processSystemPackagesExtra(tempDir, jarFiles);
 
 			String[] moduleDirs = new String[] {
-				_moduleFrameworkBaseDir + "/static/",
-				_moduleFrameworkModulesDir, _moduleFrameworkPortalDir
+				_moduleFrameworkBaseDirName + "/static/",
+				_moduleFrameworkModulesDirName, _moduleFrameworkPortalDirName
 			};
 
 			for (String moduleDir : moduleDirs) {
@@ -356,9 +358,9 @@ public class TargetPlatformMain implements Indexer {
 	}
 
 	private final Map<String, String> _config = new HashMap<>();
-	private final String _moduleFrameworkBaseDir;
-	private final String _moduleFrameworkModulesDir;
-	private final String _moduleFrameworkPortalDir;
+	private final String _moduleFrameworkBaseDirName;
+	private final String _moduleFrameworkModulesDirName;
+	private final String _moduleFrameworkPortalDirName;
 	private final Parameters _packagesParamters = new Parameters();
 	private final List<Parameters> _parametersList = new ArrayList<>();
 
