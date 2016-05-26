@@ -3365,7 +3365,6 @@
 			<type>int</type>
 		</attribute>
 		<attribute>
-			<description>A base URL for the iterator. Parameters are added to and removed from this URL as the user navigates through pages.</description>
 			<name>portletURL</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
