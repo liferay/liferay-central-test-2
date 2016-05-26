@@ -600,7 +600,7 @@ public class JenkinsResultsParserUtil {
 					urlConnection.setReadTimeout(timeout);
 				}
 
-				int bytesRead = 0;
+				int bytes = 0;
 				String line = null;
 
 				try (BufferedReader bufferedReader = new BufferedReader(
@@ -608,11 +608,11 @@ public class JenkinsResultsParserUtil {
 							urlConnection.getInputStream()))) {
 
 					while ((line = bufferedReader.readLine()) != null) {
-						byte[] bytes = line.getBytes();
+						byte[] lineBytes = line.getBytes();
 
-						bytesRead += bytes.length;
+						bytes += lineBytes.length;
 
-						if (bytesRead > (30 * 1024 * 1024)) {
+						if (bytes > (30 * 1024 * 1024)) {
 							sb.append("URL: ");
 							sb.append(url);
 							sb.append(" response has been truncated due to ");
@@ -626,7 +626,7 @@ public class JenkinsResultsParserUtil {
 				}
 
 				if (!url.startsWith("file:") &&
-					(bytesRead < (3 * 1024 * 1024))) {
+					(bytes < (3 * 1024 * 1024))) {
 
 					_toStringCache.put(key, sb.toString());
 				}
