@@ -17,7 +17,7 @@ package com.liferay.portal.target.platform.indexer.main;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static java.util.concurrent.TimeUnit.MINUTES;
 
-import com.liferay.portal.target.platform.indexer.internal.IndexValidator;
+import com.liferay.portal.target.platform.indexer.internal.DefaultIndexValidator;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -103,18 +103,18 @@ public class IndexValidatorMain {
 			return;
 		}
 
-		IndexValidator indexValidator = new IndexValidator();
+		DefaultIndexValidator defaultIndexValidator = new DefaultIndexValidator();
 
-		indexValidator.setIncludeTargetPlatform(includeTargetPlatform);
+		defaultIndexValidator.setIncludeTargetPlatform(includeTargetPlatform);
 
 		if (includeTargetPlatform) {
-			indexValidator.setModuleFrameworkBaseDirName(moduleFrameworkBaseDirName);
+			defaultIndexValidator.setModuleFrameworkBaseDirName(moduleFrameworkBaseDirName);
 		}
 
 		long start = System.currentTimeMillis();
 
 		try {
-			List<String> messages = indexValidator.validate(indexURIs);
+			List<String> messages = defaultIndexValidator.validate(indexURIs);
 
 			if (!messages.isEmpty()) {
 				System.out.println("== Validation errors");

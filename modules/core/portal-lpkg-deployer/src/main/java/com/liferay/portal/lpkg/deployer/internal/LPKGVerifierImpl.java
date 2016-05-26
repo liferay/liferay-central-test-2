@@ -25,7 +25,8 @@ import com.liferay.portal.lpkg.deployer.LPKGVerifier;
 import com.liferay.portal.lpkg.deployer.LPKGVerifyException;
 import com.liferay.portal.target.platform.indexer.Indexer;
 import com.liferay.portal.target.platform.indexer.IndexerFactory;
-import com.liferay.portal.target.platform.indexer.ValidatorFactory;
+import com.liferay.portal.target.platform.indexer.IndexValidator;
+import com.liferay.portal.target.platform.indexer.IndexValidatorFactory;
 import com.liferay.portal.util.PropsValues;
 
 import java.io.File;
@@ -71,13 +72,12 @@ public class LPKGVerifierImpl implements LPKGVerifier {
 				_log.info("Wrote index " + indexFile.getPath());
 			}
 
-			com.liferay.portal.target.platform.indexer.Validator validator =
-				_validatorFactory.create();
+			IndexValidator indexValidator = _indexValidatorFactory.create();
 
 			long start = System.currentTimeMillis();
 
 			try {
-				List<String> errors = validator.validate(
+				List<String> errors = indexValidator.validate(
 					Collections.singletonList(indexFile.toURI()));
 
 				if (!errors.isEmpty()) {
@@ -205,6 +205,6 @@ public class LPKGVerifierImpl implements LPKGVerifier {
 	private IndexerFactory _indexerFactory;
 
 	@Reference
-	private ValidatorFactory _validatorFactory;
+	private IndexValidatorFactory _indexValidatorFactory;
 
 }

@@ -207,7 +207,7 @@
 		</path>
 
 		<java
-			classname="com.liferay.portal.target.platform.indexer.main.TargetPlatformMain"
+			classname="com.liferay.portal.target.platform.indexer.main.TargetPlatformIndexerMain"
 			classpathref="target.platform.indexer.classpath"
 			fork="true"
 			newenvironment="true"
