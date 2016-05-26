@@ -64,14 +64,12 @@ public abstract class BaseUpgradePortletId extends UpgradeProcess {
 			return typeSettings;
 		}
 
-		String stagingPortletSetting = typeSettingsProperties.getProperty(
-			oldStagingPortletId);
+		String value = typeSettingsProperties.getProperty(oldStagingPortletId);
 
 		String newStagingPortletId = StagingUtil.getStagedPortletId(
 			newRootPortletId);
 
-		typeSettingsProperties.setProperty(
-			newStagingPortletId, stagingPortletSetting);
+		typeSettingsProperties.setProperty(newStagingPortletId, value);
 
 		typeSettingsProperties.remove(oldStagingPortletId);
 
