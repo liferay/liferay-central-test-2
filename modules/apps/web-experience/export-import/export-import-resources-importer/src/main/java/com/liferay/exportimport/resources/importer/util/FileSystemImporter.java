@@ -139,7 +139,7 @@ public class FileSystemImporter extends BaseImporter {
 		MimeTypes mimeTypes, Portal portal,
 		PortletPreferencesFactory portletPreferencesFactory,
 		PortletPreferencesLocalService portletPreferencesLocalService,
-		PortletPreferencesTranslator defaultPortletPreferencesTranslator,
+		PortletPreferencesTranslator portletPreferencesTranslator,
 		Map<String, PortletPreferencesTranslator> portletPreferencesTranslators,
 		RepositoryLocalService repositoryLocalService, SAXReader saxReader,
 		ThemeLocalService themeLocalService) {
@@ -164,12 +164,9 @@ public class FileSystemImporter extends BaseImporter {
 		this.portal = portal;
 		this.portletPreferencesFactory = portletPreferencesFactory;
 		this.portletPreferencesLocalService = portletPreferencesLocalService;
-
 		this.portletPreferencesTranslators =
 			new DefaultedPortletPreferencesTranslatorMap(
-				portletPreferencesTranslators,
-				defaultPortletPreferencesTranslator);
-
+				portletPreferencesTranslators, portletPreferencesTranslator);
 		this.repositoryLocalService = repositoryLocalService;
 		this.saxReader = saxReader;
 		this.themeLocalService = themeLocalService;
@@ -2021,11 +2018,11 @@ public class FileSystemImporter extends BaseImporter {
 		public DefaultedPortletPreferencesTranslatorMap(
 			Map<String, PortletPreferencesTranslator>
 				portletPreferencesTranslators,
-			PortletPreferencesTranslator defaultPortletPreferencesTranslator) {
+			PortletPreferencesTranslator portletPreferencesTranslator) {
 
 			super(portletPreferencesTranslators);
-			_defaultPortletPreferencesTranslator =
-				defaultPortletPreferencesTranslator;
+
+			_portletPreferencesTranslator = portletPreferencesTranslator;
 		}
 
 		@Override
@@ -2033,14 +2030,14 @@ public class FileSystemImporter extends BaseImporter {
 			PortletPreferencesTranslator value = super.get(key);
 
 			if (value == null) {
-				value = _defaultPortletPreferencesTranslator;
+				value = _portletPreferencesTranslator;
 			}
 
 			return value;
 		}
 
 		private final PortletPreferencesTranslator
-			_defaultPortletPreferencesTranslator;
+			_portletPreferencesTranslator;
 
 	}
 
