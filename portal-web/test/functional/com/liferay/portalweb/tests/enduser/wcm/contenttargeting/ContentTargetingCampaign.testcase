@@ -171,7 +171,7 @@
 			<var name="contentMetricName" value="Content Metric Name" />
 			<var name="contentTitle" value="DM Document Title" />
 			<var name="contentTrackingActionSelect" value="View" />
-			<var name="menulistContent" value="Document" />
+			<var name="menulistContent" value="Basic Document" />
 		</execute>
 
 		<execute macro="PortletEntry#save" />
