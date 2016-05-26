@@ -50,7 +50,7 @@ import org.osgi.service.component.annotations.Reference;
  * @author Shuyang Zhou
  */
 @Component(immediate = true)
-public class LPKGVerifierImpl implements LPKGVerifier {
+public class DefaultLPKGVerifier implements LPKGVerifier {
 
 	@Activate
 	public void activate(BundleContext bundleContext) {
@@ -197,7 +197,7 @@ public class LPKGVerifierImpl implements LPKGVerifier {
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		LPKGVerifierImpl.class);
+		DefaultLPKGVerifier.class);
 
 	private BundleContext _bundleContext;
 
