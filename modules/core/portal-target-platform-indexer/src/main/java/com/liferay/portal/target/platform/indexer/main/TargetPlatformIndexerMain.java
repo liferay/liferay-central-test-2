@@ -24,7 +24,7 @@ import java.nio.file.Path;
 /**
  * @author Raymond Augé
  */
-public class TargetPlatformMain {
+public class TargetPlatformIndexerMain {
 
 	public static void main(String[] args) throws Exception {
 		String moduleFrameworkBaseDirName = System.getProperty(

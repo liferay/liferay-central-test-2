@@ -35,7 +35,7 @@ JAVA_OPTS="-Dmodule.framework.base.dir=${module_framework_base_dir}"
 #
 
 java -classpath "$CLASSPATH" ${JAVA_OPTS} \
-	com.liferay.portal.target.platform.indexer.main.TargetPlatformMain
+	com.liferay.portal.target.platform.indexer.main.TargetPlatformIndexerMain
 
 #
 # Indexing LPKG files
