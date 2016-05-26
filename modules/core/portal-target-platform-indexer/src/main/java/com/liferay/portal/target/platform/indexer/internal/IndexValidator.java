@@ -55,8 +55,10 @@ public class IndexValidator implements Validator {
 		_includeTargetPlatform = includeTargetPlatform;
 	}
 
-	public void setModuleFrameworkBaseDir(String moduleFrameworkBaseDir) {
-		_moduleFrameworkBaseDir = moduleFrameworkBaseDir;
+	public void setModuleFrameworkBaseDirName(
+		String moduleFrameworkBaseDirName) {
+
+		_moduleFrameworkBaseDirName = moduleFrameworkBaseDirName;
 	}
 
 	@Override
@@ -151,7 +153,7 @@ public class IndexValidator implements Validator {
 		}
 
 		File targetPlatformDir = new File(
-			_moduleFrameworkBaseDir, Indexer.DIR_NAME_TARGET_PLATFORM);
+			_moduleFrameworkBaseDirName, Indexer.DIR_NAME_TARGET_PLATFORM);
 
 		if (!targetPlatformDir.exists() || !targetPlatformDir.canRead()) {
 			System.err.printf(
@@ -203,6 +205,6 @@ public class IndexValidator implements Validator {
 		"Unable to resolve <<INITIAL>> version=null: ";
 
 	private boolean _includeTargetPlatform;
-	private String _moduleFrameworkBaseDir;
+	private String _moduleFrameworkBaseDirName;
 
 }

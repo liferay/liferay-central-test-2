@@ -29,7 +29,7 @@ public class ValidatorFactory {
 		IndexValidator indexValidator = new IndexValidator();
 
 		indexValidator.setIncludeTargetPlatform(true);
-		indexValidator.setModuleFrameworkBaseDir(
+		indexValidator.setModuleFrameworkBaseDirName(
 			PropsValues.MODULE_FRAMEWORK_BASE_DIR);
 
 		return indexValidator;
