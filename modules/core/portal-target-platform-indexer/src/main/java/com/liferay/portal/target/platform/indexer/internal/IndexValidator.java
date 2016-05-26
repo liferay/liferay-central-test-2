@@ -157,7 +157,8 @@ public class IndexValidator implements Validator {
 
 		if (!targetPlatformDir.exists() || !targetPlatformDir.canRead()) {
 			System.err.printf(
-				"== Cannot read target platform dir %s\n", targetPlatformDir);
+				"== Unable to read target platform dir %s\n",
+				targetPlatformDir);
 
 			return;
 		}
