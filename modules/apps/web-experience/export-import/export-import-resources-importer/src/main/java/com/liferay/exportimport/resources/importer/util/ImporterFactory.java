@@ -235,7 +235,7 @@ public class ImporterFactory {
 		cardinality = ReferenceCardinality.AT_LEAST_ONE,
 		policy = ReferencePolicy.DYNAMIC,
 		policyOption = ReferencePolicyOption.GREEDY,
-		target = "(!(portlet.preferences.translator.portlet.id=" + ResourcesImporterConstants.DEFAULT +"))",
+		target = "(!(portlet.preferences.translator.portlet.id=" + ResourcesImporterConstants.PORTLET_ID_DEFAULT +"))",
 		unbind = "unsetPortletPreferencesTranslator"
 	)
 	protected void setPortletPreferencesTranslator(
@@ -299,7 +299,7 @@ public class ImporterFactory {
 	private DDMXML _ddmxml;
 
 	@Reference(
-		target = "(portlet.preferences.translator.portlet.id=" + ResourcesImporterConstants.DEFAULT +")"
+		target = "(portlet.preferences.translator.portlet.id=" + ResourcesImporterConstants.PORTLET_ID_DEFAULT +")"
 	)
 	private PortletPreferencesTranslator _defaultPortletPreferencesTranslator;
 
