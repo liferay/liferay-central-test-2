@@ -18,6 +18,7 @@ import com.liferay.portal.target.platform.indexer.internal.PathUtil;
 import com.liferay.portal.target.platform.indexer.internal.TargetPlatformIndexer;
 
 import java.io.File;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 

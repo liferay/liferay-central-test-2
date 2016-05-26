@@ -103,12 +103,14 @@ public class IndexValidatorMain {
 			return;
 		}
 
-		DefaultIndexValidator defaultIndexValidator = new DefaultIndexValidator();
+		DefaultIndexValidator defaultIndexValidator =
+			new DefaultIndexValidator();
 
 		defaultIndexValidator.setIncludeTargetPlatform(includeTargetPlatform);
 
 		if (includeTargetPlatform) {
-			defaultIndexValidator.setModuleFrameworkBaseDirName(moduleFrameworkBaseDirName);
+			defaultIndexValidator.setModuleFrameworkBaseDirName(
+				moduleFrameworkBaseDirName);
 		}
 
 		long start = System.currentTimeMillis();

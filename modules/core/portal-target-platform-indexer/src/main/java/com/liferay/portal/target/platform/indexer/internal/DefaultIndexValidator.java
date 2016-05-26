@@ -22,8 +22,8 @@ import aQute.bnd.osgi.resource.ResourceBuilder;
 import biz.aQute.resolve.ResolverValidator;
 import biz.aQute.resolve.ResolverValidator.Resolution;
 
-import com.liferay.portal.target.platform.indexer.Indexer;
 import com.liferay.portal.target.platform.indexer.IndexValidator;
+import com.liferay.portal.target.platform.indexer.Indexer;
 
 import java.io.File;
 import java.io.FilenameFilter;
