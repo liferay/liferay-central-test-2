@@ -43,7 +43,8 @@ public class LPKGIndexerMain {
 
 		if (moduleFrameworkBaseDirName == null) {
 			System.err.println(
-				"== -Dmodule.framework.base.dir= must point to a valid path");
+				"== -Dmodule.framework.base.dir= must point to a valid " +
+					"directory");
 
 			return;
 		}
