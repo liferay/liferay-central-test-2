@@ -708,13 +708,14 @@ public class LayoutAdminPortlet extends MVCPortlet {
 			actionRequest);
 
 		long groupId = ParamUtil.getLong(actionRequest, "groupId");
-		long layoutSetBranchId = ParamUtil.getLong(
-			actionRequest, "layoutSetBranchId");
 		boolean privateLayout = ParamUtil.getBoolean(
 			actionRequest, "privateLayout");
 
 		LayoutSet layoutSet = layoutSetLocalService.getLayoutSet(
 			groupId, privateLayout);
+
+		long layoutSetBranchId = ParamUtil.getLong(
+			actionRequest, "layoutSetBranchId");
 
 		LayoutSetBranch layoutSetBranch =
 			layoutSetBranchLocalService.getLayoutSetBranch(layoutSetBranchId);
