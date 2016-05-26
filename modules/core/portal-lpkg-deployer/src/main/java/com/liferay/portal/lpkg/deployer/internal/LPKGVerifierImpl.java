@@ -92,10 +92,10 @@ public class LPKGVerifierImpl implements LPKGVerifier {
 						sb.append("[");
 						sb.append(error);
 						sb.append("]");
-						sb.append(",");
+						sb.append(", ");
 					}
 
-					sb.setIndex(sb.index() - 1);
+					sb.setIndex(sb.index() - 2);
 
 					sb.append("}");
 
