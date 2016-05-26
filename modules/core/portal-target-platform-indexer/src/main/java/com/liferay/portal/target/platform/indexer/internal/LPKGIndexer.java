@@ -47,7 +47,7 @@ public class LPKGIndexer implements Indexer {
 		_config.put(
 			"license.url", "https://www.liferay.com/downloads/ce-license");
 		_config.put("pretty", "true");
-		_config.put("repository.name", _getFileNameWithoutExtension(lpkgFile));
+		_config.put("repository.name", _getRepositoryName(lpkgFile));
 		_config.put("stylesheet", "http://www.osgi.org/www/obr2html.xsl");
 	}
 
@@ -123,16 +123,16 @@ public class LPKGIndexer implements Indexer {
 		}
 	}
 
-	private String _getFileNameWithoutExtension(File lpkgFile) {
-		String name = lpkgFile.getName();
+	private String _getRepositoryName(File lpkgFile) {
+		String fileName = lpkgFile.getName();
 
-		int index = name.lastIndexOf('.');
+		int index = fileName.lastIndexOf('.');
 
 		if (index > 0) {
-			name = name.substring(0, index);
+			fileName = fileName.substring(0, index);
 		}
 
-		return name;
+		return fileName;
 	}
 
 	private final Map<String, String> _config = new HashMap<>();

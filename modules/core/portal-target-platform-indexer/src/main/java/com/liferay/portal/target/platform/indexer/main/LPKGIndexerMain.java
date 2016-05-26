@@ -38,10 +38,10 @@ public class LPKGIndexerMain {
 			return;
 		}
 
-		String moduleFrameworkBaseDir = System.getProperty(
+		String moduleFrameworkBaseDirName = System.getProperty(
 			"module.framework.base.dir");
 
-		if (moduleFrameworkBaseDir == null) {
+		if (moduleFrameworkBaseDirName == null) {
 			System.err.println(
 				"== -Dmodule.framework.base.dir= must point to a valid path");
 
@@ -49,12 +49,12 @@ public class LPKGIndexerMain {
 		}
 
 		File outputDir = new File(
-			moduleFrameworkBaseDir, Indexer.DIR_NAME_TARGET_PLATFORM);
+			moduleFrameworkBaseDirName, Indexer.DIR_NAME_TARGET_PLATFORM);
 
-		String outputDirProperty = System.getProperty("output.dir");
+		String outputDirName = System.getProperty("output.dir");
 
-		if (outputDirProperty != null) {
-			outputDir = new File(outputDirProperty);
+		if (outputDirName != null) {
+			outputDir = new File(outputDirName);
 		}
 
 		if (!outputDir.exists() && !outputDir.mkdirs()) {
