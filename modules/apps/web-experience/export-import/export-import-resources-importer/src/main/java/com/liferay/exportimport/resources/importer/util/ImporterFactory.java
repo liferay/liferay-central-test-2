@@ -205,8 +205,7 @@ public class ImporterFactory {
 			_layoutLocalService, _layoutPrototypeLocalService,
 			_layoutSetLocalService, _layoutSetPrototypeLocalService, _mimeTypes,
 			_portal, _portletPreferencesFactory,
-			_portletPreferencesLocalService,
-			_defaultPortletPreferencesTranslator,
+			_portletPreferencesLocalService, _portletPreferencesTranslator,
 			_portletPreferencesTranslators, _repositoryLocalService, _saxReader,
 			_themeLocalService);
 	}
@@ -225,8 +224,7 @@ public class ImporterFactory {
 			_layoutLocalService, _layoutPrototypeLocalService,
 			_layoutSetLocalService, _layoutSetPrototypeLocalService, _mimeTypes,
 			_portal, _portletPreferencesFactory,
-			_portletPreferencesLocalService,
-			_defaultPortletPreferencesTranslator,
+			_portletPreferencesLocalService, _portletPreferencesTranslator,
 			_portletPreferencesTranslators, _repositoryLocalService, _saxReader,
 			_themeLocalService);
 	}
@@ -298,11 +296,6 @@ public class ImporterFactory {
 	@Reference
 	private DDMXML _ddmxml;
 
-	@Reference(
-		target = "(portlet.preferences.translator.portlet.id=" + ResourcesImporterConstants.PORTLET_ID_DEFAULT +")"
-	)
-	private PortletPreferencesTranslator _defaultPortletPreferencesTranslator;
-
 	@Reference
 	private DLAppLocalService _dlAppLocalService;
 
@@ -350,6 +343,11 @@ public class ImporterFactory {
 
 	@Reference
 	private PortletPreferencesLocalService _portletPreferencesLocalService;
+
+	@Reference(
+		target = "(portlet.preferences.translator.portlet.id=" + ResourcesImporterConstants.PORTLET_ID_DEFAULT +")"
+	)
+	private PortletPreferencesTranslator _portletPreferencesTranslator;
 
 	private final Map<String, PortletPreferencesTranslator>
 		_portletPreferencesTranslators = new ConcurrentHashMap<>();
