@@ -71,7 +71,7 @@ import org.osgi.util.tracker.BundleTracker;
  * @author Shuyang Zhou
  */
 @Component(immediate = true, service = LPKGDeployer.class)
-public class LPKGDeployerImpl implements LPKGDeployer {
+public class DefaultLPKGDeployer implements LPKGDeployer {
 
 	@Activate
 	public void activate(final BundleContext bundleContext) throws IOException {
@@ -292,7 +292,7 @@ public class LPKGDeployerImpl implements LPKGDeployer {
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		LPKGDeployerImpl.class);
+		DefaultLPKGDeployer.class);
 
 	private BundleTracker<List<Bundle>> _lpkgBundleTracker;
 
