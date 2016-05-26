@@ -537,7 +537,7 @@ public class JenkinsResultsParserUtil {
 		String response = toString(
 			url, checkCache, maxRetries, retryPeriod, timeout);
 
-		if (response.endsWith("response has been truncated due to its size.")) {
+		if (response.endsWith("was truncated due to its size.")) {
 			return null;
 		}
 
@@ -613,10 +613,10 @@ public class JenkinsResultsParserUtil {
 						bytes += lineBytes.length;
 
 						if (bytes > (30 * 1024 * 1024)) {
-							sb.append("URL: ");
+							sb.append("Response for ");
 							sb.append(url);
-							sb.append(" response has been truncated due to ");
-							sb.append("its size.");
+							sb.append(" was truncated due to its size.");
+
 							break;
 						}
 
