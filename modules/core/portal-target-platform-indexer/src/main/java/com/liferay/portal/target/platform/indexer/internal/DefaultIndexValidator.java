@@ -23,7 +23,7 @@ import biz.aQute.resolve.ResolverValidator;
 import biz.aQute.resolve.ResolverValidator.Resolution;
 
 import com.liferay.portal.target.platform.indexer.Indexer;
-import com.liferay.portal.target.platform.indexer.Validator;
+import com.liferay.portal.target.platform.indexer.IndexValidator;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -49,7 +49,7 @@ import org.osgi.resource.Resource;
 /**
  * @author Raymond Augé
  */
-public class IndexValidator implements Validator {
+public class DefaultIndexValidator implements IndexValidator {
 
 	public void setIncludeTargetPlatform(boolean includeTargetPlatform) {
 		_includeTargetPlatform = includeTargetPlatform;

@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * @author Raymond Augé
  */
-public interface Validator {
+public interface IndexValidator {
 
 	public List<String> validate(List<URI> indexURIs) throws Exception;
 
