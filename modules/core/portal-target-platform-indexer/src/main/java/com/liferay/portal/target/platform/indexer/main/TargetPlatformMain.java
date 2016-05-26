@@ -147,12 +147,12 @@ public class TargetPlatformMain implements Indexer {
 			_processSystemBundle(tempDir, jarFiles);
 			_processSystemPackagesExtra(tempDir, jarFiles);
 
-			String[] moduleDirs = new String[] {
+			String[] moduleDirNames = new String[] {
 				_moduleFrameworkBaseDirName + "/static/",
 				_moduleFrameworkModulesDirName, _moduleFrameworkPortalDirName
 			};
 
-			for (String moduleDir : moduleDirs) {
+			for (String moduleDir : moduleDirNames) {
 				File dir = new File(moduleDir);
 
 				if (!dir.isDirectory() || !dir.canRead()) {
