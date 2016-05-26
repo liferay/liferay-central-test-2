@@ -91,7 +91,7 @@ public class DefaultLPKGVerifier implements LPKGVerifier {
 					for (String message : messages) {
 						sb.append("[");
 						sb.append(message);
-						sb.append("],");
+						sb.append("], ");
 					}
 
 					sb.setIndex(sb.index() - 1);
