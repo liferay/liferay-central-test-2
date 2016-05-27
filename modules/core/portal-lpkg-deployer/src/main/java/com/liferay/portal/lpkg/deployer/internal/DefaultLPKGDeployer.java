@@ -167,7 +167,8 @@ public class DefaultLPKGDeployer implements LPKGDeployer {
 		if (!lpkgFilePath.startsWith(_deploymentDirPath)) {
 			throw new LPKGVerifyException(
 				"Unable to deploy " + lpkgFile +
-					" from outside deployment dir " + _deploymentDirPath);
+					" from outside the deployment directory " +
+						_deploymentDirPath);
 		}
 
 		for (Bundle bundle : _lpkgVerifier.verify(lpkgFile)) {
