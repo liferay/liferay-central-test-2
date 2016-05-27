@@ -23,9 +23,6 @@ import java.util.concurrent.atomic.AtomicReference;
  */
 public class ThrowableCollector {
 
-	public static final String INITIAL_BUNDLES =
-		"(throwable.collector=initial.bundles)";
-
 	public void collect(Throwable t) {
 		while (true) {
 			Throwable throwable = _atomicReference.get();
