@@ -1016,8 +1016,11 @@ public abstract class BaseIndexer<T> implements Indexer<T> {
 				String fieldName = getExpandoFieldName(
 					searchContext, expandoBridge, attributeName);
 
-				boolean like =
-					indexType == ExpandoColumnConstants.INDEX_TYPE_TEXT;
+				boolean like = false;
+
+				if (indexType == ExpandoColumnConstants.INDEX_TYPE_TEXT) {
+					like = true;
+				}
 
 				if (searchContext.isAndSearch()) {
 					Query query = searchQuery.addRequiredTerm(
