@@ -57,9 +57,9 @@ public class UpgradePortletId extends UpgradeProcess {
 		String typeSettings, String oldRootPortletId, String newRootPortletId,
 		boolean exactMatch) {
 
-		throw new RuntimeException(
-			"com.liferay.portal.upgrade.util.UpgradePortletId is deprecated. " +
-				"Use com.liferay.portal.kernel.upgrade.BaseUpgradePortletId.");
+		throw new UnsupportedOperationException(
+			"This class is deprecated in favor of " +
+				"com.liferay.portal.kernel.upgrade.BaseUpgradePortletId");
 	}
 
 	protected String getNewTypeSettings(
