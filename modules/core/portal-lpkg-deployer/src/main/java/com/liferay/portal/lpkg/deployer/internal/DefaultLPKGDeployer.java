@@ -325,7 +325,7 @@ public class DefaultLPKGDeployer implements LPKGDeployer {
 	@Reference
 	private LPKGWARBundleRegistry _lpkgWarBundleRegistry;
 
-	@Reference(target = ThrowableCollector.INITIAL_BUNDLES)
+	@Reference(target = "(throwable.collector=initial.bundles)")
 	private ThrowableCollector _throwableCollector;
 
 	private final Map<String, URL> _urls = new ConcurrentHashMap<>();
