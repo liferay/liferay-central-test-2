@@ -267,11 +267,11 @@ public class DDLFormViewRecordsDisplayContext {
 			SearchContext searchContext = SearchContextFactory.getInstance(
 				PortalUtil.getHttpServletRequest(_renderRequest));
 
+			searchContext.setAttribute(Field.STATUS, status);
 			searchContext.setAttribute(
 				"recordSetId", _ddlRecordSet.getRecordSetId());
 			searchContext.setAttribute(
 				"recordSetScope", _ddlRecordSet.getScope());
-			searchContext.setAttribute(Field.STATUS, status);
 			searchContext.setEnd(_recordSearchContainer.getEnd());
 			searchContext.setKeywords(displayTerms.getKeywords());
 			searchContext.setStart(_recordSearchContainer.getStart());
