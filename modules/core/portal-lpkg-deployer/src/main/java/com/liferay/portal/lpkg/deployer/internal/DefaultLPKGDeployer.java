@@ -255,7 +255,7 @@ public class DefaultLPKGDeployer implements LPKGDeployer {
 
 			});
 
-		_lpkgIndexValidator.setLpkgDeployer(this);
+		_lpkgIndexValidator.setLPKGDeployer(this);
 
 		_lpkgIndexValidator.validate(lpkgFiles);
 
