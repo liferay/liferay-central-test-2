@@ -20,7 +20,7 @@ import com.liferay.portal.kernel.util.AutoResetThreadLocal;
 /**
  * @author Shuyang Zhou
  */
-public class LPKGValidationThreadLocal {
+public class LPKGIndexValidationThreadLocal {
 
 	public static boolean isEnabled() {
 		return _enabled.get();

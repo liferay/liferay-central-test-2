@@ -86,7 +86,7 @@ public class DefaultLPKGVerifier implements LPKGVerifier {
 					iae);
 			}
 
-			if (LPKGValidationThreadLocal.isEnabled()) {
+			if (LPKGIndexValidationThreadLocal.isEnabled()) {
 				_lpkgIndexValidator.validate(
 					Collections.singletonList(lpkgFile));
 			}
