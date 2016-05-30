@@ -259,9 +259,9 @@ public class DefaultLPKGDeployer implements LPKGDeployer {
 
 		_lpkgIndexValidator.validate(lpkgFiles);
 
-		boolean enabled = LPKGIndexValidationThreadLocal.isEnabled();
+		boolean enabled = LPKGIndexValidatorThreadLocal.isEnabled();
 
-		LPKGIndexValidationThreadLocal.setEnabled(false);
+		LPKGIndexValidatorThreadLocal.setEnabled(false);
 
 		try {
 			for (File lpkgFile : lpkgFiles) {
@@ -296,7 +296,7 @@ public class DefaultLPKGDeployer implements LPKGDeployer {
 			}
 		}
 		finally {
-			LPKGIndexValidationThreadLocal.setEnabled(enabled);
+			LPKGIndexValidatorThreadLocal.setEnabled(enabled);
 		}
 	}
 
