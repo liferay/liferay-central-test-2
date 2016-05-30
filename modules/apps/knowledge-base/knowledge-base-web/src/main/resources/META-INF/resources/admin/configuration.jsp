@@ -17,12 +17,12 @@
 <%@ include file="/admin/init.jsp" %>
 
 <%
-kbGroupServiceConfiguration = ParameterMapUtil.setParameterMap(KBGroupServiceConfiguration.class, kbGroupServiceConfiguration, request.getParameterMap(), "preferences--", "--");
-
 String tabs2 = ParamUtil.getString(request, "tabs2", "email-from");
 
 String editorParam = StringPool.BLANK;
 String editorBody = StringPool.BLANK;
+
+kbGroupServiceConfiguration = ParameterMapUtil.setParameterMap(KBGroupServiceConfiguration.class, kbGroupServiceConfiguration, request.getParameterMap(), "preferences--", "--");
 
 if (tabs2.equals("article-added-email")) {
 	editorParam = "emailKBArticleAddedBody";
