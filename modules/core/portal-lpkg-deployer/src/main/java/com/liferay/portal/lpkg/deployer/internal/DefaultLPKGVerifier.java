@@ -95,8 +95,8 @@ public class DefaultLPKGVerifier implements LPKGVerifier {
 					iae);
 			}
 
-			if (LPKGIndexValidationThreadLocal.isEnabled()) {
-				_validateLPKGIndex(lpkgFile, symbolicName, version);
+			if (LPKGValidationThreadLocal.isEnabled()) {
+				_doIndexValidation(lpkgFile, symbolicName, version);
 			}
 
 			List<Bundle> oldBundles = new ArrayList<>();
@@ -137,7 +137,7 @@ public class DefaultLPKGVerifier implements LPKGVerifier {
 		}
 	}
 
-	private void _validateLPKGIndex(
+	private void _doIndexValidation(
 		File lpkgFile, String symbolicName, Version version) {
 
 		try {
@@ -148,19 +148,20 @@ public class DefaultLPKGVerifier implements LPKGVerifier {
 
 			indexer.index(unsyncByteArrayOutputStream);
 
-			Path path = Paths.get(
+			Path indexFilePath = Paths.get(
 				PropsValues.MODULE_FRAMEWORK_BASE_DIR,
 				Indexer.DIR_NAME_TARGET_PLATFORM,
 				symbolicName + "-" + version + "-index.xml");
 
-			Files.write(path, unsyncByteArrayOutputStream.toByteArray());
+			Files.write(
+				indexFilePath, unsyncByteArrayOutputStream.toByteArray());
 
 			if (_log.isInfoEnabled()) {
-				_log.info("Wrote index " + path);
+				_log.info("Wrote index " + indexFilePath);
 			}
 
 			_lpkgIndexValidator.validate(
-				Collections.singletonList(path.toUri()));
+				Collections.singletonList(indexFilePath.toUri()));
 		}
 		catch (LPKGVerifyException lpkgve) {
 			throw lpkgve;
