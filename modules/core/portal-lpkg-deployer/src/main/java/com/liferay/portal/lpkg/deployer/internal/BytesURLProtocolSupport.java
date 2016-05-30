@@ -58,7 +58,7 @@ public class BytesURLProtocolSupport {
 		try {
 			URL url = new URL("bytes://localhost/".concat(id));
 
-			_dataMap.put(url, data);
+			_bytesMap.put(url, data);
 
 			return url;
 		}
@@ -68,10 +68,10 @@ public class BytesURLProtocolSupport {
 	}
 
 	public byte[] removeData(URL url) {
-		return _dataMap.remove(url);
+		return _bytesMap.remove(url);
 	}
 
-	private final Map<URL, byte[]> _dataMap = new ConcurrentHashMap<>();
+	private final Map<URL, byte[]> _bytesMap = new ConcurrentHashMap<>();
 
 	private class BytesURLConnection extends URLConnection {
 
@@ -81,13 +81,13 @@ public class BytesURLProtocolSupport {
 
 		@Override
 		public InputStream getInputStream() throws IOException {
-			byte[] data = _dataMap.get(url);
+			byte[] bytes = _bytesMap.get(url);
 
-			if (data == null) {
-				throw new IOException("Unable to find data for url " + url);
+			if (bytes == null) {
+				throw new IOException("Unable to get bytes for URL " + url);
 			}
 
-			return new UnsyncByteArrayInputStream(data);
+			return new UnsyncByteArrayInputStream(bytes);
 		}
 
 		private BytesURLConnection(URL url) {

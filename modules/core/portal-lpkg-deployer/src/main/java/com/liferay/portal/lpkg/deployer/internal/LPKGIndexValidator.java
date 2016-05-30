@@ -48,7 +48,7 @@ import org.osgi.service.component.annotations.Reference;
 @Component(immediate = true, service = LPKGIndexValidator.class)
 public class LPKGIndexValidator {
 
-	public void setLpkgDeployer(LPKGDeployer lpkgDeployer) {
+	public void setLPKGDeployer(LPKGDeployer lpkgDeployer) {
 		_lpkgDeployer = lpkgDeployer;
 	}
 
@@ -56,10 +56,11 @@ public class LPKGIndexValidator {
 		long start = System.currentTimeMillis();
 
 		List<URI> targetPlatformIndexURIs = _getTargetPlatformIndexURIs();
-		List<URI> lpkgIndexURIs = _indexLPKGFiles(lpkgFiles);
 
 		IndexValidator indexValidator = _indexValidatorFactory.create(
 			targetPlatformIndexURIs);
+
+		List<URI> lpkgIndexURIs = _indexLPKGFiles(lpkgFiles);
 
 		try {
 			List<String> messages = indexValidator.validate(lpkgIndexURIs);
@@ -84,6 +85,7 @@ public class LPKGIndexValidator {
 		}
 		finally {
 			_cleanUp(targetPlatformIndexURIs);
+
 			_cleanUp(lpkgIndexURIs);
 
 			if (_log.isInfoEnabled()) {
