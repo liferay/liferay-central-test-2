@@ -17,11 +17,11 @@
 <%@ include file="/section/init.jsp" %>
 
 <%
-kbSectionPortletInstanceConfiguration = ParameterMapUtil.setParameterMap(KBSectionPortletInstanceConfiguration.class, kbSectionPortletInstanceConfiguration, request.getParameterMap(), "preferences--", "--");
-
 String tabs2 = ParamUtil.getString(request, "tabs2", "general");
 
 String tabs2Names = "general,display-settings";
+
+kbSectionPortletInstanceConfiguration = ParameterMapUtil.setParameterMap(KBSectionPortletInstanceConfiguration.class, kbSectionPortletInstanceConfiguration, request.getParameterMap(), "preferences--", "--");
 %>
 
 <liferay-portlet:actionURL portletConfiguration="<%= true %>" var="configurationActionURL" />
