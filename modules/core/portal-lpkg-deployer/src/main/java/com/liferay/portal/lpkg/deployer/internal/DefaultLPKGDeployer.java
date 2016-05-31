@@ -147,7 +147,7 @@ public class DefaultLPKGDeployer implements LPKGDeployer {
 			}
 
 			if (LPKGIndexValidatorThreadLocal.isEnabled()) {
-				_lpkgIndexValidator.updateIntegrity();
+				_lpkgIndexValidator.updateIntegrityProperties();
 			}
 
 			return bundles;
@@ -299,7 +299,7 @@ public class DefaultLPKGDeployer implements LPKGDeployer {
 				}
 			}
 
-			_lpkgIndexValidator.updateIntegrity();
+			_lpkgIndexValidator.updateIntegrityProperties();
 		}
 		finally {
 			LPKGIndexValidatorThreadLocal.setEnabled(enabled);
