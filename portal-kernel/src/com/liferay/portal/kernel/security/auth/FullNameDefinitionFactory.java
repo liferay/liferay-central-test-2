@@ -42,6 +42,7 @@ public class FullNameDefinitionFactory {
 		FullNameField fullNameField = new FullNameField();
 
 		fullNameField.setName(userNameField);
+		fullNameField.setRequired(required);
 
 		String[] values = null;
 
@@ -59,8 +60,6 @@ public class FullNameDefinitionFactory {
 		}
 
 		fullNameField.setValues(values);
-
-		fullNameField.setRequired(required);
 
 		return fullNameField;
 	}
