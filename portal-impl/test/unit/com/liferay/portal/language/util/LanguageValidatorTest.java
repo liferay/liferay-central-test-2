@@ -208,7 +208,6 @@ public class LanguageValidatorTest {
 			LanguageValidator.isValid(
 				LanguageConstants.KEY_USER_NAME_FIELD_NAMES,
 				"last-name,first-name"));
-
 		Assert.assertFalse(
 			LanguageValidator.isValid(
 				LanguageConstants.KEY_USER_NAME_FIELD_NAMES,
@@ -398,7 +397,6 @@ public class LanguageValidatorTest {
 			LanguageValidator.isValid(
 				LanguageConstants.KEY_USER_NAME_REQUIRED_FIELD_NAMES,
 				"suffix"));
-
 		Assert.assertFalse(
 			LanguageValidator.isValid(
 				LanguageConstants.KEY_USER_NAME_REQUIRED_FIELD_NAMES,
