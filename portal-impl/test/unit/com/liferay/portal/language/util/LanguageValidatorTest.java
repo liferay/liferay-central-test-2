@@ -25,7 +25,7 @@ import org.junit.Test;
 public class LanguageValidatorTest {
 
 	@Test
-	public void testLangDirValues() {
+	public void testIsValidKeyDir() {
 		Assert.assertTrue(
 			LanguageValidator.isValid(LanguageConstants.KEY_DIR, "ltr"));
 		Assert.assertTrue(
@@ -40,7 +40,7 @@ public class LanguageValidatorTest {
 	}
 
 	@Test
-	public void testLineBeginValues() {
+	public void testIsValidKeyLineBegin() {
 		Assert.assertTrue(
 			LanguageValidator.isValid(
 				LanguageConstants.KEY_LINE_BEGIN, "left"));
@@ -61,7 +61,7 @@ public class LanguageValidatorTest {
 	}
 
 	@Test
-	public void testLineEndValues() {
+	public void testIsValidKeyLineEnd() {
 		Assert.assertTrue(
 			LanguageValidator.isValid(LanguageConstants.KEY_LINE_END, "left"));
 		Assert.assertTrue(
@@ -79,7 +79,7 @@ public class LanguageValidatorTest {
 	}
 
 	@Test
-	public void testUserNameFieldNameValues() {
+	public void testIsValidKeyUserNameFieldNames() {
 		Assert.assertTrue(
 			LanguageValidator.isValid(
 				LanguageConstants.KEY_USER_NAME_FIELD_NAMES,
@@ -249,7 +249,7 @@ public class LanguageValidatorTest {
 	}
 
 	@Test
-	public void testUserNameRequireFieldNamesValues() {
+	public void testIsValidKeyUserNameRequiredFieldNames() {
 		Assert.assertTrue(
 			LanguageValidator.isValid(
 				LanguageConstants.KEY_USER_NAME_REQUIRED_FIELD_NAMES,
