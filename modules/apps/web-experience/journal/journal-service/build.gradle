@@ -34,5 +34,5 @@ dependencies {
 	provided project(":apps:foundation:petra:petra-collection")
 	provided project(":apps:foundation:petra:petra-content")
 	provided project(":apps:foundation:petra:petra-xml")
-	provided project(":apps:web-experience:journal:journal-api")
+	provided group: "com.liferay", name: "com.liferay.journal.api", version: "2.0.0"
 }
