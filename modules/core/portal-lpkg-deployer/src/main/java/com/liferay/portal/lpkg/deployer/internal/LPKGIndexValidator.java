@@ -309,7 +309,7 @@ public class LPKGIndexValidator {
 			localProcessExecutor.destroy();
 		}
 
-		URL url = _bytesURLProtocolSupport.putData(
+		URL url = _bytesURLProtocolSupport.putBytes(
 			"liferay-target-platform", bytes);
 
 		uris.add(url.toURI());
@@ -331,7 +331,7 @@ public class LPKGIndexValidator {
 
 				String name = lpkgFile.getName();
 
-				URL url = _bytesURLProtocolSupport.putData(
+				URL url = _bytesURLProtocolSupport.putBytes(
 					name.substring(0, name.length() - 5),
 					unsyncByteArrayOutputStream.toByteArray());
 

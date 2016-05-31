@@ -151,12 +151,12 @@ public class TargetPlatformMain {
 
 			String name = lpkgFile.getName();
 
-			byte[] data = byteArrayOutputStream.toByteArray();
+			byte[] bytes = byteArrayOutputStream.toByteArray();
 
-			URL url = BytesURLSupport.putData(
-				name.substring(0, name.length() - 5), data);
+			URL url = BytesURLSupport.putBytes(
+				name.substring(0, name.length() - 5), bytes);
 
-			_writeIndexToLPKG(lpkgFile, data);
+			_writeIndexToLPKG(lpkgFile, bytes);
 
 			byteArrayOutputStream.reset();
 
@@ -198,7 +198,7 @@ public class TargetPlatformMain {
 
 			targetPlatformIndexer.index(byteArrayOutputStream);
 
-			URL url = BytesURLSupport.putData(
+			URL url = BytesURLSupport.putBytes(
 				"liferay-target-platform", byteArrayOutputStream.toByteArray());
 
 			return url.toURI();
@@ -237,7 +237,7 @@ public class TargetPlatformMain {
 								return FileVisitResult.CONTINUE;
 							}
 
-							URL url = BytesURLSupport.putData(
+							URL url = BytesURLSupport.putBytes(
 								fileName.substring(0, fileName.length() - 4),
 								Files.readAllBytes(filePath));
 
@@ -357,7 +357,7 @@ public class TargetPlatformMain {
 		}
 	}
 
-	private static void _writeIndexToLPKG(File lpkg, byte[] data)
+	private static void _writeIndexToLPKG(File lpkg, byte[] bytes)
 		throws IOException {
 
 		try (FileSystem fileSystem = FileSystems.newFileSystem(
@@ -370,7 +370,7 @@ public class TargetPlatformMain {
 			// OpenOption...) to automatically add the StandardOpenOption list
 
 			Files.write(
-				fileSystem.getPath("index.xml"), data,
+				fileSystem.getPath("index.xml"), bytes,
 				StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING,
 				StandardOpenOption.WRITE);
 		}
