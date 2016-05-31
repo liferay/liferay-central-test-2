@@ -58,10 +58,10 @@ import org.osgi.framework.launch.FrameworkFactory;
 public class TargetPlatformMain {
 
 	public static void main(String[] args) throws Exception {
-		String moduleFrameworkBaseDir = System.getProperty(
+		String moduleFrameworkBaseDirName = System.getProperty(
 			"module.framework.base.dir");
 
-		if (moduleFrameworkBaseDir == null) {
+		if (moduleFrameworkBaseDirName == null) {
 			System.err.println(
 				"== -Dmodule.framework.base.dir must point to a valid " +
 					"directory");
@@ -71,64 +71,64 @@ public class TargetPlatformMain {
 
 		BytesURLSupport.init();
 
-		String moduleFrameworkStaticDir = System.getProperty(
+		String indexesFileName = System.getProperty(
+			"indexes.file",
+			moduleFrameworkBaseDirName + "/" +
+				Indexer.DIR_NAME_TARGET_PLATFORM + "/target-platform-indexes-" +
+					System.currentTimeMillis() + ".zip");
+		String moduleFrameworkStaticDirName = System.getProperty(
 			"module.framework.static.dir",
-			moduleFrameworkBaseDir.concat("/static"));
-
-		String moduleFrameworkModulesDir = System.getProperty(
+			moduleFrameworkBaseDirName.concat("/static"));
+		String moduleFrameworkModulesDirName = System.getProperty(
 			"module.framework.modules.dir",
-			moduleFrameworkBaseDir.concat("/modules"));
-
-		String moduleFrameworkPortalDir = System.getProperty(
+			moduleFrameworkBaseDirName.concat("/modules"));
+		String moduleFrameworkPortalDirName = System.getProperty(
 			"module.framework.portal.dir",
-			moduleFrameworkBaseDir.concat("/portal"));
-
+			moduleFrameworkBaseDirName.concat("/portal"));
 		String moduleFrameworkMarketplaceDir = System.getProperty(
 			"module.framework.marketplace.dir",
-			moduleFrameworkBaseDir.concat("/marketplace"));
-
-		String indexesFile = System.getProperty(
-			"indexes.file",
-			moduleFrameworkBaseDir + "/" + Indexer.DIR_NAME_TARGET_PLATFORM +
-				"/target-platform-indexes-" + System.currentTimeMillis() +
-					".zip");
-
-		String integrityProperties = System.getProperty(
-			"integrity.properties",
-			moduleFrameworkBaseDir + "/" + Indexer.DIR_NAME_TARGET_PLATFORM +
-				"/integrity.properties");
+			moduleFrameworkBaseDirName.concat("/marketplace"));
 
 		List<URI> uris = _index(
-			indexesFile, moduleFrameworkStaticDir, moduleFrameworkModulesDir,
-			moduleFrameworkPortalDir, moduleFrameworkMarketplaceDir);
+			indexesFileName, moduleFrameworkStaticDirName,
+			moduleFrameworkModulesDirName, moduleFrameworkPortalDirName,
+			moduleFrameworkMarketplaceDir);
 
 		if (_validate(uris)) {
-			_updateIntegrity(uris, Paths.get(integrityProperties));
+			String integrityPropertiesFileName = System.getProperty(
+				"integrity.properties",
+				moduleFrameworkBaseDirName + "/" +
+					Indexer.DIR_NAME_TARGET_PLATFORM + "/integrity.properties");
+
+			_updateIntegrityProperties(
+				uris, Paths.get(integrityPropertiesFileName));
 		}
 	}
 
 	private static List<URI> _index(
-			String indexesFileName, String moduleFrameworkStaticDir,
-			String moduleFrameworkModulesDir, String moduleFrameworkPortalDir,
-			String moduleFrameworkMarketplaceDir)
+			String indexesFileName, String moduleFrameworkStaticDirName,
+			String moduleFrameworkModulesDirName,
+			String moduleFrameworkPortalDirName,
+			String moduleFrameworkMarketplaceDirName)
 		throws Exception {
 
-		Path indexFilePath = Paths.get(indexesFileName);
+		Path indexesFilePath = Paths.get(indexesFileName);
 
-		if (Files.exists(indexFilePath)) {
-			return _loadIndexes(indexFilePath);
+		if (Files.exists(indexesFilePath)) {
+			return _loadIndexes(indexesFilePath);
 		}
 
 		List<URI> uris = new ArrayList<>();
 
 		uris.add(
 			_indexTargetPlatform(
-				moduleFrameworkStaticDir, moduleFrameworkModulesDir,
-				moduleFrameworkPortalDir));
+				moduleFrameworkStaticDirName, moduleFrameworkModulesDirName,
+				moduleFrameworkPortalDirName));
 
 		uris.addAll(
 			_indexLPKGFiles(
-				Utilities.listFiles(moduleFrameworkMarketplaceDir, "*.lpkg")));
+				Utilities.listFiles(
+					moduleFrameworkMarketplaceDirName, "*.lpkg")));
 
 		_saveIndexes(indexesFileName, uris);
 
@@ -294,7 +294,7 @@ public class TargetPlatformMain {
 		System.out.println("== Saved indexes file at " + indexesFileName);
 	}
 
-	private static void _updateIntegrity(
+	private static void _updateIntegrityProperties(
 			List<URI> uris, Path integrityPropertiesPath)
 		throws Exception {
 
