@@ -363,12 +363,11 @@ public class TargetPlatformMain {
 		try (FileSystem fileSystem = FileSystems.newFileSystem(
 				lpkg.toPath(), null)) {
 
-			// The StandardOpenOption list should not be needed, but there is a
-			// bug in com.sun.nio.zipfs.ZipFileSystemProvider.newOutputStream(
-			// Path, OpenOption...) which does not follow the api contract of
-			// java.nio.file.Files.write(Path, byte[], OpenOption...) to
-			// automatically add these options. So that these options must be
-			// explicitly listed out until the jdk bug is fixed.
+			// Specifying StandardOpenOption list is a workaround for a bug in
+			// com.sun.nio.zipfs.ZipFileSystemProvider#newOutputStream(
+			// Path, OpenOption...) that does not follow the API contract
+			// specified in java.nio.file.Files#write(Path, byte[],
+			// OpenOption...) to automatically add the StandardOpenOption list
 
 			Files.write(
 				fileSystem.getPath("index.xml"), data,
