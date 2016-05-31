@@ -242,7 +242,7 @@ public class LPKGIndexValidator {
 
 	private void _cleanUp(List<URI> uris) throws MalformedURLException {
 		for (URI uri : uris) {
-			_bytesURLProtocolSupport.removeData(uri.toURL());
+			_bytesURLProtocolSupport.removeBytes(uri.toURL());
 		}
 	}
 
