@@ -21,7 +21,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-
+import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
 import java.nio.file.FileVisitResult;
 import java.nio.file.FileVisitor;
@@ -31,7 +31,6 @@ import java.nio.file.PathMatcher;
 import java.nio.file.Paths;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -164,27 +163,33 @@ public class LanguagePropertyTest {
 		_testValidKey(LanguageConstants.KEY_USER_NAME_REQUIRED_FIELD_NAMES);
 	}
 
-	private static List<String> _getFileNames(String glob) throws IOException {
-		final PathMatcher includePatternMatcher =
-			FileSystems.getDefault().getPathMatcher("glob:" + glob);
+	private static List<String> _getFileNames(String pattern)
+		throws IOException {
 
-		final List<String> paths = new ArrayList<>();
+		final List<String> fileNames = new ArrayList<>();
+
+		FileSystem fileSystem = FileSystems.getDefault();
+	
+		final PathMatcher pathMatcher = fileSystem.getPathMatcher(
+			"glob:" + pattern);
 
 		FileVisitor<Path> simpleFileVisitor = new SimpleFileVisitor<Path>() {
 
 			@Override
 			public FileVisitResult visitFile(
-				Path path, BasicFileAttributes attrs) {
+				Path path, BasicFileAttributes basicFileAttributes) {
 
-				if (includePatternMatcher.matches(path)) {
-					paths.add(path.toString());
+				if (pathMatcher.matches(path)) {
+					fileNames.add(path.toString());
 				}
 
 				return FileVisitResult.CONTINUE;
 			}
 
 			@Override
-			public FileVisitResult visitFileFailed(Path file, IOException exc) {
+			public FileVisitResult visitFileFailed(
+				Path path, IOException ioeException) {
+
 				return FileVisitResult.CONTINUE;
 			}
 
@@ -192,7 +197,7 @@ public class LanguagePropertyTest {
 
 		Files.walkFileTree(Paths.get("./"), simpleFileVisitor);
 
-		return paths;
+		return fileNames;
 	}
 
 	private static Map<String, Properties> _getPropertiesMap(
@@ -215,11 +220,11 @@ public class LanguagePropertyTest {
 	}
 
 	private void _testMissingKey(String key) {
-		Set<String> paths = _modulesPropertiesMap.keySet();
+		Set<String> fileNames = _modulesPropertiesMap.keySet();
 
 		List<String> failureMessages = new ArrayList<>();
 
-		for (String path : paths) {
+		for (String path : fileNames) {
 			Properties properties = _modulesPropertiesMap.get(path);
 
 			Set<String> propertyNames = properties.stringPropertyNames();
