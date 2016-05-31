@@ -176,8 +176,7 @@ public class LanguagePropertyTest {
 
 			@Override
 			public FileVisitResult visitFile(
-					Path path, BasicFileAttributes attrs)
-				throws IOException {
+				Path path, BasicFileAttributes attrs) {
 
 				if (includePatternMatcher.matches(path)) {
 					paths.add(path.toString());
@@ -187,9 +186,7 @@ public class LanguagePropertyTest {
 			}
 
 			@Override
-			public FileVisitResult visitFileFailed(Path file, IOException exc)
-				throws IOException {
-
+			public FileVisitResult visitFileFailed(Path file, IOException exc) {
 				return FileVisitResult.CONTINUE;
 			}
 
