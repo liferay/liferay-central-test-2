@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+
 import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
 import java.nio.file.FileVisitResult;
@@ -31,6 +32,7 @@ import java.nio.file.PathMatcher;
 import java.nio.file.Paths;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -80,8 +82,7 @@ public class LanguagePropertyTest {
 
 	@Test
 	public void testMissingKeyUserNamePrefixValues() {
-		_testMissingKey(
-			LanguageConstants.KEY_USER_NAME_PREFIX_VALUES);
+		_testMissingKey(LanguageConstants.KEY_USER_NAME_PREFIX_VALUES);
 	}
 
 	@Test
@@ -154,8 +155,7 @@ public class LanguagePropertyTest {
 
 	@Test
 	public void testValidKeyUserNameFieldNames() {
-		_testValidKey(
-			LanguageConstants.KEY_USER_NAME_FIELD_NAMES);
+		_testValidKey(LanguageConstants.KEY_USER_NAME_FIELD_NAMES);
 	}
 
 	@Test
@@ -169,7 +169,7 @@ public class LanguagePropertyTest {
 		final List<String> fileNames = new ArrayList<>();
 
 		FileSystem fileSystem = FileSystems.getDefault();
-	
+
 		final PathMatcher pathMatcher = fileSystem.getPathMatcher(
 			"glob:" + pattern);
 
@@ -262,7 +262,7 @@ public class LanguagePropertyTest {
 		}
 	}
 
-	private static Map<String, Properties> _portalImplPropertiesMap;
 	private static Map<String, Properties> _modulesPropertiesMap;
+	private static Map<String, Properties> _portalImplPropertiesMap;
 
 }
