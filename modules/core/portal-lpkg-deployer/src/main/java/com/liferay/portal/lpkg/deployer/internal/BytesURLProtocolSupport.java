@@ -67,7 +67,7 @@ public class BytesURLProtocolSupport {
 		}
 	}
 
-	public byte[] removeData(URL url) {
+	public byte[] removeBytes(URL url) {
 		return _bytesMap.remove(url);
 	}
 

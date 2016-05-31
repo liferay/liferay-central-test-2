@@ -92,7 +92,7 @@ public class BytesURLSupport {
 		}
 	}
 
-	public static byte[] removeData(URL url) {
+	public static byte[] removeBytes(URL url) {
 		return _dataMap.remove(url);
 	}
 
