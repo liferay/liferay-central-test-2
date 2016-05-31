@@ -58,11 +58,11 @@ public class BytesURLSupport {
 								public InputStream getInputStream()
 									throws IOException {
 
-									byte[] bytes = _dataMap.get(url);
+									byte[] bytes = _bytesMap.get(url);
 
 									if (bytes == null) {
 										throw new IOException(
-											"Unable to find data for " + url);
+											"Unable to get bytes for " + url);
 									}
 
 									return new ByteArrayInputStream(bytes);
@@ -77,11 +77,11 @@ public class BytesURLSupport {
 			});
 	}
 
-	public static URL putData(String id, byte[] data) {
+	public static URL putBytes(String id, byte[] bytes) {
 		try {
 			URL url = new URL("bytes://localhost/".concat(id));
 
-			_dataMap.put(url, data);
+			_bytesMap.put(url, bytes);
 
 			return url;
 		}
@@ -91,9 +91,9 @@ public class BytesURLSupport {
 	}
 
 	public static byte[] removeBytes(URL url) {
-		return _dataMap.remove(url);
+		return _bytesMap.remove(url);
 	}
 
-	private static final Map<URL, byte[]> _dataMap = new ConcurrentHashMap<>();
+	private static final Map<URL, byte[]> _bytesMap = new ConcurrentHashMap<>();
 
 }
