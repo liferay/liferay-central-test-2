@@ -12,9 +12,8 @@
  * details.
  */
 
-package com.liferay.portal.language.util;
+package com.liferay.portal.kernel.language;
 
-import com.liferay.portal.kernel.language.LanguageConstants;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 
