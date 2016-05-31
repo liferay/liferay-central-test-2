@@ -50,13 +50,13 @@ public class LanguagePropertyTest {
 
 	@BeforeClass
 	public static void setUpClass() throws Exception {
-		List<String> coreFilePaths = _getPaths(
-			"./portal-impl/src/**/Language*.properties");
-		List<String> moduleFilePaths = _getPaths(
+		List<String> modulesFileNames = _getPaths(
 			"./modules/**/src/**/Language*.properties");
+		List<String> portalImplFileNames = _getPaths(
+			"./portal-impl/src/**/Language*.properties");
 
-		_corePropertiesMap = _getPropertiesMap(coreFilePaths);
-		_modulePropertiesMap = _getPropertiesMap(moduleFilePaths);
+		_modulesPropertiesMap = _getPropertiesMap(modulesFileNames);
+		_portalImplPropertiesMap = _getPropertiesMap(portalImplFileNames);
 	}
 
 	@Test
@@ -100,12 +100,12 @@ public class LanguagePropertyTest {
 
 	@Test
 	public void testUserNameRequiredFieldNamesSubsetOfUserNameFieldNames() {
-		Set<String> paths = _corePropertiesMap.keySet();
+		Set<String> paths = _portalImplPropertiesMap.keySet();
 
 		List<String> failureMessages = new ArrayList<>();
 
 		for (String path : paths) {
-			Properties properties = _corePropertiesMap.get(path);
+			Properties properties = _portalImplPropertiesMap.get(path);
 
 			String userNameFieldNamesString = properties.getProperty(
 				LanguageConstants.KEY_USER_NAME_FIELD_NAMES);
@@ -199,31 +199,32 @@ public class LanguagePropertyTest {
 		return paths;
 	}
 
-	private static Map<String, Properties> _getPropertiesMap(List<String> paths)
+	private static Map<String, Properties> _getPropertiesMap(
+			List<String> fileNames)
 		throws IOException {
 
 		Map<String, Properties> propertiesMap = new HashMap<>();
 
-		for (String path : paths) {
+		for (String fileName : fileNames) {
 			Properties properties = new Properties();
 
-			try (InputStream inputStream = new FileInputStream(path)) {
+			try (InputStream inputStream = new FileInputStream(fileName)) {
 				properties.load(inputStream);
 			}
 
-			propertiesMap.put(path, properties);
+			propertiesMap.put(fileName, properties);
 		}
 
 		return propertiesMap;
 	}
 
 	private void _assertLanguageSettingNotPresent(String key) {
-		Set<String> paths = _modulePropertiesMap.keySet();
+		Set<String> paths = _modulesPropertiesMap.keySet();
 
 		List<String> failureMessages = new ArrayList<>();
 
 		for (String path : paths) {
-			Properties properties = _modulePropertiesMap.get(path);
+			Properties properties = _modulesPropertiesMap.get(path);
 
 			Set<String> propertyNames = properties.stringPropertyNames();
 
@@ -239,12 +240,12 @@ public class LanguagePropertyTest {
 	}
 
 	private void _assertValidLanguageSettingValue(String key) {
-		Set<String> paths = _corePropertiesMap.keySet();
+		Set<String> paths = _portalImplPropertiesMap.keySet();
 
 		List<String> failureMessages = new ArrayList<>();
 
 		for (String path : paths) {
-			Properties properties = _corePropertiesMap.get(path);
+			Properties properties = _portalImplPropertiesMap.get(path);
 
 			String value = properties.getProperty(key);
 
@@ -260,7 +261,7 @@ public class LanguagePropertyTest {
 		}
 	}
 
-	private static Map<String, Properties> _corePropertiesMap;
-	private static Map<String, Properties> _modulePropertiesMap;
+	private static Map<String, Properties> _portalImplPropertiesMap;
+	private static Map<String, Properties> _modulesPropertiesMap;
 
 }
