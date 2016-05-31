@@ -12,9 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.language.util;
-
-import com.liferay.portal.kernel.language.LanguageConstants;
+package com.liferay.portal.kernel.language;
 
 import org.junit.Assert;
 import org.junit.Test;

@@ -16,6 +16,8 @@ Main-Class: com.liferay.lang.builder.LangBuilder
 	@com.liferay.portal.kernel-[0-9]*.jar!/com/liferay/portal/kernel/io/unsync/UnsyncByteArrayOutputStream.class,\
 	@com.liferay.portal.kernel-[0-9]*.jar!/com/liferay/portal/kernel/io/unsync/UnsyncStringReader.class,\
 	@com.liferay.portal.kernel-[0-9]*.jar!/com/liferay/portal/kernel/io/unsync/UnsyncStringWriter.class,\
+	@com.liferay.portal.kernel-[0-9]*.jar!/com/liferay/portal/kernel/language/LanguageConstants.class,\
+	@com.liferay.portal.kernel-[0-9]*.jar!/com/liferay/portal/kernel/language/LanguageValidator.class,\
 	@com.liferay.portal.kernel-[0-9]*.jar!/com/liferay/portal/kernel/log/*,\
 	@com.liferay.portal.kernel-[0-9]*.jar!/com/liferay/portal/kernel/memory/SoftReferenceThreadLocal.class,\
 	@com.liferay.portal.kernel-[0-9]*.jar!/com/liferay/portal/kernel/nio/charset/CharsetEncoderUtil.class,\
