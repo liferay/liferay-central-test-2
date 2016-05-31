@@ -23,7 +23,7 @@ import com.liferay.portal.kernel.util.StringUtil;
  */
 public class LanguageValidator {
 
-	public static boolean isLanguageSettingsProperty(String key) {
+	public static boolean isSpecialPropertyKey(String key) {
 		return ArrayUtil.contains(
 			LanguageConstants.KEYS_SPECIAL_PROPERTIES, key);
 	}

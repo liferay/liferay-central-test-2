@@ -214,7 +214,7 @@ public class LangBuilder {
 		_createProperties(content, "vi"); // Vietnamese
 	}
 
-	private static String _getDefaultLanguageSettingValue(String key) {
+	private static String _getSpecialPropertyValue(String key) {
 		if (key.equals(LanguageConstants.KEY_DIR)) {
 			return LanguageConstants.VALUE_LTR;
 		}
@@ -363,11 +363,8 @@ public class LangBuilder {
 								translatedText = value + AUTOMATIC_COPY;
 							}
 						}
-						else if (LanguageValidator.isLanguageSettingsProperty(
-									key)) {
-
-							translatedText = _getDefaultLanguageSettingValue(
-								key);
+						else if (LanguageValidator.isSpecialPropertyKey(key)) {
+							translatedText = _getSpecialPropertyValue(key);
 						}
 						else if (languageId.equals("el") &&
 								 (key.equals("enabled") || key.equals("on") ||
