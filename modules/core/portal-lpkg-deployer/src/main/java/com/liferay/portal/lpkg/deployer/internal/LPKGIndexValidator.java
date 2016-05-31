@@ -92,20 +92,20 @@ public class LPKGIndexValidator {
 			return false;
 		}
 
-		Set<String> keys = new HashSet<>();
+		Set<String> integrityKeys = new HashSet<>();
 
 		for (URI uri : indexURIs) {
-			keys.add(_toKey(uri));
+			integrityKeys.add(_toIntegrityKey(uri));
 		}
 
-		if (!keys.equals(properties.stringPropertyNames())) {
+		if (!integrityKeys.equals(properties.stringPropertyNames())) {
 			if (_log.isInfoEnabled()) {
 				List<String> expectedKeys = new ArrayList<>(
 					properties.stringPropertyNames());
 
 				Collections.sort(expectedKeys);
 
-				List<String> actualKeys = new ArrayList<>(keys);
+				List<String> actualKeys = new ArrayList<>(integrityKeys);
 
 				Collections.sort(actualKeys);
 
@@ -119,10 +119,10 @@ public class LPKGIndexValidator {
 		}
 
 		for (URI uri : indexURIs) {
-			String key = _toKey(uri);
+			String integrityKey = _toIntegrityKey(uri);
 
 			try {
-				String expectedChecksum = properties.getProperty(key);
+				String expectedChecksum = properties.getProperty(integrityKey);
 
 				String actualChecksum = _toChecksum(uri);
 
@@ -130,7 +130,7 @@ public class LPKGIndexValidator {
 					if (_log.isInfoEnabled()) {
 						_log.info(
 							"Failed integrity check because of mismatched " +
-								"checksum for " + key);
+								"checksum for " + integrityKey);
 					}
 
 					return false;
@@ -163,7 +163,7 @@ public class LPKGIndexValidator {
 			StringBundler sb = new StringBundler(indexURIs.size() * 4);
 
 			for (URI uri : indexURIs) {
-				sb.append(_toKey(uri));
+				sb.append(_toIntegrityKey(uri));
 				sb.append(StringPool.EQUAL);
 				sb.append(_toChecksum(uri));
 				sb.append(StringPool.NEW_LINE);
@@ -336,16 +336,16 @@ public class LPKGIndexValidator {
 		return StringUtil.bytesToHexString(messageDigest.digest());
 	}
 
-	private String _toKey(URI uri) {
-		String key = uri.getPath();
+	private String _toIntegrityKey(URI uri) {
+		String integrityKey = uri.getPath();
 
-		int index = key.lastIndexOf(StringPool.SLASH);
+		int index = integrityKey.lastIndexOf(StringPool.SLASH);
 
 		if (index != -1) {
-			key = key.substring(index + 1);
+			integrityKey = integrityKey.substring(index + 1);
 		}
 
-		return key;
+		return integrityKey;
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
