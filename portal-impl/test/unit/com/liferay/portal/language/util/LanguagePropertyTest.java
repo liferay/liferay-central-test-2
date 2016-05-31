@@ -220,45 +220,45 @@ public class LanguagePropertyTest {
 	}
 
 	private void _testMissingKey(String key) {
+		List<String> invalidFileNames = new ArrayList<>();
+
 		Set<String> fileNames = _modulesPropertiesMap.keySet();
 
-		List<String> failureMessages = new ArrayList<>();
-
-		for (String path : fileNames) {
-			Properties properties = _modulesPropertiesMap.get(path);
+		for (String fileName : fileNames) {
+			Properties properties = _modulesPropertiesMap.get(fileName);
 
 			Set<String> propertyNames = properties.stringPropertyNames();
 
 			if (propertyNames.contains(key)) {
-				failureMessages.add(path);
+				invalidFileNames.add(fileName);
 			}
 		}
 
-		if (!failureMessages.isEmpty()) {
+		if (!invalidFileNames.isEmpty()) {
 			Assert.fail(
-				"Language setting \"" + key + "\" found in " + failureMessages);
+				"Key \"" + key + "\" is missing from: " + invalidFileNames);
 		}
 	}
 
 	private void _testValidKey(String key) {
-		Set<String> paths = _portalImplPropertiesMap.keySet();
+		List<String> invalidFileNames = new ArrayList<>();
 
-		List<String> failureMessages = new ArrayList<>();
+		Set<String> fileNames = _portalImplPropertiesMap.keySet();
 
-		for (String path : paths) {
+		for (String path : fileNames) {
 			Properties properties = _portalImplPropertiesMap.get(path);
 
 			String value = properties.getProperty(key);
 
 			if ((value != null) && !LanguageValidator.isValid(key, value)) {
-				failureMessages.add(path);
+				invalidFileNames.add(path);
 			}
 		}
 
-		if (!failureMessages.isEmpty()) {
+		if (!invalidFileNames.isEmpty()) {
 			Assert.fail(
-				"Invalid values for Language setting \"" + key +
-					"\" found in " + failureMessages);
+				"Invalid values for key \"" + key + "\" are found in: " +
+					invalidFileNames);
 		}
 	}
 
