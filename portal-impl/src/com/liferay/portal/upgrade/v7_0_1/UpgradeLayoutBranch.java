@@ -15,7 +15,7 @@
 package com.liferay.portal.upgrade.v7_0_1;
 
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
-import com.liferay.portal.upgrade.v7_0_0.util.LayoutBranchTable;
+import com.liferay.portal.upgrade.v7_0_1.util.LayoutBranchTable;
 
 /**
  * @author Miguel Pastor
