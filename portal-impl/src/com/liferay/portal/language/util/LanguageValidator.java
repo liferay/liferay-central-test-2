@@ -64,8 +64,7 @@ public class LanguageValidator {
 			return false;
 		}
 
-		if (ArrayUtil.contains(
-				valueArray, LanguageConstants.VALUE_PREFIX) &&
+		if (ArrayUtil.contains(valueArray, LanguageConstants.VALUE_PREFIX) &&
 			!valueArray[0].equals(LanguageConstants.VALUE_PREFIX)) {
 
 			return false;
