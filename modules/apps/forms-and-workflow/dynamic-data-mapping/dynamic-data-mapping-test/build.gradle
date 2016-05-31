@@ -18,7 +18,7 @@ dependencies {
 	testCompile group: "com.liferay", name: "com.liferay.dynamic.data.mapping.type.radio", version: "2.0.0"
 	testCompile group: "com.liferay", name: "com.liferay.dynamic.data.mapping.type.select", version: "2.0.0"
 	testCompile group: "com.liferay", name: "com.liferay.dynamic.data.mapping.type.text", version: "2.0.0"
-	testCompile project(":apps:forms-and-workflow:dynamic-data-mapping:dynamic-data-mapping-api")
+	testCompile group: "com.liferay", name: "com.liferay.dynamic.data.mapping.api", version: "3.1.0"
 	testCompile project(":apps:forms-and-workflow:dynamic-data-mapping:dynamic-data-mapping-service")
 	testCompile project(":apps:forms-and-workflow:dynamic-data-mapping:dynamic-data-mapping-validator")
 
