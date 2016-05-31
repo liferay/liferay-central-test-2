@@ -298,7 +298,7 @@ public class ClassPathUtil {
 
 					String name = file.getName();
 
-					if (name.endsWith(".jar") || name.equals("bundleFile")) {
+					if (name.equals("bundleFile") || name.endsWith(".jar")) {
 						return true;
 					}
 
