@@ -189,10 +189,13 @@ public class LPKGIndexValidator {
 	public void validate(List<File> lpkgFiles) throws Exception {
 		long start = System.currentTimeMillis();
 
-		List<URI> targetPlatformIndexURIs = _getTargetPlatformIndexURIs();
-		List<URI> lpkgIndexURIs = _indexLPKGFiles(lpkgFiles);
+		List<URI> allIndexURIs = new ArrayList<>();
 
-		List<URI> allIndexURIs = new ArrayList<>(targetPlatformIndexURIs);
+		List<URI> targetPlatformIndexURIs = _getTargetPlatformIndexURIs();
+
+		allIndexURIs.addAll(targetPlatformIndexURIs);
+
+		List<URI> lpkgIndexURIs = _indexLPKGFiles(lpkgFiles);
 
 		allIndexURIs.addAll(lpkgIndexURIs);
 
