@@ -202,6 +202,9 @@
 
 	<target name="index-modules-and-app-lpkgs">
 		<path id="target.platform.indexer.classpath">
+
+			<!-- Order is important -->
+
 			<fileset dir="${osgi.dir}/static" includes="com.liferay.portal.target.platform.indexer.jar" />
 			<fileset dir="${osgi.dir}/core" includes="com.liferay.portal.bootstrap.jar,org.eclipse.osgi.jar" />
 		</path>
