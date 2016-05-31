@@ -72,8 +72,8 @@ public class LPKGIndexValidator {
 		if (Files.notExists(_integrityPropertiesFilePath)) {
 			if (_log.isInfoEnabled()) {
 				_log.info(
-					_integrityPropertiesFilePath +
-						" does not exist, skipped integrity checking.");
+					"Skip integrity check because " +
+						_integrityPropertiesFilePath + " does not exist");
 			}
 
 			return false;
@@ -110,8 +110,9 @@ public class LPKGIndexValidator {
 				Collections.sort(actualKeys);
 
 				_log.info(
-					"Failed integrity check, expected keys: " + expectedKeys +
-						", actual keys: " + actualKeys);
+					"Failed integrity check because expected keys: " +
+						expectedKeys + " do not match actual keys: " +
+							actualKeys);
 			}
 
 			return false;
@@ -128,8 +129,8 @@ public class LPKGIndexValidator {
 				if (!Objects.equals(expectedChecksum, actualChecksum)) {
 					if (_log.isInfoEnabled()) {
 						_log.info(
-							"Failed integrity check, checksum mismatch for " +
-								key);
+							"Failed integrity check because of mismatched " +
+								"checksum for " + key);
 					}
 
 					return false;
@@ -143,7 +144,7 @@ public class LPKGIndexValidator {
 		}
 
 		if (_log.isInfoEnabled()) {
-			_log.info("Passed integrity check.");
+			_log.info("Passed integrity check");
 		}
 
 		return true;
@@ -153,7 +154,7 @@ public class LPKGIndexValidator {
 		_lpkgDeployer = lpkgDeployer;
 	}
 
-	public void updateIntegrity() {
+	public void updateIntegrityProperties() {
 		try {
 			List<URI> indexURIs = _getTargetPlatformIndexURIs();
 
