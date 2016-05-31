@@ -50,9 +50,9 @@ public class LanguagePropertyTest {
 
 	@BeforeClass
 	public static void setUpClass() throws Exception {
-		List<String> modulesFileNames = _getPaths(
+		List<String> modulesFileNames = _getFileNames(
 			"./modules/**/src/**/Language*.properties");
-		List<String> portalImplFileNames = _getPaths(
+		List<String> portalImplFileNames = _getFileNames(
 			"./portal-impl/src/**/Language*.properties");
 
 		_modulesPropertiesMap = _getPropertiesMap(modulesFileNames);
@@ -60,42 +60,39 @@ public class LanguagePropertyTest {
 	}
 
 	@Test
-	public void testModulesNoLanguageSettingsKeyDir() {
-		_assertLanguageSettingNotPresent(LanguageConstants.KEY_DIR);
+	public void testMissingKeyDir() {
+		_testMissingKey(LanguageConstants.KEY_DIR);
 	}
 
 	@Test
-	public void testModulesNoLanguageSettingsKeyLineBegin() {
-		_assertLanguageSettingNotPresent(LanguageConstants.KEY_LINE_BEGIN);
+	public void testMissingKeyLineBegin() {
+		_testMissingKey(LanguageConstants.KEY_LINE_BEGIN);
 	}
 
 	@Test
-	public void testModulesNoLanguageSettingsKeyLineEnd() {
-		_assertLanguageSettingNotPresent(LanguageConstants.KEY_LINE_END);
+	public void testMissingKeyLineEnd() {
+		_testMissingKey(LanguageConstants.KEY_LINE_END);
 	}
 
 	@Test
-	public void testModulesNoLanguageSettingsKeyUserNameFieldNames() {
-		_assertLanguageSettingNotPresent(
-			LanguageConstants.KEY_USER_NAME_FIELD_NAMES);
+	public void testMissingKeyUserNameFieldNames() {
+		_testMissingKey(LanguageConstants.KEY_USER_NAME_FIELD_NAMES);
 	}
 
 	@Test
-	public void testModulesNoLanguageSettingsKeyUserNamePrefixValues() {
-		_assertLanguageSettingNotPresent(
+	public void testMissingKeyUserNamePrefixValues() {
+		_testMissingKey(
 			LanguageConstants.KEY_USER_NAME_PREFIX_VALUES);
 	}
 
 	@Test
-	public void testModulesNoLanguageSettingsKeyUserNameRequiredFieldNames() {
-		_assertLanguageSettingNotPresent(
-			LanguageConstants.KEY_USER_NAME_REQUIRED_FIELD_NAMES);
+	public void testMissingKeyUserNameRequiredFieldNames() {
+		_testMissingKey(LanguageConstants.KEY_USER_NAME_REQUIRED_FIELD_NAMES);
 	}
 
 	@Test
-	public void testModulesNoLanguageSettingsKeyUserNameSuffixValues() {
-		_assertLanguageSettingNotPresent(
-			LanguageConstants.KEY_USER_NAME_SUFFIX_VALUES);
+	public void testMissingKeyUserNameSuffixValues() {
+		_testMissingKey(LanguageConstants.KEY_USER_NAME_SUFFIX_VALUES);
 	}
 
 	@Test
@@ -142,33 +139,32 @@ public class LanguagePropertyTest {
 	}
 
 	@Test
-	public void testValidLanguageSettingValueLangDir() {
-		_assertValidLanguageSettingValue(LanguageConstants.KEY_DIR);
+	public void testValidKeyDir() {
+		_testValidKey(LanguageConstants.KEY_DIR);
 	}
 
 	@Test
-	public void testValidLanguageSettingValueLangLineBegin() {
-		_assertValidLanguageSettingValue(LanguageConstants.KEY_LINE_BEGIN);
+	public void testValidKeyLineBegin() {
+		_testValidKey(LanguageConstants.KEY_LINE_BEGIN);
 	}
 
 	@Test
-	public void testValidLanguageSettingValueLangLineEnd() {
-		_assertValidLanguageSettingValue(LanguageConstants.KEY_LINE_END);
+	public void testValidKeyLineEnd() {
+		_testValidKey(LanguageConstants.KEY_LINE_END);
 	}
 
 	@Test
-	public void testValidLanguageSettingValueLangUserNameFieldNames() {
-		_assertValidLanguageSettingValue(
+	public void testValidKeyUserNameFieldNames() {
+		_testValidKey(
 			LanguageConstants.KEY_USER_NAME_FIELD_NAMES);
 	}
 
 	@Test
-	public void testValidLanguageSettingValueLangUserNameRequiredFieldNames() {
-		_assertValidLanguageSettingValue(
-			LanguageConstants.KEY_USER_NAME_REQUIRED_FIELD_NAMES);
+	public void testValidKeyUserNameRequiredFieldNames() {
+		_testValidKey(LanguageConstants.KEY_USER_NAME_REQUIRED_FIELD_NAMES);
 	}
 
-	private static List<String> _getPaths(String glob) throws IOException {
+	private static List<String> _getFileNames(String glob) throws IOException {
 		final PathMatcher includePatternMatcher =
 			FileSystems.getDefault().getPathMatcher("glob:" + glob);
 
@@ -218,7 +214,7 @@ public class LanguagePropertyTest {
 		return propertiesMap;
 	}
 
-	private void _assertLanguageSettingNotPresent(String key) {
+	private void _testMissingKey(String key) {
 		Set<String> paths = _modulesPropertiesMap.keySet();
 
 		List<String> failureMessages = new ArrayList<>();
@@ -239,7 +235,7 @@ public class LanguagePropertyTest {
 		}
 	}
 
-	private void _assertValidLanguageSettingValue(String key) {
+	private void _testValidKey(String key) {
 		Set<String> paths = _portalImplPropertiesMap.keySet();
 
 		List<String> failureMessages = new ArrayList<>();
