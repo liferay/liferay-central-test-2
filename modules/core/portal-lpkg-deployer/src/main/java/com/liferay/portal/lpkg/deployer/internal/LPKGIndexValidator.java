@@ -288,7 +288,7 @@ public class LPKGIndexValidator {
 
 		List<URI> uris = _indexLPKGFiles(files);
 
-		byte[] data = null;
+		byte[] bytes = null;
 
 		LocalProcessExecutor localProcessExecutor = new LocalProcessExecutor();
 
@@ -303,14 +303,14 @@ public class LPKGIndexValidator {
 
 			Future<byte[]> future = processChannel.getProcessNoticeableFuture();
 
-			data = future.get();
+			bytes = future.get();
 		}
 		finally {
 			localProcessExecutor.destroy();
 		}
 
 		URL url = _bytesURLProtocolSupport.putData(
-			"liferay-target-platform", data);
+			"liferay-target-platform", bytes);
 
 		uris.add(url.toURI());
 
