@@ -50,8 +50,10 @@ public class LanguagePropertyTest {
 
 	@BeforeClass
 	public static void setUpClass() throws Exception {
-		List<String> coreFilePaths = _getPaths(_CORE_GLOB);
-		List<String> moduleFilePaths = _getPaths(_MODULES_GLOB);
+		List<String> coreFilePaths = _getPaths(
+			"./portal-impl/src/**/Language*.properties");
+		List<String> moduleFilePaths = _getPaths(
+			"./modules/**/src/**/Language*.properties");
 
 		_corePropertiesMap = _getPropertiesMap(coreFilePaths);
 		_modulePropertiesMap = _getPropertiesMap(moduleFilePaths);
@@ -192,7 +194,7 @@ public class LanguagePropertyTest {
 
 		};
 
-		Files.walkFileTree(Paths.get(_BASE_DIR), simpleFileVisitor);
+		Files.walkFileTree(Paths.get("./"), simpleFileVisitor);
 
 		return paths;
 	}
@@ -257,14 +259,6 @@ public class LanguagePropertyTest {
 					"\" found in " + failureMessages);
 		}
 	}
-
-	private static final String _BASE_DIR = "./";
-
-	private static final String _CORE_GLOB =
-		"./portal-impl/src/**/Language*.properties";
-
-	private static final String _MODULES_GLOB =
-		"./modules/**/src/**/Language*.properties";
 
 	private static Map<String, Properties> _corePropertiesMap;
 	private static Map<String, Properties> _modulePropertiesMap;
