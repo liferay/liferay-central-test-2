@@ -116,15 +116,15 @@ public class Utilities {
 	}
 
 	public static String toIntegrityKey(URI uri) {
-		String key = uri.getPath();
+		String integrityKey = uri.getPath();
 
-		int index = key.lastIndexOf('/');
+		int index = integrityKey.lastIndexOf('/');
 
 		if (index != -1) {
-			key = key.substring(index + 1);
+			integrityKey = integrityKey.substring(index + 1);
 		}
 
-		return key;
+		return integrityKey;
 	}
 
 	protected static final char[] HEX_DIGITS = {
