@@ -250,7 +250,6 @@ public class DDLRecordStagedModelRepository
 		recordVersionDynamicQuery.add(
 			RestrictionsFactoryUtil.eqProperty(
 				"recordVersion.version", "version"));
-
 		recordVersionDynamicQuery.add(
 			RestrictionsFactoryUtil.eqProperty(
 				"recordVersion.recordId", "recordId"));
