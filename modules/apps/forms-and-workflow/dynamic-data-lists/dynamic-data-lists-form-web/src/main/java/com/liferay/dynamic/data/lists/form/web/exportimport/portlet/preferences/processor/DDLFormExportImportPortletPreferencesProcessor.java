@@ -179,8 +179,7 @@ public class DDLFormExportImportPortletPreferencesProcessor
 	}
 
 	@Reference(
-		target =
-			"(model.class.name=com.liferay.dynamic.data.lists.model.DDLRecord)",
+		target = "(model.class.name=com.liferay.dynamic.data.lists.model.DDLRecord)",
 		unbind = "-"
 	)
 	protected void setDDLRecordStagedModelRepository(
