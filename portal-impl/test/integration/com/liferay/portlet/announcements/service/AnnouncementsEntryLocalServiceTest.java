@@ -59,7 +59,7 @@ public class AnnouncementsEntryLocalServiceTest {
 	public void testDeleteGroupAnnouncements() throws Exception {
 		Group group = GroupTestUtil.addGroup();
 
-		AnnouncementsEntry entry = addAnnouncementsEntry(
+		AnnouncementsEntry entry = addEntry(
 			group.getClassNameId(), group.getGroupId());
 
 		Assert.assertNotNull(
@@ -80,7 +80,7 @@ public class AnnouncementsEntryLocalServiceTest {
 		long classNameId = ClassNameLocalServiceUtil.getClassNameId(
 			Organization.class);
 
-		AnnouncementsEntry entry = addAnnouncementsEntry(
+		AnnouncementsEntry entry = addEntry(
 			classNameId, organization.getOrganizationId());
 
 		Assert.assertNotNull(
@@ -103,7 +103,7 @@ public class AnnouncementsEntryLocalServiceTest {
 		long classNameId = ClassNameLocalServiceUtil.getClassNameId(
 			Group.class);
 
-		AnnouncementsEntry entry = addAnnouncementsEntry(
+		AnnouncementsEntry entry = addEntry(
 			classNameId, group.getGroupId());
 
 		Assert.assertNotNull(
@@ -131,7 +131,7 @@ public class AnnouncementsEntryLocalServiceTest {
 		long classNameId = ClassNameLocalServiceUtil.getClassNameId(
 			UserGroup.class);
 
-		AnnouncementsEntry entry = addAnnouncementsEntry(
+		AnnouncementsEntry entry = addEntry(
 			classNameId, userGroup.getUserGroupId());
 
 		Assert.assertNotNull(
@@ -145,7 +145,7 @@ public class AnnouncementsEntryLocalServiceTest {
 				entry.getEntryId()));
 	}
 
-	protected AnnouncementsEntry addAnnouncementsEntry(
+	protected AnnouncementsEntry addEntry(
 			long classNameId, long classPK)
 		throws Exception {
 
@@ -159,7 +159,7 @@ public class AnnouncementsEntryLocalServiceTest {
 	protected void deleteRoleAnnouncements(int roleType) throws Exception {
 		Role role = RoleTestUtil.addRole(roleType);
 
-		AnnouncementsEntry entry = addAnnouncementsEntry(
+		AnnouncementsEntry entry = addEntry(
 			role.getClassNameId(), role.getRoleId());
 
 		Assert.assertNotNull(
