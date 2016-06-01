@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1464811790849
+Bnd-LastModified: 1464824036628
 Bundle-ManifestVersion: 2
 Bundle-Name: system.packages.extra
 Bundle-SymbolicName: system.packages.extra
@@ -3438,7 +3438,7 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  om.liferay.portal.upgrade.v7_0_1.util;version="1.0.0",com.liferay.por
  tal.upload;version="1.0.2";uses:="com.liferay.portal.kernel.servlet,c
  om.liferay.portal.kernel.upload,javax.portlet,javax.servlet,javax.ser
- vlet.http",com.liferay.portal.util;version="1.3.0";uses:="com.liferay
+ vlet.http",com.liferay.portal.util;version="1.4.0";uses:="com.liferay
  .expando.kernel.model,com.liferay.layouts.admin.kernel.util,com.lifer
  ay.portal.kernel.configuration,com.liferay.portal.kernel.exception,co
  m.liferay.portal.kernel.json,com.liferay.portal.kernel.model,com.life
