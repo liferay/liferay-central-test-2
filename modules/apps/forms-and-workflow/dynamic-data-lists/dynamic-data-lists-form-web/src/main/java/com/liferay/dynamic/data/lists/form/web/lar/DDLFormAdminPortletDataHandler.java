@@ -265,8 +265,7 @@ public class DDLFormAdminPortletDataHandler extends BasePortletDataHandler {
 	}
 
 	@Reference(
-		target =
-			"(model.class.name=com.liferay.dynamic.data.lists.model.DDLRecordSet)",
+		target = "(model.class.name=com.liferay.dynamic.data.lists.model.DDLRecordSet)",
 		unbind = "-"
 	)
 	protected void setDDLRecordSetStagedModelRepository(
@@ -276,8 +275,7 @@ public class DDLFormAdminPortletDataHandler extends BasePortletDataHandler {
 	}
 
 	@Reference(
-		target =
-			"(model.class.name=com.liferay.dynamic.data.lists.model.DDLRecord)",
+		target = "(model.class.name=com.liferay.dynamic.data.lists.model.DDLRecord)",
 		unbind = "-"
 	)
 	protected void setDDLRecordStagedModelRepository(
