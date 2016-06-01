@@ -125,6 +125,7 @@ public class JournalContentPortletToolbarContributor
 				themeDisplay.getLocale());
 
 			urlMenuItem.setLabel(label);
+
 			urlMenuItem.setURL(portletURL.toString());
 			urlMenuItem.setUseDialog(true);
 
