@@ -69,7 +69,7 @@
 		<execute function="SelectFrame" value1="relative=top" />
 	</command>
 
-	<command name="viewNoContentPG">
+	<command name="viewContentNoLongerExistsAfterDeletion">
 		<execute function="AssertTextEquals" locator1="CampaignContentDisplay#ENTRY_CONTENT" value1="The selected content no longer exists" />
 	</command>
 
