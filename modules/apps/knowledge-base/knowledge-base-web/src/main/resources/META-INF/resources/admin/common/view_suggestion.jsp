@@ -17,11 +17,11 @@
 <%@ include file="/admin/common/init.jsp" %>
 
 <%
-KBSuggestionListDisplayContext kbSuggestionListDisplayContext = new KBSuggestionListDisplayContext(request, templatePath, scopeGroupId);
-
 KBComment kbComment = KBCommentServiceUtil.getKBComment(ParamUtil.getLong(request, "kbCommentId"));
 
 String kbCommentTitle = StringUtil.shorten(HtmlUtil.escape(kbComment.getContent()), 100);
+
+KBSuggestionListDisplayContext kbSuggestionListDisplayContext = new KBSuggestionListDisplayContext(request, templatePath, scopeGroupId);
 
 portletDisplay.setShowBackIcon(true);
 portletDisplay.setURLBack(redirect);
