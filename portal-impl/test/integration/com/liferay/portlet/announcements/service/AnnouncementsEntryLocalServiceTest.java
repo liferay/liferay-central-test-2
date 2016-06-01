@@ -103,8 +103,7 @@ public class AnnouncementsEntryLocalServiceTest {
 		long classNameId = ClassNameLocalServiceUtil.getClassNameId(
 			Group.class);
 
-		AnnouncementsEntry entry = addEntry(
-			classNameId, group.getGroupId());
+		AnnouncementsEntry entry = addEntry(classNameId, group.getGroupId());
 
 		Assert.assertNotNull(
 			AnnouncementsEntryLocalServiceUtil.fetchAnnouncementsEntry(
@@ -145,8 +144,7 @@ public class AnnouncementsEntryLocalServiceTest {
 				entry.getEntryId()));
 	}
 
-	protected AnnouncementsEntry addEntry(
-			long classNameId, long classPK)
+	protected AnnouncementsEntry addEntry(long classNameId, long classPK)
 		throws Exception {
 
 		return AnnouncementsEntryLocalServiceUtil.addEntry(
