@@ -2286,7 +2286,7 @@
 			<var name="siteName" value="Site Name" />
 		</execute>
 
-		<execute macro="CampaignDisplayPortlet#viewNoContentPG" />
+		<execute macro="CampaignDisplayPortlet#viewContentNoLongerExistsAfterDeletion" />
 
 		<execute macro="Navigator#gotoSitePage">
 			<var name="pageName" value="Test Page Name" />
