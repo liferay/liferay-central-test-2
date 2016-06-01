@@ -237,8 +237,7 @@ public class DDLRecordSetStagedModelDataHandler
 	}
 
 	@Reference(
-		target =
-			"(model.class.name=com.liferay.dynamic.data.lists.model.DDLRecordSet)",
+		target = "(model.class.name=com.liferay.dynamic.data.lists.model.DDLRecordSet)",
 		unbind = "-"
 	)
 	protected void setStagedModelRepository(
