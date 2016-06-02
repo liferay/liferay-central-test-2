@@ -310,6 +310,7 @@
 
 		<execute macro="DMDocument#saveAndCheckinEditedDocumentPG">
 			<var name="dmDocumentTitle" value="Document1" />
+			<var name="revision" value="Minor" />
 		</execute>
 
 		<execute macro="DMNavigator#gotoDocumentPG">
@@ -359,6 +360,7 @@
 
 		<execute macro="DMDocument#checkinPG">
 			<var name="dmDocumentTitle" value="Document1" />
+			<var name="revision" value="Minor" />
 		</execute>
 
 		<execute macro="DMDocument#viewDocumentVersionNumberCmdPG">
