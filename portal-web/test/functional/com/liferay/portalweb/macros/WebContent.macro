@@ -15,11 +15,6 @@
 		<execute function="AssertClick" locator1="WCD#ADD_STRUCTURED_WEB_CONTENT" value1="Basic Web Content" />
 
 		<execute function="SelectFrame" locator1="IFrame#EDIT_ASSET" />
-
-		<execute macro="WebContent#addCP">
-			<var name="webContentContent" value="${webContentContent}" />
-			<var name="webContentTitle" value="${webContentTitle}" />
-		</execute>
 	</command>
 
 	<command name="addAbstractSummary">
@@ -80,6 +75,15 @@
 		</execute>
 
 		<execute macro="WebContent#saveAsDraftViaAP" />
+	</command>
+
+	<command name="addDraftPGViaWCD">
+		<execute macro="WebContent#_gotoAddPGViaWCD" />
+
+		<execute macro="WebContent#addDraft">
+			<var name="webContentContent" value="${webContentContent}" />
+			<var name="webContentTitle" value="${webContentTitle}" />
+		</execute>
 	</command>
 
 	<command name="addExistingRelatedAssetCP">
