@@ -965,10 +965,11 @@
 		</execute>
 
 		<execute macro="WebContent#addPGViaWCD">
-			<var name="pageBreak" value="true" />
 			<var name="webContentContent" value="@page_break@ Welcome @page_break@" />
 			<var name="webContentTitle" value="WC WebContent Title" />
 		</execute>
+
+		<execute macro="WebContent#viewPageBreak" />
 
 		<execute macro="WebContentDisplayPortlet#viewContentPageBreak">
 			<var name="webContentContent" value="Welcome" />

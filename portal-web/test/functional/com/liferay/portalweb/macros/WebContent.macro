@@ -1633,6 +1633,10 @@
 		<execute function="AssertTextEquals#assertPartialText" locator1="APAsset#ASSET_VIEW_CONTENT" value1="${webContentContent}" />
 	</command>
 
+	<command name="viewPageBreak">
+		<execute function="AssertTextEquals#assertPartialText" locator1="Pagination#PAGES" value1="Pages" />
+	</command>
+
 	<command name="viewPGViaWCD">
 		<if>
 			<equals arg1="${draft}" arg2="true" />
