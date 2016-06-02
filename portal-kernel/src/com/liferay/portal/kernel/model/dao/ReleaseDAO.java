@@ -12,10 +12,10 @@
  * details.
  */
 
-package com.liferay.portal.kernel.upgrade.util;
+package com.liferay.portal.kernel.model.dao;
 
-import com.liferay.counter.kernel.service.CounterLocalService;
 import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.DBManagerUtil;
 import com.liferay.portal.kernel.model.ReleaseConstants;
 import com.liferay.portal.kernel.util.StringBundler;
 
@@ -28,24 +28,12 @@ import java.sql.Timestamp;
 /**
  * @author Adolfo Pérez
  */
-public class DBRelease {
+public class ReleaseDAO {
 
-	public DBRelease(
-		Connection connection, CounterLocalService counterLocalService) {
+	public void addRelease(Connection connection, String bundleSymbolicName)
+		throws SQLException {
 
-		_connection = connection;
-		_counterLocalService = counterLocalService;
-		_db = null;
-	}
-
-	public DBRelease(Connection connection, DB db) {
-		_connection = connection;
-		_counterLocalService = null;
-		_db = db;
-	}
-
-	public void addRelease(String bundleSymbolicName) throws SQLException {
-		if (_hasRelease(bundleSymbolicName)) {
+		if (hasRelease(connection, bundleSymbolicName)) {
 			return;
 		}
 
@@ -58,11 +46,11 @@ public class DBRelease {
 		sb.append("schemaVersion, buildNumber, buildDate, verified, state_, ");
 		sb.append("testString) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-		try (PreparedStatement ps = _connection.prepareStatement(
+		try (PreparedStatement ps = connection.prepareStatement(
 				sb.toString())) {
 
 			ps.setLong(1, 0);
-			ps.setLong(2, _increment());
+			ps.setLong(2, increment());
 			ps.setTimestamp(3, timestamp);
 			ps.setTimestamp(4, timestamp);
 			ps.setString(5, bundleSymbolicName);
@@ -77,8 +65,11 @@ public class DBRelease {
 		}
 	}
 
-	private boolean _hasRelease(String bundleSymbolicName) throws SQLException {
-		try (PreparedStatement ps = _connection.prepareStatement(
+	protected boolean hasRelease(
+			Connection connection, String bundleSymbolicName)
+		throws SQLException {
+
+		try (PreparedStatement ps = connection.prepareStatement(
 				"select * from Release_ where servletContextName = ?")) {
 
 			ps.setString(1, bundleSymbolicName);
@@ -89,16 +80,10 @@ public class DBRelease {
 		}
 	}
 
-	private long _increment() {
-		if (_counterLocalService == null) {
-			return _db.increment();
-		}
+	protected long increment() {
+		DB db = DBManagerUtil.getDB();
 
-		return _counterLocalService.increment();
+		return db.increment();
 	}
-
-	private final Connection _connection;
-	private final CounterLocalService _counterLocalService;
-	private final DB _db;
 
 }
