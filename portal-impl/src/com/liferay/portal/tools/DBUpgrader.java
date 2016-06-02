@@ -96,13 +96,11 @@ public class DBUpgrader {
 			upgrade();
 			verify();
 
-			_registerModuleServiceLifecycle(
-				ModuleServiceLifecycle.LIFECYCLE_VALUE_DATABASE_INITIALIZED);
+			_registerModuleServiceLifecycle("database.initialized");
 
 			InitUtil.registerContext();
 
-			_registerModuleServiceLifecycle(
-				ModuleServiceLifecycle.LIFECYCLE_VALUE_PORTAL_INITIALIZED);
+			_registerModuleServiceLifecycle("portal.initialized");
 
 			System.out.println(
 				"\nCompleted Liferay core upgrade and verify processes in " +
@@ -302,13 +300,13 @@ public class DBUpgrader {
 	}
 
 	private static void _registerModuleServiceLifecycle(
-		String lifecycleValue) {
+		String moduleServiceLifecycle) {
 
 		Registry registry = RegistryUtil.getRegistry();
 
 		Map<String, Object> properties = new HashMap<>();
 
-		properties.put("module.service.lifecycle", lifecycleValue);
+		properties.put("module.service.lifecycle", moduleServiceLifecycle);
 		properties.put("service.vendor", ReleaseInfo.getVendor());
 		properties.put("service.version", ReleaseInfo.getVersion());
 
