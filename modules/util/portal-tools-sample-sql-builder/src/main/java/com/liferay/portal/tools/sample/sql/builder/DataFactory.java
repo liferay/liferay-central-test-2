@@ -2229,7 +2229,6 @@ public class DataFactory {
 		String name = _getResourcePermissionModelName(
 			DDMStructure.class.getName(),
 			getClassName(ddmStructureModel.getClassNameId()));
-
 		String primKey = String.valueOf(ddmStructureModel.getStructureId());
 
 		resourcePermissionModels.add(
@@ -2255,7 +2254,6 @@ public class DataFactory {
 		String name = _getResourcePermissionModelName(
 			DDMTemplate.class.getName(),
 			getClassName(ddmTemplateModel.getResourceClassNameId()));
-
 		String primKey = String.valueOf(ddmTemplateModel.getTemplateId());
 
 		resourcePermissionModels.add(
