@@ -245,31 +245,22 @@
 			<var name="webContentTitle" value="${webContentTitle}" />
 		</execute>
 
-		<if>
-			<equals arg1="${draft}" arg2="true" />
-			<then>
-				<execute function="Click" locator1="Button#SAVE_AS_DRAFT" />
-				<execute macro="Alert#viewSuccessMessage" />
-			</then>
-			<else>
-				<execute function="Click" locator1="Button#PUBLISH" />
-				<execute function="SelectFrame" value1="relative=top" />
+		<execute function="Click" locator1="Button#PUBLISH" />
+		<execute function="SelectFrame" value1="relative=top" />
 
-				<if>
-					<equals arg1="${webContentJavascript}" arg2="true" />
-					<then>
-						<execute function="AssertTextEquals" locator1="//div[@class='journal-content-article']//span[contains(@class,'portlet-title-text')]" value1="${embeddedPortletTitle}" />
-					</then>
-					<elseif>
-						<equals arg1="${pageBreak}" arg2="true" />
-						<then>
-							<execute function="AssertTextEquals#assertPartialText" locator1="Pagination#PAGES" value1="Pages" />
-						</then>
-					</elseif>
-					<else>
-						<execute function="AssertTextEquals" locator1="WCD#WEB_CONTENT_CONTENT" value1="${webContentContent}" />
-					</else>
-				</if>
+		<if>
+			<equals arg1="${webContentJavascript}" arg2="true" />
+			<then>
+				<execute function="AssertTextEquals" locator1="//div[@class='journal-content-article']//span[contains(@class,'portlet-title-text')]" value1="${embeddedPortletTitle}" />
+			</then>
+			<elseif>
+				<equals arg1="${pageBreak}" arg2="true" />
+				<then>
+					<execute function="AssertTextEquals#assertPartialText" locator1="Pagination#PAGES" value1="Pages" />
+				</then>
+			</elseif>
+			<else>
+				<execute function="AssertTextEquals" locator1="WCD#WEB_CONTENT_CONTENT" value1="${webContentContent}" />
 			</else>
 		</if>
 	</command>

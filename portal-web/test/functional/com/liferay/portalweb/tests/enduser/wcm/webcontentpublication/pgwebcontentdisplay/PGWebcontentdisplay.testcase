@@ -42,8 +42,7 @@
 	</tear-down>
 
 	<command name="AddDraftNotApproved" priority="4">
-		<execute macro="WebContent#addPGViaWCD">
-			<var name="draft" value="true" />
+		<execute macro="WebContent#addDraftPGViaWCD">
 			<var name="webContentContent" value="WC WebContent Content" />
 			<var name="webContentTitle" value="WC WebContent Title" />
 		</execute>
