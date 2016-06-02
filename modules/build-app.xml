@@ -297,7 +297,7 @@
 	</target>
 
 	<target name="reset-all">
-		<property location="${osgi.dir}/../deploy" name="deploy.dir.absolute" />
+		<property location="${liferay.home}/deploy" name="deploy.dir.absolute" />
 		<property location="${osgi.dir}" name="osgi.dir.absolute" />
 
 		<fail message="${osgi.dir.absolute} and ${deploy.dir.absolute} cannot be reset if ${osgi.dir.absolute}_backup and/or ${deploy.dir.absolute}_backup are not present.">
