@@ -32,7 +32,7 @@ public class YouTubeWebUpgrade implements UpgradeStepRegistrator {
 
 	@Override
 	public void register(Registry registry) {
-		BaseUpgradeWebModuleRelease upgradeRelease =
+		BaseUpgradeWebModuleRelease upgradeWebModuleRelease =
 			new BaseUpgradeWebModuleRelease() {
 
 				protected String getBundleSymbolicName() {
@@ -46,7 +46,7 @@ public class YouTubeWebUpgrade implements UpgradeStepRegistrator {
 			};
 
 		try {
-			upgradeRelease.upgrade();
+			upgradeWebModuleRelease.upgrade();
 		}
 		catch (UpgradeException ue) {
 			throw new RuntimeException(ue);
