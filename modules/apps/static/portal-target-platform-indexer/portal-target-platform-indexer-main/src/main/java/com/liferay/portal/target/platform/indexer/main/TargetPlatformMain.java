@@ -65,18 +65,16 @@ public class TargetPlatformMain {
 
 		String indexesFileName = System.getProperty(
 			"indexes.file",
-			liferayHome + "/osgi/" +
-				Indexer.DIR_NAME_TARGET_PLATFORM + "/target-platform-indexes-" +
-					System.currentTimeMillis() + ".zip");
+			liferayHome + "/osgi/" + Indexer.DIR_NAME_TARGET_PLATFORM +
+				"/target-platform-indexes-" + System.currentTimeMillis() +
+					".zip");
 		String moduleFrameworkStaticDirName = System.getProperty(
-			"module.framework.static.dir",
-			liferayHome.concat("/osgi/static"));
+			"module.framework.static.dir", liferayHome.concat("/osgi/static"));
 		String moduleFrameworkModulesDirName = System.getProperty(
 			"module.framework.modules.dir",
 			liferayHome.concat("/osgi/modules"));
 		String moduleFrameworkPortalDirName = System.getProperty(
-			"module.framework.portal.dir",
-			liferayHome.concat("/osgi/portal"));
+			"module.framework.portal.dir", liferayHome.concat("/osgi/portal"));
 		String moduleFrameworkMarketplaceDir = System.getProperty(
 			"module.framework.marketplace.dir",
 			liferayHome.concat("/osgi/marketplace"));
@@ -89,8 +87,8 @@ public class TargetPlatformMain {
 		if (_validate(uris)) {
 			String integrityPropertiesFileName = System.getProperty(
 				"integrity.properties",
-				liferayHome + "/osgi/" +
-					Indexer.DIR_NAME_TARGET_PLATFORM + "/integrity.properties");
+				liferayHome + "/osgi/" + Indexer.DIR_NAME_TARGET_PLATFORM +
+					"/integrity.properties");
 
 			_updateIntegrityProperties(
 				uris, Paths.get(integrityPropertiesFileName));
