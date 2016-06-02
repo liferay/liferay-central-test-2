@@ -16,9 +16,9 @@
 
 <%@ include file="/admin/init.jsp" %>
 
-<liferay-util:include page="/admin/common/top_tabs.jsp" servletContext="<%= application %>" />
-
 <%
+String navigation = ParamUtil.getString(request, "navigation", "all");
+
 KBSuggestionListDisplayContext kbSuggestionListDisplayContext = new KBSuggestionListDisplayContext(request, templatePath, scopeGroupId);
 
 request.setAttribute(KBWebKeys.KNOWLEDGE_BASE_KB_SUGGESTION_LIST_DISPLAY_CONTEXT, kbSuggestionListDisplayContext);
@@ -40,8 +40,6 @@ if (Validator.isNull(orderByCol) || Validator.isNull(orderByType)) {
 	orderByType = portalPreferences.getValue(KBPortletKeys.KNOWLEDGE_BASE_ADMIN, "suggestions-order-by-type", "desc");
 }
 
-String navigation = ParamUtil.getString(request, "navigation", "all");
-
 if (!navigation.equals("all") && orderByCol.equals("status")) {
 	orderByCol = "modified-date";
 }
@@ -60,6 +58,8 @@ request.setAttribute("view_suggestions.jsp-searchContainer", kbCommentsSearchCon
 
 List<KBComment> kbComments = kbCommentsSearchContainer.getResults();
 %>
+
+<liferay-util:include page="/admin/common/top_tabs.jsp" servletContext="<%= application %>" />
 
 <liferay-frontend:management-bar
 	disabled="<%= kbComments.isEmpty() %>"
