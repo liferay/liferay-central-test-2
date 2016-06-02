@@ -93,7 +93,7 @@ public class DocumentLibraryConvertProcessTest {
 		List<Image> images = ImageLocalServiceUtil.getImages();
 
 		for (Image image : images) {
-			_imageMap.put(image, image.getTextObj());
+			_bytesMap.put(image, image.getTextObj());
 
 			ImageLocalServiceUtil.deleteImage(image);
 		}
@@ -101,14 +101,14 @@ public class DocumentLibraryConvertProcessTest {
 
 	@AfterClass
 	public static void tearDownClass() throws PortalException {
-		for (Entry<Image, byte[]> entry : _imageMap.entrySet()) {
+		for (Entry<Image, byte[]> entry : _bytesMap.entrySet()) {
 			Image image = entry.getKey();
 
 			ImageLocalServiceUtil.updateImage(
 				image.getImageId(), entry.getValue());
 		}
 
-		_imageMap.clear();
+		_bytesMap.clear();
 	}
 
 	@Before
@@ -349,7 +349,7 @@ public class DocumentLibraryConvertProcessTest {
 	private static final String _CLASS_NAME_DB_STORE =
 		"com.liferay.portal.store.db.DBStore";
 
-	private static final Map<Image, byte[]> _imageMap = new HashMap<>();
+	private static final Map<Image, byte[]> _bytesMap = new HashMap<>();
 	private static StoreFactory _storeFactory;
 
 	private ConvertProcess _convertProcess;
