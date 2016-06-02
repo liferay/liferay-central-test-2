@@ -543,7 +543,7 @@
 
 		<execute macro="WebContentNavigator#gotoAddCP" />
 
-		<execute macro="WebContent#addDraftCP">
+		<execute macro="WebContent#addDraft">
 			<var name="webContentContent" value="WC WebContent Content" />
 			<var name="webContentTitle" value="WC WebContent Title" />
 		</execute>
@@ -1612,7 +1612,7 @@
 
 		<execute macro="WebContentNavigator#gotoAddCP" />
 
-		<execute macro="WebContent#addDraftCP">
+		<execute macro="WebContent#addDraft">
 			<var name="webContentContent" value="WC WebContent Content" />
 			<var name="webContentTitle" value="WC WebContent Title" />
 		</execute>
