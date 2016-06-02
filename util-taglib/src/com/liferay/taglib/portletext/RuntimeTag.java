@@ -196,15 +196,15 @@ public class RuntimeTag extends TagSupport {
 
 			PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
-			Stack<String> alreadyEmbeddedPortletIdsStack =
-				_embeddedPortletIdsStack.get();
+			Stack<String> embeddedPortletIds = _embeddedPortletIds.get();
 
-			if (alreadyEmbeddedPortletIdsStack == null) {
-				alreadyEmbeddedPortletIdsStack = new Stack<>();
-				_embeddedPortletIdsStack.set(alreadyEmbeddedPortletIdsStack);
+			if (embeddedPortletIds == null) {
+				embeddedPortletIds = new Stack<>();
+
+				_embeddedPortletIds.set(embeddedPortletIds);
 			}
 
-			if (alreadyEmbeddedPortletIdsStack.search(portletDisplay.getId()) >
+			if (embeddedPortletIds.search(portletDisplay.getId()) >
 					-1) {
 
 				String errorMessage = LanguageUtil.get(
@@ -294,12 +294,12 @@ public class RuntimeTag extends TagSupport {
 				PortletJSONUtil.writeHeaderPaths(response, jsonObject);
 			}
 
-			alreadyEmbeddedPortletIdsStack.push(
+			embeddedPortletIds.push(
 				portletInstance.getPortletInstanceKey());
 
 			PortletContainerUtil.render(request, response, portlet);
 
-			alreadyEmbeddedPortletIdsStack.pop();
+			embeddedPortletIds.pop();
 
 			if (jsonObject != null) {
 				PortletJSONUtil.writeFooterPaths(response, jsonObject);
@@ -413,7 +413,7 @@ public class RuntimeTag extends TagSupport {
 
 	private static final Log _log = LogFactoryUtil.getLog(RuntimeTag.class);
 
-	private static final ThreadLocal<Stack<String>> _embeddedPortletIdsStack =
+	private static final ThreadLocal<Stack<String>> _embeddedPortletIds =
 		new ThreadLocal<>();
 
 	private String _defaultPreferences;
