@@ -58,7 +58,7 @@ gradle.beforeProject {
 			}
 
 			startTestableTomcat {
-				checkTimeout = 15*60*1000
+				checkTimeout = 15 * 60 * 1000
 			}
 
 			testIntegration {
