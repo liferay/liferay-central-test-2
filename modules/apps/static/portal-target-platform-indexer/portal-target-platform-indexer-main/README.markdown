@@ -7,7 +7,7 @@
 # Change these vars to reflect the environment.
 #
 
-liferay_home=/opt/liferay-portal-trunk
+liferay_home=/opt/liferay
 
 #
 # This is the classpath to TargetPlatformMain
