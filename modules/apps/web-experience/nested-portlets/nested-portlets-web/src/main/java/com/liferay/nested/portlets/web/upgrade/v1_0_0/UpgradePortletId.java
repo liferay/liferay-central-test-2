@@ -32,9 +32,8 @@ public class UpgradePortletId extends BaseUpgradePortletId {
 	protected void doUpgrade() throws Exception {
 		super.doUpgrade();
 
-		updateNestedPortletLayoutTypeSettings();
-
 		updateNestedPortletLayoutRevisionTypeSettings();
+		updateNestedPortletLayoutTypeSettings();
 	}
 
 	@Override
