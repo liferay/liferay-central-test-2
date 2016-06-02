@@ -260,7 +260,7 @@
 				<var name="dmDocumentTitle" value="Document_1.doc" />
 			</execute>
 
-			<execute function="AssertClick" locator1="Button#PUBLISH" value1="Publish" />
+			<execute function="AssertClick" locator1="Button#SAVE" value1="Save" />
 
 			<execute macro="Navigator#gotoPage">
 				<var name="pageName" value="${pageName}" />
@@ -347,7 +347,7 @@
 			</then>
 		</while>
 
-		<execute function="AssertClick" locator1="Button#PUBLISH" value1="Publish" />
+		<execute function="AssertClick" locator1="Button#SAVE" value1="Save" />
 
 		<execute macro="DMDocument#viewDocumentVersionNumberCmdPG">
 			<var name="dmDocumentVersionNumber" value="PWC" />
