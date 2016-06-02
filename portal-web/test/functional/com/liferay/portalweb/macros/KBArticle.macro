@@ -43,12 +43,12 @@
 		<if>
 			<isset var="kbTemplateTitle" />
 			<then>
-				<execute function="AssertClick" locator1="KnowledgeBase#MENUBAR_ADD" value1="Add" />
-				<execute function="AssertClick" locator1="KnowledgeBase#ADD_ARTICLE_VIA_TEMPLATE" value1="${kbTemplateTitle}" />
+				<execute macro="KBArticle#_gotoAddArticleViaTemplate">
+					<var name="kbTemplateTitle" value="${kbTemplateTitle" />
+				</execute>
 			</then>
 			<else>
-				<execute function="AssertClick" locator1="KnowledgeBase#MENUBAR_ADD" value1="Add" />
-				<execute function="AssertClick" locator1="MenuItem#BASIC_ARTICLE" value1="Basic Article" />
+				<execute macro="KBArticle#_gotoAddBasicArticle" />
 			</else>
 		</if>
 
@@ -646,8 +646,7 @@
 	<command name="importCP">
 		<var name="key_kbZipFile" value="${kbZipFile}" />
 
-		<execute function="AssertClick" locator1="KnowledgeBase#MENUBAR_ADD" value1="Add" />
-		<execute function="AssertClick" locator1="MenuItem#IMPORT" value1="Import" />
+		<execute macro="KBArticle#_gotoImportArticle" />
 
 		<execute function="UploadCommonFile" locator1="TextInput#UPLOAD_FILE" value1="${kbZipFile}" />
 
