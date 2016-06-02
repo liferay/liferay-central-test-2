@@ -47,24 +47,21 @@ public class KBSuggestionListDisplayContext {
 		HttpServletRequest request, String templatePath, KBArticle kbArticle) {
 
 		_request = request;
-
-		_navigation = ParamUtil.getString(_request, "navigation", "all");
-
 		_templatePath = templatePath;
 		_kbArticle = kbArticle;
 
 		_groupId = kbArticle.getGroupId();
+		_navigation = ParamUtil.getString(_request, "navigation", "all");
 	}
 
 	public KBSuggestionListDisplayContext(
 		HttpServletRequest request, String templatePath, long groupId) {
 
 		_request = request;
-
-		_navigation = ParamUtil.getString(_request, "navigation", "all");
-
 		_templatePath = templatePath;
 		_groupId = groupId;
+
+		_navigation = ParamUtil.getString(_request, "navigation", "all");
 	}
 
 	public int getCompletedKBCommentsCount() throws PortalException {
