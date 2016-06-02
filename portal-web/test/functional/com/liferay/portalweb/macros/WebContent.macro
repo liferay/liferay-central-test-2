@@ -56,13 +56,14 @@
 		</if>
 	</command>
 
-	<command name="addDraftCP">
+	<command name="addDraft">
 		<execute macro="WebContent#addCP">
 			<var name="webContentContent" value="${webContentContent}" />
 			<var name="webContentTitle" value="${webContentTitle}" />
 		</execute>
 
 		<execute function="AssertClick" locator1="Button#SAVE_AS_DRAFT" value1="Save as Draft" />
+
 		<execute macro="Alert#viewSuccessMessage" />
 	</command>
 
@@ -271,6 +272,17 @@
 				</if>
 			</else>
 		</if>
+	</command>
+
+	<command name="addDraftPGViaWCD">
+		<execute macro="WebContent#_gotoAddPGViaAP" />
+
+		<execute macro="WebContent#addCP">
+			<var name="webContentContent" value="${webContentContent}" />
+			<var name="webContentTitle" value="${webContentTitle}" />
+		</execute>
+
+		<execute macro="WebContent#saveAsDraft" />
 	</command>
 
 	<command name="addStructuredPGViaWCD">
