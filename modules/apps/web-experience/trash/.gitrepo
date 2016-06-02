@@ -4,7 +4,7 @@
 ;
 [subrepo]
 	cmdver = liferay
-	commit = eb071a5a73151d68302a13c4a95bd3b645009fb2
+	commit = 7f3434b138f64c94989b8e8d38cd001e36424f22
 	mode = push
-	parent = 84ce35c205b2541ccfd9f4ad0f9ee91b531c8e39
+	parent = 6ac54008fed2594a630c436ad0396c2e98e52a0b
 	remote = git@github.com:liferay/com-liferay-trash.git
