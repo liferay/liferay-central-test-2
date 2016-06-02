@@ -37,7 +37,6 @@
 		</execute>
 
 		<execute macro="WebContent#addPGViaWCD">
-			<var name="pageName" value="Web Content Display Page" />
 			<var name="webContentContent" value="WC WebContent Content" />
 			<var name="webContentTitle" value="WC WebContent Title" />
 		</execute>
