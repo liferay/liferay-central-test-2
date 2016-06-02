@@ -299,22 +299,6 @@ public class DBUpgrader {
 		serviceRegistrar.registerService(Release.class, release, properties);
 	}
 
-	private static void _registerModuleServiceLifecycle(
-		String moduleServiceLifecycle) {
-
-		Registry registry = RegistryUtil.getRegistry();
-
-		Map<String, Object> properties = new HashMap<>();
-
-		properties.put("module.service.lifecycle", moduleServiceLifecycle);
-		properties.put("service.vendor", ReleaseInfo.getVendor());
-		properties.put("service.version", ReleaseInfo.getVersion());
-
-		registry.registerService(
-			ModuleServiceLifecycle.class, new ModuleServiceLifecycle() {},
-			properties);
-	}
-
 	private static void _checkPermissionAlgorithm() throws Exception {
 		long count = _getResourceCodesCount();
 
@@ -407,6 +391,22 @@ public class DBUpgrader {
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
+	}
+
+	private static void _registerModuleServiceLifecycle(
+		String moduleServiceLifecycle) {
+
+		Registry registry = RegistryUtil.getRegistry();
+
+		Map<String, Object> properties = new HashMap<>();
+
+		properties.put("module.service.lifecycle", moduleServiceLifecycle);
+		properties.put("service.vendor", ReleaseInfo.getVendor());
+		properties.put("service.version", ReleaseInfo.getVersion());
+
+		registry.registerService(
+			ModuleServiceLifecycle.class, new ModuleServiceLifecycle() {},
+			properties);
 	}
 
 	private static void _updateCompanyKey() throws Exception {
