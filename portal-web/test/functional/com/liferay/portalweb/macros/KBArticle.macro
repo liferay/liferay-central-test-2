@@ -1,4 +1,24 @@
 <definition>
+	<command name="_gotoAddArticleViaTemplate">
+		<var name="key_kbTemplateTitle" value="${kbTemplateTitle}" />
+
+		<execute function="Click" locator1="Button#PLUS" />
+
+		<execute function="AssertClick" locator1="KnowledgeBase#ADD_ARTICLE_VIA_TEMPLATE" value1="${kbTemplateTitle}" />
+	</command>
+
+	<command name="_gotoAddBasicArticle">
+		<execute function="Click" locator1="Button#PLUS" />
+
+		<execute function="AssertClick" locator1="KnowledgeBase#ADD_BASIC_ARTICLE" value1="Basic Article" />
+	</command>
+
+	<command name="_gotoImportArticle">
+		<execute function="Click" locator1="Button#PLUS" />
+
+		<execute function="AssertClick" locator1="KnowledgeBase#ADD_IMPORT_ARTICLES" value1="Import" />
+	</command>
+
 	<command name="addChildPGViaKBAdmin">
 		<var name="key_kbArticleTitle" value="${kbArticleTitle}" />
 
