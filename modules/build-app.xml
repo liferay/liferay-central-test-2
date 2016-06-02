@@ -2,8 +2,9 @@
 <!DOCTYPE project>
 
 <project name="build-app">
-	<property name="osgi.dir" value="${basedir}/../../bundles/osgi" />
-	<property name="liferay.home" value="${osgi.dir}/.." />
+	<property name="liferay.home" value="${basedir}/../../bundles" />
+
+	<property name="osgi.dir" value="${liferay.home}/osgi" />
 
 	<macrodef name="set-artifact-versions-previous-release">
 		<attribute name="app.version.previous.release" />
