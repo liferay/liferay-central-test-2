@@ -1,4 +1,10 @@
 <definition>
+	<command name="_gotoAddFolder">
+		<execute function="Click" locator1="Button#PLUS" />
+
+		<execute function="AssertClick" locator1="KnowledgeBase#ADD_FOLDER" value1="Folder" />
+	</command>
+
 	<command name="addCP">
 		<execute function="AssertClick" locator1="KnowledgeBase#MENUBAR_ADD" value1="Add" />
 
