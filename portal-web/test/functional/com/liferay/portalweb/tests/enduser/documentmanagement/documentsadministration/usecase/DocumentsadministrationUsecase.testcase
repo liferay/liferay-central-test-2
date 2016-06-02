@@ -267,7 +267,7 @@
 			</execute>
 		</for>
 
-		<execute macro="DMDocument#editPublishPG">
+		<execute macro="DMDocument#editSavePG">
 			<var name="dmDocumentTitle" value="Document_1.doc" />
 			<var name="dmDocumentTitleEdit" value="Document1" />
 		</execute>
