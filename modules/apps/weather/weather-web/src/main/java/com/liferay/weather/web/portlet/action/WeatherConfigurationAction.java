@@ -12,23 +12,33 @@
  * details.
  */
 
-package com.liferay.weather.action;
+package com.liferay.weather.web.portlet.action;
 
+import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.portlet.DefaultConfigurationAction;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.weather.web.constants.WeatherPortletKeys;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.ValidatorException;
 
+import org.osgi.service.component.annotations.Component;
+
 /**
  * @author Samuel Kong
+ * @author Peter Fellwock
  */
-public class ConfigurationActionImpl extends DefaultConfigurationAction {
-
+@Component(
+	immediate = true,
+	property = {"javax.portlet.name=" + WeatherPortletKeys.WEATHER},
+	service = ConfigurationAction.class
+)
+public class WeatherConfigurationAction extends DefaultConfigurationAction {
+	
 	@Override
 	public void processAction(
 			PortletConfig portletConfig, ActionRequest actionRequest,
@@ -52,5 +62,4 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 				actionRequest, ValidatorException.class.getName(), ve);
 		}
 	}
-
 }
