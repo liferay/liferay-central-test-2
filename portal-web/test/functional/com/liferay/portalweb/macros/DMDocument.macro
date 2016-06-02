@@ -1510,7 +1510,32 @@
 
 		<execute function="AssertClick" locator1="Button#SAVE_AND_CHECKIN" value1="Save and Check In" />
 
-		<execute macro="PortletEntry#save" />
+		<if>
+			<condition function="IsElementPresent" locator1="Radio#MAJOR_VERSION" />
+			<then>
+				<if>
+					<equals arg1="${revision}" arg2="Major" />
+					<then>
+						<execute function="Click" locator1="Radio#MAJOR_VERSION" />
+					</then>
+					<elseif>
+						<equals arg1="${revision}" arg2="Minor" />
+						<then>
+							<execute function="Click" locator1="Radio#MINOR_VERSION" />
+						</then>
+					</elseif>
+				</if>
+
+				<if>
+					<isset var="changeLog" />
+					<then>
+						<execute function="Type" locator1="TextArea#CHANGE_LOG" value1="${changeLog}" />
+					</then>
+				</if>
+
+				<execute macro="PortletEntry#save" />
+			</then>
+		</if>
 	</command>
 
 	<command name="saveAsDraftPG">
