@@ -40,12 +40,11 @@ public class UpgradeResourcePermission extends UpgradeProcess {
 
 	protected String getNewCompositeModelName(String ddmModelClassName) {
 		return _resourceActions.getCompositeModelName(
-			ddmModelClassName, _JOURNAL_ARTICLE_CLASS_NAME);
+			ddmModelClassName, _CLASS_NAME);
 	}
 
 	protected String getOldCompositeModelName(String ddmModelClassName) {
-		return _JOURNAL_ARTICLE_CLASS_NAME + StringPool.DASH +
-			ddmModelClassName;
+		return _CLASS_NAME + StringPool.DASH + ddmModelClassName;
 	}
 
 	protected void updateResourcePermissions(String ddmModelClassName)
@@ -62,14 +61,10 @@ public class UpgradeResourcePermission extends UpgradeProcess {
 				"update ResourcePermission set primKey = ? where primKey =" +
 					" ?")) {
 
-			// Set name
-
 			ps.setString(1, newCompositeModelName);
 			ps.setString(2, oldCompositeModelName);
 
 			ps.executeUpdate();
-
-			// Set primKey
 
 			ps1.setString(1, newCompositeModelName);
 			ps1.setString(2, oldCompositeModelName);
@@ -78,7 +73,7 @@ public class UpgradeResourcePermission extends UpgradeProcess {
 		}
 	}
 
-	private static final String _JOURNAL_ARTICLE_CLASS_NAME =
+	private static final String _CLASS_NAME =
 		"com.liferay.journal.model.JournalArticle";
 
 	private final ResourceActions _resourceActions;
