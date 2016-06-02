@@ -360,7 +360,6 @@
 		</execute>
 
 		<execute macro="WebContent#addPGViaWCD">
-			<var name="pageName" value="Asset Publisher Page" />
 			<var name="webContentContent" value="Web Content1 Content" />
 			<var name="webContentTitle" value="Web Content1 Title" />
 		</execute>
