@@ -18,6 +18,32 @@
 	<td></td>
 	<td></td>
 </tr>
+<!--ADD_BUTTON-->
+<tr>
+	<td>ADD_BASIC_ARTICLE</td>
+	<td>//a[contains(@id,'knowledge_base') and contains(.,'Basic Article')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ADD_FOLDER</td>
+	<td>//a[contains(@id,'knowledge_base') and contains(.,'Folder')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ADD_IMPORT_ARTICLES</td>
+	<td>//a[contains(@id,'knowledge_base') and contains(.,'Import')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ADD_ARTICLE_VIA_TEMPLATE</td>
+	<td>//a[contains(@id,'knowledge_base') and contains(.,'${key_kbTemplateTitle}')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
 <!--ADMIN_TABS-->
 <tr>
 	<td>ADMIN_TABS_ARTICLES</td>
