@@ -38,7 +38,7 @@ import org.osgi.service.component.annotations.Component;
 	service = ConfigurationAction.class
 )
 public class WeatherConfigurationAction extends DefaultConfigurationAction {
-	
+
 	@Override
 	public void processAction(
 			PortletConfig portletConfig, ActionRequest actionRequest,
@@ -62,4 +62,5 @@ public class WeatherConfigurationAction extends DefaultConfigurationAction {
 				actionRequest, ValidatorException.class.getName(), ve);
 		}
 	}
+
 }
