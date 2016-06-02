@@ -14,9 +14,8 @@
 
 package com.liferay.portal.upgrade.v7_0_0;
 
-import com.liferay.portal.kernel.dao.db.DBManagerUtil;
+import com.liferay.portal.kernel.model.dao.ReleaseDAO;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
-import com.liferay.portal.kernel.upgrade.util.DBRelease;
 import com.liferay.portal.kernel.util.LoggingTimer;
 
 import java.io.IOException;
@@ -41,10 +40,10 @@ public class UpgradeModules extends UpgradeProcess {
 	protected void addRelease(String... bundleSymbolicNames)
 		throws SQLException {
 
-		DBRelease dbRelease = new DBRelease(connection, DBManagerUtil.getDB());
+		ReleaseDAO releaseDAO = new ReleaseDAO();
 
 		for (String bundleSymbolicName : bundleSymbolicNames) {
-			dbRelease.addRelease(bundleSymbolicName);
+			releaseDAO.addRelease(connection, bundleSymbolicName);
 		}
 	}
 
@@ -53,20 +52,6 @@ public class UpgradeModules extends UpgradeProcess {
 		updateExtractedModules();
 
 		updateConvertedLegacyModules();
-	}
-
-	protected boolean hasRelease(String bundleSymbolicName)
-		throws SQLException {
-
-		try (PreparedStatement ps = connection.prepareStatement(
-				"select * from Release_ where servletContextName = ?")) {
-
-			ps.setString(1, bundleSymbolicName);
-
-			try (ResultSet rs = ps.executeQuery()) {
-				return rs.next();
-			}
-		}
 	}
 
 	protected boolean hasServiceComponent(String buildNamespace)

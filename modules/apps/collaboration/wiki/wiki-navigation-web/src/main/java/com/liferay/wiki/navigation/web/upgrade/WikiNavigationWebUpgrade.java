@@ -14,11 +14,10 @@
 
 package com.liferay.wiki.navigation.web.upgrade;
 
-import com.liferay.counter.kernel.service.CounterLocalService;
 import com.liferay.portal.kernel.module.framework.ModuleServiceLifecycle;
+import com.liferay.portal.kernel.upgrade.BaseUpgradeRelease;
 import com.liferay.portal.kernel.upgrade.DummyUpgradeStep;
 import com.liferay.portal.kernel.upgrade.UpgradeException;
-import com.liferay.portal.upgrade.legacy.UpgradeWebPluginRelease;
 import com.liferay.portal.upgrade.registry.UpgradeStepRegistrator;
 import com.liferay.wiki.navigation.web.upgrade.v1_0_0.UpgradePortletPreferences;
 import com.liferay.wiki.navigation.web.upgrade.v1_0_1.UpgradePortletId;
@@ -34,7 +33,26 @@ public class WikiNavigationWebUpgrade implements UpgradeStepRegistrator {
 
 	@Override
 	public void register(Registry registry) {
-		_upgradeRelease();
+		BaseUpgradeRelease upgradeRelease = new BaseUpgradeRelease() {
+
+			protected String getBundleSymbolicName() {
+				return "com.liferay.wiki.navigation.web";
+			}
+
+			protected String[] getPortletIds() {
+				return new String[] {
+					"1_WAR_wikinavigationportlet", "2_WAR_wikinavigationportlet"
+				};
+			}
+
+		};
+
+		try {
+			upgradeRelease.upgrade();
+		}
+		catch (UpgradeException ue) {
+			throw new RuntimeException(ue);
+		}
 
 		registry.register(
 			"com.liferay.wiki.navigation.web", "0.0.0", "1.0.1",
@@ -52,23 +70,6 @@ public class WikiNavigationWebUpgrade implements UpgradeStepRegistrator {
 	@Reference(target = ModuleServiceLifecycle.PORTAL_INITIALIZED, unbind = "-")
 	protected void setModuleServiceLifecycle(
 		ModuleServiceLifecycle moduleServiceLifecycle) {
-	}
-
-	@Reference(unbind = "-")
-	protected CounterLocalService counterLocalService;
-
-	private void _upgradeRelease() {
-		try {
-			UpgradeWebPluginRelease upgradeWebPluginRelease =
-				new UpgradeWebPluginRelease(counterLocalService);
-
-			upgradeWebPluginRelease.upgrade(
-				"com.liferay.wiki.navigation.web",
-				"1_WAR_wikinavigationportlet", "2_WAR_wikinavigationportlet");
-		}
-		catch (UpgradeException ue) {
-			throw new RuntimeException(ue);
-		}
 	}
 
 }

@@ -12,12 +12,9 @@
  * details.
  */
 
-package com.liferay.portal.upgrade.legacy;
+package com.liferay.portal.kernel.upgrade;
 
-import com.liferay.counter.kernel.service.CounterLocalService;
-import com.liferay.portal.kernel.dao.jdbc.DataAccess;
-import com.liferay.portal.kernel.upgrade.UpgradeException;
-import com.liferay.portal.kernel.upgrade.util.DBRelease;
+import com.liferay.portal.kernel.model.dao.ReleaseDAO;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.StringBundler;
 
@@ -29,40 +26,25 @@ import java.sql.SQLException;
 /**
  * @author Adolfo Pérez
  */
-public class UpgradeWebPluginRelease {
+public abstract class BaseUpgradeRelease extends UpgradeProcess {
 
-	public UpgradeWebPluginRelease(CounterLocalService counterLocalService) {
-		_counterLocalService = counterLocalService;
-	}
+	@Override
+	protected void doUpgrade() throws Exception {
+		if (hasAnyPortletId(connection, getPortletIds())) {
+			ReleaseDAO releaseDAO = new ReleaseDAO();
 
-	public void upgrade(String bundleSymbolicName, String... portletIds)
-		throws UpgradeException {
-
-		try (Connection con = DataAccess.getUpgradeOptimizedConnection()) {
-			_connection = con;
-
-			_doUpgrade(bundleSymbolicName, portletIds);
-		}
-		catch (Exception e) {
-			throw new UpgradeException(e);
-		}
-		finally {
-			_connection = null;
+			releaseDAO.addRelease(connection, getBundleSymbolicName());
 		}
 	}
 
-	private void _doUpgrade(String bundleSymbolicName, String... portletIds)
+	protected abstract String getBundleSymbolicName();
+
+	protected abstract String[] getPortletIds();
+
+	protected boolean hasAnyPortletId(
+			Connection connection, String... portletIds)
 		throws SQLException {
 
-		if (_hasAnyPortlet(portletIds)) {
-			DBRelease dbRelease = new DBRelease(
-				_connection, _counterLocalService);
-
-			dbRelease.addRelease(bundleSymbolicName);
-		}
-	}
-
-	private boolean _hasAnyPortlet(String... portletIds) throws SQLException {
 		if (portletIds.length == 0) {
 			return false;
 		}
@@ -77,7 +59,7 @@ public class UpgradeWebPluginRelease {
 
 		sb.append(CharPool.CLOSE_PARENTHESIS);
 
-		try (PreparedStatement ps = _connection.prepareStatement(
+		try (PreparedStatement ps = connection.prepareStatement(
 				"select portletId from Portlet where portletId in " +
 					sb.toString())) {
 
@@ -94,8 +76,5 @@ public class UpgradeWebPluginRelease {
 			}
 		}
 	}
-
-	private Connection _connection;
-	private final CounterLocalService _counterLocalService;
 
 }
