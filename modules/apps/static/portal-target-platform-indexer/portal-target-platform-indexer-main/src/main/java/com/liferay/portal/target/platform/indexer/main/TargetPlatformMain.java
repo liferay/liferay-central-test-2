@@ -52,9 +52,9 @@ import java.util.List;
 public class TargetPlatformMain {
 
 	public static void main(String[] args) throws Exception {
-		String liferatHome = System.getProperty("liferay.home");
+		String liferayHome = System.getProperty("liferay.home");
 
-		if (liferatHome == null) {
+		if (liferayHome == null) {
 			System.err.println(
 				"== -Dliferay.home must point to a valid directory");
 
@@ -65,21 +65,21 @@ public class TargetPlatformMain {
 
 		String indexesFileName = System.getProperty(
 			"indexes.file",
-			liferatHome + "/osgi/" +
+			liferayHome + "/osgi/" +
 				Indexer.DIR_NAME_TARGET_PLATFORM + "/target-platform-indexes-" +
 					System.currentTimeMillis() + ".zip");
 		String moduleFrameworkStaticDirName = System.getProperty(
 			"module.framework.static.dir",
-			liferatHome.concat("/osgi/static"));
+			liferayHome.concat("/osgi/static"));
 		String moduleFrameworkModulesDirName = System.getProperty(
 			"module.framework.modules.dir",
-			liferatHome.concat("/osgi/modules"));
+			liferayHome.concat("/osgi/modules"));
 		String moduleFrameworkPortalDirName = System.getProperty(
 			"module.framework.portal.dir",
-			liferatHome.concat("/osgi/portal"));
+			liferayHome.concat("/osgi/portal"));
 		String moduleFrameworkMarketplaceDir = System.getProperty(
 			"module.framework.marketplace.dir",
-			liferatHome.concat("/osgi/marketplace"));
+			liferayHome.concat("/osgi/marketplace"));
 
 		List<URI> uris = _index(
 			indexesFileName, moduleFrameworkStaticDirName,
@@ -89,7 +89,7 @@ public class TargetPlatformMain {
 		if (_validate(uris)) {
 			String integrityPropertiesFileName = System.getProperty(
 				"integrity.properties",
-				liferatHome + "/osgi/" +
+				liferayHome + "/osgi/" +
 					Indexer.DIR_NAME_TARGET_PLATFORM + "/integrity.properties");
 
 			_updateIntegrityProperties(
