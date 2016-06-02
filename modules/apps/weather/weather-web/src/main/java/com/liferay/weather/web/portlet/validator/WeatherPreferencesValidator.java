@@ -12,12 +12,12 @@
  * details.
  */
 
-package com.liferay.weather.portlet;
+package com.liferay.weather.web.portlet.validator;
 
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.weather.model.Weather;
-import com.liferay.weather.util.WeatherUtil;
+import com.liferay.weather.web.model.Weather;
+import com.liferay.weather.web.util.WeatherUtil;
 
 import java.util.ArrayList;
 import java.util.List;
