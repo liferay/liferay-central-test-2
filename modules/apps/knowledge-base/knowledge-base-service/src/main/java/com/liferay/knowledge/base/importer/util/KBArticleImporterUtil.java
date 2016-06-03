@@ -65,13 +65,14 @@ public class KBArticleImporterUtil {
 		}
 
 		try {
-			String fileName = _buildImagePath(
+			String zipReaderFileName = getZipReaderFileName(
 				kbGroupServiceConfiguration.markdownImporterImageFolder(),
 				imageFileName);
 
 			return addImageFileEntry(
 				userId, kbArticle, imageFileName,
-				zipReader.getEntryAsInputStream(fileName), fileEntriesMap);
+				zipReader.getEntryAsInputStream(zipReaderFileName),
+				fileEntriesMap);
 		}
 		catch (Exception e) {
 			StringBuilder sb = new StringBuilder(4);
@@ -179,14 +180,14 @@ public class KBArticleImporterUtil {
 		return fileEntry;
 	}
 
-	private static String _buildImagePath(
-		String imageFolder, String imageFileName) {
+	protected static String getZipReaderFileName(
+		String dirName, String fileName) {
 
-		if (imageFolder.endsWith(StringPool.SLASH)) {
-			return imageFolder + imageFileName;
+		if (dirName.endsWith(StringPool.SLASH)) {
+			return dirName + fileName;
 		}
 		else {
-			return imageFolder + StringPool.SLASH + imageFileName;
+			return dirName + StringPool.SLASH + fileName;
 		}
 	}
 
