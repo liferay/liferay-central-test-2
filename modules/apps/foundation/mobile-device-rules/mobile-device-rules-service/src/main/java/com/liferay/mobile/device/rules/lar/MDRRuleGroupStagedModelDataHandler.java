@@ -108,11 +108,11 @@ public class MDRRuleGroupStagedModelDataHandler
 			return;
 		}
 
-		Map<Long, Long> ids =
+		Map<Long, Long> ruleGroupIds =
 			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
 				MDRRuleGroup.class);
 
-		ids.put(classPK, mdrRuleGroup.getPrimaryKey());
+		ruleGroupIds.put(classPK, mdrRuleGroup.getRuleGroupId());
 	}
 
 	@Override
