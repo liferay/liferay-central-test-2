@@ -10,7 +10,7 @@
 liferay_home=/opt/liferay
 
 #
-# This is the classpath to TargetPlatformMain
+# This is the classpath to TargetPlatformIndexerClient
 #
 jars=(
 	${liferay_home}/osgi/core/com.liferay.portal.bootstrap.jar
@@ -43,4 +43,4 @@ JAVA_OPTS="-Dliferay.home=${liferay_home}"
 # 7. integrity.properties, optional, defaults to ${liferay.home}/osgi/target-platform/integrity.properties.
 
 java -classpath "$CLASSPATH" ${JAVA_OPTS} \
-	com.liferay.portal.tools.target.platform.indexer.client.TargetPlatformMain
+	com.liferay.portal.tools.target.platform.indexer.client.TargetPlatformIndexerClient

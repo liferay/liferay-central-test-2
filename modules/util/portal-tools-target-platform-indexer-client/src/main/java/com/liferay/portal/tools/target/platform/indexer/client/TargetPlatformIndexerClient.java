@@ -49,7 +49,7 @@ import java.util.List;
 /**
  * @author Shuyang Zhou
  */
-public class TargetPlatformMain {
+public class TargetPlatformIndexerClient {
 
 	public static void main(String[] args) throws Exception {
 		String liferayHome = System.getProperty("liferay.home");
