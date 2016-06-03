@@ -89,6 +89,7 @@ public class LPKGIndexValidator {
 			ClassPathUtil.getGlobalClassPath());
 
 		builder.setBootstrapClassPath(classpath);
+
 		builder.setReactClassLoader(PortalClassLoaderUtil.getClassLoader());
 		builder.setRuntimeClassPath(classpath);
 
