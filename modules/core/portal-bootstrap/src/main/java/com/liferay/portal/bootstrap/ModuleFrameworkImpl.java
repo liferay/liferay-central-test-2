@@ -1057,10 +1057,10 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 
 		Collections.sort(jarPaths);
 
-		for (Path lpkgPath : jarPaths) {
-			try (InputStream inputStream = Files.newInputStream(lpkgPath)) {
+		for (Path jarPath : jarPaths) {
+			try (InputStream inputStream = Files.newInputStream(jarPath)) {
 				Bundle bundle = _installInitialBundle(
-					lpkgPath.toString(), inputStream);
+					jarPath.toString(), inputStream);
 
 				if (bundle != null) {
 					bundles.add(bundle);
