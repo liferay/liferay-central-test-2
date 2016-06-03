@@ -2,7 +2,7 @@
 <!DOCTYPE project>
 
 <project name="build-app">
-	<property name="liferay.home" value="${basedir}/../../bundles" />
+	<property name="liferay.home" value="${basedir}/../bundles" />
 
 	<property name="osgi.dir" value="${liferay.home}/osgi" />
 
