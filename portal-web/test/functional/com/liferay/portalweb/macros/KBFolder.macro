@@ -2,7 +2,9 @@
 	<command name="_gotoAddFolder">
 		<execute function="Click" locator1="Button#PLUS" />
 
-		<execute function="AssertClick" locator1="KnowledgeBase#ADD_FOLDER" value1="Folder" />
+		<execute function="AssertClick" locator1="MenuItem#ANY_MENU_ITEM" value1="Folder">
+			<var name="key_menuItem" value="Folder" />
+		</execute>
 	</command>
 
 	<command name="addCP">

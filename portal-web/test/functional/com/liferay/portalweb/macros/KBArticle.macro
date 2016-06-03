@@ -4,19 +4,25 @@
 
 		<execute function="Click" locator1="Button#PLUS" />
 
-		<execute function="AssertClick" locator1="KnowledgeBase#ADD_ARTICLE_VIA_TEMPLATE" value1="${kbTemplateTitle}" />
+		<execute function="AssertClick" locator1="MenuItem#ANY_MENU_ITEM" value1="${kbTemplateTitle}">
+			<var name="key_menuItem" value="${kbTemplateTitle}" />
+		</execute>
 	</command>
 
 	<command name="_gotoAddBasicArticle">
 		<execute function="Click" locator1="Button#PLUS" />
 
-		<execute function="AssertClick" locator1="KnowledgeBase#ADD_BASIC_ARTICLE" value1="Basic Article" />
+		<execute function="AssertClick" locator1="MenuItem#ANY_MENU_ITEM" value1="Basic Article">
+			<var name="key_menuItem" value="Basic Article" />
+		</execute>
 	</command>
 
 	<command name="_gotoImportArticle">
 		<execute function="Click" locator1="Button#PLUS" />
 
-		<execute function="AssertClick" locator1="KnowledgeBase#ADD_IMPORT_ARTICLES" value1="Import" />
+		<execute function="AssertClick" locator1="MenuItem#ANY_MENU_ITEM" value1="Import">
+			<var name="key_menuItem" value="Import" />
+		</execute>
 	</command>
 
 	<command name="addChildPGViaKBAdmin">
