@@ -55,10 +55,10 @@ public class AdminConfigurationAction
 		throws Exception {
 
 		validateEmail(actionRequest, "emailKBArticleAdded");
-		validateEmail(actionRequest, "emailKBArticleUpdated");
-		validateEmail(actionRequest, "emailKBArticleSuggestionReceived");
 		validateEmail(actionRequest, "emailKBArticleSuggestionInProgress");
+		validateEmail(actionRequest, "emailKBArticleSuggestionReceived");
 		validateEmail(actionRequest, "emailKBArticleSuggestionResolved");
+		validateEmail(actionRequest, "emailKBArticleUpdated");
 		validateEmailFrom(actionRequest);
 
 		super.processAction(portletConfig, actionRequest, actionResponse);
