@@ -86,7 +86,7 @@ public class CSSBuilderTest {
 	}
 
 	@Test
-	public void testCssBuilderWithJniWithPortalCommonJar() throws Exception {
+	public void testCssBuilderWithJniAndPortalCommonJar() throws Exception {
 		_testCssBuilder("jni", _PORTAL_COMMON_CSS_JAR_FILE_NAME);
 	}
 
@@ -96,7 +96,7 @@ public class CSSBuilderTest {
 	}
 
 	@Test
-	public void testCssBuilderWithRubyWithPortalCommonJar() throws Exception {
+	public void testCssBuilderWithRubyAndPortalCommonJar() throws Exception {
 		_testCssBuilder("ruby", _PORTAL_COMMON_CSS_JAR_FILE_NAME);
 	}
 
