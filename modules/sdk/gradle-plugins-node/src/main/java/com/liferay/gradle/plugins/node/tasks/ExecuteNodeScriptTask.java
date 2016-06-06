@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.gradle.api.tasks.Input;
+import org.gradle.api.tasks.Optional;
 
 /**
  * @author Andrea Di Giorgi
@@ -37,6 +38,7 @@ public class ExecuteNodeScriptTask extends ExecuteNodeTask {
 	}
 
 	@Input
+	@Optional
 	public File getScriptFile() {
 		return GradleUtil.toFile(getProject(), _scriptFile);
 	}
@@ -46,9 +48,15 @@ public class ExecuteNodeScriptTask extends ExecuteNodeTask {
 	}
 
 	protected List<String> getCompleteArgs() {
+		File scriptFile = getScriptFile();
+
+		if (scriptFile == null) {
+			return getArgs();
+		}
+
 		List<String> completeArgs = new ArrayList<>();
 
-		completeArgs.add(FileUtil.getAbsolutePath(getScriptFile()));
+		completeArgs.add(FileUtil.getAbsolutePath(scriptFile));
 
 		completeArgs.addAll(getArgs());
 
