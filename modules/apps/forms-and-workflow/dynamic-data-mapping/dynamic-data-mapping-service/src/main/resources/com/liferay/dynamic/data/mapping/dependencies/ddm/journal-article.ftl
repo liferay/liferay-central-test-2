@@ -16,7 +16,6 @@
 	<#if journalArticle != "">
 		<#assign selectedAssetTitle = journalArticle.getTitle(requestedLocale)>
 	</#if>
-
 </#if>
 
 <@liferay_aui["field-wrapper"] cssClass="form-builder-field" data=data required=required>
