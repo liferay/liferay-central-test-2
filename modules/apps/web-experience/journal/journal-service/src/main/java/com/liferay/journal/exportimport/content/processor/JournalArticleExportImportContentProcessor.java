@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.model.StagedModel;
 import com.liferay.portal.kernel.service.GroupLocalService;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MapUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Element;
@@ -152,27 +153,35 @@ public class JournalArticleExportImportContentProcessor
 
 				if (journalArticle == null) {
 					if (_log.isInfoEnabled()) {
-						_log.info(
-							"Skipping JournalArticle with classPK = " +
-								classPK + " not found; referenced by " +
-								stagedModel.getModelClassName() + ":" +
-								stagedModel.getPrimaryKeyObj());
+						StringBundler sb = new StringBundler();
+
+						sb.append("Staged model with class name ");
+						sb.append(stagedModel.getModelClassName());
+						sb.append( " and primary key ");
+						sb.append(stagedModel.getPrimaryKeyObj());
+						sb.append( " references missing journal article with ");
+						sb.append("class primary key ");
+						sb.append(classPK);
+
+						_log.info(sb.toString());
 					}
 
 					continue;
 				}
 
-				String jaReference =
-					"[$ja-reference=" + journalArticle.getPrimaryKey() + "$]";
+				String journalArticleReference =
+					"[$journal-article-reference=" +
+						journalArticle.getPrimaryKey() + "$]";
 
 				if (_log.isDebugEnabled()) {
 					_log.debug(
-						"Replacing: " + jsonData + " with " + jaReference);
+						"Replacing " + jsonData + " with " +
+							journalArticleReference);
 				}
 
-				sb.replace(beginPos, endPos, jaReference);
+				sb.replace(beginPos, endPos, journalArticleReference);
 
-				endPos = beginPos + jaReference.length();
+				endPos = beginPos + journalArticleReference.length();
 
 				if (exportReferencedContent) {
 					StagedModelDataHandlerUtil.exportReferenceStagedModel(
@@ -220,15 +229,17 @@ public class JournalArticleExportImportContentProcessor
 			if (journalArticle == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
-						"Unable to fetch article with id: " +
+						"Unable to get journal article with primary key " +
 							articlePrimaryKey);
 				}
 
-				throw new NoSuchArticleException("id = " + articlePrimaryKey);
+				throw new NoSuchArticleException(
+					"No JournalArticle exists with the key {id= " +
+						articlePrimaryKey + "}");
 			}
 			else {
 				String journalArticleReference =
-					"[$ja-reference=" + classPK + "$]";
+					"[$journal-article-reference=" + classPK + "$]";
 
 				JSONObject jsonObject = _jsonFactory.createJSONObject();
 
@@ -293,7 +304,8 @@ public class JournalArticleExportImportContentProcessor
 
 				if (journalArticle == null) {
 					Throwable throwable = new NoSuchArticleException(
-						"resourcePrimKey=" + classPK);
+						"No JournalArticle exists with the key " +
+							"{resourcePrimKey=" + classPK + "}");
 
 					throwables.add(throwable);
 				}
