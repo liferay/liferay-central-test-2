@@ -62,7 +62,7 @@
 			<var name="webContentTitle" value="${webContentTitle}" />
 		</execute>
 
-		<execute function="AssertClick" locator1="Button#SAVE_AS_DRAFT" value1="Save as Draft" />
+		<execute macro="Button#clickSaveAsDraft" />
 
 		<execute macro="Alert#viewSuccessMessage" />
 	</command>
@@ -683,7 +683,7 @@
 		<if>
 			<equals arg1="${saveAsDraft}" arg2="true" />
 			<then>
-				<execute function="AssertClick" locator1="Button#SAVE_AS_DRAFT" value1="Save as Draft" />
+				<execute macro="Button#clickSaveAsDraft" />
 				<execute macro="Alert#viewSuccessMessage" />
 				<execute function="AssertTextEquals" locator1="AssetWorkflow#WORKFLOW_STATUS" value1="Draft" />
 			</then>
@@ -854,7 +854,7 @@
 		<if>
 			<equals arg1="${saveAsDraft}" arg2="true" />
 			<then>
-				<execute function="AssertClick" locator1="Button#SAVE_AS_DRAFT" value1="Save as Draft" />
+				<execute macro="Button#clickSaveAsDraft" />
 
 				<execute macro="Alert#viewSuccessMessage" />
 				<execute function="AssertTextEquals#assertPartialText" locator1="Message#WEB_CONTENT_STATUS" value1="Draft" />
@@ -1142,7 +1142,7 @@
 	</command>
 
 	<command name="saveAsDraftViaAP">
-		<execute function="AssertClick" locator1="Button#SAVE_AS_DRAFT" value1="Save as Draft" />
+		<execute macro="Button#clickSaveAsDraft" />
 
 		<execute macro="Alert#viewSuccessMessage" />
 
