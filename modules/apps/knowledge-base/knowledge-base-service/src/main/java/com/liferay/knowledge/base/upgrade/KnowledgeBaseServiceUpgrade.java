@@ -17,6 +17,7 @@ package com.liferay.knowledge.base.upgrade;
 import com.liferay.portal.kernel.module.framework.ModuleServiceLifecycle;
 import com.liferay.portal.kernel.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.registry.UpgradeStepRegistrator;
+import com.liferay.portal.upgrade.release.BaseUpgradeServiceModuleRelease;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -30,8 +31,20 @@ public class KnowledgeBaseServiceUpgrade implements UpgradeStepRegistrator {
 	@Override
 	public void register(Registry registry) {
 		try {
-			UpgradeServiceModuleRelease upgradeServiceModuleRelease =
-				new UpgradeServiceModuleRelease();
+			BaseUpgradeServiceModuleRelease upgradeServiceModuleRelease =
+				new BaseUpgradeServiceModuleRelease() {
+
+					@Override
+					protected String getNewBundleSymbolicName() {
+						return "com.liferay.knowledge.base.service";
+					}
+
+					@Override
+					protected String getOldBundleSymbolicName() {
+						return "knowledge-base-portlet";
+					}
+
+				};
 
 			upgradeServiceModuleRelease.upgrade();
 		}

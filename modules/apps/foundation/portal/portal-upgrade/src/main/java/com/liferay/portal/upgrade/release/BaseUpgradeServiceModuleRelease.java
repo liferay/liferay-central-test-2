@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.knowledge.base.upgrade;
+package com.liferay.portal.upgrade.release;
 
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.CharPool;
@@ -24,14 +24,14 @@ import java.sql.SQLException;
 /**
  * @author Adolfo Pérez
  */
-class UpgradeServiceModuleRelease extends UpgradeProcess {
+public abstract class BaseUpgradeServiceModuleRelease extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
 		try (PreparedStatement ps = connection.prepareStatement(
 				"select buildNumber from Release_ where " +
 					"servletContextName = ?")) {
 
-			ps.setString(1, _OLD_SERVLET_CONTEXT_NAME);
+			ps.setString(1, getOldBundleSymbolicName());
 
 			try (ResultSet rs = ps.executeQuery()) {
 				if (rs.next()) {
@@ -43,18 +43,9 @@ class UpgradeServiceModuleRelease extends UpgradeProcess {
 		}
 	}
 
-	private void _updateRelease(String schemaVersion) throws SQLException {
-		try (PreparedStatement ps = connection.prepareStatement(
-				"update Release_ set servletContextName = ?, " +
-					"schemaVersion = ? where servletContextName = ?")) {
+	protected abstract String getNewBundleSymbolicName();
 
-			ps.setString(1, _NEW_SERVLET_CONTEXT_NAME);
-			ps.setString(2, schemaVersion);
-			ps.setString(3, _OLD_SERVLET_CONTEXT_NAME);
-
-			ps.execute();
-		}
-	}
+	protected abstract String getOldBundleSymbolicName();
 
 	private String _toSchemaVersion(String buildNumber) {
 		StringBuilder sb = new StringBuilder(2 * buildNumber.length());
@@ -71,10 +62,17 @@ class UpgradeServiceModuleRelease extends UpgradeProcess {
 		return sb.toString();
 	}
 
-	private static final String _NEW_SERVLET_CONTEXT_NAME =
-		"com.liferay.knowledge.base.service";
+	private void _updateRelease(String schemaVersion) throws SQLException {
+		try (PreparedStatement ps = connection.prepareStatement(
+				"update Release_ set servletContextName = ?, " +
+					"schemaVersion = ? where servletContextName = ?")) {
 
-	private static final String _OLD_SERVLET_CONTEXT_NAME =
-		"knowledge-base-portlet";
+			ps.setString(1, getNewBundleSymbolicName());
+			ps.setString(2, schemaVersion);
+			ps.setString(3, getOldBundleSymbolicName());
+
+			ps.execute();
+		}
+	}
 
 }

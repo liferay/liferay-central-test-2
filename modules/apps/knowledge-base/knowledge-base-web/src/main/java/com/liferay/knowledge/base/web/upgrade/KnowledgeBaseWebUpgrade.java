@@ -38,10 +38,12 @@ public class KnowledgeBaseWebUpgrade implements UpgradeStepRegistrator {
 		BaseUpgradeWebModuleRelease upgradeWebModuleRelease =
 			new BaseUpgradeWebModuleRelease() {
 
+				@Override
 				protected String getBundleSymbolicName() {
 					return "com.liferay.knowledge.base.web";
 				}
 
+				@Override
 				protected String[] getPortletIds() {
 					return new String[] {
 						"1_WAR_knowledgebaseportlet",
