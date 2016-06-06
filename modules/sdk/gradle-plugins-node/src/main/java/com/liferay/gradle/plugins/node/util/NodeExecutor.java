@@ -67,7 +67,12 @@ public class NodeExecutor {
 						execSpec.setExecutable(getExecutable());
 					}
 
-					execSpec.setEnvironment(getEnvironment());
+					Map<String, String> environment = getEnvironment();
+
+					if (environment != null) {
+						execSpec.setEnvironment(getEnvironment());
+					}
+
 					execSpec.setWorkingDir(_workingDir);
 				}
 
@@ -113,9 +118,13 @@ public class NodeExecutor {
 	}
 
 	protected Map<String, String> getEnvironment() {
-		Map<String, String> environment = new HashMap<>(System.getenv());
-
 		File executableDir = getExecutableDir();
+
+		if (executableDir == null) {
+			return null;
+		}
+
+		Map<String, String> environment = new HashMap<>(System.getenv());
 
 		for (String pathKey : _PATH_KEYS) {
 			String path = environment.get(pathKey);
@@ -132,12 +141,28 @@ public class NodeExecutor {
 		return environment;
 	}
 
-	protected File getExecutable() {
-		return new File(getExecutableDir(), GradleUtil.toString(_command));
+	protected String getExecutable() {
+		String executable = GradleUtil.toString(_command);
+
+		File executableDir = getExecutableDir();
+
+		if (executableDir != null) {
+			File executableFile = new File(executableDir, executable);
+
+			executable = executableFile.getAbsolutePath();
+		}
+
+		return executable;
 	}
 
 	protected File getExecutableDir() {
-		return new File(getNodeDir(), "bin");
+		File nodeDir = getNodeDir();
+
+		if (nodeDir == null) {
+			return null;
+		}
+
+		return new File(nodeDir, "bin");
 	}
 
 	protected List<String> getWindowsArgs() {
@@ -147,9 +172,18 @@ public class NodeExecutor {
 
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("\"\"");
-		sb.append(getExecutable());
-		sb.append('\"');
+		sb.append('"');
+
+		String executable = getExecutable();
+
+		if (executable.indexOf(File.separatorChar) == -1) {
+			sb.append(executable);
+		}
+		else {
+			sb.append('"');
+			sb.append(executable);
+			sb.append('"');
+		}
 
 		for (String arg : getArgs()) {
 			sb.append(" \"");
@@ -158,10 +192,10 @@ public class NodeExecutor {
 				sb.append(arg);
 			}
 
-			sb.append('\"');
+			sb.append('"');
 		}
 
-		sb.append('\"');
+		sb.append('"');
 
 		windowsArgs.add(sb.toString());
 

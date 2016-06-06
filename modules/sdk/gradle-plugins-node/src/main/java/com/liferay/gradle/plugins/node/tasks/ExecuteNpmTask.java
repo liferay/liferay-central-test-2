@@ -33,7 +33,27 @@ public class ExecuteNpmTask extends ExecuteNodeScriptTask {
 
 				@Override
 				public File call() throws Exception {
+					File nodeDir = getNodeDir();
+
+					if (nodeDir == null) {
+						return null;
+					}
+
 					return new File(getNodeDir(), ".cache");
+				}
+
+			});
+
+		setCommand(
+			new Callable<String>() {
+
+				@Override
+				public String call() throws Exception {
+					if (getNodeDir() == null) {
+						return "npm";
+					}
+
+					return "node";
 				}
 
 			});
@@ -43,6 +63,12 @@ public class ExecuteNpmTask extends ExecuteNodeScriptTask {
 
 				@Override
 				public File call() throws Exception {
+					File nodeDir = getNodeDir();
+
+					if (nodeDir == null) {
+						return null;
+					}
+
 					return new File(
 						getNodeDir(), "lib/node_modules/npm/bin/npm-cli.js");
 				}
