@@ -157,9 +157,9 @@ public class JournalArticleExportImportContentProcessor
 
 						messageSB.append("Staged model with class name ");
 						messageSB.append(stagedModel.getModelClassName());
-						messageSB.append( " and primary key ");
+						messageSB.append(" and primary key ");
 						messageSB.append(stagedModel.getPrimaryKeyObj());
-						messageSB.append( " references missing journal ");
+						messageSB.append(" references missing journal ");
 						messageSB.append("article with class primary key ");
 						messageSB.append(classPK);
 
