@@ -153,17 +153,17 @@ public class JournalArticleExportImportContentProcessor
 
 				if (journalArticle == null) {
 					if (_log.isInfoEnabled()) {
-						StringBundler sb = new StringBundler();
+						StringBundler messageSB = new StringBundler();
 
-						sb.append("Staged model with class name ");
-						sb.append(stagedModel.getModelClassName());
-						sb.append( " and primary key ");
-						sb.append(stagedModel.getPrimaryKeyObj());
-						sb.append( " references missing journal article with ");
-						sb.append("class primary key ");
-						sb.append(classPK);
+						messageSB.append("Staged model with class name ");
+						messageSB.append(stagedModel.getModelClassName());
+						messageSB.append( " and primary key ");
+						messageSB.append(stagedModel.getPrimaryKeyObj());
+						messageSB.append( " references missing journal ");
+						messageSB.append("article with class primary key ");
+						messageSB.append(classPK);
 
-						_log.info(sb.toString());
+						_log.info(messageSB.toString());
 					}
 
 					continue;
@@ -289,7 +289,7 @@ public class JournalArticleExportImportContentProcessor
 
 				if (Validator.isNull(json)) {
 					if (_log.isDebugEnabled()) {
-						_log.debug("No reference specified.");
+						_log.debug("No journal article reference is specified");
 					}
 
 					continue;
@@ -314,7 +314,9 @@ public class JournalArticleExportImportContentProcessor
 
 		if (!throwables.isEmpty()) {
 			throw new PortalException(
-				new BulkException("Content validation failure", throwables));
+				new BulkException(
+					"Unable to validate jounral article references",
+					throwables));
 		}
 	}
 
