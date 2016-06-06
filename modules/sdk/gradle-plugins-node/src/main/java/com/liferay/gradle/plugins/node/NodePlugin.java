@@ -53,7 +53,7 @@ public class NodePlugin implements Plugin<Project> {
 		final NodeExtension nodeExtension = GradleUtil.addExtension(
 			project, EXTENSION_NAME, NodeExtension.class);
 
-		addTaskDownloadNode(project);
+		addTaskDownloadNode(project, nodeExtension);
 		addTaskNpmInstall(project);
 
 		configureTasksDownloadNode(project, nodeExtension);
@@ -71,9 +71,23 @@ public class NodePlugin implements Plugin<Project> {
 			});
 	}
 
-	protected DownloadNodeTask addTaskDownloadNode(Project project) {
-		return GradleUtil.addTask(
+	protected DownloadNodeTask addTaskDownloadNode(
+		Project project, final NodeExtension nodeExtension) {
+
+		DownloadNodeTask downloadNodeTask = GradleUtil.addTask(
 			project, DOWNLOAD_NODE_TASK_NAME, DownloadNodeTask.class);
+
+		downloadNodeTask.onlyIf(
+			new Spec<Task>() {
+
+				@Override
+				public boolean isSatisfiedBy(Task task) {
+					return nodeExtension.isDownload();
+				}
+
+			});
+
+		return downloadNodeTask;
 	}
 
 	protected ExecuteNpmTask addTaskNpmInstall(Project project) {
@@ -184,7 +198,11 @@ public class NodePlugin implements Plugin<Project> {
 
 				@Override
 				public File call() throws Exception {
-					return nodeExtension.getNodeDir();
+					if (nodeExtension.isDownload()) {
+						return nodeExtension.getNodeDir();
+					}
+
+					return null;
 				}
 
 			});
