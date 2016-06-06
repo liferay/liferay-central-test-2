@@ -17,9 +17,8 @@
 <%@ include file="/init.jsp" %>
 
 <%
-String closeRedirect = ParamUtil.getString(request, "closeRedirect");
-
 String redirect = ParamUtil.getString(request, "redirect");
+String closeRedirect = ParamUtil.getString(request, "closeRedirect");
 
 String portletResource = ParamUtil.getString(request, "portletResource");
 
