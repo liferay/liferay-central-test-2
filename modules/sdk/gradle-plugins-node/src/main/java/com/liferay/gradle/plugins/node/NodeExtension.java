@@ -14,7 +14,6 @@
 
 package com.liferay.gradle.plugins.node;
 
-import com.liferay.gradle.util.FileUtil;
 import com.liferay.gradle.util.GradleUtil;
 import com.liferay.gradle.util.OSDetector;
 import com.liferay.gradle.util.Validator;
@@ -123,17 +122,6 @@ public class NodeExtension {
 		};
 
 		_project = project;
-
-		setNpmArgs(
-			"--cache",
-			new Callable<String>() {
-
-				@Override
-				public String call() throws Exception {
-					return FileUtil.getAbsolutePath(getNpmCacheDir());
-				}
-
-			});
 	}
 
 	public File getNodeDir() {
@@ -190,10 +178,6 @@ public class NodeExtension {
 
 	public void setNpmArgs(Object... npmArgs) {
 		setNpmArgs(Arrays.asList(npmArgs));
-	}
-
-	protected File getNpmCacheDir() {
-		return new File(getNodeDir(), ".cache");
 	}
 
 	private Object _nodeDir;

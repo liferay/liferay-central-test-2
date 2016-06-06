@@ -14,8 +14,12 @@
 
 package com.liferay.gradle.plugins.node.tasks;
 
+import com.liferay.gradle.util.FileUtil;
+import com.liferay.gradle.util.GradleUtil;
+
 import java.io.File;
 
+import java.util.List;
 import java.util.concurrent.Callable;
 
 /**
@@ -24,6 +28,16 @@ import java.util.concurrent.Callable;
 public class ExecuteNpmTask extends ExecuteNodeScriptTask {
 
 	public ExecuteNpmTask() {
+		setCacheDir(
+			new Callable<File>() {
+
+				@Override
+				public File call() throws Exception {
+					return new File(getNodeDir(), ".cache");
+				}
+
+			});
+
 		setScriptFile(
 			new Callable<File>() {
 
@@ -35,5 +49,29 @@ public class ExecuteNpmTask extends ExecuteNodeScriptTask {
 
 			});
 	}
+
+	public File getCacheDir() {
+		return GradleUtil.toFile(getProject(), _cacheDir);
+	}
+
+	public void setCacheDir(Object cacheDir) {
+		_cacheDir = cacheDir;
+	}
+
+	@Override
+	protected List<String> getCompleteArgs() {
+		List<String> completeArgs = super.getCompleteArgs();
+
+		File cacheDir = getCacheDir();
+
+		if (cacheDir != null) {
+			completeArgs.add("--cache");
+			completeArgs.add(FileUtil.getAbsolutePath(cacheDir));
+		}
+
+		return completeArgs;
+	}
+
+	private Object _cacheDir;
 
 }
