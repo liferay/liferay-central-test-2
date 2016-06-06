@@ -146,6 +146,7 @@ public class DDMFormTemplateContextFactoryImpl
 		templateContext.put(
 			"fieldTypes",
 			_ddmFormFieldTypesJSONSerializer.serialize(ddmFormFieldTypes));
+
 		templateContext.put(
 			"layout", _ddmFormLayoutJSONSerializer.serialize(ddmFormLayout));
 

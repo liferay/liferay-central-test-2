@@ -126,11 +126,11 @@ public class DDMFormRendererImpl implements DDMFormRenderer {
 			DDMFormRenderingContext ddmFormRenderingContext)
 		throws PortalException {
 
-		Map<String, Object> templateContext =
+		Map<String, Object> ddmFormTemplateContext =
 			_ddmFormTemplateContextFactory.create(
 				ddmForm, ddmFormLayout, ddmFormRenderingContext);
 
-		template.putAll(templateContext);
+		template.putAll(ddmFormTemplateContext);
 	}
 
 	protected String render(Template template, String namespace)
