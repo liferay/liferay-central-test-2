@@ -250,17 +250,6 @@
 		<execute function="SelectFrame" value1="relative=top" />
 	</command>
 
-	<command name="addDraftPGViaWCD">
-		<execute macro="WebContent#_gotoAddPGViaAP" />
-
-		<execute macro="WebContent#addCP">
-			<var name="webContentContent" value="${webContentContent}" />
-			<var name="webContentTitle" value="${webContentTitle}" />
-		</execute>
-
-		<execute macro="WebContent#saveAsDraft" />
-	</command>
-
 	<command name="addStructuredPGViaWCD">
 		<execute macro="WebContentNavigator#gotoAddPGViaWCD">
 			<var name="structureName" value="${structureName}" />
@@ -1137,10 +1126,6 @@
 		<execute function="AssertTextEquals" locator1="WCPreview#BODY_FIELD" value1="${webContentText}" />
 	</command>
 
-	<command name="saveAsDraft">
-		<execute function="AssertClick" locator1="Button#SAVE_AS_DRAFT" value1="Save as Draft" />
-	</command>
-
 	<command name="saveAsDraftViaAP">
 		<execute macro="Button#clickSaveAsDraft" />
 
@@ -1589,6 +1574,10 @@
 		<execute function="AssertElementNotPresent" locator1="TextInput#TITLE" value1="${webContentTitle}" />
 	</command>
 
+	<command name="viewPageBreak">
+		<execute function="AssertTextEquals#assertPartialText" locator1="Pagination#PAGES" value1="Pages" />
+	</command>
+
 	<command name="viewPaginateRelatedAssets">
 		<execute function="AssertTextEquals" locator1="Pagination#ITEMS_PER_PAGE_SELECT" value1="${itemsPerPage}" />
 		<execute function="AssertTextEquals" locator1="Pagination#CURRENT_PAGE_SELECT" value1="${numberOfPages}" />
@@ -1616,10 +1605,6 @@
 
 		<execute function="AssertTextEquals" locator1="APAsset#ASSET_TITLE_HEADER" value1="${webContentTitle}" />
 		<execute function="AssertTextEquals#assertPartialText" locator1="APAsset#ASSET_VIEW_CONTENT" value1="${webContentContent}" />
-	</command>
-
-	<command name="viewPageBreak">
-		<execute function="AssertTextEquals#assertPartialText" locator1="Pagination#PAGES" value1="Pages" />
 	</command>
 
 	<command name="viewPGViaWCD">
