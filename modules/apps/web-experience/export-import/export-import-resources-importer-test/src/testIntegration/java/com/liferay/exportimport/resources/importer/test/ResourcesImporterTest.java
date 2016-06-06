@@ -371,14 +371,14 @@ public class ResourcesImporterTest {
 			JournalFolderLocalServiceUtil.fetchFolder(
 				importedGroup.getGroupId(), "Basic Web Content Parent Folder");
 
-		JournalArticle articleInParentFolder =
+		JournalArticle parentJournalFolderJournalArticle =
 			JournalArticleLocalServiceUtil.getArticle(
 				importedGroup.getGroupId(), "BASIC-ARTICLE-IN-PARENT-FOLDER");
 
 		Assert.assertNotNull(parentJournalFolder);
 
 		Assert.assertEquals(
-			articleInParentFolder.getFolder(), parentJournalFolder);
+			parentJournalFolderJournalArticle.getFolder(), parentJournalFolder);
 
 		JournalFolder childJournalFolder =
 			JournalFolderLocalServiceUtil.fetchFolder(
@@ -387,12 +387,12 @@ public class ResourcesImporterTest {
 		Assert.assertEquals(
 			parentJournalFolder, childJournalFolder.getParentFolder());
 
-		JournalArticle articleInChildFolder =
+		JournalArticle childJournalFolderJournalArticle =
 			JournalArticleLocalServiceUtil.getArticle(
 				importedGroup.getGroupId(), "BASIC-ARTICLE-IN-CHILD-FOLDER");
 
 		Assert.assertEquals(
-			articleInChildFolder.getFolder(), childJournalFolder);
+			childJournalFolderJournalArticle.getFolder(), childJournalFolder);
 	}
 
 	protected void validateLayouts(Group importedGroup) throws Exception {
