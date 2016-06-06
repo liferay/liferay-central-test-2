@@ -228,13 +228,13 @@ public class ResourcesImporterTest {
 			webArchive,
 			"classes/resources-importer/journal/articles/BASIC_WEB_CONTENT" +
 				"/Basic Web Content Parent Folder" +
-					"/Basic Article in Parent Folder.xml");
+					"/Basic Web Content Child Folder" +
+						"/Basic Article in Child Folder.xml");
 		addWebInfResource(
 			webArchive,
 			"classes/resources-importer/journal/articles/BASIC_WEB_CONTENT" +
 				"/Basic Web Content Parent Folder" +
-					"/Basic Web Content Child Folder" +
-						"/Basic Article in Child Folder.xml");
+					"/Basic Article in Parent Folder.xml");
 		addWebInfResource(
 			webArchive,
 			"classes/resources-importer/journal/structures" +
