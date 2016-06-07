@@ -21,26 +21,21 @@ import com.liferay.portal.kernel.util.ReleaseInfo;
  */
 public class StaticLPKGResolver {
 
-	public static final String STATIC_LPKG_BUNDLE_SYMBOLIC_NAME =
-		"static.lpkg.bundle.symbolic.name";
-
-	public static final String STATIC_LPKG_FILE_NAME = "static.lpkg.file.name";
-
 	public static String getStaticLPKGBundleSymbolicName() {
 		return _STATIC_LPKG_BUNDLE_SYMBOLIC_NAME;
 	}
 
 	public static String getStaticLPKGFileName() {
-		return _STATIC_LPKGFILE_NAME;
+		return _STATIC_LPKG_FILE_NAME;
 	}
 
 	private static final String _STATIC_LPKG_BUNDLE_SYMBOLIC_NAME;
 
-	private static final String _STATIC_LPKGFILE_NAME;
+	private static final String _STATIC_LPKG_FILE_NAME;
 
 	static {
 		String staticLPKGBundleSymbolicName = System.getProperty(
-			STATIC_LPKG_BUNDLE_SYMBOLIC_NAME);
+			"static.lpkg.bundle.symbolic.name");
 
 		String name = ReleaseInfo.getName();
 
@@ -56,14 +51,15 @@ public class StaticLPKGResolver {
 			_STATIC_LPKG_BUNDLE_SYMBOLIC_NAME = staticLPKGBundleSymbolicName;
 		}
 
-		String staticLPKGFileName = System.getProperty(STATIC_LPKG_FILE_NAME);
+		String staticLPKGFileName = System.getProperty(
+			"static.lpkg.file.name");
 
 		if (staticLPKGFileName == null) {
-			_STATIC_LPKGFILE_NAME = _STATIC_LPKG_BUNDLE_SYMBOLIC_NAME.concat(
+			_STATIC_LPKG_FILE_NAME = _STATIC_LPKG_BUNDLE_SYMBOLIC_NAME.concat(
 				".lpkg");
 		}
 		else {
-			_STATIC_LPKGFILE_NAME = staticLPKGFileName;
+			_STATIC_LPKG_FILE_NAME = staticLPKGFileName;
 		}
 	}
 
