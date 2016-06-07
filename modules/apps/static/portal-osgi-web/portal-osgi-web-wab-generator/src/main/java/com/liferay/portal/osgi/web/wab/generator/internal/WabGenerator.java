@@ -97,7 +97,7 @@ public class WabGenerator
 			bundleContext, Bundle.ACTIVE, null) {
 
 			@Override
-			public Void addingBundle(Bundle bundle, BundleEvent event) {
+			public Void addingBundle(Bundle bundle, BundleEvent bundleEvent) {
 				String location = bundle.getLocation();
 
 				if (requiredForStartupLocations.remove(location) &&
@@ -123,6 +123,42 @@ public class WabGenerator
 		_serviceRegistration.unregister();
 
 		_serviceRegistration = null;
+	}
+
+	protected Set<String> getRequiredForStartupLocations(Path path)
+		throws IOException {
+
+		Set<String> locations = new HashSet<>();
+
+		try (DirectoryStream<Path> directoryStream =
+				Files.newDirectoryStream(path, "*.war")) {
+
+			for (Path warPath : directoryStream) {
+				URI uri = warPath.toUri();
+
+				try (ZipFile zipFile = new ZipFile(new File(uri));
+					InputStream inputStream = zipFile.getInputStream(
+						new ZipEntry(
+							"WEB-INF/liferay-plugin-package.properties"))) {
+
+					Properties properties = new Properties();
+
+					properties.load(inputStream);
+
+					if (!Boolean.valueOf(
+							properties.getProperty("required-for-startup"))) {
+
+						continue;
+					}
+
+					URL url = ArtifactURLUtil.transform(uri.toURL());
+
+					locations.add(url.toString());
+				}
+			}
+		}
+
+		return locations;
 	}
 
 	protected void registerArtifactUrlTransformer(BundleContext bundleContext) {
@@ -161,42 +197,6 @@ public class WabGenerator
 
 	protected void unsetModuleServiceLifecycle(
 		ModuleServiceLifecycle moduleServiceLifecycle) {
-	}
-
-	protected Set<String> getRequiredForStartupLocations(Path path)
-		throws IOException {
-
-		Set<String> locations = new HashSet<>();
-
-		try (DirectoryStream<Path> directoryStream =
-				Files.newDirectoryStream(path, "*.war")) {
-
-			for (Path warPath : directoryStream) {
-				URI uri = warPath.toUri();
-
-				try (ZipFile zipFile = new ZipFile(new File(uri));
-					InputStream inputStream = zipFile.getInputStream(
-						new ZipEntry(
-							"WEB-INF/liferay-plugin-package.properties"))) {
-
-					Properties properties = new Properties();
-
-					properties.load(inputStream);
-
-					if (!Boolean.valueOf(
-							properties.getProperty("required-for-startup"))) {
-
-						continue;
-					}
-
-					URL url = ArtifactURLUtil.transform(uri.toURL());
-
-					locations.add(url.toString());
-				}
-			}
-		}
-
-		return locations;
 	}
 
 	private ServiceRegistration<ArtifactUrlTransformer> _serviceRegistration;
