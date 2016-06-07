@@ -1230,7 +1230,6 @@ public class CalendarBookingLocalServiceImpl
 				firstReminder = oldChildCalendarBooking.getFirstReminder();
 				firstReminderType =
 					oldChildCalendarBooking.getFirstReminderType();
-
 				secondReminder = oldChildCalendarBooking.getSecondReminder();
 				secondReminderType =
 					oldChildCalendarBooking.getSecondReminderType();
