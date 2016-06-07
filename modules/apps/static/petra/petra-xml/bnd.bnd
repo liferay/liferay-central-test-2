@@ -3,4 +3,4 @@ Bundle-SymbolicName: com.liferay.petra.xml
 Bundle-Version: 1.0.3
 Export-Package: com.liferay.petra.xml
 Liferay-Releng-Module-Group-Description:
-Liferay-Releng-Module-Group-Title:
+Liferay-Releng-Module-Group-Title: 
