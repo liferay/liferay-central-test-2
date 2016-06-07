@@ -129,7 +129,7 @@ public class MyWorkflowTaskPortlet extends MVCPortlet {
 
 			throw new PrincipalException(
 				String.format(
-					"User %d does not have permissions to view the task %d ",
+					"User %d does not have permission to view task %d",
 					themeDisplay.getUserId(),
 					workflowTask.getWorkflowTaskId()));
 		}
