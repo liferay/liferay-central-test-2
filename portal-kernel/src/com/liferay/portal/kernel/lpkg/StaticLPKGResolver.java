@@ -27,14 +27,14 @@ public class StaticLPKGResolver {
 	public static final String STATIC_LPKG_FILE_NAME = "static.lpkg.file.name";
 
 	public static String getStaticLPKGBundleSymbolicName() {
-		return _STATIC_LPKGBUNDLE_SYMBOLIC_NAME;
+		return _STATIC_LPKG_BUNDLE_SYMBOLIC_NAME;
 	}
 
 	public static String getStaticLPKGFileName() {
 		return _STATIC_LPKGFILE_NAME;
 	}
 
-	private static final String _STATIC_LPKGBUNDLE_SYMBOLIC_NAME;
+	private static final String _STATIC_LPKG_BUNDLE_SYMBOLIC_NAME;
 
 	private static final String _STATIC_LPKGFILE_NAME;
 
@@ -46,20 +46,20 @@ public class StaticLPKGResolver {
 
 		if (staticLPKGBundleSymbolicName == null) {
 			if (name.contains("Community")) {
-				_STATIC_LPKGBUNDLE_SYMBOLIC_NAME ="Liferay CE Static";
+				_STATIC_LPKG_BUNDLE_SYMBOLIC_NAME ="Liferay CE Static";
 			}
 			else {
-				_STATIC_LPKGBUNDLE_SYMBOLIC_NAME = "Liferay DXP Static";
+				_STATIC_LPKG_BUNDLE_SYMBOLIC_NAME = "Liferay DXP Static";
 			}
 		}
 		else {
-			_STATIC_LPKGBUNDLE_SYMBOLIC_NAME = staticLPKGBundleSymbolicName;
+			_STATIC_LPKG_BUNDLE_SYMBOLIC_NAME = staticLPKGBundleSymbolicName;
 		}
 
 		String staticLPKGFileName = System.getProperty(STATIC_LPKG_FILE_NAME);
 
 		if (staticLPKGFileName == null) {
-			_STATIC_LPKGFILE_NAME = _STATIC_LPKGBUNDLE_SYMBOLIC_NAME.concat(
+			_STATIC_LPKGFILE_NAME = _STATIC_LPKG_BUNDLE_SYMBOLIC_NAME.concat(
 				".lpkg");
 		}
 		else {
