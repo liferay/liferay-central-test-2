@@ -4,7 +4,7 @@
 ;
 [subrepo]
 	cmdver = liferay
-	commit = b787d6143d3b2716c2739853d1b49b1484d0576e
+	commit = 0f909612529e3c50aac0679b79d7e89ba217a860
 	mode = push
-	parent = 5d567cf717ecce7a7354628609fdb53cd8f42190
+	parent = abe968ad02ac71c0ee7aeefbed0ef02abd487038
 	remote = git@github.com:liferay/com-liferay-user-groups-admin.git
