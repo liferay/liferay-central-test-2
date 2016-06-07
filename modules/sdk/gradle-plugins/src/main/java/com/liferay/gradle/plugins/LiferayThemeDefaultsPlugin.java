@@ -283,10 +283,10 @@ public class LiferayThemeDefaultsPlugin implements Plugin<Project> {
 		final LiferayExtension liferayExtension = GradleUtil.getExtension(
 			project, LiferayExtension.class);
 
-		boolean startupRequired = getPluginPackageProperty(
-			project, "startup-required");
+		boolean requiredForStartup = getPluginPackageProperty(
+			project, "required-for-startup");
 
-		if (startupRequired) {
+		if (requiredForStartup) {
 			liferayExtension.setDeployDir(
 				new Callable<File>() {
 
