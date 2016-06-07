@@ -662,6 +662,7 @@ public class CalendarBookingLocalServiceTest {
 
 		CalendarBooking childCalendarBooking = getChildCalendarBooking(
 			calendarBooking);
+
 		childCalendarBooking = CalendarBookingLocalServiceUtil.updateStatus(
 			_user.getUserId(), childCalendarBooking,
 			CalendarBookingWorkflowConstants.STATUS_MAYBE, serviceContext);
@@ -700,7 +701,6 @@ public class CalendarBookingLocalServiceTest {
 		Assert.assertNotEquals(
 			calendarBooking.getSecondReminder(),
 			childCalendarBooking.getSecondReminder());
-
 		Assert.assertEquals(
 			firstReminder, childCalendarBooking.getFirstReminder());
 		Assert.assertEquals(
