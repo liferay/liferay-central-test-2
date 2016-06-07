@@ -77,14 +77,15 @@ public class SearchPortlet extends BaseKBPortlet {
 		throws IOException, PortletException {
 
 		try {
-			int status = getStatus(renderRequest);
-
-			renderRequest.setAttribute(KBWebKeys.KNOWLEDGE_BASE_STATUS, status);
+			renderRequest.setAttribute(
+				KBWebKeys.DL_MIME_TYPE_DISPLAY_CONTEXT,
+				dlMimeTypeDisplayContext);
 
 			KBArticle kbArticle = null;
 
 			long resourcePrimKey = ParamUtil.getLong(
 				renderRequest, "resourcePrimKey");
+			int status = getStatus(renderRequest);
 
 			if (resourcePrimKey > 0) {
 				kbArticle = kbArticleService.getLatestKBArticle(
@@ -94,9 +95,7 @@ public class SearchPortlet extends BaseKBPortlet {
 			renderRequest.setAttribute(
 				KBWebKeys.KNOWLEDGE_BASE_KB_ARTICLE, kbArticle);
 
-			renderRequest.setAttribute(
-				KBWebKeys.DL_MIME_TYPE_DISPLAY_CONTEXT,
-				dlMimeTypeDisplayContext);
+			renderRequest.setAttribute(KBWebKeys.KNOWLEDGE_BASE_STATUS, status);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchArticleException ||
