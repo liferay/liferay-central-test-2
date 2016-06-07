@@ -83,10 +83,11 @@ public class WabGenerator
 
 		registerArtifactUrlTransformer(bundleContext);
 
-		final Set<String> requiredLocations = _scanForRequiredWars(
-			Paths.get(PropsValues.LIFERAY_HOME, "osgi/war"));
+		final Set<String> requiredForStartupLocations =
+			getRequiredForStartupLocations(
+				Paths.get(PropsValues.LIFERAY_HOME, "osgi/war"));
 
-		if (requiredLocations.isEmpty()) {
+		if (requiredForStartupLocations.isEmpty()) {
 			return;
 		}
 
@@ -99,8 +100,8 @@ public class WabGenerator
 			public Void addingBundle(Bundle bundle, BundleEvent event) {
 				String location = bundle.getLocation();
 
-				if (requiredLocations.remove(location) &&
-					requiredLocations.isEmpty()) {
+				if (requiredForStartupLocations.remove(location) &&
+					requiredForStartupLocations.isEmpty()) {
 
 					countDownLatch.countDown();
 				}
@@ -162,7 +163,9 @@ public class WabGenerator
 		ModuleServiceLifecycle moduleServiceLifecycle) {
 	}
 
-	private Set<String> _scanForRequiredWars(Path path) throws IOException {
+	protected Set<String> getRequiredForStartupLocations(Path path)
+		throws IOException {
+
 		Set<String> locations = new HashSet<>();
 
 		try (DirectoryStream<Path> directoryStream =
@@ -181,7 +184,7 @@ public class WabGenerator
 					properties.load(inputStream);
 
 					if (!Boolean.valueOf(
-							properties.getProperty("startup-required"))) {
+							properties.getProperty("required-for-startup"))) {
 
 						continue;
 					}
