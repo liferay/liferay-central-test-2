@@ -87,6 +87,9 @@ public class NodePlugin implements Plugin<Project> {
 
 			});
 
+		downloadNodeTask.setDescription(
+			"Downloads Node.js in the project build directory.");
+
 		return downloadNodeTask;
 	}
 
