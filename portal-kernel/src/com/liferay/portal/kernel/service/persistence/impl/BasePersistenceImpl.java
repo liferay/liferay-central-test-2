@@ -548,7 +548,7 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 	private SessionFactory _sessionFactory;
 
 	private static class NullModel
-		extends BaseModelAdaptor<NullModel>
+		extends BaseModelAdapter<NullModel>
 		implements CacheModel<NullModel>, MVCCModel {
 
 		@Override

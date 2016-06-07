@@ -25,7 +25,7 @@ import java.util.Map;
 /**
  * @author Preston Crary
  */
-public abstract class BaseModelAdaptor<T> implements BaseModel<T> {
+public abstract class BaseModelAdapter<T> implements BaseModel<T> {
 
 	@Override
 	public abstract Object clone();
