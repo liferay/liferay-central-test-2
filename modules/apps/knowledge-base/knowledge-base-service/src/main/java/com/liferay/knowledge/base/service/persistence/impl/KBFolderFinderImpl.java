@@ -41,8 +41,8 @@ import java.util.List;
 public class KBFolderFinderImpl
 	extends KBFolderFinderBaseImpl implements KBFolderFinder {
 
-	public static final String FIND_F_BY_G_P =
-		KBFolderFinder.class.getName() + ".findF_ByG_P";
+	public static final String COUNT_A_BY_G_P =
+		KBFolderFinder.class.getName() + ".countA_ByG_P";
 
 	public static final String COUNT_F_BY_G_P =
 		KBFolderFinder.class.getName() + ".countF_ByG_P";
@@ -50,17 +50,8 @@ public class KBFolderFinderImpl
 	public static final String FIND_A_BY_G_P =
 		KBFolderFinder.class.getName() + ".findA_ByG_P";
 
-	public static final String COUNT_A_BY_G_P =
-		KBFolderFinder.class.getName() + ".countA_ByG_P";
-
-	@Override
-	public List<Object> filterFindF_A_ByG_P(
-		long groupId, long parentResourcePrimKey,
-		QueryDefinition<?> queryDefinition) {
-
-		return doFindF_A_ByG_P(
-			groupId, parentResourcePrimKey, queryDefinition, true);
-	}
+	public static final String FIND_F_BY_G_P =
+		KBFolderFinder.class.getName() + ".findF_ByG_P";
 
 	@Override
 	public int countF_A_ByG_P(
@@ -77,6 +68,15 @@ public class KBFolderFinderImpl
 		QueryDefinition<?> queryDefinition) {
 
 		return doCountF_A_ByG_P(
+			groupId, parentResourcePrimKey, queryDefinition, true);
+	}
+
+	@Override
+	public List<Object> filterFindF_A_ByG_P(
+		long groupId, long parentResourcePrimKey,
+		QueryDefinition<?> queryDefinition) {
+
+		return doFindF_A_ByG_P(
 			groupId, parentResourcePrimKey, queryDefinition, true);
 	}
 
