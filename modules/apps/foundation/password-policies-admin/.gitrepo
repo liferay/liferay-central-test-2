@@ -4,7 +4,7 @@
 ;
 [subrepo]
 	cmdver = liferay
-	commit = 9928253e3094d841b087400458fac42624c1a98c
+	commit = 6401fbd81204099f7943c2cd9da1cccccdcc950e
 	mode = push
-	parent = 2f1072c5637e4f597b5863748c19335231b62674
+	parent = ae99dc288bf7f6cf2604c62ae16fe50b10cc9d5c
 	remote = git@github.com:liferay/com-liferay-password-policies-admin.git
