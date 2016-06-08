@@ -14,6 +14,7 @@
 
 package com.liferay.portal.scripting.executor.internal.extender;
 
+import com.liferay.osgi.util.ServiceTrackerFactory;
 import com.liferay.portal.kernel.cluster.ClusterMasterExecutor;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -25,6 +26,7 @@ import com.liferay.portal.kernel.scripting.ScriptingExecutor;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.scripting.executor.constants.ScriptingExecutorConstants;
 import com.liferay.portal.scripting.executor.internal.ScriptingExecutorMessagingConstants;
+import com.liferay.portal.scripting.executor.provider.ScriptBundleProvider;
 
 import java.net.URL;
 
@@ -37,7 +39,7 @@ import java.util.Set;
 
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
-import org.osgi.framework.BundleEvent;
+import org.osgi.framework.ServiceReference;
 import org.osgi.framework.wiring.BundleWiring;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
@@ -46,8 +48,8 @@ import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ReferenceCardinality;
 import org.osgi.service.component.annotations.ReferencePolicy;
 import org.osgi.service.component.annotations.ReferencePolicyOption;
-import org.osgi.util.tracker.BundleTracker;
-import org.osgi.util.tracker.BundleTrackerCustomizer;
+import org.osgi.util.tracker.ServiceTracker;
+import org.osgi.util.tracker.ServiceTrackerCustomizer;
 
 /**
  * @author Michael C. Han
@@ -57,11 +59,13 @@ public class ScriptingExecutorExtender {
 
 	@Activate
 	protected void activate(BundleContext bundleContext) {
-		_bundleTracker = new BundleTracker<>(
-			bundleContext, Bundle.ACTIVE,
-			new ScriptingExecutorBundleTrackerCustomizer());
+		_bundleContext = bundleContext;
 
-		_bundleTracker.open();
+		_serviceTracker = ServiceTrackerFactory.create(
+			bundleContext, ScriptBundleProvider.class,
+			new ScriptBundleProviderServiceTrackerCustomizer());
+
+		_serviceTracker.open();
 	}
 
 	@Reference(
@@ -76,11 +80,13 @@ public class ScriptingExecutorExtender {
 
 	@Deactivate
 	protected void deactivate() {
-		_bundleTracker.close();
+		_serviceTracker.close();
+
+		_bundleContext = null;
 
 		_singleDestinationMessageSender = null;
 
-		_bundleTracker = null;
+		_serviceTracker = null;
 	}
 
 	protected void removeScriptingExecutor(
@@ -112,19 +118,29 @@ public class ScriptingExecutorExtender {
 	private static final Log _log = LogFactoryUtil.getLog(
 		ScriptingExecutorExtender.class);
 
-	private BundleTracker<Object> _bundleTracker;
+	private BundleContext _bundleContext;
 
 	@Reference
 	private ClusterMasterExecutor _clusterMasterExecutor;
 
 	private final Set<String> _scriptingLanguages = new HashSet<>();
+	private ServiceTracker<ScriptBundleProvider, ScriptBundleProvider>
+		_serviceTracker;
 	private SingleDestinationMessageSender _singleDestinationMessageSender;
 
-	private class ScriptingExecutorBundleTrackerCustomizer
-		implements BundleTrackerCustomizer<Object> {
+	private class ScriptBundleProviderServiceTrackerCustomizer
+		implements ServiceTrackerCustomizer
+			<ScriptBundleProvider, ScriptBundleProvider> {
 
 		@Override
-		public Object addingBundle(Bundle bundle, BundleEvent bundleEvent) {
+		public ScriptBundleProvider addingService(
+			ServiceReference<ScriptBundleProvider> serviceReference) {
+
+			ScriptBundleProvider scriptBundleProvider =
+				_bundleContext.getService(serviceReference);
+
+			Bundle bundle = scriptBundleProvider.getBundle();
+
 			Dictionary<String, String> headers = bundle.getHeaders();
 
 			if (GetterUtil.getBoolean(
@@ -201,13 +217,15 @@ public class ScriptingExecutorExtender {
 		}
 
 		@Override
-		public void modifiedBundle(
-			Bundle bundle, BundleEvent bundleEvent, Object object) {
+		public void modifiedService(
+			ServiceReference<ScriptBundleProvider> serviceReference,
+			ScriptBundleProvider scriptBundleProvider) {
 		}
 
 		@Override
-		public void removedBundle(
-			Bundle bundle, BundleEvent bundleEvent, Object object) {
+		public void removedService(
+			ServiceReference<ScriptBundleProvider> serviceReference,
+			ScriptBundleProvider scriptBundleProvider) {
 		}
 
 	}
