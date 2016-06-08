@@ -104,14 +104,13 @@ public class WabGenerator
 				String location = StringUtil.toLowerCase(bundle.getLocation());
 
 				if (_log.isDebugEnabled()) {
-					_log.debug("Bundle activated at location: " + location);
+					_log.debug("Activated bundle " + location);
 				}
 
 				if (requiredForStartupLocations.remove(location)) {
 					if (_log.isDebugEnabled()) {
 						_log.debug(
-							"WAB bundle at " + location +
-								" is required for startup");
+							"Bundle " + location + " is required for startup");
 					}
 
 					if (requiredForStartupLocations.isEmpty()) {
@@ -126,7 +125,7 @@ public class WabGenerator
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
-				"WABs required for startup: " + requiredForStartupLocations);
+				"Bundles required for startup: " + requiredForStartupLocations);
 		}
 
 		bundleTracker.open();
