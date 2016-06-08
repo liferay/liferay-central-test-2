@@ -150,7 +150,9 @@ public class WabGenerator
 				Files.newDirectoryStream(path, "*.war")) {
 
 			for (Path warPath : directoryStream) {
-				URI uri = warPath.toUri();
+				Path realPath = warPath.toRealPath();
+
+				URI uri = realPath.toUri();
 
 				try (ZipFile zipFile = new ZipFile(new File(uri));
 					InputStream inputStream = zipFile.getInputStream(
