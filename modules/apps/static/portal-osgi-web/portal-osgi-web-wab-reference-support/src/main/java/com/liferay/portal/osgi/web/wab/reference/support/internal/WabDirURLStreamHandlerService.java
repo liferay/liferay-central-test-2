@@ -100,7 +100,7 @@ public class WabDirURLStreamHandlerService
 		}
 		catch (IOException | URISyntaxException e) {
 			if (_log.isInfoEnabled()) {
-				_log.info("Error opening connection", e);
+				_log.info("Unable to open connection", e);
 			}
 		}
 
