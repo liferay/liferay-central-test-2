@@ -89,10 +89,10 @@ public class AppServer {
 	}
 
 	public AppServer(
-		String serverId, String dirName, String extraLibDirNames,
+		String serverDetectorServerId, String dirName, String extraLibDirNames,
 		String globalLibDirName, String portalDirName) {
 
-		_serverId = serverId;
+		_serverDetectorServerId = serverDetectorServerId;
 		_dir = new File(dirName);
 
 		if (extraLibDirNames != null) {
@@ -133,8 +133,8 @@ public class AppServer {
 		return new File(_portalDir, "/WEB-INF/lib");
 	}
 
-	public String getServerId() {
-		return _serverId;
+	public String getServerDetectorServerId() {
+		return _serverDetectorServerId;
 	}
 
 	public void setDirName(String dirName) {
@@ -161,6 +161,6 @@ public class AppServer {
 	private final List<File> _extraLibDirs = new ArrayList<>();
 	private File _globalLibDir;
 	private File _portalDir;
-	private final String _serverId;
+	private final String _serverDetectorServerId;
 
 }
