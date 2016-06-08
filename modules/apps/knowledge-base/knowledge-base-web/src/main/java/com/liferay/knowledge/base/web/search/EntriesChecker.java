@@ -130,7 +130,6 @@ public class EntriesChecker extends EmptyOnClickRowChecker {
 		}
 
 		String checkBoxRowIds = getEntryRowIds();
-
 		String checkBoxAllRowIds = "'#" + getAllRowIds() + "'";
 		String checkBoxPostOnClick =
 			_liferayPortletResponse.getNamespace() + "toggleActionsButton();";
