@@ -23,7 +23,10 @@ import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.sender.SingleDestinationMessageSender;
 import com.liferay.portal.kernel.messaging.sender.SingleDestinationMessageSenderFactory;
 import com.liferay.portal.kernel.scripting.ScriptingExecutor;
+import com.liferay.portal.kernel.service.CompanyLocalService;
+import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.scripting.executor.constants.ScriptingExecutorConstants;
 import com.liferay.portal.scripting.executor.internal.ScriptingExecutorMessagingConstants;
 import com.liferay.portal.scripting.executor.provider.ScriptBundleProvider;
@@ -123,10 +126,19 @@ public class ScriptingExecutorExtender {
 	@Reference
 	private ClusterMasterExecutor _clusterMasterExecutor;
 
+	@Reference
+	private CompanyLocalService _companyLocalService;
+
+	@Reference
+	private Portal _portal;
+
 	private final Set<String> _scriptingLanguages = new HashSet<>();
 	private ServiceTracker<ScriptBundleProvider, ScriptBundleProvider>
 		_serviceTracker;
 	private SingleDestinationMessageSender _singleDestinationMessageSender;
+
+	@Reference
+	private UserLocalService _userLocalService;
 
 	private class ScriptBundleProviderServiceTrackerCustomizer
 		implements ServiceTrackerCustomizer
