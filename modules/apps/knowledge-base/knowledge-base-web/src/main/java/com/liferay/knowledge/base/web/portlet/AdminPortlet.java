@@ -125,14 +125,14 @@ public class AdminPortlet extends BaseKBPortlet {
 		long[] deleteKBArticleResourcePrimKeys = ParamUtil.getLongValues(
 			actionRequest, "rowIdsKBArticle");
 
-		long[] deleteKBFolderIds = ParamUtil.getLongValues(
-			actionRequest, "rowIdsKBFolder");
-
 		for (long deleteKBArticleResourcePrimKey :
 				deleteKBArticleResourcePrimKeys) {
 
 			kbArticleService.deleteKBArticle(deleteKBArticleResourcePrimKey);
 		}
+
+		long[] deleteKBFolderIds = ParamUtil.getLongValues(
+			actionRequest, "rowIdsKBFolder");
 
 		for (long deleteKBFolderId : deleteKBFolderIds) {
 			kbFolderService.deleteKBFolder(deleteKBFolderId);
