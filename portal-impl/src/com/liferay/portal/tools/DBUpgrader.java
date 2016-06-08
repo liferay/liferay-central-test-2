@@ -93,7 +93,8 @@ public class DBUpgrader {
 
 			stopWatch.start();
 
-			ServerDetector.init(System.getProperty("serverId"));
+			ServerDetector.init(
+				System.getProperty("server.detector.server.id"));
 
 			ClassPathUtil.initializeClassPaths(null);
 
