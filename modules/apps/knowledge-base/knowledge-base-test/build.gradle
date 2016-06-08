@@ -4,5 +4,5 @@ dependencies {
 	testIntegrationCompile group: "com.liferay.portal", name: "com.liferay.portal.impl", version: "2.0.0"
 	testIntegrationCompile group: "com.liferay.portal", name: "com.liferay.portal.kernel", version: "2.0.0"
 	testIntegrationCompile group: "com.liferay", name: "com.liferay.knowledge.base.api", version: "3.2.0"
-	testIntegrationCompile project(":apps:knowledge-base:knowledge-base-service")
+	testIntegrationCompile group: "com.liferay", name: "com.liferay.knowledge.base.service", version: "1.0.0"
 }
