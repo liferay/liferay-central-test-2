@@ -99,7 +99,7 @@ public class WabDirURLStreamHandlerService
 			return wabDirHandler.openConnection(url);
 		}
 		catch (IOException | URISyntaxException e) {
-			_log.error("Error opening connection", e);
+			_log.error("Unable to open connection", e);
 		}
 
 		return null;
