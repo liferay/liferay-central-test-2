@@ -85,7 +85,7 @@ public class KBFolderLocalServiceTest {
 	}
 
 	@Test
-	public void testGetKBFoldersAndKBArticlesCountInRootFolder()
+	public void testGetKBFoldersAndKBArticlesCountInRootKBFolder()
 		throws Exception {
 
 		addKBArticle(
@@ -100,7 +100,7 @@ public class KBFolderLocalServiceTest {
 	}
 
 	@Test
-	public void testGetKBFoldersAndKBArticlesCountInRootFolderByDraftStatus()
+	public void testGetKBFoldersAndKBArticlesCountInRootKBFolderByDraftStatus()
 		throws Exception {
 
 		addKBArticle(
@@ -161,7 +161,7 @@ public class KBFolderLocalServiceTest {
 	}
 
 	@Test
-	public void testGetKBFoldersAndKBArticlesInRootFolder() throws Exception {
+	public void testGetKBFoldersAndKBArticlesInRootKBFolder() throws Exception {
 		KBArticle kbArticle = addKBArticle(
 			KBFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 			RandomTestUtil.randomString());
@@ -182,7 +182,7 @@ public class KBFolderLocalServiceTest {
 	}
 
 	@Test
-	public void testGetKBFoldersAndKBArticlesInRootFolderByDraftStatus()
+	public void testGetKBFoldersAndKBArticlesInRootKBFolderByDraftStatus()
 		throws Exception {
 
 		addKBArticle(
@@ -210,7 +210,7 @@ public class KBFolderLocalServiceTest {
 			KBFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 			RandomTestUtil.randomString());
 
-		KBArticle kbArticleVersion = updateKBArticle(
+		KBArticle newKBArticle = updateKBArticle(
 			kbArticle, RandomTestUtil.randomString());
 
 		List<Object> kbFolderAndKBArticles =
@@ -226,8 +226,7 @@ public class KBFolderLocalServiceTest {
 		Assert.assertEquals(
 			_kbFolder.getKbFolderId(), currentKBFolder.getKbFolderId());
 		Assert.assertEquals(
-			kbArticleVersion.getKbArticleId(),
-			currentKBArticle1.getKbArticleId());
+			newKBArticle.getKbArticleId(), currentKBArticle1.getKbArticleId());
 	}
 
 	protected KBArticle addKBArticle(long parentKbFolderId, String title)
