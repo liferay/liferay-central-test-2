@@ -166,7 +166,8 @@ public class UpgradeClient {
 		commands.addAll(Arrays.asList(_jvmOpts.split(" ")));
 		commands.add("-Dexternal-properties=portal-upgrade.properties");
 		commands.add(
-			"-Dserver.detector.server.id=" + _appServer.getServerDetectorServerId());
+			"-Dserver.detector.server.id=" +
+				_appServer.getServerDetectorServerId());
 		commands.add("com.liferay.portal.tools.DBUpgrader");
 
 		processBuilder.command(commands);
