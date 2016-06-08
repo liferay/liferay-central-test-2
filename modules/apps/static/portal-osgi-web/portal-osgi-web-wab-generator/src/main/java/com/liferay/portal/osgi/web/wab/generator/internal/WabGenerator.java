@@ -14,6 +14,8 @@
 
 package com.liferay.portal.osgi.web.wab.generator.internal;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.module.framework.ModuleServiceLifecycle;
 import com.liferay.portal.kernel.util.HashMapDictionary;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -101,6 +103,14 @@ public class WabGenerator
 			public Void addingBundle(Bundle bundle, BundleEvent bundleEvent) {
 				String location = StringUtil.toLowerCase(bundle.getLocation());
 
+				if (_log.isDebugEnabled()) {
+					_log.debug("WAB activated at location: " + location);
+
+					if (requiredForStartupLocations.contains(location)) {
+						_log.debug("WAB is required for startup");
+					}
+				}
+
 				if (requiredForStartupLocations.remove(location) &&
 					requiredForStartupLocations.isEmpty()) {
 
@@ -111,6 +121,11 @@ public class WabGenerator
 			}
 
 		};
+
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"WABs required for startup: " + requiredForStartupLocations);
+		}
 
 		bundleTracker.open();
 
@@ -199,6 +214,8 @@ public class WabGenerator
 	protected void unsetModuleServiceLifecycle(
 		ModuleServiceLifecycle moduleServiceLifecycle) {
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(WabGenerator.class);
 
 	private ServiceRegistration<ArtifactUrlTransformer> _serviceRegistration;
 
