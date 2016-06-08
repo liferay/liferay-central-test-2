@@ -276,7 +276,7 @@ public class KBArticleMarkdownConverter {
 		int urlTitleMaxLength = ModelHintsUtil.getMaxLength(
 			KBArticle.class.getName(), "urlTitle");
 
-		if (urlTitle.length() > urlTitleMaxLength) {
+		while (urlTitle.length() > urlTitleMaxLength) {
 			int pos = urlTitle.lastIndexOf(StringPool.DASH);
 
 			if (pos == -1) {
