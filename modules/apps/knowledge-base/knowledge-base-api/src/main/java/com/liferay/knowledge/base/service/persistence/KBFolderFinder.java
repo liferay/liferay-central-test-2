@@ -22,14 +22,14 @@ import aQute.bnd.annotation.ProviderType;
  */
 @ProviderType
 public interface KBFolderFinder {
-	public java.util.List<java.lang.Object> filterFindF_A_ByG_P(long groupId,
-		long parentResourcePrimKey,
-		com.liferay.portal.kernel.dao.orm.QueryDefinition<?> queryDefinition);
-
 	public int countF_A_ByG_P(long groupId, long parentResourcePrimKey,
 		com.liferay.portal.kernel.dao.orm.QueryDefinition<?> queryDefinition);
 
 	public int filterCountF_A_ByG_P(long groupId, long parentResourcePrimKey,
+		com.liferay.portal.kernel.dao.orm.QueryDefinition<?> queryDefinition);
+
+	public java.util.List<java.lang.Object> filterFindF_A_ByG_P(long groupId,
+		long parentResourcePrimKey,
 		com.liferay.portal.kernel.dao.orm.QueryDefinition<?> queryDefinition);
 
 	public java.util.List<java.lang.Object> findF_A_ByG_P(long groupId,
