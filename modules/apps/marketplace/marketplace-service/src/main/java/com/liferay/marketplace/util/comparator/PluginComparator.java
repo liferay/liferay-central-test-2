@@ -39,8 +39,9 @@ public class PluginComparator implements Comparator, Serializable {
 
 	public PluginComparator() {
 		_locale = LocaleUtil.getDefault();
-		_collator = Collator.getInstance(_locale);
 		_servletContext = ServletContextPool.get(PortalUtil.getPathContext());
+
+		_collator = Collator.getInstance(_locale);
 	}
 
 	public PluginComparator(ServletContext servletContext, Locale locale) {
