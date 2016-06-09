@@ -574,7 +574,8 @@ public class SitesImpl implements Sites {
 			groupId, privateLayout, layoutId, serviceContext);
 
 		return new Object[] {
-			group, oldFriendlyURL, LayoutConstants.DEFAULT_PLID};
+			group, oldFriendlyURL, LayoutConstants.DEFAULT_PLID
+		};
 	}
 
 	@Override
