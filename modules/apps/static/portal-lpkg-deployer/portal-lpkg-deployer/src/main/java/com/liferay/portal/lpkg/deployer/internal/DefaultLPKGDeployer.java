@@ -311,6 +311,9 @@ public class DefaultLPKGDeployer implements LPKGDeployer {
 		}
 	}
 
+	/**
+	 * @see FrameworkWiring#getRemovalPendingBundles
+	 */
 	private void _refreshRemovalPendingBundles(
 			BundleContext bundleContext, Bundle bundle)
 		throws Exception {
@@ -325,8 +328,8 @@ public class DefaultLPKGDeployer implements LPKGDeployer {
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
-				"Starting removal pending bundles freshing for the upgrade " +
-					"of " + bundle);
+				"Start refreshing references to point to the new bundle " +
+					bundle);
 		}
 
 		frameworkWiring.refreshBundles(
@@ -351,15 +354,14 @@ public class DefaultLPKGDeployer implements LPKGDeployer {
 		if (frameworkEvent.getType() == FrameworkEvent.PACKAGES_REFRESHED) {
 			if (_log.isInfoEnabled()) {
 				_log.info(
-					"Removal pending bundles refreshed for the upgrade of " +
-						bundle);
+					"Finished refreshing references to point to the new " +
+						"bundle " + bundle);
 			}
 		}
 		else {
 			throw new Exception(
-				"Unexpected FrameworkEvent from removal pending bundles " +
-					"refreshing " + frameworkEvent + " for the upgrade of " +
-						bundle);
+				"Unable to refresh references to the new bundle " + bundle + 
+					" because of framework event " + frameworkEvent);
 		}
 	}
 
