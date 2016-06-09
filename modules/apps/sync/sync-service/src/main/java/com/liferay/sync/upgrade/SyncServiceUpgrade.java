@@ -34,9 +34,11 @@ public class SyncServiceUpgrade implements UpgradeStepRegistrator {
 		registry.register(
 			"com.liferay.sync.service", "0.0.1", "1.0.0",
 			new DummyUpgradeStep());
+
 		registry.register(
 			"com.liferay.sync.service", "1.0.0", "1.0.1",
 			new DummyUpgradeStep());
+
 		registry.register(
 			"com.liferay.sync.service", "1.0.1", "1.0.2", new UpgradeSchema(),
 			new UpgradeSyncDLObject(_groupLocalService));
