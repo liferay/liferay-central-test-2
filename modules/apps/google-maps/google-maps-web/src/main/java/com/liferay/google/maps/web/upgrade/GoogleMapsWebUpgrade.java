@@ -14,12 +14,12 @@
 
 package com.liferay.google.maps.web.upgrade;
 
-import com.liferay.counter.kernel.service.CounterLocalService;
-import com.liferay.google.maps.web.upgrade.util.UpgradePluginRelease;
-import com.liferay.google.maps.web.upgrade.v1_0_0.UpgradePortletId;
+import com.liferay.portal.kernel.module.framework.ModuleServiceLifecycle;
 import com.liferay.portal.kernel.upgrade.DummyUpgradeStep;
 import com.liferay.portal.kernel.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.registry.UpgradeStepRegistrator;
+import com.liferay.portal.upgrade.release.BaseUpgradeWebModuleRelease;
+import com.liferay.google.maps.web.upgrade.v1_0_0.UpgradePortletId;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -32,7 +32,27 @@ public class GoogleMapsWebUpgrade implements UpgradeStepRegistrator {
 
 	@Override
 	public void register(Registry registry) {
-		_upgradeRelease();
+		BaseUpgradeWebModuleRelease upgradeWebModuleRelease =
+			new BaseUpgradeWebModuleRelease() {
+
+				@Override
+				protected String getBundleSymbolicName() {
+					return "com.liferay.youtube.web";
+				}
+
+				@Override
+				protected String[] getPortletIds() {
+					return new String[] {"1_WAR_youtubeportlet"};
+				}
+
+			};
+
+		try {
+			upgradeWebModuleRelease.upgrade();
+		}
+		catch (UpgradeException ue) {
+			throw new RuntimeException(ue);
+		}
 
 		registry.register(
 			"com.liferay.google.maps.web", "0.0.0", "1.0.0",
@@ -43,19 +63,9 @@ public class GoogleMapsWebUpgrade implements UpgradeStepRegistrator {
 			new UpgradePortletId());
 	}
 
-	@Reference
-	protected CounterLocalService counterLocalService;
-
-	private void _upgradeRelease() {
-		try {
-			UpgradePluginRelease upgradePluginRelease =
-				new UpgradePluginRelease(counterLocalService);
-
-			upgradePluginRelease.upgrade();
-		}
-		catch (UpgradeException ue) {
-			throw new RuntimeException(ue);
-		}
+	@Reference(target = ModuleServiceLifecycle.PORTAL_INITIALIZED, unbind = "-")
+	protected void setModuleServiceLifecycle(
+		ModuleServiceLifecycle moduleServiceLifecycle) {
 	}
 
 }
