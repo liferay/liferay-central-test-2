@@ -182,6 +182,7 @@ public class DDMFormJSONDeserializerTest
 			ddmFormFieldRule.getDDMFormFieldRuleType());
 
 		ddmFormFieldRule = ddmFormFieldRules.get(1);
+
 		Assert.assertEquals(
 			"isReadOnly(Date2510) && isVisible(Decimal3479)",
 			ddmFormFieldRule.getExpression());
