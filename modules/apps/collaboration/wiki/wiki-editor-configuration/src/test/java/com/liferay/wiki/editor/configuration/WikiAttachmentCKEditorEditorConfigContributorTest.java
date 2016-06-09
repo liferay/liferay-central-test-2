@@ -307,7 +307,6 @@ public class WikiAttachmentCKEditorEditorConfigContributorTest
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
 		jsonObject.put("extraPlugins", "plugin1,plugin2,plugin3");
-
 		jsonObject.put("toolbar_creole", jsonArray);
 
 		return jsonObject;
