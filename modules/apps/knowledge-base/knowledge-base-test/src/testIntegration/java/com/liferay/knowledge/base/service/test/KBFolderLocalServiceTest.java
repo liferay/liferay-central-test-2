@@ -134,10 +134,8 @@ public class KBFolderLocalServiceTest {
 
 	@Test
 	public void testGetKBFoldersAndKBArticlesInKBFolder() throws Exception {
-		KBArticle kbArticle1 = addKBArticle(
-			_kbFolder.getKbFolderId(), RandomTestUtil.randomString());
-		KBArticle kbArticle2 = addKBArticle(
-			_kbFolder.getKbFolderId(), RandomTestUtil.randomString());
+		KBArticle kbArticle1 = addKBArticle(_kbFolder.getKbFolderId(), "A");
+		KBArticle kbArticle2 = addKBArticle(_kbFolder.getKbFolderId(), "B");
 
 		KBFolder kbFolder = addKbFolder(_kbFolder.getKbFolderId());
 
