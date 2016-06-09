@@ -472,7 +472,7 @@ if (portletTitleBasedNavigation) {
 
 		<c:if test="<%= !childPages.isEmpty() %>">
 			<h4 class="text-default">
-				<liferay-ui:message arguments="<%= childPages.size() %>" key="children-pages-x" translateArguments="<%= false %>" />
+				<liferay-ui:message arguments="<%= childPages.size() %>" key="child-pages-x" translateArguments="<%= false %>" />
 			</h4>
 
 			<div>
