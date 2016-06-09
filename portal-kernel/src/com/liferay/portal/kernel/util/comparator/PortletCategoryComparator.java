@@ -32,6 +32,7 @@ public class PortletCategoryComparator
 
 	public PortletCategoryComparator(Locale locale) {
 		_locale = locale;
+
 		_collator = Collator.getInstance(_locale);
 	}
 

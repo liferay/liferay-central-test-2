@@ -30,6 +30,7 @@ public class ActionComparator implements Comparator<String>, Serializable {
 
 	public ActionComparator(Locale locale) {
 		_locale = locale;
+
 		_collator = Collator.getInstance(_locale);
 	}
 

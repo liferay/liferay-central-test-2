@@ -31,6 +31,7 @@ public class AssetRendererFactoryTypeNameComparator
 
 	public AssetRendererFactoryTypeNameComparator(Locale locale) {
 		_locale = locale;
+
 		_collator = Collator.getInstance(_locale);
 	}
 

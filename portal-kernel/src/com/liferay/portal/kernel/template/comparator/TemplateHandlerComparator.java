@@ -31,6 +31,7 @@ public class TemplateHandlerComparator
 
 	public TemplateHandlerComparator(Locale locale) {
 		_locale = locale;
+
 		_collator = Collator.getInstance(_locale);
 	}
 
