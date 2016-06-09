@@ -1367,7 +1367,7 @@ public class HookHotDeployListener
 
 			List<Company> companies = CompanyLocalServiceUtil.getCompanies();
 
-			for (Company company :companies) {
+			for (Company company : companies) {
 				PropsUtil.addProperties(company, portalProperties);
 			}
 		}
