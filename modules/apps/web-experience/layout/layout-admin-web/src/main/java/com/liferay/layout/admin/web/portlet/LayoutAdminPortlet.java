@@ -902,20 +902,20 @@ public class LayoutAdminPortlet extends MVCPortlet {
 			return redirect;
 		}
 
-		boolean isAncestorLayout = false;
+		boolean ancestor = false;
 
 		if (layout.getPlid() == themeDisplay.getRefererPlid()) {
-			isAncestorLayout = true;
+			ancestor = true;
 		}
 		else {
 			for (Layout parentLayout : refererLayout.getAncestors()) {
 				if (parentLayout.getPlid() == layout.getPlid()) {
-					isAncestorLayout = true;
+					ancestor = true;
 				}
 			}
 		}
 
-		if (!isAncestorLayout) {
+		if (!ancestor) {
 			return redirect;
 		}
 
