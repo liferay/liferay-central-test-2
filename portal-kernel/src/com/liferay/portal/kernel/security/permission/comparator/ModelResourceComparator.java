@@ -31,6 +31,7 @@ public class ModelResourceComparator
 
 	public ModelResourceComparator(Locale locale) {
 		_locale = locale;
+
 		_collator = Collator.getInstance(_locale);
 	}
 

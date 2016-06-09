@@ -43,6 +43,7 @@ public class PortletTitleComparator
 
 		_servletContext = servletContext;
 		_locale = locale;
+
 		_collator = Collator.getInstance(_locale);
 	}
 

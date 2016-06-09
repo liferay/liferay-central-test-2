@@ -29,6 +29,7 @@ public class SocialActivityDefinitionNameComparator
 
 	public SocialActivityDefinitionNameComparator(Locale locale) {
 		_locale = locale;
+
 		_collator = Collator.getInstance(_locale);
 	}
 

@@ -28,6 +28,7 @@ public class PortletIdComparator implements Comparator<String> {
 
 	public PortletIdComparator(Locale locale) {
 		_locale = locale;
+
 		_collator = Collator.getInstance(_locale);
 	}
 
