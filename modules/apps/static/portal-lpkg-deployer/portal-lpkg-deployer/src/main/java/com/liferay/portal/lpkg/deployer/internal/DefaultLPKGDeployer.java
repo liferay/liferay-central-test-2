@@ -360,7 +360,7 @@ public class DefaultLPKGDeployer implements LPKGDeployer {
 		}
 		else {
 			throw new Exception(
-				"Unable to refresh references to the new bundle " + bundle + 
+				"Unable to refresh references to the new bundle " + bundle +
 					" because of framework event " + frameworkEvent);
 		}
 	}
