@@ -49,6 +49,7 @@ public class WikiAttachmentCKEditorEditorConfigContributor
 
 			if (key.startsWith("toolbar_")) {
 				JSONArray toolbarJSONArray = JSONFactoryUtil.createJSONArray();
+
 				JSONArray jsonArray = jsonObject.getJSONArray(key);
 
 				for (int i = 0; i < jsonArray.length(); i++) {

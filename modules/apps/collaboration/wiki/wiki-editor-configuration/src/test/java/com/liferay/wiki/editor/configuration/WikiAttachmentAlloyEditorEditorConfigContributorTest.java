@@ -176,7 +176,6 @@ public class WikiAttachmentAlloyEditorEditorConfigContributorTest
 		JSONObject expectedJSONObject = JSONFactoryUtil.createJSONObject();
 
 		expectedJSONObject.put("extraPlugins", "plugin1,plugin2,plugin3");
-
 		expectedJSONObject.put(
 			"toolbars", getToolbarsWithCameraButtonJSONObject());
 
