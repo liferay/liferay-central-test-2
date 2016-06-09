@@ -43,15 +43,12 @@ String parentTitle = LanguageUtil.get(request, "home");
 
 if (parentResourcePrimKey != KBFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 	if (parentResourceClassNameId == kbFolderClassNameId) {
-		KBFolder parentKBFolder =
-				KBFolderServiceUtil.getKBFolder(parentResourcePrimKey);
+		KBFolder parentKBFolder = KBFolderServiceUtil.getKBFolder(parentResourcePrimKey);
 
 		parentTitle = parentKBFolder.getName();
 	}
 	else {
-		KBArticle parentKBArticle =
-				KBArticleServiceUtil.getLatestKBArticle(parentResourcePrimKey,
-						status);
+		KBArticle parentKBArticle = KBArticleServiceUtil.getLatestKBArticle(parentResourcePrimKey, status);
 
 		parentTitle = parentKBArticle.getTitle();
 	}
