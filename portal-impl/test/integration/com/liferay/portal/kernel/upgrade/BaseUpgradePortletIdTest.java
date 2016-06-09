@@ -92,7 +92,7 @@ public class BaseUpgradePortletIdTest extends BaseUpgradePortletId {
 
 		_portlets.clear();
 
-		assertFurtherTestsInSameJvmCanAddCompanies();
+		assertFurtherTestsInTheSameJVMCanAddCompanies();
 	}
 
 	@After
@@ -148,7 +148,7 @@ public class BaseUpgradePortletIdTest extends BaseUpgradePortletId {
 		}
 	}
 
-	protected static void assertFurtherTestsInSameJvmCanAddCompanies()
+	protected static void assertFurtherTestsInTheSameJVMCanAddCompanies()
 		throws Exception {
 
 		Company company = CompanyTestUtil.addCompany();
