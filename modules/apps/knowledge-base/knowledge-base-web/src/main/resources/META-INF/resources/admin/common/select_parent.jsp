@@ -23,8 +23,8 @@ resourceClassNameId = ParamUtil.getLong(request, "resourceClassNameId");
 resourcePrimKey = ParamUtil.getLong(request, "resourcePrimKey");
 long parentResourceClassNameId = ParamUtil.getLong(request, "parentResourceClassNameId", kbFolderClassNameId);
 long parentResourcePrimKey = ParamUtil.getLong(request, "parentResourcePrimKey", KBFolderConstants.DEFAULT_PARENT_FOLDER_ID);
-double priority = ParamUtil.getDouble(request, "priority", KBArticleConstants.DEFAULT_PRIORITY);
 long originalParentResourcePrimKey = ParamUtil.getLong(request, "originalParentResourcePrimKey");
+double priority = ParamUtil.getDouble(request, "priority", KBArticleConstants.DEFAULT_PRIORITY);
 
 boolean kbFolderView = (resourceClassNameId == kbFolderClassNameId);
 
