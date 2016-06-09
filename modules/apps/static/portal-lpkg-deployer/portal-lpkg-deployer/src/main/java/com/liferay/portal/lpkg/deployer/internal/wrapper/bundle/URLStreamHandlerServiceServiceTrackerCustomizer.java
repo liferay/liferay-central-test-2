@@ -68,9 +68,9 @@ public class URLStreamHandlerServiceServiceTrackerCustomizer
 
 			URL wabURL = new URL(
 				"webbundle", null, -1,
-				_lpkgURL.toExternalForm() + "?Web-ContextPath=/" +
-					_contextName + "&" + Constants.BUNDLE_VERSION + "=" +
-						bundle.getVersion(),
+				_lpkgURL.toExternalForm() + "?" + Constants.BUNDLE_VERSION +
+					"=" + bundle.getVersion() + "&Web-ContextPath=/" +
+						_contextName,
 				abstractURLStreamHandlerService);
 
 			URLConnection urlConnection =
