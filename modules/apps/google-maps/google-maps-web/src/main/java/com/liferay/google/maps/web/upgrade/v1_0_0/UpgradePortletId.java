@@ -14,9 +14,8 @@
 
 package com.liferay.google.maps.web.upgrade.v1_0_0;
 
-import com.liferay.google.maps.web.constants.GoogleMapsPortletKeys;
 import com.liferay.portal.kernel.upgrade.BaseUpgradePortletId;
-
+import com.liferay.google.maps.web.constants.GoogleMapsPortletKeys;
 
 /**
  * @author Peter Fellwock
@@ -26,9 +25,12 @@ public class UpgradePortletId extends BaseUpgradePortletId {
 	@Override
 	protected String[][] getRenamePortletIdsArray() {
 		return new String[][] {
-			new String[] {"1_WAR_googlemapsportlet",
+			new String[] {"1_WAR_googlemapsportlet", 
 				GoogleMapsPortletKeys.GOOGLE_MAPS}
 		};
 	}
 
 }
+
+
+
