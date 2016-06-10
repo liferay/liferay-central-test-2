@@ -15,11 +15,10 @@
 package com.liferay.weather.web.upgrade;
 
 import com.liferay.portal.kernel.module.framework.ModuleServiceLifecycle;
-import com.liferay.portal.kernel.upgrade.BaseUpgradeRelease;
 import com.liferay.portal.kernel.upgrade.DummyUpgradeStep;
 import com.liferay.portal.kernel.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.registry.UpgradeStepRegistrator;
-import com.liferay.weather.web.constants.WeatherPortletKeys;
+import com.liferay.portal.upgrade.release.BaseUpgradeWebModuleRelease;
 import com.liferay.weather.web.upgrade.v1_0_0.UpgradePortletId;
 
 import org.osgi.service.component.annotations.Component;
@@ -33,20 +32,23 @@ public class WeatherWebUpgrade implements UpgradeStepRegistrator {
 
 	@Override
 	public void register(Registry registry) {
-		BaseUpgradeRelease upgradeRelease = new BaseUpgradeRelease() {
+		BaseUpgradeWebModuleRelease upgradeWebModuleRelease =
+			new BaseUpgradeWebModuleRelease() {
 
-			protected String getBundleSymbolicName() {
-				return "com.liferay.weather.web";
-			}
+				@Override
+				protected String getBundleSymbolicName() {
+					return "com.liferay.weather.web";
+				}
 
-			protected String[] getPortletIds() {
-				return new String[] {WeatherPortletKeys.WEATHER};
-			}
+				@Override
+				protected String[] getPortletIds() {
+					return new String[] {"1_WAR_weatherportlet"};
+				}
 
-		};
+			};
 
 		try {
-			upgradeRelease.upgrade();
+			upgradeWebModuleRelease.upgrade();
 		}
 		catch (UpgradeException ue) {
 			throw new RuntimeException(ue);
