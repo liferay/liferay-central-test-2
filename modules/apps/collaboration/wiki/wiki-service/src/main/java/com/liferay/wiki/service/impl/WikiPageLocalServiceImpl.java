@@ -1731,6 +1731,13 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			userId, page, SocialActivityConstants.TYPE_MOVE_TO_TRASH,
 			extraDataJSONObject.toString(), 0);
 
+		// Indexer
+
+		Indexer<WikiPage> indexer = IndexerRegistryUtil.nullSafeGetIndexer(
+			WikiPage.class);
+
+		indexer.reindex(page);
+
 		// Workflow
 
 		if (oldStatus == WorkflowConstants.STATUS_PENDING) {
@@ -1738,13 +1745,6 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 				page.getCompanyId(), page.getGroupId(),
 				WikiPage.class.getName(), page.getPageId());
 		}
-
-		// Indexer
-
-		Indexer<WikiPage> indexer = IndexerRegistryUtil.nullSafeGetIndexer(
-			WikiPage.class);
-
-		indexer.reindex(page);
 
 		return page;
 	}
