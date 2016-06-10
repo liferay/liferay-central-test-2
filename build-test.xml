@@ -8434,7 +8434,7 @@ jdbc.default.password=${database.mysql.password}</echo>
 extra.lib.dirs=
 global.lib.dir=modules/com/liferay/portal/main
 portal.dir=standalone/deployments/ROOT.war
-server.id=jboss</echo>
+server.detector.server.id=jboss</echo>
 			</then>
 			<elseif>
 				<equals arg1="${app.server.type}" arg2="tomcat" />
@@ -8443,7 +8443,7 @@ server.id=jboss</echo>
 extra.lib.dirs=bin
 global.lib.dir=lib
 portal.dir=webapps/ROOT
-server.id=tomcat</echo>
+server.detector.server.id=tomcat</echo>
 				</then>
 			</elseif>
 			<elseif>
@@ -8453,7 +8453,7 @@ server.id=tomcat</echo>
 extra.lib.dirs=modules/system/layers/base/javax/mail,modules/system/layers/base/javax/persistence,modules/system/layers/base/javax/servlet,modules/system/layers/base/javax/transaction
 global.lib.dir=modules/com/liferay/portal/main
 portal.dir=standalone/deployments/ROOT.war
-server.id=wildfly</echo>
+server.detector.server.id=wildfly</echo>
 				</then>
 			</elseif>
 		</if>
