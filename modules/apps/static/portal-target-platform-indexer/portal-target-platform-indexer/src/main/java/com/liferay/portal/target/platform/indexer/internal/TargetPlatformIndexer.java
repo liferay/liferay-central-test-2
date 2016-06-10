@@ -311,6 +311,7 @@ public class TargetPlatformIndexer implements Indexer {
 				}
 
 				sb.append(parameterString);
+
 				sb.append(",");
 			}
 
