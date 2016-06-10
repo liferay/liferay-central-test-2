@@ -2592,7 +2592,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 				node.getStatusByUserId(), fileEntry.getFileEntryId());
 		}
 
-		// Index
+		// Indexer
 
 		Indexer<WikiPage> indexer = IndexerRegistryUtil.nullSafeGetIndexer(
 			WikiPage.class);
