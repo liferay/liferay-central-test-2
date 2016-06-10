@@ -362,7 +362,7 @@ public class LiferayOSGiDefaultsPlugin implements Plugin<Project> {
 
 		if (Validator.isNotNull(_REPOSITORY_PRIVATE_PASSWORD) &&
 			Validator.isNotNull(_REPOSITORY_PRIVATE_URL) &&
-			Validator.isNotNull(_REPOSITORY_PRIVATE_USER_NAME)) {
+			Validator.isNotNull(_REPOSITORY_PRIVATE_USERNAME)) {
 
 			MavenArtifactRepository mavenArtifactRepository =
 				repositoryHandler.maven(
@@ -401,7 +401,7 @@ public class LiferayOSGiDefaultsPlugin implements Plugin<Project> {
 						passwordCredentials.setPassword(
 							_REPOSITORY_PRIVATE_PASSWORD);
 						passwordCredentials.setUsername(
-							_REPOSITORY_PRIVATE_USER_NAME);
+							_REPOSITORY_PRIVATE_USERNAME);
 					}
 
 				});
@@ -2238,8 +2238,8 @@ public class LiferayOSGiDefaultsPlugin implements Plugin<Project> {
 	private static final String _REPOSITORY_PRIVATE_URL = System.getProperty(
 		"repository.private.url");
 
-	private static final String _REPOSITORY_PRIVATE_USER_NAME =
-		System.getProperty("repository.private.user.name");
+	private static final String _REPOSITORY_PRIVATE_USERNAME =
+		System.getProperty("repository.private.username");
 
 	private static final String _REPOSITORY_URL = System.getProperty(
 		"repository.url", DEFAULT_REPOSITORY_URL);
