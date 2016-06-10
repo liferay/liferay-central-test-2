@@ -189,16 +189,16 @@ public class TargetPlatformIndexer implements Indexer {
 					"\ndoes not have system bundle url: " + url);
 		}
 
-		int start = content.lastIndexOf(_OSGI_CONTENT_PREFIX, index);
+		int start = content.lastIndexOf(_ATTRIBUTE_PREFIX_OSGI_CONTENT, index);
 
 		if (start == -1) {
 			throw new IllegalStateException(
 				"Indexed content:\n" + content.substring(0, index) +
 					"\n does not have osgi content prefix: " +
-						_OSGI_CONTENT_PREFIX);
+						_ATTRIBUTE_PREFIX_OSGI_CONTENT);
 		}
 
-		start += _OSGI_CONTENT_PREFIX.length();
+		start += _ATTRIBUTE_PREFIX_OSGI_CONTENT.length();
 
 		int end = content.lastIndexOf("\"/>", index);
 
@@ -212,15 +212,15 @@ public class TargetPlatformIndexer implements Indexer {
 
 		index += url.length() + 3;
 
-		start = newContent.indexOf(_SIZE_PREFIX, index);
+		start = newContent.indexOf(_ATTRIBUTE_PREFIX_SIZE, index);
 
 		if (start == -1) {
 			throw new IllegalStateException(
 				"Indexed content:\n" + content +
-					"\n does not have size prefix: " + _SIZE_PREFIX);
+					"\n does not have size prefix: " + _ATTRIBUTE_PREFIX_SIZE);
 		}
 
-		start += _SIZE_PREFIX.length();
+		start += _ATTRIBUTE_PREFIX_SIZE.length();
 
 		end = newContent.indexOf("\"/>", index);
 
@@ -375,10 +375,10 @@ public class TargetPlatformIndexer implements Indexer {
 		"eclipse.platform;osgi.os=linux;osgi.arch=x86_64;osgi.ws=gtk;osgi.nl=" +
 			"en_US";
 
-	private static final String _OSGI_CONTENT_PREFIX =
+	private static final String _ATTRIBUTE_PREFIX_OSGI_CONTENT =
 		"<attribute name=\"osgi.content\" value=\"";
 
-	private static final String _SIZE_PREFIX =
+	private static final String _ATTRIBUTE_PREFIX_SIZE =
 		"<attribute name=\"size\" type=\"Long\" value=\"";
 
 	private static final Set<String> _ignoredNamespaces = new HashSet<>();
