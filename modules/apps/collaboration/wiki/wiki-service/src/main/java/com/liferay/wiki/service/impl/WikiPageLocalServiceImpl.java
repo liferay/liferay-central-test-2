@@ -1739,6 +1739,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 				WikiPage.class.getName(), page.getPageId());
 		}
 
+		// Indexer
+
 		Indexer<WikiPage> indexer = IndexerRegistryUtil.nullSafeGetIndexer(
 			WikiPage.class);
 
