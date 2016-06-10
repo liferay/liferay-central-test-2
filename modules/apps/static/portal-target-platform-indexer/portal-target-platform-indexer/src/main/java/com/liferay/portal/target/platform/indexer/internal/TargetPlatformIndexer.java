@@ -145,11 +145,6 @@ public class TargetPlatformIndexer implements Indexer {
 		}
 	}
 
-	private static final char[] _HEX_DIGITS = {
-		'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd',
-		'e', 'f'
-	};
-
 	private static String _bytesToHexString(byte[] bytes) {
 		char[] chars = new char[bytes.length * 2];
 
@@ -372,6 +367,11 @@ public class TargetPlatformIndexer implements Indexer {
 
 	private static final String _ATTRIBUTE_PREFIX_SIZE =
 		"<attribute name=\"size\" type=\"Long\" value=\"";
+
+	private static final char[] _HEX_DIGITS = {
+		'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd',
+		'e', 'f'
+	};
 
 	private static final String _PARAMETER_STRING_JDK_VERSION =
 		"osgi.ee;osgi.ee=JavaSE;version:List<Version>=\"1.0.0,1.1.0,1.2.0," +
