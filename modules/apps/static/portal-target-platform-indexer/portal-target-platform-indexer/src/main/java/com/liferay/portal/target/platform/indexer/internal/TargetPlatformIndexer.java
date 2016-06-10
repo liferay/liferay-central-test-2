@@ -137,7 +137,7 @@ public class TargetPlatformIndexer implements Indexer {
 			resourceIndexer.index(jarFiles, byteArrayOutputStream, _config);
 
 			outputStream.write(
-				_fixSystemBundleOSGIContent(
+				_fixSystemBundleOSGiContent(
 					byteArrayOutputStream.toString("UTF-8"), sha256sum, size));
 		}
 		finally {
@@ -173,7 +173,7 @@ public class TargetPlatformIndexer implements Indexer {
 		jarFiles.add(tempJarPath.toFile());
 	}
 
-	private byte[] _fixSystemBundleOSGIContent(
+	private byte[] _fixSystemBundleOSGiContent(
 			String content, String sha256sum, long size)
 		throws UnsupportedEncodingException {
 
