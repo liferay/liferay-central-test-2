@@ -2,13 +2,13 @@
 <!DOCTYPE project>
 
 <project name="build-app">
-	<property file="../build.properties" />
-
 	<property file="../app.server.${user.name}.properties" />
 	<property file="../app.server.${env.COMPUTERNAME}.properties" />
 	<property file="../app.server.${env.HOST}.properties" />
 	<property file="../app.server.${env.HOSTNAME}.properties" />
 	<property file="../app.server.properties" />
+
+	<property file="../build.properties" />
 
 	<property name="liferay.home" value="${basedir}/../bundles" />
 
@@ -91,7 +91,7 @@
 			<arg value="HEAD" />
 		</exec>
 
-		<echo message="Current branch detected: ${liferay.releng.branch}" />
+		<echo message="Current branch: ${liferay.releng.branch}" />
 
 		<condition property="current.branch.private">
 			<contains string="${liferay.releng.branch}" substring="ee-" />
