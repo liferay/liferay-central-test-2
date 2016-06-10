@@ -367,6 +367,12 @@ public class TargetPlatformIndexer implements Indexer {
 		}
 	}
 
+	private static final String _ATTRIBUTE_PREFIX_OSGI_CONTENT =
+		"<attribute name=\"osgi.content\" value=\"";
+
+	private static final String _ATTRIBUTE_PREFIX_SIZE =
+		"<attribute name=\"size\" type=\"Long\" value=\"";
+
 	private static final String _PARAMETER_STRING_JDK_VERSION =
 		"osgi.ee;osgi.ee=JavaSE;version:List<Version>=\"1.0.0,1.1.0,1.2.0," +
 			"1.3.0,1.4.0,1.5.0,1.6.0,1.7.0,1.8.0\"";
@@ -374,12 +380,6 @@ public class TargetPlatformIndexer implements Indexer {
 	private static final String _PARAMETER_STRING_OS_VERSION =
 		"eclipse.platform;osgi.os=linux;osgi.arch=x86_64;osgi.ws=gtk;osgi.nl=" +
 			"en_US";
-
-	private static final String _ATTRIBUTE_PREFIX_OSGI_CONTENT =
-		"<attribute name=\"osgi.content\" value=\"";
-
-	private static final String _ATTRIBUTE_PREFIX_SIZE =
-		"<attribute name=\"size\" type=\"Long\" value=\"";
 
 	private static final Set<String> _ignoredNamespaces = new HashSet<>();
 
