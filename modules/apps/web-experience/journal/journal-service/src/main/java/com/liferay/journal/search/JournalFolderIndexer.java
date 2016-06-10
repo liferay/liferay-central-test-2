@@ -120,6 +120,7 @@ public class JournalFolderIndexer
 		}
 
 		document.addText(Field.TITLE, title);
+
 		document.addKeyword(
 			Field.TREE_PATH,
 			StringUtil.split(journalFolder.getTreePath(), CharPool.SLASH));
