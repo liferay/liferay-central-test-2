@@ -181,7 +181,7 @@ public class TargetPlatformIndexer implements Indexer {
 		if (index == -1) {
 			throw new IllegalStateException(
 				"Indexed content:\n" + content +
-					"\ndoes not have system bundle url: " + url);
+					"\nMissing system bundle URL: " + url);
 		}
 
 		int start = content.lastIndexOf(_ATTRIBUTE_PREFIX_OSGI_CONTENT, index);
@@ -189,7 +189,7 @@ public class TargetPlatformIndexer implements Indexer {
 		if (start == -1) {
 			throw new IllegalStateException(
 				"Indexed content:\n" + content.substring(0, index) +
-					"\n does not have osgi content prefix: " +
+					"\nMissing OSGI content attribute: " +
 						_ATTRIBUTE_PREFIX_OSGI_CONTENT);
 		}
 
@@ -211,8 +211,8 @@ public class TargetPlatformIndexer implements Indexer {
 
 		if (start == -1) {
 			throw new IllegalStateException(
-				"Indexed content:\n" + content +
-					"\n does not have size prefix: " + _ATTRIBUTE_PREFIX_SIZE);
+				"Indexed content:\n" + content + "\nMissing size attribute: " +
+					_ATTRIBUTE_PREFIX_SIZE);
 		}
 
 		start += _ATTRIBUTE_PREFIX_SIZE.length();
