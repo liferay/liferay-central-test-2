@@ -123,7 +123,7 @@
 	</target>
 
 	<target depends="check-current-branch" if="${current.branch.private}" name="checkout-public-modules-releng">
-		<loadfile property="git.commit.portal.public" srcfile="../git-commit-portal-7.0.x">
+		<loadfile property="git.commit.portal.public" srcfile="../git-commit-portal">
 			<filterchain>
 				<striplinebreaks />
 			</filterchain>
@@ -299,6 +299,7 @@
 		<condition else="${basedir}/apps/${app.name}" property="app.dir" value="${basedir}/private/apps/${app.name}">
 			<available file="${basedir}/private/apps/${app.name}" />
 		</condition>
+
 		<condition else="${basedir}/.releng/apps/${app.name}" property="releng.app.dir" value="${basedir}/.releng/private/apps/${app.name}">
 			<available file="${basedir}/.releng/private/apps/${app.name}" />
 		</condition>
