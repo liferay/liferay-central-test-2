@@ -278,7 +278,27 @@ public class LPKGBundleTrackerCustomizer
 	private InputStream _toWARWrapperBundle(Bundle bundle, URL url)
 		throws IOException {
 
+		StringBundler sb = new StringBundler(7);
+
+		sb.append("lpkg://");
+		sb.append(URLCodec.encodeURL(bundle.getSymbolicName()));
+		sb.append(StringPool.DASH);
+		sb.append(bundle.getVersion());
+		sb.append(StringPool.SLASH);
+
 		String servletContextName = _readServletContextName(url);
+
+		sb.append(servletContextName);
+
+		sb.append(".war");
+
+		String lpkgURL = sb.toString();
+
+		// The bundle URL changes after a reboot. To ensure we do not install
+		// the same bundle multiple times over reboots, we must map the ever
+		// changing bundle URL to a fixed LPKG URL.
+
+		_urls.put(lpkgURL, url);
 
 		String pathString = url.getPath();
 
@@ -292,24 +312,6 @@ public class LPKGBundleTrackerCustomizer
 		if (index >= 0) {
 			version = fileName.substring(index + 1);
 		}
-
-		StringBundler sb = new StringBundler(7);
-
-		sb.append("lpkg://");
-		sb.append(URLCodec.encodeURL(bundle.getSymbolicName()));
-		sb.append(StringPool.DASH);
-		sb.append(bundle.getVersion());
-		sb.append(StringPool.SLASH);
-		sb.append(servletContextName);
-		sb.append(".war");
-
-		String lpkgURL = sb.toString();
-
-		// The bundle URL changes after a reboot. To ensure we do not install
-		// the same bundle multiple times over reboots, we must map the ever
-		// changing bundle URL to a fixed LPKG URL.
-
-		_urls.put(lpkgURL, url);
 
 		try (UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
 				new UnsyncByteArrayOutputStream()) {
