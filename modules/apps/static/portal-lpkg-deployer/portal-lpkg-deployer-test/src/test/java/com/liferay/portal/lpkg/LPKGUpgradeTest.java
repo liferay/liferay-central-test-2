@@ -46,7 +46,7 @@ public class LPKGUpgradeTest {
 		String liferayHome = System.getProperty("liferay.home");
 
 		Assert.assertNotNull(
-			"Missing system property liferay.home", liferayHome);
+			"Missing system property \"liferay.home\"", liferayHome);
 
 		try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(
 				Paths.get(liferayHome, "/osgi/marketplace"))) {

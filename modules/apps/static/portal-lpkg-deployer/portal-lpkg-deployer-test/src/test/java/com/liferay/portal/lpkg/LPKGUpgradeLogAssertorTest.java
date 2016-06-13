@@ -42,7 +42,7 @@ public class LPKGUpgradeLogAssertorTest {
 		String liferayHome = System.getProperty("liferay.home");
 
 		Assert.assertNotNull(
-			"Missing system property liferay.home", liferayHome);
+			"Missing system property \"liferay.home\"", liferayHome);
 
 		final Set<String> symbolicNames = new HashSet<>();
 
