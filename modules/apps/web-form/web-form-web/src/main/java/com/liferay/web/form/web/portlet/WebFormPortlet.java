@@ -21,6 +21,7 @@ import com.liferay.expando.kernel.service.ExpandoTableLocalServiceUtil;
 import com.liferay.expando.kernel.service.ExpandoValueLocalServiceUtil;
 import com.liferay.mail.kernel.model.MailMessage;
 import com.liferay.mail.kernel.service.MailServiceUtil;
+import com.liferay.portal.configuration.metatype.bnd.util.ConfigurableUtil;
 import com.liferay.portal.kernel.captcha.CaptchaTextException;
 import com.liferay.portal.kernel.captcha.CaptchaUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -48,9 +49,9 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
-import com.liferay.webform.util.PortletPropsValues;
-import com.liferay.webform.util.WebFormUtil;
+import com.liferay.web.form.web.configuration.WebFormGroupServiceConfiguration;
 import com.liferay.web.form.web.constants.WebFormPortletKeys;
+import com.liferay.web.form.web.util.WebFormUtil;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -69,7 +70,10 @@ import javax.portlet.PortletPreferences;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 
+import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.ConfigurationPolicy;
+import org.osgi.service.component.annotations.Modified;
 
 /**
  * @author Daniel Weisser
@@ -80,7 +84,8 @@ import org.osgi.service.component.annotations.Component;
  * @author Peter Fellwock
  */
 @Component(
-	immediate = true,
+	configurationPid = "com.liferay.web.form.web.configuration.WebFormConfiguration",
+	configurationPolicy = ConfigurationPolicy.OPTIONAL, immediate = true,
 	property = {
 		"com.liferay.portlet.css-class-wrapper=web-form-portlet",
 		"com.liferay.portlet.display-category=category.tools",
@@ -229,7 +234,8 @@ public class WebFormPortlet extends MVCPortlet {
 
 			if (saveToFile) {
 				String fileName = WebFormUtil.getFileName(
-					themeDisplay, portletId);
+					themeDisplay, portletId,
+					_webFormGroupServiceConfiguration.dataRootDir());
 
 				fileSuccess = saveFile(fieldsMap, fileName);
 			}
@@ -282,12 +288,19 @@ public class WebFormPortlet extends MVCPortlet {
 		}
 	}
 
+	@Activate
+	@Modified
+	protected void activate(Map<String, Object> properties) {
+		_webFormGroupServiceConfiguration = ConfigurableUtil.createConfigurable(
+			WebFormGroupServiceConfiguration.class, properties);
+	}
+
 	protected void appendFieldLabels(
 		Map<String, String> fieldsMap, StringBundler sb) {
 
 		for (String fieldLabel : fieldsMap.keySet()) {
 			sb.append(getCSVFormattedValue(fieldLabel));
-			sb.append(PortletPropsValues.CSV_SEPARATOR);
+			sb.append(_webFormGroupServiceConfiguration.csvSeparator());
 		}
 
 		sb.setIndex(sb.index() - 1);
@@ -302,7 +315,7 @@ public class WebFormPortlet extends MVCPortlet {
 			String fieldValue = fieldsMap.get(fieldLabel);
 
 			sb.append(getCSVFormattedValue(fieldValue));
-			sb.append(PortletPropsValues.CSV_SEPARATOR);
+			sb.append(_webFormGroupServiceConfiguration.csvSeparator());
 		}
 
 		sb.setIndex(sb.index() - 1);
@@ -348,7 +361,7 @@ public class WebFormPortlet extends MVCPortlet {
 			fieldLabels.add(fieldLabel);
 
 			sb.append(getCSVFormattedValue(localizedfieldLabel));
-			sb.append(PortletPropsValues.CSV_SEPARATOR);
+			sb.append(_webFormGroupServiceConfiguration.csvSeparator());
 		}
 
 		sb.setIndex(sb.index() - 1);
@@ -368,7 +381,7 @@ public class WebFormPortlet extends MVCPortlet {
 						fieldName, row.getClassPK(), StringPool.BLANK);
 
 					sb.append(getCSVFormattedValue(data));
-					sb.append(PortletPropsValues.CSV_SEPARATOR);
+					sb.append(_webFormGroupServiceConfiguration.csvSeparator());
 				}
 
 				sb.setIndex(sb.index() - 1);
@@ -480,8 +493,8 @@ public class WebFormPortlet extends MVCPortlet {
 			}
 
 			InternetAddress fromAddress = new InternetAddress(
-				WebFormUtil.getEmailFromAddress(preferences, companyId),
-				WebFormUtil.getEmailFromName(preferences, companyId));
+				_webFormGroupServiceConfiguration.emailFromAddress(),
+				_webFormGroupServiceConfiguration.emailFromName());
 			String subject = preferences.getValue("subject", StringPool.BLANK);
 			String body = getMailBody(fieldsMap);
 
@@ -540,7 +553,7 @@ public class WebFormPortlet extends MVCPortlet {
 				continue;
 			}
 
-			if (!PortletPropsValues.VALIDATION_SCRIPT_ENABLED) {
+			if (!_webFormGroupServiceConfiguration.validationScriptEnable()) {
 				continue;
 			}
 
@@ -562,5 +575,7 @@ public class WebFormPortlet extends MVCPortlet {
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(WebFormPortlet.class);
+
+	private WebFormGroupServiceConfiguration _webFormGroupServiceConfiguration;
 
 }

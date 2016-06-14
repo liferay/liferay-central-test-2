@@ -28,7 +28,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.web.form.web.constants.WebFormPortletKeys;
-import com.liferay.web.form.util.WebFormUtil;
+import com.liferay.web.form.web.util.WebFormUtil;
 
 import java.util.HashSet;
 import java.util.List;
@@ -40,6 +40,7 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletPreferences;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.osgi.service.component.annotations.Component;
@@ -57,7 +58,7 @@ import org.osgi.service.component.annotations.Component;
 	service = ConfigurationAction.class
 )
 public class WebFormConfigurationAction extends DefaultConfigurationAction {
-	
+
 	@Override
 	public String getJspPath(HttpServletRequest request) {
 		String cmd = ParamUtil.getString(request, Constants.CMD);
