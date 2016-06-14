@@ -188,7 +188,7 @@ if ((row == null) && portletName.equals(DLPortletKeys.MEDIA_GALLERY_DISPLAY)) {
 					try {
 						localRepository = RepositoryProviderUtil.getLocalRepository(folder.getRepositoryId());
 					}
-					catch (UndeployedExternalRepositoryException uere) {
+					catch (RepositoryException re) {
 					}
 
 					if ((localRepository != null) && localRepository.isCapabilityProvided(TemporaryFileEntriesCapability.class)) {
