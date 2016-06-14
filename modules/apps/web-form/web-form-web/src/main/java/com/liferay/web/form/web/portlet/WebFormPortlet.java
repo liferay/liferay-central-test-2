@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.webform.portlet;
+package com.liferay.web.form.web.portlet;
 
 import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
 import com.liferay.expando.kernel.model.ExpandoRow;
@@ -50,6 +50,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.webform.util.PortletPropsValues;
 import com.liferay.webform.util.WebFormUtil;
+import com.liferay.web.form.web.constants.WebFormPortletKeys;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -63,9 +64,12 @@ import javax.mail.internet.InternetAddress;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
+import javax.portlet.Portlet;
 import javax.portlet.PortletPreferences;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
+
+import org.osgi.service.component.annotations.Component;
 
 /**
  * @author Daniel Weisser
@@ -73,7 +77,32 @@ import javax.portlet.ResourceResponse;
  * @author Alberto Montero
  * @author Julio Camarero
  * @author Brian Wing Shun Chan
+ * @author Peter Fellwock
  */
+@Component(
+	immediate = true,
+	property = {
+		"com.liferay.portlet.css-class-wrapper=web-form-portlet",
+		"com.liferay.portlet.display-category=category.tools",
+		"com.liferay.portlet.header-portlet-css=/css/main.css",
+		"com.liferay.portlet.icon=/icons/web-form.png",
+		"com.liferay.portlet.use-default-template=true",
+		"javax.portlet.display-name=WebForm",
+		"javax.portlet.expiration-cache=0",
+		"javax.portlet.init-param.copy-request-parameters=true",
+		"javax.portlet.init-param.template-path=/",
+		"javax.portlet.init-param.view-template=/view.jsp",
+		"javax.portlet.name=" + WebFormPortletKeys.WEB_FORM,
+		"javax.portlet.portlet-info.keywords=Web Form",
+		"javax.portlet.portlet-info.short-title=Web Form",
+		"javax.portlet.portlet-info.title=Web Form",
+		"javax.portlet.preferences=classpath:/META-INF/portlet-preferences/default-portlet-preferences.xml",
+		"javax.portlet.resource-bundle=contnt.Language",
+		"javax.portlet.security-role-ref=administrator,guest,power-user,user",
+		"javax.portlet.supports.mime-type=text/html"
+	},
+	service = Portlet.class
+)
 public class WebFormPortlet extends MVCPortlet {
 
 	public void deleteData(
