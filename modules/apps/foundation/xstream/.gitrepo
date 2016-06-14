@@ -4,7 +4,7 @@
 ;
 [subrepo]
 	cmdver = liferay
-	commit = 285fbe998de77641dafc48c7395f00bf54b88e5a
+	commit = 82e8b6166ddbb8aafc80c7045bb1d0ca77a2d3b5
 	mode = push
-	parent = f13e97d81cd7097b56529c7e6019325b7306918b
+	parent = 2d4c4edc96da13a63e545414ac55112cf960120c
 	remote = git@github.com:liferay/com-liferay-xstream.git
