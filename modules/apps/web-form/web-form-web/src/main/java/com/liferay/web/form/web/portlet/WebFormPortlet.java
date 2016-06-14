@@ -14,13 +14,13 @@
 
 package com.liferay.web.form.web.portlet;
 
-import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
+import com.liferay.counter.kernel.service.CounterLocalService;
 import com.liferay.expando.kernel.model.ExpandoRow;
-import com.liferay.expando.kernel.service.ExpandoRowLocalServiceUtil;
-import com.liferay.expando.kernel.service.ExpandoTableLocalServiceUtil;
-import com.liferay.expando.kernel.service.ExpandoValueLocalServiceUtil;
+import com.liferay.expando.kernel.service.ExpandoRowLocalService;
+import com.liferay.expando.kernel.service.ExpandoTableLocalService;
+import com.liferay.expando.kernel.service.ExpandoValueLocalService;
 import com.liferay.mail.kernel.model.MailMessage;
-import com.liferay.mail.kernel.service.MailServiceUtil;
+import com.liferay.mail.kernel.service.MailService;
 import com.liferay.portal.configuration.metatype.bnd.util.ConfigurableUtil;
 import com.liferay.portal.kernel.captcha.CaptchaTextException;
 import com.liferay.portal.kernel.captcha.CaptchaUtil;
@@ -74,6 +74,7 @@ import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.ConfigurationPolicy;
 import org.osgi.service.component.annotations.Modified;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Daniel Weisser
@@ -92,7 +93,7 @@ import org.osgi.service.component.annotations.Modified;
 		"com.liferay.portlet.header-portlet-css=/css/main.css",
 		"com.liferay.portlet.icon=/icons/web-form.png",
 		"com.liferay.portlet.use-default-template=true",
-		"javax.portlet.display-name=WebForm",
+		"javax.portlet.display-name=Web Form",
 		"javax.portlet.expiration-cache=0",
 		"javax.portlet.init-param.copy-request-parameters=true",
 		"javax.portlet.init-param.template-path=/",
@@ -130,7 +131,7 @@ public class WebFormPortlet extends MVCPortlet {
 			"databaseTableName", StringPool.BLANK);
 
 		if (Validator.isNotNull(databaseTableName)) {
-			ExpandoTableLocalServiceUtil.deleteTable(
+			_expandoTableLocalService.deleteTable(
 				themeDisplay.getCompanyId(), WebFormUtil.class.getName(),
 				databaseTableName);
 		}
@@ -369,13 +370,13 @@ public class WebFormPortlet extends MVCPortlet {
 		sb.append(CharPool.NEW_LINE);
 
 		if (Validator.isNotNull(databaseTableName)) {
-			List<ExpandoRow> rows = ExpandoRowLocalServiceUtil.getRows(
+			List<ExpandoRow> rows = _expandoRowLocalService.getRows(
 				themeDisplay.getCompanyId(), WebFormUtil.class.getName(),
 				databaseTableName, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 			for (ExpandoRow row : rows) {
 				for (String fieldName : fieldLabels) {
-					String data = ExpandoValueLocalServiceUtil.getData(
+					String data = _expandoValueLocalService.getData(
 						themeDisplay.getCompanyId(),
 						WebFormUtil.class.getName(), databaseTableName,
 						fieldName, row.getClassPK(), StringPool.BLANK);
@@ -431,14 +432,14 @@ public class WebFormPortlet extends MVCPortlet {
 
 		WebFormUtil.checkTable(companyId, databaseTableName, preferences);
 
-		long classPK = CounterLocalServiceUtil.increment(
+		long classPK = _counterLocalService.increment(
 			WebFormUtil.class.getName());
 
 		try {
 			for (String fieldLabel : fieldsMap.keySet()) {
 				String fieldValue = fieldsMap.get(fieldLabel);
 
-				ExpandoValueLocalServiceUtil.addValue(
+				_expandoValueLocalService.addValue(
 					companyId, WebFormUtil.class.getName(), databaseTableName,
 					fieldLabel, classPK, fieldValue);
 			}
@@ -506,7 +507,7 @@ public class WebFormPortlet extends MVCPortlet {
 
 			mailMessage.setTo(toAddresses);
 
-			MailServiceUtil.sendEmail(mailMessage);
+			_mailService.sendEmail(mailMessage);
 
 			return true;
 		}
@@ -522,6 +523,39 @@ public class WebFormPortlet extends MVCPortlet {
 		throws Exception {
 
 		CaptchaUtil.serveImage(resourceRequest, resourceResponse);
+	}
+
+	@Reference(unbind = "-")
+	protected void setCounterLocalService(
+		CounterLocalService counterLocalService) {
+
+		_counterLocalService = counterLocalService;
+	}
+
+	@Reference(unbind = "-")
+	protected void setExpandoRowLocalService(
+		ExpandoRowLocalService expandoRowLocalService) {
+
+		_expandoRowLocalService = expandoRowLocalService;
+	}
+
+	@Reference(unbind = "-")
+	protected void setExpandoTableLocalService(
+		ExpandoTableLocalService expandoTableLocalService) {
+
+		_expandoTableLocalService = expandoTableLocalService;
+	}
+
+	@Reference(unbind = "-")
+	protected void setExpandoValueLocalService(
+		ExpandoValueLocalService expandoValueLocalService) {
+
+		_expandoValueLocalService = expandoValueLocalService;
+	}
+
+	@Reference(unbind = "-")
+	protected void setMailService(MailService mailService) {
+		_mailService = mailService;
 	}
 
 	protected Set<String> validate(
@@ -575,6 +609,12 @@ public class WebFormPortlet extends MVCPortlet {
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(WebFormPortlet.class);
+
+	private static CounterLocalService _counterLocalService;
+	private static ExpandoRowLocalService _expandoRowLocalService;
+	private static ExpandoTableLocalService _expandoTableLocalService;
+	private static ExpandoValueLocalService _expandoValueLocalService;
+	private static MailService _mailService;
 
 	private WebFormGroupServiceConfiguration _webFormGroupServiceConfiguration;
 
