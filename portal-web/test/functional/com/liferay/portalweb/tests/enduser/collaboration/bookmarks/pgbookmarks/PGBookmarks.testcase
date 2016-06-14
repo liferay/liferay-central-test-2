@@ -83,11 +83,6 @@
 			<var name="folderDescription" value="${folderDescription}" />
 			<var name="folderName" value="${folderName}" />
 		</execute>
-
-		<execute macro="BookmarksFolder#viewFolder">
-			<var name="folderDescription" value="${folderDescription}" />
-			<var name="folderName" value="${folderName}" />
-		</execute>
 	</command>
 
 	<command name="AddFolderBookmark" priority="5">
