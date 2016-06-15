@@ -109,13 +109,13 @@ if (parentResourcePrimKey != KBFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 
 						<liferay-portlet:renderURL var="rowURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
 							<portlet:param name="mvcPath" value='<%= templatePath + "select_parent.jsp" %>' />
-							<portlet:param name="eventName" value="<%= eventName %>" />
 							<portlet:param name="resourceClassNameId" value="<%= String.valueOf(resourceClassNameId) %>" />
 							<portlet:param name="resourcePrimKey" value="<%= String.valueOf(resourcePrimKey) %>" />
 							<portlet:param name="parentResourceClassNameId" value="<%= String.valueOf(kbFolder.getClassNameId()) %>" />
 							<portlet:param name="parentResourcePrimKey" value="<%= String.valueOf(kbFolder.getKbFolderId()) %>" />
-							<portlet:param name="selectableClassNameIds" value="<%= StringUtil.merge(selectableClassNameIds) %>" />
 							<portlet:param name="originalParentResourcePrimKey" value="<%= String.valueOf(originalParentResourcePrimKey) %>" />
+							<portlet:param name="selectableClassNameIds" value="<%= StringUtil.merge(selectableClassNameIds) %>" />
+							<portlet:param name="eventName" value="<%= eventName %>" />
 						</liferay-portlet:renderURL>
 
 						<%
@@ -183,7 +183,6 @@ if (parentResourcePrimKey != KBFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 
 						<liferay-portlet:renderURL var="rowURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
 							<portlet:param name="mvcPath" value='<%= templatePath + "select_parent.jsp" %>' />
-							<portlet:param name="eventName" value="<%= eventName %>" />
 							<portlet:param name="resourceClassNameId" value="<%= String.valueOf(resourceClassNameId) %>" />
 							<portlet:param name="resourcePrimKey" value="<%= String.valueOf(resourcePrimKey) %>" />
 							<portlet:param name="parentResourceClassNameId" value="<%= String.valueOf(kbArticle.getClassNameId()) %>" />
@@ -191,6 +190,7 @@ if (parentResourcePrimKey != KBFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 							<portlet:param name="originalParentResourcePrimKey" value="<%= String.valueOf(originalParentResourcePrimKey) %>" />
 							<portlet:param name="selectableClassNameIds" value="<%= StringUtil.merge(selectableClassNameIds) %>" />
 							<portlet:param name="status" value="<%= String.valueOf(status) %>" />
+							<portlet:param name="eventName" value="<%= eventName %>" />
 						</liferay-portlet:renderURL>
 
 						<%
