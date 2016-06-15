@@ -155,7 +155,9 @@ public class KBArticleLocalServiceTest {
 	}
 
 	@Test(expected = KBArticleParentException.class)
-	public void testAddKBArticleWithInvalidParentClassName() throws Exception {
+	public void testAddKBArticleWithInvalidParentClassNameId()
+		throws Exception {
+
 		long invalidParentClassNameId = 123456789L;
 
 		KBArticleLocalServiceUtil.addKBArticle(
