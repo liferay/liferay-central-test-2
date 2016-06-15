@@ -374,7 +374,7 @@ public class KBArticleLocalServiceTest {
 	}
 
 	@Test
-	public void testDeleteKBArticleDeletesChildArticles() throws Exception {
+	public void testDeleteKBArticleDeletesChildKBArticles() throws Exception {
 		ServiceTestUtil.setUser(_user);
 
 		KBArticle kbArticle = KBArticleLocalServiceUtil.addKBArticle(
