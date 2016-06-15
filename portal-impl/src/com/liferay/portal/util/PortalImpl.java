@@ -1200,7 +1200,9 @@ public class PortalImpl implements Portal {
 				Locale siteDefaultLocale = getSiteDefaultLocale(
 					layout.getGroupId());
 
-				if (siteDefaultLocale.equals(locale)) {
+				if (siteDefaultLocale.equals(locale) &&
+					(PropsValues.LOCALE_PREPEND_FRIENDLY_URL_STYLE != 2)) {
+
 					return canonicalURL;
 				}
 
