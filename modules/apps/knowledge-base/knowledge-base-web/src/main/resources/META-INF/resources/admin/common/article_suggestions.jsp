@@ -28,7 +28,6 @@ int pendingKBCommentsCount = 0;
 
 if (showAdminSuggestionView) {
 	kbCommentsCount = KBCommentLocalServiceUtil.getKBCommentsCount(KBArticle.class.getName(), kbArticle.getClassPK());
-
 	pendingKBCommentsCount = KBCommentLocalServiceUtil.getKBCommentsCount(KBArticle.class.getName(), kbArticle.getClassPK(), new int[] {KBCommentConstants.STATUS_IN_PROGRESS, KBCommentConstants.STATUS_NEW});
 }
 else {
