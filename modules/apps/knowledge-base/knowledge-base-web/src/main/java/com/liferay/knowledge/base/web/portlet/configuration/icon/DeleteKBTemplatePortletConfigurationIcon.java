@@ -62,9 +62,8 @@ public class DeleteKBTemplatePortletConfigurationIcon
 			portletRequest, KBPortletKeys.KNOWLEDGE_BASE_ADMIN,
 			PortletRequest.ACTION_PHASE);
 
-		portletURL.setParameter("mvcPath", "/admin/view_template.jsp");
-
 		portletURL.setParameter(ActionRequest.ACTION_NAME, "deleteKBTemplate");
+		portletURL.setParameter("mvcPath", "/admin/view_template.jsp");
 
 		KBTemplate kbTemplate = (KBTemplate)portletRequest.getAttribute(
 			KBWebKeys.KNOWLEDGE_BASE_KB_TEMPLATE);

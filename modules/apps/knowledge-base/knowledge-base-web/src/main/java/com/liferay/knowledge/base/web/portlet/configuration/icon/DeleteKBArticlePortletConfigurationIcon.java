@@ -61,11 +61,11 @@ public class DeleteKBArticlePortletConfigurationIcon
 			portletRequest, KBPortletKeys.KNOWLEDGE_BASE_ADMIN,
 			PortletRequest.ACTION_PHASE);
 
+		portletURL.setParameter(ActionRequest.ACTION_NAME, "deleteKBArticle");
+
 		String mvcPath = ParamUtil.getString(portletRequest, "mvcPath");
 
 		portletURL.setParameter("mvcPath", mvcPath);
-
-		portletURL.setParameter(ActionRequest.ACTION_NAME, "deleteKBArticle");
 
 		KBArticle kbArticle = getKBArticle(portletRequest);
 
