@@ -62,9 +62,8 @@ public class DeleteKBFolderPortletConfigurationIcon
 			portletRequest, KBPortletKeys.KNOWLEDGE_BASE_ADMIN,
 			PortletRequest.ACTION_PHASE);
 
-		portletURL.setParameter("mvcPath", "/admin/view_folders.jsp");
-
 		portletURL.setParameter(ActionRequest.ACTION_NAME, "deleteKBFolder");
+		portletURL.setParameter("mvcPath", "/admin/view_folders.jsp");
 
 		PortletURL redirectURL = PortalUtil.getControlPanelPortletURL(
 			portletRequest, KBPortletKeys.KNOWLEDGE_BASE_ADMIN,
