@@ -37,10 +37,11 @@ public class RuntimeServiceLoaderCondition implements ServiceLoaderCondition {
 			path = "file:/" + path.substring(5, path.length());
 		}
 
-		String moduleFrameworkBaseDir = PropsValues.MODULE_FRAMEWORK_BASE_DIR.replace(
+		String moduleFrameworkBaseDirName =
+			PropsValues.MODULE_FRAMEWORK_BASE_DIR.replace(
 				StringPool.DOUBLE_SLASH, StringPool.SLASH);
 
-		return path.contains(moduleFrameworkBaseDir);
+		return path.contains(moduleFrameworkBaseDirName);
 	}
 
 }
