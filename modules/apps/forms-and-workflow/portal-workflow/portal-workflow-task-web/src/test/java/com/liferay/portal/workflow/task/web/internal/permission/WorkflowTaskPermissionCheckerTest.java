@@ -67,7 +67,7 @@ public class WorkflowTaskPermissionCheckerTest {
 	}
 
 	@Test
-	public void testAssigneeIsNonContentReviewerRoleHasNoPermission() {
+	public void testAssigneeIsNotContentReviewerRoleHasNoPermission() {
 		WorkflowTask workflowTask = mockWorkflowTask(
 			Role.class.getName(), RandomTestUtil.randomLong());
 
@@ -97,7 +97,7 @@ public class WorkflowTaskPermissionCheckerTest {
 	}
 
 	@Test
-	public void testNonContentReviewerHasNoPermission() {
+	public void testNotContentReviewerHasNoPermission() {
 		PermissionChecker permissionChecker = mockPermissionChecker(
 			false, false, false);
 
@@ -128,29 +128,10 @@ public class WorkflowTaskPermissionCheckerTest {
 	}
 
 	protected PermissionChecker mockPermissionChecker(
-		boolean isOmniadmin, boolean isCompanyAdmin,
-		boolean isContentReviewer) {
+		boolean omniadmin, boolean companyAdmin,
+		boolean contentReviewer) {
 
 		PermissionChecker permissionChecker = mock(PermissionChecker.class);
-
-		when(
-			permissionChecker.isOmniadmin()
-		).thenReturn(
-			isOmniadmin
-		);
-
-		when(
-			permissionChecker.isCompanyAdmin()
-		).thenReturn(
-			isCompanyAdmin
-		);
-
-		when(
-			permissionChecker.isContentReviewer(
-				Matchers.anyLong(), Matchers.anyLong())
-		).thenReturn(
-			isContentReviewer
-		);
 
 		when(
 			permissionChecker.getUserId()
@@ -167,6 +148,25 @@ public class WorkflowTaskPermissionCheckerTest {
 			permissionChecker.getRoleIds(Matchers.anyLong(), Matchers.anyLong())
 		).thenReturn(
 			roleIds
+		);
+
+		when(
+			permissionChecker.isCompanyAdmin()
+		).thenReturn(
+			companyAdmin
+		);
+
+		when(
+			permissionChecker.isContentReviewer(
+				Matchers.anyLong(), Matchers.anyLong())
+		).thenReturn(
+			contentReviewer
+		);
+
+		when(
+			permissionChecker.isOmniadmin()
+		).thenReturn(
+			omniadmin
 		);
 
 		return permissionChecker;
