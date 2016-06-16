@@ -26,12 +26,12 @@
 		StringBundler sb = new StringBundler(5);
 
 		sb.append(themeDisplay.getPathMain());
-		sb.append("/blogs/find_entry?noSuchEntryRedirect=");
+		sb.append("/blogs/find_entry?p_l_id=");
+		sb.append(themeDisplay.getPlid());
+		sb.append("&noSuchEntryRedirect=");
 		sb.append(HttpUtil.encodeURL(showErrorMessageURL.toString()));
 		sb.append("&entryId=");
 		sb.append(entry.getEntryId());
-		sb.append("&p_l_id=");
-		sb.append(themeDisplay.getPlid());
 
 		String viewEntryURL = sb.toString();
 		%>
