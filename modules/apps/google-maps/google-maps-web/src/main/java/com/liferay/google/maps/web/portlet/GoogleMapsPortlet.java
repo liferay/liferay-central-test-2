@@ -14,8 +14,8 @@
 
 package com.liferay.google.maps.web.portlet;
 
-import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.google.maps.web.constants.GoogleMapsPortletKeys;
+import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 
 import javax.portlet.Portlet;
 
@@ -29,10 +29,10 @@ import org.osgi.service.component.annotations.Component;
 	property = {
 		"com.liferay.portlet.css-class-wrapper=google-maps-portlet",
 		"com.liferay.portlet.display-category=category.google",
+		"com.liferay.portlet.footer-portlet-javascript=/js/main.js",
 		"com.liferay.portlet.header-portlet-css=/css/main.css",
 		"com.liferay.portlet.icon=/icons/google_maps.png",
 		"com.liferay.portlet.instanceable=true",
-		"com.liferay.portlet.footer-portlet-javascript=/js/main.js",
 		"com.liferay.portlet.use-default-template=true",
 		"javax.portlet.display-name=Google Maps",
 		"javax.portlet.expiration-cache=0",
