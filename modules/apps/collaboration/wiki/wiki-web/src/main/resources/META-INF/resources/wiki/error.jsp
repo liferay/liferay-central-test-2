@@ -26,17 +26,17 @@ boolean portletTitleBasedNavigation = GetterUtil.getBoolean(portletConfig.getIni
 if (portletTitleBasedNavigation) {
 	portletDisplay.setShowBackIcon(true);
 
-	String urlBack = request.getHeader(HttpHeaders.REFERER);
+	String backURL = request.getHeader(HttpHeaders.REFERER);
 
-	if (Validator.isNull(urlBack)) {
+	if (Validator.isNull(backURL)) {
 		WikiURLHelper wikiURLHelper = new WikiURLHelper(wikiRequestHelper, renderResponse, wikiGroupServiceConfiguration);
 
 		PortletURL backToViewPagesURL = wikiURLHelper.getBackToViewPagesURL(node);
 
-		urlBack = backToViewPagesURL.toString();
+		backURL = backToViewPagesURL.toString();
 	}
 
-	portletDisplay.setURLBack(urlBack);
+	portletDisplay.setURLBack(backURL);
 
 	renderResponse.setTitle(title);
 }
