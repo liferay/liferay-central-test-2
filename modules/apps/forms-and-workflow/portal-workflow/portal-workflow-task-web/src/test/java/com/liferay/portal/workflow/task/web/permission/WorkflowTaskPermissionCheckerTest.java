@@ -117,20 +117,19 @@ public class WorkflowTaskPermissionCheckerTest {
 	}
 
 	protected PermissionChecker mockCompanyAdminPermissionChecker() {
-		return mockPermissionChecker(false, true, false);
-	}
-
-	protected PermissionChecker mockContentReviewerPermissionChecker() {
-		return mockPermissionChecker(false, false, true);
-	}
-
-	protected PermissionChecker mockOmniadminPermissionChecker() {
 		return mockPermissionChecker(true, false, false);
 	}
 
+	protected PermissionChecker mockContentReviewerPermissionChecker() {
+		return mockPermissionChecker(false, true, false);
+	}
+
+	protected PermissionChecker mockOmniadminPermissionChecker() {
+		return mockPermissionChecker(false, false, true);
+	}
+
 	protected PermissionChecker mockPermissionChecker(
-		boolean omniadmin, boolean companyAdmin,
-		boolean contentReviewer) {
+		boolean companyAdmin, boolean contentReviewer, boolean omniadmin) {
 
 		PermissionChecker permissionChecker = mock(PermissionChecker.class);
 
