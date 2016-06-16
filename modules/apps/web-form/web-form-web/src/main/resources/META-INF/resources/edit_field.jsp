@@ -142,7 +142,7 @@ boolean ignoreRequestValue = (index != formFieldsIndex);
 		</c:when>
 	</c:choose>
 
-	<c:if test="<%= validationScriptEnable %>">
+	<c:if test="<%= webFormGroupServiceConfiguration.validationScriptEnable() %>">
 		<c:choose>
 			<c:when test="<%= !fieldsEditingDisabled %>">
 				<div class="validation">
