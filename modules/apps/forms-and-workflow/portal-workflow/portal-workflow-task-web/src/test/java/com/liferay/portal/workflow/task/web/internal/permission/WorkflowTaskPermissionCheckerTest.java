@@ -68,9 +68,9 @@ public class WorkflowTaskPermissionCheckerTest {
 	}
 
 	@Test
-	public void testAssigneeIsNotContentReviewerRoleHasNoPermission() {
+	public void testAssigneeIsNotContentReviewerHasNoPermission() {
 		WorkflowTask workflowTask = mockWorkflowTask(
-			Role.class.getName(), RandomTestUtil.randomLong());
+			User.class.getName(), RandomTestUtil.randomLong());
 
 		Assert.assertFalse(
 			_workflowTaskPermissionChecker.hasPermission(
@@ -79,9 +79,9 @@ public class WorkflowTaskPermissionCheckerTest {
 	}
 
 	@Test
-	public void testAssigneeIsNotContentReviewerHasNoPermission() {
+	public void testAssigneeIsNotContentReviewerRoleHasNoPermission() {
 		WorkflowTask workflowTask = mockWorkflowTask(
-			User.class.getName(), RandomTestUtil.randomLong());
+			Role.class.getName(), RandomTestUtil.randomLong());
 
 		Assert.assertFalse(
 			_workflowTaskPermissionChecker.hasPermission(
