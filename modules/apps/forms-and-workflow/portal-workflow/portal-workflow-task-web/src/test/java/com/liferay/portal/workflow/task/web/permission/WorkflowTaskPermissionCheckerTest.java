@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.workflow.WorkflowTask;
 import com.liferay.portal.kernel.workflow.WorkflowTaskAssignee;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -185,8 +186,7 @@ public class WorkflowTaskPermissionCheckerTest {
 
 		WorkflowTask workflowTask = mock(WorkflowTask.class);
 
-		ArrayList<WorkflowTaskAssignee> workflowTaskAssignees =
-			new ArrayList<>();
+		List<WorkflowTaskAssignee> workflowTaskAssignees = new ArrayList<>();
 
 		workflowTaskAssignees.add(workflowTaskAssignee);
 
