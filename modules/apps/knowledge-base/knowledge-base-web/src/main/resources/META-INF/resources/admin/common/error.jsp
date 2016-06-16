@@ -22,15 +22,15 @@ boolean portletTitleBasedNavigation = GetterUtil.getBoolean(portletConfig.getIni
 if (portletTitleBasedNavigation) {
 	portletDisplay.setShowBackIcon(true);
 
-	String urlBack = request.getHeader(HttpHeaders.REFERER);
+	String backURL = request.getHeader(HttpHeaders.REFERER);
 
-	if (Validator.isNull(urlBack)) {
+	if (Validator.isNull(backURL)) {
 		PortletURL portletURL = PortalUtil.getControlPanelPortletURL(request, KBPortletKeys.KNOWLEDGE_BASE_ADMIN, PortletRequest.RENDER_PHASE);
 
-		urlBack = portletURL.toString();
+		backURL = portletURL.toString();
 	}
 
-	portletDisplay.setURLBack(urlBack);
+	portletDisplay.setURLBack(backURL);
 
 	renderResponse.setTitle(LanguageUtil.get(resourceBundle, "error"));
 }
