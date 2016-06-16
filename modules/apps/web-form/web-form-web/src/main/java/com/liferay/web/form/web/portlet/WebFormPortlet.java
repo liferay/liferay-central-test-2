@@ -91,7 +91,7 @@ import org.osgi.service.component.annotations.Reference;
 		"com.liferay.portlet.css-class-wrapper=web-form-portlet",
 		"com.liferay.portlet.display-category=category.tools",
 		"com.liferay.portlet.header-portlet-css=/css/main.css",
-		"com.liferay.portlet.icon=/icons/web-form.png",
+		"com.liferay.portlet.icon=/icons/web_form.png",
 		"com.liferay.portlet.use-default-template=true",
 		"javax.portlet.display-name=Web Form",
 		"javax.portlet.expiration-cache=0",
