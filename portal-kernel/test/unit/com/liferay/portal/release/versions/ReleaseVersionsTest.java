@@ -49,10 +49,11 @@ public class ReleaseVersionsTest {
 	public void testReleaseVersions() throws IOException {
 		final Path portalPath = Paths.get(System.getProperty("user.dir"));
 
-		String otherDirName = System.getProperty("release.versions.other.dir");
+		String otherDirName = System.getProperty(
+			"release.versions.test.other.dir");
 
 		Assert.assertTrue(
-			"Please set the property ${release.versions.other.dir}",
+			"Please set the property \"release.versions.test.other.dir\"",
 			Validator.isNotNull(otherDirName));
 
 		final Path otherPath = Paths.get(otherDirName);
