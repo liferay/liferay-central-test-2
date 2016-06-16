@@ -216,13 +216,11 @@ public class VerifyPermission extends VerifyProcess {
 
 			for (ResourcePermission resourcePermission : resourcePermissions) {
 				ResourcePermission groupResourcePermission =
-					ResourcePermissionLocalServiceUtil.
-						fetchResourcePermission(
-							resourcePermission.getCompanyId(),
-							Group.class.getName(),
-							resourcePermission.getScope(),
-							resourcePermission.getPrimKey(),
-							resourcePermission.getRoleId());
+					ResourcePermissionLocalServiceUtil. fetchResourcePermission(
+						resourcePermission.getCompanyId(),
+						Group.class.getName(), resourcePermission.getScope(),
+						resourcePermission.getPrimKey(),
+						resourcePermission.getRoleId());
 
 				if (groupResourcePermission == null) {
 					ResourcePermissionLocalServiceUtil.setResourcePermissions(
