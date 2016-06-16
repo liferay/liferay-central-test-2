@@ -88,13 +88,6 @@ public abstract class JSONAction extends Action {
 				json = sb.toString();
 			}
 		}
-		catch (SecurityException se) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(se.getMessage());
-			}
-
-			json = JSONFactoryUtil.serializeThrowable(se);
-		}
 		catch (PrincipalException pe) {
 			_log.error(pe.getMessage());
 
@@ -102,6 +95,13 @@ public abstract class JSONAction extends Action {
 				HttpServletResponse.SC_FORBIDDEN, pe, request, response);
 
 			return null;
+		}
+		catch (SecurityException se) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(se.getMessage());
+			}
+
+			json = JSONFactoryUtil.serializeThrowable(se);
 		}
 		catch (Exception e) {
 			_log.error(e.getMessage());
