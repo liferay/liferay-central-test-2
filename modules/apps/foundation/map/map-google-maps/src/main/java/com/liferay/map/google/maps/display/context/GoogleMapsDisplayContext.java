@@ -21,7 +21,7 @@ import com.liferay.portal.kernel.util.PrefsPropsUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import javax.portlet.PortletPreferences;
-import javax.portlet.PortletRequest;
+
 import javax.servlet.http.HttpServletRequest;
 
 /**
