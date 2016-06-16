@@ -173,7 +173,7 @@ MBThread thread = (MBThread)request.getAttribute("edit_message.jsp-thread");
 					}
 					%>
 
-					<c:if test="<%= showAnswerFlag || hasReplyPermission || hasUpdatePermission || hasBanUserPermission || hasPermissionsPermission || hasMoveThreadPermission || hasDeletePermission %>">
+					<c:if test="<%= showAnswerFlag || hasBanUserPermission || hasReplyPermission || hasUpdatePermission || hasPermissionsPermission || hasMoveThreadPermission || hasDeletePermission %>">
 						<liferay-ui:icon-menu direction="left-side" icon="<%= StringPool.BLANK %>" markupView="lexicon" message="<%= StringPool.BLANK %>" showWhenSingleIcon="<%= true %>">
 							<c:if test="<%= showAnswerFlag %>">
 								<c:choose>
