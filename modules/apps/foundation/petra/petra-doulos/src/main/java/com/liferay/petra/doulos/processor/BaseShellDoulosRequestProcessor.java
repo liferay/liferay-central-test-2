@@ -180,7 +180,7 @@ public abstract class BaseShellDoulosRequestProcessor
 		return _THREAD_EXECUTE_INTERVAL;
 	}
 
-	protected abstract boolean isRemoveRequest(JSONObject payloadJSONObject);
+	protected abstract boolean isRemoveFromQueue(JSONObject payloadJSONObject);
 
 	protected abstract boolean isValid(JSONObject payloadJSONObject);
 
@@ -202,7 +202,7 @@ public abstract class BaseShellDoulosRequestProcessor
 		synchronized (this) {
 			shellStatus = _shellStatuses.get(key);
 
-			if (isRemoveRequest(payloadJSONObject)) {
+			if (isRemoveFromQueue(payloadJSONObject)) {
 				if (shellStatus != null) {
 					_shellStatuses.remove(key);
 				}
