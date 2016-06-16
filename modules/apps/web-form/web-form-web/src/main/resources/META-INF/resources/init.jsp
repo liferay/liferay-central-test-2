@@ -52,11 +52,9 @@ page import="com.liferay.web.form.web.util.WebFormUtil" %>
 <portlet:defineObjects />
 
 <%
-WebFormGroupServiceConfiguration webFormGroupServiceConfiguration = ConfigurationProviderUtil.getCompanyConfiguration(WebFormGroupServiceConfiguration.class, themeDisplay.getCompanyId());
-
-boolean validationScriptEnable = webFormGroupServiceConfiguration.validationScriptEnable();
-
 String currentURL = PortalUtil.getCurrentURL(request);
 
 String portletResource = ParamUtil.getString(request, "portletResource");
+
+WebFormGroupServiceConfiguration webFormGroupServiceConfiguration = ConfigurationProviderUtil.getCompanyConfiguration(WebFormGroupServiceConfiguration.class, themeDisplay.getCompanyId());
 %>

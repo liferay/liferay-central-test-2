@@ -237,7 +237,7 @@ if (WebFormUtil.getTableRowsCount(company.getCompanyId(), databaseTableName) > 0
 
 		webFields.delegate(['change', 'click', 'keydown'], toggleOptions, 'select');
 
-		<c:if test="<%= validationScriptEnable %>">
+		<c:if test="<%= webFormGroupServiceConfiguration.validationScriptEnable() %>">
 			var toggleValidationOptions = function(event) {
 				this.next().toggle();
 			};
