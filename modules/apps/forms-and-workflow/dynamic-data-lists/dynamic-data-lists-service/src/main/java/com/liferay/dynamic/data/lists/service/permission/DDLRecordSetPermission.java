@@ -73,7 +73,8 @@ public class DDLRecordSetPermission {
 		String portletId = PortletProviderUtil.getPortletId(
 			DDLRecord.class.getName(), PortletProvider.Action.EDIT);
 
-		if ((actionId != DDLActionKeys.ADD_RECORD) && (recordSet.getScope() ==
+		if ((actionId != DDLActionKeys.ADD_RECORD) &&
+			(recordSet.getScope() ==
 				DDLRecordSetConstants.SCOPE_DYNAMIC_DATA_LISTS)) {
 
 			Boolean hasPermission = StagingPermissionUtil.hasPermission(
