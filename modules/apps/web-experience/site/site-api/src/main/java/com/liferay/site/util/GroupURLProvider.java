@@ -124,7 +124,7 @@ public class GroupURLProvider {
 			catch (PortalException pe) {
 				_log.error(
 					"Unable to check permission on group " +
-					group.getGroupId());
+						group.getGroupId());
 			}
 		}
 
