@@ -118,14 +118,14 @@ else {
 	<aui:input label="<%= dateTogglerCheckboxLabel %>" name="<%= randomNamespace + dateTogglerCheckboxName %>" type="checkbox" value="<%= disabled %>" />
 
 	<aui:script sandbox="<%= true %>">
-		var checkbox = $('#<portlet:namespace /><%= randomNamespace + dateTogglerCheckboxName %>');
+		var checkbox = $('#<%= namespace + randomNamespace + dateTogglerCheckboxName %>');
 
 		checkbox.on(
 			'click mouseover',
 			function(event) {
 				var checked = checkbox.prop('checked');
 
-				var form = $(document.<portlet:namespace /><%= formName %>);
+				var form = $(document.forms.<%= namespace + formName %>);
 
 				if (!form.length) {
 					form = $(checkbox.prop('form'));
