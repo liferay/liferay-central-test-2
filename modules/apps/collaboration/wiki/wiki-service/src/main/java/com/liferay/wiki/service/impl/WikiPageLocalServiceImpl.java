@@ -1285,8 +1285,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		boolean workflowAssetPreview = false;
 
 		if (request != null) {
-			workflowAssetPreview = (Boolean)request.getAttribute(
-				WebKeys.WORKFLOW_ASSET_PREVIEW);
+			workflowAssetPreview = GetterUtil.getBoolean(
+				request.getAttribute(WebKeys.WORKFLOW_ASSET_PREVIEW));
 		}
 
 		if (!workflowAssetPreview && page.isApproved()) {
