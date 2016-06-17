@@ -685,8 +685,6 @@
 		<execute function="Type#typeEditor" locator1="Comments#EDIT_COMMENT_FIELD" value1="${entryCommentEdit}" />
 
 		<execute macro="PortletEntry#publish" />
-
-		<execute macro="Alert#viewSuccessMessage" />
 	</command>
 
 	<command name="editFrontPagePG">
