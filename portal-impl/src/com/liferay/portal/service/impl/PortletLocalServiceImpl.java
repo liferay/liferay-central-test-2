@@ -459,8 +459,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			Portlet portlet = _portletsMap.get(rootPortletId);
 
 			if ((portlet == null) || !portlet.isActive() ||
-				!portlet.isInclude() ||
-				!portlet.isReady() || portlet.isUndeployedPortlet()) {
+				!portlet.isInclude() || !portlet.isReady() ||
+				portlet.isUndeployedPortlet()) {
 
 				continue;
 			}
