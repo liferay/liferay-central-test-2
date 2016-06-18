@@ -45,6 +45,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Dictionary;
 import java.util.Enumeration;
 import java.util.HashSet;
@@ -138,10 +139,18 @@ public class DefaultLPKGDeployer implements LPKGDeployer {
 		}
 
 		try {
+			String location = lpkgFile.getCanonicalPath();
+
+			Bundle lpkgBundle = bundleContext.getBundle(location);
+
+			if (lpkgBundle != null) {
+				return Collections.emptyList();
+			}
+
 			List<Bundle> bundles = new ArrayList<>();
 
-			Bundle lpkgBundle = bundleContext.installBundle(
-				lpkgFile.getCanonicalPath(), toBundle(lpkgFile));
+			lpkgBundle = bundleContext.installBundle(
+				location, toBundle(lpkgFile));
 
 			BundleStartLevel bundleStartLevel = lpkgBundle.adapt(
 				BundleStartLevel.class);
