@@ -25,6 +25,15 @@
 		</execute>
 	</command>
 
+	<command name="_gotoChildArticle">
+		<var name="key_kbChildArticleTitle" value="${kbChildArticleTitle}" />
+
+		<execute function="AssertTextEquals#assertPartialText" locator1="KnowledgeBase#CHILD_PAGE_HEADER" value1="Child Article" />
+		<execute function="AssertTextEquals" locator1="KnowledgeBase#CHILD_PAGE_TITLE" value1="${kbChildArticleTitle}" />
+
+		<execute function="AssertClick" locator1="KnowledgeBase#CHILD_PAGE_TITLE" value1="${kbChildArticleTitle}" />
+	</command>
+
 	<command name="addChildPGViaKBAdmin">
 		<var name="key_kbArticleTitle" value="${kbArticleTitle}" />
 
