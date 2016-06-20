@@ -34,7 +34,7 @@
 		<execute function="AssertClick" locator1="KnowledgeBase#CHILD_PAGE_TITLE" value1="${kbChildArticleTitle}" />
 	</command>
 
-	<command name="addChildPGViaKBAdmin">
+	<command name="addChildArticleViaKBAdmin">
 		<var name="key_kbArticleTitle" value="${kbArticleTitle}" />
 
 		<execute function="Click" locator1="KnowledgeBase#ARTICLE_TABLE_ARTICLE_ACTIONS" />
