@@ -2789,11 +2789,9 @@ public class PortalImpl implements Portal {
 	public String getLayoutFriendlyURL(Layout layout, ThemeDisplay themeDisplay)
 		throws PortalException {
 
-		LayoutTypeController layoutTypeController =
-			LayoutTypeControllerTracker.getLayoutTypeController(
-				layout.getType());
+		LayoutType layoutType = layout.getLayoutType();
 
-		if (!layoutTypeController.isURLFriendliable()) {
+		if (!layoutType.isURLFriendliable()) {
 			return null;
 		}
 
