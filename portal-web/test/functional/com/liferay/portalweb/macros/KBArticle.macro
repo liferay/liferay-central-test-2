@@ -484,7 +484,7 @@
 			</else>
 		</if>
 
-		<execute function="Confirm" value1="Are you sure you want to delete the selected articles?" />
+		<execute function="Confirm" value1="Are you sure you want to delete the selected entries? They will be deleted immediately." />
 		<execute macro="Alert#viewSuccessMessage" />
 		<execute function="AssertTextNotPresent" locator1="Message#ERROR" value1="Your request failed to complete." />
 		<execute function="AssertTextNotPresent" locator1="Message#ERROR" value1="An unexpected error occurred while importing articles: File name is null." />
