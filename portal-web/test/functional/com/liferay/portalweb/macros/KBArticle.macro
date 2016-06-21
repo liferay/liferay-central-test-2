@@ -470,8 +470,20 @@
 	</command>
 
 	<command name="deleteCP">
-		<execute function="AssertClick" locator1="NavBar#ACTIONS" value1="Actions" />
-		<execute function="ClickNoError" locator1="MenuItem#DELETE" value1="Delete" />
+		<if>
+			<condition function="IsElementPresent" locator1="Icon#DELETE" />
+			<then>
+				<execute function="ClickNoError" locator1="Icon#DELETE" />
+			</then>
+			<else>
+				<var name="key_rowEntry" value="${kbArticleTitle}" />
+
+				<execute function="Click" locator1="Icon#ROW_VERTICAL_ELLIPSIS" />
+
+				<execute function="AssertClick" locator1="MenuItem#DELETE" value1="Delete" />
+			</else>
+		</if>
+
 		<execute function="Confirm" value1="Are you sure you want to delete the selected articles?" />
 		<execute macro="Alert#viewSuccessMessage" />
 		<execute function="AssertTextNotPresent" locator1="Message#ERROR" value1="Your request failed to complete." />
