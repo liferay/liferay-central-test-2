@@ -803,7 +803,7 @@
 	</command>
 
 	<command name="selectAllCP">
-		<execute function="Check" locator1="KnowledgeBase#ARTICLE_TABLE_SELECT_ALL_CHECKBOX" />
+		<execute function="Check#checkAll" locator1="Checkbox#SELECT_ALL" />
 	</command>
 
 	<command name="selectArticleCP">
