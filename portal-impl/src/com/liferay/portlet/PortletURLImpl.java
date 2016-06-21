@@ -817,14 +817,7 @@ public class PortletURLImpl
 
 		try {
 			if (_layoutFriendlyURL == null) {
-				Layout layout = null;
-
-				if (_plid == themeDisplay.getPlid()) {
-					layout = themeDisplay.getLayout();
-				}
-				else {
-					layout = getLayout();
-				}
+				Layout layout = getLayout();
 
 				if (layout != null) {
 					_layoutFriendlyURL = GetterUtil.getString(
