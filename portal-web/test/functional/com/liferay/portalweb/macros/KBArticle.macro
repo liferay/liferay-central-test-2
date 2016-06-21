@@ -17,14 +17,6 @@
 		</execute>
 	</command>
 
-	<command name="_gotoImportArticle">
-		<execute function="Click" locator1="Button#PLUS" />
-
-		<execute function="AssertClick" locator1="MenuItem#ANY_MENU_ITEM" value1="Import">
-			<var name="key_menuItem" value="Import" />
-		</execute>
-	</command>
-
 	<command name="_gotoChildArticle">
 		<var name="key_kbChildArticleTitle" value="${kbChildArticleTitle}" />
 
@@ -32,6 +24,14 @@
 		<execute function="AssertTextEquals" locator1="KnowledgeBase#CHILD_PAGE_TITLE" value1="${kbChildArticleTitle}" />
 
 		<execute function="AssertClick" locator1="KnowledgeBase#CHILD_PAGE_TITLE" value1="${kbChildArticleTitle}" />
+	</command>
+
+	<command name="_gotoImportArticle">
+		<execute function="Click" locator1="Button#PLUS" />
+
+		<execute function="AssertClick" locator1="MenuItem#ANY_MENU_ITEM" value1="Import">
+			<var name="key_menuItem" value="Import" />
+		</execute>
 	</command>
 
 	<command name="addChildArticleViaKBAdmin">
