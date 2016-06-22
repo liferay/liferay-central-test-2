@@ -436,7 +436,7 @@ public class PortletPreferencesLocalServiceImpl
 				ownerId, ownerType, plid, portletId);
 
 		if (portletPreferences == null) {
-			Portlet portlet = portletLocalService.getPortletById(
+			Portlet portlet = portletLocalService.fetchPortletById(
 				companyId, portletId);
 
 			if (strict &&
