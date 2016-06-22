@@ -1386,7 +1386,14 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 
 		SyncDLObject syncDLObject = SyncUtil.toSyncDLObject(fileEntry, event);
 
-		return checkModifiedTime(syncDLObject, fileEntry.getFileEntryId());
+		checkModifiedTime(syncDLObject, fileEntry.getFileEntryId());
+
+		String lanTokenKey = SyncUtil.stashLanTokenKey(
+			syncDLObject.getModifiedTime(), fileEntry.getFileEntryId());
+
+		syncDLObject.setLanTokenKey(lanTokenKey);
+
+		return syncDLObject;
 	}
 
 	protected SyncDLObject toSyncDLObject(Folder folder, String event)
