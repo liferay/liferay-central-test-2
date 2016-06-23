@@ -48,11 +48,11 @@ public class _CLASS_Rule extends BaseJSPRule {
 			AnonymousUser anonymousUser)
 		throws Exception {
 
-		// You can obtain the rule Configuration from the typeSettings
+		// You can obtain the rule configuration from the type settings
 
 		String typeSettings = ruleInstance.getTypeSettings();
 
-		// Return true if the AnonymousUser matches this rule
+		// Return true if the anonymous user matches this rule
 
 		return _getMatches(typeSettings);
 	}
@@ -65,7 +65,7 @@ public class _CLASS_Rule extends BaseJSPRule {
 	@Override
 	public String getRuleCategoryKey() {
 
-		// Available Categories: BehaviourRuleCategory,
+		// Available category classes: BehaviourRuleCategory,
 		// SessionAttributesRuleCategory, SocialRuleCategory and
 		// UserAttributesRoleCategory
 
@@ -96,11 +96,9 @@ public class _CLASS_Rule extends BaseJSPRule {
 		PortletRequest portletRequest, PortletResponse portletResponse,
 		String id, Map<String, String> values) {
 
-		// Logic to store the configuration of the rule
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
 		boolean matches = GetterUtil.getBoolean(values.get("matches"));
-
-		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
 		jsonObject.put("matches", matches);
 
@@ -125,14 +123,15 @@ public class _CLASS_Rule extends BaseJSPRule {
 
 		if (!values.isEmpty()) {
 
-			// Value from the request (in case of error)
+			// Value from the request in case of an error
 
 			matches = GetterUtil.getBoolean(values.get("matches"));
 		}
 		else if (ruleInstance != null) {
-			String typeSettings = ruleInstance.getTypeSettings();
 
 			// Value from the stored configuration
+
+			String typeSettings = ruleInstance.getTypeSettings();
 
 			matches = _getMatches(typeSettings);
 		}
