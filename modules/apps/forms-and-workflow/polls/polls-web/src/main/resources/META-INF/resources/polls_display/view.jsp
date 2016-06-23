@@ -18,9 +18,11 @@
 
 <%
 PollsQuestion question = null;
+
 try {
 	question = PollsUtil.getQuestionByPortlet(portletPreferences);
-} catch (NoSuchQuestionException nsqe) {
+}
+catch (NoSuchQuestionException nsqe) {
 }
 %>
 
