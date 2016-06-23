@@ -2879,7 +2879,7 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  .orm,com.liferay.portal.kernel.exception,com.liferay.portal.kernel.mo
  del,com.liferay.portal.kernel.service,com.liferay.portal.kernel.servi
  ce.persistence,com.liferay.portal.kernel.util",com.liferay.portal.ker
- nel.servlet;version="7.1.0";uses:="com.liferay.portal.kernel.log,com.
+ nel.servlet;version="7.2.0";uses:="com.liferay.portal.kernel.log,com.
  liferay.portal.kernel.util,javax.portlet,javax.servlet,javax.servlet.
  http",com.liferay.portal.kernel.servlet.filters.compoundsessionid;ver
  sion="7.0.0";uses:="com.liferay.portal.kernel.servlet,javax.servlet.h
