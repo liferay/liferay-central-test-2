@@ -16,6 +16,8 @@ package com.liferay.portal.workflow.task.web.internal.permission;
 
 import com.liferay.asset.kernel.model.AssetRenderer;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Role;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
@@ -46,7 +48,7 @@ public class WorkflowTaskPermissionChecker {
 			return true;
 		}
 
-		if (!hasViewPermissionOnAsset(workflowTask, permissionChecker) &&
+		if (!hasAssetViewPermission(workflowTask, permissionChecker) &&
 			!permissionChecker.isContentReviewer(
 				permissionChecker.getCompanyId(), groupId)) {
 
@@ -71,7 +73,7 @@ public class WorkflowTaskPermissionChecker {
 		return false;
 	}
 
-	protected boolean hasViewPermissionOnAsset(
+	protected boolean hasAssetViewPermission(
 		WorkflowTask workflowTask, PermissionChecker permissionChecker) {
 
 		Map<String, Serializable> optionalAttributes =
@@ -79,27 +81,24 @@ public class WorkflowTaskPermissionChecker {
 
 		String className = MapUtil.getString(
 			optionalAttributes, WorkflowConstants.CONTEXT_ENTRY_CLASS_NAME);
+		long classPK = MapUtil.getLong(
+			optionalAttributes, WorkflowConstants.CONTEXT_ENTRY_CLASS_PK);
 
 		WorkflowHandler<?> workflowHandler =
 			WorkflowHandlerRegistryUtil.getWorkflowHandler(className);
 
-		if (workflowHandler != null) {
-			long classPK = MapUtil.getLong(
-				optionalAttributes, WorkflowConstants.CONTEXT_ENTRY_CLASS_PK);
+		if (workflowHandler == null) {
+			return false;
+		}
 
-			try {
-				AssetRenderer<?> assetRenderer =
-					workflowHandler.getAssetRenderer(classPK);
+		try {
+			AssetRenderer<?> assetRenderer = workflowHandler.getAssetRenderer(
+				classPK);
 
-				if (assetRenderer.hasViewPermission(permissionChecker)) {
-					return true;
-				}
-				else {
-					return false;
-				}
-			}
-			catch (PortalException pe) {
-			}
+			return assetRenderer.hasViewPermission(permissionChecker);
+		}
+		catch (PortalException pe) {
+			_log.error(pe, pe);
 		}
 
 		return false;
@@ -138,5 +137,8 @@ public class WorkflowTaskPermissionChecker {
 
 		return false;
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		WorkflowTaskPermissionChecker.class);
 
 }
