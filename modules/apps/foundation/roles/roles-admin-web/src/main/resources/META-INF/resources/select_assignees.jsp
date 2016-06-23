@@ -69,6 +69,7 @@ request.setAttribute("edit_role_assignments.jsp-portletURL", portletURL);
 
 		<%
 		PortletURL usersPortletURL = PortletURLUtil.clone(portletURL, renderResponse);
+
 		usersPortletURL.setParameter("tabs1", "users");
 		%>
 
