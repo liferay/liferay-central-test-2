@@ -829,9 +829,9 @@
 		<var name="key_vocabularyName" value="${vocabularyName}" />
 
 		<if>
-			<condition function="IsElementNotPresent" locator1="CPKnowledgebaseadminAddarticle#CATEGORIZATION_HEADER_EXPANDED" />
+			<condition function="IsElementNotPresent" locator1="AssetCategorization#CATEGORIZATION_PANEL_EXPANDED" />
 			<then>
-				<execute function="Click" locator1="CPKnowledgebaseadminAddarticle#CATEGORIZATION_HEADER_COLLAPSED" />
+				<execute function="Click" locator1="AssetCategorization#CATEGORIZATION_PANEL_COLLAPSED" />
 			</then>
 		</if>
 
