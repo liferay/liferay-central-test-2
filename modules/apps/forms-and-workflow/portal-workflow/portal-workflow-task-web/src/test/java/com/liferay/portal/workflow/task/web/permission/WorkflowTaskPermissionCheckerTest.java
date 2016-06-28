@@ -200,7 +200,6 @@ public class WorkflowTaskPermissionCheckerTest extends PowerMockito {
 				mockOmniadminPermissionChecker()));
 	}
 
-	@SuppressWarnings({"rawtypes", "unchecked"})
 	protected void mockAssetRendererHasViewPermission(
 			boolean hasAssetViewPermission)
 		throws PortalException {
@@ -309,15 +308,15 @@ public class WorkflowTaskPermissionCheckerTest extends PowerMockito {
 		workflowTaskAssignees.add(workflowTaskAssignee);
 
 		when(
-			workflowTask.getWorkflowTaskAssignees()
-		).thenReturn(
-			workflowTaskAssignees
-		);
-
-		when(
 			workflowTask.getOptionalAttributes()
 		).thenReturn(
 			new HashMap<String, Serializable>()
+		);
+
+		when(
+			workflowTask.getWorkflowTaskAssignees()
+		).thenReturn(
+			workflowTaskAssignees
 		);
 
 		return workflowTask;
