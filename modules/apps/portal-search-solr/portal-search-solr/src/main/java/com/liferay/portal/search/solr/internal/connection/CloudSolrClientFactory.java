@@ -41,17 +41,16 @@ public class CloudSolrClientFactory implements SolrClientFactory {
 			HttpClientFactory httpClientFactory)
 		throws Exception {
 
-		String zkHost = solrConfiguration.zkHost();
-
-		if (Validator.isNull(zkHost)) {
-			throw new IllegalStateException("Must configure Zookeeper host");
-		}
-
 		String defaultCollection = solrConfiguration.defaultCollection();
 
 		if (Validator.isNull(defaultCollection)) {
-			throw new IllegalStateException(
-				"Must configure default collection name");
+			throw new IllegalStateException("Default collection is null");
+		}
+
+		String zkHost = solrConfiguration.zkHost();
+
+		if (Validator.isNull(zkHost)) {
+			throw new IllegalStateException("Zookeeper host is null");
 		}
 
 		HttpClient httpClient = httpClientFactory.createInstance();
