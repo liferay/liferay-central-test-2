@@ -62,8 +62,6 @@ public class _CLASS_TrackingAction extends BaseJSPTrackingAction {
 			String id, Map<String, String> values)
 		throws InvalidTrackingActionException {
 
-		// Custom logic to Store the configuration
-
 		return null;
 	}
 
@@ -86,17 +84,11 @@ public class _CLASS_TrackingAction extends BaseJSPTrackingAction {
 		String eventType = StringPool.BLANK;
 
 		if (!values.isEmpty()) {
-
-			// Values from the request in case there is an error
-
 			alias = values.get("alias");
 			elementId = values.get("elementId");
 			eventType = values.get("eventType");
 		}
 		else if (trackingActionInstance != null) {
-
-			// Values from the Stored Cofiguration
-
 			alias = trackingActionInstance.getAlias();
 			elementId = trackingActionInstance.getElementId();
 			eventType = trackingActionInstance.getEventType();
@@ -107,9 +99,6 @@ public class _CLASS_TrackingAction extends BaseJSPTrackingAction {
 		context.put("eventType", eventType);
 		context.put("eventTypes", getEventTypes());
 	}
-
-	// The different event types that can be tracked for this element
-	// (e.g. click, view, submit, play...)
 
 	private static final String[] _EVENT_TYPES = {"click"};
 
