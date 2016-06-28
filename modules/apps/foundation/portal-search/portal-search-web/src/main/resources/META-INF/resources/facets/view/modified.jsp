@@ -91,8 +91,8 @@ int index = 0;
 
 							data = new HashMap<>();
 
-							data.put("value", HtmlUtil.escape(range));
 							data.put("selection", index);
+							data.put("value", HtmlUtil.escape(range));
 							%>
 
 							<aui:a cssClass="<%= rangeCssClass %>" data="<%= data %>" href="javascript:;">
