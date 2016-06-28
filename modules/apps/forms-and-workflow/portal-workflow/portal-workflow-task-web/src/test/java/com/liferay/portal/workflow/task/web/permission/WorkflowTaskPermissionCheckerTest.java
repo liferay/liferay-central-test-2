@@ -158,12 +158,12 @@ public class WorkflowTaskPermissionCheckerTest extends PowerMockito {
 
 		long[] permissionCheckerRoleIds = randomPermissionCheckerRoleIds();
 
+		WorkflowTask workflowTask = mockWorkflowTask(
+			Role.class.getName(), permissionCheckerRoleIds[0]);
+
 		PermissionChecker permissionChecker = mockPermissionChecker(
 			RandomTestUtil.randomLong(), permissionCheckerRoleIds, false, false,
 			false);
-
-		WorkflowTask workflowTask = mockWorkflowTask(
-			Role.class.getName(), permissionCheckerRoleIds[0]);
 
 		mockAssetRendererHasViewPermission(true);
 
@@ -178,12 +178,12 @@ public class WorkflowTaskPermissionCheckerTest extends PowerMockito {
 
 		long[] permissionCheckerRoleIds = randomPermissionCheckerRoleIds();
 
+		WorkflowTask workflowTask = mockWorkflowTask(
+			Role.class.getName(), permissionCheckerRoleIds[0]);
+
 		PermissionChecker permissionChecker = mockPermissionChecker(
 			RandomTestUtil.randomLong(), permissionCheckerRoleIds, false, false,
 			false);
-
-		WorkflowTask workflowTask = mockWorkflowTask(
-			Role.class.getName(), permissionCheckerRoleIds[0]);
 
 		mockAssetRendererHasViewPermission(false);
 
