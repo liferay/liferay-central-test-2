@@ -22,7 +22,7 @@
 		/>
 
 		<liferay-ui:search-container-column-text
-				colspan="<%= 2 %>"
+			colspan="<%= 2 %>"
 		>
 			<h5><%= organization.getName() %></h5>
 
@@ -42,8 +42,8 @@
 		</liferay-ui:search-container-column-text>
 
 		<liferay-ui:search-container-column-jsp
-				cssClass="entry-action-column"
-				path="/organization_action.jsp"
+			cssClass="entry-action-column"
+			path="/organization_action.jsp"
 		/>
 	</c:when>
 	<c:when test='<%= displayStyle.equals("icon") %>'>
@@ -54,14 +54,14 @@
 
 		<liferay-ui:search-container-column-text>
 			<liferay-frontend:icon-vertical-card
-					actionJsp="/organization_action.jsp"
-					actionJspServletContext="<%= application %>"
-					cssClass="entry-display-style"
-					icon="users"
-					resultRow="<%= row %>"
-					rowChecker="<%= rowChecker %>"
-					subtitle="<%= LanguageUtil.get(request, organization.getType()) %>"
-					title="<%= organization.getName() %>"
+				actionJsp="/organization_action.jsp"
+				actionJspServletContext="<%= application %>"
+				cssClass="entry-display-style"
+				icon="users"
+				resultRow="<%= row %>"
+				rowChecker="<%= rowChecker %>"
+				subtitle="<%= LanguageUtil.get(request, organization.getType()) %>"
+				title="<%= organization.getName() %>"
 			/>
 		</liferay-ui:search-container-column-text>
 	</c:when>
