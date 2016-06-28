@@ -46,7 +46,7 @@ public class LoadBalancerUtilTest extends BaseJenkinsResultsParserTestCase {
 
 	@Test
 	public void testGetMostAvailableMasterURL() throws Exception {
-		LoadBalancerUtil.recentBatchPeriod = 0;
+		LoadBalancerUtil._RECENT_BATCH_AGE = 0;
 
 		assertSamples();
 	}
