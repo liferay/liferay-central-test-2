@@ -118,10 +118,10 @@ public class LoadBalancerUtilTest extends BaseJenkinsResultsParserTestCase {
 	protected void downloadSample(File sampleDir, URL url) throws Exception {
 		Properties properties = getDownloadProperties(sampleDir.getName());
 
-		List<String> hostNames = LoadBalancerUtil.getMasters(
+		List<String> masters = LoadBalancerUtil.getMasters(
 			sampleDir.getName(), properties);
 
-		for (int i = 1; i <= hostNames.size(); i++) {
+		for (int i = 1; i <= masters.size(); i++) {
 			downloadSampleURL(
 				new File(sampleDir, sampleDir.getName() + "-" + i),
 				JenkinsResultsParserUtil.createURL(
