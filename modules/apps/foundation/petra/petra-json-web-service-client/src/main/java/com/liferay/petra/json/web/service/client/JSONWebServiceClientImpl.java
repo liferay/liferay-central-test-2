@@ -197,9 +197,9 @@ public class JSONWebServiceClientImpl implements JSONWebServiceClient {
 			_logger.debug(
 				"Sending DELETE request to " + _login + "@" + _hostName + url);
 
-			logArguments("Http parameters", parameters);
+			log("HTTP parameters", parameters);
 
-			logArguments("Http headers", headers);
+			log("HTTP headers", headers);
 		}
 
 		HttpDelete httpDelete = new HttpDelete(url);
@@ -239,9 +239,9 @@ public class JSONWebServiceClientImpl implements JSONWebServiceClient {
 			_logger.debug(
 				"Sending GET request to " + _login + "@" + _hostName + url);
 
-			logArguments("Http parameters", parameters);
+			log("HTTP parameters", parameters);
 
-			logArguments("Http headers", headers);
+			log("HTTP headers", headers);
 		}
 
 		HttpGet httpGet = new HttpGet(url);
@@ -272,9 +272,9 @@ public class JSONWebServiceClientImpl implements JSONWebServiceClient {
 			_logger.debug(
 				"Sending POST request to " + _login + "@" + _hostName + url);
 
-			logArguments("Http parameters", parameters);
+			log("HTTP parameters", parameters);
 
-			logArguments("Http headers", headers);
+			log("HTTP headers", headers);
 		}
 
 		HttpPost httpPost = new HttpPost(url);
@@ -338,9 +338,9 @@ public class JSONWebServiceClientImpl implements JSONWebServiceClient {
 			_logger.debug(
 				"Sending PUT request to " + _login + "@" + _hostName + url);
 
-			logArguments("Http parameters", parameters);
+			log("HTTP parameters", parameters);
 
-			logArguments("Http headers", headers);
+			log("HTTP headers", headers);
 		}
 
 		HttpPut httpPut = new HttpPut(url);
@@ -581,26 +581,22 @@ public class JSONWebServiceClientImpl implements JSONWebServiceClient {
 		return false;
 	}
 
-	protected void logArguments(
-		String argumentType, Map<String, String> arguments) {
-
-		if (!_logger.isDebugEnabled() || arguments.isEmpty()) {
+	protected void log(String message, Map<String, String> map) {
+		if (!_logger.isDebugEnabled() || map.isEmpty()) {
 			return;
 		}
 
-		StringBuilder sb = new StringBuilder((arguments.size() * 4) + 2);
+		StringBuilder sb = new StringBuilder((map.size() * 4) + 2);
 
-		sb.append(argumentType);
+		sb.append(message);
 		sb.append(":");
 
-		for (Map.Entry<String, String> entry : arguments.entrySet()) {
+		for (Map.Entry<String, String> entry : map.entrySet()) {
 			String key = entry.getKey();
-
 			String value = entry.getValue();
 
 			if (value == null) {
 				key = "-" + key;
-
 				value = "";
 			}
 
