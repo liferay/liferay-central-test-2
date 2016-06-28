@@ -290,7 +290,7 @@ public class LoadBalancerUtil {
 				continue;
 			}
 
-			System.out.println("Master name prefix: " + masterPrefix);
+			System.out.println("Master prefix: " + masterPrefix);
 			System.out.println("Masters: " + masters);
 
 			return masters;
