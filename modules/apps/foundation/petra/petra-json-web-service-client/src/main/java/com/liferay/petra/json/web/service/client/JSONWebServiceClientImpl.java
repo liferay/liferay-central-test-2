@@ -196,6 +196,10 @@ public class JSONWebServiceClientImpl implements JSONWebServiceClient {
 		if (_logger.isDebugEnabled()) {
 			_logger.debug(
 				"Sending DELETE request to " + _login + "@" + _hostName + url);
+
+			logArguments("Http parameters", parameters);
+
+			logArguments("Http headers", headers);
 		}
 
 		HttpDelete httpDelete = new HttpDelete(url);
@@ -234,6 +238,10 @@ public class JSONWebServiceClientImpl implements JSONWebServiceClient {
 		if (_logger.isDebugEnabled()) {
 			_logger.debug(
 				"Sending GET request to " + _login + "@" + _hostName + url);
+
+			logArguments("Http parameters", parameters);
+
+			logArguments("Http headers", headers);
 		}
 
 		HttpGet httpGet = new HttpGet(url);
@@ -263,6 +271,10 @@ public class JSONWebServiceClientImpl implements JSONWebServiceClient {
 		if (_logger.isDebugEnabled()) {
 			_logger.debug(
 				"Sending POST request to " + _login + "@" + _hostName + url);
+
+			logArguments("Http parameters", parameters);
+
+			logArguments("Http headers", headers);
 		}
 
 		HttpPost httpPost = new HttpPost(url);
@@ -325,6 +337,10 @@ public class JSONWebServiceClientImpl implements JSONWebServiceClient {
 		if (_logger.isDebugEnabled()) {
 			_logger.debug(
 				"Sending PUT request to " + _login + "@" + _hostName + url);
+
+			logArguments("Http parameters", parameters);
+
+			logArguments("Http headers", headers);
 		}
 
 		HttpPut httpPut = new HttpPut(url);
@@ -563,6 +579,38 @@ public class JSONWebServiceClientImpl implements JSONWebServiceClient {
 		}
 
 		return false;
+	}
+
+	protected void logArguments(
+		String argumentType, Map<String, String> arguments) {
+
+		if (!_logger.isDebugEnabled() || arguments.isEmpty()) {
+			return;
+		}
+
+		StringBuilder sb = new StringBuilder((arguments.size() * 4) + 2);
+
+		sb.append(argumentType);
+		sb.append(":");
+
+		for (Map.Entry<String, String> entry : arguments.entrySet()) {
+			String key = entry.getKey();
+
+			String value = entry.getValue();
+
+			if (value == null) {
+				key = "-" + key;
+
+				value = "";
+			}
+
+			sb.append("\n");
+			sb.append(key);
+			sb.append("=");
+			sb.append(value);
+		}
+
+		_logger.debug(sb.toString());
 	}
 
 	protected void setProxyHost(HttpClientBuilder httpClientBuilder) {
