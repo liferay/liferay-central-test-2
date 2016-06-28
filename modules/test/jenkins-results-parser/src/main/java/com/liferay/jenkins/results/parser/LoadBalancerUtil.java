@@ -308,34 +308,32 @@ public class LoadBalancerUtil {
 	protected static int getRecentBatchSizesTotal(String master)
 		throws Exception {
 
-		List<BatchSizeRecord> masterRecentBatchSizes = _recentBatchSizeRecordsMap.get(
-			master);
+		List<BatchSizeRecord> recentBatchSizeRecords =
+			_recentBatchSizeRecordsMap.get(master);
 
-		if ((masterRecentBatchSizes == null) ||
-			masterRecentBatchSizes.isEmpty()) {
+		if ((recentBatchSizeRecords == null) ||
+			recentBatchSizeRecords.isEmpty()) {
 
 			return 0;
 		}
 
 		int recentBatchSizesTotal = 0;
 
-		List<BatchSizeRecord> masterRecentBatchSizeEntriesToBeRemoved =
-			new ArrayList<>(masterRecentBatchSizes.size());
+		List<BatchSizeRecord> oldBatchSizeRecords =
+			new ArrayList<>(recentBatchSizeRecords.size());
 
-		for (BatchSizeRecord recentBatchSizeRecord : masterRecentBatchSizes) {
+		for (BatchSizeRecord recentBatchSizeRecord : recentBatchSizeRecords) {
 			if ((recentBatchSizeRecord.timestamp + recentBatchPeriod) >
 					System.currentTimeMillis()) {
 
 				recentBatchSizesTotal += recentBatchSizeRecord.size;
 			}
 			else {
-				masterRecentBatchSizeEntriesToBeRemoved.add(
-					recentBatchSizeRecord);
+				oldBatchSizeRecords.add(recentBatchSizeRecord);
 			}
 		}
 
-		masterRecentBatchSizes.removeAll(
-			masterRecentBatchSizeEntriesToBeRemoved);
+		recentBatchSizeRecords.removeAll(oldBatchSizeRecords);
 
 		return recentBatchSizesTotal;
 	}
