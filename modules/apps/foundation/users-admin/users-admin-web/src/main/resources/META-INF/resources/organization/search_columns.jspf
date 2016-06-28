@@ -113,8 +113,8 @@
 		</c:if>
 
 		<liferay-ui:search-container-column-jsp
-				cssClass="entry-action-column"
-				path="/organization_action.jsp"
+			cssClass="entry-action-column"
+			path="/organization_action.jsp"
 		/>
 	</c:otherwise>
 </c:choose>
