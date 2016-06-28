@@ -157,13 +157,14 @@ public class LoadBalancerUtil {
 			}
 			finally {
 				if (recentBatchPeriod > 0) {
-					List<BatchSizeRecord> masterRecentBatchSizes =
-						_recentBatchSizesMap.get(masters.get(x));
+					List<BatchSizeRecord> recentBatchSizeRecords =
+						_recentBatchSizeRecordsMap.get(masters.get(x));
 
-					if (masterRecentBatchSizes == null) {
-						masterRecentBatchSizes = new ArrayList<>();
-						_recentBatchSizesMap.put(
-							masters.get(x), masterRecentBatchSizes);
+					if (recentBatchSizeRecords == null) {
+						recentBatchSizeRecords = new ArrayList<>();
+
+						_recentBatchSizeRecordsMap.put(
+							masters.get(x), recentBatchSizeRecords);
 					}
 
 					int invokedBatchSize = 0;
@@ -177,7 +178,7 @@ public class LoadBalancerUtil {
 					}
 
 					if (invokedBatchSize != 0) {
-						masterRecentBatchSizes.add(
+						recentBatchSizeRecords.add(
 							new BatchSizeRecord(
 								invokedBatchSize, System.currentTimeMillis()));
 					}
@@ -307,7 +308,7 @@ public class LoadBalancerUtil {
 	protected static int getRecentBatchSizesTotal(String master)
 		throws Exception {
 
-		List<BatchSizeRecord> masterRecentBatchSizes = _recentBatchSizesMap.get(
+		List<BatchSizeRecord> masterRecentBatchSizes = _recentBatchSizeRecordsMap.get(
 			master);
 
 		if ((masterRecentBatchSizes == null) ||
@@ -408,7 +409,7 @@ public class LoadBalancerUtil {
 	private static final Pattern _masterNamePattern =
 		Pattern.compile(".*/(?<masterName>[^/]+)/?");
 	private static final Map<String, List<BatchSizeRecord>>
-		_recentBatchSizesMap = new HashMap<>();
+		_recentBatchSizeRecordsMap = new HashMap<>();
 	private static final Pattern _urlPattern = Pattern.compile(
 		"http://(?<masterPrefix>.+-\\d?).liferay.com");
 
