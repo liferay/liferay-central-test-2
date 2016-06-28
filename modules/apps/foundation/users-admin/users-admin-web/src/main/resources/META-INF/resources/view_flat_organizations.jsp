@@ -34,11 +34,11 @@ String usersListView = (String)request.getAttribute("view.jsp-usersListView");
 
 PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 
+portletURL.setParameter("displayStyle", displayStyle);
+
 String keywords = ParamUtil.getString(request, "keywords");
 
 LinkedHashMap<String, Object> organizationParams = new LinkedHashMap<String, Object>();
-
-portletURL.setParameter("displayStyle", displayStyle);
 
 boolean showList = true;
 

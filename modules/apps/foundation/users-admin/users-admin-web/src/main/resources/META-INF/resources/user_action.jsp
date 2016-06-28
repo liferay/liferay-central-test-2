@@ -17,9 +17,9 @@
 <%@ include file="/init.jsp" %>
 
 <%
-UserSearch searchContainer = (UserSearch)request.getAttribute("liferay-ui:search:searchContainer");
-
 String redirect = currentURL;
+
+UserSearch searchContainer = (UserSearch)request.getAttribute("liferay-ui:search:searchContainer");
 
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
