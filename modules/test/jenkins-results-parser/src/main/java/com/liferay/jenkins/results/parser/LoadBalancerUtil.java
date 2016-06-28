@@ -14,7 +14,6 @@
 
 package com.liferay.jenkins.results.parser;
 
-import java.io.File;
 import java.io.StringReader;
 
 import java.util.ArrayList;
@@ -156,7 +155,7 @@ public class LoadBalancerUtil {
 				return "http://" + masters.get(x);
 			}
 			finally {
-				if (_RECENT_BATCH_AGE > 0) {
+				if (RECENT_BATCH_AGE > 0) {
 					List<BatchRecord> recentBatchSizeRecords =
 						_recentBatchRecordsMap.get(masters.get(x));
 
@@ -308,12 +307,10 @@ public class LoadBalancerUtil {
 	protected static int getRecentBatchSizesTotal(String master)
 		throws Exception {
 
-		List<BatchRecord> recentBatchRecords =
-			_recentBatchRecordsMap.get(master);
+		List<BatchRecord> recentBatchRecords = _recentBatchRecordsMap.get(
+			master);
 
-		if ((recentBatchRecords == null) ||
-			recentBatchRecords.isEmpty()) {
-
+		if ((recentBatchRecords == null) || recentBatchRecords.isEmpty()) {
 			return 0;
 		}
 
@@ -323,7 +320,7 @@ public class LoadBalancerUtil {
 			recentBatchRecords.size());
 
 		for (BatchRecord recentBatchRecord : recentBatchRecords) {
-			if ((recentBatchRecord.timestamp + _RECENT_BATCH_AGE) >
+			if ((recentBatchRecord.timestamp + RECENT_BATCH_AGE) >
 					System.currentTimeMillis()) {
 
 				recentBatchSizesTotal += recentBatchRecord.size;
@@ -361,12 +358,12 @@ public class LoadBalancerUtil {
 		executorService.shutdown();
 	}
 
-	protected static long _RECENT_BATCH_AGE = 120 * 1000;
+	protected static long RECENT_BATCH_AGE = 120 * 1000;
 
 	private static final Pattern _masterPattern =
 		Pattern.compile(".*/(?<master>[^/]+)/?");
-	private static final Map<String, List<BatchRecord>>
-		_recentBatchRecordsMap = new HashMap<>();
+	private static final Map<String, List<BatchRecord>> _recentBatchRecordsMap =
+		new HashMap<>();
 	private static final Pattern _urlPattern = Pattern.compile(
 		"http://(?<masterPrefix>.+-\\d?).liferay.com");
 
