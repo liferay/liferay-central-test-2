@@ -81,7 +81,7 @@ public class WorkflowTaskPermissionCheckerTest extends PowerMockito {
 
 	@Test
 	public void testIsContentReviewerRoleHasPermission() {
-		long[] permissionCheckerRoleIds = randomPermissionRoles();
+		long[] permissionCheckerRoleIds = randomPermissionCheckerRoleIds();
 
 		PermissionChecker permissionChecker =
 			mockContentReviewerPermissionChecker(
@@ -156,7 +156,7 @@ public class WorkflowTaskPermissionCheckerTest extends PowerMockito {
 	public void testNotContentReviewerWithAssetViewPermissionHasPermission()
 		throws PortalException {
 
-		long[] permissionCheckerRoleIds = randomPermissionRoles();
+		long[] permissionCheckerRoleIds = randomPermissionCheckerRoleIds();
 
 		PermissionChecker permissionChecker = mockPermissionChecker(
 			RandomTestUtil.randomLong(), permissionCheckerRoleIds, false, false,
@@ -176,7 +176,7 @@ public class WorkflowTaskPermissionCheckerTest extends PowerMockito {
 	public void testNotContentReviewerWithNoAssetViewPermissionHasNoPermission()
 		throws PortalException {
 
-		long[] permissionCheckerRoleIds = randomPermissionRoles();
+		long[] permissionCheckerRoleIds = randomPermissionCheckerRoleIds();
 
 		PermissionChecker permissionChecker = mockPermissionChecker(
 			RandomTestUtil.randomLong(), permissionCheckerRoleIds, false, false,
@@ -343,7 +343,7 @@ public class WorkflowTaskPermissionCheckerTest extends PowerMockito {
 		return workflowTaskAssignee;
 	}
 
-	protected long[] randomPermissionRoles() {
+	protected long[] randomPermissionCheckerRoleIds() {
 		return new long[] {RandomTestUtil.randomLong()};
 	}
 
