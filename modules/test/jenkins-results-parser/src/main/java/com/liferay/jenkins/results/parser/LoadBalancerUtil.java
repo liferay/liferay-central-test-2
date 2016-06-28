@@ -156,14 +156,14 @@ public class LoadBalancerUtil {
 				return "http://" + masters.get(x);
 			}
 			finally {
-				if (recentBatchPeriod > 0) {
-					List<BatchSizeRecord> recentBatchSizeRecords =
-						_recentBatchSizeRecordsMap.get(masters.get(x));
+				if (_RECENT_BATCH_AGE > 0) {
+					List<BatchRecord> recentBatchSizeRecords =
+						_recentBatchRecordsMap.get(masters.get(x));
 
 					if (recentBatchSizeRecords == null) {
 						recentBatchSizeRecords = new ArrayList<>();
 
-						_recentBatchSizeRecordsMap.put(
+						_recentBatchRecordsMap.put(
 							masters.get(x), recentBatchSizeRecords);
 					}
 
@@ -179,7 +179,7 @@ public class LoadBalancerUtil {
 
 					if (invokedBatchSize != 0) {
 						recentBatchSizeRecords.add(
-							new BatchSizeRecord(
+							new BatchRecord(
 								invokedBatchSize, System.currentTimeMillis()));
 					}
 				}
@@ -308,32 +308,32 @@ public class LoadBalancerUtil {
 	protected static int getRecentBatchSizesTotal(String master)
 		throws Exception {
 
-		List<BatchSizeRecord> recentBatchSizeRecords =
-			_recentBatchSizeRecordsMap.get(master);
+		List<BatchRecord> recentBatchRecords =
+			_recentBatchRecordsMap.get(master);
 
-		if ((recentBatchSizeRecords == null) ||
-			recentBatchSizeRecords.isEmpty()) {
+		if ((recentBatchRecords == null) ||
+			recentBatchRecords.isEmpty()) {
 
 			return 0;
 		}
 
 		int recentBatchSizesTotal = 0;
 
-		List<BatchSizeRecord> oldBatchSizeRecords =
-			new ArrayList<>(recentBatchSizeRecords.size());
+		List<BatchRecord> oldBatchRecords = new ArrayList<>(
+			recentBatchRecords.size());
 
-		for (BatchSizeRecord recentBatchSizeRecord : recentBatchSizeRecords) {
-			if ((recentBatchSizeRecord.timestamp + recentBatchPeriod) >
+		for (BatchRecord recentBatchRecord : recentBatchRecords) {
+			if ((recentBatchRecord.timestamp + _RECENT_BATCH_AGE) >
 					System.currentTimeMillis()) {
 
-				recentBatchSizesTotal += recentBatchSizeRecord.size;
+				recentBatchSizesTotal += recentBatchRecord.size;
 			}
 			else {
-				oldBatchSizeRecords.add(recentBatchSizeRecord);
+				oldBatchRecords.add(recentBatchRecord);
 			}
 		}
 
-		recentBatchSizeRecords.removeAll(oldBatchSizeRecords);
+		recentBatchRecords.removeAll(oldBatchRecords);
 
 		return recentBatchSizesTotal;
 	}
@@ -361,53 +361,12 @@ public class LoadBalancerUtil {
 		executorService.shutdown();
 	}
 
-	protected static void waitForTurn(File file, int masterCount)
-		throws Exception {
-
-		long start = System.currentTimeMillis();
-
-		try {
-			while (true) {
-				if (!file.exists()) {
-					JenkinsResultsParserUtil.write(file, "");
-
-					return;
-				}
-
-				long age = System.currentTimeMillis() - file.lastModified();
-				String content = JenkinsResultsParserUtil.read(file);
-
-				if (content.length() > 0) {
-					if (age < _MAX_AGE) {
-						Thread.sleep(1000);
-
-						continue;
-					}
-					else {
-						System.out.println(
-							"Sempahore file " + file + " timed out: " +
-								content);
-					}
-				}
-
-				return;
-			}
-		}
-		finally {
-			System.out.println(
-				"Waited " + ((System.currentTimeMillis() - start) / 1000F) +
-					" seconds.");
-		}
-	}
-
-	protected static long recentBatchPeriod = 120 * 1000;
-
-	private static final long _MAX_AGE = 30 * 1000;
+	protected static long _RECENT_BATCH_AGE = 120 * 1000;
 
 	private static final Pattern _masterPattern =
 		Pattern.compile(".*/(?<master>[^/]+)/?");
-	private static final Map<String, List<BatchSizeRecord>>
-		_recentBatchSizeRecordsMap = new HashMap<>();
+	private static final Map<String, List<BatchRecord>>
+		_recentBatchRecordsMap = new HashMap<>();
 	private static final Pattern _urlPattern = Pattern.compile(
 		"http://(?<masterPrefix>.+-\\d?).liferay.com");
 
@@ -530,12 +489,12 @@ public class LoadBalancerUtil {
 
 	}
 
-	private static class BatchSizeRecord {
+	private static class BatchRecord {
 
 		public int size;
 		public long timestamp;
 
-		private BatchSizeRecord(int size, long timestamp) {
+		private BatchRecord(int size, long timestamp) {
 			this.size = size;
 			this.timestamp = timestamp;
 		}
