@@ -274,13 +274,13 @@ public class LoadBalancerUtil {
 				"jenkins.local.url[" + masterPrefix + "-" + i + "]");
 
 			if ((jenkinsLocalURL != null) && (jenkinsLocalURL.length() > 0)) {
-				Matcher matcher = _masterNamePattern.matcher(jenkinsLocalURL);
+				Matcher matcher = _masterPattern.matcher(jenkinsLocalURL);
 
 				if (!matcher.find()) {
 					continue;
 				}
 
-				String jenkinsLocalMaster = matcher.group("masterName");
+				String jenkinsLocalMaster = matcher.group("master");
 
 				if (!blacklist.contains(jenkinsLocalMaster)) {
 					masters.add(jenkinsLocalMaster);
@@ -406,8 +406,8 @@ public class LoadBalancerUtil {
 
 	private static final long _MAX_AGE = 30 * 1000;
 
-	private static final Pattern _masterNamePattern =
-		Pattern.compile(".*/(?<masterName>[^/]+)/?");
+	private static final Pattern _masterPattern =
+		Pattern.compile(".*/(?<master>[^/]+)/?");
 	private static final Map<String, List<BatchSizeRecord>>
 		_recentBatchSizeRecordsMap = new HashMap<>();
 	private static final Pattern _urlPattern = Pattern.compile(
