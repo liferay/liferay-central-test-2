@@ -54,16 +54,6 @@ public class IconDeleteTag extends IconTag {
 		String cssClass = GetterUtil.getString(getCssClass());
 
 		setCssClass(cssClass.concat(" item-remove"));
-		setMarkupView("lexicon");
-
-		if (Validator.isNull(getMessage())) {
-			if (_trash) {
-				setMessage("move-to-the-recycle-bin");
-			}
-			else {
-				setMessage("delete");
-			}
-		}
 
 		String icon = StringPool.BLANK;
 
@@ -81,6 +71,17 @@ public class IconDeleteTag extends IconTag {
 		}
 
 		setIcon(icon);
+
+		setMarkupView("lexicon");
+
+		if (Validator.isNull(getMessage())) {
+			if (_trash) {
+				setMessage("move-to-the-recycle-bin");
+			}
+			else {
+				setMessage("delete");
+			}
+		}
 
 		String url = getUrl();
 
