@@ -34,10 +34,10 @@ Map<String, Object> context = (Map<String, Object>)request.getAttribute("context
 <aui:select label="event-type" name='<%= ContentTargetingUtil.GUID_REPLACEMENT + "eventType" %>'>
 
 	<%
-	for (String curEventType : (List<String>)context.get("eventTypes")) {
+	for (String eventType : (List<String>)context.get("eventTypes")) {
 	%>
 
-		<aui:option label="<%= curEventType %>" selected='<%= curEventType.equals(GetterUtil.getString(context.get("eventType"), "click")) %>' value="<%= curEventType %>" />
+		<aui:option label="<%= eventType %>" selected='<%= eventType.equals(GetterUtil.getString(context.get("eventType"), "click")) %>' value="<%= eventType %>" />
 
 	<%
 	}
