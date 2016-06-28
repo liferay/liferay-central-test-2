@@ -231,8 +231,7 @@ public class DownloadEntriesMVCResourceCommand implements MVCResourceCommand {
 			return folder.getName() + ".zip";
 		}
 		else {
-			return LanguageUtil.get(
-				locale, "documents-and-media") + ".zip";
+			return LanguageUtil.get(locale, "documents-and-media") + ".zip";
 		}
 	}
 
