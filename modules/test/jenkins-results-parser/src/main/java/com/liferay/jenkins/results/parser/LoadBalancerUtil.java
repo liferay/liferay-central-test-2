@@ -51,16 +51,16 @@ public class LoadBalancerUtil {
 			String baseInvocationURL = properties.getProperty(
 				"base.invocation.url");
 
-			String masterNamePrefix = getMasterNamePrefix(baseInvocationURL);
+			String masterPrefix = getMasterPrefix(baseInvocationURL);
 
-			if (masterNamePrefix.equals(baseInvocationURL)) {
+			if (masterPrefix.equals(baseInvocationURL)) {
 				return baseInvocationURL;
 			}
 
-			List<String> masters = getMasters(masterNamePrefix, properties);
+			List<String> masters = getMasters(masterPrefix, properties);
 
 			if (masters.size() == 1) {
-				return "http://" + masterNamePrefix + "-1";
+				return "http://" + masterPrefix + "-1";
 			}
 
 			int maxAvailableSlaveCount = Integer.MIN_VALUE;
@@ -71,7 +71,7 @@ public class LoadBalancerUtil {
 					masters.size());
 
 				startParallelTasks(
-					futureTasks, masters, masterNamePrefix, properties);
+					futureTasks, masters, masterPrefix, properties);
 
 				List<Integer> badIndices = new ArrayList<>(futureTasks.size());
 				List<Integer> maxIndices = new ArrayList<>(futureTasks.size());
@@ -251,18 +251,18 @@ public class LoadBalancerUtil {
 		return blacklist;
 	}
 
-	protected static String getMasterNamePrefix(String baseInvocationURL) {
+	protected static String getMasterPrefix(String baseInvocationURL) {
 		Matcher matcher = _urlPattern.matcher(baseInvocationURL);
 
 		if (!matcher.find()) {
 			return baseInvocationURL;
 		}
 
-		return matcher.group("masterNamePrefix");
+		return matcher.group("masterPrefix");
 	}
 
 	protected static List<String> getMasters(
-		String masterNamePrefix, Properties properties) {
+		String masterPrefix, Properties properties) {
 
 		List<String> blacklist = getBlacklist(properties);
 		List<String> masters = new ArrayList<>();
@@ -270,7 +270,7 @@ public class LoadBalancerUtil {
 
 		while (true) {
 			String jenkinsLocalURL = properties.getProperty(
-				"jenkins.local.url[" + masterNamePrefix + "-" + i + "]");
+				"jenkins.local.url[" + masterPrefix + "-" + i + "]");
 
 			if ((jenkinsLocalURL != null) && (jenkinsLocalURL.length() > 0)) {
 				Matcher matcher = _masterNamePattern.matcher(jenkinsLocalURL);
@@ -289,7 +289,7 @@ public class LoadBalancerUtil {
 				continue;
 			}
 
-			System.out.println("Master name prefix: " + masterNamePrefix);
+			System.out.println("Master name prefix: " + masterPrefix);
 			System.out.println("Masters: " + masters);
 
 			return masters;
@@ -341,7 +341,7 @@ public class LoadBalancerUtil {
 
 	protected static void startParallelTasks(
 			List<FutureTask<Integer>> futureTasks, List<String> masters,
-			String masterNamePrefix, Properties properties)
+			String masterPrefix, Properties properties)
 		throws Exception {
 
 		ExecutorService executorService = Executors.newFixedThreadPool(
@@ -410,7 +410,7 @@ public class LoadBalancerUtil {
 	private static final Map<String, List<BatchSizeRecord>>
 		_recentBatchSizesMap = new HashMap<>();
 	private static final Pattern _urlPattern = Pattern.compile(
-		"http://(?<masterNamePrefix>.+-\\d?).liferay.com");
+		"http://(?<masterPrefix>.+-\\d?).liferay.com");
 
 	private static class AvailableSlaveCallable implements Callable<Integer> {
 
