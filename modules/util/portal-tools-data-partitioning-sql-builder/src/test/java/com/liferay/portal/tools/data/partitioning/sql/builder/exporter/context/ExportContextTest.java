@@ -23,7 +23,7 @@ import org.junit.Test;
 public class ExportContextTest {
 
 	@Test
-	public void testConstructorWithCatalog() {
+	public void testConstructorWithCatalogName() {
 		String catalogName = "catalogName";
 
 		ExportContext exportProcess = new ExportContext(
@@ -35,7 +35,7 @@ public class ExportContextTest {
 	}
 
 	@Test
-	public void testConstructorWithoutCatalogShouldUseSchema() {
+	public void testConstructorWithoutCatalogName() {
 		ExportContext exportProcess = new ExportContext(
 			null, null, null, "schemaName", true);
 
