@@ -18,9 +18,11 @@
 
 <%
 String backURL = ParamUtil.getString(request, "backURL");
+
 KBArticle kbArticle = (KBArticle)request.getAttribute(KBWebKeys.KNOWLEDGE_BASE_KB_ARTICLE);
 
 String diffHtmlResults = (String)request.getAttribute(WebKeys.DIFF_HTML_RESULTS);
+
 double sourceVersion = ParamUtil.getDouble(request, "sourceVersion");
 double targetVersion = ParamUtil.getDouble(request, "targetVersion");
 
