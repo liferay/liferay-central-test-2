@@ -57,7 +57,7 @@ public class FieldQueryFactoryImpl implements FieldQueryFactory {
 		}
 
 		if (!isSubstringSearchAlways) {
-			return doCreateQueryForFullTextSearch(field, value);
+			return createQueryForFullTextSearch(field, value);
 		}
 
 		KeywordTokenizer keywordTokenizer = getKeywordTokenizer();
@@ -76,18 +76,18 @@ public class FieldQueryFactoryImpl implements FieldQueryFactory {
 			BooleanQueryImpl booleanQuery = new BooleanQueryImpl();
 
 			for (String token : tokens) {
-				Query query = doCreateQuery(field, token, like);
+				Query tokenQuery = createTokenQuery(field, token, like);
 
-				booleanQuery.add(query, BooleanClauseOccur.SHOULD);
+				booleanQuery.add(tokenQuery, BooleanClauseOccur.SHOULD);
 			}
 
 			return booleanQuery;
 		}
 
-		return doCreateQuery(field, value, like);
+		return createTokenQuery(field, value, like);
 	}
 
-	protected Query doCreatePhraseMatchQuery(String field, String value) {
+	protected Query createPhraseMatchQuery(String field, String value) {
 		if (!isPhrase(value)) {
 			return null;
 		}
@@ -106,17 +106,7 @@ public class FieldQueryFactoryImpl implements FieldQueryFactory {
 		return matchQuery;
 	}
 
-	protected Query doCreateQuery(String field, String value, boolean like) {
-		Query query = doCreatePhraseMatchQuery(field, value);
-
-		if (query != null) {
-			return query;
-		}
-
-		return doCreateQueryForSubstringSearch(field, value);
-	}
-
-	protected Query doCreateQueryForFullTextExactMatch(
+	protected Query createQueryForFullTextExactMatch(
 		String field, String value) {
 
 		MatchQuery matchQuery = new MatchQuery(field, value);
@@ -128,7 +118,7 @@ public class FieldQueryFactoryImpl implements FieldQueryFactory {
 		return matchQuery;
 	}
 
-	protected Query doCreateQueryForFullTextProximity(
+	protected Query createQueryForFullTextProximity(
 		String field, String value) {
 
 		MatchQuery matchQuery = new MatchQuery(field, value);
@@ -140,46 +130,41 @@ public class FieldQueryFactoryImpl implements FieldQueryFactory {
 		return matchQuery;
 	}
 
-	protected Query doCreateQueryForFullTextScoring(
-		String field, String value) {
-
+	protected Query createQueryForFullTextScoring(String field, String value) {
 		BooleanQueryImpl booleanQueryImpl = new BooleanQueryImpl();
 
 		booleanQueryImpl.add(
 			new MatchQuery(field, value), BooleanClauseOccur.MUST);
 
 		booleanQueryImpl.add(
-			doCreateQueryForFullTextExactMatch(field, value),
+			createQueryForFullTextExactMatch(field, value),
 			BooleanClauseOccur.SHOULD);
 
 		booleanQueryImpl.add(
-			doCreateQueryForFullTextProximity(field, value),
+			createQueryForFullTextProximity(field, value),
 			BooleanClauseOccur.SHOULD);
 
 		List<String> phrases = getEmbeddedPhrases(value);
 
 		for (String phrase : phrases) {
 			booleanQueryImpl.add(
-				doCreatePhraseMatchQuery(field, phrase),
-				BooleanClauseOccur.MUST);
+				createPhraseMatchQuery(field, phrase), BooleanClauseOccur.MUST);
 		}
 
 		return booleanQueryImpl;
 	}
 
-	protected Query doCreateQueryForFullTextSearch(String field, String value) {
-		Query query = doCreatePhraseMatchQuery(field, value);
+	protected Query createQueryForFullTextSearch(String field, String value) {
+		Query query = createPhraseMatchQuery(field, value);
 
 		if (query != null) {
 			return query;
 		}
 
-		return doCreateQueryForFullTextScoring(field, value);
+		return createQueryForFullTextScoring(field, value);
 	}
 
-	protected Query doCreateQueryForSubstringSearch(
-		String field, String value) {
-
+	protected Query createQueryForSubstringSearch(String field, String value) {
 		value = StringUtil.replace(value, CharPool.PERCENT, StringPool.BLANK);
 
 		if (value.length() == 0) {
@@ -192,6 +177,16 @@ public class FieldQueryFactoryImpl implements FieldQueryFactory {
 		}
 
 		return new WildcardQueryImpl(new QueryTermImpl(field, value));
+	}
+
+	protected Query createTokenQuery(String field, String value, boolean like) {
+		Query query = createPhraseMatchQuery(field, value);
+
+		if (query != null) {
+			return query;
+		}
+
+		return createQueryForSubstringSearch(field, value);
 	}
 
 	protected List<String> getEmbeddedPhrases(String value) {
