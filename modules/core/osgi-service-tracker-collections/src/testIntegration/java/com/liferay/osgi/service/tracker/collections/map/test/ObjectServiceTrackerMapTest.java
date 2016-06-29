@@ -486,15 +486,21 @@ public class ObjectServiceTrackerMapTest {
 			ServiceTrackerMapFactory.openSingleValueMap(
 				_bundleContext, TrackedOne.class, "(target=*)",
 				new ServiceReferenceMapper<String, TrackedOne>() {
+
+					@Override
 					public void map(
 						ServiceReference<TrackedOne> serviceReference,
 						Emitter<String> emitter) {
 
-						emitter.emit((String)serviceReference.getProperty("target"));
-						emitter.emit((String)serviceReference.getProperty("target"));
+						emitter.emit(
+							(String)serviceReference.getProperty("target"));
+						emitter.emit(
+							(String)serviceReference.getProperty("target"));
 					}
+
 				},
 				new ServiceTrackerCustomizer<TrackedOne, TrackedTwo>() {
+
 					@Override
 					public TrackedTwo addingService(
 						ServiceReference<TrackedOne> serviceReference) {
