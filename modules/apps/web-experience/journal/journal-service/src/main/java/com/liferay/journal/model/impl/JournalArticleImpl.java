@@ -325,11 +325,6 @@ public class JournalArticleImpl extends JournalArticleBaseImpl {
 			return _imagesFolderId;
 		}
 
-		ServiceContext serviceContext = new ServiceContext();
-
-		serviceContext.setAddGroupPermissions(true);
-		serviceContext.setAddGuestPermissions(true);
-
 		Repository repository =
 			PortletFileRepositoryUtil.fetchPortletRepository(
 				getGroupId(), JournalConstants.SERVICE_NAME);
