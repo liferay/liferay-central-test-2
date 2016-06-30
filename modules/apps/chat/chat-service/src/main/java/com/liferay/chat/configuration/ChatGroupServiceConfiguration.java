@@ -32,8 +32,8 @@ public interface ChatGroupServiceConfiguration {
 
 	/**
 	 * Input a list of comma delimited values of allowed social relation types.
-	 * This property will only be used if the property "buddy.list.strategy"
-	 * is set to "sites,social" or "social".
+	 * This property will only be used if the property "buddy.list.strategy" is
+	 * set to "sites,social" or "social".
 	 *
 	 * Valid bidirectional are 12 for "TYPE_BI_CONNECTION", 1 for
 	 * "TYPE_BI_COWORKER", 2 for "TYPE_BI_FRIEND", 3 for
@@ -47,14 +47,15 @@ public interface ChatGroupServiceConfiguration {
 	public int buddyListMaxBuddies();
 
 	/**
-	 * Specify the strategy to generate the list of buddies available in the chat
-	 * list. The value of "all" will include all users in a portal instance. The
-	 * value of "sites" will include all users that belong to sites that a user
-	 * also belongs to. The value of "social" will include all users based on the
-	 * user's social relations and the allowed social relation types defined in
-	 * the property "buddy.list.allowed.social.relation.types". The value of
-	 * "sites,social" will include a combined list of users from the values of
-	 * "sites" and "social".
+	 * Specify the strategy to generate the list of buddies available in the
+	 * chat list. The value of "all" will include all users in a portal
+	 * instance. The value of "sites" will include all users that belong to
+	 * sites that a user also belongs to. The value of "social" will include all
+	 * users based on the user's social relations and the allowed social
+	 * relation types defined in the property
+	 * "buddy.list.allowed.social.relation.types". The value of "sites,social"
+	 * will include a combined list of users from the values of "sites" and
+	 * "social".
 	 */
 	@Meta.AD(deflt = "all", required = false)
 	public String buddyListStrategy();
