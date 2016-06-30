@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.chat.hook.listeners;
+package com.liferay.chat.model.listener;
 
 import com.liferay.chat.jabber.JabberUtil;
 import com.liferay.chat.model.Status;
