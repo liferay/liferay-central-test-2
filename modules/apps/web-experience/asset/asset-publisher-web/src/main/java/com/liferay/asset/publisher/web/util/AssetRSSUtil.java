@@ -182,6 +182,22 @@ public class AssetRSSUtil {
 		return RSSUtil.export(syndFeed);
 	}
 
+	/**
+	 * @deprecated As of 7.0.0, replaced by {@link
+	 *             #getAssetEntries(PortletRequest, PortletResponse,
+	 *             PortletPreferences)}
+	 */
+	@Deprecated
+	protected static List<AssetEntry> getAssetEntries(
+			PortletRequest portletRequest,
+			PortletPreferences portletPreferences)
+		throws Exception {
+
+		throw new UnsupportedOperationException(
+			"This method is deprecated and replaced by #getAssetEntries(" +
+				"PortletRequest, PortletResponse, PortletPreferences)");
+	}
+
 	protected static List<AssetEntry> getAssetEntries(
 			PortletRequest portletRequest, PortletResponse portletResponse,
 			PortletPreferences portletPreferences)
