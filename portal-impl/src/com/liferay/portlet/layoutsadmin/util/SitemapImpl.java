@@ -187,6 +187,7 @@ public class SitemapImpl implements Sitemap {
 		return getSitemap(groupId, null, privateLayout, themeDisplay);
 	}
 
+	@Override
 	public String getSitemap(
 			long groupId, String layoutUuid, boolean privateLayout,
 			ThemeDisplay themeDisplay)
@@ -230,8 +231,7 @@ public class SitemapImpl implements Sitemap {
 	}
 
 	protected void visitLayoutSet(
-			Element element, LayoutSet layoutSet, ThemeDisplay themeDisplay)
-		throws PortalException {
+		Element element, LayoutSet layoutSet, ThemeDisplay themeDisplay) {
 
 		if (layoutSet.isPrivateLayout()) {
 			return;
