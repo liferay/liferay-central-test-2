@@ -15,6 +15,7 @@
 package com.liferay.layouts.admin.kernel.util;
 
 import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
