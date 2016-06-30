@@ -89,6 +89,21 @@ public class AssetPublisherDisplayContext {
 		PAGINATION_TYPE_NONE, PAGINATION_TYPE_REGULAR, PAGINATION_TYPE_SIMPLE
 	};
 
+	/**
+	 * @deprecated As of 7.0.0, replaced by {@link
+	 *             #AssetPublisherDisplayContext(PortletRequest,
+	 *             PortletResponse, PortletPreferences)}
+	 */
+	@Deprecated
+	public AssetPublisherDisplayContext(
+		PortletRequest portletRequest, PortletPreferences portletPreferences) {
+
+		throw new UnsupportedOperationException(
+			"This constructor is deprecated and replaced by " +
+				"#AssetPublisherDisplayContext(PortletRequest, " +
+					"PortletResponse, PortletPreferences)");
+	}
+
 	public AssetPublisherDisplayContext(
 		PortletRequest portletRequest, PortletResponse portletResponse,
 		PortletPreferences portletPreferences) {
