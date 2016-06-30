@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.dao.orm.ScrollableResults;
 import com.liferay.portal.kernel.security.pacl.DoPrivileged;
 import com.liferay.portal.kernel.security.pacl.NotPrivileged;
 import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 
 import java.io.Serializable;
 
@@ -32,8 +33,6 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.kernel.util.StringPool;
 import org.hibernate.LockOptions;
 
 /**
@@ -361,14 +360,7 @@ public class QueryImpl implements Query {
 		sb.append("{names=");
 		sb.append(Arrays.toString(_names));
 		sb.append(", _query=");
-
-		if (_query != null) {
-			sb.append(_query.toString());
-		}
-		else {
-			sb.append(StringPool.NULL);
-		}
-
+		sb.append(String.valueOf(_query));
 		sb.append(", _strictName=");
 		sb.append(_strictName);
 		sb.append("}");

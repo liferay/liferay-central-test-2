@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.dao.orm.Criterion;
 import com.liferay.portal.kernel.dao.orm.Disjunction;
 import com.liferay.portal.kernel.dao.orm.Junction;
 import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.kernel.util.StringPool;
 
 /**
  * @author Raymond Augé
@@ -49,14 +48,7 @@ public class DisjunctionImpl extends CriterionImpl implements Disjunction {
 		StringBundler sb = new StringBundler(3);
 
 		sb.append("{_disjunction=");
-
-		if (_disjunction != null) {
-			sb.append(_disjunction.toString());
-		}
-		else {
-			sb.append(StringPool.NULL);
-		}
-
+		sb.append(String.valueOf(_disjunction));
 		sb.append("}");
 
 		return sb.toString();

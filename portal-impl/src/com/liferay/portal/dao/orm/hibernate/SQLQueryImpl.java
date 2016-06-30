@@ -25,7 +25,6 @@ import com.liferay.portal.kernel.security.pacl.DoPrivileged;
 import com.liferay.portal.kernel.security.pacl.NotPrivileged;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.Serializable;
 
@@ -417,15 +416,8 @@ public class SQLQueryImpl implements SQLQuery {
 
 		sb.append("{names=");
 		sb.append(Arrays.toString(_names));
-		sb.append(", _query=");
-
-		if (_sqlQuery != null) {
-			sb.append(_sqlQuery.toString());
-		}
-		else {
-			sb.append(StringPool.NULL);
-		}
-
+		sb.append(", _sqlQuery=");
+		sb.append(String.valueOf(_sqlQuery));
 		sb.append(", _strictName=");
 		sb.append(_strictName);
 		sb.append("}");

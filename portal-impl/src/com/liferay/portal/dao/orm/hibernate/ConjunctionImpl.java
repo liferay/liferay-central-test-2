@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.dao.orm.Conjunction;
 import com.liferay.portal.kernel.dao.orm.Criterion;
 import com.liferay.portal.kernel.dao.orm.Junction;
 import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.kernel.util.StringPool;
 
 /**
  * @author Raymond Augé
@@ -49,14 +48,7 @@ public class ConjunctionImpl extends CriterionImpl implements Conjunction {
 		StringBundler sb = new StringBundler(3);
 
 		sb.append("{_conjunction=");
-
-		if (_conjunction != null) {
-			sb.append(_conjunction.toString());
-		}
-		else {
-			sb.append(StringPool.NULL);
-		}
-
+		sb.append(String.valueOf(_conjunction));
 		sb.append("}");
 
 		return sb.toString();
