@@ -62,7 +62,8 @@ public class JabberMessageListener implements MessageListener {
 			String resource = JabberUtil.getResource(from);
 
 			if (StringUtil.equalsIgnoreCase(
-					resource, _chatGroupServiceConfiguration.jabberResource())) {
+					resource,
+					_chatGroupServiceConfiguration.jabberResource())) {
 
 				return;
 			}
@@ -77,11 +78,10 @@ public class JabberMessageListener implements MessageListener {
 		}
 	}
 
-	private ChatGroupServiceConfiguration _chatGroupServiceConfiguration;
-
 	private static final Log _log = LogFactoryUtil.getLog(
 		JabberMessageListener.class);
 
+	private final ChatGroupServiceConfiguration _chatGroupServiceConfiguration;
 	private final long _companyId;
 	private final long _userId;
 
