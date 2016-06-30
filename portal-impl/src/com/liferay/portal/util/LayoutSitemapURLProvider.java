@@ -55,6 +55,10 @@ public class LayoutSitemapURLProvider implements SitemapURLProvider {
 		visitLayout(element, layout, themeDisplay);
 	}
 
+	/**
+	 * @deprecated As of 7.0.0, with no direct replacement
+	 */
+	@Deprecated
 	@Override
 	public void visitLayoutSet(
 			Element element, LayoutSet layoutSet, ThemeDisplay themeDisplay)
