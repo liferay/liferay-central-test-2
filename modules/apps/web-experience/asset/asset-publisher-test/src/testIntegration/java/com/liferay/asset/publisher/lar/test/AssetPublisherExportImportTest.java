@@ -1090,15 +1090,7 @@ public class AssetPublisherExportImportTest
 				ServiceContextTestUtil.getServiceContext());
 		}
 
-		String scopeId = AssetPublisherUtil.getScopeId(
-			group, group.getGroupId());
-
-		preferenceMap.put("scopeIds", new String[] {scopeId});
-
-		preferenceMap.put("selectionStyle", new String[] {"dynamic"});
-
-		PortletPreferences portletPreferences = getImportedPortletPreferences(
-			preferenceMap);
+		PortletRequest portletRequest = new MockPortletRequest();
 
 		MockHttpServletRequest mockHttpServletRequest =
 			new MockHttpServletRequest();
@@ -1117,10 +1109,18 @@ public class AssetPublisherExportImportTest
 		mockHttpServletRequest.setAttribute(
 			WebKeys.THEME_DISPLAY, themeDisplay);
 
-		PortletRequest portletRequest = new MockPortletRequest();
-
 		portletRequest.setAttribute(
 			PortletServlet.PORTLET_SERVLET_REQUEST, mockHttpServletRequest);
+
+		String scopeId = AssetPublisherUtil.getScopeId(
+			group, group.getGroupId());
+
+		preferenceMap.put("scopeIds", new String[] {scopeId});
+
+		preferenceMap.put("selectionStyle", new String[] {"dynamic"});
+
+		PortletPreferences portletPreferences = getImportedPortletPreferences(
+			preferenceMap);
 
 		AssetPublisherDisplayContext assetPublisherDisplayContext =
 			new AssetPublisherDisplayContext(
