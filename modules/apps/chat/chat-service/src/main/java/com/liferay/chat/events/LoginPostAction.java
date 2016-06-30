@@ -12,31 +12,34 @@
  * details.
  */
 
-package com.liferay.chat.web.portlet.action;
+package com.liferay.chat.events;
 
 import com.liferay.chat.jabber.JabberUtil;
+import com.liferay.portal.kernel.events.Action;
 import com.liferay.portal.kernel.events.LifecycleAction;
-import com.liferay.portal.kernel.events.SessionAction;
-import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.kernel.util.PortalUtil;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.osgi.service.component.annotations.Component;
 
 /**
  * @author Bruno Farache
+ * @author Peter Fellwock
  */
 @Component(
-	immediate = true, property = {"key=servlet.session.destroy.events"},
+	immediate = true, property = {"key=logout.events.post"},
 	service = LifecycleAction.class
 )
-public class SessionDestroyAction extends SessionAction {
+public class LoginPostAction extends Action {
 
 	@Override
-	public void run(HttpSession session) {
-		Long userId = (Long)session.getAttribute(WebKeys.USER_ID);
+	public void run(HttpServletRequest request, HttpServletResponse response) {
+		long userId = PortalUtil.getUserId(request);
+		String password = PortalUtil.getUserPassword(request);
 
-		JabberUtil.disconnect(userId);
+		JabberUtil.login(userId, password);
 	}
 
 }
