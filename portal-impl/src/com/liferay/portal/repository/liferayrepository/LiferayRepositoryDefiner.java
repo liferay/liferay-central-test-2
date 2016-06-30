@@ -79,16 +79,13 @@ public class LiferayRepositoryDefiner extends BaseRepositoryDefiner {
 		capabilityRegistry.addExportedCapability(
 			ThumbnailCapability.class,
 			portalCapabilityLocator.getThumbnailCapability(documentRepository));
-
 		capabilityRegistry.addExportedCapability(
 			TrashCapability.class,
 			portalCapabilityLocator.getTrashCapability(documentRepository));
-
 		capabilityRegistry.addExportedCapability(
 			WorkflowCapability.class,
 			portalCapabilityLocator.getWorkflowCapability(
 				documentRepository, WorkflowCapability.OperationMode.FULL));
-
 		capabilityRegistry.addSupportedCapability(
 			ProcessorCapability.class,
 			portalCapabilityLocator.getProcessorCapability(documentRepository));
