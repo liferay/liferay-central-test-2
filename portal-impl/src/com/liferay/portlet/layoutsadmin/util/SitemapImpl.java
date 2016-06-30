@@ -184,12 +184,12 @@ public class SitemapImpl implements Sitemap {
 			long groupId, boolean privateLayout, ThemeDisplay themeDisplay)
 		throws PortalException {
 
-		return getSitemap(groupId, null, privateLayout, themeDisplay);
+		return getSitemap(null, groupId, privateLayout, themeDisplay);
 	}
 
 	@Override
 	public String getSitemap(
-			long groupId, String layoutUuid, boolean privateLayout,
+			String layoutUuid, long groupId, boolean privateLayout,
 			ThemeDisplay themeDisplay)
 		throws PortalException {
 
@@ -224,7 +224,7 @@ public class SitemapImpl implements Sitemap {
 
 		for (SitemapURLProvider sitemapURLProvider : sitemapURLProviders) {
 			sitemapURLProvider.visitLayout(
-				rootElement, layoutSet, layoutUuid, themeDisplay);
+				rootElement, layoutUuid, layoutSet, themeDisplay);
 		}
 
 		return document.asXML();
@@ -263,10 +263,10 @@ public class SitemapImpl implements Sitemap {
 				StringBundler sb = new StringBundler(7);
 
 				sb.append(portalURL);
-				sb.append("/sitemap.xml?groupId=");
-				sb.append(layoutSet.getGroupId());
-				sb.append("&layoutUuid=");
+				sb.append("/sitemap.xml?layoutUuid=");
 				sb.append(layout.getUuid());
+				sb.append("&groupId=");
+				sb.append(layoutSet.getGroupId());
 				sb.append("&privateLayout=");
 				sb.append(layout.getPrivateLayout());
 

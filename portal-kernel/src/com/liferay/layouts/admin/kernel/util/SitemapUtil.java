@@ -66,12 +66,12 @@ public class SitemapUtil {
 	}
 
 	public static String getSitemap(
-			long groupId, String layoutUuid, boolean privateLayout,
+			String layoutUuid, long groupId, boolean privateLayout,
 			ThemeDisplay themeDisplay)
 		throws PortalException {
 
 		return getSitemap().getSitemap(
-			groupId, layoutUuid, privateLayout, themeDisplay);
+			layoutUuid, groupId, privateLayout, themeDisplay);
 	}
 
 	public void setSitemap(Sitemap sitemap) {

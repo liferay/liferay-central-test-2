@@ -45,7 +45,7 @@ public class LayoutSitemapURLProvider implements SitemapURLProvider {
 
 	@Override
 	public void visitLayout(
-			Element element, LayoutSet layoutSet, String layoutUuid,
+			Element element, String layoutUuid, LayoutSet layoutSet,
 			ThemeDisplay themeDisplay)
 		throws PortalException {
 

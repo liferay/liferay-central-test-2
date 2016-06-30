@@ -48,7 +48,7 @@ public interface Sitemap {
 		throws PortalException;
 
 	public String getSitemap(
-			long groupId, String layoutUuid, boolean privateLayout,
+			String layoutUuid, long groupId, boolean privateLayout,
 			ThemeDisplay themeDisplay)
 		throws PortalException;
 
