@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.chat.events;
+package com.liferay.chat.internal.events;
 
 import com.liferay.chat.jabber.JabberUtil;
 import com.liferay.portal.kernel.events.Action;
