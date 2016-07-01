@@ -1,3 +1,3 @@
 <%@ include file="/init.jsp" %>
 
-<%= request.getAttribute("providerMessage") %>
+<%= request.getAttribute("portletProviderMessage") %>
