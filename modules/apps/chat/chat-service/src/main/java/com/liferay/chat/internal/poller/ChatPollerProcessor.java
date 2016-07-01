@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.chat.poller;
+package com.liferay.chat.internal.poller;
 
 import com.liferay.chat.configuration.ChatGroupServiceConfiguration;
 import com.liferay.chat.model.Entry;

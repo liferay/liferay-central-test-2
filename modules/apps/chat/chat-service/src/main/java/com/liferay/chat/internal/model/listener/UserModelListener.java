@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.chat.model.listener;
+package com.liferay.chat.internal.model.listener;
 
 import com.liferay.chat.jabber.JabberUtil;
 import com.liferay.chat.model.Status;
