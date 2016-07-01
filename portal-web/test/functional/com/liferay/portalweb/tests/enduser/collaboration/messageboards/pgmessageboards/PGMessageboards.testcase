@@ -1029,7 +1029,7 @@
 	</command>
 
 	<command name="ViewMBThreadAndReplyThreadInGmail" priority="4">
-		<property name="custom.properties" value="message.boards.message.formats.default=html${line.separator}pop.server.notifications.enabled=true${line.separator}pop.server.subdomain=${line.separator}mail.session.mail.smtp.socketFactory.class=javax.net.ssl.SSLSocketFactory${line.separator}mail.session.mail.pop3.socketFactory.class=javax.net.ssl.SSLSocketFactory" />
+		<property name="custom.properties" value="message.boards.message.formats.default=html${line.separator}pop.server.notifications.enabled=true${line.separator}pop.server.subdomain=${line.separator}mail.session.mail.store.protocol=pop3${line.separator}mail.session.mail.transport.protocol=smtp" />
 
 		<execute macro="TestCase#getSiteName">
 			<return from="siteName" name="siteName" />
