@@ -446,8 +446,14 @@ portletURL.setParameter("portletResource", portletResource);
 					'submit',
 					function(event) {
 						event.preventDefault();
+						event.stopPropagation();
 
-						submitForm(form, form.attr('action'), false);
+						var exportImport = Liferay.component('<portlet:namespace />ExportImportComponent');
+						var dateChecker = exportImport.getDateRangeChecker();
+
+						if (dateChecker.validRange) {
+							submitForm(form, form.attr('action'), false);
+						}
 					}
 				);
 			</aui:script>
@@ -487,6 +493,8 @@ portletURL.setParameter("portletResource", portletResource);
 			timeZone: '<%= timeZone.getID() %>'
 		}
 	);
+
+	Liferay.component('<portlet:namespace />ExportImportComponent', exportImport);
 
 	Liferay.once(
 		'destroyPortlet',
