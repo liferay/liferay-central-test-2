@@ -56,12 +56,14 @@ public class _CLASS_Report extends BaseJSPReport {
 			ReportInstance reportInstance)
 		throws Exception {
 
-		String setting1 = ParamUtil.getString(portletRequest, "setting1");
-		String setting2 = ParamUtil.getString(portletRequest, "setting2");
-
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
+		String setting1 = ParamUtil.getString(portletRequest, "setting1");
+
 		jsonObject.put("setting1", setting1);
+
+		String setting2 = ParamUtil.getString(portletRequest, "setting2");
+
 		jsonObject.put("setting2", setting2);
 
 		return jsonObject.toString();
