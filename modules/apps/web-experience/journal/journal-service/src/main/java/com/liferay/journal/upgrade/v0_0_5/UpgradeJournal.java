@@ -124,14 +124,14 @@ public class UpgradeJournal extends UpgradeProcess {
 	}
 
 	protected void addDDMStorageLink(
-			Map<Long, List<Long>> journalArticleStructureMap)
+			Map<Long, List<Long>> ddmStructureIdsMap)
 		throws Exception {
 
 		long journalArticleClassNameId = PortalUtil.getClassNameId(
 			JournalArticle.class.getName());
 
 		for (Map.Entry<Long, List<Long>> entry :
-				journalArticleStructureMap.entrySet()) {
+				ddmStructureIdsMap.entrySet()) {
 
 			long ddmStructureId = getDDMStructureId(
 				entry.getKey(), entry.getValue());
@@ -163,15 +163,13 @@ public class UpgradeJournal extends UpgradeProcess {
 					2, PortalUtil.getClassNameId(DDMStructure.class.getName()));
 
 				try (ResultSet rs = ps.executeQuery()) {
-					Map<Long, List<Long>> journalArticleStructureMap =
-						new HashMap<>();
+					Map<Long, List<Long>> ddmStructureIdsMap = new HashMap<>();
 
 					while (rs.next()) {
 						long structureId = rs.getLong("structureId");
 						long id = rs.getLong("id_");
 
-						List<Long> ddmStructureIds =
-							journalArticleStructureMap.get(id);
+						List<Long> ddmStructureIds = ddmStructureIdsMap.get(id);
 
 						if (ddmStructureIds == null) {
 							ddmStructureIds = new ArrayList<>();
@@ -179,10 +177,10 @@ public class UpgradeJournal extends UpgradeProcess {
 
 						ddmStructureIds.add(structureId);
 
-						journalArticleStructureMap.put(id, ddmStructureIds);
+						ddmStructureIdsMap.put(id, ddmStructureIds);
 					}
 
-					addDDMStorageLink(journalArticleStructureMap);
+					addDDMStorageLink(ddmStructureIdsMap);
 				}
 			}
 		}
