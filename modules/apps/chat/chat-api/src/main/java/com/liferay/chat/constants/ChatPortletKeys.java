@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.chat.web.constants;
+package com.liferay.chat.constants;
 
 /**
  * @author Peter Fellwock

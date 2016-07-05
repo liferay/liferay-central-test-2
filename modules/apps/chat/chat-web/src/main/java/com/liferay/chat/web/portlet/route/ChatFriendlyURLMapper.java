@@ -14,7 +14,7 @@
 
 package com.liferay.chat.web.portlet.route;
 
-import com.liferay.chat.web.constants.ChatPortletKeys;
+import com.liferay.chat.constants.ChatPortletKeys;
 import com.liferay.portal.kernel.portlet.DefaultFriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 
