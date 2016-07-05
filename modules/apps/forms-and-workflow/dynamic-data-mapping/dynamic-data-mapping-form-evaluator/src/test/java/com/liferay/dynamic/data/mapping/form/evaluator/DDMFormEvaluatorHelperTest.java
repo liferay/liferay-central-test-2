@@ -172,7 +172,10 @@ public class DDMFormEvaluatorHelperTest extends PowerMockito {
 	protected void setDDMExpressionFactory() throws Exception {
 		when(
 			_ddmExpressionFactory.createBooleanDDMExpression(
-				Matchers.anyString())).thenReturn(_ddmExpression);
+				Matchers.anyString())
+		).thenReturn(
+			_ddmExpression
+		);
 	}
 
 	protected void setUpLanguageUtil() {
@@ -180,8 +183,11 @@ public class DDMFormEvaluatorHelperTest extends PowerMockito {
 
 		languageUtil.setLanguage(_language);
 
-		when(_language.get(_resourceBundle, "this-field-is-invalid")).
-			thenReturn("This field is invalid");
+		when(
+			_language.get(_resourceBundle, "this-field-is-invalid")
+		).thenReturn(
+			"This field is invalid"
+		);
 	}
 
 	protected void setUpResourceBundleUtil() {
