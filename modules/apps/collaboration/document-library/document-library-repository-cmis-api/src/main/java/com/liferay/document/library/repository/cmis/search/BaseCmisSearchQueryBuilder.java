@@ -201,7 +201,7 @@ public class BaseCmisSearchQueryBuilder implements CMISSearchQueryBuilder {
 			try {
 				long userId = GetterUtil.getLong(value);
 
-				User user = _userLocalService .getUserById(userId);
+				User user = _userLocalService.getUserById(userId);
 
 				String screenName = CMISParameterValueUtil.formatParameterValue(
 					field, user.getScreenName(), wildcard, queryConfig);
