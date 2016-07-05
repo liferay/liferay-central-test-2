@@ -358,7 +358,7 @@ public class KBFolderLocalServiceTest {
 	}
 
 	@Test
-	public void testMoveKBFolderToParentKBFolderInHomeFolder()
+	public void testMoveKBFolderToParentKBFolderInHomeKBFolder()
 		throws Exception {
 
 		KBFolder kbFolder = addKBFolder(
