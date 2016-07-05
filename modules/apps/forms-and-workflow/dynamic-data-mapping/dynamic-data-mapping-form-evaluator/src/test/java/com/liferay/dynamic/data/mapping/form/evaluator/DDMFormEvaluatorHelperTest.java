@@ -192,7 +192,7 @@ public class DDMFormEvaluatorHelperTest extends PowerMockito {
 		when(
 			_language.get(_resourceBundle, "this-field-is-invalid")
 		).thenReturn(
-			"This field is invalid"
+			"This field is invalid."
 		);
 	}
 
