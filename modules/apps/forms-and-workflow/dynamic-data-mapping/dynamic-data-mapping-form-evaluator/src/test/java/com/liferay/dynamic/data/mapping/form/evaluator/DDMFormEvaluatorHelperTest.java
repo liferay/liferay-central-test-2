@@ -72,7 +72,7 @@ public class DDMFormEvaluatorHelperTest extends PowerMockito {
 
 		ddmFormFieldValidation.setExpression("isEmailAddress(emailField)");
 		ddmFormFieldValidation.setErrorMessage(
-			"This is an invalid email address");
+			"This is an invalid email address.");
 
 		ddmFormField.setDDMFormFieldValidation(ddmFormFieldValidation);
 
@@ -103,7 +103,7 @@ public class DDMFormEvaluatorHelperTest extends PowerMockito {
 		Assert.assertFalse(ddmFormFieldEvaluationResult.isValid());
 
 		Assert.assertEquals(
-			"This is an invalid email address",
+			"This is an invalid email address.",
 			ddmFormFieldEvaluationResult.getErrorMessage());
 	}
 
