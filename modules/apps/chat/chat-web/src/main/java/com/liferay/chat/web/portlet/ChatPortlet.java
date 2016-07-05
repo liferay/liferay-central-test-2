@@ -14,7 +14,7 @@
 
 package com.liferay.chat.web.portlet;
 
-import com.liferay.chat.web.constants.ChatPortletKeys;
+import com.liferay.chat.constants.ChatPortletKeys;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.PropsKeys;

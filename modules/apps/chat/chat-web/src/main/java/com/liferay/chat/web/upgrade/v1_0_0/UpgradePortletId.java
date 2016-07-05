@@ -14,7 +14,7 @@
 
 package com.liferay.chat.web.upgrade.v1_0_0;
 
-import com.liferay.chat.web.constants.ChatPortletKeys;
+import com.liferay.chat.constants.ChatPortletKeys;
 import com.liferay.portal.kernel.upgrade.BaseUpgradePortletId;
 
 /**
