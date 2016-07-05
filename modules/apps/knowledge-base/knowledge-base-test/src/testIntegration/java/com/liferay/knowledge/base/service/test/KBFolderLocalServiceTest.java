@@ -343,9 +343,13 @@ public class KBFolderLocalServiceTest {
 	}
 
 	@Test
-	public void testMoveKBFolderToParentKBFolderInKBFolder() throws Exception {
-		KBFolder kbFolder = addKBFolder(_kbFolder.getKbFolderId());
-		KBFolder parentKBFolder = addKBFolder(_kbFolder.getKbFolderId());
+	public void testMoveKBFolderToParentKBFolderInHomeKBFolder()
+		throws Exception {
+
+		KBFolder kbFolder = addKBFolder(
+			KBFolderConstants.DEFAULT_PARENT_FOLDER_ID);
+		KBFolder parentKBFolder = addKBFolder(
+			KBFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 
 		KBFolderLocalServiceUtil.moveKBFolder(
 			kbFolder.getKbFolderId(), parentKBFolder.getKbFolderId());
@@ -358,13 +362,9 @@ public class KBFolderLocalServiceTest {
 	}
 
 	@Test
-	public void testMoveKBFolderToParentKBFolderInHomeKBFolder()
-		throws Exception {
-
-		KBFolder kbFolder = addKBFolder(
-			KBFolderConstants.DEFAULT_PARENT_FOLDER_ID);
-		KBFolder parentKBFolder = addKBFolder(
-			KBFolderConstants.DEFAULT_PARENT_FOLDER_ID);
+	public void testMoveKBFolderToParentKBFolderInKBFolder() throws Exception {
+		KBFolder kbFolder = addKBFolder(_kbFolder.getKbFolderId());
+		KBFolder parentKBFolder = addKBFolder(_kbFolder.getKbFolderId());
 
 		KBFolderLocalServiceUtil.moveKBFolder(
 			kbFolder.getKbFolderId(), parentKBFolder.getKbFolderId());
