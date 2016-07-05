@@ -335,15 +335,18 @@ public class UpgradeJournal extends UpgradeProcess {
 
 		DDMStructure ddmStructure1 = _ddmStructureLocalService.getStructure(
 			ddmStructureId1);
-		DDMStructure ddmStructure2 = _ddmStructureLocalService.getStructure(
-			ddmStructureId2);
 
 		Set<String> fieldNames1 = ddmStructure1.getFieldNames();
-		Set<String> fieldNames2 = ddmStructure2.getFieldNames();
 
 		Set<String> articleFieldNames = getArticleFieldNames(id);
 
 		fieldNames1.removeAll(articleFieldNames);
+
+		DDMStructure ddmStructure2 = _ddmStructureLocalService.getStructure(
+			ddmStructureId2);
+
+		Set<String> fieldNames2 = ddmStructure2.getFieldNames();
+
 		fieldNames2.removeAll(articleFieldNames);
 
 		if (fieldNames1.size() <= fieldNames2.size()) {
