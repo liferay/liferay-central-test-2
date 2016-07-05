@@ -123,8 +123,7 @@ public class UpgradeJournal extends UpgradeProcess {
 		return StringUtil.toUpperCase(structureElement.elementText("name"));
 	}
 
-	protected void addDDMStorageLink(
-			Map<Long, List<Long>> ddmStructureIdsMap)
+	protected void addDDMStorageLink(Map<Long, List<Long>> ddmStructureIdsMap)
 		throws Exception {
 
 		long journalArticleClassNameId = PortalUtil.getClassNameId(
@@ -305,14 +304,11 @@ public class UpgradeJournal extends UpgradeProcess {
 		Set<String> articleFieldNames = new HashSet<>();
 
 		try (LoggingTimer loggingTimer = new LoggingTimer()) {
-			StringBundler sb = new StringBundler(2);
+			String sql =
+				"select JournalArticle.content from JournalArticle where " +
+					"JournalArticle.id_ = ?";
 
-			sb.append("select JournalArticle.content from JournalArticle ");
-			sb.append("where JournalArticle.id_ = ?");
-
-			try (PreparedStatement ps = connection.prepareStatement(
-					sb.toString())) {
-
+			try (PreparedStatement ps = connection.prepareStatement(sql)) {
 				ps.setLong(1, articleId);
 
 				try (ResultSet rs = ps.executeQuery()) {
