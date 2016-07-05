@@ -1,21 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>pmd-core</artifactId>
-    <name>PMD Core</name>
+    <artifactId>pmd-java</artifactId>
+    <name>PMD Java</name>
 
     <parent>
         <groupId>net.sourceforge.pmd</groupId>
         <artifactId>pmd</artifactId>
-        <version>5.2.3</version>
+        <version>5.5.0</version>
     </parent>
 
     <properties>
-        <config.basedir>${basedir}</config.basedir>
+        <config.basedir>${basedir}/../pmd-core</config.basedir>
     </properties>
 
     <build>
+        <testResources>
+            <testResource>
+                <directory>${basedir}/src/test/resources</directory>
+            </testResource>
+            <testResource>
+                <directory>${basedir}/src/test/java</directory>
+                <includes>
+                    <include>**/testdata/*.java</include>
+                </includes>
+            </testResource>
+        </testResources>
+        <resources>
+            <resource>
+                <directory>${basedir}/src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
         <plugins>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <configuration>
+                    <useDefaultDelimiters>false</useDefaultDelimiters>
+                    <delimiters>
+                        <delimiter>${*}</delimiter>
+                    </delimiters>
+                </configuration>
+            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>
@@ -30,6 +57,23 @@
                                     <property name="target" value="${project.build.directory}/generated-sources/javacc" />
                                     <property name="javacc.jar" value="${settings.localRepository}/net/java/dev/javacc/javacc/${javacc.version}/javacc-${javacc.version}.jar" />
                                 </ant>
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>pmd-clean</id>
+                        <phase>clean</phase>
+                        <configuration>
+                            <target>
+                                <echo>PMD specific tasks: cleaning generated markdown</echo>
+                                <delete quiet="true">
+                                    <fileset dir="${basedir}/src/site/markdown/rules/" includes="**/*.md" />
+                                    <fileset dir="${basedir}/src/site/markdown/" includes="mergedruleset.xml" />
+                                    <fileset dir="${basedir}/src/site/" includes="site.xml" />
+                                </delete>
                             </target>
                         </configuration>
                         <goals>
@@ -56,23 +100,14 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <plugin>
+                <groupId>net.sourceforge.pmd</groupId>
+                <artifactId>pmd-build</artifactId>
+            </plugin>
         </plugins>
     </build>
     <dependencies>
-        <dependency>
-            <groupId>org.apache.ant</groupId>
-            <artifactId>ant</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-          <groupId>com.beust</groupId>
-          <artifactId>jcommander</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-        </dependency>
         <dependency>
             <groupId>jaxen</groupId>
             <artifactId>jaxen</artifactId>
@@ -82,12 +117,12 @@
             <artifactId>javacc</artifactId>
         </dependency>
         <dependency>
-            <groupId>net.sourceforge.saxon</groupId>
-            <artifactId>saxon</artifactId>
+            <groupId>net.sourceforge.pmd</groupId>
+            <artifactId>pmd-core</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
+            <groupId>net.sourceforge.saxon</groupId>
+            <artifactId>saxon</artifactId>
         </dependency>
         <dependency>
             <groupId>org.ow2.asm</groupId>
@@ -102,23 +137,13 @@
         </dependency>
 
         <dependency>
-            <groupId>com.github.tomakehurst</groupId>
-            <artifactId>wiremock</artifactId>
+            <groupId>net.sourceforge.pmd</groupId>
+            <artifactId>pmd-test</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.ant</groupId>
-            <artifactId>ant-testutil</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-all</artifactId>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
