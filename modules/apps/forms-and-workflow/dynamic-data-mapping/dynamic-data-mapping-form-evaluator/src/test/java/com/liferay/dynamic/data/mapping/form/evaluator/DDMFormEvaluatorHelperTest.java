@@ -161,15 +161,15 @@ public class DDMFormEvaluatorHelperTest extends PowerMockito {
 			new DDMFormEvaluatorHelper(ddmForm, ddmFormValues, locale);
 
 		field(
-			DDMFormEvaluatorHelper.class, "_jsonFactory"
-		).set(
-			ddmFormEvaluatorHelper, _jsonFactory
-		);
-
-		field(
 			DDMFormEvaluatorHelper.class, "_ddmExpressionFactory"
 		).set(
 			ddmFormEvaluatorHelper, _ddmExpressionFactory
+		);
+
+		field(
+			DDMFormEvaluatorHelper.class, "_jsonFactory"
+		).set(
+			ddmFormEvaluatorHelper, _jsonFactory
 		);
 
 		return ddmFormEvaluatorHelper;
