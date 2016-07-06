@@ -34,6 +34,7 @@ SPAUtil spaUtil = (SPAUtil)request.getAttribute(SPAWebKeys.SPA_UTIL);
 	Liferay.SPA.clearScreensCache = <%= spaUtil.isClearScreensCache(request, session) %>;
 	Liferay.SPA.excludedPaths = <%= spaUtil.getExcludedPaths() %>;
 	Liferay.SPA.loginRedirect = '<%= HtmlUtil.escapeJS(spaUtil.getLoginRedirect(request)) %>';
+	Liferay.SPA.requestTimeout = <%= spaUtil.getRequestTimeout() %>;
 
 	frontendJsSpaWebLiferayInitEs.default.init(
 		function(app) {
