@@ -1930,10 +1930,10 @@ public class JSPSourceProcessor extends BaseSourceProcessor {
 
 		outerLoop:
 		for (String tldFileName : tldFileNames) {
-			File tldFile = new File(tldFileName);
-
 			tldFileName = StringUtil.replace(
 				tldFileName, StringPool.BACK_SLASH, StringPool.SLASH);
+
+			File tldFile = new File(tldFileName);
 
 			String content = FileUtil.read(tldFile);
 
