@@ -2831,6 +2831,8 @@ AUI.add(
 						else {
 							repeatableInstance.add(field.get('container'));
 						}
+
+						A.DD.DDM.getDrag(field.get('container')).addInvalid('.alloy-editor');
 					},
 
 					toJSON: function() {
