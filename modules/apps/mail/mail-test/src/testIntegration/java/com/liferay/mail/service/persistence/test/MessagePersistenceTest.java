@@ -249,10 +249,9 @@ public class MessagePersistenceTest {
 		return OrderByComparatorFactoryUtil.create("Mail_Message", "messageId",
 			true, "companyId", true, "userId", true, "userName", true,
 			"createDate", true, "modifiedDate", true, "accountId", true,
-			"folderId", true, "sender", true, "to", true, "cc", true, "bcc",
-			true, "sentDate", true, "subject", true, "preview", true, "body",
-			true, "flags", true, "size", true, "remoteMessageId", true,
-			"contentType", true);
+			"folderId", true, "sender", true, "sentDate", true, "subject",
+			true, "preview", true, "flags", true, "size", true,
+			"remoteMessageId", true, "contentType", true);
 	}
 
 	@Test
