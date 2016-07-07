@@ -1719,8 +1719,10 @@
 
 		<execute macro="KBArticle#gotoSuggestionsNavigationCP" />
 
-		<execute macro="KBArticleSuggestion#gotoSuggestionStatusInProgress">
-			<var name="suggestionCount" value="1" />
+		<execute macro="KBArticleSuggestion#viewPG">
+			<var name="kbSuggestionBody" value="Knowledge Base Article Suggestion" />
+			<var name="kbSuggestionUserName" value="userfn userln" />
+			<var name="status" value="In Progress" />
 		</execute>
 
 		<execute macro="KBArticleSuggestion#moveToResolvedStatus">
@@ -1730,8 +1732,10 @@
 
 		<execute macro="KBArticle#gotoSuggestionsNavigationCP" />
 
-		<execute macro="KBArticleSuggestion#gotoSuggestionStatusResolved">
-			<var name="suggestionCount" value="1" />
+		<execute macro="KBArticleSuggestion#viewPG">
+			<var name="kbSuggestionBody" value="Knowledge Base Article Suggestion" />
+			<var name="kbSuggestionUserName" value="userfn userln" />
+			<var name="status" value="Resolved" />
 		</execute>
 
 		<execute macro="KBArticleSuggestion#deleteCP">
