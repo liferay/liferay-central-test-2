@@ -95,11 +95,14 @@ MBMessageDisplay messageDisplay = (MBMessageDisplay)request.getAttribute(WebKeys
 
 	<%
 	}
-
-	long replyToMessageId = message.getMessageId();
 	%>
 
 	<c:if test="<%= MBCategoryPermission.contains(permissionChecker, scopeGroupId, message.getCategoryId(), ActionKeys.REPLY_TO_MESSAGE) && !thread.isLocked() %>">
+
+		<%
+		long replyToMessageId = message.getMessageId();
+		%>
+
 		<%@ include file="/message_boards/edit_message_quick.jspf" %>
 	</c:if>
 </c:if>
