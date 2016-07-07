@@ -850,6 +850,8 @@
 			<var name="categoryName" value="MB Category3 Name" />
 		</execute>
 
+		<execute function="Pause" locator1="5000" />
+
 		<execute macro="MessageboardsThread#viewReplyPG">
 			<var name="mbThreadAttachment" value="Document_4.jpeg" />
 			<var name="postCount" value="2" />
