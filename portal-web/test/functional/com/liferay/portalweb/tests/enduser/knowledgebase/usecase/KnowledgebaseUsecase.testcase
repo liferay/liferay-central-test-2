@@ -1746,7 +1746,7 @@
 
 		<execute macro="KBArticle#gotoSuggestionsNavigationCP" />
 
-		<execute macro="KBArticleSuggestion#viewDefaultResolved" />
+		<execute macro="KBArticleSuggestion#viewNoSuggestions" />
 	</command>
 
 	<command name="ViewKBArticleSuggestionsWorkflowNotificationEmail" priority="3">
