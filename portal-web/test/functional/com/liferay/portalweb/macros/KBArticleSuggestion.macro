@@ -25,6 +25,10 @@
 		<var name="key_kbArticleTitle" value="${kbArticleTitle}" />
 		<var name="key_kbSuggestionBody" value="${kbSuggestionBody}" />
 
+		<var name="key_rowEntry" value="${kbSuggestionBody}" />
+
+		<execute function="Click" locator1="Icon#ROW_VERTICAL_ELLIPSIS" />
+
 		<execute function="AssertTextEquals" locator1="KnowledgeBaseSuggestions#CONTENT" value1="${kbSuggestionBody}" />
 
 		<execute function="AssertClickNoError" locator1="Button#DELETE" value1="Delete" />
@@ -62,6 +66,10 @@
 		<var name="key_kbArticleTitle" value="${kbArticleTitle}" />
 		<var name="key_kbSuggestionBody" value="${kbSuggestionBody}" />
 
+		<var name="key_rowEntry" value="${kbSuggestionBody}" />
+
+		<execute function="Click" locator1="Icon#ROW_VERTICAL_ELLIPSIS" />
+
 		<execute function="AssertClick" locator1="KnowledgeBaseSuggestions#MOVE_TO_IN_PROGRESS_BUTTON" value1="Move to in Progress" />
 		<execute function="AssertElementPresent" locator1="Message#SUCCESS" />
 	</command>
@@ -70,6 +78,10 @@
 		<var name="key_kbArticleTitle" value="${kbArticleTitle}" />
 		<var name="key_kbSuggestionBody" value="${kbSuggestionBody}" />
 
+		<var name="key_rowEntry" value="${kbSuggestionBody}" />
+
+		<execute function="Click" locator1="Icon#ROW_VERTICAL_ELLIPSIS" />
+
 		<execute function="AssertClick" locator1="KnowledgeBaseSuggestions#MOVE_TO_NEW_BUTTON" value1="Move to New" />
 		<execute function="AssertElementPresent" locator1="Message#SUCCESS" />
 	</command>
@@ -77,6 +89,10 @@
 	<command name="moveToResolvedStatus">
 		<var name="key_kbArticleTitle" value="${kbArticleTitle}" />
 		<var name="key_kbSuggestionBody" value="${kbSuggestionBody}" />
+
+		<var name="key_rowEntry" value="${kbSuggestionBody}" />
+
+		<execute function="Click" locator1="Icon#ROW_VERTICAL_ELLIPSIS" />
 
 		<execute function="AssertClick" locator1="KnowledgeBaseSuggestions#RESOLVE_BUTTON" value1="Resolve" />
 		<execute function="AssertElementPresent" locator1="Message#SUCCESS" />
