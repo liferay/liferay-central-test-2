@@ -7314,7 +7314,6 @@ public class JournalArticleLocalServiceImpl
 		subscriptionSender.setLocalizedBodyMap(localizedBodyMap);
 		subscriptionSender.setLocalizedSubjectMap(localizedSubjectMap);
 		subscriptionSender.setMailId("journal_article", article.getId());
-
 		subscriptionSender.setNotificationType(notificationType);
 		subscriptionSender.setPortletId(portletId);
 		subscriptionSender.setReplyToAddress(fromAddress);
