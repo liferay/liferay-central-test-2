@@ -165,6 +165,10 @@
 		</while>
 	</command>
 
+	<command name="viewEmptyChoiceErrorMessage">
+		<execute function="AssertElementPresent" locator1="Message#ERROR" value1="Please enter valid choices." />
+	</command>
+
 	<command name="viewPollAsGuestPG">
 		<var name="key_pollsQuestion" value="${pollsQuestion}" />
 
