@@ -1746,22 +1746,6 @@
 
 		<execute macro="KBArticle#gotoSuggestionsNavigationCP" />
 
-		<execute macro="KBArticleSuggestion#gotoSuggestionStatusNew">
-			<var name="suggestionCount" value="0" />
-		</execute>
-
-		<execute macro="KBArticleSuggestion#viewDefaultNew" />
-
-		<execute macro="KBArticleSuggestion#gotoSuggestionStatusInProgress">
-			<var name="suggestionCount" value="0" />
-		</execute>
-
-		<execute macro="KBArticleSuggestion#viewDefaultInProgress" />
-
-		<execute macro="KBArticleSuggestion#gotoSuggestionStatusResolved">
-			<var name="suggestionCount" value="0" />
-		</execute>
-
 		<execute macro="KBArticleSuggestion#viewDefaultResolved" />
 	</command>
 
