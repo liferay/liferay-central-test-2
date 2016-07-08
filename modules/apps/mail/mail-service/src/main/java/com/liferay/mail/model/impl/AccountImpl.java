@@ -14,7 +14,7 @@
 
 package com.liferay.mail.model.impl;
 
-import com.liferay.mail.util.PasswordUtil;
+import com.liferay.mail.internal.util.PasswordUtil;
 
 /**
  * @author Scott Lee

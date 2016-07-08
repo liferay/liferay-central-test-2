@@ -12,34 +12,26 @@
  * details.
  */
 
-package com.liferay.mail.search;
+package com.liferay.mail.internal.search;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.expando.kernel.util.ExpandoBridgeIndexerUtil;
-import com.liferay.mail.model.Account;
-import com.liferay.mail.service.AccountLocalServiceUtil;
+import com.liferay.mail.model.Message;
+import com.liferay.mail.service.MessageLocalServiceUtil;
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
-import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.BaseIndexer;
-import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
-import com.liferay.portal.kernel.search.Hits;
-import com.liferay.portal.kernel.search.IndexSearcherHelperUtil;
 import com.liferay.portal.kernel.search.IndexWriterHelperUtil;
 import com.liferay.portal.kernel.search.Indexer;
-import com.liferay.portal.kernel.search.SearchContext;
-import com.liferay.portal.kernel.search.SortFactoryUtil;
 import com.liferay.portal.kernel.search.Summary;
-import com.liferay.portal.kernel.search.generic.BooleanQueryImpl;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 import javax.portlet.PortletRequest;
@@ -48,13 +40,13 @@ import javax.portlet.PortletResponse;
 import org.osgi.service.component.annotations.Component;
 
 /**
- * @author Michael C. Han
+ * @author Scott Lee
  * @author Peter Fellwock
  */
 @Component(immediate = true, service = Indexer.class)
-public class AccountIndexer extends BaseIndexer<Account> {
+public class MessageIndexer extends BaseIndexer<Message> {
 
-	public static final String CLASS_NAME = Account.class.getName();
+	public static final String CLASS_NAME = Message.class.getName();
 
 	@Override
 	public String getClassName() {
@@ -62,44 +54,23 @@ public class AccountIndexer extends BaseIndexer<Account> {
 	}
 
 	@Override
-	protected void doDelete(Account account) throws Exception {
-		SearchContext searchContext = new SearchContext();
-
-		searchContext.setCompanyId(account.getCompanyId());
-		searchContext.setEnd(QueryUtil.ALL_POS);
-		searchContext.setSearchEngineId(getSearchEngineId());
-		searchContext.setSorts(SortFactoryUtil.getDefaultSorts());
-		searchContext.setStart(QueryUtil.ALL_POS);
-
-		BooleanQuery booleanQuery = new BooleanQueryImpl();
-
-		booleanQuery.addRequiredTerm(Field.ENTRY_CLASS_NAME, CLASS_NAME);
-
-		booleanQuery.addRequiredTerm("accountId", account.getAccountId());
-
-		Hits hits = IndexSearcherHelperUtil.search(searchContext, booleanQuery);
-
-		List<String> uids = new ArrayList<>(hits.getLength());
-
-		for (int i = 0; i < hits.getLength(); i++) {
-			Document document = hits.doc(i);
-
-			uids.add(document.get(Field.UID));
-		}
-
-		IndexWriterHelperUtil.deleteDocuments(
-			getSearchEngineId(), account.getCompanyId(), uids,
-			isCommitImmediately());
+	protected void doDelete(Message message) throws Exception {
+		deleteDocument(message.getCompanyId(), message.getMessageId());
 	}
 
 	@Override
-	protected Document doGetDocument(Account account) throws Exception {
-		Document document = getBaseModelDocument(CLASS_NAME, account);
+	protected Document doGetDocument(Message message) throws Exception {
+		Document document = getBaseModelDocument(CLASS_NAME, message);
 
-		ExpandoBridge expandoBridge = account.getExpandoBridge();
+		ExpandoBridge expandoBridge = message.getExpandoBridge();
 
-		document.addKeyword("accountId", account.getAccountId());
-		document.addText(Field.NAME, account.getAddress());
+		document.addText(
+			Field.CONTENT, HtmlUtil.extractText(message.getBody()));
+		document.addKeyword(Field.FOLDER_ID, message.getFolderId());
+		document.addText(Field.TITLE, message.getSubject());
+
+		document.addKeyword("accountId", message.getAccountId());
+		document.addKeyword("remoteMessageId", message.getRemoteMessageId());
 
 		ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);
 
@@ -115,19 +86,19 @@ public class AccountIndexer extends BaseIndexer<Account> {
 	}
 
 	@Override
-	protected void doReindex(Account account) throws Exception {
-		Document document = getDocument(account);
+	protected void doReindex(Message message) throws Exception {
+		Document document = getDocument(message);
 
 		IndexWriterHelperUtil.updateDocument(
-			getSearchEngineId(), account.getCompanyId(), document,
+			getSearchEngineId(), message.getCompanyId(), document,
 			isCommitImmediately());
 	}
 
 	@Override
 	protected void doReindex(String className, long classPK) throws Exception {
-		Account account = AccountLocalServiceUtil.getAccount(classPK);
+		Message message = MessageLocalServiceUtil.getMessage(classPK);
 
-		doReindex(account);
+		doReindex(message);
 	}
 
 	@Override
@@ -139,26 +110,26 @@ public class AccountIndexer extends BaseIndexer<Account> {
 
 	protected void reindexMessages(long companyId) throws PortalException {
 		final IndexableActionableDynamicQuery indexableActionableDynamicQuery =
-			AccountLocalServiceUtil.getIndexableActionableDynamicQuery();
+			MessageLocalServiceUtil.getIndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setCompanyId(companyId);
 		indexableActionableDynamicQuery.setPerformActionMethod(
-			new ActionableDynamicQuery.PerformActionMethod<Account>() {
+			new ActionableDynamicQuery.PerformActionMethod<Message>() {
 
 				@Override
-				public void performAction(Account account)
+				public void performAction(Message message)
 					throws PortalException {
 
 					try {
-						Document document = getDocument(account);
+						Document document = getDocument(message);
 
 						indexableActionableDynamicQuery.addDocuments(document);
 					}
 					catch (PortalException pe) {
 						if (_log.isWarnEnabled()) {
 							_log.warn(
-								"Unable to index account " +
-									account.getAccountId(),
+								"Unable to index message " +
+									message.getMessageId(),
 								pe);
 						}
 					}
@@ -170,6 +141,6 @@ public class AccountIndexer extends BaseIndexer<Account> {
 		indexableActionableDynamicQuery.performActions();
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(AccountIndexer.class);
+	private static final Log _log = LogFactoryUtil.getLog(MessageIndexer.class);
 
 }
