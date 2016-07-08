@@ -41,6 +41,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.PortalUtil;
@@ -142,7 +143,8 @@ public class MailManager {
 		Message message = MessageLocalServiceUtil.addMessage(
 			_user.getUserId(), account.getDraftFolderId(), account.getAddress(),
 			StringPool.BLANK, StringPool.BLANK, StringPool.BLANK, new Date(),
-			StringPool.BLANK, StringPool.BLANK, StringPool.BLANK, 0, null);
+			StringPool.BLANK, StringPool.BLANK, StringPool.BLANK, 0,
+			ContentTypes.TEXT_HTML_UTF8);
 
 		return message;
 	}
