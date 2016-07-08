@@ -133,8 +133,8 @@ public class Session {
 			syncDeviceType = "desktop-windows";
 		}
 
-		Header syncDeviceTypeHeader = 
-			new BasicHeader("Sync-Device", syncDeviceType);
+		Header syncDeviceTypeHeader = new BasicHeader(
+			"Sync-Device", syncDeviceType);
 
 		headers.add(syncDeviceTypeHeader);
 
