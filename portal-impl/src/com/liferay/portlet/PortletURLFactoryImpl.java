@@ -93,11 +93,10 @@ public class PortletURLFactoryImpl implements PortletURLFactory {
 		Layout layout = themeDisplay.getLayout();
 
 		if (layout != null) {
-			return getPortletURLFactory().create(
-				portletRequest, portletId, layout, lifecycle);
+			return create(portletRequest, portletId, layout, lifecycle);
 		}
 
-		return getPortletURLFactory().create(
+		return create(
 			portletRequest, portletId, themeDisplay.getPlid(), lifecycle);
 	}
 
