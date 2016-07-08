@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.mail.messaging;
+package com.liferay.mail.internal.messaging;
 
 import com.liferay.mail.exception.NoSuchAccountException;
 import com.liferay.mail.mailbox.Mailbox;

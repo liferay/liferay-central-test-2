@@ -12,26 +12,34 @@
  * details.
  */
 
-package com.liferay.mail.search;
+package com.liferay.mail.internal.search;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.expando.kernel.util.ExpandoBridgeIndexerUtil;
-import com.liferay.mail.model.Message;
-import com.liferay.mail.service.MessageLocalServiceUtil;
+import com.liferay.mail.model.Folder;
+import com.liferay.mail.service.FolderLocalServiceUtil;
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.BaseIndexer;
+import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
+import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.search.IndexSearcherHelperUtil;
 import com.liferay.portal.kernel.search.IndexWriterHelperUtil;
 import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.SearchContext;
+import com.liferay.portal.kernel.search.SortFactoryUtil;
 import com.liferay.portal.kernel.search.Summary;
+import com.liferay.portal.kernel.search.generic.BooleanQueryImpl;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import javax.portlet.PortletRequest;
@@ -40,13 +48,13 @@ import javax.portlet.PortletResponse;
 import org.osgi.service.component.annotations.Component;
 
 /**
- * @author Scott Lee
+ * @author Michael C. Han
  * @author Peter Fellwock
  */
 @Component(immediate = true, service = Indexer.class)
-public class MessageIndexer extends BaseIndexer<Message> {
+public class FolderIndexer extends BaseIndexer<Folder> {
 
-	public static final String CLASS_NAME = Message.class.getName();
+	public static final String CLASS_NAME = Folder.class.getName();
 
 	@Override
 	public String getClassName() {
@@ -54,23 +62,46 @@ public class MessageIndexer extends BaseIndexer<Message> {
 	}
 
 	@Override
-	protected void doDelete(Message message) throws Exception {
-		deleteDocument(message.getCompanyId(), message.getMessageId());
+	protected void doDelete(Folder folder) throws Exception {
+		SearchContext searchContext = new SearchContext();
+
+		searchContext.setCompanyId(folder.getCompanyId());
+		searchContext.setEnd(QueryUtil.ALL_POS);
+		searchContext.setSearchEngineId(getSearchEngineId());
+		searchContext.setSorts(SortFactoryUtil.getDefaultSorts());
+		searchContext.setStart(QueryUtil.ALL_POS);
+
+		BooleanQuery booleanQuery = new BooleanQueryImpl();
+
+		booleanQuery.addRequiredTerm(Field.ENTRY_CLASS_NAME, CLASS_NAME);
+
+		booleanQuery.addRequiredTerm("folderId", folder.getFolderId());
+
+		Hits hits = IndexSearcherHelperUtil.search(searchContext, booleanQuery);
+
+		List<String> uids = new ArrayList<>(hits.getLength());
+
+		for (int i = 0; i < hits.getLength(); i++) {
+			Document document = hits.doc(i);
+
+			uids.add(document.get(Field.UID));
+		}
+
+		IndexWriterHelperUtil.deleteDocuments(
+			getSearchEngineId(), folder.getCompanyId(), uids,
+			isCommitImmediately());
 	}
 
 	@Override
-	protected Document doGetDocument(Message message) throws Exception {
-		Document document = getBaseModelDocument(CLASS_NAME, message);
+	protected Document doGetDocument(Folder folder) throws Exception {
+		Document document = getBaseModelDocument(CLASS_NAME, folder);
 
-		ExpandoBridge expandoBridge = message.getExpandoBridge();
+		ExpandoBridge expandoBridge = folder.getExpandoBridge();
 
-		document.addText(
-			Field.CONTENT, HtmlUtil.extractText(message.getBody()));
-		document.addKeyword(Field.FOLDER_ID, message.getFolderId());
-		document.addText(Field.TITLE, message.getSubject());
+		document.addKeyword(Field.FOLDER_ID, folder.getFolderId());
+		document.addText(Field.NAME, folder.getDisplayName());
 
-		document.addKeyword("accountId", message.getAccountId());
-		document.addKeyword("remoteMessageId", message.getRemoteMessageId());
+		document.addKeyword("accountId", folder.getAccountId());
 
 		ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);
 
@@ -86,19 +117,19 @@ public class MessageIndexer extends BaseIndexer<Message> {
 	}
 
 	@Override
-	protected void doReindex(Message message) throws Exception {
-		Document document = getDocument(message);
+	protected void doReindex(Folder folder) throws Exception {
+		Document document = getDocument(folder);
 
 		IndexWriterHelperUtil.updateDocument(
-			getSearchEngineId(), message.getCompanyId(), document,
+			getSearchEngineId(), folder.getCompanyId(), document,
 			isCommitImmediately());
 	}
 
 	@Override
 	protected void doReindex(String className, long classPK) throws Exception {
-		Message message = MessageLocalServiceUtil.getMessage(classPK);
+		Folder folder = FolderLocalServiceUtil.getFolder(classPK);
 
-		doReindex(message);
+		doReindex(folder);
 	}
 
 	@Override
@@ -110,26 +141,26 @@ public class MessageIndexer extends BaseIndexer<Message> {
 
 	protected void reindexMessages(long companyId) throws PortalException {
 		final IndexableActionableDynamicQuery indexableActionableDynamicQuery =
-			MessageLocalServiceUtil.getIndexableActionableDynamicQuery();
+			FolderLocalServiceUtil.getIndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setCompanyId(companyId);
 		indexableActionableDynamicQuery.setPerformActionMethod(
-			new ActionableDynamicQuery.PerformActionMethod<Message>() {
+			new ActionableDynamicQuery.PerformActionMethod<Folder>() {
 
 				@Override
-				public void performAction(Message message)
+				public void performAction(Folder folder)
 					throws PortalException {
 
 					try {
-						Document document = getDocument(message);
+						Document document = getDocument(folder);
 
 						indexableActionableDynamicQuery.addDocuments(document);
 					}
 					catch (PortalException pe) {
 						if (_log.isWarnEnabled()) {
 							_log.warn(
-								"Unable to index message " +
-									message.getMessageId(),
+								"Unable to index folder " +
+									folder.getFolderId(),
 								pe);
 						}
 					}
@@ -141,6 +172,6 @@ public class MessageIndexer extends BaseIndexer<Message> {
 		indexableActionableDynamicQuery.performActions();
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(MessageIndexer.class);
+	private static final Log _log = LogFactoryUtil.getLog(FolderIndexer.class);
 
 }

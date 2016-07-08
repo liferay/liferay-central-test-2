@@ -16,11 +16,11 @@ package com.liferay.mail.service.impl;
 
 import com.liferay.mail.constants.MailConstants;
 import com.liferay.mail.exception.NoSuchMessageException;
+import com.liferay.mail.internal.util.HtmlContentUtil;
 import com.liferay.mail.model.Attachment;
 import com.liferay.mail.model.Folder;
 import com.liferay.mail.model.Message;
 import com.liferay.mail.service.base.MessageLocalServiceBaseImpl;
-import com.liferay.mail.util.HtmlContentUtil;
 import com.liferay.portal.kernel.dao.orm.Disjunction;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;

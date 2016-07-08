@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.mail.imap;
+package com.liferay.mail.internal.imap;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;

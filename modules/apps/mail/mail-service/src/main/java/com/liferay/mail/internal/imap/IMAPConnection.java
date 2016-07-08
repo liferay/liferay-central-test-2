@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.mail.imap;
+package com.liferay.mail.internal.imap;
 
 import com.liferay.mail.configuration.MailGroupServiceConfiguration;
 import com.liferay.mail.exception.MailException;
