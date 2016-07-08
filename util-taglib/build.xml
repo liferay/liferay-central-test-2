@@ -8,18 +8,33 @@
 	<property name="manifest.bundle.name" value="Liferay Util Taglib" />
 	<property name="manifest.bundle.symbolic.name" value="com.liferay.util.taglib" />
 
-	<target depends="build-common-java.deploy" name="deploy">
-		<if>
-			<equals arg1="${app.server.type}" arg2="tomcat" />
-			<then>
-				<copy file="${jar.file}.jar" preservelastmodified="true" todir="${deploy.dir}" />
+	<macrodef name="deploy">
+		<attribute name="deploy.dir" />
+		<attribute name="jar.file" />
+		<attribute name="src.dir" />
 
-				<copy preservelastmodified="true" todir="${app.server.portal.dir}/WEB-INF/tld">
-					<fileset dir="classes/META-INF" includes="*.tld" />
-				</copy>
-			</then>
-		</if>
-	</target>
+		<sequential>
+			<deploy-cmd
+				copy.jar="false"
+				deploy.dir="@{deploy.dir}"
+				jar.file="@{jar.file}"
+				src.dir="@{src.dir}"
+			>
+				<deploy-post>
+					<if>
+						<equals arg1="${app.server.type}" arg2="tomcat" />
+						<then>
+							<copy file="@{jar.file}.jar" preservelastmodified="true" todir="@{deploy.dir}" />
+
+							<copy preservelastmodified="true" todir="${app.server.portal.dir}/WEB-INF/tld">
+								<fileset dir="classes/META-INF" includes="*.tld" />
+							</copy>
+						</then>
+					</if>
+				</deploy-post>
+			</deploy-cmd>
+		</sequential>
+	</macrodef>
 
 	<target name="build-taglibs">
 		<java
