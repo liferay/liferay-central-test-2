@@ -192,6 +192,10 @@ public abstract class DoulosServlet extends HttpServlet {
 
 		String validIpsString = servletConfig.getInitParameter("validIps");
 
+		if (validIpsString == null) {
+			validIpsString = "";
+		}
+
 		_validIps = validIpsString.split(",");
 	}
 
