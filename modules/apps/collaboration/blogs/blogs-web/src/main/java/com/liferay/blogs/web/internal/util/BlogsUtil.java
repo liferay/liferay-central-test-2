@@ -28,13 +28,11 @@ public class BlogsUtil {
 
 		String[] words = StringUtil.split(strippedContent, StringPool.SPACE);
 
-		int wordCount = words.length;
-
-		if (wordCount < 250) {
+		if (words.length < 250) {
 			return 1;
 		}
 
-		return Math.round(wordCount / 250F);
+		return Math.round(words.length / 250F);
 	}
 
 }
