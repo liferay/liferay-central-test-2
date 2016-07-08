@@ -410,6 +410,9 @@ public class IMAPAccessor {
 
 		Folder jxFolder = null;
 
+		Thread.currentThread().setContextClassLoader(
+			javax.mail.Session.class.getClassLoader());
+
 		try {
 			jxFolder = openFolder(_account.getSentFolderId());
 
@@ -435,6 +438,8 @@ public class IMAPAccessor {
 		}
 		finally {
 			closeFolder(jxFolder, false);
+			Thread.currentThread().setContextClassLoader(
+				IMAPAccessor.class.getClassLoader());
 		}
 	}
 
