@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import java.util.List;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Scott Lee
@@ -52,6 +53,11 @@ public class StartupAction extends SimpleAction {
 		for (MailboxFactory mailboxFactory : mailboxFactories) {
 			mailboxFactory.initialize();
 		}
+	}
+
+	@Reference(unbind = "-")
+	protected void setMailboxFactoryUtil(
+		MailboxFactoryUtil mailboxFactoryUtil) {
 	}
 
 }
