@@ -34,6 +34,8 @@ import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 
+import java.nio.charset.StandardCharsets;
+
 import java.util.Date;
 import java.util.List;
 
@@ -57,6 +59,8 @@ public class MessageLocalServiceImpl extends MessageLocalServiceBaseImpl {
 		long messageId = counterLocalService.increment();
 
 		Message message = messagePersistence.create(messageId);
+
+		subject = _forceEncoding(subject);
 
 		message.setCompanyId(user.getCompanyId());
 		message.setUserId(user.getUserId());
@@ -361,6 +365,13 @@ public class MessageLocalServiceImpl extends MessageLocalServiceBaseImpl {
 		}
 
 		return contentType.substring(0, i);
+	}
+
+	private String _forceEncoding(String subject) {
+		byte ptext[] = subject.getBytes(StandardCharsets.ISO_8859_1);
+		String encodedString = new String(ptext, StandardCharsets.UTF_8);
+
+		return encodedString;
 	}
 
 }
