@@ -197,8 +197,8 @@ public class ModulesStructureTest {
 
 	private boolean _contains(Path path, String s) throws IOException {
 		try (FileReader fileReader = new FileReader(path.toFile());
-				UnsyncBufferedReader unsyncBufferedReader =
-					new UnsyncBufferedReader(fileReader)) {
+			UnsyncBufferedReader unsyncBufferedReader =
+				new UnsyncBufferedReader(fileReader)) {
 
 			String line = null;
 
