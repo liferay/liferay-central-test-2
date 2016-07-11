@@ -1440,12 +1440,14 @@
 
 	<command name="viewSourceURLCP">
 		<var name="key_kbArticleSourceURL" value="${kbArticleSourceURL}" />
-		<var name="key_kbArticleTitle" value="${kbArticleTitle}" />
-		<var name="key_rowEntry" value="${kbArticleTitle}" />
 
-		<execute function="Click" locator1="Icon#ROW_VERTICAL_ELLIPSIS" />
+		<execute function="Click" locator1="Icon#HEADER_VERTICAL_ELLIPSIS" />
 
 		<execute function="AssertClick" locator1="MenuItem#EDIT" value1="Edit" />
+
+		<execute macro="Panel#expandPanel">
+			<var name="panelHeading" value="Configuration" />
+		</execute>
 
 		<execute function="AssertTextEquals" locator1="CKEditor#SOURCE_URL" value1="${kbArticleSourceURL}" />
 	</command>
