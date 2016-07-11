@@ -185,7 +185,23 @@
 	</command>
 
 	<command name="Demo" priority="1">
-		<property name="portlet.properties.knowledge-base-portlet" value="admin.kb.article.sections=Application Server,Authentication,Content Management,Database,Development,Plugins,Portlets,Security,Server Configuration,User Interface${line.separator}admin.kb.article.default.sections=" />
+		<execute macro="Navigator#openURL" />
+
+		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+			<var name="portlet" value="System Settings" />
+		</execute>
+
+		<execute macro="SystemSettings#gotoCategory">
+			<var name="category" value="Collaboration" />
+		</execute>
+
+		<execute macro="SystemSettings#editConfiguration">
+			<var name="configurationName" value="Knowledge Base Section" />
+		</execute>
+
+		<execute macro="KBArticle#addSections">
+			<var name="kbAdminSection" value="Application Server,Authentication,Content Management,Database,Development,Plugins,Portlets,Security,Server Configuration,User Interface" />
+		</execute>
 
 		<execute macro="Navigator#openURL" />
 
