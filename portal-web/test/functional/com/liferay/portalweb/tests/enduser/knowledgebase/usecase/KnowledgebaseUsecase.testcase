@@ -304,7 +304,7 @@
 			<var name="kbArticleTitle" value="KB Admin Article" />
 		</execute>
 
-		<execute macro="KBArticle#deletePGViaKBDisplay">
+		<execute macro="KBArticle#deletePG">
 			<var name="kbArticleTitle" value="KB Admin Article" />
 		</execute>
 
@@ -427,7 +427,7 @@
 			<var name="pageName" value="Knowledge Base Article Page" />
 		</execute>
 
-		<execute macro="KBArticle#deletePGViaKBArticle">
+		<execute macro="KBArticle#deletePG">
 			<var name="kbArticleTitle" value="KB Admin Article2" />
 		</execute>
 	</command>
