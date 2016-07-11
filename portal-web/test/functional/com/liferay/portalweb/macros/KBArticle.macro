@@ -129,7 +129,9 @@
 		<if>
 			<isset var="kbArticleSection" />
 			<then>
-				<execute function="AddSelection" locator1="KnowledgeBaseArticle#SECTIONS_SELECT" value1="${kbArticleSection}" />
+				<var name="key_kbArticleSection" value="${kbArticleSection}" />
+
+				<execute function="AssertClick" locator1="KnowledgeBaseArticle#SECTIONS_SELECT" value1="${kbArticleSection}" />
 			</then>
 		</if>
 
