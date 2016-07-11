@@ -1113,7 +1113,7 @@
 		</execute>
 
 		<execute function="AssertTextEquals" locator1="KnowledgeBaseArticle#TITLE" value1="${kbChildArticleTitle}" />
-		<execute function="AssertTextEquals" locator1="KnowledgeBaseArticle#CONTENT" value1="${kbChildArticleContent}" />
+		<execute function="AssertTextEquals#assertPartialText" locator1="KnowledgeBaseArticle#CONTENT" value1="${kbChildArticleContent}" />
 	</command>
 
 	<command name="viewChildArticleHierarchyViaKBDisplayPG">
