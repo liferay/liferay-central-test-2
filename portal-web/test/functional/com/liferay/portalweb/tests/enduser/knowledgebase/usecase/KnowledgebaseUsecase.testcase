@@ -913,8 +913,6 @@
 	</command>
 
 	<command name="ViewImportedKBArticleWithSourceURLMetadata" priority="4">
-		<property name="portlet.properties.knowledge-base-portlet" value="knowledge.base.source.url.enabled=true" />
-
 		<execute macro="Page#add">
 			<var name="pageName" value="Knowledge Base Display Page" />
 		</execute>
@@ -934,6 +932,20 @@
 		<execute macro="Portlet#addPG">
 			<var name="portletName" value="Knowledge Base Display" />
 		</execute>
+
+		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+			<var name="portlet" value="System Settings" />
+		</execute>
+
+		<execute macro="SystemSettings#gotoCategory">
+			<var name="category" value="Collaboration" />
+		</execute>
+
+		<execute macro="SystemSettings#editConfiguration">
+			<var name="configurationName" value="Knowledge Base Service" />
+		</execute>
+
+		<execute macro="KBArticle#enableSourceURL" />
 
 		<execute macro="Navigator#openURL" />
 
@@ -1037,13 +1049,27 @@
 	</command>
 
 	<command name="ViewKBArticleGitHubSourceURL" priority="3">
-		<property name="portlet.properties.knowledge-base-portlet" value="knowledge.base.source.url.enabled=true" />
-
 		<var name="history" value="true" />
 		<var name="kbArticleSourceURL" value="http://www.google.com" />
 		<var name="kbArticleTitle" value="Knowledge Base Article Title" />
 		<var name="print" value="true" />
 		<var name="subscribe" value="true" />
+
+		<execute macro="Navigator#openURL" />
+
+		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+			<var name="portlet" value="System Settings" />
+		</execute>
+
+		<execute macro="SystemSettings#gotoCategory">
+			<var name="category" value="Collaboration" />
+		</execute>
+
+		<execute macro="SystemSettings#editConfiguration">
+			<var name="configurationName" value="Knowledge Base Service" />
+		</execute>
+
+		<execute macro="KBArticle#enableSourceURL" />
 
 		<execute macro="Navigator#openURL" />
 
