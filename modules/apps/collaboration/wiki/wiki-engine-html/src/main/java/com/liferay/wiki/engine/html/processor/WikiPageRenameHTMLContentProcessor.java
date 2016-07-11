@@ -46,7 +46,6 @@ public class WikiPageRenameHTMLContentProcessor
 			"(<img [^s]*src=\"[^g]+get_page_attachment\\?[^t]+title=)" +
 				"@old_title@&",
 			"$1@new_title@&");
-
 		regexps.put(
 			"(<a [^h]*href=\"[^g]+get_page_attachment\\?[^t]+title=)" +
 				"@old_title@&",
