@@ -509,7 +509,7 @@
 		<execute function="AssertTextNotPresent" locator1="Message#ERROR" value1="An unexpected error occurred while importing articles: File name is null." />
 	</command>
 
-	<command name="deletePGViaKBDisplay">
+	<command name="deletePG">
 		<var name="key_kbTool" value="Delete" />
 
 		<execute function="AssertClickNoError" locator1="KnowledgeBase#KB_TOOLS" value1="Delete" />
