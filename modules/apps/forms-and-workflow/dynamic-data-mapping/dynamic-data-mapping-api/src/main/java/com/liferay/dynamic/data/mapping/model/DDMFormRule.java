@@ -24,6 +24,9 @@ import java.util.List;
  */
 public class DDMFormRule implements Serializable {
 
+	public DDMFormRule() {
+	}
+
 	public DDMFormRule(DDMFormRule ddmFormRule) {
 		_condition = ddmFormRule._condition;
 		_actions = new ArrayList<>(ddmFormRule._actions);
@@ -33,9 +36,6 @@ public class DDMFormRule implements Serializable {
 	public DDMFormRule(String condition, List<String> actions) {
 		_condition = condition;
 		_actions = actions;
-	}
-
-	public DDMFormRule() {
 	}
 
 	public void addAction(String action) {
