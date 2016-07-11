@@ -16,7 +16,10 @@
 			<#assign VOID = freeMarkerPortletPreferences.setValue("displayDepth", "1")>
 			<#assign VOID = freeMarkerPortletPreferences.setValue("portletSetupPortletDecoratorId", "barebone")>
 
-			<@liferay.navigation_menu instance_id="header_navigation_menu" default_preferences="${freeMarkerPortletPreferences}" />
+			<@liferay.navigation_menu
+				instance_id="header_navigation_menu"
+				default_preferences="${freeMarkerPortletPreferences}"
+			/>
 
 			<#assign VOID = freeMarkerPortletPreferences.reset()>
 		</ul>
@@ -26,7 +29,10 @@
 		<#assign VOID = freeMarkerPortletPreferences.setValue("portletSetupPortletDecoratorId", "barebone")>
 		<#assign VOID = freeMarkerPortletPreferences.setValue("rootLayoutType", "relative")>
 
-		<@liferay.navigation_menu instance_id="main_navigation_menu" default_preferences="${freeMarkerPortletPreferences}" />
+		<@liferay.navigation_menu
+			instance_id="main_navigation_menu"
+			default_preferences="${freeMarkerPortletPreferences}"
+		/>
 
 		<#assign VOID = freeMarkerPortletPreferences.reset()>
 	</nav>
