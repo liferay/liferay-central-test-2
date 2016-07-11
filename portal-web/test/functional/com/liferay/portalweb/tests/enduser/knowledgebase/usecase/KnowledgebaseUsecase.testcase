@@ -428,6 +428,7 @@
 		</execute>
 
 		<execute macro="KBArticle#deletePG">
+			<var name="deleteViaKBArticle" value="true" />
 			<var name="kbArticleTitle" value="KB Admin Article2" />
 		</execute>
 	</command>
