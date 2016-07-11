@@ -231,6 +231,23 @@
 		<execute function="AssertTextEquals#assertPartialText" locator1="Message#ERROR_ENTER_A_VALID_TITLE" value1="Please enter a valid title." />
 	</command>
 
+	<command name="addSections">
+		<var name="sectionCount" value="0" />
+
+		<for list="${kbAdminSection}" param="kbAdminSection">
+			<var name="key_assetType" value="KBArticleSection" />
+			<var method="MathUtil#sum('${sectionCount}', '1')" name="sectionCount" />
+
+			<var name="key_counter" value="${sectionCount}" />
+
+			<execute function="Type" locator1="KnowledgeBaseArticle#ADMIN_KB_ARTICLE_SECTION" value1="${kbAdminSection}" />
+
+			<execute function="Click" locator1="Icon#ADD_REPEATABLE_ENTRY" />
+		</for>
+
+		<execute function="AssertClick" locator1="Button#SAVE" value1="Save" />
+	</command>
+
 	<command name="configureEmailCP">
 		<execute function="Click" locator1="BasePortlet#OPTIONS_ICON" />
 
