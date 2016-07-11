@@ -340,8 +340,7 @@ public class DefaultLPKGDeployer implements LPKGDeployer {
 
 			if (targetLocation != null) {
 				if (_log.isInfoEnabled()) {
-					_log.info(
-						"Using overwritten war bundle " + targetLocation);
+					_log.info("Using overwritten war bundle " + targetLocation);
 				}
 
 				continue;
