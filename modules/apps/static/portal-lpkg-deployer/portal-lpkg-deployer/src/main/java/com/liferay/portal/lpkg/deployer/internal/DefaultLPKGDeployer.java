@@ -309,7 +309,7 @@ public class DefaultLPKGDeployer implements LPKGDeployer {
 
 			if (jarBundle != null) {
 				if (_log.isInfoEnabled()) {
-					_log.info("Using overwritten jar bundle " + location);
+					_log.info("Using overwritten JAR bundle " + location);
 				}
 
 				continue;
@@ -327,7 +327,7 @@ public class DefaultLPKGDeployer implements LPKGDeployer {
 			_startBundle(jarBundle);
 
 			if (_log.isInfoEnabled()) {
-				_log.info("Installed overwritten jar bundle " + location);
+				_log.info("Installed overwritten JAR bundle " + location);
 			}
 		}
 	}
@@ -565,7 +565,7 @@ public class DefaultLPKGDeployer implements LPKGDeployer {
 
 			if (_log.isInfoEnabled()) {
 				_log.info(
-					"Uninstalled orphan overwritten jar bundle " + location);
+					"Uninstalled orphan overwritten JAR bundle " + location);
 			}
 		}
 	}
