@@ -14,19 +14,28 @@
 
 package com.liferay.adaptive.media.document.library.repository;
 
+import com.liferay.adaptive.media.processor.MediaProcessor;
+import com.liferay.adaptive.media.processor.MediaProcessorException;
+import com.liferay.adaptive.media.processor.MediaProcessorLocator;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.module.framework.ModuleServiceLifecycle;
 import com.liferay.portal.kernel.repository.DocumentRepository;
 import com.liferay.portal.kernel.repository.capabilities.Capability;
 import com.liferay.portal.kernel.repository.event.RepositoryEventAware;
 import com.liferay.portal.kernel.repository.event.RepositoryEventType;
 import com.liferay.portal.kernel.repository.model.FileEntry;
+import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.repository.registry.CapabilityRegistry;
 import com.liferay.portal.kernel.repository.registry.RepositoryDefiner;
 import com.liferay.portal.kernel.repository.registry.RepositoryEventRegistry;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
+
+import java.util.List;
 
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Adolfo Pérez
@@ -45,6 +54,18 @@ public class AdaptiveMediaRepositoryDefiner
 			AdaptiveMediaCapabiliy.class, new AdaptiveMediaCapabiliy());
 	}
 
+	@Reference(unbind = "-")
+	public void setMediaProcessorLocator(
+		MediaProcessorLocator mediaProcessorLocator) {
+
+		_mediaProcessorLocator = mediaProcessorLocator;
+	}
+
+	@Reference(target = ModuleServiceLifecycle.PORTAL_INITIALIZED, unbind = "-")
+	public void setModuleServiceLifecycle(
+		ModuleServiceLifecycle moduleServiceLifecycle) {
+	}
+
 	@Activate
 	protected void activate() {
 		initializeOverridenRepositoryDefiner(_CLASS_NAME);
@@ -55,17 +76,39 @@ public class AdaptiveMediaRepositoryDefiner
 		restoreOverridenRepositoryDefiner(_CLASS_NAME);
 	}
 
-	private void _createAdaptiveImages(FileEntry fileEntry) {
-	}
-
 	private void _deleteAdaptiveImages(FileEntry fileEntry) {
+		try {
+			MediaProcessor<FileVersion, ?> mediaProcessor =
+				_mediaProcessorLocator.locateForClass(FileVersion.class);
+
+			List<FileVersion> fileVersions = fileEntry.getFileVersions(
+				WorkflowConstants.STATUS_ANY);
+
+			for (FileVersion fileVersion : fileVersions) {
+				mediaProcessor.cleanUp(fileVersion);
+			}
+		}
+		catch (MediaProcessorException | PortalException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	private void _updateAdaptiveImages(FileEntry fileEntry) {
+		try {
+			MediaProcessor<FileVersion, ?> mediaProcessor =
+				_mediaProcessorLocator.locateForClass(FileVersion.class);
+
+			mediaProcessor.process(fileEntry.getLatestFileVersion(true));
+		}
+		catch (MediaProcessorException | PortalException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	private static final String _CLASS_NAME =
 		"com.liferay.portal.repository.liferayrepository.LiferayRepository";
+
+	private MediaProcessorLocator _mediaProcessorLocator;
 
 	private class AdaptiveMediaCapabiliy
 		implements Capability, RepositoryEventAware {
@@ -75,7 +118,7 @@ public class AdaptiveMediaRepositoryDefiner
 
 			repositoryEventRegistry.registerRepositoryEventListener(
 				RepositoryEventType.Add.class, FileEntry.class,
-				AdaptiveMediaRepositoryDefiner.this::_createAdaptiveImages);
+				AdaptiveMediaRepositoryDefiner.this::_updateAdaptiveImages);
 
 			repositoryEventRegistry.registerRepositoryEventListener(
 				RepositoryEventType.Update.class, FileEntry.class,
@@ -86,13 +129,6 @@ public class AdaptiveMediaRepositoryDefiner
 				AdaptiveMediaRepositoryDefiner.this::_deleteAdaptiveImages);
 		}
 
-	}
-
-	@Reference(
-		target = ModuleServiceLifecycle.PORTAL_INITIALIZED, unbind = "-"
-	)
-	public void setModuleServiceLifecycle(
-		ModuleServiceLifecycle moduleServiceLifecycle) {
 	}
 
 }
