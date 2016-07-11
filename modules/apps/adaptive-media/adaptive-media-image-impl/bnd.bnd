@@ -1,0 +1,7 @@
+Bundle-Name: Liferay Adaptive Media Image Implementation
+Bundle-SymbolicName: com.liferay.adaptive.media.image
+Bundle-Version: 1.0.0
+Export-Package: com.liferay.adaptive.media.image.processor
+Liferay-Releng-Module-Group-Description:
+Liferay-Releng-Module-Group-Title: Adaptive Media
+Private-Package: com.liferay.adaptive.media
