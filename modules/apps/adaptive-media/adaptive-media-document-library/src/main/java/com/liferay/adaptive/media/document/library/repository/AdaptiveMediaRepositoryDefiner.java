@@ -14,6 +14,7 @@
 
 package com.liferay.adaptive.media.document.library.repository;
 
+import com.liferay.portal.kernel.module.framework.ModuleServiceLifecycle;
 import com.liferay.portal.kernel.repository.DocumentRepository;
 import com.liferay.portal.kernel.repository.capabilities.Capability;
 import com.liferay.portal.kernel.repository.event.RepositoryEventAware;
@@ -85,6 +86,13 @@ public class AdaptiveMediaRepositoryDefiner
 				AdaptiveMediaRepositoryDefiner.this::_deleteAdaptiveImages);
 		}
 
+	}
+
+	@Reference(
+		target = ModuleServiceLifecycle.PORTAL_INITIALIZED, unbind = "-"
+	)
+	public void setModuleServiceLifecycle(
+		ModuleServiceLifecycle moduleServiceLifecycle) {
 	}
 
 }
