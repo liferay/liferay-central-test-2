@@ -43,9 +43,7 @@
 
 		<execute function="Click#clickNoMouseOver" locator1="Mentions#MENTIONS_USER_DISPLAY_OPTION" />
 
-		<execute function="Click" locator1="Button#PUBLISH" />
-
-		<execute macro="Alert#viewSuccessMessage" />
+		<execute macro="PortletEntry#publish" />
 	</command>
 
 	<command name="addMentionViaMessageBoardThread">
@@ -73,9 +71,7 @@
 
 		<execute function="Click#clickNoMouseOver" locator1="Mentions#MENTIONS_USER_DISPLAY_OPTION" />
 
-		<execute function="Click" locator1="Button#PUBLISH" value1="Publish" />
-
-		<execute macro="Alert#viewSuccessMessage" />
+		<execute macro="PortletEntry#publish" />
 	</command>
 
 	<command name="disableMentionsViaPortalSettings">
