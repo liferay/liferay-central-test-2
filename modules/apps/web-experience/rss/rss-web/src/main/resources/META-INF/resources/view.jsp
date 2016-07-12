@@ -25,7 +25,12 @@ contextObjects.put("rssDisplayContext", rssDisplayContext);
 %>
 
 <c:choose>
-	<c:when test="<%= rssFeeds.size() > 0 %>">
+	<c:when test="<%= rssFeeds.isEmpty() %>">
+		<div class="alert alert-info portlet-configuration">
+			<liferay-ui:message key="please-configure-this-portlet-and-select-at-least-one-valid-rss-feed" />
+		</div>
+	</c:when>
+	<c:otherwise>
 		<liferay-ddm:template-renderer className="<%= RSSFeed.class.getName() %>" contextObjects="<%= contextObjects %>" displayStyle="<%= rssPortletInstanceConfiguration.displayStyle() %>" displayStyleGroupId="<%= rssDisplayContext.getDisplayStyleGroupId() %>" entries="<%= rssFeeds %>">
 
 			<%
@@ -48,10 +53,5 @@ contextObjects.put("rssDisplayContext", rssDisplayContext);
 			%>
 
 		</liferay-ddm:template-renderer>
-	</c:when>
-	<c:otherwise>
-		<div class="alert alert-info portlet-configuration">
-			<liferay-ui:message key="please-configure-this-portlet-and-select-at-least-one-valid-rss-feed" />
-		</div>
 	</c:otherwise>
 </c:choose>
