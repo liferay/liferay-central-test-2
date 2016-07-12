@@ -143,8 +143,7 @@ String searchContainerId = ParamUtil.getString(request, "searchContainerId");
 
 							<%
 							String articleImageURL = curArticle.getArticleImageURL(themeDisplay);
-
-							String cardOnClick = "Liferay.fire('previewArticle', {title: '" + HtmlUtil.escapeJS(curArticle.getTitle(locale)) + "', uri: '" + HtmlUtil.escapeJS(previewArticleContentURL.toString()) + "'});";
+							String taglibOnClick = "Liferay.fire('previewArticle', {title: '" + HtmlUtil.escapeJS(curArticle.getTitle(locale)) + "', uri: '" + HtmlUtil.escapeJS(previewArticleContentURL.toString()) + "'});";
 							%>
 
 							<c:choose>
@@ -153,7 +152,7 @@ String searchContainerId = ParamUtil.getString(request, "searchContainerId");
 										actionJsp='<%= journalDisplayContext.isShowEditActions() ? "/article_action.jsp" : null %>'
 										actionJspServletContext="<%= application %>"
 										imageUrl="<%= articleImageURL %>"
-										onClick="<%= cardOnClick %>"
+										onClick="<%= taglibOnClick %>"
 										resultRow="<%= row %>"
 										rowChecker="<%= articleSearchContainer.getRowChecker() %>"
 										title="<%= curArticle.getTitle(locale) %>"
@@ -167,7 +166,7 @@ String searchContainerId = ParamUtil.getString(request, "searchContainerId");
 										actionJsp='<%= journalDisplayContext.isShowEditActions() ? "/article_action.jsp" : null %>'
 										actionJspServletContext="<%= application %>"
 										icon="web-content"
-										onClick="<%= cardOnClick %>"
+										onClick="<%= taglibOnClick %>"
 										resultRow="<%= row %>"
 										rowChecker="<%= articleSearchContainer.getRowChecker() %>"
 										title="<%= curArticle.getTitle(locale) %>"
