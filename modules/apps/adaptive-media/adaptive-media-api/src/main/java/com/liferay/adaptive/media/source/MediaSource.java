@@ -25,23 +25,30 @@ import java.util.stream.Stream;
  * A {@link MediaSource} is responsible of locating and returning media
  * related to a model.
  *
+ * All media matching the query will be returned, sorted by score. This means
+ * better matches will appear before lesser ones.
+ *
  * @author Adolfo Pérez
  */
 public interface MediaSource<B extends MediaQueryBuilder<M, T>, M, T> {
 
 	/**
-	 * Return all {@link Media} for the given model.
+	 * Return all {@link Media} for the given model. The provided function will
+	 * be invoked with an instance of an implementation dependant {@link
+	 * MediaQueryBuilder}.
 	 *
-	 * @param model The model for which all generated media will be retrieved
+	 * @param queryBuilderFunction Function that will be invoked with a {@link
+	 *        MediaQueryBuilder} as argument. This query builder will provide
+	 *        operations to filter and sort the returned media.
 	 *
-	 * @return A non-null, possibly empty stream with all generated media for
-	 *         the given model.
+	 * @return A non-null, possibly empty stream with all media matching the
+	 *         query ordered by score: better matches are returned before
+	 *         worser ones
 	 *
 	 * @throws MediaProcessorException if an error occurred while getting the
 	 *         {@link Media}. See {@link MediaProcessorException} inner classes
 	 *         for the set of possible exceptions.
-	 * @throws MediaProcessorRuntimeException if a system error occurred.
-	 * @throws PortalException if an error occurred while cally any Liferay
+	 * @throws PortalException if an error occurred while calling any Liferay
 	 *         services
 	 */
 	public Stream<Media<T>> getMedia(
