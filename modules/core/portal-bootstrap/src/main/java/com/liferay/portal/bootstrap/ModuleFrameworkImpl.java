@@ -1140,12 +1140,18 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 
 							if (overwrittenFileNames.contains(fileName)) {
 								if (_log.isInfoEnabled()) {
-									_log.info(
-										zipFile + ":" + zipEntry +
-											" is overwritten by " +
-												PropsValues.
-													MODULE_FRAMEWORK_BASE_DIR +
-												"/static/" + fileName);
+									StringBundler sb = new StringBundler(7);
+
+									sb.append(zipFile);
+									sb.append(":");
+									sb.append(zipEntry);
+									sb.append(" is overwritten by ");
+									sb.append(
+										PropsValues.MODULE_FRAMEWORK_BASE_DIR);
+									sb.append("/static/");
+									sb.append(fileName);
+
+									_log.info(sb.toString());
 								}
 
 								continue;
