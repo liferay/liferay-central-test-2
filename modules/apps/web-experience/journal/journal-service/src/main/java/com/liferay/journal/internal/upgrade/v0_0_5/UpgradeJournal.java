@@ -100,7 +100,7 @@ public class UpgradeJournal extends UpgradeProcess {
 			defaultUserId, group.getGroupId(),
 			PortalUtil.getClassNameId(JournalArticle.class),
 			clazz.getClassLoader(),
-			"com/liferay/journal/upgrade/v1_0_0/dependencies" +
+			"com/liferay/journal/internal/upgrade/v1_0_0/dependencies" +
 				"/basic-web-content-structure.xml",
 			new ServiceContext());
 
@@ -256,7 +256,8 @@ public class UpgradeJournal extends UpgradeProcess {
 
 		return ContentUtil.get(
 			clazz.getClassLoader(),
-			"com/liferay/journal/upgrade/v1_0_0/dependencies/" + fileName);
+			"com/liferay/journal/internal/upgrade/v1_0_0/dependencies/" +
+				fileName);
 	}
 
 	protected List<Element> getDDMStructures(Locale locale)
