@@ -14,3 +14,11 @@ dependencies {
 	testCompile group: "junit", name: "junit", version: "4.12"
 	testCompile group: "org.mockito", name: "mockito-core", version: "1.10.8", transitive: true
 }
+
+jacocoTestReport {
+	afterEvaluate {
+		classDirectories = files(classDirectories.files.collect {
+			fileTree(dir: it, exclude: 'com/liferay/adaptive/media/image/internal/image/**')
+		})
+	}
+}
