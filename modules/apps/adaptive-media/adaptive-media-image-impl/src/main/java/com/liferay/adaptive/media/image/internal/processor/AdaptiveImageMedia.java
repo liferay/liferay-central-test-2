@@ -21,6 +21,8 @@ import com.liferay.adaptive.media.processor.MediaProperty;
 
 import java.io.InputStream;
 
+import java.net.URI;
+
 import java.util.Optional;
 import java.util.function.Supplier;
 
@@ -32,10 +34,12 @@ public final class AdaptiveImageMedia
 
 	public AdaptiveImageMedia(
 		Supplier<InputStream> supplier,
-		AdaptiveImagePropertyMapping adaptiveImagePropertyMapping) {
+		AdaptiveImagePropertyMapping adaptiveImagePropertyMapping,
+		URI relativeURI) {
 
 		_supplier = supplier;
 		_adaptiveImagePropertyMapping = adaptiveImagePropertyMapping;
+		_relativeURI = relativeURI;
 	}
 
 	@Override
@@ -50,7 +54,13 @@ public final class AdaptiveImageMedia
 		return _adaptiveImagePropertyMapping.getPropertyValue(mediaProperty);
 	}
 
+	@Override
+	public URI getRelativeURI() {
+		return _relativeURI;
+	}
+
 	private final AdaptiveImagePropertyMapping _adaptiveImagePropertyMapping;
+	private final URI _relativeURI;
 	private final Supplier<InputStream> _supplier;
 
 }

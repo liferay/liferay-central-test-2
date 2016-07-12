@@ -18,6 +18,8 @@ import aQute.bnd.annotation.ProviderType;
 
 import java.io.InputStream;
 
+import java.net.URI;
+
 import java.util.Optional;
 
 /**
@@ -50,5 +52,14 @@ public interface Media<T> {
 	 *         Optional}
 	 */
 	public <V> Optional<V> getPropertyValue(MediaProperty<T, V> property);
+
+	/**
+	 * Return the relative URI of this {@link Media}. This can be used by other
+	 * parts of the system to uniquely identify each {@link Media}. This URI
+	 * should be treated as an opaque value.
+	 *
+	 * @return A relative URI pointing to this {@link Media}
+	 */
+	public URI getRelativeURI();
 
 }

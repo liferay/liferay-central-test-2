@@ -32,6 +32,12 @@ import com.liferay.portal.kernel.repository.model.FileVersion;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+
+import java.net.URI;
+import java.net.URLEncoder;
+
+import java.nio.charset.StandardCharsets;
 
 import java.util.Collection;
 import java.util.Comparator;
@@ -192,6 +198,20 @@ public final class AdaptiveImageMediaProcessorImpl
 		};
 	}
 
+	private URI _buildRelativeURI(
+		FileVersion fileVersion,
+		AdaptiveImageVariantConfiguration adaptiveImageVariantConfiguration) {
+
+		String relativePath = String.format(
+			"/adaptive/%d/%d/%d/%d/%d/%s/%s", fileVersion.getCompanyId(),
+			fileVersion.getGroupId(), fileVersion.getRepositoryId(),
+			fileVersion.getFileEntryId(), fileVersion.getFileVersionId(),
+			adaptiveImageVariantConfiguration.getUUID(),
+			_encode(fileVersion.getFileName()));
+
+		return URI.create(relativePath);
+	}
+
 	private Media<AdaptiveImageMediaProcessor> _createMedia(
 		FileVersion fileVersion,
 		AdaptiveImageVariantConfiguration adaptiveImageVariantConfiguration) {
@@ -204,7 +224,18 @@ public final class AdaptiveImageMediaProcessorImpl
 			() ->
 				_imageStorage.getContentStream(
 					fileVersion, adaptiveImageVariantConfiguration),
-			adaptiveImagePropertyMapping);
+			adaptiveImagePropertyMapping,
+			_buildRelativeURI(fileVersion, adaptiveImageVariantConfiguration));
+	}
+
+	private String _encode(String s) {
+		try {
+			return URLEncoder.encode(s, StandardCharsets.UTF_8.name());
+		}
+		catch (UnsupportedEncodingException uee) {
+			throw new MediaProcessorRuntimeException.
+				UnsupportedEncodingException(uee);
+		}
 	}
 
 	private AdaptiveImageConfiguration _adaptiveImageConfiguration;

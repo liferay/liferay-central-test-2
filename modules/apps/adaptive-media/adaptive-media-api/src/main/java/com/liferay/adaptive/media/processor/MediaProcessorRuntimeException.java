@@ -94,4 +94,24 @@ public class MediaProcessorRuntimeException extends RuntimeException {
 
 	}
 
+	public static final class UnsupportedEncodingException
+		extends MediaProcessorRuntimeException {
+
+		public UnsupportedEncodingException() {
+		}
+
+		public UnsupportedEncodingException(String s) {
+			super(s);
+		}
+
+		public UnsupportedEncodingException(String s, Throwable throwable) {
+			super(s, throwable);
+		}
+
+		public UnsupportedEncodingException(Throwable throwable) {
+			super(throwable);
+		}
+
+	}
+
 }
