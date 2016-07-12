@@ -1429,7 +1429,17 @@
 	<command name="viewSourceURLCP">
 		<var name="key_kbArticleSourceURL" value="${kbArticleSourceURL}" />
 
-		<execute function="Click" locator1="Icon#HEADER_VERTICAL_ELLIPSIS" />
+		<if>
+			<isset var="kbChildArticleTitle" />
+			<then>
+				<execute function="Click" locator1="Icon#HEADER_VERTICAL_ELLIPSIS" />
+			</then>
+			<else>
+				<var name="key_rowEntry" value="${kbArticleTitle}" />
+
+				<execute function="Click" locator1="Icon#ROW_VERTICAL_ELLIPSIS" />
+			</else>
+		</if>
 
 		<execute function="AssertClick" locator1="MenuItem#EDIT" value1="Edit" />
 
