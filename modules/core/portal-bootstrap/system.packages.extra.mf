@@ -3401,7 +3401,7 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  tal.kernel.template,com.liferay.portal.kernel.templateparser,com.life
  ray.portal.kernel.theme";version="1.0.0",com.liferay.portal.theme;use
  s:="com.liferay.portal.kernel.model,com.liferay.portal.kernel.theme,j
- avax.servlet";version="1.0.0",com.liferay.portal.tools;version="1.1.0
+ avax.servlet";version="1.0.0",com.liferay.portal.tools;version="1.2.0
  ";uses:="com.liferay.portal.kernel.dao.db,com.liferay.portal.kernel.e
  xception,com.liferay.portal.kernel.util,com.liferay.portal.kernel.xml
  ",com.liferay.portal.tools.deploy;uses:="com.liferay.portal.kernel.de
