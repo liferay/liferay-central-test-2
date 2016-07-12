@@ -18,6 +18,7 @@ import com.liferay.adaptive.media.processor.Media;
 import com.liferay.adaptive.media.processor.MediaProcessorException;
 import com.liferay.portal.kernel.exception.PortalException;
 
+import java.util.function.Function;
 import java.util.stream.Stream;
 
 /**
@@ -26,7 +27,7 @@ import java.util.stream.Stream;
  *
  * @author Adolfo Pérez
  */
-public interface MediaSource<M, T> {
+public interface MediaSource<B extends MediaQueryBuilder<M, T>, M, T> {
 
 	/**
 	 * Return all {@link Media} for the given model.
@@ -43,7 +44,8 @@ public interface MediaSource<M, T> {
 	 * @throws PortalException if an error occurred while cally any Liferay
 	 *         services
 	 */
-	public Stream<Media<T>> getMedia(M model)
+	public Stream<Media<T>> getMedia(
+			Function<B, MediaQuery<M, T>> queryBuilderFunction)
 		throws MediaProcessorException, PortalException;
 
 }

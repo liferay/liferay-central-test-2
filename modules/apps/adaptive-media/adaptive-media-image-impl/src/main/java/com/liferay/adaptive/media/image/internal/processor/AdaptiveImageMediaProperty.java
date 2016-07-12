@@ -25,11 +25,17 @@ public final class AdaptiveImageMediaProperty {
 
 	public static final MediaProperty<AdaptiveImageMediaProcessor, Integer>
 		IMAGE_HEIGHT = new MediaProperty<>(
-		"height", AdaptiveImageMediaProperty::_parseInt);
+			"height", AdaptiveImageMediaProperty::_parseInt,
+			AdaptiveImageMediaProperty::_intDistance);
 
 	public static final MediaProperty<AdaptiveImageMediaProcessor, Integer>
 		IMAGE_WIDTH = new MediaProperty<>(
-		"width", AdaptiveImageMediaProperty::_parseInt);
+			"width", AdaptiveImageMediaProperty::_parseInt,
+			AdaptiveImageMediaProperty::_intDistance);
+
+	private static int _intDistance(int i1, int i2) {
+		return Math.abs(i1 - i2);
+	}
 
 	private static int _parseInt(String value) {
 		try {
