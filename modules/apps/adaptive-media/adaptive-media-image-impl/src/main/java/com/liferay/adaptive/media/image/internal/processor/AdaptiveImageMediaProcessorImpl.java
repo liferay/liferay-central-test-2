@@ -20,6 +20,7 @@ import com.liferay.adaptive.media.image.internal.configuration.AdaptiveImageVari
 import com.liferay.adaptive.media.image.internal.image.ImageProcessor;
 import com.liferay.adaptive.media.image.internal.image.ImageStorage;
 import com.liferay.adaptive.media.image.processor.AdaptiveImageMediaProcessor;
+import com.liferay.adaptive.media.image.source.AdaptiveImageMediaSource;
 import com.liferay.adaptive.media.processor.Media;
 import com.liferay.adaptive.media.processor.MediaProcessor;
 import com.liferay.adaptive.media.processor.MediaProcessorRuntimeException;
@@ -40,10 +41,13 @@ import org.osgi.service.component.annotations.Reference;
 @Component(
 	immediate = true,
 	property = "model.class.name=com.liferay.portal.kernel.repository.model.FileVersion",
-	service = {AdaptiveImageMediaProcessor.class, MediaProcessor.class}
+	service = {
+		AdaptiveImageMediaProcessor.class, AdaptiveImageMediaSource.class,
+		MediaProcessor.class
+	}
 )
 public final class AdaptiveImageMediaProcessorImpl
-	implements AdaptiveImageMediaProcessor {
+	implements AdaptiveImageMediaProcessor, AdaptiveImageMediaSource {
 
 	@Override
 	public void cleanUp(FileVersion fileVersion) {

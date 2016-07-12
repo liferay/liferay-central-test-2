@@ -14,7 +14,6 @@
 
 package com.liferay.adaptive.media.processor.internal;
 
-import com.liferay.adaptive.media.processor.Media;
 import com.liferay.adaptive.media.processor.MediaProcessor;
 import com.liferay.adaptive.media.processor.MediaProcessorException;
 import com.liferay.adaptive.media.processor.MediaProcessorLocator;
@@ -26,7 +25,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.transaction.TransactionCommitCallbackUtil;
 
 import java.util.List;
-import java.util.stream.Stream;
 
 import org.osgi.framework.BundleContext;
 import org.osgi.service.component.annotations.Activate;
@@ -77,13 +75,6 @@ public class TransactionAwareMediaProcessorLocator
 
 			TransactionCommitCallbackUtil.registerCallback(() ->
 				_forEach(mediaProcessor -> mediaProcessor.cleanUp(model)));
-		}
-
-		@Override
-		public Stream<Media<T>> getMedia(M model)
-			throws MediaProcessorException, PortalException {
-
-			throw new UnsupportedOperationException();
 		}
 
 		@Override

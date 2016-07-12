@@ -18,8 +18,6 @@ import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.portal.kernel.exception.PortalException;
 
-import java.util.stream.Stream;
-
 /**
  * A {@link MediaProcessor} is responsible of generating media of a particular
  * type.
@@ -46,24 +44,6 @@ public interface MediaProcessor<M, T> {
 	 * @throws MediaProcessorRuntimeException if a system error occurred.
 	 */
 	public void cleanUp(M model)
-		throws MediaProcessorException, PortalException;
-
-	/**
-	 * Return all generated {@link Media} for the given model.
-	 *
-	 * @param model The model for which all generated media will be retrieved
-	 *
-	 * @return A non-null, possibly empty stream with all generated media for
-	 *         the given model.
-	 *
-	 * @throws MediaProcessorException if an error occurred while getting the
-	 *         {@link Media}. See {@link MediaProcessorException} inner classes
-	 *         for the set of possible exceptions.
-	 * @throws MediaProcessorRuntimeException if a system error occurred.
-	 * @throws PortalException if an error occurred while cally any Liferay
-	 *         services
-	 */
-	public Stream<Media<T>> getMedia(M model)
 		throws MediaProcessorException, PortalException;
 
 	/**

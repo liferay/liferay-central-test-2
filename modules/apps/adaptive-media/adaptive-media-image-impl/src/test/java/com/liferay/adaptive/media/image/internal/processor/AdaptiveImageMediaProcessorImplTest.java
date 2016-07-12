@@ -41,7 +41,7 @@ import org.mockito.Mockito;
 /**
  * @author Adolfo Pérez
  */
-public class AdaptiveImageMediaProcessorTest {
+public class AdaptiveImageMediaProcessorImplTest {
 
 	@Before
 	public void setUp() {
