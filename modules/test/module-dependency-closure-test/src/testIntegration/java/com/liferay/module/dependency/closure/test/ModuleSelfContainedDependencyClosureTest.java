@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.test.module.dependency.closure.test;
+package com.liferay.module.dependency.closure.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 import com.liferay.portal.util.PropsValues;
@@ -45,14 +45,14 @@ import org.osgi.framework.wiring.FrameworkWiring;
  * @author Shuyang Zhou
  */
 @RunWith(Arquillian.class)
-public class TestModuleSelfContainedDependencyClosureTest {
+public class ModuleSelfContainedDependencyClosureTest {
 
 	@Test
 	public void testTestModuleSelfContainedDependencyClosure()
 		throws IOException {
 
 		Bundle bundle = FrameworkUtil.getBundle(
-			TestModuleSelfContainedDependencyClosureTest.class);
+			ModuleSelfContainedDependencyClosureTest.class);
 
 		BundleContext bundleContext = bundle.getBundleContext();
 
