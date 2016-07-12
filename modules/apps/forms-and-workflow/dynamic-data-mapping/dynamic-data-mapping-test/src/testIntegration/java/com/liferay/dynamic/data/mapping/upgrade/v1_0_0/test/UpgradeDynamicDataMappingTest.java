@@ -909,11 +909,9 @@ public class UpgradeDynamicDataMappingTest {
 
 		String dateFieldName = "date1";
 
-		StringBundler sb = null;
-
 		// Date getDate statement
 
-		sb = new StringBundler(4);
+		StringBundler sb = new StringBundler(4);
 
 		sb.append("dateUtil.getDate(");
 		sb.append(dateFieldName);
