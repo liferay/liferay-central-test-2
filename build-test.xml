@@ -5523,6 +5523,10 @@ auto.deploy.dest.dir=C:/WINDOWS/system32/config/systemprofile/liferay/websphere-
 						</if>
 					</then>
 				</if>
+
+				<var name="osgi.module.custom.properties" unset="true" />
+				<var name="osgi.module.jar.file" unset="true" />
+				<var name="osgi.module.name" unset="true" />
 			</sequential>
 		</for>
 	</target>
