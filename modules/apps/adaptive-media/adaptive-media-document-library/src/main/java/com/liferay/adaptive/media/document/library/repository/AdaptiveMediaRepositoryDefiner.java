@@ -76,7 +76,7 @@ public class AdaptiveMediaRepositoryDefiner
 		restoreOverridenRepositoryDefiner(_CLASS_NAME);
 	}
 
-	private void _deleteAdaptiveImages(FileEntry fileEntry) {
+	private void _deleteAdaptiveMedia(FileEntry fileEntry) {
 		try {
 			MediaProcessor<FileVersion, ?> mediaProcessor =
 				_mediaProcessorLocator.locateForClass(FileVersion.class);
@@ -93,7 +93,7 @@ public class AdaptiveMediaRepositoryDefiner
 		}
 	}
 
-	private void _updateAdaptiveImages(FileEntry fileEntry) {
+	private void _updateAdaptiveMedia(FileEntry fileEntry) {
 		try {
 			MediaProcessor<FileVersion, ?> mediaProcessor =
 				_mediaProcessorLocator.locateForClass(FileVersion.class);
@@ -118,15 +118,15 @@ public class AdaptiveMediaRepositoryDefiner
 
 			repositoryEventRegistry.registerRepositoryEventListener(
 				RepositoryEventType.Add.class, FileEntry.class,
-				AdaptiveMediaRepositoryDefiner.this::_updateAdaptiveImages);
+				AdaptiveMediaRepositoryDefiner.this::_updateAdaptiveMedia);
 
 			repositoryEventRegistry.registerRepositoryEventListener(
 				RepositoryEventType.Update.class, FileEntry.class,
-				AdaptiveMediaRepositoryDefiner.this::_updateAdaptiveImages);
+				AdaptiveMediaRepositoryDefiner.this::_updateAdaptiveMedia);
 
 			repositoryEventRegistry.registerRepositoryEventListener(
 				RepositoryEventType.Delete.class, FileEntry.class,
-				AdaptiveMediaRepositoryDefiner.this::_deleteAdaptiveImages);
+				AdaptiveMediaRepositoryDefiner.this::_deleteAdaptiveMedia);
 		}
 
 	}
