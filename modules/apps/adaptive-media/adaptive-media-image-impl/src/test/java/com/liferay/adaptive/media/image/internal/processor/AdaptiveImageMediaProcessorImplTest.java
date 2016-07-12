@@ -28,8 +28,11 @@ import com.liferay.portal.kernel.util.StringUtil;
 import java.io.IOException;
 import java.io.InputStream;
 
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.junit.Assert;
@@ -119,7 +122,8 @@ public class AdaptiveImageMediaProcessorImplTest {
 			MediaProcessorRuntimeException.InvalidConfiguration.class
 		);
 
-		_adaptiveImageMediaProcessor.getMedia(_fileVersion);
+		_adaptiveImageMediaProcessor.getMedia(
+			query -> query.allForModel(_fileVersion));
 	}
 
 	@Test
@@ -144,10 +148,12 @@ public class AdaptiveImageMediaProcessorImplTest {
 			inputStream
 		);
 
-		_adaptiveImageMediaProcessor.getMedia(_fileVersion).
-			forEach(
-				media ->
-					Assert.assertSame(inputStream, media.getInputStream()));
+		Stream<Media<AdaptiveImageMediaProcessor>> mediaStream =
+			_adaptiveImageMediaProcessor.getMedia(
+				query -> query.allForModel(_fileVersion));
+
+		mediaStream.forEach(
+			media -> Assert.assertSame(inputStream, media.getInputStream()));
 	}
 
 	@Test
@@ -164,19 +170,22 @@ public class AdaptiveImageMediaProcessorImplTest {
 			Collections.singleton(configuration)
 		);
 
-		_adaptiveImageMediaProcessor.getMedia(_fileVersion).
-			forEach(
-				media -> {
-					Assert.assertEquals(
-						media.getPropertyValue(
-							AdaptiveImageMediaProperty.IMAGE_HEIGHT),
-						Optional.of(100));
+		Stream<Media<AdaptiveImageMediaProcessor>> mediaStream =
+			_adaptiveImageMediaProcessor.getMedia(
+				query -> query.allForModel(_fileVersion));
 
-					Assert.assertEquals(
-						media.getPropertyValue(
-							AdaptiveImageMediaProperty.IMAGE_WIDTH),
-						Optional.empty());
-				});
+		mediaStream.forEach(
+			media -> {
+				Assert.assertEquals(
+					media.getPropertyValue(
+						AdaptiveImageMediaProperty.IMAGE_HEIGHT),
+					Optional.of(100));
+
+				Assert.assertEquals(
+					media.getPropertyValue(
+						AdaptiveImageMediaProperty.IMAGE_WIDTH),
+					Optional.empty());
+			});
 	}
 
 	@Test
@@ -193,19 +202,193 @@ public class AdaptiveImageMediaProcessorImplTest {
 			Collections.singleton(configuration)
 		);
 
-		_adaptiveImageMediaProcessor.getMedia(_fileVersion).
-			forEach(
-				media -> {
-					Assert.assertEquals(
-						media.getPropertyValue(
-							AdaptiveImageMediaProperty.IMAGE_HEIGHT),
-						Optional.of(100));
+		Stream<Media<AdaptiveImageMediaProcessor>> mediaStream =
+			_adaptiveImageMediaProcessor.getMedia(
+				query -> query.allForModel(_fileVersion));
 
-					Assert.assertEquals(
-						media.getPropertyValue(
-							AdaptiveImageMediaProperty.IMAGE_WIDTH),
-						Optional.of(200));
-				});
+		mediaStream.forEach(
+			media -> {
+				Assert.assertEquals(
+					media.getPropertyValue(
+						AdaptiveImageMediaProperty.IMAGE_HEIGHT),
+					Optional.of(100));
+
+				Assert.assertEquals(
+					media.getPropertyValue(
+						AdaptiveImageMediaProperty.IMAGE_WIDTH),
+					Optional.of(200));
+			});
+	}
+
+	@Test
+	public void testGetMediaQueryWith100Height() {
+		AdaptiveImageVariantConfiguration configuration1 =
+			new AdaptiveImageVariantConfiguration(
+				StringUtil.randomString(), StringUtil.randomString(),
+				MapUtil.fromArray("height", "100", "width", "200"));
+
+		AdaptiveImageVariantConfiguration configuration2 =
+			new AdaptiveImageVariantConfiguration(
+				StringUtil.randomString(), StringUtil.randomString(),
+				MapUtil.fromArray("height", "200", "width", "200"));
+
+		Mockito.when(
+			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))
+		).thenReturn(
+			true
+		);
+
+		Mockito.when(
+			_adaptiveImageConfiguration.getAdaptiveImageVariantConfigurations(
+				Mockito.any(long.class))
+		).thenReturn(
+			Arrays.asList(configuration1, configuration2)
+		);
+
+		Mockito.when(
+			_fileVersion.getFileName()
+		).thenReturn(
+			StringUtil.randomString()
+		);
+
+		Stream<Media<AdaptiveImageMediaProcessor>> mediaStream =
+			_adaptiveImageMediaProcessor.getMedia(
+				query ->
+					query.
+						forModel(_fileVersion).
+						with(AdaptiveImageMediaProperty.IMAGE_HEIGHT, 100).
+						done());
+
+		List<Media<AdaptiveImageMediaProcessor>> mediaList =
+			mediaStream.collect(Collectors.toList());
+
+		Media<AdaptiveImageMediaProcessor> media0 = mediaList.get(0);
+
+		Optional<Integer> media0Optional = media0.getPropertyValue(
+			AdaptiveImageMediaProperty.IMAGE_HEIGHT);
+
+		Assert.assertEquals(100, (int)media0Optional.get());
+
+		Media<AdaptiveImageMediaProcessor> media1 = mediaList.get(1);
+
+		Optional<Integer> media1Optional = media1.getPropertyValue(
+			AdaptiveImageMediaProperty.IMAGE_HEIGHT);
+
+		Assert.assertEquals(200, (int)media1Optional.get());
+	}
+
+	@Test
+	public void testGetMediaQueryWith200Height() {
+		AdaptiveImageVariantConfiguration configuration1 =
+			new AdaptiveImageVariantConfiguration(
+				StringUtil.randomString(), StringUtil.randomString(),
+				MapUtil.fromArray("height", "100", "width", "200"));
+
+		AdaptiveImageVariantConfiguration configuration2 =
+			new AdaptiveImageVariantConfiguration(
+				StringUtil.randomString(), StringUtil.randomString(),
+				MapUtil.fromArray("height", "200", "width", "200"));
+
+		Mockito.when(
+			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))
+		).thenReturn(
+			true
+		);
+
+		Mockito.when(
+			_adaptiveImageConfiguration.getAdaptiveImageVariantConfigurations(
+				Mockito.any(long.class))
+		).thenReturn(
+			Arrays.asList(configuration1, configuration2)
+		);
+
+		Mockito.when(
+			_fileVersion.getFileName()
+		).thenReturn(
+			StringUtil.randomString()
+		);
+
+		Stream<Media<AdaptiveImageMediaProcessor>> mediaStream =
+			_adaptiveImageMediaProcessor.getMedia(
+				query ->
+					query.
+						forModel(_fileVersion).
+						with(AdaptiveImageMediaProperty.IMAGE_HEIGHT, 200).
+						done());
+
+		List<Media<AdaptiveImageMediaProcessor>> mediaList =
+			mediaStream.collect(Collectors.toList());
+
+		Media<AdaptiveImageMediaProcessor> media0 = mediaList.get(0);
+
+		Optional<Integer> media0Optional = media0.getPropertyValue(
+			AdaptiveImageMediaProperty.IMAGE_HEIGHT);
+
+		Assert.assertEquals(200, (int)media0Optional.get());
+
+		Media<AdaptiveImageMediaProcessor> media1 = mediaList.get(1);
+
+		Optional<Integer> media1Optional = media1.getPropertyValue(
+			AdaptiveImageMediaProperty.IMAGE_HEIGHT);
+
+		Assert.assertEquals(100, (int)media1Optional.get());
+	}
+
+	@Test
+	public void testGetMediaQueryWithNoMatchingProperties() {
+		AdaptiveImageVariantConfiguration configuration1 =
+			new AdaptiveImageVariantConfiguration(
+				StringUtil.randomString(), StringUtil.randomString(),
+				MapUtil.fromArray("height", "100"));
+
+		AdaptiveImageVariantConfiguration configuration2 =
+			new AdaptiveImageVariantConfiguration(
+				StringUtil.randomString(), StringUtil.randomString(),
+				MapUtil.fromArray("height", "200"));
+
+		Mockito.when(
+			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))
+		).thenReturn(
+			true
+		);
+
+		Mockito.when(
+			_adaptiveImageConfiguration.getAdaptiveImageVariantConfigurations(
+				Mockito.any(long.class))
+		).thenReturn(
+			Arrays.asList(configuration1, configuration2)
+		);
+
+		Mockito.when(
+			_fileVersion.getFileName()
+		).thenReturn(
+			StringUtil.randomString()
+		);
+
+		Stream<Media<AdaptiveImageMediaProcessor>> mediaStream =
+			_adaptiveImageMediaProcessor.getMedia(
+				query ->
+					query.
+						forModel(_fileVersion).
+						with(AdaptiveImageMediaProperty.IMAGE_WIDTH, 100).
+						done());
+
+		List<Media<AdaptiveImageMediaProcessor>> mediaList =
+			mediaStream.collect(Collectors.toList());
+
+		Media<AdaptiveImageMediaProcessor> media0 = mediaList.get(0);
+
+		Optional<Integer> media0Optional = media0.getPropertyValue(
+			AdaptiveImageMediaProperty.IMAGE_HEIGHT);
+
+		Assert.assertEquals(100, (int)media0Optional.get());
+
+		Media<AdaptiveImageMediaProcessor> media1 = mediaList.get(1);
+
+		Optional<Integer> media1Optional = media1.getPropertyValue(
+			AdaptiveImageMediaProperty.IMAGE_HEIGHT);
+
+		Assert.assertEquals(200, (int)media1Optional.get());
 	}
 
 	@Test
@@ -217,7 +400,8 @@ public class AdaptiveImageMediaProcessorImplTest {
 		);
 
 		Stream<Media<AdaptiveImageMediaProcessor>> mediaStream =
-			_adaptiveImageMediaProcessor.getMedia(_fileVersion);
+			_adaptiveImageMediaProcessor.getMedia(
+				query -> query.allForModel(_fileVersion));
 
 		Object[] mediaArray = mediaStream.toArray();
 

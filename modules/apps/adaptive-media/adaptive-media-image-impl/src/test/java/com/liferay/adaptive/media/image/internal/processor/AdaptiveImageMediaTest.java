@@ -18,6 +18,8 @@ import com.liferay.adaptive.media.image.internal.configuration.AdaptiveImageProp
 
 import java.io.InputStream;
 
+import java.net.URI;
+
 import java.util.Collections;
 import java.util.function.Supplier;
 
@@ -41,7 +43,7 @@ public class AdaptiveImageMediaTest {
 			AdaptiveImagePropertyMapping.fromProperties(Collections.emptyMap());
 
 		AdaptiveImageMedia adaptiveImageMedia = new AdaptiveImageMedia(
-			supplier, adaptiveImagePropertyMapping);
+			supplier, adaptiveImagePropertyMapping, URI.create("/"));
 
 		Assert.assertEquals(inputStream, adaptiveImageMedia.getInputStream());
 	}
@@ -52,7 +54,7 @@ public class AdaptiveImageMediaTest {
 			Mockito.mock(AdaptiveImagePropertyMapping.class);
 
 		AdaptiveImageMedia adaptiveImageMedia = new AdaptiveImageMedia(
-			() -> null, adaptiveImagePropertyMapping);
+			() -> null, adaptiveImagePropertyMapping, URI.create("/"));
 
 		adaptiveImageMedia.getPropertyValue(
 			AdaptiveImageMediaProperty.IMAGE_HEIGHT);
