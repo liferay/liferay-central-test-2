@@ -987,6 +987,7 @@
 
 		<execute macro="KBArticle#viewSourceURLCP">
 			<var name="kbArticleSourceURL" value="https://github.com/liferay/liferay-docs/blob/master/develop/tutorials/articles/liferayui-taglibs/knowledge-base-article-parent-title-2-child-2.markdown" />
+			<var name="kbChildArticleTitle" value="Knowledge Base Article Parent Title 2 Child 2" />
 		</execute>
 
 		<execute macro="Navigator#gotoPage">
