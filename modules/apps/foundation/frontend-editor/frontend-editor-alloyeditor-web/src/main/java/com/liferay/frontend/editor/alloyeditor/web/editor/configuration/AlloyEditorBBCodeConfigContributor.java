@@ -65,11 +65,11 @@ public class AlloyEditorBBCodeConfigContributor
 
 		String extraPlugins = jsonObject.getString("extraPlugins");
 
-		extraPlugins = extraPlugins.concat(",bbcode,itemselector");
+		extraPlugins = extraPlugins.concat(",bbcode,itemselector,media");
 
 		jsonObject.put("extraPlugins", extraPlugins);
 
-		jsonObject.put("format_tags", "p;pre");
+		jsonObject.put("format_tags", "p;h1;h2;h3;h4;h5;h6;pre");
 		jsonObject.put("lang", getLangJSONObject(inputEditorTaglibAttributes));
 		jsonObject.put("newThreadURL", MBThreadConstants.NEW_THREAD_URL);
 
@@ -85,6 +85,9 @@ public class AlloyEditorBBCodeConfigContributor
 		jsonObject.put(
 			"removePlugins", removePlugins.concat(",").concat(sb.toString()));
 
+		jsonObject.put(
+			"smiley_descriptions",
+			toJSONArray(BBCodeTranslatorUtil.getEmoticonDescriptions()));
 		jsonObject.put(
 			"smiley_images",
 			toJSONArray(BBCodeTranslatorUtil.getEmoticonFiles()));
