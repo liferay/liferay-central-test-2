@@ -4,7 +4,7 @@
 ;
 [subrepo]
 	cmdver = liferay
-	commit = 8f7496e42a1ed6a65258faed6852ccfbda249886
+	commit = 4f2cf3942833ede613bf23c652a9680a02c3ccc7
 	mode = push
-	parent = e27748a7b2d5de70ab4cde1aa9b727ff51036093
+	parent = 9379d30445a196ea1a8512a6bb59e08dc7f5c874
 	remote = git@github.com:liferay/com-liferay-frontend-theme.git
