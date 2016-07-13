@@ -33,9 +33,9 @@ public class ImageAdaptiveMediaConfigurationTest {
 
 	@Before
 	public void setUp() {
-		_adaptiveImageConfiguration.setAdaptiveImageConfigurationParser(
+		_mediaConfigurationHelper.setAdaptiveImageConfigurationParser(
 			_adaptiveImageConfigurationParser);
-		_adaptiveImageConfiguration.setConfigurationProvider(
+		_mediaConfigurationHelper.setConfigurationProvider(
 			_configurationProvider);
 	}
 
@@ -57,7 +57,7 @@ public class ImageAdaptiveMediaConfigurationTest {
 
 		Iterable<ImageAdaptiveMediaVariantConfiguration>
 			adaptiveImageVariantConfigurations =
-				_adaptiveImageConfiguration.
+				_mediaConfigurationHelper.
 					getAdaptiveImageVariantConfigurations(1234);
 
 		Iterator<ImageAdaptiveMediaVariantConfiguration> iterator =
@@ -82,7 +82,7 @@ public class ImageAdaptiveMediaConfigurationTest {
 			new String[] {"test:xyz"}
 		);
 
-		_adaptiveImageConfiguration.getAdaptiveImageVariantConfigurations(1234);
+		_mediaConfigurationHelper.getAdaptiveImageVariantConfigurations(1234);
 	}
 
 	@Test(expected = AdaptiveMediaProcessorRuntimeException.InvalidConfiguration.class)
@@ -95,7 +95,7 @@ public class ImageAdaptiveMediaConfigurationTest {
 			ConfigurationException.class
 		);
 
-		_adaptiveImageConfiguration.getAdaptiveImageVariantConfigurations(1234);
+		_mediaConfigurationHelper.getAdaptiveImageVariantConfigurations(1234);
 	}
 
 	@Test
@@ -116,7 +116,7 @@ public class ImageAdaptiveMediaConfigurationTest {
 
 		Iterable<ImageAdaptiveMediaVariantConfiguration>
 			adaptiveImageVariantConfigurations =
-				_adaptiveImageConfiguration.
+				_mediaConfigurationHelper.
 					getAdaptiveImageVariantConfigurations(1234);
 
 		Iterator<ImageAdaptiveMediaVariantConfiguration> iterator =
@@ -128,8 +128,8 @@ public class ImageAdaptiveMediaConfigurationTest {
 	private final ImageAdaptiveMediaCompanyConfiguration
 		_adaptiveImageCompanyConfiguration = Mockito.mock(
 			ImageAdaptiveMediaCompanyConfiguration.class);
-	private final ImageAdaptiveMediaConfiguration _adaptiveImageConfiguration =
-		new ImageAdaptiveMediaConfiguration();
+	private final ImageAdaptiveMediaConfigurationHelper
+		_mediaConfigurationHelper = new ImageAdaptiveMediaConfigurationHelper();
 	private final ImageAdaptiveMediaVariantConfigurationParser
 		_adaptiveImageConfigurationParser =
 			new ImageAdaptiveMediaVariantConfigurationParser();

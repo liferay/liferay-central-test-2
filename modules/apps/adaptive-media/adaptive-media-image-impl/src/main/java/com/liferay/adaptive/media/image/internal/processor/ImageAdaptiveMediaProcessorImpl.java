@@ -17,7 +17,7 @@ package com.liferay.adaptive.media.image.internal.processor;
 import com.liferay.adaptive.media.finder.AdaptiveMediaQuery;
 import com.liferay.adaptive.media.image.finder.ImageAdaptiveMediaFinder;
 import com.liferay.adaptive.media.image.finder.ImageAdaptiveMediaQueryBuilder;
-import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaConfiguration;
+import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaConfigurationHelper;
 import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaPropertyMapping;
 import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaVariantConfiguration;
 import com.liferay.adaptive.media.image.internal.finder.ImageAdaptiveMediaQueryBuilderImpl;
@@ -94,7 +94,7 @@ public final class ImageAdaptiveMediaProcessorImpl
 
 		Collection<ImageAdaptiveMediaVariantConfiguration>
 			adaptiveImageVariantConfigurations =
-				_adaptiveImageConfiguration.
+				_mediaConfigurationHelper.
 					getAdaptiveImageVariantConfigurations(companyId);
 
 		return adaptiveImageVariantConfigurations.stream().
@@ -117,7 +117,7 @@ public final class ImageAdaptiveMediaProcessorImpl
 
 		Iterable<ImageAdaptiveMediaVariantConfiguration>
 			adaptiveImageVariantConfigurations =
-				_adaptiveImageConfiguration.
+				_mediaConfigurationHelper.
 					getAdaptiveImageVariantConfigurations(companyId);
 
 		for (ImageAdaptiveMediaVariantConfiguration
@@ -139,10 +139,10 @@ public final class ImageAdaptiveMediaProcessorImpl
 	}
 
 	@Reference(unbind = "-")
-	public void setAdaptiveImageConfiguration(
-		ImageAdaptiveMediaConfiguration adaptiveImageConfiguration) {
+	public void setMediaConfigurationHelper(
+		ImageAdaptiveMediaConfigurationHelper mediaConfigurationHelper) {
 
-		_adaptiveImageConfiguration = adaptiveImageConfiguration;
+		_mediaConfigurationHelper = mediaConfigurationHelper;
 	}
 
 	@Reference(unbind = "-")
@@ -244,7 +244,7 @@ public final class ImageAdaptiveMediaProcessorImpl
 		}
 	}
 
-	private ImageAdaptiveMediaConfiguration _adaptiveImageConfiguration;
+	private ImageAdaptiveMediaConfigurationHelper _mediaConfigurationHelper;
 	private ImageProcessor _imageProcessor;
 	private ImageStorage _imageStorage;
 

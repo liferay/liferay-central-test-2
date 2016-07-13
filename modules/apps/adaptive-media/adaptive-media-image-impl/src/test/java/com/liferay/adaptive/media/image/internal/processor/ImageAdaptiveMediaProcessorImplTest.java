@@ -14,7 +14,7 @@
 
 package com.liferay.adaptive.media.image.internal.processor;
 
-import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaConfiguration;
+import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaConfigurationHelper;
 import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaVariantConfiguration;
 import com.liferay.adaptive.media.image.internal.util.ImageProcessor;
 import com.liferay.adaptive.media.image.internal.util.ImageStorage;
@@ -50,8 +50,8 @@ public class ImageAdaptiveMediaProcessorImplTest {
 	public void setUp() {
 		_adaptiveImageMediaProcessor.setImageStorage(_imageMediaStorage);
 		_adaptiveImageMediaProcessor.setImageProcessor(_imageProcessor);
-		_adaptiveImageMediaProcessor.setAdaptiveImageConfiguration(
-			_adaptiveImageConfiguration);
+		_adaptiveImageMediaProcessor.setMediaConfigurationHelper(
+			_mediaConfigurationHelper);
 	}
 
 	@Test
@@ -116,7 +116,7 @@ public class ImageAdaptiveMediaProcessorImplTest {
 		);
 
 		Mockito.when(
-			_adaptiveImageConfiguration.getAdaptiveImageVariantConfigurations(
+			_mediaConfigurationHelper.getAdaptiveImageVariantConfigurations(
 				Mockito.any(long.class))
 		).thenThrow(
 			AdaptiveMediaProcessorRuntimeException.InvalidConfiguration.class
@@ -134,7 +134,7 @@ public class ImageAdaptiveMediaProcessorImplTest {
 				Collections.emptyMap());
 
 		Mockito.when(
-			_adaptiveImageConfiguration.getAdaptiveImageVariantConfigurations(
+			_mediaConfigurationHelper.getAdaptiveImageVariantConfigurations(
 				Mockito.any(long.class))
 		).thenReturn(
 			Collections.singleton(configuration)
@@ -164,7 +164,7 @@ public class ImageAdaptiveMediaProcessorImplTest {
 				MapUtil.fromArray("height", "100"));
 
 		Mockito.when(
-			_adaptiveImageConfiguration.getAdaptiveImageVariantConfigurations(
+			_mediaConfigurationHelper.getAdaptiveImageVariantConfigurations(
 				Mockito.any(long.class))
 		).thenReturn(
 			Collections.singleton(configuration)
@@ -196,7 +196,7 @@ public class ImageAdaptiveMediaProcessorImplTest {
 				MapUtil.fromArray("height", "100", "width", "200"));
 
 		Mockito.when(
-			_adaptiveImageConfiguration.getAdaptiveImageVariantConfigurations(
+			_mediaConfigurationHelper.getAdaptiveImageVariantConfigurations(
 				Mockito.any(long.class))
 		).thenReturn(
 			Collections.singleton(configuration)
@@ -239,7 +239,7 @@ public class ImageAdaptiveMediaProcessorImplTest {
 		);
 
 		Mockito.when(
-			_adaptiveImageConfiguration.getAdaptiveImageVariantConfigurations(
+			_mediaConfigurationHelper.getAdaptiveImageVariantConfigurations(
 				Mockito.any(long.class))
 		).thenReturn(
 			Arrays.asList(configuration1, configuration2)
@@ -296,7 +296,7 @@ public class ImageAdaptiveMediaProcessorImplTest {
 		);
 
 		Mockito.when(
-			_adaptiveImageConfiguration.getAdaptiveImageVariantConfigurations(
+			_mediaConfigurationHelper.getAdaptiveImageVariantConfigurations(
 				Mockito.any(long.class))
 		).thenReturn(
 			Arrays.asList(configuration1, configuration2)
@@ -353,7 +353,7 @@ public class ImageAdaptiveMediaProcessorImplTest {
 		);
 
 		Mockito.when(
-			_adaptiveImageConfiguration.getAdaptiveImageVariantConfigurations(
+			_mediaConfigurationHelper.getAdaptiveImageVariantConfigurations(
 				Mockito.any(long.class))
 		).thenReturn(
 			Arrays.asList(configuration1, configuration2)
@@ -422,7 +422,7 @@ public class ImageAdaptiveMediaProcessorImplTest {
 				Collections.emptyMap());
 
 		Mockito.when(
-			_adaptiveImageConfiguration.getAdaptiveImageVariantConfigurations(
+			_mediaConfigurationHelper.getAdaptiveImageVariantConfigurations(
 				Mockito.any(long.class))
 		).thenReturn(
 			Collections.singleton(configuration)
@@ -451,7 +451,7 @@ public class ImageAdaptiveMediaProcessorImplTest {
 		);
 
 		Mockito.when(
-			_adaptiveImageConfiguration.getAdaptiveImageVariantConfigurations(
+			_mediaConfigurationHelper.getAdaptiveImageVariantConfigurations(
 				Mockito.any(long.class))
 		).thenThrow(
 			AdaptiveMediaProcessorRuntimeException.InvalidConfiguration.class
@@ -474,7 +474,7 @@ public class ImageAdaptiveMediaProcessorImplTest {
 				Collections.emptyMap());
 
 		Mockito.when(
-			_adaptiveImageConfiguration.getAdaptiveImageVariantConfigurations(
+			_mediaConfigurationHelper.getAdaptiveImageVariantConfigurations(
 				Mockito.any(long.class))
 		).thenReturn(
 			Collections.singleton(configuration)
@@ -503,7 +503,7 @@ public class ImageAdaptiveMediaProcessorImplTest {
 				Collections.emptyMap());
 
 		Mockito.when(
-			_adaptiveImageConfiguration.getAdaptiveImageVariantConfigurations(
+			_mediaConfigurationHelper.getAdaptiveImageVariantConfigurations(
 				Mockito.any(long.class))
 		).thenReturn(
 			Collections.singleton(configuration)
@@ -540,7 +540,7 @@ public class ImageAdaptiveMediaProcessorImplTest {
 				Collections.emptyMap());
 
 		Mockito.when(
-			_adaptiveImageConfiguration.getAdaptiveImageVariantConfigurations(
+			_mediaConfigurationHelper.getAdaptiveImageVariantConfigurations(
 				Mockito.any(long.class))
 		).thenReturn(
 			Collections.singleton(configuration)
@@ -583,8 +583,9 @@ public class ImageAdaptiveMediaProcessorImplTest {
 		);
 	}
 
-	private final ImageAdaptiveMediaConfiguration _adaptiveImageConfiguration =
-		Mockito.mock(ImageAdaptiveMediaConfiguration.class);
+	private final ImageAdaptiveMediaConfigurationHelper
+		_mediaConfigurationHelper = Mockito.mock(
+			ImageAdaptiveMediaConfigurationHelper.class);
 	private final ImageAdaptiveMediaProcessorImpl _adaptiveImageMediaProcessor =
 		new ImageAdaptiveMediaProcessorImpl();
 	private final FileVersion _fileVersion = Mockito.mock(FileVersion.class);
