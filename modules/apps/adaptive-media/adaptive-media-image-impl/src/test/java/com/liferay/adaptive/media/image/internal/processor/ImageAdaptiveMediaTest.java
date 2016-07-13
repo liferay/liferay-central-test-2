@@ -39,29 +39,28 @@ public class ImageAdaptiveMediaTest {
 
 		Supplier<InputStream> supplier = () -> inputStream;
 
-		ImageAdaptiveMediaPropertyMapping adaptiveImagePropertyMapping =
+		ImageAdaptiveMediaPropertyMapping propertyMapping =
 			ImageAdaptiveMediaPropertyMapping.fromProperties(
 				Collections.emptyMap());
 
-		ImageAdaptiveMedia adaptiveImageMedia = new ImageAdaptiveMedia(
-			supplier, adaptiveImagePropertyMapping, URI.create("/"));
+		ImageAdaptiveMedia adaptiveMedia = new ImageAdaptiveMedia(
+			supplier, propertyMapping, URI.create("/"));
 
-		Assert.assertEquals(inputStream, adaptiveImageMedia.getInputStream());
+		Assert.assertEquals(inputStream, adaptiveMedia.getInputStream());
 	}
 
 	@Test
 	public void testGetPropertyDelegatesOnMapping() {
-		ImageAdaptiveMediaPropertyMapping adaptiveImagePropertyMapping =
-			Mockito.mock(ImageAdaptiveMediaPropertyMapping.class);
+		ImageAdaptiveMediaPropertyMapping propertyMapping = Mockito.mock(
+			ImageAdaptiveMediaPropertyMapping.class);
 
-		ImageAdaptiveMedia adaptiveImageMedia = new ImageAdaptiveMedia(
-			() -> null, adaptiveImagePropertyMapping, URI.create("/"));
+		ImageAdaptiveMedia adaptiveMedia = new ImageAdaptiveMedia(
+			() -> null, propertyMapping, URI.create("/"));
 
-		adaptiveImageMedia.getPropertyValue(
-			ImageAdaptiveMediaProperty.IMAGE_HEIGHT);
+		adaptiveMedia.getPropertyValue(ImageAdaptiveMediaProperty.IMAGE_HEIGHT);
 
 		Mockito.verify(
-			adaptiveImagePropertyMapping
+			propertyMapping
 		).getPropertyValue(ImageAdaptiveMediaProperty.IMAGE_HEIGHT);
 	}
 

@@ -21,14 +21,11 @@ import com.liferay.portal.configuration.metatype.annotations.ExtendedObjectClass
 /**
  * @author Adolfo Pérez
  */
-@ExtendedObjectClassDefinition(
-	category = "adaptive.media",
-	scope = ExtendedObjectClassDefinition.Scope.COMPANY
-)
+@ExtendedObjectClassDefinition(category = "other")
 @Meta.OCD(
 	id = "com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaCompanyConfiguration",
 	localization = "content/Language",
-	name = "adaptive.image.configuration.name"
+	name = "adaptive.media.image.configuration.name"
 )
 public interface ImageAdaptiveMediaCompanyConfiguration {
 

@@ -36,21 +36,18 @@ public class ImageAdaptiveMediaConfigurationHelper {
 		getImageAdaptiveMediaConfigurationEntries(long companyId) {
 
 		try {
-			ImageAdaptiveMediaCompanyConfiguration
-				adaptiveImageCompanyConfiguration =
-					_configurationProvider.getCompanyConfiguration(
-						ImageAdaptiveMediaCompanyConfiguration.class,
-						companyId);
+			ImageAdaptiveMediaCompanyConfiguration companyConfiguration =
+				_configurationProvider.getCompanyConfiguration(
+					ImageAdaptiveMediaCompanyConfiguration.class, companyId);
 
-			String[] imageVariants =
-				adaptiveImageCompanyConfiguration.imageVariants();
+			String[] imageVariants = companyConfiguration.imageVariants();
 
 			if (imageVariants == null) {
 				return Collections.emptyList();
 			}
 
 			return Stream.of(imageVariants).
-				map(_mediaConfigurationEntryParser::parse).
+				map(_configurationEntryParser::parse).
 				collect(Collectors.toList());
 		}
 		catch (ConfigurationException ce) {
@@ -60,22 +57,21 @@ public class ImageAdaptiveMediaConfigurationHelper {
 	}
 
 	@Reference(unbind = "-")
-	public void setImageAdaptiveMediaConfigurationEntryParser(
-		ImageAdaptiveMediaConfigurationEntryParser
-			mediaConfigurationEntryParser) {
-
-		_mediaConfigurationEntryParser = mediaConfigurationEntryParser;
-	}
-
-	@Reference(unbind = "-")
 	public void setConfigurationProvider(
 		ConfigurationProvider configurationProvider) {
 
 		_configurationProvider = configurationProvider;
 	}
 
+	@Reference(unbind = "-")
+	public void setImageAdaptiveMediaConfigurationEntryParser(
+		ImageAdaptiveMediaConfigurationEntryParser configurationEntryParser) {
+
+		_configurationEntryParser = configurationEntryParser;
+	}
+
 	private ImageAdaptiveMediaConfigurationEntryParser
-		_mediaConfigurationEntryParser;
+		_configurationEntryParser;
 	private ConfigurationProvider _configurationProvider;
 
 }

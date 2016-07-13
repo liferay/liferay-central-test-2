@@ -25,7 +25,7 @@ import org.junit.Test;
 public class ImageAdaptiveMediaPropertyTest {
 
 	@Test(
-		expected = AdaptiveMediaProcessorRuntimeException.MediaPropertyFormatException.class
+		expected = AdaptiveMediaProcessorRuntimeException.AdaptiveMediaPropertyFormatException.class
 	)
 	public void testImageHeightFailsForNonIntegers() {
 		ImageAdaptiveMediaProperty.IMAGE_HEIGHT.convert("xyz");
@@ -39,7 +39,7 @@ public class ImageAdaptiveMediaPropertyTest {
 	}
 
 	@Test(
-		expected = AdaptiveMediaProcessorRuntimeException.MediaPropertyFormatException.class
+		expected = AdaptiveMediaProcessorRuntimeException.AdaptiveMediaPropertyFormatException.class
 	)
 	public void testImageWidthFailsForNonIntegers() {
 		ImageAdaptiveMediaProperty.IMAGE_WIDTH.convert("xyz");

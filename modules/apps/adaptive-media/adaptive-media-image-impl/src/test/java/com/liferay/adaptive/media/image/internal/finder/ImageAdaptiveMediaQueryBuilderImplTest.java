@@ -28,25 +28,24 @@ public class ImageAdaptiveMediaQueryBuilderImplTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testNullFileVersionFailsWhenQueryingAll() {
-		_adaptiveImageMediaQueryBuilder.allForModel(null);
+		_queryBuilder.allForModel(null);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testNullFileVersionFailsWhenQueryingProperties() {
-		_adaptiveImageMediaQueryBuilder.forModel(null);
+		_queryBuilder.forModel(null);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testNullValueFailsWhenQueryingProperties() {
 		FileVersion fileVersion = Mockito.mock(FileVersion.class);
 
-		_adaptiveImageMediaQueryBuilder.
+		_queryBuilder.
 			forModel(fileVersion).
 			with(ImageAdaptiveMediaProperty.IMAGE_HEIGHT, null);
 	}
 
-	private final ImageAdaptiveMediaQueryBuilderImpl
-		_adaptiveImageMediaQueryBuilder =
-			new ImageAdaptiveMediaQueryBuilderImpl();
+	private final ImageAdaptiveMediaQueryBuilderImpl _queryBuilder =
+		new ImageAdaptiveMediaQueryBuilderImpl();
 
 }

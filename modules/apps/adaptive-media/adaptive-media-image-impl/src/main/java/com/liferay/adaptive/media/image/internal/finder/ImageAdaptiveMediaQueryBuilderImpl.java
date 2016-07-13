@@ -34,7 +34,7 @@ public class ImageAdaptiveMediaQueryBuilderImpl
 		allForModel(FileVersion fileVersion) {
 
 		if (fileVersion == null) {
-			throw new IllegalArgumentException("FileVersion cannot be null");
+			throw new IllegalArgumentException("File version cannot be null");
 		}
 
 		_fileVersion = fileVersion;
@@ -50,7 +50,7 @@ public class ImageAdaptiveMediaQueryBuilderImpl
 	@Override
 	public MediaPropertyQueryBuilder forModel(FileVersion fileVersion) {
 		if (fileVersion == null) {
-			throw new IllegalArgumentException("FileVersion cannot be null");
+			throw new IllegalArgumentException("File version cannot be null");
 		}
 
 		_fileVersion = fileVersion;
@@ -63,9 +63,9 @@ public class ImageAdaptiveMediaQueryBuilderImpl
 	}
 
 	public Map<AdaptiveMediaProperty<ImageAdaptiveMediaProcessor, ?>, Object>
-		getMediaProperties() {
+		getProperties() {
 
-		return _mediaProperties;
+		return _properties;
 	}
 
 	@Override
@@ -75,16 +75,16 @@ public class ImageAdaptiveMediaQueryBuilderImpl
 
 		if (value == null) {
 			throw new IllegalArgumentException(
-				"AdaptiveMediaProperty value cannot be null");
+				"Adaptive media property value cannot be null");
 		}
 
-		_mediaProperties.put(property, value);
+		_properties.put(property, value);
 
 		return this;
 	}
 
 	private FileVersion _fileVersion;
 	private Map<AdaptiveMediaProperty<ImageAdaptiveMediaProcessor, ?>, Object>
-		_mediaProperties = new LinkedHashMap<>();
+		_properties = new LinkedHashMap<>();
 
 }

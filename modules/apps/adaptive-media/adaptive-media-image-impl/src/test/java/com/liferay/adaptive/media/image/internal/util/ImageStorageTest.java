@@ -60,7 +60,7 @@ public class ImageStorageTest {
 			4L
 		);
 
-		Path fileVersionPath = _mediaStorage.getFileVersionPath(fileVersion);
+		Path fileVersionPath = _imageStorage.getFileVersionPath(fileVersion);
 
 		Assert.assertEquals("adaptive/1/2/3/4", fileVersionPath.toString());
 	}
@@ -99,17 +99,17 @@ public class ImageStorageTest {
 			"jpg"
 		);
 
-		ImageAdaptiveMediaConfigurationEntry mediaConfigurationEntry =
+		ImageAdaptiveMediaConfigurationEntry configurationEntry =
 			new ImageAdaptiveMediaConfigurationEntry(
 				StringUtil.randomString(), "xyz", Collections.emptyMap());
 
-		Path fileVersionVariantPath = _mediaStorage.getFileVersionVariantPath(
-			fileVersion, mediaConfigurationEntry);
+		Path fileVersionVariantPath = _imageStorage.getFileVersionVariantPath(
+			fileVersion, configurationEntry);
 
 		Assert.assertEquals(
 			"adaptive/1/2/3/4/xyz.jpg", fileVersionVariantPath.toString());
 	}
 
-	private final ImageStorage _mediaStorage = new ImageStorage();
+	private final ImageStorage _imageStorage = new ImageStorage();
 
 }

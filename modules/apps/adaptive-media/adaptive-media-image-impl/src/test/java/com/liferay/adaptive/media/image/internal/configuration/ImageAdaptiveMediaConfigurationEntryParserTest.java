@@ -26,45 +26,43 @@ public class ImageAdaptiveMediaConfigurationEntryParserTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testEmptyName() {
-		_mediaConfigurationEntryParser.parse(":12345:height=100;width=200");
+		_configurationEntryParser.parse(":12345:height=100;width=200");
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testEmptyProperties() {
-		_mediaConfigurationEntryParser.parse("test:12345:");
+		_configurationEntryParser.parse("test:12345:");
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testEmptyString() {
-		_mediaConfigurationEntryParser.parse("");
+		_configurationEntryParser.parse("");
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testEmptyUUID() {
-		_mediaConfigurationEntryParser.parse("test::height=100;width=200");
+		_configurationEntryParser.parse("test::height=100;width=200");
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testMissingPropertiesField() {
-		_mediaConfigurationEntryParser.parse("test:12345");
+		_configurationEntryParser.parse("test:12345");
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testNullString() {
-		_mediaConfigurationEntryParser.parse(null);
+		_configurationEntryParser.parse(null);
 	}
 
 	@Test
 	public void testValidString() {
-		ImageAdaptiveMediaConfigurationEntry mediaConfigurationEntry =
-			_mediaConfigurationEntryParser.parse(
-				"test:12345:height=100;width=200");
+		ImageAdaptiveMediaConfigurationEntry configurationEntry =
+			_configurationEntryParser.parse("test:12345:height=100;width=200");
 
-		Assert.assertEquals("test", mediaConfigurationEntry.getName());
-		Assert.assertEquals("12345", mediaConfigurationEntry.getUUID());
+		Assert.assertEquals("test", configurationEntry.getName());
+		Assert.assertEquals("12345", configurationEntry.getUUID());
 
-		Map<String, String> properties =
-			mediaConfigurationEntry.getProperties();
+		Map<String, String> properties = configurationEntry.getProperties();
 
 		Assert.assertEquals("100", properties.get("height"));
 		Assert.assertEquals("200", properties.get("width"));
@@ -72,7 +70,7 @@ public class ImageAdaptiveMediaConfigurationEntryParserTest {
 	}
 
 	private final ImageAdaptiveMediaConfigurationEntryParser
-		_mediaConfigurationEntryParser =
+		_configurationEntryParser =
 			new ImageAdaptiveMediaConfigurationEntryParser();
 
 }

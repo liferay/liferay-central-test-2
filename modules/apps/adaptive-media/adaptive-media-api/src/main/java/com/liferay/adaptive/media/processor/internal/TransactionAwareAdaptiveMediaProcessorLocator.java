@@ -54,7 +54,7 @@ public class TransactionAwareAdaptiveMediaProcessorLocator
 
 	@Override
 	public <M> AdaptiveMediaProcessor<M, ?> locateForClass(Class<M> clazz) {
-		return new AggregateMediaProcessor<>(clazz);
+		return new AggregateAdaptiveMediaProcessor<>(clazz);
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
@@ -63,10 +63,17 @@ public class TransactionAwareAdaptiveMediaProcessorLocator
 	private ServiceTrackerMap<String, List<AdaptiveMediaProcessor>>
 		_serviceTrackerMap;
 
-	private final class AggregateMediaProcessor<M, T>
+	private interface AdaptiveMediaProcessorAction<M> {
+
+		public void execute(AdaptiveMediaProcessor<M, ?> processor)
+			throws Exception;
+
+	}
+
+	private final class AggregateAdaptiveMediaProcessor<M, T>
 		implements AdaptiveMediaProcessor<M, T> {
 
-		public AggregateMediaProcessor(Class<M> clazz) {
+		public AggregateAdaptiveMediaProcessor(Class<M> clazz) {
 			_clazz = clazz;
 		}
 
@@ -75,7 +82,7 @@ public class TransactionAwareAdaptiveMediaProcessorLocator
 			throws AdaptiveMediaProcessorException, PortalException {
 
 			TransactionCommitCallbackUtil.registerCallback(() ->
-				_forEach(mediaProcessor -> mediaProcessor.cleanUp(model)));
+				_forEach(processor -> processor.cleanUp(model)));
 		}
 
 		@Override
@@ -83,22 +90,20 @@ public class TransactionAwareAdaptiveMediaProcessorLocator
 			throws AdaptiveMediaProcessorException, PortalException {
 
 			TransactionCommitCallbackUtil.registerCallback(() ->
-				_forEach(mediaProcessor -> mediaProcessor.process(model)));
+				_forEach(processor -> processor.process(model)));
 		}
 
-		private Void _forEach(MediaProcessorAction action) {
-			List<AdaptiveMediaProcessor> mediaProcessors =
+		private Void _forEach(AdaptiveMediaProcessorAction action) {
+			List<AdaptiveMediaProcessor> processors =
 				_serviceTrackerMap.getService(_clazz.getName());
 
-			if (mediaProcessors == null) {
+			if (processors == null) {
 				return null;
 			}
 
-			for (AdaptiveMediaProcessor<M, ?> mediaProcessor :
-					mediaProcessors) {
-
+			for (AdaptiveMediaProcessor<M, ?> processor : processors) {
 				try {
-					action.execute(mediaProcessor);
+					action.execute(processor);
 				}
 				catch (Exception e) {
 					_log.error(e);
@@ -109,13 +114,6 @@ public class TransactionAwareAdaptiveMediaProcessorLocator
 		}
 
 		private final Class<M> _clazz;
-
-	}
-
-	private interface MediaProcessorAction<M> {
-
-		public void execute(AdaptiveMediaProcessor<M, ?> mediaProcessor)
-			throws Exception;
 
 	}
 

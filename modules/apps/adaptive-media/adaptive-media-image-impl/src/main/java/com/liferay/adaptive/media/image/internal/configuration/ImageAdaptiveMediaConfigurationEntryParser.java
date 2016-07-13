@@ -33,14 +33,14 @@ public class ImageAdaptiveMediaConfigurationEntryParser {
 	public ImageAdaptiveMediaConfigurationEntry parse(String s) {
 		if (Validator.isNull(s)) {
 			throw new IllegalArgumentException(
-				"Adaptive image variant configuration not valid: " + s);
+				"Image adaptive media configuration not valid: " + s);
 		}
 
 		String[] fields = _FIELD_SEPARATOR_PATTERN.split(s);
 
 		if (fields.length != 3) {
 			throw new IllegalArgumentException(
-				"Adaptive image variant configuration not valid: " + s);
+				"Image adaptive media configuration not valid: " + s);
 		}
 
 		String name = fields[0];
@@ -48,7 +48,7 @@ public class ImageAdaptiveMediaConfigurationEntryParser {
 
 		if (Validator.isNull(name) || Validator.isNull(uuid)) {
 			throw new IllegalArgumentException(
-				"Adaptive image variant configuration not valid: " + s);
+				"Image adaptive media configuration not valid: " + s);
 		}
 
 		String[] propertiesString = _PROPERTY_SEPARATOR_PATTERN.split(

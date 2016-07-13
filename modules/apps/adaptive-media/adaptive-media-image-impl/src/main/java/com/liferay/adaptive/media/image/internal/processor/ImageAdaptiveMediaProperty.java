@@ -45,7 +45,7 @@ public final class ImageAdaptiveMediaProperty {
 		}
 		catch (NumberFormatException nfe) {
 			throw new AdaptiveMediaProcessorRuntimeException.
-				MediaPropertyFormatException(nfe);
+				AdaptiveMediaPropertyFormatException(nfe);
 		}
 	}
 

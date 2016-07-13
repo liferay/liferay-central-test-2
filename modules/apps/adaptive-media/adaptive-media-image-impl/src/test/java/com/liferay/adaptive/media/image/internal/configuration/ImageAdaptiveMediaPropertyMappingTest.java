@@ -31,17 +31,16 @@ public class ImageAdaptiveMediaPropertyMappingTest {
 
 	@Test
 	public void testCreateFromEmptyMap() {
-		ImageAdaptiveMediaPropertyMapping adaptiveImagePropertyMapping =
+		ImageAdaptiveMediaPropertyMapping propertyMapping =
 			ImageAdaptiveMediaPropertyMapping.fromProperties(
 				Collections.emptyMap());
 
-		Optional<Integer> height =
-			adaptiveImagePropertyMapping.getPropertyValue(
-				ImageAdaptiveMediaProperty.IMAGE_HEIGHT);
+		Optional<Integer> height = propertyMapping.getPropertyValue(
+			ImageAdaptiveMediaProperty.IMAGE_HEIGHT);
 
 		Assert.assertFalse(height.isPresent());
 
-		Optional<Integer> width = adaptiveImagePropertyMapping.getPropertyValue(
+		Optional<Integer> width = propertyMapping.getPropertyValue(
 			ImageAdaptiveMediaProperty.IMAGE_WIDTH);
 
 		Assert.assertFalse(width.isPresent());
@@ -49,17 +48,16 @@ public class ImageAdaptiveMediaPropertyMappingTest {
 
 	@Test
 	public void testIgnoreUnknownProperties() {
-		ImageAdaptiveMediaPropertyMapping adaptiveImagePropertyMapping =
+		ImageAdaptiveMediaPropertyMapping propertyMapping =
 			ImageAdaptiveMediaPropertyMapping.fromProperties(
 				MapUtil.fromArray("foo", StringUtil.randomString()));
 
-		Optional<Integer> height =
-			adaptiveImagePropertyMapping.getPropertyValue(
-				ImageAdaptiveMediaProperty.IMAGE_HEIGHT);
+		Optional<Integer> height = propertyMapping.getPropertyValue(
+			ImageAdaptiveMediaProperty.IMAGE_HEIGHT);
 
 		Assert.assertFalse(height.isPresent());
 
-		Optional<Integer> width = adaptiveImagePropertyMapping.getPropertyValue(
+		Optional<Integer> width = propertyMapping.getPropertyValue(
 			ImageAdaptiveMediaProperty.IMAGE_WIDTH);
 
 		Assert.assertFalse(width.isPresent());
@@ -67,19 +65,18 @@ public class ImageAdaptiveMediaPropertyMappingTest {
 
 	@Test
 	public void testValidProperties() {
-		ImageAdaptiveMediaPropertyMapping adaptiveImagePropertyMapping =
+		ImageAdaptiveMediaPropertyMapping propertyMapping =
 			ImageAdaptiveMediaPropertyMapping.fromProperties(
 				MapUtil.fromArray(
 					ImageAdaptiveMediaProperty.IMAGE_HEIGHT.getName(), "100",
 					ImageAdaptiveMediaProperty.IMAGE_WIDTH.getName(), "200"));
 
-		Optional<Integer> height =
-			adaptiveImagePropertyMapping.getPropertyValue(
-				ImageAdaptiveMediaProperty.IMAGE_HEIGHT);
+		Optional<Integer> height = propertyMapping.getPropertyValue(
+			ImageAdaptiveMediaProperty.IMAGE_HEIGHT);
 
 		Assert.assertEquals(Integer.valueOf(100), height.get());
 
-		Optional<Integer> width = adaptiveImagePropertyMapping.getPropertyValue(
+		Optional<Integer> width = propertyMapping.getPropertyValue(
 			ImageAdaptiveMediaProperty.IMAGE_WIDTH);
 
 		Assert.assertEquals(Integer.valueOf(200), width.get());

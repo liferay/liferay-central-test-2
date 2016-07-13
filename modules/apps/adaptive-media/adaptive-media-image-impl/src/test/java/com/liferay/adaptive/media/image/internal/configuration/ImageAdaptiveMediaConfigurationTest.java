@@ -33,11 +33,9 @@ public class ImageAdaptiveMediaConfigurationTest {
 
 	@Before
 	public void setUp() {
-		_imageAdaptiveMediaConfigurationHelper.
-			setImageAdaptiveMediaConfigurationEntryParser(
-				_imageAdaptiveMediaConfigurationEntryParser);
-		_imageAdaptiveMediaConfigurationHelper.setConfigurationProvider(
-			_configurationProvider);
+		_configurationHelper.setImageAdaptiveMediaConfigurationEntryParser(
+			_configurationEntryParser);
+		_configurationHelper.setConfigurationProvider(_configurationProvider);
 	}
 
 	@Test
@@ -47,22 +45,21 @@ public class ImageAdaptiveMediaConfigurationTest {
 				Mockito.eq(ImageAdaptiveMediaCompanyConfiguration.class),
 				Mockito.any(long.class))
 		).thenReturn(
-			_adaptiveImageCompanyConfiguration
+			_companyConfiguration
 		);
 
 		Mockito.when(
-			_adaptiveImageCompanyConfiguration.imageVariants()
+			_companyConfiguration.imageVariants()
 		).thenReturn(
 			new String[0]
 		);
 
-		Iterable<ImageAdaptiveMediaConfigurationEntry>
-			mediaConfigurationEntries =
-				_imageAdaptiveMediaConfigurationHelper.
-					getImageAdaptiveMediaConfigurationEntries(1234);
+		Iterable<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
+			_configurationHelper.
+				getImageAdaptiveMediaConfigurationEntries(1234);
 
 		Iterator<ImageAdaptiveMediaConfigurationEntry> iterator =
-			mediaConfigurationEntries.iterator();
+			configurationEntries.iterator();
 
 		Assert.assertFalse(iterator.hasNext());
 	}
@@ -74,17 +71,16 @@ public class ImageAdaptiveMediaConfigurationTest {
 				Mockito.eq(ImageAdaptiveMediaCompanyConfiguration.class),
 				Mockito.any(long.class))
 		).thenReturn(
-			_adaptiveImageCompanyConfiguration
+			_companyConfiguration
 		);
 
 		Mockito.when(
-			_adaptiveImageCompanyConfiguration.imageVariants()
+			_companyConfiguration.imageVariants()
 		).thenReturn(
 			new String[] {"test:xyz"}
 		);
 
-		_imageAdaptiveMediaConfigurationHelper.getImageAdaptiveMediaConfigurationEntries(
-			1234);
+		_configurationHelper.getImageAdaptiveMediaConfigurationEntries(1234);
 	}
 
 	@Test(expected = AdaptiveMediaProcessorRuntimeException.InvalidConfiguration.class)
@@ -97,8 +93,7 @@ public class ImageAdaptiveMediaConfigurationTest {
 			ConfigurationException.class
 		);
 
-		_imageAdaptiveMediaConfigurationHelper.getImageAdaptiveMediaConfigurationEntries(
-			1234);
+		_configurationHelper.getImageAdaptiveMediaConfigurationEntries(1234);
 	}
 
 	@Test
@@ -108,35 +103,32 @@ public class ImageAdaptiveMediaConfigurationTest {
 				Mockito.eq(ImageAdaptiveMediaCompanyConfiguration.class),
 				Mockito.any(long.class))
 		).thenReturn(
-			_adaptiveImageCompanyConfiguration
+			_companyConfiguration
 		);
 
 		Mockito.when(
-			_adaptiveImageCompanyConfiguration.imageVariants()
+			_companyConfiguration.imageVariants()
 		).thenReturn(
 			null
 		);
 
-		Iterable<ImageAdaptiveMediaConfigurationEntry>
-			mediaConfigurationEntries =
-			_imageAdaptiveMediaConfigurationHelper.
-					getImageAdaptiveMediaConfigurationEntries(1234);
+		Iterable<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
+			_configurationHelper.
+				getImageAdaptiveMediaConfigurationEntries(1234);
 
 		Iterator<ImageAdaptiveMediaConfigurationEntry> iterator =
-			mediaConfigurationEntries.iterator();
+			configurationEntries.iterator();
 
 		Assert.assertFalse(iterator.hasNext());
 	}
 
-	private final ImageAdaptiveMediaCompanyConfiguration
-		_adaptiveImageCompanyConfiguration = Mockito.mock(
-			ImageAdaptiveMediaCompanyConfiguration.class);
-	private final ImageAdaptiveMediaConfigurationHelper
-		_imageAdaptiveMediaConfigurationHelper =
-			new ImageAdaptiveMediaConfigurationHelper();
+	private final ImageAdaptiveMediaCompanyConfiguration _companyConfiguration =
+		Mockito.mock(ImageAdaptiveMediaCompanyConfiguration.class);
 	private final ImageAdaptiveMediaConfigurationEntryParser
-		_imageAdaptiveMediaConfigurationEntryParser =
-			new ImageAdaptiveMediaConfigurationEntryParser();
+		_configurationEntryParser =
+		new ImageAdaptiveMediaConfigurationEntryParser();
+	private final ImageAdaptiveMediaConfigurationHelper _configurationHelper =
+		new ImageAdaptiveMediaConfigurationHelper();
 	private final ConfigurationProvider _configurationProvider = Mockito.mock(
 		ConfigurationProvider.class);
 

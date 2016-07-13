@@ -34,11 +34,10 @@ public final class ImageAdaptiveMedia
 
 	public ImageAdaptiveMedia(
 		Supplier<InputStream> supplier,
-		ImageAdaptiveMediaPropertyMapping adaptiveImagePropertyMapping,
-		URI relativeURI) {
+		ImageAdaptiveMediaPropertyMapping propertyMapping, URI relativeURI) {
 
 		_supplier = supplier;
-		_adaptiveImagePropertyMapping = adaptiveImagePropertyMapping;
+		_propertyMapping = propertyMapping;
 		_relativeURI = relativeURI;
 	}
 
@@ -49,9 +48,9 @@ public final class ImageAdaptiveMedia
 
 	@Override
 	public <V> Optional<V> getPropertyValue(
-		AdaptiveMediaProperty<ImageAdaptiveMediaProcessor, V> mediaProperty) {
+		AdaptiveMediaProperty<ImageAdaptiveMediaProcessor, V> property) {
 
-		return _adaptiveImagePropertyMapping.getPropertyValue(mediaProperty);
+		return _propertyMapping.getPropertyValue(property);
 	}
 
 	@Override
@@ -59,8 +58,7 @@ public final class ImageAdaptiveMedia
 		return _relativeURI;
 	}
 
-	private final ImageAdaptiveMediaPropertyMapping
-		_adaptiveImagePropertyMapping;
+	private final ImageAdaptiveMediaPropertyMapping _propertyMapping;
 	private final URI _relativeURI;
 	private final Supplier<InputStream> _supplier;
 

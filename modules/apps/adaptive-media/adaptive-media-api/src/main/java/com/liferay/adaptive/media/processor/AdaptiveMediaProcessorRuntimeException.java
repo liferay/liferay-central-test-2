@@ -36,6 +36,28 @@ public class AdaptiveMediaProcessorRuntimeException extends RuntimeException {
 		super(throwable);
 	}
 
+	public static final class AdaptiveMediaPropertyFormatException
+		extends AdaptiveMediaProcessorRuntimeException {
+
+		public AdaptiveMediaPropertyFormatException() {
+		}
+
+		public AdaptiveMediaPropertyFormatException(String s) {
+			super(s);
+		}
+
+		public AdaptiveMediaPropertyFormatException(
+			String s, Throwable throwable) {
+
+			super(s, throwable);
+		}
+
+		public AdaptiveMediaPropertyFormatException(Throwable throwable) {
+			super(throwable);
+		}
+
+	}
+
 	public static final class InvalidConfiguration
 		extends AdaptiveMediaProcessorRuntimeException {
 
@@ -71,26 +93,6 @@ public class AdaptiveMediaProcessorRuntimeException extends RuntimeException {
 		}
 
 		public IOException(Throwable throwable) {
-			super(throwable);
-		}
-
-	}
-
-	public static final class MediaPropertyFormatException
-		extends AdaptiveMediaProcessorRuntimeException {
-
-		public MediaPropertyFormatException() {
-		}
-
-		public MediaPropertyFormatException(String s) {
-			super(s);
-		}
-
-		public MediaPropertyFormatException(String s, Throwable throwable) {
-			super(s, throwable);
-		}
-
-		public MediaPropertyFormatException(Throwable throwable) {
 			super(throwable);
 		}
 

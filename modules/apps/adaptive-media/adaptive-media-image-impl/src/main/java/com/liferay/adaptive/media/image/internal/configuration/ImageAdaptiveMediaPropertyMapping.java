@@ -31,47 +31,48 @@ public class ImageAdaptiveMediaPropertyMapping {
 		Map<String, String> properties) {
 
 		Map<AdaptiveMediaProperty<ImageAdaptiveMediaProcessor, ?>, Optional<?>>
-			mediaProperties = new HashMap<>();
+			propertiesXX = new HashMap<>();
 
-		mediaProperties.put(
+		propertiesXX.put(
 			ImageAdaptiveMediaProperty.IMAGE_HEIGHT,
-			getMediaPropertyValue(
+			getPropertyValue(
 				properties, ImageAdaptiveMediaProperty.IMAGE_HEIGHT));
-		mediaProperties.put(
+		propertiesXX.put(
 			ImageAdaptiveMediaProperty.IMAGE_WIDTH,
-			getMediaPropertyValue(
+			getPropertyValue(
 				properties, ImageAdaptiveMediaProperty.IMAGE_WIDTH));
 
-		return new ImageAdaptiveMediaPropertyMapping(mediaProperties);
+		return new ImageAdaptiveMediaPropertyMapping(propertiesXX);
 	}
 
 	public <V> Optional<V> getPropertyValue(
-		AdaptiveMediaProperty<ImageAdaptiveMediaProcessor, V> mediaProperty) {
+		AdaptiveMediaProperty<ImageAdaptiveMediaProcessor, V> property) {
 
-		return (Optional<V>)_mediaProperties.get(mediaProperty);
+		return (Optional<V>)_properties.get(property);
 	}
 
 	protected ImageAdaptiveMediaPropertyMapping(
 		Map<AdaptiveMediaProperty<ImageAdaptiveMediaProcessor, ?>, Optional<?>>
-			mediaProperties) {
+			properties) {
 
-		_mediaProperties = mediaProperties;
+		_properties = properties;
 	}
 
-	private static <V> Optional<V> getMediaPropertyValue(
+	private static <V> Optional<V> getPropertyValue(
 		Map<String, String> properties,
-		AdaptiveMediaProperty<ImageAdaptiveMediaProcessor, V> mediaProperty) {
+		AdaptiveMediaProperty<ImageAdaptiveMediaProcessor, V> propertyXX) {
 
-		String value = properties.get(mediaProperty.getName());
+		String value = properties.get(propertyXX.getName());
 
 		if (value == null) {
 			return Optional.empty();
 		}
 
-		return Optional.of(mediaProperty.convert(value));
+		return Optional.of(propertyXX.convert(value));
 	}
 
-	private Map<AdaptiveMediaProperty<ImageAdaptiveMediaProcessor, ?>, Optional<?>>
-		_mediaProperties;
+	private Map<
+		AdaptiveMediaProperty<ImageAdaptiveMediaProcessor, ?>, Optional<?>>
+			_properties;
 
 }

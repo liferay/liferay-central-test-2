@@ -80,11 +80,11 @@ public class ImageStorage {
 
 	public InputStream getContentStream(
 		FileVersion fileVersion,
-		ImageAdaptiveMediaConfigurationEntry mediaConfigurationEntry) {
+		ImageAdaptiveMediaConfigurationEntry configurationEntry) {
 
 		try {
 			Path fileVersionVariantPath = getFileVersionVariantPath(
-				fileVersion, mediaConfigurationEntry);
+				fileVersion, configurationEntry);
 
 			return getFileAsStream(
 				fileVersion.getCompanyId(), fileVersionVariantPath);
@@ -96,12 +96,12 @@ public class ImageStorage {
 
 	public void save(
 		FileVersion fileVersion,
-		ImageAdaptiveMediaConfigurationEntry mediaConfigurationEntry,
+		ImageAdaptiveMediaConfigurationEntry configurationEntry,
 		InputStream inputStream) {
 
 		try {
 			Path fileVersionVariantPath = getFileVersionVariantPath(
-				fileVersion, mediaConfigurationEntry);
+				fileVersion, configurationEntry);
 
 			DLStoreUtil.addFile(
 				fileVersion.getCompanyId(), CompanyConstants.SYSTEM,
@@ -129,12 +129,12 @@ public class ImageStorage {
 
 	protected Path getFileVersionVariantPath(
 		FileVersion fileVersion,
-		ImageAdaptiveMediaConfigurationEntry mediaConfigurationEntry) {
+		ImageAdaptiveMediaConfigurationEntry configurationEntry) {
 
 		Path basePath = getFileVersionPath(fileVersion);
 
 		String fileName =
-			mediaConfigurationEntry.getUUID() + CharPool.PERIOD +
+			configurationEntry.getUUID() + CharPool.PERIOD +
 				fileVersion.getExtension();
 
 		return basePath.resolve(fileName);

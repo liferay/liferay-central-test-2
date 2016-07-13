@@ -55,10 +55,10 @@ public class AdaptiveMediaRepositoryDefiner
 	}
 
 	@Reference(unbind = "-")
-	public void setMediaProcessorLocator(
-		AdaptiveMediaProcessorLocator mediaProcessorLocator) {
+	public void setAdaptiveMediaProcessorLocator(
+		AdaptiveMediaProcessorLocator processorLocator) {
 
-		_mediaProcessorLocator = mediaProcessorLocator;
+		_processorLocator = processorLocator;
 	}
 
 	@Reference(target = ModuleServiceLifecycle.PORTAL_INITIALIZED, unbind = "-")
@@ -78,14 +78,14 @@ public class AdaptiveMediaRepositoryDefiner
 
 	private void _deleteAdaptiveMedia(FileEntry fileEntry) {
 		try {
-			AdaptiveMediaProcessor<FileVersion, ?> mediaProcessor =
-				_mediaProcessorLocator.locateForClass(FileVersion.class);
+			AdaptiveMediaProcessor<FileVersion, ?> processor =
+				_processorLocator.locateForClass(FileVersion.class);
 
 			List<FileVersion> fileVersions = fileEntry.getFileVersions(
 				WorkflowConstants.STATUS_ANY);
 
 			for (FileVersion fileVersion : fileVersions) {
-				mediaProcessor.cleanUp(fileVersion);
+				processor.cleanUp(fileVersion);
 			}
 		}
 		catch (AdaptiveMediaProcessorException | PortalException e) {
@@ -95,10 +95,10 @@ public class AdaptiveMediaRepositoryDefiner
 
 	private void _updateAdaptiveMedia(FileEntry fileEntry) {
 		try {
-			AdaptiveMediaProcessor<FileVersion, ?> mediaProcessor =
-				_mediaProcessorLocator.locateForClass(FileVersion.class);
+			AdaptiveMediaProcessor<FileVersion, ?> processor =
+				_processorLocator.locateForClass(FileVersion.class);
 
-			mediaProcessor.process(fileEntry.getLatestFileVersion(true));
+			processor.process(fileEntry.getLatestFileVersion(true));
 		}
 		catch (AdaptiveMediaProcessorException | PortalException e) {
 			throw new RuntimeException(e);
@@ -108,7 +108,7 @@ public class AdaptiveMediaRepositoryDefiner
 	private static final String _CLASS_NAME =
 		"com.liferay.portal.repository.liferayrepository.LiferayRepository";
 
-	private AdaptiveMediaProcessorLocator _mediaProcessorLocator;
+	private AdaptiveMediaProcessorLocator _processorLocator;
 
 	private class AdaptiveMediaCapabiliy
 		implements Capability, RepositoryEventAware {
