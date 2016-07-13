@@ -26,7 +26,7 @@ import com.liferay.portal.configuration.metatype.annotations.ExtendedObjectClass
 	scope = ExtendedObjectClassDefinition.Scope.COMPANY
 )
 @Meta.OCD(
-	id = "com.liferay.adaptive.image.configuration.ImageAdaptiveMediaConfiguration",
+	id = "com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaCompanyConfiguration",
 	localization = "content/Language",
 	name = "adaptive.image.configuration.name"
 )
