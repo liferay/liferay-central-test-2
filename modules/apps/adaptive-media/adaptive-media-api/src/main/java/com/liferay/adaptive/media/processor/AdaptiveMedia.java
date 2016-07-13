@@ -24,12 +24,26 @@ import java.util.Optional;
 
 /**
  * A {@link AdaptiveMedia} represents some content (images, audio, video, etc.)
- * along with a set of properties which characterize that content.
+ * along with a set of attributes which characterize that content.
  *
  * @author Adolfo Pérez
  */
 @ProviderType
 public interface AdaptiveMedia<T> {
+
+	/**
+	 * Return this media's value for the given attribute. This method will
+	 * always return a non null optional.
+	 *
+	 * @param attribute The attribute to get the value from
+	 * @param <V> The type of the attribute value
+	 *
+	 * @return {@link Optional#EMPTY} if the attribute is not present in this
+	 *         {@link AdaptiveMedia}; otherwise, the value wrapped in an {@link
+	 *         Optional}
+	 */
+	public <V> Optional<V> getAttributeValue(
+		AdaptiveMediaAttribute<T, V> attribute);
 
 	/**
 	 * Return an {@link InputStream} with the raw contents of this {@link
@@ -39,20 +53,6 @@ public interface AdaptiveMedia<T> {
 	 *         AdaptiveMedia}
 	 */
 	public InputStream getInputStream();
-
-	/**
-	 * Return this media's value for the given property. This method will
-	 * always return a non null optional.
-	 *
-	 * @param property The property to get the value from
-	 * @param <V> The type of the property value
-	 *
-	 * @return {@link Optional#EMPTY} if the property is not present in this
-	 *         {@link AdaptiveMedia}; otherwise, the value wrapped in an {@link
-	 *         Optional}
-	 */
-	public <V> Optional<V> getPropertyValue(
-		AdaptiveMediaProperty<T, V> property);
 
 	/**
 	 * Return the relative URI of this {@link AdaptiveMedia}. This can be used

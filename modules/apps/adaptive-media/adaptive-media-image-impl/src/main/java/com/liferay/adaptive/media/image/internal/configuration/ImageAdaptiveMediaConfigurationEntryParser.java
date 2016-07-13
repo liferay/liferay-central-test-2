@@ -51,14 +51,14 @@ public class ImageAdaptiveMediaConfigurationEntryParser {
 				"Image adaptive media configuration not valid: " + s);
 		}
 
-		String[] propertiesString = _PROPERTY_SEPARATOR_PATTERN.split(
+		String[] attributesArray = _ATTRIBUTE_SEPARATOR_PATTERN.split(
 			fields[2]);
 
 		Map<String, String> properties = new HashMap<>();
 
-		for (String propertyString : propertiesString) {
+		for (String attributeString : attributesArray) {
 			String[] keyValuePair = _KEY_VALUE_SEPARATOR_PATTERN.split(
-				propertyString);
+				attributeString);
 
 			properties.put(keyValuePair[0], keyValuePair[1]);
 		}
@@ -66,13 +66,13 @@ public class ImageAdaptiveMediaConfigurationEntryParser {
 		return new ImageAdaptiveMediaConfigurationEntry(name, uuid, properties);
 	}
 
+	private static final Pattern _ATTRIBUTE_SEPARATOR_PATTERN = Pattern.compile(
+		"\\s*;\\s*");
+
 	private static final Pattern _FIELD_SEPARATOR_PATTERN = Pattern.compile(
 		"\\s*:\\s*");
 
 	private static final Pattern _KEY_VALUE_SEPARATOR_PATTERN = Pattern.compile(
 		"\\s*=\\s*");
-
-	private static final Pattern _PROPERTY_SEPARATOR_PATTERN = Pattern.compile(
-		"\\s*;\\s*");
 
 }

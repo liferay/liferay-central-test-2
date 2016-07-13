@@ -17,7 +17,7 @@ package com.liferay.adaptive.media.image.internal.finder;
 import com.liferay.adaptive.media.finder.AdaptiveMediaQuery;
 import com.liferay.adaptive.media.image.finder.ImageAdaptiveMediaQueryBuilder;
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
-import com.liferay.adaptive.media.processor.AdaptiveMediaProperty;
+import com.liferay.adaptive.media.processor.AdaptiveMediaAttribute;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 
 import java.util.LinkedHashMap;
@@ -28,7 +28,7 @@ import java.util.Map;
  */
 public class ImageAdaptiveMediaQueryBuilderImpl
 	implements ImageAdaptiveMediaQueryBuilder,
-			   ImageAdaptiveMediaQueryBuilder.MediaPropertyQueryBuilder {
+			   ImageAdaptiveMediaQueryBuilder.MediaAttributeQueryBuilder {
 
 	public AdaptiveMediaQuery<FileVersion, ImageAdaptiveMediaProcessor>
 		allForModel(FileVersion fileVersion) {
@@ -48,7 +48,7 @@ public class ImageAdaptiveMediaQueryBuilderImpl
 	}
 
 	@Override
-	public MediaPropertyQueryBuilder forModel(FileVersion fileVersion) {
+	public MediaAttributeQueryBuilder forModel(FileVersion fileVersion) {
 		if (fileVersion == null) {
 			throw new IllegalArgumentException("File version cannot be null");
 		}
@@ -58,33 +58,33 @@ public class ImageAdaptiveMediaQueryBuilderImpl
 		return this;
 	}
 
+	public Map<AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, ?>, Object>
+		getAttributes() {
+
+		return _attributes;
+	}
+
 	public FileVersion getFileVersion() {
 		return _fileVersion;
 	}
 
-	public Map<AdaptiveMediaProperty<ImageAdaptiveMediaProcessor, ?>, Object>
-		getProperties() {
-
-		return _properties;
-	}
-
 	@Override
-	public <V> MediaPropertyQueryBuilder with(
-		AdaptiveMediaProperty<ImageAdaptiveMediaProcessor, V> property,
+	public <V> MediaAttributeQueryBuilder with(
+		AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, V> attribute,
 		V value) {
 
 		if (value == null) {
 			throw new IllegalArgumentException(
-				"Adaptive media property value cannot be null");
+				"Adaptive media attribute value cannot be null");
 		}
 
-		_properties.put(property, value);
+		_attributes.put(attribute, value);
 
 		return this;
 	}
 
+	private Map<AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, ?>, Object>
+		_attributes = new LinkedHashMap<>();
 	private FileVersion _fileVersion;
-	private Map<AdaptiveMediaProperty<ImageAdaptiveMediaProcessor, ?>, Object>
-		_properties = new LinkedHashMap<>();
 
 }

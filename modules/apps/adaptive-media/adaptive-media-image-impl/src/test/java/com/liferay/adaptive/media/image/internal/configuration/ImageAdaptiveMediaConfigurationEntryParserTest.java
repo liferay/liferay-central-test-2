@@ -25,13 +25,13 @@ import org.junit.Test;
 public class ImageAdaptiveMediaConfigurationEntryParserTest {
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testEmptyName() {
-		_configurationEntryParser.parse(":12345:height=100;width=200");
+	public void testEmptyAttributes() {
+		_configurationEntryParser.parse("test:12345:");
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testEmptyProperties() {
-		_configurationEntryParser.parse("test:12345:");
+	public void testEmptyName() {
+		_configurationEntryParser.parse(":12345:height=100;width=200");
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -45,7 +45,7 @@ public class ImageAdaptiveMediaConfigurationEntryParserTest {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testMissingPropertiesField() {
+	public void testMissingAttributesField() {
 		_configurationEntryParser.parse("test:12345");
 	}
 

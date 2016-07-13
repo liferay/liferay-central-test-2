@@ -24,7 +24,7 @@ import com.liferay.portal.kernel.exception.PortalException;
  *
  * The type parameter M specifies the model used by the processor to generate
  * the media. The type parameter T is used to restrict the set of valid
- * {@link AdaptiveMediaProperty} available.
+ * {@link AdaptiveMediaAttribute} available.
  *
  * @author Adolfo Pérez
  */

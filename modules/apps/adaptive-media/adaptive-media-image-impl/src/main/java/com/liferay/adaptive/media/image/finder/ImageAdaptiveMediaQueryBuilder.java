@@ -17,7 +17,7 @@ package com.liferay.adaptive.media.image.finder;
 import com.liferay.adaptive.media.finder.AdaptiveMediaQuery;
 import com.liferay.adaptive.media.finder.AdaptiveMediaQueryBuilder;
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
-import com.liferay.adaptive.media.processor.AdaptiveMediaProperty;
+import com.liferay.adaptive.media.processor.AdaptiveMediaAttribute;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 
 /**
@@ -30,15 +30,15 @@ public interface ImageAdaptiveMediaQueryBuilder
 	public AdaptiveMediaQuery<FileVersion, ImageAdaptiveMediaProcessor>
 		allForModel(FileVersion fileVersion);
 
-	public MediaPropertyQueryBuilder forModel(FileVersion fileVersion);
+	public MediaAttributeQueryBuilder forModel(FileVersion fileVersion);
 
-	public interface MediaPropertyQueryBuilder {
+	public interface MediaAttributeQueryBuilder {
 
 		public AdaptiveMediaQuery<FileVersion, ImageAdaptiveMediaProcessor>
 			done();
 
-		public <V> MediaPropertyQueryBuilder with(
-			AdaptiveMediaProperty<ImageAdaptiveMediaProcessor, V> property,
+		public <V> MediaAttributeQueryBuilder with(
+			AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, V> attribute,
 			V value);
 
 	}

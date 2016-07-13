@@ -22,32 +22,32 @@ import org.junit.Test;
 /**
  * @author Adolfo Pérez
  */
-public class ImageAdaptiveMediaPropertyTest {
+public class ImageAdaptiveMediaAttributeTest {
 
 	@Test(
-		expected = AdaptiveMediaProcessorRuntimeException.AdaptiveMediaPropertyFormatException.class
+		expected = AdaptiveMediaProcessorRuntimeException.AdaptiveMediaAttributeFormatException.class
 	)
 	public void testImageHeightFailsForNonIntegers() {
-		ImageAdaptiveMediaProperty.IMAGE_HEIGHT.convert("xyz");
+		ImageAdaptiveMediaAttribute.IMAGE_HEIGHT.convert("xyz");
 	}
 
 	@Test
 	public void testImageHeightRecognizesIntegers() {
-		int result = ImageAdaptiveMediaProperty.IMAGE_HEIGHT.convert("42");
+		int result = ImageAdaptiveMediaAttribute.IMAGE_HEIGHT.convert("42");
 
 		Assert.assertEquals(42, result);
 	}
 
 	@Test(
-		expected = AdaptiveMediaProcessorRuntimeException.AdaptiveMediaPropertyFormatException.class
+		expected = AdaptiveMediaProcessorRuntimeException.AdaptiveMediaAttributeFormatException.class
 	)
 	public void testImageWidthFailsForNonIntegers() {
-		ImageAdaptiveMediaProperty.IMAGE_WIDTH.convert("xyz");
+		ImageAdaptiveMediaAttribute.IMAGE_WIDTH.convert("xyz");
 	}
 
 	@Test
 	public void testImageWidthRecognizesIntegers() {
-		int result = ImageAdaptiveMediaProperty.IMAGE_WIDTH.convert("42");
+		int result = ImageAdaptiveMediaAttribute.IMAGE_WIDTH.convert("42");
 
 		Assert.assertEquals(42, result);
 	}

@@ -36,23 +36,23 @@ public class AdaptiveMediaProcessorRuntimeException extends RuntimeException {
 		super(throwable);
 	}
 
-	public static final class AdaptiveMediaPropertyFormatException
+	public static final class AdaptiveMediaAttributeFormatException
 		extends AdaptiveMediaProcessorRuntimeException {
 
-		public AdaptiveMediaPropertyFormatException() {
+		public AdaptiveMediaAttributeFormatException() {
 		}
 
-		public AdaptiveMediaPropertyFormatException(String s) {
+		public AdaptiveMediaAttributeFormatException(String s) {
 			super(s);
 		}
 
-		public AdaptiveMediaPropertyFormatException(
+		public AdaptiveMediaAttributeFormatException(
 			String s, Throwable throwable) {
 
 			super(s, throwable);
 		}
 
-		public AdaptiveMediaPropertyFormatException(Throwable throwable) {
+		public AdaptiveMediaAttributeFormatException(Throwable throwable) {
 			super(throwable);
 		}
 

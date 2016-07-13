@@ -14,7 +14,7 @@
 
 package com.liferay.adaptive.media.image.internal.processor;
 
-import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaPropertyMapping;
+import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaAttributeMapping;
 
 import java.io.InputStream;
 
@@ -34,34 +34,35 @@ import org.mockito.Mockito;
 public class ImageAdaptiveMediaTest {
 
 	@Test
+	public void testGetAttributeDelegatesOnMapping() {
+		ImageAdaptiveMediaAttributeMapping attributeMapping = Mockito.mock(
+			ImageAdaptiveMediaAttributeMapping.class);
+
+		ImageAdaptiveMedia adaptiveMedia = new ImageAdaptiveMedia(
+			() -> null, attributeMapping, URI.create("/"));
+
+		adaptiveMedia.getAttributeValue(
+			ImageAdaptiveMediaAttribute.IMAGE_HEIGHT);
+
+		Mockito.verify(
+			attributeMapping
+		).getAttributeValue(ImageAdaptiveMediaAttribute.IMAGE_HEIGHT);
+	}
+
+	@Test
 	public void testGetInputStreamDelegatesOnSupplier() {
 		InputStream inputStream = Mockito.mock(InputStream.class);
 
 		Supplier<InputStream> supplier = () -> inputStream;
 
-		ImageAdaptiveMediaPropertyMapping propertyMapping =
-			ImageAdaptiveMediaPropertyMapping.fromProperties(
+		ImageAdaptiveMediaAttributeMapping attributeMapping =
+			ImageAdaptiveMediaAttributeMapping.fromProperties(
 				Collections.emptyMap());
 
 		ImageAdaptiveMedia adaptiveMedia = new ImageAdaptiveMedia(
-			supplier, propertyMapping, URI.create("/"));
+			supplier, attributeMapping, URI.create("/"));
 
 		Assert.assertEquals(inputStream, adaptiveMedia.getInputStream());
-	}
-
-	@Test
-	public void testGetPropertyDelegatesOnMapping() {
-		ImageAdaptiveMediaPropertyMapping propertyMapping = Mockito.mock(
-			ImageAdaptiveMediaPropertyMapping.class);
-
-		ImageAdaptiveMedia adaptiveMedia = new ImageAdaptiveMedia(
-			() -> null, propertyMapping, URI.create("/"));
-
-		adaptiveMedia.getPropertyValue(ImageAdaptiveMediaProperty.IMAGE_HEIGHT);
-
-		Mockito.verify(
-			propertyMapping
-		).getPropertyValue(ImageAdaptiveMediaProperty.IMAGE_HEIGHT);
 	}
 
 }

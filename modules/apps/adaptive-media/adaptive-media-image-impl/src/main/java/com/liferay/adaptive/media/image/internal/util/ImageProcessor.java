@@ -14,9 +14,9 @@
 
 package com.liferay.adaptive.media.image.internal.util;
 
+import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaAttributeMapping;
 import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaConfigurationEntry;
-import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaPropertyMapping;
-import com.liferay.adaptive.media.image.internal.processor.ImageAdaptiveMediaProperty;
+import com.liferay.adaptive.media.image.internal.processor.ImageAdaptiveMediaAttribute;
 import com.liferay.adaptive.media.processor.AdaptiveMediaProcessorRuntimeException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.image.ImageToolUtil;
@@ -55,15 +55,17 @@ public class ImageProcessor {
 		ImageAdaptiveMediaConfigurationEntry configurationEntry) {
 
 		try {
-			ImageAdaptiveMediaPropertyMapping propertyMapping =
-				ImageAdaptiveMediaPropertyMapping.fromProperties(
+			ImageAdaptiveMediaAttributeMapping attributeMapping =
+				ImageAdaptiveMediaAttributeMapping.fromProperties(
 					configurationEntry.getProperties());
 
-			Optional<Integer> heightOptional = propertyMapping.getPropertyValue(
-				ImageAdaptiveMediaProperty.IMAGE_HEIGHT);
+			Optional<Integer> heightOptional =
+				attributeMapping.getAttributeValue(
+					ImageAdaptiveMediaAttribute.IMAGE_HEIGHT);
 
-			Optional<Integer> widthOptional = propertyMapping.getPropertyValue(
-				ImageAdaptiveMediaProperty.IMAGE_WIDTH);
+			Optional<Integer> widthOptional =
+				attributeMapping.getAttributeValue(
+					ImageAdaptiveMediaAttribute.IMAGE_WIDTH);
 
 			RenderedImage renderedImage = _readImage(
 				fileVersion.getContentStream(false));

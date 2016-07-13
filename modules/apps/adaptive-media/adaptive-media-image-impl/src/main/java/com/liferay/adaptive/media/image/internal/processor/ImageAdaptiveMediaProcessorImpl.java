@@ -17,17 +17,17 @@ package com.liferay.adaptive.media.image.internal.processor;
 import com.liferay.adaptive.media.finder.AdaptiveMediaQuery;
 import com.liferay.adaptive.media.image.finder.ImageAdaptiveMediaFinder;
 import com.liferay.adaptive.media.image.finder.ImageAdaptiveMediaQueryBuilder;
+import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaAttributeMapping;
 import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaConfigurationHelper;
-import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaPropertyMapping;
 import com.liferay.adaptive.media.image.internal.finder.ImageAdaptiveMediaQueryBuilderImpl;
 import com.liferay.adaptive.media.image.internal.util.ImageProcessor;
 import com.liferay.adaptive.media.image.internal.util.ImageStorage;
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
 import com.liferay.adaptive.media.processor.AdaptiveMedia;
+import com.liferay.adaptive.media.processor.AdaptiveMediaAttribute;
 import com.liferay.adaptive.media.processor.AdaptiveMediaProcessor;
 import com.liferay.adaptive.media.processor.AdaptiveMediaProcessorRuntimeException;
-import com.liferay.adaptive.media.processor.AdaptiveMediaProperty;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 
 import java.io.IOException;
@@ -99,7 +99,7 @@ public final class ImageAdaptiveMediaProcessorImpl
 			map(
 				configurationEntry ->
 					_createMedia(fileVersion, configurationEntry)).
-					sorted(_buildComparator(queryBuilder.getProperties()));
+					sorted(_buildComparator(queryBuilder.getAttributes()));
 	}
 
 	@Override
@@ -149,16 +149,16 @@ public final class ImageAdaptiveMediaProcessorImpl
 
 	private Comparator<AdaptiveMedia<ImageAdaptiveMediaProcessor>>
 		_buildComparator(
-			Map<AdaptiveMediaProperty<ImageAdaptiveMediaProcessor, ?>, ?>
-				properties) {
+			Map<AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, ?>, ?>
+				attributes) {
 
 		return (adaptiveMedia1, adaptiveMedia2) -> {
-			for (Map.Entry<AdaptiveMediaProperty<ImageAdaptiveMediaProcessor, ?>, ?>
-					entry : properties.entrySet()) {
+			for (Map.Entry<AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, ?>, ?>
+					entry : attributes.entrySet()) {
 
-				AdaptiveMediaProperty<ImageAdaptiveMediaProcessor, Object>
-					property =
-						(AdaptiveMediaProperty<
+				AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, Object>
+					attribute =
+						(AdaptiveMediaAttribute<
 							ImageAdaptiveMediaProcessor, Object>)
 								entry.getKey();
 
@@ -168,17 +168,17 @@ public final class ImageAdaptiveMediaProcessorImpl
 					continue;
 				}
 
-				Optional<?> value1Optional = adaptiveMedia1.getPropertyValue(
-					property);
+				Optional<?> value1Optional = adaptiveMedia1.getAttributeValue(
+					attribute);
 
 				Optional<Integer> value1Distance = value1Optional.map(
-					value1 -> property.distance(value1, requestedValue));
+					value1 -> attribute.distance(value1, requestedValue));
 
-				Optional<?> value2Optional = adaptiveMedia2.getPropertyValue(
-					property);
+				Optional<?> value2Optional = adaptiveMedia2.getAttributeValue(
+					attribute);
 
 				Optional<Integer> value2Distance = value2Optional.map(
-					value2 -> property.distance(value2, requestedValue));
+					value2 -> attribute.distance(value2, requestedValue));
 
 				Optional<Integer> resultOptional = value1Distance.flatMap(
 					value1 -> value2Distance.map(value2 -> value1 - value2));
@@ -211,13 +211,13 @@ public final class ImageAdaptiveMediaProcessorImpl
 		FileVersion fileVersion,
 		ImageAdaptiveMediaConfigurationEntry configurationEntry) {
 
-		ImageAdaptiveMediaPropertyMapping propertyMapping =
-			ImageAdaptiveMediaPropertyMapping.fromProperties(
+		ImageAdaptiveMediaAttributeMapping attributeMapping =
+			ImageAdaptiveMediaAttributeMapping.fromProperties(
 				configurationEntry.getProperties());
 
 		return new ImageAdaptiveMedia(
 			() -> _imageStorage.getContentStream(
-				fileVersion, configurationEntry), propertyMapping,
+				fileVersion, configurationEntry), attributeMapping,
 				_buildRelativeURI(fileVersion, configurationEntry));
 	}
 

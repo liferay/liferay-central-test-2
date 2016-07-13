@@ -14,10 +14,10 @@
 
 package com.liferay.adaptive.media.image.internal.processor;
 
-import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaPropertyMapping;
+import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaAttributeMapping;
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
 import com.liferay.adaptive.media.processor.AdaptiveMedia;
-import com.liferay.adaptive.media.processor.AdaptiveMediaProperty;
+import com.liferay.adaptive.media.processor.AdaptiveMediaAttribute;
 
 import java.io.InputStream;
 
@@ -34,11 +34,18 @@ public final class ImageAdaptiveMedia
 
 	public ImageAdaptiveMedia(
 		Supplier<InputStream> supplier,
-		ImageAdaptiveMediaPropertyMapping propertyMapping, URI relativeURI) {
+		ImageAdaptiveMediaAttributeMapping attributeMapping, URI relativeURI) {
 
 		_supplier = supplier;
-		_propertyMapping = propertyMapping;
+		_attributeMapping = attributeMapping;
 		_relativeURI = relativeURI;
+	}
+
+	@Override
+	public <V> Optional<V> getAttributeValue(
+		AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, V> attribute) {
+
+		return _attributeMapping.getAttributeValue(attribute);
 	}
 
 	@Override
@@ -47,18 +54,11 @@ public final class ImageAdaptiveMedia
 	}
 
 	@Override
-	public <V> Optional<V> getPropertyValue(
-		AdaptiveMediaProperty<ImageAdaptiveMediaProcessor, V> property) {
-
-		return _propertyMapping.getPropertyValue(property);
-	}
-
-	@Override
 	public URI getRelativeURI() {
 		return _relativeURI;
 	}
 
-	private final ImageAdaptiveMediaPropertyMapping _propertyMapping;
+	private final ImageAdaptiveMediaAttributeMapping _attributeMapping;
 	private final URI _relativeURI;
 	private final Supplier<InputStream> _supplier;
 

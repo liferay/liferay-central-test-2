@@ -15,25 +15,25 @@
 package com.liferay.adaptive.media.image.internal.processor;
 
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
+import com.liferay.adaptive.media.processor.AdaptiveMediaAttribute;
 import com.liferay.adaptive.media.processor.AdaptiveMediaProcessorRuntimeException;
-import com.liferay.adaptive.media.processor.AdaptiveMediaProperty;
 
 /**
  * @author Adolfo Pérez
  */
-public final class ImageAdaptiveMediaProperty {
+public final class ImageAdaptiveMediaAttribute {
 
-	public static final AdaptiveMediaProperty<
+	public static final AdaptiveMediaAttribute<
 		ImageAdaptiveMediaProcessor, Integer>
-			IMAGE_HEIGHT = new AdaptiveMediaProperty<>(
-				"height", ImageAdaptiveMediaProperty::_parseInt,
-				ImageAdaptiveMediaProperty::_intDistance);
+			IMAGE_HEIGHT = new AdaptiveMediaAttribute<>(
+				"height", ImageAdaptiveMediaAttribute::_parseInt,
+				ImageAdaptiveMediaAttribute::_intDistance);
 
-	public static final AdaptiveMediaProperty<
+	public static final AdaptiveMediaAttribute<
 		ImageAdaptiveMediaProcessor, Integer>
-			IMAGE_WIDTH = new AdaptiveMediaProperty<>(
-				"width", ImageAdaptiveMediaProperty::_parseInt,
-				ImageAdaptiveMediaProperty::_intDistance);
+			IMAGE_WIDTH = new AdaptiveMediaAttribute<>(
+				"width", ImageAdaptiveMediaAttribute::_parseInt,
+				ImageAdaptiveMediaAttribute::_intDistance);
 
 	private static int _intDistance(int i1, int i2) {
 		return Math.abs(i1 - i2);
@@ -45,11 +45,11 @@ public final class ImageAdaptiveMediaProperty {
 		}
 		catch (NumberFormatException nfe) {
 			throw new AdaptiveMediaProcessorRuntimeException.
-				AdaptiveMediaPropertyFormatException(nfe);
+				AdaptiveMediaAttributeFormatException(nfe);
 		}
 	}
 
-	private ImageAdaptiveMediaProperty() {
+	private ImageAdaptiveMediaAttribute() {
 	}
 
 }

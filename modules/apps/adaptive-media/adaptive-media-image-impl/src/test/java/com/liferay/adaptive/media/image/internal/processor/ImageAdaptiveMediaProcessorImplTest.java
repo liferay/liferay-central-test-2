@@ -107,6 +107,37 @@ public class ImageAdaptiveMediaProcessorImplTest {
 		);
 	}
 
+	@Test
+	public void testGetMediaAttributes() {
+		ImageAdaptiveMediaConfigurationEntry configurationEntry =
+			new ImageAdaptiveMediaConfigurationEntry(
+				StringUtil.randomString(), StringUtil.randomString(),
+				MapUtil.fromArray("height", "100", "width", "200"));
+
+		Mockito.when(
+			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
+				Mockito.any(long.class))
+		).thenReturn(
+			Collections.singleton(configurationEntry)
+		);
+
+		Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> stream =
+			_processor.getMedia(query -> query.allForModel(_fileVersion));
+
+		stream.forEach(
+			adaptiveMedia -> {
+				Assert.assertEquals(
+					adaptiveMedia.getAttributeValue(
+						ImageAdaptiveMediaAttribute.IMAGE_HEIGHT),
+					Optional.of(100));
+
+				Assert.assertEquals(
+					adaptiveMedia.getAttributeValue(
+						ImageAdaptiveMediaAttribute.IMAGE_WIDTH),
+					Optional.of(200));
+			});
+	}
+
 	@Test(expected = AdaptiveMediaProcessorRuntimeException.InvalidConfiguration.class)
 	public void testGetMediaConfigurationError() {
 		Mockito.when(
@@ -157,7 +188,7 @@ public class ImageAdaptiveMediaProcessorImplTest {
 	}
 
 	@Test
-	public void testGetMediaMissingProperty() {
+	public void testGetMediaMissingAttribute() {
 		ImageAdaptiveMediaConfigurationEntry configurationEntry =
 			new ImageAdaptiveMediaConfigurationEntry(
 				StringUtil.randomString(), StringUtil.randomString(),
@@ -176,45 +207,14 @@ public class ImageAdaptiveMediaProcessorImplTest {
 		stream.forEach(
 			adaptiveMedia -> {
 				Assert.assertEquals(
-					adaptiveMedia.getPropertyValue(
-						ImageAdaptiveMediaProperty.IMAGE_HEIGHT),
+					adaptiveMedia.getAttributeValue(
+						ImageAdaptiveMediaAttribute.IMAGE_HEIGHT),
 					Optional.of(100));
 
 				Assert.assertEquals(
-					adaptiveMedia.getPropertyValue(
-						ImageAdaptiveMediaProperty.IMAGE_WIDTH),
+					adaptiveMedia.getAttributeValue(
+						ImageAdaptiveMediaAttribute.IMAGE_WIDTH),
 					Optional.empty());
-			});
-	}
-
-	@Test
-	public void testGetMediaProperties() {
-		ImageAdaptiveMediaConfigurationEntry configurationEntry =
-			new ImageAdaptiveMediaConfigurationEntry(
-				StringUtil.randomString(), StringUtil.randomString(),
-				MapUtil.fromArray("height", "100", "width", "200"));
-
-		Mockito.when(
-			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
-				Mockito.any(long.class))
-		).thenReturn(
-			Collections.singleton(configurationEntry)
-		);
-
-		Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> stream =
-			_processor.getMedia(query -> query.allForModel(_fileVersion));
-
-		stream.forEach(
-			adaptiveMedia -> {
-				Assert.assertEquals(
-					adaptiveMedia.getPropertyValue(
-						ImageAdaptiveMediaProperty.IMAGE_HEIGHT),
-					Optional.of(100));
-
-				Assert.assertEquals(
-					adaptiveMedia.getPropertyValue(
-						ImageAdaptiveMediaProperty.IMAGE_WIDTH),
-					Optional.of(200));
 			});
 	}
 
@@ -254,7 +254,7 @@ public class ImageAdaptiveMediaProcessorImplTest {
 				query ->
 					query.
 						forModel(_fileVersion).
-						with(ImageAdaptiveMediaProperty.IMAGE_HEIGHT, 100).
+						with(ImageAdaptiveMediaAttribute.IMAGE_HEIGHT, 100).
 						done());
 
 		List<AdaptiveMedia<ImageAdaptiveMediaProcessor>> adaptiveMedias =
@@ -264,8 +264,8 @@ public class ImageAdaptiveMediaProcessorImplTest {
 			adaptiveMedias.get(0);
 
 		Optional<Integer> adaptiveMedia0Optional =
-			adaptiveMedia0.getPropertyValue(
-				ImageAdaptiveMediaProperty.IMAGE_HEIGHT);
+			adaptiveMedia0.getAttributeValue(
+				ImageAdaptiveMediaAttribute.IMAGE_HEIGHT);
 
 		Assert.assertEquals(100, (int)adaptiveMedia0Optional.get());
 
@@ -273,8 +273,8 @@ public class ImageAdaptiveMediaProcessorImplTest {
 			adaptiveMedias.get(1);
 
 		Optional<Integer> adaptiveMedia1Optional =
-			adaptiveMedia1.getPropertyValue(
-				ImageAdaptiveMediaProperty.IMAGE_HEIGHT);
+			adaptiveMedia1.getAttributeValue(
+				ImageAdaptiveMediaAttribute.IMAGE_HEIGHT);
 
 		Assert.assertEquals(200, (int)adaptiveMedia1Optional.get());
 	}
@@ -315,7 +315,7 @@ public class ImageAdaptiveMediaProcessorImplTest {
 				query ->
 					query.
 						forModel(_fileVersion).
-						with(ImageAdaptiveMediaProperty.IMAGE_HEIGHT, 200).
+						with(ImageAdaptiveMediaAttribute.IMAGE_HEIGHT, 200).
 						done());
 
 		List<AdaptiveMedia<ImageAdaptiveMediaProcessor>> adaptiveMedias =
@@ -325,8 +325,8 @@ public class ImageAdaptiveMediaProcessorImplTest {
 			adaptiveMedias.get(0);
 
 		Optional<Integer> adaptiveMedia0Optional =
-			adaptiveMedia0.getPropertyValue(
-				ImageAdaptiveMediaProperty.IMAGE_HEIGHT);
+			adaptiveMedia0.getAttributeValue(
+				ImageAdaptiveMediaAttribute.IMAGE_HEIGHT);
 
 		Assert.assertEquals(200, (int)adaptiveMedia0Optional.get());
 
@@ -334,14 +334,14 @@ public class ImageAdaptiveMediaProcessorImplTest {
 			adaptiveMedias.get(1);
 
 		Optional<Integer> adaptiveMedia1Optional =
-			adaptiveMedia1.getPropertyValue(
-				ImageAdaptiveMediaProperty.IMAGE_HEIGHT);
+			adaptiveMedia1.getAttributeValue(
+				ImageAdaptiveMediaAttribute.IMAGE_HEIGHT);
 
 		Assert.assertEquals(100, (int)adaptiveMedia1Optional.get());
 	}
 
 	@Test
-	public void testGetMediaQueryWithNoMatchingProperties() {
+	public void testGetMediaQueryWithNoMatchingAttributes() {
 		ImageAdaptiveMediaConfigurationEntry configurationEntry1 =
 			new ImageAdaptiveMediaConfigurationEntry(
 				StringUtil.randomString(), StringUtil.randomString(),
@@ -376,7 +376,7 @@ public class ImageAdaptiveMediaProcessorImplTest {
 				query ->
 					query.
 						forModel(_fileVersion).
-						with(ImageAdaptiveMediaProperty.IMAGE_WIDTH, 100).
+						with(ImageAdaptiveMediaAttribute.IMAGE_WIDTH, 100).
 						done());
 
 		List<AdaptiveMedia<ImageAdaptiveMediaProcessor>> adaptiveMedias =
@@ -386,8 +386,8 @@ public class ImageAdaptiveMediaProcessorImplTest {
 			adaptiveMedias.get(0);
 
 		Optional<Integer> adaptiveMedia0Optional =
-			adaptiveMedia0.getPropertyValue(
-				ImageAdaptiveMediaProperty.IMAGE_HEIGHT);
+			adaptiveMedia0.getAttributeValue(
+				ImageAdaptiveMediaAttribute.IMAGE_HEIGHT);
 
 		Assert.assertEquals(100, (int)adaptiveMedia0Optional.get());
 
@@ -395,8 +395,8 @@ public class ImageAdaptiveMediaProcessorImplTest {
 			adaptiveMedias.get(1);
 
 		Optional<Integer> adaptiveMedia1Optional =
-			adaptiveMedia1.getPropertyValue(
-				ImageAdaptiveMediaProperty.IMAGE_HEIGHT);
+			adaptiveMedia1.getAttributeValue(
+				ImageAdaptiveMediaAttribute.IMAGE_HEIGHT);
 
 		Assert.assertEquals(200, (int)adaptiveMedia1Optional.get());
 	}
