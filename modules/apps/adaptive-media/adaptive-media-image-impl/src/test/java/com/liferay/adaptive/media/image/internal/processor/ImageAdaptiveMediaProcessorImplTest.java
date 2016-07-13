@@ -16,8 +16,8 @@ package com.liferay.adaptive.media.image.internal.processor;
 
 import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaConfiguration;
 import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaVariantConfiguration;
-import com.liferay.adaptive.media.image.internal.image.ImageProcessor;
-import com.liferay.adaptive.media.image.internal.image.ImageStorage;
+import com.liferay.adaptive.media.image.internal.util.ImageProcessor;
+import com.liferay.adaptive.media.image.internal.util.ImageStorage;
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
 import com.liferay.adaptive.media.processor.AdaptiveMedia;
 import com.liferay.adaptive.media.processor.AdaptiveMediaProcessorRuntimeException;

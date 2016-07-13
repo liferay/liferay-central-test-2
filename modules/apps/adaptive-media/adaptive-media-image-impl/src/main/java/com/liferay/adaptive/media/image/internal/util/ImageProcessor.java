@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.adaptive.media.image.internal.image;
+package com.liferay.adaptive.media.image.internal.util;
 
 import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaPropertyMapping;
 import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaVariantConfiguration;

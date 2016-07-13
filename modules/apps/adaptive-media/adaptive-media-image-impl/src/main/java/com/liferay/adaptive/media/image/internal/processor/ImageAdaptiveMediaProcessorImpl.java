@@ -21,8 +21,8 @@ import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMedi
 import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaPropertyMapping;
 import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaVariantConfiguration;
 import com.liferay.adaptive.media.image.internal.finder.ImageAdaptiveMediaQueryBuilderImpl;
-import com.liferay.adaptive.media.image.internal.image.ImageProcessor;
-import com.liferay.adaptive.media.image.internal.image.ImageStorage;
+import com.liferay.adaptive.media.image.internal.util.ImageProcessor;
+import com.liferay.adaptive.media.image.internal.util.ImageStorage;
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
 import com.liferay.adaptive.media.processor.AdaptiveMedia;
 import com.liferay.adaptive.media.processor.AdaptiveMediaProcessor;
