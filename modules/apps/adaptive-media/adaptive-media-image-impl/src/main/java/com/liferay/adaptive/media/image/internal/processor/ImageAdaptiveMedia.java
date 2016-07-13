@@ -14,10 +14,10 @@
 
 package com.liferay.adaptive.media.image.internal.processor;
 
-import com.liferay.adaptive.media.image.internal.configuration.AdaptiveImagePropertyMapping;
-import com.liferay.adaptive.media.image.processor.AdaptiveImageMediaProcessor;
-import com.liferay.adaptive.media.processor.Media;
-import com.liferay.adaptive.media.processor.MediaProperty;
+import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaPropertyMapping;
+import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
+import com.liferay.adaptive.media.processor.AdaptiveMedia;
+import com.liferay.adaptive.media.processor.AdaptiveMediaProperty;
 
 import java.io.InputStream;
 
@@ -29,12 +29,12 @@ import java.util.function.Supplier;
 /**
  * @author Adolfo Pérez
  */
-public final class AdaptiveImageMedia
-	implements Media<AdaptiveImageMediaProcessor> {
+public final class ImageAdaptiveMedia
+	implements AdaptiveMedia<ImageAdaptiveMediaProcessor> {
 
-	public AdaptiveImageMedia(
+	public ImageAdaptiveMedia(
 		Supplier<InputStream> supplier,
-		AdaptiveImagePropertyMapping adaptiveImagePropertyMapping,
+		ImageAdaptiveMediaPropertyMapping adaptiveImagePropertyMapping,
 		URI relativeURI) {
 
 		_supplier = supplier;
@@ -49,7 +49,7 @@ public final class AdaptiveImageMedia
 
 	@Override
 	public <V> Optional<V> getPropertyValue(
-		MediaProperty<AdaptiveImageMediaProcessor, V> mediaProperty) {
+		AdaptiveMediaProperty<ImageAdaptiveMediaProcessor, V> mediaProperty) {
 
 		return _adaptiveImagePropertyMapping.getPropertyValue(mediaProperty);
 	}
@@ -59,7 +59,8 @@ public final class AdaptiveImageMedia
 		return _relativeURI;
 	}
 
-	private final AdaptiveImagePropertyMapping _adaptiveImagePropertyMapping;
+	private final ImageAdaptiveMediaPropertyMapping
+		_adaptiveImagePropertyMapping;
 	private final URI _relativeURI;
 	private final Supplier<InputStream> _supplier;
 

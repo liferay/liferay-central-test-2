@@ -14,7 +14,7 @@
 
 package com.liferay.adaptive.media.image.internal.finder;
 
-import com.liferay.adaptive.media.image.internal.processor.AdaptiveImageMediaProperty;
+import com.liferay.adaptive.media.image.internal.processor.ImageAdaptiveMediaProperty;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 
 import org.junit.Test;
@@ -24,7 +24,7 @@ import org.mockito.Mockito;
 /**
  * @author Adolfo Pérez
  */
-public class AdaptiveImageMediaQueryBuilderImplTest {
+public class ImageAdaptiveMediaQueryBuilderImplTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testNullFileVersionFailsWhenQueryingAll() {
@@ -42,11 +42,11 @@ public class AdaptiveImageMediaQueryBuilderImplTest {
 
 		_adaptiveImageMediaQueryBuilder.
 			forModel(fileVersion).
-			with(AdaptiveImageMediaProperty.IMAGE_HEIGHT, null);
+			with(ImageAdaptiveMediaProperty.IMAGE_HEIGHT, null);
 	}
 
-	private final AdaptiveImageMediaQueryBuilderImpl
+	private final ImageAdaptiveMediaQueryBuilderImpl
 		_adaptiveImageMediaQueryBuilder =
-			new AdaptiveImageMediaQueryBuilderImpl();
+			new ImageAdaptiveMediaQueryBuilderImpl();
 
 }

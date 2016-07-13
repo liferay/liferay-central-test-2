@@ -14,15 +14,15 @@
 
 package com.liferay.adaptive.media.finder;
 
-import com.liferay.adaptive.media.processor.Media;
-import com.liferay.adaptive.media.processor.MediaProcessorException;
+import com.liferay.adaptive.media.processor.AdaptiveMedia;
+import com.liferay.adaptive.media.processor.AdaptiveMediaProcessorException;
 import com.liferay.portal.kernel.exception.PortalException;
 
 import java.util.function.Function;
 import java.util.stream.Stream;
 
 /**
- * A {@link MediaFinder} is responsible of locating and returning media
+ * A {@link AdaptiveMediaFinder} is responsible of locating and returning media
  * related to a model.
  *
  * All media matching the query will be returned, sorted by score. This means
@@ -30,29 +30,30 @@ import java.util.stream.Stream;
  *
  * @author Adolfo Pérez
  */
-public interface MediaFinder<B extends MediaQueryBuilder<M, T>, M, T> {
+public interface AdaptiveMediaFinder<B extends AdaptiveMediaQueryBuilder<M, T>, M, T> {
 
 	/**
-	 * Return all {@link Media} for the given model. The provided function will
-	 * be invoked with an instance of an implementation dependant {@link
-	 * MediaQueryBuilder}.
+	 * Return all {@link AdaptiveMedia} for the given model. The provided
+	 * function will be invoked with an instance of an implementation dependant
+	 * {@link AdaptiveMediaQueryBuilder}.
 	 *
 	 * @param queryBuilderFunction Function that will be invoked with a {@link
-	 *        MediaQueryBuilder} as argument. This query builder will provide
-	 *        operations to filter and sort the returned media.
+	 *        AdaptiveMediaQueryBuilder} as argument. This query builder will
+	 *        provide operations to filter and sort the returned media.
 	 *
 	 * @return A non-null, possibly empty stream with all media matching the
 	 *         query ordered by score: better matches are returned before
 	 *         worser ones
 	 *
-	 * @throws MediaProcessorException if an error occurred while getting the
-	 *         {@link Media}. See {@link MediaProcessorException} inner classes
-	 *         for the set of possible exceptions.
+	 * @throws AdaptiveMediaProcessorException if an error occurred while
+	 *         getting the {@link AdaptiveMedia}. See
+	 *         {@link AdaptiveMediaProcessorException} inner classes for the set
+	 *         of possible exceptions.
 	 * @throws PortalException if an error occurred while calling any Liferay
 	 *         services
 	 */
-	public Stream<Media<T>> getMedia(
-			Function<B, MediaQuery<M, T>> queryBuilderFunction)
-		throws MediaProcessorException, PortalException;
+	public Stream<AdaptiveMedia<T>> getMedia(
+			Function<B, AdaptiveMediaQuery<M, T>> queryBuilderFunction)
+		throws AdaptiveMediaProcessorException, PortalException;
 
 }

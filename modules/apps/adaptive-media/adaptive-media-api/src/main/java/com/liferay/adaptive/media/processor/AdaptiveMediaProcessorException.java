@@ -12,17 +12,10 @@
  * details.
  */
 
-package com.liferay.adaptive.media.image.finder;
-
-import com.liferay.adaptive.media.finder.MediaFinder;
-import com.liferay.adaptive.media.image.processor.AdaptiveImageMediaProcessor;
-import com.liferay.portal.kernel.repository.model.FileVersion;
+package com.liferay.adaptive.media.processor;
 
 /**
  * @author Adolfo Pérez
  */
-public interface AdaptiveImageMediaFinder
-	extends MediaFinder
-		<AdaptiveImageMediaQueryBuilder, FileVersion,
-			AdaptiveImageMediaProcessor> {
+public class AdaptiveMediaProcessorException extends Exception {
 }

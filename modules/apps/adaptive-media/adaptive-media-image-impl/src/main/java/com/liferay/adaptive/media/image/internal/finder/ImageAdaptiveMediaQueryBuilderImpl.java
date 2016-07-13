@@ -14,10 +14,10 @@
 
 package com.liferay.adaptive.media.image.internal.finder;
 
-import com.liferay.adaptive.media.finder.MediaQuery;
-import com.liferay.adaptive.media.image.finder.AdaptiveImageMediaQueryBuilder;
-import com.liferay.adaptive.media.image.processor.AdaptiveImageMediaProcessor;
-import com.liferay.adaptive.media.processor.MediaProperty;
+import com.liferay.adaptive.media.finder.AdaptiveMediaQuery;
+import com.liferay.adaptive.media.image.finder.ImageAdaptiveMediaQueryBuilder;
+import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
+import com.liferay.adaptive.media.processor.AdaptiveMediaProperty;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 
 import java.util.LinkedHashMap;
@@ -26,12 +26,12 @@ import java.util.Map;
 /**
  * @author Adolfo Pérez
  */
-public class AdaptiveImageMediaQueryBuilderImpl
-	implements AdaptiveImageMediaQueryBuilder,
-			   AdaptiveImageMediaQueryBuilder.MediaPropertyQueryBuilder {
+public class ImageAdaptiveMediaQueryBuilderImpl
+	implements ImageAdaptiveMediaQueryBuilder,
+			   ImageAdaptiveMediaQueryBuilder.MediaPropertyQueryBuilder {
 
-	public MediaQuery<FileVersion, AdaptiveImageMediaProcessor> allForModel(
-		FileVersion fileVersion) {
+	public AdaptiveMediaQuery<FileVersion, ImageAdaptiveMediaProcessor>
+		allForModel(FileVersion fileVersion) {
 
 		if (fileVersion == null) {
 			throw new IllegalArgumentException("FileVersion cannot be null");
@@ -43,7 +43,7 @@ public class AdaptiveImageMediaQueryBuilderImpl
 	}
 
 	@Override
-	public MediaQuery<FileVersion, AdaptiveImageMediaProcessor> done() {
+	public AdaptiveMediaQuery<FileVersion, ImageAdaptiveMediaProcessor> done() {
 		return null;
 	}
 
@@ -62,7 +62,7 @@ public class AdaptiveImageMediaQueryBuilderImpl
 		return _fileVersion;
 	}
 
-	public Map<MediaProperty<AdaptiveImageMediaProcessor, ?>, Object>
+	public Map<AdaptiveMediaProperty<ImageAdaptiveMediaProcessor, ?>, Object>
 		getMediaProperties() {
 
 		return _mediaProperties;
@@ -70,11 +70,12 @@ public class AdaptiveImageMediaQueryBuilderImpl
 
 	@Override
 	public <V> MediaPropertyQueryBuilder with(
-		MediaProperty<AdaptiveImageMediaProcessor, V> property, V value) {
+		AdaptiveMediaProperty<ImageAdaptiveMediaProcessor, V> property,
+		V value) {
 
 		if (value == null) {
 			throw new IllegalArgumentException(
-				"MediaProperty value cannot be null");
+				"AdaptiveMediaProperty value cannot be null");
 		}
 
 		_mediaProperties.put(property, value);
@@ -83,7 +84,7 @@ public class AdaptiveImageMediaQueryBuilderImpl
 	}
 
 	private FileVersion _fileVersion;
-	private Map<MediaProperty<AdaptiveImageMediaProcessor, ?>, Object>
+	private Map<AdaptiveMediaProperty<ImageAdaptiveMediaProcessor, ?>, Object>
 		_mediaProperties = new LinkedHashMap<>();
 
 }

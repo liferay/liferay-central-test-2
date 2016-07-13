@@ -14,13 +14,13 @@
 
 package com.liferay.adaptive.media.image.internal.processor;
 
-import com.liferay.adaptive.media.image.internal.configuration.AdaptiveImageConfiguration;
-import com.liferay.adaptive.media.image.internal.configuration.AdaptiveImageVariantConfiguration;
+import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaConfiguration;
+import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaVariantConfiguration;
 import com.liferay.adaptive.media.image.internal.image.ImageProcessor;
 import com.liferay.adaptive.media.image.internal.image.ImageStorage;
-import com.liferay.adaptive.media.image.processor.AdaptiveImageMediaProcessor;
-import com.liferay.adaptive.media.processor.Media;
-import com.liferay.adaptive.media.processor.MediaProcessorRuntimeException;
+import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
+import com.liferay.adaptive.media.processor.AdaptiveMedia;
+import com.liferay.adaptive.media.processor.AdaptiveMediaProcessorRuntimeException;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -44,7 +44,7 @@ import org.mockito.Mockito;
 /**
  * @author Adolfo Pérez
  */
-public class AdaptiveImageMediaProcessorImplTest {
+public class ImageAdaptiveMediaProcessorImplTest {
 
 	@Before
 	public void setUp() {
@@ -71,7 +71,7 @@ public class AdaptiveImageMediaProcessorImplTest {
 		);
 	}
 
-	@Test(expected = MediaProcessorRuntimeException.IOException.class)
+	@Test(expected = AdaptiveMediaProcessorRuntimeException.IOException.class)
 	public void testCleanUpIOException() {
 		Mockito.when(
 			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))
@@ -80,7 +80,7 @@ public class AdaptiveImageMediaProcessorImplTest {
 		);
 
 		Mockito.doThrow(
-			MediaProcessorRuntimeException.IOException.class
+			AdaptiveMediaProcessorRuntimeException.IOException.class
 		).when(
 			_imageMediaStorage
 		).delete(
@@ -107,7 +107,7 @@ public class AdaptiveImageMediaProcessorImplTest {
 		);
 	}
 
-	@Test(expected = MediaProcessorRuntimeException.InvalidConfiguration.class)
+	@Test(expected = AdaptiveMediaProcessorRuntimeException.InvalidConfiguration.class)
 	public void testGetMediaConfigurationError() {
 		Mockito.when(
 			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))
@@ -119,7 +119,7 @@ public class AdaptiveImageMediaProcessorImplTest {
 			_adaptiveImageConfiguration.getAdaptiveImageVariantConfigurations(
 				Mockito.any(long.class))
 		).thenThrow(
-			MediaProcessorRuntimeException.InvalidConfiguration.class
+			AdaptiveMediaProcessorRuntimeException.InvalidConfiguration.class
 		);
 
 		_adaptiveImageMediaProcessor.getMedia(
@@ -128,8 +128,8 @@ public class AdaptiveImageMediaProcessorImplTest {
 
 	@Test
 	public void testGetMediaInputStream() {
-		AdaptiveImageVariantConfiguration configuration =
-			new AdaptiveImageVariantConfiguration(
+		ImageAdaptiveMediaVariantConfiguration configuration =
+			new ImageAdaptiveMediaVariantConfiguration(
 				StringUtil.randomString(), StringUtil.randomString(),
 				Collections.emptyMap());
 
@@ -148,7 +148,7 @@ public class AdaptiveImageMediaProcessorImplTest {
 			inputStream
 		);
 
-		Stream<Media<AdaptiveImageMediaProcessor>> mediaStream =
+		Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> mediaStream =
 			_adaptiveImageMediaProcessor.getMedia(
 				query -> query.allForModel(_fileVersion));
 
@@ -158,8 +158,8 @@ public class AdaptiveImageMediaProcessorImplTest {
 
 	@Test
 	public void testGetMediaMissingProperty() {
-		AdaptiveImageVariantConfiguration configuration =
-			new AdaptiveImageVariantConfiguration(
+		ImageAdaptiveMediaVariantConfiguration configuration =
+			new ImageAdaptiveMediaVariantConfiguration(
 				StringUtil.randomString(), StringUtil.randomString(),
 				MapUtil.fromArray("height", "100"));
 
@@ -170,7 +170,7 @@ public class AdaptiveImageMediaProcessorImplTest {
 			Collections.singleton(configuration)
 		);
 
-		Stream<Media<AdaptiveImageMediaProcessor>> mediaStream =
+		Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> mediaStream =
 			_adaptiveImageMediaProcessor.getMedia(
 				query -> query.allForModel(_fileVersion));
 
@@ -178,20 +178,20 @@ public class AdaptiveImageMediaProcessorImplTest {
 			media -> {
 				Assert.assertEquals(
 					media.getPropertyValue(
-						AdaptiveImageMediaProperty.IMAGE_HEIGHT),
+						ImageAdaptiveMediaProperty.IMAGE_HEIGHT),
 					Optional.of(100));
 
 				Assert.assertEquals(
 					media.getPropertyValue(
-						AdaptiveImageMediaProperty.IMAGE_WIDTH),
+						ImageAdaptiveMediaProperty.IMAGE_WIDTH),
 					Optional.empty());
 			});
 	}
 
 	@Test
 	public void testGetMediaProperties() {
-		AdaptiveImageVariantConfiguration configuration =
-			new AdaptiveImageVariantConfiguration(
+		ImageAdaptiveMediaVariantConfiguration configuration =
+			new ImageAdaptiveMediaVariantConfiguration(
 				StringUtil.randomString(), StringUtil.randomString(),
 				MapUtil.fromArray("height", "100", "width", "200"));
 
@@ -202,7 +202,7 @@ public class AdaptiveImageMediaProcessorImplTest {
 			Collections.singleton(configuration)
 		);
 
-		Stream<Media<AdaptiveImageMediaProcessor>> mediaStream =
+		Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> mediaStream =
 			_adaptiveImageMediaProcessor.getMedia(
 				query -> query.allForModel(_fileVersion));
 
@@ -210,25 +210,25 @@ public class AdaptiveImageMediaProcessorImplTest {
 			media -> {
 				Assert.assertEquals(
 					media.getPropertyValue(
-						AdaptiveImageMediaProperty.IMAGE_HEIGHT),
+						ImageAdaptiveMediaProperty.IMAGE_HEIGHT),
 					Optional.of(100));
 
 				Assert.assertEquals(
 					media.getPropertyValue(
-						AdaptiveImageMediaProperty.IMAGE_WIDTH),
+						ImageAdaptiveMediaProperty.IMAGE_WIDTH),
 					Optional.of(200));
 			});
 	}
 
 	@Test
 	public void testGetMediaQueryWith100Height() {
-		AdaptiveImageVariantConfiguration configuration1 =
-			new AdaptiveImageVariantConfiguration(
+		ImageAdaptiveMediaVariantConfiguration configuration1 =
+			new ImageAdaptiveMediaVariantConfiguration(
 				StringUtil.randomString(), StringUtil.randomString(),
 				MapUtil.fromArray("height", "100", "width", "200"));
 
-		AdaptiveImageVariantConfiguration configuration2 =
-			new AdaptiveImageVariantConfiguration(
+		ImageAdaptiveMediaVariantConfiguration configuration2 =
+			new ImageAdaptiveMediaVariantConfiguration(
 				StringUtil.randomString(), StringUtil.randomString(),
 				MapUtil.fromArray("height", "200", "width", "200"));
 
@@ -251,41 +251,41 @@ public class AdaptiveImageMediaProcessorImplTest {
 			StringUtil.randomString()
 		);
 
-		Stream<Media<AdaptiveImageMediaProcessor>> mediaStream =
+		Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> mediaStream =
 			_adaptiveImageMediaProcessor.getMedia(
 				query ->
 					query.
 						forModel(_fileVersion).
-						with(AdaptiveImageMediaProperty.IMAGE_HEIGHT, 100).
+						with(ImageAdaptiveMediaProperty.IMAGE_HEIGHT, 100).
 						done());
 
-		List<Media<AdaptiveImageMediaProcessor>> mediaList =
+		List<AdaptiveMedia<ImageAdaptiveMediaProcessor>> mediaList =
 			mediaStream.collect(Collectors.toList());
 
-		Media<AdaptiveImageMediaProcessor> media0 = mediaList.get(0);
+		AdaptiveMedia<ImageAdaptiveMediaProcessor> media0 = mediaList.get(0);
 
 		Optional<Integer> media0Optional = media0.getPropertyValue(
-			AdaptiveImageMediaProperty.IMAGE_HEIGHT);
+			ImageAdaptiveMediaProperty.IMAGE_HEIGHT);
 
 		Assert.assertEquals(100, (int)media0Optional.get());
 
-		Media<AdaptiveImageMediaProcessor> media1 = mediaList.get(1);
+		AdaptiveMedia<ImageAdaptiveMediaProcessor> media1 = mediaList.get(1);
 
 		Optional<Integer> media1Optional = media1.getPropertyValue(
-			AdaptiveImageMediaProperty.IMAGE_HEIGHT);
+			ImageAdaptiveMediaProperty.IMAGE_HEIGHT);
 
 		Assert.assertEquals(200, (int)media1Optional.get());
 	}
 
 	@Test
 	public void testGetMediaQueryWith200Height() {
-		AdaptiveImageVariantConfiguration configuration1 =
-			new AdaptiveImageVariantConfiguration(
+		ImageAdaptiveMediaVariantConfiguration configuration1 =
+			new ImageAdaptiveMediaVariantConfiguration(
 				StringUtil.randomString(), StringUtil.randomString(),
 				MapUtil.fromArray("height", "100", "width", "200"));
 
-		AdaptiveImageVariantConfiguration configuration2 =
-			new AdaptiveImageVariantConfiguration(
+		ImageAdaptiveMediaVariantConfiguration configuration2 =
+			new ImageAdaptiveMediaVariantConfiguration(
 				StringUtil.randomString(), StringUtil.randomString(),
 				MapUtil.fromArray("height", "200", "width", "200"));
 
@@ -308,41 +308,41 @@ public class AdaptiveImageMediaProcessorImplTest {
 			StringUtil.randomString()
 		);
 
-		Stream<Media<AdaptiveImageMediaProcessor>> mediaStream =
+		Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> mediaStream =
 			_adaptiveImageMediaProcessor.getMedia(
 				query ->
 					query.
 						forModel(_fileVersion).
-						with(AdaptiveImageMediaProperty.IMAGE_HEIGHT, 200).
+						with(ImageAdaptiveMediaProperty.IMAGE_HEIGHT, 200).
 						done());
 
-		List<Media<AdaptiveImageMediaProcessor>> mediaList =
+		List<AdaptiveMedia<ImageAdaptiveMediaProcessor>> mediaList =
 			mediaStream.collect(Collectors.toList());
 
-		Media<AdaptiveImageMediaProcessor> media0 = mediaList.get(0);
+		AdaptiveMedia<ImageAdaptiveMediaProcessor> media0 = mediaList.get(0);
 
 		Optional<Integer> media0Optional = media0.getPropertyValue(
-			AdaptiveImageMediaProperty.IMAGE_HEIGHT);
+			ImageAdaptiveMediaProperty.IMAGE_HEIGHT);
 
 		Assert.assertEquals(200, (int)media0Optional.get());
 
-		Media<AdaptiveImageMediaProcessor> media1 = mediaList.get(1);
+		AdaptiveMedia<ImageAdaptiveMediaProcessor> media1 = mediaList.get(1);
 
 		Optional<Integer> media1Optional = media1.getPropertyValue(
-			AdaptiveImageMediaProperty.IMAGE_HEIGHT);
+			ImageAdaptiveMediaProperty.IMAGE_HEIGHT);
 
 		Assert.assertEquals(100, (int)media1Optional.get());
 	}
 
 	@Test
 	public void testGetMediaQueryWithNoMatchingProperties() {
-		AdaptiveImageVariantConfiguration configuration1 =
-			new AdaptiveImageVariantConfiguration(
+		ImageAdaptiveMediaVariantConfiguration configuration1 =
+			new ImageAdaptiveMediaVariantConfiguration(
 				StringUtil.randomString(), StringUtil.randomString(),
 				MapUtil.fromArray("height", "100"));
 
-		AdaptiveImageVariantConfiguration configuration2 =
-			new AdaptiveImageVariantConfiguration(
+		ImageAdaptiveMediaVariantConfiguration configuration2 =
+			new ImageAdaptiveMediaVariantConfiguration(
 				StringUtil.randomString(), StringUtil.randomString(),
 				MapUtil.fromArray("height", "200"));
 
@@ -365,28 +365,28 @@ public class AdaptiveImageMediaProcessorImplTest {
 			StringUtil.randomString()
 		);
 
-		Stream<Media<AdaptiveImageMediaProcessor>> mediaStream =
+		Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> mediaStream =
 			_adaptiveImageMediaProcessor.getMedia(
 				query ->
 					query.
 						forModel(_fileVersion).
-						with(AdaptiveImageMediaProperty.IMAGE_WIDTH, 100).
+						with(ImageAdaptiveMediaProperty.IMAGE_WIDTH, 100).
 						done());
 
-		List<Media<AdaptiveImageMediaProcessor>> mediaList =
+		List<AdaptiveMedia<ImageAdaptiveMediaProcessor>> mediaList =
 			mediaStream.collect(Collectors.toList());
 
-		Media<AdaptiveImageMediaProcessor> media0 = mediaList.get(0);
+		AdaptiveMedia<ImageAdaptiveMediaProcessor> media0 = mediaList.get(0);
 
 		Optional<Integer> media0Optional = media0.getPropertyValue(
-			AdaptiveImageMediaProperty.IMAGE_HEIGHT);
+			ImageAdaptiveMediaProperty.IMAGE_HEIGHT);
 
 		Assert.assertEquals(100, (int)media0Optional.get());
 
-		Media<AdaptiveImageMediaProcessor> media1 = mediaList.get(1);
+		AdaptiveMedia<ImageAdaptiveMediaProcessor> media1 = mediaList.get(1);
 
 		Optional<Integer> media1Optional = media1.getPropertyValue(
-			AdaptiveImageMediaProperty.IMAGE_HEIGHT);
+			ImageAdaptiveMediaProperty.IMAGE_HEIGHT);
 
 		Assert.assertEquals(200, (int)media1Optional.get());
 	}
@@ -399,7 +399,7 @@ public class AdaptiveImageMediaProcessorImplTest {
 			false
 		);
 
-		Stream<Media<AdaptiveImageMediaProcessor>> mediaStream =
+		Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> mediaStream =
 			_adaptiveImageMediaProcessor.getMedia(
 				query -> query.allForModel(_fileVersion));
 
@@ -416,8 +416,8 @@ public class AdaptiveImageMediaProcessorImplTest {
 			true
 		);
 
-		AdaptiveImageVariantConfiguration configuration =
-			new AdaptiveImageVariantConfiguration(
+		ImageAdaptiveMediaVariantConfiguration configuration =
+			new ImageAdaptiveMediaVariantConfiguration(
 				StringUtil.randomString(), StringUtil.randomString(),
 				Collections.emptyMap());
 
@@ -442,7 +442,7 @@ public class AdaptiveImageMediaProcessorImplTest {
 		);
 	}
 
-	@Test(expected = MediaProcessorRuntimeException.InvalidConfiguration.class)
+	@Test(expected = AdaptiveMediaProcessorRuntimeException.InvalidConfiguration.class)
 	public void testProcessInvalidConfigurationException() throws Exception {
 		Mockito.when(
 			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))
@@ -454,13 +454,13 @@ public class AdaptiveImageMediaProcessorImplTest {
 			_adaptiveImageConfiguration.getAdaptiveImageVariantConfigurations(
 				Mockito.any(long.class))
 		).thenThrow(
-			MediaProcessorRuntimeException.InvalidConfiguration.class
+			AdaptiveMediaProcessorRuntimeException.InvalidConfiguration.class
 		);
 
 		_adaptiveImageMediaProcessor.process(_fileVersion);
 	}
 
-	@Test(expected = MediaProcessorRuntimeException.IOException.class)
+	@Test(expected = AdaptiveMediaProcessorRuntimeException.IOException.class)
 	public void testProcessIOExceptionInImageProcessor() throws Exception {
 		Mockito.when(
 			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))
@@ -468,8 +468,8 @@ public class AdaptiveImageMediaProcessorImplTest {
 			true
 		);
 
-		AdaptiveImageVariantConfiguration configuration =
-			new AdaptiveImageVariantConfiguration(
+		ImageAdaptiveMediaVariantConfiguration configuration =
+			new ImageAdaptiveMediaVariantConfiguration(
 				StringUtil.randomString(), StringUtil.randomString(),
 				Collections.emptyMap());
 
@@ -483,13 +483,13 @@ public class AdaptiveImageMediaProcessorImplTest {
 		Mockito.when(
 			_imageProcessor.process(_fileVersion, configuration)
 		).thenThrow(
-			MediaProcessorRuntimeException.IOException.class
+			AdaptiveMediaProcessorRuntimeException.IOException.class
 		);
 
 		_adaptiveImageMediaProcessor.process(_fileVersion);
 	}
 
-	@Test(expected = MediaProcessorRuntimeException.IOException.class)
+	@Test(expected = AdaptiveMediaProcessorRuntimeException.IOException.class)
 	public void testProcessIOExceptionInInputStream() throws Exception {
 		Mockito.when(
 			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))
@@ -497,8 +497,8 @@ public class AdaptiveImageMediaProcessorImplTest {
 			true
 		);
 
-		AdaptiveImageVariantConfiguration configuration =
-			new AdaptiveImageVariantConfiguration(
+		ImageAdaptiveMediaVariantConfiguration configuration =
+			new ImageAdaptiveMediaVariantConfiguration(
 				StringUtil.randomString(), StringUtil.randomString(),
 				Collections.emptyMap());
 
@@ -526,7 +526,7 @@ public class AdaptiveImageMediaProcessorImplTest {
 		_adaptiveImageMediaProcessor.process(_fileVersion);
 	}
 
-	@Test(expected = MediaProcessorRuntimeException.IOException.class)
+	@Test(expected = AdaptiveMediaProcessorRuntimeException.IOException.class)
 	public void testProcessIOExceptionInStorage() throws Exception {
 		Mockito.when(
 			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))
@@ -534,8 +534,8 @@ public class AdaptiveImageMediaProcessorImplTest {
 			true
 		);
 
-		AdaptiveImageVariantConfiguration configuration =
-			new AdaptiveImageVariantConfiguration(
+		ImageAdaptiveMediaVariantConfiguration configuration =
+			new ImageAdaptiveMediaVariantConfiguration(
 				StringUtil.randomString(), StringUtil.randomString(),
 				Collections.emptyMap());
 
@@ -555,7 +555,7 @@ public class AdaptiveImageMediaProcessorImplTest {
 		);
 
 		Mockito.doThrow(
-			MediaProcessorRuntimeException.IOException.class
+			AdaptiveMediaProcessorRuntimeException.IOException.class
 		).when(
 			_imageMediaStorage
 		).save(
@@ -579,14 +579,14 @@ public class AdaptiveImageMediaProcessorImplTest {
 			_imageProcessor, Mockito.never()
 		).process(
 			Mockito.any(FileVersion.class),
-			Mockito.any(AdaptiveImageVariantConfiguration.class)
+			Mockito.any(ImageAdaptiveMediaVariantConfiguration.class)
 		);
 	}
 
-	private final AdaptiveImageConfiguration _adaptiveImageConfiguration =
-		Mockito.mock(AdaptiveImageConfiguration.class);
-	private final AdaptiveImageMediaProcessorImpl _adaptiveImageMediaProcessor =
-		new AdaptiveImageMediaProcessorImpl();
+	private final ImageAdaptiveMediaConfiguration _adaptiveImageConfiguration =
+		Mockito.mock(ImageAdaptiveMediaConfiguration.class);
+	private final ImageAdaptiveMediaProcessorImpl _adaptiveImageMediaProcessor =
+		new ImageAdaptiveMediaProcessorImpl();
 	private final FileVersion _fileVersion = Mockito.mock(FileVersion.class);
 	private final ImageStorage _imageMediaStorage = Mockito.mock(
 		ImageStorage.class);

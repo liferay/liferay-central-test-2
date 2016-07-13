@@ -14,7 +14,7 @@
 
 package com.liferay.adaptive.media.image.internal.processor;
 
-import com.liferay.adaptive.media.image.internal.configuration.AdaptiveImagePropertyMapping;
+import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaPropertyMapping;
 
 import java.io.InputStream;
 
@@ -31,7 +31,7 @@ import org.mockito.Mockito;
 /**
  * @author Adolfo Pérez
  */
-public class AdaptiveImageMediaTest {
+public class ImageAdaptiveMediaTest {
 
 	@Test
 	public void testGetInputStreamDelegatesOnSupplier() {
@@ -39,10 +39,11 @@ public class AdaptiveImageMediaTest {
 
 		Supplier<InputStream> supplier = () -> inputStream;
 
-		AdaptiveImagePropertyMapping adaptiveImagePropertyMapping =
-			AdaptiveImagePropertyMapping.fromProperties(Collections.emptyMap());
+		ImageAdaptiveMediaPropertyMapping adaptiveImagePropertyMapping =
+			ImageAdaptiveMediaPropertyMapping.fromProperties(
+				Collections.emptyMap());
 
-		AdaptiveImageMedia adaptiveImageMedia = new AdaptiveImageMedia(
+		ImageAdaptiveMedia adaptiveImageMedia = new ImageAdaptiveMedia(
 			supplier, adaptiveImagePropertyMapping, URI.create("/"));
 
 		Assert.assertEquals(inputStream, adaptiveImageMedia.getInputStream());
@@ -50,18 +51,18 @@ public class AdaptiveImageMediaTest {
 
 	@Test
 	public void testGetPropertyDelegatesOnMapping() {
-		AdaptiveImagePropertyMapping adaptiveImagePropertyMapping =
-			Mockito.mock(AdaptiveImagePropertyMapping.class);
+		ImageAdaptiveMediaPropertyMapping adaptiveImagePropertyMapping =
+			Mockito.mock(ImageAdaptiveMediaPropertyMapping.class);
 
-		AdaptiveImageMedia adaptiveImageMedia = new AdaptiveImageMedia(
+		ImageAdaptiveMedia adaptiveImageMedia = new ImageAdaptiveMedia(
 			() -> null, adaptiveImagePropertyMapping, URI.create("/"));
 
 		adaptiveImageMedia.getPropertyValue(
-			AdaptiveImageMediaProperty.IMAGE_HEIGHT);
+			ImageAdaptiveMediaProperty.IMAGE_HEIGHT);
 
 		Mockito.verify(
 			adaptiveImagePropertyMapping
-		).getPropertyValue(AdaptiveImageMediaProperty.IMAGE_HEIGHT);
+		).getPropertyValue(ImageAdaptiveMediaProperty.IMAGE_HEIGHT);
 	}
 
 }

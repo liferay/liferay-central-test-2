@@ -19,32 +19,33 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.portal.kernel.exception.PortalException;
 
 /**
- * A {@link MediaProcessor} is responsible of generating media of a particular
- * type.
+ * A {@link AdaptiveMediaProcessor} is responsible of generating media of a
+ * particular type.
  *
  * The type parameter M specifies the model used by the processor to generate
  * the media. The type parameter T is used to restrict the set of valid
- * {@link MediaProperty} available.
+ * {@link AdaptiveMediaProperty} available.
  *
  * @author Adolfo Pérez
  */
 @ProviderType
-public interface MediaProcessor<M, T> {
+public interface AdaptiveMediaProcessor<M, T> {
 
 	/**
 	 * Completely remove any generated media for the given model. After calling
-	 * this method on a model, the result of calling MediaProcessor#getMedia
-	 * with that same model is undefined.
+	 * this method on a model, the result of calling
+	 * AdaptiveMediaProcessor#getMedia with that same model is undefined.
 	 *
 	 * @param model The model for which all generated media will be deleted
 	 *
-	 * @throws MediaProcessorException if a processing error occurred. See
-	 *         {@link MediaProcessorException} inner classes for the set of
-	 *         possible exceptions.
-	 * @throws MediaProcessorRuntimeException if a system error occurred.
+	 * @throws AdaptiveMediaProcessorException if a processing error occurred.
+	 *         See {@link AdaptiveMediaProcessorException} inner classes for the
+	 *         set of possible exceptions.
+	 * @throws AdaptiveMediaProcessorRuntimeException if a system error
+	 *         occurred.
 	 */
 	public void cleanUp(M model)
-		throws MediaProcessorException, PortalException;
+		throws AdaptiveMediaProcessorException, PortalException;
 
 	/**
 	 * Generate the media for the given model. Implementations may decide not to
@@ -52,14 +53,16 @@ public interface MediaProcessor<M, T> {
 	 *
 	 * @param model The model for which media will be generated
 	 *
-	 * @throws MediaProcessorException if an error occurred while getting the
-	 *         {@link Media}. See {@link MediaProcessorException} inner classes
-	 *         for the set of possible exceptions.
-	 * @throws MediaProcessorRuntimeException if a system error occurred.
+	 * @throws AdaptiveMediaProcessorException if an error occurred while
+	 *         getting the {@link AdaptiveMedia}. See
+	 *         {@link AdaptiveMediaProcessorException} inner classes for the set
+	 *         of possible exceptions.
+	 * @throws AdaptiveMediaProcessorRuntimeException if a system error
+	 *         occurred.
 	 * @throws PortalException if an error occurred while cally any Liferay
 	 *         services
 	 */
 	public void process(M model)
-		throws MediaProcessorException, PortalException;
+		throws AdaptiveMediaProcessorException, PortalException;
 
 }

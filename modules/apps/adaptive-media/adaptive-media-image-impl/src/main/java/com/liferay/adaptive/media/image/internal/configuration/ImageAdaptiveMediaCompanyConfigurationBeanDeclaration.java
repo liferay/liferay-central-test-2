@@ -22,11 +22,11 @@ import org.osgi.service.component.annotations.Component;
  * @author Adolfo Pérez
  */
 @Component
-public class AdaptiveImageCompanyConfigurationBeanDeclaration
+public class ImageAdaptiveMediaCompanyConfigurationBeanDeclaration
 	implements ConfigurationBeanDeclaration {
 
 	public Class<?> getConfigurationBeanClass() {
-		return AdaptiveImageCompanyConfiguration.class;
+		return ImageAdaptiveMediaCompanyConfiguration.class;
 	}
 
 }

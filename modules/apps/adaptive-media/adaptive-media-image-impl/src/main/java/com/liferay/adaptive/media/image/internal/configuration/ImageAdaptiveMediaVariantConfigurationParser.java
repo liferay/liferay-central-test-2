@@ -26,11 +26,11 @@ import org.osgi.service.component.annotations.Component;
  * @author Adolfo Pérez
  */
 @Component(
-	immediate = true, service = AdaptiveImageVariantConfigurationParser.class
+	immediate = true, service = ImageAdaptiveMediaVariantConfigurationParser.class
 )
-public class AdaptiveImageVariantConfigurationParser {
+public class ImageAdaptiveMediaVariantConfigurationParser {
 
-	public AdaptiveImageVariantConfiguration parse(String s) {
+	public ImageAdaptiveMediaVariantConfiguration parse(String s) {
 		if (Validator.isNull(s)) {
 			throw new IllegalArgumentException(
 				"Adaptive image variant configuration not valid: " + s);
@@ -63,7 +63,8 @@ public class AdaptiveImageVariantConfigurationParser {
 			properties.put(keyValuePair[0], keyValuePair[1]);
 		}
 
-		return new AdaptiveImageVariantConfiguration(name, uuid, properties);
+		return new ImageAdaptiveMediaVariantConfiguration(
+			name, uuid, properties);
 	}
 
 	private static final Pattern _FIELD_SEPARATOR_PATTERN = Pattern.compile(

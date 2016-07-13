@@ -14,10 +14,10 @@
 
 package com.liferay.adaptive.media.image.internal.image;
 
-import com.liferay.adaptive.media.image.internal.configuration.AdaptiveImagePropertyMapping;
-import com.liferay.adaptive.media.image.internal.configuration.AdaptiveImageVariantConfiguration;
-import com.liferay.adaptive.media.image.internal.processor.AdaptiveImageMediaProperty;
-import com.liferay.adaptive.media.processor.MediaProcessorRuntimeException;
+import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaPropertyMapping;
+import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaVariantConfiguration;
+import com.liferay.adaptive.media.image.internal.processor.ImageAdaptiveMediaProperty;
+import com.liferay.adaptive.media.processor.AdaptiveMediaProcessorRuntimeException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.image.ImageToolUtil;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
@@ -52,20 +52,21 @@ public class ImageProcessor {
 
 	public InputStream process(
 		FileVersion fileVersion,
-		AdaptiveImageVariantConfiguration adaptiveImageVariantConfiguration) {
+		ImageAdaptiveMediaVariantConfiguration
+			adaptiveImageVariantConfiguration) {
 
 		try {
-			AdaptiveImagePropertyMapping adaptiveImagePropertyMapping =
-				AdaptiveImagePropertyMapping.fromProperties(
+			ImageAdaptiveMediaPropertyMapping adaptiveImagePropertyMapping =
+				ImageAdaptiveMediaPropertyMapping.fromProperties(
 					adaptiveImageVariantConfiguration.getProperties());
 
 			Optional<Integer> heightOptional =
 				adaptiveImagePropertyMapping.getPropertyValue(
-					AdaptiveImageMediaProperty.IMAGE_HEIGHT);
+					ImageAdaptiveMediaProperty.IMAGE_HEIGHT);
 
 			Optional<Integer> widthOptional =
 				adaptiveImagePropertyMapping.getPropertyValue(
-					AdaptiveImageMediaProperty.IMAGE_WIDTH);
+					ImageAdaptiveMediaProperty.IMAGE_WIDTH);
 
 			RenderedImage renderedImage = _readImage(
 				fileVersion.getContentStream(false));
@@ -82,7 +83,7 @@ public class ImageProcessor {
 			return new UnsyncByteArrayInputStream(baos.toByteArray());
 		}
 		catch (IOException | PortalException e) {
-			throw new MediaProcessorRuntimeException.IOException(e);
+			throw new AdaptiveMediaProcessorRuntimeException.IOException(e);
 		}
 	}
 

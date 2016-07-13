@@ -14,7 +14,7 @@
 
 package com.liferay.adaptive.media.image.internal.configuration;
 
-import com.liferay.adaptive.media.processor.MediaProcessorRuntimeException;
+import com.liferay.adaptive.media.processor.AdaptiveMediaProcessorRuntimeException;
 import com.liferay.portal.kernel.module.configuration.ConfigurationException;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 
@@ -29,17 +29,18 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Adolfo Pérez
  */
-@Component(immediate = true, service = AdaptiveImageConfiguration.class)
-public class AdaptiveImageConfiguration {
+@Component(immediate = true, service = ImageAdaptiveMediaConfiguration.class)
+public class ImageAdaptiveMediaConfiguration {
 
-	public Collection<AdaptiveImageVariantConfiguration>
+	public Collection<ImageAdaptiveMediaVariantConfiguration>
 		getAdaptiveImageVariantConfigurations(long companyId) {
 
 		try {
-			AdaptiveImageCompanyConfiguration
+			ImageAdaptiveMediaCompanyConfiguration
 				adaptiveImageCompanyConfiguration =
 					_configurationProvider.getCompanyConfiguration(
-						AdaptiveImageCompanyConfiguration.class, companyId);
+						ImageAdaptiveMediaCompanyConfiguration.class,
+						companyId);
 
 			String[] imageVariants =
 				adaptiveImageCompanyConfiguration.imageVariants();
@@ -53,13 +54,14 @@ public class AdaptiveImageConfiguration {
 				collect(Collectors.toList());
 		}
 		catch (ConfigurationException ce) {
-			throw new MediaProcessorRuntimeException.InvalidConfiguration(ce);
+			throw new
+				AdaptiveMediaProcessorRuntimeException.InvalidConfiguration(ce);
 		}
 	}
 
 	@Reference(unbind = "-")
 	public void setAdaptiveImageConfigurationParser(
-		AdaptiveImageVariantConfigurationParser
+		ImageAdaptiveMediaVariantConfigurationParser
 			adaptiveImageConfigurationParser) {
 
 		_adaptiveImageConfigurationParser = adaptiveImageConfigurationParser;
@@ -72,7 +74,7 @@ public class AdaptiveImageConfiguration {
 		_configurationProvider = configurationProvider;
 	}
 
-	private AdaptiveImageVariantConfigurationParser
+	private ImageAdaptiveMediaVariantConfigurationParser
 		_adaptiveImageConfigurationParser;
 	private ConfigurationProvider _configurationProvider;
 

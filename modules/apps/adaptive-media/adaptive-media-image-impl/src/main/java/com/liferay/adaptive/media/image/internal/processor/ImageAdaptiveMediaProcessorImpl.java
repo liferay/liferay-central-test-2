@@ -14,20 +14,20 @@
 
 package com.liferay.adaptive.media.image.internal.processor;
 
-import com.liferay.adaptive.media.finder.MediaQuery;
-import com.liferay.adaptive.media.image.finder.AdaptiveImageMediaFinder;
-import com.liferay.adaptive.media.image.finder.AdaptiveImageMediaQueryBuilder;
-import com.liferay.adaptive.media.image.internal.configuration.AdaptiveImageConfiguration;
-import com.liferay.adaptive.media.image.internal.configuration.AdaptiveImagePropertyMapping;
-import com.liferay.adaptive.media.image.internal.configuration.AdaptiveImageVariantConfiguration;
-import com.liferay.adaptive.media.image.internal.finder.AdaptiveImageMediaQueryBuilderImpl;
+import com.liferay.adaptive.media.finder.AdaptiveMediaQuery;
+import com.liferay.adaptive.media.image.finder.ImageAdaptiveMediaFinder;
+import com.liferay.adaptive.media.image.finder.ImageAdaptiveMediaQueryBuilder;
+import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaConfiguration;
+import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaPropertyMapping;
+import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaVariantConfiguration;
+import com.liferay.adaptive.media.image.internal.finder.ImageAdaptiveMediaQueryBuilderImpl;
 import com.liferay.adaptive.media.image.internal.image.ImageProcessor;
 import com.liferay.adaptive.media.image.internal.image.ImageStorage;
-import com.liferay.adaptive.media.image.processor.AdaptiveImageMediaProcessor;
-import com.liferay.adaptive.media.processor.Media;
-import com.liferay.adaptive.media.processor.MediaProcessor;
-import com.liferay.adaptive.media.processor.MediaProcessorRuntimeException;
-import com.liferay.adaptive.media.processor.MediaProperty;
+import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
+import com.liferay.adaptive.media.processor.AdaptiveMedia;
+import com.liferay.adaptive.media.processor.AdaptiveMediaProcessor;
+import com.liferay.adaptive.media.processor.AdaptiveMediaProcessorRuntimeException;
+import com.liferay.adaptive.media.processor.AdaptiveMediaProperty;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 
 import java.io.IOException;
@@ -56,12 +56,12 @@ import org.osgi.service.component.annotations.Reference;
 	immediate = true,
 	property = "model.class.name=com.liferay.portal.kernel.repository.model.FileVersion",
 	service = {
-		AdaptiveImageMediaProcessor.class, AdaptiveImageMediaFinder.class,
-		MediaProcessor.class
+		ImageAdaptiveMediaProcessor.class, ImageAdaptiveMediaFinder.class,
+		AdaptiveMediaProcessor.class
 	}
 )
-public final class AdaptiveImageMediaProcessorImpl
-	implements AdaptiveImageMediaProcessor, AdaptiveImageMediaFinder {
+public final class ImageAdaptiveMediaProcessorImpl
+	implements ImageAdaptiveMediaProcessor, ImageAdaptiveMediaFinder {
 
 	@Override
 	public void cleanUp(FileVersion fileVersion) {
@@ -73,13 +73,13 @@ public final class AdaptiveImageMediaProcessorImpl
 	}
 
 	@Override
-	public Stream<Media<AdaptiveImageMediaProcessor>> getMedia(
-		Function<AdaptiveImageMediaQueryBuilder,
-		MediaQuery<FileVersion, AdaptiveImageMediaProcessor>>
+	public Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> getMedia(
+		Function<ImageAdaptiveMediaQueryBuilder,
+		AdaptiveMediaQuery<FileVersion, ImageAdaptiveMediaProcessor>>
 			queryBuilderFunction) {
 
-		AdaptiveImageMediaQueryBuilderImpl adaptiveImageMediaQueryBuilder =
-			new AdaptiveImageMediaQueryBuilderImpl();
+		ImageAdaptiveMediaQueryBuilderImpl adaptiveImageMediaQueryBuilder =
+			new ImageAdaptiveMediaQueryBuilderImpl();
 
 		queryBuilderFunction.apply(adaptiveImageMediaQueryBuilder);
 
@@ -92,7 +92,7 @@ public final class AdaptiveImageMediaProcessorImpl
 
 		long companyId = fileVersion.getCompanyId();
 
-		Collection<AdaptiveImageVariantConfiguration>
+		Collection<ImageAdaptiveMediaVariantConfiguration>
 			adaptiveImageVariantConfigurations =
 				_adaptiveImageConfiguration.
 					getAdaptiveImageVariantConfigurations(companyId);
@@ -115,12 +115,12 @@ public final class AdaptiveImageMediaProcessorImpl
 
 		long companyId = fileVersion.getCompanyId();
 
-		Iterable<AdaptiveImageVariantConfiguration>
+		Iterable<ImageAdaptiveMediaVariantConfiguration>
 			adaptiveImageVariantConfigurations =
 				_adaptiveImageConfiguration.
 					getAdaptiveImageVariantConfigurations(companyId);
 
-		for (AdaptiveImageVariantConfiguration
+		for (ImageAdaptiveMediaVariantConfiguration
 				adaptiveImageVariantConfiguration :
 					adaptiveImageVariantConfigurations) {
 
@@ -132,14 +132,15 @@ public final class AdaptiveImageMediaProcessorImpl
 					inputStream);
 			}
 			catch (IOException ioe) {
-				throw new MediaProcessorRuntimeException.IOException(ioe);
+				throw new AdaptiveMediaProcessorRuntimeException.IOException(
+					ioe);
 			}
 		}
 	}
 
 	@Reference(unbind = "-")
 	public void setAdaptiveImageConfiguration(
-		AdaptiveImageConfiguration adaptiveImageConfiguration) {
+		ImageAdaptiveMediaConfiguration adaptiveImageConfiguration) {
 
 		_adaptiveImageConfiguration = adaptiveImageConfiguration;
 	}
@@ -154,17 +155,20 @@ public final class AdaptiveImageMediaProcessorImpl
 		_imageStorage = imageStorage;
 	}
 
-	private Comparator<Media<AdaptiveImageMediaProcessor>> _buildComparator(
-		Map<MediaProperty<AdaptiveImageMediaProcessor, ?>, ?> properties) {
+	private Comparator<AdaptiveMedia<ImageAdaptiveMediaProcessor>>
+		_buildComparator(
+			Map<AdaptiveMediaProperty<ImageAdaptiveMediaProcessor, ?>, ?>
+				properties) {
 
 		return (media1, media2) -> {
-			for (Map.Entry<MediaProperty<AdaptiveImageMediaProcessor, ?>, ?>
+			for (Map.Entry<AdaptiveMediaProperty<ImageAdaptiveMediaProcessor, ?>, ?>
 					entry : properties.entrySet()) {
 
-				MediaProperty<AdaptiveImageMediaProcessor, Object>
+				AdaptiveMediaProperty<ImageAdaptiveMediaProcessor, Object>
 					mediaProperty =
-						(MediaProperty<AdaptiveImageMediaProcessor, Object>)
-							entry.getKey();
+						(AdaptiveMediaProperty<
+							ImageAdaptiveMediaProcessor, Object>)
+								entry.getKey();
 
 				Object requestedValue = entry.getValue();
 
@@ -200,7 +204,8 @@ public final class AdaptiveImageMediaProcessorImpl
 
 	private URI _buildRelativeURI(
 		FileVersion fileVersion,
-		AdaptiveImageVariantConfiguration adaptiveImageVariantConfiguration) {
+		ImageAdaptiveMediaVariantConfiguration
+			adaptiveImageVariantConfiguration) {
 
 		String relativePath = String.format(
 			"/adaptive/%d/%d/%d/%d/%d/%s/%s", fileVersion.getCompanyId(),
@@ -212,15 +217,16 @@ public final class AdaptiveImageMediaProcessorImpl
 		return URI.create(relativePath);
 	}
 
-	private Media<AdaptiveImageMediaProcessor> _createMedia(
+	private AdaptiveMedia<ImageAdaptiveMediaProcessor> _createMedia(
 		FileVersion fileVersion,
-		AdaptiveImageVariantConfiguration adaptiveImageVariantConfiguration) {
+		ImageAdaptiveMediaVariantConfiguration
+			adaptiveImageVariantConfiguration) {
 
-		AdaptiveImagePropertyMapping adaptiveImagePropertyMapping =
-			AdaptiveImagePropertyMapping.fromProperties(
+		ImageAdaptiveMediaPropertyMapping adaptiveImagePropertyMapping =
+			ImageAdaptiveMediaPropertyMapping.fromProperties(
 				adaptiveImageVariantConfiguration.getProperties());
 
-		return new AdaptiveImageMedia(
+		return new ImageAdaptiveMedia(
 			() ->
 				_imageStorage.getContentStream(
 					fileVersion, adaptiveImageVariantConfiguration),
@@ -233,12 +239,12 @@ public final class AdaptiveImageMediaProcessorImpl
 			return URLEncoder.encode(s, StandardCharsets.UTF_8.name());
 		}
 		catch (UnsupportedEncodingException uee) {
-			throw new MediaProcessorRuntimeException.
+			throw new AdaptiveMediaProcessorRuntimeException.
 				UnsupportedEncodingException(uee);
 		}
 	}
 
-	private AdaptiveImageConfiguration _adaptiveImageConfiguration;
+	private ImageAdaptiveMediaConfiguration _adaptiveImageConfiguration;
 	private ImageProcessor _imageProcessor;
 	private ImageStorage _imageStorage;
 

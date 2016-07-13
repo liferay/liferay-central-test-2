@@ -14,25 +14,35 @@
 
 package com.liferay.adaptive.media.image.internal.configuration;
 
-import aQute.bnd.annotation.metatype.Meta;
-
-import com.liferay.portal.configuration.metatype.annotations.ExtendedObjectClassDefinition;
+import java.util.Map;
 
 /**
  * @author Adolfo Pérez
  */
-@ExtendedObjectClassDefinition(
-	category = "adaptive.media",
-	scope = ExtendedObjectClassDefinition.Scope.COMPANY
-)
-@Meta.OCD(
-	id = "com.liferay.adaptive.image.configuration.AdaptiveImageConfiguration",
-	localization = "content/Language",
-	name = "adaptive.image.configuration.name"
-)
-public interface AdaptiveImageCompanyConfiguration {
+public class ImageAdaptiveMediaVariantConfiguration {
 
-	@Meta.AD(required = false)
-	public String[] imageVariants();
+	public ImageAdaptiveMediaVariantConfiguration(
+		String name, String uuid, Map<String, String> properties) {
+
+		_name = name;
+		_uuid = uuid;
+		_properties = properties;
+	}
+
+	public String getName() {
+		return _name;
+	}
+
+	public Map<String, String> getProperties() {
+		return _properties;
+	}
+
+	public String getUUID() {
+		return _uuid;
+	}
+
+	private final String _name;
+	private final Map<String, String> _properties;
+	private final String _uuid;
 
 }

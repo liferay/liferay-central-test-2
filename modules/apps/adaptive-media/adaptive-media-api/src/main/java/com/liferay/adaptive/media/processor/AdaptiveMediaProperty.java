@@ -20,20 +20,21 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 
 /**
- * A {@link MediaProperty} represents a characteristic of a media (width, size,
- * etc.). Instances of {@link MediaProperty} are annotated by a processor type
- * and by the property value type. The processor type restriction is there to
- * avoid users of {@link Media} to request properties not supported by the
- * processor (i.e. the set of available properties is checked at compile time).
- * The property value type annotation will reduce (or avoid completely) the
- * need for runtime casts when retrieving property values.
+ * A {@link AdaptiveMediaProperty} represents a characteristic of a media
+ * (width, size, etc.). Instances of {@link AdaptiveMediaProperty} are annotated
+ * by a processor type and by the property value type. The processor type
+ * restriction is there to avoid users of {@link AdaptiveMedia} to request
+ * properties not supported by the processor (i.e. the set of available
+ * properties is checked at compile time). The property value type annotation
+ * will reduce (or avoid completely) the need for runtime casts when retrieving
+ * property values.
  *
  * @author Adolfo Pérez
  */
 @ProviderType
-public final class MediaProperty<T, V> {
+public final class AdaptiveMediaProperty<T, V> {
 
-	public MediaProperty(
+	public AdaptiveMediaProperty(
 		String name, Function<String, V> converter,
 		BiFunction<V, V, Integer> distanceFunction) {
 

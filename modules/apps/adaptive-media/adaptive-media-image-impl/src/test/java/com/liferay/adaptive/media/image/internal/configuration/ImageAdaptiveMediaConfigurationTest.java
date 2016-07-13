@@ -14,7 +14,7 @@
 
 package com.liferay.adaptive.media.image.internal.configuration;
 
-import com.liferay.adaptive.media.processor.MediaProcessorRuntimeException;
+import com.liferay.adaptive.media.processor.AdaptiveMediaProcessorRuntimeException;
 import com.liferay.portal.kernel.module.configuration.ConfigurationException;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 
@@ -29,7 +29,7 @@ import org.mockito.Mockito;
 /**
  * @author Adolfo Pérez
  */
-public class AdaptiveImageConfigurationTest {
+public class ImageAdaptiveMediaConfigurationTest {
 
 	@Before
 	public void setUp() {
@@ -43,7 +43,7 @@ public class AdaptiveImageConfigurationTest {
 	public void testEmptyConfiguration() throws Exception {
 		Mockito.when(
 			_configurationProvider.getCompanyConfiguration(
-				Mockito.eq(AdaptiveImageCompanyConfiguration.class),
+				Mockito.eq(ImageAdaptiveMediaCompanyConfiguration.class),
 				Mockito.any(long.class))
 		).thenReturn(
 			_adaptiveImageCompanyConfiguration
@@ -55,12 +55,12 @@ public class AdaptiveImageConfigurationTest {
 			new String[0]
 		);
 
-		Iterable<AdaptiveImageVariantConfiguration>
+		Iterable<ImageAdaptiveMediaVariantConfiguration>
 			adaptiveImageVariantConfigurations =
 				_adaptiveImageConfiguration.
 					getAdaptiveImageVariantConfigurations(1234);
 
-		Iterator<AdaptiveImageVariantConfiguration> iterator =
+		Iterator<ImageAdaptiveMediaVariantConfiguration> iterator =
 			adaptiveImageVariantConfigurations.iterator();
 
 		Assert.assertFalse(iterator.hasNext());
@@ -70,7 +70,7 @@ public class AdaptiveImageConfigurationTest {
 	public void testInvalidConfiguration() throws Exception {
 		Mockito.when(
 			_configurationProvider.getCompanyConfiguration(
-				Mockito.eq(AdaptiveImageCompanyConfiguration.class),
+				Mockito.eq(ImageAdaptiveMediaCompanyConfiguration.class),
 				Mockito.any(long.class))
 		).thenReturn(
 			_adaptiveImageCompanyConfiguration
@@ -85,11 +85,11 @@ public class AdaptiveImageConfigurationTest {
 		_adaptiveImageConfiguration.getAdaptiveImageVariantConfigurations(1234);
 	}
 
-	@Test(expected = MediaProcessorRuntimeException.InvalidConfiguration.class)
+	@Test(expected = AdaptiveMediaProcessorRuntimeException.InvalidConfiguration.class)
 	public void testModuleConfigurationException() throws Exception {
 		Mockito.when(
 			_configurationProvider.getCompanyConfiguration(
-				Mockito.eq(AdaptiveImageCompanyConfiguration.class),
+				Mockito.eq(ImageAdaptiveMediaCompanyConfiguration.class),
 				Mockito.any(long.class))
 		).thenThrow(
 			ConfigurationException.class
@@ -102,7 +102,7 @@ public class AdaptiveImageConfigurationTest {
 	public void testNullConfiguration() throws Exception {
 		Mockito.when(
 			_configurationProvider.getCompanyConfiguration(
-				Mockito.eq(AdaptiveImageCompanyConfiguration.class),
+				Mockito.eq(ImageAdaptiveMediaCompanyConfiguration.class),
 				Mockito.any(long.class))
 		).thenReturn(
 			_adaptiveImageCompanyConfiguration
@@ -114,25 +114,25 @@ public class AdaptiveImageConfigurationTest {
 			null
 		);
 
-		Iterable<AdaptiveImageVariantConfiguration>
+		Iterable<ImageAdaptiveMediaVariantConfiguration>
 			adaptiveImageVariantConfigurations =
 				_adaptiveImageConfiguration.
 					getAdaptiveImageVariantConfigurations(1234);
 
-		Iterator<AdaptiveImageVariantConfiguration> iterator =
+		Iterator<ImageAdaptiveMediaVariantConfiguration> iterator =
 			adaptiveImageVariantConfigurations.iterator();
 
 		Assert.assertFalse(iterator.hasNext());
 	}
 
-	private final AdaptiveImageCompanyConfiguration
+	private final ImageAdaptiveMediaCompanyConfiguration
 		_adaptiveImageCompanyConfiguration = Mockito.mock(
-			AdaptiveImageCompanyConfiguration.class);
-	private final AdaptiveImageConfiguration _adaptiveImageConfiguration =
-		new AdaptiveImageConfiguration();
-	private final AdaptiveImageVariantConfigurationParser
+			ImageAdaptiveMediaCompanyConfiguration.class);
+	private final ImageAdaptiveMediaConfiguration _adaptiveImageConfiguration =
+		new ImageAdaptiveMediaConfiguration();
+	private final ImageAdaptiveMediaVariantConfigurationParser
 		_adaptiveImageConfigurationParser =
-			new AdaptiveImageVariantConfigurationParser();
+			new ImageAdaptiveMediaVariantConfigurationParser();
 	private final ConfigurationProvider _configurationProvider = Mockito.mock(
 		ConfigurationProvider.class);
 

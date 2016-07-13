@@ -14,7 +14,7 @@
 
 package com.liferay.adaptive.media.image.internal.image;
 
-import com.liferay.adaptive.media.image.internal.configuration.AdaptiveImageVariantConfiguration;
+import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaVariantConfiguration;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.util.StringUtil;
 
@@ -99,9 +99,10 @@ public class ImageStorageTest {
 			"jpg"
 		);
 
-		AdaptiveImageVariantConfiguration adaptiveImageVariantConfiguration =
-			new AdaptiveImageVariantConfiguration(
-				StringUtil.randomString(), "xyz", Collections.emptyMap());
+		ImageAdaptiveMediaVariantConfiguration
+			adaptiveImageVariantConfiguration =
+				new ImageAdaptiveMediaVariantConfiguration(
+					StringUtil.randomString(), "xyz", Collections.emptyMap());
 
 		Path fileVersionVariantPath = _mediaStorage.getFileVersionVariantPath(
 			fileVersion, adaptiveImageVariantConfiguration);

@@ -12,10 +12,27 @@
  * details.
  */
 
-package com.liferay.adaptive.media.finder;
+package com.liferay.adaptive.media.image.internal.configuration;
+
+import aQute.bnd.annotation.metatype.Meta;
+
+import com.liferay.portal.configuration.metatype.annotations.ExtendedObjectClassDefinition;
 
 /**
  * @author Adolfo Pérez
  */
-public interface MediaQueryBuilder<M, T> {
+@ExtendedObjectClassDefinition(
+	category = "adaptive.media",
+	scope = ExtendedObjectClassDefinition.Scope.COMPANY
+)
+@Meta.OCD(
+	id = "com.liferay.adaptive.image.configuration.ImageAdaptiveMediaConfiguration",
+	localization = "content/Language",
+	name = "adaptive.image.configuration.name"
+)
+public interface ImageAdaptiveMediaCompanyConfiguration {
+
+	@Meta.AD(required = false)
+	public String[] imageVariants();
+
 }

@@ -23,20 +23,20 @@ import java.net.URI;
 import java.util.Optional;
 
 /**
- * A {@link Media} represents some content (images, audio, video, etc.) along
- * with a set of properties which characterize that content.
+ * A {@link AdaptiveMedia} represents some content (images, audio, video, etc.)
+ * along with a set of properties which characterize that content.
  *
  * @author Adolfo Pérez
  */
 @ProviderType
-public interface Media<T> {
+public interface AdaptiveMedia<T> {
 
 	/**
 	 * Return an {@link InputStream} with the raw contents of this {@link
-	 * Media}.
+	 * AdaptiveMedia}.
 	 *
 	 * @return An {@link InputStream} with the raw contents of this {@link
-	 *         Media}
+	 *         AdaptiveMedia}
 	 */
 	public InputStream getInputStream();
 
@@ -48,17 +48,18 @@ public interface Media<T> {
 	 * @param <V> The type of the property value
 	 *
 	 * @return {@link Optional#EMPTY} if the property is not present in this
-	 *         {@link Media}; otherwise, the value wrapped in an {@link
+	 *         {@link AdaptiveMedia}; otherwise, the value wrapped in an {@link
 	 *         Optional}
 	 */
-	public <V> Optional<V> getPropertyValue(MediaProperty<T, V> property);
+	public <V> Optional<V> getPropertyValue(
+		AdaptiveMediaProperty<T, V> property);
 
 	/**
-	 * Return the relative URI of this {@link Media}. This can be used by other
-	 * parts of the system to uniquely identify each {@link Media}. This URI
-	 * should be treated as an opaque value.
+	 * Return the relative URI of this {@link AdaptiveMedia}. This can be used
+	 * by other parts of the system to uniquely identify each
+	 * {@link AdaptiveMedia}. This URI should be treated as an opaque value.
 	 *
-	 * @return A relative URI pointing to this {@link Media}
+	 * @return A relative URI pointing to this {@link AdaptiveMedia}
 	 */
 	public URI getRelativeURI();
 

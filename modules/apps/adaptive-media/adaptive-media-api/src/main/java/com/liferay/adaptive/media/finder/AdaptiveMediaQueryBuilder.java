@@ -12,37 +12,10 @@
  * details.
  */
 
-package com.liferay.adaptive.media.image.internal.configuration;
-
-import java.util.Map;
+package com.liferay.adaptive.media.finder;
 
 /**
  * @author Adolfo Pérez
  */
-public class AdaptiveImageVariantConfiguration {
-
-	public AdaptiveImageVariantConfiguration(
-		String name, String uuid, Map<String, String> properties) {
-
-		_name = name;
-		_uuid = uuid;
-		_properties = properties;
-	}
-
-	public String getName() {
-		return _name;
-	}
-
-	public Map<String, String> getProperties() {
-		return _properties;
-	}
-
-	public String getUUID() {
-		return _uuid;
-	}
-
-	private final String _name;
-	private final Map<String, String> _properties;
-	private final String _uuid;
-
+public interface AdaptiveMediaQueryBuilder<M, T> {
 }

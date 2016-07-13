@@ -14,7 +14,7 @@
 
 package com.liferay.adaptive.media.image.internal.processor;
 
-import com.liferay.adaptive.media.processor.MediaProcessorRuntimeException;
+import com.liferay.adaptive.media.processor.AdaptiveMediaProcessorRuntimeException;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -22,32 +22,32 @@ import org.junit.Test;
 /**
  * @author Adolfo Pérez
  */
-public class AdaptiveImageMediaPropertyTest {
+public class ImageAdaptiveMediaPropertyTest {
 
 	@Test(
-		expected = MediaProcessorRuntimeException.MediaPropertyFormatException.class
+		expected = AdaptiveMediaProcessorRuntimeException.MediaPropertyFormatException.class
 	)
 	public void testImageHeightFailsForNonIntegers() {
-		AdaptiveImageMediaProperty.IMAGE_HEIGHT.convert("xyz");
+		ImageAdaptiveMediaProperty.IMAGE_HEIGHT.convert("xyz");
 	}
 
 	@Test
 	public void testImageHeightRecognizesIntegers() {
-		int result = AdaptiveImageMediaProperty.IMAGE_HEIGHT.convert("42");
+		int result = ImageAdaptiveMediaProperty.IMAGE_HEIGHT.convert("42");
 
 		Assert.assertEquals(42, result);
 	}
 
 	@Test(
-		expected = MediaProcessorRuntimeException.MediaPropertyFormatException.class
+		expected = AdaptiveMediaProcessorRuntimeException.MediaPropertyFormatException.class
 	)
 	public void testImageWidthFailsForNonIntegers() {
-		AdaptiveImageMediaProperty.IMAGE_WIDTH.convert("xyz");
+		ImageAdaptiveMediaProperty.IMAGE_WIDTH.convert("xyz");
 	}
 
 	@Test
 	public void testImageWidthRecognizesIntegers() {
-		int result = AdaptiveImageMediaProperty.IMAGE_WIDTH.convert("42");
+		int result = ImageAdaptiveMediaProperty.IMAGE_WIDTH.convert("42");
 
 		Assert.assertEquals(42, result);
 	}

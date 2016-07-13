@@ -14,9 +14,9 @@
 
 package com.liferay.adaptive.media.image.internal.configuration;
 
-import com.liferay.adaptive.media.image.internal.processor.AdaptiveImageMediaProperty;
-import com.liferay.adaptive.media.image.processor.AdaptiveImageMediaProcessor;
-import com.liferay.adaptive.media.processor.MediaProperty;
+import com.liferay.adaptive.media.image.internal.processor.ImageAdaptiveMediaProperty;
+import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
+import com.liferay.adaptive.media.processor.AdaptiveMediaProperty;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,34 +25,34 @@ import java.util.Optional;
 /**
  * @author Adolfo Pérez
  */
-public class AdaptiveImagePropertyMapping {
+public class ImageAdaptiveMediaPropertyMapping {
 
-	public static final AdaptiveImagePropertyMapping fromProperties(
+	public static final ImageAdaptiveMediaPropertyMapping fromProperties(
 		Map<String, String> properties) {
 
-		Map<MediaProperty<AdaptiveImageMediaProcessor, ?>, Optional<?>>
+		Map<AdaptiveMediaProperty<ImageAdaptiveMediaProcessor, ?>, Optional<?>>
 			mediaProperties = new HashMap<>();
 
 		mediaProperties.put(
-			AdaptiveImageMediaProperty.IMAGE_HEIGHT,
+			ImageAdaptiveMediaProperty.IMAGE_HEIGHT,
 			getMediaPropertyValue(
-				properties, AdaptiveImageMediaProperty.IMAGE_HEIGHT));
+				properties, ImageAdaptiveMediaProperty.IMAGE_HEIGHT));
 		mediaProperties.put(
-			AdaptiveImageMediaProperty.IMAGE_WIDTH,
+			ImageAdaptiveMediaProperty.IMAGE_WIDTH,
 			getMediaPropertyValue(
-				properties, AdaptiveImageMediaProperty.IMAGE_WIDTH));
+				properties, ImageAdaptiveMediaProperty.IMAGE_WIDTH));
 
-		return new AdaptiveImagePropertyMapping(mediaProperties);
+		return new ImageAdaptiveMediaPropertyMapping(mediaProperties);
 	}
 
 	public <V> Optional<V> getPropertyValue(
-		MediaProperty<AdaptiveImageMediaProcessor, V> mediaProperty) {
+		AdaptiveMediaProperty<ImageAdaptiveMediaProcessor, V> mediaProperty) {
 
 		return (Optional<V>)_mediaProperties.get(mediaProperty);
 	}
 
-	protected AdaptiveImagePropertyMapping(
-		Map<MediaProperty<AdaptiveImageMediaProcessor, ?>, Optional<?>>
+	protected ImageAdaptiveMediaPropertyMapping(
+		Map<AdaptiveMediaProperty<ImageAdaptiveMediaProcessor, ?>, Optional<?>>
 			mediaProperties) {
 
 		_mediaProperties = mediaProperties;
@@ -60,7 +60,7 @@ public class AdaptiveImagePropertyMapping {
 
 	private static <V> Optional<V> getMediaPropertyValue(
 		Map<String, String> properties,
-		MediaProperty<AdaptiveImageMediaProcessor, V> mediaProperty) {
+		AdaptiveMediaProperty<ImageAdaptiveMediaProcessor, V> mediaProperty) {
 
 		String value = properties.get(mediaProperty.getName());
 
@@ -71,7 +71,7 @@ public class AdaptiveImagePropertyMapping {
 		return Optional.of(mediaProperty.convert(value));
 	}
 
-	private Map<MediaProperty<AdaptiveImageMediaProcessor, ?>, Optional<?>>
+	private Map<AdaptiveMediaProperty<ImageAdaptiveMediaProcessor, ?>, Optional<?>>
 		_mediaProperties;
 
 }

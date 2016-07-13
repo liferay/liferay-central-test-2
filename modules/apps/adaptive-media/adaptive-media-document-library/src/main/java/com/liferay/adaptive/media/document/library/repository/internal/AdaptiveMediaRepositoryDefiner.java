@@ -14,9 +14,9 @@
 
 package com.liferay.adaptive.media.document.library.repository.internal;
 
-import com.liferay.adaptive.media.processor.MediaProcessor;
-import com.liferay.adaptive.media.processor.MediaProcessorException;
-import com.liferay.adaptive.media.processor.MediaProcessorLocator;
+import com.liferay.adaptive.media.processor.AdaptiveMediaProcessor;
+import com.liferay.adaptive.media.processor.AdaptiveMediaProcessorException;
+import com.liferay.adaptive.media.processor.AdaptiveMediaProcessorLocator;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.module.framework.ModuleServiceLifecycle;
 import com.liferay.portal.kernel.repository.DocumentRepository;
@@ -56,7 +56,7 @@ public class AdaptiveMediaRepositoryDefiner
 
 	@Reference(unbind = "-")
 	public void setMediaProcessorLocator(
-		MediaProcessorLocator mediaProcessorLocator) {
+		AdaptiveMediaProcessorLocator mediaProcessorLocator) {
 
 		_mediaProcessorLocator = mediaProcessorLocator;
 	}
@@ -78,7 +78,7 @@ public class AdaptiveMediaRepositoryDefiner
 
 	private void _deleteAdaptiveMedia(FileEntry fileEntry) {
 		try {
-			MediaProcessor<FileVersion, ?> mediaProcessor =
+			AdaptiveMediaProcessor<FileVersion, ?> mediaProcessor =
 				_mediaProcessorLocator.locateForClass(FileVersion.class);
 
 			List<FileVersion> fileVersions = fileEntry.getFileVersions(
@@ -88,19 +88,19 @@ public class AdaptiveMediaRepositoryDefiner
 				mediaProcessor.cleanUp(fileVersion);
 			}
 		}
-		catch (MediaProcessorException | PortalException e) {
+		catch (AdaptiveMediaProcessorException | PortalException e) {
 			throw new RuntimeException(e);
 		}
 	}
 
 	private void _updateAdaptiveMedia(FileEntry fileEntry) {
 		try {
-			MediaProcessor<FileVersion, ?> mediaProcessor =
+			AdaptiveMediaProcessor<FileVersion, ?> mediaProcessor =
 				_mediaProcessorLocator.locateForClass(FileVersion.class);
 
 			mediaProcessor.process(fileEntry.getLatestFileVersion(true));
 		}
-		catch (MediaProcessorException | PortalException e) {
+		catch (AdaptiveMediaProcessorException | PortalException e) {
 			throw new RuntimeException(e);
 		}
 	}
@@ -108,7 +108,7 @@ public class AdaptiveMediaRepositoryDefiner
 	private static final String _CLASS_NAME =
 		"com.liferay.portal.repository.liferayrepository.LiferayRepository";
 
-	private MediaProcessorLocator _mediaProcessorLocator;
+	private AdaptiveMediaProcessorLocator _mediaProcessorLocator;
 
 	private class AdaptiveMediaCapabiliy
 		implements Capability, RepositoryEventAware {

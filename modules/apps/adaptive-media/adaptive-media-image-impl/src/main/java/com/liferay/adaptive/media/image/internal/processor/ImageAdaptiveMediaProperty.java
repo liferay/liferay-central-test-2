@@ -14,24 +14,26 @@
 
 package com.liferay.adaptive.media.image.internal.processor;
 
-import com.liferay.adaptive.media.image.processor.AdaptiveImageMediaProcessor;
-import com.liferay.adaptive.media.processor.MediaProcessorRuntimeException;
-import com.liferay.adaptive.media.processor.MediaProperty;
+import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
+import com.liferay.adaptive.media.processor.AdaptiveMediaProcessorRuntimeException;
+import com.liferay.adaptive.media.processor.AdaptiveMediaProperty;
 
 /**
  * @author Adolfo Pérez
  */
-public final class AdaptiveImageMediaProperty {
+public final class ImageAdaptiveMediaProperty {
 
-	public static final MediaProperty<AdaptiveImageMediaProcessor, Integer>
-		IMAGE_HEIGHT = new MediaProperty<>(
-			"height", AdaptiveImageMediaProperty::_parseInt,
-			AdaptiveImageMediaProperty::_intDistance);
+	public static final AdaptiveMediaProperty<
+		ImageAdaptiveMediaProcessor, Integer>
+			IMAGE_HEIGHT = new AdaptiveMediaProperty<>(
+				"height", ImageAdaptiveMediaProperty::_parseInt,
+				ImageAdaptiveMediaProperty::_intDistance);
 
-	public static final MediaProperty<AdaptiveImageMediaProcessor, Integer>
-		IMAGE_WIDTH = new MediaProperty<>(
-			"width", AdaptiveImageMediaProperty::_parseInt,
-			AdaptiveImageMediaProperty::_intDistance);
+	public static final AdaptiveMediaProperty<
+		ImageAdaptiveMediaProcessor, Integer>
+			IMAGE_WIDTH = new AdaptiveMediaProperty<>(
+				"width", ImageAdaptiveMediaProperty::_parseInt,
+				ImageAdaptiveMediaProperty::_intDistance);
 
 	private static int _intDistance(int i1, int i2) {
 		return Math.abs(i1 - i2);
@@ -42,12 +44,12 @@ public final class AdaptiveImageMediaProperty {
 			return Integer.parseInt(value);
 		}
 		catch (NumberFormatException nfe) {
-			throw new MediaProcessorRuntimeException.
+			throw new AdaptiveMediaProcessorRuntimeException.
 				MediaPropertyFormatException(nfe);
 		}
 	}
 
-	private AdaptiveImageMediaProperty() {
+	private ImageAdaptiveMediaProperty() {
 	}
 
 }

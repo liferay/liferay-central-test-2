@@ -12,14 +12,10 @@
  * details.
  */
 
-package com.liferay.adaptive.media.image.processor;
-
-import com.liferay.adaptive.media.processor.MediaProcessor;
-import com.liferay.portal.kernel.repository.model.FileVersion;
+package com.liferay.adaptive.media.finder;
 
 /**
  * @author Adolfo Pérez
  */
-public interface AdaptiveImageMediaProcessor
-	extends MediaProcessor<FileVersion, AdaptiveImageMediaProcessor> {
+public interface AdaptiveMediaQuery<M, T> {
 }

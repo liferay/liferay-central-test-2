@@ -17,25 +17,27 @@ package com.liferay.adaptive.media.processor;
 /**
  * @author Adolfo Pérez
  */
-public class MediaProcessorRuntimeException extends RuntimeException {
+public class AdaptiveMediaProcessorRuntimeException extends RuntimeException {
 
-	public MediaProcessorRuntimeException() {
+	public AdaptiveMediaProcessorRuntimeException() {
 	}
 
-	public MediaProcessorRuntimeException(String s) {
+	public AdaptiveMediaProcessorRuntimeException(String s) {
 		super(s);
 	}
 
-	public MediaProcessorRuntimeException(String s, Throwable throwable) {
+	public AdaptiveMediaProcessorRuntimeException(
+		String s, Throwable throwable) {
+
 		super(s, throwable);
 	}
 
-	public MediaProcessorRuntimeException(Throwable throwable) {
+	public AdaptiveMediaProcessorRuntimeException(Throwable throwable) {
 		super(throwable);
 	}
 
 	public static final class InvalidConfiguration
-		extends MediaProcessorRuntimeException {
+		extends AdaptiveMediaProcessorRuntimeException {
 
 		public InvalidConfiguration() {
 		}
@@ -55,7 +57,7 @@ public class MediaProcessorRuntimeException extends RuntimeException {
 	}
 
 	public static final class IOException
-		extends MediaProcessorRuntimeException {
+		extends AdaptiveMediaProcessorRuntimeException {
 
 		public IOException() {
 		}
@@ -75,7 +77,7 @@ public class MediaProcessorRuntimeException extends RuntimeException {
 	}
 
 	public static final class MediaPropertyFormatException
-		extends MediaProcessorRuntimeException {
+		extends AdaptiveMediaProcessorRuntimeException {
 
 		public MediaPropertyFormatException() {
 		}
@@ -95,7 +97,7 @@ public class MediaProcessorRuntimeException extends RuntimeException {
 	}
 
 	public static final class UnsupportedEncodingException
-		extends MediaProcessorRuntimeException {
+		extends AdaptiveMediaProcessorRuntimeException {
 
 		public UnsupportedEncodingException() {
 		}

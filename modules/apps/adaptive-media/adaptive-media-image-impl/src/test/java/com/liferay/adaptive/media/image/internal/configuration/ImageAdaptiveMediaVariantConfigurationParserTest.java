@@ -22,7 +22,7 @@ import org.junit.Test;
 /**
  * @author Adolfo Pérez
  */
-public class AdaptiveImageVariantConfigurationParserTest {
+public class ImageAdaptiveMediaVariantConfigurationParserTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testEmptyName() {
@@ -58,9 +58,10 @@ public class AdaptiveImageVariantConfigurationParserTest {
 
 	@Test
 	public void testValidString() {
-		AdaptiveImageVariantConfiguration adaptiveImageVariantConfiguration =
-			_adaptiveImageVariantConfigurationParser.parse(
-				"test:12345:height=100;width=200");
+		ImageAdaptiveMediaVariantConfiguration
+			adaptiveImageVariantConfiguration =
+				_adaptiveImageVariantConfigurationParser.parse(
+					"test:12345:height=100;width=200");
 
 		Assert.assertEquals(
 			"test", adaptiveImageVariantConfiguration.getName());
@@ -75,8 +76,8 @@ public class AdaptiveImageVariantConfigurationParserTest {
 		Assert.assertEquals(2, properties.size());
 	}
 
-	private final AdaptiveImageVariantConfigurationParser
+	private final ImageAdaptiveMediaVariantConfigurationParser
 		_adaptiveImageVariantConfigurationParser =
-			new AdaptiveImageVariantConfigurationParser();
+			new ImageAdaptiveMediaVariantConfigurationParser();
 
 }

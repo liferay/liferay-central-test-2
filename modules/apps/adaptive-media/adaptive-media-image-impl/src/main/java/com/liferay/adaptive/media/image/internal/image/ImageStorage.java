@@ -14,8 +14,8 @@
 
 package com.liferay.adaptive.media.image.internal.image;
 
-import com.liferay.adaptive.media.image.internal.configuration.AdaptiveImageVariantConfiguration;
-import com.liferay.adaptive.media.processor.MediaProcessorRuntimeException;
+import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaVariantConfiguration;
+import com.liferay.adaptive.media.processor.AdaptiveMediaProcessorRuntimeException;
 import com.liferay.document.library.kernel.store.DLStoreUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.CompanyConstants;
@@ -66,7 +66,7 @@ public class ImageStorage {
 			}
 		}
 		catch (IOException | PortalException e) {
-			throw new MediaProcessorRuntimeException.IOException(e);
+			throw new AdaptiveMediaProcessorRuntimeException.IOException(e);
 		}
 	}
 
@@ -80,7 +80,8 @@ public class ImageStorage {
 
 	public InputStream getContentStream(
 		FileVersion fileVersion,
-		AdaptiveImageVariantConfiguration adaptiveImageVariantConfiguration) {
+		ImageAdaptiveMediaVariantConfiguration
+			adaptiveImageVariantConfiguration) {
 
 		try {
 			Path fileVersionVariantPath = getFileVersionVariantPath(
@@ -90,13 +91,14 @@ public class ImageStorage {
 				fileVersion.getCompanyId(), fileVersionVariantPath);
 		}
 		catch (PortalException pe) {
-			throw new MediaProcessorRuntimeException.IOException(pe);
+			throw new AdaptiveMediaProcessorRuntimeException.IOException(pe);
 		}
 	}
 
 	public void save(
 		FileVersion fileVersion,
-		AdaptiveImageVariantConfiguration adaptiveImageVariantConfiguration,
+		ImageAdaptiveMediaVariantConfiguration
+			adaptiveImageVariantConfiguration,
 		InputStream inputStream) {
 
 		try {
@@ -108,7 +110,7 @@ public class ImageStorage {
 				fileVersionVariantPath.toString(), false, inputStream);
 		}
 		catch (PortalException pe) {
-			throw new MediaProcessorRuntimeException.IOException(pe);
+			throw new AdaptiveMediaProcessorRuntimeException.IOException(pe);
 		}
 	}
 
@@ -129,7 +131,8 @@ public class ImageStorage {
 
 	protected Path getFileVersionVariantPath(
 		FileVersion fileVersion,
-		AdaptiveImageVariantConfiguration adaptiveImageVariantConfiguration) {
+		ImageAdaptiveMediaVariantConfiguration
+			adaptiveImageVariantConfiguration) {
 
 		Path basePath = getFileVersionPath(fileVersion);
 
