@@ -28,7 +28,7 @@ import java.util.Map;
  */
 public class ImageAdaptiveMediaQueryBuilderImpl
 	implements ImageAdaptiveMediaQueryBuilder,
-			   ImageAdaptiveMediaQueryBuilder.MediaAttributeQueryBuilder {
+	   ImageAdaptiveMediaQueryBuilder.AdaptiveMediaAttributeQueryBuilder {
 
 	public AdaptiveMediaQuery<FileVersion, ImageAdaptiveMediaProcessor>
 		allForModel(FileVersion fileVersion) {
@@ -48,7 +48,9 @@ public class ImageAdaptiveMediaQueryBuilderImpl
 	}
 
 	@Override
-	public MediaAttributeQueryBuilder forModel(FileVersion fileVersion) {
+	public AdaptiveMediaAttributeQueryBuilder forModel(
+		FileVersion fileVersion) {
+
 		if (fileVersion == null) {
 			throw new IllegalArgumentException("File version cannot be null");
 		}
@@ -69,7 +71,7 @@ public class ImageAdaptiveMediaQueryBuilderImpl
 	}
 
 	@Override
-	public <V> MediaAttributeQueryBuilder with(
+	public <V> AdaptiveMediaAttributeQueryBuilder with(
 		AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, V> attribute,
 		V value) {
 
