@@ -19,9 +19,9 @@ import java.util.Map;
 /**
  * @author Adolfo Pérez
  */
-public class ImageAdaptiveMediaVariantConfiguration {
+public class ImageAdaptiveMediaConfigurationEntry {
 
-	public ImageAdaptiveMediaVariantConfiguration(
+	public ImageAdaptiveMediaConfigurationEntry(
 		String name, String uuid, Map<String, String> properties) {
 
 		_name = name;

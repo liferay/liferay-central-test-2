@@ -33,9 +33,10 @@ public class ImageAdaptiveMediaConfigurationTest {
 
 	@Before
 	public void setUp() {
-		_mediaConfigurationHelper.setAdaptiveImageConfigurationParser(
-			_adaptiveImageConfigurationParser);
-		_mediaConfigurationHelper.setConfigurationProvider(
+		_imageAdaptiveMediaConfigurationHelper.
+			setImageAdaptiveMediaConfigurationEntryParser(
+				_imageAdaptiveMediaConfigurationEntryParser);
+		_imageAdaptiveMediaConfigurationHelper.setConfigurationProvider(
 			_configurationProvider);
 	}
 
@@ -55,13 +56,13 @@ public class ImageAdaptiveMediaConfigurationTest {
 			new String[0]
 		);
 
-		Iterable<ImageAdaptiveMediaVariantConfiguration>
-			adaptiveImageVariantConfigurations =
-				_mediaConfigurationHelper.
-					getAdaptiveImageVariantConfigurations(1234);
+		Iterable<ImageAdaptiveMediaConfigurationEntry>
+			mediaConfigurationEntries =
+				_imageAdaptiveMediaConfigurationHelper.
+					getImageAdaptiveMediaConfigurationEntries(1234);
 
-		Iterator<ImageAdaptiveMediaVariantConfiguration> iterator =
-			adaptiveImageVariantConfigurations.iterator();
+		Iterator<ImageAdaptiveMediaConfigurationEntry> iterator =
+			mediaConfigurationEntries.iterator();
 
 		Assert.assertFalse(iterator.hasNext());
 	}
@@ -82,7 +83,8 @@ public class ImageAdaptiveMediaConfigurationTest {
 			new String[] {"test:xyz"}
 		);
 
-		_mediaConfigurationHelper.getAdaptiveImageVariantConfigurations(1234);
+		_imageAdaptiveMediaConfigurationHelper.getImageAdaptiveMediaConfigurationEntries(
+			1234);
 	}
 
 	@Test(expected = AdaptiveMediaProcessorRuntimeException.InvalidConfiguration.class)
@@ -95,7 +97,8 @@ public class ImageAdaptiveMediaConfigurationTest {
 			ConfigurationException.class
 		);
 
-		_mediaConfigurationHelper.getAdaptiveImageVariantConfigurations(1234);
+		_imageAdaptiveMediaConfigurationHelper.getImageAdaptiveMediaConfigurationEntries(
+			1234);
 	}
 
 	@Test
@@ -114,13 +117,13 @@ public class ImageAdaptiveMediaConfigurationTest {
 			null
 		);
 
-		Iterable<ImageAdaptiveMediaVariantConfiguration>
-			adaptiveImageVariantConfigurations =
-				_mediaConfigurationHelper.
-					getAdaptiveImageVariantConfigurations(1234);
+		Iterable<ImageAdaptiveMediaConfigurationEntry>
+			mediaConfigurationEntries =
+			_imageAdaptiveMediaConfigurationHelper.
+					getImageAdaptiveMediaConfigurationEntries(1234);
 
-		Iterator<ImageAdaptiveMediaVariantConfiguration> iterator =
-			adaptiveImageVariantConfigurations.iterator();
+		Iterator<ImageAdaptiveMediaConfigurationEntry> iterator =
+			mediaConfigurationEntries.iterator();
 
 		Assert.assertFalse(iterator.hasNext());
 	}
@@ -129,10 +132,11 @@ public class ImageAdaptiveMediaConfigurationTest {
 		_adaptiveImageCompanyConfiguration = Mockito.mock(
 			ImageAdaptiveMediaCompanyConfiguration.class);
 	private final ImageAdaptiveMediaConfigurationHelper
-		_mediaConfigurationHelper = new ImageAdaptiveMediaConfigurationHelper();
-	private final ImageAdaptiveMediaVariantConfigurationParser
-		_adaptiveImageConfigurationParser =
-			new ImageAdaptiveMediaVariantConfigurationParser();
+		_imageAdaptiveMediaConfigurationHelper =
+			new ImageAdaptiveMediaConfigurationHelper();
+	private final ImageAdaptiveMediaConfigurationEntryParser
+		_imageAdaptiveMediaConfigurationEntryParser =
+			new ImageAdaptiveMediaConfigurationEntryParser();
 	private final ConfigurationProvider _configurationProvider = Mockito.mock(
 		ConfigurationProvider.class);
 

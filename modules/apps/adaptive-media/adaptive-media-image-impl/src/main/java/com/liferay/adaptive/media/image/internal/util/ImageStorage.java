@@ -14,7 +14,7 @@
 
 package com.liferay.adaptive.media.image.internal.util;
 
-import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaVariantConfiguration;
+import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.adaptive.media.processor.AdaptiveMediaProcessorRuntimeException;
 import com.liferay.document.library.kernel.store.DLStoreUtil;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -80,12 +80,11 @@ public class ImageStorage {
 
 	public InputStream getContentStream(
 		FileVersion fileVersion,
-		ImageAdaptiveMediaVariantConfiguration
-			adaptiveImageVariantConfiguration) {
+		ImageAdaptiveMediaConfigurationEntry mediaConfigurationEntry) {
 
 		try {
 			Path fileVersionVariantPath = getFileVersionVariantPath(
-				fileVersion, adaptiveImageVariantConfiguration);
+				fileVersion, mediaConfigurationEntry);
 
 			return getFileAsStream(
 				fileVersion.getCompanyId(), fileVersionVariantPath);
@@ -97,13 +96,12 @@ public class ImageStorage {
 
 	public void save(
 		FileVersion fileVersion,
-		ImageAdaptiveMediaVariantConfiguration
-			adaptiveImageVariantConfiguration,
+		ImageAdaptiveMediaConfigurationEntry mediaConfigurationEntry,
 		InputStream inputStream) {
 
 		try {
 			Path fileVersionVariantPath = getFileVersionVariantPath(
-				fileVersion, adaptiveImageVariantConfiguration);
+				fileVersion, mediaConfigurationEntry);
 
 			DLStoreUtil.addFile(
 				fileVersion.getCompanyId(), CompanyConstants.SYSTEM,
@@ -131,13 +129,12 @@ public class ImageStorage {
 
 	protected Path getFileVersionVariantPath(
 		FileVersion fileVersion,
-		ImageAdaptiveMediaVariantConfiguration
-			adaptiveImageVariantConfiguration) {
+		ImageAdaptiveMediaConfigurationEntry mediaConfigurationEntry) {
 
 		Path basePath = getFileVersionPath(fileVersion);
 
 		String fileName =
-			adaptiveImageVariantConfiguration.getUUID() + CharPool.PERIOD +
+			mediaConfigurationEntry.getUUID() + CharPool.PERIOD +
 				fileVersion.getExtension();
 
 		return basePath.resolve(fileName);

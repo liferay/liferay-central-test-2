@@ -19,7 +19,7 @@ import com.liferay.adaptive.media.image.finder.ImageAdaptiveMediaFinder;
 import com.liferay.adaptive.media.image.finder.ImageAdaptiveMediaQueryBuilder;
 import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaConfigurationHelper;
 import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaPropertyMapping;
-import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaVariantConfiguration;
+import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.adaptive.media.image.internal.finder.ImageAdaptiveMediaQueryBuilderImpl;
 import com.liferay.adaptive.media.image.internal.util.ImageProcessor;
 import com.liferay.adaptive.media.image.internal.util.ImageStorage;
@@ -92,12 +92,12 @@ public final class ImageAdaptiveMediaProcessorImpl
 
 		long companyId = fileVersion.getCompanyId();
 
-		Collection<ImageAdaptiveMediaVariantConfiguration>
-			adaptiveImageVariantConfigurations =
-				_mediaConfigurationHelper.
-					getAdaptiveImageVariantConfigurations(companyId);
+		Collection<ImageAdaptiveMediaConfigurationEntry>
+			mediaConfigurationEntries =
+				_mediaConfigurationHelper.getImageAdaptiveMediaConfigurationEntries(
+					companyId);
 
-		return adaptiveImageVariantConfigurations.stream().
+		return mediaConfigurationEntries.stream().
 			map(
 				adaptiveImageVariantConfiguration ->
 					_createMedia(
@@ -115,14 +115,14 @@ public final class ImageAdaptiveMediaProcessorImpl
 
 		long companyId = fileVersion.getCompanyId();
 
-		Iterable<ImageAdaptiveMediaVariantConfiguration>
-			adaptiveImageVariantConfigurations =
-				_mediaConfigurationHelper.
-					getAdaptiveImageVariantConfigurations(companyId);
+		Iterable<ImageAdaptiveMediaConfigurationEntry>
+			mediaConfigurationEntries =
+				_mediaConfigurationHelper.getImageAdaptiveMediaConfigurationEntries(
+					companyId);
 
-		for (ImageAdaptiveMediaVariantConfiguration
+		for (ImageAdaptiveMediaConfigurationEntry
 				adaptiveImageVariantConfiguration :
-					adaptiveImageVariantConfigurations) {
+					mediaConfigurationEntries) {
 
 			try (InputStream inputStream = _imageProcessor.process(
 					fileVersion, adaptiveImageVariantConfiguration)) {
@@ -204,14 +204,13 @@ public final class ImageAdaptiveMediaProcessorImpl
 
 	private URI _buildRelativeURI(
 		FileVersion fileVersion,
-		ImageAdaptiveMediaVariantConfiguration
-			adaptiveImageVariantConfiguration) {
+		ImageAdaptiveMediaConfigurationEntry mediaConfigurationEntry) {
 
 		String relativePath = String.format(
 			"/adaptive/%d/%d/%d/%d/%d/%s/%s", fileVersion.getCompanyId(),
 			fileVersion.getGroupId(), fileVersion.getRepositoryId(),
 			fileVersion.getFileEntryId(), fileVersion.getFileVersionId(),
-			adaptiveImageVariantConfiguration.getUUID(),
+			mediaConfigurationEntry.getUUID(),
 			_encode(fileVersion.getFileName()));
 
 		return URI.create(relativePath);
@@ -219,19 +218,18 @@ public final class ImageAdaptiveMediaProcessorImpl
 
 	private AdaptiveMedia<ImageAdaptiveMediaProcessor> _createMedia(
 		FileVersion fileVersion,
-		ImageAdaptiveMediaVariantConfiguration
-			adaptiveImageVariantConfiguration) {
+		ImageAdaptiveMediaConfigurationEntry mediaConfigurationEntry) {
 
 		ImageAdaptiveMediaPropertyMapping adaptiveImagePropertyMapping =
 			ImageAdaptiveMediaPropertyMapping.fromProperties(
-				adaptiveImageVariantConfiguration.getProperties());
+				mediaConfigurationEntry.getProperties());
 
 		return new ImageAdaptiveMedia(
 			() ->
 				_imageStorage.getContentStream(
-					fileVersion, adaptiveImageVariantConfiguration),
+					fileVersion, mediaConfigurationEntry),
 			adaptiveImagePropertyMapping,
-			_buildRelativeURI(fileVersion, adaptiveImageVariantConfiguration));
+			_buildRelativeURI(fileVersion, mediaConfigurationEntry));
 	}
 
 	private String _encode(String s) {

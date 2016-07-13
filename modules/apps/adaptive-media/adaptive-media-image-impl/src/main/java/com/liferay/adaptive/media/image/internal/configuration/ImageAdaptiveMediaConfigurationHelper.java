@@ -32,8 +32,8 @@ import org.osgi.service.component.annotations.Reference;
 @Component(immediate = true, service = ImageAdaptiveMediaConfigurationHelper.class)
 public class ImageAdaptiveMediaConfigurationHelper {
 
-	public Collection<ImageAdaptiveMediaVariantConfiguration>
-		getAdaptiveImageVariantConfigurations(long companyId) {
+	public Collection<ImageAdaptiveMediaConfigurationEntry>
+		getImageAdaptiveMediaConfigurationEntries(long companyId) {
 
 		try {
 			ImageAdaptiveMediaCompanyConfiguration
@@ -50,7 +50,7 @@ public class ImageAdaptiveMediaConfigurationHelper {
 			}
 
 			return Stream.of(imageVariants).
-				map(_adaptiveImageConfigurationParser::parse).
+				map(_mediaConfigurationEntryParser::parse).
 				collect(Collectors.toList());
 		}
 		catch (ConfigurationException ce) {
@@ -60,11 +60,11 @@ public class ImageAdaptiveMediaConfigurationHelper {
 	}
 
 	@Reference(unbind = "-")
-	public void setAdaptiveImageConfigurationParser(
-		ImageAdaptiveMediaVariantConfigurationParser
-			adaptiveImageConfigurationParser) {
+	public void setImageAdaptiveMediaConfigurationEntryParser(
+		ImageAdaptiveMediaConfigurationEntryParser
+			mediaConfigurationEntryParser) {
 
-		_adaptiveImageConfigurationParser = adaptiveImageConfigurationParser;
+		_mediaConfigurationEntryParser = mediaConfigurationEntryParser;
 	}
 
 	@Reference(unbind = "-")
@@ -74,8 +74,8 @@ public class ImageAdaptiveMediaConfigurationHelper {
 		_configurationProvider = configurationProvider;
 	}
 
-	private ImageAdaptiveMediaVariantConfigurationParser
-		_adaptiveImageConfigurationParser;
+	private ImageAdaptiveMediaConfigurationEntryParser
+		_mediaConfigurationEntryParser;
 	private ConfigurationProvider _configurationProvider;
 
 }

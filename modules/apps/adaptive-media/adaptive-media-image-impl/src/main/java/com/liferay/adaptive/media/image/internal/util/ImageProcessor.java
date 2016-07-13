@@ -15,7 +15,7 @@
 package com.liferay.adaptive.media.image.internal.util;
 
 import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaPropertyMapping;
-import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaVariantConfiguration;
+import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.adaptive.media.image.internal.processor.ImageAdaptiveMediaProperty;
 import com.liferay.adaptive.media.processor.AdaptiveMediaProcessorRuntimeException;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -52,13 +52,12 @@ public class ImageProcessor {
 
 	public InputStream process(
 		FileVersion fileVersion,
-		ImageAdaptiveMediaVariantConfiguration
-			adaptiveImageVariantConfiguration) {
+		ImageAdaptiveMediaConfigurationEntry mediaConfigurationEntry) {
 
 		try {
 			ImageAdaptiveMediaPropertyMapping adaptiveImagePropertyMapping =
 				ImageAdaptiveMediaPropertyMapping.fromProperties(
-					adaptiveImageVariantConfiguration.getProperties());
+					mediaConfigurationEntry.getProperties());
 
 			Optional<Integer> heightOptional =
 				adaptiveImagePropertyMapping.getPropertyValue(

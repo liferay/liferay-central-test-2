@@ -22,62 +22,57 @@ import org.junit.Test;
 /**
  * @author Adolfo Pérez
  */
-public class ImageAdaptiveMediaVariantConfigurationParserTest {
+public class ImageAdaptiveMediaConfigurationEntryParserTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testEmptyName() {
-		_adaptiveImageVariantConfigurationParser.parse(
-			":12345:height=100;width=200");
+		_mediaConfigurationEntryParser.parse(":12345:height=100;width=200");
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testEmptyProperties() {
-		_adaptiveImageVariantConfigurationParser.parse("test:12345:");
+		_mediaConfigurationEntryParser.parse("test:12345:");
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testEmptyString() {
-		_adaptiveImageVariantConfigurationParser.parse("");
+		_mediaConfigurationEntryParser.parse("");
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testEmptyUUID() {
-		_adaptiveImageVariantConfigurationParser.parse(
-			"test::height=100;width=200");
+		_mediaConfigurationEntryParser.parse("test::height=100;width=200");
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testMissingPropertiesField() {
-		_adaptiveImageVariantConfigurationParser.parse("test:12345");
+		_mediaConfigurationEntryParser.parse("test:12345");
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testNullString() {
-		_adaptiveImageVariantConfigurationParser.parse(null);
+		_mediaConfigurationEntryParser.parse(null);
 	}
 
 	@Test
 	public void testValidString() {
-		ImageAdaptiveMediaVariantConfiguration
-			adaptiveImageVariantConfiguration =
-				_adaptiveImageVariantConfigurationParser.parse(
-					"test:12345:height=100;width=200");
+		ImageAdaptiveMediaConfigurationEntry mediaConfigurationEntry =
+			_mediaConfigurationEntryParser.parse(
+				"test:12345:height=100;width=200");
 
-		Assert.assertEquals(
-			"test", adaptiveImageVariantConfiguration.getName());
-		Assert.assertEquals(
-			"12345", adaptiveImageVariantConfiguration.getUUID());
+		Assert.assertEquals("test", mediaConfigurationEntry.getName());
+		Assert.assertEquals("12345", mediaConfigurationEntry.getUUID());
 
 		Map<String, String> properties =
-			adaptiveImageVariantConfiguration.getProperties();
+			mediaConfigurationEntry.getProperties();
 
 		Assert.assertEquals("100", properties.get("height"));
 		Assert.assertEquals("200", properties.get("width"));
 		Assert.assertEquals(2, properties.size());
 	}
 
-	private final ImageAdaptiveMediaVariantConfigurationParser
-		_adaptiveImageVariantConfigurationParser =
-			new ImageAdaptiveMediaVariantConfigurationParser();
+	private final ImageAdaptiveMediaConfigurationEntryParser
+		_mediaConfigurationEntryParser =
+			new ImageAdaptiveMediaConfigurationEntryParser();
 
 }
