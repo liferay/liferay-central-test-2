@@ -67,9 +67,9 @@ import org.osgi.util.tracker.ServiceTrackerCustomizer;
 		"osgi.command.function=check", "osgi.command.function=execute",
 		"osgi.command.function=list", "osgi.command.scope=upgrade"
 	},
-	service = Object.class
+	service = ReleaseManagerOSGiCommands.class
 )
-public class ReleaseManager {
+public class ReleaseManagerOSGiCommands {
 
 	public void check() {
 		Set<String> bundleSymbolicNames = _serviceTrackerMap.keySet();

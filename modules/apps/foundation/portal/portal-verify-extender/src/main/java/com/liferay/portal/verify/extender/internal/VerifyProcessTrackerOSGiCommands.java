@@ -65,9 +65,9 @@ import org.osgi.service.component.annotations.Reference;
 		"osgi.command.function=list", "osgi.command.function=show",
 		"osgi.command.function=showReports", "osgi.command.scope=verify"
 	},
-	service = {VerifyProcessTracker.class}
+	service = {VerifyProcessTrackerOSGiCommands.class}
 )
-public class VerifyProcessTracker {
+public class VerifyProcessTrackerOSGiCommands {
 
 	public void execute(final String verifyProcessName) {
 		executeVerifyProcesses(
@@ -331,7 +331,7 @@ public class VerifyProcessTracker {
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		VerifyProcessTracker.class);
+		VerifyProcessTrackerOSGiCommands.class);
 
 	private CounterLocalService _counterLocalService;
 	private OutputStreamContainerFactoryTracker
