@@ -50,6 +50,16 @@ public class ImageAdaptiveMediaConfigurationEntryParserTest {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
+	public void testMissingName() {
+		_configurationEntryParser.parse("12345:height=100;width=200");
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testMissingUUID() {
+		_configurationEntryParser.parse("test:height=100;width=200");
+	}
+
+	@Test(expected = IllegalArgumentException.class)
 	public void testNullString() {
 		_configurationEntryParser.parse(null);
 	}

@@ -37,7 +37,7 @@ public class ImageAdaptiveMediaQueryBuilderImplTest {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testNullValueFailsWhenQueryingAttributes() {
+	public void testNullAttributeValueFailsWhenQueryingAttributes() {
 		FileVersion fileVersion = Mockito.mock(FileVersion.class);
 
 		_queryBuilder.

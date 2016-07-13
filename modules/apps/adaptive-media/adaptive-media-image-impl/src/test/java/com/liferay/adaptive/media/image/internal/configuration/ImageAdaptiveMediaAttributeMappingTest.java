@@ -82,4 +82,22 @@ public class ImageAdaptiveMediaAttributeMappingTest {
 		Assert.assertEquals(Integer.valueOf(200), width.get());
 	}
 
+	@Test
+	public void testValidSingleAttribute() {
+		ImageAdaptiveMediaAttributeMapping attributeMapping =
+			ImageAdaptiveMediaAttributeMapping.fromProperties(
+				MapUtil.fromArray(
+					ImageAdaptiveMediaAttribute.IMAGE_HEIGHT.getName(), "100"));
+
+		Optional<Integer> height = attributeMapping.getAttributeValue(
+			ImageAdaptiveMediaAttribute.IMAGE_HEIGHT);
+
+		Assert.assertEquals(Integer.valueOf(100), height.get());
+
+		Optional<Integer> width = attributeMapping.getAttributeValue(
+			ImageAdaptiveMediaAttribute.IMAGE_WIDTH);
+
+		Assert.assertFalse(width.isPresent());
+	}
+
 }
