@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.adaptive.media.source;
+package com.liferay.adaptive.media.finder;
 
 import com.liferay.adaptive.media.processor.Media;
 import com.liferay.adaptive.media.processor.MediaProcessorException;
@@ -22,7 +22,7 @@ import java.util.function.Function;
 import java.util.stream.Stream;
 
 /**
- * A {@link MediaSource} is responsible of locating and returning media
+ * A {@link MediaFinder} is responsible of locating and returning media
  * related to a model.
  *
  * All media matching the query will be returned, sorted by score. This means
@@ -30,7 +30,7 @@ import java.util.stream.Stream;
  *
  * @author Adolfo Pérez
  */
-public interface MediaSource<B extends MediaQueryBuilder<M, T>, M, T> {
+public interface MediaFinder<B extends MediaQueryBuilder<M, T>, M, T> {
 
 	/**
 	 * Return all {@link Media} for the given model. The provided function will

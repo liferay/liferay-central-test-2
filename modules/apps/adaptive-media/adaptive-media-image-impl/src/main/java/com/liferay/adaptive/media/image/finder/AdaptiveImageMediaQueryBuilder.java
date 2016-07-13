@@ -12,12 +12,12 @@
  * details.
  */
 
-package com.liferay.adaptive.media.image.source;
+package com.liferay.adaptive.media.image.finder;
 
+import com.liferay.adaptive.media.finder.MediaQuery;
+import com.liferay.adaptive.media.finder.MediaQueryBuilder;
 import com.liferay.adaptive.media.image.processor.AdaptiveImageMediaProcessor;
 import com.liferay.adaptive.media.processor.MediaProperty;
-import com.liferay.adaptive.media.source.MediaQuery;
-import com.liferay.adaptive.media.source.MediaQueryBuilder;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 
 /**

@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.adaptive.media.source;
+package com.liferay.adaptive.media.finder;
 
 /**
  * @author Adolfo Pérez

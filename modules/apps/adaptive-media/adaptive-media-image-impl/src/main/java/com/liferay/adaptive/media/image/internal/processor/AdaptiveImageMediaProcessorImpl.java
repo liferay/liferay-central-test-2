@@ -14,20 +14,20 @@
 
 package com.liferay.adaptive.media.image.internal.processor;
 
+import com.liferay.adaptive.media.finder.MediaQuery;
+import com.liferay.adaptive.media.image.finder.AdaptiveImageMediaFinder;
+import com.liferay.adaptive.media.image.finder.AdaptiveImageMediaQueryBuilder;
 import com.liferay.adaptive.media.image.internal.configuration.AdaptiveImageConfiguration;
 import com.liferay.adaptive.media.image.internal.configuration.AdaptiveImagePropertyMapping;
 import com.liferay.adaptive.media.image.internal.configuration.AdaptiveImageVariantConfiguration;
+import com.liferay.adaptive.media.image.internal.finder.AdaptiveImageMediaQueryBuilderImpl;
 import com.liferay.adaptive.media.image.internal.image.ImageProcessor;
 import com.liferay.adaptive.media.image.internal.image.ImageStorage;
-import com.liferay.adaptive.media.image.internal.source.AdaptiveImageMediaQueryBuilderImpl;
 import com.liferay.adaptive.media.image.processor.AdaptiveImageMediaProcessor;
-import com.liferay.adaptive.media.image.source.AdaptiveImageMediaQueryBuilder;
-import com.liferay.adaptive.media.image.source.AdaptiveImageMediaSource;
 import com.liferay.adaptive.media.processor.Media;
 import com.liferay.adaptive.media.processor.MediaProcessor;
 import com.liferay.adaptive.media.processor.MediaProcessorRuntimeException;
 import com.liferay.adaptive.media.processor.MediaProperty;
-import com.liferay.adaptive.media.source.MediaQuery;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 
 import java.io.IOException;
@@ -56,12 +56,12 @@ import org.osgi.service.component.annotations.Reference;
 	immediate = true,
 	property = "model.class.name=com.liferay.portal.kernel.repository.model.FileVersion",
 	service = {
-		AdaptiveImageMediaProcessor.class, AdaptiveImageMediaSource.class,
+		AdaptiveImageMediaProcessor.class, AdaptiveImageMediaFinder.class,
 		MediaProcessor.class
 	}
 )
 public final class AdaptiveImageMediaProcessorImpl
-	implements AdaptiveImageMediaProcessor, AdaptiveImageMediaSource {
+	implements AdaptiveImageMediaProcessor, AdaptiveImageMediaFinder {
 
 	@Override
 	public void cleanUp(FileVersion fileVersion) {

@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.adaptive.media.image.internal.source;
+package com.liferay.adaptive.media.image.internal.finder;
 
 import com.liferay.adaptive.media.image.internal.processor.AdaptiveImageMediaProperty;
 import com.liferay.portal.kernel.repository.model.FileVersion;
