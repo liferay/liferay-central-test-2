@@ -199,7 +199,7 @@ public final class ImageAdaptiveMediaProcessorImpl
 		ImageAdaptiveMediaConfigurationEntry configurationEntry) {
 
 		String relativePath = String.format(
-			"/adaptive/%d/%d/%d/%d/%d/%s/%s", fileVersion.getCompanyId(),
+			"/adaptive/media/%d/%d/%d/%d/%d/%s/%s", fileVersion.getCompanyId(),
 			fileVersion.getGroupId(), fileVersion.getRepositoryId(),
 			fileVersion.getFileEntryId(), fileVersion.getFileVersionId(),
 			configurationEntry.getUUID(), _encode(fileVersion.getFileName()));
@@ -217,8 +217,9 @@ public final class ImageAdaptiveMediaProcessorImpl
 
 		return new ImageAdaptiveMedia(
 			() -> _imageStorage.getContentStream(
-				fileVersion, configurationEntry), attributeMapping,
-				_buildRelativeURI(fileVersion, configurationEntry));
+					fileVersion, configurationEntry),
+			attributeMapping,
+			_buildRelativeURI(fileVersion, configurationEntry));
 	}
 
 	private String _encode(String s) {
