@@ -34,26 +34,26 @@ public class ScreensRatingsEntryServiceImpl
 	extends ScreensRatingsEntryServiceBaseImpl {
 
 	public JSONObject deleteRatingsEntry(
-			long classPK, String className, int ratingGroupCount)
+			long classPK, String className, int ratingsLength)
 		throws PortalException {
 
 		ratingsEntryLocalService.deleteEntry(getUserId(), className, classPK);
 
-		return getRatingsEntries(classPK, className, ratingGroupCount);
+		return getRatingsEntries(classPK, className, ratingsLength);
 	}
 
-	public JSONObject getRatingsEntries(long assetEntryId, int ratingGroupCount)
+	public JSONObject getRatingsEntries(long assetEntryId, int ratingsLength)
 		throws PortalException {
 
 		AssetEntry assetEntry = assetEntryLocalService.fetchEntry(assetEntryId);
 
 		return getRatingsEntries(
 			assetEntry.getClassPK(), assetEntry.getClassName(),
-			ratingGroupCount);
+			ratingsLength);
 	}
 
 	public JSONObject getRatingsEntries(
-			long classPK, String className, int ratingGroupCount)
+			long classPK, String className, int ratingsLength)
 		throws PortalException {
 
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
@@ -61,14 +61,14 @@ public class ScreensRatingsEntryServiceImpl
 		List<RatingsEntry> ratingsEntries = ratingsEntryLocalService.getEntries(
 			className, classPK);
 
-		int[] ratings = new int[ratingGroupCount];
+		int[] ratings = new int[ratingsLength];
 		double totalScore = 0;
 		double userScore = -1;
 
 		for (RatingsEntry ratingsEntry : ratingsEntries) {
-			int index = (int)(ratingsEntry.getScore() * ratingGroupCount);
+			int index = (int)(ratingsEntry.getScore() * ratingsLength);
 
-			if (index == ratingGroupCount) {
+			if (index == ratingsLength) {
 				index--;
 			}
 
@@ -98,13 +98,13 @@ public class ScreensRatingsEntryServiceImpl
 	}
 
 	public JSONObject updateRatingsEntry(
-			long classPK, String className, double score, int ratingGroupCount)
+			long classPK, String className, double score, int ratingsLength)
 		throws PortalException {
 
 		ratingsEntryLocalService.updateEntry(
 			getUserId(), className, classPK, score, new ServiceContext());
 
-		return getRatingsEntries(classPK, className, ratingGroupCount);
+		return getRatingsEntries(classPK, className, ratingsLength);
 	}
 
 }
