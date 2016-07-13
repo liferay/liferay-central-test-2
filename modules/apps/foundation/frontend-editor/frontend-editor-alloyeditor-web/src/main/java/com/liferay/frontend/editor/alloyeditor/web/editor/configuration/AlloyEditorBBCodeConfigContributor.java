@@ -148,19 +148,17 @@ public class AlloyEditorBBCodeConfigContributor
 			getStyleFormatJSONObject(
 				LanguageUtil.get(resourceBundle, "computer-code"), "code", null,
 				_CKEDITOR_STYLE_INLINE));
-
 		return jsonArray;
 	}
 
 	protected JSONObject getStyleFormatsJSONObject(Locale locale) {
-		JSONObject styleFormatsJSONObject = JSONFactoryUtil.createJSONObject();
-
 		JSONObject stylesJSONObject = JSONFactoryUtil.createJSONObject();
 
 		stylesJSONObject.put("styles", getStyleFormatsJSONArray(locale));
 
-		styleFormatsJSONObject.put("cfg", stylesJSONObject);
+		JSONObject styleFormatsJSONObject = JSONFactoryUtil.createJSONObject();
 
+		styleFormatsJSONObject.put("cfg", stylesJSONObject);
 		styleFormatsJSONObject.put("name", "styles");
 
 		return styleFormatsJSONObject;
