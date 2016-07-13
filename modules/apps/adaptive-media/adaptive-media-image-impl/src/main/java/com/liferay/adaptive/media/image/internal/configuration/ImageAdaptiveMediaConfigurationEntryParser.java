@@ -33,14 +33,14 @@ public class ImageAdaptiveMediaConfigurationEntryParser {
 	public ImageAdaptiveMediaConfigurationEntry parse(String s) {
 		if (Validator.isNull(s)) {
 			throw new IllegalArgumentException(
-				"Image adaptive media configuration not valid: " + s);
+				"Invalid image adaptive media configuration: " + s);
 		}
 
 		String[] fields = _FIELD_SEPARATOR_PATTERN.split(s);
 
 		if (fields.length != 3) {
 			throw new IllegalArgumentException(
-				"Image adaptive media configuration not valid: " + s);
+				"Invalid image adaptive media configuration: " + s);
 		}
 
 		String name = fields[0];
@@ -48,17 +48,17 @@ public class ImageAdaptiveMediaConfigurationEntryParser {
 
 		if (Validator.isNull(name) || Validator.isNull(uuid)) {
 			throw new IllegalArgumentException(
-				"Image adaptive media configuration not valid: " + s);
+				"Invalid image adaptive media configuration: " + s);
 		}
 
-		String[] attributesArray = _ATTRIBUTE_SEPARATOR_PATTERN.split(
+		String[] attributes = _ATTRIBUTE_SEPARATOR_PATTERN.split(
 			fields[2]);
 
 		Map<String, String> properties = new HashMap<>();
 
-		for (String attributeString : attributesArray) {
+		for (String attribute : attributes) {
 			String[] keyValuePair = _KEY_VALUE_SEPARATOR_PATTERN.split(
-				attributeString);
+				attribute);
 
 			properties.put(keyValuePair[0], keyValuePair[1]);
 		}

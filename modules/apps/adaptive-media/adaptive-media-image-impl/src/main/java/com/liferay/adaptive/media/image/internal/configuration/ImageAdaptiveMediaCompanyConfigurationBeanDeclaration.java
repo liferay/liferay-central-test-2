@@ -25,6 +25,7 @@ import org.osgi.service.component.annotations.Component;
 public class ImageAdaptiveMediaCompanyConfigurationBeanDeclaration
 	implements ConfigurationBeanDeclaration {
 
+	@Override
 	public Class<?> getConfigurationBeanClass() {
 		return ImageAdaptiveMediaCompanyConfiguration.class;
 	}

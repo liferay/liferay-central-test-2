@@ -30,6 +30,7 @@ public class ImageAdaptiveMediaQueryBuilderImpl
 	implements ImageAdaptiveMediaQueryBuilder,
 	   ImageAdaptiveMediaQueryBuilder.AdaptiveMediaAttributeQueryBuilder {
 
+	@Override
 	public AdaptiveMediaQuery<FileVersion, ImageAdaptiveMediaProcessor>
 		allForModel(FileVersion fileVersion) {
 
