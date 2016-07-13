@@ -811,8 +811,7 @@ public class MBUtil {
 
 			if (_log.isWarnEnabled()) {
 				_log.warn(
-					"Replacing unsupported BBCode editor with AlloyEditor " +
-						"BBCode");
+					"Replacing unsupported BBCode editor with AlloyEditor BBCode");
 			}
 		}
 
