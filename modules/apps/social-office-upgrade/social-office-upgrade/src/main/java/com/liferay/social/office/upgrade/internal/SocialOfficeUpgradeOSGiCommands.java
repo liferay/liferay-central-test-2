@@ -37,7 +37,7 @@ import org.osgi.service.component.annotations.Reference;
 		"osgi.command.function=executeAll",
 		"osgi.command.function=hideTasksLayout",
 		"osgi.command.function=removeTasksPortlet",
-		"osgi.command.function=updateTheme", "osgi.command.scope=so"
+		"osgi.command.function=updateTheme", "osgi.command.scope=socialOffice"
 	},
 	service = SocialOfficeUpgradeOSGiCommands.class
 )
@@ -85,7 +85,8 @@ public class SocialOfficeUpgradeOSGiCommands {
 		actionableDynamicQuery.performActions();
 
 		System.out.printf(
-			"[so:hideTasksLayout] %d layouts updated.%n", atomicInteger.get());
+			"[socialOffice:hideTasksLayout] %d layouts updated.%n",
+			atomicInteger.get());
 	}
 
 	public void removeTasksPortlet() throws PortalException {
@@ -123,7 +124,8 @@ public class SocialOfficeUpgradeOSGiCommands {
 		actionableDynamicQuery.performActions();
 
 		System.out.printf(
-			"[so:removeTasksPortlet] %d Tasks portlet preferences deleted.%n",
+			"[socialOffice:removeTasksPortlet] %d Tasks portlet " +
+				"preferences deleted.%n",
 			atomicInteger.get());
 	}
 
@@ -162,7 +164,8 @@ public class SocialOfficeUpgradeOSGiCommands {
 		actionableDynamicQuery.performActions();
 
 		System.out.printf(
-			"[so:updateTheme] %d layouts updated.%n", atomicInteger.get());
+			"[socialOffice:updateTheme] %d layouts updated.%n",
+			atomicInteger.get());
 	}
 
 	@Reference(unbind = "-")
