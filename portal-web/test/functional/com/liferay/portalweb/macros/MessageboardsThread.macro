@@ -563,20 +563,6 @@
 		<execute function="AssertTextEquals" locator1="MessageBoardsThread#THREAD_BODY" value1="${threadBody}" />
 	</command>
 
-	<command name="quickReplyPG">
-		<var name="key_threadSubject" value="${threadSubject}" />
-
-		<execute function="AssertClick" locator1="MessageBoards#THREAD_LIST_THREAD" value1="${threadSubject}" />
-
-		<execute function="Click#waitForMenuToggleJSClick" locator1="Icon#BODY_VERTICAL_ELLIPSIS" />
-
-		<execute function="AssertClick" locator1="MenuItem#QUICK_REPLY" value1="Quick Reply" />
-
-		<execute function="Type#typeEditor" locator1="AlloyEditor#CONTENT_FIELD" value1="${threadReplyBody}" />
-
-		<execute macro="PortletEntry#publish" />
-	</command>
-
 	<command name="ratePG">
 		<if>
 			<equals arg1="${ratingType}" arg2="Positive" />
