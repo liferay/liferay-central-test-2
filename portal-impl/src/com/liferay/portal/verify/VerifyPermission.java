@@ -400,8 +400,8 @@ public class VerifyPermission extends VerifyProcess {
 
 		StringBundler sb = new StringBundler(6);
 
-		sb.append("update ResourcePermission r1 set plid = ");
-		sb.append("(select SUBSTR(ResourcePermission.primKey, 0,");
+		sb.append("update ResourcePermission r1 set plid = (select ");
+		sb.append("SUBSTR(ResourcePermission.primKey, 0, ");
 		sb.append("INSTR(ResourcePermission.primKey, '_LAYOUT_') -1) from ");
 		sb.append("ResourcePermission where r1.resourcePermissionId = ");
 		sb.append("ResourcePermission.resourcePermissionId and ");
@@ -419,16 +419,15 @@ public class VerifyPermission extends VerifyProcess {
 				companyId, powerUserRole.getRoleId(), userRole.getRoleId(),
 				userClassNameId, userGroupClassNameId);
 
-			sb = new StringBundler(20);
+			sb = new StringBundler(19);
 
 			sb.append("update ResourcePermission r1 set roleId = ");
 			sb.append(userRole.getRoleId());
 			sb.append(" where exists (select ");
 			sb.append("ResourcePermission.resourcePermissionId from ");
-			sb.append("ResourcePermission inner join ");
-			sb.append("Layout on ResourcePermission.plid = ");
-			sb.append("Layout.plid inner join Group_ on Layout.groupId = ");
-			sb.append("Group_.groupId where ");
+			sb.append("ResourcePermission inner join Layout on ");
+			sb.append("ResourcePermission.plid = Layout.plid inner join ");
+			sb.append("Group_ on Layout.groupId = Group_.groupId where ");
 			sb.append("r1.resourcePermissionId = ResourcePermission.");
 			sb.append("resourcePermissionId and ResourcePermission.scope = ");
 			sb.append(ResourceConstants.SCOPE_INDIVIDUAL);
