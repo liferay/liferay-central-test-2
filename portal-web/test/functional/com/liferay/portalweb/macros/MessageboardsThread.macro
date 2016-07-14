@@ -235,9 +235,13 @@
 	</command>
 
 	<command name="banUser">
+		<var name="key_threadReplyBody" value="${threadReplyBody}" />
 		<var name="key_userName" value="${userName}" />
 
-		<execute function="AssertClick" locator1="MessageBoardsThread#MESSAGE_BAN_THIS_USER" value1="Ban This User" />
+		<execute function="Click" locator1="MessageBoards#THREAD_REPLY_ACTIONS" />
+
+		<execute function="Click" locator1="MenuItem#BAN_THIS_USER" />
+
 		<execute macro="Alert#viewSuccessMessage" />
 	</command>
 
