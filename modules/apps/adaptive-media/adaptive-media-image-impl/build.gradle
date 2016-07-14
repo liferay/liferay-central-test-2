@@ -17,7 +17,7 @@ dependencies {
 jacocoTestReport {
 	afterEvaluate {
 		classDirectories = files(classDirectories.files.collect {
-			fileTree(dir: it, exclude: 'com/liferay/adaptive/media/image/internal/image/**')
+			fileTree(dir: it, exclude: 'com/liferay/adaptive/media/image/internal/util/**')
 		})
 	}
 }
