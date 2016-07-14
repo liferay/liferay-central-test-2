@@ -74,12 +74,13 @@ List fileEntries = DLAppServiceUtil.getGroupFileEntries(scopeGroupId, 0, folderI
 	PortletURL portletURL = renderResponse.createRenderURL();
 
 	portletURL.setParameter("mvcRenderCommandName", "/image_gallery_display/view");
-	portletURL.setParameter("topLink", topLink);
-	portletURL.setParameter("folderId", String.valueOf(folderId));
 
 	if (Validator.isNotNull(redirect)) {
 		portletURL.setParameter("redirect", redirect);
 	}
+
+	portletURL.setParameter("topLink", topLink);
+	portletURL.setParameter("folderId", String.valueOf(folderId));
 
 	request.setAttribute("view.jsp-folder", folder);
 
