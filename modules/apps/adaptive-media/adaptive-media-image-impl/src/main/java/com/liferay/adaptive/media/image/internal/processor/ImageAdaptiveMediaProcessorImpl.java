@@ -73,7 +73,7 @@ public final class ImageAdaptiveMediaProcessorImpl
 	}
 
 	@Override
-	public Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> getMedia(
+	public Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> getAdaptiveMedia(
 		Function<ImageAdaptiveMediaQueryBuilder,
 		AdaptiveMediaQuery<FileVersion, ImageAdaptiveMediaProcessor>>
 			queryBuilderFunction) {

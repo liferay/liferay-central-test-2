@@ -122,7 +122,7 @@ public class ImageAdaptiveMediaProcessorImplTest {
 		);
 
 		Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> stream =
-			_processor.getMedia(
+			_processor.getAdaptiveMedia(
 				queryBuilder -> queryBuilder.allForModel(_fileVersion));
 
 		stream.forEach(
@@ -156,7 +156,7 @@ public class ImageAdaptiveMediaProcessorImplTest {
 			AdaptiveMediaProcessorRuntimeException.InvalidConfiguration.class
 		);
 
-		_processor.getMedia(
+		_processor.getAdaptiveMedia(
 			queryBuilder -> queryBuilder.allForModel(_fileVersion));
 	}
 
@@ -184,7 +184,7 @@ public class ImageAdaptiveMediaProcessorImplTest {
 		);
 
 		Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> stream =
-			_processor.getMedia(
+			_processor.getAdaptiveMedia(
 				queryBuilder -> queryBuilder.allForModel(_fileVersion));
 
 		stream.forEach(
@@ -207,7 +207,7 @@ public class ImageAdaptiveMediaProcessorImplTest {
 		);
 
 		Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> stream =
-			_processor.getMedia(
+			_processor.getAdaptiveMedia(
 				queryBuilder -> queryBuilder.allForModel(_fileVersion));
 
 		stream.forEach(
@@ -256,7 +256,7 @@ public class ImageAdaptiveMediaProcessorImplTest {
 		);
 
 		Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> stream =
-			_processor.getMedia(
+			_processor.getAdaptiveMedia(
 				queryBuilder ->
 					queryBuilder.
 						forModel(_fileVersion).
@@ -317,7 +317,7 @@ public class ImageAdaptiveMediaProcessorImplTest {
 		);
 
 		Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> stream =
-			_processor.getMedia(
+			_processor.getAdaptiveMedia(
 				queryBuilder ->
 					queryBuilder.
 						forModel(_fileVersion).
@@ -378,7 +378,7 @@ public class ImageAdaptiveMediaProcessorImplTest {
 		);
 
 		Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> stream =
-			_processor.getMedia(
+			_processor.getAdaptiveMedia(
 				queryBuilder ->
 					queryBuilder.
 						forModel(_fileVersion).
@@ -416,7 +416,7 @@ public class ImageAdaptiveMediaProcessorImplTest {
 		);
 
 		Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> stream =
-			_processor.getMedia(
+			_processor.getAdaptiveMedia(
 				queryBuilder -> queryBuilder.allForModel(_fileVersion));
 
 		Object[] adaptiveMediaArray = stream.toArray();
