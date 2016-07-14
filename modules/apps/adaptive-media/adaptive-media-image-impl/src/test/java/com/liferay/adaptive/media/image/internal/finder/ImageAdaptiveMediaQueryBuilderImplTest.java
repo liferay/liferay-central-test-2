@@ -27,6 +27,15 @@ import org.mockito.Mockito;
 public class ImageAdaptiveMediaQueryBuilderImplTest {
 
 	@Test(expected = IllegalArgumentException.class)
+	public void testNullAttributeValueFailsWhenQueryingAttributes() {
+		FileVersion fileVersion = Mockito.mock(FileVersion.class);
+
+		_queryBuilder.
+			forModel(fileVersion).
+			with(ImageAdaptiveMediaAttribute.IMAGE_HEIGHT, null);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
 	public void testNullFileVersionFailsWhenQueryingAll() {
 		_queryBuilder.allForModel(null);
 	}
@@ -34,15 +43,6 @@ public class ImageAdaptiveMediaQueryBuilderImplTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void testNullFileVersionFailsWhenQueryingAttributes() {
 		_queryBuilder.forModel(null);
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void testNullAttributeValueFailsWhenQueryingAttributes() {
-		FileVersion fileVersion = Mockito.mock(FileVersion.class);
-
-		_queryBuilder.
-			forModel(fileVersion).
-			with(ImageAdaptiveMediaAttribute.IMAGE_HEIGHT, null);
 	}
 
 	private final ImageAdaptiveMediaQueryBuilderImpl _queryBuilder =

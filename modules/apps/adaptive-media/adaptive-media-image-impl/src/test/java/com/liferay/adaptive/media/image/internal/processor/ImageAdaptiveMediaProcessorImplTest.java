@@ -139,7 +139,9 @@ public class ImageAdaptiveMediaProcessorImplTest {
 			});
 	}
 
-	@Test(expected = AdaptiveMediaProcessorRuntimeException.InvalidConfiguration.class)
+	@Test(
+		expected = AdaptiveMediaProcessorRuntimeException.InvalidConfiguration.class
+	)
 	public void testGetMediaConfigurationError() {
 		Mockito.when(
 			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))
@@ -456,7 +458,9 @@ public class ImageAdaptiveMediaProcessorImplTest {
 		);
 	}
 
-	@Test(expected = AdaptiveMediaProcessorRuntimeException.InvalidConfiguration.class)
+	@Test(
+		expected = AdaptiveMediaProcessorRuntimeException.InvalidConfiguration.class
+	)
 	public void testProcessInvalidConfigurationException() throws Exception {
 		Mockito.when(
 			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))

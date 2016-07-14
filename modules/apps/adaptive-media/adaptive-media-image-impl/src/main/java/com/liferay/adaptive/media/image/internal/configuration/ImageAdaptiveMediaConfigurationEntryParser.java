@@ -51,8 +51,7 @@ public class ImageAdaptiveMediaConfigurationEntryParser {
 				"Invalid image adaptive media configuration: " + s);
 		}
 
-		String[] attributes = _ATTRIBUTE_SEPARATOR_PATTERN.split(
-			fields[2]);
+		String[] attributes = _ATTRIBUTE_SEPARATOR_PATTERN.split(fields[2]);
 
 		Map<String, String> properties = new HashMap<>();
 
