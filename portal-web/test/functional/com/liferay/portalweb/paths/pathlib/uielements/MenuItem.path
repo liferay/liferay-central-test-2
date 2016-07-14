@@ -179,6 +179,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>BAN_THIS_USER</td>
+	<td>//a[@role='menuitem' and contains(.,'Ban This User')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>BASIC_ARTICLE</td>
 	<td>//a[contains(@id,'menuItem') and contains(.,'Basic Article')]</td>
 	<td></td>
@@ -896,6 +901,11 @@
 <tr>
 	<td>TRANSFORM_RESIZE</td>
 	<td>//div[@class=&quot;dropdown dropup open&quot;]//a[contains(.,'Resize')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>UNBAN_THIS_USER</td>
+	<td>//a[@role='menuitem' and contains(.,'Unban This User')]</td>
 	<td></td>
 </tr>
 <tr>
