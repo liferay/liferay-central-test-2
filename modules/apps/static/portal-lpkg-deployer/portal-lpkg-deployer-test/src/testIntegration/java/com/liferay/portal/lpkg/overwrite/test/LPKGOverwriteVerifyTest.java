@@ -101,21 +101,21 @@ public class LPKGOverwriteVerifyTest {
 
 			if (Validator.isNotNull(version)) {
 				Assert.assertEquals(
-					"Jar not sucessfully overwritten: " + symbolicName,
+					"JAR not sucessfully overwritten: " + symbolicName,
 					new Version(version), bundle.getVersion());
 			}
 			else if (statics.remove(symbolicName)) {
 				String location = bundle.getLocation();
 
 				Assert.assertTrue(
-					"Static jar not sucessfully overwritten: " + symbolicName,
+					"Static JAR not sucessfully overwritten: " + symbolicName,
 					location.contains("Static-Jar::"));
 			}
 			else if (wars.remove(symbolicName)) {
 				String location = bundle.getLocation();
 
 				Assert.assertTrue(
-					"War not sucessfully overwritten: " + symbolicName,
+					"WAR not sucessfully overwritten: " + symbolicName,
 					!location.contains("lpkg://"));
 			}
 		}
@@ -144,10 +144,10 @@ public class LPKGOverwriteVerifyTest {
 			});
 
 		Assert.assertTrue(
-			"Jars not overwritten: " + jars.entrySet(), jars.isEmpty());
+			"JARs not overwritten: " + jars.entrySet(), jars.isEmpty());
 		Assert.assertTrue(
-			"Static jars not overwritten: " + statics, statics.isEmpty());
-		Assert.assertTrue("Wars not overwritten: " + wars, wars.isEmpty());
+			"Static JARs not overwritten: " + statics, statics.isEmpty());
+		Assert.assertTrue("WARs not overwritten: " + wars, wars.isEmpty());
 	}
 
 }
