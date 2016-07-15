@@ -24,7 +24,7 @@ import java.sql.PreparedStatement;
 /**
  * @author Rafael Praxedes
  */
-public class UpgradeKaleoClassNameAndKaleoClassPKs extends UpgradeProcess {
+public class UpgradeKaleoClassNameAndKaleoClassPK extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
@@ -47,22 +47,21 @@ public class UpgradeKaleoClassNameAndKaleoClassPKs extends UpgradeProcess {
 			return;
 		}
 
-		StringBundler updateScriptSB = new StringBundler(11);
+		StringBundler sb = new StringBundler(10);
 
-		updateScriptSB.append("update ");
-		updateScriptSB.append(tableName);
-		updateScriptSB.append(" set kaleoClassName = ?,");
-		updateScriptSB.append("kaleoClassPK = ");
-		updateScriptSB.append(kaleoClassPKOldColumn);
-		updateScriptSB.append(" where kaleoClassName is null and ");
-		updateScriptSB.append("kaleoClassPK is null and ");
-		updateScriptSB.append(kaleoClassPKOldColumn);
-		updateScriptSB.append(" is not null and ");
-		updateScriptSB.append(kaleoClassPKOldColumn);
-		updateScriptSB.append(" > 0 ");
+		sb.append("update ");
+		sb.append(tableName);
+		sb.append(" set kaleoClassName = ?, kaleoClassPK = ");
+		sb.append(kaleoClassPKOldColumn);
+		sb.append(" where kaleoClassName is null and ");
+		sb.append("kaleoClassPK is null and ");
+		sb.append(kaleoClassPKOldColumn);
+		sb.append(" is not null and ");
+		sb.append(kaleoClassPKOldColumn);
+		sb.append(" > 0 ");
 
 		try (PreparedStatement ps = connection.prepareStatement(
-				updateScriptSB.toString())) {
+				sb.toString())) {
 
 			ps.setString(1, kaleoClassName);
 
