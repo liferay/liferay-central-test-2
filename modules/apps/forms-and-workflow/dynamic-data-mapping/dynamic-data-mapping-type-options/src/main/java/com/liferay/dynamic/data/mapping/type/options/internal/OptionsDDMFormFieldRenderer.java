@@ -18,12 +18,10 @@ import com.liferay.dynamic.data.mapping.form.field.type.BaseDDMFormFieldRenderer
 import com.liferay.dynamic.data.mapping.form.field.type.DDMFormFieldRenderer;
 import com.liferay.dynamic.data.mapping.model.DDMFormField;
 import com.liferay.dynamic.data.mapping.render.DDMFormFieldRenderingContext;
-import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.template.Template;
 import com.liferay.portal.kernel.template.TemplateConstants;
 import com.liferay.portal.kernel.template.TemplateResource;
 
-import java.util.List;
 import java.util.Map;
 
 import org.osgi.service.component.annotations.Activate;
