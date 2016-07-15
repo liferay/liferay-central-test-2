@@ -20,7 +20,6 @@ import com.liferay.portal.workflow.kaleo.model.KaleoNode;
 import com.liferay.portal.workflow.kaleo.model.KaleoTask;
 
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 
 /**
  * @author Rafael Praxedes
@@ -42,7 +41,11 @@ public class UpgradeKaleoClassNameAndKaleoClassPKs extends UpgradeProcess {
 	protected void upgradeKaleoClassNameAndKaleoClassPK(
 			String tableName, String kaleoClassName,
 			String kaleoClassPKOldColumn)
-		throws SQLException {
+		throws Exception {
+
+		if (!hasColumn(tableName, kaleoClassPKOldColumn)) {
+			return;
+		}
 
 		StringBundler updateScriptSB = new StringBundler(11);
 
