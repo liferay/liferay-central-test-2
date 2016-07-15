@@ -15,7 +15,6 @@
 package com.liferay.portal.workflow.kaleo.internal.upgrade;
 
 import com.liferay.portal.upgrade.registry.UpgradeStepRegistrator;
-import com.liferay.portal.workflow.kaleo.upgrade.v1_0_0.UpgradeKaleoClassNameAndKaleoClassPKs;
 import com.liferay.portal.workflow.kaleo.internal.upgrade.v1_0_0.UpgradeKaleoTaskInstanceToken;
 import com.liferay.portal.workflow.kaleo.internal.upgrade.v1_1_0.UpgradeWorkflowContext;
 import com.liferay.portal.workflow.kaleo.internal.upgrade.v1_2_1.UpgradeKaleoLog;
@@ -23,6 +22,7 @@ import com.liferay.portal.workflow.kaleo.internal.upgrade.v1_2_1.UpgradeKaleoNot
 import com.liferay.portal.workflow.kaleo.internal.upgrade.v1_3_0.UpgradeClassNames;
 import com.liferay.portal.workflow.kaleo.internal.upgrade.v1_3_0.UpgradeKaleoAction;
 import com.liferay.portal.workflow.kaleo.internal.upgrade.v1_3_0.UpgradeKaleoDefinition;
+import com.liferay.portal.workflow.kaleo.internal.upgrade.v1_3_2.UpgradeKaleoClassNameAndKaleoClassPKs;
 
 import org.osgi.service.component.annotations.Component;
 
@@ -35,14 +35,10 @@ public class KaleoServiceUpgrade implements UpgradeStepRegistrator {
 	@Override
 	public void register(Registry registry) {
 		registry.register(
-			"com.liferay.portal.workflow.kaleo.service", "0.0.1", "0.0.2",
+			"com.liferay.portal.workflow.kaleo.service", "0.0.1", "1.0.0",
 			new UpgradeKaleoTaskInstanceToken(),
 			new com.liferay.portal.workflow.kaleo.internal.upgrade.v1_0_0.
 				UpgradeSchema());
-
-		registry.register(
-			"com.liferay.portal.workflow.kaleo.service", "0.0.2", "1.0.0",
-			new UpgradeKaleoClassNameAndKaleoClassPKs());
 
 		registry.register(
 			"com.liferay.portal.workflow.kaleo.service", "1.0.0", "1.1.0",
@@ -66,6 +62,10 @@ public class KaleoServiceUpgrade implements UpgradeStepRegistrator {
 			"com.liferay.portal.workflow.kaleo.service", "1.3.0", "1.3.1",
 			new com.liferay.portal.workflow.kaleo.internal.upgrade.v1_3_1.
 				UpgradeSchema());
+
+		registry.register(
+			"com.liferay.portal.workflow.kaleo.service", "1.3.1", "1.3.2",
+			new UpgradeKaleoClassNameAndKaleoClassPKs());
 	}
 
 }

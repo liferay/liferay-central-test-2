@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.workflow.kaleo.upgrade.v1_0_0;
+package com.liferay.portal.workflow.kaleo.internal.upgrade.v1_3_2;
 
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.StringBundler;
