@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.liferay</groupId>
   <artifactId>com.liferay.source.formatter</artifactId>
-  <version>1.0.242</version>
+  <version>1.0.243</version>
   <licenses>
     <license>
       <name>LGPL 2.1</name>
@@ -53,6 +53,12 @@
       <artifactId>ant</artifactId>
       <version>1.9.4</version>
       <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>biz.aQute.bnd</groupId>
+      <artifactId>biz.aQute.bndlib</artifactId>
+      <version>3.1.0</version>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.liferay.portal</groupId>
