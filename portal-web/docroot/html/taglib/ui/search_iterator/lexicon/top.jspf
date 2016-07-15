@@ -34,7 +34,7 @@ if (rowChecker != null) {
 	<c:if test="<%= rowMover != null %>">
 
 		<%
-		String dragAndDropState = GetterUtil.getString(SessionClicks.get(request, namespace + id + "_searchContainerMove", null), StringPool.BLANK);
+		String dragAndDropState = GetterUtil.getString(SessionClicks.get(request, namespace + id + "_searchContainerMove", null));
 		%>
 
 		<div class="checkbox search-container-dd-toggle">
