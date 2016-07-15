@@ -22,7 +22,7 @@ import com.liferay.portal.workflow.kaleo.internal.upgrade.v1_2_1.UpgradeKaleoNot
 import com.liferay.portal.workflow.kaleo.internal.upgrade.v1_3_0.UpgradeClassNames;
 import com.liferay.portal.workflow.kaleo.internal.upgrade.v1_3_0.UpgradeKaleoAction;
 import com.liferay.portal.workflow.kaleo.internal.upgrade.v1_3_0.UpgradeKaleoDefinition;
-import com.liferay.portal.workflow.kaleo.internal.upgrade.v1_3_2.UpgradeKaleoClassNameAndKaleoClassPKs;
+import com.liferay.portal.workflow.kaleo.internal.upgrade.v1_3_2.UpgradeKaleoClassNameAndKaleoClassPK;
 
 import org.osgi.service.component.annotations.Component;
 
@@ -65,7 +65,7 @@ public class KaleoServiceUpgrade implements UpgradeStepRegistrator {
 
 		registry.register(
 			"com.liferay.portal.workflow.kaleo.service", "1.3.1", "1.3.2",
-			new UpgradeKaleoClassNameAndKaleoClassPKs());
+			new UpgradeKaleoClassNameAndKaleoClassPK());
 	}
 
 }
