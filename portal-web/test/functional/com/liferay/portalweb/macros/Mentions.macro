@@ -37,7 +37,7 @@
 
 		<execute function="AssertClick" locator1="MessageBoardsThread#MESSAGE_REPLY_1" value1="Reply to Main Thread" />
 
-		<execute function="Type#typeEditor" locator1="AlloyEditor#CONTENT_FIELD" value1="${threadBody} @${mentionsUserScreenName}" />
+		<execute function="Type#sendKeys" locator1="AlloyEditor#CONTENT_FIELD" value1="${threadBody} @${mentionsUserScreenName}" />
 
 		<execute function="SelectFrame#selectFrameTop" />
 
@@ -65,9 +65,7 @@
 
 		<execute function="Type" locator1="TextInput#SUBJECT" value1="${threadSubject}" />
 
-		<execute function="Type#typeEditor" locator1="AlloyEditor#CONTENT_FIELD" value1="${threadBody} @${mentionsUserScreenName}" />
-
-		<execute function="SelectFrame#selectFrameTop" />
+		<execute function="Type#sendKeys" locator1="AlloyEditor#CONTENT_FIELD" value1="@${mentionsUserScreenName}" />
 
 		<execute function="Click#clickNoMouseOver" locator1="Mentions#MENTIONS_USER_DISPLAY_OPTION" />
 
