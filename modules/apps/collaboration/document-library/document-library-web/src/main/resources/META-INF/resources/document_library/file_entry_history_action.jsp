@@ -17,8 +17,9 @@
 <%@ include file="/document_library/init.jsp" %>
 
 <%
-boolean allowActions = ParamUtil.getBoolean(request, "allowActions", true);
 String redirect = ParamUtil.getString(request, "redirect");
+
+boolean showHistoryActions = ParamUtil.getBoolean(request, "showHistoryActions", true);
 
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
@@ -41,7 +42,7 @@ FileEntry fileEntry = fileVersion.getFileEntry();
 		url="<%= DLUtil.getPreviewURL(fileEntry, fileVersion, themeDisplay, StringPool.BLANK) %>"
 	/>
 
-	<c:if test="<%= allowActions %>">
+	<c:if test="<%= showHistoryActions %>">
 		<portlet:renderURL var="viewFileVersionURL">
 			<portlet:param name="mvcRenderCommandName" value="/document_library/view_file_entry" />
 			<portlet:param name="redirect" value="<%= redirect %>" />
