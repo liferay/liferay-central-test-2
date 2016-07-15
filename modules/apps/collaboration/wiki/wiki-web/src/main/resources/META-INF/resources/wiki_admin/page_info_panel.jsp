@@ -35,7 +35,6 @@ WikiPageInfoPanelDisplayContext wikiPageInfoPanelDisplayContext = wikiDisplayCon
 					<li>
 						<liferay-util:include page="/wiki/subscribe.jsp" servletContext="<%= application %>" />
 					</li>
-
 					<li>
 						<liferay-util:include page="/wiki/page_action.jsp" servletContext="<%= application %>" />
 					</li>

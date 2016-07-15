@@ -32,7 +32,6 @@ WikiNodeInfoPanelDisplayContext wikiNodeInfoPanelDisplayContext = wikiDisplayCon
 				<li>
 					<liferay-util:include page="/wiki/subscribe.jsp" servletContext="<%= application %>" />
 				</li>
-
 				<li>
 					<liferay-util:include page="/wiki/node_action.jsp" servletContext="<%= application %>" />
 				</li>
