@@ -103,7 +103,7 @@ public class LPKGRevertOverwriteVerifyTest {
 				Version version = new Version(versionString);
 
 				Assert.assertEquals(
-					"Jar not sucessfully reverted: " + symbolicName,
+					"JAR not sucessfully reverted: " + symbolicName,
 					new Version(
 						version.getMajor(), version.getMinor(),
 						version.getMicro() - 1, version.getQualifier()),
@@ -113,14 +113,14 @@ public class LPKGRevertOverwriteVerifyTest {
 				String location = bundle.getLocation();
 
 				Assert.assertTrue(
-					"Static jar not sucessfully reverted: " + symbolicName,
+					"Static JAR not sucessfully reverted: " + symbolicName,
 					!location.contains("Static-Jar::"));
 			}
 			else if (wars.remove(symbolicName)) {
 				String location = bundle.getLocation();
 
 				Assert.assertTrue(
-					"War not sucessfully reverted: " + symbolicName,
+					"WAR not sucessfully reverted: " + symbolicName,
 					location.contains("lpkg://"));
 			}
 		}
@@ -149,10 +149,10 @@ public class LPKGRevertOverwriteVerifyTest {
 			});
 
 		Assert.assertTrue(
-			"Jars not reverted: " + jars.entrySet(), jars.isEmpty());
+			"JARs not reverted: " + jars.entrySet(), jars.isEmpty());
 		Assert.assertTrue(
-			"Static jars not reverted: " + statics, statics.isEmpty());
-		Assert.assertTrue("Wars not reverted: " + wars, wars.isEmpty());
+			"Static JARs not reverted: " + statics, statics.isEmpty());
+		Assert.assertTrue("WARs not reverted: " + wars, wars.isEmpty());
 
 		Files.delete(Paths.get(PropsValues.LIFERAY_HOME, "/overwrites"));
 	}
