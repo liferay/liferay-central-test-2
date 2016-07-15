@@ -29,21 +29,20 @@ public class UpgradeKaleoClassNameAndKaleoClassPK extends UpgradeProcess {
 	@Override
 	protected void doUpgrade() throws Exception {
 		upgradeKaleoClassNameAndKaleoClassPK(
-			"KaleoAction", KaleoNode.class.getName(), "kaleoNodeId");
+			"KaleoAction", "kaleoNodeId", KaleoNode.class.getName());
 		upgradeKaleoClassNameAndKaleoClassPK(
-			"KaleoLog", KaleoNode.class.getName(), "kaleoNodeId");
+			"KaleoLog", "kaleoNodeId", KaleoNode.class.getName());
 		upgradeKaleoClassNameAndKaleoClassPK(
-			"KaleoNotification", KaleoNode.class.getName(), "kaleoNodeId");
+			"KaleoNotification", "kaleoNodeId", KaleoNode.class.getName());
 		upgradeKaleoClassNameAndKaleoClassPK(
-			"KaleoTaskAssignment", KaleoTask.class.getName(), "kaleoTaskId");
+			"KaleoTaskAssignment", "kaleoTaskId", KaleoTask.class.getName());
 	}
 
 	protected void upgradeKaleoClassNameAndKaleoClassPK(
-			String tableName, String kaleoClassName,
-			String kaleoClassPKOldColumn)
+			String tableName, String columnName, String kaleoClassName)
 		throws Exception {
 
-		if (!hasColumn(tableName, kaleoClassPKOldColumn)) {
+		if (!hasColumn(tableName, columnName)) {
 			return;
 		}
 
@@ -52,12 +51,12 @@ public class UpgradeKaleoClassNameAndKaleoClassPK extends UpgradeProcess {
 		sb.append("update ");
 		sb.append(tableName);
 		sb.append(" set kaleoClassName = ?, kaleoClassPK = ");
-		sb.append(kaleoClassPKOldColumn);
+		sb.append(columnName);
 		sb.append(" where kaleoClassName is null and ");
 		sb.append("kaleoClassPK is null and ");
-		sb.append(kaleoClassPKOldColumn);
+		sb.append(columnName);
 		sb.append(" is not null and ");
-		sb.append(kaleoClassPKOldColumn);
+		sb.append(columnName);
 		sb.append(" > 0 ");
 
 		try (PreparedStatement ps = connection.prepareStatement(
