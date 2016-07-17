@@ -201,7 +201,7 @@ public final class ImageAdaptiveMediaProcessorImpl
 		ImageAdaptiveMediaConfigurationEntry configurationEntry) {
 
 		String relativePath = String.format(
-			"/adaptive/media/%d/%d/%d/%d/%d/%s/%s", fileVersion.getCompanyId(),
+			"adaptive/image/%d/%d/%d/%d/%d/%s/%s", fileVersion.getCompanyId(),
 			fileVersion.getGroupId(), fileVersion.getRepositoryId(),
 			fileVersion.getFileEntryId(), fileVersion.getFileVersionId(),
 			configurationEntry.getUUID(), _encode(fileVersion.getFileName()));
