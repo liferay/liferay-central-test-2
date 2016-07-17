@@ -81,7 +81,13 @@ public final class ImageAdaptiveMediaProcessorImpl
 		ImageAdaptiveMediaQueryBuilderImpl queryBuilder =
 			new ImageAdaptiveMediaQueryBuilderImpl();
 
-		queryBuilderFunction.apply(queryBuilder);
+		AdaptiveMediaQuery<FileVersion, ImageAdaptiveMediaProcessor> query =
+			queryBuilderFunction.apply(queryBuilder);
+
+		if (query != ImageAdaptiveMediaQueryBuilderImpl.QUERY) {
+			throw new IllegalArgumentException(
+				"Only queries built by the provided query build are valid.");
+		}
 
 		FileVersion fileVersion = queryBuilder.getFileVersion();
 

@@ -31,6 +31,11 @@ public class ImageAdaptiveMediaQueryBuilderImpl
 	implements ImageAdaptiveMediaQueryBuilder,
 	   ImageAdaptiveMediaQueryBuilder.AdaptiveMediaAttributeQueryBuilder {
 
+	public static final
+		AdaptiveMediaQuery<FileVersion, ImageAdaptiveMediaProcessor> QUERY =
+			new AdaptiveMediaQuery<FileVersion, ImageAdaptiveMediaProcessor>() {
+			};
+
 	@Override
 	public AdaptiveMediaQuery<FileVersion, ImageAdaptiveMediaProcessor>
 		allForModel(FileVersion fileVersion) {
@@ -41,12 +46,12 @@ public class ImageAdaptiveMediaQueryBuilderImpl
 
 		_fileVersion = fileVersion;
 
-		return null;
+		return QUERY;
 	}
 
 	@Override
 	public AdaptiveMediaQuery<FileVersion, ImageAdaptiveMediaProcessor> done() {
-		return null;
+		return QUERY;
 	}
 
 	@Override
