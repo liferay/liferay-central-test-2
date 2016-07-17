@@ -170,10 +170,6 @@ public final class ImageAdaptiveMediaProcessorImpl
 
 				Object requestedValue = entry.getValue();
 
-				if (requestedValue == null) {
-					continue;
-				}
-
 				Optional<?> value1Optional = adaptiveMedia1.getAttributeValue(
 					attribute);
 
