@@ -20,6 +20,8 @@ import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
 import com.liferay.adaptive.media.processor.AdaptiveMediaAttribute;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 
+import java.util.Optional;
+
 /**
  * @author Adolfo Pérez
  */
@@ -36,6 +38,10 @@ public interface ImageAdaptiveMediaQueryBuilder
 
 		public AdaptiveMediaQuery<FileVersion, ImageAdaptiveMediaProcessor>
 			done();
+
+		public <V> AdaptiveMediaAttributeQueryBuilder with(
+			AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, V> attribute,
+			Optional<V> valueOptional);
 
 		public <V> AdaptiveMediaAttributeQueryBuilder with(
 			AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, V> attribute,

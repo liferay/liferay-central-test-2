@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.repository.model.FileVersion;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * @author Adolfo Pérez
@@ -69,6 +70,20 @@ public class ImageAdaptiveMediaQueryBuilderImpl
 
 	public FileVersion getFileVersion() {
 		return _fileVersion;
+	}
+
+	public <V> AdaptiveMediaAttributeQueryBuilder with(
+		AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, V> attribute,
+		Optional<V> valueOptional) {
+
+		if (valueOptional == null) {
+			throw new IllegalArgumentException(
+				"Adaptive media attribute value optional cannot be null");
+		}
+
+		valueOptional.ifPresent(value -> _attributes.put(attribute, value));
+
+		return this;
 	}
 
 	@Override
