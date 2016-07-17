@@ -19,7 +19,7 @@ import com.liferay.portal.kernel.module.configuration.ConfigurationException;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 
 import java.util.Collection;
-import java.util.Collections;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -37,25 +37,25 @@ public class ImageAdaptiveMediaConfigurationHelper {
 	public Collection<ImageAdaptiveMediaConfigurationEntry>
 		getImageAdaptiveMediaConfigurationEntries(long companyId) {
 
-		try {
-			ImageAdaptiveMediaCompanyConfiguration companyConfiguration =
-				_configurationProvider.getCompanyConfiguration(
-					ImageAdaptiveMediaCompanyConfiguration.class, companyId);
+		Stream<ImageAdaptiveMediaConfigurationEntry> configurationEntryStream =
+			_getConfigurationEntries(companyId);
 
-			String[] imageVariants = companyConfiguration.imageVariants();
+		return configurationEntryStream.collect(Collectors.toList());
+	}
 
-			if (imageVariants == null) {
-				return Collections.emptyList();
-			}
+	public Optional<ImageAdaptiveMediaConfigurationEntry>
+		getImageAdaptiveMediaConfigurationEntry(
+			long companyId, String configurationEntryUUID) {
 
-			return Stream.of(imageVariants).
-				map(_configurationEntryParser::parse).
-				collect(Collectors.toList());
-		}
-		catch (ConfigurationException ce) {
-			throw new
-				AdaptiveMediaProcessorRuntimeException.InvalidConfiguration(ce);
-		}
+		Stream<ImageAdaptiveMediaConfigurationEntry> configurationEntryStream =
+			_getConfigurationEntries(companyId);
+
+		return configurationEntryStream.
+			filter(
+				configurationEntry ->
+					configurationEntryUUID.equals(
+						configurationEntry.getUUID())).
+			findFirst();
 	}
 
 	@Reference(unbind = "-")
@@ -70,6 +70,29 @@ public class ImageAdaptiveMediaConfigurationHelper {
 		ImageAdaptiveMediaConfigurationEntryParser configurationEntryParser) {
 
 		_configurationEntryParser = configurationEntryParser;
+	}
+
+	private Stream<ImageAdaptiveMediaConfigurationEntry>
+		_getConfigurationEntries(long companyId) {
+
+		try {
+			ImageAdaptiveMediaCompanyConfiguration companyConfiguration =
+				_configurationProvider.getCompanyConfiguration(
+					ImageAdaptiveMediaCompanyConfiguration.class, companyId);
+
+			String[] imageVariants = companyConfiguration.imageVariants();
+
+			if (imageVariants == null) {
+				return Stream.empty();
+			}
+
+			return Stream.of(imageVariants).
+				map(_configurationEntryParser::parse);
+		}
+		catch (ConfigurationException ce) {
+			throw new
+				AdaptiveMediaProcessorRuntimeException.InvalidConfiguration(ce);
+		}
 	}
 
 	private ImageAdaptiveMediaConfigurationEntryParser
