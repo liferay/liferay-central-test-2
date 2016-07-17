@@ -14,6 +14,7 @@
 
 package com.liferay.adaptive.media.image.internal.processor;
 
+import com.liferay.adaptive.media.finder.AdaptiveMediaQuery;
 import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaConfigurationHelper;
 import com.liferay.adaptive.media.image.internal.util.ImageProcessor;
@@ -137,6 +138,20 @@ public class ImageAdaptiveMediaProcessorImplTest {
 						ImageAdaptiveMediaAttribute.IMAGE_WIDTH),
 					Optional.of(200));
 			});
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testGetMediaAttributesWithNonBuilderQuery() {
+		_processor.getAdaptiveMedia(
+			queryBuilder ->
+				new AdaptiveMediaQuery
+					<FileVersion, ImageAdaptiveMediaProcessor>() {
+				});
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testGetMediaAttributesWithNullQuery() {
+		_processor.getAdaptiveMedia(queryBuilder -> null);
 	}
 
 	@Test(
@@ -422,6 +437,44 @@ public class ImageAdaptiveMediaProcessorImplTest {
 		Object[] adaptiveMediaArray = stream.toArray();
 
 		Assert.assertEquals(0, adaptiveMediaArray.length);
+	}
+
+	@Test
+	public void testMediaLazilyDelegatesOnStorageInputStream() {
+		ImageAdaptiveMediaConfigurationEntry configurationEntry =
+			new ImageAdaptiveMediaConfigurationEntry(
+				StringUtil.randomString(), StringUtil.randomString(),
+				MapUtil.fromArray("height", "100", "width", "200"));
+
+		Mockito.when(
+			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
+				Mockito.any(long.class))
+		).thenReturn(
+			Collections.singleton(configurationEntry)
+		);
+
+		Mockito.when(
+			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))
+		).thenReturn(
+			true
+		);
+
+		Mockito.when(
+			_fileVersion.getFileName()
+		).thenReturn(StringUtil.randomString());
+
+		Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> mediaStream =
+			_processor.getAdaptiveMedia(
+				queryBuilder -> queryBuilder.allForModel(_fileVersion));
+
+		AdaptiveMedia<ImageAdaptiveMediaProcessor> media =
+			mediaStream.findFirst().get();
+
+		media.getInputStream();
+
+		Mockito.verify(
+			_imageStorage
+		).getContentStream(_fileVersion, configurationEntry);
 	}
 
 	@Test

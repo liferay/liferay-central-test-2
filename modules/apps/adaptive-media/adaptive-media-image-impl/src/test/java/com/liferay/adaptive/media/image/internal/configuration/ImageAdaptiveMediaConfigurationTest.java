@@ -18,7 +18,9 @@ import com.liferay.adaptive.media.processor.AdaptiveMediaProcessorRuntimeExcepti
 import com.liferay.portal.kernel.module.configuration.ConfigurationException;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 
+import java.util.Collection;
 import java.util.Iterator;
+import java.util.Optional;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -64,6 +66,30 @@ public class ImageAdaptiveMediaConfigurationTest {
 		Assert.assertFalse(iterator.hasNext());
 	}
 
+	@Test
+	public void testExistantConfigurationEntry() throws Exception {
+		Mockito.when(
+			_configurationProvider.getCompanyConfiguration(
+				Mockito.eq(ImageAdaptiveMediaCompanyConfiguration.class),
+				Mockito.any(long.class))
+		).thenReturn(
+			_companyConfiguration
+		);
+
+		Mockito.when(
+			_companyConfiguration.imageVariants()
+		).thenReturn(
+			new String[] {"one:1:height=100;width=100"}
+		);
+
+		Optional<ImageAdaptiveMediaConfigurationEntry>
+			configurationEntryOptional =
+				_configurationHelper.getImageAdaptiveMediaConfigurationEntry(
+					1234, "1");
+
+		Assert.assertTrue(configurationEntryOptional.isPresent());
+	}
+
 	@Test(expected = IllegalArgumentException.class)
 	public void testInvalidConfiguration() throws Exception {
 		Mockito.when(
@@ -97,6 +123,53 @@ public class ImageAdaptiveMediaConfigurationTest {
 	}
 
 	@Test
+	public void testNonEmptyConfiguration() throws Exception {
+		Mockito.when(
+			_configurationProvider.getCompanyConfiguration(
+				Mockito.eq(ImageAdaptiveMediaCompanyConfiguration.class),
+				Mockito.any(long.class))
+		).thenReturn(
+			_companyConfiguration
+		);
+
+		Mockito.when(
+			_companyConfiguration.imageVariants()
+		).thenReturn(
+			new String[] {"one:1:height=100;width=100"}
+		);
+
+		Collection<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
+			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
+				1234);
+
+		Assert.assertFalse(configurationEntries.isEmpty());
+	}
+
+	@Test
+	public void testNonExistantConfigurationEntry() throws Exception {
+		Mockito.when(
+			_configurationProvider.getCompanyConfiguration(
+				Mockito.eq(ImageAdaptiveMediaCompanyConfiguration.class),
+				Mockito.any(long.class))
+		).thenReturn(
+			_companyConfiguration
+		);
+
+		Mockito.when(
+			_companyConfiguration.imageVariants()
+		).thenReturn(
+			new String[] {"one:1:height=100;width=100"}
+		);
+
+		Optional<ImageAdaptiveMediaConfigurationEntry>
+			configurationEntryOptional =
+				_configurationHelper.getImageAdaptiveMediaConfigurationEntry(
+					1234, "0");
+
+		Assert.assertFalse(configurationEntryOptional.isPresent());
+	}
+
+	@Test
 	public void testNullConfiguration() throws Exception {
 		Mockito.when(
 			_configurationProvider.getCompanyConfiguration(
@@ -112,14 +185,11 @@ public class ImageAdaptiveMediaConfigurationTest {
 			null
 		);
 
-		Iterable<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
-			_configurationHelper.
-				getImageAdaptiveMediaConfigurationEntries(1234);
+		Collection<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
+			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
+				1234);
 
-		Iterator<ImageAdaptiveMediaConfigurationEntry> iterator =
-			configurationEntries.iterator();
-
-		Assert.assertFalse(iterator.hasNext());
+		Assert.assertTrue(configurationEntries.isEmpty());
 	}
 
 	private final ImageAdaptiveMediaCompanyConfiguration _companyConfiguration =
