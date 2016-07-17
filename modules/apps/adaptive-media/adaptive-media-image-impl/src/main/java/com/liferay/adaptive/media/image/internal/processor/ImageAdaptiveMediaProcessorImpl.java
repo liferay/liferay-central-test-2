@@ -105,7 +105,7 @@ public final class ImageAdaptiveMediaProcessorImpl
 			map(
 				configurationEntry ->
 					_createMedia(fileVersion, configurationEntry)).
-					sorted(_buildComparator(queryBuilder.getAttributes()));
+			sorted(_buildComparator(queryBuilder.getAttributes()));
 	}
 
 	@Override
