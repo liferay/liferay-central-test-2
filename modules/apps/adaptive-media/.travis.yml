@@ -14,7 +14,7 @@ cache:
     - $HOME/.gradle/wrapper/
 
 script:
-- ./gradlew clean compileJava compileJSP compileTestJava test
+- ./gradlew clean compileJava compileJSP compileTestJava test && ! find . -type f -name 'TEST-*.xml' -exec grep -F '<failure' {} \+ > /dev/null
 
 after_success:
   - ./gradlew jacocoTestReport coveralls
