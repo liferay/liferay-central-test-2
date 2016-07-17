@@ -34,6 +34,17 @@ public class ImageAdaptiveMediaAttributeMapping {
 			attributes = new HashMap<>();
 
 		attributes.put(
+			AdaptiveMediaAttribute.contentLength(),
+			getAttributeValue(
+				properties, AdaptiveMediaAttribute.contentLength()));
+		attributes.put(
+			AdaptiveMediaAttribute.contentType(),
+			getAttributeValue(
+				properties, AdaptiveMediaAttribute.contentType()));
+		attributes.put(
+			AdaptiveMediaAttribute.fileName(),
+			getAttributeValue(properties, AdaptiveMediaAttribute.fileName()));
+		attributes.put(
 			ImageAdaptiveMediaAttribute.IMAGE_HEIGHT,
 			getAttributeValue(
 				properties, ImageAdaptiveMediaAttribute.IMAGE_HEIGHT));
@@ -48,7 +59,13 @@ public class ImageAdaptiveMediaAttributeMapping {
 	public <V> Optional<V> getAttributeValue(
 		AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, V> attribute) {
 
-		return (Optional<V>) _attributes.get(attribute);
+		Optional<V> valueOptional = (Optional<V>)_attributes.get(attribute);
+
+		if (valueOptional == null) {
+			return Optional.empty();
+		}
+
+		return valueOptional;
 	}
 
 	protected ImageAdaptiveMediaAttributeMapping(

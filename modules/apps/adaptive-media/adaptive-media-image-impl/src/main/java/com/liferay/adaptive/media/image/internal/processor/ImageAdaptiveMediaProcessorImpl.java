@@ -213,9 +213,28 @@ public final class ImageAdaptiveMediaProcessorImpl
 		FileVersion fileVersion,
 		ImageAdaptiveMediaConfigurationEntry configurationEntry) {
 
+		Map<String, String> properties = configurationEntry.getProperties();
+
+		AdaptiveMediaAttribute<Object, Integer> contentLengthAttribute =
+			AdaptiveMediaAttribute.contentLength();
+
+		properties.put(
+			contentLengthAttribute.getName(),
+			String.valueOf(fileVersion.getSize()));
+
+		AdaptiveMediaAttribute<Object, String> contentTypeAttribute =
+			AdaptiveMediaAttribute.contentType();
+
+		properties.put(
+			contentTypeAttribute.getName(), fileVersion.getMimeType());
+
+		AdaptiveMediaAttribute<Object, String> fileNameAttribute =
+			AdaptiveMediaAttribute.fileName();
+
+		properties.put(fileNameAttribute.getName(), fileVersion.getFileName());
+
 		ImageAdaptiveMediaAttributeMapping attributeMapping =
-			ImageAdaptiveMediaAttributeMapping.fromProperties(
-				configurationEntry.getProperties());
+			ImageAdaptiveMediaAttributeMapping.fromProperties(properties);
 
 		return new ImageAdaptiveMedia(
 			() -> _imageStorage.getContentStream(

@@ -34,6 +34,18 @@ import java.util.function.Function;
 @ProviderType
 public final class AdaptiveMediaAttribute<T, V> {
 
+	public static final <S> AdaptiveMediaAttribute<S, Integer> contentLength() {
+		return (AdaptiveMediaAttribute<S, Integer>)_CONTENT_LENGTH;
+	}
+
+	public static final <S> AdaptiveMediaAttribute<S, String> contentType() {
+		return (AdaptiveMediaAttribute<S, String>)_CONTENT_TYPE;
+	}
+
+	public static final <S> AdaptiveMediaAttribute<S, String> fileName() {
+		return (AdaptiveMediaAttribute<S, String>)_FILE_NAME;
+	}
+
 	public AdaptiveMediaAttribute(
 		String name, Function<String, V> converter,
 		BiFunction<V, V, Integer> distanceFunction) {
@@ -54,6 +66,20 @@ public final class AdaptiveMediaAttribute<T, V> {
 	public String getName() {
 		return _name;
 	}
+
+	private static final AdaptiveMediaAttribute<?, Integer> _CONTENT_LENGTH =
+		new AdaptiveMediaAttribute<>(
+			"content-length", Integer::parseInt, (i1, i2) -> Math.abs(i1 - i2));
+
+	private static final AdaptiveMediaAttribute<?, String> _CONTENT_TYPE =
+		new AdaptiveMediaAttribute<>(
+			"content-type", (s) -> s,
+			(s1, s2) -> s1.equals(s2) ? 0 : Integer.MAX_VALUE);
+
+	private static final AdaptiveMediaAttribute<?, String> _FILE_NAME =
+		new AdaptiveMediaAttribute<>(
+			"file-name", (s) -> s,
+			(s1, s2) -> s1.equals(s2) ? 0 : Integer.MAX_VALUE);
 
 	private final Function<String, V> _converter;
 	private final BiFunction<V, V, Integer> _distanceFunction;
