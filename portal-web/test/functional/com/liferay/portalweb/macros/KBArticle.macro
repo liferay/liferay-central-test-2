@@ -1488,7 +1488,6 @@
 	</command>
 
 	<command name="viewViaReadMoreLinkPG">
-		<execute function="AssertTextNotPresent" locator1="KnowledgeBase#DISPLAY_CHILD_CONTENT" value1="This last sentence of the child article should only be visible after clicking on Read More. " />
 		<execute function="AssertClick" locator1="KnowledgeBaseArticle#NEXT" value1="${kbArticleTitle}" />
 		<execute function="AssertTextPresent" locator1="KnowledgeBase#DISPLAY_CONTENT" value1="This last sentence of the child article should only be visible after clicking on Read More." />
 	</command>
