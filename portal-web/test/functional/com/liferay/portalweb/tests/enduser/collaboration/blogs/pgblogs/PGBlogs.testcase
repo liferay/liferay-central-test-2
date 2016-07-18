@@ -1262,6 +1262,7 @@
 
 		<execute macro="BlogsEntry#flagPG">
 			<var name="flagReason" value="Spam" />
+			<var name="siteName" value="${siteName}" />
 			<var method="TestPropsUtil#get('email.address.2')" name="userEmailAddress" />
 		</execute>
 
@@ -1277,11 +1278,11 @@
 		<execute macro="Gmail#viewMail">
 			<var name="emailFromUserName" value="Joe Bloggs" />
 			<var name="gmailAssetType" value="Inappropriate Content Flagged" />
-			<var name="gmailMailTableMessageTitle" value="Inappropriate Content Flagged in Liferay" />
-			<var name="gmailMessageBody" value="You are receiving this email because you are administrator of Liferay. Please review the content in this site." />
+			<var name="gmailMailTableMessageTitle" value="Inappropriate Content Flagged in ${siteName}" />
+			<var name="gmailMessageBody" value="You are receiving this email because you are administrator of ${siteName}. Please review the content in this site." />
 			<var name="gmailMessageBodyClosing" value="Sincerely" />
 			<var name="gmailMessageBodyGreeting" value="Dear userfn1 userln1," />
-			<var name="gmailMessageTitle" value="Inappropriate Content Flagged in Liferay" />
+			<var name="gmailMessageTitle" value="Inappropriate Content Flagged in ${siteName}" />
 		</execute>
 
 		<execute macro="Gmail#tearDown">
