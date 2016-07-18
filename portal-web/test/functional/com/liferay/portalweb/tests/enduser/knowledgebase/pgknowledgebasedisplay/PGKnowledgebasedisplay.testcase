@@ -1238,7 +1238,7 @@
 			<var name="kbArticleTitle" value="Knowledge Base Article Parent Title" />
 		</execute>
 
-		<execute macro="KBArticle#viewViaReadMoreLinkPG">
+		<execute macro="KBArticle#viewViaNextLinkPG">
 			<var name="kbArticleContent" value="This is a child article. Lengthy articles are no longer summarized on the KB Display portlet, and the Read More link has been deprecated. To access a child article, one must click on the parent article and then click on the child page link found either: under the article navigation, or under the parent article entry." />
 			<var name="kbArticleTitle" value="Knowledge Base Article Parent Title 1 Child 1" />
 		</execute>
