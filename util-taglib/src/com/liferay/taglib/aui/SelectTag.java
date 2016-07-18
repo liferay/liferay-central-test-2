@@ -148,8 +148,6 @@ public class SelectTag extends BaseSelectTag {
 			bean = pageContext.getAttribute("aui:model-context:bean");
 		}
 
-		Class<?> model = getModel();
-
 		String name = getName();
 
 		int pos = name.indexOf(StringPool.DOUBLE_DASH);
@@ -184,6 +182,8 @@ public class SelectTag extends BaseSelectTag {
 
 			listTypeFieldName = "typeId";
 		}
+
+		Class<?> model = getModel();
 
 		String title = getTitle();
 
