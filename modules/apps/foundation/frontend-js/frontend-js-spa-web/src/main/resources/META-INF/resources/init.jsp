@@ -19,6 +19,7 @@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
 
 <%@ page import="com.liferay.frontend.js.spa.web.internal.constants.SPAWebKeys" %><%@
 page import="com.liferay.frontend.js.spa.web.internal.servlet.taglib.util.SPAUtil" %><%@
+page import="com.liferay.portal.kernel.language.LanguageUtil" %><%@
 page import="com.liferay.portal.kernel.util.HtmlUtil" %>
 
 <liferay-theme:defineObjects />
@@ -35,7 +36,11 @@ SPAUtil spaUtil = (SPAUtil)request.getAttribute(SPAWebKeys.SPA_UTIL);
 	Liferay.SPA.excludedPaths = <%= spaUtil.getExcludedPaths() %>;
 	Liferay.SPA.loginRedirect = '<%= HtmlUtil.escapeJS(spaUtil.getLoginRedirect(request)) %>';
 	Liferay.SPA.requestTimeout = <%= spaUtil.getRequestTimeout() %>;
-	Liferay.SPA.userNotificationTimeout = <%= spaUtil.getUserNotificationTimeout() %>;
+	Liferay.SPA.userNotification = {
+		message: '<%= LanguageUtil.get(spaUtil.getLanguageResourceBundle(themeDisplay.getLocale()), "it-looks-like-this-is-taking-longer-than-expected") %>',
+		timeout: <%= spaUtil.getUserNotificationTimeout() %>,
+		title: '<%= LanguageUtil.get(spaUtil.getLanguageResourceBundle(themeDisplay.getLocale()), "oops") %>'
+	};
 
 	frontendJsSpaWebLiferayInitEs.default.init(
 		function(app) {
