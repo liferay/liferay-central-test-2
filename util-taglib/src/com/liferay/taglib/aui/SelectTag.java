@@ -161,7 +161,7 @@ public class SelectTag extends BaseSelectTag {
 		String field = getField();
 
 		if (Validator.isNull(field)) {
-			field = getName();
+			field = name;
 		}
 
 		String id = getId();
