@@ -562,8 +562,7 @@ public class UserGroupFinderImpl
 	}
 
 	private boolean _isFinderParam(String key) {
-		return ArrayUtil.contains(
-			UserGroupFinderConstants.PARAM_KEYS_USER_GROUP_FINDER, key);
+		return ArrayUtil.contains(UserGroupFinderConstants.PARAM_KEYS, key);
 	}
 
 }

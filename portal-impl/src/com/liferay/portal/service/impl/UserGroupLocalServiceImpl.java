@@ -1180,10 +1180,7 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 		}
 
 		for (String key : params.keySet()) {
-			if (ArrayUtil.contains(
-					UserGroupFinderConstants.PARAM_KEYS_USER_GROUP_FINDER,
-					key)) {
-
+			if (ArrayUtil.contains(UserGroupFinderConstants.PARAM_KEYS, key)) {
 				return true;
 			}
 		}
