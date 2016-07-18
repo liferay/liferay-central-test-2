@@ -78,7 +78,6 @@ if (fileEntryTypeId >= 0) {
 }
 
 boolean majorVersion = ParamUtil.getBoolean(request, "majorVersion");
-
 boolean updateVersionDetails = ParamUtil.getBoolean(request, "updateVersionDetails");
 
 long assetClassPK = 0;
