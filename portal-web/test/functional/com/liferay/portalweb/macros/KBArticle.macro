@@ -1487,7 +1487,7 @@
 		</if>
 	</command>
 
-	<command name="viewViaReadMoreLinkPG">
+	<command name="viewViaNextLinkPG">
 		<execute function="AssertClick" locator1="KnowledgeBaseArticle#NEXT" value1="${kbArticleTitle}" />
 		<execute function="AssertTextPresent" locator1="KnowledgeBase#DISPLAY_CONTENT" value1="${kbArticleContent}" />
 	</command>
