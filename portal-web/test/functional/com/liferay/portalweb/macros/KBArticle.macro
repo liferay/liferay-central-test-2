@@ -570,13 +570,6 @@
 		<execute function="AssertTextEquals" locator1="KnowledgeBase#ARTICLE_TABLE_ARTICLE_PRIORITY" value1="${kbNewPriority}" />
 	</command>
 
-	<command name="editKBArticlePriorityViaEnterKeyCP">
-		<var name="key_kbArticleTitle" value="${kbArticleTitle}" />
-
-		<execute function="Type" locator1="KnowledgeBase#ARTICLE_TABLE_ARTICLE_PRIORITY" value1="${kbNewPriority}" />
-		<execute function="KeyPress" locator1="KnowledgeBase#ARTICLE_TABLE_ARTICLE_PRIORITY" value1="\RETURN" />
-	</command>
-
 	<command name="editPGViaKBDisplay">
 		<var name="key_kbTool" value="Edit" />
 
