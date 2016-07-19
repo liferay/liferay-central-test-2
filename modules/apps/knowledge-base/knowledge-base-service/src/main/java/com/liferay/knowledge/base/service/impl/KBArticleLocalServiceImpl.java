@@ -1520,7 +1520,7 @@ public class KBArticleLocalServiceImpl extends KBArticleLocalServiceBaseImpl {
 			kbArticles = new ArrayList<>();
 		}
 
-		_doGetAllDescendantKBArticles(
+		_getAllDescendantKBArticles(
 			kbArticles, resourcePrimKey, status, orderByComparator);
 
 		return Collections.unmodifiableList(kbArticles);
@@ -2046,7 +2046,7 @@ public class KBArticleLocalServiceImpl extends KBArticleLocalServiceBaseImpl {
 	@BeanReference(type = PortletFileRepository.class)
 	protected PortletFileRepository portletFileRepository;
 
-	private void _doGetAllDescendantKBArticles(
+	private void _getAllDescendantKBArticles(
 		List<KBArticle> kbArticles, long resourcePrimKey, int status,
 		OrderByComparator<KBArticle> orderByComparator) {
 
@@ -2071,7 +2071,7 @@ public class KBArticleLocalServiceImpl extends KBArticleLocalServiceBaseImpl {
 		for (KBArticle curKBArticle : curKBArticles) {
 			kbArticles.add(curKBArticle);
 
-			_doGetAllDescendantKBArticles(
+			_getAllDescendantKBArticles(
 				kbArticles, curKBArticle.getResourcePrimKey(), status,
 				orderByComparator);
 		}
