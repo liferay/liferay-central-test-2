@@ -131,6 +131,7 @@ String searchContainerId = ParamUtil.getString(request, "searchContainerId");
 						%>
 
 						<liferay-ui:search-container-column-text>
+
 							<%
 							String articleImageURL = curArticle.getArticleImageURL(themeDisplay);
 							%>
