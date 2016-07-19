@@ -104,9 +104,10 @@ public class MBCommentManagerImplTest {
 		DiscussionComment discussionComment =
 			threadDiscussionCommentIterator.next();
 
-		int threadCommentsCount = discussionComment.getDescendantCommentsCount();
+		int descendantCommentsCount =
+			discussionComment.getDescendantCommentsCount();
 
-		Assert.assertEquals(2, threadCommentsCount);
+		Assert.assertEquals(2, descendantCommentsCount);
 	}
 
 	@Test
@@ -119,10 +120,10 @@ public class MBCommentManagerImplTest {
 		DiscussionComment rootDiscussionComment =
 			discussion.getRootDiscussionComment();
 
-		int threadCommentsCount =
+		int descendantCommentsCount =
 			rootDiscussionComment.getDescendantCommentsCount();
 
-		Assert.assertEquals(2, threadCommentsCount);
+		Assert.assertEquals(2, descendantCommentsCount);
 	}
 
 	private long _addComment() throws Exception {
