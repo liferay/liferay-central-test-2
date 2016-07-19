@@ -184,6 +184,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>DESCRIPTIVE_VIEW_CHILD_ARTICLE_DETAILS</td>
+	<td>//li[contains(.,'${key_kbArticleTitle}')]//a[contains(.,'Child Article')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td></td>
 	<td></td>
 	<td></td>

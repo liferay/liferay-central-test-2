@@ -619,6 +619,12 @@
 		<execute function="AssertClick" locator1="KnowledgeBaseSearch#SEARCH_BACK_BUTTON" value1="Back" />
 	</command>
 
+	<command name="gotoChildArticleDescriptiveDetails">
+		<var name="key_kbArticleTitle" value="${kbArticleTitle}" />
+
+		<execute function="AssertClick#assertPartialTextClickAt" locator1="KnowledgeBase#DESCRIPTIVE_VIEW_CHILD_ARTICLE_DETAILS" value1="Child Article" />
+	</command>
+
 	<command name="gotoCP">
 		<var name="key_kbArticleTitle" value="${kbArticleTitle}" />
 		<var name="key_rowEntry" value="${kbArticleTitle}" />
