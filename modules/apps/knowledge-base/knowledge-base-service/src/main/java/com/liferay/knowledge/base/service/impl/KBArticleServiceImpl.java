@@ -838,7 +838,7 @@ public class KBArticleServiceImpl extends KBArticleServiceBaseImpl {
 			kbArticles = new ArrayList<>();
 		}
 
-		_doGetAllDescendantKBArticles(
+		_getAllDescendantKBArticles(
 			kbArticles, groupId, resourcePrimKey, status, orderByComparator);
 
 		return Collections.unmodifiableList(kbArticles);
@@ -866,7 +866,7 @@ public class KBArticleServiceImpl extends KBArticleServiceBaseImpl {
 		}
 	}
 
-	private void _doGetAllDescendantKBArticles(
+	private void _getAllDescendantKBArticles(
 		List<KBArticle> kbArticles, long groupId, long resourcePrimKey,
 		int status, OrderByComparator<KBArticle> orderByComparator) {
 
@@ -891,7 +891,7 @@ public class KBArticleServiceImpl extends KBArticleServiceBaseImpl {
 		for (KBArticle curKBArticle : curKBArticles) {
 			kbArticles.add(curKBArticle);
 
-			_doGetAllDescendantKBArticles(
+			_getAllDescendantKBArticles(
 				kbArticles, groupId, curKBArticle.getResourcePrimKey(), status,
 				orderByComparator);
 		}
