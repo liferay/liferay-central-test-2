@@ -1117,6 +1117,14 @@
 			<var name="pageName" value="${pageName}" />
 		</execute>
 
+		<execute macro="Portlet#addPG">
+			<var name="portletName" value="${portletName}" />
+		</execute>
+
+		<execute macro="Navigator#gotoPage">
+			<var name="pageName" value="Message Boards Page" />
+		</execute>
+
 		<execute macro="MessageboardsCategory#addPG">
 			<var name="categoryName" value="MB Category Name" />
 		</execute>
