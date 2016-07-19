@@ -2112,15 +2112,6 @@
 		</execute>
 
 		<execute macro="KBArticle#gotoNextArticlePG">
-			<var name="kbDisplayNextArticle" value="Knowledge Base Article Parent Title 3" />
-		</execute>
-
-		<execute macro="KBArticle#viewViaKBDisplayPG">
-			<var name="kbArticleContent" value="Knowledge Base Article Parent Content 3" />
-			<var name="kbArticleTitle" value="Knowledge Base Article Parent Title 3" />
-		</execute>
-
-		<execute macro="KBArticle#gotoNextArticlePG">
 			<var name="kbDisplayNextArticle" value="Knowledge Base Article Parent Title 2" />
 		</execute>
 
@@ -2129,13 +2120,22 @@
 			<var name="kbArticleTitle" value="Knowledge Base Article Parent Title 2" />
 		</execute>
 
-		<execute macro="KBArticle#gotoPreviousArticle">
-			<var name="kbDisplayPreviousArticle" value="Knowledge Base Article Parent Title 3" />
+		<execute macro="KBArticle#gotoNextArticlePG">
+			<var name="kbDisplayNextArticle" value="Knowledge Base Article Parent Title 3" />
 		</execute>
 
 		<execute macro="KBArticle#viewViaKBDisplayPG">
 			<var name="kbArticleContent" value="Knowledge Base Article Parent Content 3" />
 			<var name="kbArticleTitle" value="Knowledge Base Article Parent Title 3" />
+		</execute>
+
+		<execute macro="KBArticle#gotoPreviousArticle">
+			<var name="kbDisplayPreviousArticle" value="Knowledge Base Article Parent Title 2" />
+		</execute>
+
+		<execute macro="KBArticle#viewViaKBDisplayPG">
+			<var name="kbArticleContent" value="Knowledge Base Article Parent Content 2" />
+			<var name="kbArticleTitle" value="Knowledge Base Article Parent Title 2" />
 		</execute>
 
 		<execute macro="KBArticle#gotoPreviousArticle">
