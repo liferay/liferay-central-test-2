@@ -32,10 +32,10 @@ public class CommentJSONWS {
 		setBody(discussionComment.getBody());
 		setCommentId(discussionComment.getCommentId());
 		setCreateDate(discussionComment.getCreateDate());
-		setModifiedDate(discussionComment.getModifiedDate());
-		setParentCommentId(discussionComment.getParentCommentId());
 		setDescendantCommentsCount(
 			discussionComment.getDescendantCommentsCount());
+		setModifiedDate(discussionComment.getModifiedDate());
+		setParentCommentId(discussionComment.getParentCommentId());
 		setUserId(discussionComment.getUserId());
 		setUserName(discussionComment.getUserName());
 	}
