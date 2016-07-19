@@ -1218,8 +1218,6 @@
 			<var method="TestPropsUtil#get('email.address.2')" name="userEmailAddress" />
 			<var method="TestPropsUtil#get('email.password.2')" name="userPassword" />
 		</execute>
-
-		<execute function="Open" locator1="http://localhost:8080" />
 	</command>
 
 	<command name="ViewMessageBoardsBannedUsers" priority="3">
