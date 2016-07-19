@@ -175,7 +175,7 @@
 </tr>
 <tr>
 	<td>DESCRIPTIVE_VIEW_ARTICLE_PRIORITY</td>
-	<td>//div[contains(.,'${key_kbArticleTitle}')]/h5/span[@class='kb-article-descriptive-details']</td>
+	<td>//div[contains(.,'${key_kbArticleTitle}')]/h5/span[@class='kb-descriptive-details' and contains(.,'Priority')]</td>
 	<td></td>
 </tr>
 <tr>
