@@ -1095,6 +1095,10 @@
 			<var name="userScreenName" value="usersn" />
 		</execute>
 
+		<execute macro="User#editEmailViaMyAccount">
+			<var method="TestPropsUtil#get('email.address.2')" name="userEmailAddress" />
+		</execute>
+
 		<execute macro="MessageboardsPortlet#configureMessageEmailFromCP">
 			<var method="TestPropsUtil#get('email.address.1')" name="emailFromAddress" />
 		</execute>
@@ -1150,7 +1154,7 @@
 
 		<execute macro="User#loginPG">
 			<var name="password" value="test" />
-			<var name="userEmailAddress" value="test@liferay.com" />
+			<var method="TestPropsUtil#get('email.address.2')" name="userEmailAddress" />
 		</execute>
 
 		<execute macro="Navigator#gotoPage">
