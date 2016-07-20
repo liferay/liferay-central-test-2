@@ -368,10 +368,9 @@ public class MessageLocalServiceImpl extends MessageLocalServiceBaseImpl {
 	}
 
 	protected String encode(String subject) {
-		byte ptext[] = subject.getBytes(StandardCharsets.ISO_8859_1);
-		String encodedString = new String(ptext, StandardCharsets.UTF_8);
+		byte bytes[] = subject.getBytes(StandardCharsets.ISO_8859_1);
 
-		return encodedString;
+		return new String(bytes, StandardCharsets.UTF_8);
 	}
 
 }
