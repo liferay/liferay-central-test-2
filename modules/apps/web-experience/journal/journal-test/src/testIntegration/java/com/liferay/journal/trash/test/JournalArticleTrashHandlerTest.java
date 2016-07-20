@@ -334,7 +334,6 @@ public class JournalArticleTrashHandlerTest
 			PortletFileRepositoryUtil.getPortletFileEntriesCount(
 				group.getGroupId(), folderId,
 				WorkflowConstants.STATUS_APPROVED));
-
 		Assert.assertEquals(
 			1,
 			PortletFileRepositoryUtil.getPortletFileEntriesCount(
