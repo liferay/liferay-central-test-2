@@ -350,7 +350,7 @@
 		</execute>
 	</command>
 
-	<command name="AddKBArticleWithSourceViaKBAdmin" priority="4">
+	<command name="AddKBArticleWithHTMLViaKBAdmin" priority="4">
 		<var name="kbArticleContentSource">
 			<![CDATA[<b>Knowledge Base&rsquo;s Article Content</b>]]>
 		</var>
