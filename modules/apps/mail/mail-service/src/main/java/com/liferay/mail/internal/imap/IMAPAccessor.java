@@ -409,7 +409,7 @@ public class IMAPAccessor {
 			List<MailFile> mailFiles)
 		throws PortalException {
 
-		Thread currentThread = Thread.currentThread(); 
+		Thread currentThread = Thread.currentThread();
 
 		currentThread.setContextClassLoader(Session.class.getClassLoader());
 
