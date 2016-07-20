@@ -12,14 +12,14 @@
  * details.
  */
 
-package com.liferay.social.activities.web.internal.constants;
+package com.liferay.social.activities.web.constants;
 
 /**
- * @author Adolfo Pérez
+ * @author Eudaldo Alonso
  */
-public class SocialActivitiesWebKeys {
+public class SocialActivitiesPortletKeys {
 
-	public static final String SOCIAL_ACTIVITIES_QUERY_HELPER =
-		"SOCIAL_ACTIVITIES_QUERY_HELPER";
+	public static final String SOCIAL_ACTIVITIES =
+		"com_liferay_social_activities_web_portlet_SocialActivitiesPortlet";
 
 }
