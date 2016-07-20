@@ -60,7 +60,7 @@ public class MessageLocalServiceImpl extends MessageLocalServiceBaseImpl {
 
 		Message message = messagePersistence.create(messageId);
 
-		subject = _forceEncoding(subject);
+		subject = encode(subject);
 
 		message.setCompanyId(user.getCompanyId());
 		message.setUserId(user.getUserId());
@@ -367,7 +367,7 @@ public class MessageLocalServiceImpl extends MessageLocalServiceBaseImpl {
 		return contentType.substring(0, i);
 	}
 
-	private String _forceEncoding(String subject) {
+	protected String encode(String subject) {
 		byte ptext[] = subject.getBytes(StandardCharsets.ISO_8859_1);
 		String encodedString = new String(ptext, StandardCharsets.UTF_8);
 
