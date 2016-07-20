@@ -42,7 +42,7 @@ public class BackgroundTaskDisplayFactoryUtil {
 	}
 
 	/**
-	 * @deprecated As of 7.1.0, replaced by {@link #_getBackgroundTaskDisplayFactory()}
+	 * @deprecated As of 7.0.0, replaced by {@link #_getBackgroundTaskDisplayFactory()}
 	 */
 	@Deprecated
 	public static BackgroundTaskDisplayFactory
