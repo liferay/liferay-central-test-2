@@ -125,6 +125,12 @@
 		<execute function="AssertTextEquals#assertPartialText" locator1="KnowledgeBaseSuggestions#STATUS" value1="${status}" />
 	</command>
 
+	<command name="viewSuggestionStatus">
+		<var name="key_kbSuggestionBody" value="${kbSuggestionBody}" />
+
+		<execute function="AssertTextEquals#assertPartialText" locator1="KnowledgeBaseSuggestions#STATUS" value1="${status}" />
+	</command>
+
 	<command name="viewSubmittedSuggestionCountNoPermissionPG">
 		<var name="kbSuggestionCount" value="${kbSuggestionCount}" />
 
