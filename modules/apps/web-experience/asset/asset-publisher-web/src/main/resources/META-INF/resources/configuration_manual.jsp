@@ -181,25 +181,25 @@ String eventName = "_" + HtmlUtil.escapeJS(assetPublisherDisplayContext.getPortl
 													url="javascript:;"
 												/>
 
-										<%
-										}
-										else {
-											ClassTypeReader classTypeReader = curRendererFactory.getClassTypeReader();
-											List<ClassType> assetAvailableClassTypes = classTypeReader.getAvailableClassTypes(PortalUtil.getCurrentAndAncestorSiteGroupIds(groupId), locale);
+											<%
+											}
+											else {
+												ClassTypeReader classTypeReader = curRendererFactory.getClassTypeReader();
+												List<ClassType> assetAvailableClassTypes = classTypeReader.getAvailableClassTypes(PortalUtil.getCurrentAndAncestorSiteGroupIds(groupId), locale);
 
-												for (ClassType assetAvailableClassType : assetAvailableClassTypes) {
-													assetBrowserURL.setParameter("subtypeSelectionId", String.valueOf(assetAvailableClassType.getClassTypeId()));
-													assetBrowserURL.setParameter("showNonindexable", String.valueOf(Boolean.TRUE));
-													assetBrowserURL.setParameter("showScheduled", String.valueOf(Boolean.TRUE));
+													for (ClassType assetAvailableClassType : assetAvailableClassTypes) {
+														assetBrowserURL.setParameter("subtypeSelectionId", String.valueOf(assetAvailableClassType.getClassTypeId()));
+														assetBrowserURL.setParameter("showNonindexable", String.valueOf(Boolean.TRUE));
+														assetBrowserURL.setParameter("showScheduled", String.valueOf(Boolean.TRUE));
 
-													data.put("href", assetBrowserURL.toString());
+														data.put("href", assetBrowserURL.toString());
 
-													String type = assetAvailableClassType.getName();
+														String type = assetAvailableClassType.getName();
 
-													data.put("destroyOnHide", true);
-													data.put("title", LanguageUtil.format(request, "select-x", type, false));
-													data.put("type", type);
-										%>
+														data.put("destroyOnHide", true);
+														data.put("title", LanguageUtil.format(request, "select-x", type, false));
+														data.put("type", type);
+											%>
 
 													<liferay-ui:icon
 														cssClass="asset-selector"

@@ -130,6 +130,7 @@ portletURL.setParameter("tabs3", "current-and-previous");
 
 						<div class="export-dialog-tree portlet-export-import-publish-processes">
 							<div class="container-fluid-1280">
+
 								<%
 								int incompleteBackgroundTaskCount = BackgroundTaskManagerUtil.getBackgroundTasksCount(StagingUtil.getStagingAndLiveGroupIds(themeDisplay.getScopeGroupId()), selPortlet.getPortletId(), BackgroundTaskExecutorNames.PORTLET_STAGING_BACKGROUND_TASK_EXECUTOR, false);
 								%>

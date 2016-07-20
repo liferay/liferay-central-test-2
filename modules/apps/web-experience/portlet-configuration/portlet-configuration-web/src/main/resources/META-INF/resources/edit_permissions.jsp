@@ -138,6 +138,7 @@ definePermissionsURL.setWindowState(LiferayWindowState.POP_UP);
 			</aui:nav-bar>
 
 			<div class="container-fluid-1280">
+
 				<%
 				boolean filterGroupRoles = !ResourceActionsUtil.isPortalModelResource(modelResource);
 
