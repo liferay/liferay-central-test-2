@@ -998,8 +998,6 @@
 		<execute function="AssertClick" locator1="MenuItem#SUBSCRIBE" value1="Subscribe" />
 
 		<execute macro="Alert#viewSuccessMessage" />
-
-		<execute function="AssertElementPresent" locator1="KnowledgeBase#LINK_UNSUBSCRIBE" />
 	</command>
 
 	<command name="tearDownCP">
