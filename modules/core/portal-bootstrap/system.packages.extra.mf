@@ -2778,7 +2778,7 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  l.search.filter",com.liferay.portal.kernel.search.facet.collector;ver
  sion="6.3.0",com.liferay.portal.kernel.search.facet.config;version="7
  .0.0";uses:="com.liferay.portal.kernel.json",com.liferay.portal.kerne
- l.search.facet.faceted.searcher;version="1.0.0";uses:="com.liferay.po
+ l.search.facet.faceted.searcher;version="1.1.0";uses:="com.liferay.po
  rtal.kernel.search",com.liferay.portal.kernel.search.facet.util;versi
  on="6.3.0";uses:="com.liferay.portal.kernel.search,com.liferay.portal
  .kernel.search.facet,com.liferay.portal.kernel.search.facet.config",c
