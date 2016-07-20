@@ -35,22 +35,22 @@ public class ImageAdaptiveMediaAttributeMapping {
 
 		attributes.put(
 			AdaptiveMediaAttribute.contentLength(),
-			getAttributeValue(
+			_getAttributeValue(
 				properties, AdaptiveMediaAttribute.contentLength()));
 		attributes.put(
 			AdaptiveMediaAttribute.contentType(),
-			getAttributeValue(
+			_getAttributeValue(
 				properties, AdaptiveMediaAttribute.contentType()));
 		attributes.put(
 			AdaptiveMediaAttribute.fileName(),
-			getAttributeValue(properties, AdaptiveMediaAttribute.fileName()));
+			_getAttributeValue(properties, AdaptiveMediaAttribute.fileName()));
 		attributes.put(
 			ImageAdaptiveMediaAttribute.IMAGE_HEIGHT,
-			getAttributeValue(
+			_getAttributeValue(
 				properties, ImageAdaptiveMediaAttribute.IMAGE_HEIGHT));
 		attributes.put(
 			ImageAdaptiveMediaAttribute.IMAGE_WIDTH,
-			getAttributeValue(
+			_getAttributeValue(
 				properties, ImageAdaptiveMediaAttribute.IMAGE_WIDTH));
 
 		return new ImageAdaptiveMediaAttributeMapping(attributes);
@@ -75,7 +75,7 @@ public class ImageAdaptiveMediaAttributeMapping {
 		_attributes = attributes;
 	}
 
-	private static <V> Optional<V> getAttributeValue(
+	private static <V> Optional<V> _getAttributeValue(
 		Map<String, String> properties,
 		AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, V> attribute) {
 
