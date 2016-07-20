@@ -324,6 +324,12 @@ public class MessageLocalServiceImpl extends MessageLocalServiceBaseImpl {
 		return message;
 	}
 
+	protected String encode(String subject) {
+		byte bytes[] = subject.getBytes(StandardCharsets.ISO_8859_1);
+
+		return new String(bytes, StandardCharsets.UTF_8);
+	}
+
 	protected String getBody(String body) {
 		if (Validator.isNull(body)) {
 			return body;
@@ -365,12 +371,6 @@ public class MessageLocalServiceImpl extends MessageLocalServiceBaseImpl {
 		}
 
 		return contentType.substring(0, i);
-	}
-
-	protected String encode(String subject) {
-		byte bytes[] = subject.getBytes(StandardCharsets.ISO_8859_1);
-
-		return new String(bytes, StandardCharsets.UTF_8);
 	}
 
 }
