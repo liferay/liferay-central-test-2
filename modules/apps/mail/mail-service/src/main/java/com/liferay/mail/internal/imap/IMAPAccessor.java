@@ -62,6 +62,7 @@ import javax.mail.Message.RecipientType;
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
 import javax.mail.Part;
+import javax.mail.Session;
 import javax.mail.Store;
 import javax.mail.Transport;
 import javax.mail.UIDFolder;
@@ -408,10 +409,11 @@ public class IMAPAccessor {
 			List<MailFile> mailFiles)
 		throws PortalException {
 
-		Folder jxFolder = null;
+		Thread currentThread = Thread.currentThread(); 
 
-		Thread.currentThread().setContextClassLoader(
-			javax.mail.Session.class.getClassLoader());
+		currentThread.setContextClassLoader(Session.class.getClassLoader());
+
+		Folder jxFolder = null;
 
 		try {
 			jxFolder = openFolder(_account.getSentFolderId());
@@ -438,7 +440,8 @@ public class IMAPAccessor {
 		}
 		finally {
 			closeFolder(jxFolder, false);
-			Thread.currentThread().setContextClassLoader(
+
+			currentThread.setContextClassLoader(
 				IMAPAccessor.class.getClassLoader());
 		}
 	}
