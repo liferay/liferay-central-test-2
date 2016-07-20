@@ -59,13 +59,7 @@ public class ImageAdaptiveMediaAttributeMapping {
 	public <V> Optional<V> getAttributeValue(
 		AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, V> attribute) {
 
-		Optional<V> valueOptional = (Optional<V>)_attributes.get(attribute);
-
-		if (valueOptional == null) {
-			return Optional.empty();
-		}
-
-		return valueOptional;
+		return (Optional<V>)_attributes.get(attribute);
 	}
 
 	protected ImageAdaptiveMediaAttributeMapping(
