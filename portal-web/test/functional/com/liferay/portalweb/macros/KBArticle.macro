@@ -1239,6 +1239,15 @@
 		</if>
 	</command>
 
+	<command name="viewCPWithHTML">
+		<var name="key_kbArticleTitle" value="${kbArticleTitle}" />
+		
+		<execute function="AssertClick" locator1="KnowledgeBase#DESCRIPTIVE_VIEW_ARTICLE_TITLE" value1="${kbArticleTitle}" />
+
+		<execute function="AssertTextEquals" locator1="KnowledgeBaseArticle#TITLE" value1="${kbArticleTitle}" />
+		<execute function="AssertTextEquals" locator1="KnowledgeBaseArticle#HTML_BOLD_CONTENT" value1="${kbArticleContent}" />
+	</command>
+
 	<command name="viewDefaultCP">
 		<execute function="AssertTextEquals#assertPartialText" locator1="Message#EMPTY_INFO" value1="No articles were found." />
 		<execute function="AssertElementNotPresent" locator1="KnowledgeBase#ARTICLE_TABLE_KB_GENERIC" />
