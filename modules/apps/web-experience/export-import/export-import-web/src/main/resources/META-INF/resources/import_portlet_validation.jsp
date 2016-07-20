@@ -29,18 +29,19 @@ String redirect = ParamUtil.getString(request, "redirect");
 </liferay-portlet:resourceURL>
 
 <aui:form action="<%= importPortletURL %>" cssClass="lfr-export-dialog" method="post" name="fm1">
+
 	<%
 	FileEntry fileEntry = ExportImportHelperUtil.getTempFileEntry(scopeGroupId, themeDisplay.getUserId(), ExportImportHelper.TEMP_FOLDER_NAME + selPortlet.getPortletId());
 	%>
 
-	<div class='lfr-dynamic-uploader <%= fileEntry == null ? "hide-dialog-footer" : StringPool.BLANK %>'>
+	<div class="lfr-dynamic-uploader <%= fileEntry == null ? "hide-dialog-footer" : StringPool.BLANK %>">
 		<div class="container-fluid-1280">
 			<div class="lfr-upload-container" id="<portlet:namespace />fileUpload"></div>
 		</div>
 	</div>
 
 	<aui:button-row>
-		<aui:button cssClass='btn-lg' name="continueButton" type="submit" value="continue" />
+		<aui:button cssClass="btn-lg" name="continueButton" type="submit" value="continue" />
 	</aui:button-row>
 
 	<%
