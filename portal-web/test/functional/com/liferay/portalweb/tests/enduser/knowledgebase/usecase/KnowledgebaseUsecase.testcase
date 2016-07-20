@@ -1948,14 +1948,29 @@
 
 		<execute macro="KBArticle#gotoSuggestionsNavigationPG" />
 
+		<execute macro="KBArticleSuggestion#viewSuggestionStatus">
+			<var name="kbSuggestionBody" value="${kbSuggestionBody}" />
+			<var name="status" value="New" />
+		</execute>
+
 		<execute macro="KBArticleSuggestion#moveToInProgressStatus">
 			<var name="kbArticleTitle" value="${kbArticleTitle}" />
 			<var name="kbSuggestionBody" value="${kbSuggestionBody}" />
 		</execute>
 
+		<execute macro="KBArticleSuggestion#viewSuggestionStatus">
+			<var name="kbSuggestionBody" value="${kbSuggestionBody}" />
+			<var name="status" value="In Progress" />
+		</execute>
+
 		<execute macro="KBArticleSuggestion#moveToResolvedStatus">
 			<var name="kbArticleTitle" value="${kbArticleTitle}" />
 			<var name="kbSuggestionBody" value="${kbSuggestionBody}" />
+		</execute>
+
+		<execute macro="KBArticleSuggestion#viewSuggestionStatus">
+			<var name="kbSuggestionBody" value="${kbSuggestionBody}" />
+			<var name="status" value="Resolved" />
 		</execute>
 
 		<execute macro="MockMock#viewMail">
