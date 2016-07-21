@@ -1303,26 +1303,29 @@ public class LayoutImportController implements ImportController {
 
 			BiPredicate<Version, Version> minorVersionBiPredicate =
 				(currentVersion, importVersion) -> {
+					int currentMinorVersion = GetterUtil.getInteger(
+						currentVersion.getMinor(), -1);
+					int importedMinorVersion = GetterUtil.getInteger(
+						importVersion.getMinor(), -1);
 
-				int currentMinorVersion = GetterUtil.getInteger(
-					currentVersion.getMinor(), -1);
-				int importedMinorVersion = GetterUtil.getInteger(
-					importVersion.getMinor(), -1);
+					if (((currentMinorVersion == -1) &&
+						 (importedMinorVersion == -1)) ||
+						(currentMinorVersion < importedMinorVersion)) {
 
-				if (((currentMinorVersion == -1) &&
-					 (importedMinorVersion == -1)) ||
-					(currentMinorVersion < importedMinorVersion)) {
+						return false;
+					}
 
-					return false;
-				}
-
-				return true;
-			};
+					return true;
+				};
 
 			BiPredicate<Version, Version> manifestVersionBiPredicate =
-				(currentVersion, importVersion) ->
-					majorVersionBiPredicate.and(minorVersionBiPredicate).test(
+				(currentVersion, importVersion) -> {
+					BiPredicate<Version, Version> versionBiPredicate =
+						majorVersionBiPredicate.and(minorVersionBiPredicate);
+
+					return versionBiPredicate.test(
 						currentVersion, importVersion);
+				};
 
 			Bundle bundle = FrameworkUtil.getBundle(
 				LayoutImportController.class);
