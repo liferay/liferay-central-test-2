@@ -16,6 +16,7 @@ package com.liferay.adaptive.media.web.internal.processor;
 
 import com.liferay.adaptive.media.processor.AdaptiveMedia;
 import com.liferay.adaptive.media.processor.AdaptiveMediaURLFactory;
+import com.liferay.adaptive.media.web.internal.constants.AdaptiveMediaWebConstants;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.StringPool;
 
@@ -37,7 +38,11 @@ public class DefaultAdaptiveMediaURLFactory implements AdaptiveMediaURLFactory {
 			pathModule += StringPool.SLASH;
 		}
 
-		URI moduleURI = URI.create(pathModule);
+		String servletPath =
+			pathModule + AdaptiveMediaWebConstants.SERVLET_PATH +
+				StringPool.SLASH;
+
+		URI moduleURI = URI.create(servletPath);
 		URI relativeURI = media.getRelativeURI();
 
 		return moduleURI.resolve(relativeURI);
