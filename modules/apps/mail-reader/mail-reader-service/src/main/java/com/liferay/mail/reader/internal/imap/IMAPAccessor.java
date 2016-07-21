@@ -801,8 +801,8 @@ public class IMAPAccessor {
 
 		Store store = _imapConnection.getStore(true);
 
-		com.liferay.mail.reader.model.Folder folder = FolderLocalServiceUtil.getFolder(
-			folderId);
+		com.liferay.mail.reader.model.Folder folder =
+			FolderLocalServiceUtil.getFolder(folderId);
 
 		return store.getFolder(folder.getFullName());
 	}
