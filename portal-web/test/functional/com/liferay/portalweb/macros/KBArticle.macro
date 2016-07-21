@@ -261,9 +261,13 @@
 			<isset var="emailFrom" />
 			<then>
 				<execute function="AssertClick" locator1="KnowledgeBaseConfiguration#NAVIGATION_TAB_EMAIL_FROM" value1="Email From" />
+
 				<execute function="Type" locator1="KnowledgeBaseConfiguration#EMAIL_FROM_NAME_FIELD" value1="${userName}" />
+				
 				<execute function="Type" locator1="KnowledgeBaseConfiguration#EMAIL_FROM_ADDRESS_FIELD" value1="${userEmailAddress}" />
+				
 				<execute macro="Button#clickSave" />
+				
 				<execute macro="Alert#viewSuccessMessage" />
 			</then>
 		</if>
@@ -272,11 +276,17 @@
 			<isset var="suggestionReceived" />
 			<then>
 				<execute function="AssertClick" locator1="KnowledgeBaseConfiguration#NAVIGATION_TAB_SUGGESTION_RECEIVED" value1="Suggestion Received Email" />
+				
 				<execute function="SelectFrame" locator1="KnowledgeBaseConfiguration#SUGGESTION_RECEIVED_EMAIL_EDITOR_IFRAME" />
+				
 				<execute function="Type" locator1="CKEditor#BODY" value1="[$COMMENT_CREATE_DATE$] &lt;a href=&quot;[$ARTICLE_URL$]&quot;&gt;View your received suggestion here&lt;/a&gt;" />
+				
 				<execute function="SelectFrame" value1="relative=top" />
+				
 				<execute function="SelectFrame" locator1="KnowledgeBaseConfiguration#IFRAME" />
+				
 				<execute macro="Button#clickSave" />
+				
 				<execute macro="Alert#viewSuccessMessage" />
 			</then>
 		</if>
@@ -285,11 +295,17 @@
 			<isset var="suggestionInProgress" />
 			<then>
 				<execute function="AssertClick" locator1="KnowledgeBaseConfiguration#NAVIGATION_TAB_SUGGESTION_IN_PROGRESS" value1="Suggestion in Progress Email" />
+				
 				<execute function="SelectFrame" locator1="KnowledgeBaseConfiguration#SUGGESTION_IN_PROGRESS_EMAIL_EDITOR_IFRAME" />
+				
 				<execute function="Type" locator1="CKEditor#BODY" value1="[$COMMENT_CREATE_DATE$] &lt;a href=&quot;[$ARTICLE_URL$]&quot;&gt;View your suggestion that is in progress here&lt;/a&gt;" />
+				
 				<execute function="SelectFrame" value1="relative=top" />
+				
 				<execute function="SelectFrame" locator1="KnowledgeBaseConfiguration#IFRAME" />
+				
 				<execute macro="Button#clickSave" />
+				
 				<execute macro="Alert#viewSuccessMessage" />
 			</then>
 		</if>
@@ -298,11 +314,17 @@
 			<isset var="suggestionResolved" />
 			<then>
 				<execute function="AssertClick" locator1="KnowledgeBaseConfiguration#NAVIGATION_TAB_SUGGESTION_RESOLVED" value1="Suggestion Resolved Email" />
+				
 				<execute function="SelectFrame" locator1="KnowledgeBaseConfiguration#SUGGESTION_RESOLVED_EMAIL_EDITOR_IFRAME" />
+				
 				<execute function="Type" locator1="CKEditor#BODY" value1="[$COMMENT_CREATE_DATE$] &lt;a href=&quot;[$ARTICLE_URL$]&quot;&gt;View your resolved suggestion here&lt;/a&gt;" />
+				
 				<execute function="SelectFrame" value1="relative=top" />
+				
 				<execute function="SelectFrame" locator1="KnowledgeBaseConfiguration#IFRAME" />
+				
 				<execute macro="Button#clickSave" />
+				
 				<execute macro="Alert#viewSuccessMessage" />
 			</then>
 		</if>
