@@ -30,9 +30,10 @@ public interface ImageAdaptiveMediaQueryBuilder
 		<FileVersion, ImageAdaptiveMediaProcessor> {
 
 	public AdaptiveMediaQuery<FileVersion, ImageAdaptiveMediaProcessor>
-		allForModel(FileVersion fileVersion);
+		allForVersion(FileVersion fileVersion);
 
-	public AdaptiveMediaAttributeQueryBuilder forModel(FileVersion fileVersion);
+	public AdaptiveMediaAttributeQueryBuilder forVersion(
+		FileVersion fileVersion);
 
 	public interface AdaptiveMediaAttributeQueryBuilder {
 

@@ -124,7 +124,7 @@ public class ImageAdaptiveMediaProcessorImplTest {
 
 		Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> stream =
 			_processor.getAdaptiveMedia(
-				queryBuilder -> queryBuilder.allForModel(_fileVersion));
+				queryBuilder -> queryBuilder.allForVersion(_fileVersion));
 
 		stream.forEach(
 			adaptiveMedia -> {
@@ -172,7 +172,7 @@ public class ImageAdaptiveMediaProcessorImplTest {
 		);
 
 		_processor.getAdaptiveMedia(
-			queryBuilder -> queryBuilder.allForModel(_fileVersion));
+			queryBuilder -> queryBuilder.allForVersion(_fileVersion));
 	}
 
 	@Test
@@ -200,7 +200,7 @@ public class ImageAdaptiveMediaProcessorImplTest {
 
 		Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> stream =
 			_processor.getAdaptiveMedia(
-				queryBuilder -> queryBuilder.allForModel(_fileVersion));
+				queryBuilder -> queryBuilder.allForVersion(_fileVersion));
 
 		stream.forEach(
 			adaptiveMedia ->
@@ -223,7 +223,7 @@ public class ImageAdaptiveMediaProcessorImplTest {
 
 		Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> stream =
 			_processor.getAdaptiveMedia(
-				queryBuilder -> queryBuilder.allForModel(_fileVersion));
+				queryBuilder -> queryBuilder.allForVersion(_fileVersion));
 
 		stream.forEach(
 			adaptiveMedia -> {
@@ -274,7 +274,7 @@ public class ImageAdaptiveMediaProcessorImplTest {
 			_processor.getAdaptiveMedia(
 				queryBuilder ->
 					queryBuilder.
-						forModel(_fileVersion).
+						forVersion(_fileVersion).
 						with(ImageAdaptiveMediaAttribute.IMAGE_HEIGHT, 100).
 						done());
 
@@ -335,7 +335,7 @@ public class ImageAdaptiveMediaProcessorImplTest {
 			_processor.getAdaptiveMedia(
 				queryBuilder ->
 					queryBuilder.
-						forModel(_fileVersion).
+						forVersion(_fileVersion).
 						with(ImageAdaptiveMediaAttribute.IMAGE_HEIGHT, 200).
 						done());
 
@@ -396,7 +396,7 @@ public class ImageAdaptiveMediaProcessorImplTest {
 			_processor.getAdaptiveMedia(
 				queryBuilder ->
 					queryBuilder.
-						forModel(_fileVersion).
+						forVersion(_fileVersion).
 						with(ImageAdaptiveMediaAttribute.IMAGE_WIDTH, 100).
 						done());
 
@@ -432,7 +432,7 @@ public class ImageAdaptiveMediaProcessorImplTest {
 
 		Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> stream =
 			_processor.getAdaptiveMedia(
-				queryBuilder -> queryBuilder.allForModel(_fileVersion));
+				queryBuilder -> queryBuilder.allForVersion(_fileVersion));
 
 		Object[] adaptiveMediaArray = stream.toArray();
 
@@ -465,7 +465,7 @@ public class ImageAdaptiveMediaProcessorImplTest {
 
 		Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> mediaStream =
 			_processor.getAdaptiveMedia(
-				queryBuilder -> queryBuilder.allForModel(_fileVersion));
+				queryBuilder -> queryBuilder.allForVersion(_fileVersion));
 
 		AdaptiveMedia<ImageAdaptiveMediaProcessor> media =
 			mediaStream.findFirst().get();

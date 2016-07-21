@@ -96,7 +96,7 @@ public class ImageAdaptiveMediaRequestHandler
 				_finder.getAdaptiveMedia(
 					queryBuilder ->
 						queryBuilder.
-							forModel(fileVersion).
+							forVersion(fileVersion).
 							with(
 								ImageAdaptiveMediaAttribute.IMAGE_HEIGHT,
 								attributeMapping.getAttributeValue(

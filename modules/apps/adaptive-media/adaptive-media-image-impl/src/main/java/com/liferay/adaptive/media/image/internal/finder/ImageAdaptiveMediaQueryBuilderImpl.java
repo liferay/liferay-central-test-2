@@ -38,7 +38,7 @@ public class ImageAdaptiveMediaQueryBuilderImpl
 
 	@Override
 	public AdaptiveMediaQuery<FileVersion, ImageAdaptiveMediaProcessor>
-		allForModel(FileVersion fileVersion) {
+		allForVersion(FileVersion fileVersion) {
 
 		if (fileVersion == null) {
 			throw new IllegalArgumentException("File version cannot be null");
@@ -55,7 +55,7 @@ public class ImageAdaptiveMediaQueryBuilderImpl
 	}
 
 	@Override
-	public AdaptiveMediaAttributeQueryBuilder forModel(
+	public AdaptiveMediaAttributeQueryBuilder forVersion(
 		FileVersion fileVersion) {
 
 		if (fileVersion == null) {

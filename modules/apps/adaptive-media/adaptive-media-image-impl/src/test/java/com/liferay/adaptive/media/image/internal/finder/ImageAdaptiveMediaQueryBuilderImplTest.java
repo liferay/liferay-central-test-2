@@ -37,7 +37,7 @@ public class ImageAdaptiveMediaQueryBuilderImplTest {
 		FileVersion fileVersion = Mockito.mock(FileVersion.class);
 
 		_queryBuilder.
-			forModel(fileVersion).
+			forVersion(fileVersion).
 			with(ImageAdaptiveMediaAttribute.IMAGE_HEIGHT, Optional.of(100));
 
 		Map<AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, ?>, Object>
@@ -52,18 +52,18 @@ public class ImageAdaptiveMediaQueryBuilderImplTest {
 		FileVersion fileVersion = Mockito.mock(FileVersion.class);
 
 		_queryBuilder.
-			forModel(fileVersion).
+			forVersion(fileVersion).
 			with(ImageAdaptiveMediaAttribute.IMAGE_HEIGHT, (Integer)null);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testNullFileVersionFailsWhenQueryingAll() {
-		_queryBuilder.allForModel(null);
+		_queryBuilder.allForVersion(null);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testNullFileVersionFailsWhenQueryingAttributes() {
-		_queryBuilder.forModel(null);
+		_queryBuilder.forVersion(null);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -71,7 +71,7 @@ public class ImageAdaptiveMediaQueryBuilderImplTest {
 		FileVersion fileVersion = Mockito.mock(FileVersion.class);
 
 		_queryBuilder.
-			forModel(fileVersion).
+			forVersion(fileVersion).
 			with(
 				ImageAdaptiveMediaAttribute.IMAGE_HEIGHT,
 				(Optional<Integer>)null);
