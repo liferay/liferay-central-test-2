@@ -201,10 +201,9 @@ public final class ImageAdaptiveMediaProcessorImpl
 		ImageAdaptiveMediaConfigurationEntry configurationEntry) {
 
 		String relativePath = String.format(
-			"image/%d/%d/%d/%d/%d/%s/%s", fileVersion.getCompanyId(),
-			fileVersion.getGroupId(), fileVersion.getRepositoryId(),
-			fileVersion.getFileEntryId(), fileVersion.getFileVersionId(),
-			configurationEntry.getUUID(), _encode(fileVersion.getFileName()));
+			"image/%d/%d/%s/%s", fileVersion.getFileEntryId(),
+			fileVersion.getFileVersionId(), configurationEntry.getUUID(),
+			_encode(fileVersion.getFileName()));
 
 		return URI.create(relativePath);
 	}
