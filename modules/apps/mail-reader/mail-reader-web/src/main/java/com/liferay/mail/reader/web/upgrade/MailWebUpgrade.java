@@ -55,10 +55,12 @@ public class MailWebUpgrade implements UpgradeStepRegistrator {
 		}
 
 		registry.register(
-			"com.liferay.mail.reader.web", "0.0.0", "1.0.0", new DummyUpgradeStep());
+			"com.liferay.mail.reader.web", "0.0.0", "1.0.0",
+			new DummyUpgradeStep());
 
 		registry.register(
-			"com.liferay.mail.reader.web", "0.0.1", "1.0.0", new UpgradePortletId());
+			"com.liferay.mail.reader.web", "0.0.1", "1.0.0",
+			new UpgradePortletId());
 	}
 
 	@Reference(target = ModuleServiceLifecycle.PORTAL_INITIALIZED, unbind = "-")
