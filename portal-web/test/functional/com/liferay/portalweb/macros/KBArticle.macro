@@ -77,7 +77,7 @@
 			</else>
 		</if>
 
-		<execute function="Type#sendKeys" locator1="AlloyEditor#TITLE_FIELD" value1="${kbArticleTitle}" />
+		<execute function="Type#typeEditor" locator1="AlloyEditor#TITLE_FIELD" value1="${kbArticleTitle}" />
 
 		<execute macro="Panel#expandPanel">
 			<var name="panelHeading" value="Configuration" />
