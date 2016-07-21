@@ -1274,9 +1274,9 @@ public class LayoutImportController implements ImportController {
 			throw new LARFileException(e);
 		}
 
-		Element headerElement = rootElement.element("header");
+		// Bundle compatibility
 
-		// Export Import bundle compatibility
+		Element headerElement = rootElement.element("header");
 
 		int importBuildNumber = GetterUtil.getInteger(
 			headerElement.attributeValue("build-number"));
@@ -1296,12 +1296,12 @@ public class LayoutImportController implements ImportController {
 			}
 		}
 		else {
-			BiPredicate<Version, Version> majorVersionPredicate =
+			BiPredicate<Version, Version> majorVersionBiPredicate =
 				(Version currentVersion, Version importVersion) ->
 					Objects.equals(
 						currentVersion.getMajor(), importVersion.getMajor());
 
-			BiPredicate<Version, Version> minorVersionPredicate =
+			BiPredicate<Version, Version> minorVersionBiPredicate =
 				(Version currentVersion, Version importVersion) -> {
 
 				int currentMinorVersion = GetterUtil.getInteger(
@@ -1319,20 +1319,20 @@ public class LayoutImportController implements ImportController {
 				return true;
 			};
 
-			BiPredicate<Version, Version> manifestVersionPredicate =
+			BiPredicate<Version, Version> manifestVersionBiPredicate =
 				(Version currentVersion, Version importVersion) ->
-					majorVersionPredicate.and(minorVersionPredicate).test(
+					majorVersionBiPredicate.and(minorVersionBiPredicate).test(
 						currentVersion, importVersion);
 
 			Bundle bundle = FrameworkUtil.getBundle(
 				LayoutImportController.class);
 
-			String currentBundleVersion = bundle.getVersion().toString();
+			String currentBundleVersion = String.valueOf(bundle.getVersion());
 
 			String importBundleVersion = GetterUtil.getString(
 				headerElement.attributeValue("bundle-version"), "3.0.0");
 
-			if (!manifestVersionPredicate.test(
+			if (!manifestVersionBiPredicate.test(
 					Version.getInstance(currentBundleVersion),
 					Version.getInstance(importBundleVersion))) {
 
