@@ -1,4 +1,4 @@
-Bundle-Name: Liferay Mail Service
+Bundle-Name: Liferay Mail Reader Service
 Bundle-SymbolicName: com.liferay.mail.reader.service
 Bundle-Version: 1.0.0
 Export-Package:\
