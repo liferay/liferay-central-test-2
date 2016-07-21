@@ -162,7 +162,7 @@ public class LiferaySeleniumHelper {
 		if (!pattern.equals(confirmation)) {
 			throw new Exception(
 				"Expected text \"" + pattern +
-					"\" does not match actual text\"" + confirmation + "\"");
+					"\" does not match actual text \"" + confirmation + "\"");
 		}
 	}
 
@@ -607,7 +607,7 @@ public class LiferaySeleniumHelper {
 
 			throw new Exception(
 				"Expected text \"" + pattern +
-					"\" does not match actual text\"" + text + "\" at \"" +
+					"\" does not match actual text \"" + text + "\" at \"" +
 						selectLocator + "\"");
 		}
 	}
@@ -623,7 +623,7 @@ public class LiferaySeleniumHelper {
 
 			throw new Exception(
 				"Expected text \"" + pattern +
-					"\" does not match actual text\"" + text + "\" at \"" +
+					"\" does not match actual text \"" + text + "\" at \"" +
 						locator + "\"");
 		}
 	}
@@ -657,7 +657,7 @@ public class LiferaySeleniumHelper {
 
 			throw new Exception(
 				"Expected text \"" + pattern +
-					"\" does not match actual text\"" + value + "\" at \"" +
+					"\" does not match actual text \"" + value + "\" at \"" +
 						locator + "\"");
 		}
 	}
