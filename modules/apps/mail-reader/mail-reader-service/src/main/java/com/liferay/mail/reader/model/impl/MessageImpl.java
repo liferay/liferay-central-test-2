@@ -12,10 +12,10 @@
  * details.
  */
 
-package com.liferay.mail.model.impl;
+package com.liferay.mail.reader.model.impl;
 
-import com.liferay.mail.model.Attachment;
-import com.liferay.mail.service.AttachmentLocalServiceUtil;
+import com.liferay.mail.reader.model.Attachment;
+import com.liferay.mail.reader.service.AttachmentLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.User;

@@ -2,11 +2,11 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping auto-import="false" default-lazy="false">
-	<import class="com.liferay.mail.model.Account" />
-	<import class="com.liferay.mail.model.Attachment" />
-	<import class="com.liferay.mail.model.Folder" />
-	<import class="com.liferay.mail.model.Message" />
-	<class name="com.liferay.mail.model.impl.AccountImpl" table="Mail_Account">
+	<import class="com.liferay.mail.reader.model.Account" />
+	<import class="com.liferay.mail.reader.model.Attachment" />
+	<import class="com.liferay.mail.reader.model.Folder" />
+	<import class="com.liferay.mail.reader.model.Message" />
+	<class name="com.liferay.mail.reader.model.impl.AccountImpl" table="Mail_Account">
 		<id name="accountId" type="long">
 			<generator class="assigned" />
 		</id>
@@ -36,7 +36,7 @@
 		<property name="trashFolderId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="defaultSender" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 	</class>
-	<class name="com.liferay.mail.model.impl.AttachmentImpl" table="Mail_Attachment">
+	<class name="com.liferay.mail.reader.model.impl.AttachmentImpl" table="Mail_Attachment">
 		<id name="attachmentId" type="long">
 			<generator class="assigned" />
 		</id>
@@ -49,7 +49,7 @@
 		<property name="fileName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property column="size_" name="size" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
-	<class name="com.liferay.mail.model.impl.FolderImpl" table="Mail_Folder">
+	<class name="com.liferay.mail.reader.model.impl.FolderImpl" table="Mail_Folder">
 		<id name="folderId" type="long">
 			<generator class="assigned" />
 		</id>
@@ -63,7 +63,7 @@
 		<property name="displayName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="remoteMessageCount" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 	</class>
-	<class name="com.liferay.mail.model.impl.MessageImpl" table="Mail_Message">
+	<class name="com.liferay.mail.reader.model.impl.MessageImpl" table="Mail_Message">
 		<id name="messageId" type="long">
 			<generator class="assigned" />
 		</id>

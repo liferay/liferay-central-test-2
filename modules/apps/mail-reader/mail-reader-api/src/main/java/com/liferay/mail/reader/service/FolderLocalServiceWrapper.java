@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.mail.service;
+package com.liferay.mail.reader.service;
 
 import aQute.bnd.annotation.ProviderType;
 
@@ -39,13 +39,13 @@ public class FolderLocalServiceWrapper implements FolderLocalService,
 	* @return the folder that was added
 	*/
 	@Override
-	public com.liferay.mail.model.Folder addFolder(
-		com.liferay.mail.model.Folder folder) {
+	public com.liferay.mail.reader.model.Folder addFolder(
+		com.liferay.mail.reader.model.Folder folder) {
 		return _folderLocalService.addFolder(folder);
 	}
 
 	@Override
-	public com.liferay.mail.model.Folder addFolder(long userId, long accountId,
+	public com.liferay.mail.reader.model.Folder addFolder(long userId, long accountId,
 		java.lang.String fullName, java.lang.String displayName,
 		int remoteMessageCount)
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -60,7 +60,7 @@ public class FolderLocalServiceWrapper implements FolderLocalService,
 	* @return the new folder
 	*/
 	@Override
-	public com.liferay.mail.model.Folder createFolder(long folderId) {
+	public com.liferay.mail.reader.model.Folder createFolder(long folderId) {
 		return _folderLocalService.createFolder(folderId);
 	}
 
@@ -72,8 +72,8 @@ public class FolderLocalServiceWrapper implements FolderLocalService,
 	* @throws PortalException
 	*/
 	@Override
-	public com.liferay.mail.model.Folder deleteFolder(
-		com.liferay.mail.model.Folder folder)
+	public com.liferay.mail.reader.model.Folder deleteFolder(
+		com.liferay.mail.reader.model.Folder folder)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _folderLocalService.deleteFolder(folder);
 	}
@@ -86,18 +86,18 @@ public class FolderLocalServiceWrapper implements FolderLocalService,
 	* @throws PortalException if a folder with the primary key could not be found
 	*/
 	@Override
-	public com.liferay.mail.model.Folder deleteFolder(long folderId)
+	public com.liferay.mail.reader.model.Folder deleteFolder(long folderId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _folderLocalService.deleteFolder(folderId);
 	}
 
 	@Override
-	public com.liferay.mail.model.Folder fetchFolder(long folderId) {
+	public com.liferay.mail.reader.model.Folder fetchFolder(long folderId) {
 		return _folderLocalService.fetchFolder(folderId);
 	}
 
 	@Override
-	public com.liferay.mail.model.Folder getFolder(long accountId,
+	public com.liferay.mail.reader.model.Folder getFolder(long accountId,
 		java.lang.String fullName)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _folderLocalService.getFolder(accountId, fullName);
@@ -111,7 +111,7 @@ public class FolderLocalServiceWrapper implements FolderLocalService,
 	* @throws PortalException if a folder with the primary key could not be found
 	*/
 	@Override
-	public com.liferay.mail.model.Folder getFolder(long folderId)
+	public com.liferay.mail.reader.model.Folder getFolder(long folderId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _folderLocalService.getFolder(folderId);
 	}
@@ -123,13 +123,13 @@ public class FolderLocalServiceWrapper implements FolderLocalService,
 	* @return the folder that was updated
 	*/
 	@Override
-	public com.liferay.mail.model.Folder updateFolder(
-		com.liferay.mail.model.Folder folder) {
+	public com.liferay.mail.reader.model.Folder updateFolder(
+		com.liferay.mail.reader.model.Folder folder) {
 		return _folderLocalService.updateFolder(folder);
 	}
 
 	@Override
-	public com.liferay.mail.model.Folder updateFolder(long folderId,
+	public com.liferay.mail.reader.model.Folder updateFolder(long folderId,
 		java.lang.String fullName, java.lang.String displayName,
 		int remoteMessageCount)
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -222,7 +222,7 @@ public class FolderLocalServiceWrapper implements FolderLocalService,
 	* Performs a dynamic query on the database and returns a range of the matching rows.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.mail.model.impl.FolderModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.mail.reader.model.impl.FolderModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param dynamicQuery the dynamic query
@@ -241,7 +241,7 @@ public class FolderLocalServiceWrapper implements FolderLocalService,
 	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.mail.model.impl.FolderModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.mail.reader.model.impl.FolderModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param dynamicQuery the dynamic query
@@ -263,7 +263,7 @@ public class FolderLocalServiceWrapper implements FolderLocalService,
 	* Returns a range of all the folders.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.mail.model.impl.FolderModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.mail.reader.model.impl.FolderModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param start the lower bound of the range of folders
@@ -271,13 +271,13 @@ public class FolderLocalServiceWrapper implements FolderLocalService,
 	* @return the range of folders
 	*/
 	@Override
-	public java.util.List<com.liferay.mail.model.Folder> getFolders(int start,
+	public java.util.List<com.liferay.mail.reader.model.Folder> getFolders(int start,
 		int end) {
 		return _folderLocalService.getFolders(start, end);
 	}
 
 	@Override
-	public java.util.List<com.liferay.mail.model.Folder> getFolders(
+	public java.util.List<com.liferay.mail.reader.model.Folder> getFolders(
 		long accountId) {
 		return _folderLocalService.getFolders(accountId);
 	}

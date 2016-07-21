@@ -12,11 +12,11 @@
  * details.
  */
 
-package com.liferay.mail.internal.imap;
+package com.liferay.mail.reader.internal.imap;
 
-import com.liferay.mail.configuration.MailGroupServiceConfiguration;
-import com.liferay.mail.exception.MailException;
-import com.liferay.mail.model.Account;
+import com.liferay.mail.reader.configuration.MailGroupServiceConfiguration;
+import com.liferay.mail.reader.exception.MailException;
+import com.liferay.mail.reader.model.Account;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.module.configuration.ConfigurationException;

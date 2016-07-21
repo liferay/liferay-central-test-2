@@ -12,15 +12,15 @@
  * details.
  */
 
-package com.liferay.mail.service.persistence.impl;
+package com.liferay.mail.reader.service.persistence.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.mail.exception.NoSuchFolderException;
-import com.liferay.mail.model.Folder;
-import com.liferay.mail.model.impl.FolderImpl;
-import com.liferay.mail.model.impl.FolderModelImpl;
-import com.liferay.mail.service.persistence.FolderPersistence;
+import com.liferay.mail.reader.exception.NoSuchFolderException;
+import com.liferay.mail.reader.model.Folder;
+import com.liferay.mail.reader.model.impl.FolderImpl;
+import com.liferay.mail.reader.model.impl.FolderModelImpl;
+import com.liferay.mail.reader.service.persistence.FolderPersistence;
 
 import com.liferay.portal.kernel.dao.orm.EntityCache;
 import com.liferay.portal.kernel.dao.orm.FinderCache;
@@ -63,7 +63,7 @@ import java.util.Set;
  *
  * @author Brian Wing Shun Chan
  * @see FolderPersistence
- * @see com.liferay.mail.service.persistence.FolderUtil
+ * @see com.liferay.mail.reader.service.persistence.FolderUtil
  * @generated
  */
 @ProviderType

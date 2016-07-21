@@ -1,5 +1,5 @@
 Bundle-Name: Liferay Mail Test
-Bundle-SymbolicName: com.liferay.mail.test
+Bundle-SymbolicName: com.liferay.mail.reader.test
 Bundle-Version: 1.0.0
 Import-Package:\
 	!org.junit.experimental.theories,\

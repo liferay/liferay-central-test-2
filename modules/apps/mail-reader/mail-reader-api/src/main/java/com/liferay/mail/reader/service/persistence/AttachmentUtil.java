@@ -12,11 +12,11 @@
  * details.
  */
 
-package com.liferay.mail.service.persistence;
+package com.liferay.mail.reader.service.persistence;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.mail.model.Attachment;
+import com.liferay.mail.reader.model.Attachment;
 
 import com.liferay.osgi.util.ServiceTrackerFactory;
 
@@ -29,7 +29,7 @@ import org.osgi.util.tracker.ServiceTracker;
 import java.util.List;
 
 /**
- * The persistence utility for the attachment service. This utility wraps {@link com.liferay.mail.service.persistence.impl.AttachmentPersistenceImpl} and provides direct access to the database for CRUD operations. This utility should only be used by the service layer, as it must operate within a transaction. Never access this utility in a JSP, controller, model, or other front-end class.
+ * The persistence utility for the attachment service. This utility wraps {@link com.liferay.mail.reader.service.persistence.impl.AttachmentPersistenceImpl} and provides direct access to the database for CRUD operations. This utility should only be used by the service layer, as it must operate within a transaction. Never access this utility in a JSP, controller, model, or other front-end class.
  *
  * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
@@ -37,7 +37,7 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  * @see AttachmentPersistence
- * @see com.liferay.mail.service.persistence.impl.AttachmentPersistenceImpl
+ * @see com.liferay.mail.reader.service.persistence.impl.AttachmentPersistenceImpl
  * @generated
  */
 @ProviderType
@@ -189,7 +189,7 @@ public class AttachmentUtil {
 	*/
 	public static Attachment findByMessageId_First(long messageId,
 		OrderByComparator<Attachment> orderByComparator)
-		throws com.liferay.mail.exception.NoSuchAttachmentException {
+		throws com.liferay.mail.reader.exception.NoSuchAttachmentException {
 		return getPersistence()
 				   .findByMessageId_First(messageId, orderByComparator);
 	}
@@ -217,7 +217,7 @@ public class AttachmentUtil {
 	*/
 	public static Attachment findByMessageId_Last(long messageId,
 		OrderByComparator<Attachment> orderByComparator)
-		throws com.liferay.mail.exception.NoSuchAttachmentException {
+		throws com.liferay.mail.reader.exception.NoSuchAttachmentException {
 		return getPersistence()
 				   .findByMessageId_Last(messageId, orderByComparator);
 	}
@@ -246,7 +246,7 @@ public class AttachmentUtil {
 	*/
 	public static Attachment[] findByMessageId_PrevAndNext(long attachmentId,
 		long messageId, OrderByComparator<Attachment> orderByComparator)
-		throws com.liferay.mail.exception.NoSuchAttachmentException {
+		throws com.liferay.mail.reader.exception.NoSuchAttachmentException {
 		return getPersistence()
 				   .findByMessageId_PrevAndNext(attachmentId, messageId,
 			orderByComparator);
@@ -307,7 +307,7 @@ public class AttachmentUtil {
 	* @throws NoSuchAttachmentException if a attachment with the primary key could not be found
 	*/
 	public static Attachment remove(long attachmentId)
-		throws com.liferay.mail.exception.NoSuchAttachmentException {
+		throws com.liferay.mail.reader.exception.NoSuchAttachmentException {
 		return getPersistence().remove(attachmentId);
 	}
 
@@ -323,7 +323,7 @@ public class AttachmentUtil {
 	* @throws NoSuchAttachmentException if a attachment with the primary key could not be found
 	*/
 	public static Attachment findByPrimaryKey(long attachmentId)
-		throws com.liferay.mail.exception.NoSuchAttachmentException {
+		throws com.liferay.mail.reader.exception.NoSuchAttachmentException {
 		return getPersistence().findByPrimaryKey(attachmentId);
 	}
 

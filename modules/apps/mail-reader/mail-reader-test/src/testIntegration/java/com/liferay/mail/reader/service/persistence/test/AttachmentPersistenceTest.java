@@ -12,15 +12,15 @@
  * details.
  */
 
-package com.liferay.mail.service.persistence.test;
+package com.liferay.mail.reader.service.persistence.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 
-import com.liferay.mail.exception.NoSuchAttachmentException;
-import com.liferay.mail.model.Attachment;
-import com.liferay.mail.service.AttachmentLocalServiceUtil;
-import com.liferay.mail.service.persistence.AttachmentPersistence;
-import com.liferay.mail.service.persistence.AttachmentUtil;
+import com.liferay.mail.reader.exception.NoSuchAttachmentException;
+import com.liferay.mail.reader.model.Attachment;
+import com.liferay.mail.reader.service.AttachmentLocalServiceUtil;
+import com.liferay.mail.reader.service.persistence.AttachmentPersistence;
+import com.liferay.mail.reader.service.persistence.AttachmentUtil;
 
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;

@@ -12,12 +12,12 @@
  * details.
  */
 
-package com.liferay.mail.model.impl;
+package com.liferay.mail.reader.model.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.mail.model.Account;
-import com.liferay.mail.service.AccountLocalServiceUtil;
+import com.liferay.mail.reader.model.Account;
+import com.liferay.mail.reader.service.AccountLocalServiceUtil;
 
 /**
  * The extended model base implementation for the Account service. Represents a row in the &quot;Mail_Account&quot; database table, with each column mapped to a property of this class.

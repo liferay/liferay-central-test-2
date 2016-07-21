@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.mail.model;
+package com.liferay.mail.reader.model;
 
 import aQute.bnd.annotation.ProviderType;
 
@@ -25,17 +25,17 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Brian Wing Shun Chan
  * @see AttachmentModel
- * @see com.liferay.mail.model.impl.AttachmentImpl
- * @see com.liferay.mail.model.impl.AttachmentModelImpl
+ * @see com.liferay.mail.reader.model.impl.AttachmentImpl
+ * @see com.liferay.mail.reader.model.impl.AttachmentModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.mail.model.impl.AttachmentImpl")
+@ImplementationClassName("com.liferay.mail.reader.model.impl.AttachmentImpl")
 @ProviderType
 public interface Attachment extends AttachmentModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.mail.model.impl.AttachmentImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to {@link com.liferay.mail.reader.model.impl.AttachmentImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public static final Accessor<Attachment, Long> ATTACHMENT_ID_ACCESSOR = new Accessor<Attachment, Long>() {
 			@Override

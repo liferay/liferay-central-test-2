@@ -12,9 +12,9 @@
  * details.
  */
 
-package com.liferay.mail.internal.imap;
+package com.liferay.mail.reader.internal.imap;
 
-import com.liferay.mail.attachment.DefaultAttachmentHandler;
+import com.liferay.mail.reader.attachment.DefaultAttachmentHandler;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 

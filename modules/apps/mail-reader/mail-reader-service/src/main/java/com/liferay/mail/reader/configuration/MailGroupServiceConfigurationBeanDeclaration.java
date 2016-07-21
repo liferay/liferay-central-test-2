@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.mail.configuration;
+package com.liferay.mail.reader.configuration;
 
 import com.liferay.portal.kernel.settings.definition.ConfigurationBeanDeclaration;
 

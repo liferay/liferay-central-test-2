@@ -12,12 +12,12 @@
  * details.
  */
 
-package com.liferay.mail.model.impl;
+package com.liferay.mail.reader.model.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.mail.model.Message;
-import com.liferay.mail.service.MessageLocalServiceUtil;
+import com.liferay.mail.reader.model.Message;
+import com.liferay.mail.reader.service.MessageLocalServiceUtil;
 
 /**
  * The extended model base implementation for the Message service. Represents a row in the &quot;Mail_Message&quot; database table, with each column mapped to a property of this class.

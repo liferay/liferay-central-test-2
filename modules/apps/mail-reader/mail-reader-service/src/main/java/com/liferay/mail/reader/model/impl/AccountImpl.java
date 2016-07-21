@@ -12,9 +12,9 @@
  * details.
  */
 
-package com.liferay.mail.model.impl;
+package com.liferay.mail.reader.model.impl;
 
-import com.liferay.mail.internal.util.PasswordUtil;
+import com.liferay.mail.reader.internal.util.PasswordUtil;
 
 /**
  * @author Scott Lee

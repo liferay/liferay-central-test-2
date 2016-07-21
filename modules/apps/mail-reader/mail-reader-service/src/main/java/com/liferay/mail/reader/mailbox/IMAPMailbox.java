@@ -12,27 +12,27 @@
  * details.
  */
 
-package com.liferay.mail.mailbox;
+package com.liferay.mail.reader.mailbox;
 
-import com.liferay.mail.attachment.AttachmentHandler;
-import com.liferay.mail.attachment.DefaultAttachmentHandler;
-import com.liferay.mail.constants.MailConstants;
-import com.liferay.mail.exception.MailException;
-import com.liferay.mail.exception.NoSuchFolderException;
-import com.liferay.mail.exception.NoSuchMessageException;
-import com.liferay.mail.internal.imap.IMAPAccessor;
-import com.liferay.mail.internal.imap.IMAPConnection;
-import com.liferay.mail.internal.util.AccountLock;
-import com.liferay.mail.model.Account;
-import com.liferay.mail.model.Attachment;
-import com.liferay.mail.model.Folder;
-import com.liferay.mail.model.MailFile;
-import com.liferay.mail.model.Message;
-import com.liferay.mail.model.MessagesDisplay;
-import com.liferay.mail.service.AccountLocalServiceUtil;
-import com.liferay.mail.service.AttachmentLocalServiceUtil;
-import com.liferay.mail.service.FolderLocalServiceUtil;
-import com.liferay.mail.service.MessageLocalServiceUtil;
+import com.liferay.mail.reader.attachment.AttachmentHandler;
+import com.liferay.mail.reader.attachment.DefaultAttachmentHandler;
+import com.liferay.mail.reader.constants.MailConstants;
+import com.liferay.mail.reader.exception.MailException;
+import com.liferay.mail.reader.exception.NoSuchFolderException;
+import com.liferay.mail.reader.exception.NoSuchMessageException;
+import com.liferay.mail.reader.internal.imap.IMAPAccessor;
+import com.liferay.mail.reader.internal.imap.IMAPConnection;
+import com.liferay.mail.reader.internal.util.AccountLock;
+import com.liferay.mail.reader.model.Account;
+import com.liferay.mail.reader.model.Attachment;
+import com.liferay.mail.reader.model.Folder;
+import com.liferay.mail.reader.model.MailFile;
+import com.liferay.mail.reader.model.Message;
+import com.liferay.mail.reader.model.MessagesDisplay;
+import com.liferay.mail.reader.service.AccountLocalServiceUtil;
+import com.liferay.mail.reader.service.AttachmentLocalServiceUtil;
+import com.liferay.mail.reader.service.FolderLocalServiceUtil;
+import com.liferay.mail.reader.service.MessageLocalServiceUtil;
 import com.liferay.petra.mail.InternetAddressUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;

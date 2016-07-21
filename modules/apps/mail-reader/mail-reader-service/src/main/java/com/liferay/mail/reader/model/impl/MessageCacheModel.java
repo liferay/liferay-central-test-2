@@ -12,11 +12,11 @@
  * details.
  */
 
-package com.liferay.mail.model.impl;
+package com.liferay.mail.reader.model.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.mail.model.Message;
+import com.liferay.mail.reader.model.Message;
 
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;

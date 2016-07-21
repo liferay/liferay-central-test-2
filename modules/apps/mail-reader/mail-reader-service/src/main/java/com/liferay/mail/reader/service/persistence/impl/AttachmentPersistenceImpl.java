@@ -12,15 +12,15 @@
  * details.
  */
 
-package com.liferay.mail.service.persistence.impl;
+package com.liferay.mail.reader.service.persistence.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.mail.exception.NoSuchAttachmentException;
-import com.liferay.mail.model.Attachment;
-import com.liferay.mail.model.impl.AttachmentImpl;
-import com.liferay.mail.model.impl.AttachmentModelImpl;
-import com.liferay.mail.service.persistence.AttachmentPersistence;
+import com.liferay.mail.reader.exception.NoSuchAttachmentException;
+import com.liferay.mail.reader.model.Attachment;
+import com.liferay.mail.reader.model.impl.AttachmentImpl;
+import com.liferay.mail.reader.model.impl.AttachmentModelImpl;
+import com.liferay.mail.reader.service.persistence.AttachmentPersistence;
 
 import com.liferay.portal.kernel.dao.orm.EntityCache;
 import com.liferay.portal.kernel.dao.orm.FinderCache;
@@ -59,7 +59,7 @@ import java.util.Set;
  *
  * @author Brian Wing Shun Chan
  * @see AttachmentPersistence
- * @see com.liferay.mail.service.persistence.AttachmentUtil
+ * @see com.liferay.mail.reader.service.persistence.AttachmentUtil
  * @generated
  */
 @ProviderType

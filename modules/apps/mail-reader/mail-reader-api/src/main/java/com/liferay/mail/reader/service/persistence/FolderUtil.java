@@ -12,11 +12,11 @@
  * details.
  */
 
-package com.liferay.mail.service.persistence;
+package com.liferay.mail.reader.service.persistence;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.mail.model.Folder;
+import com.liferay.mail.reader.model.Folder;
 
 import com.liferay.osgi.util.ServiceTrackerFactory;
 
@@ -29,7 +29,7 @@ import org.osgi.util.tracker.ServiceTracker;
 import java.util.List;
 
 /**
- * The persistence utility for the folder service. This utility wraps {@link com.liferay.mail.service.persistence.impl.FolderPersistenceImpl} and provides direct access to the database for CRUD operations. This utility should only be used by the service layer, as it must operate within a transaction. Never access this utility in a JSP, controller, model, or other front-end class.
+ * The persistence utility for the folder service. This utility wraps {@link com.liferay.mail.reader.service.persistence.impl.FolderPersistenceImpl} and provides direct access to the database for CRUD operations. This utility should only be used by the service layer, as it must operate within a transaction. Never access this utility in a JSP, controller, model, or other front-end class.
  *
  * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
@@ -37,7 +37,7 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  * @see FolderPersistence
- * @see com.liferay.mail.service.persistence.impl.FolderPersistenceImpl
+ * @see com.liferay.mail.reader.service.persistence.impl.FolderPersistenceImpl
  * @generated
  */
 @ProviderType
@@ -186,7 +186,7 @@ public class FolderUtil {
 	*/
 	public static Folder findByAccountId_First(long accountId,
 		OrderByComparator<Folder> orderByComparator)
-		throws com.liferay.mail.exception.NoSuchFolderException {
+		throws com.liferay.mail.reader.exception.NoSuchFolderException {
 		return getPersistence()
 				   .findByAccountId_First(accountId, orderByComparator);
 	}
@@ -214,7 +214,7 @@ public class FolderUtil {
 	*/
 	public static Folder findByAccountId_Last(long accountId,
 		OrderByComparator<Folder> orderByComparator)
-		throws com.liferay.mail.exception.NoSuchFolderException {
+		throws com.liferay.mail.reader.exception.NoSuchFolderException {
 		return getPersistence()
 				   .findByAccountId_Last(accountId, orderByComparator);
 	}
@@ -243,7 +243,7 @@ public class FolderUtil {
 	*/
 	public static Folder[] findByAccountId_PrevAndNext(long folderId,
 		long accountId, OrderByComparator<Folder> orderByComparator)
-		throws com.liferay.mail.exception.NoSuchFolderException {
+		throws com.liferay.mail.reader.exception.NoSuchFolderException {
 		return getPersistence()
 				   .findByAccountId_PrevAndNext(folderId, accountId,
 			orderByComparator);
@@ -277,7 +277,7 @@ public class FolderUtil {
 	* @throws NoSuchFolderException if a matching folder could not be found
 	*/
 	public static Folder findByA_F(long accountId, java.lang.String fullName)
-		throws com.liferay.mail.exception.NoSuchFolderException {
+		throws com.liferay.mail.reader.exception.NoSuchFolderException {
 		return getPersistence().findByA_F(accountId, fullName);
 	}
 
@@ -314,7 +314,7 @@ public class FolderUtil {
 	* @return the folder that was removed
 	*/
 	public static Folder removeByA_F(long accountId, java.lang.String fullName)
-		throws com.liferay.mail.exception.NoSuchFolderException {
+		throws com.liferay.mail.reader.exception.NoSuchFolderException {
 		return getPersistence().removeByA_F(accountId, fullName);
 	}
 
@@ -365,7 +365,7 @@ public class FolderUtil {
 	* @throws NoSuchFolderException if a folder with the primary key could not be found
 	*/
 	public static Folder remove(long folderId)
-		throws com.liferay.mail.exception.NoSuchFolderException {
+		throws com.liferay.mail.reader.exception.NoSuchFolderException {
 		return getPersistence().remove(folderId);
 	}
 
@@ -381,7 +381,7 @@ public class FolderUtil {
 	* @throws NoSuchFolderException if a folder with the primary key could not be found
 	*/
 	public static Folder findByPrimaryKey(long folderId)
-		throws com.liferay.mail.exception.NoSuchFolderException {
+		throws com.liferay.mail.reader.exception.NoSuchFolderException {
 		return getPersistence().findByPrimaryKey(folderId);
 	}
 

@@ -12,12 +12,12 @@
  * details.
  */
 
-package com.liferay.mail.service.persistence;
+package com.liferay.mail.reader.service.persistence;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.mail.exception.NoSuchMessageException;
-import com.liferay.mail.model.Message;
+import com.liferay.mail.reader.exception.NoSuchMessageException;
+import com.liferay.mail.reader.model.Message;
 
 import com.liferay.portal.kernel.service.persistence.BasePersistence;
 
@@ -29,7 +29,7 @@ import com.liferay.portal.kernel.service.persistence.BasePersistence;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see com.liferay.mail.service.persistence.impl.MessagePersistenceImpl
+ * @see com.liferay.mail.reader.service.persistence.impl.MessagePersistenceImpl
  * @see MessageUtil
  * @generated
  */

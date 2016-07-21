@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.mail.internal.util;
+package com.liferay.mail.reader.internal.util;
 
 import com.liferay.portal.kernel.util.StringPool;
 

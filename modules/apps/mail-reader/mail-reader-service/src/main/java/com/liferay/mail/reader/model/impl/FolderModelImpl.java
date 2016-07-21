@@ -12,15 +12,15 @@
  * details.
  */
 
-package com.liferay.mail.model.impl;
+package com.liferay.mail.reader.model.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.expando.kernel.util.ExpandoBridgeFactoryUtil;
 
-import com.liferay.mail.model.Folder;
-import com.liferay.mail.model.FolderModel;
+import com.liferay.mail.reader.model.Folder;
+import com.liferay.mail.reader.model.FolderModel;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -98,19 +98,19 @@ public class FolderModelImpl extends BaseModelImpl<Folder>
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.mail.service.util.ServiceProps.get(
-				"value.object.entity.cache.enabled.com.liferay.mail.model.Folder"),
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.mail.reader.service.util.ServiceProps.get(
+				"value.object.entity.cache.enabled.com.liferay.mail.reader.model.Folder"),
 			true);
-	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.mail.service.util.ServiceProps.get(
-				"value.object.finder.cache.enabled.com.liferay.mail.model.Folder"),
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.mail.reader.service.util.ServiceProps.get(
+				"value.object.finder.cache.enabled.com.liferay.mail.reader.model.Folder"),
 			true);
-	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.mail.service.util.ServiceProps.get(
-				"value.object.column.bitmask.enabled.com.liferay.mail.model.Folder"),
+	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.mail.reader.service.util.ServiceProps.get(
+				"value.object.column.bitmask.enabled.com.liferay.mail.reader.model.Folder"),
 			true);
 	public static final long ACCOUNTID_COLUMN_BITMASK = 1L;
 	public static final long FULLNAME_COLUMN_BITMASK = 2L;
-	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.mail.service.util.ServiceProps.get(
-				"lock.expiration.time.com.liferay.mail.model.Folder"));
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.mail.reader.service.util.ServiceProps.get(
+				"lock.expiration.time.com.liferay.mail.reader.model.Folder"));
 
 	public FolderModelImpl() {
 	}
@@ -594,7 +594,7 @@ public class FolderModelImpl extends BaseModelImpl<Folder>
 		StringBundler sb = new StringBundler(34);
 
 		sb.append("<model><model-name>");
-		sb.append("com.liferay.mail.model.Folder");
+		sb.append("com.liferay.mail.reader.model.Folder");
 		sb.append("</model-name>");
 
 		sb.append(

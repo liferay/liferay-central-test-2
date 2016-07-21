@@ -12,12 +12,12 @@
  * details.
  */
 
-package com.liferay.mail.internal.imap;
+package com.liferay.mail.reader.internal.imap;
 
-import com.liferay.mail.exception.MailException;
-import com.liferay.mail.model.Account;
-import com.liferay.mail.service.FolderLocalServiceUtil;
-import com.liferay.mail.service.MessageLocalServiceUtil;
+import com.liferay.mail.reader.exception.MailException;
+import com.liferay.mail.reader.model.Account;
+import com.liferay.mail.reader.service.FolderLocalServiceUtil;
+import com.liferay.mail.reader.service.MessageLocalServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.User;
@@ -48,7 +48,7 @@ public class IMAPMessageCountListener implements MessageCountListener {
 		try {
 			jxFolder = _imapAccessor.openFolder(jxMessages[0].getFolder());
 
-			com.liferay.mail.model.Folder folder =
+			com.liferay.mail.reader.model.Folder folder =
 				FolderLocalServiceUtil.getFolder(
 					_account.getAccountId(), jxFolder.getFullName());
 
@@ -77,7 +77,7 @@ public class IMAPMessageCountListener implements MessageCountListener {
 		try {
 			jxFolder = _imapAccessor.openFolder(jxMessages[0].getFolder());
 
-			com.liferay.mail.model.Folder folder =
+			com.liferay.mail.reader.model.Folder folder =
 				FolderLocalServiceUtil.getFolder(
 					_account.getAccountId(), jxFolder.getFullName());
 
@@ -85,7 +85,7 @@ public class IMAPMessageCountListener implements MessageCountListener {
 				jxFolder, jxMessages);
 
 			for (long remoteMessageId : remoteMessageIds) {
-				com.liferay.mail.model.Message message =
+				com.liferay.mail.reader.model.Message message =
 					MessageLocalServiceUtil.getMessage(
 						folder.getFolderId(), remoteMessageId);
 

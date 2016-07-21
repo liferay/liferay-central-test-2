@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.mail.exception;
+package com.liferay.mail.reader.exception;
 
 import com.liferay.portal.kernel.exception.NoSuchModelException;
 

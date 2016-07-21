@@ -12,10 +12,10 @@
  * details.
  */
 
-package com.liferay.mail.web.portlet.action;
+package com.liferay.mail.reader.web.portlet.action;
 
-import com.liferay.mail.mailbox.MailboxFactory;
-import com.liferay.mail.mailbox.MailboxFactoryUtil;
+import com.liferay.mail.reader.mailbox.MailboxFactory;
+import com.liferay.mail.reader.mailbox.MailboxFactoryUtil;
 import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.events.LifecycleAction;
 import com.liferay.portal.kernel.events.SimpleAction;

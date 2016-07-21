@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.mail.model;
+package com.liferay.mail.reader.model;
 
 import aQute.bnd.annotation.ProviderType;
 
@@ -25,17 +25,17 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Brian Wing Shun Chan
  * @see AccountModel
- * @see com.liferay.mail.model.impl.AccountImpl
- * @see com.liferay.mail.model.impl.AccountModelImpl
+ * @see com.liferay.mail.reader.model.impl.AccountImpl
+ * @see com.liferay.mail.reader.model.impl.AccountModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.mail.model.impl.AccountImpl")
+@ImplementationClassName("com.liferay.mail.reader.model.impl.AccountImpl")
 @ProviderType
 public interface Account extends AccountModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.mail.model.impl.AccountImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to {@link com.liferay.mail.reader.model.impl.AccountImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public static final Accessor<Account, Long> ACCOUNT_ID_ACCESSOR = new Accessor<Account, Long>() {
 			@Override

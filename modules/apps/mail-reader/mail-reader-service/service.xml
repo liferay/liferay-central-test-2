@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
 
-<service-builder package-path="com.liferay.mail">
+<service-builder package-path="com.liferay.mail.reader">
 	<namespace>Mail</namespace>
 	<entity local-service="true" name="Account" remote-service="false">
 

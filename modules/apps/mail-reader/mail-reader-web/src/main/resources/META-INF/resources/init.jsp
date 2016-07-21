@@ -25,20 +25,20 @@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %><%@
 taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %><%@
 taglib uri="http://liferay.com/tld/util" prefix="liferay-util" %>
 
-<%@ page import="com.liferay.mail.configuration.MailGroupServiceConfiguration" %><%@
-page import="com.liferay.mail.constants.MailConstants" %><%@
-page import="com.liferay.mail.constants.MailPortletKeys" %><%@
-page import="com.liferay.mail.model.Account" %><%@
-page import="com.liferay.mail.model.Attachment" %><%@
-page import="com.liferay.mail.model.Folder" %><%@
-page import="com.liferay.mail.model.MailFile" %><%@
-page import="com.liferay.mail.model.Message" %><%@
-page import="com.liferay.mail.model.MessageDisplay" %><%@
-page import="com.liferay.mail.model.MessagesDisplay" %><%@
-page import="com.liferay.mail.service.AccountLocalServiceUtil" %><%@
-page import="com.liferay.mail.service.FolderLocalServiceUtil" %><%@
-page import="com.liferay.mail.service.MessageLocalServiceUtil" %><%@
-page import="com.liferay.mail.web.util.MailManager" %><%@
+<%@ page import="com.liferay.mail.reader.configuration.MailGroupServiceConfiguration" %><%@
+page import="com.liferay.mail.reader.constants.MailConstants" %><%@
+page import="com.liferay.mail.reader.constants.MailPortletKeys" %><%@
+page import="com.liferay.mail.reader.model.Account" %><%@
+page import="com.liferay.mail.reader.model.Attachment" %><%@
+page import="com.liferay.mail.reader.model.Folder" %><%@
+page import="com.liferay.mail.reader.model.MailFile" %><%@
+page import="com.liferay.mail.reader.model.Message" %><%@
+page import="com.liferay.mail.reader.model.MessageDisplay" %><%@
+page import="com.liferay.mail.reader.model.MessagesDisplay" %><%@
+page import="com.liferay.mail.reader.service.AccountLocalServiceUtil" %><%@
+page import="com.liferay.mail.reader.service.FolderLocalServiceUtil" %><%@
+page import="com.liferay.mail.reader.service.MessageLocalServiceUtil" %><%@
+page import="com.liferay.mail.reader.web.util.MailManager" %><%@
 page import="com.liferay.portal.kernel.json.JSONArray" %><%@
 page import="com.liferay.portal.kernel.json.JSONFactoryUtil" %><%@
 page import="com.liferay.portal.kernel.json.JSONObject" %><%@
