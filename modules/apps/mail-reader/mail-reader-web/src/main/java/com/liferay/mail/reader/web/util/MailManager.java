@@ -12,26 +12,26 @@
  * details.
  */
 
-package com.liferay.mail.web.util;
+package com.liferay.mail.reader.web.util;
 
 import com.liferay.document.library.kernel.exception.FileSizeException;
-import com.liferay.mail.attachment.AttachmentHandler;
-import com.liferay.mail.constants.MailConstants;
-import com.liferay.mail.exception.MailException;
-import com.liferay.mail.mailbox.Mailbox;
-import com.liferay.mail.mailbox.MailboxFactoryUtil;
-import com.liferay.mail.mailbox.PasswordRetriever;
-import com.liferay.mail.model.Account;
-import com.liferay.mail.model.Attachment;
-import com.liferay.mail.model.Folder;
-import com.liferay.mail.model.MailFile;
-import com.liferay.mail.model.Message;
-import com.liferay.mail.model.MessageDisplay;
-import com.liferay.mail.model.MessagesDisplay;
-import com.liferay.mail.service.AccountLocalServiceUtil;
-import com.liferay.mail.service.AttachmentLocalServiceUtil;
-import com.liferay.mail.service.FolderLocalServiceUtil;
-import com.liferay.mail.service.MessageLocalServiceUtil;
+import com.liferay.mail.reader.attachment.AttachmentHandler;
+import com.liferay.mail.reader.constants.MailConstants;
+import com.liferay.mail.reader.exception.MailException;
+import com.liferay.mail.reader.mailbox.Mailbox;
+import com.liferay.mail.reader.mailbox.MailboxFactoryUtil;
+import com.liferay.mail.reader.mailbox.PasswordRetriever;
+import com.liferay.mail.reader.model.Account;
+import com.liferay.mail.reader.model.Attachment;
+import com.liferay.mail.reader.model.Folder;
+import com.liferay.mail.reader.model.MailFile;
+import com.liferay.mail.reader.model.Message;
+import com.liferay.mail.reader.model.MessageDisplay;
+import com.liferay.mail.reader.model.MessagesDisplay;
+import com.liferay.mail.reader.service.AccountLocalServiceUtil;
+import com.liferay.mail.reader.service.AttachmentLocalServiceUtil;
+import com.liferay.mail.reader.service.FolderLocalServiceUtil;
+import com.liferay.mail.reader.service.MessageLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;

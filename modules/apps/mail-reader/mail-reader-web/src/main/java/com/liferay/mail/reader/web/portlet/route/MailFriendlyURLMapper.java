@@ -12,9 +12,9 @@
  * details.
  */
 
-package com.liferay.mail.web.portlet.route;
+package com.liferay.mail.reader.web.portlet.route;
 
-import com.liferay.mail.constants.MailPortletKeys;
+import com.liferay.mail.reader.constants.MailPortletKeys;
 import com.liferay.portal.kernel.portlet.DefaultFriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 

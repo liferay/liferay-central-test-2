@@ -12,14 +12,14 @@
  * details.
  */
 
-package com.liferay.mail.service.impl;
+package com.liferay.mail.reader.service.impl;
 
 import com.liferay.document.library.kernel.exception.DuplicateDirectoryException;
 import com.liferay.document.library.kernel.exception.DuplicateFileException;
 import com.liferay.document.library.kernel.store.DLStoreUtil;
-import com.liferay.mail.model.Attachment;
-import com.liferay.mail.model.Message;
-import com.liferay.mail.service.base.AttachmentLocalServiceBaseImpl;
+import com.liferay.mail.reader.model.Attachment;
+import com.liferay.mail.reader.model.Message;
+import com.liferay.mail.reader.service.base.AttachmentLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;

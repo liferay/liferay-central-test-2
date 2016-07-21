@@ -12,11 +12,11 @@
  * details.
  */
 
-package com.liferay.mail.service.persistence;
+package com.liferay.mail.reader.service.persistence;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.mail.model.Account;
+import com.liferay.mail.reader.model.Account;
 
 import com.liferay.osgi.util.ServiceTrackerFactory;
 
@@ -29,7 +29,7 @@ import org.osgi.util.tracker.ServiceTracker;
 import java.util.List;
 
 /**
- * The persistence utility for the account service. This utility wraps {@link com.liferay.mail.service.persistence.impl.AccountPersistenceImpl} and provides direct access to the database for CRUD operations. This utility should only be used by the service layer, as it must operate within a transaction. Never access this utility in a JSP, controller, model, or other front-end class.
+ * The persistence utility for the account service. This utility wraps {@link com.liferay.mail.reader.service.persistence.impl.AccountPersistenceImpl} and provides direct access to the database for CRUD operations. This utility should only be used by the service layer, as it must operate within a transaction. Never access this utility in a JSP, controller, model, or other front-end class.
  *
  * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
@@ -37,7 +37,7 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  * @see AccountPersistence
- * @see com.liferay.mail.service.persistence.impl.AccountPersistenceImpl
+ * @see com.liferay.mail.reader.service.persistence.impl.AccountPersistenceImpl
  * @generated
  */
 @ProviderType
@@ -185,7 +185,7 @@ public class AccountUtil {
 	*/
 	public static Account findByUserId_First(long userId,
 		OrderByComparator<Account> orderByComparator)
-		throws com.liferay.mail.exception.NoSuchAccountException {
+		throws com.liferay.mail.reader.exception.NoSuchAccountException {
 		return getPersistence().findByUserId_First(userId, orderByComparator);
 	}
 
@@ -211,7 +211,7 @@ public class AccountUtil {
 	*/
 	public static Account findByUserId_Last(long userId,
 		OrderByComparator<Account> orderByComparator)
-		throws com.liferay.mail.exception.NoSuchAccountException {
+		throws com.liferay.mail.reader.exception.NoSuchAccountException {
 		return getPersistence().findByUserId_Last(userId, orderByComparator);
 	}
 
@@ -238,7 +238,7 @@ public class AccountUtil {
 	*/
 	public static Account[] findByUserId_PrevAndNext(long accountId,
 		long userId, OrderByComparator<Account> orderByComparator)
-		throws com.liferay.mail.exception.NoSuchAccountException {
+		throws com.liferay.mail.reader.exception.NoSuchAccountException {
 		return getPersistence()
 				   .findByUserId_PrevAndNext(accountId, userId,
 			orderByComparator);
@@ -272,7 +272,7 @@ public class AccountUtil {
 	* @throws NoSuchAccountException if a matching account could not be found
 	*/
 	public static Account findByU_A(long userId, java.lang.String address)
-		throws com.liferay.mail.exception.NoSuchAccountException {
+		throws com.liferay.mail.reader.exception.NoSuchAccountException {
 		return getPersistence().findByU_A(userId, address);
 	}
 
@@ -308,7 +308,7 @@ public class AccountUtil {
 	* @return the account that was removed
 	*/
 	public static Account removeByU_A(long userId, java.lang.String address)
-		throws com.liferay.mail.exception.NoSuchAccountException {
+		throws com.liferay.mail.reader.exception.NoSuchAccountException {
 		return getPersistence().removeByU_A(userId, address);
 	}
 
@@ -359,7 +359,7 @@ public class AccountUtil {
 	* @throws NoSuchAccountException if a account with the primary key could not be found
 	*/
 	public static Account remove(long accountId)
-		throws com.liferay.mail.exception.NoSuchAccountException {
+		throws com.liferay.mail.reader.exception.NoSuchAccountException {
 		return getPersistence().remove(accountId);
 	}
 
@@ -375,7 +375,7 @@ public class AccountUtil {
 	* @throws NoSuchAccountException if a account with the primary key could not be found
 	*/
 	public static Account findByPrimaryKey(long accountId)
-		throws com.liferay.mail.exception.NoSuchAccountException {
+		throws com.liferay.mail.reader.exception.NoSuchAccountException {
 		return getPersistence().findByPrimaryKey(accountId);
 	}
 

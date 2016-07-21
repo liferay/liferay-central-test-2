@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.mail.service;
+package com.liferay.mail.reader.service;
 
 import aQute.bnd.annotation.ProviderType;
 
@@ -40,13 +40,13 @@ public class AttachmentLocalServiceWrapper implements AttachmentLocalService,
 	* @return the attachment that was added
 	*/
 	@Override
-	public com.liferay.mail.model.Attachment addAttachment(
-		com.liferay.mail.model.Attachment attachment) {
+	public com.liferay.mail.reader.model.Attachment addAttachment(
+		com.liferay.mail.reader.model.Attachment attachment) {
 		return _attachmentLocalService.addAttachment(attachment);
 	}
 
 	@Override
-	public com.liferay.mail.model.Attachment addAttachment(long userId,
+	public com.liferay.mail.reader.model.Attachment addAttachment(long userId,
 		long messageId, java.lang.String contentPath,
 		java.lang.String fileName, long size, java.io.File file)
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -61,7 +61,7 @@ public class AttachmentLocalServiceWrapper implements AttachmentLocalService,
 	* @return the new attachment
 	*/
 	@Override
-	public com.liferay.mail.model.Attachment createAttachment(long attachmentId) {
+	public com.liferay.mail.reader.model.Attachment createAttachment(long attachmentId) {
 		return _attachmentLocalService.createAttachment(attachmentId);
 	}
 
@@ -72,8 +72,8 @@ public class AttachmentLocalServiceWrapper implements AttachmentLocalService,
 	* @return the attachment that was removed
 	*/
 	@Override
-	public com.liferay.mail.model.Attachment deleteAttachment(
-		com.liferay.mail.model.Attachment attachment) {
+	public com.liferay.mail.reader.model.Attachment deleteAttachment(
+		com.liferay.mail.reader.model.Attachment attachment) {
 		return _attachmentLocalService.deleteAttachment(attachment);
 	}
 
@@ -85,13 +85,13 @@ public class AttachmentLocalServiceWrapper implements AttachmentLocalService,
 	* @throws PortalException if a attachment with the primary key could not be found
 	*/
 	@Override
-	public com.liferay.mail.model.Attachment deleteAttachment(long attachmentId)
+	public com.liferay.mail.reader.model.Attachment deleteAttachment(long attachmentId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _attachmentLocalService.deleteAttachment(attachmentId);
 	}
 
 	@Override
-	public com.liferay.mail.model.Attachment fetchAttachment(long attachmentId) {
+	public com.liferay.mail.reader.model.Attachment fetchAttachment(long attachmentId) {
 		return _attachmentLocalService.fetchAttachment(attachmentId);
 	}
 
@@ -103,7 +103,7 @@ public class AttachmentLocalServiceWrapper implements AttachmentLocalService,
 	* @throws PortalException if a attachment with the primary key could not be found
 	*/
 	@Override
-	public com.liferay.mail.model.Attachment getAttachment(long attachmentId)
+	public com.liferay.mail.reader.model.Attachment getAttachment(long attachmentId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _attachmentLocalService.getAttachment(attachmentId);
 	}
@@ -115,8 +115,8 @@ public class AttachmentLocalServiceWrapper implements AttachmentLocalService,
 	* @return the attachment that was updated
 	*/
 	@Override
-	public com.liferay.mail.model.Attachment updateAttachment(
-		com.liferay.mail.model.Attachment attachment) {
+	public com.liferay.mail.reader.model.Attachment updateAttachment(
+		com.liferay.mail.reader.model.Attachment attachment) {
 		return _attachmentLocalService.updateAttachment(attachment);
 	}
 
@@ -200,7 +200,7 @@ public class AttachmentLocalServiceWrapper implements AttachmentLocalService,
 	* Performs a dynamic query on the database and returns a range of the matching rows.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.mail.model.impl.AttachmentModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.mail.reader.model.impl.AttachmentModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param dynamicQuery the dynamic query
@@ -219,7 +219,7 @@ public class AttachmentLocalServiceWrapper implements AttachmentLocalService,
 	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.mail.model.impl.AttachmentModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.mail.reader.model.impl.AttachmentModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param dynamicQuery the dynamic query
@@ -241,7 +241,7 @@ public class AttachmentLocalServiceWrapper implements AttachmentLocalService,
 	* Returns a range of all the attachments.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.mail.model.impl.AttachmentModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.mail.reader.model.impl.AttachmentModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param start the lower bound of the range of attachments
@@ -249,13 +249,13 @@ public class AttachmentLocalServiceWrapper implements AttachmentLocalService,
 	* @return the range of attachments
 	*/
 	@Override
-	public java.util.List<com.liferay.mail.model.Attachment> getAttachments(
+	public java.util.List<com.liferay.mail.reader.model.Attachment> getAttachments(
 		int start, int end) {
 		return _attachmentLocalService.getAttachments(start, end);
 	}
 
 	@Override
-	public java.util.List<com.liferay.mail.model.Attachment> getAttachments(
+	public java.util.List<com.liferay.mail.reader.model.Attachment> getAttachments(
 		long messageId) {
 		return _attachmentLocalService.getAttachments(messageId);
 	}

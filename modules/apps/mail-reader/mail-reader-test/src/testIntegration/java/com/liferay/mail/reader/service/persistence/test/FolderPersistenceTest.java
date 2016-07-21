@@ -12,15 +12,15 @@
  * details.
  */
 
-package com.liferay.mail.service.persistence.test;
+package com.liferay.mail.reader.service.persistence.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 
-import com.liferay.mail.exception.NoSuchFolderException;
-import com.liferay.mail.model.Folder;
-import com.liferay.mail.service.FolderLocalServiceUtil;
-import com.liferay.mail.service.persistence.FolderPersistence;
-import com.liferay.mail.service.persistence.FolderUtil;
+import com.liferay.mail.reader.exception.NoSuchFolderException;
+import com.liferay.mail.reader.model.Folder;
+import com.liferay.mail.reader.service.FolderLocalServiceUtil;
+import com.liferay.mail.reader.service.persistence.FolderPersistence;
+import com.liferay.mail.reader.service.persistence.FolderUtil;
 
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;

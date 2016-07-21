@@ -12,19 +12,19 @@
  * details.
  */
 
-package com.liferay.mail.internal.imap;
+package com.liferay.mail.reader.internal.imap;
 
-import com.liferay.mail.attachment.AttachmentHandler;
-import com.liferay.mail.configuration.MailGroupServiceConfiguration;
-import com.liferay.mail.constants.MailConstants;
-import com.liferay.mail.exception.MailException;
-import com.liferay.mail.exception.NoSuchMessageException;
-import com.liferay.mail.internal.util.HtmlContentUtil;
-import com.liferay.mail.model.Account;
-import com.liferay.mail.model.MailFile;
-import com.liferay.mail.service.AttachmentLocalServiceUtil;
-import com.liferay.mail.service.FolderLocalServiceUtil;
-import com.liferay.mail.service.MessageLocalServiceUtil;
+import com.liferay.mail.reader.attachment.AttachmentHandler;
+import com.liferay.mail.reader.configuration.MailGroupServiceConfiguration;
+import com.liferay.mail.reader.constants.MailConstants;
+import com.liferay.mail.reader.exception.MailException;
+import com.liferay.mail.reader.exception.NoSuchMessageException;
+import com.liferay.mail.reader.internal.util.HtmlContentUtil;
+import com.liferay.mail.reader.model.Account;
+import com.liferay.mail.reader.model.MailFile;
+import com.liferay.mail.reader.service.AttachmentLocalServiceUtil;
+import com.liferay.mail.reader.service.FolderLocalServiceUtil;
+import com.liferay.mail.reader.service.MessageLocalServiceUtil;
 import com.liferay.petra.mail.InternetAddressUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
@@ -469,7 +469,7 @@ public class IMAPAccessor {
 
 				long remoteMessageId = getUID(jxFolder, jxMessage);
 
-				com.liferay.mail.model.Message message =
+				com.liferay.mail.reader.model.Message message =
 					MessageLocalServiceUtil.getMessage(
 						folderId, remoteMessageId);
 
@@ -522,7 +522,7 @@ public class IMAPAccessor {
 		Folder jxFolder = null;
 
 		try {
-			com.liferay.mail.model.Folder folder =
+			com.liferay.mail.reader.model.Folder folder =
 				FolderLocalServiceUtil.fetchFolder(folderId);
 
 			if (folder == null) {
@@ -659,7 +659,7 @@ public class IMAPAccessor {
 				}
 			}
 
-			com.liferay.mail.model.Folder folder =
+			com.liferay.mail.reader.model.Folder folder =
 				FolderLocalServiceUtil.getFolder(folderId);
 
 			FolderLocalServiceUtil.updateFolder(
@@ -801,7 +801,7 @@ public class IMAPAccessor {
 
 		Store store = _imapConnection.getStore(true);
 
-		com.liferay.mail.model.Folder folder = FolderLocalServiceUtil.getFolder(
+		com.liferay.mail.reader.model.Folder folder = FolderLocalServiceUtil.getFolder(
 			folderId);
 
 		return store.getFolder(folder.getFullName());
@@ -846,7 +846,7 @@ public class IMAPAccessor {
 	protected Message getMessage(long folderId, Folder jxFolder, boolean oldest)
 		throws MessagingException, PortalException {
 
-		com.liferay.mail.model.Message message = null;
+		com.liferay.mail.reader.model.Message message = null;
 
 		try {
 			message = MessageLocalServiceUtil.getRemoteMessage(
@@ -905,7 +905,7 @@ public class IMAPAccessor {
 		long[] remoteMessageIds = new long[messageIds.length];
 
 		for (int i = 0; i < messageIds.length; i++) {
-			com.liferay.mail.model.Message message =
+			com.liferay.mail.reader.model.Message message =
 				MessageLocalServiceUtil.getMessage(messageIds[i]);
 
 			remoteMessageIds[i] = message.getRemoteMessageId();
@@ -1031,7 +1031,7 @@ public class IMAPAccessor {
 		throws PortalException {
 
 		try {
-			com.liferay.mail.model.Message message =
+			com.liferay.mail.reader.model.Message message =
 				MessageLocalServiceUtil.getMessage(messageId);
 
 			StringBundler sb = new StringBundler(6);
@@ -1055,7 +1055,7 @@ public class IMAPAccessor {
 		throws PortalException {
 
 		try {
-			com.liferay.mail.model.Message message =
+			com.liferay.mail.reader.model.Message message =
 				MessageLocalServiceUtil.getMessage(messageId);
 
 			if (recipientType.equals(RecipientType.TO)) {

@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.mail.configuration;
+package com.liferay.mail.reader.configuration;
 
 import aQute.bnd.annotation.metatype.Meta;
 
@@ -25,7 +25,7 @@ import com.liferay.portal.configuration.metatype.annotations.ExtendedObjectClass
 	scope = ExtendedObjectClassDefinition.Scope.COMPANY
 )
 @Meta.OCD(
-	id = "com.liferay.mail.configuration.MailConfiguration",
+	id = "com.liferay.mail.reader.configuration.MailConfiguration",
 	localization = "content/Language", name = "mail.service.configuration.name"
 )
 public interface MailGroupServiceConfiguration {

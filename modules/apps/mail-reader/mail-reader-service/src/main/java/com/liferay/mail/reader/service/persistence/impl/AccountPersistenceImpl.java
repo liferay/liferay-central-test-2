@@ -12,15 +12,15 @@
  * details.
  */
 
-package com.liferay.mail.service.persistence.impl;
+package com.liferay.mail.reader.service.persistence.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.mail.exception.NoSuchAccountException;
-import com.liferay.mail.model.Account;
-import com.liferay.mail.model.impl.AccountImpl;
-import com.liferay.mail.model.impl.AccountModelImpl;
-import com.liferay.mail.service.persistence.AccountPersistence;
+import com.liferay.mail.reader.exception.NoSuchAccountException;
+import com.liferay.mail.reader.model.Account;
+import com.liferay.mail.reader.model.impl.AccountImpl;
+import com.liferay.mail.reader.model.impl.AccountModelImpl;
+import com.liferay.mail.reader.service.persistence.AccountPersistence;
 
 import com.liferay.portal.kernel.dao.orm.EntityCache;
 import com.liferay.portal.kernel.dao.orm.FinderCache;
@@ -64,7 +64,7 @@ import java.util.Set;
  *
  * @author Brian Wing Shun Chan
  * @see AccountPersistence
- * @see com.liferay.mail.service.persistence.AccountUtil
+ * @see com.liferay.mail.reader.service.persistence.AccountUtil
  * @generated
  */
 @ProviderType

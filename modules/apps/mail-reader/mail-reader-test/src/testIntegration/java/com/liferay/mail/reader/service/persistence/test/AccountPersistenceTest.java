@@ -12,15 +12,15 @@
  * details.
  */
 
-package com.liferay.mail.service.persistence.test;
+package com.liferay.mail.reader.service.persistence.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 
-import com.liferay.mail.exception.NoSuchAccountException;
-import com.liferay.mail.model.Account;
-import com.liferay.mail.service.AccountLocalServiceUtil;
-import com.liferay.mail.service.persistence.AccountPersistence;
-import com.liferay.mail.service.persistence.AccountUtil;
+import com.liferay.mail.reader.exception.NoSuchAccountException;
+import com.liferay.mail.reader.model.Account;
+import com.liferay.mail.reader.service.AccountLocalServiceUtil;
+import com.liferay.mail.reader.service.persistence.AccountPersistence;
+import com.liferay.mail.reader.service.persistence.AccountUtil;
 
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;

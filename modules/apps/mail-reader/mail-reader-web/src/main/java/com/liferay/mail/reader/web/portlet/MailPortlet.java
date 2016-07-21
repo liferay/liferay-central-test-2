@@ -12,13 +12,13 @@
  * details.
  */
 
-package com.liferay.mail.web.portlet;
+package com.liferay.mail.reader.web.portlet;
 
-import com.liferay.mail.attachment.AttachmentHandler;
-import com.liferay.mail.constants.MailPortletKeys;
-import com.liferay.mail.model.Attachment;
-import com.liferay.mail.service.AttachmentLocalService;
-import com.liferay.mail.web.util.MailManager;
+import com.liferay.mail.reader.attachment.AttachmentHandler;
+import com.liferay.mail.reader.constants.MailPortletKeys;
+import com.liferay.mail.reader.model.Attachment;
+import com.liferay.mail.reader.service.AttachmentLocalService;
+import com.liferay.mail.reader.web.util.MailManager;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.PortletResponseUtil;

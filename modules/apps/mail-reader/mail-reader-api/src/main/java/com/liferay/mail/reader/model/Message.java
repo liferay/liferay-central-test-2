@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.mail.model;
+package com.liferay.mail.reader.model;
 
 import aQute.bnd.annotation.ProviderType;
 
@@ -25,17 +25,17 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Brian Wing Shun Chan
  * @see MessageModel
- * @see com.liferay.mail.model.impl.MessageImpl
- * @see com.liferay.mail.model.impl.MessageModelImpl
+ * @see com.liferay.mail.reader.model.impl.MessageImpl
+ * @see com.liferay.mail.reader.model.impl.MessageModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.mail.model.impl.MessageImpl")
+@ImplementationClassName("com.liferay.mail.reader.model.impl.MessageImpl")
 @ProviderType
 public interface Message extends MessageModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.mail.model.impl.MessageImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to {@link com.liferay.mail.reader.model.impl.MessageImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public static final Accessor<Message, Long> MESSAGE_ID_ACCESSOR = new Accessor<Message, Long>() {
 			@Override

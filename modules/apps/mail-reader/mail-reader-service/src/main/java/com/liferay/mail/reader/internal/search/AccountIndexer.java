@@ -12,12 +12,12 @@
  * details.
  */
 
-package com.liferay.mail.internal.search;
+package com.liferay.mail.reader.internal.search;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.expando.kernel.util.ExpandoBridgeIndexerUtil;
-import com.liferay.mail.model.Account;
-import com.liferay.mail.service.AccountLocalServiceUtil;
+import com.liferay.mail.reader.model.Account;
+import com.liferay.mail.reader.service.AccountLocalServiceUtil;
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;

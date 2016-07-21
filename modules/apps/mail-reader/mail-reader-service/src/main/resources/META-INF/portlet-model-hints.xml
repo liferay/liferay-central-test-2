@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 
 <model-hints>
-	<model name="com.liferay.mail.model.Account">
+	<model name="com.liferay.mail.reader.model.Account">
 		<field name="accountId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
@@ -29,7 +29,7 @@
 		<field name="trashFolderId" type="long" />
 		<field name="defaultSender" type="boolean" />
 	</model>
-	<model name="com.liferay.mail.model.Attachment">
+	<model name="com.liferay.mail.reader.model.Attachment">
 		<field name="attachmentId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
@@ -40,7 +40,7 @@
 		<field name="fileName" type="String" />
 		<field name="size" type="long" />
 	</model>
-	<model name="com.liferay.mail.model.Folder">
+	<model name="com.liferay.mail.reader.model.Folder">
 		<field name="folderId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
@@ -52,7 +52,7 @@
 		<field name="displayName" type="String" />
 		<field name="remoteMessageCount" type="int" />
 	</model>
-	<model name="com.liferay.mail.model.Message">
+	<model name="com.liferay.mail.reader.model.Message">
 		<field name="messageId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />

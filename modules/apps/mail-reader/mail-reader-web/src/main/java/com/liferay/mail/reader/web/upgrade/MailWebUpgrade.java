@@ -12,9 +12,9 @@
  * details.
  */
 
-package com.liferay.mail.web.upgrade;
+package com.liferay.mail.reader.web.upgrade;
 
-import com.liferay.mail.web.upgrade.v1_0_0.UpgradePortletId;
+import com.liferay.mail.reader.web.upgrade.v1_0_0.UpgradePortletId;
 import com.liferay.portal.kernel.module.framework.ModuleServiceLifecycle;
 import com.liferay.portal.kernel.upgrade.DummyUpgradeStep;
 import com.liferay.portal.kernel.upgrade.UpgradeException;
@@ -37,7 +37,7 @@ public class MailWebUpgrade implements UpgradeStepRegistrator {
 
 				@Override
 				protected String getBundleSymbolicName() {
-					return "com.liferay.mail.web";
+					return "com.liferay.mail.reader.web";
 				}
 
 				@Override
@@ -55,10 +55,10 @@ public class MailWebUpgrade implements UpgradeStepRegistrator {
 		}
 
 		registry.register(
-			"com.liferay.mail.web", "0.0.0", "1.0.0", new DummyUpgradeStep());
+			"com.liferay.mail.reader.web", "0.0.0", "1.0.0", new DummyUpgradeStep());
 
 		registry.register(
-			"com.liferay.mail.web", "0.0.1", "1.0.0", new UpgradePortletId());
+			"com.liferay.mail.reader.web", "0.0.1", "1.0.0", new UpgradePortletId());
 	}
 
 	@Reference(target = ModuleServiceLifecycle.PORTAL_INITIALIZED, unbind = "-")

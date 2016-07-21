@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.mail.service;
+package com.liferay.mail.reader.service;
 
 import aQute.bnd.annotation.ProviderType;
 
@@ -22,7 +22,7 @@ import org.osgi.util.tracker.ServiceTracker;
 
 /**
  * Provides the local service utility for Account. This utility wraps
- * {@link com.liferay.mail.service.impl.AccountLocalServiceImpl} and is the
+ * {@link com.liferay.mail.reader.service.impl.AccountLocalServiceImpl} and is the
  * primary access point for service operations in application layer code running
  * on the local server. Methods of this service will not have security checks
  * based on the propagated JAAS credentials because this service can only be
@@ -30,8 +30,8 @@ import org.osgi.util.tracker.ServiceTracker;
  *
  * @author Brian Wing Shun Chan
  * @see AccountLocalService
- * @see com.liferay.mail.service.base.AccountLocalServiceBaseImpl
- * @see com.liferay.mail.service.impl.AccountLocalServiceImpl
+ * @see com.liferay.mail.reader.service.base.AccountLocalServiceBaseImpl
+ * @see com.liferay.mail.reader.service.impl.AccountLocalServiceImpl
  * @generated
  */
 @ProviderType
@@ -39,7 +39,7 @@ public class AccountLocalServiceUtil {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this class directly. Add custom service methods to {@link com.liferay.mail.service.impl.AccountLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
+	 * Never modify this class directly. Add custom service methods to {@link com.liferay.mail.reader.service.impl.AccountLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
 
 	/**
@@ -48,12 +48,12 @@ public class AccountLocalServiceUtil {
 	* @param account the account
 	* @return the account that was added
 	*/
-	public static com.liferay.mail.model.Account addAccount(
-		com.liferay.mail.model.Account account) {
+	public static com.liferay.mail.reader.model.Account addAccount(
+		com.liferay.mail.reader.model.Account account) {
 		return getService().addAccount(account);
 	}
 
-	public static com.liferay.mail.model.Account addAccount(long userId,
+	public static com.liferay.mail.reader.model.Account addAccount(long userId,
 		java.lang.String address, java.lang.String personalName,
 		java.lang.String protocol, java.lang.String incomingHostName,
 		int incomingPort, boolean incomingSecure,
@@ -78,7 +78,7 @@ public class AccountLocalServiceUtil {
 	* @param accountId the primary key for the new account
 	* @return the new account
 	*/
-	public static com.liferay.mail.model.Account createAccount(long accountId) {
+	public static com.liferay.mail.reader.model.Account createAccount(long accountId) {
 		return getService().createAccount(accountId);
 	}
 
@@ -89,8 +89,8 @@ public class AccountLocalServiceUtil {
 	* @return the account that was removed
 	* @throws PortalException
 	*/
-	public static com.liferay.mail.model.Account deleteAccount(
-		com.liferay.mail.model.Account account)
+	public static com.liferay.mail.reader.model.Account deleteAccount(
+		com.liferay.mail.reader.model.Account account)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().deleteAccount(account);
 	}
@@ -102,12 +102,12 @@ public class AccountLocalServiceUtil {
 	* @return the account that was removed
 	* @throws PortalException if a account with the primary key could not be found
 	*/
-	public static com.liferay.mail.model.Account deleteAccount(long accountId)
+	public static com.liferay.mail.reader.model.Account deleteAccount(long accountId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().deleteAccount(accountId);
 	}
 
-	public static com.liferay.mail.model.Account fetchAccount(long accountId) {
+	public static com.liferay.mail.reader.model.Account fetchAccount(long accountId) {
 		return getService().fetchAccount(accountId);
 	}
 
@@ -118,12 +118,12 @@ public class AccountLocalServiceUtil {
 	* @return the account
 	* @throws PortalException if a account with the primary key could not be found
 	*/
-	public static com.liferay.mail.model.Account getAccount(long accountId)
+	public static com.liferay.mail.reader.model.Account getAccount(long accountId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().getAccount(accountId);
 	}
 
-	public static com.liferay.mail.model.Account getAccount(long userId,
+	public static com.liferay.mail.reader.model.Account getAccount(long userId,
 		java.lang.String address)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().getAccount(userId, address);
@@ -135,12 +135,12 @@ public class AccountLocalServiceUtil {
 	* @param account the account
 	* @return the account that was updated
 	*/
-	public static com.liferay.mail.model.Account updateAccount(
-		com.liferay.mail.model.Account account) {
+	public static com.liferay.mail.reader.model.Account updateAccount(
+		com.liferay.mail.reader.model.Account account) {
 		return getService().updateAccount(account);
 	}
 
-	public static com.liferay.mail.model.Account updateAccount(long accountId,
+	public static com.liferay.mail.reader.model.Account updateAccount(long accountId,
 		java.lang.String personalName, java.lang.String password,
 		boolean savePassword, java.lang.String signature, boolean useSignature,
 		java.lang.String folderPrefix, boolean defaultSender)
@@ -150,7 +150,7 @@ public class AccountLocalServiceUtil {
 			savePassword, signature, useSignature, folderPrefix, defaultSender);
 	}
 
-	public static com.liferay.mail.model.Account updateFolders(long accountId,
+	public static com.liferay.mail.reader.model.Account updateFolders(long accountId,
 		long inboxFolderId, long draftFolderId, long sentFolderId,
 		long trashFolderId)
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -219,7 +219,7 @@ public class AccountLocalServiceUtil {
 	* Performs a dynamic query on the database and returns a range of the matching rows.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.mail.model.impl.AccountModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.mail.reader.model.impl.AccountModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param dynamicQuery the dynamic query
@@ -237,7 +237,7 @@ public class AccountLocalServiceUtil {
 	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.mail.model.impl.AccountModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.mail.reader.model.impl.AccountModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param dynamicQuery the dynamic query
@@ -258,19 +258,19 @@ public class AccountLocalServiceUtil {
 	* Returns a range of all the accounts.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.mail.model.impl.AccountModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.mail.reader.model.impl.AccountModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param start the lower bound of the range of accounts
 	* @param end the upper bound of the range of accounts (not inclusive)
 	* @return the range of accounts
 	*/
-	public static java.util.List<com.liferay.mail.model.Account> getAccounts(
+	public static java.util.List<com.liferay.mail.reader.model.Account> getAccounts(
 		int start, int end) {
 		return getService().getAccounts(start, end);
 	}
 
-	public static java.util.List<com.liferay.mail.model.Account> getAccounts(
+	public static java.util.List<com.liferay.mail.reader.model.Account> getAccounts(
 		long userId) {
 		return getService().getAccounts(userId);
 	}

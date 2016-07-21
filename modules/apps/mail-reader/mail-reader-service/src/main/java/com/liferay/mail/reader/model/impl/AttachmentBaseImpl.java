@@ -12,12 +12,12 @@
  * details.
  */
 
-package com.liferay.mail.model.impl;
+package com.liferay.mail.reader.model.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.mail.model.Attachment;
-import com.liferay.mail.service.AttachmentLocalServiceUtil;
+import com.liferay.mail.reader.model.Attachment;
+import com.liferay.mail.reader.service.AttachmentLocalServiceUtil;
 
 /**
  * The extended model base implementation for the Attachment service. Represents a row in the &quot;Mail_Attachment&quot; database table, with each column mapped to a property of this class.

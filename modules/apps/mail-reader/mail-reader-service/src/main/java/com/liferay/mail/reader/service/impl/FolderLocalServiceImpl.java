@@ -12,10 +12,10 @@
  * details.
  */
 
-package com.liferay.mail.service.impl;
+package com.liferay.mail.reader.service.impl;
 
-import com.liferay.mail.model.Folder;
-import com.liferay.mail.service.base.FolderLocalServiceBaseImpl;
+import com.liferay.mail.reader.model.Folder;
+import com.liferay.mail.reader.service.base.FolderLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.search.Indexer;

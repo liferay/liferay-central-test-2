@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.mail.service;
+package com.liferay.mail.reader.service;
 
 import aQute.bnd.annotation.ProviderType;
 
@@ -22,7 +22,7 @@ import org.osgi.util.tracker.ServiceTracker;
 
 /**
  * Provides the local service utility for Attachment. This utility wraps
- * {@link com.liferay.mail.service.impl.AttachmentLocalServiceImpl} and is the
+ * {@link com.liferay.mail.reader.service.impl.AttachmentLocalServiceImpl} and is the
  * primary access point for service operations in application layer code running
  * on the local server. Methods of this service will not have security checks
  * based on the propagated JAAS credentials because this service can only be
@@ -30,8 +30,8 @@ import org.osgi.util.tracker.ServiceTracker;
  *
  * @author Brian Wing Shun Chan
  * @see AttachmentLocalService
- * @see com.liferay.mail.service.base.AttachmentLocalServiceBaseImpl
- * @see com.liferay.mail.service.impl.AttachmentLocalServiceImpl
+ * @see com.liferay.mail.reader.service.base.AttachmentLocalServiceBaseImpl
+ * @see com.liferay.mail.reader.service.impl.AttachmentLocalServiceImpl
  * @generated
  */
 @ProviderType
@@ -39,7 +39,7 @@ public class AttachmentLocalServiceUtil {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this class directly. Add custom service methods to {@link com.liferay.mail.service.impl.AttachmentLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
+	 * Never modify this class directly. Add custom service methods to {@link com.liferay.mail.reader.service.impl.AttachmentLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
 
 	/**
@@ -48,12 +48,12 @@ public class AttachmentLocalServiceUtil {
 	* @param attachment the attachment
 	* @return the attachment that was added
 	*/
-	public static com.liferay.mail.model.Attachment addAttachment(
-		com.liferay.mail.model.Attachment attachment) {
+	public static com.liferay.mail.reader.model.Attachment addAttachment(
+		com.liferay.mail.reader.model.Attachment attachment) {
 		return getService().addAttachment(attachment);
 	}
 
-	public static com.liferay.mail.model.Attachment addAttachment(long userId,
+	public static com.liferay.mail.reader.model.Attachment addAttachment(long userId,
 		long messageId, java.lang.String contentPath,
 		java.lang.String fileName, long size, java.io.File file)
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -68,7 +68,7 @@ public class AttachmentLocalServiceUtil {
 	* @param attachmentId the primary key for the new attachment
 	* @return the new attachment
 	*/
-	public static com.liferay.mail.model.Attachment createAttachment(
+	public static com.liferay.mail.reader.model.Attachment createAttachment(
 		long attachmentId) {
 		return getService().createAttachment(attachmentId);
 	}
@@ -79,8 +79,8 @@ public class AttachmentLocalServiceUtil {
 	* @param attachment the attachment
 	* @return the attachment that was removed
 	*/
-	public static com.liferay.mail.model.Attachment deleteAttachment(
-		com.liferay.mail.model.Attachment attachment) {
+	public static com.liferay.mail.reader.model.Attachment deleteAttachment(
+		com.liferay.mail.reader.model.Attachment attachment) {
 		return getService().deleteAttachment(attachment);
 	}
 
@@ -91,13 +91,13 @@ public class AttachmentLocalServiceUtil {
 	* @return the attachment that was removed
 	* @throws PortalException if a attachment with the primary key could not be found
 	*/
-	public static com.liferay.mail.model.Attachment deleteAttachment(
+	public static com.liferay.mail.reader.model.Attachment deleteAttachment(
 		long attachmentId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().deleteAttachment(attachmentId);
 	}
 
-	public static com.liferay.mail.model.Attachment fetchAttachment(
+	public static com.liferay.mail.reader.model.Attachment fetchAttachment(
 		long attachmentId) {
 		return getService().fetchAttachment(attachmentId);
 	}
@@ -109,7 +109,7 @@ public class AttachmentLocalServiceUtil {
 	* @return the attachment
 	* @throws PortalException if a attachment with the primary key could not be found
 	*/
-	public static com.liferay.mail.model.Attachment getAttachment(
+	public static com.liferay.mail.reader.model.Attachment getAttachment(
 		long attachmentId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().getAttachment(attachmentId);
@@ -121,8 +121,8 @@ public class AttachmentLocalServiceUtil {
 	* @param attachment the attachment
 	* @return the attachment that was updated
 	*/
-	public static com.liferay.mail.model.Attachment updateAttachment(
-		com.liferay.mail.model.Attachment attachment) {
+	public static com.liferay.mail.reader.model.Attachment updateAttachment(
+		com.liferay.mail.reader.model.Attachment attachment) {
 		return getService().updateAttachment(attachment);
 	}
 
@@ -196,7 +196,7 @@ public class AttachmentLocalServiceUtil {
 	* Performs a dynamic query on the database and returns a range of the matching rows.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.mail.model.impl.AttachmentModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.mail.reader.model.impl.AttachmentModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param dynamicQuery the dynamic query
@@ -214,7 +214,7 @@ public class AttachmentLocalServiceUtil {
 	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.mail.model.impl.AttachmentModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.mail.reader.model.impl.AttachmentModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param dynamicQuery the dynamic query
@@ -235,19 +235,19 @@ public class AttachmentLocalServiceUtil {
 	* Returns a range of all the attachments.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.mail.model.impl.AttachmentModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.mail.reader.model.impl.AttachmentModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param start the lower bound of the range of attachments
 	* @param end the upper bound of the range of attachments (not inclusive)
 	* @return the range of attachments
 	*/
-	public static java.util.List<com.liferay.mail.model.Attachment> getAttachments(
+	public static java.util.List<com.liferay.mail.reader.model.Attachment> getAttachments(
 		int start, int end) {
 		return getService().getAttachments(start, end);
 	}
 
-	public static java.util.List<com.liferay.mail.model.Attachment> getAttachments(
+	public static java.util.List<com.liferay.mail.reader.model.Attachment> getAttachments(
 		long messageId) {
 		return getService().getAttachments(messageId);
 	}

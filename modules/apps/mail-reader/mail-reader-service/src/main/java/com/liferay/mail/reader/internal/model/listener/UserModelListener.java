@@ -12,12 +12,12 @@
  * details.
  */
 
-package com.liferay.mail.internal.model.listener;
+package com.liferay.mail.reader.internal.model.listener;
 
-import com.liferay.mail.mailbox.Mailbox;
-import com.liferay.mail.mailbox.MailboxFactoryUtil;
-import com.liferay.mail.model.Account;
-import com.liferay.mail.service.AccountLocalServiceUtil;
+import com.liferay.mail.reader.mailbox.Mailbox;
+import com.liferay.mail.reader.mailbox.MailboxFactoryUtil;
+import com.liferay.mail.reader.model.Account;
+import com.liferay.mail.reader.service.AccountLocalServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.BaseModelListener;

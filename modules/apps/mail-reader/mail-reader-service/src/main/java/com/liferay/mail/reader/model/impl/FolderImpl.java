@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.mail.model.impl;
+package com.liferay.mail.reader.model.impl;
 
 /**
  * @author Brian Wing Shun Chan

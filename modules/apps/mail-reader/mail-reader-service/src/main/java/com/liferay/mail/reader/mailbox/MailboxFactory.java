@@ -12,9 +12,9 @@
  * details.
  */
 
-package com.liferay.mail.mailbox;
+package com.liferay.mail.reader.mailbox;
 
-import com.liferay.mail.model.Account;
+import com.liferay.mail.reader.model.Account;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
 

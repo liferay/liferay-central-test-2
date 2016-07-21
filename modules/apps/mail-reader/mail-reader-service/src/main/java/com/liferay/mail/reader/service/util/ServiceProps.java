@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.mail.service.util;
+package com.liferay.mail.reader.service.util;
 
 import aQute.bnd.annotation.ProviderType;
 

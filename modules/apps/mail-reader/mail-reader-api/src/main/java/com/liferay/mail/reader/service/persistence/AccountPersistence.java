@@ -12,12 +12,12 @@
  * details.
  */
 
-package com.liferay.mail.service.persistence;
+package com.liferay.mail.reader.service.persistence;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.mail.exception.NoSuchAccountException;
-import com.liferay.mail.model.Account;
+import com.liferay.mail.reader.exception.NoSuchAccountException;
+import com.liferay.mail.reader.model.Account;
 
 import com.liferay.portal.kernel.service.persistence.BasePersistence;
 
@@ -29,7 +29,7 @@ import com.liferay.portal.kernel.service.persistence.BasePersistence;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see com.liferay.mail.service.persistence.impl.AccountPersistenceImpl
+ * @see com.liferay.mail.reader.service.persistence.impl.AccountPersistenceImpl
  * @see AccountUtil
  * @generated
  */

@@ -12,9 +12,9 @@
  * details.
  */
 
-package com.liferay.mail.web.upgrade.v1_0_0;
+package com.liferay.mail.reader.web.upgrade.v1_0_0;
 
-import com.liferay.mail.constants.MailPortletKeys;
+import com.liferay.mail.reader.constants.MailPortletKeys;
 import com.liferay.portal.kernel.upgrade.BaseUpgradePortletId;
 
 /**
