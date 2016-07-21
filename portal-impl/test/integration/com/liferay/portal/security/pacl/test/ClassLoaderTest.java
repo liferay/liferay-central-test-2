@@ -220,6 +220,7 @@ public class ClassLoaderTest {
 		}
 	}
 
+	@Ignore
 	@Test
 	public void testGet18() throws Exception {
 		PortletClassLoaderUtil.getClassLoader("pacl-1-test-portlet");
