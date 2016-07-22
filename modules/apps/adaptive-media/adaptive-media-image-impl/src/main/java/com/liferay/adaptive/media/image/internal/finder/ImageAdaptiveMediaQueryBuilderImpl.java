@@ -101,14 +101,22 @@ public class ImageAdaptiveMediaQueryBuilderImpl
 		return _attributes;
 	}
 
-	public FileVersion getFileVersion() throws PortalException {
+	public Optional<FileVersion> getFileVersion() {
 		if (_fileVersion != null) {
-			return _fileVersion;
+			return Optional.of(_fileVersion);
 		}
 
-		_fileVersion = _fileEntry.getLatestFileVersion();
+		return Optional.empty();
+	}
 
-		return _fileVersion;
+	public FileEntry getFileEntry() throws PortalException {
+		if (_fileEntry != null) {
+			return _fileEntry;
+		}
+
+		_fileEntry = _fileVersion.getFileEntry();
+
+		return _fileEntry;
 	}
 
 	public <V> AdaptiveMediaAttributeQueryBuilder with(

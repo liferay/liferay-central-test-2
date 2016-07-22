@@ -29,6 +29,7 @@ import com.liferay.adaptive.media.processor.AdaptiveMediaAttribute;
 import com.liferay.adaptive.media.processor.AdaptiveMediaProcessor;
 import com.liferay.adaptive.media.processor.AdaptiveMediaProcessorRuntimeException;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 
 import java.io.IOException;
@@ -91,22 +92,22 @@ public final class ImageAdaptiveMediaProcessorImpl
 				"Only queries built by the provided query build are valid.");
 		}
 
-		FileVersion fileVersion = queryBuilder.getFileVersion();
+		FileEntry fileEntry = queryBuilder.getFileEntry();
 
-		if (!_imageProcessor.isMimeTypeSupported(fileVersion.getMimeType())) {
+		if (!_imageProcessor.isMimeTypeSupported(fileEntry.getMimeType())) {
 			return Stream.empty();
 		}
 
-		long companyId = fileVersion.getCompanyId();
-
 		Collection<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
 			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
-				companyId);
+				fileEntry.getCompanyId());
 
 		return configurationEntries.stream().
 			map(
 				configurationEntry ->
-					_createMedia(fileVersion, configurationEntry)).
+					_createMedia(
+						fileEntry, queryBuilder.getFileVersion(),
+						configurationEntry)).
 			sorted(_buildComparator(queryBuilder.getAttributes()));
 	}
 
@@ -199,20 +200,30 @@ public final class ImageAdaptiveMediaProcessorImpl
 	}
 
 	private URI _buildRelativeURI(
-		FileVersion fileVersion,
+		FileEntry fileEntry, Optional<FileVersion> fileVersionOptional,
 		ImageAdaptiveMediaConfigurationEntry configurationEntry) {
 
-		String relativePath = String.format(
-			"image/%d/%d/%s/%s", fileVersion.getFileEntryId(),
-			fileVersion.getFileVersionId(), configurationEntry.getUUID(),
-			_encode(fileVersion.getFileName()));
+		String relativePath =
+			fileVersionOptional.map(
+				fileVersion ->
+					String.format(
+						"image/%d/%d/%s/%s", fileEntry.getFileEntryId(),
+						fileVersion.getFileVersionId(),
+						configurationEntry.getUUID(),
+						_encode(fileVersion.getFileName()))).
+			orElseGet(
+				() ->
+					String.format(
+						"image/%d/%s/%s", fileEntry.getFileEntryId(),
+						configurationEntry.getUUID(),
+						_encode(fileEntry.getFileName())));
 
 		return URI.create(relativePath);
 	}
 
 	private AdaptiveMedia<ImageAdaptiveMediaProcessor> _createMedia(
-		FileVersion fileVersion,
-		ImageAdaptiveMediaConfigurationEntry configurationEntry) {
+			FileEntry fileEntry, Optional<FileVersion> fileVersionOptional,
+			ImageAdaptiveMediaConfigurationEntry configurationEntry) {
 
 		Map<String, String> properties = configurationEntry.getProperties();
 
@@ -221,27 +232,31 @@ public final class ImageAdaptiveMediaProcessorImpl
 
 		properties.put(
 			contentLengthAttribute.getName(),
-			String.valueOf(fileVersion.getSize()));
+			String.valueOf(fileEntry.getSize()));
 
 		AdaptiveMediaAttribute<Object, String> contentTypeAttribute =
 			AdaptiveMediaAttribute.contentType();
 
 		properties.put(
-			contentTypeAttribute.getName(), fileVersion.getMimeType());
+			contentTypeAttribute.getName(), fileEntry.getMimeType());
 
 		AdaptiveMediaAttribute<Object, String> fileNameAttribute =
 			AdaptiveMediaAttribute.fileName();
 
-		properties.put(fileNameAttribute.getName(), fileVersion.getFileName());
+		properties.put(fileNameAttribute.getName(), fileEntry.getFileName());
 
 		ImageAdaptiveMediaAttributeMapping attributeMapping =
 			ImageAdaptiveMediaAttributeMapping.fromProperties(properties);
 
+		FileVersion fileVersion = fileVersionOptional.orElseGet(
+			fileEntry.getLatestFileVersion());
+
 		return new ImageAdaptiveMedia(
 			() -> _imageStorage.getContentStream(
-					fileVersion, configurationEntry),
+				fileVersion, configurationEntry),
 			attributeMapping,
-			_buildRelativeURI(fileVersion, configurationEntry));
+			_buildRelativeURI(
+				fileEntry, fileVersionOptional, configurationEntry));
 	}
 
 	private String _encode(String s) {
