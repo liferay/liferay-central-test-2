@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.workflow.task.web.permission;
+package com.liferay.portal.workflow.task.web.internal.permission;
 
 import static org.mockito.Mockito.mock;
 
