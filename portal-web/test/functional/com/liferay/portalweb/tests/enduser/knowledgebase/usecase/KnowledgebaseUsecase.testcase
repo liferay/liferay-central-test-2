@@ -919,8 +919,7 @@
 			<var name="portlet" value="Knowledge Base" />
 		</execute>
 
-		<execute macro="KBArticle#gotoViaKBAdminCP">
-			<var name="hasChildArticle" value="true" />
+		<execute macro="KBArticle#gotoChildArticleDescriptiveDetails">
 			<var name="kbArticleTitle" value="Knowledge Base Article Parent Title 2" />
 		</execute>
 
