@@ -102,13 +102,24 @@ public final class ImageAdaptiveMediaProcessorImpl
 			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
 				fileEntry.getCompanyId());
 
-		return configurationEntries.stream().
-			map(
-				configurationEntry ->
-					_createMedia(
-						fileEntry, queryBuilder.getFileVersion(),
-						configurationEntry)).
-			sorted(_buildComparator(queryBuilder.getAttributes()));
+		try {
+			return configurationEntries.stream().
+				map(
+					configurationEntry ->
+						_createMedia(
+							fileEntry, queryBuilder.getFileVersion(),
+							configurationEntry)).
+				sorted(_buildComparator(queryBuilder.getAttributes()));
+		}
+		catch (AdaptiveMediaProcessorRuntimeException ampre) {
+			Throwable cause = ampre.getCause();
+
+			if (cause instanceof PortalException) {
+				throw (PortalException)cause;
+			}
+
+			throw ampre;
+		}
 	}
 
 	@Override
@@ -249,7 +260,14 @@ public final class ImageAdaptiveMediaProcessorImpl
 			ImageAdaptiveMediaAttributeMapping.fromProperties(properties);
 
 		FileVersion fileVersion = fileVersionOptional.orElseGet(
-			fileEntry.getLatestFileVersion());
+			() -> {
+				try {
+					return fileEntry.getLatestFileVersion();
+				}
+				catch (PortalException pe) {
+					throw new AdaptiveMediaProcessorRuntimeException(pe);
+				}
+			});
 
 		return new ImageAdaptiveMedia(
 			() -> _imageStorage.getContentStream(
