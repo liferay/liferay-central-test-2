@@ -125,12 +125,6 @@
 		<execute function="AssertTextEquals#assertPartialText" locator1="KnowledgeBaseSuggestions#STATUS" value1="${status}" />
 	</command>
 
-	<command name="viewSuggestionStatus">
-		<var name="key_kbSuggestionBody" value="${kbSuggestionBody}" />
-
-		<execute function="AssertTextEquals#assertPartialText" locator1="KnowledgeBaseSuggestions#STATUS" value1="${status}" />
-	</command>
-
 	<command name="viewSubmittedSuggestionCountNoPermissionPG">
 		<var name="kbSuggestionCount" value="${kbSuggestionCount}" />
 
@@ -146,5 +140,11 @@
 				<execute function="AssertTextEquals#assertPartialText" locator1="KnowledgeBase#LINK_THERE_ARE_SUGGESTIONS" value1="You sent ${kbSuggestionCount} suggestions for this article." />
 			</else>
 		</if>
+	</command>
+
+	<command name="viewSuggestionStatus">
+		<var name="key_kbSuggestionBody" value="${kbSuggestionBody}" />
+
+		<execute function="AssertTextEquals#assertPartialText" locator1="KnowledgeBaseSuggestions#STATUS" value1="${status}" />
 	</command>
 </definition>
