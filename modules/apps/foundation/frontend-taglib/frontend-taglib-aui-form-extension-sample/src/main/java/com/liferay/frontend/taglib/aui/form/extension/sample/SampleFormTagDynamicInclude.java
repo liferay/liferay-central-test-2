@@ -50,8 +50,8 @@ public class SampleFormTagDynamicInclude implements TagDynamicInclude {
 			"doStartTag#before");
 
 		tagDynamicIncludeRegistry.register(
-			"com.liferay.taglib.aui.FormTag", PortletKeys.LOGIN + "-loginFormModal",
-			"doStartTag#before");
+			"com.liferay.taglib.aui.FormTag",
+			PortletKeys.LOGIN + "-loginFormModal", "doStartTag#before");
 	}
 
 }
