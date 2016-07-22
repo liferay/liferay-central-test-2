@@ -17,6 +17,7 @@ package com.liferay.adaptive.media.image.internal.finder;
 import com.liferay.adaptive.media.image.internal.processor.ImageAdaptiveMediaAttribute;
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
 import com.liferay.adaptive.media.processor.AdaptiveMediaAttribute;
+import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 
 import java.util.Map;
@@ -31,6 +32,26 @@ import org.mockito.Mockito;
  * @author Adolfo Pérez
  */
 public class ImageAdaptiveMediaQueryBuilderImplTest {
+
+	@Test
+	public void testFileEntryQueryReturnsEmptyFileVersion() throws Exception {
+		FileEntry fileEntry = Mockito.mock(FileEntry.class);
+
+		_queryBuilder.allForFileEntry(fileEntry);
+
+		Assert.assertEquals(Optional.empty(), _queryBuilder.getFileVersion());
+	}
+
+	@Test
+	public void testFileEntryWithAttributesQueryReturnsEmptyFileVersion()
+		throws Exception {
+
+		FileEntry fileEntry = Mockito.mock(FileEntry.class);
+
+		_queryBuilder.forFileEntry(fileEntry).done();
+
+		Assert.assertEquals(Optional.empty(), _queryBuilder.getFileVersion());
+	}
 
 	@Test
 	public void testNonNullOptionalAttributeQuery() {
@@ -54,6 +75,16 @@ public class ImageAdaptiveMediaQueryBuilderImplTest {
 		_queryBuilder.
 			forVersion(fileVersion).
 			with(ImageAdaptiveMediaAttribute.IMAGE_HEIGHT, (Integer)null);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testNullFileEntryFailsWhenQueryingAll() {
+		_queryBuilder.allForFileEntry(null);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testNullFileEntryFailsWhenQueryingAttributes() {
+		_queryBuilder.forFileEntry(null);
 	}
 
 	@Test(expected = IllegalArgumentException.class)

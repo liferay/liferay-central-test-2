@@ -28,6 +28,7 @@ import com.liferay.adaptive.media.processor.AdaptiveMedia;
 import com.liferay.adaptive.media.processor.AdaptiveMediaAttribute;
 import com.liferay.adaptive.media.processor.AdaptiveMediaProcessor;
 import com.liferay.adaptive.media.processor.AdaptiveMediaProcessorRuntimeException;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 
 import java.io.IOException;
@@ -74,9 +75,10 @@ public final class ImageAdaptiveMediaProcessorImpl
 
 	@Override
 	public Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> getAdaptiveMedia(
-		Function<ImageAdaptiveMediaQueryBuilder,
-		AdaptiveMediaQuery<FileVersion, ImageAdaptiveMediaProcessor>>
-			queryBuilderFunction) {
+			Function<ImageAdaptiveMediaQueryBuilder,
+			AdaptiveMediaQuery<FileVersion, ImageAdaptiveMediaProcessor>>
+				queryBuilderFunction)
+		throws PortalException {
 
 		ImageAdaptiveMediaQueryBuilderImpl queryBuilder =
 			new ImageAdaptiveMediaQueryBuilderImpl();

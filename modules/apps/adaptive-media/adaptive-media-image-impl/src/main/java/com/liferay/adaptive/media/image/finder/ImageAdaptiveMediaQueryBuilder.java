@@ -18,6 +18,7 @@ import com.liferay.adaptive.media.finder.AdaptiveMediaQuery;
 import com.liferay.adaptive.media.finder.AdaptiveMediaQueryBuilder;
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
 import com.liferay.adaptive.media.processor.AdaptiveMediaAttribute;
+import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 
 import java.util.Optional;
@@ -30,7 +31,12 @@ public interface ImageAdaptiveMediaQueryBuilder
 		<FileVersion, ImageAdaptiveMediaProcessor> {
 
 	public AdaptiveMediaQuery<FileVersion, ImageAdaptiveMediaProcessor>
+		allForFileEntry(FileEntry fileEntry);
+
+	public AdaptiveMediaQuery<FileVersion, ImageAdaptiveMediaProcessor>
 		allForVersion(FileVersion fileVersion);
+
+	public AdaptiveMediaAttributeQueryBuilder forFileEntry(FileEntry fileEntry);
 
 	public AdaptiveMediaAttributeQueryBuilder forVersion(
 		FileVersion fileVersion);

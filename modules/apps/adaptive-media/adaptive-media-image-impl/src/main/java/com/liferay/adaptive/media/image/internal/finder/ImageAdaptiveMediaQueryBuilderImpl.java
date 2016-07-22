@@ -18,6 +18,8 @@ import com.liferay.adaptive.media.finder.AdaptiveMediaQuery;
 import com.liferay.adaptive.media.image.finder.ImageAdaptiveMediaQueryBuilder;
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
 import com.liferay.adaptive.media.processor.AdaptiveMediaAttribute;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 
 import java.util.LinkedHashMap;
@@ -38,6 +40,19 @@ public class ImageAdaptiveMediaQueryBuilderImpl
 
 	@Override
 	public AdaptiveMediaQuery<FileVersion, ImageAdaptiveMediaProcessor>
+		allForFileEntry(FileEntry fileEntry) {
+
+		if (fileEntry == null) {
+			throw new IllegalArgumentException("File entry cannot be null");
+		}
+
+		_fileEntry = fileEntry;
+
+		return QUERY;
+	}
+
+	@Override
+	public AdaptiveMediaQuery<FileVersion, ImageAdaptiveMediaProcessor>
 		allForVersion(FileVersion fileVersion) {
 
 		if (fileVersion == null) {
@@ -52,6 +67,19 @@ public class ImageAdaptiveMediaQueryBuilderImpl
 	@Override
 	public AdaptiveMediaQuery<FileVersion, ImageAdaptiveMediaProcessor> done() {
 		return QUERY;
+	}
+
+	@Override
+	public AdaptiveMediaAttributeQueryBuilder forFileEntry(
+		FileEntry fileEntry) {
+
+		if (fileEntry == null) {
+			throw new IllegalArgumentException("File entry cannot be null");
+		}
+
+		_fileEntry = fileEntry;
+
+		return this;
 	}
 
 	@Override
@@ -73,7 +101,13 @@ public class ImageAdaptiveMediaQueryBuilderImpl
 		return _attributes;
 	}
 
-	public FileVersion getFileVersion() {
+	public FileVersion getFileVersion() throws PortalException {
+		if (_fileVersion != null) {
+			return _fileVersion;
+		}
+
+		_fileVersion = _fileEntry.getLatestFileVersion();
+
 		return _fileVersion;
 	}
 
@@ -108,6 +142,7 @@ public class ImageAdaptiveMediaQueryBuilderImpl
 
 	private Map<AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, ?>, Object>
 		_attributes = new LinkedHashMap<>();
+	private FileEntry _fileEntry;
 	private FileVersion _fileVersion;
 
 }
