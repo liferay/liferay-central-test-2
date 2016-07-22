@@ -350,11 +350,11 @@ public class JournalArticleStagedModelDataHandler
 			}
 		}
 
-		JournalArticle lastArticle =
+		JournalArticle latestArticle =
 			_journalArticleLocalService.fetchLatestArticle(
 				article.getResourcePrimKey());
 
-		if (lastArticle.getId() == article.getId()) {
+		if (latestArticle.getId() == article.getId()) {
 			for (FileEntry fileEntry : article.getImagesFileEntries()) {
 				StagedModelDataHandlerUtil.exportReferenceStagedModel(
 					portletDataContext, article, fileEntry,
@@ -638,11 +638,11 @@ public class JournalArticleStagedModelDataHandler
 				}
 			}
 
-			JournalArticle lastArticle =
+			JournalArticle latestArticle =
 				_journalArticleLocalService.fetchLatestArticle(
 					article.getResourcePrimKey());
 
-			if (lastArticle.getId() == article.getId()) {
+			if (latestArticle.getId() == article.getId()) {
 				List<Element> attachmentElements =
 					portletDataContext.getReferenceDataElements(
 						article, DLFileEntry.class,
