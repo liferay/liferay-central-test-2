@@ -95,7 +95,6 @@ boolean showAssetCount = dataJSONObject.getBoolean("showAssetCount", true);
 					AssetCategory curAssetCategory = AssetCategoryLocalServiceUtil.getAssetCategory(assetCategoryId);
 
 					if (AssetCategoryPermission.contains(permissionChecker, curAssetCategory, ActionKeys.VIEW)) {
-
 						int popularity = (int)(1 + ((maxCount - (maxCount - (termCollector.getFrequency() - minCount))) * multiplier));
 
 						if (frequencyThreshold > termCollector.getFrequency()) {
