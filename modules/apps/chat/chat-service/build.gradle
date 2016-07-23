@@ -14,5 +14,5 @@ dependencies {
 	provided group: "javax.servlet", name: "javax.servlet-api", version: "3.0.1"
 	provided group: "org.igniterealtime.smack", name: "smack", version: "3.2.1"
 	provided group: "org.igniterealtime.smack", name: "smackx", version: "3.2.1"
-	provided project(":apps:chat:chat-api")
+	provided group: "com.liferay", name: "com.liferay.chat.api", version: "1.0.0"
 }
