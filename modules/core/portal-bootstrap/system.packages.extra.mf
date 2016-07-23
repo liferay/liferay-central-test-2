@@ -2837,7 +2837,7 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  y.portal.kernel.security.sso;version="1.0.0";uses:="javax.servlet.htt
  p",com.liferay.portal.kernel.security.xml;version="1.0.0";uses:="java
  x.xml.parsers,javax.xml.stream,org.xml.sax",com.liferay.portal.kernel
- .service;version="1.4.0";uses:="com.liferay.announcements.kernel.mode
+ .service;version="1.5.0";uses:="com.liferay.announcements.kernel.mode
  l,com.liferay.expando.kernel.model,com.liferay.exportimport.kernel.la
  r,com.liferay.exportimport.kernel.model,com.liferay.portal.kernel.cac
  he.thread.local,com.liferay.portal.kernel.cluster,com.liferay.portal.
@@ -2939,7 +2939,7 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  portal.kernel.security.permission,com.liferay.portal.kernel.service,c
  om.liferay.portal.kernel.theme,javax.portlet,javax.servlet.http",com.
  liferay.portal.kernel.url;version="1.0.0";uses:="javax.servlet",com.l
- iferay.portal.kernel.util;version="7.4.0";uses:="com.liferay.expando.
+ iferay.portal.kernel.util;version="7.5.0";uses:="com.liferay.expando.
  kernel.model,com.liferay.mail.kernel.model,com.liferay.portal.kernel.
  concurrent,com.liferay.portal.kernel.configuration,com.liferay.portal
  .kernel.dao.jdbc.aop,com.liferay.portal.kernel.dao.search,com.liferay
@@ -3439,7 +3439,7 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  rade.v7_0_2;uses:="com.liferay.portal.kernel.upgrade";version="1.0.0"
  ,com.liferay.portal.upload;version="1.0.2";uses:="com.liferay.portal.
  kernel.servlet,com.liferay.portal.kernel.upload,javax.portlet,javax.s
- ervlet,javax.servlet.http",com.liferay.portal.util;version="1.5.0";us
+ ervlet,javax.servlet.http",com.liferay.portal.util;version="1.6.0";us
  es:="com.liferay.expando.kernel.model,com.liferay.layouts.admin.kerne
  l.util,com.liferay.portal.kernel.configuration,com.liferay.portal.ker
  nel.exception,com.liferay.portal.kernel.json,com.liferay.portal.kerne
