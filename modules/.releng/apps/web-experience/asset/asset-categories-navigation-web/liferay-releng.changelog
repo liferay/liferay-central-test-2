@@ -12,3 +12,8 @@ e4cd117da6ca94b846e40c1e4e5d3bfab8272851^..74184b353748dc202ea5b03fb029676a2fcc0
 # Bundle Version 1.0.4
 #
 74184b353748dc202ea5b03fb029676a2fcc0fbc^..da1af8fc7eb0da45cbbec84fb4ff88c017fca4a3=LPS-66416
+
+#
+# Bundle Version 1.0.5
+#
+da1af8fc7eb0da45cbbec84fb4ff88c017fca4a3^..445f2e2f0c0e751bf558ce4a99e966e7fa50a64d=LPS-65012 LPS-65660 LPS-66935
