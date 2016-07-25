@@ -356,6 +356,10 @@ public class MailManager {
 	}
 
 	public JSONObject getDefaultAccounts() {
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
+
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
 		JSONObject gmailAccountJSONObject = JSONFactoryUtil.createJSONObject();
 
 		gmailAccountJSONObject.put("address", "@gmail.com");
@@ -374,6 +378,8 @@ public class MailManager {
 		gmailAccountJSONObject.put("titleLanguageKey", "gmail-account");
 		gmailAccountJSONObject.put("useLocalPartAsLogin", true);
 
+		jsonArray.put(gmailAccountJSONObject);
+
 		JSONObject customMailAccontJSONObject = JSONFactoryUtil.createJSONObject();
 
 		customMailAccontJSONObject.put("address", "");
@@ -390,12 +396,7 @@ public class MailManager {
 		customMailAccontJSONObject.put("titleLanguageKey", "custom-mail-account");
 		customMailAccontJSONObject.put("useLocalPartAsLogin", false);
 
-		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
-
-		jsonArray.put(gmailAccountJSONObject);
 		jsonArray.put(customMailAccontJSONObject);
-
-		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
 		jsonObject.put("accounts", jsonArray);
 
