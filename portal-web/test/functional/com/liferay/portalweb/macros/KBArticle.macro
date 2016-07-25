@@ -1241,7 +1241,7 @@
 
 	<command name="viewCPWithHTML">
 		<var name="key_kbArticleTitle" value="${kbArticleTitle}" />
-		
+
 		<execute function="AssertClick" locator1="KnowledgeBase#DESCRIPTIVE_VIEW_ARTICLE_TITLE" value1="${kbArticleTitle}" />
 
 		<execute function="AssertTextEquals" locator1="KnowledgeBaseArticle#TITLE" value1="${kbArticleTitle}" />
