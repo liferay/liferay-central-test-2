@@ -355,7 +355,7 @@ public class MailManager {
 		return mailbox.getAttachment(attachmentId);
 	}
 
-	public JSONObject getDefaultAccounts() {
+	public JSONObject getDefaultAccountsJSONObject() {
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
