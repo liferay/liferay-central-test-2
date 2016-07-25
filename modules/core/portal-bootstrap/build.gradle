@@ -68,7 +68,7 @@ dependencies {
 	provided group: "org.springframework", name: "spring-core", version: "4.1.9.RELEASE"
 	provided project(":core:jaxws-osgi-bridge")
 	provided project(":core:portal-app-license-api")
-	provided group: "com.liferay", name: "com.liferay.registry.api", version: "1.1.0"
+	provided project(":core:registry-api")
 	provided project(":core:registry-impl")
 }
 
