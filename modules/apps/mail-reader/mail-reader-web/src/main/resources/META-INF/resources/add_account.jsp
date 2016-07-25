@@ -19,7 +19,7 @@
 <%
 MailManager mailManager = MailManager.getInstance(request);
 
-JSONObject defaultAccountsJSONObject = mailManager.getDefaultAccounts();
+JSONObject defaultAccountsJSONObject = mailManager.getDefaultAccountsJSONObject();
 
 JSONArray accountsJSONArray = defaultAccountsJSONObject.getJSONArray("accounts");
 
