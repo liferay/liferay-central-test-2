@@ -366,8 +366,8 @@ public class MailManager {
 		gmailAccountJSONObject.put(
 			"descriptionLanguageKey",
 			"please-enable-imap-in-you-gmail-settings-for-mail-to-work");
-		gmailAccountJSONObject.put("hideSettings", true);
 		gmailAccountJSONObject.put("folderPrefix", "");
+		gmailAccountJSONObject.put("hideSettings", true);
 		gmailAccountJSONObject.put("incomingHostName", "imap.gmail.com");
 		gmailAccountJSONObject.put("incomingPort", 993);
 		gmailAccountJSONObject.put("incomingSecure", true);
@@ -380,7 +380,8 @@ public class MailManager {
 
 		jsonArray.put(gmailAccountJSONObject);
 
-		JSONObject customMailAccontJSONObject = JSONFactoryUtil.createJSONObject();
+		JSONObject customMailAccontJSONObject =
+			JSONFactoryUtil.createJSONObject();
 
 		customMailAccontJSONObject.put("address", "");
 		customMailAccontJSONObject.put("descriptionLanguageKey", "");
@@ -393,7 +394,8 @@ public class MailManager {
 		customMailAccontJSONObject.put("outgoingPort", 25);
 		customMailAccontJSONObject.put("outgoingSecure", false);
 		customMailAccontJSONObject.put("protocol", "imap");
-		customMailAccontJSONObject.put("titleLanguageKey", "custom-mail-account");
+		customMailAccontJSONObject.put(
+			"titleLanguageKey", "custom-mail-account");
 		customMailAccontJSONObject.put("useLocalPartAsLogin", false);
 
 		jsonArray.put(customMailAccontJSONObject);
