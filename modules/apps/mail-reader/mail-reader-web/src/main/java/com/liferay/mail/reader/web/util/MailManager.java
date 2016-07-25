@@ -358,28 +358,27 @@ public class MailManager {
 	public JSONObject getDefaultAccounts() {
 		JSONObject gmailAccount = JSONFactoryUtil.createJSONObject();
 
-		gmailAccount.put("titleLanguageKey", "gmail-account");
+		gmailAccount.put("address", "@gmail.com");
 		gmailAccount.put(
 			"descriptionLanguageKey",
 			"please-enable-imap-in-you-gmail-settings-for-mail-to-work");
-		gmailAccount.put("address", "@gmail.com");
-		gmailAccount.put("protocol", "imap");
 		gmailAccount.put("hideSettings", true);
+		gmailAccount.put("folderPrefix", "");
 		gmailAccount.put("incomingHostName", "imap.gmail.com");
 		gmailAccount.put("incomingPort", 993);
 		gmailAccount.put("incomingSecure", true);
 		gmailAccount.put("outgoingHostName", "smtp.gmail.com");
 		gmailAccount.put("outgoingPort", 465);
 		gmailAccount.put("outgoingSecure", true);
-		gmailAccount.put("folderPrefix", "");
+		gmailAccount.put("protocol", "imap");
+		gmailAccount.put("titleLanguageKey", "gmail-account");
 		gmailAccount.put("useLocalPartAsLogin", true);
 
 		JSONObject customAccount = JSONFactoryUtil.createJSONObject();
 
-		customAccount.put("titleLanguageKey", "custom-mail-account");
-		customAccount.put("descriptionLanguageKey", "");
 		customAccount.put("address", "");
-		customAccount.put("protocol", "imap");
+		customAccount.put("descriptionLanguageKey", "");
+		customAccount.put("folderPrefix", "");
 		customAccount.put("hideSettings", false);
 		customAccount.put("incomingHostName", "");
 		customAccount.put("incomingPort", 110);
@@ -387,7 +386,8 @@ public class MailManager {
 		customAccount.put("outgoingHostName", "");
 		customAccount.put("outgoingPort", 25);
 		customAccount.put("outgoingSecure", false);
-		customAccount.put("folderPrefix", "");
+		customAccount.put("protocol", "imap");
+		customAccount.put("titleLanguageKey", "custom-mail-account");
 		customAccount.put("useLocalPartAsLogin", false);
 
 		JSONArray accountsArray = JSONFactoryUtil.createJSONArray();
