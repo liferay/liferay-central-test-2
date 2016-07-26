@@ -991,7 +991,7 @@ public class ResourceActionsImpl implements ResourceActions {
 					types =
 						RoleConstants.TYPES_ORGANIZATION_AND_REGULAR_AND_SITE;
 				}
-				else if (group.isUser() || group.isCompany() ||
+				else if (group.isCompany() || group.isUser() ||
 						 group.isUserGroup()) {
 
 					types = RoleConstants.TYPES_REGULAR;
