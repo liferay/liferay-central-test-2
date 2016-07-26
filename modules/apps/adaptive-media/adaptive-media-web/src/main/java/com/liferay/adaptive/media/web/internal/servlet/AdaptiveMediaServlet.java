@@ -14,10 +14,10 @@
 
 package com.liferay.adaptive.media.web.internal.servlet;
 
+import com.liferay.adaptive.media.AdaptiveMedia;
+import com.liferay.adaptive.media.AdaptiveMediaAttribute;
+import com.liferay.adaptive.media.AdaptiveMediaProcessorException;
 import com.liferay.adaptive.media.handler.AdaptiveMediaRequestHandler;
-import com.liferay.adaptive.media.processor.AdaptiveMedia;
-import com.liferay.adaptive.media.processor.AdaptiveMediaAttribute;
-import com.liferay.adaptive.media.processor.AdaptiveMediaProcessorException;
 import com.liferay.adaptive.media.web.internal.constants.AdaptiveMediaWebConstants;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.servlet.HttpHeaders;

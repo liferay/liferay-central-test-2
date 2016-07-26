@@ -14,8 +14,8 @@
 
 package com.liferay.adaptive.media.web.internal.processor;
 
-import com.liferay.adaptive.media.processor.AdaptiveMedia;
-import com.liferay.adaptive.media.processor.AdaptiveMediaURLFactory;
+import com.liferay.adaptive.media.AdaptiveMedia;
+import com.liferay.adaptive.media.AdaptiveMediaURLFactory;
 import com.liferay.adaptive.media.web.internal.constants.AdaptiveMediaWebConstants;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.StringPool;

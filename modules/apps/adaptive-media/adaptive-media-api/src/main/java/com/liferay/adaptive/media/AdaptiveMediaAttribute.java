@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.adaptive.media.processor;
+package com.liferay.adaptive.media;
 
 import aQute.bnd.annotation.ProviderType;
 

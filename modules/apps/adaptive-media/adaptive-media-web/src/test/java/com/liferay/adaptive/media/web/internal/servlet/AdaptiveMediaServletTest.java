@@ -14,8 +14,8 @@
 
 package com.liferay.adaptive.media.web.internal.servlet;
 
+import com.liferay.adaptive.media.AdaptiveMediaProcessorException;
 import com.liferay.adaptive.media.handler.AdaptiveMediaRequestHandler;
-import com.liferay.adaptive.media.processor.AdaptiveMediaProcessorException;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.util.StringUtil;
 

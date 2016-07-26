@@ -14,10 +14,10 @@
 
 package com.liferay.adaptive.media.image.internal.processor;
 
+import com.liferay.adaptive.media.AdaptiveMedia;
+import com.liferay.adaptive.media.AdaptiveMediaAttribute;
 import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaAttributeMapping;
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
-import com.liferay.adaptive.media.processor.AdaptiveMedia;
-import com.liferay.adaptive.media.processor.AdaptiveMediaAttribute;
 
 import java.io.InputStream;
 

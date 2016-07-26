@@ -14,9 +14,9 @@
 
 package com.liferay.adaptive.media.image.internal.processor;
 
+import com.liferay.adaptive.media.AdaptiveMediaAttribute;
+import com.liferay.adaptive.media.AdaptiveMediaProcessorRuntimeException;
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
-import com.liferay.adaptive.media.processor.AdaptiveMediaAttribute;
-import com.liferay.adaptive.media.processor.AdaptiveMediaProcessorRuntimeException;
 
 /**
  * @author Adolfo Pérez

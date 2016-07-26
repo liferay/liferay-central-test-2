@@ -14,8 +14,8 @@
 
 package com.liferay.adaptive.media.processor.internal;
 
+import com.liferay.adaptive.media.AdaptiveMediaProcessorException;
 import com.liferay.adaptive.media.processor.AdaptiveMediaProcessor;
-import com.liferay.adaptive.media.processor.AdaptiveMediaProcessorException;
 import com.liferay.adaptive.media.processor.AdaptiveMediaProcessorLocator;
 import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerMap;
 import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerMapFactory;

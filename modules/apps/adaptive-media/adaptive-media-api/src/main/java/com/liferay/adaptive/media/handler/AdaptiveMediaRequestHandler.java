@@ -14,7 +14,7 @@
 
 package com.liferay.adaptive.media.handler;
 
-import com.liferay.adaptive.media.processor.AdaptiveMedia;
+import com.liferay.adaptive.media.AdaptiveMedia;
 
 import java.io.IOException;
 
