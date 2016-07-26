@@ -63,9 +63,8 @@ public class ContactLocalServiceImpl extends ContactLocalServiceBaseImpl {
 			birthdayMonth, birthdayDay, birthdayYear,
 			ContactBirthdayException.class);
 
-		validateBirthday(birthday);
-
 		validate(className, classPK);
+		validateBirthday(birthday);
 
 		long contactId = counterLocalService.increment();
 
@@ -222,8 +221,7 @@ public class ContactLocalServiceImpl extends ContactLocalServiceBaseImpl {
 		throws ContactBirthdayException {
 
 		if ((birthday != null) && birthday.after(new Date())) {
-			throw new ContactBirthdayException(
-				"Birthday cannot be set to a date in future.");
+			throw new ContactBirthdayException("Birthday is in the future");
 		}
 	}
 
