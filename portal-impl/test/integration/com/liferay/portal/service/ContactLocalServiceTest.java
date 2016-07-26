@@ -45,7 +45,7 @@ public class ContactLocalServiceTest {
 		new LiferayIntegrationTestRule();
 
 	@Test(expected = SystemException.class)
-	public void testAddFutureBirthdayByContact() throws Exception {
+	public void testDefaultAddContactWithFutureBirthday() throws Exception {
 		Contact contact = ContactLocalServiceUtil.createContact(
 			CounterLocalServiceUtil.increment());
 
@@ -57,7 +57,7 @@ public class ContactLocalServiceTest {
 	}
 
 	@Test(expected = ContactBirthdayException.class)
-	public void testAddFutureBirthdayByProperties() throws Exception {
+	public void testCustomAddContactWithFutureBirthday() throws Exception {
 		_user = UserTestUtil.addUser();
 
 		Calendar calendar = Calendar.getInstance();
@@ -74,7 +74,7 @@ public class ContactLocalServiceTest {
 	}
 
 	@Test(expected = SystemException.class)
-	public void testUpdateFutureBirthdayByContact() throws Exception {
+	public void testDefaultUpdateContactWithFutureBirthday() throws Exception {
 		Date date = new Date(System.currentTimeMillis() + 100000);
 
 		Contact contact = ContactLocalServiceUtil.createContact(
@@ -86,7 +86,7 @@ public class ContactLocalServiceTest {
 	}
 
 	@Test(expected = ContactBirthdayException.class)
-	public void testUpdateFutureBirthdayByProperties() throws Exception {
+	public void testCustomUpdateContactWithFutureBirthday() throws Exception {
 		_user = UserTestUtil.addUser();
 
 		Calendar calendar = Calendar.getInstance();
