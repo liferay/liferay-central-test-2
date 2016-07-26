@@ -46,12 +46,12 @@ public class ContactLocalServiceTest {
 
 	@Test(expected = SystemException.class)
 	public void testAddFutureBirthdayByContact() throws Exception {
-		Date future = new Date(System.currentTimeMillis() + 100000);
-
 		Contact contact = ContactLocalServiceUtil.createContact(
 			CounterLocalServiceUtil.increment());
 
-		contact.setBirthday(future);
+		Date date = new Date(System.currentTimeMillis() + 100000);
+
+		contact.setBirthday(date);
 
 		ContactLocalServiceUtil.addContact(contact);
 	}
@@ -62,26 +62,26 @@ public class ContactLocalServiceTest {
 
 		_users.add(user);
 
-		Calendar future = Calendar.getInstance();
+		Calendar calendar = Calendar.getInstance();
 
-		future.add(Calendar.YEAR, 1000);
+		calendar.add(Calendar.YEAR, 1000);
 
 		ContactLocalServiceUtil.addContact(
 			user.getUserId(), Contact.class.getName(), user.getUserId(),
 			user.getEmailAddress(), user.getFirstName(), user.getMiddleName(),
 			user.getLastName(), 0, 0, user.getMale(),
-			future.get(Calendar.MONTH), future.get(Calendar.DATE),
-			future.get(Calendar.YEAR), "", "", "", "", "", user.getJobTitle());
+			calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE),
+			calendar.get(Calendar.YEAR), "", "", "", "", "", user.getJobTitle());
 	}
 
 	@Test(expected = SystemException.class)
 	public void testUpdateFutureBirthdayByContact() throws Exception {
-		Date future = new Date(System.currentTimeMillis() + 100000);
+		Date calendar = new Date(System.currentTimeMillis() + 100000);
 
 		Contact contact = ContactLocalServiceUtil.createContact(
 			CounterLocalServiceUtil.increment());
 
-		contact.setBirthday(future);
+		contact.setBirthday(calendar);
 
 		ContactLocalServiceUtil.updateContact(contact);
 	}
@@ -92,15 +92,15 @@ public class ContactLocalServiceTest {
 
 		_users.add(user);
 
-		Calendar future = Calendar.getInstance();
+		Calendar calendar = Calendar.getInstance();
 
-		future.add(Calendar.YEAR, 1000);
+		calendar.add(Calendar.YEAR, 1000);
 
 		ContactLocalServiceUtil.updateContact(
 			user.getContactId(), user.getEmailAddress(), user.getFirstName(),
 			user.getMiddleName(), user.getLastName(), 0, 0, user.getMale(),
-			future.get(Calendar.MONTH), future.get(Calendar.DATE),
-			future.get(Calendar.YEAR), "", "", "", "", "", user.getJobTitle());
+			calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE),
+			calendar.get(Calendar.YEAR), "", "", "", "", "", user.getJobTitle());
 	}
 
 	@DeleteAfterTestRun
