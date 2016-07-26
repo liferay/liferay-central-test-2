@@ -58,20 +58,19 @@ public class ContactLocalServiceTest {
 
 	@Test(expected = ContactBirthdayException.class)
 	public void testAddFutureBirthdayByProperties() throws Exception {
-		User user = UserTestUtil.addUser();
-
-		_users.add(user);
+		_user = UserTestUtil.addUser();
 
 		Calendar calendar = Calendar.getInstance();
 
 		calendar.add(Calendar.YEAR, 1000);
 
 		ContactLocalServiceUtil.addContact(
-			user.getUserId(), Contact.class.getName(), user.getUserId(),
-			user.getEmailAddress(), user.getFirstName(), user.getMiddleName(),
-			user.getLastName(), 0, 0, user.getMale(),
+			_user.getUserId(), Contact.class.getName(), _user.getUserId(),
+			_user.getEmailAddress(), _user.getFirstName(),
+			_user.getMiddleName(), _user.getLastName(), 0, 0, _user.getMale(),
 			calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE),
-			calendar.get(Calendar.YEAR), "", "", "", "", "", user.getJobTitle());
+			calendar.get(Calendar.YEAR), "", "", "", "", "",
+			_user.getJobTitle());
 	}
 
 	@Test(expected = SystemException.class)
@@ -88,22 +87,21 @@ public class ContactLocalServiceTest {
 
 	@Test(expected = ContactBirthdayException.class)
 	public void testUpdateFutureBirthdayByProperties() throws Exception {
-		User user = UserTestUtil.addUser();
-
-		_users.add(user);
+		_user = UserTestUtil.addUser();
 
 		Calendar calendar = Calendar.getInstance();
 
 		calendar.add(Calendar.YEAR, 1000);
 
 		ContactLocalServiceUtil.updateContact(
-			user.getContactId(), user.getEmailAddress(), user.getFirstName(),
-			user.getMiddleName(), user.getLastName(), 0, 0, user.getMale(),
+			_user.getContactId(), _user.getEmailAddress(), _user.getFirstName(),
+			_user.getMiddleName(), _user.getLastName(), 0, 0, _user.getMale(),
 			calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE),
-			calendar.get(Calendar.YEAR), "", "", "", "", "", user.getJobTitle());
+			calendar.get(Calendar.YEAR), "", "", "", "", "",
+			_user.getJobTitle());
 	}
 
 	@DeleteAfterTestRun
-	private final List<User> _users = new ArrayList<>();
+	private User _user;
 
 }
