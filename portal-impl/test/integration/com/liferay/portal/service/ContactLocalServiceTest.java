@@ -25,10 +25,8 @@ import com.liferay.portal.kernel.test.rule.DeleteAfterTestRun;
 import com.liferay.portal.kernel.test.util.UserTestUtil;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 import org.junit.ClassRule;
 import org.junit.Rule;
@@ -43,18 +41,6 @@ public class ContactLocalServiceTest {
 	@Rule
 	public static final AggregateTestRule aggregateTestRule =
 		new LiferayIntegrationTestRule();
-
-	@Test(expected = SystemException.class)
-	public void testDefaultAddContactWithFutureBirthday() throws Exception {
-		Contact contact = ContactLocalServiceUtil.createContact(
-			CounterLocalServiceUtil.increment());
-
-		Date date = new Date(System.currentTimeMillis() + 100000);
-
-		contact.setBirthday(date);
-
-		ContactLocalServiceUtil.addContact(contact);
-	}
 
 	@Test(expected = ContactBirthdayException.class)
 	public void testCustomAddContactWithFutureBirthday() throws Exception {
@@ -73,18 +59,6 @@ public class ContactLocalServiceTest {
 			_user.getJobTitle());
 	}
 
-	@Test(expected = SystemException.class)
-	public void testDefaultUpdateContactWithFutureBirthday() throws Exception {
-		Date date = new Date(System.currentTimeMillis() + 100000);
-
-		Contact contact = ContactLocalServiceUtil.createContact(
-			CounterLocalServiceUtil.increment());
-
-		contact.setBirthday(date);
-
-		ContactLocalServiceUtil.updateContact(contact);
-	}
-
 	@Test(expected = ContactBirthdayException.class)
 	public void testCustomUpdateContactWithFutureBirthday() throws Exception {
 		_user = UserTestUtil.addUser();
@@ -99,6 +73,30 @@ public class ContactLocalServiceTest {
 			calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE),
 			calendar.get(Calendar.YEAR), "", "", "", "", "",
 			_user.getJobTitle());
+	}
+
+	@Test(expected = SystemException.class)
+	public void testDefaultAddContactWithFutureBirthday() throws Exception {
+		Contact contact = ContactLocalServiceUtil.createContact(
+			CounterLocalServiceUtil.increment());
+
+		Date date = new Date(System.currentTimeMillis() + 100000);
+
+		contact.setBirthday(date);
+
+		ContactLocalServiceUtil.addContact(contact);
+	}
+
+	@Test(expected = SystemException.class)
+	public void testDefaultUpdateContactWithFutureBirthday() throws Exception {
+		Date date = new Date(System.currentTimeMillis() + 100000);
+
+		Contact contact = ContactLocalServiceUtil.createContact(
+			CounterLocalServiceUtil.increment());
+
+		contact.setBirthday(date);
+
+		ContactLocalServiceUtil.updateContact(contact);
 	}
 
 	@DeleteAfterTestRun
