@@ -17,8 +17,6 @@ package com.liferay.adaptive.media.image.internal.handler;
 import com.liferay.adaptive.media.handler.AdaptiveMediaRequestHandler;
 import com.liferay.adaptive.media.image.finder.ImageAdaptiveMediaFinder;
 import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaAttributeMapping;
-import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaConfigurationEntry;
-import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaConfigurationHelper;
 import com.liferay.adaptive.media.image.internal.processor.ImageAdaptiveMediaAttribute;
 import com.liferay.adaptive.media.image.internal.util.Tuple;
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
@@ -26,17 +24,13 @@ import com.liferay.adaptive.media.processor.AdaptiveMedia;
 import com.liferay.adaptive.media.processor.AdaptiveMediaAttribute;
 import com.liferay.adaptive.media.processor.AdaptiveMediaProcessorException;
 import com.liferay.adaptive.media.processor.AdaptiveMediaProcessorRuntimeException;
-import com.liferay.document.library.kernel.service.DLAppLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.repository.model.FileVersion;
-import com.liferay.portal.kernel.util.CharPool;
-import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.IOException;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -70,20 +64,13 @@ public class ImageAdaptiveMediaRequestHandler
 	}
 
 	@Reference(unbind = "-")
-	public void setDLAppLocalService(DLAppLocalService dlAppLocalService) {
-		_dlAppLocalService = dlAppLocalService;
-	}
-
-	@Reference(unbind = "-")
-	public void setImageAdaptiveMediaConfigurationHelper(
-		ImageAdaptiveMediaConfigurationHelper configurationHelper) {
-
-		_configurationHelper = configurationHelper;
-	}
-
-	@Reference(unbind = "-")
 	public void setImageAdaptiveMediaFinder(ImageAdaptiveMediaFinder finder) {
 		_finder = finder;
+	}
+
+	@Reference(unbind = "-")
+	public void setPathInterpreter(PathInterpreter pathInterpreter) {
+		_pathInterpreter = pathInterpreter;
 	}
 
 	private Optional<AdaptiveMedia<ImageAdaptiveMediaProcessor>>
@@ -118,29 +105,20 @@ public class ImageAdaptiveMediaRequestHandler
 		_interpretPath(String pathInfo) {
 
 		try {
-			String[] components = StringUtil.split(
-				pathInfo.substring(1), CharPool.SLASH);
+			Optional<Tuple<FileVersion, Map<String, String>>>
+				fileVersionPropertiesTupleOptional =
+					_pathInterpreter.interpretPath(pathInfo);
 
-			if (components.length < 7) {
+			if (!fileVersionPropertiesTupleOptional.isPresent()) {
 				return Optional.empty();
 			}
 
-			long fileVersionId = Long.parseUnsignedLong(components[4]);
+			Tuple<FileVersion, Map<String, String>> fileVersionMapTuple =
+				fileVersionPropertiesTupleOptional.get();
 
-			FileVersion fileVersion = _dlAppLocalService.getFileVersion(
-				fileVersionId);
+			FileVersion fileVersion = fileVersionMapTuple.first;
 
-			String configurationEntryUUID = components[5];
-
-			Optional<ImageAdaptiveMediaConfigurationEntry>
-				configurationEntryOptional =
-					_configurationHelper.
-						getImageAdaptiveMediaConfigurationEntry(
-							fileVersion.getCompanyId(), configurationEntryUUID);
-
-			Map<String, String> properties = configurationEntryOptional.
-				map(ImageAdaptiveMediaConfigurationEntry::getProperties).
-				orElse(new HashMap<>());
+			Map<String, String> properties = fileVersionMapTuple.second;
 
 			AdaptiveMediaAttribute<Object, Integer> contentLengthAttribute =
 				AdaptiveMediaAttribute.contentLength();
@@ -166,7 +144,9 @@ public class ImageAdaptiveMediaRequestHandler
 
 			return Optional.of(Tuple.of(fileVersion, attributeMapping));
 		}
-		catch (NumberFormatException | PortalException e) {
+		catch (NumberFormatException |
+			   AdaptiveMediaProcessorRuntimeException e) {
+
 			_log.error(e);
 
 			return Optional.empty();
@@ -176,8 +156,7 @@ public class ImageAdaptiveMediaRequestHandler
 	private static final Log _log = LogFactoryUtil.getLog(
 		ImageAdaptiveMediaRequestHandler.class);
 
-	private ImageAdaptiveMediaConfigurationHelper _configurationHelper;
-	private DLAppLocalService _dlAppLocalService;
 	private ImageAdaptiveMediaFinder _finder;
+	private PathInterpreter _pathInterpreter;
 
 }
