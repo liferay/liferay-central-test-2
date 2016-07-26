@@ -69,6 +69,12 @@ public class ImageAdaptiveMediaFinderImplTest {
 		);
 
 		Mockito.when(
+			_fileVersion.getFileName()
+		).thenReturn(
+			StringUtil.randomString()
+		);
+
+		Mockito.when(
 			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))
 		).thenReturn(
 			true
@@ -118,6 +124,12 @@ public class ImageAdaptiveMediaFinderImplTest {
 	)
 	public void testGetMediaConfigurationError() throws Exception {
 		Mockito.when(
+			_fileVersion.getFileEntry()
+		).thenReturn(
+			_fileEntry
+		);
+
+		Mockito.when(
 			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))
 		).thenReturn(
 			true
@@ -140,6 +152,12 @@ public class ImageAdaptiveMediaFinderImplTest {
 			new ImageAdaptiveMediaConfigurationEntry(
 				StringUtil.randomString(), StringUtil.randomString(),
 				Collections.emptyMap());
+
+		Mockito.when(
+			_fileVersion.getFileEntry()
+		).thenReturn(
+			_fileEntry
+		);
 
 		Mockito.when(
 			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
@@ -168,6 +186,12 @@ public class ImageAdaptiveMediaFinderImplTest {
 
 	@Test
 	public void testGetMediaMissingAttribute() throws Exception {
+		Mockito.when(
+			_fileVersion.getFileEntry()
+		).thenReturn(
+			_fileEntry
+		);
+
 		ImageAdaptiveMediaConfigurationEntry configurationEntry =
 			new ImageAdaptiveMediaConfigurationEntry(
 				StringUtil.randomString(), StringUtil.randomString(),
@@ -221,6 +245,12 @@ public class ImageAdaptiveMediaFinderImplTest {
 				Mockito.any(long.class))
 		).thenReturn(
 			Arrays.asList(configurationEntry1, configurationEntry2)
+		);
+
+		Mockito.when(
+			_fileVersion.getFileEntry()
+		).thenReturn(
+			_fileEntry
 		);
 
 		Mockito.when(
@@ -285,6 +315,12 @@ public class ImageAdaptiveMediaFinderImplTest {
 		);
 
 		Mockito.when(
+			_fileVersion.getFileEntry()
+		).thenReturn(
+			_fileEntry
+		);
+
+		Mockito.when(
 			_fileVersion.getFileName()
 		).thenReturn(
 			StringUtil.randomString()
@@ -346,6 +382,12 @@ public class ImageAdaptiveMediaFinderImplTest {
 		);
 
 		Mockito.when(
+			_fileVersion.getFileEntry()
+		).thenReturn(
+			_fileEntry
+		);
+
+		Mockito.when(
 			_fileVersion.getFileName()
 		).thenReturn(
 			StringUtil.randomString()
@@ -384,6 +426,12 @@ public class ImageAdaptiveMediaFinderImplTest {
 	@Test
 	public void testGetMediaWhenNotSupported() throws Exception {
 		Mockito.when(
+			_fileVersion.getFileEntry()
+		).thenReturn(
+			_fileEntry
+		);
+
+		Mockito.when(
 			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))
 		).thenReturn(
 			false
@@ -421,8 +469,16 @@ public class ImageAdaptiveMediaFinderImplTest {
 		);
 
 		Mockito.when(
+			_fileVersion.getFileEntry()
+		).thenReturn(
+			_fileEntry
+		);
+
+		Mockito.when(
 			_fileVersion.getFileName()
-		).thenReturn(StringUtil.randomString());
+		).thenReturn(
+			StringUtil.randomString()
+		);
 
 		Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> mediaStream =
 			_finder.getAdaptiveMedia(
