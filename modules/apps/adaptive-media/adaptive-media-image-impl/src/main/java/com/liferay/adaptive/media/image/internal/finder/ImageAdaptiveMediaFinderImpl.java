@@ -40,7 +40,6 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
@@ -88,13 +87,17 @@ public class ImageAdaptiveMediaFinderImpl implements ImageAdaptiveMediaFinder {
 				fileEntry.getCompanyId());
 
 		try {
+			AdaptiveMediaPropertyDistanceComparator comparator =
+				new AdaptiveMediaPropertyDistanceComparator(
+					queryBuilder.getAttributes());
+
 			return configurationEntries.stream().
 				map(
 					configurationEntry ->
 						_createMedia(
 							fileEntry, queryBuilder.getFileVersion(),
 							configurationEntry)).
-				sorted(_buildComparator(queryBuilder.getAttributes()));
+				sorted(comparator);
 		}
 		catch (AdaptiveMediaProcessorRuntimeException ampre) {
 			Throwable cause = ampre.getCause();
@@ -122,49 +125,6 @@ public class ImageAdaptiveMediaFinderImpl implements ImageAdaptiveMediaFinder {
 	@Reference(unbind = "-")
 	public void setImageStorage(ImageStorage imageStorage) {
 		_imageStorage = imageStorage;
-	}
-
-	private Comparator<AdaptiveMedia<ImageAdaptiveMediaProcessor>>
-		_buildComparator(
-			Map<AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, ?>, ?>
-				attributes) {
-
-		return (adaptiveMedia1, adaptiveMedia2) -> {
-			for (Map.Entry<AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, ?>, ?>
-					entry : attributes.entrySet()) {
-
-				AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, Object>
-					attribute =
-						(AdaptiveMediaAttribute<
-							ImageAdaptiveMediaProcessor, Object>)
-								entry.getKey();
-
-				Object requestedValue = entry.getValue();
-
-				Optional<?> value1Optional = adaptiveMedia1.getAttributeValue(
-					attribute);
-
-				Optional<Integer> value1Distance = value1Optional.map(
-					value1 -> attribute.distance(value1, requestedValue));
-
-				Optional<?> value2Optional = adaptiveMedia2.getAttributeValue(
-					attribute);
-
-				Optional<Integer> value2Distance = value2Optional.map(
-					value2 -> attribute.distance(value2, requestedValue));
-
-				Optional<Integer> resultOptional = value1Distance.flatMap(
-					value1 -> value2Distance.map(value2 -> value1 - value2));
-
-				int result = resultOptional.orElse(0);
-
-				if (result != 0) {
-					return result;
-				}
-			}
-
-			return 0;
-		};
 	}
 
 	private URI _buildRelativeURI(
