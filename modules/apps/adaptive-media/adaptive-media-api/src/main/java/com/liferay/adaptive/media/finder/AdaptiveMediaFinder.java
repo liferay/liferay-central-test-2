@@ -30,12 +30,14 @@ import java.util.stream.Stream;
  *
  * @author Adolfo Pérez
  */
-public interface AdaptiveMediaFinder<B extends AdaptiveMediaQueryBuilder<M, T>, M, T> {
+public interface AdaptiveMediaFinder
+	<B extends AdaptiveMediaQueryBuilder<M, T>, M, T> {
 
 	/**
-	 * Return all {@link AdaptiveMedia} for the given model. The provided
-	 * function will be invoked with an instance of an implementation dependant
-	 * {@link AdaptiveMediaQueryBuilder}.
+	 * Return all {@link AdaptiveMedia} for the given model that matches the
+	 * query. The provided function will be invoked with an instance of an
+	 * implementation dependant {@link AdaptiveMediaQueryBuilder}, that callers
+	 * must use to create the query.
 	 *
 	 * @param queryBuilderFunction Function that will be invoked with a {@link
 	 *        AdaptiveMediaQueryBuilder} as argument. This query builder will
@@ -49,6 +51,10 @@ public interface AdaptiveMediaFinder<B extends AdaptiveMediaQueryBuilder<M, T>, 
 	 *         getting the {@link AdaptiveMedia}. See
 	 *         {@link AdaptiveMediaProcessorException} inner classes for the set
 	 *         of possible exceptions.
+	 * @throws com.liferay.adaptive.media.AdaptiveMediaProcessorRuntimeException.IOException
+	 *         if an error occurs while processing the
+	 * @throws IllegalArgumentException if <code>queryBuilderFunction</code> is
+	 *         null, or the query returned by it is not valid.
 	 * @throws PortalException if an error occurred while calling any Liferay
 	 *         services
 	 */

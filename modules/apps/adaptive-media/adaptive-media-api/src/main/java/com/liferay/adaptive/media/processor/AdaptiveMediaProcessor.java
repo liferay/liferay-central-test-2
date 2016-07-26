@@ -25,7 +25,7 @@ import com.liferay.portal.kernel.exception.PortalException;
  *
  * The type parameter M specifies the model used by the processor to generate
  * the media. The type parameter T is used to restrict the set of valid
- * {@link AdaptiveMediaAttribute} available.
+ * {@link com.liferay.adaptive.media.AdaptiveMediaAttribute} available.
  *
  * @author Adolfo Pérez
  */
@@ -42,8 +42,8 @@ public interface AdaptiveMediaProcessor<M, T> {
 	 * @throws AdaptiveMediaProcessorException if a processing error occurred.
 	 *         See {@link AdaptiveMediaProcessorException} inner classes for the
 	 *         set of possible exceptions.
-	 * @throws AdaptiveMediaProcessorRuntimeException if a system error
-	 *         occurred.
+	 * @throws com.liferay.adaptive.media.AdaptiveMediaProcessorRuntimeException
+	 *         if a system error occurred.
 	 */
 	public void cleanUp(M model)
 		throws AdaptiveMediaProcessorException, PortalException;
@@ -55,12 +55,11 @@ public interface AdaptiveMediaProcessor<M, T> {
 	 * @param model The model for which media will be generated
 	 *
 	 * @throws AdaptiveMediaProcessorException if an error occurred while
-	 *         getting the {@link AdaptiveMedia}. See
-	 *         {@link AdaptiveMediaProcessorException} inner classes for the set
-	 *         of possible exceptions.
-	 * @throws AdaptiveMediaProcessorRuntimeException if a system error
-	 *         occurred.
-	 * @throws PortalException if an error occurred while cally any Liferay
+	 *         generating the media. See {@link AdaptiveMediaProcessorException}
+	 *         inner classes for the set of possible exceptions.
+	 * @throws com.liferay.adaptive.media.AdaptiveMediaProcessorRuntimeException
+	 *         if a system error occurred.
+	 * @throws PortalException if an error occurred while calling any Liferay
 	 *         services
 	 */
 	public void process(M model)

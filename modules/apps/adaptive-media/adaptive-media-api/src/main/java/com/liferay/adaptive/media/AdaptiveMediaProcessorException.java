@@ -34,6 +34,9 @@ public class AdaptiveMediaProcessorException extends Exception {
 		super(throwable);
 	}
 
+	/**
+	 * This exception will be raised when a requested media is not found.
+	 */
 	public static final class AdaptiveMediaNotFound
 		extends AdaptiveMediaProcessorException {
 

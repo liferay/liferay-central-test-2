@@ -23,6 +23,28 @@ import java.util.regex.Pattern;
 import org.osgi.service.component.annotations.Component;
 
 /**
+ * An {@link ImageAdaptiveMediaConfigurationEntryParser} is responsible of
+ * parsing ConfigAdmin configuration entries.
+ *
+ * A configuration entry must be a string of the following form:
+ * <code>
+ *     name:uuid:key0=val0;key1=val1;...;keyN=valN
+ * </code>
+ * Where_
+ * <ul>
+ *     <li>
+ *         name is an arbitrary {@link String}
+ *     </li>
+ *     <li>
+ *         uuid must be a unique identifier. No two configuration entries should
+ *         have the same UUID.
+ *     </li>
+ *     <li>
+ *         The key and value pairs can be anything, but note that consumers of
+ *         the resulting {@link ImageAdaptiveMediaConfigurationEntry} may
+ *         require a particular set of attributes.
+ *     </li>
+ * </ul>
  * @author Adolfo Pérez
  */
 @Component(
@@ -30,6 +52,17 @@ import org.osgi.service.component.annotations.Component;
 )
 public class ImageAdaptiveMediaConfigurationEntryParser {
 
+	/**
+	 * Parse the give configuration line, and return a configuration entry with
+	 * its data.
+	 *
+	 * @param s the configuration line to parse
+	 *
+	 * @return A {@link ImageAdaptiveMediaConfigurationEntry} with the line data
+	 *
+	 * @throws IllegalArgumentException is <code>s</code> is null or it is not a
+	 *         valid configuration line.
+	 */
 	public ImageAdaptiveMediaConfigurationEntry parse(String s) {
 		if (Validator.isNull(s)) {
 			throw new IllegalArgumentException(

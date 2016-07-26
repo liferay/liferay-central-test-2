@@ -23,12 +23,32 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
+ * This class is responsible of giving convenient access to a set of media
+ * attributes. It will offer a typesafe interface to access attribute values,
+ * accepting only attributes of the correct type (those for adaptive images),
+ * and returning values of the correct type.
+ *
  * @author Adolfo Pérez
  */
 public class ImageAdaptiveMediaAttributeMapping {
 
-	public static final ImageAdaptiveMediaAttributeMapping fromProperties(
+	/**
+	 * Return an {@link ImageAdaptiveMediaAttributeMapping} that will use the
+	 * given map as the underlying attribute storage.
+	 *
+	 * @param properties The map to get the properties from
+	 *
+	 * @return A non-null mapping that will give typesafe access to the
+	 *         underlying map
+	 *
+	 * @throws IllegalArgumentException if <code>properties</code> is null
+	 */
+	public static ImageAdaptiveMediaAttributeMapping fromProperties(
 		Map<String, String> properties) {
+
+		if (properties == null) {
+			throw new IllegalArgumentException("properties map cannot be null");
+		}
 
 		Map<AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, ?>, Optional<?>>
 			attributes = new HashMap<>();
@@ -56,8 +76,22 @@ public class ImageAdaptiveMediaAttributeMapping {
 		return new ImageAdaptiveMediaAttributeMapping(attributes);
 	}
 
+	/**
+	 * Return an {@link Optional} that will contain the value of
+	 * <code>attribute</code> in this mapping (if any).
+	 *
+	 * @param attribute a non null attribute
+	 * @param <V> the type of the value mapped to the attribute
+
+	 * @return A non-null optional that will contain the (non-null) value (if
+	 *         any)
+	 */
 	public <V> Optional<V> getAttributeValue(
 		AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, V> attribute) {
+
+		if (attribute == null) {
+			throw new IllegalArgumentException("attribute cannot be null");
+		}
 
 		return (Optional<V>)_attributes.get(attribute);
 	}

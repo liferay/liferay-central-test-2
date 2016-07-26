@@ -36,6 +36,10 @@ public class AdaptiveMediaProcessorRuntimeException extends RuntimeException {
 		super(throwable);
 	}
 
+	/**
+	 * Exception thrown when a value serialized as a String cannot be converted
+	 * by a {@link AdaptiveMediaAttribute}.
+	 */
 	public static final class AdaptiveMediaAttributeFormatException
 		extends AdaptiveMediaProcessorRuntimeException {
 
@@ -58,6 +62,9 @@ public class AdaptiveMediaProcessorRuntimeException extends RuntimeException {
 
 	}
 
+	/**
+	 * Exception thrown when there is a processor configuration error.
+	 */
 	public static final class InvalidConfiguration
 		extends AdaptiveMediaProcessorRuntimeException {
 
@@ -78,6 +85,11 @@ public class AdaptiveMediaProcessorRuntimeException extends RuntimeException {
 
 	}
 
+	/**
+	 * Exception used to wrap instances {@link java.io.IOException}. This kind
+	 * of exception is considered a system error, so it is reasonable to wrap
+	 * it inside a RuntimeException
+	 */
 	public static final class IOException
 		extends AdaptiveMediaProcessorRuntimeException {
 
@@ -98,6 +110,12 @@ public class AdaptiveMediaProcessorRuntimeException extends RuntimeException {
 
 	}
 
+	/**
+	 * Exception used to wrap instances {@link
+	 * java.io.UnsupportedEncodingException} This kind of exception is
+	 * considered a system error, so it is reasonable to wrap it inside a
+	 * RuntimeException
+	 */
 	public static final class UnsupportedEncodingException
 		extends AdaptiveMediaProcessorRuntimeException {
 

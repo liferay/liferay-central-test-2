@@ -34,18 +34,48 @@ import java.util.function.Function;
 @ProviderType
 public final class AdaptiveMediaAttribute<T, V> {
 
+	/**
+	 * A generic attribute representing the content length of the media. This
+	 * attribute can be used with any kind of media.
+	 *
+	 * @return The content length attribute
+	 */
 	public static final <S> AdaptiveMediaAttribute<S, Integer> contentLength() {
 		return (AdaptiveMediaAttribute<S, Integer>)_CONTENT_LENGTH;
 	}
 
+	/**
+	 * A generic attribute representing the content type of the media. This
+	 * attribute can be used with any kind of media.
+	 *
+	 * @return the content type attribute
+	 */
 	public static final <S> AdaptiveMediaAttribute<S, String> contentType() {
 		return (AdaptiveMediaAttribute<S, String>)_CONTENT_TYPE;
 	}
 
+	/**
+	 * A generic attribute representing the file name (if any) of the media.
+	 * This attribute can be used with any kind of media.
+	 *
+	 * @return the file name attribute
+	 */
 	public static final <S> AdaptiveMediaAttribute<S, String> fileName() {
 		return (AdaptiveMediaAttribute<S, String>)_FILE_NAME;
 	}
 
+	/**
+	 * Create a new attribute. As all attributes live in the same global
+	 * namespace <code>name</code> should uniquely identify this attribute, and
+	 * it is recommended for it to be a human readable value. <code>converter
+	 * </code> should be a function capable of converting a String to a value
+	 * of the correct type; this function should throw a {@link
+	 * AdaptiveMediaProcessorRuntimeException.AdaptiveMediaAttributeFormatException}
+	 * when the give String is not convertible. <code>distanceFunction</code> is
+	 * a function that should compute the distance between two values of the
+	 * attribute; it should return a value between 0 and {@link
+	 * Integer#MAX_VALUE}.
+	 */
 	public AdaptiveMediaAttribute(
 		String name, Function<String, V> converter,
 		BiFunction<V, V, Integer> distanceFunction) {
@@ -55,14 +85,39 @@ public final class AdaptiveMediaAttribute<T, V> {
 		_distanceFunction = distanceFunction;
 	}
 
+	/**
+	 * Convert the given string to a value of the correct type.
+	 *
+	 * @param value the string containing the value to convert
+	 *
+	 * @return The converted value
+	 *
+	 * @throws {@link
+	 *         AdaptiveMediaProcessorRuntimeException.AdaptiveMediaAttributeFormatException}
+	 *         when the give value is not convertible.
+	 */
 	public V convert(String value) {
 		return _converter.apply(value);
 	}
 
+	/**
+	 * Compute the distance between the two values.
+	 *
+	 * @param value1 The first value
+	 * @param value2 The second value
+	 *
+	 * @return A value between 0 and {@link Integer#MAX_VALUE} representing how
+	 *         close both values are
+	 */
 	public int distance(V value1, V value2) {
 		return _distanceFunction.apply(value1, value2);
 	}
 
+	/**
+	 * Return the globally unique name for this attribute.
+	 *
+	 * @return the name of this attribute
+	 */
 	public String getName() {
 		return _name;
 	}

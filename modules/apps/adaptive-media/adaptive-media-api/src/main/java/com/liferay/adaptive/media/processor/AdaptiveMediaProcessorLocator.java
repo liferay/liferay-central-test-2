@@ -16,7 +16,7 @@ package com.liferay.adaptive.media.processor;
 
 /**
  * Implementations of this interface are responsible of the location of the
- * a valid {@link AdaptiveMediaProcessor} for a particular class.
+ * a valid {@link AdaptiveMediaProcessor} for a particular model class.
  *
  * @author Adolfo Pérez
  */

@@ -32,6 +32,10 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
 
 /**
+ * This is an {@link AdaptiveMediaProcessorLocator} that will decorate any
+ * returned {@link AdaptiveMediaProcessor} so that it executes its logic after
+ * the current transaction has finished.
+ *
  * @author Adolfo Pérez
  */
 @Component(immediate = true, service = AdaptiveMediaProcessorLocator.class)
