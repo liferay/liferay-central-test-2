@@ -75,12 +75,12 @@ public class ContactLocalServiceTest {
 
 	@Test(expected = SystemException.class)
 	public void testUpdateFutureBirthdayByContact() throws Exception {
-		Date calendar = new Date(System.currentTimeMillis() + 100000);
+		Date date = new Date(System.currentTimeMillis() + 100000);
 
 		Contact contact = ContactLocalServiceUtil.createContact(
 			CounterLocalServiceUtil.increment());
 
-		contact.setBirthday(calendar);
+		contact.setBirthday(date);
 
 		ContactLocalServiceUtil.updateContact(contact);
 	}
