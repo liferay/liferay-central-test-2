@@ -101,22 +101,22 @@ public class ImageAdaptiveMediaQueryBuilderImpl
 		return _attributes;
 	}
 
-	public FileEntry getFileEntry() throws PortalException {
-		if (_fileEntry != null) {
-			return _fileEntry;
+	public FileVersion getFileVersion() throws PortalException {
+		if (_fileVersion != null) {
+			return _fileVersion;
 		}
 
-		_fileEntry = _fileVersion.getFileEntry();
+		_fileVersion = _fileEntry.getLatestFileVersion();
 
-		return _fileEntry;
+		return _fileVersion;
 	}
 
-	public Optional<FileVersion> getFileVersion() {
-		if (_fileVersion != null) {
-			return Optional.of(_fileVersion);
+	public boolean hasFileVersion() {
+		if (_fileEntry == null) {
+			return true;
 		}
 
-		return Optional.empty();
+		return false;
 	}
 
 	public <V> AdaptiveMediaAttributeQueryBuilder with(

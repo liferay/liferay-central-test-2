@@ -34,23 +34,25 @@ import org.mockito.Mockito;
 public class ImageAdaptiveMediaQueryBuilderImplTest {
 
 	@Test
-	public void testFileEntryQueryReturnsEmptyFileVersion() throws Exception {
+	public void testFileEntryQueryReturnsLatestFileVersion() throws Exception {
 		FileEntry fileEntry = Mockito.mock(FileEntry.class);
 
 		_queryBuilder.allForFileEntry(fileEntry);
 
-		Assert.assertEquals(Optional.empty(), _queryBuilder.getFileVersion());
+		Assert.assertEquals(
+			fileEntry.getLatestFileVersion(), _queryBuilder.getFileVersion());
 	}
 
 	@Test
-	public void testFileEntryWithAttributesQueryReturnsEmptyFileVersion()
+	public void testFileEntryWithAttributesQueryReturnsLatestFileVersion()
 		throws Exception {
 
 		FileEntry fileEntry = Mockito.mock(FileEntry.class);
 
 		_queryBuilder.forFileEntry(fileEntry).done();
 
-		Assert.assertEquals(Optional.empty(), _queryBuilder.getFileVersion());
+		Assert.assertEquals(
+			fileEntry.getLatestFileVersion(), _queryBuilder.getFileVersion());
 	}
 
 	@Test

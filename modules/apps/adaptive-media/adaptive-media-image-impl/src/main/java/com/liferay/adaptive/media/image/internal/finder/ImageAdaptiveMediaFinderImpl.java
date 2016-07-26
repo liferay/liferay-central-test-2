@@ -29,7 +29,6 @@ import com.liferay.adaptive.media.processor.AdaptiveMedia;
 import com.liferay.adaptive.media.processor.AdaptiveMediaAttribute;
 import com.liferay.adaptive.media.processor.AdaptiveMediaProcessorRuntimeException;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 
 import java.io.UnsupportedEncodingException;
@@ -41,7 +40,7 @@ import java.nio.charset.StandardCharsets;
 
 import java.util.Collection;
 import java.util.Map;
-import java.util.Optional;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
@@ -65,6 +64,10 @@ public class ImageAdaptiveMediaFinderImpl implements ImageAdaptiveMediaFinder {
 				queryBuilderFunction)
 		throws PortalException {
 
+		if (queryBuilderFunction == null) {
+			throw new IllegalArgumentException("queryBuilder must be non null");
+		}
+
 		ImageAdaptiveMediaQueryBuilderImpl queryBuilder =
 			new ImageAdaptiveMediaQueryBuilderImpl();
 
@@ -76,38 +79,29 @@ public class ImageAdaptiveMediaFinderImpl implements ImageAdaptiveMediaFinder {
 				"Only queries built by the provided query build are valid.");
 		}
 
-		FileEntry fileEntry = queryBuilder.getFileEntry();
+		FileVersion fileVersion = queryBuilder.getFileVersion();
 
-		if (!_imageProcessor.isMimeTypeSupported(fileEntry.getMimeType())) {
+		if (!_imageProcessor.isMimeTypeSupported(fileVersion.getMimeType())) {
 			return Stream.empty();
 		}
 
 		Collection<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
 			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
-				fileEntry.getCompanyId());
+				fileVersion.getCompanyId());
 
-		try {
-			AdaptiveMediaPropertyDistanceComparator comparator =
-				new AdaptiveMediaPropertyDistanceComparator(
-					queryBuilder.getAttributes());
+		BiFunction<FileVersion, ImageAdaptiveMediaConfigurationEntry, URI>
+			uriFactory = _getURIFactory(queryBuilder);
 
-			return configurationEntries.stream().
-				map(
-					configurationEntry ->
-						_createMedia(
-							fileEntry, queryBuilder.getFileVersion(),
-							configurationEntry)).
-				sorted(comparator);
-		}
-		catch (AdaptiveMediaProcessorRuntimeException ampre) {
-			Throwable cause = ampre.getCause();
+		AdaptiveMediaPropertyDistanceComparator comparator =
+			new AdaptiveMediaPropertyDistanceComparator(
+				queryBuilder.getAttributes());
 
-			if (cause instanceof PortalException) {
-				throw (PortalException)cause;
-			}
-
-			throw ampre;
-		}
+		return configurationEntries.stream().
+			map(
+				configurationEntry ->
+					_createMedia(
+						fileVersion, uriFactory, configurationEntry)).
+			sorted(comparator);
 	}
 
 	@Reference(unbind = "-")
@@ -127,29 +121,33 @@ public class ImageAdaptiveMediaFinderImpl implements ImageAdaptiveMediaFinder {
 		_imageStorage = imageStorage;
 	}
 
-	private URI _buildRelativeURI(
-		FileEntry fileEntry, Optional<FileVersion> fileVersionOptional,
+	private URI _createFileEntryURL(
+		FileVersion fileVersion,
 		ImageAdaptiveMediaConfigurationEntry configurationEntry) {
 
-		String relativePath = fileVersionOptional.map(
-			fileVersion ->
-				String.format(
-					"image/%d/%d/%s/%s", fileEntry.getFileEntryId(),
-					fileVersion.getFileVersionId(),
-					configurationEntry.getUUID(),
-					_encode(fileVersion.getFileName()))).
-		orElseGet(
-			() ->
-				String.format(
-					"image/%d/%s/%s", fileEntry.getFileEntryId(),
-					configurationEntry.getUUID(),
-					_encode(fileEntry.getFileName())));
+		String relativeURI = String.format(
+			"image/%d/%s/%s", fileVersion.getFileEntryId(),
+			configurationEntry.getUUID(), _encode(fileVersion.getFileName()));
 
-		return URI.create(relativePath);
+		return URI.create(relativeURI);
+	}
+
+	private URI _createFileVersionURL(
+		FileVersion fileVersion,
+		ImageAdaptiveMediaConfigurationEntry configurationEntry) {
+
+		String relativeURI = String.format(
+			"image/%d/%d/%s/%s", fileVersion.getFileEntryId(),
+			fileVersion.getFileVersionId(), configurationEntry.getUUID(),
+			_encode(fileVersion.getFileName()));
+
+		return URI.create(relativeURI);
 	}
 
 	private AdaptiveMedia<ImageAdaptiveMediaProcessor> _createMedia(
-		FileEntry fileEntry, Optional<FileVersion> fileVersionOptional,
+		FileVersion fileVersion,
+		BiFunction<FileVersion, ImageAdaptiveMediaConfigurationEntry, URI>
+			uriFactory,
 		ImageAdaptiveMediaConfigurationEntry configurationEntry) {
 
 		Map<String, String> properties = configurationEntry.getProperties();
@@ -159,37 +157,27 @@ public class ImageAdaptiveMediaFinderImpl implements ImageAdaptiveMediaFinder {
 
 		properties.put(
 			contentLengthAttribute.getName(),
-			String.valueOf(fileEntry.getSize()));
+			String.valueOf(fileVersion.getSize()));
 
 		AdaptiveMediaAttribute<Object, String> contentTypeAttribute =
 			AdaptiveMediaAttribute.contentType();
 
-		properties.put(contentTypeAttribute.getName(), fileEntry.getMimeType());
+		properties.put(
+			contentTypeAttribute.getName(), fileVersion.getMimeType());
 
 		AdaptiveMediaAttribute<Object, String> fileNameAttribute =
 			AdaptiveMediaAttribute.fileName();
 
-		properties.put(fileNameAttribute.getName(), fileEntry.getFileName());
+		properties.put(fileNameAttribute.getName(), fileVersion.getFileName());
 
 		ImageAdaptiveMediaAttributeMapping attributeMapping =
 			ImageAdaptiveMediaAttributeMapping.fromProperties(properties);
-
-		FileVersion fileVersion = fileVersionOptional.orElseGet(
-			() -> {
-				try {
-					return fileEntry.getLatestFileVersion();
-				}
-				catch (PortalException pe) {
-					throw new AdaptiveMediaProcessorRuntimeException(pe);
-				}
-			});
 
 		return new ImageAdaptiveMedia(
 			() -> _imageStorage.getContentStream(
 				fileVersion, configurationEntry),
 			attributeMapping,
-			_buildRelativeURI(
-				fileEntry, fileVersionOptional, configurationEntry));
+			uriFactory.apply(fileVersion, configurationEntry));
 	}
 
 	private String _encode(String s) {
@@ -200,6 +188,16 @@ public class ImageAdaptiveMediaFinderImpl implements ImageAdaptiveMediaFinder {
 			throw new AdaptiveMediaProcessorRuntimeException.
 				UnsupportedEncodingException(uee);
 		}
+	}
+
+	private BiFunction<FileVersion, ImageAdaptiveMediaConfigurationEntry, URI>
+		_getURIFactory(ImageAdaptiveMediaQueryBuilderImpl queryBuilder) {
+
+		if (queryBuilder.hasFileVersion()) {
+			return this::_createFileVersionURL;
+		}
+
+		return this::_createFileEntryURL;
 	}
 
 	private ImageAdaptiveMediaConfigurationHelper _configurationHelper;
