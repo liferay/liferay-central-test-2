@@ -40,7 +40,7 @@ import org.osgi.framework.Version;
  */
 public class LPKGVersionChangeTestCase {
 
-	protected void doVersionChange(
+	protected void testVersionChange(
 			int majorDelta, int minorDelta, int microDelta)
 		throws IOException {
 

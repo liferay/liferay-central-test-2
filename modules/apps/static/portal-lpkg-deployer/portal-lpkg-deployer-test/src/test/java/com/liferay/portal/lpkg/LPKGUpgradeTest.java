@@ -25,7 +25,7 @@ public class LPKGUpgradeTest extends LPKGVersionChangeTestCase {
 
 	@Test
 	public void testUpgradeLPKG() throws IOException {
-		doVersionChange(0, 0, 1);
+		testVersionChange(0, 0, 1);
 	}
 
 }
