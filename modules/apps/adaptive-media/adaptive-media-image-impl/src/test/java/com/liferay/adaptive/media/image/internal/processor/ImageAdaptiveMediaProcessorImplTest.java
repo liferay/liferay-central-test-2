@@ -258,6 +258,37 @@ public class ImageAdaptiveMediaProcessorImplTest {
 	}
 
 	@Test
+	public void testProcessWhenNoConfigurationEntries() {
+		Mockito.when(
+			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))
+		).thenReturn(
+			true
+		);
+
+		Mockito.when(
+			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
+				Mockito.any(long.class))
+		).thenReturn(
+			Collections.emptyList()
+		);
+
+		_processor.process(_fileVersion);
+
+		Mockito.verify(
+			_imageProcessor, Mockito.never()
+		).process(
+			Mockito.any(FileVersion.class),
+			Mockito.any(ImageAdaptiveMediaConfigurationEntry.class));
+
+		Mockito.verify(
+			_imageStorage, Mockito.never()
+		).save(
+			Mockito.any(FileVersion.class),
+			Mockito.any(ImageAdaptiveMediaConfigurationEntry.class),
+			Mockito.any(InputStream.class));
+	}
+
+	@Test
 	public void testProcessWhenNotSupported() {
 		Mockito.when(
 			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))
