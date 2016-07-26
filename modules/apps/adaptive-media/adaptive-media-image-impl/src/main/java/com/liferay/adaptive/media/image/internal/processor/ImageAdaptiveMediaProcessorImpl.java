@@ -214,27 +214,26 @@ public final class ImageAdaptiveMediaProcessorImpl
 		FileEntry fileEntry, Optional<FileVersion> fileVersionOptional,
 		ImageAdaptiveMediaConfigurationEntry configurationEntry) {
 
-		String relativePath =
-			fileVersionOptional.map(
-				fileVersion ->
-					String.format(
-						"image/%d/%d/%s/%s", fileEntry.getFileEntryId(),
-						fileVersion.getFileVersionId(),
-						configurationEntry.getUUID(),
-						_encode(fileVersion.getFileName()))).
-			orElseGet(
-				() ->
-					String.format(
-						"image/%d/%s/%s", fileEntry.getFileEntryId(),
-						configurationEntry.getUUID(),
-						_encode(fileEntry.getFileName())));
+		String relativePath = fileVersionOptional.map(
+			fileVersion ->
+				String.format(
+					"image/%d/%d/%s/%s", fileEntry.getFileEntryId(),
+					fileVersion.getFileVersionId(),
+					configurationEntry.getUUID(),
+					_encode(fileVersion.getFileName()))).
+		orElseGet(
+			() ->
+				String.format(
+					"image/%d/%s/%s", fileEntry.getFileEntryId(),
+					configurationEntry.getUUID(),
+					_encode(fileEntry.getFileName())));
 
 		return URI.create(relativePath);
 	}
 
 	private AdaptiveMedia<ImageAdaptiveMediaProcessor> _createMedia(
-			FileEntry fileEntry, Optional<FileVersion> fileVersionOptional,
-			ImageAdaptiveMediaConfigurationEntry configurationEntry) {
+		FileEntry fileEntry, Optional<FileVersion> fileVersionOptional,
+		ImageAdaptiveMediaConfigurationEntry configurationEntry) {
 
 		Map<String, String> properties = configurationEntry.getProperties();
 
@@ -248,8 +247,7 @@ public final class ImageAdaptiveMediaProcessorImpl
 		AdaptiveMediaAttribute<Object, String> contentTypeAttribute =
 			AdaptiveMediaAttribute.contentType();
 
-		properties.put(
-			contentTypeAttribute.getName(), fileEntry.getMimeType());
+		properties.put(contentTypeAttribute.getName(), fileEntry.getMimeType());
 
 		AdaptiveMediaAttribute<Object, String> fileNameAttribute =
 			AdaptiveMediaAttribute.fileName();
