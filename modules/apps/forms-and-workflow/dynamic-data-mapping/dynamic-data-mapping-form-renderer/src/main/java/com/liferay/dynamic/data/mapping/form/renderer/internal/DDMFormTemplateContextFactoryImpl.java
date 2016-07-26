@@ -41,6 +41,10 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+import javax.servlet.Servlet;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
+
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
@@ -98,7 +102,7 @@ public class DDMFormTemplateContextFactoryImpl
 
 		templateContext.put("containerId", containerId);
 		templateContext.put(
-			"evaluatorURL", ddmFormRenderingContext.getEvaluatorURL());
+			"evaluatorURL", getDDMFormContextProviderServletURL());
 
 		List<Object> pages = getPages(
 			ddmForm, ddmFormLayout, ddmFormRenderingContext);
@@ -141,6 +145,13 @@ public class DDMFormTemplateContextFactoryImpl
 			"templateNamespace", getTemplateNamespace(ddmFormLayout));
 
 		return templateContext;
+	}
+
+	protected String getDDMFormContextProviderServletURL() {
+		String servletContextPath = getServletContextPath();
+
+		return servletContextPath.concat(
+			"/dynamic-data-mapping-form-context-provider/");
 	}
 
 	protected Map<String, String> getLanguageStringsMap(
@@ -202,6 +213,15 @@ public class DDMFormTemplateContextFactoryImpl
 		return new AggregateResourceBundle(resourceBundlesArray);
 	}
 
+	protected String getServletContextPath() {
+		ServletConfig servletConfig =
+			_ddmFormContextProviderServlet.getServletConfig();
+
+		ServletContext servletContext = servletConfig.getServletContext();
+
+		return servletContext.getContextPath();
+	}
+
 	protected String getTemplateNamespace(DDMFormLayout ddmFormLayout) {
 		String paginationMode = ddmFormLayout.getPaginationMode();
 
@@ -221,6 +241,11 @@ public class DDMFormTemplateContextFactoryImpl
 
 	@Reference
 	private DDM _ddm;
+
+	@Reference(
+		target = "(osgi.http.whiteboard.servlet.name=com.liferay.dynamic.data.mapping.form.renderer.internal.servlet.DDMFormContextProviderServlet)"
+	)
+	private Servlet _ddmFormContextProviderServlet;
 
 	@Reference
 	private DDMFormEvaluator _ddmFormEvaluator;
