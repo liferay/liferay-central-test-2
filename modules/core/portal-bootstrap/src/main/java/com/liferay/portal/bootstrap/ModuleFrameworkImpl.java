@@ -1096,7 +1096,7 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 
 			if (_log.isInfoEnabled()) {
 				_log.info(
-					"Uninstalled orphan overridingn static JAR bundle " +
+					"Uninstalled orphan overriding static JAR bundle " +
 						location);
 			}
 		}
