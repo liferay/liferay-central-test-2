@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author Julio Camarero
- * @deprecated As of 7.1.0
+ * @deprecated As of 7.0.0
  */
 @Deprecated
 public abstract class BaseAssetEntryQueryProcessor
