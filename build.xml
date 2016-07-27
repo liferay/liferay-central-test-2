@@ -349,7 +349,7 @@
 			</then>
 		</if>
 
-		<copy file="tools/lpkg.override.markdown" tofile="${liferay.home}/osgi/marketplace/override/README.markdown" />
+		<copy file="tools/osgi-marketplace-override-README.markdown" tofile="${liferay.home}/osgi/marketplace/override/README.markdown" />
 
 		<print-current-time />
 	</target>
