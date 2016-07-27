@@ -317,6 +317,7 @@ public class ScreensAssetEntryServiceImpl
 
 		for (AssetEntry assetEntry : assetEntries) {
 			JSONObject jsonObject = toJSONObject(assetEntry, locale);
+
 			jsonArray.put(jsonObject);
 		}
 
