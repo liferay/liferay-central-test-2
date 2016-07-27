@@ -195,8 +195,8 @@ public class RuntimeTag extends TagSupport {
 				WebKeys.THEME_DISPLAY);
 
 			Portlet portlet = getPortlet(
-					themeDisplay.getCompanyId(),
-					portletInstance.getPortletInstanceKey());
+				themeDisplay.getCompanyId(),
+				portletInstance.getPortletInstanceKey());
 
 			Stack<String> embeddedPortletIds = _embeddedPortletIds.get();
 
