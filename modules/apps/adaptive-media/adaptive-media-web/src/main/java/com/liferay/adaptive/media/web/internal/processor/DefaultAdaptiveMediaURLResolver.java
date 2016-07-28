@@ -15,7 +15,7 @@
 package com.liferay.adaptive.media.web.internal.processor;
 
 import com.liferay.adaptive.media.AdaptiveMedia;
-import com.liferay.adaptive.media.AdaptiveMediaURLFactory;
+import com.liferay.adaptive.media.AdaptiveMediaURLResolver;
 import com.liferay.adaptive.media.web.internal.constants.AdaptiveMediaWebConstants;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -27,11 +27,12 @@ import org.osgi.service.component.annotations.Component;
 /**
  * @author Adolfo Pérez
  */
-@Component(immediate = true, service = AdaptiveMediaURLFactory.class)
-public class DefaultAdaptiveMediaURLFactory implements AdaptiveMediaURLFactory {
+@Component(immediate = true, service = AdaptiveMediaURLResolver.class)
+public class DefaultAdaptiveMediaURLResolver
+	implements AdaptiveMediaURLResolver {
 
 	@Override
-	public <T> URI createAdaptiveMediaURI(AdaptiveMedia<T> media) {
+	public <T> URI resolveURI(AdaptiveMedia<T> media) {
 		String pathModule = PortalUtil.getPathModule();
 
 		if (!pathModule.endsWith(StringPool.SLASH)) {

@@ -19,8 +19,8 @@ import java.net.URI;
 /**
  * @author Adolfo Pérez
  */
-public interface AdaptiveMediaURLFactory {
+public interface AdaptiveMediaURLResolver {
 
-	public <T> URI createAdaptiveMediaURI(AdaptiveMedia<T> media);
+	public <T> URI resolveURI(AdaptiveMedia<T> media);
 
 }
