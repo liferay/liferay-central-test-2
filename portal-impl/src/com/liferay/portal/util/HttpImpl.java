@@ -1082,33 +1082,33 @@ public class HttpImpl implements Http {
 			return url;
 		}
 
-		Matcher matcher = _relativeUrlPattern.matcher(url);
+		Matcher matcher = _relativeURLPattern.matcher(url);
 
 		if (matcher.lookingAt()) {
 			return url;
 		}
 
-		boolean modifiedURL;
+		boolean modified = false;
 
 		do {
-			modifiedURL = false;
+			modified = false;
 
-			matcher = _absoluteUrlPattern.matcher(url);
-
-			if (matcher.lookingAt()) {
-				url = url.substring(matcher.end());
-
-				modifiedURL = true;
-			}
-
-			matcher = _protocolRelativeUrlPattern.matcher(url);
+			matcher = _absoluteURLPattern.matcher(url);
 
 			if (matcher.lookingAt()) {
 				url = url.substring(matcher.end());
 
-				modifiedURL = true;
+				modified = true;
 			}
-		} while (modifiedURL);
+
+			matcher = _protocolRelativeURLPattern.matcher(url);
+
+			if (matcher.lookingAt()) {
+				url = url.substring(matcher.end());
+
+				modified = true;
+			}
+		} while (modified);
 
 		return url;
 	}
@@ -1822,15 +1822,15 @@ public class HttpImpl implements Http {
 
 	private static final ThreadLocal<Cookie[]> _cookies = new ThreadLocal<>();
 
-	private final Pattern _absoluteUrlPattern = Pattern.compile(
+	private final Pattern _absoluteURLPattern = Pattern.compile(
 		"^[a-zA-Z0-9]+://");
 	private final HttpClient _httpClient = new HttpClient();
 	private final Pattern _nonProxyHostsPattern;
-	private final Pattern _protocolRelativeUrlPattern = Pattern.compile(
+	private final Pattern _protocolRelativeURLPattern = Pattern.compile(
 		"^[\\s\\\\/]+");
 	private final Credentials _proxyCredentials;
 	private final HttpClient _proxyHttpClient = new HttpClient();
-	private final Pattern _relativeUrlPattern = Pattern.compile(
+	private final Pattern _relativeURLPattern = Pattern.compile(
 		"^\\s*/[a-zA-Z0-9]+");
 
 	private static class FastProtocolSocketFactory
