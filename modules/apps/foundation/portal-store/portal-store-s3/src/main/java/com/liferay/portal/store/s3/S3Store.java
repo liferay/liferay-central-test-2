@@ -398,8 +398,8 @@ public class S3Store extends BaseStore {
 
 		String proxyAuthType = _s3StoreConfiguration.proxyAuthType();
 
-		if (proxyAuthType.equals("username-password") ||
-			proxyAuthType.equals("ntlm")) {
+		if (proxyAuthType.equals("ntlm") ||
+			proxyAuthType.equals("username-password")) {
 
 			clientConfiguration.setProxyPassword(
 				_s3StoreConfiguration.proxyPassword());
