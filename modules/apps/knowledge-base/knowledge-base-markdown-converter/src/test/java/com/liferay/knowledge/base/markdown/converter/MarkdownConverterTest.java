@@ -28,17 +28,17 @@ public class MarkdownConverterTest {
 	public void testLiferayToHtmlSerializer() throws Exception {
 		String markdownString =
 			"### The liferay-ui:logo-selector Tag " +
-				"Requires Parameter Changes [](id=the-liferay-uilogo-selector" +
-					"-tag-requires-parameter-changes)";
+				"Requires Parameter Changes [](id=the-liferay-uilogo-" +
+					"selector-tag-requires-parameter-changes)";
 
 		String html =
 			MarkdownConverterFactoryUtil.create().convert(markdownString);
 
-		int pos = html.indexOf(
+		int index = html.indexOf(
 			"id=\"the-liferay-uilogo-selector-tag-" +
 				"requires-parameter-changes\"");
 
-		Assert.assertNotEquals(-1, pos);
+		Assert.assertNotEquals(-1, index);
 	}
 
 }
