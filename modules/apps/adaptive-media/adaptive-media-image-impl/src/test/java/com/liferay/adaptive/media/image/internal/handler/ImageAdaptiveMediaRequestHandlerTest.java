@@ -15,8 +15,8 @@
 package com.liferay.adaptive.media.image.internal.handler;
 
 import com.liferay.adaptive.media.AdaptiveMedia;
-import com.liferay.adaptive.media.AdaptiveMediaProcessorException;
-import com.liferay.adaptive.media.AdaptiveMediaProcessorRuntimeException;
+import com.liferay.adaptive.media.AdaptiveMediaException;
+import com.liferay.adaptive.media.AdaptiveMediaRuntimeException;
 import com.liferay.adaptive.media.image.finder.ImageAdaptiveMediaFinder;
 import com.liferay.adaptive.media.image.internal.util.Tuple;
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
@@ -48,7 +48,7 @@ public class ImageAdaptiveMediaRequestHandlerTest {
 		_requestHandler.setPathInterpreter(_pathInterpreter);
 	}
 
-	@Test(expected = AdaptiveMediaProcessorRuntimeException.class)
+	@Test(expected = AdaptiveMediaRuntimeException.class)
 	public void testFinderFailsWithMediaProcessorException() throws Exception {
 		Mockito.when(
 			_pathInterpreter.interpretPath(Mockito.any(String.class))
@@ -59,13 +59,13 @@ public class ImageAdaptiveMediaRequestHandlerTest {
 		Mockito.when(
 			_finder.getAdaptiveMedia(Mockito.any(Function.class))
 		).thenThrow(
-			AdaptiveMediaProcessorException.class
+			AdaptiveMediaException.class
 		);
 
 		_requestHandler.handleRequest(_request);
 	}
 
-	@Test(expected = AdaptiveMediaProcessorRuntimeException.class)
+	@Test(expected = AdaptiveMediaRuntimeException.class)
 	public void testFinderFailsWithPortalException() throws Exception {
 		Mockito.when(
 			_pathInterpreter.interpretPath(Mockito.any(String.class))
@@ -106,7 +106,7 @@ public class ImageAdaptiveMediaRequestHandlerTest {
 		Mockito.when(
 			_pathInterpreter.interpretPath(Mockito.any(String.class))
 		).thenThrow(
-			AdaptiveMediaProcessorRuntimeException.class
+			AdaptiveMediaRuntimeException.class
 		);
 
 		Optional<AdaptiveMedia<ImageAdaptiveMediaProcessor>> mediaOptional =

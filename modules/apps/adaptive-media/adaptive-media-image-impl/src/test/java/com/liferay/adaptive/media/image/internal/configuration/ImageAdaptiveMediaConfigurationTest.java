@@ -14,7 +14,7 @@
 
 package com.liferay.adaptive.media.image.internal.configuration;
 
-import com.liferay.adaptive.media.AdaptiveMediaProcessorRuntimeException;
+import com.liferay.adaptive.media.AdaptiveMediaRuntimeException;
 import com.liferay.portal.kernel.module.configuration.ConfigurationException;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 
@@ -109,7 +109,7 @@ public class ImageAdaptiveMediaConfigurationTest {
 		_configurationHelper.getImageAdaptiveMediaConfigurationEntries(1234);
 	}
 
-	@Test(expected = AdaptiveMediaProcessorRuntimeException.InvalidConfiguration.class)
+	@Test(expected = AdaptiveMediaRuntimeException.InvalidConfiguration.class)
 	public void testModuleConfigurationException() throws Exception {
 		Mockito.when(
 			_configurationProvider.getCompanyConfiguration(

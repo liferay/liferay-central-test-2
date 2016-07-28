@@ -14,7 +14,7 @@
 
 package com.liferay.adaptive.media.image.internal.processor;
 
-import com.liferay.adaptive.media.AdaptiveMediaProcessorRuntimeException;
+import com.liferay.adaptive.media.AdaptiveMediaRuntimeException;
 import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaConfigurationHelper;
 import com.liferay.adaptive.media.image.internal.util.ImageProcessor;
@@ -71,8 +71,7 @@ public final class ImageAdaptiveMediaProcessorImpl
 					fileVersion, configurationEntry, inputStream);
 			}
 			catch (IOException ioe) {
-				throw new AdaptiveMediaProcessorRuntimeException.IOException(
-					ioe);
+				throw new AdaptiveMediaRuntimeException.IOException(ioe);
 			}
 		}
 	}

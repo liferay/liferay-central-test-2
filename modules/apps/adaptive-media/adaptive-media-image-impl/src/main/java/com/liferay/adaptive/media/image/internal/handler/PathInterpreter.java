@@ -14,7 +14,7 @@
 
 package com.liferay.adaptive.media.image.internal.handler;
 
-import com.liferay.adaptive.media.AdaptiveMediaProcessorRuntimeException;
+import com.liferay.adaptive.media.AdaptiveMediaRuntimeException;
 import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaConfigurationHelper;
 import com.liferay.adaptive.media.image.internal.util.Tuple;
@@ -75,7 +75,7 @@ public class PathInterpreter {
 			return Optional.of(Tuple.of(fileVersion, properties));
 		}
 		catch (PortalException pe) {
-			throw new AdaptiveMediaProcessorRuntimeException(pe);
+			throw new AdaptiveMediaRuntimeException(pe);
 		}
 	}
 

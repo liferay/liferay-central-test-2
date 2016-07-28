@@ -14,7 +14,7 @@
 
 package com.liferay.adaptive.media.image.internal.processor;
 
-import com.liferay.adaptive.media.AdaptiveMediaProcessorRuntimeException;
+import com.liferay.adaptive.media.AdaptiveMediaRuntimeException;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -25,7 +25,7 @@ import org.junit.Test;
 public class ImageAdaptiveMediaAttributeTest {
 
 	@Test(
-		expected = AdaptiveMediaProcessorRuntimeException.AdaptiveMediaAttributeFormatException.class
+		expected = AdaptiveMediaRuntimeException.AdaptiveMediaAttributeFormatException.class
 	)
 	public void testImageHeightFailsForNonIntegers() {
 		ImageAdaptiveMediaAttribute.IMAGE_HEIGHT.convert("xyz");
@@ -39,7 +39,7 @@ public class ImageAdaptiveMediaAttributeTest {
 	}
 
 	@Test(
-		expected = AdaptiveMediaProcessorRuntimeException.AdaptiveMediaAttributeFormatException.class
+		expected = AdaptiveMediaRuntimeException.AdaptiveMediaAttributeFormatException.class
 	)
 	public void testImageWidthFailsForNonIntegers() {
 		ImageAdaptiveMediaAttribute.IMAGE_WIDTH.convert("xyz");

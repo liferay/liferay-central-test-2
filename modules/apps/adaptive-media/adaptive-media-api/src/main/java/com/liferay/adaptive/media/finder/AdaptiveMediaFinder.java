@@ -15,7 +15,7 @@
 package com.liferay.adaptive.media.finder;
 
 import com.liferay.adaptive.media.AdaptiveMedia;
-import com.liferay.adaptive.media.AdaptiveMediaProcessorException;
+import com.liferay.adaptive.media.AdaptiveMediaException;
 import com.liferay.portal.kernel.exception.PortalException;
 
 import java.util.function.Function;
@@ -47,11 +47,11 @@ public interface AdaptiveMediaFinder
 	 *         query ordered by score: better matches are returned before
 	 *         worser ones
 	 *
-	 * @throws AdaptiveMediaProcessorException if an error occurred while
+	 * @throws AdaptiveMediaException if an error occurred while
 	 *         getting the {@link AdaptiveMedia}. See
-	 *         {@link AdaptiveMediaProcessorException} inner classes for the set
+	 *         {@link AdaptiveMediaException} inner classes for the set
 	 *         of possible exceptions.
-	 * @throws com.liferay.adaptive.media.AdaptiveMediaProcessorRuntimeException.IOException
+	 * @throws AdaptiveMediaRuntimeException.IOException
 	 *         if an error occurs while processing the
 	 * @throws IllegalArgumentException if <code>queryBuilderFunction</code> is
 	 *         null, or the query returned by it is not valid.
@@ -60,6 +60,6 @@ public interface AdaptiveMediaFinder
 	 */
 	public Stream<AdaptiveMedia<T>> getAdaptiveMedia(
 			Function<B, AdaptiveMediaQuery<M, T>> queryBuilderFunction)
-		throws AdaptiveMediaProcessorException, PortalException;
+		throws AdaptiveMediaException, PortalException;
 
 }

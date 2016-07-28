@@ -70,7 +70,7 @@ public final class AdaptiveMediaAttribute<T, V> {
 	 * it is recommended for it to be a human readable value. <code>converter
 	 * </code> should be a function capable of converting a String to a value
 	 * of the correct type; this function should throw a {@link
-	 * AdaptiveMediaProcessorRuntimeException.AdaptiveMediaAttributeFormatException}
+	 * AdaptiveMediaRuntimeException.AdaptiveMediaAttributeFormatException}
 	 * when the give String is not convertible. <code>distanceFunction</code> is
 	 * a function that should compute the distance between two values of the
 	 * attribute; it should return a value between 0 and {@link
@@ -93,7 +93,7 @@ public final class AdaptiveMediaAttribute<T, V> {
 	 * @return The converted value
 	 *
 	 * @throws {@link
-	 *         AdaptiveMediaProcessorRuntimeException.AdaptiveMediaAttributeFormatException}
+	 *         AdaptiveMediaRuntimeException.AdaptiveMediaAttributeFormatException}
 	 *         when the give value is not convertible.
 	 */
 	public V convert(String value) {

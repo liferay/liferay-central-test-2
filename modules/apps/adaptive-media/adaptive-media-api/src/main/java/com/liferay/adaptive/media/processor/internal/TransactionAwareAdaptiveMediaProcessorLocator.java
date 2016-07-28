@@ -14,7 +14,7 @@
 
 package com.liferay.adaptive.media.processor.internal;
 
-import com.liferay.adaptive.media.AdaptiveMediaProcessorException;
+import com.liferay.adaptive.media.AdaptiveMediaException;
 import com.liferay.adaptive.media.processor.AdaptiveMediaProcessor;
 import com.liferay.adaptive.media.processor.AdaptiveMediaProcessorLocator;
 import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerMap;
@@ -83,7 +83,7 @@ public class TransactionAwareAdaptiveMediaProcessorLocator
 
 		@Override
 		public void cleanUp(M model)
-			throws AdaptiveMediaProcessorException, PortalException {
+			throws AdaptiveMediaException, PortalException {
 
 			TransactionCommitCallbackUtil.registerCallback(() ->
 				_forEach(processor -> processor.cleanUp(model)));
@@ -91,7 +91,7 @@ public class TransactionAwareAdaptiveMediaProcessorLocator
 
 		@Override
 		public void process(M model)
-			throws AdaptiveMediaProcessorException, PortalException {
+			throws AdaptiveMediaException, PortalException {
 
 			TransactionCommitCallbackUtil.registerCallback(() ->
 				_forEach(processor -> processor.process(model)));

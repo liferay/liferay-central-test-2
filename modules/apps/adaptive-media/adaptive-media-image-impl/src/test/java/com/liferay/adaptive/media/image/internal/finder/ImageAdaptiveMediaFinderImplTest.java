@@ -15,7 +15,7 @@
 package com.liferay.adaptive.media.image.internal.finder;
 
 import com.liferay.adaptive.media.AdaptiveMedia;
-import com.liferay.adaptive.media.AdaptiveMediaProcessorRuntimeException;
+import com.liferay.adaptive.media.AdaptiveMediaRuntimeException;
 import com.liferay.adaptive.media.finder.AdaptiveMediaQuery;
 import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaConfigurationHelper;
@@ -187,9 +187,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 		_finder.getAdaptiveMedia(queryBuilder -> null);
 	}
 
-	@Test(
-		expected = AdaptiveMediaProcessorRuntimeException.InvalidConfiguration.class
-	)
+	@Test(expected = AdaptiveMediaRuntimeException.InvalidConfiguration.class)
 	public void testGetMediaConfigurationError() throws Exception {
 		Mockito.when(
 			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))
@@ -201,7 +199,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
 				Mockito.any(long.class))
 		).thenThrow(
-			AdaptiveMediaProcessorRuntimeException.InvalidConfiguration.class
+			AdaptiveMediaRuntimeException.InvalidConfiguration.class
 		);
 
 		_finder.getAdaptiveMedia(

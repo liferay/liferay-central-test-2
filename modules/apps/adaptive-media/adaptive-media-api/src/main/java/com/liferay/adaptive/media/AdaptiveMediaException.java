@@ -17,20 +17,20 @@ package com.liferay.adaptive.media;
 /**
  * @author Adolfo Pérez
  */
-public class AdaptiveMediaProcessorException extends Exception {
+public class AdaptiveMediaException extends Exception {
 
-	public AdaptiveMediaProcessorException() {
+	public AdaptiveMediaException() {
 	}
 
-	public AdaptiveMediaProcessorException(String s) {
+	public AdaptiveMediaException(String s) {
 		super(s);
 	}
 
-	public AdaptiveMediaProcessorException(String s, Throwable throwable) {
+	public AdaptiveMediaException(String s, Throwable throwable) {
 		super(s, throwable);
 	}
 
-	public AdaptiveMediaProcessorException(Throwable throwable) {
+	public AdaptiveMediaException(Throwable throwable) {
 		super(throwable);
 	}
 
@@ -38,7 +38,7 @@ public class AdaptiveMediaProcessorException extends Exception {
 	 * This exception will be raised when a requested media is not found.
 	 */
 	public static final class AdaptiveMediaNotFound
-		extends AdaptiveMediaProcessorException {
+		extends AdaptiveMediaException {
 
 		public AdaptiveMediaNotFound() {
 		}

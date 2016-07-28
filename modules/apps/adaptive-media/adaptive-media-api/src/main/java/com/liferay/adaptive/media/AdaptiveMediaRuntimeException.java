@@ -17,22 +17,20 @@ package com.liferay.adaptive.media;
 /**
  * @author Adolfo Pérez
  */
-public class AdaptiveMediaProcessorRuntimeException extends RuntimeException {
+public class AdaptiveMediaRuntimeException extends RuntimeException {
 
-	public AdaptiveMediaProcessorRuntimeException() {
+	public AdaptiveMediaRuntimeException() {
 	}
 
-	public AdaptiveMediaProcessorRuntimeException(String s) {
+	public AdaptiveMediaRuntimeException(String s) {
 		super(s);
 	}
 
-	public AdaptiveMediaProcessorRuntimeException(
-		String s, Throwable throwable) {
-
+	public AdaptiveMediaRuntimeException(String s, Throwable throwable) {
 		super(s, throwable);
 	}
 
-	public AdaptiveMediaProcessorRuntimeException(Throwable throwable) {
+	public AdaptiveMediaRuntimeException(Throwable throwable) {
 		super(throwable);
 	}
 
@@ -41,7 +39,7 @@ public class AdaptiveMediaProcessorRuntimeException extends RuntimeException {
 	 * by a {@link AdaptiveMediaAttribute}.
 	 */
 	public static final class AdaptiveMediaAttributeFormatException
-		extends AdaptiveMediaProcessorRuntimeException {
+		extends AdaptiveMediaRuntimeException {
 
 		public AdaptiveMediaAttributeFormatException() {
 		}
@@ -66,7 +64,7 @@ public class AdaptiveMediaProcessorRuntimeException extends RuntimeException {
 	 * Exception thrown when there is a processor configuration error.
 	 */
 	public static final class InvalidConfiguration
-		extends AdaptiveMediaProcessorRuntimeException {
+		extends AdaptiveMediaRuntimeException {
 
 		public InvalidConfiguration() {
 		}
@@ -91,7 +89,7 @@ public class AdaptiveMediaProcessorRuntimeException extends RuntimeException {
 	 * it inside a RuntimeException
 	 */
 	public static final class IOException
-		extends AdaptiveMediaProcessorRuntimeException {
+		extends AdaptiveMediaRuntimeException {
 
 		public IOException() {
 		}
@@ -117,7 +115,7 @@ public class AdaptiveMediaProcessorRuntimeException extends RuntimeException {
 	 * RuntimeException
 	 */
 	public static final class UnsupportedEncodingException
-		extends AdaptiveMediaProcessorRuntimeException {
+		extends AdaptiveMediaRuntimeException {
 
 		public UnsupportedEncodingException() {
 		}

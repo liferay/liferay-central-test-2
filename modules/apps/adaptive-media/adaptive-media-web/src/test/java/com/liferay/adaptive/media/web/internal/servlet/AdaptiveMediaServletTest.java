@@ -14,7 +14,7 @@
 
 package com.liferay.adaptive.media.web.internal.servlet;
 
-import com.liferay.adaptive.media.AdaptiveMediaProcessorException;
+import com.liferay.adaptive.media.AdaptiveMediaException;
 import com.liferay.adaptive.media.handler.AdaptiveMediaRequestHandler;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -115,7 +115,7 @@ public class AdaptiveMediaServletTest {
 		Mockito.when(
 			_requestHandler.handleRequest(_request)
 		).thenThrow(
-			AdaptiveMediaProcessorException.AdaptiveMediaNotFound.class
+			AdaptiveMediaException.AdaptiveMediaNotFound.class
 		);
 
 		_servlet.doGet(_request, _response);

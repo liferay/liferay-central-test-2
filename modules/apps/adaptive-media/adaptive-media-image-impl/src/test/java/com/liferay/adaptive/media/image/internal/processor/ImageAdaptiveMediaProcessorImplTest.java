@@ -14,7 +14,7 @@
 
 package com.liferay.adaptive.media.image.internal.processor;
 
-import com.liferay.adaptive.media.AdaptiveMediaProcessorRuntimeException;
+import com.liferay.adaptive.media.AdaptiveMediaRuntimeException;
 import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaConfigurationHelper;
 import com.liferay.adaptive.media.image.internal.util.ImageProcessor;
@@ -62,7 +62,7 @@ public class ImageAdaptiveMediaProcessorImplTest {
 		);
 	}
 
-	@Test(expected = AdaptiveMediaProcessorRuntimeException.IOException.class)
+	@Test(expected = AdaptiveMediaRuntimeException.IOException.class)
 	public void testCleanUpIOException() {
 		Mockito.when(
 			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))
@@ -71,7 +71,7 @@ public class ImageAdaptiveMediaProcessorImplTest {
 		);
 
 		Mockito.doThrow(
-			AdaptiveMediaProcessorRuntimeException.IOException.class
+			AdaptiveMediaRuntimeException.IOException.class
 		).when(
 			_imageStorage
 		).delete(
@@ -132,9 +132,7 @@ public class ImageAdaptiveMediaProcessorImplTest {
 		);
 	}
 
-	@Test(
-		expected = AdaptiveMediaProcessorRuntimeException.InvalidConfiguration.class
-	)
+	@Test(expected = AdaptiveMediaRuntimeException.InvalidConfiguration.class)
 	public void testProcessInvalidConfigurationException() throws Exception {
 		Mockito.when(
 			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))
@@ -146,13 +144,13 @@ public class ImageAdaptiveMediaProcessorImplTest {
 			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
 				Mockito.any(long.class))
 		).thenThrow(
-			AdaptiveMediaProcessorRuntimeException.InvalidConfiguration.class
+			AdaptiveMediaRuntimeException.InvalidConfiguration.class
 		);
 
 		_processor.process(_fileVersion);
 	}
 
-	@Test(expected = AdaptiveMediaProcessorRuntimeException.IOException.class)
+	@Test(expected = AdaptiveMediaRuntimeException.IOException.class)
 	public void testProcessIOExceptionInImageProcessor() throws Exception {
 		Mockito.when(
 			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))
@@ -175,13 +173,13 @@ public class ImageAdaptiveMediaProcessorImplTest {
 		Mockito.when(
 			_imageProcessor.process(_fileVersion, configurationEntry)
 		).thenThrow(
-			AdaptiveMediaProcessorRuntimeException.IOException.class
+			AdaptiveMediaRuntimeException.IOException.class
 		);
 
 		_processor.process(_fileVersion);
 	}
 
-	@Test(expected = AdaptiveMediaProcessorRuntimeException.IOException.class)
+	@Test(expected = AdaptiveMediaRuntimeException.IOException.class)
 	public void testProcessIOExceptionInInputStream() throws Exception {
 		Mockito.when(
 			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))
@@ -218,7 +216,7 @@ public class ImageAdaptiveMediaProcessorImplTest {
 		_processor.process(_fileVersion);
 	}
 
-	@Test(expected = AdaptiveMediaProcessorRuntimeException.IOException.class)
+	@Test(expected = AdaptiveMediaRuntimeException.IOException.class)
 	public void testProcessIOExceptionInStorage() throws Exception {
 		Mockito.when(
 			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))
@@ -247,7 +245,7 @@ public class ImageAdaptiveMediaProcessorImplTest {
 		);
 
 		Mockito.doThrow(
-			AdaptiveMediaProcessorRuntimeException.IOException.class
+			AdaptiveMediaRuntimeException.IOException.class
 		).when(
 			_imageStorage
 		).save(

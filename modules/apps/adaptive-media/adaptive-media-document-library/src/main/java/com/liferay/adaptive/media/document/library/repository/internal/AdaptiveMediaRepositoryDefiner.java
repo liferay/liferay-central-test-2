@@ -14,7 +14,7 @@
 
 package com.liferay.adaptive.media.document.library.repository.internal;
 
-import com.liferay.adaptive.media.AdaptiveMediaProcessorException;
+import com.liferay.adaptive.media.AdaptiveMediaException;
 import com.liferay.adaptive.media.processor.AdaptiveMediaProcessor;
 import com.liferay.adaptive.media.processor.AdaptiveMediaProcessorLocator;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -88,7 +88,7 @@ public class AdaptiveMediaRepositoryDefiner
 				processor.cleanUp(fileVersion);
 			}
 		}
-		catch (AdaptiveMediaProcessorException | PortalException e) {
+		catch (AdaptiveMediaException | PortalException e) {
 			throw new RuntimeException(e);
 		}
 	}
@@ -100,7 +100,7 @@ public class AdaptiveMediaRepositoryDefiner
 
 			processor.process(fileEntry.getLatestFileVersion(true));
 		}
-		catch (AdaptiveMediaProcessorException | PortalException e) {
+		catch (AdaptiveMediaException | PortalException e) {
 			throw new RuntimeException(e);
 		}
 	}

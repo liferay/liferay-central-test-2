@@ -16,7 +16,7 @@ package com.liferay.adaptive.media.processor;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.adaptive.media.AdaptiveMediaProcessorException;
+import com.liferay.adaptive.media.AdaptiveMediaException;
 import com.liferay.portal.kernel.exception.PortalException;
 
 /**
@@ -39,14 +39,13 @@ public interface AdaptiveMediaProcessor<M, T> {
 	 *
 	 * @param model The model for which all generated media will be deleted
 	 *
-	 * @throws AdaptiveMediaProcessorException if a processing error occurred.
-	 *         See {@link AdaptiveMediaProcessorException} inner classes for the
+	 * @throws AdaptiveMediaException if a processing error occurred.
+	 *         See {@link AdaptiveMediaException} inner classes for the
 	 *         set of possible exceptions.
-	 * @throws com.liferay.adaptive.media.AdaptiveMediaProcessorRuntimeException
+	 * @throws AdaptiveMediaRuntimeException
 	 *         if a system error occurred.
 	 */
-	public void cleanUp(M model)
-		throws AdaptiveMediaProcessorException, PortalException;
+	public void cleanUp(M model) throws AdaptiveMediaException, PortalException;
 
 	/**
 	 * Generate the media for the given model. Implementations may decide not to
@@ -54,15 +53,14 @@ public interface AdaptiveMediaProcessor<M, T> {
 	 *
 	 * @param model The model for which media will be generated
 	 *
-	 * @throws AdaptiveMediaProcessorException if an error occurred while
-	 *         generating the media. See {@link AdaptiveMediaProcessorException}
+	 * @throws AdaptiveMediaException if an error occurred while
+	 *         generating the media. See {@link AdaptiveMediaException}
 	 *         inner classes for the set of possible exceptions.
-	 * @throws com.liferay.adaptive.media.AdaptiveMediaProcessorRuntimeException
+	 * @throws AdaptiveMediaRuntimeException
 	 *         if a system error occurred.
 	 * @throws PortalException if an error occurred while calling any Liferay
 	 *         services
 	 */
-	public void process(M model)
-		throws AdaptiveMediaProcessorException, PortalException;
+	public void process(M model) throws AdaptiveMediaException, PortalException;
 
 }

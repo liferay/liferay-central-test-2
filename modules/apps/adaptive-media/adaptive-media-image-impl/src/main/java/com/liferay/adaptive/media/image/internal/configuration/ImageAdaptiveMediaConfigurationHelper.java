@@ -14,7 +14,7 @@
 
 package com.liferay.adaptive.media.image.internal.configuration;
 
-import com.liferay.adaptive.media.AdaptiveMediaProcessorRuntimeException;
+import com.liferay.adaptive.media.AdaptiveMediaRuntimeException;
 import com.liferay.portal.kernel.module.configuration.ConfigurationException;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 
@@ -54,8 +54,7 @@ public class ImageAdaptiveMediaConfigurationHelper {
 			filter(
 				configurationEntry ->
 					configurationEntryUUID.equals(
-						configurationEntry.getUUID())).
-			findFirst();
+						configurationEntry.getUUID())).findFirst();
 	}
 
 	@Reference(unbind = "-")
@@ -90,8 +89,7 @@ public class ImageAdaptiveMediaConfigurationHelper {
 				map(_configurationEntryParser::parse);
 		}
 		catch (ConfigurationException ce) {
-			throw new
-				AdaptiveMediaProcessorRuntimeException.InvalidConfiguration(ce);
+			throw new AdaptiveMediaRuntimeException.InvalidConfiguration(ce);
 		}
 	}
 

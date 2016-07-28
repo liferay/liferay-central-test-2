@@ -14,7 +14,7 @@
 
 package com.liferay.adaptive.media.image.internal.util;
 
-import com.liferay.adaptive.media.AdaptiveMediaProcessorRuntimeException;
+import com.liferay.adaptive.media.AdaptiveMediaRuntimeException;
 import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaAttributeMapping;
 import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.adaptive.media.image.internal.processor.ImageAdaptiveMediaAttribute;
@@ -82,7 +82,7 @@ public class ImageProcessor {
 			return new UnsyncByteArrayInputStream(baos.toByteArray());
 		}
 		catch (IOException | PortalException e) {
-			throw new AdaptiveMediaProcessorRuntimeException.IOException(e);
+			throw new AdaptiveMediaRuntimeException.IOException(e);
 		}
 	}
 
