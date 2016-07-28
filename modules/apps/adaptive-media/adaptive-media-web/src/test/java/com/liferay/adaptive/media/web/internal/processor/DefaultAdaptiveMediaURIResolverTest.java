@@ -42,7 +42,7 @@ public class DefaultAdaptiveMediaURIResolverTest {
 	}
 
 	@Test
-	public void testMediaURLWhenPathDoesNotEndInSlash() {
+	public void testMediaURIWhenPathDoesNotEndInSlash() {
 		String pathModule = StringPool.SLASH + StringUtil.randomString();
 
 		Mockito.when(
@@ -64,7 +64,7 @@ public class DefaultAdaptiveMediaURIResolverTest {
 	}
 
 	@Test
-	public void testMediaURLWhenPathEndsInSlash() {
+	public void testMediaURIWhenPathEndsInSlash() {
 		String pathModule =
 			StringPool.SLASH + StringUtil.randomString() + StringPool.SLASH;
 
