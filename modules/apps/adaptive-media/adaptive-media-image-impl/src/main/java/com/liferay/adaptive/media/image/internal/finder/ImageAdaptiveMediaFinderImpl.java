@@ -17,6 +17,7 @@ package com.liferay.adaptive.media.image.internal.finder;
 import com.liferay.adaptive.media.AdaptiveMedia;
 import com.liferay.adaptive.media.AdaptiveMediaAttribute;
 import com.liferay.adaptive.media.AdaptiveMediaRuntimeException;
+import com.liferay.adaptive.media.AdaptiveMediaURLResolver;
 import com.liferay.adaptive.media.finder.AdaptiveMediaFinder;
 import com.liferay.adaptive.media.finder.AdaptiveMediaQuery;
 import com.liferay.adaptive.media.image.finder.ImageAdaptiveMediaFinder;
@@ -105,6 +106,13 @@ public class ImageAdaptiveMediaFinderImpl implements ImageAdaptiveMediaFinder {
 	}
 
 	@Reference(unbind = "-")
+	public void setAdaptiveMediaURLResolver(
+		AdaptiveMediaURLResolver adaptiveMediaURLResolver) {
+
+		_adaptiveMediaURLResolver = adaptiveMediaURLResolver;
+	}
+
+	@Reference(unbind = "-")
 	public void setImageAdaptiveMediaConfigurationHelper(
 		ImageAdaptiveMediaConfigurationHelper configurationHelper) {
 
@@ -129,7 +137,7 @@ public class ImageAdaptiveMediaFinderImpl implements ImageAdaptiveMediaFinder {
 			"image/%d/%s/%s", fileVersion.getFileEntryId(),
 			configurationEntry.getUUID(), _encode(fileVersion.getFileName()));
 
-		return URI.create(relativeURI);
+		return _adaptiveMediaURLResolver.resolveURI(URI.create(relativeURI));
 	}
 
 	private URI _createFileVersionURL(
@@ -141,7 +149,7 @@ public class ImageAdaptiveMediaFinderImpl implements ImageAdaptiveMediaFinder {
 			fileVersion.getFileVersionId(), configurationEntry.getUUID(),
 			_encode(fileVersion.getFileName()));
 
-		return URI.create(relativeURI);
+		return _adaptiveMediaURLResolver.resolveURI(URI.create(relativeURI));
 	}
 
 	private AdaptiveMedia<ImageAdaptiveMediaProcessor> _createMedia(
@@ -200,6 +208,7 @@ public class ImageAdaptiveMediaFinderImpl implements ImageAdaptiveMediaFinder {
 		return this::_createFileEntryURL;
 	}
 
+	private AdaptiveMediaURLResolver _adaptiveMediaURLResolver;
 	private ImageAdaptiveMediaConfigurationHelper _configurationHelper;
 	private ImageProcessor _imageProcessor;
 	private ImageStorage _imageStorage;
