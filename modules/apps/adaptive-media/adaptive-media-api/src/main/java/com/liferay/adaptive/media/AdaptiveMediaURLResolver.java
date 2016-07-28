@@ -21,6 +21,6 @@ import java.net.URI;
  */
 public interface AdaptiveMediaURLResolver {
 
-	public <T> URI resolveURI(AdaptiveMedia<T> media);
+	public URI resolveURI(URI relativeURI);
 
 }

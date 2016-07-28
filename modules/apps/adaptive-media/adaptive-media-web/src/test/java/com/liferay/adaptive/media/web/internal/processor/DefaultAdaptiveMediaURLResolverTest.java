@@ -14,7 +14,6 @@
 
 package com.liferay.adaptive.media.web.internal.processor;
 
-import com.liferay.adaptive.media.AdaptiveMedia;
 import com.liferay.adaptive.media.AdaptiveMediaURLResolver;
 import com.liferay.adaptive.media.web.internal.constants.AdaptiveMediaWebConstants;
 import com.liferay.portal.kernel.util.Portal;
@@ -54,13 +53,7 @@ public class DefaultAdaptiveMediaURLResolverTest {
 
 		URI relativeURI = URI.create(StringUtil.randomString());
 
-		Mockito.when(
-			_media.getRelativeURI()
-		).thenReturn(
-			relativeURI
-		);
-
-		URI uri = _urlResolver.resolveURI(_media);
+		URI uri = _urlResolver.resolveURI(relativeURI);
 
 		String uriString = uri.toString();
 
@@ -83,13 +76,7 @@ public class DefaultAdaptiveMediaURLResolverTest {
 
 		URI relativeURI = URI.create(StringUtil.randomString());
 
-		Mockito.when(
-			_media.getRelativeURI()
-		).thenReturn(
-			relativeURI
-		);
-
-		URI uri = _urlResolver.resolveURI(_media);
+		URI uri = _urlResolver.resolveURI(relativeURI);
 
 		String uriString = uri.toString();
 
@@ -99,7 +86,6 @@ public class DefaultAdaptiveMediaURLResolverTest {
 		Assert.assertTrue(uriString.contains(relativeURI.toString()));
 	}
 
-	private final AdaptiveMedia<?> _media = Mockito.mock(AdaptiveMedia.class);
 	private final Portal _portal = Mockito.mock(Portal.class);
 	private final AdaptiveMediaURLResolver _urlResolver =
 		new DefaultAdaptiveMediaURLResolver();

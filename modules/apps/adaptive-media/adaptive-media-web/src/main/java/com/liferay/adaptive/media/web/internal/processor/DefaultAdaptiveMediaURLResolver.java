@@ -14,7 +14,6 @@
 
 package com.liferay.adaptive.media.web.internal.processor;
 
-import com.liferay.adaptive.media.AdaptiveMedia;
 import com.liferay.adaptive.media.AdaptiveMediaURLResolver;
 import com.liferay.adaptive.media.web.internal.constants.AdaptiveMediaWebConstants;
 import com.liferay.portal.kernel.util.PortalUtil;
@@ -32,7 +31,7 @@ public class DefaultAdaptiveMediaURLResolver
 	implements AdaptiveMediaURLResolver {
 
 	@Override
-	public <T> URI resolveURI(AdaptiveMedia<T> media) {
+	public URI resolveURI(URI relativeURI) {
 		String pathModule = PortalUtil.getPathModule();
 
 		if (!pathModule.endsWith(StringPool.SLASH)) {
@@ -44,7 +43,6 @@ public class DefaultAdaptiveMediaURLResolver
 				StringPool.SLASH;
 
 		URI moduleURI = URI.create(servletPath);
-		URI relativeURI = media.getRelativeURI();
 
 		return moduleURI.resolve(relativeURI);
 	}
