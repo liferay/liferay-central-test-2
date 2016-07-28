@@ -55,12 +55,12 @@ public interface AdaptiveMedia<T> {
 	public InputStream getInputStream();
 
 	/**
-	 * Return the relative URI of this {@link AdaptiveMedia}. This can be used
-	 * by other parts of the system to uniquely identify each
-	 * {@link AdaptiveMedia}. This URI should be treated as an opaque value.
+	 * Return the URI of this {@link AdaptiveMedia}. This can be used by other
+	 * parts of the system to uniquely identify each {@link AdaptiveMedia}. This
+	 * URI should be treated as an opaque value.
 	 *
-	 * @return A relative URI pointing to this {@link AdaptiveMedia}
+	 * @return A URI pointing to this {@link AdaptiveMedia}
 	 */
-	public URI getRelativeURI();
+	public URI getURI();
 
 }

@@ -34,11 +34,11 @@ public final class ImageAdaptiveMedia
 
 	public ImageAdaptiveMedia(
 		Supplier<InputStream> supplier,
-		ImageAdaptiveMediaAttributeMapping attributeMapping, URI relativeURI) {
+		ImageAdaptiveMediaAttributeMapping attributeMapping, URI uri) {
 
 		_supplier = supplier;
 		_attributeMapping = attributeMapping;
-		_relativeURI = relativeURI;
+		_uri = uri;
 	}
 
 	@Override
@@ -54,12 +54,12 @@ public final class ImageAdaptiveMedia
 	}
 
 	@Override
-	public URI getRelativeURI() {
-		return _relativeURI;
+	public URI getURI() {
+		return _uri;
 	}
 
 	private final ImageAdaptiveMediaAttributeMapping _attributeMapping;
-	private final URI _relativeURI;
+	private final URI _uri;
 	private final Supplier<InputStream> _supplier;
 
 }
