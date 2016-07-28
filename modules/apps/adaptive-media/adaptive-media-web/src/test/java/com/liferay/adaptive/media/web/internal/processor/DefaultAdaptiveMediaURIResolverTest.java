@@ -14,7 +14,7 @@
 
 package com.liferay.adaptive.media.web.internal.processor;
 
-import com.liferay.adaptive.media.AdaptiveMediaURLResolver;
+import com.liferay.adaptive.media.AdaptiveMediaURIResolver;
 import com.liferay.adaptive.media.web.internal.constants.AdaptiveMediaWebConstants;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.PortalUtil;
@@ -32,7 +32,7 @@ import org.mockito.Mockito;
 /**
  * @author Adolfo Pérez
  */
-public class DefaultAdaptiveMediaURLResolverTest {
+public class DefaultAdaptiveMediaURIResolverTest {
 
 	@Before
 	public void setUp() {
@@ -87,7 +87,7 @@ public class DefaultAdaptiveMediaURLResolverTest {
 	}
 
 	private final Portal _portal = Mockito.mock(Portal.class);
-	private final AdaptiveMediaURLResolver _urlResolver =
-		new DefaultAdaptiveMediaURLResolver();
+	private final AdaptiveMediaURIResolver _urlResolver =
+		new DefaultAdaptiveMediaURIResolver();
 
 }

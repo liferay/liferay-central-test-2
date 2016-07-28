@@ -16,7 +16,7 @@ package com.liferay.adaptive.media.image.internal.finder;
 
 import com.liferay.adaptive.media.AdaptiveMedia;
 import com.liferay.adaptive.media.AdaptiveMediaRuntimeException;
-import com.liferay.adaptive.media.AdaptiveMediaURLResolver;
+import com.liferay.adaptive.media.AdaptiveMediaURIResolver;
 import com.liferay.adaptive.media.finder.AdaptiveMediaQuery;
 import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaConfigurationHelper;
@@ -53,7 +53,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 
 	@Before
 	public void setUp() {
-		_finder.setAdaptiveMediaURLResolver(_urlResolver);
+		_finder.setAdaptiveMediaURIResolver(_uriResolver);
 		_finder.setImageAdaptiveMediaConfigurationHelper(_configurationHelper);
 		_finder.setImageProcessor(_imageProcessor);
 		_finder.setImageStorage(_imageStorage);
@@ -528,7 +528,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 	private final ImageProcessor _imageProcessor = Mockito.mock(
 		ImageProcessor.class);
 	private final ImageStorage _imageStorage = Mockito.mock(ImageStorage.class);
-	private final AdaptiveMediaURLResolver _urlResolver = Mockito.mock(
-		AdaptiveMediaURLResolver.class);
+	private final AdaptiveMediaURIResolver _uriResolver = Mockito.mock(
+		AdaptiveMediaURIResolver.class);
 
 }

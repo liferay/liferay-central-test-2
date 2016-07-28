@@ -14,7 +14,7 @@
 
 package com.liferay.adaptive.media.web.internal.processor;
 
-import com.liferay.adaptive.media.AdaptiveMediaURLResolver;
+import com.liferay.adaptive.media.AdaptiveMediaURIResolver;
 import com.liferay.adaptive.media.web.internal.constants.AdaptiveMediaWebConstants;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -26,9 +26,9 @@ import org.osgi.service.component.annotations.Component;
 /**
  * @author Adolfo Pérez
  */
-@Component(immediate = true, service = AdaptiveMediaURLResolver.class)
-public class DefaultAdaptiveMediaURLResolver
-	implements AdaptiveMediaURLResolver {
+@Component(immediate = true, service = AdaptiveMediaURIResolver.class)
+public class DefaultAdaptiveMediaURIResolver
+	implements AdaptiveMediaURIResolver {
 
 	@Override
 	public URI resolveURI(URI relativeURI) {

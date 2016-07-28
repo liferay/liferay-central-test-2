@@ -19,7 +19,7 @@ import java.net.URI;
 /**
  * @author Adolfo Pérez
  */
-public interface AdaptiveMediaURLResolver {
+public interface AdaptiveMediaURIResolver {
 
 	public URI resolveURI(URI relativeURI);
 
