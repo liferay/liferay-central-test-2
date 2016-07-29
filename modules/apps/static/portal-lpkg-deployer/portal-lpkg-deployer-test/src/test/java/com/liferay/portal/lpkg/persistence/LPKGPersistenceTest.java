@@ -94,26 +94,27 @@ public class LPKGPersistenceTest {
 		try (ZipOutputStream zipOutputStream = new ZipOutputStream(
 				new FileOutputStream(path.toFile()))) {
 
+			zipOutputStream.putNextEntry(
+				new ZipEntry("liferay-marketplace.properties"));
+
 			StringBundler sb = new StringBundler(11);
 
 			sb.append("bundles=");
 			sb.append(_SYMBOLIC_NAME);
 			sb.append("#1.0.0##\n");
-			sb.append("context-names=\n");
-			sb.append("remote-app-id=Test\n");
-			sb.append("version=1.0\n");
 			sb.append("category=Test\n");
+			sb.append("context-names=\n");
 			sb.append("description=Test\n");
-			sb.append("title=Test\n");
 			sb.append("icon-url=https://www.liferay.com/web/guest/");
-			sb.append("marketplace/-/mp/asset/icon/71985553");
-
-			zipOutputStream.putNextEntry(
-				new ZipEntry("liferay-marketplace.properties"));
+			sb.append("marketplace/-/mp/asset/icon/71985553\n");
+			sb.append("remote-app-id=Test\n");
+			sb.append("title=Test\n");
+			sb.append("version=1.0");
 
 			String properties = sb.toString();
 
 			zipOutputStream.write(properties.getBytes());
+
 			zipOutputStream.closeEntry();
 
 			zipOutputStream.putNextEntry(
