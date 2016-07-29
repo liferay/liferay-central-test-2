@@ -105,8 +105,8 @@ public class LPKGPersistenceTest {
 			sb.append("category=Test\n");
 			sb.append("context-names=\n");
 			sb.append("description=Test\n");
-			sb.append("icon-url=https://www.liferay.com/web/guest/");
-			sb.append("marketplace/-/mp/asset/icon/71985553\n");
+			sb.append("icon-url=https://www.liferay.com/web/guest");
+			sb.append("/marketplace/-/mp/asset/icon/71985553\n");
 			sb.append("remote-app-id=Test\n");
 			sb.append("title=Test\n");
 			sb.append("version=1.0");
