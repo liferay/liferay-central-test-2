@@ -39,7 +39,9 @@ public class LPKGPersistenceStopBundleTest {
 		BundleContext bundleContext = bundle.getBundleContext();
 
 		for (Bundle testBundle : bundleContext.getBundles()) {
-			if (!"LPKG Persistence Test".equals(testBundle.getSymbolicName())) {
+			String symbolicName = testBundle.getSymbolicName();
+
+			if (!symbolicName.equals("LPKG Persistence Test")) {
 				continue;
 			}
 
