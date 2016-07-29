@@ -19,8 +19,8 @@ import com.liferay.dynamic.data.mapping.model.DDMStructure;
 import com.liferay.dynamic.data.mapping.model.DDMTemplate;
 import com.liferay.dynamic.data.mapping.service.DDMTemplateLocalServiceUtil;
 import com.liferay.journal.configuration.JournalGroupServiceConfiguration;
+import com.liferay.journal.configuration.JournalServiceConfiguration;
 import com.liferay.journal.configuration.JournalServiceConfigurationKeys;
-import com.liferay.journal.configuration.JournalServiceConfigurationValues;
 import com.liferay.journal.model.JournalArticle;
 import com.liferay.journal.model.JournalArticleDisplay;
 import com.liferay.journal.model.JournalFolder;
@@ -33,7 +33,6 @@ import com.liferay.journal.transformer.JournalTransformer;
 import com.liferay.journal.util.comparator.ArticleVersionComparator;
 import com.liferay.petra.collection.stack.FiniteUniqueStack;
 import com.liferay.petra.xml.XMLUtil;
-import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.diff.CompareVersionsException;
 import com.liferay.portal.kernel.diff.DiffHtmlUtil;
@@ -52,6 +51,7 @@ import com.liferay.portal.kernel.model.LayoutConstants;
 import com.liferay.portal.kernel.model.LayoutSet;
 import com.liferay.portal.kernel.model.ModelHintsUtil;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.module.configuration.ConfigurationProviderUtil;
 import com.liferay.portal.kernel.portlet.PortletProvider;
 import com.liferay.portal.kernel.portlet.PortletProviderUtil;
 import com.liferay.portal.kernel.portlet.PortletRequestModel;
@@ -95,7 +95,6 @@ import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.Node;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.kernel.xml.XPath;
-import com.liferay.portal.util.PropsUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -1193,6 +1192,26 @@ public class JournalUtil {
 		}
 	}
 
+	private static String _getCustomTokenValue(
+		String token, JournalServiceConfiguration journalServiceConfiguration) {
+
+		for (String keyValue :
+				journalServiceConfiguration.customTokenValues()) {
+
+			String[] tokenArray = keyValue.split("\\=");
+
+			if (tokenArray.length != 2) {
+				continue;
+			}
+
+			if (tokenArray[0].equals(token)) {
+				return tokenArray[1];
+			}
+		}
+
+		return null;
+	}
+
 	private static Element _getElementByInstanceId(
 		Document document, String instanceId) {
 
@@ -1407,20 +1426,39 @@ public class JournalUtil {
 		}
 	}
 
-	private static void _populateCustomTokens(Map<String, String> tokens) {
+	private static void _populateCustomTokens(
+		Map<String, String> tokens, long companyId) {
+
+		JournalServiceConfiguration journalServiceConfiguration = null;
+
+		try {
+			journalServiceConfiguration =
+				ConfigurationProviderUtil.getCompanyConfiguration(
+					JournalServiceConfiguration.class, companyId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		if (journalServiceConfiguration == null) {
+			return;
+		}
+
 		if (_customTokens == null) {
 			synchronized (JournalUtil.class) {
 				_customTokens = new HashMap<>();
 
-				for (String customToken : JournalServiceConfigurationValues.
-						JOURNAL_ARTICLE_CUSTOM_TOKENS) {
+				for (String token :
+						journalServiceConfiguration.customTokenNames()) {
 
-					String value = PropsUtil.get(
-						JournalServiceConfigurationKeys.
-							JOURNAL_ARTICLE_CUSTOM_TOKEN_VALUE,
-						new Filter(customToken));
+					String tokenValue = _getCustomTokenValue(
+						token, journalServiceConfiguration);
 
-					_customTokens.put(customToken, value);
+					if (Validator.isNull(tokenValue)) {
+						continue;
+					}
+
+					_customTokens.put(token, tokenValue);
 				}
 			}
 		}
@@ -1491,7 +1529,7 @@ public class JournalUtil {
 			"site_group_id", String.valueOf(themeDisplay.getSiteGroupId()));
 		tokens.put("theme_image_path", themeDisplay.getPathThemeImages());
 
-		_populateCustomTokens(tokens);
+		_populateCustomTokens(tokens, themeDisplay.getCompanyId());
 
 		// Deprecated tokens
 
@@ -1569,7 +1607,7 @@ public class JournalUtil {
 			String.valueOf(themeDisplayModel.getScopeGroupId()));
 		tokens.put("theme_image_path", themeDisplayModel.getPathThemeImages());
 
-		_populateCustomTokens(tokens);
+		_populateCustomTokens(tokens, themeDisplayModel.getCompanyId());
 
 		// Deprecated tokens
 

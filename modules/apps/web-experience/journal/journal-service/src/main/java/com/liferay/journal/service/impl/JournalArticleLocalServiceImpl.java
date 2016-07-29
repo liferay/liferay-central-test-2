@@ -40,7 +40,7 @@ import com.liferay.exportimport.content.processor.ExportImportContentProcessor;
 import com.liferay.exportimport.content.processor.ExportImportContentProcessorRegistryUtil;
 import com.liferay.exportimport.kernel.lar.ExportImportThreadLocal;
 import com.liferay.journal.configuration.JournalGroupServiceConfiguration;
-import com.liferay.journal.configuration.JournalServiceConfigurationValues;
+import com.liferay.journal.configuration.JournalServiceConfiguration;
 import com.liferay.journal.constants.JournalConstants;
 import com.liferay.journal.exception.ArticleContentException;
 import com.liferay.journal.exception.ArticleDisplayDateException;
@@ -115,6 +115,7 @@ import com.liferay.portal.kernel.search.QueryConfig;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextUtil;
 import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
@@ -148,7 +149,6 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.SubscriptionSender;
-import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.webserver.WebServerServletTokenUtil;
@@ -1372,9 +1372,9 @@ public class JournalArticleLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		if (JournalServiceConfigurationValues.
-				JOURNAL_ARTICLE_EXPIRE_ALL_VERSIONS) {
+		User user = userLocalService.getUser(userId);
 
+		if (isExpireAllArticleVersions(user.getCompanyId())) {
 			List<JournalArticle> articles = journalArticlePersistence.findByG_A(
 				groupId, articleId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 				new ArticleVersionComparator(true));
@@ -2739,9 +2739,7 @@ public class JournalArticleLocalServiceImpl
 	public List<JournalArticle> getIndexableArticlesByDDMStructureKey(
 		String[] ddmStructureKeys) {
 
-		if (JournalServiceConfigurationValues.
-				JOURNAL_ARTICLE_INDEX_ALL_VERSIONS) {
-
+		if (isReindexAllArticleVersions()) {
 			return getStructureArticles(ddmStructureKeys);
 		}
 
@@ -3608,9 +3606,7 @@ public class JournalArticleLocalServiceImpl
 
 		// Comment
 
-		if (JournalServiceConfigurationValues.
-				JOURNAL_ARTICLE_COMMENTS_ENABLED) {
-
+		if (isArticleCommentsEnabled(article.getCompanyId())) {
 			CommentManagerUtil.moveDiscussionToTrash(
 				JournalArticle.class.getName(), article.getResourcePrimKey());
 		}
@@ -3822,9 +3818,7 @@ public class JournalArticleLocalServiceImpl
 
 		// Comment
 
-		if (JournalServiceConfigurationValues.
-				JOURNAL_ARTICLE_COMMENTS_ENABLED) {
-
+		if (isArticleCommentsEnabled(article.getCompanyId())) {
 			CommentManagerUtil.restoreDiscussionFromTrash(
 				JournalArticle.class.getName(), article.getResourcePrimKey());
 		}
@@ -5796,9 +5790,7 @@ public class JournalArticleLocalServiceImpl
 
 		journalArticlePersistence.update(article);
 
-		if (JournalServiceConfigurationValues.
-				JOURNAL_ARTICLE_EXPIRE_ALL_VERSIONS) {
-
+		if (isExpireAllArticleVersions(article.getCompanyId())) {
 			setArticlesExpirationDate(article);
 		}
 
@@ -6178,8 +6170,7 @@ public class JournalArticleLocalServiceImpl
 		List<JournalArticle> articles =
 			journalArticleFinder.findByExpirationDate(
 				JournalArticleConstants.CLASSNAME_ID_DEFAULT,
-				new Date(
-					expirationDate.getTime() + _JOURNAL_ARTICLE_CHECK_INTERVAL),
+				new Date(expirationDate.getTime() + _getArticleCheckInterval()),
 				new QueryDefinition<JournalArticle>(
 					WorkflowConstants.STATUS_APPROVED));
 
@@ -6188,9 +6179,7 @@ public class JournalArticleLocalServiceImpl
 		}
 
 		for (JournalArticle article : articles) {
-			if (JournalServiceConfigurationValues.
-					JOURNAL_ARTICLE_EXPIRE_ALL_VERSIONS) {
-
+			if (isExpireAllArticleVersions(article.getCompanyId())) {
 				List<JournalArticle> currentArticles =
 					journalArticlePersistence.findByG_A(
 						article.getGroupId(), article.getArticleId(),
@@ -6227,7 +6216,7 @@ public class JournalArticleLocalServiceImpl
 
 		if (_previousCheckDate == null) {
 			_previousCheckDate = new Date(
-				expirationDate.getTime() - _JOURNAL_ARTICLE_CHECK_INTERVAL);
+				expirationDate.getTime() - _getArticleCheckInterval());
 		}
 	}
 
@@ -6863,6 +6852,10 @@ public class JournalArticleLocalServiceImpl
 			page = 1;
 		}
 
+		JournalServiceConfiguration journalServiceConfiguration =
+			configurationProvider.getCompanyConfiguration(
+				JournalServiceConfiguration.class, article.getCompanyId());
+
 		int numberOfPages = 1;
 		boolean paginate = false;
 		boolean pageFlow = false;
@@ -7038,8 +7031,7 @@ public class JournalArticleLocalServiceImpl
 			if (!pageFlow) {
 				String[] pieces = StringUtil.split(
 					content,
-					JournalServiceConfigurationValues.
-						JOURNAL_ARTICLE_TOKEN_PAGE_BREAK);
+					journalServiceConfiguration.journalArticlePageBreakToken());
 
 				if (pieces.length > 1) {
 					if (page > pieces.length) {
@@ -7198,6 +7190,43 @@ public class JournalArticleLocalServiceImpl
 
 		if ((article == null) || (article.getVersion() <= version)) {
 			return true;
+		}
+
+		return false;
+	}
+
+	protected boolean isArticleCommentsEnabled(long companyId)
+		throws PortalException {
+
+		JournalServiceConfiguration journalServiceConfiguration =
+			configurationProvider.getCompanyConfiguration(
+				JournalServiceConfiguration.class, companyId);
+
+		return journalServiceConfiguration.articleCommentsEnabled();
+	}
+
+	protected boolean isExpireAllArticleVersions(long companyId)
+		throws PortalException {
+
+		JournalServiceConfiguration journalServiceConfiguration =
+			configurationProvider.getCompanyConfiguration(
+				JournalServiceConfiguration.class, companyId);
+
+		return journalServiceConfiguration.expireAllArticleVersionsEnabled();
+	}
+
+	protected boolean isReindexAllArticleVersions() {
+		try {
+			long companyId = CompanyThreadLocal.getCompanyId();
+
+			JournalServiceConfiguration journalServiceConfiguration =
+				configurationProvider.getCompanyConfiguration(
+					JournalServiceConfiguration.class, companyId);
+
+			return journalServiceConfiguration.indexAllArticleVersionsEnabled();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
 		}
 
 		return false;
@@ -8108,9 +8137,15 @@ public class JournalArticleLocalServiceImpl
 	@ServiceReference(type = JournalConverter.class)
 	protected JournalConverter journalConverter;
 
-	private static final long _JOURNAL_ARTICLE_CHECK_INTERVAL =
-		JournalServiceConfigurationValues.JOURNAL_ARTICLE_CHECK_INTERVAL *
-			Time.MINUTE;
+	private long _getArticleCheckInterval() throws PortalException {
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		JournalServiceConfiguration journalServiceConfiguration =
+			configurationProvider.getCompanyConfiguration(
+				JournalServiceConfiguration.class, companyId);
+
+		return journalServiceConfiguration.checkInterval();
+	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		JournalArticleLocalServiceImpl.class);
