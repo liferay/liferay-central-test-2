@@ -476,7 +476,7 @@ public class JournalServiceVerifyProcess extends VerifyLayout {
 					Property resourcePrimKey = PropertyFactoryUtil.forName(
 						"resourcePrimKey");
 
-					dynamicQuery.add(resourcePrimKey.le(0l));
+					dynamicQuery.add(resourcePrimKey.le(0L));
 				}
 
 			});
