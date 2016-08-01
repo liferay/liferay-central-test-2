@@ -59,7 +59,7 @@ public final class ImageAdaptiveMedia
 	}
 
 	private final ImageAdaptiveMediaAttributeMapping _attributeMapping;
-	private final URI _uri;
 	private final Supplier<InputStream> _supplier;
+	private final URI _uri;
 
 }

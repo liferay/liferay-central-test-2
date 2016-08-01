@@ -208,9 +208,9 @@ public class ImageAdaptiveMediaFinderImpl implements ImageAdaptiveMediaFinder {
 		return this::_createFileEntryURL;
 	}
 
-	private AdaptiveMediaURIResolver _uriResolver;
 	private ImageAdaptiveMediaConfigurationHelper _configurationHelper;
 	private ImageProcessor _imageProcessor;
 	private ImageStorage _imageStorage;
+	private AdaptiveMediaURIResolver _uriResolver;
 
 }

@@ -15,10 +15,10 @@
 package com.liferay.adaptive.media.internal.processor;
 
 import com.liferay.adaptive.media.AdaptiveMediaException;
-import com.liferay.adaptive.media.processor.AdaptiveMediaProcessor;
-import com.liferay.adaptive.media.processor.AdaptiveMediaProcessorLocator;
 import com.liferay.adaptive.media.internal.messaging.AdaptiveMediaDestinationNames;
 import com.liferay.adaptive.media.internal.messaging.AdaptiveMediaProcessorCommand;
+import com.liferay.adaptive.media.processor.AdaptiveMediaProcessor;
+import com.liferay.adaptive.media.processor.AdaptiveMediaProcessorLocator;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBus;
@@ -42,6 +42,9 @@ public class AdaptiveMediaProcessorLocatorImpl
 	public <M> AdaptiveMediaProcessor<M, ?> locateForClass(Class<M> clazz) {
 		return new AggregateAdaptiveMediaProcessor<>(clazz);
 	}
+
+	@Reference
+	private MessageBus _messageBus;
 
 	private final class AggregateAdaptiveMediaProcessor<M, T>
 		implements AdaptiveMediaProcessor<M, T> {
@@ -91,8 +94,5 @@ public class AdaptiveMediaProcessorLocatorImpl
 		private final Class<M> _clazz;
 
 	}
-
-	@Reference
-	private MessageBus _messageBus;
 
 }

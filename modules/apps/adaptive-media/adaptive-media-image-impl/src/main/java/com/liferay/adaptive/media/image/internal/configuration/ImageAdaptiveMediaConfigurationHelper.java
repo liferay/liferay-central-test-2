@@ -85,8 +85,8 @@ public class ImageAdaptiveMediaConfigurationHelper {
 				return Stream.empty();
 			}
 
-			return Stream.of(imageVariants).
-				map(_configurationEntryParser::parse);
+			return
+				Stream.of(imageVariants).map(_configurationEntryParser::parse);
 		}
 		catch (ConfigurationException ce) {
 			throw new AdaptiveMediaRuntimeException.InvalidConfiguration(ce);

@@ -196,7 +196,7 @@ public class ImageAdaptiveMediaConfigurationTest {
 		Mockito.mock(ImageAdaptiveMediaCompanyConfiguration.class);
 	private final ImageAdaptiveMediaConfigurationEntryParser
 		_configurationEntryParser =
-		new ImageAdaptiveMediaConfigurationEntryParser();
+			new ImageAdaptiveMediaConfigurationEntryParser();
 	private final ImageAdaptiveMediaConfigurationHelper _configurationHelper =
 		new ImageAdaptiveMediaConfigurationHelper();
 	private final ConfigurationProvider _configurationProvider = Mockito.mock(
