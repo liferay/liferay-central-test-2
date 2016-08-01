@@ -61,12 +61,12 @@ public class DDMFormPagesTemplateContextFactoryTest {
 	@Test
 	public void testOnePageThreeRows() {
 
-		// DDM form
+		// Dynamic data mapping form
 
 		DDMForm ddmForm = DDMFormTestUtil.createDDMForm(
 			"Field1", "Field2", "Field3", "Field4", "Field5");
 
-		// DDM form layout
+		// Dynamic data mapping form layout
 
 		DDMFormLayout ddmFormLayout = new DDMFormLayout();
 
@@ -144,7 +144,7 @@ public class DDMFormPagesTemplateContextFactoryTest {
 	@Test
 	public void testRequiredFieldsWithoutRequiredFieldsWarning() {
 
-		// DDM form
+		// Dynamic data mapping form
 
 		DDMForm ddmForm = DDMFormTestUtil.createDDMForm();
 
@@ -160,7 +160,7 @@ public class DDMFormPagesTemplateContextFactoryTest {
 			DDMFormTestUtil.createDDMFormField(
 				"Field3", "Field3", "text", "string", false, false, false));
 
-		// DDM form layout
+		// Dynamic data mapping form layout
 
 		DDMFormLayout ddmFormLayout = new DDMFormLayout();
 
@@ -217,7 +217,7 @@ public class DDMFormPagesTemplateContextFactoryTest {
 	@Test
 	public void testRequiredFieldsWithRequiredFieldsWarning() {
 
-		// DDM form
+		// Dynamic data mapping form
 
 		DDMForm ddmForm = DDMFormTestUtil.createDDMForm();
 
@@ -233,7 +233,7 @@ public class DDMFormPagesTemplateContextFactoryTest {
 			DDMFormTestUtil.createDDMFormField(
 				"Field3", "Field3", "text", "string", false, false, false));
 
-		// DDM form layout
+		// Dynamic data mapping form layout
 
 		DDMFormLayout ddmFormLayout = new DDMFormLayout();
 

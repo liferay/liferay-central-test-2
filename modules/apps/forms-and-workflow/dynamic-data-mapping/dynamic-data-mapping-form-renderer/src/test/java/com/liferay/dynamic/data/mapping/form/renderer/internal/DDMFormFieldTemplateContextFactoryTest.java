@@ -64,7 +64,7 @@ public class DDMFormFieldTemplateContextFactoryTest {
 	@Test
 	public void testNotReadOnlyTextFieldAndReadOnlyForm() {
 
-		// DDM form
+		// Dynamic data mapping form
 
 		DDMForm ddmForm = DDMFormTestUtil.createDDMForm();
 
@@ -75,7 +75,7 @@ public class DDMFormFieldTemplateContextFactoryTest {
 
 		ddmForm.addDDMFormField(ddmFormField);
 
-		// DDM form field evaluation
+		// Dynamic data mapping form field evaluation
 
 		String instanceId = StringUtil.randomString();
 
@@ -87,7 +87,7 @@ public class DDMFormFieldTemplateContextFactoryTest {
 		DDMFormEvaluationResult ddmFormEvaluationResult =
 			getDDMFormEvaluationResult(ddmFormFieldEvaluationResult);
 
-		// DDM form values
+		// Dynamic data mapping form values
 
 		List<DDMFormFieldValue> ddmFormFieldValues = new ArrayList<>();
 
@@ -119,7 +119,7 @@ public class DDMFormFieldTemplateContextFactoryTest {
 	@Test
 	public void testReadOnlyTextFieldAndNotReadOnlyForm() {
 
-		// DDM form
+		// Dynamic data mapping form
 
 		DDMForm ddmForm = DDMFormTestUtil.createDDMForm();
 
@@ -130,7 +130,7 @@ public class DDMFormFieldTemplateContextFactoryTest {
 
 		ddmForm.addDDMFormField(ddmFormField);
 
-		// DDM form field evaluation
+		// Dynamic data mapping form field evaluation
 
 		String instanceId = StringUtil.randomString();
 
@@ -142,7 +142,7 @@ public class DDMFormFieldTemplateContextFactoryTest {
 		DDMFormEvaluationResult ddmFormEvaluationResult =
 			getDDMFormEvaluationResult(ddmFormFieldEvaluationResult);
 
-		// DDM form values
+		// Dynamic data mapping form values
 
 		List<DDMFormFieldValue> ddmFormFieldValues = new ArrayList<>();
 
@@ -174,7 +174,7 @@ public class DDMFormFieldTemplateContextFactoryTest {
 	@Test
 	public void testTextField() {
 
-		// DDM form
+		// Dynamic data mapping form
 
 		DDMForm ddmForm = DDMFormTestUtil.createDDMForm();
 
@@ -192,7 +192,7 @@ public class DDMFormFieldTemplateContextFactoryTest {
 
 		ddmForm.addDDMFormField(ddmFormField);
 
-		// DDM form field evaluation
+		// Dynamic data mapping form field evaluation
 
 		String instanceId = StringUtil.randomString();
 
@@ -205,7 +205,7 @@ public class DDMFormFieldTemplateContextFactoryTest {
 		DDMFormEvaluationResult ddmFormEvaluationResult =
 			getDDMFormEvaluationResult(ddmFormFieldEvaluationResult);
 
-		// DDM form values
+		// Dynamic data mapping form values
 
 		List<DDMFormFieldValue> ddmFormFieldValues = new ArrayList<>();
 
