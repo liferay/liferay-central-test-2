@@ -178,6 +178,12 @@
 			<then>
 				<execute function="AssertClick" locator1="Button#SUBMIT_FOR_PUBLICATION" value1="Submit for Publication" />
 			</then>
+			<elseif>
+				<equals arg1="${saveAsDraft}" arg2="true" />
+				<then>
+					<execute macro="Button#clickSaveAsDraft" />
+				</then>
+			</elseif>
 			<else>
 				<execute function="AssertClick" locator1="Button#PUBLISH" value1="Publish" />
 			</else>
