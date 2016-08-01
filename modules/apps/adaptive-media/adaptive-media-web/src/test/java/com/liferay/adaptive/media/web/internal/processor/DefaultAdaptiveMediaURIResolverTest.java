@@ -53,7 +53,7 @@ public class DefaultAdaptiveMediaURIResolverTest {
 
 		URI relativeURI = URI.create(StringUtil.randomString());
 
-		URI uri = _urlResolver.resolveURI(relativeURI);
+		URI uri = _uriResolver.resolveURI(relativeURI);
 
 		String uriString = uri.toString();
 
@@ -76,7 +76,7 @@ public class DefaultAdaptiveMediaURIResolverTest {
 
 		URI relativeURI = URI.create(StringUtil.randomString());
 
-		URI uri = _urlResolver.resolveURI(relativeURI);
+		URI uri = _uriResolver.resolveURI(relativeURI);
 
 		String uriString = uri.toString();
 
@@ -87,7 +87,7 @@ public class DefaultAdaptiveMediaURIResolverTest {
 	}
 
 	private final Portal _portal = Mockito.mock(Portal.class);
-	private final AdaptiveMediaURIResolver _urlResolver =
+	private final AdaptiveMediaURIResolver _uriResolver =
 		new DefaultAdaptiveMediaURIResolver();
 
 }

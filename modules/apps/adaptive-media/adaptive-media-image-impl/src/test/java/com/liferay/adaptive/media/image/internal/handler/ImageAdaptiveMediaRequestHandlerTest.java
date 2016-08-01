@@ -139,7 +139,7 @@ public class ImageAdaptiveMediaRequestHandlerTest {
 			_finder
 		).getAdaptiveMedia(Mockito.any(Function.class));
 
-		Assert.assertTrue(properties.size() > 0);
+		Assert.assertFalse(properties.isEmpty());
 	}
 
 	private final FileVersion _fileVersion = Mockito.mock(FileVersion.class);

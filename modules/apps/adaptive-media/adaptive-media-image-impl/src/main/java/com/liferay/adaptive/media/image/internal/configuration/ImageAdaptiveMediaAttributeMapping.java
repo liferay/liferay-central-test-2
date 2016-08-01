@@ -37,10 +37,8 @@ public class ImageAdaptiveMediaAttributeMapping {
 	 * given map as the underlying attribute storage.
 	 *
 	 * @param properties The map to get the properties from
-	 *
 	 * @return A non-null mapping that will give typesafe access to the
 	 *         underlying map
-	 *
 	 * @throws IllegalArgumentException if <code>properties</code> is null
 	 */
 	public static ImageAdaptiveMediaAttributeMapping fromProperties(
@@ -82,7 +80,6 @@ public class ImageAdaptiveMediaAttributeMapping {
 	 *
 	 * @param attribute a non null attribute
 	 * @param <V> the type of the value mapped to the attribute
-
 	 * @return A non-null optional that will contain the (non-null) value (if
 	 *         any)
 	 */

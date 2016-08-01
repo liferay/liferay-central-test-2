@@ -71,8 +71,8 @@ public final class AdaptiveMediaAttribute<T, V> {
 	 * </code> should be a function capable of converting a String to a value
 	 * of the correct type; this function should throw a {@link
 	 * AdaptiveMediaRuntimeException.AdaptiveMediaAttributeFormatException}
-	 * when the give String is not convertible. <code>distanceFunction</code> is
-	 * a function that should compute the distance between two values of the
+	 * when the given String is not convertible. <code>distanceFunction</code>
+	 * is a function that should compute the distance between two values of the
 	 * attribute; it should return a value between 0 and {@link
 	 * Integer#MAX_VALUE}.
 	 */
@@ -89,9 +89,7 @@ public final class AdaptiveMediaAttribute<T, V> {
 	 * Convert the given string to a value of the correct type.
 	 *
 	 * @param value the string containing the value to convert
-	 *
 	 * @return The converted value
-	 *
 	 * @throws {@link
 	 *         AdaptiveMediaRuntimeException.AdaptiveMediaAttributeFormatException}
 	 *         when the give value is not convertible.
@@ -105,7 +103,6 @@ public final class AdaptiveMediaAttribute<T, V> {
 	 *
 	 * @param value1 The first value
 	 * @param value2 The second value
-	 *
 	 * @return A value between 0 and {@link Integer#MAX_VALUE} representing how
 	 *         close both values are
 	 */

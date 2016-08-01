@@ -57,9 +57,7 @@ public class ImageAdaptiveMediaConfigurationEntryParser {
 	 * its data.
 	 *
 	 * @param s the configuration line to parse
-	 *
 	 * @return A {@link ImageAdaptiveMediaConfigurationEntry} with the line data
-	 *
 	 * @throws IllegalArgumentException is <code>s</code> is null or it is not a
 	 *         valid configuration line.
 	 */
