@@ -21,10 +21,11 @@ import com.liferay.adaptive.media.internal.messaging.AdaptiveMediaDestinationNam
 import com.liferay.adaptive.media.internal.messaging.AdaptiveMediaProcessorCommand;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.messaging.Message;
-import com.liferay.portal.kernel.messaging.MessageBusUtil;
+import com.liferay.portal.kernel.messaging.MessageBus;
 import com.liferay.portal.kernel.transaction.TransactionCommitCallbackUtil;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * This is an {@link AdaptiveMediaProcessorLocator} that will decorate any
@@ -60,7 +61,7 @@ public class AdaptiveMediaProcessorLocatorImpl
 			message.put("command", AdaptiveMediaProcessorCommand.CLEAN_UP);
 
 			TransactionCommitCallbackUtil.registerCallback(() -> {
-				MessageBusUtil.sendMessage(
+				_messageBus.sendMessage(
 					AdaptiveMediaDestinationNames.ADAPTIVE_MEDIA_PROCESSOR,
 					message);
 
@@ -79,7 +80,7 @@ public class AdaptiveMediaProcessorLocatorImpl
 			message.put("command", AdaptiveMediaProcessorCommand.PROCESS);
 
 			TransactionCommitCallbackUtil.registerCallback(() -> {
-				MessageBusUtil.sendMessage(
+				_messageBus.sendMessage(
 					AdaptiveMediaDestinationNames.ADAPTIVE_MEDIA_PROCESSOR,
 					message);
 
@@ -90,5 +91,8 @@ public class AdaptiveMediaProcessorLocatorImpl
 		private final Class<M> _clazz;
 
 	}
+
+	@Reference
+	private MessageBus _messageBus;
 
 }
