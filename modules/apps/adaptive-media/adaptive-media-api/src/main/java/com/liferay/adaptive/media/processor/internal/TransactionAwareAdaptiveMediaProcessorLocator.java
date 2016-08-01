@@ -17,19 +17,12 @@ package com.liferay.adaptive.media.processor.internal;
 import com.liferay.adaptive.media.AdaptiveMediaException;
 import com.liferay.adaptive.media.processor.AdaptiveMediaProcessor;
 import com.liferay.adaptive.media.processor.AdaptiveMediaProcessorLocator;
-import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerMap;
-import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerMapFactory;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.messaging.Message;
+import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.transaction.TransactionCommitCallbackUtil;
 
-import java.util.List;
-
-import org.osgi.framework.BundleContext;
-import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Deactivate;
 
 /**
  * This is an {@link AdaptiveMediaProcessorLocator} that will decorate any
@@ -42,36 +35,9 @@ import org.osgi.service.component.annotations.Deactivate;
 public class TransactionAwareAdaptiveMediaProcessorLocator
 	implements AdaptiveMediaProcessorLocator {
 
-	@Activate
-	public void activate(BundleContext bundleContext) {
-		_serviceTrackerMap = ServiceTrackerMapFactory.openMultiValueMap(
-			bundleContext, AdaptiveMediaProcessor.class, "(model.class.name=*)",
-			(serviceReference, emitter) ->
-				emitter.emit(
-					(String)serviceReference.getProperty("model.class.name")));
-	}
-
-	@Deactivate
-	public void deactivate() {
-		_serviceTrackerMap.close();
-	}
-
 	@Override
 	public <M> AdaptiveMediaProcessor<M, ?> locateForClass(Class<M> clazz) {
 		return new AggregateAdaptiveMediaProcessor<>(clazz);
-	}
-
-	private static final Log _log = LogFactoryUtil.getLog(
-		TransactionAwareAdaptiveMediaProcessorLocator.class);
-
-	private ServiceTrackerMap<String, List<AdaptiveMediaProcessor>>
-		_serviceTrackerMap;
-
-	private interface AdaptiveMediaProcessorAction<M> {
-
-		public void execute(AdaptiveMediaProcessor<M, ?> processor)
-			throws Exception;
-
 	}
 
 	private final class AggregateAdaptiveMediaProcessor<M, T>
@@ -85,36 +51,38 @@ public class TransactionAwareAdaptiveMediaProcessorLocator
 		public void cleanUp(M model)
 			throws AdaptiveMediaException, PortalException {
 
-			TransactionCommitCallbackUtil.registerCallback(() ->
-				_forEach(processor -> processor.cleanUp(model)));
+			Message message = new Message();
+
+			message.put("className", _clazz.getName());
+			message.put("model", model);
+			message.put("command", AdaptiveMediaProcessorCommand.CLEAN_UP);
+
+			TransactionCommitCallbackUtil.registerCallback(() -> {
+				MessageBusUtil.sendMessage(
+					AdaptiveMediaDestinationNames.ADAPTIVE_MEDIA_PROCESSOR,
+					message);
+
+				return null;
+			});
 		}
 
 		@Override
 		public void process(M model)
 			throws AdaptiveMediaException, PortalException {
 
-			TransactionCommitCallbackUtil.registerCallback(() ->
-				_forEach(processor -> processor.process(model)));
-		}
+			Message message = new Message();
 
-		private Void _forEach(AdaptiveMediaProcessorAction action) {
-			List<AdaptiveMediaProcessor> processors =
-				_serviceTrackerMap.getService(_clazz.getName());
+			message.put("className", _clazz.getName());
+			message.put("model", model);
+			message.put("command", AdaptiveMediaProcessorCommand.PROCESS);
 
-			if (processors == null) {
+			TransactionCommitCallbackUtil.registerCallback(() -> {
+				MessageBusUtil.sendMessage(
+					AdaptiveMediaDestinationNames.ADAPTIVE_MEDIA_PROCESSOR,
+					message);
+
 				return null;
-			}
-
-			for (AdaptiveMediaProcessor<M, ?> processor : processors) {
-				try {
-					action.execute(processor);
-				}
-				catch (Exception e) {
-					_log.error(e);
-				}
-			}
-
-			return null;
+			});
 		}
 
 		private final Class<M> _clazz;
