@@ -267,6 +267,15 @@
 		<execute function="AssertClick" locator1="Button#SAVE" value1="Save" />
 	</command>
 
+	<command name="cancelAddKBArticle">
+		<execute macro="KBArticle#_gotoAddBasicArticle" />
+		
+		<execute function="Type#typeEditor" locator1="AlloyEditor#TITLE_FIELD" value1="${kbArticleTitle}" />
+		<execute function="Type#typeEditor" locator1="AlloyEditor#CONTENT_FIELD" value1="${kbArticleContent}" />
+
+		<execute macro="Button#clickCancel" />
+	</command>
+
 	<command name="configureEmailCP">
 		<execute function="Click" locator1="BasePortlet#OPTIONS_ICON" />
 
