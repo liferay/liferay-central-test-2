@@ -20,6 +20,8 @@ import com.liferay.dynamic.data.mapping.render.DDMFormFieldRenderingContext;
 import com.liferay.portal.kernel.json.JSONException;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
@@ -73,7 +75,7 @@ public class ValidationDDMFormFieldTemplateContextContributor
 					"expression", valueJSONObject.getString("expression"));
 			}
 			catch (JSONException jsone) {
-				jsone.printStackTrace();
+				_log.error(jsone, jsone);
 			}
 		}
 		else {
@@ -86,5 +88,8 @@ public class ValidationDDMFormFieldTemplateContextContributor
 
 	@Reference
 	protected JSONFactory jsonFactory;
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		ValidationDDMFormFieldTemplateContextContributor.class);
 
 }
