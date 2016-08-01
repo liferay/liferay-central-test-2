@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.adaptive.media.processor.internal;
+package com.liferay.adaptive.media.internal.messaging;
 
 import com.liferay.adaptive.media.AdaptiveMediaException;
 import com.liferay.adaptive.media.processor.AdaptiveMediaProcessor;

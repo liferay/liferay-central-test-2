@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.adaptive.media.processor.internal;
+package com.liferay.adaptive.media.internal.messaging;
 
 import com.liferay.portal.kernel.messaging.Destination;
 import com.liferay.portal.kernel.messaging.DestinationConfiguration;
@@ -30,8 +30,8 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Adolfo Pérez
  */
-@Component(immediate = true, service = Object.class)
-public class AdaptiveMediaDestinationRegistrator {
+@Component(immediate = true)
+public class AdaptiveMediaMessagingConfigurator {
 
 	@Deactivate
 	public void activate(BundleContext bundleContext) {
