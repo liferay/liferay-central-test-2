@@ -1237,6 +1237,13 @@
 			</then>
 		</if>
 
+		<if>
+			<equals arg1="${kbStatus}" arg2="Draft" />
+			<then>
+				<execute function="AssertTextEquals" locator1="KnowledgeBase#ARTICLE_TABLE_ARTICLE_STATUS" value1="Draft" />
+			</then>
+		</if>
+
 		<execute function="AssertClick" locator1="KnowledgeBase#DESCRIPTIVE_VIEW_ARTICLE_TITLE" value1="${kbArticleTitle}" />
 
 		<execute function="AssertTextEquals" locator1="KnowledgeBaseArticle#TITLE" value1="${kbArticleTitle}" />
