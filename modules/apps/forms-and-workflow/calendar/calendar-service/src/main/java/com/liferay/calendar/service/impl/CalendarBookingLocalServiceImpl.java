@@ -515,7 +515,7 @@ public class CalendarBookingLocalServiceImpl
 				return;
 			}
 
-			recurrenceObj.addExceptionDate(startTimeJCalendar);
+			recurrenceObj.addExceptionJCalendar(startTimeJCalendar);
 		}
 
 		String recurrence = RecurrenceSerializer.serialize(recurrenceObj);
