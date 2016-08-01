@@ -613,7 +613,25 @@
 			</then>
 		</if>
 
-		<execute macro="PortletEntry#publish" />
+		<if>
+			<equals arg1="${cancel}" arg2="true" />
+			<then>
+				<execute macro="Button#clickCancel" />
+			</then>
+			<elseif>
+				<equals arg1="${saveAsDraft}" arg2="true" />
+				<then>
+					<execute macro="Button#clickSaveAsDraft" />
+
+					<execute macro="Alert#viewSuccessMessage" />
+				</then>
+			</elseif>
+			<else>
+				<execute macro="PortletEntry#publish" />
+
+				<execute macro="Alert#viewSuccessMessage" />
+			</else>
+		</if>
 	</command>
 
 	<command name="editKBArticlePriorityCP">
