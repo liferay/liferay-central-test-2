@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.liferay</groupId>
   <artifactId>com.liferay.source.formatter</artifactId>
-  <version>1.0.248</version>
+  <version>1.0.249</version>
   <licenses>
     <license>
       <name>LGPL 2.1</name>
@@ -24,6 +24,12 @@
     <url>http://github.com/liferay/liferay-plugins</url>
   </scm>
   <dependencies>
+    <dependency>
+      <groupId>com.puppycrawl.tools</groupId>
+      <artifactId>checkstyle</artifactId>
+      <version>7.0</version>
+      <scope>compile</scope>
+    </dependency>
     <dependency>
       <groupId>com.thoughtworks.qdox</groupId>
       <artifactId>qdox</artifactId>
