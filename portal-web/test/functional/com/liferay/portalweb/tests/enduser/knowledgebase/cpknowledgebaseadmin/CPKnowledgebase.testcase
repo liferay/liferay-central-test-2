@@ -772,6 +772,44 @@
 		</execute>
 	</command>
 
+	<command name="SaveEditedKBArticleAsDraft">
+		<execute macro="Navigator#openURL" />
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Knowledge Base" />
+		</execute>
+
+		<execute macro="KBArticle#addCP">
+			<var name="kbArticleContent" value="Knowledge Base Article Content" />
+			<var name="kbArticleTitle" value="Knowledge Base Article Title" />
+		</execute>
+
+		<execute macro="Navigator#openURL" />
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Knowledge Base" />
+		</execute>
+
+		<execute macro="KBArticle#editCP">
+			<var name="kbArticleContentEdit" value="Knowledge Base Article Content Edit" />
+			<var name="kbArticleTitle" value="Knowledge Base Article Title" />
+			<var name="kbArticleTitleEdit" value="Knowledge Base Article Title Edit" />
+			<var name="saveAsDraft" value="true" />
+		</execute>
+
+		<execute macro="Navigator#openURL" />
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Knowledge Base" />
+		</execute>
+
+		<execute macro="KBArticle#viewCP">
+			<var name="kbArticleContent" value="Knowledge Base Article Content Edit" />
+			<var name="kbArticleTitle" value="Knowledge Base Article Title Edit" />
+			<var name="kbStatus" value="Draft" />
+		</execute>
+	</command>
+
 	<command name="SelectParentArticleViaKBAdmin" priority="4">
 		<execute macro="Navigator#openURL" />
 
