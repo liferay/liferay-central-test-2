@@ -319,7 +319,7 @@ public class DDMExpressionEvaluationTest {
 		DDMExpression<Long> ddmExpression =
 			_ddmExpressionFactory.createLongDDMExpression("var1 + var2 + var3");
 
-		long var1 = 5l;
+		long var1 = 5L;
 
 		ddmExpression.setLongVariableValue("var1", var1);
 

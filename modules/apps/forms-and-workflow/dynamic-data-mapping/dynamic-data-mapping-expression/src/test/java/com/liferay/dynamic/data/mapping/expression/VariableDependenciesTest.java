@@ -32,7 +32,7 @@ public class VariableDependenciesTest {
 		DDMExpression<Long> ddmExpression =
 			_ddmExpressionFactory.createLongDDMExpression("var1 + var2 + var3");
 
-		ddmExpression.setLongVariableValue("var1", 5l);
+		ddmExpression.setLongVariableValue("var1", 5L);
 		ddmExpression.setExpressionStringVariableValue("var2", "var1 + 3");
 		ddmExpression.setExpressionStringVariableValue("var3", "var2 + var1");
 
