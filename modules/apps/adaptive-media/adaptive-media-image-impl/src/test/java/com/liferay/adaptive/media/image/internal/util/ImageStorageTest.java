@@ -93,12 +93,6 @@ public class ImageStorageTest {
 			4L
 		);
 
-		Mockito.when(
-			fileVersion.getExtension()
-		).thenReturn(
-			"jpg"
-		);
-
 		ImageAdaptiveMediaConfigurationEntry configurationEntry =
 			new ImageAdaptiveMediaConfigurationEntry(
 				StringUtil.randomString(), "xyz", Collections.emptyMap());
@@ -107,7 +101,7 @@ public class ImageStorageTest {
 			fileVersion, configurationEntry);
 
 		Assert.assertEquals(
-			"adaptive/1/2/3/4/xyz.jpg", fileVersionVariantPath.toString());
+			"adaptive/1/2/3/4/xyz", fileVersionVariantPath.toString());
 	}
 
 	private final ImageStorage _imageStorage = new ImageStorage();
