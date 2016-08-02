@@ -1,6 +1,7 @@
 buildscript {
 	dependencies {
 		classpath group: "com.liferay", name: "com.liferay.gradle.plugins.defaults", version: "latest.release"
+		classpath group: "org.kt3k.gradle.plugin", name: "coveralls-gradle-plugin", version: "2.6.3"
 	}
 
 	repositories {
@@ -9,10 +10,16 @@ buildscript {
 		maven {
 			url "https://cdn.lfrs.sl/repository.liferay.com/nexus/content/groups/public"
 		}
+
+		maven {
+			url "https://plugins.gradle.org/m2/"
+		}
 	}
 }
 
+apply plugin: "com.github.kt3k.coveralls"
 apply plugin: "com.liferay.app.defaults.plugin"
+apply plugin: "jacoco"
 
 configure(subprojects.findAll {!it.childProjects}) {
 	apply plugin: "com.liferay.defaults.plugin"
@@ -29,4 +36,31 @@ configure(subprojects.findAll {!it.childProjects}) {
 		}
 	}
 }
+
+repositories {
+	mavenLocal()
+	jcenter()
+}
+
+task coverageReport(type: org.gradle.testing.jacoco.tasks.JacocoReport) {
+	additionalSourceDirs = files(subprojects.sourceSets.main.allSource.srcDirs)
+	classDirectories = files(subprojects.sourceSets.main.output)
+	dependsOn = subprojects.test
+	executionData = files(subprojects.jacocoTestReport.executionData)
+	sourceDirectories = files(subprojects.sourceSets.main.allSource.srcDirs)
+
+	reports {
+		html.enabled = true
+		xml.enabled = true
+	}
+
+	onlyIf = { true }
+
+	doFirst {
+		executionData = files(executionData.findAll { it.exists() })
+	}
+}
+
+tasks.coveralls {
+	dependsOn 'coverageReport'
 }
