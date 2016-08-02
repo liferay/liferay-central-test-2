@@ -36,10 +36,10 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.TempFileEntryUtil;
 import com.liferay.portal.service.test.ServiceTestUtil;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
+import com.liferay.portlet.blogs.BlogsEntryImageSelectorHelper;
 
 import java.io.InputStream;
 
-import com.liferay.portlet.blogs.BlogsEntryImageSelectorHelper;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.ClassRule;

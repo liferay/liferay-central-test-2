@@ -61,7 +61,6 @@ public class AssetTagLocalServiceTest {
 
 		_organizationIndexer = IndexerRegistryUtil.getIndexer(
 			Organization.class);
-
 	}
 
 	@After
@@ -116,12 +115,12 @@ public class AssetTagLocalServiceTest {
 		Assert.assertEquals(0, assetTagStats.getAssetCount());
 	}
 
-	private Indexer<Organization> _organizationIndexer;
-
 	@DeleteAfterTestRun
 	private Group _group;
 
 	@DeleteAfterTestRun
 	private Organization _organization;
+
+	private Indexer<Organization> _organizationIndexer;
 
 }

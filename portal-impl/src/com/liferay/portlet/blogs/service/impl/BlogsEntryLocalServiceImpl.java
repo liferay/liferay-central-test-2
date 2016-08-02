@@ -110,7 +110,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		throw new UnsupportedOperationException(
 			"This class is deprecated and replaced by " +
 				"com.liferay.blogs.service.impl.BlogsEntryLocalServiceImpl");
-
 	}
 
 	@Indexable(type = IndexableType.REINDEX)
@@ -127,7 +126,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		throw new UnsupportedOperationException(
 			"This class is deprecated and replaced by " +
 				"com.liferay.blogs.service.impl.BlogsEntryLocalServiceImpl");
-
 	}
 
 	@Override
