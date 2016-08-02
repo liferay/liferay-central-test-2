@@ -683,9 +683,8 @@ public class ModularBlogsEntryLocalServiceWrapper
 
 	@Reference
 	protected void setBlogsEntryLocalService(
-		com.
-			liferay.
-				blogs.service.BlogsEntryLocalService blogsEntryLocalService) {
+		com.liferay.blogs.service.BlogsEntryLocalService
+			blogsEntryLocalService) {
 
 		_blogsEntryLocalService = blogsEntryLocalService;
 	}
