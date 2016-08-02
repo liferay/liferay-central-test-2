@@ -380,15 +380,14 @@ public class AssetCategoriesDisplayContext {
 			PortletProvider.Action.BROWSE);
 
 		selectCategoryURL.setParameter(
-			"eventName", _renderResponse.getNamespace() + "selectCategory");
-		selectCategoryURL.setParameter(
 			"allowedSelectVocabularies", Boolean.TRUE.toString());
+		selectCategoryURL.setParameter(
+			"eventName", _renderResponse.getNamespace() + "selectCategory");
 		selectCategoryURL.setParameter("singleSelect", Boolean.TRUE.toString());
 		selectCategoryURL.setParameter(
 			"vocabularyIds",
 			ListUtil.toString(
 				vocabularies, AssetVocabulary.VOCABULARY_ID_ACCESSOR));
-
 		selectCategoryURL.setWindowState(LiferayWindowState.POP_UP);
 
 		_selectCategoryURL = selectCategoryURL.toString();
