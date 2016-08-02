@@ -14,6 +14,7 @@
 
 package com.liferay.adaptive.media.image.internal.configuration;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -34,7 +35,7 @@ public class ImageAdaptiveMediaConfigurationEntry {
 	}
 
 	public Map<String, String> getProperties() {
-		return _properties;
+		return new HashMap<>(_properties);
 	}
 
 	public String getUUID() {
