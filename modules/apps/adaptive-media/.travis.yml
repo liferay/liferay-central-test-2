@@ -8,13 +8,22 @@ jdk:
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
   - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+
 cache:
   directories:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
 
+install:
+  - ./scripts/install_bundle.sh
+  - ./gradlew setupTestableTomcat
+
 script:
-- ./gradlew clean compileJava compileJSP compileTestJava test && ! find . -type f -name 'TEST-*.xml' -exec grep -F '<failure' {} \+ > /dev/null
+  - ./scripts/run_unit_tests.sh
+  - ../bundles/tomcat-8.0.32/bin/startup.sh
+  - ./scripts/deploy_modules.sh
+  - travis_wait ./scripts/wait_until_startup.sh
+  - cd adaptive-media-image-test && ../gradlew clean testIntegration
 
 after_success:
-  - ./gradlew jacocoTestReport coveralls
+  - cd .. && ./gradlew coveralls
