@@ -261,10 +261,6 @@ if (showSource) {
 			plugins.push(A.Plugin.LiferayAlloyEditorSource);
 		</c:if>
 
-		<%
-		boolean useCustomDataProcessor = (editorOptionsDynamicAttributes != null) && GetterUtil.getBoolean(editorOptionsDynamicAttributes.get("useCustomDataProcessor"));
-		%>
-
 		alloyEditor = new A.LiferayAlloyEditor(
 			{
 				contents: '<%= HtmlUtil.escapeJS(contents) %>',
@@ -276,6 +272,11 @@ if (showSource) {
 				onInitMethod: window['<%= HtmlUtil.escapeJS(onInitMethod) %>'],
 				plugins: plugins,
 				textMode: <%= (editorOptions != null) ? editorOptions.isTextMode() : Boolean.FALSE.toString() %>,
+
+				<%
+				boolean useCustomDataProcessor = (editorOptionsDynamicAttributes != null) && GetterUtil.getBoolean(editorOptionsDynamicAttributes.get("useCustomDataProcessor"));
+				%>
+
 				useCustomDataProcessor: <%= useCustomDataProcessor %>
 			}
 		).render();
