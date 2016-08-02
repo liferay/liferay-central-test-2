@@ -98,6 +98,9 @@ public class ImageAdaptiveMediaFinderImpl implements ImageAdaptiveMediaFinder {
 				queryBuilder.getAttributes());
 
 		return configurationEntries.stream().
+			filter(
+				configurationEntry ->
+					_imageStorage.hasContent(fileVersion, configurationEntry)).
 			map(
 				configurationEntry ->
 					_createMedia(

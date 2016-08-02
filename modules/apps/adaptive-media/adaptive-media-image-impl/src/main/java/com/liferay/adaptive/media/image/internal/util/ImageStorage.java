@@ -94,6 +94,25 @@ public class ImageStorage {
 		}
 	}
 
+	public boolean hasContent(
+		FileVersion fileVersion,
+		ImageAdaptiveMediaConfigurationEntry configurationEntry) {
+
+		try {
+			Path fileVersionVariantPath = getFileVersionVariantPath(
+				fileVersion, configurationEntry);
+
+			boolean b = DLStoreUtil.hasDirectory(
+				fileVersion.getCompanyId(), CompanyConstants.SYSTEM,
+				fileVersionVariantPath.toString());
+
+			return b;
+		}
+		catch (PortalException pe) {
+			throw new AdaptiveMediaRuntimeException.IOException(pe);
+		}
+	}
+
 	public void save(
 		FileVersion fileVersion,
 		ImageAdaptiveMediaConfigurationEntry configurationEntry,
