@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.blogs.internal.wrapper;
+package com.liferay.blogs.internal.service;
 
 import com.liferay.blogs.kernel.model.BlogsStatsUser;
 import com.liferay.blogs.kernel.service.BlogsStatsUserLocalService;

@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.blogs.internal.wrapper;
+package com.liferay.blogs.internal.service;
 
 import com.liferay.blogs.service.BlogsStatsUserLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
