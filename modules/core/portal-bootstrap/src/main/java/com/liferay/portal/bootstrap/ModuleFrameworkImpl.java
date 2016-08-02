@@ -153,12 +153,11 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 			Parameters parameters = OSGiHeader.parseHeader(
 				bundleSymbolicNameAttributeValue);
 
-			Set<String> bundleSymbolicNameSet = parameters.keySet();
+			Set<String> set = parameters.keySet();
 
-			Iterator<String> bundleSymbolicNameIterator =
-				bundleSymbolicNameSet.iterator();
+			Iterator<String> iterator = set.iterator();
 
-			String bundleSymbolicName = bundleSymbolicNameIterator.next();
+			String bundleSymbolicName = iterator.next();
 
 			String bundleVersionAttributeValue = attributes.getValue(
 				Constants.BUNDLE_VERSION);
@@ -794,12 +793,11 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 			Parameters parameters = OSGiHeader.parseHeader(
 				bundleSymbolicNameAttributeValue);
 
-			Set<String> bundleSymbolicNameSet = parameters.keySet();
+			Set<String> set = parameters.keySet();
 
-			Iterator<String> bundleSymbolicNameIterator =
-				bundleSymbolicNameSet.iterator();
+			Iterator<String> iterator = set.iterator();
 
-			String bundleSymbolicName = bundleSymbolicNameIterator.next();
+			String bundleSymbolicName = iterator.next();
 
 			String bundleVersionAttributeValue = attributes.getValue(
 				Constants.BUNDLE_VERSION);
