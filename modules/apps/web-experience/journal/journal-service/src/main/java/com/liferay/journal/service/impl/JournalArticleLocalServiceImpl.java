@@ -6170,7 +6170,7 @@ public class JournalArticleLocalServiceImpl
 		List<JournalArticle> articles =
 			journalArticleFinder.findByExpirationDate(
 				JournalArticleConstants.CLASSNAME_ID_DEFAULT,
-				new Date(expirationDate.getTime() + _getArticleCheckInterval()),
+				new Date(expirationDate.getTime() + getArticleCheckInterval()),
 				new QueryDefinition<JournalArticle>(
 					WorkflowConstants.STATUS_APPROVED));
 
@@ -6216,7 +6216,7 @@ public class JournalArticleLocalServiceImpl
 
 		if (_previousCheckDate == null) {
 			_previousCheckDate = new Date(
-				expirationDate.getTime() - _getArticleCheckInterval());
+				expirationDate.getTime() - getArticleCheckInterval());
 		}
 	}
 
@@ -6828,6 +6828,16 @@ public class JournalArticleLocalServiceImpl
 		}
 	}
 
+	protected long getArticleCheckInterval() throws PortalException {
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		JournalServiceConfiguration journalServiceConfiguration =
+			configurationProvider.getCompanyConfiguration(
+				JournalServiceConfiguration.class, companyId);
+
+		return journalServiceConfiguration.checkInterval();
+	}
+
 	protected Locale getArticleDefaultLocale(String content) {
 		String defaultLanguageId = LocalizationUtil.getDefaultLanguageId(
 			content);
@@ -6851,10 +6861,6 @@ public class JournalArticleLocalServiceImpl
 		if (page < 1) {
 			page = 1;
 		}
-
-		JournalServiceConfiguration journalServiceConfiguration =
-			configurationProvider.getCompanyConfiguration(
-				JournalServiceConfiguration.class, article.getCompanyId());
 
 		int numberOfPages = 1;
 		boolean paginate = false;
@@ -7029,6 +7035,11 @@ public class JournalArticleLocalServiceImpl
 				portletRequestModel, script, langType, propagateException);
 
 			if (!pageFlow) {
+				JournalServiceConfiguration journalServiceConfiguration =
+					configurationProvider.getCompanyConfiguration(
+						JournalServiceConfiguration.class,
+						article.getCompanyId());
+
 				String[] pieces = StringUtil.split(
 					content,
 					journalServiceConfiguration.journalArticlePageBreakToken());

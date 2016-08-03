@@ -114,26 +114,12 @@ public class JournalArticleFinderImpl
 			ddmTemplateKey, false);
 		boolean andOperator = false;
 
-		JournalServiceConfiguration journalServiceConfiguration = null;
-
-		try {
-			journalServiceConfiguration =
-				ConfigurationProviderUtil.getCompanyConfiguration(
-					JournalServiceConfiguration.class, companyId);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-
 		if (Validator.isNotNull(keywords)) {
 			articleIds = CustomSQLUtil.keywords(keywords, false);
 			titles = CustomSQLUtil.keywords(keywords);
 			descriptions = CustomSQLUtil.keywords(keywords, false);
 
-			if ((journalServiceConfiguration != null) &&
-				journalServiceConfiguration.
-					databaseContentKeywordSearchEnabled()) {
-
+			if (isdatabaseContentKeywordSearchEnabled(companyId)) {
 				contents = CustomSQLUtil.keywords(keywords, false);
 			}
 		}
@@ -251,26 +237,12 @@ public class JournalArticleFinderImpl
 			ddmTemplateKey, false);
 		boolean andOperator = false;
 
-		JournalServiceConfiguration journalServiceConfiguration = null;
-
-		try {
-			journalServiceConfiguration =
-				ConfigurationProviderUtil.getCompanyConfiguration(
-					JournalServiceConfiguration.class, companyId);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-
 		if (Validator.isNotNull(keywords)) {
 			articleIds = CustomSQLUtil.keywords(keywords, false);
 			titles = CustomSQLUtil.keywords(keywords);
 			descriptions = CustomSQLUtil.keywords(keywords, false);
 
-			if ((journalServiceConfiguration != null) &&
-				journalServiceConfiguration.
-					databaseContentKeywordSearchEnabled()) {
-
+			if (isdatabaseContentKeywordSearchEnabled(companyId)) {
 				contents = CustomSQLUtil.keywords(keywords, false);
 			}
 		}
@@ -389,26 +361,12 @@ public class JournalArticleFinderImpl
 			ddmTemplateKey, false);
 		boolean andOperator = false;
 
-		JournalServiceConfiguration journalServiceConfiguration = null;
-
-		try {
-			journalServiceConfiguration =
-				ConfigurationProviderUtil.getCompanyConfiguration(
-					JournalServiceConfiguration.class, companyId);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-
 		if (Validator.isNotNull(keywords)) {
 			articleIds = CustomSQLUtil.keywords(keywords, false);
 			titles = CustomSQLUtil.keywords(keywords);
 			descriptions = CustomSQLUtil.keywords(keywords, false);
 
-			if ((journalServiceConfiguration != null) &&
-				journalServiceConfiguration.
-					databaseContentKeywordSearchEnabled()) {
-
+			if (isdatabaseContentKeywordSearchEnabled(companyId)) {
 				contents = CustomSQLUtil.keywords(keywords, false);
 			}
 		}
@@ -573,26 +531,12 @@ public class JournalArticleFinderImpl
 			ddmTemplateKey, false);
 		boolean andOperator = false;
 
-		JournalServiceConfiguration journalServiceConfiguration = null;
-
-		try {
-			journalServiceConfiguration =
-				ConfigurationProviderUtil.getCompanyConfiguration(
-					JournalServiceConfiguration.class, companyId);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-
 		if (Validator.isNotNull(keywords)) {
 			articleIds = CustomSQLUtil.keywords(keywords, false);
 			titles = CustomSQLUtil.keywords(keywords);
 			descriptions = CustomSQLUtil.keywords(keywords, false);
 
-			if ((journalServiceConfiguration != null) &&
-				journalServiceConfiguration.
-					databaseContentKeywordSearchEnabled()) {
-
+			if (isdatabaseContentKeywordSearchEnabled(companyId)) {
 				contents = CustomSQLUtil.keywords(keywords, false);
 			}
 		}
@@ -1593,6 +1537,26 @@ public class JournalArticleFinderImpl
 		}
 
 		return articles.get(0);
+	}
+
+	protected boolean isdatabaseContentKeywordSearchEnabled(long companyId) {
+		JournalServiceConfiguration journalServiceConfiguration = null;
+
+		try {
+			journalServiceConfiguration =
+				ConfigurationProviderUtil.getCompanyConfiguration(
+					JournalServiceConfiguration.class, companyId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		if (journalServiceConfiguration == null) {
+			return false;
+		}
+
+		return
+			journalServiceConfiguration.databaseContentKeywordSearchEnabled();
 	}
 
 	protected boolean isNullArray(Object[] array) {
