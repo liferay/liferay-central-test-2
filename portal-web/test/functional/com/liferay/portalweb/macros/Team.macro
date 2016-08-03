@@ -147,7 +147,9 @@
 	<command name="deleteCP">
 		<var name="key_teamName" value="${teamName}" />
 
-		<execute function="Click" locator1="Icon#DISPLAY_STYLE_LIST" />
+		<execute macro="Portlet#changeDisplayStyle">
+			<var name="displayStyle" value="List" />
+		</execute>
 
 		<execute function="AssertTextEquals" locator1="SiteTeams#TEAM_TABLE_NAME" value1="${teamName}" />
 		<execute function="Click" locator1="SiteTeams#TEAM_TABLE_ACTIONS" />
