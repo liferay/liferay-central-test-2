@@ -356,6 +356,17 @@ public class HtmlImplTest {
 	}
 
 	@Test
+	public void testStripTag() {
+		char[] tag = {'t', 'a', 'g'};
+
+		Assert.assertEquals(
+			17, _htmlImpl.stripTag(tag, "<tag>Hello World!</tag>", 0));
+
+		Assert.assertEquals(
+			0, _htmlImpl.stripTag(tag, "<gat>Hello World!</gat>", 0));
+	}
+
+	@Test
 	public void testUnescapeDoubleHtmlEncoding() {
 		Assert.assertEquals(
 			"&#034;", _htmlImpl.unescape(_htmlImpl.escape("&#034;")));
