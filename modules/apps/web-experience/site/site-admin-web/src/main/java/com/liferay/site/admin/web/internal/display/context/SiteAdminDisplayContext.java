@@ -14,9 +14,6 @@
 
 package com.liferay.site.admin.web.internal.display.context;
 
-import com.liferay.application.list.constants.ApplicationListWebKeys;
-import com.liferay.application.list.constants.PanelCategoryKeys;
-import com.liferay.application.list.display.context.logic.PanelCategoryHelper;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.Group;
@@ -53,9 +50,7 @@ import com.liferay.site.constants.SiteWebKeys;
 import com.liferay.site.util.GroupSearchProvider;
 
 import java.util.LinkedHashMap;
-import java.util.Map;
 
-import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 
 import javax.servlet.http.HttpServletRequest;

@@ -14,10 +14,6 @@
 
 package com.liferay.site.admin.web.internal.portlet;
 
-import com.liferay.application.list.PanelAppRegistry;
-import com.liferay.application.list.PanelCategoryRegistry;
-import com.liferay.application.list.constants.ApplicationListWebKeys;
-import com.liferay.application.list.display.context.logic.PanelCategoryHelper;
 import com.liferay.asset.kernel.exception.AssetCategoryException;
 import com.liferay.asset.kernel.exception.AssetTagException;
 import com.liferay.exportimport.kernel.exception.RemoteExportException;
@@ -329,12 +325,6 @@ public class SiteAdminPortlet extends MVCPortlet {
 		renderRequest.setAttribute(
 			SiteWebKeys.GROUP_URL_PROVIDER, groupURLProvider);
 
-		PanelCategoryHelper panelCategoryHelper = new PanelCategoryHelper(
-			panelAppRegistry, panelCategoryRegistry);
-
-		renderRequest.setAttribute(
-			ApplicationListWebKeys.PANEL_CATEGORY_HELPER, panelCategoryHelper);
-
 		if (SessionErrors.contains(
 				renderRequest, NoSuchBackgroundTaskException.class.getName()) ||
 			SessionErrors.contains(
@@ -539,18 +529,6 @@ public class SiteAdminPortlet extends MVCPortlet {
 		MembershipRequestService membershipRequestService) {
 
 		this.membershipRequestService = membershipRequestService;
-	}
-
-	@Reference(unbind = "-")
-	protected void setPanelAppRegistry(PanelAppRegistry panelAppRegistry) {
-		this.panelAppRegistry = panelAppRegistry;
-	}
-
-	@Reference(unbind = "-")
-	protected void setPanelCategoryRegistry(
-		PanelCategoryRegistry panelCategoryRegistry) {
-
-		this.panelCategoryRegistry = panelCategoryRegistry;
 	}
 
 	@Reference(unbind = "-")
@@ -941,8 +919,6 @@ public class SiteAdminPortlet extends MVCPortlet {
 	protected LayoutSetService layoutSetService;
 	protected MembershipRequestLocalService membershipRequestLocalService;
 	protected MembershipRequestService membershipRequestService;
-	protected PanelAppRegistry panelAppRegistry;
-	protected PanelCategoryRegistry panelCategoryRegistry;
 	protected RoleLocalService roleLocalService;
 	protected TeamLocalService teamLocalService;
 	protected UserLocalService userLocalService;
