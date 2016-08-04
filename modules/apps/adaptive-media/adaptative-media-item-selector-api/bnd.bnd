@@ -1,0 +1,6 @@
+Bundle-Name: Liferay Adaptive Item Selector API
+Bundle-SymbolicName: com.liferay.adaptive.media.item.selector.api
+Bundle-Version: 1.0.0
+Export-Package:com.liferay.adaptative.media.item.selector
+Liferay-Releng-Module-Group-Description:
+Liferay-Releng-Module-Group-Title: Adaptive Media

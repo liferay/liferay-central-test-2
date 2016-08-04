@@ -1,7 +1,7 @@
 (function() {
 	var Lang = AUI().Lang;
 
-	var STR_ADAPTIVE_MEDIA_RETURN_TYPE = 'com.liferay.item.selector.criteria.AdaptiveMediaItemSelectorReturnType';
+	var STR_ADAPTIVE_MEDIA_RETURN_TYPE = 'com.liferay.adaptative.media.item.selector.AdaptativeMediaURLItemSelectorReturnType';
 
 	var STR_FILE_ENTRY_RETURN_TYPE = 'com.liferay.item.selector.criteria.FileEntryItemSelectorReturnType';
 
