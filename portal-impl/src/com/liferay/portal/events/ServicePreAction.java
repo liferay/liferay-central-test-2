@@ -439,7 +439,7 @@ public class ServicePreAction extends Action {
 					_log.warn(sb.toString());
 				}
 
-				throw new PrincipalException(sb.toString());
+				throw new PrincipalException();
 			}
 			else if (isLoginRequest(request) && !viewableGroup) {
 				layout = null;
