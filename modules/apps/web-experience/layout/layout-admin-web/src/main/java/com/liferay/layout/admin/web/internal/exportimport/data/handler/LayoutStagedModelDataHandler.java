@@ -339,7 +339,7 @@ public class LayoutStagedModelDataHandler
 		Element layoutElement =
 			portletDataContext.getImportDataStagedModelElement(layout);
 
-		long layoutId = GetterUtil.getInteger(
+		long layoutId = GetterUtil.getLong(
 			layoutElement.attributeValue("layout-id"));
 
 		long oldLayoutId = layoutId;
