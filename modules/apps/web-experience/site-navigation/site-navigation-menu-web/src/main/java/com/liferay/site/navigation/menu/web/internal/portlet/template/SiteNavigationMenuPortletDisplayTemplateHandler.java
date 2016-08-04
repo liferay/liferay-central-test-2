@@ -133,8 +133,8 @@ public class SiteNavigationMenuPortletDisplayTemplateHandler
 
 	@Override
 	protected String getTemplatesConfigPath() {
-		return "com/liferay/site/navigation/menu/web/portlet/template/" +
-			"dependencies/portlet-display-templates.xml";
+		return "com/liferay/site/navigation/menu/web/portlet/template" +
+			"/dependencies/portlet-display-templates.xml";
 	}
 
 	protected TemplateVariableGroup getUtilTemplateVariableGroup() {

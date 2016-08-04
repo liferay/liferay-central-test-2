@@ -108,8 +108,8 @@ public class SiteNavigationLanguagePortletDisplayTemplateHandler
 
 	@Override
 	protected String getTemplatesConfigPath() {
-		return "com/liferay/site/navigation/language/web/portlet/template/" +
-			"dependencies/portlet-display-templates.xml";
+		return "com/liferay/site/navigation/language/web/portlet/template" +
+			"/dependencies/portlet-display-templates.xml";
 	}
 
 	private volatile SiteNavigationLanguageWebTemplateConfiguration
