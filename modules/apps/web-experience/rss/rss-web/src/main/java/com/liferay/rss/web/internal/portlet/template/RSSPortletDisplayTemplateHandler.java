@@ -90,8 +90,8 @@ public class RSSPortletDisplayTemplateHandler
 
 	@Override
 	protected String getTemplatesConfigPath() {
-		return "com/liferay/rss/web/portlet/template/dependencies/" +
-			"portlet-display-templates.xml";
+		return "com/liferay/rss/web/portlet/template/dependencies" +
+			"/portlet-display-templates.xml";
 	}
 
 }
