@@ -48,8 +48,8 @@ public class FilePropagator {
 		return _threadsDurationTotal / _threadsCompletedCount;
 	}
 
-	public void setCleanupCommand(String cleanupCommand) {
-		_cleanupCommand = cleanupCommand;
+	public void setCleanUpCommand(String cleanUpCommand) {
+		_cleanUpCommand = cleanUpCommand;
 	}
 
 	public void start(int threadCount) {
@@ -181,8 +181,8 @@ public class FilePropagator {
 		sb.append(targetSlave);
 		sb.append(" '");
 
-		if ((_cleanupCommand != null) && !_cleanupCommand.isEmpty()) {
-			sb.append(_cleanupCommand);
+		if ((_cleanUpCommand != null) && !_cleanUpCommand.isEmpty()) {
+			sb.append(_cleanUpCommand);
 			sb.append("; ");
 		}
 
@@ -209,7 +209,7 @@ public class FilePropagator {
 	}
 
 	private final List<String> _busySlaves = new ArrayList<>();
-	private String _cleanupCommand;
+	private String _cleanUpCommand;
 	private final List<String> _errorSlaves = new ArrayList<>();
 	private final List<FilePropagatorTask> _filePropagatorTasks =
 		new ArrayList<>();
@@ -228,11 +228,10 @@ public class FilePropagator {
 		}
 
 		private String _escapeParentheses(String fileName) {
-			String escaped = fileName.replace(")", "\\)");
+			fileName = fileName.replace(")", "\\)");
+			fileName = fileName.replace("(", "\\(");
 
-			escaped = escaped.replace("(", "\\(");
-
-			return escaped;
+			return fileName;
 		}
 
 		private final String _sourceFileName;
