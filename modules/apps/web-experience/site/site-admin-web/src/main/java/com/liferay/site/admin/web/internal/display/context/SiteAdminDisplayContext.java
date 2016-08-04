@@ -129,19 +129,6 @@ public class SiteAdminDisplayContext {
 		return _groupId;
 	}
 
-	public Map<Long, Integer> getGroupUsersCount(long[] groupIds)
-		throws PortalException {
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)_request.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		Company company = themeDisplay.getCompany();
-
-		return UserLocalServiceUtil.searchCounts(
-			company.getCompanyId(), WorkflowConstants.STATUS_APPROVED,
-			groupIds);
-	}
-
 	public String getKeywords() {
 		if (_keywords == null) {
 			_keywords = ParamUtil.getString(_request, "keywords");
@@ -210,53 +197,6 @@ public class SiteAdminDisplayContext {
 		return searchURL;
 	}
 
-	public PortletURL getSiteAdministrationPortletURL(Group group)
-		throws PortalException {
-
-		PortletURL siteAdministrationURL = null;
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)_request.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		PermissionChecker permissionChecker =
-			themeDisplay.getPermissionChecker();
-
-		PanelCategoryHelper panelCategoryHelper =
-			(PanelCategoryHelper)_request.getAttribute(
-				ApplicationListWebKeys.PANEL_CATEGORY_HELPER);
-
-		String portletId = null;
-
-		if (panelCategoryHelper != null) {
-			portletId = panelCategoryHelper.getFirstPortletId(
-				PanelCategoryKeys.SITE_ADMINISTRATION, permissionChecker,
-				group);
-		}
-
-		if (Validator.isNotNull(portletId)) {
-			siteAdministrationURL = PortalUtil.getControlPanelPortletURL(
-				_request, group, portletId, 0, 0, PortletRequest.RENDER_PHASE);
-		}
-
-		return siteAdministrationURL;
-	}
-
-	public PortletURL getSiteAdministrationURL(long groupId) {
-		PortletURL siteAdministrationURL =
-			_liferayPortletResponse.createRenderURL();
-
-		siteAdministrationURL.setParameter("mvcPath", "/edit_site.jsp");
-		siteAdministrationURL.setParameter(
-			"redirect", getCurrentURL().toString());
-		siteAdministrationURL.setParameter("groupId", String.valueOf(groupId));
-
-		return siteAdministrationURL;
-	}
-
-	public int getUserGroupsCount() throws PortalException {
-		return getUserGroupsCount(getGroup());
-	}
-
 	public int getUserGroupsCount(Group group) {
 		LinkedHashMap<String, Object> userGroupParams = new LinkedHashMap<>();
 
@@ -271,10 +211,6 @@ public class SiteAdminDisplayContext {
 
 		return UserGroupLocalServiceUtil.searchCount(
 			company.getCompanyId(), null, userGroupParams);
-	}
-
-	public int getUsersCount() throws PortalException {
-		return getUsersCount(getGroup());
 	}
 
 	public int getUsersCount(Group group) {
