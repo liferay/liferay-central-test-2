@@ -108,8 +108,8 @@ public class AssetTagsNavigationPortletDisplayTemplateHandler
 
 	@Override
 	protected String getTemplatesConfigPath() {
-		return "com/liferay/asset/tags/navigation/web/portlet/template/" +
-			"dependencies/portlet-display-templates.xml";
+		return "com/liferay/asset/tags/navigation/web/portlet/template" +
+			"/dependencies/portlet-display-templates.xml";
 	}
 
 }
