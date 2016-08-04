@@ -133,8 +133,8 @@ public class SiteNavigationBreadcrumbPortletDisplayTemplateHandler
 
 	@Override
 	protected String getTemplatesConfigPath() {
-		return "com/liferay/site/navigation/breadcrumb/web/portlet/template/" +
-			"dependencies/portlet-display-templates.xml";
+		return "com/liferay/site/navigation/breadcrumb/web/portlet/template" +
+			"/dependencies/portlet-display-templates.xml";
 	}
 
 	private volatile SiteNavigationBreadcrumbWebTemplateConfiguration
