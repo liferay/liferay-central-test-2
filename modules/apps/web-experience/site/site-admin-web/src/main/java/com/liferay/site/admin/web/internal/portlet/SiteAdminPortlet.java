@@ -95,6 +95,7 @@ import com.liferay.portal.liveusers.LiveUsers;
 import com.liferay.site.admin.web.internal.constants.SiteAdminPortletKeys;
 import com.liferay.site.constants.SiteWebKeys;
 import com.liferay.site.util.GroupSearchProvider;
+import com.liferay.site.util.GroupURLProvider;
 import com.liferay.sites.kernel.util.Sites;
 import com.liferay.sites.kernel.util.SitesUtil;
 
@@ -325,6 +326,9 @@ public class SiteAdminPortlet extends MVCPortlet {
 		renderRequest.setAttribute(
 			SiteWebKeys.GROUP_SEARCH_PROVIDER, groupSearchProvider);
 
+		renderRequest.setAttribute(
+			SiteWebKeys.GROUP_URL_PROVIDER, groupURLProvider);
+
 		PanelCategoryHelper panelCategoryHelper = new PanelCategoryHelper(
 			panelAppRegistry, panelCategoryRegistry);
 
@@ -490,6 +494,11 @@ public class SiteAdminPortlet extends MVCPortlet {
 	@Reference(unbind = "-")
 	protected void setGroupService(GroupService groupService) {
 		this.groupService = groupService;
+	}
+
+	@Reference(unbind = "-")
+	protected void setGroupURLProvider(GroupURLProvider groupURLProvider) {
+		this.groupURLProvider = groupURLProvider;
 	}
 
 	@Reference(unbind = "-")
@@ -925,6 +934,7 @@ public class SiteAdminPortlet extends MVCPortlet {
 	protected GroupLocalService groupLocalService;
 	protected GroupSearchProvider groupSearchProvider;
 	protected GroupService groupService;
+	protected GroupURLProvider groupURLProvider;
 	protected LayoutLocalService layoutLocalService;
 	protected LayoutSetLocalService layoutSetLocalService;
 	protected LayoutSetPrototypeService layoutSetPrototypeService;
