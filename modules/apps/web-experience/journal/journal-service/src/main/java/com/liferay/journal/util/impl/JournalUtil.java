@@ -1637,7 +1637,6 @@ public class JournalUtil {
 	private static Map<String, String> _customTokens;
 	private static final JournalTransformer _journalTransformer =
 		new JournalTransformer(
-			JournalServiceConfigurationKeys.TRANSFORMER_LISTENER,
 			JournalServiceConfigurationKeys.ERROR_TEMPLATE, true);
 
 }
