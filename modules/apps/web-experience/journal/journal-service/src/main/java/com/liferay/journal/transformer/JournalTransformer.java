@@ -87,50 +87,29 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class JournalTransformer {
 
-	public JournalTransformer(
-		String errorTemplatePropertyKey, boolean restricted) {
-
+	public JournalTransformer(boolean restricted) {
 		_restricted = restricted;
-
-		ClassLoader classLoader = getClassLoader();
-
-		Configuration configuration = ConfigurationFactoryUtil.getConfiguration(
-			classLoader, "portlet");
-
-		Set<String> transformerListenerClassNames = SetUtil.fromArray(
-			configuration.getArray(transformerListenerPropertyKey));
-
-		for (String transformerListenerClassName :
-				transformerListenerClassNames) {
-
-			try {
-				if (_log.isDebugEnabled()) {
-					_log.debug(
-						"Instantiating transformer listener " +
-							transformerListenerClassName);
-				}
-
-				TransformerListener transformerListener =
-					(TransformerListener)InstanceFactory.newInstance(
-						classLoader, transformerListenerClassName);
-
-				_transformerListeners.add(transformerListener);
-			}
-			catch (Exception e) {
-				_log.error(e, e);
-			}
-		}
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, replaced by {@link #JournalTransformer(String, boolean)}
+	 * @deprecated As of 7.1.0, replaced by {@link #JournalTransformer(boolean)}
+	 */
+	@Deprecated
+	public JournalTransformer(
+		String errorTemplatePropertyKey, boolean restricted) {
+
+		this(restricted);
+	}
+
+	/**
+	 * @deprecated As of 7.0.0, replaced by {@link #JournalTransformer(boolean)}
 	 */
 	@Deprecated
 	public JournalTransformer(
 		String transformerListenerPropertyKey, String errorTemplatePropertyKey,
 		boolean restricted) {
 
-		this(errorTemplatePropertyKey, restricted);
+		this(restricted);
 	}
 
 	public String transform(
@@ -197,7 +176,11 @@ public class JournalTransformer {
 			_logTransformBefore.debug(document);
 		}
 
-		for (TransformerListener transformerListener : _transformerListeners) {
+		List<TransformerListener> transformerListeners =
+			JournalTransformerListenerRegistryUtil.
+				getTransformerListeners();
+
+		for (TransformerListener transformerListener : transformerListeners) {
 
 			// Modify XML
 
@@ -382,7 +365,7 @@ public class JournalTransformer {
 
 		// Postprocess output
 
-		for (TransformerListener transformerListener : _transformerListeners) {
+		for (TransformerListener transformerListener : transformerListeners) {
 
 			// Modify output
 
@@ -716,7 +699,5 @@ public class JournalTransformer {
 
 	private final Map<String, String> _errorTemplateIds = new HashMap<>();
 	private final boolean _restricted;
-	private final Set<TransformerListener> _transformerListeners =
-		new HashSet<>();
 
 }
