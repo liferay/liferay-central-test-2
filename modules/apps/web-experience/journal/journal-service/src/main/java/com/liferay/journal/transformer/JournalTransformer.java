@@ -111,13 +111,6 @@ public class JournalTransformer {
 		}
 
 		_restricted = restricted;
-	}
-
-	public JournalTransformer(
-		String transformerListenerPropertyKey, String errorTemplatePropertyKey,
-		boolean restricted) {
-
-		this(errorTemplatePropertyKey, restricted);
 
 		ClassLoader classLoader = getClassLoader();
 
@@ -147,6 +140,17 @@ public class JournalTransformer {
 				_log.error(e, e);
 			}
 		}
+	}
+
+	/**
+	 * @deprecated As of 7.1.0, replaced by {@link #JournalTransformer(String, boolean)}
+	 */
+	@Deprecated
+	public JournalTransformer(
+		String transformerListenerPropertyKey, String errorTemplatePropertyKey,
+		boolean restricted) {
+
+		this(errorTemplatePropertyKey, restricted);
 	}
 
 	public String transform(
