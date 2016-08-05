@@ -1,5 +1,5 @@
 (function() {
-	var STR_ADAPTIVE_MEDIA_RETURN_TYPE = 'com.liferay.item.selector.criteria.AdaptativeMediaURLItemSelectorReturnType';
+	var STR_ADAPTIVE_MEDIA_RETURN_TYPE = 'com.liferay.item.selector.criteria.AdaptiveMediaItemSelectorReturnType';
 
 	var STR_FILE_ENTRY_RETURN_TYPE = 'com.liferay.item.selector.criteria.FileEntryItemSelectorReturnType';
 
@@ -21,7 +21,7 @@
 						if (event.data.name === 'imageselector') {
 							event.removeListener();
 
-							event.stop();
+							event.cancel();
 
 							var onSelectedImageChangeFn = AUI._.bind(
 								instance._onSelectedImageChange,
@@ -38,9 +38,42 @@
 			},
 
 			_getPictureElement: function(selectedItem) {
-				var itemValue = JSON.parse(selectedItem.value);
+				var pictureEl;
 
-				return CKEDITOR.dom.element.createFromHtml('<picture><img src="' + itemValue.url + '"></picture>');
+				try {
+					var itemValue = JSON.parse(selectedItem.value);
+
+					var pictureHtml = '<picture>';
+
+					itemValue.sources.forEach(
+						function(source) {
+							var mediaText = '';
+
+							source.media.forEach(
+								function(media, index) {
+									if (index > 0) {
+										mediaText += ' and ';
+									}
+									mediaText += '(' + media.key + ':' + media.value + ')';
+								}
+							);
+
+							pictureHtml += '<source srcset="' + source.src + '" media="' + mediaText + '">';
+						}
+					);
+
+					if (itemValue.defaultSrc) {
+						pictureHtml += '<img src="' + itemValue.defaultSrc + '">';
+					}
+
+					pictureHtml += '</picture>';
+
+					pictureEl = CKEDITOR.dom.element.createFromHtml(pictureHtml);
+				}
+				catch (e) {
+				}
+
+				return pictureEl;
 			},
 
 			_onSelectedImageChange: function(editor, imageSrc, selectedItem) {
