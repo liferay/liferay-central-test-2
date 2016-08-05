@@ -94,7 +94,7 @@ request.setAttribute(WebKeys.SEARCH_CONTAINER, structureSearch);
 				name="name"
 			>
 				<c:choose>
-					<c:when test="<%= ddmDisplay.isEnabledSelectLink(structure, classPK) %>">
+					<c:when test="<%= ddmDisplay.isEnableSelectStructureLink(structure, classPK) %>">
 
 						<%
 						Map<String, Object> data = new HashMap<String, Object>();
