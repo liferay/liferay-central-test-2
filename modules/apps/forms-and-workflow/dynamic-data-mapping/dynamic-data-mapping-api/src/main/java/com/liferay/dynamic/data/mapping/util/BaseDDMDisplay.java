@@ -311,7 +311,9 @@ public abstract class BaseDDMDisplay implements DDMDisplay {
 	}
 
 	@Override
-	public boolean isEnableSelectStructureLink(DDMStructure structure, long classPK) {
+	public boolean isEnableSelectStructureLink(
+		DDMStructure structure, long classPK) {
+
 		if (structure.getStructureId() == classPK) {
 			return false;
 		}
