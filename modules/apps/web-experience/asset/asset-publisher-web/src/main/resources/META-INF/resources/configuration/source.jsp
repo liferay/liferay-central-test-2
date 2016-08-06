@@ -111,6 +111,7 @@ List<AssetRendererFactory<?>> classTypesAssetRendererFactories = (List<AssetRend
 		for (long subtypeId : assetSelectedClassTypeIds) {
 			try {
 				ClassType classType = classTypeReader.getClassType(subtypeId, locale);
+
 				subtypesLeftList.add(new KeyValuePair(String.valueOf(subtypeId), HtmlUtil.escape(classType.getName())));
 			}
 			catch (NoSuchModelException nsme) {
