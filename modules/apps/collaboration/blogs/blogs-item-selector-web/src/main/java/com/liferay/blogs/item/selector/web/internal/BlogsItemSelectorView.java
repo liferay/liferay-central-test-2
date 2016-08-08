@@ -17,6 +17,7 @@ package com.liferay.blogs.item.selector.web.internal;
 import com.liferay.blogs.item.selector.criterion.BlogsItemSelectorCriterion;
 import com.liferay.blogs.item.selector.web.internal.display.context.BlogsItemSelectorViewDisplayContext;
 import com.liferay.item.selector.ItemSelectorReturnType;
+import com.liferay.item.selector.ItemSelectorReturnTypeResolverHandler;
 import com.liferay.item.selector.ItemSelectorView;
 import com.liferay.item.selector.criteria.FileEntryItemSelectorReturnType;
 import com.liferay.item.selector.criteria.URLItemSelectorReturnType;
@@ -54,6 +55,12 @@ public class BlogsItemSelectorView
 	@Override
 	public Class<BlogsItemSelectorCriterion> getItemSelectorCriterionClass() {
 		return BlogsItemSelectorCriterion.class;
+	}
+
+	public ItemSelectorReturnTypeResolverHandler
+		getItemSelectorReturnTypeResolverHandler() {
+
+		return _itemSelectorReturnTypeResolverHandler;
 	}
 
 	public ServletContext getServletContext() {
@@ -105,6 +112,15 @@ public class BlogsItemSelectorView
 		requestDispatcher.include(request, response);
 	}
 
+	@Reference(unbind = "-")
+	public void setItemSelectorReturnTypeResolverHandler(
+		ItemSelectorReturnTypeResolverHandler
+			itemSelectorReturnTypeResolverHandler) {
+
+		_itemSelectorReturnTypeResolverHandler =
+			itemSelectorReturnTypeResolverHandler;
+	}
+
 	@Reference(
 		target = "(osgi.web.symbolicname=com.liferay.blogs.item.selector.web)",
 		unbind = "-"
@@ -121,6 +137,8 @@ public class BlogsItemSelectorView
 					new URLItemSelectorReturnType()
 				}));
 
+	private ItemSelectorReturnTypeResolverHandler
+		_itemSelectorReturnTypeResolverHandler;
 	private ServletContext _servletContext;
 
 }
