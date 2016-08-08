@@ -71,11 +71,9 @@ public class BlogsItemSelectorViewDisplayContext {
 			_blogsItemSelectorCriterion.getDesiredItemSelectorReturnTypes();
 
 		ItemSelectorReturnType itemSelectorReturnType =
-			ItemSelectorReturnTypeUtil.
-				getFirstAvailableItemSelectorReturnType(
-					desiredItemSelectorReturnTypes,
-					_blogsItemSelectorView.
-						getSupportedItemSelectorReturnTypes());
+			ItemSelectorReturnTypeUtil.getFirstAvailableItemSelectorReturnType(
+				desiredItemSelectorReturnTypes,
+				_blogsItemSelectorView.getSupportedItemSelectorReturnTypes());
 
 		ItemSelectorReturnTypeResolverHandler
 			itemSelectorReturnTypeResolverHandler =
