@@ -38,9 +38,7 @@ try {
 	String templateContent = (String)request.getAttribute(NestedPortletsWebKeys.TEMPLATE_CONTENT + portletDisplay.getId());
 
 	if (Validator.isNotNull(templateId) && Validator.isNotNull(templateContent)) {
-		HttpServletRequest originalServletRequest = PortalUtil.getOriginalServletRequest(request);
-
-		RuntimePageUtil.processTemplate(originalServletRequest, response, new StringTemplateResource(templateId, templateContent));
+		RuntimePageUtil.processTemplate(PortalUtil.getOriginalServletRequest(request), response, new StringTemplateResource(templateId, templateContent));
 	}
 }
 catch (Exception e) {
