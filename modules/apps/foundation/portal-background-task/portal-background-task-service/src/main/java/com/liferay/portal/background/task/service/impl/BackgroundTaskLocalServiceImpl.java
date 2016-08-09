@@ -249,8 +249,8 @@ public class BackgroundTaskLocalServiceImpl
 			if (backgroundTask.getStatus() ==
 					BackgroundTaskConstants.STATUS_IN_PROGRESS) {
 
-				backgroundTask.setStatus(BackgroundTaskConstants.STATUS_FAILED);
 				backgroundTask.setCompleted(true);
+				backgroundTask.setStatus(BackgroundTaskConstants.STATUS_FAILED);
 
 				backgroundTaskPersistence.update(backgroundTask);
 			}
