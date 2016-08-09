@@ -177,6 +177,39 @@
 		<execute macro="PortletEntry#save" />
 	</command>
 
+	<command name="removeMemberCP">
+		<execute function="AssertClick" locator1="ContentRow#ENTRY_CONTENT_ENTRY_NAME_LINK" value1="${teamName}">
+			<var name="key_rowEntry" value="${teamName}" />
+		</execute>
+
+		<execute macro="Navigator#gotoNavItem">
+			<var name="navItem" value="${membershipType}s" />
+		</execute>
+
+		<if>
+			<equals arg1="${membershipType}" arg2="User" />
+			<then>
+				<execute function="Check" locator1="ContentRow#ENTRY_CONTENT_ENTRY_CHECKBOX">
+					<var name="key_rowEntry" value="${userFirstName} ${userLastName}" />
+				</execute>
+			</then>
+			<elseif>
+				<equals arg1="${membershipType}" arg2="User Group" />
+				<then>
+					<execute function="Check" locator1="ContentRow#ENTRY_CONTENT_ENTRY_CHECKBOX">
+						<var name="key_rowEntry" value="${userGroupName}" />
+					</execute>
+				</then>
+			</elseif>
+		</if>
+
+		<execute function="ClickNoError" locator1="Icon#DELETE" />
+
+		<execute function="Confirm" value1="Are you sure you want to delete this? It will be deleted immediately." />
+
+		<execute macro="Alert#viewSuccessMessage" />
+	</command>
+
 	<command name="removePermissionPG">
 		<execute function="Uncheck" locator1="//tr[contains(.,'${teamName}')]/td/input[contains(@id,'${permissionDefinitionKey}')]" />
 
@@ -257,5 +290,19 @@
 				</then>
 			</elseif>
 		</if>
+	</command>
+
+	<command name="viewNoMembersCP">
+		<execute function="AssertClick" locator1="ContentRow#ENTRY_CONTENT_ENTRY_NAME_LINK" value1="${teamName}">
+			<var name="key_rowEntry" value="${teamName}" />
+		</execute>
+
+		<for list="Users,User Groups" param="navItem">
+			<execute macro="Navigator#gotoNavItem">
+				<var name="navItem" value="${navItem}" />
+			</execute>
+
+			<execute function="AssertTextEquals" locator1="Message#EMPTY_INFO" value1="There are no members. You can add a member by clicking the plus button on the bottom right corner." />
+		</for>
 	</command>
 </definition>
