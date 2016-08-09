@@ -330,7 +330,7 @@ public class MarketplaceStorePortlet extends RemoteMVCPortlet {
 		jsonObject.put("cmd", "updateApps");
 		jsonObject.put("message", "success");
 
-		if (_lock.tryLock()) {
+		if (_reentrantLock.tryLock()) {
 			try {
 				long[] appPackageIds = ParamUtil.getLongValues(
 					actionRequest, "appPackageIds");
@@ -366,7 +366,7 @@ public class MarketplaceStorePortlet extends RemoteMVCPortlet {
 				jsonObject.put("updatedApps", jsonArray);
 			}
 			finally {
-				_lock.unlock();
+				_reentrantLock.unlock();
 			}
 		}
 		else {
@@ -536,6 +536,6 @@ public class MarketplaceStorePortlet extends RemoteMVCPortlet {
 
 	private AppLocalService _appLocalService;
 	private AppService _appService;
-	private final ReentrantLock _lock = new ReentrantLock();
+	private final ReentrantLock _reentrantLock = new ReentrantLock();
 
 }
