@@ -21,14 +21,13 @@ long groupId = ParamUtil.getLong(request, "groupId", scopeGroupId);
 long classPK = ParamUtil.getLong(request, "classPK");
 String displayStyle = ParamUtil.getString(request, "displayStyle", "list");
 String eventName = ParamUtil.getString(request, "eventName", "selectStructure");
+boolean searchRestriction = ParamUtil.getBoolean(request, "searchRestriction");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("mvcPath", "/select_structure.jsp");
 portletURL.setParameter("classPK", String.valueOf(classPK));
 portletURL.setParameter("eventName", eventName);
-
-boolean searchRestriction = ParamUtil.getBoolean(request, "searchRestriction");
 
 SearchContainer structureSearch = new StructureSearch(renderRequest, portletURL, WorkflowConstants.STATUS_APPROVED);
 
