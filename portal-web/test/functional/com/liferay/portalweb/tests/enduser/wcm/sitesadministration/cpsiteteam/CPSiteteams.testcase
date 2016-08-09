@@ -119,7 +119,7 @@
 		</execute>
 
 		<execute macro="ProductMenu#gotoSitesMembers">
-			<var name="portlet" value="Site Memberships" />
+			<var name="portlet" value="Site Teams" />
 		</execute>
 
 		<execute macro="Team#viewMemberCP">
