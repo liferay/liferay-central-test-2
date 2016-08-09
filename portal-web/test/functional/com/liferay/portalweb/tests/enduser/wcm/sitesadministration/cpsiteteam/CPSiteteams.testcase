@@ -121,7 +121,7 @@
 		</execute>
 
 		<execute macro="Team#viewMemberCP">
-			<var name="siteName" value="Site Name" />
+			<var name="membershipType" value="User" />
 			<var name="teamName" value="Site Team Name" />
 			<var name="userFirstName" value="userfn" />
 			<var name="userLastName" value="userln" />
