@@ -373,6 +373,18 @@
 		<execute function="AssertElementNotPresent" locator1="BlogsEntry#CONTENT" />
 	</command>
 
+	<command name="publish">
+		<if>
+			<condition function="IsElementPresent" locator1="Message#DRAFT_AUTO_SAVE" />
+			<then>
+				<execute macro="Button#clickPublish" />
+			</then>
+			<else>
+				<execute macro="PortletEntry#publish" />
+			</else>
+		</if>
+	</command>
+
 	<command name="publishWithInvalidContent">
 		<execute function="AssertClick" locator1="Button#PUBLISH" value1="Publish" />
 
