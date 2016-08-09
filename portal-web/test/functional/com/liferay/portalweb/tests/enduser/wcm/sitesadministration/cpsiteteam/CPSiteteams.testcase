@@ -19,7 +19,11 @@
 			<else>
 				<execute macro="Team#tearDownCP" />
 
+				<execute macro="UserGroup#tearDownCP" />
+
 				<execute macro="User#tearDownCP" />
+
+				<execute macro="Site#tearDownCP" />
 			</else>
 		</if>
 	</tear-down>
