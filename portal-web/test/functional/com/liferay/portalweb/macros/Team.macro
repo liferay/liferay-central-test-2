@@ -233,18 +233,29 @@
 	</command>
 
 	<command name="viewMemberCP">
-		<var name="key_cardText" value="${userScreenName}" />
-
-		<execute macro="Portlet#changeDisplayStyle">
-			<var name="displayStyle" value="Icon" />
+		<execute function="AssertClick" locator1="ContentRow#ENTRY_CONTENT_ENTRY_NAME_LINK" value1="${teamName}">
+			<var name="key_rowEntry" value="${teamName}" />
 		</execute>
 
-		<execute function="AssertTextEquals#assertPartialText" locator1="Card#SPECIFIC_LARGE_TEXT" value1="${userFirstName} ${userLastName}" />
-		<execute function="AssertTextEquals" locator1="Card#SPECIFIC_TEXT" value1="${userScreenName}" />
-		<execute function="AssertTextEquals" locator1="Card#SPECIFIC_SMALL_TEXT" value1="${teamName}" />
+		<execute macro="Navigator#gotoNavItem">
+			<var name="navItem" value="${membershipType}s" />
+		</execute>
 
-		<var name="key_rowEntry" value="${key_cardText}" />
-
-		<execute function="AssertVisible" locator1="Icon#ROW_VERTICAL_ELLIPSIS" />
+		<if>
+			<equals arg1="${membershipType}" arg2="User" />
+			<then>
+				<execute function="AssertTextEquals#assertPartialText" locator1="ContentRow#ENTRY_CONTENT_ROW_1" value1="${userFirstName} ${userLastName}">
+					<var name="key_rowEntry" value="${userFirstName} ${userLastName}" />
+				</execute>
+			</then>
+			<elseif>
+				<equals arg1="${membershipType}" arg2="User Group" />
+				<then>
+					<execute function="AssertTextEquals#assertPartialText" locator1="ContentRow#ENTRY_CONTENT_ROW_1" value1="${userGroupName}">
+						<var name="key_rowEntry" value="${userGroupName}" />
+					</execute>
+				</then>
+			</elseif>
+		</if>
 	</command>
 </definition>
