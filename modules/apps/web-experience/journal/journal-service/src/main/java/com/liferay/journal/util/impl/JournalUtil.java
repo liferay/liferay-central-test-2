@@ -1192,19 +1192,20 @@ public class JournalUtil {
 	}
 
 	private static String _getCustomTokenValue(
-		String token, JournalServiceConfiguration journalServiceConfiguration) {
+		String tokenName,
+		JournalServiceConfiguration journalServiceConfiguration) {
 
-		for (String keyValue :
+		for (String tokenValue :
 				journalServiceConfiguration.customTokenValues()) {
 
-			String[] tokenArray = keyValue.split("\\=");
+			String[] tokenValueParts = tokenValue.split("\\=");
 
-			if (tokenArray.length != 2) {
+			if (tokenValueParts.length != 2) {
 				continue;
 			}
 
-			if (tokenArray[0].equals(token)) {
-				return tokenArray[1];
+			if (tokenValueParts[0].equals(tokenName)) {
+				return tokenValueParts[1];
 			}
 		}
 
@@ -1447,17 +1448,17 @@ public class JournalUtil {
 			synchronized (JournalUtil.class) {
 				_customTokens = new HashMap<>();
 
-				for (String token :
+				for (String tokenName :
 						journalServiceConfiguration.customTokenNames()) {
 
 					String tokenValue = _getCustomTokenValue(
-						token, journalServiceConfiguration);
+						tokenName, journalServiceConfiguration);
 
 					if (Validator.isNull(tokenValue)) {
 						continue;
 					}
 
-					_customTokens.put(token, tokenValue);
+					_customTokens.put(tokenName, tokenValue);
 				}
 			}
 		}
