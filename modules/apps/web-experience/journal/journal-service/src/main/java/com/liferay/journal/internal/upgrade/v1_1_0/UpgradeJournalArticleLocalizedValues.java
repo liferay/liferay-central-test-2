@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.LoggingTimer;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.sql.PreparedStatement;
@@ -43,8 +44,10 @@ public class UpgradeJournalArticleLocalizedValues extends UpgradeProcess {
 	@Override
 	protected void doUpgrade() throws Exception {
 		upgradeSchema();
+
 		updateJournalArticleDefaultLanguageId();
 		updateJournalArticleLocalizedFields();
+
 		dropTitleColumn();
 		dropDescriptionColumn();
 	}
@@ -78,8 +81,8 @@ public class UpgradeJournalArticleLocalizedValues extends UpgradeProcess {
 			PreparedStatement ps2 =
 				AutoBatchPreparedStatementUtil.concurrentAutoBatch(
 					connection,
-					"update JournalArticle set defaultLanguageId = ? " +
-						"where id_ = ?");
+					"update JournalArticle set defaultLanguageId = ? where " +
+						"id_ = ?");
 
 			ResultSet rs = ps1.executeQuery()) {
 
@@ -101,17 +104,19 @@ public class UpgradeJournalArticleLocalizedValues extends UpgradeProcess {
 	}
 
 	protected void updateJournalArticleLocalizedFields() throws Exception {
+		StringBundler sb = new StringBundler(3);
+		
+		sb.append("insert into JournalArticleLocalization(");
+		sb.append("articleLocalizationId, companyId, articlePK, title, ");
+		sb.append("description, languageId) values(?, ?, ?, ?, ?, ?)");
+
 		try (LoggingTimer loggingTimer = new LoggingTimer();
 			PreparedStatement ps1 = connection.prepareStatement(
 				"select id_, companyId, title, description from " +
 					"JournalArticle");
 			PreparedStatement ps2 =
 				AutoBatchPreparedStatementUtil.concurrentAutoBatch(
-					connection,
-					"insert into JournalArticleLocalization(" +
-						"articleLocalizationId, companyId, articlePK, title," +
-							"description, languageId) values(?, ?, ?, ?, ?, ?" +
-								")");
+					connection, sb.toString());
 			ResultSet rs = ps1.executeQuery()) {
 
 			while (rs.next()) {
