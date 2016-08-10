@@ -220,11 +220,12 @@ public class PortletContainerTestUtil {
 			throw new IllegalStateException("Cookie is null");
 		}
 
-		CloseableHttpResponse httpResponse = null;
+		CloseableHttpResponse closeableHttpResponse = null;
 
 		HttpClientBuilder httpClientBuilder = HttpClientBuilder.create();
 
-		try (CloseableHttpClient httpClient = httpClientBuilder.build();
+		try (CloseableHttpClient closeableHttpClient =
+				httpClientBuilder.build();
 			StringWriter stringWriter = new StringWriter();
 			WriterOutputStream writerOutputStream = new WriterOutputStream(
 				stringWriter)) {
@@ -250,13 +251,13 @@ public class PortletContainerTestUtil {
 
 			URI uri = requestBuilder.getUri();
 
-			httpResponse = httpClient.execute(
+			closeableHttpResponse = closeableHttpClient.execute(
 				new HttpHost(uri.getHost(), uri.getPort()),
 				requestBuilder.build());
 
-			StatusLine statusLine = httpResponse.getStatusLine();
+			StatusLine statusLine = closeableHttpResponse.getStatusLine();
 
-			HttpEntity httpEntity = httpResponse.getEntity();
+			HttpEntity httpEntity = closeableHttpResponse.getEntity();
 
 			httpEntity.writeTo(writerOutputStream);
 
@@ -267,8 +268,8 @@ public class PortletContainerTestUtil {
 		}
 		finally {
 			try {
-				if (httpResponse != null) {
-					httpResponse.close();
+				if (closeableHttpResponse != null) {
+					closeableHttpResponse.close();
 				}
 			}
 			catch (IOException ioe) {

@@ -43,9 +43,9 @@ public class RSSWebCacheItem implements WebCacheItem {
 
 	@Override
 	public Object convert(String key) throws WebCacheException {
-		InputStream inputstream = null;
-
 		SyndFeed feed = null;
+
+		InputStream inputstream = null;
 
 		try {
 
@@ -66,12 +66,10 @@ public class RSSWebCacheItem implements WebCacheItem {
 
 			SyndFeedInput input = new SyndFeedInput();
 
-			int timeout = PropsValues.RSS_CONNECTION_TIMEOUT;
-
 			Http.Options options = new Http.Options();
 
 			options.setLocation(_url);
-			options.setTimeout(timeout);
+			options.setTimeout(PropsValues.RSS_CONNECTION_TIMEOUT);
 
 			inputstream = HttpUtil.URLtoInputStream(options);
 
