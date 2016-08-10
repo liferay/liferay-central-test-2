@@ -71,7 +71,8 @@ public class WSRPConsumerUpgrade implements UpgradeStepRegistrator {
 			"com.liferay.wsrp.web", "0.0.3", "0.0.4", new UpgradeUuid());
 
 		registry.register(
-			"com.liferay.wsrp.web", "0.0.4", "1.0.0", new UpgradeWSRPServices());
+			"com.liferay.wsrp.web", "0.0.4", "1.0.0",
+			new UpgradeWSRPServices());
 	}
 
 	@Reference(target = ModuleServiceLifecycle.PORTAL_INITIALIZED, unbind = "-")

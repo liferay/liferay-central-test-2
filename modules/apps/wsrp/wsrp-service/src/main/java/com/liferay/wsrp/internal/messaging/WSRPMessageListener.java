@@ -64,7 +64,7 @@ public class WSRPMessageListener extends HotDeployMessageListener {
 		ExtensionHelperUtil.initialize();
 
 		try {
-			_WSRPConsumerPortletLocalService.destroyWSRPConsumerPortlets();
+			_wSRPConsumerPortletLocalService.destroyWSRPConsumerPortlets();
 		}
 		catch (PortalException pe) {
 			if (_log.isWarnEnabled()) {
@@ -72,13 +72,13 @@ public class WSRPMessageListener extends HotDeployMessageListener {
 			}
 		}
 
-		_WSRPConsumerPortletLocalService.initWSRPConsumerPortlets();
+		_wSRPConsumerPortletLocalService.initWSRPConsumerPortlets();
 	}
 
 	@Deactivate
 	protected void deactivate(BundleContext bundleContext) {
 		try {
-			_WSRPConsumerPortletLocalService.destroyWSRPConsumerPortlets();
+			_wSRPConsumerPortletLocalService.destroyWSRPConsumerPortlets();
 		}
 		catch (PortalException pe) {
 			if (_log.isWarnEnabled()) {
@@ -91,14 +91,14 @@ public class WSRPMessageListener extends HotDeployMessageListener {
 	protected void setWSRPConsumerPortletLocalService(
 		WSRPConsumerPortletLocalService wSRPConsumerPortletLocalService) {
 
-		_WSRPConsumerPortletLocalService = wSRPConsumerPortletLocalService;
+		_wSRPConsumerPortletLocalService = wSRPConsumerPortletLocalService;
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		WSRPMessageListener.class);
 
 	private static WSRPConsumerPortletLocalService
-		_WSRPConsumerPortletLocalService;
+		_wSRPConsumerPortletLocalService;
 
 	private BundleContext _bundleContext;
 	private ServiceTracker<MBeanServer, MBeanServer> _serviceTracker;
