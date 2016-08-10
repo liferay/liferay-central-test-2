@@ -105,7 +105,7 @@ public class UpgradeJournalArticleLocalizedValues extends UpgradeProcess {
 
 	protected void updateJournalArticleLocalizedFields() throws Exception {
 		StringBundler sb = new StringBundler(3);
-		
+
 		sb.append("insert into JournalArticleLocalization(");
 		sb.append("articleLocalizationId, companyId, articlePK, title, ");
 		sb.append("description, languageId) values(?, ?, ?, ?, ?, ?)");
