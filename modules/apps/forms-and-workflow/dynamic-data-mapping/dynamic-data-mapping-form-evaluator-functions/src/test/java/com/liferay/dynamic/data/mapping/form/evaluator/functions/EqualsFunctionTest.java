@@ -27,7 +27,7 @@ public class EqualsFunctionTest {
 		EqualsFunction equalsFunction = new EqualsFunction();
 
 		Boolean result = (Boolean)equalsFunction.evaluate(null, "not equals");
-		
+
 		Assert.assertFalse(result);
 	}
 
@@ -36,7 +36,7 @@ public class EqualsFunctionTest {
 		EqualsFunction equalsFunction = new EqualsFunction();
 
 		Boolean result = (Boolean)equalsFunction.evaluate("text", null);
-		
+
 		Assert.assertFalse(result);
 	}
 
@@ -53,7 +53,7 @@ public class EqualsFunctionTest {
 
 		Boolean result = (Boolean)equalsFunction.evaluate(
 			"simple text", "simple text");
-		
+
 		Assert.assertTrue(result);
 	}
 
@@ -62,7 +62,7 @@ public class EqualsFunctionTest {
 		EqualsFunction equalsFunction = new EqualsFunction();
 
 		Boolean result = (Boolean)equalsFunction.evaluate(2, 2);
-		
+
 		Assert.assertTrue(result);
 	}
 
