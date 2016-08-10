@@ -31,7 +31,7 @@ import java.util.List;
 /**
  * @author Peter Fellwock
  */
-public class WSRPUpgradeStep extends UpgradeProcess {
+public class UpgradeWSRPServices extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
