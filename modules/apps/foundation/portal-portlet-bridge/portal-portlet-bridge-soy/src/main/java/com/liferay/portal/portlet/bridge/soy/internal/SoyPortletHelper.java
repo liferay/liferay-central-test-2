@@ -47,13 +47,10 @@ public class SoyPortletHelper {
 	public SoyPortletHelper(Bundle bundle) throws Exception {
 		_bundle = bundle;
 
-		_moduleName = getModuleName();
-
 		_javaScriptTPL = getJavaScriptTPL();
-
 		_jsonDeserializer = JSONFactoryUtil.createJSONDeserializer();
-
 		_jsonSerializer = JSONFactoryUtil.createJSONSerializer();
+		_moduleName = getModuleName();
 	}
 
 	public Object deserializeValue(Object value) {
