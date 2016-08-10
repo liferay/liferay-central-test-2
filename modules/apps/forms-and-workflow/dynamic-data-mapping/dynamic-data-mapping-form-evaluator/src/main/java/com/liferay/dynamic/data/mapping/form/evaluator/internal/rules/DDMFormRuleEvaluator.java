@@ -72,10 +72,8 @@ public class DDMFormRuleEvaluator {
 	protected void setFunctions(DDMExpression<?> ddmExpression) {
 		ddmExpression.setDDMExpressionFunction(
 			"fieldAt", new FieldAtFunction());
-
 		ddmExpression.setDDMExpressionFunction(
 			"get", new PropertyGetFunction(_ddmFormFieldEvaluationResults));
-
 		ddmExpression.setDDMExpressionFunction(
 			"set", new PropertySetFunction(_ddmFormFieldEvaluationResults));
 	}

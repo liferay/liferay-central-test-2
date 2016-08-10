@@ -27,6 +27,7 @@ public class BetweenFunctionTest {
 		BetweenFunction betweenFunction = new BetweenFunction();
 
 		Boolean result = (Boolean)betweenFunction.evaluate(1, 2, 3);
+
 		Assert.assertFalse(result);
 	}
 
@@ -35,6 +36,7 @@ public class BetweenFunctionTest {
 		BetweenFunction betweenFunction = new BetweenFunction();
 
 		Boolean result = (Boolean)betweenFunction.evaluate(10, 2, 9);
+
 		Assert.assertFalse(result);
 	}
 
@@ -43,6 +45,7 @@ public class BetweenFunctionTest {
 		BetweenFunction betweenFunction = new BetweenFunction();
 
 		Boolean result = (Boolean)betweenFunction.evaluate(7, 7, 5);
+		
 		Assert.assertFalse(result);
 	}
 
@@ -51,6 +54,7 @@ public class BetweenFunctionTest {
 		BetweenFunction betweenFunction = new BetweenFunction();
 
 		Boolean result = (Boolean)betweenFunction.evaluate(6, 4, 4);
+		
 		Assert.assertFalse(result);
 	}
 
@@ -59,6 +63,7 @@ public class BetweenFunctionTest {
 		BetweenFunction betweenFunction = new BetweenFunction();
 
 		Boolean result = (Boolean)betweenFunction.evaluate(3, 2, 5);
+		
 		Assert.assertTrue(result);
 	}
 
@@ -67,6 +72,7 @@ public class BetweenFunctionTest {
 		BetweenFunction betweenFunction = new BetweenFunction();
 
 		Boolean result = (Boolean)betweenFunction.evaluate(4, 4, 4);
+		
 		Assert.assertTrue(result);
 	}
 
@@ -75,6 +81,7 @@ public class BetweenFunctionTest {
 		BetweenFunction betweenFunction = new BetweenFunction();
 
 		Boolean result = (Boolean)betweenFunction.evaluate(7, 4, 7);
+		
 		Assert.assertTrue(result);
 	}
 
@@ -83,6 +90,7 @@ public class BetweenFunctionTest {
 		BetweenFunction betweenFunction = new BetweenFunction();
 
 		Boolean result = (Boolean)betweenFunction.evaluate(9, 9, 10);
+		
 		Assert.assertTrue(result);
 	}
 

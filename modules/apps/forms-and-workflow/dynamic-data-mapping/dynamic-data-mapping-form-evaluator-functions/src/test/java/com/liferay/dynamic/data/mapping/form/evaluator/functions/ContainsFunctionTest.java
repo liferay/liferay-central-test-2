@@ -28,6 +28,7 @@ public class ContainsFunctionTest {
 
 		Boolean result = (Boolean)containsFunction.evaluate(
 			"another text", "not contains");
+
 		Assert.assertFalse(result);
 	}
 
@@ -37,6 +38,7 @@ public class ContainsFunctionTest {
 
 		Boolean result = (Boolean)containsFunction.evaluate(
 			null, "not contains");
+
 		Assert.assertFalse(result);
 	}
 
@@ -46,6 +48,7 @@ public class ContainsFunctionTest {
 
 		Boolean result = (Boolean)containsFunction.evaluate(
 			"simple text", null);
+
 		Assert.assertFalse(result);
 	}
 
@@ -55,6 +58,7 @@ public class ContainsFunctionTest {
 
 		Boolean result = (Boolean)containsFunction.evaluate(
 			"text", "simple text");
+
 		Assert.assertFalse(result);
 	}
 
@@ -71,6 +75,7 @@ public class ContainsFunctionTest {
 
 		Boolean result = (Boolean)containsFunction.evaluate(
 			"another text", "another");
+
 		Assert.assertTrue(result);
 	}
 
