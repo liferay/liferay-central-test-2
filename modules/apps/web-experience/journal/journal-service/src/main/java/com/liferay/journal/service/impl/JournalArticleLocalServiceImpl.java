@@ -436,7 +436,7 @@ public class JournalArticleLocalServiceImpl
 
 		journalArticlePersistence.update(article);
 
-		// Localization
+		// Article localization
 
 		_addArticleLocalizedFields(
 			user.getCompanyId(), article.getId(), titleMap, descriptionMap);
@@ -844,7 +844,7 @@ public class JournalArticleLocalServiceImpl
 
 		journalArticlePersistence.update(newArticle);
 
-		// Localization
+		// Article localization
 
 		_addArticleLocalizedFields(
 			newArticle.getCompanyId(), newArticle.getId(),
@@ -951,7 +951,7 @@ public class JournalArticleLocalServiceImpl
 			updatePreviousApprovedArticle(article);
 		}
 
-		// Localization
+		// Article localization
 
 		journalArticleLocalizationPersistence.removeByArticlePK(
 			article.getId());
@@ -5634,7 +5634,7 @@ public class JournalArticleLocalServiceImpl
 			ExpandoBridgeUtil.copyExpandoBridgeAttributes(
 				oldArticle.getExpandoBridge(), article.getExpandoBridge());
 
-			// Localization columns
+			// Article localization
 
 			_addArticleLocalizedFields(
 				article.getCompanyId(), article.getId(),
