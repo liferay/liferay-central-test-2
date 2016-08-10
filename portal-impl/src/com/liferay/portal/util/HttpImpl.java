@@ -69,6 +69,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.http.Header;
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.Credentials;
@@ -126,12 +127,17 @@ public class HttpImpl implements Http {
 			_nonProxyHostsPattern = null;
 		}
 
+		HttpClientBuilder httpClientBuilder = HttpClientBuilder.create();
+
 		_poolingHttpClientConnectionManager =
 			new PoolingHttpClientConnectionManager();
 
 		_poolingHttpClientConnectionManager.setDefaultMaxPerRoute(
 			_MAX_CONNECTIONS_PER_HOST);
 		_poolingHttpClientConnectionManager.setMaxTotal(_MAX_TOTAL_CONNECTIONS);
+
+		httpClientBuilder.setConnectionManager(
+			_poolingHttpClientConnectionManager);
 
 		RequestConfig.Builder requestConfigBuilder = RequestConfig.custom();
 
@@ -141,19 +147,14 @@ public class HttpImpl implements Http {
 
 		RequestConfig requestConfig = requestConfigBuilder.build();
 
-		HttpClientBuilder httpClientBuilder = HttpClientBuilder.create();
-
-		httpClientBuilder.setConnectionManager(
-			_poolingHttpClientConnectionManager);
-
 		httpClientBuilder.setDefaultRequestConfig(requestConfig);
 
-		_httpClient = httpClientBuilder.build();
+		_closeableHttpClient = httpClientBuilder.build();
 
 		if (!hasProxyConfig() || Validator.isNull(_PROXY_USERNAME)) {
 			_proxyCredentials = null;
 
-			_proxyHttpClient = _httpClient;
+			_proxyCloseableHttpClient = _closeableHttpClient;
 
 			return;
 		}
@@ -184,14 +185,13 @@ public class HttpImpl implements Http {
 			_poolingHttpClientConnectionManager);
 
 		requestConfigBuilder.setProxy(new HttpHost(_PROXY_HOST, _PROXY_PORT));
-
 		requestConfigBuilder.setProxyPreferredAuthSchemes(_proxyAuthPrefs);
 
 		RequestConfig proxyRequestConfig = requestConfigBuilder.build();
 
 		proxyHttpClientBuilder.setDefaultRequestConfig(proxyRequestConfig);
 
-		_proxyHttpClient = proxyHttpClientBuilder.build();
+		_proxyCloseableHttpClient = proxyHttpClientBuilder.build();
 	}
 
 	@Override
@@ -426,7 +426,7 @@ public class HttpImpl implements Http {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, no replacement
+	 * @deprecated As of 7.0.0, with no direct replacement
 	 */
 	@Deprecated
 	public org.apache.commons.httpclient.HttpClient getClient(
@@ -502,9 +502,10 @@ public class HttpImpl implements Http {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, no replacement
+	 * @deprecated As of 7.0.0, with no direct replacement
 	 */
 	@Deprecated
+	@SuppressWarnings("unused")
 	public org.apache.commons.httpclient.HostConfiguration getHostConfiguration(
 			String location)
 		throws IOException {
@@ -938,7 +939,7 @@ public class HttpImpl implements Http {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, no replacement
+	 * @deprecated As of 7.0.0, with no direct replacement
 	 */
 	@Deprecated
 	public void proxifyState(
@@ -1380,17 +1381,16 @@ public class HttpImpl implements Http {
 			new AuthScope(_PROXY_HOST, _PROXY_PORT), _proxyCredentials);
 	}
 
-	protected CloseableHttpClient getClient(HttpHost proxyHost) {
+	protected CloseableHttpClient getCloseableHttpClient(HttpHost proxyHost) {
 		if (proxyHost != null) {
-			return _proxyHttpClient;
+			return _proxyCloseableHttpClient;
 		}
 
-		return _httpClient;
+		return _closeableHttpClient;
 	}
 
 	protected RequestConfig.Builder getRequestConfigBuilder(
-			URI uri, int timeout)
-		throws IOException {
+		URI uri, int timeout) {
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Location is " + uri.toString());
@@ -1443,7 +1443,7 @@ public class HttpImpl implements Http {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, no replacement
+	 * @deprecated As of 7.0.0, with no direct replacement
 	 */
 	@Deprecated
 	protected boolean hasRequestHeader(
@@ -1465,7 +1465,7 @@ public class HttpImpl implements Http {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, no replacement
+	 * @deprecated As of 7.0.0, with no direct replacement
 	 */
 	@Deprecated
 	protected void processPostMethod(
@@ -1523,7 +1523,7 @@ public class HttpImpl implements Http {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, no replacement
+	 * @deprecated As of 7.0.0, with no direct replacement
 	 */
 	@Deprecated
 	protected org.apache.commons.httpclient.Cookie toCommonsCookie(
@@ -1533,7 +1533,7 @@ public class HttpImpl implements Http {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, no replacement
+	 * @deprecated As of 7.0.0, with no direct replacement
 	 */
 	@Deprecated
 	protected org.apache.commons.httpclient.Cookie[] toCommonsCookies(
@@ -1543,7 +1543,7 @@ public class HttpImpl implements Http {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, no replacement
+	 * @deprecated As of 7.0.0, with no direct replacement
 	 */
 	@Deprecated
 	protected org.apache.commons.httpclient.methods.multipart.FilePart
@@ -1561,9 +1561,10 @@ public class HttpImpl implements Http {
 		int maxAge = cookie.getMaxAge();
 
 		if (maxAge > 0) {
-			Date expire = new Date(System.currentTimeMillis() + maxAge * 1000L);
+			Date expiryDate = new Date(
+				System.currentTimeMillis() + maxAge * 1000L);
 
-			basicClientCookie.setExpiryDate(expire);
+			basicClientCookie.setExpiryDate(expiryDate);
 
 			basicClientCookie.setAttribute(
 				ClientCookie.MAX_AGE_ATTR, Integer.toString(maxAge));
@@ -1592,7 +1593,7 @@ public class HttpImpl implements Http {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, no replacement
+	 * @deprecated As of 7.0.0, with no direct replacement
 	 */
 	@Deprecated
 	protected Cookie toServletCookie(
@@ -1654,7 +1655,7 @@ public class HttpImpl implements Http {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, no replacement
+	 * @deprecated As of 7.0.0, with no direct replacement
 	 */
 	@Deprecated
 	protected Cookie[] toServletCookies(
@@ -1741,7 +1742,7 @@ public class HttpImpl implements Http {
 			throw new IOException("Invalid URI: " + location, urise);
 		}
 
-		BasicCookieStore cookieStore = null;
+		BasicCookieStore basicCookieStore = null;
 
 		try {
 			_cookies.set(null);
@@ -1755,14 +1756,15 @@ public class HttpImpl implements Http {
 				location = Http.HTTP_WITH_SLASH + location;
 			}
 
-			HttpHost targetHost = new HttpHost(uri.getHost(), uri.getPort());
+			HttpHost targetHttpHost = new HttpHost(
+				uri.getHost(), uri.getPort());
 
 			RequestConfig.Builder requestConfigBuilder =
 				getRequestConfigBuilder(uri, timeout);
 
 			RequestConfig requestConfig = requestConfigBuilder.build();
 
-			CloseableHttpClient httpClient = getClient(
+			CloseableHttpClient httpClient = getCloseableHttpClient(
 				requestConfig.getProxy());
 
 			HttpClientContext httpClientContext = HttpClientContext.create();
@@ -1798,7 +1800,7 @@ public class HttpImpl implements Http {
 							Charset.forName(StringPool.UTF8));
 
 						_poolingHttpClientConnectionManager.setConnectionConfig(
-							targetHost, connectionConfigBuilder.build());
+							targetHttpHost, connectionConfigBuilder.build());
 					}
 
 					processPostMethod(requestBuilder, fileParts, parts);
@@ -1839,14 +1841,14 @@ public class HttpImpl implements Http {
 			}
 
 			if (ArrayUtil.isNotEmpty(cookies)) {
-				cookieStore = new BasicCookieStore();
+				basicCookieStore = new BasicCookieStore();
 
 				org.apache.http.cookie.Cookie[] httpCookies = toHttpCookies(
 					cookies);
 
-				cookieStore.addCookies(httpCookies);
+				basicCookieStore.addCookies(httpCookies);
 
-				httpClientContext.setCookieStore(cookieStore);
+				httpClientContext.setCookieStore(basicCookieStore);
 
 				requestConfigBuilder.setCookieSpec(CookieSpecs.DEFAULT);
 			}
@@ -1870,19 +1872,20 @@ public class HttpImpl implements Http {
 
 			requestBuilder.setConfig(requestConfigBuilder.build());
 
-			CloseableHttpResponse httpResponse = httpClient.execute(
-				targetHost, requestBuilder.build(), httpClientContext);
+			CloseableHttpResponse closeableHttpResponse = httpClient.execute(
+				targetHttpHost, requestBuilder.build(), httpClientContext);
 
 			response.setResponseCode(
-				httpResponse.getStatusLine().getStatusCode());
+				closeableHttpResponse.getStatusLine().getStatusCode());
 
-			Header locationHeader = httpResponse.getFirstHeader("location");
+			Header locationHeader = closeableHttpResponse.getFirstHeader(
+				"location");
 
 			if ((locationHeader != null) && !locationHeader.equals(location)) {
 				String redirect = locationHeader.getValue();
 
 				if (followRedirects) {
-					httpResponse.close();
+					closeableHttpResponse.close();
 
 					return URLtoInputStream(
 						redirect, Http.Method.GET, headers, cookies, auth, body,
@@ -1895,7 +1898,7 @@ public class HttpImpl implements Http {
 
 			long contentLengthLong = 0;
 
-			Header contentLengthHeader = httpResponse.getFirstHeader(
+			Header contentLengthHeader = closeableHttpResponse.getFirstHeader(
 				HttpHeaders.CONTENT_LENGTH);
 
 			if (contentLengthHeader != null) {
@@ -1914,20 +1917,23 @@ public class HttpImpl implements Http {
 				}
 			}
 
-			Header contentType = httpResponse.getFirstHeader(
+			Header contentTypeHeader = closeableHttpResponse.getFirstHeader(
 				HttpHeaders.CONTENT_TYPE);
 
-			if (contentType != null) {
-				response.setContentType(contentType.getValue());
+			if (contentTypeHeader != null) {
+				response.setContentType(contentTypeHeader.getValue());
 			}
 
-			for (Header header : httpResponse.getAllHeaders()) {
+			for (Header header : closeableHttpResponse.getAllHeaders()) {
 				response.addHeader(header.getName(), header.getValue());
 			}
+			
+			HttpEntity httpEntity = closeableHttpResponse.getEntity();
 
-			InputStream inputStream = httpResponse.getEntity().getContent();
+			InputStream inputStream = httpEntity.getContent();
 
-			final CloseableHttpResponse referenceHttpResponse = httpResponse;
+			final CloseableHttpResponse referenceCloseableHttpResponse =
+				closeableHttpResponse;
 
 			final Reference<InputStream> reference = FinalizeManager.register(
 				inputStream,
@@ -1936,11 +1942,11 @@ public class HttpImpl implements Http {
 					@Override
 					public void doFinalize(Reference<?> reference) {
 						try {
-							referenceHttpResponse.close();
+							referenceCloseableHttpResponse.close();
 						}
 						catch (IOException ioe) {
 							if (_log.isDebugEnabled()) {
-								_log.debug("Error closing response", ioe);
+								_log.debug("Unable to close response", ioe);
 							}
 						}
 					}
@@ -1954,7 +1960,7 @@ public class HttpImpl implements Http {
 				public void close() throws IOException {
 					super.close();
 
-					referenceHttpResponse.close();
+					referenceCloseableHttpResponse.close();
 
 					reference.clear();
 				}
@@ -1963,8 +1969,8 @@ public class HttpImpl implements Http {
 		}
 		finally {
 			try {
-				if (cookieStore != null) {
-					_cookies.set(toServletCookies(cookieStore.getCookies()));
+				if (basicCookieStore != null) {
+					_cookies.set(toServletCookies(basicCookieStore.getCookies()));
 				}
 			}
 			catch (Exception e) {
@@ -2020,7 +2026,7 @@ public class HttpImpl implements Http {
 
 	private final Pattern _absoluteURLPattern = Pattern.compile(
 		"^[a-zA-Z0-9]+://");
-	private final CloseableHttpClient _httpClient;
+	private final CloseableHttpClient _closeableHttpClient;
 	private final Pattern _nonProxyHostsPattern;
 	private final PoolingHttpClientConnectionManager
 		_poolingHttpClientConnectionManager;
@@ -2028,7 +2034,7 @@ public class HttpImpl implements Http {
 		"^[\\s\\\\/]+");
 	private final List<String> _proxyAuthPrefs = new ArrayList<>();
 	private final Credentials _proxyCredentials;
-	private final CloseableHttpClient _proxyHttpClient;
+	private final CloseableHttpClient _proxyCloseableHttpClient;
 	private final Pattern _relativeURLPattern = Pattern.compile(
 		"^\\s*/[a-zA-Z0-9]+");
 
