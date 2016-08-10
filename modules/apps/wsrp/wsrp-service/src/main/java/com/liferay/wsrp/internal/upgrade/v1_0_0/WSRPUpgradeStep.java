@@ -16,10 +16,9 @@ package com.liferay.wsrp.internal.upgrade.v1_0_0;
 
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBManagerUtil;
-import com.liferay.portal.kernel.dao.db.DBProcessContext;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.upgrade.UpgradeException;
-import com.liferay.portal.kernel.upgrade.UpgradeStep;
+import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.wsrp.model.WSRPConsumer;
 import com.liferay.wsrp.model.WSRPConsumerPortlet;
 import com.liferay.wsrp.model.WSRPProducer;
@@ -32,10 +31,11 @@ import java.util.List;
 /**
  * @author Peter Fellwock
  */
-public class WSRPUpgradeStep implements UpgradeStep {
+public class WSRPUpgradeStep extends UpgradeProcess {
 
 	@Override
-	public void upgrade(DBProcessContext dbProcessContext) {
+	protected void doUpgrade() throws Exception {
+		
 		updateWSRPConsumer();
 
 		updateWSRPConsumerPortlet();
@@ -43,8 +43,9 @@ public class WSRPUpgradeStep implements UpgradeStep {
 		updateVersion();
 
 		updateWSRPProducer();
+		
 	}
-
+	
 	protected void updateVersion() {
 		final DB db = DBManagerUtil.getDB();
 
