@@ -15,6 +15,7 @@
 package com.liferay.portal.kernel.increment;
 
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.ClassUtil;
 
 import java.lang.reflect.Constructor;
 
@@ -34,7 +35,7 @@ public class IncrementFactory {
 		}
 
 		try {
-			Class valueClass = value.getClass();
+			Class<?> valueClass = value.getClass();
 
 			do {
 				try {
@@ -48,8 +49,9 @@ public class IncrementFactory {
 
 					if (valueClass.equals(Object.class)) {
 						throw new SystemException(
-							"Invalid Increment provided: " + counterClass +
-								" cannot increment type " + value.getClass());
+							counterClass.getName() +
+								" is unable to increment " +
+									ClassUtil.getClassName(value));
 					}
 				}
 			}

@@ -128,7 +128,7 @@ public class BufferedIncrementAdvice
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Error incrementing", e);
+				_log.warn("Unable to increment", e);
 			}
 		}
 
