@@ -436,8 +436,7 @@ public class JournalArticleImpl extends JournalArticleBaseImpl {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, only used for backwards compatibility when
-	 *             importing LARs from themes
+	 * @deprecated As of 7.0.0
 	 */
 	@Deprecated
 	public String getLegacyDescription() {
@@ -445,8 +444,7 @@ public class JournalArticleImpl extends JournalArticleBaseImpl {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, only used for backwards compatibility when
-	 *             importing LARs from themes
+	 * @deprecated As of 7.0.0
 	 */
 	@Deprecated
 	public String getLegacyTitle() {
@@ -605,7 +603,7 @@ public class JournalArticleImpl extends JournalArticleBaseImpl {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, only used for backwards compatibility
+	 * @deprecated As of 7.0.0
 	 */
 	@Deprecated
 	public void setDescription(String description) {
@@ -650,7 +648,7 @@ public class JournalArticleImpl extends JournalArticleBaseImpl {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, only used for backwards compatibility
+	 * @deprecated As of 7.0.0
 	 */
 	@Deprecated
 	public void setTitle(String title) {
@@ -665,7 +663,7 @@ public class JournalArticleImpl extends JournalArticleBaseImpl {
 		JournalArticleImpl.class);
 
 	/**
-	 * @deprecated As of 7.0.0, only used for backwards compatibility
+	 * @deprecated As of 7.0.0
 	 */
 	@Deprecated
 	private String _description;
@@ -679,7 +677,7 @@ public class JournalArticleImpl extends JournalArticleBaseImpl {
 	private String _smallImageType;
 
 	/**
-	 * @deprecated As of 7.0.0, only used for backwards compatibility
+	 * @deprecated As of 7.0.0
 	 */
 	@Deprecated
 	private String _title;
