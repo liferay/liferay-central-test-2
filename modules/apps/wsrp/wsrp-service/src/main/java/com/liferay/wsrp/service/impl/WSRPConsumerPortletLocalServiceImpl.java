@@ -515,12 +515,10 @@ public class WSRPConsumerPortletLocalServiceImpl
 		portlet = portletLocalService.clonePortlet(_CONSUMER_PORTLET_ID);
 
 		portlet.setCompanyId(companyId);
-		portlet.setPortletId(portletId);
-
-		portlet.setPortletApp(_consumerPortlet.getPortletApp());
-
-		portlet.setPortletName(portletId);
 		portlet.setDisplayName(portletId);
+		portlet.setPortletApp(_consumerPortlet.getPortletApp());
+		portlet.setPortletId(portletId);
+		portlet.setPortletName(portletId);
 
 		Map<String, String> initParams = portlet.getInitParams();
 
