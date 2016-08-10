@@ -35,7 +35,6 @@ public class UpgradeWSRPServices extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		
 		updateWSRPConsumer();
 
 		updateWSRPConsumerPortlet();
@@ -43,9 +42,8 @@ public class UpgradeWSRPServices extends UpgradeProcess {
 		updateVersion();
 
 		updateWSRPProducer();
-		
 	}
-	
+
 	protected void updateVersion() {
 		final DB db = DBManagerUtil.getDB();
 
