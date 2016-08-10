@@ -70,19 +70,8 @@ public class HelloSoyPortlet extends SoyPortlet {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
-		PortletURL navigationURL = renderResponse.createRenderURL();
-
-		navigationURL.setParameter(
-			"mvcRenderCommandName", "hello_soy_navigation");
-
-		template.put("navigationURL", navigationURL.toString());
-
 		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
-
-		User user = themeDisplay.getUser();
-
-		template.put("userName", user.getFirstName());
 
 		Layout layout = themeDisplay.getLayout();
 
@@ -90,6 +79,17 @@ public class HelloSoyPortlet extends SoyPortlet {
 			themeDisplay.getScopeGroupId(), layout.isPrivateLayout());
 
 		template.put("layouts", layouts);
+
+		PortletURL navigationURL = renderResponse.createRenderURL();
+
+		navigationURL.setParameter(
+			"mvcRenderCommandName", "hello_soy_navigation");
+
+		template.put("navigationURL", navigationURL.toString());
+
+		User user = themeDisplay.getUser();
+
+		template.put("userName", user.getFirstName());
 
 		super.render(renderRequest, renderResponse);
 	}
