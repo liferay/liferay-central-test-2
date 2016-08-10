@@ -12,9 +12,10 @@
  * details.
  */
 
-package com.liferay.wsrp.configuration;
+package com.liferay.wsrp.configuration.definition;
 
 import com.liferay.portal.kernel.settings.definition.ConfigurationBeanDeclaration;
+import com.liferay.wsrp.configuration.WSRPGroupServiceConfiguration;
 
 import org.osgi.service.component.annotations.Component;
 
