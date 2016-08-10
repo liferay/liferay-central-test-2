@@ -44,7 +44,6 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.ClassRule;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -62,7 +61,6 @@ import java.util.Set;
 /**
  * @generated
  */
-@Ignore
 @RunWith(Arquillian.class)
 public class WSRPConsumerPersistenceTest {
 	@ClassRule
@@ -237,8 +235,7 @@ public class WSRPConsumerPersistenceTest {
 	protected OrderByComparator<WSRPConsumer> getOrderByComparator() {
 		return OrderByComparatorFactoryUtil.create("WSRP_WSRPConsumer", "uuid",
 			true, "wsrpConsumerId", true, "companyId", true, "createDate",
-			true, "modifiedDate", true, "name", true, "url", true, "wsdl",
-			true, "registrationContextString", true,
+			true, "modifiedDate", true, "name", true, "url", true,
 			"registrationPropertiesString", true, "forwardCookies", true,
 			"forwardHeaders", true, "markupCharacterSets", true,
 			"lastPublishDate", true);
