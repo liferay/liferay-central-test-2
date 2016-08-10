@@ -50,23 +50,26 @@ public class DDMFormFieldEvaluationResult {
 			return false;
 		}
 
-		DDMFormFieldEvaluationResult other = (DDMFormFieldEvaluationResult)obj;
+		DDMFormFieldEvaluationResult ddmFormFieldEvaluationResult =
+			(DDMFormFieldEvaluationResult)obj;
 
 		if (_instanceId == null) {
-			if (other._instanceId != null) {
+			if (ddmFormFieldEvaluationResult._instanceId != null) {
 				return false;
 			}
 		}
-		else if (!_instanceId.equals(other._instanceId)) {
+		else if (!_instanceId.equals(
+					ddmFormFieldEvaluationResult._instanceId)) {
+
 			return false;
 		}
 
 		if (_name == null) {
-			if (other._name != null) {
+			if (ddmFormFieldEvaluationResult._name != null) {
 				return false;
 			}
 		}
-		else if (!_name.equals(other._name)) {
+		else if (!_name.equals(ddmFormFieldEvaluationResult._name)) {
 			return false;
 		}
 
