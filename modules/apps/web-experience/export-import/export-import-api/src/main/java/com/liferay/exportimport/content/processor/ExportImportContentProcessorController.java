@@ -155,14 +155,15 @@ public class ExportImportContentProcessorController {
 		}
 		catch (ClassCastException cce) {
 			if (_log.isWarnEnabled()) {
-				Class genericExportImportContentProcessorClass =
+				Class<?> genericExportImportContentProcessorClass =
 					genericExportImportContentProcessor.getClass();
 
+				String className =
+					genericExportImportContentProcessorClass.getSimpleName();
+
 				_log.warn(
-					"Skipping " +
-						genericExportImportContentProcessorClass.
-							getSimpleName() +
-							" due to unsupported content type");
+					"Skipping " + className +
+						" due to unsupported content type");
 			}
 		}
 

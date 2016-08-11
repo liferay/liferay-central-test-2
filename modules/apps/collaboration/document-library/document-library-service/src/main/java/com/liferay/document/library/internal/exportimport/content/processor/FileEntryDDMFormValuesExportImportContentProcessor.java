@@ -62,10 +62,10 @@ public class FileEntryDDMFormValuesExportImportContentProcessor
 
 	@Override
 	public boolean validateContentReferences(
-		long groupId, DDMFormValues content) {
+		long groupId, DDMFormValues ddmFormValues) {
 
 		return ddmFormValuesExportImportContentProcessor.
-			validateContentReferences(groupId, content);
+			validateContentReferences(groupId, ddmFormValues);
 	}
 
 	@Reference
