@@ -114,26 +114,26 @@ public class ExportImportContentProcessorRegistryUtil {
 					serviceReference.getProperty("content.processor.order"), 1);
 
 				ArrayList<ExportImportContentProcessor<?, ?>>
-					exportImportContentProcessorList =
+					exportImportContentProcessors =
 						_exportImportContentProcessors.get(modelClassName);
 
-				if (exportImportContentProcessorList == null) {
-					exportImportContentProcessorList = new ArrayList<>();
+				if (exportImportContentProcessors == null) {
+					exportImportContentProcessors = new ArrayList<>();
 				}
 
-				int capacity = exportImportContentProcessorList.size() + 1;
+				int capacity = exportImportContentProcessors.size() + 1;
 
-				exportImportContentProcessorList.ensureCapacity(capacity);
+				exportImportContentProcessors.ensureCapacity(capacity);
 
 				order = Math.max(0, order);
 
 				order = Math.min(capacity, order) - 1;
 
-				exportImportContentProcessorList.add(
+				exportImportContentProcessors.add(
 					order, exportImportContentProcessor);
 
 				_exportImportContentProcessors.put(
-					modelClassName, exportImportContentProcessorList);
+					modelClassName, exportImportContentProcessors);
 			}
 
 			return exportImportContentProcessor;
@@ -161,13 +161,13 @@ public class ExportImportContentProcessorRegistryUtil {
 
 			for (String modelClassName : modelClassNames) {
 				List<ExportImportContentProcessor<?, ?>>
-					exportImportContentProcessorList =
+					exportImportContentProcessors =
 						_exportImportContentProcessors.get(modelClassName);
 
-				exportImportContentProcessorList.remove(
+				exportImportContentProcessors.remove(
 					exportImportContentProcessor);
 
-				if (exportImportContentProcessorList.isEmpty()) {
+				if (exportImportContentProcessors.isEmpty()) {
 					_exportImportContentProcessors.remove(modelClassName);
 				}
 			}
