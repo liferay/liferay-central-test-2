@@ -14,10 +14,7 @@
 
 package com.liferay.wsrp.internal.upgrade.v1_0_0;
 
-import com.liferay.portal.kernel.dao.db.DB;
-import com.liferay.portal.kernel.dao.db.DBManagerUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
-import com.liferay.portal.kernel.upgrade.UpgradeException;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.wsrp.model.WSRPConsumer;
 import com.liferay.wsrp.model.WSRPConsumerPortlet;
@@ -39,25 +36,10 @@ public class UpgradeWSRPServices extends UpgradeProcess {
 
 		updateWSRPConsumerPortlet();
 
-		updateVersion();
-
 		updateWSRPProducer();
 	}
 
-	protected void updateVersion() {
-		final DB db = DBManagerUtil.getDB();
-
-		try {
-			db.runSQL(
-				"update WSRP_WSRPProducer set version = '2.0' where version " +
-					"is null or version = ''");
-		}
-		catch (Exception e) {
-			new UpgradeException(e);
-		}
-	}
-
-	protected void updateWSRPConsumer() {
+	protected void updateWSRPConsumer() throws Exception {
 		List<WSRPConsumer> wsrpConsumers =
 			WSRPConsumerLocalServiceUtil.getWSRPConsumers(
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS);
@@ -67,7 +49,7 @@ public class UpgradeWSRPServices extends UpgradeProcess {
 		}
 	}
 
-	protected void updateWSRPConsumerPortlet() {
+	protected void updateWSRPConsumerPortlet() throws Exception {
 		List<WSRPConsumerPortlet> wsrpConsumerPortlets =
 			WSRPConsumerPortletLocalServiceUtil.getWSRPConsumerPortlets(
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS);
@@ -78,7 +60,11 @@ public class UpgradeWSRPServices extends UpgradeProcess {
 		}
 	}
 
-	protected void updateWSRPProducer() {
+	protected void updateWSRPProducer() throws Exception {
+		runSQL(
+			"update WSRP_WSRPProducer set version = '2.0' where version is " +
+				"null or version = ''");
+
 		List<WSRPProducer> wsrpProducers =
 			WSRPProducerLocalServiceUtil.getWSRPProducers(
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS);
