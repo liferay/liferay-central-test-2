@@ -45,7 +45,7 @@ public class PQLOperatorTest extends TestCase {
 
 		for (String operator : operators) {
 			_validateOperatorError(
-				operator, "Invalid '" + operator + "' operator.");
+				operator, "Invalid '" + operator + "' operator");
 		}
 	}
 
@@ -75,7 +75,7 @@ public class PQLOperatorTest extends TestCase {
 		}
 		finally {
 			if (actual == null) {
-				throw new Exception("No error thrown for invalid PQLOperator.");
+				throw new Exception("No error thrown for invalid PQLOperator");
 			}
 		}
 	}
