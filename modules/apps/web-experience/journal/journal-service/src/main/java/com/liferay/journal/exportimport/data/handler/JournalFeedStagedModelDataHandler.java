@@ -326,6 +326,9 @@ public class JournalFeedStagedModelDataHandler
 		_ddmTemplateLocalService = ddmTemplateLocalService;
 	}
 
+	/**
+	 * @deprecated As of 7.0.0
+	 */
 	@Deprecated
 	protected void setJournalFeedExportImportContentProcessor(
 		JournalFeedExportImportContentProcessor
