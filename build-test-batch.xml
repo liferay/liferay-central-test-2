@@ -1832,15 +1832,12 @@ information. Make sure to commit in all build services results.
 	<target name="subrepository-semantic-versioning-jdk8">
 		<echo>Deleting stale baseline log files.</echo>
 
-		<for param="log.file">
+		<delete failonerror="false">
 			<fileset dir="${project.dir}">
 				<include name="baseline-reports/*.log" />
 				<include name="modules/**/baseline.log" />
 			</fileset>
-			<sequential>
-				<delete file="@{log.file}" />
-			</sequential>
-		</for>
+		</delete>
 
 		<echo file="build.${user.name}.properties">baseline.jar.report.level=persist</echo>
 
