@@ -56,15 +56,15 @@ public class ExtensionHelperUtil {
 	}
 
 	public static void initialize() {
-		WSRPGroupServiceConfiguration wSRPGroupServiceConfiguration =
+		WSRPGroupServiceConfiguration wsrpGroupServiceConfiguration =
 			WSRPConfigurationUtil.getWSRPConfiguration();
 
 		try {
 			if (Validator.isNotNull(
-					wSRPGroupServiceConfiguration.extensionHelperImpl())) {
+					wsrpGroupServiceConfiguration.extensionHelperImpl())) {
 
 				_extensionHelper = (ExtensionHelper)InstanceFactory.newInstance(
-					wSRPGroupServiceConfiguration.extensionHelperImpl());
+					wsrpGroupServiceConfiguration.extensionHelperImpl());
 			}
 		}
 		catch (Exception e) {

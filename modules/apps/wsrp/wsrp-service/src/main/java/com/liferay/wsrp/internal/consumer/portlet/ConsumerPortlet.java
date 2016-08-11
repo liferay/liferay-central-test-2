@@ -270,7 +270,7 @@ public class ConsumerPortlet extends MVCPortlet {
 	@Activate
 	@Modified
 	protected void activate(Map<String, Object> properties) {
-		_wSRPGroupServiceConfiguration = ConfigurableUtil.createConfigurable(
+		_wsrpGroupServiceConfiguration = ConfigurableUtil.createConfigurable(
 			WSRPGroupServiceConfiguration.class, properties);
 	}
 
@@ -308,7 +308,7 @@ public class ConsumerPortlet extends MVCPortlet {
 
 		sb.append(resourceID);
 		sb.append(url);
-		sb.append(_wSRPGroupServiceConfiguration.soapDebug());
+		sb.append(_wsrpGroupServiceConfiguration.soapDebug());
 
 		String expectedWsrpAuth = encodeWSRPAuth(
 			resourceRequest, sb.toString());
@@ -454,7 +454,7 @@ public class ConsumerPortlet extends MVCPortlet {
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws Exception {
 
-		if (_wSRPGroupServiceConfiguration.secureResourceUrlsEnabled()) {
+		if (_wsrpGroupServiceConfiguration.secureResourceUrlsEnabled()) {
 			if (!authorize(resourceRequest, resourceResponse)) {
 				return;
 			}
@@ -1902,7 +1902,7 @@ public class ConsumerPortlet extends MVCPortlet {
 			liferayPortletURL =
 				(LiferayPortletURL)liferayPortletResponse.createResourceURL();
 
-			if (_wSRPGroupServiceConfiguration.secureResourceUrlsEnabled()) {
+			if (_wsrpGroupServiceConfiguration.secureResourceUrlsEnabled()) {
 				secureResourceURL(
 					portletRequest, liferayPortletURL, parameterMap);
 			}
@@ -2064,7 +2064,7 @@ public class ConsumerPortlet extends MVCPortlet {
 
 		sb.append(resourceID);
 		sb.append(url);
-		sb.append(_wSRPGroupServiceConfiguration.secureResourceUrlsSalt());
+		sb.append(_wsrpGroupServiceConfiguration.secureResourceUrlsSalt());
 
 		if (themeDisplay.isSignedIn()) {
 			sb.append(AuthTokenUtil.getToken(request));
@@ -2174,6 +2174,6 @@ public class ConsumerPortlet extends MVCPortlet {
 	private static WebsiteLocalService _websiteLocalService;
 
 	private volatile WSRPGroupServiceConfiguration
-		_wSRPGroupServiceConfiguration;
+		_wsrpGroupServiceConfiguration;
 
 }
