@@ -1829,6 +1829,54 @@ information. Make sure to commit in all build services results.
 		</gradle-execute>
 	</target>
 
+	<target name="subrepository-semantic-versioning-jdk8">
+		<echo>Deleting stale baseline log files.</echo>
+
+		<for param="log.file">
+			<fileset dir="${project.dir}">
+				<include name="baseline-reports/*.log" />
+				<include name="modules/**/baseline.log" />
+			</fileset>
+			<sequential>
+				<delete file="@{log.file}" />
+			</sequential>
+		</for>
+
+		<echo file="build.${user.name}.properties">baseline.jar.report.level=persist</echo>
+
+		<echo>Executing baseline on ${subrepository.dir}.</echo>
+
+		<gradle-execute dir="${subrepository.dir}" forcedcacheenabled="false" task="baseline" />
+
+		<echo>Checking for baseline log files.</echo>
+
+		<var name="log.files" unset="true" />
+
+		<fileset dir="${project.dir}" id="log.files">
+			<include name="baseline-reports/*.log" />
+			<include name="modules/**/baseline.log" />
+		</fileset>
+
+		<pathconvert pathsep="," property="log.files" refid="log.files" />
+
+		<for list="${log.files}" param="log.file">
+			<sequential>
+				<print-file file.name="@{log.file}" />
+			</sequential>
+		</for>
+
+		<if>
+			<not>
+				<equals arg1="${log.files}" arg2="" />
+			</not>
+			<then>
+				<fail message="Semantic versioning is incorrect." />
+			</then>
+		</if>
+
+		<echo>Check for baseline log files completed.</echo>
+	</target>
+
 	<target name="sybase-service-start">
 		<local name="database.type" />
 
