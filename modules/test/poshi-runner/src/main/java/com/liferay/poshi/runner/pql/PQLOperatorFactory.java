@@ -39,7 +39,7 @@ public class PQLOperatorFactory {
 					if ((value1 == null) || (value2 == null)) {
 						throw new Exception(
 							"'" + operator + "' operators must be " +
-								"surrounded by 2 boolean values.");
+								"surrounded by 2 boolean values");
 					}
 
 					if (!(value1 instanceof Boolean) ||
@@ -47,7 +47,7 @@ public class PQLOperatorFactory {
 
 						throw new Exception(
 							"'" + operator + "' operators must be " +
-								"surrounded by 2 boolean values.");
+								"surrounded by 2 boolean values");
 					}
 
 					Boolean booleanValue1 = (Boolean)value1;
@@ -61,7 +61,7 @@ public class PQLOperatorFactory {
 					}
 
 					throw new Exception(
-						"Unsupported '" + operator + "' operator.");
+						"Unsupported '" + operator + "' operator");
 				}
 
 			};
@@ -87,7 +87,7 @@ public class PQLOperatorFactory {
 
 						throw new Exception(
 							"The '" + operator + "' operator only works " +
-								"for string values.");
+								"for string values");
 					}
 
 					String stringValue1 = (String)value1;
@@ -101,7 +101,7 @@ public class PQLOperatorFactory {
 					}
 
 					throw new Exception(
-						"Unsupported '" + operator + "' operator.");
+						"Unsupported '" + operator + "' operator");
 				}
 
 			};
@@ -130,7 +130,7 @@ public class PQLOperatorFactory {
 					}
 
 					throw new Exception(
-						"Unsupported '" + operator + "' operator.");
+						"Unsupported '" + operator + "' operator");
 				}
 
 			};
@@ -152,7 +152,7 @@ public class PQLOperatorFactory {
 					if ((value1 == null) || (value2 == null)) {
 						throw new Exception(
 							"The '" + operator + "' operator only works " +
-								"for number values.");
+								"for number values");
 					}
 
 					if ((value1 instanceof Double ||
@@ -195,18 +195,18 @@ public class PQLOperatorFactory {
 						}
 
 						throw new Exception(
-							"Unsupported '" + operator + "' operator.");
+							"Unsupported '" + operator + "' operator");
 					}
 
 					throw new Exception(
 						"The '" + operator + "' operator only works for " +
-							"number values.");
+							"number values");
 				}
 
 			};
 		}
 
-		throw new Exception("Unsupported '" + operator + "' operator.");
+		throw new Exception("Unsupported '" + operator + "' operator");
 	}
 
 }
