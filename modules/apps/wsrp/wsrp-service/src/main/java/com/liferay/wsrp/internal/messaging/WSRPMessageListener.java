@@ -68,7 +68,7 @@ public class WSRPMessageListener extends HotDeployMessageListener {
 		}
 		catch (PortalException pe) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Unable to destroy WSRP Consumer Portlets", pe);
+				_log.warn("Unable to destroy WSRP consumer portlets", pe);
 			}
 		}
 
@@ -82,7 +82,7 @@ public class WSRPMessageListener extends HotDeployMessageListener {
 		}
 		catch (PortalException pe) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Unable to destroy WSRP Consumer Portlets", pe);
+				_log.warn("Unable to destroy WSRP consumer portlets", pe);
 			}
 		}
 	}
@@ -117,13 +117,13 @@ public class WSRPMessageListener extends HotDeployMessageListener {
 				mBeanServer.registerMBean(
 					new WSRPConsumerPortletManager(),
 					new ObjectName(
-						"com.liferay.wsrp:classification=wsrp," +
-							"name=WSRPConsumerPortletManager"));
+						"com.liferay.wsrp:classification=wsrp,name=" +
+							"WSRPConsumerPortletManager"));
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
-						"Unable to register WSRPConsumerPortletManager", e);
+						"Unable to register WSRP consumer portlet manager", e);
 				}
 			}
 

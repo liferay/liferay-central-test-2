@@ -75,11 +75,11 @@ public class ConsumerRequestExtensionsHelper {
 	}
 
 	private void _initConsumerRequestExtensions() throws Exception {
-		WSRPGroupServiceConfiguration wSRPGroupServiceConfiguration =
+		WSRPGroupServiceConfiguration wsrpGroupServiceConfiguration =
 			WSRPConfigurationUtil.getWSRPConfiguration();
 
 		String[] consumerRequestExtensionsClassNames =
-			wSRPGroupServiceConfiguration.consumerRequestExtensions();
+			wsrpGroupServiceConfiguration.consumerRequestExtensions();
 
 		if (consumerRequestExtensionsClassNames.length == 0) {
 			return;

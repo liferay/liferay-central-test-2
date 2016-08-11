@@ -58,7 +58,7 @@ public class ServiceHandler implements InvocationHandler {
 		String forwardCookies, String forwardHeaders, String userToken,
 		boolean v2) {
 
-		_wSRPGroupServiceConfiguration =
+		_wsrpGroupServiceConfiguration =
 			WSRPConfigurationUtil.getWSRPConfiguration();
 
 		_engineConfiguration = getEngineConfiguration(
@@ -192,7 +192,7 @@ public class ServiceHandler implements InvocationHandler {
 
 		Handler logHandler = new LogHandler();
 
-		if (_wSRPGroupServiceConfiguration.soapDebug()) {
+		if (_wsrpGroupServiceConfiguration.soapDebug()) {
 			requestSimpleChain.addHandler(logHandler);
 		}
 
@@ -215,7 +215,7 @@ public class ServiceHandler implements InvocationHandler {
 
 		SimpleChain responseSimpleChain = new SimpleChain();
 
-		if (_wSRPGroupServiceConfiguration.soapDebug()) {
+		if (_wsrpGroupServiceConfiguration.soapDebug()) {
 			responseSimpleChain.addHandler(logHandler);
 		}
 
@@ -248,6 +248,6 @@ public class ServiceHandler implements InvocationHandler {
 	private final Service _serviceLocator;
 	private final boolean _v2;
 	private final String _version;
-	private final WSRPGroupServiceConfiguration _wSRPGroupServiceConfiguration;
+	private final WSRPGroupServiceConfiguration _wsrpGroupServiceConfiguration;
 
 }

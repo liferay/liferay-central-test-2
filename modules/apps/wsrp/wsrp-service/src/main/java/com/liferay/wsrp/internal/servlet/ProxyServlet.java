@@ -85,11 +85,11 @@ public class ProxyServlet extends HttpServlet {
 	}
 
 	protected boolean isAllowedURL(String url) throws Exception {
-		WSRPGroupServiceConfiguration wSRPGroupServiceConfiguration =
+		WSRPGroupServiceConfiguration wsrpGroupServiceConfiguration =
 			WSRPConfigurationUtil.getWSRPConfiguration();
 
 		String[] allowedIps =
-			wSRPGroupServiceConfiguration.proxyUrlIpsAllowed();
+			wsrpGroupServiceConfiguration.proxyUrlIpsAllowed();
 
 		if (allowedIps.length == 0) {
 			return true;

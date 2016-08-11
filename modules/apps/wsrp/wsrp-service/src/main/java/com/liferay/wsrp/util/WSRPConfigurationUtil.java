@@ -35,13 +35,13 @@ import org.osgi.service.component.annotations.Modified;
 public class WSRPConfigurationUtil {
 
 	public static WSRPGroupServiceConfiguration getWSRPConfiguration() {
-		return _getInstance()._wSRPGroupServiceConfiguration;
+		return _getInstance()._wsrpGroupServiceConfiguration;
 	}
 
 	@Activate
 	@Modified
 	protected void activate(Map<String, Object> properties) {
-		_wSRPGroupServiceConfiguration = ConfigurableUtil.createConfigurable(
+		_wsrpGroupServiceConfiguration = ConfigurableUtil.createConfigurable(
 			WSRPGroupServiceConfiguration.class, properties);
 	}
 
@@ -53,6 +53,6 @@ public class WSRPConfigurationUtil {
 		new WSRPConfigurationUtil();
 
 	private static volatile WSRPGroupServiceConfiguration
-		_wSRPGroupServiceConfiguration;
+		_wsrpGroupServiceConfiguration;
 
 }
