@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.wsrp.web.upgrade.v1_0_0;
+package com.liferay.wsrp.web.internal.upgrade.v1_0_0;
 
 import com.liferay.portal.kernel.upgrade.BaseUpgradePortletId;
 import com.liferay.wsrp.constants.WSRPPortletKeys;
