@@ -99,13 +99,6 @@ public class ServiceHandler implements InvocationHandler {
 			return markupService;
 		}
 
-		/**
-		Thread currentThread = Thread.currentThread();
-
-		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
-
-		**/
-
 		ClassLoader contextClassLoader = WSRPPortletKeys.class.getClassLoader();
 
 		URL bindingURL = (URL)args[0];
