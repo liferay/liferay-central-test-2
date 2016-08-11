@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.wsrp.web.portlet;
+package com.liferay.wsrp.web.internal.portlet;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;

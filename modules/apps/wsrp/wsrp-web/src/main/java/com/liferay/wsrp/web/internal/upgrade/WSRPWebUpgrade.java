@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.wsrp.web.upgrade;
+package com.liferay.wsrp.web.internal.upgrade;
 
 import com.liferay.portal.kernel.module.framework.ModuleServiceLifecycle;
 import com.liferay.portal.kernel.upgrade.DummyUpgradeStep;
