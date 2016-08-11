@@ -979,6 +979,9 @@ public class JournalArticleStagedModelDataHandler
 		_imageLocalService = imageLocalService;
 	}
 
+	/**
+	 * @deprecated As of 7.0.0
+	 */
 	@Deprecated
 	protected void setJournalArticleExportImportContentProcessor(
 		JournalArticleExportImportContentProcessor
