@@ -146,6 +146,9 @@ public abstract class BaseStagedModelDataHandler<T extends StagedModel>
 			portletDataContext, stagedModel);
 	}
 
+	/**
+	 * @deprecated As of 7.0.0
+	 */
 	@Deprecated
 	protected ExportImportContentProcessor getExportImportContentProcessor(
 		Class<T> clazz) {
