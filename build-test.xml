@@ -2588,7 +2588,7 @@ go</echo>
 				<arg value="restart" />
 			</exec>
 
-			<echo>Sleep for 30 seconds</echo>
+			<echo>Sleep for 30 seconds.</echo>
 
 			<sleep seconds="30" />
 
@@ -2599,7 +2599,7 @@ go</echo>
 				<arg value="restart" />
 			</exec>
 
-			<echo>Sleep for 30 seconds</echo>
+			<echo>Sleep for 30 seconds.</echo>
 
 			<sleep seconds="30" />
 
