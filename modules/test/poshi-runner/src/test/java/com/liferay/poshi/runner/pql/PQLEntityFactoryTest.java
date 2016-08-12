@@ -81,42 +81,44 @@ public class PQLEntityFactoryTest extends TestCase {
 		_validateVariableResult("\"test test\"", "test test");
 	}
 
-	private static void _validateQueryResult(String query, Object expected)
+	private static void _validateQueryResult(
+			String query, Object expectedResult)
 		throws Exception {
 
-		_validateQueryResult(query, expected, new Properties());
+		_validateQueryResult(query, expectedResult, new Properties());
 	}
 
 	private static void _validateQueryResult(
-			String query, Object expected, Properties properties)
+			String query, Object expectedResult, Properties properties)
 		throws Exception {
 
 		PQLEntity pqlEntity = PQLEntityFactory.newPQLEntity(query);
 
-		Object actual = pqlEntity.getValue(properties);
+		Object actualResult = pqlEntity.getValue(properties);
 
-		if (!actual.equals(expected)) {
+		if (!actualResult.equals(expectedResult)) {
 			StringBuilder sb = new StringBuilder();
 
 			sb.append("Mismatched result within the following query:\n");
 			sb.append(query);
 			sb.append("\n* Actual:   ");
-			sb.append(actual);
+			sb.append(actualResult);
 			sb.append("\n* Expected: ");
-			sb.append(expected);
+			sb.append(expectedResult);
 
 			throw new Exception(sb.toString());
 		}
 	}
 
-	private static void _validateVariableResult(String query, Object expected)
+	private static void _validateVariableResult(
+			String query, Object expectedResult)
 		throws Exception {
 
 		Properties properties = new Properties();
 
 		properties.put("portal.smoke", query);
 
-		_validateQueryResult("portal.smoke", expected, properties);
+		_validateQueryResult("portal.smoke", expectedResult, properties);
 	}
 
 }
