@@ -94,32 +94,32 @@ public class PQLVariableTest extends TestCase {
 		}
 	}
 
-	private void _validateVariableResult(String pql, Object expectedObject)
+	private void _validateVariableResult(String pql, Object expectedResult)
 		throws Exception {
 
 		Properties properties = new Properties();
 
 		properties.put("portal.smoke", pql);
 
-		Class clazz = expectedObject.getClass();
+		Class clazz = expectedResult.getClass();
 
 		PQLVariable pqlVariable = new PQLVariable("portal.smoke");
 
-		Object actualObject = pqlVariable.getValue(properties);
+		Object actualResult = pqlVariable.getValue(properties);
 
-		if (!clazz.isInstance(actualObject)) {
+		if (!clazz.isInstance(actualResult)) {
 			throw new Exception(pql + " should be of type: " + clazz.getName());
 		}
 
-		if (!actualObject.equals(expectedObject)) {
+		if (!actualResult.equals(expectedResult)) {
 			StringBuilder sb = new StringBuilder();
 
 			sb.append("Mismatched result within the following PQL:\n");
 			sb.append(pql);
 			sb.append("\n* Actual:   ");
-			sb.append(actualObject);
+			sb.append(actualResult);
 			sb.append("\n* Expected: ");
-			sb.append(expectedObject);
+			sb.append(expectedResult);
 
 			throw new Exception(sb.toString());
 		}
