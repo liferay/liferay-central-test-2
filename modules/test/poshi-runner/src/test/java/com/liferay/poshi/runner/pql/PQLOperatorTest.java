@@ -378,7 +378,7 @@ public class PQLOperatorTest extends TestCase {
 			if (!actualError.equals(expectedError)) {
 				StringBuilder sb = new StringBuilder();
 
-				sb.append("Mismatched error for PQLOperator validation:");
+				sb.append("Mismatched error for PQL operator validation:");
 				sb.append("\n* Actual:   ");
 				sb.append(actualError);
 				sb.append("\n* Expected: ");
@@ -390,7 +390,7 @@ public class PQLOperatorTest extends TestCase {
 		finally {
 			if (actualError == null) {
 				throw new Exception(
-					"No error thrown for PQLOperator validation: " + operator);
+					"No error thrown for PQL operator validation: " + operator);
 			}
 		}
 	}

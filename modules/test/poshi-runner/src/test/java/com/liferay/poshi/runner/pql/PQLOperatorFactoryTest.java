@@ -66,7 +66,7 @@ public class PQLOperatorFactoryTest extends TestCase {
 			if (!actualError.equals(expectedError)) {
 				StringBuilder sb = new StringBuilder();
 
-				sb.append("Mismatched error thrown for new PQLOperators:");
+				sb.append("Mismatched error thrown for new PQL operators:");
 				sb.append("\n* Actual:   ");
 				sb.append(actualError);
 				sb.append("\n* Expected: ");
