@@ -51,7 +51,7 @@ public class StagedLayoutSetImpl implements StagedLayoutSet {
 	public StagedLayoutSetImpl(LayoutSet layoutSet) {
 		Objects.requireNonNull(
 			layoutSet,
-			"Cannot create a new StagedLayoutSet for a null LayoutSet");
+			"Unable to create a new staged layout set for a null layout set");
 
 		_layoutSet = layoutSet;
 
