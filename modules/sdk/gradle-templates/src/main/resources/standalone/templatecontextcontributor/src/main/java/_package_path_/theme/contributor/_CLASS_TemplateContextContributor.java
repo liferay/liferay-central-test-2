@@ -20,11 +20,7 @@ public class _CLASS_TemplateContextContributor
 	public void prepare(
 		Map<String, Object> contextObjects, HttpServletRequest request) {
 
-		// This variable can be used in any theme file. For example, you could
-		// add this code to the file portal_normal.ftl in your theme:
-		// <h1>${sample_text}</h1>
-
-		contextObjects.put("sample_text", "This is some sample text");
+		contextObjects.put("sample_text", "This is some sample text.");
 	}
 
 }

@@ -57,6 +57,7 @@ public class _CLASS_PortletToolbarContributor
 			"content.Language", getLocale(portletRequest), getClass());
 
 		menu.setMessage(LanguageUtil.get(resourceBundle, "list-of-links"));
+
 		menu.setScroll(false);
 		menu.setShowArrow(false);
 		menu.setShowWhenSingleIcon(true);
