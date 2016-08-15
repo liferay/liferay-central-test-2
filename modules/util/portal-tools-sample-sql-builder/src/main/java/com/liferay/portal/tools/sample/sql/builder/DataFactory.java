@@ -1164,13 +1164,13 @@ public class DataFactory {
 
 		long resourcePrimKey = journalArticleModel.getResourcePrimKey();
 
-		String resourceUuid = _journalArticleResourceUUIDs.get(resourcePrimKey);
+		String resourceUUID = _journalArticleResourceUUIDs.get(resourcePrimKey);
 
 		return newAssetEntryModel(
 			journalArticleModel.getGroupId(),
 			journalArticleModel.getCreateDate(),
 			journalArticleModel.getModifiedDate(),
-			getClassNameId(JournalArticle.class), resourcePrimKey, resourceUuid,
+			getClassNameId(JournalArticle.class), resourcePrimKey, resourceUUID,
 			_defaultJournalDDMStructureModel.getStructureId(),
 			journalArticleModel.isIndexable(), true, ContentTypes.TEXT_HTML,
 			journalArticleLocalizationModel.getTitle());
