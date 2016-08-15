@@ -75,7 +75,7 @@ public class ServiceWrapperRegistry {
 			}
 			catch (Throwable t) {
 				_log.error(
-					"Error obtaining service bag for : " +
+					"Unable to get service bag for " +
 						serviceWrapper.getClass(),
 					t);
 			}
