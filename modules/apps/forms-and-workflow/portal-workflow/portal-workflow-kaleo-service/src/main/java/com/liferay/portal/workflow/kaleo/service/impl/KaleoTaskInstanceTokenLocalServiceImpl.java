@@ -187,7 +187,7 @@ public class KaleoTaskInstanceTokenLocalServiceImpl
 		kaleoTaskAssignmentInstanceLocalService.
 			deleteCompanyKaleoTaskAssignmentInstances(companyId);
 
-		// Kaleo task assignment instances
+		// Kaleo task form instances
 
 		kaleoTaskFormInstanceLocalService.deleteCompanyKaleoTaskFormInstances(
 			companyId);
@@ -208,7 +208,7 @@ public class KaleoTaskInstanceTokenLocalServiceImpl
 			deleteKaleoDefinitionKaleoTaskAssignmentInstances(
 				kaleoDefinitionId);
 
-		// Kaleo task assignment instances
+		// Kaleo task form instances
 
 		kaleoTaskFormInstanceLocalService.
 			deleteKaleoDefinitionKaleoTaskFormInstances(kaleoDefinitionId);
@@ -228,7 +228,7 @@ public class KaleoTaskInstanceTokenLocalServiceImpl
 		kaleoTaskAssignmentInstanceLocalService.
 			deleteKaleoInstanceKaleoTaskAssignmentInstances(kaleoInstanceId);
 
-		// Kaleo task assignment instances
+		// Kaleo task form instances
 
 		kaleoTaskFormInstanceLocalService.
 			deleteKaleoInstanceKaleoTaskFormInstances(kaleoInstanceId);
@@ -464,11 +464,11 @@ public class KaleoTaskInstanceTokenLocalServiceImpl
 		int kaleoTaskFormsCount = kaleoTaskFormPersistence.countByKaleoTaskId(
 			kaleoTaskInstanceToken.getKaleoTaskId());
 
-		int kaleoTaskFormInstanceCount =
+		int kaleoTaskFormInstancesCount =
 			kaleoTaskFormInstancePersistence.countByKaleoTaskInstanceTokenId(
 				kaleoTaskInstanceTokenId);
 
-		if (kaleoTaskFormsCount > kaleoTaskFormInstanceCount) {
+		if (kaleoTaskFormsCount > kaleoTaskFormInstancesCount) {
 			return true;
 		}
 
