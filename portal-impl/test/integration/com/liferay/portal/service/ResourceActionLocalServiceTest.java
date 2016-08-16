@@ -47,7 +47,6 @@ public class ResourceActionLocalServiceTest {
 		List<String> actionIds = new ArrayList<>(3);
 
 		actionIds.add(ActionKeys.VIEW);
-
 		actionIds.add(_ACTION_ID_1);
 		actionIds.add(_ACTION_ID_2);
 
