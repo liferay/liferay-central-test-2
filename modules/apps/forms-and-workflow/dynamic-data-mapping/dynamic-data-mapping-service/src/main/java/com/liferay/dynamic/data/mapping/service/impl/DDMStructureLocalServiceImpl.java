@@ -1499,7 +1499,7 @@ public class DDMStructureLocalServiceImpl
 		return structureVersion;
 	}
 
-	protected Set<Long> collectDataProviderInstanceIds(
+	protected Set<Long> getDataProviderInstanceIds(
 		long groupId, DDMFormRule ddmFormRule) {
 
 		List<String> actions = ddmFormRule.getActions();
@@ -1649,7 +1649,7 @@ public class DDMStructureLocalServiceImpl
 
 		for (DDMFormRule ddmFormRule : ddmForm.getDDMFormRules()) {
 			Set<Long> ddmFormDataProviderInstanceIds =
-				collectDataProviderInstanceIds(groupId, ddmFormRule);
+				getDataProviderInstanceIds(groupId, ddmFormRule);
 
 			dataProviderInstanceIds.addAll(ddmFormDataProviderInstanceIds);
 		}
