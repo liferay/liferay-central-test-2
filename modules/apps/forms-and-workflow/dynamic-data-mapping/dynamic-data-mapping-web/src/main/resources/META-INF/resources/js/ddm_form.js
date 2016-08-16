@@ -1014,7 +1014,7 @@ AUI.add(
 						portletURL.setDoAsGroupId(instance.get('doAsGroupId'));
 						portletURL.setParameter('criteria', criteria);
 						portletURL.setParameter('itemSelectedEventName', portletNamespace + 'selectDocumentLibrary');
-						portletURL.setParameter('p_p_auth', container.getData('assetBrowserAuthToken'));
+						portletURL.setParameter('p_p_auth', container.getData('itemSelectorAuthToken'));
 
 						var criterionJSON = {
 							desiredItemSelectorReturnTypes: 'com.liferay.item.selector.criteria.FileEntryItemSelectorReturnType,com.liferay.item.selector.criteria.FileEntryItemSelectorReturnType'
