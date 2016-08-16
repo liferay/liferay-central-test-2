@@ -211,9 +211,9 @@
 		<execute macro="ProductMenu#gotoUserMyAccount">
 			<var name="portlet" value="Notifications" />
 		</execute>
-		
+
 		<execute macro="Notifications#viewNoRequest" />
 
 		<execute macro="Notifications#viewNoNotificationEntry" />
-	</command>	
+	</command>
 </definition>
