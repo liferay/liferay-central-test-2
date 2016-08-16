@@ -48,8 +48,6 @@ public class KaleoTaskFormInstanceLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		// Kaleo task form instance
-
 		User user = userPersistence.findByPrimaryKey(
 			serviceContext.getGuestOrUserId());
 		Date now = new Date();
@@ -92,7 +90,7 @@ public class KaleoTaskFormInstanceLocalServiceImpl
 			else {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
-						"No FormValueProcessor defined to for form: " +
+						"No form value processor defined to for form: " +
 							kaleoTaskForm.getKaleoTaskFormId() + " values: " +
 								formValues);
 				}

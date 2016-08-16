@@ -41,8 +41,6 @@ public class KaleoTaskFormLocalServiceImpl
 			TaskForm taskForm, ServiceContext serviceContext)
 		throws PortalException {
 
-		// Kaleo task
-
 		User user = userPersistence.findByPrimaryKey(
 			serviceContext.getGuestOrUserId());
 		Date now = new Date();
