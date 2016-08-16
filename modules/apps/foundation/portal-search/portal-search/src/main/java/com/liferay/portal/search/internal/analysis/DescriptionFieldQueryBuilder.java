@@ -38,13 +38,13 @@ public class DescriptionFieldQueryBuilder implements FieldQueryBuilder {
 
 	@Override
 	public Query build(String field, String keywords) {
-		FullTextQueryBuilder builder = new FullTextQueryBuilder(
+		FullTextQueryBuilder fullTextQueryBuilder = new FullTextQueryBuilder(
 			keywordTokenizer);
 
-		builder.setExactMatchBoost(_exactMatchBoost);
-		builder.setProximitySlop(_proximitySlop);
+		fullTextQueryBuilder.setExactMatchBoost(_exactMatchBoost);
+		fullTextQueryBuilder.setProximitySlop(_proximitySlop);
 
-		return builder.build(field, keywords);
+		return fullTextQueryBuilder.build(field, keywords);
 	}
 
 	@Activate
