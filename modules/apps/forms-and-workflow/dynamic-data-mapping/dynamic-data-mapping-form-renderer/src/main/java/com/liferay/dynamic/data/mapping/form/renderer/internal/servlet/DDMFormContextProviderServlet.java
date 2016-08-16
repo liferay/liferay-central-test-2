@@ -78,7 +78,7 @@ public class DDMFormContextProviderServlet extends HttpServlet {
 					request, response, ddmFormValues, defaultLocale,
 					portletNamespace);
 
-			_prepareThreadLocal(request, defaultLocale);
+			_prepareThreadLocal(defaultLocale);
 
 			DDMFormLayout ddmFormLayout = getDDMFormLayout(request);
 
@@ -178,7 +178,7 @@ public class DDMFormContextProviderServlet extends HttpServlet {
 			ddmForm, serializedDDMFormValues);
 	}
 
-	private void _prepareThreadLocal(HttpServletRequest request, Locale locale)
+	private void _prepareThreadLocal(Locale locale)
 		throws Exception, PortalException {
 
 		LocaleThreadLocal.setThemeDisplayLocale(locale);
