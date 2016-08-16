@@ -29,15 +29,10 @@ import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONSerializer;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.model.User;
-import com.liferay.portal.kernel.security.permission.PermissionChecker;
-import com.liferay.portal.kernel.security.permission.PermissionCheckerFactoryUtil;
-import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.servlet.ServletResponseUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.LocaleThreadLocal;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.PortalUtil;
 
 import java.io.IOException;
 
@@ -185,13 +180,6 @@ public class DDMFormContextProviderServlet extends HttpServlet {
 
 	private void _prepareThreadLocal(HttpServletRequest request, Locale locale)
 		throws Exception, PortalException {
-
-		User user = PortalUtil.getUser(request);
-
-		PermissionChecker permissionChecker =
-			PermissionCheckerFactoryUtil.create(user);
-
-		PermissionThreadLocal.setPermissionChecker(permissionChecker);
 
 		LocaleThreadLocal.setThemeDisplayLocale(locale);
 	}
