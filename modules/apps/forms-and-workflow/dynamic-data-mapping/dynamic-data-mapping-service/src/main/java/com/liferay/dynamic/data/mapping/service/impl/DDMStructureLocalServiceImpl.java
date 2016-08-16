@@ -1499,38 +1499,6 @@ public class DDMStructureLocalServiceImpl
 		return structureVersion;
 	}
 
-	protected Set<Long> getDataProviderInstanceIds(
-		long groupId, DDMFormRule ddmFormRule) {
-
-		List<String> actions = ddmFormRule.getActions();
-
-		if (ListUtil.isEmpty(actions)) {
-			return Collections.emptySet();
-		}
-
-		Set<Long> dataProviderInstanceIds = new HashSet<>(actions.size());
-
-		for (String action : actions) {
-			Matcher matcher = _callFunctionPattern.matcher(action);
-
-			while (matcher.find()) {
-				String dataProviderUuid = matcher.group(1);
-
-				DDMDataProviderInstance dataProviderInstance =
-					ddmDataProviderInstanceLocalService.
-						fetchDDMDataProviderInstanceByUuidAndGroupId(
-							dataProviderUuid, groupId);
-
-				if (dataProviderInstance != null) {
-					dataProviderInstanceIds.add(
-						dataProviderInstance.getDataProviderInstanceId());
-				}
-			}
-		}
-
-		return dataProviderInstanceIds;
-	}
-
 	protected Set<Long> deleteStructures(List<DDMStructure> structures)
 		throws PortalException {
 
@@ -1652,6 +1620,38 @@ public class DDMStructureLocalServiceImpl
 				getDataProviderInstanceIds(groupId, ddmFormRule);
 
 			dataProviderInstanceIds.addAll(ddmFormDataProviderInstanceIds);
+		}
+
+		return dataProviderInstanceIds;
+	}
+
+	protected Set<Long> getDataProviderInstanceIds(
+		long groupId, DDMFormRule ddmFormRule) {
+
+		List<String> actions = ddmFormRule.getActions();
+
+		if (ListUtil.isEmpty(actions)) {
+			return Collections.emptySet();
+		}
+
+		Set<Long> dataProviderInstanceIds = new HashSet<>(actions.size());
+
+		for (String action : actions) {
+			Matcher matcher = _callFunctionPattern.matcher(action);
+
+			while (matcher.find()) {
+				String dataProviderUuid = matcher.group(1);
+
+				DDMDataProviderInstance dataProviderInstance =
+					ddmDataProviderInstanceLocalService.
+						fetchDDMDataProviderInstanceByUuidAndGroupId(
+							dataProviderUuid, groupId);
+
+				if (dataProviderInstance != null) {
+					dataProviderInstanceIds.add(
+						dataProviderInstance.getDataProviderInstanceId());
+				}
+			}
 		}
 
 		return dataProviderInstanceIds;
