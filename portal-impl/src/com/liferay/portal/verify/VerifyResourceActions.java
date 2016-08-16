@@ -34,15 +34,16 @@ import java.util.Set;
 public class VerifyResourceActions extends VerifyProcess {
 
 	protected void deleteDuplicateBitwiseValuesOnResource() throws Exception {
-		String selectSQL =
-			"select ra1.resourceActionId, ra1.name, ra1.actionId, " +
-				"ra1.bitwiseValue from ResourceAction ra1 inner join " +
-					"ResourceAction ra2 on (ra1.name = ra2.name) and " +
-						"(ra1.bitwiseValue = ra2.bitwiseValue) and " +
-							"(ra1.actionId != ra2.actionId)";
+		StringBundler sb = new StringBundler(5);
+
+		sb.append("select ra1.resourceActionId, ra1.name, ra1.actionId, ");
+		sb.append("ra1.bitwiseValue from ResourceAction ra1 inner join ");
+		sb.append("ResourceAction ra2 on (ra1.name = ra2.name) and ");
+		sb.append("(ra1.bitwiseValue = ra2.bitwiseValue) and (ra1.actionId ");
+		sb.append("!= ra2.actionId)");
 
 		try (LoggingTimer loggingTimer = new LoggingTimer();
-			PreparedStatement ps = connection.prepareStatement(selectSQL);
+			PreparedStatement ps = connection.prepareStatement(sb.toString());
 			ResultSet rs = ps.executeQuery()) {
 
 			Map<String, Set<Long>> nameBitwiseValuesPairs = new HashMap<>();
