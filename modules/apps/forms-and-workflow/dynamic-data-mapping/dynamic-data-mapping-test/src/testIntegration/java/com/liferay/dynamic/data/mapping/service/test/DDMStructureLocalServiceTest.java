@@ -152,7 +152,7 @@ public class DDMStructureLocalServiceTest extends BaseDDMServiceTestCase {
 	}
 
 	@Test
-	public void testAddStructureWithReferencedDataProviderInstance()
+	public void testAddStructureWithReferencedDataProviderInstance1()
 		throws Exception {
 
 		DDMForm ddmForm = DDMFormTestUtil.createDDMForm();
