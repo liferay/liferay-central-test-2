@@ -64,7 +64,7 @@ public class VerifyResourceActions extends VerifyProcess {
 				}
 
 				if (_log.isInfoEnabled()) {
-					StringBundler sb = new StringBundler(7);
+					sb = new StringBundler(7);
 
 					sb.append("Deleting resource action ");
 					sb.append(rs.getString("actionId"));
