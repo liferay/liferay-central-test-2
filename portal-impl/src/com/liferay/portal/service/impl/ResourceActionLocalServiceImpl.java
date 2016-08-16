@@ -235,12 +235,10 @@ public class ResourceActionLocalServiceImpl
 				ActionableDynamicQuery resourceBlockActionableDynamicQuery =
 					resourceBlockLocalService.getActionableDynamicQuery();
 
-				resourceBlockActionableDynamicQuery.setCompanyId(
-					company.getCompanyId());
-
 				resourceBlockActionableDynamicQuery.setAddCriteriaMethod(
 					addCriteriaMethod);
-
+				resourceBlockActionableDynamicQuery.setCompanyId(
+					company.getCompanyId());
 				resourceBlockActionableDynamicQuery.setPerformActionMethod(
 					new ActionableDynamicQuery.
 						PerformActionMethod<ResourceBlock>() {
@@ -287,12 +285,10 @@ public class ResourceActionLocalServiceImpl
 					resourceTypePermissionLocalService.
 						getActionableDynamicQuery();
 
-				resourceTypeActionableDynamicQuery.setCompanyId(
-					company.getCompanyId());
-
 				resourceTypeActionableDynamicQuery.setAddCriteriaMethod(
 					addCriteriaMethod);
-
+				resourceTypeActionableDynamicQuery.setCompanyId(
+					company.getCompanyId());
 				resourceTypeActionableDynamicQuery.setPerformActionMethod(
 					new ActionableDynamicQuery.
 						PerformActionMethod<ResourceTypePermission>() {
@@ -326,10 +322,8 @@ public class ResourceActionLocalServiceImpl
 				ActionableDynamicQuery actionableDynamicQuery =
 					resourcePermissionLocalService.getActionableDynamicQuery();
 
-				actionableDynamicQuery.setCompanyId(company.getCompanyId());
-
 				actionableDynamicQuery.setAddCriteriaMethod(addCriteriaMethod);
-
+				actionableDynamicQuery.setCompanyId(company.getCompanyId());
 				actionableDynamicQuery.setPerformActionMethod(
 					new ActionableDynamicQuery.
 						PerformActionMethod<ResourcePermission>() {
