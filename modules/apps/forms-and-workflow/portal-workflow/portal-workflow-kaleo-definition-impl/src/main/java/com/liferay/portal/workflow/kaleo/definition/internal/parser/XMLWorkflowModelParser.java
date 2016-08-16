@@ -654,17 +654,21 @@ public class XMLWorkflowModelParser implements WorkflowModelParser {
 
 				long companyId = GetterUtil.getLong(
 					formReferenceElement.elementText("company-id"));
+
 				taskFormReference.setCompanyId(companyId);
 
 				long groupId = GetterUtil.getLong(
 					formReferenceElement.elementText("group-id"));
+
 				taskFormReference.setGroupId(groupId);
 
 				long formId = GetterUtil.getLong(
 					formReferenceElement.elementText("form-id"));
+
 				taskFormReference.setFormId(formId);
 
 				String formUuid = formReferenceElement.elementText("form-uuid");
+
 				taskFormReference.setFormUuid(formUuid);
 
 				taskForm.setTaskFormReference(taskFormReference);
