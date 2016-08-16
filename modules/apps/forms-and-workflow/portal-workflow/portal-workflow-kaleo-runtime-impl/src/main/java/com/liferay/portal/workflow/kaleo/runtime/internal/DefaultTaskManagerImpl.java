@@ -213,7 +213,7 @@ public class DefaultTaskManagerImpl
 					}
 					else {
 						if (_log.isWarnEnabled()) {
-							_log.warn("No FormDefinitionRetriever defined");
+							_log.warn("No form definition retriever defined");
 						}
 					}
 				}
