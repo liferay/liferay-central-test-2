@@ -72,7 +72,7 @@ public class TaskNodeValidator extends BaseNodeValidator<Task> {
 				throw new WorkflowException(
 					"Task form must specify either the form reference or " +
 						"form definition for task: " + task.getName() +
-							" form: " + taskForm.getName());
+							" and form: " + taskForm.getName());
 			}
 		}
 	}
