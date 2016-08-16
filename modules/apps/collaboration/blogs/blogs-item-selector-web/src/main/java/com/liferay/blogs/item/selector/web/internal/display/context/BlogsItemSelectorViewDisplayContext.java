@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.util.PortletKeys;
 
-import java.util.List;
 import java.util.Locale;
 
 import javax.portlet.ActionRequest;
