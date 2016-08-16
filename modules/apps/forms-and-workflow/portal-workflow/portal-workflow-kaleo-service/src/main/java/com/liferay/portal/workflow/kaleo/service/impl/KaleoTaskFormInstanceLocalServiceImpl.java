@@ -91,8 +91,8 @@ public class KaleoTaskFormInstanceLocalServiceImpl
 				if (_log.isWarnEnabled()) {
 					_log.warn(
 						"No form value processor defined to for form: " +
-							kaleoTaskForm.getKaleoTaskFormId() + " values: " +
-								formValues);
+							kaleoTaskForm.getKaleoTaskFormId() +
+								" and values: " + formValues);
 				}
 			}
 		}
