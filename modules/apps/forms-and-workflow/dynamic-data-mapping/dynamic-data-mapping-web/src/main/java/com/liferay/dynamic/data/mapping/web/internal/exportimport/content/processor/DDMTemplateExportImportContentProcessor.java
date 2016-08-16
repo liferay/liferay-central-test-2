@@ -23,6 +23,7 @@ import org.osgi.service.component.annotations.Component;
 
 /**
  * @author Gergely Mathe
+ * @deprecated As of 7.0.0
  */
 @Component(
 	property = {
