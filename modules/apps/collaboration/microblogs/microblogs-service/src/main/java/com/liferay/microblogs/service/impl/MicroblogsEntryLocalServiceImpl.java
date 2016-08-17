@@ -255,6 +255,9 @@ public class MicroblogsEntryLocalServiceImpl
 		return microblogsEntryPersistence.countByCompanyId(companyId);
 	}
 
+	/**
+	 * @deprecated As of 7.0.0
+	 */
 	@Deprecated
 	@Override
 	public List<MicroblogsEntry> getMicroblogsEntries(
@@ -265,6 +268,9 @@ public class MicroblogsEntryLocalServiceImpl
 			creatorClassNameId, type, start, end, obc);
 	}
 
+	/**
+	 * @deprecated As of 7.0.0
+	 */
 	@Deprecated
 	@Override
 	public List<MicroblogsEntry> getMicroblogsEntries(
@@ -274,6 +280,9 @@ public class MicroblogsEntryLocalServiceImpl
 			creatorClassNameId, creatorClassPK, start, end);
 	}
 
+	/**
+	 * @deprecated As of 7.0.0
+	 */
 	@Deprecated
 	@Override
 	public List<MicroblogsEntry> getMicroblogsEntries(
@@ -321,6 +330,9 @@ public class MicroblogsEntryLocalServiceImpl
 			andOperator, start, end);
 	}
 
+	/**
+	 * @deprecated As of 7.0.0
+	 */
 	@Deprecated
 	@Override
 	public List<MicroblogsEntry> getMicroblogsEntries(
@@ -341,6 +353,9 @@ public class MicroblogsEntryLocalServiceImpl
 			companyId, creatorClassNameId, assetTagName, start, end);
 	}
 
+	/**
+	 * @deprecated As of 7.0.0
+	 */
 	@Deprecated
 	@Override
 	public List<MicroblogsEntry> getMicroblogsEntries(
@@ -350,6 +365,9 @@ public class MicroblogsEntryLocalServiceImpl
 			creatorClassNameId, assetTagName, start, end);
 	}
 
+	/**
+	 * @deprecated As of 7.0.0
+	 */
 	@Deprecated
 	@Override
 	public int getMicroblogsEntriesCount(
@@ -359,6 +377,9 @@ public class MicroblogsEntryLocalServiceImpl
 			creatorClassNameId, creatorClassPK);
 	}
 
+	/**
+	 * @deprecated As of 7.0.0
+	 */
 	@Deprecated
 	@Override
 	public int getMicroblogsEntriesCount(
@@ -403,6 +424,9 @@ public class MicroblogsEntryLocalServiceImpl
 			companyId, creatorClassNameId, assetTagName);
 	}
 
+	/**
+	 * @deprecated As of 7.0.0
+	 */
 	@Deprecated
 	@Override
 	public int getMicroblogsEntriesCount(
@@ -413,6 +437,9 @@ public class MicroblogsEntryLocalServiceImpl
 			creatorClassNameId, creatorClassPK, assetTagName, andOperator);
 	}
 
+	/**
+	 * @deprecated As of 7.0.0
+	 */
 	@Deprecated
 	@Override
 	public int getMicroblogsEntriesCount(
