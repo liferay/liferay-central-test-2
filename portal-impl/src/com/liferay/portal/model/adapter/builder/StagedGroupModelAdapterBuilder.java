@@ -20,7 +20,8 @@ import com.liferay.portal.kernel.model.adapter.builder.ModelAdapterBuilder;
 import com.liferay.portal.model.adapter.impl.StagedGroupImpl;
 
 /**
- * @author Mate Thurzo
+ * @author     Mate Thurzo
+ * @deprecated As of 7.0.0
  */
 @Deprecated
 public class StagedGroupModelAdapterBuilder
