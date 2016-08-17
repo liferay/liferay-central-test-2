@@ -33,6 +33,7 @@ import java.io.PrintWriter;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.UUID;
 
@@ -89,7 +90,8 @@ public class GoogleDocsDLViewFileVersionDisplayContext
 		List<MenuItem> menuItems = menu.getMenuItems();
 
 		menuItems.removeIf(
-			menuItem -> menuItem.getKey().equals("#edit-with-image-editor"));
+			menuItem ->
+				Objects.equals(menuItem.getKey(), "#edit-with-image-editor"));
 
 		_googleDocsUIItemsProcessor.processMenuItems(menuItems);
 
