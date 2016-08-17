@@ -1353,7 +1353,7 @@ public class SitesImpl implements Sites {
 				layoutSet.isPrivateLayout(), parameterMap, importData);
 		}
 		catch (Exception e) {
-			++mergeFailCount;
+			mergeFailCount++;
 
 			StringBundler sb = new StringBundler(6);
 
