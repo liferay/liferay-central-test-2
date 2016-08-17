@@ -231,6 +231,7 @@ public class MicroblogsEntryFinderImpl
 	 * @deprecated As of 7.0.0, replaced by {@link #countByC_U_ATN(long, long,
 	 *             String)}
 	 */
+	@Deprecated
 	@Override
 	public int countByU_ATN(long userId, String assetTagName) {
 		Session session = null;
