@@ -246,7 +246,7 @@ public class PropsValues {
 	public static final boolean TEST_SKIP_TEAR_DOWN = GetterUtil.getBoolean(
 		PropsUtil.get("test.skip.tear.down"));
 
-	public static final String[]  TEST_TOGGLE_FILE_NAMES = StringUtil.split(
+	public static final String[] TEST_TOGGLE_FILE_NAMES = StringUtil.split(
 		PropsUtil.get("test.toggle.file.names"));
 
 	public static final boolean TESTING_CLASS_METHOD = GetterUtil.getBoolean(
