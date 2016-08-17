@@ -17,7 +17,6 @@ package com.liferay.blogs.item.selector.web.internal.display.context;
 import com.liferay.blogs.item.selector.criterion.BlogsItemSelectorCriterion;
 import com.liferay.blogs.item.selector.web.internal.BlogsItemSelectorView;
 import com.liferay.blogs.kernel.service.BlogsEntryLocalServiceUtil;
-import com.liferay.item.selector.ItemSelectorReturnType;
 import com.liferay.item.selector.ItemSelectorReturnTypeResolver;
 import com.liferay.item.selector.ItemSelectorReturnTypeResolverHandler;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
@@ -42,10 +41,14 @@ public class BlogsItemSelectorViewDisplayContext {
 	public BlogsItemSelectorViewDisplayContext(
 		BlogsItemSelectorCriterion blogsItemSelectorCriterion,
 		BlogsItemSelectorView blogsItemSelectorView,
+		ItemSelectorReturnTypeResolverHandler
+			itemSelectorReturnTypeResolverHandler,
 		String itemSelectedEventName, boolean search, PortletURL portletURL) {
 
 		_blogsItemSelectorCriterion = blogsItemSelectorCriterion;
 		_blogsItemSelectorView = blogsItemSelectorView;
+		_itemSelectorReturnTypeResolverHandler =
+			itemSelectorReturnTypeResolverHandler;
 		_itemSelectedEventName = itemSelectedEventName;
 		_search = search;
 		_portletURL = portletURL;
@@ -65,12 +68,7 @@ public class BlogsItemSelectorViewDisplayContext {
 	}
 
 	public ItemSelectorReturnTypeResolver getItemSelectorReturnTypeResolver() {
-		ItemSelectorReturnTypeResolverHandler
-			itemSelectorReturnTypeResolverHandler =
-				_blogsItemSelectorView.
-					getItemSelectorReturnTypeResolverHandler();
-
-		return itemSelectorReturnTypeResolverHandler.
+		return _itemSelectorReturnTypeResolverHandler.
 			getItemSelectorReturnTypeResolver(
 				_blogsItemSelectorCriterion, _blogsItemSelectorView,
 				FileEntry.class);
@@ -113,6 +111,8 @@ public class BlogsItemSelectorViewDisplayContext {
 	private final BlogsItemSelectorCriterion _blogsItemSelectorCriterion;
 	private final BlogsItemSelectorView _blogsItemSelectorView;
 	private final String _itemSelectedEventName;
+	private final ItemSelectorReturnTypeResolverHandler
+		_itemSelectorReturnTypeResolverHandler;
 	private final PortletURL _portletURL;
 	private final boolean _search;
 
