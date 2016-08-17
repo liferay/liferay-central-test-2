@@ -360,6 +360,8 @@
 	</command>
 
 	<command name="SaveGroupStatisticsConfiguration" priority="4">
+		<var name="siteStatistics" value="Votes by Users" />
+
 		<execute macro="Page#add">
 			<var name="pageName" value="Group Statistics Page" />
 		</execute>
@@ -396,7 +398,7 @@
 			<var name="pageName" value="Group Statistics Page" />
 		</execute>
 
-		<var name="siteStatistics" value="Votes by Users" />
+		<var name="key_siteStatistics" value="${siteStatistics}" />
 
 		<execute function="AssertTextEquals" locator1="GroupStatistics#SITE_STATISTICS_PANEL" value1="Site Statistics: ${siteStatistics}" />
 	</command>
