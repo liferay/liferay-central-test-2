@@ -53,6 +53,9 @@ public class DDLRecordStagedModelDataHandler
 
 	public static final String[] CLASS_NAMES = {DDLRecord.class.getName()};
 
+	/**
+	 * @deprecated As of 7.0.0
+	 */
 	@Deprecated
 	@Override
 	public void deleteStagedModel(DDLRecord stagedModel)
@@ -61,6 +64,9 @@ public class DDLRecordStagedModelDataHandler
 		super.deleteStagedModel(stagedModel);
 	}
 
+	/**
+	 * @deprecated As of 7.0.0
+	 */
 	@Deprecated
 	@Override
 	public void deleteStagedModel(
@@ -70,6 +76,9 @@ public class DDLRecordStagedModelDataHandler
 		super.deleteStagedModel(uuid, groupId, className, extraData);
 	}
 
+	/**
+	 * @deprecated As of 7.0.0
+	 */
 	@Deprecated
 	@Override
 	public DDLRecord fetchStagedModelByUuidAndGroupId(
@@ -78,6 +87,9 @@ public class DDLRecordStagedModelDataHandler
 		return super.fetchStagedModelByUuidAndGroupId(uuid, groupId);
 	}
 
+	/**
+	 * @deprecated As of 7.0.0
+	 */
 	@Deprecated
 	@Override
 	public List<DDLRecord> fetchStagedModelsByUuidAndCompanyId(
@@ -208,6 +220,9 @@ public class DDLRecordStagedModelDataHandler
 		return _ddlRecordStagedModelRepository;
 	}
 
+	/**
+	 * @deprecated As of 7.0.0
+	 */
 	@Deprecated
 	protected void setDDLRecordLocalService(
 		DDLRecordLocalService ddlRecordLocalService) {

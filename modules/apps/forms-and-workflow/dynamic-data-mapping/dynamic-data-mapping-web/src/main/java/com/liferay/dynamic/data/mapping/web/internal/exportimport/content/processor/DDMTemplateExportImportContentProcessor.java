@@ -34,6 +34,7 @@ import org.osgi.service.component.annotations.Component;
 		ExportImportContentProcessor.class
 	}
 )
+@Deprecated
 public class DDMTemplateExportImportContentProcessor
 	extends BaseTextExportImportContentProcessor {
 
