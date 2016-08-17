@@ -1,7 +1,13 @@
 (function() {
+	var Lang = AUI().Lang;
+
 	var STR_ADAPTIVE_MEDIA_RETURN_TYPE = 'com.liferay.item.selector.criteria.AdaptiveMediaItemSelectorReturnType';
 
 	var STR_FILE_ENTRY_RETURN_TYPE = 'com.liferay.item.selector.criteria.FileEntryItemSelectorReturnType';
+
+	var TPL_PICTURE_TAG = '<picture>{sources}<img src="{defaultSrc}"></picture>';
+
+	var TPL_SOURCE_TAG = '<source srcset="{srcset}" media="{media}">';
 
 	CKEDITOR.plugins.add(
 		'adaptivemedia',
@@ -43,30 +49,38 @@
 				try {
 					var itemValue = JSON.parse(selectedItem.value);
 
-					var pictureHtml = '<picture>';
+					var sources = '';
 
 					itemValue.sources.forEach(
 						function(source) {
 							var mediaText = '';
 
-							source.media.forEach(
-								function(media, index) {
+							source.attributes.forEach(
+								function(attr, index) {
 									if (index > 0) {
 										mediaText += ' and ';
 									}
-									mediaText += '(' + media.key + ':' + media.value + ')';
+									mediaText += '(' + attr.key + ':' + attr.value + ')';
 								}
 							);
 
-							pictureHtml += '<source srcset="' + source.src + '" media="' + mediaText + '">';
+							sources += Lang.sub(
+								TPL_SOURCE_TAG,
+								{
+									media: mediaText,
+									srcset: source.src
+								}
+							);
 						}
 					);
 
-					if (itemValue.defaultSrc) {
-						pictureHtml += '<img src="' + itemValue.defaultSrc + '">';
-					}
-
-					pictureHtml += '</picture>';
+					var pictureHtml = Lang.sub(
+						TPL_PICTURE_TAG,
+						{
+							defaultSrc: itemValue.defaultSource,
+							sources: sources
+						}
+					);
 
 					pictureEl = CKEDITOR.dom.element.createFromHtml(pictureHtml);
 				}
