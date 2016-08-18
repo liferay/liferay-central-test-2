@@ -1072,9 +1072,9 @@
 		<if>
 			<condition function="IsElementPresent" locator1="KnowledgeBase#ARTICLE_DESCRIPTIVE_ARTICLE_TITLE_GENERIC" />
 			<then>
-				<execute function="Check" locator1="KnowledgeBase#ARTICLE_TABLE_SELECT_ALL_CHECKBOX" />
-				<execute function="Click" locator1="KnowledgeBase#MENUBAR_ACTIONS" />
-				<execute function="AssertClickNoError" locator1="MenuItem#DELETE" value1="Delete" />
+				<execute function="Check#checkAll" locator1="KnowledgeBase#ARTICLE_TABLE_SELECT_ALL_CHECKBOX" />
+
+				<execute function="Click" locator1="Icon#DELETE" />
 				<execute function="Confirm" value1="Are you sure you want to delete the selected articles?" />
 				<execute macro="Alert#viewSuccessMessage" />
 				<execute function="AssertTextEquals#assertPartialText" locator1="KnowledgeBase#MESSAGE_NO_ARTICLES_FOUND" value1="No articles were found." />
