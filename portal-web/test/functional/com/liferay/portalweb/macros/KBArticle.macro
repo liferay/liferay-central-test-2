@@ -1077,7 +1077,6 @@
 				<execute function="Click" locator1="Icon#DELETE" />
 				<execute function="Confirm" value1="Are you sure you want to delete the selected entries? They will be deleted immediately." />
 				<execute macro="Alert#viewSuccessMessage" />
-				<execute function="AssertTextEquals#assertPartialText" locator1="KnowledgeBase#MESSAGE_NO_ARTICLES_FOUND" value1="No articles were found." />
 			</then>
 		</if>
 	</command>
