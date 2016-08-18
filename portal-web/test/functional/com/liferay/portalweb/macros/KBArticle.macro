@@ -1075,7 +1075,9 @@
 				<execute function="Check#checkAll" locator1="KnowledgeBase#ARTICLE_TABLE_SELECT_ALL_CHECKBOX" />
 
 				<execute function="Click" locator1="Icon#DELETE" />
+
 				<execute function="Confirm" value1="Are you sure you want to delete the selected entries? They will be deleted immediately." />
+
 				<execute macro="Alert#viewSuccessMessage" />
 			</then>
 		</if>
