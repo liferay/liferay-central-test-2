@@ -57,18 +57,16 @@ public class SubrepositoryTaskNoReport extends SubrepositoryTask {
 			new GenericFailureMessageGenerator();
 
 		sb.append("<pre><code>");
-
 		sb.append(
 			genericFailureMessageGenerator.getMessage(
 				null, consoleSnippet, null));
-
 		sb.append("</code></pre>");
 
 		return sb.toString();
 	}
 
 	protected static final Pattern consoleResultPattern = Pattern.compile(
-		"Subrepository task (SUCCESSFUL|FAILED)(.*)");
+		"Subrepository task (FAILED|SUCCESSFUL)(.*)");
 
 	protected String consoleSnippet;
 
