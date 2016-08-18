@@ -29,7 +29,9 @@
 			<var name="portlet" value="Knowledge Base" />
 		</execute>
 
-		<execute function="AssertClick" locator1="KnowledgeBase#ADMIN_TABS_TEMPLATES" value1="Templates" />
+		<execute function="Click" locator1="Icon#HEADER_VERTICAL_ELLIPSIS" />
+
+		<execute function="AssertClick" locator1="MenuItem#TEMPLATES" value1="Templates" />
 
 		<if>
 			<condition function="IsElementPresent" locator1="KnowledgeBaseTemplate#TEMPLATE_TABLE_SELECT_ALL_CHECKBOX" />
