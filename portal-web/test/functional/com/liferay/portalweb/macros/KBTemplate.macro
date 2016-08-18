@@ -34,7 +34,7 @@
 		<execute function="AssertClick" locator1="MenuItem#TEMPLATES" value1="Templates" />
 
 		<if>
-			<condition function="IsElementPresent" locator1="KnowledgeBaseTemplate#TEMPLATE_TABLE_SELECT_ALL_CHECKBOX" />
+			<condition function="IsElementPresent" locator1="ContentRow#ENTRY_CONTENT_ROW_1" />
 			<then>
 				<execute function="Check" locator1="KnowledgeBaseTemplate#TEMPLATE_TABLE_SELECT_ALL_CHECKBOX" />
 				<execute function="AssertClickNoError" locator1="Button#DELETE" value1="Delete" />
