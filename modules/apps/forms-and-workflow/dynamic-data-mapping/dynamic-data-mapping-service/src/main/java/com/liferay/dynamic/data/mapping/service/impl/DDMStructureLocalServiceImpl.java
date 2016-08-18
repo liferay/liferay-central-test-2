@@ -1532,6 +1532,7 @@ public class DDMStructureLocalServiceImpl
 
 		DDMForm parentDDMForm = getParentDDMForm(parentStructureId);
 
+		validateHierarchy(structure.getStructureId(), parentStructureId);
 		validate(nameMap, parentDDMForm, ddmForm);
 
 		structure.setParentStructureId(parentStructureId);
@@ -1846,6 +1847,22 @@ public class DDMStructureLocalServiceImpl
 			le.setTargetAvailableLocales(LanguageUtil.getAvailableLocales());
 
 			throw le;
+		}
+	}
+
+	protected void validateHierarchy(long structureId, long parentStructureId)
+		throws PortalException {
+
+		while (parentStructureId != 0) {
+			DDMStructure parentStructure =
+				ddmStructurePersistence.fetchByPrimaryKey(parentStructureId);
+
+			if (structureId == parentStructure.getStructureId()) {
+				throw new StructureDefinitionException(
+					"There is a cycle in the structure hierarchy");
+			}
+
+			parentStructureId = parentStructure.getParentStructureId();
 		}
 	}
 
