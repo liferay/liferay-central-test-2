@@ -65,7 +65,7 @@ import org.slf4j.LoggerFactory;
 /**
  * @author Shinn Lok
  */
-@PowerMockIgnore("javax.crypto.*")
+@PowerMockIgnore({"javax.crypto.*", "javax.net.ssl.*"})
 @PrepareForTest({EntityUtils.class, HttpClientBuilder.class, SyncEngine.class})
 @RunWith(PowerMockRunner.class)
 public abstract class BaseTestCase {
@@ -84,7 +84,8 @@ public abstract class BaseTestCase {
 			System.getProperty("user.home"), "liferay-sync-test");
 
 		syncAccount = SyncAccountService.addSyncAccount(
-			filePathName, "test@liferay.com", "test", "http://localhost:8080");
+			filePathName, "test@liferay.com", "test", "1.0.0",
+			"http://localhost:8080");
 
 		syncAccount.setActive(true);
 		syncAccount.setState(SyncAccount.STATE_CONNECTED);
