@@ -44,22 +44,24 @@ public class AdaptiveMediaPictureDynamicInclude extends BaseDynamicInclude {
 			String key)
 		throws IOException {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
+		if (BrowserSnifferUtil.isIe(request)) {
+			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+				WebKeys.THEME_DISPLAY);
 
-		PrintWriter printWriter = response.getWriter();
+			PrintWriter printWriter = response.getWriter();
 
-		StringBundler sb = new StringBundler(7);
+			StringBundler sb = new StringBundler(7);
 
-		sb.append("<script src=\"");
-		sb.append(themeDisplay.getPortalURL());
-		sb.append(PortalUtil.getPathProxy());
-		sb.append(_servletContext.getContextPath());
-		sb.append("/picturefill.js\" ");
-		sb.append("type= \"text/javascript\">");
-		sb.append("</script>");
+			sb.append("<script src=\"");
+			sb.append(themeDisplay.getPortalURL());
+			sb.append(PortalUtil.getPathProxy());
+			sb.append(_servletContext.getContextPath());
+			sb.append("/picturefill.js\" ");
+			sb.append("type= \"text/javascript\">");
+			sb.append("</script>");
 
-		printWriter.println(sb.toString());
+			printWriter.println(sb.toString());
+		}
 	}
 
 	@Override
