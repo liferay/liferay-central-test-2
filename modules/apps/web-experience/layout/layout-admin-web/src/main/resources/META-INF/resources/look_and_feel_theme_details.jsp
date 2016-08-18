@@ -30,6 +30,7 @@ boolean useDefaultThemeSettings = false;
 if (Validator.isNotNull(themeId)) {
 	selTheme = ThemeLocalServiceUtil.getTheme(company.getCompanyId(), themeId);
 	selColorScheme = ThemeLocalServiceUtil.getColorScheme(company.getCompanyId(), themeId, StringPool.BLANK);
+
 	useDefaultThemeSettings = true;
 }
 else {
