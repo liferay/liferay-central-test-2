@@ -15,6 +15,7 @@
 package com.liferay.adaptive.media.image.internal.processor;
 
 import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaAttributeMapping;
+import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaAttribute;
 
 import java.io.InputStream;
 

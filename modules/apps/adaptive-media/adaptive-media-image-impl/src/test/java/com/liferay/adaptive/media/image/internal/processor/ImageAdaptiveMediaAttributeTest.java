@@ -15,6 +15,7 @@
 package com.liferay.adaptive.media.image.internal.processor;
 
 import com.liferay.adaptive.media.AdaptiveMediaRuntimeException;
+import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaAttribute;
 
 import org.junit.Assert;
 import org.junit.Test;

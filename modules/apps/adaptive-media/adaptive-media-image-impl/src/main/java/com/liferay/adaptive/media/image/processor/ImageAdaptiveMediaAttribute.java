@@ -12,11 +12,10 @@
  * details.
  */
 
-package com.liferay.adaptive.media.image.internal.processor;
+package com.liferay.adaptive.media.image.processor;
 
 import com.liferay.adaptive.media.AdaptiveMediaAttribute;
 import com.liferay.adaptive.media.AdaptiveMediaRuntimeException;
-import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
 
 /**
  * @author Adolfo Pérez
