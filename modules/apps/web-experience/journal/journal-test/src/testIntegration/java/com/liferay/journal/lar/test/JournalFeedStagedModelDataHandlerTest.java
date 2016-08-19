@@ -29,7 +29,11 @@ import com.liferay.journal.test.util.JournalTestUtil;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.model.StagedModel;
+import com.liferay.portal.kernel.portlet.PortalPreferences;
+import com.liferay.portal.kernel.portlet.PortletPreferencesFactoryUtil;
+import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.service.LayoutLocalServiceUtil;
+import com.liferay.portal.kernel.service.PortalPreferencesLocalServiceUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.Sync;
@@ -37,6 +41,7 @@ import com.liferay.portal.kernel.test.rule.SynchronousDestinationTestRule;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.test.util.TestPropsValues;
 import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.portal.kernel.util.PortletKeys;
 import com.liferay.portal.lar.test.BaseStagedModelDataHandlerTestCase;
 import com.liferay.portal.test.log.CaptureAppender;
 import com.liferay.portal.test.log.Log4JLoggerTestUtil;
@@ -50,7 +55,9 @@ import java.util.Map;
 import org.apache.log4j.Level;
 import org.apache.log4j.spi.LoggingEvent;
 
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
@@ -71,6 +78,7 @@ public class JournalFeedStagedModelDataHandlerTest
 			new LiferayIntegrationTestRule(),
 			SynchronousDestinationTestRule.INSTANCE);
 
+	@Before
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
@@ -87,6 +95,45 @@ public class JournalFeedStagedModelDataHandlerTest
 			_layout.getName(), _layout.getTitle(), _layout.getDescription(),
 			_layout.getType(), _layout.getHidden(), _layout.getFriendlyURL(),
 			serviceContext);
+
+		CompanyThreadLocal.setCompanyId(TestPropsValues.getCompanyId());
+
+		serviceContext.setCompanyId(TestPropsValues.getCompanyId());
+
+		PortalPreferences portalPreferenceces =
+			PortletPreferencesFactoryUtil.getPortalPreferences(
+				TestPropsValues.getUserId(), true);
+
+		portalPreferenceces.setValue(
+			"", "publishToLiveByDefaultEnabled", "true");
+		portalPreferenceces.setValue(
+			"", "versionHistoryByDefaultEnabled", "true");
+		portalPreferenceces.setValue("", "articleCommentsEnabled", "true");
+		portalPreferenceces.setValue(
+			"", "expireAllArticleVersionsEnabled", "true");
+		portalPreferenceces.setValue("", "folderIconCheckCountEnabled", "true");
+		portalPreferenceces.setValue(
+			"", "indexAllArticleVersionsEnabled", "true");
+		portalPreferenceces.setValue(
+			"", "databaseContentKeywordSearchEnabled", "true");
+		portalPreferenceces.setValue("", "journalArticleStorageType", "json");
+		portalPreferenceces.setValue(
+			"", "journalArticlePageBreakToken", "@page_break@");
+
+		_portalPreferences =
+			PortalPreferencesLocalServiceUtil.addPortalPreferences(
+				TestPropsValues.getCompanyId(),
+				PortletKeys.PREFS_OWNER_TYPE_COMPANY,
+				PortletPreferencesFactoryUtil.toXML(portalPreferenceces));
+	}
+
+	@After
+	@Override
+	public void tearDown() throws Exception {
+		super.tearDown();
+
+		PortalPreferencesLocalServiceUtil.deletePortalPreferences(
+			_portalPreferences);
 	}
 
 	@Override
@@ -271,5 +318,7 @@ public class JournalFeedStagedModelDataHandlerTest
 	}
 
 	private Layout _layout;
+	private com.liferay.portal.kernel.model.PortalPreferences
+		_portalPreferences;
 
 }
