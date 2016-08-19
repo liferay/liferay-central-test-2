@@ -549,12 +549,6 @@ public abstract class BaseDB implements DB {
 	protected String applyMaxStringIndexLengthLimitation(Matcher matcher) {
 		DBType dbType = getDBType();
 
-		boolean sybase = false;
-
-		if (dbType.equals(DBType.SYBASE)) {
-			sybase = true;
-		}
-
 		int stringIndexMaxLength = GetterUtil.getInteger(
 			PropsUtil.get(
 				PropsKeys.DATABASE_STRING_INDEX_MAX_LENGTH,
@@ -564,7 +558,7 @@ public abstract class BaseDB implements DB {
 		String replacement = "\\(" + stringIndexMaxLength + "\\)";
 
 		if (stringIndexMaxLength < 0) {
-			if (sybase) {
+			if (dbType.equals(DBType.SYBASE)) {
 				replacement = StringPool.BLANK;
 			}
 			else {
@@ -572,14 +566,13 @@ public abstract class BaseDB implements DB {
 			}
 		}
 
-		StringBuffer sb = new StringBuffer();
-
 		boolean remove = false;
+		StringBuffer sb = new StringBuffer();
 
 		while (matcher.find()) {
 			int length = Integer.valueOf(matcher.group(1));
 
-			if (sybase && (length > 1250)) {
+			if (dbType.equals(DBType.SYBASE) && (length > 1250)) {
 				matcher.appendReplacement(sb, "%%REMOVE%%");
 
 				remove = true;
@@ -596,7 +589,7 @@ public abstract class BaseDB implements DB {
 
 		String string = sb.toString();
 
-		if (sybase && remove) {
+		if (dbType.equals(DBType.SYBASE) && remove) {
 			String[] strings = StringUtil.split(string, StringPool.NEW_LINE);
 
 			for (int i = 0; i < strings.length; i++) {
