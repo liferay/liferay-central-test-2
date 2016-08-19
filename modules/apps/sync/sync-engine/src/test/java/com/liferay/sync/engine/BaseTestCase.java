@@ -16,6 +16,8 @@ package com.liferay.sync.engine;
 
 import com.liferay.sync.engine.model.SyncAccount;
 import com.liferay.sync.engine.service.SyncAccountService;
+import com.liferay.sync.engine.session.Session;
+import com.liferay.sync.engine.session.SessionManager;
 import com.liferay.sync.engine.upgrade.util.UpgradeUtil;
 import com.liferay.sync.engine.util.FileUtil;
 import com.liferay.sync.engine.util.LoggerUtil;
@@ -26,6 +28,8 @@ import com.liferay.sync.engine.util.StreamUtil;
 
 import java.io.IOException;
 import java.io.InputStream;
+
+import java.net.URL;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -66,7 +70,12 @@ import org.slf4j.LoggerFactory;
  * @author Shinn Lok
  */
 @PowerMockIgnore({"javax.crypto.*", "javax.net.ssl.*"})
-@PrepareForTest({EntityUtils.class, HttpClientBuilder.class, SyncEngine.class})
+@PrepareForTest(
+	{
+		EntityUtils.class, HttpClientBuilder.class, SessionManager.class,
+		SyncEngine.class
+	}
+)
 @RunWith(PowerMockRunner.class)
 public abstract class BaseTestCase {
 
@@ -91,6 +100,15 @@ public abstract class BaseTestCase {
 		syncAccount.setState(SyncAccount.STATE_CONNECTED);
 
 		SyncAccountService.update(syncAccount);
+
+		PowerMockito.stub(
+			PowerMockito.method(
+				SessionManager.class, "getSession", long.class, boolean.class)
+		).toReturn(
+			new Session(
+				new URL(syncAccount.getUrl()), syncAccount.getLogin(),
+				syncAccount.getPassword(), false, 1)
+		);
 
 		PowerMockito.stub(
 			PowerMockito.method(SyncEngine.class, "getExecutorService")
