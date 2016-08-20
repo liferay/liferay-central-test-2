@@ -2748,7 +2748,7 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  .liferay.portal.kernel.resource.manager;version="1.0.0";uses:="com.li
  feray.portal.kernel.resource",com.liferay.portal.kernel.sanitizer;ver
  sion="7.0.0";uses:="com.liferay.portal.kernel.exception",com.liferay.
- portal.kernel.scheduler;version="7.0.0";uses:="com.liferay.portal.ker
+ portal.kernel.scheduler;version="7.1.0";uses:="com.liferay.portal.ker
  nel.exception,com.liferay.portal.kernel.messaging,com.liferay.portal.
  kernel.messaging.proxy,com.liferay.portal.kernel.scheduler.messaging,
  com.liferay.portal.kernel.util,javax.portlet",com.liferay.portal.kern
