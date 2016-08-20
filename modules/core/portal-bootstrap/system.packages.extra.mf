@@ -2940,7 +2940,7 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  .liferay.portal.kernel.security.permission,com.liferay.portal.kernel.
  service,com.liferay.portal.kernel.theme,javax.portlet,javax.servlet.h
  ttp",com.liferay.portal.kernel.url;version="1.0.0";uses:="javax.servl
- et",com.liferay.portal.kernel.util;version="7.5.0";uses:="com.liferay
+ et",com.liferay.portal.kernel.util;version="7.6.0";uses:="com.liferay
  .expando.kernel.model,com.liferay.mail.kernel.model,com.liferay.porta
  l.kernel.concurrent,com.liferay.portal.kernel.configuration,com.lifer
  ay.portal.kernel.dao.jdbc.aop,com.liferay.portal.kernel.dao.search,co
@@ -3439,7 +3439,7 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  rade.v7_0_2;uses:="com.liferay.portal.kernel.upgrade";version="1.0.0"
  ,com.liferay.portal.upload;version="1.0.2";uses:="com.liferay.portal.
  kernel.servlet,com.liferay.portal.kernel.upload,javax.portlet,javax.s
- ervlet,javax.servlet.http",com.liferay.portal.util;version="1.6.0";us
+ ervlet,javax.servlet.http",com.liferay.portal.util;version="1.7.0";us
  es:="com.liferay.expando.kernel.model,com.liferay.layouts.admin.kerne
  l.util,com.liferay.portal.kernel.configuration,com.liferay.portal.ker
  nel.exception,com.liferay.portal.kernel.json,com.liferay.portal.kerne
