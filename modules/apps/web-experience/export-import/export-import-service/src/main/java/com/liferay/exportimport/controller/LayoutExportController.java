@@ -299,7 +299,7 @@ public class LayoutExportController implements ExportController {
 				portletDataContext.isPrivateLayout());
 		}
 		else if (group.isLayoutSetPrototype()) {
-			type ="layout-set-prototype";
+			type = "layout-set-prototype";
 
 			LayoutSetPrototype layoutSetPrototype =
 				_layoutSetPrototypeLocalService.getLayoutSetPrototype(
