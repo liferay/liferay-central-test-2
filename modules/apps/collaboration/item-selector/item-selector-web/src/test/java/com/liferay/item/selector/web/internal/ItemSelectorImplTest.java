@@ -140,14 +140,12 @@ public class ItemSelectorImplTest extends PowerMockito {
 			mediaItemSelectorCriterion.getDesiredItemSelectorReturnTypes();
 
 		Assert.assertEquals(2, desiredItemSelectorReturnTypes.size());
-
 		Assert.assertTrue(
 			desiredItemSelectorReturnTypes.get(0) instanceof
 				TestFileEntryItemSelectorReturnType);
 		Assert.assertTrue(
 			desiredItemSelectorReturnTypes.get(1) instanceof
 				TestURLItemSelectorReturnType);
-
 		Assert.assertTrue(
 			itemSelectorCriteria.get(1) instanceof FlickrItemSelectorCriterion);
 	}
@@ -170,7 +168,6 @@ public class ItemSelectorImplTest extends PowerMockito {
 		Assert.assertNull(parameters.get("0_desiredItemSelectorReturnTypes"));
 		Assert.assertNotNull(parameters.get("0_json")[0]);
 		Assert.assertNotNull(parameters.get("1_json")[0]);
-
 		Assert.assertEquals(4, parameters.size());
 	}
 
