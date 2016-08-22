@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.adaptive.media.image.web.servlet;
+package com.liferay.adaptive.media.image.web.servlet.taglib;
 
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.servlet.taglib.BaseDynamicInclude;
