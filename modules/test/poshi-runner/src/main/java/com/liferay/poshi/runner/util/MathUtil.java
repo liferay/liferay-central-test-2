@@ -30,9 +30,7 @@ public class MathUtil {
 	}
 
 	public static int percent(Integer percent, Integer value) {
-		int product = product(percent, value)
-
-		return quotient(product, 100, true)
+		return quotient(product(percent, value), 100, true);
 	}
 
 	public static int product(Integer... values) {
