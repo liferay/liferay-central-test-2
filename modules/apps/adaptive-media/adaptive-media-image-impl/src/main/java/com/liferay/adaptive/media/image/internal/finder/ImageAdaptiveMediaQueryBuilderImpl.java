@@ -39,8 +39,8 @@ public class ImageAdaptiveMediaQueryBuilderImpl
 			};
 
 	@Override
-	public AdaptiveMediaQuery<FileVersion, ImageAdaptiveMediaProcessor>
-		allForFileEntry(FileEntry fileEntry) {
+	public AdaptiveMediaAttributeQueryBuilder allForFileEntry(
+		FileEntry fileEntry) {
 
 		if (fileEntry == null) {
 			throw new IllegalArgumentException("File entry cannot be null");
@@ -48,12 +48,12 @@ public class ImageAdaptiveMediaQueryBuilderImpl
 
 		_fileEntry = fileEntry;
 
-		return QUERY;
+		return this;
 	}
 
 	@Override
-	public AdaptiveMediaQuery<FileVersion, ImageAdaptiveMediaProcessor>
-		allForVersion(FileVersion fileVersion) {
+	public AdaptiveMediaAttributeQueryBuilder allForVersion(
+		FileVersion fileVersion) {
 
 		if (fileVersion == null) {
 			throw new IllegalArgumentException("File version cannot be null");
@@ -61,7 +61,7 @@ public class ImageAdaptiveMediaQueryBuilderImpl
 
 		_fileVersion = fileVersion;
 
-		return QUERY;
+		return this;
 	}
 
 	@Override
@@ -111,12 +111,33 @@ public class ImageAdaptiveMediaQueryBuilderImpl
 		return _fileVersion;
 	}
 
+	public AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, ?>
+		getOrderByAttribute() {
+
+		return _orderByAttribute;
+	}
+
+	public boolean getOrderByAttributeAsc() {
+		return _orderByAttributeAsc;
+	}
+
 	public boolean hasFileVersion() {
 		if (_fileEntry == null) {
 			return true;
 		}
 
 		return false;
+	}
+
+	@Override
+	public <V> AdaptiveMediaAttributeQueryBuilder orderBy(
+		AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, V> attribute,
+		boolean asc) {
+
+		_orderByAttribute = attribute;
+		_orderByAttributeAsc = asc;
+
+		return this;
 	}
 
 	public <V> AdaptiveMediaAttributeQueryBuilder with(
@@ -152,5 +173,8 @@ public class ImageAdaptiveMediaQueryBuilderImpl
 		_attributes = new LinkedHashMap<>();
 	private FileEntry _fileEntry;
 	private FileVersion _fileVersion;
+	private AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, ?>
+		_orderByAttribute;
+	private boolean _orderByAttributeAsc = true;
 
 }

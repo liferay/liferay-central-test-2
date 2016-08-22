@@ -93,9 +93,14 @@ public class ImageAdaptiveMediaFinderImpl implements ImageAdaptiveMediaFinder {
 		BiFunction<FileVersion, ImageAdaptiveMediaConfigurationEntry, URI>
 			uriFactory = _getURIFactory(queryBuilder);
 
-		AdaptiveMediaPropertyDistanceComparator comparator =
+		AdaptiveMediaPropertyDistanceComparator distanceComparator =
 			new AdaptiveMediaPropertyDistanceComparator(
 				queryBuilder.getAttributes());
+
+		AdaptiveMediaAttributeComparator attributeComparator =
+			new AdaptiveMediaAttributeComparator(
+				queryBuilder.getOrderByAttribute(),
+				queryBuilder.getOrderByAttributeAsc());
 
 		return configurationEntries.stream().
 			filter(
@@ -105,7 +110,8 @@ public class ImageAdaptiveMediaFinderImpl implements ImageAdaptiveMediaFinder {
 				configurationEntry ->
 					_createMedia(
 						fileVersion, uriFactory, configurationEntry)).
-			sorted(comparator);
+			sorted(distanceComparator).
+			sorted(attributeComparator);
 	}
 
 	@Reference(unbind = "-")

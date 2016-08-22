@@ -16,7 +16,7 @@ package com.liferay.adaptive.media;
 
 import aQute.bnd.annotation.ProviderType;
 
-import java.util.function.BiFunction;
+import java.util.Comparator;
 import java.util.function.Function;
 
 /**
@@ -66,23 +66,38 @@ public final class AdaptiveMediaAttribute<T, V> {
 
 	/**
 	 * Create a new attribute. As all attributes live in the same global
-	 * namespace <code>name</code> should uniquely identify this attribute, and
+	 * namespace. <code>name</code> should uniquely identify this attribute, and
 	 * it is recommended for it to be a human readable value. <code>converter
 	 * </code> should be a function capable of converting a String to a value
 	 * of the correct type; this function should throw a {@link
 	 * AdaptiveMediaRuntimeException.AdaptiveMediaAttributeFormatException}
-	 * when the given String is not convertible. <code>distanceFunction</code>
-	 * is a function that should compute the distance between two values of the
-	 * attribute; it should return a value between 0 and {@link
-	 * Integer#MAX_VALUE}.
+	 * when the given String is not convertible. <code>comparator</code>
+	 * is a comparator that compare its two arguments for order considering the
+	 * distance between their values; it should return a value between
+	 * {@link Integer#MIN_VALUE} and {@link Integer#MAX_VALUE} based on the
+	 * distance of the values.
 	 */
 	public AdaptiveMediaAttribute(
-		String name, Function<String, V> converter,
-		BiFunction<V, V, Integer> distanceFunction) {
+		String name, Function<String, V> converter, Comparator<V> comparator) {
 
 		_name = name;
 		_converter = converter;
-		_distanceFunction = distanceFunction;
+		_comparator = comparator;
+	}
+
+	/**
+	 * Compares its two arguments for order. Returns a negative integer,
+	 * zero, or a positive integer as the first argument is less than, equal
+	 * to, or greater than the second
+	 *
+	 * @param value1 The first value to be compared
+	 * @param value2 The second value to be compared
+	 * @return a negative integer, zero, or a positive integer as the
+	 *         first argument is less than, equal to, or greater than the
+	 *         second.
+	 */
+	public int compare(V value1, V value2) {
+		return _comparator.compare(value1, value2);
 	}
 
 	/**
@@ -107,7 +122,7 @@ public final class AdaptiveMediaAttribute<T, V> {
 	 *         close both values are
 	 */
 	public int distance(V value1, V value2) {
-		return _distanceFunction.apply(value1, value2);
+		return Math.abs(_comparator.compare(value1, value2));
 	}
 
 	/**
@@ -121,20 +136,18 @@ public final class AdaptiveMediaAttribute<T, V> {
 
 	private static final AdaptiveMediaAttribute<?, Integer> _CONTENT_LENGTH =
 		new AdaptiveMediaAttribute<>(
-			"content-length", Integer::parseInt, (i1, i2) -> Math.abs(i1 - i2));
+			"content-length", Integer::parseInt, (i1, i2) -> i1 - i2);
 
 	private static final AdaptiveMediaAttribute<?, String> _CONTENT_TYPE =
 		new AdaptiveMediaAttribute<>(
-			"content-type", (s) -> s,
-			(s1, s2) -> s1.equals(s2) ? 0 : Integer.MAX_VALUE);
+			"content-type", (s) -> s, (s1, s2) -> s1.compareTo(s2));
 
 	private static final AdaptiveMediaAttribute<?, String> _FILE_NAME =
 		new AdaptiveMediaAttribute<>(
-			"file-name", (s) -> s,
-			(s1, s2) -> s1.equals(s2) ? 0 : Integer.MAX_VALUE);
+			"file-name", (s) -> s, (s1, s2) -> s1.compareTo(s2));
 
+	private final Comparator<V> _comparator;
 	private final Function<String, V> _converter;
-	private final BiFunction<V, V, Integer> _distanceFunction;
 	private final String _name;
 
 }

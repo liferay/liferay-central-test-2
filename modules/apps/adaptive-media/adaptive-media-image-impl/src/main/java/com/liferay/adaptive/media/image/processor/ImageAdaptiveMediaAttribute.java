@@ -35,7 +35,7 @@ public final class ImageAdaptiveMediaAttribute {
 				ImageAdaptiveMediaAttribute::_intDistance);
 
 	private static int _intDistance(int i1, int i2) {
-		return Math.abs(i1 - i2);
+		return i1 - i2;
 	}
 
 	private static int _parseInt(String value) {
