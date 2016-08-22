@@ -36,9 +36,9 @@ import javax.portlet.PortletURL;
 public interface ItemSelector {
 
 	/**
-	 * Returns the selected event name used to create the item selector url.
+	 * Returns the selected event name used to create the item selector URL.
 	 *
-	 * @param  itemSelectorURL the unescaped item selector url
+	 * @param  itemSelectorURL the unescaped item selector URL
 	 * @return the selected event name
 	 */
 	public String getItemSelectedEventName(String itemSelectorURL);
@@ -48,9 +48,9 @@ public interface ItemSelector {
 
 	/**
 	 * Returns the list of item selector criteria that was used to create the
-	 * item selector url.
+	 * item selector URL.
 	 *
-	 * @param  itemSelectorURL the unescaped item selector url
+	 * @param  itemSelectorURL the unescaped item selector URL
 	 * @return the selected event name
 	 */
 	public List<ItemSelectorCriterion> getItemSelectorCriteria(
