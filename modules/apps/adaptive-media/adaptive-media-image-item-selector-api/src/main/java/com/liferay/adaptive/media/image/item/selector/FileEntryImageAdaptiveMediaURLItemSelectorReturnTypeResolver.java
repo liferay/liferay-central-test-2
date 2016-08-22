@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.adaptative.media.item.selector;
+package com.liferay.adaptive.media.image.item.selector;
 
 import com.liferay.adaptive.media.AdaptiveMedia;
 import com.liferay.adaptive.media.image.finder.ImageAdaptiveMediaFinder;
@@ -42,15 +42,15 @@ import org.osgi.service.component.annotations.Reference;
 	immediate = true, property = {"service.ranking:Integer=100"},
 	service = ItemSelectorReturnTypeResolver.class
 )
-public class FileEntryAdaptativeMediaURLItemSelectorReturnTypeResolver
+public class FileEntryImageAdaptiveMediaURLItemSelectorReturnTypeResolver
 	implements ItemSelectorReturnTypeResolver
-		<AdaptativeMediaURLItemSelectorReturnType, FileEntry> {
+		<ImageAdaptiveMediaURLItemSelectorReturnType, FileEntry> {
 
 	@Override
-	public Class<AdaptativeMediaURLItemSelectorReturnType>
+	public Class<ImageAdaptiveMediaURLItemSelectorReturnType>
 		getItemSelectorReturnTypeClass() {
 
-		return AdaptativeMediaURLItemSelectorReturnType.class;
+		return ImageAdaptiveMediaURLItemSelectorReturnType.class;
 	}
 
 	@Override

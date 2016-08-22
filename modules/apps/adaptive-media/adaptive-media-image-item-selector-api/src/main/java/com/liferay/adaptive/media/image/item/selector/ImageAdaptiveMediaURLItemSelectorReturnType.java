@@ -12,13 +12,13 @@
  * details.
  */
 
-package com.liferay.adaptative.media.item.selector;
+package com.liferay.adaptive.media.image.item.selector;
 
 import com.liferay.item.selector.ItemSelectorReturnType;
 
 /**
  * @author Roberto Díaz
  */
-public class AdaptativeMediaURLItemSelectorReturnType
+public class ImageAdaptiveMediaURLItemSelectorReturnType
 	implements ItemSelectorReturnType {
 }
