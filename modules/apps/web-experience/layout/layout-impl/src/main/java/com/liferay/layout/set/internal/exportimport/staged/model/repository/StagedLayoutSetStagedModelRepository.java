@@ -104,8 +104,10 @@ public class StagedLayoutSetStagedModelRepository
 
 		Stream<Layout> layoutsStream = layouts.stream();
 
-		return layoutsStream.filter(
-			(layout) -> ArrayUtil.contains(layoutIds, layout.getLayoutId())).collect(Collectors.toList());
+		layoutsStream = layoutsStream.filter(
+			(layout) -> ArrayUtil.contains(layoutIds, layout.getLayoutId()));
+
+		return layoutsStream.collect(Collectors.toList());
 	}
 
 	public List<StagedModel> fetchDependencyStagedModels(
