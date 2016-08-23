@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.test.util.TestPropsValues;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.HashMapDictionary;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.service.test.ServiceTestUtil;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
@@ -194,24 +195,18 @@ public class ImageAdaptiveMediaProcessorTest {
 	private void _addTestVariant() throws IOException {
 		Configuration configuration = _configurationAdmin.getConfiguration(
 			"com.liferay.adaptive.media.image.internal.configuration." +
-				"ImageAdaptiveMediaCompanyConfiguration");
+				"ImageAdaptiveMediaCompanyConfiguration", StringPool.QUESTION);
 
 		Dictionary<String, Object> properties = configuration.getProperties();
 
 		if (properties == null) {
-			configuration.update(new HashMapDictionary<>());
-
-			properties = configuration.getProperties();
-		}
-
-		Object value = properties.get("imageVariants");
-
-		if (value != null) {
-			return;
+			properties = new HashMapDictionary<>();
 		}
 
 		properties.put(
 			"imageVariants", new String[] {"small:0:width=100;height=100"});
+
+		configuration.update(properties);
 	}
 
 	private byte[] _getImageBytes() throws Exception {
@@ -241,7 +236,7 @@ public class ImageAdaptiveMediaProcessorTest {
 	private int _getVariantsCount() throws IOException {
 		Configuration configuration = _configurationAdmin.getConfiguration(
 			"com.liferay.adaptive.media.image.internal.configuration." +
-				"ImageAdaptiveMediaCompanyConfiguration");
+				"ImageAdaptiveMediaCompanyConfiguration", StringPool.QUESTION);
 
 		Dictionary<String, Object> properties = configuration.getProperties();
 
