@@ -109,7 +109,6 @@ public class DDLFormBrowserDisplayContext {
 		PortletURL portletURL = _renderResponse.createRenderURL();
 
 		portletURL.setParameter("mvcPath", "/browser/view.jsp");
-
 		portletURL.setParameter("displayStyle", getDisplayStyle());
 		portletURL.setParameter("eventName", getEventName());
 		portletURL.setParameter("orderByCol", getOrderByCol());
