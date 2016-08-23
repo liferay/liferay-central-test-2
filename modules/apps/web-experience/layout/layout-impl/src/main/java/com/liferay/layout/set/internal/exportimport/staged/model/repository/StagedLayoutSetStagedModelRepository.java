@@ -224,7 +224,7 @@ public class StagedLayoutSetStagedModelRepository
 			layoutSet = _layoutSetLocalService.updateLayoutSet(stagedLayoutSet);
 		}
 
-		// Layout Set settings
+		// Layout set settings
 
 		boolean layoutSetSettings = MapUtil.getBoolean(
 			portletDataContext.getParameterMap(),
