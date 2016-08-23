@@ -73,9 +73,8 @@ public class PortletDataContextFactoryImpl
 		long[] layoutIds = portletDataContext.getLayoutIds();
 
 		if (ArrayUtil.isNotEmpty(layoutIds)) {
-			long[] cloneLayoutIds = Arrays.copyOf(layoutIds, layoutIds.length);
-
-			clonePortletDataContext.setLayoutIds(cloneLayoutIds);
+			clonePortletDataContext.setLayoutIds(
+				Arrays.copyOf(layoutIds, layoutIds.length));
 		}
 
 		ManifestSummary manifestSummary =
