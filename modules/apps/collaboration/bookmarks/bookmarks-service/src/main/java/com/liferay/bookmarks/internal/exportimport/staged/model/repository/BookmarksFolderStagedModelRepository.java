@@ -104,12 +104,12 @@ public class BookmarksFolderStagedModelRepository
 		PortletDataContext portletDataContext,
 		BookmarksFolder bookmarksFolder) {
 
-		List<BookmarksEntry> folderEntries =
+		List<BookmarksEntry> bookmarksEntries =
 			_bookmarksEntryLocalService.getEntries(
 				bookmarksFolder.getGroupId(), bookmarksFolder.getFolderId(),
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
-		Stream<StagedModel> mappedStream = folderEntries.stream().map(
+		Stream<StagedModel> mappedStream = bookmarksEntries.stream().map(
 			(bookmarksEntry) -> (StagedModel)bookmarksEntry);
 
 		return mappedStream.collect(Collectors.toList());
