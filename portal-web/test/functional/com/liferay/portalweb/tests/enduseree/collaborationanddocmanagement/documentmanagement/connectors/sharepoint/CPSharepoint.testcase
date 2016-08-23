@@ -758,11 +758,12 @@
 			<var name="dmRepositoryName" value="Sharepoint Repository Name" />
 		</execute>
 
-		<execute macro="DMDocument#editCP">
-			<var name="checkedOut" value="true" />
+		<execute macro="DMNavigator#gotoEditDocument">
 			<var name="dmDocumentTitle" value="Document_1.xls" />
-			<var name="dmDocumentTitleEdit" value="Document_1_Edit.jpg" />
-			<var name="dmRepositoryName" value="true" />
+		</execute>
+
+		<execute macro="DMDocument#editCmd">
+			<var name="dmDocumentTitleEdit" value="Document_1_Edit.xls" />
 		</execute>
 
 		<execute macro="Navigator#openURL" />
