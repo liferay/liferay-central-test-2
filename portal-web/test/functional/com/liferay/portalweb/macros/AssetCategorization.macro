@@ -49,7 +49,7 @@
 
 		<execute function="SelectFrame" value1="relative=top" />
 
-		<execute function="Click" locator1="Icon#CLOSE" />
+		<execute function="AssertClick" locator1="Button#DONE" value1="Done" />
 	</command>
 
 	<command name="addTag">
