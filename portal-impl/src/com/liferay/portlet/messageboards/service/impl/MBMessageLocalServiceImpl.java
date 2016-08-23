@@ -176,9 +176,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		validateDiscussionMaxComments(className, classPK);
 
 		long categoryId = MBCategoryConstants.DISCUSSION_CATEGORY_ID;
-
 		subject = getDiscussionMessageSubject(subject, body);
-
 		List<ObjectValuePair<String, InputStream>> inputStreamOVPs =
 			Collections.emptyList();
 		boolean anonymous = false;
@@ -1546,7 +1544,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		throws PortalException {
 
 		subject = getDiscussionMessageSubject(subject, body);
-
 		List<ObjectValuePair<String, InputStream>> inputStreamOVPs = null;
 		List<String> existingFiles = null;
 		double priority = 0.0;
