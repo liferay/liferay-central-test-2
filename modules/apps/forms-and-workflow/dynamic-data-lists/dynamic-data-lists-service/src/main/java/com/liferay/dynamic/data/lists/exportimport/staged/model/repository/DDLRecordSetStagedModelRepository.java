@@ -137,10 +137,12 @@ public class DDLRecordSetStagedModelRepository
 
 		List<DDLRecord> ddlRecords = ddlRecordSet.getRecords();
 
-		Stream<StagedModel> mappedStream = ddlRecords.stream().map(
+		Stream<DDLRecord> ddlRecordsStream = ddlRecords.stream();
+
+		Stream<StagedModel> stagedModelsStream = ddlRecordsStream.map(
 			(ddlRecord) -> (StagedModel)ddlRecord);
 
-		return mappedStream.collect(Collectors.toList());
+		return stagedModelsStream.collect(Collectors.toList());
 	}
 
 	public List<StagedModel> fetchDependencyStagedModels(

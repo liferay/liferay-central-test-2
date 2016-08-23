@@ -109,10 +109,13 @@ public class BookmarksFolderStagedModelRepository
 				bookmarksFolder.getGroupId(), bookmarksFolder.getFolderId(),
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
-		Stream<StagedModel> mappedStream = bookmarksEntries.stream().map(
+		Stream<BookmarksEntry> bookmarksEntriesStream =
+			bookmarksEntries.stream();
+
+		Stream<StagedModel> stagedModelsStream = bookmarksEntriesStream.map(
 			(bookmarksEntry) -> (StagedModel)bookmarksEntry);
 
-		return mappedStream.collect(Collectors.toList());
+		return stagedModelsStream.collect(Collectors.toList());
 	}
 
 	@Override

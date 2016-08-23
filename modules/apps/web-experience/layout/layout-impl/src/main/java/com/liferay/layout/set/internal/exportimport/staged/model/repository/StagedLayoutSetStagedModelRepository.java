@@ -102,9 +102,10 @@ public class StagedLayoutSetStagedModelRepository
 
 		long[] layoutIds = portletDataContext.getLayoutIds();
 
-		return layouts.stream().filter(
-			(layout) -> ArrayUtil.contains(layoutIds, layout.getLayoutId())).
-				collect(Collectors.toList());
+		Stream<Layout> layoutsStream = layouts.stream();
+
+		return layoutsStream.filter(
+			(layout) -> ArrayUtil.contains(layoutIds, layout.getLayoutId())).collect(Collectors.toList());
 	}
 
 	public List<StagedModel> fetchDependencyStagedModels(
@@ -176,14 +177,16 @@ public class StagedLayoutSetStagedModelRepository
 
 		dynamicQuery.add(privateLayoutProperty.eq(privateLayout));
 
-		List<LayoutSet> companyLayoutSets = dynamicQuery.list();
+		List<LayoutSet> layoutSets = dynamicQuery.list();
 
-		Stream<StagedLayoutSet> mappedStream = companyLayoutSets.stream().map(
+		Stream<LayoutSet> layoutSetsStream = layoutSets.stream();
+
+		Stream<StagedLayoutSet> stagedLayoutSetsStream = layoutSetsStream.map(
 			(layoutSet) ->
 				ModelAdapterUtil.adapt(
 					layoutSet, LayoutSet.class, StagedLayoutSet.class));
 
-		return mappedStream.collect(Collectors.toList());
+		return stagedLayoutSetsStream.collect(Collectors.toList());
 	}
 
 	public ExportActionableDynamicQuery getExportActionableDynamicQuery(
