@@ -348,14 +348,6 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 		}
 	}
 
-	protected void checkMissingAuthor(
-		String content, String fileName, String className) {
-
-		if (!content.contains(" * @author ")) {
-			processMessage(fileName, "Missing author");
-		}
-	}
-
 	protected void checkPackagePath(
 		String content, String fileName, String packagePath) {
 
@@ -663,8 +655,6 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 
 			processMessage(fileName, "UTF-8");
 		}
-
-		checkMissingAuthor(newContent, fileName, className);
 
 		newContent = fixDataAccessConnection(className, newContent);
 		newContent = fixSessionKey(fileName, newContent, sessionKeyPattern);
