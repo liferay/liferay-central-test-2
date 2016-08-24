@@ -366,19 +366,19 @@ public class JournalDisplayContext {
 		ThemeDisplay themeDisplay = (ThemeDisplay) _request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		JSONArray jsonArray = _getFoldersJSON(
+		JSONArray jsonArray = _getFoldersJSONArray(
 			themeDisplay.getScopeGroupId(),
 			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 
-		JSONObject rootNode = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		rootNode.put("icon", "folder");
-		rootNode.put("children", jsonArray);
-		rootNode.put("id", JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID);
-		rootNode.put(
+		jsonObject.put("children", jsonArray);
+		jsonObject.put("icon", "folder");
+		jsonObject.put("id", JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID);
+		jsonObject.put(
 			"name", LanguageUtil.get(themeDisplay.getLocale(), "home"));
 
-		return rootNode.toString();
+		return jsonObject.toString();
 	}
 
 	public String getFolderTitle() throws PortalException {
@@ -1152,30 +1152,30 @@ public class JournalDisplayContext {
 			portletURL.toString());
 	}
 
-	private JSONArray _getFoldersJSON(long groupId, long folderId) {
+	private JSONArray _getFoldersJSONArray(long groupId, long folderId) {
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
 		List<JournalFolder> folders = JournalFolderLocalServiceUtil.getFolders(
 			groupId, folderId);
 
-		JSONArray jsonFolders = JSONFactoryUtil.createJSONArray();
-
 		for (JournalFolder folder : folders) {
-			JSONObject jsonFolder = JSONFactoryUtil.createJSONObject();
+			JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-			JSONArray childrenJsonArray = _getFoldersJSON(
+			JSONArray childrenJsonArray = _getFoldersJSONArray(
 				groupId, folder.getFolderId());
 
 			if (childrenJsonArray.length() > 0) {
-				jsonFolder.put("children", childrenJsonArray);
+				jsonObject.put("children", childrenJsonArray);
 			}
 
-			jsonFolder.put("icon", "folder");
-			jsonFolder.put("id", folder.getFolderId());
-			jsonFolder.put("name", folder.getName());
+			jsonObject.put("icon", "folder");
+			jsonObject.put("id", folder.getFolderId());
+			jsonObject.put("name", folder.getName());
 
-			jsonFolders.put(jsonFolder);
+			jsonArray.put(jsonObject);
 		}
 
-		return jsonFolders;
+		return jsonArray;
 	}
 
 	private String[] _addMenuFavItems;
