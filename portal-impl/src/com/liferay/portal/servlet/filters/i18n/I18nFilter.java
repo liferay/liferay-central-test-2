@@ -83,6 +83,17 @@ public class I18nFilter extends BasePortalFilter {
 		}
 	}
 
+	protected String getDefaultLanguageId(HttpServletRequest request) {
+		String defaultLanguageId = getSiteDefaultLanguageId(request);
+
+		if (Validator.isNull(defaultLanguageId)) {
+			defaultLanguageId = LocaleUtil.toLanguageId(
+				LocaleUtil.getDefault());
+		}
+
+		return defaultLanguageId;
+	}
+
 	protected String getFriendlyURL(HttpServletRequest request) {
 		String friendlyURL = StringPool.BLANK;
 
@@ -99,43 +110,6 @@ public class I18nFilter extends BasePortalFilter {
 		}
 
 		return friendlyURL;
-	}
-
-	protected String getRequestedLanguageId(
-		HttpServletRequest request, String userLanguageId) {
-
-		HttpSession session = request.getSession();
-
-		Locale locale = (Locale)session.getAttribute(
-			Globals.LOCALE_KEY);
-
-		String requestedLanguageId = null;
-
-		if (Validator.isNotNull(locale)) {
-			requestedLanguageId = LocaleUtil.toLanguageId(locale);
-		}
-
-		if (Validator.isNull(requestedLanguageId)) {
-			requestedLanguageId = userLanguageId;
-		}
-
-		if (Validator.isNull(requestedLanguageId)) {
-			requestedLanguageId = CookieKeys.getCookie(
-				request, CookieKeys.GUEST_LANGUAGE_ID, false);
-		}
-
-		return requestedLanguageId;
-	}
-
-	protected String getDefaultLanguageId(HttpServletRequest request) {
-		String defaultLanguageId = getSiteDefaultLanguageId(request);
-
-		if (Validator.isNull(defaultLanguageId)) {
-			defaultLanguageId = LocaleUtil.toLanguageId(
-				LocaleUtil.getDefault());
-		}
-
-		return defaultLanguageId;
 	}
 
 	protected String getRedirect(HttpServletRequest request) throws Exception {
@@ -219,6 +193,31 @@ public class I18nFilter extends BasePortalFilter {
 		return redirect;
 	}
 
+	protected String getRequestedLanguageId(
+		HttpServletRequest request, String userLanguageId) {
+
+		HttpSession session = request.getSession();
+
+		Locale locale = (Locale)session.getAttribute(Globals.LOCALE_KEY);
+
+		String requestedLanguageId = null;
+
+		if (Validator.isNotNull(locale)) {
+			requestedLanguageId = LocaleUtil.toLanguageId(locale);
+		}
+
+		if (Validator.isNull(requestedLanguageId)) {
+			requestedLanguageId = userLanguageId;
+		}
+
+		if (Validator.isNull(requestedLanguageId)) {
+			requestedLanguageId = CookieKeys.getCookie(
+				request, CookieKeys.GUEST_LANGUAGE_ID, false);
+		}
+
+		return requestedLanguageId;
+	}
+
 	protected String getSiteDefaultLanguageId(HttpServletRequest request) {
 		String friendlyURL = getFriendlyURL(request);
 
@@ -287,7 +286,7 @@ public class I18nFilter extends BasePortalFilter {
 
 		String defaultLanguageId = getDefaultLanguageId(request);
 
-		if(Validator.isNull(requestedLanguageId)) {
+		if (Validator.isNull(requestedLanguageId)) {
 			requestedLanguageId = defaultLanguageId;
 		}
 
