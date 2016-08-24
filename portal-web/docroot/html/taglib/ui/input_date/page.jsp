@@ -76,9 +76,9 @@ if (nullable && !required && (dayValue == 0) && (monthValue == -1) && (yearValue
 	nullDate = true;
 }
 
-Format format = FastDateFormatFactoryUtil.getSimpleDateFormat(simpleDateFormatPattern, locale);
-
 String dateString = null;
+
+Format format = FastDateFormatFactoryUtil.getSimpleDateFormat(simpleDateFormatPattern, locale);
 
 if (nullable && nullDate) {
 	dateString = StringPool.BLANK;
