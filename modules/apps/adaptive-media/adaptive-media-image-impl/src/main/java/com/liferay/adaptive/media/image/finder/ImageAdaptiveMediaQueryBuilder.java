@@ -30,33 +30,41 @@ public interface ImageAdaptiveMediaQueryBuilder
 	extends AdaptiveMediaQueryBuilder
 		<FileVersion, ImageAdaptiveMediaProcessor> {
 
-	public AdaptiveMediaAttributeQueryBuilder allForFileEntry(
-		FileEntry fileEntry);
+	public InitialStep allForFileEntry(FileEntry fileEntry);
 
-	public AdaptiveMediaAttributeQueryBuilder allForVersion(
-		FileVersion fileVersion);
+	public InitialStep allForVersion(FileVersion fileVersion);
 
-	public AdaptiveMediaAttributeQueryBuilder forFileEntry(FileEntry fileEntry);
+	public InitialStep forFileEntry(FileEntry fileEntry);
 
-	public AdaptiveMediaAttributeQueryBuilder forVersion(
-		FileVersion fileVersion);
+	public InitialStep forVersion(FileVersion fileVersion);
 
-	public interface AdaptiveMediaAttributeQueryBuilder {
+	public interface FinalStep {
 
 		public AdaptiveMediaQuery<FileVersion, ImageAdaptiveMediaProcessor>
 			done();
 
-		public <V> AdaptiveMediaAttributeQueryBuilder orderBy(
-			AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, V> attribute,
-			boolean asc);
+	}
 
-		public <V> AdaptiveMediaAttributeQueryBuilder with(
+	public interface FuzzySortStep extends FinalStep {
+
+		public <V> FuzzySortStep with(
 			AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, V> attribute,
 			Optional<V> valueOptional);
 
-		public <V> AdaptiveMediaAttributeQueryBuilder with(
+		public <V> FuzzySortStep with(
 			AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, V> attribute,
 			V value);
+
+	}
+
+	public interface InitialStep extends FuzzySortStep, StrictSortStep {
+	}
+
+	public interface StrictSortStep extends FinalStep {
+
+		public <V> StrictSortStep orderBy(
+			AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, V> attribute,
+			boolean asc);
 
 	}
 

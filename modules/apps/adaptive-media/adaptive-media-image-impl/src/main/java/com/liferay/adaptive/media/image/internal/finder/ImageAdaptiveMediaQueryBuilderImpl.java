@@ -31,7 +31,9 @@ import java.util.Optional;
  */
 public class ImageAdaptiveMediaQueryBuilderImpl
 	implements ImageAdaptiveMediaQueryBuilder,
-	   ImageAdaptiveMediaQueryBuilder.AdaptiveMediaAttributeQueryBuilder {
+			   ImageAdaptiveMediaQueryBuilder.FuzzySortStep,
+			   ImageAdaptiveMediaQueryBuilder.InitialStep,
+			   ImageAdaptiveMediaQueryBuilder.StrictSortStep {
 
 	public static final
 		AdaptiveMediaQuery<FileVersion, ImageAdaptiveMediaProcessor> QUERY =
@@ -39,9 +41,7 @@ public class ImageAdaptiveMediaQueryBuilderImpl
 			};
 
 	@Override
-	public AdaptiveMediaAttributeQueryBuilder allForFileEntry(
-		FileEntry fileEntry) {
-
+	public InitialStep allForFileEntry(FileEntry fileEntry) {
 		if (fileEntry == null) {
 			throw new IllegalArgumentException("File entry cannot be null");
 		}
@@ -52,9 +52,7 @@ public class ImageAdaptiveMediaQueryBuilderImpl
 	}
 
 	@Override
-	public AdaptiveMediaAttributeQueryBuilder allForVersion(
-		FileVersion fileVersion) {
-
+	public InitialStep allForVersion(FileVersion fileVersion) {
 		if (fileVersion == null) {
 			throw new IllegalArgumentException("File version cannot be null");
 		}
@@ -70,9 +68,7 @@ public class ImageAdaptiveMediaQueryBuilderImpl
 	}
 
 	@Override
-	public AdaptiveMediaAttributeQueryBuilder forFileEntry(
-		FileEntry fileEntry) {
-
+	public InitialStep forFileEntry(FileEntry fileEntry) {
 		if (fileEntry == null) {
 			throw new IllegalArgumentException("File entry cannot be null");
 		}
@@ -83,9 +79,7 @@ public class ImageAdaptiveMediaQueryBuilderImpl
 	}
 
 	@Override
-	public AdaptiveMediaAttributeQueryBuilder forVersion(
-		FileVersion fileVersion) {
-
+	public InitialStep forVersion(FileVersion fileVersion) {
 		if (fileVersion == null) {
 			throw new IllegalArgumentException("File version cannot be null");
 		}
@@ -130,7 +124,7 @@ public class ImageAdaptiveMediaQueryBuilderImpl
 	}
 
 	@Override
-	public <V> AdaptiveMediaAttributeQueryBuilder orderBy(
+	public <V> StrictSortStep orderBy(
 		AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, V> attribute,
 		boolean asc) {
 
@@ -140,7 +134,7 @@ public class ImageAdaptiveMediaQueryBuilderImpl
 		return this;
 	}
 
-	public <V> AdaptiveMediaAttributeQueryBuilder with(
+	public <V> FuzzySortStep with(
 		AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, V> attribute,
 		Optional<V> valueOptional) {
 
@@ -155,7 +149,7 @@ public class ImageAdaptiveMediaQueryBuilderImpl
 	}
 
 	@Override
-	public <V> AdaptiveMediaAttributeQueryBuilder with(
+	public <V> FuzzySortStep with(
 		AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, V> attribute,
 		V value) {
 
