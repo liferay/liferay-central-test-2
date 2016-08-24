@@ -14,9 +14,13 @@
 
 package com.liferay.portal.template.soy.internal;
 
+import com.liferay.portal.kernel.json.JSONDeserializer;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONSerializer;
 import com.liferay.portal.kernel.template.TemplateConstants;
 import com.liferay.portal.kernel.template.TemplateContextContributor;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.template.TemplateContextHelper;
 import com.liferay.portal.template.TemplateResourceParser;
@@ -54,6 +58,12 @@ import org.osgi.util.tracker.BundleTrackerCustomizer;
 )
 public class SoyTemplateContextHelper extends TemplateContextHelper {
 
+	public Object deserializeValue(Object value) {
+		String json = _jsonSerializer.serializeDeep(value);
+
+		return _jsonDeserializer.deserialize(json);
+	}
+
 	@Override
 	public Map<String, Object> getHelperUtilities(
 		ClassLoader classLoader, boolean restricted) {
@@ -63,7 +73,7 @@ public class SoyTemplateContextHelper extends TemplateContextHelper {
 
 	@Override
 	public Set<String> getRestrictedVariables() {
-		return Collections.emptySet();
+		return SetUtil.fromArray(new String[] {TemplateConstants.NAMESPACE});
 	}
 
 	@Override
@@ -88,6 +98,9 @@ public class SoyTemplateContextHelper extends TemplateContextHelper {
 	@Activate
 	protected void activate(BundleContext bundleContext) {
 		int stateMask = Bundle.ACTIVE | Bundle.RESOLVED;
+
+		_jsonDeserializer = JSONFactoryUtil.createJSONDeserializer();
+		_jsonSerializer = JSONFactoryUtil.createJSONSerializer();
 
 		_bundleTracker = new BundleTracker<>(
 			bundleContext, stateMask,
@@ -123,6 +136,8 @@ public class SoyTemplateContextHelper extends TemplateContextHelper {
 	private final Map<Long, Bundle> _bundleProvidersMap =
 		new ConcurrentHashMap<>();
 	private BundleTracker<List<BundleCapability>> _bundleTracker;
+	private JSONDeserializer<Object> _jsonDeserializer;
+	private JSONSerializer _jsonSerializer;
 	private final List<TemplateContextContributor>
 		_templateContextContributors = new CopyOnWriteArrayList<>();
 
