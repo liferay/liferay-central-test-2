@@ -100,9 +100,8 @@ public class ImageAdaptiveMediaQueryBuilderImpl
 	public Comparator<AdaptiveMedia<ImageAdaptiveMediaProcessor>>
 		getComparator() {
 
-		if (_orderByAttribute != null) {
-			return new AdaptiveMediaAttributeComparator(
-				_orderByAttribute, _orderByAttributeAsc);
+		if (!_sortCriteria.isEmpty()) {
+			return new AdaptiveMediaAttributeComparator(_sortCriteria);
 		}
 
 		return new AdaptiveMediaPropertyDistanceComparator(_attributes);
@@ -131,8 +130,12 @@ public class ImageAdaptiveMediaQueryBuilderImpl
 		AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, V> attribute,
 		boolean asc) {
 
-		_orderByAttribute = attribute;
-		_orderByAttributeAsc = asc;
+		if (attribute == null) {
+			throw new IllegalArgumentException(
+				"Adaptive media attribute cannot be null");
+		}
+
+		_sortCriteria.put(attribute, asc);
 
 		return this;
 	}
@@ -170,8 +173,7 @@ public class ImageAdaptiveMediaQueryBuilderImpl
 		_attributes = new LinkedHashMap<>();
 	private FileEntry _fileEntry;
 	private FileVersion _fileVersion;
-	private AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, ?>
-		_orderByAttribute;
-	private boolean _orderByAttributeAsc = true;
+	private Map<AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, ?>, Boolean>
+		_sortCriteria = new LinkedHashMap<>();
 
 }

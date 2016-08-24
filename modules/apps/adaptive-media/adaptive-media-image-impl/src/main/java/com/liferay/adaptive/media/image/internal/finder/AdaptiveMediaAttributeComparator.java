@@ -18,7 +18,9 @@ import com.liferay.adaptive.media.AdaptiveMedia;
 import com.liferay.adaptive.media.AdaptiveMediaAttribute;
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
 
+import java.util.Collections;
 import java.util.Comparator;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -30,17 +32,21 @@ public class AdaptiveMediaAttributeComparator
 	public AdaptiveMediaAttributeComparator(
 		AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, ?> attribute) {
 
-		this(attribute, true);
+		this(Collections.singletonMap(attribute, true));
 	}
 
 	public AdaptiveMediaAttributeComparator(
 		AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, ?> attribute,
 		boolean ascending) {
 
-		_attribute =
-			(AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, Object>)
-				attribute;
-		_ascending = ascending;
+		this(Collections.singletonMap(attribute, ascending));
+	}
+
+	public AdaptiveMediaAttributeComparator(
+		Map<AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, ?>, Boolean>
+			sortCriteria) {
+
+		_sortCriteria = (Map)sortCriteria;
 	}
 
 	@Override
@@ -48,35 +54,36 @@ public class AdaptiveMediaAttributeComparator
 		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia1,
 		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia2) {
 
-		if (_attribute == null) {
-			return 0;
+		for (Map.Entry
+				<AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, Object>,
+					Boolean> sortCriterion : _sortCriteria.entrySet()) {
+
+			AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, Object>
+				attribute = sortCriterion.getKey();
+
+			Optional<?> value1Optional = adaptiveMedia1.getAttributeValue(
+				attribute);
+			Optional<?> value2Optional = adaptiveMedia2.getAttributeValue(
+				attribute);
+
+			Optional<Integer> valueOptional = value1Optional.flatMap(
+				value1 ->
+					value2Optional.map(
+						value2 -> attribute.compare(value1, value2)));
+
+			int result = valueOptional.map(
+				value -> sortCriterion.getValue() ? value : -value).orElse(0);
+
+			if (result != 0) {
+				return result;
+			}
 		}
 
-		Optional<?> value1Optional = adaptiveMedia1.getAttributeValue(
-			_attribute);
-		Optional<?> value2Optional = adaptiveMedia2.getAttributeValue(
-			_attribute);
-
-		if (!value1Optional.isPresent()) {
-			return 1;
-		}
-		else if (!value2Optional.isPresent()) {
-			return -1;
-		}
-
-		int value = _attribute.compare(
-			value1Optional.get(), value2Optional.get());
-
-		if (_ascending) {
-			return value;
-		}
-		else {
-			return -value;
-		}
+		return 0;
 	}
 
-	private final boolean _ascending;
-	private final AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, Object>
-		_attribute;
+	private final Map
+		<AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, Object>, Boolean>
+			_sortCriteria;
 
 }
