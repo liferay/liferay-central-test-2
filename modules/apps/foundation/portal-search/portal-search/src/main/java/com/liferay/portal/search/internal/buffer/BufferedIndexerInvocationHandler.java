@@ -104,18 +104,17 @@ public class BufferedIndexerInvocationHandler implements InvocationHandler {
 
 		if (args[0] instanceof ResourcedModel &&
 			args[0] instanceof ClassedModel &&
-			"reindex".equals(method.getName())) {
+			Objects.equals(method.getName(), "reindex")) {
 
 			MethodKey methodKey = new MethodKey(
 				Indexer.class, method.getName(), String.class, Long.TYPE);
 
-			ResourcedModel resourcedModel = (ResourcedModel)args[0];
 			ClassedModel classedModel = (ClassedModel)args[0];
+			ResourcedModel resourcedModel = (ResourcedModel)args[0];
 
-			String className = classedModel.getModelClassName();
-			Long classPK = resourcedModel.getResourcePrimKey();
-
-			bufferRequest(methodKey, className, classPK, indexerRequestBuffer);
+			bufferRequest(
+				methodKey, classedModel.getModelClassName(),
+				resourcedModel.getResourcePrimKey(), indexerRequestBuffer);
 		}
 		else if (args[0] instanceof ClassedModel) {
 			MethodKey methodKey = new MethodKey(
@@ -146,7 +145,7 @@ public class BufferedIndexerInvocationHandler implements InvocationHandler {
 			}
 			catch (Exception e) {
 				if (_log.isDebugEnabled()) {
-					_log.debug("Error obtaining resourcePrimKey", e);
+					_log.debug("Unable to get resource primary key", e);
 				}
 			}
 
