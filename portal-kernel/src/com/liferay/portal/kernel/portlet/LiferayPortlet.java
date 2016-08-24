@@ -499,6 +499,35 @@ public class LiferayPortlet extends GenericPortlet {
 			Arrays.asList(StringUtil.split(getInitParameter("valid-paths"))));
 	}
 
+	protected boolean isAddSuccessMessage(ActionRequest actionRequest) {
+		String portletId = PortalUtil.getPortletId(actionRequest);
+
+		if (SessionMessages.contains(
+				actionRequest, portletId +
+					SessionMessages.KEY_SUFFIX_HIDE_DEFAULT_SUCCESS_MESSAGE)) {
+
+			return false;
+		}
+
+		if (SessionMessages.isEmpty(actionRequest)) {
+			return true;
+		}
+
+		int sessionMessagesSize = SessionMessages.size(actionRequest);
+
+		for (String suffix : _IGNORED_SESSION_MESSAGE_SUFFIXES) {
+			if (SessionMessages.contains(actionRequest, portletId + suffix)) {
+				sessionMessagesSize--;
+			}
+		}
+
+		if (sessionMessagesSize == 0) {
+			return true;
+		}
+
+		return false;
+	}
+
 	protected boolean isAlwaysSendRedirect() {
 		return alwaysSendRedirect;
 	}
@@ -628,35 +657,6 @@ public class LiferayPortlet extends GenericPortlet {
 	protected boolean addProcessActionSuccessMessage;
 	protected boolean alwaysSendRedirect;
 	protected Set<String> validPaths;
-
-	protected boolean isAddSuccessMessage(ActionRequest actionRequest) {
-		String portletId = PortalUtil.getPortletId(actionRequest);
-
-		if (SessionMessages.contains(
-				actionRequest, portletId +
-					SessionMessages.KEY_SUFFIX_HIDE_DEFAULT_SUCCESS_MESSAGE)) {
-
-			return false;
-		}
-
-		if (SessionMessages.isEmpty(actionRequest)) {
-			return true;
-		}
-
-		int sessionMessagesSize = SessionMessages.size(actionRequest);
-
-		for (String suffix : _IGNORED_SESSION_MESSAGE_SUFFIXES) {
-			if (SessionMessages.contains(actionRequest, portletId + suffix)) {
-				sessionMessagesSize--;
-			}
-		}
-
-		if (sessionMessagesSize == 0) {
-			return true;
-		}
-
-		return false;
-	}
 
 	private static final String[] _IGNORED_SESSION_MESSAGE_SUFFIXES = {
 		SessionMessages.KEY_SUFFIX_DELETE_SUCCESS_DATA,
