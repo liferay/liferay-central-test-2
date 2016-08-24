@@ -101,7 +101,7 @@ public class LiferayPortlet extends GenericPortlet {
 			boolean emptySessionMessages = isEmptySessionMessages(
 				actionRequest);
 
-			if (_isAddSuccessMessage(actionRequest)) {
+			if (isAddSuccessMessage(actionRequest)) {
 				addSuccessMessage(actionRequest, actionResponse);
 			}
 
@@ -629,7 +629,7 @@ public class LiferayPortlet extends GenericPortlet {
 	protected boolean alwaysSendRedirect;
 	protected Set<String> validPaths;
 
-	private boolean _isAddSuccessMessage(ActionRequest actionRequest) {
+	protected boolean isAddSuccessMessage(ActionRequest actionRequest) {
 		String portletId = PortalUtil.getPortletId(actionRequest);
 
 		if (SessionMessages.contains(
