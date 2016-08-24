@@ -38,7 +38,7 @@
 			<if>
 				<isfalse value="${valid.checksum}" />
 				<then>
-					<fail message="${file} failed checksum." />
+					<fail message="@{file} failed checksum." />
 				</then>
 			</if>
 		</sequential>
