@@ -14,6 +14,7 @@
 
 package com.liferay.adaptive.media.image.internal.finder;
 
+import com.liferay.adaptive.media.AdaptiveMedia;
 import com.liferay.adaptive.media.AdaptiveMediaAttribute;
 import com.liferay.adaptive.media.finder.AdaptiveMediaQuery;
 import com.liferay.adaptive.media.image.finder.ImageAdaptiveMediaQueryBuilder;
@@ -22,6 +23,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -95,6 +97,17 @@ public class ImageAdaptiveMediaQueryBuilderImpl
 		return _attributes;
 	}
 
+	public Comparator<AdaptiveMedia<ImageAdaptiveMediaProcessor>>
+		getComparator() {
+
+		if (_orderByAttribute != null) {
+			return new AdaptiveMediaAttributeComparator(
+				_orderByAttribute, _orderByAttributeAsc);
+		}
+
+		return new AdaptiveMediaPropertyDistanceComparator(_attributes);
+	}
+
 	public FileVersion getFileVersion() throws PortalException {
 		if (_fileVersion != null) {
 			return _fileVersion;
@@ -103,16 +116,6 @@ public class ImageAdaptiveMediaQueryBuilderImpl
 		_fileVersion = _fileEntry.getLatestFileVersion();
 
 		return _fileVersion;
-	}
-
-	public AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, ?>
-		getOrderByAttribute() {
-
-		return _orderByAttribute;
-	}
-
-	public boolean getOrderByAttributeAsc() {
-		return _orderByAttributeAsc;
 	}
 
 	public boolean hasFileVersion() {
