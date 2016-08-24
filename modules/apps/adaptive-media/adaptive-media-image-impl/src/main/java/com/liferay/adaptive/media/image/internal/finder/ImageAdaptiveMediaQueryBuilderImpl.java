@@ -104,7 +104,11 @@ public class ImageAdaptiveMediaQueryBuilderImpl
 			return new AdaptiveMediaAttributeComparator(_sortCriteria);
 		}
 
-		return new AdaptiveMediaPropertyDistanceComparator(_attributes);
+		if (!_attributes.isEmpty()) {
+			return new AdaptiveMediaPropertyDistanceComparator(_attributes);
+		}
+
+		return (v1, v2) -> 0;
 	}
 
 	public FileVersion getFileVersion() throws PortalException {
