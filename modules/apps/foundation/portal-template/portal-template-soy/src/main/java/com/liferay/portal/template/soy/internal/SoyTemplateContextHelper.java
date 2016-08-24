@@ -76,6 +76,28 @@ public class SoyTemplateContextHelper extends TemplateContextHelper {
 		return SetUtil.fromArray(new String[] {TemplateConstants.NAMESPACE});
 	}
 
+	public Bundle getTemplateBundle(String templateId) {
+		int pos = templateId.indexOf(TemplateConstants.BUNDLE_SEPARATOR);
+
+		if (pos == -1) {
+			throw new IllegalArgumentException(
+				String.format(
+					"The templateId \"%s\" does not map to a Soy template",
+					templateId));
+		}
+
+		long bundleId = Long.valueOf(templateId.substring(0, pos));
+
+		Bundle bundle = _bundleProvidersMap.get(bundleId);
+
+		if (bundle == null) {
+			throw new IllegalStateException(
+				"There are no bundles providing " + bundleId);
+		}
+
+		return bundle;
+	}
+
 	@Override
 	public void prepare(
 		Map<String, Object> contextObjects, HttpServletRequest request) {
