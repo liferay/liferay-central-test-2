@@ -77,7 +77,7 @@ public class ImageAdaptiveMediaFinderImpl implements ImageAdaptiveMediaFinder {
 
 		if (query != ImageAdaptiveMediaQueryBuilderImpl.QUERY) {
 			throw new IllegalArgumentException(
-				"Only queries built by the provided query build are valid.");
+				"Only queries built by the provided query builder are valid.");
 		}
 
 		FileVersion fileVersion = queryBuilder.getFileVersion();
