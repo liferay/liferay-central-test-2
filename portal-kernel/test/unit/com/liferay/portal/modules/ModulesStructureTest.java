@@ -409,7 +409,6 @@ public class ModulesStructureTest {
 		if (_containsFile(dirPath, "**/src/main/resources/**/*.soy")) {
 			Assert.assertTrue(
 				"Missing " + gitAttributesPath, gitAttributesExists);
-
 			Assert.assertEquals("*.soy\ttext eol=lf", _read(gitAttributesPath));
 		}
 		else {
