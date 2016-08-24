@@ -2,7 +2,7 @@
 <!DOCTYPE project>
 
 <project name="build-common-ivy" xmlns:antelope="antlib:ise.antelope.tasks">
-	<macrodef name="checksum-downloaded-file">
+	<macrodef name="md5check">
 		<attribute name="file" />
 		<attribute name="md5.url" />
 
@@ -129,7 +129,7 @@
 						</else>
 					</if>
 
-					<checksum-downloaded-file file="${mirrors.cache.artifact.dir}/${mirrors.cache.artifact.file.name}" md5.url="${src}.md5" />
+					<md5check file="${mirrors.cache.artifact.dir}/${mirrors.cache.artifact.file.name}" md5.url="${src}.md5" />
 				</then>
 			</if>
 
