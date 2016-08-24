@@ -136,33 +136,33 @@ public class UpgradeJournalArticleLocalizedValues extends UpgradeProcess {
 				localeSet.addAll(descriptionMap.keySet());
 
 				for (Locale locale : localeSet) {
-					String articleTitle = titleMap.get(locale);
-					String articleDescription = descriptionMap.get(locale);
+					String localizedTitle = titleMap.get(locale);
+					String localizedDescription = descriptionMap.get(locale);
 
-					if ((articleTitle != null) &&
-						(articleTitle.length() > _maxArticleTitleLength)) {
+					if ((localizedTitle != null) &&
+						(localizedTitle.length() > _MAX_LENGTH_TITLE)) {
 
-						articleTitle = articleTitle.substring(
-							0, _maxArticleTitleLength);
+						localizedTitle = localizedTitle.substring(
+							0, _MAX_LENGTH_TITLE);
 
-						_logWarning(articleId, "Title");
+						_log(articleId, "title");
 					}
 
-					if ((articleDescription != null) &&
-						(articleDescription.length() >
-							_maxArticleDescriptionLength)) {
+					if ((localizedDescription != null) &&
+						(localizedDescription.length() >
+							_MAX_LENGTH_DESCRIPTION)) {
 
-						articleDescription = articleDescription.substring(
-							0, _maxArticleDescriptionLength);
+						localizedDescription = localizedDescription.substring(
+							0, _MAX_LENGTH_DESCRIPTION);
 
-						_logWarning(articleId, "Description");
+						_log(articleId, "description");
 					}
 
 					ps2.setLong(1, _increment());
 					ps2.setLong(2, companyId);
 					ps2.setLong(3, articleId);
-					ps2.setString(4, articleTitle);
-					ps2.setString(5, articleDescription);
+					ps2.setString(4, localizedTitle);
+					ps2.setString(5, localizedDescription);
 					ps2.setString(6, LocaleUtil.toLanguageId(locale));
 
 					ps2.addBatch();
@@ -187,25 +187,20 @@ public class UpgradeJournalArticleLocalizedValues extends UpgradeProcess {
 		return db.increment();
 	}
 
-	private void _logWarning(long articleId, String field) {
-		if (_log.isWarnEnabled()) {
-			StringBundler sbInfo = new StringBundler(6);
-
-			sbInfo.append(field);
-			sbInfo.append(" for article");
-			sbInfo.append(" with Id: ");
-			sbInfo.append(articleId);
-			sbInfo.append(" was truncated because it");
-			sbInfo.append(" exceeded maximum length");
-
-			_log.warn(sbInfo.toString());
+	private void _log(long articleId, String columnName) {
+		if (!_log.isWarnEnabled()) {
+			return;
 		}
+
+		return "Truncated the " + columnName + " value for article " +
+			articleId + " because it is too long";
 	}
+
+	private static final int _MAX_LENGTH_DESCRIPTION = 4000;
+
+	private static final int _MAX_LENGTH_TITLE = 400;
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		UpgradeJournalArticleLocalizedValues.class);
-
-	private static final int _maxArticleDescriptionLength = 4000;
-	private static final int _maxArticleTitleLength = 400;
 
 }
