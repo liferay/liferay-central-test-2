@@ -7728,16 +7728,13 @@ public class JournalArticleLocalServiceImpl
 
 		boolean indexingEnabled = serviceContext.isIndexingEnabled();
 
-		try {
-			serviceContext.setIndexingEnabled(false);
+		serviceContext.setIndexingEnabled(false);
 
-			ddmStructureLocalService.updateStructure(
-				serviceContext.getUserId(), ddmStructureId, ddmForm,
-				ddmStructure.getDDMFormLayout(), serviceContext);
-		}
-		finally {
-			serviceContext.setIndexingEnabled(indexingEnabled);
-		}
+		ddmStructureLocalService.updateStructure(
+			serviceContext.getUserId(), ddmStructureId, ddmForm,
+			ddmStructure.getDDMFormLayout(), serviceContext);
+
+		serviceContext.setIndexingEnabled(indexingEnabled);
 	}
 
 	protected void updatePreviousApprovedArticle(JournalArticle article)
