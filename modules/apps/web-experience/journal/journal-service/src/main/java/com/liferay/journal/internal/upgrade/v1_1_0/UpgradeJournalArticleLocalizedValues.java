@@ -193,8 +193,8 @@ public class UpgradeJournalArticleLocalizedValues extends UpgradeProcess {
 		}
 
 		_log.warn(
-			"Truncated the " + columnName + " value for article " +
-				articleId + " because it is too long");
+			"Truncated the " + columnName + " value for article " + articleId +
+				" because it is too long");
 	}
 
 	private static final int _MAX_LENGTH_DESCRIPTION = 4000;
