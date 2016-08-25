@@ -3,7 +3,7 @@
 set -e
 
 PREFIX='adaptive-media-'
-MODULES='api image-impl document-library web'
+MODULES='api document-library image-impl image-item-selector-api image-js web'
 
 for m in ${MODULES}; do
 	(cd ${PREFIX}${m} && ../gradlew deploy)
