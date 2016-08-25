@@ -1724,10 +1724,6 @@ public class DDMStructureLocalServiceImpl
 			DDMStructure structure, ServiceContext serviceContext)
 		throws PortalException {
 
-		if (!serviceContext.isIndexingEnabled()) {
-			return;
-		}
-
 		Indexer<?> indexer = IndexerRegistryUtil.nullSafeGetIndexer(
 			structure.getClassName());
 
