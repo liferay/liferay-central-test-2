@@ -145,7 +145,8 @@ public class FileEntryImageAdaptiveMediaURLItemSelectorReturnTypeResolverTest {
 	private void _addTestVariant() throws IOException {
 		Configuration configuration = _configurationAdmin.getConfiguration(
 			"com.liferay.adaptive.media.image.internal.configuration." +
-				"ImageAdaptiveMediaCompanyConfiguration");
+				"ImageAdaptiveMediaCompanyConfiguration",
+			null);
 
 		Dictionary<String, Object> properties = configuration.getProperties();
 

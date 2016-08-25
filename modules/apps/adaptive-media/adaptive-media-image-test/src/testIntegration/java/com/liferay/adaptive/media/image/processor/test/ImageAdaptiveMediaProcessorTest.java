@@ -195,7 +195,8 @@ public class ImageAdaptiveMediaProcessorTest {
 	private void _addTestVariant() throws IOException {
 		Configuration configuration = _configurationAdmin.getConfiguration(
 			"com.liferay.adaptive.media.image.internal.configuration." +
-				"ImageAdaptiveMediaCompanyConfiguration", StringPool.QUESTION);
+				"ImageAdaptiveMediaCompanyConfiguration",
+			null);
 
 		Dictionary<String, Object> properties = configuration.getProperties();
 
@@ -236,7 +237,8 @@ public class ImageAdaptiveMediaProcessorTest {
 	private int _getVariantsCount() throws IOException {
 		Configuration configuration = _configurationAdmin.getConfiguration(
 			"com.liferay.adaptive.media.image.internal.configuration." +
-				"ImageAdaptiveMediaCompanyConfiguration", StringPool.QUESTION);
+				"ImageAdaptiveMediaCompanyConfiguration",
+			null);
 
 		Dictionary<String, Object> properties = configuration.getProperties();
 
