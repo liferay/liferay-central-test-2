@@ -22,6 +22,7 @@ script:
   - ./scripts/run_unit_tests.sh
   - ../bundles/tomcat-8.0.32/bin/startup.sh
   - ./scripts/deploy_modules.sh
+  - ./scripts/deploy_temp_libs.sh
   - travis_wait ./scripts/wait_until_startup.sh
   - cd adaptive-media-image-test && ../gradlew clean testIntegration
 
