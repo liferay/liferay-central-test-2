@@ -114,17 +114,11 @@ public class FileEntryImageAdaptiveMediaURLItemSelectorReturnTypeResolver
 
 		sourceJSONObject.put("src", adaptiveMedia.getURI());
 
-		JSONArray attributesJSONArray = JSONFactoryUtil.createJSONArray();
+		JSONObject attributesJSONObject = JSONFactoryUtil.createJSONObject();
 
 		widthOptional.ifPresent(
 			width -> {
-				JSONObject maxWidthJSONObject =
-					JSONFactoryUtil.createJSONObject();
-
-				maxWidthJSONObject.put("key", "max-width");
-				maxWidthJSONObject.put("value", width + "px");
-
-				attributesJSONArray.put(maxWidthJSONObject);
+				attributesJSONObject.put("max-width", width + "px");
 
 				if (previousAdaptiveMedia != null) {
 					Optional<Integer> previousWidthOptional =
@@ -132,22 +126,14 @@ public class FileEntryImageAdaptiveMediaURLItemSelectorReturnTypeResolver
 							ImageAdaptiveMediaAttribute.IMAGE_WIDTH);
 
 					previousWidthOptional.ifPresent(
-						previousWidth -> {
-							JSONObject minWidthJSONObject =
-								JSONFactoryUtil.createJSONObject();
-
-							minWidthJSONObject.put("key", "min-width");
-							minWidthJSONObject.put(
-								"value", previousWidth + "px");
-
-							attributesJSONArray.put(minWidthJSONObject);
-						}
-					);
+						previousWidth ->
+							attributesJSONObject.put(
+								"min-width", previousWidth + "px"));
 				}
 			}
 		);
 
-		return sourceJSONObject.put("attributes", attributesJSONArray);
+		return sourceJSONObject.put("attributes", attributesJSONObject);
 	}
 
 	@Reference(

@@ -53,15 +53,15 @@
 
 					itemValue.sources.forEach(
 						function(source) {
-							var mediaText = '';
+							var propertyNames = source.attributes.getOwnPropertyNames();
 
-							source.attributes.forEach(
-								function(attr, index) {
-									if (index > 0) {
-										mediaText += ' and ';
-									}
-									mediaText += '(' + attr.key + ':' + attr.value + ')';
-								}
+							var mediaText = propertyNames.reduce(
+								function(previous, current) {
+									var value = '(' + current + ':' + source.attributes[current] + ')';
+
+									return previous ? ' and ' + value : value;
+								},
+								''
 							);
 
 							sources += Lang.sub(
