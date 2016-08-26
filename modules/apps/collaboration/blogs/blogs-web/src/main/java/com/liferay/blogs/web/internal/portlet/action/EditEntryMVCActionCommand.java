@@ -296,8 +296,6 @@ public class EditEntryMVCActionCommand extends BaseMVCActionCommand {
 				JSONPortletResponseUtil.writeJSON(
 					actionRequest, actionResponse, jsonObject);
 
-				hideDefaultSuccessMessage(actionRequest);
-
 				return;
 			}
 
