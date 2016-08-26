@@ -638,23 +638,25 @@ public class JspServlet extends HttpServlet {
 					path = path.subpath(2, path.getNameCount());
 				}
 
-				Path pathFileName = path.getFileName();
-
-				String stringFileName = pathFileName.toString();
-
-				String escapedStringFileName = stringFileName.replaceAll(
-					StringPool.UNDERLINE, "_005f");
-
-				String classFileName = escapedStringFileName.substring(
-					0, escapedStringFileName.length() - 4) + "_jsp.class";
-
 				String dirName = "/org/apache/jsp/";
 
-				if (path.getParent() != null) {
-					dirName += path.getParent().toString() + "/";
+				Path parentPath = path.getParent();
+
+				if (parentPath != null) {
+					dirName += parentPath.toString() + "/";
 				}
 
-				paths.add(Paths.get(scratchDirName, dirName, classFileName));
+				Path fileNamePath = path.getFileName();
+
+				String fileName = fileNamePath.toString();
+
+				fileName = fileName.replaceAll(StringPool.UNDERLINE, "_005f");
+
+				fileName = fileName.substring(0, fileName.length() - 4);
+
+				fileName = fileName + "_jsp.class";
+
+				paths.add(Paths.get(scratchDirName, dirName, fileName));
 			}
 
 			_deleteOutdatedJspFiles(scratchDirName, paths);
