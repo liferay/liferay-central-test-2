@@ -3,11 +3,7 @@ AUI.add(
 	function(A) {
 		var AArray = A.Array;
 
-		var CSS_BTN_LG = A.getClassName('btn', 'lg');
-
-		var CSS_BTN_LINK = A.getClassName('btn', 'link');
-
-		var CSS_BTN_PRIMARY = A.getClassName('btn', 'primary');
+		var FormBuilderConfirmDialog = Liferay.DDL.FormBuilderConfirmationDialog;
 
 		var FieldTypes = Liferay.DDM.Renderer.FieldTypes;
 
@@ -144,7 +140,7 @@ AUI.add(
 						var fieldContext = fieldSettingsPanel.getPreviousContext();
 
 						if (fieldSettingsPanel.hasChanges()) {
-							instance.confirmCancelFieldChangesDiolog(
+							instance.openConfirmCancelFieldChangesDiolog(
 								function() {
 									instance.confirmCancelFieldChanges(field, fieldContext, fieldSettingsPanel);
 
@@ -169,49 +165,6 @@ AUI.add(
 						settingForm.set('context', fieldSettingsPanel._previousFormContext);
 
 						settingForm.render();
-					},
-
-					confirmCancelFieldChangesDiolog: function(confirmFn) {
-						var instance = this;
-
-						Liferay.Util.openWindow(
-							{
-								dialog: {
-									bodyContent: TPL_CONFIRM_CANCEL_FIELD_EDITION,
-									destroyOnHide: true,
-									draggable: false,
-									height: 210,
-									resizable: false,
-									toolbars: {
-										footer: [
-											{
-												cssClass: [CSS_BTN_LG, CSS_BTN_PRIMARY].join(' '),
-												labelHTML: Liferay.Language.get('yes-cancel'),
-												on: {
-													click: function(event) {
-														confirmFn.apply(instance, arguments);
-
-														Liferay.Util.getWindow('cancelFieldChangesDialog').hide();
-													}
-												}
-											},
-											{
-												cssClass: [CSS_BTN_LG, CSS_BTN_LINK].join(' '),
-												labelHTML: Liferay.Language.get('dismiss'),
-												on: {
-													click: function() {
-														Liferay.Util.getWindow('cancelFieldChangesDialog').hide();
-													}
-												}
-											}
-										]
-									},
-									width: false
-								},
-								id: 'cancelFieldChangesDialog',
-								title: Liferay.Language.get('cancel-field-changes')
-							}
-						);
 					},
 
 					contains: function(field) {
@@ -303,6 +256,18 @@ AUI.add(
 						}
 
 						return instance._sidebar;
+					},
+
+					openConfirmCancelFieldChangesDiolog: function(confirmFn) {
+						var instance = this;
+
+						var config = {
+							body: TPL_CONFIRM_CANCEL_FIELD_EDITION,
+							confirmFn: confirmFn,
+							id: 'cancelFieldChangesDialog'
+						};
+
+						FormBuilderConfirmDialog.open(config);
 					},
 
 					showFieldSettingsPanel: function(field) {
@@ -763,6 +728,6 @@ AUI.add(
 	},
 	'',
 	{
-		requires: ['aui-form-builder', 'aui-form-builder-pages', 'aui-popover', 'liferay-ddl-form-builder-field-settings-sidebar', 'liferay-ddl-form-builder-field-support', 'liferay-ddl-form-builder-field-type', 'liferay-ddl-form-builder-field-types-modal', 'liferay-ddl-form-builder-layout-deserializer', 'liferay-ddl-form-builder-layout-visitor', 'liferay-ddl-form-builder-pages-manager', 'liferay-ddl-form-builder-util', 'liferay-ddm-form-field-types', 'liferay-ddm-form-renderer']
+		requires: ['aui-form-builder', 'aui-form-builder-pages', 'aui-popover', 'liferay-ddl-form-builder-confirmation-dialog', 'liferay-ddl-form-builder-field-settings-sidebar', 'liferay-ddl-form-builder-field-support', 'liferay-ddl-form-builder-field-type', 'liferay-ddl-form-builder-field-types-modal', 'liferay-ddl-form-builder-layout-deserializer', 'liferay-ddl-form-builder-layout-visitor', 'liferay-ddl-form-builder-pages-manager', 'liferay-ddl-form-builder-util', 'liferay-ddm-form-field-types', 'liferay-ddm-form-renderer']
 	}
 );
