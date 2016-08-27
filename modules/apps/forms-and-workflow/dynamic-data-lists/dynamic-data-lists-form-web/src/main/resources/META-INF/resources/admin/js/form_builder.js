@@ -141,14 +141,14 @@ AUI.add(
 
 						var fieldSettingsPanel = instance.getFieldSettingsPanel();
 
-						var currentFieldSettings = fieldSettingsPanel.getFieldSettings();
+						var fieldContext = fieldSettingsPanel.getPreviousContext();
 
-						var fieldContext = fieldSettingsPanel._previousContext;
-
-						if (JSON.stringify(fieldContext) != JSON.stringify(currentFieldSettings.context)) {
+						if (fieldSettingsPanel.hasChanges()) {
 							instance.confirmCancelFieldChangesDiolog(
 								function() {
 									instance.confirmCancelFieldChanges(field, fieldContext, fieldSettingsPanel);
+
+									fieldSettingsPanel.close();
 								}
 							);
 						}

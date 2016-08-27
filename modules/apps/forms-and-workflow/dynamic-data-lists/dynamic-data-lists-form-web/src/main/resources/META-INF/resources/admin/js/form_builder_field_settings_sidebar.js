@@ -67,10 +67,36 @@ AUI.add(
 						return settings;
 					},
 
+					getPreviousContext: function() {
+						var instance = this;
+
+						return instance._previousContext;
+					},
+
+					hasChanges: function() {
+						var instance = this;
+
+						var previousContext = instance.getPreviousContext();
+
+						var currentFieldSettings = instance.getFieldSettings();
+
+						return JSON.stringify(previousContext) !== JSON.stringify(currentFieldSettings.context);
+					},
+
 					_afterOpenStart: function() {
 						var instance = this;
 
 						instance._showLoading();
+					},
+
+					_afterPressEscapeKey: function() {
+						var instance = this;
+
+						if (instance.get('boundingBox').hasClass('open')) {
+							var field = instance.get('field');
+
+							instance.get('builder').cancelFieldEdition(field);
+						}
 					},
 
 					_afterSidebarOpen: function() {
