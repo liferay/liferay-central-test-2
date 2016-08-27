@@ -70,7 +70,9 @@ public class AlloyEditorAccessibilityConfigContributor
 		}
 
 		stylesJSONObject.put("selections", selectionsJSONArray);
+
 		toolbarsJSONObject.put("styles", stylesJSONObject);
+
 		jsonObject.put("toolbars", toolbarsJSONObject);
 	}
 
