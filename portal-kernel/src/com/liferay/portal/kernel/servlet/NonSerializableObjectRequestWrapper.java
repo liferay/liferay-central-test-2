@@ -113,15 +113,18 @@ public class NonSerializableObjectRequestWrapper
 		ServletRequest servletRequest = getRequest();
 
 		try {
-			Field attributes = ReflectionUtil.getDeclaredField(
-				servletRequest.getClass(), "attributes");
+			Field servletRequestAttributesField =
+				ReflectionUtil.getDeclaredField(
+					servletRequest.getClass(), "attributes");
 
-			Object attributesInstance = attributes.get(servletRequest);
+			Object servletRequestAttributes = servletRequestAttributesField.get(
+				servletRequest);
 
-			Field attrs = ReflectionUtil.getDeclaredField(
-				attributesInstance.getClass(), "attributes");
+			Field attributesField = ReflectionUtil.getDeclaredField(
+				servletRequestAttributes.getClass(), "attributes");
 
-			Map map = (Map)attrs.get(attributesInstance);
+			Map<Object, Object> map = (Map<Object, Object>)attributesField.get(
+				servletRequestAttributes);
 
 			Object attribute = map.get(attributeName);
 
@@ -132,14 +135,16 @@ public class NonSerializableObjectRequestWrapper
 		}
 		catch (NoSuchFieldException nsfe) {
 			if (_log.isDebugEnabled()) {
-				_log.debug("We only deal with Weblogic requests");
+				_log.debug(
+					"Unable to get fields from a Weblogic servlet request");
 			}
 		}
 		catch (Exception e) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"Setting to false the field isWebLogicClassLoader in " +
-						"the servletRequest " + servletRequest);
+					"Unable to set WebLogic class loader flag for attribute " +
+						attributeName + " in servlet request " +
+							servletRequest);
 			}
 		}
 	}
