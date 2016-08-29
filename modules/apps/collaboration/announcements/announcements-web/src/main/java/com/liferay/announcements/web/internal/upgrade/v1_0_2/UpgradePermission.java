@@ -286,7 +286,7 @@ public class UpgradePermission extends UpgradeProcess {
 
 	static {
 
-		// see ResourceActionLocalServiceImpl.checkResourceActions
+		// See ResourceActionLocalServiceImpl#checkResourceActions
 
 		long viewActionReservedBitwiseValue = 1;
 
