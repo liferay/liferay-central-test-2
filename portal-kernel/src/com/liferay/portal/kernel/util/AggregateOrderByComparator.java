@@ -25,21 +25,25 @@ import java.util.List;
  */
 public class AggregateOrderByComparator<T> extends OrderByComparator<T> {
 
-	public AggregateOrderByComparator(List<OrderByComparator<T>> comparators) {
-		_comparators = new ArrayList<>(comparators);
+	public AggregateOrderByComparator(
+		List<OrderByComparator<T>> orderByComparators) {
+
+		_orderByComparators = new ArrayList<>(orderByComparators);
 	}
 
-	public AggregateOrderByComparator(OrderByComparator<T>... comparators) {
-		_comparators = new ArrayList<>(Arrays.asList(comparators));
+	public AggregateOrderByComparator(
+		OrderByComparator<T>... orderByComparators) {
+
+		_orderByComparators = new ArrayList<>(Arrays.asList(orderByComparators));
 	}
 
 	@Override
-	public int compare(T o1, T o2) {
-		for (OrderByComparator<T> comparator : _comparators) {
-			int compare = comparator.compare(o1, o2);
+	public int compare(T t1, T t2) {
+		for (OrderByComparator<T> orderByComparators : _orderByComparators) {
+			int value = orderByComparators.compare(t1, t2);
 
-			if (compare != 0) {
-				return compare;
+			if (value != 0) {
+				return value;
 			}
 		}
 
@@ -49,7 +53,8 @@ public class AggregateOrderByComparator<T> extends OrderByComparator<T> {
 	@Override
 	public String getOrderBy() {
 		return StringUtil.merge(
-			ListUtil.toList(_comparators, OrderByComparator::getOrderBy), ",");
+			ListUtil.toList(
+				_orderByComparators, OrderByComparator::getOrderBy), ",");
 	}
 
 	@Override
@@ -57,6 +62,6 @@ public class AggregateOrderByComparator<T> extends OrderByComparator<T> {
 		return Collections.reverseOrder(this);
 	}
 
-	private final List<OrderByComparator<T>> _comparators;
+	private final List<OrderByComparator<T>> _orderByComparators;
 
 }
