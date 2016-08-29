@@ -59,10 +59,10 @@ public class UpgradeImageTypeContent extends UpgradeProcess {
 
 		contentDocument = contentDocument.clone();
 
-		XPath xPathSelector = SAXReaderUtil.createXPath(
+		XPath xPath = SAXReaderUtil.createXPath(
 			"//dynamic-element[@type='image']");
 
-		List<Node> imageNodes = xPathSelector.selectNodes(contentDocument);
+		List<Node> imageNodes = xPath.selectNodes(contentDocument);
 
 		for (Node imageNode : imageNodes) {
 			Element imageEl = (Element)imageNode;
