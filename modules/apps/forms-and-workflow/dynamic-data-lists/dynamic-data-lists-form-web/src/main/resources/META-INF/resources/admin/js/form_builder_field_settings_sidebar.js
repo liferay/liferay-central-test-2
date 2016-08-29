@@ -92,7 +92,7 @@ AUI.add(
 					_afterPressEscapeKey: function() {
 						var instance = this;
 
-						if (instance.get('boundingBox').hasClass('open')) {
+						if (instance.isOpen()) {
 							var field = instance.get('field');
 
 							instance.get('builder').cancelFieldEdition(field);

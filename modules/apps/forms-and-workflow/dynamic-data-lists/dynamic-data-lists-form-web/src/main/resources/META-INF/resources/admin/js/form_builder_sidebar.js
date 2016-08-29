@@ -126,10 +126,16 @@ AUI.add(
 						return AObject.getValue(window, ['ddl', 'sidebar', 'render']);
 					},
 
+					isOpen: function() {
+						var instance = this;
+
+						return !!instance._isOpen;
+					},
+
 					open: function() {
 						var instance = this;
 
-						if (!instance._isOpen) {
+						if (!instance.isOpen()) {
 							instance.fire('open:start');
 						}
 						else {
@@ -147,10 +153,10 @@ AUI.add(
 						instance.close();
 					},
 
-					_afterPressEscapeKey: function(e) {
+					_afterPressEscapeKey: function() {
 						var instance = this;
 
-						if (instance.get('boundingBox').hasClass('open')) {
+						if (instance.isOpen()) {
 							instance.close();
 						}
 					},
