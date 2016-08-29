@@ -202,7 +202,7 @@ if (comment) {
 			}
 			%>
 
-			<aui:select inlineLabel="<%= Boolean.TRUE.toString() %>" label="viewable-by" name="socialRelationType" value="<%= socialRelationType %>" onChange='<%= renderResponse.getNamespace() + "relationTypeOnChange(event);" %>'>
+			<aui:select inlineLabel="<%= Boolean.TRUE.toString() %>" label="viewable-by" name="socialRelationType" onChange='<%= renderResponse.getNamespace() + "relationTypeOnChange(event);" %>' value="<%= socialRelationType %>">
 				<aui:option label="everyone" value="<%= MicroblogsEntryConstants.TYPE_EVERYONE %>" />
 				<aui:option label="connections" value="<%= SocialRelationConstants.TYPE_BI_CONNECTION %>" />
 				<aui:option label="followers" value="<%= SocialRelationConstants.TYPE_UNI_FOLLOWER %>" />
