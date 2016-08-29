@@ -45,12 +45,12 @@ public class UpgradeApp extends UpgradeProcess {
 			runSQL("alter table Marketplace_App add iconURL STRING");
 		}
 
-		if (!hasColumn("Marketplace_App", "required")) {
-			runSQL("alter table Marketplace_App add required BOOLEAN");
-		}
-
 		if (!hasColumn("Marketplace_App", "version")) {
 			runSQL("alter table Marketplace_App add version VARCHAR(75)");
+		}
+
+		if (!hasColumn("Marketplace_App", "required")) {
+			runSQL("alter table Marketplace_App add required BOOLEAN");
 		}
 	}
 
