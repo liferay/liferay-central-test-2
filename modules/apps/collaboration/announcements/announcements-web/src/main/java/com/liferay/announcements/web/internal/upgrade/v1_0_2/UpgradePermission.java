@@ -35,7 +35,7 @@ import java.util.Set;
 /**
  * @author Roberto Díaz
  */
-public class UpgradePermissions extends UpgradeProcess {
+public class UpgradePermission extends UpgradeProcess {
 
 	protected void addAnnouncementsAdminResourceActions() {
 		addResourceAction(
@@ -282,7 +282,7 @@ public class UpgradePermissions extends UpgradeProcess {
 	private static final long _VIEW_VALUE = 1;
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		UpgradePermissions.class);
+		UpgradePermission.class);
 
 	static {
 
