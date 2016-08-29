@@ -16,14 +16,14 @@ cache:
 
 install:
   - ./scripts/install_bundle.sh
-  - ./gradlew setupTestableTomcat
+  - ./scripts/run.sh ./gradlew setupTestableTomcat
 
 script:
   - ./scripts/run_unit_tests.sh
   - ../bundles/tomcat-8.0.32/bin/startup.sh
   - ./scripts/deploy_modules.sh
   - travis_wait ./scripts/wait_until_startup.sh
-  - cd adaptive-media-image-test && ../gradlew clean testIntegration
+  - ./scripts/run_integration_tests.sh
 
 after_success:
-  - cd .. && ./gradlew coveralls
+  - ./gradlew coveralls

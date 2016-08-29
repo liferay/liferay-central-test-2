@@ -4,7 +4,7 @@ set -e
 
 run_tests()
 {
-	./gradlew compileJava compileTestJava test
+	./scripts/run.sh ./gradlew compileJava compileTestJava test
 }
 
 assert_success()
