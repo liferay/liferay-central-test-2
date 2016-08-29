@@ -543,7 +543,7 @@ public class DDMStructureLocalServiceTest extends BaseDDMServiceTestCase {
 	}
 
 	@Test(expected = InvalidParentStructureException.class)
-	public void testUpdateStructureWithCycles() throws Exception {
+	public void testValidateParentStructure() throws Exception {
 		DDMStructure structure1 = addStructure(
 			0, _classNameId, null, "Test Structure 1", null,
 			read("ddm-structure-text-field.xsd"), StorageType.JSON.getValue(),
