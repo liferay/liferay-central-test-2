@@ -64,3 +64,8 @@ task coverageReport(type: org.gradle.testing.jacoco.tasks.JacocoReport) {
 tasks.coveralls {
 	dependsOn 'coverageReport'
 }
+
+coveralls.jacocoReportPath = "build/reports/jacoco/coverageReport/coverageReport.xml"
+coveralls.sourceDirs = files(subprojects.sourceSets.main.allSource.srcDirs).collect {
+	file -> file.absolutePath
+}
