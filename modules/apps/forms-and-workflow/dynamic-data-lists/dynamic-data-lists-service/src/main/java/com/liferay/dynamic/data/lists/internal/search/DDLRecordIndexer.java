@@ -307,12 +307,6 @@ public class DDLRecordIndexer extends BaseIndexer<DDLRecord> {
 					recordVersionDynamicQuery.setProjection(
 						ProjectionFactoryUtil.property("recordId"));
 
-					Property statusProperty = PropertyFactoryUtil.forName(
-						"status");
-
-					recordVersionDynamicQuery.add(
-						statusProperty.eq(WorkflowConstants.STATUS_APPROVED));
-
 					dynamicQuery.add(
 						recordIdProperty.in(recordVersionDynamicQuery));
 
