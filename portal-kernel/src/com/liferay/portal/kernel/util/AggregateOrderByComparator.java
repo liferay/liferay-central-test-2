@@ -34,7 +34,8 @@ public class AggregateOrderByComparator<T> extends OrderByComparator<T> {
 	public AggregateOrderByComparator(
 		OrderByComparator<T>... orderByComparators) {
 
-		_orderByComparators = new ArrayList<>(Arrays.asList(orderByComparators));
+		_orderByComparators = new ArrayList<>(
+			Arrays.asList(orderByComparators));
 	}
 
 	@Override
