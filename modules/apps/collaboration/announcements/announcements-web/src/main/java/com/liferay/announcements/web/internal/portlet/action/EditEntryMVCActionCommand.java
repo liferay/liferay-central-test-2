@@ -127,10 +127,10 @@ public class EditEntryMVCActionCommand extends BaseMVCActionCommand {
 		String url = ParamUtil.getString(actionRequest, "url");
 		String type = ParamUtil.getString(actionRequest, "type");
 
+		Date displayDate = new Date();
+
 		boolean displayImmediately = ParamUtil.getBoolean(
 			actionRequest, "displayImmediately");
-
-		Date displayDate = new Date();
 
 		if (!displayImmediately) {
 			int displayDateMonth = ParamUtil.getInteger(
