@@ -55,7 +55,8 @@ public class AggregateOrderByComparator<T> extends OrderByComparator<T> {
 	public String getOrderBy() {
 		return StringUtil.merge(
 			ListUtil.toList(
-				_orderByComparators, OrderByComparator::getOrderBy), ",");
+				_orderByComparators, OrderByComparator::getOrderBy),
+				StringPool.COMMA);
 	}
 
 	@Override
