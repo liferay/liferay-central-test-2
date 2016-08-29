@@ -445,7 +445,7 @@
 		</execute>
 	</command>
 
-	<command name="EditDocumentTitleFileExtension" priority="4">
+	<command name="ViewOriginalFileExtensionAfterUnsuccessfulExtensionChange" priority="4">
 		<execute macro="DMRepository#gotoCP">
 			<var name="dmRepositoryName" value="Sharepoint Repository Name" />
 		</execute>
@@ -522,7 +522,7 @@
 		</execute>
 	</command>
 
-	<command name="EditDocumentTitleRemoveFileExtension" priority="4">
+	<command name="ViewOriginalFileExtensionAfterUnsuccessfulExtensionRemoval" priority="4">
 		<execute macro="DMRepository#gotoCP">
 			<var name="dmRepositoryName" value="Sharepoint Repository Name" />
 		</execute>
