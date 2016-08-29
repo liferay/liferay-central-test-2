@@ -1544,7 +1544,7 @@ public class DDMStructureLocalServiceImpl
 
 		DDMForm parentDDMForm = getParentDDMForm(parentStructureId);
 
-		validateHierarchy(structure.getStructureId(), parentStructureId);
+		validateParentStructure(structure.getStructureId(), parentStructureId);
 		validate(nameMap, parentDDMForm, ddmForm);
 
 		structure.setParentStructureId(parentStructureId);
@@ -1908,7 +1908,8 @@ public class DDMStructureLocalServiceImpl
 		}
 	}
 
-	protected void validateHierarchy(long structureId, long parentStructureId)
+	protected void validateParentStructure(
+			long structureId, long parentStructureId)
 		throws PortalException {
 
 		while (parentStructureId != 0) {
