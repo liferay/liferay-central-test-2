@@ -544,24 +544,24 @@ public class DDMStructureLocalServiceTest extends BaseDDMServiceTestCase {
 
 	@Test(expected = InvalidParentStructureException.class)
 	public void testUpdateStructureWithCycles() throws Exception {
-		DDMStructure structureNode1 = addStructure(
-			0, _classNameId, null, "Test Structure1", null,
+		DDMStructure structure1 = addStructure(
+			0, _classNameId, null, "Test Structure 1", null,
 			read("ddm-structure-text-field.xsd"), StorageType.JSON.getValue(),
 			DDMStructureConstants.TYPE_DEFAULT);
 
-		DDMStructure structureNode2 = addStructure(
-			structureNode1.getStructureId(), _classNameId, null,
-			"Test Structure2", null, read("ddm-structure-radio-field.xsd"),
+		DDMStructure structure2 = addStructure(
+			structure1.getStructureId(), _classNameId, null,
+			"Test Structure 2", null, read("ddm-structure-radio-field.xsd"),
 			StorageType.JSON.getValue(), DDMStructureConstants.TYPE_DEFAULT);
 
-		DDMStructure structureNode3 = addStructure(
-			structureNode2.getStructureId(), _classNameId, null,
-			"Test Structure3", null, read("ddm-structure-select-field.xsd"),
+		DDMStructure structure3 = addStructure(
+			structure2.getStructureId(), _classNameId, null,
+			"Test Structure 3", null, read("ddm-structure-select-field.xsd"),
 			StorageType.JSON.getValue(), DDMStructureConstants.TYPE_DEFAULT);
 
-		structureNode1.setParentStructureId(structureNode3.getStructureId());
+		structure1.setParentStructureId(structure3.getStructureId());
 
-		updateStructure(structureNode1);
+		updateStructure(structure1);
 	}
 
 	@Test
