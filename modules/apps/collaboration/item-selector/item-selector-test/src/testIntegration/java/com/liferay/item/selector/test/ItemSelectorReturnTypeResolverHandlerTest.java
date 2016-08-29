@@ -22,6 +22,7 @@ import com.liferay.item.selector.ItemSelectorView;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.List;
@@ -88,14 +89,8 @@ public class ItemSelectorReturnTypeResolverHandlerTest {
 			TestItemSelectorCriterion testItemSelectorCriterion =
 				new TestItemSelectorCriterion();
 
-			List<ItemSelectorReturnType> desiredItemSelectorReturnTypes =
-				new ArrayList<>();
-
-			desiredItemSelectorReturnTypes.add(
-				new TestItemSelectorReturnType());
-
 			testItemSelectorCriterion.setDesiredItemSelectorReturnTypes(
-				desiredItemSelectorReturnTypes);
+				Arrays.asList(new TestItemSelectorReturnType()));
 
 			ItemSelectorReturnTypeResolver itemSelectorReturnTypeResolver =
 				_itemSelectorReturnTypeResolverHandler.
