@@ -253,7 +253,7 @@ public class ItemSelectorCriterionSerializerImpl
 
 			List<ItemSelectorReturnType> supportedItemSelectorReturnTypes =
 				_itemSelectorReturnTypeProviderHandler.
-					getItemSelectorReturnTypes(
+					getSupportedItemSelectorReturnTypes(
 						itemSelectorView.
 							getSupportedItemSelectorReturnTypes(),
 						itemSelectorViewKey);
