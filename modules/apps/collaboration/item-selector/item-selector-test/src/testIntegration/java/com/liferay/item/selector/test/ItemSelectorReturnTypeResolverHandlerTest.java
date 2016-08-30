@@ -19,6 +19,7 @@ import com.liferay.item.selector.ItemSelectorReturnType;
 import com.liferay.item.selector.ItemSelectorReturnTypeResolver;
 import com.liferay.item.selector.ItemSelectorReturnTypeResolverHandler;
 import com.liferay.item.selector.ItemSelectorView;
+import com.liferay.item.selector.ItemSelectorViewReturnTypeProvider;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 
 import java.util.ArrayList;
@@ -72,18 +73,28 @@ public class ItemSelectorReturnTypeResolverHandlerTest {
 
 		ServiceRegistration<ItemSelectorView>
 			itemSelectorViewServiceRegistration = registerItemSelectorView(
-				testItemSelectorView);
+				testItemSelectorView, "test-view");
 
 		ServiceRegistration<ItemSelectorReturnTypeResolver>
 			itemSelectorReturnTypeResolverServiceRegistration =
 				registerReturnTypeResolver(
 					new TestItemSelectorReturnTypeResolver(), 50);
 
+		ItemSelectorViewReturnTypeProvider itemSelectorViewReturnTypeProvider =
+			new TestItemSelectorViewReturnTypeProvider();
+
+		ServiceRegistration<ItemSelectorViewReturnTypeProvider>
+			itemSelectorViewReturnTypeProviderServiceRegistration =
+				registerItemSelectorViewProvider(
+					itemSelectorViewReturnTypeProvider, "test-view");
+
 		List serviceRegistrations = new ArrayList<>();
 
 		serviceRegistrations.add(itemSelectorViewServiceRegistration);
 		serviceRegistrations.add(
 			itemSelectorReturnTypeResolverServiceRegistration);
+		serviceRegistrations.add(
+			itemSelectorViewReturnTypeProviderServiceRegistration);
 
 		try {
 			TestItemSelectorCriterion testItemSelectorCriterion =
@@ -204,15 +215,30 @@ public class ItemSelectorReturnTypeResolverHandlerTest {
 	@ArquillianResource
 	public Bundle bundle;
 
-	protected ServiceRegistration<ItemSelectorView>
-		registerItemSelectorView(ItemSelectorView itemSelectorView) {
+	protected ServiceRegistration<ItemSelectorView> registerItemSelectorView(
+		ItemSelectorView itemSelectorView, String itemSelectorViewKey) {
 
 		Dictionary<String, Object> properties = new Hashtable<>();
 
-		properties.put("item.selector.view.key", "test-view");
+		properties.put("item.selector.view.key", itemSelectorViewKey);
 
 		return _bundleContext.registerService(
 			ItemSelectorView.class, itemSelectorView, properties);
+	}
+
+	protected ServiceRegistration<ItemSelectorViewReturnTypeProvider>
+		registerItemSelectorViewProvider(
+			ItemSelectorViewReturnTypeProvider
+				itemSelectorViewReturnTypeProvider,
+			String itemSelectorViewKey) {
+
+		Dictionary<String, Object> properties = new Hashtable<>();
+
+		properties.put("item.selector.view.key", itemSelectorViewKey);
+
+		return _bundleContext.registerService(
+			ItemSelectorViewReturnTypeProvider.class,
+			itemSelectorViewReturnTypeProvider, properties);
 	}
 
 	protected ServiceRegistration<ItemSelectorReturnTypeResolver>
