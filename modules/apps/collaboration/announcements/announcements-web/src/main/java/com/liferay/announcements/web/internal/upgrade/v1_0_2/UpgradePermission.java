@@ -276,23 +276,15 @@ public class UpgradePermission extends UpgradeProcess {
 		}
 	}
 
-	private static final long _BITWISE_VALUE_ACCESS_IN_CONTROL_PANEL;
+	/**
+	 * @see ResourceActionLocalServiceImpl#checkResourceActions
+	 */
+	private static final long _BITWISE_VALUE_ACCESS_IN_CONTROL_PANEL = 1 << 1;
 
 	private static final long _BITWISE_VALUE_VIEW = 1;
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		UpgradePermission.class);
-
-	static {
-
-		// See ResourceActionLocalServiceImpl#checkResourceActions
-
-		long viewActionReservedBitwiseValue = 1;
-
-		long nextBitwiseValue = viewActionReservedBitwiseValue << 1;
-
-		_BITWISE_VALUE_ACCESS_IN_CONTROL_PANEL = nextBitwiseValue;
-	}
 
 	private final Set<String> _resourcePermissions = new HashSet<>();
 
