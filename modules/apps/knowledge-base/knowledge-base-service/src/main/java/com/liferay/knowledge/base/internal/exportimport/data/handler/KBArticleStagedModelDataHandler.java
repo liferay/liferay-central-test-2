@@ -26,6 +26,7 @@ import com.liferay.exportimport.kernel.lar.StagedModelModifiedDateComparator;
 import com.liferay.knowledge.base.constants.KBArticleConstants;
 import com.liferay.knowledge.base.constants.KBFolderConstants;
 import com.liferay.knowledge.base.constants.KBPortletKeys;
+import com.liferay.knowledge.base.internal.exportimport.content.processor.KBArticleExportImportContentProcessor;
 import com.liferay.knowledge.base.model.KBArticle;
 import com.liferay.knowledge.base.model.KBFolder;
 import com.liferay.knowledge.base.service.KBArticleLocalService;
@@ -156,6 +157,14 @@ public class KBArticleStagedModelDataHandler
 		exportKBArticleAttachments(
 			portletDataContext, kbArticleElement, kbArticle);
 
+		String content =
+			_kbArticleExportImportContentProcessor.
+				replaceExportContentReferences(
+					portletDataContext, kbArticle, kbArticle.getContent(), true,
+					true);
+
+		kbArticle.setContent(content);
+
 		portletDataContext.addClassedModel(
 			kbArticleElement, ExportImportPathUtil.getModelPath(kbArticle),
 			kbArticle);
@@ -243,6 +252,13 @@ public class KBArticleStagedModelDataHandler
 		}
 
 		String[] sections = AdminUtil.unescapeSections(kbArticle.getSections());
+
+		String content =
+			_kbArticleExportImportContentProcessor.
+				replaceImportContentReferences(
+					portletDataContext, kbArticle, kbArticle.getContent());
+
+		kbArticle.setContent(content);
 
 		ServiceContext serviceContext = portletDataContext.createServiceContext(
 			kbArticle);
@@ -424,6 +440,15 @@ public class KBArticleStagedModelDataHandler
 	}
 
 	@Reference(unbind = "-")
+	protected void setKBArticleExportImportContentProcessor(
+		KBArticleExportImportContentProcessor
+			kbArticleExportImportContentProcessor) {
+
+		_kbArticleExportImportContentProcessor =
+			kbArticleExportImportContentProcessor;
+	}
+
+	@Reference(unbind = "-")
 	protected void setKBArticleLocalService(
 		KBArticleLocalService kbArticleLocalService) {
 
@@ -459,6 +484,8 @@ public class KBArticleStagedModelDataHandler
 	private static final Log _log = LogFactoryUtil.getLog(
 		KBArticleStagedModelDataHandler.class);
 
+	private KBArticleExportImportContentProcessor
+		_kbArticleExportImportContentProcessor;
 	private KBArticleLocalService _kbArticleLocalService;
 	private KBArticlePersistence _kbArticlePersistence;
 	private KBFolderLocalService _kbFolderLocalService;
