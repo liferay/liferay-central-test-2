@@ -161,6 +161,22 @@ public class UpgradePermission extends UpgradeProcess {
 		upgradeAnnouncementsResourcePermission();
 	}
 
+	protected String getKey(
+		long companyId, int scope, String primKey, long roleId) {
+
+		StringBundler sb = new StringBundler(7);
+
+		sb.append(companyId);
+		sb.append(StringPool.PERIOD);
+		sb.append(scope);
+		sb.append(StringPool.PERIOD);
+		sb.append(primKey);
+		sb.append(StringPool.PERIOD);
+		sb.append(roleId);
+
+		return sb.toString();
+	}
+
 	protected void updateResourcePermission(
 			long resourcePermissionId, long bitwiseValue)
 		throws Exception {
@@ -257,22 +273,6 @@ public class UpgradePermission extends UpgradeProcess {
 
 			deleteResourceAction(resourceActionId);
 		}
-	}
-
-	protected String getKey(
-		long companyId, int scope, String primKey, long roleId) {
-
-		StringBundler sb = new StringBundler(7);
-
-		sb.append(companyId);
-		sb.append(StringPool.PERIOD);
-		sb.append(scope);
-		sb.append(StringPool.PERIOD);
-		sb.append(primKey);
-		sb.append(StringPool.PERIOD);
-		sb.append(roleId);
-
-		return sb.toString();
 	}
 
 	private static final long _ACCESS_IN_CONTROL_PANEL_VALUE;
