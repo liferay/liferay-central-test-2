@@ -277,7 +277,7 @@ public class UpgradePermission extends UpgradeProcess {
 	}
 
 	/**
-	 * @see ResourceActionLocalServiceImpl#checkResourceActions
+	 * @see com.liferay.portal.service.impl.ResourceActionLocalServiceImpl#checkResourceActions
 	 */
 	private static final long _BITWISE_VALUE_ACCESS_IN_CONTROL_PANEL = 1 << 1;
 
