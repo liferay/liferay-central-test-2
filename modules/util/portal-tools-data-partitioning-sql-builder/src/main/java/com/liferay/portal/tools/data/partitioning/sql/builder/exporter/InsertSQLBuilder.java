@@ -25,8 +25,8 @@ public class InsertSQLBuilder implements SQLBuilder {
 
 	@Override
 	public String build(
-		String[] fields, ResultSetMetaData resultSetMetaData,
-		String tableName) {
+		ResultSetMetaData resultSetMetaData, String tableName,
+		String[] fields) {
 
 		if ((fields == null) || (fields.length == 0)) {
 			throw new IllegalArgumentException("Fields are null");
