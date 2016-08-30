@@ -6198,8 +6198,8 @@ public class JournalArticleLocalServiceImpl
 			String uuid = jsonObject.getString("uuid");
 			long groupId = jsonObject.getLong("groupId");
 
-			FileEntry fileEntry = dlAppLocalService.getFileEntryByUuidAndGroupId(
-				uuid, groupId);
+			FileEntry fileEntry =
+				dlAppLocalService.getFileEntryByUuidAndGroupId(uuid, groupId);
 
 			boolean isTempFile = fileEntry.isRepositoryCapabilityProvided(
 				TemporaryFileEntriesCapability.class);
@@ -6214,12 +6214,14 @@ public class JournalArticleLocalServiceImpl
 					fileEntry.getFileName());
 
 				fileEntry = PortletFileRepositoryUtil.addPortletFileEntry(
-					groupId, fileEntry.getUserId(), JournalArticle.class.getName(),
+					groupId, fileEntry.getUserId(),
+					JournalArticle.class.getName(),
 					article.getResourcePrimKey(), JournalConstants.SERVICE_NAME,
 					folder.getFolderId(), fileEntry.getContentStream(),
 					fileEntryName, fileEntry.getMimeType(), false);
 
-				dlAppLocalService.deleteFileEntry(tempFileEntry.getFileEntryId());
+				dlAppLocalService.deleteFileEntry(
+					tempFileEntry.getFileEntryId());
 			}
 
 			JSONObject cdata = JSONFactoryUtil.createJSONObject(

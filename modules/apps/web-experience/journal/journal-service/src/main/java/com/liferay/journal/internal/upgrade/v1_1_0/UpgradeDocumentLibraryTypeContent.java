@@ -43,7 +43,9 @@ import java.util.regex.Pattern;
  */
 public class UpgradeDocumentLibraryTypeContent extends UpgradeProcess {
 
-	public UpgradeDocumentLibraryTypeContent(DLAppLocalService dlAppLocalService) {
+	public UpgradeDocumentLibraryTypeContent(
+		DLAppLocalService dlAppLocalService) {
+
 		_dlAppLocalService = dlAppLocalService;
 	}
 
