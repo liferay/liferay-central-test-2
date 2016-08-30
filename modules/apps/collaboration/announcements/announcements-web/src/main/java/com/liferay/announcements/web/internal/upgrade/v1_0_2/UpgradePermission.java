@@ -48,7 +48,7 @@ public class UpgradePermission extends UpgradeProcess {
 			long roleId)
 		throws Exception {
 
-		String key = _getKey(companyId, scope, primKey, roleId);
+		String key = getKey(companyId, scope, primKey, roleId);
 
 		if (_resourcePermissions.contains(key)) {
 			return;
@@ -259,7 +259,7 @@ public class UpgradePermission extends UpgradeProcess {
 		}
 	}
 
-	private String _getKey(
+	protected String getKey(
 		long companyId, int scope, String primKey, long roleId) {
 
 		StringBundler sb = new StringBundler(7);
