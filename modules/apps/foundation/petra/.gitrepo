@@ -4,7 +4,7 @@
 ;
 [subrepo]
 	cmdver = liferay
-	commit = e970109eacb0553bf22c1a931d7c473df8ea8608
+	commit = 747942b932b5a8f76b264d9a14b32d6163ee19ee
 	mode = push
-	parent = 9367f2ee27bf3723965691ac340918f626d7e4b8
+	parent = 9976a2bfd561206d93b0cf43cb4a2ad594595114
 	remote = git@github.com:liferay/com-liferay-petra.git
