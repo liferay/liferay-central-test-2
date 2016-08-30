@@ -156,10 +156,10 @@ public abstract class BaseDataPartitioningExporter
 					fields[i] = serializeTableField(resultSet.getObject(i + 1));
 				}
 
-				String insertSql = _insertSQLBuilder.build(
+				String insertSQL = _insertSQLBuilder.build(
 					fields, resultSetMetaData, tableName);
 
-				outputStream.write(insertSql.getBytes());
+				outputStream.write(insertSQL.getBytes());
 			}
 		}
 		catch (IOException | SQLException e) {
