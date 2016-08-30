@@ -40,7 +40,9 @@ public class SearchIndexPortalInstanceLifecycleListener
 			}
 		}
 		catch (Exception e) {
-			_log.error("Search engine failure initializing " + companyId, e);
+			_log.error(
+				"Unable to initialize search engine for company " + companyId,
+				e);
 		}
 	}
 
@@ -52,7 +54,8 @@ public class SearchIndexPortalInstanceLifecycleListener
 			}
 		}
 		catch (Exception e) {
-			_log.error("Search engine failure initializing " + company, e);
+			_log.error(
+				"Unable to initialize search engine for company " + company, e);
 		}
 	}
 
@@ -64,7 +67,8 @@ public class SearchIndexPortalInstanceLifecycleListener
 			}
 		}
 		catch (Exception e) {
-			_log.error("Search engine failure removing " + company, e);
+			_log.error(
+				"Unable to remove search engine for company " + company, e);
 		}
 	}
 
