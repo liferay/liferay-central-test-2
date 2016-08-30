@@ -45,7 +45,6 @@ repositories {
 task coverageReport(type: org.gradle.testing.jacoco.tasks.JacocoReport) {
 	additionalSourceDirs = files(subprojects.sourceSets.main.allSource.srcDirs)
 	classDirectories = files(subprojects.sourceSets.main.output)
-	dependsOn = subprojects.test
 	executionData = files(subprojects.jacocoTestReport.executionData)
 	sourceDirectories = files(subprojects.sourceSets.main.allSource.srcDirs)
 
