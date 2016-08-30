@@ -640,6 +640,45 @@
 		</execute>
 	</command>
 
+	<command name="DownloadMBThreadAttachment" priority="5">
+		<var name="threadBody" value="MB Thread Message Body" />
+		<var name="threadSubject" value="MB Thread Message Subject" />
+
+		<execute macro="Navigator#gotoPage">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="MessageboardsThread#addPGWithAttachment">
+			<var name="mbThreadAttachment" value="Document_1.jpg" />
+			<var name="threadBody" value="${threadBody}" />
+			<var name="threadSubject" value="${threadSubject}" />
+		</execute>
+
+		<execute macro="Navigator#gotoPage">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<var name="key_threadSubject" value="${threadSubject}" />
+
+		<execute function="AssertTextEquals" locator1="MessageBoards#THREAD_LIST_THREAD" value1="${threadSubject}" />
+
+		<execute function="Click" locator1="MessageBoards#THREAD_LIST_THREAD" value1="${threadSubject}" />
+
+		<execute macro="MessageboardsThread#downloadAttachmentPG" />
+
+		<execute function="Pause" locator1="5000" />
+
+		<execute macro="MessageboardsThread#downloadAttachmentPG" />
+
+		<execute function="AssertClick" locator1="MessageBoardsThread#THREAD_REPLY_BUTTON" value1="Reply to Main Thread" />
+
+		<execute function="Type#typeEditor" locator1="AlloyEditor#CONTENT_FIELD" value1="MB Thread Reply Body" />
+
+		<execute function="Click" locator1="Button#PUBLISH" />
+
+		<execute macro="Alert#viewSuccessMessage" />
+	</command>
+
 	<command name="EditMBCategory" priority="5">
 		<property name="portal.acceptance" value="true" />
 
