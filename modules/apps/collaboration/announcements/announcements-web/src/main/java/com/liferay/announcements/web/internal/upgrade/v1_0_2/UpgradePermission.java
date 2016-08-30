@@ -39,8 +39,9 @@ public class UpgradePermission extends UpgradeProcess {
 
 	protected void addAnnouncementsAdminResourceActions() {
 		addResourceAction(
-			ActionKeys.ACCESS_IN_CONTROL_PANEL, _ACCESS_IN_CONTROL_PANEL_VALUE);
-		addResourceAction(ActionKeys.VIEW, _VIEW_VALUE);
+			ActionKeys.ACCESS_IN_CONTROL_PANEL,
+			_BITWISE_VALUE_ACCESS_IN_CONTROL_PANEL);
+		addResourceAction(ActionKeys.VIEW, _BITWISE_VALUE_VIEW);
 	}
 
 	protected void addAnnouncementsAdminViewResourcePermission(
@@ -63,7 +64,7 @@ public class UpgradePermission extends UpgradeProcess {
 				ResourcePermission.class.getName());
 
 			long actionBitwiseValue =
-				_VIEW_VALUE | _ACCESS_IN_CONTROL_PANEL_VALUE;
+				_BITWISE_VALUE_VIEW | _BITWISE_VALUE_ACCESS_IN_CONTROL_PANEL;
 
 			String name =
 				"com_liferay_announcements_web_portlet_" +
@@ -91,7 +92,7 @@ public class UpgradePermission extends UpgradeProcess {
 			ps.setLong(8, roleId);
 			ps.setLong(9, ownerId);
 			ps.setLong(10, actionBitwiseValue);
-			ps.setBoolean(11, _VIEW_ACTION_SUPPORTED);
+			ps.setBoolean(11, true);
 
 			ps.executeUpdate();
 		}
@@ -275,11 +276,9 @@ public class UpgradePermission extends UpgradeProcess {
 		}
 	}
 
-	private static final long _ACCESS_IN_CONTROL_PANEL_VALUE;
+	private static final long _BITWISE_VALUE_ACCESS_IN_CONTROL_PANEL;
 
-	private static final boolean _VIEW_ACTION_SUPPORTED = true;
-
-	private static final long _VIEW_VALUE = 1;
+	private static final long _BITWISE_VALUE_VIEW = 1;
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		UpgradePermission.class);
@@ -292,7 +291,7 @@ public class UpgradePermission extends UpgradeProcess {
 
 		long nextBitwiseValue = viewActionReservedBitwiseValue << 1;
 
-		_ACCESS_IN_CONTROL_PANEL_VALUE = nextBitwiseValue;
+		_BITWISE_VALUE_ACCESS_IN_CONTROL_PANEL = nextBitwiseValue;
 	}
 
 	private final Set<String> _resourcePermissions = new HashSet<>();
