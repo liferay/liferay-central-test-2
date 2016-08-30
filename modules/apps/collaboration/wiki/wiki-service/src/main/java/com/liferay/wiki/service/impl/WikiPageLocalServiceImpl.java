@@ -2073,16 +2073,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			String cmd = GetterUtil.getString(
 				workflowContext.get(WorkflowConstants.CONTEXT_COMMAND));
 
-			if (cmd.equals(Constants.RENAME)) {
-				long resourcePrimKey = page.getResourcePrimKey();
-
-				WikiPage oldPage = getPage(resourcePrimKey, true);
-
-				page = doRenamePage(
-					userId, page.getNodeId(), oldPage.getTitle(),
-					page.getTitle(), serviceContext);
-			}
-			else if (cmd.equals(Constants.CHANGE_PARENT)) {
+			if (cmd.equals(Constants.CHANGE_PARENT)) {
 				List<WikiPage> pageVersions = wikiPagePersistence.findByN_T(
 					page.getNodeId(), page.getTitle());
 
@@ -2091,6 +2082,15 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 					wikiPagePersistence.update(pageVersion);
 				}
+			}
+			else if (cmd.equals(Constants.RENAME)) {
+				long resourcePrimKey = page.getResourcePrimKey();
+
+				WikiPage oldPage = getPage(resourcePrimKey, true);
+
+				page = doRenamePage(
+					userId, page.getNodeId(), oldPage.getTitle(),
+					page.getTitle(), serviceContext);
 			}
 
 			// Asset
