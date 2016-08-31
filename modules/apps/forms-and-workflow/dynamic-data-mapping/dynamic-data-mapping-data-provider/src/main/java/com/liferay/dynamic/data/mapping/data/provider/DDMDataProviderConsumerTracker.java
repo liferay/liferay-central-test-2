@@ -33,11 +33,11 @@ import org.osgi.service.component.annotations.Deactivate;
 public class DDMDataProviderConsumerTracker {
 
 	public DDMDataProviderConsumer getDDMDataProviderConsumer(String type) {
-		return _ddmDataProviderConsumerTrackerMap.getService(type);
+		return _ddmDataProviderConsumerServiceTrackerMap.getService(type);
 	}
 
 	public Set<String> getDDMDataProviderConsumerTypes() {
-		return _ddmDataProviderConsumerTrackerMap.keySet();
+		return _ddmDataProviderConsumerServiceTrackerMap.keySet();
 	}
 
 	public List<DDMDataProviderContextContributor>
@@ -45,7 +45,8 @@ public class DDMDataProviderConsumerTracker {
 
 		List<DDMDataProviderContextContributor>
 			ddmDataProviderContextContributors =
-				_ddmDataProviderContextContributorTrackerMap.getService(type);
+				_ddmDataProviderContextContributorServiceTrackerMap.getService(
+					type);
 
 		if (ddmDataProviderContextContributors != null) {
 			return ddmDataProviderContextContributors;
@@ -56,31 +57,31 @@ public class DDMDataProviderConsumerTracker {
 
 	@Activate
 	protected void activate(BundleContext bundleContext) {
-		_ddmDataProviderContextContributorTrackerMap =
+		_ddmDataProviderContextContributorServiceTrackerMap =
 			ServiceTrackerMapFactory.multiValueMap(
 				bundleContext, DDMDataProviderContextContributor.class,
 				"ddm.data.provider.type");
 
-		_ddmDataProviderContextContributorTrackerMap.open();
+		_ddmDataProviderContextContributorServiceTrackerMap.open();
 
-		_ddmDataProviderConsumerTrackerMap =
+		_ddmDataProviderConsumerServiceTrackerMap =
 			ServiceTrackerMapFactory.singleValueMap(
 				bundleContext, DDMDataProviderConsumer.class,
 				"ddm.data.provider.type");
 
-		_ddmDataProviderConsumerTrackerMap.open();
+		_ddmDataProviderConsumerServiceTrackerMap.open();
 	}
 
 	@Deactivate
 	protected void deactivate() {
-		_ddmDataProviderContextContributorTrackerMap.close();
+		_ddmDataProviderContextContributorServiceTrackerMap.close();
 
-		_ddmDataProviderConsumerTrackerMap.close();
+		_ddmDataProviderConsumerServiceTrackerMap.close();
 	}
 
 	private ServiceTrackerMap<String, DDMDataProviderConsumer>
-		_ddmDataProviderConsumerTrackerMap;
+		_ddmDataProviderConsumerServiceTrackerMap;
 	private ServiceTrackerMap<String, List<DDMDataProviderContextContributor>>
-		_ddmDataProviderContextContributorTrackerMap;
+		_ddmDataProviderContextContributorServiceTrackerMap;
 
 }
