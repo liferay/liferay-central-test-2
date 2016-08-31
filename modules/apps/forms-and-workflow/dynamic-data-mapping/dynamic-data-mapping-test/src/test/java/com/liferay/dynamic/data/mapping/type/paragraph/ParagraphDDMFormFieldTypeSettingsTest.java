@@ -83,7 +83,6 @@ public class ParagraphDDMFormFieldTypeSettingsTest
 		DDMFormField textDDMFormField = ddmFormFieldsMap.get("text");
 
 		Assert.assertNotNull(textDDMFormField);
-
 		Assert.assertEquals("string", textDDMFormField.getDataType());
 		Assert.assertNotNull(textDDMFormField.getLabel());
 
