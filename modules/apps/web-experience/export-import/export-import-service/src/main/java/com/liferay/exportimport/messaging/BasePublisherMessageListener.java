@@ -69,8 +69,7 @@ public abstract class BasePublisherMessageListener
 
 		if (singleDestinationMessageSenderFactory == null) {
 			throw new IllegalArgumentException(
-				"SingleDestinationMessageSenderFactory reference cannot be " +
-					"null");
+				"Single destination message sender factory is null");
 		}
 
 		BundleContext bundleContext = componentContext.getBundleContext();

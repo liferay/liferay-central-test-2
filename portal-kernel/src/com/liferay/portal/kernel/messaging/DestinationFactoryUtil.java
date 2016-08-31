@@ -47,7 +47,7 @@ public class DestinationFactoryUtil {
 					DestinationFactory.class);
 
 				if (_log.isDebugEnabled()) {
-					_log.debug("Waiting for a DestinationFactory");
+					_log.debug("Waiting for a destination factory");
 				}
 
 				Thread.sleep(500);

@@ -55,7 +55,7 @@ public class PortalExecutorManagerUtil {
 					PortalExecutorManager.class);
 
 				if (_log.isDebugEnabled()) {
-					_log.debug("Waiting for a PortalExecutorManager");
+					_log.debug("Waiting for a portal executor manager");
 				}
 
 				Thread.sleep(500);
