@@ -2944,7 +2944,7 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  ortal.kernel.security.permission,com.liferay.portal.kernel.service,co
  m.liferay.portal.kernel.theme,javax.portlet,javax.servlet.http",com.l
  iferay.portal.kernel.url;version="1.0.0";uses:="javax.servlet",com.li
- feray.portal.kernel.util;version="7.5.0";uses:="com.liferay.expando.k
+ feray.portal.kernel.util;version="7.6.0";uses:="com.liferay.expando.k
  ernel.model,com.liferay.mail.kernel.model,com.liferay.portal.kernel.c
  oncurrent,com.liferay.portal.kernel.configuration,com.liferay.portal.
  kernel.dao.jdbc.aop,com.liferay.portal.kernel.dao.search,com.liferay.
