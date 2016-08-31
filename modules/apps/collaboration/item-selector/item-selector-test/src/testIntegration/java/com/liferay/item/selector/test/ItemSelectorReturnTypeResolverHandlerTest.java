@@ -80,13 +80,10 @@ public class ItemSelectorReturnTypeResolverHandlerTest {
 				registerReturnTypeResolver(
 					new TestItemSelectorReturnTypeResolver(), 50);
 
-		ItemSelectorViewReturnTypeProvider itemSelectorViewReturnTypeProvider =
-			new TestItemSelectorViewReturnTypeProvider();
-
 		ServiceRegistration<ItemSelectorViewReturnTypeProvider>
 			itemSelectorViewReturnTypeProviderServiceRegistration =
 				registerItemSelectorViewProvider(
-					itemSelectorViewReturnTypeProvider, "test-view");
+					new TestItemSelectorViewReturnTypeProvider(), "test-view");
 
 		List serviceRegistrations = new ArrayList<>();
 
