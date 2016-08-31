@@ -51,7 +51,7 @@
 						[$ROLE_IDS_OR_OWNER_ID$] AND
 						[$PRIM_KEYS$]
 					) OR
-					([$DEFAULT_RESOURCE_FOR_GROUP_ADMIN$])
+					([$GROUP_ADMIN_DEFAULT_RESOURCE$])
 				)
 		]]>
 	</sql>
