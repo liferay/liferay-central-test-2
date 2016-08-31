@@ -76,7 +76,7 @@ public class MessageBusUtil {
 				_messageBus = registry.getService(MessageBus.class);
 
 				if (_log.isDebugEnabled()) {
-					_log.debug("Waiting for a MessageBus");
+					_log.debug("Waiting for a message bus");
 				}
 
 				Thread.sleep(500);
