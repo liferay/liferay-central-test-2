@@ -222,6 +222,11 @@ for (long calendarId : calendarIds) {
 					continue;
 				}
 			}
+			else if (scopeGroup.isStagingGroup() && (scopeGroup.getLiveGroupId() == calendarGroup.getGroupId())) {
+				Group stagingGroup = calendarGroup.getStagingGroup();
+
+				calendar = CalendarLocalServiceUtil.fetchCalendarByUuidAndGroupId(calendar.getUuid(), stagingGroup.getGroupId());
+			}
 
 			otherCalendars.add(calendar);
 		}
