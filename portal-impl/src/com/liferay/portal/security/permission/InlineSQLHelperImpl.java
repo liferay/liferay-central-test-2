@@ -718,7 +718,7 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 			new String[] {
 				"[$CLASS_NAME$]", "[$COMPANY_ID$]", "[$PRIM_KEYS$]",
 				"[$RESOURCE_SCOPE_INDIVIDUAL$]", "[$ROLE_IDS_OR_OWNER_ID$]",
-				"[$DEFAULT_RESOURCE_FOR_GROUP_ADMIN$]"
+				"[$GROUP_ADMIN_DEFAULT_RESOURCE$]"
 			},
 			new String[] {
 				className, String.valueOf(companyId), sb.toString(),
