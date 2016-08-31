@@ -86,7 +86,7 @@ public class ProxyFactory {
 
 		T dummyService = newDummyInstance(serviceClass);
 
-		return _doNewServiceTrackedInstance(
+		return _newServiceTrackedInstance(
 			serviceClass, declaringClass, fieldName, filterString,
 			dummyService);
 	}
@@ -116,11 +116,11 @@ public class ProxyFactory {
 		Class<T> serviceClass, Class<?> declaringClass, String fieldName,
 		String filterString) {
 
-		return _doNewServiceTrackedInstance(
+		return _newServiceTrackedInstance(
 			serviceClass, declaringClass, fieldName, filterString, null);
 	}
 
-	private static <T> T _doNewServiceTrackedInstance(
+	private static <T> T _newServiceTrackedInstance(
 		Class<T> serviceClass, Class<?> declaringClass, String fieldName,
 		String filterString, T dummyService) {
 
