@@ -716,14 +716,14 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 		permissionJoin = StringUtil.replace(
 			permissionJoin,
 			new String[] {
-				"[$CLASS_NAME$]", "[$COMPANY_ID$]", "[$PRIM_KEYS$]",
-				"[$RESOURCE_SCOPE_INDIVIDUAL$]", "[$ROLE_IDS_OR_OWNER_ID$]",
-				"[$GROUP_ADMIN_DEFAULT_RESOURCE$]"
+				"[$CLASS_NAME$]", "[$COMPANY_ID$]",
+				"[$GROUP_ADMIN_DEFAULT_RESOURCE$]", "[$PRIM_KEYS$]",
+				"[$RESOURCE_SCOPE_INDIVIDUAL$]", "[$ROLE_IDS_OR_OWNER_ID$]"
 			},
 			new String[] {
-				className, String.valueOf(companyId), sb.toString(),
+				className, String.valueOf(companyId),
+				defaultResourceForGroupAdminSB.toString(), sb.toString(),
 				String.valueOf(scope), roleIdsOrOwnerIdSQL,
-				defaultResourceForGroupAdminSB.toString()
 			});
 
 		int pos = sql.indexOf(_WHERE_CLAUSE);
