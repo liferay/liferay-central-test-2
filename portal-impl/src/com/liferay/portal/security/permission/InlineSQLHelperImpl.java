@@ -665,10 +665,10 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 
 		sb.append("))");
 
-		StringBundler defaultResourceForGroupAdmin = new StringBundler(3);
+		StringBundler defaultResourceForGroupAdminSB = new StringBundler(3);
 
 		if (Validator.isNotNull(groupIdField) && (groupIds.length > 1)) {
-			boolean isGroupAdmin = false;
+			boolean groupAdmin = false;
 
 			StringBundler defaultResource = new StringBundler(4);
 
@@ -677,33 +677,35 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 			defaultResource.append(permissionChecker.getOwnerRoleId());
 			defaultResource.append(")");
 
-			StringBundler groupAdmin = new StringBundler(groupIds.length);
+			StringBundler groupAdminSB = new StringBundler(groupIds.length);
 
-			groupAdmin.append(groupIdField);
-			groupAdmin.append(" IN (");
+			groupAdminSB.append(groupIdField);
+			groupAdminSB.append(" IN (");
 
 			for (int i = 0; i < groupIds.length; i++) {
 				if (!isEnabled(0, groupIds[i])) {
-					groupAdmin.append(groupIds[i]);
-					groupAdmin.append(',');
-					isGroupAdmin = true;
+					groupAdminSB.append(groupIds[i]);
+					groupAdminSB.append(',');
+
+					groupAdmin = true;
 				}
 			}
 
-			groupAdmin.setIndex(groupAdmin.index() - 1);
-			groupAdmin.append(")");
+			groupAdminSB.setIndex(groupAdminSB.index() - 1);
 
-			if (isGroupAdmin) {
-				defaultResourceForGroupAdmin.append(defaultResource);
-				defaultResourceForGroupAdmin.append(" AND ");
-				defaultResourceForGroupAdmin.append(groupAdmin);
+			groupAdminSB.append(")");
+
+			if (groupAdmin) {
+				defaultResourceForGroupAdminSB.append(defaultResource);
+				defaultResourceForGroupAdminSB.append(" AND ");
+				defaultResourceForGroupAdminSB.append(groupAdminSB);
 			}
 			else {
-				defaultResourceForGroupAdmin.append("[$FALSE$] <> [$FALSE$]");
+				defaultResourceForGroupAdminSB.append("[$FALSE$] <> [$FALSE$]");
 			}
 		}
 		else {
-			defaultResourceForGroupAdmin.append("[$FALSE$] <> [$FALSE$]");
+			defaultResourceForGroupAdminSB.append("[$FALSE$] <> [$FALSE$]");
 		}
 
 		String roleIdsOrOwnerIdSQL = getRoleIdsOrOwnerIdSQL(
@@ -721,7 +723,7 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 			new String[] {
 				className, String.valueOf(companyId), sb.toString(),
 				String.valueOf(scope), roleIdsOrOwnerIdSQL,
-				defaultResourceForGroupAdmin.toString()
+				defaultResourceForGroupAdminSB.toString()
 			});
 
 		int pos = sql.indexOf(_WHERE_CLAUSE);
