@@ -15,7 +15,9 @@
 package com.liferay.announcements.web.internal.portlet.action;
 
 import com.liferay.announcements.kernel.exception.NoSuchEntryException;
+import com.liferay.announcements.kernel.model.AnnouncementsEntry;
 import com.liferay.announcements.web.constants.AnnouncementsPortletKeys;
+import com.liferay.announcements.web.constants.AnnouncementsWebKeys;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
@@ -45,7 +47,10 @@ public class EditEntryMVCRenderCommand implements MVCRenderCommand {
 		throws PortletException {
 
 		try {
-			ActionUtil.getEntry(renderRequest);
+			AnnouncementsEntry entry = ActionUtil.getEntry(renderRequest);
+
+			renderRequest.setAttribute(
+				AnnouncementsWebKeys.ANNOUNCEMENTS_ENTRY, entry);
 		}
 		catch (NoSuchEntryException | PrincipalException e) {
 			SessionErrors.add(renderRequest, e.getClass());
