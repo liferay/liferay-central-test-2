@@ -216,9 +216,6 @@ public class DDMStructureServiceTest extends BaseDDMServiceTestCase {
 
 	@Test
 	public void testSearchWithSiteAdminPermission() throws Exception {
-		List<Role> roles = RoleLocalServiceUtil.getRoles(
-			TestPropsValues.getCompanyId());
-
 		DDMStructure structure = addStructure(
 			_classNameId, StringUtil.randomString());
 
@@ -227,6 +224,9 @@ public class DDMStructureServiceTest extends BaseDDMServiceTestCase {
 		String modelName = ResourceActionsUtil.getCompositeModelName(
 			PortalUtil.getClassName(_classNameId),
 			DDMStructure.class.getName());
+
+		List<Role> roles = RoleLocalServiceUtil.getRoles(
+			TestPropsValues.getCompanyId());
 
 		for (Role role : roles) {
 			ResourcePermissionServiceUtil.removeResourcePermission(
@@ -248,9 +248,6 @@ public class DDMStructureServiceTest extends BaseDDMServiceTestCase {
 
 	@Test
 	public void testSearchWithSiteMemberPermission() throws Exception {
-		List<Role> roles = RoleLocalServiceUtil.getRoles(
-			TestPropsValues.getCompanyId());
-
 		DDMStructure structure = addStructure(
 			_classNameId, StringUtil.randomString());
 
@@ -259,6 +256,9 @@ public class DDMStructureServiceTest extends BaseDDMServiceTestCase {
 		String modelName = ResourceActionsUtil.getCompositeModelName(
 			PortalUtil.getClassName(_classNameId),
 			DDMStructure.class.getName());
+
+		List<Role> roles = RoleLocalServiceUtil.getRoles(
+			TestPropsValues.getCompanyId());
 
 		for (Role role : roles) {
 			ResourcePermissionServiceUtil.removeResourcePermission(
