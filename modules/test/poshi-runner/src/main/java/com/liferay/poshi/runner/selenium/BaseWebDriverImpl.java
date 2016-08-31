@@ -112,8 +112,6 @@ import org.xml.sax.InputSource;
 public abstract class BaseWebDriverImpl implements LiferaySelenium, WebDriver {
 
 	public BaseWebDriverImpl(String browserURL, WebDriver webDriver) {
-		_screenshotCount = 0;
-		_screenshotErrorCount = 0;
 		_webDriver = webDriver;
 
 		initKeysSpecialChars();
