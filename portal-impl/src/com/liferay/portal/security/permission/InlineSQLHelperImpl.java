@@ -665,47 +665,47 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 
 		sb.append("))");
 
-		StringBundler defaultResourceForGroupAdminSB = new StringBundler(3);
+		StringBundler groupAdminResourcePermissionSB = new StringBundler(3);
 
 		if (Validator.isNotNull(groupIdField) && (groupIds.length > 1)) {
 			boolean groupAdmin = false;
 
-			StringBundler defaultResource = new StringBundler(4);
+			StringBundler sb1 = new StringBundler(4);
 
-			defaultResource.append("(ResourcePermission.primKeyId = 0) AND ");
-			defaultResource.append("(ResourcePermission.roleId = ");
-			defaultResource.append(permissionChecker.getOwnerRoleId());
-			defaultResource.append(")");
+			sb1.append("(ResourcePermission.primKeyId = 0) AND ");
+			sb1.append("(ResourcePermission.roleId = ");
+			sb1.append(permissionChecker.getOwnerRoleId());
+			sb1.append(")");
 
-			StringBundler groupAdminSB = new StringBundler(groupIds.length);
+			StringBundler sb2 = new StringBundler(groupIds.length);
 
-			groupAdminSB.append(groupIdField);
-			groupAdminSB.append(" IN (");
+			sb2.append(groupIdField);
+			sb2.append(" IN (");
 
 			for (int i = 0; i < groupIds.length; i++) {
 				if (!isEnabled(0, groupIds[i])) {
-					groupAdminSB.append(groupIds[i]);
-					groupAdminSB.append(',');
+					sb2.append(groupIds[i]);
+					sb2.append(", ");
 
 					groupAdmin = true;
 				}
 			}
 
-			groupAdminSB.setIndex(groupAdminSB.index() - 1);
+			sb2.setIndex(sb2.index() - 1);
 
-			groupAdminSB.append(")");
+			sb2.append(")");
 
 			if (groupAdmin) {
-				defaultResourceForGroupAdminSB.append(defaultResource);
-				defaultResourceForGroupAdminSB.append(" AND ");
-				defaultResourceForGroupAdminSB.append(groupAdminSB);
+				groupAdminResourcePermissionSB.append(sb1);
+				groupAdminResourcePermissionSB.append(" AND ");
+				groupAdminResourcePermissionSB.append(sb2);
 			}
 			else {
-				defaultResourceForGroupAdminSB.append("[$FALSE$] <> [$FALSE$]");
+				groupAdminResourcePermissionSB.append("[$FALSE$] <> [$FALSE$]");
 			}
 		}
 		else {
-			defaultResourceForGroupAdminSB.append("[$FALSE$] <> [$FALSE$]");
+			groupAdminResourcePermissionSB.append("[$FALSE$] <> [$FALSE$]");
 		}
 
 		String roleIdsOrOwnerIdSQL = getRoleIdsOrOwnerIdSQL(
@@ -717,13 +717,13 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 			permissionJoin,
 			new String[] {
 				"[$CLASS_NAME$]", "[$COMPANY_ID$]",
-				"[$GROUP_ADMIN_DEFAULT_RESOURCE$]", "[$PRIM_KEYS$]",
+				"[$GROUP_ADMIN_RESOURCE_PERMISSION$]", "[$PRIM_KEYS$]",
 				"[$RESOURCE_SCOPE_INDIVIDUAL$]", "[$ROLE_IDS_OR_OWNER_ID$]"
 			},
 			new String[] {
 				className, String.valueOf(companyId),
-				defaultResourceForGroupAdminSB.toString(), sb.toString(),
-				String.valueOf(scope), roleIdsOrOwnerIdSQL,
+				groupAdminResourcePermissionSB.toString(), sb.toString(),
+				String.valueOf(scope), roleIdsOrOwnerIdSQL
 			});
 
 		int pos = sql.indexOf(_WHERE_CLAUSE);
