@@ -52,6 +52,7 @@ page import="com.liferay.calendar.recurrence.Recurrence" %><%@
 page import="com.liferay.calendar.recurrence.Weekday" %><%@
 page import="com.liferay.calendar.service.CalendarBookingLocalServiceUtil" %><%@
 page import="com.liferay.calendar.service.CalendarBookingServiceUtil" %><%@
+page import="com.liferay.calendar.service.CalendarLocalServiceUtil" %><%@
 page import="com.liferay.calendar.service.CalendarNotificationTemplateLocalServiceUtil" %><%@
 page import="com.liferay.calendar.service.CalendarResourceServiceUtil" %><%@
 page import="com.liferay.calendar.service.CalendarServiceUtil" %><%@
@@ -82,6 +83,7 @@ page import="com.liferay.portal.kernel.model.User" %><%@
 page import="com.liferay.portal.kernel.portlet.LiferayWindowState" %><%@
 page import="com.liferay.portal.kernel.security.permission.ActionKeys" %><%@
 page import="com.liferay.portal.kernel.security.permission.ResourceActionsUtil" %><%@
+page import="com.liferay.portal.kernel.service.GroupLocalServiceUtil" %><%@
 page import="com.liferay.portal.kernel.service.GroupServiceUtil" %><%@
 page import="com.liferay.portal.kernel.service.UserLocalServiceUtil" %><%@
 page import="com.liferay.portal.kernel.service.WorkflowDefinitionLinkLocalServiceUtil" %><%@
@@ -210,6 +212,13 @@ for (long calendarId : calendarIds) {
 		CalendarResource calendarResource = calendar.getCalendarResource();
 
 		if (calendarResource.isActive()) {
+			Group scopeGroup = themeDisplay.getScopeGroup();
+			Group calendarGroup = GroupLocalServiceUtil.getGroup(calendar.getGroupId());
+
+			if (calendarGroup.isStagingGroup() && !scopeGroup.isStagingGroup()) {
+				calendar = CalendarLocalServiceUtil.fetchCalendarByUuidAndGroupId(calendar.getUuid(), calendarGroup.getLiveGroupId());
+			}
+
 			otherCalendars.add(calendar);
 		}
 	}
