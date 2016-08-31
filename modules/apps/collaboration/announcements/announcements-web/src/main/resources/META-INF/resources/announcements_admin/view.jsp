@@ -123,7 +123,7 @@ List<AnnouncementsEntry> announcementsEntries = announcementsEntriesSearchContai
 				<%
 				PortletURL rowURL = renderResponse.createRenderURL();
 
-				rowURL.setParameter("mvcRenderCommandName", "/announcements/edit_entry");
+				rowURL.setParameter("mvcRenderCommandName", "/announcements/view_entry");
 				rowURL.setParameter("redirect", currentURL);
 				rowURL.setParameter("entryId", String.valueOf(entry.getEntryId()));
 				%>

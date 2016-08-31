@@ -155,6 +155,7 @@ if (portletTitleBasedNavigation) {
 		document.<portlet:namespace />fm.target = '_blank';
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = '<%= Constants.PREVIEW %>';
 		document.<portlet:namespace />fm.<portlet:namespace />content.value = <portlet:namespace />getContent();
+		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = '<%= currentURL %>';
 		document.<portlet:namespace />fm.submit();
 	}
 

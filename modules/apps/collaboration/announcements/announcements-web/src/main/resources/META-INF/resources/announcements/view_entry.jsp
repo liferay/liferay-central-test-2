@@ -17,6 +17,8 @@
 <%@ include file="/announcements/init.jsp" %>
 
 <%
+String redirect = ParamUtil.getString(request, "redirect");
+
 AnnouncementsEntry entry = (AnnouncementsEntry)request.getAttribute(AnnouncementsWebKeys.ANNOUNCEMENTS_ENTRY);
 int flagValue = GetterUtil.getInteger(request.getAttribute(AnnouncementsWebKeys.VIEW_ENTRY_FLAG_VALUE));
 
@@ -32,12 +34,23 @@ if (flagValue != AnnouncementsFlagConstants.HIDDEN) {
 boolean portletTitleBasedNavigation = GetterUtil.getBoolean(portletConfig.getInitParameter("portlet-title-based-navigation"));
 
 if (portletTitleBasedNavigation) {
+	portletDisplay.setShowBackIcon(true);
+	portletDisplay.setURLBack(redirect);
+
 	renderResponse.setTitle(entry.getTitle());
 }
 %>
 
+<c:if test="<%= portletTitleBasedNavigation %>">
+	<liferay-frontend:info-bar>
+		<small class="text-capitalize text-muted">
+			<liferay-ui:message arguments="<%= new String[] {entry.getUserName(), LanguageUtil.getTimeDescription(request, System.currentTimeMillis() - entry.getModifiedDate().getTime(), true)} %>" key="x-modified-x-ago" translateArguments="<%= false %>" />
+		</small>
+	</liferay-frontend:info-bar>
+</c:if>
+
 <div <%= portletTitleBasedNavigation ? "class=\"container-fluid-1280\"" : StringPool.BLANK %>>
-	<div class="panel" id="<portlet:namespace /><%= entry.getEntryId() %>">
+	<div class="main-content-card panel" id="<portlet:namespace /><%= entry.getEntryId() %>">
 		<div class="panel-heading">
 			<div class="card-row">
 				<div class="card-col-field">
