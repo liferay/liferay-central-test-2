@@ -390,7 +390,7 @@ public class DDMFormFieldTemplateContextFactory {
 				"value",
 				String.valueOf(ddmFormFieldEvaluationResult.getValue()));
 		}
-		else if(value != null) {
+		else if (value != null) {
 			ddmFormFieldTemplateContext.put("value", value.getString(_locale));
 		}
 	}

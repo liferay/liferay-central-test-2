@@ -212,7 +212,7 @@ public class DDMFormRuleEvaluatorHelperTest extends PowerMockito {
 				Assert.assertEquals(
 					30.0, ddmFormFieldEvaluationResult.getValue());
 			}
-			else if(ddmFormFieldEvaluationResult.getName().equals("field1")) {
+			else if (ddmFormFieldEvaluationResult.getName().equals("field1")) {
 				Assert.assertEquals(
 					false, ddmFormFieldEvaluationResult.isVisible());
 				Assert.assertEquals(
