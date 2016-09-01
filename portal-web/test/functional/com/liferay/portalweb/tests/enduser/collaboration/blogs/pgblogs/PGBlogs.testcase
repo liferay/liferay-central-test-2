@@ -1209,7 +1209,9 @@
 		<execute macro="BlogsEntryComment#viewSubscribedPG" />
 	</command>
 
-	<command name="UserFlagsEntryAndAdminViewsNotificationInGmail" priority="4">
+	<command name="UserFlagsEntryAndAdminViewsNotificationInMockMock" priority="4">
+		<property name="test.smtp.server.enabled" value="true" />
+
 		<execute macro="TestCase#getSiteName">
 			<return from="siteName" name="siteName" />
 			<var name="siteName" value="${siteName}" />
@@ -1253,6 +1255,14 @@
 			<var name="flagReason" value="Spam" />
 			<var name="siteName" value="${siteName}" />
 			<var method="TestPropsUtil#get('email.address.2')" name="userEmailAddress" />
+		</execute>
+
+		<execute macro="MockMock#viewMail">
+			<var name="asset" value="Inappropriate Content Flagged in Liferay" />
+			<var name="content" value="flagged as inappropriate by Test Test" />
+			<var name="recipient" value="Test Test" />
+			<var name="sender" value="Joe Bloggs" />
+			<var name="subject" value="Inappropriate Content Flagged in Liferay" />
 		</execute>
 	</command>
 
