@@ -92,13 +92,14 @@ public class StripDoctypeFilter {
 
 	public int read(byte[] bytes, int offset, int length) throws IOException {
 		if (_documentStarted && (length > _bufferLength)) {
-			int len = _bufferLength;
+			int bufferLength = _bufferLength;
 
-			for (int i = 0; i < len; i++) {
+			for (int i = 0; i < bufferLength; i++) {
 				bytes[offset++] = (byte) (readFromBuffer() & 0xFF);
 			}
 
-			return _inputStream.read(bytes, offset, length - len) + len;
+			return _inputStream.read(bytes, offset, length - bufferLength) +
+				bufferLength;
 		}
 
 		int read = 0;
@@ -122,13 +123,14 @@ public class StripDoctypeFilter {
 
 	public int read(char[] chars, int offset, int length) throws IOException {
 		if (_documentStarted && (length > _bufferLength)) {
-			int len = _bufferLength;
+			int bufferLength = _bufferLength;
 
-			for (int i = 0; i < len; i++) {
+			for (int i = 0; i < bufferLength; i++) {
 				chars[offset++] = (char)readFromBuffer();
 			}
 
-			return _reader.read(chars, offset, length - len) + len;
+			return _reader.read(chars, offset, length - bufferLength) +
+				bufferLength;
 		}
 
 		int read = 0;
