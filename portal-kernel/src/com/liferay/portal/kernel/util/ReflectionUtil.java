@@ -205,7 +205,7 @@ public class ReflectionUtil {
 	}
 
 	public static <T> T throwException(Throwable throwable) {
-		return ReflectionUtil.<T, RuntimeException>_doThrowException(throwable);
+		return ReflectionUtil.<T, RuntimeException>_throwException(throwable);
 	}
 
 	public static Field unfinalField(Field field) throws Exception {
@@ -221,7 +221,7 @@ public class ReflectionUtil {
 	}
 
 	@SuppressWarnings("unchecked")
-	private static <T, E extends Throwable> T _doThrowException(
+	private static <T, E extends Throwable> T _throwException(
 			Throwable throwable)
 		throws E {
 
