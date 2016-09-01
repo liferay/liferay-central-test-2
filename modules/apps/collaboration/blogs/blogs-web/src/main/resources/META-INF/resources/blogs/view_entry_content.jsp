@@ -67,7 +67,7 @@ String socialBookmarksDisplayPosition = blogsPortletInstanceConfiguration.social
 
 					<c:if test="<%= viewSingleEntry %>">
 						<div class="cover-image-caption">
-							<small><%= entry.getCoverImageCaption() %></small>
+							<small><%= HtmlUtil.escape(entry.getCoverImageCaption()) %></small>
 						</div>
 					</c:if>
 				</c:if>
