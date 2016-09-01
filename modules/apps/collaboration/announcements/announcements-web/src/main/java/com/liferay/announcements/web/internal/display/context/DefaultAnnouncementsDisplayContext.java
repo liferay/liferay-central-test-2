@@ -19,6 +19,8 @@ import com.liferay.announcements.web.constants.AnnouncementsPortletKeys;
 import com.liferay.announcements.web.internal.display.context.util.AnnouncementsRequestHelper;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.model.Organization;
@@ -228,20 +230,25 @@ public class DefaultAnnouncementsDisplayContext
 	}
 
 	@Override
-	public boolean isTabs1Visible() throws PortalException {
+	public boolean isTabs1Visible() {
 		String portletName = _announcementsRequestHelper.getPortletName();
 
 		ThemeDisplay themeDisplay =
 			_announcementsRequestHelper.getThemeDisplay();
 
-		if (!portletName.equals(AnnouncementsPortletKeys.ALERTS) ||
-			(portletName.equals(AnnouncementsPortletKeys.ALERTS) &&
-			 PortletPermissionUtil.hasControlPanelAccessPermission(
-				 _announcementsRequestHelper.getPermissionChecker(),
-				 themeDisplay.getCompanyGroupId(),
-				 AnnouncementsPortletKeys.ANNOUNCEMENTS_ADMIN))) {
+		try {
+			if (!portletName.equals(AnnouncementsPortletKeys.ALERTS) ||
+				(portletName.equals(AnnouncementsPortletKeys.ALERTS) &&
+				 PortletPermissionUtil.hasControlPanelAccessPermission(
+					 _announcementsRequestHelper.getPermissionChecker(),
+					 themeDisplay.getCompanyGroupId(),
+					 AnnouncementsPortletKeys.ANNOUNCEMENTS_ADMIN))) {
 
-			return true;
+				return true;
+			}
+		}
+		catch (PortalException pe) {
+			_log.error(pe, pe);
 		}
 
 		return false;
@@ -279,6 +286,9 @@ public class DefaultAnnouncementsDisplayContext
 
 	private static final UUID _UUID = UUID.fromString(
 		"CD705D0E-7DB4-430C-9492-F1FA25ACE02E");
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		DefaultAnnouncementsDisplayContext.class);
 
 	private final AnnouncementsRequestHelper _announcementsRequestHelper;
 

@@ -61,6 +61,6 @@ public interface AnnouncementsDisplayContext extends DisplayContext {
 
 	public boolean isShowScopeName();
 
-	public boolean isTabs1Visible() throws PortalException;
+	public boolean isTabs1Visible();
 
 }
