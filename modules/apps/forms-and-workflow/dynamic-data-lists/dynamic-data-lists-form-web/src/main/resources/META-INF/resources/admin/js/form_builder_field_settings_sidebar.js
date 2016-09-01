@@ -19,7 +19,7 @@ AUI.add(
 					},
 
 					description: {
-						value: 'No description'
+						value: ''
 					},
 
 					field: {
@@ -27,7 +27,7 @@ AUI.add(
 					},
 
 					title: {
-						value: 'Untitle'
+						value: ''
 					},
 
 					toolbar: {
@@ -255,9 +255,6 @@ AUI.add(
 						var instance = this;
 
 						var contentBox = instance.get('contentBox');
-
-						instance.set('description', '');
-						instance.set('title', '');
 
 						if (!contentBox.one('.loading-icon')) {
 							contentBox.append(TPL_LOADING);
