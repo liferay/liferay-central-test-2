@@ -33,8 +33,19 @@ if (entry == null) {
 	displayImmediately = true;
 }
 
-String headerTitle = (entry == null) ? alert? LanguageUtil.get(resourceBundle, "new-alert") : LanguageUtil.get(resourceBundle, "new-announcement") : entry.getTitle();
+String headerTitle = null;
 
+if (entry != null) {
+	headerTitle = entry.getTitle();
+}
+else {
+	if (alert) {
+		headerTitle = LanguageUtil.get(resourceBundle, "new-alert");
+	}
+	else {
+		headerTitle = LanguageUtil.get(resourceBundle, "new-announcement");
+	}
+}
 boolean portletTitleBasedNavigation = GetterUtil.getBoolean(portletConfig.getInitParameter("portlet-title-based-navigation"));
 
 if (portletTitleBasedNavigation) {
