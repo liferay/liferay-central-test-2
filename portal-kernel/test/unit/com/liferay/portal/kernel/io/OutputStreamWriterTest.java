@@ -90,7 +90,7 @@ public class OutputStreamWriterTest {
 
 			});
 
-		// 1st close
+		// First close
 
 		try {
 			outputStreamWriter.close();
@@ -101,7 +101,7 @@ public class OutputStreamWriterTest {
 			Assert.assertSame(ioe, ioException);
 		}
 
-		// 2nd close to check 1st close indeed changed the state
+		// Second close to check first close indeed changed the state
 
 		outputStreamWriter.close();
 	}
