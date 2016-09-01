@@ -574,7 +574,7 @@
 	<command name="deletePG">
 		<var name="key_kbTool" value="Delete" />
 
-		<execute function="AssertClickNoError" locator1="KnowledgeBase#KB_TOOLS" value1="Delete" />
+		<execute function="ClickNoError" locator1="KnowledgeBase#KB_TOOLS" />
 
 		<execute function="Confirm" value1="Are you sure you want to delete this? It will be deleted immediately." />
 
