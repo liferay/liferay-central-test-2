@@ -97,9 +97,6 @@ public class EditEntryMVCActionCommand extends BaseMVCActionCommand {
 			   PrincipalException e) {
 
 			SessionErrors.add(actionRequest, e.getClass());
-
-			actionResponse.setRenderParameter(
-				"mvcRenderCommandName", "/announcements/edit_entry");
 		}
 	}
 
