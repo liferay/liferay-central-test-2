@@ -127,6 +127,8 @@ AUI.add(
 
 						visitor.set('fieldHandler', instance.destroyField);
 
+						instance._sidebar.destroy();
+
 						visitor.visit();
 
 						(new A.EventHandle(instance._eventHandlers)).detach();
