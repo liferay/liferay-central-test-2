@@ -1,0 +1,8 @@
+.gradle/
+build/
+classes/
+test-classes/
+test-coverage/
+test-results/
+*~
+*.iml
