@@ -482,11 +482,11 @@
 		</execute>
 
 		<execute macro="DMNavigator#gotoDocumentCP">
-			<var name="dmDocumentTitle" value="Document_1.docx" />
+			<var name="dmDocumentTitle" value="Document_1.jpg" />
 		</execute>
 
 		<execute macro="DMDocument#viewCP">
-			<var name="dmDocumentTitle" value="Document_1.docx" />
+			<var name="dmDocumentTitle" value="Document_1.jpg" />
 		</execute>
 	</command>
 
@@ -516,11 +516,11 @@
 		</execute>
 
 		<execute macro="DMNavigator#gotoDocumentCP">
-			<var name="dmDocumentTitle" value="Document_2_Edit.docx" />
+			<var name="dmDocumentTitle" value="Document_2_Edit.jpg" />
 		</execute>
 
 		<execute macro="DMDocument#viewCP">
-			<var name="dmDocumentTitle" value="Document_2_Edit.docx" />
+			<var name="dmDocumentTitle" value="Document_2_Edit.jpg" />
 		</execute>
 	</command>
 
@@ -550,11 +550,11 @@
 		</execute>
 
 		<execute macro="DMNavigator#gotoDocumentCP">
-			<var name="dmDocumentTitle" value="Document_3.docx" />
+			<var name="dmDocumentTitle" value="Document_3" />
 		</execute>
 
 		<execute macro="DMDocument#viewCP">
-			<var name="dmDocumentTitle" value="Document_3.docx" />
+			<var name="dmDocumentTitle" value="Document_3" />
 		</execute>
 	</command>
 
