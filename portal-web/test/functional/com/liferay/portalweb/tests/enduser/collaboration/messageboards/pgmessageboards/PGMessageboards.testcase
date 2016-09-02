@@ -640,40 +640,6 @@
 		</execute>
 	</command>
 
-	<command name="DownloadMBThreadAttachment" priority="5">
-		<var name="threadBody" value="MB Thread Message Body" />
-		<var name="threadSubject" value="MB Thread Message Subject" />
-
-		<execute macro="Navigator#gotoPage">
-			<var name="pageName" value="${pageName}" />
-		</execute>
-
-		<execute macro="MessageboardsThread#addPGWithAttachment">
-			<var name="mbThreadAttachment" value="Document_1.jpg" />
-			<var name="threadBody" value="${threadBody}" />
-			<var name="threadSubject" value="${threadSubject}" />
-		</execute>
-
-		<execute macro="Navigator#gotoPage">
-			<var name="pageName" value="${pageName}" />
-		</execute>
-
-		<execute macro="MessageboardsThread#gotoCP">
-			<var name="threadSubject" value="${threadSubject}" />
-		</execute>
-
-		<execute macro="MessageboardsThread#downloadAttachmentPG" />
-
-		<execute function="Pause" locator1="5000" />
-
-		<execute macro="MessageboardsThread#downloadAttachmentPG" />
-
-		<execute macro="MessageboardsThread#replyPG">
-			<var name="threadReplyBody" value="MB Thread Reply Body" />
-			<var name="threadSubject" value="MB Thread Message Subject" />
-		</execute>
-	</command>
-
 	<command name="EditMBCategory" priority="5">
 		<property name="portal.acceptance" value="true" />
 
@@ -930,6 +896,41 @@
 			<var name="threadBody2" value="${explanationBody}" />
 			<var name="threadSubject" value="${threadSubject}" />
 			<var name="threadSubject2" value="${explanationSubject}" />
+		</execute>
+	</command>
+
+	<command name="ReplyAfterDownloadingMBThreadAttachmentTwice" priority="5">
+		<description message="This is a use case for LPS-67722." />
+		<var name="threadBody" value="MB Thread Message Body" />
+		<var name="threadSubject" value="MB Thread Message Subject" />
+
+		<execute macro="Navigator#gotoPage">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="MessageboardsThread#addPGWithAttachment">
+			<var name="mbThreadAttachment" value="Document_1.jpg" />
+			<var name="threadBody" value="${threadBody}" />
+			<var name="threadSubject" value="${threadSubject}" />
+		</execute>
+
+		<execute macro="Navigator#gotoPage">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="MessageboardsThread#gotoCP">
+			<var name="threadSubject" value="${threadSubject}" />
+		</execute>
+
+		<execute macro="MessageboardsThread#downloadAttachmentPG" />
+
+		<execute function="Pause" locator1="5000" />
+
+		<execute macro="MessageboardsThread#downloadAttachmentPG" />
+
+		<execute macro="MessageboardsThread#replyPG">
+			<var name="threadReplyBody" value="MB Thread Reply Body" />
+			<var name="threadSubject" value="MB Thread Message Subject" />
 		</execute>
 	</command>
 
