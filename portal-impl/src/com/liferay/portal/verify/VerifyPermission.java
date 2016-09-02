@@ -182,8 +182,6 @@ public class VerifyPermission extends VerifyProcess {
 		Role role = RoleLocalServiceUtil.getRole(
 			companyId, RoleConstants.GUEST);
 
-		long roleId = role.getRoleId();
-
 		ActionableDynamicQuery actionableDynamicQuery =
 			ResourcePermissionLocalServiceUtil.getActionableDynamicQuery();
 
@@ -194,11 +192,10 @@ public class VerifyPermission extends VerifyProcess {
 				public void addCriteria(DynamicQuery dynamicQuery) {
 					Property property = PropertyFactoryUtil.forName("roleId");
 
-					dynamicQuery.add(property.eq(roleId));
+					dynamicQuery.add(property.eq(role.getRoleId()));
 				}
 
 			});
-
 		actionableDynamicQuery.setPerformActionMethod(
 			new ActionableDynamicQuery.
 				PerformActionMethod<ResourcePermission>() {
