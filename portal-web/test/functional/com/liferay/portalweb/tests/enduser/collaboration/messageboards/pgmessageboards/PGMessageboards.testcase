@@ -658,11 +658,9 @@
 			<var name="pageName" value="${pageName}" />
 		</execute>
 
-		<var name="key_threadSubject" value="${threadSubject}" />
-
-		<execute function="AssertTextEquals" locator1="MessageBoards#THREAD_LIST_THREAD" value1="${threadSubject}" />
-
-		<execute function="Click" locator1="MessageBoards#THREAD_LIST_THREAD" value1="${threadSubject}" />
+		<execute macro="MessageboardsThread#gotoCP">
+			<var name="threadSubject" value="${threadSubject}" />
+		</execute>
 
 		<execute macro="MessageboardsThread#downloadAttachmentPG" />
 
@@ -670,13 +668,10 @@
 
 		<execute macro="MessageboardsThread#downloadAttachmentPG" />
 
-		<execute function="AssertClick" locator1="MessageBoardsThread#THREAD_REPLY_BUTTON" value1="Reply to Main Thread" />
-
-		<execute function="Type#typeEditor" locator1="AlloyEditor#CONTENT_FIELD" value1="MB Thread Reply Body" />
-
-		<execute function="Click" locator1="Button#PUBLISH" />
-
-		<execute macro="Alert#viewSuccessMessage" />
+		<execute macro="MessageboardsThread#replyPG">
+			<var name="threadReplyBody" value="MB Thread Reply Body" />
+			<var name="threadSubject" value="MB Thread Message Subject" />
+		</execute>
 	</command>
 
 	<command name="EditMBCategory" priority="5">
