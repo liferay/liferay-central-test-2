@@ -241,7 +241,7 @@ public class DefaultAnnouncementsDisplayContext
 				(portletName.equals(AnnouncementsPortletKeys.ALERTS) &&
 				 PortletPermissionUtil.hasControlPanelAccessPermission(
 					 _announcementsRequestHelper.getPermissionChecker(),
-					 themeDisplay.getCompanyGroupId(),
+					 themeDisplay.getScopeGroupId(),
 					 AnnouncementsPortletKeys.ANNOUNCEMENTS_ADMIN))) {
 
 				return true;
