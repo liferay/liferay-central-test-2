@@ -46,6 +46,7 @@ else {
 		headerTitle = LanguageUtil.get(resourceBundle, "new-announcement");
 	}
 }
+
 boolean portletTitleBasedNavigation = GetterUtil.getBoolean(portletConfig.getInitParameter("portlet-title-based-navigation"));
 
 if (portletTitleBasedNavigation) {
