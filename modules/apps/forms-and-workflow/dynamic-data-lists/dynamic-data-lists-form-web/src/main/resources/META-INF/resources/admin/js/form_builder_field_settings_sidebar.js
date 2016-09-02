@@ -65,8 +65,6 @@ AUI.add(
 						instance.destroyFieldSettingsForm();
 
 						(new A.EventHandle(instance._eventHandlers)).detach();
-
-						FormBuilderFieldsSettingsSidebar.superclass.destructor.apply(instance, arguments);
 					},
 
 					destroyFieldSettingsForm: function() {
