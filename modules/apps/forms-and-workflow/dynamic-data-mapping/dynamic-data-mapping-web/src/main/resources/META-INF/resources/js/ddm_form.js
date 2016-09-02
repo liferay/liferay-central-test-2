@@ -1377,6 +1377,8 @@ AUI.add(
 
 						instance._cache = {};
 
+						instance._clearedModal = false;
+
 						instance.after('selectedLayoutChange', instance._afterSelectedLayoutChange);
 						instance.after('selectedLayoutPathChange', instance._afterSelectedLayoutPathChange);
 
@@ -1663,6 +1665,8 @@ AUI.add(
 					_handleClearButtonClick: function() {
 						var instance = this;
 
+						instance._clearedModal = true;
+
 						instance.setValue('');
 
 						instance.set('selectedLayout', instance.get('selectedLayoutPath')[0]);
@@ -1884,7 +1888,11 @@ AUI.add(
 							listNode.on('scroll', instance._handleModalScroll, instance);
 						}
 						else {
-							instance._renderLayoutsList(privateLayout);
+							if (instance._clearedModal) {
+								instance._renderLayoutsList(privateLayout);
+
+								instance._clearedModal = false;
+							}
 						}
 
 						modal.show();
