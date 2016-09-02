@@ -1389,21 +1389,27 @@ public class ResourcePermissionLocalServiceImpl
 
 			List<ResourcePermission> resourcePermissions = new ArrayList<>();
 
-			int i = 0;
+			int batchSize = 1000;
+			int start = 0;
 
-			while (i < (roleIds.length - 1000)) {
+			while (start < (roleIds.length - batchSize)) {
 				resourcePermissions.addAll(
 					resourcePermissionPersistence.findByC_N_S_P_R(
 						companyId, name, scope, primKey,
-						ArrayUtil.subset(roleIds, i, i + 1000)));
+						ArrayUtil.subset(roleIds, start, start + batchSize)));
 
-				i += 1000;
+				start += batchSize;
 			}
 
 			resourcePermissions.addAll(
 				resourcePermissionPersistence.findByC_N_S_P_R(
 					companyId, name, scope, primKey,
-					ArrayUtil.subset(roleIds, i, roleIds.length)));
+					ArrayUtil.subset(roleIds, start, roleIds.length)));
+
+			resourcePermissions.addAll(
+				resourcePermissionPersistence.findByC_N_S_P_R(
+					companyId, name, scope, primKey,
+					ArrayUtil.subset(roleIds, start, roleIds.length)));
 
 			for (ResourcePermission resourcePermission : resourcePermissions) {
 				long roleId = resourcePermission.getRoleId();
