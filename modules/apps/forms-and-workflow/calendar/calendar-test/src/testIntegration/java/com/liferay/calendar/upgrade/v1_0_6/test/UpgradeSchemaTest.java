@@ -20,7 +20,7 @@ import com.liferay.calendar.model.CalendarBooking;
 import com.liferay.calendar.model.CalendarBookingConstants;
 import com.liferay.calendar.model.CalendarResource;
 import com.liferay.calendar.service.CalendarBookingLocalServiceUtil;
-import com.liferay.calendar.upgrade.v1_0_6.UpgradeCalendarBooking;
+import com.liferay.calendar.upgrade.v1_0_6.UpgradeSchema;
 import com.liferay.calendar.util.CalendarResourceUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -51,7 +51,7 @@ import org.junit.runner.RunWith;
  * @author Adam Brandizzi
  */
 @RunWith(Arquillian.class)
-public class UpgradeCalendarBookingTest extends UpgradeCalendarBooking {
+public class UpgradeSchemaTest extends UpgradeSchema {
 
 	@ClassRule
 	@Rule

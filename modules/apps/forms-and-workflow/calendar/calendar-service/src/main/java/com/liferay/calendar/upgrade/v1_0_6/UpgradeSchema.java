@@ -25,8 +25,7 @@ public class UpgradeSchema extends UpgradeProcess {
 	@Override
 	protected void doUpgrade() throws Exception {
 		String template = StringUtil.read(
-			UpgradeCalendarBooking.class.getResourceAsStream(
-				"dependencies/update.sql"));
+			UpgradeSchema.class.getResourceAsStream("dependencies/update.sql"));
 
 		runSQLTemplateString(template, false, false);
 	}
