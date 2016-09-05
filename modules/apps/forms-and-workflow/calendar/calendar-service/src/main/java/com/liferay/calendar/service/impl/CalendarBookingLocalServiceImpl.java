@@ -851,7 +851,7 @@ public class CalendarBookingLocalServiceImpl
 		calendarBooking.setModifiedDate(serviceContext.getModifiedDate(null));
 		calendarBooking.setCalendarId(calendarId);
 		calendarBooking.setCalendarResourceId(calendar.getCalendarResourceId());
-		
+
 		Map<Locale, String> updatedTitleMap = calendarBooking.getTitleMap();
 
 		updatedTitleMap.putAll(titleMap);
