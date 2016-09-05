@@ -130,8 +130,7 @@ public class FileEntryImageAdaptiveMediaURLItemSelectorReturnTypeResolver
 							attributesJSONObject.put(
 								"min-width", previousWidth + "px"));
 				}
-			}
-		);
+			});
 
 		return sourceJSONObject.put("attributes", attributesJSONObject);
 	}
