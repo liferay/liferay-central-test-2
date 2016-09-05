@@ -407,7 +407,7 @@ renderResponse.setTitle((entry != null) ? entry.getTitle() : LanguageUtil.get(re
 		}
 	};
 
-	var configurationContentHeader = AUI.$('#configurationContent');
+	var configurationContentHeader = AUI.$('#<portlet:namespace />configurationContent');
 
 	if (configurationContentHeader.hasClass('in')) {
 		createAbstractEditor();
