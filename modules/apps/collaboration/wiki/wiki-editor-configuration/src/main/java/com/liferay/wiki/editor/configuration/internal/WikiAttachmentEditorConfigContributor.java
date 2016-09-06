@@ -137,7 +137,7 @@ public class WikiAttachmentEditorConfigContributor
 		}
 		catch (PortalException pe) {
 			_log.error(
-				"Unable to get page format for page " + wikiPageResourcePrimKey,
+				"Unable to get format for page " + wikiPageResourcePrimKey,
 				pe);
 		}
 
