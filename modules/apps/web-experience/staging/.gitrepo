@@ -3,7 +3,7 @@
 ;
 [subrepo]
 	cmdver = liferay
-	commit = 7fcfa5cc0abf4c1361800c70bdfce6f3e9b70224
+	commit = 73eb8cbd4f9027199514da87a1df564d275716ec
 	mode = push
-	parent = b901427a66a6912c9d66bff99b74405aba974473
+	parent = b64c7010dd4a3dfe942e5a486b38ee11848c612e
 	remote = git@github.com:liferay/com-liferay-staging.git
