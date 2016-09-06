@@ -691,7 +691,22 @@
 		<execute function="AssertTextEquals" locator1="Message#INFO" value1="A new version is created automatically if this content is modified." />
 		<execute function="Type#typeEditor" locator1="AlloyEditor#TITLE_FIELD" value1="${kbArticleTitleEdit}" />
 		<execute function="Type#typeEditor" locator1="AlloyEditor#CONTENT_FIELD" value1="${kbArticleContentEdit}" />
-		<execute macro="PortletEntry#publish" />
+
+		<if>
+			<equals arg1="${cancel}" arg2="true" />
+			<then>
+				<execute macro="Button#clickCancel" />
+			</then>
+			<elseif>
+				<equals arg1="${saveAsDraft}" arg2="true" />
+				<then>
+					<execute macro="Button#clickSaveAsDraft" />
+				</then>
+			</elseif>
+			<else>
+				<execute function="AssertClick" locator1="Button#PUBLISH" value1="Publish" />
+			</else>
+		</if>
 	</command>
 
 	<command name="editPGViaLocalizedKBDisplay">
