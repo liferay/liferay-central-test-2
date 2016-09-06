@@ -175,7 +175,7 @@ String privateMessagingPortletId = PortletProviderUtil.getPortletId("com.liferay
 	url="<%= exportURL %>"
 />
 
-<c:if test="<%= Validator.isNotNull(privateMessagingPortletId)  %>">
+<c:if test="<%= Validator.isNotNull(privateMessagingPortletId) %>">
 	<aui:script>
 		Liferay.provide(
 			window,
