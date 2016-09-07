@@ -12,15 +12,20 @@
  * details.
  */
 
-package com.liferay.social.office.association.internal.constants;
+package com.liferay.social.office.upgrade.association.internal.constants;
 
 /**
- * @author Jonathan Lee
  * @author Eudaldo Alonso
  */
-public class RoleConstants
-	extends com.liferay.portal.kernel.model.RoleConstants {
+public class SocialOfficeConstants {
 
-	public static final String SOCIAL_OFFICE_USER = "Social Office User";
+	public static final String LAYOUT_SET_PROTOTYPE_KEY =
+		"layoutSetPrototypeKey";
+
+	public static final String LAYOUT_SET_PROTOTYPE_KEY_USER_PRIVATE =
+		"layoutSetPrototypeKey_UserPrivate";
+
+	public static final String LAYOUT_SET_PROTOTYPE_KEY_USER_PUBLIC =
+		"layoutSetPrototypeKey_UserPublic";
 
 }
