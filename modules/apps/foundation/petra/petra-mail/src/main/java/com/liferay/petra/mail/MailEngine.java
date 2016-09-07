@@ -600,14 +600,13 @@ public class MailEngine {
 			if (me.getNextException() instanceof SocketException) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
-						"Unable to connect to a valid mail server. Please " +
-							"make sure one is properly configured: " +
+						"Failed to connect to a valid mail server. Please " +
+							"make sure one is properly configured. " +
 								me.getMessage());
 				}
 			}
 			else {
-				LogUtil.log(
-					_log, me, "Unable to send message: " + me.getMessage());
+				LogUtil.log(_log, me);
 			}
 
 			if (_isThrowsExceptionOnFailure()) {
