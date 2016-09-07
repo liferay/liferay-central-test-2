@@ -853,12 +853,12 @@ public class PDFProcessorImpl
 
 			List<PDPage> pdPages = pdDocumentCatalog.getAllPages();
 
-			PDPage firstPage = pdPages.get(0);
+			PDPage pdPage = pdPages.get(0);
 
-			PDRectangle mediaBox = firstPage.getMediaBox();
+			PDRectangle pdRectangle = pdPage.getMediaBox();
 
-			float width = mediaBox.getWidth();
-			float height = mediaBox.getHeight();
+			float width = pdRectangle.getWidth();
+			float height = pdRectangle.getHeight();
 
 			double widthFactor =
 				(double)PropsValues.
