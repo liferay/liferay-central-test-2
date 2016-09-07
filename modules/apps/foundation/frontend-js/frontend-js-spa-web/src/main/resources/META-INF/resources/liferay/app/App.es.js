@@ -13,6 +13,8 @@ class LiferayApp extends App {
 		this.portletsBlacklist = {};
 		this.validStatusCodes = [];
 
+		this.setShouldUseFacade(true);
+
 		var exceptionsSelector = ':not([target="_blank"]):not([data-senna-off]):not([data-resource-href])';
 
 		this.setFormSelector('form' + exceptionsSelector);
@@ -70,18 +72,16 @@ class LiferayApp extends App {
 		return lastModifiedInterval > this.getCacheExpirationTime();
 	}
 
-	onBeforeNavigate(event) {
-		if (Liferay.SPA.clearScreensCache || event.form) {
+	onBeforeNavigate(data, event) {
+		if (Liferay.SPA.clearScreensCache || data.form) {
 			this.clearScreensCache();
 		}
 
-		Liferay.fire(
-			'beforeNavigate',
-			{
-				app: this,
-				path: event.path
-			}
-		);
+		Liferay.fire('beforeNavigate', {
+			originalEvent: event,
+			app: this,
+			path: data.path
+		});
 	}
 
 	onDocClickDelegate_(event) {
