@@ -846,6 +846,8 @@ public class PDFProcessorImpl
 		PDDocument pdDocument = null;
 
 		try {
+			Map<String, Integer> scaledDimensions = new HashMap<>();
+
 			pdDocument = PDDocument.load(file);
 
 			PDDocumentCatalog pdDocumentCatalog =
@@ -858,22 +860,23 @@ public class PDFProcessorImpl
 			PDRectangle pdRectangle = pdPage.getMediaBox();
 
 			float width = pdRectangle.getWidth();
-			float height = pdRectangle.getHeight();
 
 			double widthFactor =
 				(double)PropsValues.
 					DL_FILE_ENTRY_PREVIEW_DOCUMENT_MAX_WIDTH / width;
+
+			float height = pdRectangle.getHeight();
+
+			int scaledHeight = (int)Math.round(widthFactor * height);
+
+			scaledDimensions.put("height", scaledHeight);
 
 			double heightFactor =
 				(double)PropsValues.
 					DL_FILE_ENTRY_PREVIEW_DOCUMENT_MAX_HEIGHT / height;
 
 			int scaledWidth = (int)Math.round(heightFactor * width);
-			int scaledHeight = (int)Math.round(widthFactor * height);
 
-			Map<String, Integer> scaledDimensions = new HashMap<>();
-
-			scaledDimensions.put("height", scaledHeight);
 			scaledDimensions.put("width", scaledWidth);
 
 			return scaledDimensions;
