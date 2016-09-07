@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.message.boards.internal.convert.documentlibrary;
+package com.liferay.message.boards.internal.convert.document.library;
 
 import com.liferay.document.library.kernel.model.DLFileEntry;
 import com.liferay.document.library.kernel.model.DLFolderConstants;
