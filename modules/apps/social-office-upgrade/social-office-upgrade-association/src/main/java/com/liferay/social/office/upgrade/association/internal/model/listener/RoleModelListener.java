@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.social.office.association.internal.model.listener;
+package com.liferay.social.office.upgrade.association.internal.model.listener;
 
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.exception.ModelListenerException;
@@ -27,10 +27,10 @@ import com.liferay.portal.kernel.service.GroupLocalService;
 import com.liferay.portal.kernel.service.RoleLocalService;
 import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.service.persistence.impl.TableMapper;
-import com.liferay.social.office.association.internal.constants.RoleConstants;
-import com.liferay.social.office.association.internal.constants.SocialOfficeConstants;
-import com.liferay.social.office.association.internal.util.LayoutSetPrototypeUtil;
-import com.liferay.social.office.association.internal.util.SocialOfficeUtil;
+import com.liferay.social.office.upgrade.association.internal.constants.RoleConstants;
+import com.liferay.social.office.upgrade.association.internal.constants.SocialOfficeConstants;
+import com.liferay.social.office.upgrade.association.internal.util.LayoutSetPrototypeUtil;
+import com.liferay.social.office.upgrade.association.internal.util.SocialOfficeUtil;
 
 import java.util.List;
 
