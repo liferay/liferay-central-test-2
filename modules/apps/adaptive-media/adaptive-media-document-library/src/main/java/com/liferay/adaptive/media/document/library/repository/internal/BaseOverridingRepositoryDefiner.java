@@ -14,13 +14,24 @@
 
 package com.liferay.adaptive.media.document.library.repository.internal;
 
+import com.liferay.adaptive.media.AdaptiveMediaException;
+import com.liferay.adaptive.media.processor.AdaptiveMediaProcessor;
+import com.liferay.adaptive.media.processor.AdaptiveMediaProcessorLocator;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.module.framework.ModuleServiceLifecycle;
 import com.liferay.portal.kernel.repository.DocumentRepository;
 import com.liferay.portal.kernel.repository.RepositoryConfiguration;
 import com.liferay.portal.kernel.repository.RepositoryException;
+import com.liferay.portal.kernel.repository.capabilities.Capability;
+import com.liferay.portal.kernel.repository.event.RepositoryEventAware;
+import com.liferay.portal.kernel.repository.event.RepositoryEventType;
+import com.liferay.portal.kernel.repository.model.FileEntry;
+import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.repository.registry.CapabilityRegistry;
 import com.liferay.portal.kernel.repository.registry.RepositoryDefiner;
 import com.liferay.portal.kernel.repository.registry.RepositoryEventRegistry;
 import com.liferay.portal.kernel.repository.registry.RepositoryFactoryRegistry;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.repository.registry.RepositoryClassDefinition;
 import com.liferay.portal.repository.registry.RepositoryClassDefinitionCatalog;
 import com.liferay.portal.repository.registry.RepositoryClassDefinitionCatalogUtil;
@@ -31,8 +42,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import org.osgi.service.component.annotations.Reference;
+
 /**
  * @author Adolfo Pérez
+ * @author Sergio González
  */
 public abstract class BaseOverridingRepositoryDefiner
 	implements RepositoryDefiner {
@@ -62,6 +76,9 @@ public abstract class BaseOverridingRepositoryDefiner
 		CapabilityRegistry<DocumentRepository> capabilityRegistry) {
 
 		_overridenRepositoryDefiner.registerCapabilities(capabilityRegistry);
+
+		capabilityRegistry.addSupportedCapability(
+			AdaptiveMediaCapabiliy.class, new AdaptiveMediaCapabiliy());
 	}
 
 	@Override
@@ -80,16 +97,26 @@ public abstract class BaseOverridingRepositoryDefiner
 			repositoryFactoryRegistry);
 	}
 
+	@Reference(unbind = "-")
+	public void setAdaptiveMediaProcessorLocator(
+		AdaptiveMediaProcessorLocator processorLocator) {
+
+		_processorLocator = processorLocator;
+	}
+
+	@Reference(target = ModuleServiceLifecycle.PORTAL_INITIALIZED, unbind = "-")
+	public void setModuleServiceLifecycle(
+		ModuleServiceLifecycle moduleServiceLifecycle) {
+	}
+
 	protected void initializeOverridenRepositoryDefiner(String className) {
 		List<RepositoryDefiner> repositoryDefiners = _getFieldValue(
 			"_repositoryDefiners");
 
-		_overridenRepositoryDefiner = repositoryDefiners.stream().
-			filter(
+		_overridenRepositoryDefiner = repositoryDefiners.stream().filter(
 				(repositoryDefiner) ->
 					className.equals(repositoryDefiner.getClassName())).
-			findFirst().
-			orElseThrow(
+			findFirst().orElseThrow(
 				() -> new RepositoryException(
 					"No repository found with className " + className));
 	}
@@ -103,6 +130,23 @@ public abstract class BaseOverridingRepositoryDefiner
 				_overridenRepositoryDefiner);
 
 		repositoryClassDefinitions.put(className, repositoryClassDefinition);
+	}
+
+	private void _deleteAdaptiveMedia(FileEntry fileEntry) {
+		try {
+			AdaptiveMediaProcessor<FileVersion, ?> processor =
+				_processorLocator.locateForClass(FileVersion.class);
+
+			List<FileVersion> fileVersions = fileEntry.getFileVersions(
+				WorkflowConstants.STATUS_ANY);
+
+			for (FileVersion fileVersion : fileVersions) {
+				processor.cleanUp(fileVersion);
+			}
+		}
+		catch (AdaptiveMediaException | PortalException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	private <T> T _getFieldValue(String fieldName) {
@@ -127,6 +171,40 @@ public abstract class BaseOverridingRepositoryDefiner
 		}
 	}
 
+	private void _updateAdaptiveMedia(FileEntry fileEntry) {
+		try {
+			AdaptiveMediaProcessor<FileVersion, ?> processor =
+				_processorLocator.locateForClass(FileVersion.class);
+
+			processor.process(fileEntry.getLatestFileVersion(true));
+		}
+		catch (AdaptiveMediaException | PortalException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
 	private RepositoryDefiner _overridenRepositoryDefiner;
+	private AdaptiveMediaProcessorLocator _processorLocator;
+
+	private class AdaptiveMediaCapabiliy
+		implements Capability, RepositoryEventAware {
+
+		public void registerRepositoryEventListeners(
+			RepositoryEventRegistry repositoryEventRegistry) {
+
+			repositoryEventRegistry.registerRepositoryEventListener(
+				RepositoryEventType.Add.class, FileEntry.class,
+				BaseOverridingRepositoryDefiner.this::_updateAdaptiveMedia);
+
+			repositoryEventRegistry.registerRepositoryEventListener(
+				RepositoryEventType.Update.class, FileEntry.class,
+				BaseOverridingRepositoryDefiner.this::_updateAdaptiveMedia);
+
+			repositoryEventRegistry.registerRepositoryEventListener(
+				RepositoryEventType.Delete.class, FileEntry.class,
+				BaseOverridingRepositoryDefiner.this::_deleteAdaptiveMedia);
+		}
+
+	}
 
 }
