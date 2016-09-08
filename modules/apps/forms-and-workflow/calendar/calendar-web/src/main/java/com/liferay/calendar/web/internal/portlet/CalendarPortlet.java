@@ -15,7 +15,6 @@
 package com.liferay.calendar.web.internal.portlet;
 
 import com.liferay.calendar.constants.CalendarPortletKeys;
-import com.liferay.calendar.constants.CalendarWebKeys;
 import com.liferay.calendar.exception.CalendarBookingDurationException;
 import com.liferay.calendar.exception.CalendarBookingRecurrenceException;
 import com.liferay.calendar.exception.CalendarNameException;
@@ -53,6 +52,7 @@ import com.liferay.calendar.util.CalendarUtil;
 import com.liferay.calendar.util.JCalendarUtil;
 import com.liferay.calendar.util.RSSUtil;
 import com.liferay.calendar.util.RecurrenceUtil;
+import com.liferay.calendar.web.internal.constants.CalendarWebKeys;
 import com.liferay.calendar.web.internal.display.context.CalendarDisplayContext;
 import com.liferay.calendar.web.internal.upgrade.CalendarWebUpgrade;
 import com.liferay.calendar.workflow.CalendarBookingWorkflowConstants;
@@ -1484,7 +1484,7 @@ public class CalendarPortlet extends MVCPortlet {
 				themeDisplay);
 
 		renderRequest.setAttribute(
-			WebKeys.PORTLET_DISPLAY_CONTEXT, calendarDisplayContext);
+			CalendarWebKeys.CALENDAR_DISPLAY_CONTEXT, calendarDisplayContext);
 	}
 
 	@Reference(unbind = "-")
