@@ -12,15 +12,11 @@
  * details.
  */
 
-package com.liferay.calendar.constants;
+package com.liferay.calendar.web.internal.constants;
 
 /**
- * @author Eduardo Lundgren
- * @author Andrea Di Giorgi
- * @deprecated As of 7.0.0, replaced by {@link
- * 			   com.liferay.calendar.web.internal.constants.CalendarWebKeys}
+ * @author Adam Brandizzi
  */
-@Deprecated
 public class CalendarWebKeys {
 
 	public static final String CALENDAR = "CALENDAR";
