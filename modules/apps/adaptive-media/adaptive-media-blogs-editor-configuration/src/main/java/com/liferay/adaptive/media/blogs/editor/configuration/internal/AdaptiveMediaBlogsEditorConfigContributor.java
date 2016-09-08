@@ -57,6 +57,23 @@ public class AdaptiveMediaBlogsEditorConfigContributor
 		ThemeDisplay themeDisplay,
 		RequestBackedPortletURLFactory requestBackedPortletURLFactory) {
 
+		String extraPlugins = jsonObject.getString("extraPlugins");
+
+		if (Validator.isNotNull(extraPlugins)) {
+			extraPlugins += ",adaptivemedia";
+		}
+		else {
+			extraPlugins = "adaptivemedia";
+		}
+
+		jsonObject.put("extraPlugins", extraPlugins);
+
+		String allowedContent = jsonObject.getString("allowedContent");
+
+		allowedContent += "picture[*](*);";
+
+		jsonObject.put("allowedContent", allowedContent);
+
 		String itemSelectorURL = jsonObject.getString(
 			"filebrowserImageBrowseLinkUrl");
 
