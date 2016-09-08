@@ -18,12 +18,11 @@
 
 <%
 KBArticle kbArticle = (KBArticle)request.getAttribute(KBWebKeys.KNOWLEDGE_BASE_KB_ARTICLE);
+
 long parentResourcePrimKey = (long)request.getAttribute("view_navigation_articles.jsp-parentResourcePrimKey");
-
 List<Long> ancestorResourcePrimaryKeys = (List<Long>)request.getAttribute("view_navigation_articles.jsp-ancestorResourcePrimaryKeys");
-KBArticleURLHelper kbArticleURLHelper = (KBArticleURLHelper)request.getAttribute("view_navigation_articles.jsp-kbArticleURLHelper");
-
 int level = GetterUtil.getInteger(request.getAttribute("view_navigation_articles.jsp-level"));
+
 int maxNestingLevel = kbDisplayPortletInstanceConfiguration.maxNestingLevel();
 
 boolean maxNestingLevelReached = false;
@@ -31,6 +30,8 @@ boolean maxNestingLevelReached = false;
 if ((maxNestingLevel - level) <= 1) {
 	maxNestingLevelReached = true;
 }
+
+KBArticleURLHelper kbArticleURLHelper = (KBArticleURLHelper)request.getAttribute("view_navigation_articles.jsp-kbArticleURLHelper");
 
 List<KBArticle> childKBArticles = null;
 
