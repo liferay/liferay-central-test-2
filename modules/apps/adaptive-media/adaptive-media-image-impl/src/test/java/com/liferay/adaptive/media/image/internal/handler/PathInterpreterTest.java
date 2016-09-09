@@ -66,7 +66,7 @@ public class PathInterpreterTest {
 			Optional.of(_configurationEntry)
 		);
 
-		_pathInterpreter.interpretPath("image/0/x/foo.jpg");
+		_pathInterpreter.interpretPath("/image/0/x/foo.jpg");
 
 		Mockito.verify(_dlAppLocalService).getFileEntry(0);
 		Mockito.verify(_fileVersion).getCompanyId();
@@ -81,7 +81,7 @@ public class PathInterpreterTest {
 			PortalException.class
 		);
 
-		_pathInterpreter.interpretPath("image/0/x/foo.jpg");
+		_pathInterpreter.interpretPath("/image/0/x/foo.jpg");
 	}
 
 	@Test(expected = AdaptiveMediaRuntimeException.class)
@@ -100,7 +100,7 @@ public class PathInterpreterTest {
 			PortalException.class
 		);
 
-		_pathInterpreter.interpretPath("image/0/x/foo.jpg");
+		_pathInterpreter.interpretPath("/image/0/x/foo.jpg");
 	}
 
 	@Test
@@ -118,7 +118,7 @@ public class PathInterpreterTest {
 			Optional.of(_configurationEntry)
 		);
 
-		_pathInterpreter.interpretPath("image/0/1/x/foo.jpg");
+		_pathInterpreter.interpretPath("/image/0/1/x/foo.jpg");
 
 		Mockito.verify(_dlAppLocalService).getFileEntry(0);
 		Mockito.verify(_dlAppLocalService).getFileVersion(1);
@@ -134,7 +134,7 @@ public class PathInterpreterTest {
 			PortalException.class
 		);
 
-		_pathInterpreter.interpretPath("image/0/1/x/foo.jpg");
+		_pathInterpreter.interpretPath("/image/0/1/x/foo.jpg");
 	}
 
 	@Test

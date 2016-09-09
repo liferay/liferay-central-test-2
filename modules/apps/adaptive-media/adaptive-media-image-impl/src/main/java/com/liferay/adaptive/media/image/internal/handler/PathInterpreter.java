@@ -114,7 +114,7 @@ public class PathInterpreter {
 	}
 
 	private static final Pattern _URL_PATTERN = Pattern.compile(
-		"image/(\\d+)(?:/(\\d+))?/([^/]+)/(?:[^/]+)");
+		"/image/(\\d+)(?:/(\\d+))?/([^/]+)/(?:[^/]+)");
 
 	private ImageAdaptiveMediaConfigurationHelper _configurationHelper;
 	private DLAppLocalService _dlAppLocalService;
