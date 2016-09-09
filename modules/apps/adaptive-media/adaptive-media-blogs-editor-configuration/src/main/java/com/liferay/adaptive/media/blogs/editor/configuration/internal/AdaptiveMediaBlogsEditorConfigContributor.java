@@ -70,7 +70,7 @@ public class AdaptiveMediaBlogsEditorConfigContributor
 
 		String allowedContent = jsonObject.getString("allowedContent");
 
-		allowedContent += "picture[*](*);";
+		allowedContent += "picture[*](*); source[*](*); ";
 
 		jsonObject.put("allowedContent", allowedContent);
 
