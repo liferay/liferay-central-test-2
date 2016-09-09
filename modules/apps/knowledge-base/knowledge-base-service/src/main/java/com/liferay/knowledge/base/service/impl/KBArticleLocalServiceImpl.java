@@ -1511,6 +1511,37 @@ public class KBArticleLocalServiceImpl extends KBArticleLocalServiceBaseImpl {
 		}
 	}
 
+	protected void getAllDescendantKBArticles(
+		List<KBArticle> kbArticles, long resourcePrimKey, int status,
+		OrderByComparator<KBArticle> orderByComparator) {
+
+		List<KBArticle> curKBArticles = null;
+
+		if (status == WorkflowConstants.STATUS_ANY) {
+			curKBArticles = kbArticlePersistence.findByP_L(
+				resourcePrimKey, true, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+				orderByComparator);
+		}
+		else if (status == WorkflowConstants.STATUS_APPROVED) {
+			curKBArticles = kbArticlePersistence.findByP_M(
+				resourcePrimKey, true, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+				orderByComparator);
+		}
+		else {
+			curKBArticles = kbArticlePersistence.findByP_S(
+				resourcePrimKey, status, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+				orderByComparator);
+		}
+
+		for (KBArticle curKBArticle : curKBArticles) {
+			kbArticles.add(curKBArticle);
+
+			getAllDescendantKBArticles(
+				kbArticles, curKBArticle.getResourcePrimKey(), status,
+				orderByComparator);
+		}
+	}
+
 	protected List<KBArticle> getAllDescendantKBArticles(
 		long resourcePrimKey, int status,
 		OrderByComparator<KBArticle> orderByComparator,
@@ -2006,6 +2037,28 @@ public class KBArticleLocalServiceImpl extends KBArticleLocalServiceBaseImpl {
 		}
 	}
 
+	protected void validateParentStatus(
+			long parentResourceClassNameId, long parentResourcePrimKey,
+			int status)
+		throws PortalException {
+
+		long kbFolderClassNameId = classNameLocalService.getClassNameId(
+			KBFolder.class);
+
+		if (parentResourceClassNameId == kbFolderClassNameId) {
+			return;
+		}
+
+		KBArticle kbArticle = fetchLatestKBArticle(
+			parentResourcePrimKey, WorkflowConstants.STATUS_APPROVED);
+
+		if ((kbArticle == null) &&
+			(status == WorkflowConstants.STATUS_APPROVED)) {
+
+			throw new KBArticleStatusException();
+		}
+	}
+
 	protected void validateSourceURL(String sourceURL) throws PortalException {
 		if (Validator.isNull(sourceURL)) {
 			return;
@@ -2053,59 +2106,6 @@ public class KBArticleLocalServiceImpl extends KBArticleLocalServiceBaseImpl {
 
 	@BeanReference(type = PortletFileRepository.class)
 	protected PortletFileRepository portletFileRepository;
-
-	protected void getAllDescendantKBArticles(
-		List<KBArticle> kbArticles, long resourcePrimKey, int status,
-		OrderByComparator<KBArticle> orderByComparator) {
-
-		List<KBArticle> curKBArticles = null;
-
-		if (status == WorkflowConstants.STATUS_ANY) {
-			curKBArticles = kbArticlePersistence.findByP_L(
-				resourcePrimKey, true, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-				orderByComparator);
-		}
-		else if (status == WorkflowConstants.STATUS_APPROVED) {
-			curKBArticles = kbArticlePersistence.findByP_M(
-				resourcePrimKey, true, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-				orderByComparator);
-		}
-		else {
-			curKBArticles = kbArticlePersistence.findByP_S(
-				resourcePrimKey, status, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-				orderByComparator);
-		}
-
-		for (KBArticle curKBArticle : curKBArticles) {
-			kbArticles.add(curKBArticle);
-
-			getAllDescendantKBArticles(
-				kbArticles, curKBArticle.getResourcePrimKey(), status,
-				orderByComparator);
-		}
-	}
-
-	protected void validateParentStatus(
-			long parentResourceClassNameId, long parentResourcePrimKey,
-			int status)
-		throws PortalException {
-
-		long kbFolderClassNameId = classNameLocalService.getClassNameId(
-			KBFolder.class);
-
-		if (parentResourceClassNameId == kbFolderClassNameId) {
-			return;
-		}
-
-		KBArticle kbArticle = fetchLatestKBArticle(
-			parentResourcePrimKey, WorkflowConstants.STATUS_APPROVED);
-
-		if ((kbArticle == null) &&
-			(status == WorkflowConstants.STATUS_APPROVED)) {
-
-			throw new KBArticleStatusException();
-		}
-	}
 
 	private static final int[] _STATUSES = {
 		WorkflowConstants.STATUS_APPROVED, WorkflowConstants.STATUS_PENDING
