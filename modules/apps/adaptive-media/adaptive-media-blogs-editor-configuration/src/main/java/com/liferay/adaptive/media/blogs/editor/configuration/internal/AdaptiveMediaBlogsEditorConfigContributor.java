@@ -57,20 +57,14 @@ public class AdaptiveMediaBlogsEditorConfigContributor
 		ThemeDisplay themeDisplay,
 		RequestBackedPortletURLFactory requestBackedPortletURLFactory) {
 
-		String extraPlugins = jsonObject.getString("extraPlugins");
-
-		if (Validator.isNotNull(extraPlugins)) {
-			extraPlugins += ",adaptivemedia";
-		}
-		else {
-			extraPlugins = "adaptivemedia";
-		}
-
-		jsonObject.put("extraPlugins", extraPlugins);
-
 		String allowedContent = jsonObject.getString("allowedContent");
 
-		allowedContent += "picture[*](*); source[*](*); ";
+		if (Validator.isNotNull(allowedContent)) {
+			allowedContent = allowedContent + " picture[*](*); source[*](*); ";
+		}
+		else {
+			allowedContent = "picture[*](*); source[*](*);";
+		}
 
 		jsonObject.put("allowedContent", allowedContent);
 
@@ -104,6 +98,17 @@ public class AdaptiveMediaBlogsEditorConfigContributor
 		if (!blogsItemSelectorCriterionPresent) {
 			return;
 		}
+
+		String extraPlugins = jsonObject.getString("extraPlugins");
+
+		if (Validator.isNotNull(extraPlugins)) {
+			extraPlugins = extraPlugins + ",adaptivemedia";
+		}
+		else {
+			extraPlugins = "adaptivemedia";
+		}
+
+		jsonObject.put("extraPlugins", extraPlugins);
 
 		String itemSelectedEventName = _itemSelector.getItemSelectedEventName(
 			itemSelectorURL);
