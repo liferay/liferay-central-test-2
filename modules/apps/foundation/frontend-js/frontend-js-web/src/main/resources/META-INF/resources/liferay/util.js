@@ -1594,6 +1594,7 @@
 
 							if (assetEntryIndex > -1) {
 								item.attr('disabled', true);
+								item.attr('data-prevent-selection', true);
 
 								selectedData.splice(assetEntryIndex, 1);
 							}
