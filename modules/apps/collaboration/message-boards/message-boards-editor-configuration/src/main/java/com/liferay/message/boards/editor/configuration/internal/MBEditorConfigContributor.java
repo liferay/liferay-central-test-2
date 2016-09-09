@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.message.boards.editor.configuration;
+package com.liferay.message.boards.editor.configuration.internal;
 
 import com.liferay.message.boards.web.constants.MBPortletKeys;
 import com.liferay.portal.kernel.editor.configuration.BaseEditorConfigContributor;
