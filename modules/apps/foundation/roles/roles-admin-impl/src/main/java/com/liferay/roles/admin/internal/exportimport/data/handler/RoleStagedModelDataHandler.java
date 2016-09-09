@@ -347,9 +347,10 @@ public class RoleStagedModelDataHandler
 				PermissionChecker permissionChecker =
 					PermissionThreadLocal.getPermissionChecker();
 
-				User currentUser = permissionChecker.getUser();
+				User user = permissionChecker.getUser();
 
-				groupId = currentUser.getGroupId();
+				groupId = user.getGroupId();
+
 				primaryKey = portletDataContext.getUserPersonalSiteGroupId();
 			}
 
