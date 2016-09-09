@@ -449,19 +449,9 @@
 	</command>
 
 	<command name="saveAsDraft">
-		<if>
-			<condition function="IsElementPresent" locator1="Message#DRAFT_AUTO_SAVE" />
-			<then>
-				<execute function="AssertClick" locator1="Button#SAVE_AS_DRAFT" value1="Save as Draft" />
+		<execute function="AssertClick" locator1="Button#SAVE_AS_DRAFT" value1="Save as Draft" />
 
-				<execute function="AssertTextEquals" locator1="BlogsEntry#WORKFLOW_STATUS" value1="Draft" />
-			</then>
-			<else>
-				<execute function="AssertClick" locator1="Button#SAVE_AS_DRAFT" value1="Save as Draft" />
-
-				<execute macro="Alert#viewSuccessMessage" />
-			</else>
-		</if>
+		<execute macro="Alert#viewSuccessMessage" />
 	</command>
 
 	<command name="scheduleBlogEntry">
