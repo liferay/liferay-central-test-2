@@ -921,7 +921,7 @@ public class KBArticleLocalServiceImpl extends KBArticleLocalServiceBaseImpl {
 
 		validateParent(
 			kbArticle, parentResourceClassNameId, parentResourcePrimKey);
-		_validateParentStatus(
+		validateParentStatus(
 			parentResourceClassNameId, parentResourcePrimKey,
 			kbArticle.getStatus());
 
@@ -1253,7 +1253,7 @@ public class KBArticleLocalServiceImpl extends KBArticleLocalServiceBaseImpl {
 		KBArticle kbArticle = getLatestKBArticle(
 			resourcePrimKey, WorkflowConstants.STATUS_ANY);
 
-		_validateParentStatus(
+		validateParentStatus(
 			kbArticle.getParentResourceClassNameId(),
 			kbArticle.getParentResourcePrimKey(), status);
 
@@ -1528,7 +1528,7 @@ public class KBArticleLocalServiceImpl extends KBArticleLocalServiceBaseImpl {
 			kbArticles = new ArrayList<>();
 		}
 
-		_getAllDescendantKBArticles(
+		getAllDescendantKBArticles(
 			kbArticles, resourcePrimKey, status, orderByComparator);
 
 		return Collections.unmodifiableList(kbArticles);
@@ -2054,7 +2054,7 @@ public class KBArticleLocalServiceImpl extends KBArticleLocalServiceBaseImpl {
 	@BeanReference(type = PortletFileRepository.class)
 	protected PortletFileRepository portletFileRepository;
 
-	private void _getAllDescendantKBArticles(
+	protected void getAllDescendantKBArticles(
 		List<KBArticle> kbArticles, long resourcePrimKey, int status,
 		OrderByComparator<KBArticle> orderByComparator) {
 
@@ -2079,13 +2079,13 @@ public class KBArticleLocalServiceImpl extends KBArticleLocalServiceBaseImpl {
 		for (KBArticle curKBArticle : curKBArticles) {
 			kbArticles.add(curKBArticle);
 
-			_getAllDescendantKBArticles(
+			getAllDescendantKBArticles(
 				kbArticles, curKBArticle.getResourcePrimKey(), status,
 				orderByComparator);
 		}
 	}
 
-	private void _validateParentStatus(
+	protected void validateParentStatus(
 			long parentResourceClassNameId, long parentResourcePrimKey,
 			int status)
 		throws PortalException {
