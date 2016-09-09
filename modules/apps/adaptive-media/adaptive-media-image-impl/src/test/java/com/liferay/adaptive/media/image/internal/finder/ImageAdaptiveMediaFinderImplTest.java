@@ -20,6 +20,7 @@ import com.liferay.adaptive.media.AdaptiveMediaURIResolver;
 import com.liferay.adaptive.media.finder.AdaptiveMediaQuery;
 import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaConfigurationHelper;
+import com.liferay.adaptive.media.image.internal.util.ImageInfo;
 import com.liferay.adaptive.media.image.internal.util.ImageProcessor;
 import com.liferay.adaptive.media.image.internal.util.ImageStorage;
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaAttribute;
@@ -126,9 +127,9 @@ public class ImageAdaptiveMediaFinderImplTest {
 		);
 
 		Mockito.when(
-			_imageStorage.hasContent(_fileVersion, configurationEntry)
+			_imageStorage.getImageInfo(_fileVersion, configurationEntry)
 		).thenReturn(
-			true
+			Optional.of(new ImageInfo("image/jpeg", 1))
 		);
 
 		Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> stream =
@@ -166,11 +167,11 @@ public class ImageAdaptiveMediaFinderImplTest {
 		);
 
 		Mockito.when(
-			_imageStorage.hasContent(
+			_imageStorage.getImageInfo(
 				Mockito.any(FileVersion.class),
 				Mockito.any(ImageAdaptiveMediaConfigurationEntry.class))
 		).thenReturn(
-			true
+			Optional.of(new ImageInfo("image/jpeg", 1))
 		);
 
 		Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> stream =
@@ -236,11 +237,11 @@ public class ImageAdaptiveMediaFinderImplTest {
 		);
 
 		Mockito.when(
-			_imageStorage.hasContent(
+			_imageStorage.getImageInfo(
 				Mockito.any(FileVersion.class),
 				Mockito.any(ImageAdaptiveMediaConfigurationEntry.class))
 		).thenReturn(
-			true
+			Optional.of(new ImageInfo("image/jpeg", 1))
 		);
 
 		Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> stream =
@@ -319,11 +320,11 @@ public class ImageAdaptiveMediaFinderImplTest {
 		);
 
 		Mockito.when(
-			_imageStorage.hasContent(
+			_imageStorage.getImageInfo(
 				Mockito.any(FileVersion.class),
 				Mockito.any(ImageAdaptiveMediaConfigurationEntry.class))
 		).thenReturn(
-			true
+			Optional.of(new ImageInfo("image/jpeg", 1))
 		);
 
 		Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> stream =
@@ -417,11 +418,11 @@ public class ImageAdaptiveMediaFinderImplTest {
 		);
 
 		Mockito.when(
-			_imageStorage.hasContent(
+			_imageStorage.getImageInfo(
 				Mockito.any(FileVersion.class),
 				Mockito.any(ImageAdaptiveMediaConfigurationEntry.class))
 		).thenReturn(
-			true
+			Optional.of(new ImageInfo("image/jpeg", 1))
 		);
 
 		Mockito.when(
@@ -476,9 +477,9 @@ public class ImageAdaptiveMediaFinderImplTest {
 		);
 
 		Mockito.when(
-			_imageStorage.hasContent(_fileVersion, configurationEntry)
+			_imageStorage.getImageInfo(_fileVersion, configurationEntry)
 		).thenReturn(
-			true
+			Optional.of(new ImageInfo("image/jpeg", 1))
 		);
 
 		Mockito.when(
@@ -537,11 +538,11 @@ public class ImageAdaptiveMediaFinderImplTest {
 		);
 
 		Mockito.when(
-			_imageStorage.hasContent(
+			_imageStorage.getImageInfo(
 				Mockito.eq(_fileVersion),
 				Mockito.any(ImageAdaptiveMediaConfigurationEntry.class))
 		).thenReturn(
-			true
+			Optional.of(new ImageInfo("image/jpeg", 1))
 		);
 
 		Mockito.when(
@@ -612,11 +613,11 @@ public class ImageAdaptiveMediaFinderImplTest {
 		);
 
 		Mockito.when(
-			_imageStorage.hasContent(
+			_imageStorage.getImageInfo(
 				Mockito.any(FileVersion.class),
 				Mockito.any(ImageAdaptiveMediaConfigurationEntry.class))
 		).thenReturn(
-			true
+			Optional.of(new ImageInfo("image/jpeg", 1))
 		);
 
 		Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> stream =
@@ -681,11 +682,11 @@ public class ImageAdaptiveMediaFinderImplTest {
 		);
 
 		Mockito.when(
-			_imageStorage.hasContent(
+			_imageStorage.getImageInfo(
 				Mockito.any(FileVersion.class),
 				Mockito.any(ImageAdaptiveMediaConfigurationEntry.class))
 		).thenReturn(
-			true
+			Optional.of(new ImageInfo("image/jpeg", 1))
 		);
 
 		Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> stream =
@@ -770,11 +771,11 @@ public class ImageAdaptiveMediaFinderImplTest {
 		);
 
 		Mockito.when(
-			_imageStorage.hasContent(
+			_imageStorage.getImageInfo(
 				Mockito.any(FileVersion.class),
 				Mockito.any(ImageAdaptiveMediaConfigurationEntry.class))
 		).thenReturn(
-			true
+			Optional.of(new ImageInfo("image/jpeg", 1))
 		);
 
 		Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> stream =

@@ -26,6 +26,7 @@ import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMedi
 import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaConfigurationHelper;
 import com.liferay.adaptive.media.image.internal.processor.ImageAdaptiveMedia;
+import com.liferay.adaptive.media.image.internal.util.ImageInfo;
 import com.liferay.adaptive.media.image.internal.util.ImageProcessor;
 import com.liferay.adaptive.media.image.internal.util.ImageStorage;
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
@@ -41,6 +42,7 @@ import java.nio.charset.StandardCharsets;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.stream.Stream;
@@ -96,7 +98,8 @@ public class ImageAdaptiveMediaFinderImpl implements ImageAdaptiveMediaFinder {
 		return configurationEntries.stream().
 			filter(
 				configurationEntry ->
-					_imageStorage.hasContent(fileVersion, configurationEntry)).
+					_imageStorage.getImageInfo(fileVersion, configurationEntry)
+						.isPresent()).
 			map(
 				configurationEntry ->
 					_createMedia(
@@ -162,15 +165,20 @@ public class ImageAdaptiveMediaFinderImpl implements ImageAdaptiveMediaFinder {
 		AdaptiveMediaAttribute<Object, Integer> contentLengthAttribute =
 			AdaptiveMediaAttribute.contentLength();
 
-		properties.put(
-			contentLengthAttribute.getName(),
-			String.valueOf(fileVersion.getSize()));
+		Optional<ImageInfo> imageInfoOptional =
+			_imageStorage.getImageInfo(fileVersion, configurationEntry);
+
+		imageInfoOptional.ifPresent(
+			imageInfo -> properties.put(
+				contentLengthAttribute.getName(),
+				String.valueOf(imageInfo.getSize())));
 
 		AdaptiveMediaAttribute<Object, String> contentTypeAttribute =
 			AdaptiveMediaAttribute.contentType();
 
-		properties.put(
-			contentTypeAttribute.getName(), fileVersion.getMimeType());
+		imageInfoOptional.ifPresent(
+			imageInfo -> properties.put(
+				contentTypeAttribute.getName(), imageInfo.getMimeType()));
 
 		AdaptiveMediaAttribute<Object, String> fileNameAttribute =
 			AdaptiveMediaAttribute.fileName();
