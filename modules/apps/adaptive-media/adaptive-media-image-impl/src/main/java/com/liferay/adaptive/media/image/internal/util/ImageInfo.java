@@ -32,15 +32,7 @@ public class ImageInfo {
 		return _size;
 	}
 
-	public void setMimeType(String mimeType) {
-		_mimeType = mimeType;
-	}
-
-	public void setSize(long size) {
-		_size = size;
-	}
-
-	private String _mimeType;
-	private long _size;
+	private final String _mimeType;
+	private final long _size;
 
 }
