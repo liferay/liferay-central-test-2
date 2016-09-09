@@ -165,8 +165,8 @@ public class ImageAdaptiveMediaFinderImpl implements ImageAdaptiveMediaFinder {
 		AdaptiveMediaAttribute<Object, Integer> contentLengthAttribute =
 			AdaptiveMediaAttribute.contentLength();
 
-		Optional<ImageInfo> imageInfoOptional =
-			_imageStorage.getImageInfo(fileVersion, configurationEntry);
+		Optional<ImageInfo> imageInfoOptional = _imageStorage.getImageInfo(
+			fileVersion, configurationEntry);
 
 		imageInfoOptional.ifPresent(
 			imageInfo -> properties.put(

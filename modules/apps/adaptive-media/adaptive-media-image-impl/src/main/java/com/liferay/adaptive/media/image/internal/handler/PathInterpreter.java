@@ -68,7 +68,8 @@ public class PathInterpreter {
 						getImageAdaptiveMediaConfigurationEntry(
 							fileVersion.getCompanyId(), configurationEntryUUID);
 
-			Map<String, String> properties = configurationEntryOptional.
+			Map<String, String> properties =
+				configurationEntryOptional.
 				map(ImageAdaptiveMediaConfigurationEntry::getProperties).
 				orElse(new HashMap<>());
 

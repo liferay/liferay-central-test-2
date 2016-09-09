@@ -27,6 +27,7 @@ import java.io.InputStream;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
 import java.util.Optional;
 
 import org.osgi.service.component.annotations.Component;
@@ -139,17 +140,15 @@ public class ImageStorage {
 		}
 	}
 
+	protected File getFile(long companyId, Path path) throws PortalException {
+		return DLStoreUtil.getFile(
+			companyId, CompanyConstants.SYSTEM, path.toString());
+	}
+
 	protected InputStream getFileAsStream(long companyId, Path path)
 		throws PortalException {
 
 		return DLStoreUtil.getFileAsStream(
-			companyId, CompanyConstants.SYSTEM, path.toString());
-	}
-
-	protected File getFile(long companyId, Path path)
-		throws PortalException {
-
-		return DLStoreUtil.getFile(
 			companyId, CompanyConstants.SYSTEM, path.toString());
 	}
 

@@ -24,22 +24,23 @@ public class ImageInfo {
 		_size = size;
 	}
 
-	private String _mimeType;
-	private long _size;
-
 	public String getMimeType() {
 		return _mimeType;
-	}
-
-	public void setMimeType(String mimeType) {
-		_mimeType = mimeType;
 	}
 
 	public long getSize() {
 		return _size;
 	}
 
+	public void setMimeType(String mimeType) {
+		_mimeType = mimeType;
+	}
+
 	public void setSize(long size) {
 		_size = size;
 	}
+
+	private String _mimeType;
+	private long _size;
+
 }

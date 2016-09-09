@@ -229,7 +229,8 @@ public class FileEntryImageAdaptiveMediaURLItemSelectorReturnTypeResolverTest {
 
 	private byte[] _getImageBytes() throws Exception {
 		return FileUtil.getBytes(
-			FileEntryImageAdaptiveMediaURLItemSelectorReturnTypeResolverTest.class,
+			FileEntryImageAdaptiveMediaURLItemSelectorReturnTypeResolverTest.
+				class,
 			"/com/liferay/adaptive/media/image/processor/test/dependencies/" +
 				"image.jpg");
 	}
