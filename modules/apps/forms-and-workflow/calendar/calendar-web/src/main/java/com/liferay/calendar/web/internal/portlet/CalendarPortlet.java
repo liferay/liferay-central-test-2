@@ -278,10 +278,10 @@ public class CalendarPortlet extends MVCPortlet {
 		throws IOException, PortletException {
 
 		try {
-			setRenderRequestAttributes(renderRequest);
 			getCalendar(renderRequest);
 			getCalendarBooking(renderRequest);
 			getCalendarResource(renderRequest);
+			setRenderRequestAttributes(renderRequest);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchResourceException ||
