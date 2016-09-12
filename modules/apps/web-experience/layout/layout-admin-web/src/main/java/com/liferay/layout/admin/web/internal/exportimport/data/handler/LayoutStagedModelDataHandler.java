@@ -365,6 +365,7 @@ public class LayoutStagedModelDataHandler
 
 			layoutId = _layoutLocalService.getNextLayoutId(
 				groupId, privateLayout);
+
 			friendlyURL = StringPool.SLASH + layoutId;
 		}
 		else if (layoutsImportMode.equals(
