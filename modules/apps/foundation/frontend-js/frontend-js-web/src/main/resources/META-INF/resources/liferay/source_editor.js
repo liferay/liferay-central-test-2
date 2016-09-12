@@ -94,6 +94,10 @@ AUI.add(
 
 						instance._initializeThemes();
 						instance._highlightActiveGutterLine(0);
+
+						if (A.UA.linux && aceEditor.renderer) {
+							aceEditor.renderer.$computeLayoutConfig();
+						}
 					},
 
 					bindUI: function() {
