@@ -192,7 +192,9 @@
 
 		<execute function="Type" locator1="BlogsEntry#TITLE" value1="${entryTitle}" />
 		<execute function="Type" locator1="BlogsEntry#CONTENT" value1="${entryContent}" />
+
 		<execute function="AssertClick" locator1="Button#SUBMIT_FOR_PUBLICATION" value1="Submit for Publication" />
+
 		<execute function="Pause" locator1="5000" />
 
 		<execute function="SelectFrame" value1="relative=top" />
@@ -377,7 +379,9 @@
 		<var name="key_assetHeader" value="${entryTitle}" />
 
 		<execute function="Click" locator1="Icon#DESCRIPTIVE_HEADER_VERTICAL_ELLIPSIS" />
+
 		<execute macro="PortletEntry#clickMoveToRecycleBin" />
+
 		<execute function="AssertElementPresent" locator1="Message#SUCCESS" />
 		<execute function="AssertElementNotPresent" locator1="BlogsEntry#TITLE" />
 		<execute function="AssertElementNotPresent" locator1="BlogsEntry#CONTENT" />
@@ -827,6 +831,7 @@
 		<var name="key_assetTitle" value="${assetTitle}" />
 
 		<execute function="AssertClick" locator1="AP#ASSET_ABSTRACT_TITLE" value1="${entryTitle}" />
+
 		<execute function="AssertTextEquals" locator1="APAsset#ASSET_TITLE_HEADER" value1="${entryTitle}" />
 		<execute function="AssertTextEquals#assertPartialText" locator1="APAsset#ASSET_CONTENT" value1="${entryContent}" />
 	</command>
@@ -1059,6 +1064,7 @@
 					<var name="key_tagName" value="${tagName}" />
 
 					<execute function="AssertClick" locator1="BlogsEntry#TAG" value1="${tagName}" />
+
 					<execute function="AssertTextEquals" locator1="AssetCategorization#TAG_FILTER_TITLE" value1="Entries with tag ${tagName} ." />
 					<execute function="AssertTextEquals" locator1="BlogsEntry#TITLE" value1="${entryTitle}" />
 				</for>
@@ -1069,6 +1075,7 @@
 				<var name="key_tagName" value="${tagName}" />
 
 				<execute function="AssertClick" locator1="BlogsEntry#TAG" value1="${tagName}" />
+
 				<execute function="AssertTextEquals" locator1="AssetCategorization#TAG_FILTER_TITLE" value1="Entries with tag ${tagName} ." />
 				<execute function="AssertTextEquals" locator1="BlogsEntry#TITLE" value1="${entryTitle}" />
 			</else>
@@ -1204,6 +1211,7 @@
 		<execute function="AssertTextEquals" locator1="BlogsEntry#CONTENT" value1="${entryContent}" />
 		<execute function="AssertTextEquals" locator1="Comments#ENTRY_COUNT_PANEL" value1="1 Comments" />
 		<execute function="AssertTextEquals" locator1="Comments#COMMENT_BODY" value1="[...] ${entryContent2} [...] Read More" />
+
 		<execute function="AssertClick" locator1="Link#READ_MORE" value1="Read More" />
 
 		<var name="key_entryContent" value="${entryContent2}" />
