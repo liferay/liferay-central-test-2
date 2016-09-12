@@ -404,11 +404,13 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 		return fieldsMap;
 	}
 
-	protected DDMForm getFullDDMForm(long structureId) throws Exception {
-		DDMForm fullDDMForm = _fullDDMForms.get(structureId);
+	protected DDMForm getFullHierarchyDDMForm(long structureId)
+		throws Exception {
 
-		if (fullDDMForm != null) {
-			return fullDDMForm;
+		DDMForm fullHierarchyDDMForm = _fullHierarchyDDMForms.get(structureId);
+
+		if (fullHierarchyDDMForm != null) {
+			return fullHierarchyDDMForm;
 		}
 
 		try (PreparedStatement ps = connection.prepareStatement(
@@ -421,21 +423,22 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 				if (rs.next()) {
 					long parentStructureId = rs.getLong("parentStructureId");
 
-					fullDDMForm = getDDMForm(structureId);
+					fullHierarchyDDMForm = getDDMForm(structureId);
 
 					if (parentStructureId > 0) {
-						DDMForm parentDDMForm = getFullDDMForm(
+						DDMForm parentDDMForm = getFullHierarchyDDMForm(
 							parentStructureId);
 
 						List<DDMFormField> ddmFormFields =
-							fullDDMForm.getDDMFormFields();
+							fullHierarchyDDMForm.getDDMFormFields();
 
 						ddmFormFields.addAll(parentDDMForm.getDDMFormFields());
 					}
 
-					_fullDDMForms.put(structureId, fullDDMForm);
+					_fullHierarchyDDMForms.put(
+						structureId, fullHierarchyDDMForm);
 
-					return fullDDMForm;
+					return fullHierarchyDDMForm;
 				}
 			}
 
@@ -894,7 +897,7 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 				String data_ = rs.getString("data_");
 				long ddmStructureId = rs.getLong("structureId");
 
-				DDMForm ddmForm = getFullDDMForm(ddmStructureId);
+				DDMForm ddmForm = getFullHierarchyDDMForm(ddmStructureId);
 
 				DDMFormValues ddmFormValues =
 					_ddmFormValuesJSONDeserializer.deserialize(ddmForm, data_);
@@ -946,7 +949,7 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 				String data_ = rs.getString("data_");
 				long ddmStructureId = rs.getLong("structureId");
 
-				DDMForm ddmForm = getFullDDMForm(ddmStructureId);
+				DDMForm ddmForm = getFullHierarchyDDMForm(ddmStructureId);
 
 				DDMFormValues ddmFormValues =
 					_ddmFormValuesJSONDeserializer.deserialize(ddmForm, data_);
@@ -1404,7 +1407,7 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 						long structureId = rs.getLong("structureId");
 						long classPK = rs.getLong("classPK");
 
-						DDMForm ddmForm = getFullDDMForm(structureId);
+						DDMForm ddmForm = getFullHierarchyDDMForm(structureId);
 
 						ps2.setLong(1, classPK);
 
@@ -1528,7 +1531,7 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 	private long _expandoStorageAdapterClassNameId;
 	private final ExpandoTableLocalService _expandoTableLocalService;
 	private final ExpandoValueLocalService _expandoValueLocalService;
-	private final Map<Long, DDMForm> _fullDDMForms = new HashMap<>();
+	private final Map<Long, DDMForm> _fullHierarchyDDMForms = new HashMap<>();
 	private final ResourceLocalService _resourceLocalService;
 	private final ResourcePermissionLocalService
 		_resourcePermissionLocalService;
