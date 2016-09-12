@@ -30,11 +30,15 @@
 	</command>
 
 	<command name="addContent">
-		<execute function="Type#typeEditor" locator1="AlloyEditor#CONTENT_FIELD" value1="${entryContent}" />
+		<execute macro="AlloyEditor#addContent">
+			<var name="content" value="${entryContent}" />
+		</execute>
 	</command>
 
 	<command name="addContentWithInlineImage">
-		<execute function="Type#typeEditor" locator1="AlloyEditor#CONTENT_FIELD" value1="${entryContent}" />
+		<execute macro="AlloyEditor#addContent">
+			<var name="content" value="${entryContent}" />
+		</execute>
 
 		<execute function="Click" locator1="AlloyEditor#CONTENT_FIELD" />
 
@@ -112,7 +116,9 @@
 	</command>
 
 	<command name="addTitle">
-		<execute function="Type#typeEditor" locator1="AlloyEditor#TITLE_FIELD" value1="${entryTitle}" />
+		<execute macro="AlloyEditor#addTitle">
+			<var name="title" value="${entryTitle}" />
+		</execute>
 	</command>
 
 	<command name="addWithTrackbackURLPG">
@@ -205,7 +211,9 @@
 	<command name="editContent">
 		<execute function="AssertTextEquals" locator1="AlloyEditor#CONTENT_FIELD" value1="${entryContent}" />
 
-		<execute function="Type#typeEditor" locator1="AlloyEditor#CONTENT_FIELD" value1="${entryContentEdit}" />
+		<execute macro="AlloyEditor#addContent">
+			<var name="content" value="${entryContentEdit}" />
+		</execute>
 	</command>
 
 	<command name="editContentViaCardViewPG">
@@ -262,7 +270,9 @@
 	<command name="editTitle">
 		<execute function="AssertTextEquals" locator1="AlloyEditor#TITLE_FIELD" value1="${entryTitle}" />
 
-		<execute function="Type#typeEditor" locator1="AlloyEditor#TITLE_FIELD" value1="${entryTitleEdit}" />
+		<execute macro="AlloyEditor#addTitle">
+			<var name="title" value="${entryTitleEdit}" />
+		</execute>
 	</command>
 
 	<command name="editTitleViaCardViewPG">

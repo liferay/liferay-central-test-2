@@ -6,8 +6,11 @@
 
 		<execute function="Click" locator1="Button#PLUS" />
 
-		<execute function="Type#typeEditor" locator1="AlloyEditor#TITLE_FIELD" value1="${kbTemplateTitle}" />
-		<execute function="Type#typeEditor" locator1="AlloyEditor#CONTENT_FIELD" value1="${kbTemplateContent}" />
+		<execute macro="AlloyEditor#addTitleAndContent">
+			<var name="content" value="${kbTemplateContent}" />
+			<var name="title" value="${kbTemplateTitle}" />
+		</execute>
+
 		<execute macro="PortletEntry#publish" />
 	</command>
 

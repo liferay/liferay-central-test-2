@@ -49,8 +49,11 @@
 
 		<execute function="AssertClick" locator1="MenuItem#ADD_CHILD_ARTICLE" value1="Add Child Article" />
 
-		<execute function="Type#typeEditor" locator1="AlloyEditor#TITLE_FIELD" value1="${kbChildArticleTitle}" />
-		<execute function="Type#typeEditor" locator1="AlloyEditor#CONTENT_FIELD" value1="${kbChildArticleContent}" />
+		<execute macro="AlloyEditor#addTitleAndContent">
+			<var name="content" value="${kbChildArticleContent}" />
+			<var name="title" value="${kbChildArticleTitle}" />
+		</execute>
+
 		<execute macro="PortletEntry#publish" />
 	</command>
 
@@ -59,8 +62,10 @@
 
 		<execute function="AssertClick" locator1="KnowledgeBase#KB_TOOLS" value1="Add Child Article" />
 
-		<execute function="Type#typeEditor" locator1="AlloyEditor#TITLE_FIELD" value1="${kbArticleTitle}" />
-		<execute function="Type#typeEditor" locator1="AlloyEditor#CONTENT_FIELD" value1="${kbArticleContent}" />
+		<execute macro="AlloyEditor#addTitleAndContent">
+			<var name="content" value="${kbArticleContent}" />
+			<var name="title" value="${kbArticleTitle}" />
+		</execute>
 
 		<execute macro="Panel#expandPanel">
 			<var name="panelHeading" value="Configuration" />
@@ -118,7 +123,9 @@
 				<execute function="Type#sendKeys" locator1="AlloyEditor#TITLE_FIELD" value1="${kbArticleTitle}" />
 			</then>
 			<else>
-				<execute function="Type#typeEditor" locator1="AlloyEditor#TITLE_FIELD" value1="${kbArticleTitle}" />
+				<execute macro="AlloyEditor#addTitle">
+					<var name="title" value="${kbArticleTitle}" />
+				</execute>
 			</else>
 		</if>
 
@@ -152,7 +159,9 @@
 				<execute function="Type#sendKeysAceEditor" locator1="TextArea#ACE_EDITOR" value1="${kbArticleContentSource}" />
 			</then>
 			<else>
-				<execute function="Type#typeEditor" locator1="AlloyEditor#CONTENT_FIELD" value1="${kbArticleContent}" />
+				<execute macro="AlloyEditor#addContent">
+					<var name="content" value="${kbArticleContent}" />
+				</execute>
 			</else>
 		</if>
 
@@ -258,9 +267,10 @@
 
 		<execute function="AssertClick" locator1="MenuItem#BASIC_ARTICLE" value1="Basic Article" />
 
-		<execute function="Type#typeEditor" locator1="AlloyEditor#TITLE_FIELD" value1="${kbArticleTitle}" />
-
-		<execute function="Type#typeEditor" locator1="AlloyEditor#CONTENT_FIELD" value1="${kbArticleContent}" />
+		<execute macro="AlloyEditor#addTitleAndContent">
+			<var name="content" value="${kbArticleContent}" />
+			<var name="title" value="${kbArticleTitle}" />
+		</execute>
 
 		<execute macro="KBArticle#selectAttachmentCP">
 			<var name="kbArticleAttachment" value="${kbArticleAttachment}" />
@@ -276,8 +286,10 @@
 
 		<execute function="AssertClick" locator1="MenuItem#BASIC_ARTICLE" value1="Basic Article" />
 
-		<execute function="Type#typeEditor" locator1="AlloyEditor#TITLE_FIELD" value1="${kbArticleTitle}" />
-		<execute function="Type#typeEditor" locator1="AlloyEditor#CONTENT_FIELD" value1="${kbArticleContent}" />
+		<execute macro="AlloyEditor#addTitleAndContent">
+			<var name="content" value="${kbArticleContent}" />
+			<var name="title" value="${kbArticleTitle}" />
+		</execute>
 
 		<execute function="AssertClick" locator1="Button#PUBLISH" value1="Publish" />
 
@@ -305,8 +317,10 @@
 	<command name="cancelAddKBArticle">
 		<execute macro="KBArticle#_gotoAddBasicArticle" />
 
-		<execute function="Type#typeEditor" locator1="AlloyEditor#TITLE_FIELD" value1="${kbArticleTitle}" />
-		<execute function="Type#typeEditor" locator1="AlloyEditor#CONTENT_FIELD" value1="${kbArticleContent}" />
+		<execute macro="AlloyEditor#addTitleAndContent">
+			<var name="content" value="${kbArticleContent}" />
+			<var name="title" value="${kbArticleTitle}" />
+		</execute>
 
 		<execute macro="Button#clickCancel" />
 	</command>
@@ -641,8 +655,11 @@
 		<execute function="AssertClick" locator1="MenuItem#EDIT" value1="Edit" />
 
 		<execute function="AssertTextEquals" locator1="Message#INFO" value1="A new version is created automatically if this content is modified." />
-		<execute function="Type#typeEditor" locator1="AlloyEditor#TITLE_FIELD" value1="${kbArticleTitleEdit}" />
-		<execute function="Type#typeEditor" locator1="AlloyEditor#CONTENT_FIELD" value1="${kbArticleContentEdit}" />
+
+		<execute macro="AlloyEditor#addTitleAndContent">
+			<var name="content" value="${kbArticleContentEdit}" />
+			<var name="title" value="${kbArticleTitleEdit}" />
+		</execute>
 
 		<if>
 			<isset var="kbArticleAttachment" />
@@ -689,8 +706,11 @@
 		<execute function="AssertClick" locator1="KnowledgeBase#KB_TOOLS" value1="Edit" />
 
 		<execute function="AssertTextEquals" locator1="Message#INFO" value1="A new version is created automatically if this content is modified." />
-		<execute function="Type#typeEditor" locator1="AlloyEditor#TITLE_FIELD" value1="${kbArticleTitleEdit}" />
-		<execute function="Type#typeEditor" locator1="AlloyEditor#CONTENT_FIELD" value1="${kbArticleContentEdit}" />
+
+		<execute macro="AlloyEditor#addTitleAndContent">
+			<var name="content" value="${kbArticleContentEdit}" />
+			<var name="title" value="${kbArticleTitleEdit}" />
+		</execute>
 
 		<if>
 			<equals arg1="${cancel}" arg2="true" />
