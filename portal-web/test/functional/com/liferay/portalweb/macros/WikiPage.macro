@@ -886,7 +886,7 @@
 				</var>
 
 				<execute macro="AlloyEditor#addContent">
-					<var name="content" value="${wikiPagwikiPageContentLinkHTMLeContentURL}" />
+					<var name="content" value="${wikiPageContentLinkHTML}" />
 				</execute>
 			</else>
 		</if>
