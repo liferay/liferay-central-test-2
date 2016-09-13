@@ -197,25 +197,8 @@ public class InvokerFilter extends BasePortalLifecycle implements Filter {
 
 		_invokerFilterHelper.addInvokerFilter(this);
 
-		String dispatcher = GetterUtil.getString(
+		_dispatcher = Dispatcher.valueOf(
 			_filterConfig.getInitParameter("dispatcher"));
-
-		if (dispatcher.equals("ERROR")) {
-			_dispatcher = Dispatcher.ERROR;
-		}
-		else if (dispatcher.equals("FORWARD")) {
-			_dispatcher = Dispatcher.FORWARD;
-		}
-		else if (dispatcher.equals("INCLUDE")) {
-			_dispatcher = Dispatcher.INCLUDE;
-		}
-		else if (dispatcher.equals("REQUEST")) {
-			_dispatcher = Dispatcher.REQUEST;
-		}
-		else {
-			throw new IllegalArgumentException(
-				"Invalid dispatcher " + dispatcher);
-		}
 	}
 
 	protected InvokerFilterChain getInvokerFilterChain(
