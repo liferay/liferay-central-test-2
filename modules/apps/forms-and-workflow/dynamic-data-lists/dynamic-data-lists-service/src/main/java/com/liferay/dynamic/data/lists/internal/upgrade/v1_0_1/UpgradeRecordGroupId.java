@@ -15,6 +15,7 @@
 package com.liferay.dynamic.data.lists.internal.upgrade.v1_0_1;
 
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.upgrade.AutoBatchPreparedStatementUtil;
 
 import java.sql.PreparedStatement;
@@ -31,13 +32,14 @@ public class UpgradeRecordGroupId extends UpgradeProcess {
 	}
 
 	protected void updateRecordGroupId() throws Exception {
-		String sql =
-			"SELECT DDLRecordSet.groupId, DDLRecord.recordId " +
-			"FROM DDLRecord INNER JOIN DDLRecordSet " +
-			"ON DDLRecord.recordSetId = DDLRecordSet.recordSetId " +
-			"WHERE DDLRecord.groupId != DDLRecordSet.groupId;";
+		StringBundler sb = new StringBundler(4);
 
-		try (PreparedStatement ps1 = connection.prepareStatement(sql);
+		sb.append("select DDLRecordSet.groupId, DDLRecord.recordId ");
+		sb.append("from DDLRecord inner join DDLRecordSet ");
+		sb.append("on DDLRecord.recordSetId = DDLRecordSet.recordSetId ");
+		sb.append("where DDLRecord.groupId != DDLRecordSet.groupId");
+
+		try (PreparedStatement ps1 = connection.prepareStatement(sb.toString());
 			ResultSet rs = ps1.executeQuery();
 			PreparedStatement ps2 =
 				AutoBatchPreparedStatementUtil.concurrentAutoBatch(
