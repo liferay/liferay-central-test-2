@@ -258,7 +258,7 @@ public class JournalFolderServiceImpl extends JournalFolderServiceBaseImpl {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, replaced by {@link #getSubfolderIds(List, long,
+	 * @deprecated As of 3.3.0, replaced by {@link #getSubfolderIds(List, long,
 	 *             long, boolean)}
 	 */
 	@Deprecated

@@ -210,7 +210,7 @@ public class JournalConverterImpl implements JournalConverter {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, with no direct replacement
+	 * @deprecated As of 3.3.0, with no direct replacement
 	 */
 	@Deprecated
 	@Override
@@ -221,7 +221,7 @@ public class JournalConverterImpl implements JournalConverter {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, with no direct replacement
+	 * @deprecated As of 3.3.0, with no direct replacement
 	 */
 	@Deprecated
 	@Override
@@ -247,7 +247,7 @@ public class JournalConverterImpl implements JournalConverter {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, with no direct replacement
+	 * @deprecated As of 3.3.0, with no direct replacement
 	 */
 	@Deprecated
 	@Override

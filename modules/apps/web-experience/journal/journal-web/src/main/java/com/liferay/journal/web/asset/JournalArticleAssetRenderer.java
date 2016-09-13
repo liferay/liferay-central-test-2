@@ -142,7 +142,7 @@ public class JournalArticleAssetRenderer
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, with no direct replacement
+	 * @deprecated As of 1.3.0, with no direct replacement
 	 */
 	@Deprecated
 	@Override
