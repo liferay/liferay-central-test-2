@@ -174,15 +174,9 @@ public class InvokerFilter extends BasePortalLifecycle implements Filter {
 
 	@Override
 	protected void doPortalInit() throws Exception {
-		_invokerFilterChainSize = GetterUtil.getInteger(
-			PropsUtil.get(PropsKeys.INVOKER_FILTER_CHAIN_SIZE));
-
 		if (_invokerFilterChainSize > 0) {
 			_filterChains = new ConcurrentLFUCache<>(_invokerFilterChainSize);
 		}
-
-		_invokerFilterURIMaxLength = GetterUtil.getInteger(
-			PropsUtil.get(PropsKeys.INVOKER_FILTER_URI_MAX_LENGTH));
 
 		ServletContext servletContext = _filterConfig.getServletContext();
 
@@ -328,12 +322,15 @@ public class InvokerFilter extends BasePortalLifecycle implements Filter {
 
 	private static final Log _log = LogFactoryUtil.getLog(InvokerFilter.class);
 
+	private static final int _invokerFilterChainSize = GetterUtil.getInteger(
+		PropsUtil.get(PropsKeys.INVOKER_FILTER_CHAIN_SIZE));
+	private static final int _invokerFilterURIMaxLength = GetterUtil.getInteger(
+		PropsUtil.get(PropsKeys.INVOKER_FILTER_URI_MAX_LENGTH));
+
 	private String _contextPath;
 	private Dispatcher _dispatcher;
 	private ConcurrentLFUCache<String, InvokerFilterChain> _filterChains;
 	private FilterConfig _filterConfig;
-	private int _invokerFilterChainSize;
 	private InvokerFilterHelper _invokerFilterHelper;
-	private int _invokerFilterURIMaxLength;
 
 }
