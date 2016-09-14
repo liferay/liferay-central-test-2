@@ -202,9 +202,8 @@ public class UpgradeSchemaTest extends UpgradeSchema {
 
 			if (hasColumn("CalendarBooking", "recurringCalendarBookingId")) {
 
-				// Hack through the OSGi classloading, it does not worth to
-				// export those generated *Table packages just to support this
-				// test.
+				// Hack through the OSGi classloading, it is not worth exporting
+				// the generated *Table packages just to support this test
 
 				ClassLoader classLoader = CalendarUtil.class.getClassLoader();
 
