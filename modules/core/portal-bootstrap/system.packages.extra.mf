@@ -2930,7 +2930,7 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  al.kernel.service,com.liferay.portal.kernel.util,com.liferay.trash.ke
  rnel.model,javax.portlet,javax.servlet,javax.servlet.http",com.lifera
  y.portal.kernel.tree;version="2.1.0";uses:="com.liferay.portal.kernel
- .exception",com.liferay.portal.kernel.upgrade;version="7.1.0";uses:="
+ .exception",com.liferay.portal.kernel.upgrade;version="7.2.0";uses:="
  com.liferay.portal.kernel.dao.db,com.liferay.portal.kernel.exception,
  com.liferay.portal.kernel.upgrade.util,com.liferay.portal.kernel.util
  ,com.liferay.portal.kernel.xml,javax.portlet",com.liferay.portal.kern
