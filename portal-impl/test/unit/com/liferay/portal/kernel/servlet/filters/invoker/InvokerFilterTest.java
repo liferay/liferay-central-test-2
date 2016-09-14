@@ -154,7 +154,6 @@ public class InvokerFilterTest extends PowerMockito {
 				logRecord.getMessage().startsWith("Rejected " + urlPrefix));
 		}
 		catch (Exception e) {
-			e.printStackTrace();
 			Assert.fail(e.getMessage());
 		}
 	}
