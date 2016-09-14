@@ -124,7 +124,7 @@ if (forcePost && (portletURL != null)) {
 			content = StringPool.BLANK;
 		}
 		else {
-			StringBundler sb = new StringBundler((pagesIteratorEnd - pagesIteratorBegin + 1) * 14);
+			StringBundler sb = new StringBundler((pagesIteratorEnd - pagesIteratorBegin + 1) * 8);
 
 			for (int i = pagesIteratorBegin; i <= pagesIteratorEnd; i++) {
 				if (i == cur) {
