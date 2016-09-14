@@ -244,9 +244,12 @@ public class LayoutLocalServiceStagingAdvice implements MethodInterceptor {
 
 		parentLayoutId = layoutLocalServiceHelper.getParentLayoutId(
 			groupId, privateLayout, parentLayoutId);
+
 		String name = nameMap.get(LocaleUtil.getSiteDefault());
+
 		friendlyURLMap = layoutLocalServiceHelper.getFriendlyURLMap(
 			groupId, privateLayout, layoutId, name, friendlyURLMap);
+
 		String friendlyURL = friendlyURLMap.get(LocaleUtil.getSiteDefault());
 
 		layoutLocalServiceHelper.validate(

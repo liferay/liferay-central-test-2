@@ -668,6 +668,7 @@ public class CalendarBookingLocalServiceTest {
 			CalendarBookingWorkflowConstants.STATUS_MAYBE, serviceContext);
 
 		int firstReminder = RandomTestUtil.randomInt();
+
 		int secondReminder = RandomTestUtil.randomInt(1, firstReminder);
 
 		childCalendarBooking =
@@ -728,6 +729,7 @@ public class CalendarBookingLocalServiceTest {
 			false, false, serviceContext);
 
 		long startTime = System.currentTimeMillis();
+
 		long endTime = startTime + 36000000;
 
 		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_PUBLISH);
