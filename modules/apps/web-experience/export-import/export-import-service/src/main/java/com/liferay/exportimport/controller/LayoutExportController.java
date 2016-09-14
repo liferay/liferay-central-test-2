@@ -390,7 +390,7 @@ public class LayoutExportController implements ExportController {
 		portletDataContext.addDeletionSystemEventStagedModelTypes(
 			new StagedModelType(Layout.class));
 
-		// Export Layout Set
+		// Export layout set
 
 		LayoutSet layoutSet = _layoutSetLocalService.getLayoutSet(
 			portletDataContext.getGroupId(),
