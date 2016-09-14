@@ -58,7 +58,7 @@ public class StagedLayoutSetImpl implements StagedLayoutSet {
 
 		_layoutSet = layoutSet;
 
-		// Last Publish Date
+		// Last publish date
 
 		UnicodeProperties settingsProperties =
 			_layoutSet.getSettingsProperties();
@@ -71,7 +71,7 @@ public class StagedLayoutSetImpl implements StagedLayoutSet {
 
 		_lastPublishDate = Date.from(instant);
 
-		// LayoutSet Prototype
+		// Layout set prototype
 
 		if (Validator.isNotNull(_layoutSet.getLayoutSetPrototypeUuid())) {
 			LayoutSetPrototype layoutSetPrototype =

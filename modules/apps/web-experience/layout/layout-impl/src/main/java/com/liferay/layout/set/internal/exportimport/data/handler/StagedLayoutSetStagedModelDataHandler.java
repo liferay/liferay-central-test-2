@@ -195,7 +195,7 @@ public class StagedLayoutSetStagedModelDataHandler
 
 		List<Element> layoutElements = layoutsElement.elements();
 
-		// Delete Missing Pages
+		// Delete missing pages
 
 		deleteMissingLayouts(portletDataContext, layoutElements);
 
