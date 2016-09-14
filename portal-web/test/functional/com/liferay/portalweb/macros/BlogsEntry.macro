@@ -493,7 +493,7 @@
 
 		<var locator="TextInput#DISPLAY_DATE_MINUTE" name="displayDateMinute" />
 
-		<var method="MathUtil#sum('${displayDateMinute}','2')" name="displayDateMinuteFuture" />
+		<var method="MathUtil#sum('${displayDateMinute}','3')" name="displayDateMinuteFuture" />
 
 		<var name="displayDateMinuteFutureLength" value="${displayDateMinuteFuture?length()}" />
 
