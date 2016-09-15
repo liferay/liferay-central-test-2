@@ -39,50 +39,42 @@ public class MySQLInsertSQLBuilderTest {
 
 	@Test
 	public void testBuildFieldFieldDouble() throws Exception {
-		String field = _insertSQLBuilder.buildField(
-			Double.valueOf(99.99));
+		String field = _insertSQLBuilder.buildField(Double.valueOf(99.99));
 
 		Assert.assertEquals("'99.99'", field);
 	}
 
 	@Test
 	public void testBuildFieldFieldFloat() throws Exception {
-		String field = _insertSQLBuilder.buildField(
-			Float.valueOf(1));
+		String field = _insertSQLBuilder.buildField(Float.valueOf(1));
 
 		Assert.assertEquals("'1.0'", field);
 	}
 
 	@Test
 	public void testBuildFieldFieldInteger() throws Exception {
-		String field = _insertSQLBuilder.buildField(
-			Integer.valueOf(1));
+		String field = _insertSQLBuilder.buildField(Integer.valueOf(1));
 
 		Assert.assertEquals("'1'", field);
 	}
 
 	@Test
 	public void testBuildFieldFieldString() throws Exception {
-		String field = _insertSQLBuilder.buildField(
-			new String("1"));
+		String field = _insertSQLBuilder.buildField(new String("1"));
 
 		Assert.assertEquals("'1'", field);
 	}
 
 	@Test
-	public void testBuildFieldFieldStringShouldWithQuotes()
-		throws Exception {
-
-		String field = _insertSQLBuilder.buildField(
-			new String("'1'"));
+	public void testBuildFieldFieldStringShouldWithQuotes() throws Exception {
+		String field = _insertSQLBuilder.buildField(new String("'1'"));
 
 		Assert.assertEquals("'''1'''", field);
 	}
 
 	@Test
 	public void testBuildFieldFieldTimestamp() throws Exception {
-		String field = _insertSQLBuilder.buildField(
-			new Timestamp(0L));
+		String field = _insertSQLBuilder.buildField(new Timestamp(0L));
 
 		Assert.assertEquals("'1970-01-01 00:00:00'", field);
 	}
