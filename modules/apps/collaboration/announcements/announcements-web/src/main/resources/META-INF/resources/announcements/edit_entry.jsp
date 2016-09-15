@@ -23,9 +23,9 @@ AnnouncementsEntry entry = (AnnouncementsEntry)request.getAttribute(Announcement
 
 long entryId = BeanParamUtil.getLong(entry, request, "entryId");
 
-String content = BeanParamUtil.getString(entry, request, "content");
-
 String title = BeanParamUtil.getString(entry, request, "title");
+
+String content = BeanParamUtil.getString(entry, request, "content");
 
 boolean alert = ParamUtil.getBoolean(request, "alert");
 
@@ -100,19 +100,19 @@ if (portletTitleBasedNavigation) {
 					<c:otherwise>
 
 						<%
-							String distributionScope = ParamUtil.getString(request, "distributionScope");
+						String distributionScope = ParamUtil.getString(request, "distributionScope");
 
-							long classNameId = 0;
-							long classPK = 0;
+						long classNameId = 0;
+						long classPK = 0;
 
-							String[] distributionScopeArray = StringUtil.split(distributionScope);
+						String[] distributionScopeArray = StringUtil.split(distributionScope);
 
-							if (distributionScopeArray.length == 2) {
-								classNameId = GetterUtil.getLong(distributionScopeArray[0]);
-								classPK = GetterUtil.getLong(distributionScopeArray[1]);
-							}
+						if (distributionScopeArray.length == 2) {
+							classNameId = GetterUtil.getLong(distributionScopeArray[0]);
+							classPK = GetterUtil.getLong(distributionScopeArray[1]);
+						}
 
-							boolean submitOnChange = false;
+						boolean submitOnChange = false;
 						%>
 
 						<%@ include file="/announcements/entry_select_scope.jspf" %>
