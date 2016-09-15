@@ -29,71 +29,71 @@ import org.junit.Test;
 public class PostgreSQLInsertSQLBuilderTest {
 
 	@Test
-	public void testSerializeTableFieldDate() throws Exception {
-		String serializeTableField = _insertSQLBuilder.buildField(new Date(0L));
+	public void testBuildFieldFieldDate() throws Exception {
+		String field = _insertSQLBuilder.buildField(new Date(0L));
 
 		Assert.assertEquals(
 			"to_timestamp('1970-01-01 00:01:00', 'YYYY-MM-DD HH24:MI:SS:MS')",
-			serializeTableField);
+			field);
 	}
 
 	@Test
-	public void testSerializeTableFieldDouble() throws Exception {
-		String serializeTableField = _insertSQLBuilder.buildField(
+	public void testBuildFieldFieldDouble() throws Exception {
+		String field = _insertSQLBuilder.buildField(
 			Double.valueOf(99.99));
 
-		Assert.assertEquals("'99.99'", serializeTableField);
+		Assert.assertEquals("'99.99'", field);
 	}
 
 	@Test
-	public void testSerializeTableFieldFloat() throws Exception {
-		String serializeTableField = _insertSQLBuilder.buildField(
+	public void testBuildFieldFieldFloat() throws Exception {
+		String field = _insertSQLBuilder.buildField(
 			Float.valueOf(1));
 
-		Assert.assertEquals("'1.0'", serializeTableField);
+		Assert.assertEquals("'1.0'", field);
 	}
 
 	@Test
-	public void testSerializeTableFieldInteger() throws Exception {
-		String serializeTableField = _insertSQLBuilder.buildField(
+	public void testBuildFieldFieldInteger() throws Exception {
+		String field = _insertSQLBuilder.buildField(
 			Integer.valueOf(1));
 
-		Assert.assertEquals("'1'", serializeTableField);
+		Assert.assertEquals("'1'", field);
 	}
 
 	@Test
-	public void testSerializeTableFieldNull() throws Exception {
-		String serializeTableField = _insertSQLBuilder.buildField(null);
+	public void testBuildFieldFieldNull() throws Exception {
+		String field = _insertSQLBuilder.buildField(null);
 
-		Assert.assertEquals("null", serializeTableField);
+		Assert.assertEquals("null", field);
 	}
 
 	@Test
-	public void testSerializeTableFieldString() throws Exception {
-		String serializeTableField = _insertSQLBuilder.buildField(
+	public void testBuildFieldFieldString() throws Exception {
+		String field = _insertSQLBuilder.buildField(
 			new String("1"));
 
-		Assert.assertEquals("'1'", serializeTableField);
+		Assert.assertEquals("'1'", field);
 	}
 
 	@Test
-	public void testSerializeTableFieldStringShouldWithQuotes()
+	public void testBuildFieldFieldStringShouldWithQuotes()
 		throws Exception {
 
-		String serializeTableField = _insertSQLBuilder.buildField(
+		String field = _insertSQLBuilder.buildField(
 			new String("'1'"));
 
-		Assert.assertEquals("'''1'''", serializeTableField);
+		Assert.assertEquals("'''1'''", field);
 	}
 
 	@Test
-	public void testSerializeTableFieldTimestamp() throws Exception {
-		String serializeTableField = _insertSQLBuilder.buildField(
+	public void testBuildFieldFieldTimestamp() throws Exception {
+		String field = _insertSQLBuilder.buildField(
 			new Timestamp(0L));
 
 		Assert.assertEquals(
 			"to_timestamp('1970-01-01 00:01:00', 'YYYY-MM-DD HH24:MI:SS:MS')",
-			serializeTableField);
+			field);
 	}
 
 	private final InsertSQLBuilder _insertSQLBuilder = new InsertSQLBuilder(
