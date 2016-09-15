@@ -23,7 +23,7 @@ import org.junit.Test;
 public class InsertSQLBuilderTest {
 
 	@Test
-	public void testBuild() {
+	public void testBuildInsert() {
 		String[] fields = {"a", "b", "c", "d"};
 
 		InsertSQLBuilder insertSQLBuilder = new InsertSQLBuilder();
