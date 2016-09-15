@@ -4053,7 +4053,7 @@ public class PortalImpl implements Portal {
 
 		String virtualHostname = layoutSet.getVirtualHostname();
 
-		String domain = HttpUtil.getDomain(themeDisplay.getURLPortal());
+		String domain = HttpUtil.getDomain(themeDisplay.getPortalURL());
 
 		if (Validator.isNotNull(virtualHostname) &&
 			domain.startsWith(virtualHostname)) {
