@@ -59,7 +59,6 @@
 		<execute macro="Mentions#addMentionViaMessageBoardThread">
 			<var name="mentionsUserFullName" value="userfn userln" />
 			<var name="mentionsUserScreenName" value="usersn" />
-			<var name="threadBody" value="Thread Body" />
 			<var name="threadSubject" value="Thread Subject" />
 		</execute>
 
@@ -70,8 +69,6 @@
 		</execute>
 
 		<execute macro="MessageboardsThread#viewCP">
-			<var name="postsNumber" value="1" />
-			<var name="threadBody" value="Thread Body" />
 			<var name="threadSubject" value="Thread Subject" />
 		</execute>
 
