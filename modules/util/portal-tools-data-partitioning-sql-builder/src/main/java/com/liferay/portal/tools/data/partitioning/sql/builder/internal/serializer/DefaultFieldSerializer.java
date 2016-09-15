@@ -36,19 +36,19 @@ public class DefaultFieldSerializer implements FieldSerializer {
 	}
 
 	@Override
-	public String serialize(Object field) {
+	public String serialize(Object object) {
 		StringBuilder sb = new StringBuilder();
 
-		if (field == null) {
+		if (object == null) {
 			sb.append("null");
 		}
-		else if ((field instanceof Date) || (field instanceof Timestamp)) {
+		else if ((object instanceof Date) || (object instanceof Timestamp)) {
 			sb.append("'");
-			sb.append(_dateFormat.format(field));
+			sb.append(_dateFormat.format(object));
 			sb.append("'");
 		}
-		else if (field instanceof String) {
-			String value = (String)field;
+		else if (object instanceof String) {
+			String value = (String)object;
 
 			value = value.replace("'", "''");
 
@@ -58,7 +58,7 @@ public class DefaultFieldSerializer implements FieldSerializer {
 		}
 		else {
 			sb.append("'");
-			sb.append(field);
+			sb.append(object);
 			sb.append("'");
 		}
 

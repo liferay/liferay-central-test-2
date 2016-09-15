@@ -19,6 +19,6 @@ package com.liferay.portal.tools.data.partitioning.sql.builder.exporter.serializ
  */
 public interface FieldSerializer {
 
-	public String serialize(Object field);
+	public String serialize(Object object);
 
 }

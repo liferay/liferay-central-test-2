@@ -28,21 +28,21 @@ import java.text.SimpleDateFormat;
 public class PostgreSQLFieldSerializer implements FieldSerializer {
 
 	@Override
-	public String serialize(Object field) {
+	public String serialize(Object object) {
 		StringBuilder sb = new StringBuilder();
 
-		if (field == null) {
+		if (object == null) {
 			sb.append("null");
 		}
-		else if ((field instanceof Date) || (field instanceof Timestamp)) {
+		else if ((object instanceof Date) || (object instanceof Timestamp)) {
 			sb.append("to_timestamp('");
-			sb.append(_dateFormat.format(field));
+			sb.append(_dateFormat.format(object));
 			sb.append("', 'YYYY-MM-DD HH24:MI:SS:MS')");
 		}
-		else if (field instanceof String) {
+		else if (object instanceof String) {
 			sb.append("'");
 
-			String value = (String)field;
+			String value = (String)object;
 
 			sb.append(value.replace("'", "''"));
 
@@ -50,7 +50,7 @@ public class PostgreSQLFieldSerializer implements FieldSerializer {
 		}
 		else {
 			sb.append("'");
-			sb.append(field);
+			sb.append(object);
 			sb.append("'");
 		}
 
