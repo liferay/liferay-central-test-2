@@ -83,11 +83,11 @@ if (portletTitleBasedNavigation) {
 
 		<aui:fieldset-group markupView="lexicon">
 			<aui:fieldset>
-				<h1><liferay-ui:input-editor contents="<%= title %>" editorName="alloyeditor" name="titleEditor" placeholder="title" showSource="<%= false %>" /></h1>
+				<h1><liferay-ui:input-editor contents="<%= HtmlUtil.escape(title) %>" editorName="alloyeditor" name="titleEditor" placeholder="title" showSource="<%= false %>" /></h1>
 
 				<aui:input name="title" type="hidden" />
 
-				<liferay-ui:input-editor contents="<%= content %>" editorName='<%= PropsUtil.get("editor.wysiwyg.portal-web.docroot.html.portlet.announcements.edit_entry.jsp") %>' name="contentEditor" />
+				<liferay-ui:input-editor contents="<%= HtmlUtil.escape(content) %>" editorName='<%= PropsUtil.get("editor.wysiwyg.portal-web.docroot.html.portlet.announcements.edit_entry.jsp") %>' name="contentEditor" />
 
 				<aui:input name="content" type="hidden" />
 			</aui:fieldset>
