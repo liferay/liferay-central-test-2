@@ -14,14 +14,11 @@
 
 package com.liferay.hello.soy.web.internal.portlet;
 
-import com.liferay.portal.kernel.model.User;
-import com.liferay.portal.kernel.theme.ThemeDisplay;
-import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.kernel.service.LayoutService;
+import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.portlet.bridge.soy.SoyPortlet;
 
 import java.io.IOException;
-
-import java.util.Objects;
 
 import javax.portlet.Portlet;
 import javax.portlet.PortletException;
@@ -30,6 +27,7 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Bruno Basto
@@ -52,7 +50,7 @@ import org.osgi.service.component.annotations.Component;
 		"javax.portlet.expiration-cache=0",
 		"javax.portlet.init-param.copy-request-parameters=true",
 		"javax.portlet.init-param.template-path=/",
-		"javax.portlet.init-param.view-template=hello_soy_view",
+		"javax.portlet.init-param.view-template=View",
 		"javax.portlet.name=hello_soy_portlet",
 		"javax.portlet.resource-bundle=content.Language",
 		"javax.portlet.security-role-ref=guest,power-user,user",
@@ -67,31 +65,17 @@ public class HelloSoyPortlet extends SoyPortlet {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
-		PortletURL portletURL = renderResponse.createRenderURL();
+		PortletURL navigationURL = renderResponse.createRenderURL();
 
-		portletURL.setParameter("mvcPath", "hello_soy_description");
+		navigationURL.setParameter("mvcRenderCommandName", "Navigation");
 
-		template.put("descriptionURL", portletURL.toString());
-
-		String path = getPath(renderRequest, renderResponse);
-
-		if (Objects.equals(path, "hello_soy_edit")) {
-			portletURL.setParameter("mvcPath", "hello_soy_view");
-		}
-		else {
-			portletURL.setParameter("mvcPath", "hello_soy_edit");
-		}
-
-		template.put("portletURL", portletURL.toString());
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		User user = themeDisplay.getUser();
-
-		template.put("userName", user.getFirstName());
+		template.put("navigationURL", navigationURL.toString());
+		template.put("releaseInfo", ReleaseInfo.getReleaseInfo());
 
 		super.render(renderRequest, renderResponse);
 	}
+
+	@Reference
+	protected LayoutService layoutService;
 
 }
