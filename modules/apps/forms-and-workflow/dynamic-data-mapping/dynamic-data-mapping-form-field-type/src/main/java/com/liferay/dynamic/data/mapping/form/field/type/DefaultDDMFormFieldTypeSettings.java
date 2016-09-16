@@ -138,6 +138,7 @@ public interface DefaultDDMFormFieldTypeSettings
 	/**
 	 * @deprecated As of 2.0.0
 	 */
+	@Deprecated
 	@DDMFormField(
 		label = "%field-visibility-expression",
 		properties = {
