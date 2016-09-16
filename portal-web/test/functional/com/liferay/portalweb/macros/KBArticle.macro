@@ -793,7 +793,7 @@
 	<command name="gotoChildArticleDescriptiveDetails">
 		<var name="key_kbArticleTitle" value="${kbArticleTitle}" />
 
-		<execute function="AssertClick#assertPartialTextClickAt" locator1="KnowledgeBase#DESCRIPTIVE_VIEW_CHILD_ARTICLE_DETAILS" value1="Child Article" />
+		<execute function="AssertClick#assertPartialTextClickAt" locator1="KnowledgeBase#DESCRIPTIVE_VIEW_CHILD_ARTICLE_LINK" value1="Child Article" />
 	</command>
 
 	<command name="gotoCP">
