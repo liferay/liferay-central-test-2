@@ -70,6 +70,7 @@ public class HelloSoyPortlet extends SoyPortlet {
 		navigationURL.setParameter("mvcRenderCommandName", "Navigation");
 
 		template.put("navigationURL", navigationURL.toString());
+
 		template.put("releaseInfo", ReleaseInfo.getReleaseInfo());
 
 		super.render(renderRequest, renderResponse);
