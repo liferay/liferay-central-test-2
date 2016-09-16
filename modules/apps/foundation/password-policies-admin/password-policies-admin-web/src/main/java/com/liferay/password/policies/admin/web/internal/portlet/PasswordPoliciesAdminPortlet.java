@@ -153,11 +153,12 @@ public class PasswordPoliciesAdminPortlet extends MVCPortlet {
 			PasswordPolicy passwordPolicy =
 				_passwordPolicyService.addPasswordPolicy(
 					name, description, changeable, changeRequired, minAge,
-				checkSyntax, allowDictionaryWords, minAlphanumeric, minLength,
-				minLowerCase, minNumbers, minSymbols, minUpperCase, regex,
-				history, historyCount, expireable, maxAge, warningTime,
-				graceLimit, lockout, maxFailure, lockoutDuration,
-				resetFailureCount, resetTicketMaxAge, serviceContext);
+					checkSyntax, allowDictionaryWords, minAlphanumeric,
+					minLength, minLowerCase, minNumbers, minSymbols,
+					minUpperCase, regex, history, historyCount, expireable,
+					maxAge, warningTime, graceLimit, lockout, maxFailure,
+					lockoutDuration, resetFailureCount, resetTicketMaxAge,
+					serviceContext);
 
 			passwordPolicyId = passwordPolicy.getPasswordPolicyId();
 		}
