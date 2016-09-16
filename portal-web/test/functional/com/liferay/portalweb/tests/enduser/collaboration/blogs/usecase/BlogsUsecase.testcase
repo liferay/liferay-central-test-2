@@ -1918,7 +1918,7 @@
 		</execute>
 
 		<execute macro="DMDocument#addCP">
-			<var name="dmDocumentDescription" value="${dmDocumentDescription}" />
+			<var name="dmDocumentDescription" value="DM Document Description" />
 			<var name="dmDocumentFile" value="Document_2.jpg" />
 			<var name="dmDocumentTitle" value="Document_2.jpg" />
 		</execute>
