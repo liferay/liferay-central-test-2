@@ -26,7 +26,6 @@ List<AssetRendererFactory<?>> classTypesAssetRendererFactories = new ArrayList<>
 
 <liferay-portlet:renderURL portletConfiguration="<%= true %>" varImpl="configurationRenderURL" />
 
-
 <aui:form action="<%= configurationActionURL %>" cssClass="container-fluid-1280" method="post" name="fm" onSubmit="event.preventDefault();">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 	<aui:input name="redirect" type="hidden" value="<%= configurationRenderURL.toString() %>" />
