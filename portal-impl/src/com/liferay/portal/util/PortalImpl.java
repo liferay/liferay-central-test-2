@@ -8011,9 +8011,7 @@ public class PortalImpl implements Portal {
 	}
 
 	protected boolean isUnwrapRequest(String currentRequestClassName) {
-		for (String packageName :
-				PropsValues.REQUEST_UNWRAP_PACKAGES) {
-
+		for (String packageName : PropsValues.REQUEST_UNWRAP_PACKAGES) {
 			if (currentRequestClassName.startsWith(packageName)) {
 				return true;
 			}
