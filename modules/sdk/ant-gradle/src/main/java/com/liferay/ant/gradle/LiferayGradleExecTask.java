@@ -70,6 +70,6 @@ public class LiferayGradleExecTask extends GradleExecTask {
 	}
 
 	private boolean _forcedCacheEnabled = true;
-	private boolean _portalBuild;
+	private boolean _portalBuild = true;
 
 }
