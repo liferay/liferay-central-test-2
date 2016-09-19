@@ -34,10 +34,10 @@ public class UpgradeRecordGroupId extends UpgradeProcess {
 	protected void updateRecordGroupId() throws Exception {
 		StringBundler sb = new StringBundler(4);
 
-		sb.append("select DDLRecordSet.groupId, DDLRecord.recordId ");
-		sb.append("from DDLRecord inner join DDLRecordSet ");
-		sb.append("on DDLRecord.recordSetId = DDLRecordSet.recordSetId ");
-		sb.append("where DDLRecord.groupId != DDLRecordSet.groupId");
+		sb.append("select DDLRecordSet.groupId, DDLRecord.recordId from ");
+		sb.append("DDLRecord inner join DDLRecordSet on ");
+		sb.append("DDLRecord.recordSetId = DDLRecordSet.recordSetId where ");
+		sb.append("DDLRecord.groupId != DDLRecordSet.groupId");
 
 		try (PreparedStatement ps1 = connection.prepareStatement(sb.toString());
 			ResultSet rs = ps1.executeQuery();
