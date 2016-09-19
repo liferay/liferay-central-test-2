@@ -1304,7 +1304,7 @@ public class DDLRecordLocalServiceImpl extends DDLRecordLocalServiceBaseImpl {
 
 		if (recordSet.getGroupId() != groupId) {
 			throw new RecordGroupIdException(
-				"Record groupId should be the same as its recordSet.");
+				"Record group ID is not the same as the record set group ID");
 		}
 	}
 
