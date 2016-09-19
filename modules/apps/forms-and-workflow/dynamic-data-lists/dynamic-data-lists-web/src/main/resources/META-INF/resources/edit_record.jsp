@@ -35,8 +35,6 @@ if (record != null) {
 
 DDLRecordSet recordSet = DDLRecordSetServiceUtil.getRecordSet(recordSetId);
 
-long groupId = recordSet.getGroupId();
-
 DDMStructure ddmStructure = recordSet.getDDMStructure();
 
 DDMFormValues ddmFormValues = null;
@@ -165,7 +163,7 @@ else {
 		<aui:form action="<%= (record == null) ? addRecordURL : updateRecordURL %>" cssClass="container-fluid-1280" enctype="multipart/form-data" method="post" name="fm">
 			<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 			<aui:input name="recordId" type="hidden" value="<%= recordId %>" />
-			<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
+			<aui:input name="groupId" type="hidden" value="<%= recordSet.getGroupId() %>" />
 			<aui:input name="recordSetId" type="hidden" value="<%= recordSetId %>" />
 			<aui:input name="formDDMTemplateId" type="hidden" value="<%= formDDMTemplateId %>" />
 			<aui:input name="defaultLanguageId" type="hidden" value="<%= defaultLanguageId %>" />
