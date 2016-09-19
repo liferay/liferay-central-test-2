@@ -103,7 +103,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
-import com.liferay.portal.service.impl.LayoutLocalServiceVirtualLayoutsAdvice;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.PortletPreferencesImpl;
 import com.liferay.sites.kernel.util.Sites;
@@ -1294,7 +1293,7 @@ public class SitesImpl implements Sites {
 
 		try {
 			Lock lock = LockManagerUtil.lock(
-				LayoutLocalServiceVirtualLayoutsAdvice.class.getName(),
+				SitesImpl.class.getName(),
 				String.valueOf(layoutSet.getLayoutSetId()), owner);
 
 			// Double deep check
@@ -1308,7 +1307,7 @@ public class SitesImpl implements Sites {
 					// Acquire lock if the lock is older than the lock max time
 
 					lock = LockManagerUtil.lock(
-						LayoutLocalServiceVirtualLayoutsAdvice.class.getName(),
+						SitesImpl.class.getName(),
 						String.valueOf(layoutSet.getLayoutSetId()),
 						lock.getOwner(), owner);
 
@@ -1366,7 +1365,7 @@ public class SitesImpl implements Sites {
 			MergeLayoutPrototypesThreadLocal.setInProgress(false);
 
 			LockManagerUtil.unlock(
-				LayoutLocalServiceVirtualLayoutsAdvice.class.getName(),
+				SitesImpl.class.getName(),
 				String.valueOf(layoutSet.getLayoutSetId()), owner);
 		}
 	}
@@ -1649,7 +1648,7 @@ public class SitesImpl implements Sites {
 
 		try {
 			Lock lock = LockManagerUtil.lock(
-				LayoutLocalServiceVirtualLayoutsAdvice.class.getName(),
+				SitesImpl.class.getName(),
 				String.valueOf(layout.getPlid()), owner);
 
 			if (!owner.equals(lock.getOwner())) {
@@ -1661,7 +1660,7 @@ public class SitesImpl implements Sites {
 					// Acquire lock if the lock is older than the lock max time
 
 					lock = LockManagerUtil.lock(
-						LayoutLocalServiceVirtualLayoutsAdvice.class.getName(),
+						SitesImpl.class.getName(),
 						String.valueOf(layout.getPlid()), lock.getOwner(),
 						owner);
 
@@ -1700,7 +1699,7 @@ public class SitesImpl implements Sites {
 			MergeLayoutPrototypesThreadLocal.setInProgress(false);
 
 			LockManagerUtil.unlock(
-				LayoutLocalServiceVirtualLayoutsAdvice.class.getName(),
+				SitesImpl.class.getName(),
 				String.valueOf(layout.getPlid()), owner);
 		}
 	}
