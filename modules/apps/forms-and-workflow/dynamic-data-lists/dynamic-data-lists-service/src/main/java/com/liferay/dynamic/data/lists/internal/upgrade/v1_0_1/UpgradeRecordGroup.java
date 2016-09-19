@@ -24,14 +24,10 @@ import java.sql.ResultSet;
 /**
  * @author Pedro Queiroz
  */
-public class UpgradeRecordGroupId extends UpgradeProcess {
+public class UpgradeRecordGroup extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		updateRecordGroupId();
-	}
-
-	protected void updateRecordGroupId() throws Exception {
 		StringBundler sb = new StringBundler(4);
 
 		sb.append("select DDLRecordSet.groupId, DDLRecord.recordId from ");

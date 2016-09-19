@@ -17,7 +17,7 @@ package com.liferay.dynamic.data.lists.internal.upgrade;
 import com.liferay.dynamic.data.lists.internal.upgrade.v1_0_0.UpgradeKernelPackage;
 import com.liferay.dynamic.data.lists.internal.upgrade.v1_0_0.UpgradeLastPublishDate;
 import com.liferay.dynamic.data.lists.internal.upgrade.v1_0_0.UpgradeSchema;
-import com.liferay.dynamic.data.lists.internal.upgrade.v1_0_1.UpgradeRecordGroupId;
+import com.liferay.dynamic.data.lists.internal.upgrade.v1_0_1.UpgradeRecordGroup;
 import com.liferay.dynamic.data.mapping.service.DDMStructureLocalService;
 import com.liferay.portal.upgrade.registry.UpgradeStepRegistrator;
 
@@ -46,7 +46,7 @@ public class DDLServiceUpgrade implements UpgradeStepRegistrator {
 
 		registry.register(
 			"com.liferay.dynamic.data.lists.service", "1.0.0", "1.0.1",
-			new UpgradeRecordGroupId());
+			new UpgradeRecordGroup());
 	}
 
 	@Reference(unbind = "-")
