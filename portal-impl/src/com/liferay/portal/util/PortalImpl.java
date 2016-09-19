@@ -8010,6 +8010,18 @@ public class PortalImpl implements Portal {
 		return false;
 	}
 
+	protected boolean isUnwrapRequest(String currentRequestClassName) {
+		for (String packageName :
+				PropsValues.REQUEST_UNWRAP_PACKAGES) {
+
+			if (currentRequestClassName.startsWith(packageName)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	protected boolean isValidPortalDomain(long companyId, String domain) {
 		if (_validPortalDomainCheckDisabled) {
 			return true;
@@ -8158,18 +8170,6 @@ public class PortalImpl implements Portal {
 		themeDisplay.setI18nLanguageId(i18nLanguageId);
 		themeDisplay.setI18nPath(i18nPath);
 		themeDisplay.setLocale(locale);
-	}
-
-	protected boolean isUnwrapRequest(String currentRequestClassName) {
-		for (String requestUnwrapPackage :
-				PropsValues.REQUEST_UNWRAP_PACKAGES) {
-
-			if (currentRequestClassName.startsWith(requestUnwrapPackage)) {
-				return true;
-			}
-		}
-
-		return false;
 	}
 
 	private static final Log _logWebServerServlet = LogFactoryUtil.getLog(
