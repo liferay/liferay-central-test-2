@@ -26,7 +26,6 @@ import org.apache.tools.ant.taskdefs.ExecTask;
 import org.apache.tools.ant.taskdefs.condition.Os;
 import org.apache.tools.ant.types.Commandline.Argument;
 import org.apache.tools.ant.types.Environment;
-import org.apache.tools.ant.util.FileUtils;
 
 /**
  * @author Chas Austin
@@ -148,12 +147,6 @@ public class GradleExecTask extends ExecTask {
 	private String _getExecutable() throws Exception {
 		Project project = getProject();
 
-		String executable = project.getProperty("gradle.executable");
-
-		if ((executable != null) && !executable.isEmpty()) {
-			return executable;
-		}
-
 		String fileName = "gradlew";
 
 		if (Os.isFamily(Os.FAMILY_WINDOWS)) {
@@ -166,16 +159,13 @@ public class GradleExecTask extends ExecTask {
 			File file = new File(dir, fileName);
 
 			if (file.isFile()) {
-				executable = FileUtils.getRelativePath(
-					project.getBaseDir(), file);
-
-				break;
+				return file.getAbsolutePath();
 			}
 
 			dir = dir.getParentFile();
 		}
 
-		return executable;
+		return null;
 	}
 
 	private File _buildFile;
