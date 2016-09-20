@@ -116,7 +116,7 @@ AssetCategoryUtil.addPortletBreadcrumbEntry(assetCategoriesDisplayContext.getVoc
 			</portlet:renderURL>
 
 			<%
-			int subCategoriesCount = AssetCategoryLocalServiceUtil.getChildCategoriesCount(curCategory.getCategoryId());
+			int subcategoriesCount = AssetCategoryLocalServiceUtil.getChildCategoriesCount(curCategory.getCategoryId());
 			%>
 
 			<c:choose>
@@ -142,7 +142,7 @@ AssetCategoryUtil.addPortletBreadcrumbEntry(assetCategoriesDisplayContext.getVoc
 						</h6>
 
 						<h6 class="text-default">
-							<liferay-ui:message arguments="<%= subCategoriesCount %>" key="x-subcategories" />
+							<liferay-ui:message arguments="<%= subcategoriesCount %>" key="x-subcategories" />
 						</h6>
 					</liferay-ui:search-container-column-text>
 
@@ -172,7 +172,7 @@ AssetCategoryUtil.addPortletBreadcrumbEntry(assetCategoriesDisplayContext.getVoc
 							</liferay-frontend:vertical-card-header>
 
 							<liferay-frontend:vertical-card-footer>
-								<liferay-ui:message arguments="<%= subCategoriesCount %>" key="x-subcategories" />
+								<liferay-ui:message arguments="<%= subcategoriesCount %>" key="x-subcategories" />
 							</liferay-frontend:vertical-card-footer>
 						</liferay-frontend:icon-vertical-card>
 					</liferay-ui:search-container-column-text>
@@ -194,7 +194,7 @@ AssetCategoryUtil.addPortletBreadcrumbEntry(assetCategoriesDisplayContext.getVoc
 					<liferay-ui:search-container-column-text
 						cssClass="table-cell-content"
 						name="subcategories"
-						value="<%= String.valueOf(subCategoriesCount) %>"
+						value="<%= String.valueOf(subcategoriesCount) %>"
 					/>
 
 					<liferay-ui:search-container-column-date
