@@ -83,7 +83,23 @@ public class GradleExecTask extends ExecTask {
 		_stacktrace = stacktrace;
 	}
 
+	public void setTask(String task) {
+		if (!_tasks.isEmpty()) {
+			throw new BuildException(
+				"The \"task\" and \"tasks\" attributes cannot both be " +
+					"specified");
+		}
+
+		_task = task;
+	}
+
 	public void setTasks(String tasks) {
+		if ((_task != null) && !_task.isEmpty()) {
+			throw new BuildException(
+				"The \"task\" and \"tasks\" attributes cannot both be " +
+					"specified");
+		}
+
 		_tasks.clear();
 
 		StringTokenizer stringTokenizer = new StringTokenizer(tasks, ", ");
@@ -128,8 +144,13 @@ public class GradleExecTask extends ExecTask {
 			addArgument("--stacktrace");
 		}
 
-		for (String task : _tasks) {
-			addArgument(task);
+		if ((_task != null) && !_task.isEmpty()) {
+			addArgument(_task);
+		}
+		else {
+			for (String task : _tasks) {
+				addArgument(task);
+			}
 		}
 	}
 
@@ -175,6 +196,7 @@ public class GradleExecTask extends ExecTask {
 	private File _projectCacheDir;
 	private boolean _quiet;
 	private boolean _stacktrace = true;
+	private String _task;
 	private final List<String> _tasks = new ArrayList<String>();
 
 }
