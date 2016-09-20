@@ -221,7 +221,7 @@ public class VirtualHostFilter extends BasePortalFilter {
 
 				int offset =
 					originalFriendlyURL.length() - friendlyURL.length() -
-					i18nLanguageId.length();
+						i18nLanguageId.length();
 
 				if (!originalFriendlyURL.regionMatches(
 						offset, i18nLanguageId, 0, i18nLanguageId.length())) {
