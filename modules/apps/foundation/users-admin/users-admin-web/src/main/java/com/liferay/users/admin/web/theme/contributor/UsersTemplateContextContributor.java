@@ -54,9 +54,9 @@ public class UsersTemplateContextContributor
 
 		User user = themeDisplay.getUser();
 
-		Contact contact = user.fetchContact();
-
 		contextObjects.put("is_default_user", user.isDefaultUser());
+
+		Contact contact = user.fetchContact();
 
 		if (contact != null) {
 			contextObjects.put("is_female", !contact.isMale());
