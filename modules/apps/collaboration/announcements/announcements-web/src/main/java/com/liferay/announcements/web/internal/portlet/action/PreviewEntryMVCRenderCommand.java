@@ -70,6 +70,7 @@ public class PreviewEntryMVCRenderCommand implements MVCRenderCommand {
 			WebKeys.THEME_DISPLAY);
 
 		User user = themeDisplay.getUser();
+
 		Date now = new Date();
 
 		String[] distributionScopeParts = StringUtil.split(

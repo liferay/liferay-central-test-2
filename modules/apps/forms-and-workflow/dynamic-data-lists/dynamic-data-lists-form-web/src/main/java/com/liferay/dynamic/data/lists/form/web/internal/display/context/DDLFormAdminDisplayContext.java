@@ -254,6 +254,7 @@ public class DDLFormAdminDisplayContext {
 
 		sb.append(themeDisplay.getPortalURL());
 		sb.append(group.getPathFriendlyURL(false, themeDisplay));
+
 		sb.append("/forms/shared/-/form/");
 		sb.append(_recordSet.getRecordSetId());
 

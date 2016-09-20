@@ -834,6 +834,7 @@ public class DDLRecordLocalServiceImpl extends DDLRecordLocalServiceBaseImpl {
 			long ddmStorageId = storageEngine.create(
 				recordSet.getCompanyId(), recordSet.getDDMStructureId(),
 				ddmFormValues, serviceContext);
+
 			String version = getNextVersion(
 				recordVersion.getVersion(), majorVersion,
 				serviceContext.getWorkflowAction());

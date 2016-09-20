@@ -145,6 +145,7 @@ public class AssetPublisherExportImportTest
 		preferenceMap.put(
 			"anyAssetType",
 			new String[] {String.valueOf(dlFileEntryClassNameId)});
+
 		preferenceMap.put(
 			"anyClassTypeDLFileEntryAssetRendererFactory",
 			new String[] {String.valueOf(Boolean.TRUE)});
@@ -176,6 +177,7 @@ public class AssetPublisherExportImportTest
 		preferenceMap.put(
 			"anyAssetType",
 			new String[] {String.valueOf(journalArticleClassNameId)});
+
 		preferenceMap.put(
 			"anyClassTypeJournalArticleAssetRendererFactory",
 			new String[] {String.valueOf(Boolean.TRUE)});
@@ -608,6 +610,7 @@ public class AssetPublisherExportImportTest
 		preferenceMap.put(
 			"anyAssetType",
 			new String[] {String.valueOf(dlFileEntryClassNameId)});
+
 		preferenceMap.put(
 			"anyClassTypeDLFileEntryAssetRendererFactory",
 			new String[] {
@@ -664,6 +667,7 @@ public class AssetPublisherExportImportTest
 		preferenceMap.put(
 			"anyAssetType",
 			new String[] {String.valueOf(journalArticleClassNameId)});
+
 		preferenceMap.put(
 			"anyClassTypeJournalArticleAssetRendererFactory",
 			new String[] {String.valueOf(ddmStructure.getStructureId())});

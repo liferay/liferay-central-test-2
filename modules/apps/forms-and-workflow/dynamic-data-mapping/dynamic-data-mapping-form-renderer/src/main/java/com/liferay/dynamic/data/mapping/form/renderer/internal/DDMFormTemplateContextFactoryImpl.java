@@ -169,6 +169,7 @@ public class DDMFormTemplateContextFactoryImpl
 		templateContext.put(
 			"requiredFieldsWarningMessageHTML",
 			getRequiredFieldsWarningMessageHTML(resourceBundle));
+
 		templateContext.put(
 			"showRequiredFieldsWarning",
 			ddmFormRenderingContext.isShowRequiredFieldsWarning());

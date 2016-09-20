@@ -744,6 +744,7 @@ public class UIItemsBuilder {
 
 			_fileEntryDisplayContextHelper = new FileEntryDisplayContextHelper(
 				_themeDisplay.getPermissionChecker(), _fileEntry);
+
 			_fileVersionDisplayContextHelper =
 				new FileVersionDisplayContextHelper(fileVersion);
 		}

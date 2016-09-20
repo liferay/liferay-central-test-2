@@ -222,6 +222,7 @@ public class CalendarPortlet extends MVCPortlet {
 						"file");
 
 				jsonObject.put("error", message);
+
 				jsonObject.put("success", false);
 			}
 		}
@@ -233,6 +234,7 @@ public class CalendarPortlet extends MVCPortlet {
 				resourceBundle, "failed-to-import-empty-file");
 
 			jsonObject.put("error", message);
+
 			jsonObject.put("success", false);
 		}
 
@@ -781,6 +783,7 @@ public class CalendarPortlet extends MVCPortlet {
 			long endTime = startTime + calendarBooking.getDuration();
 
 			calendarBooking.setStartTime(startTime);
+
 			calendarBooking.setEndTime(endTime);
 
 			calendarBooking.setRecurrence(
@@ -1057,6 +1060,7 @@ public class CalendarPortlet extends MVCPortlet {
 
 		searchContext.setAttribute(Field.NAME, keywords);
 		searchContext.setAttribute("resourceName", keywords);
+
 		searchContext.setCompanyId(themeDisplay.getCompanyId());
 		searchContext.setEnd(SearchContainer.DEFAULT_DELTA);
 		searchContext.setGroupIds(new long[0]);
@@ -1064,6 +1068,7 @@ public class CalendarPortlet extends MVCPortlet {
 		Group group = themeDisplay.getScopeGroup();
 
 		searchContext.setIncludeStagingGroups(group.isStagingGroup());
+
 		searchContext.setStart(0);
 		searchContext.setUserId(themeDisplay.getUserId());
 

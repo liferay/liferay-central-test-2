@@ -137,6 +137,7 @@ public class DDMStructureServiceTest extends BaseDDMServiceTestCase {
 		String description = StringUtil.randomString();
 
 		addStructure(_classNameId, name, description);
+
 		addStructure(_classNameId, name, StringUtil.randomString());
 		addStructure(_classNameId, StringUtil.randomString(), description);
 
@@ -172,6 +173,7 @@ public class DDMStructureServiceTest extends BaseDDMServiceTestCase {
 		String description = StringUtil.randomString();
 
 		addStructure(_classNameId, name, description);
+
 		addStructure(_classNameId, name, StringUtil.randomString());
 		addStructure(_classNameId, StringUtil.randomString(), description);
 
@@ -192,6 +194,7 @@ public class DDMStructureServiceTest extends BaseDDMServiceTestCase {
 		String description = StringUtil.randomString();
 
 		addStructure(_classNameId, name, description);
+
 		addStructure(_classNameId, name, StringUtil.randomString());
 		addStructure(_classNameId, StringUtil.randomString(), description);
 

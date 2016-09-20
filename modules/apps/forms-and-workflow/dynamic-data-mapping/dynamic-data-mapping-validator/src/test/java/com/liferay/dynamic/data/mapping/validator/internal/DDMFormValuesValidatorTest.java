@@ -378,6 +378,7 @@ public class DDMFormValuesValidatorTest {
 		ddmFormFieldOptions.addOptionLabel("B", LocaleUtil.US, "Option B");
 
 		ddmFormField.setDDMFormFieldOptions(ddmFormFieldOptions);
+
 		ddmFormField.setLocalizable(true);
 
 		ddmForm.addDDMFormField(ddmFormField);
@@ -606,6 +607,7 @@ public class DDMFormValuesValidatorTest {
 		ddmFormFieldOptions.addOptionLabel("B", LocaleUtil.US, "Option B");
 
 		ddmFormField.setDDMFormFieldOptions(ddmFormFieldOptions);
+
 		ddmFormField.setLocalizable(false);
 
 		ddmForm.addDDMFormField(ddmFormField);

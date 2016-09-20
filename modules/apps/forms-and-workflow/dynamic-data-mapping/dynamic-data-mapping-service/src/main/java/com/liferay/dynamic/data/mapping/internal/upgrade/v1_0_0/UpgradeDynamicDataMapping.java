@@ -658,6 +658,7 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 					fieldName, ddmFormFieldsMap.keySet());
 
 				ddmFormField.setName(newFieldName);
+
 				ddmFormField.setProperty("oldName", fieldName);
 			}
 
@@ -907,6 +908,7 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 					entryVersion, "DDLRecord", ddmFormValues);
 
 				ps2.setString(1, toJSON(ddmFormValues));
+
 				ps2.setLong(2, contentId);
 
 				ps2.addBatch();
@@ -959,6 +961,7 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 					entryVersion, "DLFileEntry", ddmFormValues);
 
 				ps2.setString(1, toJSON(ddmFormValues));
+
 				ps2.setLong(2, contentId);
 
 				ps2.addBatch();
@@ -1151,6 +1154,7 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 				String definition = toJSON(ddmForm);
 
 				ps2.setString(1, definition);
+
 				ps2.setLong(2, structureId);
 
 				ps2.addBatch();
@@ -1166,6 +1170,7 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 				long structureVersionId = increment();
 
 				ps3.setLong(1, structureVersionId);
+
 				ps3.setLong(2, groupId);
 				ps3.setLong(3, companyId);
 				ps3.setLong(4, userId);
@@ -1302,6 +1307,7 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 					classNameId, classPK);
 
 				ps2.setLong(1, resourceClassNameId);
+
 				ps2.setLong(2, templateId);
 
 				ps2.addBatch();
@@ -1425,6 +1431,7 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 									structureId, content);
 
 								ps3.setString(1, content);
+
 								ps3.setLong(2, classPK);
 
 								ps3.addBatch();

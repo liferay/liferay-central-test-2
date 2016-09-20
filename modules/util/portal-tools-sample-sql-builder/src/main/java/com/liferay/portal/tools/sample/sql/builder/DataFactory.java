@@ -886,6 +886,7 @@ public class DataFactory {
 		sb.append("</name></root>");
 
 		_defaultDLFileEntryTypeModel.setName(sb.toString());
+
 		_defaultDLFileEntryTypeModel.setLastPublishDate(nextFutureDate());
 
 		_defaultDLDDMStructureModel = newDDMStructureModel(
@@ -1236,6 +1237,7 @@ public class DataFactory {
 			userModel.getLastName());
 
 		contactModel.setUserName(fullName);
+
 		contactModel.setCreateDate(new Date());
 		contactModel.setModifiedDate(new Date());
 		contactModel.setClassNameId(getClassNameId(User.class));
@@ -1842,6 +1844,7 @@ public class DataFactory {
 			typeSettingsProperties.toString(), '\n', "\\n");
 
 		layoutModel.setTypeSettings(typeSettings);
+
 		layoutModel.setLastPublishDate(new Date());
 
 		return layoutModel;

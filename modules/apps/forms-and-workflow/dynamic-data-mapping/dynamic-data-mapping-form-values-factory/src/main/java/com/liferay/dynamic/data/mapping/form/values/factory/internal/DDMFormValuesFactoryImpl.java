@@ -154,6 +154,7 @@ public class DDMFormValuesFactoryImpl implements DDMFormValuesFactory {
 		String fieldName = getFieldName(lastDDMFormFieldParameterNameParts);
 
 		ddmFormFieldValue.setName(fieldName);
+
 		ddmFormFieldValue.setInstanceId(
 			getFieldInstanceId(lastDDMFormFieldParameterNameParts));
 

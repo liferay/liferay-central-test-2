@@ -415,6 +415,7 @@ public class AutoBatchPreparedStatementUtilTest {
 			Assert.assertEquals(
 				Integer.valueOf(0),
 				ReflectionTestUtil.getFieldValue(invocationHandler, "_count"));
+
 			Assert.assertTrue(methods.toString(), methods.isEmpty());
 
 			// Protection for executing empty batch
@@ -519,6 +520,7 @@ public class AutoBatchPreparedStatementUtilTest {
 			Assert.assertEquals(
 				Integer.valueOf(0),
 				ReflectionTestUtil.getFieldValue(invocationHandler, "_count"));
+
 			Assert.assertTrue(methods.toString(), methods.isEmpty());
 
 			// Protection for executing empty batch
