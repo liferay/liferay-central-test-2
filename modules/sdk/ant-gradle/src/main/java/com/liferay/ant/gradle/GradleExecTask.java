@@ -116,7 +116,7 @@ public class GradleExecTask extends ExecTask {
 		}
 
 		if (_projectCacheDir != null) {
-			addArgument("project-cache-dir");
+			addArgument("--project-cache-dir");
 			addArgument(_projectCacheDir.getAbsolutePath());
 		}
 
