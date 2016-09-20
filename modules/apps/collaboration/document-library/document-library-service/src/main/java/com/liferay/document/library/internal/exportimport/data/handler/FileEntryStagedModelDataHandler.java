@@ -263,7 +263,9 @@ public class FileEntryStagedModelDataHandler
 			}
 			finally {
 				try {
-					is.close();
+					if (is != null) {
+						is.close();
+					}
 				}
 				catch (IOException ioe) {
 					_log.error(ioe, ioe);
