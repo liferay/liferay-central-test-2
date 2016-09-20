@@ -110,7 +110,6 @@ public class ModulesStructureTest {
 						Assert.assertTrue(
 							"Missing " + buildGradlePath,
 							Files.exists(buildGradlePath));
-
 						Assert.assertFalse(
 							"Forbidden " + buildXMLPath,
 							Files.exists(buildXMLPath));
