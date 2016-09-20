@@ -579,8 +579,11 @@ public class FileEntryStagedModelDataHandler
 				fileEntry.getFileEntryId(), importedFileEntry.getFileEntryId());
 		}
 		finally {
-			if (is != null) {
+			try {
 				is.close();
+			}
+			catch (IOException ioe) {
+				_log.error(ioe, ioe);
 			}
 		}
 	}
