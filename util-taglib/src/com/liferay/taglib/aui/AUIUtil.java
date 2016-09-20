@@ -196,7 +196,7 @@ public class AUIUtil {
 		for (int i = 0; i < name.length(); i++) {
 			char c = name.charAt(i);
 
-			if ((_validChars.length <= c) || !_validChars[c]) {
+			if ((_VALID_CHARS.length <= c) || !_VALID_CHARS[c]) {
 				if (chars == null) {
 					chars = new char[name.length()];
 
@@ -214,23 +214,23 @@ public class AUIUtil {
 		return new String(chars);
 	}
 
-	private static final boolean[] _validChars = new boolean[128];
+	private static final boolean[] _VALID_CHARS = new boolean[128];
 
 	static {
 		for (int i = 'a'; i <= 'z'; i++) {
-			_validChars[i] = true;
+			_VALID_CHARS[i] = true;
 		}
 
 		for (int i = 'A'; i <= 'Z'; i++) {
-			_validChars[i] = true;
+			_VALID_CHARS[i] = true;
 		}
 
 		for (int i = '0'; i <= '9'; i++) {
-			_validChars[i] = true;
+			_VALID_CHARS[i] = true;
 		}
 
-		_validChars['-'] = true;
-		_validChars['_'] = true;
+		_VALID_CHARS['-'] = true;
+		_VALID_CHARS['_'] = true;
 	}
 
 }
