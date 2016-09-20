@@ -1068,7 +1068,7 @@ public class HttpImpl implements Http {
 		}
 
 		if (pos == 0) {
-			throw new IllegalArgumentException("Unable to handle uri :" + uri);
+			throw new IllegalArgumentException("Unable to handle URI: " + uri);
 		}
 
 		String[] uriParts = StringUtil.split(uri.substring(1), CharPool.SLASH);
