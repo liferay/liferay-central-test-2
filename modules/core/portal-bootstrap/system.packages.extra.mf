@@ -2842,7 +2842,7 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  .portal.kernel.security.sso;version="1.0.0";uses:="javax.servlet.http
  ",com.liferay.portal.kernel.security.xml;version="1.0.0";uses:="javax
  .xml.parsers,javax.xml.stream,org.xml.sax",com.liferay.portal.kernel.
- service;version="1.4.0";uses:="com.liferay.announcements.kernel.model
+ service;version="1.4.1";uses:="com.liferay.announcements.kernel.model
  ,com.liferay.expando.kernel.model,com.liferay.exportimport.kernel.lar
  ,com.liferay.exportimport.kernel.model,com.liferay.portal.kernel.cach
  e.thread.local,com.liferay.portal.kernel.cluster,com.liferay.portal.k
@@ -2915,7 +2915,7 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  uses:="com.liferay.portal.kernel.template",com.liferay.portal.kernel.
  templateparser;version="7.0.0";uses:="com.liferay.portal.kernel.excep
  tion,com.liferay.portal.kernel.theme,com.liferay.portal.kernel.xml",c
- om.liferay.portal.kernel.theme;version="1.0.0";uses:="com.liferay.mob
+ om.liferay.portal.kernel.theme;version="1.1.0";uses:="com.liferay.mob
  ile.device.rules.kernel,com.liferay.portal.kernel.exception,com.lifer
  ay.portal.kernel.json,com.liferay.portal.kernel.mobile.device,com.lif
  eray.portal.kernel.model,com.liferay.portal.kernel.module.configurati
