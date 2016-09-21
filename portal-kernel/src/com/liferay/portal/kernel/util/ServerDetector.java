@@ -285,6 +285,7 @@ public class ServerDetector {
 
 		GLASSFISH, JBOSS, JETTY, JONAS, OC4J, RESIN, TOMCAT, UNKNOWN, WEBLOGIC,
 		WEBSPHERE, WILDFLY;
+
 	}
 
 }
