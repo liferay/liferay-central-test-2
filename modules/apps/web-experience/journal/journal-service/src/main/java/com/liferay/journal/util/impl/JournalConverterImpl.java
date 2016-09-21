@@ -15,7 +15,6 @@
 package com.liferay.journal.util.impl;
 
 import com.liferay.document.library.kernel.service.DLAppLocalService;
-import com.liferay.document.library.kernel.service.DLAppLocalServiceUtil;
 import com.liferay.document.library.kernel.util.DLUtil;
 import com.liferay.dynamic.data.mapping.model.DDMStructure;
 import com.liferay.dynamic.data.mapping.storage.DDMFormValues;
@@ -936,8 +935,7 @@ public class JournalConverterImpl implements JournalConverter {
 			long groupId = jsonObject.getLong("groupId");
 
 			FileEntry fileEntry =
-				DLAppLocalServiceUtil.getFileEntryByUuidAndGroupId(
-					uuid, groupId);
+				_dlAppLocalService.getFileEntryByUuidAndGroupId(uuid, groupId);
 
 			fieldValue = DLUtil.getPreviewURL(
 				fileEntry, fileEntry.getFileVersion(), null, StringPool.BLANK,
