@@ -82,6 +82,7 @@ import com.liferay.portal.kernel.exception.NoSuchImageException;
 import com.liferay.portal.kernel.exception.NoSuchLayoutException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSONException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.language.LanguageUtil;
@@ -6574,6 +6575,12 @@ public class JournalArticleLocalServiceImpl
 		String value = dynamicContentElement.getText();
 
 		if (Validator.isNull(value)) {
+			return;
+		}
+
+		String previewUrlPrefix = PortalUtil.getPathContext() + "/documents/";
+
+		if (value.startsWith(previewUrlPrefix)) {
 			return;
 		}
 
