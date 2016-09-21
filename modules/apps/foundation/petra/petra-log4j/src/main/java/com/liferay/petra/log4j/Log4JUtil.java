@@ -172,7 +172,7 @@ public class Log4JUtil {
 		LogFactory logFactory, Map<String, String> customLogSettings) {
 
 		System.setProperty(
-			ServerDetector.SERVER_DETECTOR_SERVER_ID_SYSTEM_PROPERTY_KEY,
+			ServerDetector.SYSTEM_PROPERTY_KEY_SERVER_DETECTOR_SERVER_ID,
 			serverId);
 
 		_liferayHome = liferayHome;

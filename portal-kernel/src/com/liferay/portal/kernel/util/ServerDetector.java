@@ -36,7 +36,7 @@ public class ServerDetector {
 
 	public static final String RESIN_ID = "resin";
 
-	public static final String SERVER_DETECTOR_SERVER_ID_SYSTEM_PROPERTY_KEY =
+	public static final String SYSTEM_PROPERTY_KEY_SERVER_DETECTOR_SERVER_ID =
 		"server.detector.server.id";
 
 	public static final String TOMCAT_ID = "tomcat";
@@ -203,7 +203,7 @@ public class ServerDetector {
 
 	private static ServerType _detectServerType() {
 		String serverId = System.getProperty(
-			SERVER_DETECTOR_SERVER_ID_SYSTEM_PROPERTY_KEY);
+			SYSTEM_PROPERTY_KEY_SERVER_DETECTOR_SERVER_ID);
 
 		if (serverId != null) {
 			return ServerType.valueOf(StringUtil.toUpperCase(serverId));
