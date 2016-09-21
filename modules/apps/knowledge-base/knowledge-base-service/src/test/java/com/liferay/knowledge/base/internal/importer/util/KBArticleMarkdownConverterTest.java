@@ -72,11 +72,12 @@ public class KBArticleMarkdownConverterTest {
 
 		metadata.put("base.source.url", "http://baseURL");
 
-		KBArticleMarkdownConverter kbArticleMarkdownConverter = new KBArticleMarkdownConverter(
-			markdown, fileEntryName, metadata);
+		KBArticleMarkdownConverter kbArticleMarkdownConverter =
+			new KBArticleMarkdownConverter(markdown, fileEntryName, metadata);
 
 		Assert.assertEquals(
-			"http://baseURL/some/unix/file", kbArticleMarkdownConverter.getSourceURL());
+			"http://baseURL/some/unix/file",
+			kbArticleMarkdownConverter.getSourceURL());
 	}
 
 	@Test
@@ -90,11 +91,12 @@ public class KBArticleMarkdownConverterTest {
 
 		metadata.put("base.source.url", "http://baseURL");
 
-		KBArticleMarkdownConverter kbArticleMarkdownConverter = new KBArticleMarkdownConverter(
-			markdown, fileEntryName, metadata);
+		KBArticleMarkdownConverter kbArticleMarkdownConverter =
+			new KBArticleMarkdownConverter(markdown, fileEntryName, metadata);
 
 		Assert.assertEquals(
-			"http://baseURL/some/windows/file", kbArticleMarkdownConverter.getSourceURL());
+			"http://baseURL/some/windows/file",
+			kbArticleMarkdownConverter.getSourceURL());
 	}
 
 	@Test
@@ -105,8 +107,8 @@ public class KBArticleMarkdownConverterTest {
 		String fileEntryName = "some\\windows\\file";
 		Map<String, String> metadata = new HashMap<>();
 
-		KBArticleMarkdownConverter kbArticleMarkdownConverter = new KBArticleMarkdownConverter(
-			markdown, fileEntryName, metadata);
+		KBArticleMarkdownConverter kbArticleMarkdownConverter =
+			new KBArticleMarkdownConverter(markdown, fileEntryName, metadata);
 
 		Assert.assertNull(kbArticleMarkdownConverter.getSourceURL());
 	}
@@ -120,11 +122,12 @@ public class KBArticleMarkdownConverterTest {
 
 		metadata.put("base.source.url", "http://baseURL/");
 
-		KBArticleMarkdownConverter kbArticleMarkdownConverter = new KBArticleMarkdownConverter(
-			markdown, fileEntryName, metadata);
+		KBArticleMarkdownConverter kbArticleMarkdownConverter =
+			new KBArticleMarkdownConverter(markdown, fileEntryName, metadata);
 
 		Assert.assertEquals(
-			"http://baseURL/some/unix/file", kbArticleMarkdownConverter.getSourceURL());
+			"http://baseURL/some/unix/file",
+			kbArticleMarkdownConverter.getSourceURL());
 	}
 
 	@Mock
