@@ -15,6 +15,8 @@
 package com.liferay.journal.util.impl;
 
 import com.liferay.document.library.kernel.service.DLAppLocalService;
+import com.liferay.document.library.kernel.service.DLAppLocalServiceUtil;
+import com.liferay.document.library.kernel.util.DLUtil;
 import com.liferay.dynamic.data.mapping.model.DDMStructure;
 import com.liferay.dynamic.data.mapping.storage.DDMFormValues;
 import com.liferay.dynamic.data.mapping.storage.Field;
@@ -921,6 +923,25 @@ public class JournalConverterImpl implements JournalConverter {
 			if (fieldValue.equals(Boolean.FALSE.toString())) {
 				fieldValue = StringPool.BLANK;
 			}
+
+			dynamicContentElement.addCDATA(fieldValue);
+		}
+		else if (DDMImpl.TYPE_DDM_DOCUMENTLIBRARY.equals(fieldType) &&
+				 Validator.isNotNull(fieldValue)) {
+
+			JSONObject jsonObject = JSONFactoryUtil.createJSONObject(
+				fieldValue);
+
+			String uuid = jsonObject.getString("uuid");
+			long groupId = jsonObject.getLong("groupId");
+
+			FileEntry fileEntry =
+				DLAppLocalServiceUtil.getFileEntryByUuidAndGroupId(
+					uuid, groupId);
+
+			fieldValue = DLUtil.getPreviewURL(
+				fileEntry, fileEntry.getFileVersion(), null, StringPool.BLANK,
+				false, true);
 
 			dynamicContentElement.addCDATA(fieldValue);
 		}
