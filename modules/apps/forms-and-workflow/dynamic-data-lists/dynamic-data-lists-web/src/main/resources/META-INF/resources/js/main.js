@@ -606,21 +606,12 @@ AUI.add(
 
 					options.forEach(
 						function(item, index) {
+							normalized[item.value] = item.label;
+
 							var localizationMap = item.localizationMap;
-							var isIncludeLocale;
 
-							for (var key in localizationMap) {
-								if (key === locale) {
-									normalized[item.value] = localizationMap[key].label;
-
-									isIncludeLocale = true;
-
-									break;
-								}
-							}
-
-							if (!isIncludeLocale) {
-								normalized[item.value] = item.label;
+							if (localizationMap[locale]) {
+								normalized[item.value] = localizationMap[locale].label
 							}
 						}
 					);
