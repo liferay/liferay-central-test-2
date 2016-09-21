@@ -25,15 +25,15 @@ import org.apache.http.protocol.HttpContext;
 public class JCIFSNTLMSchemeFactory implements AuthSchemeProvider {
 
 	public JCIFSNTLMSchemeFactory(String domain, String workstation) {
-		this._domain = domain;
-		this._workstation = workstation;
+		_domain = domain;
+		_workstation = workstation;
 	}
 
-	public AuthScheme create(final HttpContext context) {
+	public AuthScheme create(HttpContext context) {
 		return new NTLMScheme(new JCIFSEngine(_domain, _workstation));
 	}
 
-	private String _domain;
-	private String _workstation;
+	private final String _domain;
+	private final String _workstation;
 
 }

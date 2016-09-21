@@ -157,11 +157,10 @@ public class JSONWebServiceClientImpl implements JSONWebServiceClient {
 				RegistryBuilder registerBuilder =
 					RegistryBuilder.<AuthSchemeProvider>create();
 
-				registerBuilder =
-					registerBuilder.register(
-						AuthSchemes.NTLM,
-						new JCIFSNTLMSchemeFactory(
-							_proxyDomain, _proxyWorkstation));
+				registerBuilder = registerBuilder.register(
+					AuthSchemes.NTLM,
+					new JCIFSNTLMSchemeFactory(
+						_proxyDomain, _proxyWorkstation));
 
 				Lookup<AuthSchemeProvider> authSchemeRegistry =
 					registerBuilder.build();
