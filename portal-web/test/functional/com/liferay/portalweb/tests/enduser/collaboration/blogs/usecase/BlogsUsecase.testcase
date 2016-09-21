@@ -725,8 +725,6 @@
 	<command name="RestoreBlogsEntry" priority="5">
 		<property name="portal.acceptance" value="true" />
 
-		<var name="assetRestoreLocation" value="Blogs" />
-
 		<execute macro="Navigator#openURL" />
 
 		<execute macro="ProductMenu#gotoSitesContent">
