@@ -233,7 +233,7 @@ public class HtmlImpl implements Html {
 			char c = text.charAt(i);
 
 			if (c < 256) {
-				if ((c < 128) && _validChars[c]) {
+				if ((c < 128) && _VALID_CHARS[c]) {
 					sb.append(c);
 				}
 				else if ((mode == ESCAPE_MODE_ATTRIBUTE) &&
@@ -900,6 +900,8 @@ public class HtmlImpl implements Html {
 
 	private static final char[] _TAG_STYLE = {'s', 't', 'y', 'l', 'e'};
 
+	private static final boolean[] _VALID_CHARS = new boolean[128];
+
 	// See http://www.w3.org/TR/xpath20/#lexical-structure
 
 	private static final char[] _XPATH_TOKENS = {
@@ -908,7 +910,6 @@ public class HtmlImpl implements Html {
 	};
 
 	private static final Map<String, String> _unescapeMap = new HashMap<>();
-	private static final boolean[] _validChars = new boolean[128];
 
 	static {
 		_unescapeMap.put("lt", "<");
@@ -928,19 +929,19 @@ public class HtmlImpl implements Html {
 		_unescapeMap.put("#45", "-");
 
 		for (int i = 'a'; i <= 'z'; i++) {
-			_validChars[i] = true;
+			_VALID_CHARS[i] = true;
 		}
 
 		for (int i = 'A'; i <= 'Z'; i++) {
-			_validChars[i] = true;
+			_VALID_CHARS[i] = true;
 		}
 
 		for (int i = '0'; i <= '9'; i++) {
-			_validChars[i] = true;
+			_VALID_CHARS[i] = true;
 		}
 
-		_validChars['-'] = true;
-		_validChars['_'] = true;
+		_VALID_CHARS['-'] = true;
+		_VALID_CHARS['_'] = true;
 	}
 
 	private final Pattern _pattern = Pattern.compile("([\\s<&]|$)");
