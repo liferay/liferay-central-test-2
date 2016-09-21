@@ -66,7 +66,6 @@ public class KBArticleMarkdownConverterTest {
 		throws Exception {
 
 		String markdown = "Title [](id=1234)\n=============";
-
 		String fileEntryName = "some/unix/file";
 
 		Map<String, String> metadata = new HashMap<>();
@@ -85,7 +84,6 @@ public class KBArticleMarkdownConverterTest {
 		throws Exception {
 
 		String markdown = "Title [](id=1234)\n=============";
-
 		String fileEntryName = "some\\windows\\file";
 
 		Map<String, String> metadata = new HashMap<>();
@@ -104,9 +102,7 @@ public class KBArticleMarkdownConverterTest {
 		throws Exception {
 
 		String markdown = "Title [](id=1234)\n=============";
-
 		String fileEntryName = "some\\windows\\file";
-
 		Map<String, String> metadata = new HashMap<>();
 
 		KBArticleMarkdownConverter converter = new KBArticleMarkdownConverter(
@@ -118,7 +114,6 @@ public class KBArticleMarkdownConverterTest {
 	@Test
 	public void testGetSourceURLUsesTheSlashInTheBaseURL() throws Exception {
 		String markdown = "Title [](id=1234)\n=============";
-
 		String fileEntryName = "some/unix/file";
 
 		Map<String, String> metadata = new HashMap<>();
