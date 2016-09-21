@@ -72,11 +72,11 @@ public class KBArticleMarkdownConverterTest {
 
 		metadata.put("base.source.url", "http://baseURL");
 
-		KBArticleMarkdownConverter converter = new KBArticleMarkdownConverter(
+		KBArticleMarkdownConverter kbArticleMarkdownConverter = new KBArticleMarkdownConverter(
 			markdown, fileEntryName, metadata);
 
 		Assert.assertEquals(
-			"http://baseURL/some/unix/file", converter.getSourceURL());
+			"http://baseURL/some/unix/file", kbArticleMarkdownConverter.getSourceURL());
 	}
 
 	@Test
@@ -90,11 +90,11 @@ public class KBArticleMarkdownConverterTest {
 
 		metadata.put("base.source.url", "http://baseURL");
 
-		KBArticleMarkdownConverter converter = new KBArticleMarkdownConverter(
+		KBArticleMarkdownConverter kbArticleMarkdownConverter = new KBArticleMarkdownConverter(
 			markdown, fileEntryName, metadata);
 
 		Assert.assertEquals(
-			"http://baseURL/some/windows/file", converter.getSourceURL());
+			"http://baseURL/some/windows/file", kbArticleMarkdownConverter.getSourceURL());
 	}
 
 	@Test
@@ -105,10 +105,10 @@ public class KBArticleMarkdownConverterTest {
 		String fileEntryName = "some\\windows\\file";
 		Map<String, String> metadata = new HashMap<>();
 
-		KBArticleMarkdownConverter converter = new KBArticleMarkdownConverter(
+		KBArticleMarkdownConverter kbArticleMarkdownConverter = new KBArticleMarkdownConverter(
 			markdown, fileEntryName, metadata);
 
-		Assert.assertNull(converter.getSourceURL());
+		Assert.assertNull(kbArticleMarkdownConverter.getSourceURL());
 	}
 
 	@Test
@@ -120,11 +120,11 @@ public class KBArticleMarkdownConverterTest {
 
 		metadata.put("base.source.url", "http://baseURL/");
 
-		KBArticleMarkdownConverter converter = new KBArticleMarkdownConverter(
+		KBArticleMarkdownConverter kbArticleMarkdownConverter = new KBArticleMarkdownConverter(
 			markdown, fileEntryName, metadata);
 
 		Assert.assertEquals(
-			"http://baseURL/some/unix/file", converter.getSourceURL());
+			"http://baseURL/some/unix/file", kbArticleMarkdownConverter.getSourceURL());
 	}
 
 	@Mock
