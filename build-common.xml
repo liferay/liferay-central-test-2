@@ -718,6 +718,7 @@ Error-Prone was automatically installed. Please rerun your task.
 			</if>
 
 			<junit dir="${project.dir}" fork="on" forkmode="@{forkmode}" haltonfailure="${junit.halt.on.failure}" jvm="${junit.jvm}" outputtoformatters="false" printsummary="on" showoutput="true">
+				<sysproperty key="catalina.base" value="." />
 				<sysproperty file="woven-classes" key="junit.aspectj.dump" />
 				<sysproperty key="junit.code.coverage" value="${junit.code.coverage}" />
 				<sysproperty if:true="${jvm.debug}" key="jvm.debug" value="true" />
@@ -725,7 +726,6 @@ Error-Prone was automatically installed. Please rerun your task.
 				<sysproperty key="whip.agent" value="${whip.agent}" />
 				<sysproperty file="test-coverage/@{test.type}/whip.dat" key="whip.datafile" />
 				<sysproperty key="whip.instrument.dump" value="${whip.instrument.dump}" />
-				<sysproperty key="catalina.base" value="." />
 				<jvmarg if:true="${jvm.debug}" line="${jpda.settings}" />
 				<jvmarg line="${junit.java.gc}" />
 				<jvmarg line="${whip.agent}" />
