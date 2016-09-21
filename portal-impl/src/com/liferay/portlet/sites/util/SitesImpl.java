@@ -1659,8 +1659,8 @@ public class SitesImpl implements Sites {
 
 		try {
 			Lock lock = LockManagerUtil.lock(
-				SitesImpl.class.getName(),
-				String.valueOf(layout.getPlid()), owner);
+				SitesImpl.class.getName(), String.valueOf(layout.getPlid()),
+				owner);
 
 			if (!owner.equals(lock.getOwner())) {
 				Date createDate = lock.getCreateDate();
@@ -1710,8 +1710,8 @@ public class SitesImpl implements Sites {
 			MergeLayoutPrototypesThreadLocal.setInProgress(false);
 
 			LockManagerUtil.unlock(
-				SitesImpl.class.getName(),
-				String.valueOf(layout.getPlid()), owner);
+				SitesImpl.class.getName(), String.valueOf(layout.getPlid()),
+				owner);
 		}
 	}
 
