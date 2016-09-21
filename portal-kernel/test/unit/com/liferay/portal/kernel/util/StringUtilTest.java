@@ -504,7 +504,7 @@ public class StringUtilTest {
 	}
 
 	@Test
-	public void testShortenStringWith4byteChars() {
+	public void testShortenStringWith4ByteChars() {
 		int space = (int)CharPool.SPACE;
 
 		int[] codePoints = new int[] {
@@ -515,11 +515,9 @@ public class StringUtilTest {
 
 		Assert.assertEquals(
 			new String(codePoints, 0, 1), StringUtil.shorten(string, 1));
-
 		Assert.assertEquals(
 			new String(codePoints, 0, 1) + "...",
 			StringUtil.shorten(string, 4));
-
 		Assert.assertEquals(
 			new String(codePoints, 0, 2) + "...",
 			StringUtil.shorten(string, 7));
