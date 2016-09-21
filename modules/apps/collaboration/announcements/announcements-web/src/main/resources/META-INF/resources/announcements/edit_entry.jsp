@@ -24,7 +24,6 @@ AnnouncementsEntry entry = (AnnouncementsEntry)request.getAttribute(Announcement
 long entryId = BeanParamUtil.getLong(entry, request, "entryId");
 
 String title = BeanParamUtil.getString(entry, request, "title");
-
 String content = BeanParamUtil.getString(entry, request, "content");
 
 boolean alert = ParamUtil.getBoolean(request, "alert");
