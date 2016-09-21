@@ -138,6 +138,7 @@ public class DDMFormFieldTypesJSONSerializerImpl
 			"settingsLayout",
 			ddmFormFieldTypeSettingsSerializerHelper.
 				getSettingsLayoutJSONObject());
+
 		jsonObject.put(
 			"system",
 			MapUtil.getBoolean(

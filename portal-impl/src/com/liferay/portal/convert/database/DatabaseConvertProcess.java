@@ -66,6 +66,7 @@ public class DatabaseConvertProcess extends BaseConvertProcess {
 		String url = values[1];
 		String userName = values[2];
 		String password = values[3];
+
 		String jndiName = StringPool.BLANK;
 
 		return DataSourceFactoryUtil.initDataSource(

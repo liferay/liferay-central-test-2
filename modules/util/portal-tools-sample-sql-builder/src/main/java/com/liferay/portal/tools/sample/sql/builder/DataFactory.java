@@ -1721,6 +1721,7 @@ public class DataFactory {
 		String title = sb.toString();
 
 		journalArticleModel.setTitle(title);
+
 		journalArticleModel.setUrlTitle(urlTitle);
 
 		journalArticleModel.setContent(_journalArticleContent);

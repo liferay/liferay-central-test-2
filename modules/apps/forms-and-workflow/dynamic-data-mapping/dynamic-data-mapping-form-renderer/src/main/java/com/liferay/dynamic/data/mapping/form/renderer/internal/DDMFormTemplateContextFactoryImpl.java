@@ -138,6 +138,7 @@ public class DDMFormTemplateContextFactoryImpl
 		templateContext.put(
 			"evaluation",
 			jsonSerializer.serializeDeep(ddmFormEvaluationResult));
+
 		templateContext.put("evaluatorURL", getDDMFormEvaluatorServletURL());
 
 		List<DDMFormFieldType> ddmFormFieldTypes =

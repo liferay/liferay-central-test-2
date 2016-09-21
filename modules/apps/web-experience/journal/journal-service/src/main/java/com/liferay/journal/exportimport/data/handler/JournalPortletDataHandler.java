@@ -422,6 +422,7 @@ public class JournalPortletDataHandler extends BasePortletDataHandler {
 				}
 
 			});
+
 		exportActionableDynamicQuery.setStagedModelType(
 			new StagedModelType(JournalArticle.class.getName()));
 
@@ -455,6 +456,7 @@ public class JournalPortletDataHandler extends BasePortletDataHandler {
 				}
 
 			});
+
 		exportActionableDynamicQuery.setStagedModelType(
 			new StagedModelType(
 				DDMStructure.class.getName(), JournalArticle.class.getName()));
@@ -530,6 +532,7 @@ public class JournalPortletDataHandler extends BasePortletDataHandler {
 				}
 
 			});
+
 		exportActionableDynamicQuery.setStagedModelType(
 			new StagedModelType(
 				DDMTemplate.class.getName(), DDMStructure.class.getName()));

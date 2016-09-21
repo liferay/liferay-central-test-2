@@ -209,6 +209,7 @@ public class DDMFormLayoutTransformerTest {
 		Assert.assertArrayEquals(
 			expectedRenderedDDMFormFields,
 			ArrayUtil.toStringArray(actualRenderedDDMFormFields));
+
 		Assert.assertEquals(expectedSize, actualColumn.get("size"));
 	}
 

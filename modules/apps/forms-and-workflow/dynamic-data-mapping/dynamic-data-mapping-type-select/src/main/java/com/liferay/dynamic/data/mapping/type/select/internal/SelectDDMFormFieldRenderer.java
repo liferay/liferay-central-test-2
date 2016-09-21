@@ -115,6 +115,7 @@ public class SelectDDMFormFieldRenderer extends BaseDDMFormFieldRenderer {
 				ddmFormFieldRenderingContext.getLocale(), "choose-an-option"));
 
 		template.put("strings", stringsMap);
+
 		template.put("value", ddmFormFieldRenderingContext.getValue());
 	}
 

@@ -4980,6 +4980,7 @@ public class JournalArticleLocalServiceImpl
 			expirationDateYear = expirationCal.get(Calendar.YEAR);
 			expirationDateHour = expirationCal.get(Calendar.HOUR);
 			expirationDateMinute = expirationCal.get(Calendar.MINUTE);
+
 			neverExpire = false;
 
 			if (expirationCal.get(Calendar.AM_PM) == Calendar.PM) {
@@ -5007,6 +5008,7 @@ public class JournalArticleLocalServiceImpl
 			reviewDateYear = reviewCal.get(Calendar.YEAR);
 			reviewDateHour = reviewCal.get(Calendar.HOUR);
 			reviewDateMinute = reviewCal.get(Calendar.MINUTE);
+
 			neverReview = false;
 
 			if (reviewCal.get(Calendar.AM_PM) == Calendar.PM) {
@@ -6385,6 +6387,7 @@ public class JournalArticleLocalServiceImpl
 						WebServerServletTokenUtil.getToken(imageId);
 
 				dynamicContentEl.setText(elContent);
+
 				dynamicContentEl.addAttribute("id", String.valueOf(imageId));
 			}
 		}

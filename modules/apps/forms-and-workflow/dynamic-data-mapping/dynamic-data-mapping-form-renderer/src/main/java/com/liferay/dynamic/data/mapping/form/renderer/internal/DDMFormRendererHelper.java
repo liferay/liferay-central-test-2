@@ -299,6 +299,7 @@ public class DDMFormRendererHelper {
 			ddmFormField.isRequired(), ddmFormFieldRenderingContext);
 		setDDMFormFieldRenderingContextTip(
 			ddmFormField.getTip(), ddmFormFieldRenderingContext);
+
 		setDDMFormFieldRenderingContextValue(
 			ddmFormFieldValue.getValue(), ddmFormFieldRenderingContext);
 		setDDMFormFieldRenderingContextVisible(

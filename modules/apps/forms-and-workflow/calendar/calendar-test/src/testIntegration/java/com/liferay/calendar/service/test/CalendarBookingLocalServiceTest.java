@@ -702,6 +702,7 @@ public class CalendarBookingLocalServiceTest {
 		Assert.assertNotEquals(
 			calendarBooking.getSecondReminder(),
 			childCalendarBooking.getSecondReminder());
+
 		Assert.assertEquals(
 			firstReminder, childCalendarBooking.getFirstReminder());
 		Assert.assertEquals(

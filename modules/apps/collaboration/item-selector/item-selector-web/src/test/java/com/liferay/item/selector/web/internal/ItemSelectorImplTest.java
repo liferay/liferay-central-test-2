@@ -137,6 +137,7 @@ public class ItemSelectorImplTest extends PowerMockito {
 		Assert.assertEquals(
 			_mediaItemSelectorCriterion.getMaxSize(),
 			mediaItemSelectorCriterion.getMaxSize());
+
 		Assert.assertTrue(
 			(ItemSelectorView<?>)
 				mediaItemSelectorViewRenderer.getItemSelectorView() instanceof
@@ -152,6 +153,7 @@ public class ItemSelectorImplTest extends PowerMockito {
 		Assert.assertEquals(
 			_flickrItemSelectorCriterion.getUser(),
 			flickrItemSelectorCriterion.getUser());
+
 		Assert.assertTrue(
 			(ItemSelectorView<?>)
 				flickrItemSelectorViewRenderer.getItemSelectorView() instanceof

@@ -724,6 +724,7 @@ public class LayoutExportController implements ExportController {
 			settingsMap, "privateLayout");
 		Map<String, String[]> parameterMap =
 			(Map<String, String[]>)settingsMap.get("parameterMap");
+
 		DateRange dateRange = ExportImportDateUtil.getDateRange(
 			exportImportConfiguration);
 

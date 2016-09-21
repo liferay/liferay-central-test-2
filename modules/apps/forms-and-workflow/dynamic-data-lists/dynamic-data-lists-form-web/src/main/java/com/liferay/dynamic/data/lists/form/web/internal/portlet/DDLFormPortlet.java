@@ -160,6 +160,7 @@ public class DDLFormPortlet extends MVCPortlet {
 
 		sb.append(themeDisplay.getPortalURL());
 		sb.append(group.getPathFriendlyURL(false, themeDisplay));
+
 		sb.append("/forms/shared/-/form/");
 		sb.append(recordSetId);
 

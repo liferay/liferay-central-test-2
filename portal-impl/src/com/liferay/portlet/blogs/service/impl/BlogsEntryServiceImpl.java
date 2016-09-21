@@ -206,6 +206,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		Company company = companyPersistence.findByPrimaryKey(companyId);
 
 		String name = company.getName();
+
 		List<BlogsEntry> blogsEntries = getCompanyEntries(
 			companyId, displayDate, status, max);
 
@@ -325,6 +326,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		Group group = groupPersistence.findByPrimaryKey(groupId);
 
 		String name = group.getDescriptiveName();
+
 		List<BlogsEntry> blogsEntries = getGroupEntries(
 			groupId, displayDate, status, max);
 
@@ -474,6 +476,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 			organizationId);
 
 		String name = organization.getName();
+
 		List<BlogsEntry> blogsEntries = getOrganizationEntries(
 			organizationId, displayDate, status, max);
 

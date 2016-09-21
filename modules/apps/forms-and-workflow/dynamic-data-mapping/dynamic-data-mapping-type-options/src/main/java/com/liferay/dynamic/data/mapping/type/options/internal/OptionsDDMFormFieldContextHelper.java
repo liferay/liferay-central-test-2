@@ -57,6 +57,7 @@ public class OptionsDDMFormFieldContextHelper {
 				optionValue);
 
 			optionMap.put("label", optionLabel.getString(_locale));
+
 			optionMap.put(
 				"status",
 				isChecked(optionValue) ? "checked" : StringPool.BLANK);

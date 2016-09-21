@@ -154,6 +154,7 @@ public class ItemSelectorCriterionSerializer {
 						itemSelectorReturnType.getClass();
 
 				sb.append(itemSelectorReturnTypeClass.getName());
+
 				sb.append(StringPool.COMMA);
 			}
 

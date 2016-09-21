@@ -114,6 +114,7 @@ public class BlogsEntryImageSelectorHelperTest {
 			Assert.assertEquals(
 				_IMAGE_CROP_REGION, imageSelector.getImageCropRegion());
 			Assert.assertEquals(StringPool.BLANK, imageSelector.getImageURL());
+
 			Assert.assertFalse(
 				blogsEntryImageSelectorHelper.isFileEntryTempFile());
 		}
@@ -137,6 +138,7 @@ public class BlogsEntryImageSelectorHelperTest {
 		Assert.assertEquals(
 			StringPool.BLANK, imageSelector.getImageCropRegion());
 		Assert.assertEquals(_IMAGE_URL, imageSelector.getImageURL());
+
 		Assert.assertFalse(blogsEntryImageSelectorHelper.isFileEntryTempFile());
 	}
 
@@ -215,6 +217,7 @@ public class BlogsEntryImageSelectorHelperTest {
 			Assert.assertEquals(
 				_IMAGE_CROP_REGION, imageSelector.getImageCropRegion());
 			Assert.assertEquals(StringPool.BLANK, imageSelector.getImageURL());
+
 			Assert.assertTrue(
 				blogsEntryImageSelectorHelper.isFileEntryTempFile());
 		}

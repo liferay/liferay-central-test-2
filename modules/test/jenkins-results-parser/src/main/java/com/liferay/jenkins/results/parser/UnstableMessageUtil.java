@@ -275,6 +275,7 @@ public class UnstableMessageUtil {
 							description = description.replace("\"", "\"");
 
 							sb.append(description);
+
 							sb.append(" - ");
 						}
 
