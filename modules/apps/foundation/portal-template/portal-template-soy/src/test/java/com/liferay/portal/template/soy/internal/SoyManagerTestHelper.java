@@ -81,12 +81,12 @@ public class SoyManagerTestHelper {
 			new SoyTemplateContextHelper();
 
 		ReflectionTestUtil.setFieldValue(
-			soyTemplateContextHelper, "_jsonSerializer",
-			new JSONSerializerImpl());
-
-		ReflectionTestUtil.setFieldValue(
 			soyTemplateContextHelper, "_jsonDeserializer",
 			new JSONDeserializerImpl<>());
+
+		ReflectionTestUtil.setFieldValue(
+			soyTemplateContextHelper, "_jsonSerializer",
+			new JSONSerializerImpl());
 
 		_soyManager.setTemplateContextHelper(soyTemplateContextHelper);
 
