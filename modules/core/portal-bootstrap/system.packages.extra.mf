@@ -2650,7 +2650,7 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  ernel.poller.comet;version="7.0.0";uses:="com.liferay.portal.kernel.e
  xception,javax.servlet.http",com.liferay.portal.kernel.pop;version="6
  .2.0";uses:="com.liferay.portal.kernel.exception,javax.mail",com.life
- ray.portal.kernel.portlet;version="7.3.0";uses:="com.liferay.asset.ke
+ ray.portal.kernel.portlet;version="7.4.0";uses:="com.liferay.asset.ke
  rnel.model,com.liferay.expando.kernel.model,com.liferay.exportimport.
  kernel.lar,com.liferay.portal.kernel.atom,com.liferay.portal.kernel.e
  xception,com.liferay.portal.kernel.json,com.liferay.portal.kernel.mod
@@ -2665,7 +2665,7 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  al.kernel.xml,com.liferay.portal.kernel.xmlrpc,com.liferay.registry.c
  ollections,com.liferay.social.kernel.model,javax.portlet,javax.portle
  t.filter,javax.servlet,javax.servlet.http",com.liferay.portal.kernel.
- portlet.bridges.mvc;version="1.2.0";uses:="com.liferay.portal.kernel.
+ portlet.bridges.mvc;version="1.3.0";uses:="com.liferay.portal.kernel.
  portlet,javax.portlet",com.liferay.portal.kernel.portlet.configuratio
  n.icon;version="1.0.0";uses:="com.liferay.registry,com.liferay.regist
  ry.collections,javax.portlet,javax.servlet,javax.servlet.http",com.li
