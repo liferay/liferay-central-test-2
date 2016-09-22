@@ -3587,6 +3587,16 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 					passwordReset = true;
 				}
 
+				String oldEncPwd = user.getPassword();
+
+				if (!user.isPasswordEncrypted()) {
+					oldEncPwd = PasswordEncryptorUtil.encrypt(
+						user.getPassword());
+				}
+
+				passwordTrackerLocalService.trackPassword(
+					user.getUserId(), oldEncPwd);
+
 				user.setPassword(PasswordEncryptorUtil.encrypt(newPassword));
 				user.setPasswordUnencrypted(newPassword);
 				user.setPasswordEncrypted(true);
