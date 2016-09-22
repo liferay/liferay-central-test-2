@@ -54,7 +54,7 @@ public class TunnelServlet extends HttpServlet {
 
 		if ((permissionChecker == null) || !permissionChecker.isSignedIn()) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Non-authenticated access is disallowed");
+				_log.warn("Unauthenticated access is forbidden");
 			}
 
 			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
