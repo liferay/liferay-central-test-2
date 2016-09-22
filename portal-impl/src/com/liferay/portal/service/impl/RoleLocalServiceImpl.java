@@ -588,8 +588,8 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		int type = role.getType();
 
 		if (type == RoleConstants.TYPE_REGULAR) {
-			assigneesTotal += userLocalService.getRoleUsersCount(roleId);
 			assigneesTotal += groupLocalService.getRoleGroupsCount(roleId);
+			assigneesTotal += userLocalService.getRoleUsersCount(roleId);
 		}
 
 		if (type == RoleConstants.TYPE_SITE) {
