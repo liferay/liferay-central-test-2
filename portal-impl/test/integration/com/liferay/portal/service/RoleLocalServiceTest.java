@@ -82,72 +82,57 @@ public class RoleLocalServiceTest {
 
 	@Test
 	public void testGetAssigneesTotalOrganizationRole() throws Exception {
-		Organization organization = OrganizationTestUtil.addOrganization();
-		Role role = RoleTestUtil.addRole(RoleConstants.TYPE_ORGANIZATION);
-		User user = UserTestUtil.addUser();
-
-		_organizations.add(organization);
-		_roles.add(role);
-		_users.add(user);
+		_organization = OrganizationTestUtil.addOrganization();
+		_role = RoleTestUtil.addRole(RoleConstants.TYPE_ORGANIZATION);
+		_user = UserTestUtil.addUser();
 
 		OrganizationLocalServiceUtil.addUserOrganization(
-			user.getUserId(), organization);
+			_user.getUserId(), _organization);
 		UserGroupRoleLocalServiceUtil.addUserGroupRoles(
-			user.getUserId(), organization.getGroupId(),
-			new long[] {role.getRoleId()});
+			_user.getUserId(), _organization.getGroupId(),
+			new long[] {_role.getRoleId()});
 
 		Assert.assertEquals(
-			1, RoleLocalServiceUtil.getAssigneesTotal(role.getRoleId()));
+			1, RoleLocalServiceUtil.getAssigneesTotal(_role.getRoleId()));
 	}
 
 	@Test
 	public void testGetAssigneesTotalRegularRole() throws Exception {
-		Group group = GroupTestUtil.addGroup();
-		Organization organization = OrganizationTestUtil.addOrganization();
-		Role role = RoleTestUtil.addRole(RoleConstants.TYPE_REGULAR);
-		User user = UserTestUtil.addUser();
-		UserGroup userGroup = UserGroupTestUtil.addUserGroup();
+		_group = GroupTestUtil.addGroup();
+		_organization = OrganizationTestUtil.addOrganization();
+		_role = RoleTestUtil.addRole(RoleConstants.TYPE_REGULAR);
+		_user = UserTestUtil.addUser();
+		_userGroup = UserGroupTestUtil.addUserGroup();
 
-		_groups.add(group);
-		_organizations.add(organization);
-		_roles.add(role);
-		_userGroups.add(userGroup);
-		_users.add(user);
-
-		RoleLocalServiceUtil.addUserRole(user.getUserId(), role);
-		RoleLocalServiceUtil.addGroupRole(group.getGroupId(), role);
-		RoleLocalServiceUtil.addGroupRole(organization.getGroupId(), role);
-		RoleLocalServiceUtil.addGroupRole(userGroup.getGroupId(), role);
+		RoleLocalServiceUtil.addUserRole(_user.getUserId(), _role);
+		RoleLocalServiceUtil.addGroupRole(_group.getGroupId(), _role);
+		RoleLocalServiceUtil.addGroupRole(_organization.getGroupId(), _role);
+		RoleLocalServiceUtil.addGroupRole(_userGroup.getGroupId(), _role);
 
 		Assert.assertEquals(
-			4, RoleLocalServiceUtil.getAssigneesTotal(role.getRoleId()));
+			4, RoleLocalServiceUtil.getAssigneesTotal(_role.getRoleId()));
 	}
 
 	@Test
 	public void testGetAssigneesTotalSiteRole() throws Exception {
-		Group group = GroupTestUtil.addGroup();
-		Role role = RoleTestUtil.addRole(RoleConstants.TYPE_SITE);
-		User user = UserTestUtil.addUser();
-		UserGroup userGroup = UserGroupTestUtil.addUserGroup();
+		_group = GroupTestUtil.addGroup();
+		_role = RoleTestUtil.addRole(RoleConstants.TYPE_SITE);
+		_user = UserTestUtil.addUser();
+		_userGroup = UserGroupTestUtil.addUserGroup();
 
-		_groups.add(group);
-		_roles.add(role);
-		_users.add(user);
-		_userGroups.add(userGroup);
-
-		GroupLocalServiceUtil.addUserGroup(user.getUserId(), group);
+		GroupLocalServiceUtil.addUserGroup(_user.getUserId(), _group);
 		GroupLocalServiceUtil.addUserGroupGroup(
-			userGroup.getUserGroupId(), group);
+			_userGroup.getUserGroupId(), _group);
 
-		long[] roleIds = new long[] {role.getRoleId()};
+		long[] roleIds = new long[] {_role.getRoleId()};
 
 		UserGroupGroupRoleLocalServiceUtil.addUserGroupGroupRoles(
-			userGroup.getGroupId(), group.getGroupId(), roleIds);
+			_userGroup.getGroupId(), _group.getGroupId(), roleIds);
 		UserGroupRoleLocalServiceUtil.addUserGroupRoles(
-			user.getUserId(), group.getGroupId(), roleIds);
+			_user.getUserId(), _group.getGroupId(), roleIds);
 
 		Assert.assertEquals(
-			2, RoleLocalServiceUtil.getAssigneesTotal(role.getRoleId()));
+			2, RoleLocalServiceUtil.getAssigneesTotal(_role.getRoleId()));
 	}
 
 	@SuppressWarnings({"rawtypes", "unchecked"})
@@ -275,19 +260,16 @@ public class RoleLocalServiceTest {
 	protected Object[] getOrganizationAndTeam() throws Exception {
 		User user = TestPropsValues.getUser();
 
-		Organization organization =
-			OrganizationLocalServiceUtil.addOrganization(
-				user.getUserId(),
-				OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID,
-				RandomTestUtil.randomString(), false);
-
-		_organizations.add(organization);
+		_organization = OrganizationLocalServiceUtil.addOrganization(
+			user.getUserId(),
+			OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID,
+			RandomTestUtil.randomString(), false);
 
 		Team team = TeamLocalServiceUtil.addTeam(
-			user.getUserId(), organization.getGroupId(),
+			user.getUserId(), _organization.getGroupId(),
 			RandomTestUtil.randomString(), null, new ServiceContext());
 
-		return new Object[] {organization, team};
+		return new Object[] {_organization, team};
 	}
 
 	protected void testGetTeamRoleMap(
@@ -309,18 +291,18 @@ public class RoleLocalServiceTest {
 	}
 
 	@DeleteAfterTestRun
-	private final List<Group> _groups = new ArrayList<>();
+	private Group _group;
 
 	@DeleteAfterTestRun
-	private final List<Organization> _organizations = new ArrayList<>();
+	private Organization _organization;
 
 	@DeleteAfterTestRun
-	private final List<Role> _roles = new ArrayList<>();
+	private Role _role;
 
 	@DeleteAfterTestRun
-	private final List<UserGroup> _userGroups = new ArrayList<>();
+	private User _user;
 
 	@DeleteAfterTestRun
-	private final List<User> _users = new ArrayList<>();
+	private UserGroup _userGroup;
 
 }
