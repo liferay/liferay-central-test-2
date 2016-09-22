@@ -195,7 +195,7 @@ private String _getActionLabel(HttpServletRequest request, ThemeDisplay themeDis
 
 private String _getAssigneesMessage(HttpServletRequest request, Role role) throws Exception {
 	if (_isImpliedRole(role)) {
-		return LanguageUtil.get(request, "this-role-is-auto-assigned");
+		return LanguageUtil.get(request, "this-role-is-automatically-assigned");
 	}
 
 	int count = RoleLocalServiceUtil.getAssigneesTotal(role.getRoleId());
