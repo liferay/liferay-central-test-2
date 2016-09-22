@@ -1799,7 +1799,7 @@ public class JournalArticleLocalServiceImpl
 	 * @param      languageId the primary key of the language translation to get
 	 * @param      themeDisplay the theme display
 	 * @return     the web content from the matching web content article
-	 * @deprecated As of 7.0.0, replaced by {@link
+	 * @deprecated As of 4.0.0, replaced by {@link
 	 *             #getArticleContent(JournalArticle, String, String, String,
 	 *             PortletRequestModel,ThemeDisplay)}
 	 */
@@ -1864,7 +1864,7 @@ public class JournalArticleLocalServiceImpl
 	 * @param      languageId the primary key of the language translation to get
 	 * @param      themeDisplay the theme display
 	 * @return     the web content from the matching web content article
-	 * @deprecated As of 7.0.0, replaced by {@link #getArticleContent(long,
+	 * @deprecated As of 4.0.0, replaced by {@link #getArticleContent(long,
 	 *             String, double, String, String, String, PortletRequestModel,
 	 *             ThemeDisplay)}
 	 */
@@ -1891,7 +1891,7 @@ public class JournalArticleLocalServiceImpl
 	 * @param      languageId the primary key of the language translation to get
 	 * @param      themeDisplay the theme display
 	 * @return     the web content from the matching web content article
-	 * @deprecated As of 7.0.0, replaced by {@link #getArticleContent(long,
+	 * @deprecated As of 4.0.0, replaced by {@link #getArticleContent(long,
 	 *             String, double, String, String, String, PortletRequestModel,
 	 *             ThemeDisplay)}
 	 */
@@ -1948,7 +1948,7 @@ public class JournalArticleLocalServiceImpl
 	 * @param      languageId the primary key of the language translation to get
 	 * @param      themeDisplay the theme display
 	 * @return     the latest web content from the matching web content article
-	 * @deprecated As of 7.0.0, replaced by {@link #getArticleContent(long,
+	 * @deprecated As of 4.0.0, replaced by {@link #getArticleContent(long,
 	 *             String, String, String, String, PortletRequestModel,
 	 *             ThemeDisplay)}
 	 */
@@ -1974,7 +1974,7 @@ public class JournalArticleLocalServiceImpl
 	 * @param      languageId the primary key of the language translation to get
 	 * @param      themeDisplay the theme display
 	 * @return     the latest web content from the matching web content article
-	 * @deprecated As of 7.0.0, replaced by {@link #getArticleContent(long,
+	 * @deprecated As of 4.0.0, replaced by {@link #getArticleContent(long,
 	 *             String, String, String, String, PortletRequestModel,
 	 *             ThemeDisplay)}
 	 */
@@ -3477,7 +3477,7 @@ public class JournalArticleLocalServiceImpl
 	 *             folder
 	 * @return     the updated web content article, which was moved to a new
 	 *             folder
-	 * @deprecated As of 7.0.0, replaced by {@link #moveArticle(long, String,
+	 * @deprecated As of 4.0.0, replaced by {@link #moveArticle(long, String,
 	 *             long, ServiceContext)}
 	 */
 	@Deprecated
@@ -4404,7 +4404,7 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, replaced by {@link #search(long, long, List,
+	 * @deprecated As of 4.0.0, replaced by {@link #search(long, long, List,
 	 *             long, String, String, String, String, int, String, String,
 	 *             LinkedHashMap, boolean, int, int, Sort)}
 	 */
@@ -5667,7 +5667,7 @@ public class JournalArticleLocalServiceImpl
 	 * @param      assetTagNames the new asset tag names
 	 * @param      assetLinkEntryIds the primary keys of the new asset link
 	 *             entries
-	 * @deprecated As of 7.0.0, replaced by {@link #updateAsset(long,
+	 * @deprecated As of 4.0.0, replaced by {@link #updateAsset(long,
 	 *             JournalArticle, long[], String[], long[], Double)}
 	 */
 	@Deprecated
@@ -6115,7 +6115,7 @@ public class JournalArticleLocalServiceImpl
 	 *             article's old DDM template
 	 * @param      newDDMTemplateKey the primary key of the web content
 	 *             article's new DDM template
-	 * @deprecated As of 7.0.0, replaced by {@link #updateDDMTemplateKey}
+	 * @deprecated As of 4.0.0, replaced by {@link #updateDDMTemplateKey}
 	 */
 	@Deprecated
 	@Override
@@ -6751,7 +6751,7 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	/**
-	 * @deprecated As of 7.0.0
+	 * @deprecated As of 4.0.0
 	 */
 	@Deprecated
 	protected void formatDocumentLibrary(
@@ -6760,7 +6760,7 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	/**
-	 * @deprecated As of 7.0.0
+	 * @deprecated As of 4.0.0
 	 */
 	@Deprecated
 	protected void formatDocumentLibraryDynamicContent(
@@ -6769,7 +6769,7 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	/**
-	 * @deprecated As of 7.0.0
+	 * @deprecated As of 4.0.0
 	 */
 	@Deprecated
 	protected void formatImage(JournalArticle article, Element el)
@@ -6777,7 +6777,7 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	/**
-	 * @deprecated As of 7.0.0
+	 * @deprecated As of 4.0.0
 	 */
 	@Deprecated
 	protected void formatImageDynamicContent(
@@ -7384,7 +7384,7 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, replaced by {@link #notifySubscribers(long,
+	 * @deprecated As of 4.0.0, replaced by {@link #notifySubscribers(long,
 	 *             JournalArticle, String, ServiceContext)}
 	 */
 	@Deprecated
@@ -8061,7 +8061,7 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, replaced by {@link #validateReferences(long,
+	 * @deprecated As of 4.0.0, replaced by {@link #validateReferences(long,
 	 *             String, String, String, boolean, String, byte[], long,
 	 *             String)}
 	 */

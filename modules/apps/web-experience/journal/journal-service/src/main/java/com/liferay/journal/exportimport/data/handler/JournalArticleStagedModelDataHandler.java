@@ -967,7 +967,7 @@ public class JournalArticleStagedModelDataHandler
 	}
 
 	/**
-	 * @deprecated As of 7.0.0
+	 * @deprecated As of 4.0.0
 	 */
 	@Deprecated
 	protected void setJournalArticleExportImportContentProcessor(
@@ -1003,7 +1003,7 @@ public class JournalArticleStagedModelDataHandler
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, only used for backwards compatibility with
+	 * @deprecated As of 4.0.0, only used for backwards compatibility with
 	 *             LARs that use journal schema under 1.1.0
 	 */
 	@Deprecated
