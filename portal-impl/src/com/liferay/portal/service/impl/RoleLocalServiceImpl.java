@@ -608,9 +608,9 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 			List<?> list = userGroupRoleLocalService.dynamicQuery(
 				userGroupGroupRoleQuery);
 
-			Long userGroupGroupRoleCount = (Long)list.get(0);
+			Long count = (Long)list.get(0);
 
-			assigneesTotal += userGroupGroupRoleCount.intValue();
+			assigneesTotal += count.intValue();
 		}
 
 		if ((type == RoleConstants.TYPE_SITE) ||
@@ -630,9 +630,9 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 			List<?> list = userGroupRoleLocalService.dynamicQuery(
 				userGroupRoleQuery);
 
-			Long userGroupGroupRoleCount = (Long)list.get(0);
+			Long count = (Long)list.get(0);
 
-			assigneesTotal += userGroupGroupRoleCount.intValue();
+			assigneesTotal += count.intValue();
 		}
 
 		return assigneesTotal;
