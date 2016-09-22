@@ -594,19 +594,19 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		}
 
 		if (type == RoleConstants.TYPE_SITE) {
-			DynamicQuery userGroupGroupRoleQuery =
+			DynamicQuery userGroupGroupRoleDynamicQuery =
 				userGroupGroupRoleLocalService.dynamicQuery();
 
 			Property property = PropertyFactoryUtil.forName(
 				"primaryKey.roleId");
 
-			userGroupGroupRoleQuery.add(property.eq(roleId));
+			userGroupGroupRoleDynamicQuery.add(property.eq(roleId));
 
-			userGroupGroupRoleQuery.setProjection(
+			userGroupGroupRoleDynamicQuery.setProjection(
 				ProjectionFactoryUtil.countDistinct("primaryKey.userGroupId"));
 				
 			List<?> list = userGroupRoleLocalService.dynamicQuery(
-				userGroupGroupRoleQuery);
+				userGroupGroupRoleDynamicQuery);
 
 			Long count = (Long)list.get(0);
 
@@ -616,19 +616,19 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		if ((type == RoleConstants.TYPE_SITE) ||
 			(type == RoleConstants.TYPE_ORGANIZATION)) {
 
-			DynamicQuery userGroupRoleQuery =
+			DynamicQuery userGroupRoleDynamicQuery =
 				userGroupRoleLocalService.dynamicQuery();
 
 			Property property = PropertyFactoryUtil.forName(
 				"primaryKey.roleId");
 
-			userGroupRoleQuery.add(property.eq(roleId));
+			userGroupRoleDynamicQuery.add(property.eq(roleId));
 
-			userGroupRoleQuery.setProjection(
+			userGroupRoleDynamicQuery.setProjection(
 				ProjectionFactoryUtil.countDistinct("primaryKey.userId"));
 				
 			List<?> list = userGroupRoleLocalService.dynamicQuery(
-				userGroupRoleQuery);
+				userGroupRoleDynamicQuery);
 
 			Long count = (Long)list.get(0);
 
