@@ -604,7 +604,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 			userGroupGroupRoleDynamicQuery.setProjection(
 				ProjectionFactoryUtil.countDistinct("primaryKey.userGroupId"));
-				
+
 			List<?> list = userGroupRoleLocalService.dynamicQuery(
 				userGroupGroupRoleDynamicQuery);
 
@@ -626,7 +626,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 			userGroupRoleDynamicQuery.setProjection(
 				ProjectionFactoryUtil.countDistinct("primaryKey.userId"));
-				
+
 			List<?> list = userGroupRoleLocalService.dynamicQuery(
 				userGroupRoleDynamicQuery);
 
