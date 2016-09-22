@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.cache.thread.local.ThreadLocalCache;
 import com.liferay.portal.kernel.cache.thread.local.ThreadLocalCacheManager;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.Property;
 import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
 import com.liferay.portal.kernel.exception.DuplicateRoleException;
 import com.liferay.portal.kernel.exception.NoSuchRoleException;
@@ -596,8 +597,11 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 			DynamicQuery userGroupGroupRoleQuery =
 				userGroupGroupRoleLocalService.dynamicQuery();
 
-			userGroupGroupRoleQuery.add(
-				PropertyFactoryUtil.forName("primaryKey.roleId").eq(roleId));
+			Property property = PropertyFactoryUtil.forName(
+				"primaryKey.roleId");
+
+			userGroupGroupRoleQuery.add(property.eq(roleId));
+
 			userGroupGroupRoleQuery.setProjection(
 				ProjectionFactoryUtil.countDistinct("primaryKey.userGroupId"));
 
