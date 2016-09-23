@@ -1,7 +1,5 @@
 import com.liferay.gradle.util.copy.StripPathSegmentsAction
 
-apply plugin: "com.liferay.cache"
-
 configurations {
 	metalComponents
 }
@@ -22,19 +20,6 @@ buildMetalComponents {
 
 	includeEmptyDirs = false
 	into "classes/META-INF/resources"
-}
-
-cache {
-	task(classes) {
-		baseDir = "classes/META-INF"
-		cacheDir = ".task-cache"
-
-		skipTaskDependency configJSModules
-		skipTaskDependency replaceSoyTranslation
-
-		testFile "build.gradle"
-		testFile "package.json"
-	}
 }
 
 configJSModules {
