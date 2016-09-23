@@ -402,6 +402,8 @@ AUI.add(
 						option.remove();
 
 						instance.fire('removeOption');
+
+						instance.evaluate();
 					},
 
 					_onOptionValueChange: function(event) {
