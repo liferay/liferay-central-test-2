@@ -37,8 +37,8 @@ public class BaseDDLDDMConverterTest {
 	}
 
 	protected String getBasePath() {
-		return "com/liferay/dynamic/data/lists/form/web/internal/converter/" +
-			"dependencies/";
+		return "com/liferay/dynamic/data/lists/form/web/internal/converter" +
+			"/dependencies/";
 	}
 
 	protected String read(String fileName) throws Exception {
