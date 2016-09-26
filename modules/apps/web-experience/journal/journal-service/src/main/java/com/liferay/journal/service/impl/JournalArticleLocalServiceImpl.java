@@ -6577,9 +6577,9 @@ public class JournalArticleLocalServiceImpl
 			return;
 		}
 
-		String previewUrlPrefix = PortalUtil.getPathContext() + "/documents/";
+		String previewURLPrefix = PortalUtil.getPathContext() + "/documents/";
 
-		if (value.startsWith(previewUrlPrefix)) {
+		if (value.startsWith(previewURLPrefix)) {
 			return;
 		}
 
