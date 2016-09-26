@@ -5,7 +5,7 @@
 
 	var STR_FILE_ENTRY_RETURN_TYPE = 'com.liferay.item.selector.criteria.FileEntryItemSelectorReturnType';
 
-	var TPL_PICTURE_TAG = '<picture><!--[if IE 9]><video style="display: none;"><![endif]-->{sources}<!--[if IE 9]></video><![endif]--><img src="{defaultSrc}"></picture>';
+	var TPL_PICTURE_TAG = '<picture>{sources}<img src="{defaultSrc}"></picture>';
 
 	var TPL_SOURCE_TAG = '<source srcset="{srcset}" media="{media}">';
 
