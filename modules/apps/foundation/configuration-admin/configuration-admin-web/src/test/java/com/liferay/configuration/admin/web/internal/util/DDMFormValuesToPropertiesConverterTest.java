@@ -165,7 +165,7 @@ public class DDMFormValuesToPropertiesConverterTest extends Mockito {
 	}
 
 	@Test
-	public void testSimpleIntegerNotValidValue() {
+	public void testSimpleIntegerInvalidValue() {
 		DDMForm ddmForm = new DDMForm();
 
 		ddmForm.addAvailableLocale(_enLocale);
