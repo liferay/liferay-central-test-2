@@ -113,6 +113,10 @@ AUI.add(
 						mainOption.set('key', '');
 					},
 
+					getCustomChangedEventName: function() {
+						return ['dragend', 'removeOption'];
+					},
+
 					getLastOption: function() {
 						var instance = this;
 
