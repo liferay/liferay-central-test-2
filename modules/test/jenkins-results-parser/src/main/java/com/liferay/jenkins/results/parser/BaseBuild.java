@@ -216,9 +216,9 @@ public abstract class BaseBuild implements Build {
 		StringBuilder sb = new StringBuilder();
 
 		sb.append(indentStringBuffer);
-		sb.append("Build '");
+		sb.append("Build \"");
 		sb.append(jobName);
-		sb.append("'");
+		sb.append("\"");
 
 		String status = getStatus();
 
@@ -518,9 +518,9 @@ public abstract class BaseBuild implements Build {
 
 			StringBuilder sb = new StringBuilder();
 
-			sb.append("Build '");
+			sb.append("Build \"");
 			sb.append(jobName);
-			sb.append("'");
+			sb.append("\"");
 
 			if (status.equals("completed")) {
 				sb.append(" completed at ");
