@@ -64,11 +64,11 @@ public class LogAssertionTestCallback
 
 			DB db = DBManagerUtil.getDB();
 
-			// Hypersonic uses AQS to do sync waiting, which responses
-			// interruptions in an unfriendly way. To make the failure messages
-			// more readable, don't interrupt for Hypersonic, log asserter will
-			// only assert the log failures in the end of the test, rather than
-			// asserting it on catching.
+			// Hypersonic uses AQS to do sync waiting, which responds to
+			// interruptions in an unfriendly way. Do not interrupt for
+			// Hypersonic to make the failure messages more readable. The log
+			// asserter will only assert log failures at the end of the test
+			// rather than asserting it on a caught failure.
 
 			if (db.getDBType() != DBType.HYPERSONIC) {
 				_thread.interrupt();
