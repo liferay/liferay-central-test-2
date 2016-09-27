@@ -30,7 +30,7 @@ public class BuildFactory {
 			return new SourceBuild(url, parent);
 		}
 
-		for (String batchIndicator : _batchIndicators) {
+		for (String batchIndicator : _BATCH_INDICATORS) {
 			if (url.contains(batchIndicator)) {
 				return new BatchBuild(url, (TopLevelBuild)parent);
 			}
@@ -39,6 +39,6 @@ public class BuildFactory {
 		return new TopLevelBuild(url, (TopLevelBuild)parent);
 	}
 
-	private static final String[] _batchIndicators = {"-batch", "-dist"};
+	private static final String[] _BATCH_INDICATORS = {"-batch", "-dist"};
 
 }
