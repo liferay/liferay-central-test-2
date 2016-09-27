@@ -2661,7 +2661,7 @@ public class JournalArticleLocalServiceImpl
 		if (article == null) {
 			throw new NoSuchArticleException(
 				"No approved JournalArticle exists with the key {groupId=" +
-					groupId + ", " + "articleId=" + articleId + "}");
+					groupId + ", articleId=" + articleId + "}");
 		}
 
 		return article;
