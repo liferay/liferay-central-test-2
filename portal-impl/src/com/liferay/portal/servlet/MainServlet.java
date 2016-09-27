@@ -1313,6 +1313,8 @@ public class MainServlet extends ActionServlet {
 		Object serverContainer = servletContext.getAttribute(
 			"javax.websocket.server.ServerContainer");
 
+		properties = new HashMap<>();
+
 		if (serverContainer != null) {
 			properties.put("websocket.active", Boolean.TRUE);
 		}
@@ -1321,8 +1323,6 @@ public class MainServlet extends ActionServlet {
 				_log.info("A WebSocket server container is not registered");
 			}
 		}
-
-		properties = new HashMap<>();
 
 		properties.put("bean.id", ServletContext.class.getName());
 		properties.put("original.bean", Boolean.TRUE);
