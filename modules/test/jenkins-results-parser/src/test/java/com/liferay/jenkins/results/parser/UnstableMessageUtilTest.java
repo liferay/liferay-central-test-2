@@ -112,7 +112,7 @@ public class UnstableMessageUtilTest extends BaseJenkinsResultsParserTestCase {
 
 	@Override
 	protected String getMessage(String urlString) throws Exception {
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 
 		sb.append("<div>");
 		sb.append(
