@@ -295,22 +295,21 @@ public class UnstableMessageUtil {
 						sb.append(testName);
 
 						sb.append("</a> - ");
+						sb.append("<a href=\"");
 
 						String logURL = _getLogURL(
 							jobVariant, project, runBuildURLJSONObject);
 
-						sb.append("<a href=\"");
 						sb.append(logURL);
+
 						sb.append("/");
 						sb.append(testName.replace("#", "_"));
 						sb.append("/index.html.gz\">Poshi Report</a> - ");
-
 						sb.append("<a href=\"");
 						sb.append(logURL);
 						sb.append("/");
 						sb.append(testName.replace("#", "_"));
 						sb.append("/summary.html.gz\">Poshi Summary</a> - ");
-
 						sb.append("<a href=\"");
 						sb.append(logURL);
 						sb.append(
@@ -320,7 +319,6 @@ public class UnstableMessageUtil {
 								project.getProperty("record.liferay.log"))) {
 
 							sb.append(" - ");
-
 							sb.append("<a href=\"");
 							sb.append(logURL);
 							sb.append("/liferay-log.txt.gz\">Liferay Log</a>");
