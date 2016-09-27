@@ -181,9 +181,17 @@ AUI.add(
 
 						var repetitions = option.getRepeatedSiblings();
 
-						repetitions.splice(newIndex, 0, repetitions.splice(oldIndex, 1)[0]);
+						var value = instance.get('value');
+
+						instance._reorderOptions(repetitions, newIndex, oldIndex);
 
 						repetitions.forEach(A.bind('_syncRepeatableField', option));
+
+						instance._reorderOptions(value, newIndex, oldIndex);
+
+						instance.set('value', value);
+
+						instance.fire('dragend');
 					},
 
 					processEvaluationContext: function(context) {
@@ -462,6 +470,10 @@ AUI.add(
 						var container = option.get('container');
 
 						container.append(TPL_DRAG_HANDLE + TPL_REMOVE_BUTTON);
+					},
+
+					_reorderOptions: function(options, newIndex, oldIndex) {
+						options.splice(newIndex, 0, options.splice(oldIndex, 1)[0]);
 					},
 
 					_restoreOption: function(option, contextValue) {
