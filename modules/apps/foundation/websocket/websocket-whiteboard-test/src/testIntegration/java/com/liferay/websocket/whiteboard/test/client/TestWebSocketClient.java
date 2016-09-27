@@ -38,12 +38,8 @@ public class TestWebSocketClient {
 		_countDownLatch.await(time, timeUnit);
 	}
 
-	public long getMissingMessages() {
+	public long getOnTextCount() {
 		return _countDownLatch.getCount();
-	}
-
-	public void initExpectedMessages(int expectedMessages) {
-		_countDownLatch = new CountDownLatch(expectedMessages);
 	}
 
 	@OnOpen
@@ -75,6 +71,10 @@ public class TestWebSocketClient {
 		catch (IOException ioe) {
 			throw new RuntimeException(ioe);
 		}
+	}
+
+	public void setInitialOnTextCount(int initialOnTextCount) {
+		_countDownLatch = new CountDownLatch(initialOnTextCount);
 	}
 
 	private CountDownLatch _countDownLatch;
