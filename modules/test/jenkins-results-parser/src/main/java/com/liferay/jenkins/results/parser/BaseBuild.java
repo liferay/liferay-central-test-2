@@ -105,7 +105,6 @@ public abstract class BaseBuild implements Build {
 
 	@Override
 	public String getInvocationURL() {
-
 		String jobURL = getJobURL();
 
 		if (jobURL == null) {
@@ -513,6 +512,24 @@ public abstract class BaseBuild implements Build {
 		return foundDownstreamBuildURLs;
 	}
 
+	protected JSONObject getBuildJSONObject(String tree) throws Exception {
+		if (getBuildURL() == null) {
+			return null;
+		}
+
+		StringBuffer sb = new StringBuffer();
+
+		sb.append(JenkinsResultsParserUtil.getLocalURL(getBuildURL()));
+		sb.append("/api/json?pretty");
+
+		if (tree != null) {
+			sb.append("&tree=");
+			sb.append(tree);
+		}
+
+		return JenkinsResultsParserUtil.toJSONObject(sb.toString(), false);
+	}
+
 	protected String getBuildMessage() {
 		if (jobName != null) {
 			String status = getStatus();
@@ -568,24 +585,6 @@ public abstract class BaseBuild implements Build {
 		}
 
 		return "";
-	}
-
-	protected JSONObject getBuildJSONObject(String tree) throws Exception {
-		if (getBuildURL() == null) {
-			return null;
-		}
-
-		StringBuffer sb = new StringBuffer();
-
-		sb.append(JenkinsResultsParserUtil.getLocalURL(getBuildURL()));
-		sb.append("/api/json?pretty");
-
-		if (tree != null) {
-			sb.append("&tree=");
-			sb.append(tree);
-		}
-
-		return JenkinsResultsParserUtil.toJSONObject(sb.toString(), false);
 	}
 
 	protected JSONArray getBuildsJSONArray() throws Exception {
@@ -731,7 +730,6 @@ public abstract class BaseBuild implements Build {
 	}
 
 	protected void loadParametersFromBuildJSONObject() throws Exception {
-
 		if (getBuildURL() == null) {
 			return;
 		}
@@ -850,25 +848,26 @@ public abstract class BaseBuild implements Build {
 		}
 	}
 
-	protected List<Integer> badBuildNumbers = new ArrayList<>();
 	protected static final Pattern buildURLPattern = Pattern.compile(
 		"\\w+://(?<master>[^/]+)/+job/+(?<jobName>[^/]+).*/(?<buildNumber>" +
 			"\\d+)/?");
-	protected List<Build> downstreamBuilds = new ArrayList<>();
 	protected static final Pattern downstreamBuildURLPattern = Pattern.compile(
 		"\\'.*\\' started at (?<url>.+)\\.");
 	protected static final Pattern invocationURLPattern = Pattern.compile(
 		"\\w+://(?<master>[^/]+)/+job/+(?<jobName>[^/]+).*/" +
 			"buildWithParameters\\?(?<queryString>.*)");
+
+	protected List<Integer> badBuildNumbers = new ArrayList<>();
+	protected List<Build> downstreamBuilds = new ArrayList<>();
 	protected String jobName;
 	protected String master;
 	protected String result;
 	protected long statusModifiedTime;
 
 	private int _buildNumber = -1;
-	private int _consoleReadCursor = 0;
+	private int _consoleReadCursor;
 	private Map<String, String> _parameters = new HashMap<>();
-	private Build _parentBuild;
+	private final Build _parentBuild;
 	private String _status;
 
 }

@@ -19,7 +19,9 @@ package com.liferay.jenkins.results.parser;
  */
 public class BuildFactory {
 
-	public static Build newBuild(String url, Build parentBuild) throws Exception {
+	public static Build newBuild(String url, Build parentBuild)
+		throws Exception {
+
 		url = JenkinsResultsParserUtil.getLocalURL(url);
 
 		if (url.contains("AXIS_VARIABLE=")) {
