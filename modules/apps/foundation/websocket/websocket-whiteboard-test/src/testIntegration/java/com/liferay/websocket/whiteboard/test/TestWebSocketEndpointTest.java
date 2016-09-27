@@ -19,6 +19,8 @@ import com.liferay.websocket.whiteboard.test.client.TestWebSocketClient;
 import java.net.URI;
 import java.net.URL;
 
+import java.util.concurrent.TimeUnit;
+
 import javax.websocket.ContainerProvider;
 import javax.websocket.WebSocketContainer;
 
@@ -56,9 +58,13 @@ public class TestWebSocketEndpointTest {
 
 		webSocketContainer.connectToServer(testWebSocketClient, uri);
 
+		testWebSocketClient.initExpectedMessages(1);
+
 		testWebSocketClient.sendText("echo");
 
-		Thread.sleep(1000);
+		testWebSocketClient.await(1, TimeUnit.SECONDS);
+
+		Assert.assertEquals(0, testWebSocketClient.getMissingMessages());
 
 		Assert.assertEquals("echo", testWebSocketClient.popReceivedTexts());
 	}

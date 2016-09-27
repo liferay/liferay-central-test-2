@@ -17,6 +17,8 @@ package com.liferay.websocket.whiteboard.test.client;
 import java.io.IOException;
 
 import java.util.Stack;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 import javax.websocket.ClientEndpoint;
 import javax.websocket.OnMessage;
@@ -30,6 +32,20 @@ import javax.websocket.Session;
 @ClientEndpoint
 public class TestWebSocketClient {
 
+	public void await(long time, TimeUnit timeUnit)
+		throws InterruptedException {
+
+		_receiveMessageLatch.await(time, timeUnit);
+	}
+
+	public long getMissingMessages() {
+		return _receiveMessageLatch.getCount();
+	}
+
+	public void initExpectedMessages(int expectedMessages) {
+		_receiveMessageLatch = new CountDownLatch(expectedMessages);
+	}
+
 	@OnOpen
 	public void onOpen(Session session) {
 		_session = session;
@@ -37,6 +53,13 @@ public class TestWebSocketClient {
 
 	@OnMessage
 	public void onText(String text, Session session) {
+		if (_receiveMessageLatch == null) {
+			throw new RuntimeException(
+				"You should init the number of expected messages");
+		}
+
+		_receiveMessageLatch.countDown();
+
 		_texts.add(text);
 	}
 
@@ -47,7 +70,7 @@ public class TestWebSocketClient {
 	public void sendText(String text) {
 		try {
 			Basic basic = _session.getBasicRemote();
-			
+
 			basic.sendText(text);
 		}
 		catch (IOException ioe) {
@@ -55,7 +78,8 @@ public class TestWebSocketClient {
 		}
 	}
 
-	private final Stack<String> _texts = new Stack<>();
+	private CountDownLatch _receiveMessageLatch;
 	private Session _session;
+	private final Stack<String> _texts = new Stack<>();
 
 }
