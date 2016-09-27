@@ -44,7 +44,7 @@ public class AxisBuild extends BaseBuild {
 
 	@Override
 	public void reinvoke() {
-		throw new RuntimeException("Axis builds cannot be reinvoked.");
+		throw new RuntimeException("Axis builds cannot be reinvoked");
 	}
 
 	protected AxisBuild(String url) throws Exception {

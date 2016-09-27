@@ -67,8 +67,7 @@ public abstract class BaseBuild implements Build {
 	}
 
 	@Override
-	public String getConsoleText()
-	{
+	public String getConsoleText() {
 		try {
 			return JenkinsResultsParserUtil.toString(
 				JenkinsResultsParserUtil.getLocalURL(
