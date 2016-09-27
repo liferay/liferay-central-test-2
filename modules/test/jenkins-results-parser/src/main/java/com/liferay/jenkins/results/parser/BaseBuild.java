@@ -165,7 +165,7 @@ public abstract class BaseBuild implements Build {
 
 	@Override
 	public Build getParent() {
-		return _parent;
+		return _parentBuild;
 	}
 
 	@Override
@@ -437,8 +437,8 @@ public abstract class BaseBuild implements Build {
 		this(url, null);
 	}
 
-	protected BaseBuild(String url, Build parent) throws Exception {
-		_parent = parent;
+	protected BaseBuild(String url, Build parentBuild) throws Exception {
+		_parentBuild = parentBuild;
 
 		if (url.contains("buildWithParameters")) {
 			setInvocationURL(url);
@@ -867,7 +867,7 @@ public abstract class BaseBuild implements Build {
 	private int _buildNumber = -1;
 	private int _consoleReadCursor = 0;
 	private Map<String, String> _parameters = new HashMap<>();
-	private Build _parent;
+	private Build _parentBuild;
 	private String _status;
 
 }
