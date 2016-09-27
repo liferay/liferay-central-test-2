@@ -13,8 +13,6 @@ AUI.add(
 				);
 
 				instance._domEvents = [];
-
-				instance._bindDefaultEvents();
 			},
 
 			bindContainerEvent: function(eventName, callback, selector, volatile) {
@@ -53,6 +51,10 @@ AUI.add(
 				return 'change';
 			},
 
+			getCustomChangedEventName: function() {
+				return null;
+			},
+
 			_afterEventsRender: function() {
 				var instance = this;
 
@@ -75,12 +77,33 @@ AUI.add(
 				instance._bindDefaultEvents();
 			},
 
+			_bindCustomChangedEvents: function() {
+				var instance = this;
+
+				var event = instance.getCustomChangedEventName();
+
+				if (!event) {
+					return;
+				}
+
+				instance._eventHandlers.push(
+					instance.after(event, A.bind(instance._onCustomValueChanged, instance))
+				);
+			},
+
 			_bindDefaultEvents: function() {
 				var instance = this;
 
 				instance.bindInputEvent('blur', instance._onInputBlur, true);
 				instance.bindInputEvent('focus', instance._onInputFocus);
 				instance.bindInputEvent(instance.getChangeEventName(), instance._onValueChange, true);
+				instance._bindCustomChangedEvents();
+			},
+
+			_onCustomValueChanged: function(event) {
+				var instance = this;
+
+				instance._onValueChange(event);
 			},
 
 			_onInputBlur: function(event) {
