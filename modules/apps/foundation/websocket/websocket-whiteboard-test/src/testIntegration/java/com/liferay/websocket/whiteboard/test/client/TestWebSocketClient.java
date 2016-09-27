@@ -35,15 +35,15 @@ public class TestWebSocketClient {
 	public void await(long time, TimeUnit timeUnit)
 		throws InterruptedException {
 
-		_receiveMessageLatch.await(time, timeUnit);
+		_countDownLatch.await(time, timeUnit);
 	}
 
 	public long getMissingMessages() {
-		return _receiveMessageLatch.getCount();
+		return _countDownLatch.getCount();
 	}
 
 	public void initExpectedMessages(int expectedMessages) {
-		_receiveMessageLatch = new CountDownLatch(expectedMessages);
+		_countDownLatch = new CountDownLatch(expectedMessages);
 	}
 
 	@OnOpen
@@ -53,12 +53,11 @@ public class TestWebSocketClient {
 
 	@OnMessage
 	public void onText(String text, Session session) {
-		if (_receiveMessageLatch == null) {
-			throw new RuntimeException(
-				"You should init the number of expected messages");
+		if (_countDownLatch == null) {
+			throw new RuntimeException("Count down latch is null");
 		}
 
-		_receiveMessageLatch.countDown();
+		_countDownLatch.countDown();
 
 		_texts.add(text);
 	}
@@ -78,7 +77,7 @@ public class TestWebSocketClient {
 		}
 	}
 
-	private CountDownLatch _receiveMessageLatch;
+	private CountDownLatch _countDownLatch;
 	private Session _session;
 	private final Stack<String> _texts = new Stack<>();
 
