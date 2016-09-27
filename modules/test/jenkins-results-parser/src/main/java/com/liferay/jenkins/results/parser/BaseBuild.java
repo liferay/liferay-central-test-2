@@ -164,7 +164,7 @@ public abstract class BaseBuild implements Build {
 	}
 
 	@Override
-	public Build getParent() {
+	public Build getParentBuild() {
 		return _parentBuild;
 	}
 

@@ -46,7 +46,7 @@ public interface Build {
 
 	public String getParameterValue(String name);
 
-	public Build getParent();
+	public Build getParentBuild();
 
 	public String getResult();
 
