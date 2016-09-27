@@ -394,6 +394,7 @@ public abstract class BaseBuild implements Build {
 						if (executorService != null) {
 							Runnable runnable = new Runnable() {
 
+								@Override
 								public void run() {
 									downstreamBuild.update();
 								}
