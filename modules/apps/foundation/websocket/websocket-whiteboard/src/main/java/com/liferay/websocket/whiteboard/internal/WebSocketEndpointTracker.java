@@ -140,12 +140,12 @@ public class WebSocketEndpointTracker
 	@Reference
 	private LogService _logService;
 
-	@Reference(target = "(websocket.active=true)")
-	private ServletContext _servletContext;
-
 	private final ConcurrentMap<String, ServerEndpointConfigWrapper>
 		_serverEndpointConfigWrappers = new ConcurrentHashMap<>();
 	private ServiceTracker<Endpoint, ServerEndpointConfigWrapper>
 		_serverEndpointConfigWrapperServiceTracker;
+
+	@Reference(target = "(websocket.active=true)")
+	private ServletContext _servletContext;
 
 }
