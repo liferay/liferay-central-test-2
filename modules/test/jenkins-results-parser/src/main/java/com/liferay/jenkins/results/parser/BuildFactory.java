@@ -27,7 +27,7 @@ public class BuildFactory {
 		}
 
 		if (url.contains("-source")) {
-			return new SourceBuild(url, (TopLevelBuild)parent);
+			return new SourceBuild(url, parent);
 		}
 
 		for (String batchIndicator : _batchIndicators) {
