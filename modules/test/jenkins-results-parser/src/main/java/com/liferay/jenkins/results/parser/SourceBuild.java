@@ -23,8 +23,8 @@ public class SourceBuild extends BaseBuild {
 		super(url);
 	}
 
-	public SourceBuild(String url, Build parent) throws Exception {
-		super(url, parent);
+	public SourceBuild(String url, Build parentBuild) throws Exception {
+		super(url, parentBuild);
 	}
 
 	@Override

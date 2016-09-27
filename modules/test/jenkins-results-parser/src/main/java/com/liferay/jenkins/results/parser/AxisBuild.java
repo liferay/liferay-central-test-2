@@ -51,8 +51,8 @@ public class AxisBuild extends BaseBuild {
 		this(url, null);
 	}
 
-	protected AxisBuild(String url, BatchBuild parent) throws Exception {
-		super(JenkinsResultsParserUtil.getLocalURL(url), parent);
+	protected AxisBuild(String url, BatchBuild parentBuild) throws Exception {
+		super(JenkinsResultsParserUtil.getLocalURL(url), parentBuild);
 	}
 
 	@Override

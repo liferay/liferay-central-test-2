@@ -19,24 +19,24 @@ package com.liferay.jenkins.results.parser;
  */
 public class BuildFactory {
 
-	public static Build newBuild(String url, Build parent) throws Exception {
+	public static Build newBuild(String url, Build parentBuild) throws Exception {
 		url = JenkinsResultsParserUtil.getLocalURL(url);
 
 		if (url.contains("AXIS_VARIABLE=")) {
-			return new AxisBuild(url, (BatchBuild)parent);
+			return new AxisBuild(url, (BatchBuild)parentBuild);
 		}
 
 		if (url.contains("-source")) {
-			return new SourceBuild(url, parent);
+			return new SourceBuild(url, parentBuild);
 		}
 
 		for (String batchIndicator : _BATCH_INDICATORS) {
 			if (url.contains(batchIndicator)) {
-				return new BatchBuild(url, (TopLevelBuild)parent);
+				return new BatchBuild(url, (TopLevelBuild)parentBuild);
 			}
 		}
 
-		return new TopLevelBuild(url, (TopLevelBuild)parent);
+		return new TopLevelBuild(url, (TopLevelBuild)parentBuild);
 	}
 
 	private static final String[] _BATCH_INDICATORS = {"-batch", "-dist"};
