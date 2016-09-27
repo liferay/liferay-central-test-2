@@ -30,8 +30,8 @@ import javax.websocket.Session;
 @ClientEndpoint
 public class TestWebSocketClient {
 
-	public TestWebSocketClient(BlockingQueue<String> textQueue) {
-		_textQueue = textQueue;
+	public TestWebSocketClient(BlockingQueue<String> blockingQueue) {
+		_blockingQueue = blockingQueue;
 	}
 
 	@OnOpen
@@ -43,7 +43,7 @@ public class TestWebSocketClient {
 	public void onText(String text, Session session)
 		throws InterruptedException {
 
-		_textQueue.put(text);
+		_blockingQueue.put(text);
 	}
 
 	public void sendText(String text) throws IOException {
@@ -52,7 +52,7 @@ public class TestWebSocketClient {
 		basic.sendText(text);
 	}
 
+	private final BlockingQueue<String> _blockingQueue;
 	private Session _session;
-	private final BlockingQueue<String> _textQueue;
 
 }
