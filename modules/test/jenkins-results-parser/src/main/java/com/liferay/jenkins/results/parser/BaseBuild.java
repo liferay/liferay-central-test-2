@@ -213,14 +213,14 @@ public abstract class BaseBuild implements Build {
 			indentStringBuffer.append(" ");
 		}
 
-		String status = getStatus();
-
 		StringBuilder sb = new StringBuilder();
 
 		sb.append(indentStringBuffer);
 		sb.append("Build '");
 		sb.append(jobName);
 		sb.append("'");
+
+		String status = getStatus();
 
 		if (status.equals("completed")) {
 			sb.append(" completed at ");
