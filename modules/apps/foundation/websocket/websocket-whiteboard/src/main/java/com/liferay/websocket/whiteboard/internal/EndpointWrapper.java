@@ -42,33 +42,6 @@ public class EndpointWrapper extends Endpoint {
 		_endpoint = serviceObjects.getService();
 	}
 
-	protected void close() {
-		_closed = true;
-
-		Iterator<Session> iterator = _sessions.iterator();
-
-		while (iterator.hasNext()) {
-			Session session = iterator.next();
-
-			iterator.remove();
-
-			try {
-				CloseReason closeReason = new CloseReason(
-					CloseReason.CloseCodes.GOING_AWAY, "Service is going away");
-
-				session.close(closeReason);
-
-				_endpoint.onClose(session, closeReason);
-
-				_serviceObjects.ungetService(_endpoint);
-			}
-			catch (IOException ioe) {
-				_logService.log(
-					LogService.LOG_ERROR, "Unable to close session", ioe);
-			}
-		}
-	}
-
 	@Override
 	public void onClose(Session session, CloseReason closeReason) {
 		if (_closed) {
@@ -102,9 +75,36 @@ public class EndpointWrapper extends Endpoint {
 		_sessions.add(session);
 	}
 
-	private final LogService _logService;
+	protected void close() {
+		_closed = true;
+
+		Iterator<Session> iterator = _sessions.iterator();
+
+		while (iterator.hasNext()) {
+			Session session = iterator.next();
+
+			iterator.remove();
+
+			try {
+				CloseReason closeReason = new CloseReason(
+					CloseReason.CloseCodes.GOING_AWAY, "Service is going away");
+
+				session.close(closeReason);
+
+				_endpoint.onClose(session, closeReason);
+
+				_serviceObjects.ungetService(_endpoint);
+			}
+			catch (IOException ioe) {
+				_logService.log(
+					LogService.LOG_ERROR, "Unable to close session", ioe);
+			}
+		}
+	}
+
 	private volatile boolean _closed;
 	private final Endpoint _endpoint;
+	private final LogService _logService;
 	private final ServiceObjects<Endpoint> _serviceObjects;
 	private final Set<Session> _sessions = new HashSet<>();
 

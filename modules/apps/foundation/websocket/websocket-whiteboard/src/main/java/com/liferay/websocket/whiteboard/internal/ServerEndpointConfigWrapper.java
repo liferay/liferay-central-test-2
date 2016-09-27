@@ -66,13 +66,13 @@ public class ServerEndpointConfigWrapper implements ServerEndpointConfig {
 	}
 
 	@Override
-	public Class<?> getEndpointClass() {
-		return _serverEndpointConfig.getEndpointClass();
+	public List<Class<? extends Encoder>> getEncoders() {
+		return _serverEndpointConfig.getEncoders();
 	}
 
 	@Override
-	public List<Class<? extends Encoder>> getEncoders() {
-		return _serverEndpointConfig.getEncoders();
+	public Class<?> getEndpointClass() {
+		return _serverEndpointConfig.getEndpointClass();
 	}
 
 	@Override
@@ -86,13 +86,13 @@ public class ServerEndpointConfigWrapper implements ServerEndpointConfig {
 	}
 
 	@Override
-	public Map<String, Object> getUserProperties() {
-		return _serverEndpointConfig.getUserProperties();
+	public List<String> getSubprotocols() {
+		return _serverEndpointConfig.getSubprotocols();
 	}
 
 	@Override
-		public List<String> getSubprotocols() {
-		return _serverEndpointConfig.getSubprotocols();
+	public Map<String, Object> getUserProperties() {
+		return _serverEndpointConfig.getUserProperties();
 	}
 
 	public ServiceObjectsConfigurator removeConfigurator(
@@ -115,12 +115,13 @@ public class ServerEndpointConfigWrapper implements ServerEndpointConfig {
 			public <T> T getEndpointInstance(Class<T> endpointClass) {
 				return (T)new NullEndpoint();
 			}
-	
+
 		};
 
-	private ServerEndpointConfig _serverEndpointConfig;
-	private ConcurrentNavigableMap<ServiceReference<Endpoint>,
+	private final ConcurrentNavigableMap<ServiceReference<Endpoint>,
 		ServiceObjectsConfigurator> _endpoints = new ConcurrentSkipListMap<>();
+	private final LogService _logService;
+	private final ServerEndpointConfig _serverEndpointConfig;
 
 	private final class NullEndpoint extends Endpoint {
 
@@ -140,5 +141,4 @@ public class ServerEndpointConfigWrapper implements ServerEndpointConfig {
 
 	}
 
-	private final LogService _logService;
 }
