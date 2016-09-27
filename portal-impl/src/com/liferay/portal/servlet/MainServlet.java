@@ -1310,10 +1310,10 @@ public class MainServlet extends ActionServlet {
 
 		ServletContext servletContext = getServletContext();
 
+		properties = new HashMap<>();
+
 		Object serverContainer = servletContext.getAttribute(
 			"javax.websocket.server.ServerContainer");
-
-		properties = new HashMap<>();
 
 		if (serverContainer != null) {
 			properties.put("websocket.active", Boolean.TRUE);
