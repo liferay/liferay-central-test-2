@@ -48,7 +48,7 @@ AUI.add(
 						var sortableList = instance.get('sortableList');
 
 						instance._eventHandlers.push(
-							instance.after('*:valueChanged', A.bind('_afterOptionValueChanged', instance)),
+							instance.after('liferay-ddm-form-field-key-value:valueChanged', A.bind('_afterOptionValueChanged', instance)),
 							sortableList.after('drag:end', A.bind('_afterSortableListDragEnd', instance)),
 							sortableList.after('drag:start', A.bind('_afterSortableListDragStart', instance))
 						);
