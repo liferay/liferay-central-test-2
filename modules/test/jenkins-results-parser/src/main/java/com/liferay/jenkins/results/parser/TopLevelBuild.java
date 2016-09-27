@@ -42,7 +42,9 @@ public class TopLevelBuild extends BaseBuild {
 	@Override
 	public void update() {
 		long start = System.currentTimeMillis();
+
 		super.update();
+
 		_updateDuration = System.currentTimeMillis() - start;
 	}
 
