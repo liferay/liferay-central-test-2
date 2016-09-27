@@ -45,10 +45,10 @@ public class TestWebSocketEndpointTest {
 		WebSocketContainer webSocketContainer =
 			ContainerProvider.getWebSocketContainer();
 
-		SynchronousQueue<String> textQueue = new SynchronousQueue<>();
+		SynchronousQueue<String> synchronousQueue = new SynchronousQueue<>();
 
 		TestWebSocketClient testWebSocketClient = new TestWebSocketClient(
-			textQueue);
+			synchronousQueue);
 
 		StringBuilder sb = new StringBuilder();
 
@@ -64,7 +64,7 @@ public class TestWebSocketEndpointTest {
 
 		testWebSocketClient.sendText("echo");
 
-		Assert.assertEquals("echo", textQueue.poll(1, TimeUnit.HOURS));
+		Assert.assertEquals("echo", synchronousQueue.poll(1, TimeUnit.HOURS));
 	}
 
 	@ArquillianResource
