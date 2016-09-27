@@ -58,13 +58,13 @@ public class TestWebSocketEndpointTest {
 
 		webSocketContainer.connectToServer(testWebSocketClient, uri);
 
-		testWebSocketClient.initExpectedMessages(1);
+		testWebSocketClient.setInitialOnTextCount(1);
 
 		testWebSocketClient.sendText("echo");
 
 		testWebSocketClient.await(1, TimeUnit.SECONDS);
 
-		Assert.assertEquals(0, testWebSocketClient.getMissingMessages());
+		Assert.assertEquals(0, testWebSocketClient.getOnTextCount());
 
 		Assert.assertEquals("echo", testWebSocketClient.popReceivedTexts());
 	}
