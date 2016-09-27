@@ -157,7 +157,7 @@ public class UnstableMessageUtil {
 			JSONObject runBuildURLJSONObject)
 		throws Exception {
 
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 
 		sb.append(project.getProperty("log.base.url"));
 		sb.append("/");
