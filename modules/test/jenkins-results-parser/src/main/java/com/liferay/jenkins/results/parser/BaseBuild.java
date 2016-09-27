@@ -311,9 +311,9 @@ public abstract class BaseBuild implements Build {
 
 		buildURL = JenkinsResultsParserUtil.getLocalURL(buildURL);
 
-		String myBuildURL = getBuildURL();
+		String curBuildURL = getBuildURL();
 
-		if ((myBuildURL != null) && myBuildURL.equals(buildURL)) {
+		if ((curBuildURL != null) && curBuildURL.equals(buildURL)) {
 			return true;
 		}
 
