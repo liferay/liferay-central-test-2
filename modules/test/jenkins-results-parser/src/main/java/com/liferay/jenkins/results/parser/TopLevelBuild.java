@@ -52,8 +52,10 @@ public class TopLevelBuild extends BaseBuild {
 		this(url, null);
 	}
 
-	protected TopLevelBuild(String url, TopLevelBuild parentBuild) throws Exception {
-		super(url, parentBuild);
+	protected TopLevelBuild(String url, TopLevelBuild topLevelBuild)
+		throws Exception {
+
+		super(url, topLevelBuild);
 	}
 
 	@Override
