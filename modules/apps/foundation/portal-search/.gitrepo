@@ -3,7 +3,7 @@
 ;
 [subrepo]
 	cmdver = liferay
-	commit = ce37617a58dcebc29481b70af5fe9fb4486d541c
+	commit = 00b3d49f13d297a27ab713b76177b8e618ac2513
 	mode = push
-	parent = e7f4a4be7bae086203f7c0c36c256c8567565f58
+	parent = 36fd65f6ae4d58274eda739d62c50ec81cdccf2b
 	remote = git@github.com:liferay/com-liferay-portal-search.git
