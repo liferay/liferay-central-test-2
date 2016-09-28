@@ -229,9 +229,9 @@ renderResponse.setTitle(LanguageUtil.get(request, "add-new-page"));
 
 			<liferay-ui:asset-tags-error />
 
-			<liferay-asset:asset-categories-selector className="<%= Layout.class.getName() %>" classPK="<%= selLayout != null ? selLayout.getPrimaryKey() : 0 %>" />
+			<aui:input name="categories" type="assetCategories" />
 
-			<liferay-asset:asset-tags-selector className="<%= Layout.class.getName() %>" classPK="<%= selLayout != null ? selLayout.getPrimaryKey() : 0 %>" />
+			<aui:input name="tags" type="assetTags" />
 		</aui:fieldset>
 	</aui:fieldset-group>
 
