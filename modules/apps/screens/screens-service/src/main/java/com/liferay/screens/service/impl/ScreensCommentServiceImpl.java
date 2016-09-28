@@ -48,15 +48,13 @@ public class ScreensCommentServiceImpl extends ScreensCommentServiceBaseImpl {
 		AssetEntry assetEntry = assetEntryLocalService.getEntry(
 			className, classPK);
 
-		long groupId = assetEntry.getGroupId();
-
-		long companyId = groupLocalService.getGroup(groupId).getCompanyId();
+		long companyId = groupLocalService.getGroup(assetEntry.getGroupId()).getCompanyId();
 
 		discussionPermission.checkAddPermission(
-			companyId, groupId, className, classPK);
+			companyId, assetEntry.getGroupId(), className, classPK);
 
 		long commentId = commentManager.addComment(
-			getUserId(), groupId, className, classPK, getUser().getFullName(),
+			getUserId(), assetEntry.getGroupId(), className, classPK, getUser().getFullName(),
 			StringPool.BLANK, body, createServiceContextFunction());
 
 		Comment comment = commentManager.fetchComment(commentId);
@@ -74,12 +72,10 @@ public class ScreensCommentServiceImpl extends ScreensCommentServiceBaseImpl {
 		AssetEntry assetEntry = assetEntryLocalService.getEntry(
 			comment.getClassName(), comment.getClassPK());
 
-		long groupId = assetEntry.getGroupId();
-
-		long companyId = groupLocalService.getGroup(groupId).getCompanyId();
+		long companyId = groupLocalService.getGroup(assetEntry.getGroupId()).getCompanyId();
 
 		discussionPermission.checkViewPermission(
-			companyId, groupId, comment.getClassName(), comment.getClassPK());
+			companyId, assetEntry.getGroupId(), comment.getClassName(), comment.getClassPK());
 
 		return toJSONObject(comment, discussionPermission);
 	}
@@ -95,15 +91,13 @@ public class ScreensCommentServiceImpl extends ScreensCommentServiceBaseImpl {
 		AssetEntry assetEntry = assetEntryLocalService.getEntry(
 			className, classPK);
 
-		long groupId = assetEntry.getGroupId();
-
-		long companyId = groupLocalService.getGroup(groupId).getCompanyId();
+		long companyId = groupLocalService.getGroup(assetEntry.getGroupId()).getCompanyId();
 
 		discussionPermission.checkViewPermission(
-			companyId, groupId, className, classPK);
+			companyId, assetEntry.getGroupId(), className, classPK);
 
 		Discussion discussion = commentManager.getDiscussion(
-			getUserId(), groupId, className, classPK,
+			getUserId(), assetEntry.getGroupId(), className, classPK,
 			createServiceContextFunction());
 
 		DiscussionComment rootDiscussionComment =
@@ -156,12 +150,10 @@ public class ScreensCommentServiceImpl extends ScreensCommentServiceBaseImpl {
 		AssetEntry assetEntry = assetEntryLocalService.getEntry(
 			className, classPK);
 
-		long groupId = assetEntry.getGroupId();
-
-		long companyId = groupLocalService.getGroup(groupId).getCompanyId();
+		long companyId = groupLocalService.getGroup(assetEntry.getGroupId()).getCompanyId();
 
 		discussionPermission.checkViewPermission(
-			companyId, groupId, className, classPK);
+			companyId, assetEntry.getGroupId(), className, classPK);
 
 		return commentManager.getCommentsCount(className, classPK);
 	}
