@@ -48,10 +48,10 @@ public class ScreensCommentServiceImpl extends ScreensCommentServiceBaseImpl {
 		AssetEntry assetEntry = assetEntryLocalService.getEntry(
 			className, classPK);
 
-		long companyId = groupLocalService.getGroup(assetEntry.getGroupId()).getCompanyId();
+		Group group = groupLocalService.getGroup(assetEntry.getGroupId());
 
 		discussionPermission.checkAddPermission(
-			companyId, assetEntry.getGroupId(), className, classPK);
+			group.getCompanyId(), assetEntry.getGroupId(), className, classPK);
 
 		long commentId = commentManager.addComment(
 			getUserId(), assetEntry.getGroupId(), className, classPK, getUser().getFullName(),
@@ -72,10 +72,10 @@ public class ScreensCommentServiceImpl extends ScreensCommentServiceBaseImpl {
 		AssetEntry assetEntry = assetEntryLocalService.getEntry(
 			comment.getClassName(), comment.getClassPK());
 
-		long companyId = groupLocalService.getGroup(assetEntry.getGroupId()).getCompanyId();
+		Group group = groupLocalService.getGroup(assetEntry.getGroupId());
 
 		discussionPermission.checkViewPermission(
-			companyId, assetEntry.getGroupId(), comment.getClassName(), comment.getClassPK());
+			group.getCompanyId(), assetEntry.getGroupId(), comment.getClassName(), comment.getClassPK());
 
 		return toJSONObject(comment, discussionPermission);
 	}
@@ -91,10 +91,10 @@ public class ScreensCommentServiceImpl extends ScreensCommentServiceBaseImpl {
 		AssetEntry assetEntry = assetEntryLocalService.getEntry(
 			className, classPK);
 
-		long companyId = groupLocalService.getGroup(assetEntry.getGroupId()).getCompanyId();
+		Group group = groupLocalService.getGroup(assetEntry.getGroupId());
 
 		discussionPermission.checkViewPermission(
-			companyId, assetEntry.getGroupId(), className, classPK);
+			group.getCompanyId(), assetEntry.getGroupId(), className, classPK);
 
 		Discussion discussion = commentManager.getDiscussion(
 			getUserId(), assetEntry.getGroupId(), className, classPK,
@@ -150,10 +150,10 @@ public class ScreensCommentServiceImpl extends ScreensCommentServiceBaseImpl {
 		AssetEntry assetEntry = assetEntryLocalService.getEntry(
 			className, classPK);
 
-		long companyId = groupLocalService.getGroup(assetEntry.getGroupId()).getCompanyId();
+		Group group = groupLocalService.getGroup(assetEntry.getGroupId());
 
 		discussionPermission.checkViewPermission(
-			companyId, assetEntry.getGroupId(), className, classPK);
+			group.getCompanyId(), assetEntry.getGroupId(), className, classPK);
 
 		return commentManager.getCommentsCount(className, classPK);
 	}
