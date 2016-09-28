@@ -130,8 +130,8 @@ public class ScreensCommentServiceImpl extends ScreensCommentServiceBaseImpl {
 				   (commentsCount > 0)) {
 
 				JSONObject jsonObject = toJSONObject(
-						threadDiscussionCommentIterator.next(),
-						discussionPermission);
+					threadDiscussionCommentIterator.next(),
+					discussionPermission);
 
 				jsonArray.put(jsonObject);
 
