@@ -183,7 +183,7 @@ public class AssetRSSUtil {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, replaced by {@link
+	 * @deprecated As of 1.3.0, replaced by {@link
 	 *             #getAssetEntries(PortletRequest, PortletResponse,
 	 *             PortletPreferences)}
 	 */

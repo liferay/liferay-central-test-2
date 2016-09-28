@@ -90,7 +90,7 @@ public class AssetPublisherDisplayContext {
 	};
 
 	/**
-	 * @deprecated As of 7.0.0, replaced by {@link
+	 * @deprecated As of 1.3.0, replaced by {@link
 	 *             #AssetPublisherDisplayContext(PortletRequest,
 	 *             PortletResponse, PortletPreferences)}
 	 */
