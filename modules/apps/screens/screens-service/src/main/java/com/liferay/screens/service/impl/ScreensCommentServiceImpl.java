@@ -54,8 +54,9 @@ public class ScreensCommentServiceImpl extends ScreensCommentServiceBaseImpl {
 			group.getCompanyId(), assetEntry.getGroupId(), className, classPK);
 
 		long commentId = commentManager.addComment(
-			getUserId(), assetEntry.getGroupId(), className, classPK, getUser().getFullName(),
-			StringPool.BLANK, body, createServiceContextFunction());
+			getUserId(), assetEntry.getGroupId(), className, classPK,
+			getUser().getFullName(), StringPool.BLANK, body,
+			createServiceContextFunction());
 
 		Comment comment = commentManager.fetchComment(commentId);
 
@@ -75,7 +76,8 @@ public class ScreensCommentServiceImpl extends ScreensCommentServiceBaseImpl {
 		Group group = groupLocalService.getGroup(assetEntry.getGroupId());
 
 		discussionPermission.checkViewPermission(
-			group.getCompanyId(), assetEntry.getGroupId(), comment.getClassName(), comment.getClassPK());
+			group.getCompanyId(), assetEntry.getGroupId(),
+			comment.getClassName(), comment.getClassPK());
 
 		return toJSONObject(comment, discussionPermission);
 	}
