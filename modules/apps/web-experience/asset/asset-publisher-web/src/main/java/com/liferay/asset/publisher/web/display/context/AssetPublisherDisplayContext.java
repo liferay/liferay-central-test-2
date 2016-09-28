@@ -96,12 +96,15 @@ public class AssetPublisherDisplayContext {
 	 */
 	@Deprecated
 	public AssetPublisherDisplayContext(
-		PortletRequest portletRequest, PortletPreferences portletPreferences) {
+		HttpServletRequest request, PortletPreferences portletPreferences) {
 
-		throw new UnsupportedOperationException(
-			"This constructor is deprecated and replaced by " +
-				"#AssetPublisherDisplayContext(PortletRequest, " +
-					"PortletResponse, PortletPreferences)");
+		_request = request;
+		_portletRequest = (PortletRequest)request.getAttribute(
+			JavaConstants.JAVAX_PORTLET_REQUEST);
+		_portletResponse = (PortletResponse)request.getAttribute(
+			JavaConstants.JAVAX_PORTLET_RESPONSE);
+
+		_portletPreferences = portletPreferences;
 	}
 
 	public AssetPublisherDisplayContext(
