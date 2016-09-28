@@ -24,7 +24,6 @@ import com.liferay.dynamic.data.mapping.model.Value;
 import com.liferay.dynamic.data.mapping.storage.DDMFormFieldValue;
 import com.liferay.dynamic.data.mapping.storage.DDMFormValues;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.ResourceConstants;
 import com.liferay.portal.kernel.model.ResourcePermission;
 import com.liferay.portal.kernel.model.Role;
@@ -124,16 +123,15 @@ public class PublishRecordSetMVCResourceCommand extends BaseMVCResourceCommand {
 			boolean published)
 		throws PortalException {
 
-		Company company = PortalUtil.getCompany(resourceRequest);
+		long companyId = PortalUtil.getCompanyId(resourceRequest);
 
-		Role guestRole = _roleLocalService.getRole(
-			company.getCompanyId(), RoleConstants.GUEST);
+		Role role = _roleLocalService.getRole(companyId, RoleConstants.GUEST);
 
 		ResourcePermission resourcePermission =
 			_resourcePermissionLocalService.getResourcePermission(
-				guestRole.getCompanyId(), DDLRecordSet.class.getName(),
+				role.getCompanyId(), DDLRecordSet.class.getName(),
 				ResourceConstants.SCOPE_INDIVIDUAL, String.valueOf(recordSetId),
-				guestRole.getRoleId());
+				role.getRoleId());
 
 		if (published) {
 			resourcePermission.addResourceAction(DDLActionKeys.ADD_RECORD);
