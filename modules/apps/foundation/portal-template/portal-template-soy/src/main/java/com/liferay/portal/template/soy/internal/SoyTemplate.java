@@ -19,6 +19,7 @@ import com.google.template.soy.SoyFileSet;
 import com.google.template.soy.SoyFileSet.Builder;
 import com.google.template.soy.data.SanitizedContent;
 import com.google.template.soy.data.SoyMapData;
+import com.google.template.soy.data.UnsafeSanitizedContentOrdainer;
 import com.google.template.soy.tofu.SoyTofu;
 import com.google.template.soy.tofu.SoyTofu.Renderer;
 
@@ -31,6 +32,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.template.AbstractMultiResourceTemplate;
 import com.liferay.portal.template.TemplateContextHelper;
+import com.liferay.portal.template.soy.utils.SoyHTMLContextValue;
 
 import java.io.Reader;
 import java.io.Writer;
@@ -92,7 +94,16 @@ public class SoyTemplate extends AbstractMultiResourceTemplate {
 				continue;
 			}
 
-			soyMapData.put(key, get(key));
+			Object value = get(key);
+
+			if (value instanceof SoyHTMLContextValue) {
+				SoyHTMLContextValue htmlValue = (SoyHTMLContextValue)value;
+
+				value = UnsafeSanitizedContentOrdainer.ordainAsSafe(
+					htmlValue.toString(), SanitizedContent.ContentKind.HTML);
+			}
+
+			soyMapData.put(key, value);
 		}
 
 		return soyMapData;
