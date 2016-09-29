@@ -43,7 +43,7 @@ public class PortalPreferencesLocalServiceImpl
 
 		if (previousPortalPreferences != null) {
 			throw new IllegalArgumentException(
-				"Duplicated ownerId and ownerType against " +
+				"Duplicate owner ID and owner type exists in " +
 					previousPortalPreferences);
 		}
 
