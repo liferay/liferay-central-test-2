@@ -49,7 +49,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 
 			sb = new StringBundler(4);
 
-			sb.append("delete from MBMessage where threadId in (select ");
+			sb.append("delete from MBDiscussion where threadId in (select ");
 			sb.append("threadId from MBThread where categoryId = ");
 			sb.append(MBCategoryConstants.DISCUSSION_CATEGORY_ID);
 			sb.append(" and messageCount = 1)");
@@ -58,7 +58,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 
 			sb = new StringBundler(4);
 
-			sb.append("delete from MBDiscussion where threadId in (select ");
+			sb.append("delete from MBMessage where threadId in (select ");
 			sb.append("threadId from MBThread where categoryId = ");
 			sb.append(MBCategoryConstants.DISCUSSION_CATEGORY_ID);
 			sb.append(" and messageCount = 1)");
