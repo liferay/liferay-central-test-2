@@ -249,7 +249,7 @@ AUI.add(
 						if (node.get('checked')) {
 							instance._updateCheckedNodes(
 								{
-									node: node, 
+									node: node,
 									checked: true,
 									forceChildrenState: true
 								}
@@ -346,7 +346,7 @@ AUI.add(
 						var children = node.get('children');
 
 						if (children.length) {
-							var childrenChecked = (force) ? undefined : checked;
+							var childrenChecked = (forceChildrenState) ? undefined : checked;
 
 							A.each(
 								children,
@@ -354,7 +354,8 @@ AUI.add(
 									instance._updateCheckedNodes(
 										{
 											node: child,
-											checked: childrenChecked
+											checked: childrenChecked,
+											forceChildrenState: forceChildrenState
 										}
 									);
 								}
