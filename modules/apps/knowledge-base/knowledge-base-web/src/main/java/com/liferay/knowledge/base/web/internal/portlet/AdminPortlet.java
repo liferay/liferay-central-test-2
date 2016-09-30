@@ -250,6 +250,8 @@ public class AdminPortlet extends BaseKBPortlet {
 
 			KBArticle kbArticle = null;
 
+			String cmd = ParamUtil.getString(renderRequest, Constants.CMD);
+
 			long kbArticleClassNameId = PortalUtil.getClassNameId(
 				KBArticleConstants.getClassName());
 
@@ -259,8 +261,6 @@ public class AdminPortlet extends BaseKBPortlet {
 			long resourcePrimKey = ParamUtil.getLong(
 				renderRequest, "resourcePrimKey");
 			int status = WorkflowConstants.STATUS_ANY;
-
-			String cmd = ParamUtil.getString(renderRequest, Constants.CMD);
 
 			if (Validator.isNotNull(cmd) && cmd.equals("compareVersions")) {
 				double sourceVersion = ParamUtil.getDouble(
