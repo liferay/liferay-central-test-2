@@ -194,6 +194,8 @@ CommentSectionDisplayContext commentSectionDisplayContext = CommentDisplayContex
 		loginURL.setParameter("mvcRenderCommandName", "/login/login");
 		loginURL.setPortletMode(PortletMode.VIEW);
 		loginURL.setWindowState(LiferayWindowState.POP_UP);
+
+		String messageId = ParamUtil.getString(request, "messageId");
 		%>
 
 		<aui:script>
@@ -449,6 +451,10 @@ CommentSectionDisplayContext commentSectionDisplayContext = CommentDisplayContex
 
 				editorInstance.dispose();
 			}
+
+			<c:if test="<%= Validator.isNotNull(messageId) %>">
+				<%= randomNamespace %>scrollIntoView(<%= messageId %>);
+			</c:if>
 		</aui:script>
 
 		<aui:script sandbox="<%= true %>">
