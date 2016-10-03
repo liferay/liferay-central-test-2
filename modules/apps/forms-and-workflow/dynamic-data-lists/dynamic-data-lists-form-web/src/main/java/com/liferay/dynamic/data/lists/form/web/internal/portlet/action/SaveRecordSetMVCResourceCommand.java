@@ -74,10 +74,10 @@ public class SaveRecordSetMVCResourceCommand extends BaseMVCResourceCommand {
 			response.put("error", t.getMessage());
 		}
 
-		JSONSerializer serializer = jsonFactory.createJSONSerializer();
+		JSONSerializer jsonSerializer = jsonFactory.createJSONSerializer();
 
 		PortletResponseUtil.write(
-			resourceResponse, serializer.serializeDeep(response));
+			resourceResponse, jsonSerializer.serializeDeep(response));
 	}
 
 	protected DDLRecordSet saveRecordSetInTransaction(
