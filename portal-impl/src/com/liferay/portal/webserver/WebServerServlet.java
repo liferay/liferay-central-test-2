@@ -235,10 +235,8 @@ public class WebServerServlet extends HttpServlet {
 		try {
 			user = _getUser(request);
 
-			long userCompanyId = user.getCompanyId();
-
 			if (_processCompanyInactiveRequest(
-					request, response, userCompanyId)) {
+					request, response, user.getCompanyId())) {
 
 				return;
 			}
@@ -300,11 +298,9 @@ public class WebServerServlet extends HttpServlet {
 
 					Image image = getImage(request, true);
 
-					long imageCompanyId = image.getCompanyId();
-
-					if ((imageCompanyId != userCompanyId) &&
+					if ((image.getCompanyId() != user.getCompanyId()) &&
 						_processCompanyInactiveRequest(
-							request, response, imageCompanyId)) {
+							request, response, image.getCompanyId())) {
 
 						return;
 					}
@@ -904,10 +900,8 @@ public class WebServerServlet extends HttpServlet {
 			throw new NoSuchFileEntryException();
 		}
 
-		long fileEntryCompanyId = fileEntry.getCompanyId();
-
 		if (_processCompanyInactiveRequest(
-				request, response, fileEntryCompanyId)) {
+				request, response, fileEntry.getCompanyId())) {
 
 			return;
 		}
@@ -1215,10 +1209,8 @@ public class WebServerServlet extends HttpServlet {
 			return;
 		}
 
-		long fileEntryCompanyId = fileEntry.getCompanyId();
-
 		if (_processCompanyInactiveRequest(
-				request, response, fileEntryCompanyId)) {
+				request, response, fileEntry.getCompanyId())) {
 
 			return;
 		}
