@@ -611,7 +611,7 @@ AUI.add(
 							var localizationMap = item.localizationMap;
 
 							if (localizationMap[locale]) {
-								normalized[item.value] = localizationMap[locale].label
+								normalized[item.value] = localizationMap[locale].label;
 							}
 						}
 					);
