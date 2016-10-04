@@ -277,7 +277,7 @@ public class LayoutExportController implements ExportController {
 		StagedModelDataHandlerUtil.exportStagedModel(
 			portletDataContext, stagedGroup);
 
-		// Export other things
+		// Export other models
 
 		_portletExportController.exportAssetLinks(portletDataContext);
 		_portletExportController.exportExpandoTables(portletDataContext);
