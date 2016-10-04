@@ -51,10 +51,6 @@ AUI.add(
 				return 'change';
 			},
 
-			getCustomChangedEventName: function() {
-				return null;
-			},
-
 			_afterEventsRender: function() {
 				var instance = this;
 
@@ -77,72 +73,39 @@ AUI.add(
 				instance._bindDefaultEvents();
 			},
 
-			_bindCustomChangedEvents: function() {
-				var instance = this;
-
-				var event = instance.getCustomChangedEventName();
-
-				if (!event) {
-					return;
-				}
-
-				instance._eventHandlers.push(
-					instance.after(event, A.bind(instance._onCustomValueChanged, instance))
-				);
-			},
-
 			_bindDefaultEvents: function() {
 				var instance = this;
 
 				instance.bindInputEvent('blur', instance._onInputBlur, true);
 				instance.bindInputEvent('focus', instance._onInputFocus);
 				instance.bindInputEvent(instance.getChangeEventName(), instance._onValueChange, true);
-				instance._bindCustomChangedEvents();
 			},
 
-			_onCustomValueChanged: function(event) {
+			_getEventPayload: function(originalEvent) {
 				var instance = this;
 
-				instance._onValueChange(event);
+				return {
+					field: instance,
+					originalEvent: originalEvent
+				};
 			},
 
 			_onInputBlur: function(event) {
 				var instance = this;
 
-				instance.fire(
-					'blur',
-					{
-						domEvent: event,
-						field: instance
-					}
-				);
+				instance.fire('blur', instance._getEventPayload(event));
 			},
 
 			_onInputFocus: function(event) {
 				var instance = this;
 
-				instance.fire(
-					'focus',
-					{
-						domEvent: event,
-						field: instance
-					}
-				);
+				instance.fire('focus', instance._getEventPayload(event));
 			},
 
 			_onValueChange: function(event) {
 				var instance = this;
 
-				if (instance.get('rendered')) {
-					instance.fire(
-						'valueChanged',
-						{
-							domEvent: event,
-							field: instance,
-							value: instance.getValue()
-						}
-					);
-				}
+				instance.set('value', instance.getValue());
 			}
 		};
 

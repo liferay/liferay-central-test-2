@@ -48,7 +48,9 @@ AUI.add(
 						var sortableList = instance.get('sortableList');
 
 						instance._eventHandlers.push(
-							instance.after('liferay-ddm-form-field-key-value:valueChanged', A.bind('_afterOptionValueChanged', instance)),
+							instance.after('liferay-ddm-form-field-key-value:destroy', instance._afterDestroyOption),
+							instance.after('liferay-ddm-form-field-key-value:render', instance._afterRenderOption),
+							instance.after('liferay-ddm-form-field-key-value:valueChange', instance._afterOptionValueChange),
 							sortableList.after('drag:end', A.bind('_afterSortableListDragEnd', instance)),
 							sortableList.after('drag:start', A.bind('_afterSortableListDragStart', instance))
 						);
@@ -111,10 +113,6 @@ AUI.add(
 						}
 
 						mainOption.set('key', '');
-					},
-
-					getCustomChangedEventName: function() {
-						return ['dragend', 'removeOption'];
 					},
 
 					getLastOption: function() {
@@ -190,8 +188,6 @@ AUI.add(
 						instance._reorderOptions(value, newIndex, oldIndex);
 
 						instance.set('value', value);
-
-						instance.fire('dragend');
 					},
 
 					processEvaluationContext: function(context) {
@@ -246,6 +242,14 @@ AUI.add(
 						);
 					},
 
+					_afterDestroyOption: function(event) {
+						var instance = this;
+
+						var option = event.target;
+
+						A.DD.DDM.getDrag(option.get('container')).destroy();
+					},
+
 					_afterErrorMessageChange: function(event) {
 						var instance = this;
 
@@ -254,14 +258,31 @@ AUI.add(
 						mainOption.set('errorMessage', event.newVal);
 					},
 
-					_afterOptionValueChanged: function() {
+					_afterOptionValueChange: function(event) {
 						var instance = this;
 
-						instance.evaluate();
+						var option = event.target;
+
+						var repetitions = option.getRepeatedSiblings();
+
+						if (option.get('repeatedIndex') === repetitions.length - 1) {
+							instance.addOption();
+						}
+
+						var value = instance.getValue();
+
+						if (value.length > 0 && instance.get('required')) {
+							instance.set('errorMessage', '');
+							instance.set('valid', true);
+						}
+
+						instance.set('value', value);
 					},
 
-					_afterRenderOption: function(option) {
+					_afterRenderOption: function(event) {
 						var instance = this;
+
+						var option = event.target;
 
 						instance._bindListEvents();
 						instance._renderOptionUI(option);
@@ -325,12 +346,7 @@ AUI.add(
 					_bindOptionUI: function(option) {
 						var instance = this;
 
-						option.after('render', A.bind('_afterRenderOption', instance, option));
-
 						option.bindContainerEvent('click', A.bind('_onOptionClickClose', instance, option), '.close');
-
-						option.on('destroy', A.bind('_onDestroyOption', instance, option));
-						option.on('valueChanged', A.bind('_onOptionValueChange', instance));
 					},
 
 					_canSortNode: function(event) {
@@ -388,12 +404,6 @@ AUI.add(
 						return container.one('.options');
 					},
 
-					_onDestroyOption: function(option) {
-						var instance = this;
-
-						A.DD.DDM.getDrag(option.get('container')).destroy();
-					},
-
 					_onFocusOption: function(event) {
 						event.target.scrollIntoView();
 					},
@@ -411,26 +421,7 @@ AUI.add(
 
 						option.remove();
 
-						instance.fire('removeOption');
-					},
-
-					_onOptionValueChange: function(event) {
-						var instance = this;
-
-						var option = event.target;
-
-						var repetitions = option.getRepeatedSiblings();
-
-						if (option.get('repeatedIndex') === repetitions.length - 1) {
-							instance.addOption();
-						}
-
-						var value = instance.getValue();
-
-						if (value.length > 0 && instance.get('required')) {
-							instance.set('errorMessage', '');
-							instance.set('valid', true);
-						}
+						instance.set('value', instance.getValue());
 					},
 
 					_renderOptions: function(optionsValues) {
