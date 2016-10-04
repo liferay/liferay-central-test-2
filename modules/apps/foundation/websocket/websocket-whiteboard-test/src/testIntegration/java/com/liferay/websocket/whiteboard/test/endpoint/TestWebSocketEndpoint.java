@@ -39,23 +39,6 @@ public class TestWebSocketEndpoint extends Endpoint {
 	@Override
 	public void onOpen(final Session session, EndpointConfig endpointConfig) {
 		session.addMessageHandler(
-			new MessageHandler.Whole<String>() {
-
-				@Override
-				public void onMessage(String text) {
-					try {
-						RemoteEndpoint.Basic basic = session.getBasicRemote();
-
-						basic.sendText(text);
-					}
-					catch (IOException ioe) {
-						throw new RuntimeException(ioe);
-					}
-				}
-
-			});
-
-		session.addMessageHandler(
 			new MessageHandler.Whole<ByteBuffer>() {
 
 				@Override
@@ -64,6 +47,22 @@ public class TestWebSocketEndpoint extends Endpoint {
 						RemoteEndpoint.Basic basic = session.getBasicRemote();
 
 						basic.sendBinary(byteBuffer);
+					}
+					catch (IOException ioe) {
+						throw new RuntimeException(ioe);
+					}
+				}
+
+			});
+		session.addMessageHandler(
+			new MessageHandler.Whole<String>() {
+
+				@Override
+				public void onMessage(String text) {
+					try {
+						RemoteEndpoint.Basic basic = session.getBasicRemote();
+
+						basic.sendText(text);
 					}
 					catch (IOException ioe) {
 						throw new RuntimeException(ioe);
