@@ -236,10 +236,10 @@ public class MainServlet extends ActionServlet {
 			if (!StringPool.DEFAULT_CHARSET_NAME.startsWith("UTF-")) {
 				StringBundler sb = new StringBundler(4);
 
-				sb.append("Default JVM charset \"");
+				sb.append("The default JVM character set \"");
 				sb.append(StringPool.DEFAULT_CHARSET_NAME);
-				sb.append("\" is not UTF, please review JVM file.encoding ");
-				sb.append("property");
+				sb.append("\" is not UTF. Please review the JVM property ");
+				sb.append("\"file.encoding\".");
 
 				_log.warn(sb.toString());
 			}
@@ -251,10 +251,10 @@ public class MainServlet extends ActionServlet {
 
 				StringBundler sb = new StringBundler(4);
 
-				sb.append("Default JVM timezone \"");
+				sb.append("The default JVM time zone \"");
 				sb.append(userTimeZone);
-				sb.append("\" is not UTC or GMT, please review JVM ");
-				sb.append("user.timezone property");
+				sb.append("\" is not UTC or GMT. Please review the JVM ");
+				sb.append("property \"user.timezone\".");
 
 				_log.warn(sb.toString());
 			}
