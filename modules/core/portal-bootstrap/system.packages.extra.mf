@@ -2343,7 +2343,7 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  rtal.dao.jdbc.spring";version="1.0.0",com.liferay.portal.dao.orm.comm
  on;uses:="com.liferay.portal.kernel.dao.orm,com.liferay.portal.kernel
  .security.pacl";version="1.0.0",com.liferay.portal.dao.orm.hibernate;
- version="1.0.2";uses:="com.liferay.portal.kernel.dao.orm,com.liferay.
+ version="1.0.3";uses:="com.liferay.portal.kernel.dao.orm,com.liferay.
  portal.kernel.security.pacl,com.liferay.portal.kernel.util,org.hibern
  ate,org.hibernate.criterion,org.hibernate.dialect,org.hibernate.engin
  e,org.hibernate.property,org.hibernate.type,org.hibernate.usertype",c
