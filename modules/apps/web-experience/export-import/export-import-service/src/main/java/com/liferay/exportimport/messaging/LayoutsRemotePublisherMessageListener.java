@@ -141,11 +141,27 @@ public class LayoutsRemotePublisherMessageListener
 	protected void setDestination(Destination destination) {
 	}
 
+	/**
+	 * @deprecated As of 3.2.0
+	 */
+	@Deprecated
+	protected void setExportImportConfigurationLocalService(
+		ExportImportConfigurationLocalService
+			exportImportConfigurationLocalService) {
+	}
+
 	@Reference(
 		target = "(&(release.bundle.symbolic.name=com.liferay.exportimport.service)(release.schema.version=1.0.0))",
 		unbind = "-"
 	)
 	protected void setRelease(Release release) {
+	}
+
+	/**
+	 * @deprecated As of 3.2.0
+	 */
+	@Deprecated
+	protected void setUserLocalService(UserLocalService userLocalService) {
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
