@@ -52,7 +52,7 @@ public class TestWebSocketEndpointTest {
 		SynchronousQueue<ByteBuffer> synchronousQueue =
 			new SynchronousQueue<>();
 
-		BinaryWebSocketClient testWebSocketClient = new BinaryWebSocketClient(
+		BinaryWebSocketClient binaryWebSocketClient = new BinaryWebSocketClient(
 			synchronousQueue);
 
 		StringBuilder sb = new StringBuilder();
@@ -65,9 +65,9 @@ public class TestWebSocketEndpointTest {
 
 		URI uri = new URI(sb.toString());
 
-		webSocketContainer.connectToServer(testWebSocketClient, uri);
+		webSocketContainer.connectToServer(binaryWebSocketClient, uri);
 
-		testWebSocketClient.sendMessage(ByteBuffer.wrap("echo".getBytes()));
+		binaryWebSocketClient.sendMessage(ByteBuffer.wrap("echo".getBytes()));
 
 		ByteBuffer byteBuffer = synchronousQueue.poll(1, TimeUnit.HOURS);
 
@@ -83,7 +83,7 @@ public class TestWebSocketEndpointTest {
 
 		SynchronousQueue<String> synchronousQueue = new SynchronousQueue<>();
 
-		TextWebSocketClient testWebSocketClient = new TextWebSocketClient(
+		TextWebSocketClient textWebSocketClient = new TextWebSocketClient(
 			synchronousQueue);
 
 		StringBuilder sb = new StringBuilder();
@@ -96,9 +96,9 @@ public class TestWebSocketEndpointTest {
 
 		URI uri = new URI(sb.toString());
 
-		webSocketContainer.connectToServer(testWebSocketClient, uri);
+		webSocketContainer.connectToServer(textWebSocketClient, uri);
 
-		testWebSocketClient.sendMessage("echo");
+		textWebSocketClient.sendMessage("echo");
 
 		Assert.assertEquals("echo", synchronousQueue.poll(1, TimeUnit.HOURS));
 	}
