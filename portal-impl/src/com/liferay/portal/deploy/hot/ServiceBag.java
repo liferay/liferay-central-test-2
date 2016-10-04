@@ -42,31 +42,31 @@ public class ServiceBag<V> {
 		if (!(previousService instanceof ServiceWrapper)) {
 			Class<?> previousServiceClass = previousService.getClass();
 
-			AggregateClassLoader previousServiceClassLoader =
+			AggregateClassLoader previousServiceAggregateClassLoader =
 				new AggregateClassLoader(previousServiceClass.getClassLoader());
 
-			previousServiceClassLoader.addClassLoader(
+			previousServiceAggregateClassLoader.addClassLoader(
 				IdentifiableOSGiService.class.getClassLoader());
 
 			previousService = ProxyUtil.newProxyInstance(
-				previousServiceClassLoader,
+				previousServiceAggregateClassLoader,
 				new Class<?>[] {
 					serviceTypeClass, IdentifiableOSGiService.class
 				},
 				new ClassLoaderBeanHandler(
-					previousService, previousServiceClassLoader));
+					previousService, previousServiceAggregateClassLoader));
 
 			serviceWrapper.setWrappedService((V)previousService);
 		}
 
-		AggregateClassLoader newServiceClassLoader = new AggregateClassLoader(
-			serviceTypeClass.getClassLoader());
+		AggregateClassLoader newServiceAggregateClassLoader =
+			new AggregateClassLoader(serviceTypeClass.getClassLoader());
 
-		newServiceClassLoader.addClassLoader(
+		newServiceAggregateClassLoader.addClassLoader(
 			IdentifiableOSGiService.class.getClassLoader());
 
 		Object nextTarget = ProxyUtil.newProxyInstance(
-			newServiceClassLoader,
+			newServiceAggregateClassLoader,
 			new Class<?>[] {
 				serviceTypeClass, ServiceWrapper.class,
 				IdentifiableOSGiService.class
