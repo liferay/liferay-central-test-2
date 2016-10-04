@@ -473,8 +473,6 @@ public class ModulesStructureTest {
 
 		// LPS-67772
 
-		Path dirNamePath = dirPath.getFileName();
-
 		Path gitAttributesPath = dirPath.resolve(".gitattributes");
 
 		Assert.assertTrue(
