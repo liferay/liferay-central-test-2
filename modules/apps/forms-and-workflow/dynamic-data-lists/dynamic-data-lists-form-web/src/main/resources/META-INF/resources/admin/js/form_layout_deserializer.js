@@ -87,6 +87,7 @@ AUI.add(
 						fieldDefinition.parent = builder;
 						fieldDefinition.portletNamespace = builder.get('portletNamespace');
 						fieldDefinition.readOnly = true;
+						fieldDefinition.locale = themeDisplay.getDefaultLanguageId();
 
 						var fieldClass = FormBuilderUtil.getFieldClass(fieldDefinition.type);
 
