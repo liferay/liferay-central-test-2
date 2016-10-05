@@ -190,7 +190,7 @@ public abstract class BaseBuild implements Build {
 	}
 
 	@Override
-	public Map<String, String> getStartProperties() {
+	public Map<String, String> getStartPropertiesMap() {
 		return getTempMap("start.properties");
 	}
 
@@ -314,7 +314,7 @@ public abstract class BaseBuild implements Build {
 	}
 
 	@Override
-	public Map<String, String> getStopProperties() {
+	public Map<String, String> getStopPropertiesMap() {
 		return getTempMap("stop.properties");
 	}
 
@@ -671,30 +671,7 @@ public abstract class BaseBuild implements Build {
 		return sb.toString();
 	}
 
-	protected Map<String, String> getParametersFromBuildJSONObject(
-			JSONObject buildJSONObject)
-		throws Exception {
-
-		JSONArray actionsJSONArray = buildJSONObject.getJSONArray("actions");
-
-		if (actionsJSONArray.length() == 0) {
-			return new HashMap<>();
-		}
-
-		JSONObject jsonObject = actionsJSONArray.getJSONObject(0);
-
-		if (jsonObject.has("parameters")) {
-			JSONArray parametersJSONArray = jsonObject.getJSONArray(
-				"parameters");
-
-			return getParametersFromJSONArray(parametersJSONArray);
-		}
-
-		return new HashMap<>();
-	}
-
-	protected Map<String, String> getParametersFromJSONArray(
-			JSONArray jsonArray)
+	protected Map<String, String> getParameters(JSONArray jsonArray)
 		throws Exception {
 
 		Map<String, String> parameters = new HashMap<>(jsonArray.length());
@@ -715,6 +692,27 @@ public abstract class BaseBuild implements Build {
 		return parameters;
 	}
 
+	protected Map<String, String> getParameters(JSONObject buildJSONObject)
+		throws Exception {
+
+		JSONArray actionsJSONArray = buildJSONObject.getJSONArray("actions");
+
+		if (actionsJSONArray.length() == 0) {
+			return new HashMap<>();
+		}
+
+		JSONObject jsonObject = actionsJSONArray.getJSONObject(0);
+
+		if (jsonObject.has("parameters")) {
+			JSONArray parametersJSONArray = jsonObject.getJSONArray(
+				"parameters");
+
+			return getParameters(parametersJSONArray);
+		}
+
+		return new HashMap<>();
+	}
+
 	protected JSONObject getQueueItemJSONObject() throws Exception {
 		JSONArray queueItemsJSONArray = getQueueItemsJSONArray();
 
@@ -731,9 +729,7 @@ public abstract class BaseBuild implements Build {
 				continue;
 			}
 
-			if (_parameters.equals(
-					getParametersFromBuildJSONObject(queueItemJSONObject))) {
-
+			if (_parameters.equals(getParameters(queueItemJSONObject))) {
 				return queueItemJSONObject;
 			}
 		}
@@ -759,8 +755,7 @@ public abstract class BaseBuild implements Build {
 
 			Map<String, String> parameters = getParameters();
 
-			if (parameters.equals(
-					getParametersFromBuildJSONObject(buildJSONObject)) &&
+			if (parameters.equals(getParameters(buildJSONObject)) &&
 				!badBuildNumbers.contains(buildJSONObject.getInt("number"))) {
 
 				return buildJSONObject;
@@ -812,28 +807,29 @@ public abstract class BaseBuild implements Build {
 			JSONObject tempMapJSONObject =
 				JenkinsResultsParserUtil.toJSONObject(sb.toString(), false);
 
-			if (tempMapJSONObject.has("properties")) {
-				JSONArray propertiesJSONArray = tempMapJSONObject.getJSONArray(
-					"properties");
-
-				Map<String, String> tempMap = new HashMap<>(
-					propertiesJSONArray.length());
-
-				for (int i = 0; i < propertiesJSONArray.length(); i++) {
-					JSONObject property = propertiesJSONArray.getJSONObject(i);
-
-					String key = property.getString("name");
-					String value = property.optString("value");
-
-					if ((value != null) && !value.isEmpty()) {
-						tempMap.put(key, value);
-					}
-				}
-
-				return tempMap;
+			if (!tempMapJSONObject.has("properties")) {
+				return Collections.emptyMap();
 			}
 
-			return Collections.emptyMap();
+			JSONArray propertiesJSONArray = tempMapJSONObject.getJSONArray(
+				"properties");
+
+			Map<String, String> tempMap = new HashMap<>(
+				propertiesJSONArray.length());
+
+			for (int i = 0; i < propertiesJSONArray.length(); i++) {
+				JSONObject propertyJSONObject =
+					propertiesJSONArray.getJSONObject(i);
+
+				String key = propertyJSONObject.getString("name");
+				String value = propertyJSONObject.optString("value");
+
+				if ((value != null) && !value.isEmpty()) {
+					tempMap.put(key, value);
+				}
+			}
+
+			return tempMap;
 		}
 		catch (Exception e) {
 			throw new RuntimeException(e);

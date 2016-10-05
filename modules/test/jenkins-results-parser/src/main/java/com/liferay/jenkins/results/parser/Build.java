@@ -50,7 +50,7 @@ public interface Build {
 
 	public String getResult();
 
-	public Map<String, String> getStartProperties();
+	public Map<String, String> getStartPropertiesMap();
 
 	public String getStatus();
 
@@ -62,7 +62,7 @@ public interface Build {
 
 	public String getStatusSummary();
 
-	public Map<String, String> getStopProperties();
+	public Map<String, String> getStopPropertiesMap();
 
 	public boolean hasBuildURL(String buildURL);
 
