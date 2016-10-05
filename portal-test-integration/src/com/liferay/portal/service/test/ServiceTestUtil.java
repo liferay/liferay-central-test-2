@@ -380,7 +380,7 @@ public class ServiceTestUtil {
 
 				throw new IllegalStateException(
 					"Destination " + oldDestination.getName() +
-						" shutdown waiting timeout!");
+						" shutdown timeout");
 			}
 		}
 		catch (InterruptedException ie) {
