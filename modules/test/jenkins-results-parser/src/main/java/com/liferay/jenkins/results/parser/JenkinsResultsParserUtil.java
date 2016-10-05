@@ -340,13 +340,11 @@ public class JenkinsResultsParserUtil {
 	public static Properties getBuildProperties() throws Exception {
 		Properties properties = new Properties();
 
-		properties.load(
-			new StringReader(
-				toString(
-					getLocalURL(
-						"http://mirrors-no-cache.lax.liferay.com/github.com" +
-							"/liferay/liferay-jenkins-ee/commands" +
-								"/build.properties"))));
+		String url =
+			"http://mirrors-no-cache.lax.liferay.com/github.com/liferay" +
+				"/liferay-jenkins-ee/commands/build.properties";
+
+		properties.load(new StringReader(toString(getLocalURL(url))));
 
 		return properties;
 	}
