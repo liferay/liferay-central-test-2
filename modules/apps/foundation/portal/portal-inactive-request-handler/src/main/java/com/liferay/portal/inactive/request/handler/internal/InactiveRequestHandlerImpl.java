@@ -95,11 +95,11 @@ public class InactiveRequestHandlerImpl implements InactiveRequestHandler {
 
 		Bundle bundle = bundleContext.getBundle();
 
-		URL url = bundle.getResource(_INACTIVE_HTML_FILE);
+		URL url = bundle.getResource(_INACTIVE_HTML_FILE_NAME);
 
 		if (url == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Unable to load: " + _INACTIVE_HTML_FILE);
+				_log.warn("Unable to load " + _INACTIVE_HTML_FILE_NAME);
 			}
 
 			return;
@@ -110,7 +110,7 @@ public class InactiveRequestHandlerImpl implements InactiveRequestHandler {
 		}
 		catch (IOException ioe) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Unable to read " + _INACTIVE_HTML_FILE, ioe);
+				_log.warn("Unable to read " + _INACTIVE_HTML_FILE_NAME, ioe);
 			}
 		}
 	}
@@ -126,7 +126,7 @@ public class InactiveRequestHandlerImpl implements InactiveRequestHandler {
 			inactiveRequestHandlerConfiguration.showInactiveRequestMessage();
 	}
 
-	private static final String _INACTIVE_HTML_FILE =
+	private static final String _INACTIVE_HTML_FILE_NAME =
 		"com/liferay/portal/dependencies/inactive.html";
 
 	private static final Log _log = LogFactoryUtil.getLog(
