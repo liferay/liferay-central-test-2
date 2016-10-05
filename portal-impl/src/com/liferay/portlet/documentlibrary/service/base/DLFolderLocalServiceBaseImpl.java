@@ -340,6 +340,10 @@ public abstract class DLFolderLocalServiceBaseImpl extends BaseLocalServiceImpl
 							"modifiedDate");
 
 					if (modifiedDateCriterion != null) {
+						Conjunction conjunction = RestrictionsFactoryUtil.conjunction();
+
+						conjunction.add(modifiedDateCriterion);
+
 						Disjunction disjunction = RestrictionsFactoryUtil.disjunction();
 
 						disjunction.add(RestrictionsFactoryUtil.gtProperty(
@@ -350,9 +354,6 @@ public abstract class DLFolderLocalServiceBaseImpl extends BaseLocalServiceImpl
 
 						disjunction.add(lastPublishDateProperty.isNull());
 
-						Conjunction conjunction = RestrictionsFactoryUtil.conjunction();
-
-						conjunction.add(modifiedDateCriterion);
 						conjunction.add(disjunction);
 
 						modifiedDateCriterion = conjunction;

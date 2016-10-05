@@ -333,6 +333,10 @@ public abstract class DLFileShortcutLocalServiceBaseImpl
 							"modifiedDate");
 
 					if (modifiedDateCriterion != null) {
+						Conjunction conjunction = RestrictionsFactoryUtil.conjunction();
+
+						conjunction.add(modifiedDateCriterion);
+
 						Disjunction disjunction = RestrictionsFactoryUtil.disjunction();
 
 						disjunction.add(RestrictionsFactoryUtil.gtProperty(
@@ -343,9 +347,6 @@ public abstract class DLFileShortcutLocalServiceBaseImpl
 
 						disjunction.add(lastPublishDateProperty.isNull());
 
-						Conjunction conjunction = RestrictionsFactoryUtil.conjunction();
-
-						conjunction.add(modifiedDateCriterion);
 						conjunction.add(disjunction);
 
 						modifiedDateCriterion = conjunction;
