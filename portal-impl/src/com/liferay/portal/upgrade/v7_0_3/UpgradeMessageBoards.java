@@ -39,7 +39,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 		try (LoggingTimer loggingTimer = new LoggingTimer()) {
 			runSQL("create table " + tempTableName + " (threadId LONG)");
 
-			StringBundler sb = new StringBundler(7);
+			StringBundler sb = new StringBundler(8);
 
 			sb.append("insert into ");
 			sb.append(tempTableName);
