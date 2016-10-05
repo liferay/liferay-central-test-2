@@ -492,6 +492,10 @@ import ${apiPackagePath}.service.${entity.name}${sessionTypeName}Service;
 
 									<#if entity.isStagedGroupedModel()>
 										if (modifiedDateCriterion != null) {
+											Conjunction conjunction = RestrictionsFactoryUtil.conjunction();
+
+											conjunction.add(modifiedDateCriterion);
+
 											Disjunction disjunction = RestrictionsFactoryUtil.disjunction();
 
 											disjunction.add(RestrictionsFactoryUtil.gtProperty("modifiedDate", "lastPublishDate"));
@@ -500,9 +504,6 @@ import ${apiPackagePath}.service.${entity.name}${sessionTypeName}Service;
 
 											disjunction.add(lastPublishDateProperty.isNull());
 
-											Conjunction conjunction = RestrictionsFactoryUtil.conjunction();
-
-											conjunction.add(modifiedDateCriterion);
 											conjunction.add(disjunction);
 
 											modifiedDateCriterion = conjunction;
