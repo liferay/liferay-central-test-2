@@ -57,14 +57,14 @@ public class SSOUtilTest {
 			PortletPreferences portletPreferences =
 				PrefsPropsUtil.getPreferences(entry.getKey());
 
-			String disabledString = entry.getValue();
+			String disabled = entry.getValue();
 
-			if (disabledString == null) {
+			if (disabled == null) {
 				portletPreferences.reset(PropsKeys.LOGIN_DIALOG_DISABLED);
 			}
 			else {
 				portletPreferences.setValue(
-					PropsKeys.LOGIN_DIALOG_DISABLED, disabledString);
+					PropsKeys.LOGIN_DIALOG_DISABLED, disabled);
 			}
 
 			portletPreferences.store();
