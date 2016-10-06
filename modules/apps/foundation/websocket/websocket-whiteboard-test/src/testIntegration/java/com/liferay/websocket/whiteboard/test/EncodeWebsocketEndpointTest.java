@@ -65,10 +65,10 @@ public class EncodeWebsocketEndpointTest {
 
 		encodeWebSocketClient.sendMessage(new Example(2, "echo"));
 
-		Example data = synchronousQueue.poll(1, TimeUnit.HOURS);
+		Example example = synchronousQueue.poll(1, TimeUnit.HOURS);
 
-		Assert.assertEquals("echo", data.getData());
-		Assert.assertEquals(2, data.getNumber());
+		Assert.assertEquals("echo", example.getData());
+		Assert.assertEquals(2, example.getNumber());
 	}
 
 	@ArquillianResource
