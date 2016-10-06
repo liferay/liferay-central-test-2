@@ -20,7 +20,7 @@ package com.liferay.portal.template.soy.utils;
 public class SoyHTMLContextValue implements CharSequence {
 
 	public SoyHTMLContextValue(String value) {
-		this._value = value;
+		_value = value;
 	}
 
 	@Override
