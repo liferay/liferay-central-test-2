@@ -1,7 +1,7 @@
 # JS Transpiler Gradle Plugin
 
-The JS Transpiler Gradle plugin allows you to run [`metal-cli`](https://github.com/metal/metal-cli)
-in order to build [Metal.js](http://metaljs.com/) code, compile Soy files and
+The JS Transpiler Gradle plugin lets you run [`metal-cli`](https://github.com/metal/metal-cli)
+in order to build [Metal.js](http://metaljs.com/) code, compile Soy files, and
 transpile ES6 to ES5.
 
 ## Usage
@@ -37,9 +37,9 @@ Name | Depends On | Type | Description
 `transpileJS` | `downloadMetalCli`, `npmInstall`, `processResources` | [`TranspileJSTask`](#transpilejstask) | Builds Metal.js code.
 
 By default, the `downloadMetalCli` task downloads the version 1.3.1 of
-`metal-cli`. However, if the project's `package.json` file already lists the
+`metal-cli`. If the project's `package.json` file, however, already lists the
 `metal-cli` package in its `dependencies` or `devDependencies`, the
-`downloadMetalCli` task will be disabled.
+`downloadMetalCli` task is disabled.
 
 The `transpileJS` task is automatically configured with sensible defaults,
 depending on whether the [`java`](https://docs.gradle.org/current/userguide/java_plugin.html)
@@ -47,7 +47,7 @@ plugin is applied:
 
 Property Name | Default Value
 ------------- | -------------
-[`sourceDir`](#sourcedir) | The directory `META-INF/resources` in the first `resources` directory of the `main` source set (by default: `src/main/resources/META-INF/resources`)
+[`sourceDir`](#sourcedir) | The directory `META-INF/resources` in the first `resources` directory of the `main` source set (by default, `src/main/resources/META-INF/resources`).
 `workingDir` | `"${sourceSets.main.output.resourcesDir}/META-INF/resources"`
 
 The plugin also adds the following dependencies to tasks defined by the `java`
@@ -60,14 +60,14 @@ Name | Depends On
 ### TranspileJSTask
 
 Tasks of type `TranspileJSTask` extend `ExecuteNodeScriptTask`, so all its
-properties and methods, such as `args`, `inheritProxy` and `workingDir` are
+properties and methods, such as `args`, `inheritProxy`, and `workingDir`, are
 available. They also have the following properties set by default:
 
 Property Name | Default Value
 ------------- | -------------
 `scriptFile` | `"${downloadMetalCli.moduleDir}/index.js"`
 
-Purpose of these tasks is to run the `build` command of `metal-cli` in order to
+The purpose of this task is to run the `build` command of `metal-cli` to
 build Metal.js code from [`sourceDir`](#sourceDir) into the `workingDir`
 directory.
 
@@ -75,13 +75,13 @@ directory.
 
 Property Name | Type | Default Value | Description
 ------------- | ---- | ------------- | -----------
-`bundleFileName` | `String` | `null` | The name of the final bundle file, for formats (like "globals") that create one. It sets the `--bundleFileName` argument.
-`globalName` | `String` | `null` | Only used by the "globals" format build. The name of the global variable that will hold exported modules. It sets the `--globalName` argument.
-`moduleName` | `String` | `null` | Only used by the "amd" format build. The name of the project that is being compiled. All built modules will be stored in a folder with this name. It sets the `--moduleName` argument.
-`modules` | `String` | `"amd"` | The format(s) that the source files will be built to. It sets the `--format` argument.
+`bundleFileName` | `String` | `null` | The name of the final bundle file for formats (e.g., *globals*) that create one. It sets the `--bundleFileName` argument.
+`globalName` | `String` | `null` | The name of the global variable that holds exported modules. It sets the `--globalName` argument. This is only used by the *globals* format build.
+`moduleName` | `String` | `null` | The name of the project that is being compiled. All built modules are stored in a folder with this name. It sets the `--moduleName` argument. This is only used by the *amd* format build.
+`modules` | `String` | `"amd"` | The format(s) that the source files are built to. It sets the `--format` argument.
 <a name="sourcedir"></a>`sourceDir` | `File` | `null` | The directory that contains the files to build.
-`sourceMaps` | `SourceMaps` | `enabled` | Whether to generate source map files. Available values: `disabled`, `enabled`, `enabled_inline`
-`soyDependencies` | `Set<String>` | `["${npmInstall.workingDir}/node_modules/metal*/src/**/*.soy"]` | The path GLOBs of Soy files that the main source files depend on, but that should not be compiled. It sets the `--soyDeps` argument.
+`sourceMaps` | `SourceMaps` | `enabled` | Whether to generate source map files. Available values include `disabled`, `enabled`, and `enabled_inline`.
+`soyDependencies` | `Set<String>` | `["${npmInstall.workingDir}/`<br />`node_modules/metal*/src/**/*.soy"]` | The path GLOBs of Soy files that the main source files depend on, but that should not be compiled. It sets the `--soyDeps` argument.
 `soySkipMetalGeneration` | `boolean` | `false` | Whether to just compile Soy files, without adding Metal.js generated code, like the `component` class. It sets the `--soySkipMetalGeneration` argument.
 `soySrcIncludes` | `Set<String>` | `[]` | The path GLOBs of the Soy files to compile. It sets the `--soySrc` argument.
 `srcIncludes` | `Set<String>` | `[]` | The path GLOBs of the JS files to compile. It sets the `--src` argument.
