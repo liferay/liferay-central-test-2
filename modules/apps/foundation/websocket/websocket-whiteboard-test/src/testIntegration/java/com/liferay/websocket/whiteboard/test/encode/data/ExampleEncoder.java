@@ -33,7 +33,7 @@ public class ExampleEncoder implements Encoder.Text<Example> {
 	}
 
 	@Override
-	public String encode(Example data) throws EncodeException {
+	public String encode(Example example) throws EncodeException {
 		try {
 			JAXBContext jaxbContext = JAXBContext.newInstance(Example.class);
 
@@ -41,7 +41,7 @@ public class ExampleEncoder implements Encoder.Text<Example> {
 
 			StringWriter stringWriter = new StringWriter();
 
-			marshaller.marshal(data, stringWriter);
+			marshaller.marshal(example, stringWriter);
 
 			return stringWriter.toString();
 		}

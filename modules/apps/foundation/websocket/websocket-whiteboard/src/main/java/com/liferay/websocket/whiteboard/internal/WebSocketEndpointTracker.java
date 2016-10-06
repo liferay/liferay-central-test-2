@@ -60,11 +60,9 @@ public class WebSocketEndpointTracker
 		List<Class<? extends Decoder>> decoders =
 			(List<Class<? extends Decoder>>)serviceReference.getProperty(
 				"org.osgi.http.websocket.endpoint.decoders");
-
 		List<Class<? extends Encoder>> encoders =
 			(List<Class<? extends Encoder>>)serviceReference.getProperty(
 				"org.osgi.http.websocket.endpoint.encoders");
-
 		List<String> subprotocol = (List<String>)serviceReference.getProperty(
 			"org.osgi.http.websocket.endpoint.subprotocol");
 

@@ -34,9 +34,9 @@ public class ExampleDecoder implements Decoder.Text<Example> {
 
 			Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 
-			StringReader reader = new StringReader(message);
+			StringReader stringReader = new StringReader(message);
 
-			return (Example)unmarshaller.unmarshal(reader);
+			return (Example)unmarshaller.unmarshal(stringReader);
 		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
