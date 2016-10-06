@@ -1,6 +1,6 @@
 # Node Gradle Plugin
 
-The Node Gradle plugin allows you to run [Node.js](https://nodejs.org/) and
+The Node Gradle plugin lets you run [Node.js](https://nodejs.org/) and
 [NPM](https://www.npmjs.com/) as part of your build.
 
 ## Usage
@@ -30,8 +30,8 @@ named `node`:
 
 Property Name | Type | Default Value | Description
 ------------- | ---- | ------------- | -----------
-<a name="download"></a>`download` | `boolean` | `true` | Whether to download and use a local and isolated Node.js distribution instead of the one potentially installed in the system.
-`global` | `boolean` | `false` | Whether to use a single Node.js installation for the whole multi-project build. This reduces the time required to unpack the Node.js distribution and to download NPM packages thanks to a shared packages cache. If `download` is `false`, this property has no effect.
+<a name="download"></a>`download` | `boolean` | `true` | Whether to download and use a local and isolated Node.js distribution instead of the one installed in the system.
+`global` | `boolean` | `false` | Whether to use a single Node.js installation for the whole multi-project build. This reduces the time required to unpack the Node.js distribution and the time required to download NPM packages thanks to a shared packages cache. If `download` is `false`, this property has no effect.
 <a name="nodedir"></a>`nodeDir` | `File` | <p>**If `global` is `true`:** `"${rootProject.buildDir}/node"`</p><p>**Otherwise:** `"${project.buildDir}/node"`</p> | The directory where the Node.js distribution is unpacked. If `download` is `false`, this property has no effect.
 `nodeExeUrl` | `String` | `"http://nodejs.org/dist/v${node.nodeVersion}/${arch}/node.exe"` | The URL of `node.exe` to download when on Windows. If `download` is `false`, this property has no effect.
 `nodeUrl` | `String` | `"http://nodejs.org/dist/v${node.nodeVersion}/node-v${node.nodeVersion}-${platform}-x${bitMode}.tar.gz"` | The URL of the Node.js distribution to download. If `download` is `false`, this property has no effect.
@@ -39,8 +39,8 @@ Property Name | Type | Default Value | Description
 `npmArgs` | `List<String>` | `[]` | The arguments added automatically to every task of type [`ExecuteNpmTask`](#executenpmtask).
 
 It is possible to override the default value of the `download` property by
-setting the `nodeDownload` project property, for example via command-line
-argument:
+setting the `nodeDownload` project property. For example, this can be done via
+command-line argument:
 
 ```bash
 ./gradlew -PnodeDownload=false npmInstall
@@ -68,7 +68,7 @@ Name | Depends On | Type | Description
 
 ### DownloadNodeTask
 
-The purpose of these task is to download and unpack a Node.js distribution.
+The purpose of this task is to download and unpack a Node.js distribution.
 
 #### Task Properties
 
@@ -93,12 +93,13 @@ Property Name | Type | Default Value | Description
 ------------- | ---- | ------------- | -----------
 `args` | `List<String>` | `[]` | The arguments for the Node.js invocation.
 `command` | `String` | `"node"` | The file name of the executable to invoke.
-`inheritProxy` | `boolean` | `true` | Whether to set the `http_proxy`, `https_proxy`, and `no_proxy` environment variales in the Node.js invocation based on the values of the system properties `https.proxyHost`, `https.proxyPort`, `https.proxyUser`, `https.proxyPassword`, `https.nonProxyHosts`, `https.proxyHost`, `https.proxyPort`, `https.proxyUser`, `https.proxyPassword`, and `https.nonProxyHosts`. If these environment variables are already set, their values will not be overwritten.
+`inheritProxy` | `boolean` | `true` | Whether to set the `http_proxy`, `https_proxy`, and `no_proxy` environment variables in the Node.js invocation based on the values of the system properties `https.proxyHost`, `https.proxyPort`, `https.proxyUser`, `https.proxyPassword`, `https.nonProxyHosts`, `https.proxyHost`, `https.proxyPort`, `https.proxyUser`, `https.proxyPassword`, and `https.nonProxyHosts`. If these environment variables are already set, their values will not be overwritten.
 `nodeDir` | `File` | <p>**If [`node.download`](#download) is `true`:** [`node.nodeDir`](#nodedir)</p><p>**Otherwise:** `null`</p> | The directory that contains the executable to invoke. If `null`, the executable must be available in the system `PATH`.
-`npmInstallRetries` | `int` | `0` | The number of times the `node_modules` is deleted and `npm install` is retried in case the Node.js invocation defined by this task fails. This can help solving corrupted `node_modules` directories by re-downloading the project dependencies.
+`npmInstallRetries` | `int` | `0` | The number of times the `node_modules` is deleted and `npm install` is retried in case the Node.js invocation defined by this task fails. This can help solving corrupted `node_modules` directories by re-downloading the project's dependencies.
 `workingDir` | `File` | `project.projectDir` | The working directory to use in the Node.js invocation.
 
-The properties of type `File` support any type that can be resolved by [`project.file`](https://docs.gradle.org/current/dsl/org.gradle.api.Project.html#org.gradle.api.Project:file(java.css.Object)).
+The properties of type `File` support any type that can be resolved by
+[`project.file`](https://docs.gradle.org/current/dsl/org.gradle.api.Project.html#org.gradle.api.Project:file(java.css.Object)).
 Moreover, it is possible to use Closures and Callables as values for the
 `String` properties, to defer evaluation until task execution.
 
@@ -111,7 +112,7 @@ Method | Description
 
 ### ExecuteNodeScriptTask
 
-The purpose of these tasks is to execute a Node.js script. Tasks of type
+The purpose of this task is to execute a Node.js script. Tasks of type
 `ExecuteNodeScriptTask` extend [`ExecuteNodeTask`](#executenodetask).
 
 #### Task Properties
@@ -120,12 +121,13 @@ Property Name | Type | Default Value | Description
 ------------- | ---- | ------------- | -----------
 `scriptFile` | `File` | `null` | The Node.js script to execute.
 
-The properties of type `File` support any type that can be resolved by [`project.file`](https://docs.gradle.org/current/dsl/org.gradle.api.Project.html#org.gradle.api.Project:file(java.css.Object)).
+The properties of type `File` support any type that can be resolved by
+[`project.file`](https://docs.gradle.org/current/dsl/org.gradle.api.Project.html#org.gradle.api.Project:file(java.css.Object)).
 
 ### ExecuteNpmTask
 
-The purpose of these tasks is to execute a NPM command. Tasks of type
-`ExecuteNpmTask` extend [`ExecuteNodeScriptTask`](#executenodescripttask), with
+The purpose of this task is to execute an NPM command. Tasks of type
+`ExecuteNpmTask` extend [`ExecuteNodeScriptTask`](#executenodescripttask) with
 the following properties set by default:
 
 Property Name | Default Value
@@ -137,9 +139,9 @@ Property Name | Default Value
 
 Property Name | Type | Default Value | Description
 ------------- | ---- | ------------- | -----------
-`cacheDir` | `File` | <p>**If `nodeDir` is `null`:** `null`</p><p>**Otherwise:** `"${nodeDir}/.cache"` | The location of NPM's cache directory. It sets the [`--cache`](https://docs.npmjs.com/misc/config#cache) argument. Leave the property null to keep the default value.
+`cacheDir` | `File` | <p>**If `nodeDir` is `null`:** `null`</p><p>**Otherwise:** `"${nodeDir}/.cache"` | The location of NPM's cache directory. It sets the [`--cache`](https://docs.npmjs.com/misc/config#cache) argument. Leave the property `null` to keep the default value.
 `progress` | `boolean` | `true` | Whether to show a progress bar during the NPM invocation. It sets the [`--progress`](https://docs.npmjs.com/misc/config#progress) argument.
-<a name="registry"></a>`registry` | `String` | `null` | The base URL of the NPM package registry. It sets the [`--registry`](https://docs.npmjs.com/misc/config#registry) argument. Leave the property null or empty to keep the default value.
+<a name="registry"></a>`registry` | `String` | `null` | The base URL of the NPM package registry. It sets the [`--registry`](https://docs.npmjs.com/misc/config#registry) argument. Leave the property `null` or empty to keep the default value.
 
 The properties of type `File` support any type that can be resolved by [`project.file`](https://docs.gradle.org/current/dsl/org.gradle.api.Project.html#org.gradle.api.Project:file(java.css.Object)).
 Moreover, it is possible to use Closures and Callables as values for the
@@ -147,7 +149,7 @@ Moreover, it is possible to use Closures and Callables as values for the
 
 ### DownloadNodeModuleTask
 
-Purpose of these tasks is to download a Node.js package. The packages are
+The purpose of this task is to download a Node.js package. The packages are
 downloaded in the `${workingDir}/node_modules` directory, which is equal, by
 default, to the `node_modules` directory of the project. Tasks of type
 `DownloadNodeModuleTask` extend [`ExecuteNpmTask`](#executenpmtask) in order to
@@ -180,7 +182,7 @@ does not declare any dependency in the `dependency` or `devDependencies` object.
 
 Property Name | Type | Default Value | Description
 ------------- | ---- | ------------- | -----------
-`nodeModulesCacheDir` | `File` | `null` | <p>The directory where `node_modules` directories are cached. By setting this property, it is possible to cache the `node_modules` directory of a project and avoid unnecessary invocations of `npm install`, useful especially in Continuous Integration environments.</p><p>The `node_modules` directory is cached based on the content of the project's `npm-shrinkwrap.json` (or `package.json` if absent), and so, if `NpmInstallTask` tasks in more projects are configured with the same `nodeModulesCacheDir`, and their `npm-shrinkwrap.json` or `package.json` declare the same dependencies, their `node_modules` caches will be shared.</p><p>This feature is not available if the [`com.liferay.cache`](https://github.com/liferay/liferay-portal/tree/master/modules/sdk/gradle-plugins-cache) plugin is applied.</p>
+`nodeModulesCacheDir` | `File` | `null` | <p>The directory where `node_modules` directories are cached. By setting this property, it is possible to cache the `node_modules` directory of a project and avoid unnecessary invocations of `npm install`, useful especially in Continuous Integration environments.</p><p>The `node_modules` directory is cached based on the content of the project's `npm-shrinkwrap.json` (or `package.json` if absent). Therefore, if `NpmInstallTask` tasks in multiple projects are configured with the same `nodeModulesCacheDir`, and their `npm-shrinkwrap.json` or `package.json` declare the same dependencies, their `node_modules` caches will be shared.</p><p>This feature is not available if the [`com.liferay.cache`](https://github.com/liferay/liferay-portal/tree/master/modules/sdk/gradle-plugins-cache) plugin is applied.</p>
 `nodeModulesCacheNativeSync` | `boolean` | `true` | Whether to use `rsync` (on Linux/macOS) or `robocopy` (on Windows) to cache and restore the `node_modules` directory. If `nodeModulesCacheDir` is not set, this property has no effect.
 `nodeModulesCacheRemoveBinDirs` | `boolean` | `true` | Whether to remove `.bin` directories while caching and restoring the `node_modules` directory. If `nodeModulesCacheDir` is not set, this property has no effect.
 `removeShrinkwrappedUrls` | `boolean` | `false` | Whether to temporarily remove all the hard-coded URLs in the `from` and `resolved` fields of the `npm-shinkwrap.json` file before invoking `npm install`. This way, it is possible to force NPM to download all dependencies from a custom registry declared in the [`registry`](#registry) property.
@@ -189,7 +191,7 @@ The properties of type `File` support any type that can be resolved by [`project
 
 ### PublishNodeModuleTask
 
-Purpose of these tasks is to publish a package to the
+The purpose of this task is to publish a package to the
 [NPM registry](#https://www.npmjs.com/). Tasks of type `PublishNodeModuleTask`
 extend [`ExecuteNpmTask`](#executenpmtask) in order to execute the command
 `npm publish`.
@@ -207,11 +209,11 @@ Property Name | Type | Default Value | Description
 `moduleBugsUrl` | `String` | `null` | The value of the [`bugs.url`](https://docs.npmjs.com/files/package.json#bugs) field in the generated `package.json` file.
 `moduleDescription` | `String` | `project.description` | The value of the [`description`](https://docs.npmjs.com/files/package.json#description-1) field in the generated `package.json` file.
 `moduleKeywords` | `List<String>` | `[]` | The value of the [`keywords`](https://docs.npmjs.com/files/package.json#keywords) field in the generated `package.json` file.
-`moduleLicense` | `String` | `null` | The value of the [`license`](hhttps://docs.npmjs.com/files/package.json#license) field in the generated `package.json` file.
+`moduleLicense` | `String` | `null` | The value of the [`license`](https://docs.npmjs.com/files/package.json#license) field in the generated `package.json` file.
 `moduleMain` | `String` | `null` | The value of the [`main`](https://docs.npmjs.com/files/package.json#main) field in the generated `package.json` file.
 `moduleName` | `String` | Name based on [`osgiHelper.bundleSymbolicName`](https://github.com/gradle/gradle/blob/master/subprojects/osgi/src/main/java/org/gradle/api/internal/plugins/osgi/OsgiHelper.java): for example, if `osgiHelper.bundleSymbolicName` is `"com.liferay.gradle.plugins.node"`, the default value for the `moduleName` property is `"liferay-gradle-plugins-node"`. | The value of the [`name`](https://docs.npmjs.com/files/package.json#name) field in the generated `package.json` file.
 `moduleRepository` | `String` | `null` | The value of the [`repository`](https://docs.npmjs.com/files/package.json#repository) field in the generated `package.json` file.
 `moduleVersion` | `String` | `project.version` | The value of the [`version`](https://docs.npmjs.com/files/package.json#version) field in the generated `package.json` file.
-`npmEmailAddress` | `String` | `null` | Email address of the npmjs.com user that will publish the package.
-`npmPassword` | `String` | `null` | Password of the npmjs.com user that will publish the package.
-`npmUserName` | `String` | `null` | Name of the npmjs.com user that will publish the package.
+`npmEmailAddress` | `String` | `null` | The email address of the npmjs.com user that publishes the package.
+`npmPassword` | `String` | `null` | The password of the npmjs.com user that publishes the package.
+`npmUserName` | `String` | `null` | The name of the npmjs.com user that publishes the package.
