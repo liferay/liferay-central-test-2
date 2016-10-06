@@ -34,7 +34,7 @@ import org.osgi.framework.ServiceRegistration;
 /**
  * @author Cristina González
  */
-public class Activator implements BundleActivator {
+public class WebSocketWhiteboardTestBundleActivator implements BundleActivator {
 
 	@Override
 	public void start(BundleContext bundleContext) throws Exception {
