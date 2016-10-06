@@ -26,8 +26,8 @@ public class Example {
 	}
 
 	public Example(int number, String data) {
-		this._number = number;
-		this._data = data;
+		_number = number;
+		_data = data;
 	}
 
 	public String getData() {
@@ -39,11 +39,11 @@ public class Example {
 	}
 
 	public void setData(String data) {
-		this._data = data;
+		_data = data;
 	}
 
 	public void setNumber(int number) {
-		this._number = number;
+		_number = number;
 	}
 
 	private String _data;
