@@ -80,13 +80,9 @@ public class SoyPortletHelperTest {
 
 		SoyPortletHelper soyPortletHelper = new SoyPortletHelper(bundle);
 
-		// Expected
-
 		Set<String> expectedRequiredModules = new HashSet<>();
 
 		expectedRequiredModules.add("SampleModuleName/View.soy");
-
-		// Actual
 
 		Set<String> actualRequiredModules = soyPortletHelper.getRequiredModules(
 			"View", Collections.<String>emptySet());
