@@ -38,22 +38,22 @@ public class Activator implements BundleActivator {
 
 	@Override
 	public void start(BundleContext bundleContext) throws Exception {
+		Dictionary<String, Object> properties = new Hashtable<>();
+
 		List<Class<? extends Decoder>> decoders = new ArrayList<>();
 
 		decoders.add(ExampleDecoder.class);
 
 		List<Class<? extends Encoder>> encoders = new ArrayList<>();
 
+		properties.put("org.osgi.http.websocket.endpoint.decoders", decoders);
+
 		encoders.add(ExampleEncoder.class);
-
-		Dictionary<String, Object> properties = new Hashtable<>();
-
-		properties.put(
-			"org.osgi.http.websocket.endpoint.path", "/o/websocket/decoder");
 
 		properties.put("org.osgi.http.websocket.endpoint.encoders", encoders);
 
-		properties.put("org.osgi.http.websocket.endpoint.decoders", decoders);
+		properties.put(
+			"org.osgi.http.websocket.endpoint.path", "/o/websocket/decoder");
 
 		_endpointServiceRegistration = bundleContext.registerService(
 			Endpoint.class, new EncodeWebSocketEndpoint(), properties);
