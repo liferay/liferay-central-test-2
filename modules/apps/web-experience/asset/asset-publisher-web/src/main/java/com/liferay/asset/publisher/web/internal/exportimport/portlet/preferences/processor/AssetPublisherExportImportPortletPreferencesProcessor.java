@@ -752,9 +752,16 @@ public class AssetPublisherExportImportPortletPreferencesProcessor
 						"classTypeIdsDLFileEntryAssetRendererFactory");
 				}
 
-				updateExportPortletPreferencesClassPKs(
-					portletDataContext, portlet, portletPreferences, name,
-					DLFileEntryType.class.getName());
+				if (!anyAssetTypeClassName.equals(
+						DLFileEntry.class.getName())) {
+
+					portletPreferences.reset(name);
+				}
+				else {
+					updateExportPortletPreferencesClassPKs(
+						portletDataContext, portlet, portletPreferences, name,
+						DLFileEntryType.class.getName());
+				}
 			}
 			else if (name.equals(
 						"anyClassTypeJournalArticleAssetRendererFactory") ||
@@ -788,9 +795,16 @@ public class AssetPublisherExportImportPortletPreferencesProcessor
 						"classTypeIdsJournalArticleAssetRendererFactory");
 				}
 
-				updateExportPortletPreferencesClassPKs(
-					portletDataContext, portlet, portletPreferences, name,
-					DDMStructure.class.getName());
+				if (!anyAssetTypeClassName.equals(
+						JournalArticle.class.getName())) {
+
+					portletPreferences.reset(name);
+				}
+				else {
+					updateExportPortletPreferencesClassPKs(
+						portletDataContext, portlet, portletPreferences, name,
+						DDMStructure.class.getName());
+				}
 			}
 			else if (name.equals("assetVocabularyId")) {
 				long assetVocabularyId = GetterUtil.getLong(value);
