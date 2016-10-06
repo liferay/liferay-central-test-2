@@ -42,10 +42,10 @@ public class EncodeWebSocketClient {
 	}
 
 	@OnMessage
-	public void onMessage(Example text, Session session)
+	public void onMessage(Example example, Session session)
 		throws InterruptedException {
 
-		_blockingQueue.put(text);
+		_blockingQueue.put(example);
 	}
 
 	@OnOpen
@@ -53,10 +53,12 @@ public class EncodeWebSocketClient {
 		_session = session;
 	}
 
-	public void sendMessage(Example data) throws EncodeException, IOException {
+	public void sendMessage(Example example)
+		throws EncodeException, IOException {
+
 		Basic basic = _session.getBasicRemote();
 
-		basic.sendObject(data);
+		basic.sendObject(example);
 	}
 
 	private final BlockingQueue<Example> _blockingQueue;
