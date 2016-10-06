@@ -101,7 +101,7 @@ AUI.add(
 								}
 							).render();
 
-							instance._alloyEditor.getNativeEditor().on('afterCommandExec', A.bind(instance._afterCommandExec, instance));
+							instance._alloyEditor.getNativeEditor().on('actionPerformed', A.bind(instance._actionPerformed, instance));
 						}
 
 						return instance;
@@ -117,7 +117,7 @@ AUI.add(
 						}
 					},
 
-					_afterCommandExec: function() {
+					_actionPerformed: function() {
 						var instance = this;
 
 						instance._onChangeEditor(instance.getValue());
