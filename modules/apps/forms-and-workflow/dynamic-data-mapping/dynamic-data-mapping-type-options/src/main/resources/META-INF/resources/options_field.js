@@ -48,7 +48,7 @@ AUI.add(
 						var sortableList = instance.get('sortableList');
 
 						instance._eventHandlers.push(
-							instance.after('liferay-ddm-form-field-key-value:destroy', instance._afterDestroyOption),
+							instance.on('liferay-ddm-form-field-key-value:destroy', instance._onDestroyOption),
 							instance.after('liferay-ddm-form-field-key-value:render', instance._afterRenderOption),
 							instance.after('liferay-ddm-form-field-key-value:valueChange', instance._afterOptionValueChange),
 							sortableList.after('drag:end', A.bind('_afterSortableListDragEnd', instance)),
@@ -242,7 +242,7 @@ AUI.add(
 						);
 					},
 
-					_afterDestroyOption: function(event) {
+					_onDestroyOption: function(event) {
 						var instance = this;
 
 						var option = event.target;
