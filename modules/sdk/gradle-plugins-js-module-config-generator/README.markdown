@@ -1,9 +1,9 @@
 # JS Module Config Generator Gradle Plugin
 
-The JS Module Config Generator Gradle plugin allows you to run the
-[`Liferay AMD Module Config Generator`](https://github.com/liferay/liferay-module-config-generator)
-in order to generate the configuration file needed to load AMD files via combo
-loader in Liferay.
+The JS Module Config Generator Gradle plugin lets you run the
+[Liferay AMD Module Config Generator](https://github.com/liferay/liferay-module-config-generator)
+to generate the configuration file needed to load AMD files via combo loader in
+Liferay.
 
 ## Usage
 
@@ -49,10 +49,11 @@ Name | Depends On | Type | Description
 
 By default, the `downloadLiferayModuleConfigGenerator` task downloads the
 version of `liferay-module-config-generator` declared in the
-[`jsModuleConfigGenerator.version`](#version) property. However, if the project's
-`package.json` file already lists the `liferay-module-config-generator` package
-in its `dependencies` or `devDependencies`, the
-`downloadLiferayModuleConfigGenerator` task will be disabled.
+[`jsModuleConfigGenerator.version`](#version) property. If the project's
+`package.json` file, however, already lists the
+`liferay-module-config-generator` package in its `dependencies` or
+`devDependencies`, the
+`downloadLiferayModuleConfigGenerator` task is disabled.
 
 The `configJSModules` task is automatically configured with sensible defaults,
 depending on whether the [`java`](https://docs.gradle.org/current/userguide/java_plugin.html)
@@ -78,10 +79,10 @@ the `transpileJS` task.
 ### ConfigJSModulesTask
 
 Tasks of type `ConfigJSModulesTask` extend `ExecuteNodeScriptTask`, so all its
-properties and methods, such as `args`, `inheritProxy` and `workingDir` are
+properties and methods, such as `args`, `inheritProxy`, and `workingDir`, are
 available. The `ConfigJSModulesTask` instances also implement the
 [`PatternFilterable`](https://docs.gradle.org/current/javadoc/org/gradle/api/tasks/util/PatternFilterable.html)
-interface, which allows to specify include and exclude patterns for the files in
+interface, which lets you specify include and exclude patterns for the files in
 [`sourceDir`](#sourcedir) to process.
 
 They also have the following properties set by default:
@@ -91,10 +92,10 @@ Property Name | Default Value
 [`includes`](https://docs.gradle.org/current/javadoc/org/gradle/api/tasks/util/PatternFilterable.html#getIncludes()) | `["**/*.es.js*", "**/*.soy.js*"]`
 `scriptFile` | `"${downloadLiferayModuleConfigGenerator.moduleDir}/bin/index.js"`
 
-Purpose of these tasks is to run the Liferay AMD Module Config Generator from
-the included files in [`sourceDir`](#sourceDir). The Generator will process
-these files and it will create a configuration file in the location specified by
-the [`outputFile`](#outputfile) property.
+The purpose of this task is to run the Liferay AMD Module Config Generator from
+the included files in [`sourceDir`](#sourceDir). The Generator processes these
+files and creates a configuration file in the location specified by the
+[`outputFile`](#outputfile) property.
 
 #### Task Properties
 
@@ -102,12 +103,12 @@ Property Name | Type | Default Value | Description
 ------------- | ---- | ------------- | -----------
 `configVariable` | `String` | `null` | The configuration variable to which the modules should be added. It sets the `--config` argument.
 `ignorePath` | `boolean` | `false` | Whether not to create module `path` and `fullPath` properties. It sets the `--ignorePath` argument.
-`keepFileExtension` | `boolean` | `false` | Whether to keep the file extension when generating module name. It sets the `--keepExtension` argument.
-`lowerCase` | `boolean` | `false` | Whether to convert file name to lower case before using it as module name. It sets the `--lowerCase` argument.
+`keepFileExtension` | `boolean` | `false` | Whether to keep the file extension when generating the module name. It sets the `--keepExtension` argument.
+`lowerCase` | `boolean` | `false` | Whether to convert file name to lower case before using it as the module name. It sets the `--lowerCase` argument.
 <a name="moduleconfigfile"></a>`moduleConfigFile` | `File` | `null` | The JSON file which contains configuration data for the modules. It sets the `--moduleConfig` argument.
-`moduleExtension` | `String` | `null` | If set, use the provided string as an extension instead to get it automatically from the file name. It sets the `--extension` argument.
-`moduleFormat` | `String` | `null` | The regular expression and value which will be applied to the file name when generating the module name. It sets the `--format` argument.
-<a name="outputfile"></a>`outputFile` | `File` | `null` | The file where to store the generated configuration. It sets the `--output` argument.
+`moduleExtension` | `String` | `null` | The extension for the module file (e.g., `.js`). If set, use the provided string as an extension instead to get it automatically from the file name. It sets the `--extension` argument.
+`moduleFormat` | `String` | `null` | The regular expression and value to apply to the file name when generating the module name. It sets the `--format` argument.
+<a name="outputfile"></a>`outputFile` | `File` | `null` | The file where the generated configuration is stored. It sets the `--output` argument.
 <a name="sourcedir"></a>`sourceDir` | `File` | `null` | The directory that contains the files to process.
 
 The properties of type `File` support any type that can be resolved by [`project.file`](https://docs.gradle.org/current/dsl/org.gradle.api.Project.html#org.gradle.api.Project:file(java.css.Object)).
