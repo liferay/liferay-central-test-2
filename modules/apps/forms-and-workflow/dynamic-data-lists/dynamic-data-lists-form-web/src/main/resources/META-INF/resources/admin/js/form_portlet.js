@@ -90,8 +90,8 @@ AUI.add(
 						instance.layoutSerializer = new LayoutSerializer(
 							{
 								availableLanguageIds: instance.get('availableLanguageIds'),
-								defaultLanguageId: instance.get('defaultLanguageId'),
-								builder: instance.get('formBuilder')
+								builder: instance.get('formBuilder'),
+								defaultLanguageId: instance.get('defaultLanguageId')
 							}
 						);
 
