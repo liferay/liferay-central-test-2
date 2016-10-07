@@ -66,8 +66,6 @@ List<DDMTemplate> ddmTemplates = journalContentDisplayContext.getDDMTemplates();
 
 					<div class="row template-preview <%= article == null ? "hidden" : "" %>">
 						<div class="col-md-3 col-sm-6 col-xs-12">
-							<p class="text-muted"><liferay-ui:message key="template" /></p>
-
 							<div class="hidden loading-animation"></div>
 
 							<div class="alert alert-danger hidden">
@@ -80,10 +78,6 @@ List<DDMTemplate> ddmTemplates = journalContentDisplayContext.getDDMTemplates();
 										<liferay-util:param name="articleId" value="<%= article.getArticleId() %>" />
 									</liferay-util:include>
 								</c:if>
-							</div>
-
-							<div class="button-holder template-preview-button <%= ddmTemplates.size() > 1 ? StringPool.BLANK : "hidden" %>">
-								<aui:button name="templateSelector" value="change" />
 							</div>
 						</div>
 					</div>

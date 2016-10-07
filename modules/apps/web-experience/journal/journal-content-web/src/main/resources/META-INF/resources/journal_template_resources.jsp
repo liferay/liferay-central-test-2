@@ -34,6 +34,8 @@ data.put("template-key", ddmTemplate.getTemplateKey());
 String ddmTemplateImageURL = ddmTemplate.getTemplateImageURL(themeDisplay);
 %>
 
+<p class="text-muted"><liferay-ui:message key="template" /></p>
+
 <liferay-frontend:horizontal-card
 	cssClass="template-preview-content"
 	data="<%= data %>"
@@ -52,3 +54,7 @@ String ddmTemplateImageURL = ddmTemplate.getTemplateImageURL(themeDisplay);
 		</c:choose>
 	</liferay-frontend:horizontal-card-col>
 </liferay-frontend:horizontal-card>
+
+<div class="button-holder template-preview-button <%= ddmTemplates.size() > 1 ? StringPool.BLANK : "hidden" %>">
+	<aui:button name="templateSelector" value="change" />
+</div>
