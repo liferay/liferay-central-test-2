@@ -409,6 +409,10 @@ public class JournalUtil {
 		return layout;
 	}
 
+	/**
+	 * @deprecated As of 4.0.0, with no direct replacement
+	 */
+	@Deprecated
 	public static List<JournalArticle> getArticles(Hits hits)
 		throws PortalException {
 
