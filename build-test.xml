@@ -4426,7 +4426,6 @@ go]]></replacevalue>
 				<var name="app.server.bundle.index" value="1" />
 
 				<antelope:repeat count="${app.server.bundles.size}">
-
 					<var name="test.app.server.parent.dir" value="${app.server.parent.dir}-${app.server.bundle.index}" />
 
 					<copy todir="${test.app.server.parent.dir}/data">
