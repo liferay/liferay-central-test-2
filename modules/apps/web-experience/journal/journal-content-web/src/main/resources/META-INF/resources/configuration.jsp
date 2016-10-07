@@ -20,8 +20,6 @@
 String redirect = ParamUtil.getString(request, "redirect");
 
 JournalArticle article = journalContentDisplayContext.getArticle();
-
-List<DDMTemplate> ddmTemplates = journalContentDisplayContext.getDDMTemplates();
 %>
 
 <liferay-ui:error exception="<%= NoSuchArticleException.class %>" message="the-web-content-could-not-be-found" />
@@ -124,9 +122,8 @@ List<DDMTemplate> ddmTemplates = journalContentDisplayContext.getDDMTemplates();
 
 	var form = AUI.$(document.<portlet:namespace />fm);
 
-	var assetClassPK = '<%= (article != null) ? article.getResourcePrimKey() : "" %>';
+	var assetClassPK = '<%= (article != null) ? JournalArticleAssetRenderer.getClassPK(article) : "" %>';
 	var articlePreviewNode = $('.article-preview');
-	var templatePreviewButtonNode = $('.template-preview-button');
 	var templatePreviewNode = $('.template-preview');
 
 	var showLoading = function(element) {
@@ -201,7 +198,6 @@ List<DDMTemplate> ddmTemplates = journalContentDisplayContext.getDDMTemplates();
 					hideError(articlePreviewNode);
 					showLoading(articlePreviewNode);
 
-					templatePreviewButtonNode.addClass(STR_HIDDEN);
 					templatePreviewNode.addClass(STR_HIDDEN);
 
 					articlePreviewNode.find('.article-preview-content-container').html('');
@@ -235,7 +231,6 @@ List<DDMTemplate> ddmTemplates = journalContentDisplayContext.getDDMTemplates();
 									if (templatePreviewContent.length > 0) {
 										var templatePreviewContentNode = templatePreviewNode.find('.template-preview-content');
 
-										templatePreviewButtonNode.toggleClass(STR_HIDDEN, templatePreviewContentNode.attr('data-change-enabled') === 'false');
 										templatePreviewNode.removeClass(STR_HIDDEN);
 
 										form.fm('ddmTemplateKey').val(templatePreviewContentNode.attr('data-template-key'));
@@ -255,61 +250,34 @@ List<DDMTemplate> ddmTemplates = journalContentDisplayContext.getDDMTemplates();
 		}
 	);
 
-	$('#<portlet:namespace />templateSelector').on(
-		'click',
+	Liferay.on(
+		'changeTemplate',
 		function(event) {
-			event.preventDefault();
+			var ddmTemplateKey = event.ddmTemplateKey;
 
-			var templatePreviewContent = templatePreviewNode.find('.template-preview-content');
+			<liferay-portlet:resourceURL portletName="<%= JournalContentPortletKeys.JOURNAL_CONTENT %>" var="templateURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
+				<portlet:param name="mvcPath" value="/journal_template_resources.jsp" />
+				<portlet:param name="articleResourcePrimKey" value="[$ARTICLE_RESOURCE_PRIMKEY$]" />
+				<portlet:param name="ddmTemplateKey" value="[$DDM_TEMPLATE_KEY$]" />
+			</liferay-portlet:resourceURL>
 
-			Liferay.Util.openDDMPortlet(
+			var templateURL = '<%= templateURL %>';
+
+			templateURL = templateURL.replace(encodeURIComponent('[$ARTICLE_RESOURCE_PRIMKEY$]'), assetClassPK),
+			templateURL = templateURL.replace(encodeURIComponent('[$DDM_TEMPLATE_KEY$]'), ddmTemplateKey),
+
+			templatePreviewNode.find('.template-preview-content-container').html('');
+
+			$.ajax(
+				templateURL,
 				{
-					basePortletURL: '<%= PortalUtil.getControlPanelPortletURL(request, PortletProviderUtil.getPortletId(DDMStructure.class.getName(), PortletProvider.Action.VIEW), PortletRequest.RENDER_PHASE) %>',
-					classNameId: '<%= PortalUtil.getClassNameId(DDMStructure.class) %>',
-					classPK: templatePreviewContent.attr('data-structure-key'),
-					dialog: {
-						destroyOnHide: true
-					},
-					eventName: 'selectTemplate',
-					groupId: $('.template-preview-content').attr('data-group-id'),
-					mvcPath: '/select_template.jsp',
-					navigationStartsOn: '<%= DDMNavigationHelper.SELECT_TEMPLATE %>',
-					refererPortletName: '<%= JournalContentPortletKeys.JOURNAL_CONTENT %>',
-					resourceClassNameId: $('.template-preview-content').attr('data-structure-id'),
-					showAncestorScopes: true,
-					showCacheableInput: true,
-					templateId: $('.template-preview-content').attr('data-template-id'),
-					title: '<liferay-ui:message key="templates" />'
-				},
-				function(event) {
-					<liferay-portlet:resourceURL portletName="<%= JournalContentPortletKeys.JOURNAL_CONTENT %>" var="templateURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
-						<portlet:param name="mvcPath" value="/journal_template_resources.jsp" />
-						<portlet:param name="articleResourcePrimKey" value="[$ARTICLE_RESOURCE_PRIMKEY$]" />
-						<portlet:param name="ddmTemplateKey" value="[$DDM_TEMPLATE_KEY$]" />
-					</liferay-portlet:resourceURL>
+					success: function(responseData) {
+						var responseData = $(responseData);
 
-					var templateURL = '<%= templateURL %>';
+						templatePreviewNode.find('.template-preview-content-container').html(responseData);
 
-					templateURL = templateURL.replace(encodeURIComponent('[$ARTICLE_RESOURCE_PRIMKEY$]'), assetClassPK),
-					templateURL = templateURL.replace(encodeURIComponent('[$DDM_TEMPLATE_KEY$]'), event.ddmtemplatekey),
-
-					templatePreviewNode.find('.template-preview-content-container').html('');
-
-					$.ajax(
-						templateURL,
-						{
-							error: function() {
-								showTemplateError();
-							},
-							success: function(responseData) {
-								var responseData = $(responseData);
-
-								templatePreviewNode.find('.template-preview-content-container').html(responseData);
-
-								form.fm('ddmTemplateKey').val(event.ddmtemplatekey);
-							}
-						}
-					);
+						form.fm('ddmTemplateKey').val(ddmTemplateKey);
+					}
 				}
 			);
 		}
