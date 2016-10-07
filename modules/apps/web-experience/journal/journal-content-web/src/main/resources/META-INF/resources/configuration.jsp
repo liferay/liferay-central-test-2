@@ -277,7 +277,7 @@ List<DDMTemplate> ddmTemplates = journalContentDisplayContext.getDDMTemplates();
 					groupId: $('.template-preview-content').attr('data-group-id'),
 					mvcPath: '/select_template.jsp',
 					navigationStartsOn: '<%= DDMNavigationHelper.SELECT_TEMPLATE %>',
-					refererPortletName: '<%= JournalPortletKeys.JOURNAL %>',
+					refererPortletName: '<%= JournalContentPortletKeys.JOURNAL_CONTENT %>',
 					resourceClassNameId: $('.template-preview-content').attr('data-structure-id'),
 					showAncestorScopes: true,
 					showCacheableInput: true,
