@@ -88,7 +88,7 @@ Property Name | Type | Default Value | Description
 
 The properties of type `File` support any type that can be resolved by [`project.file`](https://docs.gradle.org/current/dsl/org.gradle.api.Project.html#org.gradle.api.Project:file(java.css.Object)).
 Moreover, it is possible to use Closures and Callables as values for the `int`
-and `String` properties, to defer evaluation until task execution.
+and `String` properties to defer evaluation until task execution.
 
 #### Task Methods
 

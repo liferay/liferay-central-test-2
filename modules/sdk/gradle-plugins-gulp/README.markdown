@@ -47,8 +47,8 @@ Property Name | Default Value
 
 Gulp must be already installed in the `node_modules` directory of the project;
 otherwise, it will not be downloaded by the task. In order to ensure Gulp is
-installed, you can add the Gulp dependency to the project's `package.json` file,
-then declare a dependency on the `npmInstall` task:
+installed, you can add the Gulp dependency to the project's `package.json` file
+and then declare a dependency on the `npmInstall` task:
 
 ```gradle
 tasks.withType(ExecuteGulpTask) {
