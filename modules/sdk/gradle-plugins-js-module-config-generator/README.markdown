@@ -93,7 +93,7 @@ Property Name | Default Value
 `scriptFile` | `"${downloadLiferayModuleConfigGenerator.moduleDir}/bin/index.js"`
 
 The purpose of this task is to run the Liferay AMD Module Config Generator from
-the included files in [`sourceDir`](#sourceDir). The Generator processes these
+the included files in [`sourceDir`](#sourceDir). The generator processes these
 files and creates a configuration file in the location specified by the
 [`outputFile`](#outputfile) property.
 
@@ -113,4 +113,4 @@ Property Name | Type | Default Value | Description
 
 The properties of type `File` support any type that can be resolved by [`project.file`](https://docs.gradle.org/current/dsl/org.gradle.api.Project.html#org.gradle.api.Project:file(java.css.Object)).
 Moreover, it is possible to use Closures and Callables as values for the `int`
-and `String` properties, to defer evaluation until task execution.
+and `String` properties to defer evaluation until task execution.
