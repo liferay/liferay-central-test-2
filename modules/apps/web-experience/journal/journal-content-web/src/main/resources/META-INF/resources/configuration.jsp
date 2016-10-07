@@ -130,6 +130,7 @@ List<DDMTemplate> ddmTemplates = journalContentDisplayContext.getDDMTemplates();
 
 	var form = AUI.$(document.<portlet:namespace />fm);
 
+	var assetClassPK = '<%= (article != null) ? article.getResourcePrimKey() : "" %>';
 	var articlePreviewNode = $('.article-preview');
 	var templatePreviewButtonNode = $('.template-preview-button');
 	var templatePreviewNode = $('.template-preview');
@@ -214,8 +215,10 @@ List<DDMTemplate> ddmTemplates = journalContentDisplayContext.getDDMTemplates();
 
 					articlePreviewNode.find('.web-content-selector').html('<liferay-ui:message key="change" />');
 
+					assetClassPK = event.assetclasspk;
+
 					$.ajax(
-						baseJournalArticleResourceUrl.replace(encodeURIComponent('[$ARTICLE_RESOURCE_PRIMKEY$]'), event.assetclasspk),
+						baseJournalArticleResourceUrl.replace(encodeURIComponent('[$ARTICLE_RESOURCE_PRIMKEY$]'), assetClassPK),
 						{
 							error: function() {
 								hideLoading(articlePreviewNode);
@@ -285,26 +288,34 @@ List<DDMTemplate> ddmTemplates = journalContentDisplayContext.getDDMTemplates();
 					title: '<liferay-ui:message key="templates" />'
 				},
 				function(event) {
-					templatePreviewContent.attr('data-template-id', event.ddmtemplateid);
-					templatePreviewContent.attr('data-template-key', event.ddmtemplatekey);
+					<liferay-portlet:resourceURL portletName="<%= JournalContentPortletKeys.JOURNAL_CONTENT %>" var="templateURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
+						<portlet:param name="mvcPath" value="/journal_template_resources.jsp" />
+						<portlet:param name="articleResourcePrimKey" value="[$ARTICLE_RESOURCE_PRIMKEY$]" />
+						<portlet:param name="ddmTemplateKey" value="[$DDM_TEMPLATE_KEY$]" />
+					</liferay-portlet:resourceURL>
 
-					templatePreviewContent.find('.template-title').html(event.name);
-					templatePreviewContent.find('.template-description').html(event.description);
+					var templateURL = '<%= templateURL %>';
 
-					var templateImage = templatePreviewContent.find('.template-image');
+					templateURL = templateURL.replace(encodeURIComponent('[$ARTICLE_RESOURCE_PRIMKEY$]'), assetClassPK),
+					templateURL = templateURL.replace(encodeURIComponent('[$DDM_TEMPLATE_KEY$]'), event.ddmtemplatekey),
 
-					if (event.imageurl !== 'null') {
-						templateImage.attr('alt', event.name);
-						templateImage.attr('src', event.imageurl);
-						templateImage.removeClass('hidden');
-					}
-					else {
-						templateImage.attr('alt', '');
-						templateImage.attr('src', '');
-						templateImage.addClass('hidden');
-					}
+					templatePreviewNode.find('.template-preview-content-container').html('');
 
-					form.fm('ddmTemplateKey').val(event.ddmtemplatekey);
+					$.ajax(
+						templateURL,
+						{
+							error: function() {
+								showTemplateError();
+							},
+							success: function(responseData) {
+								var responseData = $(responseData);
+
+								templatePreviewNode.find('.template-preview-content-container').html(responseData);
+
+								form.fm('ddmTemplateKey').val(event.ddmtemplatekey);
+							}
+						}
+					);
 				}
 			);
 		}
