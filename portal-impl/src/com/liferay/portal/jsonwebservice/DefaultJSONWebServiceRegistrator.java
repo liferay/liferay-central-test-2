@@ -143,7 +143,7 @@ public class DefaultJSONWebServiceRegistrator
 	}
 
 	public void setWireViaUtil(boolean wireViaUtil) {
-		this._wireViaUtil = wireViaUtil;
+		_wireViaUtil = wireViaUtil;
 	}
 
 	protected Class<?> loadUtilClass(Class<?> implementationClass)
