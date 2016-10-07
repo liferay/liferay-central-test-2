@@ -71,6 +71,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import javax.portlet.PortletMode;
 import javax.portlet.PortletRequest;
@@ -669,6 +670,24 @@ public class JournalContentDisplayContext {
 		AssetEntryServiceUtil.incrementViewCounter(
 			JournalArticle.class.getName(),
 			articleDisplay.getResourcePrimKey());
+	}
+
+	public boolean isDefaultTemplate() {
+		JournalArticleDisplay articleDisplay = getArticleDisplay();
+
+		if ((articleDisplay == null) ||
+			Validator.isNull(articleDisplay.getDDMTemplateKey())) {
+
+			return true;
+		}
+
+		if (Objects.equals(
+				articleDisplay.getDDMTemplateKey(), getDDMTemplateKey())) {
+
+			return true;
+		}
+
+		return false;
 	}
 
 	public boolean isEnableViewCountIncrement() {
