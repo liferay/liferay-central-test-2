@@ -3,7 +3,7 @@
 ;
 [subrepo]
 	cmdver = liferay
-	commit = fade240f6d107c710310567db2876eba29acc738
+	commit = 047a127f73f2401ee6d45ccf107fdd5870b51633
 	mode = push
-	parent = c3cfe40a1c11ba63a8ab16f6706bf48abefa76e5
+	parent = 4749115a919048954accfba3f774391b9bb3448c
 	remote = git@github.com:liferay/com-liferay-portal-cache.git
