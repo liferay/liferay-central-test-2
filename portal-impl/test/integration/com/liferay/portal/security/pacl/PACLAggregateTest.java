@@ -95,8 +95,7 @@ public class PACLAggregateTest extends AutoBalanceTestCase {
 		try {
 			List<Class<?>> classes = scanTestClasses();
 
-			Assume.assumeFalse(
-				"No PACL test available, skip running.", classes.isEmpty());
+			Assume.assumeFalse("No PACL tests available", classes.isEmpty());
 
 			ProcessChannel<Result> processChannel =
 				localProcessExecutor.execute(
