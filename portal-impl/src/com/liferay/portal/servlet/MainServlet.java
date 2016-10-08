@@ -1130,7 +1130,7 @@ public class MainServlet extends ActionServlet {
 
 		Group group = layout.getGroup();
 
-		if (GroupLocalServiceUtil.isActive(group)) {
+		if (GroupLocalServiceUtil.isLiveGroupActive(group)) {
 			return false;
 		}
 
