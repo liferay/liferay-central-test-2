@@ -161,8 +161,8 @@ AUI.add(
 								{
 									builder: instance,
 									dataProviders: instance.get('dataProviders'),
-									defaultLanguageId: instance.get('defaultLanguageId'),
 									evaluatorURL: instance.get('evaluatorURL'),
+									locale: instance.get('defaultLanguageId'),
 									portletNamespace: instance.get('portletNamespace'),
 									readOnly: true
 								}
