@@ -250,7 +250,9 @@ public class ReleaseManagerOSGiCommands {
 		executeUpgradeInfos(bundleSymbolicName, upgradeInfosList.get(0));
 	}
 
-	protected void executeAll(Set<String> upgradeThrewExceptionBundleSymbolicNames) {
+	protected void executeAll(
+		Set<String> upgradeThrewExceptionBundleSymbolicNames) {
+
 		Set<String> upgradableBundleSymbolicNames =
 			getUpgradableBundleSymbolicNames();
 
@@ -308,18 +310,6 @@ public class ReleaseManagerOSGiCommands {
 		}
 	}
 
-	protected List<List<UpgradeInfo>> getUpgradeInfosList(
-		String bundleSymbolicName,
-		ServiceTrackerMap<String, List<UpgradeInfo>> serviceTrackerMap) {
-
-		String schemaVersionString = getSchemaVersionString(bundleSymbolicName);
-
-		ReleaseGraphManager releaseGraphManager = new ReleaseGraphManager(
-			serviceTrackerMap.getService(bundleSymbolicName));
-
-		return releaseGraphManager.getUpgradeInfosList(schemaVersionString);
-	}
-
 	protected String getSchemaVersionString(String bundleSymbolicName) {
 		Release release = _releaseLocalService.fetchRelease(bundleSymbolicName);
 
@@ -340,6 +330,18 @@ public class ReleaseManagerOSGiCommands {
 		}
 
 		return upgradableBundleSymbolicNames;
+	}
+
+	protected List<List<UpgradeInfo>> getUpgradeInfosList(
+		String bundleSymbolicName,
+		ServiceTrackerMap<String, List<UpgradeInfo>> serviceTrackerMap) {
+
+		String schemaVersionString = getSchemaVersionString(bundleSymbolicName);
+
+		ReleaseGraphManager releaseGraphManager = new ReleaseGraphManager(
+			serviceTrackerMap.getService(bundleSymbolicName));
+
+		return releaseGraphManager.getUpgradeInfosList(schemaVersionString);
 	}
 
 	protected boolean isUpgradable(String bundleSymbolicName) {
