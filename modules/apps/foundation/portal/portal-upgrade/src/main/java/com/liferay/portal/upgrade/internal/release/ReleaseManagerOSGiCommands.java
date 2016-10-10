@@ -134,27 +134,26 @@ public class ReleaseManagerOSGiCommands {
 	}
 
 	public void executeAll() {
-		Set<String> upgradedFailedBundleSymbolicNames = new HashSet<>();
+		Set<String> upgradeThrewExceptionBundleSymbolicNames = new HashSet<>();
 
-		executeAll(upgradedFailedBundleSymbolicNames);
+		executeAll(upgradeThrewExceptionBundleSymbolicNames);
 
-		if (upgradedFailedBundleSymbolicNames.isEmpty()) {
+		if (upgradeThrewExceptionBundleSymbolicNames.isEmpty()) {
 			System.out.println("All modules were successfully upgraded");
 
 			return;
 		}
 
 		StringBundler sb = new StringBundler(
-			(upgradedFailedBundleSymbolicNames.size() * 3) + 3);
+			(upgradeThrewExceptionBundleSymbolicNames.size() * 3) + 3);
 
-		sb.append(
-			"\nThe following module upgrades finished with errors:\n");
+		sb.append("\nThe following modules had errors while upgrading:\n");
 
-		for (String upgradedFailedBundleSymbolicName :
-				upgradedFailedBundleSymbolicNames) {
+		for (String upgradeThrewExceptionBundleSymbolicName :
+				upgradeThrewExceptionBundleSymbolicNames) {
 
 			sb.append("\t");
-			sb.append(upgradedFailedBundleSymbolicName);
+			sb.append(upgradeThrewExceptionBundleSymbolicName);
 			sb.append("\n");
 		}
 
@@ -251,12 +250,12 @@ public class ReleaseManagerOSGiCommands {
 		executeUpgradeInfos(bundleSymbolicName, upgradeInfosList.get(0));
 	}
 
-	protected void executeAll(Set<String> upgradedFailedBundleSymbolicNames) {
+	protected void executeAll(Set<String> upgradeThrewExceptionBundleSymbolicNames) {
 		Set<String> upgradableBundleSymbolicNames =
 			getUpgradableBundleSymbolicNames();
 
 		upgradableBundleSymbolicNames.removeAll(
-			upgradedFailedBundleSymbolicNames);
+			upgradeThrewExceptionBundleSymbolicNames);
 
 		if (upgradableBundleSymbolicNames.isEmpty()) {
 			return;
@@ -269,12 +268,12 @@ public class ReleaseManagerOSGiCommands {
 				doExecute(upgradableBundleSymbolicName, _serviceTrackerMap);
 			}
 			catch (Exception e) {
-				upgradedFailedBundleSymbolicNames.add(
+				upgradeThrewExceptionBundleSymbolicNames.add(
 					upgradableBundleSymbolicName);
 			}
 		}
 
-		executeAll(upgradedFailedBundleSymbolicNames);
+		executeAll(upgradeThrewExceptionBundleSymbolicNames);
 	}
 
 	protected void executeUpgradeInfos(
