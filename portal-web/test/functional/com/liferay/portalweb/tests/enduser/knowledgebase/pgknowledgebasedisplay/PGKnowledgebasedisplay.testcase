@@ -320,7 +320,7 @@
 		</execute>
 
 		<execute macro="KBArticle#configureKBSocialBookmarkSites">
-			<var name="enableSocialBookmarkSites" value="twitter,facebook,plusone,addthis,blinklist,delicious,digg,evernote,linkedin,newsvine,reddit,slashdot,stumbleupon,technorati,tuenti" />
+			<var name="enableSocialBookmarkSites" value="twitter,facebook,plusone,addthis,delicious,digg,evernote,linkedin,newsvine,reddit,slashdot,stumbleupon,technorati,tuenti" />
 		</execute>
 
 		<execute macro="Navigator#gotoPage">
@@ -329,7 +329,7 @@
 
 		<execute function="Click" locator1="Icon#SHARE" />
 
-		<for list="Twitter,Facebook,Google+,LinkedIn,BlinkList,Delicious,Digg,Evernote,Newsvine,Reddit,Slashdot,StumbleUpon,Technorati,Tuenti" param="socialBookmarkSites" >
+		<for list="Twitter,Facebook,Google+,LinkedIn,Delicious,Digg,Evernote,Newsvine,Reddit,Slashdot,StumbleUpon,Technorati,Tuenti" param="socialBookmarkSites" >
 			<execute macro="KBArticle#viewEnabledKBSocialBookmarkSites">
 				<var name="socialBookmarkSite" value="${socialBookmarkSites}" />
 			</execute>
@@ -346,14 +346,14 @@
 
 		<execute macro="KBArticle#configureKBSocialBookmarkSites">
 			<var name="disableSocialBookmarkSites" value="twitter,newsvine,reddit,slashdot,stumbleupon,technorati,tuenti" />
-			<var name="enableSocialBookmarkSites" value="facebook,plusone,addthis,blinklist,delicious,digg,evernote,linkedin" />
+			<var name="enableSocialBookmarkSites" value="facebook,plusone,addthis,delicious,digg,evernote,linkedin" />
 		</execute>
 
 		<execute macro="Navigator#gotoPage">
 			<var name="pageName" value="Knowledge Base Display Page" />
 		</execute>
 
-		<for list="Facebook,Google+,AddThis,LinkedIn,BlinkList,Delicious,Digg,Evernote" param="socialBookmarkSites" >
+		<for list="Facebook,Google+,AddThis,LinkedIn,Delicious,Digg,Evernote" param="socialBookmarkSites" >
 			<execute macro="KBArticle#viewEnabledKBSocialBookmarkSites">
 				<var name="socialBookmarkSite" value="${socialBookmarkSites}" />
 			</execute>
@@ -883,7 +883,7 @@
 	<command name="ViewKBArticleWithAllSocialBookmarkSites" priority="3">
 		<property name="hook.plugins.includes" value="social-bookmarks-hook" />
 
-		<var name="socialBookmarkSites" value="twitter,facebook,plusone,addthis,blinklist,delicious,digg,evernote,linkedin,newsvine,reddit,slashdot,stumbleupon,technorati,tuenti" />
+		<var name="socialBookmarkSites" value="twitter,facebook,plusone,addthis,delicious,digg,evernote,linkedin,newsvine,reddit,slashdot,stumbleupon,technorati,tuenti" />
 
 		<execute macro="Navigator#openURL" />
 
@@ -913,7 +913,7 @@
 			<var name="pageName" value="Knowledge Base Display Page" />
 		</execute>
 
-		<for list="Twitter,Facebook,Google+,AddThis,LinkedIn,BlinkList,Delicious,Digg,Evernote,Newsvine,Reddit,Slashdot,StumbleUpon,Technorati,Tuenti" param="socialBookmarkSites" >
+		<for list="Twitter,Facebook,Google+,AddThis,LinkedIn,Delicious,Digg,Evernote,Newsvine,Reddit,Slashdot,StumbleUpon,Technorati,Tuenti" param="socialBookmarkSites" >
 			<execute macro="KBArticle#viewEnabledKBSocialBookmarkSites">
 				<var name="socialBookmarkSite" value="${socialBookmarkSites}" />
 			</execute>
