@@ -139,7 +139,7 @@ public class ReleaseManagerOSGiCommands {
 		executeAll(upgradedFailedBundleSymbolicNames);
 
 		if (upgradedFailedBundleSymbolicNames.isEmpty()) {
-			System.out.println("All modules have been successfully upgraded!");
+			System.out.println("All modules were successfully upgraded");
 
 			return;
 		}
@@ -148,7 +148,7 @@ public class ReleaseManagerOSGiCommands {
 			(upgradedFailedBundleSymbolicNames.size() * 3) + 3);
 
 		sb.append(
-			"\nThe following module upgrades have finished with errors:\n");
+			"\nThe following module upgrades finished with errors:\n");
 
 		for (String upgradedFailedBundleSymbolicName :
 				upgradedFailedBundleSymbolicNames) {
@@ -159,7 +159,7 @@ public class ReleaseManagerOSGiCommands {
 		}
 
 		sb.append("Use the command upgrade:list <module name> to get more ");
-		sb.append("details about the status of a specific upgrade");
+		sb.append("details about the status of a specific upgrade.");
 
 		System.out.println(sb.toString());
 	}
