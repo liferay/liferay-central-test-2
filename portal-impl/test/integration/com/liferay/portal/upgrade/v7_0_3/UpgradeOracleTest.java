@@ -105,13 +105,13 @@ public class UpgradeOracleTest {
 		Assert.assertEquals(75, getCharLenght(_TABLE_NAME, _FIELD_NAME));
 	}
 
-	protected int getCharLenght(String tableName, String tableColumn)
+	protected int getCharLenght(String tableName, String columnName)
 		throws Exception {
 
 		try (Connection connection = DataAccess.getUpgradeOptimizedConnection();
 			PreparedStatement ps = connection.prepareStatement(
 				"select char_length from user_tab_columns where table_name = " +
-					"'" + tableName + "' and column_name = '" + tableColumn +
+					"'" + tableName + "' and column_name = '" + columnName +
 					"'")) {
 
 			ResultSet rs = ps.executeQuery();
@@ -122,13 +122,13 @@ public class UpgradeOracleTest {
 		}
 	}
 
-	protected String getCharUsed(String tableName, String tableColumn)
+	protected String getCharUsed(String tableName, String columnName)
 		throws Exception {
 
 		try (Connection connection = DataAccess.getUpgradeOptimizedConnection();
 			PreparedStatement ps = connection.prepareStatement(
 				"select char_used from user_tab_columns where table_name = '" +
-					tableName + "' and column_name = '" + tableColumn + "'")) {
+					tableName + "' and column_name = '" + columnName + "'")) {
 
 			ResultSet rs = ps.executeQuery();
 
