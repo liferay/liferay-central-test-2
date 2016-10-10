@@ -171,20 +171,20 @@ public class DLFileEntryActivityInterpreter
 				return "activity-document-library-file-update-file-in";
 			}
 		}
-		else if (activityType == SocialActivityConstants.TYPE_MOVE_TO_TRASH) {
-			if (Validator.isNull(groupName)) {
-				return "activity-document-library-file-move-to-trash";
-			}
-			else {
-				return "activity-document-library-file-move-to-trash-in";
-			}
-		}
 		else if (activityType == SocialActivityConstants.TYPE_ADD_COMMENT) {
 			if (Validator.isNull(groupName)) {
 				return "activity-document-library-file-add-comment";
 			}
 			else {
 				return "activity-document-library-file-add-comment-in";
+			}
+		}
+		else if (activityType == SocialActivityConstants.TYPE_MOVE_TO_TRASH) {
+			if (Validator.isNull(groupName)) {
+				return "activity-document-library-file-move-to-trash";
+			}
+			else {
+				return "activity-document-library-file-move-to-trash-in";
 			}
 		}
 		else if (activityType ==
