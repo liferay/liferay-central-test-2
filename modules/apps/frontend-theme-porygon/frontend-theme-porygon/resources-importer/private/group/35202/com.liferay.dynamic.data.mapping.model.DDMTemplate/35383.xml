@@ -15,7 +15,7 @@
   <__versionUserId>20164</__versionUserId>
   <__versionUserName>Test Test</__versionUserName>
   <__createDate class="sql-timestamp">2016-09-20 11:32:50.702</__createDate>
-  <__modifiedDate class="sql-timestamp">2016-09-22 11:33:26.739</__modifiedDate>
+  <__modifiedDate class="sql-timestamp">2016-10-07 12:56:43.683</__modifiedDate>
   <__setModifiedDate>false</__setModifiedDate>
   <__classNameId>29836</__classNameId>
   <__originalClassNameId>29836</__originalClassNameId>
@@ -26,7 +26,7 @@
   <__resourceClassNameId>29993</__resourceClassNameId>
   <__templateKey>33373</__templateKey>
   <__originalTemplateKey>33373</__originalTemplateKey>
-  <__version>1.4</__version>
+  <__version>1.9</__version>
   <__name>&lt;?xml version=&apos;1.0&apos; encoding=&apos;UTF-8&apos;?&gt;&lt;root available-locales=&quot;en_US&quot; default-locale=&quot;en_US&quot;&gt;&lt;Name language-id=&quot;en_US&quot;&gt;Porygon New Entry Template&lt;/Name&gt;&lt;/root&gt;</__name>
   <__description></__description>
   <__type>display</__type>
@@ -44,7 +44,7 @@
 &lt;#if displayMode == 1 &gt;
 	&lt;#assign
 		aspectRatio = request.attributes.aspectRatio!&quot;&quot;
-		pullTo = (request.attributes.pullTo!&quot;&quot; == &quot;right&quot;)?then(&quot;pull-sm-right&quot;, &quot;&quot;)
+		pullTo = ((request.attributes.pullTo!&quot;&quot;) == &quot;right&quot;)?then(&quot;pull-sm-right&quot;, &quot;&quot;)
 	/&gt;
 
 	&lt;div class=&quot;blog-list-card col-sm-6 ${pullTo}&quot;&gt;
