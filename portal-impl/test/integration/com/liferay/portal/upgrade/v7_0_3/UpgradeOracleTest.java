@@ -78,11 +78,11 @@ public class UpgradeOracleTest {
 			"alter table " + _TABLE_NAME + " modify " + _FIELD_NAME +
 				" varchar2(75 CHAR)");
 
-		Release portalRelease = ReleaseLocalServiceUtil.fetchRelease("portal");
+		Release release = ReleaseLocalServiceUtil.fetchRelease("portal");
 
-		portalRelease.setBuildNumber(ReleaseInfo.getBuildNumber());
+		release.setBuildNumber(ReleaseInfo.getBuildNumber());
 
-		ReleaseLocalServiceUtil.updateRelease(portalRelease);
+		ReleaseLocalServiceUtil.updateRelease(release);
 	}
 
 	@Test
@@ -94,11 +94,11 @@ public class UpgradeOracleTest {
 
 	@Test
 	public void testUpgradeDividesFieldSizesByFour() throws Exception {
-		Release portalRelease = ReleaseLocalServiceUtil.fetchRelease("portal");
+		Release release = ReleaseLocalServiceUtil.fetchRelease("portal");
 
-		portalRelease.setBuildNumber(ReleaseInfo.RELEASE_6_1_20_BUILD_NUMBER);
+		release.setBuildNumber(ReleaseInfo.RELEASE_6_1_20_BUILD_NUMBER);
 
-		ReleaseLocalServiceUtil.updateRelease(portalRelease);
+		ReleaseLocalServiceUtil.updateRelease(release);
 
 		_upgradeOracle.upgrade();
 
