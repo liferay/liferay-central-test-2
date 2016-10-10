@@ -58,7 +58,16 @@ AUI.add(
 
 						fieldType.get('settings').fields.forEach(
 							function(item, index) {
-								config[item.name] = field.get(item.name);
+								var value = field.get(item.name);
+
+								if (A.Object.hasKey(value, themeDisplay.getLanguageId())) {
+									var newValue = {};
+
+									newValue[themeDisplay.getDefaultLanguageId()] = value[themeDisplay.getLanguageId()];
+									value = newValue;
+								}
+
+								config[item.name] = value;
 							}
 						);
 

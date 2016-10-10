@@ -66,7 +66,16 @@ AUI.add(
 
 				fieldSettingsJSON.fieldValues.forEach(
 					function(item) {
-						settings[item.name] = item.value;
+						var value = item.value;
+
+						if (A.Object.hasKey(value, themeDisplay.getLanguageId())) {
+							var newValue = {};
+
+							newValue[themeDisplay.getDefaultLanguageId()] = value[themeDisplay.getLanguageId()];
+							value = newValue;
+						}
+
+						settings[item.name] = value;
 					}
 				);
 
@@ -151,7 +160,16 @@ AUI.add(
 
 				settingsForm.get('fields').forEach(
 					function(item, index) {
-						item.set('value', instance.get(item.get('name')));
+						var value = instance.get(item.get('name'));
+
+						if (A.Object.hasKey(value, themeDisplay.getDefaultLanguageId())) {
+							var newValue = {};
+
+							newValue[themeDisplay.getLanguageId()] = value[themeDisplay.getDefaultLanguageId()];
+							value = newValue;
+						}
+
+						item.set('value', value);
 					}
 				);
 			},
