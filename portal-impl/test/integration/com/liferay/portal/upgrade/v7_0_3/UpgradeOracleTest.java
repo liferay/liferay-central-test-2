@@ -102,10 +102,10 @@ public class UpgradeOracleTest {
 
 		_upgradeOracle.upgrade();
 
-		Assert.assertEquals(75, getCharLenght(_TABLE_NAME, _FIELD_NAME));
+		Assert.assertEquals(75, getCharLength(_TABLE_NAME, _FIELD_NAME));
 	}
 
-	protected int getCharLenght(String tableName, String columnName)
+	protected int getCharLength(String tableName, String columnName)
 		throws Exception {
 
 		try (Connection connection = DataAccess.getUpgradeOptimizedConnection();
