@@ -136,7 +136,7 @@ public class ReleaseManagerOSGiCommands {
 	public void executeAll() {
 		Set<String> upgradedFailedBundleSymbolicNames = new HashSet<>();
 
-		doExecuteAll(upgradedFailedBundleSymbolicNames);
+		executeAll(upgradedFailedBundleSymbolicNames);
 
 		if (upgradedFailedBundleSymbolicNames.isEmpty()) {
 			System.out.println("All modules have been successfully upgraded!");
@@ -251,7 +251,7 @@ public class ReleaseManagerOSGiCommands {
 		executeUpgradeInfos(bundleSymbolicName, upgradeInfosList.get(0));
 	}
 
-	protected void doExecuteAll(Set<String> upgradedFailedBundleSymbolicNames) {
+	protected void executeAll(Set<String> upgradedFailedBundleSymbolicNames) {
 		Set<String> upgradableBundleSymbolicNames =
 			getUpgradableBundleSymbolicNames();
 
@@ -274,7 +274,7 @@ public class ReleaseManagerOSGiCommands {
 			}
 		}
 
-		doExecuteAll(upgradedFailedBundleSymbolicNames);
+		executeAll(upgradedFailedBundleSymbolicNames);
 	}
 
 	protected void executeUpgradeInfos(
