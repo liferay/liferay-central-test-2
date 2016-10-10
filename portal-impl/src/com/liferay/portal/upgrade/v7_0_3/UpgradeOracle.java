@@ -53,9 +53,7 @@ public class UpgradeOracle extends UpgradeProcess {
 			while (rs.next()) {
 				String tableName = rs.getString(1);
 
-				if (!_portal_table_names.contains(
-						StringUtil.toLowerCase(tableName))) {
-
+				if (!_tableNames.contains(StringUtil.toLowerCase(tableName))) {
 					continue;
 				}
 
@@ -150,7 +148,7 @@ public class UpgradeOracle extends UpgradeProcess {
 
 	private static final Log _log = LogFactoryUtil.getLog(UpgradeOracle.class);
 
-	private static final Set<String> _portal_table_names =
+	private static final Set<String> _tableNames =
 		new HashSet<String>(Arrays.asList(
 			"account_", "address", "announcementsdelivery",
 			"announcementsentry", "announcementsflag", "assetcategory",
