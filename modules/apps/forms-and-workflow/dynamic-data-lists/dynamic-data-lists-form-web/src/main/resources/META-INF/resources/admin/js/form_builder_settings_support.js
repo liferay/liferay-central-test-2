@@ -3,6 +3,8 @@ AUI.add(
 	function(A) {
 		var FieldTypes = Liferay.DDM.Renderer.FieldTypes;
 
+		var coerceLanguage = Liferay.DDL.FormBuilderUtil.coerceLanguage;
+
 		var CSS_FIELD = A.getClassName('form', 'builder', 'field');
 
 		var CSS_FIELD_CONTENT_TOOLBAR = A.getClassName('form', 'builder', 'field', 'content', 'toolbar');
@@ -64,18 +66,15 @@ AUI.add(
 
 				var fieldSettingsJSON = settingsForm.toJSON();
 
+				var builderLanguage = themeDisplay.getDefaultLanguageId();
+
+				var settingsLanguage = themeDisplay.getLanguageId();
+
 				fieldSettingsJSON.fieldValues.forEach(
 					function(item) {
 						var value = item.value;
 
-						if (A.Object.hasKey(value, themeDisplay.getLanguageId())) {
-							var newValue = {};
-
-							newValue[themeDisplay.getDefaultLanguageId()] = value[themeDisplay.getLanguageId()];
-							value = newValue;
-						}
-
-						settings[item.name] = value;
+						settings[item.name] = coerceLanguage(value, settingsLanguage, builderLanguage);
 					}
 				);
 
@@ -158,18 +157,15 @@ AUI.add(
 
 				var settingsForm = instance.get('settingsForm');
 
+				var builderLanguage = themeDisplay.getDefaultLanguageId();
+
+				var settingsLanguage = themeDisplay.getLanguageId();
+
 				settingsForm.get('fields').forEach(
 					function(item, index) {
 						var value = instance.get(item.get('name'));
 
-						if (A.Object.hasKey(value, themeDisplay.getDefaultLanguageId())) {
-							var newValue = {};
-
-							newValue[themeDisplay.getLanguageId()] = value[themeDisplay.getDefaultLanguageId()];
-							value = newValue;
-						}
-
-						item.set('value', value);
+						item.set('value', coerceLanguage(value, builderLanguage, settingsLanguage));
 					}
 				);
 			},
