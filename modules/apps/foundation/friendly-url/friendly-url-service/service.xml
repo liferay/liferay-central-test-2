@@ -59,7 +59,6 @@
 			<finder-column name="main" />
 		</finder>
 	</entity>
-
 	<exceptions>
 		<exception>DuplicateFriendlyURL</exception>
 		<exception>FriendlyURLLength</exception>
