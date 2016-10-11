@@ -77,18 +77,22 @@ renderResponse.setTitle(role.getTitle(locale));
 String tabs2Names = "users,sites,organizations,user-groups";
 
 PortletURL usersPortletURL = PortletURLUtil.clone(portletURL, renderResponse);
-PortletURL sitesPortletURL = PortletURLUtil.clone(portletURL, renderResponse);
-PortletURL organizationsPortletURL = PortletURLUtil.clone(portletURL, renderResponse);
-PortletURL userGroupsPortletURL = PortletURLUtil.clone(portletURL, renderResponse);
 
 usersPortletURL.setParameter("tabs2", "users");
+
+PortletURL sitesPortletURL = PortletURLUtil.clone(portletURL, renderResponse);
+
 sitesPortletURL.setParameter("tabs2", "sites");
+
+PortletURL organizationsPortletURL = PortletURLUtil.clone(portletURL, renderResponse);
+
 organizationsPortletURL.setParameter("tabs2", "organizations");
+
+PortletURL userGroupsPortletURL = PortletURLUtil.clone(portletURL, renderResponse);
+
 userGroupsPortletURL.setParameter("tabs2", "user-groups");
 
-String[] tabs2Urls = {
-	usersPortletURL.toString(), sitesPortletURL.toString(), organizationsPortletURL.toString(), userGroupsPortletURL.toString()
-};
+String[] tabs2URLs = {usersPortletURL.toString(), sitesPortletURL.toString(), organizationsPortletURL.toString(), userGroupsPortletURL.toString()};
 %>
 
 <liferay-util:include page="/edit_role_tabs.jsp" servletContext="<%= application %>" />
@@ -97,7 +101,7 @@ String[] tabs2Urls = {
 	<liferay-ui:tabs
 		names="<%= tabs2Names %>"
 		type="tabs nav-tabs-default"
-		urls="<%= tabs2Urls %>"
+		urls="<%= tabs2URLs %>"
 		value="<%= tabs2 %>"
 	>
 		<liferay-frontend:management-bar
