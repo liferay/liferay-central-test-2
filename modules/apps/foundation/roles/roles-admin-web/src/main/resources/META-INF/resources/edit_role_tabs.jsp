@@ -30,7 +30,6 @@ Role role = RoleServiceUtil.fetchRole(roleId);
 String[] tabs1Names = new String[0];
 String[] tabs1URLs = new String[0];
 
-String portletResource = ParamUtil.getString(request, "portletResource");
 String portletURL = ParamUtil.getString(request, "portletURL");
 
 if (role != null) {
