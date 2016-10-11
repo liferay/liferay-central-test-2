@@ -16,6 +16,8 @@ package com.liferay.adaptive.media;
 
 /**
  * @author Adolfo Pérez
+ *
+ * @review
  */
 public class AdaptiveMediaRuntimeException extends RuntimeException {
 
@@ -37,6 +39,8 @@ public class AdaptiveMediaRuntimeException extends RuntimeException {
 	/**
 	 * Exception thrown when a value serialized as a String cannot be converted
 	 * by a {@link AdaptiveMediaAttribute}.
+	 *
+	 * @review
 	 */
 	public static final class AdaptiveMediaAttributeFormatException
 		extends AdaptiveMediaRuntimeException {
@@ -62,6 +66,8 @@ public class AdaptiveMediaRuntimeException extends RuntimeException {
 
 	/**
 	 * Exception thrown when there is a processor configuration error.
+	 *
+	 * @review
 	 */
 	public static final class InvalidConfiguration
 		extends AdaptiveMediaRuntimeException {
@@ -87,6 +93,8 @@ public class AdaptiveMediaRuntimeException extends RuntimeException {
 	 * Exception used to wrap instances {@link java.io.IOException}. This kind
 	 * of exception is considered a system error, so it is reasonable to wrap
 	 * it inside a RuntimeException
+	 *
+	 * @review
 	 */
 	public static final class IOException
 		extends AdaptiveMediaRuntimeException {
@@ -113,6 +121,8 @@ public class AdaptiveMediaRuntimeException extends RuntimeException {
 	 * java.io.UnsupportedEncodingException} This kind of exception is
 	 * considered a system error, so it is reasonable to wrap it inside a
 	 * RuntimeException
+	 *
+	 * @review
 	 */
 	public static final class UnsupportedEncodingException
 		extends AdaptiveMediaRuntimeException {

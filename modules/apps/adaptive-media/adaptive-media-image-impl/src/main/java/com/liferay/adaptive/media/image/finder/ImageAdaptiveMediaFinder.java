@@ -26,6 +26,8 @@ import com.liferay.portal.kernel.repository.model.FileVersion;
  * {@link ImageAdaptiveMediaQueryBuilder}.
  *
  * @author Adolfo Pérez
+ *
+ * @review
  */
 public interface ImageAdaptiveMediaFinder
 	extends AdaptiveMediaFinder

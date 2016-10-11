@@ -30,6 +30,8 @@ import java.util.function.Function;
  * attribute values.
  *
  * @author Adolfo Pérez
+ *
+ * @review
  */
 @ProviderType
 public final class AdaptiveMediaAttribute<T, V> {
@@ -39,6 +41,8 @@ public final class AdaptiveMediaAttribute<T, V> {
 	 * attribute can be used with any kind of media.
 	 *
 	 * @return The content length attribute
+	 *
+	 * @review
 	 */
 	public static final <S> AdaptiveMediaAttribute<S, Integer> contentLength() {
 		return (AdaptiveMediaAttribute<S, Integer>)_CONTENT_LENGTH;
@@ -49,6 +53,8 @@ public final class AdaptiveMediaAttribute<T, V> {
 	 * attribute can be used with any kind of media.
 	 *
 	 * @return the content type attribute
+	 *
+	 * @review
 	 */
 	public static final <S> AdaptiveMediaAttribute<S, String> contentType() {
 		return (AdaptiveMediaAttribute<S, String>)_CONTENT_TYPE;
@@ -59,6 +65,8 @@ public final class AdaptiveMediaAttribute<T, V> {
 	 * This attribute can be used with any kind of media.
 	 *
 	 * @return the file name attribute
+	 *
+	 * @review
 	 */
 	public static final <S> AdaptiveMediaAttribute<S, String> fileName() {
 		return (AdaptiveMediaAttribute<S, String>)_FILE_NAME;
@@ -76,6 +84,8 @@ public final class AdaptiveMediaAttribute<T, V> {
 	 * distance between their values; it should return a value between
 	 * {@link Integer#MIN_VALUE} and {@link Integer#MAX_VALUE} based on the
 	 * distance of the values.
+	 *
+	 * @review
 	 */
 	public AdaptiveMediaAttribute(
 		String name, Function<String, V> converter, Comparator<V> comparator) {
@@ -95,6 +105,8 @@ public final class AdaptiveMediaAttribute<T, V> {
 	 * @return a negative integer, zero, or a positive integer as the
 	 *         first argument is less than, equal to, or greater than the
 	 *         second.
+	 *
+	 * @review
 	 */
 	public int compare(V value1, V value2) {
 		return _comparator.compare(value1, value2);
@@ -108,6 +120,8 @@ public final class AdaptiveMediaAttribute<T, V> {
 	 * @throws {@link
 	 *         AdaptiveMediaRuntimeException.AdaptiveMediaAttributeFormatException}
 	 *         when the give value is not convertible.
+	 *
+	 * @review
 	 */
 	public V convert(String value) {
 		return _converter.apply(value);
@@ -120,6 +134,8 @@ public final class AdaptiveMediaAttribute<T, V> {
 	 * @param value2 The second value
 	 * @return A value between 0 and {@link Integer#MAX_VALUE} representing how
 	 *         close both values are
+	 *
+	 * @review
 	 */
 	public int distance(V value1, V value2) {
 		return Math.abs(_comparator.compare(value1, value2));
@@ -129,6 +145,8 @@ public final class AdaptiveMediaAttribute<T, V> {
 	 * Return the globally unique name for this attribute.
 	 *
 	 * @return the name of this attribute
+	 *
+	 * @review
 	 */
 	public String getName() {
 		return _name;

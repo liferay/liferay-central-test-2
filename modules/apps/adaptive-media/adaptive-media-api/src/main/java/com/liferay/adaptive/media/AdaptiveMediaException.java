@@ -16,6 +16,8 @@ package com.liferay.adaptive.media;
 
 /**
  * @author Adolfo Pérez
+ *
+ * @review
  */
 public class AdaptiveMediaException extends Exception {
 
@@ -36,6 +38,8 @@ public class AdaptiveMediaException extends Exception {
 
 	/**
 	 * This exception will be raised when a requested media is not found.
+	 *
+	 * @review
 	 */
 	public static final class AdaptiveMediaNotFound
 		extends AdaptiveMediaException {

@@ -19,6 +19,8 @@ package com.liferay.adaptive.media.finder;
  * must return to indicate a valid or final result.
  *
  * @author Adolfo Pérez
+ *
+ * @review
  */
 public interface AdaptiveMediaQuery<M, T> {
 }

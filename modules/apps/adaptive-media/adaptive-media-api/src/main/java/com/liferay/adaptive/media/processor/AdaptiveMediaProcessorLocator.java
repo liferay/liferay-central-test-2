@@ -19,6 +19,8 @@ package com.liferay.adaptive.media.processor;
  * a valid {@link AdaptiveMediaProcessor} for a particular model class.
  *
  * @author Adolfo Pérez
+ *
+ * @review
  */
 public interface AdaptiveMediaProcessorLocator {
 
@@ -31,6 +33,8 @@ public interface AdaptiveMediaProcessorLocator {
 	 * @param <M> The class generic type
 	 *
 	 * @return A non null {@link AdaptiveMediaProcessor}
+	 *
+	 * @review
 	 */
 	public <M> AdaptiveMediaProcessor<M, ?> locateForClass(Class<M> clazz);
 

@@ -29,6 +29,8 @@ import java.util.stream.Stream;
  * better matches will appear before lesser ones.
  *
  * @author Adolfo Pérez
+ *
+ * @review
  */
 public interface AdaptiveMediaFinder
 	<B extends AdaptiveMediaQueryBuilder<M, T>, M, T> {
@@ -57,6 +59,8 @@ public interface AdaptiveMediaFinder
 	 *         null, or the query returned by it is not valid.
 	 * @throws PortalException if an error occurred while calling any Liferay
 	 *         services
+	 *
+	 * @review
 	 */
 	public Stream<AdaptiveMedia<T>> getAdaptiveMedia(
 			Function<B, AdaptiveMediaQuery<M, T>> queryBuilderFunction)

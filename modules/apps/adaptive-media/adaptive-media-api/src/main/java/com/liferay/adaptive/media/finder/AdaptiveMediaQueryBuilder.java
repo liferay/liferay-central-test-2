@@ -19,6 +19,8 @@ package com.liferay.adaptive.media.finder;
  * extend to provide a way to create {@link AdaptiveMediaQuery}.
  *
  * @author Adolfo Pérez
+ *
+ * @review
  */
 public interface AdaptiveMediaQueryBuilder<M, T> {
 }

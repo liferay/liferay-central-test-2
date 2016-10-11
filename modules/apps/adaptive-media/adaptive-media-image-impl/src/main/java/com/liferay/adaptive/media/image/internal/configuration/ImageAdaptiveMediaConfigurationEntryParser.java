@@ -46,6 +46,8 @@ import org.osgi.service.component.annotations.Component;
  *     </li>
  * </ul>
  * @author Adolfo Pérez
+ *
+ * @review
  */
 @Component(
 	immediate = true, service = ImageAdaptiveMediaConfigurationEntryParser.class
@@ -60,6 +62,8 @@ public class ImageAdaptiveMediaConfigurationEntryParser {
 	 * @return A {@link ImageAdaptiveMediaConfigurationEntry} with the line data
 	 * @throws IllegalArgumentException is <code>s</code> is null or it is not a
 	 *         valid configuration line.
+	 *
+	 * @review
 	 */
 	public ImageAdaptiveMediaConfigurationEntry parse(String s) {
 		if (Validator.isNull(s)) {

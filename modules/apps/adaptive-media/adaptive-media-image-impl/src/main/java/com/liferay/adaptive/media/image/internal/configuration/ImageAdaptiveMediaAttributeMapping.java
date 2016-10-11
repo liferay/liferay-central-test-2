@@ -29,6 +29,8 @@ import java.util.Optional;
  * and returning values of the correct type.
  *
  * @author Adolfo Pérez
+ *
+ * @review
  */
 public class ImageAdaptiveMediaAttributeMapping {
 
@@ -40,6 +42,8 @@ public class ImageAdaptiveMediaAttributeMapping {
 	 * @return A non-null mapping that will give typesafe access to the
 	 *         underlying map
 	 * @throws IllegalArgumentException if <code>properties</code> is null
+	 *
+	 * @review
 	 */
 	public static ImageAdaptiveMediaAttributeMapping fromProperties(
 		Map<String, String> properties) {
@@ -82,6 +86,8 @@ public class ImageAdaptiveMediaAttributeMapping {
 	 * @param <V> the type of the value mapped to the attribute
 	 * @return A non-null optional that will contain the (non-null) value (if
 	 *         any)
+	 *
+	 * @review
 	 */
 	public <V> Optional<V> getAttributeValue(
 		AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, V> attribute) {

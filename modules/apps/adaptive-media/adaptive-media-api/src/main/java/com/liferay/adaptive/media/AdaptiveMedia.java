@@ -27,6 +27,8 @@ import java.util.Optional;
  * along with a set of attributes which characterize that content.
  *
  * @author Adolfo Pérez
+ *
+ * @review
  */
 @ProviderType
 public interface AdaptiveMedia<T> {
@@ -41,6 +43,8 @@ public interface AdaptiveMedia<T> {
 	 * @return {@link Optional#EMPTY} if the attribute is not present in this
 	 *         {@link AdaptiveMedia}; otherwise, the value wrapped in an {@link
 	 *         Optional}
+	 *
+	 * @review
 	 */
 	public <V> Optional<V> getAttributeValue(
 		AdaptiveMediaAttribute<T, V> attribute);
@@ -51,6 +55,8 @@ public interface AdaptiveMedia<T> {
 	 *
 	 * @return An {@link InputStream} with the raw contents of this {@link
 	 *         AdaptiveMedia}
+	 *
+	 * @review
 	 */
 	public InputStream getInputStream();
 
@@ -60,6 +66,8 @@ public interface AdaptiveMedia<T> {
 	 * URI should be treated as an opaque value.
 	 *
 	 * @return A URI pointing to this {@link AdaptiveMedia}
+	 *
+	 * @review
 	 */
 	public URI getURI();
 

@@ -28,6 +28,8 @@ import com.liferay.portal.kernel.exception.PortalException;
  * {@link com.liferay.adaptive.media.AdaptiveMediaAttribute} available.
  *
  * @author Adolfo Pérez
+ *
+ * @review
  */
 @ProviderType
 public interface AdaptiveMediaProcessor<M, T> {
@@ -44,6 +46,8 @@ public interface AdaptiveMediaProcessor<M, T> {
 	 *         set of possible exceptions.
 	 * @throws AdaptiveMediaRuntimeException
 	 *         if a system error occurred.
+	 *
+	 * @review
 	 */
 	public void cleanUp(M model) throws AdaptiveMediaException, PortalException;
 
@@ -60,6 +64,8 @@ public interface AdaptiveMediaProcessor<M, T> {
 	 *         if a system error occurred.
 	 * @throws PortalException if an error occurred while calling any Liferay
 	 *         services
+	 *
+	 * @review
 	 */
 	public void process(M model) throws AdaptiveMediaException, PortalException;
 

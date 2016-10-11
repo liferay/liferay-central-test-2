@@ -33,6 +33,8 @@ import org.osgi.service.component.annotations.Reference;
  * asynchronously once the current transaction has finished.
  *
  * @author Adolfo Pérez
+ *
+ * @review
  */
 @Component(immediate = true, service = AdaptiveMediaProcessorLocator.class)
 public class AdaptiveMediaProcessorLocatorImpl
