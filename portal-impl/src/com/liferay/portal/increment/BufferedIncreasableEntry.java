@@ -52,10 +52,9 @@ public class BufferedIncreasableEntry<K, T>
 
 	@Override
 	public String toString() {
-		Object[] arguments = _methodInvocation.getArguments();
+		String s = _methodInvocation.toString();
 
-		return _methodInvocation.toString() + " - " +
-			Arrays.toString(arguments);
+		return s.concat(" - ").concat(Arrays.toString(arguments));
 	}
 
 	private final MethodInvocation _methodInvocation;
