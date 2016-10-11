@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactory;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.wiki.constants.WikiPortletKeys;
 import com.liferay.wiki.item.selector.criterion.WikiAttachmentItemSelectorCriterion;
 
@@ -132,6 +133,17 @@ public class WikiAttachmentEditorConfigContributor
 		jsonObject.put(
 			"filebrowserImageBrowseLinkUrl", itemSelectorURL.toString());
 		jsonObject.put("filebrowserImageBrowseUrl", itemSelectorURL.toString());
+
+		String removePlugins = jsonObject.getString("removePlugins");
+
+		if (Validator.isNotNull(removePlugins)) {
+			removePlugins += ",ae_addimages";
+		}
+		else {
+			removePlugins = "ae_addimages";
+		}
+
+		jsonObject.put("removePlugins", removePlugins);
 	}
 
 	@Reference(unbind = "-")
