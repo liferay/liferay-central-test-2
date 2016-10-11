@@ -340,19 +340,20 @@ public abstract class JournalFolderLocalServiceBaseImpl
 							"modifiedDate");
 
 					if (modifiedDateCriterion != null) {
-						Disjunction disjunction = RestrictionsFactoryUtil.disjunction();
-
-						disjunction.add(RestrictionsFactoryUtil.gtProperty(
-							"modifiedDate", "lastPublishDate"));
-
-						Property lastPublishDateProperty = PropertyFactoryUtil.forName(
-							"lastPublishDate");
-
-						disjunction.add(lastPublishDateProperty.isNull());
-
 						Conjunction conjunction = RestrictionsFactoryUtil.conjunction();
 
 						conjunction.add(modifiedDateCriterion);
+
+						Disjunction disjunction = RestrictionsFactoryUtil.disjunction();
+
+						disjunction.add(RestrictionsFactoryUtil.gtProperty(
+								"modifiedDate", "lastPublishDate"));
+
+						Property lastPublishDateProperty = PropertyFactoryUtil.forName(
+								"lastPublishDate");
+
+						disjunction.add(lastPublishDateProperty.isNull());
+
 						conjunction.add(disjunction);
 
 						modifiedDateCriterion = conjunction;
