@@ -9,16 +9,16 @@
 	</command>
 
 	<command name="configureActionOptions">
- 		<execute macro="FormRules#selectAction">
- 			<var name="action" value="${action}" />
- 			<var name="actionRowNumber" value="${actionRowNumber}" />
- 		</execute>
- 
- 		<execute macro="FormRules#selectActionTarget">
- 			<var name="actionTarget" value="${actionTarget}" />
- 			<var name="actionRowNumber" value="${actionRowNumber}" />
- 		</execute>
- 	</command>
+		<execute macro="FormRules#selectAction">
+			<var name="action" value="${action}" />
+			<var name="actionRowNumber" value="${actionRowNumber}" />
+		</execute>
+
+		<execute macro="FormRules#selectActionTarget">
+			<var name="actionRowNumber" value="${actionRowNumber}" />
+			<var name="actionTarget" value="${actionTarget}" />
+		</execute>
+	</command>
 
 	<command name="configureConditionOptions">
 		<execute macro="FormRules#selectConditionField">
@@ -67,16 +67,16 @@
 	</command>
 
 	<command name="selectAction">
- 		<var name="key_actionRowNumber" value="${actionRowNumber}" />
- 		
- 		<execute function="Select" locator1="Form#RULE_BUILDER_SELECT_ACTION" value1="${action}" />
- 	</command>
+		<var name="key_actionRowNumber" value="${actionRowNumber}" />
+
+		<execute function="Select" locator1="Form#RULE_BUILDER_SELECT_ACTION" value1="${action}" />
+	</command>
 
 	<command name="selectActionTarget">
- 		<var name="key_actionRowNumber" value="${actionRowNumber}" />
- 
- 		<execute function="Select" locator1="Form#RULE_BUILDER_SELECT_ACTION_TARGET" value1="${actionTarget}" />
- 	</command>
+		<var name="key_actionRowNumber" value="${actionRowNumber}" />
+
+		<execute function="Select" locator1="Form#RULE_BUILDER_SELECT_ACTION_TARGET" value1="${actionTarget}" />
+	</command>
 
 	<command name="selectConditionField">
 		<var name="key_conditionRowNumber" value="${conditionRowNumber}" />
