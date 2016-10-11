@@ -187,9 +187,9 @@ pageContext.setAttribute("portletURL", portletURL);
 				rowURL = renderResponse.createRenderURL();
 
 				rowURL.setParameter("mvcPath", "/edit_role.jsp");
+				rowURL.setParameter("tabs1", "details");
 				rowURL.setParameter("redirect", searchContainer.getIteratorURL().toString());
 				rowURL.setParameter("roleId", String.valueOf(role.getRoleId()));
-				rowURL.setParameter("tabs1", "details");
 			}
 			%>
 
