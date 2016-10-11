@@ -732,7 +732,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 	@Override
 	public BlogsEntry fetchEntry(long groupId, String urlTitle) {
-		Group group = groupLocalService.fetchGroup(groupId);
+		Group group = groupPersistence.fetchByPrimaryKey(groupId);
 
 		FriendlyURL friendlyURL = friendlyURLLocalService.fetchFriendlyURL(
 			group.getCompanyId(), groupId, BlogsEntry.class, urlTitle);
@@ -835,7 +835,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	public BlogsEntry getEntry(long groupId, String urlTitle)
 		throws PortalException {
 
-		Group group = groupLocalService.getGroup(groupId);
+		Group group = groupPersistence.fetchByPrimaryKey(groupId);
 
 		FriendlyURL friendlyURL = friendlyURLLocalService.fetchFriendlyURL(
 			group.getCompanyId(), groupId, BlogsEntry.class, urlTitle);
