@@ -657,6 +657,12 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		expandoRowLocalService.deleteRows(entry.getEntryId());
 
+		// Friendly URL
+
+		friendlyURLLocalService.deleteFriendlyURL(
+			entry.getCompanyId(), entry.getGroupId(), BlogsEntry.class,
+			entry.getEntryId());
+
 		// Ratings
 
 		ratingsStatsLocalService.deleteStats(
@@ -672,12 +678,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		workflowInstanceLinkLocalService.deleteWorkflowInstanceLinks(
 			entry.getCompanyId(), entry.getGroupId(),
 			BlogsEntry.class.getName(), entry.getEntryId());
-
-		// Friendly URL
-
-		friendlyURLLocalService.deleteFriendlyURL(
-			entry.getCompanyId(), entry.getGroupId(), BlogsEntry.class,
-			entry.getEntryId());
 
 		return entry;
 	}
