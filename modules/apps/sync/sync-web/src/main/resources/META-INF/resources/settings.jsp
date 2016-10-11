@@ -79,7 +79,7 @@ if (deployed && oAuthEnabled) {
 		</aui:fieldset>
 	</c:if>
 
-	<aui:input label="allow-lan-syncing" name="lanEnabled" type="toggle-switch" value="<%= lanEnabled %>" />
+	<aui:input helpMessage="allow-lan-syncing-help" label="allow-lan-syncing" name="lanEnabled" type="toggle-switch" value="<%= lanEnabled %>" />
 
 	<aui:input helpMessage="max-connections-help" label="max-connections" name="maxConnections" type="text" value="<%= maxConnections %>" wrapperCssClass="lfr-input-text-container">
 		<aui:validator name="digits" />
