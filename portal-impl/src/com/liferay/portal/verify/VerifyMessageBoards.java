@@ -129,13 +129,12 @@ public class VerifyMessageBoards extends VerifyProcess {
 				_log.debug("Processing categories for statistics accuracy");
 			}
 
-			StringBundler sb = new StringBundler(7);
+			StringBundler sb = new StringBundler(6);
 
-			sb.append("update MBCategory set threadCount = ");
-			sb.append("(select count(*) from MBThread where ");
-			sb.append("(MBCategory.groupId = MBThread.groupId) and ");
-			sb.append("(MBCategory.categoryId = MBThread.categoryId) and ");
-			sb.append("(MBThread.status = ");
+			sb.append("update MBCategory set threadCount = (select count(*) ");
+			sb.append("from MBThread where (MBCategory.groupId = ");
+			sb.append("MBThread.groupId) and (MBCategory.categoryId = ");
+			sb.append("MBThread.categoryId) and (MBThread.status = ");
 			sb.append(WorkflowConstants.STATUS_APPROVED);
 			sb.append("))");
 
@@ -143,11 +142,10 @@ public class VerifyMessageBoards extends VerifyProcess {
 
 			sb.setIndex(0);
 
-			sb.append("update MBCategory set messageCount = ");
-			sb.append("(select count(*) from MBMessage where ");
-			sb.append("(MBCategory.groupId = MBMessage.groupId) and ");
-			sb.append("(MBCategory.categoryId = MBMessage.categoryId) and ");
-			sb.append("(MBMessage.status = ");
+			sb.append("update MBCategory set messageCount = (select count(*) ");
+			sb.append("from MBMessage where (MBCategory.groupId = ");
+			sb.append("MBMessage.groupId) and (MBCategory.categoryId = ");
+			sb.append("MBMessage.categoryId) and (MBMessage.status = ");
 			sb.append(WorkflowConstants.STATUS_APPROVED);
 			sb.append("))");
 
@@ -165,12 +163,11 @@ public class VerifyMessageBoards extends VerifyProcess {
 				_log.debug("Processing threads for statistics accuracy");
 			}
 
-			StringBundler sb = new StringBundler(6);
+			StringBundler sb = new StringBundler(5);
 
-			sb.append("update MBThread set messageCount = ");
-			sb.append("(select count(*) from MBMessage where ");
-			sb.append("(MBThread.threadId = MBMessage.threadId) and ");
-			sb.append("(MBMessage.status = ");
+			sb.append("update MBThread set messageCount = (select count(*) ");
+			sb.append("from MBMessage where (MBThread.threadId = ");
+			sb.append("MBMessage.threadId) and (MBMessage.status = ");
 			sb.append(WorkflowConstants.STATUS_APPROVED);
 			sb.append("))");
 
