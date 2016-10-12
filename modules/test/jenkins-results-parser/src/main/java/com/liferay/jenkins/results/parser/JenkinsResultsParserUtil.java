@@ -353,9 +353,9 @@ public class JenkinsResultsParserUtil {
 
 	public static String getHostName(String defaultHostName) {
 		try {
-			InetAddress address = InetAddress.getLocalHost();
+			InetAddress inetAddress = InetAddress.getLocalHost();
 
-			return address.getHostName();
+			return inetAddress.getHostName();
 		}
 		catch (UnknownHostException uhe) {
 			return defaultHostName;
