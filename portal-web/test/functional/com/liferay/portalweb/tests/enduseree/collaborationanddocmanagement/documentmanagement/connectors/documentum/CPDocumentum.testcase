@@ -341,8 +341,6 @@
 		<execute macro="DMDocument#cannotViewCP">
 			<var name="dmDocumentTitle" value="Document_1.doc" />
 		</execute>
-
-		<execute macro="DMDocument#viewDefaultCP" />
 	</command>
 
 	<command name="DeleteDocumentInSubfolder" priority="5">
