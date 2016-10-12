@@ -400,7 +400,7 @@ public class UnstableMessageUtil {
 	}
 
 	private static final String _FF_VNC_ERROR_MARKER =
-		"org.openqa.selenium.WebDriverException: Failed to " +
-		"connect to binary FirefoxBinary";
+		"org.openqa.selenium.WebDriverException: Failed to connect to " +
+			"binary FirefoxBinary";
 
 }
