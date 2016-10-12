@@ -15,6 +15,8 @@
 package com.liferay.sync.internal.configurator;
 
 import com.liferay.document.library.kernel.service.DLSyncEventLocalService;
+import com.liferay.portal.instance.lifecycle.BasePortalInstanceLifecycleListener;
+import com.liferay.portal.instance.lifecycle.PortalInstanceLifecycleListener;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.Destination;
@@ -33,7 +35,6 @@ import com.liferay.sync.util.SyncUtil;
 import com.liferay.sync.util.VerifyUtil;
 
 import java.util.Dictionary;
-import java.util.List;
 
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
@@ -45,8 +46,25 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Shinn Lok
  */
-@Component(immediate = true, service = SyncConfigurator.class)
-public class SyncConfigurator {
+@Component(immediate = true, service = PortalInstanceLifecycleListener.class)
+public class SyncConfigurator extends BasePortalInstanceLifecycleListener {
+
+	@Override
+	public void portalInstanceRegistered(Company company) throws Exception {
+		boolean lanEnabled = PrefsPropsUtil.getBoolean(
+			company.getCompanyId(),
+			SyncServiceConfigurationKeys.SYNC_LAN_ENABLED,
+			SyncServiceConfigurationValues.SYNC_LAN_ENABLED);
+
+		if (lanEnabled) {
+			try {
+				SyncUtil.enableLanSync(company.getCompanyId());
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
+		}
+	}
 
 	@Activate
 	protected void activate(BundleContext bundleContext) {
@@ -59,24 +77,6 @@ public class SyncConfigurator {
 		}
 		catch (Exception e) {
 			_log.error(e, e);
-		}
-
-		List<Company> companies = _companyLocalService.getCompanies();
-
-		for (Company company : companies) {
-			boolean lanEnabled = PrefsPropsUtil.getBoolean(
-				company.getCompanyId(),
-				SyncServiceConfigurationKeys.SYNC_LAN_ENABLED,
-				SyncServiceConfigurationValues.SYNC_LAN_ENABLED);
-
-			if (lanEnabled) {
-				try {
-					SyncUtil.enableLanSync(company.getCompanyId());
-				}
-				catch (Exception e) {
-					_log.error(e, e);
-				}
-			}
 		}
 
 		_serviceRegistration = registerMessageListener(
