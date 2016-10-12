@@ -325,6 +325,9 @@ public class UnstableMessageUtil {
 
 			String hostName = JenkinsResultsParserUtil.getHostName("UNKNOWN");
 
+			String message = hostName + " VNC Failure";
+			String from = "root@" + hostName;
+
 			StringBuilder toSB = new StringBuilder();
 
 			toSB.append("kevin.yen@liferay.com, ");
@@ -332,10 +335,6 @@ public class UnstableMessageUtil {
 			toSB.append("leslie.wong@liferay.com, ");
 			toSB.append("michael.hashimoto@liferay.com, ");
 			toSB.append("peter.yoo@liferay.com");
-
-			String message = hostName + " VNC Failure";
-
-			String from = "root@" + hostName;
 
 			JenkinsResultsParserUtil.sendEmail(
 				message, from, message, toSB.toString());
