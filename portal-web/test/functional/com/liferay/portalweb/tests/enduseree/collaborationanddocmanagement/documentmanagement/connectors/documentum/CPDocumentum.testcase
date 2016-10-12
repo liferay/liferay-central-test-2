@@ -815,7 +815,7 @@
 		</execute>
 
 		<execute macro="DMRepository#viewBreadcrumb">
-			<var name="dmRepositoryName" value="DOCUMENTUM REPOSITORY NAME" />
+			<var name="dmRepositoryName" value="Documentum Repository Name" />
 		</execute>
 	</command>
 </definition>
