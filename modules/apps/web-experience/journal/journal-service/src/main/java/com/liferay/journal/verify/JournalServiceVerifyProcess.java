@@ -404,8 +404,8 @@ public class JournalServiceVerifyProcess extends VerifyLayout {
 		throws Exception {
 
 		try (PreparedStatement ps = connection.prepareStatement(
-				"update JournalArticle set expirationDate = ? where " +
-					"groupId = ? and articleId = ? and status = ?")) {
+				"update JournalArticle set expirationDate = ? where groupId " +
+					"= ? and articleId = ? and status = ?")) {
 
 			ps.setTimestamp(1, expirationDate);
 			ps.setLong(2, groupId);
