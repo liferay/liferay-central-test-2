@@ -9,6 +9,7 @@ AUI.add(
 					var newValue = {};
 
 					newValue[target] = value[source];
+
 					value = newValue;
 				}
 

@@ -84,10 +84,10 @@ AUI.add(
 
 						fieldDefinition.dataProviders = builder.get('dataProviders');
 						fieldDefinition.evaluatorURL = builder.get('evaluatorURL');
+						fieldDefinition.locale = themeDisplay.getDefaultLanguageId();
 						fieldDefinition.parent = builder;
 						fieldDefinition.portletNamespace = builder.get('portletNamespace');
 						fieldDefinition.readOnly = true;
-						fieldDefinition.locale = themeDisplay.getDefaultLanguageId();
 
 						var fieldClass = FormBuilderUtil.getFieldClass(fieldDefinition.type);
 
