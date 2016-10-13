@@ -242,14 +242,6 @@ AUI.add(
 						);
 					},
 
-					_onDestroyOption: function(event) {
-						var instance = this;
-
-						var option = event.target;
-
-						A.DD.DDM.getDrag(option.get('container')).destroy();
-					},
-
 					_afterErrorMessageChange: function(event) {
 						var instance = this;
 
@@ -402,6 +394,14 @@ AUI.add(
 						var container = instance.get('container');
 
 						return container.one('.options');
+					},
+
+					_onDestroyOption: function(event) {
+						var instance = this;
+
+						var option = event.target;
+
+						A.DD.DDM.getDrag(option.get('container')).destroy();
 					},
 
 					_onFocusOption: function(event) {
