@@ -56,17 +56,18 @@ public class JournalArticleDDMFormValuesReader extends BaseDDMFormValuesReader {
 		}
 	}
 
-	public void setJournalConverter(JournalConverter journalConverter) {
-		_journalConverter = journalConverter;
-	}
-
 	public void setFieldsToDDMFormValuesConverter(
 		FieldsToDDMFormValuesConverter fieldsToDDMFormValuesConverter) {
 
 		_fieldsToDDMFormValuesConverter = fieldsToDDMFormValuesConverter;
 	}
 
+	public void setJournalConverter(JournalConverter journalConverter) {
+		_journalConverter = journalConverter;
+	}
+
 	private final JournalArticle _article;
 	private FieldsToDDMFormValuesConverter _fieldsToDDMFormValuesConverter;
 	private JournalConverter _journalConverter;
+
 }
