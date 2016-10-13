@@ -81,7 +81,6 @@ public class DDMTemplateStagedModelDataHandlerTest
 		Assert.assertNotNull(importedTemplate);
 
 		Assert.assertNotNull(importedStructure);
-
 		Assert.assertEquals(
 			importedStructure.getStructureId(), importedTemplate.getClassPK());
 	}
