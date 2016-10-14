@@ -8055,8 +8055,8 @@ public class JournalArticleLocalServiceImpl
 	protected DDMXML ddmXML;
 
 	private static final long _JOURNAL_ARTICLE_CHECK_INTERVAL =
-		JournalServiceConfigurationValues.JOURNAL_ARTICLE_CHECK_INTERVAL
-			* Time.MINUTE;
+		JournalServiceConfigurationValues.JOURNAL_ARTICLE_CHECK_INTERVAL *
+			Time.MINUTE;
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		JournalArticleLocalServiceImpl.class);
