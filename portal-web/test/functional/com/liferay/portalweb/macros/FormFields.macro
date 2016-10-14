@@ -415,6 +415,12 @@
 		<execute function="AssertTextEquals#assertText" locator1="FormFields#SELECT_OPTION" value1="${selectOption}" />
 	</command>
 
+	<command name="viewSelectOptionsRowFieldValue">
+		<var name="key_rowNumber" value="${rowNumber}" />
+
+		<execute function="AssertTextEquals" locator1="FormFields#SELECT_OPTIONS_OPTION_VALUE_FIELD_VISIBLE" value1="${fieldValue}" />
+	</command>
+
 	<command name="viewSelectValue">
 		<var name="key_fieldName" value="${fieldName}" />
 
