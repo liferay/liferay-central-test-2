@@ -333,6 +333,9 @@ public class OrganizationLocalServiceTest {
 			OrganizationLocalServiceUtil.hasUserOrganization(
 				TestPropsValues.getUserId(), organizationB.getOrganizationId(),
 				false, false));
+
+		UserLocalServiceUtil.deleteOrganizationUser(
+			organizationA.getOrganizationId(), TestPropsValues.getUser());
 	}
 
 	@Test
@@ -359,6 +362,9 @@ public class OrganizationLocalServiceTest {
 			OrganizationLocalServiceUtil.hasUserOrganization(
 				TestPropsValues.getUserId(), organizationA.getOrganizationId(),
 				true, true));
+
+		UserLocalServiceUtil.deleteOrganizationUser(
+			organizationAA.getOrganizationId(), TestPropsValues.getUser());
 	}
 
 	@Test
