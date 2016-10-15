@@ -121,7 +121,6 @@ public class DefaultSocialActivitiesDisplayContext
 
 		Group group = _socialActivitiesRequestHelper.getScopeGroup();
 		Layout layout = _socialActivitiesRequestHelper.getLayout();
-
 		SocialActivitiesQueryHelper.Scope scope =
 			SocialActivitiesQueryHelper.Scope.fromValue(getSelectedTabName());
 
@@ -164,7 +163,6 @@ public class DefaultSocialActivitiesDisplayContext
 	public boolean isSeeMoreControlVisible() {
 		Group group = _socialActivitiesRequestHelper.getScopeGroup();
 		Layout layout = _socialActivitiesRequestHelper.getLayout();
-
 		SocialActivitiesQueryHelper.Scope scope =
 			SocialActivitiesQueryHelper.Scope.fromValue(getSelectedTabName());
 
