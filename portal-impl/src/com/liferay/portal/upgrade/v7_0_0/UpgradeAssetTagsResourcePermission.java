@@ -32,8 +32,8 @@ public class UpgradeAssetTagsResourcePermission extends UpgradeProcess {
 	protected void deleteResourcePermissions() throws Exception {
 		try (LoggingTimer loggingTimer = new LoggingTimer()) {
 			runSQL(
-				"delete from ResourcePermission where name = '" +
-					"com.liferay.portlet.asset.model.AssetTag' and scope = " +
+				"delete from ResourcePermission where name = " +
+					"'com.liferay.portlet.asset.model.AssetTag' and scope = " +
 						ResourceConstants.SCOPE_INDIVIDUAL);
 		}
 	}
