@@ -267,7 +267,7 @@ public class JournalArticleServiceTest {
 		Assert.assertEquals(
 			"Version 2", _latestArticle.getTitle(LocaleUtil.getDefault()));
 		Assert.assertTrue(_latestArticle.isApproved());
-		Assert.assertTrue(1.1 == _latestArticle.getVersion());
+		Assert.assertTrue(_latestArticle.getVersion() == 1.1);
 	}
 
 	@Test
@@ -295,7 +295,7 @@ public class JournalArticleServiceTest {
 		Assert.assertEquals(
 			"Version 2", _latestArticle.getTitle(LocaleUtil.getDefault()));
 		Assert.assertTrue(_latestArticle.isApproved());
-		Assert.assertTrue(1.1 == _latestArticle.getVersion());
+		Assert.assertTrue(_latestArticle.getVersion() == 1.1);
 	}
 
 	@Test
