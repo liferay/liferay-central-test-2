@@ -4091,7 +4091,7 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  .kernel.exception,com.liferay.portal.kernel.security.permission,com.l
  iferay.portal.kernel.service,com.liferay.portal.kernel.theme,com.life
  ray.social.kernel.model",com.liferay.social.kernel.service;version="1
- .0.0";uses:="com.liferay.asset.kernel.model,com.liferay.portal.kernel
+ .1.0";uses:="com.liferay.asset.kernel.model,com.liferay.portal.kernel
  .dao.orm,com.liferay.portal.kernel.exception,com.liferay.portal.kerne
  l.json,com.liferay.portal.kernel.jsonwebservice,com.liferay.portal.ke
  rnel.messaging.async,com.liferay.portal.kernel.model,com.liferay.port
@@ -4101,7 +4101,7 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  iferay.social.kernel.model",com.liferay.social.kernel.service.permiss
  ion;version="1.0.0";uses:="com.liferay.portal.kernel.exception,com.li
  feray.portal.kernel.security.permission",com.liferay.social.kernel.se
- rvice.persistence;version="1.0.0";uses:="com.liferay.portal.kernel.da
+ rvice.persistence;version="1.1.0";uses:="com.liferay.portal.kernel.da
  o.orm,com.liferay.portal.kernel.service,com.liferay.portal.kernel.ser
  vice.persistence,com.liferay.portal.kernel.util,com.liferay.social.ke
  rnel.exception,com.liferay.social.kernel.model",com.liferay.social.ke
