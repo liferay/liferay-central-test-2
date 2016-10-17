@@ -493,7 +493,10 @@ public class JournalArticleFinderImpl
 			session = openSession();
 
 			String sql = CustomSQLUtil.get(
-				getClass(), FIND_BY_EXPIRATION_DATE, queryDefinition);
+				getClass(), FIND_BY_EXPIRATION_DATE, queryDefinition,
+				"JournalArticle");
+
+			sql = replaceStatusJoin(sql, queryDefinition);
 
 			SQLQuery q = session.createSynchronizedSQLQuery(sql);
 
