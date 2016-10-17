@@ -59,6 +59,7 @@ import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.Function;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.GroupSubscriptionCheckSubscriptionSender;
 import com.liferay.portal.kernel.util.HtmlUtil;
@@ -103,6 +104,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -1747,8 +1749,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			"[$BLOGS_ENTRY_CREATE_DATE$]",
 			Time.getSimpleDate(entry.getCreateDate(), "yyyy/MM/dd"),
 			"[$BLOGS_ENTRY_DESCRIPTION$]", entry.getDescription(),
-			"[$BLOGS_ENTRY_SITE_NAME$]",
-			group.getDescriptiveName(serviceContext.getLocale()),
 			"[$BLOGS_ENTRY_STATUS_BY_USER_NAME$]", entry.getStatusByUserName(),
 			"[$BLOGS_ENTRY_TITLE$]", entryTitle,
 			"[$BLOGS_ENTRY_UPDATE_COMMENT$]",
@@ -1772,6 +1772,14 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			subscriptionSender.setLocalizedBodyMap(
 				LocalizationUtil.getMap(bodyLocalizedValuesMap));
 		}
+
+		GroupDescriptiveNameSerializableFunction
+			groupDescriptiveNameSerializableFunction =
+				new GroupDescriptiveNameSerializableFunction(group);
+
+		subscriptionSender.setLocalizedContextAttribute(
+			"[$BLOGS_ENTRY_SITE_NAME$]",
+			groupDescriptiveNameSerializableFunction);
 
 		if (subjectLocalizedValuesMap != null) {
 			subscriptionSender.setLocalizedSubjectMap(
@@ -2108,5 +2116,31 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		BlogsEntryLocalServiceImpl.class);
+
+	private static class GroupDescriptiveNameSerializableFunction
+		implements Function<Locale, String>, Serializable {
+
+		public GroupDescriptiveNameSerializableFunction(Group group) {
+			_group = group;
+		}
+
+		@Override
+		public String apply(Locale locale) {
+			try {
+				return _group.getDescriptiveName(locale);
+			}
+			catch (PortalException pe) {
+				_log.error(
+					"Unable to get descriptive name for group " +
+						_group.getGroupId(),
+					pe);
+			}
+
+			return StringPool.BLANK;
+		}
+
+		private final Group _group;
+
+	}
 
 }

@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.systemevent.SystemEvent;
 import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
+import com.liferay.portal.kernel.util.Function;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.SubscriptionSender;
@@ -47,10 +48,13 @@ import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 import com.liferay.ratings.kernel.model.RatingsEntry;
 
+import java.io.Serializable;
+
 import java.text.DateFormat;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * @author Peter Shin
@@ -478,14 +482,18 @@ public class KBCommentLocalServiceImpl extends KBCommentLocalServiceBaseImpl {
 			"[$ARTICLE_CONTENT$]", kbArticleContent, false);
 		subscriptionSender.setContextAttribute(
 			"[$COMMENT_CONTENT$]", kbComment.getContent(), false);
-		subscriptionSender.setContextAttribute(
-			"[$COMMENT_CREATE_DATE$]",
-			_getFormattedKBCommentCreateDate(kbComment, serviceContext), false);
 		subscriptionSender.setContextCreatorUserPrefix("ARTICLE");
 		subscriptionSender.setCreatorUserId(kbArticle.getUserId());
 		subscriptionSender.setCurrentUserId(userId);
 		subscriptionSender.setFrom(fromAddress, fromName);
 		subscriptionSender.setHtmlFormat(true);
+
+		CreateDateSerializableFunction createDateSerializableFunction =
+			new CreateDateSerializableFunction(kbComment);
+
+		subscriptionSender.setLocalizedContextAttribute(
+			"[$COMMENT_CREATE_DATE$]", createDateSerializableFunction, false);
+
 		subscriptionSender.setMailId("kb_article", kbArticle.getKbArticleId());
 		subscriptionSender.setPortletId(serviceContext.getPortletId());
 		subscriptionSender.setReplyToAddress(fromAddress);
@@ -534,16 +542,25 @@ public class KBCommentLocalServiceImpl extends KBCommentLocalServiceBaseImpl {
 	@ServiceReference(type = ConfigurationProvider.class)
 	protected ConfigurationProvider configurationProvider;
 
-	private String _getFormattedKBCommentCreateDate(
-		KBComment kbComment, ServiceContext serviceContext) {
-
-		DateFormat dateFormat = DateFormatFactoryUtil.getDate(
-			serviceContext.getLocale());
-
-		return dateFormat.format(kbComment.getCreateDate());
-	}
-
 	private static final Log _log = LogFactoryUtil.getLog(
 		KBCommentLocalServiceImpl.class);
+
+	private static class CreateDateSerializableFunction
+		implements Function<Locale, String>, Serializable {
+
+		public CreateDateSerializableFunction(KBComment statusKey) {
+			_kbComment = statusKey;
+		}
+
+		@Override
+		public String apply(Locale locale) {
+			DateFormat dateFormat = DateFormatFactoryUtil.getDate(locale);
+
+			return dateFormat.format(_kbComment.getCreateDate());
+		}
+
+		private final KBComment _kbComment;
+
+	}
 
 }

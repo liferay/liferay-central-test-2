@@ -62,6 +62,7 @@ import com.liferay.portal.kernel.settings.LocalizedValuesMap;
 import com.liferay.portal.kernel.social.SocialActivityManagerUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.Function;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.GroupSubscriptionCheckSubscriptionSender;
 import com.liferay.portal.kernel.util.ListUtil;
@@ -93,6 +94,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
@@ -1699,13 +1701,6 @@ public class DLAppHelperLocalServiceImpl
 			folder = dlAppLocalService.getFolder(folderId);
 		}
 
-		String folderName = LanguageUtil.get(
-			serviceContext.getLocale(), "home");
-
-		if (folder != null) {
-			folderName = folder.getName();
-		}
-
 		SubscriptionSender subscriptionSender =
 			new GroupSubscriptionCheckSubscriptionSender(
 				DLPermission.RESOURCE_NAME);
@@ -1719,12 +1714,20 @@ public class DLAppHelperLocalServiceImpl
 		subscriptionSender.setClassPK(fileVersion.getFileEntryId());
 		subscriptionSender.setClassName(DLFileEntryConstants.getClassName());
 		subscriptionSender.setCompanyId(fileVersion.getCompanyId());
+
+		if (folder != null) {
+			subscriptionSender.setContextAttribute(
+				"[$FOLDER_NAME$]", folder.getName(), true);
+		}
+		else {
+			subscriptionSender.setLocalizedContextAttribute(
+				"[$FOLDER_NAME$]", new HomeTitleSerializableFunction());
+		}
+
 		subscriptionSender.setContextAttributes(
 			"[$DOCUMENT_STATUS_BY_USER_NAME$]",
 			fileVersion.getStatusByUserName(), "[$DOCUMENT_TITLE$]", entryTitle,
-			"[$DOCUMENT_TYPE$]",
-			dlFileEntryType.getName(serviceContext.getLocale()),
-			"[$DOCUMENT_URL$]", entryURL, "[$FOLDER_NAME$]", folderName);
+			"[$DOCUMENT_URL$]", entryURL);
 		subscriptionSender.setContextCreatorUserPrefix("DOCUMENT");
 		subscriptionSender.setCreatorUserId(fileVersion.getUserId());
 		subscriptionSender.setCurrentUserId(userId);
@@ -1734,6 +1737,14 @@ public class DLAppHelperLocalServiceImpl
 		subscriptionSender.setHtmlFormat(true);
 		subscriptionSender.setLocalizedBodyMap(
 			LocalizationUtil.getMap(bodyLocalizedValuesMap));
+
+		DLFileEntryTypeTitleSerializableFunction
+			dlFileEntryTypeTitleSerializableFunction =
+				new DLFileEntryTypeTitleSerializableFunction(dlFileEntryType);
+
+		subscriptionSender.setLocalizedContextAttribute(
+			"[$DOCUMENT_TYPE$]", dlFileEntryTypeTitleSerializableFunction);
+
 		subscriptionSender.setLocalizedSubjectMap(
 			LocalizationUtil.getMap(subjectLocalizedValuesMap));
 		subscriptionSender.setMailId(
@@ -2073,5 +2084,33 @@ public class DLAppHelperLocalServiceImpl
 
 	@BeanReference(type = DLAppService.class)
 	protected DLAppService dlAppService;
+
+	private static class DLFileEntryTypeTitleSerializableFunction
+		implements Function<Locale, String>, Serializable {
+
+		public DLFileEntryTypeTitleSerializableFunction(
+			DLFileEntryType dlFileEntryType) {
+
+			_dlFileEntryType = dlFileEntryType;
+		}
+
+		@Override
+		public String apply(Locale locale) {
+			return _dlFileEntryType.getName(locale);
+		}
+
+		private final DLFileEntryType _dlFileEntryType;
+
+	}
+
+	private static class HomeTitleSerializableFunction
+		implements Function<Locale, String>, Serializable {
+
+		@Override
+		public String apply(Locale locale) {
+			return LanguageUtil.get(locale, "home");
+		}
+
+	}
 
 }

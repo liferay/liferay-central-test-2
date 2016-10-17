@@ -36,6 +36,7 @@ import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.model.UserGroup;
 import com.liferay.portal.kernel.portlet.PortletProvider;
 import com.liferay.portal.kernel.portlet.PortletProviderUtil;
+import com.liferay.portal.kernel.util.Function;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PortalUtil;
@@ -48,6 +49,8 @@ import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.announcements.service.base.AnnouncementsEntryLocalServiceBaseImpl;
 import com.liferay.util.ContentUtil;
+
+import java.io.Serializable;
 
 import java.util.Date;
 import java.util.LinkedHashMap;
@@ -546,13 +549,22 @@ public class AnnouncementsEntryLocalServiceImpl
 			"[$ENTRY_CONTENT$]", entry.getContent(), false);
 		subscriptionSender.setContextAttributes(
 			"[$ENTRY_ID$]", entry.getEntryId(), "[$ENTRY_TITLE$]",
-			entry.getTitle(), "[$ENTRY_TYPE$]",
-			LanguageUtil.get(locale, entry.getType()), "[$ENTRY_URL$]",
-			entry.getUrl(), "[$PORTLET_NAME$]",
-			LanguageUtil.get(
-				locale, entry.isAlert() ? "alert" : "announcement"));
+			entry.getTitle(), "[$ENTRY_URL$]", entry.getUrl());
 		subscriptionSender.setFrom(fromAddress, fromName);
 		subscriptionSender.setHtmlFormat(true);
+
+		EntryTypeSerializableFunction entryTypeSerializableFunction =
+			new EntryTypeSerializableFunction(entry);
+
+		subscriptionSender.setLocalizedContextAttribute(
+			"[$ENTRY_TYPE$]", entryTypeSerializableFunction);
+
+		PortletNameSerializableFunction portletNameSerializableFunction =
+			new PortletNameSerializableFunction(entry);
+
+		subscriptionSender.setLocalizedContextAttribute(
+			"[$PORTLET_NAME$]", portletNameSerializableFunction);
+
 		subscriptionSender.setMailId("announcements_entry", entry.getEntryId());
 
 		String portletId = PortletProviderUtil.getPortletId(
@@ -601,5 +613,38 @@ public class AnnouncementsEntryLocalServiceImpl
 		AnnouncementsEntryLocalServiceImpl.class);
 
 	private Date _previousCheckDate;
+
+	private static class EntryTypeSerializableFunction
+		implements Function<Locale, String>, Serializable {
+
+		public EntryTypeSerializableFunction(AnnouncementsEntry entry) {
+			_entry = entry;
+		}
+
+		@Override
+		public String apply(Locale locale) {
+			return LanguageUtil.get(locale, _entry.getType());
+		}
+
+		private final AnnouncementsEntry _entry;
+
+	}
+
+	private static class PortletNameSerializableFunction
+		implements Function<Locale, String>, Serializable {
+
+		public PortletNameSerializableFunction(AnnouncementsEntry entry) {
+			_entry = entry;
+		}
+
+		@Override
+		public String apply(Locale locale) {
+			return LanguageUtil.get(
+				locale, _entry.isAlert() ? "alert" : "announcement");
+		}
+
+		private final AnnouncementsEntry _entry;
+
+	}
 
 }
