@@ -2,8 +2,8 @@
 
 set -e
 
-wget https://googledrive.com/host/0ByHmCu3rbdX0RGJrZUQxVUtiRzQ
+wget https://dl.dropboxusercontent.com/u/16739577/bundles.zip
 
-unzip 0ByHmCu3rbdX0RGJrZUQxVUtiRzQ
+unzip bundles.zip
 
 mv bundles ../bundles
