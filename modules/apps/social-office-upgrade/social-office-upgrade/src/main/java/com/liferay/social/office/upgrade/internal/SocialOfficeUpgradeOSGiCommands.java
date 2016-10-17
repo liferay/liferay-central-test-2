@@ -105,19 +105,19 @@ public class SocialOfficeUpgradeOSGiCommands {
 	}
 
 	public void removeTasksPortlet() throws PortalException {
-		int preferencesCount = _removeTasksPortletPreferences();
+		int portletPreferencesCount = _removeTasksPortletPreferences();
 
 		System.out.printf(
 			"[socialOffice:removeTasksPortlet] %d Tasks portlet preferences " +
 				"deleted.%n",
-			preferencesCount);
+			portletPreferencesCount);
 
-		int layoutCount = _removeTasksPortletLayoutTypeSettings();
+		int layoutsCount = _removeTasksPortletLayoutTypeSettings();
 
 		System.out.printf(
 			"[socialOffice:removeTasksPortlet] Removed tasks portlet from %d " +
 				"layouts.%n",
-			layoutCount);
+			layoutsCount);
 	}
 
 	public void updateEventsDisplay() throws PortalException {
