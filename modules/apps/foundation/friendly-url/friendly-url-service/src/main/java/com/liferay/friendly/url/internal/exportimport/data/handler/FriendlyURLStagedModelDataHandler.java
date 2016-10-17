@@ -105,9 +105,9 @@ public class FriendlyURLStagedModelDataHandler
 
 			FriendlyURL importedFriendlyURL = (FriendlyURL)friendlyURL.clone();
 
-			importedFriendlyURL.setCompanyId(portletDataContext.getCompanyId());
 			importedFriendlyURL.setGroupId(
 				portletDataContext.getScopeGroupId());
+			importedFriendlyURL.setCompanyId(portletDataContext.getCompanyId());
 			importedFriendlyURL.setClassNameId(classNameId);
 			importedFriendlyURL.setClassPK(classPK);
 
