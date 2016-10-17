@@ -129,9 +129,6 @@ public class CounterLocalServiceTest {
 
 		List<String> arguments = new ArrayList<>();
 
-		arguments.add("-Xmx1024m");
-		arguments.add("-XX:MaxPermSize=200m");
-
 		arguments.add("-Dliferay.mode=test");
 
 		for (String property :
@@ -139,6 +136,9 @@ public class CounterLocalServiceTest {
 
 			arguments.add("-D" + property);
 		}
+
+		arguments.add("-Xmx1024m");
+		arguments.add("-XX:MaxPermSize=200m");
 
 		Builder builder = new Builder();
 
