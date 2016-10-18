@@ -177,11 +177,11 @@ public class LiferaySettingsPlugin implements Plugin<Settings> {
 			final Path projectPathRootDirPath, final String projectPathPrefix)
 		throws IOException {
 
+		final String buildProfile = System.getProperty("build.profile");
 		final Set<Path> excludedDirPaths = getDirPaths(
 			"build.exclude.dirs", rootDirPath);
 		final Set<ProjectDirType> excludedProjectDirTypes = _getFlags(
 			"build.exclude.", ProjectDirType.class);
-		final String buildProfile = System.getProperty("build.profile");
 
 		Files.walkFileTree(
 			rootDirPath,
