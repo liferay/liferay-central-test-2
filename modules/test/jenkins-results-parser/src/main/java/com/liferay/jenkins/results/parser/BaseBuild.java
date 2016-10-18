@@ -380,7 +380,7 @@ public abstract class BaseBuild implements Build {
 		String hostName = JenkinsResultsParserUtil.getHostName("");
 
 		if (!hostName.startsWith("cloud-10-0")) {
-			System.out.println("A Build may not be reinvoked by " + hostName);
+			System.out.println("A build may not be reinvoked by " + hostName);
 		}
 
 		result = null;
