@@ -98,10 +98,10 @@ public class ConfigurationInvocationHandler<S> implements InvocationHandler {
 			}
 		}
 		else if (returnType.equals(LocalizedValuesMap.class)) {
-			LocalizedValuesMap value = _typedSettings.getLocalizedValuesMap(
-				key);
+			LocalizedValuesMap localizedValuesMap =
+				_typedSettings.getLocalizedValuesMap(key);
 
-			if (value.getDefaultValue() == null) {
+			if (localizedValuesMap.getDefaultValue() == null) {
 				return null;
 			}
 
