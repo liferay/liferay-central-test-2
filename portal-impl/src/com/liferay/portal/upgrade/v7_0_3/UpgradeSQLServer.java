@@ -30,17 +30,15 @@ import java.sql.SQLException;
 /**
  * @author Cristina González
  */
-public class UpgradeVarcharSybase extends UpgradeProcess {
+public class UpgradeSQLServer extends UpgradeProcess {
 
-	protected void alterVarcharColumns() throws Exception {
-		StringBundler sb = new StringBundler(6);
+	protected void alterNVarcharColumns() throws Exception {
+		StringBundler sb = new StringBundler(4);
 
-		sb.append("select o.name, c.name ");
-		sb.append("from sysobjects o, syscolumns c, systypes t ");
-		sb.append("where o.id = c.id ");
-		sb.append("and c.type = t.type ");
-		sb.append("and t.name = 'varchar' ");
-		sb.append("and c.length = 1000");
+		sb.append("select table_name, column_name from ");
+		sb.append("INFORMATION_SCHEMA.COLUMNS ");
+		sb.append("where DATA_TYPE = 'nvarchar' ");
+		sb.append("and character_maximum_length = 2000");
 
 		try (LoggingTimer loggingTimer = new LoggingTimer();
 			PreparedStatement ps = connection.prepareStatement(sb.toString());
@@ -48,13 +46,12 @@ public class UpgradeVarcharSybase extends UpgradeProcess {
 
 			while (rs.next()) {
 				String tableName = rs.getString(1);
-
 				String columnName = rs.getString(2);
 
 				try {
 					runSQL(
-						"alter table " + tableName + " modify " + columnName +
-							" varchar(4000)");
+						"alter table " + tableName + " alter column " +
+							columnName + " nvarchar(4000)");
 				}
 				catch (SQLException sqle) {
 					if (sqle.getErrorCode() == 1441) {
@@ -83,14 +80,14 @@ public class UpgradeVarcharSybase extends UpgradeProcess {
 	protected void doUpgrade() throws Exception {
 		DB db = DBManagerUtil.getDB();
 
-		if (db.getDBType() != DBType.SYBASE) {
+		if (db.getDBType() != DBType.SQLSERVER) {
 			return;
 		}
 
-		alterVarcharColumns();
+		alterNVarcharColumns();
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		UpgradeVarcharSybase.class);
+		UpgradeSQLServer.class);
 
 }
