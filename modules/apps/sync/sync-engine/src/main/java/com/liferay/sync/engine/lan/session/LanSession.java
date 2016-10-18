@@ -321,15 +321,16 @@ public class LanSession {
 			syncLanClientUuids.size(),
 			PropsValues.SYNC_LAN_SESSION_QUERY_POOL_MAX_SIZE);
 
-		List<Future<SyncLanClientQueryResult>> pendingFutures = new ArrayList<>(
-			queryPoolSize);
+		List<Future<SyncLanClientQueryResult>>
+			pendingSyncLanClientQueryResults = new ArrayList<>(queryPoolSize);
 
 		ExecutorCompletionService<SyncLanClientQueryResult>
 			executorCompletionService = new ExecutorCompletionService<>(
 				getExecutorService());
 
 		for (int i = 0; i < queryPoolSize; i++) {
-			Callable callable = new Callable<SyncLanClientQueryResult>() {
+			Callable<SyncLanClientQueryResult> callable =
+				new Callable<SyncLanClientQueryResult>() {
 
 				@Override
 				public synchronized SyncLanClientQueryResult call()
@@ -353,11 +354,12 @@ public class LanSession {
 
 			};
 
-			pendingFutures.add(executorCompletionService.submit(callable));
+			pendingSyncLanClientQueryResults.add(
+				executorCompletionService.submit(callable));
 		}
 
-		List<Future<SyncLanClientQueryResult>> completedFutures =
-			new ArrayList<>(queryPoolSize);
+		List<Future<SyncLanClientQueryResult>>
+			completedSyncLanClientQueryResult = new ArrayList<>(queryPoolSize);
 
 		long timeout = PropsValues.SYNC_LAN_SESSION_QUERY_TOTAL_TIMEOUT;
 
@@ -368,18 +370,19 @@ public class LanSession {
 				executorCompletionService.poll(timeout, TimeUnit.MILLISECONDS);
 
 			if (future == null) {
-				for (Future<SyncLanClientQueryResult> pendingFuture :
-						pendingFutures) {
+				for (Future<SyncLanClientQueryResult>
+					pendingSyncLanClientQueryResult :
+						pendingSyncLanClientQueryResults) {
 
-					if (!pendingFuture.isDone()) {
-						pendingFuture.cancel(true);
+					if (!pendingSyncLanClientQueryResult.isDone()) {
+						pendingSyncLanClientQueryResult.cancel(true);
 					}
 				}
 
 				break;
 			}
 
-			completedFutures.add(future);
+			completedSyncLanClientQueryResult.add(future);
 
 			timeout = endTime - System.currentTimeMillis();
 		}
@@ -388,7 +391,7 @@ public class LanSession {
 		int candidateDownloadRatePerConnection = 0;
 
 		for (Future<SyncLanClientQueryResult> completedFuture :
-				completedFutures) {
+				completedSyncLanClientQueryResult) {
 
 			SyncLanClientQueryResult syncLanClientQueryResult = null;
 
