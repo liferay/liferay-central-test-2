@@ -105,7 +105,7 @@ public class ConfigurationInvocationHandler<S> implements InvocationHandler {
 				return null;
 			}
 
-			return value;
+			return localizedValuesMap;
 		}
 		else if (returnType.equals(String.class)) {
 			return _typedSettings.getValue(key, null);
