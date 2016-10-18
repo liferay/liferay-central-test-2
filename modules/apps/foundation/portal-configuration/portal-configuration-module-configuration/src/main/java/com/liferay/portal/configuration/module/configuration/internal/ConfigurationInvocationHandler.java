@@ -70,7 +70,7 @@ public class ConfigurationInvocationHandler<S> implements InvocationHandler {
 
 	private Object _getValue(Class<?> returnType, String key)
 		throws NoSuchMethodException, IllegalAccessException,
-		InvocationTargetException, InstantiationException {
+			   InvocationTargetException, InstantiationException {
 
 		if (returnType.equals(boolean.class) ||
 			returnType.equals(double.class) || returnType.equals(float.class) ||
