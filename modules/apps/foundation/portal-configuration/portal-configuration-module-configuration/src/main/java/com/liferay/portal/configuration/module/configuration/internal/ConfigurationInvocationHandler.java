@@ -68,7 +68,7 @@ public class ConfigurationInvocationHandler<S> implements InvocationHandler {
 		}
 	}
 
-	private Object _getValueOrNull(Class<?> returnType, String key)
+	private Object _getValue(Class<?> returnType, String key)
 		throws NoSuchMethodException, IllegalAccessException,
 		InvocationTargetException, InstantiationException {
 
@@ -153,7 +153,7 @@ public class ConfigurationInvocationHandler<S> implements InvocationHandler {
 		Meta.AD annotation = method.getAnnotation(Meta.AD.class);
 
 		if ((annotation != null) && !Meta.NULL.equals(annotation.id())) {
-			value = _getValueOrNull(returnType, annotation.id());
+			value = _getValue(returnType, annotation.id());
 		}
 
 		if (value != null) {
