@@ -24,18 +24,12 @@ public class ModulesIntegrationBatchBuild extends BatchBuild {
 
 	public ModulesIntegrationBatchBuild(String url) throws Exception {
 		super(url);
-
-		// TODO Auto-generated constructor stub
-
 	}
 
 	public ModulesIntegrationBatchBuild(String url, TopLevelBuild topLevelBuild)
 		throws Exception {
 
 		super(url, topLevelBuild);
-
-		// TODO Auto-generated constructor stub
-
 	}
 
 	@Override
@@ -85,7 +79,7 @@ public class ModulesIntegrationBatchBuild extends BatchBuild {
 			sb.append("Arquillian broken connection failure ");
 			sb.append("detected at ");
 			sb.append(arquillianErrorAxisBuild.getBuildURL());
-			sb.append(" This batch will be reinvoked.");
+			sb.append(". This batch will be reinvoked.");
 
 			System.out.println(sb);
 
@@ -96,7 +90,7 @@ public class ModulesIntegrationBatchBuild extends BatchBuild {
 	protected List<Build> verifiedAxisBuilds = new ArrayList<>();
 
 	private static final String _ARQUILLIAN_ERROR_MARKER =
-		"org.jboss.arquillian.protocol.jmx.JMXMethodExecutor.invoke" +
-			"(JMXMethodExecutor.java";
+		"org.jboss.arquillian.protocol.jmx.JMXMethodExecutor.invoke(" +
+			"JMXMethodExecutor.java";
 
 }
