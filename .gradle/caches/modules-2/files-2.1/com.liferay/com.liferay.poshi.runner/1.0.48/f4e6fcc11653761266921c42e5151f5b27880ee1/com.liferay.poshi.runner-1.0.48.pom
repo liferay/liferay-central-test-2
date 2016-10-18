@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.liferay</groupId>
   <artifactId>com.liferay.poshi.runner</artifactId>
-  <version>1.0.46</version>
+  <version>1.0.48</version>
   <licenses>
     <license>
       <name>LGPL 2.1</name>
@@ -94,6 +94,12 @@
       <groupId>org.apache.ivy</groupId>
       <artifactId>ivy</artifactId>
       <version>2.4.0</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.bytedeco.javacpp-presets</groupId>
+      <artifactId>opencv</artifactId>
+      <version>2.4.10-0.10</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
