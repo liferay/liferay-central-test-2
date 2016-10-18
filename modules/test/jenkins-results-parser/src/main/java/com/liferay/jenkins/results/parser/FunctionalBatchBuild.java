@@ -33,7 +33,7 @@ public class FunctionalBatchBuild extends BatchBuild {
 	public void update() {
 		super.update();
 
-		if (badBuildNumbers.size() > 0) {
+		if (!badBuildNumbers.isEmpty()) {
 			return;
 		}
 
