@@ -53,7 +53,6 @@ public class BaseCKEditorConfigContributor extends BaseEditorConfigContributor {
 				PortalUtil.getStaticResourceURL(
 					themeDisplay.getRequest(),
 					themeDisplay.getPathThemeCss() + "/aui.css")));
-
 		jsonArray.put(
 			HtmlUtil.escape(
 				PortalUtil.getStaticResourceURL(
