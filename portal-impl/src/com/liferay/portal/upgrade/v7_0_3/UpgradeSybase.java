@@ -33,14 +33,11 @@ import java.sql.SQLException;
 public class UpgradeSybase extends UpgradeProcess {
 
 	protected void alterVarcharColumns() throws Exception {
-		StringBundler sb = new StringBundler(6);
+		StringBundler sb = new StringBundler(3);
 
-		sb.append("select o.name, c.name ");
-		sb.append("from sysobjects o, syscolumns c, systypes t ");
-		sb.append("where o.id = c.id ");
-		sb.append("and c.type = t.type ");
-		sb.append("and t.name = 'varchar' ");
-		sb.append("and c.length = 1000");
+		sb.append("select o.name, c.name from sysobjects o, syscolumns c, ");
+		sb.append("systypes t where o.id = c.id and c.type = t.type and ");
+		sb.append("t.name = 'varchar' and c.length = 1000");
 
 		try (LoggingTimer loggingTimer = new LoggingTimer();
 			PreparedStatement ps = connection.prepareStatement(sb.toString());

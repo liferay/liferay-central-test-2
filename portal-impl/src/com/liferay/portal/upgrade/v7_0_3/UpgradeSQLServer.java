@@ -33,11 +33,10 @@ import java.sql.SQLException;
 public class UpgradeSQLServer extends UpgradeProcess {
 
 	protected void alterNVarcharColumns() throws Exception {
-		StringBundler sb = new StringBundler(4);
+		StringBundler sb = new StringBundler(3);
 
 		sb.append("select table_name, column_name from ");
-		sb.append("INFORMATION_SCHEMA.COLUMNS ");
-		sb.append("where DATA_TYPE = 'nvarchar' ");
+		sb.append("INFORMATION_SCHEMA.COLUMNS where DATA_TYPE = 'nvarchar' ");
 		sb.append("and character_maximum_length = 2000");
 
 		try (LoggingTimer loggingTimer = new LoggingTimer();
