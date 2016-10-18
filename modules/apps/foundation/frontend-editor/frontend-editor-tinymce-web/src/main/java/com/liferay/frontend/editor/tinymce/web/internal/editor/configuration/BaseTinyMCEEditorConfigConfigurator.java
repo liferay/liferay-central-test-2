@@ -49,7 +49,6 @@ public class BaseTinyMCEEditorConfigConfigurator
 				PortalUtil.getStaticResourceURL(
 					themeDisplay.getRequest(),
 					themeDisplay.getPathThemeCss() + "/aui.css")));
-
 		sb.append(StringPool.COMMA);
 		sb.append(
 			HtmlUtil.escape(
@@ -60,9 +59,7 @@ public class BaseTinyMCEEditorConfigConfigurator
 		jsonObject.put("content_css", sb.toString());
 
 		jsonObject.put("convert_urls", Boolean.FALSE);
-
 		jsonObject.put("extended_valid_elements", _EXTENDED_VALID_ELEMENTS);
-
 		jsonObject.put("invalid_elements", "script");
 
 		String contentsLanguageId = (String)inputEditorTaglibAttributes.get(
