@@ -69,8 +69,8 @@ public class ConfigurationInvocationHandler<S> implements InvocationHandler {
 	}
 
 	private Object _getValue(Class<?> returnType, String key)
-		throws NoSuchMethodException, IllegalAccessException,
-			   InvocationTargetException, InstantiationException {
+		throws IllegalAccessException, InstantiationException,
+			   InvocationTargetException, NoSuchMethodException {
 
 		if (returnType.equals(boolean.class) ||
 			returnType.equals(double.class) || returnType.equals(float.class) ||
@@ -132,8 +132,8 @@ public class ConfigurationInvocationHandler<S> implements InvocationHandler {
 	}
 
 	private Object _invokeConfigurationOverride(Method method, Object[] args)
-		throws IllegalAccessException, InvocationTargetException,
-			   NoSuchMethodException {
+		throws IllegalAccessException, InstantiationException,
+			   InvocationTargetException, NoSuchMethodException {
 
 		Class<?> clazz = _configurationOverrideInstance.getClass();
 
