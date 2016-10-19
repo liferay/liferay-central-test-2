@@ -144,8 +144,8 @@ public class ConfigurationExportImportTest {
 
 	private Configuration _configuration;
 	private ConfigurationAdmin _configurationAdmin;
-	private File _file;
 	private Dictionary _dictionary;
+	private File _file;
 	private ServiceReference<ConfigurationAdmin> _serviceReference;
 
 }
