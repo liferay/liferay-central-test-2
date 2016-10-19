@@ -74,13 +74,8 @@ if (microblogsEntries != null) {
 			<div class="entry-bubble">
 				<div class="user-name">
 					<c:choose>
-						<c:when test="<%= curUser != null && curUser.isActive() %>">
-
-							<%
-							String userDisplayURL = curUser.getDisplayURL(themeDisplay);
-							%>
-
-							<span><a href="<%= userDisplayURL %>"><%= userFullName %></a></span>
+						<c:when test="<%= (curUser != null) && curUser.isActive() %>">
+							<span><a href="<%= curUser.getDisplayURL(themeDisplay) %>"><%= userFullName %></a></span>
 						</c:when>
 						<c:otherwise>
 							<span><%= userFullName %></span>

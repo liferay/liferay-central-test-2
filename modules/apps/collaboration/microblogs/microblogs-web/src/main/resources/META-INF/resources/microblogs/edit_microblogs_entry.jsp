@@ -91,13 +91,8 @@ if (comment) {
 			<div class="microblogs-entry">
 				<span class="thumbnail">
 					<c:choose>
-						<c:when test="<%= receiverUser != null && receiverUser.isActive() %>">
-
-							<%
-							String receiverUserDisplayURL = receiverUser.getDisplayURL(themeDisplay);
-							%>
-
-							<a href="<%= receiverUserDisplayURL %>">
+						<c:when test="<%= (receiverUser != null) && receiverUser.isActive() %>">
+							<a href="<%= receiverUser.getDisplayURL(themeDisplay) %>">
 								<liferay-ui:user-portrait
 									imageCssClass="user-icon-lg"
 									userId="<%= (microblogsEntry != null) ? microblogsEntry.getUserId() : 0 %>"
