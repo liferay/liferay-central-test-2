@@ -60,7 +60,7 @@ public class ConfigurationExportImportTest {
 
 		_file = new File("test-configuration-export.config");
 
-		_properties = new Hashtable<>();
+		_dictionary = new Hashtable<>();
 	}
 
 	@After
@@ -75,9 +75,9 @@ public class ConfigurationExportImportTest {
 		String blankStringKey = "blankStringKey";
 		String blankStringValue = StringPool.BLANK;
 
-		_properties.put(blankStringKey, blankStringValue);
+		_dictionary.put(blankStringKey, blankStringValue);
 
-		exportImportProperties(_properties);
+		exportImportProperties(_dictionary);
 
 		Assert.assertEquals(
 			blankStringValue,
@@ -88,9 +88,9 @@ public class ConfigurationExportImportTest {
 	public void testExportImportBoolean() throws Exception {
 		String booleanKey = "booleanKey";
 
-		_properties.put(booleanKey, true);
+		_dictionary.put(booleanKey, true);
 
-		exportImportProperties(_properties);
+		exportImportProperties(_dictionary);
 
 		Assert.assertTrue(
 			(boolean)_configuration.getProperties().get(booleanKey));
@@ -101,9 +101,9 @@ public class ConfigurationExportImportTest {
 		String stringKey = "stringKey";
 		String stringValue = "stringValue";
 
-		_properties.put(stringKey, stringValue);
+		_dictionary.put(stringKey, stringValue);
 
-		exportImportProperties(_properties);
+		exportImportProperties(_dictionary);
 
 		Assert.assertEquals(
 			stringValue, _configuration.getProperties().get(stringKey));
@@ -114,9 +114,9 @@ public class ConfigurationExportImportTest {
 		String arrayKey = "arrayKey";
 		String[] arrayValues = new String[] {"value1", "value2", "value3"};
 
-		_properties.put(arrayKey, arrayValues);
+		_dictionary.put(arrayKey, arrayValues);
 
-		exportImportProperties(_properties);
+		exportImportProperties(_dictionary);
 
 		Assert.assertArrayEquals(
 			arrayValues,
@@ -145,7 +145,7 @@ public class ConfigurationExportImportTest {
 	private Configuration _configuration;
 	private ConfigurationAdmin _configurationAdmin;
 	private File _file;
-	private Dictionary _properties;
+	private Dictionary _dictionary;
 	private ServiceReference<ConfigurationAdmin> _serviceReference;
 
 }
