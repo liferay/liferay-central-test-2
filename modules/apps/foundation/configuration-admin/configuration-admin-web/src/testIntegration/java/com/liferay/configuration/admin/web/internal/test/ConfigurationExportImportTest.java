@@ -140,8 +140,8 @@ public class ConfigurationExportImportTest {
 
 	private Configuration _configuration;
 	private ConfigurationAdmin _configurationAdmin;
-	private Dictionary _dictionary = new Hashtable<>();
-	private File _file = new File("test-configuration-export.config");
+	private final Dictionary _dictionary = new Hashtable<>();
+	private final File _file = new File("test-configuration-export.config");
 	private ServiceReference<ConfigurationAdmin> _serviceReference;
 
 }
