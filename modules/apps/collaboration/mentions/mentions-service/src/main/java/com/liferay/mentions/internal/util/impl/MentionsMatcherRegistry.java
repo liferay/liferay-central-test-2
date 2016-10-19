@@ -42,7 +42,7 @@ public class MentionsMatcherRegistry {
 
 		if (defaultMentionsMatcher == null) {
 			throw new IllegalStateException(
-				"Default implementation of MentionsMatcher not found");
+				"Unable to get default mentions matcher");
 		}
 
 		return defaultMentionsMatcher;
