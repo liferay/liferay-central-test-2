@@ -875,6 +875,20 @@ public abstract class BaseBuild implements Build {
 		}
 	}
 
+	protected boolean isParentBuildRoot() {
+		if (_parentBuild == null) {
+			return false;
+		}
+
+		if ((_parentBuild.getParentBuild() == null) &&
+			(_parentBuild instanceof TopLevelBuild)) {
+
+			return true;
+		}
+
+		return false;
+	}
+
 	protected void loadParametersFromBuildJSONObject() throws Exception {
 		if (getBuildURL() == null) {
 			return;
@@ -988,7 +1002,9 @@ public abstract class BaseBuild implements Build {
 
 			statusModifiedTime = System.currentTimeMillis();
 
-			System.out.println(getBuildMessage());
+			if (isParentBuildRoot()) {
+				System.out.println(getBuildMessage());
+			}
 		}
 	}
 
