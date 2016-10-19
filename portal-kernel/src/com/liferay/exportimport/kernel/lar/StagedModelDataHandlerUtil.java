@@ -451,9 +451,8 @@ public class StagedModelDataHandlerUtil {
 
 		if (stagedModel == null) {
 			_log.error(
-				"Can not retrieve StagedModelDataHandler for a null value. " +
-					"This typically means something hasn't been exported " +
-						"properly");
+				"Unable to get a staged model data handler for a null value " +
+					"because a model was not exported properly");
 
 			return null;
 		}
