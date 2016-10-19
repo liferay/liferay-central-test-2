@@ -55,7 +55,6 @@ public class BaseMentionsEditorConfigContributor
 			"regExp",
 			"(?:\\strigger|^trigger)(" +
 				MentionsMatcherUtil.getScreenNameRegularExpression() + ")");
-
 		triggerJSONObject.put(
 			"resultFilters", "function(query, results) {return results;}");
 		triggerJSONObject.put("resultTextLocator", "screenName");
