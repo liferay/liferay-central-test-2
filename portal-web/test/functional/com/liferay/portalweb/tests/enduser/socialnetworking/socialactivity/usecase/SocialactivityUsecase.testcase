@@ -338,6 +338,8 @@
 			<var name="portletName" value="Atividade Social" />
 		</execute>
 
+		<execute function="AssertVisible" locator1="ControlMenu#HEADER_TITLE" />
+
 		<execute macro="Navigator#gotoPage">
 			<var name="pageName" value="Social Activity Page" />
 		</execute>
