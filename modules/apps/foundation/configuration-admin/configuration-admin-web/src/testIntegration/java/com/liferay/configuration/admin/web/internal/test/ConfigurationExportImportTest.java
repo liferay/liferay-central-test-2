@@ -57,10 +57,6 @@ public class ConfigurationExportImportTest {
 
 		_configuration = _configurationAdmin.createFactoryConfiguration(
 			"test.pid", StringPool.QUESTION);
-
-		_file = new File("test-configuration-export.config");
-
-		_dictionary = new Hashtable<>();
 	}
 
 	@After
@@ -144,8 +140,8 @@ public class ConfigurationExportImportTest {
 
 	private Configuration _configuration;
 	private ConfigurationAdmin _configurationAdmin;
-	private Dictionary _dictionary;
-	private File _file;
+	private Dictionary _dictionary = new Hashtable<>();
+	private File _file = new File("test-configuration-export.config");
 	private ServiceReference<ConfigurationAdmin> _serviceReference;
 
 }
