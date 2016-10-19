@@ -77,8 +77,8 @@ public class ConfigurationInvocationHandler<S> implements InvocationHandler {
 	}
 
 	private Object _invokeTypedSettings(Method method)
-		throws NoSuchMethodException, IllegalAccessException,
-			   InvocationTargetException, InstantiationException {
+		throws IllegalAccessException, InstantiationException,
+			   InvocationTargetException, NoSuchMethodException {
 
 		Class<?> returnType = method.getReturnType();
 
