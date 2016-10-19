@@ -703,6 +703,8 @@
 			<var name="recycleBinDisabled" value="true" />
 		</execute>
 
+		<execute macro="DMNavigator#gotoHomeCP" />
+
 		<execute macro="DMRepository#gotoCP">
 			<var name="dmRepositoryName" value="Documentum Repository Name" />
 		</execute>
