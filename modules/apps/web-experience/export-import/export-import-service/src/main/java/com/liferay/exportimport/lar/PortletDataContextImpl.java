@@ -1479,7 +1479,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 				}
 				catch (NoSuchTeamException nste) {
 					if (_log.isWarnEnabled()) {
-						_log.warn("Team " + roleName + " does not exist");
+						_log.warn("Team " + roleName + " does not exist", nste);
 					}
 
 					continue;
@@ -1497,7 +1497,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 			}
 			catch (NoSuchRoleException nsre) {
 				if (_log.isWarnEnabled()) {
-					_log.warn("Role " + roleName + " does not exist");
+					_log.warn("Role " + roleName + " does not exist", nsre);
 				}
 
 				continue;
@@ -2119,7 +2119,8 @@ public class PortletDataContextImpl implements PortletDataContext {
 					catch (NoSuchLayoutException nsle) {
 						if (_log.isWarnEnabled()) {
 							_log.warn(
-								"Unable to find layout " + group.getClassPK());
+								"Unable to find layout " + group.getClassPK(),
+								nsle);
 						}
 					}
 				}

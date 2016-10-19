@@ -178,6 +178,13 @@ public class WebServerServlet extends HttpServlet {
 						folderId = folder.getFolderId();
 					}
 					catch (NoSuchFolderException nsfe) {
+
+						// LPS-52675
+
+						if (_log.isDebugEnabled()) {
+							_log.debug(nsfe, nsfe);
+						}
+
 						if (i != (pathArray.length - 1)) {
 							return false;
 						}
@@ -832,8 +839,20 @@ public class WebServerServlet extends HttpServlet {
 					return;
 				}
 				catch (NoSuchFileEntryException nsfee) {
+
+					// LPS-52675
+
+					if (_log.isDebugEnabled()) {
+						_log.debug(nsfee, nsfee);
+					}
 				}
 				catch (PrincipalException pe) {
+
+					// LPS-52675
+
+					if (_log.isDebugEnabled()) {
+						_log.debug(pe, pe);
+					}
 				}
 			}
 			else {
@@ -1281,6 +1300,12 @@ public class WebServerServlet extends HttpServlet {
 				DLAppLocalServiceUtil.getFileEntry(groupId, folderId, fileName);
 			}
 			catch (RepositoryException re) {
+
+				// LPS-52675
+
+				if (_log.isDebugEnabled()) {
+					_log.debug(re, re);
+				}
 			}
 		}
 		else {
@@ -1293,6 +1318,12 @@ public class WebServerServlet extends HttpServlet {
 					uuid, groupId);
 			}
 			catch (RepositoryException re) {
+
+				// LPS-52675
+
+				if (_log.isDebugEnabled()) {
+					_log.debug(re, re);
+				}
 			}
 		}
 	}
