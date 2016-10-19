@@ -18,6 +18,7 @@ import com.liferay.document.library.kernel.model.DLFolderConstants;
 import com.liferay.document.library.kernel.service.DLAppService;
 import com.liferay.document.library.web.constants.DLPortletKeys;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.PortletResponseUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCResourceCommand;
@@ -93,14 +94,7 @@ public class EditFolderMVCResourceCommand implements MVCResourceCommand {
 		InputStream inputStream = null;
 
 		try {
-			String zipFileName = LanguageUtil.get(
-				themeDisplay.getLocale(), "documents-and-media");
-
-			if (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-				Folder folder = _dlAppService.getFolder(folderId);
-
-				zipFileName = folder.getName();
-			}
+			String zipFileName = getZipFileName(folderId, themeDisplay);
 
 			ZipWriter zipWriter = ZipWriterFactoryUtil.getZipWriter();
 
@@ -120,6 +114,19 @@ public class EditFolderMVCResourceCommand implements MVCResourceCommand {
 			if (file != null) {
 				file.delete();
 			}
+		}
+	}
+
+	protected String getZipFileName(long folderId, ThemeDisplay themeDisplay)
+		throws PortalException {
+
+		if (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+			Folder folder = _dlAppService.getFolder(folderId);
+
+			return folder.getName() + ".zip";
+		}
+		else {
+			return themeDisplay.getScopeGroupName() + ".zip";
 		}
 	}
 
