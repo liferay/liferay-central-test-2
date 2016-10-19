@@ -59,7 +59,7 @@
 			<var name="fieldValue" value="Text Field On Spanish Portal" />
 		</execute>
 
-		<execute macro="Form#closeSidebar" />
+		<execute macro="FormFields#save" />
 
 		<execute macro="Form#save" />
 
