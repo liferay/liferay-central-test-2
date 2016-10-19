@@ -52,14 +52,9 @@ portletURL.setParameter("mvcRenderCommandName", "/message_boards/view_banned_use
 			%>
 
 			<c:choose>
-				<c:when test="<%= bannedUser != null && bannedUser.isActive() %>">
-
-					<%
-					String bannedUserDisplayURL = bannedUser.getDisplayURL(themeDisplay);
-					%>
-
+				<c:when test="<%= (bannedUser != null) && bannedUser.isActive() %>">
 					<liferay-ui:search-container-column-text
-						href="<%= bannedUserDisplayURL %>"
+						href="<%= bannedUser.getDisplayURL(themeDisplay) %>"
 						name="banned-user"
 						value="<%= HtmlUtil.escape(PortalUtil.getUserName(ban.getBanUserId(), StringPool.BLANK)) %>"
 					/>
@@ -83,14 +78,9 @@ portletURL.setParameter("mvcRenderCommandName", "/message_boards/view_banned_use
 			%>
 
 			<c:choose>
-				<c:when test="<%= bannedByUser != null && bannedByUser.isActive() %>">
-
-					<%
-					String bannedByUserDisplayURL = bannedByUser.getDisplayURL(themeDisplay);
-					%>
-
+				<c:when test="<%= (bannedByUser != null) && bannedByUser.isActive() %>">
 					<liferay-ui:search-container-column-text
-						href="<%= bannedByUserDisplayURL %>"
+						href="<%= bannedByUser.getDisplayURL(themeDisplay) %>"
 						name="banned-by"
 						value="<%= HtmlUtil.escape(PortalUtil.getUserName(ban.getUserId(), StringPool.BLANK)) %>"
 					/>
