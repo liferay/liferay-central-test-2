@@ -123,10 +123,10 @@ public class ConfigurationExportImportTest {
 			(String[])_configuration.getProperties().get(arrayKey));
 	}
 
-	protected void exportImportProperties(Dictionary properties)
+	protected void exportImportProperties(Dictionary dictionary)
 		throws Exception {
 
-		byte[] bytes = ConfigurationExporter.getPropertiesAsBytes(properties);
+		byte[] bytes = ConfigurationExporter.getPropertiesAsBytes(dictionary);
 
 		FileOutputStream fileOutputStream = new FileOutputStream(_file);
 
