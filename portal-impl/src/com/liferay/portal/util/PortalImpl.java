@@ -2044,11 +2044,13 @@ public class PortalImpl implements Portal {
 
 			Date date = cal.getTime();
 
-			/*if ((timeZone != null) &&
+			/*
+			if ((timeZone != null) &&
 				cal.before(CalendarFactoryUtil.getCalendar(timeZone))) {
 
 				throw pe;
-			}*/
+			}
+			*/
 
 			return date;
 		}
