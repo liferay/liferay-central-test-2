@@ -2757,7 +2757,7 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  iferay.portal.kernel.messaging,com.liferay.portal.kernel.scheduler",c
  om.liferay.portal.kernel.scripting;version="7.0.0";uses:="com.liferay
  .portal.kernel.exception,javax.portlet",com.liferay.portal.kernel.sea
- rch;version="7.2.0";uses:="com.liferay.asset.kernel.model,com.liferay
+ rch;version="7.3.0";uses:="com.liferay.asset.kernel.model,com.liferay
  .expando.kernel.model,com.liferay.portal.kernel.backgroundtask,com.li
  feray.portal.kernel.comment,com.liferay.portal.kernel.exception,com.l
  iferay.portal.kernel.json,com.liferay.portal.kernel.messaging,com.lif
