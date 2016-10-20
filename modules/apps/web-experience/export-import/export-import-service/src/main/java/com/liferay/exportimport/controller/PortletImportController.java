@@ -1296,7 +1296,7 @@ public class PortletImportController implements ImportController {
 			return;
 		}
 
-		// Portlet preferences to be updated only when importing data
+		// Portlet preferences will be updated only when importing data
 
 		String[] dataPortletPreferences =
 			portletDataHandler.getDataPortletPreferences();
