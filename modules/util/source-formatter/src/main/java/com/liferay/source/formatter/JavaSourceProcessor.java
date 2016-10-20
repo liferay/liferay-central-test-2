@@ -855,7 +855,7 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 				sb.append("vulnerability using ");
 			}
 			else {
-				sb.append("Use SecureXMLBuilderUtil.");
+				sb.append("Use SecureXMLFactoryProviderUtil.");
 				sb.append("newDocumentBuilderFactory instead of ");
 			}
 
