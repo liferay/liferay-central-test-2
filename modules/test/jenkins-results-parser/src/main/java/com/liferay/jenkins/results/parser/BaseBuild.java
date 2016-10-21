@@ -414,8 +414,6 @@ public abstract class BaseBuild implements Build {
 
 					if (runningBuildJSONObject != null) {
 						setBuildNumber(runningBuildJSONObject.getInt("number"));
-
-						setStatus("running");
 					}
 					else {
 						JSONObject queueItemJSONObject =
@@ -1004,6 +1002,8 @@ public abstract class BaseBuild implements Build {
 	protected void setBuildNumber(int buildNumber) {
 		_buildNumber = buildNumber;
 
+		setStatus("running");
+
 		if (_buildNumber != -1) {
 			checkForReinvocation();
 		}
@@ -1026,9 +1026,9 @@ public abstract class BaseBuild implements Build {
 
 		_consoleReadCursor = 0;
 
-		checkForReinvocation();
-
 		setStatus("running");
+
+		checkForReinvocation();
 	}
 
 	protected void setInvocationURL(String invocationURL) throws Exception {
