@@ -142,6 +142,25 @@
 		</execute>
 
 		<execute macro="DMDocument#addCP">
+			<var name="dmDocumentFile" value="Document_1.txt" />
+			<var name="dmDocumentTitle" value="Document_1.txt" />
+		</execute>
+
+		<execute macro="DMNavigator#gotoDocumentCP">
+			<var name="dmDocumentTitle" value="Document_1.txt" />
+		</execute>
+
+		<execute macro="DMDocument#viewCP">
+			<var name="dmDocumentTitle" value="Document_1.txt" />
+		</execute>
+	</command>
+
+	<command name="AddAllDocumentTypes" priority="5">
+		<execute macro="DMRepository#gotoCP">
+			<var name="dmRepositoryName" value="Documentum Repository Name" />
+		</execute>
+
+		<execute macro="DMDocument#addCP">
 			<var name="dmDocumentFile" value="Document_1.doc" />
 			<var name="dmDocumentTitle" value="Document_1.doc" />
 		</execute>
