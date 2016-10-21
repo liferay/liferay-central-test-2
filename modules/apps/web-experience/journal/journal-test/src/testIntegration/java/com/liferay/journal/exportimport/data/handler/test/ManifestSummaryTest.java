@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.journal.lar.test;
+package com.liferay.journal.exportimport.data.handler.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 import com.liferay.asset.kernel.model.AssetEntry;
@@ -22,6 +22,7 @@ import com.liferay.exportimport.kernel.lar.ExportImportHelperUtil;
 import com.liferay.exportimport.kernel.lar.ManifestSummary;
 import com.liferay.exportimport.kernel.lar.PortletDataContext;
 import com.liferay.exportimport.kernel.lar.StagedModelType;
+import com.liferay.journal.exportimport.data.handler.test.JournalArticleStagedModelDataHandlerTest;
 import com.liferay.journal.model.JournalArticle;
 import com.liferay.journal.model.JournalFolder;
 import com.liferay.portal.kernel.model.Group;
