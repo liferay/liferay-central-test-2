@@ -8,7 +8,12 @@ module.exports = function(config) {
 
 	config.plugins.push(karmaHtml2JsPreprocessor);
 
-	config.files.push('test/**/fixtures/*.html');
+	config.files = [
+		'node_modules/metal*/src/**/*.js',
+		'src/**/*.es.js',
+		'test/**/*.js',
+		'test/**/fixtures/*.html'
+	];
 
 	config.preprocessors['test/**/fixtures/*.html'] = ['html2js'];
 };
