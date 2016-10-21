@@ -381,17 +381,11 @@ public abstract class BaseBuild implements Build {
 
 		if (!hostName.startsWith("cloud-10-0")) {
 			System.out.println("A build may not be reinvoked by " + hostName);
+
+			return;
 		}
 
-		result = null;
-
 		String invocationURL = getInvocationURL();
-
-		badBuildNumbers.add(getBuildNumber());
-
-		setBuildNumber(-1);
-
-		downstreamBuilds.clear();
 
 		try {
 			JenkinsResultsParserUtil.toString(
@@ -401,11 +395,9 @@ public abstract class BaseBuild implements Build {
 			throw new RuntimeException(e);
 		}
 
-		setStatus("starting");
+		System.out.println(getReinvokedMessage());
 
-		_consoleReadCursor = 0;
-
-		System.out.println("Reinvoked: " + invocationURL);
+		reset();
 	}
 
 	@Override
@@ -506,6 +498,22 @@ public abstract class BaseBuild implements Build {
 		}
 
 		update();
+	}
+
+	protected void checkForReinvocation() {
+		Build topLevelBuild = getTopLevelBuild();
+
+		if (topLevelBuild == null) {
+			return;
+		}
+
+		String consoleText = topLevelBuild.getConsoleText();
+
+		if (consoleText.contains(getReinvokedMessage())) {
+			reset();
+
+			update();
+		}
 	}
 
 	protected void findDownstreamBuilds() {
@@ -624,7 +632,13 @@ public abstract class BaseBuild implements Build {
 			}
 
 			if (status.equals("running")) {
-				sb.append(" started at ");
+				if (badBuildNumbers.size() > 0) {
+					sb.append(" restarted at ");
+				}
+				else {
+					sb.append(" started at ");
+				}
+
 				sb.append(getBuildURL());
 				sb.append(".");
 
@@ -786,6 +800,17 @@ public abstract class BaseBuild implements Build {
 		return jsonObject.getJSONArray("items");
 	}
 
+	protected String getReinvokedMessage() {
+		StringBuffer sb = new StringBuffer();
+
+		sb.append("Reinvoked: ");
+		sb.append(getBuildURL());
+		sb.append(" at ");
+		sb.append(getInvocationURL());
+
+		return sb.toString();
+	}
+
 	protected JSONObject getRunningBuildJSONObject() throws Exception {
 		JSONArray buildsJSONArray = getBuildsJSONArray();
 
@@ -875,6 +900,18 @@ public abstract class BaseBuild implements Build {
 		}
 	}
 
+	protected Build getTopLevelBuild() {
+		Build parentBuildCursor = _parentBuild;
+
+		while ((parentBuildCursor != null) &&
+		 !(parentBuildCursor instanceof TopLevelBuild)) {
+
+			parentBuildCursor = parentBuildCursor.getParentBuild();
+		}
+
+		return parentBuildCursor;
+	}
+
 	protected boolean isParentBuildRoot() {
 		if (_parentBuild == null) {
 			return false;
@@ -950,8 +987,26 @@ public abstract class BaseBuild implements Build {
 		}
 	}
 
+	protected void reset() {
+		result = null;
+
+		badBuildNumbers.add(getBuildNumber());
+
+		setBuildNumber(-1);
+
+		downstreamBuilds.clear();
+
+		_consoleReadCursor = 0;
+
+		setStatus("starting");
+	}
+
 	protected void setBuildNumber(int buildNumber) {
 		_buildNumber = buildNumber;
+
+		if (_buildNumber != -1) {
+			checkForReinvocation();
+		}
 	}
 
 	protected void setBuildURL(String buildURL) throws Exception {
@@ -970,6 +1025,8 @@ public abstract class BaseBuild implements Build {
 		loadParametersFromBuildJSONObject();
 
 		_consoleReadCursor = 0;
+
+		checkForReinvocation();
 
 		setStatus("running");
 	}
