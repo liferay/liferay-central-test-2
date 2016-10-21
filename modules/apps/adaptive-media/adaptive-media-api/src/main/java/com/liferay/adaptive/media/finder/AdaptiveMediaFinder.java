@@ -22,45 +22,36 @@ import java.util.function.Function;
 import java.util.stream.Stream;
 
 /**
- * A {@link AdaptiveMediaFinder} is responsible of locating and returning media
- * related to a model.
+ * An {@link AdaptiveMediaFinder} is responsible for locating and returning
+ * media related to a model.
  *
- * All media matching the query will be returned, sorted by score. This means
- * better matches will appear before lesser ones.
+ * <p>
+ * All media matching the query is sorted by score and returned. Better matches
+ * are prioritized before worse ones.
+ * </p>
  *
  * @author Adolfo Pérez
- *
- * @review
  */
 public interface AdaptiveMediaFinder
 	<B extends AdaptiveMediaQueryBuilder<M, T>, M, T> {
 
 	/**
-	 * Return all {@link AdaptiveMedia} for the given model that matches the
-	 * query. The provided function will be invoked with an instance of an
-	 * implementation dependant {@link AdaptiveMediaQueryBuilder}, that callers
-	 * must use to create the query.
+	 * Returns all {@link AdaptiveMedia} instances for the model that matches
+	 * the query. The function is invoked with an instance of an implementation
+	 * dependent {@link AdaptiveMediaQueryBuilder}, that callers must use to
+	 * create the query.
 	 *
-	 * @param queryBuilderFunction Function that will be invoked with a {@link
-	 *        AdaptiveMediaQueryBuilder} as argument. This query builder will
-	 *        provide operations to filter and sort the returned media.
-	 *
-	 * @return A non-null, possibly empty stream with all media matching the
-	 *         query ordered by score: better matches are returned before
-	 *         worser ones
-	 *
-	 * @throws AdaptiveMediaException if an error occurred while
-	 *         getting the {@link AdaptiveMedia}. See
-	 *         {@link AdaptiveMediaException} inner classes for the set
-	 *         of possible exceptions.
-	 * @throws AdaptiveMediaRuntimeException.IOException
-	 *         if an error occurs while processing the
-	 * @throws IllegalArgumentException if <code>queryBuilderFunction</code> is
-	 *         null, or the query returned by it is not valid.
+	 * @param  queryBuilderFunction a function to be invoked with an {@link
+	 *         AdaptiveMediaQueryBuilder} argument. The query builder provides
+	 *         operations to filter and sort the returned media.
+	 * @return a non-<code>null</code>, possibly empty stream of all media
+	 *         instances matching the query ordered by score: better matches are
+	 *         prioritized first
+	 * @throws AdaptiveMediaException if an error occurred while getting the
+	 *         {@link AdaptiveMedia}. See {@link AdaptiveMediaException} inner
+	 *         classes for the set of possible exceptions.
 	 * @throws PortalException if an error occurred while calling any Liferay
-	 *         services
-	 *
-	 * @review
+	 *         service
 	 */
 	public Stream<AdaptiveMedia<T>> getAdaptiveMedia(
 			Function<B, AdaptiveMediaQuery<M, T>> queryBuilderFunction)

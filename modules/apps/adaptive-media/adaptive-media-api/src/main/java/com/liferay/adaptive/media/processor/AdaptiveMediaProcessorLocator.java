@@ -15,26 +15,18 @@
 package com.liferay.adaptive.media.processor;
 
 /**
- * Implementations of this interface are responsible of the location of the
- * a valid {@link AdaptiveMediaProcessor} for a particular model class.
+ * Locates a valid {@link AdaptiveMediaProcessor} for a particular model class.
  *
  * @author Adolfo Pérez
- *
- * @review
  */
 public interface AdaptiveMediaProcessorLocator {
 
 	/**
-	 * Return a {@link AdaptiveMediaProcessor} for the given class. If no
-	 * processor is found, implementations are free to return a processor that
-	 * does nothing.
+	 * Returns an {@link AdaptiveMediaProcessor} for the class. If no processor
+	 * is found, implementations might return a processor that does nothing.
 	 *
-	 * @param clazz The class of models the returned processor will support
-	 * @param <M> The class generic type
-	 *
-	 * @return A non null {@link AdaptiveMediaProcessor}
-	 *
-	 * @review
+	 * @param  clazz the class of models the returned processor supports
+	 * @return a non-<code>null</code> {@link AdaptiveMediaProcessor}
 	 */
 	public <M> AdaptiveMediaProcessor<M, ?> locateForClass(Class<M> clazz);
 

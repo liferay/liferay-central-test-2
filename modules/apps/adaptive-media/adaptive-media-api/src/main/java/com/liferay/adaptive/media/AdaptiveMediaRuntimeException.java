@@ -16,8 +16,6 @@ package com.liferay.adaptive.media;
 
 /**
  * @author Adolfo Pérez
- *
- * @review
  */
 public class AdaptiveMediaRuntimeException extends RuntimeException {
 
@@ -37,10 +35,9 @@ public class AdaptiveMediaRuntimeException extends RuntimeException {
 	}
 
 	/**
-	 * Exception thrown when a value serialized as a String cannot be converted
-	 * by a {@link AdaptiveMediaAttribute}.
-	 *
-	 * @review
+	 * This exception is thrown when a value serialized as a
+	 * <code>String</code> cannot be converted by an
+	 * {@link AdaptiveMediaAttribute}.
 	 */
 	public static final class AdaptiveMediaAttributeFormatException
 		extends AdaptiveMediaRuntimeException {
@@ -65,9 +62,7 @@ public class AdaptiveMediaRuntimeException extends RuntimeException {
 	}
 
 	/**
-	 * Exception thrown when there is a processor configuration error.
-	 *
-	 * @review
+	 * This exception is thrown when there is a processor configuration error.
 	 */
 	public static final class InvalidConfiguration
 		extends AdaptiveMediaRuntimeException {
@@ -90,11 +85,9 @@ public class AdaptiveMediaRuntimeException extends RuntimeException {
 	}
 
 	/**
-	 * Exception used to wrap instances {@link java.io.IOException}. This kind
-	 * of exception is considered a system error, so it is reasonable to wrap
-	 * it inside a RuntimeException
-	 *
-	 * @review
+	 * This exception wraps {@link java.io.IOException} instances. Since it
+	 * is a system error, it is reasonable to wrap it inside a runtime
+	 * exception.
 	 */
 	public static final class IOException
 		extends AdaptiveMediaRuntimeException {
@@ -117,12 +110,9 @@ public class AdaptiveMediaRuntimeException extends RuntimeException {
 	}
 
 	/**
-	 * Exception used to wrap instances {@link
-	 * java.io.UnsupportedEncodingException} This kind of exception is
-	 * considered a system error, so it is reasonable to wrap it inside a
-	 * RuntimeException
-	 *
-	 * @review
+	 * This exception wraps {@link java.io.UnsupportedEncodingException}
+	 * instances. Since it is a system error, it is reasonable to wrap it
+	 * inside a runtime exception.
 	 */
 	public static final class UnsupportedEncodingException
 		extends AdaptiveMediaRuntimeException {

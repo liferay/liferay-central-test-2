@@ -144,6 +144,7 @@ public class ImageAdaptiveMediaQueryBuilderImpl
 		return this;
 	}
 
+	@Override
 	public <V> FuzzySortStep with(
 		AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, V> attribute,
 		Optional<V> valueOptional) {

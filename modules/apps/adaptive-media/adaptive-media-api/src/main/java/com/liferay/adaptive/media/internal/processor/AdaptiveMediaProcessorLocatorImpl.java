@@ -28,13 +28,11 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 /**
- * This is an {@link AdaptiveMediaProcessorLocator} that will decorate any
+ * This {@link AdaptiveMediaProcessorLocator} implementation decorates any
  * returned {@link AdaptiveMediaProcessor} so that it executes its logic
  * asynchronously once the current transaction has finished.
  *
  * @author Adolfo Pérez
- *
- * @review
  */
 @Component(immediate = true, service = AdaptiveMediaProcessorLocator.class)
 public class AdaptiveMediaProcessorLocatorImpl

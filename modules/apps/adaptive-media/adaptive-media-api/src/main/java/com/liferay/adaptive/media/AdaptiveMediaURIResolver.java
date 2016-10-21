@@ -18,8 +18,6 @@ import java.net.URI;
 
 /**
  * @author Adolfo Pérez
- *
- * @review
  */
 public interface AdaptiveMediaURIResolver {
 

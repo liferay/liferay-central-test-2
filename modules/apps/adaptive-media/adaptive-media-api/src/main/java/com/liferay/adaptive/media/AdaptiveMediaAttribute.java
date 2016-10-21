@@ -20,72 +20,63 @@ import java.util.Comparator;
 import java.util.function.Function;
 
 /**
- * A {@link AdaptiveMediaAttribute} represents a characteristic of a media
- * (width, size, etc.). Instances of {@link AdaptiveMediaAttribute} are
- * annotated by a processor type and by the attribute value type. The processor
- * type restriction is there to avoid users of {@link AdaptiveMedia} to request
- * attributes not supported by the processor (i.e. the set of available
- * attributes is checked at compile time). The attribute value type annotation
- * will reduce (or avoid completely) the need for runtime casts when retrieving
+ * Represents a characteristic of an {@link AdaptiveMedia} instance (e.g., its
+ * width, size, etc.). Instances are annotated by a processor type and by the
+ * attribute value type. The processor type restriction prevents {@link
+ * AdaptiveMedia} users from requesting unsupported attributes (i.e., the set of
+ * available attributes is checked at compile time). The attribute value type
+ * annotation reduces (or avoids completely) the need to cast retrieved
  * attribute values.
  *
  * @author Adolfo Pérez
- *
- * @review
  */
 @ProviderType
 public final class AdaptiveMediaAttribute<T, V> {
 
 	/**
-	 * A generic attribute representing the content length of the media. This
-	 * attribute can be used with any kind of media.
+	 * Returns a generic attribute representing the content length of the media.
+	 * This attribute can be used with any kind of media.
 	 *
-	 * @return The content length attribute
-	 *
-	 * @review
+	 * @return the content length attribute
 	 */
 	public static final <S> AdaptiveMediaAttribute<S, Integer> contentLength() {
 		return (AdaptiveMediaAttribute<S, Integer>)_CONTENT_LENGTH;
 	}
 
 	/**
-	 * A generic attribute representing the content type of the media. This
+	 * Returns a generic attribute representing the media's content type. This
 	 * attribute can be used with any kind of media.
 	 *
 	 * @return the content type attribute
-	 *
-	 * @review
 	 */
 	public static final <S> AdaptiveMediaAttribute<S, String> contentType() {
 		return (AdaptiveMediaAttribute<S, String>)_CONTENT_TYPE;
 	}
 
 	/**
-	 * A generic attribute representing the file name (if any) of the media.
+	 * Returns a generic attribute representing the media's file name (if any).
 	 * This attribute can be used with any kind of media.
 	 *
 	 * @return the file name attribute
-	 *
-	 * @review
 	 */
 	public static final <S> AdaptiveMediaAttribute<S, String> fileName() {
 		return (AdaptiveMediaAttribute<S, String>)_FILE_NAME;
 	}
 
 	/**
-	 * Create a new attribute. As all attributes live in the same global
-	 * namespace. <code>name</code> should uniquely identify this attribute, and
-	 * it is recommended for it to be a human readable value. <code>converter
-	 * </code> should be a function capable of converting a String to a value
-	 * of the correct type; this function should throw a {@link
-	 * AdaptiveMediaRuntimeException.AdaptiveMediaAttributeFormatException}
-	 * when the given String is not convertible. <code>comparator</code>
-	 * is a comparator that compare its two arguments for order considering the
-	 * distance between their values; it should return a value between
-	 * {@link Integer#MIN_VALUE} and {@link Integer#MAX_VALUE} based on the
-	 * distance of the values.
+	 * Creates a new attribute. All attributes live in the same global
+	 * namespace.
 	 *
-	 * @review
+	 * @param name a human-readable value that uniquely identifies this
+	 *        attribute
+	 * @param converter a function that can convert a <code>String</code> to a
+	 *        value of the correct type; this function should throw an {@link
+	 *        AdaptiveMediaRuntimeException.AdaptiveMediaAttributeFormatException}
+	 *        if it cannot convert the String.
+	 * @param comparator compares its two arguments for order considering the
+	 *        distance between their values; it should return a value between
+	 *        {@link Integer#MIN_VALUE} and {@link Integer#MAX_VALUE} based on
+	 *        the distance of the values.
 	 */
 	public AdaptiveMediaAttribute(
 		String name, Function<String, V> converter, Comparator<V> comparator) {
@@ -96,57 +87,46 @@ public final class AdaptiveMediaAttribute<T, V> {
 	}
 
 	/**
-	 * Compares its two arguments for order. Returns a negative integer,
-	 * zero, or a positive integer as the first argument is less than, equal
-	 * to, or greater than the second
+	 * Compares its two arguments for order. Returns a negative integer, zero,
+	 * or a positive integer depending on whether the first argument is less
+	 * than, equal to, or greater than the second argument respectively.
 	 *
-	 * @param value1 The first value to be compared
-	 * @param value2 The second value to be compared
-	 * @return a negative integer, zero, or a positive integer as the
-	 *         first argument is less than, equal to, or greater than the
-	 *         second.
-	 *
-	 * @review
+	 * @param  value1 The first value to be compared
+	 * @param  value2 The second value to be compared
+	 * @return a negative integer, zero, or a positive integer depending on
+	 *         whether the first argument is less than, equal to, or greater
+	 *         than the second argument respectively.
 	 */
 	public int compare(V value1, V value2) {
 		return _comparator.compare(value1, value2);
 	}
 
 	/**
-	 * Convert the given string to a value of the correct type.
+	 * Returns the value converted to the correct type.
 	 *
-	 * @param value the string containing the value to convert
-	 * @return The converted value
-	 * @throws {@link
-	 *         AdaptiveMediaRuntimeException.AdaptiveMediaAttributeFormatException}
-	 *         when the give value is not convertible.
-	 *
-	 * @review
+	 * @param  value the value to convert
+	 * @return the value converted to the correct type
 	 */
 	public V convert(String value) {
 		return _converter.apply(value);
 	}
 
 	/**
-	 * Compute the distance between the two values.
+	 * Returns the distance between the two values.
 	 *
-	 * @param value1 The first value
-	 * @param value2 The second value
-	 * @return A value between 0 and {@link Integer#MAX_VALUE} representing how
-	 *         close both values are
-	 *
-	 * @review
+	 * @param  value1 the first value
+	 * @param  value2 the second value
+	 * @return a value between 0 and {@link Integer#MAX_VALUE} representing the
+	 *         distance between the two values
 	 */
 	public int distance(V value1, V value2) {
 		return Math.abs(_comparator.compare(value1, value2));
 	}
 
 	/**
-	 * Return the globally unique name for this attribute.
+	 * Returns this {@link AdaptiveMedia} instance's globally unique name.
 	 *
-	 * @return the name of this attribute
-	 *
-	 * @review
+	 * @return the attribute's name
 	 */
 	public String getName() {
 		return _name;

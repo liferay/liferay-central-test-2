@@ -23,27 +23,22 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
- * This class is responsible of giving convenient access to a set of media
- * attributes. It will offer a typesafe interface to access attribute values,
- * accepting only attributes of the correct type (those for adaptive images),
- * and returning values of the correct type.
+ * Gives convenient access to a set of media attributes. It offers a type-safe
+ * interface to access attribute values, accepting only attributes of the
+ * correct type (those for adaptive images), and returning values of the correct
+ * type.
  *
  * @author Adolfo Pérez
- *
- * @review
  */
 public class ImageAdaptiveMediaAttributeMapping {
 
 	/**
-	 * Return an {@link ImageAdaptiveMediaAttributeMapping} that will use the
-	 * given map as the underlying attribute storage.
+	 * Returns an {@link ImageAdaptiveMediaAttributeMapping} that uses the map
+	 * as the underlying attribute storage.
 	 *
-	 * @param properties The map to get the properties from
-	 * @return A non-null mapping that will give typesafe access to the
-	 *         underlying map
-	 * @throws IllegalArgumentException if <code>properties</code> is null
-	 *
-	 * @review
+	 * @param  properties the map to get the properties from
+	 * @return a non-<code>null</code> mapping that provides type-safe access to
+	 *         an underlying map
 	 */
 	public static ImageAdaptiveMediaAttributeMapping fromProperties(
 		Map<String, String> properties) {
@@ -79,15 +74,12 @@ public class ImageAdaptiveMediaAttributeMapping {
 	}
 
 	/**
-	 * Return an {@link Optional} that will contain the value of
-	 * <code>attribute</code> in this mapping (if any).
+	 * Returns an {@link Optional} instance that contains the value of the
+	 * attribute (if any) in this mapping.
 	 *
-	 * @param attribute a non null attribute
-	 * @param <V> the type of the value mapped to the attribute
-	 * @return A non-null optional that will contain the (non-null) value (if
-	 *         any)
-	 *
-	 * @review
+	 * @param  attribute a non <code>null</code> attribute
+	 * @return A non-<code>null</code> optional that will contain the
+	 *         (non-<code>null</code>) value (if any)
 	 */
 	public <V> Optional<V> getAttributeValue(
 		AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, V> attribute) {

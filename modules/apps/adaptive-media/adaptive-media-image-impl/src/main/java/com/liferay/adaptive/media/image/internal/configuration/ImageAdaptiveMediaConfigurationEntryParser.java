@@ -23,31 +23,36 @@ import java.util.regex.Pattern;
 import org.osgi.service.component.annotations.Component;
 
 /**
- * An {@link ImageAdaptiveMediaConfigurationEntryParser} is responsible of
- * parsing ConfigAdmin configuration entries.
+ * Parses ConfigAdmin configuration entries.
  *
+ * <p>
  * A configuration entry must be a string of the following form:
- * <code>
- *     name:uuid:key0=val0;key1=val1;...;keyN=valN
- * </code>
- * Where_
- * <ul>
- *     <li>
- *         name is an arbitrary {@link String}
- *     </li>
- *     <li>
- *         uuid must be a unique identifier. No two configuration entries should
- *         have the same UUID.
- *     </li>
- *     <li>
- *         The key and value pairs can be anything, but note that consumers of
- *         the resulting {@link ImageAdaptiveMediaConfigurationEntry} may
- *         require a particular set of attributes.
- *     </li>
- * </ul>
- * @author Adolfo Pérez
+ * </p>
  *
- * @review
+ * <code>
+ * name:uuid:key0=val0;key1=val1;...;keyN=valN
+ * </code>
+ *
+ * <p>
+ * Where ...
+ * </p>
+ *
+ * <ul>
+ * <li>
+ * <code>name</code> is an arbitrary {@link String}
+ * </li>
+ * <li>
+ * <code>uuid</code> is a unique identifier. No two configuration entries should
+ * have the same UUID.
+ * </li>
+ * <li>
+ * The key and value pairs can be anything, but consumers of
+ * the resulting {@link ImageAdaptiveMediaConfigurationEntry} might
+ * require a particular set of attributes.
+ * </li>
+ * </ul>
+ *
+ * @author Adolfo Pérez
  */
 @Component(
 	immediate = true, service = ImageAdaptiveMediaConfigurationEntryParser.class
@@ -55,15 +60,10 @@ import org.osgi.service.component.annotations.Component;
 public class ImageAdaptiveMediaConfigurationEntryParser {
 
 	/**
-	 * Parse the give configuration line, and return a configuration entry with
-	 * its data.
+	 * Returns a configuration entry parsed from the configuration line's data.
 	 *
-	 * @param s the configuration line to parse
-	 * @return A {@link ImageAdaptiveMediaConfigurationEntry} with the line data
-	 * @throws IllegalArgumentException is <code>s</code> is null or it is not a
-	 *         valid configuration line.
-	 *
-	 * @review
+	 * @param  s the configuration line to parse
+	 * @return a {@link ImageAdaptiveMediaConfigurationEntry} with the line data
 	 */
 	public ImageAdaptiveMediaConfigurationEntry parse(String s) {
 		if (Validator.isNull(s)) {

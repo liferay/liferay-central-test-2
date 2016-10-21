@@ -20,52 +20,37 @@ import com.liferay.adaptive.media.AdaptiveMediaException;
 import com.liferay.portal.kernel.exception.PortalException;
 
 /**
- * A {@link AdaptiveMediaProcessor} is responsible of generating media of a
- * particular type.
+ * Generates a particular type of media.
  *
- * The type parameter M specifies the model used by the processor to generate
- * the media. The type parameter T is used to restrict the set of valid
- * {@link com.liferay.adaptive.media.AdaptiveMediaAttribute} available.
+ * <p>
+ * The type parameter <code>M</code> specifies the model used by the processor
+ * to generate the media. The type parameter <code>T</code> restricts the valid
+ * {@link com.liferay.adaptive.media.AdaptiveMediaAttribute} set available.
+ * </p>
  *
  * @author Adolfo Pérez
- *
- * @review
  */
 @ProviderType
 public interface AdaptiveMediaProcessor<M, T> {
 
 	/**
-	 * Completely remove any generated media for the given model. After calling
-	 * this method on a model, the result of calling
-	 * AdaptiveMediaProcessor#getMedia with that same model is undefined.
+	 * Completely removes any generated media for the model. After calling this
+	 * method on a model, the result of calling {@link
+	 * com.liferay.adaptive.media.processor#getMedia} with that same model is
+	 * undefined.
 	 *
-	 * @param model The model for which all generated media will be deleted
-	 *
-	 * @throws AdaptiveMediaException if a processing error occurred.
-	 *         See {@link AdaptiveMediaException} inner classes for the
-	 *         set of possible exceptions.
-	 * @throws AdaptiveMediaRuntimeException
-	 *         if a system error occurred.
-	 *
-	 * @review
+	 * @param  model the model for which all generated media is deleted
+	 * @throws PortalException
 	 */
 	public void cleanUp(M model) throws AdaptiveMediaException, PortalException;
 
 	/**
-	 * Generate the media for the given model. Implementations may decide not to
-	 * generate any media for a model.
+	 * Generates the media for the model. Some implementations might not
+	 * generate any media for the model.
 	 *
-	 * @param model The model for which media will be generated
-	 *
-	 * @throws AdaptiveMediaException if an error occurred while
-	 *         generating the media. See {@link AdaptiveMediaException}
-	 *         inner classes for the set of possible exceptions.
-	 * @throws AdaptiveMediaRuntimeException
-	 *         if a system error occurred.
+	 * @param  model the model for which media is generated
 	 * @throws PortalException if an error occurred while calling any Liferay
 	 *         services
-	 *
-	 * @review
 	 */
 	public void process(M model) throws AdaptiveMediaException, PortalException;
 

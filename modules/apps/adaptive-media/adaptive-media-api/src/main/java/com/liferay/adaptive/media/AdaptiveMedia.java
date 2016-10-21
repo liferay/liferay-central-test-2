@@ -23,51 +23,40 @@ import java.net.URI;
 import java.util.Optional;
 
 /**
- * A {@link AdaptiveMedia} represents some content (images, audio, video, etc.)
- * along with a set of attributes which characterize that content.
+ * Represents content (images, audio, video, and other types of content) along
+ * with a set of attributes which characterize the content.
  *
  * @author Adolfo Pérez
- *
- * @review
  */
 @ProviderType
 public interface AdaptiveMedia<T> {
 
 	/**
-	 * Return this media's value for the given attribute. This method will
-	 * always return a non null optional.
+	 * Returns this {@link AdaptiveMedia} instance's value for the attribute.
+	 * This method always returns a non-<code>null</code> optional.
 	 *
-	 * @param attribute The attribute to get the value from
-	 * @param <V> The type of the attribute value
-	 *
-	 * @return {@link Optional#EMPTY} if the attribute is not present in this
-	 *         {@link AdaptiveMedia}; otherwise, the value wrapped in an {@link
-	 *         Optional}
-	 *
-	 * @review
+	 * @param  attribute the attribute
+	 * @return the attribute value wrapped in an {@link Optional}; {@link
+	 *         Optional#EMPTY} otherwise
 	 */
 	public <V> Optional<V> getAttributeValue(
 		AdaptiveMediaAttribute<T, V> attribute);
 
 	/**
-	 * Return an {@link InputStream} with the raw contents of this {@link
-	 * AdaptiveMedia}.
+	 * Returns an {@link InputStream} with the raw contents of this {@link
+	 * AdaptiveMedia} instance.
 	 *
 	 * @return An {@link InputStream} with the raw contents of this {@link
-	 *         AdaptiveMedia}
-	 *
-	 * @review
+	 *         AdaptiveMedia} instance
 	 */
 	public InputStream getInputStream();
 
 	/**
-	 * Return the URI of this {@link AdaptiveMedia}. This can be used by other
-	 * parts of the system to uniquely identify each {@link AdaptiveMedia}. This
-	 * URI should be treated as an opaque value.
+	 * Returns the URI of this {@link AdaptiveMedia} instance. The URI can be
+	 * used by other parts of the system to uniquely identify each {@link
+	 * AdaptiveMedia} instance. This URI should be treated as an opaque value.
 	 *
-	 * @return A URI pointing to this {@link AdaptiveMedia}
-	 *
-	 * @review
+	 * @return a URI for this {@link AdaptiveMedia} instance
 	 */
 	public URI getURI();
 

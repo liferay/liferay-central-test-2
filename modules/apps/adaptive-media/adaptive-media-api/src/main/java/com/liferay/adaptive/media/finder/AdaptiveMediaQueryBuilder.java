@@ -16,11 +16,9 @@ package com.liferay.adaptive.media.finder;
 
 /**
  * A marker interface that implementations of {@link AdaptiveMediaFinder} must
- * extend to provide a way to create {@link AdaptiveMediaQuery}.
+ * extend to provide a way to create {@link AdaptiveMediaQuery} instances.
  *
  * @author Adolfo Pérez
- *
- * @review
  */
 public interface AdaptiveMediaQueryBuilder<M, T> {
 }
