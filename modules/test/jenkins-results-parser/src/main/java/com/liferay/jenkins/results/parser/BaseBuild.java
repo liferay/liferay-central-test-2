@@ -14,8 +14,6 @@
 
 package com.liferay.jenkins.results.parser;
 
-import java.net.URL;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -79,13 +77,21 @@ public abstract class BaseBuild implements Build {
 
 	@Override
 	public String getBuildURL() {
-		String jobURL = getJobURL();
+		try {
+			String jobURL = getJobURL();
 
-		if ((jobURL == null) || (_buildNumber == -1)) {
-			return null;
+			if ((jobURL == null) || (_buildNumber == -1)) {
+				return null;
+			}
+
+			jobURL = JenkinsResultsParserUtil.decode(jobURL);
+
+			return JenkinsResultsParserUtil.encode(
+				jobURL + "/" + _buildNumber + "/");
 		}
-
-		return jobURL + "/" + _buildNumber + "/";
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	@Override
@@ -155,9 +161,7 @@ public abstract class BaseBuild implements Build {
 		sb.deleteCharAt(sb.length() - 1);
 
 		try {
-			URL url = JenkinsResultsParserUtil.encode(new URL(sb.toString()));
-
-			return url.toExternalForm();
+			return JenkinsResultsParserUtil.encode(sb.toString());
 		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
@@ -175,7 +179,13 @@ public abstract class BaseBuild implements Build {
 			return null;
 		}
 
-		return "http://" + master + "/job/" + jobName;
+		try {
+			return JenkinsResultsParserUtil.encode(
+				"http://" + master + "/job/" + jobName);
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	@Override
