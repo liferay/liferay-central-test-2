@@ -299,7 +299,8 @@ public class JournalContentDisplayContext {
 		catch (PortalException pe) {
 			_log.error(
 				"Unable to obtain ddm template for article " +
-					articleDisplay.getId());
+					articleDisplay.getId(),
+				pe);
 		}
 
 		return _ddmTemplate;
@@ -355,7 +356,8 @@ public class JournalContentDisplayContext {
 		catch (PortalException pe) {
 			_log.error(
 				"Unable to obtain ddm temmplate for article " +
-					article.getId());
+					article.getId(),
+				pe);
 		}
 
 		return _ddmTemplates;
@@ -806,7 +808,8 @@ public class JournalContentDisplayContext {
 		catch (PortalException pe) {
 			_log.error(
 				"Unable to check permissions for article " +
-					latestArticle.getId());
+					latestArticle.getId(),
+				pe);
 		}
 
 		return _showEditArticleIcon;
@@ -839,7 +842,8 @@ public class JournalContentDisplayContext {
 		catch (PortalException pe) {
 			_log.error(
 				"Unable to check permission on ddm template " +
-					ddmTemplate.getTemplateId());
+					ddmTemplate.getTemplateId(),
+				pe);
 		}
 
 		return _showEditTemplateIcon;

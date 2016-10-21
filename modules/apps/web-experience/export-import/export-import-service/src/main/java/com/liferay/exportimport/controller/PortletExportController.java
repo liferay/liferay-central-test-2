@@ -794,6 +794,12 @@ public class PortletExportController implements ExportController {
 					PortletKeys.PREFS_PLID_SHARED, portletElement);
 			}
 			catch (NoSuchPortletPreferencesException nsppe) {
+
+				// LPS-52675
+
+				if (_log.isDebugEnabled()) {
+					_log.debug(nsppe, nsppe);
+				}
 			}
 		}
 
@@ -1013,6 +1019,13 @@ public class PortletExportController implements ExportController {
 				ownerId, ownerType, plid, portletId);
 		}
 		catch (NoSuchPortletPreferencesException nsppe) {
+
+			// LPS-52675
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(nsppe, nsppe);
+			}
+
 			return;
 		}
 
@@ -1141,6 +1154,13 @@ public class PortletExportController implements ExportController {
 				ownerId, ownerType, LayoutConstants.DEFAULT_PLID, serviceName);
 		}
 		catch (NoSuchPortletPreferencesException nsppe) {
+
+			// LPS-52675
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(nsppe, nsppe);
+			}
+
 			return;
 		}
 

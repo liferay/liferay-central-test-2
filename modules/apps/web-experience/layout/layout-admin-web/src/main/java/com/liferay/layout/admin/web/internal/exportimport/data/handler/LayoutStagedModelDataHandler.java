@@ -714,6 +714,12 @@ public class LayoutStagedModelDataHandler
 					"linked-to-layout-uuid", linkedToLayout.getUuid());
 			}
 			catch (NoSuchLayoutException nsle) {
+
+				// LPS-52675
+
+				if (_log.isDebugEnabled()) {
+					_log.debug(nsle, nsle);
+				}
 			}
 		}
 	}

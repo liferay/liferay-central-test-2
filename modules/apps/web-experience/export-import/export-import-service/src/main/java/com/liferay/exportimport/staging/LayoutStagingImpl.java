@@ -16,6 +16,8 @@ package com.liferay.exportimport.staging;
 
 import com.liferay.exportimport.kernel.staging.LayoutStaging;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.model.LayoutRevision;
@@ -161,6 +163,13 @@ public class LayoutStagingImpl implements LayoutStaging {
 			return true;
 		}
 		catch (PortalException pe) {
+
+			// LPS-52675
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(pe, pe);
+			}
+
 			return false;
 		}
 	}
@@ -171,6 +180,9 @@ public class LayoutStagingImpl implements LayoutStaging {
 
 		_layoutSetBranchLocalService = layoutSetBranchLocalService;
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		LayoutStagingImpl.class);
 
 	private LayoutSetBranchLocalService _layoutSetBranchLocalService;
 

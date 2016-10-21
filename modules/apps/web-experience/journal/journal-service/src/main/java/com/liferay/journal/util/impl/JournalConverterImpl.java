@@ -1010,6 +1010,13 @@ public class JournalConverterImpl implements JournalConverter {
 				jsonArray = JSONFactoryUtil.createJSONArray(fieldValue);
 			}
 			catch (JSONException jsone) {
+
+				// LPS-52675
+
+				if (_log.isDebugEnabled()) {
+					_log.debug(jsone, jsone);
+				}
+
 				return;
 			}
 

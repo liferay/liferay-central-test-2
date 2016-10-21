@@ -184,6 +184,12 @@ public class JournalArticleImpl extends JournalArticleBaseImpl {
 				String.valueOf(ddmStructure.getStructureId()));
 		}
 		catch (PortalException pe) {
+
+			// LPS-52675
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(pe, pe);
+			}
 		}
 
 		return getContentByLocale(getDocument(), languageId, tokens);

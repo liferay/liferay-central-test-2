@@ -323,6 +323,12 @@ public class LayoutImportController implements ImportController {
 						layout, false, serviceContext);
 				}
 				catch (NoSuchLayoutException nsle) {
+
+					// LPS-52675
+
+					if (_log.isDebugEnabled()) {
+						_log.debug(nsle, nsle);
+					}
 				}
 			}
 		}
@@ -1200,6 +1206,12 @@ public class LayoutImportController implements ImportController {
 			}
 		}
 		catch (PortalException pe) {
+
+			// LPS-52675
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(pe, pe);
+			}
 		}
 		catch (Exception e) {
 			_log.error(e, e);

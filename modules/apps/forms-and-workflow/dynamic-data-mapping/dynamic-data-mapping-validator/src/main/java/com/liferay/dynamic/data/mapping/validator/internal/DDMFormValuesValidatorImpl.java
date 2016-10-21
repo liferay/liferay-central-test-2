@@ -37,6 +37,8 @@ import com.liferay.dynamic.data.mapping.validator.DDMFormValuesValidator;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONException;
 import com.liferay.portal.kernel.json.JSONFactory;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.util.ArrayList;
@@ -87,6 +89,13 @@ public class DDMFormValuesValidatorImpl implements DDMFormValuesValidator {
 			return _jsonFactory.createJSONArray(json);
 		}
 		catch (JSONException jsone) {
+
+			// LPS-52675
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(jsone, jsone);
+			}
+
 			throw new MustSetValidValue(fieldName);
 		}
 	}
@@ -333,6 +342,9 @@ public class DDMFormValuesValidatorImpl implements DDMFormValuesValidator {
 			throw new MustSetValidValuesSize(ddmFormField.getName());
 		}
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		DDMFormValuesValidatorImpl.class);
 
 	private DDMFormEvaluator _ddmFormEvaluator;
 	private JSONFactory _jsonFactory;
