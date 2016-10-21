@@ -56,6 +56,10 @@ public class AxisBuild extends BaseBuild {
 	}
 
 	@Override
+	protected void checkForReinvocation() {
+	}
+
+	@Override
 	protected void setBuildURL(String buildURL) throws Exception {
 		buildURL = JenkinsResultsParserUtil.decode(buildURL);
 
