@@ -134,7 +134,7 @@ public class ServiceComponentLocalServiceTest {
 
 		ServiceRegistration<UpgradeStep> upgradeStepServiceRegistration =
 			registry.registerService(
-				UpgradeStep.class, new SimpleUpgradeStep(db), properties);
+				UpgradeStep.class, new TestUpgradeStep(db), properties);
 
 		String tableName = _TEST_TABLE;
 
@@ -176,7 +176,7 @@ public class ServiceComponentLocalServiceTest {
 
 		ServiceRegistration<UpgradeStep> upgradeStepServiceRegistration =
 			registry.registerService(
-				UpgradeStep.class, new SimpleUpgradeStep(db), properties);
+				UpgradeStep.class, new TestUpgradeStep(db), properties);
 
 		try {
 			ServiceComponentLocalServiceUtil.verifyDB();
@@ -214,7 +214,7 @@ public class ServiceComponentLocalServiceTest {
 
 		ServiceRegistration<UpgradeStep> upgradeStepServiceRegistration =
 			registry.registerService(
-				UpgradeStep.class, new SimpleUpgradeStep(db), properties);
+				UpgradeStep.class, new TestUpgradeStep(db), properties);
 
 		try {
 			ServiceComponentLocalServiceUtil.verifyDB();
@@ -236,9 +236,9 @@ public class ServiceComponentLocalServiceTest {
 		}
 	}
 
-	public class SimpleUpgradeStep implements UpgradeStep {
+	public class TestUpgradeStep implements UpgradeStep {
 
-		public SimpleUpgradeStep(DB db) {
+		public TestUpgradeStep(DB db) {
 			_db = db;
 		}
 
