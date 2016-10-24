@@ -909,15 +909,15 @@ public abstract class BaseBuild implements Build {
 	}
 
 	protected Build getTopLevelBuild() {
-		Build parentBuildCursor = _parentBuild;
+		Build topLevelBuild = _parentBuild;
 
-		while ((parentBuildCursor != null) &&
-		 !(parentBuildCursor instanceof TopLevelBuild)) {
+		while ((topLevelBuild != null) &&
+		 !(topLevelBuild instanceof TopLevelBuild)) {
 
-			parentBuildCursor = parentBuildCursor.getParentBuild();
+			topLevelBuild = topLevelBuild.getParentBuild();
 		}
 
-		return parentBuildCursor;
+		return topLevelBuild;
 	}
 
 	protected boolean isParentBuildRoot() {
