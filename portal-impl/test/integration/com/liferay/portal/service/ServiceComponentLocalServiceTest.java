@@ -67,7 +67,7 @@ public class ServiceComponentLocalServiceTest {
 		_serviceComponent2 = addServiceComponent(_SERVICE_COMPONENT_2, 1);
 
 		_release = ReleaseLocalServiceUtil.addRelease(
-			"SimpleUpgradeStep", "0.0.0");
+			"ServiceComponentLocalServiceTest", "0.0.0");
 	}
 
 	@Test
@@ -126,7 +126,7 @@ public class ServiceComponentLocalServiceTest {
 
 		Map<String, Object> properties = new HashMap<>();
 
-		properties.put("upgrade.bundle.symbolic.name", "SimpleUpgradeStep");
+		properties.put("upgrade.bundle.symbolic.name", "ServiceComponentLocalServiceTest");
 		properties.put("upgrade.from.schema.version", "0.0.0");
 		properties.put("upgrade.initial.database.creation", true);
 
@@ -168,7 +168,7 @@ public class ServiceComponentLocalServiceTest {
 
 		Map<String, Object> properties = new HashMap<>();
 
-		properties.put("upgrade.bundle.symbolic.name", "SimpleUpgradeStep");
+		properties.put("upgrade.bundle.symbolic.name", "ServiceComponentLocalServiceTest");
 		properties.put("upgrade.from.schema.version", "0.0.0");
 		properties.put("upgrade.initial.database.creation", false);
 
@@ -206,7 +206,7 @@ public class ServiceComponentLocalServiceTest {
 
 		Map<String, Object> properties = new HashMap<>();
 
-		properties.put("upgrade.bundle.symbolic.name", "SimpleUpgradeStep");
+		properties.put("upgrade.bundle.symbolic.name", "ServiceComponentLocalServiceTest");
 		properties.put("upgrade.from.schema.version", "0.0.1");
 		properties.put("upgrade.initial.database.creation", true);
 
