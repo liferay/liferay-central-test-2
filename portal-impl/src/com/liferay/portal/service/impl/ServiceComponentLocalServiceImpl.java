@@ -37,6 +37,7 @@ import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portal.kernel.xml.Element;
@@ -245,7 +246,7 @@ public class ServiceComponentLocalServiceImpl
 				servletContextName);
 
 			if ((release != null) &&
-				!"0.0.0".equals(release.getSchemaVersion())) {
+				!Validator.equals(release.getSchemaVersion(), "0.0.0")) {
 
 				continue;
 			}
