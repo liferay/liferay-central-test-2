@@ -19,6 +19,9 @@
 <%
 String tabs2 = ParamUtil.getString(request, "tabs2", "regular-roles");
 
+int cur = ParamUtil.getInteger(request, SearchContainer.DEFAULT_CUR_PARAM);
+int delta = ParamUtil.getInteger(request, SearchContainer.DEFAULT_DELTA_PARAM);
+
 String redirect = ParamUtil.getString(request, "redirect");
 String returnToFullPageURL = ParamUtil.getString(request, "returnToFullPageURL");
 
@@ -111,15 +114,14 @@ definePermissionsURL.setParameter("backURL", currentURL);
 definePermissionsURL.setPortletMode(PortletMode.VIEW);
 definePermissionsURL.setRefererPlid(plid);
 definePermissionsURL.setWindowState(LiferayWindowState.POP_UP);
-
-int cur = ParamUtil.getInteger(request, SearchContainer.DEFAULT_CUR_PARAM);
-int delta = ParamUtil.getInteger(request, SearchContainer.DEFAULT_DELTA_PARAM);
 %>
 
 <div class="edit-permissions portlet-configuration-edit-permissions">
 	<portlet:actionURL name="updateRolePermissions" var="updateRolePermissionsURL">
 		<portlet:param name="mvcPath" value="/edit_permissions.jsp" />
 		<portlet:param name="tabs2" value="<%= tabs2 %>" />
+		<portlet:param name="cur" value="<%= String.valueOf(cur) %>" />
+		<portlet:param name="delta" value="<%= String.valueOf(delta) %>" />
 		<portlet:param name="returnToFullPageURL" value="<%= returnToFullPageURL %>" />
 		<portlet:param name="portletConfiguration" value="<%= Boolean.TRUE.toString() %>" />
 		<portlet:param name="portletResource" value="<%= portletResource %>" />
@@ -128,8 +130,6 @@ int delta = ParamUtil.getInteger(request, SearchContainer.DEFAULT_DELTA_PARAM);
 		<portlet:param name="resourceGroupId" value="<%= String.valueOf(resourceGroupId) %>" />
 		<portlet:param name="resourcePrimKey" value="<%= resourcePrimKey %>" />
 		<portlet:param name="roleTypes" value="<%= roleTypesParam %>" />
-		<portlet:param name="cur" value="<%= String.valueOf(cur) %>" />
-		<portlet:param name="delta" value="<%= String.valueOf(delta) %>" />
 	</portlet:actionURL>
 
 	<aui:form action="<%= updateRolePermissionsURL.toString() %>" cssClass="form" method="post" name="fm">
