@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.model.Release;
 import com.liferay.portal.kernel.module.framework.ModuleServiceLifecycle;
 import com.liferay.portal.kernel.search.IndexWriterHelperUtil;
 import com.liferay.portal.kernel.service.ReleaseLocalService;
+import com.liferay.portal.kernel.util.HashMapDictionary;
 import com.liferay.portal.kernel.util.NotificationThreadLocal;
 import com.liferay.portal.kernel.workflow.WorkflowThreadLocal;
 import com.liferay.portal.output.stream.container.OutputStreamContainer;
@@ -35,12 +36,14 @@ import com.liferay.portal.output.stream.container.OutputStreamContainerFactoryTr
 import com.liferay.portal.verify.VerifyException;
 import com.liferay.portal.verify.VerifyProcess;
 import com.liferay.portal.verify.extender.internal.configuration.VerifyProcessTrackerConfiguration;
+import com.liferay.portal.verify.extender.marker.VerifyProcessCompletionMarker;
 import com.liferay.portlet.exportimport.staging.StagingAdvicesThreadLocal;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 
+import java.util.Dictionary;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -135,6 +138,8 @@ public class VerifyProcessTrackerOSGiCommands {
 	protected void activate(
 		BundleContext bundleContext, Map<String, Object> properties) {
 
+		_bundleContext = bundleContext;
+
 		_verifyProcessTrackerConfiguration =
 			ConfigurableUtil.createConfigurable(
 				VerifyProcessTrackerConfiguration.class, properties);
@@ -148,7 +153,7 @@ public class VerifyProcessTrackerOSGiCommands {
 		}
 
 		_verifyProcesses = ServiceTrackerMapFactory.multiValueMap(
-			bundleContext, VerifyProcess.class, null,
+			_bundleContext, VerifyProcess.class, null,
 			new PropertyServiceReferenceMapper<String, VerifyProcess>(
 				"verify.process.name"),
 			new PropertyServiceReferenceComparator("service.ranking"),
@@ -228,6 +233,15 @@ public class VerifyProcessTrackerOSGiCommands {
 				release.setVerified(true);
 
 				_releaseLocalService.updateRelease(release);
+
+				Dictionary<String, String> dictionary =
+					new HashMapDictionary<>();
+
+				dictionary.put("verify.process.name", verifyProcessName);
+
+				_bundleContext.registerService(
+					VerifyProcessCompletionMarker.class,
+					new VerifyProcessCompletionMarker() {}, dictionary);
 			}
 		}
 		finally {
@@ -333,6 +347,7 @@ public class VerifyProcessTrackerOSGiCommands {
 	private static final Log _log = LogFactoryUtil.getLog(
 		VerifyProcessTrackerOSGiCommands.class);
 
+	private BundleContext _bundleContext;
 	private CounterLocalService _counterLocalService;
 	private OutputStreamContainerFactoryTracker
 		_outputStreamContainerFactoryTracker;
