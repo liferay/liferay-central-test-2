@@ -50,12 +50,10 @@ if ((microblogsEntry != null) && !edit) {
 
 	receiverUserFullName = HtmlUtil.escape(PortalUtil.getUserName(microblogsEntry));
 
-	try {
-		receiverUser = UserLocalServiceUtil.getUserById(microblogsEntry.getUserId());
+	receiverUser = UserLocalServiceUtil.fetchUserById(microblogsEntry.getUserId());
 
+	if (receiverUser != null) {
 		receiverUserScreenName = receiverUser.getScreenName();
-	}
-	catch (NoSuchUserException nsue) {
 	}
 }
 
