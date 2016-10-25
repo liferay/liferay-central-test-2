@@ -124,19 +124,23 @@ public class AutoLoginFilter extends BasePortalFilter {
 		session.setAttribute("j_remoteuser", jUsername);
 
 		if (PropsValues.PORTAL_JAAS_ENABLE) {
-			String redirect = PortalUtil.getPathMain().concat(
-				"/portal/protected");
+			String mainPath = PortalUtil.getPathMain();
+
+			String redirect = mainPath.concat("/portal/protected");
 
 			if (PropsValues.AUTH_FORWARD_BY_LAST_PATH) {
-				String redirectParam = (String)request.getAttribute(
+				redirect = redirect.concat("?redirect=");
+
+				String autoLoginRedirect = (String)request.getAttribute(
 					AutoLogin.AUTO_LOGIN_REDIRECT_AND_CONTINUE);
 
-				if (Validator.isNull(redirectParam)) {
-					redirectParam = PortalUtil.getCurrentCompleteURL(request);
+				if (Validator.isNull(autoLoginRedirect)) {
+					autoLoginRedirect = PortalUtil.getCurrentCompleteURL(
+						request);
 				}
 
-				redirect = redirect.concat("?redirect=");
-				redirect = redirect.concat(HttpUtil.encodeURL(redirectParam));
+				redirect = redirect.concat(
+					HttpUtil.encodeURL(autoLoginRedirect));
 			}
 
 			response.sendRedirect(redirect);
