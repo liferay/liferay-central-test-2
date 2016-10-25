@@ -725,6 +725,7 @@ public class PersistenceNestedSetsTreeManagerTest {
 				}
 
 				session.flush();
+
 				session.clear();
 			}
 
