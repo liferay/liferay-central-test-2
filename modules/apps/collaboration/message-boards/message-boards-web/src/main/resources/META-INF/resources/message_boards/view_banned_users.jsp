@@ -42,56 +42,24 @@ portletURL.setParameter("mvcRenderCommandName", "/message_boards/view_banned_use
 		>
 
 			<%
-			User bannedUser = null;
-
-			try {
-				bannedUser = UserLocalServiceUtil.getUser(ban.getBanUserId());
-			}
-			catch (NoSuchUserException nsue) {
-			}
+			User bannedUser = UserLocalServiceUtil.fetchUser(ban.getBanUserId());
 			%>
 
-			<c:choose>
-				<c:when test="<%= (bannedUser != null) && bannedUser.isActive() %>">
-					<liferay-ui:search-container-column-text
-						href="<%= bannedUser.getDisplayURL(themeDisplay) %>"
-						name="banned-user"
-						value="<%= HtmlUtil.escape(PortalUtil.getUserName(ban.getBanUserId(), StringPool.BLANK)) %>"
-					/>
-				</c:when>
-				<c:otherwise>
-					<liferay-ui:search-container-column-text
-						name="banned-user"
-						value="<%= HtmlUtil.escape(PortalUtil.getUserName(ban.getBanUserId(), StringPool.BLANK)) %>"
-					/>
-				</c:otherwise>
-			</c:choose>
+			<liferay-ui:search-container-column-text
+				href="<%= ((bannedUser != null) && bannedUser.isActive()) ? bannedUser.getDisplayURL(themeDisplay) : null %>"
+				name="banned-user"
+				value="<%= HtmlUtil.escape(PortalUtil.getUserName(ban.getBanUserId(), StringPool.BLANK)) %>"
+			/>
 
 			<%
-			User bannedByUser = null;
-
-			try {
-				bannedByUser = UserLocalServiceUtil.getUser(ban.getUserId());
-			}
-			catch (NoSuchUserException nsue) {
-			}
+			User bannedByUser = UserLocalServiceUtil.fetchUser(ban.getUserId());
 			%>
 
-			<c:choose>
-				<c:when test="<%= (bannedByUser != null) && bannedByUser.isActive() %>">
-					<liferay-ui:search-container-column-text
-						href="<%= bannedByUser.getDisplayURL(themeDisplay) %>"
-						name="banned-by"
-						value="<%= HtmlUtil.escape(PortalUtil.getUserName(ban.getUserId(), StringPool.BLANK)) %>"
-					/>
-				</c:when>
-				<c:otherwise>
-					<liferay-ui:search-container-column-text
-						name="banned-by"
-						value="<%= HtmlUtil.escape(PortalUtil.getUserName(ban.getUserId(), StringPool.BLANK)) %>"
-					/>
-				</c:otherwise>
-			</c:choose>
+			<liferay-ui:search-container-column-text
+				href="<%= ((bannedByUser != null) && bannedByUser.isActive()) ? bannedByUser.getDisplayURL(themeDisplay) : null %>"
+				name="banned-by"
+				value="<%= HtmlUtil.escape(PortalUtil.getUserName(ban.getUserId(), StringPool.BLANK)) %>"
+			/>
 
 			<liferay-ui:search-container-column-date
 				name="ban-date"
