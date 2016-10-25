@@ -49,17 +49,20 @@ public class PortalProfileGatekeeper {
 			String name = ReleaseInfo.getName();
 
 			if (name.contains("Community")) {
-				whitelistPortalProfileNames.add(PortalProfile.PORTAL_PROFILE_NAME_CE);
+				whitelistPortalProfileNames.add(
+					PortalProfile.PORTAL_PROFILE_NAME_CE);
 			}
 			else {
-				whitelistPortalProfileNames.add(PortalProfile.PORTAL_PROFILE_NAME_DXP);
+				whitelistPortalProfileNames.add(
+					PortalProfile.PORTAL_PROFILE_NAME_DXP);
 			}
 		}
 
 		_serviceTracker = new ServiceTracker<>(
 			bundleContext, PortalProfile.class,
 			new PortalProfileServiceTrackerCustomizer(
-				bundleContext, blacklistPortalProfileNames, whitelistPortalProfileNames));
+				bundleContext, blacklistPortalProfileNames,
+				whitelistPortalProfileNames));
 
 		_serviceTracker.open();
 	}
@@ -113,7 +116,8 @@ public class PortalProfileGatekeeper {
 		}
 
 		private PortalProfileServiceTrackerCustomizer(
-			BundleContext bundleContext, Set<String> blacklistPortalProfileNames,
+			BundleContext bundleContext,
+			Set<String> blacklistPortalProfileNames,
 			Set<String> whitelistPortalProfileNames) {
 
 			_bundleContext = bundleContext;
@@ -121,8 +125,8 @@ public class PortalProfileGatekeeper {
 			_whitelistPortalProfileNames = whitelistPortalProfileNames;
 		}
 
-		private final BundleContext _bundleContext;
 		private final Set<String> _blacklistPortalProfileNames;
+		private final BundleContext _bundleContext;
 		private final Set<String> _whitelistPortalProfileNames;
 
 	}
