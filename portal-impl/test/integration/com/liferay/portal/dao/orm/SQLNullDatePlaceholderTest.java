@@ -46,21 +46,21 @@ public class SQLNullDatePlaceholderTest {
 		_db = DBManagerUtil.getDB();
 
 		_db.runSQL(
-			"create table TestNullDatePlaceholder1 (id LONG not null primary " +
+			"create table SQLNullDatePlaceholderTest1 (id LONG not null primary " +
 				"key, date_ DATE null)");
 
-		_db.runSQL("insert into TestNullDatePlaceholder1 (id) values (1)");
+		_db.runSQL("insert into SQLNullDatePlaceholderTest1 (id) values (1)");
 
-		_db.runSQL("create table TestNullDatePlaceholder2 (id LONG not null)");
+		_db.runSQL("create table SQLNullDatePlaceholderTest2 (id LONG not null)");
 
-		_db.runSQL("insert into TestNullDatePlaceholder2 (id) values (1)");
+		_db.runSQL("insert into SQLNullDatePlaceholderTest2 (id) values (1)");
 	}
 
 	@AfterClass
 	public static void tearDownClass() throws Exception {
-		_db.runSQL("drop table TestNullDatePlaceholder1");
+		_db.runSQL("drop table SQLNullDatePlaceholderTest1");
 
-		_db.runSQL("drop table TestNullDatePlaceholder2");
+		_db.runSQL("drop table SQLNullDatePlaceholderTest2");
 	}
 
 	@Test
@@ -69,8 +69,8 @@ public class SQLNullDatePlaceholderTest {
 			Statement s = conn.createStatement()) {
 
 			String query =
-				"(select date_ from TestNullDatePlaceholder1) union all " +
-					"(select [$NULL_DATE$] from TestNullDatePlaceholder2)";
+				"(select date_ from SQLNullDatePlaceholderTest1) union all " +
+					"(select [$NULL_DATE$] from SQLNullDatePlaceholderTest2)";
 
 			ResultSet rs = s.executeQuery(SQLTransformer.transform(query));
 
