@@ -714,10 +714,7 @@ public class PersistenceNestedSetsTreeManagerTest {
 
 			String methodName = method.getName();
 
-			if (methodName.equals("openSession") && _failOpenSession) {
-				throw new Exception("Unable to open session");
-			}
-			else if (methodName.equals("closeSession")) {
+			if (methodName.equals("closeSession")) {
 				Session session = (Session)args[0];
 
 				if (session == null) {
@@ -727,6 +724,9 @@ public class PersistenceNestedSetsTreeManagerTest {
 				session.flush();
 
 				session.clear();
+			}
+			else if (methodName.equals("openSession") && _failOpenSession) {
+				throw new Exception("Unable to open session");
 			}
 
 			return method.invoke(_target, args);
