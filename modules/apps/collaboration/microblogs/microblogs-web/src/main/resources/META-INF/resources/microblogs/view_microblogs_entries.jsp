@@ -50,17 +50,8 @@ PortletURL microblogsEntriesURL = (PortletURL)request.getAttribute(WebKeys.MICRO
 if (microblogsEntries != null) {
 	for (MicroblogsEntry microblogsEntry : microblogsEntries) {
 		String userFullName = HtmlUtil.escape(PortalUtil.getUserName(microblogsEntry));
-		String userScreenName = StringPool.BLANK;
 
-		User curUser = null;
-
-		try {
-			curUser = UserLocalServiceUtil.getUserById(microblogsEntry.getUserId());
-
-			userScreenName = curUser.getScreenName();
-		}
-		catch (NoSuchUserException nsue) {
-		}
+		User curUser = UserLocalServiceUtil.fetchUserById(microblogsEntry.getUserId());
 %>
 
 		<div class="microblogs-entry" id="<portlet:namespace />microblogsEntry<%= microblogsEntry.getMicroblogsEntryId() %>">
