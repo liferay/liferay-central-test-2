@@ -46,12 +46,13 @@ public class SQLNullDatePlaceholderTest {
 		_db = DBManagerUtil.getDB();
 
 		_db.runSQL(
-			"create table SQLNullDatePlaceholderTest1 (id LONG not null primary " +
-				"key, date_ DATE null)");
+			"create table SQLNullDatePlaceholderTest1 (id LONG not null " +
+				"primary key, date_ DATE null)");
 
 		_db.runSQL("insert into SQLNullDatePlaceholderTest1 (id) values (1)");
 
-		_db.runSQL("create table SQLNullDatePlaceholderTest2 (id LONG not null)");
+		_db.runSQL(
+			"create table SQLNullDatePlaceholderTest2 (id LONG not null)");
 
 		_db.runSQL("insert into SQLNullDatePlaceholderTest2 (id) values (1)");
 	}
@@ -65,16 +66,17 @@ public class SQLNullDatePlaceholderTest {
 
 	@Test
 	public void testNullDate() throws Exception {
-		try (Connection conn = DataAccess.getConnection();
-			Statement s = conn.createStatement()) {
+		try (Connection connection = DataAccess.getConnection();
+			Statement statement = connection.createStatement()) {
 
 			String query =
 				"(select date_ from SQLNullDatePlaceholderTest1) union all " +
 					"(select [$NULL_DATE$] from SQLNullDatePlaceholderTest2)";
 
-			ResultSet rs = s.executeQuery(SQLTransformer.transform(query));
+			ResultSet resultSet = statement.executeQuery(
+				SQLTransformer.transform(query));
 
-			rs.close();
+			resultSet.close();
 		}
 	}
 
