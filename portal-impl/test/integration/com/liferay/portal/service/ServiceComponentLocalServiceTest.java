@@ -126,7 +126,8 @@ public class ServiceComponentLocalServiceTest {
 
 		Map<String, Object> properties = new HashMap<>();
 
-		properties.put("upgrade.bundle.symbolic.name", "ServiceComponentLocalServiceTest");
+		properties.put(
+			"upgrade.bundle.symbolic.name", "ServiceComponentLocalServiceTest");
 		properties.put("upgrade.from.schema.version", "0.0.0");
 		properties.put("upgrade.initial.database.creation", true);
 
@@ -168,7 +169,8 @@ public class ServiceComponentLocalServiceTest {
 
 		Map<String, Object> properties = new HashMap<>();
 
-		properties.put("upgrade.bundle.symbolic.name", "ServiceComponentLocalServiceTest");
+		properties.put(
+			"upgrade.bundle.symbolic.name", "ServiceComponentLocalServiceTest");
 		properties.put("upgrade.from.schema.version", "0.0.0");
 		properties.put("upgrade.initial.database.creation", false);
 
@@ -206,7 +208,8 @@ public class ServiceComponentLocalServiceTest {
 
 		Map<String, Object> properties = new HashMap<>();
 
-		properties.put("upgrade.bundle.symbolic.name", "ServiceComponentLocalServiceTest");
+		properties.put(
+			"upgrade.bundle.symbolic.name", "ServiceComponentLocalServiceTest");
 		properties.put("upgrade.from.schema.version", "0.0.1");
 		properties.put("upgrade.initial.database.creation", true);
 

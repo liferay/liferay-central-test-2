@@ -37,7 +37,6 @@ import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portal.kernel.xml.Element;
@@ -61,6 +60,7 @@ import java.security.PrivilegedExceptionAction;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author Brian Wing Shun Chan
@@ -246,7 +246,7 @@ public class ServiceComponentLocalServiceImpl
 				servletContextName);
 
 			if ((release != null) &&
-				!Validator.equals(release.getSchemaVersion(), "0.0.0")) {
+				!Objects.equals(release.getSchemaVersion(), "0.0.0")) {
 
 				continue;
 			}
