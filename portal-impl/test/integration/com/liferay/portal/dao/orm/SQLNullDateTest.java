@@ -34,7 +34,7 @@ import org.junit.Test;
 /**
  * @author Adolfo Pérez
  */
-public class SQLNullDatePlaceholderTest {
+public class SQLNullDateTest {
 
 	@ClassRule
 	@Rule
@@ -46,22 +46,21 @@ public class SQLNullDatePlaceholderTest {
 		_db = DBManagerUtil.getDB();
 
 		_db.runSQL(
-			"create table SQLNullDatePlaceholderTest1 (id LONG not null " +
-				"primary key, date_ DATE null)");
+			"create table SQLNullDateTest1 (id LONG not null primary key, " +
+				"date_ DATE null)");
 
-		_db.runSQL("insert into SQLNullDatePlaceholderTest1 (id) values (1)");
+		_db.runSQL("insert into SQLNullDateTest1 (id) values (1)");
 
-		_db.runSQL(
-			"create table SQLNullDatePlaceholderTest2 (id LONG not null)");
+		_db.runSQL("create table SQLNullDateTest2 (id LONG not null)");
 
-		_db.runSQL("insert into SQLNullDatePlaceholderTest2 (id) values (1)");
+		_db.runSQL("insert into SQLNullDateTest2 (id) values (1)");
 	}
 
 	@AfterClass
 	public static void tearDownClass() throws Exception {
-		_db.runSQL("drop table SQLNullDatePlaceholderTest1");
+		_db.runSQL("drop table SQLNullDateTest1");
 
-		_db.runSQL("drop table SQLNullDatePlaceholderTest2");
+		_db.runSQL("drop table SQLNullDateTest2");
 	}
 
 	@Test
@@ -69,12 +68,12 @@ public class SQLNullDatePlaceholderTest {
 		try (Connection connection = DataAccess.getConnection();
 			Statement statement = connection.createStatement()) {
 
-			String query =
-				"(select date_ from SQLNullDatePlaceholderTest1) union all " +
-					"(select [$NULL_DATE$] from SQLNullDatePlaceholderTest2)";
+			String sql =
+				"(select date_ from SQLNullDateTest1) union all (select " +
+					"[$NULL_DATE$] from SQLNullDateTest2)";
 
 			ResultSet resultSet = statement.executeQuery(
-				SQLTransformer.transform(query));
+				SQLTransformer.transform(sql));
 
 			resultSet.close();
 		}
