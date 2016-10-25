@@ -36,6 +36,7 @@ public class RouteImpl implements Route {
 
 	public RouteImpl(String pattern) {
 		_pattern = pattern;
+
 		_stringParser = StringParser.create(pattern);
 
 		_stringParser.setStringEncoder(_urlEncoder);
