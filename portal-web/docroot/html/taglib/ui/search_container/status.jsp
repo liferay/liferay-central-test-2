@@ -34,12 +34,7 @@ User statusByUser = UserLocalServiceUtil.fetchUser(statusByUserId);
 			</span>
 			<span class="user-status-info">
 				<div class="user-status-name">
-					<c:when test="<%= statusByUser.isActive() %>">
-						<aui:a href="<%= statusByUser.getDisplayURL(themeDisplay) %>"><%= HtmlUtil.escape(StringUtil.shorten(statusByUser.getFullName(), 20)) %></aui:a>
-					</c:when>
-					<c:otherwise>
-						<%= HtmlUtil.escape(StringUtil.shorten(statusByUser.getFullName(), 20)) %>
-					</c:otherwise>
+					<aui:a href="<%= statusByUser.isActive() ? statusByUser.getDisplayURL(themeDisplay) : null %>"><%= HtmlUtil.escape(StringUtil.shorten(statusByUser.getFullName(), 20)) %></aui:a>
 				</div>
 
 				<div class="user-status-date">
