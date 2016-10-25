@@ -1791,8 +1791,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		return portletURL.toString();
 	}
 
-	protected String getLayoutFullURL
-			(ThemeDisplay themeDisplay, ServiceContext serviceContext)
+	protected String getLayoutFullURL(
+			ThemeDisplay themeDisplay, ServiceContext serviceContext)
 		throws PortalException {
 
 		String layoutFullURL = null;
