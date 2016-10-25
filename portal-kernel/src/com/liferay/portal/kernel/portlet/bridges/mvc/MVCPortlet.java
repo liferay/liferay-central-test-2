@@ -481,14 +481,6 @@ public class MVCPortlet extends LiferayPortlet {
 			MVCRenderConstants.MVC_PATH_REQUEST_ATTRIBUTE_NAME);
 	}
 
-	protected MVCCommandCache getRenderMVCCommandCache() {
-		return _renderMVCCommandCache;
-	}
-
-	protected MVCCommandCache getResourceMVCCommandCache() {
-		return _resourceMVCCommandCache;
-	}
-
 	protected String getPath(
 		PortletRequest portletRequest, PortletResponse portletResponse) {
 
@@ -506,6 +498,14 @@ public class MVCPortlet extends LiferayPortlet {
 		}
 
 		return mvcPath;
+	}
+
+	protected MVCCommandCache getRenderMVCCommandCache() {
+		return _renderMVCCommandCache;
+	}
+
+	protected MVCCommandCache getResourceMVCCommandCache() {
+		return _resourceMVCCommandCache;
 	}
 
 	protected void hideDefaultErrorMessage(PortletRequest portletRequest) {
