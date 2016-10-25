@@ -71,7 +71,6 @@ OrderByComparator orderByComparator = null;
 
 if (orderByCol.equals("modified-date")) {
 	orderByComparator = new ThreadModifiedDateComparator(orderByAsc);
-
 }
 
 MBListDisplayContext mbListDisplayContext = mbDisplayContextProvider.getMbListDisplayContext(request, response, categoryId);
