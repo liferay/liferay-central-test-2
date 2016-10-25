@@ -62,7 +62,8 @@ OrderByComparator orderByComparator = null;
 if (orderByCol.equals("modified-date")) {
 	orderByComparator = new ThreadModifiedDateComparator(orderByAsc);
 
-}else if(orderByCol.equals("title")) {
+}
+else if (orderByCol.equals("title")) {
 	orderByComparator = new CategoryTitleComparator(orderByAsc);
 }
 
