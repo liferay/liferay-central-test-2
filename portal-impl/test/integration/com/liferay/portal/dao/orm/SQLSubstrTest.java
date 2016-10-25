@@ -61,7 +61,7 @@ public class SQLSubstrTest {
 	@Test
 	public void testSubstr() throws Exception {
 		String sql = _db.buildSQL(
-			"select substr(data,3,2) from SQLSubstrTest where id = 1");
+			"select SUBSTR(data, 3, 2) from SQLSubstrTest where id = 1");
 
 		sql = SQLTransformer.transform(sql);
 
@@ -82,7 +82,7 @@ public class SQLSubstrTest {
 	@Test
 	public void testSubstrStart() throws Exception {
 		String sql = _db.buildSQL(
-			"select substr(data,1,3) from SQLSubstrTest where id = 1");
+			"select SUBSTR(data, 1, 3) from SQLSubstrTest where id = 1");
 
 		sql = SQLTransformer.transform(sql);
 
