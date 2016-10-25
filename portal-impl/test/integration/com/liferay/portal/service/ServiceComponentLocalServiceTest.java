@@ -244,7 +244,7 @@ public class ServiceComponentLocalServiceTest {
 
 		@Override
 		public String toString() {
-			return "Testing Verify DB";
+			return "Test Upgrade Step";
 		}
 
 		@Override
