@@ -37,29 +37,29 @@ public class PortalProfileGatekeeper {
 
 	@Activate
 	public void activate(BundleContext bundleContext) {
-		Set<String> portalProfileBlacklist = SetUtil.fromArray(
+		Set<String> blacklistPortalProfileNames = SetUtil.fromArray(
 			StringUtil.split(
-				bundleContext.getProperty("portal.profile.blacklist")));
+				bundleContext.getProperty("blacklist.portal.profile.names")));
 
-		Set<String> portalProfileNames = SetUtil.fromArray(
+		Set<String> whitelistPortalProfileNames = SetUtil.fromArray(
 			StringUtil.split(
-				bundleContext.getProperty("portal.profile.names")));
+				bundleContext.getProperty("whitelist.portal.profile.names")));
 
-		if (portalProfileNames.isEmpty()) {
+		if (whitelistPortalProfileNames.isEmpty()) {
 			String name = ReleaseInfo.getName();
 
 			if (name.contains("Community")) {
-				portalProfileNames.add(PortalProfile.PORTAL_PROFILE_NAME_CE);
+				whitelistPortalProfileNames.add(PortalProfile.PORTAL_PROFILE_NAME_CE);
 			}
 			else {
-				portalProfileNames.add(PortalProfile.PORTAL_PROFILE_NAME_DXP);
+				whitelistPortalProfileNames.add(PortalProfile.PORTAL_PROFILE_NAME_DXP);
 			}
 		}
 
 		_serviceTracker = new ServiceTracker<>(
 			bundleContext, PortalProfile.class,
 			new PortalProfileServiceTrackerCustomizer(
-				bundleContext, portalProfileBlacklist, portalProfileNames));
+				bundleContext, blacklistPortalProfileNames, whitelistPortalProfileNames));
 
 		_serviceTracker.open();
 	}
@@ -84,7 +84,7 @@ public class PortalProfileGatekeeper {
 			for (String portalProfileName :
 					portalProfile.getPortalProfileNames()) {
 
-				if (_portalProfileBlacklist.contains(portalProfileName)) {
+				if (_blacklistPortalProfileNames.contains(portalProfileName)) {
 					return null;
 				}
 			}
@@ -92,7 +92,7 @@ public class PortalProfileGatekeeper {
 			for (String portalProfileName :
 					portalProfile.getPortalProfileNames()) {
 
-				if (_portalProfileNames.contains(portalProfileName)) {
+				if (_whitelistPortalProfileNames.contains(portalProfileName)) {
 					portalProfile.activate();
 
 					break;
@@ -113,17 +113,17 @@ public class PortalProfileGatekeeper {
 		}
 
 		private PortalProfileServiceTrackerCustomizer(
-			BundleContext bundleContext, Set<String> portalProfileBlacklist,
-			Set<String> portalProfileNames) {
+			BundleContext bundleContext, Set<String> blacklistPortalProfileNames,
+			Set<String> whitelistPortalProfileNames) {
 
 			_bundleContext = bundleContext;
-			_portalProfileBlacklist = portalProfileBlacklist;
-			_portalProfileNames = portalProfileNames;
+			_blacklistPortalProfileNames = blacklistPortalProfileNames;
+			_whitelistPortalProfileNames = whitelistPortalProfileNames;
 		}
 
 		private final BundleContext _bundleContext;
-		private final Set<String> _portalProfileBlacklist;
-		private final Set<String> _portalProfileNames;
+		private final Set<String> _blacklistPortalProfileNames;
+		private final Set<String> _whitelistPortalProfileNames;
 
 	}
 
