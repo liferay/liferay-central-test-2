@@ -330,7 +330,7 @@ if (portletTitleBasedNavigation) {
 					</div>
 				</c:if>
 
-				<aui:input name="fileShortcutIds" type="hidden" value="<%= StringUtil.merge(fileShortcutIds) %>" />
+				<aui:input name="rowIdsDLFileShortcut" type="hidden" value="<%= StringUtil.merge(fileShortcutIds) %>" />
 
 				<%
 				String folderName = StringPool.BLANK;
