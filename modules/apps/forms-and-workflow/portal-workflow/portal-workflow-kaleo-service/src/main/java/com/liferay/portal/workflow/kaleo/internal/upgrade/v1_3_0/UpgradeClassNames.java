@@ -15,14 +15,10 @@
 package com.liferay.portal.workflow.kaleo.internal.upgrade.v1_3_0;
 
 import com.liferay.portal.kernel.util.LoggingTimer;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.upgrade.util.Table;
 import com.liferay.portal.workflow.kaleo.runtime.util.WorkflowContextUtil;
 
 import java.io.Serializable;
-
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 import java.util.Map;
 
@@ -47,47 +43,25 @@ public class UpgradeClassNames extends BaseUpgradeClassNames {
 	}
 
 	@Override
-	protected void updateWorkflowContextEntryClassName(
-			String tableName, String primaryKeyName)
-		throws Exception {
+	protected Map<String, Serializable> updateWorkflowContext(
+		String workflowContextJSON) {
 
-		try (LoggingTimer loggingTimer = new LoggingTimer(tableName);
-			PreparedStatement ps = connection.prepareStatement(
-				"select " + primaryKeyName + ", workflowContext from " +
-					tableName + " where workflowContext is not null");
-			ResultSet rs = ps.executeQuery()) {
+		String updatedWorkflowContextJSON =
+			_workflowContextUpgradeHelper.renamePortalClassNames(
+				workflowContextJSON);
 
-			while (rs.next()) {
-				long primaryKeyValue = rs.getLong(primaryKeyName);
-				String workflowContextJSON = rs.getString("workflowContext");
+		Map<String, Serializable> workflowContext = WorkflowContextUtil.convert(
+			updatedWorkflowContextJSON);
 
-				if (Validator.isNull(workflowContextJSON)) {
-					continue;
-				}
+		if (workflowContextJSON.equals(updatedWorkflowContextJSON) &&
+			!_workflowContextUpgradeHelper.isEntryClassNameRenamed(
+				workflowContext)) {
 
-				String updatedWorkflowContextJSON =
-					_workflowContextUpgradeHelper.renamePortalClassNames(
-						workflowContextJSON);
-
-				Map<String, Serializable> workflowContext =
-					WorkflowContextUtil.convert(updatedWorkflowContextJSON);
-
-				if (workflowContextJSON.equals(updatedWorkflowContextJSON) &&
-					!_workflowContextUpgradeHelper.isEntryClassNameRenamed(
-						workflowContext)) {
-
-					continue;
-				}
-
-				workflowContext =
-					_workflowContextUpgradeHelper.renameEntryClassName(
-						workflowContext);
-
-				updateWorkflowContext(
-					tableName, primaryKeyName, primaryKeyValue,
-					WorkflowContextUtil.convert(workflowContext));
-			}
+			return null;
 		}
+
+		return _workflowContextUpgradeHelper.renameEntryClassName(
+			workflowContext);
 	}
 
 	private final WorkflowContextUpgradeHelper _workflowContextUpgradeHelper =
