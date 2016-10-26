@@ -138,7 +138,7 @@ if (parentResourcePrimKey != KBFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 	>
 
 		<%
-		request.setAttribute(KBWebKeys.SHOW_SIDEBAR_HEADER, true);
+		request.setAttribute(KBWebKeys.SHOW_SIDEBAR_HEADER, Boolean.TRUE);
 		%>
 
 		<liferay-util:include page="/admin/info_panel.jsp" servletContext="<%= application %>" />
