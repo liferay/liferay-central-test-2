@@ -2019,7 +2019,7 @@ ${output.content}</echo>
 
 				<record action="start" name="${project.dir}/build.services.output.txt" />
 
-				<!--<ant dir="portal-impl" target="build-services" />-->
+				<ant dir="portal-impl" target="build-services" />
 
 				<record action="stop" name="${project.dir}/build.services.output.txt" />
 
