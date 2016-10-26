@@ -289,6 +289,7 @@ public interface DDLRecordLocalService extends BaseLocalService,
 	* @return the record
 	* @throws PortalException if a portal exception occurred
 	*/
+	@Indexable(type = IndexableType.REINDEX)
 	public DDLRecord updateRecord(long userId, long recordId,
 		boolean majorVersion, int displayIndex, DDMFormValues ddmFormValues,
 		ServiceContext serviceContext) throws PortalException;
