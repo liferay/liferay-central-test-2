@@ -32,12 +32,10 @@ import com.liferay.portal.kernel.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.kernel.service.PortletLocalServiceUtil;
 import com.liferay.portal.kernel.service.UserLocalServiceUtil;
 import com.liferay.portal.kernel.service.VirtualHostLocalServiceUtil;
-import com.liferay.portal.kernel.servlet.ServletContextPool;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CookieKeys;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
-import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.SetUtil;
@@ -420,38 +418,6 @@ public class PortalInstances {
 		getWebIds();
 
 		WebAppPool.remove(companyId, WebKeys.PORTLET_CATEGORY);
-	}
-
-	public static void sync() {
-		try {
-			long[] initializedCompanyIds = PortalUtil.getCompanyIds();
-
-			List<Long> removeableIds = ListUtil.toList(initializedCompanyIds);
-
-			List<Company> companies = CompanyLocalServiceUtil.getCompanies();
-
-			for (Company company : companies) {
-				long companyId = company.getCompanyId();
-
-				removeableIds.remove(companyId);
-
-				if (ArrayUtil.contains(initializedCompanyIds, companyId)) {
-					continue;
-				}
-
-				ServletContext portalContext = ServletContextPool.get(
-					PortalUtil.getPathContext());
-
-				initCompany(portalContext, company.getWebId());
-			}
-
-			for (long companyId : removeableIds) {
-				removeCompany(companyId);
-			}
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
 	}
 
 	private static long _getCompanyIdByVirtualHosts(
