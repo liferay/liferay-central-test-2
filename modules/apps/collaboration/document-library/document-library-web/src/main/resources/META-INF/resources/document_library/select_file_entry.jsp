@@ -73,7 +73,7 @@ dlSearchContainer.setResults(foldersAndFileEntriesAndFileShortcuts);
 							try {
 								DLAppServiceUtil.getFoldersCount(curFolder.getRepositoryId(), curFolder.getFolderId());
 							}
-							catch (com.liferay.portal.kernel.exception.PortalException pe) {
+							catch (PortalException pe) {
 								rowURL = null;
 							}
 						}
