@@ -449,17 +449,17 @@ if (portletTitleBasedNavigation) {
 						<%
 						User userDisplay = UserLocalServiceUtil.fetchUser(fileEntry.getUserId());
 
-						String uploadedBy = StringPool.BLANK;
+						String uploadedByMessage = StringPool.BLANK;
 
 						if ((userDisplay != null) && userDisplay.isActive()) {
-							uploadedBy = LanguageUtil.format(resourceBundle, "uploaded-by-x-x", new Object[] {userDisplay.getDisplayURL(themeDisplay), HtmlUtil.escape(fileEntry.getUserName()), dateFormatDateTime.format(fileEntry.getCreateDate())}, false);
+							uploadedByMessage = LanguageUtil.format(resourceBundle, "uploaded-by-x-x", new Object[] {userDisplay.getDisplayURL(themeDisplay), HtmlUtil.escape(fileEntry.getUserName()), dateFormatDateTime.format(fileEntry.getCreateDate())}, false);
 						}
 						else {
-							uploadedBy = LanguageUtil.format(resourceBundle, "uploaded-by-x", new Object[] {HtmlUtil.escape(fileEntry.getUserName()), dateFormatDateTime.format(fileEntry.getCreateDate())}, false);
+							uploadedByMessage = LanguageUtil.format(resourceBundle, "uploaded-by-x", new Object[] {HtmlUtil.escape(fileEntry.getUserName()), dateFormatDateTime.format(fileEntry.getCreateDate())}, false);
 						}
 						%>
 
-						<liferay-ui:icon iconCssClass="icon-plus" label="<%= true %>" message="<%= uploadedBy %>" />
+						<liferay-ui:icon iconCssClass="icon-plus" label="<%= true %>" message="<%= uploadedByMessage %>" />
 					</span>
 
 					<c:if test="<%= dlPortletInstanceSettings.isEnableRatings() && fileEntry.isSupportsSocial() %>">
