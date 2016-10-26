@@ -1044,43 +1044,6 @@
 		<execute macro="SOMicroblogs#viewMicroblogsEntryCommentLink" />
 	</command>
 
-	<command name="AddMicroblogsEntryTags" priority="4">
-		<var name="microblogsEntryContent" value="#Microblogs1 #Microblogs2 #Microblogs3 Post" />
-		<var name="microblogsEntryTagValue1" value="Microblogs1" />
-		<var name="microblogsEntryTagValue2" value="Microblogs2" />
-		<var name="microblogsEntryTagValue3" value="Microblogs3" />
-
-		<execute macro="Navigator#gotoPage">
-			<var name="pageName" value="${pageName}" />
-			<var name="soDashboard" value="true" />
-		</execute>
-
-		<execute macro="SOMicroblogs#addMicroblogsEntry">
-			<var name="microblogsEntryContent" value="${microblogsEntryContent}" />
-		</execute>
-
-		<execute macro="SOMicroblogs#viewOwnMicroblogsEntryTag">
-			<var name="microblogsEntryAuthorName" value="${adminName}" />
-			<var name="microblogsEntryContent" value="${microblogsEntryContent}" />
-			<var name="microblogsEntryTagValue" value="${microblogsEntryTagValue1}" />
-			<var name="statusUpdateEntryContent" value="${microblogsEntryContent}" />
-		</execute>
-
-		<execute macro="SOMicroblogs#viewOwnMicroblogsEntryTag">
-			<var name="microblogsEntryAuthorName" value="${adminName}" />
-			<var name="microblogsEntryContent" value="${microblogsEntryContent}" />
-			<var name="microblogsEntryTagValue" value="${microblogsEntryTagValue2}" />
-			<var name="statusUpdateEntryContent" value="${microblogsEntryContent}" />
-		</execute>
-
-		<execute macro="SOMicroblogs#viewOwnMicroblogsEntryTag">
-			<var name="microblogsEntryAuthorName" value="${adminName}" />
-			<var name="microblogsEntryContent" value="${microblogsEntryContent}" />
-			<var name="microblogsEntryTagValue" value="${microblogsEntryTagValue3}" />
-			<var name="statusUpdateEntryContent" value="${microblogsEntryContent}" />
-		</execute>
-	</command>
-
 	<command name="AddMicroblogsEntryViewableByConnections" priority="4">
 		<var name="microblogsEntryContent" value="Microblogs Post" />
 		<var name="userEmailAddress" value="socialoffice01@liferay.com" />
