@@ -22,6 +22,7 @@ import com.liferay.mail.kernel.service.MailService;
 import com.liferay.petra.log4j.Log4JUtil;
 import com.liferay.portal.convert.ConvertException;
 import com.liferay.portal.convert.ConvertProcess;
+import com.liferay.portal.instances.service.PortalInstanceLocalService;
 import com.liferay.portal.kernel.backgroundtask.BackgroundTaskConstants;
 import com.liferay.portal.kernel.backgroundtask.BackgroundTaskManager;
 import com.liferay.portal.kernel.cache.CacheRegistryUtil;
@@ -80,7 +81,6 @@ import com.liferay.portal.kernel.xuggler.XugglerInstallException;
 import com.liferay.portal.kernel.xuggler.XugglerUtil;
 import com.liferay.portal.upload.UploadServletRequestImpl;
 import com.liferay.portal.util.MaintenanceUtil;
-import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.ShutdownUtil;
 import com.liferay.portlet.ActionResponseImpl;
@@ -353,7 +353,8 @@ public class EditServerMVCActionCommand extends BaseMVCActionCommand {
 		if (!ParamUtil.getBoolean(actionRequest, "blocking")) {
 			_indexWriterHelper.reindex(
 				themeDisplay.getUserId(), "reindex",
-				PortalInstances.getCompanyIds(), className, taskContextMap);
+				_portalInstanceLocalService.getCompanyIds(), className,
+				taskContextMap);
 
 			return;
 		}
@@ -406,7 +407,8 @@ public class EditServerMVCActionCommand extends BaseMVCActionCommand {
 		try {
 			_indexWriterHelper.reindex(
 				themeDisplay.getUserId(), jobName,
-				PortalInstances.getCompanyIds(), className, taskContextMap);
+				_portalInstanceLocalService.getCompanyIds(), className,
+				taskContextMap);
 
 			countDownLatch.await(
 				ParamUtil.getLong(actionRequest, "timeout", Time.HOUR),
@@ -421,7 +423,7 @@ public class EditServerMVCActionCommand extends BaseMVCActionCommand {
 	protected void reindexDictionaries(ActionRequest actionRequest)
 		throws Exception {
 
-		long[] companyIds = PortalInstances.getCompanyIds();
+		long[] companyIds = _portalInstanceLocalService.getCompanyIds();
 
 		for (long companyId : companyIds) {
 			_indexWriterHelper.indexQuerySuggestionDictionaries(companyId);
@@ -835,6 +837,9 @@ public class EditServerMVCActionCommand extends BaseMVCActionCommand {
 	@Reference
 	private OrganizationMembershipPolicyFactory
 		_organizationMembershipPolicyFactory;
+
+	@Reference
+	private PortalInstanceLocalService _portalInstanceLocalService;
 
 	@Reference
 	private PortalUUID _portalUUID;
