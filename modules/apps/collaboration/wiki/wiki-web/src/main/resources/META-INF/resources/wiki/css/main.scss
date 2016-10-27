@@ -176,6 +176,10 @@
 		text-decoration: none;
 	}
 
+	.list-group-item h3 {
+		margin-top: 5px;
+	}
+
 	.page-actions {
 		margin-top: 1.5em;
 
@@ -369,5 +373,13 @@
 		.syntax-help h4 {
 			margin-bottom: 0.3em;
 		}
+	}
+}
+
+/* ---------- Skin ---------- */
+
+.portlet-wiki {
+	.list-group-item a {
+		color: #29353D;
 	}
 }
