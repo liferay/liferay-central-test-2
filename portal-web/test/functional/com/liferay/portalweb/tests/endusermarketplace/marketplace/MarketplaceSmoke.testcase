@@ -12,7 +12,7 @@
 		</execute>
 
 		<execute macro="Site#tearDownCP" />
-		
+
 		<execute macro="BlogsEntry#tearDownCP" />
 
 		<execute macro="BookmarksFolder#tearDownCP" />
