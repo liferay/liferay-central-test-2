@@ -96,7 +96,7 @@ public class ${entity.name}PersistenceTest {
 	public static final AggregateTestRule aggregateTestRule = new AggregateTestRule(
 		new LiferayIntegrationTestRule(), PersistenceTestRule.INSTANCE, new TransactionalTestRule(Propagation.REQUIRED
 			<#if osgiModule>
-			, "${apiPackagePath}.service"
+				, "${apiPackagePath}.service"
 			</#if>
 		));
 
