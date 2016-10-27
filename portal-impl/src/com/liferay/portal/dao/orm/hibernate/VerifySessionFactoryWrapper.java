@@ -38,9 +38,7 @@ public class VerifySessionFactoryWrapper implements SessionFactory {
 	public static SessionFactory createVerifySessionFactoryWrapper(
 		SessionFactoryImpl sessionFactoryImpl) {
 
-		if (PropsValues.
-				SPRING_HIBERNATE_SESSION_VERIFY_CURRENT_FACTORY_ENABLED) {
-
+		if (PropsValues.SPRING_HIBERNATE_SESSION_FACTORY_VERIFY) {
 			return new VerifySessionFactoryWrapper(sessionFactoryImpl);
 		}
 
