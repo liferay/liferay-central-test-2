@@ -3,7 +3,7 @@
 ;
 [subrepo]
 	cmdver = liferay
-	commit = a92859cbb22479f06a28a441370d4273f23e7319
+	commit = 323dd650f92385dbd0e130dd3af64c7462bd14cf
 	mode = push
-	parent = 831c47fb7b60567625b8f28430211477a166b30a
+	parent = 9f8463733ab58f139abd7b94989e928471b962e0
 	remote = git@github.com:liferay/com-liferay-portal-workflow.git
