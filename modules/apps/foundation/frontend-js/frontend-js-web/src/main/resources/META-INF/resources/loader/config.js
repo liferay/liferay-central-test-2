@@ -15,4 +15,8 @@
 	__CONFIG__.modules = Liferay.MODULES;
 
 	__CONFIG__.paths = Liferay.PATHS;
+
+	__CONFIG__.namespace = 'Liferay';
+
+	__CONFIG__.exposeGlobal = Liferay.EXPOSE_GLOBAL;
 }());
