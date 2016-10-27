@@ -113,6 +113,7 @@ AUI.add(
 						config,
 						{
 							enableEvaluations: instance.get('enableEvaluations'),
+							locale: instance.get('locale'),
 							parent: instance.get('parent'),
 							portletNamespace: instance.get('portletNamespace'),
 							repeatedIndex: instance.getRepeatedSiblings().length,

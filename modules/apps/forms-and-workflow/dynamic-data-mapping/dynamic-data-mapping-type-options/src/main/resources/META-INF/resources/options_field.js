@@ -342,6 +342,7 @@ AUI.add(
 						instance._mainField = new Liferay.DDM.Field.KeyValue(
 							{
 								enableEvaluations: false,
+								locale: instance.get('locale'),
 								placeholder: strings.addOptionMessage,
 								repeatable: true,
 								showLabel: false,
