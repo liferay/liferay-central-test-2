@@ -74,7 +74,7 @@ AUI.add(
 					function(item) {
 						var value = item.value;
 
-						settings[item.name] = coerceLanguage(value, settingsLanguage, builderLanguage);
+						settings[item.name] = instance._coerceLanguage(item.name, value, settingsLanguage, builderLanguage);
 					}
 				);
 
@@ -128,6 +128,26 @@ AUI.add(
 				);
 			},
 
+			_coerceLanguage: function(name, value, source, target) {
+				if (name === "options") {
+					value = value.map(
+						function(item) {
+							return A.mix(
+								{
+									label: coerceLanguage(item.label, source, target)
+								},
+								item
+							);
+						}
+					);
+				}
+				else {
+					value = coerceLanguage(value, source, target);
+				}
+
+				return value;
+			},
+
 			_renderFormBuilderField: function() {
 				var instance = this;
 
@@ -165,7 +185,7 @@ AUI.add(
 					function(item, index) {
 						var value = instance.get(item.get('name'));
 
-						item.set('value', coerceLanguage(value, builderLanguage, settingsLanguage));
+						item.set('value', instance._coerceLanguage(item.get('name'), value, builderLanguage, settingsLanguage));
 					}
 				);
 			},
