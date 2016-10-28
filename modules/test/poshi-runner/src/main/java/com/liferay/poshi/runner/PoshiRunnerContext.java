@@ -509,14 +509,15 @@ public class PoshiRunnerContext {
 			properties.putAll(
 				_classCommandNamePropertiesMap.get(classCommandName));
 
-			String testBatchGroupIgnoreRegex =
-				PropsValues.TEST_BATCH_GROUP_IGNORE_REGEX;
+			if (Validator.isNotNull(
+					PropsValues.TEST_BATCH_GROUP_IGNORE_REGEX)) {
 
-			if (Validator.isNotNull(testBatchGroupIgnoreRegex)) {
 				Set<String> propertyNames = properties.stringPropertyNames();
 
 				for (String propertyName : propertyNames) {
-					if (propertyName.matches(testBatchGroupIgnoreRegex)) {
+					if (propertyName.matches(
+							PropsValues.TEST_BATCH_GROUP_IGNORE_REGEX)) {
+
 						properties.remove(propertyName);
 					}
 				}
