@@ -57,13 +57,15 @@ AUI.add(
 				return A.map(
 					definition.fields,
 					function(item) {
+						var definition = instance.get('definition');
+
 						var fieldClass = Util.getFieldClass(item.type);
 
 						return new fieldClass(
 							A.merge(
 								item,
 								{
-									locale: instance.get('locale'),
+									locale: definition.defaultLanguageId,
 									parent: instance,
 									portletNamespace: portletNamespace
 								}

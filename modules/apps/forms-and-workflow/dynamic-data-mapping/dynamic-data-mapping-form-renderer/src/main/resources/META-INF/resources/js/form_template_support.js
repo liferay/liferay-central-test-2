@@ -19,10 +19,6 @@ AUI.add(
 				valueFn: '_valueLayout'
 			},
 
-			locale: {
-				value: themeDisplay.getLanguageId()
-			},
-
 			readOnly: {
 				value: false
 			},

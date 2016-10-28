@@ -85,12 +85,14 @@ AUI.add(
 
 						var form = instance.get('form');
 
+						var definition = form.get('definition');
+
 						instance._request = A.io.request(
 							instance.get('evaluatorURL'),
 							{
 								data: {
-									languageId: form.get('locale'),
-									serializedDDMForm: JSON.stringify(form.get('definition')),
+									languageId: definition.defaultLanguageId,
+									serializedDDMForm: JSON.stringify(definition),
 									serializedDDMFormValues: JSON.stringify(form.toJSON())
 								},
 								dataType: 'JSON',
