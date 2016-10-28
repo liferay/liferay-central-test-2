@@ -88,7 +88,9 @@ public class IndexableActionableDynamicQueryTest {
 
 		Mockito.verify(
 			indexWriterHelper
-		).updateDocuments(null, 0, Arrays.asList(documents), false);
+		).updateDocuments(
+			null, 0, Arrays.asList(documents), false
+		);
 	}
 
 	protected void verifyNoDocumentsUpdated() {
