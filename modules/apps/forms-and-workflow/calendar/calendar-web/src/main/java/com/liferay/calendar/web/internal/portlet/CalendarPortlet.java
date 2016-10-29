@@ -259,13 +259,10 @@ public class CalendarPortlet extends MVCPortlet {
 		long calendarBookingId = ParamUtil.getLong(
 			actionRequest, "calendarBookingId");
 
-		long startTime = ParamUtil.getLong(actionRequest, "startTime");
-
+		long startTime = ParamUtil.getLong(actionRequest, "startTime");\
 		int status = ParamUtil.getInteger(actionRequest, "status");
-
 		boolean updateInstance = ParamUtil.getBoolean(
 			actionRequest, "updateInstance");
-
 		boolean allFollowing = ParamUtil.getBoolean(
 			actionRequest, "allFollowing");
 
