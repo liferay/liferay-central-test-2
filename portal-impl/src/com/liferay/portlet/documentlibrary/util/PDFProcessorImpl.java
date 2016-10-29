@@ -621,14 +621,13 @@ public class PDFProcessorImpl
 			fileVersion.getFileEntryId(), fileVersion.getVersion());
 
 		File decryptedFile = getDecryptedTempFile(tempFileId);
-
 		File thumbnailFile = getThumbnailTempFile(tempFileId);
 
 		try (PDDocument pdDocument = PDDocument.load(file)) {
 			if (!_isDocumentDecrypted(pdDocument)) {
 				_log.error(
-					"Unable to decrypt PDF document with {fileEntryId=" +
-						fileVersion.getFileEntryId() + "}");
+					"Unable to decrypt PDF document for file version " +
+						fileVersion.getFileVersionId());
 
 				return;
 			}
@@ -842,12 +841,12 @@ public class PDFProcessorImpl
 			return true;
 		}
 
-		String[] decryptedPasswords = ArrayUtil.append(
+		String[] decryptPasswords = ArrayUtil.append(
 			PropsValues.
 				DL_FILE_ENTRY_PREVIEW_GENERATION_DECRYPT_PASSWORDS_PDFBOX,
 			StringPool.BLANK);
 
-		for (String decryptPassword : decryptedPasswords) {
+		for (String decryptPassword : decryptPasswords) {
 			StandardDecryptionMaterial standardDecryptionMaterial =
 				new StandardDecryptionMaterial(decryptPassword);
 
