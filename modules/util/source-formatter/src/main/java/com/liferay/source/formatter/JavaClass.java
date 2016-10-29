@@ -330,7 +330,7 @@ public class JavaClass {
 		}
 
 		JavaDocBuilder javaDocBuilder = new JavaDocBuilder(
-				new DefaultDocletTagFactory(), new ThreadSafeClassLibrary());
+			new DefaultDocletTagFactory(), new ThreadSafeClassLibrary());
 
 		javaDocBuilder.addSource(_file);
 
