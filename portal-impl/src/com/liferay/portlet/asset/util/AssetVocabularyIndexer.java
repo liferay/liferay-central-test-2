@@ -112,14 +112,16 @@ public class AssetVocabularyIndexer extends BaseIndexer<AssetVocabulary> {
 
 		Document document = getBaseModelDocument(CLASS_NAME, assetVocabulary);
 
+		document.addKeyword(
+			Field.ASSET_VOCABULARY_ID, assetVocabulary.getVocabularyId());
+
 		Locale siteDefaultLocale = PortalUtil.getSiteDefaultLocale(
 			assetVocabulary.getGroupId());
 
-		document.addKeyword(
-			Field.ASSET_VOCABULARY_ID, assetVocabulary.getVocabularyId());
 		addLocalizedField(
 			document, Field.DESCRIPTION, siteDefaultLocale,
 			assetVocabulary.getDescriptionMap());
+
 		document.addText(Field.NAME, assetVocabulary.getName());
 		addLocalizedField(
 			document, Field.TITLE, siteDefaultLocale,

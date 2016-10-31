@@ -165,18 +165,19 @@ public class AssetCategoryIndexer extends BaseIndexer<AssetCategory> {
 		addSearchAssetCategoryTitles(
 			document, Field.ASSET_CATEGORY_TITLE, categories);
 
-		Locale siteDefaultLocale = PortalUtil.getSiteDefaultLocale(
-			assetCategory.getGroupId());
-
 		document.addKeyword(
 			Field.ASSET_PARENT_CATEGORY_ID,
 			assetCategory.getParentCategoryId());
 		document.addKeyword(
 			Field.ASSET_VOCABULARY_ID, assetCategory.getVocabularyId());
 
+		Locale siteDefaultLocale = PortalUtil.getSiteDefaultLocale(
+			assetCategory.getGroupId());
+
 		addLocalizedField(
 			document, Field.DESCRIPTION, siteDefaultLocale,
 			assetCategory.getDescriptionMap());
+
 		document.addText(Field.NAME, assetCategory.getName());
 		addLocalizedField(
 			document, Field.TITLE, siteDefaultLocale,
