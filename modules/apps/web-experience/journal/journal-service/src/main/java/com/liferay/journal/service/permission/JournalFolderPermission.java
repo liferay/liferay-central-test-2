@@ -104,9 +104,7 @@ public class JournalFolderPermission implements BaseModelPermissionChecker {
 				}
 				else {
 					if (!folder.isInTrash()) {
-						_log.error(
-							"Unable to obtain JournalFolder with folderId" +
-								folderId);
+						_log.error("Unable to get journal folder " + folderId);
 
 						return false;
 					}
@@ -135,7 +133,7 @@ public class JournalFolderPermission implements BaseModelPermissionChecker {
 				folderId);
 
 			if (folder == null) {
-				_log.error("Unable to obtain Folder with folderId" + folderId);
+				_log.error("Unable to get journal folder " + folderId);
 
 				return false;
 			}
