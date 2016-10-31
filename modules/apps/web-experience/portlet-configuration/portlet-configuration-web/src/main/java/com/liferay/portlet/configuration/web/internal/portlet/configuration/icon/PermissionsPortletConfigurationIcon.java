@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.model.Portlet;
+import com.liferay.portal.kernel.model.impl.VirtualLayout;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.portlet.PortletProvider;
 import com.liferay.portal.kernel.portlet.PortletProviderUtil;
@@ -128,10 +129,20 @@ public class PermissionsPortletConfigurationIcon
 
 		Layout layout = themeDisplay.getLayout();
 
-		Group group = themeDisplay.getScopeGroup();
+		try {
+			Group group = layout.getGroup();
 
-		if (!group.hasStagingGroup() || _STAGING_LIVE_GROUP_LOCKING_ENABLED) {
-			try {
+			if (layout instanceof VirtualLayout) {
+				VirtualLayout virtualLayout = (VirtualLayout)layout;
+
+				Layout sourceLayout = virtualLayout.getSourceLayout();
+
+				group = sourceLayout.getGroup();
+			}
+
+			if (!group.hasStagingGroup() ||
+				_STAGING_LIVE_GROUP_LOCKING_ENABLED) {
+
 				if (PortletPermissionUtil.contains(
 						themeDisplay.getPermissionChecker(), layout,
 						rootPortletId, ActionKeys.PERMISSIONS)) {
@@ -139,23 +150,16 @@ public class PermissionsPortletConfigurationIcon
 					showPermissionsIcon = true;
 				}
 			}
-			catch (PortalException pe) {
 
-				// LPS-52675
+			if (layout.isLayoutPrototypeLinkActive()) {
+				showPermissionsIcon = false;
+			}
 
-				if (_log.isDebugEnabled()) {
-					_log.debug(pe, pe);
-				}
-
+			if (group.isControlPanel()) {
 				showPermissionsIcon = false;
 			}
 		}
-
-		if (layout.isLayoutPrototypeLinkActive()) {
-			showPermissionsIcon = false;
-		}
-
-		if (group.isControlPanel()) {
+		catch (PortalException pe) {
 			showPermissionsIcon = false;
 		}
 
