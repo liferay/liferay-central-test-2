@@ -1402,6 +1402,17 @@ public class JournalArticleLocalServiceImpl
 		}
 	}
 
+	/**
+	 * Returns the web content article with the ID.
+	 *
+	 * @param  id the primary key of the web content article
+	 * @return the web content article with the ID
+	 */
+	@Override
+	public JournalArticle fetchArticle(long id) {
+		return journalArticlePersistence.fetchByPrimaryKey(id);
+	}
+
 	@Override
 	public JournalArticle fetchArticle(long groupId, String articleId) {
 
