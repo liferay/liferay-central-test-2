@@ -71,12 +71,12 @@ public class SlimRuntimeServlet extends HttpServlet {
 
 		ServletContext servletContext = getServletContext();
 
-		servletContext.setAttribute(SlimRuntimeServlet.class.getName(), Boolean.TRUE);
+		servletContext.setAttribute(
+			SlimRuntimeServlet.class.getName(), Boolean.TRUE);
 
 		super.init();
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Patching - NOT SUPPORTED");
 			_log.debug("Process startup events");
 		}
 
@@ -94,22 +94,6 @@ public class SlimRuntimeServlet extends HttpServlet {
 			}
 
 			throw new ServletException(e);
-		}
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Server Detector - NOT SUPPORTED");
-			_log.debug("Plugin Package - NOT SUPPORTED");
-			_log.debug("Portlets - NOT SUPPORTED");
-			_log.debug("Layout Templates - NOT SUPPORTED");
-			_log.debug("Social - NOT SUPPORTED");
-			_log.debug("Themes - NOT SUPPORTED");
-			_log.debug("Web Settings - NOT SUPPORTED");
-			_log.debug("EXT - NOT SUPPORTED");
-			_log.debug("Global Startup Events - NOT SUPPORTED");
-			_log.debug("Resource Actions - NOT SUPPORTED");
-			_log.debug("Companies - NOT SUPPORTED");
-			_log.debug("Setup Wizard - NOT SUPPORTED");
-			_log.debug("Plugins (Legacy) - NOT SUPPORTED");
 		}
 
 		servletContext.setAttribute(WebKeys.STARTUP_FINISHED, true);
@@ -148,10 +132,6 @@ public class SlimRuntimeServlet extends HttpServlet {
 		Runtime runtime = Runtime.getRuntime();
 
 		runtime.addShutdownHook(new Thread(new ShutdownHook()));
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Indexer - NOT SUPPORTED");
-		}
 
 		// MySQL version
 
@@ -192,12 +172,6 @@ public class SlimRuntimeServlet extends HttpServlet {
 		}
 
 		ClassNameLocalServiceUtil.checkClassNames();
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Verify - NOT SUPPORTED");
-			_log.debug("Jsp Factory Swapper - NOT SUPPORTED");
-			_log.debug("Jericho - NOT SUPPORTED");
-		}
 	}
 
 	protected void registerPortalInitialized() {
@@ -234,29 +208,10 @@ public class SlimRuntimeServlet extends HttpServlet {
 		}
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Shutdown Request - NOT SUPPORTED");
-			_log.debug("Maintenance Request - NOT SUPPORTED");
-			_log.debug("Company - NOT SUPPORTED");
-			_log.debug("Group - NOT SUPPORTED");
 			_log.debug("Set portal port");
 		}
 
 		PortalUtil.setPortalInetSocketAddresses(request);
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Check variables - NOT SUPPORTED");
-			_log.debug("Portlet Request Processor - NOT SUPPORTED");
-			_log.debug("Tiles Definitions Factory - NOT SUPPORTED");
-			_log.debug("Handle non-serializable request - NOT SUPPORTED");
-			_log.debug("Encrypt request - NOT SUPPORTED");
-			_log.debug("User - NOT SUPPORTED");
-			_log.debug("Login Pre Events - NOT SUPPORTED");
-			_log.debug("Login Post Events - NOT SUPPORTED");
-			_log.debug("Session Thread Local - NOT SUPPORTED");
-			_log.debug("Absolute Redirect checking - NOT SUPPORTED");
-			_log.debug("ThemeDisplay - NOT SUPPORTED");
-			_log.debug("Service Pre Events - NOT SUPPORTED");
-		}
 
 		if (_servlets.isEmpty()) {
 			response.sendError(
@@ -269,10 +224,6 @@ public class SlimRuntimeServlet extends HttpServlet {
 		HttpServlet httpServlet = _servlets.get(0);
 
 		httpServlet.service(request, response);
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Service Post Events - NOT SUPPORTED");
-		}
 	}
 
 	private String _toString(InputStream inputStream) {
@@ -287,7 +238,8 @@ public class SlimRuntimeServlet extends HttpServlet {
 		}
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(SlimRuntimeServlet.class);
+	private static final Log _log = LogFactoryUtil.getLog(
+		SlimRuntimeServlet.class);
 
 	private ServiceRegistration<ModuleServiceLifecycle>
 		_moduleServiceLifecycleServiceRegistrationDB;
