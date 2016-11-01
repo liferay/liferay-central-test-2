@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.slim.runtime.internal;
+package com.liferay.slim.runtime.internal.util;
 
 import com.liferay.portal.kernel.util.ProxyUtil;
 

@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.slim.runtime.internal;
+package com.liferay.slim.runtime.internal.servlet;
 
 import com.liferay.portal.events.ShutdownHook;
 import com.liferay.portal.kernel.cache.thread.local.Lifecycle;
