@@ -40,9 +40,7 @@ public class SlimRuntimeStubFactory {
 		public Object invoke(Object proxy, Method method, Object[] args)
 			throws Throwable {
 
-			throw new UnsupportedOperationException(
-				"In the slim runtime the component <" + _clazz.getName() +
-					"> is not supported!");
+			throw new UnsupportedOperationException(_clazz.getName());
 		}
 
 		private final Class<?> _clazz;
