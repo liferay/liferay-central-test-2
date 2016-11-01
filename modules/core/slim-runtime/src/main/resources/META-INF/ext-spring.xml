@@ -11,7 +11,7 @@
 
 	<!--
 		#
-		# From util-spring.xml
+		# Copied from util-spring.xml.
 		#
 	-->
 
@@ -281,7 +281,7 @@
 
 	<!--
 		#
-		#From messaging-spring.xml
+		# Copied from messaging-spring.xml.
 		#
 	-->
 
@@ -319,9 +319,9 @@
 	</bean>
 
 	<!--
-	#
-	# security-spring.xml
-	#
+		#
+		# Copied from security-spring.xml.
+		#
 	-->
 
 	<bean class="com.liferay.portal.kernel.model.ModelHintsUtil" id="com.liferay.portal.kernel.model.ModelHintsUtil">
