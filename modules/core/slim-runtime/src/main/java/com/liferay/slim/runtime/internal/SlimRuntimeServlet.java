@@ -52,7 +52,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * @author Raymond Augé
  */
-public class SlimServlet extends HttpServlet {
+public class SlimRuntimeServlet extends HttpServlet {
 
 	@Override
 	public void destroy() {
@@ -71,7 +71,7 @@ public class SlimServlet extends HttpServlet {
 
 		ServletContext servletContext = getServletContext();
 
-		servletContext.setAttribute(SlimServlet.class.getName(), Boolean.TRUE);
+		servletContext.setAttribute(SlimRuntimeServlet.class.getName(), Boolean.TRUE);
 
 		super.init();
 
@@ -287,7 +287,7 @@ public class SlimServlet extends HttpServlet {
 		}
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(SlimServlet.class);
+	private static final Log _log = LogFactoryUtil.getLog(SlimRuntimeServlet.class);
 
 	private ServiceRegistration<ModuleServiceLifecycle>
 		_moduleServiceLifecycleServiceRegistrationDB;
