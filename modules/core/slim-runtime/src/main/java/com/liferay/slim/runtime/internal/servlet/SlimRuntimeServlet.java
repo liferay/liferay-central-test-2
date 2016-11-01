@@ -241,16 +241,16 @@ public class SlimRuntimeServlet extends HttpServlet {
 	private static final Log _log = LogFactoryUtil.getLog(
 		SlimRuntimeServlet.class);
 
+	private final List<HttpServlet> _httpServlets =
+		ServiceTrackerCollections.openList(
+			HttpServlet.class,
+			"(&(bean.id=" + HttpServlet.class.getName() +
+				")(original.bean=*))");
 	private ServiceRegistration<ModuleServiceLifecycle>
 		_moduleServiceLifecycleServiceRegistrationDB;
 	private ServiceRegistration<ModuleServiceLifecycle>
 		_moduleServiceLifecycleServiceRegistrationPortal;
 	private ServiceRegistration<ServletContext>
 		_servletContextServiceRegistration;
-	private final List<HttpServlet> _httpServlets =
-		ServiceTrackerCollections.openList(
-			HttpServlet.class,
-			"(&(bean.id=" + HttpServlet.class.getName() +
-				")(original.bean=*))");
 
 }
