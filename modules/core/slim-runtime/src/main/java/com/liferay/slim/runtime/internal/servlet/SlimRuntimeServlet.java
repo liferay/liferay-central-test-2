@@ -56,11 +56,11 @@ public class SlimRuntimeServlet extends HttpServlet {
 
 	@Override
 	public void destroy() {
-		_moduleServiceLifecycleServiceRegistrationPortal.unregister();
+		_portalModuleServiceLifecycleServiceRegistration.unregister();
 
 		_servletContextServiceRegistration.unregister();
 
-		_moduleServiceLifecycleServiceRegistrationDB.unregister();
+		_dbModuleServiceLifecycleServiceRegistration.unregister();
 	}
 
 	@Override
@@ -161,7 +161,7 @@ public class SlimRuntimeServlet extends HttpServlet {
 		properties.put("service.vendor", ReleaseInfo.getVendor());
 		properties.put("service.version", ReleaseInfo.getVersion());
 
-		_moduleServiceLifecycleServiceRegistrationDB = registry.registerService(
+		_dbModuleServiceLifecycleServiceRegistration = registry.registerService(
 			ModuleServiceLifecycle.class, new ModuleServiceLifecycle() {},
 			properties);
 
@@ -183,7 +183,7 @@ public class SlimRuntimeServlet extends HttpServlet {
 		properties.put("service.vendor", ReleaseInfo.getVendor());
 		properties.put("service.version", ReleaseInfo.getVersion());
 
-		_moduleServiceLifecycleServiceRegistrationPortal =
+		_portalModuleServiceLifecycleServiceRegistration =
 			registry.registerService(
 				ModuleServiceLifecycle.class, new ModuleServiceLifecycle() {},
 				properties);
@@ -241,15 +241,15 @@ public class SlimRuntimeServlet extends HttpServlet {
 	private static final Log _log = LogFactoryUtil.getLog(
 		SlimRuntimeServlet.class);
 
+	private ServiceRegistration<ModuleServiceLifecycle>
+		_dbModuleServiceLifecycleServiceRegistration;
 	private final List<HttpServlet> _httpServlets =
 		ServiceTrackerCollections.openList(
 			HttpServlet.class,
 			"(&(bean.id=" + HttpServlet.class.getName() +
 				")(original.bean=*))");
 	private ServiceRegistration<ModuleServiceLifecycle>
-		_moduleServiceLifecycleServiceRegistrationDB;
-	private ServiceRegistration<ModuleServiceLifecycle>
-		_moduleServiceLifecycleServiceRegistrationPortal;
+		_portalModuleServiceLifecycleServiceRegistration;
 	private ServiceRegistration<ServletContext>
 		_servletContextServiceRegistration;
 
