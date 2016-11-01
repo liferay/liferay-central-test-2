@@ -213,7 +213,7 @@ public class SlimRuntimeServlet extends HttpServlet {
 
 		PortalUtil.setPortalInetSocketAddresses(request);
 
-		if (_servlets.isEmpty()) {
+		if (_httpServlets.isEmpty()) {
 			response.sendError(
 				HttpServletResponse.SC_SERVICE_UNAVAILABLE,
 				"Module framework is unavailable");
@@ -221,7 +221,7 @@ public class SlimRuntimeServlet extends HttpServlet {
 			return;
 		}
 
-		HttpServlet httpServlet = _servlets.get(0);
+		HttpServlet httpServlet = _httpServlets.get(0);
 
 		httpServlet.service(request, response);
 	}
@@ -247,7 +247,7 @@ public class SlimRuntimeServlet extends HttpServlet {
 		_moduleServiceLifecycleServiceRegistrationPortal;
 	private ServiceRegistration<ServletContext>
 		_servletContextServiceRegistration;
-	private final List<HttpServlet> _servlets =
+	private final List<HttpServlet> _httpServlets =
 		ServiceTrackerCollections.openList(
 			HttpServlet.class,
 			"(&(bean.id=" + HttpServlet.class.getName() +
