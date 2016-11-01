@@ -2037,8 +2037,8 @@
 		</execute>
 
 		<execute macro="Blogs#addEntry">
-			<var name="entryContent" value="Blogs Entry Content 1" />
-			<var name="entryTitle" value="Blogs Entry Title 1" />
+			<var name="entryContent" value="Blogs Entry Content" />
+			<var name="entryTitle" value="Blogs Entry Title" />
 		</execute>
 
 		<execute macro="Navigator#gotoPage">
@@ -2046,9 +2046,9 @@
 		</execute>
 
 		<execute macro="BlogsEntry#viewEntryViaAPPG">
-			<var name="assetTitle" value="Blogs Entry Title 1" />
-			<var name="entryContent" value="Blogs Entry Content 1" />
-			<var name="entryTitle" value="Blogs Entry Title 1" />
+			<var name="assetTitle" value="Blogs Entry Title" />
+			<var name="entryContent" value="Blogs Entry Content" />
+			<var name="entryTitle" value="Blogs Entry Title" />
 		</execute>
 
 		<execute macro="Navigator#gotoPage">
@@ -2056,10 +2056,10 @@
 		</execute>
 
 		<execute macro="Blogs#editDraftPG">
-			<var name="entryContent" value="Blogs Entry Content 1" />
-			<var name="entryContentEdit" value="Blogs Entry Content 1" />
-			<var name="entryTitle" value="Blogs Entry Title 1" />
-			<var name="entryTitleEdit" value="Blogs Entry Title 2" />
+			<var name="entryContent" value="Blogs Entry Content" />
+			<var name="entryContentEdit" value="Blogs Entry Content Draft" />
+			<var name="entryTitle" value="Blogs Entry Title" />
+			<var name="entryTitleEdit" value="Blogs Entry Title Draft" />
 		</execute>
 
 		<execute function="Click" locator1="Icon#BACK" />
@@ -2067,19 +2067,15 @@
 		<execute function="AssertClick" locator1="MenuItem#NOT_PUBLISHED" value1="Not Published (1)" />
 
 		<execute macro="BlogsEntry#viewPG">
-			<var name="entryContent" value="Blogs Entry Content 1" />
-			<var name="entryTitle" value="Blogs Entry Title 2" />
+			<var name="entryContent" value="Blogs Entry Content Draft" />
+			<var name="entryTitle" value="Blogs Entry Title Draft" />
 		</execute>
 
 		<execute macro="Navigator#gotoPage">
 			<var name="pageName" value="Asset Publisher Page" />
 		</execute>
 
-		<execute macro="BlogsEntry#viewNoEntryViaAPPG">
-			<var name="assetTitle" value="Blogs Entry Title 2" />
-			<var name="entryContent" value="Blogs Entry Content 1" />
-			<var name="entryTitle" value="Blogs Entry Title 2" />
-		</execute>
+		<execute macro="AssetPublisherPortlet#viewManualNoAssetsMessagePG" />
 
 		<execute macro="Navigator#gotoPage">
 			<var name="pageName" value="Blogs Page" />
@@ -2088,10 +2084,10 @@
 		<execute function="AssertClick" locator1="MenuItem#NOT_PUBLISHED" value1="Not Published (1)" />
 
 		<execute macro="Blogs#editEntryPG">
-			<var name="entryContent" value="Blogs Entry Content 1" />
-			<var name="entryContentEdit" value="Blogs Entry Content 2" />
-			<var name="entryTitle" value="Blogs Entry Title 2" />
-			<var name="entryTitleEdit" value="Blogs Entry Title 2" />
+			<var name="entryContent" value="Blogs Entry Content Draft" />
+			<var name="entryContentEdit" value="Blogs Entry Content Edit" />
+			<var name="entryTitle" value="Blogs Entry Title Draft" />
+			<var name="entryTitleEdit" value="Blogs Entry Title Edit" />
 		</execute>
 
 		<execute macro="Navigator#gotoPage">
@@ -2099,15 +2095,15 @@
 		</execute>
 
 		<execute macro="BlogsEntry#viewEntryViaAPPG">
-			<var name="assetTitle" value="Blogs Entry Title 2" />
-			<var name="entryContent" value="Blogs Entry Content 2" />
-			<var name="entryTitle" value="Blogs Entry Title 2" />
+			<var name="assetTitle" value="Blogs Entry Title Edit" />
+			<var name="entryContent" value="Blogs Entry Content Edit" />
+			<var name="entryTitle" value="Blogs Entry Title Edit" />
 		</execute>
 
 		<execute macro="BlogsEntry#viewNoEntryViaAPPG">
-			<var name="assetTitle" value="Blogs Entry Title 1" />
-			<var name="entryContent" value="Blogs Entry Content 1" />
-			<var name="entryTitle" value="Blogs Entry Title 1" />
+			<var name="assetTitle" value="Blogs Entry Title Draft" />
+			<var name="entryContent" value="Blogs Entry Content Draft" />
+			<var name="entryTitle" value="Blogs Entry Title Draft" />
 		</execute>
 	</command>
 
