@@ -47,15 +47,6 @@ portletURL.setParameter("displayStyle", displayStyle);
 portletURL.setParameter("keywords", keywords);
 portletURL.setParameter("navigation", navigation);
 
-int status = WorkflowConstants.STATUS_ANY;
-
-if (navigation.equals("active")) {
-	status = WorkflowConstants.STATUS_APPROVED;
-}
-else if (navigation.equals("inactive")) {
-	status = WorkflowConstants.STATUS_INACTIVE;
-}
-
 List<Organization> organizations = new ArrayList<Organization>();
 
 if (filterManageableOrganizations) {
@@ -177,6 +168,15 @@ if (organization != null) {
 				<liferay-ui:search-container-results>
 
 					<%
+					int status = WorkflowConstants.STATUS_ANY;
+
+					if (navigation.equals("active")) {
+						status = WorkflowConstants.STATUS_APPROVED;
+					}
+					else if (navigation.equals("inactive")) {
+						status = WorkflowConstants.STATUS_INACTIVE;
+					}
+
 					if (Validator.isNotNull(keywords)) {
 						total = OrganizationLocalServiceUtil.searchOrganizationsAndUsersCount(company.getCompanyId(), organizationId, keywords, status, null);
 
