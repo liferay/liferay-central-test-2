@@ -17,8 +17,8 @@ package com.liferay.portlet.asset.service;
 import com.liferay.asset.kernel.model.AssetTag;
 import com.liferay.asset.kernel.service.AssetTagLocalServiceUtil;
 import com.liferay.asset.kernel.service.persistence.AssetTagFinderUtil;
-import com.liferay.blogs.kernel.model.BlogsEntry;
-import com.liferay.blogs.kernel.service.BlogsEntryLocalServiceUtil;
+import com.liferay.message.boards.kernel.model.MBCategoryConstants;
+import com.liferay.message.boards.kernel.model.MBMessage;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.GroupConstants;
@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.util.test.LayoutTestUtil;
+import com.liferay.portlet.messageboards.util.test.MBTestUtil;
 
 import java.util.HashMap;
 import java.util.List;
@@ -68,7 +69,7 @@ public class AssetTagFinderTest {
 
 	@Test
 	public void testCountByG_C_N() throws Exception {
-		long classNameId = PortalUtil.getClassNameId(BlogsEntry.class);
+		long classNameId = PortalUtil.getClassNameId(MBMessage.class);
 		String assetTagName = RandomTestUtil.randomString();
 
 		int initialScopeGroupAssetTagsCount = AssetTagFinderUtil.countByG_C_N(
@@ -76,7 +77,7 @@ public class AssetTagFinderTest {
 		int initialSiteGroupAssetTagsCount = AssetTagFinderUtil.countByG_C_N(
 			_scopeGroup.getParentGroupId(), classNameId, assetTagName);
 
-		addBlogsEntry(_scopeGroup.getGroupId(), assetTagName);
+		addMBMessage(_scopeGroup.getGroupId(), assetTagName);
 
 		int scopeGroupAssetTagsCount = AssetTagFinderUtil.countByG_C_N(
 			_scopeGroup.getGroupId(), classNameId, assetTagName);
@@ -100,7 +101,7 @@ public class AssetTagFinderTest {
 		int initialTagsCountSiteGroup = AssetTagFinderUtil.countByG_N(
 			_scopeGroup.getParentGroupId(), assetTagName);
 
-		addBlogsEntry(_scopeGroup.getGroupId(), assetTagName);
+		addMBMessage(_scopeGroup.getGroupId(), assetTagName);
 
 		int scopeGroupAssetTagsCount = AssetTagFinderUtil.countByG_N(
 			_scopeGroup.getGroupId(), assetTagName);
@@ -116,7 +117,7 @@ public class AssetTagFinderTest {
 
 	@Test
 	public void testFindByG_C_N() throws Exception {
-		long classNameId = PortalUtil.getClassNameId(BlogsEntry.class);
+		long classNameId = PortalUtil.getClassNameId(MBMessage.class);
 		String assetTagName = RandomTestUtil.randomString();
 
 		List<AssetTag> initialScopeGroupAssetTags =
@@ -128,7 +129,7 @@ public class AssetTagFinderTest {
 				_scopeGroup.getParentGroupId(), classNameId, assetTagName,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 
-		addBlogsEntry(_scopeGroup.getGroupId(), assetTagName);
+		addMBMessage(_scopeGroup.getGroupId(), assetTagName);
 
 		List<AssetTag> scopeGroupAssetTags = AssetTagFinderUtil.findByG_C_N(
 			_scopeGroup.getGroupId(), classNameId, assetTagName,
@@ -153,7 +154,7 @@ public class AssetTagFinderTest {
 			TestPropsValues.getUserId(), groupId, name, serviceContext);
 	}
 
-	protected void addBlogsEntry(long groupId, String assetTagName)
+	protected void addMBMessage(long groupId, String assetTagName)
 		throws Exception {
 
 		ServiceContext serviceContext =
@@ -162,9 +163,11 @@ public class AssetTagFinderTest {
 
 		serviceContext.setAssetTagNames(new String[] {assetTagName});
 
-		BlogsEntryLocalServiceUtil.addEntry(
-			TestPropsValues.getUserId(), RandomTestUtil.randomString(),
-			RandomTestUtil.randomString(), serviceContext);
+		MBTestUtil.addMessageWithWorkflow(
+			TestPropsValues.getUserId(), groupId,
+			MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID,
+			RandomTestUtil.randomString(), RandomTestUtil.randomString(), true,
+			serviceContext);
 	}
 
 	protected Group addScopeGroup() throws Exception {
