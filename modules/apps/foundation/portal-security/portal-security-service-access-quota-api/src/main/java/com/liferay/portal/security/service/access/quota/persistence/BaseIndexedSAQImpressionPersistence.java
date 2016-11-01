@@ -28,9 +28,6 @@ public abstract class BaseIndexedSAQImpressionPersistence
 	public abstract Iterator<String> findMetricValues(
 		long companyId, String metricName);
 
-	public abstract void findSAQImpressions(
-		long companyId, SAQImpressionConsumer saqImpressionConsumer);
-
 	@Override
 	public void findSAQImpressions(
 		long companyId, final SAQContextMatcher saqContextMatcher,
@@ -51,6 +48,9 @@ public abstract class BaseIndexedSAQImpressionPersistence
 				saqImpressionConsumer);
 		}
 	}
+
+	public abstract void findSAQImpressions(
+		long companyId, SAQImpressionConsumer saqImpressionConsumer);
 
 	public abstract void findSAQImpressionsMatchingMetric(
 		long companyId, String metric, SAQMetricMatcher saqMetricMatcher,

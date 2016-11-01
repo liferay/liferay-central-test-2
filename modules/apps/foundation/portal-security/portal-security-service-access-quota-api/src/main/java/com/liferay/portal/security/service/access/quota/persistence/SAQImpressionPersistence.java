@@ -30,11 +30,11 @@ public interface SAQImpressionPersistence {
 		long companyId, Map<String, String> metrics, long expiryIntervalMillis);
 
 	public void findSAQImpressions(
-		long companyId, SAQImpressionConsumer saqImpressionConsumer);
-
-	public void findSAQImpressions(
 		long companyId, SAQContextMatcher saqContextMatcher,
 		SAQImpressionConsumer saqImpressionConsumer);
+
+	public void findSAQImpressions(
+		long companyId, SAQImpressionConsumer saqImpressionConsumer);
 
 	public int getSAQImpressionsCount(
 		long companyId, long expiryIntervalMillis);
