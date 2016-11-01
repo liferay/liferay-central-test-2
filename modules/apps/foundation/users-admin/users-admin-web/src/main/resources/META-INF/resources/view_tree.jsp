@@ -82,7 +82,7 @@ homeURL.setParameter("usersListView", UserConstants.LIST_VIEW_FLAT_ORGANIZATIONS
 
 PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(request, "users-and-organizations"), homeURL.toString());
 
-if (Validator.isNotNull(organization)) {
+if (organization != null) {
 	UsersAdminUtil.addPortletBreadcrumbEntries(organization, request, renderResponse);
 }
 %>
@@ -128,7 +128,7 @@ if (Validator.isNotNull(organization)) {
 			<aui:input name="deleteOrganizationIds" type="hidden" />
 			<aui:input name="deleteUserIds" type="hidden" />
 
-			<c:if test="<%= Validator.isNotNull(organization) %>">
+			<c:if test="<%= organization != null %>">
 
 				<%
 				long parentOrganizationId = OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID;
@@ -262,7 +262,7 @@ if (Validator.isNotNull(organization)) {
 
 <%!
 private long _getParentOrganizationId(HttpServletRequest request, Organization organization, boolean filterManageableOrganizations) {
-	if (Validator.isNotNull(organization)) {
+	if (organization != null) {
 		return organization.getOrganizationId();
 	}
 
