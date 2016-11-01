@@ -31,4 +31,3 @@ create table ServiceComponent (
 	buildDate LONG,
 	data_ TEXT null
 );
-
