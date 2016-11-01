@@ -25,10 +25,10 @@ import java.util.Iterator;
 public abstract class BaseIndexedSAQImpressionPersistence
 	implements SAQImpressionPersistence {
 
-	public abstract Iterator<String> findAllMetricValues(
+	public abstract Iterator<String> findMetricValues(
 		long companyId, String metricName);
 
-	public abstract void findAllSAQImpressions(
+	public abstract void findSAQImpressions(
 		long companyId, SAQImpressionConsumer saqImpressionConsumer);
 
 	@Override

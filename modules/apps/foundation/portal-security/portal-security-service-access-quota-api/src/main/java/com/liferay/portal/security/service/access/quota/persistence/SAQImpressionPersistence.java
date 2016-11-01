@@ -29,7 +29,7 @@ public interface SAQImpressionPersistence {
 	public void createSAQImpression(
 		long companyId, Map<String, String> metrics, long expiryIntervalMillis);
 
-	public void findAllSAQImpressions(
+	public void findSAQImpressions(
 		long companyId, SAQImpressionConsumer saqImpressionConsumer);
 
 	public void findSAQImpressions(
