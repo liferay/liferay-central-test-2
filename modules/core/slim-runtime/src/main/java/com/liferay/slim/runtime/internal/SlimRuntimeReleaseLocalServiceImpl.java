@@ -25,7 +25,8 @@ import com.liferay.portal.service.impl.ReleaseLocalServiceImpl;
 /**
  * @author Raymond Augé
  */
-public class SlimReleaseLocalServiceImpl extends ReleaseLocalServiceImpl {
+public class SlimRuntimeReleaseLocalServiceImpl
+	extends ReleaseLocalServiceImpl {
 
 	@Override
 	public void createTablesAndPopulate() {
@@ -53,6 +54,6 @@ public class SlimReleaseLocalServiceImpl extends ReleaseLocalServiceImpl {
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		SlimReleaseLocalServiceImpl.class);
+		SlimRuntimeReleaseLocalServiceImpl.class);
 
 }

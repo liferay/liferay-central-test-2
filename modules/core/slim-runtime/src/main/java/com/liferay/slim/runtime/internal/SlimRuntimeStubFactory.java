@@ -22,7 +22,7 @@ import java.lang.reflect.Method;
 /**
  * @author Raymond Augé
  */
-public class SlimStubFactory {
+public class SlimRuntimeStubFactory {
 
 	public static Object createStub(Class<?> clazz) {
 		return ProxyUtil.newProxyInstance(
