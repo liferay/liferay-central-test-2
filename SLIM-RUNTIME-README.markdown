@@ -230,7 +230,7 @@ public class SampleServlet extends HttpServlet {
 			writer.println("<input type='submit' value='Sign Up'><br>");
 			writer.println("</form>");
 
-			List<Entry> entries = entryLocalService.getEntries(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+			List<Entry> entries = _entryLocalService.getEntries(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 			if (entries.isEmpty()) {
 				writer.println("I'm so lonely! :(<br/>");
@@ -238,7 +238,7 @@ public class SampleServlet extends HttpServlet {
 			else {
 				writer.println("Here's a list of others who've already signed up:<br/>");
 
-				for (Entry entry : entryLocalService.getEntries(QueryUtil.ALL_POS, QueryUtil.ALL_POS)) {
+				for (Entry entry : _entryLocalService.getEntries(QueryUtil.ALL_POS, QueryUtil.ALL_POS)) {
 					writer.println(String.format("%s &lt;%s><br/>", entry.getFullName(), entry.getEmailAddress()));
 				}
 			}
@@ -255,11 +255,11 @@ public class SampleServlet extends HttpServlet {
 			return;
 		}
 
-		DynamicQuery dynamicQuery = entryLocalService.dynamicQuery();
+		DynamicQuery dynamicQuery = _entryLocalService.dynamicQuery();
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("emailAddress", emailAddressParameter));
 
-		long count = entryLocalService.dynamicQueryCount(dynamicQuery);
+		long count = _entryLocalService.dynamicQueryCount(dynamicQuery);
 
 		if (count > 0) {
 			writer.println(String.format("Ooops! Someone already registered with the email address &lt;%s> :(<br/>", emailAddressParameter));
@@ -268,23 +268,24 @@ public class SampleServlet extends HttpServlet {
 			return;
 		}
 
-		long entryId = counterLocalService.increment();
+		long entryId = _counterLocalService.increment();
 
-		Entry entry = entryLocalService.createEntry(entryId);
+		Entry entry = _entryLocalService.createEntry(entryId);
 
 		entry.setFullName(fullNameParameter);
 		entry.setEmailAddress(emailAddressParameter);
 
-		entryLocalService.updateEntry(entry);
+		_entryLocalService.updateEntry(entry);
 
 		writer.println(String.format("Great! Thanks for signing up %s :D<br/>", fullNameParameter));
 		writer.println("<a href='/'>Go Back!</a>");
 	}
 
 	@Reference
-	private CounterLocalService counterLocalService;
+	private CounterLocalService _counterLocalService;
+
 	@Reference
-	private EntryLocalService entryLocalService;
+	private EntryLocalService _entryLocalService;
 
 }
 ```
