@@ -440,4 +440,63 @@
 
 		<execute function="SelectFrameTop" value1="relative=top" />
 	</command>
+
+	<command name="ViewActivityViaGroupStatistics" priority="4">
+		<execute macro="Page#add">
+			<var name="pageName" value="Group Statistics Page" />
+		</execute>
+
+		<execute macro="Navigator#gotoPage">
+			<var name="pageName" value="Group Statistics Page" />
+		</execute>
+
+		<execute macro="Portlet#addPG">
+			<var name="portletName" value="Group Statistics" />
+		</execute>
+
+		<var name="key_portletName" value="Group Statistics" />
+
+		<execute function="AssertTextEquals" locator1="Portlet#BODY" value1="Please configure this portlet and select at least one activity counter." />
+
+		<execute macro="SocialActivity#updateGroupStatisticsConfiguration">
+			<var name="displayActivityCounterName" value="blog entries of This site's users" />
+			<var name="chartType" value="column diagram" />
+			<var name="chartWidth" value="55%" />
+			<var name="dataRange" value="last 12 months" />
+		</execute>
+
+		<execute macro="Navigator#openURL" />
+
+		<execute macro="ProductMenu#gotoSitesConfiguration">
+			<var name="portlet" value="Social Activity" />
+		</execute>
+
+		<execute macro="SocialActivity#enableBlogsCP" />
+
+		<execute macro="Navigator#openURL" />
+
+		<var name="blogsEntryCounterList" value="1,2,3" />
+
+		<for list="${blogsEntryCounterList}" param="entryCount" >
+			<execute macro="Navigator#openURL" />
+
+			<execute macro="ProductMenu#gotoSitesContent">
+				<var name="portlet" value="Blogs" />
+			</execute>
+
+			<execute macro="Blogs#addEntry">
+				<var name="entryContent" value="Blogs Entry${entryCount} Content" />
+				<var name="entryTitle" value="Blogs Entry${entryCount} Title" />
+			</execute>
+		</for>
+
+		<execute macro="Navigator#gotoPage">
+			<var name="pageName" value="Group Statistics Page" />
+		</execute>
+
+		<execute macro="SocialActivity#viewPGViaGroupStatistics">
+			<var name="siteStatistics" value="Users' Blog Entries" />
+			<var name="currentValue" value="3" />
+		</execute>
+	</command>
 </definition>
