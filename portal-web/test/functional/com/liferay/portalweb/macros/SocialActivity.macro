@@ -85,6 +85,29 @@
 		<execute macro="Button#clickSave" />
 	</command>
 
+	<command name="updateGroupStatisticsConfiguration">
+		<execute macro="Portlet#gotoPortletOptions">
+			<var name="portletName" value="Group Statistics" />
+			<var name="portletOption" value="Configuration" />
+		</execute>
+
+		<execute function="SelectFrame" locator1="GroupStatisticsConfiguration#CONFIGURATION_IFRAME" />
+
+		<var name="key_displayActivityCounterName" value="${displayActivityCounterName}" />
+		<var name="key_chartType" value="${chartType}" />
+		<var name="key_chartWidth" value="${chartWidth}" />
+		<var name="key_dataRange" value="${dataRange}" />
+
+		<execute function="Select" locator1="GroupStatisticsConfiguration#SETUP_COUNTERS_DISPLAY_ACTIVITY_COUNTER_NAME_DROPDOWN" value1="${displayActivityCounterName}" />
+		<execute function="Select" locator1="GroupStatisticsConfiguration#SETUP_COUNTERS_CHART_TYPE_DROPDOWN" value1="${chartType}" />
+		<execute function="Select" locator1="GroupStatisticsConfiguration#SETUP_COUNTERS_CHART_WIDTH_DROPDOWN" value1="${chartWidth}" />
+		<execute function="Select" locator1="GroupStatisticsConfiguration#SETUP_COUNTERS_DATA_RANGE_DROPDOWN" value1="${dataRange}" />
+
+		<execute macro="PortletEntry#save" />
+
+		<execute function="SelectFrameTop" value1="relative=top" />
+	</command>
+
 	<command name="viewPGViaUserStatistics">
 		<var name="key_userName" value="${userName}" />
 
