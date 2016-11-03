@@ -2650,7 +2650,7 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  et;version="7.0.0";uses:="com.liferay.portal.kernel.exception,javax.s
  ervlet.http",com.liferay.portal.kernel.pop;version="6.2.0";uses:="com
  .liferay.portal.kernel.exception,javax.mail",com.liferay.portal.kerne
- l.portlet;version="7.4.0";uses:="com.liferay.asset.kernel.model,com.l
+ l.portlet;version="7.5.0";uses:="com.liferay.asset.kernel.model,com.l
  iferay.expando.kernel.model,com.liferay.exportimport.kernel.lar,com.l
  iferay.portal.kernel.atom,com.liferay.portal.kernel.exception,com.lif
  eray.portal.kernel.json,com.liferay.portal.kernel.model,com.liferay.p
