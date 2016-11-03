@@ -108,6 +108,18 @@
 		<execute function="SelectFrameTop" value1="relative=top" />
 	</command>
 
+	<command name="viewPGViaGroupStatistics">
+		<var name="key_siteStatistics" value="${siteStatistics}" />
+
+		<execute function="AssertTextEquals#assertPartialText" locator1="GroupStatistics#SITE_STATISTICS_PANEL" value1="${siteStatistics}" />
+
+		<var name="key_currentValue" value="${currentValue}" />
+
+		<execute function="AssertTextEquals#assertPartialText" locator1="GroupStatistics#GROUP_STATISTICS_BODY_INFO" value1="${currentValue}" />
+
+		<execute function="AssertElementPresent" locator1="GroupStatistics#GROUP_STATISTICS_BODY_CHART" />
+	</command>
+
 	<command name="viewPGViaUserStatistics">
 		<var name="key_userName" value="${userName}" />
 
