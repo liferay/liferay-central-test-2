@@ -60,7 +60,7 @@
 			<var name="portlet" value="Social Activity" />
 		</execute>
 
-		<execute macro="SocialActivity#enableCP" />
+		<execute macro="SocialActivity#enableBlogsCP" />
 
 		<execute macro="SocialActivity#configureActionCP">
 			<var name="contributionIncrement" value="2" />
