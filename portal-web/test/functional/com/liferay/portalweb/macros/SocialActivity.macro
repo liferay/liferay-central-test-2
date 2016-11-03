@@ -93,10 +93,10 @@
 
 		<execute function="SelectFrame" locator1="GroupStatisticsConfiguration#CONFIGURATION_IFRAME" />
 
-		<var name="key_displayActivityCounterName" value="${displayActivityCounterName}" />
 		<var name="key_chartType" value="${chartType}" />
 		<var name="key_chartWidth" value="${chartWidth}" />
 		<var name="key_dataRange" value="${dataRange}" />
+		<var name="key_displayActivityCounterName" value="${displayActivityCounterName}" />
 
 		<execute function="Select" locator1="GroupStatisticsConfiguration#SETUP_COUNTERS_DISPLAY_ACTIVITY_COUNTER_NAME_DROPDOWN" value1="${displayActivityCounterName}" />
 		<execute function="Select" locator1="GroupStatisticsConfiguration#SETUP_COUNTERS_CHART_TYPE_DROPDOWN" value1="${chartType}" />
