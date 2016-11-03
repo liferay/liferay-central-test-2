@@ -417,10 +417,10 @@
 		<execute function="AssertTextEquals" locator1="Portlet#BODY" value1="Please configure this portlet and select at least one activity counter." />
 
 		<execute macro="SocialActivity#updateGroupStatisticsConfiguration">
-			<var name="displayActivityCounterName" value="blog entries of This site's users" />
 			<var name="chartType" value="column diagram" />
 			<var name="chartWidth" value="55%" />
 			<var name="dataRange" value="last 12 months" />
+			<var name="displayActivityCounterName" value="blog entries of This site's users" />
 		</execute>
 
 		<execute macro="Navigator#openURL" />
@@ -453,8 +453,8 @@
 		</execute>
 
 		<execute macro="SocialActivity#viewPGViaGroupStatistics">
-			<var name="siteStatistics" value="Users' Blog Entries" />
 			<var name="currentValue" value="3" />
+			<var name="siteStatistics" value="Users' Blog Entries" />
 		</execute>
 	</command>
 </definition>
