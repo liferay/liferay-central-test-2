@@ -69,7 +69,7 @@
 		<execute macro="Button#clickSave" />
 	</command>
 
-	<command name="enableCP">
+	<command name="enableBlogsCP">
 		<execute function="Check" locator1="Checkbox#BLOGS_ENTRY" />
 
 		<execute macro="Button#clickSave" />
