@@ -58,10 +58,10 @@ if (comment instanceof WorkflowableComment) {
 <aui:form action="<%= editCommentURL %>" enctype="multipart/form-data" method="post" name="fm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
-	<aui:input name="ajax" type="hidden" value="<%= false %>" />
 	<aui:input name="commentId" type="hidden" value="<%= commentId %>" />
 	<aui:input name="parentCommentId" type="hidden" value="<%= parentCommentId %>" />
 	<aui:input name="workflowAction" type="hidden" value="<%= String.valueOf(pending ? WorkflowConstants.ACTION_SAVE_DRAFT : WorkflowConstants.ACTION_PUBLISH) %>" />
+	<aui:input name="ajax" type="hidden" value="<%= false %>" />
 
 	<liferay-ui:error exception="<%= CaptchaConfigurationException.class %>" message="a-captcha-error-occurred-please-contact-an-administrator" />
 	<liferay-ui:error exception="<%= CaptchaTextException.class %>" message="text-verification-failed" />
