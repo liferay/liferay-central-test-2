@@ -109,6 +109,9 @@
 		<equals arg1="${build.profile}" arg2="slim" />
 	</condition>
 
+	<property name="aspectj.agent" value="-javaagent:${project.dir}/lib/portal/aspectj-weaver.jar" />
+	<property name="aspectj.configuration" value="com/liferay/aspectj/aop.xml" />
+	<property name="definitions.dir" value="${project.dir}/definitions" />
 	<property name="doc.dir" value="${project.dir}/api" />
 
 	<tempfile deleteonexit="true" destdir="${project.dir}" property="app.server.tmp.properties" suffix=".properties" />
@@ -180,8 +183,6 @@
 		<istrue value="${liferay.releng.ee}" />
 	</condition>
 
-	<property name="definitions.dir" value="${project.dir}/definitions" />
-
 	<condition property="correct.ant.version">
 		<antversion atleast="1.7.0" />
 	</condition>
@@ -250,8 +251,6 @@ Error-Prone was automatically installed. Please rerun your task.
 		</and>
 	</condition>
 
-	<property name="aspectj.agent" value="-javaagent:${project.dir}/lib/portal/aspectj-weaver.jar" />
-	<property name="aspectj.configuration" value="com/liferay/aspectj/aop.xml" />
 	<property name="whip.agent" value="-javaagent:${project.dir}/${junit.whip.jar}=${junit.whip.includes};${junit.whip.excludes}" />
 
 	<macrodef name="app-server-properties-reset">
@@ -743,8 +742,8 @@ Error-Prone was automatically installed. Please rerun your task.
 		<element name="test.classes" />
 
 		<sequential>
-			<local name="junit.java.gc" />
 			<local name="aspectj.weaver.enabled" />
+			<local name="junit.java.gc" />
 
 			<if>
 				<equals arg1="@{test.type}" arg2="unit" />
