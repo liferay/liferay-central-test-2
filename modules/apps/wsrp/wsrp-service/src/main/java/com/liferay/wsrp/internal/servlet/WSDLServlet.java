@@ -29,7 +29,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.wsrp.constants.Constants;
 import com.liferay.wsrp.model.WSRPProducer;
-import com.liferay.wsrp.service.WSRPProducerLocalService;
+import com.liferay.wsrp.service.WSRPProducerLocalServiceUtil;
 
 import java.io.IOException;
 
@@ -42,7 +42,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.http.whiteboard.HttpWhiteboardConstants;
 
 /**
@@ -105,13 +104,13 @@ public class WSDLServlet extends HttpServlet {
 		if (Validator.isNumber(wsrpProducerUuid)) {
 			long wsrpProducerId = GetterUtil.getLong(wsrpProducerUuid);
 
-			wsrpProducer = _wsrpProducerLocalService.getWSRPProducer(
+			wsrpProducer = WSRPProducerLocalServiceUtil.getWSRPProducer(
 				wsrpProducerId);
 
 			wsrpProducerUuid = wsrpProducer.getUuid();
 		}
 		else {
-			wsrpProducer = _wsrpProducerLocalService.getWSRPProducer(
+			wsrpProducer = WSRPProducerLocalServiceUtil.getWSRPProducer(
 				wsrpProducerUuid);
 		}
 
@@ -174,8 +173,5 @@ public class WSDLServlet extends HttpServlet {
 			"/wsrp-2.0-interfaces.wsdl", "/wsrp-2.0-service.wsdl",
 			"/wsrp-2.0-types.xsd"
 		});
-
-	@Reference
-	private WSRPProducerLocalService _wsrpProducerLocalService;
 
 }
