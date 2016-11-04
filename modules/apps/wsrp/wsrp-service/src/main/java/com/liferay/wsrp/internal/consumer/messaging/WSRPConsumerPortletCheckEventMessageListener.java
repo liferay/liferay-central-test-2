@@ -18,10 +18,9 @@ import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageListener;
-import com.liferay.wsrp.service.WSRPConsumerPortletLocalService;
+import com.liferay.wsrp.service.WSRPConsumerPortletLocalServiceUtil;
 
 import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Mika Koivisto
@@ -36,10 +35,7 @@ public class WSRPConsumerPortletCheckEventMessageListener
 
 	@Override
 	protected void doReceive(Message message) throws Exception {
-		_wsrpConsumerPortletLocalService.initFailedWSRPConsumerPortlets();
+		WSRPConsumerPortletLocalServiceUtil.initFailedWSRPConsumerPortlets();
 	}
-
-	@Reference
-	private WSRPConsumerPortletLocalService _wsrpConsumerPortletLocalService;
 
 }
