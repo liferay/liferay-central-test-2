@@ -57,12 +57,14 @@ public class UpgradeGroup extends UpgradeProcess {
 
 			try (ResultSet rs = ps.executeQuery()) {
 				while (rs.next()) {
-					companyIds.add(rs.getLong("companyId"));
+					long companyId = rs.getLong("companyId");
+
+					companyIds.add(companyId);
 				}
 			}
 		}
 
-		long currentCompanyId = CompanyThreadLocal.getCompanyId();
+		long companyThreadLocalCompanyId = CompanyThreadLocal.getCompanyId();
 
 		try {
 			for (Long companyId : companyIds) {
@@ -91,7 +93,7 @@ public class UpgradeGroup extends UpgradeProcess {
 			}
 		}
 		finally {
-			CompanyThreadLocal.setCompanyId(currentCompanyId);
+			CompanyThreadLocal.setCompanyId(companyThreadLocalCompanyId);
 		}
 	}
 
