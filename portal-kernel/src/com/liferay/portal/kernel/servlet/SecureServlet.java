@@ -16,6 +16,7 @@ package com.liferay.portal.kernel.servlet;
 
 import com.liferay.portal.kernel.util.BasePortalLifecycle;
 import com.liferay.portal.kernel.util.InstanceFactory;
+import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.IOException;
 
@@ -62,7 +63,7 @@ public class SecureServlet
 	@Override
 	public String getServletInfo() {
 		if (servlet == null) {
-			return "";
+			return StringPool.BLANK;
 		}
 
 		return servlet.getServletInfo();
