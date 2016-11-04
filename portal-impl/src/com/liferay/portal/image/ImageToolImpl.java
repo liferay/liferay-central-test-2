@@ -705,11 +705,11 @@ public class ImageToolImpl implements ImageTool {
 		BufferedImage scaledBufferedImage = new BufferedImage(
 			scaledWidth, scaledHeight, originalBufferedImage.getType());
 
-		int currentWidth = originalBufferedImage.getWidth();
-		int currentHeight = originalBufferedImage.getHeight();
+		int originalHeight = originalBufferedImage.getHeight();
+		int originalWidth = originalBufferedImage.getWidth();
 
-		if (((scaledWidth * 2) >= currentWidth) &&
-			((scaledHeight * 2) >= currentHeight)) {
+		if (((scaledHeight * 2) >= originalHeight) &&
+			((scaledWidth * 2) >= originalWidth)) {
 
 			Graphics2D scaledGraphics2D = scaledBufferedImage.createGraphics();
 
@@ -722,7 +722,7 @@ public class ImageToolImpl implements ImageTool {
 		}
 
 		BufferedImage tempBufferedImage = new BufferedImage(
-			currentWidth, currentHeight, scaledBufferedImage.getType());
+			originalWidth, originalHeight, scaledBufferedImage.getType());
 
 		Graphics2D tempGraphics2D = tempBufferedImage.createGraphics();
 
@@ -738,37 +738,38 @@ public class ImageToolImpl implements ImageTool {
 			tempGraphics2D.setComposite(AlphaComposite.Src);
 		}
 
-		int startWidth = scaledWidth;
 		int startHeight = scaledHeight;
+		int startWidth = scaledWidth;
 
-		while ((startWidth < currentWidth) && (startHeight < currentHeight)) {
-			startWidth *= 2;
+		while ((startHeight < originalHeight) && (startWidth < originalWidth)) {
 			startHeight *= 2;
+			startWidth *= 2;
 		}
 
-		currentWidth = startWidth / 2;
-		currentHeight = startHeight / 2;
+		originalHeight = startHeight / 2;
+		originalWidth = startWidth / 2;
 
 		tempGraphics2D.drawImage(
-			originalBufferedImage, 0, 0, currentWidth, currentHeight, null);
+			originalBufferedImage, 0, 0, originalWidth, originalHeight, null);
 
-		while ((currentWidth >= (scaledWidth * 2)) &&
-			   (currentHeight >= (scaledHeight * 2))) {
+		while ((originalHeight >= (scaledHeight * 2)) &&
+			   (originalWidth >= (scaledWidth * 2))) {
 
-			currentWidth /= 2;
-			currentHeight /= 2;
+			originalHeight /= 2;
 
-			if (currentWidth < scaledWidth) {
-				currentWidth = scaledWidth;
+			if (originalHeight < scaledHeight) {
+				originalHeight = scaledHeight;
 			}
 
-			if (currentHeight < scaledHeight) {
-				currentHeight = scaledHeight;
+			originalWidth /= 2;
+
+			if (originalWidth < scaledWidth) {
+				originalWidth = scaledWidth;
 			}
 
 			tempGraphics2D.drawImage(
-				tempBufferedImage, 0, 0, currentWidth, currentHeight, 0, 0,
-				currentWidth * 2, currentHeight * 2, null);
+				tempBufferedImage, 0, 0, originalWidth, originalHeight, 0, 0,
+				originalWidth * 2, originalHeight * 2, null);
 		}
 
 		tempGraphics2D.dispose();
@@ -777,7 +778,7 @@ public class ImageToolImpl implements ImageTool {
 
 		scaledGraphics2D.drawImage(
 			tempBufferedImage, 0, 0, scaledWidth, scaledHeight, 0, 0,
-			currentWidth, currentHeight, null);
+			originalWidth, originalHeight, null);
 
 		scaledGraphics2D.dispose();
 
