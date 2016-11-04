@@ -103,9 +103,8 @@ public class ElasticSearchShutdownThreadInterruptionAspect {
 		if (namePrefix.endsWith("[http_server_worker]")) {
 			if (_locked) {
 				LogUtil.log(
-					"Called shutdownNow() on " + executorService +
-						" with name prefix: " + namePrefix +
-							" the shutdown interruption failure will happen.");
+					"Called " + executorService +
+						"#shutdownNow with name prefix " + namePrefix);
 			}
 
 			_shutdownCountDownLatch.countDown();
