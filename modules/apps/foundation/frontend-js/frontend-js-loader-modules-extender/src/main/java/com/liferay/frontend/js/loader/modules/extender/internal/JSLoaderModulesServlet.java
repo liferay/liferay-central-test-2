@@ -59,9 +59,9 @@ public class JSLoaderModulesServlet extends HttpServlet {
 	protected void activate(ComponentContext componentContext, Details details)
 		throws Exception {
 
-		_logger = new Logger(componentContext.getBundleContext());
-
 		_details = details;
+
+		_logger = new Logger(componentContext.getBundleContext());
 	}
 
 	protected JSLoaderModulesTracker getJSLoaderModulesTracker() {
