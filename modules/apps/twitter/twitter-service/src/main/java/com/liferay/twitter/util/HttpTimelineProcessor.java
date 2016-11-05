@@ -37,6 +37,7 @@ import java.util.regex.Pattern;
 
 /**
  * @author Shinn Lok
+ * @author Peter Fellwock
  */
 public class HttpTimelineProcessor implements TimelineProcessor {
 
@@ -85,7 +86,7 @@ public class HttpTimelineProcessor implements TimelineProcessor {
 
 		JSONObject statusJSONObject = JSONFactoryUtil.createJSONObject();
 
-		Date createDate = new Date(GetterUtil.getLong(matcher.group(3)) * 1000);
+		Date createDate = new Date(GetterUtil.getLong(matcher.group(3)));
 
 		statusJSONObject.put("created_at", _dateFormat.format(createDate));
 
@@ -127,8 +128,9 @@ public class HttpTimelineProcessor implements TimelineProcessor {
 		FastDateFormatFactoryUtil.getSimpleDateFormat(
 			"EEE MMM d hh:mm:ss Z yyyy", LocaleUtil.US);
 	private final Pattern _pattern = Pattern.compile(
-		"data-item-id=\"([0-9]+)\".*?data-user-id=\"([0-9]+)\".*?data-time=\"" +
-			"([0-9]+)\".*?<p class=\".*?js-tweet-text.*?\">(.*?)</p>",
+		"data-item-id=\"([0-9]+)\".*?data-user-id=\"([0-9]+)\".*?" +
+			"data-time-ms=\"([0-9]+)\".*?" +
+				"<p class=\"TweetTextSize TweetTextSize.*?>(.*?)</p>",
 		Pattern.DOTALL);
 	private final Random _random = new Random();
 
