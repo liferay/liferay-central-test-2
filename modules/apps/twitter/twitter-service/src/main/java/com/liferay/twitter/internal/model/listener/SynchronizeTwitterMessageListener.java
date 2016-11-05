@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.scheduler.TriggerFactory;
 import com.liferay.portal.kernel.scheduler.TriggerFactoryUtil;
 import com.liferay.twitter.configuration.TwitterGroupServiceConfiguration;
 import com.liferay.twitter.service.FeedLocalService;
+import com.liferay.twitter.util.TimelineProcessorUtil;
 
 import java.util.Map;
 
@@ -86,7 +87,12 @@ public class SynchronizeTwitterMessageListener
 	private static volatile TwitterGroupServiceConfiguration
 		_twitterGroupServiceConfiguration;
 
+	@Reference
 	private FeedLocalService _feedLocalService;
+
 	private SchedulerEngineHelper _schedulerEngineHelper;
+
+	@Reference
+	private TimelineProcessorUtil _timelineProcessorUtil;
 
 }

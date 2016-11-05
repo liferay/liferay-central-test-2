@@ -38,6 +38,12 @@ import org.osgi.service.component.annotations.Modified;
 public class TimelineProcessorUtil {
 
 	public static TimelineProcessor getInstance() {
+		if (_timelineProcessor != null) {
+			return _timelineProcessor;
+		}
+
+		_timelineProcessor = new HttpTimelineProcessor();
+
 		return _timelineProcessor;
 	}
 
