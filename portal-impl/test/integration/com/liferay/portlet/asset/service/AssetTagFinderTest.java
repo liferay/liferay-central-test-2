@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.asset.service.persistence;
+package com.liferay.portlet.asset.service;
 
 import com.liferay.asset.kernel.model.AssetTag;
 import com.liferay.asset.kernel.service.AssetTagLocalServiceUtil;
