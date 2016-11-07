@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -59,6 +60,25 @@ public class AdaptiveMediaImageConfigResource {
 		}
 
 		return Response.ok(userConfig).build();
+	}
+
+	@DELETE
+	@Path("/{uuid}")
+	public Response deleteConfiguration(
+			@PathParam("uuid") String uuid, AdaptiveMediaImageConfigRepr config)
+		throws PortalException {
+
+		List<AdaptiveMediaImageConfigRepr> configs = _getDiferentConfigurations(
+			uuid);
+
+		try {
+			_writeProperties(configs);
+		}
+		catch (Exception e) {
+			return Response.serverError().build();
+		}
+
+		return Response.noContent().build();
 	}
 
 	@GET
