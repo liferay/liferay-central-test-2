@@ -60,7 +60,7 @@ if (Validator.isNotNull(languageId)) {
 								sourceURL.setParameter("sourceVersion", String.valueOf(diffVersion.getVersion()));
 							%>
 
-								<c:if test="<%= sourceVersion != diffVersion.getVersion() %>">
+								<c:if test="<%= (sourceVersion != diffVersion.getVersion()) && (targetVersion != diffVersion.getVersion()) %>">
 									<liferay-ui:icon
 										label="<%= true %>"
 										message='<%= LanguageUtil.format(request, "version-x", diffVersion.getVersion()) %>'
@@ -94,7 +94,7 @@ if (Validator.isNotNull(languageId)) {
 							targetURL.setParameter("targetVersion", String.valueOf(diffVersion.getVersion()));
 						%>
 
-							<c:if test="<%= targetVersion != diffVersion.getVersion() %>">
+							<c:if test="<%= (sourceVersion != diffVersion.getVersion()) && (targetVersion != diffVersion.getVersion()) %>">
 								<liferay-ui:icon
 									label="<%= true %>"
 									message='<%= LanguageUtil.format(request, "version-x", diffVersion.getVersion()) %>'
