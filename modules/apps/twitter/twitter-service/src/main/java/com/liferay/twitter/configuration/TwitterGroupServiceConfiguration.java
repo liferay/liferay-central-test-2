@@ -31,12 +31,6 @@ import com.liferay.portal.configuration.metatype.annotations.ExtendedObjectClass
 )
 public interface TwitterGroupServiceConfiguration {
 
-	@Meta.AD(
-		deflt = "com.liferay.twitter.util.HttpTimelineProcessor",
-		required = false
-	)
-	public String usersTimelineProcessor();
-
 	@Meta.AD(deflt = "5", required = false)
 	public int twitterSynchronizationInterval();
 
