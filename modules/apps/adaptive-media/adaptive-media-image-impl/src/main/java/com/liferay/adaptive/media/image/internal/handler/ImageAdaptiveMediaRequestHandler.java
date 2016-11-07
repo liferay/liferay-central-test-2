@@ -82,8 +82,7 @@ public class ImageAdaptiveMediaRequestHandler
 			Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> mediaStream =
 				_finder.getAdaptiveMedia(
 					queryBuilder ->
-						queryBuilder.
-							forVersion(fileVersion).
+						queryBuilder.forVersion(fileVersion).
 							with(
 								ImageAdaptiveMediaAttribute.IMAGE_HEIGHT,
 								attributeMapping.getAttributeValue(

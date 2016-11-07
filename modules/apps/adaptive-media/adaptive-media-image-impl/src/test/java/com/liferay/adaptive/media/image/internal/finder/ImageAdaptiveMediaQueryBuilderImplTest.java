@@ -59,8 +59,7 @@ public class ImageAdaptiveMediaQueryBuilderImplTest {
 	public void testNonNullOptionalAttributeQuery() {
 		FileVersion fileVersion = Mockito.mock(FileVersion.class);
 
-		_queryBuilder.
-			forVersion(fileVersion).
+		_queryBuilder.forVersion(fileVersion).
 			with(ImageAdaptiveMediaAttribute.IMAGE_HEIGHT, Optional.of(100));
 
 		Map<AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, ?>, Object>
@@ -74,8 +73,7 @@ public class ImageAdaptiveMediaQueryBuilderImplTest {
 	public void testNullAttributeValueFailsWhenQueryingAttributes() {
 		FileVersion fileVersion = Mockito.mock(FileVersion.class);
 
-		_queryBuilder.
-			forVersion(fileVersion).
+		_queryBuilder.forVersion(fileVersion).
 			with(ImageAdaptiveMediaAttribute.IMAGE_HEIGHT, (Integer)null);
 	}
 
@@ -103,8 +101,7 @@ public class ImageAdaptiveMediaQueryBuilderImplTest {
 	public void testNullOptionalAttributeValueFailsWhenQueryingAttributes() {
 		FileVersion fileVersion = Mockito.mock(FileVersion.class);
 
-		_queryBuilder.
-			forVersion(fileVersion).
+		_queryBuilder.forVersion(fileVersion).
 			with(
 				ImageAdaptiveMediaAttribute.IMAGE_HEIGHT,
 				(Optional<Integer>)null);
