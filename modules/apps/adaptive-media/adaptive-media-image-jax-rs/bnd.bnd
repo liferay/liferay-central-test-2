@@ -1,0 +1,14 @@
+Bundle-Name: Liferay Adaptive Media Image JAX-RS API
+Bundle-SymbolicName: com.liferay.adaptive.media.image.jaxrs
+Bundle-Version: 1.0.0
+ConfigurationPath: /configuration
+Import-Package:\
+	!com.google.gson,\
+	\
+	!javassist.*,\
+	\
+	!org.apache.commons.vfs2.*,\
+	*
+Include-Resource: configuration=src/main/resources/configuration
+Liferay-Releng-Module-Group-Description:
+Liferay-Releng-Module-Group-Title: Adaptive Media
