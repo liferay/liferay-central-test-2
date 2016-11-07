@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 /**
  * It serves as a proxy for the API layer for a
  * {@link ImageAdaptiveMediaConfigurationEntry}.
+ * It also converts a configuration into its {@link String} representation.
  *
  * @author Alejandro Hernández
  */
@@ -65,6 +66,11 @@ public class AdaptiveMediaImageConfigRepr {
 
 	public void setWidth(int width) {
 		_width = width;
+	}
+
+	@Override
+	public String toString() {
+		return _name + ":" + _uuid + ":width=" + _width + ";height=" + _height;
 	}
 
 	private int _height = -1;
