@@ -15,7 +15,7 @@
 package com.liferay.adaptive.media.image.internal.handler;
 
 import com.liferay.adaptive.media.AdaptiveMediaRuntimeException;
-import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaConfigurationEntry;
+import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaConfigurationHelper;
 import com.liferay.adaptive.media.image.internal.util.Tuple;
 import com.liferay.document.library.kernel.service.DLAppLocalService;

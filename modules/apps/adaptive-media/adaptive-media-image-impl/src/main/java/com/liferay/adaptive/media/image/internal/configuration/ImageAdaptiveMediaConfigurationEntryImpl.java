@@ -14,15 +14,18 @@
 
 package com.liferay.adaptive.media.image.internal.configuration;
 
+import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
+
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * @author Adolfo Pérez
  */
-public class ImageAdaptiveMediaConfigurationEntry {
+public class ImageAdaptiveMediaConfigurationEntryImpl
+	implements ImageAdaptiveMediaConfigurationEntry {
 
-	public ImageAdaptiveMediaConfigurationEntry(
+	public ImageAdaptiveMediaConfigurationEntryImpl(
 		String name, String uuid, Map<String, String> properties) {
 
 		_name = name;

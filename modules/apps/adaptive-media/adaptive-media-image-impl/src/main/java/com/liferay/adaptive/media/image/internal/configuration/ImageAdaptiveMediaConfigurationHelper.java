@@ -15,6 +15,8 @@
 package com.liferay.adaptive.media.image.internal.configuration;
 
 import com.liferay.adaptive.media.AdaptiveMediaRuntimeException;
+import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfiguration;
+import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.portal.kernel.module.configuration.ConfigurationException;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 
@@ -29,10 +31,9 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Adolfo Pérez
  */
-@Component(
-	immediate = true, service = ImageAdaptiveMediaConfigurationHelper.class
-)
-public class ImageAdaptiveMediaConfigurationHelper {
+@Component(immediate = true, service = ImageAdaptiveMediaConfiguration.class)
+public class ImageAdaptiveMediaConfigurationHelper
+	implements ImageAdaptiveMediaConfiguration {
 
 	public Collection<ImageAdaptiveMediaConfigurationEntry>
 		getImageAdaptiveMediaConfigurationEntries(long companyId) {

@@ -66,7 +66,7 @@ public class ImageAdaptiveMediaConfigurationEntryParserTest {
 
 	@Test
 	public void testValidString() {
-		ImageAdaptiveMediaConfigurationEntry configurationEntry =
+		ImageAdaptiveMediaConfigurationEntryImpl configurationEntry =
 			_configurationEntryParser.parse("test:12345:height=100;width=200");
 
 		Assert.assertEquals("test", configurationEntry.getName());

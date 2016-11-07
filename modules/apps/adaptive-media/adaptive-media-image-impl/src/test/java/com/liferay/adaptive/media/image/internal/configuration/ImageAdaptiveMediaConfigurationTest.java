@@ -56,11 +56,11 @@ public class ImageAdaptiveMediaConfigurationTest {
 			new String[0]
 		);
 
-		Iterable<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
+		Iterable<ImageAdaptiveMediaConfigurationEntryImpl> configurationEntries =
 			_configurationHelper.
 				getImageAdaptiveMediaConfigurationEntries(1234);
 
-		Iterator<ImageAdaptiveMediaConfigurationEntry> iterator =
+		Iterator<ImageAdaptiveMediaConfigurationEntryImpl> iterator =
 			configurationEntries.iterator();
 
 		Assert.assertFalse(iterator.hasNext());
@@ -82,7 +82,7 @@ public class ImageAdaptiveMediaConfigurationTest {
 			new String[] {"one:1:height=100;width=100"}
 		);
 
-		Optional<ImageAdaptiveMediaConfigurationEntry>
+		Optional<ImageAdaptiveMediaConfigurationEntryImpl>
 			configurationEntryOptional =
 				_configurationHelper.getImageAdaptiveMediaConfigurationEntry(
 					1234, "1");
@@ -138,7 +138,7 @@ public class ImageAdaptiveMediaConfigurationTest {
 			new String[] {"one:1:height=100;width=100"}
 		);
 
-		Collection<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
+		Collection<ImageAdaptiveMediaConfigurationEntryImpl> configurationEntries =
 			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
 				1234);
 
@@ -161,7 +161,7 @@ public class ImageAdaptiveMediaConfigurationTest {
 			new String[] {"one:1:height=100;width=100"}
 		);
 
-		Optional<ImageAdaptiveMediaConfigurationEntry>
+		Optional<ImageAdaptiveMediaConfigurationEntryImpl>
 			configurationEntryOptional =
 				_configurationHelper.getImageAdaptiveMediaConfigurationEntry(
 					1234, "0");
@@ -185,7 +185,7 @@ public class ImageAdaptiveMediaConfigurationTest {
 			null
 		);
 
-		Collection<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
+		Collection<ImageAdaptiveMediaConfigurationEntryImpl> configurationEntries =
 			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
 				1234);
 

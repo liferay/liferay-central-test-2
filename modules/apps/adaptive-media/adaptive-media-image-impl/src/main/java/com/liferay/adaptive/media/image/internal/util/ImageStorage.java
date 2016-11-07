@@ -15,7 +15,7 @@
 package com.liferay.adaptive.media.image.internal.util;
 
 import com.liferay.adaptive.media.AdaptiveMediaRuntimeException;
-import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaConfigurationEntry;
+import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.document.library.kernel.store.DLStoreUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.CompanyConstants;

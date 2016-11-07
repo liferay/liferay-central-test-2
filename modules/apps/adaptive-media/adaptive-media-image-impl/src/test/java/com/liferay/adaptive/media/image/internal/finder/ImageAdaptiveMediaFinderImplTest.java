@@ -18,7 +18,7 @@ import com.liferay.adaptive.media.AdaptiveMedia;
 import com.liferay.adaptive.media.AdaptiveMediaRuntimeException;
 import com.liferay.adaptive.media.AdaptiveMediaURIResolver;
 import com.liferay.adaptive.media.finder.AdaptiveMediaQuery;
-import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaConfigurationEntry;
+import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaConfigurationEntryImpl;
 import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaConfigurationHelper;
 import com.liferay.adaptive.media.image.internal.util.ImageInfo;
 import com.liferay.adaptive.media.image.internal.util.ImageProcessor;
@@ -62,8 +62,8 @@ public class ImageAdaptiveMediaFinderImplTest {
 
 	@Test(expected = PortalException.class)
 	public void testFileEntryGetLatestFileVersionFails() throws Exception {
-		ImageAdaptiveMediaConfigurationEntry configurationEntry =
-			new ImageAdaptiveMediaConfigurationEntry(
+		ImageAdaptiveMediaConfigurationEntryImpl configurationEntry =
+			new ImageAdaptiveMediaConfigurationEntryImpl(
 				StringUtil.randomString(), StringUtil.randomString(),
 				new HashMap<>());
 
@@ -96,8 +96,8 @@ public class ImageAdaptiveMediaFinderImplTest {
 
 	@Test
 	public void testFileEntryGetMediaWithNoAttributes() throws Exception {
-		ImageAdaptiveMediaConfigurationEntry configurationEntry =
-			new ImageAdaptiveMediaConfigurationEntry(
+		ImageAdaptiveMediaConfigurationEntryImpl configurationEntry =
+			new ImageAdaptiveMediaConfigurationEntryImpl(
 				StringUtil.randomString(), StringUtil.randomString(),
 				new HashMap<>());
 
@@ -142,8 +142,8 @@ public class ImageAdaptiveMediaFinderImplTest {
 
 	@Test
 	public void testGetMediaAttributes() throws Exception {
-		ImageAdaptiveMediaConfigurationEntry configurationEntry =
-			new ImageAdaptiveMediaConfigurationEntry(
+		ImageAdaptiveMediaConfigurationEntryImpl configurationEntry =
+			new ImageAdaptiveMediaConfigurationEntryImpl(
 				StringUtil.randomString(), StringUtil.randomString(),
 				MapUtil.fromArray("height", "100", "width", "200"));
 
@@ -169,7 +169,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 		Mockito.when(
 			_imageStorage.getImageInfo(
 				Mockito.any(FileVersion.class),
-				Mockito.any(ImageAdaptiveMediaConfigurationEntry.class))
+				Mockito.any(ImageAdaptiveMediaConfigurationEntryImpl.class))
 		).thenReturn(
 			Optional.of(new ImageInfo("image/jpeg", 1))
 		);
@@ -200,20 +200,20 @@ public class ImageAdaptiveMediaFinderImplTest {
 
 	@Test
 	public void testGetMediaAttributesOrderByAsc() throws Exception {
-		ImageAdaptiveMediaConfigurationEntry configurationEntry1 =
-			new ImageAdaptiveMediaConfigurationEntry(
+		ImageAdaptiveMediaConfigurationEntryImpl configurationEntry1 =
+			new ImageAdaptiveMediaConfigurationEntryImpl(
 				StringUtil.randomString(), StringUtil.randomString(),
 				MapUtil.fromArray("height", "100", "width", "200"));
-		ImageAdaptiveMediaConfigurationEntry configurationEntry2 =
-			new ImageAdaptiveMediaConfigurationEntry(
+		ImageAdaptiveMediaConfigurationEntryImpl configurationEntry2 =
+			new ImageAdaptiveMediaConfigurationEntryImpl(
 				StringUtil.randomString(), StringUtil.randomString(),
 				MapUtil.fromArray("height", "100", "width", "800"));
-		ImageAdaptiveMediaConfigurationEntry configurationEntry3 =
-			new ImageAdaptiveMediaConfigurationEntry(
+		ImageAdaptiveMediaConfigurationEntryImpl configurationEntry3 =
+			new ImageAdaptiveMediaConfigurationEntryImpl(
 				StringUtil.randomString(), StringUtil.randomString(),
 				MapUtil.fromArray("height", "100", "width", "400"));
 
-		List<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
+		List<ImageAdaptiveMediaConfigurationEntryImpl> configurationEntries =
 			Arrays.asList(
 				configurationEntry1, configurationEntry2, configurationEntry3);
 
@@ -239,7 +239,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 		Mockito.when(
 			_imageStorage.getImageInfo(
 				Mockito.any(FileVersion.class),
-				Mockito.any(ImageAdaptiveMediaConfigurationEntry.class))
+				Mockito.any(ImageAdaptiveMediaConfigurationEntryImpl.class))
 		).thenReturn(
 			Optional.of(new ImageInfo("image/jpeg", 1))
 		);
@@ -283,20 +283,20 @@ public class ImageAdaptiveMediaFinderImplTest {
 
 	@Test
 	public void testGetMediaAttributesOrderByDesc() throws Exception {
-		ImageAdaptiveMediaConfigurationEntry configurationEntry1 =
-			new ImageAdaptiveMediaConfigurationEntry(
+		ImageAdaptiveMediaConfigurationEntryImpl configurationEntry1 =
+			new ImageAdaptiveMediaConfigurationEntryImpl(
 				StringUtil.randomString(), StringUtil.randomString(),
 				MapUtil.fromArray("height", "100", "width", "200"));
-		ImageAdaptiveMediaConfigurationEntry configurationEntry2 =
-			new ImageAdaptiveMediaConfigurationEntry(
+		ImageAdaptiveMediaConfigurationEntryImpl configurationEntry2 =
+			new ImageAdaptiveMediaConfigurationEntryImpl(
 				StringUtil.randomString(), StringUtil.randomString(),
 				MapUtil.fromArray("height", "100", "width", "800"));
-		ImageAdaptiveMediaConfigurationEntry configurationEntry3 =
-			new ImageAdaptiveMediaConfigurationEntry(
+		ImageAdaptiveMediaConfigurationEntryImpl configurationEntry3 =
+			new ImageAdaptiveMediaConfigurationEntryImpl(
 				StringUtil.randomString(), StringUtil.randomString(),
 				MapUtil.fromArray("height", "100", "width", "400"));
 
-		List<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
+		List<ImageAdaptiveMediaConfigurationEntryImpl> configurationEntries =
 			Arrays.asList(
 				configurationEntry1, configurationEntry2, configurationEntry3);
 
@@ -322,7 +322,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 		Mockito.when(
 			_imageStorage.getImageInfo(
 				Mockito.any(FileVersion.class),
-				Mockito.any(ImageAdaptiveMediaConfigurationEntry.class))
+				Mockito.any(ImageAdaptiveMediaConfigurationEntryImpl.class))
 		).thenReturn(
 			Optional.of(new ImageInfo("image/jpeg", 1))
 		);
@@ -399,8 +399,8 @@ public class ImageAdaptiveMediaFinderImplTest {
 
 	@Test
 	public void testGetMediaInputStream() throws Exception {
-		ImageAdaptiveMediaConfigurationEntry configurationEntry =
-			new ImageAdaptiveMediaConfigurationEntry(
+		ImageAdaptiveMediaConfigurationEntryImpl configurationEntry =
+			new ImageAdaptiveMediaConfigurationEntryImpl(
 				StringUtil.randomString(), StringUtil.randomString(),
 				Collections.emptyMap());
 
@@ -420,7 +420,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 		Mockito.when(
 			_imageStorage.getImageInfo(
 				Mockito.any(FileVersion.class),
-				Mockito.any(ImageAdaptiveMediaConfigurationEntry.class))
+				Mockito.any(ImageAdaptiveMediaConfigurationEntryImpl.class))
 		).thenReturn(
 			Optional.of(new ImageInfo("image/jpeg", 1))
 		);
@@ -458,8 +458,8 @@ public class ImageAdaptiveMediaFinderImplTest {
 
 	@Test
 	public void testGetMediaMissingAttribute() throws Exception {
-		ImageAdaptiveMediaConfigurationEntry configurationEntry =
-			new ImageAdaptiveMediaConfigurationEntry(
+		ImageAdaptiveMediaConfigurationEntryImpl configurationEntry =
+			new ImageAdaptiveMediaConfigurationEntryImpl(
 				StringUtil.randomString(), StringUtil.randomString(),
 				MapUtil.fromArray("height", "100"));
 
@@ -514,13 +514,13 @@ public class ImageAdaptiveMediaFinderImplTest {
 
 	@Test
 	public void testGetMediaQueryWith100Height() throws Exception {
-		ImageAdaptiveMediaConfigurationEntry configurationEntry1 =
-			new ImageAdaptiveMediaConfigurationEntry(
+		ImageAdaptiveMediaConfigurationEntryImpl configurationEntry1 =
+			new ImageAdaptiveMediaConfigurationEntryImpl(
 				StringUtil.randomString(), StringUtil.randomString(),
 				MapUtil.fromArray("height", "100", "width", "200"));
 
-		ImageAdaptiveMediaConfigurationEntry configurationEntry2 =
-			new ImageAdaptiveMediaConfigurationEntry(
+		ImageAdaptiveMediaConfigurationEntryImpl configurationEntry2 =
+			new ImageAdaptiveMediaConfigurationEntryImpl(
 				StringUtil.randomString(), StringUtil.randomString(),
 				MapUtil.fromArray("height", "200", "width", "200"));
 
@@ -540,7 +540,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 		Mockito.when(
 			_imageStorage.getImageInfo(
 				Mockito.eq(_fileVersion),
-				Mockito.any(ImageAdaptiveMediaConfigurationEntry.class))
+				Mockito.any(ImageAdaptiveMediaConfigurationEntryImpl.class))
 		).thenReturn(
 			Optional.of(new ImageInfo("image/jpeg", 1))
 		);
@@ -554,8 +554,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 		Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> stream =
 			_finder.getAdaptiveMedia(
 				queryBuilder ->
-					queryBuilder.
-						forVersion(_fileVersion).
+					queryBuilder.forVersion(_fileVersion).
 						with(ImageAdaptiveMediaAttribute.IMAGE_HEIGHT, 100).
 						done());
 
@@ -583,13 +582,13 @@ public class ImageAdaptiveMediaFinderImplTest {
 
 	@Test
 	public void testGetMediaQueryWith200Height() throws Exception {
-		ImageAdaptiveMediaConfigurationEntry configurationEntry1 =
-			new ImageAdaptiveMediaConfigurationEntry(
+		ImageAdaptiveMediaConfigurationEntryImpl configurationEntry1 =
+			new ImageAdaptiveMediaConfigurationEntryImpl(
 				StringUtil.randomString(), StringUtil.randomString(),
 				MapUtil.fromArray("height", "100", "width", "200"));
 
-		ImageAdaptiveMediaConfigurationEntry configurationEntry2 =
-			new ImageAdaptiveMediaConfigurationEntry(
+		ImageAdaptiveMediaConfigurationEntryImpl configurationEntry2 =
+			new ImageAdaptiveMediaConfigurationEntryImpl(
 				StringUtil.randomString(), StringUtil.randomString(),
 				MapUtil.fromArray("height", "200", "width", "200"));
 
@@ -615,7 +614,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 		Mockito.when(
 			_imageStorage.getImageInfo(
 				Mockito.any(FileVersion.class),
-				Mockito.any(ImageAdaptiveMediaConfigurationEntry.class))
+				Mockito.any(ImageAdaptiveMediaConfigurationEntryImpl.class))
 		).thenReturn(
 			Optional.of(new ImageInfo("image/jpeg", 1))
 		);
@@ -623,8 +622,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 		Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> stream =
 			_finder.getAdaptiveMedia(
 				queryBuilder ->
-					queryBuilder.
-						forVersion(_fileVersion).
+					queryBuilder.forVersion(_fileVersion).
 						with(ImageAdaptiveMediaAttribute.IMAGE_HEIGHT, 200).
 						done());
 
@@ -652,13 +650,13 @@ public class ImageAdaptiveMediaFinderImplTest {
 
 	@Test
 	public void testGetMediaQueryWithNoMatchingAttributes() throws Exception {
-		ImageAdaptiveMediaConfigurationEntry configurationEntry1 =
-			new ImageAdaptiveMediaConfigurationEntry(
+		ImageAdaptiveMediaConfigurationEntryImpl configurationEntry1 =
+			new ImageAdaptiveMediaConfigurationEntryImpl(
 				StringUtil.randomString(), StringUtil.randomString(),
 				MapUtil.fromArray("height", "100"));
 
-		ImageAdaptiveMediaConfigurationEntry configurationEntry2 =
-			new ImageAdaptiveMediaConfigurationEntry(
+		ImageAdaptiveMediaConfigurationEntryImpl configurationEntry2 =
+			new ImageAdaptiveMediaConfigurationEntryImpl(
 				StringUtil.randomString(), StringUtil.randomString(),
 				MapUtil.fromArray("height", "200"));
 
@@ -684,7 +682,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 		Mockito.when(
 			_imageStorage.getImageInfo(
 				Mockito.any(FileVersion.class),
-				Mockito.any(ImageAdaptiveMediaConfigurationEntry.class))
+				Mockito.any(ImageAdaptiveMediaConfigurationEntryImpl.class))
 		).thenReturn(
 			Optional.of(new ImageInfo("image/jpeg", 1))
 		);
@@ -692,8 +690,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 		Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> stream =
 			_finder.getAdaptiveMedia(
 				queryBuilder ->
-					queryBuilder.
-						forVersion(_fileVersion).
+					queryBuilder.forVersion(_fileVersion).
 						with(ImageAdaptiveMediaAttribute.IMAGE_WIDTH, 100).
 						done());
 
@@ -746,8 +743,8 @@ public class ImageAdaptiveMediaFinderImplTest {
 	public void testMediaLazilyDelegatesOnStorageInputStream()
 		throws Exception {
 
-		ImageAdaptiveMediaConfigurationEntry configurationEntry =
-			new ImageAdaptiveMediaConfigurationEntry(
+		ImageAdaptiveMediaConfigurationEntryImpl configurationEntry =
+			new ImageAdaptiveMediaConfigurationEntryImpl(
 				StringUtil.randomString(), StringUtil.randomString(),
 				MapUtil.fromArray("height", "100", "width", "200"));
 
@@ -773,7 +770,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 		Mockito.when(
 			_imageStorage.getImageInfo(
 				Mockito.any(FileVersion.class),
-				Mockito.any(ImageAdaptiveMediaConfigurationEntry.class))
+				Mockito.any(ImageAdaptiveMediaConfigurationEntryImpl.class))
 		).thenReturn(
 			Optional.of(new ImageInfo("image/jpeg", 1))
 		);

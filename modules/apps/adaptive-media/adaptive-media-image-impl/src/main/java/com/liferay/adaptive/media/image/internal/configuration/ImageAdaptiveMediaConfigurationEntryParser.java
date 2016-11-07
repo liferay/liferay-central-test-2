@@ -47,7 +47,7 @@ import org.osgi.service.component.annotations.Component;
  * </li>
  * <li>
  * The key and value pairs can be anything, but consumers of
- * the resulting {@link ImageAdaptiveMediaConfigurationEntry} might
+ * the resulting {@link ImageAdaptiveMediaConfigurationEntryImpl} might
  * require a particular set of attributes.
  * </li>
  * </ul>
@@ -63,9 +63,11 @@ public class ImageAdaptiveMediaConfigurationEntryParser {
 	 * Returns a configuration entry parsed from the configuration line's data.
 	 *
 	 * @param  s the configuration line to parse
-	 * @return a {@link ImageAdaptiveMediaConfigurationEntry} with the line data
+	 * @return a {@link ImageAdaptiveMediaConfigurationEntryImpl} with the line data
 	 */
-	public ImageAdaptiveMediaConfigurationEntry parse(String s) {
+	public ImageAdaptiveMediaConfigurationEntryImpl parse(String s)
+		throws IllegalArgumentException {
+
 		if (Validator.isNull(s)) {
 			throw new IllegalArgumentException(
 				"Invalid image adaptive media configuration: " + s);
@@ -97,7 +99,8 @@ public class ImageAdaptiveMediaConfigurationEntryParser {
 			properties.put(keyValuePair[0], keyValuePair[1]);
 		}
 
-		return new ImageAdaptiveMediaConfigurationEntry(name, uuid, properties);
+		return new ImageAdaptiveMediaConfigurationEntryImpl(
+			name, uuid, properties);
 	}
 
 	private static final Pattern _ATTRIBUTE_SEPARATOR_PATTERN = Pattern.compile(
