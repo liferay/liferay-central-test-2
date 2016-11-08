@@ -14,6 +14,8 @@
 
 package com.liferay.adaptive.media.image.internal.configuration;
 
+import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
+
 import java.util.Map;
 
 import org.junit.Assert;
@@ -66,7 +68,7 @@ public class ImageAdaptiveMediaConfigurationEntryParserTest {
 
 	@Test
 	public void testValidString() {
-		ImageAdaptiveMediaConfigurationEntryImpl configurationEntry =
+		ImageAdaptiveMediaConfigurationEntry configurationEntry =
 			_configurationEntryParser.parse("test:12345:height=100;width=200");
 
 		Assert.assertEquals("test", configurationEntry.getName());

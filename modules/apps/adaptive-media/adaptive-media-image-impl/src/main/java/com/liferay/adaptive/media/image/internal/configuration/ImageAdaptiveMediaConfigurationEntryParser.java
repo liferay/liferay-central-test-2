@@ -14,6 +14,7 @@
 
 package com.liferay.adaptive.media.image.internal.configuration;
 
+import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.util.HashMap;
@@ -47,7 +48,7 @@ import org.osgi.service.component.annotations.Component;
  * </li>
  * <li>
  * The key and value pairs can be anything, but consumers of
- * the resulting {@link ImageAdaptiveMediaConfigurationEntryImpl} might
+ * the resulting {@link ImageAdaptiveMediaConfigurationEntry} might
  * require a particular set of attributes.
  * </li>
  * </ul>
@@ -63,9 +64,9 @@ public class ImageAdaptiveMediaConfigurationEntryParser {
 	 * Returns a configuration entry parsed from the configuration line's data.
 	 *
 	 * @param  s the configuration line to parse
-	 * @return a {@link ImageAdaptiveMediaConfigurationEntryImpl} with the line data
+	 * @return a {@link ImageAdaptiveMediaConfigurationEntry} with the line data
 	 */
-	public ImageAdaptiveMediaConfigurationEntryImpl parse(String s) {
+	public ImageAdaptiveMediaConfigurationEntry parse(String s) {
 		if (Validator.isNull(s)) {
 			throw new IllegalArgumentException(
 				"Invalid image adaptive media configuration: " + s);

@@ -107,7 +107,7 @@ public class ImageAdaptiveMediaProcessorImplTest {
 			true
 		);
 
-		ImageAdaptiveMediaConfigurationEntryImpl configurationEntry =
+		ImageAdaptiveMediaConfigurationEntry configurationEntry =
 			new ImageAdaptiveMediaConfigurationEntryImpl(
 				StringUtil.randomString(), StringUtil.randomString(),
 				Collections.emptyMap());
@@ -159,7 +159,7 @@ public class ImageAdaptiveMediaProcessorImplTest {
 			true
 		);
 
-		ImageAdaptiveMediaConfigurationEntryImpl configurationEntry =
+		ImageAdaptiveMediaConfigurationEntry configurationEntry =
 			new ImageAdaptiveMediaConfigurationEntryImpl(
 				StringUtil.randomString(), StringUtil.randomString(),
 				Collections.emptyMap());
@@ -188,7 +188,7 @@ public class ImageAdaptiveMediaProcessorImplTest {
 			true
 		);
 
-		ImageAdaptiveMediaConfigurationEntryImpl configurationEntry =
+		ImageAdaptiveMediaConfigurationEntry configurationEntry =
 			new ImageAdaptiveMediaConfigurationEntryImpl(
 				StringUtil.randomString(), StringUtil.randomString(),
 				Collections.emptyMap());

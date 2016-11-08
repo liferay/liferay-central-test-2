@@ -11,10 +11,11 @@ import java.util.Optional;
 @ProviderType
 public interface ImageAdaptiveMediaConfigurationHelper {
 
-	Collection<ImageAdaptiveMediaConfigurationEntry>
+	public Collection<ImageAdaptiveMediaConfigurationEntry>
 		getImageAdaptiveMediaConfigurationEntries(long companyId);
 
-	Optional<ImageAdaptiveMediaConfigurationEntry>
-	getImageAdaptiveMediaConfigurationEntry(
-		long companyId, String configurationEntryUUID);
+	public Optional<ImageAdaptiveMediaConfigurationEntry>
+		getImageAdaptiveMediaConfigurationEntry(
+			long companyId, String configurationEntryUUID);
+
 }
