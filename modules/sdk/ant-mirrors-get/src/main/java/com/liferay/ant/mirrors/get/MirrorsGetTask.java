@@ -401,27 +401,26 @@ public class MirrorsGetTask extends Task {
 	protected int toOutputStream(URL url, OutputStream outputStream)
 		throws IOException {
 
-		URLConnection connection = url.openConnection();
+		URLConnection urlConnection = url.openConnection();
 
-		InputStream inputStream = connection.getInputStream();
+		InputStream inputStream = urlConnection.getInputStream();
 
 		try {
-			byte[] byteArray = new byte[1024 * 16];
-			int bytesRead = 0;
-			int totalBytes = 0;
+			byte[] bytes = new byte[1024 * 16];
+			int read = 0;
+			long time = System.currentTimeMillis();
+			int total = 0;
 
-			long intervalStart = System.currentTimeMillis();
-
-			while ((bytesRead = inputStream.read(byteArray)) > 0) {
-				outputStream.write(byteArray, 0, bytesRead);
-				totalBytes += bytesRead;
+			while ((read = inputStream.read(bytes)) > 0) {
+				outputStream.write(bytes, 0, read);
+				total += read;
 
 				if (_verbose &&
-					((System.currentTimeMillis() - intervalStart) > 100)) {
+					((System.currentTimeMillis() - time) > 100)) {
 
 					System.out.print(".");
 
-					intervalStart = System.currentTimeMillis();
+					time = System.currentTimeMillis();
 				}
 			}
 
@@ -429,7 +428,7 @@ public class MirrorsGetTask extends Task {
 				System.out.println("\n");
 			}
 
-			return totalBytes;
+			return total;
 		}
 		finally {
 			if (inputStream != null) {
