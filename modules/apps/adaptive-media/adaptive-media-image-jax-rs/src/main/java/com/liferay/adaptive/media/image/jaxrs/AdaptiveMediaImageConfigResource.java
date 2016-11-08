@@ -15,6 +15,8 @@ import java.util.stream.Collectors;
 
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.InternalServerErrorException;
+import javax.ws.rs.NotFoundException;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -41,7 +43,7 @@ public class AdaptiveMediaImageConfigResource {
 	@Path("/{uuid}")
 	@Produces({"application/json", "application/xml"})
 	@PUT
-	public Response addConfiguration(
+	public AdaptiveMediaImageConfigRepr addConfiguration(
 			@PathParam("uuid") String uuid,
 			AdaptiveMediaImageConfigRepr userConfig)
 		throws PortalException {
@@ -56,10 +58,10 @@ public class AdaptiveMediaImageConfigResource {
 			_writeProperties(configs);
 		}
 		catch (Exception e) {
-			return Response.serverError().build();
+			throw new InternalServerErrorException();
 		}
 
-		return Response.ok(userConfig).build();
+		return userConfig;
 	}
 
 	@DELETE
@@ -75,7 +77,7 @@ public class AdaptiveMediaImageConfigResource {
 			_writeProperties(configs);
 		}
 		catch (Exception e) {
-			return Response.serverError().build();
+			throw new InternalServerErrorException();
 		}
 
 		return Response.noContent().build();
@@ -84,19 +86,18 @@ public class AdaptiveMediaImageConfigResource {
 	@GET
 	@Path("/{uuid}")
 	@Produces({"application/json", "application/xml"})
-	public Response getConfiguration(@PathParam("uuid") String uuid) {
+	public AdaptiveMediaImageConfigRepr getConfiguration(
+		@PathParam("uuid") String uuid) {
+
 		Optional<ImageAdaptiveMediaConfigurationEntry> entry =
 			_imageAdaptiveMediaConfiguration.
 				getImageAdaptiveMediaConfigurationEntry(_companyId, uuid);
 
 		if (!entry.isPresent()) {
-			return Response.status(Response.Status.NOT_FOUND).build();
+			throw new NotFoundException();
 		}
 
-		AdaptiveMediaImageConfigRepr config = new AdaptiveMediaImageConfigRepr(
-			entry.get());
-
-		return Response.ok(config).build();
+		return new AdaptiveMediaImageConfigRepr(entry.get());
 	}
 
 	@GET

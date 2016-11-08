@@ -20,7 +20,7 @@ public class AdaptiveMediaImageJaxRApplication extends Application {
 	AdaptiveMediaImageRootResource _adaptiveMediaImageRootResource;
 
 	public Set<Object> getSingletons() {
-		return Collections.<Object>singleton(_adaptiveMediaImageRootResource);
+		return Collections.singleton(_adaptiveMediaImageRootResource);
 	}
 
 }
