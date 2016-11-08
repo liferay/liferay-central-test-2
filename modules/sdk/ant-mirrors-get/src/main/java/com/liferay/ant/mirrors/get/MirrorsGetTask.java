@@ -325,21 +325,21 @@ public class MirrorsGetTask extends Task {
 		try {
 			zipFile = new ZipFile(file, ZipFile.OPEN_READ);
 
-			Enumeration<?> zipFileEntries = zipFile.entries();
+			int count = 0;
 
-			int totalEntries = 0;
+			Enumeration<?> enumeration = zipFile.entries();
 
-			while (zipFileEntries.hasMoreElements()) {
-				totalEntries++;
+			while (enumeration.hasMoreElements()) {
+				enumeration.nextElement();
 
-				zipFileEntries.nextElement();
+				count++;
 			}
 
 			StringBuilder sb = new StringBuilder();
 
 			sb.append(file.getPath());
 			sb.append(" is a valid zip file with ");
-			sb.append(totalEntries);
+			sb.append(count);
 			sb.append(" entries.");
 
 			System.out.println(sb.toString());
@@ -347,7 +347,7 @@ public class MirrorsGetTask extends Task {
 			return true;
 		}
 		catch (IOException ioe) {
-			System.out.println(file.getPath() + " is not a valid zip file.");
+			System.out.println(file.getPath() + " is an invalid zip file.");
 
 			return false;
 		}
