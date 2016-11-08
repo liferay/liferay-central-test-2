@@ -23,6 +23,9 @@ import com.liferay.portal.security.service.access.quota.metric.SAQMetricMatcher;
 public abstract class BaseIndexedSAQImpressionProvider
 	implements SAQImpressionProvider {
 
+	public abstract int getSAQImpressionsCount(
+		long companyId, long expiryIntervalMillis);
+
 	@Override
 	public void populateSAQImpressions(
 		long companyId, final SAQContextMatcher saqContextMatcher,
@@ -50,8 +53,5 @@ public abstract class BaseIndexedSAQImpressionProvider
 	public abstract void populateSAQImpressionsMatchingMetric(
 		long companyId, String metric, SAQMetricMatcher saqMetricMatcher,
 		SAQImpressionConsumer saqImpressionConsumer);
-
-	public abstract int getSAQImpressionsCount(
-		long companyId, long expiryIntervalMillis);
 
 }
