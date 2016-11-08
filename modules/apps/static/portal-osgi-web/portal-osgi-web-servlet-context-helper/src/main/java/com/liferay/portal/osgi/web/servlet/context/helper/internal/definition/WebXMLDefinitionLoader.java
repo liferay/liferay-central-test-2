@@ -1083,8 +1083,6 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 		FilterDefinition filterDefinition, String[] value,
 		String[] urlPatterns) {
 
-		//Value and urlPatterns should be checked in this order
-
 		if (!ArrayUtil.isEmpty(value)) {
 			for (String urlPattern : value) {
 				filterDefinition.addURLPattern(urlPattern);
@@ -1094,7 +1092,7 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 		if (!ArrayUtil.isEmpty(urlPatterns)) {
 			if (ListUtil.isNotEmpty(filterDefinition.getURLPatterns())) {
 				throw new IllegalStateException(
-					"Cannot declare both value and urlPatterns");
+					"Both value and URL patterns are declared");
 			}
 
 			for (String urlPattern : urlPatterns) {
@@ -1116,8 +1114,6 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 		ServletDefinition servletDefinition, String[] value,
 		String[] urlPatterns) {
 
-		//Value and urlPatterns should be checked in this order
-
 		if (!ArrayUtil.isEmpty(value)) {
 			for (String urlPattern : value) {
 				servletDefinition.addURLPattern(urlPattern);
@@ -1127,7 +1123,7 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 		if (!ArrayUtil.isEmpty(urlPatterns)) {
 			if (ListUtil.isNotEmpty(servletDefinition.getURLPatterns())) {
 				throw new IllegalStateException(
-					"Cannot declare both value and urlPatterns");
+					"Both value and URL patterns are declared");
 			}
 
 			for (String urlPattern : urlPatterns) {
