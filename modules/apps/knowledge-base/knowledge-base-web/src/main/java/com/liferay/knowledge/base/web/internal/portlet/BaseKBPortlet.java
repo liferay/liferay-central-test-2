@@ -124,7 +124,7 @@ public abstract class BaseKBPortlet extends MVCPortlet {
 		long resourcePrimKey = ParamUtil.getLong(
 			actionRequest, "resourcePrimKey");
 
-		doDeleteKBArticle(actionRequest, actionResponse, resourcePrimKey);
+		deleteKBArticle(actionRequest, actionResponse, resourcePrimKey);
 	}
 
 	public void deleteKBComment(
@@ -494,7 +494,7 @@ public abstract class BaseKBPortlet extends MVCPortlet {
 		}
 	}
 
-	protected void doDeleteKBArticle(
+	protected void deleteKBArticle(
 			ActionRequest actionRequest, ActionResponse actionResponse,
 			long resourcePrimKey)
 		throws Exception {
