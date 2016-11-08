@@ -107,8 +107,8 @@ public class VerifySessionFactoryWrapper implements SessionFactory {
 
 		StringBundler sb = new StringBundler(5);
 
-		sb.append("Wrong current transaction manager. ");
-		sb.append("Current session factory classes metadata: ");
+		sb.append("Wrong current transaction manager, current session ");
+		sb.append("factory classes metadata: ");
 		sb.append(currentSessionFactoryImplementor.getAllClassMetadata());
 		sb.append(", target session factory classes metadata: ");
 		sb.append(targetSessionFactoryImplementor.getAllClassMetadata());
