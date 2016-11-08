@@ -3,6 +3,8 @@ package com.liferay.adaptive.media.image.jaxrs;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfiguration;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.util.HashMapDictionary;
 import com.liferay.registry.Registry;
 import com.liferay.registry.RegistryUtil;
@@ -14,6 +16,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.ws.rs.DELETE;
+import javax.ws.rs.ForbiddenException;
 import javax.ws.rs.GET;
 import javax.ws.rs.InternalServerErrorException;
 import javax.ws.rs.NotFoundException;
@@ -38,6 +41,7 @@ public class AdaptiveMediaImageConfigResource {
 
 		_companyId = companyId;
 		_imageAdaptiveMediaConfiguration = imageAdaptiveMediaConfiguration;
+		_permissionChecker = PermissionThreadLocal.getPermissionChecker();
 	}
 
 	@Path("/{uuid}")
@@ -47,6 +51,10 @@ public class AdaptiveMediaImageConfigResource {
 			@PathParam("uuid") String uuid,
 			AdaptiveMediaImageConfigRepr userConfig)
 		throws PortalException {
+
+		if (!_permissionChecker.isCompanyAdmin()) {
+			throw new ForbiddenException();
+		}
 
 		List<AdaptiveMediaImageConfigRepr> configs = _getDiferentConfigurations(
 			uuid);
@@ -69,6 +77,10 @@ public class AdaptiveMediaImageConfigResource {
 	public Response deleteConfiguration(
 			@PathParam("uuid") String uuid, AdaptiveMediaImageConfigRepr config)
 		throws PortalException {
+
+		if (!_permissionChecker.isCompanyAdmin()) {
+			throw new ForbiddenException();
+		}
 
 		List<AdaptiveMediaImageConfigRepr> configs = _getDiferentConfigurations(
 			uuid);
@@ -165,5 +177,6 @@ public class AdaptiveMediaImageConfigResource {
 	private final long _companyId;
 	private final ImageAdaptiveMediaConfiguration
 		_imageAdaptiveMediaConfiguration;
+	private final PermissionChecker _permissionChecker;
 
 }
