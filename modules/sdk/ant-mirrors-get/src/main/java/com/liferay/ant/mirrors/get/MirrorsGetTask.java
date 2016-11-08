@@ -156,7 +156,7 @@ public class MirrorsGetTask extends Task {
 		Matcher matcher = _pattern.matcher(src);
 
 		if (!matcher.find()) {
-			throw new RuntimeException("Invalid src attribute. " + src);
+			throw new RuntimeException("Invalid src attribute: " + src);
 		}
 
 		_fileName = matcher.group("fileName");
@@ -184,24 +184,23 @@ public class MirrorsGetTask extends Task {
 		sb.append(sourceFile.getPath());
 		sb.append(" to ");
 		sb.append(targetFile.getPath());
+		sb.append(".");
 
 		System.out.println(sb.toString());
 
 		URL sourceFileURL = new URL("file:" + sourceFile.getAbsolutePath());
 
-		long start = System.currentTimeMillis();
+		long time = System.currentTimeMillis();
 
-		int totalBytes = toFile(sourceFileURL, targetFile);
-
-		long duration = System.currentTimeMillis() - start;
+		int size = toFile(sourceFileURL, targetFile);
 
 		if (_verbose) {
 			sb = new StringBuilder();
 
 			sb.append("Copied ");
-			sb.append(totalBytes);
+			sb.append(size);
 			sb.append(" bytes in ");
-			sb.append(duration);
+			sb.append(System.currentTimeMillis() - time);
 			sb.append(" milliseconds.");
 
 			System.out.println(sb.toString());
@@ -217,15 +216,16 @@ public class MirrorsGetTask extends Task {
 		sb.append(sourceURL.toExternalForm());
 		sb.append(" to ");
 		sb.append(targetFile.getPath());
+		sb.append(".");
 
 		System.out.println(sb.toString());
 
-		int totalBytes = 0;
+		long time = System.currentTimeMillis();
 
-		long start = System.currentTimeMillis();
+		int size = 0;
 
 		try {
-			totalBytes = toFile(sourceURL, targetFile);
+			size = toFile(sourceURL, targetFile);
 		}
 		catch (IOException ioe) {
 			if (!_ignoreErrors) {
@@ -236,17 +236,15 @@ public class MirrorsGetTask extends Task {
 			}
 		}
 
-		long duration = System.currentTimeMillis() - start;
-
 		if (_verbose) {
 			sb = new StringBuilder();
 
 			sb.append("Downloaded ");
 			sb.append(sourceURL.toExternalForm());
 			sb.append(". ");
-			sb.append(totalBytes);
+			sb.append(size);
 			sb.append(" bytes in ");
-			sb.append(duration);
+			sb.append(System.currentTimeMillis() - time);
 			sb.append(" milliseconds.");
 
 			System.out.println(sb.toString());
@@ -265,7 +263,7 @@ public class MirrorsGetTask extends Task {
 			targetFile.delete();
 
 			throw new IOException(
-				targetFile.getAbsolutePath() + " is not a valid zip file.");
+				targetFile.getAbsolutePath() + " is an invalid zip file.");
 		}
 	}
 
@@ -408,12 +406,12 @@ public class MirrorsGetTask extends Task {
 		try {
 			byte[] bytes = new byte[1024 * 16];
 			int read = 0;
+			int size = 0;
 			long time = System.currentTimeMillis();
-			int total = 0;
 
 			while ((read = inputStream.read(bytes)) > 0) {
 				outputStream.write(bytes, 0, read);
-				total += read;
+				size += read;
 
 				if (_verbose &&
 					((System.currentTimeMillis() - time) > 100)) {
@@ -428,7 +426,7 @@ public class MirrorsGetTask extends Task {
 				System.out.println("\n");
 			}
 
-			return total;
+			return size;
 		}
 		finally {
 			if (inputStream != null) {
