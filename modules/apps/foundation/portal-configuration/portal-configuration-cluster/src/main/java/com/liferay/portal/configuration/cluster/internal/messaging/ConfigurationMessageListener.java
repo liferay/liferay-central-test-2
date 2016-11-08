@@ -78,7 +78,7 @@ public class ConfigurationMessageListener extends BaseMessageListener {
 
 		_reloadablePersistenceManager.reload(pid);
 
-		Dictionary<String, ?> properties = _reloadablePersistenceManager.load(
+		Dictionary<String, ?> dictionary = _reloadablePersistenceManager.load(
 			pid);
 
 		try {
@@ -96,11 +96,11 @@ public class ConfigurationMessageListener extends BaseMessageListener {
 					configuration.delete();
 				}
 				else {
-					if (properties == null) {
+					if (dictionary == null) {
 						configuration.update();
 					}
 					else {
-						configuration.update(properties);
+						configuration.update(dictionary);
 					}
 				}
 			}
