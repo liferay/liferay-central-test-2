@@ -862,24 +862,24 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 	}
 
 	private void _collectAnnotatedClasses(
-			WebXMLDefinition annotationWebXMLDefinition,
+			WebXMLDefinition webXMLDefinition,
 			Bundle bundle, Collection<String> classResources)
 		throws Exception {
 
 		for (String classResource : classResources) {
 			_collectAnnotatedClasses(
-				annotationWebXMLDefinition, bundle, classResource);
+				webXMLDefinition, bundle, classResource);
 		}
 	}
 
 	private void _collectAnnotatedClasses(
-			WebXMLDefinition annotationWebXMLDefinition,
+			WebXMLDefinition webXMLDefinition,
 			Bundle bundle, String classResource)
 		throws Exception {
 
-		URL urlClassResource = _bundle.getResource(classResource);
+		URL url = _bundle.getResource(classResource);
 
-		if (urlClassResource == null) {
+		if (url == null) {
 			return;
 		}
 
@@ -887,10 +887,10 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 
 		className = className.replaceAll("/", ".");
 
-		Class<?> annotatedClass = null;
+		Class<?> clazz = null;
 
 		try {
-			annotatedClass = bundle.loadClass(className);
+			clazz = bundle.loadClass(className);
 		}
 		catch (Throwable t) {
 			_logger.log(Logger.LOG_DEBUG, t.getMessage());
@@ -898,7 +898,7 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 			return;
 		}
 
-		WebServlet webServlet = annotatedClass.getAnnotation(
+		WebServlet webServlet = clazz.getAnnotation(
 			WebServlet.class);
 
 		if (webServlet != null) {
@@ -918,7 +918,7 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 			}
 			else {
 				servletDefinition.setName(
-					annotatedClass.getCanonicalName());
+					clazz.getCanonicalName());
 			}
 
 			_addURLPatterns(
@@ -926,13 +926,13 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 				webServlet.urlPatterns());
 
 			_setServlet(
-				servletDefinition, annotatedClass.getCanonicalName());
+				servletDefinition, clazz.getCanonicalName());
 
-			annotationWebXMLDefinition.setServletDefinition(
+			webXMLDefinition.setServletDefinition(
 				servletDefinition.getName(), servletDefinition);
 		}
 
-		WebFilter webFilter = annotatedClass.getAnnotation(WebFilter.class);
+		WebFilter webFilter = clazz.getAnnotation(WebFilter.class);
 
 		if (webFilter != null) {
 			FilterDefinition filterDefinition = new FilterDefinition();
@@ -947,7 +947,7 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 				}
 			}
 
-			_setFilter(filterDefinition, annotatedClass.getCanonicalName());
+			_setFilter(filterDefinition, clazz.getCanonicalName());
 
 			_setInitParameters(
 				webFilter.initParams(),
@@ -959,7 +959,7 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 				filterDefinition.setName(filterName);
 			}
 			else {
-				filterDefinition.setName(annotatedClass.getCanonicalName());
+				filterDefinition.setName(clazz.getCanonicalName());
 			}
 
 			String[] servletNames = webFilter.servletNames();
@@ -974,11 +974,11 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 				filterDefinition, webFilter.value(),
 				webFilter.urlPatterns());
 
-			annotationWebXMLDefinition.setFilterDefinition(
+			webXMLDefinition.setFilterDefinition(
 				filterDefinition.getName(), filterDefinition);
 		}
 
-		WebListener webListener = annotatedClass.getAnnotation(
+		WebListener webListener = clazz.getAnnotation(
 			WebListener.class);
 
 		if (webListener != null) {
@@ -986,9 +986,9 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 				new ListenerDefinition();
 
 			_setEventListener(
-				listenerDefinition, annotatedClass.getCanonicalName());
+				listenerDefinition, clazz.getCanonicalName());
 
-			annotationWebXMLDefinition.addListenerDefinition(
+			webXMLDefinition.addListenerDefinition(
 				listenerDefinition);
 		}
 	}
