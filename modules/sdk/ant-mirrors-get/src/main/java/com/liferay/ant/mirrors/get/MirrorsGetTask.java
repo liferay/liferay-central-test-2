@@ -359,8 +359,8 @@ public class MirrorsGetTask extends Task {
 	}
 
 	protected boolean isZipFileName(String fileName) {
-		if (fileName.endsWith(".zip") || fileName.endsWith(".jar") ||
-			fileName.endsWith(".war") || fileName.endsWith(".ear")) {
+		if (fileName.endsWith(".ear") || fileName.endsWith(".jar") ||
+			fileName.endsWith(".war") || fileName.endsWith(".zip")) {
 
 			return true;
 		}
