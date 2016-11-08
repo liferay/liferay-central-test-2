@@ -248,7 +248,7 @@ public class DisplayPortlet extends BaseKBPortlet {
 	}
 
 	@Override
-	protected void doDeleteKBArticle(
+	protected void deleteKBArticle(
 			ActionRequest actionRequest, ActionResponse actionResponse,
 			long resourcePrimKey)
 		throws Exception {
@@ -260,7 +260,7 @@ public class DisplayPortlet extends BaseKBPortlet {
 
 		long parentResourcePrimKey = kbArticle.getParentResourcePrimKey();
 
-		super.doDeleteKBArticle(actionRequest, actionResponse, resourcePrimKey);
+		super.deleteKBArticle(actionRequest, actionResponse, resourcePrimKey);
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
