@@ -180,7 +180,7 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 					servletNames.add(_filterMapping.servletName);
 				}
 
-				_setUrlPatterns(filterDefinition, _filterMapping.urlPatterns);
+				_addURLPatterns(filterDefinition, _filterMapping.urlPatterns);
 			}
 
 			_filterMapping = null;
@@ -247,7 +247,7 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 		else if (qName.equals("listener-class")) {
 			String listenerClassName = String.valueOf(_stack.pop());
 
-			_setListener(_listenerDefinition, listenerClassName);
+			_setEventListener(_listenerDefinition, listenerClassName);
 		}
 		else if (qName.equals("name")) {
 			String name = String.valueOf(_stack.pop());
@@ -354,7 +354,7 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 				_servletMapping.servletName);
 
 			if (servletDefinition != null) {
-				_setUrlPatterns(servletDefinition, _servletMapping.urlPatterns);
+				_addURLPatterns(servletDefinition, _servletMapping.urlPatterns);
 			}
 
 			_servletMapping = null;
@@ -897,7 +897,7 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 				servletDefinition.setAsyncSupported(
 					webServlet.asyncSupported());
 
-				_setInitParams(
+				_setInitParameters(
 					webServlet.initParams(),
 					servletDefinition.getInitParameters());
 
@@ -911,7 +911,7 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 						annotatedClass.getCanonicalName());
 				}
 
-				_setUrlPatterns(
+				_addURLPatterns(
 					servletDefinition, webServlet.value(),
 					webServlet.urlPatterns());
 
@@ -939,7 +939,7 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 
 				_setFilter(filterDefinition, annotatedClass.getCanonicalName());
 
-				_setInitParams(
+				_setInitParameters(
 					webFilter.initParams(),
 					filterDefinition.getInitParameters());
 
@@ -960,7 +960,7 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 					}
 				}
 
-				_setUrlPatterns(
+				_addURLPatterns(
 					filterDefinition, webFilter.value(),
 					webFilter.urlPatterns());
 
@@ -975,7 +975,7 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 				ListenerDefinition listenerDefinition =
 					new ListenerDefinition();
 
-				_setListener(
+				_setEventListener(
 					listenerDefinition, annotatedClass.getCanonicalName());
 
 				webXMLDefinitionAnnotation.addListenerDefinition(
@@ -1046,7 +1046,7 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 		filterDefinition.setFilter(_getFilterInstance(filterClassName));
 	}
 
-	private void _setInitParams(
+	private void _setInitParameters(
 		WebInitParam[] initParams, Map<String, String> initParametersMap) {
 
 		if (!ArrayUtil.isEmpty(initParams)) {
@@ -1056,7 +1056,7 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 		}
 	}
 
-	private void _setListener(
+	private void _setEventListener(
 		ListenerDefinition listenerDefinition, String listenerClassName) {
 
 		listenerDefinition.setEventListener(
@@ -1069,16 +1069,16 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 		servletDefinition.setServlet(_getServletInstance(servletClassName));
 	}
 
-	private void _setUrlPatterns(
+	private void _addURLPatterns(
 		FilterDefinition filterDefinition, List<String> value) {
 
 		if (!ListUtil.isEmpty(value)) {
-			_setUrlPatterns(
+			_addURLPatterns(
 				filterDefinition, value.toArray(new String[0]), null);
 		}
 	}
 
-	private void _setUrlPatterns(
+	private void _addURLPatterns(
 		FilterDefinition filterDefinition, String[] value,
 		String[] urlPatterns) {
 
@@ -1102,16 +1102,16 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 		}
 	}
 
-	private void _setUrlPatterns(
+	private void _addURLPatterns(
 		ServletDefinition servletDefinition, List<String> value) {
 
 		if (!ListUtil.isEmpty(value)) {
-			_setUrlPatterns(
+			_addURLPatterns(
 				servletDefinition, value.toArray(new String[0]), null);
 		}
 	}
 
-	private void _setUrlPatterns(
+	private void _addURLPatterns(
 		ServletDefinition servletDefinition, String[] value,
 		String[] urlPatterns) {
 
