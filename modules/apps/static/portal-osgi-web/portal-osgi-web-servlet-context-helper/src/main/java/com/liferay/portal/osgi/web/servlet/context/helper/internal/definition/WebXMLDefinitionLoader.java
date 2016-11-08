@@ -1047,11 +1047,12 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 	}
 
 	private void _setInitParameters(
-		WebInitParam[] initParams, Map<String, String> initParametersMap) {
+		WebInitParam[] webInitParams, Map<String, String> initParametersMap) {
 
-		if (!ArrayUtil.isEmpty(initParams)) {
-			for (WebInitParam initParam : initParams) {
-				initParametersMap.put(initParam.name(), initParam.value());
+		if (!ArrayUtil.isEmpty(webInitParams)) {
+			for (WebInitParam webInitParam : webInitParams) {
+				initParametersMap.put(
+					webInitParam.name(), webInitParam.value());
 			}
 		}
 	}
