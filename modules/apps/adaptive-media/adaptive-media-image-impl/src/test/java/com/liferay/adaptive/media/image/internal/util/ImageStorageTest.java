@@ -14,6 +14,7 @@
 
 package com.liferay.adaptive.media.image.internal.util;
 
+import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaConfigurationEntryImpl;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -93,7 +94,7 @@ public class ImageStorageTest {
 			4L
 		);
 
-		ImageAdaptiveMediaConfigurationEntryImpl configurationEntry =
+		ImageAdaptiveMediaConfigurationEntry configurationEntry =
 			new ImageAdaptiveMediaConfigurationEntryImpl(
 				StringUtil.randomString(), "xyz", Collections.emptyMap());
 
