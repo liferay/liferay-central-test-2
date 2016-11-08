@@ -24,12 +24,12 @@ public abstract class BaseIndexedSAQImpressionProvider
 	implements SAQImpressionProvider {
 
 	@Override
-	public void feedSAQImpressions(
+	public void populateSAQImpressions(
 		long companyId, final SAQContextMatcher saqContextMatcher,
 		SAQImpressionConsumer saqImpressionConsumer) {
 
 		for (final String metricName : saqContextMatcher.getMetricNames()) {
-			feedSAQImpressionsMatchingMetric(
+			populateSAQImpressionsMatchingMetric(
 				companyId, metricName,
 				new SAQMetricMatcher() {
 
@@ -44,10 +44,10 @@ public abstract class BaseIndexedSAQImpressionProvider
 		}
 	}
 
-	public abstract void feedSAQImpressions(
+	public abstract void populateSAQImpressions(
 		long companyId, SAQImpressionConsumer saqImpressionConsumer);
 
-	public abstract void feedSAQImpressionsMatchingMetric(
+	public abstract void populateSAQImpressionsMatchingMetric(
 		long companyId, String metric, SAQMetricMatcher saqMetricMatcher,
 		SAQImpressionConsumer saqImpressionConsumer);
 
