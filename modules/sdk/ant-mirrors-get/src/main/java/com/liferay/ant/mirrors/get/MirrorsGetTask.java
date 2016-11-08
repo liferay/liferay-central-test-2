@@ -286,14 +286,14 @@ public class MirrorsGetTask extends Task {
 			return false;
 		}
 
-		String theirMD5 = null;
+		String remoteMD5 = null;
 
 		try {
-			theirMD5 = toString(md5URL);
+			remoteMD5 = toString(md5URL);
 		}
 		catch (FileNotFoundException fnfe) {
 			if (_verbose) {
-				System.out.println("md5 file not found.");
+				System.out.println("md5 file does not exist.");
 			}
 
 			return true;
@@ -310,9 +310,9 @@ public class MirrorsGetTask extends Task {
 
 		Project project = checksum.getProject();
 
-		String myMD5 = project.getProperty("md5");
+		String localMD5 = project.getProperty("md5");
 
-		return theirMD5.contains(myMD5);
+		return remoteMD5.contains(localMD5);
 	}
 
 	protected boolean isValidZip(File file) throws IOException {
