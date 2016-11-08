@@ -867,120 +867,129 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 		throws Exception {
 
 		for (String classResource : classResources) {
-			URL urlClassResource = _bundle.getResource(classResource);
+			_collectAnnotatedClasses(
+				webXMLDefinitionAnnotation, classResource, bundle);
+		}
+	}
 
-			if (urlClassResource == null) {
-				continue;
+	private void _collectAnnotatedClasses(
+			WebXMLDefinition webXMLDefinitionAnnotation,
+			String classResource, Bundle bundle)
+		throws Exception {
+
+		URL urlClassResource = _bundle.getResource(classResource);
+
+		if (urlClassResource == null) {
+			return;
+		}
+
+		String className = classResource.replaceAll("\\.class$", "");
+
+		className = className.replaceAll("/", ".");
+
+		Class<?> annotatedClass = null;
+
+		try {
+			annotatedClass = bundle.loadClass(className);
+		}
+		catch (Throwable t) {
+			_logger.log(Logger.LOG_DEBUG, t.getMessage());
+
+			return;
+		}
+
+		WebServlet webServlet = annotatedClass.getAnnotation(
+			WebServlet.class);
+
+		if (webServlet != null) {
+			ServletDefinition servletDefinition = new ServletDefinition();
+
+			servletDefinition.setAsyncSupported(
+				webServlet.asyncSupported());
+
+			_setInitParameters(
+				webServlet.initParams(),
+				servletDefinition.getInitParameters());
+
+			String name = webServlet.name();
+
+			if (Validator.isNotNull(name)) {
+				servletDefinition.setName(name);
+			}
+			else {
+				servletDefinition.setName(
+					annotatedClass.getCanonicalName());
 			}
 
-			String className = classResource.replaceAll("\\.class$", "");
+			_addURLPatterns(
+				servletDefinition, webServlet.value(),
+				webServlet.urlPatterns());
 
-			className = className.replaceAll("/", ".");
+			_setServlet(
+				servletDefinition, annotatedClass.getCanonicalName());
 
-			Class<?> annotatedClass = null;
+			webXMLDefinitionAnnotation.setServletDefinition(
+				servletDefinition.getName(), servletDefinition);
+		}
 
-			try {
-				annotatedClass = bundle.loadClass(className);
-			}
-			catch (Throwable t) {
-				_logger.log(Logger.LOG_DEBUG, t.getMessage());
+		WebFilter webFilter = annotatedClass.getAnnotation(WebFilter.class);
 
-				return;
-			}
+		if (webFilter != null) {
+			FilterDefinition filterDefinition = new FilterDefinition();
 
-			WebServlet webServlet = annotatedClass.getAnnotation(
-				WebServlet.class);
+			filterDefinition.setAsyncSupported(webFilter.asyncSupported());
 
-			if (webServlet != null) {
-				ServletDefinition servletDefinition = new ServletDefinition();
+			DispatcherType[] dispatcherTypes = webFilter.dispatcherTypes();
 
-				servletDefinition.setAsyncSupported(
-					webServlet.asyncSupported());
-
-				_setInitParameters(
-					webServlet.initParams(),
-					servletDefinition.getInitParameters());
-
-				String name = webServlet.name();
-
-				if (Validator.isNotNull(name)) {
-					servletDefinition.setName(name);
+			if (!ArrayUtil.isEmpty(dispatcherTypes)) {
+				for (DispatcherType dispatcherType : dispatcherTypes) {
+					filterDefinition.addDispatcher(dispatcherType.name());
 				}
-				else {
-					servletDefinition.setName(
-						annotatedClass.getCanonicalName());
-				}
-
-				_addURLPatterns(
-					servletDefinition, webServlet.value(),
-					webServlet.urlPatterns());
-
-				_setServlet(
-					servletDefinition, annotatedClass.getCanonicalName());
-
-				webXMLDefinitionAnnotation.setServletDefinition(
-					servletDefinition.getName(), servletDefinition);
 			}
 
-			WebFilter webFilter = annotatedClass.getAnnotation(WebFilter.class);
+			_setFilter(filterDefinition, annotatedClass.getCanonicalName());
 
-			if (webFilter != null) {
-				FilterDefinition filterDefinition = new FilterDefinition();
+			_setInitParameters(
+				webFilter.initParams(),
+				filterDefinition.getInitParameters());
 
-				filterDefinition.setAsyncSupported(webFilter.asyncSupported());
+			String filterName = webFilter.filterName();
 
-				DispatcherType[] dispatcherTypes = webFilter.dispatcherTypes();
-
-				if (!ArrayUtil.isEmpty(dispatcherTypes)) {
-					for (DispatcherType dispatcherType : dispatcherTypes) {
-						filterDefinition.addDispatcher(dispatcherType.name());
-					}
-				}
-
-				_setFilter(filterDefinition, annotatedClass.getCanonicalName());
-
-				_setInitParameters(
-					webFilter.initParams(),
-					filterDefinition.getInitParameters());
-
-				String filterName = webFilter.filterName();
-
-				if (Validator.isNotNull(filterName)) {
-					filterDefinition.setName(filterName);
-				}
-				else {
-					filterDefinition.setName(annotatedClass.getCanonicalName());
-				}
-
-				String[] servletNames = webFilter.servletNames();
-
-				if (!ArrayUtil.isEmpty(servletNames)) {
-					for (String servletName : servletNames) {
-						filterDefinition.addServletName(servletName);
-					}
-				}
-
-				_addURLPatterns(
-					filterDefinition, webFilter.value(),
-					webFilter.urlPatterns());
-
-				webXMLDefinitionAnnotation.setFilterDefinition(
-					filterDefinition.getName(), filterDefinition);
+			if (Validator.isNotNull(filterName)) {
+				filterDefinition.setName(filterName);
+			}
+			else {
+				filterDefinition.setName(annotatedClass.getCanonicalName());
 			}
 
-			WebListener webListener = annotatedClass.getAnnotation(
-				WebListener.class);
+			String[] servletNames = webFilter.servletNames();
 
-			if (webListener != null) {
-				ListenerDefinition listenerDefinition =
-					new ListenerDefinition();
-
-				_setEventListener(
-					listenerDefinition, annotatedClass.getCanonicalName());
-
-				webXMLDefinitionAnnotation.addListenerDefinition(
-					listenerDefinition);
+			if (!ArrayUtil.isEmpty(servletNames)) {
+				for (String servletName : servletNames) {
+					filterDefinition.addServletName(servletName);
+				}
 			}
+
+			_addURLPatterns(
+				filterDefinition, webFilter.value(),
+				webFilter.urlPatterns());
+
+			webXMLDefinitionAnnotation.setFilterDefinition(
+				filterDefinition.getName(), filterDefinition);
+		}
+
+		WebListener webListener = annotatedClass.getAnnotation(
+			WebListener.class);
+
+		if (webListener != null) {
+			ListenerDefinition listenerDefinition =
+				new ListenerDefinition();
+
+			_setEventListener(
+				listenerDefinition, annotatedClass.getCanonicalName());
+
+			webXMLDefinitionAnnotation.addListenerDefinition(
+				listenerDefinition);
 		}
 	}
 
