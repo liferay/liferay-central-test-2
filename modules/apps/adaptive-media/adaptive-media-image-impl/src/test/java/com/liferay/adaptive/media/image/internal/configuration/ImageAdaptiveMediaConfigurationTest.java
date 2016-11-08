@@ -15,6 +15,8 @@
 package com.liferay.adaptive.media.image.internal.configuration;
 
 import com.liferay.adaptive.media.AdaptiveMediaRuntimeException;
+import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
+import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
 import com.liferay.portal.kernel.module.configuration.ConfigurationException;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 
@@ -56,11 +58,11 @@ public class ImageAdaptiveMediaConfigurationTest {
 			new String[0]
 		);
 
-		Iterable<ImageAdaptiveMediaConfigurationEntryImpl> configurationEntries =
+		Iterable<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
 			_configurationHelper.
 				getImageAdaptiveMediaConfigurationEntries(1234);
 
-		Iterator<ImageAdaptiveMediaConfigurationEntryImpl> iterator =
+		Iterator<ImageAdaptiveMediaConfigurationEntry> iterator =
 			configurationEntries.iterator();
 
 		Assert.assertFalse(iterator.hasNext());
@@ -82,7 +84,7 @@ public class ImageAdaptiveMediaConfigurationTest {
 			new String[] {"one:1:height=100;width=100"}
 		);
 
-		Optional<ImageAdaptiveMediaConfigurationEntryImpl>
+		Optional<ImageAdaptiveMediaConfigurationEntry>
 			configurationEntryOptional =
 				_configurationHelper.getImageAdaptiveMediaConfigurationEntry(
 					1234, "1");
@@ -138,7 +140,7 @@ public class ImageAdaptiveMediaConfigurationTest {
 			new String[] {"one:1:height=100;width=100"}
 		);
 
-		Collection<ImageAdaptiveMediaConfigurationEntryImpl> configurationEntries =
+		Collection<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
 			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
 				1234);
 
@@ -161,7 +163,7 @@ public class ImageAdaptiveMediaConfigurationTest {
 			new String[] {"one:1:height=100;width=100"}
 		);
 
-		Optional<ImageAdaptiveMediaConfigurationEntryImpl>
+		Optional<ImageAdaptiveMediaConfigurationEntry>
 			configurationEntryOptional =
 				_configurationHelper.getImageAdaptiveMediaConfigurationEntry(
 					1234, "0");
@@ -185,7 +187,7 @@ public class ImageAdaptiveMediaConfigurationTest {
 			null
 		);
 
-		Collection<ImageAdaptiveMediaConfigurationEntryImpl> configurationEntries =
+		Collection<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
 			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
 				1234);
 
@@ -197,8 +199,8 @@ public class ImageAdaptiveMediaConfigurationTest {
 	private final ImageAdaptiveMediaConfigurationEntryParser
 		_configurationEntryParser =
 			new ImageAdaptiveMediaConfigurationEntryParser();
-	private final ImageAdaptiveMediaConfigurationHelper _configurationHelper =
-		new ImageAdaptiveMediaConfigurationHelper();
+	private final ImageAdaptiveMediaConfigurationHelperImpl _configurationHelper =
+		new ImageAdaptiveMediaConfigurationHelperImpl();
 	private final ConfigurationProvider _configurationProvider = Mockito.mock(
 		ConfigurationProvider.class);
 

@@ -1,7 +1,7 @@
 package com.liferay.adaptive.media.image.jaxrs;
 
-import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfiguration;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
+import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
@@ -37,10 +37,10 @@ public class AdaptiveMediaImageConfigResource {
 
 	public AdaptiveMediaImageConfigResource(
 		long companyId,
-		ImageAdaptiveMediaConfiguration imageAdaptiveMediaConfiguration) {
+		ImageAdaptiveMediaConfigurationHelper imageAdaptiveMediaConfigurationHelper) {
 
 		_companyId = companyId;
-		_imageAdaptiveMediaConfiguration = imageAdaptiveMediaConfiguration;
+		_imageAdaptiveMediaConfigurationHelper = imageAdaptiveMediaConfigurationHelper;
 		_permissionChecker = PermissionThreadLocal.getPermissionChecker();
 	}
 
@@ -102,7 +102,7 @@ public class AdaptiveMediaImageConfigResource {
 		@PathParam("uuid") String uuid) {
 
 		Optional<ImageAdaptiveMediaConfigurationEntry> entry =
-			_imageAdaptiveMediaConfiguration.
+			_imageAdaptiveMediaConfigurationHelper.
 				getImageAdaptiveMediaConfigurationEntry(_companyId, uuid);
 
 		if (!entry.isPresent()) {
@@ -117,7 +117,7 @@ public class AdaptiveMediaImageConfigResource {
 	public Response getConfigurations() {
 		Collection<ImageAdaptiveMediaConfigurationEntry>
 			imageAdaptiveMediaConfigurationEntries =
-				_imageAdaptiveMediaConfiguration.
+				_imageAdaptiveMediaConfigurationHelper.
 					getImageAdaptiveMediaConfigurationEntries(_companyId);
 
 		List<AdaptiveMediaImageConfigRepr> configs =
@@ -146,7 +146,7 @@ public class AdaptiveMediaImageConfigResource {
 
 		Collection<ImageAdaptiveMediaConfigurationEntry>
 			imageAdaptiveMediaConfigurationEntries =
-				_imageAdaptiveMediaConfiguration.
+				_imageAdaptiveMediaConfigurationHelper.
 					getImageAdaptiveMediaConfigurationEntries(_companyId);
 
 		return imageAdaptiveMediaConfigurationEntries.stream().map(
@@ -175,8 +175,8 @@ public class AdaptiveMediaImageConfigResource {
 	}
 
 	private final long _companyId;
-	private final ImageAdaptiveMediaConfiguration
-		_imageAdaptiveMediaConfiguration;
+	private final ImageAdaptiveMediaConfigurationHelper
+		_imageAdaptiveMediaConfigurationHelper;
 	private final PermissionChecker _permissionChecker;
 
 }

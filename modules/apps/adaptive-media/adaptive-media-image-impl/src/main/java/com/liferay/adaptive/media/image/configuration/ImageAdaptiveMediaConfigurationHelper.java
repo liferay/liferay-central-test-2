@@ -9,7 +9,7 @@ import java.util.Optional;
  * @author Alejandro Hernández
  */
 @ProviderType
-public interface ImageAdaptiveMediaConfiguration {
+public interface ImageAdaptiveMediaConfigurationHelper {
 
 	Collection<ImageAdaptiveMediaConfigurationEntry>
 		getImageAdaptiveMediaConfigurationEntries(long companyId);
