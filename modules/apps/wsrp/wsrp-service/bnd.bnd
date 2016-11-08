@@ -19,4 +19,4 @@ Web-ContextPath: /wsrp-service
 	@com.liferay.util.java-*.jar!/com/liferay/util/portlet/PortletProps.class,\
 	@opensaml-[0-9]*.jar,\
 	@wss4j-[0-9]*.jar,\
-	META-INF/=@oasis.names.tc.wsrp-[0-9]*.jar!/wsdl/* 
+	META-INF/=@oasis.names.tc.wsrp-[0-9]*.jar!/wsdl/*
