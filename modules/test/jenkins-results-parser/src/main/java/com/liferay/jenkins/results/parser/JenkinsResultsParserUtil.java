@@ -493,9 +493,7 @@ public class JenkinsResultsParserUtil {
 		return masters;
 	}
 
-	public static List<String> getRandomList(
-		List<String> list, int size) {
-
+	public static List<String> getRandomList(List<String> list, int size) {
 		if (list.size() < size) {
 			throw new IllegalStateException(
 				"Size must not exceed the size of the list");
