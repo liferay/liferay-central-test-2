@@ -43,21 +43,21 @@ public class MirrorsGetTask extends Task {
 	@Override
 	public void execute() throws BuildException {
 		try {
-			StringBuilder sb;
+			StringBuilder sb = null;
 
-			if (_tryLocalNetwork && _path.startsWith(_LOCAL_NETWORK_HOSTNAME)) {
+			if (_tryLocalNetwork && _path.startsWith(_HOSTNAME)) {
 				sb = new StringBuilder();
 
 				sb.append("WARNING Setting trylocalnetwork=true ");
 				sb.append("implies that the hostname in src is not ");
-				sb.append(_LOCAL_NETWORK_HOSTNAME);
+				sb.append(_HOSTNAME);
 				sb.append(". Modify your src parameter to exclude ");
-				sb.append(_LOCAL_NETWORK_HOSTNAME);
+				sb.append(_HOSTNAME);
 				sb.append(" or set trylocalnetwork=false.");
 
 				System.out.println(sb.toString());
 
-				_path = _path.substring(_LOCAL_NETWORK_HOSTNAME.length());
+				_path = _path.substring(_HOSTNAME.length());
 
 				while (_path.startsWith("/")) {
 					_path = _path.substring(1);
@@ -95,7 +95,7 @@ public class MirrorsGetTask extends Task {
 					sb = new StringBuilder();
 
 					sb.append("http://");
-					sb.append(_LOCAL_NETWORK_HOSTNAME);
+					sb.append(_HOSTNAME);
 					sb.append("/");
 					sb.append(_path);
 					sb.append("/");
@@ -153,17 +153,17 @@ public class MirrorsGetTask extends Task {
 	}
 
 	public void setSrc(String src) {
-		Matcher srcMatcher = _SRC_PATTERN.matcher(src);
+		Matcher matcher = _pattern.matcher(src);
 
-		if (!srcMatcher.find()) {
+		if (!matcher.find()) {
 			throw new RuntimeException("Invalid src attribute. " + src);
 		}
 
-		_fileName = srcMatcher.group("fileName");
-		_path = srcMatcher.group("path");
+		_fileName = matcher.group("fileName");
+		_path = matcher.group("path");
 
 		if (_path.startsWith("mirrors/")) {
-			_path = _path.replace("mirrors/", _LOCAL_NETWORK_HOSTNAME);
+			_path = _path.replace("mirrors/", _HOSTNAME);
 		}
 	}
 
@@ -453,10 +453,10 @@ public class MirrorsGetTask extends Task {
 		}
 	}
 
-	private static final String _LOCAL_NETWORK_HOSTNAME =
+	private static final String _HOSTNAME =
 		"mirrors.lax.liferay.com";
 
-	private static final Pattern _SRC_PATTERN = Pattern.compile(
+	private static final Pattern _pattern = Pattern.compile(
 		"https?://(?<path>.+/)(?<fileName>.+)");
 
 	private File _destinationDir;
