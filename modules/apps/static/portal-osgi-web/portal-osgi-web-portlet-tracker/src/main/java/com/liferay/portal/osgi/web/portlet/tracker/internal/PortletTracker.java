@@ -196,7 +196,7 @@ public class PortletTracker
 		catch (IllegalStateException ise) {
 
 			// We still need to remove the service so we can ignore this and
-			// keep going.
+			// keep going
 
 		}
 
@@ -921,7 +921,7 @@ public class PortletTracker
 				CompanyConstants.SYSTEM, PortletKeys.PORTAL);
 
 		ServiceTracker<ServletContextHelperRegistration, ServletContext>
-			serviceTracker = getServletContextHelperRegistrationTracker(
+			serviceTracker = getServletContextHelperRegistrationServiceTracker(
 				bundle, serviceRegistrations);
 
 		serviceRegistrations.setServiceTracker(serviceTracker);
@@ -1010,7 +1010,7 @@ public class PortletTracker
 	}
 
 	protected ServiceTracker<ServletContextHelperRegistration, ServletContext>
-		getServletContextHelperRegistrationTracker(
+		getServletContextHelperRegistrationServiceTracker(
 			Bundle bundle, ServiceRegistrations serviceRegistrations) {
 
 		BundleContext bundleContext = bundle.getBundleContext();
@@ -1018,7 +1018,7 @@ public class PortletTracker
 		ServiceTracker<ServletContextHelperRegistration, ServletContext>
 			serviceTracker = new ServiceTracker<>(
 				bundleContext, ServletContextHelperRegistration.class,
-				new ServletContextCustomizer(bundleContext));
+				new ServletContextServiceTrackerCustomizer(bundleContext));
 
 		serviceTracker.open();
 
@@ -1211,11 +1211,13 @@ public class PortletTracker
 
 	}
 
-	private class ServletContextCustomizer
+	private class ServletContextServiceTrackerCustomizer
 		implements ServiceTrackerCustomizer
 			<ServletContextHelperRegistration, ServletContext> {
 
-		public ServletContextCustomizer(BundleContext bundleContext) {
+		public ServletContextServiceTrackerCustomizer(
+			BundleContext bundleContext) {
+
 			_bundleContext = bundleContext;
 		}
 
@@ -1245,7 +1247,7 @@ public class PortletTracker
 			}
 			catch (IllegalStateException ise) {
 
-				// Ignore this because the service is already ungotten.
+				// Ignore this because the service is already ungotten
 
 			}
 		}
