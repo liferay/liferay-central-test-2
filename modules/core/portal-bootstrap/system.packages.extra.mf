@@ -4397,11 +4397,12 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  r;version="1.0.0",org.apache.tools.zip;version="1.0.0",org.eclipse.pe
  rsistence.javax.persistence.osgi;uses:="javax.persistence.spi";versio
  n="1.0.0",tika;version="1.0.0",com.ibm.crypto.provider;version="1.0.0
- ",com.sun.security.auth.module;version="1.0.0",org.apache.commons.val
- idator.routines;version="1.5.0",org.apache.naming.java;version="1.0.0
- ",org.apache.xml.serializer;version="2.7.1",org.objectweb.asm.attrs;v
- ersion="5.0.1",sun.misc;version="1.0.0",sun.net.util;version="1.0.0",
- sun.security.provider;version="1.0.0"
+ ",com.sun.security.auth.module;version="1.0.0",javax.websocket;versio
+ n="1.1.0",javax.websocket.server;version="1.1.0",org.apache.commons.v
+ alidator.routines;version="1.5.0",org.apache.naming.java;version="1.0
+ .0",org.apache.xml.serializer;version="2.7.1",org.objectweb.asm.attrs
+ ;version="5.0.1",sun.misc;version="1.0.0",sun.net.util;version="1.0.0
+ ",sun.security.provider;version="1.0.0"
 Javac-Debug: on
 Javac-Deprecation: off
 Javac-Encoding: UTF-8
