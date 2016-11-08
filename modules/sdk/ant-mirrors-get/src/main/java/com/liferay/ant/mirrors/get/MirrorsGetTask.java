@@ -133,15 +133,15 @@ public class MirrorsGetTask extends Task {
 				}
 			}
 
-			copyFile(localCacheFile, new File(_destinationDir, _fileName));
+			copyFile(localCacheFile, new File(_destDir, _fileName));
 		}
 		catch (IOException ioe) {
 			throw new BuildException(ioe);
 		}
 	}
 
-	public void setDest(File dest) {
-		_destinationDir = dest;
+	public void setDest(File destDir) {
+		_destDir = destDir;
 	}
 
 	public void setForce(boolean force) {
@@ -456,7 +456,7 @@ public class MirrorsGetTask extends Task {
 	private static final Pattern _pattern = Pattern.compile(
 		"https?://(?<path>.+/)(?<fileName>.+)");
 
-	private File _destinationDir;
+	private File _destDir;
 	private String _fileName;
 	private boolean _force;
 	private boolean _ignoreErrors;
