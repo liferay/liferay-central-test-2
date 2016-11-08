@@ -1,10 +1,9 @@
 package com.liferay.adaptive.media.image.jaxrs;
 
-import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfiguration;
-
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
+import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
@@ -20,10 +19,11 @@ public class AdaptiveMediaImageRootResource {
 		@PathParam("companyId") long companyId) {
 
 		return new AdaptiveMediaImageConfigResource(
-			companyId, imageAdaptiveMediaConfiguration);
+			companyId, imageAdaptiveMediaConfigurationHelper);
 	}
 
 	@Reference
-	protected ImageAdaptiveMediaConfiguration imageAdaptiveMediaConfiguration;
+	protected ImageAdaptiveMediaConfigurationHelper
+		imageAdaptiveMediaConfigurationHelper;
 
 }
