@@ -51,19 +51,10 @@ public class MirrorsGetTask extends Task {
 	}
 		
 	protected void doExecute() throws IOException {
-		StringBuilder sb = null;
-
 		if (_tryLocalNetwork && _path.startsWith(_HOSTNAME)) {
-			sb = new StringBuilder();
-
-			sb.append("WARNING Setting trylocalnetwork=true ");
-			sb.append("implies that the hostname in src is not ");
-			sb.append(_HOSTNAME);
-			sb.append(". Modify your src parameter to exclude ");
-			sb.append(_HOSTNAME);
-			sb.append(" or set trylocalnetwork=false.");
-
-			System.out.println(sb.toString());
+			System.out.println(
+				"The src attribute has an unneceessary reference to " +
+					_HOSTNAME);
 
 			_path = _path.substring(_HOSTNAME.length());
 
@@ -72,7 +63,7 @@ public class MirrorsGetTask extends Task {
 			}
 		}
 
-		sb = new StringBuilder();
+		StringBuilder sb = new StringBuilder();
 
 		sb.append(System.getProperty("user.home"));
 		sb.append(File.separator);
