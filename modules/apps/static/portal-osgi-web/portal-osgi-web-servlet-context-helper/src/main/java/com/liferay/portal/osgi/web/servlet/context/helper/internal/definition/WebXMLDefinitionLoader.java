@@ -484,7 +484,7 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 		}
 
 		_collectAnnotatedClasses(
-			annotationWebXMLDefinition, classResources, _bundle);
+			annotationWebXMLDefinition, _bundle, classResources);
 
 		webXMLDefinitions.add(annotationWebXMLDefinition);
 
@@ -863,18 +863,18 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 
 	private void _collectAnnotatedClasses(
 			WebXMLDefinition annotationWebXMLDefinition,
-			Collection<String> classResources, Bundle bundle)
+			Bundle bundle, Collection<String> classResources)
 		throws Exception {
 
 		for (String classResource : classResources) {
 			_collectAnnotatedClasses(
-				annotationWebXMLDefinition, classResource, bundle);
+				annotationWebXMLDefinition, bundle, classResource);
 		}
 	}
 
 	private void _collectAnnotatedClasses(
 			WebXMLDefinition annotationWebXMLDefinition,
-			String classResource, Bundle bundle)
+			Bundle bundle, String classResource)
 		throws Exception {
 
 		URL urlClassResource = _bundle.getResource(classResource);
