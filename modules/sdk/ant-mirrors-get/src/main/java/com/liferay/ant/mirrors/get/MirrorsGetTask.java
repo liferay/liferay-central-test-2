@@ -281,7 +281,7 @@ public class MirrorsGetTask extends Task {
 		return path;
 	}
 
-	protected boolean isValidMD5(File file, URL md5URL) throws IOException {
+	protected boolean isValidMD5(File file, URL url) throws IOException {
 		if ((file == null) || !file.exists()) {
 			return false;
 		}
@@ -289,11 +289,11 @@ public class MirrorsGetTask extends Task {
 		String remoteMD5 = null;
 
 		try {
-			remoteMD5 = toString(md5URL);
+			remoteMD5 = toString(url);
 		}
 		catch (FileNotFoundException fnfe) {
 			if (_verbose) {
-				System.out.println("md5 file does not exist.");
+				System.out.println("URL does not point to a valid MD5 file.");
 			}
 
 			return true;
