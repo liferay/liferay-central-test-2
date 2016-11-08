@@ -43,83 +43,78 @@ public class MirrorsGetTask extends Task {
 	@Override
 	public void execute() throws BuildException {
 		try {
-			StringBuilder sb = null;
+			doExecute();
+		}
+		catch (IOException ioe) {
+			throw new BuildException(ioe);
+		}
+	}
+		
+	protected void doExecute() throws IOException {
+		StringBuilder sb = null;
 
-			if (_tryLocalNetwork && _path.startsWith(_HOSTNAME)) {
-				sb = new StringBuilder();
-
-				sb.append("WARNING Setting trylocalnetwork=true ");
-				sb.append("implies that the hostname in src is not ");
-				sb.append(_HOSTNAME);
-				sb.append(". Modify your src parameter to exclude ");
-				sb.append(_HOSTNAME);
-				sb.append(" or set trylocalnetwork=false.");
-
-				System.out.println(sb.toString());
-
-				_path = _path.substring(_HOSTNAME.length());
-
-				while (_path.startsWith("/")) {
-					_path = _path.substring(1);
-				}
-			}
-
+		if (_tryLocalNetwork && _path.startsWith(_HOSTNAME)) {
 			sb = new StringBuilder();
 
-			sb.append(System.getProperty("user.home"));
-			sb.append(File.separator);
-			sb.append(".liferay");
-			sb.append(File.separator);
-			sb.append("mirrors");
-			sb.append(File.separator);
-			sb.append(getPlatformIndependentPath(_path));
+			sb.append("WARNING Setting trylocalnetwork=true ");
+			sb.append("implies that the hostname in src is not ");
+			sb.append(_HOSTNAME);
+			sb.append(". Modify your src parameter to exclude ");
+			sb.append(_HOSTNAME);
+			sb.append(" or set trylocalnetwork=false.");
 
-			File localCacheDir = new File(sb.toString());
+			System.out.println(sb.toString());
 
-			File localCacheFile = new File(localCacheDir, _fileName);
+			_path = _path.substring(_HOSTNAME.length());
 
-			if (localCacheFile.exists() && !_force &&
-				isZipFileName(_fileName)) {
-
-				_force = !isValidZip(localCacheFile);
+			while (_path.startsWith("/")) {
+				_path = _path.substring(1);
 			}
+		}
 
-			if (localCacheFile.exists() && _force) {
-				localCacheFile.delete();
-			}
+		sb = new StringBuilder();
 
-			if (!localCacheFile.exists()) {
-				URL sourceURL = null;
+		sb.append(System.getProperty("user.home"));
+		sb.append(File.separator);
+		sb.append(".liferay");
+		sb.append(File.separator);
+		sb.append("mirrors");
+		sb.append(File.separator);
+		sb.append(getPlatformIndependentPath(_path));
 
-				if (_tryLocalNetwork) {
-					sb = new StringBuilder();
+		File localCacheDir = new File(sb.toString());
 
-					sb.append("http://");
-					sb.append(_HOSTNAME);
-					sb.append("/");
-					sb.append(_path);
-					sb.append("/");
-					sb.append(_fileName);
+		File localCacheFile = new File(localCacheDir, _fileName);
 
-					sourceURL = new URL(sb.toString());
+		if (localCacheFile.exists() && !_force &&
+			isZipFileName(_fileName)) {
 
-					try {
-						downloadFile(sourceURL, localCacheFile);
-					}
-					catch (IOException ioe) {
-						sb = new StringBuilder();
+			_force = !isValidZip(localCacheFile);
+		}
 
-						sb.append("http://");
-						sb.append(_path);
-						sb.append("/");
-						sb.append(_fileName);
+		if (localCacheFile.exists() && _force) {
+			localCacheFile.delete();
+		}
 
-						sourceURL = new URL(sb.toString());
+		if (!localCacheFile.exists()) {
+			URL sourceURL = null;
 
-						downloadFile(sourceURL, localCacheFile);
-					}
+			if (_tryLocalNetwork) {
+				sb = new StringBuilder();
+
+				sb.append("http://");
+				sb.append(_HOSTNAME);
+				sb.append("/");
+				sb.append(_path);
+				sb.append("/");
+				sb.append(_fileName);
+
+				sourceURL = new URL(sb.toString());
+
+				try {
+					downloadFile(sourceURL, localCacheFile);
 				}
-				else {
+				catch (IOException ioe) {
 					sb = new StringBuilder();
 
 					sb.append("http://");
@@ -132,12 +127,21 @@ public class MirrorsGetTask extends Task {
 					downloadFile(sourceURL, localCacheFile);
 				}
 			}
+			else {
+				sb = new StringBuilder();
 
-			copyFile(localCacheFile, new File(_destDir, _fileName));
+				sb.append("http://");
+				sb.append(_path);
+				sb.append("/");
+				sb.append(_fileName);
+
+				sourceURL = new URL(sb.toString());
+
+				downloadFile(sourceURL, localCacheFile);
+			}
 		}
-		catch (IOException ioe) {
-			throw new BuildException(ioe);
-		}
+
+		copyFile(localCacheFile, new File(_destDir, _fileName));
 	}
 
 	public void setDest(File destDir) {
