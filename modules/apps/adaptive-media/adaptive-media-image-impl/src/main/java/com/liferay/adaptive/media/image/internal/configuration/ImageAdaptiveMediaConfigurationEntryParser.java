@@ -65,9 +65,7 @@ public class ImageAdaptiveMediaConfigurationEntryParser {
 	 * @param  s the configuration line to parse
 	 * @return a {@link ImageAdaptiveMediaConfigurationEntryImpl} with the line data
 	 */
-	public ImageAdaptiveMediaConfigurationEntryImpl parse(String s)
-		throws IllegalArgumentException {
-
+	public ImageAdaptiveMediaConfigurationEntryImpl parse(String s) {
 		if (Validator.isNull(s)) {
 			throw new IllegalArgumentException(
 				"Invalid image adaptive media configuration: " + s);
