@@ -49,91 +49,6 @@ public class MirrorsGetTask extends Task {
 			throw new BuildException(ioe);
 		}
 	}
-		
-	protected void doExecute() throws IOException {
-		if (_tryLocalNetwork && _path.startsWith(_HOSTNAME)) {
-			System.out.println(
-				"The src attribute has an unneceessary reference to " +
-					_HOSTNAME);
-
-			_path = _path.substring(_HOSTNAME.length());
-
-			while (_path.startsWith("/")) {
-				_path = _path.substring(1);
-			}
-		}
-
-		StringBuilder sb = new StringBuilder();
-
-		sb.append(System.getProperty("user.home"));
-		sb.append(File.separator);
-		sb.append(".liferay");
-		sb.append(File.separator);
-		sb.append("mirrors");
-		sb.append(File.separator);
-		sb.append(getPlatformIndependentPath(_path));
-
-		File localCacheDir = new File(sb.toString());
-
-		File localCacheFile = new File(localCacheDir, _fileName);
-
-		if (localCacheFile.exists() && !_force &&
-			isZipFileName(_fileName)) {
-
-			_force = !isValidZip(localCacheFile);
-		}
-
-		if (localCacheFile.exists() && _force) {
-			localCacheFile.delete();
-		}
-
-		if (!localCacheFile.exists()) {
-			URL sourceURL = null;
-
-			if (_tryLocalNetwork) {
-				sb = new StringBuilder();
-
-				sb.append("http://");
-				sb.append(_HOSTNAME);
-				sb.append("/");
-				sb.append(_path);
-				sb.append("/");
-				sb.append(_fileName);
-
-				sourceURL = new URL(sb.toString());
-
-				try {
-					downloadFile(sourceURL, localCacheFile);
-				}
-				catch (IOException ioe) {
-					sb = new StringBuilder();
-
-					sb.append("http://");
-					sb.append(_path);
-					sb.append("/");
-					sb.append(_fileName);
-
-					sourceURL = new URL(sb.toString());
-
-					downloadFile(sourceURL, localCacheFile);
-				}
-			}
-			else {
-				sb = new StringBuilder();
-
-				sb.append("http://");
-				sb.append(_path);
-				sb.append("/");
-				sb.append(_fileName);
-
-				sourceURL = new URL(sb.toString());
-
-				downloadFile(sourceURL, localCacheFile);
-			}
-		}
-
-		copyFile(localCacheFile, new File(_destDir, _fileName));
-	}
 
 	public void setDest(File destDir) {
 		_destDir = destDir;
@@ -200,6 +115,89 @@ public class MirrorsGetTask extends Task {
 
 			System.out.println(sb.toString());
 		}
+	}
+
+	protected void doExecute() throws IOException {
+		if (_tryLocalNetwork && _path.startsWith(_HOSTNAME)) {
+			System.out.println(
+				"The src attribute has an unneceessary reference to " +
+					_HOSTNAME);
+
+			_path = _path.substring(_HOSTNAME.length());
+
+			while (_path.startsWith("/")) {
+				_path = _path.substring(1);
+			}
+		}
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(System.getProperty("user.home"));
+		sb.append(File.separator);
+		sb.append(".liferay");
+		sb.append(File.separator);
+		sb.append("mirrors");
+		sb.append(File.separator);
+		sb.append(getPlatformIndependentPath(_path));
+
+		File localCacheDir = new File(sb.toString());
+
+		File localCacheFile = new File(localCacheDir, _fileName);
+
+		if (localCacheFile.exists() && !_force && isZipFileName(_fileName)) {
+			_force = !isValidZip(localCacheFile);
+		}
+
+		if (localCacheFile.exists() && _force) {
+			localCacheFile.delete();
+		}
+
+		if (!localCacheFile.exists()) {
+			URL sourceURL = null;
+
+			if (_tryLocalNetwork) {
+				sb = new StringBuilder();
+
+				sb.append("http://");
+				sb.append(_HOSTNAME);
+				sb.append("/");
+				sb.append(_path);
+				sb.append("/");
+				sb.append(_fileName);
+
+				sourceURL = new URL(sb.toString());
+
+				try {
+					downloadFile(sourceURL, localCacheFile);
+				}
+				catch (IOException ioe) {
+					sb = new StringBuilder();
+
+					sb.append("http://");
+					sb.append(_path);
+					sb.append("/");
+					sb.append(_fileName);
+
+					sourceURL = new URL(sb.toString());
+
+					downloadFile(sourceURL, localCacheFile);
+				}
+			}
+			else {
+				sb = new StringBuilder();
+
+				sb.append("http://");
+				sb.append(_path);
+				sb.append("/");
+				sb.append(_fileName);
+
+				sourceURL = new URL(sb.toString());
+
+				downloadFile(sourceURL, localCacheFile);
+			}
+		}
+
+		copyFile(localCacheFile, new File(_destDir, _fileName));
 	}
 
 	protected void downloadFile(URL sourceURL, File targetFile)
@@ -408,9 +406,7 @@ public class MirrorsGetTask extends Task {
 				outputStream.write(bytes, 0, read);
 				size += read;
 
-				if (_verbose &&
-					((System.currentTimeMillis() - time) > 100)) {
-
+				if (_verbose && ((System.currentTimeMillis() - time) > 100)) {
 					System.out.print(".");
 
 					time = System.currentTimeMillis();
@@ -445,8 +441,7 @@ public class MirrorsGetTask extends Task {
 		}
 	}
 
-	private static final String _HOSTNAME =
-		"mirrors.lax.liferay.com";
+	private static final String _HOSTNAME = "mirrors.lax.liferay.com";
 
 	private static final Pattern _pattern = Pattern.compile(
 		"https?://(?<path>.+/)(?<fileName>.+)");
