@@ -352,9 +352,10 @@ if (portletTitleBasedNavigation) {
 				<c:if test="<%= curParentMessage == null %>">
 
 					<%
+					MBCategory category = MBCategoryLocalServiceUtil.getCategory(categoryId);
+
 					boolean disabled = false;
 					boolean question = threadAsQuestionByDefault;
-					MBCategory category = MBCategoryLocalServiceUtil.getCategory(categoryId);
 
 					if (message != null) {
 						thread = MBThreadLocalServiceUtil.getThread(threadId);
@@ -367,11 +368,9 @@ if (portletTitleBasedNavigation) {
 							}
 						}
 					}
-					else {
-						if ((category != null) && category.getDisplayStyle().equals("question")) {
-							disabled = true;
-							question = true;
-						}
+					else if ((category != null) && category.getDisplayStyle().equals("question")) {
+						disabled = true;
+						question = true;
 					}
 					%>
 
