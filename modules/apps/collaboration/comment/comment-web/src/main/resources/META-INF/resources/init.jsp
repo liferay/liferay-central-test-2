@@ -47,6 +47,7 @@ page import="com.liferay.portal.kernel.util.StringUtil" %><%@
 page import="com.liferay.portal.kernel.util.Validator" %><%@
 page import="com.liferay.portal.kernel.util.WebKeys" %><%@
 page import="com.liferay.portal.kernel.workflow.WorkflowConstants" %><%@
+page import="com.liferay.portal.util.PropsUtil" %><%@
 page import="com.liferay.portlet.asset.util.AssetUtil" %>
 
 <%@ page import="java.text.Format" %>
