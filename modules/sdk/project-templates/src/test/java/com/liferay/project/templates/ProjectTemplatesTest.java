@@ -732,6 +732,7 @@ public class ProjectTemplatesTest {
 
 		_testContains(
 			gradleProjectDir, "build.gradle",
+			"com.liferay.gradle.plugins.theme.builder",
 			"apply plugin: \"com.liferay.portal.tools.theme.builder\"");
 		_testContains(
 			gradleProjectDir,
