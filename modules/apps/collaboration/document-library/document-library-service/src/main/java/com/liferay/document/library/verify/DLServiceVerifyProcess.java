@@ -34,7 +34,7 @@ import com.liferay.document.library.kernel.store.DLStoreUtil;
 import com.liferay.document.library.kernel.util.DLUtil;
 import com.liferay.document.library.kernel.util.DLValidatorUtil;
 import com.liferay.document.library.kernel.util.comparator.DLFileVersionVersionComparator;
-import com.liferay.portal.instances.service.PortalInstanceLocalService;
+import com.liferay.portal.instances.service.PortalInstancesLocalService;
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.Criterion;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
@@ -846,7 +846,7 @@ public class DLServiceVerifyProcess extends VerifyProcess {
 	protected void verifyTree() throws Exception {
 		try (LoggingTimer loggingTimer = new LoggingTimer()) {
 			long[] companyIds =
-				_portalInstanceLocalService.getCompanyIdsBySQL();
+				_portalInstancesLocalService.getCompanyIdsBySQL();
 
 			for (long companyId : companyIds) {
 				_dlFolderLocalService.rebuildTree(companyId);
@@ -869,6 +869,6 @@ public class DLServiceVerifyProcess extends VerifyProcess {
 	private DLFolderLocalService _dlFolderLocalService;
 
 	@Reference
-	private PortalInstanceLocalService _portalInstanceLocalService;
+	private PortalInstancesLocalService _portalInstancesLocalService;
 
 }
