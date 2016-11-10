@@ -2333,7 +2333,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		}
 
 		String inReplyTo = null;
-
 		String messageSubject = message.getSubject();
 		String messageSubjectPrefix = StringPool.BLANK;
 
