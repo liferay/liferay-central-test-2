@@ -22,6 +22,7 @@ import com.liferay.polls.service.PollsQuestionLocalServiceUtil;
 import com.liferay.polls.service.persistence.PollsChoiceUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
+import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.test.util.TestPropsValues;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 
@@ -51,9 +52,9 @@ public class PollsQuestionLocalServiceTest {
 	@Test(expected = QuestionChoiceException.class)
 	public void testAddQuestion() throws Exception {
 		Map<Locale, String> titleMap = createLocalizedMap(
-			"PollsQuestion Title");
+			RandomTestUtil.randomString());
 		Map<Locale, String> descriptionMap = createLocalizedMap(
-			"PollsQuestion Description");
+			RandomTestUtil.randomString());
 		int expirationDateHour = 0;
 		int expirationDateMinute = 0;
 		int expirationDateMonth = 0;
@@ -78,9 +79,9 @@ public class PollsQuestionLocalServiceTest {
 	@Test(expected = QuestionChoiceException.class)
 	public void testUpdateQuestion() throws Exception {
 		Map<Locale, String> titleMap = createLocalizedMap(
-			"PollsQuestion Title");
+			RandomTestUtil.randomString());
 		Map<Locale, String> descriptionMap = createLocalizedMap(
-			"PollsQuestion Description");
+			RandomTestUtil.randomString());
 		int expirationDateHour = 0;
 		int expirationDateMinute = 0;
 		int expirationDateMonth = 0;
