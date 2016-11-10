@@ -62,17 +62,17 @@ public class PollsQuestionLocalServiceTest {
 		int expirationDateYear = 0;
 		boolean neverExpire = true;
 
-		List<PollsChoice> choices = new ArrayList<>();
+		List<PollsChoice> pollChoices = new ArrayList<>();
 
-		choices.add(createPollsChoice("A"));
-		choices.add(createPollsChoice("A"));
+		pollChoices.add(createPollsChoice("A"));
+		pollChoices.add(createPollsChoice("A"));
 
 		ServiceContext serviceContext = new ServiceContext();
 
 		PollsQuestionLocalServiceUtil.addQuestion(
 			TestPropsValues.getUserId(), titleMap, descriptionMap,
 			expirationDateMonth, expirationDateDay, expirationDateYear,
-			expirationDateHour, expirationDateMinute, neverExpire, choices,
+			expirationDateHour, expirationDateMinute, neverExpire, pollChoices,
 			serviceContext);
 	}
 
@@ -89,31 +89,31 @@ public class PollsQuestionLocalServiceTest {
 		int expirationDateYear = 0;
 		boolean neverExpire = true;
 
-		List<PollsChoice> choices = new ArrayList<>();
+		List<PollsChoice> pollChoices = new ArrayList<>();
 
-		choices.add(createPollsChoice("A"));
-		choices.add(createPollsChoice("B"));
+		pollChoices.add(createPollsChoice("A"));
+		pollChoices.add(createPollsChoice("B"));
 
 		ServiceContext serviceContext = new ServiceContext();
 
 		PollsQuestion pollsQuestion = PollsQuestionLocalServiceUtil.addQuestion(
 			TestPropsValues.getUserId(), titleMap, descriptionMap,
 			expirationDateMonth, expirationDateDay, expirationDateYear,
-			expirationDateHour, expirationDateMinute, neverExpire, choices,
+			expirationDateHour, expirationDateMinute, neverExpire, pollChoices,
 			serviceContext);
 
 		Assert.assertNotNull(pollsQuestion);
 
-		choices = new ArrayList<>();
+		pollChoices = new ArrayList<>();
 
-		choices.add(createPollsChoice("B"));
-		choices.add(createPollsChoice("B"));
+		pollChoices.add(createPollsChoice("B"));
+		pollChoices.add(createPollsChoice("B"));
 
 		PollsQuestionLocalServiceUtil.updateQuestion(
 			TestPropsValues.getUserId(), pollsQuestion.getQuestionId(),
 			titleMap, descriptionMap, expirationDateMonth, expirationDateDay,
 			expirationDateYear, expirationDateHour, expirationDateMinute,
-			neverExpire, choices, serviceContext);
+			neverExpire, pollChoices, serviceContext);
 	}
 
 	protected Map<Locale, String> createLocalizedMap(String localizedValue) {
