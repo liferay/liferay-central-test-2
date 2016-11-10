@@ -54,7 +54,8 @@ public class ImageAdaptiveMediaConfigResource {
 		ImageAdaptiveMediaConfigurationHelper imageAdaptiveMediaConfigurationHelper) {
 
 		_companyId = companyId;
-		_imageAdaptiveMediaConfigurationHelper = imageAdaptiveMediaConfigurationHelper;
+		_imageAdaptiveMediaConfigurationHelper =
+			imageAdaptiveMediaConfigurationHelper;
 		_permissionChecker = PermissionThreadLocal.getPermissionChecker();
 	}
 

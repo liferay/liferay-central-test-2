@@ -14,10 +14,11 @@
 
 package com.liferay.adaptive.media.image.jaxrs;
 
+import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
+
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
-import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
