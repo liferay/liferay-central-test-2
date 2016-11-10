@@ -50,19 +50,20 @@ public class SaveRecordSetMVCActionCommand
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		DDLRecordSet ddlRecordSet = saveRecordSetMVCCommandHelper.saveRecordSet(
-			actionRequest, actionResponse);
-
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		LiferayPortletURL portletURL = PortletURLFactoryUtil.create(
 			actionRequest, themeDisplay.getPpid(), PortletRequest.RENDER_PHASE);
 
-		String redirect = ParamUtil.getString(actionRequest, "redirect");
 		String mvcPath = ParamUtil.getString(actionRequest, "mvcPath");
 
 		portletURL.setParameter("mvcPath", mvcPath);
+
+		String redirect = ParamUtil.getString(actionRequest, "redirect");
+
+		DDLRecordSet ddlRecordSet = saveRecordSetMVCCommandHelper.saveRecordSet(
+			actionRequest, actionResponse);
 
 		portletURL.setParameter(
 			"recordSetId", String.valueOf(ddlRecordSet.getRecordSetId()));
