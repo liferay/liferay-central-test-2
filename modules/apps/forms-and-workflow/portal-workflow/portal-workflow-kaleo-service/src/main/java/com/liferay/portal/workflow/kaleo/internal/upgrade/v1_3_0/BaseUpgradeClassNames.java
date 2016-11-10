@@ -15,16 +15,8 @@
 package com.liferay.portal.workflow.kaleo.internal.upgrade.v1_3_0;
 
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
-import com.liferay.portal.kernel.util.LoggingTimer;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.workflow.kaleo.runtime.util.WorkflowContextUtil;
-
-import java.io.Serializable;
 
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-
-import java.util.Map;
 
 /**
  * @author Marcellus Tavares
@@ -53,9 +45,6 @@ public abstract class BaseUpgradeClassNames extends UpgradeProcess {
 	protected abstract void updateClassName(
 		String tableName, String columnName);
 
-	protected abstract Map<String, Serializable> updateWorkflowContext(
-		String workflowContextJSON);
-
 	protected void updateWorkflowContext(
 			String tableName, String primaryKeyName, long primaryKeyValue,
 			String workflowContext)
@@ -72,34 +61,8 @@ public abstract class BaseUpgradeClassNames extends UpgradeProcess {
 		}
 	}
 
-	protected void updateWorkflowContextEntryClassName(
+	protected abstract void updateWorkflowContextEntryClassName(
 			String tableName, String primaryKeyName)
-		throws Exception {
-
-		try (LoggingTimer loggingTimer = new LoggingTimer(tableName);
-			PreparedStatement ps = connection.prepareStatement(
-				"select " + primaryKeyName + ", workflowContext from " +
-					tableName + " where workflowContext is not null");
-			ResultSet rs = ps.executeQuery()) {
-
-			while (rs.next()) {
-				long primaryKeyValue = rs.getLong(primaryKeyName);
-				String workflowContextJSON = rs.getString("workflowContext");
-
-				if (Validator.isNull(workflowContextJSON)) {
-					continue;
-				}
-
-				Map<String, Serializable> workflowContext =
-					updateWorkflowContext(workflowContextJSON);
-
-				if (Validator.isNotNull(workflowContext)) {
-					updateWorkflowContext(
-						tableName, primaryKeyName, primaryKeyValue,
-						WorkflowContextUtil.convert(workflowContext));
-				}
-			}
-		}
-	}
+		throws Exception;
 
 }

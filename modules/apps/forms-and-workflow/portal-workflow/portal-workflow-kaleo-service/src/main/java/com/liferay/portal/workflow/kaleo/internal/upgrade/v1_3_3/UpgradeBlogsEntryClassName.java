@@ -16,11 +16,15 @@ package com.liferay.portal.workflow.kaleo.internal.upgrade.v1_3_3;
 
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LoggingTimer;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.upgrade.util.Table;
 import com.liferay.portal.workflow.kaleo.internal.upgrade.v1_3_0.BaseUpgradeClassNames;
 import com.liferay.portal.workflow.kaleo.runtime.util.WorkflowContextUtil;
 
 import java.io.Serializable;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import java.util.Map;
 import java.util.Objects;
@@ -42,25 +46,43 @@ public class UpgradeBlogsEntryClassName extends BaseUpgradeClassNames {
 	}
 
 	@Override
-	protected Map<String, Serializable> updateWorkflowContext(
-		String workflowContextJSON) {
+	protected void updateWorkflowContextEntryClassName(
+			String tableName, String primaryKeyName)
+		throws Exception {
 
-		Map<String, Serializable> workflowContext = WorkflowContextUtil.convert(
-			workflowContextJSON);
+		try (LoggingTimer loggingTimer = new LoggingTimer(tableName);
+			PreparedStatement ps = connection.prepareStatement(
+				"select " + primaryKeyName + ", workflowContext from " +
+					tableName + " where workflowContext is not null");
+			ResultSet rs = ps.executeQuery()) {
 
-		String entryClassName = GetterUtil.getString(
-			workflowContext.get("entryClassName"));
+			while (rs.next()) {
+				long primaryKeyValue = rs.getLong(primaryKeyName);
+				String workflowContextJSON = rs.getString("workflowContext");
 
-		if (Objects.equals(
-				"com.liferay.blogs.kernel.model.BlogsEntry", entryClassName)) {
+				if (Validator.isNull(workflowContextJSON)) {
+					continue;
+				}
 
-			workflowContext.put(
-				"entryClassName", "com.liferay.blogs.model.BlogsEntry");
+				Map<String, Serializable> workflowContext =
+					WorkflowContextUtil.convert(workflowContextJSON);
 
-			return workflowContext;
+				String entryClassName = GetterUtil.getString(
+					workflowContext.get("entryClassName"));
+
+				if (Objects.equals(
+						"com.liferay.blogs.kernel.model.BlogsEntry",
+						entryClassName)) {
+
+					workflowContext.put(
+						"entryClassName", "com.liferay.blogs.model.BlogsEntry");
+
+					updateWorkflowContext(
+						tableName, primaryKeyName, primaryKeyValue,
+						WorkflowContextUtil.convert(workflowContext));
+				}
+			}
 		}
-
-		return null;
 	}
 
 }
