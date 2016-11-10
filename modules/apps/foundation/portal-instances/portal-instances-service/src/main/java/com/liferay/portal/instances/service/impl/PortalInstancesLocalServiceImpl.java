@@ -124,14 +124,15 @@ public class PortalInstancesLocalServiceImpl
 		try {
 			long[] initializedCompanyIds = _portal.getCompanyIds();
 
-			List<Long> removeableIds = ListUtil.toList(initializedCompanyIds);
+			List<Long> removeableCompanyIds = ListUtil.toList(
+				initializedCompanyIds);
 
 			List<Company> companies = _companyLocalService.getCompanies();
 
 			for (Company company : companies) {
 				long companyId = company.getCompanyId();
 
-				removeableIds.remove(companyId);
+				removeableCompanyIds.remove(companyId);
 
 				if (ArrayUtil.contains(initializedCompanyIds, companyId)) {
 					continue;
@@ -143,7 +144,7 @@ public class PortalInstancesLocalServiceImpl
 				PortalInstances.initCompany(portalContext, company.getWebId());
 			}
 
-			for (long companyId : removeableIds) {
+			for (long companyId : removeableCompanyIds) {
 				PortalInstances.removeCompany(companyId);
 			}
 		}
