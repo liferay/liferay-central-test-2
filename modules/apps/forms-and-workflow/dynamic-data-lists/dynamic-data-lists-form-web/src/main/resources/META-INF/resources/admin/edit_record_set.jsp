@@ -250,15 +250,9 @@ renderResponse.setTitle((recordSet == null) ? LanguageUtil.get(request, "new-for
 									)
 								);
 
-								<%
-								if (showPublishModal) {
-								%>
-
+								<c:if test="<%= showPublishModal %>">
 									Liferay.component('formPortlet').openPublishModal();
-
-								<%
-								}
-								%>
+								</c:if>
 
 							},
 							['liferay-ddl-portlet'].concat(systemFieldModules)
