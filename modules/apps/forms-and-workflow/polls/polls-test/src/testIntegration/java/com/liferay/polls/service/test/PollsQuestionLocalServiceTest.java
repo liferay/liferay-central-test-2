@@ -49,7 +49,7 @@ public class PollsQuestionLocalServiceTest {
 		new LiferayIntegrationTestRule();
 
 	@Test(expected = QuestionChoiceException.class)
-	public void testAddWithRepeatedChoices() throws Exception {
+	public void testAddQuestion() throws Exception {
 		Map<Locale, String> titleMap = createLocalizedMap(
 			"PollsQuestion Title");
 		Map<Locale, String> descriptionMap = createLocalizedMap(
@@ -76,7 +76,7 @@ public class PollsQuestionLocalServiceTest {
 	}
 
 	@Test(expected = QuestionChoiceException.class)
-	public void testUpdateWithRepeatedChoices() throws Exception {
+	public void testUpdateQuestion() throws Exception {
 		Map<Locale, String> titleMap = createLocalizedMap(
 			"PollsQuestion Title");
 		Map<Locale, String> descriptionMap = createLocalizedMap(
