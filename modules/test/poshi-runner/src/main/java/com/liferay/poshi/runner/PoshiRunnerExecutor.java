@@ -696,9 +696,9 @@ public class PoshiRunnerExecutor {
 
 		XMLLoggerHandler.updateStatus(executeElement, "pending");
 
-		List<Element> argElements = executeElement.elements("arg");
-
 		List<String> args = new ArrayList<>();
+
+		List<Element> argElements = executeElement.elements("arg");
 
 		for (int i = 0; i < argElements.size(); i++) {
 			Element argElement = argElements.get(i);
