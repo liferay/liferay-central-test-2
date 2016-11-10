@@ -12,12 +12,12 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Alejandro Hernández
  */
 @XmlRootElement(name = "config")
-public class AdaptiveMediaImageConfigRepr {
+public class ImageAdaptiveMediaConfigRepr {
 
-	public AdaptiveMediaImageConfigRepr() {
+	public ImageAdaptiveMediaConfigRepr() {
 	}
 
-	public AdaptiveMediaImageConfigRepr(
+	public ImageAdaptiveMediaConfigRepr(
 		ImageAdaptiveMediaConfigurationEntry entry) {
 
 		_name = entry.getName();

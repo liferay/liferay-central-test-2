@@ -33,9 +33,9 @@ import org.osgi.service.cm.ConfigurationAdmin;
 /**
  * @author Alejandro Hernández
  */
-public class AdaptiveMediaImageConfigResource {
+public class ImageAdaptiveMediaConfigResource {
 
-	public AdaptiveMediaImageConfigResource(
+	public ImageAdaptiveMediaConfigResource(
 		long companyId,
 		ImageAdaptiveMediaConfigurationHelper imageAdaptiveMediaConfigurationHelper) {
 
@@ -47,16 +47,16 @@ public class AdaptiveMediaImageConfigResource {
 	@Path("/{uuid}")
 	@Produces({"application/json", "application/xml"})
 	@PUT
-	public AdaptiveMediaImageConfigRepr addConfiguration(
+	public ImageAdaptiveMediaConfigRepr addConfiguration(
 			@PathParam("uuid") String uuid,
-			AdaptiveMediaImageConfigRepr userConfig)
+			ImageAdaptiveMediaConfigRepr userConfig)
 		throws PortalException {
 
 		if (!_permissionChecker.isCompanyAdmin()) {
 			throw new ForbiddenException();
 		}
 
-		List<AdaptiveMediaImageConfigRepr> configs = _getDiferentConfigurations(
+		List<ImageAdaptiveMediaConfigRepr> configs = _getDiferentConfigurations(
 			uuid);
 
 		userConfig.setUuid(uuid);
@@ -75,14 +75,14 @@ public class AdaptiveMediaImageConfigResource {
 	@DELETE
 	@Path("/{uuid}")
 	public Response deleteConfiguration(
-			@PathParam("uuid") String uuid, AdaptiveMediaImageConfigRepr config)
+			@PathParam("uuid") String uuid, ImageAdaptiveMediaConfigRepr config)
 		throws PortalException {
 
 		if (!_permissionChecker.isCompanyAdmin()) {
 			throw new ForbiddenException();
 		}
 
-		List<AdaptiveMediaImageConfigRepr> configs = _getDiferentConfigurations(
+		List<ImageAdaptiveMediaConfigRepr> configs = _getDiferentConfigurations(
 			uuid);
 
 		try {
@@ -98,7 +98,7 @@ public class AdaptiveMediaImageConfigResource {
 	@GET
 	@Path("/{uuid}")
 	@Produces({"application/json", "application/xml"})
-	public AdaptiveMediaImageConfigRepr getConfiguration(
+	public ImageAdaptiveMediaConfigRepr getConfiguration(
 		@PathParam("uuid") String uuid) {
 
 		Optional<ImageAdaptiveMediaConfigurationEntry> entry =
@@ -109,7 +109,7 @@ public class AdaptiveMediaImageConfigResource {
 			throw new NotFoundException();
 		}
 
-		return new AdaptiveMediaImageConfigRepr(entry.get());
+		return new ImageAdaptiveMediaConfigRepr(entry.get());
 	}
 
 	@GET
@@ -120,12 +120,12 @@ public class AdaptiveMediaImageConfigResource {
 				_imageAdaptiveMediaConfigurationHelper.
 					getImageAdaptiveMediaConfigurationEntries(_companyId);
 
-		List<AdaptiveMediaImageConfigRepr> configs =
+		List<ImageAdaptiveMediaConfigRepr> configs =
 			imageAdaptiveMediaConfigurationEntries.stream().map(
-				AdaptiveMediaImageConfigRepr::new).collect(Collectors.toList());
+				ImageAdaptiveMediaConfigRepr::new).collect(Collectors.toList());
 
-		GenericEntity<List<AdaptiveMediaImageConfigRepr>> entity =
-			new GenericEntity<List<AdaptiveMediaImageConfigRepr>>(configs) {
+		GenericEntity<List<ImageAdaptiveMediaConfigRepr>> entity =
+			new GenericEntity<List<ImageAdaptiveMediaConfigRepr>>(configs) {
 			};
 
 		return Response.ok(entity).build();
@@ -141,7 +141,7 @@ public class AdaptiveMediaImageConfigResource {
 			null);
 	}
 
-	private List<AdaptiveMediaImageConfigRepr> _getDiferentConfigurations(
+	private List<ImageAdaptiveMediaConfigRepr> _getDiferentConfigurations(
 		String uuid) {
 
 		Collection<ImageAdaptiveMediaConfigurationEntry>
@@ -150,7 +150,7 @@ public class AdaptiveMediaImageConfigResource {
 					getImageAdaptiveMediaConfigurationEntries(_companyId);
 
 		return imageAdaptiveMediaConfigurationEntries.stream().map(
-			AdaptiveMediaImageConfigRepr::new).filter(
+			ImageAdaptiveMediaConfigRepr::new).filter(
 				c -> !c.getUuid().equals(uuid)).collect(Collectors.toList());
 	}
 
@@ -160,13 +160,13 @@ public class AdaptiveMediaImageConfigResource {
 		return registry.getService(clazz);
 	}
 
-	private void _writeProperties(List<AdaptiveMediaImageConfigRepr> configs)
+	private void _writeProperties(List<ImageAdaptiveMediaConfigRepr> configs)
 		throws Exception {
 
 		Dictionary<String, Object> properties = new HashMapDictionary<>();
 
 		properties.put("imageVariants", configs.stream().map(
-			AdaptiveMediaImageConfigRepr::toString).collect(
+			ImageAdaptiveMediaConfigRepr::toString).collect(
 				Collectors.toList()).toArray(new String[configs.size()]));
 
 		Configuration configuration = _getConfiguration();

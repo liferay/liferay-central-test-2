@@ -10,15 +10,15 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Alejandro Hernández
  */
-@Component(immediate = true, service = AdaptiveMediaImageRootResource.class)
+@Component(immediate = true, service = ImageAdaptiveMediaRootResource.class)
 @Path("/images")
-public class AdaptiveMediaImageRootResource {
+public class ImageAdaptiveMediaRootResource {
 
 	@Path("/configuration/{companyId}")
-	public AdaptiveMediaImageConfigResource getConfiguration(
+	public ImageAdaptiveMediaConfigResource getConfiguration(
 		@PathParam("companyId") long companyId) {
 
-		return new AdaptiveMediaImageConfigResource(
+		return new ImageAdaptiveMediaConfigResource(
 			companyId, imageAdaptiveMediaConfigurationHelper);
 	}
 
