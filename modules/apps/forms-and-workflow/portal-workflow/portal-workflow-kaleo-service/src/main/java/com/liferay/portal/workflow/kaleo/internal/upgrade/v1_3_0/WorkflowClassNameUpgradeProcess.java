@@ -21,7 +21,7 @@ import java.sql.PreparedStatement;
 /**
  * @author Marcellus Tavares
  */
-public abstract class BaseUpgradeClassNames extends UpgradeProcess {
+public abstract class WorkflowClassNameUpgradeProcess extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
