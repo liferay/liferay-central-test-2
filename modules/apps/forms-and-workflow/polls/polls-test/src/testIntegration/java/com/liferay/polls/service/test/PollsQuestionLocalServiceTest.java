@@ -81,13 +81,12 @@ public class PollsQuestionLocalServiceTest {
 			"PollsQuestion Title");
 		Map<Locale, String> descriptionMap = createLocalizedMap(
 			"PollsQuestion Description");
-
-		boolean neverExpire = true;
 		int expirationDateHour = 0;
 		int expirationDateMinute = 0;
 		int expirationDateMonth = 0;
 		int expirationDateDay = 0;
 		int expirationDateYear = 0;
+		boolean neverExpire = true;
 
 		List<PollsChoice> choices = new ArrayList<>();
 
