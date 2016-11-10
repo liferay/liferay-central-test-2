@@ -116,10 +116,10 @@ public class PollsQuestionLocalServiceTest {
 			neverExpire, choices, serviceContext);
 	}
 
-	protected Map<Locale, String> createLocalizedMap(String localizadValue) {
+	protected Map<Locale, String> createLocalizedMap(String localizedValue) {
 		Map<Locale, String> localizedMap = new HashMap<>();
 
-		localizedMap.put(Locale.US, localizadValue);
+		localizedMap.put(Locale.US, localizedValue);
 
 		return localizedMap;
 	}
