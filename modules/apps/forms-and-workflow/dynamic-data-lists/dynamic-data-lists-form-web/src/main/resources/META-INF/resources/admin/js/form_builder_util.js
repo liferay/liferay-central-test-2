@@ -12,6 +12,7 @@ AUI.add(
 						}
 					);
 				}
+
 				if (A.Object.hasKey(value, source)) {
 					var newValue = {};
 
