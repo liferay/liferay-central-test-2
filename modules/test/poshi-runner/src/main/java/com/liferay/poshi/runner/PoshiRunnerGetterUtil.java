@@ -209,7 +209,7 @@ public class PoshiRunnerGetterUtil {
 
 			Matcher matcher = _variablePattern.matcher(arg);
 
-			Object parameter;
+			Object parameter = null;
 
 			if (matcher.matches()) {
 				parameter = PoshiRunnerVariablesUtil.getValueFromCommandMap(
