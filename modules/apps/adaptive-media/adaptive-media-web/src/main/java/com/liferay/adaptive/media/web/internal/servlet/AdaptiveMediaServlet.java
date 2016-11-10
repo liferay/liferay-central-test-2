@@ -70,7 +70,7 @@ public class AdaptiveMediaServlet extends HttpServlet {
 		try {
 			AdaptiveMediaRequestHandler requestHandler =
 				_requestHandlerLocator.locateForPattern(
-					getRequestHandlerPattern(request));
+					_getRequestHandlerPattern(request));
 
 			if (requestHandler == null) {
 				response.sendError(
@@ -142,7 +142,7 @@ public class AdaptiveMediaServlet extends HttpServlet {
 		doGet(request, response);
 	}
 
-	private String getRequestHandlerPattern(HttpServletRequest request) {
+	private String _getRequestHandlerPattern(HttpServletRequest request) {
 		String pathInfo = request.getPathInfo();
 
 		Matcher matcher = _REQUEST_HANDLER_PATTERN.matcher(pathInfo);

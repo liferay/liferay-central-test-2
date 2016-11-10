@@ -51,7 +51,8 @@ public class ImageAdaptiveMediaConfigResource {
 
 	public ImageAdaptiveMediaConfigResource(
 		long companyId,
-		ImageAdaptiveMediaConfigurationHelper imageAdaptiveMediaConfigurationHelper) {
+		ImageAdaptiveMediaConfigurationHelper
+			imageAdaptiveMediaConfigurationHelper) {
 
 		_companyId = companyId;
 		_imageAdaptiveMediaConfigurationHelper =

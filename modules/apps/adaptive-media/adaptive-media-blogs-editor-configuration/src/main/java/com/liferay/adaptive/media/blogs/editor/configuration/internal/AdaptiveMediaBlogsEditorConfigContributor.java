@@ -83,8 +83,8 @@ public class AdaptiveMediaBlogsEditorConfigContributor
 		for (ItemSelectorCriterion itemSelectorCriterion :
 				itemSelectorCriteria) {
 
-			if (itemSelectorCriterion
-					instanceof BlogsItemSelectorCriterion) {
+			if (itemSelectorCriterion instanceof
+					BlogsItemSelectorCriterion) {
 
 				addImageAdaptiveMediaURLItemSelectorReturnType(
 					itemSelectorCriterion);

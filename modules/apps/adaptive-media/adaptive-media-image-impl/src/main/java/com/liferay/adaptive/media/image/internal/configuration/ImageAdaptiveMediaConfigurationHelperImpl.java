@@ -31,7 +31,9 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Adolfo Pérez
  */
-@Component(immediate = true, service = ImageAdaptiveMediaConfigurationHelper.class)
+@Component(
+	immediate = true, service = ImageAdaptiveMediaConfigurationHelper.class
+)
 public class ImageAdaptiveMediaConfigurationHelperImpl
 	implements ImageAdaptiveMediaConfigurationHelper {
 

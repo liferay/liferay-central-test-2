@@ -90,7 +90,7 @@ public class FileEntryImageAdaptiveMediaURLItemSelectorReturnTypeResolver
 		for (AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia :
 				adaptiveMediaList) {
 
-			JSONObject sourceJSONObject = getSourceJSONObject(
+			JSONObject sourceJSONObject = _getSourceJSONObject(
 				adaptiveMedia, previousAdaptiveMedia);
 
 			sourcesArray.put(sourceJSONObject);
@@ -103,7 +103,7 @@ public class FileEntryImageAdaptiveMediaURLItemSelectorReturnTypeResolver
 		return fileEntryJSONObject.toString();
 	}
 
-	private JSONObject getSourceJSONObject(
+	private JSONObject _getSourceJSONObject(
 		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia,
 		AdaptiveMedia<ImageAdaptiveMediaProcessor> previousAdaptiveMedia) {
 

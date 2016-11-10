@@ -231,8 +231,8 @@ public class FileEntryImageAdaptiveMediaURLItemSelectorReturnTypeResolverTest {
 		return FileUtil.getBytes(
 			FileEntryImageAdaptiveMediaURLItemSelectorReturnTypeResolverTest.
 				class,
-			"/com/liferay/adaptive/media/image/processor/test/dependencies/" +
-				"image.jpg");
+			"/com/liferay/adaptive/media/image/processor/test/dependencies" +
+				"/image.jpg");
 	}
 
 	private <T> T _getService(Class<T> clazz) {
