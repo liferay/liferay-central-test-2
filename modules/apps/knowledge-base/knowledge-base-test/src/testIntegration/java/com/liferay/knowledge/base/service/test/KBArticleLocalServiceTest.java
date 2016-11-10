@@ -208,6 +208,7 @@ public class KBArticleLocalServiceTest {
 	@Test
 	public void testAddKBArticlesMarkdownWithNoWorkflow() throws Exception {
 		updateWorkflowDefinitionForKBArticle("");
+
 		importMarkdownArticles();
 	}
 
@@ -216,6 +217,7 @@ public class KBArticleLocalServiceTest {
 		throws Exception {
 
 		updateWorkflowDefinitionForKBArticle("Single Approver@1");
+
 		importMarkdownArticles();
 	}
 
@@ -926,10 +928,13 @@ public class KBArticleLocalServiceTest {
 	}
 
 	protected void importMarkdownArticles() throws PortalException {
+		Class<?> clazz = getClass();
+
+		ClassLoader classLoader = clazz.getClassLoader();
+
 		String fileName = "markdown-articles.zip";
 
-		InputStream zipFileStream =
-			getClass().getClassLoader().getResourceAsStream(fileName);
+		InputStream zipFileStream = classLoader.getResourceAsStream(fileName);
 
 		KBArticleLocalServiceUtil.addKBArticlesMarkdown(
 			_user.getUserId(), _group.getGroupId(),
