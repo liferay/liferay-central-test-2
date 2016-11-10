@@ -620,6 +620,14 @@ public class PDFProcessorImpl
 		int previewFilesCount = 0;
 
 		try (PDDocument pdDocument = PDDocument.load(file)) {
+			if (pdDocument.isEncrypted()) {
+				_log.error(
+					"PDF document is encrypted for file version " +
+						fileVersion.getFileVersionId());
+
+				return;
+			}
+
 			previewFilesCount = pdDocument.getNumberOfPages();
 		}
 
