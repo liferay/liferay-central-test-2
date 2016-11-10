@@ -33,7 +33,6 @@ page import="com.liferay.portal.kernel.comment.Comment" %><%@
 page import="com.liferay.portal.kernel.comment.CommentConstants" %><%@
 page import="com.liferay.portal.kernel.comment.CommentManagerUtil" %><%@
 page import="com.liferay.portal.kernel.comment.WorkflowableComment" %><%@
-page import="com.liferay.portal.kernel.model.ModelHintsConstants" %><%@
 page import="com.liferay.portal.kernel.security.permission.ResourceActionsUtil" %><%@
 page import="com.liferay.portal.kernel.service.WorkflowDefinitionLinkLocalServiceUtil" %><%@
 page import="com.liferay.portal.kernel.util.Constants" %><%@
@@ -51,8 +50,6 @@ page import="com.liferay.portal.util.PropsUtil" %><%@
 page import="com.liferay.portlet.asset.util.AssetUtil" %>
 
 <%@ page import="java.text.Format" %>
-
-<%@ page import="javax.portlet.WindowState" %>
 
 <liferay-frontend:defineObjects />
 
