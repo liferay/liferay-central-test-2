@@ -753,11 +753,11 @@ public class EditUserMVCActionCommand extends BaseMVCActionCommand {
 
 		Group group = user.getGroup();
 
-		boolean hasGroupUpdatePermission = GroupPermissionUtil.contains(
-			themeDisplay.getPermissionChecker(), group.getGroupId(),
-			ActionKeys.UPDATE);
+		if (!portletId.equals(myAccountPortletId) &&
+			GroupPermissionUtil.contains(
+				themeDisplay.getPermissionChecker(), group.getGroupId(),
+				ActionKeys.UPDATE)) {
 
-		if (!portletId.equals(myAccountPortletId) && hasGroupUpdatePermission) {
 			long publicLayoutSetPrototypeId = ParamUtil.getLong(
 				actionRequest, "publicLayoutSetPrototypeId");
 			long privateLayoutSetPrototypeId = ParamUtil.getLong(
