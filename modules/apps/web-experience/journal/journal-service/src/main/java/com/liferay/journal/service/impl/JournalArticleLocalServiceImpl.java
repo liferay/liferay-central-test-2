@@ -36,7 +36,8 @@ import com.liferay.dynamic.data.mapping.service.DDMTemplateLinkLocalService;
 import com.liferay.dynamic.data.mapping.service.DDMTemplateLocalService;
 import com.liferay.dynamic.data.mapping.storage.Fields;
 import com.liferay.expando.kernel.util.ExpandoBridgeUtil;
-import com.liferay.exportimport.content.processor.ExportImportContentProcessorController;
+import com.liferay.exportimport.content.processor.ExportImportContentProcessor;
+import com.liferay.exportimport.content.processor.ExportImportContentProcessorRegistryUtil;
 import com.liferay.exportimport.kernel.lar.ExportImportThreadLocal;
 import com.liferay.journal.configuration.JournalGroupServiceConfiguration;
 import com.liferay.journal.configuration.JournalServiceConfiguration;
@@ -8069,14 +8070,12 @@ public class JournalArticleLocalServiceImpl
 			}
 		}
 
-		boolean validated =
-			exportImportContentProcessorController.validateContentReferences(
-				JournalArticle.class, groupId, content);
+		ExportImportContentProcessor exportImportContentProcessor =
+			ExportImportContentProcessorRegistryUtil.
+				getExportImportContentProcessor(JournalArticle.class.getName());
 
-		if (!validated) {
-			throw new NoSuchModelException(
-				"Validation failed for journal article references");
-		}
+		exportImportContentProcessor.validateContentReferences(
+			groupId, content);
 	}
 
 	/**
@@ -8110,10 +8109,6 @@ public class JournalArticleLocalServiceImpl
 
 	@ServiceReference(type = DDMTemplateLocalService.class)
 	protected DDMTemplateLocalService ddmTemplateLocalService;
-
-	@ServiceReference(type = ExportImportContentProcessorController.class)
-	protected ExportImportContentProcessorController
-		exportImportContentProcessorController;
 
 	@ServiceReference(type = JournalConverter.class)
 	protected JournalConverter journalConverter;
