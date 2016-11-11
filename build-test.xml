@@ -240,6 +240,7 @@ counter.jdbc.prefix=jdbc.counter.]]></echo>
 				<then>
 					<echo append="true" file="@{properties.file}"><![CDATA[
 jdbc.default.connectionProperties=oracle.jdbc.ReadTimeout=0;oracle.net.CONNECT_TIMEOUT=0
+
 jdbc.counter.connectionProperties=oracle.jdbc.ReadTimeout=0;oracle.net.CONNECT_TIMEOUT=0]]></echo>
 				</then>
 			</if>
