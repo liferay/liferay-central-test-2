@@ -51,12 +51,10 @@ public class ImageAdaptiveMediaConfigResource {
 
 	public ImageAdaptiveMediaConfigResource(
 		long companyId,
-		ImageAdaptiveMediaConfigurationHelper
-			imageAdaptiveMediaConfigurationHelper) {
+		ImageAdaptiveMediaConfigurationHelper configurationHelper) {
 
 		_companyId = companyId;
-		_imageAdaptiveMediaConfigurationHelper =
-			imageAdaptiveMediaConfigurationHelper;
+		_configurationHelper = configurationHelper;
 		_permissionChecker = PermissionThreadLocal.getPermissionChecker();
 	}
 
@@ -65,44 +63,45 @@ public class ImageAdaptiveMediaConfigResource {
 	@PUT
 	public ImageAdaptiveMediaConfigRepr addConfiguration(
 			@PathParam("uuid") String uuid,
-			ImageAdaptiveMediaConfigRepr userConfig)
+			ImageAdaptiveMediaConfigRepr configRepr)
 		throws PortalException {
 
 		if (!_permissionChecker.isCompanyAdmin()) {
 			throw new ForbiddenException();
 		}
 
-		List<ImageAdaptiveMediaConfigRepr> configs = _getDiferentConfigurations(
-			uuid);
+		List<ImageAdaptiveMediaConfigRepr> configReprs =
+			_getDiferentConfigurations(uuid);
 
-		userConfig.setUuid(uuid);
-		configs.add(userConfig);
+		configRepr.setUuid(uuid);
+		configReprs.add(configRepr);
 
 		try {
-			_writeProperties(configs);
+			_writeProperties(configReprs);
 		}
 		catch (Exception e) {
 			throw new InternalServerErrorException();
 		}
 
-		return userConfig;
+		return configRepr;
 	}
 
 	@DELETE
 	@Path("/{uuid}")
 	public Response deleteConfiguration(
-			@PathParam("uuid") String uuid, ImageAdaptiveMediaConfigRepr config)
+			@PathParam("uuid") String uuid,
+			ImageAdaptiveMediaConfigRepr configRepr)
 		throws PortalException {
 
 		if (!_permissionChecker.isCompanyAdmin()) {
 			throw new ForbiddenException();
 		}
 
-		List<ImageAdaptiveMediaConfigRepr> configs = _getDiferentConfigurations(
-			uuid);
+		List<ImageAdaptiveMediaConfigRepr> configReprs =
+			_getDiferentConfigurations(uuid);
 
 		try {
-			_writeProperties(configs);
+			_writeProperties(configReprs);
 		}
 		catch (Exception e) {
 			throw new InternalServerErrorException();
@@ -117,31 +116,30 @@ public class ImageAdaptiveMediaConfigResource {
 	public ImageAdaptiveMediaConfigRepr getConfiguration(
 		@PathParam("uuid") String uuid) {
 
-		Optional<ImageAdaptiveMediaConfigurationEntry> entry =
-			_imageAdaptiveMediaConfigurationHelper.
-				getImageAdaptiveMediaConfigurationEntry(_companyId, uuid);
+		Optional<ImageAdaptiveMediaConfigurationEntry> configurationEntry =
+			_configurationHelper.getImageAdaptiveMediaConfigurationEntry(
+				_companyId, uuid);
 
-		if (!entry.isPresent()) {
+		if (!configurationEntry.isPresent()) {
 			throw new NotFoundException();
 		}
 
-		return new ImageAdaptiveMediaConfigRepr(entry.get());
+		return new ImageAdaptiveMediaConfigRepr(configurationEntry.get());
 	}
 
 	@GET
 	@Produces({"application/json", "application/xml"})
 	public Response getConfigurations() {
-		Collection<ImageAdaptiveMediaConfigurationEntry>
-			imageAdaptiveMediaConfigurationEntries =
-				_imageAdaptiveMediaConfigurationHelper.
-					getImageAdaptiveMediaConfigurationEntries(_companyId);
+		Collection<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
+			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
+				_companyId);
 
-		List<ImageAdaptiveMediaConfigRepr> configs =
-			imageAdaptiveMediaConfigurationEntries.stream().map(
+		List<ImageAdaptiveMediaConfigRepr> configReprs =
+			configurationEntries.stream().map(
 				ImageAdaptiveMediaConfigRepr::new).collect(Collectors.toList());
 
 		GenericEntity<List<ImageAdaptiveMediaConfigRepr>> entity =
-			new GenericEntity<List<ImageAdaptiveMediaConfigRepr>>(configs) {
+			new GenericEntity<List<ImageAdaptiveMediaConfigRepr>>(configReprs) {
 			};
 
 		return Response.ok(entity).build();
@@ -160,12 +158,11 @@ public class ImageAdaptiveMediaConfigResource {
 	private List<ImageAdaptiveMediaConfigRepr> _getDiferentConfigurations(
 		String uuid) {
 
-		Collection<ImageAdaptiveMediaConfigurationEntry>
-			imageAdaptiveMediaConfigurationEntries =
-				_imageAdaptiveMediaConfigurationHelper.
-					getImageAdaptiveMediaConfigurationEntries(_companyId);
+		Collection<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
+			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
+				_companyId);
 
-		return imageAdaptiveMediaConfigurationEntries.stream().map(
+		return configurationEntries.stream().map(
 			ImageAdaptiveMediaConfigRepr::new).filter(
 				c -> !c.getUuid().equals(uuid)).collect(Collectors.toList());
 	}
@@ -176,14 +173,15 @@ public class ImageAdaptiveMediaConfigResource {
 		return registry.getService(clazz);
 	}
 
-	private void _writeProperties(List<ImageAdaptiveMediaConfigRepr> configs)
+	private void _writeProperties(
+			List<ImageAdaptiveMediaConfigRepr> configReprs)
 		throws Exception {
 
 		Dictionary<String, Object> properties = new HashMapDictionary<>();
 
-		properties.put("imageVariants", configs.stream().map(
+		properties.put("imageVariants", configReprs.stream().map(
 			ImageAdaptiveMediaConfigRepr::toString).collect(
-				Collectors.toList()).toArray(new String[configs.size()]));
+				Collectors.toList()).toArray(new String[configReprs.size()]));
 
 		Configuration configuration = _getConfiguration();
 
@@ -191,8 +189,7 @@ public class ImageAdaptiveMediaConfigResource {
 	}
 
 	private final long _companyId;
-	private final ImageAdaptiveMediaConfigurationHelper
-		_imageAdaptiveMediaConfigurationHelper;
+	private final ImageAdaptiveMediaConfigurationHelper _configurationHelper;
 	private final PermissionChecker _permissionChecker;
 
 }

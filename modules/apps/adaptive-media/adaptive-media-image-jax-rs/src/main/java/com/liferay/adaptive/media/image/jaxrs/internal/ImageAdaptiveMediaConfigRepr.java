@@ -32,22 +32,22 @@ public class ImageAdaptiveMediaConfigRepr {
 	}
 
 	public ImageAdaptiveMediaConfigRepr(
-		ImageAdaptiveMediaConfigurationEntry entry) {
+		ImageAdaptiveMediaConfigurationEntry configurationEntry) {
 
-		_name = entry.getName();
-		String width = entry.getProperties().get("width");
+		_name = configurationEntry.getName();
+		String width = configurationEntry.getProperties().get("width");
 
 		if (width != null) {
 			_width = Integer.parseInt(width);
 		}
 
-		String height = entry.getProperties().get("height");
+		String height = configurationEntry.getProperties().get("height");
 
 		if (height != null) {
 			_height = Integer.parseInt(height);
 		}
 
-		_uuid = entry.getUUID();
+		_uuid = configurationEntry.getUUID();
 	}
 
 	public int getHeight() {
