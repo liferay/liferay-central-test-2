@@ -15,6 +15,9 @@
 package com.liferay.adaptive.media.image.internal.configuration;
 
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.util.HashMap;
@@ -100,6 +103,37 @@ public class ImageAdaptiveMediaConfigurationEntryParser {
 
 		return new ImageAdaptiveMediaConfigurationEntryImpl(
 			name, uuid, properties);
+	}
+
+	public String getConfigurationString(
+		ImageAdaptiveMediaConfigurationEntry configurationEntry) {
+
+		StringBundler sb = new StringBundler();
+
+		sb.append(configurationEntry.getName());
+		sb.append(StringPool.COLON);
+		sb.append(configurationEntry.getUUID());
+		sb.append(StringPool.COLON);
+
+		Map<String, String> properties = configurationEntry.getProperties();
+
+		if (properties.get("height") != null) {
+			int height = GetterUtil.getInteger(properties.get("height"));
+
+			sb.append(height);
+
+			if (properties.get("width") != null) {
+				sb.append(StringPool.SEMICOLON);
+			}
+		}
+
+		if (properties.get("width") != null) {
+			int width = GetterUtil.getInteger(properties.get("width"));
+
+			sb.append(width);
+		}
+
+		return sb.toString();
 	}
 
 	private static final Pattern _ATTRIBUTE_SEPARATOR_PATTERN = Pattern.compile(

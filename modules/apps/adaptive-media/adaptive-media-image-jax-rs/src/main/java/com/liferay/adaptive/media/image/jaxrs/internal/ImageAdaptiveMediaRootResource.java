@@ -15,6 +15,7 @@
 package com.liferay.adaptive.media.image.jaxrs.internal;
 
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
+import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaConfigurationEntryParser;
 
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -34,8 +35,13 @@ public class ImageAdaptiveMediaRootResource {
 		@PathParam("companyId") long companyId) {
 
 		return new ImageAdaptiveMediaConfigResource(
-			companyId, imageAdaptiveMediaConfigurationHelper);
+			companyId, imageAdaptiveMediaConfigurationHelper,
+			imageAdaptiveMediaConfigurationEntryParser);
 	}
+
+	@Reference
+	protected ImageAdaptiveMediaConfigurationEntryParser
+		imageAdaptiveMediaConfigurationEntryParser;
 
 	@Reference
 	protected ImageAdaptiveMediaConfigurationHelper

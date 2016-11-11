@@ -16,6 +16,8 @@ package com.liferay.adaptive.media.image.jaxrs.internal;
 
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
 
+import java.util.Map;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -34,18 +36,21 @@ public class ImageAdaptiveMediaConfigRepr {
 	public ImageAdaptiveMediaConfigRepr(
 		ImageAdaptiveMediaConfigurationEntry configurationEntry) {
 
-		_name = configurationEntry.getName();
-		String width = configurationEntry.getProperties().get("width");
+		Map<String, String> properties = configurationEntry.getProperties();
+
+		String height = properties.get("height");
+
+		if (height != null) {
+			_height = Integer.parseInt(height);
+		}
+
+		String width = properties.get("width");
 
 		if (width != null) {
 			_width = Integer.parseInt(width);
 		}
 
-		String height = configurationEntry.getProperties().get("height");
-
-		if (height != null) {
-			_height = Integer.parseInt(height);
-		}
+		_name = configurationEntry.getName();
 
 		_uuid = configurationEntry.getUUID();
 	}
@@ -80,11 +85,6 @@ public class ImageAdaptiveMediaConfigRepr {
 
 	public void setWidth(int width) {
 		_width = width;
-	}
-
-	@Override
-	public String toString() {
-		return _name + ":" + _uuid + ":width=" + _width + ";height=" + _height;
 	}
 
 	private int _height = -1;
