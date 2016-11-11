@@ -28,7 +28,7 @@ import org.osgi.service.component.annotations.Reference;
  */
 @ApplicationPath("/")
 @Component(immediate = true, service = Application.class)
-public class ImageAdaptiveMediaJaxRApplication extends Application {
+public class ImageAdaptiveMediaJaxRsApplication extends Application {
 
 	public Set<Object> getSingletons() {
 		return Collections.singleton(_imageAdaptiveMediaRootResource);
