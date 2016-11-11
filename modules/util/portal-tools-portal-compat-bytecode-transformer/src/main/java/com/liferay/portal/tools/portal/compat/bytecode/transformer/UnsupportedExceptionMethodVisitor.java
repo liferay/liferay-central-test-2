@@ -42,16 +42,22 @@ public class UnsupportedExceptionMethodVisitor extends MethodVisitor {
 	@Override
 	public void visitCode() {
 		_methodMethodVisitor.visitCode();
+
 		_methodMethodVisitor.visitTypeInsn(
 			Opcodes.NEW,
 			Type.getInternalName(UnsupportedOperationException.class));
+
 		_methodMethodVisitor.visitInsn(Opcodes.DUP);
+
 		_methodMethodVisitor.visitMethodInsn(
 			Opcodes.INVOKESPECIAL,
 			Type.getInternalName(UnsupportedOperationException.class), "<init>",
 			"()V", false);
+
 		_methodMethodVisitor.visitInsn(Opcodes.ATHROW);
+
 		_methodMethodVisitor.visitMaxs(0, 0);
+
 		_methodMethodVisitor.visitEnd();
 	}
 
