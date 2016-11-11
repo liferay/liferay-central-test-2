@@ -88,9 +88,7 @@ public class ImageAdaptiveMediaConfigResource {
 
 	@DELETE
 	@Path("/{uuid}")
-	public Response deleteConfiguration(
-			@PathParam("uuid") String uuid,
-			ImageAdaptiveMediaConfigRepr configRepr)
+	public Response deleteConfiguration(@PathParam("uuid") String uuid)
 		throws PortalException {
 
 		if (!_permissionChecker.isCompanyAdmin()) {
