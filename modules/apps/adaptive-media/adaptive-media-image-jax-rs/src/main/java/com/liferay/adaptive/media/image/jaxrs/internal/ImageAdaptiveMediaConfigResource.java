@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.adaptive.media.image.jaxrs;
+package com.liferay.adaptive.media.image.jaxrs.internal;
 
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;

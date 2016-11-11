@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.adaptive.media.image.jaxrs;
+package com.liferay.adaptive.media.image.jaxrs.internal;
 
 import java.util.Collections;
 import java.util.Set;
