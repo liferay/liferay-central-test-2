@@ -16,19 +16,13 @@ package com.liferay.adaptive.media.image.jaxrs.internal;
 
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
-import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaConfigurationEntryImpl;
-import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaConfigurationEntryParser;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
-import com.liferay.portal.kernel.util.HashMapDictionary;
-import com.liferay.registry.Registry;
-import com.liferay.registry.RegistryUtil;
 
 import java.io.IOException;
 
 import java.util.Collection;
-import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,9 +41,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.Response;
 
-import org.osgi.service.cm.Configuration;
-import org.osgi.service.cm.ConfigurationAdmin;
-
 /**
  * @author Alejandro Hernández
  */
@@ -57,13 +48,11 @@ public class ImageAdaptiveMediaConfigResource {
 
 	public ImageAdaptiveMediaConfigResource(
 		long companyId,
-		ImageAdaptiveMediaConfigurationHelper configurationHelper,
-		ImageAdaptiveMediaConfigurationEntryParser configurationEntryParser) {
+		ImageAdaptiveMediaConfigurationHelper configurationHelper) {
 
 		_companyId = companyId;
 		_configurationHelper = configurationHelper;
 		_permissionChecker = PermissionThreadLocal.getPermissionChecker();
-		_configurationEntryParser = configurationEntryParser;
 	}
 
 	@Path("/{uuid}")
@@ -78,21 +67,19 @@ public class ImageAdaptiveMediaConfigResource {
 			throw new ForbiddenException();
 		}
 
-		Collection<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
-			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
-				_companyId);
+		Map<String, String> properties = new HashMap<>();
 
-		List<ImageAdaptiveMediaConfigurationEntry> updatedConfigurationEntries =
-			configurationEntries.stream().filter(
-				configurationEntry ->
-					!configurationEntry.getUUID().equals(uuid)).collect(
-						Collectors.toList());
+		if (configRepr.getHeight() != -1) {
+			properties.put("height", String.valueOf(configRepr.getHeight()));
+		}
 
-		updatedConfigurationEntries.add(
-			_getImageAdaptiveMediaConfigurationEntry(uuid, configRepr));
+		if (configRepr.getWidth() != -1) {
+			properties.put("width", String.valueOf(configRepr.getWidth()));
+		}
 
 		try {
-			_updateConfiguration(updatedConfigurationEntries);
+			_configurationHelper.addImageAdaptiveMediaConfigurationEntry(
+				_companyId, configRepr.getName(), uuid, properties);
 		}
 		catch (IOException ioe) {
 			throw new InternalServerErrorException();
@@ -110,18 +97,9 @@ public class ImageAdaptiveMediaConfigResource {
 			throw new ForbiddenException();
 		}
 
-		Collection<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
-			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
-				_companyId);
-
-		List<ImageAdaptiveMediaConfigurationEntry> updatedConfigurationEntries =
-			configurationEntries.stream().filter(
-				configurationEntry ->
-					!configurationEntry.getUUID().equals(uuid)).collect(
-						Collectors.toList());
-
 		try {
-			_updateConfiguration(updatedConfigurationEntries);
+			_configurationHelper.deleteImageAdaptiveMediaConfigurationEntry(
+				_companyId, uuid);
 		}
 		catch (IOException ioe) {
 			throw new InternalServerErrorException();
@@ -165,55 +143,7 @@ public class ImageAdaptiveMediaConfigResource {
 		return Response.ok(entity).build();
 	}
 
-	private Configuration _getConfiguration() throws IOException {
-		Registry registry = RegistryUtil.getRegistry();
-
-		ConfigurationAdmin configurationAdmin = registry.getService(
-			ConfigurationAdmin.class);
-
-		return configurationAdmin.getConfiguration(
-			"com.liferay.adaptive.media.image.internal.configuration." +
-				"ImageAdaptiveMediaCompanyConfiguration",
-			null);
-	}
-
-	private ImageAdaptiveMediaConfigurationEntry
-		_getImageAdaptiveMediaConfigurationEntry(
-			String uuid, ImageAdaptiveMediaConfigRepr configRepr) {
-
-		Map<String, String> properties = new HashMap<>();
-
-		if (configRepr.getHeight() != -1) {
-			properties.put("height", String.valueOf(configRepr.getHeight()));
-		}
-
-		if (configRepr.getWidth() != -1) {
-			properties.put("width", String.valueOf(configRepr.getWidth()));
-		}
-
-		return new ImageAdaptiveMediaConfigurationEntryImpl(
-			configRepr.getName(), uuid, properties);
-	}
-
-	private void _updateConfiguration(
-			List<ImageAdaptiveMediaConfigurationEntry> configurationEntries)
-		throws IOException {
-
-		Dictionary<String, Object> properties = new HashMapDictionary<>();
-
-		properties.put("imageVariants", configurationEntries.stream().map(
-			_configurationEntryParser::getConfigurationString).collect(
-				Collectors.toList()).toArray(
-					new String[configurationEntries.size()]));
-
-		Configuration configuration = _getConfiguration();
-
-		configuration.update(properties);
-	}
-
 	private final long _companyId;
-	private final ImageAdaptiveMediaConfigurationEntryParser
-		_configurationEntryParser;
 	private final ImageAdaptiveMediaConfigurationHelper _configurationHelper;
 	private final PermissionChecker _permissionChecker;
 

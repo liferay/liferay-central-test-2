@@ -19,12 +19,23 @@ import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigur
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
 import com.liferay.portal.kernel.module.configuration.ConfigurationException;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
+import com.liferay.portal.kernel.util.HashMapDictionary;
+import com.liferay.registry.Registry;
+import com.liferay.registry.RegistryUtil;
 
+import java.io.IOException;
+
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Dictionary;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.osgi.service.cm.Configuration;
+import org.osgi.service.cm.ConfigurationAdmin;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
@@ -37,6 +48,42 @@ import org.osgi.service.component.annotations.Reference;
 public class ImageAdaptiveMediaConfigurationHelperImpl
 	implements ImageAdaptiveMediaConfigurationHelper {
 
+	@Override
+	public void addImageAdaptiveMediaConfigurationEntry(
+			long companyId, String name, String uuid,
+			Map<String, String> properties)
+		throws IOException {
+
+		Collection<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
+			getImageAdaptiveMediaConfigurationEntries(companyId);
+
+		ImageAdaptiveMediaConfigurationEntry configurationEntry =
+			new ImageAdaptiveMediaConfigurationEntryImpl(
+				name, uuid, properties);
+
+		configurationEntries.add(configurationEntry);
+
+		_updateConfiguration(new ArrayList<>(configurationEntries));
+	}
+
+	@Override
+	public void deleteImageAdaptiveMediaConfigurationEntry(
+			long companyId, String uuid)
+		throws IOException {
+
+		Collection<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
+			getImageAdaptiveMediaConfigurationEntries(companyId);
+
+		List<ImageAdaptiveMediaConfigurationEntry> updatedConfigurationEntries =
+			configurationEntries.stream().filter(
+				configurationEntry ->
+					!configurationEntry.getUUID().equals(uuid)).collect(
+						Collectors.toList());
+
+		_updateConfiguration(updatedConfigurationEntries);
+	}
+
+	@Override
 	public Collection<ImageAdaptiveMediaConfigurationEntry>
 		getImageAdaptiveMediaConfigurationEntries(long companyId) {
 
@@ -46,6 +93,7 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 		return configurationEntryStream.collect(Collectors.toList());
 	}
 
+	@Override
 	public Optional<ImageAdaptiveMediaConfigurationEntry>
 		getImageAdaptiveMediaConfigurationEntry(
 			long companyId, String configurationEntryUUID) {
@@ -53,25 +101,33 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 		Stream<ImageAdaptiveMediaConfigurationEntry> configurationEntryStream =
 			_getConfigurationEntries(companyId);
 
-		return configurationEntryStream.
-			filter(
-				configurationEntry ->
-					configurationEntryUUID.equals(
-						configurationEntry.getUUID())).findFirst();
+		return configurationEntryStream.filter(
+			configurationEntry -> configurationEntryUUID.equals(
+				configurationEntry.getUUID())).findFirst();
 	}
 
 	@Reference(unbind = "-")
-	public void setConfigurationProvider(
+	protected void setConfigurationProvider(
 		ConfigurationProvider configurationProvider) {
 
 		_configurationProvider = configurationProvider;
 	}
 
 	@Reference(unbind = "-")
-	public void setImageAdaptiveMediaConfigurationEntryParser(
+	protected void setImageAdaptiveMediaConfigurationEntryParser(
 		ImageAdaptiveMediaConfigurationEntryParser configurationEntryParser) {
 
 		_configurationEntryParser = configurationEntryParser;
+	}
+
+	private Configuration _getConfiguration() throws IOException {
+		Registry registry = RegistryUtil.getRegistry();
+
+		ConfigurationAdmin configurationAdmin = registry.getService(
+			ConfigurationAdmin.class);
+
+		return configurationAdmin.getConfiguration(
+			ImageAdaptiveMediaCompanyConfiguration.class.getName(), null);
 	}
 
 	private Stream<ImageAdaptiveMediaConfigurationEntry>
@@ -94,6 +150,22 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 		catch (ConfigurationException ce) {
 			throw new AdaptiveMediaRuntimeException.InvalidConfiguration(ce);
 		}
+	}
+
+	private void _updateConfiguration(
+			List<ImageAdaptiveMediaConfigurationEntry> configurationEntries)
+		throws IOException {
+
+		Dictionary<String, Object> properties = new HashMapDictionary<>();
+
+		properties.put("imageVariants", configurationEntries.stream().map(
+			_configurationEntryParser::getConfigurationString).collect(
+				Collectors.toList()).toArray(
+					new String[configurationEntries.size()]));
+
+		Configuration configuration = _getConfiguration();
+
+		configuration.update(properties);
 	}
 
 	private ImageAdaptiveMediaConfigurationEntryParser

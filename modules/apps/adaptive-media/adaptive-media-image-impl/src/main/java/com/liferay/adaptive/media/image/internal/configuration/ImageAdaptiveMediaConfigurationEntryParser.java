@@ -63,6 +63,37 @@ import org.osgi.service.component.annotations.Component;
 )
 public class ImageAdaptiveMediaConfigurationEntryParser {
 
+	public String getConfigurationString(
+		ImageAdaptiveMediaConfigurationEntry configurationEntry) {
+
+		StringBundler sb = new StringBundler();
+
+		sb.append(configurationEntry.getName());
+		sb.append(StringPool.COLON);
+		sb.append(configurationEntry.getUUID());
+		sb.append(StringPool.COLON);
+
+		Map<String, String> properties = configurationEntry.getProperties();
+
+		if (properties.get("height") != null) {
+			int height = GetterUtil.getInteger(properties.get("height"));
+
+			sb.append(height);
+
+			if (properties.get("width") != null) {
+				sb.append(StringPool.SEMICOLON);
+			}
+		}
+
+		if (properties.get("width") != null) {
+			int width = GetterUtil.getInteger(properties.get("width"));
+
+			sb.append(width);
+		}
+
+		return sb.toString();
+	}
+
 	/**
 	 * Returns a configuration entry parsed from the configuration line's data.
 	 *
@@ -103,37 +134,6 @@ public class ImageAdaptiveMediaConfigurationEntryParser {
 
 		return new ImageAdaptiveMediaConfigurationEntryImpl(
 			name, uuid, properties);
-	}
-
-	public String getConfigurationString(
-		ImageAdaptiveMediaConfigurationEntry configurationEntry) {
-
-		StringBundler sb = new StringBundler();
-
-		sb.append(configurationEntry.getName());
-		sb.append(StringPool.COLON);
-		sb.append(configurationEntry.getUUID());
-		sb.append(StringPool.COLON);
-
-		Map<String, String> properties = configurationEntry.getProperties();
-
-		if (properties.get("height") != null) {
-			int height = GetterUtil.getInteger(properties.get("height"));
-
-			sb.append(height);
-
-			if (properties.get("width") != null) {
-				sb.append(StringPool.SEMICOLON);
-			}
-		}
-
-		if (properties.get("width") != null) {
-			int width = GetterUtil.getInteger(properties.get("width"));
-
-			sb.append(width);
-		}
-
-		return sb.toString();
 	}
 
 	private static final Pattern _ATTRIBUTE_SEPARATOR_PATTERN = Pattern.compile(

@@ -16,7 +16,10 @@ package com.liferay.adaptive.media.image.configuration;
 
 import aQute.bnd.annotation.ProviderType;
 
+import java.io.IOException;
+
 import java.util.Collection;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -24,6 +27,15 @@ import java.util.Optional;
  */
 @ProviderType
 public interface ImageAdaptiveMediaConfigurationHelper {
+
+	public void addImageAdaptiveMediaConfigurationEntry(
+			long companyId, String name, String uuid,
+			Map<String, String> properties)
+		throws IOException;
+
+	public void deleteImageAdaptiveMediaConfigurationEntry(
+			long companyId, String uuid)
+		throws IOException;
 
 	public Collection<ImageAdaptiveMediaConfigurationEntry>
 		getImageAdaptiveMediaConfigurationEntries(long companyId);
