@@ -21,7 +21,7 @@ import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 
 /**
- * @author Tom Wang
+ * @author Tong Wang
  */
 public class UnsupportedExceptionMethodVisitor extends MethodVisitor {
 

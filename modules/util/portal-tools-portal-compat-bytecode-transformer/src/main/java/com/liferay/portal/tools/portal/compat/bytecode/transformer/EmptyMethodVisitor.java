@@ -19,7 +19,7 @@ import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
 /**
- * @author Tom Wang
+ * @author Tong Wang
  */
 public class EmptyMethodVisitor extends MethodVisitor {
 
