@@ -73,8 +73,8 @@ public class PortalCompactClassVisitor extends ClassVisitor {
 			return new EmptyMethodVisitor(methodVisitor, _superName);
 		}
 
-		if (name.startsWith("set") || name.equals("<clinit>") ||
-			name.equals("afterPropertiesSet") || name.equals("destroy")) {
+		if (name.equals("<clinit>") || name.equals("afterPropertiesSet") ||
+			name.equals("destroy") || name.startsWith("set")) {
 
 			return new EmptyMethodVisitor(methodVisitor, null);
 		}
