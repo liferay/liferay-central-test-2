@@ -16,14 +16,13 @@ package com.liferay.journal.web.internal.search;
 
 import com.liferay.journal.model.JournalArticle;
 import com.liferay.journal.model.JournalFolder;
-import com.liferay.journal.service.JournalArticleServiceUtil;
-import com.liferay.journal.service.JournalFolderServiceUtil;
+import com.liferay.journal.service.JournalArticleLocalServiceUtil;
+import com.liferay.journal.service.JournalFolderLocalServiceUtil;
 import com.liferay.journal.service.permission.JournalArticlePermission;
 import com.liferay.journal.service.permission.JournalFolderPermission;
 import com.liferay.journal.web.internal.display.context.JournalDisplayContext;
 import com.liferay.portal.kernel.dao.search.EmptyOnClickRowChecker;
 import com.liferay.portal.kernel.dao.search.RowChecker;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
@@ -84,23 +83,17 @@ public class EntriesChecker extends EmptyOnClickRowChecker {
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		JournalArticle article = null;
 		JournalFolder folder = null;
 
 		String articleId = GetterUtil.getString(primaryKey);
 
-		try {
-			article = JournalArticleServiceUtil.fetchArticle(
-				themeDisplay.getScopeGroupId(), articleId);
+		JournalArticle article = JournalArticleLocalServiceUtil.fetchArticle(
+			themeDisplay.getScopeGroupId(), articleId);
 
-			if (article == null) {
-				long folderId = GetterUtil.getLong(primaryKey);
+		if (article == null) {
+			long folderId = GetterUtil.getLong(primaryKey);
 
-				folder = JournalFolderServiceUtil.fetchFolder(folderId);
-			}
-		}
-		catch (PortalException pe) {
-			return StringPool.BLANK;
+			folder = JournalFolderLocalServiceUtil.fetchFolder(folderId);
 		}
 
 		String name = null;
