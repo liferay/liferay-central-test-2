@@ -2,6 +2,46 @@ AUI.add(
 	'liferay-workflow-tasks',
 	function(A) {
 		var WorkflowTasks = {
+			moveFormDataFromDialog: function(form) {
+				var children = form.get('children');
+
+				var entryActionColumn;
+				var updatedComments;
+				var updatedContent;
+
+				if (form && form.hasChildNodes() && children.size() >= 2) {
+					updatedContent = children.item(0);
+					updatedComments = children.item(1);
+				}
+
+				if (updatedContent) {
+					var contentId = updatedContent.attr('id');
+
+					var originalColumnId = contentId.substring(0, 4);
+
+					if (contentId.search('[a-zA-Z]{4}update(Asignee|AsigneeToMe)') != -1) {
+						originalColumnId += 'updateDueDate';
+					}
+					else if (contentId.search('[a-zA-Z]{4}updateDueDate') != -1) {
+						originalColumnId += 'updateAsignee';
+					}
+
+					if (originalColumnId) {
+						entryActionColumn = A.one('#' + originalColumnId).get('parentNode');
+
+						entryActionColumn.append(updatedContent);
+
+						updatedContent.attr('hidden', true);
+					}
+				}
+
+				if (updatedComments && entryActionColumn) {
+					entryActionColumn.append(updatedComments);
+
+					updatedComments.attr('hidden', true);
+				}
+			},
+
 			onTaskClick: function(event, randomId) {
 				var instance = this;
 
@@ -34,6 +74,8 @@ AUI.add(
 			},
 
 			showPopup: function(url, content, title, randomId, height) {
+				var instance = this;
+
 				var form = A.Node.create('<form />');
 
 				form.setAttribute('action', url);
@@ -51,38 +93,6 @@ AUI.add(
 					comments.show();
 				}
 
-				var moveFormDataFromDialog =  function(form) {
-					if (form && form.hasChildNodes() && form.get('children')._nodes.length >= 2) {
-						var updatedContent = form.get('children')._nodes[0];
-						var updatedComments = form.get('children')._nodes[1];
-					}
-
-					if (updatedContent) {
-						var originalColumnId;
-
-						if (updatedContent.id.search('[a-zA-Z]{4}update(Asignee|AsigneeToMe)') != -1) {
-							originalColumnId = updatedContent.id.substring(0, 4) + "updateDueDate";
-						}
-						else if (updatedContent.id.search('[a-zA-Z]{4}updateDueDate') != -1) {
-							originalColumnId = updatedContent.id.substring(0, 4) + "updateAsignee";
-						}
-
-						if (originalColumnId) {
-							var entryActionColumn = document.getElementById(originalColumnId).parentNode;
-
-							entryActionColumn.appendChild(updatedContent);
-
-							updatedContent.hidden  = true;
-						}
-					}
-
-					if (updatedComments && entryActionColumn) {
-						entryActionColumn.appendChild(updatedComments);
-
-						updatedComments.hidden  = true;
-					}
-				};
-
 				var dialog = Liferay.Util.Window.getWindow(
 					{
 						dialog: {
@@ -91,13 +101,13 @@ AUI.add(
 							height: height,
 							on: {
 								destroy: function() {
-									moveFormDataFromDialog(form);
+									instance.moveFormDataFromDialog(form);
 								}
 							},
 							toolbars: {
 								footer: [
 									{
-										cssClass: "btn-lg btn-primary",
+										cssClass: 'btn-lg btn-primary',
 										label: Liferay.Language.get('done'),
 										on: {
 											click: function() {
@@ -106,7 +116,7 @@ AUI.add(
 										}
 									},
 									{
-										cssClass: "btn-lg btn-cancel btn-link",
+										cssClass: 'btn-cancel btn-lg btn-link',
 										label: Liferay.Language.get('cancel'),
 										on: {
 											click: function() {
