@@ -53,7 +53,7 @@ public class OAuth10aUtil {
 		Response response = oAuthRequest.send();
 
 		if (!response.isSuccessful()) {
-			throw new Exception("Request failed");
+			throw new Exception("Response is not successful");
 		}
 
 		return response.getBody();
@@ -62,12 +62,12 @@ public class OAuth10aUtil {
 	public static byte[] tokenToByteArray(String token) {
 		token = token.substring(1, token.length() - 1);
 
-		String[] byteValues = token.split(",");
+		String[] tokenParts = token.split(",");
 
-		byte[] bytes = new byte[byteValues.length];
+		byte[] bytes = new byte[tokenParts.length];
 
 		for (int i = 0; i < bytes.length; i++) {
-			bytes[i] = Byte.parseByte(byteValues[i].trim());
+			bytes[i] = Byte.parseByte(tokenParts[i].trim());
 		}
 
 		return bytes;
