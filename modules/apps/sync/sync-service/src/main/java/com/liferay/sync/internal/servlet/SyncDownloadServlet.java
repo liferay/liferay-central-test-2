@@ -21,6 +21,7 @@ import com.liferay.document.library.kernel.model.DLFileVersion;
 import com.liferay.document.library.kernel.service.DLAppService;
 import com.liferay.document.library.kernel.service.DLFileEntryLocalService;
 import com.liferay.document.library.kernel.service.DLFileVersionLocalService;
+import com.liferay.portal.kernel.exception.NoSuchImageException;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
@@ -38,7 +39,7 @@ import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionCheckerFactoryUtil;
 import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.service.GroupLocalService;
-import com.liferay.portal.kernel.service.ImageService;
+import com.liferay.portal.kernel.service.ImageLocalService;
 import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.PortalSessionThreadLocal;
@@ -134,7 +135,7 @@ public class SyncDownloadServlet extends HttpServlet {
 			if (pathArray[0].equals("image")) {
 				long imageId = GetterUtil.getLong(pathArray[1]);
 
-				sendImage(response, imageId);
+				sendImage(request, response, imageId);
 			}
 			else if (pathArray[0].equals("zip")) {
 				String zipFileIds = ParamUtil.get(
@@ -418,7 +419,9 @@ public class SyncDownloadServlet extends HttpServlet {
 		}
 	}
 
-	protected void sendImage(HttpServletResponse response, long imageId)
+	protected void sendImage(
+			HttpServletRequest request, HttpServletResponse response,
+			long imageId)
 		throws Exception {
 
 		User user = _userLocalService.fetchUser(imageId);
@@ -427,7 +430,15 @@ public class SyncDownloadServlet extends HttpServlet {
 			imageId = user.getPortraitId();
 		}
 
-		Image image = _imageService.getImage(imageId);
+		Image image = _imageLocalService.fetchImage(imageId);
+
+		if (image == null) {
+			PortalUtil.sendError(
+				HttpServletResponse.SC_NOT_FOUND, new NoSuchImageException(),
+				request, response);
+
+			return;
+		}
 
 		String type = image.getType();
 
@@ -568,8 +579,8 @@ public class SyncDownloadServlet extends HttpServlet {
 	}
 
 	@Reference(unbind = "-")
-	protected void setImageService(ImageService imageService) {
-		_imageService = imageService;
+	protected void setImageLocalService(ImageLocalService imageLocalService) {
+		_imageLocalService = imageLocalService;
 	}
 
 	@Reference(unbind = "-")
@@ -586,7 +597,7 @@ public class SyncDownloadServlet extends HttpServlet {
 	private DLFileEntryLocalService _dlFileEntryLocalService;
 	private DLFileVersionLocalService _dlFileVersionLocalService;
 	private GroupLocalService _groupLocalService;
-	private ImageService _imageService;
+	private ImageLocalService _imageLocalService;
 	private UserLocalService _userLocalService;
 
 }
