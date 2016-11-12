@@ -70,12 +70,12 @@ public class JSONUtil {
 		return jsonObject.optString(name);
 	}
 
-	public static JSONArray toJSONArray(String content) throws Exception {
-		return new JSONArray(content);
+	public static JSONArray toJSONArray(String json) throws Exception {
+		return new JSONArray(json);
 	}
 
-	public static JSONObject toJSONObject(String content) throws Exception {
-		return new JSONObject(content);
+	public static JSONObject toJSONObject(String json) throws Exception {
+		return new JSONObject(json);
 	}
 
 }
