@@ -52,7 +52,7 @@ public class OAuth20Util {
 		Response response = oAuthRequest.send();
 
 		if (!response.isSuccessful()) {
-			throw new Exception("Request failed");
+			throw new Exception("Response is not successful");
 		}
 
 		return response.getBody();
