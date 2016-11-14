@@ -23,34 +23,37 @@ import org.objectweb.asm.Opcodes;
  */
 public class EmptyMethodVisitor extends MethodVisitor {
 
-	public EmptyMethodVisitor(MethodVisitor mv, String superName) {
+	public EmptyMethodVisitor(MethodVisitor methodVisitor, String superName) {
 		super(Opcodes.ASM5, null);
 
-		_methodMethodVisitor = mv;
+		_methodVisitor = methodVisitor;
 		_superName = superName;
 	}
 
 	@Override
 	public AnnotationVisitor visitAnnotation(String desc, boolean visible) {
-		return _methodMethodVisitor.visitAnnotation(desc, visible);
+		return _methodVisitor.visitAnnotation(desc, visible);
 	}
 
 	@Override
 	public void visitCode() {
-		_methodMethodVisitor.visitCode();
+		_methodVisitor.visitCode();
 
 		if (_superName != null) {
-			_methodMethodVisitor.visitVarInsn(Opcodes.ALOAD, 0);
-			_methodMethodVisitor.visitMethodInsn(
+			_methodVisitor.visitVarInsn(Opcodes.ALOAD, 0);
+
+			_methodVisitor.visitMethodInsn(
 				Opcodes.INVOKESPECIAL, _superName, "<init>", "()V", false);
 		}
 
-		_methodMethodVisitor.visitInsn(Opcodes.RETURN);
-		_methodMethodVisitor.visitMaxs(0, 0);
-		_methodMethodVisitor.visitEnd();
+		_methodVisitor.visitInsn(Opcodes.RETURN);
+
+		_methodVisitor.visitMaxs(0, 0);
+
+		_methodVisitor.visitEnd();
 	}
 
-	private final MethodVisitor _methodMethodVisitor;
+	private final MethodVisitor _methodVisitor;
 	private final String _superName;
 
 }
