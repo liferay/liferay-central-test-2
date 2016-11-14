@@ -61,7 +61,7 @@ public class ImageStorageTest {
 
 		String fileVersionPath = _imageStorage.getFileVersionPath(fileVersion);
 
-		Assert.assertEquals("adaptive/1/2/3/4", fileVersionPath);
+		Assert.assertEquals("adaptive/1/2/3/4/", fileVersionPath);
 	}
 
 	@Test
