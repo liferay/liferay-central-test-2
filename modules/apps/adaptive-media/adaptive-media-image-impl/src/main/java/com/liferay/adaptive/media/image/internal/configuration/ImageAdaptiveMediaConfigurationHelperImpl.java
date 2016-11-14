@@ -25,7 +25,6 @@ import com.liferay.registry.RegistryUtil;
 
 import java.io.IOException;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Dictionary;
 import java.util.List;
