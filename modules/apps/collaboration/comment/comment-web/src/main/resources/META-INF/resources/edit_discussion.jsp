@@ -76,7 +76,7 @@ if (comment instanceof WorkflowableComment) {
 				<aui:workflow-status model="<%= CommentConstants.getDiscussionClass() %>" status="<%= workflowableComment.getStatus() %>" />
 			</c:if>
 
-			<liferay-ui:input-editor contents="<%= comment.getBody() %>" editorName='<%= PropsUtil.get("editor.wysiwyg.portal-web.docroot.html.taglib.ui.discussion.jsp") %>' name="body" showSource="<%= false %>" />
+			<liferay-ui:input-editor configKey="commentEditor" contents="<%= comment.getBody() %>" editorName='<%= PropsUtil.get("editor.wysiwyg.portal-web.docroot.html.taglib.ui.discussion.jsp") %>' name="body" showSource="<%= false %>" />
 		</aui:fieldset>
 
 		<c:if test="<%= parentComment != null %>">
