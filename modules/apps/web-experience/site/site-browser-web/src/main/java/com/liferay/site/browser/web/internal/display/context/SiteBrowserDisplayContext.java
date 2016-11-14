@@ -261,6 +261,14 @@ public class SiteBrowserDisplayContext {
 				company.getCompanyId(), classNameIds,
 				groupSearchTerms.getKeywords(), getGroupParams(), start, end,
 				groupSearch.getOrderByComparator());
+
+			groups = _filterGroups(groups, themeDisplay.getPermissionChecker());
+
+			total = groups.size();
+
+			total += additionalSites;
+
+			groupSearch.setTotal(total);
 		}
 
 		results.addAll(groups);
@@ -362,6 +370,21 @@ public class SiteBrowserDisplayContext {
 		_privateLayout = ParamUtil.getBoolean(_request, "privateLayout");
 
 		return _privateLayout;
+	}
+
+	private List<Group> _filterGroups(
+			List<Group> groups, PermissionChecker permissionChecker)
+		throws Exception {
+
+		List<Group> filteredGroups = new ArrayList();
+
+		for (Group group : groups) {
+			if (permissionChecker.isGroupAdmin(group.getGroupId())) {
+				filteredGroups.add(group);
+			}
+		}
+
+		return filteredGroups;
 	}
 
 	private List<Group> _filterGroups(List<Group> groups, String filter)
