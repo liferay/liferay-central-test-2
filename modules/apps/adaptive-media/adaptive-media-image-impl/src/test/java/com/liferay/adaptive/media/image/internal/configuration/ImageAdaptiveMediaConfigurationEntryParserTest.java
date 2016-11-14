@@ -16,6 +16,7 @@ package com.liferay.adaptive.media.image.internal.configuration;
 
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.Assert;
@@ -44,6 +45,59 @@ public class ImageAdaptiveMediaConfigurationEntryParserTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void testEmptyUUID() {
 		_configurationEntryParser.parse("test::height=100;width=200");
+	}
+
+	@Test
+	public void testGetConfigurationStringWithHeight() {
+		Map<String, String> properties = new HashMap<>();
+
+		properties.put("height", "100");
+
+		ImageAdaptiveMediaConfigurationEntry configurationEntry =
+			new ImageAdaptiveMediaConfigurationEntryImpl(
+				"test", "12345", properties);
+
+		String configurationString =
+			_configurationEntryParser.getConfigurationString(
+				configurationEntry);
+
+		Assert.assertEquals("test:12345:height=100", configurationString);
+	}
+
+	@Test
+	public void testGetConfigurationStringWithHeightAndWidth() {
+		Map<String, String> properties = new HashMap<>();
+
+		properties.put("height", "100");
+		properties.put("width", "200");
+
+		ImageAdaptiveMediaConfigurationEntry configurationEntry =
+			new ImageAdaptiveMediaConfigurationEntryImpl(
+				"test", "12345", properties);
+
+		String configurationString =
+			_configurationEntryParser.getConfigurationString(
+				configurationEntry);
+
+		Assert.assertEquals(
+			"test:12345:height=100;width=200", configurationString);
+	}
+
+	@Test
+	public void testGetConfigurationStringWithWidth() {
+		Map<String, String> properties = new HashMap<>();
+
+		properties.put("width", "200");
+
+		ImageAdaptiveMediaConfigurationEntry configurationEntry =
+			new ImageAdaptiveMediaConfigurationEntryImpl(
+				"test", "12345", properties);
+
+		String configurationString =
+			_configurationEntryParser.getConfigurationString(
+				configurationEntry);
+
+		Assert.assertEquals("test:12345:width=200", configurationString);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
