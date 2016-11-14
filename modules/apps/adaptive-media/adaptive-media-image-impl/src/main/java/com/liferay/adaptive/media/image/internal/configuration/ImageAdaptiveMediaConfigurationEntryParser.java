@@ -78,7 +78,7 @@ public class ImageAdaptiveMediaConfigurationEntryParser {
 		if (properties.get("height") != null) {
 			int height = GetterUtil.getInteger(properties.get("height"));
 
-			sb.append(height);
+			sb.append("height=" + height);
 
 			if (properties.get("width") != null) {
 				sb.append(StringPool.SEMICOLON);
@@ -88,7 +88,7 @@ public class ImageAdaptiveMediaConfigurationEntryParser {
 		if (properties.get("width") != null) {
 			int width = GetterUtil.getInteger(properties.get("width"));
 
-			sb.append(width);
+			sb.append("width=" + width);
 		}
 
 		return sb.toString();

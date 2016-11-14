@@ -57,13 +57,19 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 		Collection<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
 			getImageAdaptiveMediaConfigurationEntries(companyId);
 
+		List<ImageAdaptiveMediaConfigurationEntry> updatedConfigurationEntries =
+			configurationEntries.stream().filter(
+				configurationEntry ->
+					!configurationEntry.getUUID().equals(uuid)).collect(
+				Collectors.toList());
+
 		ImageAdaptiveMediaConfigurationEntry configurationEntry =
 			new ImageAdaptiveMediaConfigurationEntryImpl(
 				name, uuid, properties);
 
-		configurationEntries.add(configurationEntry);
+		updatedConfigurationEntries.add(configurationEntry);
 
-		_updateConfiguration(new ArrayList<>(configurationEntries));
+		_updateConfiguration(updatedConfigurationEntries);
 	}
 
 	@Override
