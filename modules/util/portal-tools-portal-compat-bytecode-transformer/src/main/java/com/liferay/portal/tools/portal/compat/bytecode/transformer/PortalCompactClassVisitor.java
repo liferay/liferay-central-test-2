@@ -39,7 +39,8 @@ public class PortalCompactClassVisitor extends ClassVisitor {
 		cv.visit(version, access, name, signature, superName, interfaces);
 
 		_superName = superName;
-		_isInterface = Modifier.isInterface(access);
+
+		_interface = Modifier.isInterface(access);
 	}
 
 	@Override
@@ -65,7 +66,7 @@ public class PortalCompactClassVisitor extends ClassVisitor {
 		MethodVisitor methodVisitor = cv.visitMethod(
 			access, name, desc, signature, exceptions);
 
-		if (_isInterface) {
+		if (_interface) {
 			return methodVisitor;
 		}
 
@@ -89,7 +90,7 @@ public class PortalCompactClassVisitor extends ClassVisitor {
 			methodVisitor, argumentsSize);
 	}
 
-	private boolean _isInterface;
+	private boolean _interface;
 	private String _superName;
 
 }
