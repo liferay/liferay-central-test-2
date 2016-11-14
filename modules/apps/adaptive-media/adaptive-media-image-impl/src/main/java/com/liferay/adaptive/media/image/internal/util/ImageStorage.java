@@ -25,9 +25,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
 import java.util.Optional;
 
 import org.osgi.service.component.annotations.Component;
@@ -42,28 +39,26 @@ public class ImageStorage {
 		FileVersion sourceFileVersion, FileVersion destinationFileVersion) {
 
 		try {
-			Path destinationBasePath = getFileVersionPath(
+			String destinationBasePath = getFileVersionPath(
 				destinationFileVersion);
 
-			Path sourceBasePath = getFileVersionPath(sourceFileVersion);
+			String sourceBasePath = getFileVersionPath(sourceFileVersion);
 
 			String[] sourceFileNames = DLStoreUtil.getFileNames(
 				sourceFileVersion.getCompanyId(), CompanyConstants.SYSTEM,
-				sourceBasePath.toString());
+				sourceBasePath);
 
 			for (String sourceFileName : sourceFileNames) {
-				Path sourceFileNamePath = Paths.get(sourceFileName);
-
 				try (InputStream inputStream = getFileAsStream(
-						sourceFileVersion.getCompanyId(), sourceFileNamePath)) {
+						sourceFileVersion.getCompanyId(), sourceFileName)) {
 
-					Path destinationPath = destinationBasePath.resolve(
-						sourceFileNamePath);
+					String destinationPath =
+						destinationBasePath + sourceFileName;
 
 					DLStoreUtil.addFile(
 						sourceFileVersion.getCompanyId(),
-						CompanyConstants.SYSTEM, destinationPath.toString(),
-						false, inputStream);
+						CompanyConstants.SYSTEM, destinationPath, false,
+						inputStream);
 				}
 			}
 		}
@@ -73,11 +68,11 @@ public class ImageStorage {
 	}
 
 	public void delete(FileVersion fileVersion) {
-		Path fileVersionPath = getFileVersionPath(fileVersion);
+		String fileVersionPath = getFileVersionPath(fileVersion);
 
 		DLStoreUtil.deleteDirectory(
 			fileVersion.getCompanyId(), CompanyConstants.SYSTEM,
-			fileVersionPath.toString());
+			fileVersionPath);
 	}
 
 	public InputStream getContentStream(
@@ -85,7 +80,7 @@ public class ImageStorage {
 		ImageAdaptiveMediaConfigurationEntry configurationEntry) {
 
 		try {
-			Path fileVersionVariantPath = getFileVersionVariantPath(
+			String fileVersionVariantPath = getFileVersionVariantPath(
 				fileVersion, configurationEntry);
 
 			return getFileAsStream(
@@ -101,12 +96,12 @@ public class ImageStorage {
 		ImageAdaptiveMediaConfigurationEntry configurationEntry) {
 
 		try {
-			Path fileVersionVariantPath = getFileVersionVariantPath(
+			String fileVersionVariantPath = getFileVersionVariantPath(
 				fileVersion, configurationEntry);
 
 			if (!DLStoreUtil.hasDirectory(
 					fileVersion.getCompanyId(), CompanyConstants.SYSTEM,
-					fileVersionVariantPath.toString())) {
+					fileVersionVariantPath)) {
 
 				return Optional.empty();
 			}
@@ -128,45 +123,43 @@ public class ImageStorage {
 		InputStream inputStream) {
 
 		try {
-			Path fileVersionVariantPath = getFileVersionVariantPath(
+			String fileVersionVariantPath = getFileVersionVariantPath(
 				fileVersion, configurationEntry);
 
 			DLStoreUtil.addFile(
 				fileVersion.getCompanyId(), CompanyConstants.SYSTEM,
-				fileVersionVariantPath.toString(), false, inputStream);
+				fileVersionVariantPath, false, inputStream);
 		}
 		catch (PortalException pe) {
 			throw new AdaptiveMediaRuntimeException.IOException(pe);
 		}
 	}
 
-	protected File getFile(long companyId, Path path) throws PortalException {
-		return DLStoreUtil.getFile(
-			companyId, CompanyConstants.SYSTEM, path.toString());
+	protected File getFile(long companyId, String path) throws PortalException {
+		return DLStoreUtil.getFile(companyId, CompanyConstants.SYSTEM, path);
 	}
 
-	protected InputStream getFileAsStream(long companyId, Path path)
+	protected InputStream getFileAsStream(long companyId, String path)
 		throws PortalException {
 
 		return DLStoreUtil.getFileAsStream(
-			companyId, CompanyConstants.SYSTEM, path.toString());
+			companyId, CompanyConstants.SYSTEM, path);
 	}
 
-	protected Path getFileVersionPath(FileVersion fileVersion) {
-		return Paths.get(
-			String.format(
-				"adaptive/%d/%d/%d/%d/", fileVersion.getGroupId(),
-				fileVersion.getRepositoryId(), fileVersion.getFileEntryId(),
-				fileVersion.getFileVersionId()));
+	protected String getFileVersionPath(FileVersion fileVersion) {
+		return String.format(
+			"adaptive/%d/%d/%d/%d/", fileVersion.getGroupId(),
+			fileVersion.getRepositoryId(), fileVersion.getFileEntryId(),
+			fileVersion.getFileVersionId());
 	}
 
-	protected Path getFileVersionVariantPath(
+	protected String getFileVersionVariantPath(
 		FileVersion fileVersion,
 		ImageAdaptiveMediaConfigurationEntry configurationEntry) {
 
-		Path basePath = getFileVersionPath(fileVersion);
+		String basePath = getFileVersionPath(fileVersion);
 
-		return basePath.resolve(configurationEntry.getUUID());
+		return basePath + configurationEntry.getUUID();
 	}
 
 }

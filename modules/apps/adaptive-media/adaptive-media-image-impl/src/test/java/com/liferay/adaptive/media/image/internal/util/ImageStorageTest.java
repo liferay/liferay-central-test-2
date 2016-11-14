@@ -19,8 +19,6 @@ import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMedi
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.util.StringUtil;
 
-import java.nio.file.Path;
-
 import java.util.Collections;
 
 import org.junit.Assert;
@@ -61,9 +59,9 @@ public class ImageStorageTest {
 			4L
 		);
 
-		Path fileVersionPath = _imageStorage.getFileVersionPath(fileVersion);
+		String fileVersionPath = _imageStorage.getFileVersionPath(fileVersion);
 
-		Assert.assertEquals("adaptive/1/2/3/4", fileVersionPath.toString());
+		Assert.assertEquals("adaptive/1/2/3/4", fileVersionPath);
 	}
 
 	@Test
@@ -98,11 +96,10 @@ public class ImageStorageTest {
 			new ImageAdaptiveMediaConfigurationEntryImpl(
 				StringUtil.randomString(), "xyz", Collections.emptyMap());
 
-		Path fileVersionVariantPath = _imageStorage.getFileVersionVariantPath(
+		String fileVersionVariantPath = _imageStorage.getFileVersionVariantPath(
 			fileVersion, configurationEntry);
 
-		Assert.assertEquals(
-			"adaptive/1/2/3/4/xyz", fileVersionVariantPath.toString());
+		Assert.assertEquals("adaptive/1/2/3/4/xyz", fileVersionVariantPath);
 	}
 
 	private final ImageStorage _imageStorage = new ImageStorage();
