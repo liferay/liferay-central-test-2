@@ -595,7 +595,7 @@ public class DLFileEntryIndexer
 		indexableActionableDynamicQuery.setCompanyId(companyId);
 		indexableActionableDynamicQuery.setGroupId(groupId);
 		indexableActionableDynamicQuery.setInterval(
-			PropsValues.DL_FILE_REINDEXING_INTERVAL);
+			PropsValues.DL_FILE_INDEXING_INTERVAL);
 		indexableActionableDynamicQuery.setPerformActionMethod(
 			new ActionableDynamicQuery.PerformActionMethod<DLFileEntry>() {
 
