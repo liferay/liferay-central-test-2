@@ -1232,7 +1232,6 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 		public void assetEntryShouldBeAddedWhenDraft() throws Exception {
 			String fileName = RandomTestUtil.randomString();
 			byte[] bytes = CONTENT.getBytes();
-
 			String[] assetTagNames = new String[] {"hello"};
 
 			FileEntry fileEntry = addFileEntry(
@@ -1280,7 +1279,6 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 			throws Exception {
 
 			String fileName = RandomTestUtil.randomString();
-
 			String[] assetTagNames = new String[] {"hello"};
 
 			FileEntry fileEntry = addFileEntry(
