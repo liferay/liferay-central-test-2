@@ -16,7 +16,9 @@ package com.liferay.events.display.web.internal.upgrade;
 
 import com.liferay.events.display.web.internal.upgrade.v1_0_0.UpgradeEventsDisplayPortletId;
 import com.liferay.portal.kernel.upgrade.DummyUpgradeStep;
+import com.liferay.portal.kernel.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.registry.UpgradeStepRegistrator;
+import com.liferay.portal.upgrade.release.BaseUpgradeWebModuleRelease;
 
 import org.osgi.service.component.annotations.Component;
 
@@ -28,6 +30,28 @@ public class EventsDisplayWebUpgrade implements UpgradeStepRegistrator {
 
 	@Override
 	public void register(Registry registry) {
+		BaseUpgradeWebModuleRelease upgradeWebModuleRelease =
+			new BaseUpgradeWebModuleRelease() {
+
+			@Override
+			protected String getBundleSymbolicName() {
+				return "com.liferay.events.display.web";
+			}
+
+			@Override
+			protected String[] getPortletIds() {
+				return new String[] {"1_WAR_eventsdisplayportlet"};
+			}
+
+		};
+
+		try {
+			upgradeWebModuleRelease.upgrade();
+		}
+		catch (UpgradeException ue) {
+			throw new RuntimeException(ue);
+		}
+
 		registry.register(
 			"com.liferay.events.display.web", "0.0.0", "1.0.0",
 			new DummyUpgradeStep());
