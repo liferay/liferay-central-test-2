@@ -64,17 +64,11 @@ public class SyncSiteService {
 			return syncSite;
 		}
 
-		syncSite.setActive(true);
-		syncSite.setState(SyncSite.STATE_SYNCED);
-		syncSite.setUiEvent(SyncSite.UI_EVENT_NONE);
-
 		if (reset) {
 			syncSite.setRemoteSyncTime(-1);
 
 			deleteSyncFiles(syncSite);
 		}
-
-		update(syncSite);
 
 		// Sync file
 
@@ -99,6 +93,12 @@ public class SyncSiteService {
 
 			SyncFileService.update(syncFile);
 		}
+
+		syncSite.setActive(true);
+		syncSite.setState(SyncSite.STATE_SYNCED);
+		syncSite.setUiEvent(SyncSite.UI_EVENT_NONE);
+
+		update(syncSite);
 
 		return syncSite;
 	}
