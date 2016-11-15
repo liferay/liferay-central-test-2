@@ -48,6 +48,7 @@ public class UpgradeKBAttachments extends UpgradeProcess {
 	@Override
 	protected void doUpgrade() throws Exception {
 		updateAttachments();
+
 		deleteEmptyDirectories();
 	}
 
@@ -102,12 +103,12 @@ public class UpgradeKBAttachments extends UpgradeProcess {
 					classPK = kbArticleId;
 				}
 
-				updateEntryAttachments(companyId, groupId, classPK, userId);
+				updateAttachments(companyId, groupId, classPK, userId);
 			}
 		}
 	}
 
-	protected void updateEntryAttachments(
+	protected void updateAttachments(
 			long companyId, long groupId, long resourcePrimKey, long userId)
 		throws Exception {
 
