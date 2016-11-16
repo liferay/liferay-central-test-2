@@ -438,19 +438,18 @@ AUI.add(
 							);
 						}
 						else if (schedulerEvent.isMasterBooking()) {
-							remoteServices.getCalendarBookingInvitees(
-								schedulerEvent.get('calendarBookingId'),
-								function(invitees) {
-									var confirmationMessage = Liferay.Language.get('would-you-like-to-delete-this-event');
+							var confirmationMessage;
 
-									if (invitees.length > 1) {
-										confirmationMessage = Liferay.Language.get('deleting-this-event-will-cancel-the-meeting-with-your-guests-would-you-like-to-delete');
-									}
+							if (schedulerEvent.get('hasChildCalendarBookings')) {
+								confirmationMessage = Liferay.Language.get('deleting-this-event-will-cancel-the-meeting-with-your-guests-would-you-like-to-delete');
+							}
+							else {
+								confirmationMessage = Liferay.Language.get('would-you-like-to-delete-this-event');
+							}
 
-									if (confirm(confirmationMessage)) {
-										remoteServices.deleteEvent(schedulerEvent, success);
-									}
-								})
+							if (confirm(confirmationMessage)) {
+								remoteServices.deleteEvent(schedulerEvent, success);
+							}
 						}
 
 						event.preventDefault();
