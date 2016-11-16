@@ -27,11 +27,15 @@ AUI.add(
 					}
 
 					if (originalColumnId) {
-						entryActionColumn = A.one('#' + originalColumnId).get('parentNode');
+						var originalColumnNode = A.one('#' + originalColumnId);
 
-						entryActionColumn.append(updatedContent);
+						if (originalColumnNode) {
+							entryActionColumn = originalColumnNode.get('parentNode');
 
-						updatedContent.attr('hidden', true);
+							entryActionColumn.append(updatedContent);
+
+							updatedContent.attr('hidden', true);
+						}
 					}
 				}
 
