@@ -1314,9 +1314,9 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 			catch (InterruptedException ie) {
 				StringBundler sb = new StringBundler(4);
 
+				sb.append("Unable to initialize ");
 				sb.append(bundle);
-				sb.append(" could not be initialized.");
-				sb.append("Try to delete ${liferay.home}/osgi/state folder ");
+				sb.append(". Delete the directory ${liferay.home}/osgi/state ");
 				sb.append("and restart.");
 
 				_log.fatal(sb.toString());
