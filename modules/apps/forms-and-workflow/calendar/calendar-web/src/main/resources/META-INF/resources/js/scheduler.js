@@ -105,6 +105,7 @@ AUI.add(
 					content: {
 						getter: function(val) {
 							if (val) {
+								val = LString.unescapeHTML(val);
 								val = LString.escapeHTML(val);
 							}
 
