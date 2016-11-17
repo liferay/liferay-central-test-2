@@ -221,7 +221,7 @@ public class LPKGDeployerTest {
 							StandardCopyOption.REPLACE_EXISTING);
 
 						try (ZipFile zipFile2 = new ZipFile(
-							tempFilePath.toFile());
+								tempFilePath.toFile());
 							InputStream inputStream2 = zipFile2.getInputStream(
 								new ZipEntry(
 									"WEB-INF/liferay-plugin-package." +
