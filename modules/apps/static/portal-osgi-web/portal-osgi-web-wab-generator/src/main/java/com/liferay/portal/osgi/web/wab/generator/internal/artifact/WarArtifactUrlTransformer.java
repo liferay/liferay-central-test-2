@@ -63,30 +63,26 @@ public class WarArtifactUrlTransformer implements ArtifactUrlTransformer {
 
 	private boolean _hasResources(File artifact) {
 		try (ZipFile zipFile = new ZipFile(artifact)) {
-			ZipEntry resourceDir = zipFile.getEntry(
-				"WEB-INF/classes/resources-importer/");
+			if (zipFile.getEntry(
+					"WEB-INF/classes/resources-importer/") != null) {
 
-			if (resourceDir != null) {
 				return true;
 			}
 
-			ZipEntry templateDir = zipFile.getEntry(
-				"WEB-INF/classes/templates-importer/");
+			if (zipFile.getEntry(
+					"WEB-INF/classes/templates-importer/") != null) {
 
-			if (templateDir != null) {
 				return true;
 			}
 
-			ZipEntry pluginProperties = zipFile.getEntry(
+			ZipEntry zipEntry = zipFile.getEntry(
 				"WEB-INF/liferay-plugin-package.properties");
 
-			if (pluginProperties == null) {
+			if (zipEntry == null) {
 				return false;
 			}
 
-			try (InputStream inputStream = zipFile.getInputStream(
-					pluginProperties)) {
-
+			try (InputStream inputStream = zipFile.getInputStream(zipEntry)) {
 				Properties properties = new Properties();
 
 				properties.load(inputStream);
