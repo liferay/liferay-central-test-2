@@ -1771,7 +1771,10 @@ public class StringUtil {
 		StringBundler sb = new StringBundler(2 * col.size());
 
 		for (Object object : col) {
-			sb.append(String.valueOf(object).trim());
+			String objectString = String.valueOf(object);
+
+			sb.append(objectString.trim());
+
 			sb.append(delimiter);
 		}
 
