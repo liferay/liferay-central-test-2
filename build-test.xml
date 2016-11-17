@@ -5775,15 +5775,17 @@ javascript.fast.load=false</echo>
 			<then>
 				<beanshell>
 					<![CDATA[
-						String blacklistPortalProfileNamesRemoveString = project.getProperty("blacklist.portal.profile.names.remove");
+						StringBuilder sb = new StringBuilder();
+
 						String blacklistPortalProfileNamesString = project.getProperty("blacklist.portal.profile.names");
 
 						List blacklistPortalProfileNames = new ArrayList(Arrays.asList(blacklistPortalProfileNamesString.split(",")));
+
+						String blacklistPortalProfileNamesRemoveString = project.getProperty("blacklist.portal.profile.names.remove");
+
 						List blacklistPortalProfileNamesRemove = new ArrayList(Arrays.asList(blacklistPortalProfileNamesRemoveString.split(",")));
 
 						blacklistPortalProfileNames.removeAll(blacklistPortalProfileNamesRemove);
-
-						StringBuilder sb = new StringBuilder();
 
 						for (int i = 0; i < blacklistPortalProfileNames.size(); i++) {
 							sb.append(blacklistPortalProfileNames.get(i));
