@@ -72,17 +72,17 @@ public class RebaseErrorTopLevelBuild extends TopLevelBuild {
 				return result;
 			}
 
-			long start = System.currentTimeMillis();
+			long time = System.currentTimeMillis();
 
 			Map<String, String> stopPropertiesMap = getStopPropertiesMap();
 
 			while (!stopPropertiesMap.containsKey(
 						"TOP_LEVEL_GITHUB_COMMENT_ID")) {
 
-				if ((System.currentTimeMillis() - start) > (5 * 60 * 1000)) {
+				if ((System.currentTimeMillis() - time) > (5 * 60 * 1000)) {
 					System.out.println(
-						"rebase-error build did not generate a " +
-							"TOP_LEVEL_GITHUB_COMMENT_ID");
+						"No entry exists for TOP_LEVEL_GITHUB_COMMENT_ID in " +
+							"stop.properties");
 
 					return result;
 				}
