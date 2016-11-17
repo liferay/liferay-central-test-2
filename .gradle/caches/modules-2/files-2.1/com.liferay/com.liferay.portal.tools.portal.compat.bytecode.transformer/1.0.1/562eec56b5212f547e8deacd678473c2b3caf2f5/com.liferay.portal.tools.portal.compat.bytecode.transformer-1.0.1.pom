@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.liferay</groupId>
   <artifactId>com.liferay.portal.tools.portal.compat.bytecode.transformer</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
   <description>Liferay Portal Tools Portal Compat Bytecode Transformer</description>
   <licenses>
     <license>
