@@ -63,14 +63,14 @@ public class WarArtifactUrlTransformer implements ArtifactUrlTransformer {
 
 	private boolean _hasResources(File artifact) {
 		try (ZipFile zipFile = new ZipFile(artifact)) {
-			if (zipFile.getEntry(
-					"WEB-INF/classes/resources-importer/") != null) {
+			if (zipFile.getEntry("WEB-INF/classes/resources-importer/") !=
+					null) {
 
 				return true;
 			}
 
-			if (zipFile.getEntry(
-					"WEB-INF/classes/templates-importer/") != null) {
+			if (zipFile.getEntry("WEB-INF/classes/templates-importer/") !=
+					null) {
 
 				return true;
 			}
