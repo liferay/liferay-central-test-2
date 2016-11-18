@@ -1735,10 +1735,8 @@ public class DLAppHelperLocalServiceImpl
 		subscriptionSender.setHtmlFormat(true);
 		subscriptionSender.setLocalizedBodyMap(
 			LocalizationUtil.getMap(bodyLocalizedValuesMap));
-
 		subscriptionSender.setLocalizedContextAttribute(
 			"[$DOCUMENT_TYPE$]", locale -> dlFileEntryType.getName(locale));
-
 		subscriptionSender.setLocalizedSubjectMap(
 			LocalizationUtil.getMap(subjectLocalizedValuesMap));
 		subscriptionSender.setMailId(

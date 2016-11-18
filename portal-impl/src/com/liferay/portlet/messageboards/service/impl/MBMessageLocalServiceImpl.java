@@ -2331,7 +2331,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			}
 			catch (Exception e) {
 				_log.error(
-					"Could not parse message " + message.getMessageId() + " " +
+					"Unable to parse message " + message.getMessageId() + ": " +
 						e.getMessage());
 			}
 		}
@@ -2616,9 +2616,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				group.getDescriptiveName(locale);
 		}
 		catch (PortalException pe) {
-			_log.error(
-				"Could not retrieve group name for {groupId=" + groupId + "}",
-				pe);
+			_log.error("Unable to get group name for groiup " + groupId, pe);
 
 			return LanguageUtil.get(locale, "message-boards-home");
 		}

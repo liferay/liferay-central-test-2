@@ -493,12 +493,10 @@ public class KBCommentLocalServiceImpl extends KBCommentLocalServiceBaseImpl {
 		subscriptionSender.setCurrentUserId(userId);
 		subscriptionSender.setFrom(fromAddress, fromName);
 		subscriptionSender.setHtmlFormat(true);
-
 		subscriptionSender.setLocalizedContextAttribute(
 			"[$COMMENT_CREATE_DATE$]",
 			locale -> _getFormattedKBCommentCreateDate(kbComment, locale),
 			false);
-
 		subscriptionSender.setMailId("kb_article", kbArticle.getKbArticleId());
 		subscriptionSender.setPortletId(serviceContext.getPortletId());
 		subscriptionSender.setReplyToAddress(fromAddress);
