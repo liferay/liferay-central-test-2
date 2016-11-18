@@ -129,8 +129,8 @@ public class HttpTimelineProcessor implements TimelineProcessor {
 			"EEE MMM d hh:mm:ss Z yyyy", LocaleUtil.US);
 	private final Pattern _pattern = Pattern.compile(
 		"data-item-id=\"([0-9]+)\".*?data-user-id=\"([0-9]+)\".*?" +
-			"data-time-ms=\"([0-9]+)\".*?" +
-				"<p class=\"TweetTextSize TweetTextSize.*?>(.*?)</p>",
+			"data-time-ms=\"([0-9]+)\".*?<p class=\"TweetTextSize " +
+				"TweetTextSize.*?>(.*?)</p>",
 		Pattern.DOTALL);
 	private final Random _random = new Random();
 
