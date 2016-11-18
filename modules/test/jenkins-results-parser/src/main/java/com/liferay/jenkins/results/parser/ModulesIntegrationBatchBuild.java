@@ -85,7 +85,7 @@ public class ModulesIntegrationBatchBuild extends BatchBuild {
 				sb.append("detected at ");
 				sb.append(reinvokeErrorAxisBuild.getBuildURL());
 				sb.append(". This batch will be reinvoked.");
-				sb.append("\n\nError Marker:\n");
+				sb.append("\n\nError marker:\n");
 				sb.append(reinvokeErrorMarker);
 
 				System.out.println(sb);
@@ -112,11 +112,11 @@ public class ModulesIntegrationBatchBuild extends BatchBuild {
 				JenkinsResultsParserUtil.sendEmail(
 					sb.toString(),
 					"root@" + JenkinsResultsParserUtil.getHostName("UNKNOWN"),
-					subject, "shuyang.zhou@liferay.com, peter.yoo@liferay.com");
+					subject, "peter.yoo@liferay.com, shuyang.zhou@liferay.com");
 			}
 			catch (Exception e) {
 				System.out.println(
-					"Unable to send email notification. " + e.getMessage());
+					"Unable to send email notification: " + e.getMessage());
 			}
 		}
 	}
