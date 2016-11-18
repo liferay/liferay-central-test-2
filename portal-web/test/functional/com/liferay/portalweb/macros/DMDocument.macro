@@ -1043,7 +1043,15 @@
 			<var name="dmDocumentTitleEdit" value="${dmDocumentTitleEdit}" />
 		</execute>
 
-		<execute function="Click" locator1="Button#PUBLISH" />
+		<if>
+			<isset var="checkedOut" />
+			<then>
+				<execute function="Click" locator1="Button#SAVE" />
+			</then>
+			<else>
+				<execute function="Click" locator1="Button#PUBLISH" />
+			</else>
+		</if>
 
 		<execute macro="Alert#viewSuccessMessage" />
 	</command>
