@@ -53,19 +53,25 @@ public class CalendarResourceUtilTest {
 	}
 
 	@Test
-	public void testGetGroupCalendarResource() throws PortalException {
+	public void testGetGroupCalendarFetchesSameResource()
+		throws PortalException {
+
 		ServiceContext serviceContext = new ServiceContext();
 
-		CalendarResource calendarResource =
+		CalendarResource createdCalendarResource =
 			CalendarResourceUtil.getGroupCalendarResource(
 				_group.getGroupId(), serviceContext);
 
-		Assert.assertNotNull(calendarResource);
+		Assert.assertNotNull(createdCalendarResource);
 
-		calendarResource = CalendarResourceUtil.getGroupCalendarResource(
-			_group.getGroupId(), serviceContext);
+		CalendarResource fetchedCalendarResource =
+			CalendarResourceUtil.getGroupCalendarResource(
+				_group.getGroupId(), serviceContext);
 
-		Assert.assertNotNull(calendarResource);
+		Assert.assertNotNull(fetchedCalendarResource);
+		Assert.assertEquals(
+			createdCalendarResource.getCalendarResourceId(),
+			fetchedCalendarResource.getCalendarResourceId());
 	}
 
 	@Test
