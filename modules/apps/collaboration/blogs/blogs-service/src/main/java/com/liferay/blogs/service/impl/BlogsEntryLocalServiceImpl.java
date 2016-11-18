@@ -2288,8 +2288,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		}
 		catch (PortalException pe) {
 			_log.error(
-				"Could not retrieve group name for {groupId=" +
-					group.getGroupId() + "}",
+				"Unable to get descriptive name for group " +
+					group.getGroupId(),
 				pe);
 		}
 

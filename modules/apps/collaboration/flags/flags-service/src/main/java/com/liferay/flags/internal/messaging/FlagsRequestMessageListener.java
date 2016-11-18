@@ -305,8 +305,8 @@ public class FlagsRequestMessageListener extends BaseMessageListener {
 		}
 		catch (PortalException pe) {
 			_log.error(
-				"Could not retrieve group name for {groupId=" +
-					group.getGroupId() + "}",
+				"Unable to get descriptive name for group " +
+					group.getGroupId(),
 				pe);
 		}
 

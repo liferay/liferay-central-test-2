@@ -341,10 +341,8 @@ public class MembershipRequestLocalServiceImpl
 			user.getFullName());
 		subscriptionSender.setFrom(fromAddress, fromName);
 		subscriptionSender.setHtmlFormat(true);
-
 		subscriptionSender.setLocalizedContextAttribute(
 			"[$STATUS$]", locale -> LanguageUtil.get(locale, statusKey));
-
 		subscriptionSender.setMailId(
 			"membership_request", membershipRequest.getMembershipRequestId());
 		subscriptionSender.setScopeGroupId(membershipRequest.getGroupId());

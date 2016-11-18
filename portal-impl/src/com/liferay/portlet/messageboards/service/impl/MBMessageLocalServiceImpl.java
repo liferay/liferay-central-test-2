@@ -2616,7 +2616,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				group.getDescriptiveName(locale);
 		}
 		catch (PortalException pe) {
-			_log.error("Unable to get group name for groiup " + groupId, pe);
+			_log.error(
+				"Unable to get descriptive name for group " + groupId, pe);
 
 			return LanguageUtil.get(locale, "message-boards-home");
 		}
