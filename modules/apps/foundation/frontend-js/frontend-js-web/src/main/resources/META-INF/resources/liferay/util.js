@@ -1593,8 +1593,8 @@
 							var assetEntryIndex = selectedData.indexOf(assetEntryId);
 
 							if (assetEntryIndex > -1) {
-								item.attr('disabled', true);
 								item.attr('data-prevent-selection', true);
+								item.attr('disabled', true);
 
 								selectedData.splice(assetEntryIndex, 1);
 							}
