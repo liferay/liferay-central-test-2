@@ -817,7 +817,6 @@
 			<var name="checkedOut" value="true" />
 			<var name="dmDocumentTitle" value="Document_1.xls" />
 			<var name="dmDocumentTitleEdit" value="Document_1_Edit.jpg" />
-			<var name="dmRepositoryName" value="true" />
 		</execute>
 
 		<execute macro="Navigator#openURL" />
@@ -831,11 +830,11 @@
 		</execute>
 
 		<execute macro="DMDocument#viewIconLockedCP">
-			<var name="dmDocumentTitle" value="Document_1_Edit.xls" />
+			<var name="dmDocumentTitle" value="Document_1_Edit.jpg" />
 		</execute>
 
 		<execute macro="DMNavigator#gotoDocumentCP">
-			<var name="dmDocumentTitle" value="Document_1_Edit.xls" />
+			<var name="dmDocumentTitle" value="Document_1_Edit.jpg" />
 		</execute>
 
 		<execute macro="DMDocument#viewCheckedoutCP" >
