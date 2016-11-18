@@ -218,22 +218,18 @@ public class GitHubMessageUtil {
 	}
 
 	protected static String redact(String string) throws Exception {
-		Properties properties = JenkinsResultsParserUtil.getBuildProperties();
-
 		Set<String> redactTokens = new HashSet<>();
 
+		Properties properties = JenkinsResultsParserUtil.getBuildProperties();
+
 		for (int i = 1; properties.containsKey(getRedactTokenKey(i)); i++) {
-			String redactTokenProperty = properties.getProperty(
-				getRedactTokenKey(i));
+			String key = properties.getProperty(getRedactTokenKey(i));
 
-			String redactToken = redactTokenProperty;
+			String redactToken = key;
 
-			if (redactTokenProperty.startsWith("${") &&
-				redactTokenProperty.endsWith("}")) {
-
+			if (key.startsWith("${") && key.endsWith("}")) {
 				redactToken = properties.getProperty(
-					redactTokenProperty.substring(
-						2, redactTokenProperty.length() - 1));
+					key.substring(2, key.length() - 1));
 			}
 
 			if ((redactToken != null) && !redactToken.isEmpty()) {
