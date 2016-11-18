@@ -165,13 +165,13 @@ public class AssetBrowserDisplayContext {
 			assetBrowserSearch.setResults(assetEntries);
 		}
 		else {
+			Sort sort = null;
+
 			boolean orderByAsc = false;
 
 			if (Objects.equals(getOrderByType(), "asc")) {
 				orderByAsc = true;
 			}
-
-			Sort sort = null;
 
 			if (Objects.equals(getOrderByCol(), "modified-date")) {
 				sort = new Sort(
