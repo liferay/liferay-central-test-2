@@ -270,9 +270,9 @@ if (step == 1) {
 
 							data.put("entityid", role.getRoleId());
 							data.put("entityname", role.getTitle(locale));
-							data.put("iconcssclass", RolesAdminUtil.getIconCssClass(role));
 							data.put("groupdescriptivename", organization.getGroup().getDescriptiveName(locale));
 							data.put("groupid", organization.getGroupId());
+							data.put("iconcssclass", RolesAdminUtil.getIconCssClass(role));
 							data.put("searchcontainername", "organizationRoles");
 
 							boolean disabled = false;
