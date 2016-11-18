@@ -177,7 +177,7 @@ public class WorkflowTaskPermissionCheckerTest extends PowerMockito {
 	public void testNotContentReviewerWithAssetViewPermissionHasPermission()
 		throws PortalException {
 
-		// Checks permission on completed workflow task.
+		// Checks permission on completed workflow task
 
 		PermissionChecker permissionChecker = mockPermissionChecker(
 			RandomTestUtil.randomLong(), new long[0], false, false, false);
@@ -215,7 +215,7 @@ public class WorkflowTaskPermissionCheckerTest extends PowerMockito {
 			testNotContentReviewerWithoutAssetViewPermissionHasNoPermission()
 		throws PortalException {
 
-		// Checks permission on completed workflow task.
+		// Checks permission on completed workflow task
 
 		PermissionChecker permissionChecker = mockPermissionChecker(
 			RandomTestUtil.randomLong(), new long[0], false, false, false);
