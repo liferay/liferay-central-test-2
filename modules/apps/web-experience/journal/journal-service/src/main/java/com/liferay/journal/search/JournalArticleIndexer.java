@@ -46,9 +46,9 @@ import com.liferay.portal.kernel.search.DDMStructureIndexer;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentImpl;
 import com.liferay.portal.kernel.search.Field;
-import com.liferay.portal.kernel.search.IndexWriterHelperUtil;
+import com.liferay.portal.kernel.search.IndexWriterHelper;
 import com.liferay.portal.kernel.search.Indexer;
-import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.IndexerRegistry;
 import com.liferay.portal.kernel.search.Query;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchException;
@@ -71,6 +71,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
+import com.liferay.portal.search.index.IndexStatusManager;
 import com.liferay.trash.kernel.util.TrashUtil;
 
 import java.io.Serializable;
@@ -242,7 +243,7 @@ public class JournalArticleIndexer
 	public void reindexDDMStructures(List<Long> ddmStructureIds)
 		throws SearchException {
 
-		if (IndexWriterHelperUtil.isIndexReadOnly() || !isIndexerEnabled()) {
+		if (_indexStatusManager.isIndexReadOnly() || !isIndexerEnabled()) {
 			return;
 		}
 
@@ -260,7 +261,7 @@ public class JournalArticleIndexer
 			}
 
 			final Indexer<JournalArticle> indexer =
-				IndexerRegistryUtil.nullSafeGetIndexer(JournalArticle.class);
+				_indexerRegistry.nullSafeGetIndexer(JournalArticle.class);
 
 			final ActionableDynamicQuery actionableDynamicQuery =
 				_journalArticleLocalService.getActionableDynamicQuery();
@@ -442,7 +443,7 @@ public class JournalArticleIndexer
 			return;
 		}
 
-		IndexWriterHelperUtil.updateDocument(
+		_indexWriterHelper.updateDocument(
 			getSearchEngineId(), journalArticle.getCompanyId(),
 			getDocument(latestIndexableArticle), isCommitImmediately());
 	}
@@ -611,7 +612,7 @@ public class JournalArticleIndexer
 
 			Document document = getDocument(article);
 
-			IndexWriterHelperUtil.deleteDocument(
+			_indexWriterHelper.deleteDocument(
 				getSearchEngineId(), article.getCompanyId(),
 				document.get(Field.UID), isCommitImmediately());
 
@@ -855,7 +856,7 @@ public class JournalArticleIndexer
 	protected void reindexArticleVersions(JournalArticle article)
 		throws PortalException {
 
-		IndexWriterHelperUtil.updateDocuments(
+		_indexWriterHelper.updateDocuments(
 			getSearchEngineId(), article.getCompanyId(),
 			getArticleVersions(article), isCommitImmediately());
 	}
@@ -910,6 +911,16 @@ public class JournalArticleIndexer
 	private DDMIndexer _ddmIndexer;
 	private DDMStructureLocalService _ddmStructureLocalService;
 	private FieldsToDDMFormValuesConverter _fieldsToDDMFormValuesConverter;
+
+	@Reference
+	private IndexerRegistry _indexerRegistry;
+
+	@Reference
+	private IndexStatusManager _indexStatusManager;
+
+	@Reference
+	private IndexWriterHelper _indexWriterHelper;
+
 	private JournalArticleLocalService _journalArticleLocalService;
 	private JournalArticleResourceLocalService
 		_journalArticleResourceLocalService;
