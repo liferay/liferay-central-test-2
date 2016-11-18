@@ -20,6 +20,6 @@ package com.liferay.wysiwyg.web.internal.constants;
 public class WYSIWYGPortletKeys {
 
 	public static final String WYSIWYG =
-		"com_liferay_wysiwyg_web_portlet_WysiwygPortlet";
+		"com_liferay_wysiwyg_web_portlet_WYSIWYGPortlet";
 
 }
