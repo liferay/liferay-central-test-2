@@ -2940,7 +2940,7 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  kernel.security.permission,com.liferay.portal.kernel.service,com.life
  ray.portal.kernel.theme,javax.portlet,javax.servlet.http",com.liferay
  .portal.kernel.url;version="1.0.0";uses:="javax.servlet",com.liferay.
- portal.kernel.util;version="7.11.0";uses:="com.liferay.expando.kernel
+ portal.kernel.util;version="7.12.0";uses:="com.liferay.expando.kernel
  .model,com.liferay.mail.kernel.model,com.liferay.portal.kernel.concur
  rent,com.liferay.portal.kernel.configuration,com.liferay.portal.kerne
  l.dao.jdbc.aop,com.liferay.portal.kernel.dao.search,com.liferay.porta
