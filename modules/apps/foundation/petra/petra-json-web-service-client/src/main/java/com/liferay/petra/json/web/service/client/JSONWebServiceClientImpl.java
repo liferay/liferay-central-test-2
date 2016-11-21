@@ -536,19 +536,10 @@ public class JSONWebServiceClientImpl implements JSONWebServiceClient {
 
 			int statusCode = statusLine.getStatusCode();
 
-			if (statusCode == HttpServletResponse.SC_UNAUTHORIZED) {
-				throw new JSONWebServiceTransportException.
-					AuthenticationFailure(
-						"Not authorized to access JSON web service");
-			}
-			else if (statusCode == HttpServletResponse.SC_OK) {
-				return EntityUtils.toString(
-					httpResponse.getEntity(), StandardCharsets.UTF_8);
-			}
-			else if ((statusCode == HttpServletResponse.SC_BAD_REQUEST) ||
-					 (statusCode == HttpServletResponse.SC_FORBIDDEN) ||
-					 (statusCode == HttpServletResponse.SC_NOT_ACCEPTABLE) ||
-					 (statusCode == HttpServletResponse.SC_NOT_FOUND)) {
+			if ((statusCode == HttpServletResponse.SC_BAD_REQUEST) ||
+				(statusCode == HttpServletResponse.SC_FORBIDDEN) ||
+				(statusCode == HttpServletResponse.SC_NOT_ACCEPTABLE) ||
+				(statusCode == HttpServletResponse.SC_NOT_FOUND)) {
 
 				if (httpResponse.getEntity() != null) {
 					if (_logger.isDebugEnabled()) {
@@ -558,6 +549,15 @@ public class JSONWebServiceClientImpl implements JSONWebServiceClient {
 					return EntityUtils.toString(
 						httpResponse.getEntity(), StandardCharsets.UTF_8);
 				}
+			}
+			else if (statusCode == HttpServletResponse.SC_OK) {
+				return EntityUtils.toString(
+					httpResponse.getEntity(), StandardCharsets.UTF_8);
+			}
+			else if (statusCode == HttpServletResponse.SC_UNAUTHORIZED) {
+				throw new JSONWebServiceTransportException.
+					AuthenticationFailure(
+						"Not authorized to access JSON web service");
 			}
 
 			throw new JSONWebServiceTransportException.CommunicationFailure(
