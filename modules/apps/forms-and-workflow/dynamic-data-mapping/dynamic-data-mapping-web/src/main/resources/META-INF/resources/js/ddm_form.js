@@ -2707,6 +2707,20 @@ AUI.add(
 
 		FieldTypes.select = SelectField;
 
+		var SeparatorField = A.Component.create(
+			{
+				EXTENDS: Field,
+
+				prototype: {
+					getValue: function() {
+						return '';
+					}
+				}
+			}
+		);
+
+		FieldTypes['ddm-separator'] = SeparatorField;
+
 		var Form = A.Component.create(
 			{
 				ATTRS: {
