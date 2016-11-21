@@ -68,11 +68,10 @@ public class CalendarResourceServiceTest {
 	}
 
 	@Test
-	public void testAddResourceWithModelPermission() throws Exception {
+	public void testAddCalendarResource() throws Exception {
 		Group group = GroupTestUtil.addGroup();
 
 		User user = UserTestUtil.addGroupUser(group, RoleConstants.SITE_MEMBER);
-
 		long classNameId = PortalUtil.getClassNameId(CalendarResource.class);
 
 		ServiceContext serviceContext =
