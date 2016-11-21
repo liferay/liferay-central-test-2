@@ -169,8 +169,8 @@ public class PortletTracker
 
 		removedService(serviceReference, portletModel);
 
-		com.liferay.portal.kernel.model.Portlet newPortletModel =
-			addingService(serviceReference);
+		com.liferay.portal.kernel.model.Portlet newPortletModel = addingService(
+			serviceReference);
 
 		BeanPropertiesUtil.copyProperties(newPortletModel, portletModel);
 	}
