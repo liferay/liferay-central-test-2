@@ -39,7 +39,6 @@ import com.liferay.portal.kernel.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.service.UserLocalServiceUtil;
-import com.liferay.portal.kernel.test.IdempotentRetryAssert;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.DeleteAfterTestRun;
 import com.liferay.portal.kernel.test.rule.Sync;
@@ -53,9 +52,6 @@ import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.security.permission.SimplePermissionChecker;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
-
-import java.util.concurrent.Callable;
-import java.util.concurrent.TimeUnit;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -123,7 +119,7 @@ public class DDLRecordSearchTest {
 
 		DDLRecordSet recordSet = recordSetTestHelper.addRecordSet(ddmStructure);
 
-		final SearchContext searchContext = getSearchContext(group, recordSet);
+		SearchContext searchContext = getSearchContext(group, recordSet);
 
 		DDLRecordTestHelper recordTestHelper = new DDLRecordTestHelper(
 			group, recordSet);
@@ -144,22 +140,11 @@ public class DDLRecordSearchTest {
 		recordTestHelper.addRecord(
 			ddmFormValues, WorkflowConstants.ACTION_PUBLISH);
 
-		IdempotentRetryAssert.retryAssert(
-			3, TimeUnit.SECONDS,
-			new Callable<Void>() {
+		searchContext.setKeywords("Simple description");
 
-				@Override
-				public Void call() throws Exception {
-					searchContext.setKeywords("Simple description");
+		Hits hits = DDLRecordLocalServiceUtil.search(searchContext);
 
-					Hits hits = DDLRecordLocalServiceUtil.search(searchContext);
-
-					Assert.assertEquals(1, hits.getLength());
-
-					return null;
-				}
-
-			});
+		Assert.assertEquals(1, hits.getLength());
 	}
 
 	@Test
@@ -332,26 +317,12 @@ public class DDLRecordSearchTest {
 		return recordSetTestHelper.addRecordSet(ddmStructure);
 	}
 
-	protected void assertSearch(final String keywords, final int length)
-		throws Exception {
+	protected void assertSearch(String keywords, int length) throws Exception {
+		_searchContext.setKeywords(keywords);
 
-		IdempotentRetryAssert.retryAssert(
-			3, TimeUnit.SECONDS,
-			new Callable<Void>() {
+		Hits hits = DDLRecordLocalServiceUtil.search(_searchContext);
 
-				@Override
-				public Void call() throws Exception {
-					_searchContext.setKeywords(keywords);
-
-					Hits hits = DDLRecordLocalServiceUtil.search(
-						_searchContext);
-
-					Assert.assertEquals(length, hits.getLength());
-
-					return null;
-				}
-
-			});
+		Assert.assertEquals(length, hits.getLength());
 	}
 
 	protected DDMForm createDDMForm() {
