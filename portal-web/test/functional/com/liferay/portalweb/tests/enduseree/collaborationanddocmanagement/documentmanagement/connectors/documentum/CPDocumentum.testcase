@@ -297,6 +297,21 @@
 			<var name="dmDocumentVersionNumber" value="1.1" />
 			<var name="dmRepositoryName" value="true" />
 		</execute>
+
+		<execute macro="Navigator#openURL" />
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Documents and Media" />
+		</execute>
+
+		<execute macro="DMRepository#gotoCP">
+			<var name="dmRepositoryName" value="Documentum Repository Name" />
+		</execute>
+
+		<execute macro="DMDocument#deleteCP">
+			<var name="dmDocumentTitle" value="Document_3.txt" />
+			<var name="recycleBinDisabled" value="true" />
+		</execute>
 	</command>
 
 	<command name="CheckoutDocument" priority="5">
@@ -489,6 +504,21 @@
 		<execute macro="DMDocument#cannotViewDocumentMetadataCP">
 			<var name="metadataData" value="ISO-8859-1" />
 			<var name="metadataLabel" value="Content Encoding" />
+		</execute>
+
+		<execute macro="Navigator#openURL" />
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Documents and Media" />
+		</execute>
+
+		<execute macro="DMRepository#gotoCP">
+			<var name="dmRepositoryName" value="Documentum Repository Name" />
+		</execute>
+
+		<execute macro="DMDocument#deleteCP">
+			<var name="dmDocumentTitle" value="Document_3.doc" />
+			<var name="recycleBinDisabled" value="true" />
 		</execute>
 	</command>
 
