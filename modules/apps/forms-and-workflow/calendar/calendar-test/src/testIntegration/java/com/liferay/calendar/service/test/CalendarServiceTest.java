@@ -137,9 +137,8 @@ public class CalendarServiceTest {
 			calendarResource =
 				CalendarResourceLocalServiceUtil.addCalendarResource(
 					group.getCreatorUserId(), group.getGroupId(),
-					PortalUtil.getClassNameId(Group.class),
-					group.getGroupId(), null, null, nameMap, descriptionMap,
-					true, serviceContext);
+					PortalUtil.getClassNameId(Group.class), group.getGroupId(),
+					null, null, nameMap, descriptionMap, true, serviceContext);
 		}
 
 		return calendarResource.getDefaultCalendar();
