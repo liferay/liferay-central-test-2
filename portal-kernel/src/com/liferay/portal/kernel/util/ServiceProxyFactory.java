@@ -60,19 +60,19 @@ public class ServiceProxyFactory {
 			if (blocking) {
 				ReentrantLock lock = new ReentrantLock();
 
-				Condition isRealServiceSet = lock.newCondition();
+				Condition realServiceSet = lock.newCondition();
 
 				T awaitService = (T)ProxyUtil.newProxyInstance(
 					serviceClass.getClassLoader(),
 					new Class<?>[] {serviceClass},
 					new AwaitServiceInvocationHandler(
-						field, isRealServiceSet, lock));
+						field, realServiceSet, lock));
 
 				field.set(null, awaitService);
 
 				serviceTrackerCustomizer =
 					new AwaitServiceTrackerFieldUpdaterCustomizer<>(
-						field, null, awaitService, isRealServiceSet, lock);
+						field, null, awaitService, realServiceSet, lock);
 			}
 			else {
 				T dummyService = ProxyFactory.newDummyInstance(serviceClass);
@@ -144,7 +144,7 @@ public class ServiceProxyFactory {
 						return method.invoke(service, arguments);
 					}
 
-					_isRealServiceSet.await();
+					_realServiceSet.await();
 				}
 				finally {
 					_lock.unlock();
@@ -153,15 +153,15 @@ public class ServiceProxyFactory {
 		}
 
 		private AwaitServiceInvocationHandler(
-			Field field, Condition isRealServiceSet, Lock lock) {
+			Field field, Condition realServiceSet, Lock lock) {
 
 			_field = field;
-			_isRealServiceSet = isRealServiceSet;
+			_realServiceSet = realServiceSet;
 			_lock = lock;
 		}
 
 		private final Field _field;
-		private final Condition _isRealServiceSet;
+		private final Condition _realServiceSet;
 		private final Lock _lock;
 
 	}
@@ -177,7 +177,7 @@ public class ServiceProxyFactory {
 				super.doServiceUpdate(newService);
 
 				if (newService != _awaitService) {
-					_isRealServiceSet.signalAll();
+					_realServiceSet.signalAll();
 				}
 			}
 			finally {
@@ -187,17 +187,17 @@ public class ServiceProxyFactory {
 
 		private AwaitServiceTrackerFieldUpdaterCustomizer(
 			Field serviceField, Object serviceHolder, T awaitService,
-			Condition isRealServiceSet, Lock lock) {
+			Condition realServiceSet, Lock lock) {
 
 			super(serviceField, serviceHolder, awaitService);
 
 			_awaitService = awaitService;
-			_isRealServiceSet = isRealServiceSet;
+			_realServiceSet = realServiceSet;
 			_lock = lock;
 		}
 
 		private final T _awaitService;
-		private final Condition _isRealServiceSet;
+		private final Condition _realServiceSet;
 		private final Lock _lock;
 
 	}
