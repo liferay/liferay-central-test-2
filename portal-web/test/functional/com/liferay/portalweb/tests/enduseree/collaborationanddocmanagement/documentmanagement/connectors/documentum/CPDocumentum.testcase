@@ -335,6 +335,10 @@
 		<execute macro="DMDocument#viewCheckedoutCP" >
 			<var name="dmRepositoryName" value="true" />
 		</execute>
+
+		<execute macro="DMDocument#cancelCheckoutCP">
+			<var name="dmRepositoryName" value="true" />
+		</execute>
 	</command>
 
 	<command name="DeleteDocument" priority="5">
@@ -689,6 +693,10 @@
 		<execute macro="DMDocument#viewCheckedoutCP" >
 			<var name="dmRepositoryName" value="true" />
 		</execute>
+
+		<execute macro="DMDocument#cancelCheckoutCP">
+			<var name="dmRepositoryName" value="true" />
+		</execute>
 	</command>
 
 	<command name="MoveDocumentToHome" priority="5">
@@ -829,6 +837,10 @@
 		</execute>
 
 		<execute macro="DMDocument#viewCheckedoutCP" >
+			<var name="dmRepositoryName" value="true" />
+		</execute>
+
+		<execute macro="DMDocument#cancelCheckoutCP">
 			<var name="dmRepositoryName" value="true" />
 		</execute>
 	</command>
