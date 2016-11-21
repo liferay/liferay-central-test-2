@@ -40,8 +40,8 @@ public class IntegrationTestTimeoutFailureMessageGenerator
 
 		sb.append("<p><strong>");
 		sb.append(matcher.group("testName"));
-		sb.append("</strong> was aborted because it exceeded ");
-		sb.append("the timeout period.</p>");
+		sb.append("</strong> was aborted because it exceeded the timeout ");
+		sb.append("period.</p>");
 
 		String snippet = matcher.group(0);
 
