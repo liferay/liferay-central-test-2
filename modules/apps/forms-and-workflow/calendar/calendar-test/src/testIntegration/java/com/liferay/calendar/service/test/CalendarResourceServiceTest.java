@@ -72,6 +72,7 @@ public class CalendarResourceServiceTest {
 		Group group = GroupTestUtil.addGroup();
 
 		User user = UserTestUtil.addGroupUser(group, RoleConstants.SITE_MEMBER);
+
 		long classNameId = PortalUtil.getClassNameId(CalendarResource.class);
 
 		ServiceContext serviceContext =
