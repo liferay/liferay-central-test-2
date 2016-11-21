@@ -161,8 +161,8 @@ public class ServiceProxyFactory {
 		}
 
 		private final Field _field;
-		private final Condition _realServiceSet;
 		private final Lock _lock;
+		private final Condition _realServiceSet;
 
 	}
 
@@ -197,8 +197,8 @@ public class ServiceProxyFactory {
 		}
 
 		private final T _awaitService;
-		private final Condition _realServiceSet;
 		private final Lock _lock;
+		private final Condition _realServiceSet;
 
 	}
 
