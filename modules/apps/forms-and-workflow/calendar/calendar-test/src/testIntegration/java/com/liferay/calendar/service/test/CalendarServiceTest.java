@@ -121,28 +121,25 @@ public class CalendarServiceTest {
 	}
 
 	protected Calendar getGroupCalendar(Group group) throws Exception {
-		ServiceContext serviceContext = new ServiceContext();
-
-		long groupId = group.getGroupId();
-
 		CalendarResource calendarResource =
 			CalendarResourceLocalServiceUtil.fetchCalendarResource(
-				PortalUtil.getClassNameId(Group.class), groupId);
+				PortalUtil.getClassNameId(Group.class), group.getGroupId());
 
 		if (calendarResource == null) {
-			long userId = group.getCreatorUserId();
-
 			Map<Locale, String> nameMap = new HashMap<>();
 
 			nameMap.put(LocaleUtil.getDefault(), group.getDescriptiveName());
 
 			Map<Locale, String> descriptionMap = new HashMap<>();
 
+			ServiceContext serviceContext = new ServiceContext();
+
 			calendarResource =
 				CalendarResourceLocalServiceUtil.addCalendarResource(
-					userId, groupId, PortalUtil.getClassNameId(Group.class),
-					groupId, null, null, nameMap, descriptionMap, true,
-					serviceContext);
+					group.getCreatorUserId(), group.getGroupId(),
+					PortalUtil.getClassNameId(Group.class),
+					group.getGroupId(), null, null, nameMap, descriptionMap,
+					true, serviceContext);
 		}
 
 		return calendarResource.getDefaultCalendar();
