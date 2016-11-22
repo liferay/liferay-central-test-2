@@ -1254,6 +1254,8 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 
 		newContent = formatValidatorEquals(newContent);
 
+		newContent = fixUnparameterizedClassType(newContent);
+
 		newContent = fixMissingEmptyLineAfterSettingVariable(newContent);
 
 		newContent = fixMultiLineComment(newContent);
