@@ -27,6 +27,7 @@ import com.liferay.portlet.PortletURLImpl;
 
 import java.io.IOException;
 
+import java.util.Dictionary;
 import java.util.concurrent.atomic.AtomicReference;
 
 import javax.portlet.PortletException;
