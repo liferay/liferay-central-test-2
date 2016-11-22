@@ -83,8 +83,7 @@ public class SharedSessionPortletContainerTest
 
 		};
 
-		HashMapDictionary<String, Object> properties =
-			new HashMapDictionary<>();
+		Dictionary<String, Object> properties = new HashMapDictionary<>();
 
 		properties.put(
 			"com.liferay.portlet.private-session-attributes", Boolean.FALSE);
@@ -154,8 +153,7 @@ public class SharedSessionPortletContainerTest
 
 		};
 
-		HashMapDictionary<String, Object> properties =
-			new HashMapDictionary<>();
+		Dictionary<String, Object> properties = new HashMapDictionary<>();
 
 		properties.put(
 			"com.liferay.portlet.private-session-attributes", Boolean.FALSE);
@@ -247,8 +245,7 @@ public class SharedSessionPortletContainerTest
 
 		};
 
-		HashMapDictionary<String, Object> properties =
-			new HashMapDictionary<>();
+		Dictionary<String, Object> properties = new HashMapDictionary<>();
 
 		properties.put("key", "servlet.service.events.pre");
 
@@ -318,8 +315,7 @@ public class SharedSessionPortletContainerTest
 
 		};
 
-		HashMapDictionary<String, Object> properties =
-			new HashMapDictionary<>();
+		Dictionary<String, Object> properties = new HashMapDictionary<>();
 
 		properties.put("key", "servlet.service.events.pre");
 
@@ -338,7 +334,6 @@ public class SharedSessionPortletContainerTest
 		Assert.assertEquals(200, response.getCode());
 
 		Assert.assertTrue(testPortlet.isCalledRender());
-
 		Assert.assertEquals(attributeValue, sessionValue.get());
 	}
 
@@ -388,8 +383,7 @@ public class SharedSessionPortletContainerTest
 
 		};
 
-		HashMapDictionary<String, Object> properties =
-			new HashMapDictionary<>();
+		Dictionary<String, Object> properties = new HashMapDictionary<>();
 
 		properties.put("key", "servlet.service.events.post");
 
@@ -408,7 +402,6 @@ public class SharedSessionPortletContainerTest
 		Assert.assertEquals(200, response.getCode());
 
 		Assert.assertTrue(testPortlet.isCalledRender());
-
 		Assert.assertNotEquals(attributeValue, sessionValue.get());
 	}
 
