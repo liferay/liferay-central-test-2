@@ -1482,9 +1482,9 @@ public class JournalUtil {
 			"protocol", HttpUtil.getProtocol(themeDisplay.getURLPortal()));
 		tokens.put("root_path", themeDisplay.getPathContext());
 		tokens.put(
-			"site_group_id", String.valueOf(themeDisplay.getSiteGroupId()));
-		tokens.put(
 			"scope_group_id", String.valueOf(themeDisplay.getScopeGroupId()));
+		tokens.put(
+			"site_group_id", String.valueOf(themeDisplay.getSiteGroupId()));
 		tokens.put("theme_image_path", themeDisplay.getPathThemeImages());
 
 		_populateCustomTokens(tokens);
