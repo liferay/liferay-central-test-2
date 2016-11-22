@@ -54,6 +54,7 @@ public class JournalDDMDisplay extends BaseDDMDisplay {
 		return "Liferay.FormBuilder.AVAILABLE_FIELDS.WCM_STRUCTURE";
 	}
 
+	@Override
 	public String getConfirmSelectStructureMessage(Locale locale) {
 		return LanguageUtil.get(
 			getResourceBundle(locale),
@@ -61,6 +62,7 @@ public class JournalDDMDisplay extends BaseDDMDisplay {
 				"and-available-templates");
 	}
 
+	@Override
 	public String getConfirmSelectTemplateMessage(Locale locale) {
 		return LanguageUtil.get(
 			getResourceBundle(locale),

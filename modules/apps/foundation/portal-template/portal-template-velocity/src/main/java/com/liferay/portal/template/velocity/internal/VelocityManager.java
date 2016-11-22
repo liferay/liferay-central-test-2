@@ -76,7 +76,7 @@ public class VelocityManager extends BaseSingleTemplateManager {
 			Class<?> clazz = VelocityTaglib.class;
 
 			Method method = clazz.getMethod(
-				"layoutIcon", new Class[] {Layout.class});
+				"layoutIcon", new Class<?>[] {Layout.class});
 
 			contextObjects.put("velocityTaglib_layoutIcon", method);
 		}

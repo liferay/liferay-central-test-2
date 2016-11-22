@@ -73,11 +73,11 @@
 			Map<String, Object> data = new HashMap<String, Object>();
 
 			if (assetEntry.getEntryId() != assetBrowserDisplayContext.getRefererAssetEntryId()) {
-				data.put("assetentryid", assetEntry.getEntryId());
 				data.put("assetclassname", assetEntry.getClassName());
 				data.put("assetclasspk", assetEntry.getClassPK());
-				data.put("assettype", assetRendererFactory.getTypeName(locale, assetBrowserDisplayContext.getSubtypeSelectionId()));
+				data.put("assetentryid", assetEntry.getEntryId());
 				data.put("assettitle", assetEntry.getTitle(locale));
+				data.put("assettype", assetRendererFactory.getTypeName(locale, assetBrowserDisplayContext.getSubtypeSelectionId()));
 				data.put("groupdescriptivename", group.getDescriptiveName(locale));
 
 				cssClass = "selector-button";
