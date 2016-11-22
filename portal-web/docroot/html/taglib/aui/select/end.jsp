@@ -39,7 +39,7 @@
 	</c:if>
 </div>
 
-<c:if test="<%= (BrowserSnifferUtil.isIe(request) && (BrowserSnifferUtil.getMajorVersion(request) == 11.0)) %>">
+<c:if test="<%= BrowserSnifferUtil.isIe(request) && (BrowserSnifferUtil.getMajorVersion(request) == 11.0) %>">
 	<aui:script sandbox="<%= true %>">
 		var select = $('#<%= namespace + id %>');
 
