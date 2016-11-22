@@ -2650,7 +2650,7 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  et;version="7.0.0";uses:="com.liferay.portal.kernel.exception,javax.s
  ervlet.http",com.liferay.portal.kernel.pop;version="6.2.0";uses:="com
  .liferay.portal.kernel.exception,javax.mail",com.liferay.portal.kerne
- l.portlet;version="7.5.0";uses:="com.liferay.asset.kernel.model,com.l
+ l.portlet;version="7.6.0";uses:="com.liferay.asset.kernel.model,com.l
  iferay.expando.kernel.model,com.liferay.exportimport.kernel.lar,com.l
  iferay.portal.kernel.atom,com.liferay.portal.kernel.exception,com.lif
  eray.portal.kernel.json,com.liferay.portal.kernel.model,com.liferay.p
@@ -2880,7 +2880,7 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  m.liferay.portal.kernel.exception,com.liferay.portal.kernel.model,com
  .liferay.portal.kernel.service,com.liferay.portal.kernel.service.pers
  istence,com.liferay.portal.kernel.util",com.liferay.portal.kernel.ser
- vlet;version="7.2.0";uses:="com.liferay.portal.kernel.log,com.liferay
+ vlet;version="7.3.0";uses:="com.liferay.portal.kernel.log,com.liferay
  .portal.kernel.util,javax.portlet,javax.servlet,javax.servlet.http",c
  om.liferay.portal.kernel.servlet.filters.compoundsessionid;version="7
  .0.0";uses:="com.liferay.portal.kernel.servlet,javax.servlet.http",co
@@ -3269,7 +3269,7 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  .liferay.portal.kernel.security.permission,com.liferay.portal.kernel.
  service.persistence,com.liferay.portal.kernel.service.persistence.imp
  l,com.liferay.portal.kernel.util,com.liferay.portal.model.impl";versi
- on="1.0.0",com.liferay.portal.servlet;version="1.1.0";uses:="com.life
+ on="1.0.0",com.liferay.portal.servlet;version="1.2.0";uses:="com.life
  ray.portal.facebook,com.liferay.portal.kernel.exception,com.liferay.p
  ortal.kernel.model,com.liferay.portal.kernel.plugin,com.liferay.porta
  l.kernel.security.pacl,com.liferay.portal.kernel.servlet,com.liferay.
