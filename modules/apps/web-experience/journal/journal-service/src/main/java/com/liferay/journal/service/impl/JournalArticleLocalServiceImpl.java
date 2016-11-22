@@ -7938,7 +7938,7 @@ public class JournalArticleLocalServiceImpl
 			(articleId.indexOf(CharPool.COMMA) != -1) ||
 			(articleId.indexOf(CharPool.SPACE) != -1)) {
 
-			throw new ArticleIdException("Invalid articleId: " + articleId);
+			throw new ArticleIdException("Invalid article ID: " + articleId);
 		}
 	}
 
