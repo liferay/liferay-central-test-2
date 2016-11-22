@@ -20,6 +20,8 @@ import com.liferay.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.journal.taglib.internal.servlet.ServletContextUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.PortletRequestModel;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.Constants;
@@ -64,6 +66,10 @@ public class JournalArticleTag extends IncludeTag {
 				getLanguageId(), 1, portletRequestModel, themeDisplay);
 		}
 		catch (PortalException pe) {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Unable to get Journal Article Display", pe);
+			}
+
 			return SKIP_BODY;
 		}
 
@@ -138,6 +144,9 @@ public class JournalArticleTag extends IncludeTag {
 	}
 
 	private static final String _PAGE = "/journal_article/page.jsp";
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		JournalArticleTag.class);
 
 	private JournalArticle _article;
 	private JournalArticleDisplay _articleDisplay;
