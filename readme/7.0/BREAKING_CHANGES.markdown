@@ -3112,22 +3112,22 @@ blank values are checked should be updated.
 
 Old Code:
 
-    <aui:input name="privateVirtualHost">		
-        <aui:validator errorMessage="please-enter-a-unique-virtual-host" name="custom">		
+    <aui:input name="privateVirtualHost">
+        <aui:validator errorMessage="please-enter-a-unique-virtual-host" name="custom">
             function(val, fieldNode, ruleValue) {
                 return !val || val != A.one('#<portlet:namespace />publicVirtualHost').val();
-            }		
-        </aui:validator>		
+            }
+        </aui:validator>
     </aui:input>
 
 New Code:
 
-    <aui:input name="privateVirtualHost">		
-        <aui:validator errorMessage="please-enter-a-unique-virtual-host" name="custom">		
+    <aui:input name="privateVirtualHost">
+        <aui:validator errorMessage="please-enter-a-unique-virtual-host" name="custom">
             function(val, fieldNode, ruleValue) {
                 return val != A.one('#<portlet:namespace />publicVirtualHost').val();
-            }		
-        </aui:validator>		
+            }
+        </aui:validator>
     </aui:input>
 
 Also, instead of using custom validators to determine if a field is required,
@@ -3144,7 +3144,7 @@ Old Code:
             }
         </aui:validator>
     </aui:input>
- 
+
 New Code:
 
     <aui:input name="file" type="file" />
