@@ -124,7 +124,6 @@ public class SharedSessionPortletContainerTest
 		Assert.assertEquals(200, response.getCode());
 
 		Assert.assertTrue(testPortlet.isCalledRender());
-
 		Assert.assertEquals(attributeValue, sessionValue.get());
 	}
 
@@ -196,7 +195,6 @@ public class SharedSessionPortletContainerTest
 		Assert.assertEquals(200, response.getCode());
 
 		Assert.assertTrue(testPortlet.isCalledRender());
-
 		Assert.assertEquals(attributeValue, sessionValue.get());
 	}
 
@@ -264,7 +262,6 @@ public class SharedSessionPortletContainerTest
 		Assert.assertEquals(200, response.getCode());
 
 		Assert.assertTrue(testPortlet.isCalledRender());
-
 		Assert.assertNotEquals(attributeValue, sessionValue.get());
 	}
 
