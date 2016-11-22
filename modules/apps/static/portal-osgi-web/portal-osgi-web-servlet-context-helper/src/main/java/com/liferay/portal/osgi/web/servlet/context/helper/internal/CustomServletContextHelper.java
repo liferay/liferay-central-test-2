@@ -111,7 +111,7 @@ public class CustomServletContextHelper
 			catch (IOException ioe) {
 				_logger.log(
 					Logger.LOG_ERROR,
-					"Error on getting resource name " + name + " on bundle " +
+					"Unable to get resource name " + name + " on bundle " +
 						_bundle,
 					ioe);
 			}
