@@ -2636,7 +2636,7 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  feray.portal.kernel.oauth;version="6.2.0";uses:="com.liferay.portal.k
  ernel.exception",com.liferay.portal.kernel.openid;version="1.0.0",com
  .liferay.portal.kernel.parsers.bbcode;version="7.0.0",com.liferay.por
- tal.kernel.patcher;version="7.1.0";uses:="com.liferay.portal.kernel.e
+ tal.kernel.patcher;version="7.2.0";uses:="com.liferay.portal.kernel.e
  xception",com.liferay.portal.kernel.plugin;version="6.3.0";uses:="com
  .liferay.portal.kernel.exception,com.liferay.portal.kernel.util",com.
  liferay.portal.kernel.poller;version="7.0.0";uses:="com.liferay.porta
