@@ -135,9 +135,9 @@ public class DDMFormValidatorImpl implements DDMFormValidator {
 
 		String fieldType = ddmFormField.getType();
 
-		if (!fieldType.equals(DDMFormFieldType.RADIO) &&
-			!fieldType.equals(DDMFormFieldType.SELECT) &&
-			!fieldType.equals(DDMFormFieldType.CHECKBOX_MULTIPLE)) {
+		if (!fieldType.equals(DDMFormFieldType.CHECKBOX_MULTIPLE) &&
+			!fieldType.equals(DDMFormFieldType.RADIO) &&
+			!fieldType.equals(DDMFormFieldType.SELECT)) {
 
 			return;
 		}
