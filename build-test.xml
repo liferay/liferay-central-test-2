@@ -5562,12 +5562,12 @@ osb.lcs.portlet.oauth.consumer.secret=${osb.lcs.portlet.oauth.consumer.secret}</
 <!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
 
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
-	<category name="com.liferay.portal.spring.hibernate.DialectDetector">
-		<priority value="${dialect.detector.log.level}" />
-	</category>
-
 	<category name="com.liferay.portal.dao.orm.hibernate.VerifySessionFactoryWrapper">
 		<priority value="INFO" />
+	</category>
+
+	<category name="com.liferay.portal.spring.hibernate.DialectDetector">
+		<priority value="${dialect.detector.log.level}" />
 	</category>
 
 	<category name="com.liferay.portal.test.randomizerbumpers.TikaSafeRandomizerBumper">
