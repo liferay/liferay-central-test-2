@@ -3,7 +3,7 @@
 ;
 [subrepo]
 	cmdver = liferay
-	commit = 0c40b63f7043245817fc9a92302a34cf592f205a
+	commit = 944f62b330113db9372e992154b9bdb665254b7b
 	mode = push
-	parent = 13446961711769fb2396b2266608f6f6c1ed8e03
+	parent = 7aa03d39ae0c46d4d22ba69315ce8a44e5981fa7
 	remote = git@github.com:liferay/com-liferay-portal-scheduler.git
