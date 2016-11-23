@@ -55,7 +55,9 @@ public class PatcherImpl implements Patcher {
 			_properties.getProperty(PROPERTY_PATCH_LEVELS));
 		_patchingToolVersion = GetterUtil.getInteger(
 			_properties.get(PROPERTY_PATCHING_TOOL_VERSION));
+
 		_patchingToolVersionDisplayName = getPatchingToolVersionDisplayName();
+
 		_separated = GetterUtil.getBoolean(
 			_properties.getProperty(PROPERTY_SEPARATED));
 		_separationId = _properties.getProperty(PROPERTY_SEPARATION_ID);
