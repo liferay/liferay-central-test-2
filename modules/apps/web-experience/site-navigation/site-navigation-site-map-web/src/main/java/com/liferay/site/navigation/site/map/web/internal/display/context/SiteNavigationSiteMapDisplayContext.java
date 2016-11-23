@@ -85,10 +85,10 @@ public class SiteNavigationSiteMapDisplayContext {
 			_siteNavigationSiteMapPortletInstanceConfiguration.
 				displayStyleGroupId();
 
-		Group displayStyleGroupId = GroupLocalServiceUtil.fetchGroup(
+		Group displayStyleGroup = GroupLocalServiceUtil.fetchGroup(
 			_displayStyleGroupId);
 
-		if (displayStyleGroupId == null) {
+		if (displayStyleGroup == null) {
 			_displayStyleGroupId = _themeDisplay.getSiteGroupId();
 		}
 
