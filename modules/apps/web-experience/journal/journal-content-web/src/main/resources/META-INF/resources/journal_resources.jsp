@@ -31,7 +31,7 @@ JournalArticle article = journalContentDisplayContext.getArticle();
 		</div>
 
 		<div class="button-holder">
-			<aui:button cssClass="web-content-selector" value='<%= Validator.isNull(article) ? "select" : "change" %>' />
+			<aui:button cssClass="web-content-selector" name="webContentSelector" value='<%= Validator.isNull(article) ? "select" : "change" %>' />
 		</div>
 	</div>
 </div>
