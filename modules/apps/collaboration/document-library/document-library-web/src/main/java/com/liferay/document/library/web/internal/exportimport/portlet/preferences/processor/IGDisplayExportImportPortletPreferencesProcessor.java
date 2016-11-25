@@ -56,10 +56,9 @@ public class IGDisplayExportImportPortletPreferencesProcessor
 			PortletPreferences portletPreferences)
 		throws PortletDataException {
 
-		return
-			_dlExportImportPortletPreferencesProcessor.
-				processExportPortletPreferences(
-					portletDataContext, portletPreferences);
+		return _dlExportImportPortletPreferencesProcessor.
+			processExportPortletPreferences(
+				portletDataContext, portletPreferences);
 	}
 
 	@Override
@@ -68,10 +67,9 @@ public class IGDisplayExportImportPortletPreferencesProcessor
 			PortletPreferences portletPreferences)
 		throws PortletDataException {
 
-		return
-			_dlExportImportPortletPreferencesProcessor.
-				processImportPortletPreferences(
-					portletDataContext, portletPreferences);
+		return _dlExportImportPortletPreferencesProcessor.
+			processImportPortletPreferences(
+				portletDataContext, portletPreferences);
 	}
 
 	@Reference
