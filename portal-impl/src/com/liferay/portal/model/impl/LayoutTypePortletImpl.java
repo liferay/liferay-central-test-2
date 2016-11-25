@@ -1005,7 +1005,7 @@ public class LayoutTypePortletImpl
 				continue;
 			}
 
-			String columnValue;
+			String columnValue = null;
 
 			if (hasUserPreferences()) {
 				columnValue = getUserPreference(columnId);
