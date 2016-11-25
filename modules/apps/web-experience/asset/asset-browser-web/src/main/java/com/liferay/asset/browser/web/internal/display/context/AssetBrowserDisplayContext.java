@@ -179,10 +179,10 @@ public class AssetBrowserDisplayContext {
 					Field.MODIFIED_DATE, Sort.LONG_TYPE, orderByAsc);
 			}
 			else if (Objects.equals(getOrderByCol(), "title")) {
-				String sortField = DocumentImpl.getSortableFieldName(
+				String sortFieldName = DocumentImpl.getSortableFieldName(
 					"localized_title_".concat(themeDisplay.getLanguageId()));
 
-				sort = new Sort(sortField, Sort.STRING_TYPE, orderByAsc);
+				sort = new Sort(sortFieldName, Sort.STRING_TYPE, orderByAsc);
 			}
 
 			Hits hits = AssetEntryLocalServiceUtil.search(
