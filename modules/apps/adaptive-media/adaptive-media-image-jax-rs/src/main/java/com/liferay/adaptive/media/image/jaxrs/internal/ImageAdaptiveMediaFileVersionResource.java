@@ -3,10 +3,12 @@ package com.liferay.adaptive.media.image.jaxrs.internal;
 import com.liferay.adaptive.media.AdaptiveMedia;
 import com.liferay.adaptive.media.AdaptiveMediaAttribute;
 import com.liferay.adaptive.media.AdaptiveMediaException;
+import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
 import com.liferay.adaptive.media.image.finder.ImageAdaptiveMediaFinder;
 import com.liferay.adaptive.media.image.finder.ImageAdaptiveMediaQueryBuilder;
 import com.liferay.adaptive.media.image.jaxrs.internal.provider.AdaptiveMediaApiQuery;
+import com.liferay.adaptive.media.image.jaxrs.internal.provider.OrderBySelector;
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaAttribute;
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -16,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import javax.ws.rs.BadRequestException;
@@ -26,6 +29,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriBuilder;
 
 /**
  * @author Alejandro Hernández
@@ -33,10 +37,14 @@ import javax.ws.rs.core.Response;
 public class ImageAdaptiveMediaFileVersionResource {
 
 	public ImageAdaptiveMediaFileVersionResource(
-		FileVersion fileVersion, ImageAdaptiveMediaFinder finder) {
+		FileVersion fileVersion, ImageAdaptiveMediaFinder finder,
+		ImageAdaptiveMediaConfigurationHelper
+			imageAdaptiveMediaConfigurationHelper, UriBuilder uriBuilder) {
 
 		_fileVersion = fileVersion;
 		_finder = finder;
+		_configurationHelper = imageAdaptiveMediaConfigurationHelper;
+		_uriBuilder = uriBuilder;
 	}
 
 	@GET
@@ -72,6 +80,64 @@ public class ImageAdaptiveMediaFileVersionResource {
 		return _getFirstAdaptiveMedia(stream);
 	}
 
+	@GET
+	@Path("/variants")
+	@Produces({"application/json", "application/xml"})
+	public List<ImageAdaptiveMediaRepr> getVariants(
+			@Context OrderBySelector orderBySelector,
+			@Context AdaptiveMediaApiQuery query)
+		throws AdaptiveMediaException, PortalException {
+
+		List<OrderBySelector.FieldOrder> orderList = orderBySelector.select(
+			_allowedAttributes.keySet());
+
+		List<AdaptiveMediaApiQuery.QueryAttribute> queryList = query.select(
+			_allowedAttributes);
+
+		if (!queryList.isEmpty() && !orderList.isEmpty()) {
+			throw new BadRequestException(
+				"Query and order requests cannot be used at the same time");
+		}
+
+		if (queryList.isEmpty() && orderList.isEmpty()) {
+			throw new BadRequestException(
+				"You must provide, at least, a valid query or order");
+		}
+
+		Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> stream;
+
+		if (orderList.isEmpty()) {
+			stream = _getAdaptiveMediaStream(queryList);
+		}
+		else {
+			stream = _finder.getAdaptiveMedia(queryBuilder -> {
+				ImageAdaptiveMediaQueryBuilder.InitialStep initialStep =
+					queryBuilder.forVersion(_fileVersion);
+
+				orderList.forEach(
+					order -> initialStep.orderBy(
+						(AdaptiveMediaAttribute)_allowedAttributes.get(
+							order.getFieldName()),
+						order.isAscending()));
+
+				return initialStep.done();
+			});
+		}
+
+		return _getImageAdaptiveMediaList(stream);
+	}
+
+	private ImageAdaptiveMediaConfigurationEntry
+		_getAdaptiveMediaConfigurationEntry(
+			AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia) {
+
+		Optional<String> uuid = adaptiveMedia.getAttributeValue(
+			AdaptiveMediaAttribute.configurationUuid());
+
+		return _configurationHelper.getImageAdaptiveMediaConfigurationEntry(
+			_fileVersion.getCompanyId(), uuid.get()).get();
+	}
+
 	private Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>>
 			_getAdaptiveMediaStream(
 				List<AdaptiveMediaApiQuery.QueryAttribute> query)
@@ -91,6 +157,16 @@ public class ImageAdaptiveMediaFileVersionResource {
 			});
 	}
 
+	private String _getAdaptiveMediaUri(
+		UriBuilder uriBuilder,
+		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia) {
+
+		return uriBuilder.clone().build(
+			Long.toString(_fileVersion.getFileVersionId()),
+			adaptiveMedia.getAttributeValue(
+				AdaptiveMediaAttribute.configurationUuid()).get()).toString();
+	}
+
 	private Response _getFirstAdaptiveMedia(
 		Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> stream) {
 
@@ -105,6 +181,19 @@ public class ImageAdaptiveMediaFileVersionResource {
 			adaptiveMedia.get().getInputStream()).build();
 	}
 
+	private List<ImageAdaptiveMediaRepr> _getImageAdaptiveMediaList(
+		Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> stream) {
+
+		UriBuilder uriBuilder = _uriBuilder.path(
+			ImageAdaptiveMediaFileVersionResource.class, "getConfiguration");
+
+		return stream.map(adaptiveMedia
+			-> new ImageAdaptiveMediaRepr(
+				adaptiveMedia, _getAdaptiveMediaUri(uriBuilder, adaptiveMedia),
+				_getAdaptiveMediaConfigurationEntry(adaptiveMedia))).collect(
+					Collectors.toList());
+	}
+
 	private static final Map<String, AdaptiveMediaAttribute<?, ?>>
 		_allowedAttributes = new HashMap<>();
 
@@ -114,7 +203,9 @@ public class ImageAdaptiveMediaFileVersionResource {
 		_allowedAttributes.putAll(AdaptiveMediaAttribute.allowedAttributes());
 	}
 
+	private final ImageAdaptiveMediaConfigurationHelper _configurationHelper;
 	private final FileVersion _fileVersion;
 	private final ImageAdaptiveMediaFinder _finder;
+	private final UriBuilder _uriBuilder;
 
 }
