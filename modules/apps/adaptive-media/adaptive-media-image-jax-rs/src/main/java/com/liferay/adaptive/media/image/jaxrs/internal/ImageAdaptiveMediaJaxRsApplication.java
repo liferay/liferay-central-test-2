@@ -16,6 +16,9 @@ package com.liferay.adaptive.media.image.jaxrs.internal;
 
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 
+import com.liferay.adaptive.media.image.jaxrs.internal.provider.AdaptiveMediaApiQueryContextProvider;
+import com.liferay.adaptive.media.image.jaxrs.internal.provider.OrderBySelectorContextProvider;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -36,7 +39,10 @@ public class ImageAdaptiveMediaJaxRsApplication extends Application {
 
 	public Set<Class<?>> getClasses() {
 		return new HashSet<>(
-				Collections.singletonList(JacksonJsonProvider.class));
+			Arrays.asList(
+				AdaptiveMediaApiQueryContextProvider.class,
+				JacksonJsonProvider.class,
+				OrderBySelectorContextProvider.class));
 	}
 
 	public Set<Object> getSingletons() {
