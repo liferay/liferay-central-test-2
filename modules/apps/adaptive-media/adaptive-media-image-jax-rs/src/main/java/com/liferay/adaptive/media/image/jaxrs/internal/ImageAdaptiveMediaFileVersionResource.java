@@ -14,6 +14,8 @@ import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 
+import java.io.InputStream;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,11 +24,13 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import javax.ws.rs.BadRequestException;
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
@@ -50,7 +54,9 @@ public class ImageAdaptiveMediaFileVersionResource {
 	@GET
 	@Path("/config/{uuid}")
 	@Produces("image")
-	public Response getConfiguration(@PathParam("uuid") String uuid)
+	public Response getConfiguration(
+			@PathParam("uuid") String uuid,
+			@DefaultValue("true") @QueryParam("original") boolean original)
 		throws AdaptiveMediaException, PortalException {
 
 		Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> stream =
@@ -58,13 +64,15 @@ public class ImageAdaptiveMediaFileVersionResource {
 				queryBuilder -> queryBuilder.forVersion(_fileVersion).
 					forConfiguration(uuid).done());
 
-		return _getFirstAdaptiveMedia(stream);
+		return _getFirstAdaptiveMedia(stream, original);
 	}
 
 	@GET
 	@Path("/data")
 	@Produces("image")
-	public Response getData(@Context AdaptiveMediaApiQuery query)
+	public Response getData(
+			@Context AdaptiveMediaApiQuery query,
+			@DefaultValue("true") @QueryParam("original") boolean original)
 		throws AdaptiveMediaException, PortalException {
 
 		List<AdaptiveMediaApiQuery.QueryAttribute> queryList = query.select(
@@ -77,7 +85,7 @@ public class ImageAdaptiveMediaFileVersionResource {
 		Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> stream =
 			_getAdaptiveMediaStream(queryList);
 
-		return _getFirstAdaptiveMedia(stream);
+		return _getFirstAdaptiveMedia(stream, original);
 	}
 
 	@GET
@@ -168,17 +176,23 @@ public class ImageAdaptiveMediaFileVersionResource {
 	}
 
 	private Response _getFirstAdaptiveMedia(
-		Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> stream) {
+			Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> stream,
+			boolean fallbackToOriginal)
+		throws PortalException {
 
 		Optional<AdaptiveMedia<ImageAdaptiveMediaProcessor>> adaptiveMedia =
 			stream.findFirst();
 
-		if (!adaptiveMedia.isPresent()) {
+		if (adaptiveMedia.isPresent() && !fallbackToOriginal) {
 			throw new NotFoundException();
 		}
 
+		InputStream content =
+			adaptiveMedia.isPresent() ? adaptiveMedia.get().getInputStream() :
+				_fileVersion.getContentStream(true);
+
 		return Response.status(200).type(_fileVersion.getMimeType()).entity(
-			adaptiveMedia.get().getInputStream()).build();
+			content).build();
 	}
 
 	private List<ImageAdaptiveMediaRepr> _getImageAdaptiveMediaList(
