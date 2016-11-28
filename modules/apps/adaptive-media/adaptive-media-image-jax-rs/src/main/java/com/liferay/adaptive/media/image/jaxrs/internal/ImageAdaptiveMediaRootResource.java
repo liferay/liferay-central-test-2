@@ -18,6 +18,7 @@ import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigur
 import com.liferay.adaptive.media.image.finder.ImageAdaptiveMediaFinder;
 import com.liferay.document.library.kernel.service.DLAppService;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 
 import javax.ws.rs.Path;
@@ -44,6 +45,27 @@ public class ImageAdaptiveMediaRootResource {
 			companyId, imageAdaptiveMediaConfigurationHelper);
 	}
 
+	@Path("/content/file/{fileEntryId}/{fileVersionTag}")
+	public ImageAdaptiveMediaFileVersionResource getFileEntryVersion(
+			@PathParam("fileEntryId") long fileEntryId,
+			@PathParam("fileVersionTag") String fileVersionTag)
+		throws PortalException {
+
+		FileEntry fileEntry = dlAppService.getFileEntry(fileEntryId);
+
+		FileVersion fileVersion;
+
+		if (fileVersionTag.equals("last")) {
+			fileVersion = fileEntry.getFileVersion();
+		}
+		else {
+			fileVersion = fileEntry.getFileVersion(fileVersionTag);
+		}
+
+		return new ImageAdaptiveMediaFileVersionResource(
+			fileVersion, finder, imageAdaptiveMediaConfigurationHelper,
+			_getBaseUriBuilder());
+	}
 
 	@Path("/content/version/{fileVersionId}")
 	public ImageAdaptiveMediaFileVersionResource getVersion(
