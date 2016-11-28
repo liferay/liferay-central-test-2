@@ -257,7 +257,7 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 
 	/**
 	 * @deprecated As of 7.0.0, replaced by {@link #breadcrumb(long, String,
-	 * 				boolean, boolean, boolean, boolean)}}
+	 *             boolean, boolean, boolean, boolean)}}
 	 */
 	@Deprecated
 	@Override

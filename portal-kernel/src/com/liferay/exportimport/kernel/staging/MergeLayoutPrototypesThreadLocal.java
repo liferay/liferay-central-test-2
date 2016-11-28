@@ -39,8 +39,8 @@ public class MergeLayoutPrototypesThreadLocal {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, replaced by {@link
-	 *             #isMergeComplete(String, Object...)}
+	 * @deprecated As of 7.0.0, replaced by {@link #isMergeComplete(String,
+	 *             Object...)}
 	 */
 	@Deprecated
 	public static boolean isMergeComplete(Method method, Object[] arguments) {
@@ -60,8 +60,8 @@ public class MergeLayoutPrototypesThreadLocal {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, replaced by {@link
-	 *             #setMergeComplete(String, Object...)}
+	 * @deprecated As of 7.0.0, replaced by {@link #setMergeComplete(String,
+	 *             Object...)}
 	 */
 	@Deprecated
 	public static void setMergeComplete(Method method, Object[] arguments) {
