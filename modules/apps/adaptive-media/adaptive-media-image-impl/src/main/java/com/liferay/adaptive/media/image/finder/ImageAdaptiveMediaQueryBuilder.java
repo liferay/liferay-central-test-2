@@ -38,6 +38,12 @@ public interface ImageAdaptiveMediaQueryBuilder
 
 	public InitialStep forVersion(FileVersion fileVersion);
 
+	public interface ConfigurationStep {
+
+		public FinalStep forConfiguration(String configurationUuid);
+
+	}
+
 	public interface FinalStep {
 
 		public AdaptiveMediaQuery<FileVersion, ImageAdaptiveMediaProcessor>
@@ -57,7 +63,8 @@ public interface ImageAdaptiveMediaQueryBuilder
 
 	}
 
-	public interface InitialStep extends FuzzySortStep, StrictSortStep {
+	public interface InitialStep
+		extends ConfigurationStep, FuzzySortStep, StrictSortStep {
 	}
 
 	public interface StrictSortStep extends FinalStep {

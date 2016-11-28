@@ -95,6 +95,18 @@ public class ImageAdaptiveMediaFinderImpl implements ImageAdaptiveMediaFinder {
 		BiFunction<FileVersion, ImageAdaptiveMediaConfigurationEntry, URI>
 			uriFactory = _getURIFactory(queryBuilder);
 
+		if (queryBuilder.hasConfiguration()) {
+			return configurationEntries.stream().filter(
+				configurationEntry ->
+					configurationEntry.getUUID().equals(
+						queryBuilder.getConfigurationUuid()) &&
+					_imageStorage.getImageInfo(fileVersion, configurationEntry)
+						.isPresent()
+			).map(
+				configurationEntry ->
+					_createMedia(fileVersion, uriFactory, configurationEntry));
+		}
+
 		return configurationEntries.stream().
 			filter(
 				configurationEntry ->
@@ -186,6 +198,12 @@ public class ImageAdaptiveMediaFinderImpl implements ImageAdaptiveMediaFinder {
 			AdaptiveMediaAttribute.fileName();
 
 		properties.put(fileNameAttribute.getName(), fileVersion.getFileName());
+
+		AdaptiveMediaAttribute<Object, String> configurationUuidAttribute =
+			AdaptiveMediaAttribute.configurationUuid();
+
+		properties.put(
+			configurationUuidAttribute.getName(), configurationEntry.getUUID());
 
 		ImageAdaptiveMediaAttributeMapping attributeMapping =
 			ImageAdaptiveMediaAttributeMapping.fromProperties(properties);

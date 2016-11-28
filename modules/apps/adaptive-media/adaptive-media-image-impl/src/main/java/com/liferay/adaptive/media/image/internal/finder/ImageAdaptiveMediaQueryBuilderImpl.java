@@ -33,6 +33,7 @@ import java.util.Optional;
  */
 public class ImageAdaptiveMediaQueryBuilderImpl
 	implements ImageAdaptiveMediaQueryBuilder,
+			   ImageAdaptiveMediaQueryBuilder.ConfigurationStep,
 			   ImageAdaptiveMediaQueryBuilder.FuzzySortStep,
 			   ImageAdaptiveMediaQueryBuilder.InitialStep,
 			   ImageAdaptiveMediaQueryBuilder.StrictSortStep {
@@ -67,6 +68,13 @@ public class ImageAdaptiveMediaQueryBuilderImpl
 	@Override
 	public AdaptiveMediaQuery<FileVersion, ImageAdaptiveMediaProcessor> done() {
 		return QUERY;
+	}
+
+	@Override
+	public FinalStep forConfiguration(String configurationUuid) {
+		_configurationUuid = configurationUuid;
+
+		return this;
 	}
 
 	@Override
@@ -111,6 +119,10 @@ public class ImageAdaptiveMediaQueryBuilderImpl
 		return (v1, v2) -> 0;
 	}
 
+	public String getConfigurationUuid() {
+		return _configurationUuid;
+	}
+
 	public FileVersion getFileVersion() throws PortalException {
 		if (_fileVersion != null) {
 			return _fileVersion;
@@ -119,6 +131,14 @@ public class ImageAdaptiveMediaQueryBuilderImpl
 		_fileVersion = _fileEntry.getLatestFileVersion();
 
 		return _fileVersion;
+	}
+
+	public boolean hasConfiguration() {
+		if (_configurationUuid != null) {
+			return true;
+		}
+
+		return false;
 	}
 
 	public boolean hasFileVersion() {
@@ -176,6 +196,7 @@ public class ImageAdaptiveMediaQueryBuilderImpl
 
 	private Map<AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, ?>, Object>
 		_attributes = new LinkedHashMap<>();
+	private String _configurationUuid;
 	private FileEntry _fileEntry;
 	private FileVersion _fileVersion;
 	private Map<AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, ?>, Boolean>

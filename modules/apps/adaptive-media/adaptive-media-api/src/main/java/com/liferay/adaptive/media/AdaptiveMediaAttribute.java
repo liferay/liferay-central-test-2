@@ -34,6 +34,21 @@ import java.util.function.Function;
 public final class AdaptiveMediaAttribute<T, V> {
 
 	/**
+	/**
+	 * Returns a generic attribute representing the configuration uuid used to
+	 * generate the media. This attribute can be used with any kind of media.
+	 *
+	 * @return the configuration uuid
+	 *
+	 * @review
+	 */
+	public static final <S> AdaptiveMediaAttribute<S, String>
+		configurationUuid() {
+
+		return (AdaptiveMediaAttribute<S, String>)_CONFIGURATION_UUID;
+	}
+
+	/**
 	 * Returns a generic attribute representing the content length of the media.
 	 * This attribute can be used with any kind of media.
 	 *
@@ -131,6 +146,10 @@ public final class AdaptiveMediaAttribute<T, V> {
 	public String getName() {
 		return _name;
 	}
+
+	private static final AdaptiveMediaAttribute<?, String> _CONFIGURATION_UUID =
+		new AdaptiveMediaAttribute<>(
+			"configuration-uuid", (s) -> s, String::compareTo);
 
 	private static final AdaptiveMediaAttribute<?, Integer> _CONTENT_LENGTH =
 		new AdaptiveMediaAttribute<>(

@@ -51,6 +51,10 @@ public class ImageAdaptiveMediaAttributeMapping {
 			attributes = new HashMap<>();
 
 		attributes.put(
+			AdaptiveMediaAttribute.configurationUuid(),
+			_getAttributeValue(
+				properties, AdaptiveMediaAttribute.configurationUuid()));
+		attributes.put(
 			AdaptiveMediaAttribute.contentLength(),
 			_getAttributeValue(
 				properties, AdaptiveMediaAttribute.contentLength()));
