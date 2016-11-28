@@ -45,7 +45,7 @@ public class ImageAdaptiveMediaRootResource {
 			companyId, imageAdaptiveMediaConfigurationHelper);
 	}
 
-	@Path("/content/file/{fileEntryId}/{fileVersionTag}")
+	@Path("/content/file/{fileEntryId}/version/{fileVersionTag}")
 	public ImageAdaptiveMediaFileVersionResource getFileEntryVersion(
 			@PathParam("fileEntryId") long fileEntryId,
 			@PathParam("fileVersionTag") String fileVersionTag)
