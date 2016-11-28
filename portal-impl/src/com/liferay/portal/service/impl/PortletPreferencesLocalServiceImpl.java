@@ -31,7 +31,6 @@ import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portal.kernel.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.kernel.service.ExceptionRetryAcceptor;
-import com.liferay.portal.kernel.service.LayoutLocalServiceUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
 import com.liferay.portal.kernel.spring.aop.Property;
@@ -482,7 +481,7 @@ public class PortletPreferencesLocalServiceImpl
 			return layoutRevision;
 		}
 
-		Layout layout = LayoutLocalServiceUtil.fetchLayout(plid);
+		Layout layout = layoutLocalService.fetchLayout(plid);
 
 		if (layout == null) {
 			return null;
