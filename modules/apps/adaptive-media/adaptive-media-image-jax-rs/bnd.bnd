@@ -3,6 +3,8 @@ Bundle-SymbolicName: com.liferay.adaptive.media.image.jaxrs
 Bundle-Version: 1.0.0
 ConfigurationPath: /configuration
 Import-Package:\
+	!com.fasterxml.jackson.*,\
+	\
 	!com.google.gson,\
 	\
 	!javassist.*,\
@@ -12,3 +14,9 @@ Import-Package:\
 Include-Resource: configuration=src/main/resources/configuration
 Liferay-Releng-Module-Group-Description:
 Liferay-Releng-Module-Group-Title: Adaptive Media
+-includeresource:\
+	@jackson-annotations-[0-9]*.jar,\
+	@jackson-core-[0-9]*.jar,\
+	@jackson-jaxrs-json-provider-[0-9]*.jar,\
+	@jackson-jaxrs-base-[0-9]*.jar,\
+	@jackson-databind-[0-9]*.jar

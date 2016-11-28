@@ -14,7 +14,11 @@
 
 package com.liferay.adaptive.media.image.jaxrs.internal;
 
+import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
+
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.ws.rs.ApplicationPath;
@@ -29,6 +33,11 @@ import org.osgi.service.component.annotations.Reference;
 @ApplicationPath("/")
 @Component(immediate = true, service = Application.class)
 public class ImageAdaptiveMediaJaxRsApplication extends Application {
+
+	public Set<Class<?>> getClasses() {
+		return new HashSet<>(
+				Collections.singletonList(JacksonJsonProvider.class));
+	}
 
 	public Set<Object> getSingletons() {
 		return Collections.singleton(_imageAdaptiveMediaRootResource);
