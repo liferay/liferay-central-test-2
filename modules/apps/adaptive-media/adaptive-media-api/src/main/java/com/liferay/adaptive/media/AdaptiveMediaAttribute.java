@@ -17,6 +17,8 @@ package com.liferay.adaptive.media;
 import aQute.bnd.annotation.ProviderType;
 
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Function;
 
 /**
@@ -34,6 +36,19 @@ import java.util.function.Function;
 public final class AdaptiveMediaAttribute<T, V> {
 
 	/**
+	 * Returns a string-attribute map containing all the name-attribute pairs
+	 * allowed to be used.
+	 *
+	 * @return the list of attributes allowed
+	 *
+	 * @review
+	 */
+	public static Map<String, AdaptiveMediaAttribute<?, ?>>
+		allowedAttributes() {
+
+		return _allowedAttributes;
+	}
+
 	/**
 	 * Returns a generic attribute representing the configuration uuid used to
 	 * generate the media. This attribute can be used with any kind of media.
@@ -162,6 +177,24 @@ public final class AdaptiveMediaAttribute<T, V> {
 	private static final AdaptiveMediaAttribute<?, String> _FILE_NAME =
 		new AdaptiveMediaAttribute<>(
 			"file-name", (s) -> s, (s1, s2) -> s1.compareTo(s2));
+
+	private static final Map<String, AdaptiveMediaAttribute<?, ?>>
+		_allowedAttributes = new HashMap<>();
+
+	static {
+		_allowedAttributes.put(
+			AdaptiveMediaAttribute._CONFIGURATION_UUID.getName(),
+			AdaptiveMediaAttribute._CONFIGURATION_UUID);
+		_allowedAttributes.put(
+			AdaptiveMediaAttribute._CONTENT_LENGTH.getName(),
+			AdaptiveMediaAttribute._CONTENT_LENGTH);
+		_allowedAttributes.put(
+			AdaptiveMediaAttribute._CONTENT_TYPE.getName(),
+			AdaptiveMediaAttribute._CONTENT_TYPE);
+		_allowedAttributes.put(
+			AdaptiveMediaAttribute._FILE_NAME.getName(),
+			AdaptiveMediaAttribute._FILE_NAME);
+	}
 
 	private final Comparator<V> _comparator;
 	private final Function<String, V> _converter;
