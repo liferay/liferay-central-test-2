@@ -38,8 +38,6 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.GenericEntity;
-import javax.ws.rs.core.Response;
 
 /**
  * @author Alejandro Hernández
@@ -88,7 +86,7 @@ public class ImageAdaptiveMediaConfigResource {
 
 	@DELETE
 	@Path("/{uuid}")
-	public Response deleteConfiguration(@PathParam("uuid") String uuid)
+	public void deleteConfiguration(@PathParam("uuid") String uuid)
 		throws PortalException {
 
 		if (!_permissionChecker.isCompanyAdmin()) {
@@ -102,8 +100,6 @@ public class ImageAdaptiveMediaConfigResource {
 		catch (IOException ioe) {
 			throw new InternalServerErrorException();
 		}
-
-		return Response.noContent().build();
 	}
 
 	@GET
@@ -125,20 +121,13 @@ public class ImageAdaptiveMediaConfigResource {
 
 	@GET
 	@Produces({"application/json", "application/xml"})
-	public Response getConfigurations() {
+	public List<ImageAdaptiveMediaConfigRepr> getConfigurations() {
 		Collection<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
 			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
 				_companyId);
 
-		List<ImageAdaptiveMediaConfigRepr> configReprs =
-			configurationEntries.stream().map(
-				ImageAdaptiveMediaConfigRepr::new).collect(Collectors.toList());
-
-		GenericEntity<List<ImageAdaptiveMediaConfigRepr>> entity =
-			new GenericEntity<List<ImageAdaptiveMediaConfigRepr>>(configReprs) {
-			};
-
-		return Response.ok(entity).build();
+		return configurationEntries.stream().map(
+			ImageAdaptiveMediaConfigRepr::new).collect(Collectors.toList());
 	}
 
 	private final long _companyId;
