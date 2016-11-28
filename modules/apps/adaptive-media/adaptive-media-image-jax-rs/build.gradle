@@ -11,5 +11,6 @@ dependencies {
 	provided group: "com.liferay.portal", name: "com.liferay.portal.kernel", version: "2.2.0"
 	provided group: "javax.servlet", name: "javax.servlet-api", version: "3.0.1"
 	provided group: "org.apache.cxf", name: "cxf-rt-rs-extension-providers", version: "3.0.3"
+	provided project(":adaptive-media-api");
 	provided project(":adaptive-media-image-impl");
 }
