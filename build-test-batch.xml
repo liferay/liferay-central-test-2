@@ -2485,14 +2485,7 @@ ${output.content}</echo>
 	<target name="wsdd-builder-jdk8">
 		<run-batch-test>
 			<test-action>
-				<ant dir="portal-impl">
-					<target name="build-wsdd-portal" />
-					<target name="build-wsdd-portlets" />
-				</ant>
-
-				<gradle-execute dir="modules" task="buildWSDD">
-					<arg value="-Dbuild.exclude.dirs=private/apps/osb-lcs" />
-				</gradle-execute>
+				<ant dir="portal-impl" target="build-wsdds" />
 			</test-action>
 
 			<test-set-up>
