@@ -22,7 +22,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import org.osgi.service.component.annotations.Component;
 
 /**
- * @author Gergely Mathe
+ * @author     Gergely Mathe
  * @deprecated As of 1.0.0
  */
 @Component(
