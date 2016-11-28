@@ -23,12 +23,12 @@ import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import java.io.IOException;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.ws.rs.BadRequestException;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.ForbiddenException;
 import javax.ws.rs.GET;
@@ -67,15 +67,13 @@ public class ImageAdaptiveMediaConfigResource {
 			throw new ForbiddenException();
 		}
 
-		Map<String, String> properties = new HashMap<>();
-
-		if (configRepr.getHeight() != -1) {
-			properties.put("height", String.valueOf(configRepr.getHeight()));
+		if ((configRepr == null) || (configRepr.getProperties().size() == 0)) {
+			throw new BadRequestException();
 		}
 
-		if (configRepr.getWidth() != -1) {
-			properties.put("width", String.valueOf(configRepr.getWidth()));
-		}
+		Map<String, String> properties = configRepr.getProperties();
+
+		configRepr.setUuid(uuid);
 
 		try {
 			_configurationHelper.addImageAdaptiveMediaConfigurationEntry(

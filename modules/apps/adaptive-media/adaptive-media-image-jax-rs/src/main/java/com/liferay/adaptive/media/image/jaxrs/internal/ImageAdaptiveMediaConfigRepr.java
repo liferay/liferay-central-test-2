@@ -14,65 +14,56 @@
 
 package com.liferay.adaptive.media.image.jaxrs.internal;
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
 
+import java.util.HashMap;
 import java.util.Map;
-
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * It serves as a proxy for the API layer for a
  * {@link ImageAdaptiveMediaConfigurationEntry}.
- * It also converts a configuration into its {@link String} representation.
  *
  * @author Alejandro Hernández
+ *
+ * @review
  */
-@XmlRootElement(name = "config")
 public class ImageAdaptiveMediaConfigRepr {
 
 	public ImageAdaptiveMediaConfigRepr() {
+		_properties = new HashMap<>();
 	}
 
 	public ImageAdaptiveMediaConfigRepr(
 		ImageAdaptiveMediaConfigurationEntry configurationEntry) {
 
-		Map<String, String> properties = configurationEntry.getProperties();
-
-		String height = properties.get("height");
-
-		if (height != null) {
-			_height = Integer.parseInt(height);
-		}
-
-		String width = properties.get("width");
-
-		if (width != null) {
-			_width = Integer.parseInt(width);
-		}
+		_properties = configurationEntry.getProperties();
 
 		_name = configurationEntry.getName();
 
 		_uuid = configurationEntry.getUUID();
 	}
 
-	public int getHeight() {
-		return _height;
+	@JsonAnySetter
+	public void addProperty(String key, String value) {
+		_properties.put(key, value);
 	}
 
 	public String getName() {
 		return _name;
 	}
 
+	@JsonAnyGetter
+	public Map<String, String> getProperties() {
+		return _properties;
+	}
+
+	@JsonProperty("id")
 	public String getUuid() {
 		return _uuid;
-	}
-
-	public int getWidth() {
-		return _width;
-	}
-
-	public void setHeight(int height) {
-		_height = height;
 	}
 
 	public void setName(String name) {
@@ -83,13 +74,8 @@ public class ImageAdaptiveMediaConfigRepr {
 		_uuid = uuid;
 	}
 
-	public void setWidth(int width) {
-		_width = width;
-	}
-
-	private int _height = -1;
 	private String _name;
+	private Map<String, String> _properties;
 	private String _uuid;
-	private int _width = -1;
 
 }
