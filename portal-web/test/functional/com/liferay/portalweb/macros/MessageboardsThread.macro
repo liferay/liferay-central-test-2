@@ -707,6 +707,8 @@
 		<if>
 			<isset var="mbThreadAttachment" />
 			<then>
+				<execute function="AssertClick" locator1="Button#ADVANCED_REPLY" value1="Advanced Reply" />
+
 				<if>
 					<condition function="IsNotVisible" locator1="MessageBoardsEditMessage#ATTACHMENTS_FILE_FIELD_1" />
 					<then>
