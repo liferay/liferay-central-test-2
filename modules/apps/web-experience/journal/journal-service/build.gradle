@@ -1,3 +1,5 @@
+apply plugin: "com.liferay.lang.merger"
+
 buildService {
 	apiDir = "../journal-api/src/main/java"
 	testDir = "../journal-test/src/testIntegration/java"
