@@ -2286,7 +2286,7 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  ;version="1.0.0",com.liferay.portal.atom;uses:="com.liferay.portal.ke
  rnel.atom,com.liferay.portal.kernel.exception,com.liferay.portal.kern
  el.model,javax.servlet.http";version="1.0.0",com.liferay.portal.bean;
- version="1.0.2";uses:="com.liferay.portal.kernel.bean,com.liferay.por
+ version="1.1.0";uses:="com.liferay.portal.kernel.bean,com.liferay.por
  tal.kernel.security.pacl,javax.servlet.http,org.springframework.conte
  xt",com.liferay.portal.cache.key;uses:="com.liferay.portal.kernel.cac
  he.key,com.liferay.portal.kernel.util";version="1.0.0",com.liferay.po
@@ -2463,7 +2463,7 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  ",com.liferay.portal.kernel.backgroundtask.display;version="1.0.0";us
  es:="com.liferay.portal.kernel.backgroundtask,com.liferay.portal.kern
  el.json,com.liferay.portal.kernel.template",com.liferay.portal.kernel
- .bean;version="7.0.0";uses:="javax.portlet,javax.servlet.http",com.li
+ .bean;version="7.1.0";uses:="javax.portlet,javax.servlet.http",com.li
  feray.portal.kernel.cache;version="7.1.0";uses:="com.liferay.portal.k
  ernel.nio.intraband.proxy.annotation,com.liferay.portal.kernel.spring
  .osgi",com.liferay.portal.kernel.cache.configurator;version="1.0.0",c
