@@ -59,9 +59,6 @@ public class ExportArticleUtil {
 			PortletRequest portletRequest, PortletResponse portletResponse)
 		throws IOException {
 
-		long groupId = ParamUtil.getLong(portletRequest, "groupId");
-		String articleId = ParamUtil.getString(portletRequest, "articleId");
-
 		String targetExtension = ParamUtil.getString(
 			portletRequest, "targetExtension");
 
@@ -69,6 +66,27 @@ public class ExportArticleUtil {
 
 		String[] allowedExtensions = StringUtil.split(
 			portletPreferences.getValue("extensions", null));
+
+		if (Validator.isNull(targetExtension) ||
+			!ArrayUtil.contains(allowedExtensions, targetExtension)) {
+
+			return;
+		}
+
+		sendFile(targetExtension, portletRequest, portletResponse);
+	}
+
+	public void sendFile(
+			String targetExtension, PortletRequest portletRequest,
+			PortletResponse portletResponse)
+		throws IOException {
+
+		if (Validator.isNull(targetExtension)) {
+			return;
+		}
+
+		long groupId = ParamUtil.getLong(portletRequest, "groupId");
+		String articleId = ParamUtil.getString(portletRequest, "articleId");
 
 		String languageId = LanguageUtil.getLanguageId(portletRequest);
 		PortletRequestModel portletRequestModel = new PortletRequestModel(
@@ -123,15 +141,6 @@ public class ExportArticleUtil {
 			sourceExtension);
 
 		String contentType = MimeTypesUtil.getContentType(fileName);
-
-		if (Validator.isNull(targetExtension) ||
-			!ArrayUtil.contains(allowedExtensions, targetExtension)) {
-
-			ServletResponseUtil.sendFile(
-				request, response, fileName, is, contentType);
-
-			return;
-		}
 
 		String id = DLUtil.getTempFileId(
 			articleDisplay.getId(), String.valueOf(articleDisplay.getVersion()),
