@@ -26,6 +26,7 @@ PortletURL resourceURL = (PortletURL)request.getAttribute("liferay-frontend:diff
 double sourceVersion = (Double)request.getAttribute("liferay-frontend:diff-version-comparator:sourceVersion");
 double targetVersion = (Double)request.getAttribute("liferay-frontend:diff-version-comparator:targetVersion");
 
+List<DiffVersion> diffVersions = diffVersionsInfo.getDiffVersions();
 double nextVersion = diffVersionsInfo.getNextVersion();
 double previousVersion = diffVersionsInfo.getPreviousVersion();
 
@@ -34,10 +35,6 @@ if (Validator.isNotNull(languageId)) {
 
 	resourceURL.setParameter("languageId", languageId);
 }
-
-List<DiffVersion> diffVersions = diffVersionsInfo.getDiffVersions();
-
-int diffVersionSize = diffVersions.size();
 %>
 
 <aui:form action="<%= portletURL %>" cssClass="container-fluid-1280 diff-version-comparator" method="post" name="diffVersionFm">
@@ -54,7 +51,7 @@ int diffVersionSize = diffVersions.size();
 				<aui:col width="<%= 30 %>">
 					<div class="pull-right">
 						<c:choose>
-							<c:when test="<%= diffVersionSize <= 2 %>">
+							<c:when test="<%= diffVersions.size() <= 2 %>">
 								<liferay-ui:icon label="<%= true %>" message='<%= LanguageUtil.format(request, "version-x", sourceVersion) %>' />
 							</c:when>
 							<c:otherwise>
@@ -95,7 +92,7 @@ int diffVersionSize = diffVersions.size();
 
 				<aui:col cssClass="diff-target-selector" width="<%= 70 %>">
 					<c:choose>
-						<c:when test="<%= diffVersionSize <= 2 %>">
+						<c:when test="<%= diffVersions.size() <= 2 %>">
 							<liferay-ui:icon label="<%= true %>" message='<%= LanguageUtil.format(request, "version-x", targetVersion) %>' />
 						</c:when>
 						<c:otherwise>
@@ -142,7 +139,7 @@ int diffVersionSize = diffVersions.size();
 					<%
 					int diffVersionsCount = 0;
 
-					for (int i = 0; i < diffVersionSize; i++) {
+					for (int i = 0; i < diffVersions.size(); i++) {
 						DiffVersion diffVersion = diffVersions.get(i);
 
 						if ((diffVersion.getVersion() <= sourceVersion) || (diffVersion.getVersion() > targetVersion)) {
@@ -185,7 +182,7 @@ int diffVersionSize = diffVersions.size();
 							<%
 							double previousSourceVersion = sourceVersion;
 
-							for (int i = 0; i < diffVersionSize; i++) {
+							for (int i = 0; i < diffVersions.size(); i++) {
 								DiffVersion diffVersion = diffVersions.get(i);
 
 								if ((diffVersion.getVersion() <= sourceVersion) || (diffVersion.getVersion() > targetVersion)) {
