@@ -53,11 +53,10 @@ public class UpgradeOrganizationTest {
 		List<Organization> organizations =
 			OrganizationLocalServiceUtil.getOrganizations(-1, -1);
 
-		String[] organizationsTypes = PropsValues.ORGANIZATIONS_TYPES;
-
 		for (Organization organization : organizations) {
 			Assert.assertTrue(
-				ArrayUtil.contains(organizationsTypes, organization.getType()));
+				ArrayUtil.contains(
+					PropsValues.ORGANIZATIONS_TYPES, organization.getType()));
 		}
 	}
 
