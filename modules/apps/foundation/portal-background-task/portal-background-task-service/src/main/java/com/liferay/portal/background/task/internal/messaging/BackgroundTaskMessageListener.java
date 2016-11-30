@@ -213,9 +213,8 @@ public class BackgroundTaskMessageListener extends BaseMessageListener {
 
 			if (backgroundTaskExecutor == null) {
 				throw new IllegalStateException(
-					"BackgroundTaskExecutor has not been properly registered " +
-						"into the BackgroundTaskExecutorRegistry: " +
-							backgroundTask.getTaskExecutorClassName());
+					"Unknown background task executor " +
+						backgroundTask.getTaskExecutorClassName());
 			}
 
 			backgroundTaskExecutor = backgroundTaskExecutor.clone();
