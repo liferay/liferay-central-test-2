@@ -4,7 +4,8 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.liferay</groupId>
   <artifactId>com.liferay.poshi.runner</artifactId>
-  <version>1.0.48</version>
+  <version>1.0.50</version>
+  <description>Liferay Poshi Runner</description>
   <licenses>
     <license>
       <name>LGPL 2.1</name>
@@ -28,6 +29,12 @@
       <groupId>com.deque</groupId>
       <artifactId>axe-selenium</artifactId>
       <version>1.1</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.github.scribejava</groupId>
+      <artifactId>scribejava-core</artifactId>
+      <version>3.2.0</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
