@@ -18,6 +18,7 @@ import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigur
 import com.liferay.adaptive.media.image.finder.ImageAdaptiveMediaFinder;
 import com.liferay.document.library.kernel.service.DLAppService;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 
@@ -37,12 +38,12 @@ import org.osgi.service.component.annotations.Reference;
 @Path("/images")
 public class ImageAdaptiveMediaRootResource {
 
-	@Path("/configuration/{companyId}")
+	@Path("/configuration")
 	public ImageAdaptiveMediaConfigResource getConfiguration(
-		@PathParam("companyId") long companyId) {
+		@Context Company company) {
 
 		return new ImageAdaptiveMediaConfigResource(
-			companyId, imageAdaptiveMediaConfigurationHelper);
+			company.getCompanyId(), imageAdaptiveMediaConfigurationHelper);
 	}
 
 	@Path("/content/file/{fileEntryId}/version/{fileVersionTag}")
