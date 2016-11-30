@@ -37,11 +37,11 @@ public class UpgradeOrganization extends UpgradeProcess {
 			PropsValues.ORGANIZATIONS_TYPES);
 
 		String organizationsTypesString = ListUtil.toString(
-			organizationsTypes, StringPool.NULL, "','");
+			organizationsTypes, StringPool.NULL, "', '");
 
 		try (LoggingTimer loggingTimer = new LoggingTimer()) {
 			runSQL(
-				"update Organization_ set type_='organization' where type_ " +
+				"update Organization_ set type_ = 'organization' where type_ " +
 					"not in ('" + organizationsTypesString + "')");
 		}
 	}
