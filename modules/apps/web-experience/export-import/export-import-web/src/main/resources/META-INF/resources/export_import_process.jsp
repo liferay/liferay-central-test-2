@@ -17,18 +17,19 @@
 <%@ include file="/init.jsp" %>
 
 <%
-long backgroundTaskId = ParamUtil.getLong(request, "backgroundTaskId");
 String backURL = ParamUtil.getString(request, "backURL");
 
-if (Validator.isNotNull(backURL)) {
-	portletDisplay.setShowBackIcon(true);
-	portletDisplay.setURLBack(backURL);
-}
+long backgroundTaskId = ParamUtil.getLong(request, "backgroundTaskId");
 
 BackgroundTask backgroundTask = null;
 
 if (backgroundTaskId > 0) {
 	backgroundTask = BackgroundTaskManagerUtil.getBackgroundTask(backgroundTaskId);
+}
+
+if (Validator.isNotNull(backURL)) {
+	portletDisplay.setShowBackIcon(true);
+	portletDisplay.setURLBack(backURL);
 }
 %>
 
