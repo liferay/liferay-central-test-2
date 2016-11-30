@@ -90,7 +90,7 @@ public class ExportImportUserNotificationHandler
 			_log.error(pe, pe);
 
 			return LanguageUtil.format(
-				resourceBundle, "error-x-cannot-be-found",
+				resourceBundle, "unable-to-find-x",
 				LanguageUtil.get(
 					resourceBundle, "export-import-configuration"));
 		}
