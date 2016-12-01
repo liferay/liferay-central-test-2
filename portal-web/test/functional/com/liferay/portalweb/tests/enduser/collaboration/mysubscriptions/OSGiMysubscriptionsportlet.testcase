@@ -17,8 +17,6 @@
 	</tear-down>
 
 	<command name="MySubscriptionsPortletSmoke" priority="4">
-		<property name="portlet.plugins.includes" value="my-subscriptions-portlet" />
-
 		<var name="appName" value="My Subscriptions" />
 
 		<execute macro="Navigator#gotoPage">
