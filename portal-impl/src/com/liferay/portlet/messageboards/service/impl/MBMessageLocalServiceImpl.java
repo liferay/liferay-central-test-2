@@ -1985,7 +1985,11 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			return subject;
 		}
 
-		return subject.substring(50) + StringPool.TRIPLE_PERIOD;
+		String subjectSubstring =
+			subject.substring(0, 50) +
+				StringPool.TRIPLE_PERIOD;
+
+		return subjectSubstring;
 	}
 
 	protected String getMessageURL(
