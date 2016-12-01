@@ -1,4 +1,4 @@
-Bundle-Name: Liferay OSGiFelix Utilities
+Bundle-Name: Liferay OSGi Felix Utilities
 Bundle-SymbolicName: com.liferay.osgi.felix.util
 Bundle-Version: 1.0.0
 Export-Package:\
