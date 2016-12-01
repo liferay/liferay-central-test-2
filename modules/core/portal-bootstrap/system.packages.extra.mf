@@ -3601,7 +3601,7 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  service.permission,com.liferay.portal.kernel.systemevent,com.liferay.
  portal.kernel.util,com.liferay.portlet.asset.service.base,com.liferay
  .portlet.asset.validator";version="1.0.0",com.liferay.portlet.asset.s
- ervice.permission;version="1.0.2";uses:="com.liferay.asset.kernel.mod
+ ervice.permission;version="1.1.0";uses:="com.liferay.asset.kernel.mod
  el,com.liferay.portal.kernel.exception,com.liferay.portal.kernel.secu
  rity.permission,com.liferay.portal.kernel.spring.osgi",com.liferay.po
  rtlet.asset.service.persistence.impl;uses:="com.liferay.asset.kernel.
