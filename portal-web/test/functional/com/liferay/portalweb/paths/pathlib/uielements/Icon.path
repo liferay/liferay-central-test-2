@@ -209,6 +209,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>STAR_UNSUBSCRIBED</td>
+	<td>//span/*[name()='svg'][contains(@class,'icon-star-o')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>SUBSCRIBE</td>
 	<td>//span/*[name()='svg'][contains(@class,'icon-star')]</td>
 	<td></td>
