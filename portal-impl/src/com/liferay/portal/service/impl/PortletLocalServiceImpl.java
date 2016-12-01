@@ -484,6 +484,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 	@Skip
 	public Portlet getPortletById(long companyId, String portletId) {
 		portletId = PortalUtil.getJsSafePortletId(portletId);
+		portletId = StringUtil.replace(
+			portletId, new char[] {'$'}, new char[] {'_'});
 
 		Portlet portlet = null;
 
