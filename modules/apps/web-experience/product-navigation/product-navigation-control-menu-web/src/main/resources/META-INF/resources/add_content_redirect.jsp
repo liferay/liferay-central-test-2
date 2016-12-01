@@ -60,7 +60,6 @@ if (Validator.isNotNull(className) && (classPK > 0)) {
 		Util.getOpener().Liferay.fire('AddContent:refreshContentList');
 	</c:if>
 
-	debugger;
 	Liferay.fire(
 		'closeWindow',
 		{
