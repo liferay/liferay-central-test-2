@@ -3156,10 +3156,10 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 		String strippedQuotesPreviousLine = stripQuotes(previousLine);
 
 		if (strippedQuotesLine.contains("// ") ||
-			strippedQuotesLine.contains("*/") ||
+			strippedQuotesLine.contains("/*") ||
 			strippedQuotesLine.contains("*/") ||
 			strippedQuotesPreviousLine.contains("// ") ||
-			strippedQuotesPreviousLine.contains("*/") ||
+			strippedQuotesPreviousLine.contains("/*") ||
 			strippedQuotesPreviousLine.contains("*/")) {
 
 			return null;
