@@ -1,6 +1,5 @@
 <definition component-name="portal-staging">
 	<property name="portal.release" value="true" />
-	<property name="portal.upstream" value="true" />
 	<property name="testray.main.component.name" value="Staging" />
 
 	<set-up>
@@ -167,4 +166,5 @@
 			<var name="sitePagesVariationName" value="Site Pages Variation Name" />
 		</execute>
 	</command>
+</definition>
 </definition>
