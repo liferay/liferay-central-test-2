@@ -30,6 +30,8 @@ import com.liferay.portal.kernel.repository.model.FileVersion;
 
 import java.io.InputStream;
 
+import java.net.URI;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -149,15 +151,17 @@ public class ImageAdaptiveMediaFileVersionResource {
 		return _getImageAdaptiveMediaList(stream);
 	}
 
-	private ImageAdaptiveMediaConfigurationEntry
+	private Optional<ImageAdaptiveMediaConfigurationEntry>
 		_getAdaptiveMediaConfigurationEntry(
 			AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia) {
 
 		Optional<String> uuidOptional = adaptiveMedia.getAttributeValue(
 			AdaptiveMediaAttribute.configurationUuid());
 
-		return _configurationHelper.getImageAdaptiveMediaConfigurationEntry(
-			_fileVersion.getCompanyId(), uuidOptional.get()).get();
+		return uuidOptional.flatMap(
+			uuid ->
+				_configurationHelper.getImageAdaptiveMediaConfigurationEntry(
+					_fileVersion.getCompanyId(), uuid));
 	}
 
 	private Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>>
@@ -179,14 +183,22 @@ public class ImageAdaptiveMediaFileVersionResource {
 			});
 	}
 
-	private String _getAdaptiveMediaUri(
-		UriBuilder uriBuilder,
+	private Optional<String> _getAdaptiveMediaUri(
 		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia) {
 
-		return uriBuilder.clone().build(
-			Long.toString(_fileVersion.getFileVersionId()),
+		UriBuilder uriBuilder = _uriBuilder.clone().path(
+			ImageAdaptiveMediaFileVersionResource.class, "getConfiguration");
+
+		Optional<String> attributeValueOptional =
 			adaptiveMedia.getAttributeValue(
-				AdaptiveMediaAttribute.configurationUuid()).get()).toString();
+				AdaptiveMediaAttribute.configurationUuid());
+
+		Optional<URI> uriOptional = attributeValueOptional.map(
+			(value) ->
+				uriBuilder.build(
+					String.valueOf(_fileVersion.getFileVersionId()), value));
+
+		return uriOptional.map((u) -> u.toString());
 	}
 
 	private Response _getFirstAdaptiveMedia(
@@ -217,14 +229,31 @@ public class ImageAdaptiveMediaFileVersionResource {
 	private List<ImageAdaptiveMediaRepr> _getImageAdaptiveMediaList(
 		Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> stream) {
 
-		UriBuilder uriBuilder = _uriBuilder.path(
-			ImageAdaptiveMediaFileVersionResource.class, "getConfiguration");
+		return stream.flatMap(
+			(adaptiveMedia) -> _getRepr(adaptiveMedia)).
+			collect(Collectors.toList());
+	}
 
-		return stream.map(
-			adaptiveMedia -> new ImageAdaptiveMediaRepr(
-				adaptiveMedia, _getAdaptiveMediaUri(uriBuilder, adaptiveMedia),
-				_getAdaptiveMediaConfigurationEntry(adaptiveMedia))).collect(
-					Collectors.toList());
+	private Stream<ImageAdaptiveMediaRepr> _getRepr(
+		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia) {
+
+		Optional<ImageAdaptiveMediaRepr> imageAdaptiveMediaReprOptional =
+			_getAdaptiveMediaConfigurationEntry(adaptiveMedia).
+				flatMap(
+					configurationEntry -> {
+						Optional<String> uriOptional = _getAdaptiveMediaUri(
+							adaptiveMedia);
+
+						return uriOptional.map((uri) ->
+							new ImageAdaptiveMediaRepr(
+								adaptiveMedia, uri, configurationEntry));
+				});
+
+		if (imageAdaptiveMediaReprOptional.isPresent()) {
+			return Stream.of(imageAdaptiveMediaReprOptional.get());
+		}
+
+		return Stream.empty();
 	}
 
 	private static final Map<String, AdaptiveMediaAttribute<?, ?>>
