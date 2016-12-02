@@ -3,3 +3,8 @@
 <log4j:locationInfo class="com.liferay.portal.kernel.log.SanitizerLogWrapper" method="info" file="SanitizerLogWrapper.java" line="139"/>
 </log4j:event>
 
+<log4j:event logger="com.liferay.portal.tools.deploy.BaseDeployer" timestamp="1480656607830" level="INFO" thread="main">
+<log4j:message><![CDATA[Deploying com.liferay.portal.rules.engine.sample.web-2.0.3-SNAPSHOT.war]]></log4j:message>
+<log4j:locationInfo class="com.liferay.portal.kernel.log.SanitizerLogWrapper" method="info" file="SanitizerLogWrapper.java" line="139"/>
+</log4j:event>
+
