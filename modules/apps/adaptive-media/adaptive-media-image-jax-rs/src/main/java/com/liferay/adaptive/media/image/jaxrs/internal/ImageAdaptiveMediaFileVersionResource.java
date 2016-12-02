@@ -197,7 +197,7 @@ public class ImageAdaptiveMediaFileVersionResource {
 		Optional<AdaptiveMedia<ImageAdaptiveMediaProcessor>>
 			adaptiveMediaOptional = stream.findFirst();
 
-		if (adaptiveMediaOptional.isPresent() && !fallbackToOriginal) {
+		if (!adaptiveMediaOptional.isPresent() && !fallbackToOriginal) {
 			throw new NotFoundException();
 		}
 
