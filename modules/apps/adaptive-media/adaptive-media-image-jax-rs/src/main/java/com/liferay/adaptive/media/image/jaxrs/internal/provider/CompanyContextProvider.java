@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.service.CompanyLocalService;
-import com.liferay.portal.kernel.test.util.TestPropsValues;
 import com.liferay.portal.kernel.util.PortalUtil;
 
 import javax.servlet.http.HttpServletRequest;
@@ -45,11 +44,6 @@ public class CompanyContextProvider implements ContextProvider<Company> {
 			(HttpServletRequest)message.getContextualProperty("HTTP.REQUEST");
 
 		try {
-			if (request.getHeader("Test") != null) {
-				return _companyLocalService.getCompanyById(
-					TestPropsValues.getCompanyId());
-			}
-
 			return PortalUtil.getCompany(request);
 		}
 		catch (PortalException pe) {
