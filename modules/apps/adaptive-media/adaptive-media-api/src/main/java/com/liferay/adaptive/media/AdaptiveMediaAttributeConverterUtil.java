@@ -28,8 +28,10 @@ package com.liferay.adaptive.media;
  */
 public class AdaptiveMediaAttributeConverterUtil {
 
-	public static Integer parseInt(String value) throws
-		AdaptiveMediaRuntimeException.AdaptiveMediaAttributeFormatException {
+	public static Integer parseInt(String value)
+		throws
+			AdaptiveMediaRuntimeException.
+				AdaptiveMediaAttributeFormatException {
 
 		try {
 			return Integer.parseInt(value);

@@ -64,7 +64,8 @@ public class AdaptiveMediaPropertyDistanceComparator
 				value2 -> attribute.distance(value2, requestedValue));
 
 			Optional<Integer> resultOptional = value1DistanceOptional.flatMap(
-				value1 -> value2DistanceOptional.map(value2 -> value1 - value2));
+				value1 -> value2DistanceOptional.map(
+					value2 -> value1 - value2));
 
 			int result = resultOptional.orElse(0);
 
