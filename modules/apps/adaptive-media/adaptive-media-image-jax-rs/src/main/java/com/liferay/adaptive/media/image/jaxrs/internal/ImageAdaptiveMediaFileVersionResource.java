@@ -104,7 +104,7 @@ public class ImageAdaptiveMediaFileVersionResource {
 
 	@GET
 	@Path("/variants")
-	@Produces({"application/json", "application/xml"})
+	@Produces("application/json")
 	public List<ImageAdaptiveMediaRepr> getVariants(
 			@Context OrderBySelector orderBySelector,
 			@Context AdaptiveMediaApiQuery query)

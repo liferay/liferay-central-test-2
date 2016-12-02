@@ -55,7 +55,7 @@ public class ImageAdaptiveMediaConfigResource {
 	}
 
 	@Path("/{uuid}")
-	@Produces({"application/json", "application/xml"})
+	@Produces("application/json")
 	@PUT
 	public ImageAdaptiveMediaConfigRepr addConfiguration(
 			@PathParam("uuid") String uuid,
@@ -107,7 +107,7 @@ public class ImageAdaptiveMediaConfigResource {
 
 	@GET
 	@Path("/{uuid}")
-	@Produces({"application/json", "application/xml"})
+	@Produces("application/json")
 	public ImageAdaptiveMediaConfigRepr getConfiguration(
 		@PathParam("uuid") String uuid) {
 
@@ -123,7 +123,7 @@ public class ImageAdaptiveMediaConfigResource {
 	}
 
 	@GET
-	@Produces({"application/json", "application/xml"})
+	@Produces("application/json")
 	public List<ImageAdaptiveMediaConfigRepr> getConfigurations() {
 		Collection<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
 			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
