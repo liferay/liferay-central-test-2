@@ -54,17 +54,17 @@ public class AdaptiveMediaPropertyDistanceComparator
 			Optional<?> value1Optional = adaptiveMedia1.getAttributeValue(
 				attribute);
 
-			Optional<Integer> value1Distance = value1Optional.map(
+			Optional<Integer> value1DistanceOptional = value1Optional.map(
 				value1 -> attribute.distance(value1, requestedValue));
 
 			Optional<?> value2Optional = adaptiveMedia2.getAttributeValue(
 				attribute);
 
-			Optional<Integer> value2Distance = value2Optional.map(
+			Optional<Integer> value2DistanceOptional = value2Optional.map(
 				value2 -> attribute.distance(value2, requestedValue));
 
-			Optional<Integer> resultOptional = value1Distance.flatMap(
-				value1 -> value2Distance.map(value2 -> value1 - value2));
+			Optional<Integer> resultOptional = value1DistanceOptional.flatMap(
+				value1 -> value2DistanceOptional.map(value2 -> value1 - value2));
 
 			int result = resultOptional.orElse(0);
 

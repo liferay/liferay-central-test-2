@@ -153,11 +153,11 @@ public class ImageAdaptiveMediaFileVersionResource {
 		_getAdaptiveMediaConfigurationEntry(
 			AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia) {
 
-		Optional<String> uuid = adaptiveMedia.getAttributeValue(
+		Optional<String> uuidOptional = adaptiveMedia.getAttributeValue(
 			AdaptiveMediaAttribute.configurationUuid());
 
 		return _configurationHelper.getImageAdaptiveMediaConfigurationEntry(
-			_fileVersion.getCompanyId(), uuid.get()).get();
+			_fileVersion.getCompanyId(), uuidOptional.get()).get();
 	}
 
 	private Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>>
@@ -194,17 +194,17 @@ public class ImageAdaptiveMediaFileVersionResource {
 			boolean fallbackToOriginal)
 		throws PortalException {
 
-		Optional<AdaptiveMedia<ImageAdaptiveMediaProcessor>> adaptiveMedia =
-			stream.findFirst();
+		Optional<AdaptiveMedia<ImageAdaptiveMediaProcessor>>
+			adaptiveMediaOptional = stream.findFirst();
 
-		if (adaptiveMedia.isPresent() && !fallbackToOriginal) {
+		if (adaptiveMediaOptional.isPresent() && !fallbackToOriginal) {
 			throw new NotFoundException();
 		}
 
 		InputStream inputStream = null;
 
-		if (adaptiveMedia.isPresent()) {
-			inputStream = adaptiveMedia.get().getInputStream();
+		if (adaptiveMediaOptional.isPresent()) {
+			inputStream = adaptiveMediaOptional.get().getInputStream();
 		}
 		else {
 			inputStream = _fileVersion.getContentStream(true);
