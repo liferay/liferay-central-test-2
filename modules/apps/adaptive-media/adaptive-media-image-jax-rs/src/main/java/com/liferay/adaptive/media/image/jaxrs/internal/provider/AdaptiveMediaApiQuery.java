@@ -37,6 +37,7 @@ public interface AdaptiveMediaApiQuery {
 			_value = value;
 		}
 
+		@Override
 		public boolean equals(Object o) {
 			if (this == o) {
 				return true;
@@ -65,6 +66,7 @@ public interface AdaptiveMediaApiQuery {
 			return _value;
 		}
 
+		@Override
 		public int hashCode() {
 			int result = _attribute.hashCode();
 

@@ -32,6 +32,7 @@ public interface OrderBySelector {
 			_ascending = ascending;
 		}
 
+		@Override
 		public boolean equals(Object o) {
 			if (this == o) {
 				return true;
@@ -56,6 +57,7 @@ public interface OrderBySelector {
 			return _fieldName;
 		}
 
+		@Override
 		public int hashCode() {
 			int result = _fieldName.hashCode();
 

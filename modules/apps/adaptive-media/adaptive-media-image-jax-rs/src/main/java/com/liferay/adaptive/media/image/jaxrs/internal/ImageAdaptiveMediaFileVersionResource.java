@@ -1,3 +1,17 @@
+/**
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ */
+
 package com.liferay.adaptive.media.image.jaxrs.internal;
 
 import com.liferay.adaptive.media.AdaptiveMedia;
@@ -42,12 +56,12 @@ public class ImageAdaptiveMediaFileVersionResource {
 
 	public ImageAdaptiveMediaFileVersionResource(
 		FileVersion fileVersion, ImageAdaptiveMediaFinder finder,
-		ImageAdaptiveMediaConfigurationHelper
-			imageAdaptiveMediaConfigurationHelper, UriBuilder uriBuilder) {
+		ImageAdaptiveMediaConfigurationHelper configurationHelper,
+		UriBuilder uriBuilder) {
 
 		_fileVersion = fileVersion;
 		_finder = finder;
-		_configurationHelper = imageAdaptiveMediaConfigurationHelper;
+		_configurationHelper = configurationHelper;
 		_uriBuilder = uriBuilder;
 	}
 
@@ -96,37 +110,37 @@ public class ImageAdaptiveMediaFileVersionResource {
 			@Context AdaptiveMediaApiQuery query)
 		throws AdaptiveMediaException, PortalException {
 
-		List<OrderBySelector.FieldOrder> orderList = orderBySelector.select(
-			_allowedAttributes.keySet());
+		List<OrderBySelector.FieldOrder> fieldOrderList =
+			orderBySelector.select(_allowedAttributes.keySet());
 
-		List<AdaptiveMediaApiQuery.QueryAttribute> queryList = query.select(
-			_allowedAttributes);
+		List<AdaptiveMediaApiQuery.QueryAttribute> queryAtrributeList =
+			query.select(_allowedAttributes);
 
-		if (!queryList.isEmpty() && !orderList.isEmpty()) {
+		if (!queryAtrributeList.isEmpty() && !fieldOrderList.isEmpty()) {
 			throw new BadRequestException(
 				"Query and order requests cannot be used at the same time");
 		}
 
-		if (queryList.isEmpty() && orderList.isEmpty()) {
+		if (queryAtrributeList.isEmpty() && fieldOrderList.isEmpty()) {
 			throw new BadRequestException(
 				"You must provide, at least, a valid query or order");
 		}
 
 		Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> stream;
 
-		if (orderList.isEmpty()) {
-			stream = _getAdaptiveMediaStream(queryList);
+		if (fieldOrderList.isEmpty()) {
+			stream = _getAdaptiveMediaStream(queryAtrributeList);
 		}
 		else {
 			stream = _finder.getAdaptiveMedia(queryBuilder -> {
 				ImageAdaptiveMediaQueryBuilder.InitialStep initialStep =
 					queryBuilder.forVersion(_fileVersion);
 
-				orderList.forEach(
-					order -> initialStep.orderBy(
+				fieldOrderList.forEach(
+					fieldOrder -> initialStep.orderBy(
 						(AdaptiveMediaAttribute)_allowedAttributes.get(
-							order.getFieldName()),
-						order.isAscending()));
+							fieldOrder.getFieldName()),
+						fieldOrder.isAscending()));
 
 				return initialStep.done();
 			});
@@ -187,12 +201,17 @@ public class ImageAdaptiveMediaFileVersionResource {
 			throw new NotFoundException();
 		}
 
-		InputStream content =
-			adaptiveMedia.isPresent() ? adaptiveMedia.get().getInputStream() :
-				_fileVersion.getContentStream(true);
+		InputStream inputStream = null;
+
+		if (adaptiveMedia.isPresent()) {
+			inputStream = adaptiveMedia.get().getInputStream();
+		}
+		else {
+			inputStream = _fileVersion.getContentStream(true);
+		}
 
 		return Response.status(200).type(_fileVersion.getMimeType()).entity(
-			content).build();
+			inputStream).build();
 	}
 
 	private List<ImageAdaptiveMediaRepr> _getImageAdaptiveMediaList(
@@ -201,8 +220,8 @@ public class ImageAdaptiveMediaFileVersionResource {
 		UriBuilder uriBuilder = _uriBuilder.path(
 			ImageAdaptiveMediaFileVersionResource.class, "getConfiguration");
 
-		return stream.map(adaptiveMedia
-			-> new ImageAdaptiveMediaRepr(
+		return stream.map(
+			adaptiveMedia -> new ImageAdaptiveMediaRepr(
 				adaptiveMedia, _getAdaptiveMediaUri(uriBuilder, adaptiveMedia),
 				_getAdaptiveMediaConfigurationEntry(adaptiveMedia))).collect(
 					Collectors.toList());

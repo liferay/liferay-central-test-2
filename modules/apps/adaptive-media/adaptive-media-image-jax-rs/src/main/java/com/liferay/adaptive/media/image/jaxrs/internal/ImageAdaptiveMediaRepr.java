@@ -46,11 +46,13 @@ public class ImageAdaptiveMediaRepr {
 
 		_config = new ImageAdaptiveMediaConfigRepr(configurationEntry);
 
-		ImageAdaptiveMediaAttribute.allowedAttributes().forEach((k, v) ->
-			_parseAttributes(adaptiveMedia, k, v));
+		ImageAdaptiveMediaAttribute.allowedAttributes().forEach(
+			(attributeName, attribute) -> _parseAttributes(
+				adaptiveMedia, attributeName, attribute));
 
-		AdaptiveMediaAttribute.allowedAttributes().forEach((k, v) ->
-			_parseAttributes(adaptiveMedia, k, v));
+		AdaptiveMediaAttribute.allowedAttributes().forEach(
+			(attributeName, attribute) -> _parseAttributes(
+				adaptiveMedia, attributeName, attribute));
 	}
 
 	@JsonAnySetter
@@ -81,14 +83,14 @@ public class ImageAdaptiveMediaRepr {
 	}
 
 	private void _parseAttributes(
-		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia, String k,
-		AdaptiveMediaAttribute v) {
+		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia,
+		String attributeName, AdaptiveMediaAttribute attribute) {
 
-		Optional attributeValue = adaptiveMedia.getAttributeValue(v);
+		Optional attributeValueOptional = adaptiveMedia.getAttributeValue(
+			attribute);
 
-		if (attributeValue.isPresent()) {
-			_properties.put(k, attributeValue.get());
-		}
+		attributeValueOptional.ifPresent(
+			attributeValue -> _properties.put(attributeName, attributeValue));
 	}
 
 	private ImageAdaptiveMediaConfigRepr _config;

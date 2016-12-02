@@ -22,6 +22,7 @@ import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.Comparator;
 import java.util.LinkedHashMap;
@@ -72,6 +73,11 @@ public class ImageAdaptiveMediaQueryBuilderImpl
 
 	@Override
 	public FinalStep forConfiguration(String configurationUuid) {
+		if (Validator.isNull(configurationUuid)) {
+			throw new IllegalArgumentException(
+				"Configuration uuid cannot be null");
+		}
+
 		_configurationUuid = configurationUuid;
 
 		return this;
@@ -134,7 +140,7 @@ public class ImageAdaptiveMediaQueryBuilderImpl
 	}
 
 	public boolean hasConfiguration() {
-		if (_configurationUuid != null) {
+		if (Validator.isNotNull(_configurationUuid)) {
 			return true;
 		}
 

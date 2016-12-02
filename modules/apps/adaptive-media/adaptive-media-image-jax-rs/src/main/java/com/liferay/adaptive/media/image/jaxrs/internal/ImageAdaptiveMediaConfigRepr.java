@@ -34,7 +34,6 @@ import java.util.Map;
 public class ImageAdaptiveMediaConfigRepr {
 
 	public ImageAdaptiveMediaConfigRepr() {
-		_properties = new HashMap<>();
 	}
 
 	public ImageAdaptiveMediaConfigRepr(
@@ -75,7 +74,7 @@ public class ImageAdaptiveMediaConfigRepr {
 	}
 
 	private String _name;
-	private Map<String, String> _properties;
+	private Map<String, String> _properties = new HashMap<>();
 	private String _uuid;
 
 }

@@ -174,6 +174,12 @@ public class ImageAdaptiveMediaFinderImpl implements ImageAdaptiveMediaFinder {
 
 		Map<String, String> properties = configurationEntry.getProperties();
 
+		AdaptiveMediaAttribute<Object, String> configurationUuidAttribute =
+			AdaptiveMediaAttribute.configurationUuid();
+
+		properties.put(
+			configurationUuidAttribute.getName(), configurationEntry.getUUID());
+
 		AdaptiveMediaAttribute<Object, Integer> contentLengthAttribute =
 			AdaptiveMediaAttribute.contentLength();
 
@@ -198,12 +204,6 @@ public class ImageAdaptiveMediaFinderImpl implements ImageAdaptiveMediaFinder {
 			AdaptiveMediaAttribute.fileName();
 
 		properties.put(fileNameAttribute.getName(), fileVersion.getFileName());
-
-		AdaptiveMediaAttribute<Object, String> configurationUuidAttribute =
-			AdaptiveMediaAttribute.configurationUuid();
-
-		properties.put(
-			configurationUuidAttribute.getName(), configurationEntry.getUUID());
 
 		ImageAdaptiveMediaAttributeMapping attributeMapping =
 			ImageAdaptiveMediaAttributeMapping.fromProperties(properties);

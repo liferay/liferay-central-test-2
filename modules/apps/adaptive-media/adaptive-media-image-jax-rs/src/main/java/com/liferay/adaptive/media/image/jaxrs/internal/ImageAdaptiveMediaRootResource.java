@@ -43,29 +43,28 @@ public class ImageAdaptiveMediaRootResource {
 		@Context Company company) {
 
 		return new ImageAdaptiveMediaConfigResource(
-			company.getCompanyId(), imageAdaptiveMediaConfigurationHelper);
+			company.getCompanyId(), configurationHelper);
 	}
 
-	@Path("/content/file/{fileEntryId}/version/{fileVersionTag}")
+	@Path("/content/file/{fileEntryId}/version/{version}")
 	public ImageAdaptiveMediaFileVersionResource getFileEntryVersion(
 			@PathParam("fileEntryId") long fileEntryId,
-			@PathParam("fileVersionTag") String fileVersionTag)
+			@PathParam("version") String version)
 		throws PortalException {
 
 		FileEntry fileEntry = dlAppService.getFileEntry(fileEntryId);
 
-		FileVersion fileVersion;
+		FileVersion fileVersion = null;
 
-		if (fileVersionTag.equals("last")) {
+		if (version.equals("last")) {
 			fileVersion = fileEntry.getFileVersion();
 		}
 		else {
-			fileVersion = fileEntry.getFileVersion(fileVersionTag);
+			fileVersion = fileEntry.getFileVersion(version);
 		}
 
 		return new ImageAdaptiveMediaFileVersionResource(
-			fileVersion, finder, imageAdaptiveMediaConfigurationHelper,
-			_getBaseUriBuilder());
+			fileVersion, finder, configurationHelper, _getBaseUriBuilder());
 	}
 
 	@Path("/content/version/{fileVersionId}")
@@ -76,19 +75,17 @@ public class ImageAdaptiveMediaRootResource {
 		FileVersion fileVersion = dlAppService.getFileVersion(fileVersionId);
 
 		return new ImageAdaptiveMediaFileVersionResource(
-			fileVersion, finder, imageAdaptiveMediaConfigurationHelper,
-			_getBaseUriBuilder());
+			fileVersion, finder, configurationHelper, _getBaseUriBuilder());
 	}
+
+	@Reference
+	protected ImageAdaptiveMediaConfigurationHelper configurationHelper;
 
 	@Reference
 	protected DLAppService dlAppService;
 
 	@Reference
 	protected ImageAdaptiveMediaFinder finder;
-
-	@Reference
-	protected ImageAdaptiveMediaConfigurationHelper
-		imageAdaptiveMediaConfigurationHelper;
 
 	@Context
 	protected UriInfo uriInfo;

@@ -51,13 +51,10 @@ public class AdaptiveMediaApiQueryContextProvider
 		}
 
 		return availableAttributes ->
-			Arrays.stream(
-				queries).map(
-					q -> parseQuery(
-						q,
-						availableAttributes)).filter(
-							Optional::isPresent).map(
-								Optional::get).collect(Collectors.toList());
+			Arrays.stream(queries).map(
+				query -> parseQuery(query, availableAttributes)).filter(
+					Optional::isPresent).map(Optional::get).collect(
+						Collectors.toList());
 	}
 
 	protected Optional<AdaptiveMediaApiQuery.QueryAttribute> parseQuery(
@@ -72,17 +69,16 @@ public class AdaptiveMediaApiQueryContextProvider
 			return Optional.empty();
 		}
 
-		AdaptiveMediaAttribute adaptiveMediaAttribute = availableAttributes.get(
+		AdaptiveMediaAttribute attribute = availableAttributes.get(
 			keyValuePair[0]);
 
 		try {
 			return Optional.of(
 				new AdaptiveMediaApiQuery.QueryAttribute(
-					adaptiveMediaAttribute,
-					adaptiveMediaAttribute.convert(keyValuePair[1])));
+					attribute, attribute.convert(keyValuePair[1])));
 		}
 		catch (AdaptiveMediaRuntimeException.
-			AdaptiveMediaAttributeFormatException e) {
+			AdaptiveMediaAttributeFormatException amafe) {
 
 			throw new BadRequestException(
 				String.format(
