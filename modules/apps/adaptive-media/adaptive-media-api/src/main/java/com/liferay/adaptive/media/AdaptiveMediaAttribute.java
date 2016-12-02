@@ -16,6 +16,8 @@ package com.liferay.adaptive.media;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.adaptive.media.util.AdaptiveMediaAttributeConverterUtil;
+
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;

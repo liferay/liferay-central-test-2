@@ -12,7 +12,9 @@
  * details.
  */
 
-package com.liferay.adaptive.media;
+package com.liferay.adaptive.media.util;
+
+import com.liferay.adaptive.media.AdaptiveMediaRuntimeException;
 
 /**
  * Set of functions that can be used for converting data into

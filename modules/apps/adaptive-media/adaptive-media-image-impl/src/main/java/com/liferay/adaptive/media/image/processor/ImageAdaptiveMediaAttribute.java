@@ -15,7 +15,7 @@
 package com.liferay.adaptive.media.image.processor;
 
 import com.liferay.adaptive.media.AdaptiveMediaAttribute;
-import com.liferay.adaptive.media.AdaptiveMediaAttributeConverterUtil;
+import com.liferay.adaptive.media.util.AdaptiveMediaAttributeConverterUtil;
 
 import java.util.HashMap;
 import java.util.Map;
