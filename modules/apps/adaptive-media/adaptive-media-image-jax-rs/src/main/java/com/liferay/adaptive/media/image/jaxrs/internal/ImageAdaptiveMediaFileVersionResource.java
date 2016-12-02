@@ -198,7 +198,7 @@ public class ImageAdaptiveMediaFileVersionResource {
 				uriBuilder.build(
 					String.valueOf(_fileVersion.getFileVersionId()), value));
 
-		return uriOptional.map((u) -> u.toString());
+		return uriOptional.map((uri) -> uri.toString());
 	}
 
 	private Response _getFirstAdaptiveMedia(
