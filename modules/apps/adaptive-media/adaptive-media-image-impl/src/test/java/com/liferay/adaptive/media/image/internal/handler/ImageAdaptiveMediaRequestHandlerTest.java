@@ -137,7 +137,9 @@ public class ImageAdaptiveMediaRequestHandlerTest {
 
 		Mockito.verify(
 			_finder
-		).getAdaptiveMedia(Mockito.any(Function.class));
+		).getAdaptiveMedia(
+			Mockito.any(Function.class)
+		);
 
 		Assert.assertFalse(properties.isEmpty());
 	}

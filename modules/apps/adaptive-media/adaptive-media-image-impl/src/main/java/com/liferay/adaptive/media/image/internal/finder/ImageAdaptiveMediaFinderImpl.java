@@ -100,8 +100,8 @@ public class ImageAdaptiveMediaFinderImpl implements ImageAdaptiveMediaFinder {
 				configurationEntry ->
 					configurationEntry.getUUID().equals(
 						queryBuilder.getConfigurationUuid()) &&
-					_imageStorage.getImageInfo(fileVersion, configurationEntry)
-						.isPresent()
+					_imageStorage.getImageInfo(fileVersion, configurationEntry).
+						isPresent()
 			).map(
 				configurationEntry ->
 					_createMedia(fileVersion, uriFactory, configurationEntry));
@@ -110,8 +110,8 @@ public class ImageAdaptiveMediaFinderImpl implements ImageAdaptiveMediaFinder {
 		return configurationEntries.stream().
 			filter(
 				configurationEntry ->
-					_imageStorage.getImageInfo(fileVersion, configurationEntry)
-						.isPresent()).
+					_imageStorage.getImageInfo(fileVersion, configurationEntry).
+						isPresent()).
 			map(
 				configurationEntry ->
 					_createMedia(

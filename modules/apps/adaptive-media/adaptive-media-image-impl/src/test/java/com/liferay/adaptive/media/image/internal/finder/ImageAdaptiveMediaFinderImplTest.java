@@ -791,7 +791,9 @@ public class ImageAdaptiveMediaFinderImplTest {
 
 		Mockito.verify(
 			_imageStorage
-		).getContentStream(_fileVersion, configurationEntry);
+		).getContentStream(
+			_fileVersion, configurationEntry
+		);
 	}
 
 	private final ImageAdaptiveMediaConfigurationHelper _configurationHelper =

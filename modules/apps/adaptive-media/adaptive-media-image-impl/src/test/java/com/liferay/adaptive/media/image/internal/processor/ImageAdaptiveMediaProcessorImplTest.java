@@ -123,7 +123,9 @@ public class ImageAdaptiveMediaProcessorImplTest {
 
 		Mockito.verify(
 			_imageProcessor
-		).process(_fileVersion, configurationEntry);
+		).process(
+			_fileVersion, configurationEntry
+		);
 
 		Mockito.verify(
 			_imageStorage

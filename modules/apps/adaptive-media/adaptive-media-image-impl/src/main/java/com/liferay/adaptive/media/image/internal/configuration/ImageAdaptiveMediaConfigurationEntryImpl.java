@@ -33,14 +33,17 @@ public class ImageAdaptiveMediaConfigurationEntryImpl
 		_properties = properties;
 	}
 
+	@Override
 	public String getName() {
 		return _name;
 	}
 
+	@Override
 	public Map<String, String> getProperties() {
 		return new HashMap<>(_properties);
 	}
 
+	@Override
 	public String getUUID() {
 		return _uuid;
 	}
