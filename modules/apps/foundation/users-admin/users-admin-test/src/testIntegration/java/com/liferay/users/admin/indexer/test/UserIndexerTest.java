@@ -118,7 +118,6 @@ public class UserIndexerTest {
 	@Test
 	public void testEmptyQuery() throws Exception {
 		User user1 = addUser();
-
 		User user2 = getTestUser();
 
 		assertSearch("", user1, user2);
@@ -156,7 +155,6 @@ public class UserIndexerTest {
 	@Test
 	public void testLikeCharacter() throws Exception {
 		User user1 = addUser();
-
 		User user2 = getTestUser();
 
 		assertSearch("%", user1, user2);
@@ -167,7 +165,6 @@ public class UserIndexerTest {
 	@Test
 	public void testLuceneQueryParserUnfriendlyCharacters() throws Exception {
 		User user1 = addUser();
-
 		User user2 = getTestUser();
 
 		assertSearch("@", user1, user2);
