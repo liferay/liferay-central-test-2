@@ -67,6 +67,7 @@ public class LPKGOverrideTest {
 		File file = new File(liferayHome, "/osgi/marketplace/override");
 
 		_fileImpl.deltree(file);
+
 		_fileImpl.mkdirs(file);
 
 		Map<String, String> overrides = new HashMap<>();
