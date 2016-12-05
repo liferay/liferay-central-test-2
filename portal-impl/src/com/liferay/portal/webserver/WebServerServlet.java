@@ -468,10 +468,6 @@ public class WebServerServlet extends HttpServlet {
 					imageId, true);
 
 				if (layout != null) {
-					long classPK = layout.getLayoutId();
-					String className = Layout.class.getName();
-					long groupId = layout.getGroupId();
-
 					User user = PortalUtil.getUser(request);
 
 					if (user == null) {
@@ -484,8 +480,7 @@ public class WebServerServlet extends HttpServlet {
 						PermissionCheckerFactoryUtil.create(user);
 
 					if (!LayoutPermissionUtil.contains(
-							permissionChecker, groupId, true, classPK,
-							ActionKeys.VIEW)) {
+							permissionChecker, layout, ActionKeys.VIEW)) {
 
 						if (_log.isWarnEnabled()) {
 							_log.warn(
@@ -494,8 +489,8 @@ public class WebServerServlet extends HttpServlet {
 						}
 
 						throw new PrincipalException.MustHavePermission(
-							permissionChecker, className, classPK,
-							ActionKeys.VIEW);
+							permissionChecker, Layout.class.getName(),
+							layout.getPlid(), ActionKeys.VIEW);
 					}
 				}
 			}
@@ -505,10 +500,6 @@ public class WebServerServlet extends HttpServlet {
 						imageId, true);
 
 				if (layoutSet != null) {
-					long classPK = layoutSet.getLayoutSetId();
-					String className = LayoutSet.class.getName();
-					long groupId = layoutSet.getGroupId();
-
 					User user = PortalUtil.getUser(request);
 
 					if (user == null) {
@@ -521,7 +512,8 @@ public class WebServerServlet extends HttpServlet {
 						PermissionCheckerFactoryUtil.create(user);
 
 					if (!GroupPermissionUtil.contains(
-							permissionChecker, groupId, ActionKeys.VIEW)) {
+							permissionChecker, layoutSet.getGroupId(),
+							ActionKeys.VIEW)) {
 
 						if (_log.isWarnEnabled()) {
 							_log.warn(
@@ -530,8 +522,8 @@ public class WebServerServlet extends HttpServlet {
 						}
 
 						throw new PrincipalException.MustHavePermission(
-							permissionChecker, className, classPK,
-							ActionKeys.VIEW);
+							permissionChecker, LayoutSet.class.getName(),
+							layoutSet.getLayoutSetId(), ActionKeys.VIEW);
 					}
 				}
 			}
