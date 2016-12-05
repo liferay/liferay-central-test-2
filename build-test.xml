@@ -5297,8 +5297,8 @@ go]]></replacevalue>
 					int passCount = totalCount - failCount;
 
 					lines.add(summaryLocation, "\t</summary>");
-					lines.add(summaryLocation, "\t\t<property name=\"FAILED\" value=\"" + Integer.toString(failCount) + "\" />");
-					lines.add(summaryLocation, "\t\t<property name=\"PASSED\" value=\"" + Integer.toString(passCount) + "\" />");
+					lines.add(summaryLocation, "\t\t<property name=\"failed\" value=\"" + Integer.toString(failCount) + "\" />");
+					lines.add(summaryLocation, "\t\t<property name=\"passed\" value=\"" + Integer.toString(passCount) + "\" />");
 					lines.add(summaryLocation, "\t<summary>");
 
 					FileWriter fileWriter = new FileWriter(jenkinsResultsXMLSuiteFile);
