@@ -3,7 +3,7 @@
 ;
 [subrepo]
 	cmdver = liferay
-	commit = 4e3429c066809c37ff62349e36159ef26493b0a8
+	commit = e7504e53eaccad8571fc3a35d8fcfb222fb4226d
 	mode = push
-	parent = d1c3bf0a007a294393e6bf53bdaf9ca4e2243590
+	parent = ed8b6c26bb9816ca9ab4307982f29c680ff1e436
 	remote = git@github.com:liferay/com-liferay-bookmarks.git
