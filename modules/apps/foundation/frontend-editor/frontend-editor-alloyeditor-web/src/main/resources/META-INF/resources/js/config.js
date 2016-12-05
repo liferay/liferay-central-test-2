@@ -22,15 +22,6 @@
 								'liferay-source-editor',
 								'plugin'
 							]
-						},
-						'liferay-editor-image-uploader': {
-							path: 'editor_image_uploader.js',
-							requires: [
-								'aui-alert',
-								'aui-base',
-								'aui-progressbar',
-								'uploader'
-							]
 						}
 					},
 					root: MODULE_PATH + '/js/'
