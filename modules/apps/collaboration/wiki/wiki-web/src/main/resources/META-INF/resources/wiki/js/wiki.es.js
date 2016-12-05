@@ -1,5 +1,4 @@
 import core from 'metal/src/core';
-import { EventHandler } from 'metal-events';
 import PortletBase from 'frontend-js-web/liferay/PortletBase.es';
 
 /**
@@ -9,33 +8,45 @@ class WikiPortlet extends PortletBase {
 	/**
 	 * @inheritDoc
 	 */
-	created() {
-		this.eventHandler_ = new EventHandler();
+	constructor(opt_config) {
+		super(opt_config);
+
+		this.bindUI_();
 	}
 
 	/**
-	 * @inheritDoc
+	 * Bind DOM Events
+	 *
+	 * @protected
 	 */
-	attached() {
+	bindUI_() {
+		let eventHandles = [];
+
 		let formatSelect = this.one('#format');
 
-		if (formatSelect) {
-			this.currentFormatLabel = formatSelect.options[formatSelect.selectedIndex].text.trim();
-			this.currentFormatIndex = formatSelect.selectedIndex;
+		this.currentFormatLabel = formatSelect.options[formatSelect.selectedIndex].text.trim();
+		this.currentFormatIndex = formatSelect.selectedIndex;
 
-			this.eventHandler_.add(formatSelect.addEventListener('change', (e) => { this.changeWikiFormat_(e); }));
+		if (formatSelect) {
+			eventHandles.push(
+				formatSelect.addEventListener('change', (e) => { this.changeWikiFormat_(e); })
+			);
 		}
 
 		let publishButton = this.one('#publishButton');
 
 		if (publishButton) {
-			this.eventHandler_.add(publishButton.addEventListener('click', (e) => { this.publishPage_(e); }));
+			eventHandles.push(
+				publishButton.addEventListener('click', (e) => { this.publishPage_(e); })
+			);
 		}
 
 		let saveButton = this.one('#saveButton');
 
 		if (saveButton) {
-			this.eventHandler_.add(saveButton.addEventListener('click', (e) => { this.saveDraft_(e); }));
+			eventHandles.push(
+				saveButton.addEventListener('click', (e) => { this.saveDraft_(e); })
+			);
 		}
 	}
 
@@ -52,7 +63,7 @@ class WikiPortlet extends PortletBase {
 		let newFormat = formatSelect.options[formatSelect.selectedIndex].text.trim();
 
 		let confirmMessage = _.sub(
-			this.strings.confirmLoseFormatting,
+			this.get('strings').confirmLoseFormatting,
 			this.currentFormatLabel,
 			newFormat
 		);
@@ -73,11 +84,9 @@ class WikiPortlet extends PortletBase {
 	 * @protected
 	 */
 	checkImagesBeforeSave_() {
-		let tempImages = this.all('img[data-random-id]');
-
-		if (tempImages.length > 0) {
-			if (confirm(this.strings.confirmDiscardImages)) {
-				tempImages.forEach(
+		if (this.hasTempImages_()) {
+			if (confirm(this.get('strings').confirmDiscardImages)) {
+				this.getTempImages_().forEach(
 					node => { node.parentElement.remove(); }
 				);
 
@@ -90,12 +99,26 @@ class WikiPortlet extends PortletBase {
 	}
 
 	/**
+	 * Get all the images that have not been completely uploaded.
 	 *
-	 * @inheritDoc
+	 * @return {NodeList object} List of <img> elements that have
+	 * the data-random-id attribute
+	 * @protected
 	 */
-	detached() {
-		super.detached();
-		this.eventHandler_.removeAllListeners();
+	getTempImages_() {
+		return this.all('img[data-random-id]');
+	}
+
+	/**
+	 * Checks if there are images that have not
+	 * been uploaded yet
+	 *
+	 * @return {Boolean} true if there are any image that
+	 * have not been uploaded, false otherwise.
+	 * @protected
+	 */
+	hasTempImages_() {
+		return this.getTempImages_().length > 0;
 	}
 
 	/**
@@ -104,7 +127,7 @@ class WikiPortlet extends PortletBase {
 	 * @protected
 	 */
 	publishPage_() {
-		this.one('#workflowAction').value = this.constants.ACTION_PUBLISH;
+		this.one('#workflowAction').value = this.get('constants').ACTION_PUBLISH;
 		this.checkImagesBeforeSave_();
 	}
 
@@ -114,7 +137,7 @@ class WikiPortlet extends PortletBase {
 	 * @protected
 	 */
 	saveDraft_() {
-		this.one('#workflowAction').value = this.constants.ACTION_SAVE_DRAFT;
+		this.one('#workflowAction').value = this.get('constants').ACTION_SAVE_DRAFT;
 		this.checkImagesBeforeSave_();
 	}
 
@@ -124,7 +147,7 @@ class WikiPortlet extends PortletBase {
 	 * @protected
 	 */
 	savePage_() {
-		this.one('#' + this.constants.CMD).value = this.currentAction;
+		this.one('#' + this.get('constants').CMD).value = this.get('currentAction');
 
 		let titleEditor = window[this.ns('titleEditor')];
 
