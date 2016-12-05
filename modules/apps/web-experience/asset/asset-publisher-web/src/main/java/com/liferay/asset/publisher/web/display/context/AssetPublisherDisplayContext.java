@@ -98,14 +98,12 @@ public class AssetPublisherDisplayContext {
 		PortletRequest portletRequest, PortletResponse portletResponse,
 		PortletPreferences portletPreferences) {
 
-		_request = PortalUtil.getHttpServletRequest(portletRequest);
-
 		_assetPublisherCustomizer = assetPublisherCustomizer;
-
 		_portletRequest = portletRequest;
 		_portletResponse = portletResponse;
-
 		_portletPreferences = portletPreferences;
+
+		_request = PortalUtil.getHttpServletRequest(portletRequest);
 	}
 
 	/**
