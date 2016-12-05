@@ -201,8 +201,8 @@ public class MySubscriptionsUtil {
 
 			return wikiNode.getName();
 		}
-		else if (className.equals(Folder.class.getName()) ||
-				 className.equals(DLFolderConstants.getClassName())) {
+		else if (className.equals(DLFolderConstants.class.getName()) ||
+				 className.equals(Folder.getClassName())) {
 
 			if (group != null) {
 				return LanguageUtil.get(locale, "home");
