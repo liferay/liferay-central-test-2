@@ -235,7 +235,7 @@ name = HtmlUtil.escapeJS(name);
 					cfg: {
 						uploadUrl: '<%= uploadURL %>'
 					},
-					fn: A.Plugin.LiferayEditorImageUploader
+					fn: A.Plugin.LiferayBlogsUploader
 				}
 			);
 		</c:if>
