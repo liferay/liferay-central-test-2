@@ -303,7 +303,9 @@ public class JournalContentDisplayContext {
 
 		JournalArticle article = getArticle();
 
-		_ddmTemplateKey = article.getDDMTemplateKey();
+		if (article != null) {
+			_ddmTemplateKey = article.getDDMTemplateKey();
+		}
 
 		return _ddmTemplateKey;
 	}
