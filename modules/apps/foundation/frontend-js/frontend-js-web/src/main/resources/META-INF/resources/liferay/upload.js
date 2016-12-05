@@ -216,11 +216,6 @@ AUI.add(
 						value: true
 					},
 
-					rootElement: {
-						setter: A.one,
-						value: null
-					},
-
 					simultaneousUploads: {
 						validator: Lang.isNumber,
 						value: 2
@@ -350,9 +345,7 @@ AUI.add(
 						uploader.on('uploadcomplete', instance._onUploadComplete, instance);
 						uploader.on('uploadprogress', instance._onUploadProgress, instance);
 
-						var rootElement = instance.get('rootElement');
-
-						var docElement = rootElement ? rootElement : A.getDoc().get('documentElement');
+						var docElement = A.getDoc().get('documentElement');
 
 						docElement.on('drop', instance._handleDrop, instance);
 
