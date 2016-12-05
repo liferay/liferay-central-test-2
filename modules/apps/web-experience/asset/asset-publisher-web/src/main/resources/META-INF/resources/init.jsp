@@ -48,6 +48,7 @@ page import="com.liferay.asset.publisher.web.constants.AssetPublisherWebKeys" %>
 page import="com.liferay.asset.publisher.web.display.context.AssetEntryResult" %><%@
 page import="com.liferay.asset.publisher.web.display.context.AssetPublisherDisplayContext" %><%@
 page import="com.liferay.asset.publisher.web.internal.configuration.AssetPublisherWebConfigurationValues" %><%@
+page import="com.liferay.asset.publisher.web.util.AssetPublisherCustomizer" %><%@
 page import="com.liferay.asset.publisher.web.util.AssetPublisherHelper" %><%@
 page import="com.liferay.asset.publisher.web.util.AssetPublisherUtil" %><%@
 page import="com.liferay.document.library.kernel.util.DLUtil" %><%@
@@ -122,9 +123,6 @@ page import="java.util.Set" %>
 <%@ page import="javax.portlet.PortletMode" %><%@
 page import="javax.portlet.PortletRequest" %><%@
 page import="javax.portlet.PortletURL" %>
-
-<%@ page
-	import="com.liferay.asset.publisher.web.util.AssetPublisherCustomizer" %>
 
 <liferay-frontend:defineObjects />
 
