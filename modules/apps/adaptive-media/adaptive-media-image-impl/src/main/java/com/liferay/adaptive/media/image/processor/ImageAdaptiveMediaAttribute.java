@@ -38,12 +38,11 @@ public final class ImageAdaptiveMediaAttribute {
 				ImageAdaptiveMediaAttribute::_intDistance);
 
 	/**
-	 * Returns a string-attribute map containing all the name-attribute pairs
-	 * allowed to be used.
+	 * Returns a string-attribute map containing the available 
+	 * name-attribute pairs.
 	 *
-	 * @return the list of attributes allowed
+	 * @return the list of available attributes
 	 *
-	 * @review
 	 */
 	public static Map<String, AdaptiveMediaAttribute<?, ?>>
 		allowedAttributes() {

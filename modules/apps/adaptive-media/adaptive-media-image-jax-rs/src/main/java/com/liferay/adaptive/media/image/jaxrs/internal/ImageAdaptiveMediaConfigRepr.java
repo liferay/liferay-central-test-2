@@ -24,12 +24,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * It serves as a proxy for the API layer for a
- * {@link ImageAdaptiveMediaConfigurationEntry}.
+ * Serves as a proxy for an
+ * {@link ImageAdaptiveMediaConfigurationEntry}'s API layer.
  *
  * @author Alejandro Hernández
  *
- * @review
  */
 public class ImageAdaptiveMediaConfigRepr {
 
