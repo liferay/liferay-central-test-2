@@ -2567,7 +2567,10 @@ ${tomcat-gc-log}
 			<generate-jdbc-properties properties.file="portal-impl/src/portal-ext.properties">
 				<post-action>
 					<echo file="@{properties.file}" append="true"><![CDATA[
-javascript.single.page.application.timeout=300000]]></echo>
+javascript.single.page.application.timeout=300000
+
+memory.scheduler.org.quartz.threadPool.threadCount=1
+persisted.scheduler.org.quartz.threadPool.threadCount=1]]></echo>
 				</post-action>
 			</generate-jdbc-properties>
 		</sequential>
@@ -2579,7 +2582,10 @@ javascript.single.page.application.timeout=300000]]></echo>
 				<post-action>
 					<echo file="@{properties.file}" append="true"><![CDATA[
 module.framework.base.dir=${liferay.home}/osgi
-sprite.root.dir=/tmp/sprite]]></echo>
+sprite.root.dir=/tmp/sprite
+
+memory.scheduler.org.quartz.threadPool.threadCount=1
+persisted.scheduler.org.quartz.threadPool.threadCount=1]]></echo>
 				</post-action>
 			</generate-jdbc-properties>
 		</sequential>
@@ -5682,7 +5688,10 @@ axis.servlet.hosts.allowed=
 
 tunnel.servlet.hosts.allowed=
 
-javascript.single.page.application.timeout=300000</echo>
+javascript.single.page.application.timeout=300000
+
+memory.scheduler.org.quartz.threadPool.threadCount=1
+persisted.scheduler.org.quartz.threadPool.threadCount=1</echo>
 
 		<if>
 			<equals arg1="${database.type}" arg2="oracle" />
