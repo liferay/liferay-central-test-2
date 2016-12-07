@@ -436,7 +436,7 @@ public abstract class BaseBuild implements Build {
 			return sb.toString();
 		}
 
-		throw new RuntimeException("Unknown status: " + status + ".");
+		throw new RuntimeException("Unknown status: " + status);
 	}
 
 	@Override
