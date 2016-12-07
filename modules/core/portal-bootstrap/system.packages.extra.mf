@@ -4094,7 +4094,7 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  ay.portal.kernel.exception,com.liferay.portal.kernel.security.permiss
  ion,com.liferay.portal.kernel.service,com.liferay.portal.kernel.theme
  ,com.liferay.social.kernel.model",com.liferay.social.kernel.service;v
- ersion="1.1.0";uses:="com.liferay.asset.kernel.model,com.liferay.port
+ ersion="1.2.0";uses:="com.liferay.asset.kernel.model,com.liferay.port
  al.kernel.dao.orm,com.liferay.portal.kernel.exception,com.liferay.por
  tal.kernel.json,com.liferay.portal.kernel.jsonwebservice,com.liferay.
  portal.kernel.messaging.async,com.liferay.portal.kernel.model,com.lif
