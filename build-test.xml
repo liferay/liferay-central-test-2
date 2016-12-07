@@ -5658,6 +5658,8 @@ jdbc.counter.maxActive=5
 jdbc.counter.maxIdle=0
 jdbc.counter.minIdle=0
 
+javascript.single.page.application.timeout=300000
+
 captcha.max.challenges=-1
 
 browser.launcher.url=
@@ -5673,8 +5675,6 @@ sprite.root.dir=/tmp/sprite
 axis.servlet.hosts.allowed=
 
 tunnel.servlet.hosts.allowed=
-
-javascript.single.page.application.timeout=300000
 
 memory.scheduler.org.quartz.threadPool.threadCount=1
 persisted.scheduler.org.quartz.threadPool.threadCount=1</echo>
