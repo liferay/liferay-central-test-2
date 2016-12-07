@@ -151,7 +151,7 @@ public class EditFolderMVCResourceCommand implements MVCResourceCommand {
 
 				zipWriter.addEntry(
 					path + StringPool.SLASH +
-						HtmlUtil.escapeURL(fileEntry.getTitle()),
+						HtmlUtil.escapeURL(fileEntry.getFileName()),
 					fileEntry.getContentStream());
 			}
 		}
