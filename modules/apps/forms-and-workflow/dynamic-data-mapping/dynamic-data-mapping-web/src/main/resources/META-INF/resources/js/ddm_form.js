@@ -2367,6 +2367,10 @@ AUI.add(
 								parsedValue.name = parsedValue.title;
 							}
 
+							var altNode = A.one('#' + instance.getInputName() + 'Alt');
+
+							altNode.val(parsedValue.val);
+
 							value = JSON.stringify(parsedValue);
 						}
 						else {
