@@ -28,6 +28,7 @@ import com.liferay.asset.publisher.web.util.AssetPublisherCustomizerRegistry;
 import com.liferay.asset.publisher.web.util.AssetPublisherUtil;
 import com.liferay.exportimport.kernel.staging.LayoutStagingUtil;
 import com.liferay.exportimport.kernel.staging.StagingUtil;
+import com.liferay.item.selector.ItemSelector;
 import com.liferay.petra.content.ContentUtil;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.GroupConstants;
@@ -119,6 +120,8 @@ public class AssetPublisherConfigurationAction
 		request.setAttribute(
 			AssetPublisherWebKeys.ASSET_PUBLISHER_CUSTOMIZER,
 			assetPublisherCustomizer);
+
+		request.setAttribute(AssetPublisherWebKeys.ITEM_SELECTOR, itemSelector);
 
 		super.include(portletConfig, request, response);
 	}
@@ -514,6 +517,11 @@ public class AssetPublisherConfigurationAction
 	}
 
 	@Reference(unbind = "-")
+	protected void setItemSelector(ItemSelector itemSelector) {
+		this.itemSelector = itemSelector;
+	}
+
+	@Reference(unbind = "-")
 	protected void setGroupLocalService(GroupLocalService groupLocalService) {
 		this.groupLocalService = groupLocalService;
 	}
@@ -743,6 +751,7 @@ public class AssetPublisherConfigurationAction
 	protected GroupLocalService groupLocalService;
 	protected LayoutLocalService layoutLocalService;
 	protected LayoutRevisionLocalService layoutRevisionLocalService;
+	protected ItemSelector itemSelector;
 
 	@Reference
 	protected Portal portal;
