@@ -161,7 +161,7 @@ public class ModulesIntegrationBatchBuild extends BatchBuild {
 			buildProperties = JenkinsResultsParserUtil.getBuildProperties();
 		}
 		catch (IOException ioe) {
-			throw new RuntimeException("Could not load build properties.", ioe);
+			throw new RuntimeException("Unable to get build.properties.", ioe);
 		}
 	}
 

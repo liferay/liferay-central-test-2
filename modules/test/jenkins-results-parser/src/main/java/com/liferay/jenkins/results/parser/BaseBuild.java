@@ -46,7 +46,7 @@ public abstract class BaseBuild implements Build {
 			}
 			catch (UnsupportedEncodingException uee) {
 				throw new IllegalArgumentException(
-					"Could not decode " + url, uee);
+					"Unable to decode " + url, uee);
 			}
 
 			if (!hasBuildURL(url)) {
@@ -58,8 +58,7 @@ public abstract class BaseBuild implements Build {
 	@Override
 	public void archive(final String archiveName) {
 		if (!_status.equals("completed")) {
-			throw new RuntimeException(
-				"Only completed builds may be archived.");
+			throw new RuntimeException("Invalid build status: " + _status);
 		}
 
 		this.archiveName = archiveName;
@@ -106,7 +105,8 @@ public abstract class BaseBuild implements Build {
 				getArchivePath() + "/archive-marker");
 		}
 		catch (IOException ioe) {
-			throw new RuntimeException("Could not write archive-marker.", ioe);
+			throw new RuntimeException(
+				"Unable to to write archive-marker file", ioe);
 		}
 
 		archiveConsoleLog();
