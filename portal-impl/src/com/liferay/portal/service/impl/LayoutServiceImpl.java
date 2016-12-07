@@ -2090,9 +2090,9 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			return;
 		}
 
-		List<String> originalPortletIds = _getPortletIds(
+		List<String> originalPortletIds = getPortletIds(
 			layout, originalTypeSettings);
-		List<String> newPortletIds = _getPortletIds(layout, newTypeSettings);
+		List<String> newPortletIds = getPortletIds(layout, newTypeSettings);
 
 		for (String portletId : newPortletIds) {
 			if (originalPortletIds.contains(portletId)) {
@@ -2121,20 +2121,18 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 		return filteredLayouts;
 	}
 
-	private List<String> _getPortletIds(
-		Layout originalLayout, String typeSettings) {
-
+	protected List<String> getPortletIds(Layout layout, String typeSettings) {
 		if (Validator.isBlank(typeSettings)) {
 			return Collections.emptyList();
 		}
 
-		Layout container = (Layout)originalLayout.clone();
+		Layout clonedLayout = (Layout)layout.clone();
 
-		container.setType(LayoutConstants.TYPE_PORTLET);
-		container.setTypeSettings(typeSettings);
+		clonedLayout.setType(LayoutConstants.TYPE_PORTLET);
+		clonedLayout.setTypeSettings(typeSettings);
 
 		LayoutTypePortlet layoutTypePortlet =
-			(LayoutTypePortlet)container.getLayoutType();
+			(LayoutTypePortlet)clonedLayout.getLayoutType();
 
 		return layoutTypePortlet.getPortletIds();
 	}
