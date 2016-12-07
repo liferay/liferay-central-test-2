@@ -187,14 +187,13 @@ public abstract class BaseBuild implements Build {
 		sb.append("[^\\/]*");
 		sb.append("[\\/]+job[\\/]+");
 
-		String regexLiteralJobName = JenkinsResultsParserUtil.getRegexLiteral(
+		String jobNameRegexLiteral = JenkinsResultsParserUtil.getRegexLiteral(
 			getJobName());
 
-		regexLiteralJobName = regexLiteralJobName.replace("\\(", "(\\(|%28)");
+		jobNameRegexLiteral = jobNameRegexLiteral.replace("\\(", "(\\(|%28)");
+		jobNameRegexLiteral = jobNameRegexLiteral.replace("\\)", "(\\)|%29)");
 
-		regexLiteralJobName = regexLiteralJobName.replace("\\)", "(\\)|%29)");
-
-		sb.append(regexLiteralJobName);
+		sb.append(jobNameRegexLiteral);
 
 		sb.append("[\\/]+");
 		sb.append(getBuildNumber());
