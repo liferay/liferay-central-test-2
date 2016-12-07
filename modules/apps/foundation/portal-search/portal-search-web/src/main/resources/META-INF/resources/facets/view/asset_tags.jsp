@@ -17,13 +17,7 @@
 <%@ include file="/facets/init.jsp" %>
 
 <%
-com.liferay.portal.search.web.internal.facet.display.context.AssetTagsSearchFacetDisplayContext assetTagsSearchFacetDisplayContext =
-	new com.liferay.portal.search.web.internal.facet.display.context.AssetTagsSearchFacetDisplayContext(
-		facet, fieldParam,
-		dataJSONObject.getString("displayStyle", "cloud"),
-		dataJSONObject.getInt("frequencyThreshold"),
-		dataJSONObject.getInt("maxTerms", 10),
-		dataJSONObject.getBoolean("showAssetCount", true));
+com.liferay.portal.search.web.internal.facet.display.context.AssetTagsSearchFacetDisplayContext assetTagsSearchFacetDisplayContext = new com.liferay.portal.search.web.internal.facet.display.context.AssetTagsSearchFacetDisplayContext(facet, fieldParam, dataJSONObject.getString("displayStyle", "cloud"), dataJSONObject.getInt("frequencyThreshold"), dataJSONObject.getInt("maxTerms", 10), dataJSONObject.getBoolean("showAssetCount", true));
 %>
 
 <c:choose>
