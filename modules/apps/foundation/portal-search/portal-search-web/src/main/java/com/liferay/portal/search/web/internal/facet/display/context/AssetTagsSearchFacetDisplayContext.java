@@ -75,7 +75,7 @@ public class AssetTagsSearchFacetDisplayContext {
 
 			// The cloud style may not list tags in the order of frequency,
 			// so keep looking through the results until we reach the maximum
-			// number of terms or we run out of terms.
+			// number of terms or we run out of terms
 
 			for (int i = 0, j = 0; i < termCollectors.size(); i++, j++) {
 				if ((_maxTerms > 0) && (j >= _maxTerms)) {
