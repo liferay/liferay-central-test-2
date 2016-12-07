@@ -77,7 +77,6 @@ public class TopLevelBuild extends BaseBuild {
 		sb.append("/");
 		sb.append(getBuildNumber());
 		sb.append("/");
-
 		sb.append("stop.properties");
 
 		return sb.toString();
