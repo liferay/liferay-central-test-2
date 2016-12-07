@@ -63,7 +63,7 @@ public class AxisBuild extends BaseBuild {
 		}
 
 		throw new RuntimeException(
-			"Invalid axis variable detected. " + getAxisVariable());
+			"Invalid axis variable: " + getAxisVariable());
 	}
 
 	public String getAxisVariable() {
@@ -87,7 +87,7 @@ public class AxisBuild extends BaseBuild {
 			jobURL = JenkinsResultsParserUtil.decode(jobURL);
 		}
 		catch (UnsupportedEncodingException uee) {
-			throw new RuntimeException("Could not decode " + jobURL, uee);
+			throw new RuntimeException("Uanble to decode " + jobURL, uee);
 		}
 
 		String buildURL = jobURL + "/" + axisVariable + "/" + buildNumber + "/";
@@ -112,14 +112,13 @@ public class AxisBuild extends BaseBuild {
 		sb.append("[^\\/]*");
 		sb.append("[\\/]+job[\\/]+");
 
-		String regexLiteralJobName = JenkinsResultsParserUtil.getRegexLiteral(
+		String jobNameRegexLiteral = JenkinsResultsParserUtil.getRegexLiteral(
 			getJobName());
 
-		regexLiteralJobName = regexLiteralJobName.replace("\\(", "(\\(|%28)");
+		jobNameRegexLiteral = jobNameRegexLiteral.replace("\\(", "(\\(|%28)");
+		jobNameRegexLiteral = jobNameRegexLiteral.replace("\\)", "(\\)|%29)");
 
-		regexLiteralJobName = regexLiteralJobName.replace("\\)", "(\\)|%29)");
-
-		sb.append(regexLiteralJobName);
+		sb.append(jobNameRegexLiteral);
 
 		sb.append("[\\/]+");
 		sb.append(JenkinsResultsParserUtil.getRegexLiteral(getAxisVariable()));
@@ -182,7 +181,7 @@ public class AxisBuild extends BaseBuild {
 		}
 		catch (UnsupportedEncodingException uee) {
 			throw new IllegalArgumentException(
-				"Could not decode " + buildURL, uee);
+				"Uanble to decode " + buildURL, uee);
 		}
 
 		Matcher matcher = _buildURLPattern.matcher(buildURL);
@@ -213,9 +212,8 @@ public class AxisBuild extends BaseBuild {
 
 	private static final Pattern _archiveBuildURLPattern = Pattern.compile(
 		"($\\{dependencies\\.url\\}|file:|http://).*/(?<archiveName>[^/]+)/" +
-			"(?<master>[^/]+)/+(?<jobName>[^/]+)/" +
-				"(?<axisVariable>AXIS_VARIABLE=[^,]+,[^/]+)/" +
-					"(?<buildNumber>\\d+)/?");
+			"(?<master>[^/]+)/+(?<jobName>[^/]+)/(?<axisVariable>" +
+				"AXIS_VARIABLE=[^,]+,[^/]+)/(?<buildNumber>\\d+)/?");
 	private static final Pattern _axisVariablePattern = Pattern.compile(
 		"AXIS_VARIABLE=(?<axisNumber>[^,]+),.*");
 	private static final Pattern _buildURLPattern = Pattern.compile(
