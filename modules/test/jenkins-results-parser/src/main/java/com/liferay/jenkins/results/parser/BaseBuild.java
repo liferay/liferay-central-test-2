@@ -686,7 +686,7 @@ public abstract class BaseBuild implements Build {
 			}
 			catch (IOException ioe) {
 				throw new RuntimeException(
-					"Could not create start-properties.json", ioe);
+					"Unable to create start-properties.json", ioe);
 			}
 		}
 
@@ -702,7 +702,7 @@ public abstract class BaseBuild implements Build {
 			}
 			catch (IOException ioe) {
 				throw new RuntimeException(
-					"Could not create stop-properties.json", ioe);
+					"Unable to create stop-properties.json", ioe);
 			}
 		}
 	}
@@ -840,7 +840,7 @@ public abstract class BaseBuild implements Build {
 			return JenkinsResultsParserUtil.toJSONObject(sb.toString(), false);
 		}
 		catch (IOException ioe) {
-			throw new RuntimeException("Could not find build JSON.", ioe);
+			throw new RuntimeException("Unable to get build JSON", ioe);
 		}
 	}
 
@@ -929,7 +929,7 @@ public abstract class BaseBuild implements Build {
 					"[name,type,value]]");
 		}
 		catch (IOException ioe) {
-			throw new RuntimeException("Build JSON could not be found.", ioe);
+			throw new RuntimeException("Unable to get build JSON", ioe);
 		}
 
 		JSONArray actionsJSONArray = jsonObject.getJSONArray("actions");
@@ -1241,7 +1241,7 @@ public abstract class BaseBuild implements Build {
 		}
 		catch (UnsupportedEncodingException uee) {
 			throw new IllegalArgumentException(
-				"Could not decode " + buildURL, uee);
+				"Unable to decode " + buildURL, uee);
 		}
 
 		Matcher matcher = buildURLPattern.matcher(buildURL);
@@ -1277,7 +1277,7 @@ public abstract class BaseBuild implements Build {
 			}
 			catch (UnsupportedEncodingException uee) {
 				throw new IllegalArgumentException(
-					"Could not decode " + invocationURL, uee);
+					"Unable to decode " + invocationURL, uee);
 			}
 
 			Matcher invocationURLMatcher = invocationURLPattern.matcher(
@@ -1313,13 +1313,11 @@ public abstract class BaseBuild implements Build {
 	protected void writeArchiveFile(String content, String path)
 		throws IOException {
 
-		String dependenciesURLFile =
-			JenkinsResultsParserUtil.DEPENDENCIES_URL_FILE;
-
 		StringBuilder sb = new StringBuilder();
 
-		sb.append(dependenciesURLFile.substring("file:".length()));
-
+		sb.append(
+			JenkinsResultsParserUtil.DEPENDENCIES_URL_FILE.substring(
+				"file:".length()));
 		sb.append("/");
 		sb.append(path);
 
