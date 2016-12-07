@@ -146,6 +146,7 @@ public class AxisBuild extends BaseBuild {
 	protected void checkForReinvocation() {
 	}
 
+	@Override
 	protected String getStopPropertiesTempMapURL() {
 		if (fromArchive) {
 			return getBuildURL() + "/stop-properties.json";

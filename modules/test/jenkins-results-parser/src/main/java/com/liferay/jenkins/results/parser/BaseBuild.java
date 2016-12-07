@@ -525,6 +525,7 @@ public abstract class BaseBuild implements Build {
 		reset();
 	}
 
+	@Override
 	public String replaceBuildURL(String text) {
 		if ((text == null) || text.isEmpty()) {
 			return text;
