@@ -482,12 +482,6 @@ public class WebServerServlet extends HttpServlet {
 					if (!LayoutPermissionUtil.contains(
 							permissionChecker, layout, ActionKeys.VIEW)) {
 
-						if (_log.isWarnEnabled()) {
-							_log.warn(
-								"Error checking permissions for user " +
-									user.getUserId());
-						}
-
 						throw new PrincipalException.MustHavePermission(
 							permissionChecker, Layout.class.getName(),
 							layout.getPlid(), ActionKeys.VIEW);
@@ -514,12 +508,6 @@ public class WebServerServlet extends HttpServlet {
 					if (!GroupPermissionUtil.contains(
 							permissionChecker, layoutSet.getGroupId(),
 							ActionKeys.VIEW)) {
-
-						if (_log.isWarnEnabled()) {
-							_log.warn(
-								"Error checking permissions for user " +
-									user.getUserId());
-						}
 
 						throw new PrincipalException.MustHavePermission(
 							permissionChecker, LayoutSet.class.getName(),
