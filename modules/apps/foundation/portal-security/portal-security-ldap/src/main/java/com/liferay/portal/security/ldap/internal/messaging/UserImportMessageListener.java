@@ -55,7 +55,7 @@ public class UserImportMessageListener
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
-				"LDAP user imports will occur every " + interval + " min");
+				"LDAP user imports will occur every " + interval + " minutes");
 		}
 
 		schedulerEntryImpl.setTrigger(
@@ -95,9 +95,7 @@ public class UserImportMessageListener
 			if (ldapImportConfiguration.importInterval() <= 0) {
 				if (_log.isDebugEnabled()) {
 					_log.debug(
-						"Skipping ldap import for: " + companyId +
-							". Import interval configured for : " +
-								ldapImportConfiguration.importEnabled());
+						"Skipping LDAP user import for company " + companyId);
 				}
 
 				return;
