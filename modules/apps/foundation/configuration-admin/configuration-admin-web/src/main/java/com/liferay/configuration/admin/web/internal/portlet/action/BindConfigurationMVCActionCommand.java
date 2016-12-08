@@ -29,7 +29,10 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.ResourceBundleLoader;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 
@@ -45,6 +48,7 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletException;
 
+import com.liferay.portal.util.PropsValues;
 import org.osgi.framework.Constants;
 import org.osgi.service.cm.Configuration;
 import org.osgi.service.cm.ConfigurationAdmin;
@@ -192,6 +196,28 @@ public class BindConfigurationMVCActionCommand implements MVCActionCommand {
 				configuredProperties.put(
 					ConfigurationModel.PROPERTY_KEY_COMPANY_ID,
 					ConfigurationModel.PROPERTY_VALUE_COMPANY_ID_DEFAULT);
+			}
+
+			if (configurationModel.isFactory()) {
+				String pid = configuration.getPid();
+
+				int index = pid.lastIndexOf('.');
+
+				String factoryPid = pid.substring(index + 1);
+
+				StringBundler sb = new StringBundler(7);
+
+				sb.append("file:");
+				sb.append(PropsValues.MODULE_FRAMEWORK_CONFIGS_DIR);
+				sb.append("/");
+				sb.append(configuration.getFactoryPid());
+				sb.append("-");
+				sb.append(factoryPid);
+				sb.append(".config");
+
+				configuredProperties.put(
+					ConfigurationModel.FELIX_FILEINSTALL_FILENAME,
+					sb.toString());
 			}
 
 			configuration.update(configuredProperties);
