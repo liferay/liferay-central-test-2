@@ -26,8 +26,8 @@ import com.liferay.exportimport.kernel.staging.MergeLayoutPrototypesThreadLocal;
 import com.liferay.exportimport.portlet.preferences.processor.Capability;
 import com.liferay.exportimport.portlet.preferences.processor.ExportImportPortletPreferencesProcessor;
 import com.liferay.exportimport.portlet.preferences.processor.capability.ReferencedStagedModelImporterCapability;
-import com.liferay.journal.content.web.constants.JournalContentPortletKeys;
 import com.liferay.journal.constants.JournalPortletKeys;
+import com.liferay.journal.content.web.constants.JournalContentPortletKeys;
 import com.liferay.journal.model.JournalArticle;
 import com.liferay.journal.service.JournalArticleLocalService;
 import com.liferay.journal.service.JournalContentSearchLocalService;
@@ -37,7 +37,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.Layout;
-import com.liferay.portal.kernel.service.GroupLocalServiceUtil;
+import com.liferay.portal.kernel.service.GroupLocalService;
 import com.liferay.portal.kernel.service.LayoutLocalService;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
@@ -121,7 +121,7 @@ public class JournalContentExportImportPortletPreferencesProcessor
 			return portletPreferences;
 		}
 
-		Group group = GroupLocalServiceUtil.getGroup(articleGroupId);
+		Group group = _groupLocalService.fetchGroup(articleGroupId);
 
 		if (ExportImportThreadLocal.isStagingInProcess() &&
 			!group.isStagedPortlet(JournalPortletKeys.JOURNAL)) {
@@ -263,10 +263,12 @@ public class JournalContentExportImportPortletPreferencesProcessor
 
 				portletPreferences.setValue("articleId", articleId);
 
-				Group importedArticleGroup =
-					GroupLocalServiceUtil.getGroup(groupId);
+				Group importedArticleGroup = _groupLocalService.getGroup(
+					groupId);
 
-				if(importedArticleGroup.isStagedPortlet(JournalPortletKeys.JOURNAL)) {
+				if (importedArticleGroup.isStagedPortlet(
+						JournalPortletKeys.JOURNAL)) {
+
 					portletPreferences.setValue(
 						"groupId", String.valueOf(groupId));
 				}
@@ -328,6 +330,11 @@ public class JournalContentExportImportPortletPreferencesProcessor
 	}
 
 	@Reference(unbind = "-")
+	protected void setGroupLocalService(GroupLocalService groupLocalService) {
+		_groupLocalService = groupLocalService;
+	}
+
+	@Reference(unbind = "-")
 	protected void setJournalArticleLocalService(
 		JournalArticleLocalService journalArticleLocalService) {
 
@@ -361,6 +368,7 @@ public class JournalContentExportImportPortletPreferencesProcessor
 		JournalContentExportImportPortletPreferencesProcessor.class);
 
 	private DDMTemplateLocalService _ddmTemplateLocalService;
+	private GroupLocalService _groupLocalService;
 	private JournalArticleLocalService _journalArticleLocalService;
 	private JournalContentSearchLocalService _journalContentSearchLocalService;
 	private LayoutLocalService _layoutLocalService;
