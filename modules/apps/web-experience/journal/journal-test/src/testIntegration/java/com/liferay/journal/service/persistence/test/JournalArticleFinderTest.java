@@ -22,7 +22,6 @@ import com.liferay.dynamic.data.mapping.test.util.DDMTemplateTestUtil;
 import com.liferay.journal.model.JournalArticle;
 import com.liferay.journal.model.JournalArticleConstants;
 import com.liferay.journal.model.JournalFolder;
-import com.liferay.journal.service.JournalArticleLocalService;
 import com.liferay.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.journal.service.persistence.JournalArticleFinder;
 import com.liferay.journal.test.util.JournalTestUtil;
@@ -34,7 +33,6 @@ import com.liferay.journal.util.comparator.ArticleReviewDateComparator;
 import com.liferay.journal.util.comparator.ArticleVersionComparator;
 import com.liferay.portal.kernel.dao.orm.QueryDefinition;
 import com.liferay.portal.kernel.model.Group;
-import com.liferay.portal.kernel.test.ReflectionTestUtil;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.DeleteAfterTestRun;
 import com.liferay.portal.kernel.test.rule.Sync;
@@ -45,7 +43,6 @@ import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PortalUtil;
-import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.TransactionalTestRule;
@@ -85,38 +82,11 @@ public class JournalArticleFinderTest {
 			new LiferayIntegrationTestRule(),
 			SynchronousDestinationTestRule.INSTANCE,
 			new TransactionalTestRule(
-				Propagation.REQUIRED, "com.liferay.journal.service"));
+				Propagation.SUPPORTS, "com.liferay.journal.service"));
 
 	@Before
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public void setUp() throws Exception {
-		Bundle bundle = FrameworkUtil.getBundle(JournalArticleFinderTest.class);
-
-		BundleContext bundleContext = bundle.getBundleContext();
-
-		ServiceReference<?> serviceReference =
-			bundleContext.getServiceReference(
-				"com.liferay.journal.web.internal.messaging." +
-					"CheckArticleMessageListener");
-
-		_checkArticleMessageListener = bundleContext.getService(
-			serviceReference);
-
-		ReflectionTestUtil.setFieldValue(
-			_checkArticleMessageListener, "_journalArticleLocalService",
-			ProxyUtil.newProxyInstance(
-				JournalArticleLocalService.class.getClassLoader(),
-				new Class<?>[] {JournalArticleLocalService.class},
-				(proxy, method, args) -> {
-
-					if ("checkArticles".equals(method.getName())) {
-						return null;
-					}
-
-					return method.invoke(
-						JournalArticleLocalServiceUtil.getService(), args);
-				}));
-
 		_group = GroupTestUtil.addGroup();
 
 		_ddmStructure = DDMStructureTestUtil.addStructure(
@@ -193,6 +163,8 @@ public class JournalArticleFinderTest {
 
 		_article = _articles.get(0);
 
+		Bundle bundle = FrameworkUtil.getBundle(getClass());
+
 		_bundleContext = bundle.getBundleContext();
 
 		_serviceReference = _bundleContext.getServiceReference(
@@ -203,10 +175,6 @@ public class JournalArticleFinderTest {
 
 	@After
 	public void tearDown() {
-		ReflectionTestUtil.setFieldValue(
-			_checkArticleMessageListener, "_journalArticleLocalService",
-			JournalArticleLocalServiceUtil.getService());
-
 		_bundleContext.ungetService(_serviceReference);
 	}
 
@@ -431,8 +399,6 @@ public class JournalArticleFinderTest {
 
 		// Comparators
 
-		prepareSortedArticles();
-
 		testQueryByG_F(new ArticleCreateDateComparator(true));
 		testQueryByG_F(new ArticleCreateDateComparator(false));
 		testQueryByG_F(new ArticleDisplayDateComparator(true));
@@ -600,6 +566,8 @@ public class JournalArticleFinderTest {
 			OrderByComparator<JournalArticle> orderByComparator)
 		throws Exception {
 
+		prepareSortedArticles();
+
 		QueryDefinition<JournalArticle> queryDefinition =
 			new QueryDefinition<>();
 
@@ -629,7 +597,6 @@ public class JournalArticleFinderTest {
 	private DDMStructure _basicWebContentDDMStructure;
 	private DDMTemplate _basicWebContentDDMTemplate;
 	private BundleContext _bundleContext;
-	private Object _checkArticleMessageListener;
 	private DDMStructure _ddmStructure;
 	private JournalFolder _folder;
 	private final List<Long> _folderIds = new ArrayList<>();
