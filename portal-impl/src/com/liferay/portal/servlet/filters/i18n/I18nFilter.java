@@ -161,9 +161,6 @@ public class I18nFilter extends BasePortalFilter {
 
 		String redirect = contextPath + i18nPath + requestURI;
 
-		LayoutSet layoutSet = (LayoutSet)request.getAttribute(
-			WebKeys.VIRTUAL_HOST_LAYOUT_SET);
-
 		int[] groupFriendlyURLIndex = PortalUtil.getGroupFriendlyURLIndex(
 			requestURI);
 
@@ -180,6 +177,21 @@ public class I18nFilter extends BasePortalFilter {
 				friendlyURLStart, friendlyURLEnd);
 		}
 
+		long companyId = PortalUtil.getCompanyId(request);
+
+		Group friendlyURLGroup = GroupLocalServiceUtil.fetchFriendlyURLGroup(
+			companyId, groupFriendlyURL);
+
+		if ((friendlyURLGroup != null) &&
+			!LanguageUtil.isAvailableLocale(
+				friendlyURLGroup.getGroupId(), i18nLanguageId)) {
+
+			return null;
+		}
+
+		LayoutSet layoutSet = (LayoutSet)request.getAttribute(
+			WebKeys.VIRTUAL_HOST_LAYOUT_SET);
+
 		if ((layoutSet != null) &&
 			requestURI.startsWith(
 				PropsValues.LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING)) {
@@ -191,18 +203,6 @@ public class I18nFilter extends BasePortalFilter {
 					contextPath + i18nPath +
 						requestURI.substring(friendlyURLEnd);
 			}
-		}
-
-		long companyId = PortalUtil.getCompanyId(request);
-
-		Group group = GroupLocalServiceUtil.fetchFriendlyURLGroup(
-			companyId, groupFriendlyURL);
-
-		if ((group != null) &&
-			!LanguageUtil.isAvailableLocale(
-				group.getGroupId(), i18nLanguageId)) {
-
-			return null;
 		}
 
 		String queryString = request.getQueryString();
