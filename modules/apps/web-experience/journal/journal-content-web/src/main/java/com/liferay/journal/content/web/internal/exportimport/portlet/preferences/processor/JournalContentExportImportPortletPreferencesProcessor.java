@@ -17,6 +17,7 @@ package com.liferay.journal.content.web.internal.exportimport.portlet.preference
 import com.liferay.dynamic.data.mapping.model.DDMStructure;
 import com.liferay.dynamic.data.mapping.model.DDMTemplate;
 import com.liferay.dynamic.data.mapping.service.DDMTemplateLocalService;
+import com.liferay.exportimport.kernel.lar.ExportImportThreadLocal;
 import com.liferay.exportimport.kernel.lar.PortletDataContext;
 import com.liferay.exportimport.kernel.lar.PortletDataException;
 import com.liferay.exportimport.kernel.lar.PortletDataHandlerKeys;
@@ -26,6 +27,7 @@ import com.liferay.exportimport.portlet.preferences.processor.Capability;
 import com.liferay.exportimport.portlet.preferences.processor.ExportImportPortletPreferencesProcessor;
 import com.liferay.exportimport.portlet.preferences.processor.capability.ReferencedStagedModelImporterCapability;
 import com.liferay.journal.content.web.constants.JournalContentPortletKeys;
+import com.liferay.journal.constants.JournalPortletKeys;
 import com.liferay.journal.model.JournalArticle;
 import com.liferay.journal.service.JournalArticleLocalService;
 import com.liferay.journal.service.JournalContentSearchLocalService;
@@ -35,6 +37,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.Layout;
+import com.liferay.portal.kernel.service.GroupLocalServiceUtil;
 import com.liferay.portal.kernel.service.LayoutLocalService;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
@@ -113,6 +116,19 @@ public class JournalContentExportImportPortletPreferencesProcessor
 			if (_log.isWarnEnabled()) {
 				_log.warn(
 					"No group ID found in preferences of portlet " + portletId);
+			}
+
+			return portletPreferences;
+		}
+
+		Group group = GroupLocalServiceUtil.getGroup(articleGroupId);
+
+		if (ExportImportThreadLocal.isStagingInProcess() &&
+			!group.isStagedPortlet(JournalPortletKeys.JOURNAL)) {
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Web Content is not staged in the site " + group.getName());
 			}
 
 			return portletPreferences;
@@ -247,7 +263,13 @@ public class JournalContentExportImportPortletPreferencesProcessor
 
 				portletPreferences.setValue("articleId", articleId);
 
-				portletPreferences.setValue("groupId", String.valueOf(groupId));
+				Group importedArticleGroup =
+					GroupLocalServiceUtil.getGroup(groupId);
+
+				if(importedArticleGroup.isStagedPortlet(JournalPortletKeys.JOURNAL)) {
+					portletPreferences.setValue(
+						"groupId", String.valueOf(groupId));
+				}
 
 				if (portletDataContext.getPlid() > 0) {
 					Layout layout = _layoutLocalService.fetchLayout(
