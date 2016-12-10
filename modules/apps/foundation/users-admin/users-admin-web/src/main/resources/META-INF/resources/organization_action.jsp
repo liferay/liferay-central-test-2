@@ -123,12 +123,12 @@ if (row == null) {
 	<c:if test="<%= OrganizationPermissionUtil.contains(permissionChecker, organization, ActionKeys.ASSIGN_MEMBERS) %>">
 
 		<%
-		String openSelectUsersDialog = renderResponse.getNamespace() + "openSelectUsersDialog('" + organizationId + "');";
+		String taglibOnClick = renderResponse.getNamespace() + "openSelectUsersDialog('" + organizationId + "');";
 		%>
 
 		<liferay-ui:icon
 			message="assign-users"
-			onClick="<%= openSelectUsersDialog %>"
+			onClick="<%= taglibOnClick %>"
 			url="javascript:;"
 		/>
 	</c:if>
