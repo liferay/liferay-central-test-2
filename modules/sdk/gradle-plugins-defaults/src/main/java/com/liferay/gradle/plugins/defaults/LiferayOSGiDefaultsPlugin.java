@@ -2021,6 +2021,7 @@ public class LiferayOSGiDefaultsPlugin implements Plugin<Project> {
 
 		if (!remoteServices) {
 			buildWSDDTask.setEnabled(false);
+			buildWSDDTask.setFinalizedBy(Collections.emptySet());
 		}
 	}
 
