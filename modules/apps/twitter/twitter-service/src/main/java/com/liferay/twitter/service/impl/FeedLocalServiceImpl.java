@@ -165,7 +165,7 @@ public class FeedLocalServiceImpl extends FeedLocalServiceBaseImpl {
 
 				extraDataJSONObject.put("text", text);
 
-				int tries = _TWEET_CREATE_DATE_RETRY_LIMIT;
+				int tries = _TRIES;
 
 				int count = socialActivityLocalService.getActivitiesCount(
 					user.getUserId(), 0, createDate, Feed.class.getName(),
@@ -189,8 +189,8 @@ public class FeedLocalServiceImpl extends FeedLocalServiceBaseImpl {
 				if (tries == 0) {
 					if (_log.isWarnEnabled()) {
 						_log.warn(
-							"Couldn't create social activity for tweet due " +
-								"to createDate collision");
+							"Unable to create social activity for tweet due " +
+								"to create date collision");
 					}
 				}
 				else {
@@ -208,7 +208,7 @@ public class FeedLocalServiceImpl extends FeedLocalServiceBaseImpl {
 		}
 	}
 
-	private static final int _TWEET_CREATE_DATE_RETRY_LIMIT = 10;
+	private static final int _TRIES = 10;
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		FeedLocalServiceImpl.class);
