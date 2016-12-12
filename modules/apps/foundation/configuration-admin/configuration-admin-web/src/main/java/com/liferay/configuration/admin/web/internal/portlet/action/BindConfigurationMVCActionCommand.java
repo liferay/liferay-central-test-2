@@ -214,11 +214,10 @@ public class BindConfigurationMVCActionCommand implements MVCActionCommand {
 				sb.append(configuration.getFactoryPid());
 				sb.append(StringPool.DASH);
 				sb.append(factoryPid);
-				sb.append(ConfigurationModel.CONFIG_FILE_EXTENSION);
+				sb.append(".config");
 
 				configuredProperties.put(
-					ConfigurationModel.FELIX_FILEINSTALL_FILENAME,
-					sb.toString());
+					"felix.fileinstall.filename", sb.toString());
 			}
 
 			configuration.update(configuredProperties);

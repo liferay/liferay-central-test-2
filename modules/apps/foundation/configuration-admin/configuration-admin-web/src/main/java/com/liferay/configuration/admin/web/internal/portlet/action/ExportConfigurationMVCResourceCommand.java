@@ -227,7 +227,7 @@ public class ExportConfigurationMVCResourceCommand
 			fileName = factoryPid + StringPool.DASH + factoryInstanceId;
 		}
 
-		return fileName + ConfigurationModel.CONFIG_FILE_EXTENSION;
+		return fileName + ".config";
 	}
 
 	protected Properties getProperties(
