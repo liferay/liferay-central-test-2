@@ -46,6 +46,14 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 		Assert.assertEquals(0, jsonArray.size());
 	}
 
+	@Test
+	public void testGetConfigurationWithUUIDReturnNotFound() {
+		Response response = _getBaseRequest(
+			t -> t.path("/{id}").resolveTemplate("id", "small")).get();
+
+		Assert.assertEquals(404, response.getStatus());
+	}
+
 	private void _deleteAllConfigurationEntries() {
 		JsonArray jsonArray = _getBaseRequest(_NO_PATH).get(JsonArray.class);
 
