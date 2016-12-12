@@ -33,10 +33,10 @@ String selectedFormat = BeanParamUtil.getString(wikiPage, request, "format", wik
 Collection<String> formats = wikiEngineRenderer.getFormats();
 
 if (!formats.contains(selectedFormat)) {
-	Iterator<String> itr = formats.iterator();
+	Iterator<String> iterator = formats.iterator();
 
-	if (itr.hasNext()) {
-		selectedFormat = itr.next();
+	if (iterator.hasNext()) {
+		selectedFormat = iterator.next();
 	}
 }
 
