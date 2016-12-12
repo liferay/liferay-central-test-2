@@ -79,6 +79,20 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 	}
 
 	@Test
+	public void testGetConfigurationWithCorrectUUIDReturnConfiguration() {
+		JsonObject testConfig = _getRandomConfiguration();
+
+		_addConfiguration(testConfig);
+
+		JsonObject response = _getBaseRequest(
+			t -> t.path(
+				"/{id}").resolveTemplate("id",
+				_getId(testConfig))).get(JsonObject.class);
+
+		_assertEquals(testConfig, response);
+	}
+
+	@Test
 	public void testGetConfigurationWithWrongUUIDReturnNotFound() {
 		Response response = _getBaseRequest(
 			t -> t.path("/{id}").resolveTemplate("id", "small")).get();
