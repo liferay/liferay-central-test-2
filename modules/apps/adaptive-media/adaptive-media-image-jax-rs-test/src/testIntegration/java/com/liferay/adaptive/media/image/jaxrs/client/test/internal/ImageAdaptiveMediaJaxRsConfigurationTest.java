@@ -22,7 +22,9 @@ import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.test.api.ArquillianResource;
 
+import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
@@ -35,6 +37,13 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 	@Before
 	public void setUp() {
 		_deleteAllConfigurationEntries();
+	}
+
+	@Test
+	public void testGetAllConfigurationsAreEmpty() {
+		JsonArray jsonArray = _getBaseRequest(_NO_PATH).get(JsonArray.class);
+
+		Assert.assertEquals(0, jsonArray.size());
 	}
 
 	private void _deleteAllConfigurationEntries() {
