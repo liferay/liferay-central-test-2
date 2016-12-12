@@ -56,22 +56,22 @@ public class UpgradeShoppingConfiguration extends UpgradeProcess {
 		properties.put(
 			"imageExtensions",
 			_prefsProps.getStringArray(
-				_LEGACY_SHOPPING_IMAGE_EXTENSIONS, StringPool.COMMA,
+				_OLD_KEY_SHOPPING_IMAGE_EXTENSIONS, StringPool.COMMA,
 				defaultConfig.imageExtensions()));
 		properties.put(
 			"largeImageMaxSize",
 			_prefsProps.getLong(
-				_LEGACY_SHOPPING_IMAGE_LARGE_MAX_SIZE,
+				_OLD_KEY_SHOPPING_IMAGE_LARGE_MAX_SIZE,
 				defaultConfig.largeImageMaxSize()));
 		properties.put(
 			"mediumImageMaxSize",
 			_prefsProps.getLong(
-				_LEGACY_SHOPPING_IMAGE_MEDIUM_MAX_SIZE,
+				_OLD_KEY_SHOPPING_IMAGE_MEDIUM_MAX_SIZE,
 				defaultConfig.mediumImageMaxSize()));
 		properties.put(
 			"smallImageMaxSize",
 			_prefsProps.getLong(
-				_LEGACY_SHOPPING_IMAGE_SMALL_MAX_SIZE,
+				_OLD_KEY_SHOPPING_IMAGE_SMALL_MAX_SIZE,
 				defaultConfig.smallImageMaxSize()));
 
 		Configuration configuration = _configurationAdmin.getConfiguration(
@@ -82,22 +82,22 @@ public class UpgradeShoppingConfiguration extends UpgradeProcess {
 
 		PortletPreferences portletPreferences = _prefsProps.getPreferences();
 
-		portletPreferences.reset(_LEGACY_SHOPPING_IMAGE_EXTENSIONS);
-		portletPreferences.reset(_LEGACY_SHOPPING_IMAGE_LARGE_MAX_SIZE);
-		portletPreferences.reset(_LEGACY_SHOPPING_IMAGE_MEDIUM_MAX_SIZE);
-		portletPreferences.reset(_LEGACY_SHOPPING_IMAGE_SMALL_MAX_SIZE);
+		portletPreferences.reset(_OLD_KEY_SHOPPING_IMAGE_EXTENSIONS);
+		portletPreferences.reset(_OLD_KEY_SHOPPING_IMAGE_LARGE_MAX_SIZE);
+		portletPreferences.reset(_OLD_KEY_SHOPPING_IMAGE_MEDIUM_MAX_SIZE);
+		portletPreferences.reset(_OLD_KEY_SHOPPING_IMAGE_SMALL_MAX_SIZE);
 	}
 
-	private static final String _LEGACY_SHOPPING_IMAGE_EXTENSIONS =
+	private static final String _OLD_KEY_SHOPPING_IMAGE_EXTENSIONS =
 		"shopping.image.extensions";
 
-	private static final String _LEGACY_SHOPPING_IMAGE_LARGE_MAX_SIZE =
+	private static final String _OLD_KEY_SHOPPING_IMAGE_LARGE_MAX_SIZE =
 		"shopping.image.large.max.size";
 
-	private static final String _LEGACY_SHOPPING_IMAGE_MEDIUM_MAX_SIZE =
+	private static final String _OLD_KEY_SHOPPING_IMAGE_MEDIUM_MAX_SIZE =
 		"shopping.image.medium.max.size";
 
-	private static final String _LEGACY_SHOPPING_IMAGE_SMALL_MAX_SIZE =
+	private static final String _OLD_KEY_SHOPPING_IMAGE_SMALL_MAX_SIZE =
 		"shopping.image.small.max.size";
 
 	private final ConfigurationAdmin _configurationAdmin;
