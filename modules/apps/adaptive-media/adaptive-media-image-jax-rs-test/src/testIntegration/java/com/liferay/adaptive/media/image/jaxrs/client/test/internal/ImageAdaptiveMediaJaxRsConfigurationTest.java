@@ -13,6 +13,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.UUID;
 import java.util.function.Function;
 
 import javax.ws.rs.client.Client;
@@ -46,7 +47,7 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 
 	@Test
 	public void testAddConfigurationReturnConfigurationObject() {
-		JsonObject testConfig = _testConfigList.get("0");
+		JsonObject testConfig = _getRandomConfiguration();
 
 		JsonObject json = _addConfiguration(testConfig);
 
@@ -136,6 +137,12 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 		return path.apply(target).request(MediaType.APPLICATION_JSON_TYPE);
 	}
 
+	private JsonObject _getRandomConfiguration() {
+		Object[] values = _testConfigList.values().toArray();
+
+		return (JsonObject)values[new Random().nextInt(values.length)];
+	}
+
 	private static final String _BASE_PATH =
 		"/o/adaptive-media/images/configuration";
 
@@ -150,12 +157,17 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 		for (int i = 0; i < 10; i++) {
 			JsonObject jsonObject = new JsonObject();
 
-			jsonObject.addProperty("id", i);
-			jsonObject.addProperty("name", i + " Size");
+			String uuid = UUID.randomUUID().toString();
+
+			jsonObject.addProperty("id", uuid);
+
 			jsonObject.addProperty("height", _getRandomLong());
+
+			jsonObject.addProperty("name", uuid + " Size");
+
 			jsonObject.addProperty("width", _getRandomLong());
 
-			_testConfigList.put(String.valueOf(i), jsonObject);
+			_testConfigList.put(uuid, jsonObject);
 		}
 	}
 
