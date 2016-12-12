@@ -3,12 +3,16 @@ package com.liferay.adaptive.media.image.jaxrs.client.test.internal;
 import aQute.lib.base64.Base64;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import com.liferay.adaptive.media.image.jaxrs.client.test.internal.provider.GsonProvider;
 
 import java.net.URL;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 import java.util.function.Function;
 
 import javax.ws.rs.client.Client;
@@ -42,21 +46,11 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 
 	@Test
 	public void testAddConfigurationReturnConfigurationObject() {
-		JsonObject json = _getBaseRequest(
-			t -> t.path("/{uuid}").resolveTemplate("uuid", "small")).header(
-				"Authorization", _testAuth).put(Entity.json(_testConfig),
-				JsonObject.class);
+		JsonObject testConfig = _testConfigList.get("0");
 
-		Assert.assertEquals("small", json.get("id").getAsString());
-		Assert.assertEquals(
-			json.get("width").getAsLong(),
-			_testConfig.get("width").getAsLong());
-		Assert.assertEquals(
-			json.get("height").getAsLong(),
-			_testConfig.get("height").getAsLong());
-		Assert.assertEquals(
-			json.get("name").getAsString(),
-			_testConfig.get("name").getAsString());
+		JsonObject json = _addConfiguration(testConfig);
+
+		_assertEquals(testConfig, json);
 	}
 
 	@Test
@@ -72,6 +66,35 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 			t -> t.path("/{id}").resolveTemplate("id", "small")).get();
 
 		Assert.assertEquals(404, response.getStatus());
+	}
+
+	private static long _getRandomLong() {
+		return Math.abs(new Random().nextLong() % 1000);
+	}
+
+	private JsonObject _addConfiguration(JsonObject json) {
+		Invocation.Builder builder = _getBaseRequest(
+			t -> t.path(
+				"/{id}").resolveTemplate("id", json.get("id").getAsString()));
+
+		return builder.header("Authorization", _testAuth).put(
+			Entity.json(json), JsonObject.class);
+	}
+
+	private Map<String, JsonObject> _addMultipleConfigurations() {
+		_testConfigList.forEach((k, v) -> _addConfiguration(v));
+		return _testConfigList;
+	}
+
+	private void _assertEquals(JsonElement json1, JsonElement json2) {
+		Assert.assertEquals(json1.getAsString(), json2.getAsString());
+	}
+
+	private void _assertEquals(JsonObject json1, JsonObject json2) {
+		Assert.assertEquals(json1.entrySet().size(), json2.entrySet().size());
+
+		json1.entrySet().forEach(entry ->
+			_assertEquals(json2.get(entry.getKey()), entry.getValue()));
 	}
 
 	private void _deleteAllConfigurationEntries() {
@@ -104,12 +127,20 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 
 	private static final String _testAuth =
 		"Basic " + Base64.encodeBase64("test@liferay.com:test".getBytes());
-	private static final JsonObject _testConfig = new JsonObject();
+	private static final Map<String, JsonObject> _testConfigList =
+		new HashMap<>();
 
 	static {
-		_testConfig.addProperty("name", "Small Sizes");
-		_testConfig.addProperty("height", 650);
-		_testConfig.addProperty("width", 500);
+		for (int i = 0; i < 10; i++) {
+			JsonObject jsonObject = new JsonObject();
+
+			jsonObject.addProperty("id", i);
+			jsonObject.addProperty("name", i + " Size");
+			jsonObject.addProperty("height", _getRandomLong());
+			jsonObject.addProperty("width", _getRandomLong());
+
+			_testConfigList.put(String.valueOf(i), jsonObject);
+		}
 	}
 
 	@ArquillianResource
