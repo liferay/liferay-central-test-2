@@ -451,14 +451,14 @@ renderResponse.setTitle(((item == null) ? LanguageUtil.get(request, "new-item") 
 		</aui:fieldset>
 
 		<%
-		ShoppingFileUploadsConfiguration configuration = (ShoppingFileUploadsConfiguration)GetterUtil.getObject(renderRequest.getAttribute(ShoppingFileUploadsConfiguration.class.getName()));
+		ShoppingFileUploadsConfiguration shoppingFileUploadsConfiguration = (ShoppingFileUploadsConfiguration)GetterUtil.getObject(renderRequest.getAttribute(ShoppingFileUploadsConfiguration.class.getName()));
 		%>
 
 		<aui:fieldset collapsed="<%= true %>" collapsible="<%= true %>" label="images">
 			<liferay-ui:error exception="<%= ItemLargeImageNameException.class %>">
 
 				<%
-				String[] imageExtensions = configuration.imageExtensions();
+				String[] imageExtensions = shoppingFileUploadsConfiguration.imageExtensions();
 				%>
 
 				<liferay-ui:message key="image-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(imageExtensions, ", ") %>.
@@ -467,7 +467,7 @@ renderResponse.setTitle(((item == null) ? LanguageUtil.get(request, "new-item") 
 			<liferay-ui:error exception="<%= ItemLargeImageSizeException.class %>">
 
 				<%
-				long imageMaxSize = configuration.largeImageMaxSize();
+				long imageMaxSize = shoppingFileUploadsConfiguration.largeImageMaxSize();
 				%>
 
 				<liferay-ui:message arguments="<%= TextFormatter.formatStorageSize(imageMaxSize, locale) %>" key="please-enter-a-file-with-a-valid-file-size-no-larger-than-x" translateArguments="<%= false %>" />
@@ -476,7 +476,7 @@ renderResponse.setTitle(((item == null) ? LanguageUtil.get(request, "new-item") 
 			<liferay-ui:error exception="<%= ItemMediumImageNameException.class %>">
 
 				<%
-				String[] imageExtensions = configuration.imageExtensions();
+				String[] imageExtensions = shoppingFileUploadsConfiguration.imageExtensions();
 				%>
 
 				<liferay-ui:message key="image-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(imageExtensions, ", ") %>.
@@ -485,7 +485,7 @@ renderResponse.setTitle(((item == null) ? LanguageUtil.get(request, "new-item") 
 			<liferay-ui:error exception="<%= ItemMediumImageSizeException.class %>">
 
 				<%
-				long imageMaxSize = configuration.mediumImageMaxSize();
+				long imageMaxSize = shoppingFileUploadsConfiguration.mediumImageMaxSize();
 				%>
 
 				<liferay-ui:message arguments="<%= TextFormatter.formatStorageSize(imageMaxSize, locale) %>" key="please-enter-a-file-with-a-valid-file-size-no-larger-than-x" translateArguments="<%= false %>" />
@@ -494,7 +494,7 @@ renderResponse.setTitle(((item == null) ? LanguageUtil.get(request, "new-item") 
 			<liferay-ui:error exception="<%= ItemSmallImageNameException.class %>">
 
 				<%
-				String[] imageExtensions = configuration.imageExtensions();
+				String[] imageExtensions = shoppingFileUploadsConfiguration.imageExtensions();
 				%>
 
 				<liferay-ui:message key="image-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(imageExtensions, ", ") %>.
@@ -503,7 +503,7 @@ renderResponse.setTitle(((item == null) ? LanguageUtil.get(request, "new-item") 
 			<liferay-ui:error exception="<%= ItemSmallImageSizeException.class %>">
 
 				<%
-				long imageMaxSize = configuration.smallImageMaxSize();
+				long imageMaxSize = shoppingFileUploadsConfiguration.smallImageMaxSize();
 				%>
 
 				<liferay-ui:message arguments="<%= TextFormatter.formatStorageSize(imageMaxSize, locale) %>" key="please-enter-a-file-with-a-valid-file-size-no-larger-than-x" translateArguments="<%= false %>" />
