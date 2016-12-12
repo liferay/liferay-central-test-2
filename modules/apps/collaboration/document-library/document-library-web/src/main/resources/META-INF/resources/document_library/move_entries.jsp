@@ -21,8 +21,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 long newFolderId = ParamUtil.getLong(request, "newFolderId");
 
-long[] fileShortcutIds = ParamUtil.getLongValues(request, "rowIdsDLFileShortcut");
-
 List<Folder> folders = (List<Folder>)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDERS);
 
 List<Folder> invalidMoveFolders = new ArrayList<Folder>();
@@ -330,7 +328,7 @@ if (portletTitleBasedNavigation) {
 					</div>
 				</c:if>
 
-				<aui:input name="rowIdsDLFileShortcut" type="hidden" value="<%= StringUtil.merge(fileShortcutIds) %>" />
+				<aui:input name="rowIdsDLFileShortcut" type="hidden" value="<%= ListUtil.toString(validShortcutEntries, FileShortcut.FILE_SHORTCUT_ID_ACCESSOR) %>" />
 
 				<%
 				String folderName = StringPool.BLANK;
