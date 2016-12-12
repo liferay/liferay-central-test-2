@@ -16,7 +16,6 @@ package com.liferay.portal.portlet.bridge.soy.internal;
 
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
-import com.liferay.portal.kernel.json.JSONSerializer;
 import com.liferay.portal.kernel.template.Template;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
