@@ -24,7 +24,6 @@ import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ContentTypes;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StreamUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -150,8 +149,7 @@ public class EditFolderMVCResourceCommand implements MVCResourceCommand {
 				FileEntry fileEntry = (FileEntry)entry;
 
 				zipWriter.addEntry(
-					path + StringPool.SLASH +
-						HtmlUtil.escapeURL(fileEntry.getFileName()),
+					path + StringPool.SLASH + fileEntry.getFileName(),
 					fileEntry.getContentStream());
 			}
 		}
