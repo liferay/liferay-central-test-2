@@ -70,10 +70,11 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 		Assert.assertEquals(jsonArray.size(), configurations.size());
 
 		jsonArray.forEach(configuration -> {
-			JsonObject config = configurations.get(
-				configuration.getAsJsonObject().get("id").getAsString());
+			JsonObject jsonObject = configuration.getAsJsonObject();
 
-			_assertEquals(config, configuration.getAsJsonObject());
+			JsonObject config = configurations.get(_getId(jsonObject));
+
+			_assertEquals(config, jsonObject);
 		});
 	}
 
@@ -91,8 +92,7 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 
 	private JsonObject _addConfiguration(JsonObject json) {
 		Invocation.Builder builder = _getBaseRequest(
-			t -> t.path(
-				"/{id}").resolveTemplate("id", json.get("id").getAsString()));
+			t -> t.path("/{id}").resolveTemplate("id", _getId(json)));
 
 		return builder.header("Authorization", _testAuth).put(
 			Entity.json(json), JsonObject.class);
@@ -117,8 +117,8 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 	private void _deleteAllConfigurationEntries() {
 		JsonArray jsonArray = _getBaseRequest(_NO_PATH).get(JsonArray.class);
 
-		jsonArray.forEach(e -> {
-			String id = e.getAsJsonObject().get("id").getAsString();
+		jsonArray.forEach(entry -> {
+			String id = _getId(entry.getAsJsonObject());
 
 			_getBaseRequest(
 				t -> t.path("/{id}").resolveTemplate("id", id)).header(
@@ -140,7 +140,11 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 	private JsonObject _getRandomConfiguration() {
 		Object[] values = _testConfigList.values().toArray();
 
-		return (JsonObject)values[new Random().nextInt(values.length)];
+		return (JsonObject) values[new Random().nextInt(values.length)];
+	}
+
+	private String _getId(JsonObject configuration) {
+		return configuration.get("id").getAsString();
 	}
 
 	private static final String _BASE_PATH =
