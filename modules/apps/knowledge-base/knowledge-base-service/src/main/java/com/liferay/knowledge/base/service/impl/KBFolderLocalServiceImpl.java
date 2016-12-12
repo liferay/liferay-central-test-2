@@ -73,7 +73,6 @@ public class KBFolderLocalServiceImpl extends KBFolderLocalServiceBaseImpl {
 			getUniqueUrlTitle(
 				groupId, parentResourcePrimKey, kbFolderId, name));
 		kbFolder.setDescription(description);
-
 		kbFolder.setExpandoBridgeAttributes(serviceContext);
 
 		kbFolderPersistence.update(kbFolder);
@@ -250,7 +249,6 @@ public class KBFolderLocalServiceImpl extends KBFolderLocalServiceBaseImpl {
 		kbFolder.setParentKBFolderId(parentResourcePrimKey);
 		kbFolder.setName(name);
 		kbFolder.setDescription(description);
-
 		kbFolder.setExpandoBridgeAttributes(serviceContext);
 
 		return kbFolderPersistence.update(kbFolder);
