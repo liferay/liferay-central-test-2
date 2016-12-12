@@ -61,6 +61,22 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 	}
 
 	@Test
+	public void testGetAllConfigurationsNonEmpty() {
+		Map<String, JsonObject> configurations = _addMultipleConfigurations();
+
+		JsonArray jsonArray = _getBaseRequest(_NO_PATH).get(JsonArray.class);
+
+		Assert.assertEquals(jsonArray.size(), configurations.size());
+
+		jsonArray.forEach(configuration -> {
+			JsonObject config = configurations.get(
+				configuration.getAsJsonObject().get("id").getAsString());
+
+			_assertEquals(config, configuration.getAsJsonObject());
+		});
+	}
+
+	@Test
 	public void testGetConfigurationWithWrongUUIDReturnNotFound() {
 		Response response = _getBaseRequest(
 			t -> t.path("/{id}").resolveTemplate("id", "small")).get();
