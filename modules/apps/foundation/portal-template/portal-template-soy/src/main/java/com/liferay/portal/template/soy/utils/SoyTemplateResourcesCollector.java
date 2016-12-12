@@ -27,8 +27,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Map;
 
 import org.osgi.framework.Bundle;
+import org.osgi.framework.wiring.BundleCapability;
 import org.osgi.framework.wiring.BundleRevision;
 import org.osgi.framework.wiring.BundleWire;
 import org.osgi.framework.wiring.BundleWiring;
@@ -91,6 +93,17 @@ public class SoyTemplateResourcesCollector {
 		}
 	}
 
+	/**
+	 * @deprecated As of 2.2.0, with no direct replacement
+	 */
+	@Deprecated
+	protected String getCapabilityPrefix(BundleCapability bundleCapability) {
+		Map<String, Object> attributes = bundleCapability.getAttributes();
+
+		return attributes.get("type") + StringPool.UNDERLINE +
+			attributes.get("version");
+	}
+
 	protected Bundle getProviderBundle(BundleWire bundleWire) {
 		BundleRevision bundleRevision = bundleWire.getProvider();
 
@@ -110,6 +123,15 @@ public class SoyTemplateResourcesCollector {
 
 	protected String getTemplateId(long bundleId, URL url) {
 		return String.valueOf(bundleId).concat(
+			TemplateConstants.BUNDLE_SEPARATOR).concat(url.getPath());
+	}
+
+	/**
+	 * @deprecated As of 2.2.0, with no direct replacement
+	 */
+	@Deprecated
+	protected String getTemplateId(String capabilityPrefix, URL url) {
+		return capabilityPrefix.concat(
 			TemplateConstants.BUNDLE_SEPARATOR).concat(url.getPath());
 	}
 
