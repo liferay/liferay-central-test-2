@@ -16,6 +16,7 @@ package com.liferay.dynamic.data.mapping.type.fieldset.internal;
 
 import com.liferay.dynamic.data.mapping.form.field.type.DDMFormFieldTemplateContextContributor;
 import com.liferay.dynamic.data.mapping.model.DDMFormField;
+import com.liferay.dynamic.data.mapping.model.LocalizedValue;
 import com.liferay.dynamic.data.mapping.render.DDMFormFieldRenderingContext;
 
 import java.util.HashMap;
@@ -48,7 +49,15 @@ public class FieldSetDDMFormFieldTemplateContextContributor
 			(List<Object>)ddmFormFieldRenderingContext.getProperty(
 				"nestedFields");
 
+		LocalizedValue label = ddmFormField.getLabel();
+
 		parameters.put("columnSize", getColumnSize(nestedFields));
+
+		if (label != null) {
+			parameters.put("label", label.getString(
+				ddmFormFieldRenderingContext.getLocale()));
+		}
+
 		parameters.put("fields", nestedFields);
 
 		return parameters;
