@@ -42,10 +42,10 @@ public class SearchDisplayContextFactoryImpl
 
 		try {
 			return new SearchDisplayContext(
-				renderRequest, renderResponse, portletPreferences, portal,
-				HtmlUtil.getHtml(), language, facetedSearcherManager,
+				renderRequest, portletPreferences, portal, HtmlUtil.getHtml(),
+				language, facetedSearcherManager,
 				new IndexSearchPropsValuesImpl(),
-				new PortletURLFactoryImpl());
+				new PortletURLFactoryImpl(renderRequest, renderResponse));
 		}
 		catch (PortletException pe) {
 			throw pe;
