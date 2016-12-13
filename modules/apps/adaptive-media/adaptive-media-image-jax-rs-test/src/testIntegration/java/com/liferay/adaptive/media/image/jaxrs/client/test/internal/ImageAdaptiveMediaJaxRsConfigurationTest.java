@@ -47,11 +47,11 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 
 	@Test
 	public void testAddConfigurationReturnConfigurationObject() {
-		JsonObject testConfig = _getRandomConfiguration();
+		JsonObject expectedResponse = _getRandomConfiguration();
 
-		JsonObject json = _addConfiguration(testConfig);
+		JsonObject actualResponse = _addConfiguration(expectedResponse);
 
-		_assertEquals(testConfig, json);
+		_assertEquals(expectedResponse, actualResponse);
 	}
 
 	@Test
@@ -67,29 +67,30 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 
 		JsonArray jsonArray = _getBaseRequest(_NO_PATH).get(JsonArray.class);
 
-		Assert.assertEquals(jsonArray.size(), configurations.size());
+		Assert.assertEquals(configurations.size(), jsonArray.size());
 
 		jsonArray.forEach(configuration -> {
-			JsonObject jsonObject = configuration.getAsJsonObject();
+			JsonObject actualObject = configuration.getAsJsonObject();
 
-			JsonObject config = configurations.get(_getId(jsonObject));
+			JsonObject expectedObject = configurations.get(
+				_getId(actualObject));
 
-			_assertEquals(config, jsonObject);
+			_assertEquals(expectedObject, actualObject);
 		});
 	}
 
 	@Test
 	public void testGetConfigurationWithCorrectUUIDReturnConfiguration() {
-		JsonObject testConfig = _getRandomConfiguration();
+		JsonObject expectedResponse = _getRandomConfiguration();
 
-		_addConfiguration(testConfig);
+		_addConfiguration(expectedResponse);
 
-		JsonObject response = _getBaseRequest(
+		JsonObject actualResponse = _getBaseRequest(
 			t -> t.path(
 				"/{id}").resolveTemplate("id",
-				_getId(testConfig))).get(JsonObject.class);
+				_getId(expectedResponse))).get(JsonObject.class);
 
-		_assertEquals(testConfig, response);
+		_assertEquals(expectedResponse, actualResponse);
 	}
 
 	@Test
@@ -117,15 +118,30 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 		return _testConfigList;
 	}
 
-	private void _assertEquals(JsonElement json1, JsonElement json2) {
-		Assert.assertEquals(json1.getAsString(), json2.getAsString());
+	/**
+	 * Asserts that two {@link JsonElement} are equal. If they are not, an
+	 * {@link AssertionError} is thrown.
+	 *
+	 * @param expected expected json element value.
+	 * @param actual actual json element value
+	 */
+	private void _assertEquals(JsonElement expected, JsonElement actual) {
+		Assert.assertEquals(expected.getAsString(), actual.getAsString());
 	}
 
-	private void _assertEquals(JsonObject json1, JsonObject json2) {
-		Assert.assertEquals(json1.entrySet().size(), json2.entrySet().size());
+	/**
+	 * Asserts that two {@link JsonObject} are equal. If they are not, an
+	 * {@link AssertionError} is thrown.
+	 *
+	 * @param expected expected json object value.
+	 * @param actual actual json object value
+	 */
+	private void _assertEquals(JsonObject expected, JsonObject actual) {
+		Assert.assertEquals(
+			expected.entrySet().size(), actual.entrySet().size());
 
-		json1.entrySet().forEach(entry ->
-			_assertEquals(json2.get(entry.getKey()), entry.getValue()));
+		expected.entrySet().forEach(entry ->
+			_assertEquals(entry.getValue(), actual.get(entry.getKey())));
 	}
 
 	private void _deleteAllConfigurationEntries() {
@@ -151,14 +167,14 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 		return path.apply(target).request(MediaType.APPLICATION_JSON_TYPE);
 	}
 
+	private String _getId(JsonObject configuration) {
+		return configuration.get("id").getAsString();
+	}
+
 	private JsonObject _getRandomConfiguration() {
 		Object[] values = _testConfigList.values().toArray();
 
-		return (JsonObject) values[new Random().nextInt(values.length)];
-	}
-
-	private String _getId(JsonObject configuration) {
-		return configuration.get("id").getAsString();
+		return (JsonObject)values[new Random().nextInt(values.length)];
 	}
 
 	private static final String _BASE_PATH =
