@@ -58,21 +58,16 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 	public void testAddConfigurationWithoutAuthorizationResultsIn403() {
 		JsonObject testConfig = _getRandomConfiguration();
 
-		Response response = _getBaseRequest(
-			t -> t.path(
-				"/{id}").resolveTemplate("id",
-				_getId(testConfig))).put(Entity.json(testConfig));
+		Response response = _getNonAuthenticatedResourceRequest(
+			_getId(testConfig)).put(Entity.json(testConfig));
 
 		Assert.assertEquals(403, response.getStatus());
 	}
 
 	@Test
 	public void testAddConfigurationWithoutBodyResultsIn400() {
-		Response response = _getBaseRequest(
-			t -> t.path(
-				"/{id}").resolveTemplate("id",
-				UUID.randomUUID().toString())).header(
-					"Authorization", _testAuth).put(Entity.json(""));
+		Response response = _getAuthenticatedResourceRequest(
+			_getRandomUUID()).put(Entity.json(""));
 
 		Assert.assertEquals(400, response.getStatus());
 	}
@@ -108,18 +103,16 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 
 		_addConfiguration(expectedResponse);
 
-		JsonObject actualResponse = _getBaseRequest(
-			t -> t.path(
-				"/{id}").resolveTemplate("id",
-				_getId(expectedResponse))).get(JsonObject.class);
+		JsonObject actualResponse = _getNonAuthenticatedResourceRequest(
+			_getId(expectedResponse)).get(JsonObject.class);
 
 		_assertEquals(expectedResponse, actualResponse);
 	}
 
 	@Test
 	public void testGetConfigurationWithWrongUUIDReturnNotFound() {
-		Response response = _getBaseRequest(
-			t -> t.path("/{id}").resolveTemplate("id", "small")).get();
+		Response response = _getNonAuthenticatedResourceRequest(
+			_getRandomUUID()).get();
 
 		Assert.assertEquals(404, response.getStatus());
 	}
@@ -128,11 +121,12 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 		return Math.abs(new Random().nextLong() % 1000);
 	}
 
-	private JsonObject _addConfiguration(JsonObject json) {
-		Invocation.Builder builder = _getBaseRequest(
-			t -> t.path("/{id}").resolveTemplate("id", _getId(json)));
+	private static String _getRandomUUID() {
+		return UUID.randomUUID().toString();
+	}
 
-		return builder.header("Authorization", _testAuth).put(
+	private JsonObject _addConfiguration(JsonObject json) {
+		return _getAuthenticatedResourceRequest(_getId(json)).put(
 			Entity.json(json), JsonObject.class);
 	}
 
@@ -173,10 +167,14 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 		jsonArray.forEach(entry -> {
 			String id = _getId(entry.getAsJsonObject());
 
-			_getBaseRequest(
-				t -> t.path("/{id}").resolveTemplate("id", id)).header(
-					"Authorization", _testAuth).delete();
+			_getAuthenticatedResourceRequest(id).delete();
 		});
+	}
+
+	private Invocation.Builder _getAuthenticatedResourceRequest(String id) {
+		return _getBaseRequest(
+			t -> t.path("/{id}").resolveTemplate("id", id)).header(
+				"Authorization", _testAuth);
 	}
 
 	private Invocation.Builder _getBaseRequest(
@@ -192,6 +190,10 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 
 	private String _getId(JsonObject configuration) {
 		return configuration.get("id").getAsString();
+	}
+
+	private Invocation.Builder _getNonAuthenticatedResourceRequest(String id) {
+		return _getBaseRequest(t -> t.path("/{id}").resolveTemplate("id", id));
 	}
 
 	private JsonObject _getRandomConfiguration() {
@@ -214,7 +216,7 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 		for (int i = 0; i < 10; i++) {
 			JsonObject jsonObject = new JsonObject();
 
-			String uuid = UUID.randomUUID().toString();
+			String uuid = _getRandomUUID();
 
 			jsonObject.addProperty("id", uuid);
 
