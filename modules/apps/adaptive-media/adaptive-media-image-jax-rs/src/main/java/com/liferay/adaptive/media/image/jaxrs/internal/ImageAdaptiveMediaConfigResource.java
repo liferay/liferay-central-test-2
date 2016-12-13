@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.util.MapUtil;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.io.IOException;
 
@@ -66,8 +67,9 @@ public class ImageAdaptiveMediaConfigResource {
 			throw new ForbiddenException();
 		}
 
-		if ((configRepr == null) ||
-			MapUtil.isEmpty(configRepr.getProperties())) {
+		if ( (configRepr == null) ||
+			 MapUtil.isEmpty(configRepr.getProperties()) ||
+			 	Validator.isNull(configRepr.getName())) {
 
 			throw new BadRequestException();
 		}
