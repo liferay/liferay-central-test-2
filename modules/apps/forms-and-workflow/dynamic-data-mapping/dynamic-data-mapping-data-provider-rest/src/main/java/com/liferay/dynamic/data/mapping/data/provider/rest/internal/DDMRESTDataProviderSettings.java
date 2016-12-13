@@ -47,7 +47,8 @@ import com.liferay.dynamic.data.mapping.annotations.DDMFormRule;
 							value = {
 								"url", "key", "value", "username", "password",
 								"filterable", "filterParameterName",
-								"cacheable", "inputParameters"
+								"cacheable", "inputParameters",
+								"outputParameters"
 							}
 						)
 					}
@@ -91,6 +92,9 @@ public interface DDMRESTDataProviderSettings {
 		required = true
 	)
 	public String key();
+
+	@DDMFormField(label = "%output-parameters")
+	public DDMRestDataProviderOutputParametersSettings[] outputParameters();
 
 	@DDMFormField(
 		label = "%password",
