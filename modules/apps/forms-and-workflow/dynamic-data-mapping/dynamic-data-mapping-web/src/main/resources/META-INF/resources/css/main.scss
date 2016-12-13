@@ -18,6 +18,10 @@
 	}
 
 	.form-builder {
+		.field-checkbox {
+			margin-top: -7px;
+		}
+
 		.property-builder-drop-container, .tab-pane {
 			min-height: 500px;
 
@@ -30,10 +34,6 @@
 					width: auto;
 				}
 			}
-		}
-
-		.field-checkbox {
-			margin-top: -7px;
 		}
 
 		.radio {
