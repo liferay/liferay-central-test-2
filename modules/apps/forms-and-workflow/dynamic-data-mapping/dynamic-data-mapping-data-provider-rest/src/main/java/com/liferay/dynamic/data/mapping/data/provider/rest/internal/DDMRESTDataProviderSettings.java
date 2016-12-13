@@ -46,7 +46,8 @@ import com.liferay.dynamic.data.mapping.annotations.DDMFormRule;
 							size = 12,
 							value = {
 								"url", "key", "value", "username", "password",
-								"filterable", "filterParameterName", "cacheable"
+								"filterable", "filterParameterName",
+								"cacheable", "inputParameters"
 							}
 						)
 					}
@@ -77,6 +78,9 @@ public interface DDMRESTDataProviderSettings {
 		}
 	)
 	public String filterParameterName();
+
+	@DDMFormField(label = "%input-parameters")
+	public DDMRestDataProviderInputParametersSettings[] inputParameters();
 
 	@DDMFormField(
 		label = "%displayed-json-attribute",
