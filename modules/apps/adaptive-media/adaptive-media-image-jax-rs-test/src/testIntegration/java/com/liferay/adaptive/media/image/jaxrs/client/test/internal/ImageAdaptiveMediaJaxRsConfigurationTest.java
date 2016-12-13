@@ -73,6 +73,25 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 	}
 
 	@Test
+	public void testDeleteConfigurationTrulyDeletesIt() {
+		JsonObject expectedResponse = _addConfiguration(
+			_getRandomConfiguration());
+
+		String id = _getId(expectedResponse);
+
+		JsonObject actualResponse = _getNonAuthenticatedResourceRequest(id).get(
+			JsonObject.class);
+
+		_assertEquals(expectedResponse, actualResponse);
+
+		_getAuthenticatedResourceRequest(id).delete();
+
+		Response response = _getNonAuthenticatedResourceRequest(id).get();
+
+		Assert.assertEquals(404, response.getStatus());
+	}
+
+	@Test
 	public void testDeleteExistingConfigurationReturns204() {
 		JsonObject addedConfiguration = _addConfiguration(
 			_getRandomConfiguration());
