@@ -55,6 +55,18 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 	}
 
 	@Test
+	public void testAddConfigurationWithoutAuthorizationResultsIn403() {
+		JsonObject testConfig = _getRandomConfiguration();
+
+		Response response = _getBaseRequest(
+			t -> t.path(
+				"/{id}").resolveTemplate("id",
+				_getId(testConfig))).put(Entity.json(testConfig));
+
+		Assert.assertEquals(403, response.getStatus());
+	}
+
+	@Test
 	public void testGetAllConfigurationsEmpty() {
 		JsonArray jsonArray = _getBaseRequest(_NO_PATH).get(JsonArray.class);
 
