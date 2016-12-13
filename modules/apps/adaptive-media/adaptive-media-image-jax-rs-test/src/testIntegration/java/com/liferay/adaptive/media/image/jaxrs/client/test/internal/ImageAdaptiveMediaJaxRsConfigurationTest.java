@@ -92,6 +92,14 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 	}
 
 	@Test
+	public void testDeleteConfigurationWithoutAuthorizationResultsIn403() {
+		Response actualResponse = _getNonAuthenticatedResourceRequest(
+			_getRandomUUID()).delete();
+
+		Assert.assertEquals(403, actualResponse.getStatus());
+	}
+
+	@Test
 	public void testDeleteExistingConfigurationReturns204() {
 		JsonObject addedConfiguration = _addConfiguration(
 			_getRandomConfiguration());
