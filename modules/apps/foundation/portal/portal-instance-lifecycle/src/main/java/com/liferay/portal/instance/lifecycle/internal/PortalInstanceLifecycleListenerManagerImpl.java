@@ -98,9 +98,7 @@ public class PortalInstanceLifecycleListenerManagerImpl
 			!clusterMasterExecutor.isMaster()) {
 
 			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Master instance required. Skipping: " +
-						portalInstanceLifecycleListener);
+				_log.debug("Skipping " + portalInstanceLifecycleListener);
 			}
 
 			return;
@@ -117,9 +115,7 @@ public class PortalInstanceLifecycleListenerManagerImpl
 			!clusterMasterExecutor.isMaster()) {
 
 			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Master instance required. Skipping: " +
-						portalInstanceLifecycleListener);
+				_log.debug("Skipping " + portalInstanceLifecycleListener);
 			}
 
 			return;
@@ -149,9 +145,7 @@ public class PortalInstanceLifecycleListenerManagerImpl
 			!clusterMasterExecutor.isMaster()) {
 
 			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Master instance required. Skipping: " +
-						portalInstanceLifecycleListener);
+				_log.debug("Skipping " + portalInstanceLifecycleListener);
 			}
 
 			return;
@@ -169,9 +163,7 @@ public class PortalInstanceLifecycleListenerManagerImpl
 			!clusterMasterExecutor.isMaster()) {
 
 			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Master instance required. Skipping: " +
-						portalInstanceLifecycleListener);
+				_log.debug("Skipping " + portalInstanceLifecycleListener);
 			}
 
 			return;
