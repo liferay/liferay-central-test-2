@@ -24,7 +24,7 @@ module.exports = function(config) {
 			included: true,
 			pattern: resourcesPath + '/**/!(config)*.js'
 		},
-		'src/testFrontend/**/*.js'
+		'src/test/testJS/**/*.js'
 	);
 
 	config.preprocessors[resourcesPath + '/**/*.soy.js'] = ['replacer'];
