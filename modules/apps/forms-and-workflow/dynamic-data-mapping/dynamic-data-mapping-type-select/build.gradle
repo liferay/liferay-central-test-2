@@ -3,6 +3,7 @@ configJSModules {
 }
 
 apply plugin: "com.liferay.lang.merger"
+apply plugin: "com.liferay.gulp"
 
 dependencies {
 	provided group: "com.liferay", name: "com.liferay.dynamic.data.mapping.io", version: "2.0.0"
@@ -16,6 +17,7 @@ dependencies {
 }
 
 task wrapSoyTemplates
+task testJS
 
 classes {
 	dependsOn wrapSoyTemplates
@@ -39,4 +41,8 @@ wrapSoyTemplates {
 			soyJsFile.text = soyJsWrapperHeader + soyJsFile.text.replace("(typeof ddm == 'undefined') { var ddm = {}; }", "(typeof ddm == 'undefined') { window.ddm = {}; }") + soyJsWrapperFooter
 		}
 	}
+}
+
+testJS {
+	dependsOn gulpTest
 }
