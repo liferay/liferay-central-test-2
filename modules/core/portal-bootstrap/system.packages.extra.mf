@@ -2703,7 +2703,7 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  .portal.kernel.repository.model,com.liferay.portal.kernel.service",co
  m.liferay.portal.kernel.repository.event;version="1.0.0";uses:="com.l
  iferay.portal.kernel.exception,com.liferay.portal.kernel.repository.r
- egistry",com.liferay.portal.kernel.repository.model;version="7.0.0";u
+ egistry",com.liferay.portal.kernel.repository.model;version="7.1.0";u
  ses:="com.liferay.expando.kernel.model,com.liferay.exportimport.kerne
  l.lar,com.liferay.portal.kernel.exception,com.liferay.portal.kernel.j
  son,com.liferay.portal.kernel.lock,com.liferay.portal.kernel.model,co
