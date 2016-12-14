@@ -160,18 +160,10 @@ public class WabBundleProcessor {
 			if ((unregisteredInitParameters != null) &&
 				!unregisteredInitParameters.isEmpty()) {
 
-				List<ListenerDefinition> listenerDefinitions =
-					modifiableServletContext.getListenerDefinitions();
-
-				Map<String, FilterRegistrationImpl> filterRegistrationImpls =
-					modifiableServletContext.getFilterRegistrationImpls();
-
-				Map<String, ServletRegistrationImpl> servletRegistrationImpls =
-					modifiableServletContext.getServletRegistrationImpls();
+				Map<String, Object> attributes = new HashMap<>();
 
 				Enumeration<String> attributeNames =
 					servletContext.getAttributeNames();
-				Map<String, Object> attributes = new HashMap<>();
 
 				while (attributeNames.hasMoreElements()) {
 					String attributeName = attributeNames.nextElement();
@@ -180,6 +172,13 @@ public class WabBundleProcessor {
 						attributeName,
 						servletContext.getAttribute(attributeName));
 				}
+
+				List<ListenerDefinition> listenerDefinitions =
+					modifiableServletContext.getListenerDefinitions();
+				Map<String, FilterRegistrationImpl> filterRegistrationImpls =
+					modifiableServletContext.getFilterRegistrationImpls();
+				Map<String, ServletRegistrationImpl> servletRegistrationImpls =
+					modifiableServletContext.getServletRegistrationImpls();
 
 				servletContextHelperRegistration.setProperties(
 					unregisteredInitParameters);
