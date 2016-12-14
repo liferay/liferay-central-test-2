@@ -16,6 +16,10 @@ AUI.add(
 		var Blogs = A.Component.create(
 			{
 				ATTRS: {
+					calculateReadingTimeURL: {
+						validator: Lang.isString
+					},
+
 					constants: {
 						validator: Lang.isObject
 					},
@@ -26,10 +30,6 @@ AUI.add(
 					},
 
 					editEntryURL: {
-						validator: Lang.isString
-					},
-
-					calculateReadingTimeURL: {
 						validator: Lang.isString
 					},
 

@@ -397,6 +397,7 @@ if (portletTitleBasedNavigation) {
 
 		if (blogs) {
 			blogs.setDescription(html);
+
 			blogs.updateReadingTime(html);
 		}
 	}
