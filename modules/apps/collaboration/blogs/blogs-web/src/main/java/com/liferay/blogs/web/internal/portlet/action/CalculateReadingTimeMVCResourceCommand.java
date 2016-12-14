@@ -49,8 +49,9 @@ public class CalculateReadingTimeMVCResourceCommand
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws Exception {
 
-		String content = ParamUtil.getString(resourceRequest, "content");
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
+
+		String content = ParamUtil.getString(resourceRequest, "content");
 
 		jsonObject.put("readingTime", BlogsUtil.getReadingTimeMinutes(content));
 
