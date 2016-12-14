@@ -5660,8 +5660,6 @@ jdbc.counter.maxActive=5
 jdbc.counter.maxIdle=0
 jdbc.counter.minIdle=0
 
-javascript.single.page.application.timeout=300000
-
 captcha.max.challenges=-1
 
 browser.launcher.url=
