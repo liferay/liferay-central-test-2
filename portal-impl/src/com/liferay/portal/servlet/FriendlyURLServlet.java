@@ -154,7 +154,7 @@ public class FriendlyURLServlet extends HttpServlet {
 			}
 		}
 		else {
-			if (redirect.isPermanentRedirect()) {
+			if (redirect.isPermanent()) {
 				response.setHeader("Location", redirect.getPath());
 				response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
 			}
@@ -398,7 +398,7 @@ public class FriendlyURLServlet extends HttpServlet {
 
 		Redirect redirect = getRedirect(request, path);
 
-		return new Object[] {redirect.getPath(), redirect.isForceRedirect()};
+		return new Object[] {redirect.getPath(), redirect.isForce()};
 	}
 
 	protected Locale setAlternativeLayoutFriendlyURL(
@@ -442,11 +442,11 @@ public class FriendlyURLServlet extends HttpServlet {
 		}
 
 		public Redirect(
-			String path, boolean forceRedirect, boolean permanentRedirect) {
+			String path, boolean force, boolean permanent) {
 
 			_path = path;
-			_forceRedirect = forceRedirect;
-			_permanentRedirect = permanentRedirect;
+			_force = force;
+			_permanent = permanent;
 		}
 
 		@Override
@@ -462,8 +462,8 @@ public class FriendlyURLServlet extends HttpServlet {
 			Redirect redirect = (Redirect)obj;
 
 			if (Objects.equals(getPath(), redirect.getPath()) &&
-				(isForceRedirect() == redirect.isForceRedirect()) &&
-				(isPermanentRedirect() == redirect.isPermanentRedirect())) {
+				(isForce() == redirect.isForce()) &&
+				(isPermanent() == redirect.isPermanent())) {
 
 				return true;
 			}
@@ -484,18 +484,18 @@ public class FriendlyURLServlet extends HttpServlet {
 		public int hashCode() {
 			int hash = HashUtil.hash(0, _path);
 
-			hash = HashUtil.hash(hash, _forceRedirect);
-			hash = HashUtil.hash(hash, _permanentRedirect);
+			hash = HashUtil.hash(hash, _force);
+			hash = HashUtil.hash(hash, _permanent);
 
 			return hash;
 		}
 
-		public boolean isForceRedirect() {
-			return _forceRedirect;
+		public boolean isForce() {
+			return _force;
 		}
 
-		public boolean isPermanentRedirect() {
-			return _permanentRedirect;
+		public boolean isPermanent() {
+			return _permanent;
 		}
 
 		public boolean isValidForward() {
@@ -505,16 +505,16 @@ public class FriendlyURLServlet extends HttpServlet {
 				return false;
 			}
 
-			if (isForceRedirect()) {
+			if (isForce()) {
 				return false;
 			}
 
 			return true;
 		}
 
-		private final boolean _forceRedirect;
+		private final boolean _force;
 		private final String _path;
-		private final boolean _permanentRedirect;
+		private final boolean _permanent;
 
 	}
 
