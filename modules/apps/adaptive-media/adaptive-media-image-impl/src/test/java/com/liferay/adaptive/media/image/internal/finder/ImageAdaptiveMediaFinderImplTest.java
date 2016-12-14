@@ -15,6 +15,7 @@
 package com.liferay.adaptive.media.image.internal.finder;
 
 import com.liferay.adaptive.media.AdaptiveMedia;
+import com.liferay.adaptive.media.AdaptiveMediaAttribute;
 import com.liferay.adaptive.media.AdaptiveMediaRuntimeException;
 import com.liferay.adaptive.media.AdaptiveMediaURIResolver;
 import com.liferay.adaptive.media.finder.AdaptiveMediaQuery;
@@ -647,6 +648,64 @@ public class ImageAdaptiveMediaFinderImplTest {
 				ImageAdaptiveMediaAttribute.IMAGE_HEIGHT);
 
 		Assert.assertEquals(100, (int)adaptiveMedia1Optional.get());
+	}
+
+	@Test
+	public void testGetMediaQueryWithConfigurationAttribute() throws Exception {
+		ImageAdaptiveMediaConfigurationEntry configurationEntry1 =
+			new ImageAdaptiveMediaConfigurationEntryImpl(
+				StringUtil.randomString(), "small",
+				MapUtil.fromArray("height", "100", "width", "200"));
+
+		ImageAdaptiveMediaConfigurationEntry configurationEntry2 =
+			new ImageAdaptiveMediaConfigurationEntryImpl(
+				StringUtil.randomString(), "medium",
+				MapUtil.fromArray("height", "200", "width", "200"));
+
+		Mockito.when(
+			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))
+		).thenReturn(
+			true
+		);
+
+		Mockito.when(
+			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
+				Mockito.any(long.class))
+		).thenReturn(
+			Arrays.asList(configurationEntry1, configurationEntry2)
+		);
+
+		Mockito.when(
+			_imageStorage.getImageInfo(
+				Mockito.eq(_fileVersion),
+				Mockito.any(ImageAdaptiveMediaConfigurationEntry.class))
+		).thenReturn(
+			Optional.of(new ImageInfo("image/jpeg", 1))
+		);
+
+		Mockito.when(
+			_fileVersion.getFileName()
+		).thenReturn(
+			StringUtil.randomString()
+		);
+
+		Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> stream =
+			_finder.getAdaptiveMedia(
+				queryBuilder ->
+					queryBuilder.forVersion(_fileVersion).
+						forConfiguration("small").done());
+
+		List<AdaptiveMedia<ImageAdaptiveMediaProcessor>> adaptiveMedias =
+			stream.collect(Collectors.toList());
+
+		Assert.assertEquals(1, adaptiveMedias.size());
+
+		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia0 =
+			adaptiveMedias.get(0);
+
+		Optional<String> adaptiveMedia0Optional = adaptiveMedia0.getAttributeValue(AdaptiveMediaAttribute.configurationUuid());
+
+		Assert.assertEquals("small", adaptiveMedia0Optional.get());
 	}
 
 	@Test
