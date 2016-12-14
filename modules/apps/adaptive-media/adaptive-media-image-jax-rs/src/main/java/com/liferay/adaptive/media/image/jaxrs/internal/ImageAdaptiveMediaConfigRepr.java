@@ -28,7 +28,6 @@ import java.util.Map;
  * {@link ImageAdaptiveMediaConfigurationEntry}'s API layer.
  *
  * @author Alejandro Hernández
- *
  */
 public class ImageAdaptiveMediaConfigRepr {
 
@@ -38,7 +37,7 @@ public class ImageAdaptiveMediaConfigRepr {
 	public ImageAdaptiveMediaConfigRepr(
 		ImageAdaptiveMediaConfigurationEntry configurationEntry) {
 
-		_properties = configurationEntry.getProperties();
+		_properties.putAll(configurationEntry.getProperties());
 
 		_name = configurationEntry.getName();
 
@@ -73,7 +72,7 @@ public class ImageAdaptiveMediaConfigRepr {
 	}
 
 	private String _name;
-	private Map<String, String> _properties = new HashMap<>();
+	private final Map<String, String> _properties = new HashMap<>();
 	private String _uuid;
 
 }

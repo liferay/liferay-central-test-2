@@ -42,8 +42,6 @@ public class ImageAdaptiveMediaRepr {
 
 		_url = url;
 
-		_properties = new HashMap<>();
-
 		_config = new ImageAdaptiveMediaConfigRepr(configurationEntry);
 
 		ImageAdaptiveMediaAttribute.allowedAttributes().forEach(
@@ -94,7 +92,7 @@ public class ImageAdaptiveMediaRepr {
 	}
 
 	private ImageAdaptiveMediaConfigRepr _config;
-	private Map<String, Object> _properties;
+	private final Map<String, Object> _properties = new HashMap<>();
 	private String _url;
 
 }

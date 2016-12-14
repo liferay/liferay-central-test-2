@@ -200,12 +200,14 @@ public class ImageAdaptiveMediaQueryBuilderImpl
 		return this;
 	}
 
-	private Map<AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, ?>, Object>
-		_attributes = new LinkedHashMap<>();
+	private final Map
+		<AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, ?>, Object>
+			_attributes = new LinkedHashMap<>();
 	private String _configurationUuid;
 	private FileEntry _fileEntry;
 	private FileVersion _fileVersion;
-	private Map<AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, ?>, Boolean>
-		_sortCriteria = new LinkedHashMap<>();
+	private final Map
+		<AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, ?>, Boolean>
+			_sortCriteria = new LinkedHashMap<>();
 
 }
