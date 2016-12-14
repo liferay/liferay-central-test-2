@@ -703,7 +703,9 @@ public class ImageAdaptiveMediaFinderImplTest {
 		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia0 =
 			adaptiveMedias.get(0);
 
-		Optional<String> adaptiveMedia0Optional = adaptiveMedia0.getAttributeValue(AdaptiveMediaAttribute.configurationUuid());
+		Optional<String> adaptiveMedia0Optional =
+			adaptiveMedia0.getAttributeValue(
+				AdaptiveMediaAttribute.configurationUuid());
 
 		Assert.assertEquals("small", adaptiveMedia0Optional.get());
 	}

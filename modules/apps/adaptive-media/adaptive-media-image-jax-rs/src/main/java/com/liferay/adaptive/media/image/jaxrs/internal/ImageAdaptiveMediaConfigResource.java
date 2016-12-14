@@ -67,9 +67,9 @@ public class ImageAdaptiveMediaConfigResource {
 			throw new ForbiddenException();
 		}
 
-		if ( (configRepr == null) ||
-			 MapUtil.isEmpty(configRepr.getProperties()) ||
-			 	Validator.isNull(configRepr.getName())) {
+		if ((configRepr == null) ||
+			MapUtil.isEmpty(configRepr.getProperties()) ||
+			Validator.isNull(configRepr.getName())) {
 
 			throw new BadRequestException();
 		}
