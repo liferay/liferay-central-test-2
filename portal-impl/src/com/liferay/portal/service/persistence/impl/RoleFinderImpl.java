@@ -783,12 +783,6 @@ public class RoleFinderImpl extends RoleFinderBaseImpl implements RoleFinder {
 			return 0;
 		}
 
-		if ((excludedNames == null) || excludedNames.isEmpty()) {
-			excludedNames = new ArrayList<>();
-
-			excludedNames.add("");
-		}
-
 		boolean andOperator = false;
 
 		if (Validator.isNull(keywords)) {
@@ -815,8 +809,17 @@ public class RoleFinderImpl extends RoleFinderBaseImpl implements RoleFinder {
 			sql = CustomSQLUtil.replaceKeywords(
 				sql, "lower(description)", StringPool.LIKE, true,
 				keywordsArray);
-			sql = StringUtil.replace(
-				sql, "[$EXCLUDED_NAMES$]", getExcludedNames(excludedNames));
+
+			if (excludedNames.isEmpty()) {
+				sql = StringUtil.replace(
+					sql, "(name NOT IN ([$EXCLUDED_NAMES$])) AND",
+					StringPool.BLANK);
+			}
+			else {
+				sql = StringUtil.replace(
+					sql, "[$EXCLUDED_NAMES$]", getExcludedNames(excludedNames));
+			}
+
 			sql = StringUtil.replace(sql, "[$TYPES$]", StringUtil.merge(types));
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
 
@@ -943,12 +946,6 @@ public class RoleFinderImpl extends RoleFinderBaseImpl implements RoleFinder {
 			return Collections.emptyList();
 		}
 
-		if ((excludedNames == null) || excludedNames.isEmpty()) {
-			excludedNames = new ArrayList<>();
-
-			excludedNames.add("");
-		}
-
 		boolean andOperator = false;
 
 		if (Validator.isNull(keywords)) {
@@ -975,8 +972,17 @@ public class RoleFinderImpl extends RoleFinderBaseImpl implements RoleFinder {
 			sql = CustomSQLUtil.replaceKeywords(
 				sql, "lower(description)", StringPool.LIKE, true,
 				keywordsArray);
-			sql = StringUtil.replace(
-				sql, "[$EXCLUDED_NAMES$]", getExcludedNames(excludedNames));
+
+			if (excludedNames.isEmpty()) {
+				sql = StringUtil.replace(
+					sql, "(name NOT IN ([$EXCLUDED_NAMES$])) AND",
+					StringPool.BLANK);
+			}
+			else {
+				sql = StringUtil.replace(
+					sql, "[$EXCLUDED_NAMES$]", getExcludedNames(excludedNames));
+			}
+
 			sql = StringUtil.replace(sql, "[$TYPES$]", StringUtil.merge(types));
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
 
