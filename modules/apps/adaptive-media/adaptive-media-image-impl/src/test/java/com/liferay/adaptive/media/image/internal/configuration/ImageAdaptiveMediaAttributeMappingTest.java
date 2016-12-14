@@ -46,6 +46,22 @@ public class ImageAdaptiveMediaAttributeMappingTest {
 		Assert.assertFalse(widthOptional.isPresent());
 	}
 
+	@Test(expected = IllegalArgumentException.class)
+	public void testFailWhenCreatingFromNullMap() {
+		ImageAdaptiveMediaAttributeMapping.fromProperties(null);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testFailWhenGettingValueOfNullAttribute() {
+		ImageAdaptiveMediaAttributeMapping attributeMapping =
+			ImageAdaptiveMediaAttributeMapping.fromProperties(
+				MapUtil.fromArray(
+					ImageAdaptiveMediaAttribute.IMAGE_HEIGHT.getName(), "100",
+					ImageAdaptiveMediaAttribute.IMAGE_WIDTH.getName(), "200"));
+
+		attributeMapping.getAttributeValue(null);
+	}
+
 	@Test
 	public void testIgnoreUnknownAttributes() {
 		ImageAdaptiveMediaAttributeMapping attributeMapping =

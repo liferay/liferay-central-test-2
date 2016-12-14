@@ -34,6 +34,16 @@ import org.mockito.Mockito;
 public class ImageAdaptiveMediaQueryBuilderImplTest {
 
 	@Test
+	public void testConfigurationAttributeQuery() {
+		FileVersion fileVersion = Mockito.mock(FileVersion.class);
+
+		_queryBuilder.forVersion(fileVersion).forConfiguration("small");
+
+		Assert.assertEquals(true, _queryBuilder.hasConfiguration());
+		Assert.assertEquals("small", _queryBuilder.getConfigurationUuid());
+	}
+
+	@Test
 	public void testFileEntryQueryReturnsLatestFileVersion() throws Exception {
 		FileEntry fileEntry = Mockito.mock(FileEntry.class);
 
@@ -70,11 +80,25 @@ public class ImageAdaptiveMediaQueryBuilderImplTest {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
+	public void testNullAttributeFailsWhenOrderingByIt() {
+		FileVersion fileVersion = Mockito.mock(FileVersion.class);
+
+		_queryBuilder.forVersion(fileVersion).orderBy(null, false);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
 	public void testNullAttributeValueFailsWhenQueryingAttributes() {
 		FileVersion fileVersion = Mockito.mock(FileVersion.class);
 
 		_queryBuilder.forVersion(fileVersion).
 			with(ImageAdaptiveMediaAttribute.IMAGE_HEIGHT, (Integer)null);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testNullConfigurationUUIDFailsWhenQueryingAttributes() {
+		FileVersion fileVersion = Mockito.mock(FileVersion.class);
+
+		_queryBuilder.forVersion(fileVersion).forConfiguration(null);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
