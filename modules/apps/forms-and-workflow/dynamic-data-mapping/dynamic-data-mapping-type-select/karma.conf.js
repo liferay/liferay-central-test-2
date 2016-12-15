@@ -28,6 +28,7 @@ module.exports = function(config) {
 	);
 
 	config.preprocessors[resourcesPath + '/**/*.soy.js'] = ['replacer'];
+	config.preprocessors['../dynamic-data-mapping-form-renderer/' + resourcesPath + '/**/*.soy.js'] = ['replacer'];
 
 	config.replacerPreprocessor = {
 		replacer: function(file, content) {
@@ -38,6 +39,17 @@ module.exports = function(config) {
 			if (fileName === 'select.soy.js') {
 				content = [
 					'AUI.add(\'liferay-ddm-form-field-select-template\', function(A) {',
+					content.replace(
+						'(typeof ddm == \'undefined\') { var ddm = {}; }',
+						'(typeof ddm == \'undefined\') { window.ddm = {}; }'
+					),
+					'}, \'\', {requires: []});'
+				].join('');
+			}
+
+			if (fileName === 'form.soy.js') {
+				content = [
+					'AUI.add(\'liferay-ddm-form-soy\', function(A) {',
 					content.replace(
 						'(typeof ddm == \'undefined\') { var ddm = {}; }',
 						'(typeof ddm == \'undefined\') { window.ddm = {}; }'
