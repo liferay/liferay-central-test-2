@@ -93,7 +93,7 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 	@Test
 	public void testAddConfigurationWithoutBodyReturns400() {
 		Invocation.Builder builder = _getAuthenticatedInvocationBuilder(
-			_getRandomUUID());
+			_getRandomUuid());
 
 		Response response = builder.put(Entity.json(""));
 
@@ -122,7 +122,7 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 	@Test
 	public void testDeleteConfigurationWithoutAuthorizationReturns403() {
 		Invocation.Builder builder = _getUnauthenticatedInvocationBuilder(
-			_getRandomUUID());
+			_getRandomUuid());
 
 		Response response = builder.delete();
 
@@ -145,7 +145,7 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 	@Test
 	public void testDeleteNonExistingConfigurationReturns204() {
 		Invocation.Builder builder = _getAuthenticatedInvocationBuilder(
-			_getRandomUUID());
+			_getRandomUuid());
 
 		Response response = builder.delete();
 
@@ -187,7 +187,7 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 	}
 
 	@Test
-	public void testGetConfigurationWithCorrectUUIDReturnConfiguration() {
+	public void testGetConfigurationWithExistingUuidReturnsConfiguration() {
 		JsonObject configurationJsonObject = _addConfiguration(
 			_getRandomConfigurationJsonObject());
 
@@ -200,9 +200,9 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 	}
 
 	@Test
-	public void testGetConfigurationWithWrongUUIDReturns404() {
+	public void testGetConfigurationWithNonExistingUuidReturns404() {
 		Invocation.Builder builder = _getUnauthenticatedInvocationBuilder(
-			_getRandomUUID());
+			_getRandomUuid());
 
 		Response response = builder.get();
 
@@ -213,7 +213,7 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 		return Math.abs(new Random().nextLong() % 1000);
 	}
 
-	private static String _getRandomUUID() {
+	private static String _getRandomUuid() {
 		return UUID.randomUUID().toString();
 	}
 
@@ -326,7 +326,7 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 		for (int i = 0; i < 10; i++) {
 			JsonObject jsonObject = new JsonObject();
 
-			String uuid = _getRandomUUID();
+			String uuid = _getRandomUuid();
 
 			jsonObject.addProperty("name", uuid + " Size");
 
