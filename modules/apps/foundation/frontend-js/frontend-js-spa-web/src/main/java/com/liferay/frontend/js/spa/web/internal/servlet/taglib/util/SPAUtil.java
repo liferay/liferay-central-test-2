@@ -74,16 +74,7 @@ public class SPAUtil {
 	}
 
 	public String getExcludedPaths() {
-		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
-
-		String[] excludedPaths = StringUtil.split(
-			SPAConfigurationUtil.get("spa.excluded.paths"));
-
-		for (String excludedPath : excludedPaths) {
-			jsonArray.put(excludedPath);
-		}
-
-		return jsonArray.toString();
+		return _spaExcludedPaths;
 	}
 
 	public ResourceBundle getLanguageResourceBundle(Locale locale) {
@@ -196,6 +187,7 @@ public class SPAUtil {
 
 	private static final String _VALID_STATUS_CODES;
 	private static final String _redirectParamName;
+	private static final String _spaExcludedPaths;
 
 	static {
 		Class<?> clazz = ServletResponseConstants.class;
@@ -216,6 +208,17 @@ public class SPAUtil {
 			PropsUtil.get(PropsKeys.AUTH_LOGIN_PORTLET_NAME));
 
 		_redirectParamName = portletNamespace.concat("redirect");
+
+		jsonArray = JSONFactoryUtil.createJSONArray();
+
+		String[] excludedPaths = StringUtil.split(
+			SPAConfigurationUtil.get("spa.excluded.paths"));
+
+		for (String excludedPath : excludedPaths) {
+			jsonArray.put(excludedPath);
+		}
+
+		_spaExcludedPaths = jsonArray.toString();
 	}
 
 	private PortletLocalService _portletLocalService;
