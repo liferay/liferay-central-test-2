@@ -24,7 +24,9 @@ import com.liferay.adaptive.media.image.jaxrs.client.test.internal.provider.Gson
 
 import java.net.URL;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
@@ -60,119 +62,148 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 	}
 
 	@Test
-	public void testAddConfigurationReturnConfigurationObject() {
-		JsonObject expectedResponse = _getRandomConfiguration();
+	public void testAddConfigurationReturnsConfigurationObject() {
+		JsonObject randomConfigurationJsonObject =
+			_getRandomConfigurationJsonObject();
 
-		JsonObject actualResponse = _addConfiguration(expectedResponse);
+		Invocation.Builder builder = _getAuthenticatedInvocationBuilder(
+			_getUuid(randomConfigurationJsonObject));
 
-		_assertEquals(expectedResponse, actualResponse);
+		JsonObject responseJsonObject = builder.put(
+			Entity.json(randomConfigurationJsonObject), JsonObject.class);
+
+		_assertEquals(randomConfigurationJsonObject, responseJsonObject);
 	}
 
 	@Test
-	public void testAddConfigurationWithoutAuthorizationResultsIn403() {
-		JsonObject testConfig = _getRandomConfiguration();
+	public void testAddConfigurationWithoutAuthorizationReturns403() {
+		JsonObject randomConfigurationJsonObject =
+			_getRandomConfigurationJsonObject();
 
-		Response response = _getNonAuthenticatedResourceRequest(
-			_getUuid(testConfig)).put(Entity.json(testConfig));
+		Invocation.Builder builder = _getUnauthenticatedInvocationBuilder(
+			_getUuid(randomConfigurationJsonObject));
+
+		Response response = builder.put(
+			Entity.json(randomConfigurationJsonObject));
 
 		Assert.assertEquals(403, response.getStatus());
 	}
 
 	@Test
-	public void testAddConfigurationWithoutBodyResultsIn400() {
-		Response response = _getAuthenticatedResourceRequest(
-			_getRandomUUID()).put(Entity.json(""));
+	public void testAddConfigurationWithoutBodyReturns400() {
+		Invocation.Builder builder = _getAuthenticatedInvocationBuilder(
+			_getRandomUUID());
+
+		Response response = builder.put(Entity.json(""));
 
 		Assert.assertEquals(400, response.getStatus());
 	}
 
 	@Test
-	public void testDeleteConfigurationTrulyDeletesIt() {
-		JsonObject expectedResponse = _addConfiguration(
-			_getRandomConfiguration());
+	public void testDeleteConfigurationDeletesConfiguration() {
+		JsonObject configurationJsonObject = _addConfiguration(
+			_getRandomConfigurationJsonObject());
 
-		String uuid = _getUuid(expectedResponse);
+		Invocation.Builder builder = _getUnauthenticatedInvocationBuilder(
+			_getUuid(configurationJsonObject));
 
-		JsonObject actualResponse = _getNonAuthenticatedResourceRequest(
-			uuid).get(JsonObject.class);
+		JsonObject responseJsonObject = builder.get(JsonObject.class);
 
-		_assertEquals(expectedResponse, actualResponse);
+		_assertEquals(configurationJsonObject, responseJsonObject);
 
-		_getAuthenticatedResourceRequest(uuid).delete();
+		builder.delete();
 
-		Response response = _getNonAuthenticatedResourceRequest(uuid).get();
+		Response response = builder.get();
 
 		Assert.assertEquals(404, response.getStatus());
 	}
 
 	@Test
-	public void testDeleteConfigurationWithoutAuthorizationResultsIn403() {
-		Response actualResponse = _getNonAuthenticatedResourceRequest(
-			_getRandomUUID()).delete();
+	public void testDeleteConfigurationWithoutAuthorizationReturns403() {
+		Invocation.Builder builder = _getUnauthenticatedInvocationBuilder(
+			_getRandomUUID());
 
-		Assert.assertEquals(403, actualResponse.getStatus());
+		Response response = builder.delete();
+
+		Assert.assertEquals(403, response.getStatus());
 	}
 
 	@Test
 	public void testDeleteExistingConfigurationReturns204() {
-		JsonObject addedConfiguration = _addConfiguration(
-			_getRandomConfiguration());
+		JsonObject configurationJsonObject = _addConfiguration(
+			_getRandomConfigurationJsonObject());
 
-		Response actualResponse = _getAuthenticatedResourceRequest(
-			_getUuid(addedConfiguration)).delete();
+		Invocation.Builder builder = _getAuthenticatedInvocationBuilder(
+			_getUuid(configurationJsonObject));
 
-		Assert.assertEquals(204, actualResponse.getStatus());
+		Response response = builder.delete();
+
+		Assert.assertEquals(204, response.getStatus());
 	}
 
 	@Test
 	public void testDeleteNonExistingConfigurationReturns204() {
-		Response actualResponse = _getAuthenticatedResourceRequest(
-			_getRandomUUID()).delete();
+		Invocation.Builder builder = _getAuthenticatedInvocationBuilder(
+			_getRandomUUID());
 
-		Assert.assertEquals(204, actualResponse.getStatus());
+		Response response = builder.delete();
+
+		Assert.assertEquals(204, response.getStatus());
 	}
 
 	@Test
 	public void testGetAllConfigurationsEmpty() {
-		JsonArray jsonArray = _getBaseRequest(_NO_PATH).get(JsonArray.class);
+		Invocation.Builder builder =
+			_getBaseRequest(IDENTITY_WEB_TARGET_RESOLVER);
 
-		Assert.assertEquals(0, jsonArray.size());
+		JsonArray responseJsonArray = builder.get(JsonArray.class);
+
+		Assert.assertEquals(0, responseJsonArray.size());
 	}
 
 	@Test
 	public void testGetAllConfigurationsNonEmpty() {
-		Map<String, JsonObject> configurations = _addMultipleConfigurations();
+		Map<String, JsonObject> configurations = _addConfigurations(
+			_configurationJsonObjects);
 
-		JsonArray jsonArray = _getBaseRequest(_NO_PATH).get(JsonArray.class);
+		Invocation.Builder builder =
+			_getBaseRequest(IDENTITY_WEB_TARGET_RESOLVER);
 
-		Assert.assertEquals(configurations.size(), jsonArray.size());
+		JsonArray responseJsonArray = builder.get(JsonArray.class);
 
-		jsonArray.forEach(configuration -> {
-			JsonObject actualObject = configuration.getAsJsonObject();
+		Assert.assertEquals(configurations.size(), responseJsonArray.size());
 
-			JsonObject expectedObject = configurations.get(
-				_getUuid(actualObject));
+		responseJsonArray.forEach(
+			responseJsonElement -> {
+				JsonObject responseJsonObject =
+					responseJsonElement.getAsJsonObject();
 
-			_assertEquals(expectedObject, actualObject);
-		});
+				JsonObject expectedObject = configurations.get(
+					_getUuid(responseJsonObject));
+
+				_assertEquals(expectedObject, responseJsonObject);
+			});
 	}
 
 	@Test
 	public void testGetConfigurationWithCorrectUUIDReturnConfiguration() {
-		JsonObject expectedResponse = _getRandomConfiguration();
+		JsonObject configurationJsonObject =
+			_addConfiguration(_getRandomConfigurationJsonObject());
 
-		_addConfiguration(expectedResponse);
+		Invocation.Builder builder = _getUnauthenticatedInvocationBuilder(
+			_getUuid(configurationJsonObject));
 
-		JsonObject actualResponse = _getNonAuthenticatedResourceRequest(
-			_getUuid(expectedResponse)).get(JsonObject.class);
+		JsonObject responseJsonObject = builder.get(JsonObject.class);
 
-		_assertEquals(expectedResponse, actualResponse);
+		_assertEquals(configurationJsonObject, responseJsonObject);
 	}
 
 	@Test
-	public void testGetConfigurationWithWrongUUIDReturnNotFound() {
-		Response response = _getNonAuthenticatedResourceRequest(
-			_getRandomUUID()).get();
+	public void testGetConfigurationWithWrongUUIDReturns404() {
+		Invocation.Builder builder = _getUnauthenticatedInvocationBuilder(
+			_getRandomUUID());
+
+		Response response = builder.get();
 
 		Assert.assertEquals(404, response.getStatus());
 	}
@@ -186,13 +217,24 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 	}
 
 	private JsonObject _addConfiguration(JsonObject json) {
-		return _getAuthenticatedResourceRequest(_getUuid(json)).put(
+		return _getAuthenticatedInvocationBuilder(_getUuid(json)).put(
 			Entity.json(json), JsonObject.class);
 	}
 
-	private Map<String, JsonObject> _addMultipleConfigurations() {
-		_testConfigList.forEach((k, v) -> _addConfiguration(v));
-		return _testConfigList;
+	private Map<String, JsonObject> _addConfigurations(
+		List<JsonObject> configurationJsonObjects) {
+
+		Map<String, JsonObject> configurationJsonObjectMap = new HashMap<>();
+
+		configurationJsonObjects.forEach(
+			configurationJsonObject -> {
+				configurationJsonObjectMap.put(
+					_getUuid(configurationJsonObject), configurationJsonObject);
+
+				_addConfiguration(configurationJsonObject);
+			});
+
+		return configurationJsonObjectMap;
 	}
 
 	/**
@@ -222,59 +264,76 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 	}
 
 	private void _deleteAllConfigurationEntries() {
-		JsonArray jsonArray = _getBaseRequest(_NO_PATH).get(JsonArray.class);
+		Invocation.Builder builder =
+			_getBaseRequest(IDENTITY_WEB_TARGET_RESOLVER);
 
-		jsonArray.forEach(entry -> {
-			String uuid = _getUuid(entry.getAsJsonObject());
+		JsonArray responseJsonArray = builder.get(JsonArray.class);
 
-			_getAuthenticatedResourceRequest(uuid).delete();
-		});
+		responseJsonArray.forEach(
+			jsonElement -> {
+				String uuid = _getUuid(jsonElement.getAsJsonObject());
+
+				_getAuthenticatedInvocationBuilder(uuid).delete();
+			});
 	}
 
-	private Invocation.Builder _getAuthenticatedResourceRequest(String uuid) {
-		return _getBaseRequest(
-			t -> t.path("/{uuid}").resolveTemplate("uuid", uuid)).header(
-				"Authorization", _testAuth);
+	private Invocation.Builder _getAuthenticatedInvocationBuilder(String uuid) {
+		Invocation.Builder builder = _getBaseRequest(
+			webTarget ->
+				webTarget.path("/{uuid}").resolveTemplate("uuid", uuid));
+
+		return builder.header("Authorization", _testAuth);
 	}
 
 	private Invocation.Builder _getBaseRequest(
-		Function<WebTarget, WebTarget> path) {
+		Function<WebTarget, WebTarget> webTargetResolver) {
 
-		Client client = ClientBuilder.newClient().register(GsonProvider.class);
+		Client client = ClientBuilder.newClient();
 
-		WebTarget target = client.target(
-			String.valueOf(_context)).path(_BASE_PATH);
+		client.register(GsonProvider.class);
 
-		return path.apply(target).request(MediaType.APPLICATION_JSON_TYPE);
+		WebTarget webTarget = client.target(_context.toString());
+
+		webTarget = webTarget.path(_BASE_PATH);
+
+		webTarget = webTargetResolver.apply(webTarget);
+
+		return webTarget.request(MediaType.APPLICATION_JSON_TYPE);
 	}
 
-	private Invocation.Builder _getNonAuthenticatedResourceRequest(
+	private Invocation.Builder _getUnauthenticatedInvocationBuilder(
 		String uuid) {
 
 		return _getBaseRequest(
-			t -> t.path("/{uuid}").resolveTemplate("uuid", uuid));
+			webTarget ->
+				webTarget.path("/{uuid}").resolveTemplate("uuid", uuid));
 	}
 
-	private JsonObject _getRandomConfiguration() {
-		Object[] values = _testConfigList.values().toArray();
+	private JsonObject _getRandomConfigurationJsonObject() {
+		Random random = new Random();
 
-		return (JsonObject)values[new Random().nextInt(values.length)];
+		return _configurationJsonObjects.get(
+			random.nextInt(_configurationJsonObjects.size()));
 	}
 
-	private String _getUuid(JsonObject configuration) {
-		return configuration.get("uuid").getAsString();
+	private String _getUuid(JsonObject configurationJsonObject) {
+		JsonElement configurationJsonElement =
+			configurationJsonObject.get("uuid");
+
+		return configurationJsonElement.getAsString();
 	}
 
 	private static final String _BASE_PATH =
 		"/o/adaptive-media/images/configuration";
 
-	private static final Function<WebTarget, WebTarget> _NO_PATH = t -> t;
+	private static final Function<WebTarget, WebTarget>
+		IDENTITY_WEB_TARGET_RESOLVER = webTarget -> webTarget;
 
 	private static final String _testAuth =
 		"Basic " + Base64.encodeBase64("test@liferay.com:test".getBytes());
 
-	private static final Map<String, JsonObject> _testConfigList =
-		new HashMap<>();
+	private static final List<JsonObject> _configurationJsonObjects =
+		new ArrayList<>();
 
 	static {
 		for (int i = 0; i < 10; i++) {
@@ -290,7 +349,7 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 
 			jsonObject.addProperty("width", _getRandomLong());
 
-			_testConfigList.put(uuid, jsonObject);
+			_configurationJsonObjects.add(jsonObject);
 		}
 	}
 
