@@ -68,17 +68,17 @@ public class ImageAdaptiveMediaFileVersionResource {
 	}
 
 	@GET
-	@Path("/config/{uuid}")
+	@Path("/config/{id}")
 	@Produces("image")
 	public Response getConfiguration(
-			@PathParam("uuid") String uuid,
+			@PathParam("id") String id,
 			@DefaultValue("true") @QueryParam("original") boolean original)
 		throws AdaptiveMediaException, PortalException {
 
 		Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> stream =
 			_finder.getAdaptiveMedia(
 				queryBuilder -> queryBuilder.forVersion(_fileVersion).
-					forConfiguration(uuid).done());
+					forConfiguration(id).done());
 
 		return _getFirstAdaptiveMedia(stream, original);
 	}

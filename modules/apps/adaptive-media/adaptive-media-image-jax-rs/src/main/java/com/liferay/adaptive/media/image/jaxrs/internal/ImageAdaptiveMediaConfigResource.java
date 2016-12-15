@@ -55,11 +55,11 @@ public class ImageAdaptiveMediaConfigResource {
 		_permissionChecker = PermissionThreadLocal.getPermissionChecker();
 	}
 
-	@Path("/{uuid}")
+	@Path("/{id}")
 	@Produces("application/json")
 	@PUT
 	public ImageAdaptiveMediaConfigRepr addConfiguration(
-			@PathParam("uuid") String uuid,
+			@PathParam("id") String id,
 			ImageAdaptiveMediaConfigRepr configRepr)
 		throws PortalException {
 
@@ -76,11 +76,11 @@ public class ImageAdaptiveMediaConfigResource {
 
 		Map<String, String> properties = configRepr.getProperties();
 
-		configRepr.setUuid(uuid);
+		configRepr.setUuid(id);
 
 		try {
 			_configurationHelper.addImageAdaptiveMediaConfigurationEntry(
-				_companyId, configRepr.getName(), uuid, properties);
+				_companyId, configRepr.getName(), id, properties);
 		}
 		catch (IOException ioe) {
 			throw new InternalServerErrorException();
@@ -90,8 +90,8 @@ public class ImageAdaptiveMediaConfigResource {
 	}
 
 	@DELETE
-	@Path("/{uuid}")
-	public void deleteConfiguration(@PathParam("uuid") String uuid)
+	@Path("/{id}")
+	public void deleteConfiguration(@PathParam("id") String id)
 		throws PortalException {
 
 		if (!_permissionChecker.isCompanyAdmin()) {
@@ -100,7 +100,7 @@ public class ImageAdaptiveMediaConfigResource {
 
 		try {
 			_configurationHelper.deleteImageAdaptiveMediaConfigurationEntry(
-				_companyId, uuid);
+				_companyId, id);
 		}
 		catch (IOException ioe) {
 			throw new InternalServerErrorException();
@@ -108,15 +108,15 @@ public class ImageAdaptiveMediaConfigResource {
 	}
 
 	@GET
-	@Path("/{uuid}")
+	@Path("/{id}")
 	@Produces("application/json")
 	public ImageAdaptiveMediaConfigRepr getConfiguration(
-		@PathParam("uuid") String uuid) {
+		@PathParam("id") String id) {
 
 		Optional<ImageAdaptiveMediaConfigurationEntry>
 			configurationEntryOptional =
 				_configurationHelper.getImageAdaptiveMediaConfigurationEntry(
-					_companyId, uuid);
+					_companyId, id);
 
 		ImageAdaptiveMediaConfigurationEntry configurationEntry =
 			configurationEntryOptional.orElseThrow(NotFoundException::new);
