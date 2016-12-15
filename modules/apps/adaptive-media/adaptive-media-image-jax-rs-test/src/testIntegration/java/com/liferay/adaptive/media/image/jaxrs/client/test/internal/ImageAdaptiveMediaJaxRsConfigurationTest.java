@@ -19,6 +19,7 @@ import aQute.lib.base64.Base64;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import com.liferay.adaptive.media.image.jaxrs.client.test.internal.provider.GsonProvider;
 
@@ -237,30 +238,17 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 		return configurationJsonObjectMap;
 	}
 
-	/**
-	 * Asserts that two {@link JsonElement} are equal. If they are not, an
-	 * {@link AssertionError} is thrown.
-	 *
-	 * @param expected expected json element value.
-	 * @param actual actual json element value
-	 */
-	private void _assertEquals(JsonElement expected, JsonElement actual) {
-		Assert.assertEquals(expected.getAsString(), actual.getAsString());
-	}
+	private void _assertEquals(
+		JsonObject expectedJsonObject, JsonObject actualJsonObject) {
 
-	/**
-	 * Asserts that two {@link JsonObject} are equal. If they are not, an
-	 * {@link AssertionError} is thrown.
-	 *
-	 * @param expected expected json object value.
-	 * @param actual actual json object value
-	 */
-	private void _assertEquals(JsonObject expected, JsonObject actual) {
-		Assert.assertEquals(
-			expected.entrySet().size(), actual.entrySet().size());
+		JsonParser jsonParser = new JsonParser();
 
-		expected.entrySet().forEach(entry ->
-			_assertEquals(entry.getValue(), actual.get(entry.getKey())));
+		JsonObject parsedExpectedJsonObject = (JsonObject)jsonParser.parse(
+			expectedJsonObject.getAsString());
+		JsonObject parsedActualJsonObject = (JsonObject)jsonParser.parse(
+			actualJsonObject.getAsString());
+
+		Assert.assertEquals(parsedExpectedJsonObject, parsedActualJsonObject);
 	}
 
 	private void _deleteAllConfigurationEntries() {
