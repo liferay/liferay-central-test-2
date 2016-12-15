@@ -1,3 +1,17 @@
+/**
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ */
+
 package com.liferay.adaptive.media.image.jaxrs.client.test.internal;
 
 import aQute.lib.base64.Base64;
@@ -59,7 +73,7 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 		JsonObject testConfig = _getRandomConfiguration();
 
 		Response response = _getNonAuthenticatedResourceRequest(
-			_getId(testConfig)).put(Entity.json(testConfig));
+			_getUuid(testConfig)).put(Entity.json(testConfig));
 
 		Assert.assertEquals(403, response.getStatus());
 	}
@@ -77,16 +91,16 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 		JsonObject expectedResponse = _addConfiguration(
 			_getRandomConfiguration());
 
-		String id = _getId(expectedResponse);
+		String uuid = _getUuid(expectedResponse);
 
-		JsonObject actualResponse = _getNonAuthenticatedResourceRequest(id).get(
-			JsonObject.class);
+		JsonObject actualResponse = _getNonAuthenticatedResourceRequest(
+			uuid).get(JsonObject.class);
 
 		_assertEquals(expectedResponse, actualResponse);
 
-		_getAuthenticatedResourceRequest(id).delete();
+		_getAuthenticatedResourceRequest(uuid).delete();
 
-		Response response = _getNonAuthenticatedResourceRequest(id).get();
+		Response response = _getNonAuthenticatedResourceRequest(uuid).get();
 
 		Assert.assertEquals(404, response.getStatus());
 	}
@@ -105,7 +119,7 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 			_getRandomConfiguration());
 
 		Response actualResponse = _getAuthenticatedResourceRequest(
-			_getId(addedConfiguration)).delete();
+			_getUuid(addedConfiguration)).delete();
 
 		Assert.assertEquals(204, actualResponse.getStatus());
 	}
@@ -137,7 +151,7 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 			JsonObject actualObject = configuration.getAsJsonObject();
 
 			JsonObject expectedObject = configurations.get(
-				_getId(actualObject));
+				_getUuid(actualObject));
 
 			_assertEquals(expectedObject, actualObject);
 		});
@@ -150,7 +164,7 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 		_addConfiguration(expectedResponse);
 
 		JsonObject actualResponse = _getNonAuthenticatedResourceRequest(
-			_getId(expectedResponse)).get(JsonObject.class);
+			_getUuid(expectedResponse)).get(JsonObject.class);
 
 		_assertEquals(expectedResponse, actualResponse);
 	}
@@ -172,7 +186,7 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 	}
 
 	private JsonObject _addConfiguration(JsonObject json) {
-		return _getAuthenticatedResourceRequest(_getId(json)).put(
+		return _getAuthenticatedResourceRequest(_getUuid(json)).put(
 			Entity.json(json), JsonObject.class);
 	}
 
@@ -211,15 +225,15 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 		JsonArray jsonArray = _getBaseRequest(_NO_PATH).get(JsonArray.class);
 
 		jsonArray.forEach(entry -> {
-			String id = _getId(entry.getAsJsonObject());
+			String uuid = _getUuid(entry.getAsJsonObject());
 
-			_getAuthenticatedResourceRequest(id).delete();
+			_getAuthenticatedResourceRequest(uuid).delete();
 		});
 	}
 
-	private Invocation.Builder _getAuthenticatedResourceRequest(String id) {
+	private Invocation.Builder _getAuthenticatedResourceRequest(String uuid) {
 		return _getBaseRequest(
-			t -> t.path("/{id}").resolveTemplate("id", id)).header(
+			t -> t.path("/{uuid}").resolveTemplate("uuid", uuid)).header(
 				"Authorization", _testAuth);
 	}
 
@@ -234,18 +248,21 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 		return path.apply(target).request(MediaType.APPLICATION_JSON_TYPE);
 	}
 
-	private String _getId(JsonObject configuration) {
-		return configuration.get("id").getAsString();
-	}
+	private Invocation.Builder _getNonAuthenticatedResourceRequest(
+		String uuid) {
 
-	private Invocation.Builder _getNonAuthenticatedResourceRequest(String id) {
-		return _getBaseRequest(t -> t.path("/{id}").resolveTemplate("id", id));
+		return _getBaseRequest(
+			t -> t.path("/{uuid}").resolveTemplate("uuid", uuid));
 	}
 
 	private JsonObject _getRandomConfiguration() {
 		Object[] values = _testConfigList.values().toArray();
 
 		return (JsonObject)values[new Random().nextInt(values.length)];
+	}
+
+	private String _getUuid(JsonObject configuration) {
+		return configuration.get("uuid").getAsString();
 	}
 
 	private static final String _BASE_PATH =
@@ -255,6 +272,7 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 
 	private static final String _testAuth =
 		"Basic " + Base64.encodeBase64("test@liferay.com:test".getBytes());
+
 	private static final Map<String, JsonObject> _testConfigList =
 		new HashMap<>();
 
@@ -264,11 +282,11 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 
 			String uuid = _getRandomUUID();
 
-			jsonObject.addProperty("id", uuid);
+			jsonObject.addProperty("name", uuid + " Size");
+
+			jsonObject.addProperty("uuid", uuid);
 
 			jsonObject.addProperty("height", _getRandomLong());
-
-			jsonObject.addProperty("name", uuid + " Size");
 
 			jsonObject.addProperty("width", _getRandomLong());
 
