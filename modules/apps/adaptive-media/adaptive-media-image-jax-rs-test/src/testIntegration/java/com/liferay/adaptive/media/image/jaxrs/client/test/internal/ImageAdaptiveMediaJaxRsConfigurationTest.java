@@ -154,8 +154,8 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 
 	@Test
 	public void testGetAllConfigurationsEmpty() {
-		Invocation.Builder builder =
-			_getBaseRequest(IDENTITY_WEB_TARGET_RESOLVER);
+		Invocation.Builder builder = _getBaseRequest(
+			_IDENTITY_WEB_TARGET_RESOLVER);
 
 		JsonArray responseJsonArray = builder.get(JsonArray.class);
 
@@ -167,8 +167,8 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 		Map<String, JsonObject> configurations = _addConfigurations(
 			_configurationJsonObjects);
 
-		Invocation.Builder builder =
-			_getBaseRequest(IDENTITY_WEB_TARGET_RESOLVER);
+		Invocation.Builder builder = _getBaseRequest(
+			_IDENTITY_WEB_TARGET_RESOLVER);
 
 		JsonArray responseJsonArray = builder.get(JsonArray.class);
 
@@ -188,8 +188,8 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 
 	@Test
 	public void testGetConfigurationWithCorrectUUIDReturnConfiguration() {
-		JsonObject configurationJsonObject =
-			_addConfiguration(_getRandomConfigurationJsonObject());
+		JsonObject configurationJsonObject = _addConfiguration(
+			_getRandomConfigurationJsonObject());
 
 		Invocation.Builder builder = _getUnauthenticatedInvocationBuilder(
 			_getUuid(configurationJsonObject));
@@ -252,8 +252,8 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 	}
 
 	private void _deleteAllConfigurationEntries() {
-		Invocation.Builder builder =
-			_getBaseRequest(IDENTITY_WEB_TARGET_RESOLVER);
+		Invocation.Builder builder = _getBaseRequest(
+			_IDENTITY_WEB_TARGET_RESOLVER);
 
 		JsonArray responseJsonArray = builder.get(JsonArray.class);
 
@@ -289,6 +289,13 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 		return webTarget.request(MediaType.APPLICATION_JSON_TYPE);
 	}
 
+	private JsonObject _getRandomConfigurationJsonObject() {
+		Random random = new Random();
+
+		return _configurationJsonObjects.get(
+			random.nextInt(_configurationJsonObjects.size()));
+	}
+
 	private Invocation.Builder _getUnauthenticatedInvocationBuilder(
 		String uuid) {
 
@@ -297,16 +304,9 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 				webTarget.path("/{uuid}").resolveTemplate("uuid", uuid));
 	}
 
-	private JsonObject _getRandomConfigurationJsonObject() {
-		Random random = new Random();
-
-		return _configurationJsonObjects.get(
-			random.nextInt(_configurationJsonObjects.size()));
-	}
-
 	private String _getUuid(JsonObject configurationJsonObject) {
-		JsonElement configurationJsonElement =
-			configurationJsonObject.get("uuid");
+		JsonElement configurationJsonElement = configurationJsonObject.get(
+			"uuid");
 
 		return configurationJsonElement.getAsString();
 	}
@@ -315,13 +315,12 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 		"/o/adaptive-media/images/configuration";
 
 	private static final Function<WebTarget, WebTarget>
-		IDENTITY_WEB_TARGET_RESOLVER = webTarget -> webTarget;
-
-	private static final String _testAuth =
-		"Basic " + Base64.encodeBase64("test@liferay.com:test".getBytes());
+		_IDENTITY_WEB_TARGET_RESOLVER = webTarget -> webTarget;
 
 	private static final List<JsonObject> _configurationJsonObjects =
 		new ArrayList<>();
+	private static final String _testAuth =
+		"Basic " + Base64.encodeBase64("test@liferay.com:test".getBytes());
 
 	static {
 		for (int i = 0; i < 10; i++) {
