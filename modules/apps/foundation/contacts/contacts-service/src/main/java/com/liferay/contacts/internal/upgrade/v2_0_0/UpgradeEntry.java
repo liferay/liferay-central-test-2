@@ -50,11 +50,11 @@ public class UpgradeEntry extends UpgradeProcess {
 				User user = _userLocalService.fetchUserByEmailAddress(
 					companyId, emailAddress);
 
-				if (user != null) {
-					runSQL(
-						"delete from Contacts_Entry where entryId = " +
-							String.valueOf(entryId));
+				if (user == null) {
+					continue;
 				}
+
+				runSQL("delete from Contacts_Entry where entryId = " + entryId);
 			}
 		}
 	}
