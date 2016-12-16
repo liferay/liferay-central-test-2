@@ -1205,8 +1205,8 @@ public class JournalPortlet extends MVCPortlet {
 			cause instanceof FeedNameException ||
 			cause instanceof FeedTargetLayoutFriendlyUrlException ||
 			cause instanceof FeedTargetPortletIdException ||
-			cause instanceof FolderNameException ||
 			cause instanceof FileSizeException ||
+			cause instanceof FolderNameException ||
 			cause instanceof InvalidDDMStructureException ||
 			cause instanceof LiferayFileItemException ||
 			cause instanceof LocaleException ||
