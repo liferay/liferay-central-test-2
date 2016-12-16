@@ -21,6 +21,7 @@ import com.liferay.item.selector.ItemSelector;
 import com.liferay.item.selector.ItemSelectorCriterion;
 import com.liferay.item.selector.ItemSelectorReturnType;
 import com.liferay.item.selector.criteria.URLItemSelectorReturnType;
+import com.liferay.item.selector.criteria.audio.criterion.AudioItemSelectorCriterion;
 import com.liferay.item.selector.criteria.file.criterion.FileItemSelectorCriterion;
 import com.liferay.portal.json.JSONFactoryImpl;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
@@ -220,21 +221,13 @@ public class AdaptiveMediaBlogsEditorConfigContributorTest
 	}
 
 	@Test
-	public void testItemSelectorURLWhenNoBlogsItemSelectorCriterion()
+	public void testItemSelectorURLWhenNoFileBrowserImageBrowseLinkUrl()
 		throws Exception {
-
-		when(
-			_itemSelector.getItemSelectorCriteria(
-				"fileItemSelectorCriterionURLItemSelectorReturnType")
-		).thenReturn(
-			_getFileItemSelectorCriterionURLItemSelectorReturnType()
-		);
 
 		JSONObject originalJSONObject = JSONFactoryUtil.createJSONObject();
 
 		originalJSONObject.put(
-			"filebrowserImageBrowseLinkUrl",
-			"fileItemSelectorCriterionURLItemSelectorReturnType");
+			"filebrowserImageBrowseLinkUrl", StringPool.BLANK);
 
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject(
 			originalJSONObject.toJSONString());
@@ -267,13 +260,21 @@ public class AdaptiveMediaBlogsEditorConfigContributorTest
 	}
 
 	@Test
-	public void testItemSelectorURLWhenNoFileBrowserImageBrowseLinkUrl()
+	public void testItemSelectorURLWithAudioItemSelectorCriterion()
 		throws Exception {
+
+		when(
+			_itemSelector.getItemSelectorCriteria(
+				"audioItemSelectorCriterionURLItemSelectorReturnType")
+		).thenReturn(
+			_getAudioItemSelectorCriterionURLItemSelectorReturnType()
+		);
 
 		JSONObject originalJSONObject = JSONFactoryUtil.createJSONObject();
 
 		originalJSONObject.put(
-			"filebrowserImageBrowseLinkUrl", StringPool.BLANK);
+			"filebrowserImageBrowseLinkUrl",
+			"audioItemSelectorCriterionURLItemSelectorReturnType");
 
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject(
 			originalJSONObject.toJSONString());
@@ -366,6 +367,66 @@ public class AdaptiveMediaBlogsEditorConfigContributorTest
 	}
 
 	@Test
+	public void testItemSelectorURLWithFileItemSelectorCriterion()
+		throws Exception {
+
+		PortletURL itemSelectorPortletURL = mock(PortletURL.class);
+
+		when(
+			itemSelectorPortletURL.toString()
+		).thenReturn(
+			"itemSelectorPortletURL"
+		);
+
+		when(
+			_itemSelector.getItemSelectorURL(
+				Mockito.any(RequestBackedPortletURLFactory.class),
+				Mockito.anyString(), Mockito.any(ItemSelectorCriterion.class))
+		).thenReturn(
+			itemSelectorPortletURL
+		);
+
+		when(
+			_itemSelector.getItemSelectedEventName(Mockito.anyString())
+		).thenReturn(
+			"selectedEventName"
+		);
+
+		when(
+			_itemSelector.getItemSelectorCriteria(
+				"fileItemSelectorCriterionURLItemSelectorReturnType")
+		).thenReturn(
+			_getFileItemSelectorCriterionURLItemSelectorReturnType()
+		);
+
+		JSONObject originalJSONObject = JSONFactoryUtil.createJSONObject();
+
+		originalJSONObject.put(
+			"filebrowserImageBrowseLinkUrl",
+			"fileItemSelectorCriterionURLItemSelectorReturnType");
+
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject(
+			originalJSONObject.toJSONString());
+
+		AdaptiveMediaBlogsEditorConfigContributor
+			adaptiveMediaBlogsEditorConfigContributor =
+				new AdaptiveMediaBlogsEditorConfigContributor();
+
+		adaptiveMediaBlogsEditorConfigContributor.setItemSelector(
+			_itemSelector);
+
+		adaptiveMediaBlogsEditorConfigContributor.populateConfigJSONObject(
+			jsonObject, _inputEditorTaglibAttributes, _themeDisplay,
+			_requestBackedPortletURLFactory);
+
+		Mockito.verify(
+			_itemSelector
+		).getItemSelectorURL(
+			Mockito.any(RequestBackedPortletURLFactory.class),
+			Mockito.anyString(), Mockito.any(ItemSelectorCriterion.class));
+	}
+
+	@Test
 	public void testPictureAndSourceAreAddedToAllowedContent()
 		throws Exception {
 
@@ -415,6 +476,23 @@ public class AdaptiveMediaBlogsEditorConfigContributorTest
 
 		JSONAssert.assertEquals(
 			expectedJSONObject.toJSONString(), jsonObject.toJSONString(), true);
+	}
+
+	private List<ItemSelectorCriterion>
+		_getAudioItemSelectorCriterionURLItemSelectorReturnType() {
+
+		AudioItemSelectorCriterion audioItemSelectorCriterion =
+			new AudioItemSelectorCriterion();
+
+		audioItemSelectorCriterion.setDesiredItemSelectorReturnTypes(
+			Collections.<ItemSelectorReturnType>singletonList(
+				new URLItemSelectorReturnType()));
+
+		List<ItemSelectorCriterion> itemSelectorCriteria = new ArrayList<>();
+
+		itemSelectorCriteria.add(audioItemSelectorCriterion);
+
+		return itemSelectorCriteria;
 	}
 
 	private List<ItemSelectorCriterion>
