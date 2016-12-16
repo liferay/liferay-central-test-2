@@ -69,11 +69,11 @@ public class SearchResultFieldDisplayContext implements Serializable {
 		_valuesToString = valuesToString;
 	}
 
-	private float _boost;
 	private boolean _array;
+	private float _boost;
+	private String _name;
 	private boolean _numeric;
 	private boolean _tokenized;
-	private String _name;
 	private String _valuesToString;
 
 }
