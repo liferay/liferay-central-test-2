@@ -32,7 +32,9 @@
 	.portlet-configuration-body-content,
 	.export-dialog-tree,
 	.lfr-dynamic-uploader,
-	.process-list {
+	.process-list,
+	.roles-selector-body {
+
 		> .container-fluid-1280 {
 			padding-top: 20px;
 		}
@@ -107,7 +109,8 @@
 
 	.export-dialog-tree,
 	.lfr-dynamic-uploader,
-	.process-list {
+	.process-list,
+	.roles-selector-body {
 		bottom: 0;
 		display: block;
 		left: 0;
@@ -173,7 +176,8 @@
 	.export-dialog-tree,
 	.lfr-dynamic-uploader,
 	.lfr-form-content,
-	.portlet-configuration-body-content {
+	.portlet-configuration-body-content,
+	.roles-selector-body {
 		bottom: $dialog-footer-height;
 
 		@include sm {
