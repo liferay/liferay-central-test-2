@@ -34,19 +34,19 @@ public class SearchResultFieldDisplayContext implements Serializable {
 	}
 
 	public boolean isArray() {
-		return _isArray;
+		return _array;
 	}
 
 	public boolean isNumeric() {
-		return _isNumeric;
+		return _numeric;
 	}
 
 	public boolean isTokenized() {
-		return _isTokenized;
+		return _tokenized;
 	}
 
-	public void setArray(boolean isArray) {
-		_isArray = isArray;
+	public void setArray(boolean array) {
+		_array = array;
 	}
 
 	public void setBoost(float boost) {
@@ -57,12 +57,12 @@ public class SearchResultFieldDisplayContext implements Serializable {
 		_name = name;
 	}
 
-	public void setNumeric(boolean isNumeric) {
-		_isNumeric = isNumeric;
+	public void setNumeric(boolean numeric) {
+		_numeric = numeric;
 	}
 
-	public void setTokenized(boolean isTokenized) {
-		_isTokenized = isTokenized;
+	public void setTokenized(boolean tokenized) {
+		_tokenized = tokenized;
 	}
 
 	public void setValuesToString(String valuesToString) {
@@ -70,9 +70,9 @@ public class SearchResultFieldDisplayContext implements Serializable {
 	}
 
 	private float _boost;
-	private boolean _isArray;
-	private boolean _isNumeric;
-	private boolean _isTokenized;
+	private boolean _array;
+	private boolean _numeric;
+	private boolean _tokenized;
 	private String _name;
 	private String _valuesToString;
 
