@@ -28,10 +28,8 @@ import org.osgi.service.component.annotations.Component;
  */
 @Component(
 	property = {
-		"item.selector.view.key=" + DLItemSelectorViewConstants.DL_AUDIO_ITEM_SELECTOR_VIEW_KEY,
 		"item.selector.view.key=" + DLItemSelectorViewConstants.DL_FILE_ITEM_SELECTOR_VIEW_KEY,
-		"item.selector.view.key=" + DLItemSelectorViewConstants.DL_IMAGE_ITEM_SELECTOR_VIEW_KEY,
-		"item.selector.view.key=" + DLItemSelectorViewConstants.DL_VIDEO_ITEM_SELECTOR_VIEW_KEY
+		"item.selector.view.key=" + DLItemSelectorViewConstants.DL_IMAGE_ITEM_SELECTOR_VIEW_KEY
 	},
 	service = ItemSelectorViewReturnTypeProvider.class
 )
