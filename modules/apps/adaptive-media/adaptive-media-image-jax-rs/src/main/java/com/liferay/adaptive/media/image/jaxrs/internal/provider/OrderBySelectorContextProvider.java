@@ -50,8 +50,8 @@ public class OrderBySelectorContextProvider
 		return availableFields ->
 			Arrays.stream(orders).map(this::parseOrder).filter(
 				Optional::isPresent).map(Optional::get).filter(
-					fieldOrder -> availableFields.contains(
-						fieldOrder.getFieldName())).
+					fieldOrder ->
+						availableFields.contains(fieldOrder.getFieldName())).
 							collect(Collectors.toList());
 	}
 

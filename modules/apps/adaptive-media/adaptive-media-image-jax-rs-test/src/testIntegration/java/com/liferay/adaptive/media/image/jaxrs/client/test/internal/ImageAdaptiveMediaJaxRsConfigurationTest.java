@@ -21,6 +21,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import com.liferay.adaptive.media.image.jaxrs.client.test.internal.provider.GsonProvider;
+import com.liferay.portal.kernel.json.JSONException;
 
 import java.net.URL;
 
@@ -40,7 +41,6 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.liferay.portal.kernel.json.JSONException;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.test.api.ArquillianResource;
@@ -49,6 +49,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
 import org.skyscreamer.jsonassert.JSONAssert;
 
 /**
@@ -243,10 +244,12 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 		JsonObject expectedJsonObject, JsonObject actualJsonObject) {
 
 		try {
-			JSONAssert.assertEquals(expectedJsonObject.toString(), actualJsonObject.toString(), true);
+			JSONAssert.assertEquals(
+				expectedJsonObject.toString(), actualJsonObject.toString(),
+				true);
 		}
-		catch (org.json.JSONException e) {
-			Assert.fail(e.getMessage());
+		catch (org.json.JSONException jsone) {
+			Assert.fail(jsone.getMessage());
 		}
 	}
 
@@ -266,8 +269,7 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 
 	private Invocation.Builder _getAuthenticatedInvocationBuilder(String id) {
 		Invocation.Builder builder = _getBaseRequest(
-			webTarget ->
-				webTarget.path("/{id}").resolveTemplate("id", id));
+			webTarget -> webTarget.path("/{id}").resolveTemplate("id", id));
 
 		return builder.header("Authorization", _testAuth);
 	}
@@ -288,6 +290,13 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 		return webTarget.request(MediaType.APPLICATION_JSON_TYPE);
 	}
 
+	private String _getId(JsonObject configurationJsonObject) {
+		JsonElement configurationJsonElement = configurationJsonObject.get(
+			"id");
+
+		return configurationJsonElement.getAsString();
+	}
+
 	private JsonObject _getRandomConfigurationJsonObject() {
 		Random random = new Random();
 
@@ -295,19 +304,9 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 			random.nextInt(_configurationJsonObjects.size()));
 	}
 
-	private Invocation.Builder _getUnauthenticatedInvocationBuilder(
-		String id) {
-
+	private Invocation.Builder _getUnauthenticatedInvocationBuilder(String id) {
 		return _getBaseRequest(
-			webTarget ->
-				webTarget.path("/{id}").resolveTemplate("id", id));
-	}
-
-	private String _getId(JsonObject configurationJsonObject) {
-		JsonElement configurationJsonElement =
-			configurationJsonObject.get("id");
-
-		return configurationJsonElement.getAsString();
+			webTarget -> webTarget.path("/{id}").resolveTemplate("id", id));
 	}
 
 	private static final String _BASE_PATH =

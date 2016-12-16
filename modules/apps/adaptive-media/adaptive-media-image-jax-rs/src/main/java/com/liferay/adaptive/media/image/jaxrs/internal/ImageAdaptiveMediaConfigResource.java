@@ -59,8 +59,7 @@ public class ImageAdaptiveMediaConfigResource {
 	@Produces("application/json")
 	@PUT
 	public ImageAdaptiveMediaConfigRepr addConfiguration(
-			@PathParam("id") String id,
-			ImageAdaptiveMediaConfigRepr configRepr)
+			@PathParam("id") String id, ImageAdaptiveMediaConfigRepr configRepr)
 		throws PortalException {
 
 		if (!_permissionChecker.isCompanyAdmin()) {

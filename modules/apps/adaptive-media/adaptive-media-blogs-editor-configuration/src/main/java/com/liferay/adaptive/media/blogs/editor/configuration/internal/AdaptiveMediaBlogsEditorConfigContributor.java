@@ -87,8 +87,8 @@ public class AdaptiveMediaBlogsEditorConfigContributor
 		for (ItemSelectorCriterion itemSelectorCriterion :
 				itemSelectorCriteria) {
 
-			if (itemSelectorCriterion instanceof BlogsItemSelectorCriterion ||
-				itemSelectorCriterion instanceof AudioItemSelectorCriterion ||
+			if (itemSelectorCriterion instanceof AudioItemSelectorCriterion ||
+				itemSelectorCriterion instanceof BlogsItemSelectorCriterion ||
 				itemSelectorCriterion instanceof FileItemSelectorCriterion ||
 				itemSelectorCriterion instanceof ImageItemSelectorCriterion ||
 				itemSelectorCriterion instanceof VideoItemSelectorCriterion) {

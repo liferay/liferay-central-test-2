@@ -230,24 +230,23 @@ public class ImageAdaptiveMediaFileVersionResource {
 		Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> stream) {
 
 		return stream.flatMap(
-			(adaptiveMedia) -> _getRepr(adaptiveMedia)).
-			collect(Collectors.toList());
+			(adaptiveMedia) ->
+				_getRepr(adaptiveMedia)).collect(Collectors.toList());
 	}
 
 	private Stream<ImageAdaptiveMediaRepr> _getRepr(
 		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia) {
 
 		Optional<ImageAdaptiveMediaRepr> imageAdaptiveMediaReprOptional =
-			_getAdaptiveMediaConfigurationEntry(adaptiveMedia).
-				flatMap(
-					configurationEntry -> {
-						Optional<String> uriOptional = _getAdaptiveMediaUri(
-							adaptiveMedia);
+			_getAdaptiveMediaConfigurationEntry(adaptiveMedia).flatMap(
+				configurationEntry -> {
+					Optional<String> uriOptional = _getAdaptiveMediaUri(
+						adaptiveMedia);
 
-						return uriOptional.map((uri) ->
-							new ImageAdaptiveMediaRepr(
-								adaptiveMedia, uri, configurationEntry));
-				});
+					return uriOptional.map((uri) ->
+						new ImageAdaptiveMediaRepr(
+							adaptiveMedia, uri, configurationEntry));
+			});
 
 		if (imageAdaptiveMediaReprOptional.isPresent()) {
 			return Stream.of(imageAdaptiveMediaReprOptional.get());
