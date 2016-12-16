@@ -54,14 +54,14 @@ public class GoogleDocsDLFilePicker implements DLFilePicker {
 
 	@Override
 	public String getJavaScript() throws PortalException {
-		String googleFilePickerFtl =
+		String templateId =
 			"/com/liferay/document/library/google/docs/internal/display" +
 				"/context/dependencies/google_file_picker.ftl";
 
 		Class<?> clazz = getClass();
 
 		URLTemplateResource templateResource = new URLTemplateResource(
-			googleFilePickerFtl, clazz.getResource(googleFilePickerFtl));
+			templateId, clazz.getResource(templateId));
 
 		Template template = TemplateManagerUtil.getTemplate(
 			TemplateConstants.LANG_TYPE_FTL, templateResource, false);
