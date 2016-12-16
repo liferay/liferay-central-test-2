@@ -41,6 +41,10 @@ AUI.add(
 					}
 				},
 
+				AUGMENTS: [
+					Liferay.DDM.Field.SelectFieldSearchSupport
+				],
+
 				EXTENDS: Liferay.DDM.Renderer.Field,
 
 				NAME: 'liferay-ddm-form-field-select',
@@ -91,7 +95,8 @@ AUI.add(
 							SelectField.superclass.getTemplateContext.apply(instance, arguments),
 							{
 								options: instance.get('options'),
-								selecteCaretDoubleIcon: Liferay.Util.getLexiconIconTpl('caret-double-l', 'icon-monospaced'),
+								selectCaretDoubleIcon: Liferay.Util.getLexiconIconTpl('caret-double-l', 'icon-monospaced'),
+								selectSearchIcon: Liferay.Util.getLexiconIconTpl('search', 'icon-monospaced'),
 								strings: instance.get('strings'),
 								value: instance.getValueSelected()
 							}
@@ -143,6 +148,18 @@ AUI.add(
 						return values;
 					},
 
+					openList: function() {
+						var instance = this;
+
+						var container = instance.get('container');
+
+						var selectGroup = container.one('.form-builder-select-field');
+
+						container.one('.drop-chosen').toggleClass('hide');
+
+						selectGroup.addClass('active');
+					},
+
 					render: function() {
 						var instance = this;
 
@@ -184,17 +201,18 @@ AUI.add(
 
 					_afterClickSelectTrigger: function(event) {
 						event.stopPropagation();
+						event.preventDefault();
 
 						var instance = this;
 
-						var container = instance.get('container');
+						var target = event.target;
 
-						var selectGroup = container.one('.form-builder-select-field');
-
-						selectGroup.addClass('active');
+						if (target.ancestor('.search-chosen')) {
+							return;
+						}
 
 						if (!instance.get('readOnly')) {
-							container.one('.drop-chosen').toggleClass('hide');
+							instance.openList();
 						}
 					},
 
@@ -279,6 +297,6 @@ AUI.add(
 	},
 	'',
 	{
-		requires: ['liferay-ddm-form-renderer-field']
+		requires: ['liferay-ddm-form-field-select', 'liferay-ddm-form-field-select-search-support', 'liferay-ddm-form-renderer-field']
 	}
 );
