@@ -247,6 +247,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>SELECT_FIELD_DATA_PROVIDER_LIST</td>
+	<td>//div[contains(@data-fieldname,'${key_fieldName}')]//div[contains(@class,'form-builder-select-field')]//li[contains(.,'${key_selectOption}')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>SELECT_FIELD_OPTIONS_LIST</td>
 	<td>//div[contains(@data-fieldname,'${key_fieldName}')]//div[contains(@class,'form-builder-select-field')]//ul[@class='results-chosen']//li[contains(.,'${key_selectOption}')]</td>
 	<td></td>
