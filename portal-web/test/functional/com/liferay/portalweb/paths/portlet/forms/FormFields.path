@@ -243,7 +243,7 @@
 <!--SELECT-->
 <tr>
 	<td>SELECT_FIELD</td>
-	<td>//div[contains(@data-fieldname,'${key_fieldName}')]//select</td>
+	<td>//div[contains(@data-fieldname,'${key_fieldName}')]//div[contains(@class,'form-builder-select-field')]//a[contains(@class,'select-field-trigger')]</td>
 	<td></td>
 </tr>
 <tr>
