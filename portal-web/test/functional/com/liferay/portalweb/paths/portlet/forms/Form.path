@@ -207,8 +207,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>RULE_BUILDER_CONDITION_FIELD</td>
+	<td>//li[contains(@class,'rule-condition-container')][${key_conditionRowNumber}]//a[contains(@id,'condition-first') and contains(@class,'select-field-trigger')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>RULE_BUILDER_SELECT_CONDITION_FIELD</td>
 	<td>//li[contains(@class,'form-builder-rule-condition')][${key_conditionRowNumber}]//div[contains(@class,'condition-if')]//select[contains(@id,'condition-first')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>RULE_BUILDER_CONDITION_OPERATOR_FIELD</td>
+	<td>//li[contains(@class,'rule-condition-container')][${key_conditionRowNumber}]//a[contains(@id,'condition-operator') and contains(@class,'select-field-trigger')]</td>
 	<td></td>
 </tr>
 <tr>
@@ -217,8 +227,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>RULE_BUILDER_CONDITION_VALUE_TYPE_FIELD</td>
+	<td>//li[contains(@class,'rule-condition-container')][${key_conditionRowNumber}]//a[contains(@id,'condition-second-oper') and contains(@class,'select-field-trigger')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>RULE_BUILDER_SELECT_CONDITION_VALUE_TYPE</td>
 	<td>//li[contains(@class,'form-builder-rule-condition')][${key_conditionRowNumber}]//div[contains(@class,'condition-the')]//select[contains(@id,'type')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>RULE_BUILDER_CONDITION_VALUE_FIELD</td>
+	<td>//li[contains(@class,'rule-condition-container')][${key_conditionRowNumber}]//div[contains(@data-fieldname,'condition-second-operand-options')]//a[contains(@id,'condition-second-oper') and contains(@class,'select-field-trigger')]</td>
 	<td></td>
 </tr>
 <tr>
@@ -237,8 +257,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>RULE_BUILDER_ACTION_FIELD</td>
+	<td>//a[contains(@id,'target') and contains(@class,'select-field-trigger')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>RULE_BUILDER_SELECT_ACTION</td>
 	<td>//li[contains(@class,'form-builder-rule-action')][${key_actionRowNumber}]//div[contains(@class,'action')]//select[contains(@id,'target')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>RULE_BUILDER_ACTION_TARGET_FIELD</td>
+	<td>//li[contains(@class,'form-builder-rule-action')][${key_actionRowNumber}]//a[contains(@id,'action') and contains(@class,'select-field-trigger')]</td>
 	<td></td>
 </tr>
 <tr>
