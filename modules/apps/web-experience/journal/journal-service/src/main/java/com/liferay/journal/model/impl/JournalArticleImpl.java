@@ -27,6 +27,7 @@ import com.liferay.journal.service.JournalArticleImageLocalServiceUtil;
 import com.liferay.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.journal.service.JournalArticleResourceLocalServiceUtil;
 import com.liferay.journal.service.JournalFolderLocalServiceUtil;
+import com.liferay.journal.transformer.JournalTransformerListenerRegistryUtil;
 import com.liferay.journal.transformer.LocaleTransformerListener;
 import com.liferay.journal.util.impl.JournalUtil;
 import com.liferay.portal.kernel.exception.LocaleException;
@@ -74,10 +75,13 @@ public class JournalArticleImpl extends JournalArticleBaseImpl {
 		Document document, String languageId, Map<String, String> tokens) {
 
 		TransformerListener transformerListener =
-			new LocaleTransformerListener();
+			JournalTransformerListenerRegistryUtil.getTransformerListener(
+				LocaleTransformerListener.class.getName());
 
-		document = transformerListener.onXml(
-			document.clone(), languageId, tokens);
+		if (transformerListener != null) {
+			document = transformerListener.onXml(
+				document.clone(), languageId, tokens);
+		}
 
 		return document.asXML();
 	}
