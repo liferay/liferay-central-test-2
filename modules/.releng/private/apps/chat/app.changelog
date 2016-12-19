@@ -1,0 +1,12 @@
+#
+# Liferay App Version 3.0.0
+#
+
+app.artifacts-3.0.0=\
+	com.liferay.chat.api-1.0.2.jar,\
+	com.liferay.chat.service-1.0.9.jar,\
+	com.liferay.chat.web-1.0.4.jar
+
+app.change.log-3.0.0=LPS-65920 LPS-67654 LPS-69331
+
+app.git.id-3.0.0=8105749f183870aaf9b3c87912743d28bac909ca
