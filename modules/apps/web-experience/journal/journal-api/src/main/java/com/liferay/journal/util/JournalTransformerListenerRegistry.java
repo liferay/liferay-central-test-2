@@ -26,6 +26,8 @@ import java.util.List;
 @ProviderType
 public interface JournalTransformerListenerRegistry {
 
+	public TransformerListener getTransformerListener(String className);
+
 	public List<TransformerListener> getTransformerListeners();
 
 }
