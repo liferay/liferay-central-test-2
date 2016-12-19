@@ -53,5 +53,4 @@ public interface LayoutFriendlyURL extends LayoutFriendlyURLModel, PersistedMode
 				return LayoutFriendlyURL.class;
 			}
 		};
-
 }
