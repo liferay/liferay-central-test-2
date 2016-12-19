@@ -1326,9 +1326,6 @@ public class JournalUtil {
 		List<Element> elements = newElement.elements("dynamic-content");
 
 		if ((elements == null) || elements.isEmpty()) {
-
-			// LPS-69666 If no new content to merge, return
-
 			return;
 		}
 
