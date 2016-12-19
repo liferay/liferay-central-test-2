@@ -144,6 +144,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>SETTINGS_TAB_WORKFLOW_CONFIGURATION</td>
+	<td>//div[contains(@data-fieldname,'workflowDefinition')]//a[contains(@id,'workflowDefinition')]/following-sibling::div[@class='drop-chosen']//li[contains(.,'${key_workflowDefinition}')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td></td>
 	<td></td>
 	<td></td>
