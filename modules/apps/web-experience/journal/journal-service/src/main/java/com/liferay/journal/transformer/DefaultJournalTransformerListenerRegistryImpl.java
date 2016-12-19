@@ -16,12 +16,12 @@ package com.liferay.journal.transformer;
 
 import com.liferay.journal.constants.JournalPortletKeys;
 import com.liferay.journal.util.JournalTransformerListenerRegistry;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.templateparser.TransformerListener;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -37,7 +37,7 @@ public class DefaultJournalTransformerListenerRegistryImpl
 
 	@Override
 	public List<TransformerListener> getTransformerListeners() {
-		return _transformerListeners;
+		return new ArrayList(_transformerListeners.values());
 	}
 
 	@Reference(
@@ -49,7 +49,8 @@ public class DefaultJournalTransformerListenerRegistryImpl
 	public void registerTransformerListener(
 		TransformerListener transformerListener) {
 
-		_transformerListeners.add(transformerListener);
+		_transformerListeners.put(
+			transformerListener.getClass().getName(), transformerListener);
 	}
 
 	public void unregisterTransformerListener(
@@ -58,10 +59,7 @@ public class DefaultJournalTransformerListenerRegistryImpl
 		_transformerListeners.remove(transformerListener);
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(
-		DefaultJournalTransformerListenerRegistryImpl.class);
-
-	private final List<TransformerListener> _transformerListeners =
-		new CopyOnWriteArrayList<>();
+	private final Map<String, TransformerListener> _transformerListeners =
+		new ConcurrentHashMap<>();
 
 }
