@@ -171,7 +171,7 @@ public class SelectTag extends BaseSelectTag {
 		String label = getLabel();
 
 		if (label == null) {
-			label = TextFormatter.format(name, TextFormatter.K);
+			label = TextFormatter.format(name, TextFormatter.P);
 		}
 
 		String listType = getListType();
@@ -188,7 +188,7 @@ public class SelectTag extends BaseSelectTag {
 		String title = getTitle();
 
 		if ((title == null) && Validator.isNull(label)) {
-			title = TextFormatter.format(name, TextFormatter.K);
+			title = TextFormatter.format(name, TextFormatter.P);
 		}
 
 		String value = String.valueOf(getValue());

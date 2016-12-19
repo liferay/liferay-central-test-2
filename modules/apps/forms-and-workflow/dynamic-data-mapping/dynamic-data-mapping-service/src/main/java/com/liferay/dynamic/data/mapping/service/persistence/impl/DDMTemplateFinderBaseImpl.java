@@ -33,18 +33,18 @@ public class DDMTemplateFinderBaseImpl extends BasePersistenceImpl<DDMTemplate> 
 	}
 
 	/**
-	 * Returns the ddm template persistence.
+	 * Returns the d d m template persistence.
 	 *
-	 * @return the ddm template persistence
+	 * @return the d d m template persistence
 	 */
 	public DDMTemplatePersistence getDDMTemplatePersistence() {
 		return ddmTemplatePersistence;
 	}
 
 	/**
-	 * Sets the ddm template persistence.
+	 * Sets the d d m template persistence.
 	 *
-	 * @param ddmTemplatePersistence the ddm template persistence
+	 * @param ddmTemplatePersistence the d d m template persistence
 	 */
 	public void setDDMTemplatePersistence(
 		DDMTemplatePersistence ddmTemplatePersistence) {

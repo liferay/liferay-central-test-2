@@ -19,103 +19,184 @@ import org.junit.Test;
 
 /**
  * @author Shuyang Zhou
- * @author Hugo Huijser
  */
 public class TextFormatterTest {
 
 	@Test
 	public void testFormatA() {
-		_testFormat("Web Search", "WEB_SEARCH", TextFormatter.A);
+		String original = "Web Search";
+		String expected = "WEB_SEARCH";
+
+		String actual = TextFormatter.format(original, TextFormatter.A);
+
+		Assert.assertEquals(expected, actual);
 	}
 
 	@Test
 	public void testFormatB() {
-		_testFormat("Web Search", "websearch", TextFormatter.B);
+		String original = "Web Search";
+		String expected = "websearch";
+
+		String actual = TextFormatter.format(original, TextFormatter.B);
+
+		Assert.assertEquals(expected, actual);
 	}
 
 	@Test
 	public void testFormatC() {
-		_testFormat("Web Search", "web_search", TextFormatter.C);
+		String original = "Web Search";
+		String expected = "web_search";
+
+		String actual = TextFormatter.format(original, TextFormatter.C);
+
+		Assert.assertEquals(expected, actual);
 	}
 
 	@Test
 	public void testFormatD() {
-		_testFormat("Web Search", "WebSearch", TextFormatter.D);
+		String original = "Web Search";
+		String expected = "WebSearch";
+
+		String actual = TextFormatter.format(original, TextFormatter.D);
+
+		Assert.assertEquals(expected, actual);
 	}
 
 	@Test
 	public void testFormatE() {
-		_testFormat("Web Search", "web search", TextFormatter.E);
+		String original = "Web Search";
+		String expected = "web search";
+
+		String actual = TextFormatter.format(original, TextFormatter.E);
+
+		Assert.assertEquals(expected, actual);
 	}
 
 	@Test
 	public void testFormatF() {
-		_testFormat("Web Search", "webSearch", TextFormatter.F);
+		String original = "Web Search";
+		String expected = "webSearch";
+
+		String actual = TextFormatter.format(original, TextFormatter.F);
+
+		Assert.assertEquals(expected, actual);
 	}
 
 	@Test
 	public void testFormatG() {
-		_testFormat("formatId", "FormatId", TextFormatter.G);
-		_testFormat("FriendlyURLMapper", "FriendlyURLMapper", TextFormatter.G);
+		String original = "formatId";
+		String expected = "FormatId";
+
+		String actual = TextFormatter.format(original, TextFormatter.G);
+
+		Assert.assertEquals(expected, actual);
 	}
 
 	@Test
 	public void testFormatH() {
-		_testFormat("formatId", "format id", TextFormatter.H);
-		_testFormat(
-			"FriendlyURLMapper", "friendly url mapper", TextFormatter.H);
+		String original = "formatId";
+		String expected = "format id";
+
+		String actual = TextFormatter.format(original, TextFormatter.H);
+
+		Assert.assertEquals(expected, actual);
 	}
 
 	@Test
 	public void testFormatI() {
-		_testFormat("FormatId", "formatId", TextFormatter.I);
-		_testFormat("FriendlyURLMapper", "friendlyURLMapper", TextFormatter.I);
+		String original = "FormatId";
+		String expected = "formatId";
+
+		String actual = TextFormatter.format(original, TextFormatter.I);
+
+		Assert.assertEquals(expected, actual);
 	}
 
 	@Test
 	public void testFormatJ() {
-		_testFormat("format-id", "Format Id", TextFormatter.J);
-		_testFormat(
-			"friendly-url-mapper", "Friendly Url Mapper", TextFormatter.J);
+		String original = "format-id";
+		String expected = "Format Id";
+
+		String actual = TextFormatter.format(original, TextFormatter.J);
+
+		Assert.assertEquals(expected, actual);
 	}
 
 	@Test
 	public void testFormatK() {
-		_testFormat("formatId", "format-id", TextFormatter.K);
-		_testFormat(
-			"FriendlyURLMapper", "friendly-url-mapper", TextFormatter.K);
+		String original = "formatId";
+		String expected = "format-id";
+
+		String actual = TextFormatter.format(original, TextFormatter.K);
+
+		Assert.assertEquals(expected, actual);
 	}
 
 	@Test
 	public void testFormatL() {
-		_testFormat("FormatId", "formatId", TextFormatter.L);
-		_testFormat("FOrmatId", "FOrmatId", TextFormatter.L);
+		String original = "FormatId";
+		String expected = "formatId";
+
+		String actual = TextFormatter.format(original, TextFormatter.L);
+
+		Assert.assertEquals(expected, actual);
+
+		original = "FOrmatId";
+		expected = "FOrmatId";
+
+		actual = TextFormatter.format(original, TextFormatter.L);
+
+		Assert.assertEquals(expected, actual);
 	}
 
 	@Test
 	public void testFormatM() {
-		_testFormat("format-id", "formatId", TextFormatter.M);
-		_testFormat(
-			"friendly-url-mapper", "friendlyUrlMapper", TextFormatter.M);
+		String original = "format-id";
+		String expected = "formatId";
+
+		String actual = TextFormatter.format(original, TextFormatter.M);
+
+		Assert.assertEquals(expected, actual);
 	}
 
 	@Test
 	public void testFormatN() {
-		_testFormat("format-id", "format_id", TextFormatter.N);
-		_testFormat(
-			"friendly-url-mapper", "friendly_url_mapper", TextFormatter.N);
+		String original = "format-id";
+		String expected = "format_id";
+
+		String actual = TextFormatter.format(original, TextFormatter.N);
+
+		Assert.assertEquals(expected, actual);
 	}
 
 	@Test
 	public void testFormatO() {
-		_testFormat("format_id", "format-id", TextFormatter.O);
-		_testFormat(
-			"friendly_url_mapper", "friendly-url-mapper", TextFormatter.O);
+		String original = "format_id";
+		String expected = "format-id";
+
+		String actual = TextFormatter.format(original, TextFormatter.O);
+
+		Assert.assertEquals(expected, actual);
+	}
+
+	@Test
+	public void testFormatP() {
+		String original = "formatID";
+		String expected = "format-id";
+
+		String actual = TextFormatter.format(original, TextFormatter.P);
+
+		Assert.assertEquals(expected, actual);
 	}
 
 	@Test
 	public void testFormatQ() {
-		_testFormat("FORMATId", "format-id", TextFormatter.Q);
+		String original = "FORMATId";
+		String expected = "format-id";
+
+		String actual = TextFormatter.format(original, TextFormatter.Q);
+
+		Assert.assertEquals(expected, actual);
 	}
 
 	@Test
@@ -146,12 +227,6 @@ public class TextFormatterTest {
 			"1MB", TextFormatter.formatStorageSize(bytes, LocaleUtil.SPAIN));
 		Assert.assertEquals(
 			"1MB", TextFormatter.formatStorageSize(bytes, LocaleUtil.US));
-	}
-
-	private void _testFormat(String original, String expected, int style) {
-		String actual = TextFormatter.format(original, style);
-
-		Assert.assertEquals(expected, actual);
 	}
 
 }
