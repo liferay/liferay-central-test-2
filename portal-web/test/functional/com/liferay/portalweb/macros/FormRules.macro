@@ -66,7 +66,7 @@
 
 				<execute function="Click" locator1="Form#RULE_BUILDER_CONDITION_VALUE_FIELD" />
 
-				<execute function="Select" locator1="Form#RULE_BUILDER_SELECT_CONDITION_VALUE_FIELD" value1="${conditionValueField}" />
+				<execute function="AssertClick" locator1="Form#RULE_BUILDER_SELECT_CONDITION_VALUE_FIELD" value1="${conditionValueField}" />
 			</then>
 		</if>
 	</command>
@@ -81,7 +81,7 @@
 
 		<execute function="Click" locator1="Form#RULE_BUILDER_ACTION_FIELD" />
 
-		<execute function="Select" locator1="Form#RULE_BUILDER_SELECT_ACTION" value1="${action}" />
+		<execute function="AssertClick" locator1="Form#RULE_BUILDER_SELECT_ACTION" value1="${action}" />
 	</command>
 
 	<command name="selectActionTarget">
@@ -90,7 +90,7 @@
 
 		<execute function="Click" locator1="Form#RULE_BUILDER_ACTION_TARGET_FIELD" />
 
-		<execute function="Select" locator1="Form#RULE_BUILDER_SELECT_ACTION_TARGET" value1="${actionTarget}" />
+		<execute function="AssertClick" locator1="Form#RULE_BUILDER_SELECT_ACTION_TARGET" value1="${actionTarget}" />
 	</command>
 
 	<command name="selectConditionField">
@@ -99,7 +99,7 @@
 
 		<execute function="Click" locator1="Form#RULE_BUILDER_CONDITION_FIELD" />
 
-		<execute function="Select" locator1="Form#RULE_BUILDER_SELECT_CONDITION_FIELD" value1="${conditionField}" />
+		<execute function="AssertClick" locator1="Form#RULE_BUILDER_SELECT_CONDITION_FIELD" value1="${conditionField}" />
 	</command>
 
 	<command name="selectConditionOperator">
@@ -108,7 +108,7 @@
 
 		<execute function="Click" locator1="Form#RULE_BUILDER_CONDITION_OPERATOR_FIELD" />
 
-		<execute function="Select" locator1="Form#RULE_BUILDER_SELECT_CONDITION_OPERATOR" value1="${conditionOperator}" />
+		<execute function="AssertClick" locator1="Form#RULE_BUILDER_SELECT_CONDITION_OPERATOR" value1="${conditionOperator}" />
 	</command>
 
 	<command name="selectConditionValue">
@@ -117,7 +117,7 @@
 
 		<execute function="Click" locator1="Form#RULE_BUILDER_CONDITION_VALUE_TYPE_FIELD" />
 
-		<execute function="Select" locator1="Form#RULE_BUILDER_SELECT_CONDITION_VALUE_TYPE" value1="${conditionValueType}" />
+		<execute function="AssertClick" locator1="Form#RULE_BUILDER_SELECT_CONDITION_VALUE_TYPE" value1="${conditionValueType}" />
 	</command>
 
 	<command name="selectRuleCondition">
