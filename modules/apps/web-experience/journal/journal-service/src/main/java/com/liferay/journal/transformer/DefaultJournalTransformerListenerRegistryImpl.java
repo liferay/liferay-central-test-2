@@ -36,6 +36,11 @@ public class DefaultJournalTransformerListenerRegistryImpl
 	implements JournalTransformerListenerRegistry {
 
 	@Override
+	public TransformerListener getTransformerListener(String className) {
+		return _transformerListeners.get(className);
+	}
+
+	@Override
 	public List<TransformerListener> getTransformerListeners() {
 		return new ArrayList(_transformerListeners.values());
 	}
