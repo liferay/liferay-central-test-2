@@ -3,9 +3,9 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.liferay</groupId>
-  <artifactId>com.liferay.gradle.plugins.service.builder</artifactId>
-  <version>1.0.20</version>
-  <description>Liferay Gradle Plugins Service Builder</description>
+  <artifactId>com.liferay.gradle.plugins.db.support</artifactId>
+  <version>1.0.0</version>
+  <description>Liferay Gradle Plugins DB Support</description>
   <licenses>
     <license>
       <name>LGPL 2.1</name>
