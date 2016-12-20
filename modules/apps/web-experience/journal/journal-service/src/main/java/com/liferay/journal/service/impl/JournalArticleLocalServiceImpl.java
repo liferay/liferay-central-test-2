@@ -39,6 +39,7 @@ import com.liferay.expando.kernel.util.ExpandoBridgeUtil;
 import com.liferay.exportimport.content.processor.ExportImportContentProcessor;
 import com.liferay.exportimport.content.processor.ExportImportContentProcessorRegistryUtil;
 import com.liferay.exportimport.kernel.lar.ExportImportThreadLocal;
+import com.liferay.journal.configuration.JournalFileUploadsConfiguration;
 import com.liferay.journal.configuration.JournalGroupServiceConfiguration;
 import com.liferay.journal.configuration.JournalServiceConfiguration;
 import com.liferay.journal.constants.JournalConstants;
@@ -8261,5 +8262,8 @@ public class JournalArticleLocalServiceImpl
 		JournalArticleLocalServiceImpl.class);
 
 	private Date _previousCheckDate;
+
+	@ServiceReference(type = JournalFileUploadsConfiguration.class)
+	private JournalFileUploadsConfiguration _journalFileUploadsConfiguration;
 
 }
