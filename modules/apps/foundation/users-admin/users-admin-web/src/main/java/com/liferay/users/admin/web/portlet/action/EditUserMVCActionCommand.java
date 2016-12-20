@@ -593,14 +593,14 @@ public class EditUserMVCActionCommand extends BaseMVCActionCommand {
 
 		PasswordPolicy passwordPolicy = user.getPasswordPolicy();
 
-		boolean passwordReset;
+		boolean passwordReset = false;
 
 		if ((user.getLastLoginDate() == null) &&
 			((passwordPolicy == null) ||
 			 (passwordPolicy.isChangeable() &&
 			  passwordPolicy.isChangeRequired()))) {
 
-				passwordReset = true;
+			passwordReset = true;
 		}
 		else {
 			passwordReset = ParamUtil.getBoolean(
