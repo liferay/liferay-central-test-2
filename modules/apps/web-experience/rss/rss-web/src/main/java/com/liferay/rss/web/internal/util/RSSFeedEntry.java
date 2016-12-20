@@ -111,15 +111,13 @@ public class RSSFeedEntry {
 			if (Objects.equals(RSSUtil.getFormatType(feedType), RSSUtil.ATOM) &&
 				(type.equals("html") || type.equals("xhtml"))) {
 
-				sanitizedValue = _sanitizedValue(
-					syndContent.getValue(), baseURL);
+				sanitizedValue = _sanitize(syndContent.getValue(), baseURL);
 			}
 			else if (Objects.equals(
 						RSSUtil.getFormatType(feedType), RSSUtil.RSS) &&
 					 (type.equals("text/html") || type.equals("text/xhtml"))) {
 
-				sanitizedValue = _sanitizedValue(
-					syndContent.getValue(), baseURL);
+				sanitizedValue = _sanitize(syndContent.getValue(), baseURL);
 			}
 			else {
 				sanitizedValue = HtmlUtil.escape(syndContent.getValue());
@@ -161,7 +159,7 @@ public class RSSFeedEntry {
 		return syndContents;
 	}
 
-	private String _sanitizedValue(String value, String baseURL) {
+	private String _sanitize(String value, String baseURL) {
 		value = StringUtil.replace(
 			value, new String[] {"src=\"/", "href=\"/"},
 			new String[] {"src=\"" + baseURL + "/", "href=\"" + baseURL + "/"});
