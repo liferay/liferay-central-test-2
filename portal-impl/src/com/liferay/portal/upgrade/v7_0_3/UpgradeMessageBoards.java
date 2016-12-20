@@ -147,8 +147,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 		sb.append(tempTableName);
 		sb.append(StringPool.CLOSE_PARENTHESIS);
 
-		DBTypeToSQLMap multiDatabaseSQLQuery = new DBTypeToSQLMap(
-			sb.toString());
+		DBTypeToSQLMap dbTypeToSQLMap = new DBTypeToSQLMap(sb.toString());
 
 		sb = new StringBundler(11);
 
@@ -164,9 +163,9 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 		sb.append(tempTableName);
 		sb.append(".threadId");
 
-		multiDatabaseSQLQuery.add(DBType.MYSQL, sb.toString());
+		dbTypeToSQLMap.add(DBType.MYSQL, sb.toString());
 
-		runSQL(multiDatabaseSQLQuery);
+		runSQL(dbTypeToSQLMap);
 	}
 
 }
