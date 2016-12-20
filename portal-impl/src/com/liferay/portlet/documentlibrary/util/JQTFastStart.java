@@ -53,9 +53,9 @@ public class JQTFastStart {
 			Atom atom = null;
 			Atom ftypAtom = null;
 
+			boolean fastStart = false;
 			boolean ftypFound = false;
 			boolean mdatFound = false;
-			boolean fastStart = false;
 
 			while (randomAccessInputFile.getFilePointer() <
 						randomAccessInputFile.length()) {
