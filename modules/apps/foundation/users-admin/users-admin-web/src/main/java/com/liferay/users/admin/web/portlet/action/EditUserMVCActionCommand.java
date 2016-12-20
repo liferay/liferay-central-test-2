@@ -590,9 +590,9 @@ public class EditUserMVCActionCommand extends BaseMVCActionCommand {
 		String newPassword1 = actionRequest.getParameter("password1");
 		String newPassword2 = actionRequest.getParameter("password2");
 
-		PasswordPolicy passwordPolicy = user.getPasswordPolicy();
-
 		boolean passwordReset = false;
+
+		PasswordPolicy passwordPolicy = user.getPasswordPolicy();
 
 		if ((user.getLastLoginDate() == null) &&
 			((passwordPolicy == null) ||
