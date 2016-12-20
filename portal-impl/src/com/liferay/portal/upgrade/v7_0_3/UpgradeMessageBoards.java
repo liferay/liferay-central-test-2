@@ -139,12 +139,11 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 	private void _deleteTable(String tableName, String tempTableName)
 		throws Exception {
 
-		StringBundler sb = new StringBundler(6);
+		StringBundler sb = new StringBundler(5);
 
 		sb.append("delete from ");
 		sb.append(tableName);
-		sb.append(" where threadId in (");
-		sb.append("select threadId from ");
+		sb.append(" where threadId in (select threadId from ");
 		sb.append(tempTableName);
 		sb.append(StringPool.CLOSE_PARENTHESIS);
 
