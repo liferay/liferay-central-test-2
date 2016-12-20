@@ -14,8 +14,31 @@
 
 package com.liferay.journal.configuration;
 
+import aQute.bnd.annotation.metatype.Meta;
+
+import com.liferay.portal.configuration.metatype.annotations.ExtendedObjectClassDefinition;
+
 /**
  * @author Drew Brokke
  */
+@ExtendedObjectClassDefinition(category = "web-experience")
+@Meta.OCD(
+	id = "com.liferay.journal.configuration.JournalFileUploadsConfiguration",
+	localization = "content/Language",
+	name = "journal.file.uploads.configuration.name"
+)
 public interface JournalFileUploadsConfiguration {
+
+	@Meta.AD(
+		deflt = ".gif,.jpeg,.jpg,.png", name = "allowed-file-extensions",
+		required = false
+	)
+	public String[] imageExtensions();
+
+	@Meta.AD(
+		deflt = "51200", name = "maximum-file-size-small-image",
+		required = false
+	)
+	public long smallImageMaxSize();
+
 }
