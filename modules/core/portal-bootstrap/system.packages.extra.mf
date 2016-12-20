@@ -2493,7 +2493,7 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  .kernel.concurrent;version="7.0.0";uses:="com.liferay.portal.kernel.m
  emory,com.liferay.portal.kernel.util",com.liferay.portal.kernel.confi
  guration;version="6.2.0",com.liferay.portal.kernel.dao.db;version="7.
- 1.0",com.liferay.portal.kernel.dao.jdbc;version="7.1.0",com.liferay.p
+ 2.0",com.liferay.portal.kernel.dao.jdbc;version="7.1.0",com.liferay.p
  ortal.kernel.dao.jdbc.aop;version="6.3.0",com.liferay.portal.kernel.d
  ao.jdbc.pool.metrics;version="1.0.0",com.liferay.portal.kernel.dao.or
  m;version="7.0.0";uses:="com.liferay.exportimport.kernel.lar,com.life
@@ -2931,14 +2931,14 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  l.kernel.service,com.liferay.portal.kernel.util,com.liferay.trash.ker
  nel.model,javax.portlet,javax.servlet,javax.servlet.http",com.liferay
  .portal.kernel.tree;version="2.1.0";uses:="com.liferay.portal.kernel.
- exception",com.liferay.portal.kernel.upgrade;version="7.2.0";uses:="c
+ exception",com.liferay.portal.kernel.upgrade;version="7.3.0";uses:="c
  om.liferay.portal.kernel.dao.db,com.liferay.portal.kernel.exception,c
  om.liferay.portal.kernel.upgrade.util,com.liferay.portal.kernel.util,
  com.liferay.portal.kernel.xml,javax.portlet",com.liferay.portal.kerne
  l.upgrade.dao.orm;version="7.0.0";uses:="com.liferay.portal.kernel.da
  o.db",com.liferay.portal.kernel.upgrade.util;version="7.0.0";uses:="c
  om.liferay.portal.kernel.model,com.liferay.portal.kernel.upgrade",com
- .liferay.portal.kernel.upgrade.v6_2_0;version="7.1.0";uses:="com.life
+ .liferay.portal.kernel.upgrade.v6_2_0;version="7.2.0";uses:="com.life
  ray.portal.kernel.upgrade",com.liferay.portal.kernel.upload;version="
  6.3.0";uses:="com.liferay.portal.kernel.exception,com.liferay.portal.
  kernel.json,com.liferay.portal.kernel.repository.model,com.liferay.po
