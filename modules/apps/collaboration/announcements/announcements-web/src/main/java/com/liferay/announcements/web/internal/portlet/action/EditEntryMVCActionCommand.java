@@ -85,10 +85,10 @@ public class EditEntryMVCActionCommand extends BaseMVCActionCommand {
 				"mvcRenderCommandName", "/announcements/edit_entry");
 		}
 		catch (NoSuchEntryException | PrincipalException e) {
-			
 			SessionErrors.add(actionRequest, e.getClass());
 
-		    actionResponse.setRenderParameter("mvcPath", "/announcements/error.jsp");
+			actionResponse.setRenderParameter(
+				"mvcPath", "/announcements/error.jsp");
 		}
 	}
 
