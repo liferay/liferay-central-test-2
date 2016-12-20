@@ -16,7 +16,7 @@
 
 <%@ include file="/init.jsp" %>
 
-<portlet:renderURL var="backURL" >
+<portlet:renderURL var="backURL">
 	<portlet:param name="mvcPath" value="/view.jsp" />
 </portlet:renderURL>
 
