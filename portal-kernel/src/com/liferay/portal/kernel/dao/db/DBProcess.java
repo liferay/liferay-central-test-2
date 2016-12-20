@@ -31,7 +31,7 @@ public interface DBProcess {
 		throws IOException, SQLException;
 
 	/**
-	 * @throws IOException 
+	 * @throws IOException
 	 * @throws SQLException
 	 */
 	public default void runSQL(DBTypeToSQLMap dbTypeToSQLMap)
