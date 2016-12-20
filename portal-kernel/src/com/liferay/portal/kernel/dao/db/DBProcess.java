@@ -30,7 +30,7 @@ public interface DBProcess {
 	public void runSQL(Connection connection, String template)
 		throws IOException, SQLException;
 
-	public default void runSQL(MultiDatabaseSQLQuery multiDatabaseSQLQuery)
+	public default void runSQL(DBTypeToSQLMap dbTypeToSQLMap)
 		throws IOException, SQLException {
 
 		throw new UnsupportedOperationException();

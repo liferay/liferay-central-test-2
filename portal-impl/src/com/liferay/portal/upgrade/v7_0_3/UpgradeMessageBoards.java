@@ -17,7 +17,7 @@ package com.liferay.portal.upgrade.v7_0_3;
 import com.liferay.message.boards.kernel.model.MBCategoryConstants;
 import com.liferay.message.boards.kernel.model.MBDiscussion;
 import com.liferay.portal.kernel.dao.db.DBType;
-import com.liferay.portal.kernel.dao.db.MultiDatabaseSQLQuery;
+import com.liferay.portal.kernel.dao.db.DBTypeToSQLMap;
 import com.liferay.portal.kernel.dao.jdbc.AutoBatchPreparedStatementUtil;
 import com.liferay.portal.kernel.upgrade.UpgradeException;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
@@ -118,8 +118,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 		sb.append(".threadId) and classNameId = ");
 		sb.append(classNameId);
 
-		MultiDatabaseSQLQuery multiDatabaseSQLQuery = new MultiDatabaseSQLQuery(
-			sb.toString());
+		DBTypeToSQLMap dbTypeToSQLMap = new DBTypeToSQLMap(sb.toString());
 
 		sb = new StringBundler(8);
 
@@ -132,9 +131,9 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 		sb.append("and AssetEntry.classNameId = ");
 		sb.append(classNameId);
 
-		multiDatabaseSQLQuery.addSQL(DBType.MYSQL, sb.toString());
+		dbTypeToSQLMap.add(DBType.MYSQL, sb.toString());
 
-		runSQL(multiDatabaseSQLQuery);
+		runSQL(dbTypeToSQLMap);
 	}
 
 	private void _deleteTable(String tableName, String tempTableName)
@@ -149,7 +148,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 		sb.append(tempTableName);
 		sb.append(StringPool.CLOSE_PARENTHESIS);
 
-		MultiDatabaseSQLQuery multiDatabaseSQLQuery = new MultiDatabaseSQLQuery(
+		DBTypeToSQLMap multiDatabaseSQLQuery = new DBTypeToSQLMap(
 			sb.toString());
 
 		sb = new StringBundler(11);
@@ -166,7 +165,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 		sb.append(tempTableName);
 		sb.append(".threadId");
 
-		multiDatabaseSQLQuery.addSQL(DBType.MYSQL, sb.toString());
+		multiDatabaseSQLQuery.add(DBType.MYSQL, sb.toString());
 
 		runSQL(multiDatabaseSQLQuery);
 	}

@@ -20,18 +20,18 @@ import java.util.Map;
 /**
  * @author Mariano Alvaro Saiz
  */
-public class MultiDatabaseSQLQuery {
+public class DBTypeToSQLMap {
 
-	public MultiDatabaseSQLQuery(String defaultSQL) {
+	public DBTypeToSQLMap(String defaultSQL) {
 		_defaultSQL = defaultSQL;
 	}
 
-	public void addSQL(DBType dbType, String sql) {
-		_specificSQL.put(dbType, sql);
+	public void add(DBType dbType, String sql) {
+		_sqls.put(dbType, sql);
 	}
 
-	public String getSQL(DBType dbType) {
-		String sql = _specificSQL.get(dbType);
+	public String get(DBType dbType) {
+		String sql = _sqls.get(dbType);
 
 		if (sql != null) {
 			return sql;
@@ -41,6 +41,6 @@ public class MultiDatabaseSQLQuery {
 	}
 
 	private final String _defaultSQL;
-	private final Map<DBType, String> _specificSQL = new HashMap<>();
+	private final Map<DBType, String> _sqls = new HashMap<>();
 
 }

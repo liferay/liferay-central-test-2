@@ -20,28 +20,26 @@ import org.junit.Test;
 /**
  * @author Mariano Alvaro Saiz
  */
-public class MultiDatabaseSQLQueryTest {
+public class DBTypeSQLMapTest {
 
 	@Test
 	public void testWhenMatchingDBTypeMatchingIsReturned() {
-		MultiDatabaseSQLQuery multiDatabaseSQLQuery = new MultiDatabaseSQLQuery(
-			_DEFAULT_SQL);
+		DBTypeToSQLMap dbTypeToSQLMap = new DBTypeToSQLMap(_DEFAULT_SQL);
 
-		multiDatabaseSQLQuery.addSQL(DBType.MYSQL, _DEFAULT_MYSQL_SQL);
+		dbTypeToSQLMap.add(DBType.MYSQL, _DEFAULT_MYSQL_SQL);
 
-		String sql = multiDatabaseSQLQuery.getSQL(DBType.MYSQL);
+		String sql = dbTypeToSQLMap.get(DBType.MYSQL);
 
 		Assert.assertEquals(_DEFAULT_MYSQL_SQL, sql);
 	}
 
 	@Test
 	public void testWhenNoMatchingDBTypeDefaultIsReturned() {
-		MultiDatabaseSQLQuery multiDatabaseSQLQuery = new MultiDatabaseSQLQuery(
-			_DEFAULT_SQL);
+		DBTypeToSQLMap dbTypeToSQLMap = new DBTypeToSQLMap(_DEFAULT_SQL);
 
-		multiDatabaseSQLQuery.addSQL(DBType.MYSQL, _DEFAULT_MYSQL_SQL);
+		dbTypeToSQLMap.add(DBType.MYSQL, _DEFAULT_MYSQL_SQL);
 
-		String sql = multiDatabaseSQLQuery.getSQL(DBType.ORACLE);
+		String sql = dbTypeToSQLMap.get(DBType.ORACLE);
 
 		Assert.assertEquals(_DEFAULT_SQL, sql);
 	}
