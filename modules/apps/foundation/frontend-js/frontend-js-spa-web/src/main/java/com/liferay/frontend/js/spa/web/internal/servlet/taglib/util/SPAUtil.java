@@ -92,10 +92,7 @@ public class SPAUtil {
 	}
 
 	public String getLoginRedirect(HttpServletRequest request) {
-		String portletNamespace = PortalUtil.getPortletNamespace(
-			PropsUtil.get(PropsKeys.AUTH_LOGIN_PORTLET_NAME));
-
-		return ParamUtil.getString(request, portletNamespace + "redirect");
+		return ParamUtil.getString(request, _redirectParamName);
 	}
 
 	public String getPortletsBlacklist(ThemeDisplay themeDisplay) {
@@ -198,6 +195,7 @@ public class SPAUtil {
 	}
 
 	private static final String _VALID_STATUS_CODES;
+	private static final String _redirectParamName;
 
 	static {
 		Class<?> clazz = ServletResponseConstants.class;
@@ -213,6 +211,11 @@ public class SPAUtil {
 		}
 
 		_VALID_STATUS_CODES = jsonArray.toJSONString();
+
+		String portletNamespace = PortalUtil.getPortletNamespace(
+			PropsUtil.get(PropsKeys.AUTH_LOGIN_PORTLET_NAME));
+
+		_redirectParamName = portletNamespace.concat("redirect");
 	}
 
 	private PortletLocalService _portletLocalService;
