@@ -148,7 +148,6 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.PortletKeys;
-import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -164,7 +163,6 @@ import com.liferay.portal.kernel.xml.Node;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.kernel.xml.XPath;
 import com.liferay.portal.spring.extender.service.ServiceReference;
-import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.social.kernel.model.SocialActivityConstants;
 import com.liferay.trash.kernel.exception.RestoreEntryException;
 import com.liferay.trash.kernel.exception.TrashEntryException;
@@ -7876,8 +7874,8 @@ public class JournalArticleLocalServiceImpl
 			throw new NoSuchTemplateException("DDM template key is null");
 		}
 
-		String[] imageExtensions = PrefsPropsUtil.getStringArray(
-			PropsKeys.JOURNAL_IMAGE_EXTENSIONS, StringPool.COMMA);
+		String[] imageExtensions =
+			_journalFileUploadsConfiguration.imageExtensions();
 
 		if (!smallImage || Validator.isNotNull(smallImageURL) ||
 			(smallImageFile == null) || (smallImageBytes == null)) {
@@ -7903,8 +7901,8 @@ public class JournalArticleLocalServiceImpl
 			throw new ArticleSmallImageNameException(smallImageName);
 		}
 
-		long smallImageMaxSize = PrefsPropsUtil.getLong(
-			PropsKeys.JOURNAL_IMAGE_SMALL_MAX_SIZE);
+		long smallImageMaxSize =
+			_journalFileUploadsConfiguration.smallImageMaxSize();
 
 		if ((smallImageMaxSize > 0) &&
 			(smallImageBytes.length > smallImageMaxSize)) {
@@ -8261,9 +8259,9 @@ public class JournalArticleLocalServiceImpl
 	private static final Log _log = LogFactoryUtil.getLog(
 		JournalArticleLocalServiceImpl.class);
 
-	private Date _previousCheckDate;
-
 	@ServiceReference(type = JournalFileUploadsConfiguration.class)
 	private JournalFileUploadsConfiguration _journalFileUploadsConfiguration;
+
+	private Date _previousCheckDate;
 
 }
