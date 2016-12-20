@@ -77,13 +77,18 @@ public class EditEntryMVCActionCommand extends BaseMVCActionCommand {
 		}
 		catch (EntryContentException | EntryDisplayDateException |
 			   EntryExpirationDateException | EntryTitleException |
-			   EntryURLException | NoSuchEntryException |
-			   PrincipalException e) {
+			   EntryURLException e) {
 
 			SessionErrors.add(actionRequest, e.getClass());
 
 			actionResponse.setRenderParameter(
 				"mvcRenderCommandName", "/announcements/edit_entry");
+		}
+		catch (NoSuchEntryException | PrincipalException e) {
+			
+			SessionErrors.add(actionRequest, e.getClass());
+
+		    actionResponse.setRenderParameter("mvcPath", "/announcements/error.jsp");
 		}
 	}
 
