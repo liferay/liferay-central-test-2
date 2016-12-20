@@ -87,11 +87,10 @@ public interface DB {
 
 	public boolean isSupportsUpdateWithInnerJoin();
 
-	public default void runSQL(
-			Connection con, MultiDatabaseSQLQuery multiDatabaseSQLQuery)
+	public default void runSQL(Connection con, DBTypeToSQLMap dbTypeToSQLMap)
 		throws IOException, SQLException {
 
-		String sql = multiDatabaseSQLQuery.getSQL(getDBType());
+		String sql = dbTypeToSQLMap.get(getDBType());
 
 		runSQL(con, new String[] {sql});
 	}
@@ -102,10 +101,10 @@ public interface DB {
 	public void runSQL(Connection con, String[] sqls)
 		throws IOException, SQLException;
 
-	public default void runSQL(MultiDatabaseSQLQuery multiDatabaseSQLQuery)
+	public default void runSQL(DBTypeToSQLMap dbTypeToSQLMap)
 		throws IOException, SQLException {
 
-		String sql = multiDatabaseSQLQuery.getSQL(getDBType());
+		String sql = dbTypeToSQLMap.get(getDBType());
 
 		runSQL(new String[] {sql});
 	}
