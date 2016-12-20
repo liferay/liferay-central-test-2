@@ -23,29 +23,29 @@ import org.junit.Test;
 public class DBTypeSQLMapTest {
 
 	@Test
-	public void testWhenMatchingDBTypeMatchingIsReturned() {
-		DBTypeToSQLMap dbTypeToSQLMap = new DBTypeToSQLMap(_DEFAULT_SQL);
+	public void testGetReturnsActual() {
+		DBTypeToSQLMap dbTypeToSQLMap = new DBTypeToSQLMap(_SQL_DEFAULT);
 
-		dbTypeToSQLMap.add(DBType.MYSQL, _DEFAULT_MYSQL_SQL);
+		dbTypeToSQLMap.add(DBType.MYSQL, _SQL_MYSQL);
 
 		String sql = dbTypeToSQLMap.get(DBType.MYSQL);
 
-		Assert.assertEquals(_DEFAULT_MYSQL_SQL, sql);
+		Assert.assertEquals(_SQL_MYSQL, sql);
 	}
 
 	@Test
-	public void testWhenNoMatchingDBTypeDefaultIsReturned() {
-		DBTypeToSQLMap dbTypeToSQLMap = new DBTypeToSQLMap(_DEFAULT_SQL);
+	public void testGetReturnsDefault() {
+		DBTypeToSQLMap dbTypeToSQLMap = new DBTypeToSQLMap(_SQL_DEFAULT);
 
-		dbTypeToSQLMap.add(DBType.MYSQL, _DEFAULT_MYSQL_SQL);
+		dbTypeToSQLMap.add(DBType.MYSQL, _SQL_MYSQL);
 
 		String sql = dbTypeToSQLMap.get(DBType.ORACLE);
 
-		Assert.assertEquals(_DEFAULT_SQL, sql);
+		Assert.assertEquals(_SQL_DEFAULT, sql);
 	}
 
-	private static final String _DEFAULT_MYSQL_SQL = "select * from myTable";
+	private static final String _SQL_DEFAULT = "select * from table";
 
-	private static final String _DEFAULT_SQL = "select * from table";
+	private static final String _SQL_MYSQL = "select * from myTable";
 
 }
