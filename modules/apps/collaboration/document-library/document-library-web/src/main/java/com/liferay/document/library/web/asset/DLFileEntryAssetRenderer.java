@@ -400,10 +400,10 @@ public class DLFileEntryAssetRenderer
 
 	@Override
 	public boolean isCategorizable(long groupId) {
-		long classPk = getClassPK();
+		long classPK = getClassPK();
 
 		DLFileEntry dlFileEntry = _dlFileEntryLocalService.fetchDLFileEntry(
-			classPk);
+			classPK);
 
 		if ((dlFileEntry == null) ||
 			(dlFileEntry.getRepositoryId() != groupId)) {
