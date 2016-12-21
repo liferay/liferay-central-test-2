@@ -24,6 +24,7 @@ import com.liferay.journal.model.JournalArticle;
 import com.liferay.journal.service.JournalArticleLocalService;
 import com.liferay.portal.kernel.exception.BulkException;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.json.JSONException;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
@@ -295,7 +296,18 @@ public class JournalArticleExportImportContentProcessor
 					continue;
 				}
 
-				JSONObject jsonObject = _jsonFactory.createJSONObject(json);
+				JSONObject jsonObject = null;
+
+				try {
+					jsonObject = _jsonFactory.createJSONObject(json);
+				}
+				catch (JSONException jsone) {
+					continue;
+				}
+
+				if (!jsonObject.has("classPK")) {
+					continue;
+				}
 
 				long classPK = GetterUtil.getLong(jsonObject.get("classPK"));
 
