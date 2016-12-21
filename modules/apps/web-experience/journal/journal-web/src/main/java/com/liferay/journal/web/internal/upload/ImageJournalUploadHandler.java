@@ -15,6 +15,7 @@
 package com.liferay.journal.web.internal.upload;
 
 import com.liferay.document.library.kernel.exception.FileSizeException;
+import com.liferay.journal.configuration.JournalFileUploadsConfiguration;
 import com.liferay.journal.service.permission.JournalPermission;
 import com.liferay.portal.kernel.exception.ImageTypeException;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -45,6 +46,12 @@ import javax.portlet.PortletResponse;
  * @author Eduardo Garcia
  */
 public class ImageJournalUploadHandler extends BaseUploadHandler {
+
+	public ImageJournalUploadHandler(
+		JournalFileUploadsConfiguration journalFileUploadsConfiguration) {
+
+		_journalFileUploadsConfiguration = journalFileUploadsConfiguration;
+	}
 
 	@Override
 	public void validateFile(String fileName, String contentType, long size)
@@ -159,5 +166,8 @@ public class ImageJournalUploadHandler extends BaseUploadHandler {
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		ImageJournalUploadHandler.class);
+
+	private final JournalFileUploadsConfiguration
+		_journalFileUploadsConfiguration;
 
 }
