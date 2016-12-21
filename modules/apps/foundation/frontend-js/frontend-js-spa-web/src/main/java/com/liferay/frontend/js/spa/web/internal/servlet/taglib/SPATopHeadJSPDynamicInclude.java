@@ -110,7 +110,7 @@ public class SPATopHeadJSPDynamicInclude extends BaseJSPDynamicInclude {
 	static {
 		try (InputStream inputStream =
 				SPATopHeadJSPDynamicInclude.class.getResourceAsStream(
-					"/META-INF/resources/init.template")) {
+					"/META-INF/resources/init.tmpl")) {
 
 			_initTemplate = StringUtil.read(inputStream);
 		}
