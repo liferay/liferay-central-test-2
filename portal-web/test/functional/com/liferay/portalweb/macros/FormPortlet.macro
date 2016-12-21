@@ -24,7 +24,7 @@
 	</command>
 
 	<command name="submit">
-		<execute function="Click" locator1="FormPortlet#FORM_CONTENT" />
+		<execute function="Click" locator1="FormPortlet#PORTLET_CONTENT" />
 
 		<execute macro="FormPortlet#clickSubmit" />
 	</command>
