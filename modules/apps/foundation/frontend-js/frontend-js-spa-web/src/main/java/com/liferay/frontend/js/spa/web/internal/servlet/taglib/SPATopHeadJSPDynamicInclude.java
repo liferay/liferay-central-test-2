@@ -56,15 +56,18 @@ public class SPATopHeadJSPDynamicInclude extends BaseJSPDynamicInclude {
 			String key)
 		throws IOException {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
+		ScriptData scriptData = new ScriptData();
 
 		Map<String, String> values = new HashMap<>();
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		values.put(
 			"cacheExpirationTime",
 			String.valueOf(
 				_spaUtil.getCacheExpirationTime(themeDisplay.getCompanyId())));
+
 		values.put(
 			"clearScreensCache",
 			String.valueOf(
@@ -93,8 +96,6 @@ public class SPATopHeadJSPDynamicInclude extends BaseJSPDynamicInclude {
 				_spaUtil.getLanguageResourceBundle(themeDisplay.getLocale()),
 				"oops"));
 		values.put("validStatusCodes", _spaUtil.getValidStatusCodes());
-
-		ScriptData scriptData = new ScriptData();
 
 		scriptData.append(
 			null,
