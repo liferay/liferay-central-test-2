@@ -59,8 +59,8 @@ public abstract class BaseReplacePortletId extends BaseUpgradePortletId {
 
 						clauses.add(
 							String.format(
-								"((P1.portletId = '%s') AND (P2.portletId = " +
-									"'%s'))",
+								"((PP1.portletId = '%s') AND (PP2.portletId " +
+									"= '%s'))",
 								portletId1, portletId2));
 					}
 				}
@@ -188,9 +188,9 @@ public abstract class BaseReplacePortletId extends BaseUpgradePortletId {
 
 		StringBundler sb = new StringBundler(4);
 
-		sb.append("select P1.portletPreferencesId from ");
-		sb.append("PortletPreferences P1 inner join ");
-		sb.append("PortletPreferences P2 on P1.plid = P2.plid where ");
+		sb.append("select PP1.portletPreferencesId from PortletPreferences ");
+		sb.append("PP1 inner join PortletPreferences PP2 on PP1.plid = ");
+		sb.append("PP2.plid where ");
 		sb.append(orClauses);
 
 		try (PreparedStatement ps1 = connection.prepareStatement(sb.toString());
