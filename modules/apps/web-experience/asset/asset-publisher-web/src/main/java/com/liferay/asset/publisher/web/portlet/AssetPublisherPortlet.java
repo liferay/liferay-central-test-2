@@ -297,7 +297,7 @@ public class AssetPublisherPortlet extends MVCPortlet {
 				assetPublisherCustomizer);
 		}
 		catch (Exception e) {
-			_log.error("Unable to get Asset Publisher customizer", e);
+			_log.error("Unable to get asset publisher customizer", e);
 		}
 
 		if (SessionErrors.contains(
