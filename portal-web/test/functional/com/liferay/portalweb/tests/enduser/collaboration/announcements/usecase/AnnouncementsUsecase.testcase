@@ -387,11 +387,11 @@
 		<execute function="AssertTextNotPresent" locator1="Announcements#CARD_VIEW_ENTRY_TITLE" value1="Announcements Entry Title 1" />
 		<execute function="AssertTextNotPresent" locator1="Announcements#CARD_VIEW_ENTRY_TITLE" value1="Announcements Entry Title 2" />
 
-		<execute macro="Navigator#gotoPage">
-			<var name="pageName" value="Announcements Page" />
+		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+			<var name="portlet" value="Announcements and Alerts" />
 		</execute>
 
-		<execute function="AssertClick" locator1="Announcements#NAVIGATION_MANAGE_ENTRIES" value1="Manage Entries" />
+		<execute function="AssertTextEquals" locator1="Dropdown#FILTER" value1="General" />
 
 		<execute macro="AnnouncementsPortlet#configurePaginationCP">
 			<var name="distributionScope" value="General" />
