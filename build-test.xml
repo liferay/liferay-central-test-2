@@ -1632,10 +1632,10 @@ jdbc.counter.connectionProperties=oracle.jdbc.ReadTimeout=0;oracle.net.CONNECT_T
 			<if>
 				<equals arg1="${app.server.type}" arg2="weblogic" />
 				<then>
-					<echo file="@{bundles.dir}/patching-tool/default.properties">patching.mode=binary
-war.path=${app.server.weblogic.portal.dir}/
-global.lib.path=${app.server.weblogic.lib.global.dir}
-liferay.home=${liferay.home}</echo>
+					<echo file="@{bundles.dir}/patching-tool/default.properties">global.lib.path=${app.server.weblogic.lib.global.dir}
+liferay.home=${liferay.home}
+patching.mode=binary
+war.path=${app.server.weblogic.portal.dir}/</echo>
 
 					<execute dir="@{bundles.dir}/patching-tool">
 						patching-tool${file.suffix.bat} install -force
