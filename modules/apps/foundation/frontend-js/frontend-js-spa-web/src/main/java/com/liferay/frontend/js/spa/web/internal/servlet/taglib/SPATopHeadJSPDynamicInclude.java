@@ -82,9 +82,6 @@ public class SPATopHeadJSPDynamicInclude extends BaseJSPDynamicInclude {
 				_spaUtil.getLanguageResourceBundle(themeDisplay.getLocale()),
 				"it-looks-like-this-is-taking-longer-than-expected"));
 		values.put(
-			"navigationExceptionSelectors",
-			_spaUtil.getNavigationExceptionSelectors());
-		values.put(
 			"portletsBlacklist", _spaUtil.getPortletsBlacklist(themeDisplay));
 		values.put(
 			"requestTimeout", String.valueOf(_spaUtil.getRequestTimeout()));
