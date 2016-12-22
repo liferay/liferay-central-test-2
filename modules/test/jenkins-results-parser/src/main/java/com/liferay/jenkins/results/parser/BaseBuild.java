@@ -157,7 +157,7 @@ public abstract class BaseBuild implements Build {
 				getBuildURL() + "api/json", false);
 		}
 		catch (IOException ioe) {
-			throw new RuntimeException("Unable to get build JSONObject", ioe);
+			throw new RuntimeException("Unable to get build JSON object", ioe);
 		}
 	}
 
@@ -493,7 +493,7 @@ public abstract class BaseBuild implements Build {
 		}
 		catch (IOException ioe) {
 			throw new RuntimeException(
-				"Unbale to get testReport JSONObject", ioe);
+				"Unable to get test report JSON object", ioe);
 		}
 	}
 

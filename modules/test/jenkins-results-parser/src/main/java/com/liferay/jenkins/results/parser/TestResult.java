@@ -52,7 +52,7 @@ public class TestResult {
 
 	public TestResult(AxisBuild axisBuild, JSONObject caseJSONObject) {
 		if (axisBuild == null) {
-			throw new IllegalArgumentException("axisBuild may not be null");
+			throw new IllegalArgumentException("Axis build may not be null");
 		}
 
 		this.axisBuild = axisBuild;
