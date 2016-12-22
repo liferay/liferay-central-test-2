@@ -789,7 +789,7 @@ public class RoleFinderImpl extends RoleFinderBaseImpl implements RoleFinder {
 			andOperator = true;
 		}
 
-		String[] keywordsArray = CustomSQLUtil.keywords(keywords);
+		String[] keywordsArray = CustomSQLUtil.keywords(keywords, true);
 
 		Session session = null;
 
@@ -944,7 +944,7 @@ public class RoleFinderImpl extends RoleFinderBaseImpl implements RoleFinder {
 			andOperator = true;
 		}
 
-		String[] keywordsArray = CustomSQLUtil.keywords(keywords);
+		String[] keywordsArray = CustomSQLUtil.keywords(keywords, true);
 
 		Session session = null;
 
