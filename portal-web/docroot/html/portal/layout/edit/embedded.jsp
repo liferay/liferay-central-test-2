@@ -34,3 +34,24 @@ if (selLayout != null) {
 		}
 	</aui:validator>
 </aui:input>
+
+<aui:script use="liferay-form">
+	var form = Liferay.Form.get('<portlet:namespace />addPageFm');
+
+	if (!form) {
+		form = Liferay.Form.get('<portlet:namespace />editLayoutFm');
+	}
+
+	if (form) {
+		var rules = form.formValidator.get('rules');
+
+		var fieldName = '<portlet:namespace />TypeSettingsProperties--embeddedLayoutURL--';
+
+		if (!(fieldName in rules)) {
+			rules[fieldName] = {
+				custom: false,
+				required: true
+			};
+		}
+	}
+</aui:script>
