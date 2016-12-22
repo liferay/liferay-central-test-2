@@ -53,8 +53,9 @@ public class DefaultJournalTransformerListenerRegistryImpl
 	public void registerTransformerListener(
 		TransformerListener transformerListener) {
 
-		_transformerListeners.put(
-			transformerListener.getClass().getName(), transformerListener);
+		Class<?> clazz = transformerListener.getClass();
+
+		_transformerListeners.put(clazz.getName(), transformerListener);
 	}
 
 	public void unregisterTransformerListener(
