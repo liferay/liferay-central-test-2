@@ -2881,7 +2881,7 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  rnel.dao.orm,com.liferay.portal.kernel.exception,com.liferay.portal.k
  ernel.model,com.liferay.portal.kernel.service,com.liferay.portal.kern
  el.service.persistence,com.liferay.portal.kernel.util",com.liferay.po
- rtal.kernel.servlet;version="7.3.0";uses:="com.liferay.portal.kernel.
+ rtal.kernel.servlet;version="7.4.0";uses:="com.liferay.portal.kernel.
  log,com.liferay.portal.kernel.util,javax.portlet,javax.servlet,javax.
  servlet.http",com.liferay.portal.kernel.servlet.filters.compoundsessi
  onid;version="7.0.0";uses:="com.liferay.portal.kernel.servlet,javax.s
@@ -2902,7 +2902,7 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  nition;version="1.0.0",com.liferay.portal.kernel.social;version="1.0.
  0";uses:="com.liferay.portal.kernel.exception,com.liferay.portal.kern
  el.model,com.liferay.social.kernel.service",com.liferay.portal.kernel
- .spring.aop;version="6.3.0";uses:="com.liferay.portal.kernel.service"
+ .spring.aop;version="6.3.1";uses:="com.liferay.portal.kernel.service"
  ,com.liferay.portal.kernel.spring.context;version="6.2.0";uses:="java
  x.servlet",com.liferay.portal.kernel.spring.orm;version="1.0.0",com.l
  iferay.portal.kernel.spring.osgi;version="1.0.0",com.liferay.portal.k
