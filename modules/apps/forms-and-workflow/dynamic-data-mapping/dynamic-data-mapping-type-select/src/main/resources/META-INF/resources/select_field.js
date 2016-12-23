@@ -204,7 +204,6 @@ AUI.add(
 					},
 
 					_afterClickSelectTrigger: function(event) {
-						event.stopPropagation();
 						event.preventDefault();
 
 						var instance = this;
