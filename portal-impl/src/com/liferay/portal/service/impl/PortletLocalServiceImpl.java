@@ -1594,8 +1594,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		List<String> userNotificationHandlerClasses = new ArrayList<>();
 
 		for (Element userNotificationHandlerClassElement :
-				portletElement.elements(
-					"user-notification-handler-class")) {
+				portletElement.elements("user-notification-handler-class")) {
 
 			userNotificationHandlerClasses.add(
 				userNotificationHandlerClassElement.getText());

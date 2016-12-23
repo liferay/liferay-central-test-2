@@ -333,8 +333,7 @@ public class DownloadFileHandler extends BaseHandler {
 		try {
 			HttpEntity httpEntity = httpResponse.getEntity();
 
-			inputStream = new CountingInputStream(
-				httpEntity.getContent()) {
+			inputStream = new CountingInputStream(httpEntity.getContent()) {
 
 				@Override
 				protected synchronized void afterRead(int n) {
