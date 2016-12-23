@@ -285,8 +285,6 @@ AUI.add(
 
 						instance.set('value', [option.value]);
 
-						instance.get('container').one('.option-selected').text(option.label);
-
 						instance.render();
 					}
 				}
