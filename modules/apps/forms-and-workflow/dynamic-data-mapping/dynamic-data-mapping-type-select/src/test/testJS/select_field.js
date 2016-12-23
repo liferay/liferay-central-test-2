@@ -169,11 +169,11 @@ describe(
 
 						var container = selectField.get('container');
 
-						container.one('.form-builder-select-field').simulate('mousedown');
+						container.one('.form-builder-select-field').simulate('click');
 
 						var item = container.one('.form-builder-select-field').one('.drop-chosen ul li');
 
-						item.simulate('mousedown');
+						item.simulate('click');
 
 						assert.equal(
 							selectField.getValue(),

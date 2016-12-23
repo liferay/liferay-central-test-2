@@ -54,7 +54,7 @@ AUI.add(
 						var instance = this;
 
 						instance._eventHandlers.push(
-							A.one('doc').after('click', A.bind(instance.closeList, instance)),
+							A.one('doc').after('click', A.bind(instance._afterClickOutside, instance)),
 							instance.bindContainerEvent('mousedown', instance._afterClickSelectTrigger, '.form-builder-select-field'),
 							instance.bindContainerEvent('mousedown', instance._onClickItem, 'li')
 						);
@@ -70,21 +70,17 @@ AUI.add(
 						instance.set('value', []);
 					},
 
-					closeList: function(event) {
+					closeList: function() {
 						var instance = this;
 
 						var container = instance.get('container');
-
-						var ancestor = event.target.ancestor('.form-builder-select-field');
-
-						if (ancestor && ancestor == container.one('.form-builder-select-field')) {
-							return;
-						}
 
 						if (!instance.get('readOnly') && instance._isListOpen()) {
 							container.one('.drop-chosen').addClass('hide');
 
 							container.one('.form-builder-select-field').removeClass('active');
+
+							instance.fire('closeList');
 						}
 					},
 
@@ -199,6 +195,14 @@ AUI.add(
 						inputGroup.insert(container.one('.help-block'), 'after');
 					},
 
+					_afterClickOutside: function(event) {
+						var instance = this;
+
+						if (instance._isClickingOutSide(event)) {
+							instance.closeList();
+						}
+					},
+
 					_afterClickSelectTrigger: function(event) {
 						event.stopPropagation();
 						event.preventDefault();
@@ -262,6 +266,16 @@ AUI.add(
 						}
 
 						return optionsSelected;
+					},
+
+					_isClickingOutSide: function(event) {
+						var instance = this;
+
+						var ancestor = event.target.ancestor('.form-builder-select-field');
+
+						var container = instance.get('container');
+
+						return !ancestor || ancestor !== container.one('.form-builder-select-field');
 					},
 
 					_isListOpen: function() {
