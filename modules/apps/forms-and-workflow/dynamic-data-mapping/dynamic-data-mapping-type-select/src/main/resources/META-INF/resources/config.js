@@ -15,10 +15,10 @@
 							},
 							path: 'select_field.js',
 							requires: [
-								'liferay-ddl-soy-template-util',
 								'liferay-ddm-form-field-select-search-support',
 								'liferay-ddm-form-field-select-template',
-								'liferay-ddm-form-renderer-field'
+								'liferay-ddm-form-renderer-field',
+								'liferay-ddm-soy-template-util'
 							]
 						},
 						'liferay-ddm-form-field-select-search-support': {

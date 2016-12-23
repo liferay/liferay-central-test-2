@@ -9,7 +9,7 @@ AUI.add(
 
 		var Lang = A.Lang;
 
-		var SoyTemplateUtil = Liferay.DDL.SoyTemplateUtil;
+		var SoyTemplateUtil = Liferay.DDM.SoyTemplateUtil;
 
 		var SelectFieldSearchSupport = function() {};
 

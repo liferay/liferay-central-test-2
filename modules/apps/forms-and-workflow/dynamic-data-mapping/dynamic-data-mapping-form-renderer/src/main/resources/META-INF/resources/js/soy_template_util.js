@@ -1,5 +1,5 @@
 AUI.add(
-	'liferay-ddl-soy-template-util',
+	'liferay-ddm-soy-template-util',
 	function(A) {
 		var AObject = A.Object;
 
@@ -17,7 +17,7 @@ AUI.add(
 			}
 		};
 
-		Liferay.namespace('DDL').SoyTemplateUtil = SoyTemplateUtil;
+		Liferay.namespace('DDM').SoyTemplateUtil = SoyTemplateUtil;
 	},
 	'',
 	{
