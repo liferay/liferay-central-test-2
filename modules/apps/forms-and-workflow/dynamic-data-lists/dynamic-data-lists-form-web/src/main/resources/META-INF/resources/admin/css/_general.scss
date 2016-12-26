@@ -334,10 +334,8 @@
 		}
 	}
 
-	&.active {
-		.select-field-trigger {
-			border-bottom: 2px solid #65B3F0;
-		}
+	&.active .select-field-trigger {
+		border-bottom: 2px solid #65B3F0;
 	}
 
 	.form-control[disabled] + a {

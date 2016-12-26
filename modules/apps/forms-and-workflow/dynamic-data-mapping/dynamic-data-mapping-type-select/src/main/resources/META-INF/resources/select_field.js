@@ -194,7 +194,7 @@ AUI.add(
 						selectGroup.addClass('active');
 
 						if (!instance.get('readOnly')) {
-							instance.get('container').one('.drop-chosen').toggleClass('hide');
+							container.one('.drop-chosen').toggleClass('hide');
 						}
 					},
 
