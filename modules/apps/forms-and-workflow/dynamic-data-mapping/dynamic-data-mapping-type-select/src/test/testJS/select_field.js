@@ -74,6 +74,28 @@ describe(
 		);
 
 		describe(
+			'.clickSelectTrigger()',
+			function() {
+				it(
+					'should add the focus class when opened',
+					function(done) {
+						var container = selectField.get('container');
+
+						var divSelect = container.one('.form-builder-select-field');
+
+						assert.isFalse(divSelect.hasClass('active'));
+
+						divSelect.simulate('mousedown');
+
+						assert.isTrue(divSelect.hasClass('active'));
+
+						done();
+					}
+				);
+			}
+		);
+
+		describe(
 			'.closeList()',
 			function() {
 				it(
@@ -81,13 +103,34 @@ describe(
 					function(done) {
 						var container = selectField.get('container');
 
-						container.one('.form-builder-select-field').simulate('mousedown');
+						var divSelect = container.one('.form-builder-select-field');
+
+						divSelect.simulate('mousedown');
 
 						assert.isNull(container.one('.drop-chosen.hide'));
 
 						A.one(document).simulate('click');
 
 						assert.isNotNull(container.one('.drop-chosen.hide'));
+
+						done();
+					}
+				);
+
+				it(
+					'should remove the focus class when closed',
+					function(done) {
+						var container = selectField.get('container');
+
+						var divSelect = container.one('.form-builder-select-field');
+
+						divSelect.simulate('mousedown');
+
+						assert.isTrue(divSelect.hasClass('active'));
+
+						A.one(document).simulate('click');
+
+						assert.isFalse(divSelect.hasClass('active'));
 
 						done();
 					}
