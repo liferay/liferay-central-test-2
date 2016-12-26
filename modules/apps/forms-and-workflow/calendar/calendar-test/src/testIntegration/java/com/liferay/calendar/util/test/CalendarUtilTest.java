@@ -90,7 +90,7 @@ public class CalendarUtilTest {
 		CalendarBooking anotherUserDraft =
 			CalendarBookingTestUtil.addDraftCalendarBooking(user2);
 
-		List<CalendarBooking> calendarBookings = getCalendarBookingList(
+		List<CalendarBooking> calendarBookings = getCalendarBookings(
 			approved, sameUserDraft, anotherUserDraft);
 
 		JSONArray jsonArray = CalendarUtil.toCalendarBookingsJSONArray(
@@ -154,7 +154,7 @@ public class CalendarUtilTest {
 		return calendarBookingIds;
 	}
 
-	protected List<CalendarBooking> getCalendarBookingList(
+	protected List<CalendarBooking> getCalendarBookings(
 		CalendarBooking... calendarBookings) {
 
 		return ListUtil.fromArray(calendarBookings);
