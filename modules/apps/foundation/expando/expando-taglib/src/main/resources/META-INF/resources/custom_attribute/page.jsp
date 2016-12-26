@@ -295,7 +295,7 @@ ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(company.
 						<c:when test="<%= type == ExpandoColumnConstants.GEOLOCATION %>">
 
 							<%
-								JSONObject geolocationJSONObject = JSONFactoryUtil.createJSONObject(value.toString());
+							JSONObject geolocationJSONObject = JSONFactoryUtil.createJSONObject(value.toString());
 							%>
 
 							<div id="<portlet:namespace/>CoordinatesContainer">
