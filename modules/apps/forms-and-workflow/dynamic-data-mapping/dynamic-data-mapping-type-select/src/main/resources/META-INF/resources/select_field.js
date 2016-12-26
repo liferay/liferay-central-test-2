@@ -78,7 +78,9 @@ AUI.add(
 						}
 
 						if (!instance.get('readOnly') && instance._isListOpen()) {
-							instance.get('container').one('.drop-chosen').addClass('hide');
+							container.one('.drop-chosen').addClass('hide');
+
+							container.one('.form-builder-select-field').removeClass('active');
 						}
 					},
 
@@ -184,6 +186,12 @@ AUI.add(
 						event.stopPropagation();
 
 						var instance = this;
+
+						var container = instance.get('container');
+
+						var selectGroup = container.one('.form-builder-select-field');
+
+						selectGroup.addClass('active');
 
 						if (!instance.get('readOnly')) {
 							instance.get('container').one('.drop-chosen').toggleClass('hide');
