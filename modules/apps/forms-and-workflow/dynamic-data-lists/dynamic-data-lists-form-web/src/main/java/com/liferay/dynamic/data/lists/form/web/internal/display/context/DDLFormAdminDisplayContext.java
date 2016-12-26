@@ -21,8 +21,8 @@ import com.liferay.dynamic.data.lists.form.web.constants.DDLFormPortletKeys;
 import com.liferay.dynamic.data.lists.form.web.internal.converter.DDMFormRuleToDDLFormRuleConverter;
 import com.liferay.dynamic.data.lists.form.web.internal.converter.model.DDLFormRule;
 import com.liferay.dynamic.data.lists.form.web.internal.display.context.util.DDLFormAdminRequestHelper;
-import com.liferay.dynamic.data.lists.form.web.internal.display.context.util.DDMExpressionOperatorMetadataHelper;
-import com.liferay.dynamic.data.lists.form.web.internal.display.context.util.DDMExpressionOperatorMetadataHelper.DDMExpressionOperatorMetadata;
+import com.liferay.dynamic.data.lists.form.web.internal.display.context.util.DDMExpressionFunctionMetadataHelper;
+import com.liferay.dynamic.data.lists.form.web.internal.display.context.util.DDMExpressionFunctionMetadataHelper.DDMExpressionFunctionMetadata;
 import com.liferay.dynamic.data.lists.form.web.internal.search.RecordSetSearch;
 import com.liferay.dynamic.data.lists.model.DDLFormRecord;
 import com.liferay.dynamic.data.lists.model.DDLRecord;
@@ -138,8 +138,8 @@ public class DDLFormAdminDisplayContext {
 
 		_ddlFormAdminRequestHelper = new DDLFormAdminRequestHelper(
 			renderRequest);
-		_ddmExpressionOperatorMetadataHelper =
-			new DDMExpressionOperatorMetadataHelper(getResourceBundle());
+		_ddmExpressionFunctionMetadataHelper =
+			new DDMExpressionFunctionMetadataHelper(getResourceBundle());
 	}
 
 	public int getAutosaveInterval() {
@@ -383,14 +383,14 @@ public class DDLFormAdminDisplayContext {
 		return getFormLayoutURL(true);
 	}
 
-public String getSerializedDDMExpressionOperatorsMetadata() {
+	public String getSerializedDDMExpressionOperatorsMetadata() {
 		JSONSerializer jsonSerializer = _jsonFactory.createJSONSerializer();
 
-		List<DDMExpressionOperatorMetadata> ddmExpressionFunctionMetadatas =
-			_ddmExpressionOperatorMetadataHelper.
-				getDDMExpressionOperatorMetadataList();
+		List<DDMExpressionFunctionMetadata> ddmExpressionFunctionsMetadata =
+			_ddmExpressionFunctionMetadataHelper.
+				getDDMExpressionFunctionsMetadata();
 
-		return jsonSerializer.serializeDeep(ddmExpressionFunctionMetadatas);
+		return jsonSerializer.serializeDeep(ddmExpressionFunctionsMetadata);
 	}
 
 	public String getSerializedDDMForm() throws PortalException {
@@ -762,8 +762,8 @@ public String getSerializedDDMExpressionOperatorsMetadata() {
 	private final DDLFormWebConfiguration _ddlFormWebConfiguration;
 	private final DDLRecordLocalService _ddlRecordLocalService;
 	private final DDLRecordSetService _ddlRecordSetService;
-	private final DDMExpressionOperatorMetadataHelper
-		_ddmExpressionOperatorMetadataHelper;
+	private final DDMExpressionFunctionMetadataHelper
+		_ddmExpressionFunctionMetadataHelper;
 	private final Servlet _ddmFormContextProviderServlet;
 	private final DDMFormFieldTypeServicesTracker
 		_ddmFormFieldTypeServicesTracker;
