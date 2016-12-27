@@ -81,6 +81,7 @@ import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import javax.portlet.PortletRequest;
@@ -383,12 +384,13 @@ public class DDLFormAdminDisplayContext {
 		return getFormLayoutURL(true);
 	}
 
-	public String getSerializedDDMExpressionOperatorsMetadata() {
+	public String getSerializedDDMExpressionFunctionsMetadata() {
 		JSONSerializer jsonSerializer = _jsonFactory.createJSONSerializer();
 
-		List<DDMExpressionFunctionMetadata> ddmExpressionFunctionsMetadata =
-			_ddmExpressionFunctionMetadataHelper.
-				getDDMExpressionFunctionsMetadata();
+		Map<String, List<DDMExpressionFunctionMetadata>>
+			ddmExpressionFunctionsMetadata =
+				_ddmExpressionFunctionMetadataHelper.
+					getDDMExpressionFunctionsMetadata();
 
 		return jsonSerializer.serializeDeep(ddmExpressionFunctionsMetadata);
 	}
