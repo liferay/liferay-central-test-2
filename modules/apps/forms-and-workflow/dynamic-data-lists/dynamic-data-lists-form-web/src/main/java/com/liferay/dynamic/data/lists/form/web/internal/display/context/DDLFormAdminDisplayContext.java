@@ -238,11 +238,11 @@ public class DDLFormAdminDisplayContext {
 	public String getFormURL() throws PortalException {
 		DDLRecordSet recordSet = getRecordSet();
 
-		DDLRecordSetSettings settings = recordSet.getSettingsModel();
+		DDLRecordSetSettings recordSetSettings = recordSet.getSettingsModel();
 
-		String formURL;
+		String formURL = null;
 
-		if (settings.requireAuthentication()) {
+		if (recordSetSettings.requireAuthentication()) {
 			formURL = getRestrictedFormURL();
 		}
 		else {

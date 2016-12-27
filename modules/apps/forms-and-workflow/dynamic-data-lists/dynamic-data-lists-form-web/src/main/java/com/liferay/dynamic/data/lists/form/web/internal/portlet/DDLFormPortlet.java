@@ -167,11 +167,13 @@ public class DDLFormPortlet extends MVCPortlet {
 			return;
 		}
 
-		DDLRecordSetSettings settings = recordSet.getSettingsModel();
+		DDLRecordSetSettings recordSetSettings = recordSet.getSettingsModel();
 
 		Layout layout = themeDisplay.getLayout();
 
-		if (settings.requireAuthentication() && !layout.isPrivateLayout()) {
+		if (recordSetSettings.requireAuthentication() &&
+			!layout.isPrivateLayout()) {
+
 			throw new PrincipalException.MustBeAuthenticated(
 				themeDisplay.getUserId());
 		}
