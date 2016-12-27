@@ -121,27 +121,28 @@ public class UpgradeDDLRecordSetSettingsTest {
 	}
 
 	protected JSONArray createFieldValues(boolean hasSetting) {
-		JSONArray array = _jsonFactory.createJSONArray();
+		JSONArray jsonArray = _jsonFactory.createJSONArray();
 
-		array.put(getFieldValue("BGUgRKuV", "requireCaptcha", "false"));
-		array.put(getFieldValue("dAjksJC7", "redirectURL", ""));
-		array.put(getFieldValue("WePI6lUQ", "storageType", "json"));
-		array.put(getFieldValue("BNNBRhHb", "workflowDefinition", ""));
-		array.put(getFieldValue("hn1htfIn", "sendEmailNotification", "false"));
-		array.put(getFieldValue("ZCg12Pq1", "emailFromName", ""));
-		array.put(getFieldValue("jXHNOUKb", "emailFromAddress", ""));
-		array.put(getFieldValue("joHlIcqG", "emailToAddress", ""));
-		array.put(getFieldValue("SOjmIgIQ", "emailSubject", ""));
-		array.put(getFieldValue("2NXSHTKI", "published", "false"));
+		jsonArray.put(getFieldValue("BGUgRKuV", "requireCaptcha", "false"));
+		jsonArray.put(getFieldValue("dAjksJC7", "redirectURL", ""));
+		jsonArray.put(getFieldValue("WePI6lUQ", "storageType", "json"));
+		jsonArray.put(getFieldValue("BNNBRhHb", "workflowDefinition", ""));
+		jsonArray.put(
+			getFieldValue("hn1htfIn", "sendEmailNotification", "false"));
+		jsonArray.put(getFieldValue("ZCg12Pq1", "emailFromName", ""));
+		jsonArray.put(getFieldValue("jXHNOUKb", "emailFromAddress", ""));
+		jsonArray.put(getFieldValue("joHlIcqG", "emailToAddress", ""));
+		jsonArray.put(getFieldValue("SOjmIgIQ", "emailSubject", ""));
+		jsonArray.put(getFieldValue("2NXSHTKI", "published", "false"));
 
 		if (hasSetting) {
 			JSONObject fieldValue = getFieldValue(
 				"2NXSHTKI", "requireAuthentication", "false");
 
-			array.put(fieldValue);
+			jsonArray.put(fieldValue);
 		}
 
-		return array;
+		return jsonArray;
 	}
 
 	protected DDLRecordSet createRecordSet(int scope, String settings)
@@ -195,13 +196,13 @@ public class UpgradeDDLRecordSetSettingsTest {
 	protected JSONObject getFieldValue(
 		String instanceId, String name, String value) {
 
-		JSONObject object = _jsonFactory.createJSONObject();
+		JSONObject jsonObject = _jsonFactory.createJSONObject();
 
-		object.put("instanceId", instanceId);
-		object.put("name", name);
-		object.put("value", value);
+		jsonObject.put("instanceId", instanceId);
+		jsonObject.put("name", name);
+		jsonObject.put("value", value);
 
-		return object;
+		return jsonObject;
 	}
 
 	protected JSONArray getFieldValues(String settings) throws JSONException {
