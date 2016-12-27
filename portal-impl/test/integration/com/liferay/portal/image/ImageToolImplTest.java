@@ -105,7 +105,7 @@ public class ImageToolImplTest {
 	@Test
 	public void testRotation90Degrees() throws Exception {
 		ImageBag imageBag = ImageToolUtil.read(
-			getFile("TiffOrientationValue6.jpg"));
+			getFile("rotation_90_degrees.jpg"));
 
 		RenderedImage originalImage = imageBag.getRenderedImage();
 
