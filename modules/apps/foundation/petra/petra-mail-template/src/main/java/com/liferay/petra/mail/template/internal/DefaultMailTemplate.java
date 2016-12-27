@@ -90,11 +90,11 @@ public class DefaultMailTemplate implements MailTemplate {
 			Locale locale, MailTemplateContext mailTemplateContext)
 		throws IOException {
 
-		UnsyncStringWriter writer = new UnsyncStringWriter();
+		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
 
-		render(writer, locale, mailTemplateContext);
+		render(unsyncStringWriter, locale, mailTemplateContext);
 
-		return writer.toString();
+		return unsyncStringWriter.toString();
 	}
 
 	private final boolean _escapeHtml;
