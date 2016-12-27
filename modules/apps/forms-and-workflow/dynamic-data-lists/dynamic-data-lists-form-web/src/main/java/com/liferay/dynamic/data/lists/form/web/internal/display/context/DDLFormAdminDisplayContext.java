@@ -352,19 +352,7 @@ public class DDLFormAdminDisplayContext {
 	}
 
 	public String getRestrictedFormURL() {
-		StringBundler sb = new StringBundler(4);
-
-		ThemeDisplay themeDisplay =
-			_ddlFormAdminRequestHelper.getThemeDisplay();
-
-		Group group = themeDisplay.getSiteGroup();
-
-		sb.append(themeDisplay.getPortalURL());
-		sb.append(group.getPathFriendlyURL(true, themeDisplay));
-
-		sb.append("/forms/shared/-/form/");
-
-		return sb.toString();
+		return getFormLayoutURL(true);
 	}
 
 	public String getSerializedDDMForm() throws PortalException {
@@ -419,19 +407,7 @@ public class DDLFormAdminDisplayContext {
 	}
 
 	public String getSharedFormURL() {
-		StringBundler sb = new StringBundler(4);
-
-		ThemeDisplay themeDisplay =
-			_ddlFormAdminRequestHelper.getThemeDisplay();
-
-		Group group = themeDisplay.getSiteGroup();
-
-		sb.append(themeDisplay.getPortalURL());
-		sb.append(group.getPathFriendlyURL(false, themeDisplay));
-
-		sb.append("/forms/shared/-/form/");
-
-		return sb.toString();
+		return getFormLayoutURL(false);
 	}
 
 	public boolean isAuthenticationRequired() throws PortalException {
@@ -612,6 +588,22 @@ public class DDLFormAdminDisplayContext {
 		}
 
 		return displayStyle;
+	}
+
+	protected String getFormLayoutURL(boolean privateLayout) {
+		StringBundler sb = new StringBundler(4);
+
+		ThemeDisplay themeDisplay =
+			_ddlFormAdminRequestHelper.getThemeDisplay();
+
+		Group group = themeDisplay.getSiteGroup();
+
+		sb.append(themeDisplay.getPortalURL());
+		sb.append(group.getPathFriendlyURL(privateLayout, themeDisplay));
+
+		sb.append("/forms/shared/-/form/");
+
+		return sb.toString();
 	}
 
 	protected String getKeywords() {
