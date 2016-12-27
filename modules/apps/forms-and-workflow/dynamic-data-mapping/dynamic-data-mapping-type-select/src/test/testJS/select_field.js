@@ -70,10 +70,7 @@ describe(
 
 						selectField.setValue(['a']);
 
-						assert.equal(
-							selectField.getValue(),
-							'a'
-						);
+						assert.equal(selectField.getValue(), 'a');
 
 						done();
 					}
@@ -158,10 +155,7 @@ describe(
 
 						selectField.cleanSelect();
 
-						assert.equal(
-							selectField.get('value').length,
-							0
-						);
+						assert.equal(selectField.get('value').length, 0);
 					}
 				);
 			}
@@ -183,10 +177,7 @@ describe(
 
 						item.simulate('click');
 
-						assert.equal(
-							selectField.getValue(),
-							'foo'
-						);
+						assert.equal(selectField.getValue(), 'foo');
 					}
 				);
 			}
@@ -212,10 +203,7 @@ describe(
 							function() {
 								var items = container.all('.drop-chosen ul > li');
 
-								assert.equal(
-									1,
-									items.size()
-								);
+								assert.strictEqual(1, items.size());
 
 								done();
 							},
@@ -235,17 +223,11 @@ describe(
 
 						selectField.openList();
 
-						assert.equal(
-							'foo',
-							container.one('input').val()
-						);
+						assert.strictEqual('foo', container.one('input').val());
 
 						selectField.closeList();
 
-						assert.equal(
-							'',
-							container.one('input').val()
-						);
+						assert.strictEqual('', container.one('input').val());
 					}
 				);
 
@@ -272,10 +254,7 @@ describe(
 
 								var afterSearchList = container.one('.drop-chosen ul').getHTML();
 
-								assert.equal(
-									beforeSearchList,
-									afterSearchList
-								);
+								assert.strictEqual(beforeSearchList, afterSearchList);
 
 								done();
 							},
@@ -303,10 +282,7 @@ describe(
 							function() {
 								var items = container.all('.drop-chosen ul > li');
 
-								assert.equal(
-									items.size(),
-									0
-								);
+								assert.strictEqual(items.size(), 0);
 
 								done();
 							},
@@ -326,7 +302,7 @@ describe(
 
 						var inputElement = container.one('input');
 
-						inputElement.val('        ');
+						inputElement.val(' ');
 
 						triggerEvent('input', inputElement);
 
@@ -334,10 +310,7 @@ describe(
 							function() {
 								var afterSearchList = container.one('.drop-chosen ul').getHTML();
 
-								assert.equal(
-									beforeSearchList,
-									afterSearchList
-								);
+								assert.strictEqual(beforeSearchList, afterSearchList);
 
 								done();
 							},
@@ -363,10 +336,7 @@ describe(
 							function() {
 								var term = container.one('.drop-chosen ul > li b').getContent();
 
-								assert.equal(
-									'foo',
-									term
-								);
+								assert.strictEqual('foo', term);
 
 								done();
 							},
