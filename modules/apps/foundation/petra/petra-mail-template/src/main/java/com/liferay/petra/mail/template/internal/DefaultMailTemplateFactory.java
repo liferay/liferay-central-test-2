@@ -32,9 +32,9 @@ public class DefaultMailTemplateFactory implements MailTemplateFactory {
 
 	@Override
 	public MailTemplate createMailTemplate(
-		String template, boolean escapeHtml) {
+		String template, boolean escapeHTML) {
 
-		return new DefaultMailTemplate(template, escapeHtml);
+		return new DefaultMailTemplate(template, escapeHTML);
 	}
 
 	@Override

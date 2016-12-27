@@ -19,7 +19,7 @@ package com.liferay.mail.kernel.template;
  */
 public interface MailTemplateFactory {
 
-	public MailTemplate createMailTemplate(String template, boolean escapeHtml);
+	public MailTemplate createMailTemplate(String template, boolean escapeHTML);
 
 	public MailTemplateContextBuilder createMailTemplateContextBuilder();
 

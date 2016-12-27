@@ -23,10 +23,10 @@ import com.liferay.portal.kernel.util.ServiceProxyFactory;
 public class MailTemplateFactoryUtil {
 
 	public static MailTemplate createMailTemplate(
-		String template, boolean escapeHtml) {
+		String template, boolean escapeHTML) {
 
 		return getMailTemplateFactory().createMailTemplate(
-			template, escapeHtml);
+			template, escapeHTML);
 	}
 
 	public static MailTemplateContextBuilder
