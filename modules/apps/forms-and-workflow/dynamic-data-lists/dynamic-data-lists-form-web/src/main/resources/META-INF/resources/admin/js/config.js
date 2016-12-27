@@ -68,8 +68,8 @@
 							path: 'form_builder_field_settings_form.js',
 							requires: [
 								'liferay-ddl-form-builder-autocomplete-template',
-								'liferay-ddm-soy-template-util',
 								'liferay-ddm-form-renderer',
+								'liferay-ddm-soy-template-util',
 								'liferay-form'
 							]
 						},
