@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.DeleteAfterTestRun;
 import com.liferay.portal.kernel.test.util.GroupTestUtil;
+import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.upgrade.UpgradeStep;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
@@ -87,7 +88,6 @@ public class UpgradeDDLRecordSetSettingsTest {
 		Assert.assertTrue(containsField(fieldValues, "requireAuthentication"));
 	}
 
-
 	@Test
 	public void testDoNotUpdateRecordSetsOfOtherScopes() throws Exception {
 		String originalSettings = createSettings(false);
@@ -123,21 +123,20 @@ public class UpgradeDDLRecordSetSettingsTest {
 	protected JSONArray createFieldValues(boolean hasSetting) {
 		JSONArray jsonArray = _jsonFactory.createJSONArray();
 
-		jsonArray.put(getFieldValue("BGUgRKuV", "requireCaptcha", "false"));
-		jsonArray.put(getFieldValue("dAjksJC7", "redirectURL", ""));
-		jsonArray.put(getFieldValue("WePI6lUQ", "storageType", "json"));
-		jsonArray.put(getFieldValue("BNNBRhHb", "workflowDefinition", ""));
-		jsonArray.put(
-			getFieldValue("hn1htfIn", "sendEmailNotification", "false"));
-		jsonArray.put(getFieldValue("ZCg12Pq1", "emailFromName", ""));
-		jsonArray.put(getFieldValue("jXHNOUKb", "emailFromAddress", ""));
-		jsonArray.put(getFieldValue("joHlIcqG", "emailToAddress", ""));
-		jsonArray.put(getFieldValue("SOjmIgIQ", "emailSubject", ""));
-		jsonArray.put(getFieldValue("2NXSHTKI", "published", "false"));
+		jsonArray.put(getFieldValue("requireCaptcha", "false"));
+		jsonArray.put(getFieldValue("redirectURL", ""));
+		jsonArray.put(getFieldValue("storageType", "json"));
+		jsonArray.put(getFieldValue("workflowDefinition", ""));
+		jsonArray.put(getFieldValue("sendEmailNotification", "false"));
+		jsonArray.put(getFieldValue("emailFromName", ""));
+		jsonArray.put(getFieldValue("emailFromAddress", ""));
+		jsonArray.put(getFieldValue("emailToAddress", ""));
+		jsonArray.put(getFieldValue("emailSubject", ""));
+		jsonArray.put(getFieldValue("published", "false"));
 
 		if (hasSetting) {
 			JSONObject fieldValue = getFieldValue(
-				"2NXSHTKI", "requireAuthentication", "false");
+				"requireAuthentication", "false");
 
 			jsonArray.put(fieldValue);
 		}
@@ -193,12 +192,10 @@ public class UpgradeDDLRecordSetSettingsTest {
 		return array;
 	}
 
-	protected JSONObject getFieldValue(
-		String instanceId, String name, String value) {
-
+	protected JSONObject getFieldValue(String name, String value) {
 		JSONObject jsonObject = _jsonFactory.createJSONObject();
 
-		jsonObject.put("instanceId", instanceId);
+		jsonObject.put("instanceId", RandomTestUtil.randomString());
 		jsonObject.put("name", name);
 		jsonObject.put("value", value);
 
