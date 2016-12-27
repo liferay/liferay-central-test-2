@@ -87,22 +87,6 @@ public class UpgradeDDLRecordSetSettingsTest {
 		Assert.assertTrue(containsField(fieldValues, "requireAuthentication"));
 	}
 
-	@Test
-	public void testDoNotRepeatRequireAuthenticationSetting() throws Exception {
-		String originalSettings = createSettings(true);
-
-		DDLRecordSet recordSet = createRecordSet(originalSettings);
-
-		JSONArray fieldValues = getFieldValues(recordSet.getSettings());
-
-		Assert.assertTrue(containsField(fieldValues, "requireAuthentication"));
-
-		_upgradeDDLRecordSetSettings.upgrade();
-
-		recordSet = getRecordSet(recordSet);
-
-		Assert.assertEquals(originalSettings, recordSet.getSettings());
-	}
 
 	@Test
 	public void testDoNotUpdateRecordSetsOfOtherScopes() throws Exception {

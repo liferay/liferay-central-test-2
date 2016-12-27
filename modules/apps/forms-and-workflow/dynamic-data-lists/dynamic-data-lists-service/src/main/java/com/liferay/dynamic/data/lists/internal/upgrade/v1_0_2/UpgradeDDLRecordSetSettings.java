@@ -50,22 +50,6 @@ public class UpgradeDDLRecordSetSettings extends UpgradeProcess {
 		return settingsJSONObject.toJSONString();
 	}
 
-	protected boolean containsRequireAuthenticationSetting(
-		JSONArray fieldValues) {
-
-		for (int i = 0; i < fieldValues.length(); i++) {
-			JSONObject fieldValue = fieldValues.getJSONObject(i);
-
-			String name = fieldValue.getString("name");
-
-			if (name.equals("requireAuthentication")) {
-				return true;
-			}
-		}
-
-		return false;
-	}
-
 	protected JSONObject createRequireAuthenticationSetting() {
 		JSONObject requireAuthenticationSetting =
 			_jsonFactory.createJSONObject();
@@ -102,12 +86,7 @@ public class UpgradeDDLRecordSetSettings extends UpgradeProcess {
 					JSONObject settingsJSONObject =
 						_jsonFactory.createJSONObject(settings);
 
-					JSONArray fieldValues = settingsJSONObject.getJSONArray(
-						"fieldValues");
-
-					if ((scope == DDLRecordSetConstants.SCOPE_FORMS) &&
-						!containsRequireAuthenticationSetting(fieldValues)) {
-
+					if (scope == DDLRecordSetConstants.SCOPE_FORMS) {
 						settings = addRequireAuthenticationSetting(
 							settingsJSONObject);
 
