@@ -82,7 +82,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 			total="<%= configurationEntries.size() %>"
 		>
 			<liferay-ui:search-container-results
-				results="<%= configurationEntries %>"
+				results="<%= ListUtil.subList(configurationEntries, searchContainer.getStart(), searchContainer.getEnd()) %>"
 			/>
 
 			<liferay-ui:search-container-row
