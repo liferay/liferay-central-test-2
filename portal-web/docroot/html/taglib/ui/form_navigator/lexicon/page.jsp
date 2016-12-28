@@ -27,7 +27,7 @@ for (String categoryKey : categoryKeys) {
 	}
 }
 
-String tabsParamName = "tabs1";
+String tabs1Param = "tabs1";
 %>
 
 <c:choose>
@@ -37,7 +37,7 @@ String tabsParamName = "tabs1";
 	<c:when test="<%= filterCategoryKeys.size() > 1 %>">
 		<liferay-ui:tabs
 			names="<%= StringUtil.merge(filterCategoryKeys) %>"
-			param="<%= tabsParamName %>"
+			param="<%= tabs1Param %>"
 			refresh="<%= false %>"
 			type="tabs nav-tabs-default"
 		>
@@ -88,12 +88,12 @@ String tabsParamName = "tabs1";
 	var uri = metalUriSrcUri.default;
 
 	var redirectField = dom.toElement('input[name="<portlet:namespace />redirect"]');
-	var tabsParamName = '<portlet:namespace/><%= tabsParamName %>';
+	var tabs1Param = '<portlet:namespace/><%= tabs1Param %>';
 
 	var updateRedirectField = function(event) {
 		var redirectURL = new uri(redirectField.value);
 
-		redirectURL.setParameterValue(tabsParamName, event.id);
+		redirectURL.setParameterValue(tabs1Param, event.id);
 
 		redirectField.value = redirectURL.toString();
 	};
@@ -108,12 +108,12 @@ String tabsParamName = "tabs1";
 	if (redirectField) {
 		var currentURL = new uri(document.location.href);
 
-		var urlTabsParamValue = currentURL.getParameterValue(tabsParamName);
+		var tabs1Value = currentURL.getParameterValue(tabs1Param);
 
-		if (urlTabsParamValue) {
+		if (tabs1Value) {
 			updateRedirectField(
 				{
-					id: urlTabsParamValue
+					id: tabs1Value
 				}
 			);
 		}
