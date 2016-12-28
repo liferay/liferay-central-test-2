@@ -15,6 +15,8 @@
 package com.liferay.adaptive.media.image.processor.test;
 
 import com.liferay.adaptive.media.AdaptiveMedia;
+import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
+import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
 import com.liferay.adaptive.media.image.finder.ImageAdaptiveMediaFinder;
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
 import com.liferay.adaptive.media.image.test.util.DestinationReplacer;
@@ -33,18 +35,15 @@ import com.liferay.portal.kernel.test.util.ServiceContextTestUtil;
 import com.liferay.portal.kernel.test.util.TestPropsValues;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.kernel.util.HashMapDictionary;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.service.test.ServiceTestUtil;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.registry.Registry;
 import com.liferay.registry.RegistryUtil;
-import com.liferay.registry.util.StringPlus;
 
-import java.io.IOException;
-
-import java.util.Dictionary;
-import java.util.List;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Stream;
 
 import org.junit.Assert;
@@ -54,9 +53,6 @@ import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import org.osgi.service.cm.Configuration;
-import org.osgi.service.cm.ConfigurationAdmin;
 
 /**
  * @author Adolfo Pérez
@@ -76,12 +72,24 @@ public class ImageAdaptiveMediaProcessorTest {
 	public void setUp() throws Exception {
 		_group = GroupTestUtil.addGroup();
 
-		_configurationAdmin = _getService(ConfigurationAdmin.class);
+		_configurationHelper = _getService(
+			ImageAdaptiveMediaConfigurationHelper.class);
 		_dlAppLocalService = _getService(DLAppLocalService.class);
 		_finder = _getService(ImageAdaptiveMediaFinder.class);
 		_processor = _getService(ImageAdaptiveMediaProcessor.class);
 
 		ServiceTestUtil.setUser(TestPropsValues.getUser());
+
+		Collection<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
+			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
+				TestPropsValues.getCompanyId());
+
+		for (ImageAdaptiveMediaConfigurationEntry configurationEntry :
+				configurationEntries) {
+
+			_configurationHelper.deleteImageAdaptiveMediaConfigurationEntry(
+				TestPropsValues.getCompanyId(), configurationEntry.getUUID());
+		}
 
 		_addTestVariant();
 	}
@@ -193,22 +201,14 @@ public class ImageAdaptiveMediaProcessorTest {
 			_getNonImageBytes(), serviceContext);
 	}
 
-	private void _addTestVariant() throws IOException {
-		Configuration configuration = _configurationAdmin.getConfiguration(
-			"com.liferay.adaptive.media.image.internal.configuration." +
-				"ImageAdaptiveMediaCompanyConfiguration",
-			null);
+	private void _addTestVariant() throws Exception {
+		Map<String, String> properties = new HashMap<>();
 
-		Dictionary<String, Object> properties = configuration.getProperties();
+		properties.put("height", "100");
+		properties.put("width", "100");
 
-		if (properties == null) {
-			properties = new HashMapDictionary<>();
-		}
-
-		properties.put(
-			"imageVariants", new String[] {"small:0:width=100;height=100"});
-
-		configuration.update(properties);
+		_configurationHelper.addImageAdaptiveMediaConfigurationEntry(
+			TestPropsValues.getCompanyId(), "small", "0", properties);
 	}
 
 	private byte[] _getImageBytes() throws Exception {
@@ -235,26 +235,15 @@ public class ImageAdaptiveMediaProcessorTest {
 		}
 	}
 
-	private int _getVariantsCount() throws IOException {
-		Configuration configuration = _configurationAdmin.getConfiguration(
-			"com.liferay.adaptive.media.image.internal.configuration." +
-				"ImageAdaptiveMediaCompanyConfiguration",
-			null);
+	private int _getVariantsCount() throws Exception {
+		Collection<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
+			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
+				TestPropsValues.getCompanyId());
 
-		Dictionary<String, Object> properties = configuration.getProperties();
-
-		Object value = properties.get("imageVariants");
-
-		if (value == null) {
-			return 0;
-		}
-
-		List<String> imageVariants = StringPlus.asList(value);
-
-		return imageVariants.size();
+		return configurationEntries.size();
 	}
 
-	private ConfigurationAdmin _configurationAdmin;
+	private ImageAdaptiveMediaConfigurationHelper _configurationHelper;
 	private DLAppLocalService _dlAppLocalService;
 	private ImageAdaptiveMediaFinder _finder;
 
