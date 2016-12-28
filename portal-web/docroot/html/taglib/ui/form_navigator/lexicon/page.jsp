@@ -17,6 +17,8 @@
 <%@ include file="/html/taglib/ui/form_navigator/init.jsp" %>
 
 <%
+String tabs1Param = "tabs1";
+
 List<String> filterCategoryKeys = new ArrayList<String>();
 
 for (String categoryKey : categoryKeys) {
@@ -26,8 +28,6 @@ for (String categoryKey : categoryKeys) {
 		filterCategoryKeys.add(categoryKey);
 	}
 }
-
-String tabs1Param = "tabs1";
 %>
 
 <c:choose>
