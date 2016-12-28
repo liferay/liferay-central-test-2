@@ -87,7 +87,6 @@ public class BlogsItemSelectorHelper {
 				uploadURL.toString(),
 				LanguageUtil.get(themeDisplay.getLocale(), "blog-images"),
 				PropsValues.BLOGS_IMAGE_MAX_SIZE);
-		
 
 		uploadItemSelectorCriterion.setDesiredItemSelectorReturnTypes(
 			uploadCriterionDesiredItemSelectorReturnTypes);
