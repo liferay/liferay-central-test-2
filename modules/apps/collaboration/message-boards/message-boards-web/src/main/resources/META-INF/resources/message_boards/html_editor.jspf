@@ -41,10 +41,10 @@ if (Validator.isNull(body)) {
 }
 %>
 
-<liferay-ui:input-editor allowBrowseDocuments="<%= false %>" contents="<%= body %>" editorName='<%= PropsUtil.get("editor.wysiwyg.portal-web.docroot.html.portlet.message_boards.edit_message.html.jsp") %>' />
+<liferay-ui:input-editor allowBrowseDocuments="<%= false %>" contents="<%= body %>" editorName='<%= PropsUtil.get("editor.wysiwyg.portal-web.docroot.html.portlet.message_boards.edit_message.html.jsp") %>' name="bodyEditor" />
 
 <aui:script>
 	function <portlet:namespace />getHTML() {
-		return window.<portlet:namespace />editor.getHTML();
+		return window.<portlet:namespace />bodyEditor.getHTML();
 	}
 </aui:script>
