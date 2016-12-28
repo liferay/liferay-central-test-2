@@ -17,8 +17,11 @@ package com.liferay.adaptive.media.image.internal.configuration;
 import com.liferay.adaptive.media.AdaptiveMediaRuntimeException;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
-import com.liferay.portal.kernel.module.configuration.ConfigurationException;
-import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
+import com.liferay.portal.kernel.settings.CompanyServiceSettingsLocator;
+import com.liferay.portal.kernel.settings.Settings;
+import com.liferay.portal.kernel.settings.SettingsException;
+import com.liferay.portal.kernel.settings.SettingsFactoryUtil;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.HashMapDictionary;
 import com.liferay.registry.Registry;
 import com.liferay.registry.RegistryUtil;
@@ -112,13 +115,6 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 	}
 
 	@Reference(unbind = "-")
-	protected void setConfigurationProvider(
-		ConfigurationProvider configurationProvider) {
-
-		_configurationProvider = configurationProvider;
-	}
-
-	@Reference(unbind = "-")
 	protected void setImageAdaptiveMediaConfigurationEntryParser(
 		ImageAdaptiveMediaConfigurationEntryParser configurationEntryParser) {
 
@@ -139,21 +135,22 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 		_getConfigurationEntries(long companyId) {
 
 		try {
-			ImageAdaptiveMediaCompanyConfiguration companyConfiguration =
-				_configurationProvider.getCompanyConfiguration(
-					ImageAdaptiveMediaCompanyConfiguration.class, companyId);
+			Settings settings = SettingsFactoryUtil.getSettings(
+				new CompanyServiceSettingsLocator(
+					companyId,
+					ImageAdaptiveMediaCompanyConfiguration.class.getName()));
 
-			String[] imageVariants = companyConfiguration.imageVariants();
+			String[] imageVariants = settings.getValues("imageVariants", null);
 
-			if (imageVariants == null) {
+			if (ArrayUtil.isEmpty(imageVariants)) {
 				return Stream.empty();
 			}
 
 			return
 				Stream.of(imageVariants).map(_configurationEntryParser::parse);
 		}
-		catch (ConfigurationException ce) {
-			throw new AdaptiveMediaRuntimeException.InvalidConfiguration(ce);
+		catch (SettingsException se) {
+			throw new AdaptiveMediaRuntimeException.InvalidConfiguration(se);
 		}
 	}
 
@@ -175,6 +172,5 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 
 	private ImageAdaptiveMediaConfigurationEntryParser
 		_configurationEntryParser;
-	private ConfigurationProvider _configurationProvider;
 
 }
