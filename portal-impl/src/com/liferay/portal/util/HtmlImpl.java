@@ -229,9 +229,7 @@ public class HtmlImpl implements Html {
 		}
 
 		StringBuilder sb = null;
-
 		char[] hexBuffer = new char[4];
-
 		int lastReplacementIndex = 0;
 
 		for (int i = 0; i < text.length(); i++) {
