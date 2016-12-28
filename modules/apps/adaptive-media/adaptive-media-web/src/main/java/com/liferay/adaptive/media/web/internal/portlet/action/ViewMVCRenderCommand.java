@@ -14,13 +14,23 @@
 
 package com.liferay.adaptive.media.web.internal.portlet.action;
 
+import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
+import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
 import com.liferay.adaptive.media.web.constants.AdaptiveMediaPortletKeys;
+import com.liferay.adaptive.media.web.internal.constants.AdaptiveMediaWebKeys;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.WebKeys;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Sergio González
@@ -39,7 +49,35 @@ public class ViewMVCRenderCommand implements MVCRenderCommand {
 	public String render(
 		RenderRequest renderRequest, RenderResponse renderResponse) {
 
+		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		Collection<ImageAdaptiveMediaConfigurationEntry>
+			configurationEntriesCollection =
+				_imageAdaptiveMediaConfigurationHelper.
+					getImageAdaptiveMediaConfigurationEntries(
+						themeDisplay.getCompanyId());
+
+		List<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
+			new ArrayList<>(configurationEntriesCollection);
+
+		renderRequest.setAttribute(
+			AdaptiveMediaWebKeys.CONFIGURATION_ENTRIES_LIST,
+			configurationEntries);
+
 		return "/adaptive_media/view.jsp";
 	}
+
+	@Reference
+	protected void setImageAdaptiveMediaConfigurationHelper(
+		ImageAdaptiveMediaConfigurationHelper
+			imageAdaptiveMediaConfigurationHelper) {
+
+		_imageAdaptiveMediaConfigurationHelper =
+			imageAdaptiveMediaConfigurationHelper;
+	}
+
+	private ImageAdaptiveMediaConfigurationHelper
+		_imageAdaptiveMediaConfigurationHelper;
 
 }
