@@ -23,6 +23,7 @@ import java.util.Dictionary;
 
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
+import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
 import org.osgi.service.component.annotations.Reference;
@@ -33,7 +34,7 @@ import org.osgi.service.component.annotations.Reference;
 @Component(immediate = true)
 public class AdaptiveMediaMessagingConfigurator {
 
-	@Deactivate
+	@Activate
 	public void activate(BundleContext bundleContext) {
 		DestinationConfiguration destinationConfiguration =
 			new DestinationConfiguration(
