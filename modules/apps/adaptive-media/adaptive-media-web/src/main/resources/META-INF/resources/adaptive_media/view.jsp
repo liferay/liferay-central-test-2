@@ -28,6 +28,68 @@
 	</aui:nav>
 </aui:nav-bar>
 
+<%
+List<ImageAdaptiveMediaConfigurationEntry> configurationEntries = (List)request.getAttribute(AdaptiveMediaWebKeys.CONFIGURATION_ENTRIES_LIST);
+
+PortletURL portletURL = renderResponse.createRenderURL();
+%>
+
+<div class="container-fluid-1280">
+	<liferay-ui:search-container
+		emptyResultsMessage="there-are-no-image-resolutions"
+		id="imageConfigurationEntries"
+		iteratorURL="<%= portletURL %>"
+		total="<%= configurationEntries.size() %>"
+	>
+		<liferay-ui:search-container-results
+			results="<%= configurationEntries %>"
+		/>
+
+		<liferay-ui:search-container-row
+			className="com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry"
+			modelVar="configurationEntry"
+		>
+			<liferay-portlet:renderURL varImpl="rowURL">
+				<portlet:param name="mvcRenderCommandName" value="/adaptive_media/edit_image_configuration_entry" />
+				<portlet:param name="redirect" value="<%= currentURL %>" />
+				<portlet:param name="entryUuid" value="<%= String.valueOf(configurationEntry.getUUID()) %>" />
+			</liferay-portlet:renderURL>
+
+			<liferay-ui:search-container-column-text
+				cssClass="table-cell-content"
+				href="<%= rowURL %>"
+				name="name"
+				orderable="<%= false %>"
+				value="<%= configurationEntry.getName() %>"
+			/>
+
+			<liferay-ui:search-container-column-text
+				name="uuid"
+				orderable="<%= false %>"
+				value="<%= configurationEntry.getUUID() %>"
+			/>
+
+			<%
+			Map<String, String> properties = configurationEntry.getProperties();
+			%>
+
+			<liferay-ui:search-container-column-text
+				name="max-width"
+				orderable="<%= false %>"
+				value='<%= properties.get("width") %>'
+			/>
+
+			<liferay-ui:search-container-column-text
+				name="max-height"
+				orderable="<%= false %>"
+				value='<%= properties.get("height") %>'
+			/>
+		</liferay-ui:search-container-row>
+
+		<liferay-ui:search-iterator displayStyle="list" markupView="lexicon" />
+	</liferay-ui:search-container>
+</div>
+
 <portlet:renderURL var="addImageConfigurationEntryURL">
 	<portlet:param name="mvcRenderCommandName" value="/adaptive_media/edit_image_configuration_entry" />
 	<portlet:param name="redirect" value="<%= currentURL %>" />
