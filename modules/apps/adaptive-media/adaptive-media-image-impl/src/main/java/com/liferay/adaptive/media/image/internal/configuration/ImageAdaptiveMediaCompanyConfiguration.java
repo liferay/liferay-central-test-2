@@ -21,7 +21,9 @@ import com.liferay.portal.configuration.metatype.annotations.ExtendedObjectClass
 /**
  * @author Adolfo Pérez
  */
-@ExtendedObjectClassDefinition(category = "other")
+@ExtendedObjectClassDefinition(
+	category = "other", scope = ExtendedObjectClassDefinition.Scope.COMPANY
+)
 @Meta.OCD(
 	id = "com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaCompanyConfiguration",
 	localization = "content/Language",
