@@ -344,6 +344,39 @@ describe(
 						);
 					}
 				);
+
+				it(
+					'should select a option after searching',
+					function(done) {
+						selectField.set('options', [{label: 'foo', value: 'foo'}, {label: 'bar', value: 'bar'}]);
+
+						var container = selectField.get('container');
+
+						var inputElement = container.one('input');
+
+						inputElement.val('bar');
+
+						triggerEvent('input', inputElement);
+
+						window.setTimeout(
+							function() {
+								triggerEvent('mousedown', container.one('.drop-chosen ul > li'));
+
+								window.setTimeout(
+									function() {
+										assert.strictEqual(1, selectField.get('value').length);
+										assert.strictEqual('bar', selectField.get('value')[0]);
+										assert.strictEqual('bar', container.one('select').get('value'));
+
+										done();
+									},
+									0
+								);
+							},
+							400
+						);
+					}
+				);
 			}
 		);
 	}

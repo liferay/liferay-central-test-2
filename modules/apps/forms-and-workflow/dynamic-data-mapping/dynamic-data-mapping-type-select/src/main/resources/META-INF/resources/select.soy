@@ -155,7 +155,7 @@
 			{/if}
 		{/let}
 
-		<li class="{if $selectedValue == $option.value}option-selected{/if}" data-option-index="{index($option)}">
+		<li class="{if $selectedValue == $option.value}option-selected{/if}" data-option-index="{index($option)}" data-option-value="{$option.value}">
 			{$option.label}
 		</li>
 	{/foreach}

@@ -62,12 +62,12 @@ if (goog.DEBUG) {
 
 ddm.select_options = function(opt_data, opt_ignored) {
   var output = '';
-  var optionList134 = opt_data.options;
-  var optionListLen134 = optionList134.length;
-  for (var optionIndex134 = 0; optionIndex134 < optionListLen134; optionIndex134++) {
-    var optionData134 = optionList134[optionIndex134];
+  var optionList136 = opt_data.options;
+  var optionListLen136 = optionList136.length;
+  for (var optionIndex136 = 0; optionIndex136 < optionListLen136; optionIndex136++) {
+    var optionData136 = optionList136[optionIndex136];
     var selectedValue__soy121 = '' + ((opt_data.value && opt_data.value.value) ? soy.$$escapeHtml(opt_data.value.value) : '');
-    output += '<li class="' + ((selectedValue__soy121 == optionData134.value) ? 'option-selected' : '') + '" data-option-index="' + soy.$$escapeHtmlAttribute(optionIndex134) + '">' + soy.$$escapeHtml(optionData134.label) + '</li>';
+    output += '<li class="' + ((selectedValue__soy121 == optionData136.value) ? 'option-selected' : '') + '" data-option-index="' + soy.$$escapeHtmlAttribute(optionIndex136) + '" data-option-value="' + soy.$$escapeHtmlAttribute(optionData136.value) + '">' + soy.$$escapeHtml(optionData136.label) + '</li>';
   }
   return output;
 };

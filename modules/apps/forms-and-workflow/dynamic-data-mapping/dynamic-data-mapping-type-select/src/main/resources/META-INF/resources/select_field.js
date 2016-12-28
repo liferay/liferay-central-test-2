@@ -290,13 +290,9 @@ AUI.add(
 					_onClickItem: function(event) {
 						var instance = this;
 
-						var options = instance.get('options');
+						var value = event.target.getAttribute('data-option-value');
 
-						var index = event.target.getAttribute('data-option-index');
-
-						var option = options[index];
-
-						instance.set('value', [option.value]);
+						instance.set('value', [value]);
 
 						instance.render();
 					}
