@@ -19,8 +19,8 @@ install:
   - ./scripts/run.sh ./gradlew setupTestableTomcat
 
 script:
-  - ./scripts/run_unit_tests.sh
   - ../bundles/tomcat-8.0.32/bin/startup.sh
+  - ./scripts/run_unit_tests.sh
   - ./scripts/deploy_modules.sh
   - travis_wait ./scripts/wait_until_startup.sh
   - ./scripts/run_integration_tests.sh
