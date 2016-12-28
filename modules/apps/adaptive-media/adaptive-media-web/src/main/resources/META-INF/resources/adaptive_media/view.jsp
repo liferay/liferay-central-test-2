@@ -15,3 +15,15 @@
 --%>
 
 <%@ include file="/adaptive_media/init.jsp" %>
+
+<aui:nav-bar cssClass="collapse-basic-search" markupView="lexicon">
+	<aui:nav cssClass="navbar-nav">
+		<portlet:renderURL var="viewEntriesURL" />
+
+		<aui:nav-item
+			href="<%= viewEntriesURL %>"
+			label="image-resolutions"
+			selected="<%= true %>"
+		/>
+	</aui:nav>
+</aui:nav-bar>
