@@ -22,4 +22,6 @@ public class AdaptiveMediaWebKeys {
 	public static final String CONFIGURATION_ENTRIES_LIST =
 		"CONFIGURATION_ENTRIES_LIST";
 
+	public static final String CONFIGURATION_ENTRY = "CONFIGURATION_ENTRY";
+
 }

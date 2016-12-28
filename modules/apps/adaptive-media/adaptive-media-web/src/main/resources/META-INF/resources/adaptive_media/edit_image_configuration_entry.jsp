@@ -22,5 +22,42 @@ String redirect = ParamUtil.getString(request, "redirect");
 portletDisplay.setShowBackIcon(true);
 portletDisplay.setURLBack(redirect);
 
-renderResponse.setTitle(LanguageUtil.get(request, "new-image-resolution"));
+ImageAdaptiveMediaConfigurationEntry configurationEntry = (ImageAdaptiveMediaConfigurationEntry)request.getAttribute(AdaptiveMediaWebKeys.CONFIGURATION_ENTRY);
+
+renderResponse.setTitle((configurationEntry != null) ? configurationEntry.getName() : LanguageUtil.get(request, "new-image-resolution"));
+
+Map<String, String> properties = null;
+
+if (configurationEntry != null) {
+	properties = configurationEntry.getProperties();
+}
 %>
+
+<div class="container-fluid-1280">
+	<portlet:actionURL name="/adaptive_media/edit_image_configuration_entry" var="editImageConfigurationEntryURL">
+		<portlet:param name="mvcRenderCommandName" value="/adaptive_media/edit_image_configuration_entry" />
+	</portlet:actionURL>
+
+	<aui:form action="<%= editImageConfigurationEntryURL %>" method="post" name="fm">
+		<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+		<aui:input name="entryUuid" type="hidden" value="<%= (configurationEntry != null) ? configurationEntry.getUUID() : StringPool.BLANK %>" />
+
+		<aui:fieldset-group markupView="lexicon">
+			<aui:fieldset>
+				<aui:input autoFocus="<%= windowState.equals(WindowState.MAXIMIZED) %>" name="name" required="<%= true %>" value="<%= (configurationEntry != null) ? configurationEntry.getName() : StringPool.BLANK %>" />
+
+				<aui:input name="uuid" required="<%= true %>" value="<%= (configurationEntry != null) ? configurationEntry.getUUID() : StringPool.BLANK %>" />
+
+				<aui:input label="max-width-px" name="maxWidth" required="<%= true %>" value='<%= (properties != null) ? properties.get("width") : StringPool.BLANK %>' />
+
+				<aui:input label="max-height-px" name="maxHeight" required="<%= true %>" value='<%= (properties != null) ? properties.get("height") : StringPool.BLANK %>' />
+			</aui:fieldset>
+		</aui:fieldset-group>
+
+		<aui:button-row>
+			<aui:button cssClass="btn-lg" type="submit" />
+
+			<aui:button cssClass="btn-lg" href="<%= redirect %>" type="cancel" />
+		</aui:button-row>
+	</aui:form>
+</div>

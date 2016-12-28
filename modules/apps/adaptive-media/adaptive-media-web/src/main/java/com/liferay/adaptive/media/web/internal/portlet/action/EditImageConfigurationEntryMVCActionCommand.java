@@ -17,16 +17,18 @@ package com.liferay.adaptive.media.web.internal.portlet.action;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
 import com.liferay.adaptive.media.web.constants.AdaptiveMediaPortletKeys;
-import com.liferay.adaptive.media.web.internal.constants.AdaptiveMediaWebKeys;
-import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
+import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
+import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -40,31 +42,44 @@ import org.osgi.service.component.annotations.Reference;
 		"javax.portlet.name=" + AdaptiveMediaPortletKeys.ADAPTIVE_MEDIA,
 		"mvc.command.name=/adaptive_media/edit_image_configuration_entry"
 	},
-	service = MVCRenderCommand.class
+	service = MVCActionCommand.class
 )
-public class EditImageConfigurationEntryMVCRenderCommand
-	implements MVCRenderCommand {
+public class EditImageConfigurationEntryMVCActionCommand
+	extends BaseMVCActionCommand {
 
 	@Override
-	public String render(
-		RenderRequest renderRequest, RenderResponse renderResponse) {
+	protected void doProcessAction(
+			ActionRequest actionRequest, ActionResponse actionResponse)
+		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		String entryUuid = ParamUtil.getString(renderRequest, "entryUuid");
+		String name = ParamUtil.getString(actionRequest, "name");
+		String uuid = ParamUtil.getString(actionRequest, "uuid");
+		String maxWidth = ParamUtil.getString(actionRequest, "maxWidth");
+		String maxHeight = ParamUtil.getString(actionRequest, "maxHeight");
+
+		Map<String, String> properties = new HashMap<>();
+
+		properties.put("height", maxHeight);
+		properties.put("width", maxWidth);
 
 		Optional<ImageAdaptiveMediaConfigurationEntry>
 			configurationEntryOptional =
 				_imageAdaptiveMediaConfigurationHelper.
 					getImageAdaptiveMediaConfigurationEntry(
-						themeDisplay.getCompanyId(), entryUuid);
+						themeDisplay.getCompanyId(), uuid);
 
-		renderRequest.setAttribute(
-			AdaptiveMediaWebKeys.CONFIGURATION_ENTRY,
-			configurationEntryOptional.orElse(null));
+		if (configurationEntryOptional.isPresent()) {
+			_imageAdaptiveMediaConfigurationHelper.
+				deleteImageAdaptiveMediaConfigurationEntry(
+					themeDisplay.getCompanyId(), uuid);
+		}
 
-		return "/adaptive_media/edit_image_configuration_entry.jsp";
+		_imageAdaptiveMediaConfigurationHelper.
+			addImageAdaptiveMediaConfigurationEntry(
+				themeDisplay.getCompanyId(), name, uuid, properties);
 	}
 
 	@Reference
