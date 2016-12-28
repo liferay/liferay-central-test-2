@@ -35,6 +35,7 @@ import java.util.Optional;
 
 import org.junit.AfterClass;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Rule;
@@ -73,13 +74,31 @@ public class ImageAdaptiveMediaConfigurationTest {
 		_serviceTracker.close();
 	}
 
+	@Before
+	public void setUp() throws Exception {
+		ImageAdaptiveMediaConfigurationHelper configurationHelper =
+			_serviceTracker.getService();
+
+		Collection<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
+			configurationHelper.getImageAdaptiveMediaConfigurationEntries(
+				TestPropsValues.getCompanyId());
+
+		for (ImageAdaptiveMediaConfigurationEntry configurationEntry :
+				configurationEntries) {
+
+			configurationHelper.deleteImageAdaptiveMediaConfigurationEntry(
+				TestPropsValues.getCompanyId(), configurationEntry.getUUID());
+		}
+	}
+
 	@Test
 	public void testEmptyConfiguration() throws Exception {
 		ImageAdaptiveMediaConfigurationHelper configurationHelper =
 			_serviceTracker.getService();
 
 		Iterable<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
-			configurationHelper.getImageAdaptiveMediaConfigurationEntries(1234);
+			configurationHelper.getImageAdaptiveMediaConfigurationEntries(
+				TestPropsValues.getCompanyId());
 
 		Iterator<ImageAdaptiveMediaConfigurationEntry> iterator =
 			configurationEntries.iterator();
