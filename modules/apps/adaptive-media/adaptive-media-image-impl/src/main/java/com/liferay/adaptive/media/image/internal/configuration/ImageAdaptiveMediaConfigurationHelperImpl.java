@@ -95,6 +95,11 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 		Stream<ImageAdaptiveMediaConfigurationEntry> configurationEntryStream =
 			_getConfigurationEntries(companyId);
 
+		configurationEntryStream = configurationEntryStream.sorted(
+			(configurationEntry1, configurationEntry2) ->
+				configurationEntry1.getName().compareTo(
+					configurationEntry2.getName()));
+
 		return configurationEntryStream.collect(Collectors.toList());
 	}
 
