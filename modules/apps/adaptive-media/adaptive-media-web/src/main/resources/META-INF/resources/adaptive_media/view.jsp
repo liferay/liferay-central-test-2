@@ -18,12 +18,21 @@
 
 <aui:nav-bar cssClass="collapse-basic-search" markupView="lexicon">
 	<aui:nav cssClass="navbar-nav">
-		<portlet:renderURL var="viewEntriesURL" />
+		<portlet:renderURL var="viewImageConfigurationEntriesURL" />
 
 		<aui:nav-item
-			href="<%= viewEntriesURL %>"
+			href="<%= viewImageConfigurationEntriesURL %>"
 			label="image-resolutions"
 			selected="<%= true %>"
 		/>
 	</aui:nav>
 </aui:nav-bar>
+
+<portlet:renderURL var="addImageConfigurationEntryURL">
+	<portlet:param name="mvcRenderCommandName" value="/adaptive_media/edit_image_configuration_entry" />
+	<portlet:param name="redirect" value="<%= currentURL %>" />
+</portlet:renderURL>
+
+<liferay-frontend:add-menu>
+	<liferay-frontend:add-menu-item title='<%= LanguageUtil.get(request, "add-image-resolution") %>' url="<%= addImageConfigurationEntryURL %>" />
+</liferay-frontend:add-menu>

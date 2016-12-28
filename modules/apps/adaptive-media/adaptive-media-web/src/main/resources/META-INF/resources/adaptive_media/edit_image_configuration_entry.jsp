@@ -14,19 +14,13 @@
  */
 --%>
 
-<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
+<%@ include file="/adaptive_media/init.jsp" %>
 
-<%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %><%@
-taglib uri="http://liferay.com/tld/frontend" prefix="liferay-frontend" %><%@
-taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
+<%
+String redirect = ParamUtil.getString(request, "redirect");
 
-<%@ page import="com.liferay.portal.kernel.language.LanguageUtil" %><%@
-page import="com.liferay.portal.kernel.util.ParamUtil" %>
+portletDisplay.setShowBackIcon(true);
+portletDisplay.setURLBack(redirect);
 
-<liferay-frontend:defineObjects />
-
-<liferay-theme:defineObjects />
-
-<portlet:defineObjects />
-
-<%@ include file="/init-ext.jsp" %>
+renderResponse.setTitle(LanguageUtil.get(request, "new-image-resolution"));
+%>
