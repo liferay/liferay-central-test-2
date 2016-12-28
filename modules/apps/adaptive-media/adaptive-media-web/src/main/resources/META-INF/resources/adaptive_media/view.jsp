@@ -129,6 +129,10 @@ PortletURL portletURL = renderResponse.createRenderURL();
 					orderable="<%= false %>"
 					value='<%= properties.get("height") %>'
 				/>
+
+				<liferay-ui:search-container-column-jsp
+					path="/adaptive_media/image_configuration_entry_action.jsp"
+				/>
 			</liferay-ui:search-container-row>
 
 			<liferay-ui:search-iterator displayStyle="list" markupView="lexicon" />
