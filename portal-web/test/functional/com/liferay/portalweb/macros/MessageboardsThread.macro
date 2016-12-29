@@ -74,17 +74,6 @@
 				<execute function="Click" locator1="Button#EDITOR_SWITCH" />
 
 				<execute function="Type#sendKeysAceEditor" locator1="TextArea#ACE_EDITOR" value1="${threadBody}" />
-
-				<if>
-					<isset var="fontSize" />
-					<then>
-						<var name="key_fontSize" value="${fontSize}" />
-
-						<execute function="AssertClick" locator1="CKEditor#TOOLBAR_SIZE_BUTTON" value1="Size" />
-
-						<execute function="AssertTextEquals" locator1="CKEditor#TOOLBAR_SIZE_BUTTON_DROPDOWN" value1="${key_fontSize}" />
-					</then>
-				</if>
 			</then>
 			<else>
 				<execute function="Type#typeEditor" locator1="AlloyEditor#CONTENT_FIELD" value1="${threadBody}" />
