@@ -33,17 +33,17 @@ public class EventsDisplayWebUpgrade implements UpgradeStepRegistrator {
 		BaseUpgradeWebModuleRelease upgradeWebModuleRelease =
 			new BaseUpgradeWebModuleRelease() {
 
-			@Override
-			protected String getBundleSymbolicName() {
-				return "com.liferay.events.display.web";
-			}
+				@Override
+				protected String getBundleSymbolicName() {
+					return "com.liferay.events.display.web";
+				}
 
-			@Override
-			protected String[] getPortletIds() {
-				return new String[] {"1_WAR_eventsdisplayportlet"};
-			}
+				@Override
+				protected String[] getPortletIds() {
+					return new String[] {"1_WAR_eventsdisplayportlet"};
+				}
 
-		};
+			};
 
 		try {
 			upgradeWebModuleRelease.upgrade();
