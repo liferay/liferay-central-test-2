@@ -529,7 +529,7 @@ public class JspServlet extends HttpServlet {
 		catch (NoSuchMethodException nsme) {
 		}
 
-		return Collections.unmodifiableMap(methods);
+		return methods;
 	}
 
 	private void _deleteOutdatedJspFiles(String dir, List<Path> paths) {
