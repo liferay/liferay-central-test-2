@@ -69,11 +69,11 @@
 		<if>
 			<isset var="source" />
 			<then>
-				<execute function="Click" locator1="CKEditor#TOOLBAR_SOURCE_BUTTON" />
+				<execute function="Click" locator1="AlloyEditor#CONTENT_FIELD" />
 
-				<execute function="Type" locator1="CKEditor#BODY_FIELD_SOURCE_ON" value1="${threadBody}" />
+				<execute function="Click" locator1="Button#EDITOR_SWITCH" />
 
-				<execute function="Click" locator1="CKEditor#TOOLBAR_SOURCE_BUTTON" />
+				<execute function="Type#sendKeysAceEditor" locator1="TextArea#ACE_EDITOR" value1="${threadBody}" />
 
 				<if>
 					<isset var="fontSize" />
