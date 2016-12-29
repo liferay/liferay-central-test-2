@@ -42,7 +42,7 @@
 			<var name="twitterProfileName" value="liferayqa3" />
 		</execute>
 
-		<execute function="Pause" locator1="20000" />
+		<execute function="Pause" locator1="50000" />
 
 		<execute function="Refresh" />
 
@@ -54,7 +54,7 @@
 			<var name="portletName" value="Activities" />
 		</execute>
 
-		<execute function="Pause" locator1="10000" />
+		<execute function="Pause" locator1="50000" />
 
 		<execute function="Refresh" />
 
