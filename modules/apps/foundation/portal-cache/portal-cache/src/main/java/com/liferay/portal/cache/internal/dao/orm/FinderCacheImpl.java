@@ -109,13 +109,10 @@ public class FinderCacheImpl
 			return null;
 		}
 
-		Serializable primaryKey = null;
-
-		Map<Serializable, Serializable> localCache = null;
-
 		String encodedArguments = finderPath.encodeArguments(args);
-
+		Map<Serializable, Serializable> localCache = null;
 		Serializable localCacheKey = null;
+		Serializable primaryKey = null;
 
 		if (_localCacheAvailable) {
 			localCache = _localCache.get();
@@ -181,9 +178,8 @@ public class FinderCacheImpl
 			return;
 		}
 
-		Serializable primaryKey = _resultToPrimaryKey((Serializable)result);
-
 		String encodedArguments = finderPath.encodeArguments(args);
+		Serializable primaryKey = _resultToPrimaryKey((Serializable)result);
 
 		if (_localCacheAvailable) {
 			Map<Serializable, Serializable> localCache = _localCache.get();
