@@ -977,7 +977,7 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 			sb.append(clazz);
 			sb.append(". This is usually caused by some dependency not being ");
 			sb.append("present in the classpath. Be careful, this could ");
-			sb.append("cause problems somewhere else in your code");
+			sb.append("cause problems somewhere else.");
 
 			_logger.log(Logger.LOG_DEBUG, sb.toString(), e);
 
