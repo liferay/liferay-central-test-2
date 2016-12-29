@@ -967,17 +967,16 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 		}
 		catch (Exception e) {
 
-			// See http://bugs.java.com/view_bug.do?bug_id=7183985
+			// See http://bugs.java.com/view_bug.do?bug_id=7183985 and LPS-69679
 
-			StringBundler sb = new StringBundler(7);
+			StringBundler sb = new StringBundler(6);
 
 			sb.append("Unexpected error retrieving the annotation ");
 			sb.append(WebServlet.class);
 			sb.append("from class ");
 			sb.append(clazz);
-			sb.append(". This is usually caused by some dependency not being ");
-			sb.append("present in the classpath. Be careful, this could ");
-			sb.append("cause problems somewhere else.");
+			sb.append(" because a some dependency may not be present in the ");
+			sb.append("classpath");
 
 			_logger.log(Logger.LOG_DEBUG, sb.toString(), e);
 
