@@ -715,7 +715,7 @@
 			</then>
 		</if>
 
-		<execute function="Click" locator1="Button#PUBLISH_REPLY" />
+		<execute function="Click" locator1="Button#PUBLISH" />
 
 		<execute macro="Alert#viewSuccessMessage" />
 
