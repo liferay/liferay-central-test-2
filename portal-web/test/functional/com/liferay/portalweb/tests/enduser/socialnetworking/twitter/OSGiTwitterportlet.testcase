@@ -39,7 +39,7 @@
 		</execute>
 
 		<execute macro="Twitter#configureUserProfile">
-			<var name="twitterProfileName" value="liferayqa" />
+			<var name="twitterProfileName" value="liferayqa3" />
 		</execute>
 
 		<execute function="Pause" locator1="20000" />
@@ -47,7 +47,7 @@
 		<execute function="Refresh" />
 
 		<execute macro="Twitter#viewConfiguredScreenName">
-			<var name="twitterProfileName" value="liferayqa" />
+			<var name="twitterProfileName" value="liferayqa3" />
 		</execute>
 
 		<execute macro="Portlet#addPG">
