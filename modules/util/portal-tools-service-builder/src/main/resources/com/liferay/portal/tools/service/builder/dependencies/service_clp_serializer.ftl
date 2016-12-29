@@ -217,9 +217,9 @@ public class ClpSerializer {
 
 	public static Throwable translateThrowable(Throwable throwable) {
 		if (_useReflectionToTranslateThrowable) {
-
-			ObjectOutputStream objectOutputStream = null;
 			ObjectInputStream objectInputStream = null;
+			ObjectOutputStream objectOutputStream = null;
+
 			try {
 				UnsyncByteArrayOutputStream unsyncByteArrayOutputStream = new UnsyncByteArrayOutputStream();
 				objectOutputStream = new ObjectOutputStream(unsyncByteArrayOutputStream);
