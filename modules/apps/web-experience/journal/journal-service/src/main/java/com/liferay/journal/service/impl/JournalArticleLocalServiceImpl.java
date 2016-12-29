@@ -7145,8 +7145,7 @@ public class JournalArticleLocalServiceImpl
 			groupId, urlTitle);
 
 		if ((urlTitleArticle != null) &&
-			!Objects.equals(
-				urlTitleArticle.getArticleId(), articleId)) {
+			!Objects.equals(urlTitleArticle.getArticleId(), articleId)) {
 
 			urlTitle = getUniqueUrlTitle(id, groupId, articleId, urlTitle);
 		}
