@@ -53,7 +53,7 @@ if (bbcoceEditorName.equals("bbcode")) {
 }
 %>
 
-<liferay-ui:input-editor allowBrowseDocuments="<%= false %>" configParams="<%= configParams %>" contents="<%= body %>" editorName="<%= bbcoceEditorName %>" toolbarSet="bbcode" name="bodyEditor" />
+<liferay-ui:input-editor allowBrowseDocuments="<%= false %>" configParams="<%= configParams %>" contents="<%= body %>" editorName="<%= bbcoceEditorName %>" name="bodyEditor" toolbarSet="bbcode" />
 
 <aui:script>
 	function <portlet:namespace />getHTML() {
