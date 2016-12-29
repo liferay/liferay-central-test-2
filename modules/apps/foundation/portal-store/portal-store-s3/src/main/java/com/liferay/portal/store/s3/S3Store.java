@@ -696,12 +696,14 @@ public class S3Store extends BaseStore {
 			AmazonServiceException amazonServiceException =
 				(AmazonServiceException)amazonClientException;
 
-			String errorCode = amazonServiceException.getErrorCode();
-
 			StringBundler sb = new StringBundler(11);
 
 			sb.append("{errorCode=");
+
+			String errorCode = amazonServiceException.getErrorCode();
+
 			sb.append(errorCode);
+
 			sb.append(", errorType=");
 			sb.append(amazonServiceException.getErrorType());
 			sb.append(", message=");
