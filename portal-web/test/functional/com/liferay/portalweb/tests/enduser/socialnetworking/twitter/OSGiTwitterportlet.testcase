@@ -59,7 +59,7 @@
 		<execute function="Refresh" />
 
 		<execute macro="Twitter#viewFeedEntry">
-			<var name="entryContent" value="Now Available! test.deprecated 1 (Liferay, Inc.) https://www-nightly.liferay.com/web/guest/marketplace/-/mp/application/83373616 … #TestLRMP" />
+			<var name="entryContent" value="This is a tweet sent on Twitter." />
 		</execute>
 	</command>
 </definition>
