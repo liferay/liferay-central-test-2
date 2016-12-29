@@ -299,6 +299,9 @@ public class JournalArticleExportImportContentProcessor
 			}
 		}
 		catch (DocumentException de) {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Invalid content:\n" + content);
+			}
 		}
 
 		if (!throwables.isEmpty()) {
