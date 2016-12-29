@@ -24,7 +24,6 @@ import com.liferay.journal.model.JournalArticle;
 import com.liferay.journal.service.JournalArticleLocalService;
 import com.liferay.portal.kernel.exception.BulkException;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.json.JSONException;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
@@ -124,32 +123,21 @@ public class JournalArticleExportImportContentProcessor
 			return content;
 		}
 
-		StringBuilder sb = new StringBuilder(content);
+		Document document = SAXReaderUtil.read(content);
 
-		int beginPos = 0;
-		int endPos = 0;
+		XPath xPath = SAXReaderUtil.createXPath(
+			"//dynamic-element[@type='ddm-journal-article']");
 
-		while (true) {
-			beginPos = sb.indexOf(_DDM_JOURNAL_ARTICLE_TYPE, endPos);
+		List<Node> ddmJournalArticleNodes = xPath.selectNodes(document);
 
-			if (beginPos == -1) {
-				break;
-			}
+		for (Node ddmJournalArticleNode : ddmJournalArticleNodes) {
+			Element ddmJournalArticleEl = (Element)ddmJournalArticleNode;
 
-			endPos = beginPos;
+			List<Element> dynamicContentEls = ddmJournalArticleEl.elements(
+				"dynamic-content");
 
-			while (true) {
-				beginPos = sb.indexOf(_CDATA_BEGIN, endPos);
-
-				if (beginPos == -1) {
-					break;
-				}
-
-				beginPos += _CDATA_BEGIN.length();
-
-				endPos = sb.indexOf(_CDATA_END, beginPos);
-
-				String jsonData = sb.substring(beginPos, endPos);
+			for (Element dynamicContentEl : dynamicContentEls) {
+				String jsonData = dynamicContentEl.getStringValue();
 
 				JSONObject jsonObject = _jsonFactory.createJSONObject(jsonData);
 
@@ -186,9 +174,9 @@ public class JournalArticleExportImportContentProcessor
 							journalArticleReference);
 				}
 
-				sb.replace(beginPos, endPos, journalArticleReference);
+				dynamicContentEl.clearContent();
 
-				endPos = beginPos + journalArticleReference.length();
+				dynamicContentEl.addCDATA(journalArticleReference);
 
 				if (exportReferencedContent) {
 					StagedModelDataHandlerUtil.exportReferenceStagedModel(
@@ -206,7 +194,7 @@ public class JournalArticleExportImportContentProcessor
 			}
 		}
 
-		return sb.toString();
+		return document.asXML();
 	}
 
 	protected String replaceImportJournalArticleReferences(
@@ -320,13 +308,6 @@ public class JournalArticleExportImportContentProcessor
 					throwables));
 		}
 	}
-
-	private static final String _CDATA_BEGIN = "<![CDATA[";
-
-	private static final String _CDATA_END = "]]>";
-
-	private static final String _DDM_JOURNAL_ARTICLE_TYPE =
-		"type=\"ddm-journal-article\"";
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		JournalArticleExportImportContentProcessor.class);
