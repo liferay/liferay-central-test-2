@@ -20,8 +20,6 @@ PortletURL exportAssetURL = assetRenderer.getURLExport(liferayPortletRequest, li
 exportAssetURL.setParameter("plid", String.valueOf(themeDisplay.getPlid()));
 exportAssetURL.setParameter("portletResource", portletDisplay.getId());
 exportAssetURL.setWindowState(LiferayWindowState.EXCLUSIVE);
-Map<String, Object> data = new HashMap<String, Object>();
-data.put("resource-href", exportAssetURL.toString());
 %>
 
 <liferay-ui:icon-list>
@@ -29,6 +27,10 @@ data.put("resource-href", exportAssetURL.toString());
 	<%
 	for (String extension : assetPublisherDisplayContext.getExtensions(assetRenderer)) {
 		exportAssetURL.setParameter("targetExtension", extension);
+
+		Map<String, Object> data = new HashMap<String, Object>();
+
+		data.put("resource-href", exportAssetURL.toString());
 	%>
 
 		<liferay-ui:icon
