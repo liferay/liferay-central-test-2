@@ -131,13 +131,13 @@ public class JournalArticleExportImportContentProcessor
 		List<Node> ddmJournalArticleNodes = xPath.selectNodes(document);
 
 		for (Node ddmJournalArticleNode : ddmJournalArticleNodes) {
-			Element ddmJournalArticleEl = (Element)ddmJournalArticleNode;
+			Element ddmJournalArticleElement = (Element)ddmJournalArticleNode;
 
-			List<Element> dynamicContentEls = ddmJournalArticleEl.elements(
-				"dynamic-content");
+			List<Element> dynamicContentElements =
+				ddmJournalArticleElement.elements("dynamic-content");
 
-			for (Element dynamicContentEl : dynamicContentEls) {
-				String jsonData = dynamicContentEl.getStringValue();
+			for (Element dynamicContentElement : dynamicContentElements) {
+				String jsonData = dynamicContentElement.getStringValue();
 
 				JSONObject jsonObject = _jsonFactory.createJSONObject(jsonData);
 
@@ -174,9 +174,9 @@ public class JournalArticleExportImportContentProcessor
 							journalArticleReference);
 				}
 
-				dynamicContentEl.clearContent();
+				dynamicContentElement.clearContent();
 
-				dynamicContentEl.addCDATA(journalArticleReference);
+				dynamicContentElement.addCDATA(journalArticleReference);
 
 				if (exportReferencedContent) {
 					StagedModelDataHandlerUtil.exportReferenceStagedModel(
@@ -263,13 +263,14 @@ public class JournalArticleExportImportContentProcessor
 			List<Node> ddmJournalArticleNodes = xPath.selectNodes(document);
 
 			for (Node ddmJournalArticleNode : ddmJournalArticleNodes) {
-				Element ddmJournalArticleEl = (Element)ddmJournalArticleNode;
+				Element ddmJournalArticleElement =
+					(Element)ddmJournalArticleNode;
 
-				List<Element> dynamicContentEls = ddmJournalArticleEl.elements(
-					"dynamic-content");
+				List<Element> dynamicContentElements =
+					ddmJournalArticleElement.elements("dynamic-content");
 
-				for (Element dynamicContentEl : dynamicContentEls) {
-					String json = dynamicContentEl.getStringValue();
+				for (Element dynamicContentElement : dynamicContentElements) {
+					String json = dynamicContentElement.getStringValue();
 
 					if (Validator.isNull(json)) {
 						if (_log.isDebugEnabled()) {
