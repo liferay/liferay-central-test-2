@@ -549,7 +549,7 @@ public class AnnouncementsEntryLocalServiceImpl
 			_log.debug("Notifying " + users.size() + " users");
 		}
 
-		Map<String, String> notifyUsers = new HashMap<>();
+		Map<String, String> notifyUsersFullNames = new HashMap<>();
 
 		for (User user : users) {
 			AnnouncementsDelivery announcementsDelivery =
@@ -557,17 +557,18 @@ public class AnnouncementsEntryLocalServiceImpl
 					user.getUserId(), entry.getType());
 
 			if (announcementsDelivery.isEmail()) {
-				notifyUsers.put(user.getEmailAddress(), user.getFullName());
+				notifyUsersFullNames.put(
+					user.getEmailAddress(), user.getFullName());
 			}
 
 			if (announcementsDelivery.isSms()) {
 				String smsSn = user.getContact().getSmsSn();
 
-				notifyUsers.put(smsSn, user.getFullName());
+				notifyUsersFullNames.put(smsSn, user.getFullName());
 			}
 		}
 
-		if (notifyUsers.isEmpty()) {
+		if (notifyUsersFullNames.isEmpty()) {
 			return;
 		}
 
@@ -587,8 +588,8 @@ public class AnnouncementsEntryLocalServiceImpl
 			fromAddress, fromName, toAddress, toName, subject, body, company,
 			entry);
 
-		for (String curToAddress : notifyUsers.keySet()) {
-			String curToName = notifyUsers.get(toAddress);
+		for (String curToAddress : notifyUsersFullNames.keySet()) {
+			String curToName = notifyUsersFullNames.get(toAddress);
 
 			_sendNotificationEmail(
 				fromAddress, fromName, curToAddress, curToName, subject, body,
