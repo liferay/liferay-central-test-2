@@ -156,7 +156,9 @@ public class ConfigurableUtil {
 		}
 
 		constructorMethodVisitor.visitInsn(Opcodes.RETURN);
+
 		constructorMethodVisitor.visitMaxs(0, 0);
+
 		constructorMethodVisitor.visitEnd();
 
 		// Methods
@@ -212,6 +214,7 @@ public class ConfigurableUtil {
 			}
 
 			methodVisitor.visitMaxs(0, 0);
+
 			methodVisitor.visitEnd();
 		}
 
