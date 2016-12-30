@@ -64,7 +64,7 @@ public class ConfigurableUtilTest {
 	@Test
 	public void testCreateConfigurable() {
 
-		// Test Dictionary
+		// Test dictionary
 
 		Dictionary<String, String> dictionary = new HashMapDictionary<>();
 
@@ -75,7 +75,7 @@ public class ConfigurableUtilTest {
 				TestConfiguration.class, dictionary),
 			"testReqiredString1");
 
-		// Test Map
+		// Test map
 
 		_assertTestConfiguration(
 			ConfigurableUtil.createConfigurable(
