@@ -533,6 +533,8 @@
 			<var name="dmRepositoryName" value="Sharepoint Repository Name" />
 		</execute>
 
+		<execute function="AssertVisible" locator1="ControlMenu#HEADER_TITLE" value1="Sharepoint Repository Name" />
+
 		<execute macro="DMPortlet#setIconView" />
 
 		<execute macro="DMDocument#moveToSubFolderCP">
@@ -549,6 +551,8 @@
 		<execute macro="DMDocument#viewIconLockedCP">
 			<var name="dmDocumentTitle" value="Document_1.txt" />
 		</execute>
+
+		<execute function="Pause" locator1="5000" />
 
 		<execute macro="DMNavigator#gotoDocumentCP">
 			<var name="dmDocumentTitle" value="Document_1.txt" />
