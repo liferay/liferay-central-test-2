@@ -26,9 +26,9 @@ exportAssetURL.setWindowState(LiferayWindowState.EXCLUSIVE);
 
 	<%
 	for (String extension : assetPublisherDisplayContext.getExtensions(assetRenderer)) {
-		exportAssetURL.setParameter("targetExtension", extension);
-
 		Map<String, Object> data = new HashMap<String, Object>();
+
+		exportAssetURL.setParameter("targetExtension", extension);
 
 		data.put("resource-href", exportAssetURL.toString());
 	%>
