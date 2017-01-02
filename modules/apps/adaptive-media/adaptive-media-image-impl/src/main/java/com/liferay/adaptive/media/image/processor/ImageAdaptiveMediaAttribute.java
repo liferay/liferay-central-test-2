@@ -25,15 +25,15 @@ import java.util.Map;
  */
 public final class ImageAdaptiveMediaAttribute {
 
-	public static final AdaptiveMediaAttribute<
-		ImageAdaptiveMediaProcessor, Integer>
-			IMAGE_HEIGHT = new AdaptiveMediaAttribute<>(
+	public static final AdaptiveMediaAttribute
+		<ImageAdaptiveMediaProcessor, Integer> IMAGE_HEIGHT =
+			new AdaptiveMediaAttribute<>(
 				"height", AdaptiveMediaAttributeConverterUtil::parseInt,
 				ImageAdaptiveMediaAttribute::_intDistance);
 
-	public static final AdaptiveMediaAttribute<
-		ImageAdaptiveMediaProcessor, Integer>
-			IMAGE_WIDTH = new AdaptiveMediaAttribute<>(
+	public static final AdaptiveMediaAttribute
+		<ImageAdaptiveMediaProcessor, Integer> IMAGE_WIDTH =
+			new AdaptiveMediaAttribute<>(
 				"width", AdaptiveMediaAttributeConverterUtil::parseInt,
 				ImageAdaptiveMediaAttribute::_intDistance);
 

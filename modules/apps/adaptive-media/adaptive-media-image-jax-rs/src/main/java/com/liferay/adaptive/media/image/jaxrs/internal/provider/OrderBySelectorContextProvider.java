@@ -47,12 +47,11 @@ public class OrderBySelectorContextProvider
 			return availableFields -> Collections.emptyList();
 		}
 
-		return availableFields ->
-			Arrays.stream(orders).map(this::parseOrder).filter(
-				Optional::isPresent).map(Optional::get).filter(
-					fieldOrder ->
-						availableFields.contains(fieldOrder.getFieldName())).
-							collect(Collectors.toList());
+		return availableFields -> Arrays.stream(orders).map(this::parseOrder).
+			filter(Optional::isPresent).map(Optional::get).filter(
+				fieldOrder ->
+					availableFields.contains(fieldOrder.getFieldName())).
+				collect(Collectors.toList());
 	}
 
 	protected Optional<OrderBySelector.FieldOrder> parseOrder(String order) {

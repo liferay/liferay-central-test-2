@@ -78,9 +78,8 @@ public class FileEntryImageAdaptiveMediaURLItemSelectorReturnTypeResolver
 		Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> stream =
 			_finder.getAdaptiveMedia(
 				queryBuilder ->
-					queryBuilder.allForFileEntry(fileEntry).
-					orderBy(ImageAdaptiveMediaAttribute.IMAGE_WIDTH, true).
-					done());
+					queryBuilder.allForFileEntry(fileEntry).orderBy(
+						ImageAdaptiveMediaAttribute.IMAGE_WIDTH, true).done());
 
 		List<AdaptiveMedia<ImageAdaptiveMediaProcessor>> adaptiveMediaList =
 			stream.collect(Collectors.toList());

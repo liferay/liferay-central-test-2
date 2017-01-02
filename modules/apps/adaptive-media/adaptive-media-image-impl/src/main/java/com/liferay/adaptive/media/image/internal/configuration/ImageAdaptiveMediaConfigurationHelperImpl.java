@@ -83,7 +83,7 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 			configurationEntries.stream().filter(
 				configurationEntry ->
 					!configurationEntry.getUUID().equals(uuid)).collect(
-						Collectors.toList());
+				Collectors.toList());
 
 		_updateConfiguration(companyId, updatedConfigurationEntries);
 	}

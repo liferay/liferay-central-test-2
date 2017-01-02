@@ -246,7 +246,7 @@ public class ImageAdaptiveMediaFileVersionResource {
 					return uriOptional.map((uri) ->
 						new ImageAdaptiveMediaRepr(
 							adaptiveMedia, uri, configurationEntry));
-			});
+				});
 
 		if (imageAdaptiveMediaReprOptional.isPresent()) {
 			return Stream.of(imageAdaptiveMediaReprOptional.get());

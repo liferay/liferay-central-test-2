@@ -114,11 +114,11 @@ public abstract class BaseOverridingRepositoryDefiner
 			"_repositoryDefiners");
 
 		_overridenRepositoryDefiner = repositoryDefiners.stream().filter(
-				(repositoryDefiner) ->
-					className.equals(repositoryDefiner.getClassName())).
-			findFirst().orElseThrow(
-				() -> new RepositoryException(
-					"No repository found with className " + className));
+			(repositoryDefiner) ->
+				className.equals(repositoryDefiner.getClassName())).findFirst().
+				orElseThrow(
+					() -> new RepositoryException(
+						"No repository found with className " + className));
 	}
 
 	protected void restoreOverridenRepositoryDefiner(String className) {

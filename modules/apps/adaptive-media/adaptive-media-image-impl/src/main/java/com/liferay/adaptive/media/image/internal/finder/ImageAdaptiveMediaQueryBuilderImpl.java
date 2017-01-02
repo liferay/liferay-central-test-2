@@ -18,6 +18,10 @@ import com.liferay.adaptive.media.AdaptiveMedia;
 import com.liferay.adaptive.media.AdaptiveMediaAttribute;
 import com.liferay.adaptive.media.finder.AdaptiveMediaQuery;
 import com.liferay.adaptive.media.image.finder.ImageAdaptiveMediaQueryBuilder;
+import com.liferay.adaptive.media.image.finder.ImageAdaptiveMediaQueryBuilder.ConfigurationStep;
+import com.liferay.adaptive.media.image.finder.ImageAdaptiveMediaQueryBuilder.FuzzySortStep;
+import com.liferay.adaptive.media.image.finder.ImageAdaptiveMediaQueryBuilder.InitialStep;
+import com.liferay.adaptive.media.image.finder.ImageAdaptiveMediaQueryBuilder.StrictSortStep;
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
@@ -33,11 +37,8 @@ import java.util.Optional;
  * @author Adolfo Pérez
  */
 public class ImageAdaptiveMediaQueryBuilderImpl
-	implements ImageAdaptiveMediaQueryBuilder,
-			   ImageAdaptiveMediaQueryBuilder.ConfigurationStep,
-			   ImageAdaptiveMediaQueryBuilder.FuzzySortStep,
-			   ImageAdaptiveMediaQueryBuilder.InitialStep,
-			   ImageAdaptiveMediaQueryBuilder.StrictSortStep {
+	implements ImageAdaptiveMediaQueryBuilder, ConfigurationStep, FuzzySortStep,
+			   InitialStep, StrictSortStep {
 
 	public static final
 		AdaptiveMediaQuery<FileVersion, ImageAdaptiveMediaProcessor> QUERY =
