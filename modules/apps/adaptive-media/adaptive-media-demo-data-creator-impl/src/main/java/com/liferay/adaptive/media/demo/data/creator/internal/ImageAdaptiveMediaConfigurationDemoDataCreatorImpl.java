@@ -17,12 +17,18 @@ package com.liferay.adaptive.media.demo.data.creator.internal;
 import com.liferay.adaptive.media.demo.data.creator.DemoImageAdaptiveMediaConfiguration;
 import com.liferay.adaptive.media.demo.data.creator.ImageAdaptiveMediaConfigurationDemoDataCreator;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
+import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
 
 import java.io.IOException;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Alejandro Hernández
@@ -36,6 +42,16 @@ public class ImageAdaptiveMediaConfigurationDemoDataCreatorImpl
 			long companyId)
 		throws IOException {
 
+		Collection<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
+			new ArrayList<>();
+
+		for (DemoImageAdaptiveMediaConfiguration demoConfiguration :
+				DemoImageAdaptiveMediaConfiguration.values()) {
+
+			configurationEntries.add(create(companyId, demoConfiguration));
+		}
+
+		return configurationEntries;
 	}
 
 	@Override
@@ -43,11 +59,40 @@ public class ImageAdaptiveMediaConfigurationDemoDataCreatorImpl
 			long companyId, DemoImageAdaptiveMediaConfiguration configuration)
 		throws IOException {
 
+		ImageAdaptiveMediaConfigurationEntry configurationEntry =
+			_configurationHelper.addImageAdaptiveMediaConfigurationEntry(
+				companyId, configuration.getName(), configuration.getId(),
+				configuration.getProperties());
+
+		_addConfigurationId(companyId, configurationEntry.getUUID());
+
+		return configurationEntry;
 	}
 
 	@Override
 	public void delete() throws IOException {
-
+		for (Long companyId : _configurationIds.keySet()) {
+			for (String id : _configurationIds.get(companyId)) {
+				_configurationHelper.deleteImageAdaptiveMediaConfigurationEntry(
+					companyId, id);
+				_configurationIds.get(companyId).remove(id);
+			}
+		}
 	}
+
+	@Reference(unbind = "-")
+	public void setConfigurationHelper(
+		ImageAdaptiveMediaConfigurationHelper configurationHelper) {
+
+		_configurationHelper = configurationHelper;
+	}
+
+	private void _addConfigurationId(long companyId, String uuid) {
+		_configurationIds.computeIfAbsent(companyId, k -> new ArrayList<>());
+		_configurationIds.get(companyId).add(uuid);
+	}
+
+	private ImageAdaptiveMediaConfigurationHelper _configurationHelper;
+	private final Map<Long, List<String>> _configurationIds = new HashMap<>();
 
 }
