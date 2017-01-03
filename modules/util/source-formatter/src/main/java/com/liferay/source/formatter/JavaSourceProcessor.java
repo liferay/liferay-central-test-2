@@ -268,7 +268,7 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 		}
 	}
 
-	protected void checkIndentationAndLineBreaks(
+	protected void checkLineBreaks(
 		String line, String previousLine, String fileName, int lineCount) {
 
 		String trimmedLine = StringUtil.trimLeading(line);
@@ -2680,7 +2680,7 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 						}
 					}
 					else {
-						checkIndentationAndLineBreaks(
+						checkLineBreaks(
 							line, previousLine, fileName, lineCount);
 
 						if (!trimmedLine.startsWith("//") &&
