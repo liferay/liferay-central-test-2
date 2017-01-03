@@ -162,33 +162,12 @@ describe(
 				);
 
 				it(
-					'should return empty value if the select start with an empty array value',
+					'shouldn\'t select a value when the options list changes',
 					function(done) {
 						selectField = createSelectField(
 							{
 								multiple: 'multiple',
 								value: []
-							}
-						);
-
-						selectField.set('options', [{label: 'a', value: 'a'}]);
-
-						assert.equal(
-							selectField.getValue(),
-							''
-						);
-
-						done();
-					}
-				);
-
-				it(
-					'should return empty value if the select start with an empty string value',
-					function(done) {
-						selectField = createSelectField(
-							{
-								multiple: 'multiple',
-								value: ''
 							}
 						);
 
@@ -300,7 +279,7 @@ describe(
 			'.clickItem()',
 			function() {
 				it(
-					'should click item and get it value',
+					'should click item and select its value',
 					function() {
 						selectField = createSelectField();
 
