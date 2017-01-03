@@ -28,7 +28,7 @@ import java.util.Optional;
 @ProviderType
 public interface ImageAdaptiveMediaConfigurationHelper {
 
-	public void addImageAdaptiveMediaConfigurationEntry(
+	public ImageAdaptiveMediaConfigurationEntry addImageAdaptiveMediaConfigurationEntry(
 			long companyId, String name, String uuid,
 			Map<String, String> properties)
 		throws IOException;
