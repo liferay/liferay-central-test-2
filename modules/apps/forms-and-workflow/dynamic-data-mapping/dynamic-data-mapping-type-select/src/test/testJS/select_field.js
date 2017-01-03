@@ -2,6 +2,20 @@
 
 var A = AUI();
 
+var createSelectField = function(config) {
+	return new Liferay.DDM.Field.Select(
+		A.merge(
+			{
+				context: {
+					name: 'selectField',
+					required: true
+				}
+			},
+			config || {}
+		)
+	).render(document.body);
+};
+
 describe(
 	'Liferay.DDM.Field.Select',
 	function() {
@@ -35,18 +49,75 @@ describe(
 			}
 		);
 
-		beforeEach(
-			function(done) {
-				selectField = new Liferay.DDM.Field.Select(
-					{
-						context: {
-							name: 'selectField',
-							required: true
-						}
-					}
-				).render(document.body);
+		describe(
+			'.showErrorMessage()',
+			function() {
+				it(
+					'should exists an error container if the select field has an error message',
+					function(done) {
+						selectField = createSelectField();
 
-				done();
+						selectField.set('errorMessage', 'error');
+
+						selectField.set('options', [{label: 'a', value: 'a'}]);
+
+						selectField.showErrorMessage();
+
+						var container = selectField.get('container');
+
+						assert.isNotNull(
+							container.one('.help-block'),
+							'The selectField has an error'
+						);
+
+						done();
+					}
+				);
+			}
+		);
+
+		describe(
+			'.setValue()',
+			function() {
+				it(
+					'should return empty value if set an empty array value',
+					function(done) {
+						selectField = createSelectField();
+
+						selectField.set('multiple', false);
+
+						selectField.set('options', [{label: 'a', value: 'a'}]);
+
+						selectField.setValue([]);
+
+						assert.equal(
+							selectField.getValue(),
+							''
+						);
+
+						done();
+					}
+				);
+
+				it(
+					'should return empty value if set an empty string value',
+					function(done) {
+						selectField = createSelectField();
+
+						selectField.set('multiple', false);
+
+						selectField.set('options', [{label: 'a', value: 'a'}]);
+
+						selectField.setValue('');
+
+						assert.equal(
+							selectField.getValue(),
+							''
+						);
+
+						done();
+					}
+				);
 			}
 		);
 
@@ -56,6 +127,8 @@ describe(
 				it(
 					'should return string value for single selectField',
 					function(done) {
+						selectField = createSelectField();
+
 						selectField.set('multiple', false);
 
 						selectField.set('options', [{label: 'a', value: 'a'}]);
@@ -63,6 +136,68 @@ describe(
 						selectField.setValue(['a']);
 
 						assert.equal(selectField.getValue(), 'a');
+
+						done();
+					}
+				);
+
+				it(
+					'should return string values for multiple selectField',
+					function(done) {
+						selectField = createSelectField();
+
+						selectField.set('multiple', true);
+
+						selectField.set('options', [{label: 'a', value: 'a'}, {label: 'b', value: 'b'}, {label: 'c', value: 'c'}]);
+
+						selectField.setValue(['a', 'c']);
+
+						assert.equal(
+							selectField.getValue(),
+							'a,c'
+						);
+
+						done();
+					}
+				);
+
+				it(
+					'should return empty value if the select start with an empty array value',
+					function(done) {
+						selectField = createSelectField(
+							{
+								multiple: 'multiple',
+								value: []
+							}
+						);
+
+						selectField.set('options', [{label: 'a', value: 'a'}]);
+
+						assert.equal(
+							selectField.getValue(),
+							''
+						);
+
+						done();
+					}
+				);
+
+				it(
+					'should return empty value if the select start with an empty string value',
+					function(done) {
+						selectField = createSelectField(
+							{
+								multiple: 'multiple',
+								value: ''
+							}
+						);
+
+						selectField.set('options', [{label: 'a', value: 'a'}]);
+
+						assert.equal(
+							selectField.getValue(),
+							''
+						);
 
 						done();
 					}
@@ -76,6 +211,8 @@ describe(
 				it(
 					'should add the focus class when opened',
 					function(done) {
+						selectField = createSelectField();
+
 						var container = selectField.get('container');
 
 						var divSelect = container.one('.form-builder-select-field');
@@ -98,6 +235,8 @@ describe(
 				it(
 					'should close the list after click in document',
 					function(done) {
+						selectField = createSelectField();
+
 						var container = selectField.get('container');
 
 						var divSelect = container.one('.form-builder-select-field');
@@ -117,6 +256,8 @@ describe(
 				it(
 					'should remove the focus class when closed',
 					function(done) {
+						selectField = createSelectField();
+
 						var container = selectField.get('container');
 
 						var divSelect = container.one('.form-builder-select-field');
@@ -141,6 +282,8 @@ describe(
 				it(
 					'should clean value of the select',
 					function() {
+						selectField = createSelectField();
+
 						selectField.set('options', [{label: 'a', value: 'a'}]);
 
 						selectField.setValue(['a']);
@@ -159,6 +302,8 @@ describe(
 				it(
 					'should click item and get it value',
 					function() {
+						selectField = createSelectField();
+
 						selectField.set('options', [{label: 'foo', value: 'foo'}, {label: 'bar', value: 'bar'}]);
 
 						var container = selectField.get('container');
