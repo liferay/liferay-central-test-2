@@ -189,11 +189,11 @@ public class ModuleApplicationContextExtender extends AbstractExtender {
 				new ModuleApplicationContextRegistrator(
 					_bundle, bundle, _serviceConfigurator));
 
-			List<ContextDependency> contextDependencies =
-				_processServiceReferences(_bundle);
-
 			ClassLoader classLoader = new BundleResolverClassLoader(
 				_bundle, bundle);
+
+			List<ContextDependency> contextDependencies =
+				_processServiceReferences(_bundle);
 
 			for (ContextDependency contextDependency : contextDependencies) {
 				ServiceDependency serviceDependency =
