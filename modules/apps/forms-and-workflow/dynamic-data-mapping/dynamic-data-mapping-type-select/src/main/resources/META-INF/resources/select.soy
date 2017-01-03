@@ -53,17 +53,16 @@
 				{/if}
 
 				{if not $multiple}
-					<a class="form-control select-field-trigger" {if $readOnly}disabled{/if} dir="{$dir}" href="javascript:;" id="{$name}" name="{$name}">
-
-						{let $selectedLabel}
+					<a class="form-control select-field-trigger" dir="{$dir}" href="javascript:;" id="{$name}" name="{$name}">
+						{if not $readOnly}
 							{if $value and $value.value}
-								{$value.label}
+								<span class="option-selected">{$value.label}</span>
 							{else}
-								{$strings.chooseAnOption}
+								<span class="option-selected option-selected-placeholder">{$strings.chooseAnOption}</span>
 							{/if}
-						{/let}
-
-						<span class="option-selected">{$selectedLabel}</span>
+						{else}
+							<span class="option-selected option-selected-placeholder">{$strings.chooseAnOption}</span>
+						{/if}
 					</a>
 				{else}
 					//TODO Multiple select
@@ -125,10 +124,18 @@
  * @param multiple
  * @param name
  * @param options
+ * @param readOnly
  * @param value
+ * @param strings
  */
 {template .hidden_select autoescape="deprecated-contextual"}
 	<select class="form-control hide" dir="{$dir}" id="{$name}" name="{$name}" {if $multiple}multiple size="{length($options)}"{/if}>
+		{if not $readOnly}
+			<option dir="{$dir}" disabled {if not $value}selected{/if} value="">
+				{$strings.chooseAnOption}
+			</option>
+		{/if}
+
 		{foreach $option in $options}
 			{let $selectedValue}
 				{if $value and $value.value}
