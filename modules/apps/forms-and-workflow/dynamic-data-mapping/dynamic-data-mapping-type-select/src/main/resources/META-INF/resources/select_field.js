@@ -183,6 +183,22 @@ AUI.add(
 						return instance;
 					},
 
+					setValue: function(value) {
+						var instance = this;
+
+						var inputNode = instance.getInputNode();
+
+						if (!Lang.isArray(value)) {
+							value = [value];
+						}
+
+						inputNode.all('option').each(
+							function(optionNode) {
+								instance._setSelectNodeOptions(optionNode, value);
+							}
+						);
+					},
+
 					showErrorMessage: function() {
 						var instance = this;
 
@@ -233,10 +249,6 @@ AUI.add(
 						}
 
 						return value;
-					},
-
-					_getIndexOfOption: function(value, optionValue) {
-						return value.indexOf(optionValue);
 					},
 
 					_getOptions: function(options) {
@@ -290,11 +302,53 @@ AUI.add(
 					_onClickItem: function(event) {
 						var instance = this;
 
-						var value = event.target.getAttribute('data-option-value');
+						var options = instance.get('options');
+
+						var index = event.target.getAttribute('data-option-index');
+
+						var option = options[index];
+
+						instance.setValue(option.value);
+
+						instance.set('value', option.value);
 
 						instance.set('value', [value]);
 
 						instance.render();
+					},
+
+					_selectDOMOption: function(optionNode, value) {
+						var selected = false;
+
+						if (Lang.isArray(value)) {
+							value = value[0];
+						}
+
+						if (value) {
+							if (optionNode.val()) {
+								selected = value.indexOf(optionNode.val()) > -1;
+							}
+
+							if (selected) {
+								optionNode.attr('selected', selected);
+							}
+							else {
+								optionNode.removeAttribute('selected');
+							}
+						}
+					},
+
+					_setSelectNodeOptions: function(optionNode, value) {
+						var instance = this;
+
+						if (instance.get('multiple')) {
+							for (var i = 0; i < value.length; i++) {
+								instance._selectDOMOption(optionNode, value[i]);
+							}
+						}
+						else {
+							instance._selectDOMOption(optionNode, value);
+						}
 					}
 				}
 			}
