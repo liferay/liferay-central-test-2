@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.settings.LocalizedValuesMap;
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.Function;
 import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.PrefsPropsUtil;
@@ -36,8 +37,11 @@ import com.liferay.portal.kernel.util.SubscriptionSender;
 import com.liferay.social.kernel.util.SocialInteractionsConfiguration;
 import com.liferay.social.kernel.util.SocialInteractionsConfigurationUtil;
 
+import java.io.Serializable;
+
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 import org.osgi.service.component.annotations.Component;
@@ -87,10 +91,8 @@ public class DefaultMentionsNotifier implements MentionsNotifier {
 		subscriptionSender.setCompanyId(user.getCompanyId());
 		subscriptionSender.setContextAttribute("[$CONTENT$]", content, false);
 		subscriptionSender.setContextAttributes(
-			"[$ASSET_ENTRY_NAME$]",
-			getAssetEntryName(className, serviceContext), "[$USER_ADDRESS$]",
-			messageUserEmailAddress, "[$USER_NAME$]", messageUserName,
-			"[$CONTENT_URL$]", contentURL);
+			"[$USER_ADDRESS$]", messageUserEmailAddress, "[$USER_NAME$]",
+			messageUserName, "[$CONTENT_URL$]", contentURL);
 		subscriptionSender.setCurrentUserId(userId);
 		subscriptionSender.setEntryTitle(title);
 		subscriptionSender.setEntryURL(contentURL);
@@ -119,21 +121,13 @@ public class DefaultMentionsNotifier implements MentionsNotifier {
 				mentionedUser.getEmailAddress(), mentionedUser.getFullName());
 		}
 
+		AssetEntryNameSerializableFunction assetEntryNameSerializableFunction =
+			new AssetEntryNameSerializableFunction(className);
+
+		subscriptionSender.setLocalizedContextAttribute(
+			"[$ASSET_ENTRY_NAME$]", assetEntryNameSerializableFunction);
+
 		subscriptionSender.flushNotificationsAsync();
-	}
-
-	protected String getAssetEntryName(
-		String className, ServiceContext serviceContext) {
-
-		AssetRendererFactory<?> assetRendererFactory =
-			AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(
-				className);
-
-		if (assetRendererFactory != null) {
-			return assetRendererFactory.getTypeName(serviceContext.getLocale());
-		}
-
-		return StringPool.BLANK;
 	}
 
 	protected String[] getMentionedUsersScreenNames(
@@ -192,5 +186,29 @@ public class DefaultMentionsNotifier implements MentionsNotifier {
 	private MentionsMatcherRegistry _mentionsMatcherRegistry;
 	private MentionsUserFinder _mentionsUserFinder;
 	private UserLocalService _userLocalService;
+
+	private static class AssetEntryNameSerializableFunction
+		implements Function<Locale, String>, Serializable {
+
+		public AssetEntryNameSerializableFunction(String className) {
+			_className = className;
+		}
+
+		@Override
+		public String apply(Locale locale) {
+			AssetRendererFactory<?> assetRendererFactory =
+				AssetRendererFactoryRegistryUtil.
+					getAssetRendererFactoryByClassName(_className);
+
+			if (assetRendererFactory != null) {
+				return assetRendererFactory.getTypeName(locale);
+			}
+
+			return StringPool.BLANK;
+		}
+
+		private final String _className;
+
+	}
 
 }

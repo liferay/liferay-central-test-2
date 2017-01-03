@@ -40,12 +40,14 @@ import com.liferay.portal.kernel.service.RoleLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserGroupRoleLocalService;
 import com.liferay.portal.kernel.service.UserLocalService;
+import com.liferay.portal.kernel.util.Function;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.PortletKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.SubscriptionSender;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -89,8 +91,6 @@ public class FlagsRequestMessageListener extends BaseMessageListener {
 		Layout layout = _layoutLocalService.getLayout(serviceContext.getPlid());
 
 		Group group = layout.getGroup();
-
-		String groupName = group.getDescriptiveName();
 
 		// Reporter user
 
@@ -162,7 +162,7 @@ public class FlagsRequestMessageListener extends BaseMessageListener {
 		for (User recipient : recipients) {
 			try {
 				notify(
-					reporterUser.getUserId(), company, groupName,
+					reporterUser.getUserId(), company, group,
 					reporterEmailAddress, reporterUserName,
 					reportedEmailAddress, reportedUserName, reportedURL,
 					flagsRequest.getClassPK(), flagsRequest.getContentTitle(),
@@ -223,7 +223,7 @@ public class FlagsRequestMessageListener extends BaseMessageListener {
 	}
 
 	protected void notify(
-			long reporterUserId, Company company, String groupName,
+			long reporterUserId, Company company, Group group,
 			String reporterEmailAddress, String reporterUserName,
 			String reportedEmailAddress, String reportedUserName,
 			String reportedUserURL, long contentId, String contentTitle,
@@ -245,8 +245,7 @@ public class FlagsRequestMessageListener extends BaseMessageListener {
 			"[$REPORTED_USER_ADDRESS$]", reportedEmailAddress,
 			"[$REPORTED_USER_NAME$]", reportedUserName, "[$REPORTED_USER_URL$]",
 			reportedUserURL, "[$REPORTER_USER_ADDRESS$]", reporterEmailAddress,
-			"[$REPORTER_USER_NAME$]", reporterUserName, "[$SITE_NAME$]",
-			groupName);
+			"[$REPORTER_USER_NAME$]", reporterUserName);
 		subscriptionSender.setContextAttribute(
 			"[$CONTENT_TITLE$]", contentTitle, false);
 		subscriptionSender.setContextAttribute(
@@ -258,6 +257,13 @@ public class FlagsRequestMessageListener extends BaseMessageListener {
 		subscriptionSender.setPortletId(PortletKeys.FLAGS);
 		subscriptionSender.setServiceContext(serviceContext);
 		subscriptionSender.setSubject(subject);
+
+		GroupDescriptiveNameSerializableFunction
+			groupDescriptiveNameSerializableFunction =
+				new GroupDescriptiveNameSerializableFunction(group);
+
+		subscriptionSender.setLocalizedContextAttribute(
+			"[$SITE_NAME$]", groupDescriptiveNameSerializableFunction);
 
 		subscriptionSender.addRuntimeSubscribers(toAddress, toName);
 
@@ -309,5 +315,31 @@ public class FlagsRequestMessageListener extends BaseMessageListener {
 	private RoleLocalService _roleLocalService;
 	private UserGroupRoleLocalService _userGroupRoleLocalService;
 	private UserLocalService _userLocalService;
+
+	private static class GroupDescriptiveNameSerializableFunction
+		implements Function<Locale, String>, Serializable {
+
+		public GroupDescriptiveNameSerializableFunction(Group group) {
+			_group = group;
+		}
+
+		@Override
+		public String apply(Locale locale) {
+			try {
+				return _group.getDescriptiveName(locale);
+			}
+			catch (PortalException pe) {
+				_log.error(
+					"Unable to get descriptive name for group " +
+						_group.getGroupId(),
+					pe);
+			}
+
+			return StringPool.BLANK;
+		}
+
+		private final Group _group;
+
+	}
 
 }
