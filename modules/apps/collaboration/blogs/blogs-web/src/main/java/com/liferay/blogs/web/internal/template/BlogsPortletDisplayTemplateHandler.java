@@ -25,7 +25,7 @@ import com.liferay.portal.kernel.portletdisplaytemplate.BasePortletDisplayTempla
 import com.liferay.portal.kernel.portletdisplaytemplate.PortletDisplayTemplateManager;
 import com.liferay.portal.kernel.template.TemplateHandler;
 import com.liferay.portal.kernel.template.TemplateVariableGroup;
-import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.util.List;
@@ -35,6 +35,7 @@ import java.util.Map;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Modified;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Juan Fernández
@@ -55,7 +56,7 @@ public class BlogsPortletDisplayTemplateHandler
 
 	@Override
 	public String getName(Locale locale) {
-		String portletTitle = PortalUtil.getPortletTitle(
+		String portletTitle = _portal.getPortletTitle(
 			BlogsPortletKeys.BLOGS, locale);
 
 		return portletTitle.concat(StringPool.SPACE).concat(
@@ -114,5 +115,8 @@ public class BlogsPortletDisplayTemplateHandler
 	}
 
 	private volatile BlogsConfiguration _blogsConfiguration;
+
+	@Reference
+	private Portal _portal;
 
 }

@@ -46,7 +46,7 @@ import com.liferay.portal.kernel.upload.UploadRequestSizeException;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.PrefsPropsUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
@@ -256,8 +256,8 @@ public class EditPageAttachmentsMVCActionCommand extends BaseMVCActionCommand {
 				e instanceof FileSizeException ||
 				e instanceof UploadRequestSizeException) {
 
-				HttpServletResponse response =
-					PortalUtil.getHttpServletResponse(actionResponse);
+				HttpServletResponse response = _portal.getHttpServletResponse(
+					actionResponse);
 
 				response.setContentType(ContentTypes.TEXT_HTML);
 				response.setStatus(HttpServletResponse.SC_OK);
@@ -362,6 +362,9 @@ public class EditPageAttachmentsMVCActionCommand extends BaseMVCActionCommand {
 			}
 		}
 	}
+
+	@Reference
+	private Portal _portal;
 
 	private WikiAttachmentsHelper _wikiAttachmentsHelper;
 

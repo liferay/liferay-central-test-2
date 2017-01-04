@@ -65,7 +65,7 @@ import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -147,7 +147,7 @@ public class EditEntryMVCActionCommand extends BaseMVCActionCommand {
 
 			SessionMessages.add(
 				actionRequest,
-				PortalUtil.getPortletId(actionRequest) +
+				_portal.getPortletId(actionRequest) +
 					SessionMessages.KEY_SUFFIX_HIDE_DEFAULT_SUCCESS_MESSAGE);
 		}
 	}
@@ -224,7 +224,7 @@ public class EditEntryMVCActionCommand extends BaseMVCActionCommand {
 
 			if (Validator.isNotNull(oldUrlTitle)) {
 				String oldRedirectParam =
-					PortalUtil.getPortletNamespace(portletId) + "redirect";
+					_portal.getPortletNamespace(portletId) + "redirect";
 
 				String oldRedirect = HttpUtil.getParameter(
 					redirect, oldRedirectParam, false);
@@ -316,11 +316,11 @@ public class EditEntryMVCActionCommand extends BaseMVCActionCommand {
 					sendRedirect(actionRequest, actionResponse, redirect);
 				}
 				else {
-					redirect = PortalUtil.escapeRedirect(redirect);
+					redirect = _portal.escapeRedirect(redirect);
 
 					if (Validator.isNotNull(redirect)) {
 						if (cmd.equals(Constants.ADD) && (entry != null)) {
-							String namespace = PortalUtil.getPortletNamespace(
+							String namespace = _portal.getPortletNamespace(
 								portletId);
 
 							redirect = HttpUtil.addParameter(
@@ -692,6 +692,10 @@ public class EditEntryMVCActionCommand extends BaseMVCActionCommand {
 		_blogsEntryAttachmentContentUpdater;
 	private BlogsEntryLocalService _blogsEntryLocalService;
 	private BlogsEntryService _blogsEntryService;
+
+	@Reference
+	private Portal _portal;
+
 	private TrashEntryService _trashEntryService;
 
 	private class UpdateEntryCallable implements Callable<Object[]> {
