@@ -49,20 +49,21 @@ public class LayoutCommonTag extends IncludeTag {
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		if (!themeDisplay.isFacebook() && !themeDisplay.isStateExclusive() &&
-			!themeDisplay.isStatePopUp() && !themeDisplay.isWidget()) {
+		if (!themeDisplay.isStatePopUp()) {
+			if (!themeDisplay.isFacebook() &&
+				!themeDisplay.isStateExclusive() && !themeDisplay.isWidget()) {
 
-			_includeStaticPortlets = true;
+				_includeStaticPortlets = true;
+			}
+
+			if (_WEB_SERVER_DISPLAY_NODE) {
+				_includeWebServerDisplayNode = true;
+			}
 		}
 
 		request.setAttribute(
 			"liferay-ui:layout-common:includeStaticPortlets",
 			_includeStaticPortlets);
-
-		if (_WEB_SERVER_DISPLAY_NODE && !themeDisplay.isStatePopUp()) {
-			_includeWebServerDisplayNode = true;
-		}
-
 		request.setAttribute(
 			"liferay-ui:layout-common:includeWebServerDisplayNode",
 			_includeWebServerDisplayNode);
