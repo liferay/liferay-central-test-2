@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.portlet.PortletPreferencesFactory;
 import com.liferay.portal.kernel.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.test.ReflectionTestUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.Function;
 import com.liferay.portal.kernel.util.Http;
@@ -167,6 +168,9 @@ public class TrackbackMVCActionCommandTest extends PowerMockito {
 	protected void addTrackback() throws Exception {
 		TrackbackMVCActionCommand trackbackMVCActionCommand =
 			new TrackbackMVCActionCommand(_trackback);
+
+		ReflectionTestUtil.setFieldValue(
+			trackbackMVCActionCommand, "_portal", PortalUtil.getPortal());
 
 		trackbackMVCActionCommand.addTrackback(_actionRequest, _actionResponse);
 	}
