@@ -19,7 +19,7 @@ import com.liferay.dynamic.data.mapping.annotations.DDMFormField;
 /**
  * @author Rafael Praxedes
  */
-public interface DDMDataProviderParameterizedSettings {
+public interface DDMDataProviderParameterSettings {
 
 	@DDMFormField(label = "%input-parameters")
 	public DDMDataProviderInputParametersSettings[] inputParameters();
