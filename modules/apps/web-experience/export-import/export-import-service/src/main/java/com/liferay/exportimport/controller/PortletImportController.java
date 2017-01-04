@@ -91,7 +91,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.MapUtil;
-import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.PortletKeys;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -1433,7 +1433,7 @@ public class PortletImportController implements ImportController {
 
 			for (Locale sourceAvailableLocale : sourceAvailableLocales) {
 				if (!LanguageUtil.isAvailableLocale(
-						PortalUtil.getSiteGroupId(groupId),
+						_portal.getSiteGroupId(groupId),
 						sourceAvailableLocale)) {
 
 					LocaleException le = new LocaleException(
@@ -1444,7 +1444,7 @@ public class PortletImportController implements ImportController {
 					le.setSourceAvailableLocales(sourceAvailableLocales);
 					le.setTargetAvailableLocales(
 						LanguageUtil.getAvailableLocales(
-							PortalUtil.getSiteGroupId(groupId)));
+							_portal.getSiteGroupId(groupId)));
 
 					throw le;
 				}
@@ -1466,6 +1466,9 @@ public class PortletImportController implements ImportController {
 	private LayoutLocalService _layoutLocalService;
 	private final PermissionImporter _permissionImporter =
 		PermissionImporter.getInstance();
+
+	@Reference
+	private Portal _portal;
 
 	@Reference
 	private PortletDataHandlerProvider _portletDataHandlerProvider;

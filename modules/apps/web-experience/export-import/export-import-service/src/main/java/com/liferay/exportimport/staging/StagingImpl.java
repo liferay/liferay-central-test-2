@@ -109,8 +109,8 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
-import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -304,8 +304,8 @@ public class StagingImpl implements Staging {
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		long scopeGroupId = PortalUtil.getScopeGroupId(
-			PortalUtil.getHttpServletRequest(portletRequest),
+		long scopeGroupId = _portal.getScopeGroupId(
+			_portal.getHttpServletRequest(portletRequest),
 			portlet.getPortletId());
 		long plid = ParamUtil.getLong(portletRequest, "plid");
 
@@ -506,7 +506,7 @@ public class StagingImpl implements Staging {
 	public void deleteRecentLayoutRevisionId(
 		HttpServletRequest request, long layoutSetBranchId, long plid) {
 
-		long userId = PortalUtil.getUserId(request);
+		long userId = _portal.getUserId(request);
 
 		deleteRecentLayoutRevisionId(userId, layoutSetBranchId, plid);
 	}
@@ -577,7 +577,7 @@ public class StagingImpl implements Staging {
 				String referrerClassName = entry.getValue();
 
 				if (referrerClassName.equals(Portlet.class.getName())) {
-					referrerDisplayName = PortalUtil.getPortletTitle(
+					referrerDisplayName = _portal.getPortletTitle(
 						referrerDisplayName, locale);
 				}
 
@@ -1001,7 +1001,7 @@ public class StagingImpl implements Staging {
 			HttpServletRequest request, long layoutSetBranchId, long plid)
 		throws PortalException {
 
-		long userId = PortalUtil.getUserId(request);
+		long userId = _portal.getUserId(request);
 
 		return getRecentLayoutRevisionId(userId, layoutSetBranchId, plid);
 	}
@@ -1021,7 +1021,7 @@ public class StagingImpl implements Staging {
 
 		RecentLayoutSetBranch recentLayoutSetBranch =
 			_recentLayoutSetBranchLocalService.fetchRecentLayoutSetBranch(
-				PortalUtil.getUserId(request), layoutSetId);
+				_portal.getUserId(request), layoutSetId);
 
 		if (recentLayoutSetBranch != null) {
 			return recentLayoutSetBranch.getLayoutSetBranchId();
@@ -1704,8 +1704,8 @@ public class StagingImpl implements Staging {
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		long scopeGroupId = PortalUtil.getScopeGroupId(
-			PortalUtil.getHttpServletRequest(portletRequest),
+		long scopeGroupId = _portal.getScopeGroupId(
+			_portal.getHttpServletRequest(portletRequest),
 			portlet.getPortletId());
 
 		long plid = ParamUtil.getLong(portletRequest, "plid");
@@ -2039,7 +2039,7 @@ public class StagingImpl implements Staging {
 		throws PortalException {
 
 		setRecentLayoutBranchId(
-			PortalUtil.getUserId(request), layoutSetBranchId, plid,
+			_portal.getUserId(request), layoutSetBranchId, plid,
 			layoutBranchId);
 	}
 
@@ -2059,7 +2059,7 @@ public class StagingImpl implements Staging {
 		throws PortalException {
 
 		setRecentLayoutRevisionId(
-			PortalUtil.getUserId(request), layoutSetBranchId, plid,
+			_portal.getUserId(request), layoutSetBranchId, plid,
 			layoutRevisionId);
 	}
 
@@ -2079,7 +2079,7 @@ public class StagingImpl implements Staging {
 		throws PortalException {
 
 		setRecentLayoutSetBranchId(
-			PortalUtil.getUserId(request), layoutSetId, layoutSetBranchId);
+			_portal.getUserId(request), layoutSetId, layoutSetBranchId);
 	}
 
 	@Override
@@ -3079,6 +3079,10 @@ public class StagingImpl implements Staging {
 	private LayoutService _layoutService;
 	private LayoutSetBranchLocalService _layoutSetBranchLocalService;
 	private LockManager _lockManager;
+
+	@Reference
+	private Portal _portal;
+
 	private RecentLayoutBranchLocalService _recentLayoutBranchLocalService;
 	private RecentLayoutRevisionLocalService _recentLayoutRevisionLocalService;
 	private RecentLayoutSetBranchLocalService

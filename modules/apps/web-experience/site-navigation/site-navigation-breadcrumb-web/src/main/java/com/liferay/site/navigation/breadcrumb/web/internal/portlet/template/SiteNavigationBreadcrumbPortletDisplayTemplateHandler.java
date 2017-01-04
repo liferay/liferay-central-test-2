@@ -21,7 +21,7 @@ import com.liferay.portal.kernel.servlet.taglib.ui.BreadcrumbEntry;
 import com.liferay.portal.kernel.servlet.taglib.ui.BreadcrumbUtil;
 import com.liferay.portal.kernel.template.TemplateHandler;
 import com.liferay.portal.kernel.template.TemplateVariableGroup;
-import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portlet.display.template.PortletDisplayTemplateConstants;
@@ -39,6 +39,7 @@ import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.ConfigurationPolicy;
 import org.osgi.service.component.annotations.Modified;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author José Manuel Navarro
@@ -77,7 +78,7 @@ public class SiteNavigationBreadcrumbPortletDisplayTemplateHandler
 		ResourceBundle resourceBundle = ResourceBundleUtil.getBundle(
 			"content.Language", locale, getClass());
 
-		String portletTitle = PortalUtil.getPortletTitle(
+		String portletTitle = _portal.getPortletTitle(
 			SiteNavigationBreadcrumbPortletKeys.SITE_NAVIGATION_BREADCRUMB,
 			resourceBundle);
 
@@ -137,6 +138,9 @@ public class SiteNavigationBreadcrumbPortletDisplayTemplateHandler
 		return SiteNavigationBreadcrumbConfigurationValues.
 			DISPLAY_TEMPLATES_CONFIG;
 	}
+
+	@Reference
+	private Portal _portal;
 
 	private volatile SiteNavigationBreadcrumbWebTemplateConfiguration
 		_siteNavigationBreadcrumbWebTemplateConfiguration;
