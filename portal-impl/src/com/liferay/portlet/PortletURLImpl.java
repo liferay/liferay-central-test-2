@@ -129,6 +129,10 @@ public class PortletURLImpl
 
 	@Override
 	public void addParameterIncludedInPath(String name) {
+		if (_parametersIncludedInPath.isEmpty()) {
+			_parametersIncludedInPath = new LinkedHashSet<>();
+		}
+
 		_parametersIncludedInPath.add(name);
 	}
 
@@ -746,7 +750,7 @@ public class PortletURLImpl
 		_portletRequest = portletRequest;
 		_plid = plid;
 		_lifecycle = lifecycle;
-		_parametersIncludedInPath = new LinkedHashSet<>();
+		_parametersIncludedInPath = Collections.emptySet();
 		_params = new LinkedHashMap<>();
 		_removePublicRenderParameters = new LinkedHashMap<>();
 		_secure = PortalUtil.isSecure(request);
@@ -1372,7 +1376,7 @@ public class PortletURLImpl
 	private String _layoutFriendlyURL;
 	private String _lifecycle;
 	private String _namespace;
-	private final Set<String> _parametersIncludedInPath;
+	private Set<String> _parametersIncludedInPath;
 	private Map<String, String[]> _params;
 	private long _plid;
 	private Portlet _portlet;
