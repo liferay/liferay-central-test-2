@@ -16,6 +16,9 @@ package com.liferay.journal.web.internal.portlet.action;
 
 import com.liferay.journal.constants.JournalPortletKeys;
 import com.liferay.journal.web.util.ExportArticleUtil;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCResourceCommand;
@@ -92,6 +95,13 @@ public class ExportArticleMVCResourceCommand extends BaseMVCResourceCommand {
 				_exportArticleUtil.sendFile(
 					targetExtension, resourceRequest, resourceResponse);
 			}
+			else {
+				if (_log.isDebugEnabled()) {
+					_log.debug("Extension not allowed: " + targetExtension);
+				}
+
+				throw new PortalException("Extension not allowed");
+			}
 		}
 		catch (Exception e) {
 			PortalUtil.sendError(
@@ -111,6 +121,9 @@ public class ExportArticleMVCResourceCommand extends BaseMVCResourceCommand {
 
 		_layoutLocalService = layoutLocalService;
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		ExportArticleMVCResourceCommand.class);
 
 	private ExportArticleUtil _exportArticleUtil;
 	private LayoutLocalService _layoutLocalService;
