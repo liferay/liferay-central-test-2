@@ -42,7 +42,7 @@ public class RecurrenceTestUtil {
 	public static Recurrence getDailyRecurrence(
 		int count, TimeZone timeZone, java.util.Calendar untilJCalendar) {
 
-		return getRecurrence(Frequency.DAILY, count, timeZone, untilJCalendar);
+		return getRecurrence(count, Frequency.DAILY, timeZone, untilJCalendar);
 	}
 
 	public static Recurrence getDailyRecurrence(
@@ -62,16 +62,16 @@ public class RecurrenceTestUtil {
 	}
 
 	public static Recurrence getRecurrence(
-		Frequency frequency, int count, TimeZone timeZone,
+		int count, Frequency frequency, TimeZone timeZone,
 		java.util.Calendar untilJCalendar) {
 
 		Recurrence recurrence = new Recurrence();
 
-		recurrence.setFrequency(frequency);
 		recurrence.setCount(count);
+		recurrence.setFrequency(frequency);
 		recurrence.setPositionalWeekdays(new ArrayList<PositionalWeekday>());
-		recurrence.setUntilJCalendar(untilJCalendar);
 		recurrence.setTimeZone(timeZone);
+		recurrence.setUntilJCalendar(untilJCalendar);
 
 		return recurrence;
 	}
