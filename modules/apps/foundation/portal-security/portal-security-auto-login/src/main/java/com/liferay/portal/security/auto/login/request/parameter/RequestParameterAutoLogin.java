@@ -147,6 +147,11 @@ public class RequestParameterAutoLogin extends BaseAutoLogin {
 	}
 
 	@Reference(unbind = "-")
+	protected void setPortal(Portal portal) {
+		_portal = portal;
+	}
+
+	@Reference(unbind = "-")
 	protected void setUserLocalService(UserLocalService userLocalService) {
 		_userLocalService = userLocalService;
 	}
@@ -181,10 +186,7 @@ public class RequestParameterAutoLogin extends BaseAutoLogin {
 		RequestParameterAutoLogin.class);
 
 	private ConfigurationProvider _configurationProvider;
-
-	@Reference
 	private Portal _portal;
-
 	private UserLocalService _userLocalService;
 
 }

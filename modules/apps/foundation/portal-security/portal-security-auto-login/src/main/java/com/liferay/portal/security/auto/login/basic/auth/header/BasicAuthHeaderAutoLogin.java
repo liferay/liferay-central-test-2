@@ -79,7 +79,7 @@ public class BasicAuthHeaderAutoLogin extends BaseAutoLogin {
 			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
-		long companyId = portal.getCompanyId(request);
+		long companyId = _portal.getCompanyId(request);
 
 		if (!isEnabled(companyId)) {
 			return null;
@@ -139,8 +139,10 @@ public class BasicAuthHeaderAutoLogin extends BaseAutoLogin {
 		_configurationProvider = configurationProvider;
 	}
 
-	@Reference
-	protected Portal portal;
+	@Reference(unbind = "-")
+	protected void setPortal(Portal portal) {
+		_portal = portal;
+	}
 
 	private BasicAuthHeaderAutoLoginConfiguration
 		_getBasicAuthHeaderAutoLoginConfiguration(long companyId) {
@@ -167,5 +169,6 @@ public class BasicAuthHeaderAutoLogin extends BaseAutoLogin {
 		BasicAuthHeaderAutoLogin.class);
 
 	private ConfigurationProvider _configurationProvider;
+	private Portal _portal;
 
 }
