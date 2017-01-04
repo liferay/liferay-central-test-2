@@ -27,7 +27,7 @@ import com.liferay.portal.kernel.module.framework.ModuleServiceLifecycle;
 import com.liferay.portal.kernel.service.GroupLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserLocalService;
-import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.portal.kernel.util.Portal;
 
 import java.util.Map;
 
@@ -69,7 +69,7 @@ public class AddDefaultDDLStructuresPortalInstanceLifecycleListener
 
 		_defaultDDMStructureHelper.addDDMStructures(
 			defaultUserId, group.getGroupId(),
-			PortalUtil.getClassNameId(DDLRecordSet.class),
+			_portal.getClassNameId(DDLRecordSet.class),
 			AddDefaultDDLStructuresPortalInstanceLifecycleListener.class.
 				getClassLoader(),
 			"com/liferay/dynamic/data/lists/internal/events/dependencies" +
@@ -114,6 +114,10 @@ public class AddDefaultDDLStructuresPortalInstanceLifecycleListener
 	private volatile DDLServiceConfiguration _ddlServiceConfiguration;
 	private DefaultDDMStructureHelper _defaultDDMStructureHelper;
 	private GroupLocalService _groupLocalService;
+
+	@Reference
+	private Portal _portal;
+
 	private UserLocalService _userLocalService;
 
 }
