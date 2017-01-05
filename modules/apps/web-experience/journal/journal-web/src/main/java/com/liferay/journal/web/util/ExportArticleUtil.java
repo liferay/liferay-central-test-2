@@ -145,7 +145,7 @@ public class ExportArticleUtil {
 		String fileName = title.concat(StringPool.PERIOD).concat(
 			sourceExtension);
 
-		String contentType = MimeTypesUtil.getContentType(fileName);
+		String contentType = ContentTypes.TEXT_HTML;
 
 		String id = DLUtil.getTempFileId(
 			articleDisplay.getId(), String.valueOf(articleDisplay.getVersion()),
@@ -156,6 +156,8 @@ public class ExportArticleUtil {
 
 		if (convertedFile != null) {
 			fileName = title.concat(StringPool.PERIOD).concat(targetExtension);
+
+			contentType = MimeTypesUtil.getContentType(fileName);
 
 			is = new FileInputStream(convertedFile);
 		}
