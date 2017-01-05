@@ -837,7 +837,6 @@ public class JenkinsResultsParserUtil {
 						"Authorization",
 						"token " +
 							buildProperties.getProperty("github.access.token"));
-
 					httpURLConnection.setRequestProperty(
 						"Content-Type", "application/json");
 				}
