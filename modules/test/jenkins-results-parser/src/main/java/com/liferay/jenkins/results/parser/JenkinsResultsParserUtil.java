@@ -625,7 +625,7 @@ public class JenkinsResultsParserUtil {
 			properties = getBuildProperties();
 		}
 		catch (IOException ioe) {
-			throw new RuntimeException("Unable to get build properties.", ioe);
+			throw new RuntimeException("Unable to get build properties", ioe);
 		}
 
 		for (int i = 1; properties.containsKey(_getRedactTokenKey(i)); i++) {
