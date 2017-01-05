@@ -26,6 +26,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -88,7 +89,8 @@ public class ImageAdaptiveMediaConfigurationDemoDataCreatorImpl
 	}
 
 	private void _addConfigurationId(long companyId, String uuid) {
-		_configurationIds.computeIfAbsent(companyId, k -> new ArrayList<>());
+		_configurationIds.computeIfAbsent(companyId,
+			k -> new CopyOnWriteArrayList<>());
 		_configurationIds.get(companyId).add(uuid);
 	}
 
