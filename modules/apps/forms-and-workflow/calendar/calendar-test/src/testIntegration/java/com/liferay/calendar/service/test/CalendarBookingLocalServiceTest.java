@@ -28,6 +28,7 @@ import com.liferay.calendar.recurrence.RecurrenceSerializer;
 import com.liferay.calendar.service.CalendarBookingLocalService;
 import com.liferay.calendar.service.CalendarBookingLocalServiceUtil;
 import com.liferay.calendar.service.CalendarLocalServiceUtil;
+import com.liferay.calendar.test.util.CalendarBookingTestUtil;
 import com.liferay.calendar.util.CalendarResourceUtil;
 import com.liferay.calendar.workflow.CalendarBookingWorkflowConstants;
 import com.liferay.portal.kernel.model.User;
@@ -145,7 +146,7 @@ public class CalendarBookingLocalServiceTest {
 		serviceContext.setLanguageId("fr_FR");
 
 		CalendarBooking calendarBooking =
-			CalendarBookingLocalServiceUtil.addCalendarBooking(
+			CalendarBookingTestUtil.addCalendarBooking(
 				_user.getUserId(), calendar.getCalendarId(), new long[0],
 				CalendarBookingConstants.PARENT_CALENDAR_BOOKING_ID_DEFAULT,
 				RandomTestUtil.randomLocaleStringMap(),
@@ -180,7 +181,7 @@ public class CalendarBookingLocalServiceTest {
 		recurrence.setPositionalWeekdays(new ArrayList<PositionalWeekday>());
 
 		CalendarBooking calendarBooking =
-			CalendarBookingLocalServiceUtil.addCalendarBooking(
+			CalendarBookingTestUtil.addCalendarBooking(
 				_user.getUserId(), calendar.getCalendarId(), new long[0],
 				CalendarBookingConstants.PARENT_CALENDAR_BOOKING_ID_DEFAULT,
 				RandomTestUtil.randomLocaleStringMap(),
@@ -234,7 +235,7 @@ public class CalendarBookingLocalServiceTest {
 		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_SAVE_DRAFT);
 
 		CalendarBooking calendarBooking =
-			CalendarBookingLocalServiceUtil.addCalendarBooking(
+			CalendarBookingTestUtil.addCalendarBooking(
 				_user.getUserId(), calendar.getCalendarId(),
 				new long[] {invitedCalendar.getCalendarId()},
 				CalendarBookingConstants.PARENT_CALENDAR_BOOKING_ID_DEFAULT,
@@ -276,7 +277,7 @@ public class CalendarBookingLocalServiceTest {
 		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_PUBLISH);
 
 		CalendarBooking calendarBooking =
-			CalendarBookingLocalServiceUtil.addCalendarBooking(
+			CalendarBookingTestUtil.addCalendarBooking(
 				_user.getUserId(), calendar.getCalendarId(),
 				new long[] {invitedCalendar.getCalendarId()},
 				CalendarBookingConstants.PARENT_CALENDAR_BOOKING_ID_DEFAULT,
@@ -315,7 +316,7 @@ public class CalendarBookingLocalServiceTest {
 		long startTime = System.currentTimeMillis();
 
 		CalendarBooking calendarBooking =
-			CalendarBookingLocalServiceUtil.addCalendarBooking(
+			CalendarBookingTestUtil.addCalendarBooking(
 				_user.getUserId(), calendar.getCalendarId(),
 				new long[] {invitedCalendar.getCalendarId()},
 				CalendarBookingConstants.PARENT_CALENDAR_BOOKING_ID_DEFAULT,
@@ -355,7 +356,7 @@ public class CalendarBookingLocalServiceTest {
 		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_PUBLISH);
 
 		CalendarBooking calendarBooking =
-			CalendarBookingLocalServiceUtil.addCalendarBooking(
+			CalendarBookingTestUtil.addCalendarBooking(
 				_user.getUserId(), calendar.getCalendarId(), new long[0],
 				CalendarBookingConstants.PARENT_CALENDAR_BOOKING_ID_DEFAULT,
 				RandomTestUtil.randomLocaleStringMap(),
@@ -386,7 +387,7 @@ public class CalendarBookingLocalServiceTest {
 		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_SAVE_DRAFT);
 
 		CalendarBooking calendarBooking =
-			CalendarBookingLocalServiceUtil.addCalendarBooking(
+			CalendarBookingTestUtil.addCalendarBooking(
 				_user.getUserId(), calendar.getCalendarId(), new long[0],
 				CalendarBookingConstants.PARENT_CALENDAR_BOOKING_ID_DEFAULT,
 				RandomTestUtil.randomLocaleStringMap(),
@@ -438,7 +439,7 @@ public class CalendarBookingLocalServiceTest {
 		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_SAVE_DRAFT);
 
 		CalendarBooking calendarBooking =
-			CalendarBookingLocalServiceUtil.addCalendarBooking(
+			CalendarBookingTestUtil.addCalendarBooking(
 				_user.getUserId(), calendar.getCalendarId(),
 				new long[] {invitedCalendar.getCalendarId()},
 				CalendarBookingConstants.PARENT_CALENDAR_BOOKING_ID_DEFAULT,
@@ -495,7 +496,7 @@ public class CalendarBookingLocalServiceTest {
 		long startTime = System.currentTimeMillis();
 
 		CalendarBooking calendarBooking =
-			CalendarBookingLocalServiceUtil.addCalendarBooking(
+			CalendarBookingTestUtil.addCalendarBooking(
 				_user.getUserId(), calendar.getCalendarId(),
 				new long[] {invitedCalendar.getCalendarId()},
 				CalendarBookingConstants.PARENT_CALENDAR_BOOKING_ID_DEFAULT,
@@ -543,7 +544,7 @@ public class CalendarBookingLocalServiceTest {
 		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_SAVE_DRAFT);
 
 		CalendarBooking calendarBooking =
-			CalendarBookingLocalServiceUtil.addCalendarBooking(
+			CalendarBookingTestUtil.addCalendarBooking(
 				_user.getUserId(), calendar.getCalendarId(), new long[0],
 				CalendarBookingConstants.PARENT_CALENDAR_BOOKING_ID_DEFAULT,
 				RandomTestUtil.randomLocaleStringMap(),
@@ -574,7 +575,7 @@ public class CalendarBookingLocalServiceTest {
 		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_SAVE_DRAFT);
 
 		CalendarBooking calendarBooking =
-			CalendarBookingLocalServiceUtil.addCalendarBooking(
+			CalendarBookingTestUtil.addCalendarBooking(
 				_user.getUserId(), calendar.getCalendarId(), new long[0],
 				CalendarBookingConstants.PARENT_CALENDAR_BOOKING_ID_DEFAULT,
 				RandomTestUtil.randomLocaleStringMap(),
@@ -616,7 +617,7 @@ public class CalendarBookingLocalServiceTest {
 		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_PUBLISH);
 
 		CalendarBooking calendarBooking =
-			CalendarBookingLocalServiceUtil.addCalendarBooking(
+			CalendarBookingTestUtil.addCalendarBooking(
 				_user.getUserId(), calendar.getCalendarId(), new long[0],
 				CalendarBookingConstants.PARENT_CALENDAR_BOOKING_ID_DEFAULT,
 				RandomTestUtil.randomLocaleStringMap(),
@@ -667,7 +668,7 @@ public class CalendarBookingLocalServiceTest {
 		recurrence.setPositionalWeekdays(
 			Collections.<PositionalWeekday>emptyList());
 
-		CalendarBookingLocalServiceUtil.addCalendarBooking(
+		CalendarBookingTestUtil.addCalendarBooking(
 			_user.getUserId(), calendar.getCalendarId(), new long[0],
 			CalendarBookingConstants.PARENT_CALENDAR_BOOKING_ID_DEFAULT,
 			RandomTestUtil.randomLocaleStringMap(),
@@ -703,7 +704,7 @@ public class CalendarBookingLocalServiceTest {
 		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_PUBLISH);
 
 		CalendarBooking calendarBooking =
-			CalendarBookingLocalServiceUtil.addCalendarBooking(
+			CalendarBookingTestUtil.addCalendarBooking(
 				_user.getUserId(), calendar.getCalendarId(),
 				new long[] {invitedCalendar.getCalendarId()},
 				CalendarBookingConstants.PARENT_CALENDAR_BOOKING_ID_DEFAULT,
@@ -790,7 +791,7 @@ public class CalendarBookingLocalServiceTest {
 		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_PUBLISH);
 
 		CalendarBooking calendarBooking =
-			CalendarBookingLocalServiceUtil.addCalendarBooking(
+			CalendarBookingTestUtil.addCalendarBooking(
 				_user.getUserId(), calendar.getCalendarId(),
 				new long[] {invitedCalendar.getCalendarId()},
 				CalendarBookingConstants.PARENT_CALENDAR_BOOKING_ID_DEFAULT,
@@ -873,7 +874,7 @@ public class CalendarBookingLocalServiceTest {
 		long startTime = System.currentTimeMillis();
 
 		CalendarBooking calendarBooking =
-			CalendarBookingLocalServiceUtil.addCalendarBooking(
+			CalendarBookingTestUtil.addCalendarBooking(
 				_user.getUserId(), calendar.getCalendarId(), new long[0],
 				CalendarBookingConstants.PARENT_CALENDAR_BOOKING_ID_DEFAULT,
 				RandomTestUtil.randomLocaleStringMap(), oldDescriptionMap,
@@ -935,7 +936,7 @@ public class CalendarBookingLocalServiceTest {
 		long startTime = System.currentTimeMillis();
 
 		CalendarBooking calendarBooking =
-			CalendarBookingLocalServiceUtil.addCalendarBooking(
+			CalendarBookingTestUtil.addCalendarBooking(
 				_user.getUserId(), calendar.getCalendarId(), new long[0],
 				CalendarBookingConstants.PARENT_CALENDAR_BOOKING_ID_DEFAULT,
 				oldTitleMap, RandomTestUtil.randomLocaleStringMap(),
@@ -998,7 +999,7 @@ public class CalendarBookingLocalServiceTest {
 		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_PUBLISH);
 
 		CalendarBooking calendarBooking =
-			CalendarBookingLocalServiceUtil.addCalendarBooking(
+			CalendarBookingTestUtil.addCalendarBooking(
 				_user.getUserId(), calendar.getCalendarId(),
 				new long[] {invitedCalendar.getCalendarId()},
 				CalendarBookingConstants.PARENT_CALENDAR_BOOKING_ID_DEFAULT,
