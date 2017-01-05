@@ -41,7 +41,7 @@ public class TopLevelBuild extends BaseBuild {
 		}
 		catch (IOException ioe) {
 			throw new RuntimeException(
-				"Unable to archive jenkins report.", ioe);
+				"Unable to archive Jenkins report", ioe);
 		}
 	}
 
@@ -72,7 +72,7 @@ public class TopLevelBuild extends BaseBuild {
 				JenkinsResultsParserUtil.getLocalURL(getJenkinsReportURL()));
 		}
 		catch (IOException ioe) {
-			throw new RuntimeException("Unable to get Jenkins Report.", ioe);
+			throw new RuntimeException("Unable to get Jenkins report", ioe);
 		}
 	}
 

@@ -1179,7 +1179,7 @@ public abstract class BaseBuild implements Build {
 			return repositoryType;
 		}
 		catch (IOException ioe) {
-			throw new RuntimeException("Unable to get build properties.");
+			throw new RuntimeException("Unable to get build properties");
 		}
 	}
 
