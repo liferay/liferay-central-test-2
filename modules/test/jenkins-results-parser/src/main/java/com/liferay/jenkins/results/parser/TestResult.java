@@ -188,7 +188,7 @@ public class TestResult {
 		}
 		catch (IOException ioe) {
 			throw new RuntimeException(
-				"Unable to verify existence of liferay log.");
+				"Unable to verify existence of Liferay log");
 		}
 
 		return !liferayLog.isEmpty();
