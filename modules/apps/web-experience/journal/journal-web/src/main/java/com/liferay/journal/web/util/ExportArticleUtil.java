@@ -155,7 +155,8 @@ public class ExportArticleUtil {
 			id, is, sourceExtension, targetExtension);
 
 		if (convertedFile != null) {
-			fileName = title.concat(StringPool.PERIOD).concat(targetExtension);
+			fileName = title + StringPool.PERIOD +
+				StringUtil.toLowerCase(targetExtension);
 
 			contentType = MimeTypesUtil.getContentType(fileName);
 
