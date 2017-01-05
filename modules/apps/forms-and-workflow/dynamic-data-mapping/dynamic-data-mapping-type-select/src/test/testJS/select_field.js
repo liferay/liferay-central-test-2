@@ -7,6 +7,7 @@ var createSelectField = function(config) {
 		A.merge(
 			{
 				context: {
+					multiple: false,
 					name: 'selectField',
 					required: true
 				}
@@ -55,11 +56,13 @@ describe(
 				it(
 					'should exists an error container if the select field has an error message',
 					function(done) {
-						selectField = createSelectField();
+						selectField = createSelectField(
+							{
+								options: [{label: 'a', value: 'a'}]
+							}
+						);
 
 						selectField.set('errorMessage', 'error');
-
-						selectField.set('options', [{label: 'a', value: 'a'}]);
 
 						selectField.showErrorMessage();
 
@@ -82,11 +85,11 @@ describe(
 				it(
 					'should return empty value if set an empty array value',
 					function(done) {
-						selectField = createSelectField();
-
-						selectField.set('multiple', false);
-
-						selectField.set('options', [{label: 'a', value: 'a'}]);
+						selectField = createSelectField(
+							{
+								options: [{label: 'a', value: 'a'}]
+							}
+						);
 
 						selectField.setValue([]);
 
@@ -102,17 +105,38 @@ describe(
 				it(
 					'should return empty value if set an empty string value',
 					function(done) {
-						selectField = createSelectField();
-
-						selectField.set('multiple', false);
-
-						selectField.set('options', [{label: 'a', value: 'a'}]);
+						selectField = createSelectField(
+							{
+								options: [{label: 'a', value: 'a'}]
+							}
+						);
 
 						selectField.setValue('');
 
 						assert.equal(
 							selectField.getValue(),
 							''
+						);
+
+						done();
+					}
+				);
+
+				it(
+					'should return value if select has a value in context',
+					function(done) {
+						selectField = createSelectField(
+							{
+								options: [{label: 'a', value: 'a'}],
+								value: 'a'
+							}
+						);
+
+						selectField.setValue('');
+
+						assert.equal(
+							selectField.getValue(),
+							'a'
 						);
 
 						done();
@@ -127,11 +151,11 @@ describe(
 				it(
 					'should return string value for single selectField',
 					function(done) {
-						selectField = createSelectField();
-
-						selectField.set('multiple', false);
-
-						selectField.set('options', [{label: 'a', value: 'a'}]);
+						selectField = createSelectField(
+							{
+								options: [{label: 'a', value: 'a'}]
+							}
+						);
 
 						selectField.setValue(['a']);
 
@@ -144,11 +168,12 @@ describe(
 				it(
 					'should return string values for multiple selectField',
 					function(done) {
-						selectField = createSelectField();
-
-						selectField.set('multiple', true);
-
-						selectField.set('options', [{label: 'a', value: 'a'}, {label: 'b', value: 'b'}, {label: 'c', value: 'c'}]);
+						selectField = createSelectField(
+							{
+								multiple: true,
+								options: [{label: 'a', value: 'a'}, {label: 'b', value: 'b'}, {label: 'c', value: 'c'}]
+							}
+						);
 
 						selectField.setValue(['a', 'c']);
 
@@ -166,12 +191,10 @@ describe(
 					function(done) {
 						selectField = createSelectField(
 							{
-								multiple: 'multiple',
+								options: [{label: 'a', value: 'a'}],
 								value: []
 							}
 						);
-
-						selectField.set('options', [{label: 'a', value: 'a'}]);
 
 						assert.equal(
 							selectField.getValue(),
@@ -261,9 +284,11 @@ describe(
 				it(
 					'should clean value of the select',
 					function() {
-						selectField = createSelectField();
-
-						selectField.set('options', [{label: 'a', value: 'a'}]);
+						selectField = createSelectField(
+							{
+								options: [{label: 'a', value: 'a'}]
+							}
+						);
 
 						selectField.setValue(['a']);
 
@@ -281,17 +306,19 @@ describe(
 				it(
 					'should click item and select its value',
 					function() {
-						selectField = createSelectField();
-
-						selectField.set('options', [{label: 'foo', value: 'foo'}, {label: 'bar', value: 'bar'}]);
+						selectField = createSelectField(
+							{
+								options: [{label: 'foo', value: 'foo'}, {label: 'bar', value: 'bar'}]
+							}
+						);
 
 						var container = selectField.get('container');
 
-						container.one('.form-builder-select-field').simulate('click');
+						container.one('.form-builder-select-field').simulate('mousedown');
 
 						var item = container.one('.form-builder-select-field').one('.drop-chosen ul li');
 
-						item.simulate('click');
+						item.simulate('mousedown');
 
 						assert.equal(selectField.getValue(), 'foo');
 					}
