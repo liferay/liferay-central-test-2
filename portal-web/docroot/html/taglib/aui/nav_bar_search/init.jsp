@@ -24,6 +24,7 @@ java.lang.String id = GetterUtil.getString((java.lang.String)request.getAttribut
 java.lang.String file = GetterUtil.getString((java.lang.String)request.getAttribute("aui:nav-bar-search:file"));
 com.liferay.portal.kernel.dao.search.SearchContainer<?> searchContainer = (com.liferay.portal.kernel.dao.search.SearchContainer<?>)request.getAttribute("aui:nav-bar-search:searchContainer");
 Map<String, Object> dynamicAttributes = (Map<String, Object>)request.getAttribute("aui:nav-bar-search:dynamicAttributes");
+Map<String, Object> scopedAttributes = (Map<String, Object>)request.getAttribute("aui:nav-bar-search:scopedAttributes");
 %>
 
 <%@ include file="/html/taglib/aui/nav_bar_search/init-ext.jspf" %>
