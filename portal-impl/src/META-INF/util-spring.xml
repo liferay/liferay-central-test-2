@@ -286,7 +286,6 @@
 	<bean class="com.liferay.portal.kernel.servlet.BrowserSnifferUtil" id="com.liferay.portal.kernel.servlet.BrowserSnifferUtil">
 		<property name="browserSniffer" ref="com.liferay.portal.servlet.BrowserSnifferImpl" />
 	</bean>
-	<bean class="com.liferay.portal.servlet.BrowserSnifferImpl" id="com.liferay.portal.servlet.BrowserSnifferImpl" />
 	<bean class="com.liferay.portal.kernel.servlet.DirectRequestDispatcherFactoryUtil" id="com.liferay.portal.kernel.servlet.DirectRequestDispatcherFactoryUtil">
 		<property name="directRequestDispatcherFactory">
 			<bean class="com.liferay.portal.servlet.DirectRequestDispatcherFactoryImpl" />
@@ -483,6 +482,7 @@
 	</bean>
 	<bean class="com.liferay.portal.service.permission.GroupPermissionImpl" id="com.liferay.portal.service.permission.GroupPermissionImpl" />
 	<bean class="com.liferay.portal.service.permission.UserPermissionImpl" id="com.liferay.portal.service.permission.UserPermissionImpl" />
+	<bean class="com.liferay.portal.servlet.BrowserSnifferImpl" id="com.liferay.portal.servlet.BrowserSnifferImpl" />
 	<bean class="com.liferay.portal.servlet.ThreadLocalFacadeServletRequestWrapperUtil" id="com.liferay.portal.servlet.ThreadLocalFacadeServletRequestWrapperUtil">
 		<property name="stopperClassNames">
 			<set>
