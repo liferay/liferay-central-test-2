@@ -3271,7 +3271,7 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  el.model,com.liferay.portal.kernel.security.permission,com.liferay.po
  rtal.kernel.service.persistence,com.liferay.portal.kernel.service.per
  sistence.impl,com.liferay.portal.kernel.util,com.liferay.portal.model
- .impl";version="1.0.0",com.liferay.portal.servlet;version="1.2.0";use
+ .impl";version="1.0.0",com.liferay.portal.servlet;version="1.3.0";use
  s:="com.liferay.portal.facebook,com.liferay.portal.kernel.exception,c
  om.liferay.portal.kernel.model,com.liferay.portal.kernel.plugin,com.l
  iferay.portal.kernel.security.pacl,com.liferay.portal.kernel.servlet,
@@ -3445,7 +3445,7 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  0_0";version="1.0.0",com.liferay.portal.upgrade.v7_0_3.util;version="
  1.0.0",com.liferay.portal.upload;version="1.0.2";uses:="com.liferay.p
  ortal.kernel.servlet,com.liferay.portal.kernel.upload,javax.portlet,j
- avax.servlet,javax.servlet.http",com.liferay.portal.util;version="1.8
+ avax.servlet,javax.servlet.http",com.liferay.portal.util;version="1.9
  .0";uses:="com.liferay.expando.kernel.model,com.liferay.layouts.admin
  .kernel.util,com.liferay.portal.kernel.configuration,com.liferay.port
  al.kernel.exception,com.liferay.portal.kernel.json,com.liferay.portal
