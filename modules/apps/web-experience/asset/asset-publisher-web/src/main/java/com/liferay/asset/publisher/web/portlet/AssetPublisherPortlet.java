@@ -265,6 +265,9 @@ public class AssetPublisherPortlet extends MVCPortlet {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
+		renderRequest.setAttribute(
+			WebKeys.SINGLE_PAGE_APPLICATION_CLEAR_CACHE, Boolean.TRUE);
+
 		if (SessionErrors.contains(
 				renderRequest, NoSuchGroupException.class.getName()) ||
 			SessionErrors.contains(
