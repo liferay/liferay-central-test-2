@@ -15,8 +15,8 @@
 package com.liferay.journal.web.internal.portlet.action;
 
 import com.liferay.journal.constants.JournalPortletKeys;
+import com.liferay.journal.exception.ExportArticleTargetExtensionException;
 import com.liferay.journal.web.util.ExportArticleUtil;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Layout;
@@ -100,7 +100,9 @@ public class ExportArticleMVCResourceCommand extends BaseMVCResourceCommand {
 					_log.debug("Extension not allowed: " + targetExtension);
 				}
 
-				throw new PortalException("Extension not allowed");
+				throw new ExportArticleTargetExtensionException(
+					"The target extension " + targetExtension +
+					" is not allowed");
 			}
 		}
 		catch (Exception e) {
