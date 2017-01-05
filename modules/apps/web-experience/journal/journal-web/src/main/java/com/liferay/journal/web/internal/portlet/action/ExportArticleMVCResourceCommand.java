@@ -30,8 +30,6 @@ import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 
-import javax.portlet.ActionRequest;
-import javax.portlet.ActionResponse;
 import javax.portlet.PortletPreferences;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
@@ -81,7 +79,9 @@ public class ExportArticleMVCResourceCommand extends BaseMVCResourceCommand {
 			String[] allowedExtensions = portletPreferences.getValues(
 				"extensions", null);
 
-			if (allowedExtensions != null && allowedExtensions.length == 1) {
+			if ((allowedExtensions != null) &&
+				(allowedExtensions.length == 1)) {
+
 				allowedExtensions = StringUtil.split(
 					portletPreferences.getValue("extensions", null));
 			}
@@ -97,14 +97,11 @@ public class ExportArticleMVCResourceCommand extends BaseMVCResourceCommand {
 			else {
 				throw new ExportArticleTargetExtensionException(
 					"The target extension " + targetExtension +
-					" is not allowed");
+						" is not allowed");
 			}
 		}
 		catch (Exception e) {
-
-			if (_log.isErrorEnabled()) {
-				_log.error("Error during the export", e);
-			}
+			_log.error("Error during the export", e);
 
 			PortalUtil.sendError(
 				e, PortalUtil.getHttpServletRequest(resourceRequest),
