@@ -16,7 +16,6 @@ package com.liferay.taglib.util;
 
 import com.liferay.portal.kernel.util.StringPool;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,12 +37,8 @@ public class AttributesTagSupport
 		return _attributeNamespace;
 	}
 
-	/**
-	 * @deprecated As of 7.0.0, with no direct replacement
-	 */
-	@Deprecated
 	public Map<String, Object> getScopedAttributes() {
-		return Collections.emptyMap();
+		return _scopedAttributes;
 	}
 
 	@Override
@@ -52,6 +47,7 @@ public class AttributesTagSupport
 
 		_attributeNamespace = null;
 		_dynamicAttributes = null;
+		_scopedAttributes = null;
 	}
 
 	public void setAttributeNamespace(String attributeNamespace) {
@@ -78,11 +74,8 @@ public class AttributesTagSupport
 		request.setAttribute(_encodeKey(key), value);
 	}
 
-	/**
-	 * @deprecated As of 7.0.0, with no direct replacement
-	 */
-	@Deprecated
 	public void setScopedAttribute(String name, Object value) {
+		_scopedAttributes.put(name, value);
 	}
 
 	protected Map<String, Object> getDynamicAttributes() {
@@ -100,5 +93,6 @@ public class AttributesTagSupport
 
 	private String _attributeNamespace = StringPool.BLANK;
 	private Map<String, Object> _dynamicAttributes = new HashMap<>();
+	private Map<String, Object> _scopedAttributes = new HashMap<>();
 
 }
