@@ -1,6 +1,8 @@
 AUI.add(
 	'liferay-ddm-form-field-select',
 	function(A) {
+		var CSS_SELECT_TRIGGER_ACTION = 'form-builder-select-field';
+
 		var Lang = A.Lang;
 
 		var TPL_OPTION = '<option>{label}</option>';
@@ -55,7 +57,7 @@ AUI.add(
 
 						instance._eventHandlers.push(
 							A.one('doc').after('click', A.bind(instance._afterClickOutside, instance)),
-							instance.bindContainerEvent('mousedown', instance._afterClickSelectTrigger, '.form-builder-select-field'),
+							instance.bindContainerEvent('mousedown', instance._afterClickSelectTrigger, '.' + CSS_SELECT_TRIGGER_ACTION),
 							instance.bindContainerEvent('mousedown', instance._onClickItem, 'li')
 						);
 					},
@@ -73,9 +75,9 @@ AUI.add(
 					closeList: function() {
 						var instance = this;
 
-						var container = instance.get('container');
-
 						if (!instance.get('readOnly') && instance._isListOpen()) {
+							var container = instance.get('container');
+
 							container.one('.drop-chosen').addClass('hide');
 
 							container.one('.form-builder-select-field').removeClass('active');
@@ -147,13 +149,9 @@ AUI.add(
 					openList: function() {
 						var instance = this;
 
-						var container = instance.get('container');
+						instance._getSelectTriggerAction().addClass('active');
 
-						var selectGroup = container.one('.form-builder-select-field');
-
-						container.one('.drop-chosen').toggleClass('hide');
-
-						selectGroup.addClass('active');
+						instance.get('container').one('.drop-chosen').toggleClass('hide');
 					},
 
 					render: function() {
@@ -224,13 +222,13 @@ AUI.add(
 
 						var instance = this;
 
-						var target = event.target;
-
-						if (target.ancestor('.search-chosen')) {
-							return;
-						}
-
 						if (!instance.get('readOnly')) {
+							var target = event.target;
+
+							if (target.ancestor('.search-chosen')) {
+								return;
+							}
+
 							instance.openList();
 						}
 					},
@@ -279,14 +277,18 @@ AUI.add(
 						return optionsSelected;
 					},
 
+					_getSelectTriggerAction: function() {
+						var instance = this;
+
+						return instance.get('container').one('.' + CSS_SELECT_TRIGGER_ACTION);
+					},
+
 					_isClickingOutSide: function(event) {
 						var instance = this;
 
-						var ancestor = event.target.ancestor('.form-builder-select-field');
+						var ancestor = event.target.ancestor('.' + CSS_SELECT_TRIGGER_ACTION);
 
-						var container = instance.get('container');
-
-						return !ancestor || ancestor !== container.one('.form-builder-select-field');
+						return !ancestor || ancestor !== instance._getSelectTriggerAction();
 					},
 
 					_isListOpen: function() {
@@ -304,13 +306,9 @@ AUI.add(
 
 						var options = instance.get('options');
 
-						var index = event.target.getAttribute('data-option-index');
+						var value = event.target.getAttribute('data-option-value');
 
-						var option = options[index];
-
-						instance.setValue(option.value);
-
-						instance.set('value', option.value);
+						instance.setValue(value);
 
 						instance.set('value', [value]);
 
