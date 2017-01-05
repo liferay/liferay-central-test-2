@@ -19,10 +19,10 @@
 <%@ include file="/html/taglib/taglib-init.jsp" %>
 
 <%
-boolean animated = GetterUtil.getBoolean(String.valueOf(request.getAttribute("aui:alert:animated")));
+boolean animated = GetterUtil.getBoolean(String.valueOf(request.getAttribute("aui:alert:animated")), false);
 boolean closeable = GetterUtil.getBoolean(String.valueOf(request.getAttribute("aui:alert:closeable")), true);
 java.lang.String cssClass = GetterUtil.getString((java.lang.String)request.getAttribute("aui:alert:cssClass"));
-boolean destroyOnHide = GetterUtil.getBoolean(String.valueOf(request.getAttribute("aui:alert:destroyOnHide")));
+boolean destroyOnHide = GetterUtil.getBoolean(String.valueOf(request.getAttribute("aui:alert:destroyOnHide")), false);
 java.lang.Number duration = GetterUtil.getNumber(String.valueOf(request.getAttribute("aui:alert:duration")), 0.15);
 java.lang.String id = GetterUtil.getString((java.lang.String)request.getAttribute("aui:alert:id"));
 java.lang.String type = GetterUtil.getString((java.lang.String)request.getAttribute("aui:alert:type"), "info");
