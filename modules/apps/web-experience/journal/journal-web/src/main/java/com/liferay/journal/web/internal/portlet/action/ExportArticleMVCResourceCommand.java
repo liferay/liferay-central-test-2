@@ -62,8 +62,6 @@ public class ExportArticleMVCResourceCommand extends BaseMVCResourceCommand {
 			String targetExtension = ParamUtil.getString(
 				resourceRequest, "targetExtension");
 
-			targetExtension = StringUtil.toUpperCase(targetExtension);
-
 			PortletPreferences portletPreferences =
 				resourceRequest.getPreferences();
 
@@ -90,10 +88,11 @@ public class ExportArticleMVCResourceCommand extends BaseMVCResourceCommand {
 
 			if (ArrayUtil.contains(
 					allowedExtensions,
-					StringUtil.toUpperCase(targetExtension))) {
+					StringUtil.toLowerCase(targetExtension))) {
 
 				_exportArticleUtil.sendFile(
-					targetExtension, resourceRequest, resourceResponse);
+					StringUtil.toUpperCase(targetExtension), resourceRequest,
+					resourceResponse);
 			}
 			else {
 				throw new ExportArticleTargetExtensionException(
