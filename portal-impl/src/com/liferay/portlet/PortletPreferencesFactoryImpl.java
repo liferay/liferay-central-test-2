@@ -885,12 +885,12 @@ public class PortletPreferencesFactoryImpl
 
 	protected Map<String, Preference> toPreferencesMap(String xml) {
 		if (Objects.equals(xml, PortletConstants.DEFAULT_PREFERENCES)) {
-			if (_defaultPreferenceMap == null) {
-				_defaultPreferenceMap = createPreferencesMap(
+			if (_defaultPreferencesMap == null) {
+				_defaultPreferencesMap = createPreferencesMap(
 					PortletConstants.DEFAULT_PREFERENCES);
 			}
 
-			return _defaultPreferenceMap;
+			return _defaultPreferencesMap;
 		}
 
 		if (Validator.isNull(xml)) {
@@ -934,7 +934,7 @@ public class PortletPreferencesFactoryImpl
 	private static final Log _log = LogFactoryUtil.getLog(
 		PortletPreferencesFactoryImpl.class);
 
-	private Map<String, Preference> _defaultPreferenceMap;
+	private Map<String, Preference> _defaultPreferencesMap;
 	private final PortalCache<String, Map<String, Preference>>
 		_preferencesMapPortalCache = SingleVMPoolUtil.getPortalCache(
 			PortletPreferencesFactoryImpl.class.getName());
