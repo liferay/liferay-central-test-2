@@ -96,16 +96,17 @@ public class ExportArticleMVCResourceCommand extends BaseMVCResourceCommand {
 					targetExtension, resourceRequest, resourceResponse);
 			}
 			else {
-				if (_log.isDebugEnabled()) {
-					_log.debug("Extension not allowed: " + targetExtension);
-				}
-
 				throw new ExportArticleTargetExtensionException(
 					"The target extension " + targetExtension +
 					" is not allowed");
 			}
 		}
 		catch (Exception e) {
+
+			if (_log.isErrorEnabled()) {
+				_log.error("Error during the export", e);
+			}
+
 			PortalUtil.sendError(
 				e, (ActionRequest)resourceRequest,
 				(ActionResponse)resourceResponse);
