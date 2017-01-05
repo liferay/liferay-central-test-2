@@ -108,8 +108,8 @@ public class ExportArticleMVCResourceCommand extends BaseMVCResourceCommand {
 			}
 
 			PortalUtil.sendError(
-				e, (ActionRequest)resourceRequest,
-				(ActionResponse)resourceResponse);
+				e, PortalUtil.getHttpServletRequest(resourceRequest),
+				PortalUtil.getHttpServletResponse(resourceResponse));
 		}
 	}
 
