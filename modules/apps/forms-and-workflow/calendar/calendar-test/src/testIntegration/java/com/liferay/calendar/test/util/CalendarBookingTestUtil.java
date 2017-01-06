@@ -18,9 +18,7 @@ import com.liferay.calendar.model.Calendar;
 import com.liferay.calendar.model.CalendarBooking;
 import com.liferay.calendar.model.CalendarBookingConstants;
 import com.liferay.calendar.model.CalendarResource;
-import com.liferay.calendar.notification.NotificationType;
 import com.liferay.calendar.recurrence.Recurrence;
-import com.liferay.calendar.recurrence.RecurrenceSerializer;
 import com.liferay.calendar.service.CalendarBookingLocalServiceUtil;
 import com.liferay.calendar.util.CalendarResourceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -41,13 +39,12 @@ public class CalendarBookingTestUtil {
 	public static CalendarBooking addCalendarBooking(
 			long userId, long calendarId, long[] childCalendarBookingIds,
 			long parentCalendarBookingId,
-			java.util.Map<java.util.Locale, java.lang.String> titleMap,
-			java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
+			Map<Locale, java.lang.String> titleMap,
+			Map<Locale, java.lang.String> descriptionMap,
 			java.lang.String location, long startTime, long endTime,
 			boolean allDay, java.lang.String recurrence, long firstReminder,
 			java.lang.String firstReminderType, long secondReminder,
-			java.lang.String secondReminderType,
-			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+			java.lang.String secondReminderType, ServiceContext serviceContext)
 		throws PortalException {
 
 		String firstReminderTypeString = null;
@@ -64,13 +61,12 @@ public class CalendarBookingTestUtil {
 
 		CalendarBooking calendarBooking =
 			CalendarBookingLocalServiceUtil.addCalendarBooking(
-				userId, calendarId,
-				childCalendarBookingIds,
+				userId, calendarId, childCalendarBookingIds,
 				CalendarBookingConstants.PARENT_CALENDAR_BOOKING_ID_DEFAULT,
 				titleMap, descriptionMap, RandomTestUtil.randomString(),
-				startTime, endTime, allDay, recurrence,
-				firstReminder, firstReminderTypeString,
-				secondReminder, secondReminderTypeString, serviceContext);
+				startTime, endTime, allDay, recurrence, firstReminder,
+				firstReminderTypeString, secondReminder,
+				secondReminderTypeString, serviceContext);
 
 		return calendarBooking;
 	}
@@ -114,9 +110,8 @@ public class CalendarBookingTestUtil {
 			CalendarBookingConstants.PARENT_CALENDAR_BOOKING_ID_DEFAULT,
 			RandomTestUtil.randomLocaleStringMap(),
 			RandomTestUtil.randomLocaleStringMap(),
-			RandomTestUtil.randomString(),
-			startTime, endTime, false, null,
-			0, null, 0, null, serviceContext);
+			RandomTestUtil.randomString(), startTime, endTime, false, null, 0,
+			null, 0, null, serviceContext);
 	}
 
 	public static CalendarBooking addPublishedCalendarBooking(User user)
@@ -136,9 +131,8 @@ public class CalendarBookingTestUtil {
 			CalendarBookingConstants.PARENT_CALENDAR_BOOKING_ID_DEFAULT,
 			RandomTestUtil.randomLocaleStringMap(),
 			RandomTestUtil.randomLocaleStringMap(),
-			RandomTestUtil.randomString(),
-			startTime, endTime, false, null,
-			0, null, 0, null, serviceContext);
+			RandomTestUtil.randomString(), startTime, endTime, false, null, 0,
+			null, 0, null, serviceContext);
 	}
 
 	public static CalendarBooking addRegularCalendarBooking(
@@ -151,8 +145,8 @@ public class CalendarBookingTestUtil {
 			CalendarBookingConstants.PARENT_CALENDAR_BOOKING_ID_DEFAULT,
 			RandomTestUtil.randomLocaleStringMap(),
 			RandomTestUtil.randomLocaleStringMap(),
-			RandomTestUtil.randomString(),
-			startTime, endTime, false, null, 0, null, 0, null, serviceContext);
+			RandomTestUtil.randomString(), startTime, endTime, false, null, 0,
+			null, 0, null, serviceContext);
 	}
 
 	public static CalendarBooking
@@ -167,9 +161,8 @@ public class CalendarBookingTestUtil {
 			CalendarBookingConstants.PARENT_CALENDAR_BOOKING_ID_DEFAULT,
 			RandomTestUtil.randomLocaleStringMap(),
 			RandomTestUtil.randomLocaleStringMap(),
-			RandomTestUtil.randomString(),
-			startTime, endTime, false, null,
-			0, null, 0, null, serviceContext);
+			RandomTestUtil.randomString(), startTime, endTime, false, null, 0,
+			null, 0, null, serviceContext);
 	}
 
 }
