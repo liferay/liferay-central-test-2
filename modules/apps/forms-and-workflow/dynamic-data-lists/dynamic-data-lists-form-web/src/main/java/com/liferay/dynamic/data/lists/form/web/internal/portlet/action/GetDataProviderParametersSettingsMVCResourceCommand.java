@@ -78,7 +78,6 @@ public class GetDataProviderParametersSettingsMVCResourceCommand
 			"inputs",
 			getInputParametersJSONObject(
 				dataProviderParameterizedSettings.inputParameters()));
-
 		parametersJSONObject.put(
 			"outputs",
 			getOutputParametersJSONObject(
@@ -146,11 +145,9 @@ public class GetDataProviderParametersSettingsMVCResourceCommand
 			inputJSONObject.put(
 				"name",
 				ddmDataProviderInputParameterSetting.inputParameterName());
-
 			inputJSONObject.put(
 				"required",
 				ddmDataProviderInputParameterSetting.inputParameterRequired());
-
 			inputJSONObject.put(
 				"type",
 				ddmDataProviderInputParameterSetting.inputParameterType());
@@ -176,7 +173,6 @@ public class GetDataProviderParametersSettingsMVCResourceCommand
 			outputJSONObject.put(
 				"name",
 				ddmDataProviderOutputParameterSetting.outputParameterName());
-
 			outputJSONObject.put(
 				"type",
 				ddmDataProviderOutputParameterSetting.outputParameterType());
