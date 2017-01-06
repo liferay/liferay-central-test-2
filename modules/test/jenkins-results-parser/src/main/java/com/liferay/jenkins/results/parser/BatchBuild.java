@@ -149,7 +149,7 @@ public class BatchBuild extends BaseBuild {
 			buildProperties = JenkinsResultsParserUtil.getBuildProperties();
 		}
 		catch (IOException ioe) {
-			throw new RuntimeException("Unable to get build properties.", ioe);
+			throw new RuntimeException("Unable to get build properties", ioe);
 		}
 
 		List<String> environmentOptions = new ArrayList<>(
