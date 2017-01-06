@@ -3,7 +3,7 @@
 ;
 [subrepo]
 	cmdver = liferay
-	commit = 5a1ae9d1cb311661c70f539af666574d1f5474f4
+	commit = b20952f6e5ab90ef13a67f6939f54f69cc7b956a
 	mode = push
-	parent = 5bbbdc94b5d1db0598a3515ac8aee7540d449692
+	parent = bedb9bf4409fd898443bea3fa71f4025d79297dc
 	remote = git@github.com:liferay/com-liferay-asset.git
