@@ -27,6 +27,7 @@ import com.liferay.dynamic.data.mapping.io.internal.DDMFormValuesJSONDeserialize
 import com.liferay.dynamic.data.mapping.storage.DDMFormValues;
 import com.liferay.dynamic.data.mapping.util.DDMFormFactory;
 import com.liferay.portal.json.JSONFactoryImpl;
+import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.language.Language;
 import com.liferay.portal.kernel.language.LanguageUtil;
@@ -65,7 +66,6 @@ public class GetDataProviderParametersSettingsMVCResourceCommandTest {
 		setUpDDMDataProvider();
 		setUpDDMFormValuesJSONDeserializer();
 		setUpGetDataProviderParametersSettingsMVCResourceCommand();
-
 		setUpLanguageUtil();
 		setUpResourceBundleUtil();
 	}
@@ -85,14 +85,14 @@ public class GetDataProviderParametersSettingsMVCResourceCommandTest {
 	}
 
 	protected DDMFormValues getDataProviderFormValues() throws Exception {
-		com.liferay.dynamic.data.mapping.model.DDMForm dataProviderForm =
+		com.liferay.dynamic.data.mapping.model.DDMForm ddmForm =
 			DDMFormFactory.create(DDMDataProviderSettings.class);
 
 		String serializedDDMFormValues = read(
 			"form-values-data-provider-settings.json");
 
 		return _ddmFormValuesJSONDeserializer.deserialize(
-			dataProviderForm, serializedDDMFormValues);
+			ddmForm, serializedDDMFormValues);
 	}
 
 	protected String read(String fileName) throws IOException {
@@ -127,7 +127,7 @@ public class GetDataProviderParametersSettingsMVCResourceCommandTest {
 		field(
 			DDMFormValuesJSONDeserializerImpl.class, "_jsonFactory"
 		).set(
-			_ddmFormValuesJSONDeserializer, new JSONFactoryImpl()
+			_ddmFormValuesJSONDeserializer, _jsonFactory
 		);
 	}
 
@@ -141,8 +141,7 @@ public class GetDataProviderParametersSettingsMVCResourceCommandTest {
 			_getDataProviderParametersSettingsMVCResourceCommand.getClass(),
 			"_jsonFactory"
 		).set(
-			_getDataProviderParametersSettingsMVCResourceCommand,
-			new JSONFactoryImpl()
+			_getDataProviderParametersSettingsMVCResourceCommand, _jsonFactory
 		);
 
 		field(
@@ -183,6 +182,7 @@ public class GetDataProviderParametersSettingsMVCResourceCommandTest {
 		new DDMFormValuesJSONDeserializerImpl();
 	private GetDataProviderParametersSettingsMVCResourceCommand
 		_getDataProviderParametersSettingsMVCResourceCommand;
+	private final JSONFactory _jsonFactory = new JSONFactoryImpl();
 
 	@DDMForm
 	private interface DDMDataProviderSettings
