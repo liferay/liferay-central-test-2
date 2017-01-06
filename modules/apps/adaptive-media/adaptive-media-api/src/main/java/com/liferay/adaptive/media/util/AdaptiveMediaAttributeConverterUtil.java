@@ -20,9 +20,11 @@ import com.liferay.adaptive.media.AdaptiveMediaRuntimeException;
  * Provides a set of functions for converting data into
  * {@link AdaptiveMediaAttribute} values.
  *
+ * <p>
  * These functions should throw an {@link
  * AdaptiveMediaRuntimeException.AdaptiveMediaAttributeFormatException}
  * if they cannot convert the String.
+ * </p>
  *
  * @author Alejandro Hernández
  *
