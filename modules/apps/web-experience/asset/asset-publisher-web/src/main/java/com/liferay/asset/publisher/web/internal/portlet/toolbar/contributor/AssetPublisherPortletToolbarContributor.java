@@ -36,7 +36,6 @@ import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.portal.kernel.util.WebKeys;
-import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.asset.util.AssetUtil;
 
 import java.util.ArrayList;
@@ -79,7 +78,6 @@ public class AssetPublisherPortletToolbarContributor
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		Group scopeGroup = themeDisplay.getScopeGroup();
 		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
 		String portletName = portletDisplay.getPortletName();
@@ -90,8 +88,6 @@ public class AssetPublisherPortletToolbarContributor
 				portletRequest.getPreferences());
 
 		if (!assetPublisherDisplayContext.isShowAddContentButton() ||
-			(scopeGroup.hasStagingGroup() && !scopeGroup.isStagingGroup() &&
-			 PropsValues.STAGING_LIVE_GROUP_LOCKING_ENABLED) ||
 			portletName.equals(
 				AssetPublisherPortletKeys.HIGHEST_RATED_ASSETS) ||
 			portletName.equals(AssetPublisherPortletKeys.MOST_VIEWED_ASSETS) ||
