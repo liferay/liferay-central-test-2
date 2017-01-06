@@ -119,29 +119,9 @@ public class CalendarBookingLocalServiceTest {
 		java.util.Calendar endTimeJCalendar = JCalendarUtil.getJCalendar(
 			calendarBooking.getEndTime(), calendarBooking.getTimeZone());
 
-		Assert.assertEquals(
-			nowJCalendar.get(java.util.Calendar.YEAR),
-			startTimeJCalendar.get(java.util.Calendar.YEAR));
+		assertSameDay(nowJCalendar, startTimeJCalendar);
 
-		Assert.assertEquals(
-			nowJCalendar.get(java.util.Calendar.MONTH),
-			startTimeJCalendar.get(java.util.Calendar.MONTH));
-
-		Assert.assertEquals(
-			nowJCalendar.get(java.util.Calendar.DAY_OF_MONTH),
-			startTimeJCalendar.get(java.util.Calendar.DAY_OF_MONTH));
-
-		Assert.assertEquals(
-			nowJCalendar.get(java.util.Calendar.YEAR),
-			endTimeJCalendar.get(java.util.Calendar.YEAR));
-
-		Assert.assertEquals(
-			nowJCalendar.get(java.util.Calendar.MONTH),
-			endTimeJCalendar.get(java.util.Calendar.MONTH));
-
-		Assert.assertEquals(
-			nowJCalendar.get(java.util.Calendar.DAY_OF_MONTH),
-			endTimeJCalendar.get(java.util.Calendar.DAY_OF_MONTH));
+		assertSameDay(nowJCalendar, endTimeJCalendar);
 
 		assertEqualsTime(0, 0, startTimeJCalendar);
 
@@ -1468,6 +1448,23 @@ public class CalendarBookingLocalServiceTest {
 			hour, jCalendar.get(java.util.Calendar.HOUR_OF_DAY));
 
 		Assert.assertEquals(minute, jCalendar.get(java.util.Calendar.MINUTE));
+	}
+
+	protected void assertSameDay(
+		java.util.Calendar expectedJCalendar,
+		java.util.Calendar actualJCalendar) {
+
+		Assert.assertEquals(
+			expectedJCalendar.get(java.util.Calendar.YEAR),
+			actualJCalendar.get(java.util.Calendar.YEAR));
+
+		Assert.assertEquals(
+			expectedJCalendar.get(java.util.Calendar.MONTH),
+			actualJCalendar.get(java.util.Calendar.MONTH));
+
+		Assert.assertEquals(
+			expectedJCalendar.get(java.util.Calendar.DAY_OF_MONTH),
+			actualJCalendar.get(java.util.Calendar.DAY_OF_MONTH));
 	}
 
 	protected ServiceContext createServiceContext() {
