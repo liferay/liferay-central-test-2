@@ -15,14 +15,15 @@
 package com.liferay.journal.util.impl;
 
 import com.liferay.document.library.kernel.service.DLAppLocalService;
+import com.liferay.dynamic.data.mapping.model.DDMFormFieldType;
 import com.liferay.dynamic.data.mapping.model.DDMStructure;
 import com.liferay.dynamic.data.mapping.storage.DDMFormValues;
 import com.liferay.dynamic.data.mapping.storage.Field;
 import com.liferay.dynamic.data.mapping.storage.FieldConstants;
 import com.liferay.dynamic.data.mapping.storage.Fields;
+import com.liferay.dynamic.data.mapping.util.DDM;
+import com.liferay.dynamic.data.mapping.util.DDMFieldsCounter;
 import com.liferay.dynamic.data.mapping.util.FieldsToDDMFormValuesConverter;
-import com.liferay.dynamic.data.mapping.util.impl.DDMFieldsCounter;
-import com.liferay.dynamic.data.mapping.util.impl.DDMImpl;
 import com.liferay.journal.util.JournalConverter;
 import com.liferay.petra.xml.XMLUtil;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -160,7 +161,7 @@ public class JournalConverterImpl implements JournalConverter {
 		throws PortalException {
 
 		Field fieldsDisplayField = new Field(
-			ddmStructure.getStructureId(), DDMImpl.FIELDS_DISPLAY_NAME,
+			ddmStructure.getStructureId(), DDM.FIELDS_DISPLAY_NAME,
 			StringPool.BLANK);
 
 		Fields ddmFields = new Fields();
@@ -355,7 +356,7 @@ public class JournalConverterImpl implements JournalConverter {
 			int parentOffset)
 		throws Exception {
 
-		Field fieldsDisplayField = ddmFields.get(DDMImpl.FIELDS_DISPLAY_NAME);
+		Field fieldsDisplayField = ddmFields.get(DDM.FIELDS_DISPLAY_NAME);
 
 		String[] fieldsDisplayValues = getDDMFieldsDisplayValues(
 			fieldsDisplayField);
@@ -434,7 +435,7 @@ public class JournalConverterImpl implements JournalConverter {
 
 			for (String value : values) {
 				String fieldName = StringUtil.extractFirst(
-					value, DDMImpl.INSTANCE_SEPARATOR);
+					value, DDM.INSTANCE_SEPARATOR);
 
 				if (ddmStructure.hasField(fieldName)) {
 					fieldsDisplayValues.add(fieldName);
@@ -518,9 +519,9 @@ public class JournalConverterImpl implements JournalConverter {
 	protected String getFieldInstanceId(
 		Fields ddmFields, String fieldName, int index) {
 
-		Field fieldsDisplayField = ddmFields.get(DDMImpl.FIELDS_DISPLAY_NAME);
+		Field fieldsDisplayField = ddmFields.get(DDM.FIELDS_DISPLAY_NAME);
 
-		String prefix = fieldName.concat(DDMImpl.INSTANCE_SEPARATOR);
+		String prefix = fieldName.concat(DDM.INSTANCE_SEPARATOR);
 
 		String[] fieldsDisplayValues = StringUtil.split(
 			(String)fieldsDisplayField.getValue());
@@ -531,7 +532,7 @@ public class JournalConverterImpl implements JournalConverter {
 
 				if (index < 0) {
 					return StringUtil.extractLast(
-						fieldsDisplayValue, DDMImpl.INSTANCE_SEPARATOR);
+						fieldsDisplayValue, DDM.INSTANCE_SEPARATOR);
 				}
 			}
 		}
@@ -544,7 +545,7 @@ public class JournalConverterImpl implements JournalConverter {
 
 		Serializable serializable = null;
 
-		if (DDMImpl.TYPE_DDM_LINK_TO_PAGE.equals(type)) {
+		if (DDMFormFieldType.LINK_TO_PAGE.equals(type)) {
 			String[] values = StringUtil.split(
 				dynamicContentElement.getText(), CharPool.AT);
 
@@ -569,7 +570,7 @@ public class JournalConverterImpl implements JournalConverter {
 
 			serializable = jsonObject.toString();
 		}
-		else if (DDMImpl.TYPE_SELECT.equals(type)) {
+		else if (DDMFormFieldType.SELECT.equals(type)) {
 			JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 			List<Element> optionElements = dynamicContentElement.elements(
@@ -854,14 +855,14 @@ public class JournalConverterImpl implements JournalConverter {
 			String fieldValue)
 		throws Exception {
 
-		if (DDMImpl.TYPE_CHECKBOX.equals(fieldType)) {
+		if (DDMFormFieldType.CHECKBOX.equals(fieldType)) {
 			if (fieldValue.equals(Boolean.FALSE.toString())) {
 				fieldValue = StringPool.BLANK;
 			}
 
 			dynamicContentElement.addCDATA(fieldValue);
 		}
-		else if (DDMImpl.TYPE_DDM_LINK_TO_PAGE.equals(fieldType) &&
+		else if (DDMFormFieldType.LINK_TO_PAGE.equals(fieldType) &&
 				 Validator.isNotNull(fieldValue)) {
 
 			JSONObject jsonObject = JSONFactoryUtil.createJSONObject(
@@ -902,7 +903,7 @@ public class JournalConverterImpl implements JournalConverter {
 
 			dynamicContentElement.addCDATA(sb.toString());
 		}
-		else if (DDMImpl.TYPE_SELECT.equals(fieldType) &&
+		else if (DDMFormFieldType.SELECT.equals(fieldType) &&
 				 Validator.isNotNull(fieldValue)) {
 
 			JSONArray jsonArray = null;
@@ -939,9 +940,9 @@ public class JournalConverterImpl implements JournalConverter {
 		}
 
 		String fieldsDisplayValue = fieldName.concat(
-			DDMImpl.INSTANCE_SEPARATOR).concat(instanceId);
+			DDM.INSTANCE_SEPARATOR).concat(instanceId);
 
-		Field fieldsDisplayField = ddmFields.get(DDMImpl.FIELDS_DISPLAY_NAME);
+		Field fieldsDisplayField = ddmFields.get(DDM.FIELDS_DISPLAY_NAME);
 
 		String[] fieldsDisplayValues = StringUtil.split(
 			(String)fieldsDisplayField.getValue());
