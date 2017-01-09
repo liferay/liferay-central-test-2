@@ -14,14 +14,14 @@
 
 package com.liferay.adaptive.media.image.jaxrs.client.test.internal;
 
-import aQute.lib.base64.Base64;
+import static com.liferay.adaptive.media.image.jaxrs.client.test.internal.util.ImageAdaptiveMediaTestUtil.IDENTITY_WEB_TARGET_RESOLVER;
+import static com.liferay.adaptive.media.image.jaxrs.client.test.internal.util.ImageAdaptiveMediaTestUtil.TEST_AUTH;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-import com.liferay.adaptive.media.image.jaxrs.client.test.internal.provider.GsonProvider;
-import com.liferay.portal.kernel.json.JSONException;
+import com.liferay.adaptive.media.image.jaxrs.client.test.internal.util.ImageAdaptiveMediaTestUtil;
 
 import java.net.URL;
 
@@ -33,17 +33,16 @@ import java.util.Random;
 import java.util.UUID;
 import java.util.function.Function;
 
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.test.api.ArquillianResource;
+
+import org.json.JSONException;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -156,8 +155,9 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 
 	@Test
 	public void testGetAllConfigurationsEmpty() {
-		Invocation.Builder builder = _getBaseRequest(
-			_IDENTITY_WEB_TARGET_RESOLVER);
+		Invocation.Builder builder =
+			ImageAdaptiveMediaTestUtil.getConfigurationRequest(
+				_context, IDENTITY_WEB_TARGET_RESOLVER);
 
 		JsonArray responseJsonArray = builder.get(JsonArray.class);
 
@@ -169,8 +169,9 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 		Map<String, JsonObject> configurations = _addConfigurations(
 			_configurationJsonObjects);
 
-		Invocation.Builder builder = _getBaseRequest(
-			_IDENTITY_WEB_TARGET_RESOLVER);
+		Invocation.Builder builder =
+			ImageAdaptiveMediaTestUtil.getConfigurationRequest(
+				_context, IDENTITY_WEB_TARGET_RESOLVER);
 
 		JsonArray responseJsonArray = builder.get(JsonArray.class);
 
@@ -248,14 +249,15 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 				expectedJsonObject.toString(), actualJsonObject.toString(),
 				true);
 		}
-		catch (org.json.JSONException jsone) {
+		catch (JSONException jsone) {
 			Assert.fail(jsone.getMessage());
 		}
 	}
 
 	private void _deleteAllConfigurationEntries() {
-		Invocation.Builder builder = _getBaseRequest(
-			_IDENTITY_WEB_TARGET_RESOLVER);
+		Invocation.Builder builder =
+			ImageAdaptiveMediaTestUtil.getConfigurationRequest(
+				_context, IDENTITY_WEB_TARGET_RESOLVER);
 
 		JsonArray responseJsonArray = builder.get(JsonArray.class);
 
@@ -267,27 +269,15 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 			});
 	}
 
-	private Invocation.Builder _getAuthenticatedInvocationBuilder(String id) {
-		Invocation.Builder builder = _getBaseRequest(
-			webTarget -> webTarget.path("/{id}").resolveTemplate("id", id));
-
-		return builder.header("Authorization", _testAuth);
+	private Invocation.Builder _getBaseRequest(
+		Function<WebTarget, WebTarget> webTargetBuilder) {
+		return ImageAdaptiveMediaTestUtil.getConfigurationRequest(
+			_context, webTargetBuilder);
 	}
 
-	private Invocation.Builder _getBaseRequest(
-		Function<WebTarget, WebTarget> webTargetResolver) {
-
-		Client client = ClientBuilder.newClient();
-
-		client.register(GsonProvider.class);
-
-		WebTarget webTarget = client.target(_context.toString());
-
-		webTarget = webTarget.path(_BASE_PATH);
-
-		webTarget = webTargetResolver.apply(webTarget);
-
-		return webTarget.request(MediaType.APPLICATION_JSON_TYPE);
+	private Invocation.Builder _getAuthenticatedInvocationBuilder(String id) {
+		return _getUnauthenticatedInvocationBuilder(
+			id).header("Authorization", TEST_AUTH);
 	}
 
 	private String _getId(JsonObject configurationJsonObject) {
@@ -309,16 +299,8 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 			webTarget -> webTarget.path("/{id}").resolveTemplate("id", id));
 	}
 
-	private static final String _BASE_PATH =
-		"/o/adaptive-media/images/configuration";
-
-	private static final Function<WebTarget, WebTarget>
-		_IDENTITY_WEB_TARGET_RESOLVER = webTarget -> webTarget;
-
 	private static final List<JsonObject> _configurationJsonObjects =
 		new ArrayList<>();
-	private static final String _testAuth =
-		"Basic " + Base64.encodeBase64("test@liferay.com:test".getBytes());
 
 	static {
 		for (int i = 0; i < 10; i++) {
