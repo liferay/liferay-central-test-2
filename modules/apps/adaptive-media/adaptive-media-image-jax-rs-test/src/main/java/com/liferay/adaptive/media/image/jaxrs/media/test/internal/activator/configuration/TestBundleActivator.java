@@ -17,6 +17,10 @@ package com.liferay.adaptive.media.image.jaxrs.media.test.internal.activator.con
 import com.liferay.adaptive.media.demo.data.creator.ImageAdaptiveMediaConfigurationDemoDataCreator;
 import com.liferay.document.library.demo.data.creator.FileEntryDemoDataCreator;
 import com.liferay.document.library.demo.data.creator.RootFolderDemoDataCreator;
+import com.liferay.portal.kernel.messaging.Destination;
+import com.liferay.portal.kernel.messaging.MessageBus;
+import com.liferay.portal.kernel.messaging.MessageBusUtil;
+import com.liferay.portal.kernel.messaging.SynchronousDestination;
 import com.liferay.users.admin.demo.data.creator.OmniAdminUserDemoDataCreator;
 
 import org.osgi.framework.BundleActivator;
@@ -62,5 +66,31 @@ public class TestBundleActivator implements BundleActivator {
 	private FileEntryDemoDataCreator _fileEntryDemoDataCreator;
 	private OmniAdminUserDemoDataCreator _omniAdminUserDemoDataCreator;
 	private RootFolderDemoDataCreator _rootFolderDemoDataCreator;
+
+	private class DestinationReplacer implements AutoCloseable {
+
+		public DestinationReplacer(String destinationName) {
+			MessageBus messageBus = MessageBusUtil.getMessageBus();
+
+			_destination = messageBus.getDestination(destinationName);
+
+			SynchronousDestination synchronousDestination =
+				new SynchronousDestination();
+
+			synchronousDestination.setName(destinationName);
+
+			messageBus.replace(synchronousDestination);
+		}
+
+		@Override
+		public void close() throws Exception {
+			MessageBus messageBus = MessageBusUtil.getMessageBus();
+
+			messageBus.replace(_destination);
+		}
+
+		private final Destination _destination;
+
+	}
 
 }
