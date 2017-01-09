@@ -461,7 +461,7 @@ public abstract class BaseUpgradePortletId extends UpgradeProcess {
 		throws Exception {
 
 		try (PreparedStatement ps1 = connection.prepareStatement(
-				"select resourcePermissionId, name, scope, primKey from " +
+				"select resourcePermissionId, scope, primKey from " +
 					"ResourcePermission where name = '" + oldRootPortletId +
 						"'");
 			PreparedStatement ps2 =
@@ -473,15 +473,8 @@ public abstract class BaseUpgradePortletId extends UpgradeProcess {
 
 			while (rs.next()) {
 				long resourcePermissionId = rs.getLong("resourcePermissionId");
-				String name = rs.getString("name");
 				int scope = rs.getInt("scope");
 				String primKey = rs.getString("primKey");
-
-				String newName = name;
-
-				if (updateName) {
-					newName = newRootPortletId;
-				}
 
 				if (scope == ResourceConstants.SCOPE_INDIVIDUAL) {
 					int pos = primKey.indexOf(
@@ -505,10 +498,6 @@ public abstract class BaseUpgradePortletId extends UpgradeProcess {
 						primKey = PortletPermissionUtil.getPrimaryKey(
 							plid, newPortletId);
 					}
-
-					if (name.equals(primKey)) {
-						primKey = newName;
-					}
 				}
 
 				ps2.setString(1, primKey);
@@ -526,6 +515,11 @@ public abstract class BaseUpgradePortletId extends UpgradeProcess {
 		}
 
 		if (updateName) {
+			runSQL(
+				"update ResourcePermission set primKey = '" + newRootPortletId +
+					"' where primKey = '" + oldRootPortletId + "' and name = " +
+						"'" + oldRootPortletId + "'");
+
 			runSQL(
 				"update ResourcePermission set name = '" + newRootPortletId +
 					"' where name = '" + oldRootPortletId + "'");
