@@ -112,6 +112,18 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 		Assert.assertEquals(200, response.getStatus());
 		Assert.assertEquals("image", response.getMediaType().getType());
 	}
+
+	@Test
+	public void testGettingAdaptiveFileEntriesByInvalidConfigReturns404IfQueryParamPresent() {
+		String id = ImageAdaptiveMediaTestUtil.getRandomUuid();
+
+		long fileEntryId = _getRandomAdaptiveFileEntryId();
+
+		Response response = _getConfigResponse(id, fileEntryId, false);
+
+		Assert.assertEquals(404, response.getStatus());
+	}
+
 	private Response _getConfigResponse(
 		String id, long fileEntryId, boolean useOriginal) {
 
