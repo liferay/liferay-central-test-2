@@ -1,0 +1,7 @@
+Bundle-Activator: com.liferay.adaptive.media.image.jaxrs.media.test.internal.activator.configuration.TestBundleActivator
+Bundle-Name: Liferay Adaptive Media Image JAX-RS Media Test
+Bundle-SymbolicName: com.liferay.adaptive.media.image.jaxrs.media.test
+Bundle-Version: 1.0.0
+Liferay-Releng-Module-Group-Description:
+Liferay-Releng-Module-Group-Title: Image Adaptive Media Configuration Test
+Private-Package: com.liferay.adaptive.media.image.jaxrs.media.test.*

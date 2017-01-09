@@ -1,5 +1,5 @@
-Bundle-Name: Liferay Adaptive Media Image JAX-RS Test
-Bundle-SymbolicName: com.liferay.adaptive.media.image.jaxrs.test
+Bundle-Name: Liferay Adaptive Media Image JAX-RS Configuration Test
+Bundle-SymbolicName: com.liferay.adaptive.media.image.jaxrs.configuration.test
 Bundle-Version: 1.0.0
 Import-Package:\
 	!com.google.gson.*,\
@@ -7,5 +7,5 @@ Import-Package:\
 	!org.glassfish.jersey.client.*,\
 	*
 Liferay-Releng-Module-Group-Description:
-Liferay-Releng-Module-Group-Title: Adaptive Media Test
+Liferay-Releng-Module-Group-Title: Image Adaptive Media Configuration Test
 -includeresource: @jersey-client-[0-9]*.jar*
