@@ -70,31 +70,54 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 	public void testGettingNonAdaptiveFileEntriesByConfigReturnsOriginal() {
 		String id = _getRandomConfigurationId();
 
-		Response response = _getAdaptiveMediaRequest(
-			webTarget -> webTarget.path(
-				_GET_VARIANT_BY_CONFIG).resolveTemplate("id", id)).get();
+		long fileEntryid = _getRandomNonAdaptiveFileEntryId();
+
+		Response response = _getConfigResponse(id, fileEntryid, true);
 
 		Assert.assertEquals(200, response.getStatus());
+		Assert.assertEquals("image", response.getMediaType().getType());
 	}
 
 	@Test
 	public void testGettingNonAdaptiveFileEntriesByConfigReturns404IfQueryParamPresent() {
 		String id = _getRandomConfigurationId();
 
-		Response response = _getAdaptiveMediaRequest(
-			webTarget -> webTarget.path(_GET_VARIANT_BY_CONFIG).resolveTemplate(
-				"id", id).queryParam("original", false)).get();
+		long fileEntryId = _getRandomNonAdaptiveFileEntryId();
+
+		Response response = _getConfigResponse(id, fileEntryId, false);
 
 		Assert.assertEquals(404, response.getStatus());
 	}
 
+	private Response _getConfigResponse(
+		String id, long fileEntryId, boolean useOriginal) {
+
+		return _getAdaptiveMediaRequest(
+			webTarget -> {
+				WebTarget resolvedWebTarget = webTarget.path(
+					_GET_VARIANT_BY_CONFIG).resolveTemplate("id", id);
+
+				if (!useOriginal) {
+					return resolvedWebTarget.queryParam("original", false);
+				}
+
+				return resolvedWebTarget;
+			},
+			fileEntryId).get();
+	}
+
+	private long _getRandomAdaptiveFileEntryId() {
+		return _adaptiveFileEntryIds.get(
+			RandomUtil.nextInt(_adaptiveFileEntryIds.size()));
+	}
+
 	private Invocation.Builder _getAdaptiveMediaRequest(
-		Function<WebTarget, WebTarget> webTargetResolver) {
+		Function<WebTarget, WebTarget> webTargetResolver, long fileEntryId) {
 
 		return ImageAdaptiveMediaTestUtil.getMediaRequest(_context, webTarget
 			-> {
 				WebTarget resolvedWebTarget = webTarget.resolveTemplate(
-					"fileEntryId", _getRandomNonAdaptiveFileEntryId());
+					"fileEntryId", fileEntryId);
 
 				return webTargetResolver.apply(resolvedWebTarget);
 			}).header("Authorization", TEST_AUTH);
