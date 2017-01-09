@@ -14,8 +14,14 @@
 
 package com.liferay.adaptive.media.image.jaxrs.media.test.internal.activator.configuration;
 
+import com.liferay.adaptive.media.demo.data.creator.ImageAdaptiveMediaConfigurationDemoDataCreator;
+import com.liferay.document.library.demo.data.creator.FileEntryDemoDataCreator;
+import com.liferay.document.library.demo.data.creator.RootFolderDemoDataCreator;
+import com.liferay.users.admin.demo.data.creator.OmniAdminUserDemoDataCreator;
+
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceReference;
 
 /**
  * @author Alejandro Hernández
@@ -24,6 +30,18 @@ public class TestBundleActivator implements BundleActivator {
 
 	@Override
 	public void start(BundleContext bundleContext) throws Exception {
+		_adaptiveMediaDemoDataCreator = _getService(
+			bundleContext,
+			ImageAdaptiveMediaConfigurationDemoDataCreator.class);
+
+		_fileEntryDemoDataCreator = _getService(
+			bundleContext, FileEntryDemoDataCreator.class);
+
+		_omniAdminUserDemoDataCreator = _getService(
+			bundleContext, OmniAdminUserDemoDataCreator.class);
+
+		_rootFolderDemoDataCreator = _getService(
+			bundleContext, RootFolderDemoDataCreator.class);
 
 	}
 
@@ -31,5 +49,18 @@ public class TestBundleActivator implements BundleActivator {
 	public void stop(BundleContext bundleContext) throws Exception {
 
 	}
+
+	private <T> T _getService(BundleContext bundleContext, Class<T> clazz) {
+		ServiceReference<T> serviceReference =
+			bundleContext.getServiceReference(clazz);
+
+		return bundleContext.getService(serviceReference);
+	}
+
+	private ImageAdaptiveMediaConfigurationDemoDataCreator
+		_adaptiveMediaDemoDataCreator;
+	private FileEntryDemoDataCreator _fileEntryDemoDataCreator;
+	private OmniAdminUserDemoDataCreator _omniAdminUserDemoDataCreator;
+	private RootFolderDemoDataCreator _rootFolderDemoDataCreator;
 
 }
