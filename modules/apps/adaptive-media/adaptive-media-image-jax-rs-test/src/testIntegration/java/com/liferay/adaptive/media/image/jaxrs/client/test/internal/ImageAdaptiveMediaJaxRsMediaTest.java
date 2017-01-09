@@ -14,10 +14,12 @@
 
 package com.liferay.adaptive.media.image.jaxrs.client.test.internal;
 
-
+import com.liferay.adaptive.media.image.jaxrs.client.test.internal.util.ImageAdaptiveMediaTestUtil;
 import com.liferay.arquillian.deploymentscenario.annotations.BndFile;
 
 import java.net.URL;
+
+import java.util.List;
 
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit.Arquillian;
@@ -36,11 +38,26 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 
 	@Before
 	public void setUp() {
+		long groupId = ImageAdaptiveMediaTestUtil.getGroupId(_context);
 
+		long nonAdaptiveMediaFolderId = ImageAdaptiveMediaTestUtil.getFolderId(
+			_context, groupId, "Non Adaptive Media");
+		long adaptiveMediaFolderId = ImageAdaptiveMediaTestUtil.getFolderId(
+			_context, groupId, "Adaptive Media");
+
+		_nonAdaptiveFileEntryIds = ImageAdaptiveMediaTestUtil.getFileEntryIds(
+			_context, 2, groupId, "image-without-%d.jpeg",
+			nonAdaptiveMediaFolderId);
+
+		_adaptiveFileEntryIds = ImageAdaptiveMediaTestUtil.getFileEntryIds(
+			_context, 3, groupId, "image-with-%d.jpeg", adaptiveMediaFolderId);
 	}
 
+	private List<Long> _adaptiveFileEntryIds;
 
 	@ArquillianResource
 	private URL _context;
+
+	private List<Long> _nonAdaptiveFileEntryIds;
 
 }
