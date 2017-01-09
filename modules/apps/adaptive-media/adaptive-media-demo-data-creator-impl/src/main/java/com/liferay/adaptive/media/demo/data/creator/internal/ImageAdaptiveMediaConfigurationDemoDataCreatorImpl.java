@@ -14,7 +14,7 @@
 
 package com.liferay.adaptive.media.demo.data.creator.internal;
 
-import com.liferay.adaptive.media.demo.data.creator.DemoImageAdaptiveMediaConfiguration;
+import com.liferay.adaptive.media.demo.data.creator.DemoImageAdaptiveMediaConfigurationVariant;
 import com.liferay.adaptive.media.demo.data.creator.ImageAdaptiveMediaConfigurationDemoDataCreator;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
@@ -46,11 +46,12 @@ public class ImageAdaptiveMediaConfigurationDemoDataCreatorImpl
 		Collection<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
 			new ArrayList<>();
 
-		for (DemoImageAdaptiveMediaConfiguration demoConfiguration :
-				DemoImageAdaptiveMediaConfiguration.values()) {
+		for (DemoImageAdaptiveMediaConfigurationVariant
+				demoConfigurationVariant :
+					DemoImageAdaptiveMediaConfigurationVariant.values()) {
 
 			ImageAdaptiveMediaConfigurationEntry configurationEntry = create(
-				companyId, demoConfiguration);
+				companyId, demoConfigurationVariant);
 
 			configurationEntries.add(configurationEntry);
 		}
@@ -60,13 +61,15 @@ public class ImageAdaptiveMediaConfigurationDemoDataCreatorImpl
 
 	@Override
 	public ImageAdaptiveMediaConfigurationEntry create(
-			long companyId, DemoImageAdaptiveMediaConfiguration configuration)
+			long companyId,
+			DemoImageAdaptiveMediaConfigurationVariant configurationVariant)
 		throws IOException {
 
 		ImageAdaptiveMediaConfigurationEntry configurationEntry =
 			_configurationHelper.addImageAdaptiveMediaConfigurationEntry(
-				companyId, configuration.getName(), configuration.getUuid(),
-				configuration.getProperties());
+				companyId, configurationVariant.getName(),
+				configurationVariant.getUuid(),
+				configurationVariant.getProperties());
 
 		_addConfigurationId(companyId, configurationEntry.getUUID());
 

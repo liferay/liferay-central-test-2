@@ -34,18 +34,19 @@ public interface ImageAdaptiveMediaConfigurationDemoDataCreator {
 	 * company
 	 *
 	 * @param companyId id of the company where the configuration will be created
-	 * @param configuration configuration to be created
+	 * @param configurationVariant configuration to be created
 	 * @return created configuration
 	 *
 	 * @review
 	 */
 	public ImageAdaptiveMediaConfigurationEntry create(
-			long companyId, DemoImageAdaptiveMediaConfiguration configuration)
+			long companyId,
+			DemoImageAdaptiveMediaConfigurationVariant configurationVariant)
 		throws IOException;
 
 	/**
 	  * Creates all {@link ImageAdaptiveMediaConfigurationEntry} based on the
-	  * {@link DemoImageAdaptiveMediaConfiguration} enum
+	  * {@link DemoImageAdaptiveMediaConfigurationVariant} enum
 	  *
 	  * @param companyId id of the company where the configurations will be
 	 *                      created
