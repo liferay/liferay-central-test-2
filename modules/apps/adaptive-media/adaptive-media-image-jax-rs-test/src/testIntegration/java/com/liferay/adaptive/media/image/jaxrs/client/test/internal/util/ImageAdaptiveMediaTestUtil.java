@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.function.Function;
 
 import javax.ws.rs.client.Client;
@@ -118,6 +119,10 @@ public class ImageAdaptiveMediaTestUtil {
 
 		return getBaseRequest(
 			context.toString(), _MEDIA_BASE_PATH, webTargetResolver);
+	}
+
+	public static String getRandomUuid() {
+		return UUID.randomUUID().toString();
 	}
 
 	private static long _getCompanyId(URL context) {

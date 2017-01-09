@@ -30,7 +30,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.UUID;
 import java.util.function.Function;
 
 import javax.ws.rs.client.Entity;
@@ -94,7 +93,7 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 	@Test
 	public void testAddConfigurationWithoutBodyReturns400() {
 		Invocation.Builder builder = _getAuthenticatedInvocationBuilder(
-			_getRandomUuid());
+			ImageAdaptiveMediaTestUtil.getRandomUuid());
 
 		Response response = builder.put(Entity.json(""));
 
@@ -123,7 +122,7 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 	@Test
 	public void testDeleteConfigurationWithoutAuthorizationReturns403() {
 		Invocation.Builder builder = _getUnauthenticatedInvocationBuilder(
-			_getRandomUuid());
+			ImageAdaptiveMediaTestUtil.getRandomUuid());
 
 		Response response = builder.delete();
 
@@ -146,7 +145,7 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 	@Test
 	public void testDeleteNonExistingConfigurationReturns204() {
 		Invocation.Builder builder = _getAuthenticatedInvocationBuilder(
-			_getRandomUuid());
+			ImageAdaptiveMediaTestUtil.getRandomUuid());
 
 		Response response = builder.delete();
 
@@ -205,7 +204,7 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 	@Test
 	public void testGetConfigurationWithNonExistingIdReturns404() {
 		Invocation.Builder builder = _getUnauthenticatedInvocationBuilder(
-			_getRandomUuid());
+			ImageAdaptiveMediaTestUtil.getRandomUuid());
 
 		Response response = builder.get();
 
@@ -214,10 +213,6 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 
 	private static long _getRandomLong() {
 		return Math.abs(new Random().nextLong() % 1000);
-	}
-
-	private static String _getRandomUuid() {
-		return UUID.randomUUID().toString();
 	}
 
 	private JsonObject _addConfiguration(JsonObject json) {
@@ -306,7 +301,7 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 		for (int i = 0; i < 10; i++) {
 			JsonObject jsonObject = new JsonObject();
 
-			String id = _getRandomUuid();
+			String id = ImageAdaptiveMediaTestUtil.getRandomUuid();
 
 			jsonObject.addProperty("name", id + " Size");
 
