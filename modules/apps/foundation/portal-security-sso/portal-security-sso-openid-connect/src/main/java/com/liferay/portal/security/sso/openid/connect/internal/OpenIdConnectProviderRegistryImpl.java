@@ -144,16 +144,16 @@ public class OpenIdConnectProviderRegistryImpl
 			openIdConnectProviderConfiguration.openIdConnectClientSecret());
 		openIdConnectProvider.setDiscoveryEndPoint(
 			openIdConnectProviderConfiguration.discoveryEndPoint());
+		openIdConnectProvider.setIssuerURL(
+			openIdConnectProviderConfiguration.issuerURL());
+		openIdConnectProvider.setJWKSURI(
+			openIdConnectProviderConfiguration.jwksURI());
+		openIdConnectProvider.setSubjectTypes(
+			openIdConnectProviderConfiguration.subjectTypes());
 		openIdConnectProvider.setTokenEndPoint(
 			openIdConnectProviderConfiguration.tokenEndPoint());
 		openIdConnectProvider.setUserInfoEndPoint(
 			openIdConnectProviderConfiguration.userInfoEndPoint());
-		openIdConnectProvider.setIssuerURL(
-			openIdConnectProviderConfiguration.issuerURL());
-		openIdConnectProvider.setSubjectTypes(
-			openIdConnectProviderConfiguration.subjectTypes());
-		openIdConnectProvider.setJWKSURI(
-			openIdConnectProviderConfiguration.jwksURI());
 
 		return openIdConnectProvider;
 	}
