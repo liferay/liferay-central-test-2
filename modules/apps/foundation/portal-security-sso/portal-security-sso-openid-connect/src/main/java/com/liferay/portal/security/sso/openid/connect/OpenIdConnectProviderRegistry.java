@@ -27,7 +27,7 @@ public interface OpenIdConnectProviderRegistry {
 
 	public OpenIdConnectProvider getOpenIdConnectProvider(String name);
 
-	public OpenIdConnectProvider getOpenIdConnectProvider(URL issuerUrl);
+	public OpenIdConnectProvider getOpenIdConnectProvider(URL issuerURL);
 
 	public Collection<String> getOpenIdConnectProviderNames();
 

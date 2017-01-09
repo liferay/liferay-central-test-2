@@ -64,7 +64,7 @@ public class OpenIdConnectUserInfoProcessorImpl
 			Validator.isNull(emailAddress)) {
 
 			throw new OpenIdConnectServiceException.UserInfoMissingException(
-				"User Information has missing fields");
+				"User information has missing fields");
 		}
 
 		long creatorUserId = 0;

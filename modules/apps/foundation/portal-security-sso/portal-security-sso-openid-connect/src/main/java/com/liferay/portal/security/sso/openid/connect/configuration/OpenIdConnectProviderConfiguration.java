@@ -66,13 +66,13 @@ public interface OpenIdConnectProviderConfiguration {
 		deflt = "https://accounts.google.com", description = "issuer-url-help",
 		required = false
 	)
-	public String issuerUrl();
+	public String issuerURL();
 
 	@Meta.AD(
 		deflt = "https://www.googleapis.com/oauth2/v3/certs",
 		description = "jwks-uri-help", required = false
 	)
-	public String jwksUri();
+	public String jwksURI();
 
 	@Meta.AD(
 		deflt = "public", description = "subject-types-help", required = false

@@ -25,8 +25,7 @@
 	<aui:select label="openid-connect-provider-name" name="<%= OpenIdConnectWebKeys.OPEN_ID_CONNECT_PROVIDER_NAME %>">
 
 		<%
-		Collection<String> openIdConnectProviderNames =
-			(Collection<String>)request.getAttribute(OpenIdConnectWebKeys.OPEN_ID_CONNECT_PROVIDER_NAMES);
+		Collection<String> openIdConnectProviderNames = (Collection<String>)request.getAttribute(OpenIdConnectWebKeys.OPEN_ID_CONNECT_PROVIDER_NAMES);
 
 		for (String openIdConnectProviderName : openIdConnectProviderNames) {
 		%>

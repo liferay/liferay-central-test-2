@@ -66,13 +66,13 @@ public class OpenIdConnectProviderRegistryImpl
 	}
 
 	@Override
-	public OpenIdConnectProvider getOpenIdConnectProvider(URL issuerUrl) {
+	public OpenIdConnectProvider getOpenIdConnectProvider(URL issuerURL) {
 		for (OpenIdConnectProvider openIdConnectProvider :
 				_openIdConnectProvidersPerName.values()) {
 
 			if (Objects.equals(
-					openIdConnectProvider.getIssuerUrl(),
-					issuerUrl.getHost())) {
+					openIdConnectProvider.getIssuerURL(),
+					issuerURL.getHost())) {
 
 				return openIdConnectProvider;
 			}
@@ -148,12 +148,12 @@ public class OpenIdConnectProviderRegistryImpl
 			openIdConnectProviderConfiguration.tokenEndPoint());
 		openIdConnectProvider.setUserInfoEndPoint(
 			openIdConnectProviderConfiguration.userInfoEndPoint());
-		openIdConnectProvider.setIssuerUrl(
-			openIdConnectProviderConfiguration.issuerUrl());
+		openIdConnectProvider.setIssuerURL(
+			openIdConnectProviderConfiguration.issuerURL());
 		openIdConnectProvider.setSubjectTypes(
 			openIdConnectProviderConfiguration.subjectTypes());
-		openIdConnectProvider.setJwksUri(
-			openIdConnectProviderConfiguration.jwksUri());
+		openIdConnectProvider.setJWKSURI(
+			openIdConnectProviderConfiguration.jwksURI());
 
 		return openIdConnectProvider;
 	}

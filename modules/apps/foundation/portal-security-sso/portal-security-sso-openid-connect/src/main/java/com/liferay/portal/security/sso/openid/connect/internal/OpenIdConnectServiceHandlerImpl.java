@@ -151,18 +151,18 @@ public class OpenIdConnectServiceHandlerImpl
 
 			// Request Token
 
-			String providerName = (String)httpSession.getAttribute(
+			String openIdConnectProviderName = (String)httpSession.getAttribute(
 				OpenIdConnectWebKeys.OPEN_ID_CONNECT_PROVIDER_NAME);
 
 			OpenIdConnectProvider openIdConnectProvider =
 				_openIdConnectProviderRegistry.getOpenIdConnectProvider(
-					providerName);
+					openIdConnectProviderName);
 
 			if (openIdConnectProvider == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
 						"Could not find openIdConnectProvider with name " +
-							providerName);
+							openIdConnectProviderName);
 				}
 
 				return null;
@@ -172,11 +172,11 @@ public class OpenIdConnectServiceHandlerImpl
 				initOIDCProviderMetadata(openIdConnectProvider);
 
 			OIDCTokenResponse tokenResponse = requestToken(
-				providerName, oidcProviderMetadata, authCode,
+				openIdConnectProviderName, oidcProviderMetadata, authCode,
 				httpServletRequest);
 
 			validateToken(
-				providerName, tokenResponse, actionRequest,
+				openIdConnectProviderName, tokenResponse, actionRequest,
 				oidcProviderMetadata);
 
 			Tokens tokens = tokenResponse.getTokens();
@@ -209,7 +209,7 @@ public class OpenIdConnectServiceHandlerImpl
 
 	@Override
 	public void requestAuthentication(
-			String providerName, ActionRequest actionRequest,
+			String openIdConnectProviderName, ActionRequest actionRequest,
 			ActionResponse actionResponse)
 		throws PortalException {
 
@@ -223,12 +223,12 @@ public class OpenIdConnectServiceHandlerImpl
 
 		OpenIdConnectProvider openIdConnectProvider =
 			_openIdConnectProviderRegistry.getOpenIdConnectProvider(
-				providerName);
+				openIdConnectProviderName);
 
 		if (openIdConnectProvider == null) {
 			throw new SystemException(
 				"Could not find openIdConnectProvider with name " +
-					providerName);
+					openIdConnectProviderName);
 		}
 
 		// Generate random state string for pairing the
@@ -249,7 +249,8 @@ public class OpenIdConnectServiceHandlerImpl
 		// Store state to httpSession to verify later
 
 		httpSession.setAttribute(
-			OpenIdConnectWebKeys.OPEN_ID_CONNECT_PROVIDER_NAME, providerName);
+			OpenIdConnectWebKeys.OPEN_ID_CONNECT_PROVIDER_NAME,
+			openIdConnectProviderName);
 
 		httpSession.setAttribute(
 			OpenIdConnectWebKeys.OPEN_ID_CONNECT_STATE, state);
@@ -262,7 +263,8 @@ public class OpenIdConnectServiceHandlerImpl
 				initOIDCProviderMetadata(openIdConnectProvider);
 
 			OIDCClientInformation oidcClientInformation =
-				getOIDCClientInformation(providerName, oidcProviderMetadata);
+				getOIDCClientInformation(
+					openIdConnectProviderName, oidcProviderMetadata);
 
 			URI redirectURI = createRedirectURI(httpServletRequest);
 
@@ -319,15 +321,16 @@ public class OpenIdConnectServiceHandlerImpl
 	}
 
 	protected OIDCClientInformation getOIDCClientInformation(
-			String providerName, OIDCProviderMetadata oidcProviderMetadata)
+			String openIdConnectProviderName,
+			OIDCProviderMetadata oidcProviderMetadata)
 		throws OpenIdConnectServiceException {
 
 		OpenIdConnectProvider openIdConnectProvider =
 			_openIdConnectProviderRegistry.getOpenIdConnectProvider(
-				providerName);
+				openIdConnectProviderName);
 
 		if (Validator.isNull(openIdConnectProvider)) {
-			_log.error("No provider configured: " + providerName);
+			_log.error("No provider configured: " + openIdConnectProviderName);
 
 			throw new OpenIdConnectServiceException.
 				MissingClientInformationException("Missing Client Information");
@@ -381,7 +384,7 @@ public class OpenIdConnectServiceHandlerImpl
 		String discoveryEndpoint = openIdConnectProvider.getDiscoveryEndPoint();
 
 		if (Validator.isNull(discoveryEndpoint)) {
-			Issuer issuer = new Issuer(openIdConnectProvider.getIssuerUrl());
+			Issuer issuer = new Issuer(openIdConnectProvider.getIssuerURL());
 
 			List<SubjectType> subjectTypes = new ArrayList<>();
 
@@ -389,7 +392,7 @@ public class OpenIdConnectServiceHandlerImpl
 				subjectTypes.add(SubjectType.parse(subjectType));
 			}
 
-			URI jwkSetURI = new URI(openIdConnectProvider.getJwksUri());
+			URI jwkSetURI = new URI(openIdConnectProvider.getJWKSURI());
 
 			oidcProviderMetadata = new OIDCProviderMetadata(
 				issuer, subjectTypes, jwkSetURI);
@@ -440,14 +443,15 @@ public class OpenIdConnectServiceHandlerImpl
 	}
 
 	protected OIDCTokenResponse requestToken(
-			String providerName, OIDCProviderMetadata oidcProviderMetadata,
+			String openIdConnectProviderName,
+			OIDCProviderMetadata oidcProviderMetadata,
 			AuthorizationCode authorizationCode,
 			HttpServletRequest httpServletRequest)
 		throws IOException, ParseException,
 			PortalException, URISyntaxException {
 
 		OIDCClientInformation oidcClientInformation = getOIDCClientInformation(
-			providerName, oidcProviderMetadata);
+			openIdConnectProviderName, oidcProviderMetadata);
 
 		URI redirectURI = createRedirectURI(httpServletRequest);
 
@@ -506,14 +510,14 @@ public class OpenIdConnectServiceHandlerImpl
 	}
 
 	protected IDTokenClaimsSet validateToken(
-			String providerName, OIDCTokenResponse tokenResponse,
+			String openIdConnectProviderName, OIDCTokenResponse tokenResponse,
 			ActionRequest actionRequest,
 			OIDCProviderMetadata oidcProviderMetadata)
 		throws BadJOSEException, GeneralException, JOSEException,
 			MalformedURLException, OpenIdConnectServiceException {
 
 		OIDCClientInformation oidcClientInformation = getOIDCClientInformation(
-			providerName, oidcProviderMetadata);
+			openIdConnectProviderName, oidcProviderMetadata);
 
 		HttpServletRequest httpServletRequest = getOriginalServletRequest(
 			actionRequest);

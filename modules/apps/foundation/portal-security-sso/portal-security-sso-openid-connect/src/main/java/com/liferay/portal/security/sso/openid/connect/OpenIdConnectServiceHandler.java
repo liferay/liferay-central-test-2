@@ -31,7 +31,7 @@ public interface OpenIdConnectServiceHandler {
 		throws PortalException;
 
 	public void requestAuthentication(
-			String providerName, ActionRequest actionRequest,
+			String openIdConnectProviderName, ActionRequest actionRequest,
 			ActionResponse actionResponse)
 		throws PortalException;
 

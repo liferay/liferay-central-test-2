@@ -39,12 +39,12 @@ public class OpenIdConnectProvider {
 		return _discoveryEndPoint;
 	}
 
-	public String getIssuerUrl() {
-		return _issuerUrl;
+	public String getIssuerURL() {
+		return _issuerURL;
 	}
 
-	public String getJwksUri() {
-		return _jwksUri;
+	public String getJWKSURI() {
+		return _jwksURI;
 	}
 
 	public String getName() {
@@ -79,12 +79,12 @@ public class OpenIdConnectProvider {
 		_discoveryEndPoint = discoveryEndPoint;
 	}
 
-	public void setIssuerUrl(String issuerUrl) {
-		_issuerUrl = issuerUrl;
+	public void setIssuerURL(String issuerURL) {
+		_issuerURL = issuerURL;
 	}
 
-	public void setJwksUri(String jwksUri) {
-		_jwksUri = jwksUri;
+	public void setJWKSURI(String jwksURI) {
+		_jwksURI = jwksURI;
 	}
 
 	public void setSubjectTypes(String[] subjectTypes) {
@@ -103,8 +103,8 @@ public class OpenIdConnectProvider {
 	private String _clientId;
 	private String _clientSecret;
 	private String _discoveryEndPoint;
-	private String _issuerUrl;
-	private String _jwksUri;
+	private String _issuerURL;
+	private String _jwksURI;
 	private final String _name;
 	private String[] _subjectTypes;
 	private String _tokenEndPoint;
