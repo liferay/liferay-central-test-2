@@ -71,7 +71,7 @@ public class ImageAdaptiveMediaConfigurationDemoDataCreatorImpl
 				configurationVariant.getUuid(),
 				configurationVariant.getProperties());
 
-		_addConfigurationId(companyId, configurationEntry.getUUID());
+		_addConfigurationUuid(companyId, configurationEntry.getUUID());
 
 		return configurationEntry;
 	}
@@ -79,10 +79,13 @@ public class ImageAdaptiveMediaConfigurationDemoDataCreatorImpl
 	@Override
 	public void delete() throws IOException {
 		for (Long companyId : _configurationIds.keySet()) {
-			for (String id : _configurationIds.get(companyId)) {
+			List<String> uuids = _configurationIds.get(companyId);
+
+			for (String uuid : uuids) {
 				_configurationHelper.deleteImageAdaptiveMediaConfigurationEntry(
-					companyId, id);
-				_configurationIds.get(companyId).remove(id);
+					companyId, uuid);
+
+				uuids.remove(uuid);
 			}
 		}
 	}
@@ -94,10 +97,13 @@ public class ImageAdaptiveMediaConfigurationDemoDataCreatorImpl
 		_configurationHelper = configurationHelper;
 	}
 
-	private void _addConfigurationId(long companyId, String uuid) {
+	private void _addConfigurationUuid(long companyId, String uuid) {
 		_configurationIds.computeIfAbsent(
 			companyId, k -> new CopyOnWriteArrayList<>());
-		_configurationIds.get(companyId).add(uuid);
+
+		List<String> uuids = _configurationIds.get(companyId);
+
+		uuids.add(uuid);
 	}
 
 	private ImageAdaptiveMediaConfigurationHelper _configurationHelper;
