@@ -77,6 +77,17 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 		Assert.assertEquals(200, response.getStatus());
 	}
 
+	@Test
+	public void testGettingNonAdaptiveFileEntriesByConfigReturns404IfQueryParamPresent() {
+		String id = _getRandomConfigurationId();
+
+		Response response = _getAdaptiveMediaRequest(
+			webTarget -> webTarget.path(_GET_VARIANT_BY_CONFIG).resolveTemplate(
+				"id", id).queryParam("original", false)).get();
+
+		Assert.assertEquals(404, response.getStatus());
+	}
+
 	private Invocation.Builder _getAdaptiveMediaRequest(
 		Function<WebTarget, WebTarget> webTargetResolver) {
 
