@@ -63,16 +63,14 @@ public class OpenIdConnectLoginResponseMVCActionCommand
 			_openIdConnectServiceHandler.processAuthenticationResponse(
 				themeDisplay, actionRequest, actionResponse);
 
-			String urlHome = themeDisplay.getURLHome();
-
-			actionResponse.sendRedirect(urlHome);
+			actionResponse.sendRedirect(themeDisplay.getURLHome());
 		}
 		catch (Exception e) {
 			if (e instanceof OpenIdConnectServiceException) {
 				SessionErrors.add(actionRequest, e.getClass());
 			}
 			else {
-				_log.error("Error processing the OpenID login", e);
+				_log.error("Unable to process the OpenID login", e);
 
 				PortalUtil.sendError(e, actionRequest, actionResponse);
 			}

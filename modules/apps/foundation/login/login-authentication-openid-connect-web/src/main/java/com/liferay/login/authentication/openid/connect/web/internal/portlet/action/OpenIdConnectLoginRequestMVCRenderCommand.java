@@ -61,7 +61,6 @@ public class OpenIdConnectLoginRequestMVCRenderCommand
 
 		HttpServletRequest httpServletRequest =
 			PortalUtil.getHttpServletRequest(renderRequest);
-
 		HttpServletResponse httpServletResponse =
 			PortalUtil.getHttpServletResponse(renderResponse);
 

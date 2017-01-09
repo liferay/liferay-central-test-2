@@ -58,19 +58,18 @@ public class OpenIdConnectLoginRequestMVCActionCommand
 		throws Exception {
 
 		try {
-			String openIdProviderName = ParamUtil.get(
+			String openIdConnectProviderName = ParamUtil.getString(
 				actionRequest,
-				OpenIdConnectWebKeys.OPEN_ID_CONNECT_PROVIDER_NAME,
-				StringPool.BLANK);
+				OpenIdConnectWebKeys.OPEN_ID_CONNECT_PROVIDER_NAME);
 
 			_openIdConnectServiceHandler.requestAuthentication(
-				openIdProviderName, actionRequest, actionResponse);
+				openIdConnectProviderName, actionRequest, actionResponse);
 		}
 		catch (Exception e) {
 			if (e instanceof OpenIdConnectServiceException) {
 				if (_log.isInfoEnabled()) {
 					_log.info(
-						"Error communicating with OpenID provider: " +
+						"Unable to communicate with OpenID Connect provider: " +
 							e.getMessage());
 				}
 
@@ -82,7 +81,7 @@ public class OpenIdConnectLoginRequestMVCActionCommand
 				SessionErrors.add(actionRequest, e.getClass());
 			}
 			else {
-				_log.error("Error processing the OpenID login", e);
+				_log.error("Unable to process the OpenID login", e);
 
 				PortalUtil.sendError(e, actionRequest, actionResponse);
 			}
