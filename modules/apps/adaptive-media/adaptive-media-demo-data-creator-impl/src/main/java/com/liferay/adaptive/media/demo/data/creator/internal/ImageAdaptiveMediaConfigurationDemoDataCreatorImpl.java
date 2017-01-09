@@ -49,7 +49,10 @@ public class ImageAdaptiveMediaConfigurationDemoDataCreatorImpl
 		for (DemoImageAdaptiveMediaConfiguration demoConfiguration :
 				DemoImageAdaptiveMediaConfiguration.values()) {
 
-			configurationEntries.add(create(companyId, demoConfiguration));
+			ImageAdaptiveMediaConfigurationEntry configurationEntry = create(
+				companyId, demoConfiguration);
+
+			configurationEntries.add(configurationEntry);
 		}
 
 		return configurationEntries;
@@ -62,7 +65,7 @@ public class ImageAdaptiveMediaConfigurationDemoDataCreatorImpl
 
 		ImageAdaptiveMediaConfigurationEntry configurationEntry =
 			_configurationHelper.addImageAdaptiveMediaConfigurationEntry(
-				companyId, configuration.getName(), configuration.getId(),
+				companyId, configuration.getName(), configuration.getUuid(),
 				configuration.getProperties());
 
 		_addConfigurationId(companyId, configurationEntry.getUUID());
@@ -89,8 +92,8 @@ public class ImageAdaptiveMediaConfigurationDemoDataCreatorImpl
 	}
 
 	private void _addConfigurationId(long companyId, String uuid) {
-		_configurationIds.computeIfAbsent(companyId,
-			k -> new CopyOnWriteArrayList<>());
+		_configurationIds.computeIfAbsent(
+			companyId, k -> new CopyOnWriteArrayList<>());
 		_configurationIds.get(companyId).add(uuid);
 	}
 

@@ -1,3 +1,17 @@
+/**
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ */
+
 package com.liferay.adaptive.media.demo.data.creator;
 
 import java.util.HashMap;
@@ -14,10 +28,6 @@ public enum DemoImageAdaptiveMediaConfiguration {
 	L("Large demo size", "demo-large", 800, 800),
 	XL("Extra large demo size", "demo-xlarge", 1200, 1200);
 
-	public String getId() {
-		return _id;
-	}
-
 	public String getName() {
 		return _name;
 	}
@@ -31,18 +41,22 @@ public enum DemoImageAdaptiveMediaConfiguration {
 		return properties;
 	}
 
+	public String getUuid() {
+		return _uuid;
+	}
+
 	private DemoImageAdaptiveMediaConfiguration(
-		String name, String id, int width, int height) {
+		String name, String uuid, int width, int height) {
 
 		_name = name;
-		_id = id;
+		_uuid = uuid;
 		_width = width;
 		_height = height;
 	}
 
 	private final int _height;
-	private final String _id;
 	private final String _name;
+	private final String _uuid;
 	private final int _width;
 
 }

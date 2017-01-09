@@ -48,9 +48,10 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 	implements ImageAdaptiveMediaConfigurationHelper {
 
 	@Override
-	public ImageAdaptiveMediaConfigurationEntry addImageAdaptiveMediaConfigurationEntry(
-			long companyId, String name, String uuid,
-			Map<String, String> properties)
+	public ImageAdaptiveMediaConfigurationEntry
+			addImageAdaptiveMediaConfigurationEntry(
+				long companyId, String name, String uuid,
+				Map<String, String> properties)
 		throws IOException {
 
 		Collection<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
