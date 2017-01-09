@@ -21,6 +21,9 @@ import com.liferay.portal.kernel.messaging.Destination;
 import com.liferay.portal.kernel.messaging.MessageBus;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.SynchronousDestination;
+import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.repository.model.Folder;
+import com.liferay.portal.kernel.test.util.TestPropsValues;
 import com.liferay.users.admin.demo.data.creator.OmniAdminUserDemoDataCreator;
 
 import org.osgi.framework.BundleActivator;
@@ -47,11 +50,48 @@ public class TestBundleActivator implements BundleActivator {
 		_rootFolderDemoDataCreator = _getService(
 			bundleContext, RootFolderDemoDataCreator.class);
 
+		long companyId = TestPropsValues.getCompanyId();
+
+		long groupId = TestPropsValues.getGroupId();
+
+		try (DestinationReplacer destinationReplacer = new DestinationReplacer(
+				"liferay/adaptive_media_processor")) {
+
+			User user = _omniAdminUserDemoDataCreator.create(
+				companyId, "alejandro.hernandez@liferay.com");
+
+			Folder nonAdaptiveMediaFolder = _rootFolderDemoDataCreator.create(
+				user.getUserId(), groupId, "Non Adaptive Media");
+
+			for (int i = 0; i < 2; i++) {
+				String fileName = String.format("image-without-%d.jpeg", i);
+
+				_fileEntryDemoDataCreator.create(
+					user.getUserId(), nonAdaptiveMediaFolder.getFolderId(),
+					fileName);
+			}
+
+			_adaptiveMediaDemoDataCreator.create(companyId);
+
+			Folder adaptiveMediaFolder = _rootFolderDemoDataCreator.create(
+				user.getUserId(), groupId, "Adaptive Media");
+
+			for (int i = 0; i < 3; i++) {
+				String fileName = String.format("image-with-%d.jpeg", i);
+
+				_fileEntryDemoDataCreator.create(
+					user.getUserId(), adaptiveMediaFolder.getFolderId(),
+					fileName);
+			}
+		}
 	}
 
 	@Override
 	public void stop(BundleContext bundleContext) throws Exception {
-
+		_fileEntryDemoDataCreator.delete();
+		_rootFolderDemoDataCreator.delete();
+		_adaptiveMediaDemoDataCreator.delete();
+		_omniAdminUserDemoDataCreator.delete();
 	}
 
 	private <T> T _getService(BundleContext bundleContext, Class<T> clazz) {
