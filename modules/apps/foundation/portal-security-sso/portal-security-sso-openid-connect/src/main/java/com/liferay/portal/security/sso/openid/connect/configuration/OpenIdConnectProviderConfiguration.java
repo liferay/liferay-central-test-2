@@ -52,13 +52,13 @@ public interface OpenIdConnectProviderConfiguration {
 
 	@Meta.AD(
 		deflt = "https://accounts.google.com/o/oauth2/v2/auth",
-		description = "authorization-end-point-help", required = false
+		description = "authorization-endpoint-help", required = false
 	)
 	public String authorizationEndPoint();
 
 	@Meta.AD(
 		deflt = "https://accounts.google.com/.well-known/openid-configuration",
-		description = "discovery-end-point-help", required = false
+		description = "discovery-endpoint-help", required = false
 	)
 	public String discoveryEndPoint();
 
@@ -81,13 +81,13 @@ public interface OpenIdConnectProviderConfiguration {
 
 	@Meta.AD(
 		deflt = "https://www.googleapis.com/oauth2/v4/token",
-		description = "token-end-point-help", required = false
+		description = "token-endpoint-help", required = false
 	)
 	public String tokenEndPoint();
 
 	@Meta.AD(
 		deflt = "https://www.googleapis.com/oauth2/v3/userinfo",
-		description = "user-info-end-point-help", required = false
+		description = "user-info-endpoint-help", required = false
 	)
 	public String userInfoEndPoint();
 
