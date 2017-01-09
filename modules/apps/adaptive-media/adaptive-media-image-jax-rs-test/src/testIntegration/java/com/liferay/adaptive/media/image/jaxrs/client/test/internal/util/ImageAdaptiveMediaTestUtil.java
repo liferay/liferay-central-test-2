@@ -113,6 +113,13 @@ public class ImageAdaptiveMediaTestUtil {
 		return jsonObject.get("groupId").getAsLong();
 	}
 
+	public static Invocation.Builder getMediaRequest(
+		URL context, Function<WebTarget, WebTarget> webTargetResolver) {
+
+		return getBaseRequest(
+			context.toString(), _MEDIA_BASE_PATH, webTargetResolver);
+	}
+
 	private static long _getCompanyId(URL context) {
 		Map<String, Object> queryParams = new HashMap<String, Object>() {
 			{
@@ -174,5 +181,8 @@ public class ImageAdaptiveMediaTestUtil {
 	private static final String _GET_GROUP_PATH = "/group/get-group";
 
 	private static final String _JSONWS_BASE_PATH = "/api/jsonws";
+
+	private static final String _MEDIA_BASE_PATH =
+		"o/adaptive-media/images/content/file/{fileEntryId}/version/last";
 
 }

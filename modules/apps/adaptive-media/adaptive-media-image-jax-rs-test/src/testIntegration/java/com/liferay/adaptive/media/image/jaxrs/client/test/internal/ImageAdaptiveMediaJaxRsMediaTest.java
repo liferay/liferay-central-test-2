@@ -14,18 +14,29 @@
 
 package com.liferay.adaptive.media.image.jaxrs.client.test.internal;
 
+import static com.liferay.adaptive.media.image.jaxrs.client.test.internal.util.ImageAdaptiveMediaTestUtil.TEST_AUTH;
+
 import com.liferay.adaptive.media.image.jaxrs.client.test.internal.util.ImageAdaptiveMediaTestUtil;
 import com.liferay.arquillian.deploymentscenario.annotations.BndFile;
+import com.liferay.portal.kernel.security.RandomUtil;
 
 import java.net.URL;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
+
+import javax.ws.rs.client.Invocation;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.Response;
 
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.test.api.ArquillianResource;
 
+import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
@@ -35,6 +46,8 @@ import org.junit.runner.RunWith;
 @RunAsClient
 @RunWith(Arquillian.class)
 public class ImageAdaptiveMediaJaxRsMediaTest {
+
+	private static final String _GET_VARIANT_BY_CONFIG = "/config/{id}";
 
 	@Before
 	public void setUp() {
@@ -51,6 +64,49 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 
 		_adaptiveFileEntryIds = ImageAdaptiveMediaTestUtil.getFileEntryIds(
 			_context, 3, groupId, "image-with-%d.jpeg", adaptiveMediaFolderId);
+	}
+
+	@Test
+	public void testGettingNonAdaptiveFileEntriesByConfigReturnsOriginal() {
+		String id = _getRandomConfigurationId();
+
+		Response response = _getAdaptiveMediaRequest(
+			webTarget -> webTarget.path(
+				_GET_VARIANT_BY_CONFIG).resolveTemplate("id", id)).get();
+
+		Assert.assertEquals(200, response.getStatus());
+	}
+
+	private Invocation.Builder _getAdaptiveMediaRequest(
+		Function<WebTarget, WebTarget> webTargetResolver) {
+
+		return ImageAdaptiveMediaTestUtil.getMediaRequest(_context, webTarget
+			-> {
+				WebTarget resolvedWebTarget = webTarget.resolveTemplate(
+					"fileEntryId", _getRandomNonAdaptiveFileEntryId());
+
+				return webTargetResolver.apply(resolvedWebTarget);
+			}).header("Authorization", TEST_AUTH);
+	}
+
+	private long _getRandomNonAdaptiveFileEntryId() {
+		return _nonAdaptiveFileEntryIds.get(
+			RandomUtil.nextInt(_nonAdaptiveFileEntryIds.size()));
+	}
+
+	private String _getRandomConfigurationId() {
+		return _configurationIds.get(
+			RandomUtil.nextInt(_configurationIds.size()));
+	}
+
+	private static final List<String> _configurationIds = new ArrayList<>();
+
+	static {
+		_configurationIds.add("demo-xsmall");
+		_configurationIds.add("demo-small");
+		_configurationIds.add("demo-medium");
+		_configurationIds.add("demo-large");
+		_configurationIds.add("demo-xlarge");
 	}
 
 	private List<Long> _adaptiveFileEntryIds;
