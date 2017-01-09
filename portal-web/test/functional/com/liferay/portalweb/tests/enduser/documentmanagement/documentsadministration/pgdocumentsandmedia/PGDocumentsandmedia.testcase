@@ -987,7 +987,7 @@
 		</execute>
 	</command>
 
-	<command name="DeleteFolderDocument" priority="5">
+	<command name="DeleteDocumentInFolder" priority="5">
 		<property name="portal.acceptance" value="true" />
 
 		<execute macro="Navigator#gotoPage">
