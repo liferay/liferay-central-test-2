@@ -86,13 +86,9 @@ public class ExportArticleMVCResourceCommand extends BaseMVCResourceCommand {
 					portletPreferences.getValue("extensions", null));
 			}
 
-			if (ArrayUtil.contains(
-					allowedExtensions,
-					StringUtil.toLowerCase(targetExtension))) {
-
+			if (ArrayUtil.contains(allowedExtensions, targetExtension, true)) {
 				_exportArticleUtil.sendFile(
-					StringUtil.toUpperCase(targetExtension), resourceRequest,
-					resourceResponse);
+					targetExtension, resourceRequest, resourceResponse);
 			}
 			else {
 				throw new ExportArticleTargetExtensionException(
