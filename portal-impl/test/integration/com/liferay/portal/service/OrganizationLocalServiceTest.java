@@ -660,7 +660,7 @@ public class OrganizationLocalServiceTest {
 		_organizations.add(organizationB);
 		_organizations.add(organizationA);
 
-		String shallowTreePath = OrganizationTestUtil.constructTreePath(
+		String shallowTreePath = OrganizationTestUtil.getTreePath(
 			new Organization[] {
 				organizationB, organizationBB, organizationBBB
 			});
@@ -675,7 +675,7 @@ public class OrganizationLocalServiceTest {
 		organizationBBB = OrganizationLocalServiceUtil.fetchOrganization(
 			organizationBBB.getOrganizationId());
 
-		String deepTreePath = OrganizationTestUtil.constructTreePath(
+		String deepTreePath = OrganizationTestUtil.getTreePath(
 			new Organization[] {
 				organizationA, organizationB, organizationBB, organizationBBB
 			});

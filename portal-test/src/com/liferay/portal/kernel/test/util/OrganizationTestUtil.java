@@ -149,7 +149,7 @@ public class OrganizationTestUtil {
 			new ServiceContext());
 	}
 
-	public static String constructTreePath(Organization[] organizations) {
+	public static String getTreePath(Organization[] organizations) {
 		StringBundler sb = new StringBundler();
 
 		sb.append(StringPool.FORWARD_SLASH);
