@@ -28,7 +28,6 @@ import javax.portlet.MimeResponse;
 import javax.portlet.PortletRequest;
 import javax.portlet.WindowState;
 
-
 /**
  * @author Brian Wing Shun Chan
  * @author Shuyang Zhou

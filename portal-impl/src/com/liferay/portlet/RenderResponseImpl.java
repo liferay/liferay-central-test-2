@@ -24,7 +24,6 @@ import java.util.Collection;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletRequest;
 
-
 /**
  * @author Brian Wing Shun Chan
  * @author Eduardo Lundgren
