@@ -20,8 +20,6 @@ import com.liferay.adaptive.media.image.jaxrs.client.test.internal.util.ImageAda
 import com.liferay.arquillian.deploymentscenario.annotations.BndFile;
 import com.liferay.portal.kernel.security.RandomUtil;
 
-import java.net.URL;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
@@ -32,10 +30,8 @@ import javax.ws.rs.core.Response;
 
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit.Arquillian;
-import org.jboss.arquillian.test.api.ArquillianResource;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -49,30 +45,13 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 
 	private static final String _GET_VARIANT_BY_CONFIG = "/config/{id}";
 
-	@Before
-	public void setUp() {
-		long groupId = ImageAdaptiveMediaTestUtil.getGroupId(_context);
-
-		long nonAdaptiveMediaFolderId = ImageAdaptiveMediaTestUtil.getFolderId(
-			_context, groupId, "Non Adaptive Media");
-		long adaptiveMediaFolderId = ImageAdaptiveMediaTestUtil.getFolderId(
-			_context, groupId, "Adaptive Media");
-
-		_nonAdaptiveFileEntryIds = ImageAdaptiveMediaTestUtil.getFileEntryIds(
-			_context, 2, groupId, "image-without-%d.jpeg",
-			nonAdaptiveMediaFolderId);
-
-		_adaptiveFileEntryIds = ImageAdaptiveMediaTestUtil.getFileEntryIds(
-			_context, 3, groupId, "image-with-%d.jpeg", adaptiveMediaFolderId);
-	}
-
 	@Test
 	public void testGettingNonAdaptiveFileEntriesByConfigReturnsOriginal() {
 		String id = _getRandomConfigurationId();
 
-		long fileEntryid = _getRandomNonAdaptiveFileEntryId();
+		long fileEntryId = _getRandomNonAdaptiveFileEntryId();
 
-		Response response = _getConfigResponse(id, fileEntryid, true);
+		Response response = _getConfigResponse(id, fileEntryId, true);
 
 		Assert.assertEquals(200, response.getStatus());
 		Assert.assertEquals("image", response.getMediaType().getType());
@@ -149,13 +128,14 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 	private Invocation.Builder _getAdaptiveMediaRequest(
 		Function<WebTarget, WebTarget> webTargetResolver, long fileEntryId) {
 
-		return ImageAdaptiveMediaTestUtil.getMediaRequest(_context, webTarget
-			-> {
-				WebTarget resolvedWebTarget = webTarget.resolveTemplate(
-					"fileEntryId", fileEntryId);
+		return ImageAdaptiveMediaTestUtil.getMediaRequest(webTarget -> {
+			WebTarget resolvedWebTarget = webTarget.resolveTemplate(
+				"fileEntryId", fileEntryId);
 
-				return webTargetResolver.apply(resolvedWebTarget);
-			}).header("Authorization", TEST_AUTH);
+			return webTargetResolver.apply(resolvedWebTarget);
+		}).header("Authorization", TEST_AUTH);
+	}
+
 	}
 
 	private long _getRandomNonAdaptiveFileEntryId() {
@@ -176,13 +156,26 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 		_configurationIds.add("demo-medium");
 		_configurationIds.add("demo-large");
 		_configurationIds.add("demo-xlarge");
+
+		_attributes.add("width");
+		_attributes.add("height");
+
+		long groupId = ImageAdaptiveMediaTestUtil.getGroupId();
+
+		long nonAdaptiveMediaFolderId = ImageAdaptiveMediaTestUtil.getFolderId(
+			groupId, "Non Adaptive Media");
+		long adaptiveMediaFolderId = ImageAdaptiveMediaTestUtil.getFolderId(
+			groupId, "Adaptive Media");
+
+		_nonAdaptiveFileEntryIds = ImageAdaptiveMediaTestUtil.getFileEntryIds(
+			2, groupId, "image-without-%d.jpeg", nonAdaptiveMediaFolderId);
+
+		_adaptiveFileEntryIds = ImageAdaptiveMediaTestUtil.getFileEntryIds(
+			3, groupId, "image-with-%d.jpeg", adaptiveMediaFolderId);
 	}
 
-	private List<Long> _adaptiveFileEntryIds;
+	private static List<Long> _adaptiveFileEntryIds;
 
-	@ArquillianResource
-	private URL _context;
-
-	private List<Long> _nonAdaptiveFileEntryIds;
+	private static List<Long> _nonAdaptiveFileEntryIds;
 
 }

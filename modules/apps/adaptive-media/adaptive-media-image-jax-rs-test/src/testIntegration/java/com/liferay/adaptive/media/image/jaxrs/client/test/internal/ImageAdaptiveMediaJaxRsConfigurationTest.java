@@ -23,8 +23,6 @@ import com.google.gson.JsonObject;
 
 import com.liferay.adaptive.media.image.jaxrs.client.test.internal.util.ImageAdaptiveMediaTestUtil;
 
-import java.net.URL;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -39,7 +37,6 @@ import javax.ws.rs.core.Response;
 
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit.Arquillian;
-import org.jboss.arquillian.test.api.ArquillianResource;
 
 import org.json.JSONException;
 
@@ -156,7 +153,7 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 	public void testGetAllConfigurationsEmpty() {
 		Invocation.Builder builder =
 			ImageAdaptiveMediaTestUtil.getConfigurationRequest(
-				_context, IDENTITY_WEB_TARGET_RESOLVER);
+				IDENTITY_WEB_TARGET_RESOLVER);
 
 		JsonArray responseJsonArray = builder.get(JsonArray.class);
 
@@ -170,7 +167,7 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 
 		Invocation.Builder builder =
 			ImageAdaptiveMediaTestUtil.getConfigurationRequest(
-				_context, IDENTITY_WEB_TARGET_RESOLVER);
+				IDENTITY_WEB_TARGET_RESOLVER);
 
 		JsonArray responseJsonArray = builder.get(JsonArray.class);
 
@@ -252,7 +249,7 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 	private void _deleteAllConfigurationEntries() {
 		Invocation.Builder builder =
 			ImageAdaptiveMediaTestUtil.getConfigurationRequest(
-				_context, IDENTITY_WEB_TARGET_RESOLVER);
+				IDENTITY_WEB_TARGET_RESOLVER);
 
 		JsonArray responseJsonArray = builder.get(JsonArray.class);
 
@@ -267,7 +264,7 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 	private Invocation.Builder _getBaseRequest(
 		Function<WebTarget, WebTarget> webTargetBuilder) {
 		return ImageAdaptiveMediaTestUtil.getConfigurationRequest(
-			_context, webTargetBuilder);
+			webTargetBuilder);
 	}
 
 	private Invocation.Builder _getAuthenticatedInvocationBuilder(String id) {
@@ -314,8 +311,5 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 			_configurationJsonObjects.add(jsonObject);
 		}
 	}
-
-	@ArquillianResource
-	private URL _context;
 
 }

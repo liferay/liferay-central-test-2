@@ -20,8 +20,6 @@ import com.google.gson.JsonObject;
 
 import com.liferay.adaptive.media.image.jaxrs.client.test.internal.provider.GsonProvider;
 
-import java.net.URL;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -47,14 +45,13 @@ public class ImageAdaptiveMediaTestUtil {
 		"Basic " + Base64.encodeBase64("test@liferay.com:test".getBytes());
 
 	public static Invocation.Builder getBaseRequest(
-		String context, String basePath,
-		Function<WebTarget, WebTarget> webTargetResolver) {
+		String basePath, Function<WebTarget, WebTarget> webTargetResolver) {
 
 		Client client = ClientBuilder.newClient();
 
 		client.register(GsonProvider.class);
 
-		WebTarget webTarget = client.target(context);
+		WebTarget webTarget = client.target(_SERVER_CONTEXT);
 
 		webTarget = webTarget.path(basePath);
 
@@ -64,20 +61,19 @@ public class ImageAdaptiveMediaTestUtil {
 	}
 
 	public static Invocation.Builder getConfigurationRequest(
-		URL context, Function<WebTarget, WebTarget> webTargetResolver) {
+		Function<WebTarget, WebTarget> webTargetResolver) {
 
-		return getBaseRequest(
-			context.toString(), _CONFIGURATION_BASE_PATH, webTargetResolver);
+		return getBaseRequest(_CONFIGURATION_BASE_PATH, webTargetResolver);
 	}
 
 	public static List<Long> getFileEntryIds(
-		URL context, int number, long groupId, String fileName, long folderId) {
+		int number, long groupId, String fileName, long folderId) {
 
 		ArrayList<Long> fileEntryIds = new ArrayList<>();
 
 		for (int i = 0; i < number; i++) {
 			long fileEntryId = _getFileEntryId(
-				context, groupId, folderId, String.format(fileName, i));
+				groupId, folderId, String.format(fileName, i));
 
 			fileEntryIds.add(fileEntryId);
 		}
@@ -85,7 +81,7 @@ public class ImageAdaptiveMediaTestUtil {
 		return fileEntryIds;
 	}
 
-	public static long getFolderId(URL context, long groupId, String name) {
+	public static long getFolderId(long groupId, String name) {
 		Map<String, Object> queryParams = new HashMap<String, Object>() {
 			{
 				put("repositoryId", groupId);
@@ -95,37 +91,35 @@ public class ImageAdaptiveMediaTestUtil {
 		};
 
 		JsonObject jsonObject = _getJSONWSRequest(
-			context, _GET_FOLDER_PATH, queryParams);
+			_GET_FOLDER_PATH, queryParams);
 
 		return jsonObject.get("folderId").getAsLong();
 	}
 
-	public static long getGroupId(URL context) {
+	public static long getGroupId() {
 		Map<String, Object> queryParams = new HashMap<String, Object>() {
 			{
-				put("companyId", _getCompanyId(context));
+				put("companyId", _getCompanyId());
 				put("groupKey", "Guest");
 			}
 		};
 
-		JsonObject jsonObject = _getJSONWSRequest(
-			context, _GET_GROUP_PATH, queryParams);
+		JsonObject jsonObject = _getJSONWSRequest(_GET_GROUP_PATH, queryParams);
 
 		return jsonObject.get("groupId").getAsLong();
 	}
 
 	public static Invocation.Builder getMediaRequest(
-		URL context, Function<WebTarget, WebTarget> webTargetResolver) {
+		Function<WebTarget, WebTarget> webTargetResolver) {
 
-		return getBaseRequest(
-			context.toString(), _MEDIA_BASE_PATH, webTargetResolver);
+		return getBaseRequest(_MEDIA_BASE_PATH, webTargetResolver);
 	}
 
 	public static String getRandomUuid() {
 		return UUID.randomUUID().toString();
 	}
 
-	private static long _getCompanyId(URL context) {
+	private static long _getCompanyId() {
 		Map<String, Object> queryParams = new HashMap<String, Object>() {
 			{
 				put("virtualHost", "localhost");
@@ -133,13 +127,13 @@ public class ImageAdaptiveMediaTestUtil {
 		};
 
 		JsonObject jsonObject = _getJSONWSRequest(
-			context, _GET_COMPANY_PATH, queryParams);
+			_GET_COMPANY_PATH, queryParams);
 
 		return jsonObject.get("companyId").getAsLong();
 	}
 
 	private static long _getFileEntryId(
-		URL context, long groupId, long folderId, String name) {
+		long groupId, long folderId, String name) {
 
 		Map<String, Object> queryParams = new HashMap<String, Object>() {
 			{
@@ -150,27 +144,26 @@ public class ImageAdaptiveMediaTestUtil {
 		};
 
 		JsonObject jsonObject = _getJSONWSRequest(
-			context, _GET_FILE_ENTRY_PATH, queryParams);
+			_GET_FILE_ENTRY_PATH, queryParams);
 
 		return jsonObject.get("fileEntryId").getAsLong();
 	}
 
 	private static JsonObject _getJSONWSRequest(
-		URL context, String path, Map<String, Object> queryParams) {
+		String path, Map<String, Object> queryParams) {
 
-		return getBaseRequest(
-			context.toString(), _JSONWS_BASE_PATH, webTarget -> {
-				WebTarget finalWebTarget = webTarget.path(path);
+		return getBaseRequest(_JSONWS_BASE_PATH, webTarget -> {
+			WebTarget finalWebTarget = webTarget.path(path);
 
-				if (queryParams != null) {
-					for (String param : queryParams.keySet()) {
-						finalWebTarget = finalWebTarget.queryParam(
-							param, queryParams.get(param));
-					}
+			if (queryParams != null) {
+				for (String param : queryParams.keySet()) {
+					finalWebTarget = finalWebTarget.queryParam(
+						param, queryParams.get(param));
 				}
+			}
 
-				return finalWebTarget;
-			}).header("Authorization", TEST_AUTH).get(JsonObject.class);
+			return finalWebTarget;
+		}).header("Authorization", TEST_AUTH).get(JsonObject.class);
 	}
 
 	private static final String _CONFIGURATION_BASE_PATH =
@@ -189,5 +182,7 @@ public class ImageAdaptiveMediaTestUtil {
 
 	private static final String _MEDIA_BASE_PATH =
 		"o/adaptive-media/images/content/file/{fileEntryId}/version/last";
+
+	private static final String _SERVER_CONTEXT = "http://localhost:8080";
 
 }
