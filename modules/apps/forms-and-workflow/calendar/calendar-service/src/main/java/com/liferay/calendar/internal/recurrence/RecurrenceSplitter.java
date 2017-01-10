@@ -19,25 +19,22 @@ import com.liferay.calendar.recurrence.Recurrence;
 import java.util.Calendar;
 
 /**
- * {@link RecurrenceSplitter} executes a split operation and returns a
- * {@link RecurrenceSplit} instance as result.
+ * Executes a split operation and returns a {@link RecurrenceSplit} instance as
+ * a result.
  *
  * @author Adam Brandizzi
  */
 public interface RecurrenceSplitter {
 
 	/**
-	 * Given a {@link Recurrence} instance, a date to be used as the recurrence
-	 * start date, and a date on which the recurrence should be split,
-	 * generates a {@link RecurrenceSplit} instance representing the
-	 * result.
+	 * Generates a {@link RecurrenceSplit} instance representing the result.
 	 *
-	 * @param  recurrence the {@link Recurrence} to be split into two.
-	 * @param  startTimeJCalendar the date to be considered for starting the
-	 *         original recurrence.
-	 * @param  splitTimeJCalendar the date where we expect to split the
-	 *         recurrence into two.
-	 * @return a {@link RecurrenceSplit} representing the operation result.
+	 * @param  recurrence the <code>Recurrence</code> (in the
+	 *         <code>com.liferay.calendar.api</code> module) to be split into
+	 *         two
+	 * @param  startTimeJCalendar the starting date for the original recurrence
+	 * @param  splitTimeJCalendar the date to split the recurrence
+	 * @return a {@link RecurrenceSplit} representing the operation result
 	 */
 	public RecurrenceSplit split(
 		Recurrence recurrence, Calendar startTimeJCalendar,
