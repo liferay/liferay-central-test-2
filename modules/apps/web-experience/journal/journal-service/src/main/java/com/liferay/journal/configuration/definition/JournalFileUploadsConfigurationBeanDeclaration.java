@@ -23,7 +23,7 @@ import org.osgi.service.component.annotations.Component;
  * @author Drew Brokke
  */
 @Component
-public class JournalFileUploadsConfigurationBean
+public class JournalFileUploadsConfigurationBeanDeclaration
 	implements ConfigurationBeanDeclaration {
 
 	@Override
