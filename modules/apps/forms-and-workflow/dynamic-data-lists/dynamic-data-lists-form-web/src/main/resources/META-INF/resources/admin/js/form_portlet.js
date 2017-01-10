@@ -517,7 +517,7 @@ AUI.add(
 
 						var formURL = instance._createFormURL();
 
-						return formURL   + '/preview';
+						return formURL + '/preview';
 					},
 
 					_defineIds: function(response) {
