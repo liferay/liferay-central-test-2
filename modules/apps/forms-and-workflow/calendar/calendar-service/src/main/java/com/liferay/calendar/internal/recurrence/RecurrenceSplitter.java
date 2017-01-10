@@ -31,7 +31,7 @@ public interface RecurrenceSplitter {
 	 *
 	 * @param  recurrence the <code>Recurrence</code> (in the
 	 *         <code>com.liferay.calendar.api</code> module) to be split into
-	 *         two
+	 *         two new recurrences
 	 * @param  startTimeJCalendar the starting date for the original recurrence
 	 * @param  splitTimeJCalendar the date to split the recurrence
 	 * @return a {@link RecurrenceSplit} representing the operation result

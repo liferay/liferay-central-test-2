@@ -29,21 +29,21 @@ import com.liferay.calendar.recurrence.Recurrence;
  * </p>
  *
  * <p>
- * If the recurrence does not include the split date, however, you only need the
- * original recurrence.
+ * If the recurrence does not include the split date, however, only the original
+ * recurrence is needed.
  * </p>
  *
  * <p>
  * This interface represents the result of this operation. If the split
- * operation is successful (i.e. generated two new recurrences), you can acquire
- * their values through the methods {@link #getFirstRecurrence()} and {@link
+ * operation is successful (i.e. generated two new recurrences), their values
+ * can be acquired through the methods {@link #getFirstRecurrence()} and {@link
  * #getSecondRecurrence()}. In this case, {@link #isSplit()} returns
  * <code>true</code>.
  * </p>
  *
  * <p>
  * If the split operation failed (i.e. the split date was outside the recurrence
- * range), you can still get a recurrence value via the {@link
+ * range), the recurrence value can still be acquired via the {@link
  * #getFirstRecurrence()} method. This would be a new recurrence instance whose
  * values are identical to the original recurrence. In this case, {@link
  * #isSplit()} returns <code>false</code>.
@@ -55,8 +55,8 @@ public interface RecurrenceSplit {
 
 	/**
 	 * Returns the recurrence that ends just before the split date. If the split
-	 * date was outside the original recurrence range, then this method returns
-	 * a copy of the original recurrence.
+	 * date was outside the original recurrence range, this method returns a
+	 * copy of the original recurrence.
 	 *
 	 * @return the <code>Recurrence</code> object representing either the first
 	 *         part of the split recurrence or a copy of the original
@@ -77,7 +77,7 @@ public interface RecurrenceSplit {
 
 	/**
 	 * Returns <code>true</code> if the recurrence could be split, given the
-	 * start and split date.
+	 * start and split dates.
 	 *
 	 * @return <code>true</code> if the operation could generate two new,
 	 *         different recurrences; <code>false</code> otherwise
