@@ -25,6 +25,8 @@ JournalArticleDisplay articleDisplay = journalContentDisplayContext.getArticleDi
 journalContentDisplayContext.incrementViewCounter();
 
 AssetRendererFactory<JournalArticle> assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClass(JournalArticle.class);
+
+Group scopeGroup = themeDisplay.getScopeGroup();
 %>
 
 <c:choose>
@@ -36,9 +38,11 @@ AssetRendererFactory<JournalArticle> assetRendererFactory = AssetRendererFactory
 						<liferay-ui:message key="this-application-is-not-visible-to-users-yet" />
 					</div>
 
-					<div>
-						<aui:a href="javascript:;" onClick="<%= portletDisplay.getURLConfigurationJS() %>"><liferay-ui:message key="select-web-content-to-make-it-visible" /></aui:a>
-					</div>
+					<c:if test="<%= !scopeGroup.isStaged() || scopeGroup.isStagingGroup() %>">
+						<div>
+							<aui:a href="javascript:;" onClick="<%= portletDisplay.getURLConfigurationJS() %>"><liferay-ui:message key="select-web-content-to-make-it-visible" /></aui:a>
+						</div>
+					</c:if>
 				</div>
 			</c:when>
 			<c:otherwise>
