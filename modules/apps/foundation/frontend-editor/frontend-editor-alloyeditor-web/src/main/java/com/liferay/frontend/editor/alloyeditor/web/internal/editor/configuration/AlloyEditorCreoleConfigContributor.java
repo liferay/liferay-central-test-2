@@ -67,6 +67,16 @@ public class AlloyEditorCreoleConfigContributor
 			}
 		}
 
+		JSONObject linkEditJSONObject = JSONFactoryUtil.createJSONObject();
+
+		linkEditJSONObject.put("showTargetSelector", false);
+
+		JSONObject buttonCfgJSONObject = JSONFactoryUtil.createJSONObject();
+
+		buttonCfgJSONObject.put("linkEdit", linkEditJSONObject);
+
+		jsonObject.put("buttonCfg", buttonCfgJSONObject);
+
 		jsonObject.put("decodeLinks", Boolean.TRUE);
 		jsonObject.put("disableObjectResizing", Boolean.TRUE);
 
@@ -79,16 +89,6 @@ public class AlloyEditorCreoleConfigContributor
 		jsonObject.put("extraPlugins", extraPlugins);
 
 		jsonObject.put("format_tags", "p;h1;h2;h3;h4;h5;h6;pre");
-
-		JSONObject linkEditJSONObject = JSONFactoryUtil.createJSONObject();
-
-		linkEditJSONObject.put("showTargetSelector", false);
-
-		JSONObject buttonCfgJSONObject = JSONFactoryUtil.createJSONObject();
-
-		buttonCfgJSONObject.put("linkEdit", linkEditJSONObject);
-
-		jsonObject.put("buttonCfg", buttonCfgJSONObject);
 
 		String removePlugins = jsonObject.getString("removePlugins");
 
