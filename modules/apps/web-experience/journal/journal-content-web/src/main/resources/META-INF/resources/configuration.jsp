@@ -18,6 +18,14 @@
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");
+
+long groupId = scopeGroupId;
+
+Group scopeGroup = themeDisplay.getScopeGroup();
+
+if (!scopeGroup.isStaged() || !scopeGroup.isInStagingPortlet(JournalPortletKeys.JOURNAL)) {
+	groupId = scopeGroup.getLiveGroupId();
+}
 %>
 
 <liferay-ui:error exception="<%= NoSuchArticleException.class %>" message="the-web-content-could-not-be-found" />
@@ -68,7 +76,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 			<%
 			PortletURL selectWebContentURL = PortletProviderUtil.getPortletURL(request, JournalArticle.class.getName(), PortletProvider.Action.BROWSE);
 
-			selectWebContentURL.setParameter("groupId", String.valueOf(scopeGroupId));
+			selectWebContentURL.setParameter("groupId", String.valueOf(groupId));
 			selectWebContentURL.setParameter("selectedGroupIds", StringUtil.merge(journalContentDisplayContext.getSelectedGroupIds()));
 			selectWebContentURL.setParameter("refererAssetEntryId", "[$ARTICLE_REFERER_ASSET_ENTRY_ID$]");
 			selectWebContentURL.setParameter("typeSelection", JournalArticle.class.getName());
