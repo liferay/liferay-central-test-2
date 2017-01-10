@@ -25,6 +25,7 @@ import com.liferay.dynamic.data.mapping.model.DDMTemplate;
 import com.liferay.dynamic.data.mapping.service.DDMStructureLocalServiceUtil;
 import com.liferay.dynamic.data.mapping.service.DDMTemplateLocalServiceUtil;
 import com.liferay.dynamic.data.mapping.service.permission.DDMTemplatePermission;
+import com.liferay.journal.constants.JournalPortletKeys;
 import com.liferay.journal.constants.JournalWebKeys;
 import com.liferay.journal.content.asset.addon.entry.common.ContentMetadataAssetAddonEntry;
 import com.liferay.journal.content.asset.addon.entry.common.ContentMetadataAssetAddonEntryTracker;
@@ -42,6 +43,7 @@ import com.liferay.journal.web.asset.JournalArticleAssetRenderer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.portlet.PortletProvider;
@@ -478,6 +480,14 @@ public class JournalContentDisplayContext {
 	public long[] getSelectedGroupIds() throws PortalException {
 		ThemeDisplay themeDisplay = (ThemeDisplay)_portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
+
+		Group scopeGroup = themeDisplay.getScopeGroup();
+
+		if (scopeGroup.isStagingGroup() &&
+			!scopeGroup.isInStagingPortlet(JournalPortletKeys.JOURNAL)) {
+
+			return new long[] {scopeGroup.getLiveGroupId()};
+		}
 
 		if (themeDisplay.getScopeGroupId() == themeDisplay.getSiteGroupId()) {
 			return PortalUtil.getSharedContentSiteGroupIds(
