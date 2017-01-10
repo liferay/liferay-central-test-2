@@ -46,7 +46,7 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 	private static final String _GET_VARIANT_BY_CONFIG = "/config/{id}";
 
 	@Test
-	public void testGettingNonAdaptiveFileEntriesByConfigReturnsOriginal() {
+	public void testGettingNonAdaptiveByConfigReturnsOriginal() {
 		String id = _getRandomConfigurationId();
 
 		long fileEntryId = _getRandomNonAdaptiveFileEntryId();
@@ -58,7 +58,7 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 	}
 
 	@Test
-	public void testGettingNonAdaptiveFileEntriesByConfigReturns404IfQueryParamPresent() {
+	public void testGettingNonAdaptiveByConfigReturns404IfParam() {
 		String id = _getRandomConfigurationId();
 
 		long fileEntryId = _getRandomNonAdaptiveFileEntryId();
@@ -69,7 +69,7 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 	}
 
 	@Test
-	public void testGettingAdaptiveFileEntriesByConfigReturnsData() {
+	public void testGettingAdaptiveByConfigReturnsData() {
 		String id = _getRandomConfigurationId();
 
 		long fileEntryId = _getRandomAdaptiveFileEntryId();
@@ -81,7 +81,7 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 	}
 
 	@Test
-	public void testGettingAdaptiveFileEntriesByInvalidConfigReturnsOriginal() {
+	public void testGettingAdaptiveByInvalidConfigReturnsOriginal() {
 		String id = ImageAdaptiveMediaTestUtil.getRandomUuid();
 
 		long fileEntryId = _getRandomAdaptiveFileEntryId();
@@ -93,7 +93,7 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 	}
 
 	@Test
-	public void testGettingAdaptiveFileEntriesByInvalidConfigReturns404IfQueryParamPresent() {
+	public void testGettingAdaptiveByInvalidConfigReturns404IfParam() {
 		String id = ImageAdaptiveMediaTestUtil.getRandomUuid();
 
 		long fileEntryId = _getRandomAdaptiveFileEntryId();
