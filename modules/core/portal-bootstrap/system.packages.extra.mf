@@ -3447,7 +3447,7 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  1.0.0",com.liferay.portal.upgrade.v7_0_3.util;version="1.0.0",com.lif
  eray.portal.upload;version="1.0.2";uses:="com.liferay.portal.kernel.s
  ervlet,com.liferay.portal.kernel.upload,javax.portlet,javax.servlet,j
- avax.servlet.http",com.liferay.portal.util;version="1.8.0";uses:="com
+ avax.servlet.http",com.liferay.portal.util;version="1.9.0";uses:="com
  .liferay.expando.kernel.model,com.liferay.layouts.admin.kernel.util,c
  om.liferay.portal.kernel.configuration,com.liferay.portal.kernel.exce
  ption,com.liferay.portal.kernel.json,com.liferay.portal.kernel.model,
@@ -3507,7 +3507,7 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  vax.servlet.http";version="1.0.0",com.liferay.portal.xsl;uses:="com.l
  iferay.portal.kernel.template,javax.xml.transform";version="1.0.0",co
  m.liferay.portal.zip;uses:="com.liferay.portal.kernel.zip";version="1
- .0.0",com.liferay.portlet;version="1.4.0";uses:="com.liferay.asset.ke
+ .0.0",com.liferay.portlet;version="1.5.0";uses:="com.liferay.asset.ke
  rnel.model,com.liferay.expando.kernel.model,com.liferay.exportimport.
  kernel.lar,com.liferay.portal.kernel.atom,com.liferay.portal.kernel.e
  xception,com.liferay.portal.kernel.model,com.liferay.portal.kernel.no
