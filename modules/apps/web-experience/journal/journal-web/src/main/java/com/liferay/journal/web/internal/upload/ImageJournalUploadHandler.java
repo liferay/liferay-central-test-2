@@ -66,10 +66,9 @@ public class ImageJournalUploadHandler extends BaseUploadHandler {
 
 		String extension = FileUtil.getExtension(fileName);
 
-		String[] imageExtensions =
-			_journalFileUploadsConfiguration.imageExtensions();
+		for (String imageExtension :
+				_journalFileUploadsConfiguration.imageExtensions()) {
 
-		for (String imageExtension : imageExtensions) {
 			if (StringPool.STAR.equals(imageExtension) ||
 				imageExtension.equals(StringPool.PERIOD + extension)) {
 

@@ -7874,9 +7874,6 @@ public class JournalArticleLocalServiceImpl
 			throw new NoSuchTemplateException("DDM template key is null");
 		}
 
-		String[] imageExtensions =
-			_journalFileUploadsConfiguration.imageExtensions();
-
 		if (!smallImage || Validator.isNotNull(smallImageURL) ||
 			(smallImageFile == null) || (smallImageBytes == null)) {
 
@@ -7887,7 +7884,9 @@ public class JournalArticleLocalServiceImpl
 
 		boolean validSmallImageExtension = false;
 
-		for (String imageExtension : imageExtensions) {
+		for (String imageExtension :
+				_journalFileUploadsConfiguration.imageExtensions()) {
+
 			if (StringPool.STAR.equals(imageExtension) ||
 				StringUtil.endsWith(smallImageName, imageExtension)) {
 
