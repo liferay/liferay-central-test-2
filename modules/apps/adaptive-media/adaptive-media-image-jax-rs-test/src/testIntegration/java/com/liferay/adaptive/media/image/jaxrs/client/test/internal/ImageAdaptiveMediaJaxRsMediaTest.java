@@ -135,6 +135,17 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 		Assert.assertEquals(404, response.getStatus());
 	}
 
+	@Test
+	public void testGettingAdaptiveDataWithAttributeReturnsData() {
+		long fileEntryId = _getRandomAdaptiveFileEntryId();
+
+		Response response = _getDataResponse(
+			fileEntryId, true, _getRandomQueryParams());
+
+		Assert.assertEquals(200, response.getStatus());
+		Assert.assertEquals("image", response.getMediaType().getType());
+	}
+
 	private Response _getDataResponse(
 		long fileEntryId, boolean useOriginal, List<String> queryParams) {
 
