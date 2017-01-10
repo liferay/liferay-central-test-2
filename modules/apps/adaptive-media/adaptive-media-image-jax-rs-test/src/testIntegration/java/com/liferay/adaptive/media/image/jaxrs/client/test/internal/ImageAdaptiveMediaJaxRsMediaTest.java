@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.security.RandomUtil;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
@@ -113,6 +114,16 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 		Assert.assertEquals(400, response.getStatus());
 	}
 
+	@Test
+	public void testGettingNonAdaptiveDataWithAttributeReturnsOriginal() {
+		long fileEntryId = _getRandomNonAdaptiveFileEntryId();
+
+		Response response = _getDataResponse(
+			fileEntryId, true, _getRandomQueryParams());
+
+		Assert.assertEquals(200, response.getStatus());
+		Assert.assertEquals("image", response.getMediaType().getType());
+	}
 	private Response _getDataResponse(
 		long fileEntryId, boolean useOriginal, List<String> queryParams) {
 
@@ -171,6 +182,13 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 		}).header("Authorization", TEST_AUTH);
 	}
 
+	private List<String> _getRandomQueryParams() {
+		return _attributes.stream().map(this::_getRandomAttribute).collect(
+			Collectors.toList());
+	}
+
+	private String _getRandomAttribute(String attribute) {
+		return String.format("%s:%d", attribute, RandomUtil.nextInt(1000));
 	}
 
 	private long _getRandomNonAdaptiveFileEntryId() {
@@ -184,6 +202,7 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 	}
 
 	private static final List<String> _configurationIds = new ArrayList<>();
+	private static final List<String> _attributes = new ArrayList<>();
 
 	static {
 		_configurationIds.add("demo-xsmall");
