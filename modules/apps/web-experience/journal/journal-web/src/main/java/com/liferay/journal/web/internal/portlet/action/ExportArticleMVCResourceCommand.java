@@ -66,20 +66,22 @@ public class ExportArticleMVCResourceCommand extends BaseMVCResourceCommand {
 			String porletResource = ParamUtil.getString(
 				resourceRequest, "portletResource");
 
-			if (!Validator.isBlank(porletResource)) {
+			if (Validator.isNotNull(porletResource)) {
 				long plid = ParamUtil.getLong(resourceRequest, "plid");
 
-				Layout layout = _layoutLocalService.getLayout(plid);
+				Layout layout = _layoutLocalService.fetchLayout(plid);
 
-				portletPreferences =
-					PortletPreferencesFactoryUtil.getExistingPortletSetup(
-						layout, porletResource);
+				if (layout != null) {
+					portletPreferences =
+						PortletPreferencesFactoryUtil.getExistingPortletSetup(
+							layout, porletResource);
+				}
 			}
 
 			String[] allowedExtensions = portletPreferences.getValues(
 				"extensions", null);
 
-			if ((allowedExtensions != null) &&
+			if (ArrayUtil.isNotEmpty(allowedExtensions) &&
 				(allowedExtensions.length == 1)) {
 
 				allowedExtensions = StringUtil.split(
@@ -92,12 +94,11 @@ public class ExportArticleMVCResourceCommand extends BaseMVCResourceCommand {
 			}
 			else {
 				throw new ExportArticleTargetExtensionException(
-					"The target extension " + targetExtension +
-						" is not allowed");
+					"Target extension " + targetExtension + " is not allowed");
 			}
 		}
 		catch (Exception e) {
-			_log.error("Error during the export", e);
+			_log.error("An error occurred during the export process", e);
 
 			PortalUtil.sendError(
 				e, PortalUtil.getHttpServletRequest(resourceRequest),
