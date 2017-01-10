@@ -98,7 +98,7 @@ public class ExportArticleMVCResourceCommand extends BaseMVCResourceCommand {
 			}
 		}
 		catch (Exception e) {
-			_log.error("An error occurred during the export process", e);
+			_log.error("Unable to export article", e);
 
 			PortalUtil.sendError(
 				e, PortalUtil.getHttpServletRequest(resourceRequest),
