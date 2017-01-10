@@ -151,7 +151,11 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 	public void testGettingVariantsWithoutAttributesReturns400() {
 		long fileEntryId = _getRandomNonAdaptiveFileEntryId();
 
-		Response response = _getVariantsResponse(fileEntryId, null, null);
+		Response response = _getVariantsInvocationBuilder(
+			fileEntryId, null, null).get();
+
+		Assert.assertEquals(400, response.getStatus());
+	}
 
 		Assert.assertEquals(400, response.getStatus());
 	}
@@ -181,13 +185,12 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 			fileEntryId).get();
 	}
 
-	private Response _getVariantsResponse(
+	private Invocation.Builder _getVariantsInvocationBuilder(
 		long fileEntryId, List<String> queryParams, String order) {
 
 		return _getAdaptiveMediaRequest(
 			webTarget -> {
-				WebTarget resolvedWebTarget = webTarget.path(
-					_GET_VARIANTS);
+				WebTarget resolvedWebTarget = webTarget.path(_GET_VARIANTS);
 
 				if (queryParams != null) {
 					for (String param : queryParams) {
@@ -197,13 +200,13 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 				}
 
 				if (order != null) {
-					resolvedWebTarget =
-						resolvedWebTarget.queryParam("order", order);
+					resolvedWebTarget = resolvedWebTarget.queryParam(
+						"order", order);
 				}
 
 				return resolvedWebTarget;
 			},
-			fileEntryId).get();
+			fileEntryId);
 	}
 
 	private Response _getConfigResponse(
