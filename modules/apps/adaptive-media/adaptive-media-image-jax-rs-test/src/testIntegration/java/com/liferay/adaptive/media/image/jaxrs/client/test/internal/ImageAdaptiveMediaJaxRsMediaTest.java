@@ -193,6 +193,16 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 		Assert.assertEquals(0, jsonArray.size());
 	}
 
+	@Test
+	public void testGettingVariantsOfAdaptiveReturnsFullArray() {
+		long fileEntryId = _getRandomAdaptiveFileEntryId();
+
+		JsonArray jsonArray = _getVariantsInvocationBuilder(
+			fileEntryId, _getRandomQueryParams(), null).get(JsonArray.class);
+
+		Assert.assertEquals(_configurationIds.size(), jsonArray.size());
+	}
+
 	private Response _getDataResponse(
 		long fileEntryId, boolean useOriginal, List<String> queryParams) {
 
