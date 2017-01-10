@@ -45,6 +45,7 @@ import org.junit.runner.RunWith;
 public class ImageAdaptiveMediaJaxRsMediaTest {
 
 	private static final String _GET_VARIANT_BY_CONFIG = "/config/{id}";
+	private static final String _GET_VARIANTS = "/variants";
 	private static final String _GET_VARIANT_BY_ATTRIBUTE = "/data";
 
 	@Test
@@ -107,9 +108,9 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 
 	@Test
 	public void testGettingDataWithoutAttributeReturns400() {
-		long fileEntryid = _getRandomNonAdaptiveFileEntryId();
+		long fileEntryId = _getRandomNonAdaptiveFileEntryId();
 
-		Response response = _getDataResponse(fileEntryid, true, null);
+		Response response = _getDataResponse(fileEntryId, true, null);
 
 		Assert.assertEquals(400, response.getStatus());
 	}
@@ -146,6 +147,15 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 		Assert.assertEquals("image", response.getMediaType().getType());
 	}
 
+	@Test
+	public void testGettingVariantsWithoutAttributesReturns400() {
+		long fileEntryId = _getRandomNonAdaptiveFileEntryId();
+
+		Response response = _getVariantsResponse(fileEntryId, null, null);
+
+		Assert.assertEquals(400, response.getStatus());
+	}
+
 	private Response _getDataResponse(
 		long fileEntryId, boolean useOriginal, List<String> queryParams) {
 
@@ -164,6 +174,31 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 						resolvedWebTarget = resolvedWebTarget.queryParam(
 							"q", param);
 					}
+				}
+
+				return resolvedWebTarget;
+			},
+			fileEntryId).get();
+	}
+
+	private Response _getVariantsResponse(
+		long fileEntryId, List<String> queryParams, String order) {
+
+		return _getAdaptiveMediaRequest(
+			webTarget -> {
+				WebTarget resolvedWebTarget = webTarget.path(
+					_GET_VARIANTS);
+
+				if (queryParams != null) {
+					for (String param : queryParams) {
+						resolvedWebTarget = resolvedWebTarget.queryParam(
+							"q", param);
+					}
+				}
+
+				if (order != null) {
+					resolvedWebTarget =
+						resolvedWebTarget.queryParam("order", order);
 				}
 
 				return resolvedWebTarget;
