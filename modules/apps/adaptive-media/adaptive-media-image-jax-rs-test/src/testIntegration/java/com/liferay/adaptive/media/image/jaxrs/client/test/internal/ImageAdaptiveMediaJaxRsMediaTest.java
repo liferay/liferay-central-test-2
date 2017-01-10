@@ -157,6 +157,27 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 		Assert.assertEquals(400, response.getStatus());
 	}
 
+	@Test
+	public void testGettingVariantsWithWrongAttributesReturns400() {
+		long fileEntryId = _getRandomNonAdaptiveFileEntryId();
+
+		List<String> queryParams = new ArrayList<>();
+
+		queryParams.add("wrong");
+
+		Response response = _getVariantsInvocationBuilder(
+			fileEntryId, queryParams, null).get();
+
+		Assert.assertEquals(400, response.getStatus());
+	}
+
+	@Test
+	public void testGettingVariantsWithWrongOrderReturns400() {
+		long fileEntryId = _getRandomNonAdaptiveFileEntryId();
+
+		Response response = _getVariantsInvocationBuilder(
+			fileEntryId, null, "wrong").get();
+
 		Assert.assertEquals(400, response.getStatus());
 	}
 
