@@ -131,13 +131,15 @@ AUI.add(
 
 						var formBuilder = instance.get('formBuilder');
 
+						var pagesTitles = formBuilder.getPagesTitle();
+
 						var pagesQuantity = formBuilder.get('layouts').length;
 
 						pages = new Array(pagesQuantity);
 
 						for (var i = 0; i < pagesQuantity; i++) {
 							pages[i] = {
-								label: (i + 1).toString(),
+								label: pagesTitles[i] ? pagesTitles[i] : (i + 1).toString(),
 								value: i.toString()
 							};
 						}
@@ -192,12 +194,12 @@ AUI.add(
 								data = [
 									badgeTemplate(
 										{
-											content: Number(action.source) + 1
+											content: pages[action.source].label
 										}
 									),
 									badgeTemplate(
 										{
-											content: Number(action.target) + 1
+											content: pages[action.target].label
 										}
 									)
 								];
