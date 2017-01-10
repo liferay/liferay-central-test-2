@@ -44,6 +44,7 @@ import org.junit.runner.RunWith;
 public class ImageAdaptiveMediaJaxRsMediaTest {
 
 	private static final String _GET_VARIANT_BY_CONFIG = "/config/{id}";
+	private static final String _GET_VARIANT_BY_ATTRIBUTE = "/data";
 
 	@Test
 	public void testGettingNonAdaptiveByConfigReturnsOriginal() {
@@ -101,6 +102,40 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 		Response response = _getConfigResponse(id, fileEntryId, false);
 
 		Assert.assertEquals(404, response.getStatus());
+	}
+
+	@Test
+	public void testGettingDataWithoutAttributeReturns400() {
+		long fileEntryid = _getRandomNonAdaptiveFileEntryId();
+
+		Response response = _getDataResponse(fileEntryid, true, null);
+
+		Assert.assertEquals(400, response.getStatus());
+	}
+
+	private Response _getDataResponse(
+		long fileEntryId, boolean useOriginal, List<String> queryParams) {
+
+		return _getAdaptiveMediaRequest(
+			webTarget -> {
+				WebTarget resolvedWebTarget = webTarget.path(
+					_GET_VARIANT_BY_ATTRIBUTE);
+
+				if (!useOriginal) {
+					resolvedWebTarget = resolvedWebTarget.queryParam(
+						"original", false);
+				}
+
+				if (queryParams != null) {
+					for (String param : queryParams) {
+						resolvedWebTarget = resolvedWebTarget.queryParam(
+							"q", param);
+					}
+				}
+
+				return resolvedWebTarget;
+			},
+			fileEntryId).get();
 	}
 
 	private Response _getConfigResponse(
