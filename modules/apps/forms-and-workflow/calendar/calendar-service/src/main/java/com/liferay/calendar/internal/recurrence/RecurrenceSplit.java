@@ -17,36 +17,36 @@ package com.liferay.calendar.internal.recurrence;
 import com.liferay.calendar.recurrence.Recurrence;
 
 /**
- * {@link RecurrenceSplit} represents the result of trying to split a recurrence
- * into two.
+ * Represents the result of splitting a <code>Recurrence</code> (in the
+ * <code>com.liferay.calendar.api</code> module) object.
  *
  * <p>
- * Many times, we need to split a {@link Recurrence} object at a specific date.
- * If the recurrence does start before the "split date" and ends after the
- * "split date," then we will have two new recurrences: one going until before
- * the "split date" and other (starting at the split date) going as far as the
- * original one went.
+ * A <code>Recurrence</code> object is frequently split at a specific date. If
+ * the recurrence starts before the split date and ends after the split date,
+ * then there are two new recurrences: one going up to the split date and the
+ * other starting at the split date and continuing to the original recurrence's
+ * end.
  * </p>
  *
  * <p>
- * If the recurrence does not include the split date, however, we just need the
+ * If the recurrence does not include the split date, however, you only need the
  * original recurrence.
  * </p>
  *
  * <p>
- * This interface represents the result of this operation. If the represented
- * split operation was "successful" (i.e. generated two new recurrences), we
- * can get their values through the methods {@link #getFirstRecurrence()} and
- * {@link #getSecondRecurrence()}. In this case, {@link #isSplit()} will return
+ * This interface represents the result of this operation. If the split
+ * operation is successful (i.e. generated two new recurrences), you can acquire
+ * their values through the methods {@link #getFirstRecurrence()} and {@link
+ * #getSecondRecurrence()}. In this case, {@link #isSplit()} returns
  * <code>true</code>.
  * </p>
  *
  * <p>
- * If the split operation "failed" (i.e. the split date was outside the
- * recurrence range) we can still get a recurrence value back via the
- * {@link #getFirstRecurrence()} method. This will be a new recurrence instance
- * whose values are idetical to the original recurrence. In this case,
- * {@link #isSplit()} returns <code>false</code>.
+ * If the split operation failed (i.e. the split date was outside the recurrence
+ * range), you can still get a recurrence value via the {@link
+ * #getFirstRecurrence()} method. This would be a new recurrence instance whose
+ * values are identical to the original recurrence. In this case, {@link
+ * #isSplit()} returns <code>false</code>.
  * </p>
  *
  * @author Adam Brandizzi
@@ -55,33 +55,32 @@ public interface RecurrenceSplit {
 
 	/**
 	 * Returns the recurrence that ends just before the split date. If the split
-	 * date was outside the original recurrence range, then returns a copy of
-	 * the original recurrence.
+	 * date was outside the original recurrence range, then this method returns
+	 * a copy of the original recurrence.
 	 *
-	 * @return a new {@link Recurrence} object representing either the first
-	 *         part of the split recurrence, or a copy of the original
-	 *         recurrence, if no split happened.
+	 * @return the <code>Recurrence</code> object representing either the first
+	 *         part of the split recurrence or a copy of the original
+	 *         recurrence, if no split occurred
 	 */
 	public Recurrence getFirstRecurrence();
 
 	/**
-	 * Returns the recurrence that starts after the split date and end when the
-	 * original recurrence ended. If the split
-	 * date was outside the original recurrence range, this method returns
-	 * <code>null</code>.
+	 * Returns the recurrence that starts after the split date and ends when the
+	 * original recurrence ended. If the split date was outside the original
+	 * recurrence range, this method returns <code>null</code>.
 	 *
-	 * @return a new {@link Recurrence} object representing the second part of
-	 *         the split recurrence, or <code>null</code> if the split
-	 *         date was outside the original recurrence range.
+	 * @return the <code>Recurrence</code> object representing the second part
+	 *         of the split recurrence, or <code>null</code> if the split date
+	 *         was outside the original recurrence range
 	 */
 	public Recurrence getSecondRecurrence();
 
 	/**
-	 * Informs whether the recurrence could be split into two  or not, given the
+	 * Returns <code>true</code> if the recurrence could be split, given the
 	 * start and split date.
 	 *
 	 * @return <code>true</code> if the operation could generate two new,
-	 *         different recurrences. <code>false</code> otherwise.
+	 *         different recurrences; <code>false</code> otherwise
 	 */
 	public boolean isSplit();
 
