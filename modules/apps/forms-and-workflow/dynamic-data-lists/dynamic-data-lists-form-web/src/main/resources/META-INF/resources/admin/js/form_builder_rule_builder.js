@@ -147,14 +147,6 @@ AUI.add(
 						return pages;
 					},
 
-					hide: function() {
-						var instance = this;
-
-						FormBuilderRuleBuilder.superclass.hide.apply(instance, arguments);
-
-						instance.syncUI();
-					},
-
 					renderRule: function(rule) {
 						var instance = this;
 
@@ -174,6 +166,14 @@ AUI.add(
 						instance._ruleClasses.set('pages', instance.getPages());
 
 						instance._ruleClasses.render(rule);
+					},
+
+					show: function() {
+						var instance = this;
+
+						FormBuilderRuleBuilder.superclass.show.apply(instance, arguments);
+
+						instance.syncUI();
 					},
 
 					_getActionDescription: function(type, action) {
