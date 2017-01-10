@@ -16,6 +16,8 @@ package com.liferay.adaptive.media.image.jaxrs.client.test.internal;
 
 import static com.liferay.adaptive.media.image.jaxrs.client.test.internal.util.ImageAdaptiveMediaTestUtil.TEST_AUTH;
 
+import com.google.gson.JsonArray;
+
 import com.liferay.adaptive.media.image.jaxrs.client.test.internal.util.ImageAdaptiveMediaTestUtil;
 import com.liferay.arquillian.deploymentscenario.annotations.BndFile;
 import com.liferay.portal.kernel.security.RandomUtil;
@@ -179,6 +181,16 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 			fileEntryId, null, "wrong").get();
 
 		Assert.assertEquals(400, response.getStatus());
+	}
+
+	@Test
+	public void testGettingVariantsOfNonAdaptiveReturnsEmptyArray() {
+		long fileEntryId = _getRandomNonAdaptiveFileEntryId();
+
+		JsonArray jsonArray = _getVariantsInvocationBuilder(
+			fileEntryId, _getRandomQueryParams(), null).get(JsonArray.class);
+
+		Assert.assertEquals(0, jsonArray.size());
 	}
 
 	private Response _getDataResponse(
