@@ -49,8 +49,7 @@ public class PortletConfigurationCSSBottomDynamicInclude
 
 		printWriter.print(
 			StringUtil.replace(
-				_TMPL_CONTENT, StringPool.POUND, StringPool.POUND,
-				_values));
+				_TMPL_CONTENT, StringPool.POUND, StringPool.POUND, _values));
 	}
 
 	@Override

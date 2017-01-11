@@ -48,9 +48,8 @@ public class SimulationDeviceDynamicInclude extends BaseDynamicInclude {
 		dynamicIncludeRegistry.register("/html/common/themes/bottom.jsp#post");
 	}
 
-	private static final String _TMPL_CONTENT =
-		StringUtil.read(
-			SimulationDeviceDynamicInclude.class,
-			"/META-INF/resources/simulation_device_dynamic_include.tmpl");
+	private static final String _TMPL_CONTENT = StringUtil.read(
+		SimulationDeviceDynamicInclude.class,
+		"/META-INF/resources/simulation_device_dynamic_include.tmpl");
 
 }
