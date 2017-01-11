@@ -15,7 +15,7 @@
 package com.liferay.blogs.rest.internal.resources;
 
 import com.liferay.blogs.model.BlogsEntry;
-import com.liferay.blogs.rest.internal.model.BlogsEntryRestModel;
+import com.liferay.blogs.rest.internal.model.BlogsEntryModel;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -33,8 +33,8 @@ public class BlogsEntryResource {
 	@GET
 	@Path("/")
 	@Produces("application/json")
-	public BlogsEntryRestModel getBlogsEntry() {
-		return new BlogsEntryRestModel(_blogsEntry);
+	public BlogsEntryModel getBlogsEntry() {
+		return new BlogsEntryModel(_blogsEntry);
 	}
 
 	private final BlogsEntry _blogsEntry;

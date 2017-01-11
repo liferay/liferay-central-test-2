@@ -23,12 +23,12 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Alejandro Hernández
  */
 @XmlRootElement
-public class BlogsEntryRestModel {
+public class BlogsEntryModel {
 
-	public BlogsEntryRestModel() {
+	public BlogsEntryModel() {
 	}
 
-	public BlogsEntryRestModel(BlogsEntry blogsEntry) {
+	public BlogsEntryModel(BlogsEntry blogsEntry) {
 		_title = blogsEntry.getTitle();
 		_content = blogsEntry.getContent();
 		_entryId = blogsEntry.getEntryId();
