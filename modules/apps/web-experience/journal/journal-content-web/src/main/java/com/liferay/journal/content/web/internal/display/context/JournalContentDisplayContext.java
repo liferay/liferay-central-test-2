@@ -407,6 +407,23 @@ public class JournalContentDisplayContext {
 			userToolAssetAddonEntries, _assetAddonEntryComparator);
 	}
 
+	public long getGroupId() {
+		ThemeDisplay themeDisplay = (ThemeDisplay)_portletRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		long groupId = themeDisplay.getScopeGroupId();
+
+		Group scopeGroup = themeDisplay.getScopeGroup();
+
+		if (!scopeGroup.isStaged() ||
+			!scopeGroup.isInStagingPortlet(JournalPortletKeys.JOURNAL)) {
+
+			groupId = scopeGroup.getLiveGroupId();
+		}
+
+		return groupId;
+	}
+
 	public JournalArticle getLatestArticle() {
 		if (_latestArticle != null) {
 			return _latestArticle;
