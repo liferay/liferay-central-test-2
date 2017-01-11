@@ -36,7 +36,7 @@ public class ProtectedServletRequest
 		super(request);
 
 		if (remoteUser == null) {
-			throw new NullPointerException("remoteUser is null");
+			throw new NullPointerException("Remote user is null");
 		}
 
 		if (request instanceof ProtectedServletRequest) {
