@@ -40,7 +40,7 @@ public class SimulationDeviceDynamicInclude extends BaseDynamicInclude {
 
 		PrintWriter printWriter = response.getWriter();
 
-		printWriter.print(_simulationDeviceDynamicIncludeTemplate);
+		printWriter.print(_TMPL_CONTENT);
 	}
 
 	@Override
@@ -48,7 +48,7 @@ public class SimulationDeviceDynamicInclude extends BaseDynamicInclude {
 		dynamicIncludeRegistry.register("/html/common/themes/bottom.jsp#post");
 	}
 
-	private static final String _simulationDeviceDynamicIncludeTemplate =
+	private static final String _TMPL_CONTENT =
 		StringUtil.read(
 			SimulationDeviceDynamicInclude.class,
 			"/META-INF/resources/simulation_device_dynamic_include.tmpl");

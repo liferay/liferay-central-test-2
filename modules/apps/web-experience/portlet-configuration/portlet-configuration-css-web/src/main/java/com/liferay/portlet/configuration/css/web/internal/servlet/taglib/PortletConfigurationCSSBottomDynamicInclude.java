@@ -49,7 +49,7 @@ public class PortletConfigurationCSSBottomDynamicInclude
 
 		printWriter.print(
 			StringUtil.replace(
-				_definitionsTemplate, StringPool.POUND, StringPool.POUND,
+				_TMPL_CONTENT, StringPool.POUND, StringPool.POUND,
 				_values));
 	}
 
@@ -67,7 +67,7 @@ public class PortletConfigurationCSSBottomDynamicInclude
 			"contextPath", servletContext.getContextPath());
 	}
 
-	private static final String _definitionsTemplate = StringUtil.read(
+	private static final String _TMPL_CONTENT = StringUtil.read(
 		PortletConfigurationCSSBottomDynamicInclude.class,
 		"/META-INF/resources/definitions.tmpl");
 

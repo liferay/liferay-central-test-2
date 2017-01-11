@@ -99,7 +99,7 @@ public class SPATopHeadJSPDynamicInclude extends BaseJSPDynamicInclude {
 		scriptData.append(
 			null,
 			StringUtil.replaceToStringBundler(
-				_initTemplate, StringPool.POUND, StringPool.POUND, values),
+				_TMPL_CONTENT, StringPool.POUND, StringPool.POUND, values),
 			"frontend-js-spa-web/liferay/init.es", ScriptData.ModulesType.ES6);
 
 		scriptData.writeTo(response.getWriter());
@@ -139,7 +139,7 @@ public class SPATopHeadJSPDynamicInclude extends BaseJSPDynamicInclude {
 		_spaUtil = null;
 	}
 
-	private static final String _initTemplate = StringUtil.read(
+	private static final String _TMPL_CONTENT = StringUtil.read(
 		SPATopHeadJSPDynamicInclude.class, "/META-INF/resources/init.tmpl");
 
 	@Reference
