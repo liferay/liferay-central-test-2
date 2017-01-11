@@ -25,8 +25,6 @@ JournalArticleDisplay articleDisplay = journalContentDisplayContext.getArticleDi
 journalContentDisplayContext.incrementViewCounter();
 
 AssetRendererFactory<JournalArticle> assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClass(JournalArticle.class);
-
-Group scopeGroup = themeDisplay.getScopeGroup();
 %>
 
 <c:choose>
@@ -37,6 +35,10 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 					<div>
 						<liferay-ui:message key="this-application-is-not-visible-to-users-yet" />
 					</div>
+
+					<%
+					Group scopeGroup = themeDisplay.getScopeGroup();
+					%>
 
 					<c:if test="<%= !scopeGroup.isStaged() || scopeGroup.isStagingGroup() %>">
 						<div>
