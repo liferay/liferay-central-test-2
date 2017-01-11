@@ -2666,7 +2666,7 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  l.kernel.xml,com.liferay.portal.kernel.xmlrpc,com.liferay.registry.co
  llections,com.liferay.social.kernel.model,javax.portlet,javax.portlet
  .filter,javax.servlet,javax.servlet.http",com.liferay.portal.kernel.p
- ortlet.bridges.mvc;version="1.4.0";uses:="com.liferay.portal.kernel.p
+ ortlet.bridges.mvc;version="1.5.0";uses:="com.liferay.portal.kernel.p
  ortlet,javax.portlet",com.liferay.portal.kernel.portlet.configuration
  .icon;version="1.0.0";uses:="com.liferay.registry,com.liferay.registr
  y.collections,javax.portlet,javax.servlet,javax.servlet.http",com.lif
