@@ -247,7 +247,6 @@ RoleSearchTerms searchTerms = (RoleSearchTerms)roleSearchContainer.getSearchTerm
 			}
 
 			boolean filterGuestRole = false;
-
 			boolean permissionCheckGuestEnabled = PropsValues.PERMISSIONS_CHECK_GUEST_ENABLED;
 
 			if (Objects.equals(modelResource, Layout.class.getName())) {
