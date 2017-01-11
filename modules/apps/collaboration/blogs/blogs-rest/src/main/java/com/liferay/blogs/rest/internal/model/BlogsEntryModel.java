@@ -29,9 +29,9 @@ public class BlogsEntryModel {
 	}
 
 	public BlogsEntryModel(BlogsEntry blogsEntry) {
-		_title = blogsEntry.getTitle();
 		_content = blogsEntry.getContent();
 		_entryId = blogsEntry.getEntryId();
+		_title = blogsEntry.getTitle();
 	}
 
 	public String getContent() {
