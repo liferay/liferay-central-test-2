@@ -986,40 +986,37 @@ public class ExpandoValueConversionTest {
 
 	@Test
 	public void testStringArray1() {
-		String stringArray = "[randomtext]";
-		String stringArrayValue = "randomtext";
+		String string = "randomtext";
 
 		String[] convertedArray = (String[])_converter.convertType(
-			ExpandoColumnConstants.STRING_ARRAY, stringArray);
+			ExpandoColumnConstants.STRING_ARRAY, "[randomtext]");
 
 		Assert.assertEquals(1, convertedArray.length);
-		Assert.assertEquals(stringArrayValue, convertedArray[0]);
+		Assert.assertEquals(string, convertedArray[0]);
 	}
 
 	@Test
 	public void testStringArray2() {
-		String stringArray = "[randomtext,randomtext]";
-		String stringArrayValue = "randomtext";
+		String string = "randomtext";
 
 		String[] convertedArray = (String[])_converter.convertType(
-			ExpandoColumnConstants.STRING_ARRAY, stringArray);
+			ExpandoColumnConstants.STRING_ARRAY, "[randomtext,randomtext]");
 
 		Assert.assertEquals(2, convertedArray.length);
-		Assert.assertEquals(stringArrayValue, convertedArray[0]);
-		Assert.assertEquals(stringArrayValue, convertedArray[1]);
+		Assert.assertEquals(string, convertedArray[0]);
+		Assert.assertEquals(string, convertedArray[1]);
 	}
 
 	@Test
 	public void testStringArray3() {
-		String stringArray = "randomtext,randomtext";
-		String stringArrayValue = "randomtext";
+		String string = "randomtext";
 
 		String[] convertedArray = (String[])_converter.convertType(
-			ExpandoColumnConstants.STRING_ARRAY, stringArray);
+			ExpandoColumnConstants.STRING_ARRAY, "randomtext,randomtext");
 
 		Assert.assertEquals(2, convertedArray.length);
-		Assert.assertEquals(stringArrayValue, convertedArray[0]);
-		Assert.assertEquals(stringArrayValue, convertedArray[1]);
+		Assert.assertEquals(string, convertedArray[0]);
+		Assert.assertEquals(string, convertedArray[1]);
 	}
 
 	@Test
