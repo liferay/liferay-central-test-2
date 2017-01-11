@@ -9,7 +9,6 @@
 	<tlib-version>1.0</tlib-version>
 	<short-name>liferay-comment</short-name>
 	<uri>http://liferay.com/tld/comment</uri>
-
 	<tag>
 		<name>discussion</name>
 		<tag-class>com.liferay.comment.taglib.servlet.taglib.DiscussionTag</tag-class>
