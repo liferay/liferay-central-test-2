@@ -1181,9 +1181,6 @@ public class CalendarPortlet extends MVCPortlet {
 		int[] statuses = ParamUtil.getIntegerValues(
 			resourceRequest, "statuses");
 
-		int eventsPerPage = ParamUtil.getInteger(
-			resourceRequest, "eventsPerPage");
-
 		List<CalendarBooking> calendarBookings =
 			Collections.<CalendarBooking>emptyList();
 
@@ -1194,6 +1191,9 @@ public class CalendarPortlet extends MVCPortlet {
 				endTimeJCalendar.getTimeInMillis(), true, statuses,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 				new CalendarBookingStartTimeComparator(true));
+
+			int eventsPerPage = ParamUtil.getInteger(
+				resourceRequest, "eventsPerPage");
 
 			if ((eventsPerPage > 0) &&
 				(eventsPerPage < calendarBookings.size())) {
