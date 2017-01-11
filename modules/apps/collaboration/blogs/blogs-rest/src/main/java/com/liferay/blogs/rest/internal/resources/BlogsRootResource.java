@@ -34,7 +34,7 @@ import org.osgi.service.component.annotations.Reference;
 public class BlogsRootResource {
 
 	@Path("/{entryId}")
-	public BlogsEntryResource getEntryResource(
+	public BlogsEntryResource getBlogsEntryResource(
 			@PathParam("entryId") long entryId)
 		throws PortalException {
 

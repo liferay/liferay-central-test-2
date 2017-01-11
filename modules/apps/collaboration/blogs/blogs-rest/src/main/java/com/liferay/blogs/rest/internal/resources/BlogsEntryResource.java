@@ -33,7 +33,7 @@ public class BlogsEntryResource {
 	@GET
 	@Path("/")
 	@Produces("application/json")
-	public BlogsEntryModel getBlogsEntry() {
+	public BlogsEntryModel getBlogsEntryModel() {
 		return new BlogsEntryModel(_blogsEntry);
 	}
 
