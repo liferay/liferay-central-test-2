@@ -229,4 +229,32 @@
 
 		<execute function="AssertTextEquals" locator1="Form#RULE_BUILDER_ACTION_TARGET_FIELD_2" value1="Renamed Page" />
 	</command>
+
+	<command name="ViewRuleAfterOptionValueEdit" priority="3">
+		<description message="This is a use case for LPS-68227." />
+
+		<execute macro="FormsAdminNavigator#gotoEditField">
+			<var name="fieldName" value="ChooseYourDestiny" />
+		</execute>
+
+		<execute macro="FormFields#editOptionsRow">
+			<var name="optionName" value="Destiny2" />
+			<var name="optionValue" value="Edited Destiny" />
+			<var name="rowNumber" value="2" />
+		</execute>
+
+		<execute macro="Form#closeSidebar" />
+
+		<execute macro="Form#save" />
+
+		<execute macro="FormsAdminNavigator#gotoRules" />
+
+		<execute macro="FormRules#gotoEdit">
+			<var name="ruleNumber" value="1" />
+		</execute>
+
+		<var name="key_conditionRowNumber" value="1" />
+
+		<execute function="AssertTextEquals" locator1="Form#RULE_BUILDER_CONDITION_VALUE_FIELD" value1="Edited Destiny" />
+	</command>
 </definition>
