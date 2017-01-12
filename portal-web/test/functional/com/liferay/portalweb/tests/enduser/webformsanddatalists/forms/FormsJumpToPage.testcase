@@ -230,7 +230,7 @@
 		<execute function="AssertTextEquals" locator1="Form#RULE_BUILDER_ACTION_TARGET_FIELD_2" value1="Renamed Page" />
 	</command>
 
-	<command name="ViewRuleAfterOptionValueEdit" priority="3">
+	<command ignore="true" name="ViewRuleAfterOptionValueEdit" priority="3">
 		<description message="This is a use case for LPS-68227." />
 
 		<execute macro="FormsAdminNavigator#gotoEditField">
