@@ -21,6 +21,7 @@ import com.liferay.dynamic.data.mapping.annotations.DDMFormLayoutColumn;
 import com.liferay.dynamic.data.mapping.annotations.DDMFormLayoutPage;
 import com.liferay.dynamic.data.mapping.annotations.DDMFormLayoutRow;
 import com.liferay.dynamic.data.mapping.annotations.DDMFormRule;
+import com.liferay.dynamic.data.mapping.data.provider.DDMDataProviderParameterSettings;
 
 /**
  * @author Marcellus Tavares
@@ -57,7 +58,8 @@ import com.liferay.dynamic.data.mapping.annotations.DDMFormRule;
 		)
 	}
 )
-public interface DDMRESTDataProviderSettings {
+public interface DDMRESTDataProviderSettings
+	extends DDMDataProviderParameterSettings {
 
 	@DDMFormField(
 		label = "%cache-data-on-the-first-request",
@@ -80,9 +82,6 @@ public interface DDMRESTDataProviderSettings {
 	)
 	public String filterParameterName();
 
-	@DDMFormField(label = "%input-parameters")
-	public DDMRestDataProviderInputParametersSettings[] inputParameters();
-
 	@DDMFormField(
 		label = "%displayed-json-attribute",
 		properties = {
@@ -92,9 +91,6 @@ public interface DDMRESTDataProviderSettings {
 		required = true
 	)
 	public String key();
-
-	@DDMFormField(label = "%output-parameters")
-	public DDMRestDataProviderOutputParametersSettings[] outputParameters();
 
 	@DDMFormField(
 		label = "%password",
