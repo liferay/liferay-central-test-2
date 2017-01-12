@@ -205,4 +205,28 @@
 
 		<execute macro="FormPortlet#submitSuccessfully" />
 	</command>
+
+	<command name="ViewPageNameChange" priority="4">
+		<description message="This is a use case for LPS-68227." />
+
+		<execute macro="Form#gotoFormPage">
+			<var name="formPageName" value="Page 3" />
+		</execute>
+
+		<execute macro="Form#editPageTitle">
+			<var name="formPageName" value="Renamed Page" />
+		</execute>
+
+		<execute macro="Form#save" />
+
+		<execute macro="FormsAdminNavigator#gotoRules" />
+
+		<execute macro="FormRules#gotoEdit">
+			<var name="ruleNumber" value="1" />
+		</execute>
+
+		<var name="key_actionRowNumber" value="1" />
+
+		<execute function="AssertTextEquals" locator1="Form#RULE_BUILDER_ACTION_TARGET_FIELD_2" value1="Renamed Page" />
+	</command>
 </definition>
