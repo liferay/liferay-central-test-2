@@ -17,6 +17,10 @@ AUI.add(
 						value: null
 					},
 
+					functionsMetadata: {
+						value: []
+					},
+
 					rules: {
 						value: []
 					},
@@ -157,6 +161,7 @@ AUI.add(
 									bubbleTargets: [instance],
 									contentBox: instance.get('contentBox'),
 									fields: instance.getFields(),
+									functionsMetadata: instance.get('functionsMetadata'),
 									pages: instance.getPages()
 								}
 							);
