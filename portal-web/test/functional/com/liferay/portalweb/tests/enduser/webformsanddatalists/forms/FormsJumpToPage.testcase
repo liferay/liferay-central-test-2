@@ -206,16 +206,18 @@
 		<execute macro="FormPortlet#submitSuccessfully" />
 	</command>
 
-	<command name="ViewRuleAfterPageNameChange" priority="4">
+	<command name="ViewRuleAfterLabelEdit" priority="4">
 		<description message="This is a use case for LPS-68227." />
 
-		<execute macro="Form#gotoFormPage">
-			<var name="formPageName" value="Page 3" />
+		<execute macro="FormsAdminNavigator#gotoEditField">
+			<var name="fieldName" value="ChooseYourDestiny" />
 		</execute>
 
-		<execute macro="Form#editPageTitle">
-			<var name="formPageName" value="Renamed Page" />
+		<execute macro="Form#editFieldLabel">
+			<var name="fieldValue" value="Edit Label" />
 		</execute>
+
+		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#save" />
 
@@ -225,9 +227,9 @@
 			<var name="ruleNumber" value="1" />
 		</execute>
 
-		<var name="key_actionRowNumber" value="1" />
+		<var name="key_conditionRowNumber" value="1" />
 
-		<execute function="AssertTextEquals" locator1="Form#RULE_BUILDER_ACTION_TARGET_FIELD_2" value1="Renamed Page" />
+		<execute function="AssertTextEquals" locator1="Form#RULE_BUILDER_CONDITION_FIELD" value1="Edit Label" />
 	</command>
 
 	<command ignore="true" name="ViewRuleAfterOptionValueEdit" priority="3">
@@ -258,18 +260,16 @@
 		<execute function="AssertTextEquals" locator1="Form#RULE_BUILDER_CONDITION_VALUE_FIELD" value1="Edited Destiny" />
 	</command>
 
-	<command name="ViewRuleAfterLabelEdit" priority="4">
+	<command name="ViewRuleAfterPageNameChange" priority="4">
 		<description message="This is a use case for LPS-68227." />
 
-		<execute macro="FormsAdminNavigator#gotoEditField">
-			<var name="fieldName" value="ChooseYourDestiny" />
+		<execute macro="Form#gotoFormPage">
+			<var name="formPageName" value="Page 3" />
 		</execute>
 
-		<execute macro="Form#editFieldLabel">
-			<var name="fieldValue" value="Edit Label" />
+		<execute macro="Form#editPageTitle">
+			<var name="formPageName" value="Renamed Page" />
 		</execute>
-
-		<execute macro="Form#closeSidebar" />
 
 		<execute macro="Form#save" />
 
@@ -279,8 +279,8 @@
 			<var name="ruleNumber" value="1" />
 		</execute>
 
-		<var name="key_conditionRowNumber" value="1" />
+		<var name="key_actionRowNumber" value="1" />
 
-		<execute function="AssertTextEquals" locator1="Form#RULE_BUILDER_CONDITION_FIELD" value1="Edit Label" />
+		<execute function="AssertTextEquals" locator1="Form#RULE_BUILDER_ACTION_TARGET_FIELD_2" value1="Renamed Page" />
 	</command>
 </definition>

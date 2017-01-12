@@ -145,12 +145,6 @@
 		<execute function="Type" locator1="Form#PAGE_TITLE_FIELD" value1="${formPageName}" />
 	</command>
 
-	<command name="gotoFormPage">
-		<var name="key_formPageName" value="${formPageName}" />
-
-		<execute function="Click" locator1="Form#FORM_PAGE" />
-	</command>
-
 	<command name="getPublishedFormPublicURL" returns="publicURL">
 		<var locator="Form#PUBLISH_FORM_PUBLIC_URL" name="publicURL" />
 
@@ -179,6 +173,12 @@
 
 	<command name="gotoBasicTab">
 		<execute function="AssertClick" locator1="Form#SIDEBAR_BASIC_TAB" value1="Basic" />
+	</command>
+
+	<command name="gotoFormPage">
+		<var name="key_formPageName" value="${formPageName}" />
+
+		<execute function="Click" locator1="Form#FORM_PAGE" />
 	</command>
 
 	<command name="previewForm">
