@@ -257,4 +257,30 @@
 
 		<execute function="AssertTextEquals" locator1="Form#RULE_BUILDER_CONDITION_VALUE_FIELD" value1="Edited Destiny" />
 	</command>
+
+	<command name="ViewRuleAfterLabelEdit" priority="4">
+		<description message="This is a use case for LPS-68227." />
+
+		<execute macro="FormsAdminNavigator#gotoEditField">
+			<var name="fieldName" value="ChooseYourDestiny" />
+		</execute>
+
+		<execute macro="Form#editFieldLabel">
+			<var name="fieldValue" value="Edit Label" />
+		</execute>
+
+		<execute macro="Form#closeSidebar" />
+
+		<execute macro="Form#save" />
+
+		<execute macro="FormsAdminNavigator#gotoRules" />
+
+		<execute macro="FormRules#gotoEdit">
+			<var name="ruleNumber" value="1" />
+		</execute>
+
+		<var name="key_conditionRowNumber" value="1" />
+
+		<execute function="AssertTextEquals" locator1="Form#RULE_BUILDER_CONDITION_FIELD" value1="Edit Label" />
+	</command>
 </definition>
