@@ -175,7 +175,7 @@ if (organization != null) {
 						%>
 
 						<liferay-ui:search-container
-							id="organizations"
+							id="<%= _ORGANIZATIONS_SEARCH_CONTAINER_ID %>"
 							searchContainer="<%= searchContainer %>"
 							var="organizationSearchContainer"
 						>
@@ -330,7 +330,7 @@ if (organization != null) {
 <%@ include file="/add_menu.jspf" %>
 
 <aui:script>
-	Liferay.Util.toggleSearchContainerButton('#<portlet:namespace />delete', '#<portlet:namespace /><%= searchContainerReference.getId(request, "organizationSearchContainer") %>SearchContainer', document.<portlet:namespace />fm, '<portlet:namespace />allRowIds');
+	Liferay.Util.toggleSearchContainerButton('#<portlet:namespace />delete', '#<portlet:namespace /><%= _ORGANIZATIONS_SEARCH_CONTAINER_ID %>SearchContainer', document.<portlet:namespace />fm, '<portlet:namespace />allRowIds');
 </aui:script>
 
 <%!
@@ -345,4 +345,6 @@ private long _getParentOrganizationId(HttpServletRequest request, Organization o
 
 	return ParamUtil.getLong(request, "parentOrganizationId", OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID);
 }
+
+private static final String _ORGANIZATIONS_SEARCH_CONTAINER_ID = "organizations";
 %>
