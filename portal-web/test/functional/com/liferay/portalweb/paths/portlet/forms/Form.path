@@ -298,12 +298,12 @@
 </tr>
 <tr>
 	<td>RULE_BUILDER_ACTION_TARGET_FIELD</td>
-	<td>//li[contains(@class,'form-builder-rule-action')][${key_actionRowNumber}]//a[contains(@id,'action') and contains(@class,'select-field-trigger')]</td>
+	<td>//li[contains(@class,'form-builder-rule-action')][${key_actionRowNumber}]//a[contains(@id,'action') and contains(@class,'select-field-trigger')]/span</td>
 	<td></td>
 </tr>
 <tr>
 	<td>RULE_BUILDER_ACTION_TARGET_FIELD_2</td>
-	<td>xpath=(//li[contains(@class,'form-builder-rule-action')][${key_actionRowNumber}]//a[contains(@id,'action') and contains(@class,'select-field-trigger')])[2]</td>
+	<td>xpath=(//li[contains(@class,'form-builder-rule-action')][${key_actionRowNumber}]//a[contains(@id,'action') and contains(@class,'select-field-trigger')]/span)[2]</td>
 	<td></td>
 </tr>
 <tr>
