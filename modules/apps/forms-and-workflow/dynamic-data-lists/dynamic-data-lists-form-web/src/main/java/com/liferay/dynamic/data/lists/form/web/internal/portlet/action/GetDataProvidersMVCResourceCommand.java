@@ -17,6 +17,7 @@ package com.liferay.dynamic.data.lists.form.web.internal.portlet.action;
 import com.liferay.dynamic.data.lists.form.web.constants.DDLFormPortletKeys;
 import com.liferay.dynamic.data.mapping.model.DDMDataProviderInstance;
 import com.liferay.dynamic.data.mapping.service.DDMDataProviderInstanceLocalService;
+import com.liferay.dynamic.data.mapping.util.comparator.DataProviderInstanceNameComparator;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactory;
@@ -68,9 +69,12 @@ public class GetDataProvidersMVCResourceCommand extends BaseMVCResourceCommand {
 		int end = ParamUtil.getInteger(
 			resourceRequest, "end", QueryUtil.ALL_POS);
 
+		DataProviderInstanceNameComparator dataProviderInstanceNameComparator =
+			new DataProviderInstanceNameComparator(true);
+
 		List<DDMDataProviderInstance> ddmDataProviderInstances =
 			_ddmDataProviderInstanceLocalService.getDataProviderInstances(
-				groupIds, start, end);
+				groupIds, start, end, dataProviderInstanceNameComparator);
 
 		JSONArray dataProvidersJSONArray = _jsonFactory.createJSONArray();
 

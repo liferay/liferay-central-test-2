@@ -33,6 +33,7 @@ import com.liferay.dynamic.data.mapping.storage.DDMFormFieldValue;
 import com.liferay.dynamic.data.mapping.storage.DDMFormValues;
 import com.liferay.dynamic.data.mapping.util.DDMFormFactory;
 import com.liferay.dynamic.data.mapping.util.DDMFormLayoutFactory;
+import com.liferay.dynamic.data.mapping.util.comparator.DataProviderInstanceNameComparator;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONFactory;
@@ -84,9 +85,12 @@ public class GetFieldSettingsDDMFormContextMVCResourceCommand
 		int end = ParamUtil.getInteger(
 			resourceRequest, "end", QueryUtil.ALL_POS);
 
+		DataProviderInstanceNameComparator dataProviderInstanceNameComparator =
+			new DataProviderInstanceNameComparator(true);
+
 		List<DDMDataProviderInstance> ddmDataProviderInstances =
 			_ddmDataProviderInstanceLocalService.getDataProviderInstances(
-				groupIds, start, end);
+				groupIds, start, end, dataProviderInstanceNameComparator);
 
 		for (DDMDataProviderInstance ddmDataProviderInstance :
 				ddmDataProviderInstances) {
