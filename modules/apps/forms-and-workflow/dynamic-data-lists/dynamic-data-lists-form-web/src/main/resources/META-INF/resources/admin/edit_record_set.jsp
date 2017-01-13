@@ -209,6 +209,8 @@ renderResponse.setTitle((recordSet == null) ? LanguageUtil.get(request, "new-for
 
 		<liferay-portlet:resourceURL copyCurrentRenderParameters="<%= false %>" id="saveRecordSet" var="saveRecordSetURL" />
 
+		<liferay-portlet:resourceURL copyCurrentRenderParameters="<%= false %>" id="getDataProviders" var="getDataProvidersURL" />
+
 		<liferay-portlet:resourceURL copyCurrentRenderParameters="<%= false %>" id="getDataProviderParametersSettings" var="getDataProviderParametersSettings" />
 
 		<liferay-portlet:resourceURL copyCurrentRenderParameters="<%= false %>" id="getFieldSettingsDDMFormContext" var="getFieldSettingsDDMFormContext" />
@@ -253,6 +255,7 @@ renderResponse.setTitle((recordSet == null) ? LanguageUtil.get(request, "new-for
 											editForm: event.form,
 											evaluatorURL: '<%= ddlFormAdminDisplayContext.getDDMFormContextProviderServletURL() %>',
 											fieldTypesDefinitions: <%= ddlFormAdminDisplayContext.getDDMFormFieldTypesDefinitionsMap() %>,
+											getDataProvidersURL: '<%= getDataProvidersURL.toString() %>',
 											getDataProviderParametersSettingsURL: '<%= getDataProviderParametersSettings.toString() %>',
 											getFieldTypeSettingFormContextURL: '<%= getFieldSettingsDDMFormContext.toString() %>',
 											layout: <%= ddlFormAdminDisplayContext.getSerializedDDMFormLayout() %>,
