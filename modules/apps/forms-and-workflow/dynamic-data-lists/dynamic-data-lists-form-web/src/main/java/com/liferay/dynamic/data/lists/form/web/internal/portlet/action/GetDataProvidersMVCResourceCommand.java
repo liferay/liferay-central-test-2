@@ -59,14 +59,14 @@ public class GetDataProvidersMVCResourceCommand extends BaseMVCResourceCommand {
 		ThemeDisplay themeDisplay = (ThemeDisplay)resourceRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
+		Locale locale = themeDisplay.getLocale();
+		long[] groupIds = _portal.getCurrentAndAncestorSiteGroupIds(
+			themeDisplay.getScopeGroupId());
+
 		int start = ParamUtil.getInteger(
 			resourceRequest, "start", QueryUtil.ALL_POS);
 		int end = ParamUtil.getInteger(
 			resourceRequest, "end", QueryUtil.ALL_POS);
-
-		Locale locale = themeDisplay.getLocale();
-		long[] groupIds = _portal.getCurrentAndAncestorSiteGroupIds(
-			themeDisplay.getScopeGroupId());
 
 		List<DDMDataProviderInstance> ddmDataProviderInstances =
 			_ddmDataProviderInstanceLocalService.getDataProviderInstances(
@@ -78,17 +78,18 @@ public class GetDataProvidersMVCResourceCommand extends BaseMVCResourceCommand {
 				ddmDataProviderInstances) {
 			JSONObject dataProviderJSONObject = _jsonFactory.createJSONObject();
 
-			long dataProviderInstanceId =
+			long ddmDataProviderInstanceId =
 				ddmDataProviderInstance.getDataProviderInstanceId();
 
-			String dataProviderInstanceUUID = ddmDataProviderInstance.getUuid();
+			String ddmDataProviderInstanceUUID =
+				ddmDataProviderInstance.getUuid();
 
-			String dataProviderInstanceName = ddmDataProviderInstance.getName(
-				locale);
+			String ddmDataProviderInstanceName =
+				ddmDataProviderInstance.getName(locale);
 
-			dataProviderJSONObject.put("id", dataProviderInstanceId);
-			dataProviderJSONObject.put("name", dataProviderInstanceName);
-			dataProviderJSONObject.put("uuid", dataProviderInstanceUUID);
+			dataProviderJSONObject.put("id", ddmDataProviderInstanceId);
+			dataProviderJSONObject.put("name", ddmDataProviderInstanceName);
+			dataProviderJSONObject.put("uuid", ddmDataProviderInstanceUUID);
 
 			dataProvidersJSONArray.put(dataProviderJSONObject);
 		}

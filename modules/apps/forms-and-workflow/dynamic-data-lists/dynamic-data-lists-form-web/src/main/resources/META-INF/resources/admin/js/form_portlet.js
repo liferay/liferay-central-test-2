@@ -52,11 +52,11 @@ AUI.add(
 						valueFn: '_valueFormBuilder'
 					},
 
-					getDataProvidersURL: {
+					getDataProviderParametersSettingsURL: {
 						value: ''
 					},
 
-					getDataProviderParametersSettingsURL: {
+					getDataProvidersURL: {
 						value: ''
 					},
 
