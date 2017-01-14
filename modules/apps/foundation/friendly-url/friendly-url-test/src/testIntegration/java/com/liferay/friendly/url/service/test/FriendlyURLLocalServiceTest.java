@@ -49,7 +49,6 @@ public class FriendlyURLLocalServiceTest {
 	@Test
 	public void testGetUniqueUrlTitleNormalizesUrlTitle() throws Exception {
 		long classNameId = ClassNameLocalServiceUtil.getClassNameId(User.class);
-
 		String urlTitle = "url title with spaces";
 
 		String uniqueUrlTitle = FriendlyURLLocalServiceUtil.getUniqueUrlTitle(
@@ -62,7 +61,6 @@ public class FriendlyURLLocalServiceTest {
 	@Test
 	public void testGetUniqueUrlTitleResolvesConflicts() throws Exception {
 		long classNameId = ClassNameLocalServiceUtil.getClassNameId(User.class);
-
 		String urlTitle = "existing-url-title";
 
 		FriendlyURLLocalServiceUtil.addFriendlyURL(
@@ -79,7 +77,6 @@ public class FriendlyURLLocalServiceTest {
 	@Test
 	public void testGetUniqueUrlTitleReusesOwnedUrlTitles() throws Exception {
 		long classNameId = ClassNameLocalServiceUtil.getClassNameId(User.class);
-
 		String urlTitle = "existing-url-title";
 
 		FriendlyURLLocalServiceUtil.addFriendlyURL(
@@ -110,7 +107,7 @@ public class FriendlyURLLocalServiceTest {
 	}
 
 	@Test(expected = DuplicateFriendlyURLException.class)
-	public void testValidateNonUniqueUrlTitle() throws Exception {
+	public void testValidateDuplicateUrlTitle() throws Exception {
 		long classNameId = ClassNameLocalServiceUtil.getClassNameId(User.class);
 
 		int maxLength = ModelHintsUtil.getMaxLength(
