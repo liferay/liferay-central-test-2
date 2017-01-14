@@ -188,11 +188,11 @@ public class FriendlyURLLocalServiceImpl
 		long companyId, long groupId, long classNameId, long classPK,
 		String urlTitle) {
 
-		int maxLength = ModelHintsUtil.getMaxLength(
-			FriendlyURL.class.getName(), "urlTitle");
-
 		String normalizedUrlTitle = FriendlyURLNormalizerUtil.normalize(
 			urlTitle);
+
+		int maxLength = ModelHintsUtil.getMaxLength(
+			FriendlyURL.class.getName(), "urlTitle");
 
 		String curUrlTitle = normalizedUrlTitle.substring(
 			0, Math.min(maxLength, normalizedUrlTitle.length()));
