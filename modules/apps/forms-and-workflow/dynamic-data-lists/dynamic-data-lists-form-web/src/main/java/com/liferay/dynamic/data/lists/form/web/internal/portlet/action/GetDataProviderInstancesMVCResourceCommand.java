@@ -46,11 +46,12 @@ import org.osgi.service.component.annotations.Reference;
 	immediate = true,
 	property = {
 		"javax.portlet.name=" + DDLFormPortletKeys.DYNAMIC_DATA_LISTS_FORM_ADMIN,
-		"mvc.command.name=getDataProviders"
+		"mvc.command.name=getDataProviderInstances"
 	},
 	service = MVCResourceCommand.class
 )
-public class GetDataProvidersMVCResourceCommand extends BaseMVCResourceCommand {
+public class GetDataProviderInstancesMVCResourceCommand
+	extends BaseMVCResourceCommand {
 
 	@Override
 	protected void doServeResource(
@@ -76,11 +77,13 @@ public class GetDataProvidersMVCResourceCommand extends BaseMVCResourceCommand {
 			_ddmDataProviderInstanceLocalService.getDataProviderInstances(
 				groupIds, start, end, dataProviderInstanceNameComparator);
 
-		JSONArray dataProvidersJSONArray = _jsonFactory.createJSONArray();
+		JSONArray dataProviderInstancesJSONArray =
+			_jsonFactory.createJSONArray();
 
 		for (DDMDataProviderInstance ddmDataProviderInstance :
 				ddmDataProviderInstances) {
-			JSONObject dataProviderJSONObject = _jsonFactory.createJSONObject();
+			JSONObject dataProviderInstanceJSONObject =
+				_jsonFactory.createJSONObject();
 
 			long ddmDataProviderInstanceId =
 				ddmDataProviderInstance.getDataProviderInstanceId();
@@ -91,15 +94,17 @@ public class GetDataProvidersMVCResourceCommand extends BaseMVCResourceCommand {
 			String ddmDataProviderInstanceName =
 				ddmDataProviderInstance.getName(locale);
 
-			dataProviderJSONObject.put("id", ddmDataProviderInstanceId);
-			dataProviderJSONObject.put("name", ddmDataProviderInstanceName);
-			dataProviderJSONObject.put("uuid", ddmDataProviderInstanceUUID);
+			dataProviderInstanceJSONObject.put("id", ddmDataProviderInstanceId);
+			dataProviderInstanceJSONObject.put(
+				"name", ddmDataProviderInstanceName);
+			dataProviderInstanceJSONObject.put(
+				"uuid", ddmDataProviderInstanceUUID);
 
-			dataProvidersJSONArray.put(dataProviderJSONObject);
+			dataProviderInstancesJSONArray.put(dataProviderInstanceJSONObject);
 		}
 
 		JSONPortletResponseUtil.writeJSON(
-			resourceRequest, resourceResponse, dataProvidersJSONArray);
+			resourceRequest, resourceResponse, dataProviderInstancesJSONArray);
 	}
 
 	@Reference
