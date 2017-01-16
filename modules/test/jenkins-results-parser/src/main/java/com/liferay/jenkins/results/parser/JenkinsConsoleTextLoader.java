@@ -110,8 +110,7 @@ public class JenkinsConsoleTextLoader {
 					"Invalid buildURL " + buildURL, murle);
 			}
 			catch (IOException ioe) {
-				throw new RuntimeException(
-					"IOException occurred while updating console log.", ioe);
+				throw new RuntimeException("Unable to update console log", ioe);
 			}
 		}
 
