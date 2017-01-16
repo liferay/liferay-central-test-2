@@ -1190,10 +1190,10 @@ public class LDAPUserImporterImpl implements LDAPUserImporter, UserImporter {
 						ldapServerId + " in " + stopWatch.getTime() + "ms");
 		}
 
+		Set<Long> deletedUserIds = new LinkedHashSet<>();
+
 		List<User> userGroupUsers = _userLocalService.getUserGroupUsers(
 			userGroupId);
-
-		Set<Long> deletedUserIds = new LinkedHashSet<>();
 
 		for (User user : userGroupUsers) {
 			if ((ldapServerId == user.getLdapServerId()) &&
