@@ -2935,7 +2935,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	public long getUserIdByEmailAddress(long companyId, String emailAddress)
 		throws PortalException {
 
-		emailAddress = StringUtil.toLowerCase(emailAddress.trim());
+		emailAddress = StringUtil.toLowerCase(StringUtil.trim(emailAddress));
 
 		User user = userPersistence.findByC_EA(companyId, emailAddress);
 
@@ -3790,7 +3790,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			throw new SendPasswordException.MustBeEnabled(company);
 		}
 
-		emailAddress = StringUtil.toLowerCase(emailAddress.trim());
+		emailAddress = StringUtil.toLowerCase(StringUtil.trim(emailAddress));
 
 		if (Validator.isNull(emailAddress)) {
 			throw new UserEmailAddressException.MustNotBeNull();
@@ -4321,8 +4321,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			String emailAddress2)
 		throws PortalException {
 
-		emailAddress1 = StringUtil.toLowerCase(emailAddress1.trim());
-		emailAddress2 = StringUtil.toLowerCase(emailAddress2.trim());
+		emailAddress1 = StringUtil.toLowerCase(StringUtil.trim(emailAddress1));
+		emailAddress2 = StringUtil.toLowerCase(StringUtil.trim(emailAddress2));
 
 		User user = userPersistence.findByPrimaryKey(userId);
 
@@ -4361,8 +4361,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			String emailAddress2, ServiceContext serviceContext)
 		throws PortalException {
 
-		emailAddress1 = StringUtil.toLowerCase(emailAddress1.trim());
-		emailAddress2 = StringUtil.toLowerCase(emailAddress2.trim());
+		emailAddress1 = StringUtil.toLowerCase(StringUtil.trim(emailAddress1));
+		emailAddress2 = StringUtil.toLowerCase(StringUtil.trim(emailAddress2));
 
 		User user = userPersistence.findByPrimaryKey(userId);
 
@@ -4446,7 +4446,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	public User updateGoogleUserId(long userId, String googleUserId)
 		throws PortalException {
 
-		googleUserId = googleUserId.trim();
+		googleUserId = StringUtil.trim(googleUserId);
 
 		User user = userPersistence.findByPrimaryKey(userId);
 
@@ -4859,7 +4859,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	public User updateOpenId(long userId, String openId)
 		throws PortalException {
 
-		openId = openId.trim();
+		openId = StringUtil.trim(openId);
 
 		User user = userPersistence.findByPrimaryKey(userId);
 
@@ -5284,7 +5284,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		String password = oldPassword;
 		screenName = getLogin(screenName);
-		emailAddress = StringUtil.toLowerCase(emailAddress.trim());
+		emailAddress = StringUtil.toLowerCase(StringUtil.trim(emailAddress));
 		openId = StringUtil.trim(openId);
 		String oldFullName = user.getFullName();
 		facebookSn = StringUtil.toLowerCase(StringUtil.trim(facebookSn));
@@ -5619,7 +5619,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		String emailAddress = ticket.getExtraInfo();
 
-		emailAddress = StringUtil.toLowerCase(emailAddress).trim();
+		emailAddress = StringUtil.toLowerCase(StringUtil.trim(emailAddress));
 
 		if (!emailAddress.equals(user.getEmailAddress())) {
 			if (userPersistence.fetchByC_EA(
@@ -5771,7 +5771,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			return Authenticator.FAILURE;
 		}
 
-		login = StringUtil.toLowerCase(login.trim());
+		login = StringUtil.toLowerCase(StringUtil.trim(login));
 
 		long userId = GetterUtil.getLong(login);
 

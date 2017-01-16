@@ -147,7 +147,8 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 
 	@Override
 	public LayoutSet fetchLayoutSet(String virtualHostname) {
-		virtualHostname = StringUtil.toLowerCase(virtualHostname.trim());
+		virtualHostname = StringUtil.toLowerCase(
+			StringUtil.trim(virtualHostname));
 
 		VirtualHost virtualHost = virtualHostPersistence.fetchByHostname(
 			virtualHostname);
@@ -178,7 +179,8 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 	public LayoutSet getLayoutSet(String virtualHostname)
 		throws PortalException {
 
-		virtualHostname = StringUtil.toLowerCase(virtualHostname.trim());
+		virtualHostname = StringUtil.toLowerCase(
+			StringUtil.trim(virtualHostname));
 
 		VirtualHost virtualHost = virtualHostPersistence.findByHostname(
 			virtualHostname);
@@ -445,7 +447,8 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 			long groupId, boolean privateLayout, String virtualHostname)
 		throws PortalException {
 
-		virtualHostname = StringUtil.toLowerCase(virtualHostname.trim());
+		virtualHostname = StringUtil.toLowerCase(
+			StringUtil.trim(virtualHostname));
 
 		if (Validator.isNotNull(virtualHostname) &&
 			!Validator.isDomain(virtualHostname)) {
