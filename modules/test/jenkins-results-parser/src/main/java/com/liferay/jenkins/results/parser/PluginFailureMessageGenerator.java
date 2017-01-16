@@ -45,7 +45,7 @@ public class PluginFailureMessageGenerator extends BaseFailureMessageGenerator {
 				JenkinsResultsParserUtil.getLocalURL(buildURL + "api/json"));
 		}
 		catch (IOException ioe) {
-			throw new RuntimeException("Unable to download json.", ioe);
+			throw new RuntimeException("Unable to download JSON", ioe);
 		}
 
 		String jobVariant = JenkinsResultsParserUtil.getJobVariant(jsonObject);
