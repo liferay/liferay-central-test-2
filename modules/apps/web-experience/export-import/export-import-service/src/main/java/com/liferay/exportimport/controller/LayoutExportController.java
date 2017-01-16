@@ -44,6 +44,8 @@ import com.liferay.exportimport.kernel.staging.LayoutStagingUtil;
 import com.liferay.exportimport.lar.DeletionSystemEventExporter;
 import com.liferay.exportimport.lar.PermissionExporter;
 import com.liferay.exportimport.lar.ThemeExporter;
+import com.liferay.portal.background.task.model.BackgroundTask;
+import com.liferay.portal.background.task.service.BackgroundTaskLocalService;
 import com.liferay.portal.kernel.backgroundtask.BackgroundTaskThreadLocal;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
@@ -214,8 +216,18 @@ public class LayoutExportController implements ExportController {
 		}
 
 		serviceContext.setCompanyId(companyId);
-		serviceContext.setSignedIn(false);
-		serviceContext.setUserId(defaultUserId);
+		serviceContext.setSignedIn(true);
+
+		if (BackgroundTaskThreadLocal.hasBackgroundTask()) {
+			BackgroundTask backgroundTask =
+				_backgroundTaskLocalService.getBackgroundTask(
+					BackgroundTaskThreadLocal.getBackgroundTaskId());
+
+			serviceContext.setUserId(backgroundTask.getUserId());
+		}
+		else {
+			serviceContext.setUserId(defaultUserId);
+		}
 
 		serviceContext.setAttribute("exporting", Boolean.TRUE);
 
@@ -784,6 +796,13 @@ public class LayoutExportController implements ExportController {
 	}
 
 	@Reference(unbind = "-")
+	protected void setBackgroundTaskLocalService(
+		BackgroundTaskLocalService backgroundTaskLocalService) {
+
+		_backgroundTaskLocalService = backgroundTaskLocalService;
+	}
+
+	@Reference(unbind = "-")
 	protected void setExportImportLifecycleManager(
 		ExportImportLifecycleManager exportImportLifecycleManager) {
 
@@ -857,6 +876,7 @@ public class LayoutExportController implements ExportController {
 	private static final Log _log = LogFactoryUtil.getLog(
 		LayoutExportController.class);
 
+	private BackgroundTaskLocalService _backgroundTaskLocalService;
 	private final DeletionSystemEventExporter _deletionSystemEventExporter =
 		DeletionSystemEventExporter.getInstance();
 	private ExportImportLifecycleManager _exportImportLifecycleManager;
