@@ -86,22 +86,12 @@ public class GetDataProviderInstancesMVCResourceCommand
 			JSONObject dataProviderInstanceJSONObject =
 				_jsonFactory.createJSONObject();
 
-			long ddmDataProviderInstanceId =
-				ddmDataProviderInstance.getDataProviderInstanceId();
-
-			dataProviderInstanceJSONObject.put("id", ddmDataProviderInstanceId);
-
-			String ddmDataProviderInstanceName =
-				ddmDataProviderInstance.getName(locale);
-
 			dataProviderInstanceJSONObject.put(
-				"name", ddmDataProviderInstanceName);
-
-			String ddmDataProviderInstanceUUID =
-				ddmDataProviderInstance.getUuid();
-
+				"id", ddmDataProviderInstance.getDataProviderInstanceId());
 			dataProviderInstanceJSONObject.put(
-				"uuid", ddmDataProviderInstanceUUID);
+				"name", ddmDataProviderInstance.getName(locale));
+			dataProviderInstanceJSONObject.put(
+				"uuid", ddmDataProviderInstance.getUuid());
 
 			dataProviderInstancesJSONArray.put(dataProviderInstanceJSONObject);
 		}
