@@ -116,10 +116,10 @@ public class Dom4JUtil {
 		return childElement;
 	}
 
-	public static Document parse(String xmlString) throws DocumentException {
+	public static Document parse(String xml) throws DocumentException {
 		SAXReader saxReader = new SAXReader();
 
-		return saxReader.read(new StringReader(xmlString));
+		return saxReader.read(new StringReader(xml));
 	}
 
 	public static void replace(
