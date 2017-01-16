@@ -45,7 +45,7 @@ public class PluginGitIDFailureMessageGenerator
 		sb.append("/blob/");
 		sb.append(properties.get("github.sender.branch.name"));
 		sb.append("/git-commit-plugins\">git-commit-plugins</a></strong> to ");
-		sb.append("an existing git id from <strong>");
+		sb.append("an existing Git ID from <strong>");
 		sb.append("<a href=\"https://github.com/liferay/");
 		sb.append(properties.get("plugins.repository"));
 		sb.append("/commits/");
@@ -80,7 +80,7 @@ public class PluginGitIDFailureMessageGenerator
 			messageElement, "Please update ",
 			Dom4JUtil.wrapWithNewElement(
 				getGitCommitPluginsAnchorElement(topLevelBuild), "strong"),
-			" to an existing git id from ",
+			" to an existing Git ID from ",
 			Dom4JUtil.wrapWithNewElement(
 				getPluginsBranchAnchorElement(topLevelBuild), "strong"),
 			".", getConsoleOutputSnippetElement(consoleText, true, end));

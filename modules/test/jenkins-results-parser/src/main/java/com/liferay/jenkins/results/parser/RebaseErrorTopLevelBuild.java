@@ -203,7 +203,7 @@ public class RebaseErrorTopLevelBuild extends TopLevelBuild {
 			return document.getRootElement();
 		}
 		catch (DocumentException de) {
-			throw new RuntimeException("Unable to parse xml", de);
+			throw new RuntimeException("Unable to parse XML", de);
 		}
 	}
 
