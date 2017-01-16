@@ -993,7 +993,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	@Override
-	public Layout getDefaultLayout(long groupId, boolean privateLayout) {
+	public Layout fetchDefaultLayout(long groupId, boolean privateLayout) {
 		if (groupId > 0) {
 			List<Layout> layouts = layoutPersistence.findByG_P(
 				groupId, privateLayout, 0, 1);
