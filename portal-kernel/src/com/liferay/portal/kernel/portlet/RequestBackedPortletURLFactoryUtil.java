@@ -71,7 +71,7 @@ public class RequestBackedPortletURLFactoryUtil {
 			Group controlPanelGroup = GroupLocalServiceUtil.getGroup(
 				companyId, GroupConstants.CONTROL_PANEL);
 
-			layout = LayoutLocalServiceUtil.getDefaultLayout(
+			layout = LayoutLocalServiceUtil.fetchDefaultLayout(
 				controlPanelGroup.getGroupId(), true);
 
 			if (layout == null) {
