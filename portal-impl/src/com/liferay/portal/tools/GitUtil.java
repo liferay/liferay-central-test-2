@@ -120,7 +120,7 @@ public class GitUtil {
 			arguments, "git.type", "current-branch");
 
 		try {
-			Iterable<String> fileNames;
+			Iterable<String> fileNames = null;
 
 			if (type.equals("current-branch")) {
 				String gitWorkingBranchName = ArgumentsUtil.getString(
