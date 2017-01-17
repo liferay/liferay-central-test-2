@@ -2175,7 +2175,7 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  ray.expando.kernel.exception,com.liferay.expando.kernel.model,com.lif
  eray.portal.kernel.dao.orm,com.liferay.portal.kernel.service,com.life
  ray.portal.kernel.service.persistence,com.liferay.portal.kernel.util"
- ,com.liferay.expando.kernel.util;version="1.0.0";uses:="com.liferay.e
+ ,com.liferay.expando.kernel.util;version="1.1.0";uses:="com.liferay.e
  xpando.kernel.model,com.liferay.portal.kernel.search,com.liferay.port
  al.kernel.service",com.liferay.exportimport.kernel.background.task;ve
  rsion="1.0.0",com.liferay.exportimport.kernel.configuration;version="
@@ -3807,7 +3807,7 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  .exception,com.liferay.portal.kernel.model,com.liferay.portal.kernel.
  service.persistence,com.liferay.portal.kernel.service.persistence.imp
  l,com.liferay.portal.kernel.util,com.liferay.portlet.expando.model.im
- pl";version="1.0.0",com.liferay.portlet.expando.util;version="1.0.2";
+ pl";version="1.0.0",com.liferay.portlet.expando.util;version="1.1.0";
  uses:="com.liferay.expando.kernel.model,com.liferay.expando.kernel.ut
  il,com.liferay.portal.kernel.exception,com.liferay.portal.kernel.sear
  ch,com.liferay.portal.kernel.security.pacl",com.liferay.portlet.expan
