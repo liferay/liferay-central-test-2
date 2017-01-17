@@ -1039,7 +1039,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	 */
 	@Override
 	public long getDefaultPlid(long groupId, boolean privateLayout) {
-		Layout layout = getDefaultLayout(groupId, privateLayout);
+		Layout layout = fetchDefaultLayout(groupId, privateLayout);
 
 		if (layout != null) {
 			return layout.getPlid();
