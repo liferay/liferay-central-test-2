@@ -47,8 +47,8 @@ public interface LPKGDeployer {
 	/**
 	 * Returns the deployed LPKG bundles together with their app bundles.
 	 *
-	 * @return the map of bundles with the LPKG bundle as the key and the app
-	 *         bundle list as the value
+	 * @return the map of bundles with the LPKG bundle as the key and the LPKG's
+	 *         app bundle list as the value
 	 */
 	public Map<Bundle, List<Bundle>> getDeployedLPKGBundles();
 
