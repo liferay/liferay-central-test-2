@@ -35,7 +35,8 @@ public interface LPKGDeployer {
 	 * exist). For example, if the LPKG file included four app bundles, then
 	 * five bundles are returned (i.e. one LPKG bundle and four app bundles).
 	 *
-	 * @param  bundleContext the context used to install the bundle into the OSGi container
+	 * @param  bundleContext the context used to install the bundle into the
+	 *         OSGi container
 	 * @param  lpkgFile the LPKG file to deploy
 	 * @return the LPKG file bundle and its included app bundles
 	 * @throws IOException if an IO failure during installation occurred
