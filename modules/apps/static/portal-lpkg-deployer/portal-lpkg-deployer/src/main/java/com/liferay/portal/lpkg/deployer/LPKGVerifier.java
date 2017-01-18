@@ -33,11 +33,11 @@ public interface LPKGVerifier {
 	 *         The older bundles must be uninstalled before the new LPKG file
 	 *         can be installed. When no older bundles are found, this method
 	 *         returns an empty list.
-	 * @throws LPKGVerifyException if the
-	 *         LPKG file does not contain a <code>liferay-marketplace.properties</code> file,
-	 *         if the <code>liferay-marketplace.properties</code> file does not have a valid title and
-	 *         version, or if a bundle already exists with the same symbolic name and same/higher
-	 *         version
+	 * @throws LPKGVerifyException if the LPKG file does not contain a
+	 *         <code>liferay-marketplace.properties</code> file, if the
+	 *         <code>liferay-marketplace.properties</code> file does not have a
+	 *         valid title and version, or if a bundle already exists with the
+	 *         same symbolic name and same/higher version
 	 */
 	public List<Bundle> verify(File lpkgFile) throws LPKGVerifyException;
 
