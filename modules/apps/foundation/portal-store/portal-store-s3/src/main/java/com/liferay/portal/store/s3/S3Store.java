@@ -354,8 +354,10 @@ public class S3Store extends BaseStore {
 				companyId, repositoryId, fileName, versionLabel);
 		}
 
+		File file = null;
+
 		try {
-			File file = FileUtil.createTempFile(is);
+			file = FileUtil.createTempFile(is);
 
 			putObject(companyId, repositoryId, fileName, versionLabel, file);
 		}
@@ -364,6 +366,8 @@ public class S3Store extends BaseStore {
 		}
 		finally {
 			StreamUtil.cleanUp(is);
+
+			FileUtil.delete(file);
 		}
 	}
 
