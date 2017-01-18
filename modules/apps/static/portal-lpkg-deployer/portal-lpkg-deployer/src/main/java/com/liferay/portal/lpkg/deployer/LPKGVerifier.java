@@ -25,6 +25,21 @@ import org.osgi.framework.Bundle;
  */
 public interface LPKGVerifier {
 
+	/**
+	 * Verify whether the give file is deployable as LPKG bundle.
+	 *
+	 * @param lpkgFile The file to be verified.
+	 * @return Older bundles with same symbolic name and lower versions. They
+	 *         must be uninstalled first, before this lpkg file can be
+	 *         installed. When no older bundles can be found, an empty list will
+	 *         be returned.
+	 * @throws LPKGVerifyException In case of:
+	 *         <li>lpkgFile does not contain liferay-marketplace.properties.
+	 *         <li>liferay-marketplace.properties does not have valid title and
+	 *         version.
+	 *         <li>A bundle exists with the same symbolic name and same/higher
+	 *         version.
+	 */
 	public List<Bundle> verify(File lpkgFile) throws LPKGVerifyException;
 
 }
