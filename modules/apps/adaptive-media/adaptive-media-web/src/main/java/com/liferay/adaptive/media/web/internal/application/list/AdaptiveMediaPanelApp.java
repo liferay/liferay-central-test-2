@@ -45,7 +45,7 @@ public class AdaptiveMediaPanelApp extends BasePanelApp {
 
 	@Override
 	public boolean isShow(PermissionChecker permissionChecker, Group group) {
-		return permissionChecker.isOmniadmin();
+		return permissionChecker.isCompanyAdmin();
 	}
 
 	@Override
