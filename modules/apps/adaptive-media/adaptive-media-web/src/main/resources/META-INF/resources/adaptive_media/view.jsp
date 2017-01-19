@@ -67,10 +67,18 @@ List<ImageAdaptiveMediaConfigurationEntry> configurationEntries = (List)request.
 </liferay-frontend:management-bar>
 
 <%
+ImageAdaptiveMediaConfigurationHelper imageAdaptiveMediaConfigurationHelper = (ImageAdaptiveMediaConfigurationHelper)request.getAttribute(AdaptiveMediaWebKeys.IMAGE_ADAPTIVE_MEDIA_CONFIGURATION_HELPER);
+
 PortletURL portletURL = renderResponse.createRenderURL();
 %>
 
 <div class="container-fluid-1280">
+	<c:if test="<%= imageAdaptiveMediaConfigurationHelper.isDefaultConfiguration(themeDisplay.getCompanyId()) %>">
+		<div class="alert alert-info">
+			<liferay-ui:message key="this-configuration-was-not-saved-yet" />
+		</div>
+	</c:if>
+
 	<portlet:actionURL name="/adaptive_media/delete_image_configuration_entry" var="deleteImageConfigurationEntryURL" />
 
 	<aui:form action="<%= deleteImageConfigurationEntryURL.toString() %>" method="post" name="fm">

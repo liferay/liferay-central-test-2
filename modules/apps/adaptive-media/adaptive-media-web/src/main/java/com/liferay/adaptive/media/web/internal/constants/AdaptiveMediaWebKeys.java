@@ -24,4 +24,7 @@ public class AdaptiveMediaWebKeys {
 
 	public static final String CONFIGURATION_ENTRY = "CONFIGURATION_ENTRY";
 
+	public static final String IMAGE_ADAPTIVE_MEDIA_CONFIGURATION_HELPER =
+		"IMAGE_ADAPTIVE_MEDIA_CONFIGURATION_HELPER";
+
 }
