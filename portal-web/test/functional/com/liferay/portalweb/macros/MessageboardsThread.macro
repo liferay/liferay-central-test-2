@@ -704,7 +704,7 @@
 			</then>
 		</if>
 
-		<execute function="Click" locator1="Button#PUBLISH" />
+		<execute function="Click" locator1="MessageBoardsThread#THREAD_PUBLISH_BUTTON" />
 
 		<execute macro="Alert#viewSuccessMessage" />
 
