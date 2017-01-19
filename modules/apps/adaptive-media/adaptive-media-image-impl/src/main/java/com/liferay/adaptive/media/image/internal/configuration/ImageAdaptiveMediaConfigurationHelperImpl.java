@@ -19,6 +19,7 @@ import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigur
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
 import com.liferay.portal.kernel.settings.CompanyServiceSettingsLocator;
 import com.liferay.portal.kernel.settings.ModifiableSettings;
+import com.liferay.portal.kernel.settings.PortletPreferencesSettings;
 import com.liferay.portal.kernel.settings.Settings;
 import com.liferay.portal.kernel.settings.SettingsException;
 import com.liferay.portal.kernel.settings.SettingsFactoryUtil;
@@ -33,6 +34,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import javax.portlet.PortletPreferences;
 import javax.portlet.ValidatorException;
 
 import org.osgi.service.component.annotations.Component;
@@ -135,6 +137,13 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 					companyId,
 					ImageAdaptiveMediaCompanyConfiguration.class.getName()));
 
+			String[] nullableImageVariants = getNullableImageVariants(settings);
+
+			if (nullableImageVariants != null) {
+				return Stream.of(nullableImageVariants).map(
+					_configurationEntryParser::parse);
+			}
+
 			String[] imageVariants = settings.getValues("imageVariants", null);
 
 			if (ArrayUtil.isEmpty(imageVariants)) {
@@ -147,6 +156,18 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 		catch (SettingsException se) {
 			throw new AdaptiveMediaRuntimeException.InvalidConfiguration(se);
 		}
+	}
+
+	private String[] getNullableImageVariants(Settings settings) {
+		PortletPreferencesSettings portletPreferencesSettings =
+			(PortletPreferencesSettings)settings;
+
+		PortletPreferences portletPreferences =
+			portletPreferencesSettings.getPortletPreferences();
+
+		Map<String, String[]> map = portletPreferences.getMap();
+
+		return map.get("imageVariants");
 	}
 
 	private void _updateConfiguration(
