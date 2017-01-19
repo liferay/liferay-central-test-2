@@ -85,7 +85,7 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 	@Override
 	public void deleteImageAdaptiveMediaConfigurationEntry(
 			long companyId, String uuid)
-		throws ImageAdaptiveMediaConfigurationException, IOException {
+		throws IOException {
 
 		Collection<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
 			getImageAdaptiveMediaConfigurationEntries(companyId);

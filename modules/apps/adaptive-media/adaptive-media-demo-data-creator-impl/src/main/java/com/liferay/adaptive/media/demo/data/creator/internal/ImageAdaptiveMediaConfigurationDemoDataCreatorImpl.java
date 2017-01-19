@@ -14,10 +14,13 @@
 
 package com.liferay.adaptive.media.demo.data.creator.internal;
 
+import com.liferay.adaptive.media.ImageAdaptiveMediaConfigurationException;
 import com.liferay.adaptive.media.demo.data.creator.DemoImageAdaptiveMediaConfigurationVariant;
 import com.liferay.adaptive.media.demo.data.creator.ImageAdaptiveMediaConfigurationDemoDataCreator;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import java.io.IOException;
 
@@ -65,13 +68,21 @@ public class ImageAdaptiveMediaConfigurationDemoDataCreatorImpl
 			DemoImageAdaptiveMediaConfigurationVariant configurationVariant)
 		throws IOException {
 
-		ImageAdaptiveMediaConfigurationEntry configurationEntry =
-			_configurationHelper.addImageAdaptiveMediaConfigurationEntry(
-				companyId, configurationVariant.getName(),
-				configurationVariant.getUuid(),
-				configurationVariant.getProperties());
+		ImageAdaptiveMediaConfigurationEntry configurationEntry = null;
 
-		_addConfigurationUuid(companyId, configurationEntry.getUUID());
+		try {
+			configurationEntry =
+				_configurationHelper.addImageAdaptiveMediaConfigurationEntry(
+					companyId, configurationVariant.getName(),
+					configurationVariant.getUuid(),
+					configurationVariant.getProperties());
+
+			_addConfigurationUuid(companyId, configurationEntry.getUUID());
+		}
+		catch (ImageAdaptiveMediaConfigurationException iamce) {
+			_log.error(
+				"Unable to add image adaptive media configuration", iamce);
+		}
 
 		return configurationEntry;
 	}
@@ -105,6 +116,9 @@ public class ImageAdaptiveMediaConfigurationDemoDataCreatorImpl
 
 		uuids.add(uuid);
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		ImageAdaptiveMediaConfigurationDemoDataCreatorImpl.class);
 
 	private ImageAdaptiveMediaConfigurationHelper _configurationHelper;
 	private final Map<Long, List<String>> _configurationIds = new HashMap<>();

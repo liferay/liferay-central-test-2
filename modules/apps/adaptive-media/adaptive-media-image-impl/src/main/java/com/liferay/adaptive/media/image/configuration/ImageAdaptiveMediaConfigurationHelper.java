@@ -38,7 +38,7 @@ public interface ImageAdaptiveMediaConfigurationHelper {
 
 	public void deleteImageAdaptiveMediaConfigurationEntry(
 			long companyId, String uuid)
-		throws ImageAdaptiveMediaConfigurationException, IOException;
+		throws IOException;
 
 	public Collection<ImageAdaptiveMediaConfigurationEntry>
 		getImageAdaptiveMediaConfigurationEntries(long companyId);
