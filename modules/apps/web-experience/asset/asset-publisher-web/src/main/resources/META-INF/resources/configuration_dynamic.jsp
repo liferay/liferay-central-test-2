@@ -44,7 +44,7 @@ String selectStyle = (String)request.getAttribute("configuration.jsp-selectStyle
 							<%= selectScope %>
 						</aui:fieldset>
 
-						<aui:fieldset label="asset-entry-type">
+						<aui:fieldset cssClass="source-container" label="asset-entry-type">
 
 							<%
 							Set<Long> availableClassNameIdsSet = SetUtil.fromArray(assetPublisherDisplayContext.getAvailableClassNameIds());
@@ -559,7 +559,7 @@ String selectStyle = (String)request.getAttribute("configuration.jsp-selectStyle
 	var ddmStructureFieldName = $('#<portlet:namespace />ddmStructureFieldName');
 	var orderByColumn1 = $('#<portlet:namespace />orderByColumn1');
 	var orderByColumn2 = $('#<portlet:namespace />orderByColumn2');
-	var sourcePanel = $('#<portlet:namespace />assetPublisherSourcePanel');
+	var sourcePanel = $('.source-container');
 
 	<%
 	for (AssetRendererFactory<?> curRendererFactory : classTypesAssetRendererFactories) {
@@ -729,7 +729,7 @@ String selectStyle = (String)request.getAttribute("configuration.jsp-selectStyle
 
 	sourcePanel.on(
 		'click',
-		'.asset-subtypefields-wrapper-enable .field',
+		'.asset-subtypefields-wrapper-enable label',
 		function(event) {
 			var assetSubtypeFieldsPopupNodes = $('.asset-subtypefields-popup .btn');
 
