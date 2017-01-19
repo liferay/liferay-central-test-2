@@ -45,4 +45,6 @@ public interface ImageAdaptiveMediaConfigurationHelper {
 		getImageAdaptiveMediaConfigurationEntry(
 			long companyId, String configurationEntryUUID);
 
+	public boolean isDefaultConfiguration(long companyId);
+
 }

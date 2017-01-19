@@ -121,6 +121,27 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 				configurationEntry.getUUID())).findFirst();
 	}
 
+	@Override
+	public boolean isDefaultConfiguration(long companyId) {
+		try {
+			Settings settings = SettingsFactoryUtil.getSettings(
+				new CompanyServiceSettingsLocator(
+					companyId,
+					ImageAdaptiveMediaCompanyConfiguration.class.getName()));
+
+			String[] nullableImageVariants = getNullableImageVariants(settings);
+
+			if (nullableImageVariants != null) {
+				return false;
+			}
+
+			return true;
+		}
+		catch (SettingsException se) {
+			throw new AdaptiveMediaRuntimeException.InvalidConfiguration(se);
+		}
+	}
+
 	@Reference(unbind = "-")
 	protected void setImageAdaptiveMediaConfigurationEntryParser(
 		ImageAdaptiveMediaConfigurationEntryParser configurationEntryParser) {
