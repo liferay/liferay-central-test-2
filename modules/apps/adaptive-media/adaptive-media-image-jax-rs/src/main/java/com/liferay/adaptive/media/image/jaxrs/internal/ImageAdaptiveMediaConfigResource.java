@@ -14,6 +14,7 @@
 
 package com.liferay.adaptive.media.image.jaxrs.internal;
 
+import com.liferay.adaptive.media.ImageAdaptiveMediaConfigurationException;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -81,7 +82,7 @@ public class ImageAdaptiveMediaConfigResource {
 			_configurationHelper.addImageAdaptiveMediaConfigurationEntry(
 				_companyId, configRepr.getName(), id, properties);
 		}
-		catch (IOException ioe) {
+		catch (IOException | ImageAdaptiveMediaConfigurationException e) {
 			throw new InternalServerErrorException();
 		}
 
