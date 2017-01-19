@@ -44,17 +44,25 @@ if (configurationEntry != null) {
 
 	<aui:form action="<%= editImageConfigurationEntryURL %>" method="post" name="fm">
 		<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
-		<aui:input name="entryUuid" type="hidden" value="<%= (configurationEntry != null) ? configurationEntry.getUUID() : StringPool.BLANK %>" />
+		<aui:input name="uuid" type="hidden" value="<%= (configurationEntry != null) ? configurationEntry.getUUID() : StringPool.BLANK %>" />
 
 		<aui:fieldset-group markupView="lexicon">
 			<aui:fieldset>
-				<aui:input autoFocus="<%= windowState.equals(WindowState.MAXIMIZED) %>" name="name" required="<%= true %>" value="<%= (configurationEntry != null) ? configurationEntry.getName() : StringPool.BLANK %>" />
+				<div class="row">
+					<div class="col-md-6">
+						<aui:input autoFocus="<%= windowState.equals(WindowState.MAXIMIZED) %>" name="name" required="<%= true %>" value="<%= (configurationEntry != null) ? configurationEntry.getName() : StringPool.BLANK %>" />
+					</div>
+				</div>
 
-				<aui:input name="uuid" required="<%= true %>" value="<%= (configurationEntry != null) ? configurationEntry.getUUID() : StringPool.BLANK %>" />
+				<div class="row">
+					<div class="col-md-3">
+						<aui:input label="max-width-px" name="maxWidth" required="<%= true %>" value='<%= (properties != null) ? properties.get("width") : StringPool.BLANK %>' />
+					</div>
 
-				<aui:input label="max-width-px" name="maxWidth" required="<%= true %>" value='<%= (properties != null) ? properties.get("width") : StringPool.BLANK %>' />
-
-				<aui:input label="max-height-px" name="maxHeight" required="<%= true %>" value='<%= (properties != null) ? properties.get("height") : StringPool.BLANK %>' />
+					<div class="col-md-3">
+						<aui:input label="max-height-px" name="maxHeight" required="<%= true %>" value='<%= (properties != null) ? properties.get("height") : StringPool.BLANK %>' />
+					</div>
+				</div>
 			</aui:fieldset>
 		</aui:fieldset-group>
 

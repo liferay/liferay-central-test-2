@@ -81,7 +81,7 @@ public class EditImageConfigurationEntryMVCActionCommand
 		try {
 			_imageAdaptiveMediaConfigurationHelper.
 				addImageAdaptiveMediaConfigurationEntry(
-					themeDisplay.getCompanyId(), name, uuid, properties);
+					themeDisplay.getCompanyId(), name, name, properties);
 		}
 		catch (ImageAdaptiveMediaConfigurationException iamce) {
 			SessionErrors.add(actionRequest, iamce.getClass());

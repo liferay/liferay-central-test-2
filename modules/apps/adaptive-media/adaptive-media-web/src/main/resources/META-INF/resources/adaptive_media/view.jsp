@@ -116,12 +116,6 @@ PortletURL portletURL = renderResponse.createRenderURL();
 					value="<%= configurationEntry.getName() %>"
 				/>
 
-				<liferay-ui:search-container-column-text
-					name="uuid"
-					orderable="<%= false %>"
-					value="<%= configurationEntry.getUUID() %>"
-				/>
-
 				<%
 				Map<String, String> properties = configurationEntry.getProperties();
 				%>
