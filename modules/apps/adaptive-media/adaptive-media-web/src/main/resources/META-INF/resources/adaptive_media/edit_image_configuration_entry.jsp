@@ -34,6 +34,10 @@ if (configurationEntry != null) {
 %>
 
 <div class="container-fluid-1280">
+	<liferay-ui:error exception="<%= ImageAdaptiveMediaConfigurationException.DuplicateImageAdaptiveMediaConfigurationEntryException.class %>" message="there-is-already-a-configuration-with-the-same-id" />
+	<liferay-ui:error exception="<%= ImageAdaptiveMediaConfigurationException.InvalidHeightException.class %>" message="please-enter-a-max-height-value-larger-than-0" />
+	<liferay-ui:error exception="<%= ImageAdaptiveMediaConfigurationException.InvalidWidthException.class %>" message="please-enter-a-max-width-value-larger-than-0" />
+
 	<portlet:actionURL name="/adaptive_media/edit_image_configuration_entry" var="editImageConfigurationEntryURL">
 		<portlet:param name="mvcRenderCommandName" value="/adaptive_media/edit_image_configuration_entry" />
 	</portlet:actionURL>

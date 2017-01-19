@@ -15,6 +15,7 @@
 package com.liferay.adaptive.media.image.internal.configuration;
 
 import com.liferay.adaptive.media.AdaptiveMediaRuntimeException;
+import com.liferay.adaptive.media.ImageAdaptiveMediaConfigurationException;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
 import com.liferay.portal.kernel.settings.CompanyServiceSettingsLocator;
@@ -24,6 +25,7 @@ import com.liferay.portal.kernel.settings.Settings;
 import com.liferay.portal.kernel.settings.SettingsException;
 import com.liferay.portal.kernel.settings.SettingsFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 
 import java.io.IOException;
 
@@ -54,10 +56,14 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 			addImageAdaptiveMediaConfigurationEntry(
 				long companyId, String name, String uuid,
 				Map<String, String> properties)
-		throws IOException {
+		throws ImageAdaptiveMediaConfigurationException, IOException {
+
+		_checkProperties(properties);
 
 		Collection<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
 			getImageAdaptiveMediaConfigurationEntries(companyId);
+
+		_checkDuplicates(configurationEntries, uuid);
 
 		List<ImageAdaptiveMediaConfigurationEntry> updatedConfigurationEntries =
 			configurationEntries.stream().filter(
@@ -79,7 +85,7 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 	@Override
 	public void deleteImageAdaptiveMediaConfigurationEntry(
 			long companyId, String uuid)
-		throws IOException {
+		throws ImageAdaptiveMediaConfigurationException, IOException {
 
 		Collection<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
 			getImageAdaptiveMediaConfigurationEntries(companyId);
@@ -129,7 +135,8 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 					companyId,
 					ImageAdaptiveMediaCompanyConfiguration.class.getName()));
 
-			String[] nullableImageVariants = getNullableImageVariants(settings);
+			String[] nullableImageVariants = _getNullableImageVariants(
+				settings);
 
 			if (nullableImageVariants != null) {
 				return false;
@@ -169,6 +176,44 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 		_configurationEntryParser = configurationEntryParser;
 	}
 
+	private void _checkDuplicates(
+			Collection<ImageAdaptiveMediaConfigurationEntry>
+				configurationEntries,
+			String uuid)
+		throws ImageAdaptiveMediaConfigurationException {
+
+		Optional<ImageAdaptiveMediaConfigurationEntry>
+			duplicateConfigurationEntryOptional =
+				configurationEntries.stream().filter(
+					configurationEntry -> configurationEntry.getUUID().equals(
+						uuid)).findFirst();
+
+		if (duplicateConfigurationEntryOptional.isPresent()) {
+			throw new ImageAdaptiveMediaConfigurationException.
+				DuplicateImageAdaptiveMediaConfigurationEntryException();
+		}
+	}
+
+	private void _checkProperties(Map<String, String> properties)
+		throws ImageAdaptiveMediaConfigurationException {
+
+		long width = GetterUtil.getLong(properties.get("width"));
+
+		if (width <= 0) {
+			throw new
+				ImageAdaptiveMediaConfigurationException.
+					InvalidWidthException();
+		}
+
+		long height = GetterUtil.getLong(properties.get("height"));
+
+		if (height <= 0) {
+			throw new
+				ImageAdaptiveMediaConfigurationException.
+					InvalidHeightException();
+		}
+	}
+
 	private Stream<ImageAdaptiveMediaConfigurationEntry>
 		_getConfigurationEntries(long companyId) {
 
@@ -178,7 +223,8 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 					companyId,
 					ImageAdaptiveMediaCompanyConfiguration.class.getName()));
 
-			String[] nullableImageVariants = getNullableImageVariants(settings);
+			String[] nullableImageVariants = _getNullableImageVariants(
+				settings);
 
 			if (nullableImageVariants != null) {
 				return Stream.of(nullableImageVariants).map(
@@ -197,6 +243,18 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 		catch (SettingsException se) {
 			throw new AdaptiveMediaRuntimeException.InvalidConfiguration(se);
 		}
+	}
+
+	private String[] _getNullableImageVariants(Settings settings) {
+		PortletPreferencesSettings portletPreferencesSettings =
+			(PortletPreferencesSettings)settings;
+
+		PortletPreferences portletPreferences =
+			portletPreferencesSettings.getPortletPreferences();
+
+		Map<String, String[]> map = portletPreferences.getMap();
+
+		return map.get("imageVariants");
 	}
 
 	private void _updateConfiguration(
@@ -226,18 +284,6 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 		catch (SettingsException | ValidatorException e) {
 			throw new AdaptiveMediaRuntimeException.InvalidConfiguration(e);
 		}
-	}
-
-	private String[] getNullableImageVariants(Settings settings) {
-		PortletPreferencesSettings portletPreferencesSettings =
-			(PortletPreferencesSettings)settings;
-
-		PortletPreferences portletPreferences =
-			portletPreferencesSettings.getPortletPreferences();
-
-		Map<String, String[]> map = portletPreferences.getMap();
-
-		return map.get("imageVariants");
 	}
 
 	private ImageAdaptiveMediaConfigurationEntryParser

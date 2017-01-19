@@ -14,10 +14,12 @@
 
 package com.liferay.adaptive.media.web.internal.portlet.action;
 
+import com.liferay.adaptive.media.ImageAdaptiveMediaConfigurationException;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
 import com.liferay.adaptive.media.web.constants.AdaptiveMediaPortletKeys;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
+import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -76,9 +78,14 @@ public class EditImageConfigurationEntryMVCActionCommand
 					themeDisplay.getCompanyId(), uuid);
 		}
 
-		_imageAdaptiveMediaConfigurationHelper.
-			addImageAdaptiveMediaConfigurationEntry(
-				themeDisplay.getCompanyId(), name, uuid, properties);
+		try {
+			_imageAdaptiveMediaConfigurationHelper.
+				addImageAdaptiveMediaConfigurationEntry(
+					themeDisplay.getCompanyId(), name, uuid, properties);
+		}
+		catch (ImageAdaptiveMediaConfigurationException iamce) {
+			SessionErrors.add(actionRequest, iamce.getClass());
+		}
 	}
 
 	@Reference
