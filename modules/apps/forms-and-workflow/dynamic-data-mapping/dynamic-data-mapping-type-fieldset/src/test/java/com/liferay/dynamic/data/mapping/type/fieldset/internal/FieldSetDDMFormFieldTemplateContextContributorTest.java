@@ -114,22 +114,6 @@ public class FieldSetDDMFormFieldTemplateContextContributorTest {
 		Assert.assertTrue(parameters.containsKey("label"));
 
 		Assert.assertEquals("Field 0", parameters.get("label"));
-
-		Assert.assertTrue(parameters.containsKey("fields"));
-
-		nestedFields = (List<Object>)parameters.get("fields");
-
-		Assert.assertEquals(2, nestedFields.size());
-
-		nestedField0 = (Map<String, Object>)nestedFields.get(0);
-
-		Assert.assertEquals("field1", nestedField0.get("name"));
-		Assert.assertEquals("text", nestedField0.get("type"));
-
-		nestedField1 = (Map<String, Object>)nestedFields.get(1);
-
-		Assert.assertEquals("field2", nestedField1.get("name"));
-		Assert.assertEquals("checkbox", nestedField1.get("type"));
 	}
 
 	@Test
@@ -190,26 +174,6 @@ public class FieldSetDDMFormFieldTemplateContextContributorTest {
 		Assert.assertEquals(12, parameters.get("columnSize"));
 
 		Assert.assertFalse(parameters.containsKey("label"));
-		Assert.assertTrue(parameters.containsKey("fields"));
-
-		nestedFields = (List<Object>)parameters.get("fields");
-
-		Assert.assertEquals(3, nestedFields.size());
-
-		nestedField0 = (Map<String, Object>)nestedFields.get(0);
-
-		Assert.assertEquals("field1", nestedField0.get("name"));
-		Assert.assertEquals("text", nestedField0.get("type"));
-
-		nestedField1 = (Map<String, Object>)nestedFields.get(1);
-
-		Assert.assertEquals("field2", nestedField1.get("name"));
-		Assert.assertEquals("checkbox", nestedField1.get("type"));
-
-		nestedField2 = (Map<String, Object>)nestedFields.get(2);
-
-		Assert.assertEquals("field3", nestedField2.get("name"));
-		Assert.assertEquals("select", nestedField2.get("type"));
 	}
 
 }
