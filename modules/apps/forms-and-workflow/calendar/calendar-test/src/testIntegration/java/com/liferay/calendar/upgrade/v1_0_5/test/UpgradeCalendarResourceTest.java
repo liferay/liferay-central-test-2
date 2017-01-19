@@ -60,8 +60,7 @@ public class UpgradeCalendarResourceTest {
 
 	@Test
 	public void testUpgradeCalendarResourceUserId() throws Exception {
-		CalendarResource calendarResource =
-			getCalendarResourceWithDefaultUserId();
+		CalendarResource calendarResource = getDefaultUserCalendarResource();
 
 		long userId = calendarResource.getUserId();
 
@@ -71,10 +70,12 @@ public class UpgradeCalendarResourceTest {
 
 		userId = getCalendarResourceUserId(calendarResource);
 
-		assertUserIsAdmin(userId);
+		assertUserIsAdministrator(userId);
 	}
 
-	protected void assertUserIsAdmin(long userId) throws PortalException {
+	protected void assertUserIsAdministrator(long userId)
+		throws PortalException {
+
 		User user = UserLocalServiceUtil.getUser(userId);
 
 		Assert.assertFalse(user.isDefaultUser());
@@ -111,7 +112,7 @@ public class UpgradeCalendarResourceTest {
 		}
 	}
 
-	protected CalendarResource getCalendarResourceWithDefaultUserId()
+	protected CalendarResource getDefaultUserCalendarResource()
 		throws PortalException {
 
 		ServiceContext serviceContext = new ServiceContext();
