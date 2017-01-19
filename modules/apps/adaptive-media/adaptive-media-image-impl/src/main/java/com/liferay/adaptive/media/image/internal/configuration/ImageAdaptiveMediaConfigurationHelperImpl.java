@@ -142,6 +142,26 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 		}
 	}
 
+	@Override
+	public void resetDefaultConfiguration(long companyId) {
+		try {
+			Settings settings = SettingsFactoryUtil.getSettings(
+				new CompanyServiceSettingsLocator(
+					companyId,
+					ImageAdaptiveMediaCompanyConfiguration.class.getName()));
+
+			ModifiableSettings modifiableSettings =
+				settings.getModifiableSettings();
+
+			modifiableSettings.reset("imageVariants");
+
+			modifiableSettings.store();
+		}
+		catch (IOException | SettingsException | ValidatorException e) {
+			throw new AdaptiveMediaRuntimeException.InvalidConfiguration(e);
+		}
+	}
+
 	@Reference(unbind = "-")
 	protected void setImageAdaptiveMediaConfigurationEntryParser(
 		ImageAdaptiveMediaConfigurationEntryParser configurationEntryParser) {
@@ -179,18 +199,6 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 		}
 	}
 
-	private String[] getNullableImageVariants(Settings settings) {
-		PortletPreferencesSettings portletPreferencesSettings =
-			(PortletPreferencesSettings)settings;
-
-		PortletPreferences portletPreferences =
-			portletPreferencesSettings.getPortletPreferences();
-
-		Map<String, String[]> map = portletPreferences.getMap();
-
-		return map.get("imageVariants");
-	}
-
 	private void _updateConfiguration(
 			long companyId,
 			List<ImageAdaptiveMediaConfigurationEntry> configurationEntries)
@@ -218,6 +226,18 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 		catch (SettingsException | ValidatorException e) {
 			throw new AdaptiveMediaRuntimeException.InvalidConfiguration(e);
 		}
+	}
+
+	private String[] getNullableImageVariants(Settings settings) {
+		PortletPreferencesSettings portletPreferencesSettings =
+			(PortletPreferencesSettings)settings;
+
+		PortletPreferences portletPreferences =
+			portletPreferencesSettings.getPortletPreferences();
+
+		Map<String, String[]> map = portletPreferences.getMap();
+
+		return map.get("imageVariants");
 	}
 
 	private ImageAdaptiveMediaConfigurationEntryParser

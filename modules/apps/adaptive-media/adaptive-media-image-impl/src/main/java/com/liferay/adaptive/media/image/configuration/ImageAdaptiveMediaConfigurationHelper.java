@@ -47,4 +47,6 @@ public interface ImageAdaptiveMediaConfigurationHelper {
 
 	public boolean isDefaultConfiguration(long companyId);
 
+	public void resetDefaultConfiguration(long companyId);
+
 }
