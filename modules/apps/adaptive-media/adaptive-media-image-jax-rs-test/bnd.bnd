@@ -7,5 +7,5 @@ Import-Package:\
 	!org.glassfish.jersey.client.*,\
 	*
 Liferay-Releng-Module-Group-Description:
-Liferay-Releng-Module-Group-Title: Image Adaptive Media Configuration Test
+Liferay-Releng-Module-Group-Title: Adaptive Media
 -includeresource: @jersey-client-[0-9]*.jar*

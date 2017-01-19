@@ -56,7 +56,7 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 
 		long fileEntryId = _getRandomNonAdaptiveFileEntryId();
 
-		Response response = _getConfigResponse(id, fileEntryId, true);
+		Response response = _getConfigEndpointResponse(id, fileEntryId, true);
 
 		Assert.assertEquals(200, response.getStatus());
 		Assert.assertEquals("image", response.getMediaType().getType());
@@ -68,7 +68,7 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 
 		long fileEntryId = _getRandomNonAdaptiveFileEntryId();
 
-		Response response = _getConfigResponse(id, fileEntryId, false);
+		Response response = _getConfigEndpointResponse(id, fileEntryId, false);
 
 		Assert.assertEquals(404, response.getStatus());
 	}
@@ -79,7 +79,7 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 
 		long fileEntryId = _getRandomAdaptiveFileEntryId();
 
-		Response response = _getConfigResponse(id, fileEntryId, true);
+		Response response = _getConfigEndpointResponse(id, fileEntryId, true);
 
 		Assert.assertEquals(200, response.getStatus());
 		Assert.assertEquals("image", response.getMediaType().getType());
@@ -91,7 +91,7 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 
 		long fileEntryId = _getRandomAdaptiveFileEntryId();
 
-		Response response = _getConfigResponse(id, fileEntryId, true);
+		Response response = _getConfigEndpointResponse(id, fileEntryId, true);
 
 		Assert.assertEquals(200, response.getStatus());
 		Assert.assertEquals("image", response.getMediaType().getType());
@@ -103,7 +103,7 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 
 		long fileEntryId = _getRandomAdaptiveFileEntryId();
 
-		Response response = _getConfigResponse(id, fileEntryId, false);
+		Response response = _getConfigEndpointResponse(id, fileEntryId, false);
 
 		Assert.assertEquals(404, response.getStatus());
 	}
@@ -112,7 +112,7 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 	public void testGettingDataWithoutAttributeReturns400() {
 		long fileEntryId = _getRandomNonAdaptiveFileEntryId();
 
-		Response response = _getDataResponse(fileEntryId, true, null);
+		Response response = _getDataEndpointResponse(fileEntryId, true, null);
 
 		Assert.assertEquals(400, response.getStatus());
 	}
@@ -121,7 +121,7 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 	public void testGettingNonAdaptiveDataWithAttributeReturnsOriginal() {
 		long fileEntryId = _getRandomNonAdaptiveFileEntryId();
 
-		Response response = _getDataResponse(
+		Response response = _getDataEndpointResponse(
 			fileEntryId, true, _getRandomQueryParams());
 
 		Assert.assertEquals(200, response.getStatus());
@@ -132,7 +132,7 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 	public void testGettingNonAdaptiveDataWithAttributeReturns404IfParam() {
 		long fileEntryId = _getRandomNonAdaptiveFileEntryId();
 
-		Response response = _getDataResponse(
+		Response response = _getDataEndpointResponse(
 			fileEntryId, false, _getRandomQueryParams());
 
 		Assert.assertEquals(404, response.getStatus());
@@ -142,7 +142,7 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 	public void testGettingAdaptiveDataWithAttributeReturnsData() {
 		long fileEntryId = _getRandomAdaptiveFileEntryId();
 
-		Response response = _getDataResponse(
+		Response response = _getDataEndpointResponse(
 			fileEntryId, true, _getRandomQueryParams());
 
 		Assert.assertEquals(200, response.getStatus());
@@ -203,7 +203,7 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 		Assert.assertEquals(_configurationIds.size(), jsonArray.size());
 	}
 
-	private Response _getDataResponse(
+	private Response _getDataEndpointResponse(
 		long fileEntryId, boolean useOriginal, List<String> queryParams) {
 
 		return _getAdaptiveMediaRequest(
@@ -252,7 +252,7 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 			fileEntryId);
 	}
 
-	private Response _getConfigResponse(
+	private Response _getConfigEndpointResponse(
 		String id, long fileEntryId, boolean useOriginal) {
 
 		return _getAdaptiveMediaRequest(
