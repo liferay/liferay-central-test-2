@@ -7933,8 +7933,13 @@ public class JournalArticleLocalServiceImpl
 				Validator.isNull(field.getValue(defaultlocale)) &&
 				(classNameId == JournalArticleConstants.CLASSNAME_ID_DEFAULT)) {
 
-				throw new StorageFieldRequiredException(
-					"Required field value is not present for " + defaultlocale);
+				StringBuilder errorMsg = new StringBuilder();
+
+				errorMsg.append("Required field " + field.getName());
+				errorMsg.append(" is not present for structure ");
+				errorMsg.append(ddmStructure.getNameCurrentValue());
+				errorMsg.append(" for locale " + defaultlocale);
+				throw new StorageFieldRequiredException(errorMsg.toString());
 			}
 		}
 	}
