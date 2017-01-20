@@ -175,9 +175,9 @@ public class ImageAdaptiveMediaFileVersionResource {
 					queryBuilder.forVersion(_fileVersion);
 
 				query.forEach(
-					a -> step.with(
-						(AdaptiveMediaAttribute)a.getAttribute(),
-						a.getValue()));
+					queryAttribute -> step.with(
+						(AdaptiveMediaAttribute)queryAttribute.getAttribute(),
+						queryAttribute.getValue()));
 
 				return step.done();
 			});
