@@ -7988,13 +7988,16 @@ public class JournalArticleLocalServiceImpl
 				Validator.isNull(field.getValue(defaultlocale)) &&
 				(classNameId == JournalArticleConstants.CLASSNAME_ID_DEFAULT)) {
 
-				StringBuilder errorMsg = new StringBuilder();
+				StringBundler sb = new StringBundler(6);
 
-				errorMsg.append("Required field " + field.getName());
-				errorMsg.append(" is not present for structure ");
-				errorMsg.append(ddmStructure.getNameCurrentValue());
-				errorMsg.append(" for locale " + defaultlocale);
-				throw new StorageFieldRequiredException(errorMsg.toString());
+				sb.append("Required field ");
+				sb.append(field.getName());
+				sb.append(" is not present for structure ");
+				sb.append(ddmStructure.getNameCurrentValue());
+				sb.append(" for locale ");
+				sb.append(defaultlocale);
+
+				throw new StorageFieldRequiredException(sb.toString());
 			}
 		}
 	}
