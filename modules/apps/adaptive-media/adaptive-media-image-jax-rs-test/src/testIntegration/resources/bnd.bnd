@@ -4,3 +4,4 @@ Bundle-SymbolicName: com.liferay.adaptive.media.image.jaxrs.media.test
 Bundle-Version: 1.0.0
 Liferay-Releng-Module-Group-Description:
 Liferay-Releng-Module-Group-Title: Adaptive Media
+Private-Package: com.liferay.adaptive.media.image.jaxrs.media.test.*
