@@ -8,4 +8,3 @@ Import-Package:\
 	*
 Liferay-Releng-Module-Group-Description:
 Liferay-Releng-Module-Group-Title: Adaptive Media
--includeresource: @jersey-client-[0-9]*.jar*
