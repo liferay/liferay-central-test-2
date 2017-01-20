@@ -179,12 +179,6 @@
 	/>
 </#macro>
 
-<#macro insertPortletPreferences
-	_portletPreferencesModel
->
-	${dataFactory.toInsertSQL(_portletPreferencesModel)}
-</#macro>
-
 <#macro insertUser
 	_userModel
 	_groupIds = []
