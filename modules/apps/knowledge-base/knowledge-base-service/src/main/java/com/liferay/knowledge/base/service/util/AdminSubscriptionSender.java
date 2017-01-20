@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionCheckerFactoryUtil;
 import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.util.EscapableLocalizableFunction;
 import com.liferay.portal.kernel.util.Function;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -61,17 +62,21 @@ public class AdminSubscriptionSender extends SubscriptionSender {
 
 		setContextAttribute("[$ARTICLE_TITLE$]", _kbArticle.getTitle());
 		setContextAttribute("[$ARTICLE_URL$]", kbArticleURL);
-		setLocalizedContextAttributeWithFunction(
-			"[$ARTICLE_ATTACHMENTS$]", _getEmailKBArticleAttachmentsFunction());
-		setLocalizedContextAttributeWithFunction(
+		setLocalizedContextAttribute(
+			"[$ARTICLE_ATTACHMENTS$]",
+			new EscapableLocalizableFunction(
+				_getEmailKBArticleAttachmentsFunction(), true));
+		setLocalizedContextAttribute(
 			"[$ARTICLE_VERSION$]",
-			(locale) ->
-				LanguageUtil.format(
-					locale, "version-x",
-					String.valueOf(_kbArticle.getVersion()), false));
-		setLocalizedContextAttributeWithFunction(
+			new EscapableLocalizableFunction(
+				(locale) ->
+					LanguageUtil.format(
+						locale, "version-x",
+						String.valueOf(_kbArticle.getVersion()), false), true));
+		setLocalizedContextAttribute(
 			"[$CATEGORY_TITLE$]",
-			(locale) -> LanguageUtil.get(locale, "category.kb"));
+			new EscapableLocalizableFunction(
+				(locale) -> LanguageUtil.get(locale, "category.kb"), true));
 	}
 
 	@Override
