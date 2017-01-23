@@ -666,7 +666,7 @@ public class ResourceActionsImpl implements ResourceActions {
 			String servletContextName, ClassLoader classLoader, String source)
 		throws Exception {
 
-		read(servletContextName, classLoader, source, new HashSet<>());
+		read(servletContextName, classLoader, source, null);
 	}
 
 	@Override
@@ -690,7 +690,7 @@ public class ResourceActionsImpl implements ResourceActions {
 
 		Document document = UnsecureSAXReaderUtil.read(inputStream, true);
 
-		read(servletContextName, document, new HashSet<>());
+		read(servletContextName, document, null);
 	}
 
 	@Override
@@ -1059,9 +1059,12 @@ public class ResourceActionsImpl implements ResourceActions {
 			for (Element portletResourceElement :
 					rootElement.elements("portlet-resource")) {
 
-				portletNames.add(
-					readPortletResource(
-						servletContextName, portletResourceElement));
+				String portletName = readPortletResource(
+					servletContextName, portletResourceElement);
+
+				if (portletNames != null) {
+					portletNames.add(portletName);
+				}
 			}
 		}
 
@@ -1071,10 +1074,12 @@ public class ResourceActionsImpl implements ResourceActions {
 			String modelName = readModelResource(
 				servletContextName, modelResourceElement);
 
-			ModelResourceActionsBag modelResourceActionsBag =
-				getModelResourceActionsBag(modelName);
+			if (portletNames != null) {
+				ModelResourceActionsBag modelResourceActionsBag =
+					getModelResourceActionsBag(modelName);
 
-			portletNames.addAll(modelResourceActionsBag.getResources());
+				portletNames.addAll(modelResourceActionsBag.getResources());
+			}
 		}
 	}
 
