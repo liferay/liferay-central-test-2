@@ -16,6 +16,7 @@ package com.liferay.adaptive.media.image.jaxrs.internal;
 
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
 import com.liferay.adaptive.media.image.finder.ImageAdaptiveMediaFinder;
+import com.liferay.adaptive.media.processor.AdaptiveMediaProcessorLocator;
 import com.liferay.document.library.kernel.service.DLAppService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Company;
@@ -64,7 +65,8 @@ public class ImageAdaptiveMediaRootResource {
 		}
 
 		return new ImageAdaptiveMediaFileVersionResource(
-			fileVersion, finder, configurationHelper, _getBaseUriBuilder());
+			fileVersion, finder, configurationHelper, _processorLocator,
+			_getBaseUriBuilder());
 	}
 
 	@Path("/content/version/{fileVersionId}")
@@ -75,7 +77,8 @@ public class ImageAdaptiveMediaRootResource {
 		FileVersion fileVersion = dlAppService.getFileVersion(fileVersionId);
 
 		return new ImageAdaptiveMediaFileVersionResource(
-			fileVersion, finder, configurationHelper, _getBaseUriBuilder());
+			fileVersion, finder, configurationHelper, _processorLocator,
+			_getBaseUriBuilder());
 	}
 
 	@Reference
@@ -95,5 +98,8 @@ public class ImageAdaptiveMediaRootResource {
 			ImageAdaptiveMediaRootResource.class).path(
 				ImageAdaptiveMediaRootResource.class, "getVersion");
 	}
+
+	@Reference(unbind = "-")
+	private AdaptiveMediaProcessorLocator _processorLocator;
 
 }

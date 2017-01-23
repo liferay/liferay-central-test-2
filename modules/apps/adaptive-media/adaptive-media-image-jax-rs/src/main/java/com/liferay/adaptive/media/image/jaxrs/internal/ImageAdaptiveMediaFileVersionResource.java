@@ -25,7 +25,11 @@ import com.liferay.adaptive.media.image.jaxrs.internal.provider.AdaptiveMediaApi
 import com.liferay.adaptive.media.image.jaxrs.internal.provider.OrderBySelector;
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaAttribute;
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
+import com.liferay.adaptive.media.processor.AdaptiveMediaProcessor;
+import com.liferay.adaptive.media.processor.AdaptiveMediaProcessorLocator;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 
 import java.io.InputStream;
@@ -59,12 +63,14 @@ public class ImageAdaptiveMediaFileVersionResource {
 	public ImageAdaptiveMediaFileVersionResource(
 		FileVersion fileVersion, ImageAdaptiveMediaFinder finder,
 		ImageAdaptiveMediaConfigurationHelper configurationHelper,
-		UriBuilder uriBuilder) {
+		AdaptiveMediaProcessorLocator processorLocator, UriBuilder uriBuilder) {
 
 		_fileVersion = fileVersion;
 		_finder = finder;
 		_configurationHelper = configurationHelper;
 		_uriBuilder = uriBuilder;
+
+		_processor = processorLocator.locateForClass(FileVersion.class);
 	}
 
 	@GET
@@ -80,7 +86,15 @@ public class ImageAdaptiveMediaFileVersionResource {
 				queryBuilder -> queryBuilder.forVersion(_fileVersion).
 					forConfiguration(id).done());
 
-		return _getFirstAdaptiveMedia(stream, original);
+		Optional<AdaptiveMedia<ImageAdaptiveMediaProcessor>>
+			adaptiveMediaOptional = stream.findFirst();
+
+		_processAdaptiveMediaImage(adaptiveMediaOptional, id);
+
+		InputStream is = _getInputStream(adaptiveMediaOptional, original);
+
+		return Response.status(200).type(_fileVersion.getMimeType()).entity(is).
+			build();
 	}
 
 	@GET
@@ -101,7 +115,13 @@ public class ImageAdaptiveMediaFileVersionResource {
 		Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> stream =
 			_getAdaptiveMediaStream(queryList);
 
-		return _getFirstAdaptiveMedia(stream, original);
+		Optional<AdaptiveMedia<ImageAdaptiveMediaProcessor>>
+			adaptiveMediaOptional = stream.findFirst();
+
+		InputStream is = _getInputStream(adaptiveMediaOptional, original);
+
+		return Response.status(200).type(_fileVersion.getMimeType()).entity(is).
+			build();
 	}
 
 	@GET
@@ -201,13 +221,11 @@ public class ImageAdaptiveMediaFileVersionResource {
 		return uriOptional.map((uri) -> uri.toString());
 	}
 
-	private Response _getFirstAdaptiveMedia(
-			Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> stream,
+	private InputStream _getInputStream(
+			Optional<AdaptiveMedia<ImageAdaptiveMediaProcessor>>
+				adaptiveMediaOptional,
 			boolean fallbackToOriginal)
 		throws PortalException {
-
-		Optional<AdaptiveMedia<ImageAdaptiveMediaProcessor>>
-			adaptiveMediaOptional = stream.findFirst();
 
 		if (!adaptiveMediaOptional.isPresent() && !fallbackToOriginal) {
 			throw new NotFoundException();
@@ -222,8 +240,7 @@ public class ImageAdaptiveMediaFileVersionResource {
 			inputStream = _fileVersion.getContentStream(true);
 		}
 
-		return Response.status(200).type(_fileVersion.getMimeType()).entity(
-			inputStream).build();
+		return inputStream;
 	}
 
 	private List<ImageAdaptiveMediaRepr> _getImageAdaptiveMediaList(
@@ -255,6 +272,38 @@ public class ImageAdaptiveMediaFileVersionResource {
 		return Stream.empty();
 	}
 
+	private void _processAdaptiveMediaImage(
+			Optional<AdaptiveMedia<ImageAdaptiveMediaProcessor>>
+				adaptiveMediaOptional,
+			String id)
+		throws AdaptiveMediaException, PortalException {
+
+		if (adaptiveMediaOptional.isPresent()) {
+			return;
+		}
+
+		Optional<ImageAdaptiveMediaConfigurationEntry>
+			configurationEntryOptional =
+				_configurationHelper.getImageAdaptiveMediaConfigurationEntry(
+					_fileVersion.getCompanyId(), id);
+
+		if (!configurationEntryOptional.isPresent()) {
+			return;
+		}
+
+		try {
+			_processor.process(_fileVersion);
+		}
+		catch (AdaptiveMediaException ame) {
+			_log.error(
+				"Unable to create lazy adaptive media for fileVersion id " +
+					_fileVersion.getFileVersionId());
+		}
+	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		ImageAdaptiveMediaFileVersionResource.class);
+
 	private static final Map<String, AdaptiveMediaAttribute<?, ?>>
 		_allowedAttributes = new HashMap<>();
 
@@ -268,5 +317,6 @@ public class ImageAdaptiveMediaFileVersionResource {
 	private final FileVersion _fileVersion;
 	private final ImageAdaptiveMediaFinder _finder;
 	private final UriBuilder _uriBuilder;
+	private final AdaptiveMediaProcessor<FileVersion, ?> _processor;
 
 }
