@@ -72,7 +72,7 @@ public class ViewMVCRenderCommand implements MVCRenderCommand {
 		return "/adaptive_media/view.jsp";
 	}
 
-	@Reference
+	@Reference(unbind = "-")
 	protected void setImageAdaptiveMediaConfigurationHelper(
 		ImageAdaptiveMediaConfigurationHelper
 			imageAdaptiveMediaConfigurationHelper) {

@@ -63,7 +63,7 @@ public class DeleteImageConfigurationEntryMVCActionCommand
 		}
 	}
 
-	@Reference
+	@Reference(unbind = "-")
 	protected void setImageAdaptiveMediaConfigurationHelper(
 		ImageAdaptiveMediaConfigurationHelper
 			imageAdaptiveMediaConfigurationHelper) {
