@@ -24,6 +24,8 @@ import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMedi
 import com.liferay.adaptive.media.image.internal.util.Tuple;
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaAttribute;
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
+import com.liferay.adaptive.media.processor.AdaptiveMediaProcessor;
+import com.liferay.adaptive.media.processor.AdaptiveMediaProcessorLocator;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -60,7 +62,18 @@ public class ImageAdaptiveMediaRequestHandler
 			interpretedPathOptional = _interpretPath(request.getPathInfo());
 
 		return interpretedPathOptional.flatMap(
-			tuple -> _findAdaptiveMedia(tuple.first, tuple.second));
+			tuple -> {
+				Optional<AdaptiveMedia<ImageAdaptiveMediaProcessor>>
+					adaptiveMediaOptional = _findAdaptiveMedia(
+						tuple.first, tuple.second);
+
+				adaptiveMediaOptional.ifPresent(
+					adaptiveMedia ->
+						_processAdaptiveMediaImage(
+							adaptiveMedia, tuple.first, tuple.second));
+
+				return adaptiveMediaOptional;
+			});
 	}
 
 	@Reference(unbind = "-")
@@ -148,10 +161,45 @@ public class ImageAdaptiveMediaRequestHandler
 		}
 	}
 
+	private void _processAdaptiveMediaImage(
+		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia,
+		FileVersion fileVersion,
+		ImageAdaptiveMediaAttributeMapping attributeMapping) {
+
+		Optional<String> adaptiveMediaConfigurationUuidOptional =
+			adaptiveMedia.getAttributeValue(
+				AdaptiveMediaAttribute.configurationUuid());
+
+		Optional<String> attributeMappingConfigurationUuidOptional =
+			attributeMapping.getAttributeValue(
+				AdaptiveMediaAttribute.configurationUuid());
+
+		if (adaptiveMediaConfigurationUuidOptional.equals(
+				attributeMappingConfigurationUuidOptional)) {
+
+			return;
+		}
+
+		try {
+			AdaptiveMediaProcessor<FileVersion, ?> processor =
+				_processorLocator.locateForClass(FileVersion.class);
+
+			processor.process(fileVersion);
+		}
+		catch (PortalException | AdaptiveMediaException e) {
+			_log.error(
+				"Unable to create lazy adaptive media for file version id " +
+					fileVersion.getFileVersionId());
+		}
+	}
+
 	private static final Log _log = LogFactoryUtil.getLog(
 		ImageAdaptiveMediaRequestHandler.class);
 
 	private ImageAdaptiveMediaFinder _finder;
 	private PathInterpreter _pathInterpreter;
+
+	@Reference(unbind = "-")
+	private AdaptiveMediaProcessorLocator _processorLocator;
 
 }
