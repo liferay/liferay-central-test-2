@@ -14,20 +14,25 @@
 
 package com.liferay.adaptive.media.processor;
 
-/**
- * Locates a valid {@link AdaptiveMediaProcessor} for a particular model class.
- *
- * @author Adolfo Pérez
- */
-public interface AdaptiveMediaProcessorLocator {
+import aQute.bnd.annotation.ProviderType;
 
-	/**
-	 * Returns an {@link AdaptiveMediaProcessor} for the class. If no processor
-	 * is found, implementations might return a processor that does nothing.
-	 *
-	 * @param  clazz the class of models the returned processor supports
-	 * @return a non-<code>null</code> {@link AdaptiveMediaProcessor}
-	 */
-	public <M> AdaptiveMediaProcessor<M, ?> locateForClass(Class<M> clazz);
+import com.liferay.adaptive.media.AdaptiveMediaException;
+import com.liferay.adaptive.media.internal.messaging.AdaptiveMediaProcessorCommand;
+import com.liferay.portal.kernel.exception.PortalException;
+
+/**
+ * @author Sergio González
+ */
+@ProviderType
+public interface AdaptiveMediaAsyncProcessor<M, T> {
+
+	public void cleanQueue(
+		AdaptiveMediaProcessorCommand command, String modelId);
+
+	public void triggerCleanUp(M model, String modelId)
+		throws AdaptiveMediaException, PortalException;
+
+	public void triggerProcess(M model, String modelId)
+		throws AdaptiveMediaException, PortalException;
 
 }

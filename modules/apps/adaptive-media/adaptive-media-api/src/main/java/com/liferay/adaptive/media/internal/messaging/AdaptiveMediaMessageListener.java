@@ -14,6 +14,8 @@
 
 package com.liferay.adaptive.media.internal.messaging;
 
+import com.liferay.adaptive.media.processor.AdaptiveMediaAsyncProcessor;
+import com.liferay.adaptive.media.processor.AdaptiveMediaAsyncProcessorLocator;
 import com.liferay.adaptive.media.processor.AdaptiveMediaProcessor;
 import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerMap;
 import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerMapFactory;
@@ -22,6 +24,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageListener;
+import com.liferay.portal.kernel.repository.model.FileVersion;
 
 import java.util.List;
 
@@ -29,6 +32,7 @@ import org.osgi.framework.BundleContext;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Adolfo Pérez
@@ -71,19 +75,28 @@ public class AdaptiveMediaMessageListener extends BaseMessageListener {
 			(AdaptiveMediaProcessorCommand)message.get("command");
 
 		Object model = message.get("model");
+		String modelId = (String)message.get("modelId");
 
 		for (AdaptiveMediaProcessor processor : processors) {
 			try {
-				command.execute(processor, model);
+				command.execute(processor, model, modelId);
 			}
 			catch (Exception e) {
 				_log.error(e);
 			}
 		}
+
+		AdaptiveMediaAsyncProcessor<FileVersion, ?> asyncProcessor =
+			_asyncProcessorLocator.locateForClass(FileVersion.class);
+
+		asyncProcessor.cleanQueue(command, modelId);
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		AdaptiveMediaMessageListener.class);
+
+	@Reference(unbind = "-")
+	private AdaptiveMediaAsyncProcessorLocator _asyncProcessorLocator;
 
 	private ServiceTrackerMap<String, List<AdaptiveMediaProcessor>>
 		_serviceTrackerMap;

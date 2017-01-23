@@ -24,8 +24,8 @@ import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMedi
 import com.liferay.adaptive.media.image.internal.util.Tuple;
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaAttribute;
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
-import com.liferay.adaptive.media.processor.AdaptiveMediaProcessor;
-import com.liferay.adaptive.media.processor.AdaptiveMediaProcessorLocator;
+import com.liferay.adaptive.media.processor.AdaptiveMediaAsyncProcessor;
+import com.liferay.adaptive.media.processor.AdaptiveMediaAsyncProcessorLocator;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -181,10 +181,11 @@ public class ImageAdaptiveMediaRequestHandler
 		}
 
 		try {
-			AdaptiveMediaProcessor<FileVersion, ?> processor =
-				_processorLocator.locateForClass(FileVersion.class);
+			AdaptiveMediaAsyncProcessor<FileVersion, ?> asyncProcessor =
+				_asyncProcessorLocator.locateForClass(FileVersion.class);
 
-			processor.process(fileVersion);
+			asyncProcessor.triggerProcess(
+				fileVersion, String.valueOf(fileVersion.getFileVersionId()));
 		}
 		catch (PortalException | AdaptiveMediaException e) {
 			_log.error(
@@ -196,10 +197,10 @@ public class ImageAdaptiveMediaRequestHandler
 	private static final Log _log = LogFactoryUtil.getLog(
 		ImageAdaptiveMediaRequestHandler.class);
 
+	@Reference(unbind = "-")
+	private AdaptiveMediaAsyncProcessorLocator _asyncProcessorLocator;
+
 	private ImageAdaptiveMediaFinder _finder;
 	private PathInterpreter _pathInterpreter;
-
-	@Reference(unbind = "-")
-	private AdaptiveMediaProcessorLocator _processorLocator;
 
 }

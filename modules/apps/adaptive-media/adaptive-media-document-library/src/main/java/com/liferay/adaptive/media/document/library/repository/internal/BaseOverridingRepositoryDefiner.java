@@ -15,8 +15,8 @@
 package com.liferay.adaptive.media.document.library.repository.internal;
 
 import com.liferay.adaptive.media.AdaptiveMediaException;
-import com.liferay.adaptive.media.processor.AdaptiveMediaProcessor;
-import com.liferay.adaptive.media.processor.AdaptiveMediaProcessorLocator;
+import com.liferay.adaptive.media.processor.AdaptiveMediaAsyncProcessor;
+import com.liferay.adaptive.media.processor.AdaptiveMediaAsyncProcessorLocator;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.module.framework.ModuleServiceLifecycle;
 import com.liferay.portal.kernel.repository.DocumentRepository;
@@ -98,10 +98,10 @@ public abstract class BaseOverridingRepositoryDefiner
 	}
 
 	@Reference(unbind = "-")
-	public void setAdaptiveMediaProcessorLocator(
-		AdaptiveMediaProcessorLocator processorLocator) {
+	public void setAdaptiveMediaAsyncProcessorLocator(
+		AdaptiveMediaAsyncProcessorLocator asyncProcessorLocator) {
 
-		_processorLocator = processorLocator;
+		_asyncProcessorLocator = asyncProcessorLocator;
 	}
 
 	@Reference(target = ModuleServiceLifecycle.PORTAL_INITIALIZED, unbind = "-")
@@ -134,14 +134,16 @@ public abstract class BaseOverridingRepositoryDefiner
 
 	private void _deleteAdaptiveMedia(FileEntry fileEntry) {
 		try {
-			AdaptiveMediaProcessor<FileVersion, ?> processor =
-				_processorLocator.locateForClass(FileVersion.class);
+			AdaptiveMediaAsyncProcessor<FileVersion, ?> processor =
+				_asyncProcessorLocator.locateForClass(FileVersion.class);
 
 			List<FileVersion> fileVersions = fileEntry.getFileVersions(
 				WorkflowConstants.STATUS_ANY);
 
 			for (FileVersion fileVersion : fileVersions) {
-				processor.cleanUp(fileVersion);
+				processor.triggerCleanUp(
+					fileVersion,
+					String.valueOf(fileVersion.getFileVersionId()));
 			}
 		}
 		catch (AdaptiveMediaException | PortalException e) {
@@ -173,18 +175,23 @@ public abstract class BaseOverridingRepositoryDefiner
 
 	private void _updateAdaptiveMedia(FileEntry fileEntry) {
 		try {
-			AdaptiveMediaProcessor<FileVersion, ?> processor =
-				_processorLocator.locateForClass(FileVersion.class);
+			AdaptiveMediaAsyncProcessor<FileVersion, ?> asyncProcessor =
+				_asyncProcessorLocator.locateForClass(FileVersion.class);
 
-			processor.process(fileEntry.getLatestFileVersion(true));
+			FileVersion latestFileVersion = fileEntry.getLatestFileVersion(
+				true);
+
+			asyncProcessor.triggerProcess(
+				latestFileVersion,
+				String.valueOf(latestFileVersion.getFileVersionId()));
 		}
 		catch (AdaptiveMediaException | PortalException e) {
 			throw new RuntimeException(e);
 		}
 	}
 
+	private AdaptiveMediaAsyncProcessorLocator _asyncProcessorLocator;
 	private RepositoryDefiner _overridenRepositoryDefiner;
-	private AdaptiveMediaProcessorLocator _processorLocator;
 
 	private class AdaptiveMediaCapabiliy
 		implements Capability, RepositoryEventAware {

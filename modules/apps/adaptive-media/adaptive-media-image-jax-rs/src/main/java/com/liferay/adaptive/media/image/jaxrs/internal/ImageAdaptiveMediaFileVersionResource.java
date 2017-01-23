@@ -25,8 +25,8 @@ import com.liferay.adaptive.media.image.jaxrs.internal.provider.AdaptiveMediaApi
 import com.liferay.adaptive.media.image.jaxrs.internal.provider.OrderBySelector;
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaAttribute;
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
-import com.liferay.adaptive.media.processor.AdaptiveMediaProcessor;
-import com.liferay.adaptive.media.processor.AdaptiveMediaProcessorLocator;
+import com.liferay.adaptive.media.processor.AdaptiveMediaAsyncProcessor;
+import com.liferay.adaptive.media.processor.AdaptiveMediaAsyncProcessorLocator;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -63,14 +63,16 @@ public class ImageAdaptiveMediaFileVersionResource {
 	public ImageAdaptiveMediaFileVersionResource(
 		FileVersion fileVersion, ImageAdaptiveMediaFinder finder,
 		ImageAdaptiveMediaConfigurationHelper configurationHelper,
-		AdaptiveMediaProcessorLocator processorLocator, UriBuilder uriBuilder) {
+		AdaptiveMediaAsyncProcessorLocator asyncProcessorLocator,
+		UriBuilder uriBuilder) {
 
 		_fileVersion = fileVersion;
 		_finder = finder;
 		_configurationHelper = configurationHelper;
 		_uriBuilder = uriBuilder;
 
-		_processor = processorLocator.locateForClass(FileVersion.class);
+		_asyncProcessor = asyncProcessorLocator.locateForClass(
+			FileVersion.class);
 	}
 
 	@GET
@@ -292,7 +294,8 @@ public class ImageAdaptiveMediaFileVersionResource {
 		}
 
 		try {
-			_processor.process(_fileVersion);
+			_asyncProcessor.triggerProcess(
+				_fileVersion, String.valueOf(_fileVersion.getFileVersionId()));
 		}
 		catch (AdaptiveMediaException ame) {
 			_log.error(
@@ -317,6 +320,6 @@ public class ImageAdaptiveMediaFileVersionResource {
 	private final FileVersion _fileVersion;
 	private final ImageAdaptiveMediaFinder _finder;
 	private final UriBuilder _uriBuilder;
-	private final AdaptiveMediaProcessor<FileVersion, ?> _processor;
+	private final AdaptiveMediaAsyncProcessor<FileVersion, ?> _asyncProcessor;
 
 }
