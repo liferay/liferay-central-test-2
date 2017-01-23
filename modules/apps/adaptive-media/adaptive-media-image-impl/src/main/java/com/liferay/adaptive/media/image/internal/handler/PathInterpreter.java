@@ -14,6 +14,7 @@
 
 package com.liferay.adaptive.media.image.internal.handler;
 
+import com.liferay.adaptive.media.AdaptiveMediaAttribute;
 import com.liferay.adaptive.media.AdaptiveMediaRuntimeException;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
@@ -69,8 +70,16 @@ public class PathInterpreter {
 							fileVersion.getCompanyId(), configurationEntryUUID);
 
 			Map<String, String> properties = configurationEntryOptional.map(
-				ImageAdaptiveMediaConfigurationEntry::getProperties).orElse(
-					new HashMap<>());
+				configurationEntry -> {
+					Map<String, String> curProperties =
+						configurationEntry.getProperties();
+
+					curProperties.put(
+						AdaptiveMediaAttribute.configurationUuid().getName(),
+						configurationEntry.getUUID());
+
+					return curProperties;
+				}).orElse(new HashMap<>());
 
 			return Optional.of(Tuple.of(fileVersion, properties));
 		}
