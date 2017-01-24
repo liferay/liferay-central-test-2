@@ -12,5 +12,5 @@ dependencies {
 	provided group: "org.springframework", name: "spring-core", version: "4.1.9.RELEASE"
 	provided group: "org.springframework", name: "spring-orm", version: "4.1.9.RELEASE"
 	provided group: "org.springframework", name: "spring-tx", version: "4.1.9.RELEASE"
-	provided project(":core:osgi-felix-util")
+	provided group: "com.liferay", name: "com.liferay.osgi.felix.util", version: "1.0.0"
 }
