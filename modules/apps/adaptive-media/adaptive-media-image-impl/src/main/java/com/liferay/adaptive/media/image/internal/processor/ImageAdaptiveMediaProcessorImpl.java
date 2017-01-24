@@ -55,6 +55,9 @@ public final class ImageAdaptiveMediaProcessorImpl
 		}
 
 		_imageStorage.delete(fileVersion);
+
+		_imageLocalService.deleteAdaptiveMediaImageFileVersion(
+			fileVersion.getFileVersionId());
 	}
 
 	@Override
