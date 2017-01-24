@@ -46,19 +46,18 @@ public class IndexableAdvice
 			return;
 		}
 
-		if (IndexWriterHelperUtil.isIndexReadOnly() ||
-			CompanyThreadLocal.isDeleteInProcess()) {
+		if (CompanyThreadLocal.isDeleteInProcess() ||
+			IndexWriterHelperUtil.isIndexReadOnly()) {
 
 			if (_log.isDebugEnabled()) {
-				StringBundler sb = new StringBundler(5);
-
-				sb.append("Skipping indexing - ");
-				sb.append("IndexWriterHelperUtil.isIndexReadOnly = ");
-				sb.append(IndexWriterHelperUtil.isIndexReadOnly());
-				sb.append(" CompanyThreadLocal.isDeleteInProcess = ");
-				sb.append(CompanyThreadLocal.isDeleteInProcess());
-
-				_log.debug(sb.toString());
+				if (CompanyThreadLocal.isDeleteInProcess()) {
+					_log.debug(
+						"Skip indexing because company delete is in process");
+				}
+				else if (IndexWriterHelperUtil.isIndexReadOnly()) {
+					_log.debug(
+						"Skip indexing because index writer is read only");
+				}
 			}
 
 			return;
@@ -96,8 +95,8 @@ public class IndexableAdvice
 		if (IndexWriterHelperUtil.isIndexReadOnly(indexer.getClassName())) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"Skipping indexing - " + indexer.getClassName() +
-						" is index read only.");
+					"Skipping indexing read only index for " +
+						indexer.getClassName());
 			}
 
 			return;
