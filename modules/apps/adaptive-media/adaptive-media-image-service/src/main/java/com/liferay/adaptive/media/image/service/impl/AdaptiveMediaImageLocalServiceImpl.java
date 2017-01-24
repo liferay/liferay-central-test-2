@@ -16,28 +16,60 @@ package com.liferay.adaptive.media.image.service.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.adaptive.media.image.exception.DuplicateAdaptiveMediaImageException;
+import com.liferay.adaptive.media.image.model.AdaptiveMediaImage;
 import com.liferay.adaptive.media.image.service.base.AdaptiveMediaImageLocalServiceBaseImpl;
+import com.liferay.document.library.kernel.service.DLAppLocalService;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.repository.model.FileVersion;
+import com.liferay.portal.spring.extender.service.ServiceReference;
 
 /**
- * The implementation of the adaptive media image local service.
- *
- * <p>
- * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.liferay.adaptive.media.image.service.AdaptiveMediaImageLocalService} interface.
- *
- * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
- * </p>
- *
- * @author Brian Wing Shun Chan
- * @see AdaptiveMediaImageLocalServiceBaseImpl
- * @see com.liferay.adaptive.media.image.service.AdaptiveMediaImageLocalServiceUtil
+ * @author Sergio González
  */
 @ProviderType
 public class AdaptiveMediaImageLocalServiceImpl
 	extends AdaptiveMediaImageLocalServiceBaseImpl {
-	/*
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this class directly. Always use {@link com.liferay.adaptive.media.image.service.AdaptiveMediaImageLocalServiceUtil} to access the adaptive media image local service.
-	 */
+
+	public AdaptiveMediaImage addAdaptiveMediaImage(
+			String configurationUuid, long fileVersionId, int height, int width,
+			int size)
+		throws PortalException {
+
+		_checkDuplicates(configurationUuid, fileVersionId);
+
+		FileVersion fileVersion = dlAppLocalService.getFileVersion(
+			fileVersionId);
+
+		long imageId = counterLocalService.increment();
+
+		AdaptiveMediaImage image = adaptiveMediaImagePersistence.create(
+			imageId);
+
+		image.setCompanyId(fileVersion.getCompanyId());
+		image.setGroupId(fileVersion.getGroupId());
+		image.setFileVersionId(fileVersionId);
+		image.setHeight(height);
+		image.setWidth(width);
+		image.setSize(size);
+		image.setConfigurationUuid(configurationUuid);
+
+		return adaptiveMediaImagePersistence.update(image);
+	}
+
+	@ServiceReference(type = DLAppLocalService.class)
+	protected DLAppLocalService dlAppLocalService;
+
+	private void _checkDuplicates(String configurationUuid, long fileVersionId)
+		throws DuplicateAdaptiveMediaImageException {
+
+		AdaptiveMediaImage adaptiveMediaImage =
+			adaptiveMediaImagePersistence.fetchByC_F(
+				configurationUuid, fileVersionId);
+
+		if (adaptiveMediaImage != null) {
+			throw new DuplicateAdaptiveMediaImageException();
+		}
+	}
+
 }
