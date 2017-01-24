@@ -319,6 +319,10 @@ public class AdaptiveMediaImageLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery, projection);
 	}
 
+	public static void deleteAdaptiveMediaImageFileVersion(long fileVersionId) {
+		getService().deleteAdaptiveMediaImageFileVersion(fileVersionId);
+	}
+
 	public static AdaptiveMediaImageLocalService getService() {
 		return _serviceTracker.getService();
 	}

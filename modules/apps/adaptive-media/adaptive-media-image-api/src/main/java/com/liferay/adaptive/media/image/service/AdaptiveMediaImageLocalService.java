@@ -283,4 +283,6 @@ public interface AdaptiveMediaImageLocalService extends BaseLocalService,
 	*/
 	public long dynamicQueryCount(DynamicQuery dynamicQuery,
 		Projection projection);
+
+	public void deleteAdaptiveMediaImageFileVersion(long fileVersionId);
 }

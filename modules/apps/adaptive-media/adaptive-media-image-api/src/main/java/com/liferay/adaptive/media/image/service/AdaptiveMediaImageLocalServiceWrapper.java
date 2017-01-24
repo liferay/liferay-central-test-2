@@ -338,6 +338,11 @@ public class AdaptiveMediaImageLocalServiceWrapper
 	}
 
 	@Override
+	public void deleteAdaptiveMediaImageFileVersion(long fileVersionId) {
+		_adaptiveMediaImageLocalService.deleteAdaptiveMediaImageFileVersion(fileVersionId);
+	}
+
+	@Override
 	public AdaptiveMediaImageLocalService getWrappedService() {
 		return _adaptiveMediaImageLocalService;
 	}
