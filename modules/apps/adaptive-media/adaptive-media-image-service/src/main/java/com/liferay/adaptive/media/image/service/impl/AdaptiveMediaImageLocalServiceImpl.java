@@ -24,6 +24,8 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 
+import java.util.List;
+
 /**
  * @author Sergio González
  */
@@ -55,6 +57,15 @@ public class AdaptiveMediaImageLocalServiceImpl
 		image.setConfigurationUuid(configurationUuid);
 
 		return adaptiveMediaImagePersistence.update(image);
+	}
+
+	public void deleteAdaptiveMediaImageFileVersion(long fileVersionId) {
+		List<AdaptiveMediaImage> images =
+			adaptiveMediaImagePersistence.findByFileVersionId(fileVersionId);
+
+		for (AdaptiveMediaImage image : images) {
+			adaptiveMediaImagePersistence.remove(image);
+		}
 	}
 
 	@ServiceReference(type = DLAppLocalService.class)
