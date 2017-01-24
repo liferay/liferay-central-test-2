@@ -53,6 +53,15 @@ public class AdaptiveMediaImageLocalServiceUtil {
 		return getService().addAdaptiveMediaImage(adaptiveMediaImage);
 	}
 
+	public static com.liferay.adaptive.media.image.model.AdaptiveMediaImage addAdaptiveMediaImage(
+		java.lang.String configurationUuid, long fileVersionId, int height,
+		int width, int size)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .addAdaptiveMediaImage(configurationUuid, fileVersionId,
+			height, width, size);
+	}
+
 	/**
 	* Creates a new adaptive media image with the primary key. Does not add the adaptive media image to the database.
 	*
