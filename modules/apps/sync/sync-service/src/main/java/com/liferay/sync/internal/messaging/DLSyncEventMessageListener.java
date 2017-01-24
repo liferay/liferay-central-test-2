@@ -66,11 +66,11 @@ public class DLSyncEventMessageListener extends BaseMessageListener {
 
 				@Override
 				public void addCriteria(DynamicQuery dynamicQuery) {
-					Property modifiedTime = PropertyFactoryUtil.forName(
+					Property modifiedTimeProperty = PropertyFactoryUtil.forName(
 						"modifiedTime");
 
 					dynamicQuery.add(
-						modifiedTime.gt(
+						modifiedTimeProperty.gt(
 							_syncDLObjectLocalService.getLatestModifiedTime()));
 				}
 
