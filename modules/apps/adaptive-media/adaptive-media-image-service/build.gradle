@@ -1,0 +1,7 @@
+buildService {
+	apiDir = "../adaptive-media-image-api/src/main/java"
+	testDir = "../adaptive-media-image-test/src/testIntegration/java"
+}
+
+dependencies {
+}
