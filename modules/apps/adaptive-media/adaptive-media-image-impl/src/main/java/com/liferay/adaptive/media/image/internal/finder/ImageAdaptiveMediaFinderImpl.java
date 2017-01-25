@@ -195,12 +195,6 @@ public class ImageAdaptiveMediaFinderImpl implements ImageAdaptiveMediaFinder {
 
 		properties.put(fileNameAttribute.getName(), fileVersion.getFileName());
 
-		AdaptiveMediaAttribute<Object, String> contentTypeAttribute =
-			AdaptiveMediaAttribute.contentType();
-
-		properties.put(
-			contentTypeAttribute.getName(), fileVersion.getMimeType());
-
 		AdaptiveMediaImage image = _imageLocalService.fetchAdaptiveMediaImage(
 			configurationEntry.getUUID(), fileVersion.getFileVersionId());
 
@@ -218,6 +212,12 @@ public class ImageAdaptiveMediaFinderImpl implements ImageAdaptiveMediaFinder {
 			properties.put(
 				imageWidthAttribute.getName(),
 				String.valueOf(image.getWidth()));
+
+			AdaptiveMediaAttribute<Object, String> contentTypeAttribute =
+				AdaptiveMediaAttribute.contentType();
+
+			properties.put(
+				contentTypeAttribute.getName(), image.getMimeType());
 
 			AdaptiveMediaAttribute<Object, Integer> contentLengthAttribute =
 				AdaptiveMediaAttribute.contentLength();
