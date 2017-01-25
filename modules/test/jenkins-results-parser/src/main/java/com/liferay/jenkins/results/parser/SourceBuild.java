@@ -50,7 +50,7 @@ public class SourceBuild extends BaseBuild {
 
 	@Override
 	protected FailureMessageGenerator[] getFailureMessageGenerators() {
-		return _failureMessageGenerators;
+		return _FAILURE_MESSAGE_GENERATORS;
 	}
 
 	@Override
@@ -58,11 +58,12 @@ public class SourceBuild extends BaseBuild {
 		return null;
 	}
 
-	private static final FailureMessageGenerator[] _failureMessageGenerators = {
-		new RebaseFailureMessageGenerator(),
-		new SourceFormatFailureMessageGenerator(),
+	private static final FailureMessageGenerator[] _FAILURE_MESSAGE_GENERATORS =
+		{
+			new RebaseFailureMessageGenerator(),
+			new SourceFormatFailureMessageGenerator(),
 
-		new GenericFailureMessageGenerator()
-	};
+			new GenericFailureMessageGenerator()
+		};
 
 }
