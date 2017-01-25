@@ -14,7 +14,11 @@
 
 package com.liferay.portal.kernel.lock;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.portal.kernel.exception.PortalException;
+
+import java.util.Optional;
 
 /**
  * @author Tina Tian
@@ -87,6 +91,22 @@ public interface LockManager {
 	 * @deprecated As of 7.0.0, see #tryLock
 	 */
 	public Lock lock(
+		String className, String key, String expectedOwner,
+		String updatedOwner);
+
+	Optional<Lock> tryLock(
+			long userId, String className, long key, String owner,
+			boolean inheritable, long expirationTime)
+		throws PortalException;
+
+	Optional<Lock> tryLock(
+			long userId, String className, String key, String owner,
+			boolean inheritable, long expirationTime)
+		throws PortalException;
+
+	Optional<Lock> tryLock(String className, String key, String owner);
+
+	Optional<Lock> tryLock(
 		String className, String key, String expectedOwner,
 		String updatedOwner);
 
