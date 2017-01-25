@@ -298,7 +298,7 @@ public class TopLevelBuild extends BaseBuild {
 	@Override
 	protected FailureMessageGenerator[] getFailureMessageGenerators() {
 		if (getParentBuild() == null) {
-			return _failureMessageGenerators;
+			return _FAILURE_MESSAGE_GENERATORS;
 		}
 
 		return super.getFailureMessageGenerators();
@@ -573,12 +573,13 @@ public class TopLevelBuild extends BaseBuild {
 	protected static final Pattern gitRepositoryTempMapNamePattern =
 		Pattern.compile("git\\.(?<repositoryType>.*)\\.properties");
 
-	private static final FailureMessageGenerator[] _failureMessageGenerators = {
-		new PoshiValidationFailureMessageGenerator(),
-		new DownstreamFailureMessageGenerator(),
+	private static final FailureMessageGenerator[] _FAILURE_MESSAGE_GENERATORS =
+		{
+			new PoshiValidationFailureMessageGenerator(),
+			new DownstreamFailureMessageGenerator(),
 
-		new GenericFailureMessageGenerator()
-	};
+			new GenericFailureMessageGenerator()
+		};
 
 	private long _updateDuration;
 
