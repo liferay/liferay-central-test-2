@@ -25,7 +25,6 @@ import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMedi
 import com.liferay.adaptive.media.image.internal.util.ImageProcessor;
 import com.liferay.adaptive.media.image.internal.util.ImageStorage;
 import com.liferay.adaptive.media.image.model.AdaptiveMediaImage;
-import com.liferay.adaptive.media.image.model.impl.AdaptiveMediaImageImpl;
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaAttribute;
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
 import com.liferay.adaptive.media.image.service.AdaptiveMediaImageLocalService;
@@ -131,11 +130,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 			"image/jpeg"
 		);
 
-		AdaptiveMediaImage image = new AdaptiveMediaImageImpl();
-
-		image.setHeight(800);
-		image.setWidth(900);
-		image.setSize(1000);
+		AdaptiveMediaImage image = _mockImage(800, 900, 1000L);
 
 		Mockito.when(
 			_imageLocalService.fetchAdaptiveMediaImage(
@@ -184,11 +179,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 			"image/jpeg"
 		);
 
-		AdaptiveMediaImage image = new AdaptiveMediaImageImpl();
-
-		image.setHeight(800);
-		image.setWidth(900);
-		image.setSize(1000);
+		AdaptiveMediaImage image = _mockImage(800, 900, 1000L);
 
 		Mockito.when(
 			_imageLocalService.fetchAdaptiveMediaImage(
@@ -273,11 +264,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 			"image/jpeg"
 		);
 
-		AdaptiveMediaImage image = new AdaptiveMediaImageImpl();
-
-		image.setHeight(800);
-		image.setWidth(900);
-		image.setSize(1000);
+		AdaptiveMediaImage image = _mockImage(800, 900, 1000L);
 
 		Mockito.when(
 			_imageLocalService.fetchAdaptiveMediaImage(
@@ -378,11 +365,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 			"image/jpeg"
 		);
 
-		AdaptiveMediaImage image = new AdaptiveMediaImageImpl();
-
-		image.setHeight(800);
-		image.setWidth(900);
-		image.setSize(1000);
+		AdaptiveMediaImage image = _mockImage(800, 900, 1000L);
 
 		Mockito.when(
 			_imageLocalService.fetchAdaptiveMediaImage(
@@ -504,11 +487,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 			"image/jpeg"
 		);
 
-		AdaptiveMediaImage image = new AdaptiveMediaImageImpl();
-
-		image.setHeight(800);
-		image.setWidth(900);
-		image.setSize(1000);
+		AdaptiveMediaImage image = _mockImage(800, 900, 1000L);
 
 		Mockito.when(
 			_imageLocalService.fetchAdaptiveMediaImage(
@@ -574,11 +553,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 			"image/jpeg"
 		);
 
-		AdaptiveMediaImage image = new AdaptiveMediaImageImpl();
-
-		image.setHeight(800);
-		image.setWidth(900);
-		image.setSize(1000);
+		AdaptiveMediaImage image = _mockImage(800, 900, 1000L);
 
 		Mockito.when(
 			_imageLocalService.fetchAdaptiveMediaImage(
@@ -656,11 +631,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 			"image/jpeg"
 		);
 
-		AdaptiveMediaImage image = new AdaptiveMediaImageImpl();
-
-		image.setHeight(800);
-		image.setWidth(900);
-		image.setSize(1000);
+		AdaptiveMediaImage image = _mockImage(800, 900, 1000L);
 
 		Mockito.when(
 			_imageLocalService.fetchAdaptiveMediaImage(
@@ -746,11 +717,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 			"image/jpeg"
 		);
 
-		AdaptiveMediaImage image = new AdaptiveMediaImageImpl();
-
-		image.setHeight(800);
-		image.setWidth(900);
-		image.setSize(1000);
+		AdaptiveMediaImage image = _mockImage(800, 900, 1000L);
 
 		Mockito.when(
 			_imageLocalService.fetchAdaptiveMediaImage(
@@ -836,15 +803,11 @@ public class ImageAdaptiveMediaFinderImplTest {
 			"image/jpeg"
 		);
 
-		AdaptiveMediaImage image = new AdaptiveMediaImageImpl();
-
-		image.setHeight(800);
-		image.setWidth(900);
-		image.setSize(1000);
+		AdaptiveMediaImage image = _mockImage(800, 900, 1000L);
 
 		Mockito.when(
 			_imageLocalService.fetchAdaptiveMediaImage(
-				Mockito.anyString(), Mockito.eq(_fileVersion.getFileVersionId()))
+				Mockito.anyString(), Mockito.anyLong())
 		).thenReturn(
 			image
 		);
@@ -907,11 +870,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 			"image/jpeg"
 		);
 
-		AdaptiveMediaImage image = new AdaptiveMediaImageImpl();
-
-		image.setHeight(800);
-		image.setWidth(900);
-		image.setSize(1000);
+		AdaptiveMediaImage image = _mockImage(800, 900, 1000L);
 
 		Mockito.when(
 			_imageLocalService.fetchAdaptiveMediaImage(
@@ -1017,11 +976,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 			"image/jpeg"
 		);
 
-		AdaptiveMediaImage image = new AdaptiveMediaImageImpl();
-
-		image.setHeight(800);
-		image.setWidth(900);
-		image.setSize(1000);
+		AdaptiveMediaImage image = _mockImage(800, 900, 1000L);
 
 		Mockito.when(
 			_imageLocalService.fetchAdaptiveMediaImage(
@@ -1054,6 +1009,30 @@ public class ImageAdaptiveMediaFinderImplTest {
 		).getContentStream(
 			_fileVersion, configurationEntry
 		);
+	}
+
+	private AdaptiveMediaImage _mockImage(int height, int width, long size) {
+		AdaptiveMediaImage image = Mockito.mock(AdaptiveMediaImage.class);
+
+		Mockito.when(
+			image.getHeight()
+		).thenReturn(
+			height
+		);
+
+		Mockito.when(
+			image.getWidth()
+		).thenReturn(
+			width
+		);
+
+		Mockito.when(
+			image.getSize()
+		).thenReturn(
+			size
+		);
+
+		return image;
 	}
 
 	private final ImageAdaptiveMediaConfigurationHelper _configurationHelper =
