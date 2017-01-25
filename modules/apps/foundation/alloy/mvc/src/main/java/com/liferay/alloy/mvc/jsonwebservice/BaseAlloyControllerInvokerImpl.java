@@ -143,7 +143,7 @@ public abstract class BaseAlloyControllerInvokerImpl
 				contentType = type;
 			}
 
-			protected String contentType = null;
+			protected String contentType;
 
 		};
 	}

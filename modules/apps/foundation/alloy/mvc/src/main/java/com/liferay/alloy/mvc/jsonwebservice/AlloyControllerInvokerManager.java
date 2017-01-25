@@ -410,11 +410,11 @@ public class AlloyControllerInvokerManager {
 
 	private static final String _BASE_CLASS_NAME = "AlloyControllerInvokerImpl";
 
-	private Map<String, AlloyControllerInvoker> _alloyControllerInvokers =
+	private final Map<String, AlloyControllerInvoker> _alloyControllerInvokers =
 		new ConcurrentHashMap<>();
-	private String _contextName;
-	private String _contextPath;
-	private AtomicInteger _counter = new AtomicInteger(0);
+	private final String _contextName;
+	private final String _contextPath;
+	private final AtomicInteger _counter = new AtomicInteger(0);
 	private boolean _locked;
 
 }
