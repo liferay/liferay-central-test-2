@@ -46,12 +46,12 @@ public enum DemoImageAdaptiveMediaConfigurationVariant {
 	}
 
 	private DemoImageAdaptiveMediaConfigurationVariant(
-		String name, String uuid, int maxWidth, int maxHeight) {
+		String name, String uuid, int maxHeight, int maxWidth) {
 
 		_name = name;
 		_uuid = uuid;
-		_maxWidth = maxWidth;
 		_maxHeight = maxHeight;
+		_maxWidth = maxWidth;
 	}
 
 	private final int _maxHeight;

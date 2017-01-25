@@ -73,17 +73,17 @@ public final class ImageAdaptiveMediaAttribute {
 
 	static {
 		_allowedAttributes.put(
-			ImageAdaptiveMediaAttribute.IMAGE_WIDTH.getName(),
-			ImageAdaptiveMediaAttribute.IMAGE_WIDTH);
-		_allowedAttributes.put(
-			ImageAdaptiveMediaAttribute.IMAGE_MAX_WIDTH.getName(),
-			ImageAdaptiveMediaAttribute.IMAGE_MAX_WIDTH);
-		_allowedAttributes.put(
 			ImageAdaptiveMediaAttribute.IMAGE_HEIGHT.getName(),
 			ImageAdaptiveMediaAttribute.IMAGE_HEIGHT);
 		_allowedAttributes.put(
 			ImageAdaptiveMediaAttribute.IMAGE_MAX_HEIGHT.getName(),
 			ImageAdaptiveMediaAttribute.IMAGE_MAX_HEIGHT);
+		_allowedAttributes.put(
+			ImageAdaptiveMediaAttribute.IMAGE_WIDTH.getName(),
+			ImageAdaptiveMediaAttribute.IMAGE_WIDTH);
+		_allowedAttributes.put(
+			ImageAdaptiveMediaAttribute.IMAGE_MAX_WIDTH.getName(),
+			ImageAdaptiveMediaAttribute.IMAGE_MAX_WIDTH);
 	}
 
 }

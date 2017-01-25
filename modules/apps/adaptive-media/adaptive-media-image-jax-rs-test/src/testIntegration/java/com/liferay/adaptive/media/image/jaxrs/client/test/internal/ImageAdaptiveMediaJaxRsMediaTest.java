@@ -314,8 +314,8 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 		_configurationIds.add("demo-large");
 		_configurationIds.add("demo-xlarge");
 
-		_attributes.add("width");
 		_attributes.add("height");
+		_attributes.add("width");
 
 		long groupId = ImageAdaptiveMediaTestUtil.getGroupId();
 
