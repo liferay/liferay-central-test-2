@@ -195,6 +195,10 @@ AUI.add(
 								instance._setSelectNodeOptions(optionNode, value);
 							}
 						);
+
+						instance.set('value', value);
+
+						instance.render();
 					},
 
 					showErrorMessage: function() {
@@ -265,7 +269,7 @@ AUI.add(
 								function(value, index) {
 									options.forEach(
 										function(option, index) {
-											if (option.value.indexOf(value) > -1) {
+											if (value && option.value.indexOf(value) > -1) {
 												optionsSelected.push(option);
 											}
 										}
@@ -311,10 +315,6 @@ AUI.add(
 						var value = event.target.getAttribute('data-option-value');
 
 						instance.setValue(value);
-
-						instance.set('value', [value]);
-
-						instance.render();
 					},
 
 					_selectDOMOption: function(optionNode, value) {
