@@ -326,9 +326,10 @@ public abstract class BaseBuild implements Build {
 		}
 
 		return Dom4JUtil.getNewAnchorElement(
-			getBuildURL(), null, Dom4JUtil.getNewElement(
-				"strike", null, Dom4JUtil.getNewElement(
-					"strong", null, getDisplayName())));
+			getBuildURL(), null,
+			Dom4JUtil.getNewElement(
+				"strike", null,
+				Dom4JUtil.getNewElement("strong", null, getDisplayName())));
 	}
 
 	@Override
