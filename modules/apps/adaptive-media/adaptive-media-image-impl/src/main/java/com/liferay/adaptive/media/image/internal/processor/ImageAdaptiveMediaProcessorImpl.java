@@ -90,8 +90,9 @@ public final class ImageAdaptiveMediaProcessorImpl
 
 				_imageLocalService.addAdaptiveMediaImage(
 					configurationEntry.getUUID(),
-					fileVersion.getFileVersionId(), renderedImage.getHeight(),
-					renderedImage.getWidth(), bytes.length);
+					fileVersion.getFileVersionId(), fileVersion.getMimeType(),
+					renderedImage.getWidth(), bytes.length,
+					renderedImage.getHeight());
 			}
 			catch (IOException | PortalException e) {
 				throw new AdaptiveMediaRuntimeException.IOException(e);

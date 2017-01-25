@@ -148,8 +148,8 @@ public class ImageAdaptiveMediaProcessorImplTest {
 		Mockito.when(
 			_imageLocalService.addAdaptiveMediaImage(
 				Mockito.any(String.class), Mockito.any(Long.class),
-				Mockito.any(Integer.class), Mockito.any(Integer.class),
-				Mockito.any(Integer.class))
+				Mockito.any(String.class), Mockito.any(Integer.class),
+				Mockito.any(Integer.class), Mockito.any(Integer.class))
 		).thenThrow(
 			DuplicateAdaptiveMediaImageException.class
 		);
@@ -323,7 +323,8 @@ public class ImageAdaptiveMediaProcessorImplTest {
 			_imageLocalService, Mockito.never()
 		).addAdaptiveMediaImage(
 			Mockito.any(String.class), Mockito.any(Long.class),
-			Mockito.any(Integer.class), Mockito.any(Integer.class),
+			Mockito.any(String.class), Mockito.any(Integer.class),
+			Mockito.any(Integer.class),
 			Mockito.any(Integer.class)
 		);
 	}
@@ -357,8 +358,8 @@ public class ImageAdaptiveMediaProcessorImplTest {
 			_imageLocalService, Mockito.never()
 		).addAdaptiveMediaImage(
 			Mockito.any(String.class), Mockito.any(Long.class),
-			Mockito.any(Integer.class), Mockito.any(Integer.class),
-			Mockito.any(Integer.class)
+			Mockito.any(String.class), Mockito.any(Integer.class),
+			Mockito.any(Integer.class), Mockito.any(Integer.class)
 		);
 	}
 
