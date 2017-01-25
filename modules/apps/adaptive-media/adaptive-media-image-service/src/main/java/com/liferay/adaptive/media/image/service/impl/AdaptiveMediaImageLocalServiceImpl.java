@@ -35,8 +35,8 @@ public class AdaptiveMediaImageLocalServiceImpl
 	extends AdaptiveMediaImageLocalServiceBaseImpl {
 
 	public AdaptiveMediaImage addAdaptiveMediaImage(
-			String configurationUuid, long fileVersionId, int height, int width,
-			int size)
+			String configurationUuid, long fileVersionId, String mimeType,
+			int width, int size, int height)
 		throws PortalException {
 
 		_checkDuplicates(configurationUuid, fileVersionId);
@@ -53,6 +53,7 @@ public class AdaptiveMediaImageLocalServiceImpl
 		image.setGroupId(fileVersion.getGroupId());
 		image.setCreateDate(new Date());
 		image.setFileVersionId(fileVersionId);
+		image.setMimeType(mimeType);
 		image.setHeight(height);
 		image.setWidth(width);
 		image.setSize(size);
