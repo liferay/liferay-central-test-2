@@ -917,7 +917,7 @@ public abstract class BaseBuild implements Build {
 			throw new RuntimeException("Unable to format github message.", ioe);
 		}
 
-		for (String contentFlag : _highPriorityContentFlags) {
+		for (String contentFlag : _HIGH_PRIORITY_CONTENT_FLAGS) {
 			if (content.contains(contentFlag)) {
 				return true;
 			}
@@ -1253,7 +1253,7 @@ public abstract class BaseBuild implements Build {
 	}
 
 	protected FailureMessageGenerator[] getFailureMessageGenerators() {
-		return _failureMessageGenerators;
+		return _FAILURE_MESSAGE_GENERATORS;
 	}
 
 	protected abstract Element getGitHubMessageJobResultsElement();
@@ -1739,10 +1739,12 @@ public abstract class BaseBuild implements Build {
 	protected String result;
 	protected long statusModifiedTime;
 
-	private static final FailureMessageGenerator[] _failureMessageGenerators = {
-		new GenericFailureMessageGenerator()
-	};
-	private static final String[] _highPriorityContentFlags = new String[] {
+	private static final FailureMessageGenerator[] _FAILURE_MESSAGE_GENERATORS =
+		{
+			new GenericFailureMessageGenerator()
+		};
+
+	private static final String[] _HIGH_PRIORITY_CONTENT_FLAGS = new String[] {
 		"compileJSP", "SourceFormatter.format", "Unable to compile JSPs"
 	};
 
