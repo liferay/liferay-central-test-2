@@ -54,7 +54,8 @@ public class PoshiValidationFailureMessageGenerator
 		}
 
 		return Dom4JUtil.getNewElement(
-			"div", null, Dom4JUtil.getNewElement(
+			"div", null,
+			Dom4JUtil.getNewElement(
 				"p", null, "POSHI Validation Failure",
 				Dom4JUtil.toCodeSnippetElement(poshiFailureMatcher.group(1))));
 	}
