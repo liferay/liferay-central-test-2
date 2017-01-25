@@ -326,8 +326,7 @@ public class BatchBuild extends BaseBuild {
 			return failCount;
 		}
 
-		throw new IllegalArgumentException(
-			"Invalid result parameter: " + status);
+		throw new IllegalArgumentException("Invalid status: " + status);
 	}
 
 	protected final Pattern majorVersionPattern = Pattern.compile(
