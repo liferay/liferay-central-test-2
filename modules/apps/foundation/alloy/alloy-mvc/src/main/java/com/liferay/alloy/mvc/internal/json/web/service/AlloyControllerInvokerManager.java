@@ -12,10 +12,11 @@
  * details.
  */
 
-package com.liferay.alloy.mvc.json.web.service;
+package com.liferay.alloy.mvc.internal.json.web.service;
 
 import com.liferay.alloy.mvc.AlloyController;
 import com.liferay.alloy.mvc.AlloyPortlet;
+import com.liferay.alloy.mvc.json.web.service.JSONWebServiceMethod;
 import com.liferay.portal.kernel.json.JSONSerializable;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebServiceActionsManagerUtil;
 import com.liferay.portal.kernel.model.Portlet;
