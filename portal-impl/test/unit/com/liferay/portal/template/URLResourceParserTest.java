@@ -44,7 +44,7 @@ public class URLResourceParserTest {
 
 		};
 
-		for (String langType : TemplateConstants.allowedLangTypes) {
+		for (String langType : TemplateConstants.ALLOWED_LANG_TYPES) {
 			Assert.assertTrue(
 				urlResourceParser.isTemplateResourceValid(
 					"_SEPARATOR_/template." + langType, langType));
